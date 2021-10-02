@@ -16,23 +16,21 @@
  */
 package org.ehealth_connector.common.communication;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import java.time.ZonedDateTime;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.EhcVersions;
-import org.ehealth_connector.common.mdht.Author;
-import org.ehealth_connector.common.mdht.Code;
-import org.ehealth_connector.common.mdht.Identificator;
-import org.ehealth_connector.common.utils.DateUtilMdht;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
+import org.ehealth_connector.common.hl7cdar2.TEL;
+import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.OID;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
-import org.openhealthtools.ihe.utils.OID;
-import org.openhealthtools.ihe.xds.metadata.AuthorType;
-import org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType;
-import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
-import org.openhealthtools.ihe.xds.metadata.SubmissionSetType;
-import org.openhealthtools.ihe.xds.metadata.extract.cdar2.CDAR2Extractor;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
 
 /**
  * Represents the metadata for a submission set (which can hold one or more
@@ -90,26 +88,25 @@ public class SubmissionSetMetadata {
 	}
 
 	/** The cda. */
-	private final ClinicalDocument cda;
-	private SubmissionSetType s;
+	private final POCDMT000040ClinicalDocument cda;
+	private SubmissionSet s;
 
 	/**
 	 * Standard Constructor.
 	 */
 	public SubmissionSetMetadata() {
-		s = MetadataFactory.eINSTANCE.createSubmissionSetType();
-		cda = CDAFactory.eINSTANCE.createClinicalDocument();
+		s = new SubmissionSet();
+		cda = new POCDMT000040ClinicalDocument();
 	}
 
 	/**
-	 * Constructor with OHT SubmissionSet object.
+	 * Constructor with IPF SubmissionSet object.
 	 *
-	 * @param ohtSubmissionSet
-	 *            the OHT submission set object
+	 * @param ohtSubmissionSet the IPF submission set object
 	 */
-	public SubmissionSetMetadata(SubmissionSetType ohtSubmissionSet) {
-		this.s = ohtSubmissionSet;
-		cda = CDAFactory.eINSTANCE.createClinicalDocument();
+	public SubmissionSetMetadata(SubmissionSet submissionSet) {
+		this.s = submissionSet;
+		cda = new POCDMT000040ClinicalDocument();
 	}
 
 	/**
@@ -117,8 +114,15 @@ public class SubmissionSetMetadata {
 	 *
 	 * @return the Author as Convenience API Object
 	 */
-	public Author getAuthor() {
-		return XdsMetadataUtil.convertOhtAuthorType(s.getAuthor());
+	public List<Author> getAuthor() {
+		List<Author> authors = new LinkedList<>();
+		
+		for (org.openehealth.ipf.commons.ihe.xds.core.metadata.Author author : s.getAuthors()) {
+			if(author != null) {
+				authors.add(XdsMetadataUtil.convertIpfAuthor(author));
+			}
+		}
+		return authors;
 	}
 
 	/**
@@ -126,8 +130,8 @@ public class SubmissionSetMetadata {
 	 *
 	 * @return the mdht author type.
 	 */
-	public AuthorType getAuthorTypeMdht() {
-		return s.getAuthor();
+	public List<org.openehealth.ipf.commons.ihe.xds.core.metadata.Author> getAuthorTypeMdht() {
+		return s.getAuthors();
 	}
 
 	/**
@@ -135,7 +139,7 @@ public class SubmissionSetMetadata {
 	 *
 	 * @return status the AvailabilityStatus
 	 */
-	public AvailabilityStatusType getAvailabilityStatus() {
+	public AvailabilityStatus getAvailabilityStatus() {
 		return s.getAvailabilityStatus();
 	}
 
@@ -164,15 +168,15 @@ public class SubmissionSetMetadata {
 	 * @return the EntryUUID
 	 */
 	public String getEntryUUID() {
-		return s.getEntryUUID();
+		return s.getEntryUuid();
 	}
 
 	/**
-	 * Gets the OHT SubmissionSet Object, which is wrapped by this class.
+	 * Gets the IPF SubmissionSet Object, which is wrapped by this class.
 	 *
-	 * @return the OHT SubmissionSet Object
+	 * @return the IPF SubmissionSet Object
 	 */
-	public SubmissionSetType getOhtSubmissionSetType() {
+	public SubmissionSet getIpfSubmissionSet() {
 		return s;
 	}
 
@@ -223,16 +227,16 @@ public class SubmissionSetMetadata {
 		// Workaround for a Bug in the CDAR2Extractor, which causes a
 		// NullpointerException, if no Telecom value is inserted and
 		// logger.Debug is set to true
-		if ((author.getAuthorMdht().getAssignedAuthor().getTelecoms() == null)
-				|| author.getAuthorMdht().getAssignedAuthor().getTelecoms().isEmpty()) {
-			final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-			author.getAuthorMdht().getAssignedAuthor().getTelecoms().add(tel);
+		if ((author.getAuthorMdht().getAssignedAuthor().getTelecom() == null)
+				|| author.getAuthorMdht().getAssignedAuthor().getTelecom().isEmpty()) {
+			final var tel = new TEL();
+			author.getAuthorMdht().getAssignedAuthor().getTelecom().add(tel);
 		}
 
-		cda.getAuthors().clear();
-		cda.getAuthors().add(author.copyMdhtAuthor());
-		final CDAR2Extractor extractor = new CDAR2Extractor(cda);
-		final AuthorType xAuthor = extractor.extractAuthors().get(0);
+		cda.getAuthor().clear();
+		cda.getAuthor().add(author.getAuthorMdht());
+		final var extractor = new CDAR2Extractor(cda);
+		final org.openehealth.ipf.commons.ihe.xds.core.metadata.Author xAuthor = extractor.extractAuthors().get(0);
 
 		// Set the extracted author person object
 		s.setAuthor(xAuthor);
@@ -244,7 +248,7 @@ public class SubmissionSetMetadata {
 	 * @param status
 	 *            the AvailabilityStatus
 	 */
-	public void setAvailabilityStatus(AvailabilityStatusType status) {
+	public void setAvailabilityStatus(AvailabilityStatus status) {
 		s.setAvailabilityStatus(status);
 	}
 
@@ -266,7 +270,7 @@ public class SubmissionSetMetadata {
 	 *            the contentTypeCode
 	 */
 	public void setContentTypeCode(Code code) {
-		s.setContentTypeCode(XdsMetadataUtil.convertEhcCodeToCodedMetadataType(code));
+		s.setContentTypeCode(XdsMetadataUtil.convertEhcCodeToCode(code));
 	}
 
 	/**
@@ -286,7 +290,7 @@ public class SubmissionSetMetadata {
 	 *            the uuid to be set
 	 */
 	public void setEntryUUID(String entryUuid) {
-		s.setEntryUUID(entryUuid);
+		s.setEntryUuid(entryUuid);
 	}
 
 	/**
@@ -320,27 +324,25 @@ public class SubmissionSetMetadata {
 	}
 
 	/**
-	 * Fills a given OHT SubmissionSetType object with the data of this
-	 * submission set class
+	 * Fills a given IPF SubmissionSetType object with the data of this submission
+	 * set class
 	 *
-	 * @param ohtSubmissionSetType
-	 *            the SubmissionSetType
+	 * @param ohtSubmissionSetType the SubmissionSetType
 	 * @return the filled ohtSubmissionSetType
 	 */
-	@SuppressWarnings("unchecked")
-	public SubmissionSetType toOhtSubmissionSetType(SubmissionSetType ohtSubmissionSetType) {
-		ohtSubmissionSetType.setAuthor(EcoreUtil.copy(s.getAuthor()));
+	public SubmissionSet toOhtSubmissionSetType(SubmissionSet ohtSubmissionSetType) {
+		ohtSubmissionSetType.getAuthors().addAll(s.getAuthors());
 		ohtSubmissionSetType.setAvailabilityStatus(s.getAvailabilityStatus());
-		ohtSubmissionSetType.setComments(EcoreUtil.copy(s.getComments()));
-		ohtSubmissionSetType.setContentTypeCode(EcoreUtil.copy(s.getContentTypeCode()));
+		ohtSubmissionSetType.setComments(s.getComments());
+		ohtSubmissionSetType.setContentTypeCode(s.getContentTypeCode());
 		ohtSubmissionSetType.setPatientId(s.getPatientId());
 		ohtSubmissionSetType.setSourceId(s.getSourceId());
-		ohtSubmissionSetType.setTitle(EcoreUtil.copy(s.getTitle()));
+		ohtSubmissionSetType.setTitle(s.getTitle());
 		ohtSubmissionSetType.setUniqueId(s.getUniqueId());
-		ohtSubmissionSetType.getIntendedRecipient().clear();
-		ohtSubmissionSetType.getIntendedRecipient().addAll(s.getIntendedRecipient());
+		ohtSubmissionSetType.getIntendedRecipients().clear();
+		ohtSubmissionSetType.getIntendedRecipients().addAll(s.getIntendedRecipients());
 		if (ohtSubmissionSetType.getSubmissionTime() == null) {
-			ohtSubmissionSetType.setSubmissionTime(DateUtilMdht.nowAsTS().getValue());
+			ohtSubmissionSetType.setSubmissionTime(DateUtil.formatDateTimeTzon(ZonedDateTime.now()));
 		}
 		if ((ohtSubmissionSetType.getUniqueId() == null)
 				|| (ohtSubmissionSetType.getSourceId() == null)) {

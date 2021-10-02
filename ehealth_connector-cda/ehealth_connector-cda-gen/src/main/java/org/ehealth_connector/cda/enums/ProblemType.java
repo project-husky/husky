@@ -16,9 +16,8 @@
  */
 package org.ehealth_connector.cda.enums;
 
-import org.ehealth_connector.common.mdht.Code;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.hl7cdar2.CD;
 
 /*
  *<div class="de">Wertebereich für Art des Problems (SNOMED CT; 2.16.840.1.113883.6.96)</div>
@@ -153,7 +152,7 @@ public enum ProblemType {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CD getCD() {
-		final CD cd = DatatypesFactory.eINSTANCE.createCD();
+		final CD cd = new CD();
 		cd.setCodeSystem(CODE_SYSTEM_OID);
 		cd.setCodeSystemName(CODE_SYSTEM_NAME);
 		cd.setCode(code);

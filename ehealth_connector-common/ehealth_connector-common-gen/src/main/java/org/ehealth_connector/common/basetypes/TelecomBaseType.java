@@ -24,7 +24,6 @@ import org.ehealth_connector.common.enums.NullFlavor;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
 import org.ehealth_connector.common.utils.Util;
 
-// TODO: Auto-generated Javadoc
 /**
  * <div class="en">Details for all kinds of technology-mediated contact points
  * for a person or organization, including telephone, email, etc.<div>
@@ -161,7 +160,7 @@ public class TelecomBaseType implements Serializable {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		boolean retVal = true;
+		var retVal = true;
 		if (obj == null)
 			return false;
 		if (!(obj instanceof TelecomBaseType))

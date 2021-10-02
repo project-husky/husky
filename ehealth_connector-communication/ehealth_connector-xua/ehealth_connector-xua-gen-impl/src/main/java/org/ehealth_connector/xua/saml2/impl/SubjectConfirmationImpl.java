@@ -24,7 +24,6 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.ehealth_connector.xua.core.SecurityObject;
-import org.joda.time.DateTime;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConfirmationDataType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConfirmationType;
 import org.slf4j.Logger;
@@ -133,10 +132,8 @@ public class SubjectConfirmationImpl extends SubjectConfirmationType implements
 	 */
 	public Calendar getNotBefore() {
 		if (subjectConfirmation.getSubjectConfirmationData() != null && subjectConfirmation.getSubjectConfirmationData().getNotBefore() != null) {
-			final DateTime notOnOrAfter = subjectConfirmation.getSubjectConfirmationData()
-					.getNotBefore();
 			final var retVal = new GregorianCalendar();
-			retVal.setTimeInMillis(notOnOrAfter.getMillis());
+			retVal.setTimeInMillis(subjectConfirmation.getSubjectConfirmationData().getNotBefore().toEpochMilli());
 			
 			XMLGregorianCalendar xmlGregCal = null;
 			try {
@@ -159,10 +156,8 @@ public class SubjectConfirmationImpl extends SubjectConfirmationType implements
 	 */
 	public Calendar getNotOnOrAfter() {
 		if (subjectConfirmation.getSubjectConfirmationData() != null && subjectConfirmation.getSubjectConfirmationData().getNotOnOrAfter() != null) {
-			final DateTime notOnOrAfter = subjectConfirmation.getSubjectConfirmationData()
-					.getNotOnOrAfter();
 			final var retVal = new GregorianCalendar();
-			retVal.setTimeInMillis(notOnOrAfter.getMillis());
+			retVal.setTimeInMillis(subjectConfirmation.getSubjectConfirmationData().getNotOnOrAfter().toEpochMilli());
 			
 			XMLGregorianCalendar xmlGregCal = null;
 			try {

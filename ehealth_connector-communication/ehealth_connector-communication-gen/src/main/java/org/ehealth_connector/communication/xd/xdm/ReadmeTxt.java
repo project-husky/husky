@@ -23,7 +23,7 @@ import java.util.Date;
 
 import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.mdht.VendorInformation;
-import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
+import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,9 +35,14 @@ import org.slf4j.LoggerFactory;
 public class ReadmeTxt {
 
 	/** The Constant TEMPLATE_EN. */
-	public static final String TEMPLATE_EN = "Vendor name: {0}\n" + "Product: {1}\n"
-			+ "Module: {2}\n" + "Version: {3}\n" + "Contact info: See {4}\n"
-			+ "Creation timestamp: {5}\n";
+	public static final String TEMPLATE_EN = """
+			Vendor name: {0}
+			Product: {1}
+			Module: {2}
+			Version: {3}
+			Contact info: See {4}
+			Creation timestamp: {5}
+			""";
 
 	/** The SLF4J logger instance. */
 	private final Logger log = LoggerFactory.getLogger(getClass());
@@ -62,7 +67,7 @@ public class ReadmeTxt {
 	 * @param txnData
 	 *            the SubmitTransactionData
 	 */
-	public ReadmeTxt(SubmitTransactionData txnData) {
+	public ReadmeTxt(ProvideAndRegisterDocumentSet txnData) {
 		this(txnData, new VendorInformation());
 	}
 
@@ -75,10 +80,10 @@ public class ReadmeTxt {
 	 * @param vendorInfo
 	 *            the vendor info
 	 */
-	public ReadmeTxt(SubmitTransactionData txnData, VendorInformation vendorInfo) {
+	public ReadmeTxt(ProvideAndRegisterDocumentSet txnData, VendorInformation vendorInfo) {
 		log.debug("Creating the README.TXT file");
 
-		final Object[] values = new Object[] { vendorInfo.getVendorName(),
+		final var values = new Object[] { vendorInfo.getVendorName(),
 				vendorInfo.getProductName(), vendorInfo.getModuleName(),
 				EhcVersions.getCurrentVersion() + ", Release Date "
 						+ EhcVersions.getCurrentVersion().getReleaseDate(),

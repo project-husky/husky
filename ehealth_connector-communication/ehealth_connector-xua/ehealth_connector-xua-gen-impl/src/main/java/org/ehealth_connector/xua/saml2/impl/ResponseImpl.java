@@ -25,7 +25,6 @@ import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.saml2.EncryptedAssertion;
 import org.ehealth_connector.xua.saml2.Response;
 import org.ehealth_connector.xua.saml2.Status;
-import org.joda.time.DateTime;
 
 /**
  * <!-- @formatter:off -->
@@ -132,9 +131,8 @@ public class ResponseImpl
 	 */
 	@Override
 	public Calendar getIssueInstant() {
-		final DateTime instant = response.getIssueInstant();
 		final var retVal = Calendar.getInstance();
-		retVal.setTimeInMillis(instant.getMillis());
+		retVal.setTimeInMillis(response.getIssueInstant().toEpochMilli());
 		return retVal;
 	}
 

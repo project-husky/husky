@@ -20,7 +20,7 @@ import org.ehealth_connector.xua.core.SecurityObject;
 import org.ehealth_connector.xua.hl7v3.InstanceIdentifier;
 import org.ehealth_connector.xua.hl7v3.PurposeOfUse;
 import org.ehealth_connector.xua.hl7v3.Role;
-import org.ehealth_connector.xua.saml2.Attribute;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeType;
 import org.opensaml.core.xml.schema.XSString;
 
 /**
@@ -32,7 +32,7 @@ import org.opensaml.core.xml.schema.XSString;
  * <!-- @formatter:on -->
  */
 public class AttributeImpl
-		implements Attribute, SecurityObject<org.opensaml.saml.saml2.core.Attribute> {
+		extends AttributeType implements SecurityObject<org.opensaml.saml.saml2.core.Attribute> {
 
 	private org.opensaml.saml.saml2.core.Attribute attribute;
 
@@ -53,6 +53,7 @@ public class AttributeImpl
 	 */
 	@Override
 	public String getFriendlyName() {
+		this.friendlyName = attribute.getFriendlyName();
 		return attribute.getFriendlyName();
 	}
 
@@ -63,6 +64,7 @@ public class AttributeImpl
 	 */
 	@Override
 	public String getName() {
+		this.name = attribute.getName();
 		return attribute.getName();
 	}
 
@@ -73,39 +75,42 @@ public class AttributeImpl
 	 */
 	@Override
 	public String getNameFormat() {
+		this.nameFormat = attribute.getNameFormat();
 		return attribute.getNameFormat();
 	}
 
-	@Override
 	public InstanceIdentifier getValueAsInstanceIdentifier() {
 		if (isValueAInstanceIdentifier()) {
-			return (InstanceIdentifier) attribute
+			var instanceIdentifier = (InstanceIdentifier) attribute
 					.getAttributeValues().get(0);
+			getAttributeValue().add(instanceIdentifier);
+			return instanceIdentifier;
 		}
 		return null;
 	}
 
-	@Override
 	public PurposeOfUse getValueAsPurposeOfUse() {
 		if (isValueAPurposeOfUse()) {
-			return (PurposeOfUse) attribute.getAttributeValues()
-					.get(0);
+			var purposeOfUse = (PurposeOfUse) attribute.getAttributeValues().get(0);
+			getAttributeValue().add(purposeOfUse);
+			return purposeOfUse;
 		}
 		return null;
 	}
 
-	@Override
 	public Role getValueAsRole() {
 		if (isValueARole()) {
-			return (Role) attribute.getAttributeValues().get(0);
+			var role = (Role) attribute.getAttributeValues().get(0);
+			getAttributeValue().add(role);
+			return role;
 		}
 		return null;
 	}
 
-	@Override
 	public String getValueAsString() {
 		if (isValueAString()) {
 			final XSString attributeValue = (XSString) attribute.getAttributeValues().get(0);
+			getAttributeValue().add(attributeValue);
 			return attributeValue.getValue();
 		}
 		return "";
@@ -122,28 +127,24 @@ public class AttributeImpl
 		return attribute;
 	}
 
-	@Override
 	public boolean isValueAInstanceIdentifier() {
 		return (attribute.getAttributeValues() != null) //
 				&& (!attribute.getAttributeValues().isEmpty()) //
 				&& (attribute.getAttributeValues().get(0) instanceof InstanceIdentifier);
 	}
 
-	@Override
 	public boolean isValueAPurposeOfUse() {
 		return (attribute.getAttributeValues() != null) //
 				&& (!attribute.getAttributeValues().isEmpty()) //
 				&& (attribute.getAttributeValues().get(0) instanceof PurposeOfUse);
 	}
 
-	@Override
 	public boolean isValueARole() {
 		return (attribute.getAttributeValues() != null) //
 				&& (!attribute.getAttributeValues().isEmpty()) //
 				&& (attribute.getAttributeValues().get(0) instanceof Role);
 	}
 
-	@Override
 	public boolean isValueAString() {
 		return (attribute.getAttributeValues() != null) //
 				&& (!attribute.getAttributeValues().isEmpty()) //

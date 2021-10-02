@@ -53,7 +53,7 @@ public class IdpClientByCert extends AbstractHttpFormIdpClient {
 			final var sslContext = SSLContexts.custom()
 					.loadKeyMaterial(config.getClientKeyStore(), config.getClientKeyStorePassword())
 					.build();
-			return HttpClients.custom().setSslcontext(sslContext).build();
+			return HttpClients.custom().setSSLContext(sslContext).build();
 		} catch (KeyManagementException | UnrecoverableKeyException | NoSuchAlgorithmException
 				| KeyStoreException e) {
 			throw new ClientSendException(e);
@@ -72,7 +72,7 @@ public class IdpClientByCert extends AbstractHttpFormIdpClient {
 			final var post = getHttpPost(aAuthnRequest, config);
 
 			return execute(post);
-		} catch (final Throwable t) {
+		} catch (final Exception t) {
 			throw new ClientSendException(t);
 		}
 	}

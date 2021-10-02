@@ -21,11 +21,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.ehealth_connector.xua.exceptions.SerializeException;
-import org.ehealth_connector.xua.saml2.Attribute;
 import org.ehealth_connector.xua.saml2.impl.AttributeBuilderImpl;
 import org.ehealth_connector.xua.utilities.impl.AbstractTestHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeType;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -33,7 +33,7 @@ public class AttributeSerializerImplTest extends AbstractTestHelper {
 
 	private AttributeSerializerImpl testSerializer;
 
-	private Attribute testXmlObject;
+	private AttributeType testXmlObject;
 
 	@Override
 	@BeforeEach

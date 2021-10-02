@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl;
 
+import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.BasePolicyAdministration;
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.DeletePolicyRequest;
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.OpenSamlDeletePolicyRequest;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
@@ -40,8 +41,8 @@ public class DeletePolicyRequestBuilder
 	}
 
 	public OpenSamlDeletePolicyRequest buildObject() {
-		return buildObject(DeletePolicyRequest.DEFAULT_NS_URI,
-				DeletePolicyRequest.DEFAULT_ELEMENT_LOCAL_NAME, DeletePolicyRequest.DEFAULT_PREFIX);
+		return buildObject(BasePolicyAdministration.DEFAULT_NS_URI, DeletePolicyRequest.DEFAULT_ELEMENT_LOCAL_NAME,
+				BasePolicyAdministration.DEFAULT_PREFIX);
 	}
 
 	@Override

@@ -40,9 +40,9 @@ public class UpdatePolicyRequestMarshaller extends AbstractXMLObjectMarshaller {
 			final OpenSamlDeletePolicyRequest request = (OpenSamlDeletePolicyRequest) xmlObject;
 			if (request.getAssertion() != null) {
 				final AssertionImpl assertion = (AssertionImpl) request.getAssertion();
-				final org.opensaml.saml.saml2.core.Assertion innerAssertion = assertion
+				final var innerAssertion = assertion
 						.getWrappedObject();
-				final Element assertionElement = marshall(innerAssertion);
+				final var assertionElement = marshall(innerAssertion);
 				domElement.appendChild(assertionElement);
 			}
 		}

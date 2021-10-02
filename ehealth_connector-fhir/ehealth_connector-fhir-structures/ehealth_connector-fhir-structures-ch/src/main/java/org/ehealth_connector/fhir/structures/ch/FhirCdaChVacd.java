@@ -96,7 +96,7 @@ public class FhirCdaChVacd /* extends AbstractFhirCdaCh */ {
 		 * <div class="de"></div><div class="fr"></div>
 		 */
 		@Child(name = "author")
-		@Extension(url = FhirCommon.urnUseAsAuthor, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_AUTHOR, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "Person who documented the medication statement")
 		private Reference author;
 
@@ -105,7 +105,7 @@ public class FhirCdaChVacd /* extends AbstractFhirCdaCh */ {
 		 * <div class="de"></div><div class="fr"></div>
 		 */
 		@Child(name = "code")
-		@Extension(url = FhirCommon.urnUseAsCode, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_CODE, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "Code of the medication administration")
 		private Coding code;
 
@@ -114,7 +114,7 @@ public class FhirCdaChVacd /* extends AbstractFhirCdaCh */ {
 		 * <div class="de"></div><div class="fr"></div>
 		 */
 		@Child(name = "comment")
-		@Extension(url = FhirCommon.urnUseAsComment, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_COMMENT, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "Remark for this medication statement")
 		private StringType comment;
 
@@ -123,7 +123,7 @@ public class FhirCdaChVacd /* extends AbstractFhirCdaCh */ {
 		 * <div class="de"></div><div class="fr"></div>
 		 */
 		@Child(name = "externalDocument")
-		@Extension(url = FhirCommon.urnUseAsExternalDocument, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_EXTERNAL_DOCUMENT, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "reference to the guidline for theimmunization recommendation")
 		private Reference externalDocument;
 
@@ -132,7 +132,7 @@ public class FhirCdaChVacd /* extends AbstractFhirCdaCh */ {
 		 * <div class="de"></div><div class="fr"></div>
 		 */
 		@Child(name = "lot")
-		@Extension(url = FhirCommon.urnUseAsLotNumbertext, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_LOT_NUMBERTEXT, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "LotNumber for this medication statement")
 		private StringType lot;
 
@@ -141,7 +141,7 @@ public class FhirCdaChVacd /* extends AbstractFhirCdaCh */ {
 		 * administration</div> <div class="de"></div><div class="fr"></div>
 		 */
 		@Child(name = "performer")
-		@Extension(url = FhirCommon.urnUseAsPerformer, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_PERFORMER, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "Person who performed the medicationadministration")
 		private Reference performer;
 
@@ -150,7 +150,7 @@ public class FhirCdaChVacd /* extends AbstractFhirCdaCh */ {
 		 * <div class="de"></div><div class="fr"></div>
 		 */
 		@Child(name = "reasons")
-		@Extension(url = FhirCommon.urnUseAsReason, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_REASON, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "List of reasons for this medicationstatement")
 		private Reference reasons;
 
@@ -341,97 +341,97 @@ public class FhirCdaChVacd /* extends AbstractFhirCdaCh */ {
 
 		/** The active problem concern entries. */
 		@Child(name = "activeProblemConcernEntries", max = Child.MAX_UNLIMITED)
-		@Extension(url = FhirCommon.urnUseAsActiveProblemConcernEntries, definedLocally = false, isModifier = true)
+		@Extension(url = FhirCommon.URN_USE_AS_ACTIVE_PROBLEM_CONCERN_ENTRIES, definedLocally = false, isModifier = true)
 		@Description(shortDefinition = "activeProblemConcernEntries")
 		private List<Reference> activeProblemConcernEntries; // Condition
 
 		/** The allergy problem concern entries. */
 		@Child(name = "allergyProblemConcernEntries", max = Child.MAX_UNLIMITED)
-		@Extension(url = FhirCommon.urnUseAsAllergyProblemConcernEntries, definedLocally = false, isModifier = true)
+		@Extension(url = FhirCommon.URN_USE_AS_ALLERGY_PROBLEM_CONCERN_ENTRIES, definedLocally = false, isModifier = true)
 		@Description(shortDefinition = "allergyProblemConcernEntries")
 		private List<Reference> allergyProblemConcernEntries; // Condition
 
 		/** The coded result observations. */
 		@Child(name = "codedResultObservations", max = Child.MAX_UNLIMITED)
-		@Extension(url = FhirCommon.urnUseAsCodedResultObservations, definedLocally = false, isModifier = true)
+		@Extension(url = FhirCommon.URN_USE_AS_CODED_RESULT_OBSERVATIONS, definedLocally = false, isModifier = true)
 		@Description(shortDefinition = "codedResultObservations")
 		private List<Reference> codedResultObservations; // codedResults
 
 		/** The comment. */
 		@Child(name = "comment")
-		@Extension(url = FhirCommon.urnUseAsComment, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_COMMENT, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "comment")
 		private Reference comment;
 
 		/** The confidentiality. */
 		@Child(name = "confidentiality")
-		@Extension(url = FhirCommon.urnUseAsConfidentiality, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_CONFIDENTIALITY, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "confidentiality")
 		private Reference confidentiality;
 
 		/** The custodian. */
 		@Child(name = "custodian")
-		@Extension(url = FhirCommon.urnUseAsCustodian, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_CUSTODIAN, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "custodian")
 		private Reference custodian;
 
 		/** The doc author. */
 		@Child(name = "docAuthor")
-		@Extension(url = FhirCommon.urnUseAsAuthor, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_AUTHOR, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "author")
 		private Reference docAuthor;
 
 		/** The doc language. */
 		@Child(name = "docLanguage")
-		@Extension(url = FhirCommon.urnUseAsLanguage, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_LANGUAGE, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "docLanguage")
 		private Reference docLanguage;
 
 		/** The doc type. */
 		@Child(name = "docType")
-		@Extension(url = FhirCommon.urnUseAsDocType, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_DOC_TYPE, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "docType")
 		private Reference docType;
 
 		/** The immunization recommendations. */
 		@Child(name = "immunizationRecommendations", max = Child.MAX_UNLIMITED)
-		@Extension(url = FhirCommon.urnUseAsImmunizationRecommendation, definedLocally = false, isModifier = true)
+		@Extension(url = FhirCommon.URN_USE_AS_IMMUNIZATION_RECOMMENDATION, definedLocally = false, isModifier = true)
 		@Description(shortDefinition = "immunizationRecommendations")
 		private List<Reference> immunizationRecommendations;
 
 		/** The immunizations. */
 		@Child(name = "immunizations", max = Child.MAX_UNLIMITED)
-		@Extension(url = FhirCommon.urnUseAsImmunization, definedLocally = false, isModifier = true)
+		@Extension(url = FhirCommon.URN_USE_AS_IMMUNIZATION, definedLocally = false, isModifier = true)
 		@Description(shortDefinition = "immunizations")
 		private List<Reference> immunizations;
 
 		/** The laboratory observations. */
 		@Child(name = "laboratoryObservations", max = Child.MAX_UNLIMITED)
-		@Extension(url = FhirCommon.urnUseAsLaboratoryObservations, definedLocally = false, isModifier = true)
+		@Extension(url = FhirCommon.URN_USE_AS_LABORATORY_OBSERVATIONS, definedLocally = false, isModifier = true)
 		@Description(shortDefinition = "laboratoryObservations")
 		private List<Reference> laboratoryObservations; // Observations
 
 		/** The legal authenticator. */
 		@Child(name = "legalAuthenticator")
-		@Extension(url = FhirCommon.urnUseAsLegalAuthenticator, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_LEGAL_AUTHENTICATOR, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "legalAuthenticator")
 		private Reference legalAuthenticator;
 
 		/** The past problem concern entries. */
 		@Child(name = "pastProblemConcernEntries", max = Child.MAX_UNLIMITED)
-		@Extension(url = FhirCommon.urnUseAsPastProblemConcernEntries, definedLocally = false, isModifier = true)
+		@Extension(url = FhirCommon.URN_USE_AS_PAST_PROBLEM_CONCERN_ENTRIES, definedLocally = false, isModifier = true)
 		@Description(shortDefinition = "pastProblemConcernEntries")
 		private List<Reference> pastProblemConcernEntries; // Condition
 
 		/** The patient. */
 		@Child(name = "patient")
-		@Extension(url = FhirCommon.urnUseAsPatient, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_PATIENT, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "patient")
 		private Reference patient;
 
 		/** The pregnancy observation. */
 		@Child(name = "pregnancyObservation,", max = Child.MAX_UNLIMITED)
-		@Extension(url = FhirCommon.urnUseAsPregnancyObservation, definedLocally = false, isModifier = true)
+		@Extension(url = FhirCommon.URN_USE_AS_PREGNANCY_OBSERVATION, definedLocally = false, isModifier = true)
 		@Description(shortDefinition = "pregnancyObservation")
 		private Reference pregnancyObservation; // Observation
 

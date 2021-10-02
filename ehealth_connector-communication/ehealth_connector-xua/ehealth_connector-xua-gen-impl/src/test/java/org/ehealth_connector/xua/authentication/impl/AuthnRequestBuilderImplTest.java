@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
 import org.opensaml.saml.common.xml.SAMLConstants;
 import org.opensaml.saml.saml2.core.NameID;
 
-public class AuthnRequestBuilderImplTest {
+class AuthnRequestBuilderImplTest {
 
 	private Integer testAssertionConsumerServiceIndex;
 	private String testAssertionConsumerServiceURL;
@@ -68,7 +68,7 @@ public class AuthnRequestBuilderImplTest {
 	 * {@link org.ehealth_connector.xua.authentication.impl.AuthnRequestBuilderImpl#assertionConsumerServiceIndex(java.lang.Integer)}.
 	 */
 	@Test
-	public void testAssertionConsumerServiceIndex() {
+	void testAssertionConsumerServiceIndex() {
 		final AuthnRequest request = testBuilder
 				.assertionConsumerServiceIndex(testAssertionConsumerServiceIndex).create();
 		assertEquals(testAssertionConsumerServiceIndex, request.getAssertionConsumerServiceIndex());
@@ -79,7 +79,7 @@ public class AuthnRequestBuilderImplTest {
 	 * {@link org.ehealth_connector.xua.authentication.impl.AuthnRequestBuilderImpl#assertionConsumerServiceUrl(java.lang.String)}.
 	 */
 	@Test
-	public void testAssertionConsumerServiceURL() {
+	void testAssertionConsumerServiceURL() {
 		final AuthnRequest request = testBuilder
 				.assertionConsumerServiceUrl(testAssertionConsumerServiceURL).create();
 		assertEquals(testAssertionConsumerServiceURL, request.getAssertionConsumerServiceUrl());
@@ -90,7 +90,7 @@ public class AuthnRequestBuilderImplTest {
 	 * {@link org.ehealth_connector.xua.authentication.impl.AuthnRequestBuilderImpl#attributeConsumingServiceIndex(java.lang.Integer)}.
 	 */
 	@Test
-	public void testAttributeConsumingServiceIndex() {
+	void testAttributeConsumingServiceIndex() {
 		final AuthnRequest request = testBuilder
 				.attributeConsumingServiceIndex(testAttributeConsumingServiceIndex).create();
 		assertEquals(testAttributeConsumingServiceIndex,
@@ -102,7 +102,7 @@ public class AuthnRequestBuilderImplTest {
 	 * {@link org.ehealth_connector.xua.authentication.impl.AuthnRequestBuilderImpl#consent(java.lang.String)}.
 	 */
 	@Test
-	public void testConsent() {
+	void testConsent() {
 		final AuthnRequest request = testBuilder.consent(testConsent).create();
 		assertEquals(testConsent, request.getConsent());
 	}
@@ -112,7 +112,7 @@ public class AuthnRequestBuilderImplTest {
 	 * {@link org.ehealth_connector.xua.authentication.impl.AuthnRequestBuilderImpl#destination(java.lang.String)}.
 	 */
 	@Test
-	public void testDestination() {
+	void testDestination() {
 		final AuthnRequest request = testBuilder.destination(testDestination).create();
 		assertEquals(testDestination, request.getDestination());
 	}
@@ -122,7 +122,7 @@ public class AuthnRequestBuilderImplTest {
 	 * {@link org.ehealth_connector.xua.authentication.impl.AuthnRequestBuilderImpl#forceAuthn(java.lang.Boolean)}.
 	 */
 	@Test
-	public void testForceAuthn() {
+	void testForceAuthn() {
 		final AuthnRequest request = testBuilder.forceAuthn(testForceAuthn).create();
 		assertEquals(testForceAuthn, request.getForceAuthn());
 	}
@@ -132,13 +132,13 @@ public class AuthnRequestBuilderImplTest {
 	 * {@link org.ehealth_connector.xua.authentication.impl.AuthnRequestBuilderImpl#id(java.lang.String)}.
 	 */
 	@Test
-	public void testId() {
+	void testId() {
 		final AuthnRequest request = testBuilder.id(testId).create();
 		assertEquals(testId, request.getId());
 	}
 
 	@Test
-	public void testIdIssueInstant() {
+	void testIdIssueInstant() {
 		final AuthnRequest request = testBuilder.id(testId).issueInstant(testIssueInstant).create();
 		assertEquals(testId, request.getId());
 		assertEquals(testIssueInstant, request.getIssueInstant());
@@ -149,7 +149,7 @@ public class AuthnRequestBuilderImplTest {
 	 * {@link org.ehealth_connector.xua.authentication.impl.AuthnRequestBuilderImpl#issueInstant(java.util.Calendar)}.
 	 */
 	@Test
-	public void testIssueInstant() {
+	void testIssueInstant() {
 		final AuthnRequest request = testBuilder.issueInstant(testIssueInstant).create();
 		assertEquals(testIssueInstant, request.getIssueInstant());
 	}
@@ -159,7 +159,7 @@ public class AuthnRequestBuilderImplTest {
 	 * {@link org.ehealth_connector.xua.authentication.impl.AuthnRequestBuilderImpl#issuer(java.lang.String)}.
 	 */
 	@Test
-	public void testIssuer() {
+	void testIssuer() {
 		final AuthnRequest request = testBuilder.issuer(testIssuer).create();
 		assertEquals(testIssuer, request.getIssuer());
 	}
@@ -169,14 +169,14 @@ public class AuthnRequestBuilderImplTest {
 	 * {@link org.ehealth_connector.xua.authentication.impl.AuthnRequestBuilderImpl#nameIdPolicyAllowCreate(java.lang.Boolean)}.
 	 */
 	@Test
-	public void testNameIdPolicyAllowCreate() {
+	void testNameIdPolicyAllowCreate() {
 		final AuthnRequest request = testBuilder
 				.nameIdPolicyAllowCreate(testNameIdPolicyAllowCreate).create();
 		assertEquals(testNameIdPolicyAllowCreate, request.getNameIdPolicyAllowCreate());
 	}
 
 	@Test
-	public void testNameIdPolicyAllowCreateFormat() {
+	void testNameIdPolicyAllowCreateFormat() {
 		final AuthnRequest request = testBuilder
 				.nameIdPolicyAllowCreate(testNameIdPolicyAllowCreate)
 				.nameIdPolicyFormat(testNameIdPolicyFormat).create();
@@ -189,7 +189,7 @@ public class AuthnRequestBuilderImplTest {
 	 * {@link org.ehealth_connector.xua.authentication.impl.AuthnRequestBuilderImpl#nameIdPolicyFormat(java.lang.String)}.
 	 */
 	@Test
-	public void testNameIdPolicyFormat() {
+	void testNameIdPolicyFormat() {
 		final AuthnRequest request = testBuilder.nameIdPolicyFormat(testNameIdPolicyFormat)
 				.create();
 		assertEquals(testNameIdPolicyFormat, request.getNameIdPolicyFormat());
@@ -200,7 +200,7 @@ public class AuthnRequestBuilderImplTest {
 	 * {@link org.ehealth_connector.xua.authentication.impl.AuthnRequestBuilderImpl#protocolBinding(java.lang.String)}.
 	 */
 	@Test
-	public void testProtocolBinding() {
+	void testProtocolBinding() {
 		final AuthnRequest request = testBuilder.protocolBinding(testProtocolBinding).create();
 		assertEquals(testProtocolBinding, request.getProtocolBinding());
 	}
@@ -210,7 +210,7 @@ public class AuthnRequestBuilderImplTest {
 	 * {@link org.ehealth_connector.xua.authentication.impl.AuthnRequestBuilderImpl#providerName(java.lang.String)}.
 	 */
 	@Test
-	public void testProviderName() {
+	void testProviderName() {
 		final AuthnRequest request = testBuilder.providerName(testProviderName).create();
 		assertEquals(testProviderName, request.getProviderName());
 	}

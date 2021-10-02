@@ -22,9 +22,7 @@ import java.util.List;
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.saml2.AssertionBuilder;
-import org.ehealth_connector.xua.saml2.Attribute;
-import org.joda.time.DateTime;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionsType;
 import org.opensaml.saml.common.SAMLVersion;
 import org.opensaml.saml.saml2.core.AttributeStatement;
@@ -41,7 +39,7 @@ import org.opensaml.saml.saml2.core.impl.IssuerBuilder;
  * <!-- @formatter:on -->
  */
 public class AssertionBuilderImpl implements AssertionBuilder,
-		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Assertion, AssertionType> {
+		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Assertion, Assertion> {
 
 	private org.opensaml.saml.saml2.core.Issuer issuer;
 	private org.opensaml.saml.saml2.core.Assertion wrappedObject;
@@ -61,7 +59,7 @@ public class AssertionBuilderImpl implements AssertionBuilder,
 	 * @see org.ehealth_connector.xua.saml2.AssertionBuilder#addAttribute(org.ehealth_connector.xua.saml2.Attribute)
 	 */
 	@Override
-	public AssertionBuilder addAttribute(Attribute attribute) {
+	public AssertionBuilder addAttribute(AttributeType attribute) {
 		final List<AttributeStatement> attributeStatements = wrappedObject.getAttributeStatements();
 		AttributeStatement statement = null;
 		if (attributeStatements.isEmpty()) {
@@ -128,8 +126,7 @@ public class AssertionBuilderImpl implements AssertionBuilder,
 	@Override
 	public AssertionBuilder issueInstant(Calendar aIssueInstant) {
 		if (aIssueInstant != null) {
-			final var dateTime = new DateTime(aIssueInstant.getTimeInMillis());
-			wrappedObject.setIssueInstant(dateTime);
+			wrappedObject.setIssueInstant(aIssueInstant.toInstant());
 		}
 		return this;
 	}

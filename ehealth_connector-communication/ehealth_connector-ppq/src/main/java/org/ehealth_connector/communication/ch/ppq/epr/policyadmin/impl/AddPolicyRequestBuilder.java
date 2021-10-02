@@ -17,6 +17,7 @@
 package org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl;
 
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.AddPolicyRequest;
+import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.BasePolicyAdministration;
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.OpenSamlAddPolicyRequest;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.opensaml.core.xml.AbstractXMLObjectBuilder;
@@ -39,8 +40,8 @@ public class AddPolicyRequestBuilder extends AbstractXMLObjectBuilder<OpenSamlAd
 	}
 
 	public OpenSamlAddPolicyRequest buildObject() {
-		return buildObject(AddPolicyRequest.DEFAULT_NS_URI,
-				AddPolicyRequest.DEFAULT_ELEMENT_LOCAL_NAME, AddPolicyRequest.DEFAULT_PREFIX);
+		return buildObject(BasePolicyAdministration.DEFAULT_NS_URI, AddPolicyRequest.DEFAULT_ELEMENT_LOCAL_NAME,
+				BasePolicyAdministration.DEFAULT_PREFIX);
 	}
 
 	@Override

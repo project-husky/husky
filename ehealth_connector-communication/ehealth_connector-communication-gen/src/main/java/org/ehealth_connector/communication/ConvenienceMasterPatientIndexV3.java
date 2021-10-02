@@ -21,9 +21,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.camel.CamelContext;
+import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.communication.AffinityDomain;
-import org.ehealth_connector.common.mdht.Identificator;
-import org.ehealth_connector.common.mdht.Patient;
 import org.ehealth_connector.communication.mpi.impl.PdqV3Query;
 import org.ehealth_connector.communication.mpi.impl.PixV3Query;
 import org.ehealth_connector.communication.mpi.impl.pdq.V3PdqQueryResponse;

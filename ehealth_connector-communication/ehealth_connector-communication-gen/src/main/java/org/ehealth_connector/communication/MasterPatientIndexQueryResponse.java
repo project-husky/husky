@@ -20,7 +20,7 @@ package org.ehealth_connector.communication;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ehealth_connector.common.mdht.Patient;
+import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.communication.mpi.MpiQueryResponse;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 
@@ -58,7 +58,7 @@ public class MasterPatientIndexQueryResponse {
 			this.remainingNumbers = mpiQueryResponse.getRemainingNumbers();
 			if ((mpiQueryResponse.getPatients() != null)
 					&& (mpiQueryResponse.getPatients().size() > 0)) {
-				patients = new ArrayList<Patient>();
+				patients = new ArrayList<>();
 				for (final FhirPatient patient : mpiQueryResponse.getPatients()) {
 					patients.add(patient.getPatient());
 				}

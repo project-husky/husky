@@ -16,9 +16,8 @@
  */
 package org.ehealth_connector.common.mdht.enums;
 
-import org.ehealth_connector.common.mdht.Code;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.hl7cdar2.CE;
 
 /**
  * Represents some ISC-08 Codes (the ones currently used... you are free to
@@ -144,7 +143,7 @@ public enum Isco08 {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CE getCE() {
-		final CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final var ce = new CE();
 		ce.setCodeSystem(CODE_SYSTEM_OID);
 		ce.setCodeSystemName(CODE_SYSTEM_NAME);
 		ce.setCode(code);
@@ -159,7 +158,10 @@ public enum Isco08 {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final var ehcCode = new Code();
+		ehcCode.setCode(code);
+		ehcCode.setCodeSystem(CODE_SYSTEM_NAME);
+		ehcCode.setDisplayName(displayName);
 		return ehcCode;
 	}
 

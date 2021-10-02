@@ -26,7 +26,8 @@ import java.util.List;
 import org.ehealth_connector.common.communication.AffinityDomain;
 import org.ehealth_connector.common.communication.DocumentMetadata;
 import org.ehealth_connector.common.communication.SubmissionSetMetadata;
-import org.ehealth_connector.common.mdht.Patient;
+import org.ehealth_connector.common.enums.DocumentDescriptor;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
 import org.ehealth_connector.fhir.structures.utils.FhirUtilities;
 import org.hl7.fhir.dstu3.model.Coding;
@@ -41,8 +42,7 @@ import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.StringType;
 import org.hl7.fhir.exceptions.FHIRException;
-import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
-import org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.context.FhirVersionEnum;
@@ -67,10 +67,9 @@ import ca.uhn.fhir.parser.IParser;
 public class FhirXdTransaction {
 
 	/**
-	 * The class Transaction is a derived FHIR resource containing all
-	 * information about destination and submission-set including documents for
-	 * a transaction (e.g. IHE XDS submission or IHE XDM portable media
-	 * creation)
+	 * The class Transaction is a derived FHIR resource containing all information
+	 * about destination and submission-set including documents for a transaction
+	 * (e.g. IHE XDS submission or IHE XDM portable media creation)
 	 */
 	@ResourceDef(name = "DocumentManifest")
 	public static class Transaction extends DocumentManifest {
@@ -108,22 +107,19 @@ public class FhirXdTransaction {
 	}
 
 	/**
-	 * <div class="en"> Gets the eHC affinity domain object from the FHIR
-	 * resource
+	 * <div class="en"> Gets the eHC affinity domain object from the FHIR resource
 	 *
-	 * @param transaction
-	 *            the FHIR resource
+	 * @param transaction the FHIR resource
 	 * @return the eHC affinity domain object </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
 	public AffinityDomain getAffinityDomain(Transaction transaction) {
-		final AffinityDomain afinityDomain = new AffinityDomain();
+		final var afinityDomain = new AffinityDomain();
 		// set the registry
 		afinityDomain.setRegistryDestination(getRegistry(transaction));
 
 		// set the repositories
-		final List<org.ehealth_connector.common.communication.Destination> repos = getRepositories(
-				transaction);
+		final List<org.ehealth_connector.common.communication.Destination> repos = getRepositories(transaction);
 		// TODO support of multiple repos as soon as this will be asked
 		if (!repos.isEmpty())
 			afinityDomain.setRepositoryDestination(repos.get(0));
@@ -135,12 +131,11 @@ public class FhirXdTransaction {
 	 * <div class="en">Gets an eHC author object from the FHIR DocumentManifest
 	 * object
 	 *
-	 * @param fhirObject
-	 *            the FHIR object
+	 * @param fhirObject the FHIR object
 	 * @return eHC author object </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public org.ehealth_connector.common.mdht.Author getAuthor(DocumentManifest fhirObject) {
+	public org.ehealth_connector.common.Author getAuthor(DocumentManifest fhirObject) {
 		if (!fhirObject.getAuthor().isEmpty())
 			return FhirCommon.getAuthor(fhirObject.getAuthor().get(0));
 		else
@@ -151,12 +146,11 @@ public class FhirXdTransaction {
 	 * <div class="en">Gets an eHC author object from the FHIR DocumentReference
 	 * object
 	 *
-	 * @param fhirObject
-	 *            the FHIR object
+	 * @param fhirObject the FHIR object
 	 * @return eHC author object </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public org.ehealth_connector.common.mdht.Author getAuthor(DocumentReference fhirObject) {
+	public org.ehealth_connector.common.Author getAuthor(DocumentReference fhirObject) {
 		if (!fhirObject.getAuthor().isEmpty())
 			return FhirCommon.getAuthor(fhirObject.getAuthor().get(0));
 		else
@@ -167,13 +161,11 @@ public class FhirXdTransaction {
 	 * <div class="en"> Gets an eHC Destination object from the given FHIR
 	 * MessageHeader object
 	 *
-	 * @param fhirObject
-	 *            the FHIR object
+	 * @param fhirObject the FHIR object
 	 * @return the eHC Destination </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	private org.ehealth_connector.common.communication.Destination getDestination(
-			MessageHeader fhirObject) {
+	private org.ehealth_connector.common.communication.Destination getDestination(MessageHeader fhirObject) {
 		org.ehealth_connector.common.communication.Destination retVal = null;
 
 		final String senderOrganizationalOid = fhirObject.getSource().getSoftware();
@@ -205,16 +197,15 @@ public class FhirXdTransaction {
 	/**
 	 * Method to get DocumentDescriptor from DocumentReference
 	 *
-	 * @param fhirObject
-	 *            the FHIR DocumentReference
+	 * @param fhirObject the FHIR DocumentReference
 	 * @return the DocumentDescriptor
 	 */
 	private DocumentDescriptor getDocumentDescriptor(DocumentReference fhirObject) {
-		String mimeType = "";
+		var mimeType = "";
 		fhirObject.getContentFirstRep().getFormat();
 		final Coding item = fhirObject.getContentFirstRep().getFormat();
 		final List<org.hl7.fhir.dstu3.model.Extension> extensions = item
-				.getExtensionsByUrl(FhirCommon.urnUseAsMimeType);
+				.getExtensionsByUrl(FhirCommon.URN_USE_AS_MIME_TYPE);
 		if (!extensions.isEmpty()) {
 			mimeType = item.getCode();
 		}
@@ -222,51 +213,43 @@ public class FhirXdTransaction {
 	}
 
 	/**
-	 * <div class="en">Gets a list containing all document metadatas from the
-	 * FHIR resource
+	 * <div class="en">Gets a list containing all document metadatas from the FHIR
+	 * resource
 	 *
-	 * @param transaction
-	 *            the FHIR resource
-	 * @param receiverFacilityOid
-	 *            the receiverFacilityOid will be used to determine which of the
-	 *            patient ids is the destination patient id
-	 * @param senderFacilityOid
-	 *            the senderFacilityOid will be used to determine which of the
-	 *            patient ids is the source patient id
-	 * @return list containing all document metadatas </div>
-	 *         <div class="de"></div> <div class="fr"></div>
+	 * @param transaction         the FHIR resource
+	 * @param receiverFacilityOid the receiverFacilityOid will be used to determine
+	 *                            which of the patient ids is the destination
+	 *                            patient id
+	 * @param senderFacilityOid   the senderFacilityOid will be used to determine
+	 *                            which of the patient ids is the source patient id
+	 * @return list containing all document metadatas </div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
-	public List<DocumentMetadata> GetDocumentMetadatas(Transaction transaction,
-			String receiverFacilityOid, String senderFacilityOid) {
+	public List<DocumentMetadata> getDocumentMetadatas(Transaction transaction, String receiverFacilityOid,
+			String senderFacilityOid) {
 		final List<DocumentMetadata> retVal = new ArrayList<>();
 
 		for (final Resource entry : getResources(transaction)) {
 			if (entry instanceof DocumentReference) {
 				final DocumentReference fhirObject = (DocumentReference) entry;
 
-				final DocumentMetadata metaData = new DocumentMetadata(
-						FhirCommon.getMetadataLanguage(fhirObject));
+				final var metaData = new DocumentMetadata(FhirCommon.getMetadataLanguage(fhirObject));
 				metaData.addAuthor(getAuthor(fhirObject));
-				metaData.addConfidentialityCode(
-						FhirUtilities.toCode(fhirObject.getSecurityLabelFirstRep()));
+				metaData.addConfidentialityCode(FhirUtilities.toCode(fhirObject.getSecurityLabelFirstRep()));
 
 				metaData.setClassCode(FhirUtilities.toCode(fhirObject.getClass_()));
-				metaData.setCodedLanguage(fhirObject.getContentFirstRep().getAttachment()
-						.getLanguageElement().getValueAsString());
-				metaData.setCreationTime(fhirObject.getCreated());
+				metaData.setCodedLanguage(
+						fhirObject.getContentFirstRep().getAttachment().getLanguageElement().getValueAsString());
+				metaData.setCreationTime(DateUtil.parseZonedDate(fhirObject.getCreated()));
 				metaData.setDocumentDescriptor(getDocumentDescriptor(fhirObject));
 				metaData.setFormatCode(FhirCommon.getFormatCode(fhirObject));
-				metaData.setHealthcareFacilityTypeCode(
-						FhirUtilities.toCode(fhirObject.getContext().getFacilityType()));
+				metaData.setHealthcareFacilityTypeCode(FhirUtilities.toCode(fhirObject.getContext().getFacilityType()));
 				metaData.setMimeType(FhirCommon.getMimeType(fhirObject));
-				final Patient pat = FhirCommon
-						.getPatient(fhirObject.getContext().getSourcePatientInfo());
+				final var pat = FhirCommon.getPatient(fhirObject.getContext().getSourcePatientInfo());
 				metaData.setPatient(pat);
-				metaData.setDestinationPatientId(
-						FhirCommon.getCommunityPatientId(pat, receiverFacilityOid));
+				metaData.setDestinationPatientId(FhirCommon.getCommunityPatientId(pat, receiverFacilityOid));
 				metaData.setPracticeSettingCode(FhirCommon.getPracticeSettingCode(fhirObject));
-				metaData.setSourcePatientId(
-						FhirCommon.getCommunityPatientId(pat, senderFacilityOid));
+				metaData.setSourcePatientId(FhirCommon.getCommunityPatientId(pat, senderFacilityOid));
 				metaData.setTitle(fhirObject.getDescription());
 				metaData.setTypeCode(FhirUtilities.toCode(fhirObject.getType()));
 				metaData.setUniqueId(fhirObject.getMasterIdentifier().getValue());
@@ -280,16 +263,14 @@ public class FhirXdTransaction {
 	}
 
 	/**
-	 * <div class="en"> Gets the registry as eHC Destination object from the
-	 * FHIR resource
+	 * <div class="en"> Gets the registry as eHC Destination object from the FHIR
+	 * resource
 	 *
-	 * @param docManifest
-	 *            the FHIR resource
-	 * @return the registry as eHC Destination object </div>
-	 *         <div class="de"></div> <div class="fr"></div>
+	 * @param docManifest the FHIR resource
+	 * @return the registry as eHC Destination object </div> <div class="de"></div>
+	 *         <div class="fr"></div>
 	 */
-	public org.ehealth_connector.common.communication.Destination getRegistry(
-			DocumentManifest docManifest) {
+	public org.ehealth_connector.common.communication.Destination getRegistry(DocumentManifest docManifest) {
 		org.ehealth_connector.common.communication.Destination retVal = null;
 
 		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
@@ -298,29 +279,24 @@ public class FhirXdTransaction {
 				ref = entry.getPReference();
 			} catch (final FHIRException e) {
 			}
-			if (ref != null) {
-				if (ref.getResource() instanceof MessageHeader) {
-					final MessageHeader fhirObject = (MessageHeader) ref.getResource();
-					if (!fhirObject.getExtensionsByUrl(FhirCommon.urnUseAsRegistryDestination)
-							.isEmpty())
-						retVal = getDestination((MessageHeader) ref.getResource());
-				}
+			if (ref != null && ref.getResource() instanceof MessageHeader) {
+				final MessageHeader fhirObject = (MessageHeader) ref.getResource();
+				if (!fhirObject.getExtensionsByUrl(FhirCommon.URN_USE_AS_REGISTRY_DESTINATION).isEmpty())
+					retVal = getDestination((MessageHeader) ref.getResource());
 			}
 		}
 		return retVal;
 	}
 
 	/**
-	 * <div class="en"> Gets a list of repositories as eHC Destination objects
-	 * from the FHIR resource
+	 * <div class="en"> Gets a list of repositories as eHC Destination objects from
+	 * the FHIR resource
 	 *
-	 * @param docManifest
-	 *            the FHIR resource
+	 * @param docManifest the FHIR resource
 	 * @return list of repositories</div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public List<org.ehealth_connector.common.communication.Destination> getRepositories(
-			DocumentManifest docManifest) {
+	public List<org.ehealth_connector.common.communication.Destination> getRepositories(DocumentManifest docManifest) {
 		final List<org.ehealth_connector.common.communication.Destination> retVal = new ArrayList<>();
 
 		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
@@ -329,13 +305,10 @@ public class FhirXdTransaction {
 				ref = entry.getPReference();
 			} catch (final FHIRException e) {
 			}
-			if (ref != null) {
-				if (ref.getResource() instanceof MessageHeader) {
-					final MessageHeader fhirObject = (MessageHeader) ref.getResource();
-					if (!fhirObject.getExtensionsByUrl(FhirCommon.urnUseAsRepositoryDestination)
-							.isEmpty())
-						retVal.add(getDestination((MessageHeader) ref.getResource()));
-				}
+			if (ref != null && ref.getResource() instanceof MessageHeader) {
+				final MessageHeader fhirObject = (MessageHeader) ref.getResource();
+				if (!fhirObject.getExtensionsByUrl(FhirCommon.URN_USE_AS_REPOSITORY_DESTINATION).isEmpty())
+					retVal.add(getDestination((MessageHeader) ref.getResource()));
 			}
 		}
 		return retVal;
@@ -344,8 +317,7 @@ public class FhirXdTransaction {
 	/**
 	 * Gets a list of Resources
 	 *
-	 * @param docManifest
-	 *            the FHIR document
+	 * @param docManifest the FHIR document
 	 * @return the list of Resources
 	 */
 	public List<Resource> getResources(DocumentManifest docManifest) {
@@ -364,47 +336,39 @@ public class FhirXdTransaction {
 	}
 
 	/**
-	 * <div class="en"> Gets the eHC submission-set metadata from the FHIR
-	 * resource
+	 * <div class="en"> Gets the eHC submission-set metadata from the FHIR resource
 	 *
-	 * @param transaction
-	 *            the FHIR resource
-	 * @param receiverFacilityOid
-	 *            the receiverFacilityOid will be used to determine which of the
-	 *            patient ids is the destination patient id
+	 * @param transaction         the FHIR resource
+	 * @param receiverFacilityOid the receiverFacilityOid will be used to determine
+	 *                            which of the patient ids is the destination
+	 *                            patient id
 	 * @return </div> <div class="de"></div> <div class="fr"></div>
 	 */
-	public SubmissionSetMetadata getSubmissionSetMetadata(Transaction transaction,
-			String receiverFacilityOid) {
-		final SubmissionSetMetadata retVal = new SubmissionSetMetadata();
+	public SubmissionSetMetadata getSubmissionSetMetadata(Transaction transaction, String receiverFacilityOid) {
+		final var retVal = new SubmissionSetMetadata();
 
 		for (final Resource entry : getResources(transaction)) {
 			if (entry instanceof DocumentManifest) {
 				final DocumentManifest fhirObject = (DocumentManifest) entry;
 
 				retVal.setAuthor(getAuthor(fhirObject));
-				// Fix the OHT for invalid empty authorTelecommunicationentries
-				// by deleting all authorTelecommunications
-				retVal.getAuthorTypeMdht().getAuthorTelecommunication().clear();
 
-				AvailabilityStatusType availabilityStatus = AvailabilityStatusType.APPROVED_LITERAL;
+				var availabilityStatus = AvailabilityStatus.APPROVED;
 				if (fhirObject.getStatusElement().getValue() != DocumentReferenceStatus.CURRENT) {
-					availabilityStatus = AvailabilityStatusType.DEPRECATED_LITERAL;
+					availabilityStatus = AvailabilityStatus.DEPRECATED;
 				}
 				retVal.setAvailabilityStatus(availabilityStatus);
 
 				final List<org.hl7.fhir.dstu3.model.Extension> extensions = fhirObject
-						.getExtensionsByUrl(FhirCommon.urnUseAsComment);
+						.getExtensionsByUrl(FhirCommon.URN_USE_AS_COMMENT);
 				if (!extensions.isEmpty())
-					retVal.setComments(
-							((StringType) extensions.get(0).getValue()).getValueAsString());
+					retVal.setComments(((StringType) extensions.get(0).getValue()).getValueAsString());
 
 				retVal.setContentTypeCode(FhirUtilities.toCode(fhirObject.getType()));
 
-				final Patient pat = FhirCommon.getPatient(fhirObject.getSubject());
+				final var pat = FhirCommon.getPatient(fhirObject.getSubject());
 				if (!pat.getIds().isEmpty())
-					retVal.setDestinationPatientId(
-							FhirCommon.getCommunityPatientId(pat, receiverFacilityOid));
+					retVal.setDestinationPatientId(FhirCommon.getCommunityPatientId(pat, receiverFacilityOid));
 
 				retVal.setSourceId(FhirCommon.removeUrnOidPrefix(fhirObject.getSource()));
 
@@ -418,13 +382,12 @@ public class FhirXdTransaction {
 	/**
 	 * Read the transaction object from the FHIR resource file
 	 *
-	 * @param fileName
-	 *            the file name
+	 * @param fileName the file name
 	 * @return the transaction
-	 * @throws IOException 
+	 * @throws IOException
 	 */
-	public Transaction readTransactionFromFile(String fileName) throws IOException {
-		final String resourceString = FhirCommon.getXmlResource(fileName);
+	public Transaction readTransactionFromFile(String fileName) {
+		final var resourceString = FhirCommon.getXmlResource(fileName);
 		final IParser parser = fhirCtx.newXmlParser();
 		return parser.parseResource(Transaction.class, resourceString);
 	}

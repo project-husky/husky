@@ -16,33 +16,12 @@
 			<groupId>org.ehealth_connector.common.ch</groupId>
 			<artifactId>ehealth_connector-common-ch</artifactId>
 			<version>2.0-ALPHA</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.openhealthtools.mdht.uml</groupId>
-					<artifactId>cda</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.openhealthtools.mdht.uml.hl7</groupId>
-					<artifactId>datatypes</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<!-- open health tools mdht cda-ch -->
-		<dependency>
-			<groupId>org.openhealthtools.mdht.uml.cda.ch</groupId>
-			<artifactId>org.openhealthtools.mdht.uml.cda.ch</artifactId>
 		</dependency>
 
 		<!-- test stuff -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

@@ -16,34 +16,35 @@
  */
 package org.ehealth_connector.communication.xd.storedquery;
 
+import org.openehealth.ipf.commons.ihe.xds.core.requests.query.StoredQuery;
+
 /**
  * Represents a convenience stored query object
  *
  */
 public abstract class AbstractStoredQuery implements StoredQueryInterface {
 	/**
-	 * The OHT Stored Query Object
+	 * The IPF Stored Query Object
 	 */
-	private org.openhealthtools.ihe.xds.consumer.storedquery.StoredQuery ohtStoredQuery;
+	private StoredQuery ipfStoredQuery;
 
 	/**
-	 * Gets the OHT StoredQuery object, which is being wrapped by this class
+	 * Gets the IPF StoredQuery object, which is being wrapped by this class
 	 *
-	 * @return the OHT StoredQuery
+	 * @return the IPF StoredQuery
 	 */
 	@Override
-	public org.openhealthtools.ihe.xds.consumer.storedquery.StoredQuery getOhtStoredQuery() {
-		return ohtStoredQuery;
+	public StoredQuery getIpfQuery() {
+		return ipfStoredQuery;
 	}
 
 	/**
 	 * Method to set
 	 *
-	 * @param ohtStoredQuery
-	 *            the ohtStoredQuery to set
+	 * @param ipfStoredQuery the ipfStoredQuery to set
 	 */
-	public void setOhtStoredQuery(
-			org.openhealthtools.ihe.xds.consumer.storedquery.StoredQuery ohtStoredQuery) {
-		this.ohtStoredQuery = ohtStoredQuery;
+	public void setIpfStoredQuery(
+			StoredQuery ipfStoredQuery) {
+		this.ipfStoredQuery = ipfStoredQuery;
 	}
 }

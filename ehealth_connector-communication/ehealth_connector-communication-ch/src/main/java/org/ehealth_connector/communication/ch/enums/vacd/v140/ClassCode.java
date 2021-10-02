@@ -16,12 +16,10 @@
  */
 package org.ehealth_connector.communication.ch.enums.vacd.v140;
 
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
-import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
-import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 
 /**
  * <div class="de">Dieser Code definiert die Klasse des Dokumentes und richtet
@@ -326,18 +324,17 @@ public enum ClassCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the OHT CodedMetadataType Object</div>
-	 * <div class="de">Liefert das OHT CodedMetadataType Objekt</div>
+	 * <div class="en">Gets the IPF Code Object</div> <div class="de">Liefert das
+	 * IPF Code Objekt</div>
 	 *
-	 * @return <div class="en">the codedMetadataType</div>
+	 * @return <div class="en">the code</div>
 	 */
 	@Override
-	public CodedMetadataType getCodedMetadataType() {
-		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
-		cmt.setSchemeName(CODE_SYSTEM_OID);
-		cmt.setCode(this.getCodeValue());
-		cmt.setDisplayName(
-				XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
+	public org.openehealth.ipf.commons.ihe.xds.core.metadata.Code getIpfCode() {
+		final var cmt = new org.openehealth.ipf.commons.ihe.xds.core.metadata.Code();
+		cmt.setSchemeName(getCodeSystemId());
+		cmt.setCode(getCodeValue());
+		cmt.setDisplayName(XdsMetadataUtil.createInternationalString(getDisplayName(), "de-ch"));
 		return cmt;
 	}
 

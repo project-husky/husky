@@ -17,9 +17,9 @@
 
 package org.ehealth_connector.communication.mpi.impl.pdq;
 
+import org.ehealth_connector.common.utils.OID;
 import org.ehealth_connector.communication.mpi.V3Message;
 import org.ehealth_connector.communication.utils.PixPdqV3Utils;
-import org.openhealthtools.ihe.utils.OID;
 
 import net.ihe.gazelle.hl7v3.datatypes.II;
 import net.ihe.gazelle.hl7v3.mccimt000300UV01.MCCIMT000300UV01Acknowledgement;

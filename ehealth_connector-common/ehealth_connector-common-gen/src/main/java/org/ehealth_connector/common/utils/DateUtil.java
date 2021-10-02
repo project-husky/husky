@@ -16,10 +16,15 @@
  */
 package org.ehealth_connector.common.utils;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.TimeZone;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
@@ -36,6 +41,7 @@ import org.ehealth_connector.common.hl7cdar2.TS;
  * <div class="de">Toolbox für das Datums-Handling.</div>
  *
  */
+@Deprecated(forRemoval = true)
 public class DateUtil {
 
 	/**
@@ -259,6 +265,27 @@ public class DateUtil {
 	}
 
 	/**
+	 * <div class="en">Converts the given date without day of time to a CDA R2 TS
+	 * (without time zone).</div>
+	 *
+	 * <div class="de">Konvertiert das angegebene Datum ohne Tageszeit in ein CDA R2
+	 * TS (ohne Zeitzone).</div>
+	 *
+	 * @param value the value
+	 * @return the ts
+	 */
+	public static TS date2TsDateOnly(ZonedDateTime value) {
+		if (value == null) {
+			return createIvltsUnknown(null);
+		} else {
+			ObjectFactory factory = new ObjectFactory();
+			final TS ts = factory.createTS();
+			ts.setValue(formatDateOnly(value));
+			return ts;
+		}
+	}
+
+	/**
 	 * <div class="en">Converts the given date including day of time to a CDA R2
 	 * TS (including time zone).</div>
 	 *
@@ -296,6 +323,19 @@ public class DateUtil {
 	}
 
 	/**
+	 * <div class="en">Formats the given timestamp as String: yyyyMMdd</div>
+	 *
+	 * <div class="de">Formatiert den angegebenen Zeitstempel als String:
+	 * yyyyMMdd</div>
+	 *
+	 * @param value the value
+	 * @return the string
+	 */
+	public static String formatDateOnly(ZonedDateTime value) {
+		return value.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+	}
+
+	/**
 	 * <div class="en">Formats the given timestamp as String:
 	 * yyyyMMddHHmmss</div>
 	 *
@@ -312,19 +352,46 @@ public class DateUtil {
 	}
 
 	/**
-	 * <div class="en">Formats the given timestamp as String:
-	 * yyyyMMddHHmmssZ</div>
+	 * <div class="en">Formats the given timestamp as String: yyyyMMddHHmmss</div>
 	 *
 	 * <div class="de">Formatiert den angegebenen Zeitstempel als String:
-	 * yyyyMMddHHmmssZ</div>
+	 * yyyyMMddHHmmss</div>
 	 *
-	 * @param value
-	 *            the value
+	 * @param value the value
+	 * @return the string
+	 */
+	public static String formatDateTime(ZonedDateTime value) {
+		return value.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneId.systemDefault()));
+	}
+
+	/**
+	 * <div class="en">Formats the given timestamp as String:
+	 * yyyyMMddHHmmssXXXX</div>
+	 *
+	 * <div class="de">Formatiert den angegebenen Zeitstempel als String:
+	 * yyyyMMddHHmmssXXXX</div>
+	 *
+	 * @param value the value
 	 * @return the string
 	 */
 	public static String formatDateTimeTzon(Date value) {
 		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssZ");
+		sdf.setTimeZone(TimeZone.getDefault());
 		return sdf.format(value);
+	}
+
+	/**
+	 * <div class="en">Formats the given timestamp as String:
+	 * yyyyMMddHHmmssXXXX</div>
+	 *
+	 * <div class="de">Formatiert den angegebenen Zeitstempel als String:
+	 * yyyyMMddHHmmssXXXX</div>
+	 *
+	 * @param value the value
+	 * @return the string
+	 */
+	public static String formatDateTimeTzon(ZonedDateTime value) {
+		return value.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssZ").withZone(ZoneId.systemDefault()));
 	}
 
 	/**
@@ -336,6 +403,25 @@ public class DateUtil {
 	 */
 	public static Date nowAsDate() {
 		return new Date();
+	}
+
+	/**
+	 * <div class="en">Returns the current system timestamp.</div>
+	 *
+	 * <div class="de">Liefert die aktuelle Systemzeit.</div>
+	 *
+	 * @return the date
+	 */
+	public static ZonedDateTime nowAsZonedDate() {
+		return ZonedDateTime.now();
+	}
+
+	public static Date parseDate(ZonedDateTime date) {
+		return Date.from(date.toInstant());
+	}
+
+	public static ZonedDateTime parseZonedDate(Date date) {
+		return ZonedDateTime.from(date.toInstant().atZone(ZoneId.systemDefault()));
 	}
 
 	/**
@@ -535,6 +621,7 @@ public class DateUtil {
 	public static Date parseDateyyyyMMddHHmmss(String value) {
 		try {
 			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+			sdf.setTimeZone(TimeZone.getDefault());
 			return sdf.parse(value);
 		} catch (final ParseException e) {
 			throw new IllegalArgumentException(
@@ -728,6 +815,21 @@ public class DateUtil {
 	 */
 	public static Date parseHl7Timestamp(TS value) {
 		return parseHl7Timestamp(value.getValue());
+	}
+
+	/**
+	 * Check whether the dates of the two dates are equal (ignoring the time of the
+	 * day).
+	 *
+	 * @param validFrom  the valid from
+	 * @param validFrom2 the valid from 2
+	 * @return true, if equal
+	 */
+	public static boolean equalsDateOnly(Date validFrom, Date validFrom2) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+		String validFromStr = dateFormat.format(validFrom);
+		String validFromStr2 = dateFormat.format(validFrom2);
+		return validFromStr.equals(validFromStr2);
 	}
 
 }

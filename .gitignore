@@ -5,3 +5,6 @@ target
 bin
 work
 .sts4-cache
+/log/*
+/log/
+**/log/*

@@ -54,7 +54,7 @@ public class Telecom extends TelecomBaseType {
 		if (baseType != null) {
 			retVal = new org.ehealth_connector.common.hl7cdar2.TEL();
 
-			NullFlavor nf = baseType.getNullFlavor();
+			var nf = baseType.getNullFlavor();
 			if (nf != null) {
 				if (retVal.nullFlavor == null)
 					retVal.nullFlavor = new ArrayList<String>();
@@ -91,18 +91,16 @@ public class Telecom extends TelecomBaseType {
 	 */
 	public static TelecomBaseType createTelecomBaseType(
 			org.ehealth_connector.common.hl7cdar2.TEL hl7CdaR2Value) {
-		TelecomBaseType retVal = new TelecomBaseType();
+		var retVal = new TelecomBaseType();
 		if (hl7CdaR2Value != null) {
 			String usage = null;
 			String nullFlavor = null;
-			if (hl7CdaR2Value.nullFlavor != null)
-				if (hl7CdaR2Value.nullFlavor.size() > 0)
+			if (hl7CdaR2Value.nullFlavor != null && !hl7CdaR2Value.nullFlavor.isEmpty())
 					nullFlavor = hl7CdaR2Value.nullFlavor.get(0);
 			if (nullFlavor != null)
 				retVal.setNullFlavor(NullFlavor.getEnum(nullFlavor));
 			else {
-				if (hl7CdaR2Value.getUse() != null)
-					if (hl7CdaR2Value.getUse().size() > 0)
+				if (hl7CdaR2Value.getUse() != null && !hl7CdaR2Value.getUse().isEmpty())
 						usage = hl7CdaR2Value.getUse().get(0);
 				if (usage != null)
 					retVal.setUsage(TelecomAddressUse.getEnum(usage));

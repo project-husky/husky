@@ -22,8 +22,9 @@ package org.ehealth_connector.validation.service.schematron;
  * the RuleSetType class coming from the XML configuration.
  */
 import java.io.File;
+import java.io.Serializable;
 
-public interface RuleSet {
+public interface RuleSet extends Serializable {
 
 	String getDescription();
 

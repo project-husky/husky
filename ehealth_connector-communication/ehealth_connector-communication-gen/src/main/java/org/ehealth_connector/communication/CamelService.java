@@ -1,18 +1,19 @@
 package org.ehealth_connector.communication;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.xml.namespace.QName;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.CamelContextAware;
 import org.apache.camel.Exchange;
 import org.apache.camel.support.DefaultExchange;
 import org.apache.camel.util.CastUtils;
-import org.apache.cxf.binding.soap.SoapHeader;
+import org.apache.cxf.headers.Header;
 import org.apache.cxf.headers.Header.Direction;
 import org.ehealth_connector.xua.core.SecurityHeaderElement;
 import org.ehealth_connector.xua.exceptions.SerializeException;
@@ -42,28 +43,36 @@ public abstract class CamelService implements CamelContextAware {
 	}
 
 	protected void addWssHeader(SecurityHeaderElement securityHeaderElement, Exchange exchange)
-			throws SerializeException {
+			throws SerializeException, ParserConfigurationException {
 
 		var wssElement = new OpenSaml2SerializerImpl()
 				.serializeToXml((XMLObject) securityHeaderElement.getWrappedObject());
 
-		// Element wssElement = StaxUtils.read(new
-		// StringReader(wssHeader)).getDocumentElement();
+		var docFactory = DocumentBuilderFactory.newInstance();
+		var docBuilder = docFactory.newDocumentBuilder();
+		var doc = docBuilder.newDocument();
 
+		var wsseElement = doc.createElementNS(
+				"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd", "wsse:Security");
 
-		List<SoapHeader> soapHeaders = CastUtils
-				.cast((List<?>) exchange.getIn().getHeader(AbstractWsEndpoint.OUTGOING_SOAP_HEADERS));
-		SoapHeader newHeader;
+		var wsseQName = new QName("http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd",
+				"Security", "wsse");
+
+		var replaceNode = wsseElement.getOwnerDocument().importNode(wssElement, true);
+		wsseElement.appendChild(replaceNode);
+
+		Map<QName, org.apache.cxf.headers.Header> soapHeaders = CastUtils
+				.cast((Map<QName, org.apache.cxf.headers.Header>) exchange.getIn()
+						.getHeader(AbstractWsEndpoint.OUTGOING_SOAP_HEADERS));
+		Header newHeader;
 		if (soapHeaders == null) {
-			soapHeaders = new ArrayList<>();
+			soapHeaders = new HashMap<>();
 		}
 		try {
-			newHeader = new SoapHeader(
-					new QName("http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd",
-							"Security", "wsse"),
-					wssElement);
+
+			newHeader = new Header(wsseQName, wsseElement);
 			newHeader.setDirection(Direction.DIRECTION_OUT);
-			soapHeaders.add(newHeader);
+			soapHeaders.put(wsseQName, newHeader);
 			exchange.getIn().setHeader(AbstractWsEndpoint.OUTGOING_SOAP_HEADERS, soapHeaders);
 		} catch (Exception e) {
 			log.error("Exception caught while creating the WSS header", e);
@@ -71,7 +80,7 @@ public abstract class CamelService implements CamelContextAware {
 
 	}
 
-	protected void addHttpHeader(Exchange exchange, String action) {
+	protected void addHttpHeader(Exchange exchange, Map<String, String> outgoingHttpHeaders) {
 
 		Map<String, String> outgoingHeaders = CastUtils
 				.cast((Map<String, String>) exchange.getIn().getHeader(AbstractWsEndpoint.OUTGOING_HTTP_HEADERS));
@@ -80,25 +89,31 @@ public abstract class CamelService implements CamelContextAware {
 			outgoingHeaders = new HashMap<>();
 		}
 
-		outgoingHeaders.put("Accept", "application/soap+xml");
-		outgoingHeaders.put("Content-Type",
-				String.format("application/soap+xml; charset=UTF-8; action=\"%s\"", action));
+		for (Entry<String, String> entry : outgoingHttpHeaders.entrySet()) {
+			if (entry != null && entry.getValue() != null && entry.getKey() != null) {
+				outgoingHeaders.put(entry.getKey(), entry.getValue());
+			}
+		}
+
 		exchange.getIn().setHeader(AbstractWsEndpoint.OUTGOING_HTTP_HEADERS, outgoingHeaders);
 
 	}
 
-	protected Exchange send(String endpoint, Object body, SecurityHeaderElement securityHeaderElement, String action)
-			throws Exception {
-		Exchange exchange = new DefaultExchange(getCamelContext());
+	protected Exchange send(String endpoint, Object body, SecurityHeaderElement securityHeaderElement,
+			Map<String, String> outgoingHttpHeaders) throws Exception {
+		Exchange exchange = new DefaultExchange(camelContext);
 		exchange.getIn().setBody(body);
 		if (securityHeaderElement != null) {
 			addWssHeader(securityHeaderElement, exchange);
 		}
 
-		addHttpHeader(exchange, action);
+		if (outgoingHttpHeaders != null && !outgoingHttpHeaders.isEmpty()) {
+			addHttpHeader(exchange, outgoingHttpHeaders);
+		}
 
 		try (var template = camelContext.createProducerTemplate()) {
 			var result = template.send(endpoint, exchange);
+
 			if (result.getException() != null) {
 				throw result.getException();
 			}

@@ -17,22 +17,27 @@
 package org.ehealth_connector.communication.xd.xdm;
 
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
-import org.openhealthtools.ihe.xds.document.XDSDocument;
-import org.openhealthtools.ihe.xds.response.XDSRetrieveResponseType;
-import org.openhealthtools.ihe.xds.response.impl.XDSRetrieveResponseTypeImpl;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
+import org.openehealth.ipf.commons.ihe.xds.core.responses.ErrorInfo;
+import org.openehealth.ipf.commons.ihe.xds.core.responses.Status;
 
 /**
  * Class that holds the extracted documents and submission sets from a given xdm
  * volume. It also contains errors, which might occur during the import process.
  *
  */
-public class XdmRetrieveResponseTypeImpl extends XDSRetrieveResponseTypeImpl
-		implements XDSRetrieveResponseType {
+public class XdmRetrieveResponseTypeImpl {
 
-	private List<XDSDocument> attachments;
+	protected static final Status STATUS_EDEFAULT = Status.SUCCESS;
+
+	private List<Document> attachments;
+
+	protected List<ErrorInfo> errorList;
+
+	protected Status status = STATUS_EDEFAULT;
 
 	/**
 	 * Creates a new XdmRetrieveResponseTypeImpl object
@@ -46,25 +51,14 @@ public class XdmRetrieveResponseTypeImpl extends XDSRetrieveResponseTypeImpl
 	 *
 	 * @return List of XDSDocuments in the XDM Zip File
 	 */
-	@Override
-	public List<XDSDocument> getAttachments() {
+	public List<Document> getAttachments() {
 		if (!isProcessed()) {
-			return null;
+			return new LinkedList<>();
 		}
 		if (null == attachments) {
-			return null;
+			return new LinkedList<>();
 		}
 		return Collections.unmodifiableList(attachments);
-	}
-
-	/**
-	 * Contains a map of exceptions thrown. Not used in the XDM implementation.
-	 *
-	 * @see org.openhealthtools.ihe.xds.response.XDSRetrieveResponseType#getCaughtExceptions()
-	 */
-	@Override
-	public Map<XDSRetrieveResponseType, Throwable> getCaughtExceptions() {
-		return null;
 	}
 
 	/**
@@ -73,7 +67,6 @@ public class XdmRetrieveResponseTypeImpl extends XDSRetrieveResponseTypeImpl
 	 *
 	 * @see org.openhealthtools.ihe.xds.response.XDSResponseType#isComplete()
 	 */
-	@Override
 	public boolean isComplete() {
 		return true;
 	}
@@ -84,7 +77,6 @@ public class XdmRetrieveResponseTypeImpl extends XDSRetrieveResponseTypeImpl
 	 *
 	 * @see org.openhealthtools.ihe.xds.response.impl.XDSResponseTypeImpl#isProcessed()
 	 */
-	@Override
 	protected boolean isProcessed() {
 		return true;
 	}
@@ -95,9 +87,24 @@ public class XdmRetrieveResponseTypeImpl extends XDSRetrieveResponseTypeImpl
 	 * @param attachments
 	 *            List of attachments for this responect
 	 */
-	@Override
-	protected void setAttachments(List<XDSDocument> attachments) {
+	protected void setAttachments(List<Document> attachments) {
 		this.attachments = attachments;
+	}
+
+	public List<ErrorInfo> getErrorList() {
+		return errorList;
+	}
+
+	public void setErrorList(List<ErrorInfo> errorList) {
+		this.errorList = errorList;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 }

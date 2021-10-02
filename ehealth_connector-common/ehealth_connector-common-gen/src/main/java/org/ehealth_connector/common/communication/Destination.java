@@ -19,11 +19,18 @@ package org.ehealth_connector.common.communication;
 
 import java.net.URI;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * The Class Destination. Describes an Endpoint for a transmission or
  * communication.
  */
 public class Destination {
+
+	/** The SLF4J logger instance. */
+	private static Logger log = LoggerFactory.getLogger(Destination.class);
+
 
 	/**
 	 * <div class="en">The key store for TLS</div>
@@ -220,22 +227,24 @@ public class Destination {
 		setKeyStore();
 	}
 
-	@Override
-	public Destination clone() throws CloneNotSupportedException {
-		final Destination clone = new Destination();
-		clone.keyStore = this.keyStore;
-		clone.keyStorePassword = this.keyStorePassword;
-		clone.keyStoreType = this.keyStoreType;
-		clone.receiverApplicationOid = this.receiverApplicationOid;
-		clone.receiverFacilityOid = this.receiverFacilityOid;
-		clone.senderApplicationOid = this.senderApplicationOid;
-		clone.senderFacilityOid = this.senderFacilityOid;
-		clone.senderOrganizationalOid = this.senderOrganizationalOid;
-		clone.trustStore = this.trustStore;
-		clone.trustStorePassword = this.trustStorePassword;
-		clone.trustStoreType = this.trustStoreType;
-		clone.uri = this.uri;
-		return clone;
+	/**
+	 * Clones existing Communication Endpoint
+	 *
+	 * @param origin existing communication Endpoint
+	 */
+	public Destination(Destination origin) {
+		this(origin.getSenderOrganizationalOid(), origin.getUri());
+		this.receiverApplicationOid = origin.getReceiverApplicationOid();
+		this.receiverFacilityOid = origin.getReceiverFacilityOid();
+		this.senderApplicationOid = origin.getSenderApplicationOid();
+		this.senderFacilityOid = origin.getSenderFacilityOid();
+		this.keyStore = origin.getKeyStore();
+		this.keyStorePassword = origin.getKeyStorePassword();
+		this.keyStoreType = origin.getKeyStoreType();
+		this.trustStore = origin.getTrustStore();
+		this.trustStorePassword = origin.getTrustStorePassword();
+		this.trustStoreType = origin.getTrustStoreType();
+		setKeyStore();
 	}
 
 	/**
@@ -462,5 +471,6 @@ public class Destination {
 	public void setUri(URI uri) {
 		this.uri = uri;
 	}
+
 
 }

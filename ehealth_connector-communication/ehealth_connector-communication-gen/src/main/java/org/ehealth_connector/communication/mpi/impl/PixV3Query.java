@@ -1,8 +1,10 @@
 package org.ehealth_connector.communication.mpi.impl;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.camel.CamelContext;
 import org.ehealth_connector.common.communication.AffinityDomain;
@@ -265,7 +267,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 */
 	protected String getHomeCommunityPatientId(FhirPatient patient) {
 		for (final Identifier Identifier : patient.getIdentifier()) {
-			if (Identifier.getSystem().startsWith(FhirCommon.oidUrn)
+			if (Identifier.getSystem().startsWith(FhirCommon.OID_URN)
 					&& FhirCommon.removeUrnOidPrefix(Identifier.getSystem()).equals(this.homeCommunityOid)) {
 					return Identifier.getValue();
 			}
@@ -310,7 +312,12 @@ public class PixV3Query extends PixPdqV3QueryBase {
 				pdqDest.toString().replace("https://", ""), true, auditContext.isAuditEnabled());
 		LOGGER.info("Sending request to '{}' endpoint", endpoint);
 
-		final var exchange = send(endpoint, request, assertion, "urn:hl7-org:v3:PRPA_IN201309UV02");
+		Map<String, String> outgoingHeaders = new HashMap<>();
+		outgoingHeaders.put("Accept", "application/soap+xml");
+		outgoingHeaders.put("Content-Type",
+				"application/soap+xml; charset=UTF-8; action=\"urn:hl7-org:v3:PRPA_IN201309UV02\"");
+
+		final var exchange = send(endpoint, request, assertion, outgoingHeaders);
 
 		return exchange.getMessage().getBody(PixV3QueryResponse.class);
 	}

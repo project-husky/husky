@@ -17,9 +17,12 @@
 package org.ehealth_connector.common;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
 import org.ehealth_connector.common.enums.NullFlavor;
+import org.ehealth_connector.common.hl7cdar2.II;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Identifiable;
 
 /**
  * <div class="en">The class Identificator contains all necessary fields for an
@@ -55,7 +58,7 @@ public class Identificator extends IdentificatorBaseType {
 			retVal = new org.ehealth_connector.common.hl7cdar2.II();
 			String value;
 
-			NullFlavor nf = baseType.getNullFlavor();
+			var nf = baseType.getNullFlavor();
 			if (nf != null) {
 				if (retVal.nullFlavor == null)
 					retVal.nullFlavor = new ArrayList<String>();
@@ -101,12 +104,11 @@ public class Identificator extends IdentificatorBaseType {
 	 */
 	public static IdentificatorBaseType createIdentificatorBaseType(
 			org.ehealth_connector.common.hl7cdar2.II hl7CdaR2Value) {
-		IdentificatorBaseType retVal = new IdentificatorBaseType();
+		var retVal = new IdentificatorBaseType();
 
 		if (hl7CdaR2Value != null) {
 			String nullFlavor = null;
-			if (hl7CdaR2Value.nullFlavor != null)
-				if (hl7CdaR2Value.nullFlavor.size() > 0)
+			if (hl7CdaR2Value.nullFlavor != null && !hl7CdaR2Value.nullFlavor.isEmpty())
 					nullFlavor = hl7CdaR2Value.nullFlavor.get(0);
 			if (nullFlavor != null)
 				retVal.setNullFlavor(NullFlavor.getEnum(nullFlavor));
@@ -187,6 +189,15 @@ public class Identificator extends IdentificatorBaseType {
 		super.setExtension(extension);
 	}
 
+	public Identificator(Identifiable id) {
+		if (id != null) {
+			super.setExtension(id.getId());
+			if (id.getAssigningAuthority() != null) {
+				super.setRoot(id.getAssigningAuthority().getUniversalId());
+			}
+		}
+	}
+
 	/**
 	 * <div class="en">Gets the HL7 CDA R2 data type from the current
 	 * instance.<div>
@@ -255,4 +266,23 @@ public class Identificator extends IdentificatorBaseType {
 		initFromHl7CdaR2(hl7CdaR2Value);
 	}
 
+	/**
+	 * <div class="en">Gets the identificator with the given root id from a list of
+	 * ids.</div> <div class="de">Liefert identificator mit der gegebenen root id
+	 * aus der liste der Ids.</div>
+	 *
+	 * @param iiList <br>
+	 *               <div class="de"> ii list</div>
+	 * @param root   <br>
+	 *               <div class="de"> root</div>
+	 * @return <div class="en">the identificator</div>
+	 */
+	public static Identificator getIdentificator(List<II> iiList, String root) {
+		for (final II i : iiList) {
+			if (i.getRoot().equals(root)) {
+				return new Identificator(i);
+			}
+		}
+		return null;
+	}
 }

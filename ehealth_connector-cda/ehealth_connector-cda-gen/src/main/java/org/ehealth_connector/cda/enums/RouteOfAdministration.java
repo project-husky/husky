@@ -17,10 +17,9 @@
 
 package org.ehealth_connector.cda.enums;
 
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.mdht.Code;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.ehealth_connector.common.hl7cdar2.CE;
 
 /**
  * The RouteOfAdministration.
@@ -277,7 +276,7 @@ public enum RouteOfAdministration {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CE getCE(LanguageCode languageCode) {
-		final CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final CE ce = new CE();
 		ce.setCodeSystem(CODE_SYSTEM_OID);
 		ce.setCodeSystemName(CODE_SYSTEM_NAME);
 		ce.setCode(code);
@@ -328,8 +327,7 @@ public enum RouteOfAdministration {
 		} else
 			displayName = displayNameEn;
 
-		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, CODE_SYSTEM_NAME, displayName);
-		return ehcCode;
+		return new Code(CODE_SYSTEM_OID, code, CODE_SYSTEM_NAME, displayName);
 	}
 
 	/**

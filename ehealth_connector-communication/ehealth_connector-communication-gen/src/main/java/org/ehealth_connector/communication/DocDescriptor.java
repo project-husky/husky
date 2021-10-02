@@ -16,9 +16,13 @@
  */
 package org.ehealth_connector.communication;
 
-import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
+import org.ehealth_connector.common.enums.DocumentDescriptor;
 
 public class DocDescriptor {
+
+	private DocDescriptor() {
+		throw new IllegalStateException("This is a utility class!");
+	}
 
 	public static String getFileExtension(DocumentDescriptor documentDescriptor) {
 		if (documentDescriptor.equals(DocumentDescriptor.CCR)

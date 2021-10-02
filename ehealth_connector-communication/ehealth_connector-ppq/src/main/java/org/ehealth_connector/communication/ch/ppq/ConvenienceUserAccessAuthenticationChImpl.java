@@ -23,14 +23,12 @@ import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeed;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeedResponse;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQuery;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQueryModule;
-import org.ehealth_connector.communication.ch.ppq.api.clients.PpfClient;
-import org.ehealth_connector.communication.ch.ppq.api.clients.PpqClient;
+import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQueryResponse;
 import org.ehealth_connector.communication.ch.ppq.api.config.PpClientConfig;
 import org.ehealth_connector.communication.ch.ppq.impl.clients.ClientFactoryCh;
 import org.ehealth_connector.xua.communication.impl.ConvenienceUserAccessAuthenticationImpl;
 import org.ehealth_connector.xua.core.SecurityHeaderElement;
 import org.ehealth_connector.xua.exceptions.ClientSendException;
-import org.ehealth_connector.xua.saml2.Response;
 import org.opensaml.core.config.InitializationException;
 import org.opensaml.core.config.Initializer;
 
@@ -56,11 +54,11 @@ public class ConvenienceUserAccessAuthenticationChImpl
 		// This makes sure the Marshallers are loaded for serialisation!
 		// Note: the initial implementation did not work under .net. It has been
 		// therefore changed as follows:
-		List<Initializer> initializers = new ArrayList<Initializer>();
+		List<Initializer> initializers = new ArrayList<>();
 		initializers.add(
 				new org.ehealth_connector.communication.ch.ppq.epr.config.EprObjectProviderInitializer());
-		initializers.add(new org.opensaml.xacml.config.XMLObjectProviderInitializer());
-		initializers.add(new org.opensaml.xacml.profile.saml.config.XMLObjectProviderInitializer());
+		initializers.add(new org.opensaml.xacml.config.impl.XMLObjectProviderInitializer());
+		initializers.add(new org.opensaml.xacml.profile.saml.config.impl.XMLObjectProviderInitializer());
 		for (Initializer initializer : initializers) {
 			initializer.init();
 		}
@@ -78,8 +76,14 @@ public class ConvenienceUserAccessAuthenticationChImpl
 	@Override
 	public PrivacyPolicyFeedResponse invokePrivacyPolicyFeed(SecurityHeaderElement aAssertion,
 			PrivacyPolicyFeed feed, PpClientConfig clientConfiguration) throws ClientSendException {
-		final PpfClient client = ClientFactoryCh.getPpfClient(clientConfiguration);
-		return client.send(aAssertion, feed);
+		final var client = ClientFactoryCh.getPpfClient(clientConfiguration);
+		PrivacyPolicyFeedResponse response = client.send(aAssertion, feed);
+
+		if (response != null) {
+			return response;
+		}
+
+		return null;
 	}
 
 	/**
@@ -91,10 +95,10 @@ public class ConvenienceUserAccessAuthenticationChImpl
 	 *      org.ehealth_connector.communication.ch.ppq.api.config.PpClientConfig)
 	 */
 	@Override
-	public Response invokePrivacyPolicyQuery(SecurityHeaderElement aAssertion,
+	public PrivacyPolicyQueryResponse invokePrivacyPolicyQuery(SecurityHeaderElement aAssertion,
 			PrivacyPolicyQuery query, PpClientConfig clientConfiguration)
 			throws ClientSendException {
-		final PpqClient client = ClientFactoryCh.getPpqClient(clientConfiguration);
+		final var client = ClientFactoryCh.getPpqClient(clientConfiguration);
 		return client.send(aAssertion, query);
 
 	}

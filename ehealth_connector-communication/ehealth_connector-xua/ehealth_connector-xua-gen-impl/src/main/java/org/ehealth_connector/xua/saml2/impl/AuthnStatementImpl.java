@@ -16,11 +16,22 @@
  */
 package org.ehealth_connector.xua.saml2.impl;
 
-import java.util.Calendar;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.GregorianCalendar;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.namespace.QName;
 
 import org.ehealth_connector.xua.core.SecurityObject;
-import org.ehealth_connector.xua.saml2.AuthnStatement;
-import org.joda.time.DateTime;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AuthnContextType;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AuthnStatementType;
+import org.opensaml.saml.saml2.core.AuthnContextClassRef;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <!-- @formatter:off -->
@@ -31,7 +42,10 @@ import org.joda.time.DateTime;
  * <!-- @formatter:on -->
  */
 public class AuthnStatementImpl
-		implements AuthnStatement, SecurityObject<org.opensaml.saml.saml2.core.AuthnStatement> {
+		extends AuthnStatementType implements SecurityObject<org.opensaml.saml.saml2.core.AuthnStatement>
+{
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(AuthnStatementImpl.class);
 
 	private org.opensaml.saml.saml2.core.AuthnStatement authnStatement;
 
@@ -57,13 +71,16 @@ public class AuthnStatementImpl
 	 * @see org.ehealth_connector.xua.saml2.AuthnStatement#getAuthnContextClassRef()
 	 */
 	@Override
-	public String getAuthnContextClassRef() {
+	public AuthnContextType getAuthnContext() {
 		if ((authnStatement.getAuthnContext() != null)
 				&& (authnStatement.getAuthnContext().getAuthnContextClassRef() != null)) {
-			return authnStatement.getAuthnContext().getAuthnContextClassRef()
-					.getAuthnContextClassRef();
+			this.authnContext = new AuthnContextType();
+			var qname = new QName("urn:oasis:names:tc:SAML:2.0:assertion", "AuthnContextClassRef");
+			this.authnContext.getContent().add(new JAXBElement<>(qname, AuthnContextClassRef.class,
+					authnStatement.getAuthnContext().getAuthnContextClassRef()));
+			return this.authnContext;
 		}
-		return "";
+		return null;
 	}
 
 	/**
@@ -73,11 +90,19 @@ public class AuthnStatementImpl
 	 * @see org.ehealth_connector.xua.saml2.AuthnStatement#getAuthnInstant()
 	 */
 	@Override
-	public Calendar getAuthnInstant() {
-		final DateTime instant = authnStatement.getAuthnInstant();
-		final var retVal = Calendar.getInstance();
-		retVal.setTimeInMillis(instant.getMillis());
-		return retVal;
+	public XMLGregorianCalendar getAuthnInstant() {
+		final var instant = authnStatement.getAuthnInstant();
+		final var retVal = GregorianCalendar.from(ZonedDateTime.ofInstant(instant, ZoneId.systemDefault()));
+
+		XMLGregorianCalendar xmlGregCal = null;
+		try {
+			xmlGregCal = DatatypeFactory.newInstance().newXMLGregorianCalendar(retVal);
+			setAuthnInstant(xmlGregCal);
+		} catch (DatatypeConfigurationException e) {
+			LOGGER.error(e.getMessage(), e);
+		}
+
+		return xmlGregCal;
 	}
 
 	/**
@@ -88,6 +113,7 @@ public class AuthnStatementImpl
 	 */
 	@Override
 	public String getSessionIndex() {
+		this.sessionIndex = authnStatement.getSessionIndex();
 		return authnStatement.getSessionIndex();
 	}
 
@@ -98,11 +124,19 @@ public class AuthnStatementImpl
 	 * @see org.ehealth_connector.xua.saml2.AuthnStatement#getSessionNotOnOrAfter()
 	 */
 	@Override
-	public Calendar getSessionNotOnOrAfter() {
-		final DateTime instant = authnStatement.getSessionNotOnOrAfter();
-		final var retVal = Calendar.getInstance();
-		retVal.setTimeInMillis(instant.getMillis());
-		return retVal;
+	public XMLGregorianCalendar getSessionNotOnOrAfter() {
+		final var instant = authnStatement.getSessionNotOnOrAfter();
+		final var retVal = GregorianCalendar.from(ZonedDateTime.ofInstant(instant, ZoneId.systemDefault()));
+
+		XMLGregorianCalendar xmlGregCal = null;
+		try {
+			xmlGregCal = DatatypeFactory.newInstance().newXMLGregorianCalendar(retVal);
+			setAuthnInstant(xmlGregCal);
+		} catch (DatatypeConfigurationException e) {
+			LOGGER.error(e.getMessage(), e);
+		}
+
+		return xmlGregCal;
 	}
 
 	/**

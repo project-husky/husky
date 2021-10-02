@@ -20,10 +20,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import java.time.Instant;
 import java.util.UUID;
 
 import org.ehealth_connector.xua.saml2.Response;
-import org.joda.time.DateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,14 +32,14 @@ public class ResponseBuilderImplTest {
 	private ResponseBuilderImpl responseBuilder;
 	private String testConsent;
 	private String testId;
-	private DateTime testIssueInstant;
+	private Instant testIssueInstant;
 
 	@BeforeEach
 	public void setUp() throws Exception {
 		responseBuilder = new ResponseBuilderImpl();
 
 		testConsent = "Test a consent";
-		testIssueInstant = DateTime.now();
+		testIssueInstant = Instant.now();
 		testId = UUID.randomUUID().toString();
 	}
 
@@ -72,7 +72,7 @@ public class ResponseBuilderImplTest {
 		assertNotNull(ref);
 		assertEquals(testConsent, ref.getConsent());
 		assertEquals(testId, ref.getId());
-		assertEquals(testIssueInstant.getMillis(), ref.getIssueInstant().getTimeInMillis());
+		assertEquals(testIssueInstant.toEpochMilli(), ref.getIssueInstant().getTimeInMillis());
 	}
 
 }

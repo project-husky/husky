@@ -187,7 +187,7 @@ public class V3PdqConsumerResponse extends V3Response {
 		// get the patient address as an array
 		if (getPatientByIndex(patientIndex).getPatientPerson().getAddr().size() > addrIndex)
 			addressArray = PixPdqV3Utils
-					.ADToStringArray(getPatientByIndex(patientIndex).getPatientPerson().getAddr().get(addrIndex));
+					.adToStringArray(getPatientByIndex(patientIndex).getPatientPerson().getAddr().get(addrIndex));
 		return addressArray;
 	}
 
@@ -257,7 +257,7 @@ public class V3PdqConsumerResponse extends V3Response {
 		String[] response = null;
 		// if there is an id at this level
 		if (getPatientByIndex(patientIndex).getId().size() > idIndex)
-			response = PixPdqV3Utils.IIToStringArray(getPatientByIndex(patientIndex).getId().get(idIndex));
+			response = PixPdqV3Utils.iiToStringArray(getPatientByIndex(patientIndex).getId().get(idIndex));
 
 		// return the response
 		return response;
@@ -305,7 +305,7 @@ public class V3PdqConsumerResponse extends V3Response {
 			while (iter.hasNext()) {
 				final PRPAMT201310UV02PersonalRelationship pr = iter.next();
 				if (pr.getCode().getCode().equalsIgnoreCase("MTH")) {
-					return PixPdqV3Utils.ENToStringArray(pr.getRelationshipHolder1().getName().get(nameIndex));
+					return PixPdqV3Utils.enToStringArray(pr.getRelationshipHolder1().getName().get(nameIndex));
 				}
 			}
 		}
@@ -357,7 +357,7 @@ public class V3PdqConsumerResponse extends V3Response {
 	public String[] getPatientName(int patientIndex, int nameIndex) {
 		// get the patient name as an array
 		return PixPdqV3Utils
-				.PNToStringArray(getPatientByIndex(patientIndex).getPatientPerson().getName().get(nameIndex));
+				.pnToStringArray(getPatientByIndex(patientIndex).getPatientPerson().getName().get(nameIndex));
 	}
 
 	/**

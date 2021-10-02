@@ -13,18 +13,6 @@
 
 
 	<dependencies>
-
-		<!-- hl7 -->
-		<dependency>
-			<groupId>org.hl7.v3</groupId>
-			<artifactId>hl7v3-core</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.ehealth_connector.cda</groupId>
-			<artifactId>ehealth_connector-cda-gen</artifactId>
-			<version>2.0-ALPHA</version>
-		</dependency>
 		<dependency>
 			<groupId>org.ehealth_connector.fhir.structures</groupId>
 			<artifactId>ehealth_connector-fhir-structures-gen</artifactId>
@@ -36,152 +24,6 @@
 			<version>2.0-ALPHA</version>
 		</dependency>
 
-		<!-- open health tools ihe xds -->
-		<dependency>
-			<groupId>org.openhealthtools.ihe.xds</groupId>
-			<artifactId>oht-xds-source</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.xds</groupId>
-			<artifactId>oht-xds-consumer</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.xds</groupId>
-			<artifactId>oht-xds-soap</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.xds.metadata</groupId>
-			<artifactId>oht-xds-metadata-transform</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.xds.metadata</groupId>
-			<artifactId>oht-xds-metadata-extract-cdar2</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openhealthtools.ihe</groupId>
-			<artifactId>oht-xdm</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.xua</groupId>
-			<artifactId>oht-xua</artifactId>
-		</dependency>
-
-		<!-- eclipse libs -->
-		<dependency>
-			<groupId>org.eclipse.ohf</groupId>
-			<artifactId>org.eclipse.ohf.utilities</artifactId>
-		</dependency>
-
-
-
-		<!-- open health tools ihe atna -->
-		<dependency>
-			<groupId>org.openhealthtools.ihe.atna</groupId>
-			<artifactId>oht-atna-auditor</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.atna</groupId>
-			<artifactId>oht-atna-context</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.atna</groupId>
-			<artifactId>oht-atna-nodeauth</artifactId>
-		</dependency>
-
-		<!-- open health tools ihe ebXML -->
-		<dependency>
-			<groupId>org.openhealthtools.ihe.common</groupId>
-			<artifactId>oht-common-ebXML._2._1</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.common</groupId>
-			<artifactId>oht-common-ebXML._3._0</artifactId>
-		</dependency>
-
-		<!-- open health tools ihe hl7v2 -->
-		<dependency>
-			<groupId>org.openhealthtools.ihe.common.hl7v2</groupId>
-			<artifactId>oht-common-hl7v2</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.common.hl7v2</groupId>
-			<artifactId>oht-common-hl7v2-client</artifactId>
-		</dependency>
-
-		<!-- open health tools ihe hl7v3 -->
-		<dependency>
-			<groupId>org.openhealthtools.ihe.common.hl7v3</groupId>
-			<artifactId>oht-common-hl7v3</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.common.hl7v3</groupId>
-			<artifactId>oht-common-hl7v3-client</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.common.hl7v3</groupId>
-			<artifactId>oht-common-hl7v3-soap</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openhealthtools.ihe.common.ws</groupId>
-			<artifactId>oht-common-ws-axis2</artifactId>
-		</dependency>
-
-		<!-- open health tools ihe pix -->
-		<dependency>
-			<groupId>org.openhealthtools.ihe.pix</groupId>
-			<artifactId>oht-pix-consumer-v3</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.pix</groupId>
-			<artifactId>oht-pix-consumer</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.pix</groupId>
-			<artifactId>oht-pix-source</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.pix</groupId>
-			<artifactId>oht-pix-source-v3</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.pdq</groupId>
-			<artifactId>oht-pdq-consumer</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.pdq</groupId>
-			<artifactId>oht-pdq-consumer-v3</artifactId>
-		</dependency>
-
-		<!-- axis2 -->
-		<dependency>
-			<groupId>org.apache.axis2</groupId>
-			<artifactId>axis2-kernel</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.axis2</groupId>
-			<artifactId>axis2-java2wsdl</artifactId>
-		</dependency>
-		<!-- <dependency> <groupId>org.apache.axis2</groupId> <artifactId>axis2-saaj</artifactId> 
-			</dependency> -->
-		<dependency>
-			<groupId>org.apache.axis2</groupId>
-			<artifactId>axis2-adb-codegen</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.axis2</groupId>
-			<artifactId>addressing</artifactId>
-			<!--type>mar</type -->
-		</dependency>
-
-		<!-- <dependency> <groupId>org.apache.ws.commons.axiom</groupId> <artifactId>axiom-impl</artifactId> 
-			</dependency> -->
-		<dependency>
-			<groupId>xerces</groupId>
-			<artifactId>xercesImpl</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpcore</artifactId>
@@ -191,10 +33,9 @@
 			<artifactId>httpcore-nio</artifactId>
 		</dependency>
 
-
 		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>commons-codec</groupId>
@@ -211,8 +52,18 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>jakarta.annotation</groupId>
 			<artifactId>jakarta.annotation-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
 		</dependency>
 
 		<!-- ipf stuff -->
@@ -220,10 +71,10 @@
 			<groupId>org.openehealth.ipf.boot</groupId>
 			<artifactId>ipf-xds-spring-boot-starter</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.openehealth.ipf.boot</groupId>
-        <artifactId>ipf-hl7v3-spring-boot-starter</artifactId>
+			<artifactId>ipf-hl7v3-spring-boot-starter</artifactId>
 		</dependency>
 
 		<dependency>
@@ -243,25 +94,6 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.ehealth_connector.cda</groupId>
-			<artifactId>ehealth_connector-cda-gen</artifactId>
-			<version>2.0-ALPHA</version>
-			<type>test-jar</type>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>ca.uhn.hapi.fhir</groupId>
 			<artifactId>hapi-fhir-validation-resources-dstu3</artifactId>
 			<scope>test</scope>
@@ -271,12 +103,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-
-		<!--<dependency> <groupId>org.apache.camel</groupId> <artifactId>camel-test-spring</artifactId> 
-			<scope>compile</scope> </dependency> -->
-
-
 	</dependencies>
 
 	<build>

@@ -67,7 +67,7 @@ public class PkiManagerImpl implements PkiManager {
 			final var fact = CertificateFactory.getInstance("X.509");
 			final var is = new FileInputStream(clientCertPemPath);
 			final X509Certificate cer = (X509Certificate) fact.generateCertificate(is);
-			final Certificate[] chain = new Certificate[] { cer };
+			final var chain = new Certificate[] { cer };
 
 			final var keyUri = privateKeyPemPath.toURI();
 

@@ -39,7 +39,7 @@ public class PersonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Person#Person()}.
+	 * {@link org.ehealth_connector.common.Person#Person()}.
 	 */
 	@Test
 	public void testPerson() {
@@ -48,7 +48,7 @@ public class PersonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Person#Person(org.ehealth_connector.common.mdht.Name)}
+	 * {@link org.ehealth_connector.common.Person#Person(org.ehealth_connector.common.mdht.Name)}
 	 * .
 	 */
 	@Test
@@ -58,7 +58,7 @@ public class PersonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Person#Person(org.openhealthtools.mdht.uml.cda.Person)}
+	 * {@link org.ehealth_connector.common.Person#Person(org.openhealthtools.mdht.uml.cda.Person)}
 	 * .
 	 */
 	@Test

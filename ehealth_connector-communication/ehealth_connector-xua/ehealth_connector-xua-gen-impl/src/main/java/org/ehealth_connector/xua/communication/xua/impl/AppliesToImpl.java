@@ -44,7 +44,7 @@ public class AppliesToImpl
 		final var wsEndpointReference = new ListXmlObjectHelper<EndpointReference>()
 				.getComponent(EndpointReferenceImpl.class, appliesTo.getUnknownXMLObjects());
 		if ((wsEndpointReference != null) && (wsEndpointReference.getAddress() != null)) {
-			return wsEndpointReference.getAddress().getValue();
+			return wsEndpointReference.getAddress().getURI();
 		}
 		return "";
 	}

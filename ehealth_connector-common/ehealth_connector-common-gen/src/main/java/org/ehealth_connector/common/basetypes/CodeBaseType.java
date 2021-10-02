@@ -18,6 +18,7 @@ package org.ehealth_connector.common.basetypes;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.processing.Generated;
 
@@ -63,13 +64,13 @@ public class CodeBaseType implements Serializable {
 		private String codeSystemVersion;
 
 		/** The code translation list. */
-		private ArrayList<CodeBaseType> codeTranslationList;
+		private List<CodeBaseType> codeTranslationList;
 
 		/** The display name. */
 		private String displayName;
 
 		/** The display name translation list. */
-		private ArrayList<LangText> displayNameTranslationList;
+		private List<LangText> displayNameTranslationList;
 
 		/** The null flavor. */
 		private NullFlavor nullFlavor;
@@ -147,7 +148,7 @@ public class CodeBaseType implements Serializable {
 		 *            the code translation list
 		 * @return the builder
 		 */
-		public Builder withCodeTranslationList(ArrayList<CodeBaseType> codeTranslationList) {
+		public Builder withCodeTranslationList(List<CodeBaseType> codeTranslationList) {
 			this.codeTranslationList = codeTranslationList;
 			return this;
 		}
@@ -228,13 +229,13 @@ public class CodeBaseType implements Serializable {
 	private String codeSystemVersion;
 
 	/** The code translation. */
-	private ArrayList<CodeBaseType> codeTranslationList;
+	private List<CodeBaseType> codeTranslationList;
 
 	/** The display name. */
 	private String displayName;
 
 	/** The display name translation. */
-	private ArrayList<LangText> displayNameTranslationList;
+	private List<LangText> displayNameTranslationList;
 
 	/** The null flavor. */
 	private NullFlavor nullFlavor;
@@ -284,7 +285,7 @@ public class CodeBaseType implements Serializable {
 	 */
 	public void addCodeTranslation(CodeBaseType codeTranslation) {
 		if (this.codeTranslationList == null)
-			this.codeTranslationList = new ArrayList<CodeBaseType>();
+			this.codeTranslationList = new ArrayList<>();
 		this.codeTranslationList.add(codeTranslation);
 	}
 
@@ -300,7 +301,7 @@ public class CodeBaseType implements Serializable {
 	 */
 	public void addDisplayNameTranslation(LangText displayNameTranslation) {
 		if (this.displayNameTranslationList == null)
-			this.displayNameTranslationList = new ArrayList<LangText>();
+			this.displayNameTranslationList = new ArrayList<>();
 		this.displayNameTranslationList.add(displayNameTranslation);
 	}
 
@@ -326,7 +327,7 @@ public class CodeBaseType implements Serializable {
 	 * <div class="de">Löscht die Code-Übersetzungsliste.</div>
 	 */
 	public void clearCodeTranslationList() {
-		this.codeTranslationList = new ArrayList<CodeBaseType>();
+		this.codeTranslationList = new ArrayList<>();
 	}
 
 	/**
@@ -335,7 +336,7 @@ public class CodeBaseType implements Serializable {
 	 * <div class="de">Löscht die Liste der Anzeigenamenübersetzungen.</div>
 	 */
 	public void clearDisplayNameTranslationList() {
-		this.displayNameTranslationList = new ArrayList<LangText>();
+		this.displayNameTranslationList = new ArrayList<>();
 	}
 
 	/**
@@ -395,7 +396,7 @@ public class CodeBaseType implements Serializable {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		boolean retVal = true;
+		var retVal = true;
 		if (obj == null)
 			return false;
 
@@ -524,9 +525,9 @@ public class CodeBaseType implements Serializable {
 	 *
 	 * @return the code translation list
 	 */
-	public ArrayList<CodeBaseType> getCodeTranslationList() {
+	public List<CodeBaseType> getCodeTranslationList() {
 		if (this.codeTranslationList == null)
-			this.codeTranslationList = new ArrayList<CodeBaseType>();
+			this.codeTranslationList = new ArrayList<>();
 		return codeTranslationList;
 	}
 
@@ -554,9 +555,9 @@ public class CodeBaseType implements Serializable {
 	 *
 	 * @return the display name translation list
 	 */
-	public ArrayList<LangText> getDisplayNameTranslationList() {
+	public List<LangText> getDisplayNameTranslationList() {
 		if (this.displayNameTranslationList == null)
-			this.displayNameTranslationList = new ArrayList<LangText>();
+			this.displayNameTranslationList = new ArrayList<>();
 		return displayNameTranslationList;
 	}
 
@@ -677,7 +678,7 @@ public class CodeBaseType implements Serializable {
 	 * @param codeTranslationList
 	 *            the new code translation list
 	 */
-	public void setCodeTranslationList(ArrayList<CodeBaseType> codeTranslationList) {
+	public void setCodeTranslationList(List<CodeBaseType> codeTranslationList) {
 		this.codeTranslationList = codeTranslationList;
 	}
 
@@ -707,7 +708,7 @@ public class CodeBaseType implements Serializable {
 	 * @param displayNameTranslationList
 	 *            the new display name translation list
 	 */
-	public void setDisplayNameTranslationList(ArrayList<LangText> displayNameTranslationList) {
+	public void setDisplayNameTranslationList(List<LangText> displayNameTranslationList) {
 		this.displayNameTranslationList = displayNameTranslationList;
 	}
 
@@ -746,7 +747,7 @@ public class CodeBaseType implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		StringBuilder retVal = new StringBuilder();
+		var retVal = new StringBuilder();
 
 		if (getCode() != null)
 			retVal.append(getCode() + " / ");
@@ -758,19 +759,19 @@ public class CodeBaseType implements Serializable {
 		else
 			retVal.append("no code system !!");
 
-		String displayName = getDisplayName();
-		String codeSystemName = getCodeSystemName();
-		if ((displayName != null) || (codeSystemName != null)) {
+		var displayNameL = getDisplayName();
+		var codeSystemNameL = getCodeSystemName();
+		if ((displayNameL != null) || (codeSystemNameL != null)) {
 			retVal.append(" (");
 
-			if (displayName != null)
-				retVal.append(displayName);
+			if (displayNameL != null)
+				retVal.append(displayNameL);
 
-			if (codeSystemName != null) {
-				if (displayName != null)
+			if (codeSystemNameL != null) {
+				if (displayNameL != null)
 					retVal.append(" / ");
 
-				retVal.append(codeSystemName);
+				retVal.append(codeSystemNameL);
 			}
 
 			retVal.append(")");

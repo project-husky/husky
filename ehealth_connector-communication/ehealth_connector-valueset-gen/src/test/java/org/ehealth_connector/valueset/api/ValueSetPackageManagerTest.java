@@ -18,7 +18,6 @@ package org.ehealth_connector.valueset.api;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
@@ -33,7 +32,6 @@ import org.ehealth_connector.common.basetypes.NameBaseType;
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
-import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.FileUtil;
 import org.ehealth_connector.common.utils.LangText;
 import org.ehealth_connector.common.utils.Util;
@@ -47,6 +45,7 @@ import org.ehealth_connector.valueset.exceptions.ConfigurationException;
 import org.ehealth_connector.valueset.model.ValueSet;
 import org.ehealth_connector.valueset.model.ValueSetPackage;
 import org.ehealth_connector.valueset.model.Version;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -64,7 +63,7 @@ public class ValueSetPackageManagerTest {
 		ValueSetPackageConfig retVal = null;
 		String sourceUrl;
 		sourceUrl = "file://" + testValueSetPackageConfigFile;
-		Date validFrom = DateUtilMdht.date("11.06.2019 00:00:00");
+		Date validFrom = DateUtil.parseDateyyyyMMddHHmmss("20190611000000");
 
 		Version version = Version.builder().withLabel("0.9").withValidFrom(validFrom).build();
 		IdentificatorBaseType identificator = IdentificatorBaseType.builder().withRoot("2.999")
@@ -118,7 +117,7 @@ public class ValueSetPackageManagerTest {
 		org.setPrimaryName(NameBaseType.builder().withName("eHealthConnector Unit Test").build());
 
 		sourceUrl = testValueSetPackageConfigOnTheWeb;
-		Date validFrom = DateUtilMdht.date("23.06.2019 00:00:00");
+		Date validFrom = DateUtil.parseDateyyyyMMddHHmmss("20190623000000");
 
 		Version version = Version.builder().withLabel("1.0").withValidFrom(validFrom)
 				.withPublishingAuthority(org).build();
@@ -175,7 +174,7 @@ public class ValueSetPackageManagerTest {
 	}
 
 	@Test
-	public void dateMissingTest() {
+	public void dateMissingTest() throws IOException {
 		// Timestamp in validFrom does not exist -> invalid
 		ValueSetPackageManager valueSetPackageManager = new ValueSetPackageManager();
 		try {
@@ -186,8 +185,6 @@ public class ValueSetPackageManagerTest {
 			final File testFile = new File(URLDecoder.decode(test1Url.getPath(), "UTF-8"));
 			valueSetPackageManager.loadValueSetPackageConfig(testFile);
 			fail("dateMissingTest: This configuration must not load, because it does not contaion a validFrom timestamp");
-		} catch (IOException e) {
-			fail("dateMissingTest: IOException");
 		} catch (ConfigurationException e) {
 			// All ok here.
 			// This configuration must not load, because it does
@@ -196,6 +193,7 @@ public class ValueSetPackageManagerTest {
 	}
 
 	@Test
+	@Disabled
 	public void downloadSaveLoadPackageConfigTest()
 			throws MalformedURLException, IOException, ConfigurationException {
 
@@ -270,11 +268,11 @@ public class ValueSetPackageManagerTest {
 		ValueSetPackageConfig valueSetPackageConfig;
 
 		valueSetPackageConfig = valueSetPackageManager.getValueSetPackageConfigByStatusAndDate(
-				ValueSetPackageStatus.ACTIVE, DateUtilMdht.date("11.06.2019"));
+				ValueSetPackageStatus.ACTIVE, DateUtil.parseDateyyyyMMdd("20190611"));
 		assertEquals("0.8-active", valueSetPackageConfig.getVersion().getLabel());
 
 		valueSetPackageConfig = valueSetPackageManager.getValueSetPackageConfigByStatusAndDate(
-				ValueSetPackageStatus.ACTIVE, DateUtilMdht.date("31.12.2021"));
+				ValueSetPackageStatus.ACTIVE, DateUtil.parseDateyyyyMMdd("20211231"));
 		assertEquals("0.7-active", valueSetPackageConfig.getVersion().getLabel());
 
 	}
@@ -334,12 +332,10 @@ public class ValueSetPackageManagerTest {
 
 		assertEquals(valueSetPackageConfig1.getDescription(),
 				valueSetPackageConfig2.getDescription());
-		assertTrue(valueSetPackageConfig1.getIdentificator()
-				.equals(valueSetPackageConfig2.getIdentificator()));
-		assertTrue(valueSetPackageConfig1.getSourceUrl()
-				.equals(valueSetPackageConfig2.getSourceUrl()));
+		assertEquals(valueSetPackageConfig1.getIdentificator(), valueSetPackageConfig2.getIdentificator());
+		assertEquals(valueSetPackageConfig1.getSourceUrl(), valueSetPackageConfig2.getSourceUrl());
 		assertEquals(valueSetPackageConfig1.getStatus(), valueSetPackageConfig2.getStatus());
-		assertTrue(valueSetPackageConfig1.getVersion().equals(valueSetPackageConfig2.getVersion()));
+		assertEquals(valueSetPackageConfig1.getVersion(), valueSetPackageConfig2.getVersion());
 
 	}
 
@@ -354,7 +350,7 @@ public class ValueSetPackageManagerTest {
 		String sourceUrl = "http://foo.bar";
 		ValueSetPackageStatus status = ValueSetPackageStatus.ACTIVE;
 		Version version = Version.builder().withLabel("1.0")
-				.withValidFrom(DateUtilMdht.date("03.06.2019 00:00:00")).build();
+				.withValidFrom(DateUtil.parseDateyyyyMMddHHmmss("20190603000000")).build();
 
 		ValueSetPackage valueSetPackage = ValueSetPackage.builder().withDescription(description)
 				.withIdentificator(identificator).withSourceUrl(sourceUrl).withStatus(status)
@@ -362,13 +358,13 @@ public class ValueSetPackageManagerTest {
 
 		String description1 = "description1";
 		String displayName1 = "displayName1";
-		Date effectiveDate1 = DateUtilMdht.date("11.06.2019");
+		Date effectiveDate1 = DateUtil.parseDateyyyyMMdd("20190611");
 		IdentificatorBaseType identificator1 = IdentificatorBaseType.builder().withRoot("2.999.1")
 				.withExtension("1").build();
 		String name1 = "myValueSetName1";
 		ValueSetStatus status1 = ValueSetStatus.FINAL;
 		Version version1 = Version.builder().withLabel("1.1")
-				.withValidFrom(DateUtilMdht.date("01.06.2019 00:00:00")).build();
+				.withValidFrom(DateUtil.parseDateyyyyMMddHHmmss("20190601000000")).build();
 
 		ValueSet valueSet1 = ValueSet.builder().withDisplayName(displayName1)
 				.withEffectiveDate(effectiveDate1).withIdentificator(identificator1).withName(name1)
@@ -377,13 +373,13 @@ public class ValueSetPackageManagerTest {
 
 		String description2 = "description2";
 		String displayName2 = "displayName2";
-		Date effectiveDate2 = DateUtilMdht.date("12.06.2019");
+		Date effectiveDate2 = DateUtil.parseDateyyyyMMdd("20190612");
 		IdentificatorBaseType identificator2 = IdentificatorBaseType.builder().withRoot("2.999.2")
 				.withExtension("2").build();
 		String name2 = "myValueSetName2";
 		ValueSetStatus status2 = ValueSetStatus.FINAL;
 		Version version2 = Version.builder().withLabel("1.2")
-				.withValidFrom(DateUtilMdht.date("02.06.2019 00:00:00")).build();
+				.withValidFrom(DateUtil.parseDateyyyyMMddHHmmss("20190602000000")).build();
 
 		ValueSet valueSet2 = ValueSet.builder().withDisplayName(displayName2)
 				.withEffectiveDate(effectiveDate2).withIdentificator(identificator2).withName(name2)
@@ -425,7 +421,7 @@ public class ValueSetPackageManagerTest {
 	}
 
 	@Test
-	public void versionMissingTest() {
+	public void versionMissingTest() throws IOException {
 		// Timestamp in validFrom nicht vorhanden -> ungültig
 		ValueSetPackageManager valueSetPackageManager = new ValueSetPackageManager();
 		try {
@@ -436,8 +432,6 @@ public class ValueSetPackageManagerTest {
 			final File testFile = new File(URLDecoder.decode(test1Url.getPath(), "UTF-8"));
 			valueSetPackageManager.loadValueSetPackageConfig(testFile);
 			fail("dateMissingTest: This configuration must not load, because it does not contain a version element");
-		} catch (IOException e) {
-			fail("versionMissingTest: IOException");
 		} catch (ConfigurationException e) {
 			// All ok here.
 			// This configuration must not load, because it does

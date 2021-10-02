@@ -465,7 +465,7 @@ public class ValueSetEntry implements Serializable {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		boolean retVal = true;
+		var retVal = true;
 		if (obj == null)
 			return false;
 
@@ -477,7 +477,7 @@ public class ValueSetEntry implements Serializable {
 				this.childList = new ArrayList<>();
 			retVal = (this.childList.size() == ((ValueSetEntry) obj).getChildList().size());
 			if (retVal) {
-				for (int i = 0; i < this.childList.size(); i++) {
+				for (var i = 0; i < this.childList.size(); i++) {
 					retVal = ((ValueSetEntry) obj).containsChild(this.childList.get(i));
 					if (!retVal)
 						break;
@@ -490,7 +490,7 @@ public class ValueSetEntry implements Serializable {
 			retVal = (this.designationList.size() == ((ValueSetEntry) obj).getDesignationList()
 					.size());
 			if (retVal) {
-				for (int i = 0; i < this.designationList.size(); i++) {
+				for (var i = 0; i < this.designationList.size(); i++) {
 					retVal = ((ValueSetEntry) obj).containsDesignation(this.designationList.get(i));
 					if (!retVal)
 						break;
@@ -503,7 +503,7 @@ public class ValueSetEntry implements Serializable {
 			retVal = (this.mappingCodeList.size() == ((ValueSetEntry) obj).getMappingCodeList()
 					.size());
 			if (retVal) {
-				for (int i = 0; i < this.mappingCodeList.size(); i++) {
+				for (var i = 0; i < this.mappingCodeList.size(); i++) {
 					retVal = ((ValueSetEntry) obj).containsMappingCode(this.mappingCodeList.get(i));
 					if (!retVal)
 						break;
@@ -516,7 +516,7 @@ public class ValueSetEntry implements Serializable {
 			retVal = (this.mappingNameList.size() == ((ValueSetEntry) obj).getMappingNameList()
 					.size());
 			if (retVal) {
-				for (int i = 0; i < this.mappingNameList.size(); i++) {
+				for (var i = 0; i < this.mappingNameList.size(); i++) {
 					retVal = ((ValueSetEntry) obj).containsMappingName(this.mappingNameList.get(i));
 					if (!retVal)
 						break;

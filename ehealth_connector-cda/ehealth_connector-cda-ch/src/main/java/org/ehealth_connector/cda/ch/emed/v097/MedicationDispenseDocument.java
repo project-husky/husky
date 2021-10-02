@@ -19,6 +19,7 @@ package org.ehealth_connector.cda.ch.emed.v097;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import javax.annotation.processing.Generated;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -28,6 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamSource;
+
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
@@ -459,7 +461,7 @@ public class MedicationDispenseDocument
 		Identificator docId = newDocId;
 		if (docId == null)
 			docId = new Identificator(Identificator.builder()
-					.withRoot(org.openhealthtools.ihe.utils.UUID.generate()).build());
+					.withRoot(org.ehealth_connector.common.utils.UUID.generate()).build());
 		super.setId(docId.getHl7CdaR2Ii());
 		setVersion(docId, 1);
 	}

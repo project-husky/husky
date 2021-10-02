@@ -23,8 +23,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.UUID;
 
-import org.ehealth_connector.common.mdht.Code;
-import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Identificator;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Identifier;
@@ -61,7 +61,7 @@ public class FhirCommonTest {
 
 		testIdentificator = new Identificator(testSystemOid, testOidString);
 
-		testCode = new Code(testSystemOid, testOidString);
+		testCode = new Code(testOidString, testSystemOid, null);
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class FhirCommonTest {
 	public void testAddUrnOid() {
 		final String ref = FhirCommon.addUrnOid(testOidString);
 		assertNotNull(ref);
-		assertTrue(ref.startsWith(FhirCommon.oidUrn));
+		assertTrue(ref.startsWith(FhirCommon.OID_URN));
 		assertTrue(ref.endsWith(testOidString));
 	}
 
@@ -94,7 +94,7 @@ public class FhirCommonTest {
 	public void testAddUrnUuid() {
 		final String ref = FhirCommon.addUrnUuid(testUuid);
 		assertNotNull(ref);
-		assertTrue(ref.startsWith(FhirCommon.uuidUrn));
+		assertTrue(ref.startsWith(FhirCommon.UUID_URN));
 		assertTrue(ref.endsWith(testUuid));
 	}
 

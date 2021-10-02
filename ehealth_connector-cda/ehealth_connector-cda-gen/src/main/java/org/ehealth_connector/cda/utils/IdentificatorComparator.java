@@ -18,7 +18,7 @@ package org.ehealth_connector.cda.utils;
 
 import java.util.Comparator;
 
-import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.Identificator;
 
 /**
  * This class implements the default comparison algorithm for Identificators.
@@ -37,7 +37,7 @@ public class IdentificatorComparator implements Comparator<Identificator> {
 	public int compare(Identificator a, Identificator b) {
 		int retVal = a.getRoot().compareTo(b.getRoot());
 		if (retVal == 0)
-			a.getExtension().compareTo(b.getExtension());
+			retVal = a.getExtension().compareTo(b.getExtension());
 		return retVal;
 	}
 }

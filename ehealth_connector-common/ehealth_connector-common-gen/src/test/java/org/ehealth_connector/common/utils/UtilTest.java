@@ -24,12 +24,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
+import org.ehealth_connector.common.hl7cdar2.ENXP;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ENXP;
 
 /**
  * Test of Util
@@ -39,8 +36,8 @@ public class UtilTest {
 	private List<String> testFilledList;
 	private List<?> testEmptyList;
 	private List<?> testNullList;
-	private EList<ENXP> testEnxpList1;
-	private EList<ENXP> testEnxpList2;
+	private List<ENXP> testEnxpList1;
+	private List<ENXP> testEnxpList2;
 
 	/**
 	 * Method implementing
@@ -54,17 +51,17 @@ public class UtilTest {
 		testEmptyList = new ArrayList<>();
 		testNullList = null;
 
-		testEnxpList1 = new BasicEList<>();
-		final ENXP enxp11 = DatatypesFactory.eINSTANCE.createENXP();
-		enxp11.addText("ENXP11");
+		testEnxpList1 = new ArrayList<>();
+		final ENXP enxp11 = new ENXP();
+		enxp11.xmlContent = "ENXP11";
 		testEnxpList1.add(enxp11);
 
-		testEnxpList2 = new BasicEList<>();
-		final ENXP enxp21 = DatatypesFactory.eINSTANCE.createENXP();
-		enxp21.addText("ENXP21");
+		testEnxpList2 = new ArrayList<>();
+		final ENXP enxp21 = new ENXP();
+		enxp21.xmlContent = "ENXP21";
 		testEnxpList2.add(enxp21);
-		final ENXP enxp22 = DatatypesFactory.eINSTANCE.createENXP();
-		enxp22.addText("ENXP22");
+		final ENXP enxp22 = new ENXP();
+		enxp22.xmlContent = "ENXP22";
 		testEnxpList2.add(enxp22);
 	}
 

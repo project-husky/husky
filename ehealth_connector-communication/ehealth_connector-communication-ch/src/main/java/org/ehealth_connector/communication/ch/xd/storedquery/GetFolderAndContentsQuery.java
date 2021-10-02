@@ -16,21 +16,22 @@
  */
 package org.ehealth_connector.communication.ch.xd.storedquery;
 
+import java.util.List;
+
 import org.ehealth_connector.common.ch.enums.ConfidentialityCode;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.ehealth_connector.communication.ch.enums.FormatCode;
-import org.ehealth_connector.communication.xd.storedquery.StoredQueryInterface;
-import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryException;
-import org.openhealthtools.ihe.xds.consumer.storedquery.ObjectType;
-import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQuery;
+import org.ehealth_connector.communication.xd.storedquery.AbstractStoredQuery;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntryType;
+import org.openehealth.ipf.commons.ihe.xds.core.requests.query.StoredQuery;
 
 /**
  * Represents a query to get folders and its contents (associations, documents)
  * from an XDS Registry. This class uses only enums for XDS metadata which are
  * specified by eHealth Suisse for the usage in Switzerland.
  */
-public class GetFolderAndContentsQuery implements StoredQueryInterface {
-	private org.openhealthtools.ihe.xds.consumer.storedquery.GetFolderAndContentsQuery ohtStoredQuery;
+public class GetFolderAndContentsQuery extends AbstractStoredQuery {
+	private org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetFolderAndContentsQuery ipfStoredQuery;
 
 	/**
 	 * Constructor. All arrays of codes are interpreted with as a disjunction
@@ -50,14 +51,16 @@ public class GetFolderAndContentsQuery implements StoredQueryInterface {
 	 */
 	public GetFolderAndContentsQuery(String folderId, boolean isUUID, FormatCode[] formatCodes,
 			ConfidentialityCode[] confidentialityCodes) {
-		try {
-			ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.GetFolderAndContentsQuery(
-					folderId, isUUID,
-					XdsMetadataUtil.convertEhcEnumToCodedMetadataType(formatCodes),
-					XdsMetadataUtil.convertEhcEnumToCodedMetadataType(confidentialityCodes));
-		} catch (final MalformedStoredQueryException e) {
-			e.printStackTrace();
+
+		ipfStoredQuery = new org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetFolderAndContentsQuery();
+		if (isUUID) {
+			ipfStoredQuery.setUuid(folderId);
+		} else {
+			ipfStoredQuery.setUniqueId(folderId);
 		}
+
+		ipfStoredQuery.setFormatCodes(XdsMetadataUtil.convertEhcCodeToCode(formatCodes));
+		ipfStoredQuery.setConfidentialityCodes(XdsMetadataUtil.convertEhcCodeToQueryListCode(confidentialityCodes));
 	}
 
 	/**
@@ -83,15 +86,17 @@ public class GetFolderAndContentsQuery implements StoredQueryInterface {
 	 */
 	public GetFolderAndContentsQuery(String folderId, boolean isUUID, FormatCode[] formatCodes,
 			ConfidentialityCode[] confidentialityCodes, String homeCommunityId) {
-		try {
-			ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.GetFolderAndContentsQuery(
-					folderId, isUUID,
-					XdsMetadataUtil.convertEhcEnumToCodedMetadataType(formatCodes),
-					XdsMetadataUtil.convertEhcEnumToCodedMetadataType(confidentialityCodes),
-					homeCommunityId);
-		} catch (final MalformedStoredQueryException e) {
-			e.printStackTrace();
+
+		ipfStoredQuery = new org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetFolderAndContentsQuery();
+		if (isUUID) {
+			ipfStoredQuery.setUuid(folderId);
+		} else {
+			ipfStoredQuery.setUniqueId(folderId);
 		}
+
+		ipfStoredQuery.setFormatCodes(XdsMetadataUtil.convertEhcCodeToCode(formatCodes));
+		ipfStoredQuery.setConfidentialityCodes(XdsMetadataUtil.convertEhcCodeToQueryListCode(confidentialityCodes));
+		ipfStoredQuery.setHomeCommunityId(homeCommunityId);
 	}
 
 	/**
@@ -119,16 +124,19 @@ public class GetFolderAndContentsQuery implements StoredQueryInterface {
 	 */
 	public GetFolderAndContentsQuery(String folderId, boolean isUUID, FormatCode[] formatCodes,
 			ConfidentialityCode[] confidentialityCodes, String homeCommunityId,
-			ObjectType objectType) {
-		try {
-			ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.GetFolderAndContentsQuery(
-					folderId, isUUID,
-					XdsMetadataUtil.convertEhcEnumToCodedMetadataType(formatCodes),
-					XdsMetadataUtil.convertEhcEnumToCodedMetadataType(confidentialityCodes),
-					homeCommunityId, objectType);
-		} catch (final MalformedStoredQueryException e) {
-			e.printStackTrace();
+			DocumentEntryType objectType) {
+
+		ipfStoredQuery = new org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetFolderAndContentsQuery();
+		if (isUUID) {
+			ipfStoredQuery.setUuid(folderId);
+		} else {
+			ipfStoredQuery.setUniqueId(folderId);
 		}
+
+		ipfStoredQuery.setFormatCodes(XdsMetadataUtil.convertEhcCodeToCode(formatCodes));
+		ipfStoredQuery.setConfidentialityCodes(XdsMetadataUtil.convertEhcCodeToQueryListCode(confidentialityCodes));
+		ipfStoredQuery.setHomeCommunityId(homeCommunityId);
+		ipfStoredQuery.setDocumentEntryTypes(List.of(objectType));
 	}
 
 	/**
@@ -145,25 +153,19 @@ public class GetFolderAndContentsQuery implements StoredQueryInterface {
 	 *            of that clause, to add to the query.
 	 */
 	public void addConfidentialityCodes(ConfidentialityCode[] confidentialityCodes) {
-		try {
-			ohtStoredQuery.addConfidentialityCodes(
-					XdsMetadataUtil.convertEhcEnumToCodedMetadataType(confidentialityCodes));
-		} catch (final MalformedStoredQueryException e) {
-			e.printStackTrace();
-		}
+		ipfStoredQuery.setConfidentialityCodes(XdsMetadataUtil.convertEhcCodeToQueryListCode(confidentialityCodes));
 	}
 
 	/*
 	 * Gets the OHT StoredQuery object, which is being wrapped by this class
 	 *
-	 * @see
-	 * org.ehealth_connector.communication.storedquery.StoredQueryInterface#
+	 * @see org.ehealth_connector.communication.storedquery.StoredQueryInterface#
 	 * getOhtStoredQuery()
 	 *
-	 * @returns the OHT StoredQuery
+	 * @returns the IPF StoredQuery
 	 */
 	@Override
-	public StoredQuery getOhtStoredQuery() {
-		return ohtStoredQuery;
+	public StoredQuery getIpfQuery() {
+		return ipfStoredQuery;
 	}
 }

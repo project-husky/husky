@@ -24,7 +24,6 @@ import org.ehealth_connector.xua.core.SecurityObject;
 import org.ehealth_connector.xua.saml2.ArtifactResponse;
 import org.ehealth_connector.xua.saml2.Response;
 import org.ehealth_connector.xua.saml2.Status;
-import org.joda.time.DateTime;
 import org.opensaml.core.xml.XMLObject;
 
 /**
@@ -68,9 +67,8 @@ public class ArtifactResponseImpl
 
 	@Override
 	public Calendar getIssueInstant() {
-		final DateTime instant = wrappedObject.getIssueInstant();
 		final var retVal = Calendar.getInstance();
-		retVal.setTimeInMillis(instant.getMillis());
+		retVal.setTimeInMillis(wrappedObject.getIssueInstant().toEpochMilli());
 		return retVal;
 	}
 

@@ -21,6 +21,8 @@ import java.io.ByteArrayInputStream;
 import java.io.StringWriter;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -211,7 +213,12 @@ public class V3PixSource extends CamelService {
 				pdqDest.toString().replace("https://", ""), true, auditorContext.isAuditEnabled());
 		LOGGER.info("Sending request to '{}' endpoint", endpoint);
 
-		final var exchange = send(endpoint, request, assertion, action);
+		Map<String, String> outgoingHeaders = new HashMap<>();
+		outgoingHeaders.put("Accept", "application/soap+xml");
+		outgoingHeaders.put("Content-Type",
+				String.format("application/soap+xml; charset=UTF-8; action=\"%s\"", action));
+
+		final var exchange = send(endpoint, request, assertion, outgoingHeaders);
 
 		return exchange.getMessage().getBody(String.class);
 	}

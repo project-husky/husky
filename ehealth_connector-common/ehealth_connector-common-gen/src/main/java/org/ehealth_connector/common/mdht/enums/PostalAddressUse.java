@@ -16,9 +16,8 @@
  */
 package org.ehealth_connector.common.mdht.enums;
 
-import org.ehealth_connector.common.mdht.Code;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.hl7cdar2.CE;
 
 /**
  * <div class="en">Address uses that only apply to postal addresses, not
@@ -198,61 +197,13 @@ public enum PostalAddressUse {
 	}
 
 	/**
-	 * Gets the address use as postal address use.
-	 *
-	 * @return the address use as postal address use
-	 */
-	public org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse getAddressUseAsPostalAddressUse() {
-		org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.HP;
-		switch (this) {
-		case BAD:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.BAD;
-			break;
-		case CONFIDENTIAL:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.H;
-			break;
-		case OLD:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.H;
-			break;
-		case PRIVATE:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.H;
-			break;
-		case PRIVATE_PRIMARY:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.HP;
-			break;
-		case PRIVATE_VACATION:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.HV;
-			break;
-		case TEMPORARY:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.TMP;
-			break;
-		case BUSINESS:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.WP;
-			break;
-		case BUSINESS_DIRECT:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.WP;
-			break;
-		case PUBLIC:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.WP;
-			break;
-		case PHYSICAL:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.PHYS;
-			break;
-		case POSTAL:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.PST;
-			break;
-		}
-		return retVal;
-	}
-
-	/**
 	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
 	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 *
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CE getCE() {
-		final CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final CE ce = new CE();
 		ce.setCodeSystem(CODE_SYSTEM_OID);
 		ce.setCode(code);
 		ce.setDisplayName(displayName);
@@ -266,8 +217,7 @@ public enum PostalAddressUse {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
-		return ehcCode;
+		return new Code(code, CODE_SYSTEM_OID, displayName);
 	}
 
 	/**

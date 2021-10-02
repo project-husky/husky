@@ -27,9 +27,9 @@ import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.communication.AffinityDomain;
 import org.ehealth_connector.common.communication.Destination;
-import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.communication.ConvenienceMasterPatientIndexV3;
 import org.ehealth_connector.communication.MasterPatientIndexQuery;
 import org.ehealth_connector.communication.MasterPatientIndexQueryResponse;
@@ -39,6 +39,7 @@ import org.ehealth_connector.fhir.structures.gen.FhirCommon;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
@@ -60,6 +61,7 @@ import org.ehealth_connector.common.mdht.Patient;
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
 @EnableAutoConfiguration
+@Disabled
 public class PdqV3QueryTest {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(PdqV3QueryTest.class.getName());

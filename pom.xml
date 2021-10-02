@@ -10,30 +10,21 @@
 	<packaging>pom</packaging>
 	<description>The eHealthConnector (eHC) is a convenience API for IHE transactions and CDA documents. It supports functionalities for cross-enterprise sharing of documents and master patient index (MPI) connection using IHE transactions and also supports CDA content profiles. It allows easy access and conformity to a local eHealth trust space, such as for example Switzerland or Ausria.	The eHC is built on the basis of the OHT IHE profiles.</description>
 
-	<parent>
-		<groupId>healthcare.suisse-open-exchange.maven</groupId>
-		<artifactId>suisse-open-exchange-top-pom</artifactId>
-		<version>1.0.1</version>
-	</parent>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 		<java.version>16</java.version>
 
-		<oht.version>2.2.0</oht.version>
-		<mdht.version>2.5.0</mdht.version>
-		<hapi.fhir.version>3.1.0</hapi.fhir.version>
-		<eclipse.emf.version>2.6.0.v20100614-1136</eclipse.emf.version>
-		<eclipse.ocl.version>1.3.0.v200905271400</eclipse.ocl.version>
-		<slf4j.version>1.7.12</slf4j.version>
-		<axis2.version>1.4.1</axis2.version>
+		<hapi.fhir.version>5.5.1</hapi.fhir.version>
+		<slf4j.version>1.7.32</slf4j.version>
 		<jakarta-jwsapi-version>2.1.0</jakarta-jwsapi-version>
 		<jaxws-version>2.3.4</jaxws-version>
-		<opensaml.version>3.3.1</opensaml.version>
+		<opensaml.version>4.0.1</opensaml.version>
 		<ipf.version>4.1.0</ipf.version>
 		<spring.boot.version>2.5.3</spring.boot.version>
-		<org.apache.ws.commons.axiom.version>1.2.21</org.apache.ws.commons.axiom.version>
+		<org.apache.ws.commons.axiom.version>1.3.0</org.apache.ws.commons.axiom.version>
+		<apache-httpcomponents>4.5.13</apache-httpcomponents>
+		<apache-httpcore>4.4.14</apache-httpcore>
 		<maven.compiler.release>16</maven.compiler.release>
 		<maven.compiler.source>16</maven.compiler.source>
 		<maven.compiler.target>16</maven.compiler.target>
@@ -57,221 +48,6 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
-				<groupId>org.openhealthtools.mdht.uml.cda.ch</groupId>
-				<artifactId>org.openhealthtools.mdht.uml.cda.ch</artifactId>
-				<version>1.9-SNAPSHOT</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.ehealth_connector.common</groupId>
-				<artifactId>ehealth_connector-common-gen</artifactId>
-				<version>2.0-ALPHA</version>
-				<type>test-jar</type>
-				<scope>test</scope>
-			</dependency>
-
-			<dependency>
-				<groupId>org.openhealthtools.mdht.cda</groupId>
-				<artifactId>org.openhealthtools.mdht.uml.cda.ihe.lab</artifactId>
-				<version>1.9-SNAPSHOT</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.openhealthtools.mdht.uml</groupId>
-				<artifactId>org.openhealthtools.mdht.uml.cda</artifactId>
-				<version>${mdht.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.openhealthtools.mdht.uml.hl7</groupId>
-				<artifactId>org.openhealthtools.mdht.uml.hl7.datatypes</artifactId>
-				<version>${mdht.version}</version>
-			</dependency>
-
-
-			<!-- open health tools ihe utils -->
-			<dependency>
-				<groupId>org.openhealthtools.ihe.utils</groupId>
-				<artifactId>oht-ihe-utils</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-
-			<!-- open health tools ihe ebXML -->
-			<dependency>
-				<groupId>org.openhealthtools.ihe.common.ebXML</groupId>
-				<artifactId>oht-common-ebXML._2._1</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.openhealthtools.ihe.common.ebXML</groupId>
-				<artifactId>oht-common-ebXML._3._0</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-
-			<!-- open health tools ihe hl7v2 -->
-			<dependency>
-				<groupId>org.openhealthtools.ihe.common.hl7v2</groupId>
-				<artifactId>oht-common-hl7v2</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.openhealthtools.ihe.common.hl7v2</groupId>
-				<artifactId>oht-common-hl7v2-client</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-
-			<!-- open health tools ihe hl7v3 -->
-			<dependency>
-				<groupId>org.openhealthtools.ihe.common.hl7v3</groupId>
-				<artifactId>oht-common-hl7v3</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.openhealthtools.ihe.common.hl7v3</groupId>
-				<artifactId>oht-common-hl7v3-client</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.openhealthtools.ihe.common.hl7v3</groupId>
-				<artifactId>oht-common-hl7v3-soap</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-
-			<!-- open health tools ihe atna -->
-			<dependency>
-				<groupId>org.openhealthtools.ihe.atna</groupId>
-				<artifactId>oht-atna-auditor</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.openhealthtools.ihe.atna</groupId>
-				<artifactId>oht-atna-context</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.openhealthtools.ihe.atna</groupId>
-				<artifactId>oht-atna-nodeauth</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-
-			<!-- open health tools ihe xds -->
-			<dependency>
-				<groupId>org.openhealthtools.ihe.xds</groupId>
-				<artifactId>oht-xds</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.openhealthtools.ihe.xds</groupId>
-				<artifactId>oht-xds-metadata</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.openhealthtools.ihe.xds.metadata</groupId>
-				<artifactId>oht-xds-metadata-transform</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.openhealthtools.ihe.xds.metadata</groupId>
-				<artifactId>oht-xds-metadata-extract</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.openhealthtools.ihe.xds.metadata</groupId>
-				<artifactId>oht-xds-metadata-extract-cdar2</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.openhealthtools.ihe.xds</groupId>
-				<artifactId>oht-xds-source</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.openhealthtools.ihe.xds</groupId>
-				<artifactId>oht-xds-consumer</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.openhealthtools.ihe.xds</groupId>
-				<artifactId>oht-xds-soap</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.openhealthtools.ihe</groupId>
-				<artifactId>oht-xdm</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.openhealthtools.ihe.common.ws</groupId>
-				<artifactId>oht-common-ws-axis2</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-
-			<!-- open health tools ebxml -->
-			<dependency>
-				<groupId>org.openhealthtools.ihe.common</groupId>
-				<artifactId>oht-common-ebXML._2._1</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.openhealthtools.ihe.common</groupId>
-				<artifactId>oht-common-ebXML._3._0</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-
-			<!-- open health tools ihe pix -->
-			<dependency>
-				<groupId>org.openhealthtools.ihe.pix</groupId>
-				<artifactId>oht-pix-consumer-v3</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.openhealthtools.ihe.pix</groupId>
-				<artifactId>oht-pix-consumer</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.openhealthtools.ihe.pix</groupId>
-				<artifactId>oht-pix-source</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.openhealthtools.ihe.pix</groupId>
-				<artifactId>oht-pix-source-v3</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.openhealthtools.ihe.pdq</groupId>
-				<artifactId>oht-pdq-consumer</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.openhealthtools.ihe.pdq</groupId>
-				<artifactId>oht-pdq-consumer-v3</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-
-			<!-- open health tools ihe xua -->
-			<dependency>
-				<groupId>org.openhealthtools.ihe.xua</groupId>
-				<artifactId>oht-xua</artifactId>
-				<version>${oht.version}</version>
-			</dependency>
-
-			<!-- hl7 -->
-			<dependency>
-				<groupId>org.hl7.v3</groupId>
-				<artifactId>hl7v3-core</artifactId>
-				<version>1.0.0</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.eclipse.ohf</groupId>
-				<artifactId>org.eclipse.ohf.utilities</artifactId>
-				<version>0.2.0.200812311053</version>
-			</dependency>
 
 			<!-- ipf -->
 			<dependency>
@@ -311,6 +87,10 @@
 						<groupId>org.apache.tomcat.embed</groupId>
 						<artifactId>tomcat-embed-websocket</artifactId>
 					</exclusion>
+					<exclusion>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-starter-logging</artifactId>
+					</exclusion>
 				</exclusions>
 			</dependency>
 
@@ -322,6 +102,10 @@
 					<exclusion>
 						<groupId>org.apache.tomcat.embed</groupId>
 						<artifactId>tomcat-embed-websocket</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-starter-logging</artifactId>
 					</exclusion>
 				</exclusions>
 			</dependency>
@@ -335,41 +119,17 @@
 						<groupId>org.apache.tomcat.embed</groupId>
 						<artifactId>tomcat-embed-websocket</artifactId>
 					</exclusion>
+					<exclusion>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-starter-logging</artifactId>
+					</exclusion>
 				</exclusions>
 			</dependency>
 
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-test</artifactId>
+				<artifactId>spring-boot-starter-log4j2</artifactId>
 				<version>${spring.boot.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>org.apache.tomcat.embed</groupId>
-						<artifactId>tomcat-embed-websocket</artifactId>
-					</exclusion>
-				</exclusions>
-				<scope>test</scope>
-			</dependency>
-
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-test</artifactId>
-				<version>${spring.boot.version}</version>
-				<scope>test</scope>
-				<exclusions>
-					<exclusion>
-						<groupId>junit</groupId>
-						<artifactId>junit</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-
-			<!-- https://mvnrepository.com/artifact/org.apache.camel/camel-test-spring -->
-			<dependency>
-				<groupId>org.apache.camel</groupId>
-				<artifactId>camel-test-spring</artifactId>
-				<version>3.11.1</version>
-				<scope>test</scope>
 			</dependency>
 
 			<!-- Spring boot stuff -->
@@ -401,21 +161,21 @@
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpmime</artifactId>
-				<version>4.4.1</version>
+				<version>${apache-httpcomponents}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
-				<version>4.4.1</version>
+				<version>${apache-httpcomponents}</version>
 				<artifactId>httpclient</artifactId>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
-				<version>4.4.1</version>
+				<version>${apache-httpcore}</version>
 				<artifactId>httpcore</artifactId>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
-				<version>4.4.1</version>
+				<version>${apache-httpcore}</version>
 				<artifactId>httpcore-nio</artifactId>
 			</dependency>
 
@@ -423,7 +183,7 @@
 			<dependency>
 				<groupId>xerces</groupId>
 				<artifactId>xercesImpl</artifactId>
-				<version>2.8.1</version>
+				<version>2.12.1</version>
 				<exclusions>
 					<exclusion>
 						<groupId>xml-apis</groupId>
@@ -448,232 +208,23 @@
 			<dependency>
 				<groupId>org.jsoup</groupId>
 				<artifactId>jsoup</artifactId>
-				<version>1.11.2</version>
+				<version>1.14.2</version>
 			</dependency>
 
-			<!-- axis2 stuff -->
-			<dependency>
-				<groupId>org.apache.axis2</groupId>
-				<artifactId>axis2-kernel</artifactId>
-				<version>${axis2.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>xml-apis</groupId>
-						<artifactId>xml-apis</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.apache.ws.commons.axiom</groupId>
-						<artifactId>axiom-api</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>xerces</groupId>
-						<artifactId>xercesImpl</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.apache.woden</groupId>
-						<artifactId>woden-api</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.apache.woden</groupId>
-						<artifactId>woden-impl-dom</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.apache.neethi</groupId>
-						<artifactId>neethi</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.apache.ws.commons.axiom</groupId>
-						<artifactId>axiom-impl</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.codehaus.woodstox</groupId>
-						<artifactId>wstx-asl</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.apache.ws.commons.schema</groupId>
-						<artifactId>XmlSchema</artifactId>
-					</exclusion>
-
-				</exclusions>
-
-			</dependency>
-
-			<dependency>
-				<groupId>xalan</groupId>
-				<artifactId>xalan</artifactId>
-				<version>2.7.2</version>
-				<exclusions>
-					<exclusion>
-						<groupId>xerces</groupId>
-						<artifactId>xercesImpl</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-
-
-			<dependency>
-				<groupId>org.apache.woden</groupId>
-				<artifactId>woden-api</artifactId>
-				<version>1.0M8</version>
-				<exclusions>
-					<exclusion>
-						<groupId>xerces</groupId>
-						<artifactId>xmlParserAPIs</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-
-			<dependency>
-				<groupId>org.apache.woden</groupId>
-				<artifactId>woden-impl-dom</artifactId>
-				<version>1.0M8</version>
-				<exclusions>
-					<exclusion>
-						<groupId>xerces</groupId>
-						<artifactId>xmlParserAPIs</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-
-			<!-- <dependency> <groupId>xerces</groupId> <artifactId>xmlParserAPIs</artifactId> 
-				<version>2.6.0</version> </dependency> -->
-
-			<dependency>
-				<groupId>org.apache.axis2</groupId>
-				<artifactId>axis2-java2wsdl</artifactId>
-				<version>${axis2.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>xml-apis</groupId>
-						<artifactId>xml-apis</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>jaxen</groupId>
-						<artifactId>jaxen</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.apache.ws.commons.axiom</groupId>
-						<artifactId>axiom-api</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.apache.ws.commons.axiom</groupId>
-						<artifactId>axiom-impl</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.codehaus.woodstox</groupId>
-						<artifactId>wstx-asl</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.apache.ws.commons.schema</groupId>
-						<artifactId>XmlSchema</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.axis2</groupId>
-				<artifactId>axis2-saaj</artifactId>
-				<version>${axis2.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>xml-apis</groupId>
-						<artifactId>xml-apis</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.apache.ws.commons.axiom</groupId>
-						<artifactId>axiom-api</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>xerces</groupId>
-						<artifactId>xercesImpl</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.codehaus.woodstox</groupId>
-						<artifactId>wstx-asl</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.apache.ws.commons.schema</groupId>
-						<artifactId>XmlSchema</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.axis2</groupId>
-				<artifactId>axis2-adb-codegen</artifactId>
-				<version>${axis2.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>xml-apis</groupId>
-						<artifactId>xml-apis</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.apache.ws.commons.axiom</groupId>
-						<artifactId>axiom-api</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.apache.ws.commons.axiom</groupId>
-						<artifactId>axiom-impl</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>xerces</groupId>
-						<artifactId>xercesImpl</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.codehaus.woodstox</groupId>
-						<artifactId>wstx-asl</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.apache.ws.commons.schema</groupId>
-						<artifactId>XmlSchema</artifactId>
-					</exclusion>
-				</exclusions>
-
-			</dependency>
-			<dependency>
-				<groupId>org.apache.ws.commons.axiom</groupId>
-				<artifactId>axiom-impl</artifactId>
-				<version>${org.apache.ws.commons.axiom.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>commons-logging</groupId>
-						<artifactId>commons-logging</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>jaxen</groupId>
-						<artifactId>jaxen</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.apache.geronimo.specs</groupId>
-						<artifactId>geronimo-stax-api_1.0_spec</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-
-			<dependency>
-				<groupId>org.apache.axis2</groupId>
-				<artifactId>addressing</artifactId>
-				<!--type>mar</type -->
-				<!--version>1.41</version -->
-				<version>1.4-ehc</version>
-			</dependency>
 			<dependency>
 				<groupId>commons-logging</groupId>
 				<artifactId>commons-logging</artifactId>
-				<version>1.1.1</version>
-			</dependency>
-			<dependency>
-				<groupId>commons-lang</groupId>
-				<artifactId>commons-lang</artifactId>
-				<version>2.4</version>
+				<version>1.2</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
-				<version>3.9</version>
+				<version>3.12.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-text</artifactId>
-				<version>1.7</version>
+				<version>1.9</version>
 			</dependency>
 			<dependency>
 				<groupId>commons-cli</groupId>
@@ -701,19 +252,14 @@
 			<dependency>
 				<groupId>com.jayway.jsonpath</groupId>
 				<artifactId>json-path</artifactId>
-				<version>2.4.0</version>
+				<version>2.6.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.yaml</groupId>
 				<artifactId>snakeyaml</artifactId>
-				<version>1.24</version>
+				<version>1.29</version>
 			</dependency>
 
-			<dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>1.2.17</version>
-			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
@@ -722,8 +268,8 @@
 
 			<dependency>
 				<groupId>javax.servlet</groupId>
-				<artifactId>servlet-api</artifactId>
-				<version>2.3</version>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>4.0.1</version>
 				<scope>provided</scope>
 			</dependency>
 
@@ -737,7 +283,7 @@
 			<dependency>
 				<groupId>net.sf.saxon</groupId>
 				<artifactId>Saxon-HE</artifactId>
-				<version>9.9.0-1</version>
+				<version>10.6</version>
 			</dependency>
 			<dependency>
 				<groupId>com.pdftools</groupId>
@@ -747,14 +293,14 @@
 			<dependency>
 				<groupId>org.verapdf</groupId>
 				<artifactId>validation-model</artifactId>
-				<version>1.16.1</version>
+				<version>1.18.8</version>
 			</dependency>
 
 			<!-- JAXB binding stuff -->
 			<dependency>
 				<groupId>org.glassfish.jaxb</groupId>
 				<artifactId>jaxb-runtime</artifactId>
-				<version>2.3.4</version>
+				<version>2.3.5</version>
 			</dependency>
 			<dependency>
 				<groupId>com.sun.xml.bind</groupId>
@@ -762,22 +308,33 @@
 				<version>3.0.2</version>
 			</dependency>
 			<dependency>
+				<groupId>javax.xml.bind</groupId>
+				<artifactId>jaxb-api</artifactId>
+				<version>2.3.1</version>
+			</dependency>
+
+			<dependency>
 				<groupId>jakarta.jws</groupId>
 				<artifactId>jakarta.jws-api</artifactId>
 				<version>${jakarta-jwsapi-version}</version>
 			</dependency>
 
-			<!-- https://mvnrepository.com/artifact/jakarta.xml.ws/jakarta.xml.ws-api -->
 			<dependency>
 				<groupId>jakarta.xml.ws</groupId>
 				<artifactId>jakarta.xml.ws-api</artifactId>
-				<version>2.3.3</version>
+				<version>3.0.1</version>
 			</dependency>
 
 			<dependency>
 				<groupId>jakarta.annotation</groupId>
 				<artifactId>jakarta.annotation-api</artifactId>
-				<version>1.3.5</version>
+				<version>2.0.0</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.mail</groupId>
+				<artifactId>javax.mail-api</artifactId>
+				<version>1.6.2</version>
 			</dependency>
 
 			<dependency>
@@ -786,27 +343,51 @@
 				<version>${slf4j.version}</version>
 			</dependency>
 
+			<!-- PPQ stuff -->
+			<dependency>
+				<groupId>org.opensaml</groupId>
+				<artifactId>opensaml-xacml-saml-impl</artifactId>
+				<version>${opensaml.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.opensaml</groupId>
+				<artifactId>opensaml-xacml-impl</artifactId>
+				<version>${opensaml.version}</version>
+			</dependency>
 
-			<!-- <dependency> <groupId>com.sun.xml.ws</groupId> <artifactId>jaxws-rt</artifactId> 
-				<version>${jaxws-version}</version> <scope>runtime</scope> </dependency> -->
-			<!-- <dependency> <groupId>com.sun.xml.bind</groupId> <artifactId>jaxb-impl</artifactId> 
-				<version>3.0.0-M4</version> </dependency> <dependency> <groupId>jakarta.xml.bind</groupId> 
-				<artifactId>jakarta.xml.bind-api</artifactId> <version>3.0.1</version> </dependency> -->
+			<dependency>
+				<groupId>javax.xml.ws</groupId>
+				<artifactId>jaxws-api</artifactId>
+				<version>2.3.1</version>
+			</dependency>
 
 
-			<!-- test libs -->
-			<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+			<!-- test stuff -->
+			<dependency>
+				<groupId>org.apache.maven.surefire</groupId>
+				<artifactId>surefire-junit-platform</artifactId>
+				<version>3.0.0-M5</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.ehealth_connector.common</groupId>
+				<artifactId>ehealth_connector-common-gen</artifactId>
+				<version>2.0-ALPHA</version>
+				<type>test-jar</type>
+				<scope>test</scope>
+			</dependency>
+
 			<dependency>
 				<groupId>org.junit.jupiter</groupId>
 				<artifactId>junit-jupiter-api</artifactId>
-				<version>5.7.2</version>
+				<version>5.8.1</version>
 				<scope>test</scope>
 			</dependency>
 
 			<dependency>
 				<groupId>org.junit.jupiter</groupId>
 				<artifactId>junit-jupiter-engine</artifactId>
-				<version>5.7.2</version>
+				<version>5.8.1</version>
 				<scope>test</scope>
 			</dependency>
 
@@ -818,32 +399,55 @@
 				<scope>test</scope>
 			</dependency>
 			<dependency>
-				<groupId>javax.annotation</groupId>
-				<artifactId>javax.annotation-api</artifactId>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-aop</artifactId>
-				<version>5.3.9</version>
+				<version>5.3.10</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-test-spring</artifactId>
+				<version>3.11.2</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-test</artifactId>
+				<version>${spring.boot.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.apache.tomcat.embed</groupId>
+						<artifactId>tomcat-embed-websocket</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-starter-logging</artifactId>
+					</exclusion>
+				</exclusions>
 				<scope>test</scope>
 			</dependency>
 
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-test</artifactId>
+				<version>${spring.boot.version}</version>
+				<scope>test</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>junit</groupId>
+						<artifactId>junit</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-starter-logging</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
 
 			<dependency>
-				<groupId>org.opensaml</groupId>
-				<artifactId>opensaml-xacml-saml-impl</artifactId>
-				<version>${opensaml.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.opensaml</groupId>
-				<artifactId>opensaml-xacml-impl</artifactId>
-				<version>${opensaml.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.maven.surefire</groupId>
-				<artifactId>surefire-junit-platform</artifactId>
-				<version>3.0.0-M5</version>
+				<groupId>org.checkerframework</groupId>
+				<artifactId>checker-qual</artifactId>
+				<version>3.18.0</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -853,30 +457,9 @@
 			<artifactId>junit-jupiter-api</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.apache.maven.surefire</groupId>
-			<artifactId>surefire-junit-platform</artifactId>
-			<scope>test</scope>
-		</dependency> -->
 	</dependencies>
 
 	<repositories>
-		<repository>
-			<id>projects.suisse-open-exchange.healthcare-sna</id>
-			<name>projects.suisse-open-exchange.healthcare-snapshots</name>
-			<url>https://projects.suisse-open-exchange.healthcare/artifactory/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
-		<repository>
-			<id>projects.suisse-open-exchange.healthcare-rel</id>
-			<name>projects.suisse-open-exchange.healthcare-releases</name>
-			<url>https://projects.suisse-open-exchange.healthcare/artifactory/releases</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
 		<repository>
 			<id>mvnrepository.com</id>
 			<name>MVN Repository</name>
@@ -889,17 +472,11 @@
 			<id>Shibboleth repo</id>
 			<url>https://build.shibboleth.net/nexus/content/repositories/releases</url>
 		</repository>
+		<repository>
+			<id>local-repo</id>
+			<url>file://${project.basedir}/lib/repo</url>
+		</repository>
 	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>suisse-open-exchange-repository</id>
-			<name>Suisse Open Exchange Maven Repository</name>
-			<url>https://projects.suisse-open-exchange.healthcare/artifactory/releases</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
 
 	<build>
 		<pluginManagement>
@@ -917,7 +494,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-site-plugin</artifactId>
-					<version>3.2</version>
+					<version>3.7.1</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -947,7 +524,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-project-info-reports-plugin</artifactId>
-					<version>2.4</version>
+					<version>2.9</version>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
@@ -1134,6 +711,27 @@
 					</reportPlugins>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.owasp</groupId>
+				<artifactId>dependency-check-maven</artifactId>
+				<version>6.3.1</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>aggregate</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+			</plugin>
 		</plugins>
 
 	</reporting>
@@ -1200,21 +798,4 @@
 		</developer>
 	</developers>
 
-	<distributionManagement>
-		<repository>
-			<id>projects.suisse-open-exchange.healthcare-rel</id>
-			<name>projects.suisse-open-exchange.healthcare-releases</name>
-			<url>https://projects.suisse-open-exchange.healthcare/artifactory/releases</url>
-		</repository>
-		<snapshotRepository>
-			<id>projects.suisse-open-exchange.healthcare-sna</id>
-			<name>projects.suisse-open-exchange.healthcare-snapshots</name>
-			<url>https://projects.suisse-open-exchange.healthcare/artifactory/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
-
-	<ciManagement>
-		<url>https://projects.suisse-open-exchange.healthcare/ci</url>
-		<system>Jenkins</system>
-	</ciManagement>
 </project>

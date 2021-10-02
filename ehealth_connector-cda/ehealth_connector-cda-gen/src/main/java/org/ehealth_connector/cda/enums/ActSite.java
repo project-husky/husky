@@ -17,12 +17,11 @@
 
 package org.ehealth_connector.cda.enums;
 
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.hl7cdar2.CD;
 import org.ehealth_connector.common.utils.LangText;
 import org.ehealth_connector.common.utils.LangTexts;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /*
  *<div class="de">Codesystem: HL7 ActSite (OID: 2.16.840.1.113883.5.1052).</div>
@@ -256,7 +255,7 @@ public enum ActSite {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CD getCD() {
-		final CD ce = DatatypesFactory.eINSTANCE.createCD();
+		final CD ce = new CD();
 		ce.setCodeSystem(CODE_SYSTEM_OID);
 		ce.setCode(code);
 		ce.setDisplayName(displayName);

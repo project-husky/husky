@@ -22,13 +22,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.hl7cdar2.CE;
 import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.junit.jupiter.api.Test;
-import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 
 public class ValueSetEnumInterfaceTest {
 
@@ -110,7 +110,7 @@ public class ValueSetEnumInterfaceTest {
 			assertEquals(enumEntry.getCodeSystemId(), code.getCodeSystem());
 			assertEquals(enumEntry.getDisplayName(), code.getDisplayName());
 
-			final CodedMetadataType cmt = enumEntry.getCodedMetadataType();
+			final org.openehealth.ipf.commons.ihe.xds.core.metadata.Code cmt = enumEntry.getIpfCode();
 			assertEquals(enumEntry.getCodeValue(), cmt.getCode());
 			assertEquals(enumEntry.getCodeSystemId(), cmt.getSchemeName());
 			assertEquals(enumEntry.getDisplayName(),
@@ -147,7 +147,7 @@ public class ValueSetEnumInterfaceTest {
 		assertEquals(codeSystemValue, code.getCodeSystem());
 		assertEquals(displayName, code.getDisplayName());
 
-		final CodedMetadataType cmt = mock.getCodedMetadataType();
+		final org.openehealth.ipf.commons.ihe.xds.core.metadata.Code cmt = mock.getIpfCode();
 		assertEquals(codeValue, cmt.getCode());
 		assertEquals(codeSystemValue, cmt.getSchemeName());
 		assertEquals(displayName,

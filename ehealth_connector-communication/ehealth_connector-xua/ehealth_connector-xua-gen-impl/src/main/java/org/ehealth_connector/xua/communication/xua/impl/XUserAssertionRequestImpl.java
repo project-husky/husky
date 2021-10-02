@@ -24,9 +24,9 @@ import org.ehealth_connector.xua.communication.xua.TokenType;
 import org.ehealth_connector.xua.communication.xua.XUserAssertionConstants;
 import org.ehealth_connector.xua.communication.xua.XUserAssertionRequest;
 import org.ehealth_connector.xua.core.SecurityObject;
+import org.ehealth_connector.xua.helpers.ListXmlObjectHelper;
 import org.ehealth_connector.xua.hl7v3.PurposeOfUse;
 import org.ehealth_connector.xua.hl7v3.Role;
-import org.ehealth_connector.xua.helpers.ListXmlObjectHelper;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.core.xml.schema.XSAny;
 import org.opensaml.core.xml.schema.XSString;
@@ -147,7 +147,7 @@ public class XUserAssertionRequestImpl implements XUserAssertionRequest,
 		final var wstRequestType = new ListXmlObjectHelper<org.opensaml.soap.wstrust.RequestType>()
 				.getComponent(org.opensaml.soap.wstrust.impl.RequestTypeImpl.class,
 						requestSecurityToken.getUnknownXMLObjects());
-		return RequestType.getEnum(wstRequestType.getValue());
+		return RequestType.getEnum(wstRequestType.getURI());
 	}
 
 	@Override
@@ -193,7 +193,7 @@ public class XUserAssertionRequestImpl implements XUserAssertionRequest,
 		final org.opensaml.soap.wstrust.TokenType wstRequestType = new ListXmlObjectHelper<org.opensaml.soap.wstrust.TokenType>()
 				.getComponent(org.opensaml.soap.wstrust.impl.TokenTypeImpl.class,
 						requestSecurityToken.getUnknownXMLObjects());
-		return TokenType.getEnum(wstRequestType.getValue());
+		return TokenType.getEnum(wstRequestType.getURI());
 	}
 
 	@Override

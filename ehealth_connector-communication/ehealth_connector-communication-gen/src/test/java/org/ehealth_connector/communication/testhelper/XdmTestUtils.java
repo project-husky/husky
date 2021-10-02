@@ -28,23 +28,23 @@ import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.stream.Collectors;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
-import org.ehealth_connector.cda.testhelper.TestUtils;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.communication.DocumentMetadata;
+import org.ehealth_connector.common.enums.DocumentDescriptor;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.mdht.Code;
-import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.enums.ConfidentialityCode;
 import org.ehealth_connector.communication.ConvenienceCommunication;
 import org.ehealth_connector.communication.xd.xdm.XdmContents;
-import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
-import org.openhealthtools.ihe.xds.document.XDSDocument;
-import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -112,40 +112,58 @@ public class XdmTestUtils extends TestUtils {
 		assertNotNull(importContents);
 
 		// Extract Docs from the first submissionSet
-		final XDSDocument doc1 = importContents.getDocumentList().get(0);
-		final XDSDocument doc2 = importContents.getDocumentList().get(1);
-		final DocumentEntryType doc1Metadata = importContents
-				.getXdmContentsAsOhtSubmitTransactionData()[0]
-						.getDocumentEntry(doc1.getDocumentEntryUUID());
-		final DocumentEntryType doc2Metadata = importContents
-				.getXdmContentsAsOhtSubmitTransactionData()[0]
-						.getDocumentEntry(doc2.getDocumentEntryUUID());
+		final Document doc1 = importContents.getDocumentList().get(0);
+		final Document doc2 = importContents.getDocumentList().get(1);
+		final DocumentEntry doc1Metadata = importContents.getXdmContentsAsIpfSubmitTransactionData().get(0)
+				.getDocuments().stream()
+				.filter(d -> d != null && d.getDocumentEntry() != null
+						&& d.getDocumentEntry().getEntryUuid().equals(doc1.getDocumentEntry().getEntryUuid()))
+				.collect(Collectors.toList()).get(0).getDocumentEntry();
+		final DocumentEntry doc2Metadata = importContents.getXdmContentsAsIpfSubmitTransactionData().get(0)
+				.getDocuments().stream()
+				.filter(d -> d != null && d.getDocumentEntry() != null
+						&& d.getDocumentEntry().getEntryUuid().equals(doc2.getDocumentEntry().getEntryUuid()))
+				.collect(Collectors.toList()).get(0).getDocumentEntry();
 
 		// Calculate integrity values of the imported documents
-		try {
+		try (var is = doc1.getDataHandler().getInputStream()) {
 			// Hash
-			final String doc1Hash = DigestUtils.sha1Hex(doc1.getStream());
-			final String doc2Hash = DigestUtils.sha1Hex(doc2.getStream());
+			final String doc1Hash = DigestUtils.sha1Hex(is);
+
 			// Size
 			@SuppressWarnings("resource")
-			final long doc1Size = IOUtils.toByteArray(doc1.getStream()).length;
-			@SuppressWarnings("resource")
-			final long doc2Size = IOUtils.toByteArray(doc2.getStream()).length;
+			final long doc1Size = IOUtils.toByteArray(is).length;
 
 			// Compare Hash
 			if (!doc1Hash.equals(doc1Metadata.getHash()))
 				return false;
-			if (!doc2Hash.equals(doc2Metadata.getHash()))
-				return false;
 			// Compare Size
-			if (!Long.toString(doc1Size).equals(doc1Metadata.getSize()))
-				return false;
-			if (!Long.toString(doc2Size).equals(doc2Metadata.getSize()))
+			if (doc1Size != doc1Metadata.getSize())
 				return false;
 		} catch (final IOException e) {
 			e.printStackTrace();
 			return false;
 		}
+
+		// Calculate integrity values of the imported documents
+		try (var is = doc2.getDataHandler().getInputStream()) {
+			// Hash
+			final String doc2Hash = DigestUtils.sha1Hex(is);
+			// Size
+			@SuppressWarnings("resource")
+			final long doc2Size = IOUtils.toByteArray(is).length;
+
+			// Compare Hash
+			if (!doc2Hash.equals(doc2Metadata.getHash()))
+				return false;
+			// Compare Size
+			if (doc2Size != doc2Metadata.getSize())
+				return false;
+		} catch (final IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+
 		return true;
 	}
 
@@ -190,23 +208,23 @@ public class XdmTestUtils extends TestUtils {
 	}
 
 	public boolean isSamplesHashAndSizeEqual(XdmContents xdmContents, String sourceFile1,
-			String sourceFile2) {
+			String sourceFile2) throws IOException {
 		InputStream cdaOriginalIs = getClass().getResourceAsStream(sourceFile1);
 		InputStream pdfOriginalIs = getClass().getResourceAsStream(sourceFile2);
 
 		// hash
-		if (!isEqualHash(cdaOriginalIs, xdmContents.getDocumentList().get(0).getStream()))
+		if (!isEqualHash(cdaOriginalIs, xdmContents.getDocumentList().get(0).getDataHandler().getInputStream()))
 			return false;
-		if (!isEqualHash(pdfOriginalIs, xdmContents.getDocumentList().get(1).getStream()))
+		if (!isEqualHash(pdfOriginalIs, xdmContents.getDocumentList().get(1).getDataHandler().getInputStream()))
 			return false;
 
 		cdaOriginalIs = getClass().getResourceAsStream(sourceFile1);
 		pdfOriginalIs = getClass().getResourceAsStream(sourceFile2);
 
 		// size
-		if (!isEqualSize(cdaOriginalIs, xdmContents.getDocumentList().get(0).getStream()))
+		if (!isEqualSize(cdaOriginalIs, xdmContents.getDocumentList().get(0).getDataHandler().getInputStream()))
 			return false;
-		if (!isEqualSize(pdfOriginalIs, xdmContents.getDocumentList().get(1).getStream()))
+		if (!isEqualSize(pdfOriginalIs, xdmContents.getDocumentList().get(1).getDataHandler().getInputStream()))
 			return false;
 
 		return true;

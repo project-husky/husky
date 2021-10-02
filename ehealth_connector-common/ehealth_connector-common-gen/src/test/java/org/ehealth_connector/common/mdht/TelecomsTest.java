@@ -16,9 +16,11 @@
  */
 package org.ehealth_connector.common.mdht;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import org.ehealth_connector.common.Telecom;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -35,7 +37,6 @@ public class TelecomsTest {
 	private String telS1;
 	private String telS2;
 	private String testWebsite1;
-	private String testWebsite2;
 
 	/**
 	 * Method implementing
@@ -49,7 +50,6 @@ public class TelecomsTest {
 		telS1 = "+41.32.234.66.77";
 		telS2 = "+44.32.234.66.99";
 		testWebsite1 = "http://www.myweb.ch";
-		testWebsite2 = "https://www.deiwebsite.ch";
 	}
 
 	/**
@@ -59,15 +59,18 @@ public class TelecomsTest {
 	 */
 	@Test
 	public void testAddEMail() {
-		final Telecoms t = new Telecoms();
+		final Telecom t = new Telecom();
 
-		t.addEMail("axel.helmer.job@gmail.com", TelecomAddressUse.BUSINESS);
-		assertTrue(t.getEMails().containsKey("mailto:axel.helmer.job@gmail.com"));
-		assertTrue(t.getEMails().containsValue(TelecomAddressUse.BUSINESS));
+		t.setMail("axel.helmer.job@gmail.com");
+		t.setUsage(TelecomAddressUse.BUSINESS);
 
-		t.addEMail("test@test.de", TelecomAddressUse.PRIVATE);
-		assertTrue(t.getEMails().containsKey("mailto:test@test.de"));
-		assertTrue(t.getEMails().containsValue(TelecomAddressUse.PRIVATE));
+		assertTrue(t.getValue().contains("mailto:axel.helmer.job@gmail.com"));
+		assertEquals(t.getUsage().getCodeValue(), TelecomAddressUse.BUSINESS.getCodeValue());
+
+		t.setMail("test@test.de");
+		t.setUsage(TelecomAddressUse.PRIVATE);
+		assertTrue(t.getValue().contains("mailto:test@test.de"));
+		assertEquals(t.getUsage().getCodeValue(), TelecomAddressUse.PRIVATE.getCodeValue());
 	}
 
 	/**
@@ -77,12 +80,17 @@ public class TelecomsTest {
 	 */
 	@Test
 	public void testAddFax() {
-		final Telecoms t = new Telecoms();
+		final Telecom t = new Telecom();
 
-		t.addFax(numS1, TelecomAddressUse.BUSINESS);
-		t.addFax(numS2, TelecomAddressUse.MOBILE);
-		assertTrue(t.getFaxes().containsKey("fax:" + numS1));
-		assertTrue(t.getFaxes().containsValue(TelecomAddressUse.BUSINESS));
+		t.setFax(numS1);
+		t.setUsage(TelecomAddressUse.BUSINESS);
+		assertTrue(t.getValue().contains("fax:" + numS1));
+		assertEquals(t.getUsage().getCodeValue(), TelecomAddressUse.BUSINESS.getCodeValue());
+
+		t.setFax(numS2);
+		t.setUsage(TelecomAddressUse.MOBILE);
+		assertTrue(t.getValue().contains("fax:" + numS2));
+		assertEquals(t.getUsage().getCodeValue(), TelecomAddressUse.MOBILE.getCodeValue());
 	}
 
 	/**
@@ -92,12 +100,16 @@ public class TelecomsTest {
 	 */
 	@Test
 	public void testAddPhone() {
-		final Telecoms t = new Telecoms();
+		final Telecom t = new Telecom();
 
-		t.addPhone(telS1, TelecomAddressUse.BUSINESS);
-		t.addPhone(telS2, TelecomAddressUse.MOBILE);
-		assertTrue(t.getPhones().containsKey("tel:" + telS1));
-		assertTrue(t.getPhones().containsValue(TelecomAddressUse.MOBILE));
+		t.setPhone(telS1);
+		t.setUsage(TelecomAddressUse.BUSINESS);
+
+		t.setPhone(telS2);
+		t.setUsage(TelecomAddressUse.MOBILE);
+
+		assertTrue(t.getValue().contains("tel:" + telS2));
+		assertEquals(t.getUsage().getCodeValue(), TelecomAddressUse.MOBILE.getCodeValue());
 	}
 
 	/**
@@ -107,12 +119,13 @@ public class TelecomsTest {
 	 */
 	@Test
 	public void testAddWebsite() {
-		final Telecoms t = new Telecoms();
+		final Telecom t = new Telecom();
 
-		t.addWebsite(testWebsite1, TelecomAddressUse.BUSINESS);
-		t.addWebsite(testWebsite2, TelecomAddressUse.PRIVATE);
-		assertTrue(t.getWebsites().containsKey(testWebsite1));
-		assertTrue(t.getWebsites().containsValue(TelecomAddressUse.PRIVATE));
+		t.setValue(testWebsite1);
+		t.setUsage(TelecomAddressUse.BUSINESS);
+
+		assertTrue(t.getValue().contains(testWebsite1));
+		assertEquals(t.getUsage().getCodeValue(), TelecomAddressUse.BUSINESS.getCodeValue());
 	}
 
 	/**

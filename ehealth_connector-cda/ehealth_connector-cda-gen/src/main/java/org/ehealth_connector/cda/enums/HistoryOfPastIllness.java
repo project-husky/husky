@@ -16,9 +16,8 @@
  */
 package org.ehealth_connector.cda.enums;
 
-import org.ehealth_connector.common.mdht.Code;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.hl7cdar2.CD;
 
 /*
  *<div class="de">Dieses Subset ist eine empfohlene Auswahl für den vorliegenden Implementierungsleitfaden. Andere Codes aus den, in Kapitel 7.5.2.4 Spezifikation CDA Body Level 3  Problem Entry auf Seite 53 genannten Codesystemen dürfen ebenfalls verwendet werden. Hinweis: es handelt sich hier um durchgemachte Erkrankungen, die einen Immunschutz zur Folge haben.</div>
@@ -162,7 +161,7 @@ public enum HistoryOfPastIllness {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CD getCD() {
-		final CD cd = DatatypesFactory.eINSTANCE.createCD();
+		final CD cd = new CD();
 		cd.setCodeSystem(CODE_SYSTEM_OID);
 		cd.setCodeSystemName(CODE_SYSTEM_NAME);
 		cd.setCode(code);

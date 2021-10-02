@@ -51,12 +51,11 @@ public class Code extends CodeBaseType {
 	 */
 	public static CodeBaseType createCodeBaseType(
 			org.ehealth_connector.common.hl7cdar2.CD hl7CdaR2Value) {
-		CodeBaseType retVal = new CodeBaseType();
+		var retVal = new CodeBaseType();
 
 		if (hl7CdaR2Value != null) {
 			String nullFlavor = null;
-			if (hl7CdaR2Value.nullFlavor != null)
-				if (hl7CdaR2Value.nullFlavor.size() > 0)
+			if (hl7CdaR2Value.nullFlavor != null && !hl7CdaR2Value.nullFlavor.isEmpty())
 					nullFlavor = hl7CdaR2Value.nullFlavor.get(0);
 			if (nullFlavor != null)
 				retVal.setNullFlavor(NullFlavor.getEnum(nullFlavor));
@@ -68,7 +67,7 @@ public class Code extends CodeBaseType {
 				retVal.setCodeSystemVersion(hl7CdaR2Value.getCodeSystemVersion());
 				retVal.setDisplayName(hl7CdaR2Value.getDisplayName());
 
-				ED ed = hl7CdaR2Value.getOriginalText();
+				var ed = hl7CdaR2Value.getOriginalText();
 				if (ed != null)
 					retVal.setOriginalText(ed.xmlContent);
 			}
@@ -104,7 +103,7 @@ public class Code extends CodeBaseType {
 			retVal = new org.ehealth_connector.common.hl7cdar2.CD();
 			String value;
 
-			NullFlavor nf = baseType.getNullFlavor();
+			var nf = baseType.getNullFlavor();
 			if (nf != null) {
 				if (retVal.nullFlavor == null)
 					retVal.nullFlavor = new ArrayList<String>();
@@ -174,7 +173,7 @@ public class Code extends CodeBaseType {
 			retVal = new org.ehealth_connector.common.hl7cdar2.CE();
 			String value;
 
-			NullFlavor nf = baseType.getNullFlavor();
+			var nf = baseType.getNullFlavor();
 			if (nf != null) {
 				if (retVal.nullFlavor == null)
 					retVal.nullFlavor = new ArrayList<String>();
@@ -208,7 +207,7 @@ public class Code extends CodeBaseType {
 
 				value = baseType.getOriginalText();
 				if (value != null) {
-					ED ed = new ED();
+					var ed = new ED();
 					ed.xmlContent = value;
 					retVal.setOriginalText(ed);
 				}
@@ -244,7 +243,7 @@ public class Code extends CodeBaseType {
 			retVal = new org.ehealth_connector.common.hl7cdar2.CS();
 			String value;
 
-			NullFlavor nf = baseType.getNullFlavor();
+			var nf = baseType.getNullFlavor();
 			if (nf != null) {
 				if (retVal.nullFlavor == null)
 					retVal.nullFlavor = new ArrayList<String>();
@@ -278,7 +277,7 @@ public class Code extends CodeBaseType {
 
 				value = baseType.getOriginalText();
 				if (value != null) {
-					ED ed = new ED();
+					var ed = new ED();
 					ed.xmlContent = value;
 					retVal.setOriginalText(ed);
 				}
@@ -315,6 +314,49 @@ public class Code extends CodeBaseType {
 	 */
 	public Code(CodeBaseType baseType) {
 		initFromBaseType(baseType);
+	}
+
+	/**
+	 * <div class="en">Instantiates a new instance from the given information.<div>
+	 *
+	 * <div class="de">Instanziiert eine neue Instanz vom angegebenen Daten.<div>
+	 *
+	 * @param code       the code
+	 * @param codeSystem the code System
+	 * @param display    the display name
+	 */
+	public Code(String code, String codeSystem, String display) {
+		setCode(code);
+		setCodeSystem(codeSystem);
+		setDisplayName(display);
+	}
+
+	/**
+	 * <div class="en">Instantiates a new instance from the given information.<div>
+	 *
+	 * <div class="de">Instanziiert eine neue Instanz vom angegebenen Daten.<div>
+	 *
+	 * @param code       the code
+	 * @param codeSystem the code System
+	 * @param display    the display name
+	 */
+	public Code(String code, String codeSystem, String codeSystemName, String display) {
+		setCode(code);
+		setCodeSystem(codeSystem);
+		setCodeSystemName(codeSystemName);
+		setDisplayName(display);
+	}
+
+	/**
+	 * <div class="en">Instantiates a new instance from the given null flavor.<div>
+	 *
+	 * <div class="de">Instanziiert eine neue Instanz vom angegebenen Null
+	 * Flavor.<div>
+	 *
+	 * @param nf the null flavor
+	 */
+	public Code(NullFlavor nf) {
+		setNullFlavor(nf);
 	}
 
 	/**
@@ -368,12 +410,10 @@ public class Code extends CodeBaseType {
 	public Code(ValueSetEnumInterface enumValue) {
 		CodeBaseType codeBt = CodeBaseType.builder().withCode(enumValue.getCodeValue())
 				.withCodeSystem(enumValue.getCodeSystemId()).build();
-		if (enumValue.getCodeSystemName() != null)
-			if (!"".equals(enumValue.getCodeSystemName()))
+		if (enumValue.getCodeSystemName() != null && !enumValue.getCodeSystemName().isEmpty())
 				codeBt.setCodeSystemName(enumValue.getCodeSystemName());
 
-		if (enumValue.getDisplayName() != null)
-			if (!"".equals(enumValue.getDisplayName()))
+		if (enumValue.getDisplayName() != null && !enumValue.getDisplayName().isEmpty())
 				codeBt.setDisplayName(enumValue.getDisplayName());
 
 		initFromBaseType(codeBt);

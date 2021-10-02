@@ -25,8 +25,8 @@ public abstract class V3Message {
 
 	protected String sendingApplication = null;
 	protected String sendingFacility = null;
-	private ArrayList<String> receivingApplication = new ArrayList<String>(0);
-	private ArrayList<String> receivingFacility = new ArrayList<String>(0);
+	private ArrayList<String> receivingApplication = new ArrayList<>(0);
+	private ArrayList<String> receivingFacility = new ArrayList<>(0);
 	protected II messageId;
 
 	/**

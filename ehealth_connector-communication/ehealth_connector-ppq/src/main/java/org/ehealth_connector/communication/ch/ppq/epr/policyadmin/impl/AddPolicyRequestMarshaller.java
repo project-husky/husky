@@ -22,7 +22,6 @@ import org.opensaml.core.xml.XMLObject;
 import org.opensaml.core.xml.io.AbstractXMLObjectMarshaller;
 import org.opensaml.core.xml.io.MarshallingException;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 
 /**
  * <!-- @formatter:off -->
@@ -41,10 +40,10 @@ public class AddPolicyRequestMarshaller extends AbstractXMLObjectMarshaller {
 			final OpenSamlAddPolicyRequest request = (OpenSamlAddPolicyRequest) xmlObject;
 			if (request.getAssertion() != null) {
 				final AssertionImpl assertion = (AssertionImpl) request.getAssertion();
-				final org.opensaml.saml.saml2.core.Assertion innerAssertion = assertion
+				final var innerAssertion = assertion
 						.getWrappedObject();
-				final Element assertionElement = marshall(innerAssertion);
-				final Node imported = domElement.getOwnerDocument().importNode(assertionElement,
+				final var assertionElement = marshall(innerAssertion);
+				final var imported = domElement.getOwnerDocument().importNode(assertionElement,
 						true);
 				domElement.appendChild(imported);
 			}

@@ -16,10 +16,12 @@
  */
 package org.ehealth_connector.communication.xd.storedquery;
 
-import org.ehealth_connector.common.mdht.Identificator;
+import java.util.List;
+
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
-import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryException;
-import org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
+import org.openehealth.ipf.commons.ihe.xds.core.requests.query.FindFoldersQuery;
 
 /**
  * Represents a query to find XDS folders
@@ -29,19 +31,14 @@ public class FindFoldersStoredQuery extends AbstractStoredQuery {
 	/**
 	 * Construct a find folders stored query.
 	 *
-	 * @param patientId
-	 *            ID of the patient (required)
-	 * @param status
-	 *            status the availability status of the document (required)
+	 * @param patientId ID of the patient (required)
+	 * @param status    status the availability status of the document (required)
 	 */
-	public FindFoldersStoredQuery(Identificator patientId, AvailabilityStatusType status) {
-		try {
-			setOhtStoredQuery(
-					new org.openhealthtools.ihe.xds.consumer.storedquery.FindFoldersStoredQuery(
-							XdsMetadataUtil.convertEhcIdentificator(patientId),
-							new AvailabilityStatusType[] { status }));
-		} catch (final MalformedStoredQueryException e) {
-			e.printStackTrace();
-		}
+	public FindFoldersStoredQuery(Identificator patientId, AvailabilityStatus status) {
+		var findFoldersQuery = new FindFoldersQuery();
+		findFoldersQuery.setPatientId(XdsMetadataUtil.convertEhcIdentificator(patientId));
+		findFoldersQuery.setStatus(List.of(status));
+
+		setIpfStoredQuery(findFoldersQuery);
 	}
 }
