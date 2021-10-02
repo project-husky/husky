@@ -90,7 +90,7 @@ public class MasterPatientIndexQuery {
 	public MasterPatientIndexQuery addDomainToReturn(String organizationOID) {
 		fixV3Package();
 		v3PdqQuery.addDomainToReturn(organizationOID);
-		postFixV3Package();
+		//postFixV3Package();
 		return this;
 	}
 
@@ -107,7 +107,7 @@ public class MasterPatientIndexQuery {
 	public MasterPatientIndexQuery addMothersMaidenName(boolean useFuzzySearch, Name name) {
 		fixV3Package();
 		v3PdqQuery.addMothersMaidenName(useFuzzySearch, FhirPatient.convertName(name));
-		postFixV3Package();
+		//postFixV3Package();
 		return this;
 	}
 
@@ -121,7 +121,7 @@ public class MasterPatientIndexQuery {
 	public MasterPatientIndexQuery addPatientAddress(Address address) {
 		fixV3Package();
 		v3PdqQuery.addPatientAddress(FhirPatient.convertAddress(address.getMdhtAdress()));
-		postFixV3Package();
+		//postFixV3Package();
 		return this;
 	}
 
@@ -155,7 +155,7 @@ public class MasterPatientIndexQuery {
 	public MasterPatientIndexQuery addPatientName(boolean useFuzzySearch, Name name) {
 		fixV3Package();
 		v3PdqQuery.addPatientName(useFuzzySearch, FhirPatient.convertName(name));
-		postFixV3Package();
+		//postFixV3Package();
 		return this;
 	}
 
@@ -169,7 +169,7 @@ public class MasterPatientIndexQuery {
 	public MasterPatientIndexQuery addPatientTelecom(TEL tel) {
 		fixV3Package();
 		v3PdqQuery.addPatientTelecom(FhirPatient.convertTelecom(tel));
-		postFixV3Package();
+		//postFixV3Package();
 		return this;
 	}
 
@@ -181,7 +181,7 @@ public class MasterPatientIndexQuery {
 	public MasterPatientIndexQuery cancelQuery() {
 		fixV3Package();
 		v3PdqQuery.cancelQuery();
-		postFixV3Package();
+		//postFixV3Package();
 		return this;
 	}
 
@@ -193,7 +193,7 @@ public class MasterPatientIndexQuery {
 	public MasterPatientIndexQuery continueQuery() {
 		fixV3Package();
 		v3PdqQuery.continueQuery();
-		postFixV3Package();
+		//postFixV3Package();
 		return this;
 	}
 
@@ -245,7 +245,7 @@ public class MasterPatientIndexQuery {
 	public MasterPatientIndexQuery setNistContinuationQueryId() {
 		fixV3Package();
 		v3PdqQuery.getV3PdqConsumerQuery().setQueryId("1.2.3.4", "NIST_CONTINUATION", "");
-		postFixV3Package();
+		//postFixV3Package();
 		return this;
 	}
 
@@ -260,7 +260,7 @@ public class MasterPatientIndexQuery {
 	public MasterPatientIndexQuery setPageCount(int pageCount) {
 		fixV3Package();
 		v3PdqQuery.setPageCount(pageCount);
-		postFixV3Package();
+		//postFixV3Package();
 		return this;
 	}
 
@@ -274,7 +274,7 @@ public class MasterPatientIndexQuery {
 	public MasterPatientIndexQuery setPatientDateOfBirth(Date birthDate) {
 		fixV3Package();
 		v3PdqQuery.setPatientBirthDate(birthDate);
-		postFixV3Package();
+		//postFixV3Package();
 		return this;
 	}
 
@@ -288,7 +288,7 @@ public class MasterPatientIndexQuery {
 	public MasterPatientIndexQuery setPatientSex(AdministrativeGender adminstrativeGender) {
 		fixV3Package();
 		v3PdqQuery.setPatientSex(FhirPatient.convertGender(adminstrativeGender));
-		postFixV3Package();
+		//postFixV3Package();
 		return this;
 	}
 

@@ -51,6 +51,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import net.ihe.gazelle.hl7v3.prpain201306UV02.PRPAIN201306UV02Type;
+import org.ehealth_connector.common.mdht.Patient;
+
 
 /**
  * Test of class PdqV3Query
@@ -67,7 +69,7 @@ public class PdqV3QueryTest {
 
 	final private String pdqUri = "https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType";
 
-	final private String applicationName = "2.16.840.1.113883.3.72.6.5.100.1399";
+	final private String applicationName = "2.16.840.1.113883.3.72.6.5.100.1399"; //oid of nist healthcare
 	final private String facilityName = null;
 
 	final private String senderApplicationOid = "1.2.3.4";
@@ -206,13 +208,52 @@ public class PdqV3QueryTest {
 
 		final MasterPatientIndexQuery mpiQuery = new MasterPatientIndexQuery(affinityDomain.getPdqDestination());
 		final Identificator identificator = new Identificator("1.3.6.1.4.1.12559.11.20.1", "4711");
-		mpiQuery.addPatientIdentificator(identificator);// .addDomainToReturn("1.3.6.1.4.1.12559.11.20.1");
+		mpiQuery.addPatientIdentificator(identificator);
 		
 		final MasterPatientIndexQueryResponse response = convenienceMasterPatientIndexV3Client
 				.queryPatientDemographics(
 				mpiQuery,
 				affinityDomain, null);
+		
+		// test patient not found 
 		assertTrue(response.getSuccess());
+	    assertEquals(0,response.getTotalNumbers());
+	    
+	    // 761337610436977766^^^&2.16.756.5.30.1.127.3.10.3 (PI) Kata Virer => search by identificator
+	    final MasterPatientIndexQuery mpiQuery1 = new MasterPatientIndexQuery(affinityDomain.getPdqDestination());
+	    final Identificator identificator1 = new Identificator("2.16.756.5.30.1.127.3.10.3", "761337610436977766");
+	
+		mpiQuery1.addPatientIdentificator(identificator1);
+	    
+		final MasterPatientIndexQueryResponse response1 = convenienceMasterPatientIndexV3Client
+				.queryPatientDemographics(
+				mpiQuery1,
+				affinityDomain, null);
+		
+		
+		//CHPAM18^^^CHPAM&1.3.6.1.4.1.12559.11.20.1&ISO
+		final MasterPatientIndexQuery mpiQuery2 = new MasterPatientIndexQuery(affinityDomain.getPdqDestination());
+		final Identificator identificator2 = new Identificator("1.3.6.1.4.1.12559.11.20.1", "CHPAM18");
+		
+        mpiQuery2.addPatientIdentificator(identificator2);
+	    
+		final MasterPatientIndexQueryResponse response2 = convenienceMasterPatientIndexV3Client
+				.queryPatientDemographics(
+				mpiQuery2,
+				affinityDomain, null);
+
+		
+		List<Patient> patients = response2.getPatients();
+		if(patients != null) {
+		
+		for (Patient patient : patients) {
+			System.out.println(patient.getCompleteName());
+		}
+		
+		}
+		
+		// 761337610436977766^^^&2.16.756.5.30.1.127.3.10.3 (PI)
+		assertTrue(response1.getSuccess());
 	}
 
 	@Test
