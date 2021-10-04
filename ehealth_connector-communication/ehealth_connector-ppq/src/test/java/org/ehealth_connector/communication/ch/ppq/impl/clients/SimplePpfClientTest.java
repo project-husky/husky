@@ -38,7 +38,7 @@ public class SimplePpfClientTest {
 	@Autowired
 	private CamelContext camelContext;
 	private String urlToPpq = "https://ehealthsuisse.ihe-europe.net:10443/ppq-repository";
-	private String clientKeyStore = "/src/test/resources/testKeystore.jks";
+	private String clientKeyStore = "src/test/resources/testKeystore.jks";
 	private String clientKeyStorePass = "changeit";
 
 	@BeforeEach

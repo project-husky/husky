@@ -485,7 +485,6 @@ public class CdaValidator {
 			}
 		});
 		try {
-			factory.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
 			factory.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
 
 			return factory.newSchema(source);

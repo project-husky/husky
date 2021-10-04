@@ -16,8 +16,8 @@
  */
 package org.ehealth_connector.xua.saml2.impl;
 
-import java.time.Instant;
-import java.time.temporal.ChronoField;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.GregorianCalendar;
 
 import javax.xml.bind.JAXBElement;
@@ -91,9 +91,8 @@ public class AuthnStatementImpl
 	 */
 	@Override
 	public XMLGregorianCalendar getAuthnInstant() {
-		final Instant instant = authnStatement.getAuthnInstant();
-		final var retVal = new GregorianCalendar();
-		retVal.setTimeInMillis(instant.getLong(ChronoField.MILLI_OF_SECOND));
+		final var instant = authnStatement.getAuthnInstant();
+		final var retVal = GregorianCalendar.from(ZonedDateTime.ofInstant(instant, ZoneId.systemDefault()));
 
 		XMLGregorianCalendar xmlGregCal = null;
 		try {
@@ -126,9 +125,8 @@ public class AuthnStatementImpl
 	 */
 	@Override
 	public XMLGregorianCalendar getSessionNotOnOrAfter() {
-		final Instant instant = authnStatement.getSessionNotOnOrAfter();
-		final var retVal = new GregorianCalendar();
-		retVal.setTimeInMillis(instant.getLong(ChronoField.MILLI_OF_SECOND));
+		final var instant = authnStatement.getSessionNotOnOrAfter();
+		final var retVal = GregorianCalendar.from(ZonedDateTime.ofInstant(instant, ZoneId.systemDefault()));
 
 		XMLGregorianCalendar xmlGregCal = null;
 		try {

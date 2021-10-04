@@ -91,7 +91,6 @@ public class IdpClientByBrowserAndProtocolHandlerTest extends ServerTestHelper {
 	 */
 	@BeforeEach
 	public void setUp() throws Exception {
-
 		testFilename = "/credential-criteria-registry.properties";
 
 		client = new IdpClientByBrowserAndProtocolHandler(
