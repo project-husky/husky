@@ -189,7 +189,13 @@ public enum CodeSystems implements IdentityDomain {
 	 * OID: 2.16.756.5.30.1.127.3.2.20121101.2 <div class="en">Swiss PLRR-DHA
 	 * LabObsList Codes</div>
 	 */
-	SwissPlrrDhaLabObsList("2.16.756.5.30.1.127.3.2.20121101.2", "Swiss PLRR-DHA LabObsList");
+	SwissPlrrDhaLabObsList("2.16.756.5.30.1.127.3.2.20121101.2", "Swiss PLRR-DHA LabObsList"),
+
+	/**
+	 * OID: 2.16.756.5.30.1.127.3.10.3 Swiss EPR-SPID
+	 */
+	SwissEprSpid("2.16.756.5.30.1.127.3.10.3", "Swiss EPR-SPID");
+
 
 	/**
 	 * <div class="en">Gets the Enum with a given OID</div>

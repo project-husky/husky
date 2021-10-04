@@ -36,6 +36,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  * Utility for date handling.
  *
  */
+@Deprecated(forRemoval = true)
 public class DateUtilMdht {
 
 	/**

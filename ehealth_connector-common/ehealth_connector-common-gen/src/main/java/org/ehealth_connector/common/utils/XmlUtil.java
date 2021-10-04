@@ -37,6 +37,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+@Deprecated(forRemoval = true) // Replaced by the package org.ehealth_connector.common.utils.xml
 public class XmlUtil {
 
 	/**

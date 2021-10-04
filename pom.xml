@@ -866,6 +866,12 @@
 				<artifactId>surefire-junit-platform</artifactId>
 				<version>3.0.0-M5</version>
 			</dependency>
+
+			<dependency>
+				<groupId>org.checkerframework</groupId>
+				<artifactId>checker-qual</artifactId>
+				<version>3.18.0</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
