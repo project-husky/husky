@@ -48,6 +48,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
@@ -223,12 +224,18 @@ public class Util {
 		var docBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder docBuilder;
 		try (var outputStream = new ByteArrayOutputStream()) {
+			docBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+			docBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
 			docBuilder = docBuilderFactory.newDocumentBuilder();
 			var document = docBuilder.parse(inputStream);
 			convertNonAsciiText2Unicode(document.getDocumentElement());
 			Source xmlSource = new DOMSource(document);
 			Result outputTarget = new StreamResult(outputStream);
-			TransformerFactory.newInstance().newTransformer().transform(xmlSource, outputTarget);
+
+			var transformerFactory = TransformerFactory.newInstance();
+			transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+			transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
+			transformerFactory.newTransformer().transform(xmlSource, outputTarget);
 			retVal = new ByteArrayInputStream(outputStream.toByteArray());
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException
 				| TransformerFactoryConfigurationError e) {

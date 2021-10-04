@@ -31,6 +31,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.Binder;
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.JAXBContext;
@@ -1118,6 +1119,8 @@ public class CdaUtil {
 		var sw = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
 		final var streamResult = new StreamResult(sw);
 		final var tf = TransformerFactory.newInstance();
+		tf.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+		tf.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
 		final var transformer = tf.newTransformer();
 		transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 		transformer.setOutputProperty(OutputKeys.INDENT, "yes");

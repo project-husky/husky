@@ -18,8 +18,8 @@ package org.ehealth_connector.cda.utils;
 
 import java.io.StringWriter;
 
+import javax.xml.XMLConstants;
 import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
@@ -45,11 +45,13 @@ public class Xml2Html {
 	 *
 	 */
 	public static StreamResult convertXMLToHTML(Source xml) throws TransformerException {
-		StreamResult retVal = new StreamResult(new StringWriter());
+		var retVal = new StreamResult(new StringWriter());
 
-		TransformerFactory tFactory = TransformerFactory.newInstance();
+		var tFactory = TransformerFactory.newInstance();
+		tFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+		tFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
 		Source xslt = tFactory.getAssociatedStylesheet(xml, null, null, null);
-		Transformer transform = tFactory.newTransformer(xslt);
+		var transform = tFactory.newTransformer(xslt);
 		transform.transform(xml, retVal);
 		return retVal;
 
@@ -71,10 +73,12 @@ public class Xml2Html {
 	 */
 	public static StreamResult convertXMLToHTML(Source xml, Source xslt)
 			throws TransformerException {
-		StreamResult retVal = new StreamResult(new StringWriter());
+		var retVal = new StreamResult(new StringWriter());
 
-		TransformerFactory tFactory = TransformerFactory.newInstance();
-		Transformer transform = tFactory.newTransformer(xslt);
+		var tFactory = TransformerFactory.newInstance();
+		tFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+		tFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
+		var transform = tFactory.newTransformer(xslt);
 		transform.transform(xml, retVal);
 		return retVal;
 

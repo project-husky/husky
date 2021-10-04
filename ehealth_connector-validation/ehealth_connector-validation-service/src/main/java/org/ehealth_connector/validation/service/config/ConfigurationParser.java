@@ -120,6 +120,8 @@ public class ConfigurationParser {
 			final Source schemaSource = new StreamSource(in);
 			final var schemaFactory = SchemaFactory
 					.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+			schemaFactory.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+			schemaFactory.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
 			return schemaFactory.newSchema(schemaSource);
 		}
 	}

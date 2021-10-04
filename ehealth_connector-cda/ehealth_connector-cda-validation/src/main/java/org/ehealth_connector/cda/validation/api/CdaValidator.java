@@ -358,7 +358,7 @@ public class CdaValidator {
 		 * c.makeErrorReporter());
 		 */
 		
-		final RuleSetTransformer factory = new RuleSetTransformer(processor);
+		final var factory = new RuleSetTransformer(processor);
 		return new Validators(factory);
 	}
 
@@ -468,6 +468,7 @@ public class CdaValidator {
 		}
 		final Source source = new StreamSource(schemaFile);
 		final var factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+
 		factory.setErrorHandler(new ErrorHandler() {
 			@Override
 			public void error(SAXParseException exception) throws SAXException {
@@ -484,6 +485,9 @@ public class CdaValidator {
 			}
 		});
 		try {
+			factory.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+			factory.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+
 			return factory.newSchema(source);
 		} catch (final SAXException e) {
 			log.error("Could not load XSD schema '{}'", schemaPath, e);
