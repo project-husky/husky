@@ -45,6 +45,7 @@ import org.ehealth_connector.xua.core.SecurityHeaderElement;
 import org.ehealth_connector.xua.deserialization.impl.AssertionDeserializerImpl;
 import org.ehealth_connector.xua.exceptions.DeserializeException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
@@ -66,6 +67,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
 @EnableAutoConfiguration
+@Disabled
 public class ConvenienceCommunicationIpfTest extends XdsTestUtils {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ConvenienceCommunication.class.getName());
