@@ -135,6 +135,7 @@ import org.xml.sax.SAXException;
 /**
  * Helper methods for the eHealth Connector and CDA.
  */
+@Deprecated(forRemoval = true)
 public class Util {
 
 	/**

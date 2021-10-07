@@ -21,6 +21,7 @@ package org.ehealth_connector.common.utils;
  * System utilities
  *
  */
+@Deprecated(forRemoval = true)
 public class SystemUtil {
 
 	/**
