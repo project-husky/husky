@@ -41,6 +41,7 @@ import org.ehealth_connector.common.hl7cdar2.TS;
  * <div class="de">Toolbox für das Datums-Handling.</div>
  *
  */
+@Deprecated(forRemoval = true)
 public class DateUtil {
 
 	/**

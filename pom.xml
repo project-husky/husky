@@ -443,6 +443,12 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
+
+			<dependency>
+				<groupId>org.checkerframework</groupId>
+				<artifactId>checker-qual</artifactId>
+				<version>3.18.0</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>

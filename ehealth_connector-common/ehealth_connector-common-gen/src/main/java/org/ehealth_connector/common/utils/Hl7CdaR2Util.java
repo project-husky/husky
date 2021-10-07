@@ -28,6 +28,7 @@ import org.ehealth_connector.common.hl7cdar2.ST;
  * <div class="de">Toolbox für das HL7 CDA R2 Handling.</div>
  *
  */
+@Deprecated(forRemoval = true)
 public class Hl7CdaR2Util {
 
 	private Hl7CdaR2Util() {

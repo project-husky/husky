@@ -53,6 +53,7 @@ public class FileUtil {
 	 *            the second part (tail) of the combined path.
 	 * @return the combined Path of path1 and path2.
 	 */
+	@Deprecated(forRemoval = true) // Use File or Path
 	public static String combinePath(String path1, String path2) {
 		if (!(path1.endsWith("/") || path1.endsWith("\\")))
 			return path1 + getPlatformSpecificPathSeparator() + path2;
@@ -65,6 +66,7 @@ public class FileUtil {
 	 *
 	 * @return "/" for Unix based platforms or "\" for Windows based platforms
 	 */
+	@Deprecated(forRemoval = true) // Always use slashes, it works on Windows too
 	public static String getPlatformSpecificPathSeparator() {
 		var retVal = "/";
 		if (Util.isWindows())

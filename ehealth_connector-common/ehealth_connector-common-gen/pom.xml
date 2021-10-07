@@ -65,6 +65,11 @@
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.checkerframework</groupId>
+			<artifactId>checker-qual</artifactId>
+		</dependency>
+
 		<!-- test stuff -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
