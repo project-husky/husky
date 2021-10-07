@@ -152,8 +152,8 @@ public class ValueSetEntryTest {
 		ValueSetEntry child1 = ValueSetEntry.builder().withDefaultMappingName("child-1").build();
 
 		valueSetEntryA.addChild(child1);
-		assertEquals(valueSetEntryA, valueSetEntryB);
-		assertEquals(valueSetEntryB, valueSetEntryA);
+		assertNotEquals(valueSetEntryA, valueSetEntryB);
+		assertNotEquals(valueSetEntryB, valueSetEntryA);
 
 		valueSetEntryB.addChild(child1);
 		assertEquals(valueSetEntryA, valueSetEntryB);
