@@ -24,7 +24,6 @@ import org.herasaf.xacml.core.policy.impl.ResourceType;
 import org.herasaf.xacml.core.policy.impl.ResourcesType;
 import org.herasaf.xacml.core.policy.impl.SubjectsType;
 import org.herasaf.xacml.core.policy.impl.TargetType;
-import org.opensaml.xacml.policy.impl.TargetTypeImplBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -36,12 +35,6 @@ import org.opensaml.xacml.policy.impl.TargetTypeImplBuilder;
  */
 public class TargetBuilderImpl
 		implements SimpleBuilder<TargetType>, SecurityObjectBuilder<org.opensaml.xacml.policy.TargetType, TargetType> {
-
-	private org.opensaml.xacml.policy.TargetType wrappedObject;
-
-	public TargetBuilderImpl() {
-		wrappedObject = new TargetTypeImplBuilder().buildObject();
-	}
 
 	@Override
 	public TargetType create(org.opensaml.xacml.policy.TargetType aInternalObject) {

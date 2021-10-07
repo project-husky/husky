@@ -18,6 +18,7 @@ package org.ehealth_connector.xua.serialization.impl;
 
 import java.io.ByteArrayOutputStream;
 
+import javax.xml.XMLConstants;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -93,7 +94,9 @@ public class OpenSaml2SerializerImpl implements OpenSaml2Serializer {
 		try {
 			final var element = serializeToXml(aXmlObject);
 
-			var transformerFactory = javax.xml.transform.TransformerFactory.newInstance();			
+			var transformerFactory = javax.xml.transform.TransformerFactory.newInstance();
+			transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+			transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
 			final var tr = transformerFactory.newTransformer();
 			tr.setOutputProperty(OutputKeys.INDENT, "no");
 			tr.setOutputProperty(OutputKeys.METHOD, "xml");

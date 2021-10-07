@@ -16,8 +16,6 @@
  */
 package org.ehealth_connector.communication.ch.ppq.impl.clients;
 
-import javax.jms.IllegalStateException;
-
 import org.ehealth_connector.communication.ch.ppq.api.config.PpClientConfig;
 import org.ehealth_connector.xua.communication.clients.impl.ClientFactory;
 import org.springframework.stereotype.Component;

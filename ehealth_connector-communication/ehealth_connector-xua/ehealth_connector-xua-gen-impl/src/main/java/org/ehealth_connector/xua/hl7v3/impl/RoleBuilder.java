@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.xua.hl7v3.impl;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.ehealth_connector.xua.hl7v3.OpenSamlRole;
 import org.ehealth_connector.xua.hl7v3.Role;
 import org.opensaml.core.xml.AbstractXMLObjectBuilder;

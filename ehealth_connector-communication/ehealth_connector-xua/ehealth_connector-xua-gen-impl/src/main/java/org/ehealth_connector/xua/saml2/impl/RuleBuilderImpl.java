@@ -19,7 +19,6 @@ package org.ehealth_connector.xua.saml2.impl;
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.ehealth_connector.xua.saml2.SimpleBuilder;
 import org.herasaf.xacml.core.policy.impl.RuleType;
-import org.opensaml.xacml.policy.impl.RuleTypeImplBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -31,12 +30,6 @@ import org.opensaml.xacml.policy.impl.RuleTypeImplBuilder;
  */
 public class RuleBuilderImpl
 		implements SimpleBuilder<RuleType>, SecurityObjectBuilder<org.opensaml.xacml.policy.RuleType, RuleType> {
-
-	private org.opensaml.xacml.policy.RuleType wrappedObject;
-
-	public RuleBuilderImpl() {
-		wrappedObject = new RuleTypeImplBuilder().buildObject();
-	}
 
 	@Override
 	public RuleType create(org.opensaml.xacml.policy.RuleType aInternalObject) {

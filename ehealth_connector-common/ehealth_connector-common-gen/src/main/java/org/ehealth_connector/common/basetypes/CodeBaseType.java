@@ -285,7 +285,7 @@ public class CodeBaseType implements Serializable {
 	 */
 	public void addCodeTranslation(CodeBaseType codeTranslation) {
 		if (this.codeTranslationList == null)
-			this.codeTranslationList = new ArrayList<CodeBaseType>();
+			this.codeTranslationList = new ArrayList<>();
 		this.codeTranslationList.add(codeTranslation);
 	}
 
@@ -301,7 +301,7 @@ public class CodeBaseType implements Serializable {
 	 */
 	public void addDisplayNameTranslation(LangText displayNameTranslation) {
 		if (this.displayNameTranslationList == null)
-			this.displayNameTranslationList = new ArrayList<LangText>();
+			this.displayNameTranslationList = new ArrayList<>();
 		this.displayNameTranslationList.add(displayNameTranslation);
 	}
 
@@ -327,7 +327,7 @@ public class CodeBaseType implements Serializable {
 	 * <div class="de">Löscht die Code-Übersetzungsliste.</div>
 	 */
 	public void clearCodeTranslationList() {
-		this.codeTranslationList = new ArrayList<CodeBaseType>();
+		this.codeTranslationList = new ArrayList<>();
 	}
 
 	/**
@@ -336,7 +336,7 @@ public class CodeBaseType implements Serializable {
 	 * <div class="de">Löscht die Liste der Anzeigenamenübersetzungen.</div>
 	 */
 	public void clearDisplayNameTranslationList() {
-		this.displayNameTranslationList = new ArrayList<LangText>();
+		this.displayNameTranslationList = new ArrayList<>();
 	}
 
 	/**
@@ -396,7 +396,7 @@ public class CodeBaseType implements Serializable {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		boolean retVal = true;
+		var retVal = true;
 		if (obj == null)
 			return false;
 
@@ -747,7 +747,7 @@ public class CodeBaseType implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		StringBuilder retVal = new StringBuilder();
+		var retVal = new StringBuilder();
 
 		if (getCode() != null)
 			retVal.append(getCode() + " / ");
@@ -759,19 +759,19 @@ public class CodeBaseType implements Serializable {
 		else
 			retVal.append("no code system !!");
 
-		String displayName = getDisplayName();
-		String codeSystemName = getCodeSystemName();
-		if ((displayName != null) || (codeSystemName != null)) {
+		var displayNameL = getDisplayName();
+		var codeSystemNameL = getCodeSystemName();
+		if ((displayNameL != null) || (codeSystemNameL != null)) {
 			retVal.append(" (");
 
-			if (displayName != null)
-				retVal.append(displayName);
+			if (displayNameL != null)
+				retVal.append(displayNameL);
 
-			if (codeSystemName != null) {
-				if (displayName != null)
+			if (codeSystemNameL != null) {
+				if (displayNameL != null)
 					retVal.append(" / ");
 
-				retVal.append(codeSystemName);
+				retVal.append(codeSystemNameL);
 			}
 
 			retVal.append(")");

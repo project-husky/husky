@@ -24,6 +24,10 @@ package org.ehealth_connector.common.utils;
 @Deprecated(forRemoval = true)
 public class SystemUtil {
 
+	private SystemUtil() {
+		throw new IllegalStateException("This is a utility class!");
+	}
+
 	/**
 	 * Gets the number of available processors of the current machine
 	 *

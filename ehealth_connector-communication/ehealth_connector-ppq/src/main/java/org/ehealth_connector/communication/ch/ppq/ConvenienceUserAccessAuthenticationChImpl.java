@@ -54,11 +54,11 @@ public class ConvenienceUserAccessAuthenticationChImpl
 		// This makes sure the Marshallers are loaded for serialisation!
 		// Note: the initial implementation did not work under .net. It has been
 		// therefore changed as follows:
-		List<Initializer> initializers = new ArrayList<Initializer>();
+		List<Initializer> initializers = new ArrayList<>();
 		initializers.add(
 				new org.ehealth_connector.communication.ch.ppq.epr.config.EprObjectProviderInitializer());
-		initializers.add(new org.opensaml.xacml.config.XMLObjectProviderInitializer());
-		initializers.add(new org.opensaml.xacml.profile.saml.config.XMLObjectProviderInitializer());
+		initializers.add(new org.opensaml.xacml.config.impl.XMLObjectProviderInitializer());
+		initializers.add(new org.opensaml.xacml.profile.saml.config.impl.XMLObjectProviderInitializer());
 		for (Initializer initializer : initializers) {
 			initializer.init();
 		}
@@ -80,7 +80,7 @@ public class ConvenienceUserAccessAuthenticationChImpl
 		PrivacyPolicyFeedResponse response = client.send(aAssertion, feed);
 
 		if (response != null) {
-
+			return response;
 		}
 
 		return null;

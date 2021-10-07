@@ -17,6 +17,7 @@
 package org.ehealth_connector.communication.ch;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.ehealth_connector.common.ch.enums.ConfidentialityCode;
@@ -93,7 +94,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.common.communicati
 				ccl.add(ConfidentialityCode.getEnum(cmt.getCode()));
 			}
 		} else
-			return null;
+			return new LinkedList<>();
 		return ccl;
 	}
 

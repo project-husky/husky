@@ -27,7 +27,6 @@ import org.herasaf.xacml.core.policy.impl.DefaultsType;
 import org.herasaf.xacml.core.policy.impl.EvaluatableIDImpl;
 import org.herasaf.xacml.core.policy.impl.ObligationsType;
 import org.herasaf.xacml.core.policy.impl.PolicyType;
-import org.opensaml.xacml.policy.impl.PolicyTypeImplBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -39,12 +38,6 @@ import org.opensaml.xacml.policy.impl.PolicyTypeImplBuilder;
  */
 public class PolicyBuilderImpl
 		implements SimpleBuilder<PolicyType>, SecurityObjectBuilder<org.opensaml.xacml.policy.PolicyType, PolicyType> {
-
-	private org.opensaml.xacml.policy.PolicyType wrappedObject;
-
-	public PolicyBuilderImpl() {
-		wrappedObject = new PolicyTypeImplBuilder().buildObject();
-	}
 
 	@Override
 	public PolicyType create(org.opensaml.xacml.policy.PolicyType aInternalObject) {

@@ -27,7 +27,6 @@ import org.ehealth_connector.common.mdht.enums.DateTimeRangeAttributes;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openhealthtools.ihe.xds.consumer.query.MalformedQueryException;
 
 /**
  * Test of class DateTimeRange
@@ -59,7 +58,7 @@ class DateTimeRangeTest {
 	}
 
 	@Test
-	void testDateTimeRange() throws MalformedQueryException {
+	void testDateTimeRange() {
 
 		final DateTimeRange d = new DateTimeRange(DateTimeRangeAttributes.CREATION_TIME, testDate1,
 				testDate2);
@@ -77,7 +76,7 @@ class DateTimeRangeTest {
 	}
 
 	@Test
-	void testSetGetFrom() throws MalformedQueryException {
+	void testSetGetFrom() {
 		final DateTimeRange d = new DateTimeRange(DateTimeRangeAttributes.CREATION_TIME, testDate1,
 				testDate2);
 		d.setFrom(testDateTo2);
@@ -85,7 +84,7 @@ class DateTimeRangeTest {
 	}
 
 	@Test
-	void testSetGetTo() throws MalformedQueryException {
+	void testSetGetTo() {
 		final DateTimeRange d = new DateTimeRange(DateTimeRangeAttributes.CREATION_TIME, testDate1,
 				testDate2);
 

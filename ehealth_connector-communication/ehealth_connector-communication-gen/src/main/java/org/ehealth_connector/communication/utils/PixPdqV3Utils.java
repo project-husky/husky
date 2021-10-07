@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.eclipse.emf.common.util.Enumerator;
-
 import net.ihe.gazelle.hl7v3.coctmt090003UV01.COCTMT090003UV01AssignedEntity;
 import net.ihe.gazelle.hl7v3.coctmt090003UV01.COCTMT090003UV01Organization;
 import net.ihe.gazelle.hl7v3.coctmt150002UV01.COCTMT150002UV01Organization;
@@ -61,7 +59,12 @@ import net.ihe.gazelle.hl7v3.voc.RoleClassAssignedEntity;
 import net.ihe.gazelle.hl7v3.voc.WorkPlaceAddressUse;
 
 public class PixPdqV3Utils {
+
 	static int sequence = 0;
+	
+	private PixPdqV3Utils() {
+		throw new IllegalStateException("This is a utility class!");
+	}
 
 	/**
 	 * Convert an AD (Address) object into a String array containing each part as
@@ -73,7 +76,7 @@ public class PixPdqV3Utils {
 	 * @param ad (The AD object containing the address)
 	 * @return String array containing each part of the address.
 	 */
-	public static String[] ADToStringArray(AD ad) {
+	public static String[] adToStringArray(AD ad) {
 		// NOTE: I'm only getting the first address line, other locator, etc.
 		var addressArray = new String[9];
 		if (null != ad.getStreetAddressLine() && !ad.getStreetAddressLine().isEmpty())
@@ -120,7 +123,7 @@ public class PixPdqV3Utils {
 	 * @param addressType             (possible values are "H", "W", or "WP")
 	 * @return AD type object containing the non-empty address parts provided.
 	 */
-	public static AD createAD(List<String> addressStreetAddressLines, String addressCity, String addressCounty,
+	public static AD createAd(List<String> addressStreetAddressLines, String addressCity, String addressCounty,
 			String addressState, String addressCountry, String addressZip, String addressOtherDesignation,
 			String addressType) {
 		var addressAD = new AD();
@@ -267,12 +270,12 @@ public class PixPdqV3Utils {
 	 * @param addressType             (possible values are "H", "W", or "WP")
 	 * @return AD type object containing the non-empty address parts provided.
 	 */
-	public static AD createAD(String addressStreetAddress, String addressCity, String addressCounty,
+	public static AD createAd(String addressStreetAddress, String addressCity, String addressCounty,
 			String addressState, String addressCountry, String addressZip, String addressOtherDesignation,
 			String addressType) {
 		List<String> adressLines = new ArrayList<>();
 		adressLines.add(addressStreetAddress);
-		return createAD(adressLines, addressCity, addressCounty, addressState, addressCountry, addressZip,
+		return createAd(adressLines, addressCity, addressCounty, addressState, addressCountry, addressZip,
 				addressOtherDesignation, addressType);
 	}
 
@@ -481,23 +484,6 @@ public class PixPdqV3Utils {
 		}
 
 		return en;
-	}
-
-	/**
-	 * Helper method for turning an Enumerator into a list
-	 *
-	 * @param Enumerator (the enum value that will make up the list)
-	 * @return List of Enumerator containing the single supplied value.
-	 */
-	public static List<Enumerator> createEnumeratorList(Enumerator enumValue) {
-
-		// create a list to hold the "use" value
-		List<Enumerator> enumList = new ArrayList<>();
-
-		// add the SRCH value;
-		enumList.add(enumValue);
-
-		return enumList;
 	}
 
 	/**
@@ -990,7 +976,7 @@ public class PixPdqV3Utils {
 	 * @param en (The EN value to convert)
 	 * @return String[] with each component of the name.
 	 */
-	public static String[] ENToStringArray(EN en) {
+	public static String[] enToStringArray(EN en) {
 		var patientName = new String[5];
 
 		if (null != en.getFamily() && !en.getFamily().isEmpty())
@@ -1037,11 +1023,10 @@ public class PixPdqV3Utils {
 		// for each patient found
 		for (var i = 0; i < telecom.size(); i++) {
 			var currentTEL = telecom.get(i);
-			if (null != currentTEL.getUse() && !currentTEL.getUse().isEmpty()) {
-				if (currentTEL.getUse().equalsIgnoreCase(useCode)) {
+			if (null != currentTEL.getUse() && !currentTEL.getUse().isEmpty()
+					&& currentTEL.getUse().equalsIgnoreCase(useCode)) {
 					telephoneNumber = currentTEL.getValue();
 					break;
-				}
 			}
 		}
 		return telephoneNumber;
@@ -1055,7 +1040,7 @@ public class PixPdqV3Utils {
 	 * @param id (The II type to convert to string array)
 	 * @return String[] containing extension, assignAuthority, and name.
 	 */
-	public static String[] IIToStringArray(II id) {
+	public static String[] iiToStringArray(II id) {
 		var array = new String[4];
 		array[0] = id.getExtension();
 		array[1] = id.getAssigningAuthorityName();
@@ -1072,7 +1057,7 @@ public class PixPdqV3Utils {
 	 * @param pn (The PN value to convert)
 	 * @return String[] with each component of the name.
 	 */
-	public static String[] PNToStringArray(PN pn) {
+	public static String[] pnToStringArray(PN pn) {
 		var patientName = new String[5];
 
 		// if we've got a family name

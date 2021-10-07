@@ -20,9 +20,9 @@ package org.ehealth_connector.communication.mpi.impl.pix;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ehealth_connector.common.utils.OID;
 import org.ehealth_connector.communication.mpi.V3Message;
 import org.ehealth_connector.communication.utils.PixPdqV3Utils;
-import org.openhealthtools.ihe.utils.OID;
 
 import net.ihe.gazelle.hl7v3.coctmt030007UV.COCTMT030007UVPerson;
 import net.ihe.gazelle.hl7v3.datatypes.II;
@@ -182,7 +182,7 @@ public class V3PixSourceMergePatients extends V3Message {
 	public void addPatientAddress(List<String> addressStreetAddress, String addressCity,
 			String addressCounty, String addressState, String addressCountry, String addressZip,
 			String addressOtherDesignation, String addressType) {
-		var patientAddress = PixPdqV3Utils.createAD(addressStreetAddress, addressCity, addressCounty,
+		var patientAddress = PixPdqV3Utils.createAd(addressStreetAddress, addressCity, addressCounty,
 				addressState, addressCountry, addressZip, addressOtherDesignation, addressType);
 		if (null != patientAddress)
 			patientPerson.getAddr().add(patientAddress);
@@ -347,7 +347,6 @@ public class V3PixSourceMergePatients extends V3Message {
 	 * @param namespace
 	 */
 	public void setObsoletePatientID(String extension, String root, String namespace) {
-		// patientId = root + "^" + extension;
 		final var idString = new StringBuilder();
 		idString.append(extension) //
 				.append("^^^");
@@ -357,8 +356,7 @@ public class V3PixSourceMergePatients extends V3Message {
 		idString.append("&") //
 				.append(root) //
 				.append("&ISO");
-		patientId = idString.toString();// extension + "^^^" + namespace + "&" +
-										// root + "&ISO";
+		patientId = idString.toString();
 
 		// add a replacement of
 		var replacementOf = new MFMIMT700701UV01ReplacementOf();
@@ -515,6 +513,7 @@ public class V3PixSourceMergePatients extends V3Message {
 				.setSender(PixPdqV3Utils.createMCCIMT000100UV01Sender(applicationOID, facilityOID));
 	}
 
+	@Override
 	public II getMessageId() {
 		return messageId;
 	}

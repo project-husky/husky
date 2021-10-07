@@ -16,14 +16,7 @@
 			<artifactId>ehealth_connector-communication-gen</artifactId>
 			<version>2.0-ALPHA</version>
 		</dependency>
-		
-		<dependency>
-			<groupId>org.apache.axis2</groupId>
-			<artifactId>addressing</artifactId>
-			<!--type>mar</type-->
-		</dependency>
-		
-				<!-- dependency> <groupId>ch.epd.ihe.ppq</groupId> <artifactId>ch-ppq-webservice-api</artifactId> </dependency -->
+	
 		<dependency>
 			<groupId>org.opensaml</groupId>
 			<artifactId>opensaml-xacml-saml-impl</artifactId>

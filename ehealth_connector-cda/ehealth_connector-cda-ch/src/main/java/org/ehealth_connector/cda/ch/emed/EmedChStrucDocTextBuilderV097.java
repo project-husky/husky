@@ -16,25 +16,76 @@
  */
 package org.ehealth_connector.cda.ch.emed;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
+
 import org.apache.commons.lang3.StringUtils;
 import org.ehealth_connector.cda.NarrativeTableInfos;
 import org.ehealth_connector.cda.ch.emed.enums.EmedTextNarrativeAttributes;
-import org.ehealth_connector.cda.ch.emed.v097.*;
-import org.ehealth_connector.cda.ch.emed.v097.enums.*;
+import org.ehealth_connector.cda.ch.emed.v097.IhesubstitutionPermissionContentModule;
+import org.ehealth_connector.cda.ch.emed.v097.MedicationTreatmentPlanEntryContentModule;
+import org.ehealth_connector.cda.ch.emed.v097.PrescribedQuantityEntryContentModule;
+import org.ehealth_connector.cda.ch.emed.v097.TreatmentReasonEntryContentModule;
+import org.ehealth_connector.cda.ch.emed.v097.enums.ActSubstanceAdminSubstitutionCode;
+import org.ehealth_connector.cda.ch.emed.v097.enums.ChEmedTimingEvent;
+import org.ehealth_connector.cda.ch.emed.v097.enums.PharmaceuticalDoseFormEdqm;
+import org.ehealth_connector.cda.ch.emed.v097.enums.RouteOfAdministrationEdqm;
+import org.ehealth_connector.cda.ch.emed.v097.enums.UnitsOfPresentation;
 import org.ehealth_connector.cda.ch.enums.UnitsOfTime;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.ihe.pharm.enums.DosageType;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.hl7cdar2.*;
+import org.ehealth_connector.common.hl7cdar2.CD;
+import org.ehealth_connector.common.hl7cdar2.CE;
+import org.ehealth_connector.common.hl7cdar2.COCTMT230100UVIngredient;
+import org.ehealth_connector.common.hl7cdar2.COCTMT230100UVPackagedMedicine;
+import org.ehealth_connector.common.hl7cdar2.ED;
+import org.ehealth_connector.common.hl7cdar2.EIVLTS;
+import org.ehealth_connector.common.hl7cdar2.II;
+import org.ehealth_connector.common.hl7cdar2.INT;
+import org.ehealth_connector.common.hl7cdar2.IVLPQ;
+import org.ehealth_connector.common.hl7cdar2.IVLTS;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+import org.ehealth_connector.common.hl7cdar2.PIVLTS;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Act;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040ManufacturedProduct;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Material;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Product;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Section;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Supply;
+import org.ehealth_connector.common.hl7cdar2.PQ;
+import org.ehealth_connector.common.hl7cdar2.QTY;
+import org.ehealth_connector.common.hl7cdar2.SXCMTS;
+import org.ehealth_connector.common.hl7cdar2.SXPRTS;
+import org.ehealth_connector.common.hl7cdar2.StrucDocBr;
+import org.ehealth_connector.common.hl7cdar2.StrucDocParagraph;
+import org.ehealth_connector.common.hl7cdar2.StrucDocTable;
+import org.ehealth_connector.common.hl7cdar2.StrucDocTbody;
+import org.ehealth_connector.common.hl7cdar2.StrucDocTd;
+import org.ehealth_connector.common.hl7cdar2.StrucDocText;
+import org.ehealth_connector.common.hl7cdar2.StrucDocTh;
+import org.ehealth_connector.common.hl7cdar2.StrucDocThead;
+import org.ehealth_connector.common.hl7cdar2.StrucDocTr;
+import org.ehealth_connector.common.hl7cdar2.TEL;
+import org.ehealth_connector.common.hl7cdar2.TS;
 import org.ehealth_connector.common.utils.DateUtil;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
 
 /**
  * Generates the narrative text for CDA-CH-EMED documents.

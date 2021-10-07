@@ -186,8 +186,6 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 		final var stringWriter = new StringWriter();
 		marshaller.marshal(request.getRootElement(), stringWriter);
 
-		System.out.println(stringWriter.toString());
-
 		Map<String, String> outgoingHeaders = new HashMap<>();
 		outgoingHeaders.put("Accept", "application/soap+xml");
 		outgoingHeaders.put("Content-Type",
@@ -215,8 +213,6 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 		marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF8");
 		final var stringWriter = new StringWriter();
 		marshaller.marshal(request.getRootElement(), stringWriter);
-
-		System.out.println(stringWriter.toString());
 
 		Map<String, String> outgoingHeaders = new HashMap<>();
 		outgoingHeaders.put("Accept", "application/soap+xml");

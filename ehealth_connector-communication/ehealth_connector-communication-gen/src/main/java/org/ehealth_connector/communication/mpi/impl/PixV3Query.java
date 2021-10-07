@@ -267,7 +267,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 */
 	protected String getHomeCommunityPatientId(FhirPatient patient) {
 		for (final Identifier Identifier : patient.getIdentifier()) {
-			if (Identifier.getSystem().startsWith(FhirCommon.oidUrn)
+			if (Identifier.getSystem().startsWith(FhirCommon.OID_URN)
 					&& FhirCommon.removeUrnOidPrefix(Identifier.getSystem()).equals(this.homeCommunityOid)) {
 					return Identifier.getValue();
 			}

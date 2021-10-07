@@ -22,12 +22,6 @@
 			<version>2.0-ALPHA</version>
 		</dependency>
 		
-		<!-- model -->
-		<dependency>
-			<groupId>org.openhealthtools.mdht.uml.cda.ch</groupId>
-			<artifactId>org.openhealthtools.mdht.uml.cda.ch</artifactId>
-		</dependency>
-		
 		<!-- test stuff -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>

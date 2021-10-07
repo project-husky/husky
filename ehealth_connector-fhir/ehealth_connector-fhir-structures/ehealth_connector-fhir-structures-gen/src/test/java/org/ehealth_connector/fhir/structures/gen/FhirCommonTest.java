@@ -82,7 +82,7 @@ public class FhirCommonTest {
 	public void testAddUrnOid() {
 		final String ref = FhirCommon.addUrnOid(testOidString);
 		assertNotNull(ref);
-		assertTrue(ref.startsWith(FhirCommon.oidUrn));
+		assertTrue(ref.startsWith(FhirCommon.OID_URN));
 		assertTrue(ref.endsWith(testOidString));
 	}
 
@@ -94,7 +94,7 @@ public class FhirCommonTest {
 	public void testAddUrnUuid() {
 		final String ref = FhirCommon.addUrnUuid(testUuid);
 		assertNotNull(ref);
-		assertTrue(ref.startsWith(FhirCommon.uuidUrn));
+		assertTrue(ref.startsWith(FhirCommon.UUID_URN));
 		assertTrue(ref.endsWith(testUuid));
 	}
 

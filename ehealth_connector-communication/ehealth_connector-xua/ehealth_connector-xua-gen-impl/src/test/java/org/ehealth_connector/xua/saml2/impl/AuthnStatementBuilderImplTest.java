@@ -57,7 +57,7 @@ public class AuthnStatementBuilderImplTest {
 		final AuthnStatementType ref = builder.authnContextClassRef(testAuthnContextClassRef).create();
 		assertEquals(testAuthnContextClassRef,
 				((AuthnContextClassRefImpl) ref.getAuthnContext().getContent().get(0).getValue())
-						.getAuthnContextClassRef());
+						.getURI());
 	}
 
 	/**

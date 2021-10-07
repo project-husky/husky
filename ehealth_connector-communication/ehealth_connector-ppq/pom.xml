@@ -55,6 +55,11 @@
 			<version>2.0-ALPHA</version>
 		</dependency>
 
+		<dependency>
+				<groupId>javax.xml.ws</groupId>
+				<artifactId>jaxws-api</artifactId>
+		</dependency>
+
 		<!-- test stuff -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>

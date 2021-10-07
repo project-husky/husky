@@ -197,54 +197,6 @@ public enum PostalAddressUse {
 	}
 
 	/**
-	 * Gets the address use as postal address use.
-	 *
-	 * @return the address use as postal address use
-	 */
-	public org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse getAddressUseAsPostalAddressUse() {
-		org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.HP;
-		switch (this) {
-		case BAD:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.BAD;
-			break;
-		case CONFIDENTIAL:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.H;
-			break;
-		case OLD:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.H;
-			break;
-		case PRIVATE:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.H;
-			break;
-		case PRIVATE_PRIMARY:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.HP;
-			break;
-		case PRIVATE_VACATION:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.HV;
-			break;
-		case TEMPORARY:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.TMP;
-			break;
-		case BUSINESS:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.WP;
-			break;
-		case BUSINESS_DIRECT:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.WP;
-			break;
-		case PUBLIC:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.WP;
-			break;
-		case PHYSICAL:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.PHYS;
-			break;
-		case POSTAL:
-			retVal = org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse.PST;
-			break;
-		}
-		return retVal;
-	}
-
-	/**
 	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
 	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 *

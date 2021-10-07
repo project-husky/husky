@@ -205,7 +205,7 @@ public class IdentificatorBaseType implements Serializable {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		boolean retVal = true;
+		var retVal = true;
 		if (obj == null)
 			return false;
 		if (!(obj instanceof IdentificatorBaseType))
@@ -222,16 +222,22 @@ public class IdentificatorBaseType implements Serializable {
 		// }
 		// if (retVal)
 		// retVal = (this.displayable == obj.isDisplayable());
-		if (retVal)
-			if (this.extension == null)
+		if (retVal) {
+			if (this.extension == null) {
 				retVal = (((IdentificatorBaseType) obj).getExtension() == null);
-			else
+			} else {
 				retVal = this.extension.equals(((IdentificatorBaseType) obj).getExtension());
-		if (retVal)
-			if (this.root == null)
+			}
+		}
+
+		if (retVal) {
+			if (this.root == null) {
 				retVal = (((IdentificatorBaseType) obj).getRoot() == null);
-			else
+			} else {
 				retVal = this.root.equals(((IdentificatorBaseType) obj).getRoot());
+			}
+		}
+
 		return retVal;
 	}
 
@@ -409,22 +415,22 @@ public class IdentificatorBaseType implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		StringBuilder retVal = new StringBuilder();
+		var retVal = new StringBuilder();
 
 		if (getRoot() != null)
 			retVal.append(getRoot());
 		else
 			retVal.append("no root !!");
 
-		String extension = getExtension();
-		String assigningAuthorityName = getAssigningAuthorityName();
+		String extensionL = getExtension();
+		String assigningAuthorityNameL = getAssigningAuthorityName();
 
-		if (extension != null)
+		if (extensionL != null)
 			retVal.append(" / " + extension);
 
-		if (assigningAuthorityName != null) {
+		if (assigningAuthorityNameL != null) {
 			retVal.append(" (");
-			retVal.append(assigningAuthorityName);
+			retVal.append(assigningAuthorityNameL);
 			retVal.append(")");
 		}
 

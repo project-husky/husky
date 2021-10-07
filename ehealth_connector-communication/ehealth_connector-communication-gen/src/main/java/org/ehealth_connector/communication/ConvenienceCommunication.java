@@ -30,8 +30,6 @@ import javax.activation.DataHandler;
 import javax.mail.util.ByteArrayDataSource;
 
 import org.apache.camel.CamelContext;
-import org.apache.cxf.binding.soap.interceptor.SoapOutInterceptor;
-import org.apache.cxf.interceptor.AttachmentOutInterceptor;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.communication.AffinityDomain;
 import org.ehealth_connector.common.communication.AtnaConfig;
@@ -44,7 +42,7 @@ import org.ehealth_connector.common.communication.SubmissionSetMetadata.Submissi
 import org.ehealth_connector.common.enums.DocumentDescriptor;
 import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.utils.DateUtil;
-import org.ehealth_connector.common.utils.DateUtilMdht;
+import org.ehealth_connector.common.utils.OID;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.ehealth_connector.communication.xd.storedquery.AbstractStoredQuery;
@@ -54,16 +52,15 @@ import org.ehealth_connector.communication.xd.xdm.IndexHtm;
 import org.ehealth_connector.communication.xd.xdm.ReadmeTxt;
 import org.ehealth_connector.communication.xd.xdm.XdmContents;
 import org.ehealth_connector.xua.core.SecurityHeaderElement;
-import org.ehealth_connector.xua.exceptions.SerializeException;
-import org.ehealth_connector.xua.saml2.Assertion;
-import org.ehealth_connector.xua.serialization.impl.AssertionSerializerImpl;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Association;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationLabel;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationType;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Author;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Folder;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp.Precision;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.QueryRegistry;
@@ -72,18 +69,10 @@ import org.openehealth.ipf.commons.ihe.xds.core.requests.query.QueryReturnType;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.QueryResponse;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.Response;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.RetrievedDocumentSet;
-import org.openhealthtools.ihe.atna.auditor.XDSSourceAuditor;
-import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleContext;
-import org.openhealthtools.ihe.utils.OID;
-import org.openhealthtools.ihe.xds.XDSConstants;
-import org.openhealthtools.ihe.xds.metadata.AuthorType;
-import org.openhealthtools.ihe.xua.XUAAssertion;
-import org.openhealthtools.ihe.xua.context.XUAModuleContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.w3c.dom.Element;
 
 /**
  * <div class="en">The ConvenienceCommunication class provides a convenience API
@@ -153,8 +142,6 @@ public class ConvenienceCommunication extends CamelService {
 		super();
 		this.affinityDomain = null;
 		this.atnaConfigMode = AtnaConfigMode.UNSECURE;
-		// CustomHttpsTLSv11v12SocketFactory.setup();
-		// AbstractAxis2Util.initAxis2Config();
 	}
 
 	/**
@@ -166,8 +153,6 @@ public class ConvenienceCommunication extends CamelService {
 	public ConvenienceCommunication(AffinityDomain affinityDomain) {
 		this.affinityDomain = affinityDomain;
 		this.atnaConfigMode = AtnaConfigMode.UNSECURE;
-		// CustomHttpsTLSv11v12SocketFactory.setup();
-		// AbstractAxis2Util.initAxis2Config();
 	}
 
 	/**
@@ -197,8 +182,6 @@ public class ConvenienceCommunication extends CamelService {
 		this.atnaConfigMode = atnaConfigMode;
 		this.documentMetadataExtractionMode = documentMetadataExtractionMode;
 		this.submissionSetMetadataExtractionMode = submissionSetMetadataExtractionMode;
-		// CustomHttpsTLSv11v12SocketFactory.setup();
-		// AbstractAxis2Util.initAxis2Config();
 	}
 
 	/**
@@ -247,8 +230,9 @@ public class ConvenienceCommunication extends CamelService {
 			if (e.getCause() != null)
 				message = e.getCause().getMessage() + ": " + message;
 			lastError = "Error adding document from inputstream: " + message;
-			if (Util.isDebug())
-				e.printStackTrace();
+			if (Util.isDebug()) {
+				log.error(e.getMessage(), e);
+			}
 		}
 		if (retVal != null)
 			retVal.setDocumentDescriptor(desc);
@@ -291,8 +275,7 @@ public class ConvenienceCommunication extends CamelService {
 	 * @param folderEntryUUID   the entry uuid of the folder
 	 */
 	public void addDocumentToFolder(String documentEntryUUID, String folderEntryUUID) {
-		
-		Folder folder = new Folder();
+		var folder = new Folder();
 		folder.setEntryUuid(folderEntryUUID);
 		folder.setLogicalUuid(documentEntryUUID);
 		txnData.getFolders().add(folder);
@@ -308,9 +291,8 @@ public class ConvenienceCommunication extends CamelService {
 		if (txnData == null) {
 			txnData = new ProvideAndRegisterDocumentSet();
 		}
-		XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(this.atnaConfigMode == AtnaConfigMode.SECURE);
 
-		Folder folder = new Folder();
+		var folder = new Folder();
 		folder.assignEntryUuid();
 
 		if (folder.getUniqueId() == null) {
@@ -350,7 +332,6 @@ public class ConvenienceCommunication extends CamelService {
 		if (txnData == null) {
 			txnData = new ProvideAndRegisterDocumentSet();
 		}
-		XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(this.atnaConfigMode == AtnaConfigMode.SECURE);
 
 		DocumentMetadata docMetadata = null;
 
@@ -378,25 +359,6 @@ public class ConvenienceCommunication extends CamelService {
 	}
 
 	/**
-	 *
-	 * <div class="en">Method to add a xuser assertion to allow authentication on
-	 * XDS.b transactions.</div>
-	 *
-	 * @param assertion The assertion to be added to the soap header
-	 * @throws SerializeException if there are problems adding the assertion
-	 */
-	public void addXUserAssertion(Assertion assertion) throws SerializeException {
-		final XUAModuleContext xuaContext = XUAModuleContext.getContext();
-		final Element assertionElement = new AssertionSerializerImpl().toXmlElement(assertion);
-		final XUAAssertion ohtAssertion = new XUAAssertion(assertionElement);
-		xuaContext.cacheAssertion(ohtAssertion);
-		xuaContext.getConfig().getXUAEnabledActions().add(XDSConstants.PROVIDE_AND_REGISTER_DOCUMENT_SET_ACTION);
-		AuditorModuleContext.getContext().getConfig().setSystemUserName(ohtAssertion.getAtnaUsername());
-		xuaContext.setXUAEnabled(true);
-		xuaContext.setActiveAssertion(ohtAssertion);
-	}
-
-	/**
 	 * <div class="en">Cda fixes of OHT CDAExtraction bugs and extraction methods,
 	 * which are unsafe, because an XDS registry might use another value set.</div>
 	 *
@@ -411,9 +373,8 @@ public class ConvenienceCommunication extends CamelService {
 
 		// Fix the OHT for invalid empty authorTelecommunicationentries by
 		// deleting all authorTelecommunications
-		for (final Object object : docMetadata.getDocumentEntry().getAuthors()) {
-			final AuthorType at = (AuthorType) object;
-			at.getAuthorTelecommunication().clear();
+		for (final Author at : docMetadata.getDocumentEntry().getAuthors()) {
+			at.getAuthorTelecom().clear();
 		}
 
 		// Fix the OHT CDAExtraction bug(?) that generates Unique Ids, which are
@@ -622,9 +583,8 @@ public class ConvenienceCommunication extends CamelService {
 
 				// set submission time
 				if (subSet.getSubmissionTime() == null) {
-					subSet.setSubmissionTime(DateUtilMdht.nowAsTS().getValue());
+					subSet.setSubmissionTime(new Timestamp(DateUtil.nowAsZonedDate(), Precision.SECOND));
 				}
-				// txnData.saveMetadataToFile("C:/temp/metadata.xml");
 
 				// Use the PatientId of the first Document for the Submission set ID
 				if (subSet.getPatientId() == null) {
@@ -665,9 +625,8 @@ public class ConvenienceCommunication extends CamelService {
 
 				// set submission time
 				if (subSet.getSubmissionTime() == null) {
-					subSet.setSubmissionTime(DateUtilMdht.nowAsTS().getValue());
+					subSet.setSubmissionTime(new Timestamp(DateUtil.nowAsZonedDate(), Precision.SECOND));
 				}
-				// txnData.saveMetadataToFile("C:/temp/metadata.xml");
 
 				// Use the PatientId of the first Document for the Submission set ID
 				if (subSet.getPatientId() == null) {
@@ -691,7 +650,7 @@ public class ConvenienceCommunication extends CamelService {
 	 */
 	public AffinityDomain getAffinityDomain() {
 		if (affinityDomain == null)
-			affinityDomain = new AffinityDomain(null, null, new ArrayList<Destination>());
+			affinityDomain = new AffinityDomain(null, null, new ArrayList<>());
 		return affinityDomain;
 	}
 
@@ -797,29 +756,11 @@ public class ConvenienceCommunication extends CamelService {
 	public QueryResponse queryDocumentQuery(AbstractStoredQuery query, SecurityHeaderElement securityHeader,
 			QueryReturnType returnType, boolean secure)
 			throws Exception {
-		/*
-		 * lastError = "";
-		 * setDefaultKeystoreTruststore(affinityDomain.getRegistryDestination()); final
-		 * B_Consumer consumer = new B_Consumer(
-		 * affinityDomain.getRegistryDestination().getUri());
-		 * 
-		 * try { return consumer.invokeStoredQuery(query.getOhtStoredQuery(), false); }
-		 * catch (final Exception e) { log.error("Exception", e); String message =
-		 * e.getMessage(); if (e.getCause() != null) message = e.getCause().getMessage()
-		 * + ": " + message; lastError = "Query for documents failed: " + message; if
-		 * (Util.isDebug()) e.printStackTrace();
-		 * 
-		 * }
-		 */
-
 		final var queryRegistry = new QueryRegistry(query.getIpfQuery());
 		queryRegistry.setReturnType(returnType);
 
 		final var serverInLogger = "#serverInLogger";
 		final var serverOutLogger = "#serverOutLogger";
-		final var attachmentOutInterceptor = "#AttachmentOutInterceptor";
-		AttachmentOutInterceptor interceptor = new AttachmentOutInterceptor();
-		SoapOutInterceptor soapOutInterceptor = new SoapOutInterceptor(null);
 
 		final var endpoint = String.format(
 				"xds-iti18://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
@@ -827,15 +768,6 @@ public class ConvenienceCommunication extends CamelService {
 				serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
 				secure);
 		log.info("Sending request to '{}' endpoint", endpoint);
-
-		/*
-		 * Map<String, String> outgoingHeaders = new HashMap<>();
-		 * outgoingHeaders.put("Accept", "application/soap+xml");
-		 * outgoingHeaders.put("transfer-encoding", "chunked");
-		 * outgoingHeaders.put("Content-Type",
-		 * "application/soap+xml; charset=UTF-8; action=\"urn:ihe:iti:2007:RegistryStoredQuery\""
-		 * ); outgoingHeaders.put("Force MTOM", "false");
-		 */
 
 		final var exchange = send(endpoint, queryRegistry, securityHeader, null);
 
@@ -858,20 +790,6 @@ public class ConvenienceCommunication extends CamelService {
 	 */
 	public QueryResponse queryDocumentsReferencesOnly(AbstractStoredQuery query, SecurityHeaderElement securityHeader)
 			throws Exception {
-		/*
-		 * lastError = "";
-		 * setDefaultKeystoreTruststore(affinityDomain.getRegistryDestination()); final
-		 * B_Consumer consumer = new B_Consumer(
-		 * affinityDomain.getRegistryDestination().getUri());
-		 * 
-		 * try { return consumer.invokeStoredQuery(query.getOhtStoredQuery(), true); }
-		 * catch (final Exception e) { log.error("Exception", e); String message =
-		 * e.getMessage(); if (e.getCause() != null) message = e.getCause().getMessage()
-		 * + ": " + message; lastError = "Query for document references failed: " +
-		 * message; if (Util.isDebug()) e.printStackTrace();
-		 * 
-		 * } return null;
-		 */
 
 		final var queryRegistry = new QueryRegistry(query.getIpfQuery());
 
@@ -943,14 +861,6 @@ public class ConvenienceCommunication extends CamelService {
 				secure);
 		log.info("Sending request to '{}' endpoint", endpoint);
 
-		/*
-		 * Map<String, String> outgoingHeaders = new HashMap<>();
-		 * outgoingHeaders.put("Accept", "application/soap+xml");
-		 * outgoingHeaders.put("Content-Type",
-		 * "application/soap+xml; charset=UTF-8; action=\"urn:ihe:iti:2007:RetrieveDocumentSet\""
-		 * );
-		 */
-
 		final var exchange = send(endpoint, retrieveDocumentSet, securityHeader, null);
 
 		return exchange.getMessage().getBody(RetrievedDocumentSet.class);
@@ -992,24 +902,6 @@ public class ConvenienceCommunication extends CamelService {
 			System.setProperty("javax.net.ssl.trustStore", dest.getTrustStore());
 			System.setProperty("javax.net.ssl.trustStorePassword", dest.getTrustStorePassword());
 		}
-		// System.setProperty("javax.net.debug", "all");
-		// System.setProperty("https.protocols", "TLSv1.2");
-		// System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
-		// System.setProperty("https.ciphersuites",
-		// "TLS_RSA_WITH_AES_128_CBC_SHA,SSL_RSA_WITH_3DES_EDE_CBC_SHA");
-
-		// System.setProperty("https.ciphersuites",
-		// "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_DSS_WITH_AES_256_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_DSS_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_DSS_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_DSS_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,TLS_ECDHE_RSA_WITH_RC4_128_SHA,SSL_RSA_WITH_RC4_128_SHA,TLS_ECDH_ECDSA_WITH_RC4_128_SHA,TLS_ECDH_RSA_WITH_RC4_128_SHA,TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,SSL_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA,SSL_DHE_RSA_WITH_3DES_EDE_CBC_SHA,SSL_DHE_DSS_WITH_3DES_EDE_CBC_SHA,SSL_RSA_WITH_RC4_128_MD5");
-	}
-
-	/**
-	 * Setting up the communication endpoints for the affinity domain and the logger
-	 *
-	 * @param affinityDomain the affinity domain
-	 * @param atnaConfigMode the ATNA config mode (secure or unsecure)
-	 */
-	protected void setUp(AffinityDomain affinityDomain, AtnaConfigMode atnaConfigMode) {
-		XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(atnaConfigMode == AtnaConfigMode.SECURE);
 	}
 
 	/**
@@ -1062,7 +954,6 @@ public class ConvenienceCommunication extends CamelService {
 	public Response submit(SubmissionSetMetadata submissionSetMetadata, SecurityHeaderElement securityHeader)
 			throws Exception {
 		submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
-		// txnData.saveMetadataToFile("C:/temp/metadata_fhir.xml");
 		return submit(securityHeader);
 	}
 }

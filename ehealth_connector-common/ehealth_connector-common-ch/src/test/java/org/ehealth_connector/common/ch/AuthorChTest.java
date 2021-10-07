@@ -33,7 +33,7 @@ import org.ehealth_connector.common.ch.enums.AuthorSpeciality;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.PostalAddressUse;
 import org.ehealth_connector.common.testhelpers.AbstractTestHelper;
-import org.ehealth_connector.common.utils.DateUtilMdht;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -129,7 +129,7 @@ public class AuthorChTest {
 		testName2.setGiven(testGivenName2);
 		testName2.setFamily(testFamilyName2);
 
-		testDate1 = DateUtilMdht.date("28.02.2018");
+		testDate1 = DateUtil.parseDateyyyyMMdd("20180228");
 	}
 
 	@Test

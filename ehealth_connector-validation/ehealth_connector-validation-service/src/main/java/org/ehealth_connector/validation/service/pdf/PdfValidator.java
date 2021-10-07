@@ -34,10 +34,8 @@ import com.pdftools.NativeLibrary.COMPLIANCE;
 import com.pdftools.pdfvalidator.PdfError;
 import com.pdftools.pdfvalidator.PdfValidatorAPI;
 
-import net.sf.saxon.s9api.DocumentBuilder;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.SaxonApiException;
-import net.sf.saxon.s9api.XPathCompiler;
 import net.sf.saxon.s9api.XPathSelector;
 import net.sf.saxon.s9api.XdmItem;
 import net.sf.saxon.s9api.XdmNode;
@@ -50,13 +48,13 @@ import net.sf.saxon.s9api.XdmValue;
 public class PdfValidator {
 
 	/** Not installed error message */
-	public final static String ERR_NOT_INSTALLED = "PdfValidatorAPI not installed";
+	public static final String ERR_NOT_INSTALLED = "PdfValidatorAPI not installed";
 
 	/** Not initialized error message */
-	public final static String ERR_NOT_INITIALIZED = "PdfValidatorAPI initialization failed";
+	public static final String ERR_NOT_INITIALIZED = "PdfValidatorAPI initialization failed";
 
 	/** Invalid license error message */
-	public final static String ERR_INVALID_LICENSE = "Invalid PdfValidatorAPI license";
+	public static final String ERR_INVALID_LICENSE = "Invalid PdfValidatorAPI license";
 
 	/** Current configuration */
 	private final Configuration config;
@@ -118,7 +116,7 @@ public class PdfValidator {
 	 * @return the API version of the PDF validator
 	 */
 	public String getPdfValidatorVersion() {
-		String retVal = "none";
+		var retVal = "none";
 		if (pdfValidator == null) {
 			initialize("none");
 		}
@@ -151,34 +149,34 @@ public class PdfValidator {
 			} catch (UnsatisfiedLinkError ue) {
 				String errorMsg = ERR_NOT_INSTALLED + " (" + ue.getMessage() + ")";
 				log.error(errorMsg);
-				PdfValidationResultEntry failure = new PdfValidationResultEntry();
+				var failure = new PdfValidationResultEntry();
 				failure.setErrMsg(errorMsg, Severity.Error);
 				failure.setLineNumber(lineNumber);
 				pdfValidationResult.add(failure);
 			} catch (NoClassDefFoundError e) {
 				String errorMsg = ERR_NOT_INITIALIZED + " (" + e.getMessage() + ")";
 				log.error(errorMsg);
-				PdfValidationResultEntry failure = new PdfValidationResultEntry();
+				var failure = new PdfValidationResultEntry();
 				failure.setErrMsg(errorMsg, Severity.Error);
 				failure.setLineNumber(lineNumber);
 				pdfValidationResult.add(failure);
 			} catch (ExceptionInInitializerError e) {
 				String errorMsg = ERR_NOT_INITIALIZED + " (" + e.getMessage() + ")";
 				log.error(errorMsg);
-				PdfValidationResultEntry failure = new PdfValidationResultEntry();
+				var failure = new PdfValidationResultEntry();
 				failure.setErrMsg(errorMsg, Severity.Error);
 				failure.setLineNumber(lineNumber);
 				pdfValidationResult.add(failure);
 			}
 			if (pdfValidator != null) {
 				log.info("PdfValidatorAPI initialized (Version "
-						+ com.pdftools.pdfvalidator.PdfValidatorAPI.VERSION + ")");
+						+ com.pdftools.NativeLibrary.VERSION + ")");
 				pdfValidator.setNoTempFiles(true);
 				final String licenseKey = config.getLicenseKey();
 				if (!PdfValidatorAPI.setLicenseKey(licenseKey)) {
 					licenseErrorMsg = ERR_INVALID_LICENSE + " (" + licenseKey + ")";
 					log.error(licenseErrorMsg);
-					PdfValidationResultEntry failure = new PdfValidationResultEntry();
+					var failure = new PdfValidationResultEntry();
 					failure.setErrMsg(licenseErrorMsg, Severity.Error);
 					failure.setLineNumber(lineNumber);
 					pdfValidationResult.add(failure);
@@ -186,7 +184,7 @@ public class PdfValidator {
 			}
 
 			if (pdfValidator != null) {
-				String reportingLevel = config.getPdfReportingLevel();
+				var reportingLevel = config.getPdfReportingLevel();
 				if (reportingLevel == null)
 					reportingLevel = "";
 				switch (reportingLevel) {
@@ -260,7 +258,7 @@ public class PdfValidator {
 	 * @throws IOException
 	 */
 	public void validateCda(File cdaFile)
-			throws ConfigurationException, SaxonApiException, IOException {
+			throws SaxonApiException {
 		validateCda(new StreamSource(cdaFile));
 	}
 
@@ -274,21 +272,21 @@ public class PdfValidator {
 	 * @throws IOException
 	 */
 	public void validateCda(StreamSource cdaStream)
-			throws ConfigurationException, SaxonApiException, IOException {
+			throws SaxonApiException {
 
 		pdfValidationResult = new PdfValidationResult();
 		pdfValidationResult.setReportingLevel(reportingLevel);
 		pdfValidationResult.setPdfConformanceLevel(pdfConformanceLevel);
 
-		final Processor proc = new Processor(false);
+		final var proc = new Processor(false);
 
-		final DocumentBuilder builder = proc.newDocumentBuilder();
+		final var builder = proc.newDocumentBuilder();
 		builder.setLineNumbering(true);
 		XdmNode hl7Doc;
 
 		hl7Doc = builder.build(cdaStream);
 
-		final XPathCompiler xpath = proc.newXPathCompiler();
+		final var xpath = proc.newXPathCompiler();
 		xpath.declareNamespace("", "urn:hl7-org:v3");
 
 		final XPathSelector selector = xpath
@@ -314,8 +312,7 @@ public class PdfValidator {
 	 * @throws IOException
 	 * @throws ConfigurationException
 	 */
-	private void validatePdf(String pdfStrB64, String lineNumber)
-			throws IOException, ConfigurationException {
+	private void validatePdf(String pdfStrB64, String lineNumber) {
 
 		initialize(lineNumber);
 		if (pdfValidator != null) {
@@ -326,13 +323,13 @@ public class PdfValidator {
 						comlianceLevel);
 
 				if (pdfStrB64 == null) {
-					PdfValidationResultEntry failure = new PdfValidationResultEntry();
+					var failure = new PdfValidationResultEntry();
 					failure.setErrMsg("Base64 input string is null", Severity.Error);
 					pdfValidationResult.setIsDone();
 					pdfValidationResult.add(failure);
 				}
-				if (pdfStrB64.length() == 0) {
-					PdfValidationResultEntry failure = new PdfValidationResultEntry();
+				if (pdfStrB64 != null && pdfStrB64.length() == 0) {
+					var failure = new PdfValidationResultEntry();
 					failure.setErrMsg("Base64 input string is empty", Severity.Error);
 					pdfValidationResult.setIsDone();
 					pdfValidationResult.add(failure);
@@ -345,9 +342,9 @@ public class PdfValidator {
 							final String sErrorMsg = err.getMessage();
 							final int errorCode = err.getErrorCode();
 							if (errorCode != -2092890606) {
-								final BitSet tempBS = BitSet
+								final var tempBS = BitSet
 										.valueOf(ByteBuffer.allocate(4).putInt(errorCode).array());
-								Severity severity = Severity.Information;
+								var severity = Severity.Information;
 
 								// ErrorCode --> Bit 7 = Error, Bit 23 =
 								// Warnung,
@@ -361,7 +358,7 @@ public class PdfValidator {
 										.equals(sErrorMsg)) {
 									severity = Severity.CustomWarning;
 								}
-								PdfValidationResultEntry pdfVResult = new PdfValidationResultEntry();
+								var pdfVResult = new PdfValidationResultEntry();
 								pdfVResult.setErrMsg(sErrorMsg, severity);
 								pdfVResult.setLineNumber(lineNumber);
 								pdfValidationResult.add(pdfVResult);
@@ -369,7 +366,7 @@ public class PdfValidator {
 							err = pdfValidator.getNextError();
 						}
 					} else {
-						PdfValidationResultEntry success = new PdfValidationResultEntry();
+						var success = new PdfValidationResultEntry();
 						success.setLineNumber(lineNumber);
 						success.setErrMsg("PDF is compliant", Severity.Information);
 						pdfValidationResult.add(success);
@@ -378,7 +375,7 @@ public class PdfValidator {
 					pdfValidator.destroyObject();
 				}
 			} else {
-				PdfValidationResultEntry pdfVResult = new PdfValidationResultEntry();
+				var pdfVResult = new PdfValidationResultEntry();
 				pdfVResult.setErrMsg(licenseErrorMsg, Severity.Error);
 				pdfVResult.setLineNumber(lineNumber);
 				pdfValidationResult.add(pdfVResult);

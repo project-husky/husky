@@ -20,9 +20,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.ehealth_connector.cda.utils.CdaUtilMdhtTest;
 import org.ehealth_connector.common.enums.CodeSystems;
+import org.ehealth_connector.common.hl7cdar2.II;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
 /**
  * Test of CdaChUtil

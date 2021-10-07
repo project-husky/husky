@@ -30,11 +30,11 @@ import java.util.UUID;
 
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.utils.OID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
-import org.openhealthtools.ihe.utils.OID;
 
 /**
  * <div class="en">Testclass for

@@ -271,7 +271,7 @@ public class NameBaseType implements Serializable {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		boolean retVal = true;
+		var retVal = true;
 		if (obj == null)
 			return false;
 
@@ -356,8 +356,8 @@ public class NameBaseType implements Serializable {
 	 * @return the full name
 	 */
 	public String getFullName() {
-		StringBuilder sb = new StringBuilder();
-		String myDelimiter = " ";
+		var sb = new StringBuilder();
+		var myDelimiter = " ";
 		if (delimiter != null)
 			myDelimiter = delimiter;
 

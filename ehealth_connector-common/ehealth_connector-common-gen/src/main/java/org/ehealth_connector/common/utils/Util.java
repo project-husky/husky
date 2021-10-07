@@ -44,11 +44,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Stack;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
@@ -67,20 +67,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SystemUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.FeatureMap;
-import org.eclipse.emf.ecore.util.FeatureMap.Entry;
-import org.eclipse.emf.ecore.util.FeatureMapUtil;
-import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.emf.ecore.xmi.impl.GenericXMLResourceFactoryImpl;
-import org.eclipse.emf.ecore.xml.type.AnyType;
-import org.eclipse.emf.ecore.xml.type.XMLTypeDocumentRoot;
 import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
@@ -120,16 +110,8 @@ import org.ehealth_connector.common.mdht.ParticipantRole;
 import org.ehealth_connector.common.mdht.PlayingEntity;
 import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
 import org.ehealth_connector.common.mdht.enums.Signature;
-import org.openhealthtools.mdht.uml.cda.AssignedAuthor;
-import org.openhealthtools.mdht.uml.cda.AssignedEntity;
-import org.openhealthtools.mdht.uml.cda.Author;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.cda.EntryRelationship;
-import org.openhealthtools.mdht.uml.cda.StrucDocText;
-import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
-import org.w3c.dom.Document;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
@@ -137,6 +119,13 @@ import org.xml.sax.SAXException;
  */
 @Deprecated(forRemoval = true)
 public class Util {
+
+	/** The SLF4J logger instance. */
+	private static org.slf4j.Logger log = LoggerFactory.getLogger(Util.class);
+
+	private Util() {
+		throw new IllegalStateException("This is a utility class!");
+	}
 
 	/**
 	 * The StreamGobbler is a helper for the runExternalCommand method.
@@ -205,12 +194,8 @@ public class Util {
 	 * @return false if l is null, if l.size() smaller 1 or if l.get(0) is null.
 	 *         Otherwise, return true.
 	 */
-	@SuppressWarnings("rawtypes")
-	public static boolean atLeastOne(List l) {
-		if ((l == null) || (l.size() < 1) || (l.get(0) == null)) {
-			return false;
-		}
-		return true;
+	public static boolean atLeastOne(List<?> l) {
+		return l != null && !l.isEmpty() && l.get(0) != null;
 	}
 
 	/**
@@ -237,16 +222,21 @@ public class Util {
 	 */
 	public static InputStream convertNonAsciiText2Unicode(InputStream inputStream) {
 		InputStream retVal = null;
-		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+		var docBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder docBuilder;
-		try {
+		try (var outputStream = new ByteArrayOutputStream()) {
+			docBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+			docBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
 			docBuilder = docBuilderFactory.newDocumentBuilder();
-			Document document = docBuilder.parse(inputStream);
+			var document = docBuilder.parse(inputStream);
 			convertNonAsciiText2Unicode(document.getDocumentElement());
-			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 			Source xmlSource = new DOMSource(document);
 			Result outputTarget = new StreamResult(outputStream);
-			TransformerFactory.newInstance().newTransformer().transform(xmlSource, outputTarget);
+
+			var transformerFactory = TransformerFactory.newInstance();
+			transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+			transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
+			transformerFactory.newTransformer().transform(xmlSource, outputTarget);
 			retVal = new ByteArrayInputStream(outputStream.toByteArray());
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException
 				| TransformerFactoryConfigurationError e) {
@@ -261,19 +251,17 @@ public class Util {
 	 * @param node
 	 *            the node to be escaped
 	 */
-	@SuppressWarnings("deprecation")
 	public static void convertNonAsciiText2Unicode(Node node) {
 		if (node.getFirstChild() != null) {
 			String nodeValue = node.getFirstChild().getNodeValue();
 			if (nodeValue != null) {
 				nodeValue = nodeValue.replace("\n", "").replace("\t", "");
-				node.getFirstChild().setNodeValue(
-						org.apache.commons.lang3.StringEscapeUtils.escapeJava(nodeValue));
+				node.getFirstChild().setNodeValue(StringEscapeUtils.escapeJava(nodeValue));
 			}
 		}
-		NodeList nodeList = node.getChildNodes();
-		for (int i = 0; i < nodeList.getLength(); i++) {
-			Node currentNode = nodeList.item(i);
+		var nodeList = node.getChildNodes();
+		for (var i = 0; i < nodeList.getLength(); i++) {
+			var currentNode = nodeList.item(i);
 			if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
 				// calls this method for all the children which is Element
 				convertNonAsciiText2Unicode(currentNode);
@@ -324,27 +312,25 @@ public class Util {
 	 *            the assignedAuthor
 	 * @return the assignedEntity
 	 */
-	public static AssignedAuthor createAssignedAuthorFromAssignedEntity(AssignedEntity a) {
-		final AssignedAuthor asAut = CDAFactory.eINSTANCE.createAssignedAuthor();
+	public static POCDMT000040AssignedAuthor createAssignedAuthorFromAssignedEntity(POCDMT000040AssignedEntity a) {
+		final var asAut = new POCDMT000040AssignedAuthor();
 		// Copy Addresses
-		if (a.getAddrs() != null) {
-			asAut.getAddrs().addAll(EcoreUtil.copyAll(a.getAddrs()));
+		if (a.getAddr() != null) {
+			asAut.getAddr().addAll(a.getAddr());
 		}
 		// Copy Ids
-		if (a.getIds() != null) {
-			asAut.getIds().addAll(EcoreUtil.copyAll(a.getIds()));
+		if (a.getId() != null) {
+			asAut.getId().addAll(a.getId());
 		}
 		// Copy Telecoms
-		if (a.getTelecoms() != null) {
-			asAut.getTelecoms().addAll(EcoreUtil.copyAll(a.getTelecoms()));
+		if (a.getTelecom() != null) {
+			asAut.getTelecom().addAll(a.getTelecom());
 		}
 		// Copy Represented Organization
-		if (!a.getRepresentedOrganizations().isEmpty()) {
-			asAut.setRepresentedOrganization(
-					EcoreUtil.copy(a.getRepresentedOrganizations().get(0)));
-		}
+		asAut.setRepresentedOrganization(a.getRepresentedOrganization());
+
 		// Set Assigned Person
-		asAut.setAssignedPerson(EcoreUtil.copy(a.getAssignedPerson()));
+		asAut.setAssignedPerson(a.getAssignedPerson());
 
 		return asAut;
 	}
@@ -435,7 +421,7 @@ public class Util {
 	public static POCDMT000040Authenticator createAuthenticatorFromAuthor(
 			org.ehealth_connector.common.Author author) {
 		final POCDMT000040Author a = author.getAuthorMdht();
-		final POCDMT000040Authenticator auth = new POCDMT000040Authenticator();
+		final var auth = new POCDMT000040Authenticator();
 		auth.setAssignedEntity(createAssignedEntityFromAssignedAuthor(a.getAssignedAuthor()));
 
 		// Set signature Code to 's'
@@ -455,15 +441,15 @@ public class Util {
 	 *            <div class="de">the authenticator</div>
 	 * @return the Author
 	 */
-	public static Author createAuthorFromAuthenticator(
-			org.openhealthtools.mdht.uml.cda.Authenticator authenticator) {
-		final org.openhealthtools.mdht.uml.cda.Author a = CDAFactory.eINSTANCE.createAuthor();
+	public static POCDMT000040Author createAuthorFromAuthenticator(
+			POCDMT000040Authenticator authenticator) {
+		final var a = new POCDMT000040Author();
 
 		a.setAssignedAuthor(
 				createAssignedAuthorFromAssignedEntity(authenticator.getAssignedEntity()));
 
 		// Copy Time
-		a.setTime(EcoreUtil.copy(authenticator.getTime()));
+		a.setTime(authenticator.getTime());
 
 		return a;
 	}
@@ -476,15 +462,14 @@ public class Util {
 	 *            <div class="de">the authenticator</div>
 	 * @return the Author
 	 */
-	public static Author createAuthorFromLegalAuthenticator(
-			org.openhealthtools.mdht.uml.cda.LegalAuthenticator authenticator) {
-		final org.openhealthtools.mdht.uml.cda.Author a = CDAFactory.eINSTANCE.createAuthor();
+	public static POCDMT000040Author createAuthorFromLegalAuthenticator(POCDMT000040LegalAuthenticator authenticator) {
+		final var a = new POCDMT000040Author();
 
 		a.setAssignedAuthor(
 				createAssignedAuthorFromAssignedEntity(authenticator.getAssignedEntity()));
 
 		// Copy Time
-		a.setTime(EcoreUtil.copy(authenticator.getTime()));
+		a.setTime(authenticator.getTime());
 
 		return a;
 	}
@@ -554,14 +539,13 @@ public class Util {
 			final var on = new ON();
 			on.xmlContent = organization.getPrimaryName().getFullName();
 
-			if (!organization.getHl7CdaR2Pocdmt000040Organization().getName().isEmpty()) {
-				if (organization.getHl7CdaR2Pocdmt000040Organization().getName().get(0).getUse() != null) {
+			if (!organization.getHl7CdaR2Pocdmt000040Organization().getName().isEmpty()
+					&& organization.getHl7CdaR2Pocdmt000040Organization().getName().get(0).getUse() != null) {
 					on.getUse().clear();
 					for (String item : organization.getHl7CdaR2Pocdmt000040Organization().getName().get(0)
 							.getUse()) {
 						on.getUse().add(item);
 					}
-				}
 			}
 			mdhtCustOrg.setName(on);
 
@@ -627,7 +611,7 @@ public class Util {
 	 */
 	public static TEL createEMail(String eMail, TelecomAddressUse usage) {
 		final var tel = new TEL();
-		tel.getUse().add(usage.getAddressUseAsTelecommunicationAddressUse().getLiteral());
+		tel.getUse().add(usage.getCodeValue());
 		tel.setValue(TELECOMS_EMAIL_PREFIX + eMail);
 		return tel;
 	}
@@ -659,7 +643,7 @@ public class Util {
 	 */
 	public static TEL createFax(String faxNr, TelecomAddressUse usage) {
 		final var tel = new TEL();
-		tel.getUse().add(usage.getAddressUseAsTelecommunicationAddressUse().getLiteral());
+		tel.getUse().add(usage.getCodeValue());
 		tel.setValue(TELECOMS_FAX_PREFIX + faxNr);
 		return tel;
 	}
@@ -669,7 +653,7 @@ public class Util {
 	 *
 	 * @return the IVL_PQ
 	 */
-	public static IVLPQ createIVL_PQNullFlavorNA() {
+	public static IVLPQ createIVLPQNullFlavorNA() {
 		final var ivlpq = new IVLPQ();
 		ivlpq.nullFlavor = new LinkedList<>();
 		ivlpq.getNullFlavor().add(org.ehealth_connector.common.enums.NullFlavor.NOT_APPLICABLE_CODE);
@@ -681,7 +665,7 @@ public class Util {
 	 *
 	 * @return the IVL_PQ
 	 */
-	public static IVLPQ createIVL_PQNullFlavorNASK() {
+	public static IVLPQ createIVLPQNullFlavorNASK() {
 		final var ivlpq = new IVLPQ();
 		ivlpq.nullFlavor = new LinkedList<>();
 		ivlpq.getNullFlavor().add(org.ehealth_connector.common.enums.NullFlavor.NOT_ASKED_CODE);
@@ -693,7 +677,7 @@ public class Util {
 	 *
 	 * @return the IVL_PQ
 	 */
-	public static IVLPQ createIVL_PQNullFlavorUNK() {
+	public static IVLPQ createIVLPQNullFlavorUNK() {
 		final var ivlpq = new IVLPQ();
 		ivlpq.nullFlavor = new LinkedList<>();
 		ivlpq.getNullFlavor().add(org.ehealth_connector.common.enums.NullFlavor.UNKNOWN_CODE);
@@ -726,36 +710,12 @@ public class Util {
 	}
 
 	/**
-	 * <div class="en">Creates the non quoted MDHT StrucDocText.</div>
-	 *
-	 * @param xmlString
-	 *            <br>
-	 *            <div class="de"> xml string</div>
-	 * @return the StrucDocText
-	 */
-	public static StrucDocText createNonQotedStrucDocText(String xmlString) {
-		final Resource.Factory factory = new GenericXMLResourceFactoryImpl();
-		final XMLResource resource = (XMLResource) factory.createResource(null);
-		try {
-			resource.load(new URIConverter.ReadableInputStream("<text>" + xmlString + "</text>"),
-					null);
-		} catch (final IOException e) {
-			e.printStackTrace();
-		}
-		final XMLTypeDocumentRoot root = (XMLTypeDocumentRoot) resource.getContents().get(0);
-		final AnyType value = (AnyType) root.getMixed().getValue(0);
-		final StrucDocText text = CDAFactory.eINSTANCE.createStrucDocText();
-		text.getMixed().addAll(value.getMixed());
-		return text;
-	}
-
-	/**
 	 * <div class="en">Creates the MDHT IVXB_TS null flavor UNK.</div>
 	 *
 	 * @return the ivxb ts
 	 */
 	public static IVXBTS createNullFlavorUnknown() {
-		final IVXBTS ts = new IVXBTS();
+		final var ts = new IVXBTS();
 		ts.nullFlavor = new LinkedList<>();
 		ts.nullFlavor.add(org.ehealth_connector.common.enums.NullFlavor.UNKNOWN_CODE);
 		return ts;
@@ -783,7 +743,7 @@ public class Util {
 	 */
 	public static POCDMT000040CustodianOrganization createOrganizationFromCustodianOrganization(
 			POCDMT000040CustodianOrganization mdhtCO) {
-		final POCDMT000040CustodianOrganization o = new POCDMT000040CustodianOrganization();
+		final var o = new POCDMT000040CustodianOrganization();
 		if (mdhtCO != null) {
 			// Name
 			if (mdhtCO.getName() != null) {
@@ -813,7 +773,7 @@ public class Util {
 	 * @return the organization
 	 */
 	public static Organization createOrganizationFromParticipant(Participant p) {
-		final Organization o = new Organization(new OrganizationBaseType());
+		final var o = new Organization(new OrganizationBaseType());
 
 		// id, addrs, names, telecoms
 
@@ -948,7 +908,7 @@ public class Util {
 	 * @return the MDHT ED
 	 */
 	public static ED createReference(String reference) {
-		ED ed = new ED();
+		var ed = new ED();
 		ed.setReference(createReferenceTel(reference));
 		return ed;
 	}
@@ -1001,7 +961,7 @@ public class Util {
 	public static TEL createTel(String telNr, TelecomAddressUse usage) {
 		final var tel = new TEL();
 		if (usage != null) {
-			tel.getUse().add(usage.getAddressUseAsTelecommunicationAddressUse().getLiteral());
+			tel.getUse().add(usage.getCodeValue());
 		}
 		tel.setValue(TELECOMS_PHONE_PREFIX + telNr.replaceAll("\\s+", ""));
 		return tel;
@@ -1025,7 +985,7 @@ public class Util {
 		final var tel = new TEL();
 		if (usage != null) {
 			tel.getUse().clear();
-			tel.getUse().add(usage.getAddressUseAsTelecommunicationAddressUse().getLiteral());
+			tel.getUse().add(usage.getCodeValue());
 		}
 		tel.setValue(endpointIdentifier);
 		return tel;
@@ -1045,7 +1005,7 @@ public class Util {
 		while (allAppenders.hasMoreElements()) {
 			Object nextElement = allAppenders.nextElement();
 			if (nextElement instanceof org.apache.log4j.FileAppender) {
-				org.apache.log4j.FileAppender fileAppender = (org.apache.log4j.FileAppender) nextElement;
+				var fileAppender = (org.apache.log4j.FileAppender) nextElement;
 				fileAppender.setImmediateFlush(true);
 			}
 		}
@@ -1053,7 +1013,7 @@ public class Util {
 		while (allAppenders.hasMoreElements()) {
 			Object nextElement = allAppenders.nextElement();
 			if (nextElement instanceof org.apache.log4j.FileAppender) {
-				org.apache.log4j.FileAppender fileAppender = (org.apache.log4j.FileAppender) nextElement;
+				var fileAppender = (org.apache.log4j.FileAppender) nextElement;
 				fileAppender.setImmediateFlush(true);
 			}
 		}
@@ -1107,26 +1067,10 @@ public class Util {
 
 			input.close();
 		} catch (final IOException e1) {
-			e1.printStackTrace();
+			log.error(e1.getMessage(), e1);
 		}
 
 		return targetPath;
-	}
-
-	/**
-	 * <div class="en">Extract string from a non quoted MDHT StrucDocText.</div>
-	 *
-	 * @param strucDocText
-	 *            <br>
-	 *            <div class="en">the StrucDocText</div>
-	 * @return the string
-	 */
-	public static String extractStringFromNonQuotedStrucDocText(StrucDocText strucDocText) {
-		StringBuilder sb = new StringBuilder();
-		if (strucDocText != null) {
-			sb = traverse2(strucDocText.getMixed(), sb);
-		}
-		return sb.toString();
 	}
 
 	/**
@@ -1158,7 +1102,7 @@ public class Util {
 			}
 		}
 
-		final String documentOid = org.openhealthtools.ihe.utils.OID
+		final String documentOid = OID
 				.createOIDGivenRoot("ehealthconnctor");
 		// Creates a random extension ID to identify the document
 
@@ -1183,11 +1127,11 @@ public class Util {
 			baos = new ByteArrayOutputStream();
 			oos = new ObjectOutputStream(baos);
 			oos.writeObject(object);
-			var md = MessageDigest.getInstance("MD5");
+			var md = MessageDigest.getInstance("SHA-512");
 			byte[] thedigest = md.digest(baos.toByteArray());
 			retVal = java.util.Arrays.hashCode(thedigest);
 		} catch (IOException | NoSuchAlgorithmException e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 		return retVal;
 	}
@@ -1264,8 +1208,7 @@ public class Util {
 	public static String getCurrentDirectory() {
 		var retVal = "";
 		var temp = new File(retVal);
-		if (temp != null)
-			retVal = temp.getAbsolutePath();
+		retVal = temp.getAbsolutePath();
 
 		if (!retVal.endsWith(FileUtil.getPlatformSpecificPathSeparator()))
 			retVal += FileUtil.getPlatformSpecificPathSeparator();
@@ -1380,7 +1323,7 @@ public class Util {
 
 			for (int i = pathsToCheck.length - 1; i >= 0; i--) {
 				String path = pathsToCheck[i];
-				File tmp = new File(path);
+				var tmp = new File(path);
 				if (tmp.exists() && tmp.isDirectory() && tmp.canRead()) {
 					resultList.add(path);
 				}
@@ -1424,10 +1367,10 @@ public class Util {
 	 *         <div class="fr"></div>
 	 */
 	public static String getTempDirectory() {
-		final String envVariable = "eHCTempPath";
+		final var envVariable = "eHCTempPath";
 		String tempDirectoryPath = null;
 
-		final Logger log = LogManager.getLogger(Util.class);
+		final var log = LogManager.getLogger(Util.class);
 
 		try {
 			final String env = System.getenv(envVariable);
@@ -1439,7 +1382,7 @@ public class Util {
 				tempDirectoryPath = FileUtil.getPlatformSpecificPathSeparator() + "temp";
 				log.debug("Trying to use hardcoded temp folder: " + tempDirectoryPath);
 			}
-			final File uniqueFile = File.createTempFile("eHC", ".tmp", new File(tempDirectoryPath));
+			final var uniqueFile = File.createTempFile("eHC", ".tmp", new File(tempDirectoryPath));
 			FileUtils.writeStringToFile(uniqueFile, "write check");
 			FileUtils.deleteQuietly(uniqueFile);
 		} catch (final Exception e) {
@@ -1448,28 +1391,6 @@ public class Util {
 		}
 		log.info("Temp folder: " + tempDirectoryPath);
 		return tempDirectoryPath;
-	}
-
-	/**
-	 * Extract text from an Ecore FeatureMap.
-	 *
-	 * @param featureMap
-	 *            the featureMap
-	 * @return the text as String
-	 */
-	@SuppressWarnings("unused")
-	private static String getText(FeatureMap featureMap) {
-		final StringBuffer buffer = new StringBuffer("");
-		for (final FeatureMap.Entry entry : featureMap) {
-			if (FeatureMapUtil.isText(entry)) {
-				buffer.append(entry.getValue().toString());
-			} else {
-				if (entry.getEStructuralFeature() instanceof EReference) {
-					buffer.append("<" + entry.getEStructuralFeature().getName() + ">");
-				}
-			}
-		}
-		return buffer.toString().trim();
 	}
 
 	/**
@@ -1668,17 +1589,17 @@ public class Util {
 			res = logConfig.toURI().toURL();
 		}
 		if (res == null) {
-			System.out.print("***ERROR: No valid log4j config selected\n\n");
+			log.error("***ERROR: No valid log4j config selected\n\n");
 		} else {
 			log4jConfigFn = res.getFile();
 			DOMConfigurator.configure(res);
 
 			Util.enableImmediateLogging(LogManager.getLogger(myClass));
-			System.out.print("log4j config: " + log4jConfigFn + "\n");
+			log.info("log4j config: {}\n", log4jConfigFn);
 		}
 
 		if (LogManager.getLogger(myClass) == null)
-			System.out.print("***ERROR: No valid log4j config selected\n\n");
+			log.error("***ERROR: No valid log4j config selected\n\n");
 
 	}
 
@@ -1689,9 +1610,9 @@ public class Util {
 	 *            the EntryRelationship
 	 * @return true if the EntryRelationship is a comment, false otherwise
 	 */
-	public static boolean isComment(EntryRelationship er) {
-		return er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ) && er.getInversionInd() != null
-				&& er.getInversionInd().booleanValue();
+	public static boolean isComment(POCDMT000040EntryRelationship er) {
+		return er.getTypeCode().equals(XActRelationshipEntryRelationship.SUBJ) && er.isInversionInd() != null
+				&& er.isInversionInd().booleanValue();
 	}
 
 	/**
@@ -1845,7 +1766,7 @@ public class Util {
 		// String homeDirectory = System.getProperty("user.home");
 		Process process;
 		process = Runtime.getRuntime().exec(cmd);
-		StreamGobbler streamGobbler = new StreamGobbler(process.getInputStream(),
+		var streamGobbler = new StreamGobbler(process.getInputStream(),
 				System.out::println);
 		final ExecutorService ex = Executors.newSingleThreadExecutor();
 		ex.submit(streamGobbler);
@@ -1877,117 +1798,6 @@ public class Util {
 	 */
 	public static InputStream string2InputStream(String inputStr) {
 		return new ByteArrayInputStream(inputStr.getBytes(StandardCharsets.UTF_8));
-	}
-
-	/**
-	 * Tranverses through a given FeatureMap and prints an XML representations
-	 * of this map (only for test purposes).
-	 *
-	 * @param root
-	 *            the root of the FeatureMap
-	 */
-	@SuppressWarnings("unused")
-	private static void traverse(FeatureMap root) {
-		final Stack<FeatureMap> stack = new Stack<>();
-		final Stack<String> stack2 = new Stack<>();
-		stack.push(root);
-		while (!stack.isEmpty()) {
-			final FeatureMap featureMap = stack.pop();
-			for (int i = featureMap.size() - 1; i >= 0; i--) {
-				final Entry entry = featureMap.get(i);
-				if (entry.getEStructuralFeature() instanceof EReference) {
-					System.out.print("<" + entry.getEStructuralFeature().getName());
-					final AnyType anyType = (AnyType) entry.getValue();
-					traverseAttributes(anyType.getAnyAttribute());
-					System.out.print(">");
-					stack.push(anyType.getMixed());
-
-				} else {
-					// if (entry.getValue() != null && !stack2.isEmpty()) {
-					// System.out.print("</"+stack2.pop()+">");}
-					// //Text between the Elements
-					if (entry.getValue() != null) {
-						final String value = entry.getValue().toString();
-						if (value.trim().length() > 0) {
-							System.out.print(value);
-						}
-					} else {
-						System.out.println(" }");
-					}
-				}
-				if ((entry.getValue() != null) && !stack2.isEmpty()) {
-					System.out.print("</" + stack2.pop() + ">");
-				}
-			}
-		}
-	}
-
-	/**
-	 * Tranverses through a given FeatureMap and updates a given StringBuilder
-	 * with the XML representation of the map.
-	 *
-	 * @param featureMap
-	 *            the Ecore FeatureMap
-	 * @param sb
-	 *            the StringBuilder
-	 * @return the updated StringBuilder
-	 */
-	private static StringBuilder traverse2(FeatureMap featureMap, StringBuilder sb) {
-		for (int i = 0; i <= (featureMap.size() - 1); i++) {
-			final Entry entry = featureMap.get(i);
-			if (entry.getEStructuralFeature() instanceof EReference) {
-				sb.append("<" + entry.getEStructuralFeature().getName());
-				final AnyType anyType = (AnyType) entry.getValue();
-				// sb = traverseAttributes2(anyType.getAnyAttribute(), sb);
-				traverseAttributes2(anyType.getAnyAttribute(), sb);
-				sb.append(">");
-				traverse2(anyType.getMixed(), sb);
-				sb.append("</" + entry.getEStructuralFeature().getName() + ">");
-			} else {
-				// //Text between the Elements
-				if (entry.getValue() != null) {
-					final String value = entry.getValue().toString();
-					if (value.trim().length() > 0) {
-						sb.append(value);
-					}
-				} else {
-					System.out.println(" }");
-				}
-			}
-		}
-		return sb;
-	}
-
-	/**
-	 * Recursive function to tranverse all attributes and print the contents
-	 * (only for test purposes).
-	 *
-	 * @param anyAttribute
-	 *            the Ecore FeatureMap
-	 */
-	private static void traverseAttributes(FeatureMap anyAttribute) {
-		for (final Entry entry : anyAttribute) {
-			System.out.print(" " + entry.getEStructuralFeature().getName() + "=\""
-					+ entry.getValue().toString() + "\"");
-		}
-	}
-
-	/**
-	 * Recursive function to tranverse all attributes and update the given
-	 * StringBuilder with an XML representation of the attributes.
-	 *
-	 * @param anyAttribute
-	 *            the Ecore FeatureMap
-	 * @param sb
-	 *            the StringBuilder
-	 * @return the updated StringBuilder
-	 */
-	private static StringBuilder traverseAttributes2(FeatureMap anyAttribute, StringBuilder sb) {
-		for (final Entry entry : anyAttribute) {
-			sb.append(" " + entry.getEStructuralFeature().getName() + "=\""
-					+ entry.getValue().toString() + "\"");
-		}
-		return sb;
 	}
 
 	public static Random getRand() {

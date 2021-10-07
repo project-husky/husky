@@ -16,10 +16,13 @@
  */
 package org.ehealth_connector.common.mdht;
 
+import javax.xml.bind.JAXBElement;
+
+import org.ehealth_connector.common.hl7cdar2.BL;
+import org.ehealth_connector.common.hl7cdar2.IVLPQ;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040ReferenceRange;
+import org.ehealth_connector.common.hl7cdar2.PQ;
 import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
-import org.openhealthtools.mdht.uml.hl7.datatypes.BL;
-import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 
 /**
  * The Class ReferenceRange. A reference range or reference interval is the
@@ -89,19 +92,27 @@ public class ReferenceRange extends ObservationRange {
 		var highValue = "";
 		var highUnit = "";
 
-		IVL_PQ tempIvl = null;
+		IVLPQ tempIvl = null;
 		if (mRr != null && mRr.getObservationRange() != null && mRr.getObservationRange().getValue() != null) {
-			if (mRr.getObservationRange().getValue() instanceof IVL_PQ)
-				tempIvl = (IVL_PQ) mRr.getObservationRange().getValue();
+			if (mRr.getObservationRange().getValue() instanceof IVLPQ)
+				tempIvl = (IVLPQ) mRr.getObservationRange().getValue();
 			if (mRr.getObservationRange().getValue() instanceof BL)
-				value = ((BL) mRr.getObservationRange().getValue()).getValue().toString();
+				value = ((BL) mRr.getObservationRange().getValue()).isValue().toString();
 		}
 
 		if (tempIvl != null) {
-			lowValue = tempIvl.getLow().getValue().toString();
-			lowUnit = tempIvl.getLow().getUnit();
-			highValue = tempIvl.getHigh().getValue().toString();
-			highUnit = tempIvl.getHigh().getUnit();
+			for (JAXBElement<? extends PQ> pqEl : tempIvl.getRest()) {
+				if (pqEl != null && pqEl.getName() != null) {
+					if ("low".equalsIgnoreCase(pqEl.getName().getLocalPart())) {
+						lowValue = tempIvl.getValue();
+						lowUnit = tempIvl.getUnit();
+					} else if ("high".equalsIgnoreCase(pqEl.getName().getLocalPart())) {
+						highValue = tempIvl.getValue();
+						highUnit = tempIvl.getUnit();
+					}
+				}
+			}
+
 			if (lowUnit == null)
 				lowUnit = tempIvl.getUnit();
 			if (highUnit == null)

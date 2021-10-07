@@ -29,6 +29,10 @@ import org.w3c.dom.Element;
  */
 public final class XmlAppender {
 
+	private XmlAppender() {
+		throw new IllegalStateException("This is a utility class!");
+	}
+
 	/**
 	 *
 	 * <!-- @formatter:off -->

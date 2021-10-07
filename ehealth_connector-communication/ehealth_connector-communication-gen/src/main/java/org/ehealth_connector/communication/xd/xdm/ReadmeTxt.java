@@ -35,9 +35,14 @@ import org.slf4j.LoggerFactory;
 public class ReadmeTxt {
 
 	/** The Constant TEMPLATE_EN. */
-	public static final String TEMPLATE_EN = "Vendor name: {0}\n" + "Product: {1}\n"
-			+ "Module: {2}\n" + "Version: {3}\n" + "Contact info: See {4}\n"
-			+ "Creation timestamp: {5}\n";
+	public static final String TEMPLATE_EN = """
+			Vendor name: {0}
+			Product: {1}
+			Module: {2}
+			Version: {3}
+			Contact info: See {4}
+			Creation timestamp: {5}
+			""";
 
 	/** The SLF4J logger instance. */
 	private final Logger log = LoggerFactory.getLogger(getClass());

@@ -27,10 +27,10 @@ import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 import org.ehealth_connector.common.hl7cdar2.TEL;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.OID;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
-import org.openhealthtools.ihe.utils.OID;
 
 /**
  * Represents the metadata for a submission set (which can hold one or more

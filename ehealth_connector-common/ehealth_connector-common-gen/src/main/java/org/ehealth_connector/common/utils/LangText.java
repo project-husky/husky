@@ -33,7 +33,7 @@ public class LangText implements Serializable {
 	 */
 	private static final long serialVersionUID = 2813370207249945398L;
 	private LanguageCode langCode;
-	private String langText;
+	private String text;
 
 	/**
 	 * Instantiates a new lang text. Default constructor.
@@ -52,7 +52,7 @@ public class LangText implements Serializable {
 	 */
 	public LangText(LanguageCode lang, String text) {
 		langCode = lang;
-		langText = text;
+		this.text = text;
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class LangText implements Serializable {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		boolean retVal = true;
+		var retVal = true;
 		if (obj == null)
 			return false;
 		if (!(obj instanceof LangText))
@@ -81,10 +81,10 @@ public class LangText implements Serializable {
 				retVal = this.langCode.equals(((LangText) obj).getLangCode());
 		}
 		if (retVal) {
-			if (this.langText == null)
+			if (this.text == null)
 				retVal = (((LangText) obj).getLangText() == null);
 			else
-				retVal = this.langText.equals(((LangText) obj).getLangText());
+				retVal = this.text.equals(((LangText) obj).getLangText());
 		}
 		return retVal;
 	}
@@ -104,7 +104,7 @@ public class LangText implements Serializable {
 	 * @return the langText the text
 	 */
 	public String getLangText() {
-		return langText;
+		return text;
 	}
 
 	/*
@@ -122,6 +122,6 @@ public class LangText implements Serializable {
 	}
 
 	public void setLangText(String langText) {
-		this.langText = langText;
+		this.text = langText;
 	}
 }

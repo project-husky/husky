@@ -17,6 +17,7 @@
 package org.ehealth_connector.xua.saml2.impl;
 
 import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
 
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.ehealth_connector.xua.saml2.SimpleBuilder;
@@ -71,8 +72,7 @@ public class ConditionXacmlBuilderImpl implements SimpleBuilder<ConditionType>,
 			SubjectAttributeDesignatorTypeImpl internalObj = (SubjectAttributeDesignatorTypeImpl) expType;
 			var subjectAttrDesign = new SubjectAttributeDesignatorType();
 			subjectAttrDesign.setAttributeId(internalObj.getAttributeId());
-			subjectAttrDesign
-					.setDataType(new DataTypeAttributeBuilderImpl().create(internalObj.getDataType()));
+			subjectAttrDesign.setDataType(new DataTypeAttributeBuilderImpl().create(internalObj.getDataType()));
 			subjectAttrDesign.setIssuer(internalObj.getIssuer());
 			subjectAttrDesign.setMustBePresent(internalObj.getMustBePresent());
 			subjectAttrDesign.setSubjectCategory(internalObj.getSubjectCategory());
@@ -113,49 +113,47 @@ public class ConditionXacmlBuilderImpl implements SimpleBuilder<ConditionType>,
 
 			return new JAXBElement<>(expType.getElementQName(), ApplyType.class, applyType);
 		} else if (expType instanceof AttributeDesignatorTypeImpl) {
-			AttributeDesignatorTypeImpl internalObj = (AttributeDesignatorTypeImpl) expType;
-
-			if (internalObj.getElementQName() != null) {
-				if ("ActionAttributeDesignator".equalsIgnoreCase(internalObj.getElementQName().getLocalPart())) {
-					var attrDesign = new ActionAttributeDesignatorType();
-					attrDesign.setAttributeId(internalObj.getAttributeId());
-					attrDesign.setDataType(new DataTypeAttributeBuilderImpl().create(internalObj.getDataType()));
-					attrDesign.setIssuer(internalObj.getIssuer());
-					attrDesign.setMustBePresent(internalObj.getMustBePresent());
-
-					return new JAXBElement<>(expType.getElementQName(), ActionAttributeDesignatorType.class,
-							attrDesign);
-				} else if ("EnvironmentAttributeDesignator"
-						.equalsIgnoreCase(internalObj.getElementQName().getLocalPart())) {
-					var envAttr = new EnvironmentAttributeDesignatorType();
-					envAttr.setAttributeId(internalObj.getAttributeId());
-					envAttr.setDataType(new DataTypeAttributeBuilderImpl().create(internalObj.getDataType()));
-					envAttr.setIssuer(internalObj.getIssuer());
-					envAttr.setMustBePresent(internalObj.getMustBePresent());
-					return new JAXBElement<>(expType.getElementQName(), EnvironmentAttributeDesignatorType.class,
-							envAttr);
-				} else if ("ResourceAttributeDesignator"
-						.equalsIgnoreCase(internalObj.getElementQName().getLocalPart())) {
-					var resAttr = new ResourceAttributeDesignatorType();
-					resAttr.setAttributeId(internalObj.getAttributeId());
-					resAttr.setDataType(new DataTypeAttributeBuilderImpl().create(internalObj.getDataType()));
-					resAttr.setIssuer(internalObj.getIssuer());
-					resAttr.setMustBePresent(internalObj.getMustBePresent());
-					return new JAXBElement<>(expType.getElementQName(), ResourceAttributeDesignatorType.class, resAttr);
-				} else if ("SubjectAttributeDesignator"
-						.equalsIgnoreCase(internalObj.getElementQName().getLocalPart())) {
-					var envAttr = new SubjectAttributeDesignatorType();
-					envAttr.setAttributeId(internalObj.getAttributeId());
-					envAttr.setDataType(new DataTypeAttributeBuilderImpl().create(internalObj.getDataType()));
-					envAttr.setIssuer(internalObj.getIssuer());
-					envAttr.setMustBePresent(internalObj.getMustBePresent());
-					return new JAXBElement<>(expType.getElementQName(), SubjectAttributeDesignatorType.class, envAttr);
-				}
-			}
+			return getJaxbElementForExpression((AttributeDesignatorTypeImpl) expType, expType.getElementQName());
 		}
-		
+
 		return null;
-		
+
+	}
+
+	private JAXBElement<?> getJaxbElementForExpression(AttributeDesignatorTypeImpl internalObj, QName expQName) {
+		if ("ActionAttributeDesignator".equalsIgnoreCase(internalObj.getElementQName().getLocalPart())) {
+			var attrDesign = new ActionAttributeDesignatorType();
+			attrDesign.setAttributeId(internalObj.getAttributeId());
+			attrDesign.setDataType(new DataTypeAttributeBuilderImpl().create(internalObj.getDataType()));
+			attrDesign.setIssuer(internalObj.getIssuer());
+			attrDesign.setMustBePresent(internalObj.getMustBePresent());
+
+			return new JAXBElement<>(expQName, ActionAttributeDesignatorType.class, attrDesign);
+		} else if ("EnvironmentAttributeDesignator".equalsIgnoreCase(internalObj.getElementQName().getLocalPart())) {
+			var envAttr = new EnvironmentAttributeDesignatorType();
+			envAttr.setAttributeId(internalObj.getAttributeId());
+			envAttr.setDataType(new DataTypeAttributeBuilderImpl().create(internalObj.getDataType()));
+			envAttr.setIssuer(internalObj.getIssuer());
+			envAttr.setMustBePresent(internalObj.getMustBePresent());
+			return new JAXBElement<>(expQName, EnvironmentAttributeDesignatorType.class, envAttr);
+		} else if ("ResourceAttributeDesignator".equalsIgnoreCase(internalObj.getElementQName().getLocalPart())) {
+			var resAttr = new ResourceAttributeDesignatorType();
+			resAttr.setAttributeId(internalObj.getAttributeId());
+			resAttr.setDataType(new DataTypeAttributeBuilderImpl().create(internalObj.getDataType()));
+			resAttr.setIssuer(internalObj.getIssuer());
+			resAttr.setMustBePresent(internalObj.getMustBePresent());
+			return new JAXBElement<>(expQName, ResourceAttributeDesignatorType.class, resAttr);
+		} else if ("SubjectAttributeDesignator".equalsIgnoreCase(internalObj.getElementQName().getLocalPart())) {
+			var envAttr = new SubjectAttributeDesignatorType();
+			envAttr.setAttributeId(internalObj.getAttributeId());
+			envAttr.setDataType(new DataTypeAttributeBuilderImpl().create(internalObj.getDataType()));
+			envAttr.setIssuer(internalObj.getIssuer());
+			envAttr.setMustBePresent(internalObj.getMustBePresent());
+			return new JAXBElement<>(expQName, SubjectAttributeDesignatorType.class, envAttr);
+		}
+
+		return null;
+
 	}
 
 	@Override

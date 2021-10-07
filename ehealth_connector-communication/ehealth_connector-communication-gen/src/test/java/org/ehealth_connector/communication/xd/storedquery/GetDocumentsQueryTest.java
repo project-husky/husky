@@ -22,7 +22,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.ehealth_connector.communication.testhelper.XdsTestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryException;
 
 /**
  * Test of class GetDocumentsQuery
@@ -46,7 +45,7 @@ class GetDocumentsQueryTest extends XdsTestUtils {
 	 * @throws MalformedStoredQueryException
 	 */
 	@Test
-	void testGetDocumentsQueryStringArrayBoolean() throws MalformedStoredQueryException {
+	void testGetDocumentsQueryStringArrayBoolean() {
 		final GetDocumentsQuery q = new GetDocumentsQuery(docIds, true);
 
 		assertTrue(

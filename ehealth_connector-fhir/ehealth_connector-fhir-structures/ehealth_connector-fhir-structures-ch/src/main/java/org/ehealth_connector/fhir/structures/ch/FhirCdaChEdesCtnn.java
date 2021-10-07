@@ -50,49 +50,49 @@ public class FhirCdaChEdesCtnn /* extends AbstractFhirCdaCh */ {
 
 		/** The confidentiality. */
 		@Child(name = "confidentiality")
-		@Extension(url = FhirCommon.urnUseAsConfidentiality, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_CONFIDENTIALITY, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "confidentiality")
 		private Reference confidentiality;
 
 		/** The custodian. */
 		@Child(name = "custodian")
-		@Extension(url = FhirCommon.urnUseAsCustodian, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_CUSTODIAN, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "custodian")
 		private Reference custodian;
 
 		/** The doc author. */
 		@Child(name = "docAuthor")
-		@Extension(url = FhirCommon.urnUseAsAuthor, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_AUTHOR, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "author")
 		private Reference docAuthor;
 
 		/** The doc language. */
 		@Child(name = "docLanguage")
-		@Extension(url = FhirCommon.urnUseAsLanguage, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_LANGUAGE, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "docLanguage")
 		private Reference docLanguage;
 
 		/** The doc type. */
 		@Child(name = "docType")
-		@Extension(url = FhirCommon.urnUseAsDocType, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_DOC_TYPE, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "docType")
 		private Reference docType;
 
 		/** The legal authenticator. */
 		@Child(name = "legalAuthenticator")
-		@Extension(url = FhirCommon.urnUseAsLegalAuthenticator, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_LEGAL_AUTHENTICATOR, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "legalAuthenticator")
 		private Reference legalAuthenticator;
 
 		/** The patient. */
 		@Child(name = "patient")
-		@Extension(url = FhirCommon.urnUseAsPatient, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_PATIENT, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "patient")
 		private Reference patient;
 
 		/** The comment. */
 		@Child(name = "comment")
-		@Extension(url = FhirCommon.urnUseAsComment, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_COMMENT, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "comment")
 		private Reference comment;
 
@@ -199,7 +199,7 @@ public class FhirCdaChEdesCtnn /* extends AbstractFhirCdaCh */ {
 		 *            the new comment
 		 */
 		public void setComment(Observation comment) {
-			final Reference resourceRef = new Reference();
+			final var resourceRef = new Reference();
 			resourceRef.setResource(comment);
 			this.comment = resourceRef;
 		}
@@ -211,7 +211,7 @@ public class FhirCdaChEdesCtnn /* extends AbstractFhirCdaCh */ {
 		 *            the new confidentiality code
 		 */
 		public void setConfidentiality(Basic confidentiality) {
-			final Reference resourceRef = new Reference();
+			final var resourceRef = new Reference();
 			resourceRef.setResource(confidentiality);
 			this.confidentiality = resourceRef;
 		}
@@ -223,7 +223,7 @@ public class FhirCdaChEdesCtnn /* extends AbstractFhirCdaCh */ {
 		 *            the new custodian
 		 */
 		public void setCustodian(Organization custodian) {
-			final Reference resourceRef = new Reference();
+			final var resourceRef = new Reference();
 			resourceRef.setResource(custodian);
 			this.custodian = resourceRef;
 		}
@@ -235,7 +235,7 @@ public class FhirCdaChEdesCtnn /* extends AbstractFhirCdaCh */ {
 		 *            the new doc author
 		 */
 		public void setDocAuthor(Person author) {
-			final Reference resourceRef = new Reference();
+			final var resourceRef = new Reference();
 			resourceRef.setResource(author);
 			this.docAuthor = resourceRef;
 		}
@@ -247,7 +247,7 @@ public class FhirCdaChEdesCtnn /* extends AbstractFhirCdaCh */ {
 		 *            the new doc language
 		 */
 		public void setDocLanguage(Basic language) {
-			final Reference resourceRef = new Reference();
+			final var resourceRef = new Reference();
 			resourceRef.setResource(language);
 			this.docLanguage = resourceRef;
 		}
@@ -259,7 +259,7 @@ public class FhirCdaChEdesCtnn /* extends AbstractFhirCdaCh */ {
 		 *            the new doc type
 		 */
 		public void setDocType(Basic typePseudonymized) {
-			final Reference resourceRef = new Reference();
+			final var resourceRef = new Reference();
 			resourceRef.setResource(typePseudonymized);
 			this.docType = resourceRef;
 		}
@@ -271,7 +271,7 @@ public class FhirCdaChEdesCtnn /* extends AbstractFhirCdaCh */ {
 		 *            the new legal authenticator
 		 */
 		public void setLegalAuthenticator(Person legalAuthenticator) {
-			final Reference resourceRef = new Reference();
+			final var resourceRef = new Reference();
 			resourceRef.setResource(legalAuthenticator);
 			this.legalAuthenticator = resourceRef;
 		}
@@ -283,7 +283,7 @@ public class FhirCdaChEdesCtnn /* extends AbstractFhirCdaCh */ {
 		 *            the new patient
 		 */
 		public void setPatient(Patient patient) {
-			final Reference resourceRef = new Reference();
+			final var resourceRef = new Reference();
 			resourceRef.setResource(patient);
 			this.patient = resourceRef;
 		}

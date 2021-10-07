@@ -16,19 +16,19 @@
  */
 package org.ehealth_connector.cda.utils;
 
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.CodeSystems;
-import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.hl7cdar2.ED;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Act;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040InfrastructureRootTypeId;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Section;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040StructuredBody;
+import org.ehealth_connector.common.hl7cdar2.ST;
+import org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openhealthtools.mdht.uml.cda.Act;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.cda.EntryRelationship;
-import org.openhealthtools.mdht.uml.cda.InfrastructureRootTypeId;
-import org.openhealthtools.mdht.uml.cda.Section;
-import org.openhealthtools.mdht.uml.cda.StructuredBody;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
-import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
  * Test of CdaUtil
@@ -37,12 +37,12 @@ public class CdaUtilMdhtTest {
 
 	protected String testId;
 	protected Identificator testIdentiicator;
-	protected EntryRelationship testEr;
+	protected POCDMT000040EntryRelationship testEr;
 	protected String testRef;
 	protected int testI;
 	protected int testJ;
-	protected StructuredBody testSb;
-	protected Section testS;
+	protected POCDMT000040StructuredBody testSb;
+	protected POCDMT000040Section testS;
 	protected String testText;
 
 	/**
@@ -53,33 +53,33 @@ public class CdaUtilMdhtTest {
 	@BeforeEach
 	public void setUp() throws Exception {
 		testId = "1234-5678-123456789";
-		testIdentiicator = new Identificator(CodeSystems.GLN, testId);
-		testEr = CDAFactory.eINSTANCE.createEntryRelationship();
-		testEr.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+		testIdentiicator = new Identificator(CodeSystems.GLN.getCodeSystemId(), testId);
+		testEr = new POCDMT000040EntryRelationship();
+		testEr.setTypeCode(XActRelationshipEntryRelationship.SUBJ);
 		testEr.setInversionInd(true);
-		final Act act = CDAFactory.eINSTANCE.createAct();
-		final ED ed = DatatypesFactory.eINSTANCE.createED();
+		final POCDMT000040Act act = new POCDMT000040Act();
+		final ED ed = new ED();
 		testText = "Dies ist ein test";
-		ed.addText(testText);
+		ed.xmlContent = testText;
 		act.setText(ed);
 		testEr.setAct(act);
 		testRef = "ABCDEFGHIJKL";
 
-		testSb = CDAFactory.eINSTANCE.createStructuredBody();
-		testSb.setLanguageCode(DatatypesFactory.eINSTANCE.createCS("de-CH"));
-		final InfrastructureRootTypeId irtid1 = CDAFactory.eINSTANCE
-				.createInfrastructureRootTypeId();
+		testSb = new POCDMT000040StructuredBody();
+		testSb.setLanguageCode(LanguageCode.GERMAN.getCS());
+		final POCDMT000040InfrastructureRootTypeId irtid1 = new POCDMT000040InfrastructureRootTypeId();
 		irtid1.setRoot("1.2.3.4.5.6.7");
 		irtid1.setExtension("1234567890");
 		testSb.setTypeId(irtid1);
-		testS = CDAFactory.eINSTANCE.createSection();
-		final InfrastructureRootTypeId irtid2 = CDAFactory.eINSTANCE
-				.createInfrastructureRootTypeId();
+		testS = new POCDMT000040Section();
+		final POCDMT000040InfrastructureRootTypeId irtid2 = new POCDMT000040InfrastructureRootTypeId();
 		irtid2.setRoot("7.6.5.4.3.2.1");
 		irtid2.setExtension("0987654321");
 		testS.setTypeId(irtid2);
-		testS.setTitle(DatatypesFactory.eINSTANCE.createST("Dies ist mein Titel"));
-		testS.setLanguageCode(DatatypesFactory.eINSTANCE.createCS("de-CH"));
+		ST title = new ST();
+		title.xmlContent = "Dies ist mein Titel";
+		testS.setTitle(title);
+		testS.setLanguageCode(LanguageCode.GERMAN.getCS());
 
 		testI = 1111;
 		testJ = 2222;
@@ -92,7 +92,7 @@ public class CdaUtilMdhtTest {
 	 */
 	@Test
 	public void testAddSectionToStructuredBodyAsCopy() {
-		CdaUtilMdht.addSectionToStructuredBodyAsCopy(testSb, testS);
+		CdaUtil.addSectionToStructuredBody(testSb, testS);
 	}
 
 }

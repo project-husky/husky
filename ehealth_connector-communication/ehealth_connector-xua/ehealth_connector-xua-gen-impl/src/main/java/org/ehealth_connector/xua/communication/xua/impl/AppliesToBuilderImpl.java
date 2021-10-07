@@ -48,7 +48,7 @@ public class AppliesToBuilderImpl implements AppliesToBuilder,
 	@Override
 	public AppliesToBuilder address(String aAddress) {
 		final var wsaAddress = new AddressBuilder().buildObject();
-		wsaAddress.setValue(aAddress);
+		wsaAddress.setURI(aAddress);
 
 		final EndpointReference enpointRef = new EndpointReferenceBuilder().buildObject();
 		enpointRef.setAddress(wsaAddress);

@@ -18,7 +18,7 @@
 package org.ehealth_connector.valueset.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.ehealth_connector.common.basetypes.CodeBaseType;
@@ -146,28 +146,28 @@ public class ValueSetEntryTest {
 		ValueSetEntry valueSetEntryA = new ValueSetEntry();
 		ValueSetEntry valueSetEntryB = new ValueSetEntry();
 
-		assertTrue(valueSetEntryA.equals(valueSetEntryB));
-		assertTrue(valueSetEntryB.equals(valueSetEntryA));
+		assertEquals(valueSetEntryA, valueSetEntryB);
+		assertEquals(valueSetEntryB, valueSetEntryA);
 
 		ValueSetEntry child1 = ValueSetEntry.builder().withDefaultMappingName("child-1").build();
 
 		valueSetEntryA.addChild(child1);
-		assertFalse(valueSetEntryA.equals(valueSetEntryB));
-		assertFalse(valueSetEntryB.equals(valueSetEntryA));
+		assertNotEquals(valueSetEntryA, valueSetEntryB);
+		assertNotEquals(valueSetEntryB, valueSetEntryA);
 
 		valueSetEntryB.addChild(child1);
-		assertTrue(valueSetEntryA.equals(valueSetEntryB));
-		assertTrue(valueSetEntryB.equals(valueSetEntryA));
+		assertEquals(valueSetEntryA, valueSetEntryB);
+		assertEquals(valueSetEntryB, valueSetEntryA);
 
 		ValueSetEntry child2 = ValueSetEntry.builder().withDefaultMappingName("child-2").build();
 
 		valueSetEntryA.addChild(child2);
-		assertFalse(valueSetEntryA.equals(valueSetEntryB));
-		assertFalse(valueSetEntryB.equals(valueSetEntryA));
+		assertNotEquals(valueSetEntryA, valueSetEntryB);
+		assertNotEquals(valueSetEntryB, valueSetEntryA);
 
 		valueSetEntryB.addChild(child2);
-		assertTrue(valueSetEntryA.equals(valueSetEntryB));
-		assertTrue(valueSetEntryB.equals(valueSetEntryA));
+		assertEquals(valueSetEntryA, valueSetEntryB);
+		assertEquals(valueSetEntryB, valueSetEntryA);
 
 		assertTrue(valueSetEntryA
 				.containsChild(ValueSetEntry.builder().withDefaultMappingName("child-1").build()));
@@ -182,28 +182,28 @@ public class ValueSetEntryTest {
 		ValueSetEntry valueSetEntryA = new ValueSetEntry();
 		ValueSetEntry valueSetEntryB = new ValueSetEntry();
 
-		assertTrue(valueSetEntryA.equals(valueSetEntryB));
-		assertTrue(valueSetEntryB.equals(valueSetEntryA));
+		assertEquals(valueSetEntryA, valueSetEntryB);
+		assertEquals(valueSetEntryB, valueSetEntryA);
 
 		Designation designation1 = Designation.builder().withDisplayName("designation-1").build();
 
 		valueSetEntryA.addDesignation(designation1);
-		assertFalse(valueSetEntryA.equals(valueSetEntryB));
-		assertFalse(valueSetEntryB.equals(valueSetEntryA));
+		assertNotEquals(valueSetEntryA, valueSetEntryB);
+		assertNotEquals(valueSetEntryB, valueSetEntryA);
 
 		valueSetEntryB.addDesignation(designation1);
-		assertTrue(valueSetEntryA.equals(valueSetEntryB));
-		assertTrue(valueSetEntryB.equals(valueSetEntryA));
+		assertEquals(valueSetEntryA, valueSetEntryB);
+		assertEquals(valueSetEntryB, valueSetEntryA);
 
 		Designation designation2 = Designation.builder().withDisplayName("designation-2").build();
 
 		valueSetEntryA.addDesignation(designation2);
-		assertFalse(valueSetEntryA.equals(valueSetEntryB));
-		assertFalse(valueSetEntryB.equals(valueSetEntryA));
+		assertNotEquals(valueSetEntryA, valueSetEntryB);
+		assertNotEquals(valueSetEntryB, valueSetEntryA);
 
 		valueSetEntryB.addDesignation(designation2);
-		assertTrue(valueSetEntryA.equals(valueSetEntryB));
-		assertTrue(valueSetEntryB.equals(valueSetEntryA));
+		assertEquals(valueSetEntryA, valueSetEntryB);
+		assertEquals(valueSetEntryB, valueSetEntryA);
 
 		assertTrue(valueSetEntryA.containsDesignation(
 				Designation.builder().withDisplayName("designation-1").build()));
@@ -218,30 +218,30 @@ public class ValueSetEntryTest {
 		ValueSetEntry valueSetEntryA = new ValueSetEntry();
 		ValueSetEntry valueSetEntryB = new ValueSetEntry();
 
-		assertTrue(valueSetEntryA.equals(valueSetEntryB));
-		assertTrue(valueSetEntryB.equals(valueSetEntryA));
+		assertEquals(valueSetEntryA, valueSetEntryB);
+		assertEquals(valueSetEntryB, valueSetEntryA);
 
 		CodeBaseType mappingCode1 = CodeBaseType.builder().withCode("code-1")
 				.withCodeSystem("2.999").build();
 
 		valueSetEntryA.addMappingCode(mappingCode1);
-		assertFalse(valueSetEntryA.equals(valueSetEntryB));
-		assertFalse(valueSetEntryB.equals(valueSetEntryA));
+		assertNotEquals(valueSetEntryA, valueSetEntryB);
+		assertNotEquals(valueSetEntryB, valueSetEntryA);
 
 		valueSetEntryB.addMappingCode(mappingCode1);
-		assertTrue(valueSetEntryA.equals(valueSetEntryB));
-		assertTrue(valueSetEntryB.equals(valueSetEntryA));
+		assertEquals(valueSetEntryA, valueSetEntryB);
+		assertEquals(valueSetEntryB, valueSetEntryA);
 
 		CodeBaseType mappingCode2 = CodeBaseType.builder().withCode("code-2")
 				.withCodeSystem("2.999").build();
 
 		valueSetEntryA.addMappingCode(mappingCode2);
-		assertFalse(valueSetEntryA.equals(valueSetEntryB));
-		assertFalse(valueSetEntryB.equals(valueSetEntryA));
+		assertNotEquals(valueSetEntryA, valueSetEntryB);
+		assertNotEquals(valueSetEntryB, valueSetEntryA);
 
 		valueSetEntryB.addMappingCode(mappingCode2);
-		assertTrue(valueSetEntryA.equals(valueSetEntryB));
-		assertTrue(valueSetEntryB.equals(valueSetEntryA));
+		assertEquals(valueSetEntryA, valueSetEntryB);
+		assertEquals(valueSetEntryB, valueSetEntryA);
 
 		assertTrue(valueSetEntryA.containsMappingCode(
 				CodeBaseType.builder().withCode("code-1").withCodeSystem("2.999").build()));
@@ -256,28 +256,28 @@ public class ValueSetEntryTest {
 		ValueSetEntry valueSetEntryA = new ValueSetEntry();
 		ValueSetEntry valueSetEntryB = new ValueSetEntry();
 
-		assertTrue(valueSetEntryA.equals(valueSetEntryB));
-		assertTrue(valueSetEntryB.equals(valueSetEntryA));
+		assertEquals(valueSetEntryA, valueSetEntryB);
+		assertEquals(valueSetEntryB, valueSetEntryA);
 
 		String mappingName1 = "mapping-name-1";
 
 		valueSetEntryA.addMappingName(mappingName1);
-		assertFalse(valueSetEntryA.equals(valueSetEntryB));
-		assertFalse(valueSetEntryB.equals(valueSetEntryA));
+		assertNotEquals(valueSetEntryA, valueSetEntryB);
+		assertNotEquals(valueSetEntryB, valueSetEntryA);
 
 		valueSetEntryB.addMappingName(mappingName1);
-		assertTrue(valueSetEntryA.equals(valueSetEntryB));
-		assertTrue(valueSetEntryB.equals(valueSetEntryA));
+		assertEquals(valueSetEntryA, valueSetEntryB);
+		assertEquals(valueSetEntryB, valueSetEntryA);
 
 		String mappingName2 = "mapping-name-2";
 
 		valueSetEntryA.addMappingName(mappingName2);
-		assertFalse(valueSetEntryA.equals(valueSetEntryB));
-		assertFalse(valueSetEntryB.equals(valueSetEntryA));
+		assertNotEquals(valueSetEntryA, valueSetEntryB);
+		assertNotEquals(valueSetEntryB, valueSetEntryA);
 
 		valueSetEntryB.addMappingName(mappingName2);
-		assertTrue(valueSetEntryA.equals(valueSetEntryB));
-		assertTrue(valueSetEntryB.equals(valueSetEntryA));
+		assertEquals(valueSetEntryA, valueSetEntryB);
+		assertEquals(valueSetEntryB, valueSetEntryA);
 
 		assertTrue(valueSetEntryA.containsMappingName("mapping-name-1"));
 		assertTrue(valueSetEntryA.getMappingNameList().contains("mapping-name-1"));

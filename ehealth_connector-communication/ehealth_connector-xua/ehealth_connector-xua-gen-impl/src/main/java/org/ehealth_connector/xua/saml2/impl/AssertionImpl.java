@@ -28,7 +28,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.ehealth_connector.xua.core.SecurityObject;
 import org.ehealth_connector.xua.saml2.Assertion;
-import org.joda.time.DateTime;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeStatementType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionsType;
@@ -158,9 +157,8 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 
 	public Calendar getConditionsNotBefore() {
 		if (assertion.getConditions() != null) {
-			final DateTime instant = assertion.getConditions().getNotBefore();
 			final var retVal = Calendar.getInstance();
-			retVal.setTimeInMillis(instant.getMillis());
+			retVal.setTimeInMillis(assertion.getConditions().getNotBefore().toEpochMilli());
 			return retVal;
 		}
 		return Calendar.getInstance();
@@ -168,9 +166,8 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 
 	public Calendar getConditionsNotOnOrAfter() {
 		if (assertion.getConditions() != null) {
-			final DateTime instant = assertion.getConditions().getNotOnOrAfter();
 			final var retVal = Calendar.getInstance();
-			retVal.setTimeInMillis(instant.getMillis());
+			retVal.setTimeInMillis(assertion.getConditions().getNotOnOrAfter().toEpochMilli());
 			return retVal;
 		}
 		return Calendar.getInstance();
@@ -195,9 +192,8 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 	@Override
 	public XMLGregorianCalendar getIssueInstant() {
 		if (assertion.getIssueInstant() != null) {
-			final DateTime instant = assertion.getIssueInstant();
 			final var retVal = new GregorianCalendar();
-			retVal.setTimeInMillis(instant.getMillis());
+			retVal.setTimeInMillis(assertion.getIssueInstant().toEpochMilli());
 
 			XMLGregorianCalendar xmlGregCal = null;
 			try {

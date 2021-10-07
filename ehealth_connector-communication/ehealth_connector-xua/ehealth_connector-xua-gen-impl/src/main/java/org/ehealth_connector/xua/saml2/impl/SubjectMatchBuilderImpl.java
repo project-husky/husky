@@ -32,7 +32,6 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.CV;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.II;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.core.xml.schema.impl.XSAnyImpl;
-import org.opensaml.xacml.policy.impl.SubjectMatchTypeImplBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -46,15 +45,8 @@ public class SubjectMatchBuilderImpl
 		implements SimpleBuilder<SubjectMatchType>,
 		SecurityObjectBuilder<org.opensaml.xacml.policy.SubjectMatchType, SubjectMatchType> {
 
-	private org.opensaml.xacml.policy.SubjectMatchType wrappedObject;
-
-	public SubjectMatchBuilderImpl() {
-		wrappedObject = new SubjectMatchTypeImplBuilder().buildObject();
-	}
-
 	@Override
 	public SubjectMatchType create(org.opensaml.xacml.policy.SubjectMatchType aInternalObject) {
-		wrappedObject = aInternalObject;
 		var retVal = new SubjectMatchType();
 		
 		if (aInternalObject.getAttributeSelector() != null) {
@@ -81,7 +73,7 @@ public class SubjectMatchBuilderImpl
 
 						if (anyImpl.getElementQName() != null
 								&& "CodedValue".equalsIgnoreCase(anyImpl.getElementQName().getLocalPart())) {
-							CV cv = new CV();
+							var cv = new CV();
 							
 							for (Entry<QName, String> entry : anyImpl.getUnknownAttributes().entrySet()) {
 								if (entry != null && entry.getKey() != null

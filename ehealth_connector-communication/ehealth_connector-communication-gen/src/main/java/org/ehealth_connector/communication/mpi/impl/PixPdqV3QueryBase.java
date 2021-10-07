@@ -116,12 +116,12 @@ public class PixPdqV3QueryBase extends CamelService {
 			String domainToReturnOid, String domainToReturnNamespace, CamelContext context) {
 		var pixQuery = affinityDomain.getPixDestination();
 		var pdqQuery = affinityDomain.getPdqDestination();
-		
+
 		this.pixQueryUri = pixQuery != null ? pixQuery.getUri() : null;
 		this.pixSourceUri = pixQuery != null ? pixQuery.getUri() : null;
 		this.pdqConsumerUri = pdqQuery != null ? pdqQuery.getUri() : null;
-		this.senderApplicationOid = pixQuery != null ? pixQuery.getSenderApplicationOid(): null;
-		this.senderFacilityOid = pixQuery != null ? pixQuery.getSenderFacilityOid() :null;
+		this.senderApplicationOid = pixQuery != null ? pixQuery.getSenderApplicationOid() : null;
+		this.senderFacilityOid = pixQuery != null ? pixQuery.getSenderFacilityOid() : null;
 		this.receiverApplicationOid = pixQuery != null ? pixQuery.getReceiverApplicationOid() : null;
 		this.receiverFacilityOid = pixQuery != null ? pixQuery.getReceiverFacilityOid() : null;
 		this.homeCommunityOid = homeCommunityOid;
@@ -433,7 +433,7 @@ public class PixPdqV3QueryBase extends CamelService {
 	protected void addPatientTelecoms(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
 		// telecommunication addresses (only phone and email will be added to
 		// source)
-		if ((patient.getTelecom() != null) && (!patient.getTelecom().isEmpty())) {
+		if (patient.getTelecom() != null && !patient.getTelecom().isEmpty()) {
 			for (final ContactPoint contactPoint : patient.getTelecom()) {
 				// system I 0..1 code phone | fax | email | url
 				// use M 0..1 code home | work | temp | old | mobile - purpose
@@ -537,19 +537,19 @@ public class PixPdqV3QueryBase extends CamelService {
 
 		final var organization = (Organization) patient.getManagingOrganization().getResource();
 
-		if ((organization != null) && (!organization.getIdentifier().isEmpty())) {
-			final Identifier organizationId = organization.getIdentifier().get(0);
-			if (organizationId.getSystem().startsWith(FhirCommon.oidUrn)) {
-				organizationOid = FhirCommon.removeUrnOidPrefix(organizationId.getSystem());
+		if (organization != null) {
+			if (organization.getIdentifier() != null && !organization.getIdentifier().isEmpty()) {
+				final Identifier organizationId = organization.getIdentifier().get(0);
+				if (organizationId.getSystem().startsWith(FhirCommon.OID_URN)) {
+					organizationOid = FhirCommon.removeUrnOidPrefix(organizationId.getSystem());
+				}
 			}
-		}
 
-		if ((organization != null) && (organization.getName() != null)) {
-			organizationName = organization.getName();
-		}
+			if (organization.getName() != null) {
+				organizationName = organization.getName();
+			}
 
-		if ((organization != null) && (!organization.getTelecom().isEmpty())) {
-			if (!organization.getTelecom().isEmpty()) {
+			if (organization.getTelecom() != null && !organization.getTelecom().isEmpty()) {
 				final var contactPoint = organization.getTelecomFirstRep();
 				if (contactPoint != null) {
 					organizationTelecomValue = contactPoint.getValue();
@@ -574,9 +574,9 @@ public class PixPdqV3QueryBase extends CamelService {
 			if ((pdqPatient.getProviderOrganization().getId() != null)
 					&& (!pdqPatient.getProviderOrganization().getId().isEmpty())) {
 				for (final II id : pdqPatient.getProviderOrganization().getId()) {
-					final var Identifier = new Identifier();
-					Identifier.setValue(FhirCommon.addUrnOid(id.getRoot()));
-					organization.getIdentifier().add(Identifier);
+					final var identifier = new Identifier();
+					identifier.setValue(FhirCommon.addUrnOid(id.getRoot()));
+					organization.getIdentifier().add(identifier);
 				}
 			}
 
@@ -592,10 +592,10 @@ public class PixPdqV3QueryBase extends CamelService {
 				if ((tels != null) && (!tels.isEmpty())) {
 					final var tel = tels.get(0);
 					if ((tel.getValue() != null) && tel.getValue().startsWith("tel:")) {
-						final var ContactPoint = new ContactPoint();
-						ContactPoint.setValue(tel.getValue().substring(4));
-						ContactPoint.setSystem(ContactPointSystem.PHONE);
-						organization.getTelecom().add(ContactPoint);
+						final var contactPoint = new ContactPoint();
+						contactPoint.setValue(tel.getValue().substring(4));
+						contactPoint.setSystem(ContactPointSystem.PHONE);
+						organization.getTelecom().add(contactPoint);
 					}
 				}
 			}
@@ -616,7 +616,7 @@ public class PixPdqV3QueryBase extends CamelService {
 			if (fhirAddress.getLine().size() > 1) {
 				adressOtherDesignation = fhirAddress.getLine().get(1).getValueAsString();
 			}
-			final var patientAddress = PixPdqV3Utils.createAD(fhirAddress.getLine().get(0).getValue(),
+			final var patientAddress = PixPdqV3Utils.createAd(fhirAddress.getLine().get(0).getValue(),
 					fhirAddress.getCity(), null, fhirAddress.getState(), fhirAddress.getCountry(),
 					fhirAddress.getPostalCode(), adressOtherDesignation, null);
 			v3PixSourceMessage.setPatientBirthPlace(patientAddress);
@@ -672,8 +672,9 @@ public class PixPdqV3QueryBase extends CamelService {
 	 */
 	protected void setDeceased(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
 		if (pdqPatient.getPatientPerson() != null) {
-			if (pdqPatient.getPatientPerson().getDeceasedInd() != null && pdqPatient.getPatientPerson().getDeceasedInd().value != null &&
-					pdqPatient.getPatientPerson().getDeceasedInd().value.booleanValue()) {
+			if (pdqPatient.getPatientPerson().getDeceasedInd() != null
+					&& pdqPatient.getPatientPerson().getDeceasedInd().value != null
+					&& pdqPatient.getPatientPerson().getDeceasedInd().value.booleanValue()) {
 				final var dt = new BooleanType();
 				dt.setValue(pdqPatient.getPatientPerson().getDeceasedInd().value);
 				patient.setDeceased(dt);
@@ -751,8 +752,9 @@ public class PixPdqV3QueryBase extends CamelService {
 	protected void setMultipeBirth(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
 		if (pdqPatient.getPatientPerson() != null) {
 			if ((pdqPatient.getPatientPerson().getMultipleBirthInd() != null)
-					&& pdqPatient.getPatientPerson().getMultipleBirthInd().value) {
-				final BooleanType dt = new BooleanType();
+					&& pdqPatient.getPatientPerson().getMultipleBirthInd().value != null
+					&& pdqPatient.getPatientPerson().getMultipleBirthInd().value.booleanValue()) {
+				final var dt = new BooleanType();
 				dt.setValue(pdqPatient.getPatientPerson().getMultipleBirthInd().value);
 				patient.setMultipleBirth(dt);
 			}
@@ -948,28 +950,28 @@ public class PixPdqV3QueryBase extends CamelService {
 							// item, a single person name (PN) data item shall
 							// be specified in the Person.value attribute.
 							final EN pn = names.get(0);
-							final var HumanNameType = new HumanName();
+							final var humanNameType = new HumanName();
 							if (pn.getGiven() != null) {
 								for (final EnGiven given : pn.getGiven()) {
-									HumanNameType.addGiven(getMixedValue(given.getMixed()));
+									humanNameType.addGiven(getMixedValue(given.getMixed()));
 								}
 							}
 							if (pn.getFamily() != null) {
 								for (final EnFamily family : pn.getFamily()) {
-									HumanNameType.setFamily(getMixedValue(family.getMixed()));
+									humanNameType.setFamily(getMixedValue(family.getMixed()));
 								}
 							}
 							if (pn.getPrefix() != null) {
 								for (final EnPrefix prefix : pn.getPrefix()) {
-									HumanNameType.addPrefix(getMixedValue(prefix.getMixed()));
+									humanNameType.addPrefix(getMixedValue(prefix.getMixed()));
 								}
 							}
 							if (pn.getSuffix() != null) {
 								for (final EnSuffix suffix : pn.getSuffix()) {
-									HumanNameType.addPrefix(getMixedValue(suffix.getMixed()));
+									humanNameType.addPrefix(getMixedValue(suffix.getMixed()));
 								}
 							}
-							patient.setMothersMaidenName(HumanNameType);
+							patient.setMothersMaidenName(humanNameType);
 						}
 					}
 				}

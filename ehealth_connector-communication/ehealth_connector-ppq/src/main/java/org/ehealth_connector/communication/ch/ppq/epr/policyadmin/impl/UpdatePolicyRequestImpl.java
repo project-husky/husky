@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.OpenSamlUpdatePolicyRequest;
@@ -39,7 +40,7 @@ public class UpdatePolicyRequestImpl extends AbstractAssertionBasedRequestImpl
 
 	@Override
 	public List<XMLObject> getOrderedChildren() {
-		return null;
+		return new LinkedList<>();
 	}
 
 }

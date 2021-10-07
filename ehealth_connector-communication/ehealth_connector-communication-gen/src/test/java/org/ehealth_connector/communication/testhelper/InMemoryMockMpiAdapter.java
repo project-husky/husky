@@ -19,10 +19,10 @@ package org.ehealth_connector.communication.testhelper;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.ehealth_connector.common.utils.UUID;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 import org.hl7.fhir.dstu3.model.Identifier;
-import org.openhealthtools.ihe.utils.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

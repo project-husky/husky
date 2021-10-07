@@ -22,7 +22,7 @@ import java.util.Date;
 import javax.annotation.processing.Generated;
 
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
-import org.ehealth_connector.common.utils.DateUtilMdht;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 
 /**
@@ -74,8 +74,7 @@ public class Version implements Serializable {
 		/**
 		 * With label.
 		 *
-		 * @param label
-		 *            the label
+		 * @param label the label
 		 * @return the builder
 		 */
 		public Builder withLabel(String label) {
@@ -86,8 +85,7 @@ public class Version implements Serializable {
 		/**
 		 * With publishing authority.
 		 *
-		 * @param publishingAuthority
-		 *            the publishing authority
+		 * @param publishingAuthority the publishing authority
 		 * @return the builder
 		 */
 		public Builder withPublishingAuthority(OrganizationBaseType publishingAuthority) {
@@ -98,8 +96,7 @@ public class Version implements Serializable {
 		/**
 		 * With valid from.
 		 *
-		 * @param validFrom
-		 *            the valid from
+		 * @param validFrom the valid from
 		 * @return the builder
 		 */
 		public Builder withValidFrom(Date validFrom) {
@@ -110,8 +107,7 @@ public class Version implements Serializable {
 		/**
 		 * With valid to.
 		 *
-		 * @param validTo
-		 *            the valid to
+		 * @param validTo the valid to
 		 * @return the builder
 		 */
 		public Builder withValidTo(Date validTo) {
@@ -150,8 +146,7 @@ public class Version implements Serializable {
 	/**
 	 * <div class="en">Instantiates a new Version. Default constructor.</div>
 	 *
-	 * <div class="de">Instanziiert eine neue Version.
-	 * Standardkonstruktor.</div>
+	 * <div class="de">Instanziiert eine neue Version. Standardkonstruktor.</div>
 	 */
 	public Version() {
 	}
@@ -159,8 +154,7 @@ public class Version implements Serializable {
 	/**
 	 * Instantiates a new version.
 	 *
-	 * @param builder
-	 *            the builder
+	 * @param builder the builder
 	 */
 	@Generated("SparkTools")
 	private Version(Builder builder) {
@@ -174,11 +168,10 @@ public class Version implements Serializable {
 	 * <div class="en">Checks whether the two objects are equal (based on their
 	 * content).</div>
 	 *
-	 * <div class="de">Prüft, ob die beiden Objekte gleich sind (basierend auf
-	 * ihrem Inhalt).</div>
+	 * <div class="de">Prüft, ob die beiden Objekte gleich sind (basierend auf ihrem
+	 * Inhalt).</div>
 	 *
-	 * @param obj
-	 *            the Version to compare
+	 * @param obj the Version to compare
 	 * @return true, if equal; false otherwise.
 	 */
 	@Override
@@ -190,12 +183,11 @@ public class Version implements Serializable {
 		if (!(obj instanceof Version))
 			return false;
 
-		if (retVal) {
-			if (this.label == null)
-				retVal = (((Version) obj).getLabel() == null);
-			else
-				retVal = this.label.equals(((Version) obj).getLabel());
-		}
+		if (this.label == null)
+			retVal = (((Version) obj).getLabel() == null);
+		else
+			retVal = this.label.equals(((Version) obj).getLabel());
+
 		// only business rules are applied, here. Rest was initially implemented
 		// and stays here for future use. If you use it, you need to implement
 		// another method and not change the current method.
@@ -212,8 +204,7 @@ public class Version implements Serializable {
 			else {
 				retVal = this.validFrom.equals(((Version) obj).getValidFrom());
 				if (!retVal) {
-					retVal = DateUtilMdht.equalsDateOnly(this.validFrom,
-							((Version) obj).getValidFrom());
+					retVal = DateUtil.equalsDateOnly(this.validFrom, ((Version) obj).getValidFrom());
 				}
 			}
 		}
@@ -223,8 +214,7 @@ public class Version implements Serializable {
 			else {
 				retVal = this.validTo.equals(((Version) obj).getValidTo());
 				if (!retVal) {
-					retVal = DateUtilMdht.equalsDateOnly(this.validTo,
-							((Version) obj).getValidTo());
+					retVal = DateUtil.equalsDateOnly(this.validTo, ((Version) obj).getValidTo());
 				}
 			}
 		}
@@ -292,8 +282,7 @@ public class Version implements Serializable {
 	 *
 	 * <div class="de">Legt die Versionsbezeichnung fest (z. B. '1.0').</div>
 	 *
-	 * @param label
-	 *            the new label
+	 * @param label the new label
 	 */
 	public void setLabel(String label) {
 		this.label = label;
@@ -306,8 +295,7 @@ public class Version implements Serializable {
 	 * <div class="de">Legt die Veröffentlichungsbehörde (verantwortliche
 	 * Organisation) fest.</div>
 	 *
-	 * @param publishingAuthority
-	 *            the new publishing authority
+	 * @param publishingAuthority the new publishing authority
 	 */
 	public void setPublishingAuthority(OrganizationBaseType publishingAuthority) {
 		this.publishingAuthority = publishingAuthority;
@@ -318,8 +306,7 @@ public class Version implements Serializable {
 	 *
 	 * <div class="de">Legt das 'Gültig ab' Datum fest.</div>
 	 *
-	 * @param validFrom
-	 *            the new valid from
+	 * @param validFrom the new valid from
 	 */
 	public void setValidFrom(Date validFrom) {
 		this.validFrom = validFrom;
@@ -330,8 +317,7 @@ public class Version implements Serializable {
 	 *
 	 * <div class="de">Legt das 'Gültig bis' Datum fest.</div>
 	 *
-	 * @param validTo
-	 *            the new valid to
+	 * @param validTo the new valid to
 	 */
 	public void setValidTo(Date validTo) {
 		this.validTo = validTo;

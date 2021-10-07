@@ -1,8 +1,8 @@
 package org.ehealth_connector.communication.mpi.impl.pdq;
 
+import org.ehealth_connector.common.utils.OID;
 import org.ehealth_connector.communication.mpi.V3Message;
 import org.ehealth_connector.communication.utils.PixPdqV3Utils;
-import org.openhealthtools.ihe.utils.OID;
 
 import net.ihe.gazelle.hl7v3.datatypes.II;
 import net.ihe.gazelle.hl7v3.prpain201305UV02.PRPAIN201305UV02QUQIMT021001UV01ControlActProcess;
@@ -156,7 +156,7 @@ public class V3PdqConsumerQuery extends V3Message {
 				+ addressState + " " + addressCountry + " " + addressZip + " " + addressOtherDesignation + ","
 				+ addressType + ",";
 		// Create an AD type to store the address information
-		var patientAddressAD = PixPdqV3Utils.createAD(addressStreetAddress, addressCity, addressCounty, addressState,
+		var patientAddressAD = PixPdqV3Utils.createAd(addressStreetAddress, addressCity, addressCounty, addressState,
 				addressCountry, addressZip, addressOtherDesignation, addressType);
 
 		// Add the AD to the patient Address

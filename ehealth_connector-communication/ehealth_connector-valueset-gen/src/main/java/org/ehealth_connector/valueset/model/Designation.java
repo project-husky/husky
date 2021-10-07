@@ -72,8 +72,7 @@ public class Designation implements Serializable {
 		/**
 		 * With display name.
 		 *
-		 * @param displayName
-		 *            the display name
+		 * @param displayName the display name
 		 * @return the builder
 		 */
 		public Builder withDisplayName(String displayName) {
@@ -84,8 +83,7 @@ public class Designation implements Serializable {
 		/**
 		 * With language code.
 		 *
-		 * @param languageCode
-		 *            the language code
+		 * @param languageCode the language code
 		 * @return the builder
 		 */
 		public Builder withLanguageCode(LanguageCode languageCode) {
@@ -96,8 +94,7 @@ public class Designation implements Serializable {
 		/**
 		 * With type.
 		 *
-		 * @param type
-		 *            the type
+		 * @param type the type
 		 * @return the builder
 		 */
 		public Builder withType(DesignationType type) {
@@ -131,8 +128,7 @@ public class Designation implements Serializable {
 	private DesignationType type;
 
 	/**
-	 * <div class="en">Instantiates a new Designation. Default
-	 * constructor.</div>
+	 * <div class="en">Instantiates a new Designation. Default constructor.</div>
 	 *
 	 * <div class="de">Instanziiert eine neue Designation.
 	 * Standardkonstruktor.</div>
@@ -143,8 +139,7 @@ public class Designation implements Serializable {
 	/**
 	 * Instantiates a new designation.
 	 *
-	 * @param builder
-	 *            the builder
+	 * @param builder the builder
 	 */
 	@Generated("SparkTools")
 	private Designation(Builder builder) {
@@ -157,28 +152,26 @@ public class Designation implements Serializable {
 	 * <div class="en">Checks whether the two objects are equal (based on their
 	 * content).</div>
 	 *
-	 * <div class="de">Prüft, ob die beiden Objekte gleich sind (basierend auf
-	 * ihrem Inhalt).</div>
+	 * <div class="de">Prüft, ob die beiden Objekte gleich sind (basierend auf ihrem
+	 * Inhalt).</div>
 	 *
-	 * @param obj
-	 *            the Designation to compare
+	 * @param obj the Designation to compare
 	 * @return true, if equal; false otherwise.
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		boolean retVal = true;
+		var retVal = true;
 		if (obj == null)
 			return false;
 
 		if (!(obj instanceof Designation))
 			return false;
 
-		if (retVal) {
-			if (this.languageCode == null)
-				retVal = (((Designation) obj).getLanguageCode() == null);
-			else
-				retVal = (this.languageCode == ((Designation) obj).getLanguageCode());
-		}
+		if (this.languageCode == null)
+			retVal = (((Designation) obj).getLanguageCode() == null);
+		else
+			retVal = (this.languageCode == ((Designation) obj).getLanguageCode());
+
 		if (retVal) {
 			if (this.type == null)
 				retVal = (((Designation) obj).getType() == null);
@@ -217,11 +210,11 @@ public class Designation implements Serializable {
 	}
 
 	/**
-	 * <div class="en">Gets the designations type (fully specified name,
-	 * preferred, synonym, ...).</div>
+	 * <div class="en">Gets the designations type (fully specified name, preferred,
+	 * synonym, ...).</div>
 	 *
-	 * <div class="de">Ruft den Bezeichnungstyp ab (vollständig angegebener
-	 * Name, bevorzugt, synonym, ...).</div>
+	 * <div class="de">Ruft den Bezeichnungstyp ab (vollständig angegebener Name,
+	 * bevorzugt, synonym, ...).</div>
 	 *
 	 * @return the type
 	 */
@@ -244,8 +237,7 @@ public class Designation implements Serializable {
 	 *
 	 * <div class="de">Legt den Anzeigenamen fest.</div>
 	 *
-	 * @param displayName
-	 *            the new display name
+	 * @param displayName the new display name
 	 */
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
@@ -256,22 +248,20 @@ public class Designation implements Serializable {
 	 *
 	 * <div class="de">Legt den Sprachcode fest.</div>
 	 *
-	 * @param languageCode
-	 *            the new language code
+	 * @param languageCode the new language code
 	 */
 	public void setLanguageCode(LanguageCode languageCode) {
 		this.languageCode = languageCode;
 	}
 
 	/**
-	 * <div class="en">Sets the designations type (fully specified name,
-	 * preferred, synonym, ...).</div>
+	 * <div class="en">Sets the designations type (fully specified name, preferred,
+	 * synonym, ...).</div>
 	 *
-	 * <div class="de">Legt den Bezeichnungstyp fest (vollständiger Name,
-	 * bevorzugt, synonym, ...).</div>
+	 * <div class="de">Legt den Bezeichnungstyp fest (vollständiger Name, bevorzugt,
+	 * synonym, ...).</div>
 	 *
-	 * @param type
-	 *            the new type
+	 * @param type the new type
 	 */
 	public void setType(DesignationType type) {
 		this.type = type;

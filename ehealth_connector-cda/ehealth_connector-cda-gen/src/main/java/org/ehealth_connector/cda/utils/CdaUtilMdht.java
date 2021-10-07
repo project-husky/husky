@@ -17,35 +17,27 @@
 package org.ehealth_connector.cda.utils;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.EhcVersions;
-import org.ehealth_connector.common.mdht.Identificator;
-import org.openhealthtools.ihe.utils.UUID;
-import org.openhealthtools.mdht.uml.cda.Act;
-import org.openhealthtools.mdht.uml.cda.Authenticator;
-import org.openhealthtools.mdht.uml.cda.Author;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
-import org.openhealthtools.mdht.uml.cda.Component3;
-import org.openhealthtools.mdht.uml.cda.Custodian;
-import org.openhealthtools.mdht.uml.cda.DataEnterer;
-import org.openhealthtools.mdht.uml.cda.EntryRelationship;
-import org.openhealthtools.mdht.uml.cda.InformationRecipient;
-import org.openhealthtools.mdht.uml.cda.LegalAuthenticator;
-import org.openhealthtools.mdht.uml.cda.Organizer;
-import org.openhealthtools.mdht.uml.cda.RecordTarget;
-import org.openhealthtools.mdht.uml.cda.Section;
-import org.openhealthtools.mdht.uml.cda.StructuredBody;
-import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation;
-import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry;
-import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection;
-import org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.II;
-import org.openhealthtools.mdht.uml.hl7.rim.InfrastructureRoot;
-import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
+import org.ehealth_connector.common.hl7cdar2.II;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Act;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Authenticator;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Author;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Custodian;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040DataEnterer;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040InformationRecipient;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040LegalAuthenticator;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040RecordTarget;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Section;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Specimen;
+import org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship;
+import org.ehealth_connector.common.utils.UUID;
 
 /**
  * <div class="en">A util class with helper functions for CDA based on
@@ -54,20 +46,17 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  */
 public abstract class CdaUtilMdht {
 
+
+
 	/**
-	 * Adds a copy of a given section to a given structured body.
+	 * Adds a template id.
 	 *
-	 * @param sb
-	 *            the StructuredBody
-	 * @param s
-	 *            the Section
+	 * @param act the act
+	 * @param id  the id
 	 */
-	public static void addSectionToStructuredBodyAsCopy(StructuredBody sb, Section s) {
-		if ((sb != null) && (s != null)) {
-			final Component3 c = CDAFactory.eINSTANCE.createComponent3();
-			c.setSection(EcoreUtil.copy(s));
-			sb.getComponents().add(c);
-		}
+	public static void addTemplateId(POCDMT000040Act act, Identificator id) {
+		act.getTemplateId().add(id.getHl7CdaR2Ii());
+		sortTemplateIds(act);
 	}
 
 	/**
@@ -78,8 +67,8 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateId(Act mdht, Identificator id) {
-		mdht.getTemplateIds().add(id.getIi());
+	public static void addTemplateId(POCDMT000040Authenticator mdht, Identificator id) {
+		mdht.getTemplateId().add(id.getHl7CdaR2Ii());
 		sortTemplateIds(mdht);
 	}
 
@@ -91,21 +80,8 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateId(Authenticator mdht, Identificator id) {
-		mdht.getTemplateIds().add(id.getIi());
-		sortTemplateIds(mdht);
-	}
-
-	/**
-	 * Adds a template id.
-	 *
-	 * @param mdht
-	 *            the mdht
-	 * @param id
-	 *            the id
-	 */
-	public static void addTemplateId(Author mdht, Identificator id) {
-		mdht.getTemplateIds().add(id.getIi());
+	public static void addTemplateId(POCDMT000040Author mdht, Identificator id) {
+		mdht.getTemplateId().add(id.getHl7CdaR2Ii());
 		sortTemplateIds(mdht);
 	}
 
@@ -117,8 +93,8 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateId(ClinicalDocument doc, Identificator id) {
-		doc.getTemplateIds().add(id.getIi());
+	public static void addTemplateId(POCDMT000040ClinicalDocument doc, Identificator id) {
+		doc.getTemplateId().add(id.getHl7CdaR2Ii());
 		sortTemplateIds(doc);
 	}
 
@@ -130,8 +106,8 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateId(Custodian mdht, Identificator id) {
-		mdht.getTemplateIds().add(id.getIi());
+	public static void addTemplateId(POCDMT000040Custodian mdht, Identificator id) {
+		mdht.getTemplateId().add(id.getHl7CdaR2Ii());
 		sortTemplateIds(mdht);
 	}
 
@@ -143,8 +119,8 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateId(DataEnterer mdht, Identificator id) {
-		mdht.getTemplateIds().add(id.getIi());
+	public static void addTemplateId(POCDMT000040DataEnterer mdht, Identificator id) {
+		mdht.getTemplateId().add(id.getHl7CdaR2Ii());
 		sortTemplateIds(mdht);
 	}
 
@@ -156,8 +132,8 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateId(InformationRecipient mdht, Identificator id) {
-		mdht.getTemplateIds().add(id.getIi());
+	public static void addTemplateId(POCDMT000040InformationRecipient mdht, Identificator id) {
+		mdht.getTemplateId().add(id.getHl7CdaR2Ii());
 		sortTemplateIds(mdht);
 	}
 
@@ -169,8 +145,8 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateId(InfrastructureRoot mdht, Identificator id) {
-		mdht.getTemplateIds().add(id.getIi());
+	public static void addTemplateId(POCDMT000040Observation mdht, Identificator id) {
+		mdht.getTemplateId().add(id.getHl7CdaR2Ii());
 		sortTemplateIds(mdht);
 	}
 
@@ -182,8 +158,8 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateId(LaboratoryObservation mdht, Identificator id) {
-		mdht.getTemplateIds().add(id.getIi());
+	public static void addTemplateId(POCDMT000040Section mdht, Identificator id) {
+		mdht.getTemplateId().add(id.getHl7CdaR2Ii());
 		sortTemplateIds(mdht);
 	}
 
@@ -195,8 +171,8 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateId(LaboratoryReportDataProcessingEntry mdht, Identificator id) {
-		mdht.getTemplateIds().add(id.getIi());
+	public static void addTemplateId(POCDMT000040LegalAuthenticator mdht, Identificator id) {
+		mdht.getTemplateId().add(id.getHl7CdaR2Ii());
 		sortTemplateIds(mdht);
 	}
 
@@ -208,8 +184,8 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateId(LaboratorySpecialtySection mdht, Identificator id) {
-		mdht.getTemplateIds().add(id.getIi());
+	public static void addTemplateId(POCDMT000040Organizer mdht, Identificator id) {
+		mdht.getTemplateId().add(id.getHl7CdaR2Ii());
 		sortTemplateIds(mdht);
 	}
 
@@ -221,8 +197,8 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateId(LegalAuthenticator mdht, Identificator id) {
-		mdht.getTemplateIds().add(id.getIi());
+	public static void addTemplateId(POCDMT000040RecordTarget mdht, Identificator id) {
+		mdht.getTemplateId().add(id.getHl7CdaR2Ii());
 		sortTemplateIds(mdht);
 	}
 
@@ -234,34 +210,8 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateId(Organizer mdht, Identificator id) {
-		mdht.getTemplateIds().add(id.getIi());
-		sortTemplateIds(mdht);
-	}
-
-	/**
-	 * Adds a template id.
-	 *
-	 * @param mdht
-	 *            the mdht
-	 * @param id
-	 *            the id
-	 */
-	public static void addTemplateId(RecordTarget mdht, Identificator id) {
-		mdht.getTemplateIds().add(id.getIi());
-		sortTemplateIds(mdht);
-	}
-
-	/**
-	 * Adds a template id.
-	 *
-	 * @param mdht
-	 *            the mdht
-	 * @param id
-	 *            the id
-	 */
-	public static void addTemplateId(SpecimenCollection mdht, Identificator id) {
-		mdht.getTemplateIds().add(id.getIi());
+	public static void addTemplateId(POCDMT000040Specimen mdht, Identificator id) {
+		mdht.getTemplateId().add(id.getHl7CdaR2Ii());
 		sortTemplateIds(mdht);
 	}
 
@@ -273,10 +223,10 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateIdOnce(Act mdht, Identificator id) {
+	public static void addTemplateIdOnce(POCDMT000040Act mdht, Identificator id) {
 		boolean alreadyExists = false;
-		for (II existingId : mdht.getTemplateIds()) {
-			if (existingId.equals(id.getIi()))
+		for (II existingId : mdht.getTemplateId()) {
+			if (existingId.equals(id.getHl7CdaR2Ii()))
 				alreadyExists = true;
 		}
 		if (!alreadyExists)
@@ -292,10 +242,10 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateIdOnce(Authenticator mdht, Identificator id) {
+	public static void addTemplateIdOnce(POCDMT000040Authenticator mdht, Identificator id) {
 		boolean alreadyExists = false;
-		for (II existingId : mdht.getTemplateIds()) {
-			if (existingId.equals(id.getIi()))
+		for (II existingId : mdht.getTemplateId()) {
+			if (existingId.equals(id.getHl7CdaR2Ii()))
 				alreadyExists = true;
 		}
 		if (!alreadyExists)
@@ -311,10 +261,10 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateIdOnce(Author mdht, Identificator id) {
+	public static void addTemplateIdOnce(POCDMT000040Author mdht, Identificator id) {
 		boolean alreadyExists = false;
-		for (II existingId : mdht.getTemplateIds()) {
-			if (existingId.equals(id.getIi()))
+		for (II existingId : mdht.getTemplateId()) {
+			if (existingId.equals(id.getHl7CdaR2Ii()))
 				alreadyExists = true;
 		}
 		if (!alreadyExists)
@@ -331,10 +281,10 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id to be added if it doesn't exist, yet.
 	 */
-	public static void addTemplateIdOnce(ClinicalDocument doc, Identificator id) {
+	public static void addTemplateIdOnce(POCDMT000040ClinicalDocument doc, Identificator id) {
 		boolean alreadyExists = false;
-		for (II existingId : doc.getTemplateIds()) {
-			if (existingId.equals(id.getIi()))
+		for (II existingId : doc.getTemplateId()) {
+			if (existingId.equals(id.getHl7CdaR2Ii()))
 				alreadyExists = true;
 		}
 		if (!alreadyExists)
@@ -350,10 +300,10 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateIdOnce(Custodian mdht, Identificator id) {
+	public static void addTemplateIdOnce(POCDMT000040Custodian mdht, Identificator id) {
 		boolean alreadyExists = false;
-		for (II existingId : mdht.getTemplateIds()) {
-			if (existingId.equals(id.getIi()))
+		for (II existingId : mdht.getTemplateId()) {
+			if (existingId.equals(id.getHl7CdaR2Ii()))
 				alreadyExists = true;
 		}
 		if (!alreadyExists)
@@ -369,10 +319,10 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateIdOnce(DataEnterer mdht, Identificator id) {
+	public static void addTemplateIdOnce(POCDMT000040DataEnterer mdht, Identificator id) {
 		boolean alreadyExists = false;
-		for (II existingId : mdht.getTemplateIds()) {
-			if (existingId.equals(id.getIi()))
+		for (II existingId : mdht.getTemplateId()) {
+			if (existingId.equals(id.getHl7CdaR2Ii()))
 				alreadyExists = true;
 		}
 		if (!alreadyExists)
@@ -388,48 +338,10 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateIdOnce(InformationRecipient mdht, Identificator id) {
+	public static void addTemplateIdOnce(POCDMT000040InformationRecipient mdht, Identificator id) {
 		boolean alreadyExists = false;
-		for (II existingId : mdht.getTemplateIds()) {
-			if (existingId.equals(id.getIi()))
-				alreadyExists = true;
-		}
-		if (!alreadyExists)
-			addTemplateId(mdht, id);
-		sortTemplateIds(mdht);
-	}
-
-	/**
-	 * Adds a template id once.
-	 *
-	 * @param doc
-	 *            the doc
-	 * @param id
-	 *            the id
-	 */
-	public static void addTemplateIdOnce(InfrastructureRoot doc, Identificator id) {
-		boolean alreadyExists = false;
-		for (II existingId : doc.getTemplateIds()) {
-			if (existingId.equals(id.getIi()))
-				alreadyExists = true;
-		}
-		if (!alreadyExists)
-			addTemplateId(doc, id);
-		sortTemplateIds(doc);
-	}
-
-	/**
-	 * Adds a template id once.
-	 *
-	 * @param mdht
-	 *            the mdht
-	 * @param id
-	 *            the id
-	 */
-	public static void addTemplateIdOnce(LaboratoryObservation mdht, Identificator id) {
-		boolean alreadyExists = false;
-		for (II existingId : mdht.getTemplateIds()) {
-			if (existingId.equals(id.getIi()))
+		for (II existingId : mdht.getTemplateId()) {
+			if (existingId.equals(id.getHl7CdaR2Ii()))
 				alreadyExists = true;
 		}
 		if (!alreadyExists)
@@ -445,11 +357,10 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateIdOnce(LaboratoryReportDataProcessingEntry mdht,
-			Identificator id) {
+	public static void addTemplateIdOnce(POCDMT000040Observation mdht, Identificator id) {
 		boolean alreadyExists = false;
-		for (II existingId : mdht.getTemplateIds()) {
-			if (existingId.equals(id.getIi()))
+		for (II existingId : mdht.getTemplateId()) {
+			if (existingId.equals(id.getHl7CdaR2Ii()))
 				alreadyExists = true;
 		}
 		if (!alreadyExists)
@@ -465,10 +376,10 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateIdOnce(LaboratorySpecialtySection mdht, Identificator id) {
-		boolean alreadyExists = false;
-		for (II existingId : mdht.getTemplateIds()) {
-			if (existingId.equals(id.getIi()))
+	public static void addTemplateIdOnce(POCDMT000040Section mdht, Identificator id) {
+		var alreadyExists = false;
+		for (II existingId : mdht.getTemplateId()) {
+			if (existingId.equals(id.getHl7CdaR2Ii()))
 				alreadyExists = true;
 		}
 		if (!alreadyExists)
@@ -484,10 +395,10 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateIdOnce(LegalAuthenticator mdht, Identificator id) {
-		boolean alreadyExists = false;
-		for (II existingId : mdht.getTemplateIds()) {
-			if (existingId.equals(id.getIi()))
+	public static void addTemplateIdOnce(POCDMT000040LegalAuthenticator mdht, Identificator id) {
+		var alreadyExists = false;
+		for (II existingId : mdht.getTemplateId()) {
+			if (existingId.equals(id.getHl7CdaR2Ii()))
 				alreadyExists = true;
 		}
 		if (!alreadyExists)
@@ -503,10 +414,10 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateIdOnce(Organizer mdht, Identificator id) {
+	public static void addTemplateIdOnce(POCDMT000040Organizer mdht, Identificator id) {
 		boolean alreadyExists = false;
-		for (II existingId : mdht.getTemplateIds()) {
-			if (existingId.equals(id.getIi()))
+		for (II existingId : mdht.getTemplateId()) {
+			if (existingId.equals(id.getHl7CdaR2Ii()))
 				alreadyExists = true;
 		}
 		if (!alreadyExists)
@@ -522,10 +433,10 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateIdOnce(RecordTarget mdht, Identificator id) {
+	public static void addTemplateIdOnce(POCDMT000040RecordTarget mdht, Identificator id) {
 		boolean alreadyExists = false;
-		for (II existingId : mdht.getTemplateIds()) {
-			if (existingId.equals(id.getIi()))
+		for (II existingId : mdht.getTemplateId()) {
+			if (existingId.equals(id.getHl7CdaR2Ii()))
 				alreadyExists = true;
 		}
 		if (!alreadyExists)
@@ -541,10 +452,10 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void addTemplateIdOnce(SpecimenCollection mdht, Identificator id) {
+	public static void addTemplateIdOnce(POCDMT000040Specimen mdht, Identificator id) {
 		boolean alreadyExists = false;
-		for (II existingId : mdht.getTemplateIds()) {
-			if (existingId.equals(id.getIi()))
+		for (II existingId : mdht.getTemplateId()) {
+			if (existingId.equals(id.getHl7CdaR2Ii()))
 				alreadyExists = true;
 		}
 		if (!alreadyExists)
@@ -559,7 +470,7 @@ public abstract class CdaUtilMdht {
 	 * @return the Identificator
 	 */
 	public static Identificator createUniqueIdentificator() {
-		final II ii = DatatypesFactory.eINSTANCE.createII();
+		final II ii = new II();
 		ii.setRoot(EhcVersions.getCurrentVersion().getOid());
 		ii.setExtension(UUID.generate());
 		return new Identificator(ii);
@@ -571,7 +482,7 @@ public abstract class CdaUtilMdht {
 	 * @return the II
 	 */
 	public static II createUniqueIi() {
-		final II ii = DatatypesFactory.eINSTANCE.createII();
+		final II ii = new II();
 		ii.setRoot(EhcVersions.getCurrentVersion().getOid());
 		ii.setExtension(UUID.generate());
 		return ii;
@@ -590,7 +501,7 @@ public abstract class CdaUtilMdht {
 		if (id == null) {
 			ii = createUniqueIi();
 		} else {
-			ii = id.getIi();
+			ii = id.getHl7CdaR2Ii();
 		}
 		return ii;
 	}
@@ -604,7 +515,7 @@ public abstract class CdaUtilMdht {
 	 * @return the II
 	 */
 	public static II createUniqueIiFromString(String id) {
-		final II ii = DatatypesFactory.eINSTANCE.createII();
+		final II ii = new II();
 		ii.setRoot(EhcVersions.getCurrentVersion().getOid());
 		if (id == null) {
 			ii.setExtension(UUID.generate());
@@ -615,24 +526,6 @@ public abstract class CdaUtilMdht {
 	}
 
 	/**
-	 * Gets the mdht cda factory instance.
-	 *
-	 * @return the mdht cda factory instance
-	 */
-	public static CDAFactory getMdhtCdaFactoryInstance() {
-		return CDAFactory.eINSTANCE;
-	}
-
-	/**
-	 * Gets the mdht datatypes factory instance.
-	 *
-	 * @return the mdht datatypes factory instance
-	 */
-	public static DatatypesFactory getMdhtDatatypesFactoryInstance() {
-		return DatatypesFactory.eINSTANCE;
-	}
-
-	/**
 	 * Removes the template id.
 	 *
 	 * @param mdht
@@ -640,10 +533,10 @@ public abstract class CdaUtilMdht {
 	 * @param id
 	 *            the id
 	 */
-	public static void removeTemplateId(LaboratoryObservation mdht, Identificator id) {
-		for (II existingId : mdht.getTemplateIds()) {
-			if (existingId.equals(id.getIi())) {
-				mdht.getTemplateIds().remove(existingId);
+	public static void removeTemplateId(POCDMT000040Observation mdht, Identificator id) {
+		for (II existingId : mdht.getTemplateId()) {
+			if (existingId.equals(id.getHl7CdaR2Ii())) {
+				mdht.getTemplateId().remove(existingId);
 				break;
 			}
 		}
@@ -657,10 +550,10 @@ public abstract class CdaUtilMdht {
 	 *            the new entry relationship comment inversion id and type code
 	 */
 	public static void setEntryRelationshipCommentInversionIdAndTypeCode(
-			EList<EntryRelationship> entryRelationships) {
+			List<POCDMT000040EntryRelationship> entryRelationships) {
 		final int erNb = entryRelationships.size() - 1;
 		entryRelationships.get(erNb).setInversionInd(true);
-		entryRelationships.get(erNb).setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+		entryRelationships.get(erNb).setTypeCode(XActRelationshipEntryRelationship.SUBJ);
 	}
 
 	/**
@@ -671,8 +564,8 @@ public abstract class CdaUtilMdht {
 	 * @param typeCode
 	 *            the type code
 	 */
-	public static void setEntryRelationshipTypeCode(EList<EntryRelationship> erList,
-			x_ActRelationshipEntryRelationship typeCode) {
+	public static void setEntryRelationshipTypeCode(List<POCDMT000040EntryRelationship> erList,
+			XActRelationshipEntryRelationship typeCode) {
 		final int nb = erList.size() - 1;
 		erList.get(nb).setTypeCode(typeCode);
 	}
@@ -683,15 +576,15 @@ public abstract class CdaUtilMdht {
 	 * @param mdht
 	 *            the mdht
 	 */
-	public static void sortTemplateIds(Act mdht) {
-		ArrayList<Identificator> list = new ArrayList<Identificator>();
-		for (II ii : mdht.getTemplateIds()) {
+	public static void sortTemplateIds(POCDMT000040Act mdht) {
+		ArrayList<Identificator> list = new ArrayList<>();
+		for (II ii : mdht.getTemplateId()) {
 			list.add(new Identificator(ii));
 		}
-		mdht.getTemplateIds().clear();
+		mdht.getTemplateId().clear();
 		list.sort(new IdentificatorComparator());
 		for (Identificator identificator : list) {
-			mdht.getTemplateIds().add(identificator.getIi());
+			mdht.getTemplateId().add(identificator.getHl7CdaR2Ii());
 		}
 
 	}
@@ -702,15 +595,15 @@ public abstract class CdaUtilMdht {
 	 * @param mdht
 	 *            the mdht
 	 */
-	public static void sortTemplateIds(Authenticator mdht) {
-		ArrayList<Identificator> list = new ArrayList<Identificator>();
-		for (II ii : mdht.getTemplateIds()) {
+	public static void sortTemplateIds(POCDMT000040Authenticator mdht) {
+		ArrayList<Identificator> list = new ArrayList<>();
+		for (II ii : mdht.getTemplateId()) {
 			list.add(new Identificator(ii));
 		}
-		mdht.getTemplateIds().clear();
+		mdht.getTemplateId().clear();
 		list.sort(new IdentificatorComparator());
 		for (Identificator identificator : list) {
-			mdht.getTemplateIds().add(identificator.getIi());
+			mdht.getTemplateId().add(identificator.getHl7CdaR2Ii());
 		}
 
 	}
@@ -721,15 +614,15 @@ public abstract class CdaUtilMdht {
 	 * @param mdht
 	 *            the mdht
 	 */
-	public static void sortTemplateIds(Author mdht) {
-		ArrayList<Identificator> list = new ArrayList<Identificator>();
-		for (II ii : mdht.getTemplateIds()) {
+	public static void sortTemplateIds(POCDMT000040Author mdht) {
+		ArrayList<Identificator> list = new ArrayList<>();
+		for (II ii : mdht.getTemplateId()) {
 			list.add(new Identificator(ii));
 		}
-		mdht.getTemplateIds().clear();
+		mdht.getTemplateId().clear();
 		list.sort(new IdentificatorComparator());
 		for (Identificator identificator : list) {
-			mdht.getTemplateIds().add(identificator.getIi());
+			mdht.getTemplateId().add(identificator.getHl7CdaR2Ii());
 		}
 
 	}
@@ -740,15 +633,15 @@ public abstract class CdaUtilMdht {
 	 * @param doc
 	 *            the doc
 	 */
-	public static void sortTemplateIds(ClinicalDocument doc) {
-		ArrayList<Identificator> list = new ArrayList<Identificator>();
-		for (II ii : doc.getTemplateIds()) {
+	public static void sortTemplateIds(POCDMT000040ClinicalDocument doc) {
+		ArrayList<Identificator> list = new ArrayList<>();
+		for (II ii : doc.getTemplateId()) {
 			list.add(new Identificator(ii));
 		}
-		doc.getTemplateIds().clear();
+		doc.getTemplateId().clear();
 		list.sort(new IdentificatorComparator());
 		for (Identificator identificator : list) {
-			doc.getTemplateIds().add(identificator.getIi());
+			doc.getTemplateId().add(identificator.getHl7CdaR2Ii());
 		}
 
 	}
@@ -759,15 +652,15 @@ public abstract class CdaUtilMdht {
 	 * @param mdht
 	 *            the mdht
 	 */
-	public static void sortTemplateIds(Custodian mdht) {
-		ArrayList<Identificator> list = new ArrayList<Identificator>();
-		for (II ii : mdht.getTemplateIds()) {
+	public static void sortTemplateIds(POCDMT000040Custodian mdht) {
+		ArrayList<Identificator> list = new ArrayList<>();
+		for (II ii : mdht.getTemplateId()) {
 			list.add(new Identificator(ii));
 		}
-		mdht.getTemplateIds().clear();
+		mdht.getTemplateId().clear();
 		list.sort(new IdentificatorComparator());
 		for (Identificator identificator : list) {
-			mdht.getTemplateIds().add(identificator.getIi());
+			mdht.getTemplateId().add(identificator.getHl7CdaR2Ii());
 		}
 
 	}
@@ -778,15 +671,15 @@ public abstract class CdaUtilMdht {
 	 * @param mdht
 	 *            the mdht
 	 */
-	public static void sortTemplateIds(DataEnterer mdht) {
-		ArrayList<Identificator> list = new ArrayList<Identificator>();
-		for (II ii : mdht.getTemplateIds()) {
+	public static void sortTemplateIds(POCDMT000040DataEnterer mdht) {
+		ArrayList<Identificator> list = new ArrayList<>();
+		for (II ii : mdht.getTemplateId()) {
 			list.add(new Identificator(ii));
 		}
-		mdht.getTemplateIds().clear();
+		mdht.getTemplateId().clear();
 		list.sort(new IdentificatorComparator());
 		for (Identificator identificator : list) {
-			mdht.getTemplateIds().add(identificator.getIi());
+			mdht.getTemplateId().add(identificator.getHl7CdaR2Ii());
 		}
 
 	}
@@ -797,15 +690,35 @@ public abstract class CdaUtilMdht {
 	 * @param mdht
 	 *            the mdht
 	 */
-	public static void sortTemplateIds(InformationRecipient mdht) {
-		ArrayList<Identificator> list = new ArrayList<Identificator>();
-		for (II ii : mdht.getTemplateIds()) {
+	public static void sortTemplateIds(POCDMT000040InformationRecipient mdht) {
+		ArrayList<Identificator> list = new ArrayList<>();
+		for (II ii : mdht.getTemplateId()) {
 			list.add(new Identificator(ii));
 		}
-		mdht.getTemplateIds().clear();
+		mdht.getTemplateId().clear();
 		list.sort(new IdentificatorComparator());
 		for (Identificator identificator : list) {
-			mdht.getTemplateIds().add(identificator.getIi());
+			mdht.getTemplateId().add(identificator.getHl7CdaR2Ii());
+		}
+
+	}
+
+
+	/**
+	 * Sort template ids.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 */
+	public static void sortTemplateIds(POCDMT000040Observation mdht) {
+		ArrayList<Identificator> list = new ArrayList<>();
+		for (II ii : mdht.getTemplateId()) {
+			list.add(new Identificator(ii));
+		}
+		mdht.getTemplateId().clear();
+		list.sort(new IdentificatorComparator());
+		for (Identificator identificator : list) {
+			mdht.getTemplateId().add(identificator.getHl7CdaR2Ii());
 		}
 
 	}
@@ -816,15 +729,15 @@ public abstract class CdaUtilMdht {
 	 * @param mdht
 	 *            the mdht
 	 */
-	public static void sortTemplateIds(InfrastructureRoot mdht) {
-		ArrayList<Identificator> list = new ArrayList<Identificator>();
-		for (II ii : mdht.getTemplateIds()) {
+	public static void sortTemplateIds(POCDMT000040Section mdht) {
+		ArrayList<Identificator> list = new ArrayList<>();
+		for (II ii : mdht.getTemplateId()) {
 			list.add(new Identificator(ii));
 		}
-		mdht.getTemplateIds().clear();
+		mdht.getTemplateId().clear();
 		list.sort(new IdentificatorComparator());
 		for (Identificator identificator : list) {
-			mdht.getTemplateIds().add(identificator.getIi());
+			mdht.getTemplateId().add(identificator.getHl7CdaR2Ii());
 		}
 
 	}
@@ -835,15 +748,15 @@ public abstract class CdaUtilMdht {
 	 * @param mdht
 	 *            the mdht
 	 */
-	public static void sortTemplateIds(LaboratoryObservation mdht) {
-		ArrayList<Identificator> list = new ArrayList<Identificator>();
-		for (II ii : mdht.getTemplateIds()) {
+	public static void sortTemplateIds(POCDMT000040LegalAuthenticator mdht) {
+		ArrayList<Identificator> list = new ArrayList<>();
+		for (II ii : mdht.getTemplateId()) {
 			list.add(new Identificator(ii));
 		}
-		mdht.getTemplateIds().clear();
+		mdht.getTemplateId().clear();
 		list.sort(new IdentificatorComparator());
 		for (Identificator identificator : list) {
-			mdht.getTemplateIds().add(identificator.getIi());
+			mdht.getTemplateId().add(identificator.getHl7CdaR2Ii());
 		}
 
 	}
@@ -854,15 +767,15 @@ public abstract class CdaUtilMdht {
 	 * @param mdht
 	 *            the mdht
 	 */
-	public static void sortTemplateIds(LaboratoryReportDataProcessingEntry mdht) {
-		ArrayList<Identificator> list = new ArrayList<Identificator>();
-		for (II ii : mdht.getTemplateIds()) {
+	public static void sortTemplateIds(POCDMT000040Organizer mdht) {
+		ArrayList<Identificator> list = new ArrayList<>();
+		for (II ii : mdht.getTemplateId()) {
 			list.add(new Identificator(ii));
 		}
-		mdht.getTemplateIds().clear();
+		mdht.getTemplateId().clear();
 		list.sort(new IdentificatorComparator());
 		for (Identificator identificator : list) {
-			mdht.getTemplateIds().add(identificator.getIi());
+			mdht.getTemplateId().add(identificator.getHl7CdaR2Ii());
 		}
 
 	}
@@ -873,15 +786,15 @@ public abstract class CdaUtilMdht {
 	 * @param mdht
 	 *            the mdht
 	 */
-	public static void sortTemplateIds(LaboratorySpecialtySection mdht) {
-		ArrayList<Identificator> list = new ArrayList<Identificator>();
-		for (II ii : mdht.getTemplateIds()) {
+	public static void sortTemplateIds(POCDMT000040RecordTarget mdht) {
+		ArrayList<Identificator> list = new ArrayList<>();
+		for (II ii : mdht.getTemplateId()) {
 			list.add(new Identificator(ii));
 		}
-		mdht.getTemplateIds().clear();
+		mdht.getTemplateId().clear();
 		list.sort(new IdentificatorComparator());
 		for (Identificator identificator : list) {
-			mdht.getTemplateIds().add(identificator.getIi());
+			mdht.getTemplateId().add(identificator.getHl7CdaR2Ii());
 		}
 
 	}
@@ -892,72 +805,15 @@ public abstract class CdaUtilMdht {
 	 * @param mdht
 	 *            the mdht
 	 */
-	public static void sortTemplateIds(LegalAuthenticator mdht) {
-		ArrayList<Identificator> list = new ArrayList<Identificator>();
-		for (II ii : mdht.getTemplateIds()) {
+	public static void sortTemplateIds(POCDMT000040Specimen mdht) {
+		ArrayList<Identificator> list = new ArrayList<>();
+		for (II ii : mdht.getTemplateId()) {
 			list.add(new Identificator(ii));
 		}
-		mdht.getTemplateIds().clear();
+		mdht.getTemplateId().clear();
 		list.sort(new IdentificatorComparator());
 		for (Identificator identificator : list) {
-			mdht.getTemplateIds().add(identificator.getIi());
-		}
-
-	}
-
-	/**
-	 * Sort template ids.
-	 *
-	 * @param mdht
-	 *            the mdht
-	 */
-	public static void sortTemplateIds(Organizer mdht) {
-		ArrayList<Identificator> list = new ArrayList<Identificator>();
-		for (II ii : mdht.getTemplateIds()) {
-			list.add(new Identificator(ii));
-		}
-		mdht.getTemplateIds().clear();
-		list.sort(new IdentificatorComparator());
-		for (Identificator identificator : list) {
-			mdht.getTemplateIds().add(identificator.getIi());
-		}
-
-	}
-
-	/**
-	 * Sort template ids.
-	 *
-	 * @param mdht
-	 *            the mdht
-	 */
-	public static void sortTemplateIds(RecordTarget mdht) {
-		ArrayList<Identificator> list = new ArrayList<Identificator>();
-		for (II ii : mdht.getTemplateIds()) {
-			list.add(new Identificator(ii));
-		}
-		mdht.getTemplateIds().clear();
-		list.sort(new IdentificatorComparator());
-		for (Identificator identificator : list) {
-			mdht.getTemplateIds().add(identificator.getIi());
-		}
-
-	}
-
-	/**
-	 * Sort template ids.
-	 *
-	 * @param mdht
-	 *            the mdht
-	 */
-	public static void sortTemplateIds(SpecimenCollection mdht) {
-		ArrayList<Identificator> list = new ArrayList<Identificator>();
-		for (II ii : mdht.getTemplateIds()) {
-			list.add(new Identificator(ii));
-		}
-		mdht.getTemplateIds().clear();
-		list.sort(new IdentificatorComparator());
-		for (Identificator identificator : list) {
-			mdht.getTemplateIds().add(identificator.getIi());
+			mdht.getTemplateId().add(identificator.getHl7CdaR2Ii());
 		}
 
 	}

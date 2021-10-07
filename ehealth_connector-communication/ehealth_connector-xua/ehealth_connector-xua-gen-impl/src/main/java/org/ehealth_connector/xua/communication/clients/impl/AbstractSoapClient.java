@@ -45,7 +45,7 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.fileupload.MultipartStream;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
@@ -214,7 +214,7 @@ public abstract class AbstractSoapClient<T> {
 				return boundaryWith.getBytes();
 			}
 		}
-		return null;
+		return new byte[0];
 	}
 
 	protected SoapClientConfig getConfig() {
@@ -234,7 +234,7 @@ public abstract class AbstractSoapClient<T> {
 						.loadKeyMaterial(keyStore, config.getKeyStorePassword().toCharArray())//
 						.loadTrustMaterial(keyStore, acceptingTrustStrategy)//
 						.build();
-				return HttpClients.custom().setSslcontext(sslcontext).build();
+				return HttpClients.custom().setSSLContext(sslcontext).build();
 			} catch (KeyStoreException | KeyManagementException | UnrecoverableKeyException
 					| NoSuchAlgorithmException | IOException e) {
 				throw new ClientSendException(e);
@@ -299,8 +299,7 @@ public abstract class AbstractSoapClient<T> {
 
 		final var docFactory = DocumentBuilderFactory.newInstance();
 		docFactory.setNamespaceAware(true);
-		docFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-		docFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+		docFactory.setAttribute("http://xml.org/sax/features/external-general-entities", false);
 		final var docBuilder = docFactory.newDocumentBuilder();
 		final var soapDocument = docBuilder
 				.parse(new ByteArrayInputStream(content.getBytes()));
@@ -405,8 +404,7 @@ public abstract class AbstractSoapClient<T> {
 			IOException, XPathExpressionException, SoapException {
 		final var docFactory = DocumentBuilderFactory.newInstance();
 		docFactory.setNamespaceAware(true);
-		docFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-		docFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+		docFactory.setAttribute("http://xml.org/sax/features/external-general-entities", false);
 		final var docBuilder = docFactory.newDocumentBuilder();
 		final var document = docBuilder.parse(new ByteArrayInputStream(retVal.getBytes()));
 

@@ -71,7 +71,7 @@ public class XUserAssertionResponseImpl implements XUserAssertionResponse,
 				new QName("http://docs.oasis-open.org/ws-sx/ws-trust/200512", "Status"));
 		if (!statusses.isEmpty() && (statusses.get(0) != null)
 				&& (((Status) statusses.get(0)).getCode() != null)) {
-			return ((Status) statusses.get(0)).getCode().getValue();
+			return ((Status) statusses.get(0)).getCode().getURI();
 		}
 		return null;
 	}

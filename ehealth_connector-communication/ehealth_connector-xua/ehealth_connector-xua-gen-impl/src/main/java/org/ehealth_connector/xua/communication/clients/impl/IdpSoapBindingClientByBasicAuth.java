@@ -232,7 +232,7 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 			addBasicAuthentication(post);
 
 			return execute(post);
-		} catch (final Throwable t) {
+		} catch (final Exception t) {
 			throw new ClientSendException(t);
 		}
 

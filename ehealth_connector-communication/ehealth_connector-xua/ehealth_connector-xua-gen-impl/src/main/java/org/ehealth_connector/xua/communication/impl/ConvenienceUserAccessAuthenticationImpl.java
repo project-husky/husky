@@ -59,16 +59,16 @@ public class ConvenienceUserAccessAuthenticationImpl
 		initializers.add(new org.opensaml.core.metrics.impl.MetricRegistryInitializer());
 		initializers.add(new org.opensaml.core.xml.config.GlobalParserPoolInitializer());
 		initializers.add(new org.opensaml.core.xml.config.XMLObjectProviderInitializer());
-		initializers.add(new org.opensaml.saml.config.SAMLConfigurationInitializer());
-		initializers.add(new org.opensaml.saml.config.XMLObjectProviderInitializer());
+		initializers.add(new org.opensaml.saml.config.impl.SAMLConfigurationInitializer());
+		initializers.add(new org.opensaml.saml.config.impl.XMLObjectProviderInitializer());
 		initializers
-				.add(new org.opensaml.security.config.ClientTLSValidationConfiguratonInitializer());
-		initializers.add(new org.opensaml.soap.config.XMLObjectProviderInitializer());
-		initializers.add(new org.opensaml.xmlsec.config.ApacheXMLSecurityInitializer());
+				.add(new org.opensaml.security.config.impl.ClientTLSValidationConfiguratonInitializer());
+		initializers.add(new org.opensaml.soap.config.impl.XMLObjectProviderInitializer());
+		initializers.add(new org.opensaml.xmlsec.config.impl.ApacheXMLSecurityInitializer());
 		initializers.add(new org.opensaml.xmlsec.config.GlobalAlgorithmRegistryInitializer());
-		initializers.add(new org.opensaml.xmlsec.config.GlobalSecurityConfigurationInitializer());
-		initializers.add(new org.opensaml.xmlsec.config.JavaCryptoValidationInitializer());
-		initializers.add(new org.opensaml.xmlsec.config.XMLObjectProviderInitializer());
+		initializers.add(new org.opensaml.xmlsec.config.impl.GlobalSecurityConfigurationInitializer());
+		initializers.add(new org.opensaml.xmlsec.config.impl.JavaCryptoValidationInitializer());
+		initializers.add(new org.opensaml.xmlsec.config.impl.XMLObjectProviderInitializer());
 
 		for (final Initializer initializer : initializers) {
 			initializer.init();

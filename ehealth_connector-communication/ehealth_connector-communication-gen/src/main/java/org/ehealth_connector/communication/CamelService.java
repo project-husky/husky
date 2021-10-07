@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.xml.namespace.QName;
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -24,7 +23,6 @@ import org.opensaml.core.xml.XMLObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.w3c.dom.Document;
 
 public abstract class CamelService implements CamelContextAware {
 
@@ -50,9 +48,9 @@ public abstract class CamelService implements CamelContextAware {
 		var wssElement = new OpenSaml2SerializerImpl()
 				.serializeToXml((XMLObject) securityHeaderElement.getWrappedObject());
 
-		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-		Document doc = docBuilder.newDocument();
+		var docFactory = DocumentBuilderFactory.newInstance();
+		var docBuilder = docFactory.newDocumentBuilder();
+		var doc = docBuilder.newDocument();
 
 		var wsseElement = doc.createElementNS(
 				"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd", "wsse:Security");
@@ -102,8 +100,7 @@ public abstract class CamelService implements CamelContextAware {
 	}
 
 	protected Exchange send(String endpoint, Object body, SecurityHeaderElement securityHeaderElement,
-			Map<String, String> outgoingHttpHeaders)
-			throws Exception {
+			Map<String, String> outgoingHttpHeaders) throws Exception {
 		Exchange exchange = new DefaultExchange(camelContext);
 		exchange.getIn().setBody(body);
 		if (securityHeaderElement != null) {
@@ -115,12 +112,8 @@ public abstract class CamelService implements CamelContextAware {
 		}
 
 		try (var template = camelContext.createProducerTemplate()) {
-			// exchange.getProperties().put("mtom-enabled", false);
-			// System.out.println(exchange.getProperties());
-
 			var result = template.send(endpoint, exchange);
 
-			// System.out.println(exchange.getProperties());
 			if (result.getException() != null) {
 				throw result.getException();
 			}

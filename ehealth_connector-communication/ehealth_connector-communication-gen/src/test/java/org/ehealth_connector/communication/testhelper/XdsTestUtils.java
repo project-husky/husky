@@ -18,7 +18,6 @@ package org.ehealth_connector.communication.testhelper;
 
 import java.util.Date;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,13 +27,9 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.mdht.enums.DateTimeRangeAttributes;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.communication.xd.storedquery.DateTimeRange;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationType;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
-import org.openhealthtools.ihe.xds.consumer.query.DateTimeRange;
-import org.openhealthtools.ihe.xds.consumer.query.MalformedQueryException;
-import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameter;
-import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameterList;
-import org.openhealthtools.ihe.xds.metadata.constants.DocumentEntryConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -77,13 +72,11 @@ public class XdsTestUtils {
 
 	public XdsTestUtils() {
 		// Initalize DateTimeRanges
-		try {
-			dateTimeRange1 = new DateTimeRange(DocumentEntryConstants.CREATION_TIME, "201401012300", "201412310400");
-			dateTimeRange2 = new DateTimeRange(DocumentEntryConstants.CREATION_TIME, "201501012300", "201502010400");
-			dateTimeRanges = new DateTimeRange[] { dateTimeRange1, dateTimeRange2 };
-		} catch (MalformedQueryException e) {
-			e.printStackTrace();
-		}
+		dateTimeRange1 = new DateTimeRange(DateTimeRangeAttributes.CREATION_TIME,
+				DateUtil.parseDateyyyyMMddHHmm("201401012300"), DateUtil.parseDateyyyyMMddHHmm("201412310400"));
+		dateTimeRange2 = new DateTimeRange(DateTimeRangeAttributes.CREATION_TIME,
+				DateUtil.parseDateyyyyMMddHHmm("201501012300"), DateUtil.parseDateyyyyMMddHHmm("201502010400"));
+		dateTimeRanges = new DateTimeRange[] { dateTimeRange1, dateTimeRange2 };
 
 			d1 = DateUtil.parseDateyyyyMMddHHmmss("19800521022211");
 			d2 = DateUtil.parseDateyyyyMMddHHmmss("20150521133459");
@@ -122,12 +115,4 @@ public class XdsTestUtils {
 		return "";
 	}
 
-	public void log(StoredQueryParameterList aSqpl) {
-		aSqpl.forEach(new Consumer<StoredQueryParameter>() {
-			@Override
-			public void accept(StoredQueryParameter t) {
-				log.debug(t.getName() + ": " + t.getValue());
-			}
-		});
-	}
 }

@@ -20,13 +20,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.xml.namespace.QName;
-import javax.xml.soap.SOAPHeaderElement;
-import javax.xml.ws.handler.MessageContext;
-import javax.xml.ws.handler.soap.SOAPHandler;
-import javax.xml.ws.handler.soap.SOAPMessageContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import jakarta.xml.soap.SOAPHeaderElement;
+import jakarta.xml.ws.handler.MessageContext;
+import jakarta.xml.ws.handler.soap.SOAPHandler;
+import jakarta.xml.ws.handler.soap.SOAPMessageContext;
 
 /**
  * <!-- @formatter:off -->
@@ -133,7 +134,7 @@ public class WsaHeaderSoapHandler implements SOAPHandler<SOAPMessageContext> {
 
 		} catch (final Exception t) {
 			mLogger.error("error handling inout stuff", t);
-			return true;
+			return false;
 		}
 		return true;
 	}

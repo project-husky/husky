@@ -17,8 +17,7 @@
 package org.ehealth_connector.cda.enums;
 
 import org.ehealth_connector.common.Code;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.ehealth_connector.common.hl7cdar2.CS;
 
 /*
  *<div class="de">Zustand eines Leidens</div>
@@ -190,7 +189,7 @@ public enum ProblemConcernStatusCode {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CS getCS() {
-		final CS cs = DatatypesFactory.eINSTANCE.createCS();
+		final CS cs = new CS();
 		cs.setCode(code);
 		return cs;
 	}

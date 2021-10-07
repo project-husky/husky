@@ -21,7 +21,6 @@ import java.util.Calendar;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQuery;
 import org.ehealth_connector.xua.core.SecurityObject;
 import org.ehealth_connector.xua.hl7v3.InstanceIdentifier;
-import org.joda.time.DateTime;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.xacml.ctx.AttributeType;
 import org.opensaml.xacml.ctx.AttributeValueType;
@@ -88,9 +87,8 @@ public class PrivacyPolicyQueryImpl
 
 	@Override
 	public Calendar getIssueInstant() {
-		final DateTime instant = internalObject.getIssueInstant();
 		final Calendar retVal = Calendar.getInstance();
-		retVal.setTimeInMillis(instant.getMillis());
+		retVal.setTimeInMillis(internalObject.getIssueInstant().toEpochMilli());
 		return retVal;
 	}
 

@@ -17,6 +17,7 @@
 package org.ehealth_connector.communication.xd.xdm;
 
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
@@ -52,10 +53,10 @@ public class XdmRetrieveResponseTypeImpl {
 	 */
 	public List<Document> getAttachments() {
 		if (!isProcessed()) {
-			return null;
+			return new LinkedList<>();
 		}
 		if (null == attachments) {
-			return null;
+			return new LinkedList<>();
 		}
 		return Collections.unmodifiableList(attachments);
 	}

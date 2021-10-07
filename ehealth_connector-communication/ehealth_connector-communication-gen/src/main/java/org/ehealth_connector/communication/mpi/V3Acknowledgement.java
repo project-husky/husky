@@ -17,13 +17,11 @@
 
 package org.ehealth_connector.communication.mpi;
 
-import net.ihe.gazelle.hl7v3.datatypes.II;
 import net.ihe.gazelle.hl7v3.mcciin000002UV01.MCCIIN000002UV01Type;
 
 public class V3Acknowledgement extends V3Response {
 
 	private MCCIIN000002UV01Type rootElement = null;
-	private II messageId = null;
 
 	// right now the only constructor takes in xml element
 	/**
@@ -86,7 +84,4 @@ public class V3Acknowledgement extends V3Response {
 		}
 	}
 
-	public II getMessageId() {
-		return messageId;
-	}
 }

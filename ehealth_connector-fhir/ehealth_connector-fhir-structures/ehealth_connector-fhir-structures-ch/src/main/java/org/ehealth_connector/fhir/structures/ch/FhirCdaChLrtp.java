@@ -67,49 +67,49 @@ public class FhirCdaChLrtp /* extends AbstractFhirCdaCh */ {
 
 		/** The comment. */
 		@Child(name = "comment")
-		@Extension(url = FhirCommon.urnUseAsComment, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_COMMENT, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "comment")
 		private Reference comment;
 
 		/** The custodian. */
 		@Child(name = "custodian")
-		@Extension(url = FhirCommon.urnUseAsCustodian, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_CUSTODIAN, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "custodian")
 		private Reference custodian;
 
 		/** The doc author. */
 		@Child(name = "docAuthor")
-		@Extension(url = FhirCommon.urnUseAsAuthor, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_AUTHOR, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "author")
 		private Reference docAuthor;
 
 		/** The doc language. */
 		@Child(name = "docLanguage")
-		@Extension(url = FhirCommon.urnUseAsLanguage, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_LANGUAGE, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "docLanguage")
 		private Reference docLanguage;
 
 		/** The doc type. */
 		@Child(name = "docType")
-		@Extension(url = FhirCommon.urnUseAsDocType, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_DOC_TYPE, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "docType")
 		private Reference docType;
 
 		/** The informationRecipient. */
 		@Child(name = "docInformationRecipient")
-		@Extension(url = FhirCommon.urnUseAsInformationRecipient, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_INFORMATION_RECIPIENT, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "informationRecipient")
 		private Reference informationRecipient;
 
 		/** The legal authenticator. */
 		@Child(name = "legalAuthenticator")
-		@Extension(url = FhirCommon.urnUseAsLegalAuthenticator, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_LEGAL_AUTHENTICATOR, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "legalAuthenticator")
 		private Reference legalAuthenticator;
 
 		/** The patient. */
 		@Child(name = "patient")
-		@Extension(url = FhirCommon.urnUseAsPatient, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_PATIENT, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "patient")
 		private Reference patient;
 

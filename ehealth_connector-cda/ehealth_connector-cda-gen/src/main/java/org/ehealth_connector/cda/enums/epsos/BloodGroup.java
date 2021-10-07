@@ -17,8 +17,7 @@
 package org.ehealth_connector.cda.enums.epsos;
 
 import org.ehealth_connector.common.Code;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.ehealth_connector.common.hl7cdar2.CE;
 
 /*
 *<div class="en">Description of blood group</div>
@@ -267,7 +266,7 @@ public enum BloodGroup {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CE getCE() {
-		final CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final CE ce = new CE();
 		ce.setCodeSystem(getCodeSystemOid());
 		ce.setCode(code);
 		ce.setDisplayName(displayName);

@@ -28,7 +28,6 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.util.ValidationEventCollector;
 import javax.xml.transform.Source;
@@ -77,7 +76,7 @@ public class BatchProcessConfigurationParser {
 	} // End of class ValidationHandler
 
 	/** The name of the XML schema file. */
-	private static final String schemaName = "/batchprocessconfiguration.xsd";
+	private static final String SCHEMA_NAME = "/batchprocessconfiguration.xsd";
 
 	/** The SLF4J logger instance. */
 	private final Logger log = LoggerFactory.getLogger(getClass());
@@ -115,13 +114,13 @@ public class BatchProcessConfigurationParser {
 	 *             if no implementation of the schema language is available.
 	 */
 	protected Schema createSchema() throws SAXException, FileNotFoundException {
-		final InputStream in = getClass().getResourceAsStream(schemaName);
+		final InputStream in = getClass().getResourceAsStream(SCHEMA_NAME);
 		if (in == null) {
-			throw new FileNotFoundException("Could not find schema as resource: " + schemaName);
+			throw new FileNotFoundException("Could not find schema as resource: " + SCHEMA_NAME);
 		}
 		try {
 			final Source schemaSource = new StreamSource(in);
-			final SchemaFactory schemaFactory = SchemaFactory
+			final var schemaFactory = SchemaFactory
 					.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 			return schemaFactory.newSchema(schemaSource);
 		} finally {
@@ -167,19 +166,11 @@ public class BatchProcessConfigurationParser {
 	 */
 	public BatchConfigurationType parse() throws ConfigurationException {
 		log.info("Parsing configuration file: '{}'", getBatchProcessConfigFile());
-		InputStream in = null;
-		try {
-			in = new BufferedInputStream(new FileInputStream(getBatchProcessConfigFile()));
+		try (InputStream in = new BufferedInputStream(new FileInputStream(getBatchProcessConfigFile()))) {
 			return unmarshal(BatchConfigurationType.class, in);
 		} catch (final Exception e) {
 			throw new ConfigurationException(e);
 		} finally {
-			if (in != null) {
-				try {
-					in.close();
-				} catch (final IOException e) {
-				}
-			}
 			processValidationEvents();
 		}
 	}
@@ -204,18 +195,16 @@ public class BatchProcessConfigurationParser {
 			final int line = event.getLocator().getLineNumber();
 			final int column = event.getLocator().getColumnNumber();
 
-			final StringBuilder sb = new StringBuilder();
+			final var sb = new StringBuilder();
 			sb.append(getBatchProcessConfigFile() + ":");
 			if ((line != -1) && (column != -1)) {
 				sb.append(line + ":" + column + ": ");
 			}
 
-			switch (event.getSeverity()) {
-			case ValidationEvent.WARNING:
-				log.warn(sb.toString() + event.getMessage());
-				break;
-			case ValidationEvent.ERROR:
-			case ValidationEvent.FATAL_ERROR:
+			if (ValidationEvent.WARNING == event.getSeverity()) {
+				log.warn("{}{}", sb, event.getMessage());
+			} else if (ValidationEvent.ERROR == event.getSeverity()
+					|| ValidationEvent.FATAL_ERROR == event.getSeverity()) {
 				throw new ConfigurationException(sb.toString() + "Invalid configuration entry",
 						event.getLinkedException());
 			}
@@ -250,8 +239,8 @@ public class BatchProcessConfigurationParser {
 	private <T> T unmarshal(Class<T> docClass, InputStream in)
 			throws JAXBException, SAXException, FileNotFoundException {
 		final String packageName = docClass.getPackage().getName();
-		final JAXBContext jc = JAXBContext.newInstance(packageName);
-		final Unmarshaller u = jc.createUnmarshaller();
+		final var jc = JAXBContext.newInstance(packageName);
+		final var u = jc.createUnmarshaller();
 		u.setEventHandler(getValidationHandler());
 		u.setSchema(createSchema());
 		final JAXBElement<T> doc = (JAXBElement<T>) u.unmarshal(in);

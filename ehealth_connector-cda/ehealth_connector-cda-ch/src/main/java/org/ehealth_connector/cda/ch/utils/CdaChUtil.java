@@ -27,6 +27,8 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Section;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040StructuredBody;
 import org.ehealth_connector.common.hl7cdar2.StrucDocText;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <div class="en">A util class with helper functions.</div>
@@ -34,20 +36,23 @@ import org.ehealth_connector.common.hl7cdar2.StrucDocText;
  */
 public abstract class CdaChUtil extends CdaUtilMdht {
 
+	/** The SLF4J logger instance. */
+	private static final Logger LOG = LoggerFactory.getLogger(CdaChUtil.class);
+
 	/** The Constant DIS_SECTION_CODE. */
-	public final static String DIS_SECTION_CODE = new DispenseSectionContentModule().getCode()
+	public static final String DIS_SECTION_CODE = new DispenseSectionContentModule().getCode()
 			.getCode();
 
 	/** The Constant MTP_SECTION_CODE. */
-	public final static String MTP_SECTION_CODE = new MedicationTreatmenPlanSectionContentModule()
+	public static final String MTP_SECTION_CODE = new MedicationTreatmenPlanSectionContentModule()
 			.getCode().getCode();
 
 	/** The Constant PADV_SECTION_CODE. */
-	public final static String PADV_SECTION_CODE = new PharmaceuticalAdviceSectionContentModule()
+	public static final String PADV_SECTION_CODE = new PharmaceuticalAdviceSectionContentModule()
 			.getCode().getCode();
 
 	/** The Constant PRE_SECTION_CODE. */
-	public final static String PRE_SECTION_CODE = new PrescriptionSectionContentModule().getCode()
+	public static final String PRE_SECTION_CODE = new PrescriptionSectionContentModule().getCode()
 			.getCode();
 
 	/** The Constant PML_SECTION_CODE. *
@@ -55,7 +60,7 @@ public abstract class CdaChUtil extends CdaUtilMdht {
 			.getCode();*/
 
 	/** The Constant PMLC_SECTION_CODE. */
-	public final static String PMLC_SECTION_CODE = "10160-0";
+	public static final String PMLC_SECTION_CODE = "10160-0";
 			//new MedicationCardSectionContentModule().getCode().getCode();
 
 	/**
@@ -96,7 +101,7 @@ public abstract class CdaChUtil extends CdaUtilMdht {
 			} catch (Exception e) {
 				// if an exception is catched it means that the document was
 				// malformated -> narrative text is not generated
-				e.printStackTrace();
+				LOG.error(e.getMessage(), e);
 			}
 		}
 

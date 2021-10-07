@@ -79,7 +79,7 @@ public class ZipCreator {
 	 */
 	public void addZipItem(InputStream data, String pathInZipFile) throws IOException {
 
-		log.debug("Adding to Zip-file: " + pathInZipFile);
+		log.debug("Adding to Zip-file: {}", pathInZipFile);
 
 		if (data == null) {
 			out.putNextEntry(new ZipEntry(pathInZipFile));
