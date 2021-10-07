@@ -140,8 +140,8 @@ public class UUID {
 		l = Character.getNumericValue(c) & 0x3F ^ 0x80; // set the high bits 7 & 6 to 1 0
 		uuid.replace(16, 17, hex.substring(len - 1));
 
-		String MAC = UUID.getMAC();
-		uuid.replace(20, 32, MAC);
+		String mac = UUID.getMAC();
+		uuid.replace(20, 32, mac);
 
 		uuid.insert(20, '-');
 		uuid.insert(16, '-');

@@ -17,7 +17,6 @@
 package org.ehealth_connector.valueset.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
 
@@ -53,7 +52,7 @@ public class VersionTest {
 				.withValidTo(validTo).build();
 
 		assertEquals(version1.hashCode(), version2.hashCode());
-		assertTrue(version1.equals(version2));
+		assertEquals(version1, version2);
 
 		assertEquals(label, version1.getLabel());
 		assertEquals(publishingAuthority, version1.getPublishingAuthority());

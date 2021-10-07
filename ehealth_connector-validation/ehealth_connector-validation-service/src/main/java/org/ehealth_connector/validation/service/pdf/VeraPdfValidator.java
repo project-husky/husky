@@ -41,10 +41,8 @@ import org.verapdf.pdfa.flavours.PDFAFlavour;
 import org.verapdf.pdfa.results.TestAssertion;
 import org.verapdf.pdfa.results.ValidationResult;
 
-import net.sf.saxon.s9api.DocumentBuilder;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.SaxonApiException;
-import net.sf.saxon.s9api.XPathCompiler;
 import net.sf.saxon.s9api.XPathSelector;
 import net.sf.saxon.s9api.XdmItem;
 import net.sf.saxon.s9api.XdmNode;
@@ -57,10 +55,10 @@ import net.sf.saxon.s9api.XdmValue;
 public class VeraPdfValidator {
 
 	/** Not initialized error message */
-	public final static String ERR_NOT_INITIALIZED = "PdfValidatorAPI initialization failed";
+	public static final String ERR_NOT_INITIALIZED = "PdfValidatorAPI initialization failed";
 
 	/** Not installed error message */
-	public final static String ERR_NOT_INSTALLED = "PdfValidatorAPI not installed";
+	public static final String ERR_NOT_INSTALLED = "PdfValidatorAPI not installed";
 
 	/** veraPDF validator flavour */
 	private PDFAFlavour flavour;
@@ -115,7 +113,7 @@ public class VeraPdfValidator {
 	 * @return the API version of the PDF validator
 	 */
 	public String getPdfValidatorVersion() {
-		String retVal = "none";
+		var retVal = "none";
 		if (pdfValidator == null) {
 			initialize();
 		}
@@ -169,7 +167,7 @@ public class VeraPdfValidator {
 	 * @throws IOException
 	 */
 	public void validateCda(File cdaFile)
-			throws ConfigurationException, SaxonApiException, IOException {
+			throws SaxonApiException, IOException {
 		validateCda(new StreamSource(cdaFile));
 	}
 
@@ -183,21 +181,21 @@ public class VeraPdfValidator {
 	 * @throws IOException
 	 */
 	public void validateCda(StreamSource cdaStream)
-			throws ConfigurationException, SaxonApiException, IOException {
+			throws SaxonApiException, IOException {
 
 		initialize();
 		pdfValidationResult = new VeraPdfValidationResult();
 		pdfValidationResult.setPdfConformanceLevel(pdfConformanceLevel);
 
-		final Processor proc = new Processor(false);
+		final var proc = new Processor(false);
 
-		final DocumentBuilder builder = proc.newDocumentBuilder();
+		final var builder = proc.newDocumentBuilder();
 		builder.setLineNumbering(true);
 		XdmNode hl7Doc;
 
 		hl7Doc = builder.build(cdaStream);
 
-		final XPathCompiler xpath = proc.newXPathCompiler();
+		final var xpath = proc.newXPathCompiler();
 		xpath.declareNamespace("", "urn:hl7-org:v3");
 
 		final XPathSelector selector = xpath
@@ -224,18 +222,18 @@ public class VeraPdfValidator {
 	 * @throws ConfigurationException
 	 */
 	private void validatePdf(String pdfStrB64, String lineNumber)
-			throws IOException, ConfigurationException {
+			throws IOException {
 
 		initialize();
 		ValidationResult result = null;
-		Boolean aborted = false;
-		Boolean valid = true;
+		var aborted = false;
+		var valid = true;
 		if (pdfValidator != null) {
 			pdfValidationResult.resetIsDone();
 			byte[] decodedBytes;
 			decodedBytes = Base64.getMimeDecoder().decode(pdfStrB64);
 
-			String debugString = "";
+			var debugString = "";
 			if (Util.isDebug()) {
 				debugString = debugString + "\n*** Debug: \n";
 				debugString = debugString + "pdfStrB64.length()="
@@ -248,28 +246,28 @@ public class VeraPdfValidator {
 
 			if (pdfStrB64 == null) {
 				aborted = true;
-				VeraPdfValidationResultEntry failure = new VeraPdfValidationResultEntry();
+				var failure = new VeraPdfValidationResultEntry();
 				failure.setErrMsg("Base64 input string is null", Severity.Error);
 				pdfValidationResult.setIsDone();
 				pdfValidationResult.add(failure);
 			}
 			if (pdfStrB64.length() == 0) {
 				aborted = true;
-				VeraPdfValidationResultEntry failure = new VeraPdfValidationResultEntry();
+				var failure = new VeraPdfValidationResultEntry();
 				failure.setErrMsg("Base64 input string is empty", Severity.Error);
 				pdfValidationResult.setIsDone();
 				pdfValidationResult.add(failure);
 			} else {
 				PDFAParser parser;
 				try {
-					ByteArrayInputStream is = new ByteArrayInputStream(decodedBytes);
+					var is = new ByteArrayInputStream(decodedBytes);
 					parser = Foundries.defaultInstance().createParser(is, flavour);
 					is.reset();
 
 					// Switch off veraPDF Warnings
-					java.util.logging.Logger globalLogger = java.util.logging.Logger.getLogger("");
+					var globalLogger = java.util.logging.Logger.getLogger("");
 					java.util.logging.Handler[] handlers = globalLogger.getHandlers();
-					ArrayList<java.util.logging.Handler> handlerList = new ArrayList<java.util.logging.Handler>();
+					ArrayList<java.util.logging.Handler> handlerList = new ArrayList<>();
 					for (java.util.logging.Handler handler : handlers) {
 						handlerList.add(handler);
 						globalLogger.removeHandler(handler);
@@ -285,10 +283,9 @@ public class VeraPdfValidator {
 
 				} catch (ModelParsingException | EncryptedPdfException | ValidationException e) {
 					aborted = true;
-					VeraPdfValidationResultEntry failure = new VeraPdfValidationResultEntry();
+					var failure = new VeraPdfValidationResultEntry();
 					String errMsg = e.getClass().getName() + ": " + e.getMessage();
-					if (e.getCause() != null) {
-						if (e.getCause().getMessage() != null)
+					if (e.getCause() != null && e.getCause().getMessage() != null) {
 							errMsg = errMsg + " (" + e.getCause().getMessage() + ")";
 					}
 					errMsg = errMsg
@@ -304,10 +301,10 @@ public class VeraPdfValidator {
 			if (!aborted) {
 				if (result != null) {
 					pdfValidationResult.setIsDone();
-					int realFailures = 0;
+					var realFailures = 0;
 					if (!result.isCompliant()) {
 						for (TestAssertion assertion : result.getTestAssertions()) {
-							VeraPdfValidationResultEntry failure = new VeraPdfValidationResultEntry();
+							var failure = new VeraPdfValidationResultEntry();
 							failure.setPdfSpecificationId(
 									assertion.getRuleId().getSpecification().getId());
 							failure.setPdfSpecificationName(
@@ -319,7 +316,7 @@ public class VeraPdfValidator {
 							failure.setErrMsg(assertion.getMessage(), Severity.Error);
 							failure.setLineNumber(lineNumber);
 
-							Boolean realFailure = true;
+							var realFailure = true;
 							// These rules appear under .Net, only. In order to
 							// synchronize Java and .Net validation results,
 							// these failures are suppressed.
@@ -327,17 +324,13 @@ public class VeraPdfValidator {
 									&& (assertion.getRuleId().getTestNumber() == 1))
 								realFailure = false;
 							if ("6.2.3".equals(assertion.getRuleId().getClause())
-									&& (assertion.getRuleId().getTestNumber() == 1))
-								realFailure = false;
-							if ("6.2.3".equals(assertion.getRuleId().getClause())
-									&& (assertion.getRuleId().getTestNumber() == 2))
-								realFailure = false;
-							if ("6.2.3".equals(assertion.getRuleId().getClause())
-									&& (assertion.getRuleId().getTestNumber() == 4))
-								realFailure = false;
-							if ("6.2.3".equals(assertion.getRuleId().getClause())
-									&& (assertion.getRuleId().getTestNumber() == 5))
-								realFailure = false;
+									|| (assertion.getRuleId().getTestNumber() == 1
+											|| assertion.getRuleId().getTestNumber() == 2
+											|| assertion.getRuleId().getTestNumber() == 4
+											|| assertion.getRuleId().getTestNumber() == 5)) {
+									realFailure = false;
+							}
+			
 							if ("6.3.4".equals(assertion.getRuleId().getClause())
 									&& (assertion.getRuleId().getTestNumber() == 1))
 								realFailure = false;
@@ -352,14 +345,14 @@ public class VeraPdfValidator {
 						valid = (realFailures == 0);
 					}
 					if (realFailures == 0) {
-						VeraPdfValidationResultEntry success = new VeraPdfValidationResultEntry();
+						var success = new VeraPdfValidationResultEntry();
 						success.setLineNumber(lineNumber);
 						success.setErrMsg("PDF is compliant", Severity.Information);
 						pdfValidationResult.add(success);
 					}
 					pdfValidationResult.setIsDone();
 				} else {
-					VeraPdfValidationResultEntry pdfVResult = new VeraPdfValidationResultEntry();
+					var pdfVResult = new VeraPdfValidationResultEntry();
 					pdfVResult.setLineNumber(lineNumber);
 					pdfValidationResult.add(pdfVResult);
 				}

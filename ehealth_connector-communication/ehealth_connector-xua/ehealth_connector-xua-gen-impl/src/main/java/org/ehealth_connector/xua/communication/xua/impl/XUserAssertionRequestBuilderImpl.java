@@ -23,10 +23,10 @@ import org.ehealth_connector.xua.communication.xua.XUserAssertionConstants;
 import org.ehealth_connector.xua.communication.xua.XUserAssertionRequest;
 import org.ehealth_connector.xua.communication.xua.XUserAssertionRequestBuilder;
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
-import org.ehealth_connector.xua.hl7v3.PurposeOfUse;
-import org.ehealth_connector.xua.hl7v3.Role;
 import org.ehealth_connector.xua.hl7v3.OpenSamlPurposeOfUse;
 import org.ehealth_connector.xua.hl7v3.OpenSamlRole;
+import org.ehealth_connector.xua.hl7v3.PurposeOfUse;
+import org.ehealth_connector.xua.hl7v3.Role;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.core.xml.schema.XSAny;
 import org.opensaml.core.xml.schema.XSString;
@@ -215,7 +215,7 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 		if (requestType != null) {
 			final var wstRequestType = new RequestTypeBuilder()
 					.buildObject();
-			wstRequestType.setValue(requestType.toString());
+			wstRequestType.setURI(requestType.toString());
 			addXMLObject(wstRequestType);
 		}
 		return this;
@@ -288,7 +288,7 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 		if (tokenType != null) {
 			final org.opensaml.soap.wstrust.TokenType wstTokeType = new TokenTypeBuilder()
 					.buildObject();
-			wstTokeType.setValue(tokenType.toString());
+			wstTokeType.setURI(tokenType.toString());
 			addXMLObject(wstTokeType);
 		}
 		return this;

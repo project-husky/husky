@@ -288,7 +288,6 @@ public class XdmContents {
 	 *
 	 * @return false, if the values don´t match, true otherwise
 	 */
-	@SuppressWarnings("resource")
 	private boolean documentsIntegrityCheck() {
 		if (isSubmitTransactionDataNull(0))
 			return false;
@@ -552,7 +551,6 @@ public class XdmContents {
 	 * Reads an XDM ZIP archive, so that the contents will be accessible with the
 	 * get members. You have to use this method before you can access the contents.
 	 */
-	@SuppressWarnings("unchecked")
 	private void loadXdmArchive() {
 		this.resp.setStatus(Status.SUCCESS);
 		final Map<String, ProvideAndRegisterDocumentSet> results = new HashMap<>();
@@ -580,12 +578,6 @@ public class XdmContents {
 							log.warn("XDM submission set folder '{}' has no metadata file: {}", subsetDirspec,
 									XDM_METADATA);
 						} else {
-							/*
-							 * final var baos = new ByteArrayOutputStream(); var bytesRead = 0; final var
-							 * buffer = new byte[2048]; while ((bytesRead = in.read(buffer)) != -1) {
-							 * baos.write(buffer, 0, bytesRead); }
-							 */
-
 							SubmitObjectsRequest request = null;
 							try (var in = zipFile.getInputStream(metadataEntry)) {
 								final var unmarshaller = JAXBContext.newInstance(SubmitObjectsRequest.class)
@@ -596,21 +588,6 @@ public class XdmContents {
 
 								request = (SubmitObjectsRequest) unmarshaller.unmarshal(in);
 							}
-
-							/*
-							 * @SuppressWarnings("unused") final LCMPackage pkg =
-							 * org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage.eINSTANCE; final
-							 * XMLResource resources = (XMLResource) (new
-							 * org.openhealthtools.ihe.common.ebxml._3._0.lcm.util.LCMResourceFactoryImpl()
-							 * .createResource(URI.createURI(
-							 * org.openhealthtools.ihe.common.ebxml._3._0.lcm.LCMPackage.eNS_URI))); final
-							 * var bais = new ByteArrayInputStream( baos.toByteArray());
-							 * resources.load(bais, null);
-							 */
-							/*
-							 * @SuppressWarnings("rawtypes") final EList list = resources.getContents();
-							 * final Object o = list.get(0);
-							 */
 
 							if (request != null) {
 								ProvideAndRegisterDocumentSet docSet = importXDMMetadata(request);
@@ -681,17 +658,6 @@ public class XdmContents {
 		}
 
 		provideAndRegisterDocumentSet.setSubmissionSet(submit.getSubmissionSet());
-
-		// DO PMI Audit
-		/*
-		 * String submissionSetUniqueId =
-		 * provideAndRegisterMetadata.getSubmissionSet().getUniqueId(); CX patientId =
-		 * provideAndRegisterMetadata.getSubmissionSet().getPatientId();
-		 * 
-		 * getAuditor().auditPortableMediaImport(RFC3881EventOutcomeCodes.SUCCESS,
-		 * submissionSetUniqueId, HL7V2MessageFormat.toMessageString(patientId,
-		 * MessageDelimiters.COMPONENT, MessageDelimiters.SUBCOMPONENT));
-		 */
 
 		return provideAndRegisterDocumentSet;
 	}

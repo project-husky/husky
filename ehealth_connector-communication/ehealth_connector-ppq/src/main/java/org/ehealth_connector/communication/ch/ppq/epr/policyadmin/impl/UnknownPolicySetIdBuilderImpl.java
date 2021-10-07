@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl;
 
+import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.BasePolicyAdministration;
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.OpenSamlUnknownPolicySetId;
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.UnknownPolicySetId;
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.UnknownPolicySetIdBuilder;
@@ -35,8 +36,8 @@ public class UnknownPolicySetIdBuilderImpl extends
 	private String message;
 
 	public OpenSamlUnknownPolicySetId buildObject() {
-		return buildObject(UnknownPolicySetId.DEFAULT_NS_URI,
-				UnknownPolicySetId.DEFAULT_ELEMENT_LOCAL_NAME, UnknownPolicySetId.DEFAULT_PREFIX);
+		return buildObject(BasePolicyAdministration.DEFAULT_NS_URI, UnknownPolicySetId.DEFAULT_ELEMENT_LOCAL_NAME,
+				BasePolicyAdministration.DEFAULT_PREFIX);
 	}
 
 	@Override

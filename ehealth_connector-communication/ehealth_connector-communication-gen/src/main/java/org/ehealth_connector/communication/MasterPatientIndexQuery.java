@@ -19,8 +19,6 @@ package org.ehealth_connector.communication;
 
 import java.util.Date;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
@@ -36,9 +34,6 @@ import org.hl7.fhir.dstu3.model.Identifier;
  * the Patient Demographics Query (PDQ) ITI-47.
  */
 public class MasterPatientIndexQuery {
-
-	/** The Constant log. */
-	static private final Log log = LogFactory.getLog(MasterPatientIndexQuery.class);
 
 	/**
 	 * If not add exception is thrown when deserializing to a cda model

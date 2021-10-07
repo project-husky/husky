@@ -205,7 +205,7 @@ public class FhirXdTransaction {
 		fhirObject.getContentFirstRep().getFormat();
 		final Coding item = fhirObject.getContentFirstRep().getFormat();
 		final List<org.hl7.fhir.dstu3.model.Extension> extensions = item
-				.getExtensionsByUrl(FhirCommon.urnUseAsMimeType);
+				.getExtensionsByUrl(FhirCommon.URN_USE_AS_MIME_TYPE);
 		if (!extensions.isEmpty()) {
 			mimeType = item.getCode();
 		}
@@ -281,7 +281,7 @@ public class FhirXdTransaction {
 			}
 			if (ref != null && ref.getResource() instanceof MessageHeader) {
 				final MessageHeader fhirObject = (MessageHeader) ref.getResource();
-				if (!fhirObject.getExtensionsByUrl(FhirCommon.urnUseAsRegistryDestination).isEmpty())
+				if (!fhirObject.getExtensionsByUrl(FhirCommon.URN_USE_AS_REGISTRY_DESTINATION).isEmpty())
 					retVal = getDestination((MessageHeader) ref.getResource());
 			}
 		}
@@ -307,7 +307,7 @@ public class FhirXdTransaction {
 			}
 			if (ref != null && ref.getResource() instanceof MessageHeader) {
 				final MessageHeader fhirObject = (MessageHeader) ref.getResource();
-				if (!fhirObject.getExtensionsByUrl(FhirCommon.urnUseAsRepositoryDestination).isEmpty())
+				if (!fhirObject.getExtensionsByUrl(FhirCommon.URN_USE_AS_REPOSITORY_DESTINATION).isEmpty())
 					retVal.add(getDestination((MessageHeader) ref.getResource()));
 			}
 		}

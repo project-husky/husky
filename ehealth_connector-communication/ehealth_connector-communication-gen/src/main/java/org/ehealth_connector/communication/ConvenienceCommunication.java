@@ -585,7 +585,6 @@ public class ConvenienceCommunication extends CamelService {
 				if (subSet.getSubmissionTime() == null) {
 					subSet.setSubmissionTime(new Timestamp(DateUtil.nowAsZonedDate(), Precision.SECOND));
 				}
-				// txnData.saveMetadataToFile("C:/temp/metadata.xml");
 
 				// Use the PatientId of the first Document for the Submission set ID
 				if (subSet.getPatientId() == null) {
@@ -628,7 +627,6 @@ public class ConvenienceCommunication extends CamelService {
 				if (subSet.getSubmissionTime() == null) {
 					subSet.setSubmissionTime(new Timestamp(DateUtil.nowAsZonedDate(), Precision.SECOND));
 				}
-				// txnData.saveMetadataToFile("C:/temp/metadata.xml");
 
 				// Use the PatientId of the first Document for the Submission set ID
 				if (subSet.getPatientId() == null) {
@@ -904,14 +902,6 @@ public class ConvenienceCommunication extends CamelService {
 			System.setProperty("javax.net.ssl.trustStore", dest.getTrustStore());
 			System.setProperty("javax.net.ssl.trustStorePassword", dest.getTrustStorePassword());
 		}
-		// System.setProperty("javax.net.debug", "all");
-		// System.setProperty("https.protocols", "TLSv1.2");
-		// System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
-		// System.setProperty("https.ciphersuites",
-		// "TLS_RSA_WITH_AES_128_CBC_SHA,SSL_RSA_WITH_3DES_EDE_CBC_SHA");
-
-		// System.setProperty("https.ciphersuites",
-		// "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_DSS_WITH_AES_256_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_DSS_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_DSS_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_DSS_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,TLS_ECDHE_RSA_WITH_RC4_128_SHA,SSL_RSA_WITH_RC4_128_SHA,TLS_ECDH_ECDSA_WITH_RC4_128_SHA,TLS_ECDH_RSA_WITH_RC4_128_SHA,TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,SSL_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA,SSL_DHE_RSA_WITH_3DES_EDE_CBC_SHA,SSL_DHE_DSS_WITH_3DES_EDE_CBC_SHA,SSL_RSA_WITH_RC4_128_MD5");
 	}
 
 	/**
@@ -964,7 +954,6 @@ public class ConvenienceCommunication extends CamelService {
 	public Response submit(SubmissionSetMetadata submissionSetMetadata, SecurityHeaderElement securityHeader)
 			throws Exception {
 		submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
-		// txnData.saveMetadataToFile("C:/temp/metadata_fhir.xml");
 		return submit(securityHeader);
 	}
 }

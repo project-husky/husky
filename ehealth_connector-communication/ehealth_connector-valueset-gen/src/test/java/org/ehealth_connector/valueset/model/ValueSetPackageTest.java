@@ -17,7 +17,7 @@
 package org.ehealth_connector.valueset.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
@@ -60,7 +60,7 @@ public class ValueSetPackageTest {
 				.withVersion(version).build();
 
 		assertEquals(valueSetPackage1.hashCode(), valueSetPackage2.hashCode());
-		assertTrue(valueSetPackage1.equals(valueSetPackage2));
+		assertEquals(valueSetPackage1, valueSetPackage2);
 
 		assertEquals(description, valueSetPackage1.getDescription());
 		assertEquals(identificator, valueSetPackage1.getIdentificator());
@@ -181,19 +181,19 @@ public class ValueSetPackageTest {
 		ValueSetPackage valueSetPackageA = new ValueSetPackage();
 		ValueSetPackage valueSetPackageB = new ValueSetPackage();
 
-		assertTrue(valueSetPackageA.equals(valueSetPackageB));
-		assertTrue(valueSetPackageB.equals(valueSetPackageA));
+		assertEquals(valueSetPackageA, valueSetPackageB);
+		assertEquals(valueSetPackageB, valueSetPackageA);
 
 		IdentificatorBaseType mappingIdentificator1 = IdentificatorBaseType.builder()
 				.withRoot("2.999").withExtension("identificator-1").build();
 
 		valueSetPackageA.addMappingIdentificator(mappingIdentificator1);
-		assertFalse(valueSetPackageA.equals(valueSetPackageB));
-		assertFalse(valueSetPackageB.equals(valueSetPackageA));
+		assertNotEquals(valueSetPackageA, valueSetPackageB);
+		assertNotEquals(valueSetPackageB, valueSetPackageA);
 
 		valueSetPackageB.addMappingIdentificator(mappingIdentificator1);
-		assertTrue(valueSetPackageA.equals(valueSetPackageB));
-		assertTrue(valueSetPackageB.equals(valueSetPackageA));
+		assertEquals(valueSetPackageA, valueSetPackageB);
+		assertEquals(valueSetPackageB, valueSetPackageA);
 
 		assertTrue(valueSetPackageA.containsMappingIdentificator(IdentificatorBaseType.builder()
 				.withRoot("2.999").withExtension("identificator-1").build()));
@@ -208,18 +208,18 @@ public class ValueSetPackageTest {
 		ValueSetPackage valueSetPackageA = new ValueSetPackage();
 		ValueSetPackage valueSetPackageB = new ValueSetPackage();
 
-		assertTrue(valueSetPackageA.equals(valueSetPackageB));
-		assertTrue(valueSetPackageB.equals(valueSetPackageA));
+		assertEquals(valueSetPackageA, valueSetPackageB);
+		assertEquals(valueSetPackageB, valueSetPackageA);
 
 		String mappingName1 = "name-1";
 
 		valueSetPackageA.addMappingName(mappingName1);
-		assertFalse(valueSetPackageA.equals(valueSetPackageB));
-		assertFalse(valueSetPackageB.equals(valueSetPackageA));
+		assertNotEquals(valueSetPackageA, valueSetPackageB);
+		assertNotEquals(valueSetPackageB, valueSetPackageA);
 
 		valueSetPackageB.addMappingName(mappingName1);
-		assertTrue(valueSetPackageA.equals(valueSetPackageB));
-		assertTrue(valueSetPackageB.equals(valueSetPackageA));
+		assertEquals(valueSetPackageA, valueSetPackageB);
+		assertEquals(valueSetPackageB, valueSetPackageA);
 
 		assertTrue(valueSetPackageA.containsMappingName("name-1"));
 		assertTrue(valueSetPackageA.getMappingNameList().contains("name-1"));
@@ -232,18 +232,18 @@ public class ValueSetPackageTest {
 		ValueSetPackage valueSetPackageA = new ValueSetPackage();
 		ValueSetPackage valueSetPackageB = new ValueSetPackage();
 
-		assertTrue(valueSetPackageA.equals(valueSetPackageB));
-		assertTrue(valueSetPackageB.equals(valueSetPackageA));
+		assertEquals(valueSetPackageA, valueSetPackageB);
+		assertEquals(valueSetPackageB, valueSetPackageA);
 
 		ValueSet valueSet1 = ValueSet.builder().withName("value-set-1").build();
 
 		valueSetPackageA.addValueSet(valueSet1);
-		assertFalse(valueSetPackageA.equals(valueSetPackageB));
-		assertFalse(valueSetPackageB.equals(valueSetPackageA));
+		assertNotEquals(valueSetPackageA, valueSetPackageB);
+		assertNotEquals(valueSetPackageB, valueSetPackageA);
 
 		valueSetPackageB.addValueSet(valueSet1);
-		assertTrue(valueSetPackageA.equals(valueSetPackageB));
-		assertTrue(valueSetPackageB.equals(valueSetPackageA));
+		assertEquals(valueSetPackageA, valueSetPackageB);
+		assertEquals(valueSetPackageB, valueSetPackageA);
 
 		assertTrue(valueSetPackageA
 				.containsValueSet(ValueSet.builder().withName("value-set-1").build()));

@@ -72,7 +72,7 @@ public class IdpClientByCert extends AbstractHttpFormIdpClient {
 			final var post = getHttpPost(aAuthnRequest, config);
 
 			return execute(post);
-		} catch (final Throwable t) {
+		} catch (final Exception t) {
 			throw new ClientSendException(t);
 		}
 	}

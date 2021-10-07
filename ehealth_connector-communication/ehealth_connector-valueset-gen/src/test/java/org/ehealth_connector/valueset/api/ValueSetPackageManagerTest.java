@@ -18,7 +18,6 @@ package org.ehealth_connector.valueset.api;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
@@ -333,12 +332,10 @@ public class ValueSetPackageManagerTest {
 
 		assertEquals(valueSetPackageConfig1.getDescription(),
 				valueSetPackageConfig2.getDescription());
-		assertTrue(valueSetPackageConfig1.getIdentificator()
-				.equals(valueSetPackageConfig2.getIdentificator()));
-		assertTrue(valueSetPackageConfig1.getSourceUrl()
-				.equals(valueSetPackageConfig2.getSourceUrl()));
+		assertEquals(valueSetPackageConfig1.getIdentificator(), valueSetPackageConfig2.getIdentificator());
+		assertEquals(valueSetPackageConfig1.getSourceUrl(), valueSetPackageConfig2.getSourceUrl());
 		assertEquals(valueSetPackageConfig1.getStatus(), valueSetPackageConfig2.getStatus());
-		assertTrue(valueSetPackageConfig1.getVersion().equals(valueSetPackageConfig2.getVersion()));
+		assertEquals(valueSetPackageConfig1.getVersion(), valueSetPackageConfig2.getVersion());
 
 	}
 

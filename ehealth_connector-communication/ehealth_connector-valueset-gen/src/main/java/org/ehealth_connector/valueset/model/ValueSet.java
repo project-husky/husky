@@ -141,23 +141,23 @@ public class ValueSet implements Serializable {
 		public int compare(ValueSetEntry a, ValueSetEntry b) {
 			if ((a == null) && (b == null))
 				return 0;
-			else if ((a == null) && (b != null))
+			else if ((a == null))
 				return -1;
-			else if ((a != null) && (b == null))
+			else if ((b == null))
 				return 1;
 			else {
 
-				String enumConstantName_a = a.getEnumConstantName();
-				String enumConstantName_b = b.getEnumConstantName();
+				var enumConstantNameA = a.getEnumConstantName();
+				var enumConstantNameB = b.getEnumConstantName();
 
-				if ((enumConstantName_a == null) && (enumConstantName_b == null))
+				if ((enumConstantNameA == null) && (enumConstantNameB == null))
 					return 0;
-				else if ((enumConstantName_a == null) && (enumConstantName_b != null))
+				else if ((enumConstantNameA == null))
 					return -1;
-				else if ((enumConstantName_a != null) && (enumConstantName_b == null))
+				else if ((enumConstantNameB == null))
 					return 1;
 				else
-					return enumConstantName_a.compareTo(enumConstantName_b);
+					return enumConstantNameA.compareTo(enumConstantNameB);
 			}
 		}
 	}
@@ -209,7 +209,7 @@ public class ValueSet implements Serializable {
 		// (e.g. 3 Self-Sustaining Sequence Replication)
 		// https://art-decor.org/art-decor/decor-valuesets--cdachvacd-?id=2.16.840.1.113883.1.11.14079&effectiveDate=2014-03-26T00:00:00&language=en-US
 		if (enumName.substring(0, 1).matches("[0-9]")) {
-			String number = "";
+			var number = "";
 			switch (enumName.substring(0, 1)) {
 			case "0":
 				number = "Zero";
@@ -349,7 +349,7 @@ public class ValueSet implements Serializable {
 				// String entryName = ValueSet
 				// .buildEnumName(valueSetEntry.getCodeBaseType().getDisplayName());
 
-				boolean isAlreadyThere = false;
+				var isAlreadyThere = false;
 				for (ValueSetEntry temp : globalList) {
 					isAlreadyThere = (temp.equals(valueSetEntry));
 					if (isAlreadyThere)
@@ -549,7 +549,7 @@ public class ValueSet implements Serializable {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		boolean retVal = true;
+		var retVal = true;
 		if (obj == null)
 			return false;
 
@@ -561,7 +561,7 @@ public class ValueSet implements Serializable {
 				this.descriptionList = new ArrayList<>();
 			retVal = (this.descriptionList.size() == ((ValueSet) obj).getDescriptionList().size());
 			if (retVal) {
-				for (int i = 0; i < this.descriptionList.size(); i++) {
+				for (var i = 0; i < this.descriptionList.size(); i++) {
 					retVal = ((ValueSet) obj).containsDescription(this.descriptionList.get(i));
 					if (!retVal)
 						break;
@@ -574,7 +574,7 @@ public class ValueSet implements Serializable {
 			retVal = (this.mappingIdentificatorList.size() == ((ValueSet) obj)
 					.getMappingIdentificatorList().size());
 			if (retVal) {
-				for (int i = 0; i < this.mappingIdentificatorList.size(); i++) {
+				for (var i = 0; i < this.mappingIdentificatorList.size(); i++) {
 					retVal = ((ValueSet) obj)
 							.containsMappingIdentificator(this.mappingIdentificatorList.get(i));
 					if (!retVal)
@@ -587,7 +587,7 @@ public class ValueSet implements Serializable {
 				this.mappingNameList = new ArrayList<>();
 			retVal = (this.mappingNameList.size() == ((ValueSet) obj).getMappingNameList().size());
 			if (retVal) {
-				for (int i = 0; i < this.mappingNameList.size(); i++) {
+				for (var i = 0; i < this.mappingNameList.size(); i++) {
 					retVal = ((ValueSet) obj).containsMappingName(this.mappingNameList.get(i));
 					if (!retVal)
 						break;
@@ -600,7 +600,7 @@ public class ValueSet implements Serializable {
 			retVal = (this.valueSetEntryList.size() == ((ValueSet) obj).getValueSetEntryList()
 					.size());
 			if (retVal) {
-				for (int i = 0; i < this.valueSetEntryList.size(); i++) {
+				for (var i = 0; i < this.valueSetEntryList.size(); i++) {
 					retVal = ((ValueSet) obj).containsValueSetEntry(this.valueSetEntryList.get(i));
 					if (!retVal)
 						break;
@@ -659,8 +659,8 @@ public class ValueSet implements Serializable {
 	public String getDescription(LanguageCode language) {
 		String retVal = null;
 		if (descriptionList != null) {
-			for (int i = 0; i < this.descriptionList.size(); i++) {
-				LangText langText = this.descriptionList.get(i);
+			for (var i = 0; i < this.descriptionList.size(); i++) {
+				var langText = this.descriptionList.get(i);
 				if (language.equals(langText.getLangCode())) {
 					retVal = langText.getLangText();
 					break;
@@ -853,9 +853,8 @@ public class ValueSet implements Serializable {
 	public ValueSetEntry getValueSetEntryByMappingName(String value) {
 		ValueSetEntry retVal = null;
 		for (ValueSetEntry valueSetEntry : getValueSetEntryList()) {
-			if (value != null)
-				if (value.equals(valueSetEntry.getDefaultMappingName()))
-					retVal = valueSetEntry;
+			if (value != null && value.equals(valueSetEntry.getDefaultMappingName()))
+				retVal = valueSetEntry;
 			if (retVal == null) {
 				for (String mapping : valueSetEntry.getMappingNameList()) {
 					if (mapping.equals(value))

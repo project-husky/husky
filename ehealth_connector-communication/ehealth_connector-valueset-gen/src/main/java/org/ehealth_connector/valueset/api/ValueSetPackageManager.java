@@ -41,7 +41,6 @@ import org.ehealth_connector.valueset.config.ValueSetPackageConfig;
 import org.ehealth_connector.valueset.enums.ValueSetPackageStatus;
 import org.ehealth_connector.valueset.exceptions.ConfigurationException;
 import org.ehealth_connector.valueset.exceptions.InitializationException;
-import org.ehealth_connector.valueset.model.ValueSet;
 import org.ehealth_connector.valueset.model.ValueSetPackage;
 import org.xml.sax.SAXException;
 
@@ -103,7 +102,7 @@ public class ValueSetPackageManager {
 	 *             the initialization exception
 	 */
 	public ValueSetPackage downloadValueSetPackage(ValueSetPackageConfig valueSetPackageConfig)
-			throws MalformedURLException, IOException, ParserConfigurationException, SAXException,
+			throws IOException, ParserConfigurationException, SAXException,
 			InitializationException {
 		ValueSetPackage retVal = ValueSetPackage.builder()
 				.withDescription(valueSetPackageConfig.getDescription())
@@ -112,10 +111,10 @@ public class ValueSetPackageManager {
 				.withStatus(valueSetPackageConfig.getStatus())
 				.withVersion(valueSetPackageConfig.getVersion()).build();
 
-		ValueSetManager valueSetManager = new ValueSetManager();
+		var valueSetManager = new ValueSetManager();
 
 		for (ValueSetConfig valueSetConfig : valueSetPackageConfig.getValueSetConfigList()) {
-			ValueSet valueSet = valueSetManager.downloadValueSet(valueSetConfig);
+			var valueSet = valueSetManager.downloadValueSet(valueSetConfig);
 			retVal.addValueSet(valueSet);
 		}
 		return retVal;
@@ -139,7 +138,7 @@ public class ValueSetPackageManager {
 	 *             the configuration exception
 	 */
 	public ValueSetPackageConfig downloadValueSetPackageConfig(String sourceUrl)
-			throws MalformedURLException, IOException, ConfigurationException {
+			throws IOException, ConfigurationException {
 		return downloadValueSetPackageConfig(new URL(sourceUrl));
 	}
 
@@ -162,7 +161,7 @@ public class ValueSetPackageManager {
 			throws IOException, ConfigurationException {
 		ValueSetPackageConfig retVal = null;
 		// download a package config
-		String downloadedString = IOUtils.toString(sourceUrl, Charsets.UTF_8);
+		var downloadedString = IOUtils.toString(sourceUrl, Charsets.UTF_8);
 		retVal = loadValueSetPackageConfig(IOUtils.toInputStream(downloadedString));
 		return retVal;
 	}
@@ -229,7 +228,7 @@ public class ValueSetPackageManager {
 	public ValueSetPackageConfig getValueSetPackageConfigByStatusAndDate(
 			ValueSetPackageStatus status, Date date) {
 		ValueSetPackageConfig retVal = null;
-		boolean isCandidate = false;
+		var isCandidate = false;
 		Date latestFrom = null;
 		Date latestTo = null;
 		if (valueSetPackageConfigList != null) {
@@ -246,9 +245,8 @@ public class ValueSetPackageManager {
 					if (!dateFits) {
 						if (from != null)
 							dateFits = ((date.equals(from)) || (date.after(from)));
-						if (dateFits) {
-							if (to != null)
-								dateFits = ((date.equals(to)) || (date.before(to)));
+						if (dateFits && to != null) {
+							dateFits = ((date.equals(to)) || (date.before(to)));
 						}
 					}
 
@@ -343,7 +341,7 @@ public class ValueSetPackageManager {
 	 * @throws IOException
 	 */
 	public ValueSetPackage loadValueSetPackage(File valueSetPackage) throws IOException {
-		try (FileInputStream is = new FileInputStream(valueSetPackage)) {
+		try (var is = new FileInputStream(valueSetPackage)) {
 			return loadValueSetPackage(is);
 		}
 	}
@@ -359,7 +357,7 @@ public class ValueSetPackageManager {
 	 * @return the value set package
 	 */
 	public ValueSetPackage loadValueSetPackage(InputStream inputStream) {
-		InputStreamReader reader = new InputStreamReader(inputStream, Charsets.UTF_8);
+		var reader = new InputStreamReader(inputStream, Charsets.UTF_8);
 		return CustomizedYaml.getCustomizedYaml().loadAs(reader,
 				ValueSetPackage.class);
 
@@ -403,7 +401,7 @@ public class ValueSetPackageManager {
 	 */
 	public ValueSetPackageConfig loadValueSetPackageConfig(File config)
 			throws ConfigurationException, IOException {
-		try (FileInputStream is = new FileInputStream(config)) {
+		try (var is = new FileInputStream(config)) {
 			return loadValueSetPackageConfig(is);
 		}
 	}
@@ -423,7 +421,7 @@ public class ValueSetPackageManager {
 	 */
 	public ValueSetPackageConfig loadValueSetPackageConfig(InputStream inputStream)
 			throws ConfigurationException {
-		InputStreamReader reader = new InputStreamReader(inputStream, Charsets.UTF_8);
+		var reader = new InputStreamReader(inputStream, Charsets.UTF_8);
 		if (this.valueSetPackageConfigList == null) {
 			this.valueSetPackageConfigList = new ArrayList<>();
 		}
@@ -504,7 +502,7 @@ public class ValueSetPackageManager {
 	 */
 	public void saveValueSetPackage(ValueSetPackage valueSetPackage, OutputStream outputStream)
 			throws IOException {
-		OutputStreamWriter writer = new OutputStreamWriter(outputStream, Charsets.UTF_8);
+		var writer = new OutputStreamWriter(outputStream, Charsets.UTF_8);
 		writer.write(CustomizedYaml.getCustomizedYaml().dumpAsMap(valueSetPackage));
 		writer.flush();
 		writer.close();
@@ -567,7 +565,7 @@ public class ValueSetPackageManager {
 	 */
 	public void saveValueSetPackageConfig(ValueSetPackageConfig config, OutputStream outputStream)
 			throws IOException {
-		OutputStreamWriter writer = new OutputStreamWriter(outputStream, Charsets.UTF_8);
+		var writer = new OutputStreamWriter(outputStream, Charsets.UTF_8);
 		writer.write(CustomizedYaml.getCustomizedYaml().dumpAsMap(config));
 		writer.flush();
 		writer.close();

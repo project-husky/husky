@@ -156,7 +156,7 @@ public class V3PdqConsumerQuery extends V3Message {
 				+ addressState + " " + addressCountry + " " + addressZip + " " + addressOtherDesignation + ","
 				+ addressType + ",";
 		// Create an AD type to store the address information
-		var patientAddressAD = PixPdqV3Utils.createAD(addressStreetAddress, addressCity, addressCounty, addressState,
+		var patientAddressAD = PixPdqV3Utils.createAd(addressStreetAddress, addressCity, addressCounty, addressState,
 				addressCountry, addressZip, addressOtherDesignation, addressType);
 
 		// Add the AD to the patient Address

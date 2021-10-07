@@ -39,7 +39,7 @@ public class XdsUtil {
 	public static TimeRange[] convertEhcDateTimeRange(
 			DateTimeRange[] dtr) {
 		if (dtr == null)
-			return null;
+			return new TimeRange[0];
 		else {
 			final var dtrArray = new TimeRange[dtr.length];
 
@@ -75,8 +75,6 @@ public class XdsUtil {
 			mimeType = mimeType.substring(mimeType.indexOf("!") + 1, mimeType.length());
 			dd = DocumentDescriptor.getDocumentDescriptorForMimeType(mimeType);
 		}
-		// if ("UNKNOWN!CDA-R2!text/xml".equals(dd.toString()))
-		// dd = DocumentDescriptor.CDA_R2;
 
 		final String fileNameExtension = DocDescriptor.getFileExtension(dd);
 		fileName = fileName.concat(String.format("%5s", docNr).replace(' ', '0'));

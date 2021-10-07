@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl;
 
+import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.BasePolicyAdministration;
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.EprPolicyRepositoryResponse;
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.EprPolicyRepositoryResponseBuilder;
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.OpenSamlEprPolicyRepositoryResponse;
@@ -36,9 +37,9 @@ public class EprPolicyRepositoryResponseBuilderImpl
 	private String status;
 
 	public OpenSamlEprPolicyRepositoryResponse buildObject() {
-		return buildObject(EprPolicyRepositoryResponse.DEFAULT_NS_URI,
+		return buildObject(BasePolicyAdministration.DEFAULT_NS_URI,
 				EprPolicyRepositoryResponse.DEFAULT_ELEMENT_LOCAL_NAME,
-				EprPolicyRepositoryResponse.DEFAULT_PREFIX);
+				BasePolicyAdministration.DEFAULT_PREFIX);
 	}
 
 	@Override

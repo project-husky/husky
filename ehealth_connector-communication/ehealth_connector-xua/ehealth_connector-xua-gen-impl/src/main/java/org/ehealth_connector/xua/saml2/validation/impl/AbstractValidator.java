@@ -86,7 +86,6 @@ public abstract class AbstractValidator {
 			SignatureValidator.validate(aSignature, credential);
 
 		} catch (final Exception e) {
-			log.error("Error", e);
 			throw new ValidationException(e);
 		}
 	}

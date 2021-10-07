@@ -20,13 +20,18 @@ import java.util.List;
 
 import org.ehealth_connector.common.utils.DebugUtil;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Author;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
 /**
  * Debug xds util class
  *
  */
 public class DebugXdsUtil extends DebugUtil {
+
+	private DebugXdsUtil() {
+		throw new IllegalStateException("This is a utility class!");
+	}
+
 	/**
 	 * Creates a string with the submission-set metadata (for debugging purposes
 	 * only)
@@ -37,16 +42,13 @@ public class DebugXdsUtil extends DebugUtil {
 	 *         debugging purposes only)</div>
 	 */
 	public static String debugSubmissionSetMetaData(List<ProvideAndRegisterDocumentSet> txnDatas) {
-		final StringBuilder retVal = new StringBuilder();
+		final var retVal = new StringBuilder();
 		Integer i = 0;
 		for (final ProvideAndRegisterDocumentSet txnData : txnDatas) {
 			i++;
 
 			retVal.append("\nSubmission-Set " + i + "\n");
-			// txnData.getDocList();
-			// ProvideAndRegisterDocumentSetType metadata =
-			// txnData.getMetadata();
-			final SubmissionSet ss = txnData.getSubmissionSet();
+			final var ss = txnData.getSubmissionSet();
 			retVal.append("  EntryUUID:            " + ss.getEntryUuid() + "\n");
 			retVal.append("  SourceId:             " + ss.getSourceId() + "\n");
 			retVal.append("  SubmissionTime:       " + ss.getSubmissionTime() + "\n");
@@ -88,8 +90,8 @@ public class DebugXdsUtil extends DebugUtil {
 			if (txnData.getDocuments().isEmpty()) {
 				retVal.append("null");
 			} else {
-				for (final Object item2 : txnData.getDocuments()) {
-					retVal.append("\n    " + (String) item2);
+				for (final Document item2 : txnData.getDocuments()) {
+					retVal.append("\n    " + item2);
 				}
 			}
 			retVal.append("\n");

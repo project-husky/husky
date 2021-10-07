@@ -137,9 +137,6 @@ public class LogSoapMessageHandler implements SOAPHandler<SOAPMessageContext> {
 			transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
 			transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
 			final var transformer = transformerFactory.newTransformer();
-			// transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			// transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount",
-			// "2");
 			transformer.transform(new DOMSource(soapMsg.getSOAPPart()), new StreamResult(sw));
 			mLogger.debug("Message: {} {}", inout, sw);
 		} catch (final Exception ex) {

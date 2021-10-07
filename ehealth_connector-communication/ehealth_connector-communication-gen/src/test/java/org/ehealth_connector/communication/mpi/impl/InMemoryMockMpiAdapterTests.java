@@ -18,6 +18,8 @@ package org.ehealth_connector.communication.mpi.impl;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.ehealth_connector.communication.testhelper.InMemoryMockMpiAdapter;
@@ -52,7 +54,7 @@ public class InMemoryMockMpiAdapterTests {
 		final FhirPatient patient = TestPatient.getFhirPatientMueller();
 		assertTrue(mpiAdapter.addPatient(patient));
 		final String patientId = mpiAdapter.queryPatientId(patient);
-		assertTrue(patientId != null);
+		assertNotNull(patientId);
 	}
 
 	@Test
@@ -74,7 +76,7 @@ public class InMemoryMockMpiAdapterTests {
 		final FhirPatient patientObsolete = TestPatient.getFhirPatientMuellerObsoleteId();
 		assertTrue(mpiAdapter.addPatient(patientObsolete));
 		final String mpiPatientIdObsolete = mpiAdapter.queryPatientId(patientObsolete);
-		assertTrue(!mpiPatientId.equals(mpiPatientIdObsolete));
+		assertNotEquals(mpiPatientId, mpiPatientIdObsolete);
 		assertTrue(mpiAdapter.mergePatient(patient,
 				TestPatient.getTestPatientMuellerObsolete().localId));
 		assertEquals(mpiPatientId, mpiAdapter.queryPatientId(patient));
@@ -86,7 +88,7 @@ public class InMemoryMockMpiAdapterTests {
 		final FhirPatient patient = TestPatient.getFhirPatientMueller();
 		assertTrue(mpiAdapter.addPatient(patient));
 		final String patientId = mpiAdapter.queryPatientId(patient);
-		assertTrue(patientId != null);
+		assertNotNull(patientId);
 	}
 
 }

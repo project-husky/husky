@@ -79,10 +79,7 @@ public class PurposeOfUseBuilder extends AbstractXMLObjectBuilder<OpenSamlPurpos
 			String namespacePrefix) {
 		// This is just to make the assertion Valid in the Gazelle EVS Client:
 		// https://ehealthsuisse.ihe-europe.net/EVSClient/xml/validator.seam?extension=CH%3AXUA&standard=CH%3AXUA&type=XML
-		// The prefox lead to schema error on 19.7.2018
-		// final OpenSamlPurposeOfUse ppou = new PurposeOfUseImpl(namespaceURI,
-		// localName,
-		// namespacePrefix);
+		// The prefix lead to schema error on 19.7.2018
 		final OpenSamlPurposeOfUse ppou = new PurposeOfUseImpl(namespaceURI, localName, "");
 
 		if (!StringUtils.isEmpty(code)) {

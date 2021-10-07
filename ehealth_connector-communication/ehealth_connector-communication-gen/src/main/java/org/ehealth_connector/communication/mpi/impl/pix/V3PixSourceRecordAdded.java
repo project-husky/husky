@@ -179,7 +179,7 @@ public class V3PixSourceRecordAdded extends V3Message {
 	public void addPatientAddress(List<String> addressStreetAddress, String addressCity,
 			String addressCounty, String addressState, String addressCountry, String addressZip,
 			String addressOtherDesignation, String addressType) {
-		final var patientAddress = PixPdqV3Utils.createAD(addressStreetAddress, addressCity,
+		final var patientAddress = PixPdqV3Utils.createAd(addressStreetAddress, addressCity,
 				addressCounty, addressState, addressCountry, addressZip, addressOtherDesignation,
 				addressType);
 		if (null != patientAddress)

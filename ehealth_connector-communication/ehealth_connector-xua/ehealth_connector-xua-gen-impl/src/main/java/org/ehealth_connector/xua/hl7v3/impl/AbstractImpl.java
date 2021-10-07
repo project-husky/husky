@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.xua.hl7v3.impl;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.ehealth_connector.xua.hl7v3.CE;
@@ -70,7 +71,7 @@ public abstract class AbstractImpl extends AbstractXMLObject implements CE {
 
 	@Override
 	public List<XMLObject> getOrderedChildren() {
-		return null;
+		return new LinkedList<>();
 	}
 
 	@Override

@@ -962,7 +962,7 @@ public class CdaValidator {
 				if (is != null)
 					cdaStream.getInputStream().reset();
 				veraPdfValidator.validateCda(cdaStream);
-			} catch (ConfigurationException | SaxonApiException | IOException e) {
+			} catch (SaxonApiException | IOException e) {
 				var failure = new VeraPdfValidationResultEntry();
 				failure.setErrMsg(e.getClass().getName() + ":" + e.getMessage(), Severity.Error);
 				failure.setLineNumber("none");
