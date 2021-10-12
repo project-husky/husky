@@ -85,7 +85,7 @@ public class OID {
 	 *            The ANSI issue Organizational ID (an INTEGER) for the organization to which the generated oid will be associated with
 	 * @return A IHE Document UUID String (OID)
 	 */
-	public static String createOID(String organization) {
+	public static String createOID(String organization, int maxLength) {
 		sequence++;
 
 		var hostip = new byte[4];
@@ -124,6 +124,11 @@ public class OID {
 		if (suffix.length() > maxSuffix)
 			suffix = suffix.substring(0, maxSuffix);
 		String result = root + "." + suffix;
+
+		if (result.length() > maxLength) {
+			result = result.substring(0, maxLength);
+		}
+
 		return result.replaceAll("[.]0", ".1");
 	}
 
@@ -154,8 +159,10 @@ public class OID {
 	 * @return OID subject to the max length
 	 */
 	public static String createOIDGivenRoot(String rootOid, int maxLength) {
-		if (rootOid == null) {
-			return createOID(rootOid);
+		String root = rootOid;
+
+		if (root == null) {
+			root = createOID(rootOid, maxLength);
 		}
 
 		sequence++;
@@ -187,7 +194,6 @@ public class OID {
 		}
 		// macString is now mac.length*3 bytes or 18bytes long!
 
-		String root = rootOid;
 		String suffix = macString + "." + System.currentTimeMillis() + "." + sequence;
 		int maxSuffix = maxLength - 9; // allow room for "urn:UUID:"
 		maxSuffix = maxSuffix - root.length() - 1; // adjust for root oid length

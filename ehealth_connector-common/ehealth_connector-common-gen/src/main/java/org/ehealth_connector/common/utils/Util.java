@@ -48,16 +48,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
-import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -110,6 +107,7 @@ import org.ehealth_connector.common.mdht.ParticipantRole;
 import org.ehealth_connector.common.mdht.PlayingEntity;
 import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
 import org.ehealth_connector.common.mdht.enums.Signature;
+import org.ehealth_connector.common.utils.xml.XmlFactories;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
@@ -222,21 +220,16 @@ public class Util {
 	 */
 	public static InputStream convertNonAsciiText2Unicode(InputStream inputStream) {
 		InputStream retVal = null;
-		var docBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder docBuilder;
 		try (var outputStream = new ByteArrayOutputStream()) {
-			docBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-			docBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
-			docBuilder = docBuilderFactory.newDocumentBuilder();
+			docBuilder = XmlFactories.newSafeDocumentBuilder();
 			var document = docBuilder.parse(inputStream);
 			convertNonAsciiText2Unicode(document.getDocumentElement());
 			Source xmlSource = new DOMSource(document);
 			Result outputTarget = new StreamResult(outputStream);
 
-			var transformerFactory = TransformerFactory.newInstance();
-			transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-			transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
-			transformerFactory.newTransformer().transform(xmlSource, outputTarget);
+			var transformer = XmlFactories.newTransformer();
+			transformer.transform(xmlSource, outputTarget);
 			retVal = new ByteArrayInputStream(outputStream.toByteArray());
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException
 				| TransformerFactoryConfigurationError e) {

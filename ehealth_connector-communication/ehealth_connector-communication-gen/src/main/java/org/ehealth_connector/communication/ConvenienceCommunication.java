@@ -275,10 +275,10 @@ public class ConvenienceCommunication extends CamelService {
 	 * @param folderEntryUUID   the entry uuid of the folder
 	 */
 	public void addDocumentToFolder(String documentEntryUUID, String folderEntryUUID) {
-		var folder = new Folder();
-		folder.setEntryUuid(folderEntryUUID);
-		folder.setLogicalUuid(documentEntryUUID);
-		txnData.getFolders().add(folder);
+		var association = new Association(AssociationType.HAS_MEMBER, UUID.randomUUID().toString(),
+				folderEntryUUID,
+				documentEntryUUID);
+		txnData.getAssociations().add(association);
 	}
 
 	/**
@@ -287,7 +287,7 @@ public class ConvenienceCommunication extends CamelService {
 	 * @param submissionSetContentType the contenttype code for submission set
 	 * @return the metadata of the new fold
 	 */
-	public Folder addFolder(Code submissionSetContentType) {
+	public FolderMetadata addFolder(Code submissionSetContentType) {
 		if (txnData == null) {
 			txnData = new ProvideAndRegisterDocumentSet();
 		}
@@ -302,10 +302,14 @@ public class ConvenienceCommunication extends CamelService {
 
 		txnData.getFolders().add(folder);
 
+		if (txnData.getSubmissionSet() == null) {
+			txnData.setSubmissionSet(new SubmissionSet());
+		}
+
 		txnData.getSubmissionSet()
 				.setContentTypeCode(XdsMetadataUtil.convertEhcCodeToCode(submissionSetContentType));
 
-		return folder;
+		return new FolderMetadata(folder);
 	}
 
 	/**
@@ -497,14 +501,14 @@ public class ConvenienceCommunication extends CamelService {
 
 		// Generate the unique ID
 		if (docMetadata.getDocumentEntry().getUniqueId() == null) {
-			docMetadata.setUniqueId(OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
-			document.getDocumentEntry()
-					.setUniqueId(OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
+			document.getDocumentEntry().assignUniqueId();
+			docMetadata.setUniqueId(document.getDocumentEntry().getUniqueId());
+			System.out.println(document.getDocumentEntry().getUniqueId().length());
 		}
 
 		// Generate the UUID
 		if (docMetadata.getDocumentEntry().getEntryUuid() == null) {
-			document.getDocumentEntry().setEntryUuid(UUID.randomUUID().toString());
+			document.getDocumentEntry().assignEntryUuid();
 			docMetadata.setEntryUUID(document.getDocumentEntry().getEntryUuid());
 		}
 
@@ -528,7 +532,17 @@ public class ConvenienceCommunication extends CamelService {
 			association.setSourceUuid(this.txnData.getSubmissionSet().getEntryUuid());
 			association.setTargetUuid(document.getDocumentEntry().getEntryUuid());
 			association.setLabel(AssociationLabel.ORIGINAL);
-			association.setEntryUuid(UUID.randomUUID().toString());
+			association.assignEntryUuid();
+
+			this.txnData.getAssociations().add(association);
+		}
+
+		for (Folder folder : this.txnData.getFolders()) {
+			// link folder to submission set
+			var association = new Association(AssociationType.HAS_MEMBER,
+					this.txnData.getSubmissionSet().getEntryUuid(), txnData.getSubmissionSet().getEntryUuid(),
+					folder.getEntryUuid());
+			association.assignEntryUuid();
 
 			this.txnData.getAssociations().add(association);
 		}
@@ -953,7 +967,12 @@ public class ConvenienceCommunication extends CamelService {
 	 */
 	public Response submit(SubmissionSetMetadata submissionSetMetadata, SecurityHeaderElement securityHeader)
 			throws Exception {
+		if (txnData.getSubmissionSet() == null) {
+			txnData.setSubmissionSet(new SubmissionSet());
+		}
+
 		submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
 		return submit(securityHeader);
 	}
+
 }

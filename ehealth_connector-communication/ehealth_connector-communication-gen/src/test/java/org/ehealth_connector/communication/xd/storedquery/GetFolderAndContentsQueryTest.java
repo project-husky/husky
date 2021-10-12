@@ -56,10 +56,12 @@ class GetFolderAndContentsQueryTest extends XdsTestUtils {
 
 		assertEquals("1234", sqpl.getUuid());
 		assertTrue(
-				sqpl.getFormatCodes().stream().anyMatch(t -> t.getCode().equalsIgnoreCase(formatCodes[0].getCode())));
+				sqpl.getFormatCodes().stream()
+						.anyMatch(t -> t.getCode().equalsIgnoreCase(formatCodes.get(0).getCode())));
 		assertTrue(sqpl.getConfidentialityCodes().getOuterList().stream()
 				.anyMatch(t -> t.stream()
-						.anyMatch(code -> code != null && code.getCode().equals(confidentialityCodes[0].getCode()))));
+						.anyMatch(
+								code -> code != null && code.getCode().equals(confidentialityCodes.get(0).getCode()))));
 	}
 
 	/**

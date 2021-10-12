@@ -42,11 +42,10 @@ public class XdsTestUtils {
 	// Initialize AuthorPerson
 	public static Author authorPerson;
 
-	public static Code[] formatCodes = new Code[] {
-			new Code("urn:ihe:rad:1.2.840.10008.5.1.4.1.1.88.59", "KOS Dokument", null) };
+	public static List<Code> formatCodes = List
+			.of(new Code("urn:ihe:rad:1.2.840.10008.5.1.4.1.1.88.59", "KOS Dokument", null));
 
-	public static Code[] confidentialityCodes = new Code[] {
-			new Code("30001", "administrative Daten", null) };
+	public static List<Code> confidentialityCodes = List.of(new Code("30001", "administrative Daten", null));
 
 	public static List<String> docIds = List.of("123455.235234", "1.2.3.4.5.6.7.8");
 
