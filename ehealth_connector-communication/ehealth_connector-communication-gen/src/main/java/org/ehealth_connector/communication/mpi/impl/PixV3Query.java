@@ -71,6 +71,8 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 * @param patient               the patient
 	 * @param queryDomainOids       the query domain oids
 	 * @param queryDomainNamespaces the query domain namespaces
+	 * @param assertion             a security header element for example an
+	 *                              assertion
 	 * @return the list of string
 	 */
 	public List<String> queryPatientId(org.ehealth_connector.fhir.structures.gen.FhirPatient patient,
@@ -139,7 +141,9 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 * adds a patient to the mpi. implements ITI-44 Patient Identity Source – Add
 	 * Patient Record
 	 *
-	 * @param patient the patient
+	 * @param patient   the patient
+	 * @param assertion a security header element for example an assertion
+	 * 
 	 * @return true, if successful
 	 */
 	public boolean addPatient(FhirPatient patient, SecurityHeaderElement assertion) {
@@ -175,6 +179,8 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 *
 	 * @param patient    the patient (with the surviving identifier)
 	 * @param obsoleteId the obsolete id (duplicate patient identifier)
+	 * @param assertion  a security header element for example an assertion
+	 * 
 	 * @return true, if successful
 	 */
 	public boolean mergePatient(FhirPatient patient, String obsoleteId, SecurityHeaderElement assertion) {
@@ -208,6 +214,8 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 * demographic information of the patient in the mpi.
 	 *
 	 * @param patient the patient
+	 * @assertion a security header element for example an assertion
+	 * 
 	 * @return true, if successful
 	 */
 	public boolean updatePatient(FhirPatient patient, SecurityHeaderElement assertion) {
@@ -247,6 +255,8 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 * Query patient id.
 	 *
 	 * @param patient the patient
+	 * @assertion a security header element for example an assertion
+	 * 
 	 * @return the string
 	 */
 	public String queryPatientId(FhirPatient patient, SecurityHeaderElement assertion) {

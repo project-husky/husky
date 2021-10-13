@@ -21,6 +21,10 @@ import java.util.ArrayList;
 
 import net.ihe.gazelle.hl7v3.datatypes.II;
 
+/**
+ * @author <a href="mailto:anthony.larocca@sage.com">Anthony Larocca</a>
+ *
+ */
 public abstract class V3Message {
 
 	protected String sendingApplication = null;

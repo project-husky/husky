@@ -24,11 +24,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipException;
+import java.util.zip.ZipFile;
 
 import org.apache.commons.io.IOUtils;
 import org.ehealth_connector.common.Code;
@@ -83,7 +92,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
 @EnableAutoConfiguration
-public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
+public class ConvenienceCommunicationXdmContentsTest extends XdsTestUtils {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ConvenienceCommunication.class.getName());
 
@@ -182,19 +191,96 @@ public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 	}
 
 	@Test
-	public void submitPdfDocTest() throws Exception {
-		convenienceCommunication.setAffinityDomain(affinityDomain);
-
-		convenienceCommunication.clearDocuments();
-		DocumentMetadata metdata = convenienceCommunication.addDocument(DocumentDescriptor.PDF, getDocPdf());
-		SubmissionSetMetadata subSet = new SubmissionSetMetadata();
+	public void createXdmContentsTest() throws Exception {
+		// assemble two files for the XDM Zip
+		DocumentMetadata metaData = convenienceCommunication.addDocument(DocumentDescriptor.CDA_R2, getDocCda(),
+				getDocCda());
 		Identificator patientId = new Identificator("1.3.6.1.4.1.21367.13.20.3000", "IHEBLUE-1043");
-		setMetadataForPdf(metdata, patientId);
-		setSubmissionMetadata(subSet, patientId);
-		var response = convenienceCommunication.submit(subSet, null);
+		setMetadataForCda(metaData, patientId);
 
-		assertTrue(response.getErrors().isEmpty());
-		assertEquals(Status.SUCCESS, response.getStatus());
+		metaData = convenienceCommunication.addDocument(DocumentDescriptor.PDF, getDocPdf());
+		setMetadataForPdf(metaData, patientId);
+
+		// create a FileOutputStream to store the zip file
+		final File targetFile = new File("src/test/resources/xdmTest_Java.zip");
+		try (final FileOutputStream outputStream = new FileOutputStream(targetFile)) {
+			// create and store zip.
+			convenienceCommunication.createXdmContents(outputStream);
+		}
+
+		checkZipContent(targetFile);
+	}
+
+	private void checkZipContent(File targetFile) throws ZipException, IOException {
+
+		String readmeFile = null;
+		String indexHtmFile = null;
+		Path iheXdmFolder = null;
+		File targetUnzip = new File("src/test/resources/xdmTest_Java");
+
+		try (ZipFile zipFile = new ZipFile(targetFile)) {
+			Iterator<? extends ZipEntry> entryIt = zipFile.entries().asIterator();
+
+			while (entryIt.hasNext()) {
+				ZipEntry zipEntry = entryIt.next();
+
+				Path resolvedPath = targetUnzip.toPath().resolve(zipEntry.getName()).normalize();
+				try (InputStream is = zipFile.getInputStream(zipEntry)) {
+					if ("README.TXT".equals(zipEntry.getName())) {
+						readmeFile = new String(is.readAllBytes());
+					} else if ("INDEX.HTM".equals(zipEntry.getName())) {
+						indexHtmFile = new String(is.readAllBytes());
+					} else if (zipEntry.getName().contains("IHE_XDM/")) {
+						if (zipEntry.isDirectory()) {
+							if (zipEntry.getName().equals("IHE_XDM/")) {
+								iheXdmFolder = Files.createDirectories(resolvedPath);
+							} else {
+								Files.createDirectories(resolvedPath);
+							}
+
+						} else {
+							Files.createDirectories(resolvedPath.getParent());
+							Files.copy(is, resolvedPath, StandardCopyOption.REPLACE_EXISTING);
+						}
+					}
+				}
+			}
+
+			assertNotNull(readmeFile);
+			assertNotNull(indexHtmFile);
+			assertNotNull(iheXdmFolder);
+		}
+
+		checkSubsetDirContent(String.format("%s/SUBSET01", iheXdmFolder.toString()));
+	}
+
+	private void checkSubsetDirContent(String dir) throws FileNotFoundException, IOException {
+
+		String metadataXml = null;
+		String doc1 = null;
+		String doc2 = null;
+
+		File directory = new File(dir);
+		File[] files = directory.listFiles();
+
+		assertNotNull(files);
+
+		for (File file : files) {
+			try (InputStream is = new FileInputStream(file)) {
+				if ("METADATA.XML".equals(file.getName())) {
+					metadataXml = new String(is.readAllBytes());
+				} else if (file.getName().contains("DOC00002.PDF")) {
+					doc1 = new String(is.readAllBytes());
+				} else if (file.getName().contains("DOC00001.XML")) {
+					doc2 = new String(is.readAllBytes());
+				}
+			}
+		}
+
+		assertNotNull(metadataXml);
+		assertNotNull(doc1);
+		assertNotNull(doc2);
+
 	}
 
 	@Test
@@ -314,8 +400,7 @@ public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 
 		SubmissionSet subset = convenienceCommunication.generateDefaultSubmissionSetAttributes();
 		subset.setContentTypeCode(XdsMetadataUtil
-				.convertEhcCodeToCode(
-						new Code("2.16.840.1.113883.6.96", "71388002", "Procedure (procedure)")));
+				.convertEhcCodeToCode(new Code("2.16.840.1.113883.6.96", "71388002", "Procedure (procedure)")));
 
 		SubmissionSetMetadata subSet = new SubmissionSetMetadata();
 		setSubmissionMetadata(subSet, patientId);
@@ -325,7 +410,6 @@ public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 		assertTrue(response.getErrors().isEmpty());
 		assertEquals(Status.SUCCESS, response.getStatus());
 	}
-
 
 	/**
 	 * Method to initialize the metadata for folder
@@ -372,8 +456,8 @@ public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 		assertFalse(response.getErrors().isEmpty());
 
 		ErrorInfo error = response.getErrors().get(0);
-		assertTrue(error.getCodeContext().contains(
-				"the code 1.2.3.4.5(1) is not found in the Affinity Domain configuration"));
+		assertTrue(error.getCodeContext()
+				.contains("the code 1.2.3.4.5(1) is not found in the Affinity Domain configuration"));
 		assertEquals(ErrorCode.REGISTRY_METADATA_ERROR, error.getErrorCode());
 		assertEquals("CodeValidation", error.getLocation());
 		assertEquals(Severity.ERROR, error.getSeverity());

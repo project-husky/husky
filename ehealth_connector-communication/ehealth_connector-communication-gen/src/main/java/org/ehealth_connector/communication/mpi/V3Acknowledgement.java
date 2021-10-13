@@ -19,6 +19,10 @@ package org.ehealth_connector.communication.mpi;
 
 import net.ihe.gazelle.hl7v3.mcciin000002UV01.MCCIIN000002UV01Type;
 
+/**
+ * @author <a href="mailto:anthony.larocca@sage.com">Anthony Larocca</a>
+ *
+ */
 public class V3Acknowledgement extends V3Response {
 
 	private MCCIIN000002UV01Type rootElement = null;

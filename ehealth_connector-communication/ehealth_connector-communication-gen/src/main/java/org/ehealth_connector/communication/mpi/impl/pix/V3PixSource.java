@@ -40,6 +40,10 @@ import net.ihe.gazelle.hl7v3.prpain201301UV02.PRPAIN201301UV02Type;
 import net.ihe.gazelle.hl7v3.prpain201302UV02.PRPAIN201302UV02Type;
 import net.ihe.gazelle.hl7v3.prpain201304UV02.PRPAIN201304UV02Type;
 
+/**
+ * @author <a href="mailto:anthony.larocca@sage.com">Anthony Larocca</a>
+ *
+ */
 public class V3PixSource extends CamelService {
 
 	/**

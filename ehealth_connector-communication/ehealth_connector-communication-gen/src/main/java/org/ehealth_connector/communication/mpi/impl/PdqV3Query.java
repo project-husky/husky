@@ -64,7 +64,8 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 	/**
 	 * Perfoms a PDQ Query (ITI-47)
 	 *
-	 * @param mpiQuery the mpi query object
+	 * @param mpiQuery  the mpi query object
+	 * @param assertion a security header element for example an assertion
 	 * @return the v3 pdq query response
 	 */
 	public V3PdqQueryResponse queryPatients(V3PdqQuery mpiQuery, SecurityHeaderElement assertion) {

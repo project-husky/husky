@@ -30,6 +30,10 @@ import net.ihe.gazelle.hl7v3.quqimt000001UV01.QUQIMT000001UV01QueryContinuation;
 import net.ihe.gazelle.hl7v3.voc.ActClassControlAct;
 import net.ihe.gazelle.hl7v3.voc.XActMoodIntentEvent;
 
+/**
+ * @author <a href="mailto:anthony.larocca@sage.com">Anthony Larocca</a>
+ *
+ */
 public abstract class V3PdqContinuationBase extends V3Message {
 
 	protected QUQIIN000003UV01Type rootElement = new QUQIIN000003UV01Type();

@@ -51,8 +51,11 @@ import org.ehealth_connector.xua.hl7v3.impl.RoleBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openehealth.ipf.commons.ihe.xds.core.responses.ErrorCode;
+import org.openehealth.ipf.commons.ihe.xds.core.responses.ErrorInfo;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.RetrievedDocument;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.RetrievedDocumentSet;
+import org.openehealth.ipf.commons.ihe.xds.core.responses.Severity;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -241,6 +244,38 @@ public class ConvenienceCommunicationRetrieveDocumentsTest extends XdsTestUtils 
 			assertNotNull(bytesOfDocument);
 			assertTrue(bytesOfDocument.length > 0);
 		}
+	}
+
+	@Test
+	public void retrieveDocumentUnknownIdTest() throws Exception {
+		final AffinityDomain affinityDomain = new AffinityDomain();
+		final Destination dest = new Destination();
+
+		try {
+			dest.setUri(new URI(
+					"http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_init_gw_testing/rep/ret"));
+		} catch (final URISyntaxException e) {
+			e.printStackTrace();
+		}
+		dest.setSenderApplicationOid(senderApplicationOid);
+		dest.setReceiverApplicationOid(applicationName);
+		dest.setReceiverFacilityOid(facilityName);
+		affinityDomain.setRegistryDestination(dest);
+		affinityDomain.setRepositoryDestination(dest);
+		convenienceCommunication.setAffinityDomain(affinityDomain);
+
+		var documentRequest = new DocumentRequest("1", null, "1", "1");
+
+		final RetrievedDocumentSet response = convenienceCommunication.retrieveDocument(documentRequest, null);
+		assertEquals(Status.FAILURE, response.getStatus());
+		assertFalse(response.getErrors().isEmpty());
+
+		ErrorInfo error = response.getErrors().get(0);
+
+		assertEquals("DsSimCommon#addDocumentAttachments: Not found.", error.getCodeContext());
+		assertEquals(ErrorCode.DOCUMENT_UNIQUE_ID_ERROR, error.getErrorCode());
+		assertEquals("1", error.getLocation());
+		assertEquals(Severity.ERROR, error.getSeverity());
 	}
 
 }
