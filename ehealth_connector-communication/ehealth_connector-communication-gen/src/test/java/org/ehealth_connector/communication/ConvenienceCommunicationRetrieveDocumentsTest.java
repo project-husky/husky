@@ -166,7 +166,7 @@ public class ConvenienceCommunicationRetrieveDocumentsTest extends XdsTestUtils 
 	}
 
 	@Test
-	public void ITI43RetrieveDocument() throws Exception {
+	public void retrieveDocumentTest() throws Exception {
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
 
@@ -186,7 +186,7 @@ public class ConvenienceCommunicationRetrieveDocumentsTest extends XdsTestUtils 
 		var documentRequest = new DocumentRequest("1.1.4567332.1.75", null,
 				"1.2.820.99999.15031207481211484821638086641062503555190193702785", "urn:oid:1.1.4567334.1.6");
 
-		final RetrievedDocumentSet response = convenienceCommunication.retrieveDocument(documentRequest, null, false);
+		final RetrievedDocumentSet response = convenienceCommunication.retrieveDocument(documentRequest, null);
 		assertEquals(Status.SUCCESS, response.getStatus());
 		assertTrue(response.getErrors().isEmpty());
 		assertFalse(response.getDocuments().isEmpty());
@@ -205,7 +205,7 @@ public class ConvenienceCommunicationRetrieveDocumentsTest extends XdsTestUtils 
 	}
 
 	@Test
-	public void ITI43RetrieveDocumentCda() throws Exception {
+	public void retrieveDocumentCdaTest() throws Exception {
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
 
@@ -225,7 +225,7 @@ public class ConvenienceCommunicationRetrieveDocumentsTest extends XdsTestUtils 
 		var documentRequest = new DocumentRequest("1.1.4567332.1.75", null,
 				"1.2.820.99999.18508463736145106181926975526539403561455330316563", "urn:oid:1.1.4567334.1.6");
 
-		final RetrievedDocumentSet response = convenienceCommunication.retrieveDocument(documentRequest, null, false);
+		final RetrievedDocumentSet response = convenienceCommunication.retrieveDocument(documentRequest, null);
 		assertEquals(Status.SUCCESS, response.getStatus());
 		assertTrue(response.getErrors().isEmpty());
 		assertFalse(response.getDocuments().isEmpty());

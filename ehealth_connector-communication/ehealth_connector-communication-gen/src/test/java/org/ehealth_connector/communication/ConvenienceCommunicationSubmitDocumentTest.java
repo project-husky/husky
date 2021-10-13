@@ -17,6 +17,7 @@
 package org.ehealth_connector.communication;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -63,6 +64,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
+import org.openehealth.ipf.commons.ihe.xds.core.responses.ErrorCode;
+import org.openehealth.ipf.commons.ihe.xds.core.responses.ErrorInfo;
+import org.openehealth.ipf.commons.ihe.xds.core.responses.Severity;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -176,7 +180,7 @@ public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 	}
 
 	@Test
-	public void ITI41ProvideAndRegisterDocumentPdfDoc() throws Exception {
+	public void submitPdfDocTest() throws Exception {
 		convenienceCommunication.setAffinityDomain(affinityDomain);
 
 		convenienceCommunication.clearDocuments();
@@ -192,7 +196,7 @@ public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 	}
 
 	@Test
-	public void ITI41ProvideAndRegisterDocumentCdaDoc() throws Exception {
+	public void submitCdaDocTest() throws Exception {
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
 
@@ -277,7 +281,7 @@ public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 	}
 
 	@Test
-	public void ITI41ProvideAndRegisterDocumentFolder() throws Exception {
+	public void submitFolderTest() throws Exception {
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
 
@@ -332,6 +336,45 @@ public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 		folderMeta.setComments(title);
 		folderMeta.setPatientId(patientId);
 		folderMeta.setTitle("Folder for Patient " + patientId.getExtension());
+	}
+
+	@Test
+	public void submitDocumentWrongMetadataTest() throws Exception {
+		final AffinityDomain affinityDomain = new AffinityDomain();
+		final Destination dest = new Destination();
+
+		try {
+			dest.setUri(new URI(
+					"http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_init_gw_testing/rep/prb"));
+		} catch (final URISyntaxException e) {
+			e.printStackTrace();
+		}
+		dest.setSenderApplicationOid(senderApplicationOid);
+		dest.setReceiverApplicationOid(applicationName);
+		dest.setReceiverFacilityOid(facilityName);
+		affinityDomain.setRegistryDestination(dest);
+		affinityDomain.setRepositoryDestination(dest);
+		convenienceCommunication.setAffinityDomain(affinityDomain);
+
+		convenienceCommunication.clearDocuments();
+		DocumentMetadata metdata = convenienceCommunication.addDocument(DocumentDescriptor.CDA_R2, getDocCda());
+		SubmissionSetMetadata subSet = new SubmissionSetMetadata();
+		Identificator patientId = new Identificator("1.3.6.1.4.1.21367.13.20.3000", "IHEBLUE-1043");
+		setMetadataForCda(metdata, patientId);
+		metdata.setClassCode(new Code("1", "1.2.3.4.5", "display"));
+		setSubmissionMetadata(subSet, patientId);
+
+		var response = convenienceCommunication.submit(subSet, null);
+
+		assertEquals(Status.FAILURE, response.getStatus());
+		assertFalse(response.getErrors().isEmpty());
+
+		ErrorInfo error = response.getErrors().get(0);
+		assertTrue(error.getCodeContext().contains(
+				"the code 1.2.3.4.5(1) is not found in the Affinity Domain configuration"));
+		assertEquals(ErrorCode.REGISTRY_METADATA_ERROR, error.getErrorCode());
+		assertEquals("CodeValidation", error.getLocation());
+		assertEquals(Severity.ERROR, error.getSeverity());
 	}
 
 }

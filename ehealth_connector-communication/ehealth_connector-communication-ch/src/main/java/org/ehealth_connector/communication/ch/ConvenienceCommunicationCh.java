@@ -171,13 +171,16 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	 * the last 10 results) and then query for metadata.
 	 *
 	 * @param patientId the ID of the patient
-	 * @return the OHT XDSQueryResponseType containing references instead of the
-	 *         complete document metadata</div>
+	 * @param security  a security header element for example an assertion
+	 * 
+	 * @return the IPF QueryResponse containing references instead of the complete
+	 *         document metadata</div>
 	 * @throws Exception
 	 */
 	public QueryResponse queryDocumentReferencesOnly(Identificator patientId, SecurityHeaderElement security)
 			throws Exception {
-		return queryDocumentsReferencesOnly(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED), security);
+		return queryDocumentQuery(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED), security,
+				QueryReturnType.OBJECT_REF);
 	}
 
 	/**
@@ -185,28 +188,30 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	 * of one patient.
 	 *
 	 * @param patientId the ID of the patient
-	 * @return the OHT XDSQueryResponseType containing full document metadata</div>
+	 * @param security  a security header element for example an assertion
+	 * 
+	 * @return the IPF Response containing full document metadata</div>
 	 * @throws Exception
 	 */
-	public QueryResponse queryDocuments(Identificator patientId, SecurityHeaderElement security, boolean secure)
+	public QueryResponse queryDocuments(Identificator patientId, SecurityHeaderElement security)
 			throws Exception {
 		return queryDocumentQuery(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED), security,
-				QueryReturnType.LEAF_CLASS, secure);
+				QueryReturnType.LEAF_CLASS);
 	}
 
 	/**
 	 * <div class="en">Submission of the previously prepared document(s) to the
 	 * repository<br>
-	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE
-	 * ITI Document Source actor
+	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE ITI
+	 * Document Source actor
 	 *
-	 * @param authorRole
-	 *            The AuthorRole is one of the minimal required information
-	 *            according to IHE Suisse for classification of documents in
-	 *            Switzerland.
-	 * @return the OHT XDSResponseType</div>
-	 * @throws Exception
-	 *             if the transfer is not successful
+	 * @param authorRole The AuthorRole is one of the minimal required information
+	 *                   according to IHE Suisse for classification of documents in
+	 *                   Switzerland.
+	 * @param security   a security header element for example an assertion
+	 * 
+	 * @return the IPF Response</div>
+	 * @throws Exception if the transfer is not successful
 	 */
 	public Response submit(AuthorRole authorRole, SecurityHeaderElement security) throws Exception {
 		final var subSet = new SubmissionSetMetadata(getTxnData().getSubmissionSet());
