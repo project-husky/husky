@@ -5,11 +5,9 @@ import org.openehealth.ipf.commons.ihe.ws.cxf.payload.OutPayloadLoggerIntercepto
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @EnableAutoConfiguration
-@PropertySource("classpath:atna-audit.properties")
 public class IpfApplicationConfig {
 
 	@Bean
