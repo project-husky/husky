@@ -755,14 +755,13 @@ public class ConvenienceCommunication extends CamelService {
 		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains("https://");
 		final var serverInLogger = "#serverInLogger";
 		final var serverOutLogger = "#serverOutLogger";
-		final var auditContext = "#auditContext";
 
 		final var endpoint = String.format(
-				"xds-iti18://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=%s",
+				"xds-iti18://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s",
 				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", "").replace(
 						"http://", ""),
 				serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
-				secure, this.atnaConfigMode.equals(AtnaConfigMode.SECURE), auditContext);
+				secure, this.atnaConfigMode.equals(AtnaConfigMode.SECURE));
 		log.info("Sending request to '{}' endpoint", endpoint);
 
 		final var exchange = send(endpoint, queryRegistry, securityHeader, null);

@@ -57,11 +57,6 @@ public class V3PixSource extends CamelService {
 	private URI serverURI;
 
 	/**
-	 * ATNA Auditor Context
-	 */
-	private AuditContext auditorContext;
-
-	/**
 	 * Constructor:
 	 * 
 	 * @param pdqServerURI the URI for the server to use for query requests
@@ -69,7 +64,7 @@ public class V3PixSource extends CamelService {
 	 */
 	public V3PixSource(URI pixServerURI, CamelContext context, AuditContext auditorContext) {
 		this.serverURI = pixServerURI;
-		this.auditorContext = auditorContext;
+		setAuditContext(auditorContext);
 		setCamelContext(context);
 	}
 
@@ -214,7 +209,7 @@ public class V3PixSource extends CamelService {
 			throws Exception {
 		final var endpoint = String.format(
 				"pixv3-iti44://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&audit=%s",
-				pdqDest.toString().replace("https://", ""), true, auditorContext.isAuditEnabled());
+				pdqDest.toString().replace("https://", ""), true, getAuditContext().isAuditEnabled());
 		LOGGER.info("Sending request to '{}' endpoint", endpoint);
 
 		Map<String, String> outgoingHeaders = new HashMap<>();

@@ -70,10 +70,10 @@ public class SimplePpqClient extends CamelService implements PpqClient {
 				final var serverInLogger = "#serverInLogger";
 				final var serverOutLogger = "#serverOutLogger";
 				final var endpoint = String.format(
-						"ch-ppq2://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
+						"ch-ppq2://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s",
 						config.getUrl().replace("http://", "").replace("https://", ""), serverInLogger, serverInLogger,
 						serverOutLogger,
-						serverOutLogger, secure);
+						serverOutLogger, secure, getAuditContext().isAuditEnabled());
 
 				final var exchange = send(endpoint, requestToSend, aAssertion, null);
 

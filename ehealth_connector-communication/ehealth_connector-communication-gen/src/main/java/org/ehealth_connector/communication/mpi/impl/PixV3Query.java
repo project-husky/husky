@@ -49,7 +49,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 			AuditContext auditContext) {
 		super(affinityDomain, homeCommunityOid, context);
 		this.pixSource = new V3PixSource(this.pixSourceUri, context, auditContext);
-		this.auditContext = auditContext;
+		setAuditContext(auditContext);
 	}
 
 	public PixV3Query(AffinityDomain affinityDomain, String homeCommunityOid, String homeCommunityNamespace,
@@ -57,7 +57,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 		super(affinityDomain, homeCommunityOid, homeCommunityNamespace, domainToReturnOid, domainToReturnNamespace,
 				context);
 		this.pixSource = new V3PixSource(this.pixSourceUri, context, auditContext);
-		this.auditContext = auditContext;
+		setAuditContext(auditContext);
 	}
 
 	/**
@@ -148,7 +148,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 */
 	public boolean addPatient(FhirPatient patient, SecurityHeaderElement assertion) {
 		if (pixSource == null) {
-			pixSource = new V3PixSource(this.pixSourceUri, getCamelContext(), auditContext);
+			pixSource = new V3PixSource(this.pixSourceUri, getCamelContext(), getAuditContext());
 		}
 
 		LOGGER.debug("creating v3RecordAddedMessage");
@@ -185,7 +185,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 */
 	public boolean mergePatient(FhirPatient patient, String obsoleteId, SecurityHeaderElement assertion) {
 		if (pixSource == null) {
-			pixSource = new V3PixSource(this.pixSourceUri, getCamelContext(), auditContext);
+			pixSource = new V3PixSource(this.pixSourceUri, getCamelContext(), getAuditContext());
 		}
 
 		var ret = false;
@@ -220,7 +220,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 */
 	public boolean updatePatient(FhirPatient patient, SecurityHeaderElement assertion) {
 		if (pixSource == null) {
-			pixSource = new V3PixSource(this.pixSourceUri, getCamelContext(), auditContext);
+			pixSource = new V3PixSource(this.pixSourceUri, getCamelContext(), getAuditContext());
 		}
 		final var v3RecordRevisedMessage = new V3PixSourceMessageHelper(false, true, false,
 				this.senderApplicationOid, this.senderFacilityOid, this.receiverApplicationOid,
@@ -319,7 +319,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 			throws Exception {
 		final var endpoint = String.format(
 				"pixv3-iti45://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&audit=%s",
-				pdqDest.toString().replace("https://", ""), true, auditContext.isAuditEnabled());
+				pdqDest.toString().replace("https://", ""), true, getAuditContext().isAuditEnabled());
 		LOGGER.info("Sending request to '{}' endpoint", endpoint);
 
 		Map<String, String> outgoingHeaders = new HashMap<>();

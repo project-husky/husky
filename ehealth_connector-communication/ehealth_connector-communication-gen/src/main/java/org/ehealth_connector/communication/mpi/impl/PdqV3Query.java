@@ -52,13 +52,13 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 	public PdqV3Query(AffinityDomain affinityDomain, String homeCommunityOid, CamelContext context,
 			AuditContext auditContext) {
 		super(affinityDomain, homeCommunityOid, context);
-		this.auditContext = auditContext;
+		setAuditContext(auditContext);
 	}
 
 	public PdqV3Query(AffinityDomain affinityDomain, String homeCommunityOid, String homeCommunityNameSpace,
 			CamelContext context, AuditContext auditContext) {
 		super(affinityDomain, homeCommunityOid, homeCommunityNameSpace, null, null, context);
-		this.auditContext = auditContext;
+		setAuditContext(auditContext);
 	}
 
 	/**
@@ -176,8 +176,8 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 	private PRPAIN201306UV02Type sendITI47Query(V3PdqConsumerQuery request, SecurityHeaderElement assertion,
 			URI pdqDest) throws Exception {
 		final var endpoint = String.format(
-				"pdqv3-iti47://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s",
-				pdqDest.toString().replace("https://", ""), true);
+				"pdqv3-iti47://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&audit=%s",
+				pdqDest.toString().replace("https://", ""), true, getAuditContext().isAuditEnabled());
 		LOGGER.info("Sending request to '{}' endpoint", endpoint);
 
 		final var marshaller = JAXBContext.newInstance(PRPAIN201305UV02Type.class).createMarshaller();
@@ -204,8 +204,8 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 	private PRPAIN201306UV02Type sendITI47ContinuationQuery(V3PdqContinuationBase request,
 			SecurityHeaderElement assertion, URI pdqDest) throws Exception {
 		final var endpoint = String.format(
-				"pdqv3-iti47://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&supportContinuation=%s&defaultContinuationThreshold=50",
-				pdqDest.toString().replace("https://", ""), true, true);
+				"pdqv3-iti47://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&supportContinuation=%s&defaultContinuationThreshold=50&audit=%s",
+				pdqDest.toString().replace("https://", ""), true, true, getAuditContext().isAuditEnabled());
 		LOGGER.info("Sending request to '{}' endpoint", endpoint);
 
 		final var marshaller = JAXBContext.newInstance(QUQIIN000003UV01Type.class).createMarshaller();
