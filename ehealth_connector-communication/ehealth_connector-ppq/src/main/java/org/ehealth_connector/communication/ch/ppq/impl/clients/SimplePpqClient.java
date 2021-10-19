@@ -66,12 +66,14 @@ public class SimplePpqClient extends CamelService implements PpqClient {
 			if (query != null) {
 				XACMLPolicyQueryType requestToSend = convertPrivacyPolicyQuery(query);
 
+				var secure = config.getUrl().contains("https://");
 				final var serverInLogger = "#serverInLogger";
 				final var serverOutLogger = "#serverOutLogger";
 				final var endpoint = String.format(
 						"ch-ppq2://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
-						config.getUrl().replace("https://", ""), serverInLogger, serverInLogger, serverOutLogger,
-						serverOutLogger, true);
+						config.getUrl().replace("http://", "").replace("https://", ""), serverInLogger, serverInLogger,
+						serverOutLogger,
+						serverOutLogger, secure);
 
 				final var exchange = send(endpoint, requestToSend, aAssertion, null);
 

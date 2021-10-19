@@ -45,12 +45,14 @@ import org.openehealth.ipf.commons.ihe.xds.core.requests.query.QueryReturnType;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.QueryResponse;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.Response;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * Implementation of ch specific convenience communication
  *
  */
+@Component
 public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 
 	/** The SLF4J logger instance. */

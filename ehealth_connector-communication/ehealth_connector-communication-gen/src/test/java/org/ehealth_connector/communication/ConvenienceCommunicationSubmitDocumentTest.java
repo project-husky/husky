@@ -41,7 +41,6 @@ import org.ehealth_connector.common.enums.DocumentDescriptor;
 import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.OID;
-import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.ehealth_connector.communication.testhelper.PurposeOfUse;
 import org.ehealth_connector.communication.testhelper.TestApplication;
 import org.ehealth_connector.communication.testhelper.XdsTestUtils;
@@ -62,8 +61,6 @@ import org.ehealth_connector.xua.hl7v3.impl.RoleBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.ErrorCode;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.ErrorInfo;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.Severity;
@@ -265,6 +262,11 @@ public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 		return new FileInputStream(file);
 	}
 
+	private InputStream getDocCdaV2() throws FileNotFoundException {
+		File file = new File("src/test/resources/docConsumer/CDA-CH-VACD_Impfausweis_V2.xml");
+		return new FileInputStream(file);
+	}
+
 	private void setMetadataForCda(DocumentMetadata metaData, Identificator patientId) {
 		metaData.addAuthor(authorPerson);
 		metaData.setDestinationPatientId(patientId);
@@ -280,64 +282,6 @@ public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 		metaData.setPracticeSettingCode(
 				new Code("394802001", "2.16.840.1.113883.6.96", "General medicine (qualifier value)"));
 		metaData.addConfidentialityCode(new Code("17621005", "2.16.840.1.113883.6.96", "Normal (qualifier value)"));
-	}
-
-	@Test
-	public void submitFolderTest() throws Exception {
-		final AffinityDomain affinityDomain = new AffinityDomain();
-		final Destination dest = new Destination();
-
-		try {
-			dest.setUri(new URI(
-					"https://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_init_gw_testing/rep/prb"));
-		} catch (final URISyntaxException e) {
-			e.printStackTrace();
-		}
-		dest.setSenderApplicationOid(senderApplicationOid);
-		dest.setReceiverApplicationOid(applicationName);
-		dest.setReceiverFacilityOid(facilityName);
-		affinityDomain.setRegistryDestination(dest);
-		affinityDomain.setRepositoryDestination(dest);
-		convenienceCommunication.setAffinityDomain(affinityDomain);
-
-		Identificator patientId = new Identificator("1.3.6.1.4.1.21367.13.20.3000", "IHEBLUE-1043");
-
-		final FolderMetadata folderMeta = convenienceCommunication.addFolder(
-				new Code("1.3.6.1.4.1.21367.2017.3", "UNSPECIFIED-CONTENT-TYPE", "Unspecified Clinical Activity"));
-		setMetadataForFolder(folderMeta, "This is a Folder", patientId);
-
-		final DocumentMetadata metaData = convenienceCommunication.addDocument(DocumentDescriptor.CDA_R2, getDocCda(),
-				getDocCda());
-		setMetadataForCda(metaData, patientId);
-
-		convenienceCommunication.addDocumentToFolder(metaData.getEntryUUID(), folderMeta.getEntryUUID());
-
-		SubmissionSet subset = convenienceCommunication.generateDefaultSubmissionSetAttributes();
-		subset.setContentTypeCode(XdsMetadataUtil
-				.convertEhcCodeToCode(
-						new Code("2.16.840.1.113883.6.96", "71388002", "Procedure (procedure)")));
-
-		SubmissionSetMetadata subSet = new SubmissionSetMetadata();
-		setSubmissionMetadata(subSet, patientId);
-
-		var response = convenienceCommunication.submit(subSet, null);
-
-		assertTrue(response.getErrors().isEmpty());
-		assertEquals(Status.SUCCESS, response.getStatus());
-	}
-
-
-	/**
-	 * Method to initialize the metadata for folder
-	 *
-	 * @param folderMeta1
-	 */
-	private void setMetadataForFolder(FolderMetadata folderMeta, String title, Identificator patientId) {
-		folderMeta.setAvailabilityStatus(AvailabilityStatus.APPROVED);
-		folderMeta.addCode(new Code("417319006", "2.16.840.1.113883.6.96", "Record of health event (record artifact)"));
-		folderMeta.setComments(title);
-		folderMeta.setPatientId(patientId);
-		folderMeta.setTitle("Folder for Patient " + patientId.getExtension());
 	}
 
 	@Test
@@ -377,6 +321,52 @@ public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 		assertEquals(ErrorCode.REGISTRY_METADATA_ERROR, error.getErrorCode());
 		assertEquals("CodeValidation", error.getLocation());
 		assertEquals(Severity.ERROR, error.getSeverity());
+	}
+
+	@Test
+	public void replaceCdaDocTest() throws Exception {
+		final AffinityDomain affinityDomain = new AffinityDomain();
+		final Destination dest = new Destination();
+
+		try {
+			dest.setUri(new URI(
+					"http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_init_gw_testing/rep/prb"));
+		} catch (final URISyntaxException e) {
+			e.printStackTrace();
+		}
+		dest.setSenderApplicationOid(senderApplicationOid);
+		dest.setReceiverApplicationOid(applicationName);
+		dest.setReceiverFacilityOid(facilityName);
+		affinityDomain.setRegistryDestination(dest);
+		affinityDomain.setRepositoryDestination(dest);
+		convenienceCommunication.setAffinityDomain(affinityDomain);
+
+		convenienceCommunication.clearDocuments();
+		DocumentMetadata metdata = convenienceCommunication.addDocument(DocumentDescriptor.CDA_R2, getDocCda());
+		SubmissionSetMetadata subSet = new SubmissionSetMetadata();
+		Identificator patientId = new Identificator("1.3.6.1.4.1.21367.13.20.3000", "IHEBLUE-1043");
+		setMetadataForCda(metdata, patientId);
+		setSubmissionMetadata(subSet, patientId);
+
+		var response = convenienceCommunication.submit(subSet, null);
+
+		String entryUuid = convenienceCommunication.getTxnData().getDocuments().get(0).getDocumentEntry()
+				.getEntryUuid();
+
+		assertTrue(response.getErrors().isEmpty());
+		assertEquals(Status.SUCCESS, response.getStatus());
+
+		convenienceCommunication.clearDocuments();
+		metdata = convenienceCommunication.addDocument(DocumentDescriptor.CDA_R2, getDocCdaV2());
+		subSet = new SubmissionSetMetadata();
+		patientId = new Identificator("1.3.6.1.4.1.21367.13.20.3000", "IHEBLUE-1043");
+		setMetadataForCda(metdata, patientId);
+		setSubmissionMetadata(subSet, patientId);
+
+		response = convenienceCommunication.submitReplacement(subSet, entryUuid, securityHeaderElement);
+
+		assertTrue(response.getErrors().isEmpty());
+		assertEquals(Status.SUCCESS, response.getStatus());
 	}
 
 }

@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "org.ehealth_connector.communication")
+@ComponentScan(basePackages = { "org.ehealth_connector.communication" })
 public class TestApplication extends SpringBootServletInitializer {
 
 	public static void main(final String[] args) {

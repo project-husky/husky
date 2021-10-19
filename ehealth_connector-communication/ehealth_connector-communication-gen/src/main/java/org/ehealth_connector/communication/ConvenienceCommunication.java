@@ -54,6 +54,7 @@ import org.ehealth_connector.xua.core.SecurityHeaderElement;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Association;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationLabel;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationType;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Folder;
@@ -463,6 +464,10 @@ public class ConvenienceCommunication extends CamelService {
 	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(SubmissionSetMetadata submissionSetMetadata, OutputStream outputStream) {
+		if (txnData.getSubmissionSet() == null) {
+			txnData.setSubmissionSet(new SubmissionSet());
+		}
+
 		submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
 		final var xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData));
 		xdmContents.createZip(outputStream, txnData);
@@ -750,13 +755,14 @@ public class ConvenienceCommunication extends CamelService {
 		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains("https://");
 		final var serverInLogger = "#serverInLogger";
 		final var serverOutLogger = "#serverOutLogger";
+		final var auditContext = "#auditContext";
 
 		final var endpoint = String.format(
-				"xds-iti18://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
+				"xds-iti18://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=%s",
 				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", "").replace(
 						"http://", ""),
 				serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
-				secure);
+				secure, this.atnaConfigMode.equals(AtnaConfigMode.SECURE), auditContext);
 		log.info("Sending request to '{}' endpoint", endpoint);
 
 		final var exchange = send(endpoint, queryRegistry, securityHeader, null);
@@ -818,11 +824,11 @@ public class ConvenienceCommunication extends CamelService {
 		final var serverInLogger = "#serverInLogger";
 		final var serverOutLogger = "#serverOutLogger";
 		final var endpoint = String.format(
-				"xds-iti43://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
+				"xds-iti43://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s",
 				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", "").replace(
 						"http://", ""),
 				serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
-				secure);
+				secure, this.atnaConfigMode.equals(AtnaConfigMode.SECURE));
 		log.info("Sending request to '{}' endpoint", endpoint);
 
 		final var exchange = send(endpoint, retrieveDocumentSet, security, null);
@@ -847,6 +853,25 @@ public class ConvenienceCommunication extends CamelService {
 	 */
 	public void setAutomaticExtractionEnabled(DocumentMetadataExtractionMode automaticExtractionEnabled) {
 		this.documentMetadataExtractionMode = automaticExtractionEnabled;
+	}
+
+	/**
+	 * Sets the status of the automatic metadata extraction
+	 *
+	 * @param automaticExtractionEnabled true, if metadata will be extracted as far
+	 *                                   as possible) automatically, false otherwise
+	 */
+	public void setAutomaticExtractionEnabled(SubmissionSetMetadataExtractionMode automaticExtractionEnabled) {
+		this.submissionSetMetadataExtractionMode = automaticExtractionEnabled;
+	}
+
+	/**
+	 * Sets the atna config
+	 *
+	 * @param atnaConfigMode secure or unsecure config
+	 */
+	public void setAtnaConfig(AtnaConfigMode atnaConfigMode) {
+		this.atnaConfigMode = atnaConfigMode;
 	}
 
 	/**
@@ -880,27 +905,7 @@ public class ConvenienceCommunication extends CamelService {
 	 * @throws Exception if the transfer is not successful
 	 */
 	public Response submit(SecurityHeaderElement security) throws Exception {
-		setDefaultKeystoreTruststore(affinityDomain.getRepositoryDestination());
-
-		if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
-			txnData.setSubmissionSet(generateDefaultSubmissionSetAttributes());
-			linkDocumentEntryWithSubmissionSet();
-		}
-
-		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains("https://");
-		final var serverInLogger = "#serverInLogger";
-		final var serverOutLogger = "#serverOutLogger";
-		final var endpoint = String.format(
-				"xds-iti41://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
-				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", "")
-						.replace("http://", ""),
-				serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
-				secure);
-		log.info("Sending request to '{}' endpoint", endpoint);
-
-		final var exchange = send(endpoint, txnData, security, null);
-
-		return exchange.getMessage().getBody(Response.class);
+		return submit(security, null);
 	}
 
 	/**
@@ -929,6 +934,90 @@ public class ConvenienceCommunication extends CamelService {
 
 		submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
 		return submit(security);
+	}
+
+	/**
+	 * <div class="en">Submission of the previously prepared document(s) to the
+	 * repository to replace another document. The restriction of this method is
+	 * that only one document could be replaced<br>
+	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE ITI
+	 * Document Source actor
+	 *
+	 * @param submissionSetMetadata The information in this object will be used to
+	 *                              create comprehensive meta data about this
+	 *                              submission (e.g. with AuthorRole,
+	 *                              AuthorInstitution, ContentType and Title).
+	 *                              Although, some of this information can be
+	 *                              derived automatically, some may be required in
+	 *                              your country (e.g. AuthorRole in Switzerland)
+	 * @param idOfOriginDocument    ID of the document, which should be replaced
+	 * @param security              a security header element for example an
+	 *                              assertion
+	 * @return the IPF Response</div>
+	 * @throws Exception if the transfer is not successful
+	 */
+	public Response submitReplacement(SubmissionSetMetadata submissionSetMetadata, String idOfOriginDocument,
+			SecurityHeaderElement security)
+			throws Exception {
+		if (txnData.getSubmissionSet() == null) {
+			txnData.setSubmissionSet(new SubmissionSet());
+		}
+
+		var association = new Association();
+		association.setAssociationType(AssociationType.REPLACE);
+		association.setAvailabilityStatus(AvailabilityStatus.APPROVED);
+		association.setTargetUuid(idOfOriginDocument);
+		association.assignEntryUuid();
+
+		txnData.getAssociations().add(association);
+
+		submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
+		return submit(security, association);
+	}
+	
+	/**
+	 * <div class="en">Submission of the previously prepared document(s) to the
+	 * repository<br>
+	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE ITI
+	 * Document Source actor
+	 *
+	 * @param security a security header element for example an assertion
+	 *
+	 * @return the IPF Response</div>
+	 * @throws Exception if the transfer is not successful
+	 */
+	private Response submit(SecurityHeaderElement security, Association association) throws Exception {
+		setDefaultKeystoreTruststore(affinityDomain.getRepositoryDestination());
+
+		if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
+			txnData.setSubmissionSet(generateDefaultSubmissionSetAttributes());
+			linkDocumentEntryWithSubmissionSet();
+		}
+
+		if (association != null) {
+			if (txnData.getDocuments() != null && !txnData.getDocuments().isEmpty()
+					&& txnData.getDocuments().get(0) != null) {
+				association.setSourceUuid(txnData.getDocuments().get(0).getDocumentEntry().getEntryUuid());
+			} else if (txnData.getFolders() != null && !txnData.getFolders().isEmpty()
+					&& txnData.getFolders().get(0) != null) {
+				association.setSourceUuid(txnData.getFolders().get(0).getEntryUuid());
+			}
+		}
+
+		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains("https://");
+		final var serverInLogger = "#serverInLogger";
+		final var serverOutLogger = "#serverOutLogger";
+		final var endpoint = String.format(
+				"xds-iti41://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s",
+				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", "")
+						.replace("http://", ""),
+				serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
+				secure, this.atnaConfigMode.equals(AtnaConfigMode.SECURE));
+		log.info("Sending request to '{}' endpoint", endpoint);
+
+		final var exchange = send(endpoint, txnData, security, null);
+
+		return exchange.getMessage().getBody(Response.class);
 	}
 
 }

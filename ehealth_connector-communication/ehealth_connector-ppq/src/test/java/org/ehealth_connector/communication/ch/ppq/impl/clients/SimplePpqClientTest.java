@@ -50,8 +50,8 @@ public class SimplePpqClientTest {
 
 	@Autowired
 	private CamelContext camelContext;
-	private String urlToPpq = "https://ehealthsuisse.ihe-europe.net:10443/ppq-repository?wsdl";
-	private String urlToXua = "https://ehealthsuisse.ihe-europe.net:10443/STS?wsdl";
+	private String urlToPpq = "https://ehealthsuisse.ihe-europe.net:10443/ppq-repository";
+	private String urlToXua = "https://ehealthsuisse.ihe-europe.net:10443/STS";
 	private String urlToSts = "https://gazelle.ihe.net/gazelle-sts?wsdl";
 	private String clientKeyStore = "src/test/resources/testKeystore.jks";
 	private String clientKeyStorePass = "changeit";

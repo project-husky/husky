@@ -16,72 +16,60 @@
  */
 package org.ehealth_connector.communication;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Base64;
 import java.util.Iterator;
-import java.util.List;
 import java.util.UUID;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
+import javax.xml.soap.MessageFactory;
+import javax.xml.soap.SOAPBody;
+import javax.xml.soap.SOAPElement;
+import javax.xml.soap.SOAPEnvelope;
+import javax.xml.soap.SOAPMessage;
+import javax.xml.soap.SOAPPart;
+
 import org.apache.commons.io.IOUtils;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.basetypes.NameBaseType;
 import org.ehealth_connector.common.communication.AffinityDomain;
-import org.ehealth_connector.common.communication.Destination;
 import org.ehealth_connector.common.communication.DocumentMetadata;
 import org.ehealth_connector.common.communication.SubmissionSetMetadata;
 import org.ehealth_connector.common.enums.DocumentDescriptor;
 import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.OID;
-import org.ehealth_connector.common.utils.XdsMetadataUtil;
-import org.ehealth_connector.communication.testhelper.PurposeOfUse;
 import org.ehealth_connector.communication.testhelper.TestApplication;
 import org.ehealth_connector.communication.testhelper.XdsTestUtils;
-import org.ehealth_connector.xua.communication.clients.XuaClient;
-import org.ehealth_connector.xua.communication.clients.impl.ClientFactory;
-import org.ehealth_connector.xua.communication.config.XuaClientConfig;
-import org.ehealth_connector.xua.communication.config.impl.XuaClientConfigBuilderImpl;
-import org.ehealth_connector.xua.communication.xua.RequestType;
-import org.ehealth_connector.xua.communication.xua.TokenType;
-import org.ehealth_connector.xua.communication.xua.XUserAssertionResponse;
-import org.ehealth_connector.xua.communication.xua.impl.AppliesToBuilderImpl;
-import org.ehealth_connector.xua.communication.xua.impl.XUserAssertionRequestBuilderImpl;
 import org.ehealth_connector.xua.core.SecurityHeaderElement;
 import org.ehealth_connector.xua.deserialization.impl.AssertionDeserializerImpl;
 import org.ehealth_connector.xua.exceptions.DeserializeException;
-import org.ehealth_connector.xua.hl7v3.impl.PurposeOfUseBuilder;
-import org.ehealth_connector.xua.hl7v3.impl.RoleBuilder;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
-import org.openehealth.ipf.commons.ihe.xds.core.responses.ErrorCode;
-import org.openehealth.ipf.commons.ihe.xds.core.responses.ErrorInfo;
-import org.openehealth.ipf.commons.ihe.xds.core.responses.Severity;
-import org.openehealth.ipf.commons.ihe.xds.core.responses.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -125,65 +113,6 @@ public class ConvenienceCommunicationXdmContentsTest extends XdsTestUtils {
 		}
 	}
 
-	/**
-	 * Method implementing
-	 *
-	 * @throws java.lang.Exception
-	 */
-	@BeforeEach
-	public void setUp() throws Exception {
-		var app = new SpringApplication(TestApplication.class);
-		app.setWebApplicationType(WebApplicationType.NONE);
-
-		var context = app.run();
-
-		affinityDomain = new AffinityDomain();
-		final Destination dest = new Destination();
-
-		try {
-			dest.setUri(new URI(
-					"https://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_init_gw_testing/rep/prb"));
-		} catch (final URISyntaxException e) {
-			e.printStackTrace();
-		}
-		dest.setSenderApplicationOid(senderApplicationOid);
-		dest.setReceiverApplicationOid(applicationName);
-		dest.setReceiverFacilityOid(facilityName);
-		affinityDomain.setRegistryDestination(dest);
-		affinityDomain.setRepositoryDestination(dest);
-
-		// query HCP assertion
-		XuaClientConfig xuaClientConfig = new XuaClientConfigBuilderImpl().clientKeyStore(clientKeyStore)
-				.clientKeyStorePassword(clientKeyStorePass).clientKeyStoreType("jks").url(urlToXua).create();
-
-		XuaClient client = ClientFactory.getXuaClient(xuaClientConfig);
-
-		try (InputStream is = new FileInputStream(new File("src/test/resources/ch-ppq/Assertion.xml"))) {
-
-			var assertion = new AssertionDeserializerImpl().fromXmlByteArray(IOUtils.toByteArray(is));
-
-			var purposeOfUse = new PurposeOfUseBuilder().code(PurposeOfUse.NORMAL_ACCESS.getCodeValue())
-					.codeSystem("2.16.756.5.30.1.127.3.10.6").displayName(PurposeOfUse.NORMAL_ACCESS.getDisplayName())
-					.buildObject();
-			var role = new RoleBuilder().code("HCP").codeSystem("2.16.756.5.30.1.127.3.10.6")
-					.displayName("Behandelnde(r)").buildObject();
-
-			var assertionRequest = new XUserAssertionRequestBuilderImpl().requestType(RequestType.WST_ISSUE)
-					.tokenType(TokenType.OASIS_WSS_SAML_PROFILE_11_SAMLV20)
-					.appliesTo(new AppliesToBuilderImpl().address("https://localhost:17001/services/iti18").create())
-					.purposeOfUse(purposeOfUse).subjectRole(role)
-					.resourceId("761337610411265304^^^SPID&2.16.756.5.30.1.127.3.10.3&ISO").create();
-
-			List<XUserAssertionResponse> response = client.send(assertion, assertionRequest);
-
-			securityHeaderElement = response.get(0).getAssertion();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		convenienceCommunication.clearDocuments();
-	}
-
 	@Test
 	public void contextLoads() {
 		assertNotNull(convenienceCommunication);
@@ -201,17 +130,20 @@ public class ConvenienceCommunicationXdmContentsTest extends XdsTestUtils {
 		metaData = convenienceCommunication.addDocument(DocumentDescriptor.PDF, getDocPdf());
 		setMetadataForPdf(metaData, patientId);
 
+		SubmissionSetMetadata subSet = new SubmissionSetMetadata();
+		setSubmissionMetadata(subSet, patientId);
+
 		// create a FileOutputStream to store the zip file
 		final File targetFile = new File("src/test/resources/xdmTest_Java.zip");
 		try (final FileOutputStream outputStream = new FileOutputStream(targetFile)) {
 			// create and store zip.
-			convenienceCommunication.createXdmContents(outputStream);
+			convenienceCommunication.createXdmContents(subSet, outputStream);
 		}
 
 		checkZipContent(targetFile);
 	}
 
-	private void checkZipContent(File targetFile) throws ZipException, IOException {
+	private void checkZipContent(File targetFile) throws Exception {
 
 		String readmeFile = null;
 		String indexHtmFile = null;
@@ -247,14 +179,69 @@ public class ConvenienceCommunicationXdmContentsTest extends XdsTestUtils {
 			}
 
 			assertNotNull(readmeFile);
+			testReadMeFile(readmeFile);
 			assertNotNull(indexHtmFile);
+			testIndexHtmFile(indexHtmFile);
 			assertNotNull(iheXdmFolder);
 		}
 
 		checkSubsetDirContent(String.format("%s/SUBSET01", iheXdmFolder.toString()));
 	}
 
-	private void checkSubsetDirContent(String dir) throws FileNotFoundException, IOException {
+	/**
+	 * check if readme contains
+	 * 
+	 * <ul>
+	 * <li>contact information regarding the institution that created the media
+	 * (default values)</li>
+	 * <li>information regarding the application like name of the product or
+	 * software version</li>
+	 * 
+	 * </ul>
+	 * 
+	 * 
+	 * @param readmeContent content of README.TXT file
+	 * @see <a href="https://profiles.ihe.net/ITI/TF/Volume2/ITI-32.html">ITI-32</a>
+	 */
+	private void testReadMeFile(String readmeContent) {
+		assertTrue(readmeContent.contains("eHealth Connector - http://ehealth-connector.org"));
+		assertTrue(readmeContent.contains("Open Source"));
+		assertTrue(readmeContent.contains("Convenience API"));
+		assertTrue(readmeContent.contains("http://sourceforge.net/p/ehealthconnector/wiki/Team"));
+	}
+
+	/**
+	 * check if INDEX.HTM contains
+	 * 
+	 * <ul>
+	 * <li>identification of the institution that created the interchange media</li>
+	 * <li>a link to an entry point for accessing the web content of the IHE_PDI
+	 * directory</li>
+	 * <li>a link to the README.TXT file</li>
+	 * <li>a manifest which lists the data that can be imported by a Portable Media
+	 * Importer</li>
+	 * <li>a manifest which lists any patient-related data contained on the CD that
+	 * cannot be imported</li>
+	 * 
+	 * </ul>
+	 * 
+	 * 
+	 * @param indexHtmContent content of INDEX.HTM file
+	 * @see <a href="https://profiles.ihe.net/ITI/TF/Volume2/ITI-32.html">ITI-32</a>
+	 */
+	private void testIndexHtmFile(String indexHtmContent) {
+		assertTrue(indexHtmContent.contains("eHealthConnector XDM Cross-Enterprise Document Media Interchange"));
+
+		// check patient details
+		assertTrue(indexHtmContent.contains("Patient ID: IHEBLUE-1043 (1.3.6.1.4.1.21367.13.20.3000)"));
+
+		// check references to other documents in folder
+		assertTrue(indexHtmContent.contains("<a target=\"_blank\" href=\"README.TXT\">"));
+		assertTrue(indexHtmContent.contains("IHE_XDM/SUBSET01/DOC00002.PDF"));
+		assertTrue(indexHtmContent.contains("IHE_XDM/SUBSET01/DOC00001.XML"));
+	}
+
+	private void checkSubsetDirContent(String dir) throws Exception {
 
 		String metadataXml = null;
 		String doc1 = null;
@@ -278,58 +265,38 @@ public class ConvenienceCommunicationXdmContentsTest extends XdsTestUtils {
 		}
 
 		assertNotNull(metadataXml);
+		validateMetadata(metadataXml);
 		assertNotNull(doc1);
 		assertNotNull(doc2);
 
 	}
 
-	@Test
-	public void submitCdaDocTest() throws Exception {
-		final AffinityDomain affinityDomain = new AffinityDomain();
-		final Destination dest = new Destination();
+	private void setMetadataForPdf(DocumentMetadata metaData, Identificator patientId) {
+		Name name = new Name(new NameBaseType());
+		name.setGiven("Gerald");
+		name.setFamily("Smitty");
 
-		try {
-			dest.setUri(new URI(
-					"https://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_init_gw_testing/rep/prb"));
-		} catch (final URISyntaxException e) {
-			e.printStackTrace();
-		}
-		dest.setSenderApplicationOid(senderApplicationOid);
-		dest.setReceiverApplicationOid(applicationName);
-		dest.setReceiverFacilityOid(facilityName);
-		affinityDomain.setRegistryDestination(dest);
-		affinityDomain.setRepositoryDestination(dest);
-		convenienceCommunication.setAffinityDomain(affinityDomain);
+		Author author = new Author();
+		author.addName(name);
 
-		convenienceCommunication.clearDocuments();
-		DocumentMetadata metdata = convenienceCommunication.addDocument(DocumentDescriptor.CDA_R2, getDocCda());
-		SubmissionSetMetadata subSet = new SubmissionSetMetadata();
-		Identificator patientId = new Identificator("1.3.6.1.4.1.21367.13.20.3000", "IHEBLUE-1043");
-		setMetadataForCda(metdata, patientId);
-		setSubmissionMetadata(subSet, patientId);
+		author.setRoleFunction(new Code("HCP", "2.16.756.5.30.1.127.3.10.1.1.3", "Healthcare professional"));
 
-		var response = convenienceCommunication.submit(subSet, null);
-
-		assertTrue(response.getErrors().isEmpty());
-		assertEquals(Status.SUCCESS, response.getStatus());
-	}
-
-	private void setMetadataForPdf(DocumentMetadata metdata, Identificator patientId) {
-		metdata.addAuthor(authorPerson);
-		metdata.setDestinationPatientId(patientId);
-		metdata.setSourcePatientId(new Identificator("1.2.3.4", "2342134localid"));
-		metdata.setCodedLanguage(LanguageCode.GERMAN_CODE);
-		metdata.setTypeCode(
-				new Code("371535009", "2.16.840.1.113883.6.96", "Transfer summary report (record artifact)"));
-		metdata.setFormatCode(new Code("urn:ihe:iti:xds-sd:pdf:2008", "1.3.6.1.4.1.19376.1.2.3",
+		metaData.addAuthor(author);
+		metaData.setDestinationPatientId(patientId);
+		metaData.setSourcePatientId(new Identificator("1.2.3.4", "2342134localid"));
+		metaData.setCodedLanguage(LanguageCode.GERMAN_CODE);
+		metaData.setTypeCode(
+				new Code("419891008", "2.16.840.1.113883.6.96", "Record artifact (record artifact)"));
+		metaData.setFormatCode(new Code("urn:ihe:iti:xds-sd:pdf:2008", "1.3.6.1.4.1.19376.1.2.3",
 				"1.3.6.1.4.1.19376.1.2.20 (Scanned Document)"));
-		metdata.setClassCode(
-				new Code("422735006", "2.16.840.1.113883.6.96", "Summary clinical document (record artifact)"));
-		metdata.setHealthcareFacilityTypeCode(new Code("394747008", "2.16.840.1.113883.6.96", "Health Authority"));
-		metdata.setPracticeSettingCode(
-				new Code("394810000", "2.16.840.1.113883.6.96", "Rheumatology (qualifier value)"));
-		metdata.addConfidentialityCode(new Code("17621005", "2.16.840.1.113883.6.96", "Normal (qualifier value)"));
-		metdata.setTitle("Informed Consent");
+		metaData.setClassCode(
+				new Code("184216000", "2.16.840.1.113883.6.96", "Patient record type (record artifact)"));
+		metaData.setHealthcareFacilityTypeCode(new Code("394747008", "2.16.840.1.113883.6.96", "Health Authority"));
+		metaData.setPracticeSettingCode(
+				new Code("394802001", "2.16.840.1.113883.6.96", "General medicine (qualifier value)"));
+		metaData.addConfidentialityCode(
+				new Code("17621005", "2.16.840.1.113883.6.96", "Normal (qualifier value)"));
+		metaData.setTitle("Informed Consent");
 	}
 
 	private void setSubmissionMetadata(SubmissionSetMetadata metadata, Identificator patientId) {
@@ -352,115 +319,70 @@ public class ConvenienceCommunicationXdmContentsTest extends XdsTestUtils {
 	}
 
 	private void setMetadataForCda(DocumentMetadata metaData, Identificator patientId) {
-		metaData.addAuthor(authorPerson);
+		Name name = new Name(new NameBaseType());
+		name.setGiven("Gerald");
+		name.setFamily("Smitty");
+
+		Author author = new Author();
+		author.addName(name);
+
+		author.setRoleFunction(new Code("HCP", "2.16.756.5.30.1.127.3.10.1.1.3", "Healthcare professional"));
+
+		metaData.addAuthor(author);
 		metaData.setDestinationPatientId(patientId);
-		metaData.setSourcePatientId(new Identificator("1.2.3.4", "23423452342134localid"));
+		metaData.setSourcePatientId(new Identificator("1.2.3.4", "2342134localid"));
 		metaData.setCodedLanguage(LanguageCode.FRENCH_CODE);
-		metaData.setTypeCode(new Code("41000179103", "2.16.840.1.113883.6.96", "Immunization record"));
-		metaData.setFormatCode(new Code("urn:ihe:pcc:ic:2009", "1.3.6.1.4.1.19376.1.2.3", "Immunization Content (IC)"));
 
+		metaData.setTypeCode(
+				new Code("41000179103", "2.16.840.1.113883.6.96", "Immunization record (record artifact)"));
+		metaData.setFormatCode(new Code("urn:ihe:iti:xds-sd:pdf:2008", "1.3.6.1.4.1.19376.1.2.3",
+				"1.3.6.1.4.1.19376.1.2.20 (Scanned Document)"));
 		metaData.setClassCode(
-				new Code("417319006", "2.16.840.1.113883.6.96", "Record of health event (record artifact)"));
-
+				new Code("419891008", "2.16.840.1.113883.6.96", "Record artifact (record artifact)"));
 		metaData.setHealthcareFacilityTypeCode(new Code("394747008", "2.16.840.1.113883.6.96", "Health Authority"));
 		metaData.setPracticeSettingCode(
 				new Code("394802001", "2.16.840.1.113883.6.96", "General medicine (qualifier value)"));
-		metaData.addConfidentialityCode(new Code("17621005", "2.16.840.1.113883.6.96", "Normal (qualifier value)"));
+		metaData.addConfidentialityCode(
+				new Code("17621005", "2.16.840.1.113883.6.96", "Normal (qualifier value)"));
 	}
 
-	@Test
-	public void submitFolderTest() throws Exception {
-		final AffinityDomain affinityDomain = new AffinityDomain();
-		final Destination dest = new Destination();
+	private void validateMetadata(String documentContent)
+			throws Exception {
 
-		try {
-			dest.setUri(new URI(
-					"https://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_init_gw_testing/rep/prb"));
-		} catch (final URISyntaxException e) {
-			e.printStackTrace();
-		}
-		dest.setSenderApplicationOid(senderApplicationOid);
-		dest.setReceiverApplicationOid(applicationName);
-		dest.setReceiverFacilityOid(facilityName);
-		affinityDomain.setRegistryDestination(dest);
-		affinityDomain.setRepositoryDestination(dest);
-		convenienceCommunication.setAffinityDomain(affinityDomain);
+		CloseableHttpClient httpClient = HttpClients.custom().build();
+		final var post = new HttpPost("https://gazelle.ihe.net/XDStarClient-ejb/ModelBasedValidationWSService/ModelBasedValidationWS");
+		post.setEntity(new ByteArrayEntity(createSOAPRequest(documentContent)));
 
-		Identificator patientId = new Identificator("1.3.6.1.4.1.21367.13.20.3000", "IHEBLUE-1043");
-
-		final FolderMetadata folderMeta = convenienceCommunication.addFolder(
-				new Code("1.3.6.1.4.1.21367.2017.3", "UNSPECIFIED-CONTENT-TYPE", "Unspecified Clinical Activity"));
-		setMetadataForFolder(folderMeta, "This is a Folder", patientId);
-
-		final DocumentMetadata metaData = convenienceCommunication.addDocument(DocumentDescriptor.CDA_R2, getDocCda(),
-				getDocCda());
-		setMetadataForCda(metaData, patientId);
-
-		convenienceCommunication.addDocumentToFolder(metaData.getEntryUUID(), folderMeta.getEntryUUID());
-
-		SubmissionSet subset = convenienceCommunication.generateDefaultSubmissionSetAttributes();
-		subset.setContentTypeCode(XdsMetadataUtil
-				.convertEhcCodeToCode(new Code("2.16.840.1.113883.6.96", "71388002", "Procedure (procedure)")));
-
-		SubmissionSetMetadata subSet = new SubmissionSetMetadata();
-		setSubmissionMetadata(subSet, patientId);
-
-		var response = convenienceCommunication.submit(subSet, null);
-
-		assertTrue(response.getErrors().isEmpty());
-		assertEquals(Status.SUCCESS, response.getStatus());
+		CloseableHttpResponse response = httpClient.execute(post);
+		String contentResponse = IOUtils.toString(response.getEntity().getContent());
+		
+		assertFalse(contentResponse.contains("FAILED"));
 	}
 
-	/**
-	 * Method to initialize the metadata for folder
-	 *
-	 * @param folderMeta1
-	 */
-	private void setMetadataForFolder(FolderMetadata folderMeta, String title, Identificator patientId) {
-		folderMeta.setAvailabilityStatus(AvailabilityStatus.APPROVED);
-		folderMeta.addCode(new Code("417319006", "2.16.840.1.113883.6.96", "Record of health event (record artifact)"));
-		folderMeta.setComments(title);
-		folderMeta.setPatientId(patientId);
-		folderMeta.setTitle("Folder for Patient " + patientId.getExtension());
-	}
+	private byte[] createSOAPRequest(String documentContent) throws Exception {
+		MessageFactory messageFactory = MessageFactory.newInstance();
+		SOAPMessage soapMessage = messageFactory.createMessage();
+		SOAPPart soapPart = soapMessage.getSOAPPart();
 
-	@Test
-	public void submitDocumentWrongMetadataTest() throws Exception {
-		final AffinityDomain affinityDomain = new AffinityDomain();
-		final Destination dest = new Destination();
+		// SOAP Envelope
+		SOAPEnvelope envelope = soapPart.getEnvelope();
+		envelope.addNamespaceDeclaration("ws", "http://ws.mb.validator.gazelle.ihe.net");
 
-		try {
-			dest.setUri(new URI(
-					"http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_init_gw_testing/rep/prb"));
-		} catch (final URISyntaxException e) {
-			e.printStackTrace();
-		}
-		dest.setSenderApplicationOid(senderApplicationOid);
-		dest.setReceiverApplicationOid(applicationName);
-		dest.setReceiverFacilityOid(facilityName);
-		affinityDomain.setRegistryDestination(dest);
-		affinityDomain.setRepositoryDestination(dest);
-		convenienceCommunication.setAffinityDomain(affinityDomain);
+		SOAPBody soapBody = envelope.getBody();
+		SOAPElement soapBodyElem = soapBody.addChildElement("validateBase64Document", "ws");
+		SOAPElement soapBodyElemBase64Doc = soapBodyElem.addChildElement("base64Document");
+		soapBodyElemBase64Doc.addTextNode(Base64.getEncoder().encodeToString(documentContent.getBytes()));
 
-		convenienceCommunication.clearDocuments();
-		DocumentMetadata metdata = convenienceCommunication.addDocument(DocumentDescriptor.CDA_R2, getDocCda());
-		SubmissionSetMetadata subSet = new SubmissionSetMetadata();
-		Identificator patientId = new Identificator("1.3.6.1.4.1.21367.13.20.3000", "IHEBLUE-1043");
-		setMetadataForCda(metdata, patientId);
-		metdata.setClassCode(new Code("1", "1.2.3.4.5", "display"));
-		setSubmissionMetadata(subSet, patientId);
+		SOAPElement soapBodyElementValidator = soapBodyElem.addChildElement("validator");
+		soapBodyElementValidator.addTextNode("IHE XDM ITI-32 Distribute Document Set on Media");
 
-		var response = convenienceCommunication.submit(subSet, null);
+		soapMessage.saveChanges();
 
-		assertEquals(Status.FAILURE, response.getStatus());
-		assertFalse(response.getErrors().isEmpty());
+		ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();
 
-		ErrorInfo error = response.getErrors().get(0);
-		assertTrue(error.getCodeContext()
-				.contains("the code 1.2.3.4.5(1) is not found in the Affinity Domain configuration"));
-		assertEquals(ErrorCode.REGISTRY_METADATA_ERROR, error.getErrorCode());
-		assertEquals("CodeValidation", error.getLocation());
-		assertEquals(Severity.ERROR, error.getSeverity());
+		soapMessage.writeTo(byteOutput);
+
+		return byteOutput.toByteArray();
 	}
 
 }

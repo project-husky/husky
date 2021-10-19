@@ -36,13 +36,13 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Person;
 import org.ehealth_connector.common.communication.AffinityDomain;
+import org.ehealth_connector.common.communication.AtnaConfig.AtnaConfigMode;
 import org.ehealth_connector.common.communication.Destination;
 import org.ehealth_connector.communication.testhelper.PurposeOfUse;
 import org.ehealth_connector.communication.testhelper.TestApplication;
 import org.ehealth_connector.communication.testhelper.XdsTestUtils;
 import org.ehealth_connector.communication.xd.storedquery.FindDocumentsQuery;
 import org.ehealth_connector.communication.xd.storedquery.GetDocumentsQuery;
-import org.ehealth_connector.communication.xd.storedquery.GetFolderAndContentsQuery;
 import org.ehealth_connector.communication.xd.storedquery.GetRelatedDocumentsQuery;
 import org.ehealth_connector.xua.communication.clients.XuaClient;
 import org.ehealth_connector.xua.communication.clients.impl.ClientFactory;
@@ -61,10 +61,10 @@ import org.ehealth_connector.xua.hl7v3.impl.RoleBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openehealth.ipf.commons.audit.AuditContext;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationType;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.Folder;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.ObjectReference;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.ErrorCode;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.ErrorInfo;
@@ -92,6 +92,9 @@ public class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 
 	@Autowired
 	private ConvenienceCommunication convenienceCommunication;
+
+	@Autowired
+	protected AuditContext auditContext;
 
 	final private String applicationName = "2.16.840.1.113883.3.72.6.5.100.1399";
 	final private String facilityName = null;
@@ -471,51 +474,6 @@ public class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 	}
 
 	@Test
-	public void queryGetFolderAndContentsMetadataOfFolder() throws Exception {
-
-		List<Code> formatCodes = new LinkedList<>();
-		formatCodes.add(new Code("urn:ihe:pcc:ic:2009", "1.3.6.1.4.1.19376.1.2.3", "Immunization Content (IC)"));
-		List<Code> confidentialityCodes = new LinkedList<>();
-		confidentialityCodes.add(new Code("17621005", "2.16.840.1.113883.6.96", "Normal (qualifier value)"));
-
-		GetFolderAndContentsQuery findFoldersQuery = new GetFolderAndContentsQuery("folderId", false, formatCodes,
-				confidentialityCodes, "urn:oid:1.1.4567334.1.6");
-
-		convenienceCommunication.setAffinityDomain(affinityDomain);
-
-		final QueryResponse response = convenienceCommunication.queryDocuments(findFoldersQuery, null);
-
-		assertTrue(response.getErrors().isEmpty());
-		assertEquals(Status.SUCCESS, response.getStatus());
-		assertTrue(!response.getFolders().isEmpty());
-		assertEquals(1, response.getFolders().size());
-
-		Folder folder = response.getFolders().iterator().next();
-		assertEquals("urn:uuid:afd9bee4-4c30-4b58-a0e7-e301c799047b", folder.getUniqueId());
-		assertEquals("", folder.getEntryUuid());
-		assertEquals("urn:oid:1.1.4567334.1.6", folder.getHomeCommunityId());
-		assertEquals(AvailabilityStatus.APPROVED, folder.getAvailabilityStatus());
-
-		assertNotNull(folder.getPatientId());
-		assertEquals("IHEBLUE-1043", folder.getPatientId().getId());
-		assertEquals("1.3.6.1.4.1.21367.13.20.3000", folder.getPatientId().getAssigningAuthority().getUniversalId());
-
-		assertNotNull(folder.getTitle());
-		assertEquals("Folder for Patient IHEBLUE-1043", folder.getTitle().getValue());
-
-		assertNotNull(folder.getComments());
-		assertEquals("Folder for Patient IHEBLUE-1043", folder.getComments().getValue());
-
-		assertNotNull(folder.getCodeList());
-		assertFalse(folder.getCodeList().isEmpty());
-
-		org.openehealth.ipf.commons.ihe.xds.core.metadata.Code code = folder.getCodeList().get(0);
-		assertEquals("", code.getCode());
-		assertEquals("", code.getDisplayName().getValue());
-		assertEquals("", code.getSchemeName());
-	}
-
-	@Test
 	public void queryGetRelatedDocumentsMetadataOfFolder() throws Exception {
 
 		List<AssociationType> associations = new LinkedList<>();
@@ -612,6 +570,29 @@ public class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 		assertNull(documentEntry.getAuthors().get(0).getAuthorSpecialty().get(0).getId());
 		assertNull(
 				documentEntry.getAuthors().get(0).getAuthorSpecialty().get(0).getAssigningAuthority().getUniversalId());
+	}
+
+	@Test
+	public void queryGetDocumentsMetadataOfCdaWithAuditMessage() throws Exception {
+
+		List<String> uniqueIds = new LinkedList<>();
+		uniqueIds.add("1.2.820.99999.18508463736145106181926975526539403561455330316563");
+
+		GetDocumentsQuery getDocumentsQuery = new GetDocumentsQuery(uniqueIds, false, "urn:oid:1.1.4567334.1.6");
+
+		convenienceCommunication.setAffinityDomain(affinityDomain);
+		convenienceCommunication.setAtnaConfig(AtnaConfigMode.SECURE);
+
+		final QueryResponse response = convenienceCommunication.queryDocumentReferencesOnly(getDocumentsQuery, null);
+
+		assertTrue(response.getErrors().isEmpty());
+		assertEquals(Status.SUCCESS, response.getStatus());
+		assertTrue(!response.getReferences().isEmpty());
+		assertEquals(1, response.getReferences().size());
+
+		ObjectReference objectRef = response.getReferences().iterator().next();
+		assertEquals("urn:uuid:afd9bee4-4c30-4b58-a0e7-e301c799047b", objectRef.getId());
+		assertEquals("urn:oid:1.1.4567334.1.6", objectRef.getHome());
 	}
 
 }
