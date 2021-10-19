@@ -22,6 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.net.URI;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import org.ehealth_connector.common.communication.AffinityDomain;
 import org.ehealth_connector.common.communication.Destination;
@@ -35,7 +37,6 @@ import org.hl7.fhir.dstu3.model.HumanName;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openehealth.ipf.commons.audit.AuditContext;
@@ -64,7 +65,6 @@ import ca.uhn.fhir.context.FhirVersionEnum;
  * webpage otherwise the test will not run through, you need also to remove
  * the @Ignore to perform the tests directly
  */
-@Disabled
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
 @EnableAutoConfiguration
@@ -112,8 +112,7 @@ public class PixV3QueryTest {
 	public void setUp() throws Exception {
 		var app = new SpringApplication(TestApplication.class);
 		app.setWebApplicationType(WebApplicationType.NONE);
-
-		var context = app.run();
+		app.run();
 	}
 
 	@Test
@@ -163,7 +162,18 @@ public class PixV3QueryTest {
 		identifier.setValue(String.valueOf(System.currentTimeMillis()));
 		identifier.setSystem(homeCommunityOid);
 		patient.getIdentifier().add(identifier);
-		patient.setBirthDate(DateUtil.parseDateyyyyMMdd("19550224"));
+	
+		
+		final Identifier identifier2 = new Identifier();
+		identifier2.setSystem(homeCommunityOid);
+		identifier2.setValue("CHPAM2");
+		patient.getIdentifier().add(identifier2);
+		
+		try {
+			patient.setBirthDate(new SimpleDateFormat("dd.MM.yyyy").parse("24.02.1955"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		patient.getAddress().add(address);
 		patient.setGender(AdministrativeGender.MALE);
 		patient.getManagingOrganization().setResource(getScopingOrganization());
@@ -173,6 +183,7 @@ public class PixV3QueryTest {
 		log.debug(encoded);
 
 		assertTrue(pixV3Query.addPatient(patient, null));
+		log.debug("---");
 	}
 
 	/**
