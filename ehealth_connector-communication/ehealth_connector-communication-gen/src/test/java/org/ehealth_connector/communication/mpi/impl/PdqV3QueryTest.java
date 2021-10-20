@@ -22,14 +22,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.InputStream;
 import java.net.URI;
-import java.net.URISyntaxException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 
+import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.Patient;
+import org.ehealth_connector.common.basetypes.AddressBaseType;
 import org.ehealth_connector.common.communication.AffinityDomain;
 import org.ehealth_connector.common.communication.Destination;
+import org.ehealth_connector.common.enums.AdministrativeGender;
 import org.ehealth_connector.communication.ConvenienceMasterPatientIndexV3;
 import org.ehealth_connector.communication.MasterPatientIndexQuery;
 import org.ehealth_connector.communication.MasterPatientIndexQueryResponse;
@@ -39,7 +46,6 @@ import org.ehealth_connector.fhir.structures.gen.FhirCommon;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
@@ -53,13 +59,13 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import net.ihe.gazelle.hl7v3.prpain201306UV02.PRPAIN201306UV02Type;
 
+
 /**
  * Test of class PdqV3Query
  */
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
 @EnableAutoConfiguration
-@Disabled
 public class PdqV3QueryTest {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(PdqV3QueryTest.class.getName());
@@ -69,11 +75,15 @@ public class PdqV3QueryTest {
 
 	final private String pdqUri = "https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType";
 
-	final private String applicationName = "2.16.840.1.113883.3.72.6.5.100.1399";
+	final private String applicationName = "2.16.840.1.113883.3.72.6.5.100.1399"; //oid of nist healthcare
 	final private String facilityName = null;
 
 	final private String senderApplicationOid = "1.2.3.4";
-
+	
+	
+	
+	
+	
 	/**
 	 * Method implementing
 	 *
@@ -88,6 +98,8 @@ public class PdqV3QueryTest {
 
 		return new V3PdqConsumerResponse(rootElement);
 	}
+    
+	
 
 	/**
 	 * Method implementing
@@ -98,8 +110,7 @@ public class PdqV3QueryTest {
 	public void setUp() throws Exception {
 		var app = new SpringApplication(TestApplication.class);
 		app.setWebApplicationType(WebApplicationType.NONE);
-
-		var context = app.run();
+		app.run();
 	}
 
 	@Test
@@ -117,18 +128,18 @@ public class PdqV3QueryTest {
 	 */
 	@Test
 	public void testGetPatientsFromPdqQuery() throws Exception {
-		final V3PdqConsumerResponse response = loadV3PdqResponse();
-		assertNotNull(response);
-
+		
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
-
 		dest.setUri(URI.create(pdqUri));
 		dest.setSenderApplicationOid(senderApplicationOid);
 		dest.setReceiverApplicationOid(applicationName);
 		dest.setReceiverFacilityOid(facilityName);
 		affinityDomain.setPdqDestination(dest);
 		affinityDomain.setPixDestination(dest);
+		
+		final V3PdqConsumerResponse response = loadV3PdqResponse();
+		assertNotNull(response);
 
 		final var v3PdqQuery = new PdqV3Query(affinityDomain, null, null,
 				convenienceMasterPatientIndexV3Client.getAuditContext());
@@ -188,62 +199,146 @@ public class PdqV3QueryTest {
 		assertEquals("34827R534", jim.getIdentifierFirstRep().getValue());
 	}
 
+	
 	@Test
-	public void ITI47ConsumerQueryPatientPatientIdStep1Test() {
-		LOGGER.debug("ITI47ConsumerQueryPatientPatientIdStep1Test with ipAdress Target " + pdqUri);
+	/*
+	 * check if the patient is correctly not found in case a random  identificator that does not
+	 * identify any patient in the database is used
+	 */
+	public void ITI47ConsumerQueryPatientPatientIdNotFoundTest() {
+		
 
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
-
-		try {
-			dest.setUri(new URI(pdqUri));
-		} catch (final URISyntaxException e) {
-			e.printStackTrace();
-		}
+		dest.setUri(URI.create(pdqUri));
 		dest.setSenderApplicationOid(senderApplicationOid);
 		dest.setReceiverApplicationOid(applicationName);
 		dest.setReceiverFacilityOid(facilityName);
 		affinityDomain.setPdqDestination(dest);
-		affinityDomain.setPixDestination(dest);
+		affinityDomain.setPixDestination(dest); 
+		
+		LOGGER.debug("ITI47ConsumerQueryPatientPatientIdNotFoundTest with ipAdress Target " + pdqUri);
 
 		final MasterPatientIndexQuery mpiQuery = new MasterPatientIndexQuery(affinityDomain.getPdqDestination());
 		final Identificator identificator = new Identificator("1.3.6.1.4.1.12559.11.20.1", "4711");
-		mpiQuery.addPatientIdentificator(identificator);// .addDomainToReturn("1.3.6.1.4.1.12559.11.20.1");
+		mpiQuery.addPatientIdentificator(identificator);
 		
 		final MasterPatientIndexQueryResponse response = convenienceMasterPatientIndexV3Client
 				.queryPatientDemographics(
 				mpiQuery,
 				affinityDomain, null);
+		
+		// test patient not found 
 		assertTrue(response.getSuccess());
+	    assertEquals(0,response.getTotalNumbers());
+	    
 	}
-
+	
+	
 	@Test
-	public void ITI47ConsumerQueryPatientPatientIdStep2Test() {
-
-		LOGGER.debug("ITI47ConsumerQueryPatientPatientIdStep2Test with ipAdress Target " + pdqUri);
+	public void ITI47ConsumerQueryPatientPatientIdFoundTest() {
+		
 
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
-
-		try {
-			dest.setUri(new URI(pdqUri));
-		} catch (final URISyntaxException e) {
-			e.printStackTrace();
-		}
+		dest.setUri(URI.create(pdqUri));
 		dest.setSenderApplicationOid(senderApplicationOid);
 		dest.setReceiverApplicationOid(applicationName);
 		dest.setReceiverFacilityOid(facilityName);
 		affinityDomain.setPdqDestination(dest);
-		affinityDomain.setPixDestination(dest);
+		affinityDomain.setPixDestination(dest); 
+		
+		LOGGER.debug("ITI47ConsumerQueryPatientPatientIdFoundTest with ipAdress Target " + pdqUri);
+		
+		//CHPAM18^^^CHPAM&1.3.6.1.4.1.12559.11.20.1&ISO Jasmin Schaub query Patient Demographic Supplier (PDS)
+		final MasterPatientIndexQuery mpiQuery2 = new MasterPatientIndexQuery(affinityDomain.getPdqDestination());
+		final Identificator identificator2 = new Identificator("1.3.6.1.4.1.12559.11.20.1", "CHPAM18");
+		
+        mpiQuery2.addPatientIdentificator(identificator2);
+	    
+		final MasterPatientIndexQueryResponse response2 = convenienceMasterPatientIndexV3Client
+				.queryPatientDemographics(
+				mpiQuery2,
+				affinityDomain, null);
+		
+		List<Patient> patients = response2.getPatients();
+		assertTrue(response2.getSuccess());
+		assertEquals(patients.size(),1);
+		Patient patient = patients.get(0);
+		
+		assertEquals(patient.getCompleteName().trim(),"Jasmin Schaub");
 
+		assertEquals(patient.getAdministrativeGenderCode().getCodeValue(),AdministrativeGender.FEMALE.getCodeValue());
+		assertEquals(patient.getAddress().getCountry(),"CHE");
+	    
+	}
+
+	@Test
+	public void ITI47ConsumerQueryPatientPatientIdSearchByName() {
+		
+		final AffinityDomain affinityDomain = new AffinityDomain();
+		final Destination dest = new Destination();
+		dest.setUri(URI.create(pdqUri));
+		dest.setSenderApplicationOid(senderApplicationOid);
+		dest.setReceiverApplicationOid(applicationName);
+		dest.setReceiverFacilityOid(facilityName);
+		affinityDomain.setPdqDestination(dest);
+		affinityDomain.setPixDestination(dest); 
+
+		LOGGER.debug("ITI47ConsumerQueryPatientPatientIdSearchByName with ipAdress Target " + pdqUri);
 		final MasterPatientIndexQuery mpiQuery = new MasterPatientIndexQuery(affinityDomain.getPdqDestination());
-		final Identificator identificator = new Identificator("1.3.6.1.4.1.12559.11.20.1", "4711");
-		mpiQuery.addPatientIdentificator(identificator).addDomainToReturn("1.3.6.1.4.1.12559.11.20.1");
-
+		
+		Name patientName = new Name();
+		patientName.setFamily("Sanders");
+		mpiQuery.addPatientName(false, patientName);
+		
 		final MasterPatientIndexQueryResponse response = convenienceMasterPatientIndexV3Client
 				.queryPatientDemographics(mpiQuery, affinityDomain, null);
-
+		
 		assertTrue(response.getSuccess());
-	}
+		assertEquals(response.getPatients().size(),9);
+	} 
+	
+	
+	@Test
+	public void ITI47ConsumerQueryPatientPatientIdSearchByfirstNameAndBirthdate() {
+		
+		final AffinityDomain affinityDomain = new AffinityDomain();
+		final Destination dest = new Destination();
+		dest.setUri(URI.create(pdqUri));
+		dest.setSenderApplicationOid(senderApplicationOid);
+		dest.setReceiverApplicationOid(applicationName);
+		dest.setReceiverFacilityOid(facilityName);
+		affinityDomain.setPdqDestination(dest);
+		affinityDomain.setPixDestination(dest); 
+
+		LOGGER.debug("ITI47ConsumerQueryPatientPatientIdSearchByName with ipAdress Target " + pdqUri);
+		final MasterPatientIndexQuery mpiQuery = new MasterPatientIndexQuery(affinityDomain.getPdqDestination());
+		
+		try {
+			mpiQuery.setPatientDateOfBirth(new SimpleDateFormat("dd.MM.yyyy").parse("22.06.1958"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}  
+	  
+		Name patientName = new Name();
+		patientName.setGiven("David");
+		mpiQuery.addPatientName(false, patientName);
+	    Address address = new Address(new AddressBaseType());
+	    address.setCity("Acworth");
+	    address.setPostalCode("30101");
+	    address.setStreetName("Southside Drive");
+	    mpiQuery.addPatientAddress(address);
+		
+		final MasterPatientIndexQueryResponse response = convenienceMasterPatientIndexV3Client
+				.queryPatientDemographics(mpiQuery, affinityDomain, null);
+		
+		assertTrue(response.getSuccess());
+		assertEquals(response.getPatients().size(),1);
+		Patient patient = response.getPatients().get(0);
+		assertEquals(patient.getCompleteName().trim(),"David Sanders");
+		
+	} 
+
 
 }

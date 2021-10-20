@@ -22,6 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.net.URI;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import org.ehealth_connector.common.communication.AffinityDomain;
 import org.ehealth_connector.common.communication.Destination;
@@ -112,8 +114,7 @@ public class PixV3QueryTest {
 	public void setUp() throws Exception {
 		var app = new SpringApplication(TestApplication.class);
 		app.setWebApplicationType(WebApplicationType.NONE);
-
-		var context = app.run();
+		app.run();
 	}
 
 	@Test
@@ -163,14 +164,18 @@ public class PixV3QueryTest {
 		identifier.setValue(String.valueOf(System.currentTimeMillis()));
 		identifier.setSystem(spidEprOid);
 		patient.getIdentifier().add(identifier);
+	
+		final Identifier identifier2 = new Identifier();
+		identifier2.setSystem(homeCommunityOid);
+		identifier2.setValue("CHPAM2");
+		patient.getIdentifier().add(identifier2);
+		
+		try {
+			patient.setBirthDate(new SimpleDateFormat("dd.MM.yyyy").parse("24.02.1955"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 
-		final Identifier identifier1 = new Identifier();
-
-		identifier1.setValue(String.valueOf(System.currentTimeMillis()));
-		identifier1.setSystem(OID.createOIDGivenRoot(EhcVersions.getCurrentVersion().getOid(), 64));
-		patient.getIdentifier().add(identifier1);
-
-		patient.setBirthDate(DateUtil.parseDateyyyyMMdd("19550224"));
 		patient.getAddress().add(address);
 		patient.setGender(AdministrativeGender.MALE);
 		patient.getManagingOrganization().setResource(getScopingOrganization());
@@ -180,6 +185,7 @@ public class PixV3QueryTest {
 		log.debug(encoded);
 
 		assertTrue(pixV3Query.addPatient(patient, null));
+		log.debug("---");
 	}
 
 	/**
