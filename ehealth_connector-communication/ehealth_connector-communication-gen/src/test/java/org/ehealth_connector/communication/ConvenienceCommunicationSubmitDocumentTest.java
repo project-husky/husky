@@ -77,7 +77,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @EnableAutoConfiguration
 public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ConvenienceCommunication.class.getName());
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(ConvenienceCommunicationSubmitDocumentTest.class.getName());
 
 	@Autowired
 	private ConvenienceCommunication convenienceCommunication;
@@ -117,8 +118,7 @@ public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 	public void setUp() throws Exception {
 		var app = new SpringApplication(TestApplication.class);
 		app.setWebApplicationType(WebApplicationType.NONE);
-
-		var context = app.run();
+		app.run();
 
 		affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();

@@ -112,8 +112,7 @@ public class ConvenienceCommunicationAtnaAuditTest extends XdsTestUtils {
 	public void setUp() throws Exception {
 		var app = new SpringApplication(TestApplication.class);
 		app.setWebApplicationType(WebApplicationType.NONE);
-
-		var context = app.run();
+		app.run();
 
 		affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
