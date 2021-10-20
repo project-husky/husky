@@ -1,10 +1,14 @@
 package org.ehealth_connector.communication.ch.ppq.impl.clients;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.UUID;
@@ -38,22 +42,30 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.opensaml.core.config.InitializationException;
 import org.opensaml.core.config.InitializationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+/**
+ * Test of class ConvenienceCommunication
+ */
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
-@PropertySource(value = "classpath:application.properties")
 @EnableAutoConfiguration
-public class SimplePpqClientTest {
+@ActiveProfiles("atna")
+public class SimplePpqClientAtnaAuditTest {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(SimplePpqClientAtnaAuditTest.class.getName());
 
 	@Autowired
 	private CamelContext camelContext;
 	private String urlToPpq = "https://ehealthsuisse.ihe-europe.net:10443/ppq-repository";
 	private String urlToXua = "https://ehealthsuisse.ihe-europe.net:10443/STS";
+	private String urlToSts = "https://gazelle.ihe.net/gazelle-sts?wsdl";
 	private String clientKeyStore = "src/test/resources/testKeystore.jks";
 	private String clientKeyStorePass = "changeit";
 	private SecurityHeaderElement securityHeader = null;
@@ -82,17 +94,16 @@ public class SimplePpqClientTest {
 			var assertion = new AssertionDeserializerImpl().fromXmlByteArray(IOUtils.toByteArray(is));
 
 			var purposeOfUse = new PurposeOfUseBuilder().code(PurposeOfUse.NORMAL_ACCESS.getCodeValue())
-					.codeSystem("2.16.756.5.30.1.127.3.10.6")
-					.displayName(PurposeOfUse.NORMAL_ACCESS.getDisplayName()).buildObject();
+					.codeSystem("2.16.756.5.30.1.127.3.10.6").displayName(PurposeOfUse.NORMAL_ACCESS.getDisplayName())
+					.buildObject();
 			var role = new RoleBuilder().code("HCP").codeSystem("2.16.756.5.30.1.127.3.10.6")
 					.displayName("Behandelnde(r)").buildObject();
 
 			var assertionRequest = new XUserAssertionRequestBuilderImpl().requestType(RequestType.WST_ISSUE)
 					.tokenType(TokenType.OASIS_WSS_SAML_PROFILE_11_SAMLV20)
 					.appliesTo(new AppliesToBuilderImpl().address("https://localhost:17001/services/iti18").create())
-					.purposeOfUse(purposeOfUse)
-					.subjectRole(role).resourceId("761337610411265304^^^SPID&2.16.756.5.30.1.127.3.10.3&ISO")
-					.create();
+					.purposeOfUse(purposeOfUse).subjectRole(role)
+					.resourceId("761337610411265304^^^SPID&2.16.756.5.30.1.127.3.10.3&ISO").create();
 
 			List<XUserAssertionResponse> response = client.send(assertion, assertionRequest);
 
@@ -118,6 +129,23 @@ public class SimplePpqClientTest {
 		PrivacyPolicyQueryResponse response = client.send(securityHeader, query);
 
 		assertNull(response);
+
+		String logContent = checkAuditLogging();
+		assertTrue(logContent.contains("<EventID csd-code=\"110112\""));
+		assertTrue(logContent.contains("<EventTypeCode csd-code=\"PPQ-2\""));
+		assertTrue(logContent.contains("RoleIDCode csd-code=\"110153\""));
+		assertTrue(logContent.contains("RoleIDCode csd-code=\"110152\""));
+	}
+
+	private String checkAuditLogging() throws IOException {
+		File originLogFile = new File("log/Spring-TestEHC.log");
+
+		String logContent = new String(Files.readAllBytes(originLogFile.toPath()));
+
+		assertFalse(logContent.contains("Failed to send ATNA audit event to destination"));
+		assertTrue(logContent.contains("Auditing"));
+
+		return logContent;
 	}
 
 }
