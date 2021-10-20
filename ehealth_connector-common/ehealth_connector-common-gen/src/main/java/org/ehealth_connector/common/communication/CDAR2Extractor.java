@@ -30,7 +30,6 @@ import java.util.TimeZone;
 
 import javax.xml.bind.JAXBElement;
 
-import org.apache.log4j.Logger;
 import org.ehealth_connector.common.enums.AdministrativeGender;
 import org.ehealth_connector.common.hl7cdar2.AD;
 import org.ehealth_connector.common.hl7cdar2.AdxpAdditionalLocator;
@@ -81,6 +80,8 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.Telecom;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.XcnName;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.XpnName;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Extracts XDS Document Entry Metadata from generic CDA R2 document
@@ -93,7 +94,7 @@ public class CDAR2Extractor {
 	/**
 	 * logger
 	 */
-	private static Logger logger = Logger.getLogger(CDAR2Extractor.class);
+	private static Logger logger = LoggerFactory.getLogger(CDAR2Extractor.class);
 
 	/**
 	 * Map between CDA R2 Administrative Gender codes and HL7v2.5 Table

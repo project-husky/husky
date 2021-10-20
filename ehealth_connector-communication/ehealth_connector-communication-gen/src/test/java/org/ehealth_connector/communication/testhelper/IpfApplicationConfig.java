@@ -20,4 +20,9 @@ public class IpfApplicationConfig {
 		return new OutPayloadLoggerInterceptor("log/TestEHC.log");
 	}
 
+	/*
+	 * @Bean AuditInRequestInterceptor auditInterceptor() { return new
+	 * AuditInRequestInterceptor<>(new Iti18AuditStrategy(false), null, null); }
+	 */
+
 }

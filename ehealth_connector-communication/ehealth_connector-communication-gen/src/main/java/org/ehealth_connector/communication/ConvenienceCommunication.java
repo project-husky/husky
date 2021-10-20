@@ -101,6 +101,10 @@ public class ConvenienceCommunication extends CamelService {
 	/** The SLF4J logger instance. */
 	private static Logger log = LoggerFactory.getLogger(ConvenienceCommunication.class);
 
+	private static final String SERVER_IN_LOGGER = "#serverInLogger";
+	private static final String SERVER_OUT_LOGGER = "#serverOutLogger";
+	private static final String AUDIT_CONTEXT = "#auditContext";
+
 	@Autowired
 	private CamelContext context;
 
@@ -753,15 +757,13 @@ public class ConvenienceCommunication extends CamelService {
 		queryRegistry.setReturnType(returnType);
 
 		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains("https://");
-		final var serverInLogger = "#serverInLogger";
-		final var serverOutLogger = "#serverOutLogger";
 
 		final var endpoint = String.format(
-				"xds-iti18://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s",
+				"xds-iti18://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=%s",
 				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", "").replace(
 						"http://", ""),
-				serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
-				secure, this.atnaConfigMode.equals(AtnaConfigMode.SECURE));
+				SERVER_IN_LOGGER, SERVER_IN_LOGGER, SERVER_OUT_LOGGER, SERVER_OUT_LOGGER, secure,
+				this.atnaConfigMode.equals(AtnaConfigMode.SECURE), AUDIT_CONTEXT);
 		log.info("Sending request to '{}' endpoint", endpoint);
 
 		final var exchange = send(endpoint, queryRegistry, securityHeader, null);
@@ -820,14 +822,12 @@ public class ConvenienceCommunication extends CamelService {
 		}
 
 		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains("https://");
-		final var serverInLogger = "#serverInLogger";
-		final var serverOutLogger = "#serverOutLogger";
 		final var endpoint = String.format(
-				"xds-iti43://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s",
+				"xds-iti43://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=%s",
 				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", "").replace(
 						"http://", ""),
-				serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
-				secure, this.atnaConfigMode.equals(AtnaConfigMode.SECURE));
+				SERVER_IN_LOGGER, SERVER_IN_LOGGER, SERVER_OUT_LOGGER, SERVER_OUT_LOGGER, secure,
+				this.atnaConfigMode.equals(AtnaConfigMode.SECURE), AUDIT_CONTEXT);
 		log.info("Sending request to '{}' endpoint", endpoint);
 
 		final var exchange = send(endpoint, retrieveDocumentSet, security, null);
@@ -1004,14 +1004,12 @@ public class ConvenienceCommunication extends CamelService {
 		}
 
 		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains("https://");
-		final var serverInLogger = "#serverInLogger";
-		final var serverOutLogger = "#serverOutLogger";
 		final var endpoint = String.format(
-				"xds-iti41://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s",
+				"xds-iti41://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=%s",
 				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", "")
 						.replace("http://", ""),
-				serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
-				secure, this.atnaConfigMode.equals(AtnaConfigMode.SECURE));
+				SERVER_IN_LOGGER, SERVER_IN_LOGGER, SERVER_OUT_LOGGER, SERVER_OUT_LOGGER, secure,
+				this.atnaConfigMode.equals(AtnaConfigMode.SECURE), AUDIT_CONTEXT);
 		log.info("Sending request to '{}' endpoint", endpoint);
 
 		final var exchange = send(endpoint, txnData, security, null);

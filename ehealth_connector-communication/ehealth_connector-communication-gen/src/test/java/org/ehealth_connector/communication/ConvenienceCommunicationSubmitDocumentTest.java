@@ -23,12 +23,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
 import org.ehealth_connector.common.Code;
@@ -38,9 +36,6 @@ import org.ehealth_connector.common.communication.Destination;
 import org.ehealth_connector.common.communication.DocumentMetadata;
 import org.ehealth_connector.common.communication.SubmissionSetMetadata;
 import org.ehealth_connector.common.enums.DocumentDescriptor;
-import org.ehealth_connector.common.enums.EhcVersions;
-import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.utils.OID;
 import org.ehealth_connector.communication.testhelper.PurposeOfUse;
 import org.ehealth_connector.communication.testhelper.TestApplication;
 import org.ehealth_connector.communication.testhelper.XdsTestUtils;
@@ -223,65 +218,6 @@ public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 
 		assertTrue(response.getErrors().isEmpty());
 		assertEquals(Status.SUCCESS, response.getStatus());
-	}
-
-	private void setMetadataForPdf(DocumentMetadata metdata, Identificator patientId) {
-		metdata.addAuthor(authorPerson);
-		metdata.setDestinationPatientId(patientId);
-		metdata.setSourcePatientId(new Identificator("1.2.3.4", "2342134localid"));
-		metdata.setCodedLanguage(LanguageCode.GERMAN_CODE);
-		metdata.setTypeCode(
-				new Code("371535009", "2.16.840.1.113883.6.96", "Transfer summary report (record artifact)"));
-		metdata.setFormatCode(new Code("urn:ihe:iti:xds-sd:pdf:2008", "1.3.6.1.4.1.19376.1.2.3",
-				"1.3.6.1.4.1.19376.1.2.20 (Scanned Document)"));
-		metdata.setClassCode(
-				new Code("422735006", "2.16.840.1.113883.6.96", "Summary clinical document (record artifact)"));
-		metdata.setHealthcareFacilityTypeCode(new Code("394747008", "2.16.840.1.113883.6.96", "Health Authority"));
-		metdata.setPracticeSettingCode(
-				new Code("394810000", "2.16.840.1.113883.6.96", "Rheumatology (qualifier value)"));
-		metdata.addConfidentialityCode(new Code("17621005", "2.16.840.1.113883.6.96", "Normal (qualifier value)"));
-		metdata.setTitle("Informed Consent");
-	}
-
-	private void setSubmissionMetadata(SubmissionSetMetadata metadata, Identificator patientId) {
-		metadata.getAuthor().add(authorPerson);
-		metadata.setUniqueId(OID.createOIDGivenRoot(EhcVersions.getCurrentVersion().getOid(), 64));
-		metadata.setSourceId(EhcVersions.getCurrentVersion().getOid());
-		metadata.setEntryUUID(UUID.randomUUID().toString());
-		metadata.setDestinationPatientId(patientId);
-		metadata.setContentTypeCode(new Code("71388002", "2.16.840.1.113883.6.96", "Procedure (procedure)"));
-	}
-
-	private InputStream getDocPdf() throws FileNotFoundException {
-		File file = new File("src/test/resources/docConsumer/patientconsent.pdf");
-		return new FileInputStream(file);
-	}
-
-	private InputStream getDocCda() throws FileNotFoundException {
-		File file = new File("src/test/resources/docConsumer/CDA-CH-VACD_Impfausweis.xml");
-		return new FileInputStream(file);
-	}
-
-	private InputStream getDocCdaV2() throws FileNotFoundException {
-		File file = new File("src/test/resources/docConsumer/CDA-CH-VACD_Impfausweis_V2.xml");
-		return new FileInputStream(file);
-	}
-
-	private void setMetadataForCda(DocumentMetadata metaData, Identificator patientId) {
-		metaData.addAuthor(authorPerson);
-		metaData.setDestinationPatientId(patientId);
-		metaData.setSourcePatientId(new Identificator("1.2.3.4", "23423452342134localid"));
-		metaData.setCodedLanguage(LanguageCode.FRENCH_CODE);
-		metaData.setTypeCode(new Code("41000179103", "2.16.840.1.113883.6.96", "Immunization record"));
-		metaData.setFormatCode(new Code("urn:ihe:pcc:ic:2009", "1.3.6.1.4.1.19376.1.2.3", "Immunization Content (IC)"));
-
-		metaData.setClassCode(
-				new Code("417319006", "2.16.840.1.113883.6.96", "Record of health event (record artifact)"));
-
-		metaData.setHealthcareFacilityTypeCode(new Code("394747008", "2.16.840.1.113883.6.96", "Health Authority"));
-		metaData.setPracticeSettingCode(
-				new Code("394802001", "2.16.840.1.113883.6.96", "General medicine (qualifier value)"));
-		metaData.addConfidentialityCode(new Code("17621005", "2.16.840.1.113883.6.96", "Normal (qualifier value)"));
 	}
 
 	@Test

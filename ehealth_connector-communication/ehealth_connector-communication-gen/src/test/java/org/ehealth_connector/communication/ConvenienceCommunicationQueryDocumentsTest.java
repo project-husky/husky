@@ -36,14 +36,12 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Person;
 import org.ehealth_connector.common.communication.AffinityDomain;
-import org.ehealth_connector.common.communication.AtnaConfig.AtnaConfigMode;
 import org.ehealth_connector.common.communication.Destination;
 import org.ehealth_connector.communication.testhelper.PurposeOfUse;
 import org.ehealth_connector.communication.testhelper.TestApplication;
 import org.ehealth_connector.communication.testhelper.XdsTestUtils;
 import org.ehealth_connector.communication.xd.storedquery.FindDocumentsQuery;
 import org.ehealth_connector.communication.xd.storedquery.GetDocumentsQuery;
-import org.ehealth_connector.communication.xd.storedquery.GetRelatedDocumentsQuery;
 import org.ehealth_connector.xua.communication.clients.XuaClient;
 import org.ehealth_connector.xua.communication.clients.impl.ClientFactory;
 import org.ehealth_connector.xua.communication.config.XuaClientConfig;
@@ -62,7 +60,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openehealth.ipf.commons.audit.AuditContext;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationType;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.ObjectReference;
@@ -472,127 +469,4 @@ public class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 		assertEquals("urn:uuid:afd9bee4-4c30-4b58-a0e7-e301c799047b", objectRef.getId());
 		assertEquals("urn:oid:1.1.4567334.1.6", objectRef.getHome());
 	}
-
-	@Test
-	public void queryGetRelatedDocumentsMetadataOfFolder() throws Exception {
-
-		List<AssociationType> associations = new LinkedList<>();
-		associations.add(AssociationType.HAS_MEMBER);
-
-		GetRelatedDocumentsQuery getRelatedDocumentsQuery = new GetRelatedDocumentsQuery("", false, associations,
-				"urn:oid:1.1.4567334.1.6");
-
-		convenienceCommunication.setAffinityDomain(affinityDomain);
-
-		final QueryResponse response = convenienceCommunication.queryDocuments(getRelatedDocumentsQuery, null);
-
-		assertTrue(response.getErrors().isEmpty());
-		assertEquals(Status.SUCCESS, response.getStatus());
-		assertTrue(!response.getDocumentEntries().isEmpty());
-		assertEquals(1, response.getDocumentEntries().size());
-
-		DocumentEntry documentEntry = response.getDocumentEntries().iterator().next();
-
-		// check if identifiers (unique ID, repository ID and home community ID are
-		// equal)
-		assertEquals("1.2.820.99999.18508463736145106181926975526539403561455330316563", documentEntry.getUniqueId());
-		assertEquals("1.1.4567332.1.75", documentEntry.getRepositoryUniqueId());
-		assertEquals("urn:oid:1.1.4567334.1.6", documentEntry.getHomeCommunityId());
-		assertEquals("urn:uuid:afd9bee4-4c30-4b58-a0e7-e301c799047b", documentEntry.getEntryUuid());
-
-		assertEquals(AvailabilityStatus.APPROVED, documentEntry.getAvailabilityStatus());
-		assertEquals("text/xml", documentEntry.getMimeType());
-
-		assertNull(documentEntry.getComments());
-		assertNull(documentEntry.getDocumentAvailability());
-
-		assertNull(documentEntry.getTitle());
-		assertEquals("20211012111457", documentEntry.getCreationTime().toHL7());
-
-		// check different codes
-		assertEquals("fr-CH", documentEntry.getLanguageCode());
-
-		assertNotNull(documentEntry.getClassCode());
-		assertEquals("417319006", documentEntry.getClassCode().getCode());
-		assertEquals("2.16.840.1.113883.6.96", documentEntry.getClassCode().getSchemeName());
-		assertEquals("Record of health event (record artifact)",
-				documentEntry.getClassCode().getDisplayName().getValue());
-
-		assertNotNull(documentEntry.getConfidentialityCodes().get(0));
-		assertEquals("17621005", documentEntry.getConfidentialityCodes().get(0).getCode());
-		assertEquals("Normal (qualifier value)",
-				documentEntry.getConfidentialityCodes().get(0).getDisplayName().getValue());
-
-		assertTrue(documentEntry.getEventCodeList().isEmpty());
-
-		assertEquals("urn:ihe:pcc:ic:2009", documentEntry.getFormatCode().getCode());
-		assertEquals("1.3.6.1.4.1.19376.1.2.3", documentEntry.getFormatCode().getSchemeName());
-		assertEquals("Immunization Content (IC)", documentEntry.getFormatCode().getDisplayName().getValue());
-
-		assertEquals("394747008", documentEntry.getHealthcareFacilityTypeCode().getCode());
-		assertEquals("2.16.840.1.113883.6.96", documentEntry.getHealthcareFacilityTypeCode().getSchemeName());
-		assertEquals("Health Authority", documentEntry.getHealthcareFacilityTypeCode().getDisplayName().getValue());
-
-		assertEquals("394802001", documentEntry.getPracticeSettingCode().getCode());
-		assertEquals("General medicine (qualifier value)",
-				documentEntry.getPracticeSettingCode().getDisplayName().getValue());
-		assertEquals("2.16.840.1.113883.6.96", documentEntry.getPracticeSettingCode().getSchemeName());
-
-		assertEquals("41000179103", documentEntry.getTypeCode().getCode());
-		assertEquals("Immunization record", documentEntry.getTypeCode().getDisplayName().getValue());
-		assertEquals("2.16.840.1.113883.6.96", documentEntry.getTypeCode().getSchemeName());
-
-		// check patient details
-		assertEquals("IHEBLUE-2599", documentEntry.getPatientId().getId());
-		assertEquals("1.3.6.1.4.1.21367.13.20.3000",
-				documentEntry.getPatientId().getAssigningAuthority().getUniversalId());
-
-		assertEquals("23423452342134localid", documentEntry.getSourcePatientId().getId());
-		assertEquals("1.2.3.4", documentEntry.getSourcePatientId().getAssigningAuthority().getUniversalId());
-
-		// check author details
-		assertFalse(documentEntry.getAuthors().isEmpty());
-		assertNotNull(documentEntry.getAuthors().get(0));
-		assertNotNull(documentEntry.getAuthors().get(0).getAuthorPerson());
-		assertNotNull(documentEntry.getAuthors().get(0).getAuthorPerson().getName());
-		assertEquals("Bereit", documentEntry.getAuthors().get(0).getAuthorPerson().getName().getFamilyName());
-		assertEquals("Allzeit", documentEntry.getAuthors().get(0).getAuthorPerson().getName().getGivenName());
-		assertEquals("Dr.", documentEntry.getAuthors().get(0).getAuthorPerson().getName().getPrefix());
-
-		assertNotNull(documentEntry.getAuthors().get(0).getAuthorRole());
-		assertNotNull(documentEntry.getAuthors().get(0).getAuthorRole().get(0));
-		assertEquals("221", documentEntry.getAuthors().get(0).getAuthorRole().get(0).getId());
-		assertEquals("2.16.840.1.113883.2.9.6.2.7",
-				documentEntry.getAuthors().get(0).getAuthorRole().get(0).getAssigningAuthority().getUniversalId());
-
-		assertNotNull(documentEntry.getAuthors().get(0).getAuthorSpecialty());
-		assertNotNull(documentEntry.getAuthors().get(0).getAuthorSpecialty().get(0));
-		assertNull(documentEntry.getAuthors().get(0).getAuthorSpecialty().get(0).getId());
-		assertNull(
-				documentEntry.getAuthors().get(0).getAuthorSpecialty().get(0).getAssigningAuthority().getUniversalId());
-	}
-
-	@Test
-	public void queryGetDocumentsMetadataOfCdaWithAuditMessage() throws Exception {
-
-		List<String> uniqueIds = new LinkedList<>();
-		uniqueIds.add("1.2.820.99999.18508463736145106181926975526539403561455330316563");
-
-		GetDocumentsQuery getDocumentsQuery = new GetDocumentsQuery(uniqueIds, false, "urn:oid:1.1.4567334.1.6");
-
-		convenienceCommunication.setAffinityDomain(affinityDomain);
-		convenienceCommunication.setAtnaConfig(AtnaConfigMode.SECURE);
-
-		final QueryResponse response = convenienceCommunication.queryDocumentReferencesOnly(getDocumentsQuery, null);
-
-		assertTrue(response.getErrors().isEmpty());
-		assertEquals(Status.SUCCESS, response.getStatus());
-		assertTrue(!response.getReferences().isEmpty());
-		assertEquals(1, response.getReferences().size());
-
-		ObjectReference objectRef = response.getReferences().iterator().next();
-		assertEquals("urn:uuid:afd9bee4-4c30-4b58-a0e7-e301c799047b", objectRef.getId());
-		assertEquals("urn:oid:1.1.4567334.1.6", objectRef.getHome());
-	}
-
 }

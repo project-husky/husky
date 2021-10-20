@@ -208,7 +208,7 @@ public class V3PixSource extends CamelService {
 	private String sendITI44Query(String request, SecurityHeaderElement assertion, URI pdqDest, String action)
 			throws Exception {
 		final var endpoint = String.format(
-				"pixv3-iti44://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&audit=%s",
+				"pixv3-iti44://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&audit=%s&auditContext=#auditContext",
 				pdqDest.toString().replace("https://", ""), true, getAuditContext().isAuditEnabled());
 		LOGGER.info("Sending request to '{}' endpoint", endpoint);
 

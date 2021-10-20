@@ -176,7 +176,7 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 	private PRPAIN201306UV02Type sendITI47Query(V3PdqConsumerQuery request, SecurityHeaderElement assertion,
 			URI pdqDest) throws Exception {
 		final var endpoint = String.format(
-				"pdqv3-iti47://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&audit=%s",
+				"pdqv3-iti47://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&audit=%s&auditContext=#auditContext",
 				pdqDest.toString().replace("https://", ""), true, getAuditContext().isAuditEnabled());
 		LOGGER.info("Sending request to '{}' endpoint", endpoint);
 
@@ -204,7 +204,7 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 	private PRPAIN201306UV02Type sendITI47ContinuationQuery(V3PdqContinuationBase request,
 			SecurityHeaderElement assertion, URI pdqDest) throws Exception {
 		final var endpoint = String.format(
-				"pdqv3-iti47://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&supportContinuation=%s&defaultContinuationThreshold=50&audit=%s",
+				"pdqv3-iti47://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&supportContinuation=%s&defaultContinuationThreshold=50&audit=%s&auditContext=#auditContext",
 				pdqDest.toString().replace("https://", ""), true, true, getAuditContext().isAuditEnabled());
 		LOGGER.info("Sending request to '{}' endpoint", endpoint);
 

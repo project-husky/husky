@@ -337,12 +337,6 @@
 				<version>1.6.2</version>
 			</dependency>
 
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-				<version>${slf4j.version}</version>
-			</dependency>
-
 			<!-- PPQ stuff -->
 			<dependency>
 				<groupId>org.opensaml</groupId>

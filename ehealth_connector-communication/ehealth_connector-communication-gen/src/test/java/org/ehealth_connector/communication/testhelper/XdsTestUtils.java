@@ -16,8 +16,13 @@
  */
 package org.ehealth_connector.communication.testhelper;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,8 +30,14 @@ import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.basetypes.NameBaseType;
+import org.ehealth_connector.common.communication.DocumentMetadata;
+import org.ehealth_connector.common.communication.SubmissionSetMetadata;
+import org.ehealth_connector.common.enums.EhcVersions;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.enums.DateTimeRangeAttributes;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.OID;
 import org.ehealth_connector.communication.xd.storedquery.DateTimeRange;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationType;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
@@ -112,6 +123,82 @@ public class XdsTestUtils {
 		}
 
 		return "";
+	}
+
+	protected InputStream getDocPdf() throws FileNotFoundException {
+		File file = new File("src/test/resources/docConsumer/patientconsent.pdf");
+		return new FileInputStream(file);
+	}
+
+	protected InputStream getDocCda() throws FileNotFoundException {
+		File file = new File("src/test/resources/docConsumer/CDA-CH-VACD_Impfausweis.xml");
+		return new FileInputStream(file);
+	}
+
+	protected InputStream getDocCdaV2() throws FileNotFoundException {
+		File file = new File("src/test/resources/docConsumer/CDA-CH-VACD_Impfausweis_V2.xml");
+		return new FileInputStream(file);
+	}
+
+	protected void setMetadataForCda(DocumentMetadata metaData, Identificator patientId) {
+		Name name = new Name(new NameBaseType());
+		name.setGiven("Gerald");
+		name.setFamily("Smitty");
+
+		Author author = new Author();
+		author.addName(name);
+
+		author.setRoleFunction(new Code("HCP", "2.16.756.5.30.1.127.3.10.1.1.3", "Healthcare professional"));
+
+		metaData.addAuthor(author);
+		metaData.setDestinationPatientId(patientId);
+		metaData.setSourcePatientId(new Identificator("1.2.3.4", "2342134localid"));
+		metaData.setCodedLanguage(LanguageCode.FRENCH_CODE);
+
+		metaData.setTypeCode(
+				new Code("41000179103", "2.16.840.1.113883.6.96", "Immunization record (record artifact)"));
+		metaData.setFormatCode(new Code("urn:ihe:iti:xds-sd:pdf:2008", "1.3.6.1.4.1.19376.1.2.3",
+				"1.3.6.1.4.1.19376.1.2.20 (Scanned Document)"));
+		metaData.setClassCode(
+				new Code("419891008", "2.16.840.1.113883.6.96", "Record artifact (record artifact)"));
+		metaData.setHealthcareFacilityTypeCode(new Code("394747008", "2.16.840.1.113883.6.96", "Health Authority"));
+		metaData.setPracticeSettingCode(
+				new Code("394802001", "2.16.840.1.113883.6.96", "General medicine (qualifier value)"));
+		metaData.addConfidentialityCode(new Code("17621005", "2.16.840.1.113883.6.96", "Normal (qualifier value)"));
+	}
+
+	protected void setMetadataForPdf(DocumentMetadata metaData, Identificator patientId) {
+		Name name = new Name(new NameBaseType());
+		name.setGiven("Gerald");
+		name.setFamily("Smitty");
+
+		Author author = new Author();
+		author.addName(name);
+
+		author.setRoleFunction(new Code("HCP", "2.16.756.5.30.1.127.3.10.1.1.3", "Healthcare professional"));
+
+		metaData.addAuthor(author);
+		metaData.setDestinationPatientId(patientId);
+		metaData.setSourcePatientId(new Identificator("1.2.3.4", "2342134localid"));
+		metaData.setCodedLanguage(LanguageCode.GERMAN_CODE);
+		metaData.setTypeCode(new Code("419891008", "2.16.840.1.113883.6.96", "Record artifact (record artifact)"));
+		metaData.setFormatCode(new Code("urn:ihe:iti:xds-sd:pdf:2008", "1.3.6.1.4.1.19376.1.2.3",
+				"1.3.6.1.4.1.19376.1.2.20 (Scanned Document)"));
+		metaData.setClassCode(new Code("184216000", "2.16.840.1.113883.6.96", "Patient record type (record artifact)"));
+		metaData.setHealthcareFacilityTypeCode(new Code("394747008", "2.16.840.1.113883.6.96", "Health Authority"));
+		metaData.setPracticeSettingCode(
+				new Code("394802001", "2.16.840.1.113883.6.96", "General medicine (qualifier value)"));
+		metaData.addConfidentialityCode(new Code("17621005", "2.16.840.1.113883.6.96", "Normal (qualifier value)"));
+		metaData.setTitle("Informed Consent");
+	}
+
+	protected void setSubmissionMetadata(SubmissionSetMetadata metadata, Identificator patientId) {
+		metadata.getAuthor().add(authorPerson);
+		metadata.setUniqueId(OID.createOIDGivenRoot(EhcVersions.getCurrentVersion().getOid(), 64));
+		metadata.setSourceId(EhcVersions.getCurrentVersion().getOid());
+		metadata.setEntryUUID(UUID.randomUUID().toString());
+		metadata.setDestinationPatientId(patientId);
+		metadata.setContentTypeCode(new Code("71388002", "2.16.840.1.113883.6.96", "Procedure (procedure)"));
 	}
 
 }
