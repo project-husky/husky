@@ -32,10 +32,8 @@ import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Patient.PatientCommunicationComponent;
 import org.hl7.fhir.dstu3.model.StringType;
 import org.hl7.fhir.dstu3.model.Type;
-import org.openehealth.ipf.commons.audit.AuditContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import net.ihe.gazelle.hl7v3.coctmt030007UV.COCTMT030007UVPerson;
 import net.ihe.gazelle.hl7v3.coctmt150003UV03.COCTMT150003UV03ContactParty;
@@ -64,10 +62,6 @@ import net.ihe.gazelle.hl7v3.voc.WorkPlaceAddressUse;
 public class PixPdqV3QueryBase extends CamelService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(PixPdqV3QueryBase.class.getName());
-
-	/** The ATNA audit context */
-	@Autowired
-	protected AuditContext auditContext;
 
 	/** The domain to return namespace (optional). */
 	protected String domainToReturnNamespace;

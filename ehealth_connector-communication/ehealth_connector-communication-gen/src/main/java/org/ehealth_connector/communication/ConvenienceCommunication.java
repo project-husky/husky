@@ -46,7 +46,6 @@ import org.ehealth_connector.common.utils.OID;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.ehealth_connector.communication.xd.storedquery.AbstractStoredQuery;
-import org.ehealth_connector.communication.xd.storedquery.FindDocumentsQuery;
 import org.ehealth_connector.communication.xd.storedquery.FindFoldersStoredQuery;
 import org.ehealth_connector.communication.xd.xdm.IndexHtm;
 import org.ehealth_connector.communication.xd.xdm.ReadmeTxt;
@@ -55,7 +54,7 @@ import org.ehealth_connector.xua.core.SecurityHeaderElement;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Association;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationLabel;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationType;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.Author;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Folder;
@@ -102,6 +101,10 @@ public class ConvenienceCommunication extends CamelService {
 	/** The SLF4J logger instance. */
 	private static Logger log = LoggerFactory.getLogger(ConvenienceCommunication.class);
 
+	private static final String SERVER_IN_LOGGER = "#serverInLogger";
+	private static final String SERVER_OUT_LOGGER = "#serverOutLogger";
+	private static final String AUDIT_CONTEXT = "#auditContext";
+
 	@Autowired
 	private CamelContext context;
 
@@ -130,8 +133,6 @@ public class ConvenienceCommunication extends CamelService {
 	 * <div class="en">The IPF transaction data to send XDS Documents</div>
 	 */
 	private ProvideAndRegisterDocumentSet txnData = null;
-
-	private String lastError = "";
 
 	/**
 	 * <div class="en">Instantiates a new convenience communication without affinity
@@ -209,7 +210,6 @@ public class ConvenienceCommunication extends CamelService {
 	 */
 	public DocumentMetadata addDocument(DocumentDescriptor desc, InputStream inputStream,
 			InputStream inputStream4Metadata) {
-		lastError = "";
 		DocumentMetadata retVal = null;
 		var doc = new Document();
 		try {
@@ -226,13 +226,7 @@ public class ConvenienceCommunication extends CamelService {
 			retVal = addXdsDocument(doc, desc, doc4Metadata);
 		} catch (final IOException e) {
 			log.error("Error adding document from inputstream.", e);
-			String message = e.getMessage();
-			if (e.getCause() != null)
-				message = e.getCause().getMessage() + ": " + message;
-			lastError = "Error adding document from inputstream: " + message;
-			if (Util.isDebug()) {
-				log.error(e.getMessage(), e);
-			}
+			log.error(e.getMessage(), e);
 		}
 		if (retVal != null)
 			retVal.setDocumentDescriptor(desc);
@@ -269,25 +263,25 @@ public class ConvenienceCommunication extends CamelService {
 
 	/**
 	 *
-	 * <div class="en">Add a document to a folder by theire ids</div>
+	 * <div class="en">Add a document to a folder by theirs ids</div>
 	 *
 	 * @param documentEntryUUID the entry uuid of the document
 	 * @param folderEntryUUID   the entry uuid of the folder
 	 */
 	public void addDocumentToFolder(String documentEntryUUID, String folderEntryUUID) {
-		var folder = new Folder();
-		folder.setEntryUuid(folderEntryUUID);
-		folder.setLogicalUuid(documentEntryUUID);
-		txnData.getFolders().add(folder);
+		var association = new Association(AssociationType.HAS_MEMBER, UUID.randomUUID().toString(),
+				folderEntryUUID,
+				documentEntryUUID);
+		txnData.getAssociations().add(association);
 	}
 
 	/**
 	 * <div class="en">Adds a xds folder.</div>
 	 *
-	 * @param submissionSetContentType the contenttype code for submission set
-	 * @return the metadata of the new fold
+	 * @param submissionSetContentType the content type code for submission set
+	 * @return the metadata of the new folder
 	 */
-	public Folder addFolder(Code submissionSetContentType) {
+	public FolderMetadata addFolder(Code submissionSetContentType) {
 		if (txnData == null) {
 			txnData = new ProvideAndRegisterDocumentSet();
 		}
@@ -302,10 +296,14 @@ public class ConvenienceCommunication extends CamelService {
 
 		txnData.getFolders().add(folder);
 
+		if (txnData.getSubmissionSet() == null) {
+			txnData.setSubmissionSet(new SubmissionSet());
+		}
+
 		txnData.getSubmissionSet()
 				.setContentTypeCode(XdsMetadataUtil.convertEhcCodeToCode(submissionSetContentType));
 
-		return folder;
+		return new FolderMetadata(folder);
 	}
 
 	/**
@@ -328,7 +326,6 @@ public class ConvenienceCommunication extends CamelService {
 	 * @return the doc to get the metadata from
 	 */
 	protected DocumentMetadata addXdsDocument(Document doc, DocumentDescriptor desc, Document metadataDoc) {
-		lastError = "";
 		if (txnData == null) {
 			txnData = new ProvideAndRegisterDocumentSet();
 		}
@@ -359,28 +356,24 @@ public class ConvenienceCommunication extends CamelService {
 	}
 
 	/**
-	 * <div class="en">Cda fixes of OHT CDAExtraction bugs and extraction methods,
-	 * which are unsafe, because an XDS registry might use another value set.</div>
+	 * <div class="en">Cda fixes of CDAExtraction bugs and extraction methods, which
+	 * are unsafe, because an XDS registry might use another value set.</div>
 	 *
 	 * @param docMetadata the doc metadata </div>
 	 */
 	private void cdaExtractionFixes(DocumentMetadata docMetadata) {
-		// Fix the OHT CDAExtraction behaviour, that uses the confidentiality
+		// Fix the OHT CDAExtraction behavior, that uses the confidentiality
 		// code from the cda for the XDS metadata. This leads to an error in the
-		// swiss repository, where the value set is differnt. As procausion we
+		// swiss repository, where the value set is different. As precaution we
 		// clean the list.
 		docMetadata.clearExtracted();
 
-		// Fix the OHT for invalid empty authorTelecommunicationentries by
-		// deleting all authorTelecommunications
-		for (final Author at : docMetadata.getDocumentEntry().getAuthors()) {
-			at.getAuthorTelecom().clear();
+		// Checks if the unique ID is longer than 64 or if no unique ID is set a new unique ID should be generated
+		if (docMetadata.getUniqueId() == null
+				|| (docMetadata.getUniqueId() != null && docMetadata.getUniqueId().length() > 64)) {
+			docMetadata.setUniqueId(OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
 		}
 
-		// Fix the OHT CDAExtraction bug(?) that generates Unique Ids, which are
-		// to long for the registry (EXT part is larger than the allowed 16
-		// characters)
-		docMetadata.setUniqueId(OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
 	}
 
 	/**
@@ -475,6 +468,10 @@ public class ConvenienceCommunication extends CamelService {
 	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(SubmissionSetMetadata submissionSetMetadata, OutputStream outputStream) {
+		if (txnData.getSubmissionSet() == null) {
+			txnData.setSubmissionSet(new SubmissionSet());
+		}
+
 		submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
 		final var xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData));
 		xdmContents.createZip(outputStream, txnData);
@@ -497,14 +494,14 @@ public class ConvenienceCommunication extends CamelService {
 
 		// Generate the unique ID
 		if (docMetadata.getDocumentEntry().getUniqueId() == null) {
-			docMetadata.setUniqueId(OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
-			document.getDocumentEntry()
-					.setUniqueId(OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
+			document.getDocumentEntry().assignUniqueId();
+			docMetadata.setUniqueId(document.getDocumentEntry().getUniqueId());
+			System.out.println(document.getDocumentEntry().getUniqueId().length());
 		}
 
 		// Generate the UUID
 		if (docMetadata.getDocumentEntry().getEntryUuid() == null) {
-			document.getDocumentEntry().setEntryUuid(UUID.randomUUID().toString());
+			document.getDocumentEntry().assignEntryUuid();
 			docMetadata.setEntryUUID(document.getDocumentEntry().getEntryUuid());
 		}
 
@@ -528,7 +525,17 @@ public class ConvenienceCommunication extends CamelService {
 			association.setSourceUuid(this.txnData.getSubmissionSet().getEntryUuid());
 			association.setTargetUuid(document.getDocumentEntry().getEntryUuid());
 			association.setLabel(AssociationLabel.ORIGINAL);
-			association.setEntryUuid(UUID.randomUUID().toString());
+			association.assignEntryUuid();
+
+			this.txnData.getAssociations().add(association);
+		}
+
+		for (Folder folder : this.txnData.getFolders()) {
+			// link folder to submission set
+			var association = new Association(AssociationType.HAS_MEMBER,
+					this.txnData.getSubmissionSet().getEntryUuid(), txnData.getSubmissionSet().getEntryUuid(),
+					folder.getEntryUuid());
+			association.assignEntryUuid();
 
 			this.txnData.getAssociations().add(association);
 		}
@@ -655,18 +662,6 @@ public class ConvenienceCommunication extends CamelService {
 	}
 
 	/**
-	 * Query a registry for documents, using a find documents query.
-	 *
-	 * @param queryParameter       a findDocumentsQuery object filled with your
-	 *                             query parameters
-	 * @param returnReferencesOnly if set to false, the registry response will
-	 *                             contain the document metadata. If set to true,
-	 *                             the response will contain references instead of
-	 *                             the complete document metadata.
-	 * @return the XDSQueryResponseType
-	 */
-
-	/**
 	 * Gets the status of the automatic metadata extraction
 	 *
 	 * @return true, if metadata will be extracted as far as possible)
@@ -676,12 +671,8 @@ public class ConvenienceCommunication extends CamelService {
 		return documentMetadataExtractionMode;
 	}
 
-	public String getLastError() {
-		return lastError;
-	}
-
 	/**
-	 * <div class="en">Gets the OHT transaction data (SubmissionSet and
+	 * <div class="en">Gets the IPF transaction data (SubmissionSet and
 	 * DocumentMetadata)
 	 *
 	 * @return the transaction data object </div>
@@ -719,13 +710,15 @@ public class ConvenienceCommunication extends CamelService {
 	 *
 	 * @param queryParameter a findDocumentsQuery object filled with your query
 	 *                       parameters
-	 * @return the OHT XDSQueryResponseType containing references instead of the
-	 *         complete document metadata</div>
+	 * @param security       a security header element for example an assertion
+	 * 
+	 * @return the IPF QueryResponse containing references instead of the complete
+	 *         document metadata</div>
 	 * @throws Exception
 	 */
-	public QueryResponse queryDocumentReferencesOnly(FindDocumentsQuery queryParameter,
-			SecurityHeaderElement securityHeader, boolean secure) throws Exception {
-		return queryDocumentQuery(queryParameter, securityHeader, QueryReturnType.OBJECT_REF, secure);
+	public QueryResponse queryDocumentReferencesOnly(AbstractStoredQuery queryParameter,
+			SecurityHeaderElement securityHeader) throws Exception {
+		return queryDocumentQuery(queryParameter, securityHeader, QueryReturnType.OBJECT_REF);
 	}
 
 	/**
@@ -734,72 +727,45 @@ public class ConvenienceCommunication extends CamelService {
 	 *
 	 * @param queryParameter a findDocumentsQuery object filled with your query
 	 *                       parameters
-	 * @return the OHT XDSQueryResponseType containing full document metadata</div>
+	 * @param security       a security header element for example an assertion
+	 * 
+	 * @return the IPF QueryResponse containing full document metadata</div>
 	 * @throws Exception
 	 */
-	public QueryResponse queryDocuments(FindDocumentsQuery queryParameter, SecurityHeaderElement securityHeader,
-			boolean secure)
+	public QueryResponse queryDocuments(AbstractStoredQuery queryParameter, SecurityHeaderElement securityHeader)
 			throws Exception {
-		return queryDocumentQuery(queryParameter, securityHeader, QueryReturnType.LEAF_CLASS, secure);
+		return queryDocumentQuery(queryParameter, securityHeader, QueryReturnType.LEAF_CLASS);
 	}
 
 	/**
 	 * <div class="en">Queries the registry of the affinity domain for all documents
 	 * satisfying the given query parameters.
 	 *
-	 * @param query one of the given queries (@see
-	 *              org.ehealth_connector.communication.storedquery and
-	 *              org.ehealth_connector.communication.storedquery.ch)
-	 * @return the OHT XDSQueryResponseType containing full document metadata</div>
+	 * @param query      one of the given queries (@see
+	 *                   org.ehealth_connector.communication.storedquery and
+	 *                   org.ehealth_connector.communication.storedquery.ch)
+	 * @param security   a security header element for example an assertion
+	 * @param returnType return type for XDS query
+	 * 
+	 * @return the IPF QueryResponse containing full document metadata</div>
 	 * @throws Exception
 	 */
-	public QueryResponse queryDocumentQuery(AbstractStoredQuery query, SecurityHeaderElement securityHeader,
-			QueryReturnType returnType, boolean secure)
+	protected QueryResponse queryDocumentQuery(AbstractStoredQuery query, SecurityHeaderElement securityHeader,
+			QueryReturnType returnType)
 			throws Exception {
 		final var queryRegistry = new QueryRegistry(query.getIpfQuery());
 		queryRegistry.setReturnType(returnType);
 
-		final var serverInLogger = "#serverInLogger";
-		final var serverOutLogger = "#serverOutLogger";
+		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains("https://");
 
 		final var endpoint = String.format(
-				"xds-iti18://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
-				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", ""),
-				serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
-				secure);
+				"xds-iti18://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=%s",
+				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", "").replace(
+						"http://", ""),
+				SERVER_IN_LOGGER, SERVER_IN_LOGGER, SERVER_OUT_LOGGER, SERVER_OUT_LOGGER, secure,
+				this.atnaConfigMode.equals(AtnaConfigMode.SECURE), AUDIT_CONTEXT);
 		log.info("Sending request to '{}' endpoint", endpoint);
 
-		final var exchange = send(endpoint, queryRegistry, securityHeader, null);
-
-		return exchange.getMessage().getBody(QueryResponse.class);
-	}
-
-	/**
-	 * <div class="en">Queries the registry of the affinity domain for all documents
-	 * satisfying the given query parameters. This is useful if the number of
-	 * results is limited in the registry and your query would exceed this limit. In
-	 * this case, precise your query or do a query for references first, choose the
-	 * possible matches (e.g. the last 10 results) and then query for metadata.
-	 *
-	 * @param query one of the given queries (@see
-	 *              org.ehealth_connector.communication.storedquery and
-	 *              org.ehealth_connector.communication.storedquery.ch)
-	 * @return the OHT XDSQueryResponseType containing references instead of the
-	 *         complete document metadata</div>
-	 * @throws Exception
-	 */
-	public QueryResponse queryDocumentsReferencesOnly(AbstractStoredQuery query, SecurityHeaderElement securityHeader)
-			throws Exception {
-
-		final var queryRegistry = new QueryRegistry(query.getIpfQuery());
-
-		final var serverInLogger = "#serverInLogger";
-		final var serverOutLogger = "#serverOutLogger";
-		final var endpoint = String.format(
-				"xds-iti18://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
-				affinityDomain.getRegistryDestination().getUri().toString().replace("https://", ""), serverInLogger,
-				serverInLogger, serverOutLogger, serverOutLogger, atnaConfigMode == AtnaConfigMode.SECURE);
-		log.info("Sending request to '{}' endpoint", endpoint);
 		final var exchange = send(endpoint, queryRegistry, securityHeader, null);
 
 		return exchange.getMessage().getBody(QueryResponse.class);
@@ -811,38 +777,41 @@ public class ConvenienceCommunication extends CamelService {
 	 *
 	 * @param queryParameter a findFoldersQuery object filled with your query
 	 *                       parameters
-	 * @return the OHT XDSQueryResponseType containing full folder metadata </div>
+	 * @param security       a security header element for example an assertion
+	 * 
+	 * @return the IPF QueryResponse containing full folder metadata </div>
 	 * @throws Exception
 	 *
 	 */
-	public QueryResponse queryFolders(FindFoldersStoredQuery queryParameter, SecurityHeaderElement security,
-			boolean secure)
+	public QueryResponse queryFolders(FindFoldersStoredQuery queryParameter, SecurityHeaderElement security)
 			throws Exception {
-		return queryDocumentQuery(queryParameter, security, QueryReturnType.LEAF_CLASS, secure);
+		return queryDocumentQuery(queryParameter, security, QueryReturnType.LEAF_CLASS);
 	}
 
 	/**
 	 * <div class="en">Retrieves a document from a Repository
 	 *
-	 * @param docReq the document request
-	 * @return the OHT XDSRetrieveResponseType </div>
+	 * @param docReq   the document request
+	 * @param security a security header element for example an assertion
+	 * 
+	 * @return the IPF RetrievedDocumentSet </div>
 	 * @throws Exception
 	 */
-	public RetrievedDocumentSet retrieveDocument(DocumentRequest docReq, SecurityHeaderElement securityHeader,
-			boolean secure)
+	public RetrievedDocumentSet retrieveDocument(DocumentRequest docReq, SecurityHeaderElement security)
 			throws Exception {
-		return retrieveDocuments(new DocumentRequest[] { docReq }, securityHeader, secure);
+		return retrieveDocuments(new DocumentRequest[] { docReq }, security);
 	}
 
 	/**
 	 * <div class="en">Retrieves multiple documents from one or more Repositories
 	 *
-	 * @param docReq an array of document requests
-	 * @return the OHT XDSRetrieveResponseType </div>
+	 * @param docReq   an array of document requests
+	 * @param security a security header element for example an assertion
+	 * 
+	 * @return the IPF RetrievedDocumentSet </div>
 	 * @throws Exception
 	 */
-	public RetrievedDocumentSet retrieveDocuments(DocumentRequest[] docReq, SecurityHeaderElement securityHeader,
-			boolean secure)
+	public RetrievedDocumentSet retrieveDocuments(DocumentRequest[] docReq, SecurityHeaderElement security)
 			throws Exception {
 		final var retrieveDocumentSet = new RetrieveDocumentSet();
 
@@ -852,16 +821,16 @@ public class ConvenienceCommunication extends CamelService {
 			}
 		}
 
-		final var serverInLogger = "#serverInLogger";
-		final var serverOutLogger = "#serverOutLogger";
+		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains("https://");
 		final var endpoint = String.format(
-				"xds-iti43://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
-				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", ""),
-				serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
-				secure);
+				"xds-iti43://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=%s",
+				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", "").replace(
+						"http://", ""),
+				SERVER_IN_LOGGER, SERVER_IN_LOGGER, SERVER_OUT_LOGGER, SERVER_OUT_LOGGER, secure,
+				this.atnaConfigMode.equals(AtnaConfigMode.SECURE), AUDIT_CONTEXT);
 		log.info("Sending request to '{}' endpoint", endpoint);
 
-		final var exchange = send(endpoint, retrieveDocumentSet, securityHeader, null);
+		final var exchange = send(endpoint, retrieveDocumentSet, security, null);
 
 		return exchange.getMessage().getBody(RetrievedDocumentSet.class);
 	}
@@ -883,6 +852,25 @@ public class ConvenienceCommunication extends CamelService {
 	 */
 	public void setAutomaticExtractionEnabled(DocumentMetadataExtractionMode automaticExtractionEnabled) {
 		this.documentMetadataExtractionMode = automaticExtractionEnabled;
+	}
+
+	/**
+	 * Sets the status of the automatic metadata extraction
+	 *
+	 * @param automaticExtractionEnabled true, if metadata will be extracted as far
+	 *                                   as possible) automatically, false otherwise
+	 */
+	public void setAutomaticExtractionEnabled(SubmissionSetMetadataExtractionMode automaticExtractionEnabled) {
+		this.submissionSetMetadataExtractionMode = automaticExtractionEnabled;
+	}
+
+	/**
+	 * Sets the atna config
+	 *
+	 * @param atnaConfigMode secure or unsecure config
+	 */
+	public void setAtnaConfig(AtnaConfigMode atnaConfigMode) {
+		this.atnaConfigMode = atnaConfigMode;
 	}
 
 	/**
@@ -910,29 +898,13 @@ public class ConvenienceCommunication extends CamelService {
 	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE ITI
 	 * Document Source actor
 	 *
-	 * @return the OHT XDSResponseType</div>
+	 * @param security a security header element for example an assertion
+	 *
+	 * @return the IPF Response</div>
 	 * @throws Exception if the transfer is not successful
 	 */
-	public Response submit(SecurityHeaderElement securityHeader) throws Exception {
-		setDefaultKeystoreTruststore(affinityDomain.getRepositoryDestination());
-
-		if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
-			txnData.setSubmissionSet(generateDefaultSubmissionSetAttributes());
-			linkDocumentEntryWithSubmissionSet();
-		}
-
-		final var serverInLogger = "#serverInLogger";
-		final var serverOutLogger = "#serverOutLogger";
-		final var endpoint = String.format(
-				"xds-iti41://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
-				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", ""),
-				serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
-				atnaConfigMode == AtnaConfigMode.SECURE);
-		log.info("Sending request to '{}' endpoint", endpoint);
-
-		final var exchange = send(endpoint, txnData, securityHeader, null);
-
-		return exchange.getMessage().getBody(Response.class);
+	public Response submit(SecurityHeaderElement security) throws Exception {
+		return submit(security, null);
 	}
 
 	/**
@@ -948,12 +920,101 @@ public class ConvenienceCommunication extends CamelService {
 	 *                              Although, some of this information can be
 	 *                              derived automatically, some may be required in
 	 *                              your country (e.g. AuthorRole in Switzerland)
-	 * @return the OHT XDSResponseType</div>
+	 * @param security              a security header element for example an
+	 *                              assertion
+	 * @return the IPF Response</div>
 	 * @throws Exception if the transfer is not successful
 	 */
-	public Response submit(SubmissionSetMetadata submissionSetMetadata, SecurityHeaderElement securityHeader)
+	public Response submit(SubmissionSetMetadata submissionSetMetadata, SecurityHeaderElement security)
 			throws Exception {
+		if (txnData.getSubmissionSet() == null) {
+			txnData.setSubmissionSet(new SubmissionSet());
+		}
+
 		submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
-		return submit(securityHeader);
+		return submit(security);
 	}
+
+	/**
+	 * <div class="en">Submission of the previously prepared document(s) to the
+	 * repository to replace another document. The restriction of this method is
+	 * that only one document could be replaced<br>
+	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE ITI
+	 * Document Source actor
+	 *
+	 * @param submissionSetMetadata The information in this object will be used to
+	 *                              create comprehensive meta data about this
+	 *                              submission (e.g. with AuthorRole,
+	 *                              AuthorInstitution, ContentType and Title).
+	 *                              Although, some of this information can be
+	 *                              derived automatically, some may be required in
+	 *                              your country (e.g. AuthorRole in Switzerland)
+	 * @param idOfOriginDocument    ID of the document, which should be replaced
+	 * @param security              a security header element for example an
+	 *                              assertion
+	 * @return the IPF Response</div>
+	 * @throws Exception if the transfer is not successful
+	 */
+	public Response submitReplacement(SubmissionSetMetadata submissionSetMetadata, String idOfOriginDocument,
+			SecurityHeaderElement security)
+			throws Exception {
+		if (txnData.getSubmissionSet() == null) {
+			txnData.setSubmissionSet(new SubmissionSet());
+		}
+
+		var association = new Association();
+		association.setAssociationType(AssociationType.REPLACE);
+		association.setAvailabilityStatus(AvailabilityStatus.APPROVED);
+		association.setTargetUuid(idOfOriginDocument);
+		association.assignEntryUuid();
+
+		txnData.getAssociations().add(association);
+
+		submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
+		return submit(security, association);
+	}
+	
+	/**
+	 * <div class="en">Submission of the previously prepared document(s) to the
+	 * repository<br>
+	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE ITI
+	 * Document Source actor
+	 *
+	 * @param security a security header element for example an assertion
+	 *
+	 * @return the IPF Response</div>
+	 * @throws Exception if the transfer is not successful
+	 */
+	private Response submit(SecurityHeaderElement security, Association association) throws Exception {
+		setDefaultKeystoreTruststore(affinityDomain.getRepositoryDestination());
+
+		if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
+			txnData.setSubmissionSet(generateDefaultSubmissionSetAttributes());
+			linkDocumentEntryWithSubmissionSet();
+		}
+
+		if (association != null) {
+			if (txnData.getDocuments() != null && !txnData.getDocuments().isEmpty()
+					&& txnData.getDocuments().get(0) != null) {
+				association.setSourceUuid(txnData.getDocuments().get(0).getDocumentEntry().getEntryUuid());
+			} else if (txnData.getFolders() != null && !txnData.getFolders().isEmpty()
+					&& txnData.getFolders().get(0) != null) {
+				association.setSourceUuid(txnData.getFolders().get(0).getEntryUuid());
+			}
+		}
+
+		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains("https://");
+		final var endpoint = String.format(
+				"xds-iti41://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=%s",
+				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", "")
+						.replace("http://", ""),
+				SERVER_IN_LOGGER, SERVER_IN_LOGGER, SERVER_OUT_LOGGER, SERVER_OUT_LOGGER, secure,
+				this.atnaConfigMode.equals(AtnaConfigMode.SECURE), AUDIT_CONTEXT);
+		log.info("Sending request to '{}' endpoint", endpoint);
+
+		final var exchange = send(endpoint, txnData, security, null);
+
+		return exchange.getMessage().getBody(Response.class);
+	}
+
 }

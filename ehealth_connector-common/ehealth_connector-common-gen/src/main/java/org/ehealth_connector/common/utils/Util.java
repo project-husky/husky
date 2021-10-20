@@ -30,14 +30,11 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.lang.management.ManagementFactory;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -48,16 +45,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
-import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -68,9 +62,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.text.StringEscapeUtils;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-import org.apache.log4j.xml.DOMConfigurator;
 import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
@@ -110,6 +101,8 @@ import org.ehealth_connector.common.mdht.ParticipantRole;
 import org.ehealth_connector.common.mdht.PlayingEntity;
 import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
 import org.ehealth_connector.common.mdht.enums.Signature;
+import org.ehealth_connector.common.utils.xml.XmlFactories;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
@@ -222,21 +215,16 @@ public class Util {
 	 */
 	public static InputStream convertNonAsciiText2Unicode(InputStream inputStream) {
 		InputStream retVal = null;
-		var docBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder docBuilder;
 		try (var outputStream = new ByteArrayOutputStream()) {
-			docBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-			docBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
-			docBuilder = docBuilderFactory.newDocumentBuilder();
+			docBuilder = XmlFactories.newSafeDocumentBuilder();
 			var document = docBuilder.parse(inputStream);
 			convertNonAsciiText2Unicode(document.getDocumentElement());
 			Source xmlSource = new DOMSource(document);
 			Result outputTarget = new StreamResult(outputStream);
 
-			var transformerFactory = TransformerFactory.newInstance();
-			transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-			transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
-			transformerFactory.newTransformer().transform(xmlSource, outputTarget);
+			var transformer = XmlFactories.newTransformer();
+			transformer.transform(xmlSource, outputTarget);
 			retVal = new ByteArrayInputStream(outputStream.toByteArray());
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerException
 				| TransformerFactoryConfigurationError e) {
@@ -992,34 +980,6 @@ public class Util {
 	}
 
 	/**
-	 * Enables immediate logging. All appenders will flush at the end of each
-	 * write. Currently implemented for FileAppenders, only.
-	 *
-	 * @param logger
-	 *            the desired logger for which immediate logging shall be
-	 *            enabled.
-	 */
-	@SuppressWarnings("rawtypes")
-	public static void enableImmediateLogging(org.apache.log4j.Logger logger) {
-		Enumeration allAppenders = logger.getAllAppenders();
-		while (allAppenders.hasMoreElements()) {
-			Object nextElement = allAppenders.nextElement();
-			if (nextElement instanceof org.apache.log4j.FileAppender) {
-				var fileAppender = (org.apache.log4j.FileAppender) nextElement;
-				fileAppender.setImmediateFlush(true);
-			}
-		}
-		allAppenders = logger.getParent().getAllAppenders();
-		while (allAppenders.hasMoreElements()) {
-			Object nextElement = allAppenders.nextElement();
-			if (nextElement instanceof org.apache.log4j.FileAppender) {
-				var fileAppender = (org.apache.log4j.FileAppender) nextElement;
-				fileAppender.setImmediateFlush(true);
-			}
-		}
-	}
-
-	/**
 	 * <div class="en"> Extracts a file from embedded resources in the Jar as
 	 * temporary file on the local filesystem.
 	 *
@@ -1370,7 +1330,7 @@ public class Util {
 		final var envVariable = "eHCTempPath";
 		String tempDirectoryPath = null;
 
-		final var log = LogManager.getLogger(Util.class);
+		final var log = LoggerFactory.getLogger(Util.class);
 
 		try {
 			final String env = System.getenv(envVariable);
@@ -1521,89 +1481,6 @@ public class Util {
 	}
 
 	/**
-	 * Inits the logger.
-	 *
-	 * @param myClass
-	 *            the my class
-	 * @throws MalformedURLException
-	 *             the malformed URL exception
-	 */
-	@SuppressWarnings("rawtypes")
-	public static void initLogger(Class myClass) throws MalformedURLException {
-		initLogger(Util.getRscDir(), myClass);
-	}
-
-	/**
-	 * Inits the logger.
-	 *
-	 * @param rscDir
-	 *            the rsc dir
-	 * @param myClass
-	 *            the my class
-	 * @throws MalformedURLException
-	 *             the malformed URL exception
-	 */
-	@SuppressWarnings("rawtypes")
-	public static void initLogger(String rscDir, Class myClass) throws MalformedURLException {
-		// Init
-		String log4jConfigFn = null;
-		final var runtimeMxBean = ManagementFactory.getRuntimeMXBean();
-		final List<String> vmArgs = runtimeMxBean.getInputArguments();
-		for (final String vmArg : vmArgs) {
-			if (vmArg.toLowerCase().startsWith("-dlog4j.configuration=")) {
-				log4jConfigFn = vmArg.substring(22, vmArg.length());
-			}
-		}
-
-		URL res = null;
-
-		File logConfig = null;
-
-		// use the log4j config given by the -Dlog4j.configuration vm
-		// argument
-		if (log4jConfigFn != null)
-			logConfig = new File(log4jConfigFn);
-
-		// use default log4j config
-		// Logfile: logs/ehealthconnectordemo.log
-		if (logConfig == null) {
-			logConfig = new File(rscDir + "log4jConfigs/log4j.xml".replace("/",
-					FileUtil.getPlatformSpecificPathSeparator()));
-		}
-		if (!logConfig.exists()) {
-			logConfig = new File(Util.getCurrentDirectory() + "rsc/log4jConfigs/log4j.xml"
-					.replace("/", FileUtil.getPlatformSpecificPathSeparator()));
-		}
-		if (!logConfig.exists()) {
-			logConfig = new File(Util.getCurrentDirectory() + "../rsc/log4jConfigs/log4j.xml"
-					.replace("/", FileUtil.getPlatformSpecificPathSeparator()));
-		}
-		if (!logConfig.exists()) {
-			logConfig = new File(
-					Util.getCurrentDirectory() + "src/main/resources/log4jConfigs/log4j.xml"
-							.replace("/", FileUtil.getPlatformSpecificPathSeparator()));
-		}
-		if (!logConfig.exists()) {
-			res = myClass.getResource("log4jConfigs/log4j.xml");
-		} else {
-			res = logConfig.toURI().toURL();
-		}
-		if (res == null) {
-			log.error("***ERROR: No valid log4j config selected\n\n");
-		} else {
-			log4jConfigFn = res.getFile();
-			DOMConfigurator.configure(res);
-
-			Util.enableImmediateLogging(LogManager.getLogger(myClass));
-			log.info("log4j config: {}\n", log4jConfigFn);
-		}
-
-		if (LogManager.getLogger(myClass) == null)
-			log.error("***ERROR: No valid log4j config selected\n\n");
-
-	}
-
-	/**
 	 * Checks if an EntryRelationship is a comment.
 	 *
 	 * @param er
@@ -1745,7 +1622,7 @@ public class Util {
 	public static void logAvailableMemory(@SuppressWarnings("rawtypes") Class theClass,
 			String hint) {
 
-		final Logger log = LogManager.getLogger(theClass);
+		final Logger log = LoggerFactory.getLogger(theClass);
 		freeMemory();
 		log.info(
 				hint + ": freeMemory: " + Long.toString(Util.getVmMemoryFreeInMegaBytes()) + " MB");

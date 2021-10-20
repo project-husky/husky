@@ -542,7 +542,7 @@ public class XdmContents {
 	 * Checks, if the zipFile was already loaded
 	 */
 	private void lazyLoadCheck() {
-		if (txnData != null && zipFile != null && !txnData.isEmpty()) {
+		if (txnData != null && zipFile != null && txnData.isEmpty()) {
 				loadXdmArchive();
 		}
 	}
@@ -582,9 +582,6 @@ public class XdmContents {
 							try (var in = zipFile.getInputStream(metadataEntry)) {
 								final var unmarshaller = JAXBContext.newInstance(SubmitObjectsRequest.class)
 										.createUnmarshaller();
-								unmarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);
-								unmarshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
-								unmarshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF8");
 
 								request = (SubmitObjectsRequest) unmarshaller.unmarshal(in);
 							}

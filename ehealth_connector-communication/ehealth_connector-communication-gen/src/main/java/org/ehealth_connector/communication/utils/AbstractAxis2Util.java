@@ -24,6 +24,7 @@ import org.slf4j.LoggerFactory;
  * @author roeland
  *
  */
+@Deprecated
 public abstract class AbstractAxis2Util {
 
 	private static final Logger log = LoggerFactory.getLogger(AbstractAxis2Util.class);

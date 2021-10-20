@@ -25,7 +25,9 @@ import java.net.URI;
 
 import org.ehealth_connector.common.communication.AffinityDomain;
 import org.ehealth_connector.common.communication.Destination;
+import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.OID;
 import org.ehealth_connector.communication.ConvenienceMasterPatientIndexV3;
 import org.ehealth_connector.communication.testhelper.TestApplication;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
@@ -35,7 +37,6 @@ import org.hl7.fhir.dstu3.model.HumanName;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openehealth.ipf.commons.audit.AuditContext;
@@ -64,7 +65,6 @@ import ca.uhn.fhir.context.FhirVersionEnum;
  * webpage otherwise the test will not run through, you need also to remove
  * the @Ignore to perform the tests directly
  */
-@Disabled
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
 @EnableAutoConfiguration
@@ -91,8 +91,8 @@ public class PixV3QueryTest {
 	final private String homeCommunityOid = "1.3.6.1.4.1.12559.11.20.1";
 	final private String homeCommunityNamespace = "CHPAM2";
 
-	final private String domainToReturnOid = "2.16.756.5.30.1.127.3.10.3";
-	final private String domainToReturnNamespace = "SPID";
+	final private String spidEprOid = "2.16.756.5.30.1.127.3.10.3";
+	final private String spidEprNamespace = "SPID";
 
 	private Organization getScopingOrganization() {
 		final Organization org = new Organization();
@@ -161,8 +161,15 @@ public class PixV3QueryTest {
 		final Identifier identifier = new Identifier();
 
 		identifier.setValue(String.valueOf(System.currentTimeMillis()));
-		identifier.setSystem(homeCommunityOid);
+		identifier.setSystem(spidEprOid);
 		patient.getIdentifier().add(identifier);
+
+		final Identifier identifier1 = new Identifier();
+
+		identifier1.setValue(String.valueOf(System.currentTimeMillis()));
+		identifier1.setSystem(OID.createOIDGivenRoot(EhcVersions.getCurrentVersion().getOid(), 64));
+		patient.getIdentifier().add(identifier1);
+
 		patient.setBirthDate(DateUtil.parseDateyyyyMMdd("19550224"));
 		patient.getAddress().add(address);
 		patient.setGender(AdministrativeGender.MALE);
@@ -277,7 +284,7 @@ public class PixV3QueryTest {
 		affinityDomain.setPixDestination(dest);
 
 		PixV3Query pixV3Query = new PixV3Query(affinityDomain, homeCommunityOid, homeCommunityNamespace,
-				domainToReturnOid, domainToReturnNamespace,
+				spidEprOid, spidEprNamespace,
 				convenienceMasterPatientIndexV3Client.getContext(),
 				convenienceMasterPatientIndexV3Client.getAuditContext());
 

@@ -21,3 +21,7 @@ History (see Wiki for mor details):
 * Validation of CDA documents
 * Embedding original PDF/A representation of a CDA document into the CDA document
 * IHE XUA transactions including authentication (to IdP; User authentication provider) and autorisation (to X-Assertion Provider)
+
+## Documentation
+
+- **[Install Guide](docs/Installation.md)**

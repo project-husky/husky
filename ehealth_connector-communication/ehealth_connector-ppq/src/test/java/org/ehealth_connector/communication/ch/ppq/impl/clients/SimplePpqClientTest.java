@@ -41,18 +41,19 @@ import org.opensaml.core.config.InitializationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
+@PropertySource(value = "classpath:application.properties")
 @EnableAutoConfiguration
 public class SimplePpqClientTest {
 
 	@Autowired
 	private CamelContext camelContext;
-	private String urlToPpq = "https://ehealthsuisse.ihe-europe.net:10443/ppq-repository?wsdl";
-	private String urlToXua = "https://ehealthsuisse.ihe-europe.net:10443/STS?wsdl";
-	private String urlToSts = "https://gazelle.ihe.net/gazelle-sts?wsdl";
+	private String urlToPpq = "https://ehealthsuisse.ihe-europe.net:10443/ppq-repository";
+	private String urlToXua = "https://ehealthsuisse.ihe-europe.net:10443/STS";
 	private String clientKeyStore = "src/test/resources/testKeystore.jks";
 	private String clientKeyStorePass = "changeit";
 	private SecurityHeaderElement securityHeader = null;

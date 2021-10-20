@@ -73,10 +73,10 @@ public class FindDocumentsQuery extends AbstractStoredQuery {
 	 * @param status                  the availability status of the document
 	 *                                (required)
 	 */
-	public FindDocumentsQuery(Identificator patientId, Code[] classCodes,
-			org.ehealth_connector.communication.xd.storedquery.DateTimeRange[] dateTimeRanges,
-			Code[] practiceSettingCodes, Code[] healthCareFacilityCodes, Code[] confidentialityCodes,
-			Code[] formatCodes, Person authorPerson, AvailabilityStatus status) {
+	public FindDocumentsQuery(Identificator patientId, List<Code> classCodes,
+			List<org.ehealth_connector.communication.xd.storedquery.DateTimeRange> dateTimeRanges,
+			List<Code> practiceSettingCodes, List<Code> healthCareFacilityCodes, List<Code> confidentialityCodes,
+			List<Code> formatCodes, Person authorPerson, AvailabilityStatus status) {
 
 		var findDocumentsQuery = new org.openehealth.ipf.commons.ihe.xds.core.requests.query.FindDocumentsQuery();
 		findDocumentsQuery.setPatientId(XdsMetadataUtil.convertEhcIdentificator(patientId));
@@ -92,19 +92,20 @@ public class FindDocumentsQuery extends AbstractStoredQuery {
 		}
 
 		if (dateTimeRanges != null) {
-			for (var index = 0; index < dateTimeRanges.length; index++) {
-				if (dateTimeRanges[index] != null) {
-					if (dateTimeRanges[index].getDateTimeRangeAttribute()
+			for (var index = 0; index < dateTimeRanges.size(); index++) {
+				if (dateTimeRanges.get(index) != null) {
+					if (dateTimeRanges.get(index).getDateTimeRangeAttribute()
 							.equals(DateTimeRangeAttributes.SERVICE_START_TIME)) {
 						findDocumentsQuery.getServiceStartTime()
-								.setFrom(dateTimeRanges[index].getFromAsUsFormattedString());
+								.setFrom(dateTimeRanges.get(index).getFromAsUsFormattedString());
 						findDocumentsQuery.getServiceStartTime()
-								.setTo(dateTimeRanges[index].getToAsUsFormattedString());
-					} else if (dateTimeRanges[index].getDateTimeRangeAttribute()
+								.setTo(dateTimeRanges.get(index).getToAsUsFormattedString());
+					} else if (dateTimeRanges.get(index).getDateTimeRangeAttribute()
 							.equals(DateTimeRangeAttributes.SERVICE_STOP_TIME)) {
 						findDocumentsQuery.getServiceStopTime()
-								.setFrom(dateTimeRanges[index].getFromAsUsFormattedString());
-						findDocumentsQuery.getServiceStopTime().setTo(dateTimeRanges[index].getToAsUsFormattedString());
+								.setFrom(dateTimeRanges.get(index).getFromAsUsFormattedString());
+						findDocumentsQuery.getServiceStopTime()
+								.setTo(dateTimeRanges.get(index).getToAsUsFormattedString());
 					}
 				}
 			}
@@ -124,7 +125,7 @@ public class FindDocumentsQuery extends AbstractStoredQuery {
 	 *
 	 * @param confidentialityCodes array of confidentiality codes
 	 */
-	public void addConfidentialityCodes(Code[] confidentialityCodes) {
+	public void addConfidentialityCodes(List<Code> confidentialityCodes) {
 		try {
 			((org.openehealth.ipf.commons.ihe.xds.core.requests.query.FindDocumentsQuery) getIpfQuery())
 					.getConfidentialityCodes().getOuterList()

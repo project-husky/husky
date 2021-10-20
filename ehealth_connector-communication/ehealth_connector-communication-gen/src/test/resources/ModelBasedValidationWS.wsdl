@@ -1,0 +1,197 @@
+<wsdl:definitions name="ModelBasedValidationWSService" targetNamespace="http://ws.mb.validator.gazelle.ihe.net" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.mb.validator.gazelle.ihe.net">
+<wsdl:types>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://ws.mb.validator.gazelle.ihe.net">
+<xs:element name="about" type="tns:about"/>
+<xs:element name="aboutResponse" type="tns:aboutResponse"/>
+<xs:element name="getListOfValidators" type="tns:getListOfValidators"/>
+<xs:element name="getListOfValidatorsResponse" type="tns:getListOfValidatorsResponse"/>
+<xs:element name="validateBase64Document" type="tns:validateBase64Document"/>
+<xs:element name="validateBase64DocumentResponse" type="tns:validateBase64DocumentResponse"/>
+<xs:element name="validateDocument" type="tns:validateDocument"/>
+<xs:element name="validateDocumentResponse" type="tns:validateDocumentResponse"/>
+<xs:element name="validateXDStarMetadataB64" type="tns:validateXDStarMetadataB64"/>
+<xs:element name="validateXDStarMetadataB64Response" type="tns:validateXDStarMetadataB64Response"/>
+<xs:complexType name="validateDocument">
+<xs:sequence>
+<xs:element minOccurs="0" name="document" type="xs:string"/>
+<xs:element minOccurs="0" name="validator" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="validateDocumentResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="DetailedResult" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="validateXDStarMetadataB64">
+<xs:sequence>
+<xs:element minOccurs="0" name="base64ObjectToValidate" type="xs:string"/>
+<xs:element minOccurs="0" name="arg1" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="validateXDStarMetadataB64Response">
+<xs:sequence>
+<xs:element minOccurs="0" name="DetailedResult" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="about">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="aboutResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="about" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getListOfValidators">
+<xs:sequence>
+<xs:element minOccurs="0" name="descriminator" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getListOfValidatorsResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="Validators" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="validateBase64Document">
+<xs:sequence>
+<xs:element minOccurs="0" name="base64Document" type="xs:string"/>
+<xs:element minOccurs="0" name="validator" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="validateBase64DocumentResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="DetailedResult" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="SOAPException" type="tns:SOAPException"/>
+<xs:complexType name="SOAPException">
+<xs:sequence>
+<xs:element name="message" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+</wsdl:types>
+<wsdl:message name="getListOfValidators">
+<wsdl:part element="tns:getListOfValidators" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="validateBase64DocumentResponse">
+<wsdl:part element="tns:validateBase64DocumentResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="validateBase64Document">
+<wsdl:part element="tns:validateBase64Document" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="aboutResponse">
+<wsdl:part element="tns:aboutResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getListOfValidatorsResponse">
+<wsdl:part element="tns:getListOfValidatorsResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="SOAPException">
+<wsdl:part element="tns:SOAPException" name="SOAPException"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="validateDocumentResponse">
+<wsdl:part element="tns:validateDocumentResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="validateXDStarMetadataB64">
+<wsdl:part element="tns:validateXDStarMetadataB64" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="about">
+<wsdl:part element="tns:about" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="validateXDStarMetadataB64Response">
+<wsdl:part element="tns:validateXDStarMetadataB64Response" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="validateDocument">
+<wsdl:part element="tns:validateDocument" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:portType name="ModelBasedValidationWS">
+<wsdl:operation name="validateDocument">
+<wsdl:input message="tns:validateDocument" name="validateDocument"> </wsdl:input>
+<wsdl:output message="tns:validateDocumentResponse" name="validateDocumentResponse"> </wsdl:output>
+<wsdl:fault message="tns:SOAPException" name="SOAPException"> </wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="validateXDStarMetadataB64">
+<wsdl:input message="tns:validateXDStarMetadataB64" name="validateXDStarMetadataB64"> </wsdl:input>
+<wsdl:output message="tns:validateXDStarMetadataB64Response" name="validateXDStarMetadataB64Response"> </wsdl:output>
+<wsdl:fault message="tns:SOAPException" name="SOAPException"> </wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="about">
+<wsdl:input message="tns:about" name="about"> </wsdl:input>
+<wsdl:output message="tns:aboutResponse" name="aboutResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getListOfValidators">
+<wsdl:input message="tns:getListOfValidators" name="getListOfValidators"> </wsdl:input>
+<wsdl:output message="tns:getListOfValidatorsResponse" name="getListOfValidatorsResponse"> </wsdl:output>
+<wsdl:fault message="tns:SOAPException" name="SOAPException"> </wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="validateBase64Document">
+<wsdl:input message="tns:validateBase64Document" name="validateBase64Document"> </wsdl:input>
+<wsdl:output message="tns:validateBase64DocumentResponse" name="validateBase64DocumentResponse"> </wsdl:output>
+<wsdl:fault message="tns:SOAPException" name="SOAPException"> </wsdl:fault>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="ModelBasedValidationWSServiceSoapBinding" type="tns:ModelBasedValidationWS">
+<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="validateDocument">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="validateDocument">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="validateDocumentResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="SOAPException">
+<soap:fault name="SOAPException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="about">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="about">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="aboutResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="validateXDStarMetadataB64">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="validateXDStarMetadataB64">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="validateXDStarMetadataB64Response">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="SOAPException">
+<soap:fault name="SOAPException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getListOfValidators">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getListOfValidators">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getListOfValidatorsResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="SOAPException">
+<soap:fault name="SOAPException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="validateBase64Document">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="validateBase64Document">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="validateBase64DocumentResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="SOAPException">
+<soap:fault name="SOAPException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="ModelBasedValidationWSService">
+<wsdl:port binding="tns:ModelBasedValidationWSServiceSoapBinding" name="ModelBasedValidationWSPort">
+<soap:address location="https://gazelle.ihe.net/XDStarClient-ejb/ModelBasedValidationWSService/ModelBasedValidationWS"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>
