@@ -37,6 +37,7 @@ import org.hl7.fhir.dstu3.model.HumanName;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openehealth.ipf.commons.audit.AuditContext;
@@ -133,7 +134,9 @@ public class PixV3QueryTest {
 	 * domain CHPAM2. The NIST PIX Manager sends back an acknowledgement
 	 * (MCCI_IN000002UV01) back to your PIX Source.
 	 */
+	/*
 	@Test
+    @Disabled	
 	public void ITI44SourceFeedTest() {
 
 		log.debug("ITI44SourceFeedTest with target " + pixUri);
@@ -153,7 +156,7 @@ public class PixV3QueryTest {
 				convenienceMasterPatientIndexV3Client.getAuditContext());
 
 		final FhirPatient patient = new FhirPatient();
-		final HumanName humanName = new HumanName().setFamily("Huber").addGiven("Franz");
+		final HumanName humanName = new HumanName().setFamily("Maier").addGiven("Hubert");
 		patient.getName().add(humanName);
 		final org.hl7.fhir.dstu3.model.Address address = new org.hl7.fhir.dstu3.model.Address()
 				.addLine("Testgasse 15").setPostalCode("1020").setCity("Wien").setState("AUT");
@@ -163,38 +166,97 @@ public class PixV3QueryTest {
 		identifier.setSystem(homeCommunityOid);
 		patient.getIdentifier().add(identifier);
 	
-		
 		final Identifier identifier2 = new Identifier();
-		identifier2.setSystem(homeCommunityOid);
-		identifier2.setValue("CHPAM2");
+		identifier2.setValue("SPID"+String.valueOf(System.currentTimeMillis()));
+		identifier2.setSystem(domainToReturnOid);
 		patient.getIdentifier().add(identifier2);
 		
+		
 		try {
-			patient.setBirthDate(new SimpleDateFormat("dd.MM.yyyy").parse("24.02.1955"));
+			patient.setBirthDate(new SimpleDateFormat("dd.MM.yyyy").parse("24.03.1950"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		patient.getAddress().add(address);
 		patient.setGender(AdministrativeGender.MALE);
 		patient.getManagingOrganization().setResource(getScopingOrganization());
+		
 
 		final FhirContext ctx = new FhirContext(FhirVersionEnum.DSTU3);
 		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
 		log.debug(encoded);
 
 		assertTrue(pixV3Query.addPatient(patient, null));
-		log.debug("---");
+		
+	}*/
+	
+	
+	@Test
+	
+	public void ITI44SourceFeedTestPatToMerge() {
+
+		log.debug("ITI44SourceFeedTest with target " + pixUri);
+
+		final AffinityDomain affinityDomain = new AffinityDomain();
+		final Destination dest = new Destination();
+
+		dest.setUri(URI.create(pixUri));
+		dest.setSenderApplicationOid(senderApplicationOid);
+		dest.setReceiverApplicationOid(receiverApplicationOid);
+		dest.setReceiverFacilityOid(facilityName);
+		affinityDomain.setPdqDestination(dest);
+		affinityDomain.setPixDestination(dest);
+
+		PixV3Query pixV3Query = new PixV3Query(affinityDomain, homeCommunityOid, homeCommunityNamespace, null, null,
+				convenienceMasterPatientIndexV3Client.getContext(),
+				convenienceMasterPatientIndexV3Client.getAuditContext());
+
+		final FhirPatient patient = new FhirPatient();
+		final HumanName humanName = new HumanName().setFamily("Bauer").addGiven("Anton");
+		patient.getName().add(humanName);
+		final org.hl7.fhir.dstu3.model.Address address = new org.hl7.fhir.dstu3.model.Address()
+				.addLine("Traisengasse 1").setPostalCode("1200").setCity("Wien").setState("AUT");
+		final Identifier identifier = new Identifier();
+
+		identifier.setValue(String.valueOf(System.currentTimeMillis()));
+		identifier.setSystem(homeCommunityOid);
+		patient.getIdentifier().add(identifier);
+	
+		final Identifier identifier2 = new Identifier();
+		identifier2.setValue("SPID-100");
+		identifier2.setSystem(domainToReturnOid);
+		patient.getIdentifier().add(identifier2);
+		
+		
+		try {
+			patient.setBirthDate(new SimpleDateFormat("dd.MM.yyyy").parse("24.03.1950"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		patient.getAddress().add(address);
+		patient.setGender(AdministrativeGender.MALE);
+		patient.getManagingOrganization().setResource(getScopingOrganization());
+		
+
+		final FhirContext ctx = new FhirContext(FhirVersionEnum.DSTU3);
+		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
+		log.debug(encoded);
+
+		assertTrue(pixV3Query.addPatient(patient, null));
+		
 	}
+
 
 	/**
 	 * The purpose of this test is to check that your PIX Source can send an merge
 	 * message (Patient Registry Duplicates Resolved : PRPA_IN201304UV02).
 	 *
 	 * Send a valid merge message (PRPA_IN201304UV02) to the PIX Manager. The
-	 * message shall contain patient Schuster Franz in domain CHPAM2 in replacement
-	 * of ID 1630332840196 (Huber Franz) in domain CHPAM2. The PIX Manager sends an
+	 * message shall contain patient Maier Hubert in domain CHPAM2 replacement
+	 * of ID 1630332840196 (Maier Hubertus) in domain CHPAM2. The PIX Manager sends an
 	 * acknowledgement (MCCI_IN000002UV01) back to your PIX Source.
 	 */
+	/*
 	@Test
 	public void ITI44SourceMergeTest() {
 		log.debug("ITI44SourceMergeTest with target {}", pixUri);
@@ -214,7 +276,7 @@ public class PixV3QueryTest {
 				convenienceMasterPatientIndexV3Client.getAuditContext());
 
 		final FhirPatient patient = new FhirPatient();
-		final HumanName humanName = new HumanName().setFamily("Schuster").addGiven("Franz");
+		final HumanName humanName = new HumanName().setFamily("Maier").addGiven("Hubert");
 		patient.getName().add(humanName);
 		final org.hl7.fhir.dstu3.model.Address address = new org.hl7.fhir.dstu3.model.Address()
 				.addLine("Testgasse 15").setPostalCode("1020").setCity("Wien").setState("AUT");
@@ -232,9 +294,10 @@ public class PixV3QueryTest {
 		log.debug(encoded);
 
 		assertTrue(pixV3Query.mergePatient(patient, "1630334309175", null));
-	}
+	}*/
 
-	@Test
+	//@Test
+	/*
 	public void ITI44SourceUpdateTest() {
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
@@ -271,8 +334,9 @@ public class PixV3QueryTest {
 		log.debug(encoded);
 
 		assertTrue(pixV3Query.updatePatient(patient, null));
-	}
+	}*/
 
+	/*
 	@Test
 	public void ITI45ConsumerTest() {
 
@@ -301,6 +365,6 @@ public class PixV3QueryTest {
 		String patId = pixV3Query.queryPatientId(patient, null);
 
 		assertEquals("761337610436974489", patId);
-	}
+	}*/
 
 }
