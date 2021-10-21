@@ -19,6 +19,10 @@ package org.ehealth_connector.communication.mpi.impl.pdq;
 
 import org.ehealth_connector.communication.utils.PixPdqV3Utils;
 
+/**
+ * @author <a href="mailto:anthony.larocca@sage.com">Anthony Larocca</a>
+ *
+ */
 public class V3PdqContinuationQuery extends V3PdqContinuationBase {
 
 	/**

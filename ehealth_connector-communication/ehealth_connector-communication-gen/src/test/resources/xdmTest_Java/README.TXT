@@ -3,4 +3,4 @@ Product: eHealth Connector - http://ehealth-connector.org
 Module: Convenience API
 Version: EHealthConnectorRxxxxxx, Release Date todo release date
 Contact info: See http://sourceforge.net/p/ehealthconnector/wiki/Team
-Creation timestamp: Fri Sep 17 13:49:58 CEST 2021
+Creation timestamp: Fri Oct 15 18:42:26 CEST 2021

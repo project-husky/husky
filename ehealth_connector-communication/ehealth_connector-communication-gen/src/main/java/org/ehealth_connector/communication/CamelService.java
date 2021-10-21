@@ -18,6 +18,7 @@ import org.apache.cxf.headers.Header.Direction;
 import org.ehealth_connector.xua.core.SecurityHeaderElement;
 import org.ehealth_connector.xua.exceptions.SerializeException;
 import org.ehealth_connector.xua.serialization.impl.OpenSaml2SerializerImpl;
+import org.openehealth.ipf.commons.audit.AuditContext;
 import org.openehealth.ipf.platform.camel.ihe.ws.AbstractWsEndpoint;
 import org.opensaml.core.xml.XMLObject;
 import org.slf4j.Logger;
@@ -32,6 +33,10 @@ public abstract class CamelService implements CamelContextAware {
 	@Autowired
 	private CamelContext camelContext;
 
+	/** The ATNA audit context */
+	@Autowired
+	private AuditContext auditContext;
+
 	@Override
 	public void setCamelContext(CamelContext camelContext) {
 		this.camelContext = camelContext;
@@ -40,6 +45,14 @@ public abstract class CamelService implements CamelContextAware {
 	@Override
 	public CamelContext getCamelContext() {
 		return this.camelContext;
+	}
+
+	public AuditContext getAuditContext() {
+		return auditContext;
+	}
+
+	public void setAuditContext(AuditContext auditContext) {
+		this.auditContext = auditContext;
 	}
 
 	protected void addWssHeader(SecurityHeaderElement securityHeaderElement, Exchange exchange)

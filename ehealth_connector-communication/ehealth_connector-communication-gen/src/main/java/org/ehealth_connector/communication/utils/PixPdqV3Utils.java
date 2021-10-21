@@ -58,6 +58,10 @@ import net.ihe.gazelle.hl7v3.voc.RoleClassAgent;
 import net.ihe.gazelle.hl7v3.voc.RoleClassAssignedEntity;
 import net.ihe.gazelle.hl7v3.voc.WorkPlaceAddressUse;
 
+/**
+ * @author <a href="mailto:anthony.larocca@sage.com">Anthony Larocca</a>
+ *
+ */
 public class PixPdqV3Utils {
 
 	static int sequence = 0;

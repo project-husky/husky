@@ -17,6 +17,7 @@
 package org.ehealth_connector.communication.ch;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,6 +28,7 @@ import org.ehealth_connector.communication.ch.enums.ClassCode;
 import org.ehealth_connector.communication.ch.enums.FormatCode;
 import org.ehealth_connector.communication.ch.enums.HealthcareFacilityTypeCode;
 import org.ehealth_connector.communication.ch.enums.MimeType;
+import org.ehealth_connector.communication.ch.enums.OriginalProviderRole;
 import org.ehealth_connector.communication.ch.enums.PracticeSettingCode;
 import org.ehealth_connector.communication.ch.enums.TypeCode;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Code;
@@ -233,4 +235,20 @@ public class DocumentMetadataCh extends org.ehealth_connector.common.communicati
 	public void setTypeCode(TypeCode code) {
 		getDocumentEntry().setTypeCode(code.getIpfCode());
 	}
+
+	/**
+	 * Sets the (required) original provider code. Specifies the role of the
+	 * provider of the document.
+	 * 
+	 * @param code the new original provider role code
+	 */
+	public void setOriginalProviderRole(OriginalProviderRole code) {
+		if (getDocumentEntry().getExtraMetadata() == null) {
+			getDocumentEntry().setExtraMetadata(new HashMap<>());
+		}
+
+		getDocumentEntry().getExtraMetadata().put("urn:e-health-suisse:2020:originalProviderRole",
+				List.of(String.format("%s^^^&%s&ISO", code.getCode(), code.getCodeSystemId())));
+	}
+
 }

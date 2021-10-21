@@ -19,6 +19,7 @@ package org.ehealth_connector.common.communication;
 import java.time.ZonedDateTime;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
@@ -331,16 +332,43 @@ public class SubmissionSetMetadata {
 	 * @return the filled ohtSubmissionSetType
 	 */
 	public SubmissionSet toOhtSubmissionSetType(SubmissionSet ohtSubmissionSetType) {
-		ohtSubmissionSetType.getAuthors().addAll(s.getAuthors());
-		ohtSubmissionSetType.setAvailabilityStatus(s.getAvailabilityStatus());
-		ohtSubmissionSetType.setComments(s.getComments());
-		ohtSubmissionSetType.setContentTypeCode(s.getContentTypeCode());
-		ohtSubmissionSetType.setPatientId(s.getPatientId());
-		ohtSubmissionSetType.setSourceId(s.getSourceId());
-		ohtSubmissionSetType.setTitle(s.getTitle());
-		ohtSubmissionSetType.setUniqueId(s.getUniqueId());
-		ohtSubmissionSetType.getIntendedRecipients().clear();
-		ohtSubmissionSetType.getIntendedRecipients().addAll(s.getIntendedRecipients());
+		if (s.getAuthors() != null && !s.getAuthors().isEmpty()) {
+			ohtSubmissionSetType.getAuthors().addAll(s.getAuthors());
+		}
+
+		if (s.getAvailabilityStatus() != null) {
+			ohtSubmissionSetType.setAvailabilityStatus(s.getAvailabilityStatus());
+		}
+
+		if (s.getComments() != null) {
+			ohtSubmissionSetType.setComments(s.getComments());
+		}
+
+		if (s.getContentTypeCode() != null) {
+			ohtSubmissionSetType.setContentTypeCode(s.getContentTypeCode());
+		}
+
+		if (s.getPatientId() != null) {
+			ohtSubmissionSetType.setPatientId(s.getPatientId());
+		}
+
+		if (s.getSourceId() != null) {
+			ohtSubmissionSetType.setSourceId(s.getSourceId());
+		}
+
+		if (s.getTitle() != null) {
+			ohtSubmissionSetType.setTitle(s.getTitle());
+		}
+
+		if (s.getUniqueId() != null) {
+			ohtSubmissionSetType.setUniqueId(s.getUniqueId());
+		}
+
+		if (s.getIntendedRecipients() != null && !s.getIntendedRecipients().isEmpty()) {
+			ohtSubmissionSetType.getIntendedRecipients().clear();
+			ohtSubmissionSetType.getIntendedRecipients().addAll(s.getIntendedRecipients());
+		}
+
 		if (ohtSubmissionSetType.getSubmissionTime() == null) {
 			ohtSubmissionSetType.setSubmissionTime(DateUtil.formatDateTimeTzon(ZonedDateTime.now()));
 		}
@@ -355,6 +383,11 @@ public class SubmissionSetMetadata {
 				ohtSubmissionSetType.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
 			}
 		}
+
+		if (ohtSubmissionSetType.getEntryUuid() == null) {
+			ohtSubmissionSetType.setEntryUuid(UUID.randomUUID().toString());
+		}
+
 		return ohtSubmissionSetType;
 	}
 }

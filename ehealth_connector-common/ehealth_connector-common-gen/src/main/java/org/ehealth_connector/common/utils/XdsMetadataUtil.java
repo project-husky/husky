@@ -148,7 +148,8 @@ public class XdsMetadataUtil {
 	 * @param codeList the list of Code
 	 * @return the list of IPF Code
 	 */
-	public static List<org.openehealth.ipf.commons.ihe.xds.core.metadata.Code> convertEhcCodeToCode(Code[] codeList) {
+	public static List<org.openehealth.ipf.commons.ihe.xds.core.metadata.Code> convertEhcCodeToCode(
+			List<Code> codeList) {
 		if (codeList == null)
 			return new LinkedList<>();
 		else {
@@ -190,7 +191,7 @@ public class XdsMetadataUtil {
 	 * @return the list of IPF Code
 	 */
 	public static QueryList<org.openehealth.ipf.commons.ihe.xds.core.metadata.Code> convertEhcCodeToQueryListCode(
-			Code[] codeList) {
+			List<Code> codeList) {
 		if (codeList == null)
 			return null;
 		else {

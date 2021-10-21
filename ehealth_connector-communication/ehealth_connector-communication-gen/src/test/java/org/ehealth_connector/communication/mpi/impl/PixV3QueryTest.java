@@ -27,7 +27,9 @@ import java.text.SimpleDateFormat;
 
 import org.ehealth_connector.common.communication.AffinityDomain;
 import org.ehealth_connector.common.communication.Destination;
+import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.OID;
 import org.ehealth_connector.communication.ConvenienceMasterPatientIndexV3;
 import org.ehealth_connector.communication.testhelper.TestApplication;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
@@ -37,7 +39,6 @@ import org.hl7.fhir.dstu3.model.HumanName;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openehealth.ipf.commons.audit.AuditContext;
@@ -49,6 +50,12 @@ import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.ehealth_connector.common.enums.EhcVersions;
+import org.ehealth_connector.common.utils.OID;
+
+import org.junit.jupiter.api.Disabled;
+
+
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.context.FhirVersionEnum;
@@ -91,9 +98,9 @@ public class PixV3QueryTest {
 
 	final private String homeCommunityOid = "1.3.6.1.4.1.12559.11.20.1";
 	final private String homeCommunityNamespace = "CHPAM2";
-
-	final private String domainToReturnOid = "2.16.756.5.30.1.127.3.10.3";
-	final private String domainToReturnNamespace = "SPID";
+	
+	final private String spidEprOid = "2.16.756.5.30.1.127.3.10.3";
+	final private String spidEprNamespace = "SPID";
 
 	private Organization getScopingOrganization() {
 		final Organization org = new Organization();
@@ -134,10 +141,10 @@ public class PixV3QueryTest {
 	 * domain CHPAM2. The NIST PIX Manager sends back an acknowledgement
 	 * (MCCI_IN000002UV01) back to your PIX Source.
 	 */
-	/*
+	
 	@Test
     @Disabled	
-	public void ITI44SourceFeedTest() {
+	public void ITI44SourceFeedTestWithAudit() {
 
 		log.debug("ITI44SourceFeedTest with target " + pixUri);
 
@@ -150,35 +157,35 @@ public class PixV3QueryTest {
 		dest.setReceiverFacilityOid(facilityName);
 		affinityDomain.setPdqDestination(dest);
 		affinityDomain.setPixDestination(dest);
+		
+		
+ 		PixV3Query pixV3Query = new PixV3Query(affinityDomain, homeCommunityOid, homeCommunityNamespace,
+				spidEprOid, spidEprNamespace,
+ 				convenienceMasterPatientIndexV3Client.getContext(),
+ 				convenienceMasterPatientIndexV3Client.getAuditContext());
 
-		PixV3Query pixV3Query = new PixV3Query(affinityDomain, homeCommunityOid, homeCommunityNamespace, null, null,
-				convenienceMasterPatientIndexV3Client.getContext(),
-				convenienceMasterPatientIndexV3Client.getAuditContext());
 
 		final FhirPatient patient = new FhirPatient();
-		final HumanName humanName = new HumanName().setFamily("Maier").addGiven("Hubert");
+		final HumanName humanName = new HumanName().setFamily("Maier").addGiven("Maria");
 		patient.getName().add(humanName);
 		final org.hl7.fhir.dstu3.model.Address address = new org.hl7.fhir.dstu3.model.Address()
 				.addLine("Testgasse 15").setPostalCode("1020").setCity("Wien").setState("AUT");
 		final Identifier identifier = new Identifier();
 
 		identifier.setValue(String.valueOf(System.currentTimeMillis()));
-		identifier.setSystem(homeCommunityOid);
+		identifier.setSystem(spidEprOid);
 		patient.getIdentifier().add(identifier);
-	
-		final Identifier identifier2 = new Identifier();
-		identifier2.setValue("SPID"+String.valueOf(System.currentTimeMillis()));
-		identifier2.setSystem(domainToReturnOid);
-		patient.getIdentifier().add(identifier2);
-		
-		
-		try {
-			patient.setBirthDate(new SimpleDateFormat("dd.MM.yyyy").parse("24.03.1950"));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+
+
+		final Identifier identifier1 = new Identifier();
+
+		identifier1.setValue(String.valueOf(System.currentTimeMillis()));
+		identifier1.setSystem(OID.createOIDGivenRoot(EhcVersions.getCurrentVersion().getOid(), 64));
+		patient.getIdentifier().add(identifier1);
+		patient.setBirthDate(DateUtil.parseDateyyyyMMdd("19550224"));
+       
 		patient.getAddress().add(address);
-		patient.setGender(AdministrativeGender.MALE);
+		patient.setGender(AdministrativeGender.FEMALE);
 		patient.getManagingOrganization().setResource(getScopingOrganization());
 		
 
@@ -188,12 +195,12 @@ public class PixV3QueryTest {
 
 		assertTrue(pixV3Query.addPatient(patient, null));
 		
-	}*/
+	}
 	
 	
 	@Test
-	
-	public void ITI44SourceFeedTestPatToMerge() {
+	@Disabled	
+	public void ITI44SourceFeedTestNoAudit() {
 
 		log.debug("ITI44SourceFeedTest with target " + pixUri);
 
@@ -220,6 +227,8 @@ public class PixV3QueryTest {
 
 		identifier.setValue(String.valueOf(System.currentTimeMillis()));
 		identifier.setSystem(homeCommunityOid);
+		//identifier.setSystem(spidEprOid);
+
 		patient.getIdentifier().add(identifier);
 	
 		final Identifier identifier2 = new Identifier();
@@ -352,7 +361,7 @@ public class PixV3QueryTest {
 		affinityDomain.setPixDestination(dest);
 
 		PixV3Query pixV3Query = new PixV3Query(affinityDomain, homeCommunityOid, homeCommunityNamespace,
-				domainToReturnOid, domainToReturnNamespace,
+				spidEprOid, spidEprNamespace,
 				convenienceMasterPatientIndexV3Client.getContext(),
 				convenienceMasterPatientIndexV3Client.getAuditContext());
 

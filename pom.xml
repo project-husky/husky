@@ -337,12 +337,6 @@
 				<version>1.6.2</version>
 			</dependency>
 
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-				<version>${slf4j.version}</version>
-			</dependency>
-
 			<!-- PPQ stuff -->
 			<dependency>
 				<groupId>org.opensaml</groupId>
@@ -408,6 +402,12 @@
 				<groupId>org.apache.camel</groupId>
 				<artifactId>camel-test-spring</artifactId>
 				<version>3.11.2</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-cxf</artifactId>
+				<version>3.7.5</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>

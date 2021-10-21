@@ -1,3 +1,19 @@
+/*
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ *
+ * Source code, documentation and other resources have been contributed by various people.
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * For exact developer information, please refer to the commit history of the forge.
+ *
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ *
+ */
 package org.ehealth_connector.common.communication;
 
 import java.io.Serializable;
@@ -14,7 +30,6 @@ import java.util.TimeZone;
 
 import javax.xml.bind.JAXBElement;
 
-import org.apache.log4j.Logger;
 import org.ehealth_connector.common.enums.AdministrativeGender;
 import org.ehealth_connector.common.hl7cdar2.AD;
 import org.ehealth_connector.common.hl7cdar2.AdxpAdditionalLocator;
@@ -65,17 +80,21 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.Telecom;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.XcnName;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.XpnName;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-
+/**
+ * Extracts XDS Document Entry Metadata from generic CDA R2 document
+ * 
+ * @author <a href="mailto:seknoop@us.ibm.com">Sarah Knoop</a>
+ *
+ */
 public class CDAR2Extractor {
-
-	/** Descriptor for Extractor */
-	public static final String DESCRIPTOR = "CDAR2_DE_EXTR";
 
 	/**
 	 * logger
 	 */
-	private static Logger logger = Logger.getLogger(CDAR2Extractor.class);
+	private static Logger logger = LoggerFactory.getLogger(CDAR2Extractor.class);
 
 	/**
 	 * Map between CDA R2 Administrative Gender codes and HL7v2.5 Table
@@ -400,12 +419,8 @@ public class CDAR2Extractor {
 	 * @see org.openhealthtools.ihe.xds.metadata.extract.DocumentEntryElementExtractor.extractConfidentialityCode()
 	 */
 	public List<Code> extractConfidentialityCodes() {
-		if (cda.getConfidentialityCode() == null) {
-			return new LinkedList<>();
-		}
-
-		var code = map(cda.getConfidentialityCode());
-		return List.of(code);
+		logger.info("DocumentEntry.confidentialityCode should be set explicitly");
+		return new LinkedList<>();
 	}
 
 	/**
@@ -1610,7 +1625,7 @@ public class CDAR2Extractor {
 	 * @return
 	 */
 	protected Telecom map(TEL tel) {
-		if (tel == null) {
+		if (tel == null || tel.getValue() == null || tel.getValue().isEmpty()) {
 			return null;
 		}
 
@@ -1625,7 +1640,7 @@ public class CDAR2Extractor {
 		xtn.setEmail(tel.getValue());
 
 		// XTN.12 - unformatted telephone number
-		/* xtn.setUnformattedTelephoneNumber(tel.getValue()); */
+		// xtn.setUnformattedTelephoneNumber(tel.getValue());
 
 		return xtn;
 	}

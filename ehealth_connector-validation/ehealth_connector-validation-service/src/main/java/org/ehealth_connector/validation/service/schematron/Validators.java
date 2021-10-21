@@ -25,10 +25,10 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.ehealth_connector.validation.service.transform.TransformationException;
 import org.ehealth_connector.validation.service.util.Exceptions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.XsltExecutable;
@@ -79,7 +79,7 @@ public class Validators {
 	private final RuleSetTransformer factory;
 
 	/** The SLF4J logger instance. */
-	private final Logger log = LogManager.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/**
 	 * Creates a new <tt>Validators</tt> instance which relies on the specified

@@ -43,7 +43,8 @@ public class GetFolderAndContentsQuery extends AbstractStoredQuery {
 	 * @param confidentialityCodes array of confidentiality codes to query for (can
 	 *                             be null)
 	 */
-	public GetFolderAndContentsQuery(String folderId, boolean isUUID, Code[] formatCodes, Code[] confidentialityCodes) {
+	public GetFolderAndContentsQuery(String folderId, boolean isUUID, List<Code> formatCodes,
+			List<Code> confidentialityCodes) {
 
 		var query = new org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetFolderAndContentsQuery();
 
@@ -77,7 +78,8 @@ public class GetFolderAndContentsQuery extends AbstractStoredQuery {
 	 *                             by the XCA profile. Value may be null or empty,
 	 *                             in which case it is not added to the query.
 	 */
-	public GetFolderAndContentsQuery(String folderId, boolean isUUID, Code[] formatCodes, Code[] confidentialityCodes,
+	public GetFolderAndContentsQuery(String folderId, boolean isUUID, List<Code> formatCodes,
+			List<Code> confidentialityCodes,
 			String homeCommunityId) {
 
 		var query = new org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetFolderAndContentsQuery();
@@ -116,7 +118,8 @@ public class GetFolderAndContentsQuery extends AbstractStoredQuery {
 	 * @param objectType           for the OnDemand document feature. Tells whether
 	 *                             you want static docs, on demand docs, or both
 	 */
-	public GetFolderAndContentsQuery(String folderId, boolean isUUID, Code[] formatCodes, Code[] confidentialityCodes,
+	public GetFolderAndContentsQuery(String folderId, boolean isUUID, List<Code> formatCodes,
+			List<Code> confidentialityCodes,
 			String homeCommunityId, DocumentEntryType objectType) {
 		var query = new org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetFolderAndContentsQuery();
 
@@ -146,7 +149,7 @@ public class GetFolderAndContentsQuery extends AbstractStoredQuery {
 	 *                             confidentialityCodes[i] will be a literal of that
 	 *                             clause, to add to the query.
 	 */
-	public void addConfidentialityCodes(Code[] confidentialityCodes) {
+	public void addConfidentialityCodes(List<Code> confidentialityCodes) {
 
 		var query = (org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetFolderAndContentsQuery) getIpfQuery();
 

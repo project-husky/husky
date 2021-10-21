@@ -40,6 +40,10 @@ import net.ihe.gazelle.hl7v3.prpain201301UV02.PRPAIN201301UV02Type;
 import net.ihe.gazelle.hl7v3.prpain201302UV02.PRPAIN201302UV02Type;
 import net.ihe.gazelle.hl7v3.prpain201304UV02.PRPAIN201304UV02Type;
 
+/**
+ * @author <a href="mailto:anthony.larocca@sage.com">Anthony Larocca</a>
+ *
+ */
 public class V3PixSource extends CamelService {
 
 	/**
@@ -53,11 +57,6 @@ public class V3PixSource extends CamelService {
 	private URI serverURI;
 
 	/**
-	 * ATNA Auditor Context
-	 */
-	private AuditContext auditorContext;
-
-	/**
 	 * Constructor:
 	 * 
 	 * @param pdqServerURI the URI for the server to use for query requests
@@ -65,7 +64,7 @@ public class V3PixSource extends CamelService {
 	 */
 	public V3PixSource(URI pixServerURI, CamelContext context, AuditContext auditorContext) {
 		this.serverURI = pixServerURI;
-		this.auditorContext = auditorContext;
+		setAuditContext(auditorContext);
 		setCamelContext(context);
 	}
 
@@ -209,8 +208,8 @@ public class V3PixSource extends CamelService {
 	private String sendITI44Query(String request, SecurityHeaderElement assertion, URI pdqDest, String action)
 			throws Exception {
 		final var endpoint = String.format(
-				"pixv3-iti44://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&audit=%s",
-				pdqDest.toString().replace("https://", ""), true, auditorContext.isAuditEnabled());
+				"pixv3-iti44://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&audit=%s&auditContext=#auditContext",
+				pdqDest.toString().replace("https://", ""), true, getAuditContext().isAuditEnabled());
 		LOGGER.info("Sending request to '{}' endpoint", endpoint);
 
 		Map<String, String> outgoingHeaders = new HashMap<>();

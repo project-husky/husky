@@ -49,7 +49,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 			AuditContext auditContext) {
 		super(affinityDomain, homeCommunityOid, context);
 		this.pixSource = new V3PixSource(this.pixSourceUri, context, auditContext);
-		this.auditContext = auditContext;
+		setAuditContext(auditContext);
 	}
 
 	public PixV3Query(AffinityDomain affinityDomain, String homeCommunityOid, String homeCommunityNamespace,
@@ -57,7 +57,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 		super(affinityDomain, homeCommunityOid, homeCommunityNamespace, domainToReturnOid, domainToReturnNamespace,
 				context);
 		this.pixSource = new V3PixSource(this.pixSourceUri, context, auditContext);
-		this.auditContext = auditContext;
+		setAuditContext(auditContext);
 	}
 
 	/**
@@ -71,6 +71,8 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 * @param patient               the patient
 	 * @param queryDomainOids       the query domain oids
 	 * @param queryDomainNamespaces the query domain namespaces
+	 * @param assertion             a security header element for example an
+	 *                              assertion
 	 * @return the list of string
 	 */
 	public List<String> queryPatientId(org.ehealth_connector.fhir.structures.gen.FhirPatient patient,
@@ -139,12 +141,14 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 * adds a patient to the mpi. implements ITI-44 Patient Identity Source – Add
 	 * Patient Record
 	 *
-	 * @param patient the patient
+	 * @param patient   the patient
+	 * @param assertion a security header element for example an assertion
+	 * 
 	 * @return true, if successful
 	 */
 	public boolean addPatient(FhirPatient patient, SecurityHeaderElement assertion) {
 		if (pixSource == null) {
-			pixSource = new V3PixSource(this.pixSourceUri, getCamelContext(), auditContext);
+			pixSource = new V3PixSource(this.pixSourceUri, getCamelContext(), getAuditContext());
 		}
 
 		LOGGER.debug("creating v3RecordAddedMessage");
@@ -175,11 +179,13 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 *
 	 * @param patient    the patient (with the surviving identifier)
 	 * @param obsoleteId the obsolete id (duplicate patient identifier)
+	 * @param assertion  a security header element for example an assertion
+	 * 
 	 * @return true, if successful
 	 */
 	public boolean mergePatient(FhirPatient patient, String obsoleteId, SecurityHeaderElement assertion) {
 		if (pixSource == null) {
-			pixSource = new V3PixSource(this.pixSourceUri, getCamelContext(), auditContext);
+			pixSource = new V3PixSource(this.pixSourceUri, getCamelContext(), getAuditContext());
 		}
 
 		var ret = false;
@@ -208,11 +214,13 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 * demographic information of the patient in the mpi.
 	 *
 	 * @param patient the patient
+	 * @assertion a security header element for example an assertion
+	 * 
 	 * @return true, if successful
 	 */
 	public boolean updatePatient(FhirPatient patient, SecurityHeaderElement assertion) {
 		if (pixSource == null) {
-			pixSource = new V3PixSource(this.pixSourceUri, getCamelContext(), auditContext);
+			pixSource = new V3PixSource(this.pixSourceUri, getCamelContext(), getAuditContext());
 		}
 		final var v3RecordRevisedMessage = new V3PixSourceMessageHelper(false, true, false,
 				this.senderApplicationOid, this.senderFacilityOid, this.receiverApplicationOid,
@@ -247,6 +255,8 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 * Query patient id.
 	 *
 	 * @param patient the patient
+	 * @assertion a security header element for example an assertion
+	 * 
 	 * @return the string
 	 */
 	public String queryPatientId(FhirPatient patient, SecurityHeaderElement assertion) {
@@ -308,8 +318,8 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	private PixV3QueryResponse sendQuery(PixV3QueryRequest request, SecurityHeaderElement assertion, URI pdqDest)
 			throws Exception {
 		final var endpoint = String.format(
-				"pixv3-iti45://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&audit=%s",
-				pdqDest.toString().replace("https://", ""), true, auditContext.isAuditEnabled());
+				"pixv3-iti45://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&audit=%s&auditContext=#auditContext",
+				pdqDest.toString().replace("https://", ""), true, getAuditContext().isAuditEnabled());
 		LOGGER.info("Sending request to '{}' endpoint", endpoint);
 
 		Map<String, String> outgoingHeaders = new HashMap<>();

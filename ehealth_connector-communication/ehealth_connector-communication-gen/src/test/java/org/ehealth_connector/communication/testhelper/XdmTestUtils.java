@@ -48,7 +48,7 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class XdmTestUtils extends TestUtils {
+public class XdmTestUtils extends XdsTestUtils {
 
 	private static final DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 
@@ -127,12 +127,12 @@ public class XdmTestUtils extends TestUtils {
 
 		// Calculate integrity values of the imported documents
 		try (var is = doc1.getDataHandler().getInputStream()) {
+			byte[] doc1Bytes = IOUtils.toByteArray(is);
 			// Hash
-			final String doc1Hash = DigestUtils.sha1Hex(is);
+			final String doc1Hash = DigestUtils.sha1Hex(doc1Bytes);
 
 			// Size
-			@SuppressWarnings("resource")
-			final long doc1Size = IOUtils.toByteArray(is).length;
+			final long doc1Size = doc1Bytes.length;
 
 			// Compare Hash
 			if (!doc1Hash.equals(doc1Metadata.getHash()))
@@ -147,11 +147,11 @@ public class XdmTestUtils extends TestUtils {
 
 		// Calculate integrity values of the imported documents
 		try (var is = doc2.getDataHandler().getInputStream()) {
+			byte[] doc2Bytes = IOUtils.toByteArray(is);
 			// Hash
-			final String doc2Hash = DigestUtils.sha1Hex(is);
+			final String doc2Hash = DigestUtils.sha1Hex(doc2Bytes);
 			// Size
-			@SuppressWarnings("resource")
-			final long doc2Size = IOUtils.toByteArray(is).length;
+			final long doc2Size = doc2Bytes.length;
 
 			// Compare Hash
 			if (!doc2Hash.equals(doc2Metadata.getHash()))

@@ -1,4 +1,4 @@
-package org.ehealth_connector.communication.mpi.impl;
+package org.ehealth_connector.communication.testhelper;
 
 import org.openehealth.ipf.commons.ihe.ws.cxf.payload.InPayloadLoggerInterceptor;
 import org.openehealth.ipf.commons.ihe.ws.cxf.payload.OutPayloadLoggerInterceptor;

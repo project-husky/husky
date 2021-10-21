@@ -149,7 +149,9 @@ public class IndexHtm {
 	private String createContents(ProvideAndRegisterDocumentSet txnData) {
 		// Number of Items
 		var contentsStr = new StringBuilder("<h3>Submission-Set 1</h3>\n" + "<p>Patient ID: "
-				+ txnData.getSubmissionSet().getPatientId().getId() + "</p>\n" + "<ul>\n");
+				+ txnData.getSubmissionSet().getPatientId().getId() + " ("
+				+ txnData.getSubmissionSet().getPatientId().getAssigningAuthority().getUniversalId() + ")" + "</p>\n"
+				+ "<ul>\n");
 
 		var i = 0;
 		for (final Document xdsDoc : txnData.getDocuments()) {

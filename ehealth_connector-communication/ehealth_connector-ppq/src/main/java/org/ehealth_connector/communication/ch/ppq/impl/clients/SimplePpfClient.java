@@ -69,10 +69,10 @@ public class SimplePpfClient extends CamelService
 					final var serverInLogger = "#serverInLogger";
 					final var serverOutLogger = "#serverOutLogger";
 					final var endpoint = String.format(
-							"ch-ppq1://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
+							"ch-ppq1://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s",
 							config.getUrl().replace("https://", ""),
 							serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
-							true);
+							true, getAuditContext().isAuditEnabled());
 
 					final var exchange = send(endpoint, requestToSend, aAssertion, null);
 
