@@ -142,11 +142,12 @@ public class PixV3QueryTest {
 	 * (MCCI_IN000002UV01) back to your PIX Source.
 	 */
 	
+	/*
 	@Test
-    @Disabled	
+    @Disabled
 	public void ITI44SourceFeedTestWithAudit() {
 
-		log.debug("ITI44SourceFeedTest with target " + pixUri);
+		log.debug("ITI44SourceFeedTestWithAudit with target " + pixUri);
 
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
@@ -195,11 +196,11 @@ public class PixV3QueryTest {
 
 		assertTrue(pixV3Query.addPatient(patient, null));
 		
-	}
+	}*/
 	
-	
+	/*
 	@Test
-	@Disabled	
+	//@Disabled	
 	public void ITI44SourceFeedTestNoAudit() {
 
 		log.debug("ITI44SourceFeedTest with target " + pixUri);
@@ -219,21 +220,22 @@ public class PixV3QueryTest {
 				convenienceMasterPatientIndexV3Client.getAuditContext());
 
 		final FhirPatient patient = new FhirPatient();
-		final HumanName humanName = new HumanName().setFamily("Bauer").addGiven("Anton");
+		final HumanName humanName = new HumanName().setFamily("Baumann").addGiven("Edgar");
 		patient.getName().add(humanName);
+		//patient.setNation(null);
+	
 		final org.hl7.fhir.dstu3.model.Address address = new org.hl7.fhir.dstu3.model.Address()
-				.addLine("Traisengasse 1").setPostalCode("1200").setCity("Wien").setState("AUT");
+				.addLine("Ospelgasse 1").setPostalCode("1200").setCity("Wien").setState("AUT");
 		final Identifier identifier = new Identifier();
 
 		identifier.setValue(String.valueOf(System.currentTimeMillis()));
-		identifier.setSystem(homeCommunityOid);
-		//identifier.setSystem(spidEprOid);
+		identifier.setSystem(spidEprOid);
 
 		patient.getIdentifier().add(identifier);
 	
 		final Identifier identifier2 = new Identifier();
-		identifier2.setValue("SPID-100");
-		identifier2.setSystem(domainToReturnOid);
+		identifier2.setValue(String.valueOf(System.currentTimeMillis()));
+		identifier2.setSystem(spidEprOid);
 		patient.getIdentifier().add(identifier2);
 		
 		
@@ -253,7 +255,7 @@ public class PixV3QueryTest {
 
 		assertTrue(pixV3Query.addPatient(patient, null));
 		
-	}
+	}*/
 
 
 	/**
@@ -285,7 +287,7 @@ public class PixV3QueryTest {
 				convenienceMasterPatientIndexV3Client.getAuditContext());
 
 		final FhirPatient patient = new FhirPatient();
-		final HumanName humanName = new HumanName().setFamily("Maier").addGiven("Hubert");
+		final HumanName humanName = new HumanName().setFamily("Bauer-Maier").addGiven("Anton");
 		patient.getName().add(humanName);
 		final org.hl7.fhir.dstu3.model.Address address = new org.hl7.fhir.dstu3.model.Address()
 				.addLine("Testgasse 15").setPostalCode("1020").setCity("Wien").setState("AUT");
@@ -293,7 +295,13 @@ public class PixV3QueryTest {
 		identifier.setValue(String.valueOf(System.currentTimeMillis()));
 		identifier.setSystem(FhirCommon.addUrnOid(homeCommunityOid));
 		patient.getIdentifier().add(identifier);
-		patient.setBirthDate(DateUtil.parseDateyyyyMMdd("19771208"));
+
+		final Identifier identifier2 = new Identifier();
+		identifier2.setValue(String.valueOf(System.currentTimeMillis())); 
+		identifier2.setSystem(spidEprOid);
+		patient.getIdentifier().add(identifier2);
+		
+		patient.setBirthDate(DateUtil.parseDateyyyyMMdd("19500324"));
 		patient.getAddress().add(address);
 		patient.setGender(AdministrativeGender.MALE);
 		patient.getManagingOrganization().setResource(getScopingOrganization());
@@ -302,11 +310,10 @@ public class PixV3QueryTest {
 		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
 		log.debug(encoded);
 
-		assertTrue(pixV3Query.mergePatient(patient, "1630334309175", null));
+		assertTrue(pixV3Query.mergePatient(patient, "1634793774730", null));
 	}*/
 
-	//@Test
-	/*
+	@Test
 	public void ITI44SourceUpdateTest() {
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
@@ -324,16 +331,21 @@ public class PixV3QueryTest {
 
 
 		final FhirPatient patient = new FhirPatient();
-		final HumanName humanName = new HumanName().setFamily("Huber").addGiven("Franz");
+		final HumanName humanName = new HumanName().setFamily("Bauer-Maier").addGiven("Anton");
 		patient.getName().add(humanName);
 		final org.hl7.fhir.dstu3.model.Address address = new org.hl7.fhir.dstu3.model.Address()
 				.addLine("Testgasse 18").setPostalCode("1020").setCity("Wien").setState("AUT");
 		final Identifier identifier = new Identifier();
-		identifier.setValue("1630334473749");
+		identifier.setValue("1634793774730");
 		identifier.setSystem(FhirCommon.addUrnOid(homeCommunityOid));
 		patient.getIdentifier().add(identifier);
+		
+		final Identifier identifier2 = new Identifier();
+		identifier2.setValue("SPID-101");
+		identifier2.setSystem(spidEprOid);
+		patient.getIdentifier().add(identifier2);
 
-		patient.setBirthDate(DateUtil.parseDateyyyyMMdd("19550224"));
+		patient.setBirthDate(DateUtil.parseDateyyyyMMdd("19500324"));
 		patient.getAddress().add(address);
 		patient.setGender(AdministrativeGender.MALE);
 		patient.getManagingOrganization().setResource(getScopingOrganization());
@@ -343,7 +355,7 @@ public class PixV3QueryTest {
 		log.debug(encoded);
 
 		assertTrue(pixV3Query.updatePatient(patient, null));
-	}*/
+	}
 
 	/*
 	@Test
