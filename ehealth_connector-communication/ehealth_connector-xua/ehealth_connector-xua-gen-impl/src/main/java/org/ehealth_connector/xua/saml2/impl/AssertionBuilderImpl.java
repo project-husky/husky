@@ -22,6 +22,7 @@ import java.util.List;
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.saml2.AssertionBuilder;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionsType;
 import org.opensaml.saml.common.SAMLVersion;
@@ -90,6 +91,17 @@ public class AssertionBuilderImpl implements AssertionBuilder,
 	@Override
 	public Assertion create() {
 		return new AssertionImpl(wrappedObject);
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.xua.saml2.AssertionBuilder#create(AssertionType)
+	 */
+	@Override
+	public Assertion create(AssertionType aInternalObject) {
+		return new AssertionImpl(aInternalObject);
 	}
 
 	/**

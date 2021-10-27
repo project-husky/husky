@@ -40,6 +40,7 @@ import org.ehealth_connector.xua.hl7v3.impl.RoleBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openehealth.ipf.commons.audit.AuditContext;
 import org.opensaml.core.config.InitializationException;
 import org.opensaml.core.config.InitializationService;
 import org.slf4j.Logger;
@@ -63,6 +64,10 @@ public class SimplePpqClientAtnaAuditTest {
 
 	@Autowired
 	private CamelContext camelContext;
+
+	@Autowired
+	private AuditContext auditContext;
+
 	private String urlToPpq = "https://ehealthsuisse.ihe-europe.net:10443/ppq-repository";
 	private String urlToXua = "https://ehealthsuisse.ihe-europe.net:10443/STS";
 	private String urlToSts = "https://gazelle.ihe.net/gazelle-sts?wsdl";
@@ -119,6 +124,7 @@ public class SimplePpqClientAtnaAuditTest {
 		PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).create();
 		SimplePpqClient client = ClientFactoryCh.getPpqClient(config);
+		client.setAuditContext(auditContext);
 		client.setCamelContext(camelContext);
 
 		InstanceIdentifier instanceIdentifier = new InstanceIdentifierBuilder().buildObject();

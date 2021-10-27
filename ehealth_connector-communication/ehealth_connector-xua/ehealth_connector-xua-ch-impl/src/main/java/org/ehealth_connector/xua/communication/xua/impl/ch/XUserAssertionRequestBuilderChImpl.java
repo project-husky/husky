@@ -41,4 +41,16 @@ public class XUserAssertionRequestBuilderChImpl extends XUserAssertionRequestBui
 		return this;
 	}
 
+	public XUserAssertionRequestBuilder principal(String principalId, String principalName) {
+		if (principalId != null) {
+			addXMLObjectToClaims(
+					createStringAttribute(XUserAssertionConstantsCh.CH_PRINCIPALID, principalId));
+		}
+
+		if (principalName != null) {
+			addXMLObjectToClaims(createStringAttribute(XUserAssertionConstantsCh.CH_PRINCIPAL_NAME, principalName));
+		}
+		return this;
+	}
+
 }

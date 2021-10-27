@@ -24,6 +24,7 @@ import org.ehealth_connector.xua.saml2.SimpleBuilder;
 import org.herasaf.xacml.core.function.Function;
 import org.herasaf.xacml.core.policy.impl.ActionAttributeDesignatorType;
 import org.herasaf.xacml.core.policy.impl.ApplyType;
+import org.herasaf.xacml.core.policy.impl.AttributeDesignatorType;
 import org.herasaf.xacml.core.policy.impl.AttributeSelectorType;
 import org.herasaf.xacml.core.policy.impl.AttributeValueType;
 import org.herasaf.xacml.core.policy.impl.ConditionType;
@@ -33,8 +34,10 @@ import org.herasaf.xacml.core.policy.impl.SubjectAttributeDesignatorType;
 import org.herasaf.xacml.core.policy.impl.VariableReferenceType;
 import org.opensaml.xacml.policy.impl.ApplyTypeImpl;
 import org.opensaml.xacml.policy.impl.AttributeDesignatorTypeImpl;
+import org.opensaml.xacml.policy.impl.AttributeDesignatorTypeImplBuilder;
 import org.opensaml.xacml.policy.impl.AttributeSelectorTypeImpl;
 import org.opensaml.xacml.policy.impl.AttributeValueTypeImpl;
+import org.opensaml.xacml.policy.impl.ConditionTypeImplBuilder;
 import org.opensaml.xacml.policy.impl.FunctionTypeImpl;
 import org.opensaml.xacml.policy.impl.SubjectAttributeDesignatorTypeImpl;
 import org.opensaml.xacml.policy.impl.VariableReferenceTypeImpl;
@@ -154,6 +157,26 @@ public class ConditionXacmlBuilderImpl implements SimpleBuilder<ConditionType>,
 
 		return null;
 
+	}
+
+	public org.opensaml.xacml.policy.ConditionType create(ConditionType aInternalObject) {
+		var condition = new ConditionTypeImplBuilder().buildObject();
+
+		if (aInternalObject.getExpression() != null) {
+			var expression = new AttributeDesignatorTypeImplBuilder().buildObject();
+
+			if (aInternalObject.getExpression().getValue() instanceof AttributeDesignatorType) {
+				var attrDesign = (AttributeDesignatorType) aInternalObject.getExpression().getValue();
+				expression.setAttributeId(attrDesign.getAttributeId());
+				expression.setDataType(attrDesign.getDataType().getDatatypeURI());
+				expression.setIssuer(attrDesign.getIssuer());
+				expression.setMustBePresent(attrDesign.isMustBePresent());
+			}
+
+			condition.setExpression(expression);
+		}
+
+		return condition;
 	}
 
 	@Override

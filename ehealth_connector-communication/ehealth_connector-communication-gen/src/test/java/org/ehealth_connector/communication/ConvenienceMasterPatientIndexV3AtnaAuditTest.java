@@ -122,25 +122,34 @@ public class ConvenienceMasterPatientIndexV3AtnaAuditTest {
 				convenienceMasterPatientIndexV3Client.getContext(),
 				convenienceMasterPatientIndexV3Client.getAuditContext());
 
+
 		final FhirPatient patient = new FhirPatient();
-		final HumanName humanName = new HumanName().setFamily("Huber").addGiven("Franz");
+		final HumanName humanName = new HumanName().setFamily("Bauer-Maier").addGiven("Anton");
 		patient.getName().add(humanName);
 		final org.hl7.fhir.dstu3.model.Address address = new org.hl7.fhir.dstu3.model.Address().addLine("Testgasse 18")
 				.setPostalCode("1020").setCity("Wien").setState("AUT");
 		final Identifier identifier = new Identifier();
-		identifier.setValue("1630334473749");
+		identifier.setValue("1634793774730");
 		identifier.setSystem(FhirCommon.addUrnOid(homeCommunityOid));
 		patient.getIdentifier().add(identifier);
 
-		patient.setBirthDate(DateUtil.parseDateyyyyMMdd("19550224"));
+		final Identifier identifier2 = new Identifier();
+		identifier2.setValue("SPID-101");
+		identifier2.setSystem(spidEprOid);
+		patient.getIdentifier().add(identifier2);
+
+		patient.setBirthDate(DateUtil.parseDateyyyyMMdd("19500324"));
 		patient.getAddress().add(address);
 		patient.setGender(AdministrativeGender.MALE);
 		patient.getManagingOrganization().setResource(getScopingOrganization());
 
 		final FhirContext ctx = new FhirContext(FhirVersionEnum.DSTU3);
 		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
+		LOGGER.debug(encoded);
 
 		assertTrue(pixV3Query.updatePatient(patient, null));
+
+
 
 		String logContent = checkAuditLogging();
 		assertTrue(logContent.contains("<EventID csd-code=\"110110\""));

@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.xua.saml2;
 
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionsType;
 
@@ -86,5 +87,27 @@ public interface AssertionBuilder extends BaseBuilder<AssertionBuilder> {
 	 *  <!-- @formatter:on -->
 	 */
 	Assertion create();
+
+	/**
+	 *
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to create an instance of type AssertionType.</div>
+	 * <div class="de">Methode um eine Instanc des Typs AssertionType zu erstellen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param aInternalObject
+	 * <div class="en">the internal wrapped object of type AssertionType</div>
+	 * <div class="de">das Innere, gewrappte Object vom Typ AssertionType</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * @return the Object ot the type Assertion
+	 * <div class="en">the instance of type Assertion</div>
+	 * <div class="de">die erstellte Instanz vom Typ Assertion</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *  <!-- @formatter:on -->
+	 */
+	Assertion create(AssertionType aInternalObject);
 
 }

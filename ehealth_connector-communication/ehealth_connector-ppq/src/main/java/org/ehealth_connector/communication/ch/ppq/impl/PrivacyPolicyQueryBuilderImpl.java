@@ -106,9 +106,8 @@ public class PrivacyPolicyQueryBuilderImpl implements PrivacyPolicyQueryBuilder,
 		attribute.setDataType("urn:hl7-org:v3#II");
 
 		final AttributeValueType attributeValue = new AttributeValueTypeImplBuilder().buildObject();
-		attribute.getAttributeValues().add(attributeValue);
-
 		attributeValue.getUnknownXMLObjects().add((OpenSamlInstanceIdentifier) identifier);
+		attribute.getAttributeValues().add(attributeValue);
 
 		resource.getAttributes().add(attribute);
 		return this;

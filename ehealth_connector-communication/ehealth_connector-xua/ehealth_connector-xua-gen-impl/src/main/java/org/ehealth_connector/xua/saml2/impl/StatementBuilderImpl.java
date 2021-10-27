@@ -18,9 +18,12 @@ package org.ehealth_connector.xua.saml2.impl;
 
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.ehealth_connector.xua.saml2.SimpleBuilder;
+import org.herasaf.xacml.core.policy.impl.PolicyType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.xacml20.saml.assertion.ReferencedPoliciesType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.xacml20.saml.assertion.XACMLPolicyStatementType;
 import org.opensaml.xacml.policy.PolicySetType;
+import org.opensaml.xacml.profile.saml.impl.ReferencedPoliciesTypeImplBuilder;
+import org.opensaml.xacml.profile.saml.impl.XACMLPolicyStatementTypeImplBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -70,6 +73,42 @@ public class StatementBuilderImpl
 
 			retVal.setReferencedPolicies(referencedPoliciesType);
 		}
+
+		return retVal;
+	}
+
+	public org.opensaml.xacml.profile.saml.XACMLPolicyStatementType create(
+			org.openehealth.ipf.commons.ihe.xacml20.stub.xacml20.saml.assertion.XACMLPolicyStatementType aInternalObject) {
+		var retVal = new XACMLPolicyStatementTypeImplBuilder().buildObject();
+		
+		if(aInternalObject.getPolicyOrPolicySet() != null) {
+			for(Object obj : aInternalObject.getPolicyOrPolicySet()) {
+				if(obj instanceof PolicyType) {
+					var policy = (PolicyType) obj;		
+					retVal.getPolicies().add(new PolicyBuilderImpl().create(policy));	
+				} else if(obj instanceof org.herasaf.xacml.core.policy.impl.PolicySetType) {
+					var policySet = (org.herasaf.xacml.core.policy.impl.PolicySetType) obj;
+					retVal.getPolicySets().add(new PolicySetBuilderImpl().create(policySet));
+				}
+			}
+		}
+		
+		if (aInternalObject.getReferencedPolicies() != null) {
+			var referencedPoliciesType = new ReferencedPoliciesTypeImplBuilder().buildObject();
+
+			for (Object obj : aInternalObject.getReferencedPolicies().getPolicyOrPolicySet()) {
+				if (obj instanceof PolicyType) {
+					var policy = (PolicyType) obj;
+					retVal.getReferencedPolicies().getPolicies().add(new PolicyBuilderImpl().create(policy));
+				} else if (obj instanceof org.herasaf.xacml.core.policy.impl.PolicySetType) {
+					var policySet = (org.herasaf.xacml.core.policy.impl.PolicySetType) obj;
+					retVal.getReferencedPolicies().getPolicySets().add(new PolicySetBuilderImpl().create(policySet));
+				}
+			}
+
+			retVal.setReferencedPolicies(referencedPoliciesType);
+		}
+
 
 		return retVal;
 	}

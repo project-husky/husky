@@ -28,12 +28,19 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.ehealth_connector.xua.core.SecurityObject;
 import org.ehealth_connector.xua.saml2.Assertion;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeStatementType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeType;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AuthnStatementType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionsType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.NameIDType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.StatementAbstractType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectType;
+import org.opensaml.saml.common.SAMLVersion;
+import org.opensaml.saml.saml2.core.Issuer;
+import org.opensaml.saml.saml2.core.impl.AssertionBuilder;
+import org.opensaml.saml.saml2.core.impl.AttributeStatementBuilder;
+import org.opensaml.saml.saml2.core.impl.IssuerBuilder;
 import org.opensaml.xacml.profile.saml.XACMLPolicyStatementType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,6 +84,23 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 	}
 
 	/**
+	 * Instantiates a new AssertionImpl.
+	 *
+	 * @param aAssertion the Assertion
+	 */
+	protected AssertionImpl(AssertionType aAssertion) {
+		assertion = new AssertionBuilder().buildObject();
+
+		getStatements(aAssertion.getStatementOrAuthnStatementOrAuthzDecisionStatement());
+		getIssuer(aAssertion.getIssuer());
+		getConditions(aAssertion.getConditions());
+		getId(aAssertion.getID());
+		getIssueInstant(aAssertion.getIssueInstant());
+		getSubject(aAssertion.getSubject());
+		getVersion(aAssertion.getVersion());
+	}
+
+	/**
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.xua.saml2.Assertion#getAttributes()
@@ -99,6 +123,38 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 			this.statementOrAuthnStatementOrAuthzDecisionStatement.add(statement);
 		});
 		return this.statementOrAuthnStatementOrAuthzDecisionStatement;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.xua.saml2.Assertion#getAttributes()
+	 */
+	public void getStatements(List<StatementAbstractType> statements) {
+		if (this.assertion == null) {
+			this.assertion = new AssertionBuilder().buildObject();
+		}
+
+		for (StatementAbstractType statement : statements) {
+			if (statement instanceof org.openehealth.ipf.commons.ihe.xacml20.stub.xacml20.saml.assertion.XACMLPolicyStatementType) {
+				var policyStat = (org.openehealth.ipf.commons.ihe.xacml20.stub.xacml20.saml.assertion.XACMLPolicyStatementType) statement;
+				this.assertion.getStatements().add(new StatementBuilderImpl().create(policyStat));
+			} else if(statement instanceof AttributeStatementType) {
+				var attrStat = (AttributeStatementType) statement;
+				var retVal = new AttributeStatementBuilder().buildObject();
+				
+				for(Object obj: attrStat.getAttributeOrEncryptedAttribute()) {
+					if(obj instanceof AttributeType) {
+						retVal.getAttributes().add(new AttributeBuilderImpl().create((AttributeType) obj));
+					}
+				}
+				
+				this.assertion.getStatements().add(retVal);
+			} else if (statement instanceof AuthnStatementType) {
+				var attrStat = (AuthnStatementType) statement;
+				this.assertion.getAuthnStatements().add(new AuthnStatementBuilderImpl().create(attrStat));
+			}
+		}
 	}
 
 	/**
@@ -147,6 +203,12 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 		return this.conditions;
 	}
 
+	public void getConditions(ConditionsType conditions) {
+		if (conditions != null) {
+			this.assertion.setConditions(new ConditionsBuilderImpl().create(conditions));
+		}
+	}
+
 	public void getConditionsAudienceRestrictions() {
 		if (assertion.getConditions() != null && assertion.getConditions().getAudienceRestrictions() != null) {
 			assertion.getConditions().getAudienceRestrictions()
@@ -184,6 +246,10 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 		return assertion.getID();
 	}
 
+	public void getId(String id) {
+		this.assertion.setID(id);
+	}
+
 	/**
 	 * {@inheritDoc}
 	 *
@@ -209,6 +275,12 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 		return null;
 	}
 
+	public void getIssueInstant(XMLGregorianCalendar cal) {
+		if (cal != null) {
+			this.assertion.setIssueInstant(cal.toGregorianCalendar().toInstant());
+		}
+	}
+
 	/**
 	 *
 	 * {@inheritDoc}
@@ -230,6 +302,17 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 		return null;
 	}
 
+	public void getIssuer(NameIDType issuer) {
+		if (issuer != null) {
+			Issuer retVal = new IssuerBuilder().buildObject();
+			retVal.setValue(issuer.getValue());
+			retVal.setNameQualifier(issuer.getNameQualifier());
+			retVal.setSPNameQualifier(issuer.getSPNameQualifier());
+			retVal.setSPProvidedID(issuer.getSPProvidedID());
+			assertion.setIssuer(retVal);
+		}
+	}
+
 	/**
 	 * {@inheritDoc}
 	 *
@@ -243,6 +326,12 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 			return retVal;
 		}
 		return null;
+	}
+
+	public void getSubject(SubjectType subject) {
+		if (subject != null) {
+			this.assertion.setSubject(new SubjectBuilderImpl().create(subject));
+		}
 	}
 
 	/**
@@ -259,6 +348,10 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 			return retVal;
 		}
 		return "";
+	}
+
+	public void getVersion(String version) {
+		this.assertion.setVersion(SAMLVersion.valueOf(version));
 	}
 
 	/**

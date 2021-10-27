@@ -16,6 +16,8 @@
  */
 package org.ehealth_connector.xua.saml2;
 
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.protocol.StatusType;
+
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the StatusBuilder.</div>
@@ -67,5 +69,27 @@ public interface StatusBuilder extends SimpleBuilder<Status> {
 	 * <!-- @formatter:on -->
 	 */
 	StatusBuilder statusMessage(String aStatusMessage);
+
+	/**
+	 *
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to create an instance of type StatusType.</div>
+	 * <div class="de">Methode um eine Instanc des Typs StatusType zu erstellen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param aInternalObject
+	 * <div class="en">the internal wrapped object of type StatusType</div>
+	 * <div class="de">das Innere, gewrappte Object vom Typ StatusType</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * @return the Object ot the type StatusBuilder
+	 * <div class="en">the instance of type StatusBuilder</div>
+	 * <div class="de">die erstellte Instanz vom Typ StatusBuilder</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *  <!-- @formatter:on -->
+	 */
+	Status create(StatusType aInternalObject);
 
 }

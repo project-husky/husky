@@ -85,6 +85,11 @@ public class AttributeBuilderImpl implements AttributeBuilder,
 		return this.attributeImpl;
 	}
 
+	public org.opensaml.saml.saml2.core.Attribute create(AttributeType aInternalObject) {
+		this.attributeImpl = new AttributeImpl(aInternalObject);
+		return this.attributeImpl.getWrappedObject();
+	}
+
 	/**
 	 *
 	 * {@inheritDoc}

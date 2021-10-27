@@ -19,6 +19,11 @@ package org.ehealth_connector.xua.saml2.impl;
 import org.ehealth_connector.xua.core.SecurityObject;
 import org.ehealth_connector.xua.saml2.Status;
 import org.ehealth_connector.xua.saml2.StatusCode;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.protocol.StatusCodeType;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.protocol.StatusType;
+import org.opensaml.saml.saml2.core.impl.StatusBuilder;
+import org.opensaml.saml.saml2.core.impl.StatusCodeBuilder;
+import org.opensaml.saml.saml2.core.impl.StatusMessageBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -36,6 +41,12 @@ public class StatusImpl implements Status, SecurityObject<org.opensaml.saml.saml
 		status = aStatus;
 	}
 
+	protected StatusImpl(StatusType aStatus) {
+		status = new StatusBuilder().buildObject();
+		status.setStatusCode(getStatusCode(aStatus.getStatusCode()));
+		status.setStatusMessage(getStatusMessage(aStatus.getStatusMessage()));
+	}
+
 	/**
 	 * {@inheritDoc}
 	 *
@@ -50,6 +61,20 @@ public class StatusImpl implements Status, SecurityObject<org.opensaml.saml.saml
 		return StatusCode.VERSION_MISMATCH;
 	}
 
+	private org.opensaml.saml.saml2.core.StatusCode getStatusCode(StatusCodeType aStatusCode) {
+		var statusCode = new StatusCodeBuilder().buildObject();
+
+		if (aStatusCode.getValue() != null) {
+			statusCode.setValue(aStatusCode.getValue());
+		}
+
+		if (aStatusCode.getStatusCode() != null) {
+			statusCode.setStatusCode(getStatusCode(aStatusCode.getStatusCode()));
+		}
+
+		return statusCode;
+	}
+
 	/**
 	 * {@inheritDoc}
 	 *
@@ -58,9 +83,15 @@ public class StatusImpl implements Status, SecurityObject<org.opensaml.saml.saml
 	@Override
 	public String getStatusMessage() {
 		if (status.getStatusMessage() != null) {
-			return status.getStatusMessage().getMessage();
+			return status.getStatusMessage().getValue();
 		}
 		return "";
+	}
+
+	private org.opensaml.saml.saml2.core.StatusMessage getStatusMessage(String message) {
+		var statusMessage = new StatusMessageBuilder().buildObject();
+		statusMessage.setValue(message);
+		return statusMessage;
 	}
 
 	@Override

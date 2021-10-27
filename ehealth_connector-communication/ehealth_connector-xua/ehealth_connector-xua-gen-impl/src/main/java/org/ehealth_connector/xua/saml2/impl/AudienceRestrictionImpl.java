@@ -21,6 +21,8 @@ import java.util.List;
 
 import org.ehealth_connector.xua.core.SecurityObject;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AudienceRestrictionType;
+import org.opensaml.saml.saml2.core.impl.AudienceBuilder;
+import org.opensaml.saml.saml2.core.impl.AudienceRestrictionBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -39,6 +41,16 @@ public class AudienceRestrictionImpl extends AudienceRestrictionType implements
 	protected AudienceRestrictionImpl(
 			org.opensaml.saml.saml2.core.AudienceRestriction aInternalObject) {
 		wrappedObject = aInternalObject;
+	}
+
+	protected AudienceRestrictionImpl(AudienceRestrictionType aInternalObject) {
+		wrappedObject = new AudienceRestrictionBuilder().buildObject();
+
+		for (String audience : aInternalObject.getAudience()) {
+			var retVal = new AudienceBuilder().buildObject();
+			retVal.setURI(audience);
+			wrappedObject.getAudiences().add(retVal);
+		}
 	}
 
 	public List<String> getAudiences() {		

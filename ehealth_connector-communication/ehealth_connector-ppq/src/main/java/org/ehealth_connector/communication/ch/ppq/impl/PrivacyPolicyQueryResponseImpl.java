@@ -16,18 +16,19 @@
  */
 package org.ehealth_connector.communication.ch.ppq.impl;
 
-import java.io.StringWriter;
-
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQueryResponse;
-import org.ehealth_connector.communication.ch.ppq.impl.deserialization.ResponseDeserialiser;
 import org.ehealth_connector.xua.core.SecurityObject;
 import org.ehealth_connector.xua.exceptions.DeserializeException;
+import org.ehealth_connector.xua.saml2.impl.AssertionBuilderImpl;
+import org.ehealth_connector.xua.saml2.impl.StatusBuilderImpl;
+import org.ehealth_connector.xua.saml2.impl.StatusImpl;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.protocol.ResponseType;
+import org.opensaml.saml.saml2.core.Assertion;
 import org.opensaml.saml.saml2.core.Response;
+import org.opensaml.saml.saml2.core.impl.ResponseBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -47,16 +48,35 @@ public class PrivacyPolicyQueryResponseImpl
 	}
 
 	protected PrivacyPolicyQueryResponseImpl(ResponseType aInternalObject) throws JAXBException, DeserializeException {
-		final var marshaller = JAXBContext.newInstance(ResponseType.class).createMarshaller();
-		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);
-		marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
-		marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF8");
-		final var stringWriter = new StringWriter();
-		marshaller.marshal(aInternalObject, stringWriter);
 
-		var deserializer = new ResponseDeserialiser();
+		wrappedObject = new ResponseBuilder().buildObject();
+		wrappedObject.setStatus(
+				((StatusImpl) new StatusBuilderImpl().create(aInternalObject.getStatus())).getWrappedObject());
 
-		wrappedObject = deserializer.fromXmlString(stringWriter.toString());
+
+		for (Object assertion : aInternalObject.getAssertionOrEncryptedAssertion()) {
+			if (assertion instanceof AssertionType) {
+					wrappedObject.getAssertions()
+						.add((Assertion) new AssertionBuilderImpl().create((AssertionType) assertion)
+									.getWrappedObject());
+				}
+			}
+
+		/*
+		 * final var marshaller = JAXBContext .newInstance(ResponseType.class,
+		 * ObjectFactory.class,
+		 * org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.delegation.ObjectFactory.
+		 * class) .createMarshaller();
+		 * marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);
+		 * marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
+		 * marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF8"); final var
+		 * stringWriter = new StringWriter(); marshaller.marshal(aInternalObject,
+		 * stringWriter);
+		 * 
+		 * var deserializer = new ResponseDeserialiser();
+		 * 
+		 * wrappedObject = deserializer.fromXmlString(stringWriter.toString());
+		 */
 
 	}
 

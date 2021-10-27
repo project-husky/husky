@@ -27,6 +27,12 @@ package org.ehealth_connector.xua;
 public final class XUserAssertionConstantsCh {
 	public static final String CH_EPR_2017_ANNEX5_ADDENDUM2 = "http://bag.admin.ch/epr/2017/annex/5/addendum/2";
 
+	/** principal-id */
+	public static final String CH_PRINCIPALID = "urn:e-health-suisse:principal-id";
+
+	/** principal-name */
+	public static final String CH_PRINCIPAL_NAME = "urn:e-health-suisse:principal-name";
+
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Assertion role value for assistant.</div>

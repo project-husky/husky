@@ -50,4 +50,5 @@ public interface SecurityObjectBuilder<T, U> {
 	 *  <!-- @formatter:on -->
 	 */
 	U create(T aInternalObject);
+
 }

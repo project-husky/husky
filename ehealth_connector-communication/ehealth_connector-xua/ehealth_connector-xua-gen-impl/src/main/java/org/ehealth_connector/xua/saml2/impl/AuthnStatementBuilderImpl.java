@@ -73,6 +73,10 @@ public class AuthnStatementBuilderImpl implements AuthnStatementBuilder,
 		return new AuthnStatementImpl(aAuthnStatement);
 	}
 
+	public org.opensaml.saml.saml2.core.AuthnStatement create(AuthnStatementType aAuthnStatement) {
+		return new AuthnStatementImpl(aAuthnStatement).getWrappedObject();
+	}
+
 	@Override
 	public AuthnStatementBuilder sessionIndex(String aSessionIndex) {
 		if (aSessionIndex != null) {

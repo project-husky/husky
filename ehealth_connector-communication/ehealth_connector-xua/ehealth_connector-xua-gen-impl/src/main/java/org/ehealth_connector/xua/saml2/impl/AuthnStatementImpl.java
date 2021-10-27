@@ -30,6 +30,9 @@ import org.ehealth_connector.xua.core.SecurityObject;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AuthnContextType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AuthnStatementType;
 import org.opensaml.saml.saml2.core.AuthnContextClassRef;
+import org.opensaml.saml.saml2.core.impl.AuthnContextBuilder;
+import org.opensaml.saml.saml2.core.impl.AuthnContextClassRefBuilder;
+import org.opensaml.saml.saml2.core.impl.AuthnStatementBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,9 +44,8 @@ import org.slf4j.LoggerFactory;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class AuthnStatementImpl
-		extends AuthnStatementType implements SecurityObject<org.opensaml.saml.saml2.core.AuthnStatement>
-{
+public class AuthnStatementImpl extends AuthnStatementType
+		implements SecurityObject<org.opensaml.saml.saml2.core.AuthnStatement> {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(AuthnStatementImpl.class);
 
@@ -62,6 +64,45 @@ public class AuthnStatementImpl
 	 */
 	protected AuthnStatementImpl(org.opensaml.saml.saml2.core.AuthnStatement aAuthnStatement) {
 		authnStatement = aAuthnStatement;
+	}
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Default constructor to instanciate the object.</div>
+	 * <div class="de">Default Konstruktor für die Instanziierung des Objekts.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * <!-- @formatter:on -->
+	 *
+	 * @param aAuthnStatement the AuthnStatement
+	 */
+	protected AuthnStatementImpl(AuthnStatementType aAuthnStatement) {
+		authnStatement = new AuthnStatementBuilder().buildObject();
+		var authnContext = new AuthnContextBuilder().buildObject();
+		var authnContextClassRef = new AuthnContextClassRefBuilder().buildObject();
+
+		for (JAXBElement<?> jaxbElement : aAuthnStatement.getAuthnContext().getContent()) {
+			if (jaxbElement != null && "AuthnContextClassRef".equalsIgnoreCase(jaxbElement.getName().getLocalPart())) {
+				authnContextClassRef.setURI((String) jaxbElement.getValue());
+			}
+		}
+
+		authnContext.setAuthnContextClassRef(authnContextClassRef);
+		authnStatement.setAuthnContext(authnContext);
+
+		if (aAuthnStatement.getAuthnInstant() != null) {
+			XMLGregorianCalendar xmlGregCal = aAuthnStatement.getAuthnInstant();
+			authnStatement.setAuthnInstant(xmlGregCal.toGregorianCalendar().toInstant());
+		}
+
+		authnStatement.setSessionIndex(aAuthnStatement.getSessionIndex());
+
+		if (aAuthnStatement.getSessionNotOnOrAfter() != null) {
+			XMLGregorianCalendar xmlGregCal = aAuthnStatement.getSessionNotOnOrAfter();
+			authnStatement.setSessionNotOnOrAfter(xmlGregCal.toGregorianCalendar().toInstant());
+		}
+
 	}
 
 	/**

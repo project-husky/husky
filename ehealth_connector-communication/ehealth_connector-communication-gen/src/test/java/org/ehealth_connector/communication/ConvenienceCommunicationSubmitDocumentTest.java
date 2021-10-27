@@ -125,7 +125,7 @@ public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 
 		try {
 			dest.setUri(new URI(
-					"https://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_init_gw_testing/rep/prb"));
+					"http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_init_gw_testing/rep/prb"));
 		} catch (final URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -196,7 +196,7 @@ public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 
 		try {
 			dest.setUri(new URI(
-					"https://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_init_gw_testing/rep/prb"));
+					"http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_init_gw_testing/rep/prb"));
 		} catch (final URISyntaxException e) {
 			e.printStackTrace();
 		}
