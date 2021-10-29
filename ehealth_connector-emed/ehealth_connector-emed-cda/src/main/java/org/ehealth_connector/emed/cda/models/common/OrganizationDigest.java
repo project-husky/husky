@@ -1,4 +1,0 @@
-package org.ehealth_connector.emed.cda.models.common;
-
-public class OrganizationDigest {
-}

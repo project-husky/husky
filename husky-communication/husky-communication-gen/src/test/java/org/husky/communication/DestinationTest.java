@@ -1,0 +1,124 @@
+/*
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ *
+ * Source code, documentation and other resources have been contributed by various people.
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
+ * For exact developer information, please refer to the commit history of the forge.
+ *
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ *
+ */
+
+package org.husky.communication;
+
+
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.net.URISyntaxException;
+
+import org.husky.common.communication.Destination;
+import org.husky.common.utils.Util;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+public class DestinationTest {
+
+	public static final String NIST = "http://test.url";
+
+	// NIST SECURED Repository (query interface)
+	public static final String NIST_SECURED = "https://test.url";
+	// Keystore and Truststore for secured communication (in this example, we
+	// use one keystore file for those two)
+	public static final String KEY_STORE = "docConsumer/security/keystore.jks";
+	public static final String KEY_STORE_PASS = "nistbill";
+	public static final String TRUST_STORE = "docConsumer/security/keystore.jks";
+	public static final String TRUST_STORE_PASS = "nistbill";
+
+	// The ID of your Organization
+	public static final String ORGANIZATIONAL_ID = "1.3.6.1.4.1.21367.2010.1.2.666";
+
+	// One PDF and one CDA Document that will be transfered
+	public static final String pdfFilePath = "./rsc/patientconsent.pdf";
+	public static final String cdaFilePath = "./rsc/CDA-CH-VACD_Impfausweis.xml";
+
+	java.net.URI repUri = null;
+	java.net.URI u1 = null;
+	java.net.URI u2 = null;
+
+	@BeforeEach
+	public void init() {
+		try {
+			repUri = new java.net.URI(NIST_SECURED);
+			u1 = new java.net.URI("https://foo.bar:9090");
+			u2 = new java.net.URI("http://eheahlt-connector.org");
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testKeyStoreConstructor() {
+		final String keystore = Util.extractFileFromResource(KEY_STORE);
+
+		Destination dest = new Destination(ORGANIZATIONAL_ID, repUri, keystore, KEY_STORE_PASS);
+		assertEquals(ORGANIZATIONAL_ID, dest.getSenderOrganizationalOid());
+		assertEquals(repUri, dest.getUri());
+		assertEquals(keystore, dest.getKeyStore());
+		assertEquals(KEY_STORE_PASS, dest.getKeyStorePassword());
+		assertEquals(keystore, dest.getTrustStore());
+		assertEquals(KEY_STORE_PASS, dest.getTrustStorePassword());
+	}
+
+	@Test
+	public void testKeyStoreTrustStoreConstructor() {
+		final String keystore = Util.extractFileFromResource(KEY_STORE);
+		final String truststore = Util.extractFileFromResource(TRUST_STORE);
+
+		Destination dest = new Destination(ORGANIZATIONAL_ID, repUri, keystore, KEY_STORE_PASS,
+				truststore, TRUST_STORE_PASS);
+		assertEquals(ORGANIZATIONAL_ID, dest.getSenderOrganizationalOid());
+		assertEquals(repUri, dest.getUri());
+		assertEquals(keystore, dest.getKeyStore());
+		assertEquals(KEY_STORE_PASS, dest.getKeyStorePassword());
+		assertEquals(truststore, dest.getTrustStore());
+		assertEquals(TRUST_STORE_PASS, dest.getTrustStorePassword());
+	}
+
+	@Test
+	public void testSetterGetter() {
+		Destination dest = new Destination();
+		final String keystore = Util.extractFileFromResource(KEY_STORE);
+
+		dest.setKeyStore(keystore);
+		assertEquals(keystore, dest.getKeyStore());
+		dest.setKeyStorePassword(KEY_STORE_PASS);
+		assertEquals(KEY_STORE_PASS, dest.getKeyStorePassword());
+		dest.setUri(u1);
+		assertEquals(u1, dest.getUri());
+		dest.setUri(u2);
+		assertEquals(u2, dest.getUri());
+		dest.setReceiverApplicationOid("1");
+		assertEquals("1", dest.getReceiverApplicationOid());
+		dest.setReceiverFacilityOid(ORGANIZATIONAL_ID);
+		assertEquals(ORGANIZATIONAL_ID, dest.getReceiverFacilityOid());
+		dest.setUri(repUri);
+		assertEquals(repUri, dest.getUri());
+		dest.setSenderApplicationOid(ORGANIZATIONAL_ID);
+		assertEquals(ORGANIZATIONAL_ID, dest.getSenderApplicationOid());
+		dest.setSenderOrganizationalOid(ORGANIZATIONAL_ID);
+		assertEquals(ORGANIZATIONAL_ID, dest.getSenderOrganizationalOid());
+
+		final String truststore = Util.extractFileFromResource(TRUST_STORE);
+		dest.setTrustStore(truststore);
+		assertEquals(truststore, dest.getTrustStore());
+		dest.setTrustStorePassword(TRUST_STORE_PASS);
+		assertEquals(TRUST_STORE_PASS, dest.getTrustStorePassword());
+	}
+}

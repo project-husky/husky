@@ -1,0 +1,95 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>husky-communication-ch</artifactId>
+	<name>eHealth Connector Communication CH</name>
+
+	<parent>
+		<groupId>org.husky.communication</groupId>
+		<artifactId>husky-communication</artifactId>
+		<version>2.0-ALPHA</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.husky.communication</groupId>
+			<artifactId>husky-communication-gen</artifactId>
+			<version>2.0-ALPHA</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>org.opensaml</groupId>
+			<artifactId>opensaml-xacml-saml-impl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.opensaml</groupId>
+			<artifactId>opensaml-xacml-impl</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.opensaml</groupId>
+			<artifactId>opensaml-saml-impl</artifactId>
+		</dependency>
+
+		<!-- test stuff -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.husky.communication</groupId>
+			<artifactId>husky-communication-gen</artifactId>
+			<version>2.0-ALPHA</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.husky.common</groupId>
+			<artifactId>husky-common-gen</artifactId>
+			<version>2.0-ALPHA</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>ehc4dotnet-disabled</id>
+			<!-- activation> <os> <family>Windows</family> </os> </activation -->
+			<!-- Converts the ehealthconnector library to a .net version using IKVMC -->
+			<build>
+				<plugins>
+
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+
+						<configuration>
+							<target>
+								<exec executable="ikvmc">
+									<arg value="-target:library" />
+									<arg value="-out:${project.build.directory}/${project.artifactId}-${project.version}.dll" />
+									<arg value="${project.build.directory}/${project.artifactId}-${project.version}.jar" />
+								</exec>
+							</target>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>

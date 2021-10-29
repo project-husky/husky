@@ -1,0 +1,20 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.husky.common</groupId>
+	<artifactId>husky-common</artifactId>
+	<packaging>pom</packaging>
+	<name>eHealth Connector project Common</name>
+
+	<parent>
+		<groupId>org.husky</groupId>
+		<artifactId>husky-api</artifactId>
+		<version>2.0-ALPHA</version>
+	</parent>
+
+	<modules>
+		<module>husky-common-gen</module>
+		<module>husky-common-ch</module>
+	</modules>
+</project>

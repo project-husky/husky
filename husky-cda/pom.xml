@@ -1,0 +1,22 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.husky.cda</groupId>
+	<artifactId>husky-cda</artifactId>
+	<name>eHealth Connector CDA</name>
+	<packaging>pom</packaging>
+
+	<parent>
+		<groupId>org.husky</groupId>
+		<artifactId>husky-api</artifactId>
+		<version>2.0-ALPHA</version>
+	</parent>
+
+	<modules>
+		<module>husky-cda-gen</module>
+		<module>husky-cda-ch</module>
+		<module>husky-cda-validation</module>
+	</modules>
+
+</project>

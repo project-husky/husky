@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.husky</groupId>
+		<artifactId>husky-api</artifactId>
+		<version>2.0-ALPHA</version>
+	</parent>
+	<groupId>org.husky.emed</groupId>
+	<artifactId>husky-emed</artifactId>
+	<packaging>pom</packaging>
+	<name>eHealth Connector eMedication Module</name>
+	<modules>
+		<module>husky-emed-common</module>
+		<module>husky-emed-cda</module>
+		<module>husky-emed-fhir</module>
+		<module>husky-emed-conversion</module>
+	</modules>
+</project>

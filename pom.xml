@@ -2,13 +2,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.ehealth_connector</groupId>
-	<artifactId>ehealth_connector-api</artifactId>
+	<groupId>org.husky</groupId>
+	<artifactId>husky-api</artifactId>
 	<version>2.0-ALPHA</version>
 	<url>https://gitlab.com/ehealth-connector/api/wikis/Home</url>
-	<name>eHealth Connector main Git project Api</name>
+	<name>Husky main Git project Api</name>
 	<packaging>pom</packaging>
-	<description>The eHealthConnector (eHC) is a convenience API for IHE transactions and CDA documents. It supports functionalities for cross-enterprise sharing of documents and master patient index (MPI) connection using IHE transactions and also supports CDA content profiles. It allows easy access and conformity to a local eHealth trust space, such as for example Switzerland or Ausria.	The eHC is built on the basis of the OHT IHE profiles.</description>
+	<description>The husky is a convenience API for IHE transactions and CDA documents. It supports functionalities for cross-enterprise sharing of documents and master patient index (MPI) connection using IHE transactions and also supports CDA content profiles. It allows easy access and conformity to a local eHealth trust space, such as for example Switzerland or Ausria.	The husky is built on the basis of the eHealth connector.</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -38,12 +38,12 @@
 	</scm>
 
 	<modules>
-		<module>ehealth_connector-cda</module>
-		<module>ehealth_connector-communication</module>
-		<module>ehealth_connector-validation</module>
-		<module>ehealth_connector-fhir</module>
-		<module>ehealth_connector-common</module>
-        <module>ehealth_connector-emed</module>
+		<module>husky-cda</module>
+		<module>husky-communication</module>
+		<module>husky-validation</module>
+		<module>husky-fhir</module>
+		<module>husky-common</module>
+        <module>husky-emed</module>
 	</modules>
 
 	<dependencyManagement>
@@ -369,8 +369,8 @@
 			</dependency>
 
 			<dependency>
-				<groupId>org.ehealth_connector.common</groupId>
-				<artifactId>ehealth_connector-common-gen</artifactId>
+				<groupId>org.husky.common</groupId>
+				<artifactId>husky-common-gen</artifactId>
 				<version>2.0-ALPHA</version>
 				<type>test-jar</type>
 				<scope>test</scope>
@@ -753,7 +753,7 @@
 		<url>https://gitlab.com/groups/ehealth-connector/-/issues</url>
 	</issueManagement>
 	<organization>
-		<name>eHealth Connector</name>
+		<name>Husky</name>
 		<url>https://gitlab.com/ehealth-connector</url>
 	</organization>
 
