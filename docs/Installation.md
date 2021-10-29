@@ -21,6 +21,7 @@ Before you can get started, your system must meet the following requirements:
 
 1. Right click on the project and select maven and Update Project.
 2. Next, add a new Maven build configuration. Again, right-click on the project folder and select Run as and Run Configurations
-3. In the next window you should set your Base directory by clicking the Workspace button.
-4. In the next window, select the desired directory and click OK.
-5. Make sure that the goals field contains the text clean install. Click Apply and afterward Run.
+3. Next, please click the button to create new maven build configuration
+4. In the next window you should set your Base directory by clicking the Workspace button.
+5. In the next window, select the desired directory and click OK.
+6. Make sure that the goals field contains the text clean install. Click Apply and afterward Run.
