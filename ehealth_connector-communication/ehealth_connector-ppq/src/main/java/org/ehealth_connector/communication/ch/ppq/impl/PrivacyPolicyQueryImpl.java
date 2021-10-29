@@ -18,6 +18,7 @@ package org.ehealth_connector.communication.ch.ppq.impl;
 
 import java.util.Calendar;
 
+import org.ehealth_connector.common.ch.ChEpr;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQuery;
 import org.ehealth_connector.xua.core.SecurityObject;
 import org.ehealth_connector.xua.hl7v3.InstanceIdentifier;

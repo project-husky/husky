@@ -43,6 +43,7 @@
 		<module>ehealth_connector-validation</module>
 		<module>ehealth_connector-fhir</module>
 		<module>ehealth_connector-common</module>
+        <module>ehealth_connector-emed</module>
 	</modules>
 
 	<dependencyManagement>
@@ -345,6 +346,11 @@
 			<dependency>
 				<groupId>org.opensaml</groupId>
 				<artifactId>opensaml-xacml-impl</artifactId>
+				<version>${opensaml.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.opensaml</groupId>
+				<artifactId>opensaml-storage-impl</artifactId>
 				<version>${opensaml.version}</version>
 			</dependency>
 
