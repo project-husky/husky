@@ -14,7 +14,7 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.husky.communication.ch.ppq.hl7v3;
+package org.husky.xua.communication.xua.impl.ch;
 
 import org.husky.xua.hl7v3.PurposeOfUse;
 import org.husky.xua.hl7v3.impl.PurposeOfUseBuilder;
@@ -36,11 +36,11 @@ public abstract class PurposeOfUseChImpl {
 	 */
 	public static PurposeOfUse AUTO() {
 		return createPurposeOfUse(
-				org.husky.communication.ch.ppq.epr.enums.PurposeOfUse.AUTOMATIC_UPLOAD);
+				org.husky.xua.communication.xua.impl.ch.PurposeOfUse.AUTOMATIC_UPLOAD);
 	}
 
 	private static PurposeOfUse createPurposeOfUse(
-			org.husky.communication.ch.ppq.epr.enums.PurposeOfUse code) {
+			org.husky.xua.communication.xua.impl.ch.PurposeOfUse code) {
 		return new PurposeOfUseBuilder().code(code.getCodeValue())
 				.codeSystem(code.getCodeSystemId()).codeSystemName(code.getValueSetName())
 				.displayName(code.getDisplayName()).buildObject();
@@ -53,7 +53,7 @@ public abstract class PurposeOfUseChImpl {
 	 */
 	public static PurposeOfUse EMER() {
 		return createPurposeOfUse(
-				org.husky.communication.ch.ppq.epr.enums.PurposeOfUse.EMERGENCY_ACCESS);
+				org.husky.xua.communication.xua.impl.ch.PurposeOfUse.EMERGENCY_ACCESS);
 	}
 
 	/**
@@ -63,7 +63,7 @@ public abstract class PurposeOfUseChImpl {
 	 */
 	public static PurposeOfUse NORM() {
 		return createPurposeOfUse(
-				org.husky.communication.ch.ppq.epr.enums.PurposeOfUse.NORMAL_ACCESS);
+				org.husky.xua.communication.xua.impl.ch.PurposeOfUse.NORMAL_ACCESS);
 	}
 
 }

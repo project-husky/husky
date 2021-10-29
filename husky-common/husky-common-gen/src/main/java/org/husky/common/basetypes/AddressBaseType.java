@@ -28,7 +28,7 @@ import org.husky.common.utils.Util;
  * <div class="en">This class provides the basic information for a postal
  * address according to the HL7 address entity. This class does not have any
  * foreign framework dependencies and is therefore one of the base elements of
- * the eHealth Connector.<div>
+ * the Husky.<div>
  *
  * <div class="de">Diese Klasse enthält die Basisinformationen für eine
  * Postanschrift gemäss der HL7 V3-Adressentität. Diese Klasse hat keine fremden

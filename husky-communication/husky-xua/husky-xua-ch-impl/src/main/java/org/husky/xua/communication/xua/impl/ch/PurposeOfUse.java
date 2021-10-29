@@ -14,7 +14,7 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.husky.communication.ch.ppq.epr.enums;
+package org.husky.xua.communication.xua.impl.ch;
 
 import java.util.HashMap;
 import java.util.Map;

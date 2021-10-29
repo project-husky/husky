@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.husky.cda</groupId>
 	<artifactId>husky-cda</artifactId>
-	<name>eHealth Connector CDA</name>
+	<name>Husky CDA</name>
 	<packaging>pom</packaging>
 
 	<parent>

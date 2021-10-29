@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.husky.emed.cda</groupId>
     <artifactId>husky-emed-cda</artifactId>
-    <name>eHealth Connector eMedication CDA</name>
+    <name>Husky eMedication CDA</name>
 
     <parent>
         <groupId>org.husky.emed</groupId>

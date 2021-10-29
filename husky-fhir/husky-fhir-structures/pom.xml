@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.husky.fhir.structures</groupId>
 	<artifactId>husky-fhir-structures</artifactId>
-	<name>eHealth Connector FHIR Structures</name>
+	<name>Husky FHIR Structures</name>
 
 	<parent>
 		<groupId>org.husky.fhir</groupId>

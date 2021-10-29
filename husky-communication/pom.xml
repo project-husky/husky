@@ -8,7 +8,7 @@
   <groupId>org.husky.communication</groupId>
   <artifactId>husky-communication</artifactId>
   <packaging>pom</packaging>
-  <name>eHealth Connector Communication</name>
+  <name>Husky Communication</name>
   <modules>
   	<module>husky-communication-gen</module>
   	<module>husky-communication-ch</module>

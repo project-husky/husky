@@ -375,7 +375,7 @@ public class SubmissionSetMetadata {
 		if ((ohtSubmissionSetType.getUniqueId() == null)
 				|| (ohtSubmissionSetType.getSourceId() == null)) {
 
-			// This is the eHealth Connector Root OID
+			// This is the Husky Root OID
 			// default value just in case...
 			final String organizationalId = EhcVersions.getCurrentVersion().getOid();
 

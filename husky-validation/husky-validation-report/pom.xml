@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.husky.validation.report</groupId>
 	<artifactId>husky-validation-report</artifactId>
-	<name>eHealth Connector Validation Report</name>
+	<name>Husky Validation Report</name>
 
 	<parent>
 		<groupId>org.husky.validation</groupId>

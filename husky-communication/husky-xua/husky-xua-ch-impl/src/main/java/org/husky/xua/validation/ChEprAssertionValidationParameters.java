@@ -1,10 +1,9 @@
 package org.husky.xua.validation;
 
-import java.util.List;
-
-import org.husky.communication.ch.ppq.epr.enums.PurposeOfUse;
-
-import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.*;
+import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.COND_INFIX;
+import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.SC_INFIX;
+import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.STD_PREFIX;
+import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.STMT_INFIX;
 
 /**
  * Parameter keys used to store and retrieve dynamic parameters within a

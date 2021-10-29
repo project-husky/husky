@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>husky-common-gen</artifactId>
-	<name>eHealth Connector module Common Generic</name>
+	<name>Husky module Common Generic</name>
 	<description>Common and country independent stuff</description>
 
 	<parent>

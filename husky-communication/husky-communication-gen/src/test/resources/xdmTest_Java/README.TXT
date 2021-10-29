@@ -1,5 +1,5 @@
 Vendor name: Open Source
-Product: eHealth Connector - http://ehealth-connector.org
+Product: Husky - http://ehealth-connector.org
 Module: Convenience API
 Version: EHealthConnectorRxxxxxx, Release Date todo release date
 Contact info: See http://sourceforge.net/p/ehealthconnector/wiki/Team

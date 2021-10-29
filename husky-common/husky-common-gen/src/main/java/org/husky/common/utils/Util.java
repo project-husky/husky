@@ -108,7 +108,7 @@ import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
 /**
- * Helper methods for the eHealth Connector and CDA.
+ * Helper methods for the Husky and CDA.
  */
 @Deprecated(forRemoval = true)
 public class Util {
@@ -1318,10 +1318,10 @@ public class Util {
 
 	/**
 	 * <div class="en">Gets a temp folder for output files. If you set an
-	 * environment variable with the name 'eHCTempPath' the eHealth Connector
+	 * environment variable with the name 'eHCTempPath' the Husky
 	 * will use the path specified in this environment variable. If no such
 	 * environment variable is set, it will try to use /temp. If the path is not
-	 * writable the eHealth Connector will use the system temp folder.
+	 * writable the Husky will use the system temp folder.
 	 *
 	 * @return path to temp folder</div> <div class="de"></div>
 	 *         <div class="fr"></div>

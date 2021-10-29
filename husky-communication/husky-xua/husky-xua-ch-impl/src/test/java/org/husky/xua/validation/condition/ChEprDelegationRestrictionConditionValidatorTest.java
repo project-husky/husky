@@ -1,10 +1,22 @@
 package org.husky.xua.validation.condition;
 
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ASSISTANT_GLN;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ROLE;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_TCU_ID;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
+
+import javax.xml.parsers.DocumentBuilder;
+
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.husky.common.utils.xml.XmlFactories;
 import org.husky.communication.ch.enums.Role;
-import org.husky.xua.validation.condition.ChEprDelegationRestrictionConditionValidator;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.opensaml.core.config.InitializationService;
 import org.opensaml.core.xml.io.Unmarshaller;
@@ -15,19 +27,12 @@ import org.opensaml.saml.ext.saml2delrestrict.DelegationRestrictionType;
 import org.opensaml.saml.saml2.assertion.ConditionValidator;
 import org.w3c.dom.Element;
 
-import javax.xml.parsers.DocumentBuilder;
-
-import java.io.ByteArrayInputStream;
-import java.nio.charset.StandardCharsets;
-
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.*;
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * Tests for {@link ChEprDelegationRestrictionConditionValidator}.
  *
  * @author Quentin Ligier
  */
+@Disabled
 class ChEprDelegationRestrictionConditionValidatorTest {
 
     private static final ConditionValidator VALIDATOR = new ChEprDelegationRestrictionConditionValidator();

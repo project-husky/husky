@@ -30,7 +30,7 @@ import org.husky.common.utils.Util;
 /**
  * <div class="en">This class provides the basic information for a code
  * according to HL7. This class does not have any foreign framework dependencies
- * and is therefore one of the base elements of the eHealth Connector. Note:
+ * and is therefore one of the base elements of the Husky. Note:
  * qualifiers not supported, yet.<div>
  *
  * <div class="de">Diese Klasse enthält die BasisCodeBaseTypeinformationen für

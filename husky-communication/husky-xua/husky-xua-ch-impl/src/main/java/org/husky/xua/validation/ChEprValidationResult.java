@@ -1,15 +1,26 @@
 package org.husky.xua.validation;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.communication.ch.enums.Role;
-import org.husky.communication.ch.ppq.epr.enums.PurposeOfUse;
-import org.opensaml.saml.common.assertion.ValidationContext;
-import org.opensaml.saml.common.assertion.ValidationResult;
-
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.*;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ASSISTANT_GLN;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ASSISTANT_NAME;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_AUDIENCE;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_HOME_COMMUNITY_ID;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ORGANIZATIONS_ID;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ORGANIZATIONS_NAME;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_PATIENT_EPR_SPID;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_PURPOSE_OF_USE;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_RESPONSIBLE_SUBJECT_ID;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ROLE;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_SUBJECT_NAME;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_TCU_ID;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.husky.communication.ch.enums.Role;
+import org.husky.xua.communication.xua.impl.ch.PurposeOfUse;
+import org.opensaml.saml.common.assertion.ValidationContext;
+import org.opensaml.saml.common.assertion.ValidationResult;
 
 /**
  *

@@ -5,7 +5,7 @@
 	<groupId>org.husky.validation</groupId>
 	<artifactId>husky-validation</artifactId>
 	<packaging>pom</packaging>
-	<name>eHealth Connector Validation</name>
+	<name>Husky Validation</name>
 
 	<parent>
 		<groupId>org.husky</groupId>

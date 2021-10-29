@@ -30,7 +30,7 @@ import java.util.List;
 
 /**
  * This class provides the basic information for a code according to HL7. This class does not have any foreign framework
- * dependencies and is therefore one of the base elements of the eHealth Connector. Note: qualifiers not supported, yet.
+ * dependencies and is therefore one of the base elements of the Husky. Note: qualifiers not supported, yet.
  */
 public class CodeBaseType implements Serializable {
 

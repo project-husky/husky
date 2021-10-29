@@ -567,7 +567,7 @@ public class ConvenienceCommunication extends CamelService {
 
 				if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
 
-					// This is the eHealth Connector Root OID
+					// This is the Husky Root OID
 					// default value just in case...
 					String organizationalId = EhcVersions.getCurrentVersion().getOid();
 
@@ -613,7 +613,7 @@ public class ConvenienceCommunication extends CamelService {
 
 				if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
 
-					// This is the eHealth Connector Root OID
+					// This is the Husky Root OID
 					// default value just in case...
 					String organizationalId = EhcVersions.getCurrentVersion().getOid();
 

@@ -78,7 +78,7 @@
 					<xsd:documentation>
 						URL of the download page.
 						This parameter is used for Online-CDA-Validators only.
-						No use of this in the eHealth Connector CDA Validation.
+						No use of this in the Husky CDA Validation.
 					</xsd:documentation>
 				</xsd:annotation>
 			</xsd:element>
@@ -87,7 +87,7 @@
 					<xsd:documentation>
 						Name of the JQuery theme to use (without extension).
 						This parameter is used for Online-CDA-Validators only.
-						No use of this in the eHealth Connector CDA Validation.
+						No use of this in the Husky CDA Validation.
 					</xsd:documentation>
 				</xsd:annotation>
 			</xsd:element>

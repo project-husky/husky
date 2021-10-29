@@ -11,11 +11,11 @@
 	<groupId>org.husky.emed</groupId>
 	<artifactId>husky-emed</artifactId>
 	<packaging>pom</packaging>
-	<name>eHealth Connector eMedication Module</name>
+	<name>Husky eMedication Module</name>
 	<modules>
-		<module>husky-emed-common</module>
+		<!-- <module>husky-emed-common</module> -->
 		<module>husky-emed-cda</module>
-		<module>husky-emed-fhir</module>
+		<!-- <module>husky-emed-fhir</module> -->
 		<module>husky-emed-conversion</module>
 	</modules>
 </project>

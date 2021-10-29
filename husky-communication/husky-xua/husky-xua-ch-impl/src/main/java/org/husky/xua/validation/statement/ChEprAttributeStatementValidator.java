@@ -1,9 +1,37 @@
 package org.husky.xua.validation.statement;
 
-import com.google.common.annotations.VisibleForTesting;
+import static org.husky.common.enums.CodeSystems.SwissEprSpid;
+import static org.husky.communication.ch.enums.Role.ASSISTANT;
+import static org.husky.communication.ch.enums.Role.DOCUMENT_ADMINISTRATOR;
+import static org.husky.communication.ch.enums.Role.HEALTHCARE_PROFESSIONAL;
+import static org.husky.communication.ch.enums.Role.PATIENT;
+import static org.husky.communication.ch.enums.Role.POLICY_ADMINISTRATOR;
+import static org.husky.communication.ch.enums.Role.REPRESENTATIVE;
+import static org.husky.communication.ch.enums.Role.TECHNICAL_USER;
+import static org.husky.xua.communication.xua.XUserAssertionConstants.IHE_XCA_HOMECOMMUNITYID;
+import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_ORGANISATION;
+import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_ORGANIZATIONID;
+import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_PURPOSEOFUSE;
+import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_RESOURCEID;
+import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_SUBJECTID;
+import static org.husky.xua.communication.xua.impl.ch.PurposeOfUse.AUTOMATIC_UPLOAD;
+import static org.husky.xua.communication.xua.impl.ch.PurposeOfUse.EMERGENCY_ACCESS;
+import static org.husky.xua.communication.xua.impl.ch.PurposeOfUse.NORMAL_ACCESS;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_HOME_COMMUNITY_ID;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ORGANIZATIONS_ID;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ORGANIZATIONS_NAME;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_PATIENT_EPR_SPID;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_PURPOSE_OF_USE;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_SUBJECT_NAME;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import javax.xml.namespace.QName;
 
 import org.husky.communication.ch.enums.Role;
-import org.husky.communication.ch.ppq.epr.enums.PurposeOfUse;
+import org.husky.xua.communication.xua.impl.ch.PurposeOfUse;
 import org.husky.xua.hl7v3.impl.AbstractImpl;
 import org.husky.xua.hl7v3.impl.PurposeOfUseImpl;
 import org.husky.xua.validation.ChEprAssertionValidationParameters;
@@ -17,16 +45,7 @@ import org.opensaml.saml.saml2.core.AttributeStatement;
 import org.opensaml.saml.saml2.core.Statement;
 import org.opensaml.saml.saml2.core.impl.AttributeValueImpl;
 
-import javax.xml.namespace.QName;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import static org.husky.common.enums.CodeSystems.SwissEprSpid;
-import static org.husky.communication.ch.enums.Role.*;
-import static org.husky.communication.ch.ppq.epr.enums.PurposeOfUse.*;
-import static org.husky.xua.communication.xua.XUserAssertionConstants.*;
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.*;
+import com.google.common.annotations.VisibleForTesting;
 
 /**
  * Validator used to validate {@link Statement}s within a given {@link Assertion} in the CH-EPR context.

@@ -1,11 +1,21 @@
 package org.husky.xua.validation;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.CLOCK_SKEW;
+
+import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.xml.parsers.DocumentBuilder;
+
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.utils.xml.XmlFactories;
 import org.husky.communication.ch.enums.Role;
-import org.husky.xua.validation.ChEprAssertionValidator;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.opensaml.core.config.InitializationService;
 import org.opensaml.core.xml.io.Unmarshaller;
@@ -14,15 +24,7 @@ import org.opensaml.saml.common.assertion.ValidationResult;
 import org.opensaml.saml.saml2.core.Assertion;
 import org.w3c.dom.Element;
 
-import javax.xml.parsers.DocumentBuilder;
-
-import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.CLOCK_SKEW;
-
+@Disabled
 class ChEprAssertionValidatorTest {
 
     @MonotonicNonNull

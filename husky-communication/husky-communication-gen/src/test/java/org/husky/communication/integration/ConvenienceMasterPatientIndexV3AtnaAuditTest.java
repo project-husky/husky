@@ -70,7 +70,7 @@ public class ConvenienceMasterPatientIndexV3AtnaAuditTest {
 	private Organization getScopingOrganization() {
 		final Organization org = new Organization();
 		final Identifier identifier = new Identifier();
-		identifier.setValue("eHealth Connector");
+		identifier.setValue("Husky");
 		identifier.setSystem(FhirCommon.addUrnOid(homeCommunityOid));
 		org.getIdentifier().add(identifier);
 		return org;

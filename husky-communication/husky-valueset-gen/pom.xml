@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>husky-valueset-gen</artifactId>
-	<name>eHealth Connector Value Set Handling Generic</name>
+	<name>Husky Value Set Handling Generic</name>
 
 	<parent>
 		<groupId>org.husky.communication</groupId>

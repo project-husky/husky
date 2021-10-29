@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.husky.emed.conversion</groupId>
     <artifactId>husky-emed-conversion</artifactId>
-    <name>eHealth Connector eMedication Conversion</name>
+    <name>Husky eMedication Conversion</name>
 
     <parent>
         <groupId>org.husky.emed</groupId>
