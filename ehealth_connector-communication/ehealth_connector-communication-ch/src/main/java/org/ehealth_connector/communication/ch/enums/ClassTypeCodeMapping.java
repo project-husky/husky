@@ -23,7 +23,7 @@ import javax.annotation.processing.Generated;
 
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
+import org.ehealth_connector.common.enums.ValueSetEnumInterface;
 
 /**
  * Enumeration of DocumentEntry.classCode_DocumentEntry.typeCode_mapping values

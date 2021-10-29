@@ -16,9 +16,9 @@
  */
 package org.ehealth_connector.fhir.structures.utils;
 
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.hl7cdar2.II;
+import org.ehealth_connector.common.model.Code;
+import org.ehealth_connector.common.model.Identificator;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Identifier;

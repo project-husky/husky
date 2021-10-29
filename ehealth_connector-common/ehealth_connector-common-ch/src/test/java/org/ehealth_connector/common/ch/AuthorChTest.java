@@ -23,15 +23,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
 
-import org.ehealth_connector.common.Address;
-import org.ehealth_connector.common.Author;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.basetypes.AddressBaseType;
 import org.ehealth_connector.common.ch.enums.AuthorRole;
 import org.ehealth_connector.common.ch.enums.AuthorSpeciality;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.PostalAddressUse;
+import org.ehealth_connector.common.model.Address;
+import org.ehealth_connector.common.model.Author;
+import org.ehealth_connector.common.model.Identificator;
+import org.ehealth_connector.common.model.Name;
 import org.ehealth_connector.common.testhelpers.AbstractTestHelper;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.junit.jupiter.api.BeforeEach;

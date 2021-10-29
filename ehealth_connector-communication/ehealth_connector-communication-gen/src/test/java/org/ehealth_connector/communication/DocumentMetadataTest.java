@@ -26,11 +26,11 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.communication.DocumentMetadata;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.model.Code;
+import org.ehealth_connector.common.model.Identificator;
+import org.ehealth_connector.common.model.Patient;
 import org.ehealth_connector.communication.testhelper.TestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

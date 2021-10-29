@@ -21,12 +21,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-import org.ehealth_connector.common.Author;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 import org.ehealth_connector.common.hl7cdar2.TEL;
+import org.ehealth_connector.common.model.Author;
+import org.ehealth_connector.common.model.Code;
+import org.ehealth_connector.common.model.Identificator;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.OID;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;

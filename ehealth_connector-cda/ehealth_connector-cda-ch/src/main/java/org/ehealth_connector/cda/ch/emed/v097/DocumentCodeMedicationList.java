@@ -18,8 +18,9 @@ package org.ehealth_connector.cda.ch.emed.v097;
 
 import java.util.ArrayList;
 import javax.annotation.processing.Generated;
-import org.ehealth_connector.common.Code;
+
 import org.ehealth_connector.common.basetypes.CodeBaseType;
+import org.ehealth_connector.common.model.Code;
 
 /**
  * DocumentCodeMedicationList
@@ -52,7 +53,7 @@ public class DocumentCodeMedicationList extends org.ehealth_connector.common.hl7
 						.getHl7CdaR2Cd());
 	}
 
-	private ArrayList<org.ehealth_connector.common.Code> vocabTranslationCode = new ArrayList<org.ehealth_connector.common.Code>();
+	private ArrayList<org.ehealth_connector.common.model.Code> vocabTranslationCode = new ArrayList<org.ehealth_connector.common.model.Code>();
 
 	/**
 	 * Gets the hl7Translation Translation to the Swiss EPR XDS.b metadata.
@@ -64,7 +65,7 @@ public class DocumentCodeMedicationList extends org.ehealth_connector.common.hl7
 	/**
 	 * Returns a list of vocab codes as defined in the ART-DECOR model
 	 */
-	public ArrayList<org.ehealth_connector.common.Code> getVocabTranslationCode() {
+	public ArrayList<org.ehealth_connector.common.model.Code> getVocabTranslationCode() {
 		return vocabTranslationCode;
 	}
 

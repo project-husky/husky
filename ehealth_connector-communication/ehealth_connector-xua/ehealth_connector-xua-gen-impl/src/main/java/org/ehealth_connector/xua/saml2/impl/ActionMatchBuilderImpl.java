@@ -42,8 +42,17 @@ public class ActionMatchBuilderImpl
 		actionAttrDesType.setAttributeId(aInternalObject.getActionAttributeDesignator().getAttributeId());
 		actionAttrDesType.setIssuer(aInternalObject.getActionAttributeDesignator().getIssuer());
 		actionAttrDesType.setMustBePresent(aInternalObject.getActionAttributeDesignator().getMustBePresent());
+
+		if (aInternalObject.getActionAttributeDesignator().getDataType() != null) {
+			actionAttrDesType.setDataType(
+					new DataTypeAttributeBuilderImpl()
+							.create(aInternalObject.getActionAttributeDesignator().getDataType()));
+		}
+
 		retVal.setActionAttributeDesignator(actionAttrDesType);
 		
+		retVal.setMatchFunction(new FunctionBuilderImpl().create(aInternalObject.getMatchId()));
+
 		return retVal;
 	}
 
@@ -58,7 +67,16 @@ public class ActionMatchBuilderImpl
 		actionAttrDesType.setAttributeId(aInternalObject.getActionAttributeDesignator().getAttributeId());
 		actionAttrDesType.setIssuer(aInternalObject.getActionAttributeDesignator().getIssuer());
 		actionAttrDesType.setMustBePresent(aInternalObject.getActionAttributeDesignator().isMustBePresent());
+
+		if (aInternalObject.getActionAttributeDesignator().getDataType() != null) {
+			actionAttrDesType
+					.setDataType(aInternalObject.getActionAttributeDesignator().getDataType().getDatatypeURI());
+		}
+
 		retVal.setActionAttributeDesignator(actionAttrDesType);
+
+		retVal.setMatchId(aInternalObject.getMatchFunction().getFunctionId());
+
 		return retVal;
 	}
 

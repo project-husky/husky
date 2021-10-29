@@ -62,16 +62,13 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.text.StringEscapeUtils;
-import org.ehealth_connector.common.Address;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Name;
-import org.ehealth_connector.common.Organization;
-import org.ehealth_connector.common.Telecom;
 import org.ehealth_connector.common.basetypes.AddressBaseType;
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
 import org.ehealth_connector.common.basetypes.NameBaseType;
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
 import org.ehealth_connector.common.basetypes.TelecomBaseType;
+import org.ehealth_connector.common.enums.PostalAddressUse;
+import org.ehealth_connector.common.enums.Signature;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
 import org.ehealth_connector.common.hl7cdar2.AD;
 import org.ehealth_connector.common.hl7cdar2.AdxpCity;
@@ -96,11 +93,14 @@ import org.ehealth_connector.common.hl7cdar2.POCDMT000040LegalAuthenticator;
 import org.ehealth_connector.common.hl7cdar2.ST;
 import org.ehealth_connector.common.hl7cdar2.TEL;
 import org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship;
-import org.ehealth_connector.common.mdht.Participant;
-import org.ehealth_connector.common.mdht.ParticipantRole;
-import org.ehealth_connector.common.mdht.PlayingEntity;
-import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
-import org.ehealth_connector.common.mdht.enums.Signature;
+import org.ehealth_connector.common.model.Address;
+import org.ehealth_connector.common.model.Identificator;
+import org.ehealth_connector.common.model.Name;
+import org.ehealth_connector.common.model.Organization;
+import org.ehealth_connector.common.model.Participant;
+import org.ehealth_connector.common.model.ParticipantRole;
+import org.ehealth_connector.common.model.PlayingEntity;
+import org.ehealth_connector.common.model.Telecom;
 import org.ehealth_connector.common.utils.xml.XmlFactories;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -330,7 +330,7 @@ public class Util {
 	 *            the organization
 	 * @return the assigned author
 	 */
-	public static POCDMT000040AssignedAuthor createAssignedAuthorFromOrganization(org.ehealth_connector.common.Organization organization) {
+	public static POCDMT000040AssignedAuthor createAssignedAuthorFromOrganization(org.ehealth_connector.common.model.Organization organization) {
 		final var o = organization.getHl7CdaR2Pocdmt000040Organization();
 		final var a = new POCDMT000040AssignedAuthor();
 		if (!o.getAddr().isEmpty()) {
@@ -407,7 +407,7 @@ public class Util {
 	 * @return the authenticator
 	 */
 	public static POCDMT000040Authenticator createAuthenticatorFromAuthor(
-			org.ehealth_connector.common.Author author) {
+			org.ehealth_connector.common.model.Author author) {
 		final POCDMT000040Author a = author.getAuthorMdht();
 		final var auth = new POCDMT000040Authenticator();
 		auth.setAssignedEntity(createAssignedEntityFromAssignedAuthor(a.getAssignedAuthor()));
@@ -682,7 +682,7 @@ public class Util {
 	 * @return the legal authenticator
 	 */
 	public static POCDMT000040LegalAuthenticator createLegalAuthenticatorFromAuthor(
-			org.ehealth_connector.common.Author author) {
+			org.ehealth_connector.common.model.Author author) {
 		final POCDMT000040Author a = author.getAuthorMdht();
 		final var mdhtLegAuth = new POCDMT000040LegalAuthenticator();
 		mdhtLegAuth

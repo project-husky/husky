@@ -19,7 +19,6 @@ package org.ehealth_connector.cda.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.hl7cdar2.II;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Act;
@@ -37,6 +36,7 @@ import org.ehealth_connector.common.hl7cdar2.POCDMT000040RecordTarget;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Section;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Specimen;
 import org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship;
+import org.ehealth_connector.common.model.Identificator;
 import org.ehealth_connector.common.utils.UUID;
 
 /**

@@ -16,16 +16,16 @@
  */
 package org.ehealth_connector.common.ch;
 
-import org.ehealth_connector.common.Author;
-import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.ch.enums.AuthorRole;
 import org.ehealth_connector.common.ch.enums.AuthorSpeciality;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Author;
+import org.ehealth_connector.common.model.Author;
+import org.ehealth_connector.common.model.Name;
 
 /**
  * The Swis derivation of an Author (adds features for GLN).
  */
-public class AuthorCh extends org.ehealth_connector.common.Author {
+public class AuthorCh extends org.ehealth_connector.common.model.Author {
 
 	/**
 	 * Instantiates a new instance.

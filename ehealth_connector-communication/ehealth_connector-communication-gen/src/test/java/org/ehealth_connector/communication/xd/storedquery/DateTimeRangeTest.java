@@ -23,7 +23,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-import org.ehealth_connector.common.mdht.enums.DateTimeRangeAttributes;
+import org.ehealth_connector.common.enums.DateTimeRangeAttributes;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

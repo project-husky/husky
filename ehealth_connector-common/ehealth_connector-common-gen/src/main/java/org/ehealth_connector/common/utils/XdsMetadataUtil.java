@@ -24,18 +24,18 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.ehealth_connector.common.Address;
-import org.ehealth_connector.common.Author;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Name;
-import org.ehealth_connector.common.Organization;
-import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.basetypes.AddressBaseType;
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
+import org.ehealth_connector.common.enums.AdministrativeGender;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
-import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
-import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
+import org.ehealth_connector.common.enums.ValueSetEnumInterface;
+import org.ehealth_connector.common.model.Address;
+import org.ehealth_connector.common.model.Author;
+import org.ehealth_connector.common.model.Code;
+import org.ehealth_connector.common.model.Identificator;
+import org.ehealth_connector.common.model.Name;
+import org.ehealth_connector.common.model.Organization;
+import org.ehealth_connector.common.model.Patient;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssigningAuthority;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Identifiable;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.LocalizedString;
@@ -314,12 +314,12 @@ public class XdsMetadataUtil {
 
 			// Telecoms
 			Telecom xtn = null;
-			final List<org.ehealth_connector.common.Telecom> t = new LinkedList<>();
+			final List<org.ehealth_connector.common.model.Telecom> t = new LinkedList<>();
 			if (Util.atLeastOne(at.getAuthorTelecom())) {
 				for (var i = 0; i < at.getAuthorTelecom().size(); i++) {
 					xtn = at.getAuthorTelecom().get(i);
 					if (xtn.getType() != null) {
-						var telecom = new org.ehealth_connector.common.Telecom();
+						var telecom = new org.ehealth_connector.common.model.Telecom();
 
 						var number = "";
 						if (xtn.getUnformattedPhoneNumber() != null && !xtn.getUnformattedPhoneNumber().isEmpty()) {

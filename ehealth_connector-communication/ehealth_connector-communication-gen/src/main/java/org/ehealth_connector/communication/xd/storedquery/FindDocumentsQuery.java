@@ -18,10 +18,10 @@ package org.ehealth_connector.communication.xd.storedquery;
 
 import java.util.List;
 
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Person;
-import org.ehealth_connector.common.mdht.enums.DateTimeRangeAttributes;
+import org.ehealth_connector.common.enums.DateTimeRangeAttributes;
+import org.ehealth_connector.common.model.Code;
+import org.ehealth_connector.common.model.Identificator;
+import org.ehealth_connector.common.model.Person;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.slf4j.Logger;

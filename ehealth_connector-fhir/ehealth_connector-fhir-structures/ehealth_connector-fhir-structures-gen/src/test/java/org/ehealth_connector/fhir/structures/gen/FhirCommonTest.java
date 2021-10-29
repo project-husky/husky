@@ -23,8 +23,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.UUID;
 
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.model.Code;
+import org.ehealth_connector.common.model.Identificator;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Identifier;
@@ -153,7 +153,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#createIdentifier(org.ehealth_connector.common.mdht.Identificator)}.
+	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#createIdentifier(org.org.ehealth_connector.common.model.Identificator)}.
 	 */
 	@Test
 	public void testCreateIdentifierIdentificator() {
@@ -197,7 +197,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#ehcCodeToFhirCode(org.ehealth_connector.common.mdht.Code)}.
+	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#ehcCodeToFhirCode(org.org.ehealth_connector.common.model.Code)}.
 	 */
 	@Test
 	public void testEhcCodeToFhirCode() {

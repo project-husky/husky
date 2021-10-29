@@ -28,6 +28,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.ehealth_connector.xua.core.SecurityObject;
 import org.ehealth_connector.xua.saml2.Assertion;
+import org.ehealth_connector.xua.saml2.XACMLPolicySetIdReferenceStatement;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.ehealthswiss.XACMLPolicySetIdReferenceStatementType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeStatementType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeType;
@@ -153,6 +155,10 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 			} else if (statement instanceof AuthnStatementType) {
 				var attrStat = (AuthnStatementType) statement;
 				this.assertion.getAuthnStatements().add(new AuthnStatementBuilderImpl().create(attrStat));
+			} else if (statement instanceof XACMLPolicySetIdReferenceStatementType) {
+				var policyStat = (XACMLPolicySetIdReferenceStatementType) statement;
+				this.assertion.getStatements()
+						.add(new XacmlPolicySetIdReferenceStatementBuilderImpl().create(policyStat));
 			}
 		}
 	}
@@ -187,9 +193,15 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 
 		final List<org.opensaml.saml.saml2.core.Statement> innerList = assertion.getStatements();
 		innerList.forEach(c -> {
-			if (c instanceof XACMLPolicyStatementType)
+			if (c instanceof XACMLPolicyStatementType) {
 				this.statementOrAuthnStatementOrAuthzDecisionStatement
 						.add(new StatementBuilderImpl().create((XACMLPolicyStatementType) c));
+			} else if (c instanceof XACMLPolicySetIdReferenceStatement) {
+				this.statementOrAuthnStatementOrAuthzDecisionStatement
+						.add(new XacmlPolicySetIdReferenceStatementBuilderImpl()
+								.create((XACMLPolicySetIdReferenceStatement) c));
+			}
+
 		});
 
 		return this.statementOrAuthnStatementOrAuthzDecisionStatement;

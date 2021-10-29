@@ -19,13 +19,10 @@ package org.ehealth_connector.fhir.structures.gen;
 import java.util.Date;
 import java.util.LinkedList;
 
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Name;
-import org.ehealth_connector.common.Patient;
-import org.ehealth_connector.common.Telecom;
 import org.ehealth_connector.common.basetypes.AddressBaseType;
 import org.ehealth_connector.common.basetypes.NameBaseType;
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
+import org.ehealth_connector.common.enums.AdministrativeGender;
 import org.ehealth_connector.common.enums.EntityNameUse;
 import org.ehealth_connector.common.hl7cdar2.CE;
 import org.ehealth_connector.common.hl7cdar2.CS;
@@ -33,7 +30,10 @@ import org.ehealth_connector.common.hl7cdar2.POCDMT000040Birthplace;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040LanguageCommunication;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Organization;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Place;
-import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
+import org.ehealth_connector.common.model.Identificator;
+import org.ehealth_connector.common.model.Name;
+import org.ehealth_connector.common.model.Patient;
+import org.ehealth_connector.common.model.Telecom;
 import org.ehealth_connector.common.utils.Util;
 import org.hl7.fhir.dstu3.model.Address;
 import org.hl7.fhir.dstu3.model.BooleanType;
@@ -76,7 +76,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 	 * @param mdhtAddr address object
 	 * @return fhir address
 	 */
-	public static org.hl7.fhir.dstu3.model.Address convertAddress(org.ehealth_connector.common.Address mdhtAddr) {
+	public static org.hl7.fhir.dstu3.model.Address convertAddress(org.ehealth_connector.common.model.Address mdhtAddr) {
 		org.hl7.fhir.dstu3.model.Address fhirAddr = null;
 		if (mdhtAddr != null) {
 			fhirAddr = new org.hl7.fhir.dstu3.model.Address();
@@ -332,7 +332,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 		}
 
 		if (patient.getAddresses() != null && !patient.getAddresses().isEmpty()) {
-			for (final org.ehealth_connector.common.Address address : patient.getAddresses()) {
+			for (final org.ehealth_connector.common.model.Address address : patient.getAddresses()) {
 				getAddress().add(convertAddress(address));
 			}
 		}
@@ -428,7 +428,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 		// birthplace
 		if ((patient.getMdhtPatient().getBirthplace() != null)
 				&& (patient.getMdhtPatient().getBirthplace().getPlace() != null)) {
-			setBirthPlace(convertAddress(new org.ehealth_connector.common.Address(
+			setBirthPlace(convertAddress(new org.ehealth_connector.common.model.Address(
 					patient.getMdhtPatient().getBirthplace().getPlace().getAddr())));
 		}
 
@@ -461,7 +461,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 	 * @param address
 	 * @return fhir address
 	 */
-	private org.ehealth_connector.common.Address convertAddress(org.hl7.fhir.dstu3.model.Address fhirAddress) {
+	private org.ehealth_connector.common.model.Address convertAddress(org.hl7.fhir.dstu3.model.Address fhirAddress) {
 		if (fhirAddress == null) {
 			return null;
 		}
@@ -498,7 +498,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 				break;
 			}
 		}
-		final var patientAddress = new org.ehealth_connector.common.Address(new AddressBaseType());
+		final var patientAddress = new org.ehealth_connector.common.model.Address(new AddressBaseType());
 		if (!addressline1.isEmpty()) {
 			patientAddress.setStreetAddressLine1(addressline1);
 		}
@@ -643,7 +643,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 		}
 
 		if (getManagingOrganization() != null) {
-			var organization = new org.ehealth_connector.common.Organization(new OrganizationBaseType());
+			var organization = new org.ehealth_connector.common.model.Organization(new OrganizationBaseType());
 
 			final org.hl7.fhir.dstu3.model.Organization org = (org.hl7.fhir.dstu3.model.Organization) getManagingOrganization()
 					.getResource();

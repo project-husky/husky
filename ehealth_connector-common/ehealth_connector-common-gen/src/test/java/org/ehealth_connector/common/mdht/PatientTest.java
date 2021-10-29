@@ -39,7 +39,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#addAddress(org.ehealth_connector.common.mdht.Address)}
+	 * {@link org.ehealth_connector.common.model.Patient#addAddress(org.ehealth_connector.common.mdht.Address)}
 	 * .
 	 */
 	@Test
@@ -49,7 +49,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#addId(org.ehealth_connector.common.mdht.Identificator)}
+	 * {@link org.ehealth_connector.common.model.Patient#addId(org.ehealth_connector.common.mdht.Identificator)}
 	 * .
 	 */
 	@Test
@@ -59,7 +59,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#addName(org.ehealth_connector.common.mdht.Name)}
+	 * {@link org.ehealth_connector.common.model.Patient#addName(org.ehealth_connector.common.mdht.Name)}
 	 * .
 	 */
 	@Test
@@ -69,7 +69,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#copyMdhtPatient()}.
+	 * {@link org.ehealth_connector.common.model.Patient#copyMdhtPatient()}.
 	 */
 	@Test
 	public void testCopyMdhtPatient() {
@@ -78,7 +78,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#copyMdhtPatientRole()}.
+	 * {@link org.ehealth_connector.common.model.Patient#copyMdhtPatientRole()}.
 	 */
 	@Test
 	public void testCopyMdhtPatientRole() {
@@ -87,7 +87,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#copyMdhtRecordTarget()}.
+	 * {@link org.ehealth_connector.common.model.Patient#copyMdhtRecordTarget()}.
 	 */
 	@Test
 	public void testCopyMdhtRecordTarget() {
@@ -96,7 +96,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#getName()}.
+	 * {@link org.ehealth_connector.common.model.Patient#getName()}.
 	 */
 	@Test
 	public void testGetName() {
@@ -105,7 +105,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#getNames()}.
+	 * {@link org.ehealth_connector.common.model.Patient#getNames()}.
 	 */
 	@Test
 	public void testGetNames() {
@@ -114,7 +114,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#Patient(org.ehealth_connector.common.mdht.Name, org.ehealth_connector.common.enums.AdministrativeGender, java.util.Date)}
+	 * {@link org.ehealth_connector.common.model.Patient#Patient(org.ehealth_connector.common.mdht.Name, org.ehealth_connector.common.enums.AdministrativeGender, java.util.Date)}
 	 * .
 	 */
 	@Test
@@ -124,7 +124,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#Patient(org.ehealth_connector.common.mdht.Name, org.ehealth_connector.common.enums.AdministrativeGender, java.util.Date, org.ehealth_connector.common.mdht.Identificator)}
+	 * {@link org.ehealth_connector.common.model.Patient#Patient(org.ehealth_connector.common.mdht.Name, org.ehealth_connector.common.enums.AdministrativeGender, java.util.Date, org.ehealth_connector.common.mdht.Identificator)}
 	 * .
 	 */
 	@Test
@@ -134,7 +134,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#Patient(org.openhealthtools.mdht.uml.cda.RecordTarget)}
+	 * {@link org.ehealth_connector.common.model.Patient#Patient(org.openhealthtools.mdht.uml.cda.RecordTarget)}
 	 * .
 	 */
 	@Test
@@ -144,7 +144,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#setAdministrativeGender(org.ehealth_connector.common.enums.AdministrativeGender)}
+	 * {@link org.ehealth_connector.common.model.Patient#setAdministrativeGender(org.ehealth_connector.common.enums.AdministrativeGender)}
 	 * .
 	 */
 	@Test
@@ -154,7 +154,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#setBirthday(java.util.Date)}.
+	 * {@link org.ehealth_connector.common.model.Patient#setBirthday(java.util.Date)}.
 	 */
 	@Test
 	public void testSetBirthday() {
@@ -163,7 +163,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#setDeceasedInd(java.lang.Boolean)}
+	 * {@link org.ehealth_connector.common.model.Patient#setDeceasedInd(java.lang.Boolean)}
 	 * .
 	 */
 	@Test
@@ -173,7 +173,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#setDeceasedTime(java.util.Date)}
+	 * {@link org.ehealth_connector.common.model.Patient#setDeceasedTime(java.util.Date)}
 	 * .
 	 */
 	@Test
@@ -183,7 +183,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#setEmployeeOccupation(java.lang.String)}
+	 * {@link org.ehealth_connector.common.model.Patient#setEmployeeOccupation(java.lang.String)}
 	 * .
 	 */
 	@Test
@@ -193,7 +193,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#setMothersMaidenName(java.lang.String)}
+	 * {@link org.ehealth_connector.common.model.Patient#setMothersMaidenName(java.lang.String)}
 	 * .
 	 */
 	@Test
@@ -203,7 +203,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#setMultipleBirthInd(java.lang.Boolean)}
+	 * {@link org.ehealth_connector.common.model.Patient#setMultipleBirthInd(java.lang.Boolean)}
 	 * .
 	 */
 	@Test
@@ -213,7 +213,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#setMultipleBirthOrderNumber(java.lang.Integer)}
+	 * {@link org.ehealth_connector.common.model.Patient#setMultipleBirthOrderNumber(java.lang.Integer)}
 	 * .
 	 */
 	@Test
@@ -223,7 +223,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#setNation(java.lang.String)}.
+	 * {@link org.ehealth_connector.common.model.Patient#setNation(java.lang.String)}.
 	 */
 	@Test
 	public void testSetNation() {
@@ -232,7 +232,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#setReligiousAffiliation(java.lang.String)}
+	 * {@link org.ehealth_connector.common.model.Patient#setReligiousAffiliation(java.lang.String)}
 	 * .
 	 */
 	@Test
@@ -242,7 +242,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Patient#setTelecoms(org.ehealth_connector.common.mdht.Telecoms)}
+	 * {@link org.ehealth_connector.common.model.Patient#setTelecoms(org.ehealth_connector.common.mdht.Telecoms)}
 	 * .
 	 */
 	@Test

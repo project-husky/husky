@@ -16,8 +16,8 @@
  */
 package org.ehealth_connector.cda.ch.enums;
 
-import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.hl7cdar2.CD;
+import org.ehealth_connector.common.model.Code;
 
 /*
  *<div class="en">Structured Yes/No Answer</div>

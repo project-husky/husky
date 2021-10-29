@@ -142,8 +142,7 @@ public class AttributeImpl
 
 	public String getValueAsString() {
 		if (isValueAString()) {
-			final XSString attributeValue = (XSStringImpl) ((AttributeValueImpl) attribute.getAttributeValues().get(0))
-					.getUnknownXMLObjects().get(0);
+			final XSString attributeValue = (XSStringImpl) attribute.getAttributeValues().get(0);
 			getAttributeValue().add(attributeValue);
 			return attributeValue.getValue();
 		}
@@ -194,11 +193,8 @@ public class AttributeImpl
 	public boolean isValueAString() {
 		return (attribute.getAttributeValues() != null) //
 				&& (!attribute.getAttributeValues().isEmpty()) //
-				&& attribute.getAttributeValues().get(0) instanceof AttributeValueImpl
-				&& ((AttributeValueImpl) attribute.getAttributeValues().get(0)).getUnknownXMLObjects() != null
-				&& !((AttributeValueImpl) attribute.getAttributeValues().get(0)).getUnknownXMLObjects().isEmpty()
-				&& ((AttributeValueImpl) attribute.getAttributeValues().get(0)).getUnknownXMLObjects()
-						.get(0) instanceof XSStringImpl;
+				&& attribute.getAttributeValues().get(0) instanceof XSStringImpl
+				&& ((XSStringImpl) attribute.getAttributeValues().get(0)).getValue() != null;
 	}
 
 }

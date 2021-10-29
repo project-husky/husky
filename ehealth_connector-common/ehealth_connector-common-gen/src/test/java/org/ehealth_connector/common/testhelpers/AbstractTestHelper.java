@@ -18,14 +18,14 @@ package org.ehealth_connector.common.testhelpers;
 
 import java.util.Random;
 
-import org.ehealth_connector.common.Author;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Name;
-import org.ehealth_connector.common.Organization;
-import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.basetypes.TelecomBaseType;
-import org.ehealth_connector.common.mdht.Value;
+import org.ehealth_connector.common.model.Author;
+import org.ehealth_connector.common.model.Code;
+import org.ehealth_connector.common.model.Identificator;
+import org.ehealth_connector.common.model.Name;
+import org.ehealth_connector.common.model.Organization;
+import org.ehealth_connector.common.model.Patient;
+import org.ehealth_connector.common.model.Value;
 
 /**
  * Helper Class for Tests

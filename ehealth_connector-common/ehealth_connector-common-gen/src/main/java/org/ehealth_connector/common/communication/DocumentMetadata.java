@@ -23,13 +23,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.ehealth_connector.common.Author;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Patient;
+import org.ehealth_connector.common.enums.ConfidentialityCode;
 import org.ehealth_connector.common.enums.DocumentDescriptor;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
-import org.ehealth_connector.common.mdht.enums.ConfidentialityCode;
+import org.ehealth_connector.common.model.Author;
+import org.ehealth_connector.common.model.Code;
+import org.ehealth_connector.common.model.Identificator;
+import org.ehealth_connector.common.model.Patient;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
@@ -767,7 +767,7 @@ public class DocumentMetadata {
 
 	public void setMetadata(DocumentMetadata metaData) {
 		clear();
-		for (final org.ehealth_connector.common.Author item : metaData.getAuthors()) {
+		for (final org.ehealth_connector.common.model.Author item : metaData.getAuthors()) {
 			addAuthor(item);
 		}
 

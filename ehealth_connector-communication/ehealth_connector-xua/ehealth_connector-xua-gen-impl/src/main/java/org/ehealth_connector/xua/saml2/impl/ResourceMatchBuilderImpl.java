@@ -26,6 +26,7 @@ import org.ehealth_connector.xua.hl7v3.OpenSamlInstanceIdentifier;
 import org.ehealth_connector.xua.hl7v3.impl.InstanceIdentifierBuilder;
 import org.ehealth_connector.xua.hl7v3.impl.InstanceIdentifierImpl;
 import org.ehealth_connector.xua.saml2.SimpleBuilder;
+import org.herasaf.xacml.core.dataTypeAttribute.impl.AnyURIDataTypeAttribute;
 import org.herasaf.xacml.core.policy.impl.AttributeSelectorType;
 import org.herasaf.xacml.core.policy.impl.AttributeValueType;
 import org.herasaf.xacml.core.policy.impl.ResourceAttributeDesignatorType;
@@ -128,6 +129,8 @@ public class ResourceMatchBuilderImpl implements SimpleBuilder<ResourceMatchType
 			if (aInternalObject.getResourceAttributeDesignator().getDataType() != null) {
 				resourceAttrDesignator.setDataType(new DataTypeAttributeBuilderImpl()
 						.create(aInternalObject.getResourceAttributeDesignator().getDataType()));
+			} else {
+				resourceAttrDesignator.setDataType(new AnyURIDataTypeAttribute());
 			}
 
 			resourceAttrDesignator
@@ -216,6 +219,8 @@ public class ResourceMatchBuilderImpl implements SimpleBuilder<ResourceMatchType
 			if (aInternalObject.getResourceAttributeDesignator().getDataType() != null) {
 				resourceAttrDesignator.setDataType(new DataTypeAttributeBuilderImpl()
 						.create(aInternalObject.getResourceAttributeDesignator().getDataType()));
+			} else {
+				resourceAttrDesignator.setDataType("http://www.w3.org/2001/XMLSchema#anyURI");
 			}
 
 			resourceAttrDesignator

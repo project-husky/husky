@@ -26,6 +26,7 @@ import org.ehealth_connector.common.enums.EntityNameUse;
 import org.ehealth_connector.common.enums.NullFlavor;
 import org.ehealth_connector.common.hl7cdar2.EN;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+import org.ehealth_connector.common.model.Name;
 import org.junit.jupiter.api.Test;
 
 public class NameTest {

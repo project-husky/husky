@@ -21,8 +21,6 @@ import java.util.Map;
 
 import javax.annotation.processing.Generated;
 
-import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
-
 /**
  * <!-- @formatter:off -->
  * <div class="en"><p>    <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26</p></div>

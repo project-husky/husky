@@ -28,8 +28,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.model.Code;
+import org.ehealth_connector.common.model.Identificator;
 import org.ehealth_connector.common.utils.OID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -99,7 +99,7 @@ class FolderMetadataTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.communication.FolderMetadata#addCode(org.ehealth_connector.common.mdht.Code)}.
+	 * {@link org.ehealth_connector.communication.FolderMetadata#addCode(org.org.ehealth_connector.common.model.Code)}.
 	 */
 	@Test
 	void testAddCode() {
@@ -201,7 +201,7 @@ class FolderMetadataTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.communication.FolderMetadata#setPatientId(org.ehealth_connector.common.mdht.Identificator)},
+	 * {@link org.ehealth_connector.communication.FolderMetadata#setPatientId(org.org.ehealth_connector.common.model.Identificator)},
 	 * {@link org.ehealth_connector.communication.FolderMetadata#getPatientId()}.
 	 */
 	@Test

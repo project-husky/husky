@@ -18,9 +18,10 @@ package org.ehealth_connector.cda.ch.emed.v097;
 
 import java.util.ArrayList;
 import javax.annotation.processing.Generated;
-import org.ehealth_connector.common.Code;
+
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+import org.ehealth_connector.common.model.Code;
 
 /**
  * IHEProblemStatusObservation
@@ -51,7 +52,7 @@ public class IheproblemStatusObservation
 		super.getValue().add(createHl7ValueFixedValue());
 	}
 
-	private ArrayList<org.ehealth_connector.common.Code> vocabStatusCodeCode = new ArrayList<org.ehealth_connector.common.Code>();
+	private ArrayList<org.ehealth_connector.common.model.Code> vocabStatusCodeCode = new ArrayList<org.ehealth_connector.common.model.Code>();
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -142,7 +143,7 @@ public class IheproblemStatusObservation
 	/**
 	 * Returns a list of vocab codes as defined in the ART-DECOR model
 	 */
-	public ArrayList<org.ehealth_connector.common.Code> getVocabStatusCodeCode() {
+	public ArrayList<org.ehealth_connector.common.model.Code> getVocabStatusCodeCode() {
 		return vocabStatusCodeCode;
 	}
 

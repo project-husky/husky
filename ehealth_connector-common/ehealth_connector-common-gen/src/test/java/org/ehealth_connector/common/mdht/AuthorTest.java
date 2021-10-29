@@ -23,13 +23,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Date;
 import java.util.List;
 
-import org.ehealth_connector.common.Address;
-import org.ehealth_connector.common.Author;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Name;
-import org.ehealth_connector.common.Organization;
-import org.ehealth_connector.common.Telecom;
 import org.ehealth_connector.common.basetypes.AddressBaseType;
 import org.ehealth_connector.common.basetypes.NameBaseType;
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
@@ -38,6 +31,13 @@ import org.ehealth_connector.common.enums.PostalAddressUse;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Author;
 import org.ehealth_connector.common.hl7cdar2.TS;
+import org.ehealth_connector.common.model.Address;
+import org.ehealth_connector.common.model.Author;
+import org.ehealth_connector.common.model.Code;
+import org.ehealth_connector.common.model.Identificator;
+import org.ehealth_connector.common.model.Name;
+import org.ehealth_connector.common.model.Organization;
+import org.ehealth_connector.common.model.Telecom;
 import org.ehealth_connector.common.testhelpers.AbstractTestHelper;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.junit.jupiter.api.BeforeEach;
@@ -226,7 +226,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Author#addAddress(org.ehealth_connector.common.mdht.Address)}
+	 * {@link org.ehealth_connector.common.model.Author#addAddress(org.org.ehealth_connector.common.model.Address)}
 	 * .
 	 */
 	@Test
@@ -252,7 +252,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Author#addId(org.ehealth_connector.common.mdht.Identificator)}
+	 * {@link org.ehealth_connector.common.model.Author#addId(org.org.ehealth_connector.common.model.Identificator)}
 	 * .
 	 */
 	@Test
@@ -266,7 +266,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Author#addName(org.ehealth_connector.common.mdht.Name)}
+	 * {@link org.ehealth_connector.common.model.Author#addName(org.org.ehealth_connector.common.model.Name)}
 	 * .
 	 */
 	@Test
@@ -309,7 +309,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Author#Author(org.openhealthtools.mdht.uml.cda.Author)}
+	 * {@link org.ehealth_connector.common.model.Author#Author(org.ehealth_connector.common.model.openhealthtools.mdht.uml.cda.Author)}
 	 * .
 	 */
 	@Test
@@ -323,7 +323,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Author#Author(org.ehealth_connector.common.mdht.Name)}
+	 * {@link org.ehealth_connector.common.model.Author#Author(org.org.ehealth_connector.common.model.Name)}
 	 * .
 	 */
 	@Test
@@ -336,7 +336,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Author#Author(org.ehealth_connector.common.mdht.Name, java.lang.String)}
+	 * {@link org.ehealth_connector.common.model.Author#Author(org.org.ehealth_connector.common.model.Name, java.lang.String)}
 	 * .
 	 */
 	@Test
@@ -352,7 +352,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Author#getCompleteName()}.
+	 * {@link org.ehealth_connector.common.model.Author#getCompleteName()}.
 	 */
 	@Test
 	public void testGetCompleteName() {
@@ -363,7 +363,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Author#getGlnAsIdentificator()}.
+	 * {@link org.ehealth_connector.common.model.Author#getGlnAsIdentificator()}.
 	 */
 	@Test
 	public void testGetGlnAsIdentificator() {
@@ -377,7 +377,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Author#getGln()}.
+	 * {@link org.ehealth_connector.common.model.Author#getGln()}.
 	 */
 	@Test
 	// @Ignore("setGln does not replace the gln set by constructor")
@@ -395,7 +395,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Author#getOrganization()}.
+	 * {@link org.ehealth_connector.common.model.Author#getOrganization()}.
 	 */
 	@Test
 	public void testSetGetOrganization() {
@@ -410,7 +410,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Author#getTelecoms()} .
+	 * {@link org.ehealth_connector.common.model.Author#getTelecoms()} .
 	 */
 	@Test
 	public void testSetGetTelecoms() {
@@ -424,7 +424,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.Author#getTime()}.
+	 * {@link org.ehealth_connector.common.model.Author#getTime()}.
 	 */
 	@Test
 	@Disabled

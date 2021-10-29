@@ -21,8 +21,6 @@ import java.util.Map;
 
 import javax.annotation.processing.Generated;
 
-import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
-
 /**
  * <!-- @formatter:off -->
  * <div class="en">no designation found for language ENGLISH</div>

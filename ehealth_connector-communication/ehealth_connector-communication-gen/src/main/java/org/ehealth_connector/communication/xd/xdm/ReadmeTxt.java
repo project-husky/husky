@@ -22,7 +22,7 @@ import java.text.MessageFormat;
 import java.util.Date;
 
 import org.ehealth_connector.common.enums.EhcVersions;
-import org.ehealth_connector.common.mdht.VendorInformation;
+import org.ehealth_connector.common.model.VendorInformation;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

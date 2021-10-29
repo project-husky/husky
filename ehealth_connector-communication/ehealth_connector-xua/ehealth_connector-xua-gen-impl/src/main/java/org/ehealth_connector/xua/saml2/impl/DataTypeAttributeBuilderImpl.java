@@ -99,6 +99,8 @@ public class DataTypeAttributeBuilderImpl
 		} else if ("urn:oasis:names:tc:xacml:2.0:data-type:yearMonthDuration"
 				.equalsIgnoreCase(aInternalObject)) {
 			function = new YearMonthDurationDataTypeAttribute();
+		} else if("urn:ihe:2017:record#interaction".equalsIgnoreCase(aInternalObject)) {
+			function = new InteractionDataTypeAttribute();
 		}
 
 		return function;

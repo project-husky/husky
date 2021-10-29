@@ -20,8 +20,8 @@ package org.ehealth_connector.communication;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.communication.SubmissionSetMetadata;
+import org.ehealth_connector.common.model.Code;
 import org.ehealth_connector.communication.testhelper.TestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

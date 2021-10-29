@@ -25,7 +25,6 @@ import java.io.InputStream;
 import javax.activation.DataHandler;
 import javax.mail.util.ByteArrayDataSource;
 
-import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.ch.AuthorCh;
 import org.ehealth_connector.common.ch.enums.AuthorRole;
 import org.ehealth_connector.common.communication.AffinityDomain;
@@ -34,6 +33,7 @@ import org.ehealth_connector.common.communication.DocumentMetadata.DocumentMetad
 import org.ehealth_connector.common.communication.SubmissionSetMetadata;
 import org.ehealth_connector.common.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
 import org.ehealth_connector.common.enums.DocumentDescriptor;
+import org.ehealth_connector.common.model.Identificator;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.communication.ConvenienceCommunication;
 import org.ehealth_connector.communication.ch.enums.AvailabilityStatus;

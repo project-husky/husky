@@ -19,7 +19,7 @@ package org.ehealth_connector.communication.xd.storedquery;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
-import org.ehealth_connector.common.mdht.enums.DateTimeRangeAttributes;
+import org.ehealth_connector.common.enums.DateTimeRangeAttributes;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.TimeRange;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;

@@ -17,8 +17,8 @@
 package org.ehealth_connector.common.enums;
 
 import org.apache.commons.lang3.EnumUtils;
-import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.hl7cdar2.CS;
+import org.ehealth_connector.common.model.Code;
 
 /**
  * <div class="de">Sprache</div> <div class="fr"></div>

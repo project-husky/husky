@@ -195,4 +195,5 @@ public class ResponseImpl
 	public boolean hasSignature() {
 		return (response.getSignature() != null);
 	}
+
 }

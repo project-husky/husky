@@ -39,7 +39,7 @@ public class NameTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Name#copyMdhtPn()}.
+	 * {@link org.org.ehealth_connector.common.model.Name#copyMdhtPn()}.
 	 */
 	@Test
 	public void testCopyMdhtPn() {
@@ -48,7 +48,7 @@ public class NameTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Name#getCompleteName()}.
+	 * {@link org.org.ehealth_connector.common.model.Name#getCompleteName()}.
 	 */
 	@Test
 	public void testGetCompleteName() {
@@ -57,7 +57,7 @@ public class NameTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Name#getMdhtPn()}.
+	 * {@link org.org.ehealth_connector.common.model.Name#getMdhtPn()}.
 	 */
 	@Test
 	public void testGetMdhtPn() {
@@ -66,7 +66,7 @@ public class NameTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Name#Name(org.openhealthtools.mdht.uml.hl7.datatypes.ON)}
+	 * {@link org.org.ehealth_connector.common.model.Name#Name(org.openhealthtools.mdht.uml.hl7.datatypes.ON)}
 	 * .
 	 */
 	@Test
@@ -76,7 +76,7 @@ public class NameTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Name#Name(org.openhealthtools.mdht.uml.hl7.datatypes.PN)}
+	 * {@link org.org.ehealth_connector.common.model.Name#Name(org.openhealthtools.mdht.uml.hl7.datatypes.PN)}
 	 * .
 	 */
 	@Test
@@ -86,7 +86,7 @@ public class NameTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Name#Name(java.lang.String, java.lang.String)}
+	 * {@link org.org.ehealth_connector.common.model.Name#Name(java.lang.String, java.lang.String)}
 	 * .
 	 */
 	@Test
@@ -96,7 +96,7 @@ public class NameTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Name#Name(java.lang.String, java.lang.String, java.lang.String)}
+	 * {@link org.org.ehealth_connector.common.model.Name#Name(java.lang.String, java.lang.String, java.lang.String)}
 	 * .
 	 */
 	@Test
@@ -106,7 +106,7 @@ public class NameTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Name#Name(java.lang.String, java.lang.String, java.lang.String, java.lang.String)}
+	 * {@link org.org.ehealth_connector.common.model.Name#Name(java.lang.String, java.lang.String, java.lang.String, java.lang.String)}
 	 * .
 	 */
 	@Test
@@ -116,7 +116,7 @@ public class NameTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Name#setFamilyName(java.lang.String)}
+	 * {@link org.org.ehealth_connector.common.model.Name#setFamilyName(java.lang.String)}
 	 * .
 	 */
 	@Test
@@ -126,7 +126,7 @@ public class NameTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Name#setGivenName(java.lang.String)}.
+	 * {@link org.org.ehealth_connector.common.model.Name#setGivenName(java.lang.String)}.
 	 */
 	@Test
 	public void testSetGivenName() {
@@ -135,7 +135,7 @@ public class NameTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Name#setPn(org.openhealthtools.mdht.uml.hl7.datatypes.PN)}
+	 * {@link org.org.ehealth_connector.common.model.Name#setPn(org.openhealthtools.mdht.uml.hl7.datatypes.PN)}
 	 * .
 	 */
 	@Test
@@ -145,7 +145,7 @@ public class NameTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Name#setPrefix(java.lang.String)}.
+	 * {@link org.org.ehealth_connector.common.model.Name#setPrefix(java.lang.String)}.
 	 */
 	@Test
 	public void testSetPrefix() {
@@ -154,7 +154,7 @@ public class NameTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Name#setSuffix(java.lang.String)}.
+	 * {@link org.org.ehealth_connector.common.model.Name#setSuffix(java.lang.String)}.
 	 */
 	@Test
 	public void testSetSuffix() {
