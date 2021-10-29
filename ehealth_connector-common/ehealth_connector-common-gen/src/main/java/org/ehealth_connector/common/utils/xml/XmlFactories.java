@@ -32,7 +32,8 @@ public class XmlFactories {
     /**
      * This class is not instantiable.
      */
-    private XmlFactories() {}
+    private XmlFactories() {
+    }
 
     /**
      * Initializes and configures a {@link DocumentBuilder} that is not vulnerable to XXE injections (XInclude, Billions
@@ -42,8 +43,6 @@ public class XmlFactories {
      * @throws ParserConfigurationException if the parser is not Xerces2 compatible.
      * @see <a href="https://cheatsheetseries.owasp.org/cheatsheets/XML_External_Entity_Prevention_Cheat_Sheet.html#html#jaxp-documentbuilderfactory-saxparserfactory-and-dom4j">XML
      * External Entity Prevention Cheat Sheet</a>
-     * @see <a href="https://wiki.shibboleth.net/confluence/display/OS30/Secure+XML+Processing+Requirements">Secure XML
-     * Processing Requirements</a>
      */
     public static DocumentBuilder newSafeDocumentBuilder() throws ParserConfigurationException {
         final var factory = DocumentBuilderFactory.newDefaultInstance();
@@ -56,6 +55,30 @@ public class XmlFactories {
         factory.setExpandEntityReferences(false);
         factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
         factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
+        return factory.newDocumentBuilder();
+    }
+
+    /**
+     * Initializes and configures a {@link DocumentBuilder} suited for XUA unmarshalling.
+     *
+     * @return a configured {@link DocumentBuilder}.
+     * @throws ParserConfigurationException if the parser is not Xerces2 compatible.
+     * @see <a href="https://shibboleth.atlassian.net/wiki/spaces/OS30/pages/1712521446/Secure+XML+Processing+Requirements">
+     * Secure XML Processing Requirements</a>
+     */
+    public static DocumentBuilder newXuaDocumentBuilder() throws ParserConfigurationException {
+        final var factory = DocumentBuilderFactory.newDefaultInstance();
+        factory.setNamespaceAware(true);
+        factory.setFeature("http://javax.xml.XMLConstants/feature/secure-processing", true);
+        factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+        factory.setFeature("http://apache.org/xml/features/xinclude", false);
+        factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+        factory.setXIncludeAware(false);
+        factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+        factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
+        factory.setCoalescing(true);
+        factory.setIgnoringComments(true);
+        factory.setExpandEntityReferences(false);
         return factory.newDocumentBuilder();
     }
 

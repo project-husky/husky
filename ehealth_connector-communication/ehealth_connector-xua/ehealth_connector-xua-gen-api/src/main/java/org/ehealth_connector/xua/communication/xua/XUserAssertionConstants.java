@@ -33,7 +33,7 @@ public class XUserAssertionConstants {
 	public static final String OASIS_XACML_ORGANISATION = "urn:oasis:names:tc:xspa:1.0:subject:organization";
 
 	/** XSPA subject organization-id */
-	public static final String OASIS_XACML_ORGANISATIONID = "urn:oasis:names:tc:xspa:1.0:subject:organization-id";
+	public static final String OASIS_XACML_ORGANIZATIONID = "urn:oasis:names:tc:xspa:1.0:subject:organization-id";
 
 	/** XSPA subject purposeofuse */
 	public static final String OASIS_XACML_PURPOSEOFUSE = "urn:oasis:names:tc:xspa:1.0:subject:purposeofuse";
@@ -44,8 +44,11 @@ public class XUserAssertionConstants {
 	/** XACML subject role string */
 	public static final String OASIS_XACML_ROLE = "urn:oasis:names:tc:xacml:2.0:subject:role";
 
-	/** XACML subject subject-id string */
-	public static final String OASIS_XACML_SUBJECTID = "urn:oasis:names:tc:xacml:1.0:subject:subject-id";
+	/** XSPA subject subject-id string */
+	public static final String OASIS_XACML_SUBJECTID = "urn:oasis:names:tc:xspa:1.0:subject:subject-id";
+
+	/** IHE ITI XCA home-community-id  */
+	public static final String IHE_XCA_HOMECOMMUNITYID = "urn:ihe:iti:xca:2010:homeCommunityId";
 	
 	private XUserAssertionConstants() {
 		 throw new IllegalStateException("Constants class");

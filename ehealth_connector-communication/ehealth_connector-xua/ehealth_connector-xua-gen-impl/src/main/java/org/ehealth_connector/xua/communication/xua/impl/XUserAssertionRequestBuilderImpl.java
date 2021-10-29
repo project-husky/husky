@@ -169,7 +169,7 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 	@Override
 	public XUserAssertionRequestBuilder organizationId(String organizationId) {
 		if (organizationId != null) {
-			addXMLObject(createStringAttribute(XUserAssertionConstants.OASIS_XACML_ORGANISATIONID,
+			addXMLObject(createStringAttribute(XUserAssertionConstants.OASIS_XACML_ORGANIZATIONID,
 					organizationId));
 		}
 		return this;
