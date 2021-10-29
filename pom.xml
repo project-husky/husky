@@ -44,6 +44,7 @@
 		<module>ehealth_connector-fhir</module>
 		<module>ehealth_connector-converters</module>
 		<module>ehealth_connector-common</module>
+        <module>ehealth_connector-emed</module>
 	</modules>
 
 	<dependencyManagement>

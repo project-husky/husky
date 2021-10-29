@@ -11,6 +11,8 @@ import org.junit.jupiter.api.condition.EnabledOnOs;
 import javax.xml.bind.DataBindingException;
 import javax.xml.parsers.ParserConfigurationException;
 
+import javax.xml.bind.DataBindingException;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;

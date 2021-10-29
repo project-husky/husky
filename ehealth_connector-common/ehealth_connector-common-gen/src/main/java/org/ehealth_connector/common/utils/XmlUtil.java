@@ -49,6 +49,12 @@ public class XmlUtil {
 	}
 
 	/**
+	 * This class is not instantiable.
+	 */
+	private XmlUtil() {
+	}
+
+	/**
 	 * Creates a JAXBElement from the given parameters. This method is provided,
 	 * because the QName cannot be used in .Net (using javax.xml.namespace; us
 	 * invalid because namespace is a system keyword in .Net).
