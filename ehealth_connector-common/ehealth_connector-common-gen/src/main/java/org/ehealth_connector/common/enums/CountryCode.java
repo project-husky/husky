@@ -17,8 +17,8 @@
 package org.ehealth_connector.common.enums;
 
 import org.apache.commons.lang3.EnumUtils;
-import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.hl7cdar2.CS;
+import org.ehealth_connector.common.model.Code;
 
 /**
  * ISO 3166-1 alpha-3 Country Code

@@ -20,8 +20,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.model.Code;
 import org.ehealth_connector.common.utils.DateUtil;
 
 /**

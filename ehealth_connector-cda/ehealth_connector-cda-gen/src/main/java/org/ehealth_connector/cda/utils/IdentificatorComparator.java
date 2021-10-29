@@ -18,7 +18,7 @@ package org.ehealth_connector.cda.utils;
 
 import java.util.Comparator;
 
-import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.model.Identificator;
 
 /**
  * This class implements the default comparison algorithm for Identificators.

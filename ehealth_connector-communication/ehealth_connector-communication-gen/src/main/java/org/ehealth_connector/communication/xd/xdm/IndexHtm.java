@@ -21,7 +21,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
 
-import org.ehealth_connector.common.mdht.VendorInformation;
+import org.ehealth_connector.common.model.VendorInformation;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.ehealth_connector.communication.utils.XdsUtil;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;

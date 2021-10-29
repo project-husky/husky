@@ -16,8 +16,8 @@
  */
 package org.ehealth_connector.cda.enums;
 
-import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.hl7cdar2.CD;
+import org.ehealth_connector.common.model.Code;
 
 /*
  *<div class="de">Dieses Subset ist eine empfohlene Auswahl für den vorliegenden Implementierungsleitfaden. Andere Codes aus HL7 ActCode dürfen ebenfalls verwendet werden. (Quelle für Subset: [IHE PCC TF-2], 6.3.4.15.4)</div>

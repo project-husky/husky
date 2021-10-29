@@ -25,6 +25,8 @@ import org.ehealth_connector.xua.core.SecurityObject;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.NameIDType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConfirmationType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectType;
+import org.opensaml.saml.saml2.core.impl.NameIDBuilder;
+import org.opensaml.saml.saml2.core.impl.SubjectBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -48,6 +50,36 @@ public class SubjectImpl extends SubjectType implements SecurityObject<org.opens
 	protected SubjectImpl(org.opensaml.saml.saml2.core.Subject aSubject) {
 		subject = aSubject;
 		
+		getNameID();
+		getSubjectConfirmations();
+	}
+
+	/**
+	 * Instantiates a new SubjectImpl.
+	 *
+	 * @param aSubject the a subject
+	 */
+	protected SubjectImpl(SubjectType aSubject) {
+		subject = new SubjectBuilder().buildObject();
+
+		for (JAXBElement<?> element : aSubject.getContent()) {
+			if (element != null) {
+				if (element.getValue() instanceof NameIDType) {
+					var nameId = (NameIDType) element.getValue();
+					var retVal = new NameIDBuilder().buildObject();
+					retVal.setFormat(nameId.getFormat());
+					retVal.setValue(nameId.getValue());
+					retVal.setNameQualifier(nameId.getNameQualifier());
+					retVal.setSPNameQualifier(nameId.getSPNameQualifier());
+					retVal.setSPProvidedID(nameId.getSPProvidedID());
+					subject.setNameID(retVal);
+				} else if (element.getValue() instanceof SubjectConfirmationType) {
+					var subjectConf = (SubjectConfirmationType) element.getValue();
+					subject.getSubjectConfirmations().add(new SubjectConfirmationBuilderImpl().create(subjectConf));
+				}
+			}
+		}
+
 		getNameID();
 		getSubjectConfirmations();
 	}

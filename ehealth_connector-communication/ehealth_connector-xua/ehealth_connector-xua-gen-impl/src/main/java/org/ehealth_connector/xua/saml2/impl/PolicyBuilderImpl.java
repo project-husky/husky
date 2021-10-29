@@ -25,8 +25,15 @@ import org.herasaf.xacml.core.combiningAlgorithm.rule.impl.RuleOrderedPermitOver
 import org.herasaf.xacml.core.combiningAlgorithm.rule.impl.RulePermitOverridesAlgorithm;
 import org.herasaf.xacml.core.policy.impl.DefaultsType;
 import org.herasaf.xacml.core.policy.impl.EvaluatableIDImpl;
+import org.herasaf.xacml.core.policy.impl.ObligationType;
 import org.herasaf.xacml.core.policy.impl.ObligationsType;
 import org.herasaf.xacml.core.policy.impl.PolicyType;
+import org.herasaf.xacml.core.policy.impl.RuleType;
+import org.opensaml.core.xml.schema.impl.XSStringBuilder;
+import org.opensaml.xacml.policy.impl.DefaultsTypeImplBuilder;
+import org.opensaml.xacml.policy.impl.DescriptionTypeImplBuilder;
+import org.opensaml.xacml.policy.impl.ObligationsTypeImplBuilder;
+import org.opensaml.xacml.policy.impl.PolicyTypeImplBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -100,6 +107,57 @@ public class PolicyBuilderImpl
 	@Override
 	public PolicyType create() {
 		return new PolicyType();
+	}
+
+	public org.opensaml.xacml.policy.PolicyType create(PolicyType aInternalObject) {
+		var policy = new PolicyTypeImplBuilder().buildObject();
+		policy.setVersion(aInternalObject.getVersion());
+
+		if (aInternalObject.getDescription() != null) {
+			var description = new DescriptionTypeImplBuilder().buildObject();
+			description.setValue(aInternalObject.getDescription());
+			policy.setDescription(description);
+		}
+
+		if (aInternalObject.getCombiningAlg() != null) {
+			policy.setRuleCombiningAlgoId(aInternalObject.getCombiningAlg().getCombiningAlgorithmId());
+		}
+
+		if (aInternalObject.getObligations() != null) {
+			var obligationsType = new ObligationsTypeImplBuilder().buildObject();
+
+			for (ObligationType type : aInternalObject.getObligations().getObligations()) {
+				obligationsType.getObligations().add(new ObligationBuilderImpl().create(type));
+			}
+
+			policy.setObligations(obligationsType);
+		}
+
+		if (aInternalObject.getPolicyDefaults() != null
+				&& aInternalObject.getPolicyDefaults().getXPathVersion() != null) {
+			var defaultType = new DefaultsTypeImplBuilder().buildObject();
+			var xsstring = new XSStringBuilder().buildObject("", "", "");
+			xsstring.setValue(aInternalObject.getPolicyDefaults().getXPathVersion());
+			defaultType.setXPathVersion(xsstring);
+			policy.setPolicyDefaults(defaultType);
+		}
+
+		policy.setPolicyId(((EvaluatableIDImpl) aInternalObject.getPolicyId()).toString());
+
+		if (aInternalObject.getTarget() != null) {
+			policy.setTarget(new TargetBuilderImpl().create(aInternalObject.getTarget()));
+		}
+
+		if (aInternalObject.getAdditionalInformation() != null) {
+			for (Object obj : aInternalObject.getAdditionalInformation()) {
+				if (obj instanceof RuleType) {
+					policy.getRules().add(new RuleBuilderImpl().create((RuleType) obj));
+				}
+			}
+
+		}
+
+		return policy;
 	}
 
 }

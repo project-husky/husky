@@ -39,6 +39,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.ehealth_connector.common.utils.xml.XmlFactories;
 import org.ehealth_connector.xua.authentication.AuthnRequest;
 import org.ehealth_connector.xua.communication.config.impl.IdpClientBasicAuthConfigImpl;
 import org.ehealth_connector.xua.deserialization.impl.ResponseDeserializerImpl;
@@ -190,11 +191,7 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 	@Override
 	Response parseResponse(CloseableHttpResponse response) throws ClientSendException {
 		try {
-			final var docFactory = DocumentBuilderFactory.newInstance();
-			docFactory.setNamespaceAware(true);
-			docFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-			docFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
-			final var docBuilder = docFactory.newDocumentBuilder();
+			final var docBuilder = XmlFactories.newSafeDocumentBuilder();
 			final var soapDocument = docBuilder.parse(response.getEntity().getContent());
 
 			// get the xml response node

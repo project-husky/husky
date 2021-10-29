@@ -16,8 +16,8 @@
  */
 package org.ehealth_connector.cda.enums.epsos;
 
-import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.hl7cdar2.CE;
+import org.ehealth_connector.common.model.Code;
 
 /*
 *<div class="en">Description of blood group</div>

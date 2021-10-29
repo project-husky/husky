@@ -121,7 +121,7 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 		return new XUserAssertionRequestImpl(aInternalObject);
 	}
 
-	private XMLObject createObjectAttribute(String aName, XMLObject hl7PurposeOfUse) {
+	protected XMLObject createObjectAttribute(String aName, XMLObject hl7PurposeOfUse) {
 		final var attribute = new AttributeBuilder().buildObject();
 		attribute.setName(aName);
 		final var anyBuilder = new XSAnyBuilder();
@@ -131,7 +131,7 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 		return attribute;
 	}
 
-	private Attribute createStringAttribute(String aName, String aValue) {
+	protected Attribute createStringAttribute(String aName, String aValue) {
 		final var attribute = new AttributeBuilder().buildObject();
 		attribute.setName(aName);
 
@@ -196,11 +196,11 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 	 * @see org.ehealth_connector.xua.communication.xua.XUserAssertionRequestBuilder#purposeOfUse(org.ehealth_connector.xua.hl7v3.PurposeOfUse)
 	 */
 	@Override
-	public XUserAssertionRequestBuilder purposeOfUse(PurposeOfUse testPurposeOfUse) {
-		if (testPurposeOfUse != null) {
+	public XUserAssertionRequestBuilder purposeOfUse(PurposeOfUse purposeOfUse) {
+		if (purposeOfUse != null) {
 			addXMLObjectToClaims(
 					createObjectAttribute(XUserAssertionConstants.OASIS_XACML_PURPOSEOFUSE,
-							(OpenSamlPurposeOfUse) testPurposeOfUse));
+							(OpenSamlPurposeOfUse) purposeOfUse));
 		}
 		return this;
 	}

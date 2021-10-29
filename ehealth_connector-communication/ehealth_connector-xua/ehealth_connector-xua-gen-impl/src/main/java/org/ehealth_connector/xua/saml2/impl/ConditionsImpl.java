@@ -21,7 +21,9 @@ import java.util.List;
 
 import org.ehealth_connector.xua.core.SecurityObject;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AudienceRestrictionType;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionAbstractType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionsType;
+import org.opensaml.saml.saml2.core.impl.ConditionsBuilder;
 
 /**
  *
@@ -33,6 +35,27 @@ public class ConditionsImpl
 
 	protected ConditionsImpl(org.opensaml.saml.saml2.core.Conditions aInternalObject) {
 		wrappedObject = aInternalObject;
+	}
+
+	protected ConditionsImpl(ConditionsType aInternalObject) {
+		wrappedObject = new ConditionsBuilder().buildObject();
+		
+		if(aInternalObject != null) {
+			for(ConditionAbstractType condition: aInternalObject.getConditionOrAudienceRestrictionOrOneTimeUse()) {
+				if(condition instanceof AudienceRestrictionType) {
+					var audienceRestr = (AudienceRestrictionType) condition;
+					wrappedObject.getAudienceRestrictions().add(new AudienceRestrictionBuilderImpl().create(audienceRestr));
+				}
+			}
+
+			if (aInternalObject.getNotBefore() != null) {
+				wrappedObject.setNotBefore(aInternalObject.getNotBefore().toGregorianCalendar().toInstant());
+			}
+
+			if (aInternalObject.getNotOnOrAfter() != null) {
+				wrappedObject.setNotOnOrAfter(aInternalObject.getNotOnOrAfter().toGregorianCalendar().toInstant());
+			}
+		}
 	}
 
 	public List<AudienceRestrictionType> getAudienceRestrictions() {	

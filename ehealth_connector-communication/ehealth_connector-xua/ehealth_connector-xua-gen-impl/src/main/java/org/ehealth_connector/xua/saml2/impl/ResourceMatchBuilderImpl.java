@@ -22,8 +22,11 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
+import org.ehealth_connector.xua.hl7v3.OpenSamlInstanceIdentifier;
+import org.ehealth_connector.xua.hl7v3.impl.InstanceIdentifierBuilder;
 import org.ehealth_connector.xua.hl7v3.impl.InstanceIdentifierImpl;
 import org.ehealth_connector.xua.saml2.SimpleBuilder;
+import org.herasaf.xacml.core.dataTypeAttribute.impl.AnyURIDataTypeAttribute;
 import org.herasaf.xacml.core.policy.impl.AttributeSelectorType;
 import org.herasaf.xacml.core.policy.impl.AttributeValueType;
 import org.herasaf.xacml.core.policy.impl.ResourceAttributeDesignatorType;
@@ -31,7 +34,13 @@ import org.herasaf.xacml.core.policy.impl.ResourceMatchType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.CV;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.II;
 import org.opensaml.core.xml.XMLObject;
+import org.opensaml.core.xml.schema.XSAny;
+import org.opensaml.core.xml.schema.impl.XSAnyBuilder;
 import org.opensaml.core.xml.schema.impl.XSAnyImpl;
+import org.opensaml.xacml.policy.impl.AttributeDesignatorTypeImplBuilder;
+import org.opensaml.xacml.policy.impl.AttributeSelectorTypeImplBuilder;
+import org.opensaml.xacml.policy.impl.AttributeValueTypeImplBuilder;
+import org.opensaml.xacml.policy.impl.ResourceMatchTypeImplBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -120,6 +129,8 @@ public class ResourceMatchBuilderImpl implements SimpleBuilder<ResourceMatchType
 			if (aInternalObject.getResourceAttributeDesignator().getDataType() != null) {
 				resourceAttrDesignator.setDataType(new DataTypeAttributeBuilderImpl()
 						.create(aInternalObject.getResourceAttributeDesignator().getDataType()));
+			} else {
+				resourceAttrDesignator.setDataType(new AnyURIDataTypeAttribute());
 			}
 
 			resourceAttrDesignator
@@ -135,6 +146,91 @@ public class ResourceMatchBuilderImpl implements SimpleBuilder<ResourceMatchType
 	@Override
 	public ResourceMatchType create() {
 		return new ResourceMatchType();
+	}
+
+	public org.opensaml.xacml.policy.ResourceMatchType create(ResourceMatchType aInternalObject) {
+		var retVal = new ResourceMatchTypeImplBuilder().buildObject();
+
+		if (aInternalObject.getAttributeSelector() != null) {
+			var attrSelectorType = new AttributeSelectorTypeImplBuilder().buildObject();
+
+			if (aInternalObject.getAttributeSelector().getDataType() != null) {
+				attrSelectorType.setDataType(aInternalObject.getAttributeSelector().getDataType());
+			}
+
+			attrSelectorType.setMustBePresent(aInternalObject.getAttributeSelector().isMustBePresent());
+			attrSelectorType.setRequestContextPath(aInternalObject.getAttributeSelector().getRequestContextPath());
+			retVal.setAttributeSelector(attrSelectorType);
+		}
+
+		if (aInternalObject.getAttributeValue() != null) {
+			if (retVal.getAttributeValue() == null) {
+				retVal.setAttributeValue(new AttributeValueTypeImplBuilder().buildObject());
+			}
+
+			if (aInternalObject.getAttributeValue().getContent() != null) {
+				for (Object object : aInternalObject.getAttributeValue().getContent()) {
+					if (object instanceof JAXBElement) {
+						var jaxbElement = (JAXBElement<?>) object;
+						if (jaxbElement != null) {
+							if (jaxbElement.getValue() instanceof CV) {
+								var cv = (CV) jaxbElement.getValue();
+
+								XSAny any = new XSAnyBuilder().buildObject(new QName("", "CodedValue"));
+								any.getUnknownAttributes().put(new QName("code"), cv.getCode());
+								any.getUnknownAttributes().put(new QName("codeSystem"), cv.getCode());
+								any.getUnknownAttributes().put(new QName("displayName"), cv.getDisplayName());
+
+								retVal.getAttributeValue().getUnknownXMLObjects().add(any);
+							} else if (jaxbElement.getValue() instanceof II) {
+								II id = (II) jaxbElement.getValue();
+								OpenSamlInstanceIdentifier instanceIdent = new InstanceIdentifierBuilder()
+										.buildObject();
+								instanceIdent.setExtension(id.getExtension());
+								instanceIdent.setRoot(id.getRoot());
+								retVal.getAttributeValue().getUnknownXMLObjects().add(instanceIdent);
+							} else if (jaxbElement.getValue() instanceof AttributeValueType) {
+								var attributeVal = (AttributeValueType) jaxbElement.getValue();
+								var attVal = new AttributeValueTypeImplBuilder().buildObject();
+								attVal.setValue((String) attributeVal.getContent().get(0));
+								retVal.setAttributeValue(attVal);
+							}
+						}
+					} else if (object instanceof String) {
+						retVal.getAttributeValue().setValue((String) object);
+					}
+				}
+			}
+
+			if (aInternalObject.getAttributeValue().getDataType() != null) {
+				retVal.getAttributeValue().setDataType(
+						new DataTypeAttributeBuilderImpl().create(aInternalObject.getAttributeValue().getDataType()));
+			}
+		}
+
+		if (aInternalObject.getResourceAttributeDesignator() != null) {
+			var resourceAttrDesignator = new AttributeDesignatorTypeImplBuilder().buildObject();
+			resourceAttrDesignator.setAttributeId(aInternalObject.getResourceAttributeDesignator().getAttributeId());
+
+			if (aInternalObject.getResourceAttributeDesignator().getIssuer() != null) {
+				resourceAttrDesignator.setIssuer(aInternalObject.getResourceAttributeDesignator().getIssuer());
+			}
+
+			if (aInternalObject.getResourceAttributeDesignator().getDataType() != null) {
+				resourceAttrDesignator.setDataType(new DataTypeAttributeBuilderImpl()
+						.create(aInternalObject.getResourceAttributeDesignator().getDataType()));
+			} else {
+				resourceAttrDesignator.setDataType("http://www.w3.org/2001/XMLSchema#anyURI");
+			}
+
+			resourceAttrDesignator
+					.setMustBePresent(aInternalObject.getResourceAttributeDesignator().isMustBePresent());
+			retVal.setResourceAttributeDesignator(resourceAttrDesignator);
+		}
+
+		retVal.setMatchId(aInternalObject.getMatchFunction().getFunctionId());
+
+		return retVal;
 	}
 
 }

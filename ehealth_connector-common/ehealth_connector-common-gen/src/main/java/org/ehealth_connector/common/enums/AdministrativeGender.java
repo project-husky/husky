@@ -16,89 +16,53 @@
  */
 package org.ehealth_connector.common.enums;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.ehealth_connector.common.hl7cdar2.CE;
+import org.ehealth_connector.common.model.Code;
 
-import javax.annotation.processing.Generated;
-
-import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
-
-/**
- * <!-- @formatter:off -->
- * <div class="en"><p>    <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26</p><b>description: </b><p>The gender of a person used for adminstrative purposes (as opposed to clinical gender)</p></div>
- * <div class="de">no designation found for language GERMAN</div>
- * <div class="fr">no designation found for language FRENCH</div>
- * <div class="it">no designation found for language ITALIAN</div>
- * <!-- @formatter:on -->
- */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
-public enum AdministrativeGender implements ValueSetEnumInterface {
+/*
+*<div class="de">Das Geschlecht einer Person, welches für verwaltungstechnische Belange verwendet wird</div>
+*<div class="fr"></div>
+*/
+public enum AdministrativeGender {
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Female</div>
-	 * <!-- @formatter:on -->
+	 * <div class="en"></div> <div class="de">Weiblich</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 */
-	FEMALE("F", "2.16.840.1.113883.5.1", "Female", "Female", "TOTRANSLATE", "TOTRANSLATE",
-			"TOTRANSLATE"),
+	FEMALE("F", "Female"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Male</div>
-	 * <!-- @formatter:on -->
+	 * <div class="en"></div> <div class="de">Männlich</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 */
-	MALE("M", "2.16.840.1.113883.5.1", "Male", "Male", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	MALE("M", "Male"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Undifferentiated</div>
-	 * <!-- @formatter:on -->
+	 * <div class="en"></div> <div class="de">Undifferenziert</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 */
-	UNDIFFERENTIATED("UN", "2.16.840.1.113883.5.1", "Undifferentiated", "Undifferentiated",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+	UNDIFFERENTIATED("UN", "Undifferentiated");
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Female</div>
-	 * <!-- @formatter:on -->
+	 * <div class="en">Name of the Code System</div> <div class="de">Name des
+	 * Codes Systems</div>
 	 */
+	public static final String CODE_SYSTEM_NAME = "HL7 AdministrativeGender";
+	/**
+	 * <div class="en">Identifier of the Code System</div>
+	 * <div class="de">Identifikator für das Code System</div>
+	 */
+	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.1";
 	public static final String FEMALE_CODE = "F";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Male</div>
-	 * <!-- @formatter:on -->
-	 */
 	public static final String MALE_CODE = "M";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Undifferentiated</div>
-	 * <!-- @formatter:on -->
-	 */
 	public static final String UNDIFFERENTIATED_CODE = "UN";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator für das Value Set</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String VALUE_SET_ID = "2.16.840.1.113883.1.11.1";
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Name of the value set</div>
-	 * <div class="de">Name des Value Sets</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String VALUE_SET_NAME = "AdministrativeGender";
-
-	/**
-	 * <!-- @formatter:off -->
 	 * <div class="en">Gets the Enum with a given code</div>
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
-	 * <!-- @formatter:on -->
 	 *
 	 * @param code
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
@@ -112,12 +76,13 @@ public enum AdministrativeGender implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
-	 * <!-- @formatter:on -->
+	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
+	 * ist.</div>
+	 *
 	 *
 	 * @param enumName
+	 *            <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -134,12 +99,12 @@ public enum AdministrativeGender implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
-	 * <!-- @formatter:on -->
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
+	 * ist.</div>
 	 *
 	 * @param codeValue
+	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
@@ -153,147 +118,98 @@ public enum AdministrativeGender implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Machine interpretable and (inside this class) unique code</div>
-	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse) eindeutiger Code</div>
-	 * <!-- @formatter:on -->
+	 * <div class="en">Machine interpretable and (inside this class) unique
+	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
+	 * dieser Klasse) eindeutiger Code</div>
 	 */
 	private String code;
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Identifier of the referencing code system.</div>
-	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
-	 * <!-- @formatter:on -->
+	 * <div class="en">Human readable name</div>
+	 * <div class="de">Menschenlesbarer Name</div>
 	 */
-	private String codeSystem;
+	private String displayName;
 
 	/**
-	 * The display names per language
-	 */
-	private Map<LanguageCode, String> displayNames;
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display Name</div>
-	 * <div class="de">Instanziiert dieses Enum Object mittels eines Codes und einem Display Name</div>.
-	 * <!-- @formatter:on -->
+	 * <div class="en">Instantiates this Enum Object with a given Code and
+	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>
 	 *
 	 * @param code
-	 *            code
-	 * @param codeSystem
-	 *            codeSystem
+	 *            <br>
+	 *            <div class="de"> code</div>
 	 * @param displayName
-	 *            the default display name
-	 * @param displayNameEn
-	 *            the display name en
-	 * @param displayNameDe
-	 *            the display name de
-	 * @param displayNameFr
-	 *            the display name fr
-	 * @param displayNameIt
-	 *            the display name it
+	 *            <br>
+	 *            <div class="de"> display name</div>
 	 */
-	AdministrativeGender(String code, String codeSystem, String displayName, String displayNameEn,
-			String displayNameDe, String displayNameFr, String displayNameIt) {
+	private AdministrativeGender(String code, String displayName) {
 		this.code = code;
-		this.codeSystem = codeSystem;
-		displayNames = new HashMap<>();
-		displayNames.put(null, displayName);
-		displayNames.put(LanguageCode.ENGLISH, displayNameEn);
-		displayNames.put(LanguageCode.GERMAN, displayNameDe);
-		displayNames.put(LanguageCode.FRENCH, displayNameFr);
-		displayNames.put(LanguageCode.ITALIAN, displayNameIt);
+		this.displayName = displayName;
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the code system identifier.</div>
-	 * <div class="de">Liefert den Code System Identifikator.</div>
-	 * <!-- @formatter:on -->
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
+	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 *
-	 * @return <div class="en">the code system identifier</div>
+	 * @return <div class="en">The MDHT Code</div>
 	 */
-	@Override
-	public String getCodeSystemId() {
-		return this.codeSystem;
+	public CE getCE() {
+		final var ce = new CE();
+		ce.setCodeSystem(CODE_SYSTEM_OID);
+		ce.setCodeSystemName(CODE_SYSTEM_NAME);
+		ce.setCode(code);
+		ce.setDisplayName(displayName);
+		return ce;
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the code system name.</div>
-	 * <div class="de">Liefert den Code System Namen.</div>
-	 * <!-- @formatter:on -->
-	 *
-	 * @return <div class="en">the code system identifier</div>
-	 */
-	@Override
-	public String getCodeSystemName() {
-		String retVal = "";
-		CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
-		if (cs != null)
-			retVal = cs.getCodeSystemName();
-		return retVal;
-	}
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>
-	 * <!-- @formatter:on -->
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
 	 *
 	 * @return <div class="en">the code</div>
 	 */
-	@Override
+	public Code getCode() {
+		return new Code(code, CODE_SYSTEM_OID, displayName);
+	}
+
+	/**
+	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
+	 * code system name.</div>
+	 *
+	 * @return <div class="en">the code system name</div>
+	 */
+	public String getCodeSystemName() {
+		return CODE_SYSTEM_NAME;
+	}
+
+	/**
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
+	 *
+	 * @return <div class="en">the code system id</div>
+	 */
+	public String getCodeSystemOid() {
+		return CODE_SYSTEM_OID;
+	}
+
+	/**
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
+	 *
+	 * @return <div class="en">the code</div>
+	 */
 	public String getCodeValue() {
 		return this.code;
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the display name defined by the language param. If
-	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
-	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
-	 * <!-- @formatter:on -->
+	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
+	 * display name.</div>
 	 *
-	 * @param languageCode
-	 *            the language code to get the display name for
-	 * @return returns the display name in the desired language. if language not
-	 *         found, display name in german will returned
+	 * @return <div class="en">the display name</div>
 	 */
-	@Override
-	public String getDisplayName(LanguageCode languageCode) {
-		String displayName = displayNames.get(languageCode);
-		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
-			return displayNames.get(null);
-		}
-		return displayName;
+	public String getDisplayName() {
+		return this.displayName;
 	}
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the value set identifier.</div>
-	 * <div class="de">Liefert den Value Set Identifikator.</div>
-	 * <!-- @formatter:on -->
-	 *
-	 * @return <div class="en">the value set identifier</div>
-	 */
-	@Override
-	public String getValueSetId() {
-		return VALUE_SET_ID;
-	}
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the value set name.</div>
-	 * <div class="de">Liefert den Value Set Namen.</div>
-	 * <!-- @formatter:on -->
-	 *
-	 * @return <div class="en">the value set name</div>
-	 */
-	@Override
-	public String getValueSetName() {
-		return VALUE_SET_NAME;
-	}
 }

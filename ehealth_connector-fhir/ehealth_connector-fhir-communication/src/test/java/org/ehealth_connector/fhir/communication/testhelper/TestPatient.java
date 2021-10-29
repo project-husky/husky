@@ -21,7 +21,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.ehealth_connector.common.mdht.enums.CountryCode;
+import org.ehealth_connector.common.enums.CountryCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;

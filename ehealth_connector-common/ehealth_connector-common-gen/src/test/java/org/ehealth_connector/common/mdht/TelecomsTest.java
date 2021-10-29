@@ -20,8 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import org.ehealth_connector.common.Telecom;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
+import org.ehealth_connector.common.model.Telecom;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -54,7 +54,7 @@ public class TelecomsTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Telecoms#addEMail(java.lang.String, org.ehealth_connector.common.enums.TelecomAddressUse)}
+	 * {@link org.ehealth_connector.common.model.Telecoms#addEMail(java.lang.String, org.ehealth_connector.common.enums.TelecomAddressUse)}
 	 * .
 	 */
 	@Test
@@ -75,7 +75,7 @@ public class TelecomsTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Telecoms#addFax(java.lang.String, org.ehealth_connector.common.enums.TelecomAddressUse)}
+	 * {@link org.ehealth_connector.common.model.Telecoms#addFax(java.lang.String, org.ehealth_connector.common.enums.TelecomAddressUse)}
 	 * .
 	 */
 	@Test
@@ -95,7 +95,7 @@ public class TelecomsTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Telecoms#addPhone(java.lang.String, org.ehealth_connector.common.enums.TelecomAddressUse)}
+	 * {@link org.ehealth_connector.common.model.Telecoms#addPhone(java.lang.String, org.ehealth_connector.common.enums.TelecomAddressUse)}
 	 * .
 	 */
 	@Test
@@ -114,7 +114,7 @@ public class TelecomsTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Telecoms#addWebsite(java.lang.String, org.ehealth_connector.common.enums.TelecomAddressUse)}
+	 * {@link org.ehealth_connector.common.model.Telecoms#addWebsite(java.lang.String, org.ehealth_connector.common.enums.TelecomAddressUse)}
 	 * .
 	 */
 	@Test
@@ -130,7 +130,7 @@ public class TelecomsTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Telecoms#Telecoms(org.eclipse.emf.common.util.EList)}
+	 * {@link org.ehealth_connector.common.model.Telecoms#Telecoms(org.eclipse.emf.common.util.EList)}
 	 * .
 	 */
 	@Test

@@ -22,6 +22,8 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
+import org.ehealth_connector.xua.hl7v3.OpenSamlInstanceIdentifier;
+import org.ehealth_connector.xua.hl7v3.impl.InstanceIdentifierBuilder;
 import org.ehealth_connector.xua.hl7v3.impl.InstanceIdentifierImpl;
 import org.ehealth_connector.xua.saml2.SimpleBuilder;
 import org.herasaf.xacml.core.policy.impl.AttributeSelectorType;
@@ -31,7 +33,13 @@ import org.herasaf.xacml.core.policy.impl.SubjectMatchType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.CV;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.II;
 import org.opensaml.core.xml.XMLObject;
+import org.opensaml.core.xml.schema.XSAny;
+import org.opensaml.core.xml.schema.impl.XSAnyBuilder;
 import org.opensaml.core.xml.schema.impl.XSAnyImpl;
+import org.opensaml.xacml.policy.impl.AttributeSelectorTypeImplBuilder;
+import org.opensaml.xacml.policy.impl.AttributeValueTypeImplBuilder;
+import org.opensaml.xacml.policy.impl.SubjectAttributeDesignatorTypeImplBuilder;
+import org.opensaml.xacml.policy.impl.SubjectMatchTypeImplBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -138,6 +146,89 @@ public class SubjectMatchBuilderImpl
 	@Override
 	public SubjectMatchType create() {
 		return new SubjectMatchType();
+	}
+
+	public org.opensaml.xacml.policy.SubjectMatchType create(SubjectMatchType aInternalObject) {
+		var retVal = new SubjectMatchTypeImplBuilder().buildObject();
+
+		if (aInternalObject.getAttributeSelector() != null) {
+			var attrSelectorType = new AttributeSelectorTypeImplBuilder().buildObject();
+
+			if (aInternalObject.getAttributeSelector().getDataType() != null) {
+				attrSelectorType.setDataType(aInternalObject.getAttributeSelector().getDataType());
+			}
+
+			attrSelectorType.setMustBePresent(aInternalObject.getAttributeSelector().isMustBePresent());
+			attrSelectorType.setRequestContextPath(aInternalObject.getAttributeSelector().getRequestContextPath());
+			retVal.setAttributeSelector(attrSelectorType);
+		}
+
+		if (aInternalObject.getAttributeValue() != null) {
+			if (aInternalObject.getAttributeValue().getContent() != null) {
+				if (retVal.getAttributeValue() == null) {
+					var attributeVal = new AttributeValueTypeImplBuilder().buildObject();
+					retVal.setAttributeValue(attributeVal);
+				}
+
+				for (Object object : aInternalObject.getAttributeValue().getContent()) {
+					if(object instanceof JAXBElement) {
+						var jaxbElement = (JAXBElement<?>) object;
+						if (jaxbElement != null) {
+							if (jaxbElement.getValue() instanceof CV) {
+								var cv = (CV) jaxbElement.getValue();
+
+								XSAny any = new XSAnyBuilder().buildObject(new QName("", "CodedValue"));
+								any.getUnknownAttributes().put(new QName("code"), cv.getCode());
+								any.getUnknownAttributes().put(new QName("codeSystem"), cv.getCodeSystem());
+								any.getUnknownAttributes().put(new QName("displayName"), cv.getDisplayName());
+
+								retVal.getAttributeValue().getUnknownXMLObjects().add(any);
+							} else if (jaxbElement.getValue() instanceof II) {
+								II id = (II) jaxbElement.getValue();
+								OpenSamlInstanceIdentifier instanceIdent = new InstanceIdentifierBuilder()
+										.buildObject();
+								instanceIdent.setExtension(id.getExtension());
+								instanceIdent.setRoot(id.getRoot());
+								retVal.getAttributeValue().getUnknownXMLObjects().add(instanceIdent);
+							} else if (jaxbElement.getValue() instanceof AttributeValueType) {
+								var attributeVal = (AttributeValueType) jaxbElement.getValue();
+								var attVal = new AttributeValueTypeImplBuilder().buildObject();
+								attVal.setValue((String) attributeVal.getContent().get(0));
+								retVal.setAttributeValue(attVal);
+							}
+						}
+					} else if (object instanceof String) {
+						retVal.getAttributeValue().setValue((String) object);
+					}
+				}
+			}
+
+			if (aInternalObject.getAttributeValue().getDataType() != null) {
+				retVal.getAttributeValue().setDataType(
+						new DataTypeAttributeBuilderImpl().create(aInternalObject.getAttributeValue().getDataType()));
+			}
+		}
+
+		if (aInternalObject.getSubjectAttributeDesignator() != null) {
+			var subjectAttrDesignator = new SubjectAttributeDesignatorTypeImplBuilder().buildObject();
+			subjectAttrDesignator.setAttributeId(aInternalObject.getSubjectAttributeDesignator().getAttributeId());
+
+			if (aInternalObject.getSubjectAttributeDesignator().getIssuer() != null) {
+				subjectAttrDesignator.setIssuer(aInternalObject.getSubjectAttributeDesignator().getIssuer());
+			}
+
+			if (aInternalObject.getSubjectAttributeDesignator().getDataType() != null) {
+				subjectAttrDesignator.setDataType(new DataTypeAttributeBuilderImpl()
+						.create(aInternalObject.getSubjectAttributeDesignator().getDataType()));
+			}
+
+			subjectAttrDesignator.setMustBePresent(aInternalObject.getSubjectAttributeDesignator().isMustBePresent());
+			retVal.setSubjectAttributeDesignator(subjectAttrDesignator);
+		}
+
+		retVal.setMatchId(aInternalObject.getMatchFunction().getFunctionId());
+
+		return retVal;
 	}
 
 }

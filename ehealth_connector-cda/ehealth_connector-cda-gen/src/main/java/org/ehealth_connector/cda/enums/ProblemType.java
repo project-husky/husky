@@ -16,8 +16,8 @@
  */
 package org.ehealth_connector.cda.enums;
 
-import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.hl7cdar2.CD;
+import org.ehealth_connector.common.model.Code;
 
 /*
  *<div class="de">Wertebereich für Art des Problems (SNOMED CT; 2.16.840.1.113883.6.96)</div>

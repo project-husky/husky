@@ -41,6 +41,7 @@ public class SimplePpfClient extends CamelService
 		implements PpfClient {
 
 	private static final String EHS_2015_POLYADMIN = "urn:e-health-suisse:2015:policy-administration:";
+
 	private PpClientConfig config;
 	
 
@@ -66,13 +67,15 @@ public class SimplePpfClient extends CamelService
 				if (requestToSend != null) {
 					requestToSend.setAssertion(request.getAssertion());
 
+					boolean secure = config.getUrl().contains("https://");
+
 					final var serverInLogger = "#serverInLogger";
 					final var serverOutLogger = "#serverOutLogger";
 					final var endpoint = String.format(
-							"ch-ppq1://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s",
-							config.getUrl().replace("https://", ""),
+							"ch-ppq1://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=#auditContext",
+							config.getUrl().replace("https://", "").replace("http://", ""),
 							serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
-							true, getAuditContext().isAuditEnabled());
+							secure, getAuditContext().isAuditEnabled());
 
 					final var exchange = send(endpoint, requestToSend, aAssertion, null);
 

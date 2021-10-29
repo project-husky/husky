@@ -16,9 +16,9 @@
  */
 package org.ehealth_connector.communication.ch.enums.vacd.v140;
 
-import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
+import org.ehealth_connector.common.enums.ValueSetEnumInterface;
+import org.ehealth_connector.common.model.Code;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 
 /*

@@ -31,8 +31,8 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamSource;
 
 import org.ehealth_connector.cda.utils.CdaUtil;
-import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+import org.ehealth_connector.common.model.Identificator;
 import org.ehealth_connector.common.utils.Hl7CdaR2Util;
 
 /**

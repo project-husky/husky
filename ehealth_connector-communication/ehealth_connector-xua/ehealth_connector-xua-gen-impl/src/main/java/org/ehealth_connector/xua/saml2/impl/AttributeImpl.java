@@ -20,8 +20,15 @@ import org.ehealth_connector.xua.core.SecurityObject;
 import org.ehealth_connector.xua.hl7v3.InstanceIdentifier;
 import org.ehealth_connector.xua.hl7v3.PurposeOfUse;
 import org.ehealth_connector.xua.hl7v3.Role;
+import org.ehealth_connector.xua.hl7v3.impl.InstanceIdentifierImpl;
+import org.ehealth_connector.xua.hl7v3.impl.PurposeOfUseBuilder;
+import org.ehealth_connector.xua.hl7v3.impl.PurposeOfUseImpl;
+import org.ehealth_connector.xua.hl7v3.impl.RoleImpl;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeType;
 import org.opensaml.core.xml.schema.XSString;
+import org.opensaml.core.xml.schema.impl.XSStringImpl;
+import org.opensaml.saml.saml2.core.impl.AttributeBuilder;
+import org.opensaml.saml.saml2.core.impl.AttributeValueImpl;
 
 /**
  * <!-- @formatter:off -->
@@ -44,6 +51,30 @@ public class AttributeImpl
 	 */
 	protected AttributeImpl(org.opensaml.saml.saml2.core.Attribute aAttribute) {
 		attribute = aAttribute;
+	}
+
+	/**
+	 *
+	 * Default constructor to instanciate the object
+	 *
+	 * @param aAttribute
+	 */
+	protected AttributeImpl(AttributeType aAttribute) {
+		attribute = new AttributeBuilder().buildObject();
+		attribute.setFriendlyName(aAttribute.getFriendlyName());
+		attribute.setName(aAttribute.getName());
+		attribute.setNameFormat(aAttribute.getNameFormat());
+
+		for (Object obj : aAttribute.getAttributeValue()) {
+			if (obj instanceof org.openehealth.ipf.commons.audit.types.PurposeOfUse.PurposeOfUseImpl) {
+				var purposeOfUse = (org.openehealth.ipf.commons.audit.types.PurposeOfUse.PurposeOfUseImpl) obj;
+				var retVal = new PurposeOfUseBuilder().buildObject();
+				retVal.setCode(purposeOfUse.getCode());
+				retVal.setCodeSystemName(purposeOfUse.getCodeSystemName());
+				retVal.setDisplayName(purposeOfUse.getDisplayName());
+				attribute.getAttributeValues().add(retVal);
+			}
+		}
 	}
 
 	/**
@@ -81,8 +112,8 @@ public class AttributeImpl
 
 	public InstanceIdentifier getValueAsInstanceIdentifier() {
 		if (isValueAInstanceIdentifier()) {
-			var instanceIdentifier = (InstanceIdentifier) attribute
-					.getAttributeValues().get(0);
+			var instanceIdentifier = (InstanceIdentifierImpl) ((AttributeValueImpl) attribute.getAttributeValues()
+					.get(0)).getUnknownXMLObjects().get(0);
 			getAttributeValue().add(instanceIdentifier);
 			return instanceIdentifier;
 		}
@@ -91,7 +122,8 @@ public class AttributeImpl
 
 	public PurposeOfUse getValueAsPurposeOfUse() {
 		if (isValueAPurposeOfUse()) {
-			var purposeOfUse = (PurposeOfUse) attribute.getAttributeValues().get(0);
+			var purposeOfUse = (PurposeOfUseImpl) ((AttributeValueImpl) attribute.getAttributeValues().get(0))
+					.getUnknownXMLObjects().get(0);
 			getAttributeValue().add(purposeOfUse);
 			return purposeOfUse;
 		}
@@ -100,7 +132,8 @@ public class AttributeImpl
 
 	public Role getValueAsRole() {
 		if (isValueARole()) {
-			var role = (Role) attribute.getAttributeValues().get(0);
+			var role = (RoleImpl) ((AttributeValueImpl) attribute.getAttributeValues().get(0)).getUnknownXMLObjects()
+					.get(0);
 			getAttributeValue().add(role);
 			return role;
 		}
@@ -109,7 +142,7 @@ public class AttributeImpl
 
 	public String getValueAsString() {
 		if (isValueAString()) {
-			final XSString attributeValue = (XSString) attribute.getAttributeValues().get(0);
+			final XSString attributeValue = (XSStringImpl) attribute.getAttributeValues().get(0);
 			getAttributeValue().add(attributeValue);
 			return attributeValue.getValue();
 		}
@@ -130,25 +163,38 @@ public class AttributeImpl
 	public boolean isValueAInstanceIdentifier() {
 		return (attribute.getAttributeValues() != null) //
 				&& (!attribute.getAttributeValues().isEmpty()) //
-				&& (attribute.getAttributeValues().get(0) instanceof InstanceIdentifier);
+				&& attribute.getAttributeValues().get(0) instanceof AttributeValueImpl
+				&& ((AttributeValueImpl) attribute.getAttributeValues().get(0)).getUnknownXMLObjects() != null
+				&& !((AttributeValueImpl) attribute.getAttributeValues().get(0)).getUnknownXMLObjects().isEmpty()
+				&& ((AttributeValueImpl) attribute.getAttributeValues().get(0)).getUnknownXMLObjects()
+						.get(0) instanceof InstanceIdentifierImpl;
 	}
 
 	public boolean isValueAPurposeOfUse() {
 		return (attribute.getAttributeValues() != null) //
 				&& (!attribute.getAttributeValues().isEmpty()) //
-				&& (attribute.getAttributeValues().get(0) instanceof PurposeOfUse);
+				&& attribute.getAttributeValues().get(0) instanceof AttributeValueImpl
+				&& ((AttributeValueImpl) attribute.getAttributeValues().get(0)).getUnknownXMLObjects() != null
+				&& !((AttributeValueImpl) attribute.getAttributeValues().get(0)).getUnknownXMLObjects().isEmpty()
+				&& ((AttributeValueImpl) attribute.getAttributeValues().get(0)).getUnknownXMLObjects()
+						.get(0) instanceof PurposeOfUseImpl;
 	}
 
 	public boolean isValueARole() {
 		return (attribute.getAttributeValues() != null) //
 				&& (!attribute.getAttributeValues().isEmpty()) //
-				&& (attribute.getAttributeValues().get(0) instanceof Role);
+				&& attribute.getAttributeValues().get(0) instanceof AttributeValueImpl
+				&& ((AttributeValueImpl) attribute.getAttributeValues().get(0)).getUnknownXMLObjects() != null
+				&& !((AttributeValueImpl) attribute.getAttributeValues().get(0)).getUnknownXMLObjects().isEmpty()
+				&& ((AttributeValueImpl) attribute.getAttributeValues().get(0)).getUnknownXMLObjects()
+						.get(0) instanceof RoleImpl;
 	}
 
 	public boolean isValueAString() {
 		return (attribute.getAttributeValues() != null) //
 				&& (!attribute.getAttributeValues().isEmpty()) //
-				&& (attribute.getAttributeValues().get(0) instanceof XSString);
+				&& attribute.getAttributeValues().get(0) instanceof XSStringImpl
+				&& ((XSStringImpl) attribute.getAttributeValues().get(0)).getValue() != null;
 	}
 
 }

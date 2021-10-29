@@ -52,4 +52,14 @@ public class ConditionsBuilderImpl implements ConditionsBuilder,
 		return new ConditionsImpl(aInternalObject);
 	}
 
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.xua.core.SecurityObjectBuilder#create(java.lang.Object)
+	 */
+	public org.opensaml.saml.saml2.core.Conditions create(ConditionsType aInternalObject) {
+		return new ConditionsImpl(aInternalObject).getWrappedObject();
+	}
+
 }

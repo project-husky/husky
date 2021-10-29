@@ -19,6 +19,7 @@ package org.ehealth_connector.xua.saml2.impl;
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.ehealth_connector.xua.saml2.SimpleBuilder;
 import org.herasaf.xacml.core.policy.impl.RuleType;
+import org.opensaml.xacml.policy.impl.RuleTypeImplBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -49,6 +50,20 @@ public class RuleBuilderImpl
 	@Override
 	public RuleType create() {
 		return new RuleType();
+	}
+
+	public org.opensaml.xacml.policy.RuleType create(RuleType aInternalObject) {
+		var ruleType = new RuleTypeImplBuilder().buildObject();
+
+		if (aInternalObject.getTarget() != null) {
+			ruleType.setTarget(new TargetBuilderImpl().create(aInternalObject.getTarget()));
+		}
+
+		if (aInternalObject.getCondition() != null) {
+			ruleType.setCondition(new ConditionXacmlBuilderImpl().create(aInternalObject.getCondition()));
+		}
+
+		return ruleType;
 	}
 
 }

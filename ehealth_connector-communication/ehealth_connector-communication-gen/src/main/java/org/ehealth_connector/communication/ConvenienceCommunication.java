@@ -30,7 +30,6 @@ import javax.activation.DataHandler;
 import javax.mail.util.ByteArrayDataSource;
 
 import org.apache.camel.CamelContext;
-import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.communication.AffinityDomain;
 import org.ehealth_connector.common.communication.AtnaConfig;
 import org.ehealth_connector.common.communication.AtnaConfig.AtnaConfigMode;
@@ -41,6 +40,7 @@ import org.ehealth_connector.common.communication.SubmissionSetMetadata;
 import org.ehealth_connector.common.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
 import org.ehealth_connector.common.enums.DocumentDescriptor;
 import org.ehealth_connector.common.enums.EhcVersions;
+import org.ehealth_connector.common.model.Code;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.OID;
 import org.ehealth_connector.common.utils.Util;

@@ -39,7 +39,7 @@ public class ValueTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Value#Value(org.openhealthtools.mdht.uml.hl7.datatypes.ANY)}
+	 * {@link org.ehealth_connector.common.model.Value#Value(org.openhealthtools.mdht.uml.hl7.datatypes.ANY)}
 	 * .
 	 */
 	@Test
@@ -49,7 +49,7 @@ public class ValueTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Value#Value(org.openhealthtools.mdht.uml.hl7.datatypes.CD)}
+	 * {@link org.ehealth_connector.common.model.Value#Value(org.openhealthtools.mdht.uml.hl7.datatypes.CD)}
 	 * .
 	 */
 	@Test
@@ -59,7 +59,7 @@ public class ValueTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Value#Value(org.ehealth_connector.common.mdht.Code)}
+	 * {@link org.ehealth_connector.common.model.Value#Value(org.ehealth_connector.common.mdht.Code)}
 	 * .
 	 */
 	@Test
@@ -69,7 +69,7 @@ public class ValueTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Value#Value(double, double, org.ehealth_connector.common.enums.Ucum)}
+	 * {@link org.ehealth_connector.common.model.Value#Value(double, double, org.ehealth_connector.common.enums.Ucum)}
 	 * .
 	 */
 	@Test
@@ -79,7 +79,7 @@ public class ValueTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Value#Value(org.openhealthtools.mdht.uml.hl7.datatypes.PQ)}
+	 * {@link org.ehealth_connector.common.model.Value#Value(org.openhealthtools.mdht.uml.hl7.datatypes.PQ)}
 	 * .
 	 */
 	@Test
@@ -89,7 +89,7 @@ public class ValueTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Value#Value(org.openhealthtools.mdht.uml.hl7.datatypes.RTO)}
+	 * {@link org.ehealth_connector.common.model.Value#Value(org.openhealthtools.mdht.uml.hl7.datatypes.RTO)}
 	 * .
 	 */
 	@Test
@@ -99,7 +99,7 @@ public class ValueTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Value#Value(java.lang.String, java.lang.String)}
+	 * {@link org.ehealth_connector.common.model.Value#Value(java.lang.String, java.lang.String)}
 	 * .
 	 */
 	@Test
@@ -109,7 +109,7 @@ public class ValueTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Value#Value(java.lang.String, org.ehealth_connector.common.enums.Ucum)}
+	 * {@link org.ehealth_connector.common.model.Value#Value(java.lang.String, org.ehealth_connector.common.enums.Ucum)}
 	 * .
 	 */
 	@Test

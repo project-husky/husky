@@ -19,12 +19,12 @@ package org.ehealth_connector.communication;
 
 import java.util.Date;
 
-import org.ehealth_connector.common.Address;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Name;
-import org.ehealth_connector.common.Telecom;
 import org.ehealth_connector.common.communication.Destination;
-import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
+import org.ehealth_connector.common.enums.AdministrativeGender;
+import org.ehealth_connector.common.model.Address;
+import org.ehealth_connector.common.model.Identificator;
+import org.ehealth_connector.common.model.Name;
+import org.ehealth_connector.common.model.Telecom;
 import org.ehealth_connector.communication.mpi.impl.pdq.V3PdqQuery;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 import org.hl7.fhir.dstu3.model.Identifier;

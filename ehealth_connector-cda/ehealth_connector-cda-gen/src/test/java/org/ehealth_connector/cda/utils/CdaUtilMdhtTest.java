@@ -16,7 +16,6 @@
  */
 package org.ehealth_connector.cda.utils;
 
-import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.hl7cdar2.ED;
@@ -27,6 +26,7 @@ import org.ehealth_connector.common.hl7cdar2.POCDMT000040Section;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040StructuredBody;
 import org.ehealth_connector.common.hl7cdar2.ST;
 import org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship;
+import org.ehealth_connector.common.model.Identificator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

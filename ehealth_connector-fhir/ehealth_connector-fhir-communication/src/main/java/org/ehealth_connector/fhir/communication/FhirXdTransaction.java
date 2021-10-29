@@ -135,7 +135,7 @@ public class FhirXdTransaction {
 	 * @return eHC author object </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public org.ehealth_connector.common.Author getAuthor(DocumentManifest fhirObject) {
+	public org.ehealth_connector.common.model.Author getAuthor(DocumentManifest fhirObject) {
 		if (!fhirObject.getAuthor().isEmpty())
 			return FhirCommon.getAuthor(fhirObject.getAuthor().get(0));
 		else
@@ -150,7 +150,7 @@ public class FhirXdTransaction {
 	 * @return eHC author object </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public org.ehealth_connector.common.Author getAuthor(DocumentReference fhirObject) {
+	public org.ehealth_connector.common.model.Author getAuthor(DocumentReference fhirObject) {
 		if (!fhirObject.getAuthor().isEmpty())
 			return FhirCommon.getAuthor(fhirObject.getAuthor().get(0));
 		else

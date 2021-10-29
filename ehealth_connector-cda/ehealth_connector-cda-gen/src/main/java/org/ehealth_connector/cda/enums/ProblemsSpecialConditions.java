@@ -16,8 +16,8 @@
  */
 package org.ehealth_connector.cda.enums;
 
-import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.hl7cdar2.CD;
+import org.ehealth_connector.common.model.Code;
 
 /*
  *<div class="de">Quelle für Subset: [IHE PCC TF-2], 6.3.4.14.11</div>

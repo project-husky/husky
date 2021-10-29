@@ -50,4 +50,8 @@ public class AudienceRestrictionBuilderImpl implements AudienceRestrictionBuilde
 		return new AudienceRestrictionImpl(aInternalObject);
 	}
 
+	public org.opensaml.saml.saml2.core.AudienceRestriction create(AudienceRestrictionType aInternalObject) {
+		return new AudienceRestrictionImpl(aInternalObject).getWrappedObject();
+	}
+
 }

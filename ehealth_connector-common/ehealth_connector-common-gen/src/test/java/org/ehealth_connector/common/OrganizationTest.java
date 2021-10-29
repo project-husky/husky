@@ -29,6 +29,7 @@ import org.ehealth_connector.common.enums.NullFlavor;
 import org.ehealth_connector.common.enums.PostalAddressUse;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Organization;
+import org.ehealth_connector.common.model.Organization;
 import org.junit.jupiter.api.Test;
 
 /**

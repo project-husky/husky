@@ -30,10 +30,10 @@ import org.junit.jupiter.api.Test;
 
 public class DestinationTest {
 
-	public static final String NIST = "http://ihexds.nist.gov/tf6/services/xdsrepositoryb";
+	public static final String NIST = "http://test.url";
 
 	// NIST SECURED Repository (query interface)
-	public static final String NIST_SECURED = "https://ihexds.nist.gov:12091/tf6/services/xdsrepositoryb";
+	public static final String NIST_SECURED = "https://test.url";
 	// Keystore and Truststore for secured communication (in this example, we
 	// use one keystore file for those two)
 	public static final String KEY_STORE = "docConsumer/security/keystore.jks";

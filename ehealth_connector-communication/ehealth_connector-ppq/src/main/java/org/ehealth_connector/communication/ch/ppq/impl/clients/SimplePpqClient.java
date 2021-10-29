@@ -31,8 +31,11 @@ import org.ehealth_connector.communication.ch.ppq.api.clients.PpqClient;
 import org.ehealth_connector.communication.ch.ppq.api.config.PpClientConfig;
 import org.ehealth_connector.communication.ch.ppq.impl.PrivacyPolicyQueryResponseBuilderImpl;
 import org.ehealth_connector.xua.core.SecurityHeaderElement;
-import org.herasaf.xacml.core.policy.impl.IdReferenceType;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.NameIDType;
+import org.herasaf.xacml.core.context.impl.AttributeType;
+import org.herasaf.xacml.core.context.impl.AttributeValueType;
+import org.herasaf.xacml.core.context.impl.RequestType;
+import org.openehealth.ipf.commons.ihe.xacml20.herasaf.types.IiDataTypeAttribute;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.II;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.protocol.ResponseType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.xacml20.saml.protocol.XACMLPolicyQueryType;
 import org.slf4j.Logger;
@@ -50,6 +53,7 @@ public class SimplePpqClient extends CamelService implements PpqClient {
 
 	/** The SLF4J logger instance. */
 	private static Logger log = LoggerFactory.getLogger(SimplePpqClient.class);
+
 
 	// private static final String EHS_2015_POLYADMIN =
 	// "urn:e-health-suisse:2015:policy-administration:";
@@ -70,7 +74,7 @@ public class SimplePpqClient extends CamelService implements PpqClient {
 				final var serverInLogger = "#serverInLogger";
 				final var serverOutLogger = "#serverOutLogger";
 				final var endpoint = String.format(
-						"ch-ppq2://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s",
+						"ch-ppq2://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=#auditContext",
 						config.getUrl().replace("http://", "").replace("https://", ""), serverInLogger, serverInLogger,
 						serverOutLogger,
 						serverOutLogger, secure, getAuditContext().isAuditEnabled());
@@ -94,6 +98,7 @@ public class SimplePpqClient extends CamelService implements PpqClient {
 		request.setConsent(query.getConsent());
 		request.setDestination(query.getDestination());
 		request.setID(query.getId());
+		request.setVersion("2.0");
 
 		XMLGregorianCalendar xmlGregCal = null;
 		try {
@@ -105,18 +110,28 @@ public class SimplePpqClient extends CamelService implements PpqClient {
 			log.error(e.getMessage(), e);
 		}
 
-		var nameIdType = new NameIDType();
-		nameIdType.setValue(query.getIssuer());
-		request.setIssuer(nameIdType);
+		var requestType = new RequestType();
+		var resourceType = new org.herasaf.xacml.core.context.impl.ResourceType();
+		var attributeType = new AttributeType();
+		attributeType.setAttributeId("urn:e-health-suisse:2015:epr-spid");
+		attributeType.setDataType(new IiDataTypeAttribute());
+		var attributeValueType = new AttributeValueType();
 
-		request.setVersion(query.getVersion());
+		if (query.getInstanceIdentifier() != null) {
+			var instanceIdent = new II();
+			instanceIdent.setExtension(query.getInstanceIdentifier().getExtension());
+			instanceIdent.setRoot(query.getInstanceIdentifier().getRoot());
+			attributeValueType.getContent()
+					.add(new JAXBElement<>(new QName("urn:hl7-org:v3", "InstanceIdentifier"), II.class, instanceIdent));
+		}
 
-		var id = new IdReferenceType();
-		id.setValue(query.getInstanceIdentifier().getExtension());
+		attributeType.getAttributeValues().add(attributeValueType);
+		resourceType.getAttributes().add(attributeType);
+		requestType.getResources().add(resourceType);
 
 		request.getRequestOrPolicySetIdReferenceOrPolicyIdReference()
-				.add(new JAXBElement<>(new QName("urn:oasis:names:tc:xacml:2.0:policy:schema:os", "IdReferenceType"),
-						IdReferenceType.class, id));
+				.add(new JAXBElement<>(new QName("urn:oasis:names:tc:xacml:2.0:context:schema:os", "Request"),
+						RequestType.class, requestType));
 
 		return request;
 

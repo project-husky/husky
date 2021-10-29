@@ -68,6 +68,10 @@ public class SubjectBuilderImpl implements SubjectBuilder,
 		return new SubjectImpl(aInternalObject);
 	}
 
+	public org.opensaml.saml.saml2.core.Subject create(SubjectType aInternalObject) {
+		return new SubjectImpl(aInternalObject).getWrappedObject();
+	}
+
 	@Override
 	public SubjectBuilder nameIDFormat(String aNameIDFormat) {
 		if (aNameIDFormat != null) {

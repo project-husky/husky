@@ -18,7 +18,7 @@ package org.ehealth_connector.communication.xd.storedquery;
 
 import java.util.List;
 
-import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.model.Code;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntryType;
 

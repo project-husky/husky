@@ -16,8 +16,8 @@
  */
 package org.ehealth_connector.cda.ch.enums;
 
-import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.hl7cdar2.CE;
+import org.ehealth_connector.common.model.Code;
 
 /*
  *<div class="de">Dieses Subset ist eine empfohlene Auswahl für den vorliegenden Implementierungsleitfaden. Andere Codes aus HL7 RouteOfAdministration dürfen ebenfalls verwendet werden.Hinweis: Für Impfungen relevante Einträge sind fett markiert.</div>

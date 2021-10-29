@@ -26,6 +26,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.ehealth_connector.xua.core.SecurityObject;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConfirmationDataType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConfirmationType;
+import org.opensaml.saml.saml2.core.impl.SubjectConfirmationBuilder;
+import org.opensaml.saml.saml2.core.impl.SubjectConfirmationDataBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,6 +63,34 @@ public class SubjectConfirmationImpl extends SubjectConfirmationType implements
 		getNotBefore();
 		getNotOnOrAfter();
 		getRecipient();
+	}
+
+	/**
+	 * Default constructor to instanciate the object
+	 *
+	 * @param aInternalObject
+	 */
+	protected SubjectConfirmationImpl(SubjectConfirmationType aInternalObject) {
+		subjectConfirmation = new SubjectConfirmationBuilder().buildObject();
+		
+		if(aInternalObject.getSubjectConfirmationData() != null) {
+			var subjectConfirmData = new SubjectConfirmationDataBuilder().buildObject();
+			subjectConfirmData.setAddress(aInternalObject.getSubjectConfirmationData().getAddress());
+			subjectConfirmData.setInResponseTo(aInternalObject.getSubjectConfirmationData().getInResponseTo());
+
+			if (aInternalObject.getSubjectConfirmationData().getNotBefore() != null) {
+				subjectConfirmData.setNotBefore(
+						aInternalObject.getSubjectConfirmationData().getNotBefore().toGregorianCalendar().toInstant());
+			}
+
+			if (aInternalObject.getSubjectConfirmationData().getNotOnOrAfter() != null) {
+				subjectConfirmData.setNotOnOrAfter(aInternalObject.getSubjectConfirmationData().getNotOnOrAfter()
+						.toGregorianCalendar().toInstant());
+			}
+			
+			subjectConfirmData.setRecipient(aInternalObject.getSubjectConfirmationData().getRecipient());
+			subjectConfirmation.setSubjectConfirmationData(subjectConfirmData);
+		}
 	}
 
 	/**

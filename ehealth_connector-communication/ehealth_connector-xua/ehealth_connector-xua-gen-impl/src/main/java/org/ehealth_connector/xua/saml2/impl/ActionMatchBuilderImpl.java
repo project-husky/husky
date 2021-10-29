@@ -20,6 +20,8 @@ import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.ehealth_connector.xua.saml2.SimpleBuilder;
 import org.herasaf.xacml.core.policy.impl.ActionAttributeDesignatorType;
 import org.herasaf.xacml.core.policy.impl.ActionMatchType;
+import org.opensaml.xacml.policy.impl.ActionMatchTypeImplBuilder;
+import org.opensaml.xacml.policy.impl.AttributeDesignatorTypeImplBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -40,14 +42,42 @@ public class ActionMatchBuilderImpl
 		actionAttrDesType.setAttributeId(aInternalObject.getActionAttributeDesignator().getAttributeId());
 		actionAttrDesType.setIssuer(aInternalObject.getActionAttributeDesignator().getIssuer());
 		actionAttrDesType.setMustBePresent(aInternalObject.getActionAttributeDesignator().getMustBePresent());
+
+		if (aInternalObject.getActionAttributeDesignator().getDataType() != null) {
+			actionAttrDesType.setDataType(
+					new DataTypeAttributeBuilderImpl()
+							.create(aInternalObject.getActionAttributeDesignator().getDataType()));
+		}
+
 		retVal.setActionAttributeDesignator(actionAttrDesType);
 		
+		retVal.setMatchFunction(new FunctionBuilderImpl().create(aInternalObject.getMatchId()));
+
 		return retVal;
 	}
 
 	@Override
 	public ActionMatchType create() {
 		return new ActionMatchType();
+	}
+
+	public org.opensaml.xacml.policy.ActionMatchType create(ActionMatchType aInternalObject) {
+		var retVal = new ActionMatchTypeImplBuilder().buildObject();
+		var actionAttrDesType = new AttributeDesignatorTypeImplBuilder().buildObject();
+		actionAttrDesType.setAttributeId(aInternalObject.getActionAttributeDesignator().getAttributeId());
+		actionAttrDesType.setIssuer(aInternalObject.getActionAttributeDesignator().getIssuer());
+		actionAttrDesType.setMustBePresent(aInternalObject.getActionAttributeDesignator().isMustBePresent());
+
+		if (aInternalObject.getActionAttributeDesignator().getDataType() != null) {
+			actionAttrDesType
+					.setDataType(aInternalObject.getActionAttributeDesignator().getDataType().getDatatypeURI());
+		}
+
+		retVal.setActionAttributeDesignator(actionAttrDesType);
+
+		retVal.setMatchId(aInternalObject.getMatchFunction().getFunctionId());
+
+		return retVal;
 	}
 
 }

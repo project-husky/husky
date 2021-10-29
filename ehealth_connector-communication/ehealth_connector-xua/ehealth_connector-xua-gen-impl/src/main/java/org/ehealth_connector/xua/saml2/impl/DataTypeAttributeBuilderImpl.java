@@ -99,6 +99,8 @@ public class DataTypeAttributeBuilderImpl
 		} else if ("urn:oasis:names:tc:xacml:2.0:data-type:yearMonthDuration"
 				.equalsIgnoreCase(aInternalObject)) {
 			function = new YearMonthDurationDataTypeAttribute();
+		} else if("urn:ihe:2017:record#interaction".equalsIgnoreCase(aInternalObject)) {
+			function = new InteractionDataTypeAttribute();
 		}
 
 		return function;
@@ -107,6 +109,49 @@ public class DataTypeAttributeBuilderImpl
 	@Override
 	public DataTypeAttribute<?> create() {
 		return new AnyURIDataTypeAttribute();
+	}
+
+	public String create(DataTypeAttribute<?> aInternalObject) {
+		String function = null;
+		if (aInternalObject instanceof AnyURIDataTypeAttribute) {
+			function = "http://www.w3.org/2001/XMLSchema#anyURI";
+		} else if (aInternalObject instanceof Base64BinaryDataTypeAttribute) {
+			function = "http://www.w3.org/2001/XMLSchema#base64Binary";
+		} else if (aInternalObject instanceof BooleanDataTypeAttribute) {
+			function = "http://www.w3.org/2001/XMLSchema#boolean";
+		} else if (aInternalObject instanceof DateDataTypeAttribute) {
+			function = "http://www.w3.org/2001/XMLSchema#date";
+		} else if (aInternalObject instanceof DateTimeDataTypeAttribute) {
+			function = "http://www.w3.org/TR/xmlschema-2/#dateTime";
+		} else if (aInternalObject instanceof DayTimeDurationDataTypeAttribute) {
+			function = "urn:oasis:names:tc:xacml:2.0:data-type:dayTimeDuration";
+		} else if (aInternalObject instanceof DnsNameDataTypeAttribute) {
+			function = "urn:oasis:names:tc:xacml:2.0:data-type:dnsName";
+		} else if (aInternalObject instanceof DoubleDataTypeAttribute) {
+			function = "http://www.w3.org/2001/XMLSchema#double";
+		} else if (aInternalObject instanceof HexBinaryDataTypeAttribute) {
+			function = "http://www.w3.org/2001/XMLSchema#hexBinary";
+		} else if (aInternalObject instanceof CvDataTypeAttribute) {
+			function = "urn:hl7-org:v3#CV";
+		} else if (aInternalObject instanceof IiDataTypeAttribute) {
+			function = "urn:hl7-org:v3#II";
+		} else if (aInternalObject instanceof IntegerDataTypeAttribute) {
+			function = "http://www.w3.org/2001/XMLSchema#integer";
+		} else if (aInternalObject instanceof IpAddressDataTypeAttribute) {
+			function = "urn:oasis:names:tc:xacml:2.0:data-type:ipAddress";
+		} else if (aInternalObject instanceof RFC822NameDataTypeAttribute) {
+			function = "urn:oasis:names:tc:xacml:1.0:data-type:rfc822Name";
+		} else if (aInternalObject instanceof StringDataTypeAttribute) {
+			function = "http://www.w3.org/2001/XMLSchema#string";
+		} else if (aInternalObject instanceof TimeDataTypeAttribute) {
+			function = "http://www.w3.org/2001/XMLSchema#time";
+		} else if (aInternalObject instanceof X500DataTypeAttribute) {
+			function = "urn:oasis:names:tc:xacml:2.0:data-type:x500Name";
+		} else if (aInternalObject instanceof YearMonthDurationDataTypeAttribute) {
+			function = "urn:oasis:names:tc:xacml:2.0:data-type:yearMonthDuration";
+		}
+
+		return function;
 	}
 
 }

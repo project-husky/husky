@@ -25,6 +25,7 @@ import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
 import org.ehealth_connector.common.enums.NullFlavor;
 import org.ehealth_connector.common.hl7cdar2.II;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+import org.ehealth_connector.common.model.Identificator;
 import org.junit.jupiter.api.Test;
 
 /**

@@ -20,6 +20,7 @@ import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.ehealth_connector.xua.saml2.Status;
 import org.ehealth_connector.xua.saml2.StatusBuilder;
 import org.ehealth_connector.xua.saml2.StatusCode;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.protocol.StatusType;
 import org.opensaml.saml.saml2.core.impl.StatusMessageBuilder;
 
 /**
@@ -61,6 +62,15 @@ public class StatusBuilderImpl implements StatusBuilder,
 	@Override
 	public Status create(org.opensaml.saml.saml2.core.Status aInternalObject) {
 		return new StatusImpl(aInternalObject);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.xua.saml2.StatusBuilder#create(StatusType)
+	 */
+	public Status create(StatusType statusType) {
+		return new StatusImpl(statusType);
 	}
 
 	/**

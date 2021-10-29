@@ -141,7 +141,7 @@ public class FunctionBuilderImpl
 		} else if ("urn:oasis:names:tc:xacml:1.0:function:integer-equal".equalsIgnoreCase(aInternalObject)) {
 			function = new IntegerEqualFunction();
 		} else if ("urn:ihe:2017:record:function:interactedPreviously".equalsIgnoreCase(aInternalObject)) {
-
+			function = new FunctionInteractedPreviously();
 		}
 
 		return function;
