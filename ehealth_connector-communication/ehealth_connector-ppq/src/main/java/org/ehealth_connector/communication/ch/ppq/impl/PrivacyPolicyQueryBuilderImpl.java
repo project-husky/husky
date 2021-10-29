@@ -18,6 +18,7 @@ package org.ehealth_connector.communication.ch.ppq.impl;
 
 import java.util.Calendar;
 
+import org.ehealth_connector.common.ch.ChEpr;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQuery;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQueryBuilder;
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
@@ -102,7 +103,7 @@ public class PrivacyPolicyQueryBuilderImpl implements PrivacyPolicyQueryBuilder,
 	public PrivacyPolicyQueryBuilder instanceIdentifier(InstanceIdentifier identifier) {
 
 		final AttributeType attribute = new AttributeTypeImplBuilder().buildObject();
-		attribute.setAttributeID("urn:e-health-suisse:2015:epr-spid");
+		attribute.setAttributeID(ChEpr.EPR_SPID_URN);
 		attribute.setDataType("urn:hl7-org:v3#II");
 
 		final AttributeValueType attributeValue = new AttributeValueTypeImplBuilder().buildObject();

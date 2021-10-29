@@ -196,7 +196,6 @@ public enum CodeSystems implements IdentityDomain {
 	 */
 	SwissEprSpid("2.16.756.5.30.1.127.3.10.3", "Swiss EPR-SPID");
 
-
 	/**
 	 * <div class="en">Gets the Enum with a given OID</div>
 	 * <div class="de">Liefert den Enum anhand einer gegebenen OID</div>
