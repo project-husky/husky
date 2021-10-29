@@ -122,7 +122,7 @@ public class XUserAssertionRequestImpl implements XUserAssertionRequest,
 	@Override
 	public String getOrganizationId() {
 		return getAttributeValueByName(requestSecurityToken.getUnknownXMLObjects(),
-				XUserAssertionConstants.OASIS_XACML_ORGANISATIONID);
+				XUserAssertionConstants.OASIS_XACML_ORGANIZATIONID);
 	}
 
 	@Override

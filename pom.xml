@@ -349,6 +349,11 @@
 				<artifactId>opensaml-xacml-impl</artifactId>
 				<version>${opensaml.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.opensaml</groupId>
+				<artifactId>opensaml-storage-impl</artifactId>
+				<version>${opensaml.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>javax.xml.ws</groupId>
