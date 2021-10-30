@@ -1,6 +1,6 @@
 package org.husky.emed.cda.services.narrative;
 
-import org.husky.common.model.enums.ValueSetEnumInterface;
+import org.husky.common.enums.ValueSetEnumInterface;
 import org.husky.emed.cda.models.treatment.MedicationPackagedProduct;
 import org.husky.emed.cda.models.treatment.MedicationProduct;
 

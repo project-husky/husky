@@ -13,7 +13,6 @@ import org.husky.emed.cda.services.EmedEntryDigestService;
 import org.husky.emed.cda.services.readers.SubAdmEntryReader;
 import org.husky.emed.cda.utils.IiUtils;
 import org.husky.emed.cda.utils.TemplateIds;
-import org.openhealthtools.mdht.uml.hl7.vocab.ActClass;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -171,7 +170,7 @@ public class CcePreEntryDigester {
                 .map(POCDMT000040EntryRelationship::getSubstanceAdministration)
                 .filter(Objects::nonNull)
                 .filter(sa -> sa.getMoodCode() == XDocumentSubstanceMood.PRP)
-                .filter(sa -> sa.getClassCode().contains(ActClass.SBADM.getName()))
+                .filter(sa -> sa.getClassCode().contains("SBADM"))
                 .anyMatch(sa -> TemplateIds.isInList(TemplateIds.VALIDATION_STEP, sa.getTemplateId()));
     }
 }
