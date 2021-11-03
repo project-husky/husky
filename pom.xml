@@ -38,7 +38,6 @@
 	</scm>
 
 	<modules>
-		<module>husky-cda</module>
 		<module>husky-communication</module>
 		<module>husky-validation</module>
 		<module>husky-fhir</module>
