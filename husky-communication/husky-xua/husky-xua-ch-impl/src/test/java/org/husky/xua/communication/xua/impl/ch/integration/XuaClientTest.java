@@ -12,7 +12,7 @@ import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.io.IOUtils;
-import org.husky.xua.XUserAssertionConstantsCh;
+import org.husky.communication.ch.enums.Role;
 import org.husky.xua.communication.clients.XuaClient;
 import org.husky.xua.communication.clients.impl.ClientFactory;
 import org.husky.xua.communication.clients.impl.ServerTestHelper;
@@ -58,7 +58,7 @@ public class XuaClientTest extends ServerTestHelper {
 
 			var assertion = new AssertionDeserializerImpl().fromXmlByteArray(IOUtils.toByteArray(is));
 
-			var role = new RoleBuilder().code(XUserAssertionConstantsCh.ROLE_ASSITANT)
+			var role = new RoleBuilder().code(Role.ASSISTANT_CODE)
 					.codeSystem("2.16.756.5.30.1.127.3.10.6")
 					.displayName("Behandelnde(r)").buildObject();
 			var purposeOfUse = new PurposeOfUseBuilder().code("NORM").codeSystem("2.16.756.5.30.1.127.3.10.6")

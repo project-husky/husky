@@ -16,7 +16,7 @@
  */
 package org.husky.xua.communication.xua.impl.ch;
 
-import org.husky.xua.XUserAssertionConstantsCh;
+import org.husky.xua.ChEprXuaSpecifications;
 import org.husky.xua.communication.xua.XUserAssertionRequestBuilder;
 import org.husky.xua.communication.xua.impl.XUserAssertionRequestBuilderImpl;
 
@@ -32,23 +32,23 @@ public class XUserAssertionRequestBuilderChImpl extends XUserAssertionRequestBui
 
 	public XUserAssertionRequestBuilderChImpl() {
 		super();
-		getClaims().setDialect(XUserAssertionConstantsCh.CH_EPR_2017_ANNEX5_ADDENDUM2);
+		getClaims().setDialect(ChEprXuaSpecifications.CLAIMS_DIALECT);
 	}
 
 	@Override
 	public XUserAssertionRequestBuilder dialect(String aDialect) {
-		getClaims().setDialect(XUserAssertionConstantsCh.CH_EPR_2017_ANNEX5_ADDENDUM2);
+		getClaims().setDialect(ChEprXuaSpecifications.CLAIMS_DIALECT);
 		return this;
 	}
 
 	public XUserAssertionRequestBuilder principal(String principalId, String principalName) {
 		if (principalId != null) {
 			addXMLObjectToClaims(
-					createStringAttribute(XUserAssertionConstantsCh.CH_PRINCIPALID, principalId));
+					createStringAttribute(ChEprXuaSpecifications.PRINCIPAL_ID, principalId));
 		}
 
 		if (principalName != null) {
-			addXMLObjectToClaims(createStringAttribute(XUserAssertionConstantsCh.CH_PRINCIPAL_NAME, principalName));
+			addXMLObjectToClaims(createStringAttribute(ChEprXuaSpecifications.PRINCIPAL_NAME, principalName));
 		}
 		return this;
 	}
