@@ -1,4 +1,25 @@
-This convenience API for IHE transactions and CDA documents allows easy access and conformity to eHealth affinity domains. The project is based on a country independent architecture, but implements also Swiss extensions. Other country extensions are possible, your contributions are welcome.
+This convenience API for IHE transactions and CDA documents allows easy access and conformity to eHealth affinity domains. The project is based on a country independent architecture, but implements also Swiss extensions. Other country extensions are possible, your contributions are welcome. 
+
+## Installation
+
+- **[Install Guide](docs/Installation.md)**
+
+## Implemented IHE Profiles
+
+Husky offers support for multiple IHE ITI profiles. For each profile transaction there is a convenience method. Supported profiles are
+
+| Profile            | Transaction          |
+| ------------------ | -------------------- |
+| [PDQ](docs/PDQ.md) | ITI-47               |
+| [PIX](docs/PIX.md) | ITI-44, ITI-45       |
+| [PPQ](docs/PPQ.md) | PPQ-1, PPQ-2         |
+| [SVS](docs/SVS.md) | ITI-48               |
+| [XDM](docs/XDM.md) | ITI-32               |
+| [XDS](docs/XDS.md) | ITI-18,ITI-41,ITI-43 |
+| [XUA](docs/XUA.md) | ITI-40               |
+
+
+## Former release notes
 
 History (see Wiki for mor details):
 - Rnext: next release date not defined, yet
@@ -21,7 +42,3 @@ History (see Wiki for mor details):
 * Validation of CDA documents
 * Embedding original PDF/A representation of a CDA document into the CDA document
 * IHE XUA transactions including authentication (to IdP; User authentication provider) and autorisation (to X-Assertion Provider)
-
-## Documentation
-
-- **[Install Guide](docs/Installation.md)**
