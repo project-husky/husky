@@ -73,13 +73,6 @@
             <artifactId>checker-qual</artifactId> <!-- MIT -->
             <version>3.18.0</version>
         </dependency>
-        <dependency>
-            <!-- Project Lombok is a boilerplate code remover and space saver that generates code -->
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId> <!-- MIT -->
-            <version>1.18.20</version>
-            <scope>provided</scope>
-        </dependency>
 
         <!-- Tests (EPL 2.0) -->
         <dependency>
