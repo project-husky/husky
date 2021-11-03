@@ -18,9 +18,10 @@ package org.husky.communication.testhelper;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.hl7.fhir.dstu3.model.Identifier;
-import org.husky.common.utils.UUID;
+
 import org.husky.fhir.structures.gen.FhirCommon;
 import org.husky.fhir.structures.gen.FhirPatient;
 import org.slf4j.Logger;
@@ -36,7 +37,7 @@ public class InMemoryMockMpiAdapter {
 	static private Map<String, org.husky.fhir.structures.gen.FhirPatient> map = new HashMap<String, FhirPatient>();
 
 	/** The mpi community oid. */
-	static private String mpiCommunityOid = UUID.generate();
+	static private String mpiCommunityOid = UUID.randomUUID().toString();
 
 	/** The SLF4J logger instance. */
 	private final Logger log = LoggerFactory.getLogger(getClass());
@@ -58,7 +59,7 @@ public class InMemoryMockMpiAdapter {
 		}
 		boolean retVal = false;
 
-		final String mpiIdendity = UUID.generate();
+		final String mpiIdendity = UUID.randomUUID().toString();
 		final String mapKey = this.getMapKey(patient);
 		if (mapKey != null) {
 			if (!map.containsKey(mapKey)) {
