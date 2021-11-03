@@ -143,7 +143,7 @@ public class SimplePpqClientTest {
 				response.getWrappedObject().getStatus().getStatusCode().getValue());
 
 		assertEquals("An extension id, root id or a policySetIdReference must be provided",
-				response.getWrappedObject().getStatus().getStatusMessage().getMessage());
+				response.getWrappedObject().getStatus().getStatusMessage().getValue());
 
 		assertNotNull(response.getWrappedObject().getAssertions());
 	}
