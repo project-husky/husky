@@ -178,7 +178,7 @@ public class FhirPatientTest {
 			}
 
 		}
-		assertEquals("Doncaster", city.xmlContent);
+		assertEquals("Doncaster", city.getTextContent());
 
 		final FhirPatient fhirPatient2 = new FhirPatient(patient);
 		assertEquals("Doncaster", fhirPatient2.getBirthPlace().getCity());
@@ -342,7 +342,7 @@ public class FhirPatientTest {
 
 		final Patient patient = fhirPatient.getPatient();
 		assertEquals("Test",
-				patient.getMdhtPatientRole().getProviderOrganization().getName().get(0).xmlContent);
+				patient.getMdhtPatientRole().getProviderOrganization().getName().get(0).getMergedXmlMixed());
 		assertEquals("1234",
 				patient.getMdhtPatientRole().getProviderOrganization().getId().get(0).getRoot());
 		assertEquals("tel:+417600000000", patient.getMdhtPatientRole().getProviderOrganization()
