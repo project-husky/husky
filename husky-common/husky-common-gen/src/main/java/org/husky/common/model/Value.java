@@ -414,7 +414,7 @@ public class Value {
 	}
 
 	public Value(String text) {
-		mValue = Util.createEd(text);
+		mValue = new ED(text);
 	}
 
 	/**
@@ -436,7 +436,7 @@ public class Value {
 		if (!isText) {
 			ed = Util.createReference(value);
 		} else {
-			ed = Util.createEd(value);
+			ed = new ED(value);
 		}
 		mValue = ed;
 	}

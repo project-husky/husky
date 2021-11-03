@@ -104,7 +104,6 @@ public class StylesheetFactory {
 			compiler.setURIResolver(resolver);
 		try {
 			log.info("Compiling stylesheet '{}'", sourceName);
-			Util.freeMemory();
 			Util.logAvailableMemory(getClass(), "compiler.compile (before)");
 			// if problems with locking due to concurrent accesses from threads,
 			// use semaphore to avoid same source at the same time...

@@ -463,54 +463,6 @@ public class Util {
 	}
 
 	/**
-	 * <div class="en">Creates the MDHT CE null flavor NASK.</div>
-	 *
-	 * @return the CE
-	 */
-	public static CE createCENullFlavorNASK() {
-		final var ce = new CE();
-		ce.nullFlavor = new LinkedList<>();
-		ce.getNullFlavor().add(org.husky.common.enums.NullFlavor.NOT_ASKED_CODE);
-		return ce;
-	}
-
-	/**
-	 * <div class="en">Creates the MDHT CE null flavor UNK.</div>
-	 *
-	 * @return the CE
-	 */
-	public static CE createCENullFlavorUNK() {
-		final var ce = new CE();
-		ce.nullFlavor = new LinkedList<>();
-		ce.getNullFlavor().add(org.husky.common.enums.NullFlavor.UNKNOWN_CODE);
-		return ce;
-	}
-
-	/**
-	 * <div class="en">Creates the MDHT CD null flavor NA.</div>
-	 *
-	 * @return the CD
-	 */
-	public static CD createCodeNullFlavorNA() {
-		final var code = new CD();
-		code.nullFlavor = new LinkedList<>();
-		code.getNullFlavor().add(org.husky.common.enums.NullFlavor.NOT_APPLICABLE_CODE);
-		return code;
-	}
-
-	/**
-	 * <div class="en">Creates the MDHT CD null flavor UNK.</div>
-	 *
-	 * @return the CD
-	 */
-	public static CD createCodeNullFlavorUNK() {
-		final var code = new CD();
-		code.nullFlavor = new LinkedList<>();
-		code.getNullFlavor().add(org.husky.common.enums.NullFlavor.UNKNOWN_CODE);
-		return code;
-	}
-
-	/**
 	 * Creates a new MDHT CustodianOrganization object from an eHC Organization
 	 * object.
 	 *
@@ -558,20 +510,6 @@ public class Util {
 			return mdhtCustOrg;
 		}
 		return null;
-	}
-
-	/**
-	 * <div class="en">Creates the ED.</div>
-	 *
-	 * @param text
-	 *            <br>
-	 *            <div class="en">text</div>
-	 * @return the ED
-	 */
-	public static ED createEd(String text) {
-		final var ed = new ED();
-		ed.setXmlMixed(text);
-		return ed;
 	}
 
 	/**
@@ -637,42 +575,6 @@ public class Util {
 	}
 
 	/**
-	 * <div class="en">Creates the MDHT IVL_PQ null flavor NA object.</div>
-	 *
-	 * @return the IVL_PQ
-	 */
-	public static IVLPQ createIVLPQNullFlavorNA() {
-		final var ivlpq = new IVLPQ();
-		ivlpq.nullFlavor = new LinkedList<>();
-		ivlpq.getNullFlavor().add(org.husky.common.enums.NullFlavor.NOT_APPLICABLE_CODE);
-		return ivlpq;
-	}
-
-	/**
-	 * <div class="en">Creates the IVL_PQ null flavor NASK object.</div>
-	 *
-	 * @return the IVL_PQ
-	 */
-	public static IVLPQ createIVLPQNullFlavorNASK() {
-		final var ivlpq = new IVLPQ();
-		ivlpq.nullFlavor = new LinkedList<>();
-		ivlpq.getNullFlavor().add(org.husky.common.enums.NullFlavor.NOT_ASKED_CODE);
-		return ivlpq;
-	}
-
-	/**
-	 * <div class="en">Creates the IVL_PQ null flavor UNK object.</div>
-	 *
-	 * @return the IVL_PQ
-	 */
-	public static IVLPQ createIVLPQNullFlavorUNK() {
-		final var ivlpq = new IVLPQ();
-		ivlpq.nullFlavor = new LinkedList<>();
-		ivlpq.getNullFlavor().add(org.husky.common.enums.NullFlavor.UNKNOWN_CODE);
-		return ivlpq;
-	}
-
-	/**
 	 * Creates a new MDHT LegalAuthor object from an MDHT Author object.
 	 * Signature Code will be set to fixed 's'
 	 *
@@ -695,18 +597,6 @@ public class Util {
 		mdhtLegAuth.setTime(a.getTime());
 
 		return mdhtLegAuth;
-	}
-
-	/**
-	 * <div class="en">Creates the MDHT IVXB_TS null flavor UNK.</div>
-	 *
-	 * @return the ivxb ts
-	 */
-	public static IVXBTS createNullFlavorUnknown() {
-		final var ts = new IVXBTS();
-		ts.nullFlavor = new LinkedList<>();
-		ts.nullFlavor.add(org.husky.common.enums.NullFlavor.UNKNOWN_CODE);
-		return ts;
 	}
 
 	/**
@@ -789,50 +679,6 @@ public class Util {
 		}
 
 		return o;
-	}
-
-	/**
-	 * Creates the participant from organization.
-	 *
-	 * @param o
-	 *            the o
-	 * @return the participant
-	 */
-	public static Participant createParticipantFromOrganization(Organization o) {
-		final var pe = new PlayingEntity();
-		final var pr = new ParticipantRole();
-		pr.setPlayingEntity(pe);
-		final var p = new Participant();
-		p.setParticipantRole(pr);
-
-		// id, addrs, names, telecoms
-
-		for (IdentificatorBaseType id : o.getIdentificatorList()) {
-			p.getMdht().getParticipantRole().getId().add(new Identificator(id).getHl7CdaR2Ii());
-		}
-
-		for (AddressBaseType address : o.getAddressList()) {
-			if (address != null) {
-				p.getMdht().getParticipantRole().getAddr().add(new Address(address).getHl7CdaR2Ad());
-			}
-		}
-
-		if ((o.getNameList() != null) && !o.getNameList().isEmpty()) {
-			for(NameBaseType nameType: o.getNameList()) {
-				if(nameType != null) {
-					p.getMdht().getParticipantRole().getPlayingEntity().getName()
-							.add(new Name(nameType).getHl7CdaR2Pn());
-				}
-			}
-		}
-
-		if (o.getTelecomList() != null) {
-			for (TelecomBaseType telecom : o.getTelecomList()) {
-				p.getMdht().getParticipantRole().getTelecom().add(new Telecom(telecom).getHl7CdaR2Tel());
-			}
-		}
-
-		return p;
 	}
 
 	/**
@@ -956,30 +802,6 @@ public class Util {
 	}
 
 	/**
-	 * <div class="en">Creates the MDHT phone TEL object, without knowing the
-	 * type of TEL object (id the endpoint is a fax, phone etc. is
-	 * unknown).</div>
-	 *
-	 * @param endpointIdentifier
-	 *            <br>
-	 *            <div class="en"> tel nr</div><div class="de">Der Endpunkt der
-	 *            Kommunikation (z.B. eine Telefonnummer)</div>
-	 * @param usage
-	 *            <br>
-	 *            <div class="en"> usage</div>
-	 * @return the tel
-	 */
-	public static TEL createUnknownTel(String endpointIdentifier, TelecomAddressUse usage) {
-		final var tel = new TEL();
-		if (usage != null) {
-			tel.getUse().clear();
-			tel.getUse().add(usage.getCodeValue());
-		}
-		tel.setValue(endpointIdentifier);
-		return tel;
-	}
-
-	/**
 	 * <div class="en"> Extracts a file from embedded resources in the Jar as
 	 * temporary file on the local filesystem.
 	 *
@@ -1031,15 +853,6 @@ public class Util {
 		}
 
 		return targetPath;
-	}
-
-	/**
-	 * Run the Garbage Collector to get the most possible heap space free for
-	 * subsequent tasks. This is not recommended but can be used if situations
-	 * arise.
-	 */
-	public static void freeMemory() {
-		Runtime.getRuntime().gc();
 	}
 
 	/**
@@ -1452,20 +1265,6 @@ public class Util {
 	}
 
 	/**
-	 * <div class="en">Creates an MDHT II object.</div>
-	 *
-	 * @param root
-	 *            <br>
-	 *            <div class="en">the root</div>
-	 * @return the II
-	 */
-	public static II ii(String root) {
-		final var ii = new II();
-		ii.setRoot(root);
-		return ii;
-	}
-
-	/**
 	 * Checks if an EntryRelationship is a comment.
 	 *
 	 * @param er
@@ -1475,19 +1274,6 @@ public class Util {
 	public static boolean isComment(POCDMT000040EntryRelationship er) {
 		return er.getTypeCode().equals(XActRelationshipEntryRelationship.SUBJ) && er.isInversionInd() != null
 				&& er.isInversionInd().booleanValue();
-	}
-
-	/**
-	 * This is for debugging purposes, only. For normal use, this function shall
-	 * return false.
-	 *
-	 * Debug examples: memory usage is to be displayed, make CDA contents
-	 * comparable to previous releases
-	 *
-	 * @return true, when Debug mode is on. false for normal usage.
-	 */
-	public static boolean isDebug() {
-		return false;
 	}
 
 	/**
@@ -1608,7 +1394,6 @@ public class Util {
 			String hint) {
 
 		final Logger log = LoggerFactory.getLogger(theClass);
-		freeMemory();
 		log.info(
 				hint + ": freeMemory: " + Long.toString(Util.getVmMemoryFreeInMegaBytes()) + " MB");
 

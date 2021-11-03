@@ -89,6 +89,12 @@ public class ED extends BIN {
     @XmlAttribute(name = "integrityCheckAlgorithm")
     protected IntegrityCheckAlgorithm integrityCheckAlgorithm;
 
+    public ED() {}
+
+    public ED(final String ed) {
+        this.setXmlMixed(ed);
+    }
+
     /**
      * Ruft den Wert der compression-Eigenschaft ab.
      *
