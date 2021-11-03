@@ -8,15 +8,15 @@ This convenience API for IHE transactions and CDA documents allows easy access a
 
 Husky offers support for multiple IHE ITI profiles. For each profile transaction there is a convenience method. Supported profiles are
 
-| Profile            | Transaction          |
-| ------------------ | -------------------- |
-| [PDQ](docs/PDQ.md) | ITI-47               |
-| [PIX](docs/PIX.md) | ITI-44, ITI-45       |
-| [PPQ](docs/PPQ.md) | PPQ-1, PPQ-2         |
-| [SVS](docs/SVS.md) | ITI-48               |
-| [XDM](docs/XDM.md) | ITI-32               |
-| [XDS](docs/XDS.md) | ITI-18,ITI-41,ITI-43 |
-| [XUA](docs/XUA.md) | ITI-40               |
+| Profile            | Transaction          | Description                              |
+| ------------------ | -------------------- | ---------------------------------------- |
+| [PDQ](docs/PDQ.md) | ITI-47               | Query patient demographics               |
+| [PIX](docs/PIX.md) | ITI-44, ITI-45       | Patient identity transactions            |
+| [PPQ](docs/PPQ.md) | PPQ-1, PPQ-2         | Privacy Policy Queries                   |
+| [SVS](docs/SVS.md) | ITI-48               | Retrieve value set                       |
+| [XDM](docs/XDM.md) | ITI-32               | Exchange of documents via standard media |
+| [XDS](docs/XDS.md) | ITI-18,ITI-41,ITI-43 | Exchange of documents                    |
+| [XUA](docs/XUA.md) | ITI-40               | Provide identity assertions              |
 
 
 ## Former release notes
