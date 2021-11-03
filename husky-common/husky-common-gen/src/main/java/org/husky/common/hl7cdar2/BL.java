@@ -56,28 +56,28 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "BL")
 public class BL extends ANY {
 
-	@XmlAttribute(name = "value")
-	protected Boolean value;
+    @XmlAttribute(name = "value")
+    protected Boolean value;
 
-	/**
-	 * Ruft den Wert der value-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link Boolean }
-	 *
-	 */
-	public Boolean isValue() {
-		return value;
-	}
+    /**
+     * Ruft den Wert der value-Eigenschaft ab.
+     *
+     * @return possible object is {@link Boolean }
+     *
+     */
+    public Boolean isValue() {
+        return value;
+    }
 
-	/**
-	 * Legt den Wert der value-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link Boolean }
-	 *
-	 */
-	public void setValue(Boolean value) {
-		this.value = value;
-	}
+    /**
+     * Legt den Wert der value-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link Boolean }
+     *
+     */
+    public void setValue(Boolean value) {
+        this.value = value;
+    }
 
 }

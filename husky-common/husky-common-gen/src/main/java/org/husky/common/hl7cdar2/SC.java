@@ -62,121 +62,121 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlType(name = "SC")
 public class SC extends ST {
 
-	@XmlAttribute(name = "code")
-	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-	protected String code;
-	@XmlAttribute(name = "codeSystem")
-	protected String codeSystem;
-	@XmlAttribute(name = "codeSystemName")
-	protected String codeSystemName;
-	@XmlAttribute(name = "codeSystemVersion")
-	protected String codeSystemVersion;
-	@XmlAttribute(name = "displayName")
-	protected String displayName;
+    @XmlAttribute(name = "code")
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    protected String code;
+    @XmlAttribute(name = "codeSystem")
+    protected String codeSystem;
+    @XmlAttribute(name = "codeSystemName")
+    protected String codeSystemName;
+    @XmlAttribute(name = "codeSystemVersion")
+    protected String codeSystemVersion;
+    @XmlAttribute(name = "displayName")
+    protected String displayName;
 
-	/**
-	 * Ruft den Wert der code-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getCode() {
-		return code;
-	}
+    /**
+     * Ruft den Wert der code-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getCode() {
+        return code;
+    }
 
-	/**
-	 * Ruft den Wert der codeSystem-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getCodeSystem() {
-		return codeSystem;
-	}
+    /**
+     * Ruft den Wert der codeSystem-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getCodeSystem() {
+        return codeSystem;
+    }
 
-	/**
-	 * Ruft den Wert der codeSystemName-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getCodeSystemName() {
-		return codeSystemName;
-	}
+    /**
+     * Ruft den Wert der codeSystemName-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getCodeSystemName() {
+        return codeSystemName;
+    }
 
-	/**
-	 * Ruft den Wert der codeSystemVersion-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getCodeSystemVersion() {
-		return codeSystemVersion;
-	}
+    /**
+     * Ruft den Wert der codeSystemVersion-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getCodeSystemVersion() {
+        return codeSystemVersion;
+    }
 
-	/**
-	 * Ruft den Wert der displayName-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getDisplayName() {
-		return displayName;
-	}
+    /**
+     * Ruft den Wert der displayName-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getDisplayName() {
+        return displayName;
+    }
 
-	/**
-	 * Legt den Wert der code-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setCode(String value) {
-		this.code = value;
-	}
+    /**
+     * Legt den Wert der code-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setCode(String value) {
+        this.code = value;
+    }
 
-	/**
-	 * Legt den Wert der codeSystem-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setCodeSystem(String value) {
-		this.codeSystem = value;
-	}
+    /**
+     * Legt den Wert der codeSystem-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setCodeSystem(String value) {
+        this.codeSystem = value;
+    }
 
-	/**
-	 * Legt den Wert der codeSystemName-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setCodeSystemName(String value) {
-		this.codeSystemName = value;
-	}
+    /**
+     * Legt den Wert der codeSystemName-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setCodeSystemName(String value) {
+        this.codeSystemName = value;
+    }
 
-	/**
-	 * Legt den Wert der codeSystemVersion-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setCodeSystemVersion(String value) {
-		this.codeSystemVersion = value;
-	}
+    /**
+     * Legt den Wert der codeSystemVersion-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setCodeSystemVersion(String value) {
+        this.codeSystemVersion = value;
+    }
 
-	/**
-	 * Legt den Wert der displayName-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setDisplayName(String value) {
-		this.displayName = value;
-	}
+    /**
+     * Legt den Wert der displayName-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setDisplayName(String value) {
+        this.displayName = value;
+    }
 
 }

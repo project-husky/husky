@@ -2,7 +2,7 @@ package org.husky.emed.cda.generated.artdecor;
 
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040AssignedEntity;
+import org.husky.common.hl7cdar2.*;
 
 /**
  * cdach_other_AssignedEntityCompilationIdNameAddrTelecomPersonOrganization
@@ -25,7 +25,7 @@ public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganizat
      * Adds a hl7Addr
      * The assigned entity's address.
      */
-    public void addHl7Addr(org.husky.emed.cda.generated.hl7cdar2.AD value) {
+    public void addHl7Addr(AD value) {
         getAddr().add(value);
     }
 
@@ -33,7 +33,7 @@ public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganizat
      * Adds a hl7Id
      * The assigned entity's id (including the assigned person's id).
      */
-    public void addHl7Id(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void addHl7Id(II value) {
         getId().add(value);
     }
 
@@ -41,7 +41,7 @@ public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganizat
      * Adds a hl7Telecom
      * The assigned entity's means of communication (phone, eMail, ...).
      */
-    public void addHl7Telecom(org.husky.emed.cda.generated.hl7cdar2.TEL value) {
+    public void addHl7Telecom(TEL value) {
         getTelecom().add(value);
     }
 
@@ -73,7 +73,7 @@ public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganizat
      * Gets the hl7AssignedPerson
      * The assigned person.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Person getHl7AssignedPerson() {
+    public POCDMT000040Person getHl7AssignedPerson() {
         return assignedPerson;
     }
 
@@ -81,7 +81,7 @@ public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganizat
      * Gets the hl7Code
      * The human-readable text MUST be generated automatically from the structured information of this element. The text element MUST contain the reference to the corresponding text in the human readable part, ONLY.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CE getHl7Code() {
+    public CE getHl7Code() {
         return code;
     }
 
@@ -89,7 +89,7 @@ public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganizat
      * Gets the hl7RepresentedOrganization
      * The assigned organization.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Organization getHl7RepresentedOrganization() {
+    public POCDMT000040Organization getHl7RepresentedOrganization() {
         return representedOrganization;
     }
 
@@ -97,7 +97,7 @@ public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganizat
      * Sets the hl7AssignedPerson
      * The assigned person.
      */
-    public void setHl7AssignedPerson(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Person value) {
+    public void setHl7AssignedPerson(POCDMT000040Person value) {
         this.assignedPerson = value;
     }
 
@@ -105,7 +105,7 @@ public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganizat
      * Sets the hl7Code
      * The human-readable text MUST be generated automatically from the structured information of this element. The text element MUST contain the reference to the corresponding text in the human readable part, ONLY.
      */
-    public void setHl7Code(org.husky.emed.cda.generated.hl7cdar2.CE value) {
+    public void setHl7Code(CE value) {
         this.code = value;
     }
 
@@ -113,7 +113,7 @@ public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganizat
      * Sets the hl7RepresentedOrganization
      * The assigned organization.
      */
-    public void setHl7RepresentedOrganization(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Organization value) {
+    public void setHl7RepresentedOrganization(POCDMT000040Organization value) {
         this.representedOrganization = value;
     }
 }

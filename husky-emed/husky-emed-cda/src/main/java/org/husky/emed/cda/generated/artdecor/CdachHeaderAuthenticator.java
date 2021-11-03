@@ -3,8 +3,7 @@ package org.husky.emed.cda.generated.artdecor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Authenticator;
+import org.husky.common.hl7cdar2.*;
 
 /**
  * cdach_header_Authenticator
@@ -30,9 +29,9 @@ public class CdachHeaderAuthenticator extends POCDMT000040Authenticator {
      *
      * @param code the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.CS createHl7SignatureCodeFixedValue(String code) {
+    private static CS createHl7SignatureCodeFixedValue(String code) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.CS retVal = factory.createCS();
+        CS retVal = factory.createCS();
         retVal.setCode(code);
         return retVal;
     }
@@ -42,9 +41,9 @@ public class CdachHeaderAuthenticator extends POCDMT000040Authenticator {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -52,21 +51,21 @@ public class CdachHeaderAuthenticator extends POCDMT000040Authenticator {
     /**
      * Gets the hl7AssignedEntity
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040AssignedEntity getHl7AssignedEntity() {
+    public POCDMT000040AssignedEntity getHl7AssignedEntity() {
         return assignedEntity;
     }
 
     /**
      * Gets the hl7SignatureCode
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CS getHl7SignatureCode() {
+    public CS getHl7SignatureCode() {
         return signatureCode;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
@@ -74,28 +73,28 @@ public class CdachHeaderAuthenticator extends POCDMT000040Authenticator {
      * Gets the hl7Time
      * Timestamp of the signature.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.TS getHl7Time() {
+    public TS getHl7Time() {
         return time;
     }
 
     /**
      * Sets the hl7AssignedEntity
      */
-    public void setHl7AssignedEntity(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040AssignedEntity value) {
+    public void setHl7AssignedEntity(POCDMT000040AssignedEntity value) {
         this.assignedEntity = value;
     }
 
     /**
      * Sets the hl7SignatureCode
      */
-    public void setHl7SignatureCode(org.husky.emed.cda.generated.hl7cdar2.CS value) {
+    public void setHl7SignatureCode(CS value) {
         this.signatureCode = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
@@ -104,7 +103,7 @@ public class CdachHeaderAuthenticator extends POCDMT000040Authenticator {
      * Sets the hl7Time
      * Timestamp of the signature.
      */
-    public void setHl7Time(org.husky.emed.cda.generated.hl7cdar2.TS value) {
+    public void setHl7Time(TS value) {
         this.time = value;
     }
 }

@@ -53,32 +53,32 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "BXIT_CD")
 public class BXITCD extends CD {
 
-	@XmlAttribute(name = "qty")
-	protected BigInteger qty;
+    @XmlAttribute(name = "qty")
+    protected BigInteger qty;
 
-	/**
-	 * Ruft den Wert der qty-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link BigInteger }
-	 *
-	 */
-	public BigInteger getQty() {
-		if (qty == null) {
-			return new BigInteger("1");
-		} else {
-			return qty;
-		}
-	}
+    /**
+     * Ruft den Wert der qty-Eigenschaft ab.
+     *
+     * @return possible object is {@link BigInteger }
+     *
+     */
+    public BigInteger getQty() {
+        if (qty == null) {
+            return new BigInteger("1");
+        } else {
+            return qty;
+        }
+    }
 
-	/**
-	 * Legt den Wert der qty-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link BigInteger }
-	 *
-	 */
-	public void setQty(BigInteger value) {
-		this.qty = value;
-	}
+    /**
+     * Legt den Wert der qty-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link BigInteger }
+     *
+     */
+    public void setQty(BigInteger value) {
+        this.qty = value;
+    }
 
 }

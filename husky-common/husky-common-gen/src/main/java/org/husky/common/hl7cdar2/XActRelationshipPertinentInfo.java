@@ -50,14 +50,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XActRelationshipPertinentInfo {
 
-	SPRT, CAUS, MFST, REFR, SUBJ;
+    SPRT, CAUS, MFST, REFR, SUBJ;
 
-	public static XActRelationshipPertinentInfo fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XActRelationshipPertinentInfo fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

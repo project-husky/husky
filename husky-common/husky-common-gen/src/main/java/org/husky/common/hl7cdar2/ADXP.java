@@ -63,44 +63,44 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ADXP")
 @XmlSeeAlso({ AdxpPostalCode.class, AdxpStreetName.class, AdxpCountry.class,
-		AdxpDeliveryInstallationArea.class, AdxpDirection.class, AdxpDeliveryMode.class,
-		AdxpUnitID.class, AdxpBuildingNumberSuffix.class, AdxpStreetAddressLine.class,
-		AdxpDeliveryInstallationType.class, AdxpUnitType.class, AdxpCareOf.class,
-		AdxpHouseNumber.class, AdxpCounty.class, AdxpCity.class, AdxpCensusTract.class,
-		AdxpState.class, AdxpDeliveryAddressLine.class, AdxpPrecinct.class,
-		AdxpHouseNumberNumeric.class, AdxpStreetNameType.class, AdxpStreetNameBase.class,
-		AdxpPostBox.class, AdxpDeliveryModeIdentifier.class, AdxpAdditionalLocator.class,
-		AdxpDeliveryInstallationQualifier.class, AdxpDelimiter.class })
+        AdxpDeliveryInstallationArea.class, AdxpDirection.class, AdxpDeliveryMode.class,
+        AdxpUnitID.class, AdxpBuildingNumberSuffix.class, AdxpStreetAddressLine.class,
+        AdxpDeliveryInstallationType.class, AdxpUnitType.class, AdxpCareOf.class,
+        AdxpHouseNumber.class, AdxpCounty.class, AdxpCity.class, AdxpCensusTract.class,
+        AdxpState.class, AdxpDeliveryAddressLine.class, AdxpPrecinct.class,
+        AdxpHouseNumberNumeric.class, AdxpStreetNameType.class, AdxpStreetNameBase.class,
+        AdxpPostBox.class, AdxpDeliveryModeIdentifier.class, AdxpAdditionalLocator.class,
+        AdxpDeliveryInstallationQualifier.class, AdxpDelimiter.class })
 public class ADXP extends ST {
 
-	@XmlAttribute(name = "partType")
-	protected List<String> partType;
+    @XmlAttribute(name = "partType")
+    protected List<String> partType;
 
-	/**
-	 * Gets the value of the partType property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the partType property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getPartType().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link String }
-	 *
-	 *
-	 */
-	public List<String> getPartType() {
-		if (partType == null) {
-			partType = new ArrayList<String>();
-		}
-		return this.partType;
-	}
+    /**
+     * Gets the value of the partType property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the partType property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getPartType().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link String }
+     *
+     *
+     */
+    public List<String> getPartType() {
+        if (partType == null) {
+            partType = new ArrayList<String>();
+        }
+        return this.partType;
+    }
 
 }

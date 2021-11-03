@@ -63,28 +63,28 @@ import javax.xml.bind.annotation.XmlType;
 @XmlSeeAlso({ IVXBINT.class, SXCMINT.class, POCDMT000040RegionOfInterestValue.class })
 public class INT extends QTY {
 
-	@XmlAttribute(name = "value")
-	protected BigInteger value;
+    @XmlAttribute(name = "value")
+    protected BigInteger value;
 
-	/**
-	 * Ruft den Wert der value-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link BigInteger }
-	 *
-	 */
-	public BigInteger getValue() {
-		return value;
-	}
+    /**
+     * Ruft den Wert der value-Eigenschaft ab.
+     *
+     * @return possible object is {@link BigInteger }
+     *
+     */
+    public BigInteger getValue() {
+        return value;
+    }
 
-	/**
-	 * Legt den Wert der value-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link BigInteger }
-	 *
-	 */
-	public void setValue(BigInteger value) {
-		this.value = value;
-	}
+    /**
+     * Legt den Wert der value-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link BigInteger }
+     *
+     */
+    public void setValue(BigInteger value) {
+        this.value = value;
+    }
 
 }

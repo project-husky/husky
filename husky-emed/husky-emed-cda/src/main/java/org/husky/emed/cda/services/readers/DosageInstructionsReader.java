@@ -1,11 +1,11 @@
 package org.husky.emed.cda.services.readers;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.husky.common.hl7cdar2.*;
 import org.husky.emed.cda.enums.DosageType;
 import org.husky.emed.cda.errors.InvalidEmedContentException;
 import org.husky.emed.cda.generated.artdecor.enums.ChEmedTimingEvent;
 import org.husky.emed.cda.generated.artdecor.enums.RouteOfAdministrationEdqm;
-import org.husky.emed.cda.generated.hl7cdar2.*;
 import org.husky.emed.cda.models.common.MedicationDosageInstructions;
 import org.husky.emed.cda.models.common.MedicationDosageIntake;
 import org.husky.emed.cda.models.common.QuantityWithUnit;

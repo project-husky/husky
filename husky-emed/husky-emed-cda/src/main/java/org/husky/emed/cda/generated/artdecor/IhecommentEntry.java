@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.CS;
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Act;
+import org.husky.common.hl7cdar2.*;
 import org.husky.emed.cda.models.common.Code;
 import org.husky.emed.cda.models.common.basetypes.CodeBaseType;
 
@@ -24,8 +22,8 @@ import org.husky.emed.cda.models.common.basetypes.CodeBaseType;
 public class IhecommentEntry extends POCDMT000040Act {
 
     public IhecommentEntry() {
-        super.setClassCode(org.husky.emed.cda.generated.hl7cdar2.XActClassDocumentEntryAct.ACT);
-        super.setMoodCode(org.husky.emed.cda.generated.hl7cdar2.XDocumentActMood.EVN);
+        super.setClassCode(XActClassDocumentEntryAct.ACT);
+        super.setMoodCode(XDocumentActMood.EVN);
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.40"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.2"));
         super.setCode(createHl7CodeFixedValue("48767-8",
@@ -40,7 +38,7 @@ public class IhecommentEntry extends POCDMT000040Act {
     /**
      * Adds a hl7Author
      */
-    public void addHl7Author(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Author value) {
+    public void addHl7Author(POCDMT000040Author value) {
         getAuthor().add(value);
     }
 
@@ -56,9 +54,9 @@ public class IhecommentEntry extends POCDMT000040Act {
      *
      * @param code the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.CD createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+    private static CD createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.CD retVal = factory.createCD();
+        CD retVal = factory.createCD();
         retVal.setCode(code);
         retVal.setCodeSystem(codeSystem);
         retVal.setCodeSystemName(codeSystemName);
@@ -71,9 +69,9 @@ public class IhecommentEntry extends POCDMT000040Act {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -81,28 +79,28 @@ public class IhecommentEntry extends POCDMT000040Act {
     /**
      * Gets the hl7Code
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CD getHl7Code() {
+    public CD getHl7Code() {
         return code;
     }
 
     /**
      * Gets the hl7StatusCode
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CS getHl7StatusCode() {
+    public CS getHl7StatusCode() {
         return statusCode;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
     /**
      * Gets the hl7Text
      */
-    public org.husky.emed.cda.generated.hl7cdar2.ED getHl7Text() {
+    public ED getHl7Text() {
         return text;
     }
 
@@ -116,21 +114,21 @@ public class IhecommentEntry extends POCDMT000040Act {
     /**
      * Sets the hl7Code
      */
-    public void setHl7Code(org.husky.emed.cda.generated.hl7cdar2.CD value) {
+    public void setHl7Code(CD value) {
         this.code = value;
     }
 
     /**
      * Sets the hl7StatusCode
      */
-    public void setHl7StatusCode(org.husky.emed.cda.generated.hl7cdar2.CS value) {
+    public void setHl7StatusCode(CS value) {
         this.statusCode = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
@@ -138,7 +136,7 @@ public class IhecommentEntry extends POCDMT000040Act {
     /**
      * Sets the hl7Text
      */
-    public void setHl7Text(org.husky.emed.cda.generated.hl7cdar2.ED value) {
+    public void setHl7Text(ED value) {
         this.text = value;
     }
 }

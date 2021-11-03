@@ -60,166 +60,166 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "POCD_MT000040.Component1", propOrder = { "realmCode", "typeId", "templateId",
-		"encompassingEncounter" })
+        "encompassingEncounter" })
 public class POCDMT000040Component1 {
 
-	protected List<CS> realmCode;
-	protected POCDMT000040InfrastructureRootTypeId typeId;
-	protected List<II> templateId;
-	@XmlElement(required = true)
-	protected POCDMT000040EncompassingEncounter encompassingEncounter;
-	@XmlAttribute(name = "nullFlavor")
-	protected List<String> nullFlavor;
-	@XmlAttribute(name = "typeCode")
-	protected ActRelationshipHasComponent typeCode;
+    protected List<CS> realmCode;
+    protected POCDMT000040InfrastructureRootTypeId typeId;
+    protected List<II> templateId;
+    @XmlElement(required = true)
+    protected POCDMT000040EncompassingEncounter encompassingEncounter;
+    @XmlAttribute(name = "nullFlavor")
+    protected List<String> nullFlavor;
+    @XmlAttribute(name = "typeCode")
+    protected ActRelationshipHasComponent typeCode;
 
-	/**
-	 * Ruft den Wert der encompassingEncounter-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link POCDMT000040EncompassingEncounter }
-	 *
-	 */
-	public POCDMT000040EncompassingEncounter getEncompassingEncounter() {
-		return encompassingEncounter;
-	}
+    /**
+     * Ruft den Wert der encompassingEncounter-Eigenschaft ab.
+     *
+     * @return possible object is {@link POCDMT000040EncompassingEncounter }
+     *
+     */
+    public POCDMT000040EncompassingEncounter getEncompassingEncounter() {
+        return encompassingEncounter;
+    }
 
-	/**
-	 * Gets the value of the nullFlavor property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the nullFlavor property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getNullFlavor().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link String }
-	 *
-	 *
-	 */
-	public List<String> getNullFlavor() {
-		if (nullFlavor == null) {
-			nullFlavor = new ArrayList<String>();
-		}
-		return this.nullFlavor;
-	}
+    /**
+     * Gets the value of the nullFlavor property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the nullFlavor property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getNullFlavor().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link String }
+     *
+     *
+     */
+    public List<String> getNullFlavor() {
+        if (nullFlavor == null) {
+            nullFlavor = new ArrayList<String>();
+        }
+        return this.nullFlavor;
+    }
 
-	/**
-	 * Gets the value of the realmCode property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the realmCode property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getRealmCode().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link CS }
-	 *
-	 *
-	 */
-	public List<CS> getRealmCode() {
-		if (realmCode == null) {
-			realmCode = new ArrayList<CS>();
-		}
-		return this.realmCode;
-	}
+    /**
+     * Gets the value of the realmCode property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the realmCode property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getRealmCode().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link CS }
+     *
+     *
+     */
+    public List<CS> getRealmCode() {
+        if (realmCode == null) {
+            realmCode = new ArrayList<CS>();
+        }
+        return this.realmCode;
+    }
 
-	/**
-	 * Gets the value of the templateId property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the templateId property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getTemplateId().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link II }
-	 *
-	 *
-	 */
-	public List<II> getTemplateId() {
-		if (templateId == null) {
-			templateId = new ArrayList<II>();
-		}
-		return this.templateId;
-	}
+    /**
+     * Gets the value of the templateId property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the templateId property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getTemplateId().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link II }
+     *
+     *
+     */
+    public List<II> getTemplateId() {
+        if (templateId == null) {
+            templateId = new ArrayList<II>();
+        }
+        return this.templateId;
+    }
 
-	/**
-	 * Ruft den Wert der typeCode-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link ActRelationshipHasComponent }
-	 *
-	 */
-	public ActRelationshipHasComponent getTypeCode() {
-		if (typeCode == null) {
-			return ActRelationshipHasComponent.COMP;
-		} else {
-			return typeCode;
-		}
-	}
+    /**
+     * Ruft den Wert der typeCode-Eigenschaft ab.
+     *
+     * @return possible object is {@link ActRelationshipHasComponent }
+     *
+     */
+    public ActRelationshipHasComponent getTypeCode() {
+        if (typeCode == null) {
+            return ActRelationshipHasComponent.COMP;
+        } else {
+            return typeCode;
+        }
+    }
 
-	/**
-	 * Ruft den Wert der typeId-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link POCDMT000040InfrastructureRootTypeId }
-	 *
-	 */
-	public POCDMT000040InfrastructureRootTypeId getTypeId() {
-		return typeId;
-	}
+    /**
+     * Ruft den Wert der typeId-Eigenschaft ab.
+     *
+     * @return possible object is {@link POCDMT000040InfrastructureRootTypeId }
+     *
+     */
+    public POCDMT000040InfrastructureRootTypeId getTypeId() {
+        return typeId;
+    }
 
-	/**
-	 * Legt den Wert der encompassingEncounter-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link POCDMT000040EncompassingEncounter }
-	 *
-	 */
-	public void setEncompassingEncounter(POCDMT000040EncompassingEncounter value) {
-		this.encompassingEncounter = value;
-	}
+    /**
+     * Legt den Wert der encompassingEncounter-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link POCDMT000040EncompassingEncounter }
+     *
+     */
+    public void setEncompassingEncounter(POCDMT000040EncompassingEncounter value) {
+        this.encompassingEncounter = value;
+    }
 
-	/**
-	 * Legt den Wert der typeCode-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link ActRelationshipHasComponent }
-	 *
-	 */
-	public void setTypeCode(ActRelationshipHasComponent value) {
-		this.typeCode = value;
-	}
+    /**
+     * Legt den Wert der typeCode-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link ActRelationshipHasComponent }
+     *
+     */
+    public void setTypeCode(ActRelationshipHasComponent value) {
+        this.typeCode = value;
+    }
 
-	/**
-	 * Legt den Wert der typeId-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link POCDMT000040InfrastructureRootTypeId
-	 *            }
-	 *
-	 */
-	public void setTypeId(POCDMT000040InfrastructureRootTypeId value) {
-		this.typeId = value;
-	}
+    /**
+     * Legt den Wert der typeId-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link POCDMT000040InfrastructureRootTypeId
+     *            }
+     *
+     */
+    public void setTypeId(POCDMT000040InfrastructureRootTypeId value) {
+        this.typeId = value;
+    }
 
 }

@@ -52,27 +52,27 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "HXIT_PQ", propOrder = { "validTime" })
 public class HXITPQ extends PQ {
 
-	protected IVLTS validTime;
+    protected IVLTS validTime;
 
-	/**
-	 * Ruft den Wert der validTime-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link IVLTS }
-	 *
-	 */
-	public IVLTS getValidTime() {
-		return validTime;
-	}
+    /**
+     * Ruft den Wert der validTime-Eigenschaft ab.
+     *
+     * @return possible object is {@link IVLTS }
+     *
+     */
+    public IVLTS getValidTime() {
+        return validTime;
+    }
 
-	/**
-	 * Legt den Wert der validTime-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link IVLTS }
-	 *
-	 */
-	public void setValidTime(IVLTS value) {
-		this.validTime = value;
-	}
+    /**
+     * Legt den Wert der validTime-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link IVLTS }
+     *
+     */
+    public void setValidTime(IVLTS value) {
+        this.validTime = value;
+    }
 
 }

@@ -2,8 +2,7 @@ package org.husky.emed.cda.generated.artdecor;
 
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship;
+import org.husky.common.hl7cdar2.*;
 
 /**
  * DosageInstructionsEntryRelatedComponents
@@ -20,7 +19,7 @@ import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship;
 public class DosageInstructionsEntryRelatedComponents extends POCDMT000040EntryRelationship {
 
     public DosageInstructionsEntryRelatedComponents() {
-        super.setTypeCode(org.husky.emed.cda.generated.hl7cdar2.XActRelationshipEntryRelationship.COMP);
+        super.setTypeCode(XActRelationshipEntryRelationship.COMP);
         super.setSubstanceAdministration(createHl7SubstanceAdministrationFixedValue("SBADM"));
     }
 
@@ -29,9 +28,9 @@ public class DosageInstructionsEntryRelatedComponents extends POCDMT000040EntryR
      *
      * @param classCode the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040SubstanceAdministration createHl7SubstanceAdministrationFixedValue(String classCode) {
+    private static POCDMT000040SubstanceAdministration createHl7SubstanceAdministrationFixedValue(String classCode) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.POCDMT000040SubstanceAdministration retVal = factory.createPOCDMT000040SubstanceAdministration();
+        POCDMT000040SubstanceAdministration retVal = factory.createPOCDMT000040SubstanceAdministration();
         retVal.getClassCode().add(classCode);
         return retVal;
     }
@@ -39,28 +38,28 @@ public class DosageInstructionsEntryRelatedComponents extends POCDMT000040EntryR
     /**
      * Gets the hl7SequenceNumber
      */
-    public org.husky.emed.cda.generated.hl7cdar2.INT getHl7SequenceNumber() {
+    public INT getHl7SequenceNumber() {
         return sequenceNumber;
     }
 
     /**
      * Gets the hl7SubstanceAdministration
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040SubstanceAdministration getHl7SubstanceAdministration() {
+    public POCDMT000040SubstanceAdministration getHl7SubstanceAdministration() {
         return substanceAdministration;
     }
 
     /**
      * Sets the hl7SequenceNumber
      */
-    public void setHl7SequenceNumber(org.husky.emed.cda.generated.hl7cdar2.INT value) {
+    public void setHl7SequenceNumber(INT value) {
         this.sequenceNumber = value;
     }
 
     /**
      * Sets the hl7SubstanceAdministration
      */
-    public void setHl7SubstanceAdministration(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040SubstanceAdministration value) {
+    public void setHl7SubstanceAdministration(POCDMT000040SubstanceAdministration value) {
         this.substanceAdministration = value;
     }
 }

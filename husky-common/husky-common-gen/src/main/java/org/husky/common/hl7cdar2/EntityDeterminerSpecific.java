@@ -46,14 +46,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum EntityDeterminerSpecific {
 
-	INSTANCE;
+    INSTANCE;
 
-	public static EntityDeterminerSpecific fromValue(String v) {
-		return valueOf(v);
-	}
+    public static EntityDeterminerSpecific fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

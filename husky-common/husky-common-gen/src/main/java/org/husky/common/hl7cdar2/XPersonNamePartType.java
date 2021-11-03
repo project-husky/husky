@@ -50,14 +50,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XPersonNamePartType {
 
-	DEL, FAM, GIV, PFX, SFX;
+    DEL, FAM, GIV, PFX, SFX;
 
-	public static XPersonNamePartType fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XPersonNamePartType fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

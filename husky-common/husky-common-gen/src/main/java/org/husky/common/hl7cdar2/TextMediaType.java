@@ -52,31 +52,31 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum TextMediaType {
 
-	@XmlEnumValue("text/html")
-	TEXT_HTML("text/html"), @XmlEnumValue("text/plain")
-	TEXT_PLAIN("text/plain"), @XmlEnumValue("text/rtf")
-	TEXT_RTF("text/rtf"), @XmlEnumValue("text/sgml")
-	TEXT_SGML("text/sgml"), @XmlEnumValue("text/x-hl7-ft")
-	TEXT_X_HL_7_FT("text/x-hl7-ft"), @XmlEnumValue("text/xml")
-	TEXT_XML("text/xml");
+    @XmlEnumValue("text/html")
+    TEXT_HTML("text/html"), @XmlEnumValue("text/plain")
+    TEXT_PLAIN("text/plain"), @XmlEnumValue("text/rtf")
+    TEXT_RTF("text/rtf"), @XmlEnumValue("text/sgml")
+    TEXT_SGML("text/sgml"), @XmlEnumValue("text/x-hl7-ft")
+    TEXT_X_HL_7_FT("text/x-hl7-ft"), @XmlEnumValue("text/xml")
+    TEXT_XML("text/xml");
 
-	public static TextMediaType fromValue(String v) {
-		for (TextMediaType c : TextMediaType.values()) {
-			if (c.value.equals(v)) {
-				return c;
-			}
-		}
-		throw new IllegalArgumentException(v);
-	}
+    public static TextMediaType fromValue(String v) {
+        for (TextMediaType c : TextMediaType.values()) {
+            if (c.value.equals(v)) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException(v);
+    }
 
-	private final String value;
+    private final String value;
 
-	TextMediaType(String v) {
-		value = v;
-	}
+    TextMediaType(String v) {
+        value = v;
+    }
 
-	public String value() {
-		return value;
-	}
+    public String value() {
+        return value;
+    }
 
 }

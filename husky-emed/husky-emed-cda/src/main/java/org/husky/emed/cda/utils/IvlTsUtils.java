@@ -1,8 +1,8 @@
 package org.husky.emed.cda.utils;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.cda.generated.hl7cdar2.IVLTS;
-import org.husky.emed.cda.generated.hl7cdar2.IVXBTS;
+import org.husky.common.hl7cdar2.IVLTS;
+import org.husky.common.hl7cdar2.IVXBTS;
 import org.husky.emed.cda.utils.time.DateTimes;
 import org.husky.emed.cda.utils.time.Hl7Dtm;
 

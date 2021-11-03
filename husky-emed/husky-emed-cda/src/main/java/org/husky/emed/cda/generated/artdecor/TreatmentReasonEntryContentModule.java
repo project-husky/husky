@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.CS;
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Observation;
+import org.husky.common.hl7cdar2.*;
 import org.husky.emed.cda.models.common.Code;
 import org.husky.emed.cda.models.common.basetypes.CodeBaseType;
 
@@ -25,7 +23,7 @@ public class TreatmentReasonEntryContentModule extends POCDMT000040Observation {
 
     public TreatmentReasonEntryContentModule() {
         super.getClassCode().add("OBS");
-        super.setMoodCode(org.husky.emed.cda.generated.hl7cdar2.XActMoodDocumentObservation.EVN);
+        super.setMoodCode(XActMoodDocumentObservation.EVN);
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.41"));
         super.setCode(createHl7CodeFixedValue("75326-9",
                                               "2.16.840.1.113883.6.1",
@@ -41,9 +39,9 @@ public class TreatmentReasonEntryContentModule extends POCDMT000040Observation {
      *
      * @param code the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.CD createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+    private static CD createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.CD retVal = factory.createCD();
+        CD retVal = factory.createCD();
         retVal.setCode(code);
         retVal.setCodeSystem(codeSystem);
         retVal.setCodeSystemName(codeSystemName);
@@ -56,9 +54,9 @@ public class TreatmentReasonEntryContentModule extends POCDMT000040Observation {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -66,21 +64,21 @@ public class TreatmentReasonEntryContentModule extends POCDMT000040Observation {
     /**
      * Gets the hl7Code
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CD getHl7Code() {
+    public CD getHl7Code() {
         return code;
     }
 
     /**
      * Gets the hl7StatusCode
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CS getHl7StatusCode() {
+    public CS getHl7StatusCode() {
         return statusCode;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
@@ -88,7 +86,7 @@ public class TreatmentReasonEntryContentModule extends POCDMT000040Observation {
      * Gets the hl7Text
      * It shall contain both the narrative text content and a reference to the human readable part of the item. This human readable part may contain a simple text to redirect the reader to the PDF document (e.g. "See PDF version included").<br clear="none"/>There shall be a single non-blank text node (i.e. the text shall be completely before or after the reference, see examples). The text shall be raw (i.e. no markup shall be used).
      */
-    public org.husky.emed.cda.generated.hl7cdar2.ED getHl7Text() {
+    public ED getHl7Text() {
         return text;
     }
 
@@ -102,21 +100,21 @@ public class TreatmentReasonEntryContentModule extends POCDMT000040Observation {
     /**
      * Sets the hl7Code
      */
-    public void setHl7Code(org.husky.emed.cda.generated.hl7cdar2.CD value) {
+    public void setHl7Code(CD value) {
         this.code = value;
     }
 
     /**
      * Sets the hl7StatusCode
      */
-    public void setHl7StatusCode(org.husky.emed.cda.generated.hl7cdar2.CS value) {
+    public void setHl7StatusCode(CS value) {
         this.statusCode = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
@@ -125,7 +123,7 @@ public class TreatmentReasonEntryContentModule extends POCDMT000040Observation {
      * Sets the hl7Text
      * It shall contain both the narrative text content and a reference to the human readable part of the item. This human readable part may contain a simple text to redirect the reader to the PDF document (e.g. "See PDF version included").<br clear="none"/>There shall be a single non-blank text node (i.e. the text shall be completely before or after the reference, see examples). The text shall be raw (i.e. no markup shall be used).
      */
-    public void setHl7Text(org.husky.emed.cda.generated.hl7cdar2.ED value) {
+    public void setHl7Text(ED value) {
         this.text = value;
     }
 }

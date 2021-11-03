@@ -48,26 +48,26 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum BinaryDataEncoding {
 
-	@XmlEnumValue("B64")
-	B_64("B64"), TXT("TXT");
+    @XmlEnumValue("B64")
+    B_64("B64"), TXT("TXT");
 
-	public static BinaryDataEncoding fromValue(String v) {
-		for (BinaryDataEncoding c : BinaryDataEncoding.values()) {
-			if (c.value.equals(v)) {
-				return c;
-			}
-		}
-		throw new IllegalArgumentException(v);
-	}
+    public static BinaryDataEncoding fromValue(String v) {
+        for (BinaryDataEncoding c : BinaryDataEncoding.values()) {
+            if (c.value.equals(v)) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException(v);
+    }
 
-	private final String value;
+    private final String value;
 
-	BinaryDataEncoding(String v) {
-		value = v;
-	}
+    BinaryDataEncoding(String v) {
+        value = v;
+    }
 
-	public String value() {
-		return value;
-	}
+    public String value() {
+        return value;
+    }
 
 }

@@ -51,32 +51,32 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "POCD_MT000040.RegionOfInterest.value")
 public class POCDMT000040RegionOfInterestValue extends INT {
 
-	@XmlAttribute(name = "unsorted")
-	protected Boolean unsorted;
+    @XmlAttribute(name = "unsorted")
+    protected Boolean unsorted;
 
-	/**
-	 * Ruft den Wert der unsorted-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link Boolean }
-	 *
-	 */
-	public boolean isUnsorted() {
-		if (unsorted == null) {
-			return false;
-		} else {
-			return unsorted;
-		}
-	}
+    /**
+     * Ruft den Wert der unsorted-Eigenschaft ab.
+     *
+     * @return possible object is {@link Boolean }
+     *
+     */
+    public boolean isUnsorted() {
+        if (unsorted == null) {
+            return false;
+        } else {
+            return unsorted;
+        }
+    }
 
-	/**
-	 * Legt den Wert der unsorted-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link Boolean }
-	 *
-	 */
-	public void setUnsorted(Boolean value) {
-		this.unsorted = value;
-	}
+    /**
+     * Legt den Wert der unsorted-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link Boolean }
+     *
+     */
+    public void setUnsorted(Boolean value) {
+        this.unsorted = value;
+    }
 
 }

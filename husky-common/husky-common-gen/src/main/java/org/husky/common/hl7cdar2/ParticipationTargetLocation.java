@@ -51,14 +51,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ParticipationTargetLocation {
 
-	LOC, DST, ELOC, ORG, RML, VIA;
+    LOC, DST, ELOC, ORG, RML, VIA;
 
-	public static ParticipationTargetLocation fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ParticipationTargetLocation fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

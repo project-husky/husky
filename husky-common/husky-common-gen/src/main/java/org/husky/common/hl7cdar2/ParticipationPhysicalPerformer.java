@@ -49,14 +49,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ParticipationPhysicalPerformer {
 
-	PRF, DIST, PPRF, SPRF;
+    PRF, DIST, PPRF, SPRF;
 
-	public static ParticipationPhysicalPerformer fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ParticipationPhysicalPerformer fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

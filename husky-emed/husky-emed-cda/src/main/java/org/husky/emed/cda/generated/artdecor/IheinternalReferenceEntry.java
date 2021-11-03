@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Act;
+import org.husky.common.hl7cdar2.CD;
+import org.husky.common.hl7cdar2.II;
+import org.husky.common.hl7cdar2.ObjectFactory;
+import org.husky.common.hl7cdar2.POCDMT000040Act;
 
 /**
  * IHEInternalReferenceEntry
@@ -30,9 +32,9 @@ public class IheinternalReferenceEntry extends POCDMT000040Act {
      *
      * @param nullFlavor the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.CD createHl7CodeFixedValue(String nullFlavor) {
+    private static CD createHl7CodeFixedValue(String nullFlavor) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.CD retVal = factory.createCD();
+        CD retVal = factory.createCD();
         retVal.nullFlavor = new ArrayList<String>();
         retVal.nullFlavor.add(nullFlavor);
         return retVal;
@@ -43,9 +45,9 @@ public class IheinternalReferenceEntry extends POCDMT000040Act {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -53,35 +55,35 @@ public class IheinternalReferenceEntry extends POCDMT000040Act {
     /**
      * Gets the hl7Code
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CD getHl7Code() {
+    public CD getHl7Code() {
         return code;
     }
 
     /**
      * Gets the hl7Id
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7Id() {
+    public List<II> getHl7Id() {
         return id;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
     /**
      * Sets the hl7Code
      */
-    public void setHl7Code(org.husky.emed.cda.generated.hl7cdar2.CD value) {
+    public void setHl7Code(CD value) {
         this.code = value;
     }
 
     /**
      * Sets the hl7Id
      */
-    public void setHl7Id(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7Id(II value) {
         getId().clear();
         getId().add(value);
     }
@@ -89,7 +91,7 @@ public class IheinternalReferenceEntry extends POCDMT000040Act {
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }

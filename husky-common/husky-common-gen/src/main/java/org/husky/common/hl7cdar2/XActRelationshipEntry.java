@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XActRelationshipEntry {
 
-	COMP, DRIV;
+    COMP, DRIV;
 
-	public static XActRelationshipEntry fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XActRelationshipEntry fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

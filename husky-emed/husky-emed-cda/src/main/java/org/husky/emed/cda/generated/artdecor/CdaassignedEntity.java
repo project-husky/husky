@@ -2,7 +2,7 @@ package org.husky.emed.cda.generated.artdecor;
 
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040AssignedEntity;
+import org.husky.common.hl7cdar2.*;
 
 /**
  * CDAAssignedEntity
@@ -22,21 +22,21 @@ public class CdaassignedEntity extends POCDMT000040AssignedEntity {
     /**
      * Adds a hl7Addr
      */
-    public void addHl7Addr(org.husky.emed.cda.generated.hl7cdar2.AD value) {
+    public void addHl7Addr(AD value) {
         getAddr().add(value);
     }
 
     /**
      * Adds a hl7Id
      */
-    public void addHl7Id(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void addHl7Id(II value) {
         getId().add(value);
     }
 
     /**
      * Adds a hl7Telecom
      */
-    public void addHl7Telecom(org.husky.emed.cda.generated.hl7cdar2.TEL value) {
+    public void addHl7Telecom(TEL value) {
         getTelecom().add(value);
     }
 
@@ -64,42 +64,42 @@ public class CdaassignedEntity extends POCDMT000040AssignedEntity {
     /**
      * Gets the hl7AssignedPerson
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Person getHl7AssignedPerson() {
+    public POCDMT000040Person getHl7AssignedPerson() {
         return assignedPerson;
     }
 
     /**
      * Gets the hl7Code
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CE getHl7Code() {
+    public CE getHl7Code() {
         return code;
     }
 
     /**
      * Gets the hl7RepresentedOrganization
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Organization getHl7RepresentedOrganization() {
+    public POCDMT000040Organization getHl7RepresentedOrganization() {
         return representedOrganization;
     }
 
     /**
      * Sets the hl7AssignedPerson
      */
-    public void setHl7AssignedPerson(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Person value) {
+    public void setHl7AssignedPerson(POCDMT000040Person value) {
         this.assignedPerson = value;
     }
 
     /**
      * Sets the hl7Code
      */
-    public void setHl7Code(org.husky.emed.cda.generated.hl7cdar2.CE value) {
+    public void setHl7Code(CE value) {
         this.code = value;
     }
 
     /**
      * Sets the hl7RepresentedOrganization
      */
-    public void setHl7RepresentedOrganization(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Organization value) {
+    public void setHl7RepresentedOrganization(POCDMT000040Organization value) {
         this.representedOrganization = value;
     }
 }

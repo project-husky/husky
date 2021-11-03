@@ -2,7 +2,7 @@ package org.husky.emed.cda.generated.artdecor;
 
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.PN;
+import org.husky.common.hl7cdar2.PN;
 
 /**
  * CDAPerson

@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XActMoodOrdPrms {
 
-	PRMS, RQO;
+    PRMS, RQO;
 
-	public static XActMoodOrdPrms fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XActMoodOrdPrms fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

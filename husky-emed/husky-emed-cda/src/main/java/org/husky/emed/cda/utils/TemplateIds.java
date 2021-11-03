@@ -1,11 +1,10 @@
 package org.husky.emed.cda.utils;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.cda.generated.hl7cdar2.II;
+import org.husky.common.hl7cdar2.II;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * Specifications of CDA documents.

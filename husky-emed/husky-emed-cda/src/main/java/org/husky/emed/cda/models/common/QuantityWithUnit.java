@@ -1,7 +1,7 @@
 package org.husky.emed.cda.models.common;
 
 import org.husky.emed.cda.generated.artdecor.enums.UnitCode;
-import org.husky.emed.cda.generated.hl7cdar2.PQ;
+import org.husky.common.hl7cdar2.PQ;
 
 import java.util.Objects;
 

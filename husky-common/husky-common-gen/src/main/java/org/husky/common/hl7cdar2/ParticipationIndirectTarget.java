@@ -51,14 +51,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ParticipationIndirectTarget {
 
-	IND, BEN, COV, HLD, RCT, RCV;
+    IND, BEN, COV, HLD, RCT, RCV;
 
-	public static ParticipationIndirectTarget fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ParticipationIndirectTarget fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

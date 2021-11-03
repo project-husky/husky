@@ -3,8 +3,9 @@ package org.husky.emed.cda.generated.artdecor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Observation;
+import org.husky.common.hl7cdar2.*;
+import org.husky.common.hl7cdar2.ObjectFactory;
+import org.husky.common.hl7cdar2.POCDMT000040Observation;
 
 /**
  * IHEAllergyAndIntoleranceEntry
@@ -21,7 +22,7 @@ public class IheallergyAndIntoleranceEntry extends POCDMT000040Observation {
 
     public IheallergyAndIntoleranceEntry() {
         super.getClassCode().add("OBS");
-        super.setMoodCode(org.husky.emed.cda.generated.hl7cdar2.XActMoodDocumentObservation.EVN);
+        super.setMoodCode(XActMoodDocumentObservation.EVN);
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.5"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.28"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.6"));
@@ -34,14 +35,14 @@ public class IheallergyAndIntoleranceEntry extends POCDMT000040Observation {
     /**
      * Adds a hl7EntryRelationship
      */
-    public void addHl7EntryRelationship(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship value) {
+    public void addHl7EntryRelationship(POCDMT000040EntryRelationship value) {
         getEntryRelationship().add(value);
     }
 
     /**
      * Adds a hl7Id
      */
-    public void addHl7Id(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void addHl7Id(II value) {
         getId().add(value);
     }
 
@@ -49,7 +50,7 @@ public class IheallergyAndIntoleranceEntry extends POCDMT000040Observation {
      * Adds a hl7Value
      * <br clear="none"/>
      */
-    public void addHl7Value(org.husky.emed.cda.generated.hl7cdar2.CD value) {
+    public void addHl7Value(CD value) {
         getValue().add(value);
     }
 
@@ -81,10 +82,10 @@ public class IheallergyAndIntoleranceEntry extends POCDMT000040Observation {
      * @param typeCode the desired fixed value for this argument.
      * @param inversionInd the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
+    private static POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship retVal = factory.createPOCDMT000040EntryRelationship();
-        retVal.setTypeCode(org.husky.emed.cda.generated.hl7cdar2.XActRelationshipEntryRelationship.fromValue(typeCode));
+        POCDMT000040EntryRelationship retVal = factory.createPOCDMT000040EntryRelationship();
+        retVal.setTypeCode(XActRelationshipEntryRelationship.fromValue(typeCode));
         if (inversionInd != null) {
             retVal.setInversionInd(Boolean.parseBoolean(inversionInd));
         }
@@ -96,9 +97,9 @@ public class IheallergyAndIntoleranceEntry extends POCDMT000040Observation {
      *
      * @param typeCode the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Participant2 createHl7ParticipantFixedValue(String typeCode) {
+    private static POCDMT000040Participant2 createHl7ParticipantFixedValue(String typeCode) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Participant2 retVal = factory.createPOCDMT000040Participant2();
+        POCDMT000040Participant2 retVal = factory.createPOCDMT000040Participant2();
         retVal.getTypeCode().add(typeCode);
         return retVal;
     }
@@ -108,9 +109,9 @@ public class IheallergyAndIntoleranceEntry extends POCDMT000040Observation {
      *
      * @param code the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.CS createHl7StatusCodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+    private static CS createHl7StatusCodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.CS retVal = factory.createCS();
+        CS retVal = factory.createCS();
         retVal.setCode(code);
         retVal.setCodeSystem(codeSystem);
         retVal.setCodeSystemName(codeSystemName);
@@ -123,9 +124,9 @@ public class IheallergyAndIntoleranceEntry extends POCDMT000040Observation {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -133,14 +134,14 @@ public class IheallergyAndIntoleranceEntry extends POCDMT000040Observation {
     /**
      * Gets the hl7Code
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CD getHl7Code() {
+    public CD getHl7Code() {
         return code;
     }
 
     /**
      * Gets the hl7EffectiveTime
      */
-    public org.husky.emed.cda.generated.hl7cdar2.IVLTS getHl7EffectiveTime() {
+    public IVLTS getHl7EffectiveTime() {
         return effectiveTime;
     }
 
@@ -148,28 +149,28 @@ public class IheallergyAndIntoleranceEntry extends POCDMT000040Observation {
      * Gets the hl7Participant
      * <br clear="none"/>
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Participant2> getHl7Participant() {
+    public List<POCDMT000040Participant2> getHl7Participant() {
         return participant;
     }
 
     /**
      * Gets the hl7StatusCode
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CS getHl7StatusCode() {
+    public CS getHl7StatusCode() {
         return statusCode;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
     /**
      * Gets the hl7Text
      */
-    public org.husky.emed.cda.generated.hl7cdar2.ED getHl7Text() {
+    public ED getHl7Text() {
         return text;
     }
 
@@ -177,7 +178,7 @@ public class IheallergyAndIntoleranceEntry extends POCDMT000040Observation {
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship, filled by: "false", "REFR"
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipFalseRefr() {
+    public static POCDMT000040EntryRelationship getPredefinedEntryRelationshipFalseRefr() {
         return createHl7EntryRelationshipFixedValue("false",
                                                     "REFR");
     }
@@ -186,7 +187,7 @@ public class IheallergyAndIntoleranceEntry extends POCDMT000040Observation {
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship, filled by: "MFST", null
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipMfstNull() {
+    public static POCDMT000040EntryRelationship getPredefinedEntryRelationshipMfstNull() {
         return createHl7EntryRelationshipFixedValue("MFST",
                                                     null);
     }
@@ -195,7 +196,7 @@ public class IheallergyAndIntoleranceEntry extends POCDMT000040Observation {
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship, filled by: "true", "SUBJ"
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipTrueSubj() {
+    public static POCDMT000040EntryRelationship getPredefinedEntryRelationshipTrueSubj() {
         return createHl7EntryRelationshipFixedValue("true",
                                                     "SUBJ");
     }
@@ -204,21 +205,21 @@ public class IheallergyAndIntoleranceEntry extends POCDMT000040Observation {
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040Participant2, filled by: "CSM"
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Participant2 getPredefinedParticipantCsm() {
+    public static POCDMT000040Participant2 getPredefinedParticipantCsm() {
         return createHl7ParticipantFixedValue("CSM");
     }
 
     /**
      * Sets the hl7Code
      */
-    public void setHl7Code(org.husky.emed.cda.generated.hl7cdar2.CD value) {
+    public void setHl7Code(CD value) {
         this.code = value;
     }
 
     /**
      * Sets the hl7EffectiveTime
      */
-    public void setHl7EffectiveTime(org.husky.emed.cda.generated.hl7cdar2.IVLTS value) {
+    public void setHl7EffectiveTime(IVLTS value) {
         this.effectiveTime = value;
     }
 
@@ -226,7 +227,7 @@ public class IheallergyAndIntoleranceEntry extends POCDMT000040Observation {
      * Sets the hl7Participant
      * <br clear="none"/>
      */
-    public void setHl7Participant(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Participant2 value) {
+    public void setHl7Participant(POCDMT000040Participant2 value) {
         getParticipant().clear();
         getParticipant().add(value);
     }
@@ -234,14 +235,14 @@ public class IheallergyAndIntoleranceEntry extends POCDMT000040Observation {
     /**
      * Sets the hl7StatusCode
      */
-    public void setHl7StatusCode(org.husky.emed.cda.generated.hl7cdar2.CS value) {
+    public void setHl7StatusCode(CS value) {
         this.statusCode = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
@@ -249,7 +250,7 @@ public class IheallergyAndIntoleranceEntry extends POCDMT000040Observation {
     /**
      * Sets the hl7Text
      */
-    public void setHl7Text(org.husky.emed.cda.generated.hl7cdar2.ED value) {
+    public void setHl7Text(ED value) {
         this.text = value;
     }
 }

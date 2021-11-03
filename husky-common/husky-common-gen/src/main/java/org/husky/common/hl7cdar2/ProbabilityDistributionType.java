@@ -55,26 +55,26 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ProbabilityDistributionType {
 
-	B("B"), E("E"), F("F"), G("G"), LN("LN"), N("N"), T("T"), U("U"), @XmlEnumValue("X2")
-	X_2("X2");
+    B("B"), E("E"), F("F"), G("G"), LN("LN"), N("N"), T("T"), U("U"), @XmlEnumValue("X2")
+    X_2("X2");
 
-	public static ProbabilityDistributionType fromValue(String v) {
-		for (ProbabilityDistributionType c : ProbabilityDistributionType.values()) {
-			if (c.value.equals(v)) {
-				return c;
-			}
-		}
-		throw new IllegalArgumentException(v);
-	}
+    public static ProbabilityDistributionType fromValue(String v) {
+        for (ProbabilityDistributionType c : ProbabilityDistributionType.values()) {
+            if (c.value.equals(v)) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException(v);
+    }
 
-	private final String value;
+    private final String value;
 
-	ProbabilityDistributionType(String v) {
-		value = v;
-	}
+    ProbabilityDistributionType(String v) {
+        value = v;
+    }
 
-	public String value() {
-		return value;
-	}
+    public String value() {
+        return value;
+    }
 
 }

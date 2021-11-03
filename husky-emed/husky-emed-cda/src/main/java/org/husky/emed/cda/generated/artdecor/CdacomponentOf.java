@@ -2,8 +2,10 @@ package org.husky.emed.cda.generated.artdecor;
 
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Component1;
+import org.husky.common.hl7cdar2.ActRelationshipHasComponent;
+import org.husky.common.hl7cdar2.ObjectFactory;
+import org.husky.common.hl7cdar2.POCDMT000040Component1;
+import org.husky.common.hl7cdar2.POCDMT000040EncompassingEncounter;
 
 /**
  * CDAcomponentOf
@@ -18,7 +20,7 @@ import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Component1;
 public class CdacomponentOf extends POCDMT000040Component1 {
 
     public CdacomponentOf() {
-        super.setTypeCode(org.husky.emed.cda.generated.hl7cdar2.ActRelationshipHasComponent.COMP);
+        super.setTypeCode(ActRelationshipHasComponent.COMP);
         super.setEncompassingEncounter(createHl7EncompassingEncounterFixedValue("ENC",
                                                                                 "EVN"));
     }
@@ -29,9 +31,9 @@ public class CdacomponentOf extends POCDMT000040Component1 {
      * @param classCode the desired fixed value for this argument.
      * @param moodCode the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EncompassingEncounter createHl7EncompassingEncounterFixedValue(String classCode, String moodCode) {
+    private static POCDMT000040EncompassingEncounter createHl7EncompassingEncounterFixedValue(String classCode, String moodCode) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EncompassingEncounter retVal = factory.createPOCDMT000040EncompassingEncounter();
+        POCDMT000040EncompassingEncounter retVal = factory.createPOCDMT000040EncompassingEncounter();
         retVal.getClassCode().add(classCode);
         retVal.getMoodCode().add(moodCode);
         return retVal;
@@ -40,14 +42,14 @@ public class CdacomponentOf extends POCDMT000040Component1 {
     /**
      * Gets the hl7EncompassingEncounter
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EncompassingEncounter getHl7EncompassingEncounter() {
+    public POCDMT000040EncompassingEncounter getHl7EncompassingEncounter() {
         return encompassingEncounter;
     }
 
     /**
      * Sets the hl7EncompassingEncounter
      */
-    public void setHl7EncompassingEncounter(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EncompassingEncounter value) {
+    public void setHl7EncompassingEncounter(POCDMT000040EncompassingEncounter value) {
         this.encompassingEncounter = value;
     }
 }

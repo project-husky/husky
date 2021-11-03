@@ -3,8 +3,7 @@ package org.husky.emed.cda.generated.artdecor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Performer1;
+import org.husky.common.hl7cdar2.*;
 
 /**
  * cdach_other_Performer
@@ -21,7 +20,7 @@ import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Performer1;
 public class CdachOtherPerformer extends POCDMT000040Performer1 {
 
     public CdachOtherPerformer() {
-        super.setTypeCode(org.husky.emed.cda.generated.hl7cdar2.XServiceEventPerformer.PRF);
+        super.setTypeCode(XServiceEventPerformer.PRF);
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.9.31"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.24.3.5"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.323"));
@@ -32,9 +31,9 @@ public class CdachOtherPerformer extends POCDMT000040Performer1 {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -42,14 +41,14 @@ public class CdachOtherPerformer extends POCDMT000040Performer1 {
     /**
      * Gets the hl7AssignedEntity
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040AssignedEntity getHl7AssignedEntity() {
+    public POCDMT000040AssignedEntity getHl7AssignedEntity() {
         return assignedEntity;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
@@ -57,21 +56,21 @@ public class CdachOtherPerformer extends POCDMT000040Performer1 {
      * Gets the hl7Time
      * Duration of the performance.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.IVLTS getHl7Time() {
+    public IVLTS getHl7Time() {
         return time;
     }
 
     /**
      * Sets the hl7AssignedEntity
      */
-    public void setHl7AssignedEntity(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040AssignedEntity value) {
+    public void setHl7AssignedEntity(POCDMT000040AssignedEntity value) {
         this.assignedEntity = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
@@ -80,7 +79,7 @@ public class CdachOtherPerformer extends POCDMT000040Performer1 {
      * Sets the hl7Time
      * Duration of the performance.
      */
-    public void setHl7Time(org.husky.emed.cda.generated.hl7cdar2.IVLTS value) {
+    public void setHl7Time(IVLTS value) {
         this.time = value;
     }
 }

@@ -68,105 +68,105 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "PIVL_PPD_TS", propOrder = { "phase", "period" })
 public class PIVLPPDTS extends SXCMPPDTS {
 
-	protected IVLPPDTS phase;
-	protected PPDPQ period;
-	@XmlAttribute(name = "alignment")
-	protected List<String> alignment;
-	@XmlAttribute(name = "institutionSpecified")
-	protected Boolean institutionSpecified;
+    protected IVLPPDTS phase;
+    protected PPDPQ period;
+    @XmlAttribute(name = "alignment")
+    protected List<String> alignment;
+    @XmlAttribute(name = "institutionSpecified")
+    protected Boolean institutionSpecified;
 
-	/**
-	 * Gets the value of the alignment property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the alignment property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getAlignment().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link String }
-	 *
-	 *
-	 */
-	public List<String> getAlignment() {
-		if (alignment == null) {
-			alignment = new ArrayList<String>();
-		}
-		return this.alignment;
-	}
+    /**
+     * Gets the value of the alignment property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the alignment property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getAlignment().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link String }
+     *
+     *
+     */
+    public List<String> getAlignment() {
+        if (alignment == null) {
+            alignment = new ArrayList<String>();
+        }
+        return this.alignment;
+    }
 
-	/**
-	 * Ruft den Wert der period-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link PPDPQ }
-	 *
-	 */
-	public PPDPQ getPeriod() {
-		return period;
-	}
+    /**
+     * Ruft den Wert der period-Eigenschaft ab.
+     *
+     * @return possible object is {@link PPDPQ }
+     *
+     */
+    public PPDPQ getPeriod() {
+        return period;
+    }
 
-	/**
-	 * Ruft den Wert der phase-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link IVLPPDTS }
-	 *
-	 */
-	public IVLPPDTS getPhase() {
-		return phase;
-	}
+    /**
+     * Ruft den Wert der phase-Eigenschaft ab.
+     *
+     * @return possible object is {@link IVLPPDTS }
+     *
+     */
+    public IVLPPDTS getPhase() {
+        return phase;
+    }
 
-	/**
-	 * Ruft den Wert der institutionSpecified-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link Boolean }
-	 *
-	 */
-	public boolean isInstitutionSpecified() {
-		if (institutionSpecified == null) {
-			return false;
-		} else {
-			return institutionSpecified;
-		}
-	}
+    /**
+     * Ruft den Wert der institutionSpecified-Eigenschaft ab.
+     *
+     * @return possible object is {@link Boolean }
+     *
+     */
+    public boolean isInstitutionSpecified() {
+        if (institutionSpecified == null) {
+            return false;
+        } else {
+            return institutionSpecified;
+        }
+    }
 
-	/**
-	 * Legt den Wert der institutionSpecified-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link Boolean }
-	 *
-	 */
-	public void setInstitutionSpecified(Boolean value) {
-		this.institutionSpecified = value;
-	}
+    /**
+     * Legt den Wert der institutionSpecified-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link Boolean }
+     *
+     */
+    public void setInstitutionSpecified(Boolean value) {
+        this.institutionSpecified = value;
+    }
 
-	/**
-	 * Legt den Wert der period-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link PPDPQ }
-	 *
-	 */
-	public void setPeriod(PPDPQ value) {
-		this.period = value;
-	}
+    /**
+     * Legt den Wert der period-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link PPDPQ }
+     *
+     */
+    public void setPeriod(PPDPQ value) {
+        this.period = value;
+    }
 
-	/**
-	 * Legt den Wert der phase-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link IVLPPDTS }
-	 *
-	 */
-	public void setPhase(IVLPPDTS value) {
-		this.phase = value;
-	}
+    /**
+     * Legt den Wert der phase-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link IVLPPDTS }
+     *
+     */
+    public void setPhase(IVLPPDTS value) {
+        this.phase = value;
+    }
 
 }

@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040SubstanceAdministration;
-import org.husky.emed.cda.generated.hl7cdar2.SXCMTS;
+import org.husky.common.hl7cdar2.*;
+import org.husky.common.hl7cdar2.ObjectFactory;
+import org.husky.common.hl7cdar2.POCDMT000040SubstanceAdministration;
+import org.husky.common.hl7cdar2.SXCMTS;
 
 /**
  * MedicationTreatmentPlanEntryContentModule
@@ -24,7 +25,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
 
     public MedicationTreatmentPlanEntryContentModule() {
         super.getClassCode().add("SBADM");
-        super.setMoodCode(org.husky.emed.cda.generated.hl7cdar2.XDocumentSubstanceMood.INT);
+        super.setMoodCode(XDocumentSubstanceMood.INT);
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.34"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.7"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.24"));
@@ -35,7 +36,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
     /**
      * Adds a hl7ApproachSiteCode
      */
-    public void addHl7ApproachSiteCode(org.husky.emed.cda.generated.hl7cdar2.CD value) {
+    public void addHl7ApproachSiteCode(CD value) {
         getApproachSiteCode().add(value);
     }
 
@@ -49,9 +50,9 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
     /**
      * Creates fixed contents for CDA Element hl7DoseQuantity
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.IVLPQ createHl7DoseQuantityFixedValue() {
+    private static IVLPQ createHl7DoseQuantityFixedValue() {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.IVLPQ retVal = factory.createIVLPQ();
+        IVLPQ retVal = factory.createIVLPQ();
         return retVal;
     }
 
@@ -60,10 +61,10 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      *
      * @param operator the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.EIVLTS createHl7EffectiveTimeFixedValue(String operator) {
+    private static EIVLTS createHl7EffectiveTimeFixedValue(String operator) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.EIVLTS retVal = factory.createEIVLTS();
-        retVal.setOperator(org.husky.emed.cda.generated.hl7cdar2.SetOperator.fromValue(operator));
+        EIVLTS retVal = factory.createEIVLTS();
+        retVal.setOperator(SetOperator.fromValue(operator));
         return retVal;
     }
 
@@ -73,10 +74,10 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * @param typeCode the desired fixed value for this argument.
      * @param inversionInd the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
+    private static POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship retVal = factory.createPOCDMT000040EntryRelationship();
-        retVal.setTypeCode(org.husky.emed.cda.generated.hl7cdar2.XActRelationshipEntryRelationship.fromValue(typeCode));
+        POCDMT000040EntryRelationship retVal = factory.createPOCDMT000040EntryRelationship();
+        retVal.setTypeCode(XActRelationshipEntryRelationship.fromValue(typeCode));
         if (inversionInd != null) {
             retVal.setInversionInd(Boolean.parseBoolean(inversionInd));
         }
@@ -88,10 +89,10 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      *
      * @param typeCode the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
+    private static POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Reference retVal = factory.createPOCDMT000040Reference();
-        retVal.setTypeCode(org.husky.emed.cda.generated.hl7cdar2.XActRelationshipExternalReference.fromValue(typeCode));
+        POCDMT000040Reference retVal = factory.createPOCDMT000040Reference();
+        retVal.setTypeCode(XActRelationshipExternalReference.fromValue(typeCode));
         return retVal;
     }
 
@@ -100,9 +101,9 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      *
      * @param nullFlavor the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.IVLINT createHl7RepeatNumberFixedValue(String nullFlavor) {
+    private static IVLINT createHl7RepeatNumberFixedValue(String nullFlavor) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.IVLINT retVal = factory.createIVLINT();
+        IVLINT retVal = factory.createIVLINT();
         retVal.nullFlavor = new ArrayList<String>();
         retVal.nullFlavor.add(nullFlavor);
         return retVal;
@@ -111,9 +112,9 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
     /**
      * Creates fixed contents for CDA Element hl7RouteCode
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.CE createHl7RouteCodeFixedValue() {
+    private static CE createHl7RouteCodeFixedValue() {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.CE retVal = factory.createCE();
+        CE retVal = factory.createCE();
         return retVal;
     }
 
@@ -122,9 +123,9 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      *
      * @param code the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
+    private static CS createHl7StatusCodeFixedValue(String code) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.CS retVal = factory.createCS();
+        CS retVal = factory.createCS();
         retVal.setCode(code);
         return retVal;
     }
@@ -134,9 +135,9 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -145,21 +146,21 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Gets the hl7Author
      * Medication Treatment Plan Author
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Author> getHl7Author() {
+    public List<POCDMT000040Author> getHl7Author() {
         return author;
     }
 
     /**
      * Gets the hl7Consumable
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Consumable getHl7Consumable() {
+    public POCDMT000040Consumable getHl7Consumable() {
         return consumable;
     }
 
     /**
      * Gets the hl7DoseQuantity
      */
-    public org.husky.emed.cda.generated.hl7cdar2.IVLPQ getHl7DoseQuantity() {
+    public IVLPQ getHl7DoseQuantity() {
         return doseQuantity;
     }
 
@@ -175,7 +176,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Gets the hl7EntryRelationship
      * IHE MTP Reason. Referencing to the Treatment Reason Entry Content Module below (required by IHE PHARM)
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship> getHl7EntryRelationship() {
+    public List<POCDMT000040EntryRelationship> getHl7EntryRelationship() {
         return entryRelationship;
     }
 
@@ -183,7 +184,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Gets the hl7Id
      * Medication Treatment Plan Item ID
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7Id() {
+    public List<II> getHl7Id() {
         return id;
     }
 
@@ -191,14 +192,14 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Gets the hl7Precondition
      * Precondition Criterion
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Precondition> getHl7Precondition() {
+    public List<POCDMT000040Precondition> getHl7Precondition() {
         return precondition;
     }
 
     /**
      * Gets the hl7RateQuantity
      */
-    public org.husky.emed.cda.generated.hl7cdar2.IVLPQ getHl7RateQuantity() {
+    public IVLPQ getHl7RateQuantity() {
         return rateQuantity;
     }
 
@@ -206,7 +207,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Gets the hl7Reference
      * ID of parent container (Community Medication Treatment Plan document)
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Reference> getHl7Reference() {
+    public List<POCDMT000040Reference> getHl7Reference() {
         return reference;
     }
 
@@ -214,14 +215,14 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Gets the hl7RepeatNumber
      * Number of repeats/refills. Either the @value or @nullFlavor attribute shall be set. It's required in MTP, PRE and PADV items ; forbidden in DIS items.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.IVLINT getHl7RepeatNumber() {
+    public IVLINT getHl7RepeatNumber() {
         return repeatNumber;
     }
 
     /**
      * Gets the hl7RouteCode
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CE getHl7RouteCode() {
+    public CE getHl7RouteCode() {
         return routeCode;
     }
 
@@ -229,7 +230,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Gets the hl7StatusCode
      * Status Code
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CS getHl7StatusCode() {
+    public CS getHl7StatusCode() {
         return statusCode;
     }
 
@@ -237,14 +238,14 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Gets the hl7TemplateId
      * CH-PHARM Medication Treatment Plan Item Entry Content Module
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
     /**
      * Gets the hl7Text
      */
-    public org.husky.emed.cda.generated.hl7cdar2.ED getHl7Text() {
+    public ED getHl7Text() {
         return text;
     }
 
@@ -252,7 +253,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.IVLPQ, filled by:
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.IVLPQ getPredefinedDoseQuantity() {
+    public static IVLPQ getPredefinedDoseQuantity() {
         return createHl7DoseQuantityFixedValue();
     }
 
@@ -260,7 +261,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.EIVLTS, filled by: "A"
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.EIVLTS getPredefinedEffectiveTimeA() {
+    public static EIVLTS getPredefinedEffectiveTimeA() {
         return createHl7EffectiveTimeFixedValue("A");
     }
 
@@ -268,7 +269,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship, filled by: "COMP", null
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipCompNull() {
+    public static POCDMT000040EntryRelationship getPredefinedEntryRelationshipCompNull() {
         return createHl7EntryRelationshipFixedValue("COMP",
                                                     null);
     }
@@ -277,7 +278,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship, filled by: "REFR", null
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrNull() {
+    public static POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrNull() {
         return createHl7EntryRelationshipFixedValue("REFR",
                                                     null);
     }
@@ -286,7 +287,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship, filled by: "RSON", null
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRsonNull() {
+    public static POCDMT000040EntryRelationship getPredefinedEntryRelationshipRsonNull() {
         return createHl7EntryRelationshipFixedValue("RSON",
                                                     null);
     }
@@ -295,7 +296,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship, filled by: "SUBJ", "true"
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjTrue() {
+    public static POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjTrue() {
         return createHl7EntryRelationshipFixedValue("SUBJ",
                                                     "true");
     }
@@ -304,7 +305,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040Reference, filled by: "XCRPT"
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Reference getPredefinedReferenceXcrpt() {
+    public static POCDMT000040Reference getPredefinedReferenceXcrpt() {
         return createHl7ReferenceFixedValue("XCRPT");
     }
 
@@ -312,7 +313,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.IVLINT, filled by: "NI"
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.IVLINT getPredefinedRepeatNumberNi() {
+    public static IVLINT getPredefinedRepeatNumberNi() {
         return createHl7RepeatNumberFixedValue("NI");
     }
 
@@ -320,7 +321,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.CE, filled by:
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.CE getPredefinedRouteCode() {
+    public static CE getPredefinedRouteCode() {
         return createHl7RouteCodeFixedValue();
     }
 
@@ -328,7 +329,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.II, filled by: "1.3.6.1.4.1.19376.1.5.3.1.4.7.1"
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.II getPredefinedTemplateId136141193761531471() {
+    public static II getPredefinedTemplateId136141193761531471() {
         return createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.7.1");
     }
 
@@ -336,7 +337,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.II, filled by: "1.3.6.1.4.1.19376.1.5.3.1.4.8"
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.II getPredefinedTemplateId13614119376153148() {
+    public static II getPredefinedTemplateId13614119376153148() {
         return createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.8");
     }
 
@@ -344,7 +345,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.II, filled by: "1.3.6.1.4.1.19376.1.5.3.1.4.9"
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.II getPredefinedTemplateId13614119376153149() {
+    public static II getPredefinedTemplateId13614119376153149() {
         return createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.9");
     }
 
@@ -352,7 +353,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Sets the hl7Author
      * Medication Treatment Plan Author
      */
-    public void setHl7Author(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Author value) {
+    public void setHl7Author(POCDMT000040Author value) {
         getAuthor().clear();
         getAuthor().add(value);
     }
@@ -360,14 +361,14 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
     /**
      * Sets the hl7Consumable
      */
-    public void setHl7Consumable(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Consumable value) {
+    public void setHl7Consumable(POCDMT000040Consumable value) {
         this.consumable = value;
     }
 
     /**
      * Sets the hl7DoseQuantity
      */
-    public void setHl7DoseQuantity(org.husky.emed.cda.generated.hl7cdar2.IVLPQ value) {
+    public void setHl7DoseQuantity(IVLPQ value) {
         this.doseQuantity = value;
     }
 
@@ -375,7 +376,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Sets the hl7EffectiveTime
      * <div>In case the (structured) dosage instructions include a dose regime this element SHALL be</div><div>present and specify the entire duration of the medication treatment. In case the Duration of Treatment is unknown the &lt;low&gt; and &lt;high&gt; sub-elements of this element SHALL be set to null flavor “UNK”.</div>
      */
-    public void setHl7EffectiveTime(org.husky.emed.cda.generated.hl7cdar2.IVLTS value) {
+    public void setHl7EffectiveTime(IVLTS value) {
         getEffectiveTime().clear();
         getEffectiveTime().add(value);
     }
@@ -384,7 +385,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Sets the hl7EffectiveTime
      * Dosage Instructions PCC 6.3.4.16.12 - Frequency: Event based time interval, where the event is not a precise time, but is used for timing purposes (e.g., with meals, between meals, before breakfast, before sleep).
      */
-    public void setHl7EffectiveTime(org.husky.emed.cda.generated.hl7cdar2.EIVLTS value) {
+    public void setHl7EffectiveTime(EIVLTS value) {
         getEffectiveTime().clear();
         getEffectiveTime().add(value);
     }
@@ -393,7 +394,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Sets the hl7EffectiveTime
      * Dosage Instructions PCC 6.3.4.16.12 - Frequency: Multiple events within a day with the same dosage
      */
-    public void setHl7EffectiveTime(org.husky.emed.cda.generated.hl7cdar2.SXPRTS value) {
+    public void setHl7EffectiveTime(SXPRTS value) {
         getEffectiveTime().clear();
         getEffectiveTime().add(value);
     }
@@ -402,7 +403,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Sets the hl7EntryRelationship
      * IHE MTP Reason. Referencing to the Treatment Reason Entry Content Module below (required by IHE PHARM)
      */
-    public void setHl7EntryRelationship(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship value) {
+    public void setHl7EntryRelationship(POCDMT000040EntryRelationship value) {
         getEntryRelationship().clear();
         getEntryRelationship().add(value);
     }
@@ -411,7 +412,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Sets the hl7Id
      * Medication Treatment Plan Item ID
      */
-    public void setHl7Id(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7Id(II value) {
         getId().clear();
         getId().add(value);
     }
@@ -420,7 +421,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Sets the hl7Precondition
      * Precondition Criterion
      */
-    public void setHl7Precondition(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Precondition value) {
+    public void setHl7Precondition(POCDMT000040Precondition value) {
         getPrecondition().clear();
         getPrecondition().add(value);
     }
@@ -428,7 +429,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
     /**
      * Sets the hl7RateQuantity
      */
-    public void setHl7RateQuantity(org.husky.emed.cda.generated.hl7cdar2.IVLPQ value) {
+    public void setHl7RateQuantity(IVLPQ value) {
         this.rateQuantity = value;
     }
 
@@ -436,7 +437,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Sets the hl7Reference
      * ID of parent container (Community Medication Treatment Plan document)
      */
-    public void setHl7Reference(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Reference value) {
+    public void setHl7Reference(POCDMT000040Reference value) {
         getReference().clear();
         getReference().add(value);
     }
@@ -445,14 +446,14 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Sets the hl7RepeatNumber
      * Number of repeats/refills. Either the @value or @nullFlavor attribute shall be set. It's required in MTP, PRE and PADV items ; forbidden in DIS items.
      */
-    public void setHl7RepeatNumber(org.husky.emed.cda.generated.hl7cdar2.IVLINT value) {
+    public void setHl7RepeatNumber(IVLINT value) {
         this.repeatNumber = value;
     }
 
     /**
      * Sets the hl7RouteCode
      */
-    public void setHl7RouteCode(org.husky.emed.cda.generated.hl7cdar2.CE value) {
+    public void setHl7RouteCode(CE value) {
         this.routeCode = value;
     }
 
@@ -460,7 +461,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Sets the hl7StatusCode
      * Status Code
      */
-    public void setHl7StatusCode(org.husky.emed.cda.generated.hl7cdar2.CS value) {
+    public void setHl7StatusCode(CS value) {
         this.statusCode = value;
     }
 
@@ -468,7 +469,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
      * Sets the hl7TemplateId
      * CH-PHARM Medication Treatment Plan Item Entry Content Module
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
@@ -476,7 +477,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
     /**
      * Sets the hl7Text
      */
-    public void setHl7Text(org.husky.emed.cda.generated.hl7cdar2.ED value) {
+    public void setHl7Text(ED value) {
         this.text = value;
     }
 }

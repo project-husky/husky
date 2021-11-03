@@ -3,8 +3,10 @@ package org.husky.emed.cda.generated.artdecor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040RecordTarget;
+import org.husky.common.hl7cdar2.II;
+import org.husky.common.hl7cdar2.ObjectFactory;
+import org.husky.common.hl7cdar2.POCDMT000040PatientRole;
+import org.husky.common.hl7cdar2.POCDMT000040RecordTarget;
 
 /**
  * cdach_header_Patient
@@ -32,9 +34,9 @@ public class CdachHeaderPatient extends POCDMT000040RecordTarget {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -42,28 +44,28 @@ public class CdachHeaderPatient extends POCDMT000040RecordTarget {
     /**
      * Gets the hl7PatientRole
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040PatientRole getHl7PatientRole() {
+    public POCDMT000040PatientRole getHl7PatientRole() {
         return patientRole;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
     /**
      * Sets the hl7PatientRole
      */
-    public void setHl7PatientRole(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040PatientRole value) {
+    public void setHl7PatientRole(POCDMT000040PatientRole value) {
         this.patientRole = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }

@@ -48,14 +48,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XEncounterPerformerParticipation {
 
-	PRF, CON, SPRF;
+    PRF, CON, SPRF;
 
-	public static XEncounterPerformerParticipation fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XEncounterPerformerParticipation fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

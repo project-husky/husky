@@ -3,8 +3,9 @@ package org.husky.emed.cda.generated.artdecor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Observation;
+import org.husky.common.hl7cdar2.*;
+import org.husky.common.hl7cdar2.ObjectFactory;
+import org.husky.common.hl7cdar2.POCDMT000040Observation;
 
 /**
  * IHEProblemEntry
@@ -21,7 +22,7 @@ import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Observation;
 public class IheproblemEntry extends POCDMT000040Observation {
 
     public IheproblemEntry() {
-        super.setMoodCode(org.husky.emed.cda.generated.hl7cdar2.XActMoodDocumentObservation.EVN);
+        super.setMoodCode(XActMoodDocumentObservation.EVN);
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.5"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.28"));
     }
@@ -29,7 +30,7 @@ public class IheproblemEntry extends POCDMT000040Observation {
     /**
      * Adds a hl7Value
      */
-    public void addHl7Value(org.husky.emed.cda.generated.hl7cdar2.CD value) {
+    public void addHl7Value(CD value) {
         getValue().add(value);
     }
 
@@ -46,10 +47,10 @@ public class IheproblemEntry extends POCDMT000040Observation {
      * @param typeCode the desired fixed value for this argument.
      * @param inversionInd the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
+    private static POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship retVal = factory.createPOCDMT000040EntryRelationship();
-        retVal.setTypeCode(org.husky.emed.cda.generated.hl7cdar2.XActRelationshipEntryRelationship.fromValue(typeCode));
+        POCDMT000040EntryRelationship retVal = factory.createPOCDMT000040EntryRelationship();
+        retVal.setTypeCode(XActRelationshipEntryRelationship.fromValue(typeCode));
         if (inversionInd != null) {
             retVal.setInversionInd(Boolean.parseBoolean(inversionInd));
         }
@@ -61,9 +62,9 @@ public class IheproblemEntry extends POCDMT000040Observation {
      *
      * @param code the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.CS createHl7StatusCodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+    private static CS createHl7StatusCodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.CS retVal = factory.createCS();
+        CS retVal = factory.createCS();
         retVal.setCode(code);
         retVal.setCodeSystem(codeSystem);
         retVal.setCodeSystemName(codeSystemName);
@@ -76,9 +77,9 @@ public class IheproblemEntry extends POCDMT000040Observation {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -86,28 +87,28 @@ public class IheproblemEntry extends POCDMT000040Observation {
     /**
      * Gets the hl7Code
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CD getHl7Code() {
+    public CD getHl7Code() {
         return code;
     }
 
     /**
      * Gets the hl7EffectiveTime
      */
-    public org.husky.emed.cda.generated.hl7cdar2.IVLTS getHl7EffectiveTime() {
+    public IVLTS getHl7EffectiveTime() {
         return effectiveTime;
     }
 
     /**
      * Gets the hl7EntryRelationship
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship> getHl7EntryRelationship() {
+    public List<POCDMT000040EntryRelationship> getHl7EntryRelationship() {
         return entryRelationship;
     }
 
     /**
      * Gets the hl7Id
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7Id() {
+    public List<II> getHl7Id() {
         return id;
     }
 
@@ -115,14 +116,14 @@ public class IheproblemEntry extends POCDMT000040Observation {
      * Gets the hl7StatusCode
      * A clinical document normally records only those condition observation events that have been completed, not observations that are in any other state. Therefore, the &lt;statusCode&gt; shall always have code='completed'.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CS getHl7StatusCode() {
+    public CS getHl7StatusCode() {
         return statusCode;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
@@ -130,7 +131,7 @@ public class IheproblemEntry extends POCDMT000040Observation {
      * Gets the hl7Text
      * <div>The &lt;text&gt; element is required and points to the text describing the problem being recorded; <span style="line-height: 1.22;">including any dates, comments, et cetera. The &lt;reference&gt; contains a URI in value attribute. This </span><span style="line-height: 1.22;">URI points to the free text description of the problem in the document that is being described</span></div>
      */
-    public org.husky.emed.cda.generated.hl7cdar2.ED getHl7Text() {
+    public ED getHl7Text() {
         return text;
     }
 
@@ -138,7 +139,7 @@ public class IheproblemEntry extends POCDMT000040Observation {
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship, filled by: "REFR", null
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrNull() {
+    public static POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrNull() {
         return createHl7EntryRelationshipFixedValue("REFR",
                                                     null);
     }
@@ -147,7 +148,7 @@ public class IheproblemEntry extends POCDMT000040Observation {
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.CS, filled by: "completed", null, null, null
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.CS getPredefinedStatusCodeCompletedNullNullNull() {
+    public static CS getPredefinedStatusCodeCompletedNullNullNull() {
         return createHl7StatusCodeFixedValue("completed",
                                              null,
                                              null,
@@ -157,21 +158,21 @@ public class IheproblemEntry extends POCDMT000040Observation {
     /**
      * Sets the hl7Code
      */
-    public void setHl7Code(org.husky.emed.cda.generated.hl7cdar2.CD value) {
+    public void setHl7Code(CD value) {
         this.code = value;
     }
 
     /**
      * Sets the hl7EffectiveTime
      */
-    public void setHl7EffectiveTime(org.husky.emed.cda.generated.hl7cdar2.IVLTS value) {
+    public void setHl7EffectiveTime(IVLTS value) {
         this.effectiveTime = value;
     }
 
     /**
      * Sets the hl7EntryRelationship
      */
-    public void setHl7EntryRelationship(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship value) {
+    public void setHl7EntryRelationship(POCDMT000040EntryRelationship value) {
         getEntryRelationship().clear();
         getEntryRelationship().add(value);
     }
@@ -179,7 +180,7 @@ public class IheproblemEntry extends POCDMT000040Observation {
     /**
      * Sets the hl7Id
      */
-    public void setHl7Id(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7Id(II value) {
         getId().clear();
         getId().add(value);
     }
@@ -188,14 +189,14 @@ public class IheproblemEntry extends POCDMT000040Observation {
      * Sets the hl7StatusCode
      * A clinical document normally records only those condition observation events that have been completed, not observations that are in any other state. Therefore, the &lt;statusCode&gt; shall always have code='completed'.
      */
-    public void setHl7StatusCode(org.husky.emed.cda.generated.hl7cdar2.CS value) {
+    public void setHl7StatusCode(CS value) {
         this.statusCode = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
@@ -204,7 +205,7 @@ public class IheproblemEntry extends POCDMT000040Observation {
      * Sets the hl7Text
      * <div>The &lt;text&gt; element is required and points to the text describing the problem being recorded; <span style="line-height: 1.22;">including any dates, comments, et cetera. The &lt;reference&gt; contains a URI in value attribute. This </span><span style="line-height: 1.22;">URI points to the free text description of the problem in the document that is being described</span></div>
      */
-    public void setHl7Text(org.husky.emed.cda.generated.hl7cdar2.ED value) {
+    public void setHl7Text(ED value) {
         this.text = value;
     }
 }

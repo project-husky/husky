@@ -49,28 +49,28 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum AudioMediaType {
 
-	@XmlEnumValue("audio/basic")
-	AUDIO_BASIC("audio/basic"), @XmlEnumValue("audio/k32adpcm")
-	AUDIO_K_32_ADPCM("audio/k32adpcm"), @XmlEnumValue("audio/mpeg")
-	AUDIO_MPEG("audio/mpeg");
+    @XmlEnumValue("audio/basic")
+    AUDIO_BASIC("audio/basic"), @XmlEnumValue("audio/k32adpcm")
+    AUDIO_K_32_ADPCM("audio/k32adpcm"), @XmlEnumValue("audio/mpeg")
+    AUDIO_MPEG("audio/mpeg");
 
-	public static AudioMediaType fromValue(String v) {
-		for (AudioMediaType c : AudioMediaType.values()) {
-			if (c.value.equals(v)) {
-				return c;
-			}
-		}
-		throw new IllegalArgumentException(v);
-	}
+    public static AudioMediaType fromValue(String v) {
+        for (AudioMediaType c : AudioMediaType.values()) {
+            if (c.value.equals(v)) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException(v);
+    }
 
-	private final String value;
+    private final String value;
 
-	AudioMediaType(String v) {
-		value = v;
-	}
+    AudioMediaType(String v) {
+        value = v;
+    }
 
-	public String value() {
-		return value;
-	}
+    public String value() {
+        return value;
+    }
 
 }

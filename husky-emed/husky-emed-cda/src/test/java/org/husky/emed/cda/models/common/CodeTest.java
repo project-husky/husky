@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 
 import org.husky.common.enums.NullFlavor;
-import org.husky.emed.cda.generated.hl7cdar2.CD;
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
+import org.husky.common.hl7cdar2.CD;
+import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.emed.cda.models.common.basetypes.CodeBaseType;
 import org.junit.jupiter.api.Test;
 

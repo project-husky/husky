@@ -195,7 +195,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 	 *
 	 * @param entityNameUse usage of name
 	 *
-	 * @return allocated value or {@link NameUse.<code>USUAL</code>} if no value can
+	 * @return allocated value or {@link NameUse#USUAL} if no value can
 	 *         be allocated
 	 */
 	private static NameUse getNameUse(EntityNameUse entityNameUse) {
@@ -355,7 +355,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 			}
 
 			if (organization.getName() != null && !organization.getName().isEmpty()) {
-				final String name = organization.getName().get(0).xmlContent;
+				final String name = organization.getName().get(0).getMergedXmlMixed();
 				fhirOrganization.setName(name);
 			}
 
@@ -458,7 +458,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 	/**
 	 * converts the fhir address to the convenience address
 	 *
-	 * @param address
+	 * @param fhirAddress
 	 * @return fhir address
 	 */
 	private org.husky.common.model.Address convertAddress(org.hl7.fhir.dstu3.model.Address fhirAddress) {

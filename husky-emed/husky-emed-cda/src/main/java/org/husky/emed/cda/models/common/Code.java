@@ -22,10 +22,10 @@ import java.util.ArrayList;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.enums.NullFlavor;
 import org.husky.common.enums.ValueSetEnumInterface;
-import org.husky.emed.cda.generated.hl7cdar2.CD;
-import org.husky.emed.cda.generated.hl7cdar2.CE;
-import org.husky.emed.cda.generated.hl7cdar2.CS;
-import org.husky.emed.cda.generated.hl7cdar2.ED;
+import org.husky.common.hl7cdar2.CD;
+import org.husky.common.hl7cdar2.CE;
+import org.husky.common.hl7cdar2.CS;
+import org.husky.common.hl7cdar2.ED;
 import org.husky.emed.cda.models.common.basetypes.CodeBaseType;
 
 /**

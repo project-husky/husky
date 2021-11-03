@@ -64,8 +64,8 @@ public class AuthoringDevice {
 	 */
 	public String getManufacturerName() {
 		if ((mAuthoringDevice.getManufacturerModelName() != null)
-				&& (mAuthoringDevice.getManufacturerModelName().xmlContent != null)) {
-			return mAuthoringDevice.getManufacturerModelName().xmlContent;
+				&& (mAuthoringDevice.getManufacturerModelName().getXmlMixed() != null)) {
+			return mAuthoringDevice.getManufacturerModelName().getTextContent();
 		}
 		return null;
 	}
@@ -86,8 +86,8 @@ public class AuthoringDevice {
 	 */
 	public String getSoftwareName() {
 		if ((mAuthoringDevice.getSoftwareName() != null)
-				&& (mAuthoringDevice.getSoftwareName().xmlContent != null)) {
-			return mAuthoringDevice.getSoftwareName().xmlContent;
+				&& (mAuthoringDevice.getSoftwareName().getXmlMixed() != null)) {
+			return mAuthoringDevice.getSoftwareName().getTextContent();
 		}
 		return null;
 	}
@@ -100,7 +100,7 @@ public class AuthoringDevice {
 	 */
 	public void setManufacturerName(String name) {
 		final var sc = new SC();
-		sc.xmlContent = name;
+		sc.setXmlMixed(name);
 		mAuthoringDevice.setManufacturerModelName(sc);
 	}
 
@@ -112,7 +112,7 @@ public class AuthoringDevice {
 	 */
 	public void setSoftwareName(String name) {
 		final var sc = new SC();
-		sc.xmlContent = name;
+		sc.setXmlMixed(name);
 		mAuthoringDevice.setSoftwareName(sc);
 	}
 }

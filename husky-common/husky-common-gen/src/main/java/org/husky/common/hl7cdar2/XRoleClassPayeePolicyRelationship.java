@@ -50,14 +50,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XRoleClassPayeePolicyRelationship {
 
-	COVPTY, GUAR, POLHOLD, PROV, PRS;
+    COVPTY, GUAR, POLHOLD, PROV, PRS;
 
-	public static XRoleClassPayeePolicyRelationship fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XRoleClassPayeePolicyRelationship fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

@@ -56,50 +56,50 @@ import javax.xml.bind.annotation.XmlType;
 @XmlSeeAlso({ IVXBPPDTS.class, SXCMPPDTS.class })
 public class PPDTS extends TS {
 
-	protected PQ standardDeviation;
-	@XmlAttribute(name = "distributionType")
-	protected ProbabilityDistributionType distributionType;
+    protected PQ standardDeviation;
+    @XmlAttribute(name = "distributionType")
+    protected ProbabilityDistributionType distributionType;
 
-	/**
-	 * Ruft den Wert der distributionType-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link ProbabilityDistributionType }
-	 *
-	 */
-	public ProbabilityDistributionType getDistributionType() {
-		return distributionType;
-	}
+    /**
+     * Ruft den Wert der distributionType-Eigenschaft ab.
+     *
+     * @return possible object is {@link ProbabilityDistributionType }
+     *
+     */
+    public ProbabilityDistributionType getDistributionType() {
+        return distributionType;
+    }
 
-	/**
-	 * Ruft den Wert der standardDeviation-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link PQ }
-	 *
-	 */
-	public PQ getStandardDeviation() {
-		return standardDeviation;
-	}
+    /**
+     * Ruft den Wert der standardDeviation-Eigenschaft ab.
+     *
+     * @return possible object is {@link PQ }
+     *
+     */
+    public PQ getStandardDeviation() {
+        return standardDeviation;
+    }
 
-	/**
-	 * Legt den Wert der distributionType-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link ProbabilityDistributionType }
-	 *
-	 */
-	public void setDistributionType(ProbabilityDistributionType value) {
-		this.distributionType = value;
-	}
+    /**
+     * Legt den Wert der distributionType-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link ProbabilityDistributionType }
+     *
+     */
+    public void setDistributionType(ProbabilityDistributionType value) {
+        this.distributionType = value;
+    }
 
-	/**
-	 * Legt den Wert der standardDeviation-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link PQ }
-	 *
-	 */
-	public void setStandardDeviation(PQ value) {
-		this.standardDeviation = value;
-	}
+    /**
+     * Legt den Wert der standardDeviation-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link PQ }
+     *
+     */
+    public void setStandardDeviation(PQ value) {
+        this.standardDeviation = value;
+    }
 
 }

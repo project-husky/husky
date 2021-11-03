@@ -82,7 +82,7 @@ public class Hl7CdaR2Util {
 	public static ST createHl7CdaR2St(String value) {
 		var factory = new ObjectFactory();
 		var retVal = factory.createST();
-		retVal.xmlContent = value;
+		retVal.setXmlMixed(value);
 		return retVal;
 	}
 

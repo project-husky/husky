@@ -48,14 +48,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum HomeAddressUse {
 
-	H, HP, HV;
+    H, HP, HV;
 
-	public static HomeAddressUse fromValue(String v) {
-		return valueOf(v);
-	}
+    public static HomeAddressUse fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

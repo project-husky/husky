@@ -1,9 +1,9 @@
 package org.husky.emed.cda.services.digesters;
 
+import org.husky.common.hl7cdar2.*;
 import org.husky.common.utils.StreamUtils;
 import org.husky.emed.cda.enums.PharmaceuticalAdviceStatus;
 import org.husky.emed.cda.errors.InvalidEmedContentException;
-import org.husky.emed.cda.generated.hl7cdar2.*;
 import org.husky.emed.cda.services.EmedEntryDigestService;
 import org.husky.emed.cda.utils.EntryRelationshipUtils;
 import org.husky.emed.cda.utils.IiUtils;

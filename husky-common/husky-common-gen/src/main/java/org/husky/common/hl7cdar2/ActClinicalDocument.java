@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ActClinicalDocument {
 
-	DOCCLIN, CDALVLONE;
+    DOCCLIN, CDALVLONE;
 
-	public static ActClinicalDocument fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ActClinicalDocument fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

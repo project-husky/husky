@@ -58,28 +58,28 @@ import javax.xml.bind.annotation.XmlType;
 @XmlSeeAlso({ UVPTS.class, PPDTS.class, IVXBTS.class, SXCMTS.class })
 public class TS extends QTY {
 
-	@XmlAttribute(name = "value")
-	protected String value;
+    @XmlAttribute(name = "value")
+    protected String value;
 
-	/**
-	 * Ruft den Wert der value-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getValue() {
-		return value;
-	}
+    /**
+     * Ruft den Wert der value-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getValue() {
+        return value;
+    }
 
-	/**
-	 * Legt den Wert der value-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setValue(String value) {
-		this.value = value;
-	}
+    /**
+     * Legt den Wert der value-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setValue(String value) {
+        this.value = value;
+    }
 
 }

@@ -56,51 +56,51 @@ import javax.xml.bind.annotation.XmlType;
 @XmlSeeAlso({ RTO.class })
 public class RTOQTYQTY extends QTY {
 
-	@XmlElement(required = true)
-	protected QTY numerator;
-	@XmlElement(required = true)
-	protected QTY denominator;
+    @XmlElement(required = true)
+    protected QTY numerator;
+    @XmlElement(required = true)
+    protected QTY denominator;
 
-	/**
-	 * Ruft den Wert der denominator-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link QTY }
-	 *
-	 */
-	public QTY getDenominator() {
-		return denominator;
-	}
+    /**
+     * Ruft den Wert der denominator-Eigenschaft ab.
+     *
+     * @return possible object is {@link QTY }
+     *
+     */
+    public QTY getDenominator() {
+        return denominator;
+    }
 
-	/**
-	 * Ruft den Wert der numerator-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link QTY }
-	 *
-	 */
-	public QTY getNumerator() {
-		return numerator;
-	}
+    /**
+     * Ruft den Wert der numerator-Eigenschaft ab.
+     *
+     * @return possible object is {@link QTY }
+     *
+     */
+    public QTY getNumerator() {
+        return numerator;
+    }
 
-	/**
-	 * Legt den Wert der denominator-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link QTY }
-	 *
-	 */
-	public void setDenominator(QTY value) {
-		this.denominator = value;
-	}
+    /**
+     * Legt den Wert der denominator-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link QTY }
+     *
+     */
+    public void setDenominator(QTY value) {
+        this.denominator = value;
+    }
 
-	/**
-	 * Legt den Wert der numerator-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link QTY }
-	 *
-	 */
-	public void setNumerator(QTY value) {
-		this.numerator = value;
-	}
+    /**
+     * Legt den Wert der numerator-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link QTY }
+     *
+     */
+    public void setNumerator(QTY value) {
+        this.numerator = value;
+    }
 
 }

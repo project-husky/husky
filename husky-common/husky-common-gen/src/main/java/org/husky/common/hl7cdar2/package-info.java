@@ -20,5 +20,13 @@
 // Generiert: 2020.07.09 um 01:07:39 PM CEST
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "urn:hl7-org:v3", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@XmlSchema(namespace = "urn:hl7-org:v3", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@DefaultQualifier(value = Nullable.class, locations = {TypeUseLocation.PARAMETER, TypeUseLocation.RETURN,
+        TypeUseLocation.FIELD})
 package org.husky.common.hl7cdar2;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.checkerframework.framework.qual.DefaultQualifier;
+import org.checkerframework.framework.qual.TypeUseLocation;
+
+import javax.xml.bind.annotation.XmlSchema;

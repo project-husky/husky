@@ -1,10 +1,10 @@
 package org.husky.emed.cda.services.digesters;
 
 import org.husky.emed.cda.errors.InvalidEmedContentException;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040SubstanceAdministration;
-import org.husky.emed.cda.generated.hl7cdar2.XActRelationshipEntryRelationship;
-import org.husky.emed.cda.generated.hl7cdar2.XDocumentSubstanceMood;
+import org.husky.common.hl7cdar2.POCDMT000040EntryRelationship;
+import org.husky.common.hl7cdar2.POCDMT000040SubstanceAdministration;
+import org.husky.common.hl7cdar2.XActRelationshipEntryRelationship;
+import org.husky.common.hl7cdar2.XDocumentSubstanceMood;
 import org.husky.emed.cda.models.common.AuthorDigest;
 import org.husky.emed.cda.models.common.EmedReference;
 import org.husky.emed.cda.models.entry.EmedEntryDigest;

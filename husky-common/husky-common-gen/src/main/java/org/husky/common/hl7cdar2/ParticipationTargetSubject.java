@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ParticipationTargetSubject {
 
-	SBJ, SPC;
+    SBJ, SPC;
 
-	public static ParticipationTargetSubject fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ParticipationTargetSubject fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

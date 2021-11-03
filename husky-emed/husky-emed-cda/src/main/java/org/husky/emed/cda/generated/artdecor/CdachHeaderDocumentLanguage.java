@@ -2,7 +2,7 @@ package org.husky.emed.cda.generated.artdecor;
 
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.CS;
+import org.husky.common.hl7cdar2.CS;
 
 /**
  * cdach_header_DocumentLanguage

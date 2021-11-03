@@ -63,277 +63,277 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "COCT_MT440001UV09.ValuedItem", namespace = "urn:ihe:pharm", propOrder = {
-		"realmCode", "typeId", "templateId", "id", "code", "effectiveTime", "unitQuantity",
-		"unitPriceAmt", "netAmt" })
+        "realmCode", "typeId", "templateId", "id", "code", "effectiveTime", "unitQuantity",
+        "unitPriceAmt", "netAmt" })
 public class COCTMT440001UV09ValuedItem {
 
-	@XmlElement(namespace = "urn:hl7-org:v3")
-	protected List<CS> realmCode;
-	@XmlElement(namespace = "urn:hl7-org:v3")
-	protected AllInfrastructureRootTypeId typeId;
-	@XmlElement(namespace = "urn:hl7-org:v3")
-	protected List<AllInfrastructureRootTemplateId> templateId;
-	@XmlElement(required = true)
-	protected List<II> id;
-	protected CD code;
-	protected IVLTS effectiveTime;
-	protected RTOPQPQ unitQuantity;
-	@XmlElement(required = true)
-	protected RTOMOPQ unitPriceAmt;
-	protected MO netAmt;
-	@XmlAttribute(name = "classCode", required = true)
-	protected ActClassInvoiceElement classCode;
-	@XmlAttribute(name = "moodCode", required = true)
-	protected XActMoodDefEvn moodCode;
+    @XmlElement(namespace = "urn:hl7-org:v3")
+    protected List<CS> realmCode;
+    @XmlElement(namespace = "urn:hl7-org:v3")
+    protected AllInfrastructureRootTypeId typeId;
+    @XmlElement(namespace = "urn:hl7-org:v3")
+    protected List<AllInfrastructureRootTemplateId> templateId;
+    @XmlElement(required = true)
+    protected List<II> id;
+    protected CD code;
+    protected IVLTS effectiveTime;
+    protected RTOPQPQ unitQuantity;
+    @XmlElement(required = true)
+    protected RTOMOPQ unitPriceAmt;
+    protected MO netAmt;
+    @XmlAttribute(name = "classCode", required = true)
+    protected ActClassInvoiceElement classCode;
+    @XmlAttribute(name = "moodCode", required = true)
+    protected XActMoodDefEvn moodCode;
 
-	/**
-	 * Ruft den Wert der classCode-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link ActClassInvoiceElement }
-	 *
-	 */
-	public ActClassInvoiceElement getClassCode() {
-		return classCode;
-	}
+    /**
+     * Ruft den Wert der classCode-Eigenschaft ab.
+     *
+     * @return possible object is {@link ActClassInvoiceElement }
+     *
+     */
+    public ActClassInvoiceElement getClassCode() {
+        return classCode;
+    }
 
-	/**
-	 * Ruft den Wert der code-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link CD }
-	 *
-	 */
-	public CD getCode() {
-		return code;
-	}
+    /**
+     * Ruft den Wert der code-Eigenschaft ab.
+     *
+     * @return possible object is {@link CD }
+     *
+     */
+    public CD getCode() {
+        return code;
+    }
 
-	/**
-	 * Ruft den Wert der effectiveTime-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link IVLTS }
-	 *
-	 */
-	public IVLTS getEffectiveTime() {
-		return effectiveTime;
-	}
+    /**
+     * Ruft den Wert der effectiveTime-Eigenschaft ab.
+     *
+     * @return possible object is {@link IVLTS }
+     *
+     */
+    public IVLTS getEffectiveTime() {
+        return effectiveTime;
+    }
 
-	/**
-	 * Gets the value of the id property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the id property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getId().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link II }
-	 *
-	 *
-	 */
-	public List<II> getId() {
-		if (id == null) {
-			id = new ArrayList<II>();
-		}
-		return this.id;
-	}
+    /**
+     * Gets the value of the id property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the id property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getId().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link II }
+     *
+     *
+     */
+    public List<II> getId() {
+        if (id == null) {
+            id = new ArrayList<II>();
+        }
+        return this.id;
+    }
 
-	/**
-	 * Ruft den Wert der moodCode-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link XActMoodDefEvn }
-	 *
-	 */
-	public XActMoodDefEvn getMoodCode() {
-		return moodCode;
-	}
+    /**
+     * Ruft den Wert der moodCode-Eigenschaft ab.
+     *
+     * @return possible object is {@link XActMoodDefEvn }
+     *
+     */
+    public XActMoodDefEvn getMoodCode() {
+        return moodCode;
+    }
 
-	/**
-	 * Ruft den Wert der netAmt-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link MO }
-	 *
-	 */
-	public MO getNetAmt() {
-		return netAmt;
-	}
+    /**
+     * Ruft den Wert der netAmt-Eigenschaft ab.
+     *
+     * @return possible object is {@link MO }
+     *
+     */
+    public MO getNetAmt() {
+        return netAmt;
+    }
 
-	/**
-	 * Gets the value of the realmCode property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the realmCode property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getRealmCode().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link CS }
-	 *
-	 *
-	 */
-	public List<CS> getRealmCode() {
-		if (realmCode == null) {
-			realmCode = new ArrayList<CS>();
-		}
-		return this.realmCode;
-	}
+    /**
+     * Gets the value of the realmCode property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the realmCode property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getRealmCode().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link CS }
+     *
+     *
+     */
+    public List<CS> getRealmCode() {
+        if (realmCode == null) {
+            realmCode = new ArrayList<CS>();
+        }
+        return this.realmCode;
+    }
 
-	/**
-	 * Gets the value of the templateId property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the templateId property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getTemplateId().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link AllInfrastructureRootTemplateId }
-	 *
-	 *
-	 */
-	public List<AllInfrastructureRootTemplateId> getTemplateId() {
-		if (templateId == null) {
-			templateId = new ArrayList<AllInfrastructureRootTemplateId>();
-		}
-		return this.templateId;
-	}
+    /**
+     * Gets the value of the templateId property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the templateId property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getTemplateId().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link AllInfrastructureRootTemplateId }
+     *
+     *
+     */
+    public List<AllInfrastructureRootTemplateId> getTemplateId() {
+        if (templateId == null) {
+            templateId = new ArrayList<AllInfrastructureRootTemplateId>();
+        }
+        return this.templateId;
+    }
 
-	/**
-	 * Ruft den Wert der typeId-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link AllInfrastructureRootTypeId }
-	 *
-	 */
-	public AllInfrastructureRootTypeId getTypeId() {
-		return typeId;
-	}
+    /**
+     * Ruft den Wert der typeId-Eigenschaft ab.
+     *
+     * @return possible object is {@link AllInfrastructureRootTypeId }
+     *
+     */
+    public AllInfrastructureRootTypeId getTypeId() {
+        return typeId;
+    }
 
-	/**
-	 * Ruft den Wert der unitPriceAmt-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link RTOMOPQ }
-	 *
-	 */
-	public RTOMOPQ getUnitPriceAmt() {
-		return unitPriceAmt;
-	}
+    /**
+     * Ruft den Wert der unitPriceAmt-Eigenschaft ab.
+     *
+     * @return possible object is {@link RTOMOPQ }
+     *
+     */
+    public RTOMOPQ getUnitPriceAmt() {
+        return unitPriceAmt;
+    }
 
-	/**
-	 * Ruft den Wert der unitQuantity-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link RTOPQPQ }
-	 *
-	 */
-	public RTOPQPQ getUnitQuantity() {
-		return unitQuantity;
-	}
+    /**
+     * Ruft den Wert der unitQuantity-Eigenschaft ab.
+     *
+     * @return possible object is {@link RTOPQPQ }
+     *
+     */
+    public RTOPQPQ getUnitQuantity() {
+        return unitQuantity;
+    }
 
-	/**
-	 * Legt den Wert der classCode-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link ActClassInvoiceElement }
-	 *
-	 */
-	public void setClassCode(ActClassInvoiceElement value) {
-		this.classCode = value;
-	}
+    /**
+     * Legt den Wert der classCode-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link ActClassInvoiceElement }
+     *
+     */
+    public void setClassCode(ActClassInvoiceElement value) {
+        this.classCode = value;
+    }
 
-	/**
-	 * Legt den Wert der code-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link CD }
-	 *
-	 */
-	public void setCode(CD value) {
-		this.code = value;
-	}
+    /**
+     * Legt den Wert der code-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link CD }
+     *
+     */
+    public void setCode(CD value) {
+        this.code = value;
+    }
 
-	/**
-	 * Legt den Wert der effectiveTime-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link IVLTS }
-	 *
-	 */
-	public void setEffectiveTime(IVLTS value) {
-		this.effectiveTime = value;
-	}
+    /**
+     * Legt den Wert der effectiveTime-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link IVLTS }
+     *
+     */
+    public void setEffectiveTime(IVLTS value) {
+        this.effectiveTime = value;
+    }
 
-	/**
-	 * Legt den Wert der moodCode-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link XActMoodDefEvn }
-	 *
-	 */
-	public void setMoodCode(XActMoodDefEvn value) {
-		this.moodCode = value;
-	}
+    /**
+     * Legt den Wert der moodCode-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link XActMoodDefEvn }
+     *
+     */
+    public void setMoodCode(XActMoodDefEvn value) {
+        this.moodCode = value;
+    }
 
-	/**
-	 * Legt den Wert der netAmt-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link MO }
-	 *
-	 */
-	public void setNetAmt(MO value) {
-		this.netAmt = value;
-	}
+    /**
+     * Legt den Wert der netAmt-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link MO }
+     *
+     */
+    public void setNetAmt(MO value) {
+        this.netAmt = value;
+    }
 
-	/**
-	 * Legt den Wert der typeId-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link AllInfrastructureRootTypeId }
-	 *
-	 */
-	public void setTypeId(AllInfrastructureRootTypeId value) {
-		this.typeId = value;
-	}
+    /**
+     * Legt den Wert der typeId-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link AllInfrastructureRootTypeId }
+     *
+     */
+    public void setTypeId(AllInfrastructureRootTypeId value) {
+        this.typeId = value;
+    }
 
-	/**
-	 * Legt den Wert der unitPriceAmt-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link RTOMOPQ }
-	 *
-	 */
-	public void setUnitPriceAmt(RTOMOPQ value) {
-		this.unitPriceAmt = value;
-	}
+    /**
+     * Legt den Wert der unitPriceAmt-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link RTOMOPQ }
+     *
+     */
+    public void setUnitPriceAmt(RTOMOPQ value) {
+        this.unitPriceAmt = value;
+    }
 
-	/**
-	 * Legt den Wert der unitQuantity-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link RTOPQPQ }
-	 *
-	 */
-	public void setUnitQuantity(RTOPQPQ value) {
-		this.unitQuantity = value;
-	}
+    /**
+     * Legt den Wert der unitQuantity-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link RTOPQPQ }
+     *
+     */
+    public void setUnitQuantity(RTOPQPQ value) {
+        this.unitQuantity = value;
+    }
 
 }

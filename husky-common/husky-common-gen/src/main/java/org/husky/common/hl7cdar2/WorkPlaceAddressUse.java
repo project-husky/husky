@@ -48,14 +48,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum WorkPlaceAddressUse {
 
-	WP, DIR, PUB;
+    WP, DIR, PUB;
 
-	public static WorkPlaceAddressUse fromValue(String v) {
-		return valueOf(v);
-	}
+    public static WorkPlaceAddressUse fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

@@ -60,82 +60,82 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "SLIST_PQ", propOrder = { "origin", "scale", "digits" })
 public class SLISTPQ extends ANY {
 
-	@XmlElement(required = true)
-	protected PQ origin;
-	@XmlElement(required = true)
-	protected PQ scale;
-	@XmlList
-	@XmlElement(required = true)
-	protected List<BigInteger> digits;
+    @XmlElement(required = true)
+    protected PQ origin;
+    @XmlElement(required = true)
+    protected PQ scale;
+    @XmlList
+    @XmlElement(required = true)
+    protected List<BigInteger> digits;
 
-	/**
-	 * Gets the value of the digits property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the digits property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getDigits().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link BigInteger }
-	 *
-	 *
-	 */
-	public List<BigInteger> getDigits() {
-		if (digits == null) {
-			digits = new ArrayList<BigInteger>();
-		}
-		return this.digits;
-	}
+    /**
+     * Gets the value of the digits property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the digits property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getDigits().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link BigInteger }
+     *
+     *
+     */
+    public List<BigInteger> getDigits() {
+        if (digits == null) {
+            digits = new ArrayList<BigInteger>();
+        }
+        return this.digits;
+    }
 
-	/**
-	 * Ruft den Wert der origin-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link PQ }
-	 *
-	 */
-	public PQ getOrigin() {
-		return origin;
-	}
+    /**
+     * Ruft den Wert der origin-Eigenschaft ab.
+     *
+     * @return possible object is {@link PQ }
+     *
+     */
+    public PQ getOrigin() {
+        return origin;
+    }
 
-	/**
-	 * Ruft den Wert der scale-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link PQ }
-	 *
-	 */
-	public PQ getScale() {
-		return scale;
-	}
+    /**
+     * Ruft den Wert der scale-Eigenschaft ab.
+     *
+     * @return possible object is {@link PQ }
+     *
+     */
+    public PQ getScale() {
+        return scale;
+    }
 
-	/**
-	 * Legt den Wert der origin-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link PQ }
-	 *
-	 */
-	public void setOrigin(PQ value) {
-		this.origin = value;
-	}
+    /**
+     * Legt den Wert der origin-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link PQ }
+     *
+     */
+    public void setOrigin(PQ value) {
+        this.origin = value;
+    }
 
-	/**
-	 * Legt den Wert der scale-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link PQ }
-	 *
-	 */
-	public void setScale(PQ value) {
-		this.scale = value;
-	}
+    /**
+     * Legt den Wert der scale-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link PQ }
+     *
+     */
+    public void setScale(PQ value) {
+        this.scale = value;
+    }
 
 }

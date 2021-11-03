@@ -353,7 +353,7 @@ public class Author {
 		if (retVal.equals("") && mAuthor.getAssignedAuthor() != null
 				&& mAuthor.getAssignedAuthor().getAssignedAuthoringDevice() != null
 				&& mAuthor.getAssignedAuthor().getAssignedAuthoringDevice().getSoftwareName() != null) {
-			return mAuthor.getAssignedAuthor().getAssignedAuthoringDevice().getSoftwareName().xmlContent;
+			return mAuthor.getAssignedAuthor().getAssignedAuthoringDevice().getSoftwareName().getTextContent();
 		}
 		return retVal;
 

@@ -84,36 +84,36 @@ public class Address extends AddressBaseType {
 					JAXBElement<?> elem = (JAXBElement<?>) element;
 					if (elem.getValue() instanceof AdxpAdditionalLocator) {
 						AdxpAdditionalLocator obj = (AdxpAdditionalLocator) elem.getValue();
-						retVal.setAdditionalLocator(obj.xmlContent);
+						retVal.setAdditionalLocator(obj.getTextContent());
 					} else if (elem.getValue() instanceof AdxpStreetName) {
 						AdxpStreetName obj = (AdxpStreetName) elem.getValue();
-						retVal.setStreetName(obj.xmlContent);
+						retVal.setStreetName(obj.getTextContent());
 					} else if (elem.getValue() instanceof AdxpHouseNumber) {
 						AdxpHouseNumber obj = (AdxpHouseNumber) elem.getValue();
-						retVal.setBuildingNumber(obj.xmlContent);
+						retVal.setBuildingNumber(obj.getTextContent());
 					} else if (elem.getValue() instanceof AdxpPostBox) {
 						AdxpPostBox obj = (AdxpPostBox) elem.getValue();
-						retVal.setPostBox(obj.xmlContent);
+						retVal.setPostBox(obj.getTextContent());
 					} else if (elem.getValue() instanceof AdxpPostalCode) {
 						AdxpPostalCode obj = (AdxpPostalCode) elem.getValue();
-						retVal.setPostalCode(obj.xmlContent);
+						retVal.setPostalCode(obj.getTextContent());
 					} else if (elem.getValue() instanceof AdxpCity) {
 						AdxpCity obj = (AdxpCity) elem.getValue();
-						retVal.setCity(obj.xmlContent);
+						retVal.setCity(obj.getTextContent());
 					} else if (elem.getValue() instanceof AdxpState) {
 						AdxpState obj = (AdxpState) elem.getValue();
-						retVal.setState(obj.xmlContent);
+						retVal.setState(obj.getTextContent());
 					} else if (elem.getValue() instanceof AdxpCountry) {
 						AdxpCountry obj = (AdxpCountry) elem.getValue();
-						retVal.setCountry(obj.xmlContent);
+						retVal.setCountry(obj.getTextContent());
 					} else if (elem.getValue() instanceof AdxpStreetAddressLine) {
 						if (streetAddressLine1 == null) {
 							AdxpStreetAddressLine obj = (AdxpStreetAddressLine) elem.getValue();
-							streetAddressLine1 = obj.xmlContent;
+							streetAddressLine1 = obj.getTextContent();
 							retVal.setStreetAddressLine1(streetAddressLine1);
 						} else if (streetAddressLine2 == null) {
 							AdxpStreetAddressLine obj = (AdxpStreetAddressLine) elem.getValue();
-							streetAddressLine2 = obj.xmlContent;
+							streetAddressLine2 = obj.getTextContent();
 							retVal.setStreetAddressLine2(streetAddressLine2);
 						}
 					} else
@@ -156,7 +156,7 @@ public class Address extends AddressBaseType {
 			value = baseType.getAdditionalLocator();
 			if (value != null) {
 				AdxpAdditionalLocator obj = new AdxpAdditionalLocator();
-				obj.xmlContent = value;
+				obj.setXmlMixed(value);
 				retVal.getContent()
 						.add(new JAXBElement<AdxpAdditionalLocator>(
 								new QName("urn:hl7-org:v3", "additionalLocator"),
@@ -166,7 +166,7 @@ public class Address extends AddressBaseType {
 			value = baseType.getBuildingNumber();
 			if (value != null) {
 				AdxpHouseNumber obj = new AdxpHouseNumber();
-				obj.xmlContent = value;
+				obj.setXmlMixed(value);
 				retVal.getContent().add(new JAXBElement<AdxpHouseNumber>(
 						new QName("urn:hl7-org:v3", "houseNumber"), AdxpHouseNumber.class, obj));
 			}
@@ -174,7 +174,7 @@ public class Address extends AddressBaseType {
 			value = baseType.getCity();
 			if (value != null) {
 				AdxpCity obj = new AdxpCity();
-				obj.xmlContent = value;
+				obj.setXmlMixed(value);
 				retVal.getContent().add(new JAXBElement<AdxpCity>(
 						new QName("urn:hl7-org:v3", "city"), AdxpCity.class, obj));
 			}
@@ -182,7 +182,7 @@ public class Address extends AddressBaseType {
 			value = baseType.getCountry();
 			if (value != null) {
 				AdxpCountry obj = new AdxpCountry();
-				obj.xmlContent = value;
+				obj.setXmlMixed(value);
 				retVal.getContent().add(new JAXBElement<AdxpCountry>(
 						new QName("urn:hl7-org:v3", "country"), AdxpCountry.class, obj));
 			}
@@ -190,7 +190,7 @@ public class Address extends AddressBaseType {
 			value = baseType.getPostalCode();
 			if (value != null) {
 				AdxpPostalCode obj = new AdxpPostalCode();
-				obj.xmlContent = value;
+				obj.setXmlMixed(value);
 				retVal.getContent().add(new JAXBElement<AdxpPostalCode>(
 						new QName("urn:hl7-org:v3", "postalCode"), AdxpPostalCode.class, obj));
 			}
@@ -198,7 +198,7 @@ public class Address extends AddressBaseType {
 			value = baseType.getPostBox();
 			if (value != null) {
 				AdxpPostBox obj = new AdxpPostBox();
-				obj.xmlContent = value;
+				obj.setXmlMixed(value);
 				retVal.getContent().add(new JAXBElement<AdxpPostBox>(
 						new QName("urn:hl7-org:v3", "postBox"), AdxpPostBox.class, obj));
 			}
@@ -206,7 +206,7 @@ public class Address extends AddressBaseType {
 			value = baseType.getState();
 			if (value != null) {
 				AdxpState obj = new AdxpState();
-				obj.xmlContent = value;
+				obj.setXmlMixed(value);
 				retVal.getContent().add(new JAXBElement<AdxpState>(
 						new QName("urn:hl7-org:v3", "state"), AdxpState.class, obj));
 			}
@@ -214,7 +214,7 @@ public class Address extends AddressBaseType {
 			value = baseType.getStreetAddressLine1();
 			if (value != null) {
 				AdxpStreetAddressLine obj = new AdxpStreetAddressLine();
-				obj.xmlContent = value;
+				obj.setXmlMixed(value);
 				retVal.getContent()
 						.add(new JAXBElement<AdxpStreetAddressLine>(
 								new QName("urn:hl7-org:v3", "streetAddressLine"),
@@ -224,7 +224,7 @@ public class Address extends AddressBaseType {
 			value = baseType.getStreetAddressLine2();
 			if (value != null) {
 				AdxpStreetAddressLine obj = new AdxpStreetAddressLine();
-				obj.xmlContent = value;
+				obj.setXmlMixed(value);
 				retVal.getContent()
 						.add(new JAXBElement<AdxpStreetAddressLine>(
 								new QName("urn:hl7-org:v3", "streetAddressLine"),
@@ -234,7 +234,7 @@ public class Address extends AddressBaseType {
 			value = baseType.getStreetName();
 			if (value != null) {
 				AdxpStreetName obj = new AdxpStreetName();
-				obj.xmlContent = value;
+				obj.setXmlMixed(value);
 				retVal.getContent().add(new JAXBElement<AdxpStreetName>(
 						new QName("urn:hl7-org:v3", "streetName"), AdxpStreetName.class, obj));
 			}

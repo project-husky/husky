@@ -2,7 +2,7 @@ package org.husky.emed.cda.utils.time;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.cda.generated.hl7cdar2.TS;
+import org.husky.common.hl7cdar2.TS;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;

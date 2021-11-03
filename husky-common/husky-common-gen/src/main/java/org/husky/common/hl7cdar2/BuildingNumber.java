@@ -48,14 +48,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum BuildingNumber {
 
-	BNR, BNN, BNS;
+    BNR, BNN, BNS;
 
-	public static BuildingNumber fromValue(String v) {
-		return valueOf(v);
-	}
+    public static BuildingNumber fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

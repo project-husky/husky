@@ -22,15 +22,15 @@
 
 package org.husky.common.hl7cdar2;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.*;
 
 /**
  *
@@ -59,49 +59,77 @@ import javax.xml.bind.annotation.XmlValue;
  *
  *
  */
-@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ANY")
 @XmlSeeAlso({ BL.class, ANYNonNull.class, CR.class, SLISTTS.class, GLISTPQ.class, SLISTPQ.class,
-		GLISTTS.class, II.class, QTY.class, CD.class, URL.class, BIN.class })
+        GLISTTS.class, II.class, QTY.class, CD.class, URL.class, BIN.class })
 // Fix Tony Schaller, medshare GmbH: make the JAXB classes for HL7 CDA R2
 // Serializable
 public abstract class ANY {
 
-	// Fix Tony Schaller, medshare GmbH: making public in order to access this
-	// field from all derivates
-	@XmlAttribute(name = "nullFlavor")
-	public List<String> nullFlavor;
+    // Fix Tony Schaller, medshare GmbH: making public in order to access this
+    // field from all derivates
+    @XmlAttribute(name = "nullFlavor")
+    public List<String> nullFlavor;
 
-	// Fix Tony Schaller, medshare GmbH: adding in order to access this field
-	// from all derivates
-	@XmlValue
-	public String xmlContent;
+    private List<String> xmlMixed = new ArrayList<>();
 
-	/**
-	 * Gets the value of the nullFlavor property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the nullFlavor property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getNullFlavor().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link String }
-	 *
-	 *
-	 */
-	public List<String> getNullFlavor() {
-		if (nullFlavor == null) {
-			nullFlavor = new ArrayList<String>();
-		}
-		return this.nullFlavor;
-	}
+    @XmlMixed
+    public List<String> getXmlMixed() {
+        return this.xmlMixed;
+    }
+
+    public void setXmlMixed(final List<String> xmlMixed) {
+        if (xmlMixed == null) {
+            this.xmlMixed = null;
+        } else {
+            this.xmlMixed = xmlMixed.stream().map(String::strip).filter(string -> !string.isEmpty()).toList();
+        }
+    }
+
+    public void setXmlMixed(@Nullable final String xmlMixed) {
+        if (xmlMixed == null) {
+            this.xmlMixed = null;
+        } else {
+            this.xmlMixed = List.of(Objects.requireNonNull(xmlMixed));
+        }
+    }
+
+    @NonNull
+    public String getMergedXmlMixed() {
+        if (this.xmlMixed == null || this.xmlMixed.isEmpty()) {
+            return "";
+        } else if (this.xmlMixed.size() == 1) {
+            return this.xmlMixed.get(0);
+        } else {
+            return String.join("", this.xmlMixed);
+        }
+    }
+
+    /**
+     * Gets the value of the nullFlavor property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the nullFlavor property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getNullFlavor().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link String }
+     *
+     *
+     */
+    public List<String> getNullFlavor() {
+        if (nullFlavor == null) {
+            nullFlavor = new ArrayList<>();
+        }
+        return this.nullFlavor;
+    }
 
 }

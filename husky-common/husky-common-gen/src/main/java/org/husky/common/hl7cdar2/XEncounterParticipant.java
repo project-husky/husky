@@ -50,14 +50,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XEncounterParticipant {
 
-	ADM, ATND, CON, DIS, REF;
+    ADM, ATND, CON, DIS, REF;
 
-	public static XEncounterParticipant fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XEncounterParticipant fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

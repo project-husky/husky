@@ -72,14 +72,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum Currency {
 
-	ARS, AUD, BRL, CAD, CHF, CLF, CNY, DEM, ESP, EUR, FIM, FRF, GBP, ILS, INR, JPY, KRW, MXN, NLG, NZD, PHP, RUR, THB, TRL, TWD, USD, ZAR;
+    ARS, AUD, BRL, CAD, CHF, CLF, CNY, DEM, ESP, EUR, FIM, FRF, GBP, ILS, INR, JPY, KRW, MXN, NLG, NZD, PHP, RUR, THB, TRL, TWD, USD, ZAR;
 
-	public static Currency fromValue(String v) {
-		return valueOf(v);
-	}
+    public static Currency fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

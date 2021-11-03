@@ -533,7 +533,7 @@ public class Value {
 	public String getEdText() {
 		if (isEd()) {
 			final var ed = (ED) mValue;
-			return ed.xmlContent;
+			return ed.getTextContent();
 		}
 		return null;
 	}

@@ -3,8 +3,7 @@ package org.husky.emed.cda.generated.artdecor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040RelatedDocument;
+import org.husky.common.hl7cdar2.*;
 
 /**
  * cdach_header_DocumentReplacement
@@ -24,7 +23,7 @@ import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040RelatedDocument;
 public class CdachHeaderDocumentReplacement extends POCDMT000040RelatedDocument {
 
     public CdachHeaderDocumentReplacement() {
-        super.setTypeCode(org.husky.emed.cda.generated.hl7cdar2.XActRelationshipDocument.RPLC);
+        super.setTypeCode(XActRelationshipDocument.RPLC);
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.13"));
     }
 
@@ -33,9 +32,9 @@ public class CdachHeaderDocumentReplacement extends POCDMT000040RelatedDocument 
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -44,14 +43,14 @@ public class CdachHeaderDocumentReplacement extends POCDMT000040RelatedDocument 
      * Gets the hl7ParentDocument
      * Relationship to the document that needs to be replaced.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040ParentDocument getHl7ParentDocument() {
+    public POCDMT000040ParentDocument getHl7ParentDocument() {
         return parentDocument;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
@@ -59,14 +58,14 @@ public class CdachHeaderDocumentReplacement extends POCDMT000040RelatedDocument 
      * Sets the hl7ParentDocument
      * Relationship to the document that needs to be replaced.
      */
-    public void setHl7ParentDocument(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040ParentDocument value) {
+    public void setHl7ParentDocument(POCDMT000040ParentDocument value) {
         this.parentDocument = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }

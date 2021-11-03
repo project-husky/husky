@@ -55,14 +55,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XActRelationshipEntryRelationship {
 
-	XCRPT, COMP, RSON, SPRT, CAUS, GEVL, MFST, REFR, SAS, SUBJ;
+    XCRPT, COMP, RSON, SPRT, CAUS, GEVL, MFST, REFR, SAS, SUBJ;
 
-	public static XActRelationshipEntryRelationship fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XActRelationshipEntryRelationship fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

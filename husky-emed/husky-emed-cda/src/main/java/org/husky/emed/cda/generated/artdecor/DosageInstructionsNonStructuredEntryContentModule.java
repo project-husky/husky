@@ -3,11 +3,7 @@ package org.husky.emed.cda.generated.artdecor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Consumable;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040ManufacturedProduct;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Material;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040SubstanceAdministration;
+import org.husky.common.hl7cdar2.*;
 
 /**
  * DosageInstructionsNonStructuredEntryContentModule
@@ -24,7 +20,7 @@ public class DosageInstructionsNonStructuredEntryContentModule extends POCDMT000
 
     public DosageInstructionsNonStructuredEntryContentModule() {
         super.getClassCode().add("SBADM");
-        super.setMoodCode(org.husky.emed.cda.generated.hl7cdar2.XDocumentSubstanceMood.INT);
+        super.setMoodCode(XDocumentSubstanceMood.INT);
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.52"));
         super.setConsumable(createHl7ConsumableNa());
     }
@@ -47,9 +43,9 @@ public class DosageInstructionsNonStructuredEntryContentModule extends POCDMT000
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -57,14 +53,14 @@ public class DosageInstructionsNonStructuredEntryContentModule extends POCDMT000
     /**
      * Gets the hl7Consumable
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Consumable getHl7Consumable() {
+    public POCDMT000040Consumable getHl7Consumable() {
         return consumable;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
@@ -72,21 +68,21 @@ public class DosageInstructionsNonStructuredEntryContentModule extends POCDMT000
      * Gets the hl7Text
      * It shall contain both the narrative text content and a reference to the human readable part of the item. This human readable part may contain a simple text to redirect the reader to the PDF document (e.g. "See PDF version included").<br clear="none"/>There shall be a single non-blank text node (i.e. the text shall be completely before or after the reference, see examples). The text shall be raw (i.e. no markup shall be used).
      */
-    public org.husky.emed.cda.generated.hl7cdar2.ED getHl7Text() {
+    public ED getHl7Text() {
         return text;
     }
 
     /**
      * Sets the hl7Consumable
      */
-    public void setHl7Consumable(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Consumable value) {
+    public void setHl7Consumable(POCDMT000040Consumable value) {
         this.consumable = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
@@ -95,7 +91,7 @@ public class DosageInstructionsNonStructuredEntryContentModule extends POCDMT000
      * Sets the hl7Text
      * It shall contain both the narrative text content and a reference to the human readable part of the item. This human readable part may contain a simple text to redirect the reader to the PDF document (e.g. "See PDF version included").<br clear="none"/>There shall be a single non-blank text node (i.e. the text shall be completely before or after the reference, see examples). The text shall be raw (i.e. no markup shall be used).
      */
-    public void setHl7Text(org.husky.emed.cda.generated.hl7cdar2.ED value) {
+    public void setHl7Text(ED value) {
         this.text = value;
     }
 }

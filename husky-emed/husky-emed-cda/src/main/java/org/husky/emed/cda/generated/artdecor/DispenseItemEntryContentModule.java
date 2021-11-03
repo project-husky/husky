@@ -3,8 +3,8 @@ package org.husky.emed.cda.generated.artdecor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Supply;
+import org.husky.common.hl7cdar2.*;
+import org.husky.common.hl7cdar2.POCDMT000040Supply;
 
 /**
  * DispenseItemEntryContentModule
@@ -30,7 +30,7 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
      * Adds a hl7Reference
      * ID of parent container (Community Dispense document)
      */
-    public void addHl7Reference(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Reference value) {
+    public void addHl7Reference(POCDMT000040Reference value) {
         getReference().add(value);
     }
 
@@ -45,9 +45,9 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
     /**
      * Creates fixed contents for CDA Element hl7Code
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.CD createHl7CodeFixedValue() {
+    private static CD createHl7CodeFixedValue() {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.CD retVal = factory.createCD();
+        CD retVal = factory.createCD();
         return retVal;
     }
 
@@ -57,10 +57,10 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
      * @param typeCode the desired fixed value for this argument.
      * @param inversionInd the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
+    private static POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship retVal = factory.createPOCDMT000040EntryRelationship();
-        retVal.setTypeCode(org.husky.emed.cda.generated.hl7cdar2.XActRelationshipEntryRelationship.fromValue(typeCode));
+        POCDMT000040EntryRelationship retVal = factory.createPOCDMT000040EntryRelationship();
+        retVal.setTypeCode(XActRelationshipEntryRelationship.fromValue(typeCode));
         if (inversionInd != null) {
             retVal.setInversionInd(Boolean.parseBoolean(inversionInd));
         }
@@ -72,10 +72,10 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
      *
      * @param typeCode the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
+    private static POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Reference retVal = factory.createPOCDMT000040Reference();
-        retVal.setTypeCode(org.husky.emed.cda.generated.hl7cdar2.XActRelationshipExternalReference.fromValue(typeCode));
+        POCDMT000040Reference retVal = factory.createPOCDMT000040Reference();
+        retVal.setTypeCode(XActRelationshipExternalReference.fromValue(typeCode));
         return retVal;
     }
 
@@ -84,9 +84,9 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -95,7 +95,7 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
      * Gets the hl7Author
      * Dispenser
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Author> getHl7Author() {
+    public List<POCDMT000040Author> getHl7Author() {
         return author;
     }
 
@@ -103,7 +103,7 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
      * Gets the hl7Code
      * Code
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CD getHl7Code() {
+    public CD getHl7Code() {
         return code;
     }
 
@@ -111,7 +111,7 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
      * Gets the hl7EntryRelationship
      * If the dispense is related to a Medication Treatment Plan Item, the reference to it SHALL be present.
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship> getHl7EntryRelationship() {
+    public List<POCDMT000040EntryRelationship> getHl7EntryRelationship() {
         return entryRelationship;
     }
 
@@ -119,7 +119,7 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
      * Gets the hl7Id
      * Dispense Item ID
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7Id() {
+    public List<II> getHl7Id() {
         return id;
     }
 
@@ -127,7 +127,7 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
      * Gets the hl7Product
      * Product
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Product getHl7Product() {
+    public POCDMT000040Product getHl7Product() {
         return product;
     }
 
@@ -135,14 +135,14 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
      * Gets the hl7Quantity
      * Quantity Value
      */
-    public org.husky.emed.cda.generated.hl7cdar2.PQ getHl7Quantity() {
+    public PQ getHl7Quantity() {
         return quantity;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
@@ -150,7 +150,7 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
      * Gets the hl7Text
      * Narrative Text
      */
-    public org.husky.emed.cda.generated.hl7cdar2.ED getHl7Text() {
+    public ED getHl7Text() {
         return text;
     }
 
@@ -158,7 +158,7 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.CD, filled by:
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.CD getPredefinedCode() {
+    public static CD getPredefinedCode() {
         return createHl7CodeFixedValue();
     }
 
@@ -166,7 +166,7 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship, filled by: "COMP", null
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipCompNull() {
+    public static POCDMT000040EntryRelationship getPredefinedEntryRelationshipCompNull() {
         return createHl7EntryRelationshipFixedValue("COMP",
                                                     null);
     }
@@ -175,7 +175,7 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship, filled by: "REFR", null
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrNull() {
+    public static POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrNull() {
         return createHl7EntryRelationshipFixedValue("REFR",
                                                     null);
     }
@@ -184,7 +184,7 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship, filled by: "SUBJ", "true"
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjTrue() {
+    public static POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjTrue() {
         return createHl7EntryRelationshipFixedValue("SUBJ",
                                                     "true");
     }
@@ -193,7 +193,7 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040Reference, filled by: "XCRPT"
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Reference getPredefinedReferenceXcrpt() {
+    public static POCDMT000040Reference getPredefinedReferenceXcrpt() {
         return createHl7ReferenceFixedValue("XCRPT");
     }
 
@@ -201,7 +201,7 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
      * Sets the hl7Author
      * Dispenser
      */
-    public void setHl7Author(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Author value) {
+    public void setHl7Author(POCDMT000040Author value) {
         getAuthor().clear();
         getAuthor().add(value);
     }
@@ -210,7 +210,7 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
      * Sets the hl7Code
      * Code
      */
-    public void setHl7Code(org.husky.emed.cda.generated.hl7cdar2.CD value) {
+    public void setHl7Code(CD value) {
         this.code = value;
     }
 
@@ -218,7 +218,7 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
      * Sets the hl7EntryRelationship
      * If the dispense is related to a Medication Treatment Plan Item, the reference to it SHALL be present.
      */
-    public void setHl7EntryRelationship(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship value) {
+    public void setHl7EntryRelationship(POCDMT000040EntryRelationship value) {
         getEntryRelationship().clear();
         getEntryRelationship().add(value);
     }
@@ -227,7 +227,7 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
      * Sets the hl7Id
      * Dispense Item ID
      */
-    public void setHl7Id(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7Id(II value) {
         getId().clear();
         getId().add(value);
     }
@@ -236,7 +236,7 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
      * Sets the hl7Product
      * Product
      */
-    public void setHl7Product(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Product value) {
+    public void setHl7Product(POCDMT000040Product value) {
         this.product = value;
     }
 
@@ -244,14 +244,14 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
      * Sets the hl7Quantity
      * Quantity Value
      */
-    public void setHl7Quantity(org.husky.emed.cda.generated.hl7cdar2.PQ value) {
+    public void setHl7Quantity(PQ value) {
         this.quantity = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
@@ -260,7 +260,7 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
      * Sets the hl7Text
      * Narrative Text
      */
-    public void setHl7Text(org.husky.emed.cda.generated.hl7cdar2.ED value) {
+    public void setHl7Text(ED value) {
         this.text = value;
     }
 }

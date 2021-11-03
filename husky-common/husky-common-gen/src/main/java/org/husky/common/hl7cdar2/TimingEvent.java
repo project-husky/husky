@@ -61,14 +61,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum TimingEvent {
 
-	AC, ACD, ACM, ACV, HS, IC, ICD, ICM, ICV, PC, PCD, PCM, PCV, CM, CD, CV;
+    AC, ACD, ACM, ACV, HS, IC, ICD, ICM, ICV, PC, PCD, PCM, PCV, CM, CD, CV;
 
-	public static TimingEvent fromValue(String v) {
-		return valueOf(v);
-	}
+    public static TimingEvent fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

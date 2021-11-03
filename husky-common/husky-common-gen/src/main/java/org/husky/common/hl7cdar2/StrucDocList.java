@@ -73,166 +73,166 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlType(name = "StrucDoc.List", propOrder = { "caption", "item" })
 public class StrucDocList {
 
-	protected StrucDocCaption caption;
-	@XmlElement(required = true)
-	protected List<StrucDocItem> item;
-	@XmlAttribute(name = "ID")
-	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-	@XmlID
-	@XmlSchemaType(name = "ID")
-	protected String id;
-	@XmlAttribute(name = "language")
-	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-	@XmlSchemaType(name = "NMTOKEN")
-	protected String language;
-	@XmlAttribute(name = "styleCode")
-	@XmlSchemaType(name = "NMTOKENS")
-	protected List<String> styleCode;
-	@XmlAttribute(name = "listType")
-	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-	protected String listType;
+    protected StrucDocCaption caption;
+    @XmlElement(required = true)
+    protected List<StrucDocItem> item;
+    @XmlAttribute(name = "ID")
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    @XmlID
+    @XmlSchemaType(name = "ID")
+    protected String id;
+    @XmlAttribute(name = "language")
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    @XmlSchemaType(name = "NMTOKEN")
+    protected String language;
+    @XmlAttribute(name = "styleCode")
+    @XmlSchemaType(name = "NMTOKENS")
+    protected List<String> styleCode;
+    @XmlAttribute(name = "listType")
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    protected String listType;
 
-	/**
-	 * Ruft den Wert der caption-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link StrucDocCaption }
-	 *
-	 */
-	public StrucDocCaption getCaption() {
-		return caption;
-	}
+    /**
+     * Ruft den Wert der caption-Eigenschaft ab.
+     *
+     * @return possible object is {@link StrucDocCaption }
+     *
+     */
+    public StrucDocCaption getCaption() {
+        return caption;
+    }
 
-	/**
-	 * Ruft den Wert der id-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getID() {
-		return id;
-	}
+    /**
+     * Ruft den Wert der id-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getID() {
+        return id;
+    }
 
-	/**
-	 * Gets the value of the item property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the item property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getItem().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link StrucDocItem }
-	 *
-	 *
-	 */
-	public List<StrucDocItem> getItem() {
-		if (item == null) {
-			item = new ArrayList<StrucDocItem>();
-		}
-		return this.item;
-	}
+    /**
+     * Gets the value of the item property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the item property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getItem().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link StrucDocItem }
+     *
+     *
+     */
+    public List<StrucDocItem> getItem() {
+        if (item == null) {
+            item = new ArrayList<StrucDocItem>();
+        }
+        return this.item;
+    }
 
-	/**
-	 * Ruft den Wert der language-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getLanguage() {
-		return language;
-	}
+    /**
+     * Ruft den Wert der language-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getLanguage() {
+        return language;
+    }
 
-	/**
-	 * Ruft den Wert der listType-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getListType() {
-		if (listType == null) {
-			return "unordered";
-		} else {
-			return listType;
-		}
-	}
+    /**
+     * Ruft den Wert der listType-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getListType() {
+        if (listType == null) {
+            return "unordered";
+        } else {
+            return listType;
+        }
+    }
 
-	/**
-	 * Gets the value of the styleCode property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the styleCode property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getStyleCode().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link String }
-	 *
-	 *
-	 */
-	public List<String> getStyleCode() {
-		if (styleCode == null) {
-			styleCode = new ArrayList<String>();
-		}
-		return this.styleCode;
-	}
+    /**
+     * Gets the value of the styleCode property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the styleCode property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getStyleCode().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link String }
+     *
+     *
+     */
+    public List<String> getStyleCode() {
+        if (styleCode == null) {
+            styleCode = new ArrayList<String>();
+        }
+        return this.styleCode;
+    }
 
-	/**
-	 * Legt den Wert der caption-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link StrucDocCaption }
-	 *
-	 */
-	public void setCaption(StrucDocCaption value) {
-		this.caption = value;
-	}
+    /**
+     * Legt den Wert der caption-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link StrucDocCaption }
+     *
+     */
+    public void setCaption(StrucDocCaption value) {
+        this.caption = value;
+    }
 
-	/**
-	 * Legt den Wert der id-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setID(String value) {
-		this.id = value;
-	}
+    /**
+     * Legt den Wert der id-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setID(String value) {
+        this.id = value;
+    }
 
-	/**
-	 * Legt den Wert der language-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setLanguage(String value) {
-		this.language = value;
-	}
+    /**
+     * Legt den Wert der language-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setLanguage(String value) {
+        this.language = value;
+    }
 
-	/**
-	 * Legt den Wert der listType-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setListType(String value) {
-		this.listType = value;
-	}
+    /**
+     * Legt den Wert der listType-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setListType(String value) {
+        this.listType = value;
+    }
 
 }

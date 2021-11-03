@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum EntityClassContainer {
 
-	CONT, HOLD;
+    CONT, HOLD;
 
-	public static EntityClassContainer fromValue(String v) {
-		return valueOf(v);
-	}
+    public static EntityClassContainer fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

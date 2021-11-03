@@ -3,8 +3,10 @@ package org.husky.emed.cda.generated.artdecor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040DocumentationOf;
+import org.husky.common.hl7cdar2.II;
+import org.husky.common.hl7cdar2.ObjectFactory;
+import org.husky.common.hl7cdar2.POCDMT000040DocumentationOf;
+import org.husky.common.hl7cdar2.POCDMT000040ServiceEvent;
 
 /**
  * cdach_header_HealthService
@@ -33,9 +35,9 @@ public class CdachHeaderHealthService extends POCDMT000040DocumentationOf {
      * @param classCode the desired fixed value for this argument.
      * @param moodCode the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040ServiceEvent createHl7ServiceEventFixedValue(String classCode, String moodCode) {
+    private static POCDMT000040ServiceEvent createHl7ServiceEventFixedValue(String classCode, String moodCode) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.POCDMT000040ServiceEvent retVal = factory.createPOCDMT000040ServiceEvent();
+        POCDMT000040ServiceEvent retVal = factory.createPOCDMT000040ServiceEvent();
         retVal.getClassCode().add(classCode);
         retVal.getMoodCode().add(moodCode);
         return retVal;
@@ -46,9 +48,9 @@ public class CdachHeaderHealthService extends POCDMT000040DocumentationOf {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -56,28 +58,28 @@ public class CdachHeaderHealthService extends POCDMT000040DocumentationOf {
     /**
      * Gets the hl7ServiceEvent
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040ServiceEvent getHl7ServiceEvent() {
+    public POCDMT000040ServiceEvent getHl7ServiceEvent() {
         return serviceEvent;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
     /**
      * Sets the hl7ServiceEvent
      */
-    public void setHl7ServiceEvent(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040ServiceEvent value) {
+    public void setHl7ServiceEvent(POCDMT000040ServiceEvent value) {
         this.serviceEvent = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }

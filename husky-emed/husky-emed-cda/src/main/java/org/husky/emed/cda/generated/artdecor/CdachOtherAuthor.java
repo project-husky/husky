@@ -3,8 +3,7 @@ package org.husky.emed.cda.generated.artdecor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Author;
+import org.husky.common.hl7cdar2.*;
 
 /**
  * cdach_other_Author
@@ -27,9 +26,9 @@ public class CdachOtherAuthor extends POCDMT000040Author {
     /**
      * Creates fixed contents for CDA Element hl7FunctionCode
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.CE createHl7FunctionCodeFixedValue() {
+    private static CE createHl7FunctionCodeFixedValue() {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.CE retVal = factory.createCE();
+        CE retVal = factory.createCE();
         return retVal;
     }
 
@@ -38,9 +37,9 @@ public class CdachOtherAuthor extends POCDMT000040Author {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -48,21 +47,21 @@ public class CdachOtherAuthor extends POCDMT000040Author {
     /**
      * Gets the hl7AssignedAuthor
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040AssignedAuthor getHl7AssignedAuthor() {
+    public POCDMT000040AssignedAuthor getHl7AssignedAuthor() {
         return assignedAuthor;
     }
 
     /**
      * Gets the hl7FunctionCode
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CE getHl7FunctionCode() {
+    public CE getHl7FunctionCode() {
         return functionCode;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
@@ -70,7 +69,7 @@ public class CdachOtherAuthor extends POCDMT000040Author {
      * Gets the hl7Time
      * Timestamp of the authorship.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.TS getHl7Time() {
+    public TS getHl7Time() {
         return time;
     }
 
@@ -78,28 +77,28 @@ public class CdachOtherAuthor extends POCDMT000040Author {
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.CE, filled by:
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.CE getPredefinedFunctionCode() {
+    public static CE getPredefinedFunctionCode() {
         return createHl7FunctionCodeFixedValue();
     }
 
     /**
      * Sets the hl7AssignedAuthor
      */
-    public void setHl7AssignedAuthor(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040AssignedAuthor value) {
+    public void setHl7AssignedAuthor(POCDMT000040AssignedAuthor value) {
         this.assignedAuthor = value;
     }
 
     /**
      * Sets the hl7FunctionCode
      */
-    public void setHl7FunctionCode(org.husky.emed.cda.generated.hl7cdar2.CE value) {
+    public void setHl7FunctionCode(CE value) {
         this.functionCode = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
@@ -108,7 +107,7 @@ public class CdachOtherAuthor extends POCDMT000040Author {
      * Sets the hl7Time
      * Timestamp of the authorship.
      */
-    public void setHl7Time(org.husky.emed.cda.generated.hl7cdar2.TS value) {
+    public void setHl7Time(TS value) {
         this.time = value;
     }
 }

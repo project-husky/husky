@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.util.Objects;
 
 /**
  *
@@ -73,172 +74,192 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlSeeAlso({ Thumbnail.class, ST.class })
 public class ED extends BIN {
 
-	protected TEL reference;
-	protected Thumbnail thumbnail;
-	@XmlAttribute(name = "mediaType")
-	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-	protected String mediaType;
-	@XmlAttribute(name = "language")
-	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-	protected String language;
-	@XmlAttribute(name = "compression")
-	protected CompressionAlgorithm compression;
-	@XmlAttribute(name = "integrityCheck")
-	protected byte[] integrityCheck;
-	@XmlAttribute(name = "integrityCheckAlgorithm")
-	protected IntegrityCheckAlgorithm integrityCheckAlgorithm;
+    protected TEL reference;
+    protected Thumbnail thumbnail;
+    @XmlAttribute(name = "mediaType")
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    protected String mediaType;
+    @XmlAttribute(name = "language")
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    protected String language;
+    @XmlAttribute(name = "compression")
+    protected CompressionAlgorithm compression;
+    @XmlAttribute(name = "integrityCheck")
+    protected byte[] integrityCheck;
+    @XmlAttribute(name = "integrityCheckAlgorithm")
+    protected IntegrityCheckAlgorithm integrityCheckAlgorithm;
 
-	/**
-	 * Ruft den Wert der compression-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link CompressionAlgorithm }
-	 *
-	 */
-	public CompressionAlgorithm getCompression() {
-		return compression;
-	}
+    /**
+     * Ruft den Wert der compression-Eigenschaft ab.
+     *
+     * @return possible object is {@link CompressionAlgorithm }
+     *
+     */
+    public CompressionAlgorithm getCompression() {
+        return compression;
+    }
 
-	/**
-	 * Ruft den Wert der integrityCheck-Eigenschaft ab.
-	 *
-	 * @return possible object is byte[]
-	 */
-	public byte[] getIntegrityCheck() {
-		return integrityCheck;
-	}
+    /**
+     * Ruft den Wert der integrityCheck-Eigenschaft ab.
+     *
+     * @return possible object is byte[]
+     */
+    public byte[] getIntegrityCheck() {
+        return integrityCheck;
+    }
 
-	/**
-	 * Ruft den Wert der integrityCheckAlgorithm-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link IntegrityCheckAlgorithm }
-	 *
-	 */
-	public IntegrityCheckAlgorithm getIntegrityCheckAlgorithm() {
-		if (integrityCheckAlgorithm == null) {
-			return IntegrityCheckAlgorithm.SHA_1;
-		} else {
-			return integrityCheckAlgorithm;
-		}
-	}
+    /**
+     * Ruft den Wert der integrityCheckAlgorithm-Eigenschaft ab.
+     *
+     * @return possible object is {@link IntegrityCheckAlgorithm }
+     *
+     */
+    public IntegrityCheckAlgorithm getIntegrityCheckAlgorithm() {
+        if (integrityCheckAlgorithm == null) {
+            return IntegrityCheckAlgorithm.SHA_1;
+        } else {
+            return integrityCheckAlgorithm;
+        }
+    }
 
-	/**
-	 * Ruft den Wert der language-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getLanguage() {
-		return language;
-	}
+    /**
+     * Ruft den Wert der language-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getLanguage() {
+        return language;
+    }
 
-	/**
-	 * Ruft den Wert der mediaType-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getMediaType() {
-		if (mediaType == null) {
-			return "text/plain";
-		} else {
-			return mediaType;
-		}
-	}
+    /**
+     * Ruft den Wert der mediaType-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getMediaType() {
+        if (mediaType == null) {
+            return "text/plain";
+        } else {
+            return mediaType;
+        }
+    }
 
-	/**
-	 * Ruft den Wert der reference-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link TEL }
-	 *
-	 */
-	public TEL getReference() {
-		return reference;
-	}
+    /**
+     * Ruft den Wert der reference-Eigenschaft ab.
+     *
+     * @return possible object is {@link TEL }
+     *
+     */
+    public TEL getReference() {
+        return reference;
+    }
 
-	/**
-	 * Ruft den Wert der thumbnail-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link Thumbnail }
-	 *
-	 */
-	public Thumbnail getThumbnail() {
-		return thumbnail;
-	}
+    /**
+     * Ruft den Wert der thumbnail-Eigenschaft ab.
+     *
+     * @return possible object is {@link Thumbnail }
+     *
+     */
+    public Thumbnail getThumbnail() {
+        return thumbnail;
+    }
 
-	/**
-	 * Legt den Wert der compression-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link CompressionAlgorithm }
-	 *
-	 */
-	public void setCompression(CompressionAlgorithm value) {
-		this.compression = value;
-	}
+    /**
+     * Returns the text content of the ED.
+     *
+     * @return a string.
+     */
+    public String getTextContent() {
+        if (this.getXmlMixed() == null) {
+            return "";
+        }
+        final var strings = this.getXmlMixed().stream()
+                .filter(Objects::nonNull)
+                .map(String::strip)
+                .filter(string -> !string.isEmpty())
+                .toList();
+        if (strings.isEmpty()) {
+            return "";
+        } else {
+            return String.join(" ", strings).strip();
+        }
+    }
 
-	/**
-	 * Legt den Wert der integrityCheck-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is byte[]
-	 */
-	public void setIntegrityCheck(byte[] value) {
-		this.integrityCheck = value;
-	}
+    /**
+     * Legt den Wert der compression-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link CompressionAlgorithm }
+     *
+     */
+    public void setCompression(CompressionAlgorithm value) {
+        this.compression = value;
+    }
 
-	/**
-	 * Legt den Wert der integrityCheckAlgorithm-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link IntegrityCheckAlgorithm }
-	 *
-	 */
-	public void setIntegrityCheckAlgorithm(IntegrityCheckAlgorithm value) {
-		this.integrityCheckAlgorithm = value;
-	}
+    /**
+     * Legt den Wert der integrityCheck-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is byte[]
+     */
+    public void setIntegrityCheck(byte[] value) {
+        this.integrityCheck = value;
+    }
 
-	/**
-	 * Legt den Wert der language-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setLanguage(String value) {
-		this.language = value;
-	}
+    /**
+     * Legt den Wert der integrityCheckAlgorithm-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link IntegrityCheckAlgorithm }
+     *
+     */
+    public void setIntegrityCheckAlgorithm(IntegrityCheckAlgorithm value) {
+        this.integrityCheckAlgorithm = value;
+    }
 
-	/**
-	 * Legt den Wert der mediaType-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setMediaType(String value) {
-		this.mediaType = value;
-	}
+    /**
+     * Legt den Wert der language-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setLanguage(String value) {
+        this.language = value;
+    }
 
-	/**
-	 * Legt den Wert der reference-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link TEL }
-	 *
-	 */
-	public void setReference(TEL value) {
-		this.reference = value;
-	}
+    /**
+     * Legt den Wert der mediaType-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setMediaType(String value) {
+        this.mediaType = value;
+    }
 
-	/**
-	 * Legt den Wert der thumbnail-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link Thumbnail }
-	 *
-	 */
-	public void setThumbnail(Thumbnail value) {
-		this.thumbnail = value;
-	}
+    /**
+     * Legt den Wert der reference-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link TEL }
+     *
+     */
+    public void setReference(TEL value) {
+        this.reference = value;
+    }
 
+    /**
+     * Legt den Wert der thumbnail-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link Thumbnail }
+     *
+     */
+    public void setThumbnail(Thumbnail value) {
+        this.thumbnail = value;
+    }
 }

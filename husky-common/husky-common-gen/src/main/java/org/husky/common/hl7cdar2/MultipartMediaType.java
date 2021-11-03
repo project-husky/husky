@@ -47,26 +47,26 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum MultipartMediaType {
 
-	@XmlEnumValue("multipart/x-hl7-cda-level1")
-	MULTIPART_X_HL_7_CDA_LEVEL_1("multipart/x-hl7-cda-level1");
+    @XmlEnumValue("multipart/x-hl7-cda-level1")
+    MULTIPART_X_HL_7_CDA_LEVEL_1("multipart/x-hl7-cda-level1");
 
-	public static MultipartMediaType fromValue(String v) {
-		for (MultipartMediaType c : MultipartMediaType.values()) {
-			if (c.value.equals(v)) {
-				return c;
-			}
-		}
-		throw new IllegalArgumentException(v);
-	}
+    public static MultipartMediaType fromValue(String v) {
+        for (MultipartMediaType c : MultipartMediaType.values()) {
+            if (c.value.equals(v)) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException(v);
+    }
 
-	private final String value;
+    private final String value;
 
-	MultipartMediaType(String v) {
-		value = v;
-	}
+    MultipartMediaType(String v) {
+        value = v;
+    }
 
-	public String value() {
-		return value;
-	}
+    public String value() {
+        return value;
+    }
 
 }

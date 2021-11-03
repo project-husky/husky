@@ -273,14 +273,14 @@ public class Util {
 
 		if (city != null) {
 			var obj = new AdxpCity();
-			obj.xmlContent = city;
+			obj.setXmlMixed(city);
 			retVal.getContent()
 					.add(new JAXBElement<AdxpCity>(new QName(NAMESPACE_HL7_V3, "city"), AdxpCity.class, obj));
 		}
 
 		if (zip != null) {
 			var obj = new AdxpPostalCode();
-			obj.xmlContent = zip;
+			obj.setXmlMixed(zip);
 			retVal.getContent().add(new JAXBElement<AdxpPostalCode>(new QName(NAMESPACE_HL7_V3, "postalCode"),
 					AdxpPostalCode.class, obj));
 		}
@@ -525,7 +525,7 @@ public class Util {
 			final var mdhtCustOrg = new POCDMT000040CustodianOrganization();
 
 			final var on = new ON();
-			on.xmlContent = organization.getPrimaryName().getFullName();
+			on.setXmlMixed(organization.getPrimaryName().getFullName());
 
 			if (!organization.getHl7CdaR2Pocdmt000040Organization().getName().isEmpty()
 					&& organization.getHl7CdaR2Pocdmt000040Organization().getName().get(0).getUse() != null) {
@@ -570,7 +570,7 @@ public class Util {
 	 */
 	public static ED createEd(String text) {
 		final var ed = new ED();
-		ed.xmlContent = text;
+		ed.setXmlMixed(text);
 		return ed;
 	}
 
@@ -718,7 +718,7 @@ public class Util {
 	 */
 	private static ON createOnFromPn(PN pn) {
 		final var on = new ON();
-		on.xmlContent = pn.xmlContent;
+		on.setXmlMixed(pn.getXmlMixed());
 		return on;
 	}
 
@@ -844,7 +844,7 @@ public class Util {
 	 */
 	public static PN createPnFromOn(org.husky.common.hl7cdar2.ON on) {
 		final var pn = new org.husky.common.hl7cdar2.PN();
-		pn.xmlContent = on.xmlContent;
+		pn.setXmlMixed(on.getXmlMixed());
 		return pn;
 	}
 
@@ -914,7 +914,7 @@ public class Util {
 		final var tel = new TEL();
 		final var ed = new ED();
 		tel.setValue(url);
-		ed.xmlContent = narrativeText;
+		ed.setXmlMixed(narrativeText);
 		ed.setReference(tel);
 		return ed;
 	}
@@ -1132,7 +1132,7 @@ public class Util {
 			if (er.getTypeCode().equals(XActRelationshipEntryRelationship.SUBJ)) {
 				// Get the ed and update it with the reference
 				final var ed = er.getAct().getText();
-				return ed.xmlContent;
+				return ed.getTextContent();
 			}
 		}
 		return null;
@@ -1154,7 +1154,7 @@ public class Util {
 				// Get the ed and update it with the reference
 				final var ed = er.getAct().getText();
 				ed.setReference(Util.createReferenceTel(contentId));
-				return ed.xmlContent;
+				return ed.getTextContent();
 			}
 		}
 		return null;
@@ -1600,11 +1600,11 @@ public class Util {
 		if (list.isEmpty()) {
 			return "";
 		}
-		final String names = list.get(0).xmlContent;
+		final String names = list.get(0).getTextContent();
 		if (list.size() > 1) {
 			final List<String> nameList = new ArrayList<>();
 			for (var i = 0; i < list.size(); i++) {
-				nameList.add(list.get(i).xmlContent);
+				nameList.add(list.get(i).getTextContent());
 			}
 			return Util.join(nameList, " ");
 		}
@@ -1662,7 +1662,7 @@ public class Util {
 	 */
 	public static ST st(String text) {
 		final var value = new ST();
-		value.xmlContent = text;
+		value.setXmlMixed(text);
 		return value;
 	}
 

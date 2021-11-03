@@ -22,6 +22,8 @@
 
 package org.husky.common.hl7cdar2;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,199 +80,201 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlSeeAlso({ BXITCD.class, SXCMCD.class, CE.class })
 public class CD extends ANY {
 
-	protected ED originalText;
-	protected List<CR> qualifier;
-	protected List<CD> translation;
-	@XmlAttribute(name = "code")
-	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-	protected String code;
-	@XmlAttribute(name = "codeSystem")
-	protected String codeSystem;
-	@XmlAttribute(name = "codeSystemName")
-	protected String codeSystemName;
-	@XmlAttribute(name = "codeSystemVersion")
-	protected String codeSystemVersion;
-	@XmlAttribute(name = "displayName")
-	protected String displayName;
+    protected ED originalText;
+    protected List<CR> qualifier;
+    protected List<CD> translation;
+    @XmlAttribute(name = "code")
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    protected String code;
+    @XmlAttribute(name = "codeSystem")
+    protected String codeSystem;
+    @XmlAttribute(name = "codeSystemName")
+    protected String codeSystemName;
+    @XmlAttribute(name = "codeSystemVersion")
+    protected String codeSystemVersion;
+    @XmlAttribute(name = "displayName")
+    protected String displayName;
 
-	/**
-	 * Ruft den Wert der code-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getCode() {
-		return code;
-	}
+    /**
+     * Ruft den Wert der code-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getCode() {
+        return code;
+    }
 
-	/**
-	 * Ruft den Wert der codeSystem-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getCodeSystem() {
-		return codeSystem;
-	}
+    /**
+     * Ruft den Wert der codeSystem-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getCodeSystem() {
+        return codeSystem;
+    }
 
-	/**
-	 * Ruft den Wert der codeSystemName-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getCodeSystemName() {
-		return codeSystemName;
-	}
+    /**
+     * Ruft den Wert der codeSystemName-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getCodeSystemName() {
+        return codeSystemName;
+    }
 
-	/**
-	 * Ruft den Wert der codeSystemVersion-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getCodeSystemVersion() {
-		return codeSystemVersion;
-	}
+    /**
+     * Ruft den Wert der codeSystemVersion-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getCodeSystemVersion() {
+        return codeSystemVersion;
+    }
 
-	/**
-	 * Ruft den Wert der displayName-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getDisplayName() {
-		return displayName;
-	}
+    /**
+     * Ruft den Wert der displayName-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getDisplayName() {
+        return displayName;
+    }
 
-	/**
-	 * Ruft den Wert der originalText-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link ED }
-	 *
-	 */
-	public ED getOriginalText() {
-		return originalText;
-	}
+    /**
+     * Ruft den Wert der originalText-Eigenschaft ab.
+     *
+     * @return possible object is {@link ED }
+     *
+     */
+    public ED getOriginalText() {
+        return originalText;
+    }
 
-	/**
-	 * Gets the value of the qualifier property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the qualifier property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getQualifier().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link CR }
-	 *
-	 *
-	 */
-	public List<CR> getQualifier() {
-		if (qualifier == null) {
-			qualifier = new ArrayList<CR>();
-		}
-		return this.qualifier;
-	}
+    /**
+     * Gets the value of the qualifier property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the qualifier property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getQualifier().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link CR }
+     *
+     *
+     */
+    @NonNull
+    public List<CR> getQualifier() {
+        if (qualifier == null) {
+            qualifier = new ArrayList<CR>();
+        }
+        return this.qualifier;
+    }
 
-	/**
-	 * Gets the value of the translation property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the translation property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getTranslation().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link CD }
-	 *
-	 *
-	 */
-	public List<CD> getTranslation() {
-		if (translation == null) {
-			translation = new ArrayList<CD>();
-		}
-		return this.translation;
-	}
+    /**
+     * Gets the value of the translation property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the translation property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getTranslation().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link CD }
+     *
+     *
+     */
+    @NonNull
+    public List<CD> getTranslation() {
+        if (translation == null) {
+            translation = new ArrayList<CD>();
+        }
+        return this.translation;
+    }
 
-	/**
-	 * Legt den Wert der code-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setCode(String value) {
-		this.code = value;
-	}
+    /**
+     * Legt den Wert der code-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setCode(String value) {
+        this.code = value;
+    }
 
-	/**
-	 * Legt den Wert der codeSystem-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setCodeSystem(String value) {
-		this.codeSystem = value;
-	}
+    /**
+     * Legt den Wert der codeSystem-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setCodeSystem(String value) {
+        this.codeSystem = value;
+    }
 
-	/**
-	 * Legt den Wert der codeSystemName-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setCodeSystemName(String value) {
-		this.codeSystemName = value;
-	}
+    /**
+     * Legt den Wert der codeSystemName-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setCodeSystemName(String value) {
+        this.codeSystemName = value;
+    }
 
-	/**
-	 * Legt den Wert der codeSystemVersion-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setCodeSystemVersion(String value) {
-		this.codeSystemVersion = value;
-	}
+    /**
+     * Legt den Wert der codeSystemVersion-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setCodeSystemVersion(String value) {
+        this.codeSystemVersion = value;
+    }
 
-	/**
-	 * Legt den Wert der displayName-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setDisplayName(String value) {
-		this.displayName = value;
-	}
+    /**
+     * Legt den Wert der displayName-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setDisplayName(String value) {
+        this.displayName = value;
+    }
 
-	/**
-	 * Legt den Wert der originalText-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link ED }
-	 *
-	 */
-	public void setOriginalText(ED value) {
-		this.originalText = value;
-	}
+    /**
+     * Legt den Wert der originalText-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link ED }
+     *
+     */
+    public void setOriginalText(ED value) {
+        this.originalText = value;
+    }
 
 }

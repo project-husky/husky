@@ -58,32 +58,32 @@ import javax.xml.bind.annotation.XmlType;
 @XmlSeeAlso({ ED.class })
 public abstract class BIN extends ANY {
 
-	@XmlAttribute(name = "representation")
-	protected BinaryDataEncoding representation;
+    @XmlAttribute(name = "representation")
+    protected BinaryDataEncoding representation;
 
-	/**
-	 * Ruft den Wert der representation-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link BinaryDataEncoding }
-	 *
-	 */
-	public BinaryDataEncoding getRepresentation() {
-		if (representation == null) {
-			return BinaryDataEncoding.TXT;
-		} else {
-			return representation;
-		}
-	}
+    /**
+     * Ruft den Wert der representation-Eigenschaft ab.
+     *
+     * @return possible object is {@link BinaryDataEncoding }
+     *
+     */
+    public BinaryDataEncoding getRepresentation() {
+        if (representation == null) {
+            return BinaryDataEncoding.TXT;
+        } else {
+            return representation;
+        }
+    }
 
-	/**
-	 * Legt den Wert der representation-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link BinaryDataEncoding }
-	 *
-	 */
-	public void setRepresentation(BinaryDataEncoding value) {
-		this.representation = value;
-	}
+    /**
+     * Legt den Wert der representation-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link BinaryDataEncoding }
+     *
+     */
+    public void setRepresentation(BinaryDataEncoding value) {
+        this.representation = value;
+    }
 
 }

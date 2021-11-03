@@ -49,14 +49,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ActRelationshipFulfills {
 
-	FLFS, OCCR, OREF, SCH;
+    FLFS, OCCR, OREF, SCH;
 
-	public static ActRelationshipFulfills fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ActRelationshipFulfills fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

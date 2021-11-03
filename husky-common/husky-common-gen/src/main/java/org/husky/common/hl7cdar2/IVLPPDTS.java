@@ -73,54 +73,54 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "IVL_PPD_TS", propOrder = { "rest" })
 public class IVLPPDTS extends SXCMPPDTS {
 
-	@XmlElementRefs({
-			@XmlElementRef(name = "low", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
-			@XmlElementRef(name = "high", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
-			@XmlElementRef(name = "center", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
-			@XmlElementRef(name = "width", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false) })
-	protected List<JAXBElement<? extends QTY>> rest;
+    @XmlElementRefs({
+            @XmlElementRef(name = "low", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "high", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "center", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
+            @XmlElementRef(name = "width", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false) })
+    protected List<JAXBElement<? extends QTY>> rest;
 
-	/**
-	 * Ruft das restliche Contentmodell ab.
-	 *
-	 * <p>
-	 * Sie rufen diese "catch-all"-Eigenschaft aus folgendem Grund ab: Der
-	 * Feldname "High" wird von zwei verschiedenen Teilen eines Schemas
-	 * verwendet. Siehe: Zeile 469 von
-	 * file:/C:/src/git/ehc-trunk/common/husky-common-gen/src/main/resources/schemas/hl7cdar2/coreschemas/datatypes.xsd
-	 * Zeile 460 von
-	 * file:/C:/src/git/ehc-trunk/common/husky-common-gen/src/main/resources/schemas/hl7cdar2/coreschemas/datatypes.xsd
-	 * <p>
-	 * Um diese Eigenschaft zu entfernen, wenden Sie eine Eigenschaftenanpassung
-	 * für eine der beiden folgenden Deklarationen an, um deren Namen zu ändern:
-	 * Gets the value of the rest property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the rest property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getRest().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link JAXBElement }{@code <}{@link IVXBPPDTS }{@code >}
-	 * {@link JAXBElement }{@code <}{@link IVXBPPDTS }{@code >}
-	 * {@link JAXBElement }{@code <}{@link PPDTS }{@code >} {@link JAXBElement
-	 * }{@code <}{@link PPDPQ }{@code >}
-	 *
-	 *
-	 */
-	public List<JAXBElement<? extends QTY>> getRest() {
-		if (rest == null) {
-			rest = new ArrayList<JAXBElement<? extends QTY>>();
-		}
-		return this.rest;
-	}
+    /**
+     * Ruft das restliche Contentmodell ab.
+     *
+     * <p>
+     * Sie rufen diese "catch-all"-Eigenschaft aus folgendem Grund ab: Der
+     * Feldname "High" wird von zwei verschiedenen Teilen eines Schemas
+     * verwendet. Siehe: Zeile 469 von
+     * file:/C:/src/git/ehc-trunk/common/ehealth_connector-common-gen/src/main/resources/schemas/hl7cdar2/coreschemas/datatypes.xsd
+     * Zeile 460 von
+     * file:/C:/src/git/ehc-trunk/common/ehealth_connector-common-gen/src/main/resources/schemas/hl7cdar2/coreschemas/datatypes.xsd
+     * <p>
+     * Um diese Eigenschaft zu entfernen, wenden Sie eine Eigenschaftenanpassung
+     * für eine der beiden folgenden Deklarationen an, um deren Namen zu ändern:
+     * Gets the value of the rest property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the rest property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getRest().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link JAXBElement }{@code <}{@link IVXBPPDTS }{@code >}
+     * {@link JAXBElement }{@code <}{@link IVXBPPDTS }{@code >}
+     * {@link JAXBElement }{@code <}{@link PPDTS }{@code >} {@link JAXBElement
+     * }{@code <}{@link PPDPQ }{@code >}
+     *
+     *
+     */
+    public List<JAXBElement<? extends QTY>> getRest() {
+        if (rest == null) {
+            rest = new ArrayList<JAXBElement<? extends QTY>>();
+        }
+        return this.rest;
+    }
 
 }

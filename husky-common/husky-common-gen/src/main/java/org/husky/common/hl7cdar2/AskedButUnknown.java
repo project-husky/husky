@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum AskedButUnknown {
 
-	ASKU, NAV;
+    ASKU, NAV;
 
-	public static AskedButUnknown fromValue(String v) {
-		return valueOf(v);
-	}
+    public static AskedButUnknown fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

@@ -48,14 +48,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ParticipationVerifier {
 
-	VRF, AUTHEN, LA;
+    VRF, AUTHEN, LA;
 
-	public static ParticipationVerifier fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ParticipationVerifier fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

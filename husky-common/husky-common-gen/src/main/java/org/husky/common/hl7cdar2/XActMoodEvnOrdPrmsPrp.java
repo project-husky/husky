@@ -49,14 +49,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XActMoodEvnOrdPrmsPrp {
 
-	EVN, PRMS, PRP, RQO;
+    EVN, PRMS, PRP, RQO;
 
-	public static XActMoodEvnOrdPrmsPrp fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XActMoodEvnOrdPrmsPrp fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

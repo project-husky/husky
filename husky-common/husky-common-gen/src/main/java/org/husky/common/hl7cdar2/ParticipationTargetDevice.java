@@ -48,14 +48,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ParticipationTargetDevice {
 
-	DEV, NRD, RDV;
+    DEV, NRD, RDV;
 
-	public static ParticipationTargetDevice fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ParticipationTargetDevice fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }
