@@ -5,9 +5,9 @@ In Husky the PPQ profile is implemented in the `husky-ppq` module. There are fou
 
 ## Add policies
 
-The transaction to add policies is called PPQ-1 (Privacy Policy Feed). It is a transaction to add a policy or a policy set in a policy repository. In husky project, policy feed is implemented in class [SimplePpfClient] (/docs/javadoc/...) `SimplePpfClient`.
+The transaction to add policies is called PPQ-1 (Privacy Policy Feed). It is a transaction to add a policy or a policy set in a policy repository. In husky project, policy feed is implemented in class [SimplePpfClient](javadoc/org/husky/communication/ch/ppq/impl/clients/SimplePpfClient.html).
 
-An example for policy feed can be found in integration tests of husky ppq module. The class is called `SimplePpfClientTest`. To add a policy you have to create an instance of `SimplePpfClient` and create an instance of `PrivacyPolicyFeed` with method `AddPolicy`. After that the method `send` must be executed. Further details can be found in the Javadoc.
+An example for policy feed can be found in integration tests of husky ppq module. The class is called [SimplePpfClientTest](javadoc/org/husky/communication/ch/ppq/integration/SimplePpfClientTest.html). To add a policy you have to create an instance of [SimplePpfClient](javadoc/org/husky/communication/ch/ppq/impl/clients/SimplePpfClient.html) and create an instance of [PrivacyPolicyFeed](javadoc/org/husky/communication/ch/ppq/api/PrivacyPolicyFeed.html) with method `AddPolicy`. After that the method [send](javadoc/org/husky/communication/ch/ppq/api/SimplePpfClient.html#send(org.husky.xua.core.SecurityHeaderElement,org.husky.communication.ch.ppq.api.PrivacyPolicyFeed)) must be executed. Further details can be found in the Javadoc.
 
 ```java
 PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore).clientKeyStorePassword(clientKeyStorePass).create();
@@ -33,9 +33,9 @@ Further details on the implementation can be found at [IPF CH-PPQ-1](https://oeh
 
 ## Update policies
 
-The transaction to update policies is called PPQ-1 (Privacy Policy Feed). It is a transaction to update a policy or a policy set in a policy repository. In husky project, policy feed is implemented in class `SimplePpfClient`.
+The transaction to update policies is called PPQ-1 (Privacy Policy Feed). It is a transaction to update a policy or a policy set in a policy repository. In husky project, policy feed is implemented in class [SimplePpfClient](javadoc/org/husky/communication/ch/ppq/impl/clients/SimplePpfClient.html).
 
-An example for policy feed can be found in integration tests of husky ppq module. The class is called `SimplePpfClientTest`. To update a policy you have to create an instance of `SimplePpfClient` and create an instance of `PrivacyPolicyFeed` with method `UpdatePolicy`. After that the method `send` must be executed. Further details can be found in the Javadoc.
+An example for policy feed can be found in integration tests of husky ppq module. The class is called [SimplePpfClientTest](javadoc/org/husky/communication/ch/ppq/integration/SimplePpfClientTest.html). To update a policy you have to create an instance of [SimplePpfClient](javadoc/org/husky/communication/ch/ppq/impl/clients/SimplePpfClient.html) and create an instance of [PrivacyPolicyFeed](javadoc/org/husky/communication/ch/ppq/api/PrivacyPolicyFeed.html) with method `UpdatePolicy`. After that the method [send](javadoc/org/husky/communication/ch/ppq/api/SimplePpfClient.html#send(org.husky.xua.core.SecurityHeaderElement,org.husky.communication.ch.ppq.api.PrivacyPolicyFeed)) must be executed. Further details can be found in the Javadoc.
 
 ```java
 PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore).clientKeyStorePassword(clientKeyStorePass).create();
@@ -67,9 +67,9 @@ Further details on the implementation can be found at [IPF CH-PPQ-1](https://oeh
 
 ## Delete policies
 
-The transaction to delete policies is called PPQ-1 (Privacy Policy Feed). It is a transaction to delete a policy or a policy set in a policy repository. In husky project, policy feed is implemented in class `SimplePpfClient`.
+The transaction to delete policies is called PPQ-1 (Privacy Policy Feed). It is a transaction to delete a policy or a policy set in a policy repository. In husky project, policy feed is implemented in class [SimplePpfClient](javadoc/org/husky/communication/ch/ppq/impl/clients/SimplePpfClient.html).
 
-An example for policy feed can be found in integration tests of husky ppq module. The class is called `SimplePpfClientTest`. To delete a policy you have to create an instance of `SimplePpfClient` and create an instance of `PrivacyPolicyFeed` with method `DeletePolicy`. After that the method `send` must be executed. Further details can be found in the Javadoc.
+An example for policy feed can be found in integration tests of husky ppq module. The class is called [SimplePpfClientTest](javadoc/org/husky/communication/ch/ppq/integration/SimplePpfClientTest.html). To delete a policy you have to create an instance of [SimplePpfClient](javadoc/org/husky/communication/ch/ppq/impl/clients/SimplePpfClient.html) and create an instance of [PrivacyPolicyFeed](javadoc/org/husky/communication/ch/ppq/api/PrivacyPolicyFeed.html) with method `DeletePolicy`. After that the method [send](javadoc/org/husky/communication/ch/ppq/api/SimplePpfClient.html#send(org.husky.xua.core.SecurityHeaderElement,org.husky.communication.ch.ppq.api.PrivacyPolicyFeed)) must be executed. Further details can be found in the Javadoc.
 
 ```java
 PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore).clientKeyStorePassword(clientKeyStorePass).create();
@@ -103,9 +103,9 @@ Further details on the implementation can be found at [IPF CH-PPQ-1](https://oeh
 
 ## Retrieve policies
 
-The transaction to retrieve policies is called PPQ-2. It is a transaction to retrieve policies from a policy repository. In husky project, policy query is implemented in class `SimplePpqClient`.
+The transaction to retrieve policies is called PPQ-2. It is a transaction to retrieve policies from a policy repository. In husky project, policy query is implemented in class [SimplePpqClient](javadoc/org/husky/communication/ch/ppq/impl/clients/SimplePpqClient.html).
 
-An example for policy query can be found in integration tests of husky ppq module. The class is called `SimplePpqClientTest`. To retrieve policies you have to create an instance of `SimplePpqClient` and create an instance of `PrivacyPolicyQuery`. After that the method `send` must be executed. Further details can be found in the Javadoc.
+An example for policy query can be found in integration tests of husky ppq module. The class is called [SimplePpqClientTest](javadoc/org/husky/communication/ch/ppq/integration/SimplePpqClientTest.html). To retrieve policies you have to create an instance of [SimplePpqClient](javadoc/org/husky/communication/ch/ppq/impl/clients/SimplePpqClient.html) and create an instance of [PrivacyPolicyQuery](javadoc/org/husky/communication/ch/ppq/api/PrivacyPolicyQuery.html). After that the method [send](javadoc/org/husky/communication/ch/ppq/impl/clients/SimplePpqClient.html#send(org.husky.xua.core.SecurityHeaderElement,org.husky.communication.ch.ppq.api.PrivacyPolicyQuery)) must be executed. Further details can be found in the Javadoc.
 
 ```java
 PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore).clientKeyStorePassword(clientKeyStorePass).create();

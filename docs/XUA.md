@@ -1,13 +1,13 @@
 # Cross-Enterprise User Assertion Profile (XUA)
 
 This profile provides a tool to communicate details about the identity of an authenticated user between different organizations. For these cross-enterprise transactions, it is important that the recipient can make access decisions based on the details provided. The XUA profile includes several actors. The central actors are the x-service user and the x-service provider. Moreover there are the user authentication provider and the X-Assertion Provider.
-In Husky the XUA profile is implemented in the `husky-xua-gen-impl` module, more precisely in class `SimpleXuaClient`.
+In Husky the XUA profile is implemented in the `husky-xua-gen-impl` module, more precisely in class [SimpleXuaClient](javadoc/org/husky/xua/communication/clients/impl/SimpleXuaClient.html).
 
 ## Provide assertion
 
 The transaction to provide a user assertion is called [ITI-40](<https://profiles.ihe.net/ITI/TF/Volume2/ITI-40.html>). This transaction is used by the service user to submit an identity assertion to the service provider. The identity assertion is verified using the third party issuer.
 
-An example for providing an identity assertion to service provider can be found in integration tests of husky xua-gen-impl module. The class is called `XuaClientTest`. To provide an identity assertion you have to create an instance of XuaClient. Furthermore you must create an instance of `XUserAssertionRequest`. You must submit the identity assertion and the created request with the method `send()`.
+An example for providing an identity assertion to service provider can be found in integration tests of husky xua-gen-impl module. The class is called [XuaClientTest](javadoc/org/husky/xua/communication/integration/XuaClientTest.html). To provide an identity assertion you have to create an instance of XuaClient. Furthermore you must create an instance of [XUserAssertionRequest](javadoc/org/husky/xua/communication/xua/XUserAssertionRequest.html). You must submit the identity assertion and the created request with the method [send](javadoc/org/husky/xua/communication/clients/impl/SimpleXuaClient.html#send(org.husky.xua.core.SecurityHeaderElement,org.husky.xua.communication.xua.XUserAssertionRequest)).
 
 ```java
 XuaClientConfig xuaClientConfig = new XuaClientConfigBuilderImpl().clientKeyStore(clientKeyStore)
