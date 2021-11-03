@@ -17,9 +17,9 @@
 package org.husky.xua.deserialization.impl;
 
 import java.io.ByteArrayInputStream;
+import java.util.Objects;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-
+import org.husky.common.utils.xml.XmlFactories;
 import org.husky.xua.deserialization.OpenSaml2Deserializer;
 import org.husky.xua.exceptions.DeserializeException;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
@@ -34,14 +34,6 @@ import org.w3c.dom.Element;
  * <!-- @formatter:on -->
  */
 public class OpenSaml2DeserializerImpl<T> implements OpenSaml2Deserializer<T> {
-
-	/**
-	 * Instantiates a new OpenSaml2DeserializerImpl.
-	 */
-	public OpenSaml2DeserializerImpl() {
-		System.setProperty("javax.xml.parsers.DocumentBuilderFactory",
-				"org.apache.xerces.jaxp.DocumentBuilderFactoryImpl");
-	}
 
 	/**
 	 *
@@ -67,15 +59,9 @@ public class OpenSaml2DeserializerImpl<T> implements OpenSaml2Deserializer<T> {
 	 * @see org.husky.xua.deserialization.OpenSaml2Deserializer#deserializeFromByteArrayToXmlElement(byte[])
 	 */
 	@Override
-	public Element deserializeFromByteArrayToXmlElement(byte[] aXmlBytes)
-			throws DeserializeException {
-		final var FEATURE = "http://xml.org/sax/features/external-general-entities";
+	public Element deserializeFromByteArrayToXmlElement(byte[] aXmlBytes) throws DeserializeException {
 		try {
-			final var documentBuilderFactory = DocumentBuilderFactory
-					.newInstance();
-			documentBuilderFactory.setNamespaceAware(true);
-			documentBuilderFactory.setFeature(FEATURE, false);
-			final var docBuilder = documentBuilderFactory.newDocumentBuilder();
+			final var docBuilder = XmlFactories.newSafeDocumentBuilder();
 			final var document = docBuilder.parse(new ByteArrayInputStream(aXmlBytes));
 
 			return document.getDocumentElement();
@@ -110,7 +96,7 @@ public class OpenSaml2DeserializerImpl<T> implements OpenSaml2Deserializer<T> {
 					.getUnmarshallerFactory();
 			final var unmarshaller = marshallerFactory.getUnmarshaller(aXmlElement);
 
-			return (T) unmarshaller.unmarshall(aXmlElement);
+			return (T) Objects.requireNonNull(unmarshaller).unmarshall(aXmlElement);
 		} catch (final Exception e) {
 			throw new DeserializeException(e);
 		}

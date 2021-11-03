@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.xml.namespace.QName;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.camel.CamelContext;
@@ -15,6 +14,7 @@ import org.apache.camel.support.DefaultExchange;
 import org.apache.camel.util.CastUtils;
 import org.apache.cxf.headers.Header;
 import org.apache.cxf.headers.Header.Direction;
+import org.husky.common.utils.xml.XmlFactories;
 import org.husky.xua.core.SecurityHeaderElement;
 import org.husky.xua.exceptions.SerializeException;
 import org.husky.xua.serialization.impl.OpenSaml2SerializerImpl;
@@ -61,8 +61,7 @@ public abstract class CamelService implements CamelContextAware {
 		var wssElement = new OpenSaml2SerializerImpl()
 				.serializeToXml((XMLObject) securityHeaderElement.getWrappedObject());
 
-		var docFactory = DocumentBuilderFactory.newInstance();
-		var docBuilder = docFactory.newDocumentBuilder();
+		var docBuilder = XmlFactories.newSafeDocumentBuilder();
 		var doc = docBuilder.newDocument();
 
 		var wsseElement = doc.createElementNS(

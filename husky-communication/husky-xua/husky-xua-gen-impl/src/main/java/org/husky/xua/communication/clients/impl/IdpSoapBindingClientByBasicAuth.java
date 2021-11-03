@@ -22,7 +22,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 import javax.xml.XMLConstants;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.TransformerException;
@@ -146,9 +145,7 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 		final var authnRequestElement = serializer.toXmlElement(aAuthnRequest);
 
 		// create xml dokument
-		final var docFactory = DocumentBuilderFactory.newInstance();
-		docFactory.setNamespaceAware(true);
-		final var docBuilder = docFactory.newDocumentBuilder();
+		final var docBuilder = XmlFactories.newSafeDocumentBuilder();
 		final var soapDoc = docBuilder.newDocument();
 
 		// create soap envelope

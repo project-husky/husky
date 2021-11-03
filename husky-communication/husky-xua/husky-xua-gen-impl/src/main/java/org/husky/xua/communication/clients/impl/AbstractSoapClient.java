@@ -31,7 +31,6 @@ import java.util.regex.Pattern;
 
 import javax.xml.XMLConstants;
 import javax.xml.namespace.NamespaceContext;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.TransformerException;
@@ -58,6 +57,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContexts;
 import org.apache.http.util.EntityUtils;
+import org.husky.common.utils.xml.XmlFactories;
 import org.husky.xua.communication.config.SoapClientConfig;
 import org.husky.xua.communication.config.SoapClientConfig.SoapVersion;
 import org.husky.xua.communication.soap.impl.WsaHeaderValue;
@@ -99,9 +99,7 @@ public abstract class AbstractSoapClient<T> {
 
 	protected Element createEnvelope() throws ParserConfigurationException {
 		// create xml dokument
-		final var docFactory = DocumentBuilderFactory.newInstance();
-		docFactory.setNamespaceAware(true);
-		final var docBuilder = docFactory.newDocumentBuilder();
+		final var docBuilder = XmlFactories.newSafeDocumentBuilder();
 		final var soapDoc = docBuilder.newDocument();
 
 		// create soap envelope
@@ -297,10 +295,7 @@ public abstract class AbstractSoapClient<T> {
 			throws ParserConfigurationException, UnsupportedOperationException, SAXException,
 			IOException, XPathExpressionException {
 
-		final var docFactory = DocumentBuilderFactory.newInstance();
-		docFactory.setNamespaceAware(true);
-		docFactory.setAttribute("http://xml.org/sax/features/external-general-entities", false);
-		final var docBuilder = docFactory.newDocumentBuilder();
+		final var docBuilder = XmlFactories.newSafeDocumentBuilder();
 		final var soapDocument = docBuilder
 				.parse(new ByteArrayInputStream(content.getBytes()));
 
@@ -402,10 +397,7 @@ public abstract class AbstractSoapClient<T> {
 
 	private void paserSoapFault(String retVal) throws ParserConfigurationException, SAXException,
 			IOException, XPathExpressionException, SoapException {
-		final var docFactory = DocumentBuilderFactory.newInstance();
-		docFactory.setNamespaceAware(true);
-		docFactory.setAttribute("http://xml.org/sax/features/external-general-entities", false);
-		final var docBuilder = docFactory.newDocumentBuilder();
+		final var docBuilder = XmlFactories.newSafeDocumentBuilder();
 		final var document = docBuilder.parse(new ByteArrayInputStream(retVal.getBytes()));
 
 		String prefix = document.getDocumentElement().getPrefix();

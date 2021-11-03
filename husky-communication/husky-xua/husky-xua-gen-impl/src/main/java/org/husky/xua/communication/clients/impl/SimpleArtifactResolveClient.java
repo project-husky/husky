@@ -20,8 +20,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.UUID;
 
-import javax.xml.XMLConstants;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactoryConfigurationError;
@@ -29,6 +27,7 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
 import org.apache.http.entity.StringEntity;
+import org.husky.common.utils.xml.XmlFactories;
 import org.husky.xua.communication.clients.ArtifactResolveClient;
 import org.husky.xua.communication.config.SoapClientConfig;
 import org.husky.xua.communication.soap.impl.WsaHeaderValue;
@@ -93,11 +92,7 @@ public class SimpleArtifactResolveClient extends AbstractSoapClient<ArtifactResp
 	@Override
 	protected ArtifactResponse parseResponse(String content) throws ClientSendException {
 		try {
-			final var docFactory = DocumentBuilderFactory.newInstance();
-			docFactory.setNamespaceAware(true);
-			docFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-			docFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
-			final var docBuilder = docFactory.newDocumentBuilder();
+			final var docBuilder = XmlFactories.newSafeDocumentBuilder();
 			final var soapDocument = docBuilder
 					.parse(new ByteArrayInputStream(content.getBytes()));
 
