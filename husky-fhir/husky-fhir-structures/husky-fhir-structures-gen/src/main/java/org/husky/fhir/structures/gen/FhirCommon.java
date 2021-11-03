@@ -2065,7 +2065,7 @@ public class FhirCommon {
 	public static boolean saveResource(Logger log, String path, IBaseResource fhirResource,
 			String fileName, SaveMode saveMode) {
 		var retVal = true;
-		final String separator = FileUtil.getPlatformSpecificPathSeparator();
+		final String separator = "/";
 		String fullFn = path;
 		if (!path.endsWith(separator))
 			fullFn = fullFn + separator;

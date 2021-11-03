@@ -56,22 +56,9 @@ public class FileUtil {
 	@Deprecated(forRemoval = true) // Use File or Path
 	public static String combinePath(String path1, String path2) {
 		if (!(path1.endsWith("/") || path1.endsWith("\\")))
-			return path1 + getPlatformSpecificPathSeparator() + path2;
+			return path1 + "/" + path2;
 		else
 			return path1 + path2;
-	}
-
-	/**
-	 * Returns "/" for Unix based platforms or "\" for Windows based platforms
-	 *
-	 * @return "/" for Unix based platforms or "\" for Windows based platforms
-	 */
-	@Deprecated(forRemoval = true) // Always use slashes, it works on Windows too
-	public static String getPlatformSpecificPathSeparator() {
-		var retVal = "/";
-		if (Util.isWindows())
-			retVal = "\\";
-		return retVal;
 	}
 
 	/**

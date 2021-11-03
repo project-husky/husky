@@ -1170,8 +1170,8 @@ public class Util {
 		var temp = new File(retVal);
 		retVal = temp.getAbsolutePath();
 
-		if (!retVal.endsWith(FileUtil.getPlatformSpecificPathSeparator()))
-			retVal += FileUtil.getPlatformSpecificPathSeparator();
+		if (!retVal.endsWith("/"))
+			retVal += "/";
 		return retVal;
 	}
 
@@ -1215,18 +1215,6 @@ public class Util {
 	}
 
 	/**
-	 * Gets the platform specific line break (\n as default; \r\n for Windows).
-	 *
-	 * @return the platform specific line break
-	 */
-	public static String getPlatformSpecificLineBreak() {
-		var retVal = "\n";
-		if (Util.isWindows())
-			retVal = "\r\n";
-		return retVal;
-	}
-
-	/**
 	 * Gets the rsc directory (./rsc or ../rsc or specified by the command line
 	 * argument rscdir).
 	 *
@@ -1234,12 +1222,9 @@ public class Util {
 	 */
 	public static String getRscDir() {
 
-		String rscDir = new File("").getAbsoluteFile().getAbsolutePath()
-				+ FileUtil.getPlatformSpecificPathSeparator() + "rsc";
+		String rscDir = new File("").getAbsoluteFile().getAbsolutePath() + "/rsc";
 		if (!(new File(rscDir)).exists())
-			rscDir = new File("").getAbsoluteFile().getAbsolutePath()
-					+ FileUtil.getPlatformSpecificPathSeparator() + ".."
-					+ FileUtil.getPlatformSpecificPathSeparator() + "rsc";
+			rscDir = new File("").getAbsoluteFile().getAbsolutePath() + "/../rsc";
 
 		final var runtimeMxBean = ManagementFactory.getRuntimeMXBean();
 		final List<String> vmArgs = runtimeMxBean.getInputArguments();
@@ -1249,8 +1234,8 @@ public class Util {
 			}
 		}
 
-		if (!rscDir.endsWith(FileUtil.getPlatformSpecificPathSeparator()))
-			rscDir += FileUtil.getPlatformSpecificPathSeparator();
+		if (!rscDir.endsWith("/"))
+			rscDir += "/";
 
 		if (!(new File(rscDir)).exists())
 			throw new RuntimeException("rsc dir not found (" + rscDir + ")");
@@ -1339,7 +1324,7 @@ public class Util {
 				log.debug("Trying to use temp folder set by environment variable '" + envVariable
 						+ "': " + tempDirectoryPath);
 			} else {
-				tempDirectoryPath = FileUtil.getPlatformSpecificPathSeparator() + "temp";
+				tempDirectoryPath = "/temp";
 				log.debug("Trying to use hardcoded temp folder: " + tempDirectoryPath);
 			}
 			final var uniqueFile = File.createTempFile("eHC", ".tmp", new File(tempDirectoryPath));
