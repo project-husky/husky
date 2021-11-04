@@ -13,6 +13,10 @@
         <version>2.0-ALPHA</version>
     </parent>
 
+    <properties>
+        <schematron.version>6.2.4</schematron.version>
+    </properties>
+
     <dependencies>
         <!-- Own dependencies -->
         <!-- <dependency>
@@ -37,12 +41,12 @@
         <dependency>
             <groupId>com.helger.schematron</groupId>
             <artifactId>ph-schematron-api</artifactId>
-            <version>6.2.1</version>
+            <version>${schematron.version}</version>
         </dependency>
         <dependency>
             <groupId>com.helger.schematron</groupId>
             <artifactId>ph-schematron-xslt</artifactId>
-            <version>6.2.1</version>
+            <version>${schematron.version}</version>
         </dependency>
 
         <!-- JAXB binding (EDL 1.0) -->
@@ -64,22 +68,18 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>5.3.9</version><!-- TODO -->
         </dependency>
 
         <dependency>
             <!-- The Checker Framework enhances Java's type system to make it more powerful and useful. -->
             <groupId>org.checkerframework</groupId>
             <artifactId>checker-qual</artifactId> <!-- MIT -->
-            <version>3.18.0</version>
         </dependency>
 
         <!-- Tests (EPL 2.0) -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.7.2</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
