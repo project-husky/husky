@@ -17,11 +17,10 @@
 
 package org.husky.common.model;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.time.Instant;
+import java.util.*;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.enums.CodeSystems;
 import org.husky.common.enums.Isco08;
 import org.husky.common.enums.NullFlavor;
@@ -39,6 +38,7 @@ import org.husky.common.hl7cdar2.TEL;
 import org.husky.common.hl7cdar2.TS;
 import org.husky.common.utils.DateUtil;
 import org.husky.common.utils.Util;
+import org.husky.common.utils.time.Hl7Dtm;
 
 /**
  * Author
@@ -136,7 +136,7 @@ public class Author {
 		if (functionCode != null) {
 			mAuthor.setFunctionCode(functionCode.getHl7CdaR2Ce());
 		}
-		mAuthor.setTime(DateUtil.date2TsTzon(DateUtil.nowAsDate()));
+		mAuthor.setTime(DateUtil.date2TsTzon(new Date()));
 
 		setTime(null);
 	}
@@ -518,49 +518,26 @@ public class Author {
 	 *         String</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public Date getTimeAsDate() {
-		if (mAuthor.getTime() != null) {
-			return DateUtil.parseHl7Timestamp(mAuthor.getTime());
+		return Optional.ofNullable(this.getTimeAsInstant()).map(Date::from).orElse(null);
+	}
+
+	/**
+	 * Returns the participation start time as an {@link Hl7Dtm} or {@code null}.
+	 */
+	@Nullable
+	public Hl7Dtm getTimeAsHl7Dtm() {
+		if (mAuthor.getTime() != null && mAuthor.getTime().getValue() != null) {
+			return Hl7Dtm.fromHl7(mAuthor.getTime().getValue());
 		}
 		return null;
 	}
 
 	/**
-	 * <div class="en">Gets the author time. The author/time element represents the
-	 * start time of the author’s participation in the creation of the clinical
-	 * document </div> <div class="de">Liefert die Zeit für den Autor. Diese gibt
-	 * den Startzeitpunkt an, an dem der Autor bei der Erstellung des Dokument
-	 * mitgewirkt hat.</div> <div class="fr"></div> <div class="it"></div>
-	 *
-	 *
-	 * @return date <div class="en">the start time of the participation as
-	 *         string</div> <div class="de">den Startzeitpunkt der Partizipation als
-	 *         String</div> <div class="fr"></div> <div class="it"></div>
+	 * Returns the participation start time as an {@link Hl7Dtm} or {@code null}.
 	 */
-	public IVLTS getTimeAsIVLTS() {
-		IVLTS retVal = null;
-		if (mAuthor.getTime() != null) {
-			retVal = DateUtil.date2IvltsTzon(DateUtil.parseHl7Timestamp(mAuthor.getTime().getValue()));
-		}
-		return retVal;
-	}
-
-	/**
-	 * <div class="en">Gets the author time. The author/time element represents the
-	 * start time of the author’s participation in the creation of the clinical
-	 * document </div> <div class="de">Liefert die Zeit für den Autor. Diese gibt
-	 * den Startzeitpunkt an, an dem der Autor bei der Erstellung des Dokument
-	 * mitgewirkt hat.</div> <div class="fr"></div> <div class="it"></div>
-	 *
-	 *
-	 * @return date <div class="en">the start time of the participation as
-	 *         string</div> <div class="de">den Startzeitpunkt der Partizipation als
-	 *         String</div> <div class="fr"></div> <div class="it"></div>
-	 */
-	public String getTimeAsString() {
-		if (mAuthor.getTime() != null) {
-			return DateUtil.formatDateTimeTzon(DateUtil.parseHl7Timestamp(mAuthor.getTime()));
-		}
-		return null;
+	@Nullable
+	public Instant getTimeAsInstant() {
+		return Optional.ofNullable(this.getTimeAsHl7Dtm()).map(Hl7Dtm::toInstant).orElse(null);
 	}
 
 	/**

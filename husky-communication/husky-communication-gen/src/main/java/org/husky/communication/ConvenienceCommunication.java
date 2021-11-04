@@ -22,6 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
 import java.util.zip.ZipFile;
@@ -507,7 +508,7 @@ public class ConvenienceCommunication extends CamelService {
 
 		// Generate Creation Time with the current time
 		if (docMetadata.getDocumentEntry().getCreationTime() == null) {
-			docMetadata.setCreationTime(DateUtil.nowAsZonedDate());
+			docMetadata.setCreationTime(ZonedDateTime.now());
 
 			var timestamp = new org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp(
 					docMetadata.getCreationTime(), Precision.SECOND);
@@ -590,7 +591,7 @@ public class ConvenienceCommunication extends CamelService {
 
 				// set submission time
 				if (subSet.getSubmissionTime() == null) {
-					subSet.setSubmissionTime(new Timestamp(DateUtil.nowAsZonedDate(), Precision.SECOND));
+					subSet.setSubmissionTime(new Timestamp(ZonedDateTime.now(), Precision.SECOND));
 				}
 
 				// Use the PatientId of the first Document for the Submission set ID
@@ -632,7 +633,7 @@ public class ConvenienceCommunication extends CamelService {
 
 				// set submission time
 				if (subSet.getSubmissionTime() == null) {
-					subSet.setSubmissionTime(new Timestamp(DateUtil.nowAsZonedDate(), Precision.SECOND));
+					subSet.setSubmissionTime(new Timestamp(ZonedDateTime.now(), Precision.SECOND));
 				}
 
 				// Use the PatientId of the first Document for the Submission set ID

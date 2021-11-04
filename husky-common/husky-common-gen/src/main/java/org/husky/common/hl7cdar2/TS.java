@@ -22,11 +22,14 @@
 
 package org.husky.common.hl7cdar2;
 
+import org.husky.common.enums.NullFlavor;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
+import java.util.Objects;
 
 /**
  *
@@ -60,6 +63,16 @@ public class TS extends QTY {
 
     @XmlAttribute(name = "value")
     protected String value;
+
+    public TS() {}
+
+    public TS(final String value) {
+        this.setValue(value);
+    }
+
+    public TS(final NullFlavor value) {
+        this.getNullFlavor().add(Objects.requireNonNullElse(value, NullFlavor.UNKNOWN).getCodeValue());
+    }
 
     /**
      * Ruft den Wert der value-Eigenschaft ab.

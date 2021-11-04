@@ -16,11 +16,15 @@
  */
 package org.husky.common.model;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.hl7cdar2.POCDMT000040Participant2;
 import org.husky.common.utils.DateUtil;
+import org.husky.common.utils.time.Hl7Dtm;
 
 /**
  * The Class Participant. E.g. employer and school informational contacts MAY be
@@ -68,15 +72,31 @@ public class Participant {
 	}
 
 	/**
+	 * Returns the time as an {@link Hl7Dtm} or {@code null}.
+	 */
+	@Nullable
+	public Hl7Dtm getTimeAsHl7Dtm() {
+		if (mParticipant.getTime() != null && mParticipant.getTime().getValue() != null) {
+			return Hl7Dtm.fromHl7(mParticipant.getTime().getValue());
+		}
+		return null;
+	}
+
+	/**
+	 * Returns the time as an {@link Hl7Dtm} or {@code null}.
+	 */
+	@Nullable
+	public Instant getTimeAsInstant() {
+		return Optional.ofNullable(this.getTimeAsHl7Dtm()).map(Hl7Dtm::toInstant).orElse(null);
+	}
+
+	/**
 	 * Gets the time as Java Date Object.
 	 *
 	 * @return the time
 	 */
 	public Date getTime() {
-		if (mParticipant.getTime() != null) {
-			return DateUtil.parseHl7Timestamp(mParticipant.getTime());
-		}
-		return null;
+		return Optional.ofNullable(this.getTimeAsInstant()).map(Date::from).orElse(null);
 	}
 
 	/**

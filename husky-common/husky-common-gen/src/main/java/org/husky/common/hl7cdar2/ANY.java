@@ -28,7 +28,6 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.*;
 
@@ -125,6 +124,7 @@ public abstract class ANY {
      *
      *
      */
+    @NonNull
     public List<String> getNullFlavor() {
         if (nullFlavor == null) {
             nullFlavor = new ArrayList<>();

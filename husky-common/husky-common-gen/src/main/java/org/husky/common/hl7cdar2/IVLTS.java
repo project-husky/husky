@@ -22,8 +22,11 @@
 
 package org.husky.common.hl7cdar2;
 
+import org.husky.common.enums.NullFlavor;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -79,6 +82,16 @@ public class IVLTS extends SXCMTS {
             @XmlElementRef(name = "low", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
             @XmlElementRef(name = "center", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false) })
     protected List<JAXBElement<? extends QTY>> rest;
+
+    public IVLTS() {}
+
+    public IVLTS(final String value) {
+        this.setValue(value);
+    }
+
+    public IVLTS(final NullFlavor value) {
+        this.getNullFlavor().add(Objects.requireNonNullElse(value, NullFlavor.UNKNOWN).getCodeValue());
+    }
 
     /**
      * Ruft das restliche Contentmodell ab.

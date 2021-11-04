@@ -65,6 +65,7 @@ import org.husky.common.hl7cdar2.QTY;
 import org.husky.common.hl7cdar2.TEL;
 import org.husky.common.hl7cdar2.TS;
 import org.husky.common.utils.DateUtil;
+import org.husky.common.utils.time.Hl7Dtm;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Address;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssigningAuthority;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Author;
@@ -1664,7 +1665,7 @@ public class CDAR2Extractor {
 			}
 		}
 
-		timestamp.setDateTime(DateUtil.parseZonedDate(DateUtil.parseHl7Timestamp(tm)));
+		timestamp.setDateTime(Hl7Dtm.toOffsetDateTime(tm).toZonedDateTime());
 
 		return timestamp;
 	}

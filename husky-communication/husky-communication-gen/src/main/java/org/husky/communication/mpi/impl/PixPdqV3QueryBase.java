@@ -674,8 +674,7 @@ public class PixPdqV3QueryBase extends CamelService {
 				patient.setDeceased(dt);
 			}
 			if (pdqPatient.getPatientPerson().getDeceasedTime() != null) {
-				final var deceasedTime = DateUtil
-						.parseHl7Timestamp(pdqPatient.getPatientPerson().getDeceasedTime().getValue());
+				final var deceasedTime = pdqPatient.getPatientPerson().getDeceasedTime().getValue();
 				patient.setDeceased(new DateTimeType(deceasedTime));
 			}
 		}

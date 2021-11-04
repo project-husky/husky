@@ -17,10 +17,7 @@
 
 package org.husky.common.model;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import org.husky.common.basetypes.IdentificatorBaseType;
 import org.husky.common.enums.CodeSystems;
@@ -361,11 +358,7 @@ public class Performer {
 	 *         <div class="fr"></div> <div class="it"></div>
 	 */
 	public IVLTS getTimeAsIVLTS() {
-		IVLTS retVal = null;
-		if (mPerfomer.getTime() != null) {
-			retVal = DateUtil.date2IvltsTzon(DateUtil.parseHl7Timestamp(mPerfomer.getTime().getValue()));
-		}
-		return retVal;
+		return new IVLTS(Optional.ofNullable(mPerfomer.getTime()).map(IVLTS::getValue).orElse(null));
 	}
 
 	/**
