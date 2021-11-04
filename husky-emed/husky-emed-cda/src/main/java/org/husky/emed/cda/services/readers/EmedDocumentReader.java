@@ -4,7 +4,7 @@ import org.husky.common.enums.AdministrativeGender;
 import org.husky.common.hl7cdar2.*;
 import org.husky.common.utils.StreamUtils;
 import org.husky.emed.cda.errors.InvalidEmedContentException;
-import org.husky.emed.cda.utils.time.DateTimes;
+import org.husky.common.utils.time.DateTimes;
 
 import javax.xml.bind.JAXBElement;
 import java.time.LocalDate;

@@ -16,8 +16,8 @@ import org.husky.emed.cda.models.common.RecipientDigest;
 import org.husky.emed.cda.models.document.*;
 import org.husky.emed.cda.utils.IvlTsUtils;
 import org.husky.emed.cda.utils.TemplateIds;
-import org.husky.emed.cda.utils.time.DateTimes;
-import org.husky.emed.cda.utils.time.Hl7Dtm;
+import org.husky.common.utils.time.DateTimes;
+import org.husky.common.utils.time.Hl7Dtm;
 
 import java.math.BigInteger;
 import java.time.Instant;

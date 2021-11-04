@@ -1,6 +1,5 @@
-package org.husky.emed.cda.utils.time;
+package org.husky.common.utils.time;
 
-import org.husky.emed.cda.utils.time.Hl7Dtm;
 import org.junit.jupiter.api.Test;
 
 import java.time.OffsetDateTime;
@@ -12,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  *
  * @author Quentin Ligier
  */
-public class Hl7DtmTest {
+class Hl7DtmTest {
 
     @Test
     void testToOffsetDateTime() {

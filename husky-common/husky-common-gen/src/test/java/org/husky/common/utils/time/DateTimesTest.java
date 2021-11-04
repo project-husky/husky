@@ -1,12 +1,8 @@
-package org.husky.emed.cda.utils.time;
-
+package org.husky.common.utils.time;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.husky.emed.cda.utils.time.DateTimes;
-import org.husky.emed.cda.utils.time.Hl7Dtm;
 
 /**
  * Tests of the {@link DateTimes} class.

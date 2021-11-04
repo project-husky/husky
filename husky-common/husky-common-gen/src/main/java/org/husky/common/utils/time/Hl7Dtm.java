@@ -1,10 +1,11 @@
-package org.husky.emed.cda.utils.time;
+package org.husky.common.utils.time;
 
 import ca.uhn.hl7v2.model.DataTypeException;
 import ca.uhn.hl7v2.model.primitive.CommonTS;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.cda.errors.InvalidEmedContentException;
 
+import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -15,7 +16,7 @@ import java.util.Objects;
 /**
  * HL7 timestamps (data type DTM) with particular precision, normalized to UTC.
  *
- * <p>Original code from IPF (https://github.com/oehf/ipf) under Apache 2.0 licence, modified for the Emed module use.
+ * <p>Original code from IPF (https://github.com/oehf/ipf) under Apache 2.0 licence.
  *
  * @author Dmytro Rud
  */
@@ -31,7 +32,7 @@ public class Hl7Dtm {
     /**
      * Formatters for the different patterns. It is only used when converting to HL7 DTM format, not for parsing.
      */
-    private static final Map<Precision, DateTimeFormatter> FORMATTERS = new EnumMap<>(Precision.class);
+    private static final Map<@NonNull Precision, @NonNull DateTimeFormatter> FORMATTERS = new EnumMap<>(Precision.class);
     static {
         FORMATTERS.put(Precision.YEAR,        DateTimeFormatter.ofPattern("yyyy"));
         FORMATTERS.put(Precision.MONTH,       DateTimeFormatter.ofPattern("yyyyMM"));
@@ -55,7 +56,8 @@ public class Hl7Dtm {
     /**
      * Initializes a {@link Hl7Dtm} object with the given datetime and precision.
      */
-    public Hl7Dtm(final OffsetDateTime dateTime, final Precision precision) {
+    public Hl7Dtm(@NonNull final OffsetDateTime dateTime,
+                  @NonNull final Precision precision) {
         this.dateTime = Objects.requireNonNull(dateTime);
         this.precision = Objects.requireNonNull(precision);
     }
@@ -67,7 +69,7 @@ public class Hl7Dtm {
      * @return a {@link Hl7Dtm} object.
      * @throws IllegalArgumentException if the DTM string is invalid.
      */
-    public static Hl7Dtm fromHl7(final String s) {
+    public static Hl7Dtm fromHl7(@NonNull final String s) {
         var pos = Math.max(Objects.requireNonNull(s).indexOf('-'), s.indexOf('+'));
         var len = (pos >= 0) ? pos : s.length();
 
@@ -110,9 +112,9 @@ public class Hl7Dtm {
      *      Milliseconds will be ignored.
      * @return
      *      a {@link OffsetDateTime} object, or <code>null</code> if the parameter is {@code null} or empty.
-     * @throws InvalidEmedContentException if the DTM string is invalid.
+     * @throws IllegalArgumentException if the DTM string is invalid.
      */
-    public static OffsetDateTime toOffsetDateTime(String s) {
+    public static OffsetDateTime toOffsetDateTime(@NonNull String s) {
         if (s.isBlank()) {
             throw new IllegalArgumentException("The passed HL7 DTM is empty");
         }
@@ -129,7 +131,7 @@ public class Hl7Dtm {
         try {
             ts = new CommonTS(s);
         } catch (final DataTypeException e) {
-            throw new InvalidEmedContentException("Unparsable HL7 DTM format", e);
+            throw new IllegalArgumentException("Unparsable HL7 DTM format", e);
         }
         return OffsetDateTime.of(
                 ts.getYear(),
@@ -146,22 +148,30 @@ public class Hl7Dtm {
         );
     }
 
-    public void setDateTime(final OffsetDateTime dateTime) {
+    public void setDateTime(@NonNull final OffsetDateTime dateTime) {
         this.dateTime = Objects.requireNonNull(dateTime);
     }
 
+    @NonNull
     public OffsetDateTime getDateTime() {
         return this.dateTime;
     }
 
-    public void setPrecision(final Precision precision) {
+    public void setPrecision(@NonNull final Precision precision) {
         this.precision = Objects.requireNonNull(precision);
     }
 
+    @NonNull
     public Precision getPrecision() {
         return this.precision;
     }
 
+    @NonNull
+    public Instant toInstant() {
+        return this.dateTime.toInstant();
+    }
+
+    @NonNull
     public String toHl7() {
         return FORMATTERS.get(getPrecision()).format(getDateTime());
     }

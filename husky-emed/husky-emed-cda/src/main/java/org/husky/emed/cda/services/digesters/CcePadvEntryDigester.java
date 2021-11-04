@@ -13,8 +13,8 @@ import org.husky.emed.cda.models.entry.EmedEntryDigest;
 import org.husky.emed.cda.models.entry.EmedPadvEntryDigest;
 import org.husky.emed.cda.models.entry.padv.*;
 import org.husky.emed.cda.utils.TemplateIds;
-import org.husky.emed.cda.utils.time.DateTimes;
-import org.husky.emed.cda.utils.time.Hl7Dtm;
+import org.husky.common.utils.time.DateTimes;
+import org.husky.common.utils.time.Hl7Dtm;
 import org.springframework.stereotype.Component;
 
 import static org.husky.emed.cda.utils.TemplateIds.*;

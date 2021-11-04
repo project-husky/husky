@@ -1,4 +1,4 @@
-package org.husky.emed.cda.utils.time;
+package org.husky.common.utils.time;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -37,6 +37,11 @@ public final class DateTimes {
      */
     private static final DateTimeFormatter TS_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd")
         .withZone(ZoneOffset.UTC);
+
+    /**
+     * This class is not instantiable.
+     */
+    private DateTimes() {}
 
     /**
      * Takes an HL7 DTM-formatted value given as a {@link Hl7Dtm}, sets the resolution to the fraction of seconds by
