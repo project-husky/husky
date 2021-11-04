@@ -18,6 +18,11 @@ Husky offers support for multiple IHE ITI profiles. For each profile transaction
 | [XDS](docs/XDS.md) | ITI-18,ITI-41,ITI-43 | Exchange of documents                    |
 | [XUA](docs/XUA.md) | ITI-40               | Provide identity assertions              |
 
+## eMed Module
+
+## CDA validation
+
+This project also supports validation of CDA documents using schema, schematron and PDF validation. Details on how to use this feature can be found [here](docs/CDA_Validation.md).
 
 ## Former release notes
 
