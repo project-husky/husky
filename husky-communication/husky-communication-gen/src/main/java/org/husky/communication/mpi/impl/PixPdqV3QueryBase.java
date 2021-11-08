@@ -8,20 +8,20 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.camel.CamelContext;
-import org.hl7.fhir.dstu3.model.Address;
-import org.hl7.fhir.dstu3.model.Address.AddressUse;
-import org.hl7.fhir.dstu3.model.BooleanType;
-import org.hl7.fhir.dstu3.model.CodeableConcept;
-import org.hl7.fhir.dstu3.model.ContactPoint;
-import org.hl7.fhir.dstu3.model.ContactPoint.ContactPointSystem;
-import org.hl7.fhir.dstu3.model.ContactPoint.ContactPointUse;
-import org.hl7.fhir.dstu3.model.DateTimeType;
-import org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender;
-import org.hl7.fhir.dstu3.model.HumanName;
-import org.hl7.fhir.dstu3.model.Identifier;
-import org.hl7.fhir.dstu3.model.IntegerType;
-import org.hl7.fhir.dstu3.model.Organization;
-import org.hl7.fhir.dstu3.model.Patient.PatientCommunicationComponent;
+import org.hl7.fhir.r4.model.Address;
+import org.hl7.fhir.r4.model.Address.AddressUse;
+import org.hl7.fhir.r4.model.BooleanType;
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.ContactPoint;
+import org.hl7.fhir.r4.model.ContactPoint.ContactPointSystem;
+import org.hl7.fhir.r4.model.ContactPoint.ContactPointUse;
+import org.hl7.fhir.r4.model.DateTimeType;
+import org.hl7.fhir.r4.model.Enumerations.AdministrativeGender;
+import org.hl7.fhir.r4.model.HumanName;
+import org.hl7.fhir.r4.model.Identifier;
+import org.hl7.fhir.r4.model.IntegerType;
+import org.hl7.fhir.r4.model.Organization;
+import org.hl7.fhir.r4.model.Patient.PatientCommunicationComponent;
 import org.husky.common.communication.AffinityDomain;
 import org.husky.common.enums.TelecomAddressUse;
 import org.husky.common.utils.DateUtil;
@@ -30,8 +30,8 @@ import org.husky.communication.mpi.impl.pix.V3PixSourceMessageHelper;
 import org.husky.communication.utils.PixPdqV3Utils;
 import org.husky.fhir.structures.gen.FhirCommon;
 import org.husky.fhir.structures.gen.FhirPatient;
-import org.hl7.fhir.dstu3.model.StringType;
-import org.hl7.fhir.dstu3.model.Type;
+import org.hl7.fhir.r4.model.StringType;
+import org.hl7.fhir.r4.model.Type;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -1008,8 +1008,8 @@ public class PixPdqV3QueryBase extends CamelService {
 	 * @param ad the ad
 	 * @return the address dt from ad
 	 */
-	protected org.hl7.fhir.dstu3.model.Address getAddressFromAD(AD ad) {
-		final var address = new org.hl7.fhir.dstu3.model.Address();
+	protected org.hl7.fhir.r4.model.Address getAddressFromAD(AD ad) {
+		final var address = new org.hl7.fhir.r4.model.Address();
 		if (ad.getUse() != null) {
 			if ("H".equals(ad.getUse())) {
 				address.setUse(AddressUse.HOME);

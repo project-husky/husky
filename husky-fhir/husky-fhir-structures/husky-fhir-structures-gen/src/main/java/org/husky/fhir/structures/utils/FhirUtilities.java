@@ -16,9 +16,9 @@
  */
 package org.husky.fhir.structures.utils;
 
-import org.hl7.fhir.dstu3.model.CodeableConcept;
-import org.hl7.fhir.dstu3.model.Coding;
-import org.hl7.fhir.dstu3.model.Identifier;
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.Identifier;
 import org.husky.common.hl7cdar2.II;
 import org.husky.common.model.Code;
 import org.husky.common.model.Identificator;

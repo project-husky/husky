@@ -23,18 +23,16 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hl7.fhir.dstu3.model.Coding;
-import org.hl7.fhir.dstu3.model.DocumentManifest;
-import org.hl7.fhir.dstu3.model.DocumentManifest.DocumentManifestContentComponent;
-import org.hl7.fhir.dstu3.model.DocumentReference;
-import org.hl7.fhir.dstu3.model.Enumerations.DocumentReferenceStatus;
-import org.hl7.fhir.dstu3.model.MessageHeader;
-import org.hl7.fhir.dstu3.model.MessageHeader.MessageDestinationComponent;
-import org.hl7.fhir.dstu3.model.MessageHeader.MessageSourceComponent;
-import org.hl7.fhir.dstu3.model.Reference;
-import org.hl7.fhir.dstu3.model.Resource;
-import org.hl7.fhir.dstu3.model.StringType;
-import org.hl7.fhir.exceptions.FHIRException;
+import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.DocumentManifest;
+import org.hl7.fhir.r4.model.DocumentReference;
+import org.hl7.fhir.r4.model.Enumerations.DocumentReferenceStatus;
+import org.hl7.fhir.r4.model.MessageHeader;
+import org.hl7.fhir.r4.model.MessageHeader.MessageDestinationComponent;
+import org.hl7.fhir.r4.model.MessageHeader.MessageSourceComponent;
+import org.hl7.fhir.r4.model.Reference;
+import org.hl7.fhir.r4.model.Resource;
+import org.hl7.fhir.r4.model.StringType;
 import org.husky.common.communication.AffinityDomain;
 import org.husky.common.communication.DocumentMetadata;
 import org.husky.common.communication.SubmissionSetMetadata;
@@ -97,7 +95,7 @@ public class FhirXdTransaction {
 
 	};
 
-	private final FhirContext fhirCtx = new FhirContext(FhirVersionEnum.DSTU3);
+	private final FhirContext fhirCtx = new FhirContext(FhirVersionEnum.R4);
 
 	/**
 	 * <div class="en">Empty constructor (default)</div><div class="de"></div>
@@ -204,7 +202,7 @@ public class FhirXdTransaction {
 		var mimeType = "";
 		fhirObject.getContentFirstRep().getFormat();
 		final Coding item = fhirObject.getContentFirstRep().getFormat();
-		final List<org.hl7.fhir.dstu3.model.Extension> extensions = item
+		final List<org.hl7.fhir.r4.model.Extension> extensions = item
 				.getExtensionsByUrl(FhirCommon.URN_USE_AS_MIME_TYPE);
 		if (!extensions.isEmpty()) {
 			mimeType = item.getCode();
@@ -237,10 +235,10 @@ public class FhirXdTransaction {
 				metaData.addAuthor(getAuthor(fhirObject));
 				metaData.addConfidentialityCode(FhirUtilities.toCode(fhirObject.getSecurityLabelFirstRep()));
 
-				metaData.setClassCode(FhirUtilities.toCode(fhirObject.getClass_()));
+				metaData.setClassCode(FhirUtilities.toCode(fhirObject.getCategoryFirstRep()));
 				metaData.setCodedLanguage(
 						fhirObject.getContentFirstRep().getAttachment().getLanguageElement().getValueAsString());
-				metaData.setCreationTime(DateUtil.parseZonedDate(fhirObject.getCreated()));
+				metaData.setCreationTime(DateUtil.parseZonedDate(fhirObject.getDate()));
 				metaData.setDocumentDescriptor(getDocumentDescriptor(fhirObject));
 				metaData.setFormatCode(FhirCommon.getFormatCode(fhirObject));
 				metaData.setHealthcareFacilityTypeCode(FhirUtilities.toCode(fhirObject.getContext().getFacilityType()));
@@ -273,12 +271,7 @@ public class FhirXdTransaction {
 	public org.husky.common.communication.Destination getRegistry(DocumentManifest docManifest) {
 		org.husky.common.communication.Destination retVal = null;
 
-		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
-			Reference ref = null;
-			try {
-				ref = entry.getPReference();
-			} catch (final FHIRException e) {
-			}
+		for (final Reference ref : docManifest.getContent()) {
 			if (ref != null && ref.getResource() instanceof MessageHeader) {
 				final MessageHeader fhirObject = (MessageHeader) ref.getResource();
 				if (!fhirObject.getExtensionsByUrl(FhirCommon.URN_USE_AS_REGISTRY_DESTINATION).isEmpty())
@@ -299,12 +292,7 @@ public class FhirXdTransaction {
 	public List<org.husky.common.communication.Destination> getRepositories(DocumentManifest docManifest) {
 		final List<org.husky.common.communication.Destination> retVal = new ArrayList<>();
 
-		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
-			Reference ref = null;
-			try {
-				ref = entry.getPReference();
-			} catch (final FHIRException e) {
-			}
+		for (final Reference ref : docManifest.getContent()) {
 			if (ref != null && ref.getResource() instanceof MessageHeader) {
 				final MessageHeader fhirObject = (MessageHeader) ref.getResource();
 				if (!fhirObject.getExtensionsByUrl(FhirCommon.URN_USE_AS_REPOSITORY_DESTINATION).isEmpty())
@@ -322,12 +310,7 @@ public class FhirXdTransaction {
 	 */
 	public List<Resource> getResources(DocumentManifest docManifest) {
 		final List<Resource> retVal = new ArrayList<>();
-		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
-			Reference ref = null;
-			try {
-				ref = entry.getPReference();
-			} catch (final FHIRException e) {
-			}
+		for (final Reference ref : docManifest.getContent()) {
 			if (ref != null) {
 				retVal.add((Resource) ref.getResource());
 			}
@@ -359,7 +342,7 @@ public class FhirXdTransaction {
 				}
 				retVal.setAvailabilityStatus(availabilityStatus);
 
-				final List<org.hl7.fhir.dstu3.model.Extension> extensions = fhirObject
+				final List<org.hl7.fhir.r4.model.Extension> extensions = fhirObject
 						.getExtensionsByUrl(FhirCommon.URN_USE_AS_COMMENT);
 				if (!extensions.isEmpty())
 					retVal.setComments(((StringType) extensions.get(0).getValue()).getValueAsString());

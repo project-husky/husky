@@ -19,16 +19,16 @@ package org.husky.fhir.structures.gen;
 import java.util.Date;
 import java.util.LinkedList;
 
-import org.hl7.fhir.dstu3.model.Address;
-import org.hl7.fhir.dstu3.model.BooleanType;
-import org.hl7.fhir.dstu3.model.CodeableConcept;
-import org.hl7.fhir.dstu3.model.Coding;
-import org.hl7.fhir.dstu3.model.ContactPoint;
-import org.hl7.fhir.dstu3.model.ContactPoint.ContactPointSystem;
-import org.hl7.fhir.dstu3.model.ContactPoint.ContactPointUse;
-import org.hl7.fhir.dstu3.model.DateTimeType;
-import org.hl7.fhir.dstu3.model.HumanName;
-import org.hl7.fhir.dstu3.model.HumanName.NameUse;
+import org.hl7.fhir.r4.model.Address;
+import org.hl7.fhir.r4.model.BooleanType;
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.ContactPoint;
+import org.hl7.fhir.r4.model.ContactPoint.ContactPointSystem;
+import org.hl7.fhir.r4.model.ContactPoint.ContactPointUse;
+import org.hl7.fhir.r4.model.DateTimeType;
+import org.hl7.fhir.r4.model.HumanName;
+import org.hl7.fhir.r4.model.HumanName.NameUse;
 import org.husky.common.basetypes.AddressBaseType;
 import org.husky.common.basetypes.NameBaseType;
 import org.husky.common.basetypes.OrganizationBaseType;
@@ -45,10 +45,10 @@ import org.husky.common.model.Name;
 import org.husky.common.model.Patient;
 import org.husky.common.model.Telecom;
 import org.husky.common.utils.Util;
-import org.hl7.fhir.dstu3.model.Identifier;
-import org.hl7.fhir.dstu3.model.IntegerType;
-import org.hl7.fhir.dstu3.model.StringType;
-import org.hl7.fhir.dstu3.model.Type;
+import org.hl7.fhir.r4.model.Identifier;
+import org.hl7.fhir.r4.model.IntegerType;
+import org.hl7.fhir.r4.model.StringType;
+import org.hl7.fhir.r4.model.Type;
 
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Description;
@@ -63,7 +63,7 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
  * @see "http://jamesagnew.github.io/hapi-fhir/index.html"
  */
 @ResourceDef(name = "Patient")
-public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
+public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 
 	/**
 	 *
@@ -76,10 +76,10 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 	 * @param mdhtAddr address object
 	 * @return fhir address
 	 */
-	public static org.hl7.fhir.dstu3.model.Address convertAddress(org.husky.common.model.Address mdhtAddr) {
-		org.hl7.fhir.dstu3.model.Address fhirAddr = null;
+	public static org.hl7.fhir.r4.model.Address convertAddress(org.husky.common.model.Address mdhtAddr) {
+		org.hl7.fhir.r4.model.Address fhirAddr = null;
 		if (mdhtAddr != null) {
-			fhirAddr = new org.hl7.fhir.dstu3.model.Address();
+			fhirAddr = new org.hl7.fhir.r4.model.Address();
 			if (mdhtAddr.getStreetAddressLine1() != null && !mdhtAddr.getStreetAddressLine1().isEmpty()) {
 				fhirAddr.addLine(mdhtAddr.getStreetAddressLine1());
 			}
@@ -103,16 +103,16 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 			if (mdhtAddr.getUsage() != null) {
 				switch (mdhtAddr.getUsage()) {
 				case HOME_ADDRESS, VACATION_HOME, PRIMARY_HOME:
-					fhirAddr.setUse(org.hl7.fhir.dstu3.model.Address.AddressUse.HOME);
+					fhirAddr.setUse(org.hl7.fhir.r4.model.Address.AddressUse.HOME);
 					break;
 				case WORK_PLACE:
-					fhirAddr.setUse(org.hl7.fhir.dstu3.model.Address.AddressUse.WORK);
+					fhirAddr.setUse(org.hl7.fhir.r4.model.Address.AddressUse.WORK);
 					break;
 				case TEMPORARY:
-					fhirAddr.setUse(org.hl7.fhir.dstu3.model.Address.AddressUse.TEMP);
+					fhirAddr.setUse(org.hl7.fhir.r4.model.Address.AddressUse.TEMP);
 					break;
 				case BAD_ADDRESS:
-					fhirAddr.setUse(org.hl7.fhir.dstu3.model.Address.AddressUse.NULL);
+					fhirAddr.setUse(org.hl7.fhir.r4.model.Address.AddressUse.NULL);
 					break;
 				case CONFIDENTIAL:
 					break;
@@ -140,15 +140,15 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 	 * @param gender the gender
 	 * @return the administrative gender enum
 	 */
-	public static org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender convertGender(
+	public static org.hl7.fhir.r4.model.Enumerations.AdministrativeGender convertGender(
 			AdministrativeGender gender) {
 		if (gender != null) {
 			if (gender.equals(AdministrativeGender.FEMALE)) {
-				return org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender.FEMALE;
+				return org.hl7.fhir.r4.model.Enumerations.AdministrativeGender.FEMALE;
 			} else if (gender.equals(AdministrativeGender.MALE)) {
-				return org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender.MALE;
+				return org.hl7.fhir.r4.model.Enumerations.AdministrativeGender.MALE;
 			} else if (gender.equals(AdministrativeGender.UNDIFFERENTIATED)) {
-				return org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender.OTHER;
+				return org.hl7.fhir.r4.model.Enumerations.AdministrativeGender.OTHER;
 			}
 		}
 		return null;
@@ -281,7 +281,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 	@Child(name = "birthPlace")
 	@Extension(url = "http://hl7.org/fhir/ExtensionDefinition/birthPlace", definedLocally = false, isModifier = false)
 	@Description(shortDefinition = "The birtplace of the patientt")
-	private org.hl7.fhir.dstu3.model.Address birthPlace;
+	private org.hl7.fhir.r4.model.Address birthPlace;
 
 	@Child(name = "employeeOccupation")
 	@Extension(url = "http://www.ehealth-connector.org/fhir-extensions/employeeOccupation", definedLocally = false, isModifier = false)
@@ -344,7 +344,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 		}
 		final POCDMT000040Organization organization = patient.getMdhtPatientRole().getProviderOrganization();
 		if (organization != null) {
-			final var fhirOrganization = new org.hl7.fhir.dstu3.model.Organization();
+			final var fhirOrganization = new org.hl7.fhir.r4.model.Organization();
 
 			if (organization != null && organization.getId() != null && !organization.getId().isEmpty()) {
 				final var ii = organization.getId().get(0);
@@ -461,7 +461,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 	 * @param fhirAddress
 	 * @return fhir address
 	 */
-	private org.husky.common.model.Address convertAddress(org.hl7.fhir.dstu3.model.Address fhirAddress) {
+	private org.husky.common.model.Address convertAddress(org.hl7.fhir.r4.model.Address fhirAddress) {
 		if (fhirAddress == null) {
 			return null;
 		}
@@ -526,7 +526,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 	 *
 	 * @return the birth place
 	 */
-	public org.hl7.fhir.dstu3.model.Address getBirthPlace() {
+	public org.hl7.fhir.r4.model.Address getBirthPlace() {
 		return birthPlace;
 	}
 
@@ -608,7 +608,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 			patientName.setSuffix(suffixBuilder.toString());
 		}
 
-		final org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender gender = getGender();
+		final org.hl7.fhir.r4.model.Enumerations.AdministrativeGender gender = getGender();
 		if (gender != null) {
 			switch (gender) {
 			case FEMALE:
@@ -645,7 +645,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 		if (getManagingOrganization() != null) {
 			var organization = new org.husky.common.model.Organization(new OrganizationBaseType());
 
-			final org.hl7.fhir.dstu3.model.Organization org = (org.hl7.fhir.dstu3.model.Organization) getManagingOrganization()
+			final org.hl7.fhir.r4.model.Organization org = (org.hl7.fhir.r4.model.Organization) getManagingOrganization()
 					.getResource();
 
 			if ((org != null) && (org.getName() != null)) {
@@ -846,7 +846,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 			}
 		}
 		final ContactComponent mother = addContact()
-				.setGender(org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender.FEMALE);
+				.setGender(org.hl7.fhir.r4.model.Enumerations.AdministrativeGender.FEMALE);
 		mother.addRelationship().addCoding().setCode("parent");
 		mother.setName(maidenName);
 	}

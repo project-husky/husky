@@ -25,18 +25,18 @@ import java.net.URI;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import org.hl7.fhir.dstu3.model.CodeableConcept;
-import org.hl7.fhir.dstu3.model.Coding;
-import org.hl7.fhir.dstu3.model.ContactPoint;
-import org.hl7.fhir.dstu3.model.ContactPoint.ContactPointSystem;
-import org.hl7.fhir.dstu3.model.ContactPoint.ContactPointUse;
-import org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender;
-import org.hl7.fhir.dstu3.model.HumanName;
-import org.hl7.fhir.dstu3.model.HumanName.NameUse;
-import org.hl7.fhir.dstu3.model.Identifier;
-import org.hl7.fhir.dstu3.model.Organization;
-import org.hl7.fhir.dstu3.model.Patient.PatientCommunicationComponent;
-import org.hl7.fhir.dstu3.model.codesystems.V3MaritalStatus;
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.ContactPoint;
+import org.hl7.fhir.r4.model.ContactPoint.ContactPointSystem;
+import org.hl7.fhir.r4.model.ContactPoint.ContactPointUse;
+import org.hl7.fhir.r4.model.Enumerations.AdministrativeGender;
+import org.hl7.fhir.r4.model.HumanName;
+import org.hl7.fhir.r4.model.HumanName.NameUse;
+import org.hl7.fhir.r4.model.Identifier;
+import org.hl7.fhir.r4.model.Organization;
+import org.hl7.fhir.r4.model.Patient.PatientCommunicationComponent;
+import org.hl7.fhir.r4.model.codesystems.V3MaritalStatus;
 import org.husky.common.communication.AffinityDomain;
 import org.husky.common.communication.Destination;
 import org.husky.common.enums.CountryCode;
@@ -190,7 +190,7 @@ public class PixV3QueryTest {
 		
 		patient.setGender(AdministrativeGender.FEMALE);
 		
-		final org.hl7.fhir.dstu3.model.Address address = new org.hl7.fhir.dstu3.model.Address()
+		final org.hl7.fhir.r4.model.Address address = new org.hl7.fhir.r4.model.Address()
 				.addLine("Testgasse 15").setPostalCode("8010").setCity("Graz").setState("Steiermark");
 		address.setCountry("AUT");
 		patient.getAddress().add(address);
@@ -208,7 +208,7 @@ public class PixV3QueryTest {
 		patient.getManagingOrganization().setResource(getScopingOrganization());
 		
 
-		final FhirContext ctx = new FhirContext(FhirVersionEnum.DSTU3);
+		final FhirContext ctx = new FhirContext(FhirVersionEnum.R4);
 		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
 		log.debug(encoded);
 
@@ -266,7 +266,7 @@ public class PixV3QueryTest {
 		patient.setMothersMaidenName(mothersMaidenName);
 		
 	
-		final org.hl7.fhir.dstu3.model.Address address = new org.hl7.fhir.dstu3.model.Address()
+		final org.hl7.fhir.r4.model.Address address = new org.hl7.fhir.r4.model.Address()
 				.addLine("Testgasse 1").setPostalCode("8010").setCity("Graz").setState("Steiermark").addLine("Eingang 2, Tür 34");
 		address.setCountry("AUT");
 		patient.getAddress().add(address);
@@ -324,7 +324,7 @@ public class PixV3QueryTest {
 		patient.getManagingOrganization().setResource(getScopingOrganization());
 		
 
-		final FhirContext ctx = new FhirContext(FhirVersionEnum.DSTU3);
+		final FhirContext ctx = new FhirContext(FhirVersionEnum.R4);
 		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
 		log.debug(encoded);
 
@@ -382,7 +382,7 @@ public class PixV3QueryTest {
 		patient.setGender(AdministrativeGender.MALE);
 		patient.getManagingOrganization().setResource(getScopingOrganization());
 
-		final FhirContext ctx = new FhirContext(FhirVersionEnum.DSTU3);
+		final FhirContext ctx = new FhirContext(FhirVersionEnum.R4);
 		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
 		log.debug(encoded);
 
@@ -412,7 +412,7 @@ public class PixV3QueryTest {
 		final FhirPatient patient = new FhirPatient();
 		final HumanName humanName = new HumanName().setFamily("Bauer-Maier").addGiven("Anton");
 		patient.getName().add(humanName);
-		final org.hl7.fhir.dstu3.model.Address address = new org.hl7.fhir.dstu3.model.Address()
+		final org.hl7.fhir.r4.model.Address address = new org.hl7.fhir.r4.model.Address()
 				.addLine("Testgasse 18").setPostalCode("1020").setCity("Wien").setState("AUT");
 		final Identifier identifier = new Identifier();
 		identifier.setValue("1634793774730");
@@ -429,7 +429,7 @@ public class PixV3QueryTest {
 		patient.setGender(AdministrativeGender.MALE);
 		patient.getManagingOrganization().setResource(getScopingOrganization());
 
-		final FhirContext ctx = new FhirContext(FhirVersionEnum.DSTU3);
+		final FhirContext ctx = new FhirContext(FhirVersionEnum.R4);
 		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
 		log.debug(encoded);
 

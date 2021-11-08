@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.camel.CamelContext;
-import org.hl7.fhir.dstu3.model.Identifier;
+import org.hl7.fhir.r4.model.Identifier;
 import org.husky.common.communication.AffinityDomain;
 import org.husky.communication.mpi.V3Acknowledgement;
 import org.husky.communication.mpi.impl.pix.V3PixSource;

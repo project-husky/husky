@@ -27,21 +27,21 @@ import java.util.Map;
 
 import javax.xml.bind.JAXBElement;
 
-import org.hl7.fhir.dstu3.model.Address;
-import org.hl7.fhir.dstu3.model.BooleanType;
-import org.hl7.fhir.dstu3.model.CodeableConcept;
-import org.hl7.fhir.dstu3.model.Coding;
-import org.hl7.fhir.dstu3.model.ContactPoint;
-import org.hl7.fhir.dstu3.model.ContactPoint.ContactPointSystem;
-import org.hl7.fhir.dstu3.model.ContactPoint.ContactPointUse;
-import org.hl7.fhir.dstu3.model.DateTimeType;
-import org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender;
-import org.hl7.fhir.dstu3.model.HumanName;
-import org.hl7.fhir.dstu3.model.Identifier;
-import org.hl7.fhir.dstu3.model.IntegerType;
-import org.hl7.fhir.dstu3.model.Organization;
-import org.hl7.fhir.dstu3.model.Patient.PatientCommunicationComponent;
-import org.hl7.fhir.dstu3.model.codesystems.V3MaritalStatus;
+import org.hl7.fhir.r4.model.Address;
+import org.hl7.fhir.r4.model.BooleanType;
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.ContactPoint;
+import org.hl7.fhir.r4.model.ContactPoint.ContactPointSystem;
+import org.hl7.fhir.r4.model.ContactPoint.ContactPointUse;
+import org.hl7.fhir.r4.model.DateTimeType;
+import org.hl7.fhir.r4.model.Enumerations.AdministrativeGender;
+import org.hl7.fhir.r4.model.HumanName;
+import org.hl7.fhir.r4.model.Identifier;
+import org.hl7.fhir.r4.model.IntegerType;
+import org.hl7.fhir.r4.model.Organization;
+import org.hl7.fhir.r4.model.Patient.PatientCommunicationComponent;
+import org.hl7.fhir.r4.model.codesystems.V3MaritalStatus;
 import org.husky.common.basetypes.AddressBaseType;
 import org.husky.common.enums.CountryCode;
 import org.husky.common.enums.TelecomAddressUse;
@@ -71,7 +71,7 @@ import ca.uhn.fhir.validation.ValidationResult;
  */
 public class FhirPatientTest {
 
-	private final FhirContext ctx = new FhirContext(FhirVersionEnum.DSTU3);
+	private final FhirContext ctx = new FhirContext(FhirVersionEnum.R4);
 	/** The SLF4J logger instance. */
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -333,7 +333,7 @@ public class FhirPatientTest {
 		fhirPatient.getManagingOrganization()
 				.setResource(getScopingOrganization("1234", "Test", "+417600000000"));
 
-		org.hl7.fhir.dstu3.model.Organization org = (org.hl7.fhir.dstu3.model.Organization) fhirPatient
+		org.hl7.fhir.r4.model.Organization org = (org.hl7.fhir.r4.model.Organization) fhirPatient
 				.getManagingOrganization().getResource();
 
 		assertEquals("1234", org.getIdentifierFirstRep().getSystem().substring(8));
@@ -349,7 +349,7 @@ public class FhirPatientTest {
 				.getTelecom().get(0).getValue());
 
 		final FhirPatient fhirPatient2 = new FhirPatient(patient);
-		org = (org.hl7.fhir.dstu3.model.Organization) fhirPatient2.getManagingOrganization()
+		org = (org.hl7.fhir.r4.model.Organization) fhirPatient2.getManagingOrganization()
 				.getResource();
 
 		assertEquals("1234", org.getIdentifierFirstRep().getSystem().substring(8));

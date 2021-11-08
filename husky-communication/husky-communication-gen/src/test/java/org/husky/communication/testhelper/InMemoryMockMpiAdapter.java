@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import org.hl7.fhir.dstu3.model.Identifier;
+import org.hl7.fhir.r4.model.Identifier;
 
 import org.husky.fhir.structures.gen.FhirCommon;
 import org.husky.fhir.structures.gen.FhirPatient;
@@ -67,7 +67,7 @@ public class InMemoryMockMpiAdapter {
 				// just copied the id of the patient currently, no demographic
 				// data
 				immutablePatient.setIdentifier(patient.getIdentifier());
-				final org.hl7.fhir.dstu3.model.Identifier id = immutablePatient.addIdentifier();
+				final org.hl7.fhir.r4.model.Identifier id = immutablePatient.addIdentifier();
 				id.setSystem(FhirCommon.addUrnOid(mpiCommunityOid));
 				id.setValue(mpiIdendity);
 				map.put(mapKey, immutablePatient);
