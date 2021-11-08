@@ -28,7 +28,6 @@ import org.husky.common.hl7cdar2.AD;
 import org.husky.common.hl7cdar2.CE;
 import org.husky.common.hl7cdar2.ED;
 import org.husky.common.hl7cdar2.II;
-import org.husky.common.hl7cdar2.IVLTS;
 import org.husky.common.hl7cdar2.PN;
 import org.husky.common.hl7cdar2.POCDMT000040AssignedAuthor;
 import org.husky.common.hl7cdar2.POCDMT000040Author;

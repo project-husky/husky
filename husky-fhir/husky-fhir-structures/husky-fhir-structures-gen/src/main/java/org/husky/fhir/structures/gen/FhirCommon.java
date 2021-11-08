@@ -72,7 +72,6 @@ import org.husky.common.model.Identificator;
 import org.husky.common.model.Name;
 import org.husky.common.model.Person;
 import org.husky.common.model.Telecom;
-import org.husky.common.utils.FileUtil;
 import org.husky.fhir.structures.utils.FhirUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
