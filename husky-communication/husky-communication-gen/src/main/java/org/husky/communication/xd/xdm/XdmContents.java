@@ -87,7 +87,7 @@ public class XdmContents {
 	/** The readme txt. */
 	private ReadmeTxt readmeTxt;
 
-	/** The OHT response object. */
+	/** The response object. */
 	private final XdmRetrieveResponseTypeImpl resp;
 
 	/** The txn data. */

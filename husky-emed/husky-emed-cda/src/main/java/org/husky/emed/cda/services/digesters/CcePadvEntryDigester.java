@@ -1,25 +1,39 @@
 package org.husky.emed.cda.services.digesters;
 
-odels.entry.padv.*;import org.husky.emed.cda.utils.EntryRelationshipUtils;
-impo
-import org.husky.emed.cda.models.common.AuthorDigest;
-import org.husky.emed.cda.models.common.EmedReference;
-import org.husky.emed.cda.models.entry.EmedEntryDigest;
-import org.husky.emed.cda.models.entry.EmedPadvEntryDigest;
-import org.husky.emed.cda.models.entry.padv.*;rt org.husky.emed.cda.utils.IiUtils;
-import org.husky.emed.c
-import org.husky.emed.cda.models.common.AuthorDigest;
-import org.husky.emed.cda.models.common.EmedReference;da.utils.TemplateIds;
-import org.husky.emed.cda.utils.time.DateTimes;
-import org.husky.emed.cda.utils.time.Hl7Dtm;
-import org.springframework.stereotype.Component;
-
-import static org.husky.emed.cda.utils.TemplateIds.*;
-
 import java.time.Instant;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
+
+import org.husky.common.utils.StreamUtils;
+import org.husky.emed.cda.enums.PharmaceuticalAdviceStatus;
+import org.husky.emed.cda.errors.InvalidEmedContentException;
+import org.husky.emed.cda.generated.hl7cdar2.CD;
+import org.husky.emed.cda.generated.hl7cdar2.ED;
+import org.husky.emed.cda.generated.hl7cdar2.II;
+import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Act;
+import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Author;
+import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship;
+import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Observation;
+import org.husky.emed.cda.generated.hl7cdar2.TS;
+import org.husky.emed.cda.generated.hl7cdar2.XActRelationshipEntryRelationship;
+import org.husky.emed.cda.models.common.AuthorDigest;
+import org.husky.emed.cda.models.common.EmedReference;
+import org.husky.emed.cda.models.entry.EmedEntryDigest;
+import org.husky.emed.cda.models.entry.EmedPadvEntryDigest;
+import org.husky.emed.cda.models.entry.padv.EmedPadvCancelEntryDigest;
+import org.husky.emed.cda.models.entry.padv.EmedPadvChangeEntryDigest;
+import org.husky.emed.cda.models.entry.padv.EmedPadvCommentEntryDigest;
+import org.husky.emed.cda.models.entry.padv.EmedPadvOkEntryDigest;
+import org.husky.emed.cda.models.entry.padv.EmedPadvRefuseEntryDigest;
+import org.husky.emed.cda.models.entry.padv.EmedPadvSuspendEntryDigest;
+import org.husky.emed.cda.services.EmedEntryDigestService;
+import org.husky.emed.cda.utils.EntryRelationshipUtils;
+import org.husky.emed.cda.utils.IiUtils;
+import org.husky.emed.cda.utils.TemplateIds;
+import org.husky.emed.cda.utils.time.DateTimes;
+import org.husky.emed.cda.utils.time.Hl7Dtm;
+import org.springframework.stereotype.Component;
 
 /**
  * Creator of CDA-CH-EMED MTP item entry digests.
@@ -33,6 +47,10 @@ public class CcePadvEntryDigester {
      * The registry of {@link EmedEntryDigest}.
      */
     private final EmedEntryDigestService emedEntryService;
+
+	public static final II REFERENCE_TO_MTP = new II();
+	public static final II REFERENCE_TO_PRE = new II();
+	public static final II REFERENCE_TO_DIS = new II();
 
     /**
      * Constructor.
@@ -269,7 +287,8 @@ public class CcePadvEntryDigester {
                 .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.REFR)
                 .map(POCDMT000040EntryRelationship::getSubstanceAdministration)
                 .filter(Objects::nonNull)
-                .filter(substanceAdministration -> hasAllIds(REFERENCE_TO_MTP, substanceAdministration.getTemplateId()))
+				// .filter(substanceAdministration -> hasAllIds(REFERENCE_TO_MTP,
+				// substanceAdministration.getTemplateId()))
                 .findAny()
                 .map(EmedReference::new);
     }
@@ -285,7 +304,8 @@ public class CcePadvEntryDigester {
                 .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.REFR)
                 .map(POCDMT000040EntryRelationship::getSubstanceAdministration)
                 .filter(Objects::nonNull)
-                .filter(substanceAdministration -> hasAllIds(REFERENCE_TO_PRE, substanceAdministration.getTemplateId()))
+				// .filter(substanceAdministration -> hasAllIds(REFERENCE_TO_PRE,
+				// substanceAdministration.getTemplateId()))
                 .findAny()
                 .map(EmedReference::new);
     }
@@ -301,7 +321,7 @@ public class CcePadvEntryDigester {
                 .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.REFR)
                 .map(POCDMT000040EntryRelationship::getSupply)
                 .filter(Objects::nonNull)
-                .filter(su -> hasAllIds(REFERENCE_TO_DIS, su.getTemplateId()))
+				// .filter(su -> hasAllIds(REFERENCE_TO_DIS, su.getTemplateId()))
                 .findAny()
                 .map(EmedReference::new);
     }

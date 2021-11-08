@@ -45,11 +45,11 @@ public class IndexHtm {
 			<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 			<html xmlns="http://www.w3.org/1999/xhtml">
 			  <head>
-			   <title>eHealthConnector XDM Cross-Enterprise Document Media Interchange</title>
+			   <title>Husky XDM Cross-Enterprise Document Media Interchange</title>
 			  </head>
 			  <body bgcolor="#F1FFFE">
 			    <div align="center">
-			      <h1>eHealthConnector - XDM Cross-Enterprise Document Media Interchange</h1>
+			      <h1>Husky - XDM Cross-Enterprise Document Media Interchange</h1>
 			    </div>
 			""";
 	/** The HTML Separator for different languages inside this file */

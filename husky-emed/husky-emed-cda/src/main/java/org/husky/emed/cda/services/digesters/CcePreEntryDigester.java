@@ -1,5 +1,9 @@
 package org.husky.emed.cda.services.digesters;
 
+import java.time.Instant;
+import java.util.Objects;
+import java.util.Optional;
+
 import org.husky.emed.cda.errors.InvalidEmedContentException;
 import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship;
 import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040SubstanceAdministration;
@@ -13,12 +17,7 @@ import org.husky.emed.cda.services.EmedEntryDigestService;
 import org.husky.emed.cda.services.readers.SubAdmEntryReader;
 import org.husky.emed.cda.utils.IiUtils;
 import org.husky.emed.cda.utils.TemplateIds;
-import org.openhealthtools.mdht.uml.hl7.vocab.ActClass;
 import org.springframework.stereotype.Component;
-
-import java.time.Instant;
-import java.util.Objects;
-import java.util.Optional;
 
 /**
  * Creator of CDA-CH-EMED PRE item entry digests.
@@ -171,7 +170,7 @@ public class CcePreEntryDigester {
                 .map(POCDMT000040EntryRelationship::getSubstanceAdministration)
                 .filter(Objects::nonNull)
                 .filter(sa -> sa.getMoodCode() == XDocumentSubstanceMood.PRP)
-                .filter(sa -> sa.getClassCode().contains(ActClass.SBADM.getName()))
+				// .filter(sa -> sa.getClassCode().contains(ActClass.SBADM.getName()))
                 .anyMatch(sa -> TemplateIds.isInList(TemplateIds.VALIDATION_STEP, sa.getTemplateId()));
     }
 }

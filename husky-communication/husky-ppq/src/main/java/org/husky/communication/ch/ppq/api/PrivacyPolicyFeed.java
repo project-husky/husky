@@ -31,7 +31,7 @@ public interface PrivacyPolicyFeed {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Enumeration defining the PrivacyPolicyFeed methods.</div>
-	 * <div class="de">Enumeration die die PrivacyPolicyFeed Methoden definiert.</div>
+	 * <div class="de">Enumeration die PrivacyPolicyFeed Methoden definiert.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
