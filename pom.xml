@@ -560,6 +560,56 @@
 			</plugins>
 		</pluginManagement>
 		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>resource-spa</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>resources</goal>
+							<goal>testResources</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M5</version>
+				<executions>
+					<execution>
+						<id>test-junit5</id>
+						<phase>test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-junit-platform</artifactId>
+						<version>3.0.0-M5</version>
+					</dependency>
+					<dependency>
+						<groupId>org.junit.jupiter</groupId>
+						<artifactId>junit-jupiter-engine</artifactId>
+						<version>${junit.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -574,13 +624,13 @@
 						</manifestEntries>
 						<manifestSections>
 							<manifestSection>
-								<name>ProjektInfos</name>
+								<name>Project infos</name>
 								<manifestEntries>
 									<Projekt>${project.name}</Projekt>
 									<Version>${project.version}</Version>
 									<GroupId>${project.groupId}</GroupId>
 									<ArtifactId>${project.artifactId}</ArtifactId>
-									<Url>https://sourceforge.net/projects/ehealthconnector/</Url>
+									<Url>https://sourceforge.net/projects/ehealthconnector/</Url> <!-- TODO -->
 								</manifestEntries>
 							</manifestSection>
 						</manifestSections>
@@ -589,11 +639,13 @@
 				<executions>
 					<execution>
 						<goals>
-							<goal>test-jar</goal>
+							<goal>jar</goal> <!-- Exclude tests -->
 						</goals>
 					</execution>
 				</executions>
 			</plugin>
+
+			<!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -653,11 +705,12 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+			-->
 		</plugins>
-
 	</build>
 
 	<reporting>
+		<!--
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -671,7 +724,7 @@
 					<dependencyDetailsEnabled>false</dependencyDetailsEnabled>
 					<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
 				</configuration>
-				<!-- simpler configuration without reportSets available for usual cases -->
+				<!- simpler configuration without reportSets available for usual cases ->
 				<reportSets>
 					<reportSet>
 						<reports>
@@ -751,7 +804,7 @@
 				<artifactId>maven-project-info-reports-plugin</artifactId>
 			</plugin>
 		</plugins>
-
+		-->
 	</reporting>
 
 
