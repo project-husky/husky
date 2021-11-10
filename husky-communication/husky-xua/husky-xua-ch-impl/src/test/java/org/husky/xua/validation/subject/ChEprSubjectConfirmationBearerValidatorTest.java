@@ -1,12 +1,11 @@
 package org.husky.xua.validation.subject;
 
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
-import org.husky.common.utils.xml.XmlFactories;
 import org.husky.communication.ch.enums.Role;
-import org.husky.xua.validation.subject.ChEprSubjectConfirmationBearerValidator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.opensaml.core.config.InitializationService;
+import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.opensaml.core.xml.io.Unmarshaller;
 import org.opensaml.core.xml.util.XMLObjectSupport;
 import org.opensaml.saml.common.assertion.ValidationContext;
@@ -15,10 +14,9 @@ import org.opensaml.saml.saml2.assertion.SubjectConfirmationValidator;
 import org.opensaml.saml.saml2.core.SubjectConfirmation;
 import org.w3c.dom.Element;
 
-import javax.xml.parsers.DocumentBuilder;
-
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 import static org.husky.xua.validation.ChEprAssertionValidationParameters.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,15 +30,12 @@ class ChEprSubjectConfirmationBearerValidatorTest {
 
     private static final SubjectConfirmationValidator VALIDATOR = new ChEprSubjectConfirmationBearerValidator();
     @MonotonicNonNull
-    private static DocumentBuilder DOC_BUILDER = null;
-    @MonotonicNonNull
     private static Unmarshaller UNMARSHALLER = null;
 
     @BeforeAll
     public static void setUpBeforeClass() throws Exception {
         // Initialize the library
         InitializationService.initialize();
-        DOC_BUILDER = XmlFactories.newXuaDocumentBuilder();
         UNMARSHALLER = XMLObjectSupport.getUnmarshaller(SubjectConfirmation.TYPE_NAME);
     }
 
@@ -297,7 +292,9 @@ class ChEprSubjectConfirmationBearerValidatorTest {
         final var bytes = ("<saml2:SubjectConfirmation Method=\"urn:oasis:names:tc:SAML:2.0:cm:bearer\" " +
                 "xmlns:saml2=\"urn:oasis:names:tc:SAML:2.0:assertion\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">" + xml +
                 "</saml2:SubjectConfirmation>").getBytes(StandardCharsets.UTF_8);
-        Element element = DOC_BUILDER.parse(new ByteArrayInputStream(bytes)).getDocumentElement();
+        Element element = Objects.requireNonNull(XMLObjectProviderRegistrySupport.getParserPool())
+                .parse(new ByteArrayInputStream(bytes))
+                .getDocumentElement();
         return (SubjectConfirmation) UNMARSHALLER.unmarshall(element);
     }
 }

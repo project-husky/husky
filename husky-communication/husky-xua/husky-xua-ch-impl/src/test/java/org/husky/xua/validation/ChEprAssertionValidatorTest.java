@@ -7,17 +7,16 @@ import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParamete
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.xml.parsers.DocumentBuilder;
+import java.util.Objects;
 
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.common.utils.xml.XmlFactories;
 import org.husky.communication.ch.enums.Role;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.opensaml.core.config.InitializationService;
+import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.opensaml.core.xml.io.Unmarshaller;
 import org.opensaml.core.xml.util.XMLObjectSupport;
 import org.opensaml.saml.common.assertion.ValidationResult;
@@ -30,8 +29,6 @@ class ChEprAssertionValidatorTest {
     @MonotonicNonNull
     private static ChEprAssertionValidator VALIDATOR = null;
     @MonotonicNonNull
-    private static DocumentBuilder DOC_BUILDER = null;
-    @MonotonicNonNull
     private static Unmarshaller UNMARSHALLER = null;
 
     private static final Map<String, @Nullable Object> VALIDATION_PARAMS = new HashMap<>();
@@ -41,7 +38,6 @@ class ChEprAssertionValidatorTest {
         // Initialize the library
         InitializationService.initialize();
         VALIDATOR = new ChEprAssertionValidator(Duration.ofSeconds(3));
-        DOC_BUILDER = XmlFactories.newXuaDocumentBuilder();
         UNMARSHALLER = XMLObjectSupport.getUnmarshaller(Assertion.TYPE_NAME);
         VALIDATION_PARAMS.put(CLOCK_SKEW, Duration.ofDays(3650));
     }
@@ -58,7 +54,9 @@ class ChEprAssertionValidatorTest {
     }
 
     private Assertion unmarshal(final String fileName) throws Exception {
-        Element element = DOC_BUILDER.parse(getClass().getClassLoader().getResourceAsStream("xua/" + fileName)).getDocumentElement();
+        Element element = Objects.requireNonNull(XMLObjectProviderRegistrySupport.getParserPool())
+                .parse(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("xua/" + fileName)))
+                .getDocumentElement();
         return (Assertion) UNMARSHALLER.unmarshall(element);
     }
 }

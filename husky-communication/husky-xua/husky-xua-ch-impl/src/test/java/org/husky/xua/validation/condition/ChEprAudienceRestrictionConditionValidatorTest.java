@@ -1,12 +1,11 @@
 package org.husky.xua.validation.condition;
 
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
-import org.husky.common.utils.xml.XmlFactories;
 import org.husky.communication.ch.enums.Role;
-import org.husky.xua.validation.condition.ChEprAudienceRestrictionConditionValidator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.opensaml.core.config.InitializationService;
+import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.opensaml.core.xml.io.Unmarshaller;
 import org.opensaml.core.xml.util.XMLObjectSupport;
 import org.opensaml.saml.common.assertion.ValidationContext;
@@ -15,10 +14,9 @@ import org.opensaml.saml.saml2.assertion.ConditionValidator;
 import org.opensaml.saml.saml2.core.AudienceRestriction;
 import org.w3c.dom.Element;
 
-import javax.xml.parsers.DocumentBuilder;
-
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_AUDIENCE;
 import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ROLE;
@@ -33,15 +31,12 @@ class ChEprAudienceRestrictionConditionValidatorTest {
 
     private static final ConditionValidator VALIDATOR = new ChEprAudienceRestrictionConditionValidator();
     @MonotonicNonNull
-    private static DocumentBuilder DOC_BUILDER = null;
-    @MonotonicNonNull
     private static Unmarshaller UNMARSHALLER = null;
 
     @BeforeAll
     public static void setUpBeforeClass() throws Exception {
         // Initialize the library
         InitializationService.initialize();
-        DOC_BUILDER = XmlFactories.newXuaDocumentBuilder();
         UNMARSHALLER = XMLObjectSupport.getUnmarshaller(AudienceRestriction.TYPE_NAME);
     }
 
@@ -132,7 +127,9 @@ class ChEprAudienceRestrictionConditionValidatorTest {
 
     private AudienceRestriction unmarshal(final String xml) throws Exception {
         final var bytes = ("<saml2:AudienceRestriction xmlns:saml2=\"urn:oasis:names:tc:SAML:2.0:assertion\">" + xml + "</saml2:AudienceRestriction>").getBytes(StandardCharsets.UTF_8);
-        Element element = DOC_BUILDER.parse(new ByteArrayInputStream(bytes)).getDocumentElement();
+        Element element = Objects.requireNonNull(XMLObjectProviderRegistrySupport.getParserPool())
+                .parse(new ByteArrayInputStream(bytes))
+                .getDocumentElement();
         return (AudienceRestriction) UNMARSHALLER.unmarshall(element);
     }
 }
