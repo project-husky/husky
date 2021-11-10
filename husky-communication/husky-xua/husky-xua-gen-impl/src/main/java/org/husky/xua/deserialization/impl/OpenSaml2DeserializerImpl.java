@@ -19,7 +19,6 @@ package org.husky.xua.deserialization.impl;
 import java.io.ByteArrayInputStream;
 import java.util.Objects;
 
-import org.husky.common.utils.xml.XmlFactories;
 import org.husky.xua.deserialization.OpenSaml2Deserializer;
 import org.husky.xua.exceptions.DeserializeException;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
@@ -61,9 +60,10 @@ public class OpenSaml2DeserializerImpl<T> implements OpenSaml2Deserializer<T> {
 	@Override
 	public Element deserializeFromByteArrayToXmlElement(byte[] aXmlBytes) throws DeserializeException {
 		try {
-			final var docBuilder = XmlFactories.newSafeDocumentBuilder();
-			final var document = docBuilder.parse(new ByteArrayInputStream(aXmlBytes));
-
+			// Use the parser from the OpenSAML ParserPool because its implementation may be different than
+			// XmlFactories.newSafeDocumentBuilder()
+			final var document = Objects.requireNonNull(XMLObjectProviderRegistrySupport.getParserPool())
+					.parse(new ByteArrayInputStream(aXmlBytes));
 			return document.getDocumentElement();
 		} catch (final Exception e) {
 			throw new DeserializeException(e);
