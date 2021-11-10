@@ -51,7 +51,8 @@ import org.opensaml.soap.wstrust.WSTrustConstants;
 import org.opensaml.soap.wstrust.impl.RequestSecurityTokenResponseCollectionUnmarshaller;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
+
+import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
 /**
  * <!-- @formatter:off -->
@@ -126,9 +127,8 @@ public class SimpleXuaClient extends AbstractSoapClient<List<XUserAssertionRespo
 			);
 
 			return retVal;
-		} catch (UnsupportedOperationException | IOException | TransformerFactoryConfigurationError
-				| ParserConfigurationException | SAXException | UnmarshallingException
-				| XPathExpressionException e) {
+		} catch (UnsupportedOperationException | TransformerFactoryConfigurationError | UnmarshallingException
+				| XPathExpressionException | XMLParserException e) {
 			throw new ClientSendException(e);
 		}
 	}

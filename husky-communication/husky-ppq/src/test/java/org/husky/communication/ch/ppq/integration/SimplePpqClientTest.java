@@ -17,6 +17,7 @@ import javax.xml.namespace.QName;
 
 import org.apache.camel.CamelContext;
 import org.apache.commons.io.IOUtils;
+import org.husky.communication.ch.enums.PurposeOfUse;
 import org.husky.communication.ch.ppq.TestApplication;
 import org.husky.communication.ch.ppq.api.PrivacyPolicyQuery;
 import org.husky.communication.ch.ppq.api.config.PpClientConfig;
@@ -34,7 +35,6 @@ import org.husky.xua.communication.xua.TokenType;
 import org.husky.xua.communication.xua.XUserAssertionResponse;
 import org.husky.xua.communication.xua.impl.AppliesToBuilderImpl;
 import org.husky.xua.communication.xua.impl.XUserAssertionRequestBuilderImpl;
-import org.husky.communication.ch.enums.PurposeOfUse;
 import org.husky.xua.core.SecurityHeaderElement;
 import org.husky.xua.deserialization.impl.AssertionDeserializerImpl;
 import org.husky.xua.hl7v3.InstanceIdentifier;
@@ -160,7 +160,10 @@ public class SimplePpqClientTest {
 		SecurityHeaderElement patAssertion = null;
 		try (InputStream is = new FileInputStream(new File("src/test/resources/ch-ppq/Assertion_bovie.xml"))) {
 
-			var assertion = new AssertionDeserializerImpl().fromXmlByteArray(IOUtils.toByteArray(is));
+			byte[] bytes = IOUtils.toByteArray(is);
+			System.out.println(new String(bytes));
+			
+			var assertion = new AssertionDeserializerImpl().fromXmlByteArray(bytes);
 
 			var purposeOfUse = new PurposeOfUseBuilder().code(PurposeOfUse.NORMAL_ACCESS.getCodeValue())
 					.codeSystem("2.16.756.5.30.1.127.3.10.6").displayName(PurposeOfUse.NORMAL_ACCESS.getDisplayName())

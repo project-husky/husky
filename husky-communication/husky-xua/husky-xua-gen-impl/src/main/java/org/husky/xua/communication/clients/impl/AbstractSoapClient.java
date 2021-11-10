@@ -65,12 +65,14 @@ import org.husky.xua.exceptions.ClientSendException;
 import org.husky.xua.exceptions.SoapException;
 import org.husky.xua.pki.PkiManager;
 import org.husky.xua.pki.impl.PkiManagerImpl;
+import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
+
+import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
 /**
  * <!-- @formatter:off -->
@@ -292,10 +294,12 @@ public abstract class AbstractSoapClient<T> {
 	}
 
 	protected Element getResponseElement(String content, String nameSpaceUri, String localName)
-			throws ParserConfigurationException, UnsupportedOperationException, SAXException,
-			IOException, XPathExpressionException {
+			throws UnsupportedOperationException, XPathExpressionException, XMLParserException {
 
-		final var docBuilder = XmlFactories.newSafeDocumentBuilder();
+		// Use the parser from the OpenSAML ParserPool because its implementation may be
+		// different than
+		// XmlFactories.newSafeDocumentBuilder()
+		final var docBuilder = XMLObjectProviderRegistrySupport.getParserPool();
 		final var soapDocument = docBuilder
 				.parse(new ByteArrayInputStream(content.getBytes()));
 
@@ -388,16 +392,17 @@ public abstract class AbstractSoapClient<T> {
 			throw new ClientSendException(
 					"Error occurred. No detailed error information available");
 		} catch (UnsupportedOperationException | TransformerFactoryConfigurationError
-				| ParseException | IOException | ParserConfigurationException | SAXException
-				| XPathExpressionException e) {
+				| ParseException | XPathExpressionException | XMLParserException e) {
 			throw new ClientSendException(e);
 		}
 
 	}
 
-	private void paserSoapFault(String retVal) throws ParserConfigurationException, SAXException,
-			IOException, XPathExpressionException, SoapException {
-		final var docBuilder = XmlFactories.newSafeDocumentBuilder();
+	private void paserSoapFault(String retVal) throws XPathExpressionException, SoapException, XMLParserException {
+		// Use the parser from the OpenSAML ParserPool because its implementation may be
+		// different than
+		// XmlFactories.newSafeDocumentBuilder()
+		final var docBuilder = XMLObjectProviderRegistrySupport.getParserPool();
 		final var document = docBuilder.parse(new ByteArrayInputStream(retVal.getBytes()));
 
 		String prefix = document.getDocumentElement().getPrefix();

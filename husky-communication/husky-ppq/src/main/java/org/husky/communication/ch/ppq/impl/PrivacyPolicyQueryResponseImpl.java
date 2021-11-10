@@ -62,22 +62,6 @@ public class PrivacyPolicyQueryResponseImpl
 				}
 			}
 
-		/*
-		 * final var marshaller = JAXBContext .newInstance(ResponseType.class,
-		 * ObjectFactory.class,
-		 * org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.delegation.ObjectFactory.
-		 * class) .createMarshaller();
-		 * marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);
-		 * marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
-		 * marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF8"); final var
-		 * stringWriter = new StringWriter(); marshaller.marshal(aInternalObject,
-		 * stringWriter);
-		 * 
-		 * var deserializer = new ResponseDeserialiser();
-		 * 
-		 * wrappedObject = deserializer.fromXmlString(stringWriter.toString());
-		 */
-
 	}
 
 	@Override
