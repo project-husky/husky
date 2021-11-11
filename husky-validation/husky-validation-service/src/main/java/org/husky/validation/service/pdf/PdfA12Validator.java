@@ -85,7 +85,7 @@ public class PdfA12Validator {
                 return validator.validate(parser);
             }
         } catch (final EncryptedPdfException e) {
-            return new FailedValidationResult(PDFAFlavour.NO_FLAVOUR, "The PDF is encrypted");
+            return new FailedValidationResult(PDFAFlavour.NO_FLAVOUR, "The PDF is password protected");
         } catch (final ModelParsingException e) {
             return new FailedValidationResult(PDFAFlavour.NO_FLAVOUR, "The PDF is unparsable: " + e.getMessage());
         }
