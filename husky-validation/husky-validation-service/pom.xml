@@ -30,13 +30,8 @@
 			<artifactId>junit-jupiter-api</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.pdftools</groupId>
-			<artifactId>VALA</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.verapdf</groupId>
 			<artifactId>validation-model</artifactId>
 		</dependency>
-
 	</dependencies>
 </project>
