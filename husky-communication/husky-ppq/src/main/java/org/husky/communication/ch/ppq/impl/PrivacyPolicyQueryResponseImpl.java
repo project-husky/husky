@@ -16,11 +16,8 @@
  */
 package org.husky.communication.ch.ppq.impl;
 
-import javax.xml.bind.JAXBException;
-
 import org.husky.communication.ch.ppq.api.PrivacyPolicyQueryResponse;
 import org.husky.xua.core.SecurityObject;
-import org.husky.xua.exceptions.DeserializeException;
 import org.husky.xua.saml2.impl.AssertionBuilderImpl;
 import org.husky.xua.saml2.impl.StatusBuilderImpl;
 import org.husky.xua.saml2.impl.StatusImpl;
@@ -47,7 +44,7 @@ public class PrivacyPolicyQueryResponseImpl
 		wrappedObject = aInternalObject;
 	}
 
-	protected PrivacyPolicyQueryResponseImpl(ResponseType aInternalObject) throws JAXBException, DeserializeException {
+	protected PrivacyPolicyQueryResponseImpl(ResponseType aInternalObject) {
 
 		wrappedObject = new ResponseBuilder().buildObject();
 		wrappedObject.setStatus(
