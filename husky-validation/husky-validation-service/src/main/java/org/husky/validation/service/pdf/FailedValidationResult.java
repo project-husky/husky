@@ -1,6 +1,6 @@
 package org.husky.validation.service.pdf;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.verapdf.pdfa.flavours.PDFAFlavour;
 import org.verapdf.pdfa.results.Location;
 import org.verapdf.pdfa.results.TestAssertion;
@@ -12,14 +12,29 @@ import org.verapdf.pdfa.validation.profiles.ValidationProfile;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The PDF validation result for a single failure.
+ */
 final class FailedValidationResult implements ValidationResult {
 
+    /**
+     * The PDF flavour.
+     */
     private final PDFAFlavour flavour;
 
+    /**
+     * The failure message.
+     */
     private final String message;
 
-    public FailedValidationResult(@NonNull final PDFAFlavour flavour,
-                                  @NonNull final String message) {
+    /**
+     * Constructor.
+     *
+     * @param flavour The PDF flavour.
+     * @param message The failure message.
+     */
+    public FailedValidationResult(final PDFAFlavour flavour,
+                                  final String message) {
         this.flavour = Objects.requireNonNull(flavour);
         this.message = Objects.requireNonNull(message);
     }
@@ -35,6 +50,7 @@ final class FailedValidationResult implements ValidationResult {
     }
 
     @Override
+    @Nullable
     public ProfileDetails getProfileDetails() {
         return null;
     }
@@ -52,15 +68,14 @@ final class FailedValidationResult implements ValidationResult {
     }
 
     @Override
+    @Nullable
     public ValidationProfile getValidationProfile() {
         return null;
     }
 
-    public static class FailedTestAssertion implements TestAssertion {
+    public record FailedTestAssertion(String message) implements TestAssertion {
 
-        private final String message;
-
-        public FailedTestAssertion(@NonNull final String message) {
+        public FailedTestAssertion(final String message) {
             this.message = Objects.requireNonNull(message);
         }
 
@@ -70,6 +85,7 @@ final class FailedValidationResult implements ValidationResult {
         }
 
         @Override
+        @Nullable
         public RuleId getRuleId() {
             return null;
         }
@@ -85,6 +101,7 @@ final class FailedValidationResult implements ValidationResult {
         }
 
         @Override
+        @Nullable
         public Location getLocation() {
             return null;
         }

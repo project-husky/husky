@@ -11,6 +11,11 @@ import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests of the {@link PdfA12Validator} class.
+ *
+ * @author Quentin Ligier
+ */
 class PdfA12ValidatorTest {
 
     private final PdfA12Validator validator = new PdfA12Validator();
@@ -119,6 +124,6 @@ class PdfA12ValidatorTest {
     }
 
     private InputStream getSample(final String sampleName) {
-        return Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("samples/" + sampleName));
+        return Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("pdf/" + sampleName));
     }
 }

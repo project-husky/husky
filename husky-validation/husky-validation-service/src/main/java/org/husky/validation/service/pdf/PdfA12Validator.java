@@ -9,6 +9,7 @@ import org.verapdf.pdfa.VeraGreenfieldFoundryProvider;
 import org.verapdf.pdfa.flavours.PDFAFlavour;
 import org.verapdf.pdfa.results.ValidationResult;
 
+import javax.annotation.concurrent.NotThreadSafe;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,8 +30,11 @@ import java.util.Objects;
  *     <li>PDF/A-2u – PDF 1.7 – Level U (unicode) conformance
  * </ul>
  *
+ * <p>The VeraPDF parser and validator seem to not be thread safe, beware.
+ *
  * @author Quentin Ligier
  */
+@NotThreadSafe
 public class PdfA12Validator {
 
     /**
@@ -48,7 +52,7 @@ public class PdfA12Validator {
      * @throws IOException if the parser or validator cannot be closed.
      * @throws ValidationException if the validator encounters an issue.
      */
-    public ValidationResult validate(@NonNull final String pdf) throws IOException, ValidationException {
+    public ValidationResult validate(final String pdf) throws IOException, ValidationException {
         return this.validate(Objects.requireNonNull(pdf).getBytes(StandardCharsets.UTF_8));
     }
 
@@ -73,7 +77,7 @@ public class PdfA12Validator {
      * @throws IOException if the parser or validator cannot be closed.
      * @throws ValidationException if the validator encounters an issue.
      */
-    public ValidationResult validate(@NonNull final InputStream pdf) throws IOException, ValidationException {
+    public ValidationResult validate(final InputStream pdf) throws IOException, ValidationException {
         Objects.requireNonNull(pdf);
         final var foundry = Foundries.defaultInstance();
         try (final var parser = foundry.createParser(pdf)) {

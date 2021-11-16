@@ -27,6 +27,7 @@
 		<apache-httpcomponents>4.5.13</apache-httpcomponents>
 		<apache-httpcore>4.4.14</apache-httpcore>
 		<junit.version>5.8.1</junit.version>
+		<ph-schematron.version>6.2.1</ph-schematron.version>
 		<maven.compiler.release>16</maven.compiler.release>
 		<maven.compiler.source>16</maven.compiler.source>
 		<maven.compiler.target>16</maven.compiler.target>
@@ -361,6 +362,17 @@
 				<version>2.3.1</version>
 			</dependency>
 
+			<!-- Schematron validator (Apache 2.0) -->
+			<dependency>
+				<groupId>com.helger.schematron</groupId>
+				<artifactId>ph-schematron-api</artifactId>
+				<version>${ph-schematron.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.helger.schematron</groupId>
+				<artifactId>ph-schematron-xslt</artifactId>
+				<version>${ph-schematron.version}</version>
+			</dependency>
 
 			<!-- test stuff -->
 			<dependency>

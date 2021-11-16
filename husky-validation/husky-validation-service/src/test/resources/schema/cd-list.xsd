@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- XSD for a simple CD list -->
+<!-- Made by daniel k. schneider, TECFA, April 2013 -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+		   targetNamespace="http://edutechwiki.unige.ch/en/XML/" 
+           xmlns="http://edutechwiki.unige.ch/en/XML/" 
+	       elementFormDefault="qualified">
+	       
+  <xs:element name="cd-list">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="title"/>
+        <xs:element minOccurs="0" ref="description"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="cd"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="cd">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="artist"/>
+        <xs:element ref="title"/>
+        <xs:element minOccurs="0" ref="genre"/>
+        <xs:element minOccurs="0" ref="duration"/>
+        <xs:element minOccurs="0" ref="rating"/>
+        <xs:element minOccurs="0" ref="price"/>
+        <xs:element minOccurs="0" ref="publisher"/>
+        <xs:element minOccurs="0" ref="description"/>
+        <xs:element minOccurs="0" ref="track-list"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="track">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="title"/>
+        <xs:element minOccurs="0" ref="artist"/>
+        <xs:element minOccurs="0" ref="genre"/>
+        <xs:element minOccurs="0" ref="duration"/>
+        <xs:element minOccurs="0" ref="composer"/>
+      </xs:sequence>
+     <xs:attribute name="no">
+       <xs:simpleType>
+         <xs:restriction base="xs:integer">
+            <xs:maxInclusive value="99"/>
+         </xs:restriction>
+       </xs:simpleType>
+  	 </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="artist" type="xs:string"/>
+  <xs:element name="composer" type="xs:string"/>
+  
+  <xs:element name="description">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="heading"/>
+        <xs:element ref="p"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="duration" type="xs:string"/>
+  
+  <xs:element name="genre">
+       <xs:simpleType>
+         <xs:restriction base="xs:string">
+           <xs:enumeration value="Jazz"/>
+           <xs:enumeration value="Blues"/>
+           <xs:enumeration value="Hard Bop"/>
+           <xs:enumeration value="Be Bop"/>
+           <xs:enumeration value="Latin Jazz"/>
+           <xs:enumeration value="Pop"/>
+         </xs:restriction>
+       </xs:simpleType>
+  </xs:element>
+   
+  <xs:element name="heading" type="xs:string"/>
+  
+  <xs:element name="p">
+  	<xs:simpleType>
+      <xs:restriction base="xs:string">  
+        <xs:minLength value="200"/>  
+        <xs:maxLength value="1000"/>  
+      </xs:restriction> 
+    </xs:simpleType>
+  </xs:element> 	
+
+   <xs:element name="price">
+    <xs:complexType mixed="true">
+      <xs:attributeGroup ref="attlist.price"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="publisher" type="xs:string"/>
+  <xs:element name="rating" type="xs:string"/>
+  <xs:element name="title" type="xs:string"/>
+  
+  <xs:element name="track-list">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="track"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:attributeGroup name="attlist.price">
+    <xs:attribute name="currency" default="CHF">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="CHF"/>
+          <xs:enumeration value="Euros"/>
+          <xs:enumeration value="Dollars"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  
+</xs:schema>
