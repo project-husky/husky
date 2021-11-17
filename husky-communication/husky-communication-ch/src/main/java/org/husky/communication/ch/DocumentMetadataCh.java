@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.husky.common.ch.ChEpr;
 import org.husky.common.ch.enums.ConfidentialityCode;
 import org.husky.common.communication.DocumentMetadata;
 import org.husky.common.enums.LanguageCode;
@@ -247,8 +248,8 @@ public class DocumentMetadataCh extends org.husky.common.communication.DocumentM
 			getDocumentEntry().setExtraMetadata(new HashMap<>());
 		}
 
-		getDocumentEntry().getExtraMetadata().put("urn:e-health-suisse:2020:originalProviderRole",
-				List.of(String.format("%s^^^&%s&ISO", code.getCode(), code.getCodeSystemId())));
+		getDocumentEntry().getExtraMetadata().put(ChEpr.ORIGINAL_PROVIDER_ROLE_URN,
+				List.of(code.getCodedString()));
 	}
 
 }

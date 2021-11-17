@@ -46,14 +46,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ActMoodEventOccurrence {
 
-	EVN;
+    EVN;
 
-	public static ActMoodEventOccurrence fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ActMoodEventOccurrence fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

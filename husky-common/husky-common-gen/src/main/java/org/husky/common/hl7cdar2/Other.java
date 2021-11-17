@@ -48,14 +48,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum Other {
 
-	OTH, NINF, PINF;
+    OTH, NINF, PINF;
 
-	public static Other fromValue(String v) {
-		return valueOf(v);
-	}
+    public static Other fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

@@ -37,7 +37,6 @@ import java.util.Map.Entry;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -61,6 +60,7 @@ import org.husky.common.enums.LanguageCode;
 import org.husky.common.utils.CustomizedYaml;
 import org.husky.common.utils.DateUtil;
 import org.husky.common.utils.LangText;
+import org.husky.common.utils.xml.XmlFactories;
 import org.husky.valueset.config.ValueSetConfig;
 import org.husky.valueset.enums.DesignationType;
 import org.husky.valueset.enums.SourceSystemType;
@@ -381,11 +381,7 @@ public class ValueSetManager {
 		var version = new Version();
 
 		String textContent;
-		var docBuilderFactory = DocumentBuilderFactory.newInstance();
-		docBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-		docBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
-		DocumentBuilder docBuilder;
-		docBuilder = docBuilderFactory.newDocumentBuilder();
+		DocumentBuilder docBuilder = XmlFactories.newSafeDocumentBuilder();
 		Document xmlDoc = docBuilder.parse(IOUtils.toInputStream(IOUtils.toString(reader), StandardCharsets.UTF_8));
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//ValueSet/@id");
@@ -880,11 +876,7 @@ public class ValueSetManager {
 		var version = new Version();
 
 		String textContent;
-		var docBuilderFactory = DocumentBuilderFactory.newInstance();
-		docBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-		docBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
-		DocumentBuilder docBuilder;
-		docBuilder = docBuilderFactory.newDocumentBuilder();
+		DocumentBuilder docBuilder = XmlFactories.newSafeDocumentBuilder();
 		Document xmlDoc = docBuilder.parse(IOUtils.toInputStream(IOUtils.toString(reader), StandardCharsets.UTF_8));
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//valueSets/project/valueSet/@id");

@@ -49,14 +49,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XParticipationVrfRespSprfWit {
 
-	VRF, RESP, SPRF, WIT;
+    VRF, RESP, SPRF, WIT;
 
-	public static XParticipationVrfRespSprfWit fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XParticipationVrfRespSprfWit fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

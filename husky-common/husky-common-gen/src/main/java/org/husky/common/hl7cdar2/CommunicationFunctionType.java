@@ -48,14 +48,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum CommunicationFunctionType {
 
-	RCV, RSP, SND;
+    RCV, RSP, SND;
 
-	public static CommunicationFunctionType fromValue(String v) {
-		return valueOf(v);
-	}
+    public static CommunicationFunctionType fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

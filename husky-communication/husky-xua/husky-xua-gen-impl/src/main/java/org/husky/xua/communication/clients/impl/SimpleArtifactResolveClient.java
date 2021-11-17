@@ -17,11 +17,8 @@
 package org.husky.xua.communication.clients.impl;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.util.UUID;
 
-import javax.xml.XMLConstants;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactoryConfigurationError;
@@ -40,7 +37,8 @@ import org.husky.xua.saml2.ArtifactResponse;
 import org.husky.xua.saml2.impl.ArtifactResolveImpl;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.opensaml.core.xml.io.MarshallingException;
-import org.xml.sax.SAXException;
+
+import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
 /**
  * <!-- @formatter:off -->
@@ -93,11 +91,10 @@ public class SimpleArtifactResolveClient extends AbstractSoapClient<ArtifactResp
 	@Override
 	protected ArtifactResponse parseResponse(String content) throws ClientSendException {
 		try {
-			final var docFactory = DocumentBuilderFactory.newInstance();
-			docFactory.setNamespaceAware(true);
-			docFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-			docFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
-			final var docBuilder = docFactory.newDocumentBuilder();
+			// Use the parser from the OpenSAML ParserPool because its implementation may be
+			// different than
+			// XmlFactories.newSafeDocumentBuilder()
+			final var docBuilder = XMLObjectProviderRegistrySupport.getParserPool();
 			final var soapDocument = docBuilder
 					.parse(new ByteArrayInputStream(content.getBytes()));
 
@@ -111,9 +108,8 @@ public class SimpleArtifactResolveClient extends AbstractSoapClient<ArtifactResp
 			// deserialize to the rtifactResponse instance
 			final var deserializer = new ArtifactResponseDeserializerImpl();
 			return deserializer.fromXmlElement(doc.getDocumentElement());
-		} catch (UnsupportedOperationException | IOException | DeserializeException
-				| TransformerFactoryConfigurationError | ParserConfigurationException
-				| SAXException e) {
+		} catch (UnsupportedOperationException | DeserializeException | TransformerFactoryConfigurationError
+				| XMLParserException e) {
 			throw new ClientSendException(e);
 		}
 	}

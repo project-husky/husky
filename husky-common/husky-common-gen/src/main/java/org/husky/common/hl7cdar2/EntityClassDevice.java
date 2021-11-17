@@ -48,14 +48,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum EntityClassDevice {
 
-	DEV, CER, MODDV;
+    DEV, CER, MODDV;
 
-	public static EntityClassDevice fromValue(String v) {
-		return valueOf(v);
-	}
+    public static EntityClassDevice fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

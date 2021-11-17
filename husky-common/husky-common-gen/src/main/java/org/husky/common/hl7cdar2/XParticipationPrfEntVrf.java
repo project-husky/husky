@@ -48,14 +48,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XParticipationPrfEntVrf {
 
-	PRF, VRF, ENT;
+    PRF, VRF, ENT;
 
-	public static XParticipationPrfEntVrf fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XParticipationPrfEntVrf fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

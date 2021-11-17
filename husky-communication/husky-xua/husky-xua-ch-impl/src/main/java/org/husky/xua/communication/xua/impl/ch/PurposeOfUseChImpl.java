@@ -29,21 +29,19 @@ import org.husky.xua.hl7v3.impl.PurposeOfUseBuilder;
  */
 public abstract class PurposeOfUseChImpl {
 
+	private static PurposeOfUse createPurposeOfUse(org.husky.communication.ch.enums.PurposeOfUse code) {
+		return new PurposeOfUseBuilder().code(code.getCodeValue())
+				.codeSystem(code.getCodeSystemId()).codeSystemName(code.getValueSetName())
+				.displayName(code.getDisplayName()).buildObject();
+	}
+
 	/**
 	 * Normal access.
 	 *
 	 * @return the purpose of use
 	 */
 	public static PurposeOfUse AUTO() {
-		return createPurposeOfUse(
-				org.husky.xua.communication.xua.impl.ch.PurposeOfUse.AUTOMATIC_UPLOAD);
-	}
-
-	private static PurposeOfUse createPurposeOfUse(
-			org.husky.xua.communication.xua.impl.ch.PurposeOfUse code) {
-		return new PurposeOfUseBuilder().code(code.getCodeValue())
-				.codeSystem(code.getCodeSystemId()).codeSystemName(code.getValueSetName())
-				.displayName(code.getDisplayName()).buildObject();
+		return createPurposeOfUse(org.husky.communication.ch.enums.PurposeOfUse.AUTOMATIC_UPLOAD);
 	}
 
 	/**
@@ -52,8 +50,7 @@ public abstract class PurposeOfUseChImpl {
 	 * @return the purpose of use
 	 */
 	public static PurposeOfUse EMER() {
-		return createPurposeOfUse(
-				org.husky.xua.communication.xua.impl.ch.PurposeOfUse.EMERGENCY_ACCESS);
+		return createPurposeOfUse(org.husky.communication.ch.enums.PurposeOfUse.EMERGENCY_ACCESS);
 	}
 
 	/**
@@ -62,8 +59,7 @@ public abstract class PurposeOfUseChImpl {
 	 * @return the purpose of use
 	 */
 	public static PurposeOfUse NORM() {
-		return createPurposeOfUse(
-				org.husky.xua.communication.xua.impl.ch.PurposeOfUse.NORMAL_ACCESS);
+		return createPurposeOfUse(org.husky.communication.ch.enums.PurposeOfUse.NORMAL_ACCESS);
 	}
 
 }

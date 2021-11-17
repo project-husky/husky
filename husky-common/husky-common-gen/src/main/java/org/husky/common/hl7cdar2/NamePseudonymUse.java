@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum NamePseudonymUse {
 
-	P, A;
+    P, A;
 
-	public static NamePseudonymUse fromValue(String v) {
-		return valueOf(v);
-	}
+    public static NamePseudonymUse fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

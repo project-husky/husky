@@ -56,28 +56,28 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "PQR")
 public class PQR extends CV {
 
-	@XmlAttribute(name = "value")
-	protected String value;
+    @XmlAttribute(name = "value")
+    protected String value;
 
-	/**
-	 * Ruft den Wert der value-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getValue() {
-		return value;
-	}
+    /**
+     * Ruft den Wert der value-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getValue() {
+        return value;
+    }
 
-	/**
-	 * Legt den Wert der value-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setValue(String value) {
-		this.value = value;
-	}
+    /**
+     * Legt den Wert der value-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setValue(String value) {
+        this.value = value;
+    }
 
 }

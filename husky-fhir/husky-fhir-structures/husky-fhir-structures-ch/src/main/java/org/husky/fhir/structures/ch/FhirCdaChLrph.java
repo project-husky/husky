@@ -17,13 +17,7 @@
 
 package org.husky.fhir.structures.ch;
 
-import org.hl7.fhir.dstu3.model.Basic;
-import org.hl7.fhir.dstu3.model.DocumentManifest;
-import org.hl7.fhir.dstu3.model.Observation;
-import org.hl7.fhir.dstu3.model.Organization;
-import org.hl7.fhir.dstu3.model.Patient;
-import org.hl7.fhir.dstu3.model.Person;
-import org.hl7.fhir.dstu3.model.Reference;
+import org.hl7.fhir.r4.model.*;
 import org.husky.fhir.structures.gen.FhirCommon;
 
 import ca.uhn.fhir.model.api.annotation.Child;

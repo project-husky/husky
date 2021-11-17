@@ -53,32 +53,32 @@ import javax.xml.bind.annotation.XmlType;
 @XmlSeeAlso({ IVLINT.class })
 public class SXCMINT extends INT {
 
-	@XmlAttribute(name = "operator")
-	protected SetOperator operator;
+    @XmlAttribute(name = "operator")
+    protected SetOperator operator;
 
-	/**
-	 * Ruft den Wert der operator-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link SetOperator }
-	 *
-	 */
-	public SetOperator getOperator() {
-		if (operator == null) {
-			return SetOperator.I;
-		} else {
-			return operator;
-		}
-	}
+    /**
+     * Ruft den Wert der operator-Eigenschaft ab.
+     *
+     * @return possible object is {@link SetOperator }
+     *
+     */
+    public SetOperator getOperator() {
+        if (operator == null) {
+            return SetOperator.I;
+        } else {
+            return operator;
+        }
+    }
 
-	/**
-	 * Legt den Wert der operator-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link SetOperator }
-	 *
-	 */
-	public void setOperator(SetOperator value) {
-		this.operator = value;
-	}
+    /**
+     * Legt den Wert der operator-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link SetOperator }
+     *
+     */
+    public void setOperator(SetOperator value) {
+        this.operator = value;
+    }
 
 }

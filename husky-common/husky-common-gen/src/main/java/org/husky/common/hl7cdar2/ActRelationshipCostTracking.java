@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ActRelationshipCostTracking {
 
-	CHRG, COST;
+    CHRG, COST;
 
-	public static ActRelationshipCostTracking fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ActRelationshipCostTracking fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

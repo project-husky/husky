@@ -50,14 +50,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum EntityClassPlace {
 
-	PLC, CITY, COUNTRY, COUNTY, PROVINCE;
+    PLC, CITY, COUNTRY, COUNTY, PROVINCE;
 
-	public static EntityClassPlace fromValue(String v) {
-		return valueOf(v);
-	}
+    public static EntityClassPlace fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

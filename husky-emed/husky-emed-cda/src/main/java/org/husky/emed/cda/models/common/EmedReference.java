@@ -1,8 +1,8 @@
 package org.husky.emed.cda.models.common;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.husky.common.hl7cdar2.*;
 import org.husky.emed.cda.errors.InvalidEmedContentException;
-import org.husky.emed.cda.generated.hl7cdar2.*;
 import org.husky.emed.cda.utils.IiUtils;
 
 import java.util.Objects;

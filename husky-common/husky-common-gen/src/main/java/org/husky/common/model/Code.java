@@ -17,6 +17,7 @@
 package org.husky.common.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.husky.common.basetypes.CodeBaseType;
 import org.husky.common.enums.NullFlavor;
@@ -69,7 +70,7 @@ public class Code extends CodeBaseType {
 
 				var ed = hl7CdaR2Value.getOriginalText();
 				if (ed != null)
-					retVal.setOriginalText(ed.xmlContent);
+					retVal.setOriginalText(ed.getTextContent());
 			}
 
 			for (CD item : hl7CdaR2Value.getTranslation()) {
@@ -138,7 +139,7 @@ public class Code extends CodeBaseType {
 				value = baseType.getOriginalText();
 				if (value != null) {
 					ED ed = new ED();
-					ed.xmlContent = value;
+					ed.setXmlMixed(List.of(value));
 					retVal.setOriginalText(ed);
 				}
 			}
@@ -208,7 +209,7 @@ public class Code extends CodeBaseType {
 				value = baseType.getOriginalText();
 				if (value != null) {
 					var ed = new ED();
-					ed.xmlContent = value;
+					ed.setXmlMixed(List.of(value));
 					retVal.setOriginalText(ed);
 				}
 			}
@@ -278,7 +279,7 @@ public class Code extends CodeBaseType {
 				value = baseType.getOriginalText();
 				if (value != null) {
 					var ed = new ED();
-					ed.xmlContent = value;
+					ed.setXmlMixed(List.of(value));
 					retVal.setOriginalText(ed);
 				}
 			}

@@ -3,8 +3,11 @@ package org.husky.emed.cda.generated.artdecor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Participant1;
+import org.husky.common.hl7cdar2.II;
+import org.husky.common.hl7cdar2.IVLTS;
+import org.husky.common.hl7cdar2.ObjectFactory;
+import org.husky.common.hl7cdar2.POCDMT000040AssociatedEntity;
+import org.husky.common.hl7cdar2.POCDMT000040Participant1;
 
 /**
  * cdach_header_PatientContact
@@ -31,9 +34,9 @@ public class CdachHeaderPatientContact extends POCDMT000040Participant1 {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -42,14 +45,14 @@ public class CdachHeaderPatientContact extends POCDMT000040Participant1 {
      * Gets the hl7AssociatedEntity
      * Either the contact person or the contact's organization SHALL be present.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040AssociatedEntity getHl7AssociatedEntity() {
+    public POCDMT000040AssociatedEntity getHl7AssociatedEntity() {
         return associatedEntity;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
@@ -57,7 +60,7 @@ public class CdachHeaderPatientContact extends POCDMT000040Participant1 {
      * Gets the hl7Time
      * Validity period of the participation.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.IVLTS getHl7Time() {
+    public IVLTS getHl7Time() {
         return time;
     }
 
@@ -65,14 +68,14 @@ public class CdachHeaderPatientContact extends POCDMT000040Participant1 {
      * Sets the hl7AssociatedEntity
      * Either the contact person or the contact's organization SHALL be present.
      */
-    public void setHl7AssociatedEntity(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040AssociatedEntity value) {
+    public void setHl7AssociatedEntity(POCDMT000040AssociatedEntity value) {
         this.associatedEntity = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
@@ -81,7 +84,7 @@ public class CdachHeaderPatientContact extends POCDMT000040Participant1 {
      * Sets the hl7Time
      * Validity period of the participation.
      */
-    public void setHl7Time(org.husky.emed.cda.generated.hl7cdar2.IVLTS value) {
+    public void setHl7Time(IVLTS value) {
         this.time = value;
     }
 }

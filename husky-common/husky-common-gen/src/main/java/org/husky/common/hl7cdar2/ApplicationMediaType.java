@@ -49,28 +49,28 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ApplicationMediaType {
 
-	@XmlEnumValue("application/dicom")
-	APPLICATION_DICOM("application/dicom"), @XmlEnumValue("application/msword")
-	APPLICATION_MSWORD("application/msword"), @XmlEnumValue("application/pdf")
-	APPLICATION_PDF("application/pdf");
+    @XmlEnumValue("application/dicom")
+    APPLICATION_DICOM("application/dicom"), @XmlEnumValue("application/msword")
+    APPLICATION_MSWORD("application/msword"), @XmlEnumValue("application/pdf")
+    APPLICATION_PDF("application/pdf");
 
-	public static ApplicationMediaType fromValue(String v) {
-		for (ApplicationMediaType c : ApplicationMediaType.values()) {
-			if (c.value.equals(v)) {
-				return c;
-			}
-		}
-		throw new IllegalArgumentException(v);
-	}
+    public static ApplicationMediaType fromValue(String v) {
+        for (ApplicationMediaType c : ApplicationMediaType.values()) {
+            if (c.value.equals(v)) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException(v);
+    }
 
-	private final String value;
+    private final String value;
 
-	ApplicationMediaType(String v) {
-		value = v;
-	}
+    ApplicationMediaType(String v) {
+        value = v;
+    }
 
-	public String value() {
-		return value;
-	}
+    public String value() {
+        return value;
+    }
 
 }

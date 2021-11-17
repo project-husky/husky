@@ -3,8 +3,11 @@ package org.husky.emed.cda.generated.artdecor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040ObservationMedia;
+import org.husky.common.hl7cdar2.CS;
+import org.husky.common.hl7cdar2.ED;
+import org.husky.common.hl7cdar2.II;
+import org.husky.common.hl7cdar2.ObjectFactory;
+import org.husky.common.hl7cdar2.POCDMT000040ObservationMedia;
 
 /**
  * cdach_entry_ObservationMedia
@@ -29,7 +32,7 @@ public class CdachEntryObservationMedia extends POCDMT000040ObservationMedia {
      * Adds a hl7Id
      * IDs for this item MAY be filled for traceability.
      */
-    public void addHl7Id(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void addHl7Id(II value) {
         getId().add(value);
     }
 
@@ -44,9 +47,9 @@ public class CdachEntryObservationMedia extends POCDMT000040ObservationMedia {
     /**
      * Creates fixed contents for CDA Element hl7LanguageCode
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.CS createHl7LanguageCodeFixedValue() {
+    private static CS createHl7LanguageCodeFixedValue() {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.CS retVal = factory.createCS();
+        CS retVal = factory.createCS();
         return retVal;
     }
 
@@ -55,9 +58,9 @@ public class CdachEntryObservationMedia extends POCDMT000040ObservationMedia {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -67,9 +70,9 @@ public class CdachEntryObservationMedia extends POCDMT000040ObservationMedia {
      *
      * @param representation the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.ED createHl7ValueFixedValue(String representation) {
+    private static ED createHl7ValueFixedValue(String representation) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.ED retVal = factory.createED();
+        ED retVal = factory.createED();
         return retVal;
         // TODO: Contents shall be taken from enum: org.ehealth_connector.emed.cda.generated.hl7cdar2.VideoMediaType
     }
@@ -78,14 +81,14 @@ public class CdachEntryObservationMedia extends POCDMT000040ObservationMedia {
      * Gets the hl7LanguageCode
      * The RFC 1766 (ISO-639-1 and ISO 3166) based language in which the multimedia object is written. If it isn't known or not available (e.g. for pictures), use nullFlavor instead.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CS getHl7LanguageCode() {
+    public CS getHl7LanguageCode() {
         return languageCode;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
@@ -93,7 +96,7 @@ public class CdachEntryObservationMedia extends POCDMT000040ObservationMedia {
      * Gets the hl7Value
      * This template defines only the embedding of multimedia objects in the CDA document.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.ED getHl7Value() {
+    public ED getHl7Value() {
         return value;
     }
 
@@ -101,14 +104,14 @@ public class CdachEntryObservationMedia extends POCDMT000040ObservationMedia {
      * Sets the hl7LanguageCode
      * The RFC 1766 (ISO-639-1 and ISO 3166) based language in which the multimedia object is written. If it isn't known or not available (e.g. for pictures), use nullFlavor instead.
      */
-    public void setHl7LanguageCode(org.husky.emed.cda.generated.hl7cdar2.CS value) {
+    public void setHl7LanguageCode(CS value) {
         this.languageCode = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
@@ -117,7 +120,7 @@ public class CdachEntryObservationMedia extends POCDMT000040ObservationMedia {
      * Sets the hl7Value
      * This template defines only the embedding of multimedia objects in the CDA document.
      */
-    public void setHl7Value(org.husky.emed.cda.generated.hl7cdar2.ED value) {
+    public void setHl7Value(ED value) {
         this.value = value;
     }
 }

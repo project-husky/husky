@@ -58,158 +58,158 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "COCT_MT230100UV.Author", namespace = "urn:ihe:pharm", propOrder = { "realmCode",
-		"typeId", "templateId", "time", "territorialAuthority" })
+        "typeId", "templateId", "time", "territorialAuthority" })
 public class COCTMT230100UVAuthor {
 
-	@XmlElement(namespace = "urn:hl7-org:v3")
-	protected List<CS> realmCode;
-	@XmlElement(namespace = "urn:hl7-org:v3")
-	protected AllInfrastructureRootTypeId typeId;
-	@XmlElement(namespace = "urn:hl7-org:v3")
-	protected List<AllInfrastructureRootTemplateId> templateId;
-	protected TS time;
-	@XmlElement(required = true)
-	protected COCTMT230100UVTerritorialAuthority territorialAuthority;
-	@XmlAttribute(name = "typeCode", required = true)
-	protected ParticipationAuthorOriginator typeCode;
+    @XmlElement(namespace = "urn:hl7-org:v3")
+    protected List<CS> realmCode;
+    @XmlElement(namespace = "urn:hl7-org:v3")
+    protected AllInfrastructureRootTypeId typeId;
+    @XmlElement(namespace = "urn:hl7-org:v3")
+    protected List<AllInfrastructureRootTemplateId> templateId;
+    protected TS time;
+    @XmlElement(required = true)
+    protected COCTMT230100UVTerritorialAuthority territorialAuthority;
+    @XmlAttribute(name = "typeCode", required = true)
+    protected ParticipationAuthorOriginator typeCode;
 
-	/**
-	 * Gets the value of the realmCode property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the realmCode property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getRealmCode().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link CS }
-	 *
-	 *
-	 */
-	public List<CS> getRealmCode() {
-		if (realmCode == null) {
-			realmCode = new ArrayList<CS>();
-		}
-		return this.realmCode;
-	}
+    /**
+     * Gets the value of the realmCode property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the realmCode property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getRealmCode().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link CS }
+     *
+     *
+     */
+    public List<CS> getRealmCode() {
+        if (realmCode == null) {
+            realmCode = new ArrayList<CS>();
+        }
+        return this.realmCode;
+    }
 
-	/**
-	 * Gets the value of the templateId property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the templateId property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getTemplateId().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link AllInfrastructureRootTemplateId }
-	 *
-	 *
-	 */
-	public List<AllInfrastructureRootTemplateId> getTemplateId() {
-		if (templateId == null) {
-			templateId = new ArrayList<AllInfrastructureRootTemplateId>();
-		}
-		return this.templateId;
-	}
+    /**
+     * Gets the value of the templateId property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the templateId property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getTemplateId().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link AllInfrastructureRootTemplateId }
+     *
+     *
+     */
+    public List<AllInfrastructureRootTemplateId> getTemplateId() {
+        if (templateId == null) {
+            templateId = new ArrayList<AllInfrastructureRootTemplateId>();
+        }
+        return this.templateId;
+    }
 
-	/**
-	 * Ruft den Wert der territorialAuthority-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link COCTMT230100UVTerritorialAuthority }
-	 *
-	 */
-	public COCTMT230100UVTerritorialAuthority getTerritorialAuthority() {
-		return territorialAuthority;
-	}
+    /**
+     * Ruft den Wert der territorialAuthority-Eigenschaft ab.
+     *
+     * @return possible object is {@link COCTMT230100UVTerritorialAuthority }
+     *
+     */
+    public COCTMT230100UVTerritorialAuthority getTerritorialAuthority() {
+        return territorialAuthority;
+    }
 
-	/**
-	 * Ruft den Wert der time-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link TS }
-	 *
-	 */
-	public TS getTime() {
-		return time;
-	}
+    /**
+     * Ruft den Wert der time-Eigenschaft ab.
+     *
+     * @return possible object is {@link TS }
+     *
+     */
+    public TS getTime() {
+        return time;
+    }
 
-	/**
-	 * Ruft den Wert der typeCode-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link ParticipationAuthorOriginator }
-	 *
-	 */
-	public ParticipationAuthorOriginator getTypeCode() {
-		return typeCode;
-	}
+    /**
+     * Ruft den Wert der typeCode-Eigenschaft ab.
+     *
+     * @return possible object is {@link ParticipationAuthorOriginator }
+     *
+     */
+    public ParticipationAuthorOriginator getTypeCode() {
+        return typeCode;
+    }
 
-	/**
-	 * Ruft den Wert der typeId-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link AllInfrastructureRootTypeId }
-	 *
-	 */
-	public AllInfrastructureRootTypeId getTypeId() {
-		return typeId;
-	}
+    /**
+     * Ruft den Wert der typeId-Eigenschaft ab.
+     *
+     * @return possible object is {@link AllInfrastructureRootTypeId }
+     *
+     */
+    public AllInfrastructureRootTypeId getTypeId() {
+        return typeId;
+    }
 
-	/**
-	 * Legt den Wert der territorialAuthority-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link COCTMT230100UVTerritorialAuthority }
-	 *
-	 */
-	public void setTerritorialAuthority(COCTMT230100UVTerritorialAuthority value) {
-		this.territorialAuthority = value;
-	}
+    /**
+     * Legt den Wert der territorialAuthority-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link COCTMT230100UVTerritorialAuthority }
+     *
+     */
+    public void setTerritorialAuthority(COCTMT230100UVTerritorialAuthority value) {
+        this.territorialAuthority = value;
+    }
 
-	/**
-	 * Legt den Wert der time-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link TS }
-	 *
-	 */
-	public void setTime(TS value) {
-		this.time = value;
-	}
+    /**
+     * Legt den Wert der time-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link TS }
+     *
+     */
+    public void setTime(TS value) {
+        this.time = value;
+    }
 
-	/**
-	 * Legt den Wert der typeCode-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link ParticipationAuthorOriginator }
-	 *
-	 */
-	public void setTypeCode(ParticipationAuthorOriginator value) {
-		this.typeCode = value;
-	}
+    /**
+     * Legt den Wert der typeCode-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link ParticipationAuthorOriginator }
+     *
+     */
+    public void setTypeCode(ParticipationAuthorOriginator value) {
+        this.typeCode = value;
+    }
 
-	/**
-	 * Legt den Wert der typeId-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link AllInfrastructureRootTypeId }
-	 *
-	 */
-	public void setTypeId(AllInfrastructureRootTypeId value) {
-		this.typeId = value;
-	}
+    /**
+     * Legt den Wert der typeId-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link AllInfrastructureRootTypeId }
+     *
+     */
+    public void setTypeId(AllInfrastructureRootTypeId value) {
+        this.typeId = value;
+    }
 
 }

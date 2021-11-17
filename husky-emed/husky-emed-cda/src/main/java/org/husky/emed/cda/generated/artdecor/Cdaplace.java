@@ -2,7 +2,9 @@ package org.husky.emed.cda.generated.artdecor;
 
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Place;
+import org.husky.common.hl7cdar2.AD;
+import org.husky.common.hl7cdar2.EN;
+import org.husky.common.hl7cdar2.POCDMT000040Place;
 
 /**
  * CDAPlace
@@ -22,28 +24,28 @@ public class Cdaplace extends POCDMT000040Place {
     /**
      * Gets the hl7Addr
      */
-    public org.husky.emed.cda.generated.hl7cdar2.AD getHl7Addr() {
+    public AD getHl7Addr() {
         return addr;
     }
 
     /**
      * Gets the hl7Name
      */
-    public org.husky.emed.cda.generated.hl7cdar2.EN getHl7Name() {
+    public EN getHl7Name() {
         return name;
     }
 
     /**
      * Sets the hl7Addr
      */
-    public void setHl7Addr(org.husky.emed.cda.generated.hl7cdar2.AD value) {
+    public void setHl7Addr(AD value) {
         this.addr = value;
     }
 
     /**
      * Sets the hl7Name
      */
-    public void setHl7Name(org.husky.emed.cda.generated.hl7cdar2.EN value) {
+    public void setHl7Name(EN value) {
         this.name = value;
     }
 }

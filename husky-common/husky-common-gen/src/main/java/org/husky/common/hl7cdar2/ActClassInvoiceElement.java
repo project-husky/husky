@@ -46,14 +46,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ActClassInvoiceElement {
 
-	INVE;
+    INVE;
 
-	public static ActClassInvoiceElement fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ActClassInvoiceElement fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

@@ -32,6 +32,7 @@ import org.herasaf.xacml.core.policy.impl.ObligationsType;
 import org.herasaf.xacml.core.policy.impl.PolicySetType;
 import org.husky.xua.core.SecurityObjectBuilder;
 import org.husky.xua.saml2.SimpleBuilder;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.ehealthswiss.XACMLPolicySetIdReferenceStatementType;
 import org.opensaml.core.xml.schema.impl.XSStringBuilder;
 import org.opensaml.xacml.policy.impl.DefaultsTypeImplBuilder;
 import org.opensaml.xacml.policy.impl.DescriptionTypeImplBuilder;
@@ -172,14 +173,34 @@ public class PolicySetBuilderImpl
 		if (policySetType.getAdditionalInformation() != null) {
 			for (JAXBElement<?> element : policySetType.getAdditionalInformation()) {
 				if (element != null) {
-					if (element.getValue() instanceof org.herasaf.xacml.core.policy.impl.IdReferenceType) {
-						var idReferenceType = (org.herasaf.xacml.core.policy.impl.IdReferenceType) element.getValue();
-						var idReference = new IdReferenceTypeImplBuilder().buildObject();
-						idReference.setVersion(idReferenceType.getVersion());
-						idReference.setValue(idReferenceType.getValue());
-						idReference.setEarliestVersion(idReferenceType.getEarliestVersion());
-						idReference.setLatestVersion(idReferenceType.getLatestVersion());
-						policySet.getPolicySetIdReferences().add(idReference);
+					if (element.getValue() instanceof XACMLPolicySetIdReferenceStatementType) {
+						var idReferenceType = (XACMLPolicySetIdReferenceStatementType) element.getValue();
+
+						if (idReferenceType != null && idReferenceType.getPolicySetIdReference() != null
+								&& !idReferenceType.getPolicySetIdReference().isEmpty()
+								&& idReferenceType.getPolicySetIdReference().get(0) != null) {
+							var idReference = new IdReferenceTypeImplBuilder().buildObject(
+									new QName("urn:oasis:names:tc:xacml:2.0:policy:schema:os", "PolicySetIdReference"));
+							idReference.setVersion(idReferenceType.getPolicySetIdReference().get(0).getVersion());
+							idReference.setValue(idReferenceType.getPolicySetIdReference().get(0).getValue());
+							idReference.setEarliestVersion(
+									idReferenceType.getPolicySetIdReference().get(0).getEarliestVersion());
+							idReference.setLatestVersion(
+									idReferenceType.getPolicySetIdReference().get(0).getLatestVersion());
+							policySet.getPolicySetIdReferences().add(idReference);
+						}
+					} else if (element.getValue() instanceof IdReferenceType) {
+						var idReferenceType = (IdReferenceType) element.getValue();
+
+						if (idReferenceType != null) {
+							var idReference = new IdReferenceTypeImplBuilder().buildObject(
+									new QName("urn:oasis:names:tc:xacml:2.0:policy:schema:os", "PolicySetIdReference"));
+							idReference.setVersion(idReferenceType.getVersion());
+							idReference.setValue(idReferenceType.getValue());
+							idReference.setEarliestVersion(idReferenceType.getEarliestVersion());
+							idReference.setLatestVersion(idReferenceType.getLatestVersion());
+							policySet.getPolicySetIdReferences().add(idReference);
+						}
 					}
 				}
 

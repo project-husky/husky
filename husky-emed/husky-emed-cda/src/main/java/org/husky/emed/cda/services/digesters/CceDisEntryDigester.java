@@ -1,10 +1,10 @@
 package org.husky.emed.cda.services.digesters;
 
+import org.husky.common.hl7cdar2.*;
 import org.husky.common.utils.StreamUtils;
 import org.husky.emed.cda.errors.InvalidEmedContentException;
 import org.husky.emed.cda.generated.artdecor.enums.ActSubstanceAdminSubstitutionCode;
 import org.husky.emed.cda.generated.artdecor.enums.DispenseSupplyType;
-import org.husky.emed.cda.generated.hl7cdar2.*;
 import org.husky.emed.cda.models.common.AuthorDigest;
 import org.husky.emed.cda.models.common.EmedReference;
 import org.husky.emed.cda.models.common.QuantityWithUnit;

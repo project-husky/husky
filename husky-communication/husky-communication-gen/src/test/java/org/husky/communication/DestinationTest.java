@@ -24,7 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.net.URISyntaxException;
 
 import org.husky.common.communication.Destination;
-import org.husky.common.utils.Util;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -65,39 +64,32 @@ public class DestinationTest {
 
 	@Test
 	public void testKeyStoreConstructor() {
-		final String keystore = Util.extractFileFromResource(KEY_STORE);
-
-		Destination dest = new Destination(ORGANIZATIONAL_ID, repUri, keystore, KEY_STORE_PASS);
+		Destination dest = new Destination(ORGANIZATIONAL_ID, repUri, KEY_STORE, KEY_STORE_PASS);
 		assertEquals(ORGANIZATIONAL_ID, dest.getSenderOrganizationalOid());
 		assertEquals(repUri, dest.getUri());
-		assertEquals(keystore, dest.getKeyStore());
+		assertEquals(KEY_STORE, dest.getKeyStore());
 		assertEquals(KEY_STORE_PASS, dest.getKeyStorePassword());
-		assertEquals(keystore, dest.getTrustStore());
+		assertEquals(KEY_STORE, dest.getTrustStore());
 		assertEquals(KEY_STORE_PASS, dest.getTrustStorePassword());
 	}
 
 	@Test
 	public void testKeyStoreTrustStoreConstructor() {
-		final String keystore = Util.extractFileFromResource(KEY_STORE);
-		final String truststore = Util.extractFileFromResource(TRUST_STORE);
-
-		Destination dest = new Destination(ORGANIZATIONAL_ID, repUri, keystore, KEY_STORE_PASS,
-				truststore, TRUST_STORE_PASS);
+		Destination dest = new Destination(ORGANIZATIONAL_ID, repUri, KEY_STORE, KEY_STORE_PASS,
+				TRUST_STORE, TRUST_STORE_PASS);
 		assertEquals(ORGANIZATIONAL_ID, dest.getSenderOrganizationalOid());
 		assertEquals(repUri, dest.getUri());
-		assertEquals(keystore, dest.getKeyStore());
+		assertEquals(KEY_STORE, dest.getKeyStore());
 		assertEquals(KEY_STORE_PASS, dest.getKeyStorePassword());
-		assertEquals(truststore, dest.getTrustStore());
+		assertEquals(TRUST_STORE, dest.getTrustStore());
 		assertEquals(TRUST_STORE_PASS, dest.getTrustStorePassword());
 	}
 
 	@Test
 	public void testSetterGetter() {
 		Destination dest = new Destination();
-		final String keystore = Util.extractFileFromResource(KEY_STORE);
-
-		dest.setKeyStore(keystore);
-		assertEquals(keystore, dest.getKeyStore());
+		dest.setKeyStore(KEY_STORE);
+		assertEquals(KEY_STORE, dest.getKeyStore());
 		dest.setKeyStorePassword(KEY_STORE_PASS);
 		assertEquals(KEY_STORE_PASS, dest.getKeyStorePassword());
 		dest.setUri(u1);
@@ -114,10 +106,8 @@ public class DestinationTest {
 		assertEquals(ORGANIZATIONAL_ID, dest.getSenderApplicationOid());
 		dest.setSenderOrganizationalOid(ORGANIZATIONAL_ID);
 		assertEquals(ORGANIZATIONAL_ID, dest.getSenderOrganizationalOid());
-
-		final String truststore = Util.extractFileFromResource(TRUST_STORE);
-		dest.setTrustStore(truststore);
-		assertEquals(truststore, dest.getTrustStore());
+		dest.setTrustStore(TRUST_STORE);
+		assertEquals(TRUST_STORE, dest.getTrustStore());
 		dest.setTrustStorePassword(TRUST_STORE_PASS);
 		assertEquals(TRUST_STORE_PASS, dest.getTrustStorePassword());
 	}

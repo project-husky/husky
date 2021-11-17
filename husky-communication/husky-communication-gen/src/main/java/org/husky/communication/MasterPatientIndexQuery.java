@@ -19,7 +19,7 @@ package org.husky.communication;
 
 import java.util.Date;
 
-import org.hl7.fhir.dstu3.model.Identifier;
+import org.hl7.fhir.r4.model.Identifier;
 import org.husky.common.communication.Destination;
 import org.husky.common.enums.AdministrativeGender;
 import org.husky.common.model.Address;

@@ -16,11 +16,8 @@
  */
 package org.husky.communication.ch.ppq.impl;
 
-import javax.xml.bind.JAXBException;
-
 import org.husky.communication.ch.ppq.api.PrivacyPolicyQueryResponse;
 import org.husky.xua.core.SecurityObject;
-import org.husky.xua.exceptions.DeserializeException;
 import org.husky.xua.saml2.impl.AssertionBuilderImpl;
 import org.husky.xua.saml2.impl.StatusBuilderImpl;
 import org.husky.xua.saml2.impl.StatusImpl;
@@ -47,7 +44,7 @@ public class PrivacyPolicyQueryResponseImpl
 		wrappedObject = aInternalObject;
 	}
 
-	protected PrivacyPolicyQueryResponseImpl(ResponseType aInternalObject) throws JAXBException, DeserializeException {
+	protected PrivacyPolicyQueryResponseImpl(ResponseType aInternalObject) {
 
 		wrappedObject = new ResponseBuilder().buildObject();
 		wrappedObject.setStatus(
@@ -61,22 +58,6 @@ public class PrivacyPolicyQueryResponseImpl
 									.getWrappedObject());
 				}
 			}
-
-		/*
-		 * final var marshaller = JAXBContext .newInstance(ResponseType.class,
-		 * ObjectFactory.class,
-		 * org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.delegation.ObjectFactory.
-		 * class) .createMarshaller();
-		 * marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);
-		 * marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
-		 * marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF8"); final var
-		 * stringWriter = new StringWriter(); marshaller.marshal(aInternalObject,
-		 * stringWriter);
-		 * 
-		 * var deserializer = new ResponseDeserialiser();
-		 * 
-		 * wrappedObject = deserializer.fromXmlString(stringWriter.toString());
-		 */
 
 	}
 

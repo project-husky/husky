@@ -57,36 +57,36 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum URLScheme {
 
-	@XmlEnumValue("fax")
-	FAX("fax"), @XmlEnumValue("file")
-	FILE("file"), @XmlEnumValue("ftp")
-	FTP("ftp"), @XmlEnumValue("http")
-	HTTP("http"), @XmlEnumValue("mailto")
-	MAILTO("mailto"), @XmlEnumValue("mllp")
-	MLLP("mllp"), @XmlEnumValue("modem")
-	MODEM("modem"), @XmlEnumValue("nfs")
-	NFS("nfs"), @XmlEnumValue("tel")
-	TEL("tel"), @XmlEnumValue("telnet")
-	TELNET("telnet"), @XmlEnumValue("me")
-	ME("me");
+    @XmlEnumValue("fax")
+    FAX("fax"), @XmlEnumValue("file")
+    FILE("file"), @XmlEnumValue("ftp")
+    FTP("ftp"), @XmlEnumValue("http")
+    HTTP("http"), @XmlEnumValue("mailto")
+    MAILTO("mailto"), @XmlEnumValue("mllp")
+    MLLP("mllp"), @XmlEnumValue("modem")
+    MODEM("modem"), @XmlEnumValue("nfs")
+    NFS("nfs"), @XmlEnumValue("tel")
+    TEL("tel"), @XmlEnumValue("telnet")
+    TELNET("telnet"), @XmlEnumValue("me")
+    ME("me");
 
-	public static URLScheme fromValue(String v) {
-		for (URLScheme c : URLScheme.values()) {
-			if (c.value.equals(v)) {
-				return c;
-			}
-		}
-		throw new IllegalArgumentException(v);
-	}
+    public static URLScheme fromValue(String v) {
+        for (URLScheme c : URLScheme.values()) {
+            if (c.value.equals(v)) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException(v);
+    }
 
-	private final String value;
+    private final String value;
 
-	URLScheme(String v) {
-		value = v;
-	}
+    URLScheme(String v) {
+        value = v;
+    }
 
-	public String value() {
-		return value;
-	}
+    public String value() {
+        return value;
+    }
 
 }

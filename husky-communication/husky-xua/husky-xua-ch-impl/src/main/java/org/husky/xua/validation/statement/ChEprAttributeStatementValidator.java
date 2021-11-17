@@ -14,9 +14,9 @@ import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACM
 import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_PURPOSEOFUSE;
 import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_RESOURCEID;
 import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_SUBJECTID;
-import static org.husky.xua.communication.xua.impl.ch.PurposeOfUse.AUTOMATIC_UPLOAD;
-import static org.husky.xua.communication.xua.impl.ch.PurposeOfUse.EMERGENCY_ACCESS;
-import static org.husky.xua.communication.xua.impl.ch.PurposeOfUse.NORMAL_ACCESS;
+import static org.husky.communication.ch.enums.PurposeOfUse.AUTOMATIC_UPLOAD;
+import static org.husky.communication.ch.enums.PurposeOfUse.EMERGENCY_ACCESS;
+import static org.husky.communication.ch.enums.PurposeOfUse.NORMAL_ACCESS;
 import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_HOME_COMMUNITY_ID;
 import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ORGANIZATIONS_ID;
 import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ORGANIZATIONS_NAME;
@@ -31,7 +31,7 @@ import java.util.Optional;
 import javax.xml.namespace.QName;
 
 import org.husky.communication.ch.enums.Role;
-import org.husky.xua.communication.xua.impl.ch.PurposeOfUse;
+import org.husky.communication.ch.enums.PurposeOfUse;
 import org.husky.xua.hl7v3.impl.AbstractImpl;
 import org.husky.xua.hl7v3.impl.PurposeOfUseImpl;
 import org.husky.xua.validation.ChEprAssertionValidationParameters;

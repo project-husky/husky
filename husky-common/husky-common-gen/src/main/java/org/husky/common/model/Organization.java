@@ -72,7 +72,7 @@ public class Organization extends OrganizationBaseType {
 			retVal.nullFlavor.add(nf.getCodeValue());
 		} else {
 
-			retVal.xmlContent = baseType.getName();
+			retVal.setXmlMixed(baseType.getName());
 			// Default=legal name
 			if (baseType.getUsage() == null)
 				retVal.getUse().add("L");
@@ -105,7 +105,7 @@ public class Organization extends OrganizationBaseType {
 			}
 
 			retVal.addName(
-					NameBaseType.builder().withName(hl7CdaR2Value.getName().xmlContent).build());
+					NameBaseType.builder().withName(hl7CdaR2Value.getName().getMergedXmlMixed()).build());
 
 			retVal.addTelecom(Telecom.createTelecomBaseType(hl7CdaR2Value.getTelecom()));
 		} else
@@ -139,7 +139,7 @@ public class Organization extends OrganizationBaseType {
 			}
 
 			for (ON item : hl7CdaR2Value.getName()) {
-				retVal.addName(NameBaseType.builder().withName(item.xmlContent).build());
+				retVal.addName(NameBaseType.builder().withName(item.getMergedXmlMixed()).build());
 			}
 
 			for (TEL item : hl7CdaR2Value.getTelecom()) {

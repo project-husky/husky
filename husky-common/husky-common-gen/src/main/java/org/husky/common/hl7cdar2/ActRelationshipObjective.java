@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ActRelationshipObjective {
 
-	OBJC, OBJF;
+    OBJC, OBJF;
 
-	public static ActRelationshipObjective fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ActRelationshipObjective fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

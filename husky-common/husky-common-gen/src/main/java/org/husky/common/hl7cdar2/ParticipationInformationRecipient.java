@@ -51,14 +51,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ParticipationInformationRecipient {
 
-	IRCP, NOT, PRCP, REFB, REFT, TRC;
+    IRCP, NOT, PRCP, REFB, REFT, TRC;
 
-	public static ParticipationInformationRecipient fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ParticipationInformationRecipient fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

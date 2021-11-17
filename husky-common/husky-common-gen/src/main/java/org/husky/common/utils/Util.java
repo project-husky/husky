@@ -62,25 +62,17 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.text.StringEscapeUtils;
-import org.husky.common.basetypes.AddressBaseType;
-import org.husky.common.basetypes.IdentificatorBaseType;
-import org.husky.common.basetypes.NameBaseType;
 import org.husky.common.basetypes.OrganizationBaseType;
-import org.husky.common.basetypes.TelecomBaseType;
 import org.husky.common.enums.PostalAddressUse;
 import org.husky.common.enums.Signature;
 import org.husky.common.enums.TelecomAddressUse;
 import org.husky.common.hl7cdar2.AD;
 import org.husky.common.hl7cdar2.AdxpCity;
 import org.husky.common.hl7cdar2.AdxpPostalCode;
-import org.husky.common.hl7cdar2.CD;
-import org.husky.common.hl7cdar2.CE;
 import org.husky.common.hl7cdar2.ED;
 import org.husky.common.hl7cdar2.ENXP;
 import org.husky.common.hl7cdar2.II;
-import org.husky.common.hl7cdar2.IVLPQ;
 import org.husky.common.hl7cdar2.IVLTS;
-import org.husky.common.hl7cdar2.IVXBTS;
 import org.husky.common.hl7cdar2.ON;
 import org.husky.common.hl7cdar2.PN;
 import org.husky.common.hl7cdar2.POCDMT000040AssignedAuthor;
@@ -93,14 +85,9 @@ import org.husky.common.hl7cdar2.POCDMT000040LegalAuthenticator;
 import org.husky.common.hl7cdar2.ST;
 import org.husky.common.hl7cdar2.TEL;
 import org.husky.common.hl7cdar2.XActRelationshipEntryRelationship;
-import org.husky.common.model.Address;
 import org.husky.common.model.Identificator;
-import org.husky.common.model.Name;
 import org.husky.common.model.Organization;
 import org.husky.common.model.Participant;
-import org.husky.common.model.ParticipantRole;
-import org.husky.common.model.PlayingEntity;
-import org.husky.common.model.Telecom;
 import org.husky.common.utils.xml.XmlFactories;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -273,14 +260,14 @@ public class Util {
 
 		if (city != null) {
 			var obj = new AdxpCity();
-			obj.xmlContent = city;
+			obj.setXmlMixed(city);
 			retVal.getContent()
 					.add(new JAXBElement<AdxpCity>(new QName(NAMESPACE_HL7_V3, "city"), AdxpCity.class, obj));
 		}
 
 		if (zip != null) {
 			var obj = new AdxpPostalCode();
-			obj.xmlContent = zip;
+			obj.setXmlMixed(zip);
 			retVal.getContent().add(new JAXBElement<AdxpPostalCode>(new QName(NAMESPACE_HL7_V3, "postalCode"),
 					AdxpPostalCode.class, obj));
 		}
@@ -463,54 +450,6 @@ public class Util {
 	}
 
 	/**
-	 * <div class="en">Creates the MDHT CE null flavor NASK.</div>
-	 *
-	 * @return the CE
-	 */
-	public static CE createCENullFlavorNASK() {
-		final var ce = new CE();
-		ce.nullFlavor = new LinkedList<>();
-		ce.getNullFlavor().add(org.husky.common.enums.NullFlavor.NOT_ASKED_CODE);
-		return ce;
-	}
-
-	/**
-	 * <div class="en">Creates the MDHT CE null flavor UNK.</div>
-	 *
-	 * @return the CE
-	 */
-	public static CE createCENullFlavorUNK() {
-		final var ce = new CE();
-		ce.nullFlavor = new LinkedList<>();
-		ce.getNullFlavor().add(org.husky.common.enums.NullFlavor.UNKNOWN_CODE);
-		return ce;
-	}
-
-	/**
-	 * <div class="en">Creates the MDHT CD null flavor NA.</div>
-	 *
-	 * @return the CD
-	 */
-	public static CD createCodeNullFlavorNA() {
-		final var code = new CD();
-		code.nullFlavor = new LinkedList<>();
-		code.getNullFlavor().add(org.husky.common.enums.NullFlavor.NOT_APPLICABLE_CODE);
-		return code;
-	}
-
-	/**
-	 * <div class="en">Creates the MDHT CD null flavor UNK.</div>
-	 *
-	 * @return the CD
-	 */
-	public static CD createCodeNullFlavorUNK() {
-		final var code = new CD();
-		code.nullFlavor = new LinkedList<>();
-		code.getNullFlavor().add(org.husky.common.enums.NullFlavor.UNKNOWN_CODE);
-		return code;
-	}
-
-	/**
 	 * Creates a new MDHT CustodianOrganization object from an eHC Organization
 	 * object.
 	 *
@@ -525,7 +464,7 @@ public class Util {
 			final var mdhtCustOrg = new POCDMT000040CustodianOrganization();
 
 			final var on = new ON();
-			on.xmlContent = organization.getPrimaryName().getFullName();
+			on.setXmlMixed(organization.getPrimaryName().getFullName());
 
 			if (!organization.getHl7CdaR2Pocdmt000040Organization().getName().isEmpty()
 					&& organization.getHl7CdaR2Pocdmt000040Organization().getName().get(0).getUse() != null) {
@@ -558,20 +497,6 @@ public class Util {
 			return mdhtCustOrg;
 		}
 		return null;
-	}
-
-	/**
-	 * <div class="en">Creates the ED.</div>
-	 *
-	 * @param text
-	 *            <br>
-	 *            <div class="en">text</div>
-	 * @return the ED
-	 */
-	public static ED createEd(String text) {
-		final var ed = new ED();
-		ed.xmlContent = text;
-		return ed;
 	}
 
 	/**
@@ -637,42 +562,6 @@ public class Util {
 	}
 
 	/**
-	 * <div class="en">Creates the MDHT IVL_PQ null flavor NA object.</div>
-	 *
-	 * @return the IVL_PQ
-	 */
-	public static IVLPQ createIVLPQNullFlavorNA() {
-		final var ivlpq = new IVLPQ();
-		ivlpq.nullFlavor = new LinkedList<>();
-		ivlpq.getNullFlavor().add(org.husky.common.enums.NullFlavor.NOT_APPLICABLE_CODE);
-		return ivlpq;
-	}
-
-	/**
-	 * <div class="en">Creates the IVL_PQ null flavor NASK object.</div>
-	 *
-	 * @return the IVL_PQ
-	 */
-	public static IVLPQ createIVLPQNullFlavorNASK() {
-		final var ivlpq = new IVLPQ();
-		ivlpq.nullFlavor = new LinkedList<>();
-		ivlpq.getNullFlavor().add(org.husky.common.enums.NullFlavor.NOT_ASKED_CODE);
-		return ivlpq;
-	}
-
-	/**
-	 * <div class="en">Creates the IVL_PQ null flavor UNK object.</div>
-	 *
-	 * @return the IVL_PQ
-	 */
-	public static IVLPQ createIVLPQNullFlavorUNK() {
-		final var ivlpq = new IVLPQ();
-		ivlpq.nullFlavor = new LinkedList<>();
-		ivlpq.getNullFlavor().add(org.husky.common.enums.NullFlavor.UNKNOWN_CODE);
-		return ivlpq;
-	}
-
-	/**
 	 * Creates a new MDHT LegalAuthor object from an MDHT Author object.
 	 * Signature Code will be set to fixed 's'
 	 *
@@ -698,18 +587,6 @@ public class Util {
 	}
 
 	/**
-	 * <div class="en">Creates the MDHT IVXB_TS null flavor UNK.</div>
-	 *
-	 * @return the ivxb ts
-	 */
-	public static IVXBTS createNullFlavorUnknown() {
-		final var ts = new IVXBTS();
-		ts.nullFlavor = new LinkedList<>();
-		ts.nullFlavor.add(org.husky.common.enums.NullFlavor.UNKNOWN_CODE);
-		return ts;
-	}
-
-	/**
 	 * Creates the on from pn.
 	 *
 	 * @param pn
@@ -718,7 +595,7 @@ public class Util {
 	 */
 	private static ON createOnFromPn(PN pn) {
 		final var on = new ON();
-		on.xmlContent = pn.xmlContent;
+		on.setXmlMixed(pn.getXmlMixed());
 		return on;
 	}
 
@@ -792,50 +669,6 @@ public class Util {
 	}
 
 	/**
-	 * Creates the participant from organization.
-	 *
-	 * @param o
-	 *            the o
-	 * @return the participant
-	 */
-	public static Participant createParticipantFromOrganization(Organization o) {
-		final var pe = new PlayingEntity();
-		final var pr = new ParticipantRole();
-		pr.setPlayingEntity(pe);
-		final var p = new Participant();
-		p.setParticipantRole(pr);
-
-		// id, addrs, names, telecoms
-
-		for (IdentificatorBaseType id : o.getIdentificatorList()) {
-			p.getMdht().getParticipantRole().getId().add(new Identificator(id).getHl7CdaR2Ii());
-		}
-
-		for (AddressBaseType address : o.getAddressList()) {
-			if (address != null) {
-				p.getMdht().getParticipantRole().getAddr().add(new Address(address).getHl7CdaR2Ad());
-			}
-		}
-
-		if ((o.getNameList() != null) && !o.getNameList().isEmpty()) {
-			for(NameBaseType nameType: o.getNameList()) {
-				if(nameType != null) {
-					p.getMdht().getParticipantRole().getPlayingEntity().getName()
-							.add(new Name(nameType).getHl7CdaR2Pn());
-				}
-			}
-		}
-
-		if (o.getTelecomList() != null) {
-			for (TelecomBaseType telecom : o.getTelecomList()) {
-				p.getMdht().getParticipantRole().getTelecom().add(new Telecom(telecom).getHl7CdaR2Tel());
-			}
-		}
-
-		return p;
-	}
-
-	/**
 	 * Creates the pn from on.
 	 *
 	 * @param on
@@ -844,7 +677,7 @@ public class Util {
 	 */
 	public static PN createPnFromOn(org.husky.common.hl7cdar2.ON on) {
 		final var pn = new org.husky.common.hl7cdar2.PN();
-		pn.xmlContent = on.xmlContent;
+		pn.setXmlMixed(on.getXmlMixed());
 		return pn;
 	}
 
@@ -914,7 +747,7 @@ public class Util {
 		final var tel = new TEL();
 		final var ed = new ED();
 		tel.setValue(url);
-		ed.xmlContent = narrativeText;
+		ed.setXmlMixed(narrativeText);
 		ed.setReference(tel);
 		return ed;
 	}
@@ -952,30 +785,6 @@ public class Util {
 			tel.getUse().add(usage.getCodeValue());
 		}
 		tel.setValue(TELECOMS_PHONE_PREFIX + telNr.replaceAll("\\s+", ""));
-		return tel;
-	}
-
-	/**
-	 * <div class="en">Creates the MDHT phone TEL object, without knowing the
-	 * type of TEL object (id the endpoint is a fax, phone etc. is
-	 * unknown).</div>
-	 *
-	 * @param endpointIdentifier
-	 *            <br>
-	 *            <div class="en"> tel nr</div><div class="de">Der Endpunkt der
-	 *            Kommunikation (z.B. eine Telefonnummer)</div>
-	 * @param usage
-	 *            <br>
-	 *            <div class="en"> usage</div>
-	 * @return the tel
-	 */
-	public static TEL createUnknownTel(String endpointIdentifier, TelecomAddressUse usage) {
-		final var tel = new TEL();
-		if (usage != null) {
-			tel.getUse().clear();
-			tel.getUse().add(usage.getCodeValue());
-		}
-		tel.setValue(endpointIdentifier);
 		return tel;
 	}
 
@@ -1031,15 +840,6 @@ public class Util {
 		}
 
 		return targetPath;
-	}
-
-	/**
-	 * Run the Garbage Collector to get the most possible heap space free for
-	 * subsequent tasks. This is not recommended but can be used if situations
-	 * arise.
-	 */
-	public static void freeMemory() {
-		Runtime.getRuntime().gc();
 	}
 
 	/**
@@ -1132,7 +932,7 @@ public class Util {
 			if (er.getTypeCode().equals(XActRelationshipEntryRelationship.SUBJ)) {
 				// Get the ed and update it with the reference
 				final var ed = er.getAct().getText();
-				return ed.xmlContent;
+				return ed.getTextContent();
 			}
 		}
 		return null;
@@ -1154,7 +954,7 @@ public class Util {
 				// Get the ed and update it with the reference
 				final var ed = er.getAct().getText();
 				ed.setReference(Util.createReferenceTel(contentId));
-				return ed.xmlContent;
+				return ed.getTextContent();
 			}
 		}
 		return null;
@@ -1170,8 +970,8 @@ public class Util {
 		var temp = new File(retVal);
 		retVal = temp.getAbsolutePath();
 
-		if (!retVal.endsWith(FileUtil.getPlatformSpecificPathSeparator()))
-			retVal += FileUtil.getPlatformSpecificPathSeparator();
+		if (!retVal.endsWith("/"))
+			retVal += "/";
 		return retVal;
 	}
 
@@ -1215,18 +1015,6 @@ public class Util {
 	}
 
 	/**
-	 * Gets the platform specific line break (\n as default; \r\n for Windows).
-	 *
-	 * @return the platform specific line break
-	 */
-	public static String getPlatformSpecificLineBreak() {
-		var retVal = "\n";
-		if (Util.isWindows())
-			retVal = "\r\n";
-		return retVal;
-	}
-
-	/**
 	 * Gets the rsc directory (./rsc or ../rsc or specified by the command line
 	 * argument rscdir).
 	 *
@@ -1234,12 +1022,9 @@ public class Util {
 	 */
 	public static String getRscDir() {
 
-		String rscDir = new File("").getAbsoluteFile().getAbsolutePath()
-				+ FileUtil.getPlatformSpecificPathSeparator() + "rsc";
+		String rscDir = new File("").getAbsoluteFile().getAbsolutePath() + "/rsc";
 		if (!(new File(rscDir)).exists())
-			rscDir = new File("").getAbsoluteFile().getAbsolutePath()
-					+ FileUtil.getPlatformSpecificPathSeparator() + ".."
-					+ FileUtil.getPlatformSpecificPathSeparator() + "rsc";
+			rscDir = new File("").getAbsoluteFile().getAbsolutePath() + "/../rsc";
 
 		final var runtimeMxBean = ManagementFactory.getRuntimeMXBean();
 		final List<String> vmArgs = runtimeMxBean.getInputArguments();
@@ -1249,8 +1034,8 @@ public class Util {
 			}
 		}
 
-		if (!rscDir.endsWith(FileUtil.getPlatformSpecificPathSeparator()))
-			rscDir += FileUtil.getPlatformSpecificPathSeparator();
+		if (!rscDir.endsWith("/"))
+			rscDir += "/";
 
 		if (!(new File(rscDir)).exists())
 			throw new RuntimeException("rsc dir not found (" + rscDir + ")");
@@ -1339,7 +1124,7 @@ public class Util {
 				log.debug("Trying to use temp folder set by environment variable '" + envVariable
 						+ "': " + tempDirectoryPath);
 			} else {
-				tempDirectoryPath = FileUtil.getPlatformSpecificPathSeparator() + "temp";
+				tempDirectoryPath = "/temp";
 				log.debug("Trying to use hardcoded temp folder: " + tempDirectoryPath);
 			}
 			final var uniqueFile = File.createTempFile("eHC", ".tmp", new File(tempDirectoryPath));
@@ -1467,20 +1252,6 @@ public class Util {
 	}
 
 	/**
-	 * <div class="en">Creates an MDHT II object.</div>
-	 *
-	 * @param root
-	 *            <br>
-	 *            <div class="en">the root</div>
-	 * @return the II
-	 */
-	public static II ii(String root) {
-		final var ii = new II();
-		ii.setRoot(root);
-		return ii;
-	}
-
-	/**
 	 * Checks if an EntryRelationship is a comment.
 	 *
 	 * @param er
@@ -1490,19 +1261,6 @@ public class Util {
 	public static boolean isComment(POCDMT000040EntryRelationship er) {
 		return er.getTypeCode().equals(XActRelationshipEntryRelationship.SUBJ) && er.isInversionInd() != null
 				&& er.isInversionInd().booleanValue();
-	}
-
-	/**
-	 * This is for debugging purposes, only. For normal use, this function shall
-	 * return false.
-	 *
-	 * Debug examples: memory usage is to be displayed, make CDA contents
-	 * comparable to previous releases
-	 *
-	 * @return true, when Debug mode is on. false for normal usage.
-	 */
-	public static boolean isDebug() {
-		return false;
 	}
 
 	/**
@@ -1600,11 +1358,11 @@ public class Util {
 		if (list.isEmpty()) {
 			return "";
 		}
-		final String names = list.get(0).xmlContent;
+		final String names = list.get(0).getTextContent();
 		if (list.size() > 1) {
 			final List<String> nameList = new ArrayList<>();
 			for (var i = 0; i < list.size(); i++) {
-				nameList.add(list.get(i).xmlContent);
+				nameList.add(list.get(i).getTextContent());
 			}
 			return Util.join(nameList, " ");
 		}
@@ -1623,7 +1381,6 @@ public class Util {
 			String hint) {
 
 		final Logger log = LoggerFactory.getLogger(theClass);
-		freeMemory();
 		log.info(
 				hint + ": freeMemory: " + Long.toString(Util.getVmMemoryFreeInMegaBytes()) + " MB");
 
@@ -1662,7 +1419,7 @@ public class Util {
 	 */
 	public static ST st(String text) {
 		final var value = new ST();
-		value.xmlContent = text;
+		value.setXmlMixed(text);
 		return value;
 	}
 

@@ -1,8 +1,7 @@
 package org.husky.emed.cda.utils;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.cda.generated.hl7cdar2.II;
-import org.husky.emed.cda.utils.IiUtils;
+import org.husky.common.hl7cdar2.II;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

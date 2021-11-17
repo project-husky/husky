@@ -49,14 +49,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XRoleClassAccommodationRequestor {
 
-	AGNT, PAT, PROV, PRS;
+    AGNT, PAT, PROV, PRS;
 
-	public static XRoleClassAccommodationRequestor fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XRoleClassAccommodationRequestor fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

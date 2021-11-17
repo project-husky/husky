@@ -46,14 +46,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum OrganizationNamePartQualifier {
 
-	LS;
+    LS;
 
-	public static OrganizationNamePartQualifier fromValue(String v) {
-		return valueOf(v);
-	}
+    public static OrganizationNamePartQualifier fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

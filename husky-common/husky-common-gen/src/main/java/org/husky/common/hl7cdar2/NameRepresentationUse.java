@@ -48,14 +48,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum NameRepresentationUse {
 
-	ABC, IDE, SYL;
+    ABC, IDE, SYL;
 
-	public static NameRepresentationUse fromValue(String v) {
-		return valueOf(v);
-	}
+    public static NameRepresentationUse fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

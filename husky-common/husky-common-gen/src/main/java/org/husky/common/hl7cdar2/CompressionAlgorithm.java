@@ -49,14 +49,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum CompressionAlgorithm {
 
-	DF, GZ, Z, ZL;
+    DF, GZ, Z, ZL;
 
-	public static CompressionAlgorithm fromValue(String v) {
-		return valueOf(v);
-	}
+    public static CompressionAlgorithm fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

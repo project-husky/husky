@@ -31,27 +31,27 @@ import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.hl7.fhir.dstu3.model.Basic;
-import org.hl7.fhir.dstu3.model.Bundle.BundleEntryComponent;
-import org.hl7.fhir.dstu3.model.CodeableConcept;
-import org.hl7.fhir.dstu3.model.Coding;
-import org.hl7.fhir.dstu3.model.ContactPoint;
-import org.hl7.fhir.dstu3.model.ContactPoint.ContactPointUse;
-import org.hl7.fhir.dstu3.model.DocumentManifest;
-import org.hl7.fhir.dstu3.model.DocumentManifest.DocumentManifestContentComponent;
-import org.hl7.fhir.dstu3.model.DocumentReference;
-import org.hl7.fhir.dstu3.model.DomainResource;
-import org.hl7.fhir.dstu3.model.Enumeration;
-import org.hl7.fhir.dstu3.model.Extension;
-import org.hl7.fhir.dstu3.model.HumanName;
-import org.hl7.fhir.dstu3.model.Identifier;
-import org.hl7.fhir.dstu3.model.Observation;
-import org.hl7.fhir.dstu3.model.Observation.ObservationStatus;
-import org.hl7.fhir.dstu3.model.Organization.OrganizationContactComponent;
-import org.hl7.fhir.dstu3.model.Practitioner;
-import org.hl7.fhir.dstu3.model.Reference;
-import org.hl7.fhir.dstu3.model.Resource;
-import org.hl7.fhir.dstu3.model.StringType;
+import org.hl7.fhir.r4.model.Basic;
+import org.hl7.fhir.r4.model.Bundle.BundleEntryComponent;
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.ContactPoint;
+import org.hl7.fhir.r4.model.ContactPoint.ContactPointUse;
+import org.hl7.fhir.r4.model.DocumentManifest;
+import org.hl7.fhir.r4.model.DocumentManifest.DocumentManifestRelatedComponent;
+import org.hl7.fhir.r4.model.DocumentReference;
+import org.hl7.fhir.r4.model.DomainResource;
+import org.hl7.fhir.r4.model.Enumeration;
+import org.hl7.fhir.r4.model.Extension;
+import org.hl7.fhir.r4.model.HumanName;
+import org.hl7.fhir.r4.model.Identifier;
+import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.Observation.ObservationStatus;
+import org.hl7.fhir.r4.model.Organization.OrganizationContactComponent;
+import org.hl7.fhir.r4.model.Practitioner;
+import org.hl7.fhir.r4.model.Reference;
+import org.hl7.fhir.r4.model.Resource;
+import org.hl7.fhir.r4.model.StringType;
 import org.hl7.fhir.exceptions.FHIRException;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.utilities.xhtml.XhtmlNode;
@@ -72,7 +72,6 @@ import org.husky.common.model.Identificator;
 import org.husky.common.model.Name;
 import org.husky.common.model.Person;
 import org.husky.common.model.Telecom;
-import org.husky.common.utils.FileUtil;
 import org.husky.fhir.structures.utils.FhirUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -632,14 +631,12 @@ public class FhirCommon {
 	 *            the FHIR resource to be added to the document
 	 * @return the content
 	 */
-	public static DocumentManifestContentComponent addDocManifestContent(
+	public static Reference addDocManifestContent(
 			DocumentManifest documentManifest, Resource resource) {
-		final var content = new DocumentManifestContentComponent();
 		final var ref = new Reference();
 		ref.setResource(resource);
-		content.setP(ref);
-		documentManifest.addContent(content);
-		return content;
+		documentManifest.addContent(ref);
+		return ref;
 	}
 
 	/**
@@ -836,7 +833,7 @@ public class FhirCommon {
 	 *            the FHIR address
 	 * @return the eHC address
 	 */
-	public static Address fhirAddressToEhcAddress(org.hl7.fhir.dstu3.model.Address fAddr) {
+	public static Address fhirAddressToEhcAddress(org.hl7.fhir.r4.model.Address fAddr) {
 		final var addr = new Address(new AddressBaseType());
 		for (final StringType line : fAddr.getLine()) {
 			addr.setStreetAddressLine1(line.asStringValue());
@@ -853,20 +850,20 @@ public class FhirCommon {
 		if (fAddr.getState() != null) {
 			addr.setState(fAddr.getState());
 		}
-		final Enumeration<org.hl7.fhir.dstu3.model.Address.AddressUse> useElement = fAddr
+		final Enumeration<org.hl7.fhir.r4.model.Address.AddressUse> useElement = fAddr
 				.getUseElement();
-		if (useElement.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.HOME) {
+		if (useElement.getValue() == org.hl7.fhir.r4.model.Address.AddressUse.HOME) {
 			addr.setUsage(org.husky.common.enums.PostalAddressUse.HOME_ADDRESS);
 		}
-		if (useElement.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.OLD) {
+		if (useElement.getValue() == org.hl7.fhir.r4.model.Address.AddressUse.OLD) {
 			addr.setUsage(org.husky.common.enums.PostalAddressUse.BAD_ADDRESS);
 		}
 		// We use TMP for PUB, because it is required in LRQC but not
 		// available in FHIR ;)
-		if (useElement.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.TEMP) {
+		if (useElement.getValue() == org.hl7.fhir.r4.model.Address.AddressUse.TEMP) {
 			addr.setUsage(org.husky.common.enums.PostalAddressUse.TEMPORARY);
 		}
-		if (useElement.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.WORK) {
+		if (useElement.getValue() == org.hl7.fhir.r4.model.Address.AddressUse.WORK) {
 			addr.setUsage(org.husky.common.enums.PostalAddressUse.WORK_PLACE);
 		}
 		return addr;
@@ -962,14 +959,14 @@ public class FhirCommon {
 	 */
 	public static org.husky.common.model.Author getAuthor(IBaseResource res) {
 		org.husky.common.model.Author retVal = null;
-		if (res instanceof org.hl7.fhir.dstu3.model.Person) {
-			retVal = FhirCommon.getAuthor((org.hl7.fhir.dstu3.model.Person) res);
+		if (res instanceof org.hl7.fhir.r4.model.Person) {
+			retVal = FhirCommon.getAuthor((org.hl7.fhir.r4.model.Person) res);
 		}
 		if (res instanceof Practitioner) {
 			retVal = FhirCommon.getAuthor((Practitioner) res);
 		}
-		if (res instanceof org.hl7.fhir.dstu3.model.Organization) {
-			retVal = FhirCommon.getAuthor((org.hl7.fhir.dstu3.model.Organization) res);
+		if (res instanceof org.hl7.fhir.r4.model.Organization) {
+			retVal = FhirCommon.getAuthor((org.hl7.fhir.r4.model.Organization) res);
 		}
 		return retVal;
 	}
@@ -984,7 +981,7 @@ public class FhirCommon {
 	 *         <div class="fr"></div>
 	 */
 	public static org.husky.common.model.Author getAuthor(
-			org.hl7.fhir.dstu3.model.Organization fhirObject) {
+			org.hl7.fhir.r4.model.Organization fhirObject) {
 		org.husky.common.model.Author retVal = null;
 		final String authoringDeviceName = fhirObject.getName();
 
@@ -1003,14 +1000,14 @@ public class FhirCommon {
 		}
 
 		// Add Addresses
-		for (final org.hl7.fhir.dstu3.model.Address addr : fhirObject.getAddress()) {
+		for (final org.hl7.fhir.r4.model.Address addr : fhirObject.getAddress()) {
 			org.husky.common.enums.PostalAddressUse usage = org.husky.common.enums.PostalAddressUse.WORK_PLACE;
 			if (addr.getUseElement()
-					.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.HOME) {
+					.getValue() == org.hl7.fhir.r4.model.Address.AddressUse.HOME) {
 				usage = org.husky.common.enums.PostalAddressUse.HOME_ADDRESS;
 			}
 			if (addr.getUseElement()
-					.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.TEMP) {
+					.getValue() == org.hl7.fhir.r4.model.Address.AddressUse.TEMP) {
 				usage = org.husky.common.enums.PostalAddressUse.PUBLIC;
 			}
 			final var eHCAddr = new Address(new AddressBaseType());
@@ -1052,7 +1049,7 @@ public class FhirCommon {
 	 *         <div class="fr"></div>
 	 */
 	public static org.husky.common.model.Author getAuthor(
-			org.hl7.fhir.dstu3.model.Person fhirObject) {
+			org.hl7.fhir.r4.model.Person fhirObject) {
 		org.husky.common.model.Author retVal = null;
 		final var personName = new Name();
 		personName.setGiven(fhirObject.getNameFirstRep().getGivenAsSingleString());
@@ -1072,14 +1069,14 @@ public class FhirCommon {
 		}
 
 		// Add Addresses
-		for (final org.hl7.fhir.dstu3.model.Address addr : fhirObject.getAddress()) {
+		for (final org.hl7.fhir.r4.model.Address addr : fhirObject.getAddress()) {
 			org.husky.common.enums.PostalAddressUse usage = org.husky.common.enums.PostalAddressUse.WORK_PLACE;
 			if (addr.getUseElement()
-					.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.HOME) {
+					.getValue() == org.hl7.fhir.r4.model.Address.AddressUse.HOME) {
 				usage = org.husky.common.enums.PostalAddressUse.HOME_ADDRESS;
 			}
 			if (addr.getUseElement()
-					.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.TEMP) {
+					.getValue() == org.hl7.fhir.r4.model.Address.AddressUse.TEMP) {
 				usage = org.husky.common.enums.PostalAddressUse.PUBLIC;
 			}
 			final var eHCAddr = new Address(new AddressBaseType());
@@ -1114,7 +1111,7 @@ public class FhirCommon {
 	 *         <div class="fr"></div>
 	 */
 	public static org.husky.common.model.Author getAuthor(
-			org.hl7.fhir.dstu3.model.Reference ref) {
+			org.hl7.fhir.r4.model.Reference ref) {
 		return getAuthor(ref.getResource());
 	}
 
@@ -1146,10 +1143,10 @@ public class FhirCommon {
 		}
 
 		// Add Addresses
-		for (final org.hl7.fhir.dstu3.model.Address addr : fhirObject.getAddress()) {
+		for (final org.hl7.fhir.r4.model.Address addr : fhirObject.getAddress()) {
 			org.husky.common.enums.PostalAddressUse usage = org.husky.common.enums.PostalAddressUse.WORK_PLACE;
 			if (addr.getUseElement()
-					.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.HOME) {
+					.getValue() == org.hl7.fhir.r4.model.Address.AddressUse.HOME) {
 				usage = org.husky.common.enums.PostalAddressUse.HOME_ADDRESS;
 			}
 			final var eHCAddr = new Address(new AddressBaseType());
@@ -1654,8 +1651,8 @@ public class FhirCommon {
 	public static org.husky.common.model.Organization getOrganization(
 			IBaseResource res) {
 		org.husky.common.model.Organization retVal = null;
-		if (res instanceof org.hl7.fhir.dstu3.model.Organization) {
-			retVal = FhirCommon.getOrganization((org.hl7.fhir.dstu3.model.Organization) res);
+		if (res instanceof org.hl7.fhir.r4.model.Organization) {
+			retVal = FhirCommon.getOrganization((org.hl7.fhir.r4.model.Organization) res);
 		}
 		return retVal;
 	}
@@ -1671,7 +1668,7 @@ public class FhirCommon {
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	public static org.husky.common.model.Organization getOrganization(
-			org.hl7.fhir.dstu3.model.Organization fhirOrganization) {
+			org.hl7.fhir.r4.model.Organization fhirOrganization) {
 		org.husky.common.model.Organization retVal = null;
 		// Create the organization
 		if (fhirOrganization.getName() != null) {
@@ -1687,14 +1684,14 @@ public class FhirCommon {
 			}
 
 			// Add Addresses
-			for (final org.hl7.fhir.dstu3.model.Address addr : fhirOrganization.getAddress()) {
+			for (final org.hl7.fhir.r4.model.Address addr : fhirOrganization.getAddress()) {
 				org.husky.common.enums.PostalAddressUse usage = org.husky.common.enums.PostalAddressUse.WORK_PLACE;
 				if (addr.getUseElement()
-						.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.HOME) {
+						.getValue() == org.hl7.fhir.r4.model.Address.AddressUse.HOME) {
 					usage = org.husky.common.enums.PostalAddressUse.HOME_ADDRESS;
 				}
 				if (addr.getUseElement()
-						.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.TEMP) {
+						.getValue() == org.hl7.fhir.r4.model.Address.AddressUse.TEMP) {
 					usage = org.husky.common.enums.PostalAddressUse.PUBLIC;
 				}
 				final var eHCAddr = new Address(new AddressBaseType());
@@ -1726,7 +1723,7 @@ public class FhirCommon {
 	 * @return the eHC Organization
 	 */
 	public static org.husky.common.model.Organization getOrganization(
-			org.hl7.fhir.dstu3.model.Reference orgRef) {
+			org.hl7.fhir.r4.model.Reference orgRef) {
 		return getOrganization(orgRef.getResource());
 	}
 
@@ -1741,8 +1738,8 @@ public class FhirCommon {
 	 */
 	public static org.husky.common.model.Patient getPatient(IBaseResource res) {
 		org.husky.common.model.Patient retVal = null;
-		if (res instanceof org.hl7.fhir.dstu3.model.Patient) {
-			retVal = FhirCommon.getPatient((org.hl7.fhir.dstu3.model.Patient) res);
+		if (res instanceof org.hl7.fhir.r4.model.Patient) {
+			retVal = FhirCommon.getPatient((org.hl7.fhir.r4.model.Patient) res);
 		}
 		return retVal;
 	}
@@ -1756,10 +1753,10 @@ public class FhirCommon {
 	 *         <div class="fr"></div>
 	 */
 	public static org.husky.common.model.Patient getPatient(
-			org.hl7.fhir.dstu3.model.Bundle bundle) {
+			org.hl7.fhir.r4.model.Bundle bundle) {
 		for (final BundleEntryComponent entry : bundle.getEntry()) {
-			if (entry.getResource() instanceof org.hl7.fhir.dstu3.model.Patient)
-				return getPatient((org.hl7.fhir.dstu3.model.Patient) entry.getResource());
+			if (entry.getResource() instanceof org.hl7.fhir.r4.model.Patient)
+				return getPatient((org.hl7.fhir.r4.model.Patient) entry.getResource());
 		}
 		return null;
 	}
@@ -1773,17 +1770,10 @@ public class FhirCommon {
 	 *         <div class="fr"></div>
 	 */
 	public static org.husky.common.model.Patient getPatient(
-			org.hl7.fhir.dstu3.model.DocumentManifest docManifest) {
-		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
-			Reference ref = null;
-			try {
-				if (entry.hasPReference())
-					ref = entry.getPReference();
-			} catch (final FHIRException e) {
-				log.warn(e.getMessage());
-			}
-			if (ref != null && ref.getResource() instanceof org.hl7.fhir.dstu3.model.Patient) {
-					return getPatient((org.hl7.fhir.dstu3.model.Patient) ref.getResource());
+			org.hl7.fhir.r4.model.DocumentManifest docManifest) {
+		for (final Reference ref : docManifest.getContent()) {
+			if (ref != null && ref.getResource() instanceof org.hl7.fhir.r4.model.Patient) {
+					return getPatient((org.hl7.fhir.r4.model.Patient) ref.getResource());
 			}
 		}
 		return null;
@@ -1799,7 +1789,7 @@ public class FhirCommon {
 	 *         <div class="fr"></div>
 	 */
 	public static org.husky.common.model.Patient getPatient(
-			org.hl7.fhir.dstu3.model.Patient fhirPatient) {
+			org.hl7.fhir.r4.model.Patient fhirPatient) {
 		org.husky.common.model.Patient retVal = null;
 		final List<Extension> extensions = fhirPatient
 				.getExtensionsByUrl(FhirCommon.URN_USE_AS_NON_LIVING_SUBJECT);
@@ -1813,10 +1803,10 @@ public class FhirCommon {
 			patientName.setFamily(fhirPatient.getNameFirstRep().getFamily());
 			org.husky.common.enums.AdministrativeGender gender = org.husky.common.enums.AdministrativeGender.UNDIFFERENTIATED;
 			if (fhirPatient.getGenderElement()
-					.getValue() == org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender.FEMALE) {
+					.getValue() == org.hl7.fhir.r4.model.Enumerations.AdministrativeGender.FEMALE) {
 				gender = org.husky.common.enums.AdministrativeGender.FEMALE;
 			} else if (fhirPatient.getGenderElement()
-					.getValue() == org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender.MALE) {
+					.getValue() == org.hl7.fhir.r4.model.Enumerations.AdministrativeGender.MALE) {
 				gender = org.husky.common.enums.AdministrativeGender.MALE;
 			}
 
@@ -1825,10 +1815,10 @@ public class FhirCommon {
 					fhirPatient.getBirthDate());
 
 			// Add Addresses
-			for (final org.hl7.fhir.dstu3.model.Address addr : fhirPatient.getAddress()) {
+			for (final org.hl7.fhir.r4.model.Address addr : fhirPatient.getAddress()) {
 				org.husky.common.enums.PostalAddressUse usage = org.husky.common.enums.PostalAddressUse.WORK_PLACE;
 				if (addr.getUseElement()
-						.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.HOME) {
+						.getValue() == org.hl7.fhir.r4.model.Address.AddressUse.HOME) {
 					usage = org.husky.common.enums.PostalAddressUse.HOME_ADDRESS;
 				}
 				String addrLine = null;
@@ -1865,7 +1855,7 @@ public class FhirCommon {
 	 *         <div class="fr"></div>
 	 */
 	public static org.husky.common.model.Patient getPatient(
-			org.hl7.fhir.dstu3.model.Reference orgRef) {
+			org.hl7.fhir.r4.model.Reference orgRef) {
 		return getPatient(orgRef.getResource());
 	}
 
@@ -1877,7 +1867,7 @@ public class FhirCommon {
 	 * @return <div class="en">the eHC Author</div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public static POCDMT000040Performer2 getPerformer(org.hl7.fhir.dstu3.model.Person fhirObject) {
+	public static POCDMT000040Performer2 getPerformer(org.hl7.fhir.r4.model.Person fhirObject) {
 		POCDMT000040Performer2 retVal = null;
 		final var personName = new Name();
 		personName.setGiven(fhirObject.getNameFirstRep().getGivenAsSingleString());
@@ -1899,12 +1889,12 @@ public class FhirCommon {
 		}
 
 		// Add Addresses
-		for (final org.hl7.fhir.dstu3.model.Address addr : fhirObject.getAddress()) {
+		for (final org.hl7.fhir.r4.model.Address addr : fhirObject.getAddress()) {
 			org.husky.common.enums.PostalAddressUse usage = org.husky.common.enums.PostalAddressUse.WORK_PLACE;
-			if (addr.getUseElement().getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.HOME) {
+			if (addr.getUseElement().getValue() == org.hl7.fhir.r4.model.Address.AddressUse.HOME) {
 				usage = org.husky.common.enums.PostalAddressUse.HOME_ADDRESS;
 			}
-			if (addr.getUseElement().getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.TEMP) {
+			if (addr.getUseElement().getValue() == org.hl7.fhir.r4.model.Address.AddressUse.TEMP) {
 				usage = org.husky.common.enums.PostalAddressUse.PUBLIC;
 			}
 			final var eHCAddr = new Address(new AddressBaseType());
@@ -2065,7 +2055,7 @@ public class FhirCommon {
 	public static boolean saveResource(Logger log, String path, IBaseResource fhirResource,
 			String fileName, SaveMode saveMode) {
 		var retVal = true;
-		final String separator = FileUtil.getPlatformSpecificPathSeparator();
+		final String separator = "/";
 		String fullFn = path;
 		if (!path.endsWith(separator))
 			fullFn = fullFn + separator;
@@ -2082,7 +2072,7 @@ public class FhirCommon {
 			} else {
 				writer = new BufferedWriter(new FileWriter(fullFn));
 			}
-			final var fhirCtx = new FhirContext(FhirVersionEnum.DSTU3);
+			final var fhirCtx = new FhirContext(FhirVersionEnum.R4);
 			fhirCtx.newXmlParser().setPrettyPrint(true).encodeResourceToWriter(fhirResource,
 					writer);
 
@@ -2126,7 +2116,7 @@ public class FhirCommon {
 	/**
 	 * Sets the functionCode Element of the author
 	 *
-	 * @param author       the author
+	 * @param performer    the author
 	 * @param fhirResource any FHIR DomainResource containing the extension
 	 *                     urnUseAsFunctionCode
 	 */

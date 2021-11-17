@@ -57,9 +57,9 @@ public class ValueSetPackageManagerTest {
 
 	private String testValueSetPackageConfigOnTheWeb = "https://medshare.net/fileadmin/downloads/ehc/testValueSetPackageConfig.yaml";
 	private File testValueSetPackageConfigFile = new File(Util.getTempDirectory()
-			+ FileUtil.getPlatformSpecificPathSeparator() + "testValueSetPackageConfig.yaml");
+			+ "/testValueSetPackageConfig.yaml");
 	private File testValueSetPackageFile = new File(Util.getTempDirectory()
-			+ FileUtil.getPlatformSpecificPathSeparator() + "testValueSetPackage.yaml");
+			+ "/testValueSetPackage.yaml");
 
 	private ValueSetPackageConfig createValueSetPackageConfig1() {
 		ValueSetPackageConfig retVal = null;
@@ -131,8 +131,7 @@ public class ValueSetPackageManagerTest {
 				.withStatus(ValueSetPackageStatus.ACTIVE).withVersion(version).build();
 
 		String projectFolder = Util.getCurrentDirectory()
-				+ "../../common/husky-common-ch/src/main/java/org/husky/common/ch/enums"
-						.replace("/", FileUtil.getPlatformSpecificPathSeparator());
+				+ "../../common/husky-common-ch/src/main/java/org/husky/common/ch/enums";
 		SourceFormatType sourceFormatType = SourceFormatType.JSON;
 		SourceSystemType sourceSystemType = SourceSystemType.ARTDECOR_FHIR;
 

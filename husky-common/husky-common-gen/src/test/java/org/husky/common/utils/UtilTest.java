@@ -54,15 +54,15 @@ public class UtilTest {
 
 		testEnxpList1 = new ArrayList<>();
 		final ENXP enxp11 = new ENXP();
-		enxp11.xmlContent = "ENXP11";
+		enxp11.setXmlMixed("ENXP11");
 		testEnxpList1.add(enxp11);
 
 		testEnxpList2 = new ArrayList<>();
 		final ENXP enxp21 = new ENXP();
-		enxp21.xmlContent = "ENXP21";
+		enxp21.setXmlMixed("ENXP21");
 		testEnxpList2.add(enxp21);
 		final ENXP enxp22 = new ENXP();
-		enxp22.xmlContent = "ENXP22";
+		enxp22.setXmlMixed("ENXP22");
 		testEnxpList2.add(enxp22);
 	}
 

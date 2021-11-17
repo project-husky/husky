@@ -48,27 +48,27 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum IntegrityCheckAlgorithm {
 
-	@XmlEnumValue("SHA-1")
-	SHA_1("SHA-1"), @XmlEnumValue("SHA-256")
-	SHA_256("SHA-256");
+    @XmlEnumValue("SHA-1")
+    SHA_1("SHA-1"), @XmlEnumValue("SHA-256")
+    SHA_256("SHA-256");
 
-	public static IntegrityCheckAlgorithm fromValue(String v) {
-		for (IntegrityCheckAlgorithm c : IntegrityCheckAlgorithm.values()) {
-			if (c.value.equals(v)) {
-				return c;
-			}
-		}
-		throw new IllegalArgumentException(v);
-	}
+    public static IntegrityCheckAlgorithm fromValue(String v) {
+        for (IntegrityCheckAlgorithm c : IntegrityCheckAlgorithm.values()) {
+            if (c.value.equals(v)) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException(v);
+    }
 
-	private final String value;
+    private final String value;
 
-	IntegrityCheckAlgorithm(String v) {
-		value = v;
-	}
+    IntegrityCheckAlgorithm(String v) {
+        value = v;
+    }
 
-	public String value() {
-		return value;
-	}
+    public String value() {
+        return value;
+    }
 
 }

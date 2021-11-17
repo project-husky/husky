@@ -3,8 +3,10 @@ package org.husky.emed.cda.generated.artdecor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Custodian;
+import org.husky.common.hl7cdar2.II;
+import org.husky.common.hl7cdar2.ObjectFactory;
+import org.husky.common.hl7cdar2.POCDMT000040AssignedCustodian;
+import org.husky.common.hl7cdar2.POCDMT000040Custodian;
 
 /**
  * cdach_header_Custodian
@@ -29,9 +31,9 @@ public class CdachHeaderCustodian extends POCDMT000040Custodian {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -39,28 +41,28 @@ public class CdachHeaderCustodian extends POCDMT000040Custodian {
     /**
      * Gets the hl7AssignedCustodian
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040AssignedCustodian getHl7AssignedCustodian() {
+    public POCDMT000040AssignedCustodian getHl7AssignedCustodian() {
         return assignedCustodian;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
     /**
      * Sets the hl7AssignedCustodian
      */
-    public void setHl7AssignedCustodian(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040AssignedCustodian value) {
+    public void setHl7AssignedCustodian(POCDMT000040AssignedCustodian value) {
         this.assignedCustodian = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }

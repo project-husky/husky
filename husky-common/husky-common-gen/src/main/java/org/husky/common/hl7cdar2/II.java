@@ -22,26 +22,19 @@
 
 package org.husky.common.hl7cdar2;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 /**
- *
- * An identifier that uniquely identifies a thing or object. Examples are object
- * identifier for HL7 RIM objects, medical record number, order id, service
- * catalog item id, Vehicle Identification Number (VIN), etc. Instance
- * identifiers are defined based on ISO object identifiers.
+ * An identifier that uniquely identifies a thing or object. Examples are object identifier for HL7 RIM objects, medical
+ * record number, order id, service catalog item id, Vehicle Identification Number (VIN), etc. Instance identifiers are
+ * defined based on ISO object identifiers.
  *
  *
  * <p>
  * Java-Klasse für II complex type.
  *
  * <p>
- * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser
- * Klasse enthalten ist.
+ * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
  * &lt;complexType name="II">
@@ -55,106 +48,120 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "II")
-@XmlSeeAlso({ POCDMT000040InfrastructureRootTypeId.class, AllInfrastructureRootTemplateId.class,
-		AllInfrastructureRootTypeId.class })
+@XmlSeeAlso({POCDMT000040InfrastructureRootTypeId.class, AllInfrastructureRootTemplateId.class,
+        AllInfrastructureRootTypeId.class})
 public class II extends ANY {
 
-	@XmlAttribute(name = "root")
-	protected String root;
-	@XmlAttribute(name = "extension")
-	protected String extension;
-	@XmlAttribute(name = "assigningAuthorityName")
-	protected String assigningAuthorityName;
-	@XmlAttribute(name = "displayable")
-	protected Boolean displayable;
+    @XmlAttribute(name = "root")
+    protected String root;
+    @XmlAttribute(name = "extension")
+    protected String extension;
+    @XmlAttribute(name = "assigningAuthorityName")
+    protected String assigningAuthorityName;
+    @XmlAttribute(name = "displayable")
+    protected Boolean displayable;
 
-	/**
-	 * Ruft den Wert der assigningAuthorityName-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getAssigningAuthorityName() {
-		return assigningAuthorityName;
-	}
+    /**
+     * Constructor.
+     */
+    public II() {}
 
-	/**
-	 * Ruft den Wert der extension-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getExtension() {
-		return extension;
-	}
+    /**
+     * Constructor.
+     *
+     * @param root The identifier root.
+     */
+    public II(final String root) {
+        super();
+        this.root = root;
+    }
 
-	/**
-	 * Ruft den Wert der root-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getRoot() {
-		return root;
-	}
+    /**
+     * Constructor.
+     *
+     * @param root      The identifier root.
+     * @param extension The identifier extension.
+     */
+    public II(final String root,
+              final String extension) {
+        super();
+        this.root = root;
+        this.extension = extension;
+    }
 
-	/**
-	 * Ruft den Wert der displayable-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link Boolean }
-	 *
-	 */
-	public Boolean isDisplayable() {
-		return displayable;
-	}
+    /**
+     * Ruft den Wert der assigningAuthorityName-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     */
+    public String getAssigningAuthorityName() {
+        return assigningAuthorityName;
+    }
 
-	/**
-	 * Legt den Wert der assigningAuthorityName-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setAssigningAuthorityName(String value) {
-		this.assigningAuthorityName = value;
-	}
+    /**
+     * Legt den Wert der assigningAuthorityName-Eigenschaft fest.
+     *
+     * @param value allowed object is {@link String }
+     */
+    public void setAssigningAuthorityName(String value) {
+        this.assigningAuthorityName = value;
+    }
 
-	/**
-	 * Legt den Wert der displayable-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link Boolean }
-	 *
-	 */
-	public void setDisplayable(Boolean value) {
-		this.displayable = value;
-	}
+    /**
+     * Ruft den Wert der extension-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     */
+    public String getExtension() {
+        return extension;
+    }
 
-	/**
-	 * Legt den Wert der extension-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setExtension(String value) {
-		this.extension = value;
-	}
+    /**
+     * Legt den Wert der extension-Eigenschaft fest.
+     *
+     * @param value allowed object is {@link String }
+     */
+    public void setExtension(String value) {
+        this.extension = value;
+    }
 
-	/**
-	 * Legt den Wert der root-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setRoot(String value) {
-		this.root = value;
-	}
+    /**
+     * Ruft den Wert der root-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     */
+    public String getRoot() {
+        return root;
+    }
+
+    /**
+     * Legt den Wert der root-Eigenschaft fest.
+     *
+     * @param value allowed object is {@link String }
+     */
+    public void setRoot(String value) {
+        this.root = value;
+    }
+
+    /**
+     * Ruft den Wert der displayable-Eigenschaft ab.
+     *
+     * @return possible object is {@link Boolean }
+     */
+    public Boolean isDisplayable() {
+        return displayable;
+    }
+
+    /**
+     * Legt den Wert der displayable-Eigenschaft fest.
+     *
+     * @param value allowed object is {@link Boolean }
+     */
+    public void setDisplayable(Boolean value) {
+        this.displayable = value;
+    }
 
 }

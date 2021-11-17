@@ -2,8 +2,7 @@ package org.husky.emed.cda.generated.artdecor;
 
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Author;
+import org.husky.common.hl7cdar2.*;
 
 /**
  * cdach_other_AuthorCompilationWithIdNameAddrTelecom
@@ -24,23 +23,23 @@ public class CdachOtherAuthorCompilationWithIdNameAddrTelecom extends POCDMT0000
     /**
      * Creates fixed contents for CDA Element hl7FunctionCode
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.CE createHl7FunctionCodeFixedValue() {
+    private static CE createHl7FunctionCodeFixedValue() {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.CE retVal = factory.createCE();
+        CE retVal = factory.createCE();
         return retVal;
     }
 
     /**
      * Gets the hl7AssignedAuthor
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040AssignedAuthor getHl7AssignedAuthor() {
+    public POCDMT000040AssignedAuthor getHl7AssignedAuthor() {
         return assignedAuthor;
     }
 
     /**
      * Gets the hl7FunctionCode
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CE getHl7FunctionCode() {
+    public CE getHl7FunctionCode() {
         return functionCode;
     }
 
@@ -48,7 +47,7 @@ public class CdachOtherAuthorCompilationWithIdNameAddrTelecom extends POCDMT0000
      * Gets the hl7Time
      * Timestamp of the authorship.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.TS getHl7Time() {
+    public TS getHl7Time() {
         return time;
     }
 
@@ -56,21 +55,21 @@ public class CdachOtherAuthorCompilationWithIdNameAddrTelecom extends POCDMT0000
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.CE, filled by:
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.CE getPredefinedFunctionCode() {
+    public static CE getPredefinedFunctionCode() {
         return createHl7FunctionCodeFixedValue();
     }
 
     /**
      * Sets the hl7AssignedAuthor
      */
-    public void setHl7AssignedAuthor(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040AssignedAuthor value) {
+    public void setHl7AssignedAuthor(POCDMT000040AssignedAuthor value) {
         this.assignedAuthor = value;
     }
 
     /**
      * Sets the hl7FunctionCode
      */
-    public void setHl7FunctionCode(org.husky.emed.cda.generated.hl7cdar2.CE value) {
+    public void setHl7FunctionCode(CE value) {
         this.functionCode = value;
     }
 
@@ -78,7 +77,7 @@ public class CdachOtherAuthorCompilationWithIdNameAddrTelecom extends POCDMT0000
      * Sets the hl7Time
      * Timestamp of the authorship.
      */
-    public void setHl7Time(org.husky.emed.cda.generated.hl7cdar2.TS value) {
+    public void setHl7Time(TS value) {
         this.time = value;
     }
 }

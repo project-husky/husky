@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum RoleClassManufacturedProduct {
 
-	MANU, THER;
+    MANU, THER;
 
-	public static RoleClassManufacturedProduct fromValue(String v) {
-		return valueOf(v);
-	}
+    public static RoleClassManufacturedProduct fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

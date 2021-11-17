@@ -46,14 +46,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ActMoodGoal {
 
-	GOL;
+    GOL;
 
-	public static ActMoodGoal fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ActMoodGoal fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

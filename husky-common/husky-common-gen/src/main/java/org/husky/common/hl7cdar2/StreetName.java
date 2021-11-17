@@ -48,14 +48,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum StreetName {
 
-	STR, STB, STTYP;
+    STR, STB, STTYP;
 
-	public static StreetName fromValue(String v) {
-		return valueOf(v);
-	}
+    public static StreetName fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

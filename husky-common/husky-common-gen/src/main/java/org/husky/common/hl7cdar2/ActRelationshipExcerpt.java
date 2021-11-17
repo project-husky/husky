@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ActRelationshipExcerpt {
 
-	XCRPT, VRXCRPT;
+    XCRPT, VRXCRPT;
 
-	public static ActRelationshipExcerpt fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ActRelationshipExcerpt fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

@@ -57,7 +57,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "QTY")
 @XmlSeeAlso({ RTOMOPQ.class, RTOPQPQ.class, RTOQTYQTY.class, REAL.class, PQ.class, MO.class,
-		TS.class, INT.class })
+        TS.class, INT.class })
 public abstract class QTY extends ANY {
 
 }

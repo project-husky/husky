@@ -1,7 +1,7 @@
 package org.husky.emed.cda;
 
 import org.husky.common.utils.xml.XmlUnmarshaller;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040ClinicalDocument;
+import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
 import org.xml.sax.InputSource;
 
 import javax.xml.parsers.ParserConfigurationException;

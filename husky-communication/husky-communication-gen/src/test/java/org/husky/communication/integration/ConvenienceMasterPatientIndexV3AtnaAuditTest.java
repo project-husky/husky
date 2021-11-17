@@ -10,7 +10,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 
-import org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender;
+import org.hl7.fhir.r4.model.Enumerations.AdministrativeGender;
 import org.husky.common.communication.AffinityDomain;
 import org.husky.common.communication.Destination;
 import org.husky.common.model.Identificator;
@@ -22,9 +22,9 @@ import org.husky.communication.mpi.impl.PixV3Query;
 import org.husky.communication.testhelper.TestApplication;
 import org.husky.fhir.structures.gen.FhirCommon;
 import org.husky.fhir.structures.gen.FhirPatient;
-import org.hl7.fhir.dstu3.model.HumanName;
-import org.hl7.fhir.dstu3.model.Identifier;
-import org.hl7.fhir.dstu3.model.Organization;
+import org.hl7.fhir.r4.model.HumanName;
+import org.hl7.fhir.r4.model.Identifier;
+import org.hl7.fhir.r4.model.Organization;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
@@ -129,7 +129,7 @@ public class ConvenienceMasterPatientIndexV3AtnaAuditTest {
 		final FhirPatient patient = new FhirPatient();
 		final HumanName humanName = new HumanName().setFamily("Bauer-Maier").addGiven("Anton");
 		patient.getName().add(humanName);
-		final org.hl7.fhir.dstu3.model.Address address = new org.hl7.fhir.dstu3.model.Address().addLine("Testgasse 18")
+		final org.hl7.fhir.r4.model.Address address = new org.hl7.fhir.r4.model.Address().addLine("Testgasse 18")
 				.setPostalCode("1020").setCity("Wien").setState("AUT");
 		final Identifier identifier = new Identifier();
 		identifier.setValue("1634793774730");
@@ -146,7 +146,7 @@ public class ConvenienceMasterPatientIndexV3AtnaAuditTest {
 		patient.setGender(AdministrativeGender.MALE);
 		patient.getManagingOrganization().setResource(getScopingOrganization());
 
-		final FhirContext ctx = new FhirContext(FhirVersionEnum.DSTU3);
+		final FhirContext ctx = new FhirContext(FhirVersionEnum.R4);
 		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
 		LOGGER.debug(encoded);
 

@@ -5,12 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
-import org.husky.common.basetypes.CodeBaseType;
 import org.husky.common.enums.NullFlavor;
 import org.husky.common.hl7cdar2.CD;
 import org.husky.common.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.models.common.Code;
-import org.husky.emed.cda.models.common.org;
+import org.husky.emed.cda.models.common.basetypes.CodeBaseType;
 import org.junit.jupiter.api.Test;
 
 class CodeTest {
@@ -69,15 +67,15 @@ class CodeTest {
         codeBt.addCodeTranslation(codeBaseType2);
         codeBt.addCodeTranslation(codeBaseType3);
 
-		org.husky.common.Code code1 = new org.husky.common.Code(codeBt);
+        org.husky.emed.cda.models.common.Code code1 = new org.husky.emed.cda.models.common.Code(codeBt);
         CD hl7CdaR2Type = code1.getHl7CdaR2Cd();
-        org.husky.common.Code code2 = new org.husky.common.Code(hl7CdaR2Type);
+        Code code2 = new Code(hl7CdaR2Type);
 
         assertTrue(code1.equals(code2));
 
         // Null Flavor Tests
         CD nullHl7CdaR2Value = null;
-        org.husky.common.Code nullObj = new org.husky.common.Code(nullHl7CdaR2Value);
+        Code nullObj = new Code(nullHl7CdaR2Value);
         assertEquals(NullFlavor.NOT_AVAILABLE, nullObj.getNullFlavor());
 
         ObjectFactory factory = new ObjectFactory();

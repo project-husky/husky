@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XRoleClassCoverageInvoice {
 
-	PAYEE, PAYOR;
+    PAYEE, PAYOR;
 
-	public static XRoleClassCoverageInvoice fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XRoleClassCoverageInvoice fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

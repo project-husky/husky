@@ -3,11 +3,7 @@ package org.husky.emed.cda.generated.artdecor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Consumable;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040ManufacturedProduct;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Material;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040SubstanceAdministration;
+import org.husky.common.hl7cdar2.*;
 
 /**
  * IHEValidationStepEntryContentModule
@@ -25,7 +21,7 @@ public class IhevalidationStepEntryContentModule extends POCDMT000040SubstanceAd
 
     public IhevalidationStepEntryContentModule() {
         super.getClassCode().add("SBADM");
-        super.setMoodCode(org.husky.emed.cda.generated.hl7cdar2.XDocumentSubstanceMood.PRP);
+        super.setMoodCode(XDocumentSubstanceMood.PRP);
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.16"));
         super.setConsumable(createHl7ConsumableNa());
     }
@@ -48,9 +44,9 @@ public class IhevalidationStepEntryContentModule extends POCDMT000040SubstanceAd
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -58,7 +54,7 @@ public class IhevalidationStepEntryContentModule extends POCDMT000040SubstanceAd
     /**
      * Gets the hl7Consumable
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Consumable getHl7Consumable() {
+    public POCDMT000040Consumable getHl7Consumable() {
         return consumable;
     }
 
@@ -66,14 +62,14 @@ public class IhevalidationStepEntryContentModule extends POCDMT000040SubstanceAd
      * Gets the hl7TemplateId
      * Reference to Medication Treatment Plan Item General Specification Template ID
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
     /**
      * Sets the hl7Consumable
      */
-    public void setHl7Consumable(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Consumable value) {
+    public void setHl7Consumable(POCDMT000040Consumable value) {
         this.consumable = value;
     }
 
@@ -81,7 +77,7 @@ public class IhevalidationStepEntryContentModule extends POCDMT000040SubstanceAd
      * Sets the hl7TemplateId
      * Reference to Medication Treatment Plan Item General Specification Template ID
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }

@@ -48,14 +48,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum RoleClassContact {
 
-	CON, ECON, NOK;
+    CON, ECON, NOK;
 
-	public static RoleClassContact fromValue(String v) {
-		return valueOf(v);
-	}
+    public static RoleClassContact fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

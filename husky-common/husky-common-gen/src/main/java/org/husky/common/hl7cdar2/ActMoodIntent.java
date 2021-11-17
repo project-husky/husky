@@ -52,14 +52,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ActMoodIntent {
 
-	INT, APT, ARQ, PRMS, PRP, RQO, SLOT;
+    INT, APT, ARQ, PRMS, PRP, RQO, SLOT;
 
-	public static ActMoodIntent fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ActMoodIntent fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

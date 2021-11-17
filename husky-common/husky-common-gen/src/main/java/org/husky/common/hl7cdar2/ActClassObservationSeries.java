@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ActClassObservationSeries {
 
-	OBSSER, OBSCOR;
+    OBSSER, OBSCOR;
 
-	public static ActClassObservationSeries fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ActClassObservationSeries fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

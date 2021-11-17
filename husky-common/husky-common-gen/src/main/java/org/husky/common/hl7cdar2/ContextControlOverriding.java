@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ContextControlOverriding {
 
-	ON, OP;
+    ON, OP;
 
-	public static ContextControlOverriding fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ContextControlOverriding fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

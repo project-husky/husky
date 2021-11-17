@@ -49,14 +49,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ActRelationshipHasComponent {
 
-	COMP, ARR, CTRLV, DEP;
+    COMP, ARR, CTRLV, DEP;
 
-	public static ActRelationshipHasComponent fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ActRelationshipHasComponent fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

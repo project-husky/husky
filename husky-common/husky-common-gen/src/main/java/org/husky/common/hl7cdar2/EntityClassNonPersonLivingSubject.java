@@ -49,14 +49,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum EntityClassNonPersonLivingSubject {
 
-	NLIV, ANM, MIC, PLNT;
+    NLIV, ANM, MIC, PLNT;
 
-	public static EntityClassNonPersonLivingSubject fromValue(String v) {
-		return valueOf(v);
-	}
+    public static EntityClassNonPersonLivingSubject fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

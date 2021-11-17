@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum RoleClassEmployee {
 
-	EMP, MIL;
+    EMP, MIL;
 
-	public static RoleClassEmployee fromValue(String v) {
-		return valueOf(v);
-	}
+    public static RoleClassEmployee fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

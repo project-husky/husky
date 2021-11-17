@@ -11,7 +11,7 @@
 	<groupId>org.husky.emed</groupId>
 	<artifactId>husky-emed</artifactId>
 	<packaging>pom</packaging>
-	<name>Husky eMedication Module</name>
+	<name>Husky eMedication</name>
 	<modules>
 		<!-- <module>husky-emed-common</module> -->
 		<module>husky-emed-cda</module>

@@ -18,7 +18,7 @@ import java.util.List;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.communication.ch.enums.Role;
-import org.husky.xua.communication.xua.impl.ch.PurposeOfUse;
+import org.husky.communication.ch.enums.PurposeOfUse;
 import org.opensaml.saml.common.assertion.ValidationContext;
 import org.opensaml.saml.common.assertion.ValidationResult;
 

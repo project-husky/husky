@@ -56,11 +56,11 @@ public class ValueSetManagerTest {
 
 	/** The test value set config file. */
 	private File testValueSetConfigFile = new File(Util.getTempDirectory()
-			+ FileUtil.getPlatformSpecificPathSeparator() + "testValueSetConfig.yaml");
+			+ "/testValueSetConfig.yaml");
 
 	/** The test value set yaml file. */
 	private File testValueSetYamlFile = new File(Util.getTempDirectory()
-			+ FileUtil.getPlatformSpecificPathSeparator() + "testValueSet.yaml");
+			+ "/testValueSet.yaml");
 
 	// This test is disabled because of ART-DECOR downtimes. Enable it for
 	// particular tests, but please do not commit that test enabled.
@@ -87,8 +87,7 @@ public class ValueSetManagerTest {
 		String baseUrlXml = "http://art-decor.org/decor/services/RetrieveValueSet?prefix=ch-epr-&format=xml";
 
 		String projectFolder = Util.getCurrentDirectory()
-				+ "../../common/husky-common-ch/src/main/java/org/husky/common/ch/enums"
-						.replace("/", FileUtil.getPlatformSpecificPathSeparator());
+				+ "../../common/husky-common-ch/src/main/java/org/husky/common/ch/enums";
 		SourceSystemType sourceSystemType = SourceSystemType.ARTDECOR_FHIR;
 
 		String className1 = "AuthorRole";

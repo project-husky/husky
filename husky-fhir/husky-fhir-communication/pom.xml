@@ -8,6 +8,7 @@
 		<version>2.0-ALPHA</version>
 	</parent>
 	<artifactId>husky-fhir-communication</artifactId>
+	<name>Husky FHIR Communication</name>
 
 	<dependencies>
 		<dependency>

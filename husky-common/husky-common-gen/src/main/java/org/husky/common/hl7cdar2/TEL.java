@@ -65,62 +65,62 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "TEL", propOrder = { "useablePeriod" })
 public class TEL extends URL {
 
-	protected List<SXCMTS> useablePeriod;
-	@XmlAttribute(name = "use")
-	protected List<String> use;
+    protected List<SXCMTS> useablePeriod;
+    @XmlAttribute(name = "use")
+    protected List<String> use;
 
-	/**
-	 * Gets the value of the use property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the use property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getUse().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link String }
-	 *
-	 *
-	 */
-	public List<String> getUse() {
-		if (use == null) {
-			use = new ArrayList<String>();
-		}
-		return this.use;
-	}
+    /**
+     * Gets the value of the use property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the use property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getUse().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link String }
+     *
+     *
+     */
+    public List<String> getUse() {
+        if (use == null) {
+            use = new ArrayList<String>();
+        }
+        return this.use;
+    }
 
-	/**
-	 * Gets the value of the useablePeriod property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the useablePeriod property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getUseablePeriod().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link SXCMTS }
-	 *
-	 *
-	 */
-	public List<SXCMTS> getUseablePeriod() {
-		if (useablePeriod == null) {
-			useablePeriod = new ArrayList<SXCMTS>();
-		}
-		return this.useablePeriod;
-	}
+    /**
+     * Gets the value of the useablePeriod property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the useablePeriod property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getUseablePeriod().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link SXCMTS }
+     *
+     *
+     */
+    public List<SXCMTS> getUseablePeriod() {
+        if (useablePeriod == null) {
+            useablePeriod = new ArrayList<SXCMTS>();
+        }
+        return this.useablePeriod;
+    }
 
 }

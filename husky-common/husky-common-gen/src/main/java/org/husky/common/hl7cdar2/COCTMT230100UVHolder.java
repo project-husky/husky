@@ -58,165 +58,165 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "COCT_MT230100UV.Holder", namespace = "urn:ihe:pharm", propOrder = { "realmCode",
-		"typeId", "templateId", "role" })
+        "typeId", "templateId", "role" })
 public class COCTMT230100UVHolder {
 
-	@XmlElement(namespace = "urn:hl7-org:v3")
-	protected List<CS> realmCode;
-	@XmlElement(namespace = "urn:hl7-org:v3")
-	protected AllInfrastructureRootTypeId typeId;
-	@XmlElement(namespace = "urn:hl7-org:v3")
-	protected List<AllInfrastructureRootTemplateId> templateId;
-	@XmlElement(required = true, nillable = true)
-	protected COCTMT230100UVRole role;
-	@XmlAttribute(name = "nullFlavor")
-	protected List<String> nullFlavor;
-	@XmlAttribute(name = "typeCode", required = true)
-	protected ParticipationHolder typeCode;
+    @XmlElement(namespace = "urn:hl7-org:v3")
+    protected List<CS> realmCode;
+    @XmlElement(namespace = "urn:hl7-org:v3")
+    protected AllInfrastructureRootTypeId typeId;
+    @XmlElement(namespace = "urn:hl7-org:v3")
+    protected List<AllInfrastructureRootTemplateId> templateId;
+    @XmlElement(required = true, nillable = true)
+    protected COCTMT230100UVRole role;
+    @XmlAttribute(name = "nullFlavor")
+    protected List<String> nullFlavor;
+    @XmlAttribute(name = "typeCode", required = true)
+    protected ParticipationHolder typeCode;
 
-	/**
-	 * Gets the value of the nullFlavor property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the nullFlavor property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getNullFlavor().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link String }
-	 *
-	 *
-	 */
-	public List<String> getNullFlavor() {
-		if (nullFlavor == null) {
-			nullFlavor = new ArrayList<String>();
-		}
-		return this.nullFlavor;
-	}
+    /**
+     * Gets the value of the nullFlavor property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the nullFlavor property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getNullFlavor().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link String }
+     *
+     *
+     */
+    public List<String> getNullFlavor() {
+        if (nullFlavor == null) {
+            nullFlavor = new ArrayList<String>();
+        }
+        return this.nullFlavor;
+    }
 
-	/**
-	 * Gets the value of the realmCode property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the realmCode property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getRealmCode().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link CS }
-	 *
-	 *
-	 */
-	public List<CS> getRealmCode() {
-		if (realmCode == null) {
-			realmCode = new ArrayList<CS>();
-		}
-		return this.realmCode;
-	}
+    /**
+     * Gets the value of the realmCode property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the realmCode property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getRealmCode().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link CS }
+     *
+     *
+     */
+    public List<CS> getRealmCode() {
+        if (realmCode == null) {
+            realmCode = new ArrayList<CS>();
+        }
+        return this.realmCode;
+    }
 
-	/**
-	 * Ruft den Wert der role-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link COCTMT230100UVRole }
-	 *
-	 */
-	public COCTMT230100UVRole getRole() {
-		return role;
-	}
+    /**
+     * Ruft den Wert der role-Eigenschaft ab.
+     *
+     * @return possible object is {@link COCTMT230100UVRole }
+     *
+     */
+    public COCTMT230100UVRole getRole() {
+        return role;
+    }
 
-	/**
-	 * Gets the value of the templateId property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the templateId property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getTemplateId().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link AllInfrastructureRootTemplateId }
-	 *
-	 *
-	 */
-	public List<AllInfrastructureRootTemplateId> getTemplateId() {
-		if (templateId == null) {
-			templateId = new ArrayList<AllInfrastructureRootTemplateId>();
-		}
-		return this.templateId;
-	}
+    /**
+     * Gets the value of the templateId property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the templateId property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getTemplateId().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link AllInfrastructureRootTemplateId }
+     *
+     *
+     */
+    public List<AllInfrastructureRootTemplateId> getTemplateId() {
+        if (templateId == null) {
+            templateId = new ArrayList<AllInfrastructureRootTemplateId>();
+        }
+        return this.templateId;
+    }
 
-	/**
-	 * Ruft den Wert der typeCode-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link ParticipationHolder }
-	 *
-	 */
-	public ParticipationHolder getTypeCode() {
-		return typeCode;
-	}
+    /**
+     * Ruft den Wert der typeCode-Eigenschaft ab.
+     *
+     * @return possible object is {@link ParticipationHolder }
+     *
+     */
+    public ParticipationHolder getTypeCode() {
+        return typeCode;
+    }
 
-	/**
-	 * Ruft den Wert der typeId-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link AllInfrastructureRootTypeId }
-	 *
-	 */
-	public AllInfrastructureRootTypeId getTypeId() {
-		return typeId;
-	}
+    /**
+     * Ruft den Wert der typeId-Eigenschaft ab.
+     *
+     * @return possible object is {@link AllInfrastructureRootTypeId }
+     *
+     */
+    public AllInfrastructureRootTypeId getTypeId() {
+        return typeId;
+    }
 
-	/**
-	 * Legt den Wert der role-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link COCTMT230100UVRole }
-	 *
-	 */
-	public void setRole(COCTMT230100UVRole value) {
-		this.role = value;
-	}
+    /**
+     * Legt den Wert der role-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link COCTMT230100UVRole }
+     *
+     */
+    public void setRole(COCTMT230100UVRole value) {
+        this.role = value;
+    }
 
-	/**
-	 * Legt den Wert der typeCode-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link ParticipationHolder }
-	 *
-	 */
-	public void setTypeCode(ParticipationHolder value) {
-		this.typeCode = value;
-	}
+    /**
+     * Legt den Wert der typeCode-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link ParticipationHolder }
+     *
+     */
+    public void setTypeCode(ParticipationHolder value) {
+        this.typeCode = value;
+    }
 
-	/**
-	 * Legt den Wert der typeId-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link AllInfrastructureRootTypeId }
-	 *
-	 */
-	public void setTypeId(AllInfrastructureRootTypeId value) {
-		this.typeId = value;
-	}
+    /**
+     * Legt den Wert der typeId-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link AllInfrastructureRootTypeId }
+     *
+     */
+    public void setTypeId(AllInfrastructureRootTypeId value) {
+        this.typeId = value;
+    }
 
 }

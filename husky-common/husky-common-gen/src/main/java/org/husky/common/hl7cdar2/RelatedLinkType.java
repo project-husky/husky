@@ -51,14 +51,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum RelatedLinkType {
 
-	REL, BACKUP, DIRAUTH, INDAUTH, PART, REPL;
+    REL, BACKUP, DIRAUTH, INDAUTH, PART, REPL;
 
-	public static RelatedLinkType fromValue(String v) {
-		return valueOf(v);
-	}
+    public static RelatedLinkType fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

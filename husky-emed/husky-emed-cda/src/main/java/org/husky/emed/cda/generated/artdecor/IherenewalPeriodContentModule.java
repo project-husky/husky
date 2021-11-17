@@ -3,9 +3,7 @@ package org.husky.emed.cda.generated.artdecor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Supply;
-import org.husky.emed.cda.generated.hl7cdar2.SXCMTS;
+import org.husky.common.hl7cdar2.*;
 
 /**
  * IHERenewalPeriodContentModule
@@ -22,8 +20,8 @@ import org.husky.emed.cda.generated.hl7cdar2.SXCMTS;
 public class IherenewalPeriodContentModule extends POCDMT000040Supply {
 
     public IherenewalPeriodContentModule() {
-        super.setClassCode(org.husky.emed.cda.generated.hl7cdar2.ActClassSupply.SPLY);
-        super.setMoodCode(org.husky.emed.cda.generated.hl7cdar2.XDocumentSubstanceMood.RQO);
+        super.setClassCode(ActClassSupply.SPLY);
+        super.setMoodCode(XDocumentSubstanceMood.RQO);
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.15"));
     }
 
@@ -32,9 +30,9 @@ public class IherenewalPeriodContentModule extends POCDMT000040Supply {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -51,7 +49,7 @@ public class IherenewalPeriodContentModule extends POCDMT000040Supply {
      * Gets the hl7TemplateId
      * Renewal Period effectiveTime
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
@@ -59,7 +57,7 @@ public class IherenewalPeriodContentModule extends POCDMT000040Supply {
      * Sets the hl7EffectiveTime
      * In case the renewal period is bound by a precise date
      */
-    public void setHl7EffectiveTime(org.husky.emed.cda.generated.hl7cdar2.IVLTS value) {
+    public void setHl7EffectiveTime(IVLTS value) {
         getEffectiveTime().clear();
         getEffectiveTime().add(value);
     }
@@ -69,7 +67,7 @@ public class IherenewalPeriodContentModule extends POCDMT000040Supply {
      * Sets the hl7TemplateId
      * Renewal Period effectiveTime
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }

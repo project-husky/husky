@@ -36,4 +36,19 @@ public class ChEprXuaSpecifications {
      * URN to specify the representative ID.
      */
     public static final String REPRESENTATIVE_ID = "urn:e-health-suisse:representative-id";
+
+    /**
+     * URN to specify the ID of the user.
+     */
+    public static final String PRINCIPAL_ID = "urn:e-health-suisse:principal-id";
+
+    /**
+     * URN to specify the name of the user.
+     */
+    public static final String PRINCIPAL_NAME = "urn:e-health-suisse:principal-name";
+
+    /**
+     * The claims dialect (in Get X-User Assertion requests).
+     */
+    public static final String CLAIMS_DIALECT = "http://bag.admin.ch/epr/2017/annex/5/addendum/2";
 }

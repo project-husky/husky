@@ -70,18 +70,18 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 	protected AssertionImpl(org.opensaml.saml.saml2.core.Assertion aAssertion) {
 		assertion = aAssertion;
 
-		getAttributes();
-		getAuthnStatements();
-		getConditions();
-		getConditionsAudienceRestrictions();
-		getId();
-		getConditionsNotBefore();
-		getConditionsNotOnOrAfter();
-		getIssueInstant();
-		getIssuer();
-		getSubject();
-		getVersion();
-		getStatements();
+		setAttributes();
+		setAuthnStatements();
+		setConditions();
+		setConditionsAudienceRestrictions();
+		setId();
+		setConditionsNotBefore();
+		setConditionsNotOnOrAfter();
+		setIssueInstant();
+		setIssuer();
+		setSubject();
+		setVersion();
+		setStatements();
 
 	}
 
@@ -107,7 +107,7 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 	 *
 	 * @see org.husky.xua.saml2.Assertion#getAttributes()
 	 */
-	public List<StatementAbstractType> getAttributes() {
+	public void setAttributes() {
 		if (this.statementOrAuthnStatementOrAuthzDecisionStatement == null) {
 			this.statementOrAuthnStatementOrAuthzDecisionStatement = new ArrayList<>();
 		}
@@ -124,7 +124,6 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 			statement.getAttributeOrEncryptedAttribute().addAll(attributes);
 			this.statementOrAuthnStatementOrAuthzDecisionStatement.add(statement);
 		});
-		return this.statementOrAuthnStatementOrAuthzDecisionStatement;
 	}
 
 	/**
@@ -169,7 +168,7 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 	 *
 	 * @see org.husky.xua.saml2.Assertion#getAuthnStatements()
 	 */
-	public List<StatementAbstractType> getAuthnStatements() {
+	public void setAuthnStatements() {
 		if (this.statementOrAuthnStatementOrAuthzDecisionStatement == null) {
 			this.statementOrAuthnStatementOrAuthzDecisionStatement = new ArrayList<>();
 		}
@@ -177,7 +176,6 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 		final List<org.opensaml.saml.saml2.core.AuthnStatement> innerList = assertion.getAuthnStatements();
 		innerList.forEach(c -> this.statementOrAuthnStatementOrAuthzDecisionStatement
 				.add(new AuthnStatementBuilderImpl().create(c)));
-		return this.statementOrAuthnStatementOrAuthzDecisionStatement;
 	}
 
 	/**
@@ -186,7 +184,7 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 	 *
 	 * @see org.husky.xua.saml2.Assertion#getStatements()
 	 */
-	public List<StatementAbstractType> getStatements() {
+	public void setStatements() {
 		if (this.statementOrAuthnStatementOrAuthzDecisionStatement == null) {
 			this.statementOrAuthnStatementOrAuthzDecisionStatement = new ArrayList<>();
 		}
@@ -203,16 +201,12 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 			}
 
 		});
-
-		return this.statementOrAuthnStatementOrAuthzDecisionStatement;
 	}
 
-	@Override
-	public ConditionsType getConditions() {
+	public void setConditions() {
 		if (assertion.getConditions() != null) {
 			this.conditions = new ConditionsBuilderImpl().create(assertion.getConditions());
 		}
-		return this.conditions;
 	}
 
 	public void getConditions(ConditionsType conditions) {
@@ -221,7 +215,7 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 		}
 	}
 
-	public void getConditionsAudienceRestrictions() {
+	public void setConditionsAudienceRestrictions() {
 		if (assertion.getConditions() != null && assertion.getConditions().getAudienceRestrictions() != null) {
 			assertion.getConditions().getAudienceRestrictions()
 					.forEach(audres -> getConditions().getConditionOrAudienceRestrictionOrOneTimeUse()
@@ -229,22 +223,35 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 		}
 	}
 
-	public Calendar getConditionsNotBefore() {
+	public void setConditionsNotBefore() {
 		if (assertion.getConditions() != null) {
-			final var retVal = Calendar.getInstance();
+			final var retVal = new GregorianCalendar();
 			retVal.setTimeInMillis(assertion.getConditions().getNotBefore().toEpochMilli());
-			return retVal;
+
+			XMLGregorianCalendar xmlGregCal = null;
+			try {
+				xmlGregCal = DatatypeFactory.newInstance().newXMLGregorianCalendar();
+				getConditions().setNotBefore(xmlGregCal);
+			} catch (DatatypeConfigurationException e) {
+				LOGGER.error(e.getMessage(), e);
+			}
+
 		}
-		return Calendar.getInstance();
 	}
 
-	public Calendar getConditionsNotOnOrAfter() {
+	public void setConditionsNotOnOrAfter() {
 		if (assertion.getConditions() != null) {
 			final var retVal = Calendar.getInstance();
 			retVal.setTimeInMillis(assertion.getConditions().getNotOnOrAfter().toEpochMilli());
-			return retVal;
+
+			XMLGregorianCalendar xmlGregCal = null;
+			try {
+				xmlGregCal = DatatypeFactory.newInstance().newXMLGregorianCalendar();
+				getConditions().setNotOnOrAfter(xmlGregCal);
+			} catch (DatatypeConfigurationException e) {
+				LOGGER.error(e.getMessage(), e);
+			}
 		}
-		return Calendar.getInstance();
 	}
 
 	/**
@@ -253,9 +260,8 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 	 *
 	 * @see org.husky.xua.saml2.Assertion#getId()
 	 */
-	public String getId() {
+	public void setId() {
 		setID(assertion.getID());
-		return assertion.getID();
 	}
 
 	public void getId(String id) {
@@ -267,8 +273,7 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 	 *
 	 * @see org.husky.xua.saml2.Assertion#getIssueInstant()
 	 */
-	@Override
-	public XMLGregorianCalendar getIssueInstant() {
+	public void setIssueInstant() {
 		if (assertion.getIssueInstant() != null) {
 			final var retVal = new GregorianCalendar();
 			retVal.setTimeInMillis(assertion.getIssueInstant().toEpochMilli());
@@ -280,11 +285,7 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 			} catch (DatatypeConfigurationException e) {
 				LOGGER.error(e.getMessage(), e);
 			}
-
-			return xmlGregCal;
 		}
-
-		return null;
 	}
 
 	public void getIssueInstant(XMLGregorianCalendar cal) {
@@ -299,8 +300,7 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 	 *
 	 * @see org.husky.xua.saml2.Assertion#getIssuer()
 	 */
-	@Override
-	public NameIDType getIssuer() {
+	public void setIssuer() {
 		if (assertion.getIssuer() != null) {
 			var nameIdType = new NameIDType();
 			nameIdType.setValue(assertion.getIssuer().getValue());
@@ -308,10 +308,7 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 			nameIdType.setSPNameQualifier(assertion.getIssuer().getSPNameQualifier());
 			nameIdType.setSPProvidedID(assertion.getIssuer().getSPProvidedID());
 			setIssuer(nameIdType);
-			return nameIdType;
 		}
-
-		return null;
 	}
 
 	public void getIssuer(NameIDType issuer) {
@@ -330,14 +327,11 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 	 *
 	 * @see org.husky.xua.saml2.Assertion#getSubject()
 	 */
-	@Override
-	public SubjectType getSubject() {
+	public void setSubject() {
 		if (assertion.getSubject() != null) {
 			var retVal = new SubjectBuilderImpl().create(assertion.getSubject());
 			setSubject(retVal);
-			return retVal;
 		}
-		return null;
 	}
 
 	public void getSubject(SubjectType subject) {
@@ -352,14 +346,11 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 	 *
 	 * @see org.husky.xua.saml2.Base#getVersion()
 	 */
-	@Override
-	public String getVersion() {
+	public void setVersion() {
 		if (assertion.getVersion() != null) {
 			var retVal = assertion.getVersion().toString();
 			setVersion(retVal);
-			return retVal;
 		}
-		return "";
 	}
 
 	public void getVersion(String version) {

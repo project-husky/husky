@@ -22,7 +22,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 import javax.xml.XMLConstants;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.TransformerException;
@@ -39,7 +38,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.husky.common.utils.xml.XmlFactories;
 import org.husky.xua.authentication.AuthnRequest;
 import org.husky.xua.communication.config.impl.IdpClientBasicAuthConfigImpl;
 import org.husky.xua.deserialization.impl.ResponseDeserializerImpl;
@@ -48,7 +46,9 @@ import org.husky.xua.exceptions.DeserializeException;
 import org.husky.xua.exceptions.SerializeException;
 import org.husky.xua.saml2.Response;
 import org.husky.xua.serialization.impl.AuthnRequestSerializerImpl;
-import org.xml.sax.SAXException;
+import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
+
+import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
 /**
  * <!-- @formatter:off -->
@@ -137,18 +137,20 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
+	 * @throws XMLParserException 
 	 */
 	private HttpEntity getSoapEntity(AuthnRequest aAuthnRequest)
-			throws SerializeException, ParserConfigurationException, TransformerException {
+			throws SerializeException, TransformerException, XMLParserException {
 
 		// serialize the authnrequest to xml element
 		final var serializer = new AuthnRequestSerializerImpl();
 		final var authnRequestElement = serializer.toXmlElement(aAuthnRequest);
 
 		// create xml dokument
-		final var docFactory = DocumentBuilderFactory.newInstance();
-		docFactory.setNamespaceAware(true);
-		final var docBuilder = docFactory.newDocumentBuilder();
+		// Use the parser from the OpenSAML ParserPool because its implementation may be
+		// different than
+		// XmlFactories.newSafeDocumentBuilder()
+		final var docBuilder = XMLObjectProviderRegistrySupport.getParserPool();
 		final var soapDoc = docBuilder.newDocument();
 
 		// create soap envelope
@@ -191,13 +193,17 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 	@Override
 	Response parseResponse(CloseableHttpResponse response) throws ClientSendException {
 		try {
-			final var docBuilder = XmlFactories.newSafeDocumentBuilder();
-			final var soapDocument = docBuilder.parse(response.getEntity().getContent());
+
+			// Use the parser from the OpenSAML ParserPool because its implementation may be
+			// different than
+			// XmlFactories.newSafeDocumentBuilder()
+			final var soapDocument = XMLObjectProviderRegistrySupport.getParserPool()
+					.parse(response.getEntity().getContent());
 
 			// get the xml response node
 			final var responseNode = soapDocument.getFirstChild().getLastChild().getFirstChild();
 
-			final var doc = docBuilder.newDocument();
+			final var doc = XMLObjectProviderRegistrySupport.getParserPool().newDocument();
 			final var importedNode = doc.importNode(responseNode, true);
 			doc.appendChild(importedNode);
 
@@ -205,8 +211,8 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 			final var deserializer = new ResponseDeserializerImpl();
 			return deserializer.fromXmlElement(doc.getDocumentElement());
 		} catch (UnsupportedOperationException | IOException | DeserializeException
-				| TransformerFactoryConfigurationError | ParserConfigurationException
-				| SAXException e) {
+				| TransformerFactoryConfigurationError 
+				| XMLParserException e) {
 			throw new ClientSendException(e);
 		}
 

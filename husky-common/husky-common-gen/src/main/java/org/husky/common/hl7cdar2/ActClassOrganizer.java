@@ -50,14 +50,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ActClassOrganizer {
 
-	ORGANIZER, CATEGORY, DOCBODY, DOCSECT, TOPIC;
+    ORGANIZER, CATEGORY, DOCBODY, DOCSECT, TOPIC;
 
-	public static ActClassOrganizer fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ActClassOrganizer fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

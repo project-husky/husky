@@ -54,14 +54,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XActClassDocumentEntryAct {
 
-	ACT, ACCM, CONS, CTTEVENT, INC, INFRM, PCPR, REG, SPCTRT;
+    ACT, ACCM, CONS, CTTEVENT, INC, INFRM, PCPR, REG, SPCTRT;
 
-	public static XActClassDocumentEntryAct fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XActClassDocumentEntryAct fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

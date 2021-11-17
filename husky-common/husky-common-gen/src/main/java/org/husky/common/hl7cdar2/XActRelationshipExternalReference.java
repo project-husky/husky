@@ -51,14 +51,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XActRelationshipExternalReference {
 
-	XCRPT, RPLC, SPRT, ELNK, REFR, SUBJ;
+    XCRPT, RPLC, SPRT, ELNK, REFR, SUBJ;
 
-	public static XActRelationshipExternalReference fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XActRelationshipExternalReference fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

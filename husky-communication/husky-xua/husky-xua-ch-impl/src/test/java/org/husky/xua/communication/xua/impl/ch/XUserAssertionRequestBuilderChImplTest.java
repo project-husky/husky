@@ -20,10 +20,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.husky.xua.XUserAssertionConstantsCh;
+import org.husky.xua.ChEprXuaSpecifications;
 import org.husky.xua.communication.xua.XUserAssertionRequest;
 import org.husky.xua.communication.xua.impl.XUserAssertionRequestBuilderImpl;
-import org.husky.xua.communication.xua.impl.ch.XUserAssertionRequestBuilderChImpl;
 import org.junit.jupiter.api.BeforeEach;
 
 public class XUserAssertionRequestBuilderChImplTest {
@@ -42,7 +41,7 @@ public class XUserAssertionRequestBuilderChImplTest {
 		final XUserAssertionRequest ref = builder.dialect(testDialect).create();
 		assertNotNull(ref);
 		assertNotEquals(testDialect, ref.getDialect());
-		assertEquals(XUserAssertionConstantsCh.CH_EPR_2017_ANNEX5_ADDENDUM2, ref.getDialect());
+		assertEquals(ChEprXuaSpecifications.CLAIMS_DIALECT, ref.getDialect());
 	}
 
 }

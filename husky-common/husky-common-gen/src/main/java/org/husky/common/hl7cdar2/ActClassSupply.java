@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ActClassSupply {
 
-	SPLY, DIET;
+    SPLY, DIET;
 
-	public static ActClassSupply fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ActClassSupply fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

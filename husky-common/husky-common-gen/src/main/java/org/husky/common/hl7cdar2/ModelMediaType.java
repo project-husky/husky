@@ -47,26 +47,26 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ModelMediaType {
 
-	@XmlEnumValue("model/vrml")
-	MODEL_VRML("model/vrml");
+    @XmlEnumValue("model/vrml")
+    MODEL_VRML("model/vrml");
 
-	public static ModelMediaType fromValue(String v) {
-		for (ModelMediaType c : ModelMediaType.values()) {
-			if (c.value.equals(v)) {
-				return c;
-			}
-		}
-		throw new IllegalArgumentException(v);
-	}
+    public static ModelMediaType fromValue(String v) {
+        for (ModelMediaType c : ModelMediaType.values()) {
+            if (c.value.equals(v)) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException(v);
+    }
 
-	private final String value;
+    private final String value;
 
-	ModelMediaType(String v) {
-		value = v;
-	}
+    ModelMediaType(String v) {
+        value = v;
+    }
 
-	public String value() {
-		return value;
-	}
+    public String value() {
+        return value;
+    }
 
 }

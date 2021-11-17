@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040SubstanceAdministration;
-import org.husky.emed.cda.generated.hl7cdar2.SXCMTS;
+import org.husky.common.hl7cdar2.*;
+import org.husky.common.hl7cdar2.ObjectFactory;
+import org.husky.common.hl7cdar2.POCDMT000040SubstanceAdministration;
+import org.husky.common.hl7cdar2.SXCMTS;
 
 /**
  * DosageInstructionsStartStopFrequency
@@ -27,7 +28,7 @@ public class DosageInstructionsStartStopFrequency extends POCDMT000040SubstanceA
     /**
      * Adds a hl7ApproachSiteCode
      */
-    public void addHl7ApproachSiteCode(org.husky.emed.cda.generated.hl7cdar2.CD value) {
+    public void addHl7ApproachSiteCode(CD value) {
         getApproachSiteCode().add(value);
     }
 
@@ -41,9 +42,9 @@ public class DosageInstructionsStartStopFrequency extends POCDMT000040SubstanceA
     /**
      * Creates fixed contents for CDA Element hl7DoseQuantity
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.IVLPQ createHl7DoseQuantityFixedValue() {
+    private static IVLPQ createHl7DoseQuantityFixedValue() {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.IVLPQ retVal = factory.createIVLPQ();
+        IVLPQ retVal = factory.createIVLPQ();
         return retVal;
     }
 
@@ -52,10 +53,10 @@ public class DosageInstructionsStartStopFrequency extends POCDMT000040SubstanceA
      *
      * @param operator the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.EIVLTS createHl7EffectiveTimeFixedValue(String operator) {
+    private static EIVLTS createHl7EffectiveTimeFixedValue(String operator) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.EIVLTS retVal = factory.createEIVLTS();
-        retVal.setOperator(org.husky.emed.cda.generated.hl7cdar2.SetOperator.fromValue(operator));
+        EIVLTS retVal = factory.createEIVLTS();
+        retVal.setOperator(SetOperator.fromValue(operator));
         return retVal;
     }
 
@@ -64,9 +65,9 @@ public class DosageInstructionsStartStopFrequency extends POCDMT000040SubstanceA
      *
      * @param nullFlavor the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.IVLINT createHl7RepeatNumberFixedValue(String nullFlavor) {
+    private static IVLINT createHl7RepeatNumberFixedValue(String nullFlavor) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.IVLINT retVal = factory.createIVLINT();
+        IVLINT retVal = factory.createIVLINT();
         retVal.nullFlavor = new ArrayList<String>();
         retVal.nullFlavor.add(nullFlavor);
         return retVal;
@@ -75,16 +76,16 @@ public class DosageInstructionsStartStopFrequency extends POCDMT000040SubstanceA
     /**
      * Creates fixed contents for CDA Element hl7RouteCode
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.CE createHl7RouteCodeFixedValue() {
+    private static CE createHl7RouteCodeFixedValue() {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.CE retVal = factory.createCE();
+        CE retVal = factory.createCE();
         return retVal;
     }
 
     /**
      * Gets the hl7DoseQuantity
      */
-    public org.husky.emed.cda.generated.hl7cdar2.IVLPQ getHl7DoseQuantity() {
+    public IVLPQ getHl7DoseQuantity() {
         return doseQuantity;
     }
 
@@ -107,7 +108,7 @@ public class DosageInstructionsStartStopFrequency extends POCDMT000040SubstanceA
     /**
      * Gets the hl7RateQuantity
      */
-    public org.husky.emed.cda.generated.hl7cdar2.IVLPQ getHl7RateQuantity() {
+    public IVLPQ getHl7RateQuantity() {
         return rateQuantity;
     }
 
@@ -115,14 +116,14 @@ public class DosageInstructionsStartStopFrequency extends POCDMT000040SubstanceA
      * Gets the hl7RepeatNumber
      * Number of repeats/refills. Either the @value or @nullFlavor attribute shall be set. It's required in MTP, PRE and PADV items ; forbidden in DIS items.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.IVLINT getHl7RepeatNumber() {
+    public IVLINT getHl7RepeatNumber() {
         return repeatNumber;
     }
 
     /**
      * Gets the hl7RouteCode
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CE getHl7RouteCode() {
+    public CE getHl7RouteCode() {
         return routeCode;
     }
 
@@ -130,7 +131,7 @@ public class DosageInstructionsStartStopFrequency extends POCDMT000040SubstanceA
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.IVLPQ, filled by:
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.IVLPQ getPredefinedDoseQuantity() {
+    public static IVLPQ getPredefinedDoseQuantity() {
         return createHl7DoseQuantityFixedValue();
     }
 
@@ -138,7 +139,7 @@ public class DosageInstructionsStartStopFrequency extends POCDMT000040SubstanceA
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.EIVLTS, filled by: "A"
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.EIVLTS getPredefinedEffectiveTimeA() {
+    public static EIVLTS getPredefinedEffectiveTimeA() {
         return createHl7EffectiveTimeFixedValue("A");
     }
 
@@ -146,7 +147,7 @@ public class DosageInstructionsStartStopFrequency extends POCDMT000040SubstanceA
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.IVLINT, filled by: "NI"
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.IVLINT getPredefinedRepeatNumberNi() {
+    public static IVLINT getPredefinedRepeatNumberNi() {
         return createHl7RepeatNumberFixedValue("NI");
     }
 
@@ -154,14 +155,14 @@ public class DosageInstructionsStartStopFrequency extends POCDMT000040SubstanceA
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.CE, filled by:
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.CE getPredefinedRouteCode() {
+    public static CE getPredefinedRouteCode() {
         return createHl7RouteCodeFixedValue();
     }
 
     /**
      * Sets the hl7DoseQuantity
      */
-    public void setHl7DoseQuantity(org.husky.emed.cda.generated.hl7cdar2.IVLPQ value) {
+    public void setHl7DoseQuantity(IVLPQ value) {
         this.doseQuantity = value;
     }
 
@@ -169,7 +170,7 @@ public class DosageInstructionsStartStopFrequency extends POCDMT000040SubstanceA
      * Sets the hl7EffectiveTime
      * <div>In case the (structured) dosage instructions include a dose regime this element SHALL be</div><div>present and specify the entire duration of the medication treatment. In case the Duration of Treatment is unknown the &lt;low&gt; and &lt;high&gt; sub-elements of this element SHALL be set to null flavor “UNK”.</div>
      */
-    public void setHl7EffectiveTime(org.husky.emed.cda.generated.hl7cdar2.IVLTS value) {
+    public void setHl7EffectiveTime(IVLTS value) {
         getEffectiveTime().clear();
         getEffectiveTime().add(value);
     }
@@ -178,7 +179,7 @@ public class DosageInstructionsStartStopFrequency extends POCDMT000040SubstanceA
      * Sets the hl7EffectiveTime
      * Dosage Instructions PCC 6.3.4.16.12 - Frequency: Event based time interval, where the event is not a precise time, but is used for timing purposes (e.g., with meals, between meals, before breakfast, before sleep).
      */
-    public void setHl7EffectiveTime(org.husky.emed.cda.generated.hl7cdar2.EIVLTS value) {
+    public void setHl7EffectiveTime(EIVLTS value) {
         getEffectiveTime().clear();
         getEffectiveTime().add(value);
     }
@@ -187,7 +188,7 @@ public class DosageInstructionsStartStopFrequency extends POCDMT000040SubstanceA
      * Sets the hl7EffectiveTime
      * Dosage Instructions PCC 6.3.4.16.12 - Frequency: Multiple events within a day with the same dosage
      */
-    public void setHl7EffectiveTime(org.husky.emed.cda.generated.hl7cdar2.SXPRTS value) {
+    public void setHl7EffectiveTime(SXPRTS value) {
         getEffectiveTime().clear();
         getEffectiveTime().add(value);
     }
@@ -195,7 +196,7 @@ public class DosageInstructionsStartStopFrequency extends POCDMT000040SubstanceA
     /**
      * Sets the hl7RateQuantity
      */
-    public void setHl7RateQuantity(org.husky.emed.cda.generated.hl7cdar2.IVLPQ value) {
+    public void setHl7RateQuantity(IVLPQ value) {
         this.rateQuantity = value;
     }
 
@@ -203,14 +204,14 @@ public class DosageInstructionsStartStopFrequency extends POCDMT000040SubstanceA
      * Sets the hl7RepeatNumber
      * Number of repeats/refills. Either the @value or @nullFlavor attribute shall be set. It's required in MTP, PRE and PADV items ; forbidden in DIS items.
      */
-    public void setHl7RepeatNumber(org.husky.emed.cda.generated.hl7cdar2.IVLINT value) {
+    public void setHl7RepeatNumber(IVLINT value) {
         this.repeatNumber = value;
     }
 
     /**
      * Sets the hl7RouteCode
      */
-    public void setHl7RouteCode(org.husky.emed.cda.generated.hl7cdar2.CE value) {
+    public void setHl7RouteCode(CE value) {
         this.routeCode = value;
     }
 }
