@@ -21,11 +21,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.hl7.fhir.dstu3.model.Address.AddressUse;
-import org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender;
-import org.hl7.fhir.dstu3.model.HumanName;
-import org.hl7.fhir.dstu3.model.Identifier;
-import org.hl7.fhir.dstu3.model.Identifier.IdentifierUse;
+import org.hl7.fhir.r4.model.Address.AddressUse;
+import org.hl7.fhir.r4.model.Enumerations.AdministrativeGender;
+import org.hl7.fhir.r4.model.HumanName;
+import org.hl7.fhir.r4.model.Identifier;
+import org.hl7.fhir.r4.model.Identifier.IdentifierUse;
 import org.husky.common.enums.CountryCode;
 import org.husky.common.utils.DateUtil;
 import org.husky.fhir.structures.gen.FhirCommon;
@@ -44,7 +44,7 @@ public class TestPatient {
 		final FhirPatient patient = new FhirPatient();
 		final TestPatient testPatient = TestPatient.getTestPatientMueller();
 
-		final org.hl7.fhir.dstu3.model.Address address = new org.hl7.fhir.dstu3.model.Address()
+		final org.hl7.fhir.r4.model.Address address = new org.hl7.fhir.r4.model.Address()
 				.addLine(testPatient.addrLine1).setPostalCode(testPatient.addrPostalCode)
 				.setCity(testPatient.addrCity).setState(testPatient.addrState)
 				.setCountry(testPatient.addrCountry);
@@ -73,7 +73,7 @@ public class TestPatient {
 		final FhirPatient patient = new FhirPatient();
 		final TestPatient testPatient = TestPatient.getTestPatientMuellerObsolete();
 
-		final org.hl7.fhir.dstu3.model.Address address = new org.hl7.fhir.dstu3.model.Address()
+		final org.hl7.fhir.r4.model.Address address = new org.hl7.fhir.r4.model.Address()
 				.addLine(testPatient.addrLine1).setPostalCode(testPatient.addrPostalCode)
 				.setCity(testPatient.addrCity).setState(testPatient.addrState)
 				.setCountry(testPatient.addrCountry);

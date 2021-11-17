@@ -48,14 +48,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum RoleClassSpecimen {
 
-	SPEC, ALQT, ISLT;
+    SPEC, ALQT, ISLT;
 
-	public static RoleClassSpecimen fromValue(String v) {
-		return valueOf(v);
-	}
+    public static RoleClassSpecimen fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

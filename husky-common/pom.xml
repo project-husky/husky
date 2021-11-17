@@ -5,7 +5,7 @@
 	<groupId>org.husky.common</groupId>
 	<artifactId>husky-common</artifactId>
 	<packaging>pom</packaging>
-	<name>Husky project Common</name>
+	<name>Husky Common</name>
 
 	<parent>
 		<groupId>org.husky</groupId>

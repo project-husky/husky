@@ -2,7 +2,8 @@ package org.husky.emed.cda.generated.artdecor;
 
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ED;
+import org.husky.common.hl7cdar2.ED;
+import org.husky.common.hl7cdar2.TEL;
 
 /**
  * cdach_other_TextElementWithReferenceToNarrativeText
@@ -24,7 +25,7 @@ public class CdachOtherTextElementWithReferenceToNarrativeText extends ED {
      * Gets the hl7Reference
      * The reference to the corresponding text in the human readable part must be specified by reference to content[@ID]: reference[@value='#xxx']
      */
-    public org.husky.emed.cda.generated.hl7cdar2.TEL getHl7Reference() {
+    public TEL getHl7Reference() {
         return reference;
     }
 
@@ -32,7 +33,7 @@ public class CdachOtherTextElementWithReferenceToNarrativeText extends ED {
      * Sets the hl7Reference
      * The reference to the corresponding text in the human readable part must be specified by reference to content[@ID]: reference[@value='#xxx']
      */
-    public void setHl7Reference(org.husky.emed.cda.generated.hl7cdar2.TEL value) {
+    public void setHl7Reference(TEL value) {
         this.reference = value;
     }
 }

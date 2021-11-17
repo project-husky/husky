@@ -2,7 +2,7 @@ package org.husky.emed.cda.utils;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.dataflow.qual.SideEffectFree;
-import org.husky.emed.cda.generated.hl7cdar2.*;
+import org.husky.common.hl7cdar2.*;
 
 import java.math.BigInteger;
 import java.util.Collections;

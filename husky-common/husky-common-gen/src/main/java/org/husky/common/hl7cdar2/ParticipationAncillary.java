@@ -52,14 +52,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ParticipationAncillary {
 
-	ADM, ATND, CALLBCK, CON, DIS, ESC, REF;
+    ADM, ATND, CALLBCK, CON, DIS, ESC, REF;
 
-	public static ParticipationAncillary fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ParticipationAncillary fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

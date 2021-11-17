@@ -51,28 +51,28 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "UVP_TS")
 public class UVPTS extends TS {
 
-	@XmlAttribute(name = "probability")
-	protected Double probability;
+    @XmlAttribute(name = "probability")
+    protected Double probability;
 
-	/**
-	 * Ruft den Wert der probability-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link Double }
-	 *
-	 */
-	public Double getProbability() {
-		return probability;
-	}
+    /**
+     * Ruft den Wert der probability-Eigenschaft ab.
+     *
+     * @return possible object is {@link Double }
+     *
+     */
+    public Double getProbability() {
+        return probability;
+    }
 
-	/**
-	 * Legt den Wert der probability-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link Double }
-	 *
-	 */
-	public void setProbability(Double value) {
-		this.probability = value;
-	}
+    /**
+     * Legt den Wert der probability-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link Double }
+     *
+     */
+    public void setProbability(Double value) {
+        this.probability = value;
+    }
 
 }

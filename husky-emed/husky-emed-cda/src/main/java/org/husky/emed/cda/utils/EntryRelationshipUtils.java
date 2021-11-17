@@ -2,10 +2,10 @@ package org.husky.emed.cda.utils;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.cda.errors.InvalidEmedContentException;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Act;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Observation;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040SubstanceAdministration;
+import org.husky.common.hl7cdar2.POCDMT000040Act;
+import org.husky.common.hl7cdar2.POCDMT000040EntryRelationship;
+import org.husky.common.hl7cdar2.POCDMT000040Observation;
+import org.husky.common.hl7cdar2.POCDMT000040SubstanceAdministration;
 
 import java.util.Collections;
 import java.util.List;

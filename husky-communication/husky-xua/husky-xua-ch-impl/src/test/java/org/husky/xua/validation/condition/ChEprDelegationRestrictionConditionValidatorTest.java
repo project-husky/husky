@@ -9,16 +9,15 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
-
-import javax.xml.parsers.DocumentBuilder;
+import java.util.Objects;
 
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
-import org.husky.common.utils.xml.XmlFactories;
 import org.husky.communication.ch.enums.Role;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.opensaml.core.config.InitializationService;
+import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.opensaml.core.xml.io.Unmarshaller;
 import org.opensaml.core.xml.util.XMLObjectSupport;
 import org.opensaml.saml.common.assertion.ValidationContext;
@@ -37,15 +36,12 @@ class ChEprDelegationRestrictionConditionValidatorTest {
 
     private static final ConditionValidator VALIDATOR = new ChEprDelegationRestrictionConditionValidator();
     @MonotonicNonNull
-    private static DocumentBuilder DOC_BUILDER = null;
-    @MonotonicNonNull
     private static Unmarshaller UNMARSHALLER = null;
 
     @BeforeAll
     public static void setUpBeforeClass() throws Exception {
         // Initialize the library
         InitializationService.initialize();
-        DOC_BUILDER = XmlFactories.newXuaDocumentBuilder();
         UNMARSHALLER = XMLObjectSupport.getUnmarshaller(DelegationRestrictionType.TYPE_NAME);
     }
 
@@ -177,7 +173,9 @@ class ChEprDelegationRestrictionConditionValidatorTest {
 
     private DelegationRestrictionType unmarshal(final String xml) throws Exception {
         final var bytes = ("<saml2:Condition xsi:type=\"del:DelegationRestrictionType\" xmlns:del=\"urn:oasis:names:tc:SAML:2.0:conditions:delegation\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:saml2=\"urn:oasis:names:tc:SAML:2.0:assertion\">" + xml + "</saml2:Condition>").getBytes(StandardCharsets.UTF_8);
-        Element element = DOC_BUILDER.parse(new ByteArrayInputStream(bytes)).getDocumentElement();
+        Element element = Objects.requireNonNull(XMLObjectProviderRegistrySupport.getParserPool())
+                .parse(new ByteArrayInputStream(bytes))
+                .getDocumentElement();
         return (DelegationRestrictionType) UNMARSHALLER.unmarshall(element);
     }
 }

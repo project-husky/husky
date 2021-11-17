@@ -3,8 +3,9 @@ package org.husky.emed.cda.generated.artdecor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040ClinicalDocument;
+import org.husky.common.hl7cdar2.II;
+import org.husky.common.hl7cdar2.ObjectFactory;
+import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * cdach_header_DocumentTemplateIdsCdaChv2.0-structuredBody
@@ -31,9 +32,9 @@ public class CdachHeaderDocumentTemplateIdsCdaChv20StructuredBody extends POCDMT
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -42,7 +43,7 @@ public class CdachHeaderDocumentTemplateIdsCdaChv20StructuredBody extends POCDMT
      * Gets the hl7TemplateId
      * CDA-CH v2.0 specification. This is an informational reference, only.
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
@@ -50,7 +51,7 @@ public class CdachHeaderDocumentTemplateIdsCdaChv20StructuredBody extends POCDMT
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.II, filled by: "2.16.756.5.30.1.1.1.1.4"
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.II getPredefinedTemplateId21675653011114() {
+    public static II getPredefinedTemplateId21675653011114() {
         return createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.4");
     }
 
@@ -58,7 +59,7 @@ public class CdachHeaderDocumentTemplateIdsCdaChv20StructuredBody extends POCDMT
      * Sets the hl7TemplateId
      * CDA-CH v2.0 specification. This is an informational reference, only.
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }

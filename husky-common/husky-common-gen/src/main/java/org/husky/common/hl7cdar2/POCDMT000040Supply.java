@@ -22,6 +22,8 @@
 
 package org.husky.common.hl7cdar2;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,683 +81,698 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "POCD_MT000040.Supply", propOrder = { "realmCode", "typeId", "templateId", "id",
-		"code", "text", "statusCode", "effectiveTime", "priorityCode", "repeatNumber",
-		"independentInd", "quantity", "expectedUseTime", "subject", "specimen", "product",
-		"performer", "author", "informant", "participant", "entryRelationship", "reference",
-		"precondition" })
+        "code", "text", "statusCode", "effectiveTime", "priorityCode", "repeatNumber",
+        "independentInd", "quantity", "expectedUseTime", "subject", "specimen", "product",
+        "performer", "author", "informant", "participant", "entryRelationship", "reference",
+        "precondition" })
 public class POCDMT000040Supply {
 
-	protected List<CS> realmCode;
-	protected POCDMT000040InfrastructureRootTypeId typeId;
-	protected List<II> templateId;
-	protected List<II> id;
-	protected CD code;
-	protected ED text;
-	protected CS statusCode;
-	protected List<SXCMTS> effectiveTime;
-	protected List<CE> priorityCode;
-	protected IVLINT repeatNumber;
-	protected BL independentInd;
-	protected PQ quantity;
-	protected IVLTS expectedUseTime;
-	protected POCDMT000040Subject subject;
-	protected List<POCDMT000040Specimen> specimen;
-	protected POCDMT000040Product product;
-	protected List<POCDMT000040Performer2> performer;
-	protected List<POCDMT000040Author> author;
-	protected List<POCDMT000040Informant12> informant;
-	protected List<POCDMT000040Participant2> participant;
-	protected List<POCDMT000040EntryRelationship> entryRelationship;
-	protected List<POCDMT000040Reference> reference;
-	protected List<POCDMT000040Precondition> precondition;
-	@XmlAttribute(name = "nullFlavor")
-	protected List<String> nullFlavor;
-	@XmlAttribute(name = "classCode", required = true)
-	protected ActClassSupply classCode;
-	@XmlAttribute(name = "moodCode", required = true)
-	protected XDocumentSubstanceMood moodCode;
+    protected List<CS> realmCode;
+    protected POCDMT000040InfrastructureRootTypeId typeId;
+    protected List<II> templateId;
+    protected List<II> id;
+    protected CD code;
+    protected ED text;
+    protected CS statusCode;
+    protected List<SXCMTS> effectiveTime;
+    protected List<CE> priorityCode;
+    protected IVLINT repeatNumber;
+    protected BL independentInd;
+    protected PQ quantity;
+    protected IVLTS expectedUseTime;
+    protected POCDMT000040Subject subject;
+    protected List<POCDMT000040Specimen> specimen;
+    protected POCDMT000040Product product;
+    protected List<POCDMT000040Performer2> performer;
+    protected List<POCDMT000040Author> author;
+    protected List<POCDMT000040Informant12> informant;
+    protected List<POCDMT000040Participant2> participant;
+    protected List<POCDMT000040EntryRelationship> entryRelationship;
+    protected List<POCDMT000040Reference> reference;
+    protected List<POCDMT000040Precondition> precondition;
+    @XmlAttribute(name = "nullFlavor")
+    protected List<String> nullFlavor;
+    @XmlAttribute(name = "classCode", required = true)
+    protected ActClassSupply classCode;
+    @XmlAttribute(name = "moodCode", required = true)
+    protected XDocumentSubstanceMood moodCode;
 
-	/**
-	 * Gets the value of the author property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the author property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getAuthor().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link POCDMT000040Author }
-	 *
-	 *
-	 */
-	public List<POCDMT000040Author> getAuthor() {
-		if (author == null) {
-			author = new ArrayList<POCDMT000040Author>();
-		}
-		return this.author;
-	}
+    /**
+     * Gets the value of the author property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the author property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getAuthor().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link POCDMT000040Author }
+     *
+     *
+     */
+    @NonNull
+    public List<POCDMT000040Author> getAuthor() {
+        if (author == null) {
+            author = new ArrayList<POCDMT000040Author>();
+        }
+        return this.author;
+    }
 
-	/**
-	 * Ruft den Wert der classCode-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link ActClassSupply }
-	 *
-	 */
-	public ActClassSupply getClassCode() {
-		if (classCode == null) {
-			return ActClassSupply.SPLY;
-		} else {
-			return classCode;
-		}
-	}
+    /**
+     * Ruft den Wert der classCode-Eigenschaft ab.
+     *
+     * @return possible object is {@link ActClassSupply }
+     *
+     */
+    @NonNull
+    public ActClassSupply getClassCode() {
+        if (classCode == null) {
+            return ActClassSupply.SPLY;
+        } else {
+            return classCode;
+        }
+    }
 
-	/**
-	 * Ruft den Wert der code-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link CD }
-	 *
-	 */
-	public CD getCode() {
-		return code;
-	}
+    /**
+     * Ruft den Wert der code-Eigenschaft ab.
+     *
+     * @return possible object is {@link CD }
+     *
+     */
+    public CD getCode() {
+        return code;
+    }
 
-	/**
-	 * Gets the value of the effectiveTime property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the effectiveTime property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getEffectiveTime().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link SXCMTS }
-	 *
-	 *
-	 */
-	public List<SXCMTS> getEffectiveTime() {
-		if (effectiveTime == null) {
-			effectiveTime = new ArrayList<SXCMTS>();
-		}
-		return this.effectiveTime;
-	}
+    /**
+     * Gets the value of the effectiveTime property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the effectiveTime property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getEffectiveTime().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link SXCMTS }
+     *
+     *
+     */
+    @NonNull
+    public List<SXCMTS> getEffectiveTime() {
+        if (effectiveTime == null) {
+            effectiveTime = new ArrayList<SXCMTS>();
+        }
+        return this.effectiveTime;
+    }
 
-	/**
-	 * Gets the value of the entryRelationship property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the entryRelationship property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getEntryRelationship().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link POCDMT000040EntryRelationship }
-	 *
-	 *
-	 */
-	public List<POCDMT000040EntryRelationship> getEntryRelationship() {
-		if (entryRelationship == null) {
-			entryRelationship = new ArrayList<POCDMT000040EntryRelationship>();
-		}
-		return this.entryRelationship;
-	}
+    /**
+     * Gets the value of the entryRelationship property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the entryRelationship property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getEntryRelationship().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link POCDMT000040EntryRelationship }
+     *
+     *
+     */
+    @NonNull
+    public List<POCDMT000040EntryRelationship> getEntryRelationship() {
+        if (entryRelationship == null) {
+            entryRelationship = new ArrayList<POCDMT000040EntryRelationship>();
+        }
+        return this.entryRelationship;
+    }
 
-	/**
-	 * Ruft den Wert der expectedUseTime-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link IVLTS }
-	 *
-	 */
-	public IVLTS getExpectedUseTime() {
-		return expectedUseTime;
-	}
+    /**
+     * Ruft den Wert der expectedUseTime-Eigenschaft ab.
+     *
+     * @return possible object is {@link IVLTS }
+     *
+     */
+    public IVLTS getExpectedUseTime() {
+        return expectedUseTime;
+    }
 
-	/**
-	 * Gets the value of the id property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the id property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getId().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link II }
-	 *
-	 *
-	 */
-	public List<II> getId() {
-		if (id == null) {
-			id = new ArrayList<II>();
-		}
-		return this.id;
-	}
+    /**
+     * Gets the value of the id property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the id property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getId().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link II }
+     *
+     *
+     */
+    @NonNull
+    public List<II> getId() {
+        if (id == null) {
+            id = new ArrayList<II>();
+        }
+        return this.id;
+    }
 
-	/**
-	 * Ruft den Wert der independentInd-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link BL }
-	 *
-	 */
-	public BL getIndependentInd() {
-		return independentInd;
-	}
+    /**
+     * Ruft den Wert der independentInd-Eigenschaft ab.
+     *
+     * @return possible object is {@link BL }
+     *
+     */
+    public BL getIndependentInd() {
+        return independentInd;
+    }
 
-	/**
-	 * Gets the value of the informant property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the informant property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getInformant().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link POCDMT000040Informant12 }
-	 *
-	 *
-	 */
-	public List<POCDMT000040Informant12> getInformant() {
-		if (informant == null) {
-			informant = new ArrayList<POCDMT000040Informant12>();
-		}
-		return this.informant;
-	}
+    /**
+     * Gets the value of the informant property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the informant property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getInformant().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link POCDMT000040Informant12 }
+     *
+     *
+     */
+    @NonNull
+    public List<POCDMT000040Informant12> getInformant() {
+        if (informant == null) {
+            informant = new ArrayList<POCDMT000040Informant12>();
+        }
+        return this.informant;
+    }
 
-	/**
-	 * Ruft den Wert der moodCode-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link XDocumentSubstanceMood }
-	 *
-	 */
-	public XDocumentSubstanceMood getMoodCode() {
-		return moodCode;
-	}
+    /**
+     * Ruft den Wert der moodCode-Eigenschaft ab.
+     *
+     * @return possible object is {@link XDocumentSubstanceMood }
+     *
+     */
+    public XDocumentSubstanceMood getMoodCode() {
+        return moodCode;
+    }
 
-	/**
-	 * Gets the value of the nullFlavor property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the nullFlavor property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getNullFlavor().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link String }
-	 *
-	 *
-	 */
-	public List<String> getNullFlavor() {
-		if (nullFlavor == null) {
-			nullFlavor = new ArrayList<String>();
-		}
-		return this.nullFlavor;
-	}
+    /**
+     * Gets the value of the nullFlavor property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the nullFlavor property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getNullFlavor().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link String }
+     *
+     *
+     */
+    @NonNull
+    public List<String> getNullFlavor() {
+        if (nullFlavor == null) {
+            nullFlavor = new ArrayList<String>();
+        }
+        return this.nullFlavor;
+    }
 
-	/**
-	 * Gets the value of the participant property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the participant property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getParticipant().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link POCDMT000040Participant2 }
-	 *
-	 *
-	 */
-	public List<POCDMT000040Participant2> getParticipant() {
-		if (participant == null) {
-			participant = new ArrayList<POCDMT000040Participant2>();
-		}
-		return this.participant;
-	}
+    /**
+     * Gets the value of the participant property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the participant property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getParticipant().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link POCDMT000040Participant2 }
+     *
+     *
+     */
+    @NonNull
+    public List<POCDMT000040Participant2> getParticipant() {
+        if (participant == null) {
+            participant = new ArrayList<POCDMT000040Participant2>();
+        }
+        return this.participant;
+    }
 
-	/**
-	 * Gets the value of the performer property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the performer property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getPerformer().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link POCDMT000040Performer2 }
-	 *
-	 *
-	 */
-	public List<POCDMT000040Performer2> getPerformer() {
-		if (performer == null) {
-			performer = new ArrayList<POCDMT000040Performer2>();
-		}
-		return this.performer;
-	}
+    /**
+     * Gets the value of the performer property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the performer property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getPerformer().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link POCDMT000040Performer2 }
+     *
+     *
+     */
+    @NonNull
+    public List<POCDMT000040Performer2> getPerformer() {
+        if (performer == null) {
+            performer = new ArrayList<POCDMT000040Performer2>();
+        }
+        return this.performer;
+    }
 
-	/**
-	 * Gets the value of the precondition property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the precondition property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getPrecondition().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link POCDMT000040Precondition }
-	 *
-	 *
-	 */
-	public List<POCDMT000040Precondition> getPrecondition() {
-		if (precondition == null) {
-			precondition = new ArrayList<POCDMT000040Precondition>();
-		}
-		return this.precondition;
-	}
+    /**
+     * Gets the value of the precondition property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the precondition property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getPrecondition().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link POCDMT000040Precondition }
+     *
+     *
+     */
+    @NonNull
+    public List<POCDMT000040Precondition> getPrecondition() {
+        if (precondition == null) {
+            precondition = new ArrayList<POCDMT000040Precondition>();
+        }
+        return this.precondition;
+    }
 
-	/**
-	 * Gets the value of the priorityCode property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the priorityCode property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getPriorityCode().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link CE }
-	 *
-	 *
-	 */
-	public List<CE> getPriorityCode() {
-		if (priorityCode == null) {
-			priorityCode = new ArrayList<CE>();
-		}
-		return this.priorityCode;
-	}
+    /**
+     * Gets the value of the priorityCode property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the priorityCode property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getPriorityCode().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link CE }
+     *
+     *
+     */
+    @NonNull
+    public List<CE> getPriorityCode() {
+        if (priorityCode == null) {
+            priorityCode = new ArrayList<CE>();
+        }
+        return this.priorityCode;
+    }
 
-	/**
-	 * Ruft den Wert der product-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link POCDMT000040Product }
-	 *
-	 */
-	public POCDMT000040Product getProduct() {
-		return product;
-	}
+    /**
+     * Ruft den Wert der product-Eigenschaft ab.
+     *
+     * @return possible object is {@link POCDMT000040Product }
+     *
+     */
+    public POCDMT000040Product getProduct() {
+        return product;
+    }
 
-	/**
-	 * Ruft den Wert der quantity-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link PQ }
-	 *
-	 */
-	public PQ getQuantity() {
-		return quantity;
-	}
+    /**
+     * Ruft den Wert der quantity-Eigenschaft ab.
+     *
+     * @return possible object is {@link PQ }
+     *
+     */
+    public PQ getQuantity() {
+        return quantity;
+    }
 
-	/**
-	 * Gets the value of the realmCode property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the realmCode property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getRealmCode().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link CS }
-	 *
-	 *
-	 */
-	public List<CS> getRealmCode() {
-		if (realmCode == null) {
-			realmCode = new ArrayList<CS>();
-		}
-		return this.realmCode;
-	}
+    /**
+     * Gets the value of the realmCode property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the realmCode property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getRealmCode().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link CS }
+     *
+     *
+     */
+    @NonNull
+    public List<CS> getRealmCode() {
+        if (realmCode == null) {
+            realmCode = new ArrayList<CS>();
+        }
+        return this.realmCode;
+    }
 
-	/**
-	 * Gets the value of the reference property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the reference property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getReference().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link POCDMT000040Reference }
-	 *
-	 *
-	 */
-	public List<POCDMT000040Reference> getReference() {
-		if (reference == null) {
-			reference = new ArrayList<POCDMT000040Reference>();
-		}
-		return this.reference;
-	}
+    /**
+     * Gets the value of the reference property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the reference property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getReference().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link POCDMT000040Reference }
+     *
+     *
+     */
+    @NonNull
+    public List<POCDMT000040Reference> getReference() {
+        if (reference == null) {
+            reference = new ArrayList<POCDMT000040Reference>();
+        }
+        return this.reference;
+    }
 
-	/**
-	 * Ruft den Wert der repeatNumber-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link IVLINT }
-	 *
-	 */
-	public IVLINT getRepeatNumber() {
-		return repeatNumber;
-	}
+    /**
+     * Ruft den Wert der repeatNumber-Eigenschaft ab.
+     *
+     * @return possible object is {@link IVLINT }
+     *
+     */
+    public IVLINT getRepeatNumber() {
+        return repeatNumber;
+    }
 
-	/**
-	 * Gets the value of the specimen property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the specimen property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getSpecimen().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link POCDMT000040Specimen }
-	 *
-	 *
-	 */
-	public List<POCDMT000040Specimen> getSpecimen() {
-		if (specimen == null) {
-			specimen = new ArrayList<POCDMT000040Specimen>();
-		}
-		return this.specimen;
-	}
+    /**
+     * Gets the value of the specimen property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the specimen property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getSpecimen().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link POCDMT000040Specimen }
+     *
+     *
+     */
+    @NonNull
+    public List<POCDMT000040Specimen> getSpecimen() {
+        if (specimen == null) {
+            specimen = new ArrayList<POCDMT000040Specimen>();
+        }
+        return this.specimen;
+    }
 
-	/**
-	 * Ruft den Wert der statusCode-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link CS }
-	 *
-	 */
-	public CS getStatusCode() {
-		return statusCode;
-	}
+    /**
+     * Ruft den Wert der statusCode-Eigenschaft ab.
+     *
+     * @return possible object is {@link CS }
+     *
+     */
+    public CS getStatusCode() {
+        return statusCode;
+    }
 
-	/**
-	 * Ruft den Wert der subject-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link POCDMT000040Subject }
-	 *
-	 */
-	public POCDMT000040Subject getSubject() {
-		return subject;
-	}
+    /**
+     * Ruft den Wert der subject-Eigenschaft ab.
+     *
+     * @return possible object is {@link POCDMT000040Subject }
+     *
+     */
+    public POCDMT000040Subject getSubject() {
+        return subject;
+    }
 
-	/**
-	 * Gets the value of the templateId property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the templateId property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getTemplateId().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link II }
-	 *
-	 *
-	 */
-	public List<II> getTemplateId() {
-		if (templateId == null) {
-			templateId = new ArrayList<II>();
-		}
-		return this.templateId;
-	}
+    /**
+     * Gets the value of the templateId property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the templateId property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getTemplateId().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link II }
+     *
+     *
+     */
+    @NonNull
+    public List<II> getTemplateId() {
+        if (templateId == null) {
+            templateId = new ArrayList<II>();
+        }
+        return this.templateId;
+    }
 
-	/**
-	 * Ruft den Wert der text-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link ED }
-	 *
-	 */
-	public ED getText() {
-		return text;
-	}
+    /**
+     * Ruft den Wert der text-Eigenschaft ab.
+     *
+     * @return possible object is {@link ED }
+     *
+     */
+    public ED getText() {
+        return text;
+    }
 
-	/**
-	 * Ruft den Wert der typeId-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link POCDMT000040InfrastructureRootTypeId }
-	 *
-	 */
-	public POCDMT000040InfrastructureRootTypeId getTypeId() {
-		return typeId;
-	}
+    /**
+     * Ruft den Wert der typeId-Eigenschaft ab.
+     *
+     * @return possible object is {@link POCDMT000040InfrastructureRootTypeId }
+     *
+     */
+    public POCDMT000040InfrastructureRootTypeId getTypeId() {
+        return typeId;
+    }
 
-	/**
-	 * Legt den Wert der classCode-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link ActClassSupply }
-	 *
-	 */
-	public void setClassCode(ActClassSupply value) {
-		this.classCode = value;
-	}
+    /**
+     * Legt den Wert der classCode-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link ActClassSupply }
+     *
+     */
+    public void setClassCode(ActClassSupply value) {
+        this.classCode = value;
+    }
 
-	/**
-	 * Legt den Wert der code-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link CD }
-	 *
-	 */
-	public void setCode(CD value) {
-		this.code = value;
-	}
+    /**
+     * Legt den Wert der code-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link CD }
+     *
+     */
+    public void setCode(CD value) {
+        this.code = value;
+    }
 
-	/**
-	 * Legt den Wert der expectedUseTime-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link IVLTS }
-	 *
-	 */
-	public void setExpectedUseTime(IVLTS value) {
-		this.expectedUseTime = value;
-	}
+    /**
+     * Legt den Wert der expectedUseTime-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link IVLTS }
+     *
+     */
+    public void setExpectedUseTime(IVLTS value) {
+        this.expectedUseTime = value;
+    }
 
-	/**
-	 * Legt den Wert der independentInd-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link BL }
-	 *
-	 */
-	public void setIndependentInd(BL value) {
-		this.independentInd = value;
-	}
+    /**
+     * Legt den Wert der independentInd-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link BL }
+     *
+     */
+    public void setIndependentInd(BL value) {
+        this.independentInd = value;
+    }
 
-	/**
-	 * Legt den Wert der moodCode-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link XDocumentSubstanceMood }
-	 *
-	 */
-	public void setMoodCode(XDocumentSubstanceMood value) {
-		this.moodCode = value;
-	}
+    /**
+     * Legt den Wert der moodCode-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link XDocumentSubstanceMood }
+     *
+     */
+    public void setMoodCode(XDocumentSubstanceMood value) {
+        this.moodCode = value;
+    }
 
-	/**
-	 * Legt den Wert der product-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link POCDMT000040Product }
-	 *
-	 */
-	public void setProduct(POCDMT000040Product value) {
-		this.product = value;
-	}
+    /**
+     * Legt den Wert der product-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link POCDMT000040Product }
+     *
+     */
+    public void setProduct(POCDMT000040Product value) {
+        this.product = value;
+    }
 
-	/**
-	 * Legt den Wert der quantity-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link PQ }
-	 *
-	 */
-	public void setQuantity(PQ value) {
-		this.quantity = value;
-	}
+    /**
+     * Legt den Wert der quantity-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link PQ }
+     *
+     */
+    public void setQuantity(PQ value) {
+        this.quantity = value;
+    }
 
-	/**
-	 * Legt den Wert der repeatNumber-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link IVLINT }
-	 *
-	 */
-	public void setRepeatNumber(IVLINT value) {
-		this.repeatNumber = value;
-	}
+    /**
+     * Legt den Wert der repeatNumber-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link IVLINT }
+     *
+     */
+    public void setRepeatNumber(IVLINT value) {
+        this.repeatNumber = value;
+    }
 
-	/**
-	 * Legt den Wert der statusCode-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link CS }
-	 *
-	 */
-	public void setStatusCode(CS value) {
-		this.statusCode = value;
-	}
+    /**
+     * Legt den Wert der statusCode-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link CS }
+     *
+     */
+    public void setStatusCode(CS value) {
+        this.statusCode = value;
+    }
 
-	/**
-	 * Legt den Wert der subject-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link POCDMT000040Subject }
-	 *
-	 */
-	public void setSubject(POCDMT000040Subject value) {
-		this.subject = value;
-	}
+    /**
+     * Legt den Wert der subject-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link POCDMT000040Subject }
+     *
+     */
+    public void setSubject(POCDMT000040Subject value) {
+        this.subject = value;
+    }
 
-	/**
-	 * Legt den Wert der text-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link ED }
-	 *
-	 */
-	public void setText(ED value) {
-		this.text = value;
-	}
+    /**
+     * Legt den Wert der text-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link ED }
+     *
+     */
+    public void setText(ED value) {
+        this.text = value;
+    }
 
-	/**
-	 * Legt den Wert der typeId-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link POCDMT000040InfrastructureRootTypeId
-	 *            }
-	 *
-	 */
-	public void setTypeId(POCDMT000040InfrastructureRootTypeId value) {
-		this.typeId = value;
-	}
+    /**
+     * Legt den Wert der typeId-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link POCDMT000040InfrastructureRootTypeId
+     *            }
+     *
+     */
+    public void setTypeId(POCDMT000040InfrastructureRootTypeId value) {
+        this.typeId = value;
+    }
 
 }

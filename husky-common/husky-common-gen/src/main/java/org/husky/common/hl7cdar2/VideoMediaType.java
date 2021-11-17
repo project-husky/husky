@@ -48,27 +48,27 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum VideoMediaType {
 
-	@XmlEnumValue("video/mpeg")
-	VIDEO_MPEG("video/mpeg"), @XmlEnumValue("video/x-avi")
-	VIDEO_X_AVI("video/x-avi");
+    @XmlEnumValue("video/mpeg")
+    VIDEO_MPEG("video/mpeg"), @XmlEnumValue("video/x-avi")
+    VIDEO_X_AVI("video/x-avi");
 
-	public static VideoMediaType fromValue(String v) {
-		for (VideoMediaType c : VideoMediaType.values()) {
-			if (c.value.equals(v)) {
-				return c;
-			}
-		}
-		throw new IllegalArgumentException(v);
-	}
+    public static VideoMediaType fromValue(String v) {
+        for (VideoMediaType c : VideoMediaType.values()) {
+            if (c.value.equals(v)) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException(v);
+    }
 
-	private final String value;
+    private final String value;
 
-	VideoMediaType(String v) {
-		value = v;
-	}
+    VideoMediaType(String v) {
+        value = v;
+    }
 
-	public String value() {
-		return value;
-	}
+    public String value() {
+        return value;
+    }
 
 }

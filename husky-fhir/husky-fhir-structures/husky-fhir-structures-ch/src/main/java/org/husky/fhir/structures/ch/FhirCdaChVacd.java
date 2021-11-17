@@ -20,17 +20,17 @@ package org.husky.fhir.structures.ch;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hl7.fhir.dstu3.model.Basic;
-import org.hl7.fhir.dstu3.model.Coding;
-import org.hl7.fhir.dstu3.model.Condition;
-import org.hl7.fhir.dstu3.model.DocumentManifest;
-import org.hl7.fhir.dstu3.model.MedicationStatement;
-import org.hl7.fhir.dstu3.model.Observation;
-import org.hl7.fhir.dstu3.model.Organization;
-import org.hl7.fhir.dstu3.model.Patient;
-import org.hl7.fhir.dstu3.model.Person;
-import org.hl7.fhir.dstu3.model.Reference;
-import org.hl7.fhir.dstu3.model.StringType;
+import org.hl7.fhir.r4.model.Basic;
+import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.Condition;
+import org.hl7.fhir.r4.model.DocumentManifest;
+import org.hl7.fhir.r4.model.MedicationStatement;
+import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.Organization;
+import org.hl7.fhir.r4.model.Patient;
+import org.hl7.fhir.r4.model.Person;
+import org.hl7.fhir.r4.model.Reference;
+import org.hl7.fhir.r4.model.StringType;
 import org.husky.common.enums.CodeSystems;
 import org.husky.fhir.structures.gen.FhirCommon;
 
@@ -160,7 +160,7 @@ public class FhirCdaChVacd /* extends AbstractFhirCdaCh */ {
 		 */
 		public MyMedicationStatement() {
 			super();
-			setTaken(MedicationStatementTaken.UNK);
+			setStatus(MedicationStatementStatus.UNKNOWN);
 		}
 
 		/**

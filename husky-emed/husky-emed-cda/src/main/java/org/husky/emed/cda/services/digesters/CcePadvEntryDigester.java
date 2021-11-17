@@ -1,22 +1,25 @@
 package org.husky.emed.cda.services.digesters;
 
+
 import java.time.Instant;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import org.husky.common.hl7cdar2.CD;
+import org.husky.common.hl7cdar2.ED;
+import org.husky.common.hl7cdar2.II;
+import org.husky.common.hl7cdar2.POCDMT000040Act;
+import org.husky.common.hl7cdar2.POCDMT000040Author;
+import org.husky.common.hl7cdar2.POCDMT000040EntryRelationship;
+import org.husky.common.hl7cdar2.POCDMT000040Observation;
+import org.husky.common.hl7cdar2.TS;
+import org.husky.common.hl7cdar2.XActRelationshipEntryRelationship;
 import org.husky.common.utils.StreamUtils;
+import org.husky.common.utils.time.DateTimes;
+import org.husky.common.utils.time.Hl7Dtm;
 import org.husky.emed.cda.enums.PharmaceuticalAdviceStatus;
 import org.husky.emed.cda.errors.InvalidEmedContentException;
-import org.husky.emed.cda.generated.hl7cdar2.CD;
-import org.husky.emed.cda.generated.hl7cdar2.ED;
-import org.husky.emed.cda.generated.hl7cdar2.II;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Act;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Author;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Observation;
-import org.husky.emed.cda.generated.hl7cdar2.TS;
-import org.husky.emed.cda.generated.hl7cdar2.XActRelationshipEntryRelationship;
 import org.husky.emed.cda.models.common.AuthorDigest;
 import org.husky.emed.cda.models.common.EmedReference;
 import org.husky.emed.cda.models.entry.EmedEntryDigest;
@@ -31,8 +34,6 @@ import org.husky.emed.cda.services.EmedEntryDigestService;
 import org.husky.emed.cda.utils.EntryRelationshipUtils;
 import org.husky.emed.cda.utils.IiUtils;
 import org.husky.emed.cda.utils.TemplateIds;
-import org.husky.emed.cda.utils.time.DateTimes;
-import org.husky.emed.cda.utils.time.Hl7Dtm;
 import org.springframework.stereotype.Component;
 
 /**

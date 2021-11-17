@@ -2,7 +2,9 @@ package org.husky.emed.cda.generated.artdecor;
 
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040ClinicalDocument;
+import org.husky.common.hl7cdar2.II;
+import org.husky.common.hl7cdar2.INT;
+import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * cdach_header_DocumentSetIdAndVersionNumber
@@ -25,7 +27,7 @@ public class CdachHeaderDocumentSetIdAndVersionNumber extends POCDMT000040Clinic
      * Gets the hl7SetId
      * The setId element MUST match the document id of the very first version of that document. It MUST remain the same for all document versions.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.II getHl7SetId() {
+    public II getHl7SetId() {
         return setId;
     }
 
@@ -33,7 +35,7 @@ public class CdachHeaderDocumentSetIdAndVersionNumber extends POCDMT000040Clinic
      * Gets the hl7VersionNumber
      * The versionNumber element MUST contain the value 1 for the very first version of that document. For later versions, the version number MUST be increased by 1 each.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.INT getHl7VersionNumber() {
+    public INT getHl7VersionNumber() {
         return versionNumber;
     }
 
@@ -41,7 +43,7 @@ public class CdachHeaderDocumentSetIdAndVersionNumber extends POCDMT000040Clinic
      * Sets the hl7SetId
      * The setId element MUST match the document id of the very first version of that document. It MUST remain the same for all document versions.
      */
-    public void setHl7SetId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7SetId(II value) {
         this.setId = value;
     }
 
@@ -49,7 +51,7 @@ public class CdachHeaderDocumentSetIdAndVersionNumber extends POCDMT000040Clinic
      * Sets the hl7VersionNumber
      * The versionNumber element MUST contain the value 1 for the very first version of that document. For later versions, the version number MUST be increased by 1 each.
      */
-    public void setHl7VersionNumber(org.husky.emed.cda.generated.hl7cdar2.INT value) {
+    public void setHl7VersionNumber(INT value) {
         this.versionNumber = value;
     }
 }

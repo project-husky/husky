@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ContextControlNonPropagating {
 
-	AN, ON;
+    AN, ON;
 
-	public static ContextControlNonPropagating fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ContextControlNonPropagating fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

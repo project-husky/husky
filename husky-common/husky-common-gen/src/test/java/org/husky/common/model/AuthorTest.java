@@ -421,18 +421,4 @@ public class AuthorTest {
 		assertNotNull(ref);
 		assertEquals(testTelecoms.getValue(), ref.getValue());
 	}
-
-	/**
-	 * Test method for
-	 * {@link org.husky.common.model.Author#getTime()}.
-	 */
-	@Test
-	@Disabled
-	public void testSetGetTime() {
-		final Author auth = new Author(testName1, testGln1);
-		auth.setTime(testDate1);
-
-		final String ref = auth.getTimeAsString();
-		assertNotNull(ref);
-	}
 }

@@ -28,7 +28,7 @@ import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 
-import org.hl7.fhir.dstu3.model.Organization;
+import org.hl7.fhir.r4.model.Organization;
 import org.husky.common.basetypes.AddressBaseType;
 import org.husky.common.communication.AffinityDomain;
 import org.husky.common.communication.Destination;

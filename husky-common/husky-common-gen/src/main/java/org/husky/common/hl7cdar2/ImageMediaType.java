@@ -51,30 +51,30 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ImageMediaType {
 
-	@XmlEnumValue("image/g3fax")
-	IMAGE_G_3_FAX("image/g3fax"), @XmlEnumValue("image/gif")
-	IMAGE_GIF("image/gif"), @XmlEnumValue("image/jpeg")
-	IMAGE_JPEG("image/jpeg"), @XmlEnumValue("image/png")
-	IMAGE_PNG("image/png"), @XmlEnumValue("image/tiff")
-	IMAGE_TIFF("image/tiff");
+    @XmlEnumValue("image/g3fax")
+    IMAGE_G_3_FAX("image/g3fax"), @XmlEnumValue("image/gif")
+    IMAGE_GIF("image/gif"), @XmlEnumValue("image/jpeg")
+    IMAGE_JPEG("image/jpeg"), @XmlEnumValue("image/png")
+    IMAGE_PNG("image/png"), @XmlEnumValue("image/tiff")
+    IMAGE_TIFF("image/tiff");
 
-	public static ImageMediaType fromValue(String v) {
-		for (ImageMediaType c : ImageMediaType.values()) {
-			if (c.value.equals(v)) {
-				return c;
-			}
-		}
-		throw new IllegalArgumentException(v);
-	}
+    public static ImageMediaType fromValue(String v) {
+        for (ImageMediaType c : ImageMediaType.values()) {
+            if (c.value.equals(v)) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException(v);
+    }
 
-	private final String value;
+    private final String value;
 
-	ImageMediaType(String v) {
-		value = v;
-	}
+    ImageMediaType(String v) {
+        value = v;
+    }
 
-	public String value() {
-		return value;
-	}
+    public String value() {
+        return value;
+    }
 
 }

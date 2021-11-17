@@ -5,9 +5,8 @@ import java.util.UUID;
 import javax.annotation.processing.Generated;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.husky.emed.cda.generated.hl7cdar2.II;
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040ClinicalDocument;
+import org.husky.common.hl7cdar2.*;
+import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
 import org.husky.emed.cda.utils.CdaR2Utils;
 
 /**
@@ -40,7 +39,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Adds a hl7Authenticator
      * Information about an authenticator of a CDA document. An authenticator MUST be a person.
      */
-    public void addHl7Authenticator(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Authenticator value) {
+    public void addHl7Authenticator(POCDMT000040Authenticator value) {
         getAuthenticator().add(value);
     }
 
@@ -48,14 +47,14 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Adds a hl7Author
      * Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
      */
-    public void addHl7Author(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Author value) {
+    public void addHl7Author(POCDMT000040Author value) {
         getAuthor().add(value);
     }
 
     /**
      * Adds a hl7Authorization
      */
-    public void addHl7Authorization(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Authorization value) {
+    public void addHl7Authorization(POCDMT000040Authorization value) {
         getAuthorization().add(value);
     }
 
@@ -63,7 +62,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Adds a hl7DocumentationOf
      * Information about a health service describing the context of this CDA document.
      */
-    public void addHl7DocumentationOf(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040DocumentationOf value) {
+    public void addHl7DocumentationOf(POCDMT000040DocumentationOf value) {
         getDocumentationOf().add(value);
     }
 
@@ -71,14 +70,14 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Adds a hl7InFulfillmentOf
      * Reference to one or more orders which led to the creation of this CDA document. It SHALL be declared, when the order reference is relevant for some reason.
      */
-    public void addHl7InFulfillmentOf(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040InFulfillmentOf value) {
+    public void addHl7InFulfillmentOf(POCDMT000040InFulfillmentOf value) {
         getInFulfillmentOf().add(value);
     }
 
     /**
      * Adds a hl7Informant
      */
-    public void addHl7Informant(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Informant12 value) {
+    public void addHl7Informant(POCDMT000040Informant12 value) {
         getInformant().add(value);
     }
 
@@ -88,7 +87,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * - The main recipient of the document is indicated by typeCode 'PRCP' (primary recipient).Note: Since it makes no sense to create a CDA document without doing it for someone, in Switzerland at least one recipient MUST be declared. If the document is created for the user's own needs, the user itself or its organization will be the primary recipient.
      * - Other recipients (copy to; Cc) are indicated with typeCode, TRC '(secondary recipient).
      */
-    public void addHl7InformationRecipient(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040InformationRecipient value) {
+    public void addHl7InformationRecipient(POCDMT000040InformationRecipient value) {
         getInformationRecipient().add(value);
     }
 
@@ -96,7 +95,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Adds a hl7Participant
      * Information on a patient contact.
      */
-    public void addHl7Participant(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Participant1 value) {
+    public void addHl7Participant(POCDMT000040Participant1 value) {
         getParticipant().add(value);
     }
 
@@ -107,7 +106,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * - Values that are present in both documents are overwritten with the contents of the new document.
      * - Values that are only contained in the new document are to be added.
      */
-    public void addHl7RelatedDocument(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040RelatedDocument value) {
+    public void addHl7RelatedDocument(POCDMT000040RelatedDocument value) {
         getRelatedDocument().add(value);
     }
 
@@ -191,9 +190,9 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -204,9 +203,9 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * @param root the desired fixed value for this argument.
      * @param extension the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040InfrastructureRootTypeId createHl7TypeIdFixedValue(String root, String extension) {
+    private static POCDMT000040InfrastructureRootTypeId createHl7TypeIdFixedValue(String root, String extension) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.POCDMT000040InfrastructureRootTypeId retVal = factory.createPOCDMT000040InfrastructureRootTypeId();
+        POCDMT000040InfrastructureRootTypeId retVal = factory.createPOCDMT000040InfrastructureRootTypeId();
         retVal.setRoot(root);
         retVal.setExtension(extension);
         return retVal;
@@ -216,21 +215,21 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Gets the hl7Code
      * IHE PHARM DIS document code
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CE getHl7Code() {
+    public CE getHl7Code() {
         return code;
     }
 
     /**
      * Gets the hl7Component
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Component2 getHl7Component() {
+    public POCDMT000040Component2 getHl7Component() {
         return component;
     }
 
     /**
      * Gets the hl7ComponentOf
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Component1 getHl7ComponentOf() {
+    public POCDMT000040Component1 getHl7ComponentOf() {
         return componentOf;
     }
 
@@ -238,7 +237,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Gets the hl7ConfidentialityCode
      * Swiss Realm of Confidentiality Code according to the Swiss EPR regulation.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CE getHl7ConfidentialityCode() {
+    public CE getHl7ConfidentialityCode() {
         return confidentialityCode;
     }
 
@@ -246,7 +245,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Gets the hl7Custodian
      * The organization in whose name this CDA document has been created (corresponds to the sender of a letter).
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Custodian getHl7Custodian() {
+    public POCDMT000040Custodian getHl7Custodian() {
         return custodian;
     }
 
@@ -254,7 +253,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Gets the hl7DataEnterer
      * Information about the person that entered information in this CDA document. It SHALL be declared, when data recorded in this document has been entered by a person other than the author but only when this is relevant for some reason.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040DataEnterer getHl7DataEnterer() {
+    public POCDMT000040DataEnterer getHl7DataEnterer() {
         return dataEnterer;
     }
 
@@ -262,7 +261,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Gets the hl7EffectiveTime
      * The document's creation date and time. If this document replaces a previous version (linked via parentDocument), this is the date and time of the new version.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.TS getHl7EffectiveTime() {
+    public TS getHl7EffectiveTime() {
         return effectiveTime;
     }
 
@@ -270,7 +269,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Gets the hl7Id
      * A unique identifier for each CDA document instance.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.II getHl7Id() {
+    public II getHl7Id() {
         return id;
     }
 
@@ -278,7 +277,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Gets the hl7LanguageCode
      * The RFC5646 based language in which the narrative texts in this CDA document instance are written.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CS getHl7LanguageCode() {
+    public CS getHl7LanguageCode() {
         return languageCode;
     }
 
@@ -286,7 +285,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Gets the hl7LegalAuthenticator
      * Information about the legal authenticator of a CDA document. A legal authenticator MUST be a person.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040LegalAuthenticator getHl7LegalAuthenticator() {
+    public POCDMT000040LegalAuthenticator getHl7LegalAuthenticator() {
         return legalAuthenticator;
     }
 
@@ -294,7 +293,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Gets the hl7RealmCode
      * Swiss Realm (CHE) of HL7 CDA.
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.CS> getHl7RealmCode() {
+    public List<CS> getHl7RealmCode() {
         return realmCode;
     }
 
@@ -305,7 +304,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * - Patient identifiersMultiple ids (patient identification number) MAY be declared.If multiple ids are known, it is highly recommended to declare all known ids. Especially in cases where the CDA document instance is kind of an answer to a preceding order (independent of its data format), all ids specified by the ordering system SHALL be declared in the CDA document instance. This allows the receiver to assign its internal patient identification.The patient identification number MUST be grouped with the OID of its assigning system. The patient identification number MUST be unique within the system identified by the OID.The declared OID MUST be found in one of the public OID registries, such as oid.refdata.ch (preferred), oid-info.com, hl7.org/oid, www.dimdi.de/static/de/klassi/oid/, gesundheit.gv.at/OID_Frontend/ etc.OIDs that can't be found in a public OID registry are NOT ALLOWED.
      * - PseudonymizingIn special cases, the demographic data of the patient are not allowed to be transmitted or they have to be pseudonymized.While HL7 CDA or its derivatives like CDA-CH or Swiss exchange formats nevertheless require these elements in the XML structure, the affected values MUST be replaced by a nullFlavor of type "MSK" (masked), in order to support the required data format structure and simultaneously to shield the real data.
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.POCDMT000040RecordTarget> getHl7RecordTarget() {
+    public List<POCDMT000040RecordTarget> getHl7RecordTarget() {
         return recordTarget;
     }
 
@@ -313,7 +312,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Gets the hl7SetId
      * The setId element MUST match the document id of the very first version of that document. It MUST remain the same for all document versions.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.II getHl7SetId() {
+    public II getHl7SetId() {
         return setId;
     }
 
@@ -321,7 +320,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Gets the hl7TemplateId
      * Exchange format according to the Swiss EPR
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
@@ -329,7 +328,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Gets the hl7Title
      * <div>The German title shall be "Abgabe".</div><div>The French title shall be "Remise".</div><div>The Italian title shall be "Dispensazione".</div><div>The English title shall be "Dispense".</div><div>Titles in other languages are allowed and unrestricted.</div>
      */
-    public org.husky.emed.cda.generated.hl7cdar2.ST getHl7Title() {
+    public ST getHl7Title() {
         return title;
     }
 
@@ -337,7 +336,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Gets the hl7TypeId
      * HL7 CDA R2, 2005
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040InfrastructureRootTypeId getHl7TypeId() {
+    public POCDMT000040InfrastructureRootTypeId getHl7TypeId() {
         return typeId;
     }
 
@@ -345,7 +344,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Gets the hl7VersionNumber
      * The versionNumber element MUST contain the value 1 for the very first version of that document. For later versions, the version number MUST be increased by 1 each.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.INT getHl7VersionNumber() {
+    public INT getHl7VersionNumber() {
         return versionNumber;
     }
 
@@ -353,7 +352,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.II, filled by: "2.16.756.5.30.1.1.1.1.4"
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.II getPredefinedTemplateId21675653011114() {
+    public static II getPredefinedTemplateId21675653011114() {
         return createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.4");
     }
 
@@ -396,21 +395,21 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Sets the hl7Code
      * IHE PHARM DIS document code
      */
-    public void setHl7Code(org.husky.emed.cda.generated.hl7cdar2.CE value) {
+    public void setHl7Code(CE value) {
         this.code = value;
     }
 
     /**
      * Sets the hl7Component
      */
-    public void setHl7Component(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Component2 value) {
+    public void setHl7Component(POCDMT000040Component2 value) {
         this.component = value;
     }
 
     /**
      * Sets the hl7ComponentOf
      */
-    public void setHl7ComponentOf(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Component1 value) {
+    public void setHl7ComponentOf(POCDMT000040Component1 value) {
         this.componentOf = value;
     }
 
@@ -418,7 +417,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Sets the hl7ConfidentialityCode
      * Swiss Realm of Confidentiality Code according to the Swiss EPR regulation.
      */
-    public void setHl7ConfidentialityCode(org.husky.emed.cda.generated.hl7cdar2.CE value) {
+    public void setHl7ConfidentialityCode(CE value) {
         this.confidentialityCode = value;
     }
 
@@ -426,7 +425,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Sets the hl7Custodian
      * The organization in whose name this CDA document has been created (corresponds to the sender of a letter).
      */
-    public void setHl7Custodian(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Custodian value) {
+    public void setHl7Custodian(POCDMT000040Custodian value) {
         this.custodian = value;
     }
 
@@ -434,7 +433,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Sets the hl7DataEnterer
      * Information about the person that entered information in this CDA document. It SHALL be declared, when data recorded in this document has been entered by a person other than the author but only when this is relevant for some reason.
      */
-    public void setHl7DataEnterer(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040DataEnterer value) {
+    public void setHl7DataEnterer(POCDMT000040DataEnterer value) {
         this.dataEnterer = value;
     }
 
@@ -442,7 +441,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Sets the hl7EffectiveTime
      * The document's creation date and time. If this document replaces a previous version (linked via parentDocument), this is the date and time of the new version.
      */
-    public void setHl7EffectiveTime(org.husky.emed.cda.generated.hl7cdar2.TS value) {
+    public void setHl7EffectiveTime(TS value) {
         this.effectiveTime = value;
     }
 
@@ -450,7 +449,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Sets the hl7Id
      * A unique identifier for each CDA document instance.
      */
-    public void setHl7Id(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7Id(II value) {
         this.id = value;
     }
 
@@ -458,7 +457,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Sets the hl7LanguageCode
      * The RFC5646 based language in which the narrative texts in this CDA document instance are written.
      */
-    public void setHl7LanguageCode(org.husky.emed.cda.generated.hl7cdar2.CS value) {
+    public void setHl7LanguageCode(CS value) {
         this.languageCode = value;
     }
 
@@ -466,7 +465,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Sets the hl7LegalAuthenticator
      * Information about the legal authenticator of a CDA document. A legal authenticator MUST be a person.
      */
-    public void setHl7LegalAuthenticator(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040LegalAuthenticator value) {
+    public void setHl7LegalAuthenticator(POCDMT000040LegalAuthenticator value) {
         this.legalAuthenticator = value;
     }
 
@@ -474,7 +473,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Sets the hl7RealmCode
      * Swiss Realm (CHE) of HL7 CDA.
      */
-    public void setHl7RealmCode(org.husky.emed.cda.generated.hl7cdar2.CS value) {
+    public void setHl7RealmCode(CS value) {
         getRealmCode().clear();
         getRealmCode().add(value);
     }
@@ -486,7 +485,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * - Patient identifiersMultiple ids (patient identification number) MAY be declared.If multiple ids are known, it is highly recommended to declare all known ids. Especially in cases where the CDA document instance is kind of an answer to a preceding order (independent of its data format), all ids specified by the ordering system SHALL be declared in the CDA document instance. This allows the receiver to assign its internal patient identification.The patient identification number MUST be grouped with the OID of its assigning system. The patient identification number MUST be unique within the system identified by the OID.The declared OID MUST be found in one of the public OID registries, such as oid.refdata.ch (preferred), oid-info.com, hl7.org/oid, www.dimdi.de/static/de/klassi/oid/, gesundheit.gv.at/OID_Frontend/ etc.OIDs that can't be found in a public OID registry are NOT ALLOWED.
      * - PseudonymizingIn special cases, the demographic data of the patient are not allowed to be transmitted or they have to be pseudonymized.While HL7 CDA or its derivatives like CDA-CH or Swiss exchange formats nevertheless require these elements in the XML structure, the affected values MUST be replaced by a nullFlavor of type "MSK" (masked), in order to support the required data format structure and simultaneously to shield the real data.
      */
-    public void setHl7RecordTarget(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040RecordTarget value) {
+    public void setHl7RecordTarget(POCDMT000040RecordTarget value) {
         getRecordTarget().clear();
         getRecordTarget().add(value);
     }
@@ -495,7 +494,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Sets the hl7SetId
      * The setId element MUST match the document id of the very first version of that document. It MUST remain the same for all document versions.
      */
-    public void setHl7SetId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7SetId(II value) {
         this.setId = value;
     }
 
@@ -503,7 +502,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Sets the hl7TemplateId
      * Exchange format according to the Swiss EPR
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
@@ -512,7 +511,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Sets the hl7Title
      * <div>The German title shall be "Abgabe".</div><div>The French title shall be "Remise".</div><div>The Italian title shall be "Dispensazione".</div><div>The English title shall be "Dispense".</div><div>Titles in other languages are allowed and unrestricted.</div>
      */
-    public void setHl7Title(org.husky.emed.cda.generated.hl7cdar2.ST value) {
+    public void setHl7Title(ST value) {
         this.title = value;
     }
 
@@ -520,7 +519,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Sets the hl7TypeId
      * HL7 CDA R2, 2005
      */
-    public void setHl7TypeId(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040InfrastructureRootTypeId value) {
+    public void setHl7TypeId(POCDMT000040InfrastructureRootTypeId value) {
         this.typeId = value;
     }
 
@@ -528,7 +527,7 @@ public class MedicationDispenseDocument extends POCDMT000040ClinicalDocument {
      * Sets the hl7VersionNumber
      * The versionNumber element MUST contain the value 1 for the very first version of that document. For later versions, the version number MUST be increased by 1 each.
      */
-    public void setHl7VersionNumber(org.husky.emed.cda.generated.hl7cdar2.INT value) {
+    public void setHl7VersionNumber(INT value) {
         this.versionNumber = value;
     }
 

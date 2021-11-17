@@ -3,7 +3,7 @@ package org.husky.emed.cda.utils;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.utils.datatypes.Oids;
 import org.husky.common.utils.datatypes.Uuids;
-import org.husky.emed.cda.generated.hl7cdar2.II;
+import org.husky.common.hl7cdar2.II;
 
 import java.util.Objects;
 

@@ -3,8 +3,7 @@ package org.husky.emed.cda.generated.artdecor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Section;
+import org.husky.common.hl7cdar2.*;
 
 /**
  * cdach_section_OriginalRepresentationCoded
@@ -38,9 +37,9 @@ public class CdachSectionOriginalRepresentationCoded extends POCDMT000040Section
      *
      * @param code the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.CE createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+    private static CE createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.CE retVal = factory.createCE();
+        CE retVal = factory.createCE();
         retVal.setCode(code);
         retVal.setCodeSystem(codeSystem);
         retVal.setCodeSystemName(codeSystemName);
@@ -53,10 +52,10 @@ public class CdachSectionOriginalRepresentationCoded extends POCDMT000040Section
      *
      * @param typeCode the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Entry createHl7EntryFixedValue(String typeCode) {
+    private static POCDMT000040Entry createHl7EntryFixedValue(String typeCode) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Entry retVal = factory.createPOCDMT000040Entry();
-        retVal.setTypeCode(org.husky.emed.cda.generated.hl7cdar2.XActRelationshipEntry.fromValue(typeCode));
+        POCDMT000040Entry retVal = factory.createPOCDMT000040Entry();
+        retVal.setTypeCode(XActRelationshipEntry.fromValue(typeCode));
         return retVal;
     }
 
@@ -65,9 +64,9 @@ public class CdachSectionOriginalRepresentationCoded extends POCDMT000040Section
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -75,14 +74,14 @@ public class CdachSectionOriginalRepresentationCoded extends POCDMT000040Section
     /**
      * Gets the hl7Code
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CE getHl7Code() {
+    public CE getHl7Code() {
         return code;
     }
 
     /**
      * Gets the hl7Entry
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Entry> getHl7Entry() {
+    public List<POCDMT000040Entry> getHl7Entry() {
         return entry;
     }
 
@@ -90,14 +89,14 @@ public class CdachSectionOriginalRepresentationCoded extends POCDMT000040Section
      * Gets the hl7Id
      * An ID for this section MAY be filled for traceability.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.II getHl7Id() {
+    public II getHl7Id() {
         return id;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
@@ -105,7 +104,7 @@ public class CdachSectionOriginalRepresentationCoded extends POCDMT000040Section
      * Gets the hl7Text
      * MUST contain the reference (renderMultiMedia/@referencedObject) to the corrsponding observationMedia (embedded PDF) that shows the original representation signed by the legal authenticator.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.StrucDocText getHl7Text() {
+    public StrucDocText getHl7Text() {
         return text;
     }
 
@@ -117,21 +116,21 @@ public class CdachSectionOriginalRepresentationCoded extends POCDMT000040Section
      * - [it]: 'Rappresentazione originale'
      * - [en]: 'Original representation'
      */
-    public org.husky.emed.cda.generated.hl7cdar2.ST getHl7Title() {
+    public ST getHl7Title() {
         return title;
     }
 
     /**
      * Sets the hl7Code
      */
-    public void setHl7Code(org.husky.emed.cda.generated.hl7cdar2.CE value) {
+    public void setHl7Code(CE value) {
         this.code = value;
     }
 
     /**
      * Sets the hl7Entry
      */
-    public void setHl7Entry(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Entry value) {
+    public void setHl7Entry(POCDMT000040Entry value) {
         getEntry().clear();
         getEntry().add(value);
     }
@@ -140,14 +139,14 @@ public class CdachSectionOriginalRepresentationCoded extends POCDMT000040Section
      * Sets the hl7Id
      * An ID for this section MAY be filled for traceability.
      */
-    public void setHl7Id(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7Id(II value) {
         this.id = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
@@ -156,7 +155,7 @@ public class CdachSectionOriginalRepresentationCoded extends POCDMT000040Section
      * Sets the hl7Text
      * MUST contain the reference (renderMultiMedia/@referencedObject) to the corrsponding observationMedia (embedded PDF) that shows the original representation signed by the legal authenticator.
      */
-    public void setHl7Text(org.husky.emed.cda.generated.hl7cdar2.StrucDocText value) {
+    public void setHl7Text(StrucDocText value) {
         this.text = value;
     }
 
@@ -168,7 +167,7 @@ public class CdachSectionOriginalRepresentationCoded extends POCDMT000040Section
      * - [it]: 'Rappresentazione originale'
      * - [en]: 'Original representation'
      */
-    public void setHl7Title(org.husky.emed.cda.generated.hl7cdar2.ST value) {
+    public void setHl7Title(ST value) {
         this.title = value;
     }
 }

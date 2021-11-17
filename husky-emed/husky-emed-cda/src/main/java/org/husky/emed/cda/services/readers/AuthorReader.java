@@ -2,7 +2,7 @@ package org.husky.emed.cda.services.readers;
 
 import org.husky.emed.cda.errors.InvalidEmedContentException;
 import org.husky.emed.cda.generated.artdecor.enums.ParticipationFunction;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Author;
+import org.husky.common.hl7cdar2.POCDMT000040Author;
 import org.husky.emed.cda.models.common.AuthorDigest;
 import org.husky.emed.cda.utils.TemplateIds;
 

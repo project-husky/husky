@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.CE;
-import org.husky.emed.cda.generated.hl7cdar2.CS;
+import org.husky.common.hl7cdar2.CD;
+import org.husky.common.hl7cdar2.CE;
 import org.husky.emed.cda.models.common.Code;
 import org.husky.emed.cda.models.common.basetypes.CodeBaseType;
 
@@ -38,7 +38,7 @@ public class DocumentCodeMedicationList extends CE {
      * Gets the hl7Translation
      * Translation to the Swiss EPR XDS.b metadata.
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.CD> getHl7Translation() {
+    public List<CD> getHl7Translation() {
         return translation;
     }
 
@@ -53,7 +53,7 @@ public class DocumentCodeMedicationList extends CE {
      * Sets the hl7Translation
      * Translation to the Swiss EPR XDS.b metadata.
      */
-    public void setHl7Translation(org.husky.emed.cda.generated.hl7cdar2.CD value) {
+    public void setHl7Translation(CD value) {
         getTranslation().clear();
         getTranslation().add(value);
     }

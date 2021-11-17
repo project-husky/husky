@@ -2,7 +2,8 @@ package org.husky.emed.cda.generated.artdecor;
 
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040AuthoringDevice;
+import org.husky.common.hl7cdar2.POCDMT000040AuthoringDevice;
+import org.husky.common.hl7cdar2.SC;
 
 /**
  * cdach_other_DeviceCompilationWithName
@@ -25,7 +26,7 @@ public class CdachOtherDeviceCompilationWithName extends POCDMT000040AuthoringDe
      * Gets the hl7ManufacturerModelName
      * The model name of the device MAY be declared.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.SC getHl7ManufacturerModelName() {
+    public SC getHl7ManufacturerModelName() {
         return manufacturerModelName;
     }
 
@@ -33,7 +34,7 @@ public class CdachOtherDeviceCompilationWithName extends POCDMT000040AuthoringDe
      * Gets the hl7SoftwareName
      * The name of the device MUST be declared.Note:Altough this element is called softwareName, it contains also the name of physical devices (e.g. laboratory analyzer).
      */
-    public org.husky.emed.cda.generated.hl7cdar2.SC getHl7SoftwareName() {
+    public SC getHl7SoftwareName() {
         return softwareName;
     }
 
@@ -41,7 +42,7 @@ public class CdachOtherDeviceCompilationWithName extends POCDMT000040AuthoringDe
      * Sets the hl7ManufacturerModelName
      * The model name of the device MAY be declared.
      */
-    public void setHl7ManufacturerModelName(org.husky.emed.cda.generated.hl7cdar2.SC value) {
+    public void setHl7ManufacturerModelName(SC value) {
         this.manufacturerModelName = value;
     }
 
@@ -49,7 +50,7 @@ public class CdachOtherDeviceCompilationWithName extends POCDMT000040AuthoringDe
      * Sets the hl7SoftwareName
      * The name of the device MUST be declared.Note:Altough this element is called softwareName, it contains also the name of physical devices (e.g. laboratory analyzer).
      */
-    public void setHl7SoftwareName(org.husky.emed.cda.generated.hl7cdar2.SC value) {
+    public void setHl7SoftwareName(SC value) {
         this.softwareName = value;
     }
 }

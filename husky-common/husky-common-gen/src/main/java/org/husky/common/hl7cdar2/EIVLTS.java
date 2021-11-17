@@ -62,49 +62,49 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "EIVL_TS", propOrder = { "event", "offset" })
 public class EIVLTS extends SXCMTS {
 
-	protected EIVLEvent event;
-	protected IVLPQ offset;
+    protected EIVLEvent event;
+    protected IVLPQ offset;
 
-	/**
-	 * Ruft den Wert der event-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link EIVLEvent }
-	 *
-	 */
-	public EIVLEvent getEvent() {
-		return event;
-	}
+    /**
+     * Ruft den Wert der event-Eigenschaft ab.
+     *
+     * @return possible object is {@link EIVLEvent }
+     *
+     */
+    public EIVLEvent getEvent() {
+        return event;
+    }
 
-	/**
-	 * Ruft den Wert der offset-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link IVLPQ }
-	 *
-	 */
-	public IVLPQ getOffset() {
-		return offset;
-	}
+    /**
+     * Ruft den Wert der offset-Eigenschaft ab.
+     *
+     * @return possible object is {@link IVLPQ }
+     *
+     */
+    public IVLPQ getOffset() {
+        return offset;
+    }
 
-	/**
-	 * Legt den Wert der event-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link EIVLEvent }
-	 *
-	 */
-	public void setEvent(EIVLEvent value) {
-		this.event = value;
-	}
+    /**
+     * Legt den Wert der event-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link EIVLEvent }
+     *
+     */
+    public void setEvent(EIVLEvent value) {
+        this.event = value;
+    }
 
-	/**
-	 * Legt den Wert der offset-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link IVLPQ }
-	 *
-	 */
-	public void setOffset(IVLPQ value) {
-		this.offset = value;
-	}
+    /**
+     * Legt den Wert der offset-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link IVLPQ }
+     *
+     */
+    public void setOffset(IVLPQ value) {
+        this.offset = value;
+    }
 
 }

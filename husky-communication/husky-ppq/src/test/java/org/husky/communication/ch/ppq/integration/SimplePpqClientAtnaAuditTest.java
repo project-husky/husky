@@ -32,7 +32,7 @@ import org.husky.xua.communication.xua.TokenType;
 import org.husky.xua.communication.xua.XUserAssertionResponse;
 import org.husky.xua.communication.xua.impl.AppliesToBuilderImpl;
 import org.husky.xua.communication.xua.impl.XUserAssertionRequestBuilderImpl;
-import org.husky.xua.communication.xua.impl.ch.PurposeOfUse;
+import org.husky.communication.ch.enums.PurposeOfUse;
 import org.husky.xua.core.SecurityHeaderElement;
 import org.husky.xua.deserialization.impl.AssertionDeserializerImpl;
 import org.husky.xua.hl7v3.InstanceIdentifier;

@@ -6,7 +6,7 @@ import lombok.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.cda.enums.EmedDocumentType;
 import org.husky.emed.cda.generated.artdecor.enums.DocumentEntryConfidentialityCode;
-import org.husky.emed.cda.generated.hl7cdar2.StrucDocText;
+import org.husky.common.hl7cdar2.StrucDocText;
 import org.husky.emed.cda.models.common.AuthorDigest;
 import org.husky.emed.cda.models.common.OrganizationDigest;
 import org.husky.emed.cda.models.common.PatientDigest;

@@ -1,12 +1,11 @@
 package org.husky.xua.validation.statement;
 
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
-import org.husky.common.utils.xml.XmlFactories;
 import org.husky.communication.ch.enums.Role;
-import org.husky.xua.validation.statement.ChEprAttributeStatementValidator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.opensaml.core.config.InitializationService;
+import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.opensaml.core.xml.io.Unmarshaller;
 import org.opensaml.core.xml.util.XMLObjectSupport;
 import org.opensaml.saml.common.assertion.ValidationContext;
@@ -14,10 +13,9 @@ import org.opensaml.saml.common.assertion.ValidationResult;
 import org.opensaml.saml.saml2.core.Attribute;
 import org.w3c.dom.Element;
 
-import javax.xml.parsers.DocumentBuilder;
-
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 
 import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ROLE;
@@ -32,15 +30,12 @@ class ChEprAttributeStatementValidatorTest {
 
     private static final ChEprAttributeStatementValidator VALIDATOR = new ChEprAttributeStatementValidator();
     @MonotonicNonNull
-    private static DocumentBuilder DOC_BUILDER = null;
-    @MonotonicNonNull
     private static Unmarshaller UNMARSHALLER = null;
 
     @BeforeAll
     public static void setUpBeforeClass() throws Exception {
         // Initialize the library
         InitializationService.initialize();
-        DOC_BUILDER = XmlFactories.newXuaDocumentBuilder();
         UNMARSHALLER = XMLObjectSupport.getUnmarshaller(Attribute.TYPE_NAME);
     }
 
@@ -86,7 +81,9 @@ class ChEprAttributeStatementValidatorTest {
     }
 
     private Attribute unmarshal(final String xml) throws Exception {
-        Element element = DOC_BUILDER.parse(new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8))).getDocumentElement();
+        Element element = Objects.requireNonNull(XMLObjectProviderRegistrySupport.getParserPool())
+                .parse(new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8)))
+                .getDocumentElement();
         return (Attribute) UNMARSHALLER.unmarshall(element);
     }
 

@@ -48,14 +48,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XServiceEventPerformer {
 
-	PRF, PPRF, SPRF;
+    PRF, PPRF, SPRF;
 
-	public static XServiceEventPerformer fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XServiceEventPerformer fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

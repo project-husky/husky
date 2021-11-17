@@ -22,17 +22,11 @@ import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
-
 import org.husky.common.enums.NullFlavor;
 import org.husky.common.hl7cdar2.IVLTS;
-import org.husky.common.hl7cdar2.ObjectFactory;
-import org.husky.common.hl7cdar2.SXCMTS;
 import org.husky.common.hl7cdar2.TS;
 
 /**
@@ -40,55 +34,11 @@ import org.husky.common.hl7cdar2.TS;
  *
  * <div class="de">Toolbox für das Datums-Handling.</div>
  *
+ * Deprecated, use {@link org.husky.common.utils.time.Hl7Dtm}, {@link org.husky.common.utils.time.DateTimes} and the
+ * new Java time API.
  */
-@Deprecated(forRemoval = true)
+@Deprecated
 public class DateUtil {
-
-	/**
-	 * <div class="en">Creates a CDA R2 IVL_TS having the given nullFlavor
-	 * set.</div>
-	 *
-	 * <div class="de">Erstellt ein CDA R2 IVL_TS mit dem angegebenen
-	 * nullFlavor.</div>
-	 *
-	 * @param value
-	 *            the value
-	 * @return the ivlts
-	 */
-	public static IVLTS createIvltsUnknown(NullFlavor value) {
-		ObjectFactory factory = new ObjectFactory();
-		final IVLTS ts = factory.createIVLTS();
-		ts.nullFlavor = new ArrayList<String>();
-		if (value == null) {
-			ts.nullFlavor.add(NullFlavor.UNKNOWN.getCodeValue());
-		} else {
-			ts.nullFlavor.add(value.getCodeValue());
-		}
-		return ts;
-	}
-
-	/**
-	 * <div class="en">Creates a CDA R2 TS having the given nullFlavor
-	 * set.</div>
-	 *
-	 * <div class="de">Erstellt ein CDA R2 TS mit dem angegebenen
-	 * nullFlavor.</div>
-	 *
-	 * @param value
-	 *            the value
-	 * @return the ts
-	 */
-	public static TS createTsUnknown(NullFlavor value) {
-		ObjectFactory factory = new ObjectFactory();
-		final TS ts = factory.createTS();
-		ts.nullFlavor = new ArrayList<String>();
-		if (value == null) {
-			ts.nullFlavor.add(NullFlavor.UNKNOWN.getCodeValue());
-		} else {
-			ts.nullFlavor.add(value.getCodeValue());
-		}
-		return ts;
-	}
 
 	/**
 	 * <div class="en">Converts the given date to a CDA R2 IVL_TS value (without
@@ -103,12 +53,9 @@ public class DateUtil {
 	 */
 	public static IVLTS date2Ivlts(Date value) {
 		if (value == null) {
-			return createIvltsUnknown(null);
+			return new IVLTS(NullFlavor.UNKNOWN);
 		} else {
-			ObjectFactory factory = new ObjectFactory();
-			final IVLTS ts = factory.createIVLTS();
-			ts.setValue(formatDateTime(value));
-			return ts;
+			return new IVLTS(formatDateTime(value));
 		}
 	}
 
@@ -125,12 +72,9 @@ public class DateUtil {
 	 */
 	public static IVLTS date2IvltsDateOnly(Date value) {
 		if (value == null) {
-			return createIvltsUnknown(null);
+			return new IVLTS(NullFlavor.UNKNOWN);
 		} else {
-			ObjectFactory factory = new ObjectFactory();
-			final IVLTS ts = factory.createIVLTS();
-			ts.setValue(formatDateOnly(value));
-			return ts;
+			return new IVLTS(formatDateOnly(value));
 		}
 	}
 
@@ -147,78 +91,12 @@ public class DateUtil {
 	 */
 	public static IVLTS date2IvltsTzon(Date value) {
 		if (value == null) {
-			return createIvltsUnknown(null);
+			return new IVLTS(NullFlavor.UNKNOWN);
 		} else {
-			ObjectFactory factory = new ObjectFactory();
-			final IVLTS ts = factory.createIVLTS();
-			ts.setValue(formatDateTimeTzon(value));
-			return ts;
+			return new IVLTS(formatDateTimeTzon(value));
 		}
 	}
 
-	/**
-	 * <div class="en">Converts the given dates to a CDA R2 IVL_TS (low and high
-	 * values, both including time zone when not null or nullFlavor UNK when
-	 * null).</div>
-	 *
-	 * <div class="de">Konvertiert die angegebenen Daten in ein CDA R2 IVL_TS
-	 * (low und high values, beide mit Zeitzone, wenn nicht null, oder
-	 * nullFlavor UNK, wenn null).</div>
-	 *
-	 * @param lowValue
-	 *            the low value
-	 * @param highValue
-	 *            the high value
-	 * @return the ivlts
-	 */
-	public static IVLTS date2IvltsTzon(Date lowValue, Date highValue) {
-		ObjectFactory factory = new ObjectFactory();
-		IVLTS retVal = factory.createIVLTS();
-
-		TS tsLow = null;
-		if (lowValue == null) {
-			tsLow = createTsUnknown(null);
-		} else {
-			tsLow = factory.createTS();
-			tsLow.setValue(formatDateTimeTzon(lowValue));
-		}
-
-		TS tsHigh = null;
-		if (highValue == null) {
-			tsHigh = createTsUnknown(null);
-		} else {
-			tsHigh = factory.createTS();
-			tsHigh.setValue(formatDateTimeTzon(highValue));
-		}
-
-		retVal.getRest()
-				.add(new JAXBElement<TS>(new QName("urn:hl7-org:v3", "low"), TS.class, tsLow));
-		retVal.getRest()
-				.add(new JAXBElement<TS>(new QName("urn:hl7-org:v3", "high"), TS.class, tsHigh));
-		return retVal;
-	}
-
-	/**
-	 * <div class="en">Converts the given date without day of time to a CDA R2
-	 * TS (without time zone).</div>
-	 *
-	 * <div class="de">Konvertiert das angegebene Datum ohne Tageszeit in ein
-	 * CDA R2 TS (ohne Zeitzone).</div>
-	 *
-	 * @param value
-	 *            the value
-	 * @return the ts
-	 */
-	public static SXCMTS date2SxcmTsDateOnly(Date value) {
-		if (value == null) {
-			return createIvltsUnknown(null);
-		} else {
-			ObjectFactory factory = new ObjectFactory();
-			final SXCMTS ts = factory.createSXCMTS();
-			ts.setValue(formatDateOnly(value));
-			return ts;
-		}
-	}
 
 	/**
 	 * <div class="en">Converts the given date including day of time to a CDA R2
@@ -233,12 +111,9 @@ public class DateUtil {
 	 */
 	public static TS date2Ts(Date value) {
 		if (value == null) {
-			return createIvltsUnknown(null);
+			return new IVLTS(NullFlavor.UNKNOWN);
 		} else {
-			ObjectFactory factory = new ObjectFactory();
-			final TS ts = factory.createTS();
-			ts.setValue(formatDateTime(value));
-			return ts;
+			return new TS(formatDateTime(value));
 		}
 	}
 
@@ -255,12 +130,9 @@ public class DateUtil {
 	 */
 	public static TS date2TsDateOnly(Date value) {
 		if (value == null) {
-			return createIvltsUnknown(null);
+			return new IVLTS(NullFlavor.UNKNOWN);
 		} else {
-			ObjectFactory factory = new ObjectFactory();
-			final TS ts = factory.createTS();
-			ts.setValue(formatDateOnly(value));
-			return ts;
+			return new TS(formatDateOnly(value));
 		}
 	}
 
@@ -276,12 +148,9 @@ public class DateUtil {
 	 */
 	public static TS date2TsDateOnly(ZonedDateTime value) {
 		if (value == null) {
-			return createIvltsUnknown(null);
+			return new IVLTS(NullFlavor.UNKNOWN);
 		} else {
-			ObjectFactory factory = new ObjectFactory();
-			final TS ts = factory.createTS();
-			ts.setValue(formatDateOnly(value));
-			return ts;
+			return new TS(formatDateOnly(value));
 		}
 	}
 
@@ -298,12 +167,9 @@ public class DateUtil {
 	 */
 	public static TS date2TsTzon(Date value) {
 		if (value == null) {
-			return createIvltsUnknown(null);
+			return new IVLTS(NullFlavor.UNKNOWN);
 		} else {
-			ObjectFactory factory = new ObjectFactory();
-			final TS ts = factory.createTS();
-			ts.setValue(formatDateTimeTzon(value));
-			return ts;
+			return new TS(formatDateTimeTzon(value));
 		}
 	}
 
@@ -394,28 +260,6 @@ public class DateUtil {
 		return value.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssZ").withZone(ZoneId.systemDefault()));
 	}
 
-	/**
-	 * <div class="en">Returns the current system timestamp.</div>
-	 *
-	 * <div class="de">Liefert die aktuelle Systemzeit.</div>
-	 *
-	 * @return the date
-	 */
-	public static Date nowAsDate() {
-		return new Date();
-	}
-
-	/**
-	 * <div class="en">Returns the current system timestamp.</div>
-	 *
-	 * <div class="de">Liefert die aktuelle Systemzeit.</div>
-	 *
-	 * @return the date
-	 */
-	public static ZonedDateTime nowAsZonedDate() {
-		return ZonedDateTime.now();
-	}
-
 	public static Date parseDate(ZonedDateTime date) {
 		return Date.from(date.toInstant());
 	}
@@ -470,28 +314,6 @@ public class DateUtil {
 		} catch (final ParseException e) {
 			// convert to RuntimeException
 			throw new IllegalArgumentException(e);
-		}
-	}
-
-	/**
-	 * <div class="en">Parses the given String into a timestamp. Expected
-	 * format: yyyy</div>
-	 *
-	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
-	 * Erwartetes Format: yyyy</div>
-	 *
-	 * @param value
-	 *            <br>
-	 *            <div class="de">value</div>
-	 * @return java.util.Date
-	 */
-	public static Date parseDateyyyy(String value) {
-		try {
-			final SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-			return sdf.parse(value);
-		} catch (final ParseException e) {
-			throw new IllegalArgumentException(
-					"Cannot parse date, value=[" + value + "]. Expected format is yyyy.", e);
 		}
 	}
 
@@ -563,28 +385,6 @@ public class DateUtil {
 
 	/**
 	 * <div class="en">Parses the given String into a timestamp. Expected
-	 * format: yyyyMMddHH</div>
-	 *
-	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
-	 * Erwartetes Format: yyyyMMddHH</div>
-	 *
-	 * @param value
-	 *            <br>
-	 *            <div class="de"> value</div>
-	 * @return java.util.Date
-	 */
-	public static Date parseDateyyyyMMddHH(String value) {
-		try {
-			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHH");
-			return sdf.parse(value);
-		} catch (final ParseException e) {
-			throw new IllegalArgumentException(
-					"Cannot parse date, value=[" + value + "]. Expected format is yyyyMMddHH.", e);
-		}
-	}
-
-	/**
-	 * <div class="en">Parses the given String into a timestamp. Expected
 	 * format: yyyyMMddHHmm</div>
 	 *
 	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
@@ -627,50 +427,6 @@ public class DateUtil {
 			throw new IllegalArgumentException(
 					"Cannot parse date, value=[" + value + "]. Expected format is yyyyMMddHHmmss.",
 					e);
-		}
-	}
-
-	/**
-	 * <div class="en">Parses the given String into a timestamp. Expected
-	 * format: yyyyMMddHHmmssSSSZZZZ</div>
-	 *
-	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
-	 * Erwartetes Format: yyyyMMddHHmmssSSSZZZZ</div>
-	 *
-	 * @param value
-	 *            <br>
-	 *            <div class="de"> value</div>
-	 * @return java.util.Date
-	 */
-	public static Date parseDateyyyyMMddHHmmssSSSZZZZ(String value) {
-		try {
-			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSSZZZZ");
-			return sdf.parse(value);
-		} catch (final ParseException e) {
-			throw new IllegalArgumentException("Cannot parse date, value=[" + value
-					+ "]. Expected format is yyyyMMddHHmmssSSSZZZZ.", e);
-		}
-	}
-
-	/**
-	 * <div class="en">Parses the given String into a timestamp. Expected
-	 * format: yyyyMMddHHmmssZZZZ</div>
-	 *
-	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
-	 * Erwartetes Format: yyyyMMddHHmmssZZZZ</div>
-	 *
-	 * @param value
-	 *            <br>
-	 *            <div class="de"> value</div>
-	 * @return java.util.Date
-	 */
-	public static Date parseDateyyyyMMddHHmmssZZZZ(String value) {
-		try {
-			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssZZZZ");
-			return sdf.parse(value);
-		} catch (final ParseException e) {
-			throw new IllegalArgumentException("Cannot parse date, value=[" + value
-					+ "]. Expected format is yyyyMMddHHmmssZZZZ.", e);
 		}
 	}
 
@@ -720,29 +476,6 @@ public class DateUtil {
 
 	/**
 	 * <div class="en">Parses the given String into a timestamp. Expected
-	 * format: yyyyMMddHHZZZZ</div>
-	 *
-	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
-	 * Erwartetes Format: yyyyMMddHHZZZZ</div>
-	 *
-	 * @param value
-	 *            <br>
-	 *            <div class="de"> value</div>
-	 * @return java.util.Date
-	 */
-	public static Date parseDateyyyyMMddHHZZZZ(String value) {
-		try {
-			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHZZZZ");
-			return sdf.parse(value);
-		} catch (final ParseException e) {
-			throw new IllegalArgumentException(
-					"Cannot parse date, value=[" + value + "]. Expected format is yyyyMMddHHZZZZ.",
-					e);
-		}
-	}
-
-	/**
-	 * <div class="en">Parses the given String into a timestamp. Expected
 	 * format: yyyy-MM-dd'T'HH:mm:ss</div>
 	 *
 	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
@@ -762,59 +495,6 @@ public class DateUtil {
 			throw new IllegalArgumentException("Cannot parse date, value=[" + value
 					+ "]. Expected format is yyyy-MM-ddTHH:mm:ss.", e);
 		}
-	}
-
-	/**
-	 * <div class="en">Parses the given String into a timestamp. Expected
-	 * format: yyyy[MM[dd[HH[mm[ss[ZZZZ]]]]]]</div>
-	 *
-	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
-	 * Erwartetes Format: yyyy[MM[dd[HH[mm[ss[ZZZZ]]]]]]</div>
-	 *
-	 * @param value
-	 *            the value
-	 * @return the date
-	 */
-	public static Date parseHl7Timestamp(String value) {
-		Date retVal = null;
-		if (value != null) {
-			if (value.contains("+")) {
-				if (value.length() == 19)
-					retVal = parseDateyyyyMMddHHmmssZZZZ(value);
-				else if (value.length() == 17)
-					retVal = parseDateyyyyMMddHHmmZZZZ(value);
-				else if (value.length() == 15)
-					retVal = parseDateyyyyMMddHHZZZZ(value);
-			} else {
-				if (value.length() == 14)
-					retVal = parseDateyyyyMMddHHmmss(value);
-				else if (value.length() == 12)
-					retVal = parseDateyyyyMMddHHmm(value);
-				else if (value.length() == 10)
-					retVal = parseDateyyyyMMddHH(value);
-				else if (value.length() == 8)
-					retVal = parseDateyyyyMMdd(value);
-				else if (value.length() == 6)
-					retVal = parseDateyyyyMM(value);
-				else if (value.length() == 4)
-					retVal = parseDateyyyy(value);
-			}
-		}
-		return retVal;
-	}
-
-	/**
-	 * <div class="en">Parses the given HL7 CDA R2 TS into a timestamp</div>
-	 *
-	 * <div class="de">Parst den angegebenen HL7 CDA R2 TS in einen
-	 * Zeitstempel./div>
-	 *
-	 * @param value
-	 *            the value
-	 * @return the date
-	 */
-	public static Date parseHl7Timestamp(TS value) {
-		return parseHl7Timestamp(value.getValue());
 	}
 
 	/**

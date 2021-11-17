@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum RoleClassDistributedMaterial {
 
-	DST, RET;
+    DST, RET;
 
-	public static RoleClassDistributedMaterial fromValue(String v) {
-		return valueOf(v);
-	}
+    public static RoleClassDistributedMaterial fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

@@ -3,8 +3,7 @@ package org.husky.emed.cda.generated.artdecor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Section;
+import org.husky.common.hl7cdar2.*;
 
 /**
  * cdach_section_RemarksCoded
@@ -31,7 +30,7 @@ public class CdachSectionRemarksCoded extends POCDMT000040Section {
     /**
      * Adds a hl7Entry
      */
-    public void addHl7Entry(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Entry value) {
+    public void addHl7Entry(POCDMT000040Entry value) {
         getEntry().add(value);
     }
 
@@ -50,9 +49,9 @@ public class CdachSectionRemarksCoded extends POCDMT000040Section {
      * @param codeSystemName the desired fixed value for this argument.
      * @param displayName the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.CE createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+    private static CE createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.CE retVal = factory.createCE();
+        CE retVal = factory.createCE();
         retVal.setCode(code);
         retVal.setCodeSystem(codeSystem);
         retVal.setCodeSystemName(codeSystemName);
@@ -65,9 +64,9 @@ public class CdachSectionRemarksCoded extends POCDMT000040Section {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -75,7 +74,7 @@ public class CdachSectionRemarksCoded extends POCDMT000040Section {
     /**
      * Gets the hl7Code
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CE getHl7Code() {
+    public CE getHl7Code() {
         return code;
     }
 
@@ -83,14 +82,14 @@ public class CdachSectionRemarksCoded extends POCDMT000040Section {
      * Gets the hl7Id
      * An ID for this section MAY be filled for traceability.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.II getHl7Id() {
+    public II getHl7Id() {
         return id;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
@@ -98,7 +97,7 @@ public class CdachSectionRemarksCoded extends POCDMT000040Section {
      * Gets the hl7Text
      * Human readable text of this section.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.StrucDocText getHl7Text() {
+    public StrucDocText getHl7Text() {
         return text;
     }
 
@@ -110,14 +109,14 @@ public class CdachSectionRemarksCoded extends POCDMT000040Section {
      * - [it]: 'Osservazione'
      * - [en]: 'Comment'
      */
-    public org.husky.emed.cda.generated.hl7cdar2.ST getHl7Title() {
+    public ST getHl7Title() {
         return title;
     }
 
     /**
      * Sets the hl7Code
      */
-    public void setHl7Code(org.husky.emed.cda.generated.hl7cdar2.CE value) {
+    public void setHl7Code(CE value) {
         this.code = value;
     }
 
@@ -125,14 +124,14 @@ public class CdachSectionRemarksCoded extends POCDMT000040Section {
      * Sets the hl7Id
      * An ID for this section MAY be filled for traceability.
      */
-    public void setHl7Id(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7Id(II value) {
         this.id = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
@@ -141,7 +140,7 @@ public class CdachSectionRemarksCoded extends POCDMT000040Section {
      * Sets the hl7Text
      * Human readable text of this section.
      */
-    public void setHl7Text(org.husky.emed.cda.generated.hl7cdar2.StrucDocText value) {
+    public void setHl7Text(StrucDocText value) {
         this.text = value;
     }
 
@@ -153,7 +152,7 @@ public class CdachSectionRemarksCoded extends POCDMT000040Section {
      * - [it]: 'Osservazione'
      * - [en]: 'Comment'
      */
-    public void setHl7Title(org.husky.emed.cda.generated.hl7cdar2.ST value) {
+    public void setHl7Title(ST value) {
         this.title = value;
     }
 }

@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XInformationRecipient {
 
-	PRCP, TRC;
+    PRCP, TRC;
 
-	public static XInformationRecipient fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XInformationRecipient fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

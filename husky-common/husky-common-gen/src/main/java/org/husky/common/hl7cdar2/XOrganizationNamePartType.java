@@ -48,14 +48,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XOrganizationNamePartType {
 
-	DEL, PFX, SFX;
+    DEL, PFX, SFX;
 
-	public static XOrganizationNamePartType fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XOrganizationNamePartType fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

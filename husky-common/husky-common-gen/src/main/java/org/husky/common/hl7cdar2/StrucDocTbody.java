@@ -87,210 +87,210 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlType(name = "StrucDoc.Tbody", propOrder = { "tr" })
 public class StrucDocTbody {
 
-	@XmlElement(required = true)
-	protected List<StrucDocTr> tr;
-	@XmlAttribute(name = "ID")
-	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-	@XmlID
-	@XmlSchemaType(name = "ID")
-	protected String id;
-	@XmlAttribute(name = "language")
-	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-	@XmlSchemaType(name = "NMTOKEN")
-	protected String language;
-	@XmlAttribute(name = "styleCode")
-	@XmlSchemaType(name = "NMTOKENS")
-	protected List<String> styleCode;
-	@XmlAttribute(name = "align")
-	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-	protected String align;
-	@XmlAttribute(name = "char")
-	protected String _char;
-	@XmlAttribute(name = "charoff")
-	protected String charoff;
-	@XmlAttribute(name = "valign")
-	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-	protected String valign;
+    @XmlElement(required = true)
+    protected List<StrucDocTr> tr;
+    @XmlAttribute(name = "ID")
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    @XmlID
+    @XmlSchemaType(name = "ID")
+    protected String id;
+    @XmlAttribute(name = "language")
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    @XmlSchemaType(name = "NMTOKEN")
+    protected String language;
+    @XmlAttribute(name = "styleCode")
+    @XmlSchemaType(name = "NMTOKENS")
+    protected List<String> styleCode;
+    @XmlAttribute(name = "align")
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    protected String align;
+    @XmlAttribute(name = "char")
+    protected String _char;
+    @XmlAttribute(name = "charoff")
+    protected String charoff;
+    @XmlAttribute(name = "valign")
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    protected String valign;
 
-	/**
-	 * Ruft den Wert der align-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getAlign() {
-		return align;
-	}
+    /**
+     * Ruft den Wert der align-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getAlign() {
+        return align;
+    }
 
-	/**
-	 * Ruft den Wert der char-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getChar() {
-		return _char;
-	}
+    /**
+     * Ruft den Wert der char-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getChar() {
+        return _char;
+    }
 
-	/**
-	 * Ruft den Wert der charoff-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getCharoff() {
-		return charoff;
-	}
+    /**
+     * Ruft den Wert der charoff-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getCharoff() {
+        return charoff;
+    }
 
-	/**
-	 * Ruft den Wert der id-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getID() {
-		return id;
-	}
+    /**
+     * Ruft den Wert der id-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getID() {
+        return id;
+    }
 
-	/**
-	 * Ruft den Wert der language-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getLanguage() {
-		return language;
-	}
+    /**
+     * Ruft den Wert der language-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getLanguage() {
+        return language;
+    }
 
-	/**
-	 * Gets the value of the styleCode property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the styleCode property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getStyleCode().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link String }
-	 *
-	 *
-	 */
-	public List<String> getStyleCode() {
-		if (styleCode == null) {
-			styleCode = new ArrayList<String>();
-		}
-		return this.styleCode;
-	}
+    /**
+     * Gets the value of the styleCode property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the styleCode property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getStyleCode().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link String }
+     *
+     *
+     */
+    public List<String> getStyleCode() {
+        if (styleCode == null) {
+            styleCode = new ArrayList<String>();
+        }
+        return this.styleCode;
+    }
 
-	/**
-	 * Gets the value of the tr property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the tr property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getTr().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link StrucDocTr }
-	 *
-	 *
-	 */
-	public List<StrucDocTr> getTr() {
-		if (tr == null) {
-			tr = new ArrayList<StrucDocTr>();
-		}
-		return this.tr;
-	}
+    /**
+     * Gets the value of the tr property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the tr property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getTr().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link StrucDocTr }
+     *
+     *
+     */
+    public List<StrucDocTr> getTr() {
+        if (tr == null) {
+            tr = new ArrayList<StrucDocTr>();
+        }
+        return this.tr;
+    }
 
-	/**
-	 * Ruft den Wert der valign-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getValign() {
-		return valign;
-	}
+    /**
+     * Ruft den Wert der valign-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getValign() {
+        return valign;
+    }
 
-	/**
-	 * Legt den Wert der align-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setAlign(String value) {
-		this.align = value;
-	}
+    /**
+     * Legt den Wert der align-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setAlign(String value) {
+        this.align = value;
+    }
 
-	/**
-	 * Legt den Wert der char-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setChar(String value) {
-		this._char = value;
-	}
+    /**
+     * Legt den Wert der char-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setChar(String value) {
+        this._char = value;
+    }
 
-	/**
-	 * Legt den Wert der charoff-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setCharoff(String value) {
-		this.charoff = value;
-	}
+    /**
+     * Legt den Wert der charoff-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setCharoff(String value) {
+        this.charoff = value;
+    }
 
-	/**
-	 * Legt den Wert der id-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setID(String value) {
-		this.id = value;
-	}
+    /**
+     * Legt den Wert der id-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setID(String value) {
+        this.id = value;
+    }
 
-	/**
-	 * Legt den Wert der language-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setLanguage(String value) {
-		this.language = value;
-	}
+    /**
+     * Legt den Wert der language-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setLanguage(String value) {
+        this.language = value;
+    }
 
-	/**
-	 * Legt den Wert der valign-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setValign(String value) {
-		this.valign = value;
-	}
+    /**
+     * Legt den Wert der valign-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setValign(String value) {
+        this.valign = value;
+    }
 
 }

@@ -3,7 +3,7 @@ package org.husky.emed.cda.services.readers;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.cda.errors.InvalidEmedContentException;
 import org.husky.emed.cda.generated.artdecor.enums.PharmaceuticalDoseFormEdqm;
-import org.husky.emed.cda.generated.hl7cdar2.COCTMT230100UVPackagedMedicine;
+import org.husky.common.hl7cdar2.COCTMT230100UVPackagedMedicine;
 import org.husky.emed.cda.models.treatment.MedicationPackagedProduct;
 
 import java.util.Objects;

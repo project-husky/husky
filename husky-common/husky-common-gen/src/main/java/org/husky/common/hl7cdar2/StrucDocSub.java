@@ -50,28 +50,28 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlType(name = "StrucDoc.Sub", propOrder = { "content" })
 public class StrucDocSub {
 
-	@XmlValue
-	protected String content;
+    @XmlValue
+    protected String content;
 
-	/**
-	 * Ruft den Wert der content-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getContent() {
-		return content;
-	}
+    /**
+     * Ruft den Wert der content-Eigenschaft ab.
+     *
+     * @return possible object is {@link String }
+     *
+     */
+    public String getContent() {
+        return content;
+    }
 
-	/**
-	 * Legt den Wert der content-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setContent(String value) {
-		this.content = value;
-	}
+    /**
+     * Legt den Wert der content-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link String }
+     *
+     */
+    public void setContent(String value) {
+        this.content = value;
+    }
 
 }

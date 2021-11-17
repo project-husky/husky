@@ -48,14 +48,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum AdditionalLocator {
 
-	ADL, UNID, UNIT;
+    ADL, UNID, UNIT;
 
-	public static AdditionalLocator fromValue(String v) {
-		return valueOf(v);
-	}
+    public static AdditionalLocator fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

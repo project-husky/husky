@@ -177,7 +177,7 @@ public class SubjectMatchBuilderImpl
 							if (jaxbElement.getValue() instanceof CV) {
 								var cv = (CV) jaxbElement.getValue();
 
-								XSAny any = new XSAnyBuilder().buildObject(new QName("", "CodedValue"));
+								XSAny any = new XSAnyBuilder().buildObject(new QName("urn:hl7-org:v3", "CodedValue"));
 								any.getUnknownAttributes().put(new QName("code"), cv.getCode());
 								any.getUnknownAttributes().put(new QName("codeSystem"), cv.getCodeSystem());
 								any.getUnknownAttributes().put(new QName("displayName"), cv.getDisplayName());

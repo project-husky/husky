@@ -233,17 +233,6 @@ public class VeraPdfValidator {
 			byte[] decodedBytes;
 			decodedBytes = Base64.getMimeDecoder().decode(pdfStrB64);
 
-			var debugString = "";
-			if (Util.isDebug()) {
-				debugString = debugString + "\n*** Debug: \n";
-				debugString = debugString + "pdfStrB64.length()="
-						+ Integer.toString(pdfStrB64.length()) + "\n";
-				debugString = debugString + "decodedBytes.length="
-						+ Integer.toString(decodedBytes.length) + "\n";
-				debugString = debugString + "\n*** End of debug\n";
-				System.out.print(debugString);
-			}
-
 			if (pdfStrB64 == null) {
 				aborted = true;
 				var failure = new VeraPdfValidationResultEntry();
@@ -290,9 +279,6 @@ public class VeraPdfValidator {
 					}
 					errMsg = errMsg
 							+ "*** Note: veraPDF seems still not to be fully thread save with version 1.16.1";
-					if (Util.isDebug()) {
-						errMsg = errMsg + debugString;
-					}
 					failure.setErrMsg(errMsg, Severity.CustomWarning);
 					pdfValidationResult.setIsDone();
 					pdfValidationResult.add(failure);

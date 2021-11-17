@@ -106,27 +106,25 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
             if (entry.getTreatmentReason() != null) {
                 body.append("<div id='narrative fulfilment_instructions'>");
                 body.append("<h3>Raison du traitement</h3>");
-				body.append(String.format("<p>%s</p>", StringEscapeUtils.escapeXml10(entry.getTreatmentReason())));
+                body.append(String.format("<p>%s</p>", StringEscapeUtils.escapeXml11(entry.getTreatmentReason())));
                 body.append("</div>");
             }
             if (entry.getAnnotationComment() != null) {
                 body.append("<div id='narrative annotation_comment'>");
                 body.append("<h3>Commentaire</h3>");
-				body.append(String.format("<p>%s</p>", StringEscapeUtils.escapeXml10(entry.getAnnotationComment())));
+                body.append(String.format("<p>%s</p>", StringEscapeUtils.escapeXml11(entry.getAnnotationComment())));
                 body.append("</div>");
             }
             if (entry.getPatientMedicationInstructions() != null) {
                 body.append("<div id='narrative medication_instructions'>");
                 body.append("<h3>Instructions de médication</h3>");
-				body.append(String.format("<p>%s</p>",
-						StringEscapeUtils.escapeXml10(entry.getPatientMedicationInstructions())));
+                body.append(String.format("<p>%s</p>", StringEscapeUtils.escapeXml11(entry.getPatientMedicationInstructions())));
                 body.append("</div>");
             }
             if (entry.getFulfilmentInstructions() != null) {
                 body.append("<div id='narrative fulfilment_instructions'>");
                 body.append("<h3>Instructions de fulfilment</h3>");
-				body.append(
-						String.format("<p>%s</p>", StringEscapeUtils.escapeXml10(entry.getFulfilmentInstructions())));
+                body.append(String.format("<p>%s</p>", StringEscapeUtils.escapeXml11(entry.getFulfilmentInstructions())));
                 body.append("</div>");
             }
 

@@ -64,76 +64,76 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "CR", propOrder = { "name", "value" })
 public class CR extends ANY {
 
-	protected CV name;
-	protected CD value;
-	@XmlAttribute(name = "inverted")
-	protected Boolean inverted;
+    protected CV name;
+    protected CD value;
+    @XmlAttribute(name = "inverted")
+    protected Boolean inverted;
 
-	/**
-	 * Ruft den Wert der name-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link CV }
-	 *
-	 */
-	public CV getName() {
-		return name;
-	}
+    /**
+     * Ruft den Wert der name-Eigenschaft ab.
+     *
+     * @return possible object is {@link CV }
+     *
+     */
+    public CV getName() {
+        return name;
+    }
 
-	/**
-	 * Ruft den Wert der value-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link CD }
-	 *
-	 */
-	public CD getValue() {
-		return value;
-	}
+    /**
+     * Ruft den Wert der value-Eigenschaft ab.
+     *
+     * @return possible object is {@link CD }
+     *
+     */
+    public CD getValue() {
+        return value;
+    }
 
-	/**
-	 * Ruft den Wert der inverted-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link Boolean }
-	 *
-	 */
-	public boolean isInverted() {
-		if (inverted == null) {
-			return false;
-		} else {
-			return inverted;
-		}
-	}
+    /**
+     * Ruft den Wert der inverted-Eigenschaft ab.
+     *
+     * @return possible object is {@link Boolean }
+     *
+     */
+    public boolean isInverted() {
+        if (inverted == null) {
+            return false;
+        } else {
+            return inverted;
+        }
+    }
 
-	/**
-	 * Legt den Wert der inverted-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link Boolean }
-	 *
-	 */
-	public void setInverted(Boolean value) {
-		this.inverted = value;
-	}
+    /**
+     * Legt den Wert der inverted-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link Boolean }
+     *
+     */
+    public void setInverted(Boolean value) {
+        this.inverted = value;
+    }
 
-	/**
-	 * Legt den Wert der name-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link CV }
-	 *
-	 */
-	public void setName(CV value) {
-		this.name = value;
-	}
+    /**
+     * Legt den Wert der name-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link CV }
+     *
+     */
+    public void setName(CV value) {
+        this.name = value;
+    }
 
-	/**
-	 * Legt den Wert der value-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link CD }
-	 *
-	 */
-	public void setValue(CD value) {
-		this.value = value;
-	}
+    /**
+     * Legt den Wert der value-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link CD }
+     *
+     */
+    public void setValue(CD value) {
+        this.value = value;
+    }
 
 }

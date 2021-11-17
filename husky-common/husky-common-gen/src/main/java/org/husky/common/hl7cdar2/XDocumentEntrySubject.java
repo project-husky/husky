@@ -48,14 +48,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XDocumentEntrySubject {
 
-	SPEC, PAT, PRS;
+    SPEC, PAT, PRS;
 
-	public static XDocumentEntrySubject fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XDocumentEntrySubject fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

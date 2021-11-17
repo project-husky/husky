@@ -3,8 +3,9 @@ package org.husky.emed.cda.generated.artdecor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Patient;
+import org.husky.common.hl7cdar2.ObjectFactory;
+import org.husky.common.hl7cdar2.PN;
+import org.husky.common.hl7cdar2.POCDMT000040Patient;
 
 /**
  * cdach_other_PersonNameInformationCompilation-eCH-0011
@@ -29,9 +30,9 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends POCDMT000
      *
      * @param use the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.PN createHl7NameFixedValue(String use) {
+    private static PN createHl7NameFixedValue(String use) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.PN retVal = factory.createPN();
+        PN retVal = factory.createPN();
         retVal.getUse().add(use);
         return retVal;
     }
@@ -40,7 +41,7 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends POCDMT000
      * Gets the hl7Name
      * The person's legal name (with required family and given name).
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.PN> getHl7Name() {
+    public List<PN> getHl7Name() {
         return name;
     }
 
@@ -48,7 +49,7 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends POCDMT000
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.PN, filled by: "ASGN"
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.PN getPredefinedNameAsgn() {
+    public static PN getPredefinedNameAsgn() {
         return createHl7NameFixedValue("ASGN");
     }
 
@@ -56,7 +57,7 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends POCDMT000
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.PN, filled by: "P"
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.PN getPredefinedNameP() {
+    public static PN getPredefinedNameP() {
         return createHl7NameFixedValue("P");
     }
 
@@ -64,7 +65,7 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends POCDMT000
      * Sets the hl7Name
      * The person's legal name (with required family and given name).
      */
-    public void setHl7Name(org.husky.emed.cda.generated.hl7cdar2.PN value) {
+    public void setHl7Name(PN value) {
         getName().clear();
         getName().add(value);
     }

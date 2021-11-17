@@ -2,7 +2,9 @@ package org.husky.emed.cda.generated.artdecor;
 
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040ClinicalDocument;
+import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
+import org.husky.common.hl7cdar2.ST;
+import org.husky.common.hl7cdar2.TS;
 
 /**
  * HeaderTemplateCompilationMedicationTreatmentPlan
@@ -25,7 +27,7 @@ public class HeaderTemplateCompilationMedicationTreatmentPlan extends POCDMT0000
      * Gets the hl7EffectiveTime
      * The document's creation date and time. If this document replaces a previous version (linked via parentDocument), this is the date and time of the new version.
      */
-    public org.husky.emed.cda.generated.hl7cdar2.TS getHl7EffectiveTime() {
+    public TS getHl7EffectiveTime() {
         return effectiveTime;
     }
 
@@ -33,7 +35,7 @@ public class HeaderTemplateCompilationMedicationTreatmentPlan extends POCDMT0000
      * Gets the hl7Title
      * <div>The German title shall be "Therapieentscheid Medikation".</div><div>The French title shall be "Décision thérapeutique relative à la médication".<br clear="none"/></div><div>The Italian title shall be "Decisione terapeutica di trattamento farmacologico".<br clear="none"/></div><div>The English title shall be "Medication Treatment Plan".<br clear="none"/>Titles in other languages are allowed and unrestricted.</div>
      */
-    public org.husky.emed.cda.generated.hl7cdar2.ST getHl7Title() {
+    public ST getHl7Title() {
         return title;
     }
 
@@ -41,7 +43,7 @@ public class HeaderTemplateCompilationMedicationTreatmentPlan extends POCDMT0000
      * Sets the hl7EffectiveTime
      * The document's creation date and time. If this document replaces a previous version (linked via parentDocument), this is the date and time of the new version.
      */
-    public void setHl7EffectiveTime(org.husky.emed.cda.generated.hl7cdar2.TS value) {
+    public void setHl7EffectiveTime(TS value) {
         this.effectiveTime = value;
     }
 
@@ -49,7 +51,7 @@ public class HeaderTemplateCompilationMedicationTreatmentPlan extends POCDMT0000
      * Sets the hl7Title
      * <div>The German title shall be "Therapieentscheid Medikation".</div><div>The French title shall be "Décision thérapeutique relative à la médication".<br clear="none"/></div><div>The Italian title shall be "Decisione terapeutica di trattamento farmacologico".<br clear="none"/></div><div>The English title shall be "Medication Treatment Plan".<br clear="none"/>Titles in other languages are allowed and unrestricted.</div>
      */
-    public void setHl7Title(org.husky.emed.cda.generated.hl7cdar2.ST value) {
+    public void setHl7Title(ST value) {
         this.title = value;
     }
 }

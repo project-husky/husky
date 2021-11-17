@@ -199,11 +199,11 @@ public class ValueSet implements Serializable {
 		enumName = enumName.replace("(S)", "");
 		enumName = enumName.replace("-", "_");
 		enumName = enumName.replaceAll("\\W", "_");
-		enumName = enumName.replace("_+", "_");
+		enumName = enumName.replaceAll("_+", "_");
 
-
-		while (enumName.endsWith("_"))
+		if (enumName.endsWith("_")) {
 			enumName = enumName.substring(0, enumName.length() - 1);
+		}
 
 		// enums starting with a number
 		// (e.g. 3 Self-Sustaining Sequence Replication)

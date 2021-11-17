@@ -18,11 +18,11 @@ package org.husky.xua.serialization.impl;
 
 import java.io.ByteArrayOutputStream;
 
-import javax.xml.XMLConstants;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.husky.common.utils.xml.XmlFactories;
 import org.husky.xua.exceptions.SerializeException;
 import org.husky.xua.serialization.OpenSaml2Serializer;
 import org.opensaml.core.xml.XMLObject;
@@ -39,14 +39,6 @@ import org.w3c.dom.Element;
  * <!-- @formatter:on -->
  */
 public class OpenSaml2SerializerImpl implements OpenSaml2Serializer {
-
-	/**
-	 * Instantiates a new OpenSaml2SerializerImpl.
-	 */
-	public OpenSaml2SerializerImpl() {
-		System.setProperty("javax.xml.parsers.DocumentBuilderFactory",
-				"org.apache.xerces.jaxp.DocumentBuilderFactoryImpl");
-	}
 
 	/**
 	 *
@@ -94,10 +86,7 @@ public class OpenSaml2SerializerImpl implements OpenSaml2Serializer {
 		try {
 			final var element = serializeToXml(aXmlObject);
 
-			var transformerFactory = javax.xml.transform.TransformerFactory.newInstance();
-			transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-			transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
-			final var tr = transformerFactory.newTransformer();
+			final var tr = XmlFactories.newTransformer();
 			tr.setOutputProperty(OutputKeys.INDENT, "no");
 			tr.setOutputProperty(OutputKeys.METHOD, "xml");
 			tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", String.valueOf(4));

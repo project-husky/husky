@@ -50,14 +50,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XActMoodDefEvnRqoPrmsPrp {
 
-	DEF, EVN, PRMS, PRP, RQO;
+    DEF, EVN, PRMS, PRP, RQO;
 
-	public static XActMoodDefEvnRqoPrmsPrp fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XActMoodDefEvnRqoPrmsPrp fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

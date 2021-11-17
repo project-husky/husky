@@ -2,8 +2,8 @@ package org.husky.emed.cda.generated.artdecor;
 
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Organization;
+import org.husky.common.hl7cdar2.*;
+import org.husky.common.hl7cdar2.POCDMT000040Organization;
 
 /**
  * CDAOrganization
@@ -23,28 +23,28 @@ public class Cdaorganization extends POCDMT000040Organization {
     /**
      * Adds a hl7Addr
      */
-    public void addHl7Addr(org.husky.emed.cda.generated.hl7cdar2.AD value) {
+    public void addHl7Addr(AD value) {
         getAddr().add(value);
     }
 
     /**
      * Adds a hl7Id
      */
-    public void addHl7Id(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void addHl7Id(II value) {
         getId().add(value);
     }
 
     /**
      * Adds a hl7Name
      */
-    public void addHl7Name(org.husky.emed.cda.generated.hl7cdar2.ON value) {
+    public void addHl7Name(ON value) {
         getName().add(value);
     }
 
     /**
      * Adds a hl7Telecom
      */
-    public void addHl7Telecom(org.husky.emed.cda.generated.hl7cdar2.TEL value) {
+    public void addHl7Telecom(TEL value) {
         getTelecom().add(value);
     }
 
@@ -81,9 +81,9 @@ public class Cdaorganization extends POCDMT000040Organization {
      *
      * @param classCode the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040OrganizationPartOf createHl7AsOrganizationPartOfFixedValue(String classCode) {
+    private static POCDMT000040OrganizationPartOf createHl7AsOrganizationPartOfFixedValue(String classCode) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.POCDMT000040OrganizationPartOf retVal = factory.createPOCDMT000040OrganizationPartOf();
+        POCDMT000040OrganizationPartOf retVal = factory.createPOCDMT000040OrganizationPartOf();
         retVal.getClassCode().add(classCode);
         return retVal;
     }
@@ -91,7 +91,7 @@ public class Cdaorganization extends POCDMT000040Organization {
     /**
      * Gets the hl7AsOrganizationPartOf
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040OrganizationPartOf getHl7AsOrganizationPartOf() {
+    public POCDMT000040OrganizationPartOf getHl7AsOrganizationPartOf() {
         return asOrganizationPartOf;
     }
 
@@ -99,7 +99,7 @@ public class Cdaorganization extends POCDMT000040Organization {
      * Gets the hl7StandardIndustryClassCode
      * SHALL be chosen from domain OrganizationIndustryClass
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CE getHl7StandardIndustryClassCode() {
+    public CE getHl7StandardIndustryClassCode() {
         return standardIndustryClassCode;
     }
 
@@ -107,14 +107,14 @@ public class Cdaorganization extends POCDMT000040Organization {
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040OrganizationPartOf, filled by: "PART"
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040OrganizationPartOf getPredefinedAsOrganizationPartOfPart() {
+    public static POCDMT000040OrganizationPartOf getPredefinedAsOrganizationPartOfPart() {
         return createHl7AsOrganizationPartOfFixedValue("PART");
     }
 
     /**
      * Sets the hl7AsOrganizationPartOf
      */
-    public void setHl7AsOrganizationPartOf(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040OrganizationPartOf value) {
+    public void setHl7AsOrganizationPartOf(POCDMT000040OrganizationPartOf value) {
         this.asOrganizationPartOf = value;
     }
 
@@ -122,7 +122,7 @@ public class Cdaorganization extends POCDMT000040Organization {
      * Sets the hl7StandardIndustryClassCode
      * SHALL be chosen from domain OrganizationIndustryClass
      */
-    public void setHl7StandardIndustryClassCode(org.husky.emed.cda.generated.hl7cdar2.CE value) {
+    public void setHl7StandardIndustryClassCode(CE value) {
         this.standardIndustryClassCode = value;
     }
 }

@@ -49,14 +49,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XActMoodRqoPrpAptArq {
 
-	APT, ARQ, PRP, RQO;
+    APT, ARQ, PRP, RQO;
 
-	public static XActMoodRqoPrpAptArq fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XActMoodRqoPrpAptArq fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

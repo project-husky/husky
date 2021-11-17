@@ -54,51 +54,51 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "RTO_MO_PQ", propOrder = { "numerator", "denominator" })
 public class RTOMOPQ extends QTY {
 
-	@XmlElement(required = true)
-	protected MO numerator;
-	@XmlElement(required = true)
-	protected PQ denominator;
+    @XmlElement(required = true)
+    protected MO numerator;
+    @XmlElement(required = true)
+    protected PQ denominator;
 
-	/**
-	 * Ruft den Wert der denominator-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link PQ }
-	 *
-	 */
-	public PQ getDenominator() {
-		return denominator;
-	}
+    /**
+     * Ruft den Wert der denominator-Eigenschaft ab.
+     *
+     * @return possible object is {@link PQ }
+     *
+     */
+    public PQ getDenominator() {
+        return denominator;
+    }
 
-	/**
-	 * Ruft den Wert der numerator-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link MO }
-	 *
-	 */
-	public MO getNumerator() {
-		return numerator;
-	}
+    /**
+     * Ruft den Wert der numerator-Eigenschaft ab.
+     *
+     * @return possible object is {@link MO }
+     *
+     */
+    public MO getNumerator() {
+        return numerator;
+    }
 
-	/**
-	 * Legt den Wert der denominator-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link PQ }
-	 *
-	 */
-	public void setDenominator(PQ value) {
-		this.denominator = value;
-	}
+    /**
+     * Legt den Wert der denominator-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link PQ }
+     *
+     */
+    public void setDenominator(PQ value) {
+        this.denominator = value;
+    }
 
-	/**
-	 * Legt den Wert der numerator-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link MO }
-	 *
-	 */
-	public void setNumerator(MO value) {
-		this.numerator = value;
-	}
+    /**
+     * Legt den Wert der numerator-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link MO }
+     *
+     */
+    public void setNumerator(MO value) {
+        this.numerator = value;
+    }
 
 }

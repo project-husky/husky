@@ -8,3 +8,5 @@ work
 /log/*
 /log/
 **/log/*
+.idea/
+*.iml

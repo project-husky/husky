@@ -51,32 +51,32 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "IVXB_INT")
 public class IVXBINT extends INT {
 
-	@XmlAttribute(name = "inclusive")
-	protected Boolean inclusive;
+    @XmlAttribute(name = "inclusive")
+    protected Boolean inclusive;
 
-	/**
-	 * Ruft den Wert der inclusive-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link Boolean }
-	 *
-	 */
-	public boolean isInclusive() {
-		if (inclusive == null) {
-			return true;
-		} else {
-			return inclusive;
-		}
-	}
+    /**
+     * Ruft den Wert der inclusive-Eigenschaft ab.
+     *
+     * @return possible object is {@link Boolean }
+     *
+     */
+    public boolean isInclusive() {
+        if (inclusive == null) {
+            return true;
+        } else {
+            return inclusive;
+        }
+    }
 
-	/**
-	 * Legt den Wert der inclusive-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link Boolean }
-	 *
-	 */
-	public void setInclusive(Boolean value) {
-		this.inclusive = value;
-	}
+    /**
+     * Legt den Wert der inclusive-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link Boolean }
+     *
+     */
+    public void setInclusive(Boolean value) {
+        this.inclusive = value;
+    }
 
 }

@@ -3,8 +3,7 @@ package org.husky.emed.cda.generated.artdecor;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Organization;
+import org.husky.common.hl7cdar2.*;
 
 /**
  * cdach_other_OrganizationCompilationGlnName
@@ -28,7 +27,7 @@ public class CdachOtherOrganizationCompilationGlnName extends POCDMT000040Organi
      * Adds a hl7Addr
      * The organization's address.
      */
-    public void addHl7Addr(org.husky.emed.cda.generated.hl7cdar2.AD value) {
+    public void addHl7Addr(AD value) {
         getAddr().add(value);
     }
 
@@ -36,7 +35,7 @@ public class CdachOtherOrganizationCompilationGlnName extends POCDMT000040Organi
      * Adds a hl7Name
      * The organization's name.
      */
-    public void addHl7Name(org.husky.emed.cda.generated.hl7cdar2.ON value) {
+    public void addHl7Name(ON value) {
         getName().add(value);
     }
 
@@ -44,7 +43,7 @@ public class CdachOtherOrganizationCompilationGlnName extends POCDMT000040Organi
      * Adds a hl7Telecom
      * The organization's means of communication (phone, eMail, ...).
      */
-    public void addHl7Telecom(org.husky.emed.cda.generated.hl7cdar2.TEL value) {
+    public void addHl7Telecom(TEL value) {
         getTelecom().add(value);
     }
 
@@ -77,9 +76,9 @@ public class CdachOtherOrganizationCompilationGlnName extends POCDMT000040Organi
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7IdFixedValue(String root) {
+    private static II createHl7IdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -88,7 +87,7 @@ public class CdachOtherOrganizationCompilationGlnName extends POCDMT000040Organi
      * Gets the hl7Id
      * The organization's id (GLN).
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7Id() {
+    public List<II> getHl7Id() {
         return id;
     }
 
@@ -96,7 +95,7 @@ public class CdachOtherOrganizationCompilationGlnName extends POCDMT000040Organi
      * Sets the hl7Id
      * The organization's id (GLN).
      */
-    public void setHl7Id(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7Id(II value) {
         getId().clear();
         getId().add(value);
     }

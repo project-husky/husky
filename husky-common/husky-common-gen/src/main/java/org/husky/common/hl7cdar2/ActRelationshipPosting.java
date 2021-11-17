@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ActRelationshipPosting {
 
-	CREDIT, DEBIT;
+    CREDIT, DEBIT;
 
-	public static ActRelationshipPosting fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ActRelationshipPosting fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

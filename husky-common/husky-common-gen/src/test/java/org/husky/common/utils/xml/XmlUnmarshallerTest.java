@@ -2,7 +2,6 @@ package org.husky.common.utils.xml;
 
 import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
 import org.husky.common.hl7cdar2.ST;
-import org.husky.common.utils.xml.XmlUnmarshaller;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -12,8 +11,6 @@ import org.junit.jupiter.api.condition.EnabledOnOs;
 import javax.xml.bind.DataBindingException;
 import javax.xml.parsers.ParserConfigurationException;
 
-import javax.xml.bind.DataBindingException;
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -89,7 +86,7 @@ class XmlUnmarshallerTest {
                 "<title xmlns:xi=\"http://www.w3.org/2001/XInclude\"><xi:include parse=\"text\" href=\"file:///" + FILE_TO_FETCH_WINDOWS + "\"/></title>" +
                 "</ClinicalDocument>";
         final POCDMT000040ClinicalDocument cda = XmlUnmarshaller.unmarshallStringAsType(xxe, POCDMT000040ClinicalDocument.class);
-        assertEquals("", cda.getTitle().xmlContent);
+        assertEquals("", cda.getTitle().getTextContent());
     }
 
     @Test
@@ -100,7 +97,7 @@ class XmlUnmarshallerTest {
                 "<title xmlns:xi=\"http://www.w3.org/2001/XInclude\"><xi:include parse=\"text\" href=\"file:///" + FILE_TO_FETCH_OTHERS + "\"/></title>" +
                 "</ClinicalDocument>";
         final POCDMT000040ClinicalDocument cda = XmlUnmarshaller.unmarshallStringAsType(xxe, POCDMT000040ClinicalDocument.class);
-        assertEquals("", cda.getTitle().xmlContent);
+        assertEquals("", cda.getTitle().getTextContent());
     }
 
     @Test
@@ -110,7 +107,7 @@ class XmlUnmarshallerTest {
                 "<title xmlns:xi=\"http://www.w3.org/2001/XInclude\"><xi:include parse=\"text\" href=\"" + URL_TO_FETCH + "\"/></title>" +
                 "</ClinicalDocument>";
         final POCDMT000040ClinicalDocument cda = XmlUnmarshaller.unmarshallStringAsType(xxe, POCDMT000040ClinicalDocument.class);
-        assertEquals("", cda.getTitle().xmlContent);
+        assertEquals("", cda.getTitle().getTextContent());
     }
 
     @Test
@@ -120,7 +117,7 @@ class XmlUnmarshallerTest {
                 "<title>" + title + "</title>";
         final ST unmarshalled = XmlUnmarshaller.unmarshallStringAsType(xml, ST.class);
         assertNotNull(unmarshalled);
-        assertEquals(title, unmarshalled.xmlContent);
+        assertEquals(title, unmarshalled.getTextContent());
     }
 
     @Test

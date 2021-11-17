@@ -48,14 +48,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum RoleClassInvestigationSubject {
 
-	INVSBJ, CASESBJ, RESBJ;
+    INVSBJ, CASESBJ, RESBJ;
 
-	public static RoleClassInvestigationSubject fromValue(String v) {
-		return valueOf(v);
-	}
+    public static RoleClassInvestigationSubject fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

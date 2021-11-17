@@ -60,163 +60,163 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "COCT_MT230100UV.TerritorialAuthority", namespace = "urn:ihe:pharm", propOrder = {
-		"realmCode", "typeId", "templateId", "territory", "governingCountry" })
+        "realmCode", "typeId", "templateId", "territory", "governingCountry" })
 public class COCTMT230100UVTerritorialAuthority {
 
-	@XmlElement(namespace = "urn:hl7-org:v3")
-	protected List<CS> realmCode;
-	@XmlElement(namespace = "urn:hl7-org:v3")
-	protected AllInfrastructureRootTypeId typeId;
-	@XmlElement(namespace = "urn:hl7-org:v3")
-	protected List<AllInfrastructureRootTemplateId> templateId;
-	@XmlElementRef(name = "territory", namespace = "urn:ihe:pharm", type = JAXBElement.class, required = false)
-	protected JAXBElement<COCTMT230100UVAgency> territory;
-	@XmlElementRef(name = "governingCountry", namespace = "urn:ihe:pharm", type = JAXBElement.class, required = false)
-	protected JAXBElement<COCTMT230100UVCountry> governingCountry;
-	@XmlAttribute(name = "classCode", required = true)
-	protected RoleClassTerritoryOfAuthority classCode;
+    @XmlElement(namespace = "urn:hl7-org:v3")
+    protected List<CS> realmCode;
+    @XmlElement(namespace = "urn:hl7-org:v3")
+    protected AllInfrastructureRootTypeId typeId;
+    @XmlElement(namespace = "urn:hl7-org:v3")
+    protected List<AllInfrastructureRootTemplateId> templateId;
+    @XmlElementRef(name = "territory", namespace = "urn:ihe:pharm", type = JAXBElement.class, required = false)
+    protected JAXBElement<COCTMT230100UVAgency> territory;
+    @XmlElementRef(name = "governingCountry", namespace = "urn:ihe:pharm", type = JAXBElement.class, required = false)
+    protected JAXBElement<COCTMT230100UVCountry> governingCountry;
+    @XmlAttribute(name = "classCode", required = true)
+    protected RoleClassTerritoryOfAuthority classCode;
 
-	/**
-	 * Ruft den Wert der classCode-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link RoleClassTerritoryOfAuthority }
-	 *
-	 */
-	public RoleClassTerritoryOfAuthority getClassCode() {
-		return classCode;
-	}
+    /**
+     * Ruft den Wert der classCode-Eigenschaft ab.
+     *
+     * @return possible object is {@link RoleClassTerritoryOfAuthority }
+     *
+     */
+    public RoleClassTerritoryOfAuthority getClassCode() {
+        return classCode;
+    }
 
-	/**
-	 * Ruft den Wert der governingCountry-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link JAXBElement
-	 *         }{@code <}{@link COCTMT230100UVCountry }{@code >}
-	 *
-	 */
-	public JAXBElement<COCTMT230100UVCountry> getGoverningCountry() {
-		return governingCountry;
-	}
+    /**
+     * Ruft den Wert der governingCountry-Eigenschaft ab.
+     *
+     * @return possible object is {@link JAXBElement
+     *         }{@code <}{@link COCTMT230100UVCountry }{@code >}
+     *
+     */
+    public JAXBElement<COCTMT230100UVCountry> getGoverningCountry() {
+        return governingCountry;
+    }
 
-	/**
-	 * Gets the value of the realmCode property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the realmCode property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getRealmCode().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link CS }
-	 *
-	 *
-	 */
-	public List<CS> getRealmCode() {
-		if (realmCode == null) {
-			realmCode = new ArrayList<CS>();
-		}
-		return this.realmCode;
-	}
+    /**
+     * Gets the value of the realmCode property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the realmCode property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getRealmCode().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link CS }
+     *
+     *
+     */
+    public List<CS> getRealmCode() {
+        if (realmCode == null) {
+            realmCode = new ArrayList<CS>();
+        }
+        return this.realmCode;
+    }
 
-	/**
-	 * Gets the value of the templateId property.
-	 *
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the templateId property.
-	 *
-	 * <p>
-	 * For example, to add a new item, do as follows: <pre>
-	 *    getTemplateId().add(newItem);
-	 * </pre>
-	 *
-	 *
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link AllInfrastructureRootTemplateId }
-	 *
-	 *
-	 */
-	public List<AllInfrastructureRootTemplateId> getTemplateId() {
-		if (templateId == null) {
-			templateId = new ArrayList<AllInfrastructureRootTemplateId>();
-		}
-		return this.templateId;
-	}
+    /**
+     * Gets the value of the templateId property.
+     *
+     * <p>
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the templateId property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getTemplateId().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link AllInfrastructureRootTemplateId }
+     *
+     *
+     */
+    public List<AllInfrastructureRootTemplateId> getTemplateId() {
+        if (templateId == null) {
+            templateId = new ArrayList<AllInfrastructureRootTemplateId>();
+        }
+        return this.templateId;
+    }
 
-	/**
-	 * Ruft den Wert der territory-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link JAXBElement
-	 *         }{@code <}{@link COCTMT230100UVAgency }{@code >}
-	 *
-	 */
-	public JAXBElement<COCTMT230100UVAgency> getTerritory() {
-		return territory;
-	}
+    /**
+     * Ruft den Wert der territory-Eigenschaft ab.
+     *
+     * @return possible object is {@link JAXBElement
+     *         }{@code <}{@link COCTMT230100UVAgency }{@code >}
+     *
+     */
+    public JAXBElement<COCTMT230100UVAgency> getTerritory() {
+        return territory;
+    }
 
-	/**
-	 * Ruft den Wert der typeId-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link AllInfrastructureRootTypeId }
-	 *
-	 */
-	public AllInfrastructureRootTypeId getTypeId() {
-		return typeId;
-	}
+    /**
+     * Ruft den Wert der typeId-Eigenschaft ab.
+     *
+     * @return possible object is {@link AllInfrastructureRootTypeId }
+     *
+     */
+    public AllInfrastructureRootTypeId getTypeId() {
+        return typeId;
+    }
 
-	/**
-	 * Legt den Wert der classCode-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link RoleClassTerritoryOfAuthority }
-	 *
-	 */
-	public void setClassCode(RoleClassTerritoryOfAuthority value) {
-		this.classCode = value;
-	}
+    /**
+     * Legt den Wert der classCode-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link RoleClassTerritoryOfAuthority }
+     *
+     */
+    public void setClassCode(RoleClassTerritoryOfAuthority value) {
+        this.classCode = value;
+    }
 
-	/**
-	 * Legt den Wert der governingCountry-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link JAXBElement
-	 *            }{@code <}{@link COCTMT230100UVCountry }{@code >}
-	 *
-	 */
-	public void setGoverningCountry(JAXBElement<COCTMT230100UVCountry> value) {
-		this.governingCountry = value;
-	}
+    /**
+     * Legt den Wert der governingCountry-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link JAXBElement
+     *            }{@code <}{@link COCTMT230100UVCountry }{@code >}
+     *
+     */
+    public void setGoverningCountry(JAXBElement<COCTMT230100UVCountry> value) {
+        this.governingCountry = value;
+    }
 
-	/**
-	 * Legt den Wert der territory-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link JAXBElement
-	 *            }{@code <}{@link COCTMT230100UVAgency }{@code >}
-	 *
-	 */
-	public void setTerritory(JAXBElement<COCTMT230100UVAgency> value) {
-		this.territory = value;
-	}
+    /**
+     * Legt den Wert der territory-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link JAXBElement
+     *            }{@code <}{@link COCTMT230100UVAgency }{@code >}
+     *
+     */
+    public void setTerritory(JAXBElement<COCTMT230100UVAgency> value) {
+        this.territory = value;
+    }
 
-	/**
-	 * Legt den Wert der typeId-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link AllInfrastructureRootTypeId }
-	 *
-	 */
-	public void setTypeId(AllInfrastructureRootTypeId value) {
-		this.typeId = value;
-	}
+    /**
+     * Legt den Wert der typeId-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link AllInfrastructureRootTypeId }
+     *
+     */
+    public void setTypeId(AllInfrastructureRootTypeId value) {
+        this.typeId = value;
+    }
 
 }

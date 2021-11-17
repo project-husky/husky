@@ -49,14 +49,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ActClassControlAct {
 
-	CACT, ACTN, INFO, STC;
+    CACT, ACTN, INFO, STC;
 
-	public static ActClassControlAct fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ActClassControlAct fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

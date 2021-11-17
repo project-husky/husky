@@ -2,7 +2,7 @@ package org.husky.emed.cda.generated.artdecor;
 
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Organization;
+import org.husky.common.hl7cdar2.*;
 
 /**
  * cdach_other_OrganizationCompilationWithName
@@ -25,7 +25,7 @@ public class CdachOtherOrganizationCompilationWithName extends POCDMT000040Organ
      * Adds a hl7Addr
      * The organization's address.
      */
-    public void addHl7Addr(org.husky.emed.cda.generated.hl7cdar2.AD value) {
+    public void addHl7Addr(AD value) {
         getAddr().add(value);
     }
 
@@ -33,7 +33,7 @@ public class CdachOtherOrganizationCompilationWithName extends POCDMT000040Organ
      * Adds a hl7Id
      * The organization's id.
      */
-    public void addHl7Id(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void addHl7Id(II value) {
         getId().add(value);
     }
 
@@ -41,7 +41,7 @@ public class CdachOtherOrganizationCompilationWithName extends POCDMT000040Organ
      * Adds a hl7Name
      * The organization's name.
      */
-    public void addHl7Name(org.husky.emed.cda.generated.hl7cdar2.ON value) {
+    public void addHl7Name(ON value) {
         getName().add(value);
     }
 
@@ -49,7 +49,7 @@ public class CdachOtherOrganizationCompilationWithName extends POCDMT000040Organ
      * Adds a hl7Telecom
      * The organization's means of communication (phone, eMail, ...).
      */
-    public void addHl7Telecom(org.husky.emed.cda.generated.hl7cdar2.TEL value) {
+    public void addHl7Telecom(TEL value) {
         getTelecom().add(value);
     }
 

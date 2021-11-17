@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XActClassDocumentEntryOrganizer {
 
-	BATTERY, CLUSTER;
+    BATTERY, CLUSTER;
 
-	public static XActClassDocumentEntryOrganizer fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XActClassDocumentEntryOrganizer fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

@@ -2,8 +2,9 @@ package org.husky.emed.cda.generated.artdecor;
 
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Authorization;
+import org.husky.common.hl7cdar2.ObjectFactory;
+import org.husky.common.hl7cdar2.POCDMT000040Authorization;
+import org.husky.common.hl7cdar2.POCDMT000040Consent;
 
 /**
  * CDAauthorization
@@ -29,9 +30,9 @@ public class Cdaauthorization extends POCDMT000040Authorization {
      * @param classCode the desired fixed value for this argument.
      * @param moodCode the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Consent createHl7ConsentFixedValue(String classCode, String moodCode) {
+    private static POCDMT000040Consent createHl7ConsentFixedValue(String classCode, String moodCode) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Consent retVal = factory.createPOCDMT000040Consent();
+        POCDMT000040Consent retVal = factory.createPOCDMT000040Consent();
         retVal.getClassCode().add(classCode);
         retVal.getMoodCode().add(moodCode);
         return retVal;
@@ -40,14 +41,14 @@ public class Cdaauthorization extends POCDMT000040Authorization {
     /**
      * Gets the hl7Consent
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Consent getHl7Consent() {
+    public POCDMT000040Consent getHl7Consent() {
         return consent;
     }
 
     /**
      * Sets the hl7Consent
      */
-    public void setHl7Consent(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Consent value) {
+    public void setHl7Consent(POCDMT000040Consent value) {
         this.consent = value;
     }
 }

@@ -209,7 +209,8 @@ public class ResourceMatchBuilderImpl implements SimpleBuilder<ResourceMatchType
 		}
 
 		if (aInternalObject.getResourceAttributeDesignator() != null) {
-			var resourceAttrDesignator = new AttributeDesignatorTypeImplBuilder().buildObject();
+			var resourceAttrDesignator = new AttributeDesignatorTypeImplBuilder().buildObject(
+					new QName("urn:oasis:names:tc:xacml:2.0:policy:schema:os", "ResourceAttributeDesignator"));
 			resourceAttrDesignator.setAttributeId(aInternalObject.getResourceAttributeDesignator().getAttributeId());
 
 			if (aInternalObject.getResourceAttributeDesignator().getIssuer() != null) {

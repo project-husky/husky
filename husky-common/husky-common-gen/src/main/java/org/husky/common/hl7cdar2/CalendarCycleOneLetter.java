@@ -53,14 +53,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum CalendarCycleOneLetter {
 
-	D, H, J, M, N, S, W, Y;
+    D, H, J, M, N, S, W, Y;
 
-	public static CalendarCycleOneLetter fromValue(String v) {
-		return valueOf(v);
-	}
+    public static CalendarCycleOneLetter fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

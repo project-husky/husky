@@ -19,15 +19,15 @@ package org.husky.communication.mpi.impl.pdq;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.hl7.fhir.dstu3.model.ContactPoint;
-import org.hl7.fhir.dstu3.model.ContactPoint.ContactPointSystem;
-import org.hl7.fhir.dstu3.model.ContactPoint.ContactPointUse;
-import org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender;
+import org.hl7.fhir.r4.model.ContactPoint;
+import org.hl7.fhir.r4.model.ContactPoint.ContactPointSystem;
+import org.hl7.fhir.r4.model.ContactPoint.ContactPointUse;
+import org.hl7.fhir.r4.model.Enumerations.AdministrativeGender;
 import org.husky.communication.mpi.MpiQuery;
 import org.husky.communication.utils.PixPdqV3Utils;
 import org.husky.fhir.structures.gen.FhirCommon;
-import org.hl7.fhir.dstu3.model.HumanName;
-import org.hl7.fhir.dstu3.model.Identifier;
+import org.hl7.fhir.r4.model.HumanName;
+import org.hl7.fhir.r4.model.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -116,7 +116,7 @@ public class V3PdqQuery implements MpiQuery {
 	 * @return the query object
 	 */
 	@Override
-	public MpiQuery addPatientAddress(org.hl7.fhir.dstu3.model.Address address) {
+	public MpiQuery addPatientAddress(org.hl7.fhir.r4.model.Address address) {
 		if (address == null) {
 			log.error("Address not specified");
 			return this;

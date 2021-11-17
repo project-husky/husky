@@ -51,26 +51,26 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ActMoodPredicate {
 
-	@XmlEnumValue("EVN.CRT")
-	EVN_CRT("EVN.CRT"), GOL("GOL"), OPT("OPT"), PERM("PERM"), PERMRQ("PERMRQ");
+    @XmlEnumValue("EVN.CRT")
+    EVN_CRT("EVN.CRT"), GOL("GOL"), OPT("OPT"), PERM("PERM"), PERMRQ("PERMRQ");
 
-	public static ActMoodPredicate fromValue(String v) {
-		for (ActMoodPredicate c : ActMoodPredicate.values()) {
-			if (c.value.equals(v)) {
-				return c;
-			}
-		}
-		throw new IllegalArgumentException(v);
-	}
+    public static ActMoodPredicate fromValue(String v) {
+        for (ActMoodPredicate c : ActMoodPredicate.values()) {
+            if (c.value.equals(v)) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException(v);
+    }
 
-	private final String value;
+    private final String value;
 
-	ActMoodPredicate(String v) {
-		value = v;
-	}
+    ActMoodPredicate(String v) {
+        value = v;
+    }
 
-	public String value() {
-		return value;
-	}
+    public String value() {
+        return value;
+    }
 
 }

@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XActMoodDefEvn {
 
-	DEF, EVN;
+    DEF, EVN;
 
-	public static XActMoodDefEvn fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XActMoodDefEvn fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

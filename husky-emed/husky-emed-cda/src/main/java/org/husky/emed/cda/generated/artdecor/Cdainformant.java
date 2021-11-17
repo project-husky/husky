@@ -2,7 +2,9 @@ package org.husky.emed.cda.generated.artdecor;
 
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Informant12;
+import org.husky.common.hl7cdar2.POCDMT000040AssignedEntity;
+import org.husky.common.hl7cdar2.POCDMT000040Informant12;
+import org.husky.common.hl7cdar2.POCDMT000040RelatedEntity;
 
 /**
  * CDAinformant
@@ -24,28 +26,28 @@ public class Cdainformant extends POCDMT000040Informant12 {
     /**
      * Gets the hl7AssignedEntity
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040AssignedEntity getHl7AssignedEntity() {
+    public POCDMT000040AssignedEntity getHl7AssignedEntity() {
         return assignedEntity;
     }
 
     /**
      * Gets the hl7RelatedEntity
      */
-    public org.husky.emed.cda.generated.hl7cdar2.POCDMT000040RelatedEntity getHl7RelatedEntity() {
+    public POCDMT000040RelatedEntity getHl7RelatedEntity() {
         return relatedEntity;
     }
 
     /**
      * Sets the hl7AssignedEntity
      */
-    public void setHl7AssignedEntity(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040AssignedEntity value) {
+    public void setHl7AssignedEntity(POCDMT000040AssignedEntity value) {
         this.assignedEntity = value;
     }
 
     /**
      * Sets the hl7RelatedEntity
      */
-    public void setHl7RelatedEntity(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040RelatedEntity value) {
+    public void setHl7RelatedEntity(POCDMT000040RelatedEntity value) {
         this.relatedEntity = value;
     }
 }

@@ -53,14 +53,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XDocumentActMood {
 
-	INT, APT, ARQ, DEF, EVN, PRMS, PRP, RQO;
+    INT, APT, ARQ, DEF, EVN, PRMS, PRP, RQO;
 
-	public static XDocumentActMood fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XDocumentActMood fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

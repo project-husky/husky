@@ -50,14 +50,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum SetOperator {
 
-	A, E, H, I, P;
+    A, E, H, I, P;
 
-	public static SetOperator fromValue(String v) {
-		return valueOf(v);
-	}
+    public static SetOperator fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

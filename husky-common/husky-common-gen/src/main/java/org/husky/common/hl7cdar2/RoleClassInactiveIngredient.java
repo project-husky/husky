@@ -50,14 +50,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum RoleClassInactiveIngredient {
 
-	IACT, COLR, FLVR, PRSV, STBL;
+    IACT, COLR, FLVR, PRSV, STBL;
 
-	public static RoleClassInactiveIngredient fromValue(String v) {
-		return valueOf(v);
-	}
+    public static RoleClassInactiveIngredient fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

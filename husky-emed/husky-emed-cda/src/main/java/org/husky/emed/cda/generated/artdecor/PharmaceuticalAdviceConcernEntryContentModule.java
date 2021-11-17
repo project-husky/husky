@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
-import org.husky.emed.cda.generated.hl7cdar2.ObjectFactory;
-import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Act;
+import org.husky.common.hl7cdar2.*;
+import org.husky.common.hl7cdar2.ObjectFactory;
+import org.husky.common.hl7cdar2.POCDMT000040Act;
 
 /**
  * PharmaceuticalAdviceConcernEntryContentModule
@@ -21,8 +22,8 @@ import org.husky.emed.cda.generated.hl7cdar2.POCDMT000040Act;
 public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040Act {
 
     public PharmaceuticalAdviceConcernEntryContentModule() {
-        super.setClassCode(org.husky.emed.cda.generated.hl7cdar2.XActClassDocumentEntryAct.ACT);
-        super.setMoodCode(org.husky.emed.cda.generated.hl7cdar2.XDocumentActMood.EVN);
+        super.setClassCode(XActClassDocumentEntryAct.ACT);
+        super.setMoodCode(XDocumentActMood.EVN);
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.81"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.27"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.5.1"));
@@ -39,9 +40,9 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
      *
      * @param nullFlavor the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.CD createHl7CodeFixedValue(String nullFlavor) {
+    private static CD createHl7CodeFixedValue(String nullFlavor) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.CD retVal = factory.createCD();
+        CD retVal = factory.createCD();
         retVal.nullFlavor = new ArrayList<String>();
         retVal.nullFlavor.add(nullFlavor);
         return retVal;
@@ -53,10 +54,10 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
      * @param typeCode the desired fixed value for this argument.
      * @param inversionInd the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
+    private static POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship retVal = factory.createPOCDMT000040EntryRelationship();
-        retVal.setTypeCode(org.husky.emed.cda.generated.hl7cdar2.XActRelationshipEntryRelationship.fromValue(typeCode));
+        POCDMT000040EntryRelationship retVal = factory.createPOCDMT000040EntryRelationship();
+        retVal.setTypeCode(XActRelationshipEntryRelationship.fromValue(typeCode));
         if (inversionInd != null) {
             retVal.setInversionInd(Boolean.parseBoolean(inversionInd));
         }
@@ -68,9 +69,9 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
      *
      * @param code the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.CS createHl7StatusCodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+    private static CS createHl7StatusCodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.CS retVal = factory.createCS();
+        CS retVal = factory.createCS();
         retVal.setCode(code);
         retVal.setCodeSystem(codeSystem);
         retVal.setCodeSystemName(codeSystemName);
@@ -83,9 +84,9 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
      *
      * @param root the desired fixed value for this argument.
      */
-    private static org.husky.emed.cda.generated.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+    private static II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        org.husky.emed.cda.generated.hl7cdar2.II retVal = factory.createII();
+        II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -94,7 +95,7 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
      * Gets the hl7Code
      * An optional narrative description of the concern
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CD getHl7Code() {
+    public CD getHl7Code() {
         return code;
     }
 
@@ -102,14 +103,14 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
      * Gets the hl7EffectiveTime
      * Problems determined
      */
-    public org.husky.emed.cda.generated.hl7cdar2.IVLTS getHl7EffectiveTime() {
+    public IVLTS getHl7EffectiveTime() {
         return effectiveTime;
     }
 
     /**
      * Gets the hl7EntryRelationship
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship> getHl7EntryRelationship() {
+    public List<POCDMT000040EntryRelationship> getHl7EntryRelationship() {
         return entryRelationship;
     }
 
@@ -117,7 +118,7 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
      * Gets the hl7Id
      * Pharmaceutical Advice Concern ID
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7Id() {
+    public List<II> getHl7Id() {
         return id;
     }
 
@@ -125,7 +126,7 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
      * Gets the hl7StatusCode
      * Status Code
      */
-    public org.husky.emed.cda.generated.hl7cdar2.CS getHl7StatusCode() {
+    public CS getHl7StatusCode() {
         return statusCode;
     }
 
@@ -133,7 +134,7 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
      * Gets the hl7TemplateId
      * CH-PHARM Pharmaceutical Advice Concern Entry TemplateID
      */
-    public List<org.husky.emed.cda.generated.hl7cdar2.II> getHl7TemplateId() {
+    public List<II> getHl7TemplateId() {
         return templateId;
     }
 
@@ -141,7 +142,7 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
      * Gets the hl7Text
      * It shall contain both the narrative text content and a reference to the human readable part of the item. This human readable part may contain a simple text to redirect the reader to the PDF document (e.g. "See PDF version included").<br clear="none"/>There shall be a single non-blank text node (i.e. the text shall be completely before or after the reference, see examples). The text shall be raw (i.e. no markup shall be used).
      */
-    public org.husky.emed.cda.generated.hl7cdar2.ED getHl7Text() {
+    public ED getHl7Text() {
         return text;
     }
 
@@ -149,7 +150,7 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship, filled by: "REFR", "false"
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrFalse() {
+    public static POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrFalse() {
         return createHl7EntryRelationshipFixedValue("REFR",
                                                     "false");
     }
@@ -158,7 +159,7 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship, filled by: "SUBJ", null
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjNull() {
+    public static POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjNull() {
         return createHl7EntryRelationshipFixedValue("SUBJ",
                                                     null);
     }
@@ -167,7 +168,7 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
      * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship, filled by: "SUBJ", "true"
      * @return the predefined element.
      */
-    public static org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjTrue() {
+    public static POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjTrue() {
         return createHl7EntryRelationshipFixedValue("SUBJ",
                                                     "true");
     }
@@ -176,7 +177,7 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
      * Sets the hl7Code
      * An optional narrative description of the concern
      */
-    public void setHl7Code(org.husky.emed.cda.generated.hl7cdar2.CD value) {
+    public void setHl7Code(CD value) {
         this.code = value;
     }
 
@@ -184,14 +185,14 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
      * Sets the hl7EffectiveTime
      * Problems determined
      */
-    public void setHl7EffectiveTime(org.husky.emed.cda.generated.hl7cdar2.IVLTS value) {
+    public void setHl7EffectiveTime(IVLTS value) {
         this.effectiveTime = value;
     }
 
     /**
      * Sets the hl7EntryRelationship
      */
-    public void setHl7EntryRelationship(org.husky.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship value) {
+    public void setHl7EntryRelationship(POCDMT000040EntryRelationship value) {
         getEntryRelationship().clear();
         getEntryRelationship().add(value);
     }
@@ -200,7 +201,7 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
      * Sets the hl7Id
      * Pharmaceutical Advice Concern ID
      */
-    public void setHl7Id(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7Id(II value) {
         getId().clear();
         getId().add(value);
     }
@@ -209,7 +210,7 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
      * Sets the hl7StatusCode
      * Status Code
      */
-    public void setHl7StatusCode(org.husky.emed.cda.generated.hl7cdar2.CS value) {
+    public void setHl7StatusCode(CS value) {
         this.statusCode = value;
     }
 
@@ -217,7 +218,7 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
      * Sets the hl7TemplateId
      * CH-PHARM Pharmaceutical Advice Concern Entry TemplateID
      */
-    public void setHl7TemplateId(org.husky.emed.cda.generated.hl7cdar2.II value) {
+    public void setHl7TemplateId(II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
@@ -226,7 +227,7 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
      * Sets the hl7Text
      * It shall contain both the narrative text content and a reference to the human readable part of the item. This human readable part may contain a simple text to redirect the reader to the PDF document (e.g. "See PDF version included").<br clear="none"/>There shall be a single non-blank text node (i.e. the text shall be completely before or after the reference, see examples). The text shall be raw (i.e. no markup shall be used).
      */
-    public void setHl7Text(org.husky.emed.cda.generated.hl7cdar2.ED value) {
+    public void setHl7Text(ED value) {
         this.text = value;
     }
 }

@@ -23,9 +23,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.UUID;
 
-import org.hl7.fhir.dstu3.model.CodeableConcept;
-import org.hl7.fhir.dstu3.model.Coding;
-import org.hl7.fhir.dstu3.model.Identifier;
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.Identifier;
 import org.husky.common.model.Code;
 import org.husky.common.model.Identificator;
 import org.husky.fhir.structures.gen.FhirCommon;
@@ -67,7 +67,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.fhir.structures.gen.FhirCommon#addDocManifestContent(org.hl7.fhir.dstu3.model.DocumentManifest, org.hl7.fhir.dstu3.model.Resource)}.
+	 * {@link org.husky.fhir.structures.gen.FhirCommon#addDocManifestContent(org.hl7.fhir.r4.model.DocumentManifest, org.hl7.fhir.r4.model.Resource)}.
 	 */
 	@Test
 	@Disabled
@@ -188,7 +188,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.fhir.structures.gen.FhirCommon#createObservation(org.hl7.fhir.dstu3.model.CodeableConcept)}.
+	 * {@link org.husky.fhir.structures.gen.FhirCommon#createObservation(org.hl7.fhir.r4.model.CodeableConcept)}.
 	 */
 	@Test
 	@Disabled
@@ -210,7 +210,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.fhir.structures.gen.FhirCommon#fhirAddressToEhcAddress(org.hl7.fhir.dstu3.model.Address)}.
+	 * {@link org.husky.fhir.structures.gen.FhirCommon#fhirAddressToEhcAddress(org.hl7.fhir.r4.model.Address)}.
 	 */
 	@Test
 	@Disabled
@@ -220,7 +220,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.fhir.structures.gen.FhirCommon#fhirCodeToEhcCode(org.hl7.fhir.dstu3.model.CodeableConcept)}.
+	 * {@link org.husky.fhir.structures.gen.FhirCommon#fhirCodeToEhcCode(org.hl7.fhir.r4.model.CodeableConcept)}.
 	 */
 	@Test
 	@Disabled
@@ -230,7 +230,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.fhir.structures.gen.FhirCommon#fhirIdentifierToEhcIdentificator(org.hl7.fhir.dstu3.model.Identifier)}.
+	 * {@link org.husky.fhir.structures.gen.FhirCommon#fhirIdentifierToEhcIdentificator(org.hl7.fhir.r4.model.Identifier)}.
 	 */
 	@Test
 	@Disabled
@@ -240,7 +240,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.fhir.structures.gen.FhirCommon#fhirNameToEhcName(org.hl7.fhir.dstu3.model.HumanName)}.
+	 * {@link org.husky.fhir.structures.gen.FhirCommon#fhirNameToEhcName(org.hl7.fhir.r4.model.HumanName)}.
 	 */
 	@Test
 	@Disabled
@@ -260,7 +260,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.fhir.structures.gen.FhirCommon#getAuthor(org.hl7.fhir.dstu3.model.Organization)}.
+	 * {@link org.husky.fhir.structures.gen.FhirCommon#getAuthor(org.hl7.fhir.r4.model.Organization)}.
 	 */
 	@Test
 	@Disabled
@@ -270,7 +270,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.fhir.structures.gen.FhirCommon#getAuthor(org.hl7.fhir.dstu3.model.Person)}.
+	 * {@link org.husky.fhir.structures.gen.FhirCommon#getAuthor(org.hl7.fhir.r4.model.Person)}.
 	 */
 	@Test
 	@Disabled
@@ -280,7 +280,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.fhir.structures.gen.FhirCommon#getAuthor(org.hl7.fhir.dstu3.model.Practitioner)}.
+	 * {@link org.husky.fhir.structures.gen.FhirCommon#getAuthor(org.hl7.fhir.r4.model.Practitioner)}.
 	 */
 	@Test
 	@Disabled
@@ -290,7 +290,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.fhir.structures.gen.FhirCommon#getAuthor(org.hl7.fhir.dstu3.model.Reference)}.
+	 * {@link org.husky.fhir.structures.gen.FhirCommon#getAuthor(org.hl7.fhir.r4.model.Reference)}.
 	 */
 	@Test
 	@Disabled
@@ -310,7 +310,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.fhir.structures.gen.FhirCommon#getDocumentFilepath(org.hl7.fhir.dstu3.model.DocumentReference)}.
+	 * {@link org.husky.fhir.structures.gen.FhirCommon#getDocumentFilepath(org.hl7.fhir.r4.model.DocumentReference)}.
 	 */
 	@Test
 	@Disabled
@@ -320,7 +320,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.fhir.structures.gen.FhirCommon#getFormatCode(org.hl7.fhir.dstu3.model.DocumentReference)}.
+	 * {@link org.husky.fhir.structures.gen.FhirCommon#getFormatCode(org.hl7.fhir.r4.model.DocumentReference)}.
 	 */
 	@Test
 	@Disabled
@@ -330,7 +330,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.fhir.structures.gen.FhirCommon#getMetadataLanguage(org.hl7.fhir.dstu3.model.DocumentReference)}.
+	 * {@link org.husky.fhir.structures.gen.FhirCommon#getMetadataLanguage(org.hl7.fhir.r4.model.DocumentReference)}.
 	 */
 	@Test
 	@Disabled
@@ -340,7 +340,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.fhir.structures.gen.FhirCommon#getMimeType(org.hl7.fhir.dstu3.model.DocumentReference)}.
+	 * {@link org.husky.fhir.structures.gen.FhirCommon#getMimeType(org.hl7.fhir.r4.model.DocumentReference)}.
 	 */
 	@Test
 	@Disabled
@@ -360,7 +360,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.fhir.structures.gen.FhirCommon#getOrganization(org.hl7.fhir.dstu3.model.Organization)}.
+	 * {@link org.husky.fhir.structures.gen.FhirCommon#getOrganization(org.hl7.fhir.r4.model.Organization)}.
 	 */
 	@Test
 	@Disabled
@@ -370,7 +370,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.fhir.structures.gen.FhirCommon#getOrganization(org.hl7.fhir.dstu3.model.Reference)}.
+	 * {@link org.husky.fhir.structures.gen.FhirCommon#getOrganization(org.hl7.fhir.r4.model.Reference)}.
 	 */
 	@Test
 	@Disabled
@@ -380,7 +380,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.fhir.structures.gen.FhirCommon#getPatient(org.hl7.fhir.dstu3.model.Bundle)}.
+	 * {@link org.husky.fhir.structures.gen.FhirCommon#getPatient(org.hl7.fhir.r4.model.Bundle)}.
 	 */
 	@Test
 	@Disabled
@@ -390,7 +390,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.fhir.structures.gen.FhirCommon#getPatient(org.hl7.fhir.dstu3.model.DocumentManifest)}.
+	 * {@link org.husky.fhir.structures.gen.FhirCommon#getPatient(org.hl7.fhir.r4.model.DocumentManifest)}.
 	 */
 	@Test
 	@Disabled
@@ -410,7 +410,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.fhir.structures.gen.FhirCommon#getPatient(org.hl7.fhir.dstu3.model.Patient)}.
+	 * {@link org.husky.fhir.structures.gen.FhirCommon#getPatient(org.hl7.fhir.r4.model.Patient)}.
 	 */
 	@Test
 	@Disabled
@@ -420,7 +420,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.fhir.structures.gen.FhirCommon#getPatient(org.hl7.fhir.dstu3.model.Reference)}.
+	 * {@link org.husky.fhir.structures.gen.FhirCommon#getPatient(org.hl7.fhir.r4.model.Reference)}.
 	 */
 	@Test
 	@Disabled
@@ -430,7 +430,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.fhir.structures.gen.FhirCommon#getPracticeSettingCode(org.hl7.fhir.dstu3.model.DocumentReference)}.
+	 * {@link org.husky.fhir.structures.gen.FhirCommon#getPracticeSettingCode(org.hl7.fhir.r4.model.DocumentReference)}.
 	 */
 	@Test
 	@Disabled

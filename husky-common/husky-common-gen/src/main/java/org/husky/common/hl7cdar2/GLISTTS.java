@@ -59,97 +59,97 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "GLIST_TS", propOrder = { "head", "increment" })
 public class GLISTTS extends ANY {
 
-	@XmlElement(required = true)
-	protected TS head;
-	@XmlElement(required = true)
-	protected PQ increment;
-	@XmlAttribute(name = "period")
-	protected BigInteger period;
-	@XmlAttribute(name = "denominator")
-	protected BigInteger denominator;
+    @XmlElement(required = true)
+    protected TS head;
+    @XmlElement(required = true)
+    protected PQ increment;
+    @XmlAttribute(name = "period")
+    protected BigInteger period;
+    @XmlAttribute(name = "denominator")
+    protected BigInteger denominator;
 
-	/**
-	 * Ruft den Wert der denominator-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link BigInteger }
-	 *
-	 */
-	public BigInteger getDenominator() {
-		return denominator;
-	}
+    /**
+     * Ruft den Wert der denominator-Eigenschaft ab.
+     *
+     * @return possible object is {@link BigInteger }
+     *
+     */
+    public BigInteger getDenominator() {
+        return denominator;
+    }
 
-	/**
-	 * Ruft den Wert der head-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link TS }
-	 *
-	 */
-	public TS getHead() {
-		return head;
-	}
+    /**
+     * Ruft den Wert der head-Eigenschaft ab.
+     *
+     * @return possible object is {@link TS }
+     *
+     */
+    public TS getHead() {
+        return head;
+    }
 
-	/**
-	 * Ruft den Wert der increment-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link PQ }
-	 *
-	 */
-	public PQ getIncrement() {
-		return increment;
-	}
+    /**
+     * Ruft den Wert der increment-Eigenschaft ab.
+     *
+     * @return possible object is {@link PQ }
+     *
+     */
+    public PQ getIncrement() {
+        return increment;
+    }
 
-	/**
-	 * Ruft den Wert der period-Eigenschaft ab.
-	 *
-	 * @return possible object is {@link BigInteger }
-	 *
-	 */
-	public BigInteger getPeriod() {
-		return period;
-	}
+    /**
+     * Ruft den Wert der period-Eigenschaft ab.
+     *
+     * @return possible object is {@link BigInteger }
+     *
+     */
+    public BigInteger getPeriod() {
+        return period;
+    }
 
-	/**
-	 * Legt den Wert der denominator-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link BigInteger }
-	 *
-	 */
-	public void setDenominator(BigInteger value) {
-		this.denominator = value;
-	}
+    /**
+     * Legt den Wert der denominator-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link BigInteger }
+     *
+     */
+    public void setDenominator(BigInteger value) {
+        this.denominator = value;
+    }
 
-	/**
-	 * Legt den Wert der head-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link TS }
-	 *
-	 */
-	public void setHead(TS value) {
-		this.head = value;
-	}
+    /**
+     * Legt den Wert der head-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link TS }
+     *
+     */
+    public void setHead(TS value) {
+        this.head = value;
+    }
 
-	/**
-	 * Legt den Wert der increment-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link PQ }
-	 *
-	 */
-	public void setIncrement(PQ value) {
-		this.increment = value;
-	}
+    /**
+     * Legt den Wert der increment-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link PQ }
+     *
+     */
+    public void setIncrement(PQ value) {
+        this.increment = value;
+    }
 
-	/**
-	 * Legt den Wert der period-Eigenschaft fest.
-	 *
-	 * @param value
-	 *            allowed object is {@link BigInteger }
-	 *
-	 */
-	public void setPeriod(BigInteger value) {
-		this.period = value;
-	}
+    /**
+     * Legt den Wert der period-Eigenschaft fest.
+     *
+     * @param value
+     *            allowed object is {@link BigInteger }
+     *
+     */
+    public void setPeriod(BigInteger value) {
+        this.period = value;
+    }
 
 }

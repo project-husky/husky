@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ContextControlAdditive {
 
-	AN, AP;
+    AN, AP;
 
-	public static ContextControlAdditive fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ContextControlAdditive fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

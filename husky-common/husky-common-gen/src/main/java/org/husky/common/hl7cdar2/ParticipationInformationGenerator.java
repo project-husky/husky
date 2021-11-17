@@ -49,14 +49,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ParticipationInformationGenerator {
 
-	AUT, ENT, INF, WIT;
+    AUT, ENT, INF, WIT;
 
-	public static ParticipationInformationGenerator fromValue(String v) {
-		return valueOf(v);
-	}
+    public static ParticipationInformationGenerator fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

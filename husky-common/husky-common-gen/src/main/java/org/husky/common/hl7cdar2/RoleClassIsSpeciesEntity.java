@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum RoleClassIsSpeciesEntity {
 
-	GEN, GRIC;
+    GEN, GRIC;
 
-	public static RoleClassIsSpeciesEntity fromValue(String v) {
-		return valueOf(v);
-	}
+    public static RoleClassIsSpeciesEntity fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }

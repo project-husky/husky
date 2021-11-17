@@ -31,7 +31,6 @@ import java.util.regex.Pattern;
 
 import javax.xml.XMLConstants;
 import javax.xml.namespace.NamespaceContext;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.TransformerException;
@@ -58,6 +57,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContexts;
 import org.apache.http.util.EntityUtils;
+import org.husky.common.utils.xml.XmlFactories;
 import org.husky.xua.communication.config.SoapClientConfig;
 import org.husky.xua.communication.config.SoapClientConfig.SoapVersion;
 import org.husky.xua.communication.soap.impl.WsaHeaderValue;
@@ -65,12 +65,14 @@ import org.husky.xua.exceptions.ClientSendException;
 import org.husky.xua.exceptions.SoapException;
 import org.husky.xua.pki.PkiManager;
 import org.husky.xua.pki.impl.PkiManagerImpl;
+import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
+
+import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
 /**
  * <!-- @formatter:off -->
@@ -99,9 +101,7 @@ public abstract class AbstractSoapClient<T> {
 
 	protected Element createEnvelope() throws ParserConfigurationException {
 		// create xml dokument
-		final var docFactory = DocumentBuilderFactory.newInstance();
-		docFactory.setNamespaceAware(true);
-		final var docBuilder = docFactory.newDocumentBuilder();
+		final var docBuilder = XmlFactories.newSafeDocumentBuilder();
 		final var soapDoc = docBuilder.newDocument();
 
 		// create soap envelope
@@ -294,13 +294,12 @@ public abstract class AbstractSoapClient<T> {
 	}
 
 	protected Element getResponseElement(String content, String nameSpaceUri, String localName)
-			throws ParserConfigurationException, UnsupportedOperationException, SAXException,
-			IOException, XPathExpressionException {
+			throws UnsupportedOperationException, XPathExpressionException, XMLParserException {
 
-		final var docFactory = DocumentBuilderFactory.newInstance();
-		docFactory.setNamespaceAware(true);
-		docFactory.setAttribute("http://xml.org/sax/features/external-general-entities", false);
-		final var docBuilder = docFactory.newDocumentBuilder();
+		// Use the parser from the OpenSAML ParserPool because its implementation may be
+		// different than
+		// XmlFactories.newSafeDocumentBuilder()
+		final var docBuilder = XMLObjectProviderRegistrySupport.getParserPool();
 		final var soapDocument = docBuilder
 				.parse(new ByteArrayInputStream(content.getBytes()));
 
@@ -393,19 +392,17 @@ public abstract class AbstractSoapClient<T> {
 			throw new ClientSendException(
 					"Error occurred. No detailed error information available");
 		} catch (UnsupportedOperationException | TransformerFactoryConfigurationError
-				| ParseException | IOException | ParserConfigurationException | SAXException
-				| XPathExpressionException e) {
+				| ParseException | XPathExpressionException | XMLParserException e) {
 			throw new ClientSendException(e);
 		}
 
 	}
 
-	private void paserSoapFault(String retVal) throws ParserConfigurationException, SAXException,
-			IOException, XPathExpressionException, SoapException {
-		final var docFactory = DocumentBuilderFactory.newInstance();
-		docFactory.setNamespaceAware(true);
-		docFactory.setAttribute("http://xml.org/sax/features/external-general-entities", false);
-		final var docBuilder = docFactory.newDocumentBuilder();
+	private void paserSoapFault(String retVal) throws XPathExpressionException, SoapException, XMLParserException {
+		// Use the parser from the OpenSAML ParserPool because its implementation may be
+		// different than
+		// XmlFactories.newSafeDocumentBuilder()
+		final var docBuilder = XMLObjectProviderRegistrySupport.getParserPool();
 		final var document = docBuilder.parse(new ByteArrayInputStream(retVal.getBytes()));
 
 		String prefix = document.getDocumentElement().getPrefix();

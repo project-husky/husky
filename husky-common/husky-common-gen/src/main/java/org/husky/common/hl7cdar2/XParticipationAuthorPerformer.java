@@ -47,14 +47,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum XParticipationAuthorPerformer {
 
-	PRF, AUT;
+    PRF, AUT;
 
-	public static XParticipationAuthorPerformer fromValue(String v) {
-		return valueOf(v);
-	}
+    public static XParticipationAuthorPerformer fromValue(String v) {
+        return valueOf(v);
+    }
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
 }
