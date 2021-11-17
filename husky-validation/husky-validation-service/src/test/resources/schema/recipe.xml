@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<list
+  xmlns="http://myrecipes.org/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://myrecipes.org/ recipe.xsd">
+  <recipe>
+    <meta>
+      <author></author>
+      <date></date>
+      <version></version>
+    </meta>
+    <recipe_name></recipe_name>
+    <meal></meal>
+    <ingredients>
+      <item></item>
+    </ingredients>
+    <directions>
+    </directions>
+  </recipe>
+</list>

@@ -15,6 +15,5 @@
 
 	<modules>
 		<module>husky-validation-service</module>
-		<module>husky-validation-report</module>
 	</modules>
 </project>
