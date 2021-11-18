@@ -136,9 +136,6 @@ public class SimplePpqClientTest {
 		assertEquals("urn:e-health-suisse:2015:error:not-holder-of-patient-policies",
 				response.getWrappedObject().getStatus().getStatusCode().getValue());
 
-		assertEquals("The PolicySet with the given Patient ID does not exist",
-				response.getWrappedObject().getStatus().getStatusMessage().getValue());
-
 		assertNotNull(response.getWrappedObject().getAssertions());
 	}
 

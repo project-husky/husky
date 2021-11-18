@@ -2,7 +2,6 @@ package org.husky.communication.ch.ppq.integration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -306,7 +305,7 @@ public class SimplePpfClientTest {
 		PrivacyPolicyFeedResponse response = client.send(patAssertion, ppFeedRequest);
 
 		assertTrue(response.getExceptions().isEmpty());
-		assertNotEquals("urn:e-health-suisse:2015:response-status:failure", response.getStatus());
+		assertEquals("urn:e-health-suisse:2015:response-status:success", response.getStatus());
 	}
 
 	@Test

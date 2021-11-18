@@ -6,44 +6,28 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
 import org.husky.common.communication.AffinityDomain;
+import org.husky.common.communication.AtnaConfig.AtnaConfigMode;
 import org.husky.common.communication.Destination;
 import org.husky.common.communication.DocumentMetadata;
 import org.husky.common.communication.SubmissionSetMetadata;
-import org.husky.common.communication.AtnaConfig.AtnaConfigMode;
 import org.husky.common.enums.DocumentDescriptor;
 import org.husky.common.model.Identificator;
 import org.husky.communication.ConvenienceCommunication;
 import org.husky.communication.DocumentRequest;
-import org.husky.communication.testhelper.PurposeOfUse;
 import org.husky.communication.testhelper.TestApplication;
 import org.husky.communication.testhelper.XdsTestUtils;
 import org.husky.communication.xd.storedquery.GetDocumentsQuery;
-import org.husky.xua.communication.clients.XuaClient;
-import org.husky.xua.communication.clients.impl.ClientFactory;
-import org.husky.xua.communication.config.XuaClientConfig;
-import org.husky.xua.communication.config.impl.XuaClientConfigBuilderImpl;
-import org.husky.xua.communication.xua.RequestType;
-import org.husky.xua.communication.xua.TokenType;
-import org.husky.xua.communication.xua.XUserAssertionResponse;
-import org.husky.xua.communication.xua.impl.AppliesToBuilderImpl;
-import org.husky.xua.communication.xua.impl.XUserAssertionRequestBuilderImpl;
 import org.husky.xua.core.SecurityHeaderElement;
 import org.husky.xua.deserialization.impl.AssertionDeserializerImpl;
 import org.husky.xua.exceptions.DeserializeException;
-import org.husky.xua.hl7v3.impl.PurposeOfUseBuilder;
-import org.husky.xua.hl7v3.impl.RoleBuilder;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openehealth.ipf.commons.audit.AuditContext;
@@ -55,8 +39,6 @@ import org.openehealth.ipf.commons.ihe.xds.core.responses.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -102,62 +84,6 @@ public class ConvenienceCommunicationAtnaAuditTest extends XdsTestUtils {
 			} catch (DeserializeException e) {
 				e.printStackTrace();
 			}
-		}
-	}
-
-	/**
-	 * Method implementing
-	 *
-	 * @throws java.lang.Exception
-	 */
-	@BeforeEach
-	public void setUp() throws Exception {
-		var app = new SpringApplication(TestApplication.class);
-		app.setWebApplicationType(WebApplicationType.NONE);
-		app.run();
-
-		affinityDomain = new AffinityDomain();
-		final Destination dest = new Destination();
-
-		try {
-			dest.setUri(new URI(
-					"http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_init_gw_testing/rep/xcq"));
-		} catch (final URISyntaxException e) {
-			e.printStackTrace();
-		}
-		dest.setSenderApplicationOid(senderApplicationOid);
-		dest.setReceiverApplicationOid(applicationName);
-		dest.setReceiverFacilityOid(facilityName);
-		affinityDomain.setRegistryDestination(dest);
-		affinityDomain.setRepositoryDestination(dest);
-
-		// query HCP assertion
-		XuaClientConfig xuaClientConfig = new XuaClientConfigBuilderImpl().clientKeyStore(clientKeyStore)
-				.clientKeyStorePassword(clientKeyStorePass).clientKeyStoreType("jks").url(urlToXua).create();
-
-		XuaClient client = ClientFactory.getXuaClient(xuaClientConfig);
-
-		try (InputStream is = new FileInputStream(new File("src/test/resources/ch-ppq/Assertion.xml"))) {
-
-			var assertion = new AssertionDeserializerImpl().fromXmlByteArray(IOUtils.toByteArray(is));
-
-			var purposeOfUse = new PurposeOfUseBuilder().code(PurposeOfUse.NORMAL_ACCESS.getCodeValue())
-					.codeSystem("2.16.756.5.30.1.127.3.10.6").displayName(PurposeOfUse.NORMAL_ACCESS.getDisplayName())
-					.buildObject();
-			var role = new RoleBuilder().code("HCP").codeSystem("2.16.756.5.30.1.127.3.10.6")
-					.displayName("Behandelnde(r)").buildObject();
-
-			var assertionRequest = new XUserAssertionRequestBuilderImpl().requestType(RequestType.WST_ISSUE)
-					.tokenType(TokenType.OASIS_WSS_SAML_PROFILE_11_SAMLV20)
-					.appliesTo(new AppliesToBuilderImpl().address("https://localhost:17001/services/iti18").create())
-					.purposeOfUse(purposeOfUse).subjectRole(role)
-					.resourceId("761337610411265304^^^SPID&2.16.756.5.30.1.127.3.10.3&ISO").create();
-
-			List<XUserAssertionResponse> response = client.send(assertion, assertionRequest);
-
-			securityHeaderElement = response.get(0).getAssertion();
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 
