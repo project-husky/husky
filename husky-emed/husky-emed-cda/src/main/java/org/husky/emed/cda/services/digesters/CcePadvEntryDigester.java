@@ -8,7 +8,6 @@ import java.util.stream.Stream;
 
 import org.husky.common.hl7cdar2.CD;
 import org.husky.common.hl7cdar2.ED;
-import org.husky.common.hl7cdar2.II;
 import org.husky.common.hl7cdar2.POCDMT000040Act;
 import org.husky.common.hl7cdar2.POCDMT000040Author;
 import org.husky.common.hl7cdar2.POCDMT000040EntryRelationship;
@@ -48,10 +47,6 @@ public class CcePadvEntryDigester {
      * The registry of {@link EmedEntryDigest}.
      */
     private final EmedEntryDigestService emedEntryService;
-
-	public static final II REFERENCE_TO_MTP = new II();
-	public static final II REFERENCE_TO_PRE = new II();
-	public static final II REFERENCE_TO_DIS = new II();
 
     /**
      * Constructor.

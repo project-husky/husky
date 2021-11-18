@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.husky.emed.cda.models.common.RenewalInterval;
 import org.husky.emed.cda.enums.EmedEntryType;
 import org.husky.emed.cda.generated.artdecor.enums.ActSubstanceAdminSubstitutionCode;
 import org.husky.emed.cda.generated.artdecor.enums.RouteOfAdministrationEdqm;
@@ -55,14 +56,33 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
     private RouteOfAdministrationEdqm routeOfAdministration;
 
     /**
-     * The inclusive instant at which the item shall start.
+     * The inclusive instant at which the prescription shall start.
      */
-    private Instant serviceStartTime;
+    private Instant prescriptionStartTime;
 
     /**
-     * The exclusive instant at which the item shall stop.
+     * The inclusive instant at which the prescription shall stop.
      */
-    private Instant serviceStopTime;
+    private Instant prescriptionStopTime;
+
+    /**
+     * The inclusive instant at which the initial treatment shall start or {@code null} if it's unknown.
+     */
+    @Nullable
+    private Instant initialTreatmentStartTime;
+
+    /**
+     * The inclusive instant at which the initial treatment shall stop or {@code null} if it's unknown.
+     */
+    @Nullable
+    private Instant initialTreatmentStopTime;
+
+    /**
+     * The renewal period or {@code null}. If it's not specified, the renewal period is the prescription validity
+     * period. If the lower bound is not specified, the period starts at the first dispense.
+     */
+    @Nullable
+    private RenewalInterval renewalPeriod;
 
     /**
      * The reference to the MTP entry, if any.
@@ -112,9 +132,14 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
      *                                      {@code null} if unlimited repeats/refills are authorized.
      * @param routeOfAdministration         The medication route of administration or {@code null} if it's not
      *                                      specified.
-     * @param serviceStartTime              The inclusive instant at which the item shall start.
-     * @param serviceStopTime               The exclusive instant at which the item shall stop or {@code null} if it's
-     *                                      unknown.
+     * @param prescriptionStartTime         The inclusive instant at which the prescription shall start.
+     * @param prescriptionStopTime          The inclusive instant at which the prescription shall stop or {@code null}
+     *                                      if it's unknown.
+     * @param initialTreatmentStartTime     The inclusive instant at which the initial treatment shall start or {@code
+     *                                      null} if it's unknown.
+     * @param initialTreatmentStopTime      The inclusive instant at which the initial treatment shall stop or {@code
+     *                                      null} if it's unknown.
+     * @param renewalPeriod                 The renewal period or {@code null} if it's not specified.
      * @param mtpReference                  The reference to the MTP entry, if any.
      * @param provisional                   Whether this prescription item is provisional or not.
      * @param substitutionPermissions       The list of substance substitution permissions or {@code null} if it's not
@@ -136,8 +161,11 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
                               final MedicationProduct product,
                               @Nullable final Integer repeatNumber,
                               @Nullable final RouteOfAdministrationEdqm routeOfAdministration,
-                              final Instant serviceStartTime,
-                              final Instant serviceStopTime,
+                              final Instant prescriptionStartTime,
+                              final Instant prescriptionStopTime,
+                              @Nullable final Instant initialTreatmentStartTime,
+                              @Nullable final Instant initialTreatmentStopTime,
+                              @Nullable final RenewalInterval renewalPeriod,
                               @Nullable final EmedReference mtpReference,
                               final boolean provisional,
                               @Nullable final List<@NonNull ActSubstanceAdminSubstitutionCode> substitutionPermissions,
@@ -150,8 +178,11 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
         this.product = Objects.requireNonNull(product);
         this.routeOfAdministration = routeOfAdministration;
         this.repeatNumber = repeatNumber;
-        this.serviceStartTime = Objects.requireNonNull(serviceStartTime);
-        this.serviceStopTime = Objects.requireNonNull(serviceStopTime);
+        this.prescriptionStartTime = Objects.requireNonNull(prescriptionStartTime);
+        this.prescriptionStopTime = Objects.requireNonNull(prescriptionStopTime);
+        this.initialTreatmentStartTime = initialTreatmentStartTime;
+        this.initialTreatmentStopTime = initialTreatmentStopTime;
+        this.renewalPeriod = renewalPeriod;
         this.mtpReference = mtpReference;
         this.provisional = provisional;
         if (substitutionPermissions != null) {
@@ -161,17 +192,6 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
         this.patientMedicationInstructions = patientMedicationInstructions;
         this.fulfilmentInstructions = fulfilmentInstructions;
     }
-
-    /*
-     * Returns the dosage type.
-     *
-    @NonNull public DosageType getDosageType() {
-        if (!this.dosageInstructions.isEmpty()) {
-            return DosageType.Split;
-        } else {
-            return DosageType.Normal;
-        } // tapered
-    }*/
 
     /**
      * Returns the non-null type of the item entry digest.
@@ -197,8 +217,11 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
                 ", product=" + product +
                 ", repeatNumber=" + repeatNumber +
                 ", routeOfAdministration=" + routeOfAdministration +
-                ", serviceStartTime=" + serviceStartTime +
-                ", serviceStopTime=" + serviceStopTime +
+                ", prescriptionStartTime=" + prescriptionStartTime +
+                ", prescriptionStopTime=" + prescriptionStopTime +
+                ", initialTreatmentStartTime=" + initialTreatmentStartTime +
+                ", initialTreatmentStopTime=" + initialTreatmentStopTime +
+                ", renewalPeriod=" + renewalPeriod +
                 ", mtpReference=" + mtpReference +
                 ", provisional=" + provisional +
                 ", treatmentReason='" + treatmentReason + '\'' +

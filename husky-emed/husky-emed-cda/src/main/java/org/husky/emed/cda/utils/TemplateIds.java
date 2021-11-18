@@ -88,6 +88,7 @@ public class TemplateIds {
     public static final String DOSAGE_INSTRUCTIONS = "1.3.6.1.4.1.19376.1.9.1.3.6";
     public static final String SUBSTITUTION_PERMISSION = "1.3.6.1.4.1.19376.1.9.1.3.9.1";
     public static final String SUBSTITUTION_ACT = "1.3.6.1.4.1.19376.1.9.1.3.9.2";
+    public static final String RENEWAL_PERIOD = "1.3.6.1.4.1.19376.1.9.1.3.15";
 
     /**
      * CDA-CH Author (cdach_other_Author).

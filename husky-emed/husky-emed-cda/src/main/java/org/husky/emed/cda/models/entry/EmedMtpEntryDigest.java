@@ -60,7 +60,7 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
     private Instant serviceStartTime;
 
     /**
-     * The exclusive instant at which the item shall stop or {@code null} if it's unknown.
+     * The inclusive instant at which the item shall stop or {@code null} if it's unknown.
      */
     @Nullable
     private Instant serviceStopTime;
@@ -110,7 +110,7 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
      * @param routeOfAdministration         The medication route of administration or {@code null} if it's not
      *                                      specified.
      * @param serviceStartTime              The inclusive instant at which the item shall start.
-     * @param serviceStopTime               The exclusive instant at which the item shall stop or {@code null} if it's
+     * @param serviceStopTime               The inclusive instant at which the item shall stop or {@code null} if it's
      *                                      unknown.
      * @param substitutionPermissions       The list of substance substitution permissions or {@code null} if it's not
      *                                      specified.
@@ -165,17 +165,6 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
     public boolean isConsolidatedEntry() {
         return this.originalMtpReference != null;
     }
-
-    /*
-     * Returns the dosage type.
-     *
-    @NonNull public DosageType getDosageType() {
-        if (!this.dosageInstructions.isEmpty()) {
-            return DosageType.Split;
-        } else {
-            return DosageType.Normal;
-        }
-    }*/
 
     /**
      * Returns the non-null type of the item entry digest.

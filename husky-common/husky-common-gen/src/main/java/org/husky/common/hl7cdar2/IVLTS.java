@@ -16,6 +16,7 @@
 
 package org.husky.common.hl7cdar2;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.husky.common.enums.NullFlavor;
 
 import java.util.ArrayList;
@@ -123,9 +124,10 @@ public class IVLTS extends SXCMTS {
      *
      *
      */
+    @NonNull
     public List<JAXBElement<? extends QTY>> getRest() {
         if (rest == null) {
-            rest = new ArrayList<JAXBElement<? extends QTY>>();
+            rest = new ArrayList<>();
         }
         return this.rest;
     }

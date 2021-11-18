@@ -22,8 +22,14 @@ import java.util.stream.Collectors;
  * A reader for CDA-CH-EMED Dosage Instructions Content Module (1.3.6.1.4.1.19376.1.9.1.3.6).
  *
  * <p>The following elements part of the Dosage Instructions:
- * - Prescription Item Entry Additional Template ID - Effective Time (Duration of Treatment) - Medication Frequency -
- * Route of Administration - Approach Site Code - Dose Quantity - Rate Quantity - Related Components
+ * <li> Prescription Item Entry Additional Template ID
+ * <li> Effective Time (Duration of Treatment)
+ * <li> Medication Frequency
+ * <li> Route of Administration
+ * <li> Approach Site Code
+ * <li> Dose Quantity
+ * <li> Rate Quantity
+ * <li> Related Components
  *
  * @author Quentin Ligier
  */
