@@ -49,7 +49,7 @@ class AuthnRequestBuilderImplTest {
 		testAssertionConsumerServiceURL = "https://test.it.now.ch/do/it/now/good";
 		testAttributeConsumingServiceIndex = Integer.valueOf(222);
 		testDestination = "https://test.soe.healthcare/idp";
-		testProviderName = "IG eHealthConnector";
+		testProviderName = "IG Husky";
 		testConsent = "MyConsent";
 		testProtocolBinding = SAMLConstants.POST_METHOD;
 		testForceAuthn = true;

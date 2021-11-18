@@ -174,10 +174,10 @@ public class ConvenienceCommunicationXdmContentsTest extends XdmTestUtils {
 	 * @see <a href="https://profiles.ihe.net/ITI/TF/Volume2/ITI-32.html">ITI-32</a>
 	 */
 	private void testReadMeFile(String readmeContent) {
-		assertTrue(readmeContent.contains("Husky - http://ehealth-connector.org"));
+		assertTrue(readmeContent.contains("Husky - https://github.com/project-husky/husky"));
 		assertTrue(readmeContent.contains("Open Source"));
 		assertTrue(readmeContent.contains("Convenience API"));
-		assertTrue(readmeContent.contains("http://sourceforge.net/p/ehealthconnector/wiki/Team"));
+		assertTrue(readmeContent.contains("https://github.com/project-husky/husky"));
 	}
 
 	/**
@@ -200,8 +200,7 @@ public class ConvenienceCommunicationXdmContentsTest extends XdmTestUtils {
 	 * @see <a href="https://profiles.ihe.net/ITI/TF/Volume2/ITI-32.html">ITI-32</a>
 	 */
 	private void testIndexHtmFile(String indexHtmContent) {
-		// TODO: replace eHealthConnector with husky
-		assertTrue(indexHtmContent.contains("eHealthConnector XDM Cross-Enterprise Document Media Interchange"));
+		assertTrue(indexHtmContent.contains("Husky XDM Cross-Enterprise Document Media Interchange"));
 
 		// check patient details
 		assertTrue(indexHtmContent.contains("Patient ID: IHEBLUE-1043 (1.3.6.1.4.1.21367.13.20.3000)"));

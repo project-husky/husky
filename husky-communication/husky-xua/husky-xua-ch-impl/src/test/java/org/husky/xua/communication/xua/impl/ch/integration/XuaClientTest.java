@@ -19,7 +19,6 @@ import org.husky.xua.authentication.impl.AuthnRequestBuilderImpl;
 import org.husky.xua.communication.clients.XuaClient;
 import org.husky.xua.communication.clients.impl.ClientFactory;
 import org.husky.xua.communication.clients.impl.IdpSoapBindingClientByBasicAuth;
-import org.husky.xua.communication.clients.impl.ServerTestHelper;
 import org.husky.xua.communication.config.XuaClientConfig;
 import org.husky.xua.communication.config.impl.IdpClientBasicAuthConfigBuilderImpl;
 import org.husky.xua.communication.config.impl.IdpClientBasicAuthConfigImpl;

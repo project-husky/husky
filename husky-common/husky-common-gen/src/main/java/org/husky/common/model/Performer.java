@@ -103,7 +103,7 @@ public class Performer {
 	}
 
 	/**
-	 * Erstellt ein eHealthconnector-Performer Objekt mittels eines
+	 * Erstellt ein husky-Performer Objekt mittels eines
 	 * MDHT-Performer Objekts.
 	 *
 	 * @param performerMdht

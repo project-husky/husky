@@ -53,7 +53,7 @@ public class IndexHtm {
 			<h2>Verwaltende Organisation</h2>
 			<p>Informationen zu diesem XDM Paket in Deutsch.<br/>
 			Dieses XDM Paket wurde erstellt von: {0}. </p>
-			<p>Siehe <a target="_blank" href="http://sourceforge.net/p/ehealthconnector/wiki/Team">{1}</a></p>
+			<p>Siehe <a target="_blank" href="https://github.com/project-husky/husky">{1}</a></p>
 			<h2>Inhalt</h2>
 			{2}<p>Dieses Paket enthält {3} Dokumente in 1 Submission Set.</p>
 			<h3>README Datei</h3>
@@ -64,7 +64,7 @@ public class IndexHtm {
 			<h2>Institution</h2>
 			<p>Information about this XDM volume in english.<br/>
 			This XDM volume was created by {0}. </p>
-			<p>See <a target="_blank" href="http://sourceforge.net/p/ehealthconnector/wiki/Team">{1}</a></p>
+			<p>See <a target="_blank" href="https://github.com/project-husky/husky">{1}</a></p>
 			<h2>Contents</h2>
 			{2}<p>This volume contains {3} Documents in 1 Submission Set.</p>
 			h3>README File</h3>
@@ -75,7 +75,7 @@ public class IndexHtm {
 			<h2>Organisme de gestion</h2>
 			<p>Informations sur ce volume XDM en français.<br/>
 			Ce volume XDM a été créée par {0}. </p>
-			<p>Voir <a target="_blank" href="http://sourceforge.net/p/ehealthconnector/wiki/Team">{1}</a></p>
+			<p>Voir <a target="_blank" href="https://github.com/project-husky/husky">{1}</a></p>
 			<h2>Contenu</h2>
 			{2}<p>Ce volume contient {3} Dokumente en 1 Submission Set.</p>
 			<h3>Fichier README</h3>

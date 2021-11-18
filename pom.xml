@@ -34,7 +34,7 @@
 	</properties>
 
 	<scm>
-		<connection>scm:git:https://gitlab.com/ehealth-connector/api-java.git</connection>
+		<connection>scm:git:https://github.com/project-husky/husky/husky.git</connection>
 		<developerConnection>scm:git:git@gitlab.com:ehealth-connector/api-java.git</developerConnection>
 		<url>https://github.com/project-husky/husky/tree/master</url>
 		<tag>HEAD</tag>

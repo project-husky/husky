@@ -8,18 +8,17 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-
 package org.husky.common.enums;
 
 /**
- * Enum that contains the different Versions of the eHealtConnector
+ * Enum that contains the different Versions of the eHealtConnector and husky
  *
  */
 public enum EhcVersions {
 	/**
-	 * OID eHealthConnector development edition (trunk)
+	 * OID husky development edition (trunk)
 	 */
-	EHealthConnectorDev("2.16.756.5.30.1.139.1.1.3", "eHealthConnector trunk", "xxxxxxxx"),
+	HuskyDev("2.16.756.5.30.1.139.1.1.3", "husky trunk", "xxxxxxxx"),
 
 	/**
 	 * OID eHealthConnector Proof of Concept
@@ -68,14 +67,14 @@ public enum EhcVersions {
 	EHealthConnectorR202007("2.16.756.5.30.1.139.1.1.10", "eHealthConnector R202007", "2020-07-15"),
 
 	/**
-	 * OID eHealthConnector Rxxxxxx
+	 * OID husky Rxxxxxx
 	 */
 	// This is preparation for next release, only
-	EHealthConnectorRxxxxxx("2.16.756.5.30.1.139.1.1.11", "eHealthConnector Rxxxxxx",
+	HuskyRxxxxxx("2.16.756.5.30.1.139.1.1.11", "husky Rxxxxxx",
 			"todo release date");
 
 	public static EhcVersions getCurrentVersion() {
-		return EhcVersions.EHealthConnectorRxxxxxx;
+		return EhcVersions.HuskyRxxxxxx;
 	}
 
 	private String oid;

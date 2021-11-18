@@ -162,7 +162,7 @@ public class Author {
 	}
 
 	/**
-	 * Erstellt ein eHealthconnector-Author Objekt mittels eines MDHT-Author
+	 * Erstellt ein husky-Author Objekt mittels eines MDHT-Author
 	 * Objekts.
 	 *
 	 * @param authorMdht the MDHT Author Object

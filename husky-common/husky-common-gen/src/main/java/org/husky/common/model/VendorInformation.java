@@ -18,9 +18,9 @@ public class VendorInformation {
 
 	// Default values, will be used, if the user does not provide his own
 	// information.
-	public static final String DEFAULT_CONTACT_INFORMATION = "http://sourceforge.net/p/ehealthconnector/wiki/Team";
+	public static final String DEFAULT_CONTACT_INFORMATION = "https://github.com/project-husky/husky";
 	public static final String DEFAULT_MODULE_NAME = "Convenience API";
-	public static final String DEFAULT_PRODUCT_NAME = "Husky - http://ehealth-connector.org";
+	public static final String DEFAULT_PRODUCT_NAME = "Husky - https://github.com/project-husky/husky";
 	public static final String DEFAULT_VENDOR_NAME = "Open Source";
 
 	private String contactInformation;
@@ -29,7 +29,7 @@ public class VendorInformation {
 	private String vendorName;
 
 	/**
-	 * Constructor. eHealthConnector default values will be used (see DEFAULT_*
+	 * Constructor. husky default values will be used (see DEFAULT_*
 	 * constants of this class, accordingly).
 	 */
 	public VendorInformation() {

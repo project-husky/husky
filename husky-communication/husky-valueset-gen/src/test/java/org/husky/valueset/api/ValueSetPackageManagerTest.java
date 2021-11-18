@@ -108,7 +108,7 @@ public class ValueSetPackageManagerTest {
 		String sourceUrl;
 		String baseUrl = "http://art-decor.org/decor/services/RetrieveValueSet?prefix=ch-epr-&format=json";
 		OrganizationBaseType org = new OrganizationBaseType();
-		org.setPrimaryName(NameBaseType.builder().withName("eHealthConnector Unit Test").build());
+		org.setPrimaryName(NameBaseType.builder().withName("Husky Unit Test").build());
 
 		sourceUrl = testValueSetPackageConfigOnTheWeb;
 		Date validFrom = DateUtil.parseDateyyyyMMddHHmmss("20190623000000");

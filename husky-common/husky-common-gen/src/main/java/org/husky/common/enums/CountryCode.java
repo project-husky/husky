@@ -109,8 +109,8 @@ public enum CountryCode {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div>
-	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="en">Gets the husky Code Object</div>
+	 * <div class="de">Liefert das husky Code Objekt</div>
 	 *
 	 * @return <div class="en">the code</div>
 	 */

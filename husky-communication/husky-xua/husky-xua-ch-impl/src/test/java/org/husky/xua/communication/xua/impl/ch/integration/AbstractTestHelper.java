@@ -8,7 +8,7 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-package org.husky.xua.utilities.impl;
+package org.husky.xua.communication.xua.impl.ch.integration;
 
 import java.util.Calendar;
 import java.util.UUID;

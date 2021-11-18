@@ -51,12 +51,12 @@ public class SubmissionSetMetadata {
 		 * </thead><tbody>
 		 * <tr>
 		 * <td>uniqueId</td>
-		 * <td>the eHealthConnector OID as base and a random part</td>
+		 * <td>the husky OID as base and a random part</td>
 		 * </tr>
 		 * <tr>
 		 * <td>sourceId</td>
 		 * <td>DocumentEntry/Patient/AssigningAuthorityUniversalId or (if empty)
-		 * from the eHealthConnector OID as base and a random part</td>
+		 * from the husky OID as base and a random part</td>
 		 * </tr>
 		 * <tr>
 		 * <td>submissionTime</td>
