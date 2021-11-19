@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.GregorianCalendar;
@@ -62,7 +60,6 @@ import org.husky.xua.communication.xua.XUserAssertionResponse;
 import org.husky.xua.communication.xua.impl.AppliesToBuilderImpl;
 import org.husky.xua.communication.xua.impl.XUserAssertionRequestBuilderImpl;
 import org.husky.xua.core.SecurityHeaderElement;
-import org.husky.xua.deserialization.impl.AssertionDeserializerImpl;
 import org.husky.xua.exceptions.ClientSendException;
 import org.husky.xua.exceptions.DeserializeException;
 import org.husky.xua.hl7v3.InstanceIdentifier;
@@ -112,15 +109,13 @@ public class SimplePpfClientTest {
 	private static final String urlToIdp = "https://ehealthsuisse.ihe-europe.net/idp/profile/SAML2/SOAP/ECP";
 	private static final String clientKeyStore = "src/test/resources/testKeystore.jks";
 	private static final String clientKeyStorePass = "changeit";
-	private static SecurityHeaderElement patAssertion = null;
+	private static SecurityHeaderElement xuaAssertion = null;
 
 	@BeforeAll
 	public static void setup() throws FileNotFoundException, IOException, DeserializeException, ClientSendException {
 		try {
 			InitializationService.initialize();
 			Xacml20Utils.initializeHerasaf();
-
-			File file = new File(clientKeyStore);
 
 			System.setProperty("javax.net.ssl.keyStore", clientKeyStore);
 			System.setProperty("javax.net.ssl.keyStorePassword", clientKeyStorePass);
@@ -151,7 +146,7 @@ public class SimplePpfClientTest {
 		List<XUserAssertionResponse> response = xuaClient.send(requestIdpAssertion("aandrews", "azerty"),
 				assertionRequest);
 
-		patAssertion = response.get(0).getAssertion();
+		xuaAssertion = response.get(0).getAssertion();
 	}
 
 	private static Assertion requestIdpAssertion(String user, String password) throws ClientSendException {
@@ -183,18 +178,16 @@ public class SimplePpfClientTest {
 		client.setCamelContext(camelContext);
 		client.setAuditContext(auditContext);
 
-		assertNotNull(patAssertion);
+		assertNotNull(xuaAssertion);
 
-		File fileAssertionOnly = new File("src/test/resources/ch-ppq/add_policy_assertion.xml");
-
-		Assertion assertionRequest = new AssertionBuilderImpl().version("2.0")
+		Assertion addPolicyAssertion = new AssertionBuilderImpl().version("2.0")
 				.id(UUID.randomUUID().toString()).issueInstant(new GregorianCalendar())
 				.create();
 
 		var nameId = new NameIDType();
 		nameId.setValue("urn:oid:1.3.6.1.4.1.21367.2017.2.6.2");
 		nameId.setNameQualifier("urn:e-health-suisse:community-index");
-		assertionRequest.setIssuer(nameId);
+		addPolicyAssertion.setIssuer(nameId);
 
 		XACMLPolicyStatementType policyStatement = new XACMLPolicyStatementType();
 		PolicySetType policySet = new PolicySetType();
@@ -294,15 +287,15 @@ public class SimplePpfClientTest {
 
 		policyStatement.getPolicyOrPolicySet().add(policySet);
 
-		assertionRequest.getStatementOrAuthnStatementOrAuthzDecisionStatement().add(policyStatement);
+		addPolicyAssertion.getStatementOrAuthnStatementOrAuthzDecisionStatement().add(policyStatement);
 
-		org.opensaml.saml.saml2.core.Assertion samlAssertion = (org.opensaml.saml.saml2.core.Assertion) new AssertionBuilderImpl()
-				.create(assertionRequest)
+		org.opensaml.saml.saml2.core.Assertion addPolicyAssertionOpenSaml = (org.opensaml.saml.saml2.core.Assertion) new AssertionBuilderImpl()
+				.create(addPolicyAssertion)
 				.getWrappedObject();
 		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.AddPolicy)
-				.create(samlAssertion);
+				.create(addPolicyAssertionOpenSaml);
 
-		PrivacyPolicyFeedResponse response = client.send(patAssertion, ppFeedRequest);
+		PrivacyPolicyFeedResponse response = client.send(xuaAssertion, ppFeedRequest);
 
 		assertTrue(response.getExceptions().isEmpty());
 		assertEquals("urn:e-health-suisse:2015:response-status:success", response.getStatus());
@@ -311,7 +304,7 @@ public class SimplePpfClientTest {
 	@Test
 	@Order(2)
 	public void testSendPpq1UpdatePolicy() throws Exception {
-		assertNotNull(patAssertion);
+		assertNotNull(xuaAssertion);
 
 		PpClientConfig configQuery = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).create();
@@ -324,7 +317,7 @@ public class SimplePpfClientTest {
 		instanceIdentifier.setRoot("2.16.756.5.30.1.127.3.10.3");
 		PrivacyPolicyQuery query = new PrivacyPolicyQueryBuilderImpl().instanceIdentifier(instanceIdentifier)
 				.issueInstant(new GregorianCalendar()).version("2.0").id(UUID.randomUUID().toString()).create();
-		PrivacyPolicyQueryResponseImpl responseQuery = (PrivacyPolicyQueryResponseImpl) clientPpq.send(patAssertion,
+		PrivacyPolicyQueryResponseImpl responseQuery = (PrivacyPolicyQueryResponseImpl) clientPpq.send(xuaAssertion,
 				query);
 
 		assertNotNull(responseQuery);
@@ -338,9 +331,9 @@ public class SimplePpfClientTest {
 
 		assertNotNull(responseQuery.getWrappedObject().getAssertions());
 
-		org.opensaml.saml.saml2.core.Assertion assertionQuery = responseQuery.getWrappedObject().getAssertions().get(0);
+		org.opensaml.saml.saml2.core.Assertion queriedPolicyAssertion = responseQuery.getWrappedObject().getAssertions().get(0);
 
-		var statement = (org.opensaml.xacml.profile.saml.XACMLPolicyStatementType) assertionQuery.getStatements()
+		var statement = (org.opensaml.xacml.profile.saml.XACMLPolicyStatementType) queriedPolicyAssertion.getStatements()
 				.get(0);
 
 		assertNotNull(statement.getPolicySets());
@@ -368,13 +361,13 @@ public class SimplePpfClientTest {
 		client.setCamelContext(camelContext);
 		client.setAuditContext(auditContext);
 
-		Assertion assertionRequest = new AssertionBuilderImpl().version("2.0").id(UUID.randomUUID().toString())
+		Assertion updatePolicyAssertion = new AssertionBuilderImpl().version("2.0").id(UUID.randomUUID().toString())
 				.issueInstant(new GregorianCalendar()).create();
 
 		var nameId = new NameIDType();
 		nameId.setValue("urn:oid:1.3.6.1.4.1.21367.2017.2.6.2");
 		nameId.setNameQualifier("urn:e-health-suisse:community-index");
-		assertionRequest.setIssuer(nameId);
+		updatePolicyAssertion.setIssuer(nameId);
 
 		XACMLPolicyStatementType policyStatement = new XACMLPolicyStatementType();
 		PolicySetType policySet = new PolicySetType();
@@ -475,16 +468,16 @@ public class SimplePpfClientTest {
 
 		policyStatement.getPolicyOrPolicySet().add(policySet);
 
-		assertionRequest.getStatementOrAuthnStatementOrAuthzDecisionStatement().add(policyStatement);
+		updatePolicyAssertion.getStatementOrAuthnStatementOrAuthzDecisionStatement().add(policyStatement);
 
-		org.opensaml.saml.saml2.core.Assertion samlAssertion = (org.opensaml.saml.saml2.core.Assertion) new AssertionBuilderImpl()
-				.create(assertionRequest)
+		org.opensaml.saml.saml2.core.Assertion updatePolicyAssertionOpenSaml = (org.opensaml.saml.saml2.core.Assertion) new AssertionBuilderImpl()
+				.create(updatePolicyAssertion)
 				.getWrappedObject();
 
 		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.UpdatePolicy)
-				.create(samlAssertion);
+				.create(updatePolicyAssertionOpenSaml);
 
-		PrivacyPolicyFeedResponse response = client.send(patAssertion, ppFeedRequest);
+		PrivacyPolicyFeedResponse response = client.send(xuaAssertion, ppFeedRequest);
 
 		assertTrue(response.getExceptions().isEmpty());
 		assertEquals("urn:e-health-suisse:2015:response-status:success", response.getStatus());
@@ -518,48 +511,48 @@ public class SimplePpfClientTest {
 
 		assertNotNull(responseQuery.getWrappedObject().getAssertions());
 
-		org.opensaml.saml.saml2.core.Assertion assertionQuery = responseQuery.getWrappedObject().getAssertions().get(0);
+		org.opensaml.saml.saml2.core.Assertion queriedPolicyAssertion = responseQuery.getWrappedObject().getAssertions().get(0);
 
-		var statement = (org.opensaml.xacml.profile.saml.XACMLPolicyStatementType) assertionQuery.getStatements()
+		var statement = (org.opensaml.xacml.profile.saml.XACMLPolicyStatementType) queriedPolicyAssertion.getStatements()
 				.get(0);
 
 		assertNotNull(statement.getPolicySets());
 		assertFalse(statement.getPolicySets().isEmpty());
 
-		var policySet = statement.getPolicySets().get(0);
+		var policySetQueried = statement.getPolicySets().get(0);
 
-		assertNotNull(policySet);
+		assertNotNull(policySetQueried);
 
-		String policySetId = policySet.getPolicySetId();
+		String policySetId = policySetQueried.getPolicySetId();
 
 		PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).create();
 		SimplePpfClient client = ClientFactoryCh.getPpfClient(config);
 		client.setCamelContext(camelContext);
 		client.setAuditContext(auditContext);
+		
+		Assertion deletePolicyAssertion = new AssertionBuilderImpl().version("2.0").id(UUID.randomUUID().toString())
+				.issueInstant(new GregorianCalendar()).create();
 
-		File fileAssertionOnly = new File("src/test/resources/ch-ppq/delete_policy_assertion.xml");
+		var nameId = new NameIDType();
+		nameId.setValue("urn:oid:1.3.6.1.4.1.21367.2017.2.6.2");
+		nameId.setNameQualifier("urn:e-health-suisse:community-index");
+		deletePolicyAssertion.setIssuer(nameId);
 
-		Assertion assertionRequest = null;
-		try (var fis = new FileInputStream(fileAssertionOnly)) {
-			var deserializer = new AssertionDeserializerImpl();
-			assertionRequest = deserializer.fromXmlByteArray(fis.readAllBytes());
-		}
-
-		var xacmlStatement = new XACMLPolicySetIdReferenceStatementType();
+		XACMLPolicySetIdReferenceStatementType policySetIdReferenceStatement = new XACMLPolicySetIdReferenceStatementType();
 		var idReference = new IdReferenceType();
 		idReference.setValue(policySetId);
-		xacmlStatement.getPolicySetIdReference().add(idReference);
+		policySetIdReferenceStatement.getPolicySetIdReference().add(idReference);
 
-		assertionRequest.getStatementOrAuthnStatementOrAuthzDecisionStatement().add(xacmlStatement);
+		deletePolicyAssertion.getStatementOrAuthnStatementOrAuthzDecisionStatement().add(policySetIdReferenceStatement);
 
-		org.opensaml.saml.saml2.core.Assertion samlAssertion = (org.opensaml.saml.saml2.core.Assertion) new AssertionBuilderImpl()
-				.create(assertionRequest).getWrappedObject();
+		org.opensaml.saml.saml2.core.Assertion deletePolicyAssertionOpenSaml = (org.opensaml.saml.saml2.core.Assertion) new AssertionBuilderImpl()
+				.create(deletePolicyAssertion).getWrappedObject();
 
 		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.DeletePolicy)
-				.create(samlAssertion);
+				.create(deletePolicyAssertionOpenSaml);
 
-		PrivacyPolicyFeedResponse response = client.send(patAssertion, ppFeedRequest);
+		PrivacyPolicyFeedResponse response = client.send(xuaAssertion, ppFeedRequest);
 
 		assertTrue(response.getExceptions().isEmpty());
 		assertEquals("urn:e-health-suisse:2015:response-status:success", response.getStatus());

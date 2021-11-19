@@ -6,19 +6,36 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.GregorianCalendar;
 import java.util.UUID;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
+
 import org.apache.camel.CamelContext;
+import org.herasaf.xacml.core.combiningAlgorithm.policy.impl.PolicyDenyOverridesAlgorithm;
+import org.herasaf.xacml.core.dataTypeAttribute.impl.StringDataTypeAttribute;
+import org.herasaf.xacml.core.function.impl.equalityPredicates.StringEqualFunction;
+import org.herasaf.xacml.core.policy.impl.AttributeValueType;
+import org.herasaf.xacml.core.policy.impl.EvaluatableIDImpl;
 import org.herasaf.xacml.core.policy.impl.IdReferenceType;
+import org.herasaf.xacml.core.policy.impl.PolicySetType;
+import org.herasaf.xacml.core.policy.impl.ResourceAttributeDesignatorType;
+import org.herasaf.xacml.core.policy.impl.ResourceMatchType;
+import org.herasaf.xacml.core.policy.impl.ResourceType;
+import org.herasaf.xacml.core.policy.impl.ResourcesType;
+import org.herasaf.xacml.core.policy.impl.SubjectAttributeDesignatorType;
+import org.herasaf.xacml.core.policy.impl.SubjectMatchType;
+import org.herasaf.xacml.core.policy.impl.SubjectType;
+import org.herasaf.xacml.core.policy.impl.SubjectsType;
+import org.herasaf.xacml.core.policy.impl.TargetType;
 import org.husky.communication.ch.ppq.TestApplication;
 import org.husky.communication.ch.ppq.api.PrivacyPolicyFeed;
+import org.husky.communication.ch.ppq.api.PrivacyPolicyFeed.PpfMethod;
 import org.husky.communication.ch.ppq.api.PrivacyPolicyFeedResponse;
 import org.husky.communication.ch.ppq.api.PrivacyPolicyQuery;
-import org.husky.communication.ch.ppq.api.PrivacyPolicyFeed.PpfMethod;
 import org.husky.communication.ch.ppq.api.config.PpClientConfig;
 import org.husky.communication.ch.ppq.impl.PrivacyPolicyFeedBuilderImpl;
 import org.husky.communication.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl;
@@ -27,7 +44,6 @@ import org.husky.communication.ch.ppq.impl.clients.ClientFactoryCh;
 import org.husky.communication.ch.ppq.impl.clients.SimplePpfClient;
 import org.husky.communication.ch.ppq.impl.clients.SimplePpqClient;
 import org.husky.communication.ch.ppq.impl.config.PpClientConfigBuilderImpl;
-import org.husky.xua.deserialization.impl.AssertionDeserializerImpl;
 import org.husky.xua.hl7v3.InstanceIdentifier;
 import org.husky.xua.hl7v3.impl.InstanceIdentifierBuilder;
 import org.husky.xua.saml2.Assertion;
@@ -37,7 +53,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openehealth.ipf.commons.audit.AuditContext;
 import org.openehealth.ipf.commons.ihe.xacml20.Xacml20Utils;
+import org.openehealth.ipf.commons.ihe.xacml20.herasaf.functions.CvEqualFunction;
+import org.openehealth.ipf.commons.ihe.xacml20.herasaf.functions.IiEqualFunction;
+import org.openehealth.ipf.commons.ihe.xacml20.herasaf.types.CvDataTypeAttribute;
+import org.openehealth.ipf.commons.ihe.xacml20.herasaf.types.IiDataTypeAttribute;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.ehealthswiss.XACMLPolicySetIdReferenceStatementType;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.CV;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.II;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.NameIDType;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.xacml20.saml.assertion.XACMLPolicyStatementType;
 import org.opensaml.core.config.InitializationException;
 import org.opensaml.core.config.InitializationService;
 import org.slf4j.Logger;
@@ -75,8 +99,6 @@ public class SimplePpfClientAtnaAuditTest {
 			InitializationService.initialize();
 			Xacml20Utils.initializeHerasaf();
 
-			File file = new File(clientKeyStore);
-
 			System.setProperty("javax.net.ssl.keyStore", clientKeyStore);
 			System.setProperty("javax.net.ssl.keyStorePassword", clientKeyStorePass);
 			System.setProperty("javax.net.ssl.trustStore", clientKeyStore);
@@ -94,18 +116,118 @@ public class SimplePpfClientAtnaAuditTest {
 		client.setCamelContext(camelContext);
 		client.setAuditContext(auditContext);
 
-		File fileAddAssertionOnly = new File("src/test/resources/ch-ppq/add_policy_assertion.xml");
+		Assertion addPolicyAssertion = new AssertionBuilderImpl().version("2.0").id(UUID.randomUUID().toString())
+				.issueInstant(new GregorianCalendar()).create();
 
-		Assertion assertionAddRequest = null;
-		try (var fis = new FileInputStream(fileAddAssertionOnly)) {
-			var deserializer = new AssertionDeserializerImpl();
-			assertionAddRequest = deserializer.fromXmlByteArray(fis.readAllBytes());
-		}
+		var nameIdAdd = new NameIDType();
+		nameIdAdd.setValue("urn:oid:1.3.6.1.4.1.21367.2017.2.6.2");
+		nameIdAdd.setNameQualifier("urn:e-health-suisse:community-index");
+		addPolicyAssertion.setIssuer(nameIdAdd);
 
-		org.opensaml.saml.saml2.core.Assertion samlAssertion = (org.opensaml.saml.saml2.core.Assertion) assertionAddRequest
+		XACMLPolicyStatementType policyStatement = new XACMLPolicyStatementType();
+		PolicySetType policySetAdd = new PolicySetType();
+		policySetAdd.setCombiningAlg(new PolicyDenyOverridesAlgorithm());
+
+		var id = new EvaluatableIDImpl(String.format("urn:uuid:%s", UUID.randomUUID().toString()));
+		policySetAdd.setPolicySetId(id);
+
+		TargetType target = new TargetType();
+		SubjectsType subjects = new SubjectsType();
+		SubjectType subject = new SubjectType();
+
+		SubjectMatchType match1 = new SubjectMatchType();
+		match1.setMatchFunction(new StringEqualFunction());
+		AttributeValueType attributeVal = new AttributeValueType();
+		attributeVal.setDataType(new StringDataTypeAttribute());
+		attributeVal.getContent().add("7601002469191");
+		match1.setAttributeValue(attributeVal);
+
+		SubjectAttributeDesignatorType subjAttrDesgn = new SubjectAttributeDesignatorType();
+		subjAttrDesgn.setAttributeId("urn:oasis:names:tc:xacml:1.0:subject:subject-id");
+		subjAttrDesgn.setDataType(new StringDataTypeAttribute());
+		match1.setSubjectAttributeDesignator(subjAttrDesgn);
+
+		subject.getSubjectMatches().add(match1);
+
+		SubjectMatchType match2 = new SubjectMatchType();
+		match2.setMatchFunction(new StringEqualFunction());
+		attributeVal = new AttributeValueType();
+		attributeVal.setDataType(new StringDataTypeAttribute());
+		attributeVal.getContent().add("urn:gs1:gln");
+		match2.setAttributeValue(attributeVal);
+
+		subjAttrDesgn = new SubjectAttributeDesignatorType();
+		subjAttrDesgn.setAttributeId("urn:oasis:names:tc:xacml:1.0:subject:subject-id-qualifier");
+		subjAttrDesgn.setDataType(new StringDataTypeAttribute());
+		match2.setSubjectAttributeDesignator(subjAttrDesgn);
+
+		subject.getSubjectMatches().add(match2);
+
+		SubjectMatchType match3 = new SubjectMatchType();
+		match3.setMatchFunction(new CvEqualFunction());
+		attributeVal = new AttributeValueType();
+		attributeVal.setDataType(new CvDataTypeAttribute());
+
+		var cv = new CV();
+		cv.setCode("HCP");
+		cv.setCodeSystem("2.16.756.5.30.1.127.3.10.6");
+
+		attributeVal.getContent().add(new JAXBElement<>(new QName("urn:hl7-org:v3", "CodedValue"), CV.class, cv));
+		match3.setAttributeValue(attributeVal);
+
+		subjAttrDesgn = new SubjectAttributeDesignatorType();
+		subjAttrDesgn.setAttributeId("urn:oasis:names:tc:xacml:2.0:subject:role");
+		subjAttrDesgn.setDataType(new CvDataTypeAttribute());
+		match3.setSubjectAttributeDesignator(subjAttrDesgn);
+
+		subject.getSubjectMatches().add(match3);
+
+		subjects.getSubjects().add(subject);
+		target.setSubjects(subjects);
+
+		ResourcesType resources = new ResourcesType();
+		ResourceType resource = new ResourceType();
+		ResourceMatchType resourceMatch = new ResourceMatchType();
+		resourceMatch.setMatchFunction(new IiEqualFunction());
+
+		attributeVal = new AttributeValueType();
+		attributeVal.setDataType(new IiDataTypeAttribute());
+		var instanceId = new II();
+		instanceId.setExtension("761337610411265304");
+		instanceId.setRoot("2.16.756.5.30.1.127.3.10.3");
+		attributeVal.getContent()
+				.add(new JAXBElement<>(new QName("urn:hl7-org:v3", "InstanceIdentifier"), II.class, instanceId));
+		resourceMatch.setAttributeValue(attributeVal);
+
+		ResourceAttributeDesignatorType resourceAttrDesign = new ResourceAttributeDesignatorType();
+		resourceAttrDesign.setDataType(new IiDataTypeAttribute());
+		resourceAttrDesign.setAttributeId("urn:e-health-suisse:2015:epr-spid");
+		resourceMatch.setResourceAttributeDesignator(resourceAttrDesign);
+		resource.getResourceMatches().add(resourceMatch);
+		resources.getResources().add(resource);
+		target.setResources(resources);
+
+		policySetAdd.setTarget(target);
+
+		XACMLPolicySetIdReferenceStatementType referenceId = new XACMLPolicySetIdReferenceStatementType();
+		IdReferenceType idReferenceAdd = new IdReferenceType();
+		idReferenceAdd.setValue("urn:e-health-suisse:2015:policies:access-level:delegation-and-normal");
+		referenceId.getPolicySetIdReference().add(idReferenceAdd);
+
+		policySetAdd.getAdditionalInformation()
+				.add(new JAXBElement<XACMLPolicySetIdReferenceStatementType>(
+						new QName("urn:oasis:names:tc:xacml:2.0:policy:schema:os", "PolicySetIdReference"),
+						XACMLPolicySetIdReferenceStatementType.class, referenceId));
+
+		policyStatement.getPolicyOrPolicySet().add(policySetAdd);
+
+		addPolicyAssertion.getStatementOrAuthnStatementOrAuthzDecisionStatement().add(policyStatement);
+
+		org.opensaml.saml.saml2.core.Assertion addPolicyAssertionOpenSaml = (org.opensaml.saml.saml2.core.Assertion) new AssertionBuilderImpl()
+				.create(addPolicyAssertion)
 				.getWrappedObject();
 		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.AddPolicy)
-				.create(samlAssertion);
+				.create(addPolicyAssertionOpenSaml);
 
 		PrivacyPolicyFeedResponse response = client.send(null, ppFeedRequest);
 
@@ -118,11 +240,12 @@ public class SimplePpfClientAtnaAuditTest {
 		clientPpq.setAuditContext(auditContext);
 
 		InstanceIdentifier instanceIdentifier = new InstanceIdentifierBuilder().buildObject();
-		instanceIdentifier.setExtension("761337610435209810");
+		instanceIdentifier.setExtension("761337610411265304");
 		instanceIdentifier.setRoot("2.16.756.5.30.1.127.3.10.3");
 		PrivacyPolicyQuery query = new PrivacyPolicyQueryBuilderImpl().instanceIdentifier(instanceIdentifier)
 				.issueInstant(new GregorianCalendar()).version("2.0").id(UUID.randomUUID().toString()).create();
-		PrivacyPolicyQueryResponseImpl responseQuery = (PrivacyPolicyQueryResponseImpl) clientPpq.send(null, query);
+		PrivacyPolicyQueryResponseImpl responseQuery = (PrivacyPolicyQueryResponseImpl) clientPpq.send(null,
+				query);
 
 		assertNotNull(responseQuery);
 		assertNotNull(responseQuery.getWrappedObject());
@@ -135,9 +258,9 @@ public class SimplePpfClientAtnaAuditTest {
 
 		assertNotNull(responseQuery.getWrappedObject().getAssertions());
 
-		org.opensaml.saml.saml2.core.Assertion assertionQuery = responseQuery.getWrappedObject().getAssertions().get(0);
+		org.opensaml.saml.saml2.core.Assertion policyAssertion = responseQuery.getWrappedObject().getAssertions().get(0);
 
-		var statement = (org.opensaml.xacml.profile.saml.XACMLPolicyStatementType) assertionQuery.getStatements()
+		var statement = (org.opensaml.xacml.profile.saml.XACMLPolicyStatementType) policyAssertion.getStatements()
 				.get(0);
 
 		assertNotNull(statement.getPolicySets());
@@ -149,27 +272,26 @@ public class SimplePpfClientAtnaAuditTest {
 
 		String policySetId = policySet.getPolicySetId();
 
-		File fileAssertionOnly = new File("src/test/resources/ch-ppq/delete_policy_assertion.xml");
+		Assertion deletePolicyAssertion = new AssertionBuilderImpl().version("2.0").id(UUID.randomUUID().toString())
+				.issueInstant(new GregorianCalendar()).create();
 
-		Assertion assertionRequest = null;
-		try (var fis = new FileInputStream(fileAssertionOnly)) {
-			var deserializer = new AssertionDeserializerImpl();
-			assertionRequest = deserializer.fromXmlByteArray(fis.readAllBytes());
-		}
+		var nameId = new NameIDType();
+		nameId.setValue("urn:oid:1.3.6.1.4.1.21367.2017.2.6.2");
+		nameId.setNameQualifier("urn:e-health-suisse:community-index");
+		deletePolicyAssertion.setIssuer(nameId);
 
-		var xacmlStatement = new XACMLPolicySetIdReferenceStatementType();
+		XACMLPolicySetIdReferenceStatementType policySetIdReferenceStatement = new XACMLPolicySetIdReferenceStatementType();
 		var idReference = new IdReferenceType();
 		idReference.setValue(policySetId);
-		xacmlStatement.getPolicySetIdReference().add(idReference);
+		policySetIdReferenceStatement.getPolicySetIdReference().add(idReference);
 
-		assertionRequest.getStatementOrAuthnStatementOrAuthzDecisionStatement().add(xacmlStatement);
+		deletePolicyAssertion.getStatementOrAuthnStatementOrAuthzDecisionStatement().add(policySetIdReferenceStatement);
 
-		samlAssertion = (org.opensaml.saml.saml2.core.Assertion) new AssertionBuilderImpl()
-				.create(assertionRequest)
-				.getWrappedObject();
+		org.opensaml.saml.saml2.core.Assertion deletePolicyAssertionOpenSaml = (org.opensaml.saml.saml2.core.Assertion) new AssertionBuilderImpl()
+				.create(deletePolicyAssertion).getWrappedObject();
 
 		ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.DeletePolicy)
-				.create(samlAssertion);
+				.create(deletePolicyAssertionOpenSaml);
 
 		response = client.send(null, ppFeedRequest);
 

@@ -59,7 +59,7 @@ public class XuaClientTest extends ServerTestHelper {
 
 		try (InputStream is = new FileInputStream(new File("src/test/resources/Assertion.xml"))) {
 
-			var assertion = new AssertionDeserializerImpl().fromXmlByteArray(IOUtils.toByteArray(is));
+			var idpAssertion = new AssertionDeserializerImpl().fromXmlByteArray(IOUtils.toByteArray(is));
 
 			var role = new RoleBuilder().code("HCP").codeSystem("2.16.756.5.30.1.127.3.10.6")
 					.displayName("Behandelnde(r)").buildObject();
@@ -72,7 +72,7 @@ public class XuaClientTest extends ServerTestHelper {
 					.appliesTo(new AppliesToBuilderImpl().address("https://localhost:17001/services/iti18").create())
 					.purposeOfUse(purposeOfUse).subjectRole(role).resourceId(resourceId).create();
 
-			List<XUserAssertionResponse> response = client.send(assertion, assertionRequest);
+			List<XUserAssertionResponse> response = client.send(idpAssertion, assertionRequest);
 
 			assertNotNull(response);
 			assertNotNull(response.get(0).getAssertion());
