@@ -206,8 +206,12 @@ public class ConvenienceMasterPatientIndexV3 {
 			return new LinkedList<>();
 		}
 
-		var query = new PixV3Query(affinityDomain, homeCommunityOid, context, auditContext);
-		List<String> ids = query.queryPatientId(new FhirPatient(patient), requestedCommunityOIDs, null, security);
+		var query = new PixV3Query(affinityDomain, homeCommunityOid, null, requestedCommunityOIDs.get(0),
+				null, this.context, getAuditContext());
+
+		// var query = new PixV3Query(affinityDomain, homeCommunityOid, context,
+		// auditContext);
+		List<String> ids = query.queryPatientId(new FhirPatient(patient), null, null, security);
 
 		final List<Identificator> list = new ArrayList<>();
 		if (requestedCommunityOIDs != null) {

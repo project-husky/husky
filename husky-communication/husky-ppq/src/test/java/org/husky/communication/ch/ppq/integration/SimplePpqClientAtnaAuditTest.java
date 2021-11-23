@@ -37,7 +37,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
- * Test of class ConvenienceCommunication
+ * This test class is to check whether ATNA audit messages are sent in the
+ * course of CH-PPQ-2 transactions. This is tested by checking whether audit
+ * entries have been written to the LOG file.
  */
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
@@ -57,6 +59,10 @@ public class SimplePpqClientAtnaAuditTest {
 	private String clientKeyStore = "src/test/resources/testKeystore.jks";
 	private String clientKeyStorePass = "changeit";
 
+	/**
+	 * This method initializes IPF and OpenSAML XACML modules and sets key- and
+	 * truststore.
+	 */
 	@BeforeEach
 	public void setup() {
 		try {
@@ -72,15 +78,23 @@ public class SimplePpqClientAtnaAuditTest {
 		}
 	}
 
+	/**
+	 * This tests whether an audit event with type PPQ-2 and ID 110112 is sent when
+	 * querying a policy set.
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testSendPpq2() throws Exception {
 
+		// initialize client to query policies
 		PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).create();
 		SimplePpqClient client = ClientFactoryCh.getPpqClient(config);
 		client.setAuditContext(auditContext);
 		client.setCamelContext(camelContext);
 
+		// set identifier for whom the policies are to be queried
 		InstanceIdentifier instanceIdentifier = new InstanceIdentifierBuilder().buildObject();
 		instanceIdentifier.setExtension("761337610411265304");
 		instanceIdentifier.setRoot("2.16.756.5.30.1.127.3.10.3");
@@ -90,6 +104,7 @@ public class SimplePpqClientAtnaAuditTest {
 
 		assertNotNull(response);
 
+		// check audit logging entries
 		String logContent = checkAuditLogging();
 		assertTrue(logContent.contains("<EventID csd-code=\"110112\""));
 		assertTrue(logContent.contains("<EventTypeCode csd-code=\"PPQ-2\""));
@@ -97,12 +112,23 @@ public class SimplePpqClientAtnaAuditTest {
 		assertTrue(logContent.contains("RoleIDCode csd-code=\"110152\""));
 	}
 
+	/**
+	 * This method extracts content of LOG file and checks if auditing is basically
+	 * enabled.
+	 * 
+	 * @return
+	 * @throws IOException
+	 */
 	private String checkAuditLogging() throws IOException {
 		File originLogFile = new File("log/Spring-TestEHC.log");
 
+		// extract content of log file
 		String logContent = new String(Files.readAllBytes(originLogFile.toPath()));
 
+		// check if ATNA audit events could be sent
 		assertFalse(logContent.contains("Failed to send ATNA audit event to destination"));
+
+		// check if ATNA auditing is basically enabled
 		assertTrue(logContent.contains("Auditing"));
 
 		return logContent;

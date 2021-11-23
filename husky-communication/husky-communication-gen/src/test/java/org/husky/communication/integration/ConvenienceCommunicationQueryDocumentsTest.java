@@ -54,7 +54,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
- * Test of class ConvenienceCommunication
+ * The purpose of this test class is to check whether document metadata
+ * retrieval (XDS ITI-18) works with a wide variety of parameters.
  */
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
@@ -78,16 +79,19 @@ public class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 	private AffinityDomain affinityDomain = null;
 
 	/**
-	 * Method implementing
+	 * This method creates and start spring test application. Moreover, it sets the
+	 * endpoint of XDS service for querying metadata.
 	 *
 	 * @throws java.lang.Exception
 	 */
 	@BeforeEach
 	public void setUp() throws Exception {
+		// create and start spring test application
 		var app = new SpringApplication(TestApplication.class);
 		app.setWebApplicationType(WebApplicationType.NONE);
 		app.run();
 
+		// sets XDS service endpoint
 		affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
 
@@ -104,30 +108,55 @@ public class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 		affinityDomain.setRepositoryDestination(dest);
 	}
 
+	/**
+	 * This method checks if initialization of {@link ConvenienceCommunication} was
+	 * correct.
+	 */
 	@Test
 	public void contextLoads() {
 		assertNotNull(convenienceCommunication);
 		assertNotNull(convenienceCommunication.getCamelContext());
 	}
 
+	/**
+	 * This test checks the behavior of the
+	 * {@link ConvenienceCommunication#queryDocuments(org.husky.communication.xd.storedquery.AbstractStoredQuery, org.husky.xua.core.SecurityHeaderElement)}
+	 * when no documents are found.
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void queryFindDocumentsEmptyResponseTest() throws Exception {
 
+		// ID of the patient for whom the metadata is to be searched for
 		Identificator patientId = new Identificator("1.3.6.1.4.1.21367.13.20.3000", "IHEBLUE-2737");
 
 		FindDocumentsQuery findDocumentsQuery = new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED);
 
 		convenienceCommunication.setAffinityDomain(affinityDomain);
 		
+		// query metadata of documents
 		final QueryResponse response = convenienceCommunication.queryDocuments(findDocumentsQuery,
 				null);
 
+		// check if errors are returned
 		assertTrue(response.getErrors().isEmpty());
+
+		// check if no document metadata are returned
 		assertTrue(response.getDocuments().isEmpty());
 		assertTrue(response.getDocumentEntries().isEmpty());
+
+		// check if query was successful
 		assertEquals(Status.SUCCESS, response.getStatus());
 	}
 
+	/**
+	 * This test checks the behavior of the
+	 * {@link ConvenienceCommunication#queryDocuments(org.husky.communication.xd.storedquery.AbstractStoredQuery, org.husky.xua.core.SecurityHeaderElement)}
+	 * if no patient ID is passed.
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void queryFindDocumentsNoPatientIdExpectedErrorTest() throws Exception {
 
@@ -135,11 +164,14 @@ public class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 
 		convenienceCommunication.setAffinityDomain(affinityDomain);
 
+		// query metadata of documents
 		final QueryResponse response = convenienceCommunication.queryDocuments(findDocumentsQuery, null);
 
+		// check if query failed
 		assertEquals(Status.FAILURE, response.getStatus());
 		assertFalse(response.getErrors().isEmpty());
 
+		// check details of returned errors
 		assertEquals(2, response.getErrors().size());
 
 		ErrorInfo error = response.getErrors().get(0);
@@ -153,6 +185,13 @@ public class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 		assertEquals(Severity.ERROR, error.getSeverity());
 	}
 
+	/**
+	 * This test checks the behavior of the
+	 * {@link ConvenienceCommunication#queryDocuments(org.husky.communication.xd.storedquery.AbstractStoredQuery, org.husky.xua.core.SecurityHeaderElement)}
+	 * when at least metadata is found for one PDF document
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void queryFindDocumentsMetadataOfPdf() throws Exception {
 
@@ -162,16 +201,19 @@ public class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 
 		convenienceCommunication.setAffinityDomain(affinityDomain);
 
+		// query metadata of documents with patient ID and approved as availability
+		// status
 		final QueryResponse response = convenienceCommunication.queryDocuments(findDocumentsQuery, null);
 
+		// check if query was successful
 		assertTrue(response.getErrors().isEmpty());
 		assertEquals(Status.SUCCESS, response.getStatus());
 		assertTrue(response.getDocumentEntries().size() > 0);
 
 		DocumentEntry documentEntry = response.getDocumentEntries().get(0);
 
-		// check if identifiers (unique ID, repository ID and home community ID are
-		// equal)
+		// check if identifiers (unique ID, repository ID and home community ID) are
+		// equal
 		assertEquals("1.2.820.99999.15031207481211484821638086641062503555190193702785", documentEntry.getUniqueId());
 		assertEquals("1.1.4567332.1.75", documentEntry.getRepositoryUniqueId());
 		assertEquals("urn:oid:1.1.4567334.1.6", documentEntry.getHomeCommunityId());
@@ -252,6 +294,24 @@ public class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 				documentEntry.getAuthors().get(0).getAuthorSpecialty().get(0).getAssigningAuthority().getUniversalId());
 	}
 
+	/**
+	 * This test checks the behavior of the
+	 * {@link ConvenienceCommunication#queryDocuments(org.husky.communication.xd.storedquery.AbstractStoredQuery, org.husky.xua.core.SecurityHeaderElement)}
+	 * when at least metadata is found for one CDA document with following metadata:
+	 * 
+	 * <ul>
+	 * <li>patient ID</li>
+	 * <li>class code</li>
+	 * <li>practice setting</li>
+	 * <li>health care facility</li>
+	 * <li>confidentiality</li>
+	 * <li>format</li>
+	 * <li>given and last name of author</li>
+	 * <li>approved as availability status</li>
+	 * </ul>
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void queryFindDocumentsMetadataOfCda() throws Exception {
 
@@ -282,16 +342,18 @@ public class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 
 		convenienceCommunication.setAffinityDomain(affinityDomain);
 
+		// query metadata of documents
 		final QueryResponse response = convenienceCommunication.queryDocuments(findDocumentsQuery, null);
 
+		// check if query was successful
 		assertTrue(response.getErrors().isEmpty());
 		assertEquals(Status.SUCCESS, response.getStatus());
 		assertTrue(response.getDocumentEntries().size() > 0);
 
 		DocumentEntry documentEntry = response.getDocumentEntries().get(0);
 
-		// check if identifiers (unique ID, repository ID and home community ID are
-		// equal)
+		// check if identifiers (unique ID, repository ID and home community ID) are
+		// equal
 		assertEquals("1.2.820.99999.18508463736145106181926975526539403561455330316563", documentEntry.getUniqueId());
 		assertEquals("1.1.4567332.1.75", documentEntry.getRepositoryUniqueId());
 		assertEquals("urn:oid:1.1.4567334.1.6", documentEntry.getHomeCommunityId());
@@ -371,9 +433,17 @@ public class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 				documentEntry.getAuthors().get(0).getAuthorSpecialty().get(0).getAssigningAuthority().getUniversalId());
 	}
 
+	/**
+	 * This test checks the behavior of the
+	 * {@link ConvenienceCommunication#queryDocumentReferencesOnly(org.husky.communication.xd.storedquery.AbstractStoredQuery, org.husky.xua.core.SecurityHeaderElement)}
+	 * when only the reference to a document is to be returned in the query.
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void queryGetDocumentsMetadataOfCda() throws Exception {
 
+		// unique IDs of documents for which the document references are searched for
 		List<String> uniqueIds = new LinkedList<>();
 		uniqueIds.add("1.2.820.99999.18508463736145106181926975526539403561455330316563");
 
@@ -383,11 +453,14 @@ public class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 
 		final QueryResponse response = convenienceCommunication.queryDocumentReferencesOnly(getDocumentsQuery, null);
 
+		// check if query was successful
 		assertTrue(response.getErrors().isEmpty());
 		assertEquals(Status.SUCCESS, response.getStatus());
-		assertTrue(!response.getReferences().isEmpty());
-		assertEquals(1, response.getReferences().size());
 
+		// check if references are returned.
+		assertTrue(response.getReferences().size() > 0);
+
+		// check if retrieved reference is correct
 		ObjectReference objectRef = response.getReferences().iterator().next();
 		assertEquals("urn:uuid:afd9bee4-4c30-4b58-a0e7-e301c799047b", objectRef.getId());
 		assertEquals("urn:oid:1.1.4567334.1.6", objectRef.getHome());

@@ -44,7 +44,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
- * Test of class ConvenienceCommunication
+ * The purpose of this test class is to check whether the submission of
+ * documents (XDS ITI-41) works.
  */
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
@@ -66,16 +67,19 @@ public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 
 
 	/**
-	 * Method implementing
+	 * This method creates and start spring test application. Moreover, it sets the
+	 * endpoint of XDS service for submitting documents.
 	 *
 	 * @throws java.lang.Exception
 	 */
 	@BeforeEach
 	public void setUp() throws Exception {
+		// create and start spring test application
 		var app = new SpringApplication(TestApplication.class);
 		app.setWebApplicationType(WebApplicationType.NONE);
 		app.run();
 
+		// sets XDS service endpoint
 		affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
 
@@ -91,89 +95,155 @@ public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 		affinityDomain.setRegistryDestination(dest);
 		affinityDomain.setRepositoryDestination(dest);
 
+		// here, all cached documents in ConvenienceCommunication are removed to avoid
+		// sending unwanted documents
 		convenienceCommunication.clearDocuments();
 	}
 
+	/**
+	 * This method checks if initialization of {@link ConvenienceCommunication} was
+	 * correct.
+	 */
 	@Test
 	public void contextLoads() {
 		assertNotNull(convenienceCommunication);
 		assertNotNull(convenienceCommunication.getCamelContext());
 	}
 
+	/**
+	 * This test checks the behavior of the
+	 * {@link ConvenienceCommunication#submit(SubmissionSetMetadata, org.husky.xua.core.SecurityHeaderElement)}
+	 * when a PDF document is submitted with separate submission set metadata.
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void submitPdfDocTest() throws Exception {
 		convenienceCommunication.setAffinityDomain(affinityDomain);
-
 		convenienceCommunication.clearDocuments();
+
+		// PDF document is added to convenienceCommunication object, extracting all the
+		// metadata that can be extracted.
 		DocumentMetadata metdata = convenienceCommunication.addDocument(DocumentDescriptor.PDF, getDocPdf());
+
+		// The metadata is set explicitly here
 		SubmissionSetMetadata subSet = new SubmissionSetMetadata();
 		Identificator patientId = new Identificator("1.3.6.1.4.1.21367.13.20.1000", "IHERED-1024");
 		setMetadataForPdf(metdata, patientId);
 		setSubmissionMetadata(subSet, patientId);
+
+		// submit added documents
 		var response = convenienceCommunication.submit(subSet, null);
 
+		// checks whether the document has been successfully submitted
 		assertTrue(response.getErrors().isEmpty());
 		assertEquals(Status.SUCCESS, response.getStatus());
 	}
 
+	/**
+	 * This test checks the behavior of the
+	 * {@link ConvenienceCommunication#submit(SubmissionSetMetadata, org.husky.xua.core.SecurityHeaderElement)}
+	 * when a CDA document is submitted with separate submission set metadata.
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void submitCdaDocTest() throws Exception {
 		convenienceCommunication.setAffinityDomain(affinityDomain);
 		convenienceCommunication.clearDocuments();
+
+		// CDA document is added to convenienceCommunication object, extracting all the
+		// metadata that can be extracted. In the case of CDA documents, some metadata
+		// can be extracted automatically.
 		DocumentMetadata metdata = convenienceCommunication.addDocument(DocumentDescriptor.CDA_R2, getDocCda());
+
+		// The metadata is set explicitly here
 		SubmissionSetMetadata subSet = new SubmissionSetMetadata();
 		Identificator patientId = new Identificator("1.3.6.1.4.1.21367.13.20.3000", "IHEBLUE-2599");
 		setMetadataForCda(metdata, patientId);
 		setSubmissionMetadata(subSet, patientId);
 
+		// submit added documents
 		var response = convenienceCommunication.submit(subSet, null);
 
+		// checks whether the document has been successfully submitted
 		assertTrue(response.getErrors().isEmpty());
 		assertEquals(Status.SUCCESS, response.getStatus());
 	}
 
+	/**
+	 * This test checks the behavior of the
+	 * {@link ConvenienceCommunication#submit(SubmissionSetMetadata, org.husky.xua.core.SecurityHeaderElement)}
+	 * when a CDA document is submitted with invalid metadata.
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void submitDocumentWrongMetadataTest() throws Exception {
 		convenienceCommunication.setAffinityDomain(affinityDomain);
-
 		convenienceCommunication.clearDocuments();
+
+		// CDA document is added to convenienceCommunication object, extracting all the
+		// metadata that can be extracted. In the case of CDA documents, some metadata
+		// can be extracted automatically.
 		DocumentMetadata metdata = convenienceCommunication.addDocument(DocumentDescriptor.CDA_R2, getDocCda());
+
+		// The metadata is set explicitly here. In this test case an incorrect class
+		// code is set.
 		SubmissionSetMetadata subSet = new SubmissionSetMetadata();
 		Identificator patientId = new Identificator("1.3.6.1.4.1.21367.13.20.3000", "IHEBLUE-1043");
 		setMetadataForCda(metdata, patientId);
 		metdata.setClassCode(new Code("1", "1.2.3.4.5", "display"));
 		setSubmissionMetadata(subSet, patientId);
 
+		// submit added documents
 		var response = convenienceCommunication.submit(subSet, null);
 
+		// checks whether the submission of the document failed
 		assertEquals(Status.FAILURE, response.getStatus());
 		assertTrue(response.getErrors().size() > 0);
 
+		// checks if XDSRegistryMetadataError is returned
 		ErrorInfo error = response.getErrors().get(0);
 		assertEquals(ErrorCode.REGISTRY_METADATA_ERROR, error.getErrorCode());
 		assertEquals("CodeValidation", error.getLocation());
 		assertEquals(Severity.ERROR, error.getSeverity());
 	}
 
+	/**
+	 * This test checks the behavior of the
+	 * {@link ConvenienceCommunication#submitReplacement(SubmissionSetMetadata, String, org.husky.xua.core.SecurityHeaderElement)}
+	 * when an existing CDA document is to be replaced by a new one.
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void replaceCdaDocTest() throws Exception {
 		convenienceCommunication.setAffinityDomain(affinityDomain);
-
 		convenienceCommunication.clearDocuments();
+
+		// Here the version 1 of the CDA document is transmitted, which should be
+		// replaced afterwards
 		DocumentMetadata metdata = convenienceCommunication.addDocument(DocumentDescriptor.CDA_R2, getDocCda());
 		SubmissionSetMetadata subSet = new SubmissionSetMetadata();
 		Identificator patientId = new Identificator("1.3.6.1.4.1.21367.13.20.3000", "IHEBLUE-1043");
 		setMetadataForCda(metdata, patientId);
 		setSubmissionMetadata(subSet, patientId);
 
+		// submit added documents
 		var response = convenienceCommunication.submit(subSet, null);
 
+		// The entry UUID of the first submitted document is stored here, since it is
+		// needed when replacing the document.
 		String entryUuid = convenienceCommunication.getTxnData().getDocuments().get(0).getDocumentEntry()
 				.getEntryUuid();
 
+		// checks whether the document has been successfully submitted
 		assertTrue(response.getErrors().isEmpty());
 		assertEquals(Status.SUCCESS, response.getStatus());
 
+		// Here the version 2 of the CDA document is transmitted, which should replace
+		// the first CDA document
 		convenienceCommunication.clearDocuments();
 		metdata = convenienceCommunication.addDocument(DocumentDescriptor.CDA_R2, getDocCdaV2());
 		subSet = new SubmissionSetMetadata();
@@ -181,8 +251,11 @@ public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 		setMetadataForCda(metdata, patientId);
 		setSubmissionMetadata(subSet, patientId);
 
+		// method to replace existing document with passed entry UUID is called. All
+		// added documents are submitted
 		response = convenienceCommunication.submitReplacement(subSet, entryUuid, null);
 
+		// checks whether the document has been successfully replaced
 		assertTrue(response.getErrors().isEmpty());
 		assertEquals(Status.SUCCESS, response.getStatus());
 	}

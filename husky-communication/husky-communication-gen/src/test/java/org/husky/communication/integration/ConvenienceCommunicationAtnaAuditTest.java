@@ -45,7 +45,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
- * Test of class ConvenienceCommunication
+ * This test class is to check whether ATNA audit messages are sent in the
+ * course of XDS transactions. This is tested by checking whether audit entries
+ * have been written to the LOG file.
  */
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
@@ -66,10 +68,8 @@ public class ConvenienceCommunicationAtnaAuditTest extends XdsTestUtils {
 
 	final private String senderApplicationOid = "1.2.3.4";
 
-	private AffinityDomain affinityDomain = null;
-
 	/**
-	 * Method implementing
+	 * This method creates and start spring test application
 	 *
 	 * @throws java.lang.Exception
 	 */
@@ -78,8 +78,19 @@ public class ConvenienceCommunicationAtnaAuditTest extends XdsTestUtils {
 		var app = new SpringApplication(TestApplication.class);
 		app.setWebApplicationType(WebApplicationType.NONE);
 		app.run();
+	}
 
-		affinityDomain = new AffinityDomain();
+	/**
+	 * This tests whether an audit event with type ITI-18 and ID 110112 is sent when
+	 * requesting the metadata of a document.
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void queryGetDocumentsMetadataOfCdaWithAuditMessage() throws Exception {
+
+		// sets the endpoint of XDS service for querying metadata
+		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
 
 		try {
@@ -93,30 +104,32 @@ public class ConvenienceCommunicationAtnaAuditTest extends XdsTestUtils {
 		dest.setReceiverFacilityOid(facilityName);
 		affinityDomain.setRegistryDestination(dest);
 		affinityDomain.setRepositoryDestination(dest);
-	}
+		convenienceCommunication.setAffinityDomain(affinityDomain);
+		convenienceCommunication.setAtnaConfig(AtnaConfigMode.SECURE);
 
-	@Test
-	public void queryGetDocumentsMetadataOfCdaWithAuditMessage() throws Exception {
-
+		// sets the unique ID of the document for which the metadata should be retrieved
 		List<String> uniqueIds = new LinkedList<>();
 		uniqueIds.add("1.2.820.99999.18508463736145106181926975526539403561455330316563");
 
 		GetDocumentsQuery getDocumentsQuery = new GetDocumentsQuery(uniqueIds, false, "urn:oid:1.1.4567334.1.6");
 
-		convenienceCommunication.setAffinityDomain(affinityDomain);
-		convenienceCommunication.setAtnaConfig(AtnaConfigMode.SECURE);
-
+		// In this example, only the references to the documents are retrieved in
+		// metadata.
 		final QueryResponse response = convenienceCommunication.queryDocumentReferencesOnly(getDocumentsQuery, null);
 
 		assertTrue(response.getErrors().isEmpty());
 		assertEquals(Status.SUCCESS, response.getStatus());
-		assertTrue(!response.getReferences().isEmpty());
-		assertEquals(1, response.getReferences().size());
 
+		// check if references are returned.
+		assertTrue(!response.getReferences().isEmpty());
+		assertTrue(response.getReferences().size() > 0);
+
+		// check if retrieved reference is correct
 		ObjectReference objectRef = response.getReferences().iterator().next();
 		assertEquals("urn:uuid:afd9bee4-4c30-4b58-a0e7-e301c799047b", objectRef.getId());
 		assertEquals("urn:oid:1.1.4567334.1.6", objectRef.getHome());
 
+		// check audit logging entries
 		String logContent = checkAuditLogging();
 		assertTrue(logContent.contains("<EventID csd-code=\"110112\""));
 		assertTrue(logContent.contains("<EventTypeCode csd-code=\"ITI-18\""));
@@ -124,8 +137,16 @@ public class ConvenienceCommunicationAtnaAuditTest extends XdsTestUtils {
 		assertTrue(logContent.contains("RoleIDCode csd-code=\"110152\""));
 	}
 
+	/**
+	 * This tests whether an audit event with type ITI-43 and ID 110107 is sent when
+	 * a document is retrieved.
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void retrieveDocumentCdaTest() throws Exception {
+
+		// sets the endpoint of XDS service for retrieving documents
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
 
@@ -142,18 +163,24 @@ public class ConvenienceCommunicationAtnaAuditTest extends XdsTestUtils {
 		affinityDomain.setRepositoryDestination(dest);
 		convenienceCommunication.setAffinityDomain(affinityDomain);
 
+		// sets the unique ID, repository ID and home community ID of the document which
+		// should be retrieved
 		var documentRequest = new DocumentRequest("1.1.4567332.1.75", null,
 				"1.2.820.99999.18508463736145106181926975526539403561455330316563", "urn:oid:1.1.4567334.1.6");
 
+		// send request to retrieve document
 		final RetrievedDocumentSet response = convenienceCommunication.retrieveDocument(documentRequest, null);
+
 		assertEquals(Status.SUCCESS, response.getStatus());
 		assertTrue(response.getErrors().isEmpty());
-		assertFalse(response.getDocuments().isEmpty());
 
+		// check if the document is returned
+		assertFalse(response.getDocuments().isEmpty());
 		assertEquals(1, response.getDocuments().size());
 
 		RetrievedDocument retrievedDocument = response.getDocuments().get(0);
 
+		// check if returned document is a XML document
 		assertEquals("text/xml", retrievedDocument.getMimeType());
 
 		try (var is = retrievedDocument.getDataHandler().getInputStream()) {
@@ -162,15 +189,21 @@ public class ConvenienceCommunicationAtnaAuditTest extends XdsTestUtils {
 			assertTrue(bytesOfDocument.length > 0);
 		}
 
-		checkAuditLogging();
-
+		// check audit logging entries
 		String logContent = checkAuditLogging();
 		assertTrue(logContent.contains("<EventID csd-code=\"110107\""));
 		assertTrue(logContent.contains("<EventTypeCode csd-code=\"ITI-43\""));
 	}
 
+	/**
+	 * This tests whether an audit event with type ITI-41 and ID 110106 is sent when
+	 * submitting a document.
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void submitPdfDocTest() throws Exception {
+		// sets the endpoint of XDS service for submitting documents
 		var affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
 
@@ -185,33 +218,52 @@ public class ConvenienceCommunicationAtnaAuditTest extends XdsTestUtils {
 		dest.setReceiverFacilityOid(facilityName);
 		affinityDomain.setRegistryDestination(dest);
 		affinityDomain.setRepositoryDestination(dest);
-
 		convenienceCommunication.setAffinityDomain(affinityDomain);
 
+		// here, all cached documents in ConvenienceCommunication are removed to avoid
+		// sending unwanted documents
 		convenienceCommunication.clearDocuments();
+
+		// This adds the document to be sent to the object. In the course of this some
+		// metadata is extracted.
 		DocumentMetadata metdata = convenienceCommunication.addDocument(DocumentDescriptor.PDF, getDocPdf());
 		SubmissionSetMetadata subSet = new SubmissionSetMetadata();
 		Identificator patientId = new Identificator("1.3.6.1.4.1.21367.13.20.3000", "IHEBLUE-1043");
+		// Here the metadata to be set explicitly are set
 		setMetadataForPdf(metdata, patientId);
+		// sets the metadata of the submission set
 		setSubmissionMetadata(subSet, patientId);
+
+		// send request to submit document
 		var response = convenienceCommunication.submit(subSet, null);
 
+		// check if request was successful
 		assertTrue(response.getErrors().isEmpty());
 		assertEquals(Status.SUCCESS, response.getStatus());
 
-		checkAuditLogging();
-
+		// check audit logging entries
 		String logContent = checkAuditLogging();
 		assertTrue(logContent.contains("<EventID csd-code=\"110106\""));
 		assertTrue(logContent.contains("<EventTypeCode csd-code=\"ITI-41\""));
 	}
 
+	/**
+	 * This method extracts content of LOG file and checks if auditing is basically
+	 * enabled.
+	 * 
+	 * @return
+	 * @throws IOException
+	 */
 	private String checkAuditLogging() throws IOException {
 		File originLogFile = new File("log/Spring-TestEHC.log");
 
+		// extract content of log file
 		String logContent = new String(Files.readAllBytes(originLogFile.toPath()));
 
+		// check if ATNA audit events could be sent
 		assertFalse(logContent.contains("Failed to send ATNA audit event to destination"));
+
+		// check if ATNA auditing is basically enabled
 		assertTrue(logContent.contains("Auditing"));
 
 		return logContent;

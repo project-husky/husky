@@ -92,6 +92,10 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+/**
+ * The purpose of this test class is to check whether adding, updating and
+ * deleting (CH-PPQ-1) policies works.
+ */
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
 @EnableAutoConfiguration
@@ -111,6 +115,11 @@ public class SimplePpfClientTest {
 	private static final String clientKeyStorePass = "changeit";
 	private static SecurityHeaderElement xuaAssertion = null;
 
+	/**
+	 * This method initializes IPF and OpenSAML XACML modules and sets key- and
+	 * truststore. Moreover it stores XUA assertion for user aandrews from gazelle
+	 * environment.
+	 */
 	@BeforeAll
 	public static void setup() throws FileNotFoundException, IOException, DeserializeException, ClientSendException {
 		try {
@@ -125,6 +134,7 @@ public class SimplePpfClientTest {
 			e1.printStackTrace();
 		}
 
+		// initialize XUA client to query XUA assertion
 		XuaClientConfig xuaClientConfig = new XuaClientConfigBuilderImpl().clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).clientKeyStoreType("jks").url(urlToXua).create();
 
@@ -133,6 +143,8 @@ public class SimplePpfClientTest {
 		var purposeOfUse = new PurposeOfUseBuilder().code(PurposeOfUse.NORMAL_ACCESS.getCodeValue())
 				.codeSystem("2.16.756.5.30.1.127.3.10.6").displayName(PurposeOfUse.NORMAL_ACCESS.getDisplayName())
 				.buildObject();
+
+		// set role of user
 		var role = new RoleBuilder().code("HCP").codeSystem("2.16.756.5.30.1.127.3.10.6").displayName("Behandelnde(r)")
 				.buildObject();
 
@@ -146,9 +158,19 @@ public class SimplePpfClientTest {
 		List<XUserAssertionResponse> response = xuaClient.send(requestIdpAssertion("aandrews", "azerty"),
 				assertionRequest);
 
+		// cache XUA assertion for other requests
 		xuaAssertion = response.get(0).getAssertion();
 	}
 
+	/**
+	 * This method requests IDP assertion of gazelle environment.
+	 * 
+	 * @param user     username
+	 * @param password password
+	 * 
+	 * @return received IDP assertion
+	 * @throws ClientSendException
+	 */
 	private static Assertion requestIdpAssertion(String user, String password) throws ClientSendException {
 		IdpClientBasicAuthConfigImpl idpClientConfig = new IdpClientBasicAuthConfigBuilderImpl()
 				.basicAuthPassword(password).basicAuthUsername(user).url(urlToIdp).create();
@@ -168,10 +190,18 @@ public class SimplePpfClientTest {
 
 	}
 
+	/**
+	 * This test checks the behavior of the
+	 * {@link SimplePpfClient#send(SecurityHeaderElement, PrivacyPolicyFeed) when
+	 * for adding a policy.
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	@Order(1)
 	public void testSendPpq1AddPolicy() throws Exception {
 
+		// initialize client to add policy
 		PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).create();
 		SimplePpfClient client = ClientFactoryCh.getPpfClient(config);
@@ -184,6 +214,7 @@ public class SimplePpfClientTest {
 				.id(UUID.randomUUID().toString()).issueInstant(new GregorianCalendar())
 				.create();
 
+		// set home community ID
 		var nameId = new NameIDType();
 		nameId.setValue("urn:oid:1.3.6.1.4.1.21367.2017.2.6.2");
 		nameId.setNameQualifier("urn:e-health-suisse:community-index");
@@ -200,6 +231,7 @@ public class SimplePpfClientTest {
 		SubjectsType subjects = new SubjectsType();
 		SubjectType subject = new SubjectType();
 
+		// set subject ID to policy assertion
 		SubjectMatchType match1 = new SubjectMatchType();
 		match1.setMatchFunction(new StringEqualFunction());
 		AttributeValueType attributeVal = new AttributeValueType();
@@ -214,6 +246,7 @@ public class SimplePpfClientTest {
 
 		subject.getSubjectMatches().add(match1);
 
+		// set qualifier of subject ID
 		SubjectMatchType match2 = new SubjectMatchType();
 		match2.setMatchFunction(new StringEqualFunction());
 		attributeVal = new AttributeValueType();
@@ -233,6 +266,7 @@ public class SimplePpfClientTest {
 		attributeVal = new AttributeValueType();
 		attributeVal.setDataType(new CvDataTypeAttribute());
 
+		// set role of person
 		var cv = new CV();
 		cv.setCode("HCP");
 		cv.setCodeSystem("2.16.756.5.30.1.127.3.10.6");
@@ -251,6 +285,7 @@ public class SimplePpfClientTest {
 		subjects.getSubjects().add(subject);
 		target.setSubjects(subjects);
 
+		// set person ID of epr-spid
 		ResourcesType resources = new ResourcesType();
 		ResourceType resource = new ResourceType();
 		ResourceMatchType resourceMatch = new ResourceMatchType();
@@ -275,6 +310,7 @@ public class SimplePpfClientTest {
 
 		policySet.setTarget(target);
 		
+		// set policy set ID reference
 		XACMLPolicySetIdReferenceStatementType referenceId = new XACMLPolicySetIdReferenceStatementType();
 		IdReferenceType idReference = new IdReferenceType();
 		idReference.setValue("urn:e-health-suisse:2015:policies:access-level:delegation-and-normal");
@@ -292,43 +328,61 @@ public class SimplePpfClientTest {
 		org.opensaml.saml.saml2.core.Assertion addPolicyAssertionOpenSaml = (org.opensaml.saml.saml2.core.Assertion) new AssertionBuilderImpl()
 				.create(addPolicyAssertion)
 				.getWrappedObject();
+
+		// create policy feed object with method add to add policy
 		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.AddPolicy)
 				.create(addPolicyAssertionOpenSaml);
 
+		// add policy
 		PrivacyPolicyFeedResponse response = client.send(xuaAssertion, ppFeedRequest);
 
+		// check if policy was successfully added
 		assertTrue(response.getExceptions().isEmpty());
 		assertEquals("urn:e-health-suisse:2015:response-status:success", response.getStatus());
 	}
 
+	/**
+	 * This test checks the behavior of the
+	 * {@link SimplePpfClient#send(SecurityHeaderElement, PrivacyPolicyFeed) when
+	 * for updating a policy.
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	@Order(2)
 	public void testSendPpq1UpdatePolicy() throws Exception {
 		assertNotNull(xuaAssertion);
 
+		// initialize client to query policies
 		PpClientConfig configQuery = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).create();
 		SimplePpqClient clientPpq = ClientFactoryCh.getPpqClient(configQuery);
 		clientPpq.setCamelContext(camelContext);
 		clientPpq.setAuditContext(auditContext);
 
+		// set identifier for whom the policies are to be queried
 		InstanceIdentifier instanceIdentifier = new InstanceIdentifierBuilder().buildObject();
 		instanceIdentifier.setExtension("761337610411265304");
 		instanceIdentifier.setRoot("2.16.756.5.30.1.127.3.10.3");
+
+		// create query object
 		PrivacyPolicyQuery query = new PrivacyPolicyQueryBuilderImpl().instanceIdentifier(instanceIdentifier)
 				.issueInstant(new GregorianCalendar()).version("2.0").id(UUID.randomUUID().toString()).create();
+
+		// query policies
 		PrivacyPolicyQueryResponseImpl responseQuery = (PrivacyPolicyQueryResponseImpl) clientPpq.send(xuaAssertion,
 				query);
 
+		// check if request was successful
 		assertNotNull(responseQuery);
 		assertNotNull(responseQuery.getWrappedObject());
-
 		assertNotNull(responseQuery.getWrappedObject().getStatus());
 		assertNotNull(responseQuery.getWrappedObject().getStatus().getStatusCode());
 		assertNotNull(responseQuery.getWrappedObject().getStatus().getStatusMessage());
 		assertEquals("urn:oasis:names:tc:SAML:2.0:status:Success",
 				responseQuery.getWrappedObject().getStatus().getStatusCode().getValue());
 
+		// check if policy assertions are returned
 		assertNotNull(responseQuery.getWrappedObject().getAssertions());
 
 		org.opensaml.saml.saml2.core.Assertion queriedPolicyAssertion = responseQuery.getWrappedObject().getAssertions().get(0);
@@ -339,6 +393,7 @@ public class SimplePpfClientTest {
 		assertNotNull(statement.getPolicySets());
 		assertFalse(statement.getPolicySets().isEmpty());
 
+		// extract ID of policy set with delegation-and-normal as policy reference
 		org.opensaml.xacml.policy.PolicySetType policySetExist = null;
 		for (org.opensaml.xacml.policy.PolicySetType policySet : statement.getPolicySets()) {
 			if (policySet != null && policySet.getPolicySetIdReferences() != null
@@ -355,15 +410,18 @@ public class SimplePpfClientTest {
 
 		String policySetId = policySetExist.getPolicySetId();
 
+		// initialize client to update policy
 		PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).create();
 		SimplePpfClient client = ClientFactoryCh.getPpfClient(config);
 		client.setCamelContext(camelContext);
 		client.setAuditContext(auditContext);
 
+		// create assertion to update policy
 		Assertion updatePolicyAssertion = new AssertionBuilderImpl().version("2.0").id(UUID.randomUUID().toString())
 				.issueInstant(new GregorianCalendar()).create();
 
+		// set home community ID
 		var nameId = new NameIDType();
 		nameId.setValue("urn:oid:1.3.6.1.4.1.21367.2017.2.6.2");
 		nameId.setNameQualifier("urn:e-health-suisse:community-index");
@@ -382,6 +440,7 @@ public class SimplePpfClientTest {
 		SubjectsType subjects = new SubjectsType();
 		SubjectType subject = new SubjectType();
 
+		// set subject ID to policy assertion
 		SubjectMatchType match1 = new SubjectMatchType();
 		match1.setMatchFunction(new StringEqualFunction());
 		AttributeValueType attributeVal = new AttributeValueType();
@@ -396,6 +455,7 @@ public class SimplePpfClientTest {
 
 		subject.getSubjectMatches().add(match1);
 
+		// set qualifier of subject ID
 		SubjectMatchType match2 = new SubjectMatchType();
 		match2.setMatchFunction(new StringEqualFunction());
 		attributeVal = new AttributeValueType();
@@ -415,6 +475,7 @@ public class SimplePpfClientTest {
 		attributeVal = new AttributeValueType();
 		attributeVal.setDataType(new CvDataTypeAttribute());
 
+		// set role of person
 		var cv = new CV();
 		cv.setCode("HCP");
 		cv.setCodeSystem("2.16.756.5.30.1.127.3.10.6");
@@ -432,6 +493,7 @@ public class SimplePpfClientTest {
 		subjects.getSubjects().add(subject);
 		target.setSubjects(subjects);
 
+		// set person ID of epr-spid
 		ResourcesType resources = new ResourcesType();
 		ResourceType resource = new ResourceType();
 		ResourceMatchType resourceMatch = new ResourceMatchType();
@@ -456,6 +518,7 @@ public class SimplePpfClientTest {
 
 		policySet.setTarget(target);
 
+		// set policy set ID reference
 		XACMLPolicySetIdReferenceStatementType referenceId = new XACMLPolicySetIdReferenceStatementType();
 		IdReferenceType idReference = new IdReferenceType();
 		idReference.setValue("urn:e-health-suisse:2015:policies:access-level:delegation-and-restricted");
@@ -474,71 +537,90 @@ public class SimplePpfClientTest {
 				.create(updatePolicyAssertion)
 				.getWrappedObject();
 
+		// create policy feed object with method update to update policy
 		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.UpdatePolicy)
 				.create(updatePolicyAssertionOpenSaml);
 
+		// update policy
 		PrivacyPolicyFeedResponse response = client.send(xuaAssertion, ppFeedRequest);
 
+		// check if policy was successfully updated
 		assertTrue(response.getExceptions().isEmpty());
 		assertEquals("urn:e-health-suisse:2015:response-status:success", response.getStatus());
 
 	}
 
+	/**
+	 * This test checks the behavior of the
+	 * {@link SimplePpfClient#send(SecurityHeaderElement, PrivacyPolicyFeed) when
+	 * for deleting the policy.
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	@Order(3)
 	public void testSendPpq1DeletePolicy() throws Exception {
+		// initialize client to query policies
 		PpClientConfig configQuery = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).create();
 		SimplePpqClient clientPpq = ClientFactoryCh.getPpqClient(configQuery);
 		clientPpq.setCamelContext(camelContext);
 		clientPpq.setAuditContext(auditContext);
 
+		// set identifier for whom the policies are to be queried
 		InstanceIdentifier instanceIdentifier = new InstanceIdentifierBuilder().buildObject();
 		instanceIdentifier.setExtension("761337610411265304");
 		instanceIdentifier.setRoot("2.16.756.5.30.1.127.3.10.3");
+
+		// create query object
 		PrivacyPolicyQuery query = new PrivacyPolicyQueryBuilderImpl().instanceIdentifier(instanceIdentifier)
 				.issueInstant(new GregorianCalendar()).version("2.0").id(UUID.randomUUID().toString()).create();
+
+		// query policies
 		PrivacyPolicyQueryResponseImpl responseQuery = (PrivacyPolicyQueryResponseImpl) clientPpq.send(null, query);
 
+		// check if request was successful
 		assertNotNull(responseQuery);
 		assertNotNull(responseQuery.getWrappedObject());
-
 		assertNotNull(responseQuery.getWrappedObject().getStatus());
 		assertNotNull(responseQuery.getWrappedObject().getStatus().getStatusCode());
 		assertNotNull(responseQuery.getWrappedObject().getStatus().getStatusMessage());
 		assertEquals("urn:oasis:names:tc:SAML:2.0:status:Success",
 				responseQuery.getWrappedObject().getStatus().getStatusCode().getValue());
 
+		// check if policy assertions are returned
 		assertNotNull(responseQuery.getWrappedObject().getAssertions());
 
+		// extract ID of policy set
 		org.opensaml.saml.saml2.core.Assertion queriedPolicyAssertion = responseQuery.getWrappedObject().getAssertions().get(0);
-
 		var statement = (org.opensaml.xacml.profile.saml.XACMLPolicyStatementType) queriedPolicyAssertion.getStatements()
 				.get(0);
-
 		assertNotNull(statement.getPolicySets());
 		assertFalse(statement.getPolicySets().isEmpty());
 
 		var policySetQueried = statement.getPolicySets().get(0);
-
 		assertNotNull(policySetQueried);
 
 		String policySetId = policySetQueried.getPolicySetId();
 
+		// initialize client to delete policy
 		PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).create();
 		SimplePpfClient client = ClientFactoryCh.getPpfClient(config);
 		client.setCamelContext(camelContext);
 		client.setAuditContext(auditContext);
 		
+		// create assertion to delete policy
 		Assertion deletePolicyAssertion = new AssertionBuilderImpl().version("2.0").id(UUID.randomUUID().toString())
 				.issueInstant(new GregorianCalendar()).create();
 
+		// set home community ID
 		var nameId = new NameIDType();
 		nameId.setValue("urn:oid:1.3.6.1.4.1.21367.2017.2.6.2");
 		nameId.setNameQualifier("urn:e-health-suisse:community-index");
 		deletePolicyAssertion.setIssuer(nameId);
 
+		// set ID of policy which should be deleted
 		XACMLPolicySetIdReferenceStatementType policySetIdReferenceStatement = new XACMLPolicySetIdReferenceStatementType();
 		var idReference = new IdReferenceType();
 		idReference.setValue(policySetId);
@@ -549,13 +631,136 @@ public class SimplePpfClientTest {
 		org.opensaml.saml.saml2.core.Assertion deletePolicyAssertionOpenSaml = (org.opensaml.saml.saml2.core.Assertion) new AssertionBuilderImpl()
 				.create(deletePolicyAssertion).getWrappedObject();
 
+		// create policy feed object with method delete to delete policy
 		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.DeletePolicy)
 				.create(deletePolicyAssertionOpenSaml);
 
+		// delete policy
 		PrivacyPolicyFeedResponse response = client.send(xuaAssertion, ppFeedRequest);
 
+		// check if policy was successfully deleted
 		assertTrue(response.getExceptions().isEmpty());
 		assertEquals("urn:e-health-suisse:2015:response-status:success", response.getStatus());
+	}
+
+	/**
+	 * This test checks the behavior of the
+	 * {@link SimplePpfClient#send(SecurityHeaderElement, PrivacyPolicyFeed) when
+	 * for adding a policy with missing data.
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	@Order(4)
+	public void testSendPpq1AddPolicyWrongPolicyStructure() throws Exception {
+		// initialize client to add policy
+		PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
+				.clientKeyStorePassword(clientKeyStorePass).create();
+		SimplePpfClient client = ClientFactoryCh.getPpfClient(config);
+		client.setCamelContext(camelContext);
+		client.setAuditContext(auditContext);
+
+		assertNotNull(xuaAssertion);
+
+		Assertion addPolicyAssertion = new AssertionBuilderImpl().version("2.0").id(UUID.randomUUID().toString())
+				.issueInstant(new GregorianCalendar()).create();
+
+		// set home community ID
+		var nameId = new NameIDType();
+		nameId.setValue("urn:oid:1.3.6.1.4.1.21367.2017.2.6.2");
+		nameId.setNameQualifier("urn:e-health-suisse:community-index");
+		addPolicyAssertion.setIssuer(nameId);
+
+		XACMLPolicyStatementType policyStatement = new XACMLPolicyStatementType();
+		PolicySetType policySet = new PolicySetType();
+		policySet.setCombiningAlg(new PolicyDenyOverridesAlgorithm());
+
+		var id = new EvaluatableIDImpl(String.format("urn:uuid:%s", UUID.randomUUID().toString()));
+		policySet.setPolicySetId(id);
+
+		TargetType target = new TargetType();
+		SubjectsType subjects = new SubjectsType();
+		SubjectType subject = new SubjectType();
+
+		// set subject ID to policy assertion
+		SubjectMatchType match1 = new SubjectMatchType();
+		match1.setMatchFunction(new StringEqualFunction());
+		AttributeValueType attributeVal = new AttributeValueType();
+		attributeVal.setDataType(new StringDataTypeAttribute());
+		attributeVal.getContent().add("7601002469191");
+		match1.setAttributeValue(attributeVal);
+
+		SubjectAttributeDesignatorType subjAttrDesgn = new SubjectAttributeDesignatorType();
+		subjAttrDesgn.setAttributeId("urn:oasis:names:tc:xacml:1.0:subject:subject-id");
+		subjAttrDesgn.setDataType(new StringDataTypeAttribute());
+		match1.setSubjectAttributeDesignator(subjAttrDesgn);
+
+		subject.getSubjectMatches().add(match1);
+
+		// set qualifier of subject ID
+		SubjectMatchType match2 = new SubjectMatchType();
+		match2.setMatchFunction(new StringEqualFunction());
+		attributeVal = new AttributeValueType();
+		attributeVal.setDataType(new StringDataTypeAttribute());
+		attributeVal.getContent().add("urn:gs1:gln");
+		match2.setAttributeValue(attributeVal);
+
+		subjAttrDesgn = new SubjectAttributeDesignatorType();
+		subjAttrDesgn.setAttributeId("urn:oasis:names:tc:xacml:1.0:subject:subject-id-qualifier");
+		subjAttrDesgn.setDataType(new StringDataTypeAttribute());
+		match2.setSubjectAttributeDesignator(subjAttrDesgn);
+
+		subject.getSubjectMatches().add(match2);
+
+		//missing code value in subject matches
+
+		subjects.getSubjects().add(subject);
+		target.setSubjects(subjects);
+
+		// set person ID of epr-spid
+		ResourcesType resources = new ResourcesType();
+		ResourceType resource = new ResourceType();
+		ResourceMatchType resourceMatch = new ResourceMatchType();
+		resourceMatch.setMatchFunction(new IiEqualFunction());
+
+		attributeVal = new AttributeValueType();
+		attributeVal.setDataType(new IiDataTypeAttribute());
+		var instanceId = new II();
+		instanceId.setExtension("761337610411265304");
+		instanceId.setRoot("2.16.756.5.30.1.127.3.10.3");
+		attributeVal.getContent()
+				.add(new JAXBElement<>(new QName("urn:hl7-org:v3", "InstanceIdentifier"), II.class, instanceId));
+		resourceMatch.setAttributeValue(attributeVal);
+
+		ResourceAttributeDesignatorType resourceAttrDesign = new ResourceAttributeDesignatorType();
+		resourceAttrDesign.setDataType(new IiDataTypeAttribute());
+		resourceAttrDesign.setAttributeId("urn:e-health-suisse:2015:epr-spid");
+		resourceMatch.setResourceAttributeDesignator(resourceAttrDesign);
+		resource.getResourceMatches().add(resourceMatch);
+		resources.getResources().add(resource);
+		target.setResources(resources);
+
+		policySet.setTarget(target);
+
+		// missing PolicySetIdReference
+
+		policyStatement.getPolicyOrPolicySet().add(policySet);
+
+		addPolicyAssertion.getStatementOrAuthnStatementOrAuthzDecisionStatement().add(policyStatement);
+
+		org.opensaml.saml.saml2.core.Assertion addPolicyAssertionOpenSaml = (org.opensaml.saml.saml2.core.Assertion) new AssertionBuilderImpl()
+				.create(addPolicyAssertion).getWrappedObject();
+
+		// create policy feed object with method add to add policy
+		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.AddPolicy)
+				.create(addPolicyAssertionOpenSaml);
+
+		// add policy
+		PrivacyPolicyFeedResponse response = client.send(xuaAssertion, ppFeedRequest);
+
+		// check if request has failed
+		assertTrue(response.getExceptions().isEmpty());
+		assertEquals("urn:e-health-suisse:2015:response-status:failure", response.getStatus());
 	}
 
 }

@@ -40,7 +40,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
- * Test of class ConvenienceCommunication
+ * The purpose of this test class is to check whether document retrieval (XDS
+ * ITI-43) works.
  */
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
@@ -59,14 +60,27 @@ public class ConvenienceCommunicationRetrieveDocumentsTest extends XdsTestUtils 
 	final private String senderApplicationOid = "1.2.3.4";
 
 
+	/**
+	 * This method checks if initialization of {@link ConvenienceCommunication} was
+	 * correct.
+	 */
 	@Test
 	public void contextLoads() {
 		assertNotNull(convenienceCommunication);
 		assertNotNull(convenienceCommunication.getCamelContext());
 	}
 
+	/**
+	 * This test checks the behavior of the
+	 * {@link ConvenienceCommunication#retrieveDocument(DocumentRequest, org.husky.xua.core.SecurityHeaderElement)}
+	 * when passing IDs of a PDF document.
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void retrieveDocumentTest() throws Exception {
+
+		// sets XDS service endpoint
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
 
@@ -83,18 +97,24 @@ public class ConvenienceCommunicationRetrieveDocumentsTest extends XdsTestUtils 
 		affinityDomain.setRepositoryDestination(dest);
 		convenienceCommunication.setAffinityDomain(affinityDomain);
 
+		// set identifiers (unique ID, repository ID and home community ID) of one
+		// document
 		var documentRequest = new DocumentRequest("1.1.4567332.1.75", null,
 				"1.2.820.99999.15031207481211484821638086641062503555190193702785", "urn:oid:1.1.4567334.1.6");
 
 		final RetrievedDocumentSet response = convenienceCommunication.retrieveDocument(documentRequest, null);
+
+		// check if request was successful
 		assertEquals(Status.SUCCESS, response.getStatus());
 		assertTrue(response.getErrors().isEmpty());
-		assertFalse(response.getDocuments().isEmpty());
 
+		// check if document is returned
+		assertFalse(response.getDocuments().isEmpty());
 		assertEquals(1, response.getDocuments().size());
 
 		RetrievedDocument retrievedDocument = response.getDocuments().get(0);
 
+		// check if PDF is returned
 		assertEquals("application/pdf", retrievedDocument.getMimeType());
 
 		try (var is = retrievedDocument.getDataHandler().getInputStream()) {
@@ -103,8 +123,16 @@ public class ConvenienceCommunicationRetrieveDocumentsTest extends XdsTestUtils 
 		}
 	}
 
+	/**
+	 * This test checks the behavior of the
+	 * {@link ConvenienceCommunication#retrieveDocument(DocumentRequest, org.husky.xua.core.SecurityHeaderElement)}
+	 * when passing IDs of a CDA document.
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void retrieveDocumentCdaTest() throws Exception {
+		// sets XDS service endpoint
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
 
@@ -121,18 +149,24 @@ public class ConvenienceCommunicationRetrieveDocumentsTest extends XdsTestUtils 
 		affinityDomain.setRepositoryDestination(dest);
 		convenienceCommunication.setAffinityDomain(affinityDomain);
 
+		// set identifiers (unique ID, repository ID and home community ID) of one
+		// document
 		var documentRequest = new DocumentRequest("1.1.4567332.1.75", null,
 				"1.2.820.99999.18508463736145106181926975526539403561455330316563", "urn:oid:1.1.4567334.1.6");
 
 		final RetrievedDocumentSet response = convenienceCommunication.retrieveDocument(documentRequest, null);
+
+		// check if request was successful
 		assertEquals(Status.SUCCESS, response.getStatus());
 		assertTrue(response.getErrors().isEmpty());
-		assertFalse(response.getDocuments().isEmpty());
 
+		// check if document is returned
+		assertFalse(response.getDocuments().isEmpty());
 		assertEquals(1, response.getDocuments().size());
 
 		RetrievedDocument retrievedDocument = response.getDocuments().get(0);
 
+		// check if XML is returned
 		assertEquals("text/xml", retrievedDocument.getMimeType());
 
 		try (var is = retrievedDocument.getDataHandler().getInputStream()) {
@@ -141,8 +175,16 @@ public class ConvenienceCommunicationRetrieveDocumentsTest extends XdsTestUtils 
 		}
 	}
 
+	/**
+	 * This test checks the behavior of the
+	 * {@link ConvenienceCommunication#retrieveDocument(DocumentRequest, org.husky.xua.core.SecurityHeaderElement)}
+	 * when passing unknown IDs.
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void retrieveDocumentUnknownIdTest() throws Exception {
+		// sets XDS service endpoint
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
 
@@ -159,14 +201,19 @@ public class ConvenienceCommunicationRetrieveDocumentsTest extends XdsTestUtils 
 		affinityDomain.setRepositoryDestination(dest);
 		convenienceCommunication.setAffinityDomain(affinityDomain);
 
+		// set unknown identifiers (unique ID, repository ID and home community ID).
+		// Here, 1 is set for all identifiers
 		var documentRequest = new DocumentRequest("1", null, "1", "1");
 
 		final RetrievedDocumentSet response = convenienceCommunication.retrieveDocument(documentRequest, null);
+
+		// check if request failed
 		assertEquals(Status.FAILURE, response.getStatus());
 		assertTrue(response.getErrors().size() > 0);
 
 		ErrorInfo error = response.getErrors().get(0);
 
+		// check if XDSDocumentUniqueIdError is returned
 		assertEquals(ErrorCode.DOCUMENT_UNIQUE_ID_ERROR, error.getErrorCode());
 		assertEquals("1", error.getLocation());
 		assertEquals(Severity.ERROR, error.getSeverity());

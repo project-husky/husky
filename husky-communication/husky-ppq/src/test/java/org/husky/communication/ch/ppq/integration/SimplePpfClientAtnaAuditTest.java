@@ -73,7 +73,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
- * Test of class ConvenienceCommunication
+ * This test class is to check whether ATNA audit messages are sent in the
+ * course of CH-PPQ-1 transactions. This is tested by checking whether audit
+ * entries have been written to the LOG file.
  */
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
@@ -93,6 +95,10 @@ public class SimplePpfClientAtnaAuditTest {
 	private String clientKeyStore = "src/test/resources/testKeystore.jks";
 	private String clientKeyStorePass = "changeit";
 
+	/**
+	 * This method initializes IPF and OpenSAML XACML modules and sets key- and
+	 * truststore.
+	 */
 	@BeforeEach
 	public void setup() {
 		try {
@@ -108,8 +114,16 @@ public class SimplePpfClientAtnaAuditTest {
 		}
 	}
 
+	/**
+	 * This tests whether an audit event with type PPQ-1 and ID 110106 is sent when
+	 * a policy is added and deleted.
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testSendPpq1AddDeletePolicy() throws Exception {
+
+		// initialize client to add and delete policy
 		PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).create();
 		SimplePpfClient client = ClientFactoryCh.getPpfClient(config);
@@ -226,13 +240,60 @@ public class SimplePpfClientAtnaAuditTest {
 		org.opensaml.saml.saml2.core.Assertion addPolicyAssertionOpenSaml = (org.opensaml.saml.saml2.core.Assertion) new AssertionBuilderImpl()
 				.create(addPolicyAssertion)
 				.getWrappedObject();
+
+		// create policy feed object with method add to add policy
 		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.AddPolicy)
 				.create(addPolicyAssertionOpenSaml);
 
+		// add policy
 		PrivacyPolicyFeedResponse response = client.send(null, ppFeedRequest);
+
+		// check if policy was added successfully
+		assertTrue(response.getExceptions().isEmpty());
+
+		// create assertion to delete policy
+		Assertion deletePolicyAssertion = new AssertionBuilderImpl().version("2.0").id(UUID.randomUUID().toString())
+				.issueInstant(new GregorianCalendar()).create();
+
+		var nameId = new NameIDType();
+		nameId.setValue("urn:oid:1.3.6.1.4.1.21367.2017.2.6.2");
+		nameId.setNameQualifier("urn:e-health-suisse:community-index");
+		deletePolicyAssertion.setIssuer(nameId);
+
+		// set ID of policy which should be deleted
+		XACMLPolicySetIdReferenceStatementType policySetIdReferenceStatement = new XACMLPolicySetIdReferenceStatementType();
+		var idReference = new IdReferenceType();
+		idReference.setValue(queryPolicySetId());
+		policySetIdReferenceStatement.getPolicySetIdReference().add(idReference);
+
+		deletePolicyAssertion.getStatementOrAuthnStatementOrAuthzDecisionStatement().add(policySetIdReferenceStatement);
+
+		org.opensaml.saml.saml2.core.Assertion deletePolicyAssertionOpenSaml = (org.opensaml.saml.saml2.core.Assertion) new AssertionBuilderImpl()
+				.create(deletePolicyAssertion).getWrappedObject();
+
+		// create policy feed object with method delete to delete policy
+		ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.DeletePolicy)
+				.create(deletePolicyAssertionOpenSaml);
+
+		// delete policy
+		response = client.send(null, ppFeedRequest);
 
 		assertTrue(response.getExceptions().isEmpty());
 
+		// check audit logging entries
+		String logContent = checkAuditLogging();
+		assertTrue(logContent.contains("<EventID csd-code=\"110106\""));
+		assertTrue(logContent.contains("<EventTypeCode csd-code=\"PPQ-1\""));
+		assertTrue(logContent.contains("RoleIDCode csd-code=\"110153\""));
+		assertTrue(logContent.contains("RoleIDCode csd-code=\"110152\""));
+	}
+
+	/**
+	 * This method queries added policy with CH-PPQ-2
+	 * 
+	 * @return policy set ID
+	 */
+	private String queryPolicySetId() {
 		PpClientConfig configQuery = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).create();
 		SimplePpqClient clientPpq = ClientFactoryCh.getPpqClient(configQuery);
@@ -270,46 +331,26 @@ public class SimplePpfClientAtnaAuditTest {
 
 		assertNotNull(policySet);
 
-		String policySetId = policySet.getPolicySetId();
-
-		Assertion deletePolicyAssertion = new AssertionBuilderImpl().version("2.0").id(UUID.randomUUID().toString())
-				.issueInstant(new GregorianCalendar()).create();
-
-		var nameId = new NameIDType();
-		nameId.setValue("urn:oid:1.3.6.1.4.1.21367.2017.2.6.2");
-		nameId.setNameQualifier("urn:e-health-suisse:community-index");
-		deletePolicyAssertion.setIssuer(nameId);
-
-		XACMLPolicySetIdReferenceStatementType policySetIdReferenceStatement = new XACMLPolicySetIdReferenceStatementType();
-		var idReference = new IdReferenceType();
-		idReference.setValue(policySetId);
-		policySetIdReferenceStatement.getPolicySetIdReference().add(idReference);
-
-		deletePolicyAssertion.getStatementOrAuthnStatementOrAuthzDecisionStatement().add(policySetIdReferenceStatement);
-
-		org.opensaml.saml.saml2.core.Assertion deletePolicyAssertionOpenSaml = (org.opensaml.saml.saml2.core.Assertion) new AssertionBuilderImpl()
-				.create(deletePolicyAssertion).getWrappedObject();
-
-		ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.DeletePolicy)
-				.create(deletePolicyAssertionOpenSaml);
-
-		response = client.send(null, ppFeedRequest);
-
-		assertTrue(response.getExceptions().isEmpty());
-
-		String logContent = checkAuditLogging();
-		assertTrue(logContent.contains("<EventID csd-code=\"110106\""));
-		assertTrue(logContent.contains("<EventTypeCode csd-code=\"PPQ-1\""));
-		assertTrue(logContent.contains("RoleIDCode csd-code=\"110153\""));
-		assertTrue(logContent.contains("RoleIDCode csd-code=\"110152\""));
+		return policySet.getPolicySetId();
 	}
 
+	/**
+	 * This method extracts content of LOG file and checks if auditing is basically
+	 * enabled.
+	 * 
+	 * @return
+	 * @throws IOException
+	 */
 	private String checkAuditLogging() throws IOException {
 		File originLogFile = new File("log/Spring-TestEHC.log");
 
+		// extract content of log file
 		String logContent = new String(Files.readAllBytes(originLogFile.toPath()));
 
+		// check if ATNA audit events could be sent
 		assertFalse(logContent.contains("Failed to send ATNA audit event to destination"));
+
+		// check if ATNA auditing is basically enabled
 		assertTrue(logContent.contains("Auditing"));
 
 		return logContent;

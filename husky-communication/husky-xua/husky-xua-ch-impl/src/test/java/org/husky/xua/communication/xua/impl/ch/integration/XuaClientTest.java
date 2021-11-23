@@ -28,6 +28,7 @@ import org.husky.xua.communication.xua.TokenType;
 import org.husky.xua.communication.xua.XUserAssertionResponse;
 import org.husky.xua.communication.xua.impl.AppliesToBuilderImpl;
 import org.husky.xua.communication.xua.impl.ch.XUserAssertionRequestBuilderChImpl;
+import org.husky.xua.core.SecurityHeaderElement;
 import org.husky.xua.deserialization.impl.AssertionDeserializerImpl;
 import org.husky.xua.exceptions.ClientSendException;
 import org.husky.xua.exceptions.DeserializeException;
@@ -43,6 +44,10 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.StatementAb
 import org.opensaml.saml.saml2.core.impl.AttributeValueImpl;
 import org.xml.sax.SAXException;
 
+/**
+ * The purpose of this test class is to check if the assertion query works for a
+ * user.
+ */
 public class XuaClientTest extends ServerTestHelper {
 
 	private String urlToXua = "https://ehealthsuisse.ihe-europe.net:10443/STS?wsdl";
@@ -50,23 +55,39 @@ public class XuaClientTest extends ServerTestHelper {
 	private String clientKeyStore = "src/test/resources/testKeystoreXua.jks";
 	private String clientKeyStorePass = "changeit";
 
+	/**
+	 * This test checks the behavior of the
+	 * {@link XuaClient#send(SecurityHeaderElement, org.husky.xua.communication.xua.XUserAssertionRequest)
+	 * when querying a XUA assertion for a registered assistant
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testGetAssertionWithForAssistant() throws ClientSendException, DeserializeException, SAXException,
 			IOException, ParserConfigurationException, SerializeException {
 
+		// initialize XUA client to query XUA assertion
 		XuaClientConfig xuaClientConfig = new XuaClientConfigBuilderImpl().clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).clientKeyStoreType("jks").url(urlToXua).create();
 
 		XuaClient client = ClientFactory.getXuaClient(xuaClientConfig);
 
+		// request IDP assertion with username ltieche and password azerty
 		var idpAssertion = requestIdpAssertion("ltieche", "azerty");
 
+		// set role of subject
 		var role = new RoleBuilder().code(Role.ASSISTANT_CODE).codeSystem("2.16.756.5.30.1.127.3.10.6")
 				.displayName("Behandelnde(r)").buildObject();
+
+		// set the purpose of use
 		var purposeOfUse = new PurposeOfUseBuilder().code("NORM").codeSystem("2.16.756.5.30.1.127.3.10.6")
 				.displayName("Normal Access").buildObject();
+
+		// specify information about the principal
 		var principalId = "7601002467373";
 		var principalName = "Richard Reynolds";
+
+		// set ID of patient with namespace EPR_SPID
 		String resourceId = "761337610411265304^^^SPID&2.16.756.5.30.1.127.3.10.3&ISO";
 
 		var xuaAssertionRequest = new XUserAssertionRequestBuilderChImpl().principal(principalId, principalName)
@@ -74,12 +95,20 @@ public class XuaClientTest extends ServerTestHelper {
 				.appliesTo(new AppliesToBuilderImpl().address("https://localhost:17001/services/iti18").create())
 				.purposeOfUse(purposeOfUse).subjectRole(role).resourceId(resourceId).create();
 
+		// query XUA assertion
 		List<XUserAssertionResponse> response = client.send(idpAssertion, xuaAssertionRequest);
 
+		// check if assertion is returned
 		assertNotNull(response);
 		assertNotNull(response.get(0).getAssertion());
 
+		// check if correct issuer is included in assertion
 		assertEquals("https://ehealthsuisse.ihe-europe.net/STS", response.get(0).getAssertion().getIssuer().getValue());
+		
+		String actualRole = null;
+		String actualPurposeOfUse = null;
+		String actualSubjectId = null;
+		String actualResourceId = null;
 
 		for (StatementAbstractType statement : response.get(0).getAssertion()
 				.getStatementOrAuthnStatementOrAuthzDecisionStatement()) {
@@ -91,48 +120,47 @@ public class XuaClientTest extends ServerTestHelper {
 						AttributeImpl attribute = (AttributeImpl) obj;
 
 						if (attribute.isValueARole()) {
-							assertEquals("HCP", attribute.getValueAsRole().getCode());
+							actualRole = attribute.getValueAsRole().getCode();
 						}
 
 						if (attribute.isValueAPurposeOfUse()) {
-							assertEquals(purposeOfUse.getCode(), attribute.getValueAsPurposeOfUse().getCode());
+							actualPurposeOfUse = attribute.getValueAsPurposeOfUse().getCode();
 						}
 
 						if (attribute.getName().equalsIgnoreCase("urn:oasis:names:tc:xspa:1.0:subject:subject-id")) {
-							assertEquals("Richard Reynolds",
-									(((AttributeValueImpl) attribute.getWrappedObject().getAttributeValues().get(0)))
-											.getTextContent());
+							actualSubjectId = ((AttributeValueImpl) attribute.getWrappedObject().getAttributeValues()
+									.get(0)).getTextContent();
 						}
 
 						if (attribute.getName().equalsIgnoreCase("urn:oasis:names:tc:xacml:2.0:resource:resource-id")) {
-							assertEquals(resourceId,
-									(((AttributeValueImpl) attribute.getWrappedObject().getAttributeValues().get(0)))
-											.getTextContent());
+							actualResourceId = (((AttributeValueImpl) attribute.getWrappedObject().getAttributeValues()
+									.get(0))).getTextContent();
 						}
-
-						if (attribute.getName().equalsIgnoreCase("urn:e-health-suisse:principal-id")) {
-							assertEquals(principalId,
-									(((AttributeValueImpl) attribute.getWrappedObject().getAttributeValues().get(0)))
-											.getTextContent());
-						}
-
-						if (attribute.getName().equalsIgnoreCase("urn:e-health-suisse:principal-name")) {
-							assertEquals("Richard Reynolds",
-									(((AttributeValueImpl) attribute.getWrappedObject().getAttributeValues().get(0)))
-											.getTextContent());
-						}
-
 					}
 				}
 			}
 		}
 
+		// check attribute parameter of returned assertion
+		assertEquals("HCP", actualRole);
+		assertEquals(purposeOfUse.getCode(), actualPurposeOfUse);
+		assertEquals("Richard Reynolds", actualSubjectId);
+		assertEquals(resourceId, actualResourceId);
+
 	}
 
+	/**
+	 * This test checks the behavior of the
+	 * {@link XuaClient#send(SecurityHeaderElement, org.husky.xua.communication.xua.XUserAssertionRequest)
+	 * when querying a XUA assertion for a registered technical user
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testGetAssertionWithForTechnicalUser()
 			throws ClientSendException, DeserializeException, SAXException, IOException, ParserConfigurationException {
 
+		// initialize XUA client to query XUA assertion
 		XuaClientConfig xuaClientConfig = new XuaClientConfigBuilderImpl().clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).clientKeyStoreType("jks").url(urlToXua).create();
 
@@ -142,12 +170,19 @@ public class XuaClientTest extends ServerTestHelper {
 
 			var idpAssertion = new AssertionDeserializerImpl().fromXmlByteArray(IOUtils.toByteArray(is));
 
+			// set role of subject
 			var role = new RoleBuilder().code("TCU").codeSystem("2.16.756.5.30.1.127.3.10.6")
 					.displayName("Behandelnde(r)").buildObject();
+
+			// set the purpose of use
 			var purposeOfUse = new PurposeOfUseBuilder().code("AUTO").codeSystem("2.16.756.5.30.1.127.3.10.6")
 					.displayName("Normal Access").buildObject();
+
+			// specify information about the principal
 			var principalId = "7601000050717";
 			var principalName = "Marc Loris Agpar";
+
+			// set ID of patient with namespace EPR_SPID
 			String resourceId = "761337610411265304^^^SPID&2.16.756.5.30.1.127.3.10.3&ISO";
 
 			var xuaAssertionRequest = new XUserAssertionRequestBuilderChImpl().principal(principalId, principalName)
@@ -155,13 +190,21 @@ public class XuaClientTest extends ServerTestHelper {
 					.appliesTo(new AppliesToBuilderImpl().address("https://localhost:17001/services/iti18").create())
 					.purposeOfUse(purposeOfUse).subjectRole(role).resourceId(resourceId).create();
 
+			// query XUA assertion
 			List<XUserAssertionResponse> response = client.send(idpAssertion, xuaAssertionRequest);
 
+			// check if assertion is returned
 			assertNotNull(response);
 			assertNotNull(response.get(0).getAssertion());
 
+			// check if correct issuer is included in assertion
 			assertEquals("https://ehealthsuisse.ihe-europe.net/STS",
 					response.get(0).getAssertion().getIssuer().getValue());
+
+			String actualRole = null;
+			String actualPurposeOfUse = null;
+			String actualSubjectId = null;
+			String actualResourceId = null;
 
 			for (StatementAbstractType statement : response.get(0).getAssertion()
 					.getStatementOrAuthnStatementOrAuthzDecisionStatement()) {
@@ -173,47 +216,52 @@ public class XuaClientTest extends ServerTestHelper {
 							AttributeImpl attribute = (AttributeImpl) obj;
 
 							if (attribute.isValueARole()) {
-								assertEquals("HCP", attribute.getValueAsRole().getCode());
+								actualRole = attribute.getValueAsRole().getCode();
 							}
 
 							if (attribute.isValueAPurposeOfUse()) {
-								assertEquals(purposeOfUse.getCode(), attribute.getValueAsPurposeOfUse().getCode());
+								actualPurposeOfUse = attribute.getValueAsPurposeOfUse().getCode();
 							}
 
 							if (attribute.getName()
 									.equalsIgnoreCase("urn:oasis:names:tc:xspa:1.0:subject:subject-id")) {
-								assertEquals("Marc Loris Agpar", (((AttributeValueImpl) attribute.getWrappedObject()
-										.getAttributeValues().get(0))).getTextContent());
+								actualSubjectId = ((AttributeValueImpl) attribute.getWrappedObject()
+										.getAttributeValues().get(0)).getTextContent();
 							}
 
 							if (attribute.getName()
 									.equalsIgnoreCase("urn:oasis:names:tc:xacml:2.0:resource:resource-id")) {
-								assertEquals(resourceId, (((AttributeValueImpl) attribute.getWrappedObject()
-										.getAttributeValues().get(0))).getTextContent());
-							}
-
-							if (attribute.getName().equalsIgnoreCase("urn:e-health-suisse:principal-id")) {
-								assertEquals(principalId, (((AttributeValueImpl) attribute.getWrappedObject()
-										.getAttributeValues().get(0))).getTextContent());
-							}
-
-							if (attribute.getName().equalsIgnoreCase("urn:e-health-suisse:principal-name")) {
-								assertEquals("Marc Loris Agpar", (((AttributeValueImpl) attribute.getWrappedObject()
-										.getAttributeValues().get(0))).getTextContent());
+								actualResourceId = (((AttributeValueImpl) attribute.getWrappedObject()
+										.getAttributeValues().get(0))).getTextContent();
 							}
 
 						}
 					}
 				}
 			}
+
+			// check attribute parameter of returned assertion
+			assertEquals("HCP", actualRole);
+			assertEquals(purposeOfUse.getCode(), actualPurposeOfUse);
+			assertEquals("Marc Loris Agpar", actualSubjectId);
+			assertEquals(resourceId, actualResourceId);
+
 		}
 
 	}
 
+	/**
+	 * This test checks the behavior of the
+	 * {@link XuaClient#send(SecurityHeaderElement, org.husky.xua.communication.xua.XUserAssertionRequest)
+	 * when querying a XUA assertion for a policy administrator
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testGetAssertionWithForPolicyAdministration()
 			throws ClientSendException, DeserializeException, SAXException, IOException, ParserConfigurationException {
 
+		// initialize XUA client to query XUA assertion
 		XuaClientConfig xuaClientConfig = new XuaClientConfigBuilderImpl().clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).clientKeyStoreType("jks").url(urlToXua).create();
 
@@ -223,23 +271,36 @@ public class XuaClientTest extends ServerTestHelper {
 
 			var idpAssertion = new AssertionDeserializerImpl().fromXmlByteArray(IOUtils.toByteArray(is));
 
+			// set role of subject
 			var role = new RoleBuilder().code("PADM").codeSystem("2.16.756.5.30.1.127.3.10.6")
 					.displayName("Behandelnde(r)").buildObject();
+
+			// set the purpose of use
 			var purposeOfUse = new PurposeOfUseBuilder().code("NORM").codeSystem("2.16.756.5.30.1.127.3.10.6")
 					.displayName("Normal Access").buildObject();
+
+			// set ID of patient with namespace EPR_SPID
 			String resourceId = "761337610411265304^^^SPID&2.16.756.5.30.1.127.3.10.3&ISO";
 
 			var xuaAssertionRequest = new XUserAssertionRequestBuilderChImpl().requestType(RequestType.WST_ISSUE)
 					.tokenType(TokenType.OASIS_WSS_SAML_PROFILE_11_SAMLV20).purposeOfUse(purposeOfUse).subjectRole(role)
 					.resourceId(resourceId).create();
 
+			// query XUA assertion
 			List<XUserAssertionResponse> response = client.send(idpAssertion, xuaAssertionRequest);
 
+			// check if assertion is returned
 			assertNotNull(response);
 			assertNotNull(response.get(0).getAssertion());
 
+			// check if correct issuer is included in assertion
 			assertEquals("https://ehealthsuisse.ihe-europe.net/STS",
 					response.get(0).getAssertion().getIssuer().getValue());
+
+			String actualRole = null;
+			String actualPurposeOfUse = null;
+			String actualSubjectId = null;
+			String actualResourceId = null;
 
 			for (StatementAbstractType statement : response.get(0).getAssertion()
 					.getStatementOrAuthnStatementOrAuthzDecisionStatement()) {
@@ -251,37 +312,51 @@ public class XuaClientTest extends ServerTestHelper {
 							AttributeImpl attribute = (AttributeImpl) obj;
 
 							if (attribute.isValueARole()) {
-								assertEquals(role.getCode(), attribute.getValueAsRole().getCode());
+								actualRole = attribute.getValueAsRole().getCode();
 							}
 
 							if (attribute.isValueAPurposeOfUse()) {
-								assertEquals(purposeOfUse.getCode(), attribute.getValueAsPurposeOfUse().getCode());
+								actualPurposeOfUse = attribute.getValueAsPurposeOfUse().getCode();
 							}
 
 							if (attribute.getName()
 									.equalsIgnoreCase("urn:oasis:names:tc:xspa:1.0:subject:subject-id")) {
-								assertEquals("Ivo Castineira", (((AttributeValueImpl) attribute.getWrappedObject()
-										.getAttributeValues().get(0))).getTextContent());
+								actualSubjectId = ((AttributeValueImpl) attribute.getWrappedObject()
+										.getAttributeValues().get(0)).getTextContent();
 							}
 
 							if (attribute.getName()
 									.equalsIgnoreCase("urn:oasis:names:tc:xacml:2.0:resource:resource-id")) {
-								assertEquals(resourceId, (((AttributeValueImpl) attribute.getWrappedObject()
-										.getAttributeValues().get(0))).getTextContent());
+								actualResourceId = (((AttributeValueImpl) attribute.getWrappedObject()
+										.getAttributeValues().get(0))).getTextContent();
 							}
 
 						}
 					}
 				}
 			}
-		}
 
+			// check attribute parameter of returned assertion
+			assertEquals(role.getCode(), actualRole);
+			assertEquals(purposeOfUse.getCode(), actualPurposeOfUse);
+			assertEquals("Ivo Castineira", actualSubjectId);
+			assertEquals(resourceId, actualResourceId);
+
+		}
 	}
 
+	/**
+	 * This test checks the behavior of the
+	 * {@link XuaClient#send(SecurityHeaderElement, org.husky.xua.communication.xua.XUserAssertionRequest)
+	 * when querying a XUA assertion for a registered document administrator
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testGetAssertionWithForDocumentAdministration()
 			throws ClientSendException, DeserializeException, SAXException, IOException, ParserConfigurationException {
 
+		// initialize XUA client to query XUA assertion
 		XuaClientConfig xuaClientConfig = new XuaClientConfigBuilderImpl().clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).clientKeyStoreType("jks").url(urlToXua).create();
 
@@ -292,23 +367,36 @@ public class XuaClientTest extends ServerTestHelper {
 
 			var idpAssertion = new AssertionDeserializerImpl().fromXmlByteArray(IOUtils.toByteArray(is));
 
+			// set role of subject
 			var role = new RoleBuilder().code("DADM").codeSystem("2.16.756.5.30.1.127.3.10.6")
 					.displayName("Behandelnde(r)").buildObject();
+
+			// set the purpose of use
 			var purposeOfUse = new PurposeOfUseBuilder().code("NORM").codeSystem("2.16.756.5.30.1.127.3.10.6")
 					.displayName("Normal Access").buildObject();
+
+			// set ID of patient with namespace EPR_SPID
 			String resourceId = "761337610411265304^^^SPID&2.16.756.5.30.1.127.3.10.3&ISO";
 
 			var xuaAssertionRequest = new XUserAssertionRequestBuilderChImpl().requestType(RequestType.WST_ISSUE)
 					.tokenType(TokenType.OASIS_WSS_SAML_PROFILE_11_SAMLV20).purposeOfUse(purposeOfUse).subjectRole(role)
 					.resourceId(resourceId).create();
 
+			// query XUA assertion
 			List<XUserAssertionResponse> response = client.send(idpAssertion, xuaAssertionRequest);
 
+			// check if assertion is returned
 			assertNotNull(response);
 			assertNotNull(response.get(0).getAssertion());
 
+			// check if correct issuer is included in assertion
 			assertEquals("https://ehealthsuisse.ihe-europe.net/STS",
 					response.get(0).getAssertion().getIssuer().getValue());
+
+			String actualRole = null;
+			String actualPurposeOfUse = null;
+			String actualSubjectId = null;
+			String actualResourceId = null;
 
 			for (StatementAbstractType statement : response.get(0).getAssertion()
 					.getStatementOrAuthnStatementOrAuthzDecisionStatement()) {
@@ -320,32 +408,47 @@ public class XuaClientTest extends ServerTestHelper {
 							AttributeImpl attribute = (AttributeImpl) obj;
 
 							if (attribute.isValueARole()) {
-								assertEquals(role.getCode(), attribute.getValueAsRole().getCode());
+								actualRole = attribute.getValueAsRole().getCode();
 							}
 
 							if (attribute.isValueAPurposeOfUse()) {
-								assertEquals(purposeOfUse.getCode(), attribute.getValueAsPurposeOfUse().getCode());
+								actualPurposeOfUse = attribute.getValueAsPurposeOfUse().getCode();
 							}
 
 							if (attribute.getName()
 									.equalsIgnoreCase("urn:oasis:names:tc:xspa:1.0:subject:subject-id")) {
-								assertEquals("Käthi Weisskopf", (((AttributeValueImpl) attribute.getWrappedObject()
-										.getAttributeValues().get(0))).getTextContent());
+								actualSubjectId = ((AttributeValueImpl) attribute.getWrappedObject()
+										.getAttributeValues().get(0)).getTextContent();
 							}
 
 							if (attribute.getName()
 									.equalsIgnoreCase("urn:oasis:names:tc:xacml:2.0:resource:resource-id")) {
-								assertEquals(resourceId, (((AttributeValueImpl) attribute.getWrappedObject()
-										.getAttributeValues().get(0))).getTextContent());
+								actualResourceId = (((AttributeValueImpl) attribute.getWrappedObject()
+										.getAttributeValues().get(0))).getTextContent();
 							}
 
 						}
 					}
 				}
 			}
+
+			// check attribute parameter of returned assertion
+			assertEquals(role.getCode(), actualRole);
+			assertEquals(purposeOfUse.getCode(), actualPurposeOfUse);
+			assertEquals("Käthi Weisskopf", actualSubjectId);
+			assertEquals(resourceId, actualResourceId);
 		}
 	}
 
+	/**
+	 * This method requests IDP assertion of gazelle environment.
+	 * 
+	 * @param user     username
+	 * @param password password
+	 * 
+	 * @return received IDP assertion
+	 * @throws ClientSendException
+	 */
 	private Assertion requestIdpAssertion(String user, String password) throws ClientSendException {
 		IdpClientBasicAuthConfigImpl idpClientConfig = new IdpClientBasicAuthConfigBuilderImpl()
 				.basicAuthPassword(password).basicAuthUsername(user).url(urlToIdp).create();

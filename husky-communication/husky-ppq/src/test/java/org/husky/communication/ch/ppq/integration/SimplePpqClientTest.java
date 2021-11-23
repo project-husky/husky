@@ -45,6 +45,10 @@ public class SimplePpqClientTest {
 	private String clientKeyStore = "src/test/resources/testKeystore.jks";
 	private String clientKeyStorePass = "changeit";
 
+	/**
+	 * This method initializes IPF and OpenSAML XACML modules and sets key- and
+	 * truststore.
+	 */
 	@BeforeEach
 	public void setup() throws JAXBException {
 		try {
@@ -62,7 +66,7 @@ public class SimplePpqClientTest {
 
 	@Test
 	public void testQueryPolicyWithUnknownPid() throws Exception {
-
+		// initialize client to query policies
 		PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).create();
 		SimplePpqClient client = ClientFactoryCh.getPpqClient(config);
@@ -72,13 +76,17 @@ public class SimplePpqClientTest {
 		InstanceIdentifier instanceIdentifier = new InstanceIdentifierBuilder().buildObject();
 		instanceIdentifier.setExtension("123");
 		instanceIdentifier.setRoot("2.16.756.5.30.1.127.3.10.3");
+
+		// create query object with unknown person ID
 		PrivacyPolicyQuery query = new PrivacyPolicyQueryBuilderImpl().instanceIdentifier(instanceIdentifier)
 				.issueInstant(new GregorianCalendar()).version("2.0").id(UUID.randomUUID().toString()).create();
+
+		// query policies
 		PrivacyPolicyQueryResponseImpl response = (PrivacyPolicyQueryResponseImpl) client.send(null, query);
 
+		// check if request failed
 		assertNotNull(response);
 		assertNotNull(response.getWrappedObject());
-
 		assertNotNull(response.getWrappedObject().getStatus());
 		assertNotNull(response.getWrappedObject().getStatus().getStatusCode());
 		assertNotNull(response.getWrappedObject().getStatus().getStatusMessage());
@@ -91,20 +99,24 @@ public class SimplePpqClientTest {
 	@Test
 	public void testQueryPolicyWithUnknownPolicySetId() throws Exception {
 
+		// initialize client to query policies
 		PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).create();
 		SimplePpqClient client = ClientFactoryCh.getPpqClient(config);
 		client.setCamelContext(camelContext);
 		client.setAuditContext(auditContext);
 
+		// create query object without details
 		PrivacyPolicyQuery query = new PrivacyPolicyQueryBuilderImpl()
 				.issueInstant(new GregorianCalendar()).version("2.0").id(UUID.randomUUID().toString()).create();
+
+		// query policies
 		PrivacyPolicyQueryResponseImpl response = (PrivacyPolicyQueryResponseImpl) client
 				.send(null, query);
 
+		// check if request failed
 		assertNotNull(response);
 		assertNotNull(response.getWrappedObject());
-
 		assertNotNull(response.getWrappedObject().getStatus());
 		assertNotNull(response.getWrappedObject().getStatus().getStatusCode());
 		assertNotNull(response.getWrappedObject().getStatus().getStatusMessage());
@@ -117,31 +129,45 @@ public class SimplePpqClientTest {
 		assertNotNull(response.getWrappedObject().getAssertions());
 	}
 
+	/**
+	 * This test checks the behavior of the
+	 * {@link SimplePpqClient#send(org.husky.xua.core.SecurityHeaderElement, PrivacyPolicyQuery)
+	 * when querying policies.
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testQueryHcpPolicyWithPolicy() throws Exception {
 
+		// initialize client to query policies
 		PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).create();
 		SimplePpqClient client = ClientFactoryCh.getPpqClient(config);
 		client.setCamelContext(camelContext);
 		client.setAuditContext(auditContext);
 
+		// set identifier for whom the policies are to be queried
 		InstanceIdentifier instanceIdentifier = new InstanceIdentifierBuilder().buildObject();
 		instanceIdentifier.setExtension("761337610411265304");
 		instanceIdentifier.setRoot("2.16.756.5.30.1.127.3.10.3");
+
+		// create query object
 		PrivacyPolicyQuery query = new PrivacyPolicyQueryBuilderImpl().instanceIdentifier(instanceIdentifier)
 				.issueInstant(new GregorianCalendar()).version("2.0").id(UUID.randomUUID().toString()).create();
+
+		// query policies
 		PrivacyPolicyQueryResponseImpl response = (PrivacyPolicyQueryResponseImpl) client.send(null, query);
 
+		// check if request was successful
 		assertNotNull(response);
 		assertNotNull(response.getWrappedObject());
-
 		assertNotNull(response.getWrappedObject().getStatus());
 		assertNotNull(response.getWrappedObject().getStatus().getStatusCode());
 		assertNotNull(response.getWrappedObject().getStatus().getStatusMessage());
 		assertEquals("urn:oasis:names:tc:SAML:2.0:status:Success",
 				response.getWrappedObject().getStatus().getStatusCode().getValue());
 
+		// check if policy assertions are returned
 		assertNotNull(response.getWrappedObject().getAssertions());
 
 	}

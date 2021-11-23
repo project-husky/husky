@@ -21,6 +21,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -63,7 +64,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
- * Test of class ConvenienceCommunication
+ * The purpose of this test class is to check whether the import and export of
+ * documents via standard storage media such as a USB stick (XDM ITI-32) works.
  */
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
@@ -83,23 +85,37 @@ public class ConvenienceCommunicationXdmContentsTest extends XdmTestUtils {
 
 	private String filePath = getTempFilePath();
 
+	/**
+	 * This method checks if initialization of {@link ConvenienceCommunication} was
+	 * correct.
+	 */
 	@Test
 	public void contextLoads() {
 		assertNotNull(convenienceCommunication);
 		assertNotNull(convenienceCommunication.getCamelContext());
 	}
 
+	/**
+	 * This test checks the behavior of the
+	 * {@link ConvenienceCommunication#createXdmContents(SubmissionSetMetadata, java.io.OutputStream)}
+	 * when two documents (CDA and PDF) are exported to a ZIP file
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void createXdmContentsTest() throws Exception {
-		// assemble two files for the XDM Zip
+		// add two files for the XDM Zip
+		// add CDA document with metadata
 		DocumentMetadata metaData = convenienceCommunication.addDocument(DocumentDescriptor.CDA_R2, getDocCda(),
 				getDocCda());
 		Identificator patientId = new Identificator("1.3.6.1.4.1.21367.13.20.3000", "IHEBLUE-1043");
 		setMetadataForCda(metaData, patientId);
 
+		// add PDF document with metadata
 		metaData = convenienceCommunication.addDocument(DocumentDescriptor.PDF, getDocPdf());
 		setMetadataForPdf(metaData, patientId);
 
+		// create metadata for the submission set
 		SubmissionSetMetadata subSet = new SubmissionSetMetadata();
 		setSubmissionMetadata(subSet, patientId);
 
@@ -113,6 +129,13 @@ public class ConvenienceCommunicationXdmContentsTest extends XdmTestUtils {
 		checkZipContent(targetFile);
 	}
 
+	/**
+	 * This method checks the content of passed ZIP file.
+	 * 
+	 * @param targetFile ZIP file to check
+	 * 
+	 * @throws Exception
+	 */
 	private void checkZipContent(File targetFile) throws Exception {
 
 		String readmeFile = null;
@@ -120,6 +143,8 @@ public class ConvenienceCommunicationXdmContentsTest extends XdmTestUtils {
 		Path iheXdmFolder = null;
 		File targetUnzip = new File("src/test/resources/xdmTest_Java");
 
+		// iterate each entry of the zip file and check if README.TXT, INDEX.HTM and
+		// subdirectory for XDM contents exists
 		try (ZipFile zipFile = new ZipFile(targetFile)) {
 			Iterator<? extends ZipEntry> entryIt = zipFile.entries().asIterator();
 
@@ -148,13 +173,20 @@ public class ConvenienceCommunicationXdmContentsTest extends XdmTestUtils {
 				}
 			}
 
+			// check if README.TXT exists and the content meets the minimum requirements
 			assertNotNull(readmeFile);
 			testReadMeFile(readmeFile);
+
+			// check if INDEX.HTM exists and the content meets the minimum requirements
 			assertNotNull(indexHtmFile);
 			testIndexHtmFile(indexHtmFile);
+
+			// check if subdirectory IHE_XDM exists
 			assertNotNull(iheXdmFolder);
 		}
 
+		// check if the content of IHE_XDM/SUBSET01 subdirectory meets the minimum
+		// requirements
 		checkSubsetDirContent(String.format("%s/SUBSET01", iheXdmFolder.toString()));
 	}
 
@@ -211,6 +243,20 @@ public class ConvenienceCommunicationXdmContentsTest extends XdmTestUtils {
 		assertTrue(indexHtmContent.contains("IHE_XDM/SUBSET01/DOC00001.XML"));
 	}
 
+	/**
+	 * check if subdirectory e.g. IHE_XDM/SUBSET01 contains
+	 * 
+	 * <ul>
+	 * <li>a file called METADATA.XML with valid document metadata</li>
+	 * <li>the CDA document</li>
+	 * <li>the PDF document</li>
+	 * 
+	 * </ul>
+	 * 
+	 * 
+	 * @param path to subdirectory
+	 * @see <a href="https://profiles.ihe.net/ITI/TF/Volume2/ITI-32.html">ITI-32</a>
+	 */
 	private void checkSubsetDirContent(String dir) throws Exception {
 
 		String metadataXml = null;
@@ -220,8 +266,10 @@ public class ConvenienceCommunicationXdmContentsTest extends XdmTestUtils {
 		File directory = new File(dir);
 		File[] files = directory.listFiles();
 
+		// check if there are files in the directory
 		assertNotNull(files);
 
+		// iterate files of directory and cache the contents for further checks
 		for (File file : files) {
 			try (InputStream is = new FileInputStream(file)) {
 				if ("METADATA.XML".equals(file.getName())) {
@@ -234,26 +282,53 @@ public class ConvenienceCommunicationXdmContentsTest extends XdmTestUtils {
 			}
 		}
 
+		// check if METADATA.XML exists and if it is a valid document
 		assertNotNull(metadataXml);
 		validateMetadata(metadataXml);
+
+		// check if CDA document exist in directory
 		assertNotNull(doc1);
+
+		// check if PDF document exist in directory
 		assertNotNull(doc2);
 
 	}
 
+	/**
+	 * In this method, the generated metadata for the submission set is checked
+	 * using the validation service. (<a href=
+	 * "https://ehealthsuisse.ihe-europe.net/gazelle-documentation/EVS-Client/wsvalidation.html">Validation
+	 * Services</a>)
+	 * 
+	 * @param documentContent content of METADATA.XML document
+	 * @throws Exception
+	 */
 	private void validateMetadata(String documentContent)
 			throws Exception {
 
+		// send SOAP request to gazelle validation service
 		CloseableHttpClient httpClient = HttpClients.custom().build();
 		final var post = new HttpPost("https://gazelle.ihe.net/XDStarClient-ejb/ModelBasedValidationWSService/ModelBasedValidationWS");
 		post.setEntity(new ByteArrayEntity(createSOAPRequest(documentContent)));
-
 		CloseableHttpResponse response = httpClient.execute(post);
-		String contentResponse = IOUtils.toString(response.getEntity().getContent());
+
+		// extract response of validation request
+		String contentResponse = IOUtils.toString(response.getEntity().getContent(), StandardCharsets.UTF_8);
 		
+		// checks if metadata are valid
 		assertFalse(contentResponse.contains("FAILED"));
 	}
 
+	/**
+	 * In this method the SOAP message for validate IHE XDM ITI-32 Distribute
+	 * Document Set on Media with validation service is implemented.
+	 * 
+	 * @param documentContent content of METADATA.XML file
+	 * 
+	 * @return generated SOAP message as byte array
+	 * 
+	 * @throws Exception
+	 */
 	private byte[] createSOAPRequest(String documentContent) throws Exception {
 		MessageFactory messageFactory = MessageFactory.newInstance();
 		SOAPMessage soapMessage = messageFactory.createMessage();
@@ -268,6 +343,7 @@ public class ConvenienceCommunicationXdmContentsTest extends XdmTestUtils {
 		SOAPElement soapBodyElemBase64Doc = soapBodyElem.addChildElement("base64Document");
 		soapBodyElemBase64Doc.addTextNode(Base64.getEncoder().encodeToString(documentContent.getBytes()));
 
+		// set type of document content
 		SOAPElement soapBodyElementValidator = soapBodyElem.addChildElement("validator");
 		soapBodyElementValidator.addTextNode("IHE XDM ITI-32 Distribute Document Set on Media");
 
@@ -280,35 +356,31 @@ public class ConvenienceCommunicationXdmContentsTest extends XdmTestUtils {
 		return byteOutput.toByteArray();
 	}
 
-	@Test
-	public void exportForValidationTest() {
-		// Export for Validation test. An XDM ZIP File will be
-		// exported for online validation
-		final File targetFile = new File(filePath + "/xdm_"
-				+ dateFormat.format(new Date()).replace(".", "").replace(" ", "").replace(":", "") + ".zip");
-
-		convenienceCommunication.clearDocuments();
-		final XdmContents exportContents = exportSamples(convenienceCommunication, targetFile, CDA_FILE_PATH,
-				PDF_FILE_PATH);
-		assertNotNull(exportContents);
-		assertTrue(targetFile.exists());
-	}
-
+	/**
+	 * This test checks the behavior of the
+	 * {@link ConvenienceCommunication#getXdmContents(ZipFile)} when two documents
+	 * (CDA and PDF) are exported to a ZIP file.
+	 * 
+	 * Export / Import Test.
+	 * 
+	 * @throws IOException
+	 */
 	@Test
 	public void exportImportTest() throws IOException {
-		// Export / Import Test.
-		// An XDM ZIP File will be exported. After this, the file will be imported again
-		// and the metadata as well
-		// as the file hash and size will be compared.
+		// First an XDM ZIP File is exported. 
 		final File targetFile = new File(filePath + "/xdm_"
 				+ dateFormat.format(new Date()).replace(".", "").replace(" ", "").replace(":", "") + ".zip");
 
 		convenienceCommunication.clearDocuments();
 		final XdmContents exportContents = exportSamples(convenienceCommunication, targetFile, CDA_FILE_PATH,
 				PDF_FILE_PATH);
+
+		// Check if XDM content was exported successfully
 		assertNotNull(exportContents);
 		assertTrue(targetFile.exists());
 
+		// After this, the file is imported again.
+		// The metadata as well as the hash value and the size of the file are compared.
 		final XdmContents importContents = importSamples(convenienceCommunication, targetFile);
 		assertNotNull(importContents);
 
@@ -323,12 +395,13 @@ public class ConvenienceCommunicationXdmContentsTest extends XdmTestUtils {
 		assertTrue(isSamplesHashAndSizeEqual(importContents, CDA_FILE_PATH, PDF_FILE_PATH));
 	}
 
+	/**
+	 * Import Integrity Test. An XDM ZIP File will be imported and the file
+	 * integrity (hash, size) will be compared to the values in the according
+	 * metadata.xml
+	 */
 	@Test
 	public void importIntegrityCheck() {
-		// Import Integrity Test. An XDM ZIP File will be imported and
-		// the file integrity (hash, size) will be compared to the values in the
-		// according metadata.xml
-
 		convenienceCommunication.clearDocuments();
 		assertTrue(importIntegrityCheck(XDM_FILE_PATH, convenienceCommunication));
 		assertFalse(importIntegrityCheck(XDM_CORRUPT_FILE_PATH, convenienceCommunication));

@@ -11,6 +11,9 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 
 import org.hl7.fhir.r4.model.Enumerations.AdministrativeGender;
+import org.hl7.fhir.r4.model.HumanName;
+import org.hl7.fhir.r4.model.Identifier;
+import org.hl7.fhir.r4.model.Organization;
 import org.husky.common.communication.AffinityDomain;
 import org.husky.common.communication.Destination;
 import org.husky.common.model.Identificator;
@@ -22,9 +25,6 @@ import org.husky.communication.mpi.impl.PixV3Query;
 import org.husky.communication.testhelper.TestApplication;
 import org.husky.fhir.structures.gen.FhirCommon;
 import org.husky.fhir.structures.gen.FhirPatient;
-import org.hl7.fhir.r4.model.HumanName;
-import org.hl7.fhir.r4.model.Identifier;
-import org.hl7.fhir.r4.model.Organization;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
@@ -39,7 +39,9 @@ import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.context.FhirVersionEnum;
 
 /**
- * Test of class ConvenienceCommunication
+ * This test class is to check whether ATNA audit messages are sent in the
+ * course of PIX and PDQ transactions. This is tested by checking whether audit
+ * entries have been written to the LOG file.
  */
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
@@ -76,10 +78,18 @@ public class ConvenienceMasterPatientIndexV3AtnaAuditTest {
 		return org;
 	}
 
+	/**
+	 * Test method for
+	 * {@link ConvenienceMasterPatientIndexV3#queryPatientDemographics(MasterPatientIndexQuery, AffinityDomain, org.husky.xua.core.SecurityHeaderElement)}.
+	 * (PDQ ITI-47)
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void queryPatientDemographicsWithAtnaAuditMessageTest() throws Exception {
 		LOGGER.debug("ITI47ConsumerQueryPatientPatientIdStep1Test with ipAdress Target " + pdqUri);
 
+		// sets endpoint of PDQ service
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
 
@@ -95,13 +105,18 @@ public class ConvenienceMasterPatientIndexV3AtnaAuditTest {
 		affinityDomain.setPixDestination(dest);
 
 		final MasterPatientIndexQuery mpiQuery = new MasterPatientIndexQuery(affinityDomain.getPdqDestination());
+
+		// Add identifier of the person for whom the demographic data should be searched
+		// for
 		final Identificator identificator = new Identificator("1.3.6.1.4.1.12559.11.20.1", "4711");
 		mpiQuery.addPatientIdentificator(identificator);
 		
+		// query patient demographics
 		final MasterPatientIndexQueryResponse response = convenienceMasterPatientIndexV3Client
 				.queryPatientDemographics(mpiQuery, affinityDomain, null);
 		assertTrue(response.getSuccess());
 
+		// check audit logging entries
 		String logContent = checkAuditLogging();
 		assertTrue(logContent.contains("<EventID csd-code=\"110112\""));
 		assertTrue(logContent.contains("<EventTypeCode csd-code=\"ITI-47\""));
@@ -111,6 +126,7 @@ public class ConvenienceMasterPatientIndexV3AtnaAuditTest {
 
 	@Test
 	public void updatePatientTest() throws IOException {
+		// sets endpoint of PIX service
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
 
@@ -119,12 +135,11 @@ public class ConvenienceMasterPatientIndexV3AtnaAuditTest {
 		dest.setReceiverApplicationOid(receiverApplicationOid);
 		dest.setReceiverFacilityOid(facilityName);
 		affinityDomain.setPdqDestination(dest);
-		affinityDomain.setPixDestination(dest);
+		affinityDomain.setPixDestination(dest);	
 
 		PixV3Query pixV3Query = new PixV3Query(affinityDomain, homeCommunityOid, homeCommunityNamespace, null, null,
 				convenienceMasterPatientIndexV3Client.getContext(),
 				convenienceMasterPatientIndexV3Client.getAuditContext());
-
 
 		final FhirPatient patient = new FhirPatient();
 		final HumanName humanName = new HumanName().setFamily("Bauer-Maier").addGiven("Anton");
@@ -135,7 +150,7 @@ public class ConvenienceMasterPatientIndexV3AtnaAuditTest {
 		identifier.setValue("1634793774730");
 		identifier.setSystem(FhirCommon.addUrnOid(homeCommunityOid));
 		patient.getIdentifier().add(identifier);
-
+		
 		final Identifier identifier2 = new Identifier();
 		identifier2.setValue("SPID-101");
 		identifier2.setSystem(spidEprOid);
@@ -152,8 +167,7 @@ public class ConvenienceMasterPatientIndexV3AtnaAuditTest {
 
 		assertTrue(pixV3Query.updatePatient(patient, null));
 
-
-
+		// check audit logging entries
 		String logContent = checkAuditLogging();
 		assertTrue(logContent.contains("<EventID csd-code=\"110110\""));
 		assertTrue(logContent.contains("<EventTypeCode csd-code=\"ITI-44\""));
@@ -164,6 +178,7 @@ public class ConvenienceMasterPatientIndexV3AtnaAuditTest {
 	@Test
 	public void queryPatientIdTest() throws IOException {
 
+		// sets endpoint of PIX service
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
 
@@ -188,6 +203,7 @@ public class ConvenienceMasterPatientIndexV3AtnaAuditTest {
 
 		assertEquals("761337610436974489", patId);
 
+		// check audit logging entries
 		String logContent = checkAuditLogging();
 		assertTrue(logContent.contains("<EventID csd-code=\"110112\""));
 		assertTrue(logContent.contains("<EventTypeCode csd-code=\"ITI-45\""));
@@ -195,12 +211,24 @@ public class ConvenienceMasterPatientIndexV3AtnaAuditTest {
 		assertTrue(logContent.contains("RoleIDCode csd-code=\"110152\""));
 	}
 
+	/**
+	 * This method extracts content of LOG file and checks if auditing is basically
+	 * enabled.
+	 * 
+	 * @return content of LOG file
+	 * 
+	 * @throws IOException
+	 */
 	private String checkAuditLogging() throws IOException {
 		File originLogFile = new File("log/Spring-TestEHC.log");
 
+		// extract content of log file
 		String logContent = new String(Files.readAllBytes(originLogFile.toPath()));
 
+		// check if ATNA audit events could be sent
 		assertFalse(logContent.contains("Failed to send ATNA audit event to destination"));
+
+		// check if ATNA auditing is basically enabled
 		assertTrue(logContent.contains("Auditing"));
 
 		return logContent;
