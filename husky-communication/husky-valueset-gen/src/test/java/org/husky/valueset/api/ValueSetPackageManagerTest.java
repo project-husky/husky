@@ -26,7 +26,6 @@ import org.husky.common.basetypes.NameBaseType;
 import org.husky.common.basetypes.OrganizationBaseType;
 import org.husky.common.enums.LanguageCode;
 import org.husky.common.utils.DateUtil;
-import org.husky.common.utils.FileUtil;
 import org.husky.common.utils.LangText;
 import org.husky.common.utils.Util;
 import org.husky.valueset.config.ValueSetConfig;
@@ -39,7 +38,6 @@ import org.husky.valueset.exceptions.ConfigurationException;
 import org.husky.valueset.model.ValueSet;
 import org.husky.valueset.model.ValueSetPackage;
 import org.husky.valueset.model.Version;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -183,43 +181,6 @@ public class ValueSetPackageManagerTest {
 			// This configuration must not load, because it does
 			// not contain a validFrom timestamp
 		}
-	}
-
-	@Test
-	@Disabled
-	public void downloadSaveLoadPackageConfigTest()
-			throws MalformedURLException, IOException, ConfigurationException {
-
-		ValueSetPackageManager valueSetPackageManager = new ValueSetPackageManager();
-
-		// Debug only: This is to save a config for upload to a web server:
-		// ValueSetPackageConfig valueSetPackageConfigTemp =
-		// createValueSetPackageConfig2();
-		// assertNotNull(valueSetPackageConfigTemp);
-		// valueSetPackageManager.saveValueSetPackageConfig(valueSetPackageConfigTemp,
-		// testValueSetPackageConfigFile);
-
-		// download and save a package config
-		ValueSetPackageConfig valueSetPackageConfig1 = valueSetPackageManager
-				.downloadValueSetPackageConfig(testValueSetPackageConfigOnTheWeb);
-
-		assertEquals(testValueSetPackageConfigOnTheWeb, valueSetPackageConfig1.getSourceUrl());
-
-		// Prepare cleanup
-		testValueSetPackageConfigFile.deleteOnExit();
-
-		valueSetPackageManager.saveValueSetPackageConfig(valueSetPackageConfig1,
-				testValueSetPackageConfigFile);
-		ValueSetPackageConfig valueSetPackageConfig2 = valueSetPackageManager
-				.loadValueSetPackageConfig(testValueSetPackageConfigFile);
-
-		assertEquals(valueSetPackageConfig1.getDescription(),
-				valueSetPackageConfig2.getDescription());
-		assertEquals(valueSetPackageConfig1.getVersion().getLabel(),
-				valueSetPackageConfig2.getVersion().getLabel());
-		assertEquals(valueSetPackageConfig1.getValueSetConfigList().size(),
-				valueSetPackageConfig2.getValueSetConfigList().size());
-
 	}
 
 	@Test

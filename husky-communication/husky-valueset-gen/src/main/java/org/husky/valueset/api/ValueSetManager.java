@@ -61,6 +61,7 @@ import org.husky.valueset.enums.SourceSystemType;
 import org.husky.valueset.enums.ValueSetEntryType;
 import org.husky.valueset.enums.ValueSetStatus;
 import org.husky.valueset.exceptions.InitializationException;
+import org.husky.valueset.model.CustomNamespaceContext;
 import org.husky.valueset.model.Designation;
 import org.husky.valueset.model.ValueSet;
 import org.husky.valueset.model.ValueSetEntry;
@@ -213,6 +214,7 @@ public class ValueSetManager {
 
 		var xpathFactory = XPathFactory.newInstance();
 		var xpath = xpathFactory.newXPath();
+		xpath.setNamespaceContext(new CustomNamespaceContext());
 		XPathExpression expr;
 
 		try {
@@ -378,29 +380,29 @@ public class ValueSetManager {
 		DocumentBuilder docBuilder = XmlFactories.newSafeDocumentBuilder();
 		Document xmlDoc = docBuilder.parse(IOUtils.toInputStream(IOUtils.toString(reader), StandardCharsets.UTF_8));
 
-		textContent = evaluateXpathExprAsString(xmlDoc, "//ValueSet/@id");
+		textContent = evaluateXpathExprAsString(xmlDoc, "//ihesvs:ValueSet/@id");
 		if (textContent != null)
 			valueSet.setIdentificator(IdentificatorBaseType.builder().withRoot(textContent).build());
 
-		textContent = evaluateXpathExprAsString(xmlDoc, "//ValueSet/Purpose//node()");
+		textContent = evaluateXpathExprAsString(xmlDoc, "//ihesvs:ValueSet/ihesvs:Purpose//node()");
 		if (textContent != null)
 			valueSet.addDescription(new LangText(LanguageCode.ENGLISH, textContent));
 
-		textContent = evaluateXpathExprAsString(xmlDoc, "//ValueSet/@displayName");
+		textContent = evaluateXpathExprAsString(xmlDoc, "//ihesvs:ValueSet/@displayName");
 		if (textContent != null)
 			valueSet.setDisplayName(textContent);
 
-		textContent = evaluateXpathExprAsString(xmlDoc, "//ValueSet/EffectiveDate/text()");
+		textContent = evaluateXpathExprAsString(xmlDoc, "//ihesvs:ValueSet/ihesvs:EffectiveDate/text()");
 		if (textContent != null)
 			version.setValidFrom(DateUtil.parseDateyyyyMMdd2(textContent));
 
-		textContent = evaluateXpathExprAsString(xmlDoc, "//ValueSet/@version");
+		textContent = evaluateXpathExprAsString(xmlDoc, "//ihesvs:ValueSet/@version");
 		if (textContent != null)
 			version.setLabel(textContent);
 
 		ArrayList<LanguageCode> langCodes = new ArrayList<>();
 		NodeList nodeList;
-		nodeList = evaluateXpathExprAsNodeList(xmlDoc, "//ValueSet/ConceptList/@lang");
+		nodeList = evaluateXpathExprAsNodeList(xmlDoc, "//ihesvs:ValueSet/ihesvs:ConceptList/@lang");
 
 		if (nodeList != null) {
 			for (var i = 0; i < nodeList.getLength(); i++) {
@@ -410,7 +412,7 @@ public class ValueSetManager {
 			}
 		}
 
-		nodeList = evaluateXpathExprAsNodeList(xmlDoc, "//ValueSet/ConceptList[1]/Concept");
+		nodeList = evaluateXpathExprAsNodeList(xmlDoc, "//ihesvs:ValueSet/ihesvs:ConceptList[1]/ihesvs:Concept");
 
 		if (nodeList != null) {
 			for (var i = 0; i < nodeList.getLength(); i++) {
@@ -435,7 +437,7 @@ public class ValueSetManager {
 
 					for (LanguageCode languageCode : langCodes) {
 						textContent = evaluateXpathExprAsString(xmlDoc,
-								"//ValueSet/ConceptList[@lang='" + languageCode.getCodeValue()
+								"//ihesvs:ValueSet/ihesvs:ConceptList[@lang='" + languageCode.getCodeValue()
 										+ "' or starts-with(@lang,'" + languageCode.getCodeValue()
 										+ "')]/Concept[@code='" + code.getCode() + "' and @codeSystem='"
 										+ code.getCodeSystem() + "']/@displayName");
@@ -456,7 +458,7 @@ public class ValueSetManager {
 		// Name is not available in IHE SVS format
 		// valueSet.setName(name);
 
-		textContent = evaluateXpathExprAsString(xmlDoc, "//ValueSet/Status/text()");
+		textContent = evaluateXpathExprAsString(xmlDoc, "//ihesvs:ValueSet/ihesvs:Status/text()");
 		if (textContent != null) {
 			String status = textContent;
 
