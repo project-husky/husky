@@ -1,12 +1,25 @@
+/*
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ *
+ * Source code, documentation and other resources have been contributed by various people.
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
+ * For exact developer information, please refer to the commit history of the forge.
+ *
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ *
+ */
 package org.husky.emed.cda.generated.artdecor;
 
 import java.util.List;
 import javax.annotation.processing.Generated;
-
-import org.husky.common.hl7cdar2.II;
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040DocumentationOf;
-import org.husky.common.hl7cdar2.POCDMT000040ServiceEvent;
 
 /**
  * cdach_header_HealthService
@@ -19,7 +32,7 @@ import org.husky.common.hl7cdar2.POCDMT000040ServiceEvent;
  * Version: 2019<br>
  * Status: active
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-09-08")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-11-24")
 public class CdachHeaderHealthService extends POCDMT000040DocumentationOf {
 
     public CdachHeaderHealthService() {
@@ -35,9 +48,9 @@ public class CdachHeaderHealthService extends POCDMT000040DocumentationOf {
      * @param classCode the desired fixed value for this argument.
      * @param moodCode the desired fixed value for this argument.
      */
-    private static POCDMT000040ServiceEvent createHl7ServiceEventFixedValue(String classCode, String moodCode) {
+    private static org.husky.common.hl7cdar2.POCDMT000040ServiceEvent createHl7ServiceEventFixedValue(String classCode, String moodCode) {
         ObjectFactory factory = new ObjectFactory();
-        POCDMT000040ServiceEvent retVal = factory.createPOCDMT000040ServiceEvent();
+        org.husky.common.hl7cdar2.POCDMT000040ServiceEvent retVal = factory.createPOCDMT000040ServiceEvent();
         retVal.getClassCode().add(classCode);
         retVal.getMoodCode().add(moodCode);
         return retVal;
@@ -48,9 +61,9 @@ public class CdachHeaderHealthService extends POCDMT000040DocumentationOf {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static II createHl7TemplateIdFixedValue(String root) {
+    private static org.husky.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        II retVal = factory.createII();
+        org.husky.common.hl7cdar2.II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -58,28 +71,28 @@ public class CdachHeaderHealthService extends POCDMT000040DocumentationOf {
     /**
      * Gets the hl7ServiceEvent
      */
-    public POCDMT000040ServiceEvent getHl7ServiceEvent() {
+    public org.husky.common.hl7cdar2.POCDMT000040ServiceEvent getHl7ServiceEvent() {
         return serviceEvent;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<II> getHl7TemplateId() {
+    public List<org.husky.common.hl7cdar2.II> getHl7TemplateId() {
         return templateId;
     }
 
     /**
      * Sets the hl7ServiceEvent
      */
-    public void setHl7ServiceEvent(POCDMT000040ServiceEvent value) {
+    public void setHl7ServiceEvent(org.husky.common.hl7cdar2.POCDMT000040ServiceEvent value) {
         this.serviceEvent = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(II value) {
+    public void setHl7TemplateId(org.husky.common.hl7cdar2.II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }

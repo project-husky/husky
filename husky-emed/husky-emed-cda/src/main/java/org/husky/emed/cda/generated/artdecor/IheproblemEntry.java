@@ -1,9 +1,23 @@
+/*
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ *
+ * Source code, documentation and other resources have been contributed by various people.
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
+ * For exact developer information, please refer to the commit history of the forge.
+ *
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ *
+ */
 package org.husky.emed.cda.generated.artdecor;
 
 import java.util.List;
 import javax.annotation.processing.Generated;
-
-import org.husky.common.hl7cdar2.*;
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040Observation;
 
@@ -18,11 +32,11 @@ import org.husky.common.hl7cdar2.POCDMT000040Observation;
  * Version: 2014<br>
  * Status: active
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-09-08")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-11-24")
 public class IheproblemEntry extends POCDMT000040Observation {
 
     public IheproblemEntry() {
-        super.setMoodCode(XActMoodDocumentObservation.EVN);
+        super.setMoodCode(org.husky.common.hl7cdar2.XActMoodDocumentObservation.EVN);
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.5"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.28"));
     }
@@ -30,7 +44,7 @@ public class IheproblemEntry extends POCDMT000040Observation {
     /**
      * Adds a hl7Value
      */
-    public void addHl7Value(CD value) {
+    public void addHl7Value(org.husky.common.hl7cdar2.CD value) {
         getValue().add(value);
     }
 
@@ -47,10 +61,10 @@ public class IheproblemEntry extends POCDMT000040Observation {
      * @param typeCode the desired fixed value for this argument.
      * @param inversionInd the desired fixed value for this argument.
      */
-    private static POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
+    private static org.husky.common.hl7cdar2.POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
         ObjectFactory factory = new ObjectFactory();
-        POCDMT000040EntryRelationship retVal = factory.createPOCDMT000040EntryRelationship();
-        retVal.setTypeCode(XActRelationshipEntryRelationship.fromValue(typeCode));
+        org.husky.common.hl7cdar2.POCDMT000040EntryRelationship retVal = factory.createPOCDMT000040EntryRelationship();
+        retVal.setTypeCode(org.husky.common.hl7cdar2.XActRelationshipEntryRelationship.fromValue(typeCode));
         if (inversionInd != null) {
             retVal.setInversionInd(Boolean.parseBoolean(inversionInd));
         }
@@ -62,9 +76,9 @@ public class IheproblemEntry extends POCDMT000040Observation {
      *
      * @param code the desired fixed value for this argument.
      */
-    private static CS createHl7StatusCodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+    private static org.husky.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
         ObjectFactory factory = new ObjectFactory();
-        CS retVal = factory.createCS();
+        org.husky.common.hl7cdar2.CS retVal = factory.createCS();
         retVal.setCode(code);
         retVal.setCodeSystem(codeSystem);
         retVal.setCodeSystemName(codeSystemName);
@@ -77,9 +91,9 @@ public class IheproblemEntry extends POCDMT000040Observation {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static II createHl7TemplateIdFixedValue(String root) {
+    private static org.husky.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        II retVal = factory.createII();
+        org.husky.common.hl7cdar2.II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -87,68 +101,66 @@ public class IheproblemEntry extends POCDMT000040Observation {
     /**
      * Gets the hl7Code
      */
-    public CD getHl7Code() {
+    public org.husky.common.hl7cdar2.CD getHl7Code() {
         return code;
     }
 
     /**
      * Gets the hl7EffectiveTime
      */
-    public IVLTS getHl7EffectiveTime() {
+    public org.husky.common.hl7cdar2.IVLTS getHl7EffectiveTime() {
         return effectiveTime;
     }
 
     /**
      * Gets the hl7EntryRelationship
      */
-    public List<POCDMT000040EntryRelationship> getHl7EntryRelationship() {
+    public List<org.husky.common.hl7cdar2.POCDMT000040EntryRelationship> getHl7EntryRelationship() {
         return entryRelationship;
     }
 
     /**
      * Gets the hl7Id
      */
-    public List<II> getHl7Id() {
+    public List<org.husky.common.hl7cdar2.II> getHl7Id() {
         return id;
     }
 
     /**
-     * Gets the hl7StatusCode
-     * A clinical document normally records only those condition observation events that have been completed, not observations that are in any other state. Therefore, the &lt;statusCode&gt; shall always have code='completed'.
+     * Gets the hl7StatusCode/A clinical document normally records only those condition observation events that have been completed, not observations that are in any other state. Therefore, the &lt;statusCode&gt; shall always have code='completed'.
      */
-    public CS getHl7StatusCode() {
+    public org.husky.common.hl7cdar2.CS getHl7StatusCode() {
         return statusCode;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<II> getHl7TemplateId() {
+    public List<org.husky.common.hl7cdar2.II> getHl7TemplateId() {
         return templateId;
     }
 
     /**
-     * Gets the hl7Text
-     * <div>The &lt;text&gt; element is required and points to the text describing the problem being recorded; <span style="line-height: 1.22;">including any dates, comments, et cetera. The &lt;reference&gt; contains a URI in value attribute. This </span><span style="line-height: 1.22;">URI points to the free text description of the problem in the document that is being described</span></div>
+     * Gets the hl7Text/<div>The &lt;text&gt; element is required and points to the text describing the problem being recorded; <span style="line-height: 1.22;">including any dates, comments, et cetera. The &lt;reference&gt; contains a URI in value attribute. This </span><span style="line-height: 1.22;">URI points to the free text description of the problem in the document that is being described</span></div>
      */
-    public ED getHl7Text() {
+    public org.husky.common.hl7cdar2.ED getHl7Text() {
         return text;
     }
 
     /**
-     * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship, filled by: "REFR", null
+     * Adds a predefined org.husky.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "REFR", null
      * @return the predefined element.
      */
-    public static POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrNull() {
+    public static org.husky.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrNull() {
         return createHl7EntryRelationshipFixedValue("REFR",
                                                     null);
     }
 
     /**
-     * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.CS, filled by: "completed", null, null, null
+     * Adds a predefined org.husky.common.hl7cdar2.CS, filled by: "completed", null, null, null
      * @return the predefined element.
      */
-    public static CS getPredefinedStatusCodeCompletedNullNullNull() {
+    public static org.husky.common.hl7cdar2.CS getPredefinedStatusCodeCompletedNullNullNull() {
         return createHl7StatusCodeFixedValue("completed",
                                              null,
                                              null,
@@ -158,21 +170,21 @@ public class IheproblemEntry extends POCDMT000040Observation {
     /**
      * Sets the hl7Code
      */
-    public void setHl7Code(CD value) {
+    public void setHl7Code(org.husky.common.hl7cdar2.CD value) {
         this.code = value;
     }
 
     /**
      * Sets the hl7EffectiveTime
      */
-    public void setHl7EffectiveTime(IVLTS value) {
+    public void setHl7EffectiveTime(org.husky.common.hl7cdar2.IVLTS value) {
         this.effectiveTime = value;
     }
 
     /**
      * Sets the hl7EntryRelationship
      */
-    public void setHl7EntryRelationship(POCDMT000040EntryRelationship value) {
+    public void setHl7EntryRelationship(org.husky.common.hl7cdar2.POCDMT000040EntryRelationship value) {
         getEntryRelationship().clear();
         getEntryRelationship().add(value);
     }
@@ -180,32 +192,30 @@ public class IheproblemEntry extends POCDMT000040Observation {
     /**
      * Sets the hl7Id
      */
-    public void setHl7Id(II value) {
+    public void setHl7Id(org.husky.common.hl7cdar2.II value) {
         getId().clear();
         getId().add(value);
     }
 
     /**
-     * Sets the hl7StatusCode
-     * A clinical document normally records only those condition observation events that have been completed, not observations that are in any other state. Therefore, the &lt;statusCode&gt; shall always have code='completed'.
+     * Sets the hl7StatusCode/A clinical document normally records only those condition observation events that have been completed, not observations that are in any other state. Therefore, the &lt;statusCode&gt; shall always have code='completed'.
      */
-    public void setHl7StatusCode(CS value) {
+    public void setHl7StatusCode(org.husky.common.hl7cdar2.CS value) {
         this.statusCode = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(II value) {
+    public void setHl7TemplateId(org.husky.common.hl7cdar2.II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
 
     /**
-     * Sets the hl7Text
-     * <div>The &lt;text&gt; element is required and points to the text describing the problem being recorded; <span style="line-height: 1.22;">including any dates, comments, et cetera. The &lt;reference&gt; contains a URI in value attribute. This </span><span style="line-height: 1.22;">URI points to the free text description of the problem in the document that is being described</span></div>
+     * Sets the hl7Text/<div>The &lt;text&gt; element is required and points to the text describing the problem being recorded; <span style="line-height: 1.22;">including any dates, comments, et cetera. The &lt;reference&gt; contains a URI in value attribute. This </span><span style="line-height: 1.22;">URI points to the free text description of the problem in the document that is being described</span></div>
      */
-    public void setHl7Text(ED value) {
+    public void setHl7Text(org.husky.common.hl7cdar2.ED value) {
         this.text = value;
     }
 }

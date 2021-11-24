@@ -1,10 +1,24 @@
+/*
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ *
+ * Source code, documentation and other resources have been contributed by various people.
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
+ * For exact developer information, please refer to the commit history of the forge.
+ *
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ *
+ */
 package org.husky.emed.cda.generated.artdecor;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
-
-import org.husky.common.hl7cdar2.*;
 import org.husky.common.hl7cdar2.IVLTS;
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040Material;
@@ -19,12 +33,12 @@ import org.husky.common.hl7cdar2.POCDMT000040Material;
  * Version: 2020<br>
  * Status: draft
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-09-08")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-11-24")
 public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material {
 
     public ManufacturedMaterialEntryContentModule() {
         super.setClassCode("MMAT");
-        super.setDeterminerCode(EntityDeterminerDetermined.KIND);
+        super.setDeterminerCode(org.husky.common.hl7cdar2.EntityDeterminerDetermined.KIND);
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.33"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.1"));
         super.setCode(createHl7CodeFixedValue("NA",
@@ -33,16 +47,14 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
     }
 
     /**
-     * Adds a pharmIngredient
-     * One or more active ingredients SHOULD be represented with this structure.
+     * Adds a pharmIngredient/One or more active ingredients SHOULD be represented with this structure.
      */
-    public void addPharmIngredient(COCTMT230100UVIngredient value) {
+    public void addPharmIngredient(org.husky.common.hl7cdar2.COCTMT230100UVIngredient value) {
         getIngredient().add(value);
     }
 
     /**
-     * Adds a pharmIngredient
-     * One or more active ingredients SHOULD be represented with this structure.
+     * Adds a pharmIngredient/One or more active ingredients SHOULD be represented with this structure.
      */
     public void clearPharmIngredient() {
         getIngredient().clear();
@@ -54,9 +66,9 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
      * @param nullFlavor the desired fixed value for this argument.
      * @param codeSystem the desired fixed value for this argument.
      */
-    private static CE createHl7CodeFixedValue(String nullFlavor, String codeSystem) {
+    private static org.husky.common.hl7cdar2.CE createHl7CodeFixedValue(String nullFlavor, String codeSystem) {
         ObjectFactory factory = new ObjectFactory();
-        CE retVal = factory.createCE();
+        org.husky.common.hl7cdar2.CE retVal = factory.createCE();
         retVal.nullFlavor = new ArrayList<String>();
         retVal.nullFlavor.add(nullFlavor);
         retVal.setCodeSystem(codeSystem);
@@ -68,9 +80,9 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
      *
      * @param nullFlavor the desired fixed value for this argument.
      */
-    private static EN createHl7NameFixedValue(String nullFlavor) {
+    private static org.husky.common.hl7cdar2.EN createHl7NameFixedValue(String nullFlavor) {
         ObjectFactory factory = new ObjectFactory();
-        EN retVal = factory.createEN();
+        org.husky.common.hl7cdar2.EN retVal = factory.createEN();
         retVal.nullFlavor = new ArrayList<String>();
         retVal.nullFlavor.add(nullFlavor);
         return retVal;
@@ -81,9 +93,9 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
      *
      * @param root the desired fixed value for this argument.
      */
-    private static II createHl7TemplateIdFixedValue(String root) {
+    private static org.husky.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        II retVal = factory.createII();
+        org.husky.common.hl7cdar2.II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -93,19 +105,19 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
      *
      * @param classCode the desired fixed value for this argument.
      */
-    private static COCTMT230100UVContent createPharmAsContentFixedValue(String classCode) {
+    private static org.husky.common.hl7cdar2.COCTMT230100UVContent createPharmAsContentFixedValue(String classCode) {
         ObjectFactory factory = new ObjectFactory();
-        COCTMT230100UVContent retVal = factory.createCOCTMT230100UVContent();
-        retVal.setClassCode(RoleClassContent.fromValue(classCode));
+        org.husky.common.hl7cdar2.COCTMT230100UVContent retVal = factory.createCOCTMT230100UVContent();
+        retVal.setClassCode(org.husky.common.hl7cdar2.RoleClassContent.fromValue(classCode));
         return retVal;
     }
 
     /**
      * Creates fixed contents for CDA Element pharmFormCode
      */
-    private static CE createPharmFormCodeFixedValue() {
+    private static org.husky.common.hl7cdar2.CE createPharmFormCodeFixedValue() {
         ObjectFactory factory = new ObjectFactory();
-        CE retVal = factory.createCE();
+        org.husky.common.hl7cdar2.CE retVal = factory.createCE();
         return retVal;
     }
 
@@ -114,118 +126,111 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
      *
      * @param classCode the desired fixed value for this argument.
      */
-    private static COCTMT230100UVIngredient createPharmIngredientFixedValue(String classCode) {
+    private static org.husky.common.hl7cdar2.COCTMT230100UVIngredient createPharmIngredientFixedValue(String classCode) {
         ObjectFactory factory = new ObjectFactory();
-        COCTMT230100UVIngredient retVal = factory.createCOCTMT230100UVIngredient();
+        org.husky.common.hl7cdar2.COCTMT230100UVIngredient retVal = factory.createCOCTMT230100UVIngredient();
         retVal.setClassCode(classCode);
         return retVal;
     }
 
     /**
-     * Gets the hl7Code
-     * The element SHALL be present and describes the code of the medication package (GTIN). If it is a magistral preparation/compound medicin @nullFlavor SHALL be "NA".
+     * Gets the hl7Code/The element SHALL be present and describes the code of the medication package (GTIN). If it is a magistral preparation/compound medicin @nullFlavor SHALL be "NA".
      */
-    public CE getHl7Code() {
+    public org.husky.common.hl7cdar2.CE getHl7Code() {
         return code;
     }
 
     /**
      * Gets the hl7LotNumberText
      */
-    public ST getHl7LotNumberText() {
+    public org.husky.common.hl7cdar2.ST getHl7LotNumberText() {
         return lotNumberText;
     }
 
     /**
-     * Gets the hl7Name
-     * The element SHALL contain the name of the medication.
+     * Gets the hl7Name/The element SHALL contain the name of the medication.
      */
-    public EN getHl7Name() {
+    public org.husky.common.hl7cdar2.EN getHl7Name() {
         return name;
     }
 
     /**
-     * Gets the hl7TemplateId
-     * CH-PHARM Manufactured Material Content Module
+     * Gets the hl7TemplateId/CH-PHARM Manufactured Material Content Module
      */
-    public List<II> getHl7TemplateId() {
+    public List<org.husky.common.hl7cdar2.II> getHl7TemplateId() {
         return templateId;
     }
 
     /**
      * Gets the pharmAsContent
      */
-    public COCTMT230100UVContent getPharmAsContent() {
+    public org.husky.common.hl7cdar2.COCTMT230100UVContent getPharmAsContent() {
         return asContent;
     }
 
     /**
      * Gets the pharmExpirationTime
      */
-    public TS getPharmExpirationTime() {
+    public org.husky.common.hl7cdar2.TS getPharmExpirationTime() {
         return expirationTime;
     }
 
     /**
-     * Gets the pharmFormCode
-     * This code represents the pharmaceutical dose form (e.g., tablet, capsule, liquid) and SHOULD be present, if not implied by the product.
+     * Gets the pharmFormCode/This code represents the pharmaceutical dose form (e.g., tablet, capsule, liquid) and SHOULD be present, if not implied by the product.
      */
-    public CE getPharmFormCode() {
+    public org.husky.common.hl7cdar2.CE getPharmFormCode() {
         return formCode;
     }
 
     /**
-     * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.COCTMT230100UVContent, filled by: "CONT"
+     * Adds a predefined org.husky.common.hl7cdar2.COCTMT230100UVContent, filled by: "CONT"
      * @return the predefined element.
      */
-    public static COCTMT230100UVContent getPredefinedAsContentCont() {
+    public static org.husky.common.hl7cdar2.COCTMT230100UVContent getPredefinedAsContentCont() {
         return createPharmAsContentFixedValue("CONT");
     }
 
     /**
-     * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.CE, filled by:
+     * Adds a predefined org.husky.common.hl7cdar2.CE, filled by:
      * @return the predefined element.
      */
-    public static CE getPredefinedFormCode() {
+    public static org.husky.common.hl7cdar2.CE getPredefinedFormCode() {
         return createPharmFormCodeFixedValue();
     }
 
     /**
-     * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.COCTMT230100UVIngredient, filled by: "ACTI"
+     * Adds a predefined org.husky.common.hl7cdar2.COCTMT230100UVIngredient, filled by: "ACTI"
      * @return the predefined element.
      */
-    public static COCTMT230100UVIngredient getPredefinedIngredientActi() {
+    public static org.husky.common.hl7cdar2.COCTMT230100UVIngredient getPredefinedIngredientActi() {
         return createPharmIngredientFixedValue("ACTI");
     }
 
     /**
-     * Sets the hl7Code
-     * The element SHALL be present and describes the code of the medication package (GTIN). If it is a magistral preparation/compound medicin @nullFlavor SHALL be "NA".
+     * Sets the hl7Code/The element SHALL be present and describes the code of the medication package (GTIN). If it is a magistral preparation/compound medicin @nullFlavor SHALL be "NA".
      */
-    public void setHl7Code(CE value) {
+    public void setHl7Code(org.husky.common.hl7cdar2.CE value) {
         this.code = value;
     }
 
     /**
      * Sets the hl7LotNumberText
      */
-    public void setHl7LotNumberText(ST value) {
+    public void setHl7LotNumberText(org.husky.common.hl7cdar2.ST value) {
         this.lotNumberText = value;
     }
 
     /**
-     * Sets the hl7Name
-     * The element SHALL contain the name of the medication.
+     * Sets the hl7Name/The element SHALL contain the name of the medication.
      */
-    public void setHl7Name(EN value) {
+    public void setHl7Name(org.husky.common.hl7cdar2.EN value) {
         this.name = value;
     }
 
     /**
-     * Sets the hl7TemplateId
-     * CH-PHARM Manufactured Material Content Module
+     * Sets the hl7TemplateId/CH-PHARM Manufactured Material Content Module
      */
-    public void setHl7TemplateId(II value) {
+    public void setHl7TemplateId(org.husky.common.hl7cdar2.II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
@@ -233,14 +238,14 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
     /**
      * Sets the pharmAsContent
      */
-    public void setPharmAsContent(COCTMT230100UVContent value) {
+    public void setPharmAsContent(org.husky.common.hl7cdar2.COCTMT230100UVContent value) {
         this.asContent = value;
     }
 
     /**
      * Sets the pharmExpirationTime
      */
-    public void setPharmExpirationTime(TS value) {
+    public void setPharmExpirationTime(org.husky.common.hl7cdar2.TS value) {
         ObjectFactory factory = new ObjectFactory();
         IVLTS ivlts = factory.createIVLTS();
         ivlts.setValue(value.getValue());
@@ -248,10 +253,9 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
     }
 
     /**
-     * Sets the pharmFormCode
-     * This code represents the pharmaceutical dose form (e.g., tablet, capsule, liquid) and SHOULD be present, if not implied by the product.
+     * Sets the pharmFormCode/This code represents the pharmaceutical dose form (e.g., tablet, capsule, liquid) and SHOULD be present, if not implied by the product.
      */
-    public void setPharmFormCode(CE value) {
+    public void setPharmFormCode(org.husky.common.hl7cdar2.CE value) {
         this.formCode = value;
     }
 }

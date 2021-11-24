@@ -1,9 +1,25 @@
+/*
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ *
+ * Source code, documentation and other resources have been contributed by various people.
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
+ * For exact developer information, please refer to the commit history of the forge.
+ *
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ *
+ */
 package org.husky.emed.cda.generated.artdecor;
 
 import java.util.List;
 import javax.annotation.processing.Generated;
-
-import org.husky.common.hl7cdar2.*;
+import org.husky.common.hl7cdar2.ObjectFactory;
+import org.husky.common.hl7cdar2.POCDMT000040Organization;
 
 /**
  * cdach_other_OrganizationCompilationGlnName
@@ -16,7 +32,7 @@ import org.husky.common.hl7cdar2.*;
  * Version: 2017<br>
  * Status: active
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-09-08")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-11-24")
 public class CdachOtherOrganizationCompilationGlnName extends POCDMT000040Organization {
 
     public CdachOtherOrganizationCompilationGlnName() {
@@ -24,48 +40,42 @@ public class CdachOtherOrganizationCompilationGlnName extends POCDMT000040Organi
     }
 
     /**
-     * Adds a hl7Addr
-     * The organization's address.
+     * Adds a hl7Addr/The organization's address.
      */
-    public void addHl7Addr(AD value) {
+    public void addHl7Addr(org.husky.common.hl7cdar2.AD value) {
         getAddr().add(value);
     }
 
     /**
-     * Adds a hl7Name
-     * The organization's name.
+     * Adds a hl7Name/The organization's name.
      */
-    public void addHl7Name(ON value) {
+    public void addHl7Name(org.husky.common.hl7cdar2.ON value) {
         getName().add(value);
     }
 
     /**
-     * Adds a hl7Telecom
-     * The organization's means of communication (phone, eMail, ...).
+     * Adds a hl7Telecom/The organization's means of communication (phone, eMail, ...).
      */
-    public void addHl7Telecom(TEL value) {
+    public void addHl7Telecom(org.husky.common.hl7cdar2.TEL value) {
         getTelecom().add(value);
     }
 
     /**
-     * Adds a hl7Addr
-     * The organization's address.
+     * Adds a hl7Addr/The organization's address.
      */
     public void clearHl7Addr() {
         getAddr().clear();
     }
 
     /**
-     * Adds a hl7Name
-     * The organization's name.
+     * Adds a hl7Name/The organization's name.
      */
     public void clearHl7Name() {
         getName().clear();
     }
 
     /**
-     * Adds a hl7Telecom
-     * The organization's means of communication (phone, eMail, ...).
+     * Adds a hl7Telecom/The organization's means of communication (phone, eMail, ...).
      */
     public void clearHl7Telecom() {
         getTelecom().clear();
@@ -76,26 +86,24 @@ public class CdachOtherOrganizationCompilationGlnName extends POCDMT000040Organi
      *
      * @param root the desired fixed value for this argument.
      */
-    private static II createHl7IdFixedValue(String root) {
+    private static org.husky.common.hl7cdar2.II createHl7IdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        II retVal = factory.createII();
+        org.husky.common.hl7cdar2.II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
 
     /**
-     * Gets the hl7Id
-     * The organization's id (GLN).
+     * Gets the hl7Id/The organization's id (GLN).
      */
-    public List<II> getHl7Id() {
+    public List<org.husky.common.hl7cdar2.II> getHl7Id() {
         return id;
     }
 
     /**
-     * Sets the hl7Id
-     * The organization's id (GLN).
+     * Sets the hl7Id/The organization's id (GLN).
      */
-    public void setHl7Id(II value) {
+    public void setHl7Id(org.husky.common.hl7cdar2.II value) {
         getId().clear();
         getId().add(value);
     }

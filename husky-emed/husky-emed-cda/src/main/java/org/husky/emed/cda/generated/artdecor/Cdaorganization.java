@@ -1,8 +1,23 @@
+/*
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ *
+ * Source code, documentation and other resources have been contributed by various people.
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
+ * For exact developer information, please refer to the commit history of the forge.
+ *
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ *
+ */
 package org.husky.emed.cda.generated.artdecor;
 
 import javax.annotation.processing.Generated;
-
-import org.husky.common.hl7cdar2.*;
+import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040Organization;
 
 /**
@@ -14,7 +29,7 @@ import org.husky.common.hl7cdar2.POCDMT000040Organization;
  * Effective date: 2005-09-07 00:00:00<br>
  * Status: active
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-09-08")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-11-24")
 public class Cdaorganization extends POCDMT000040Organization {
 
     public Cdaorganization() {
@@ -23,28 +38,28 @@ public class Cdaorganization extends POCDMT000040Organization {
     /**
      * Adds a hl7Addr
      */
-    public void addHl7Addr(AD value) {
+    public void addHl7Addr(org.husky.common.hl7cdar2.AD value) {
         getAddr().add(value);
     }
 
     /**
      * Adds a hl7Id
      */
-    public void addHl7Id(II value) {
+    public void addHl7Id(org.husky.common.hl7cdar2.II value) {
         getId().add(value);
     }
 
     /**
      * Adds a hl7Name
      */
-    public void addHl7Name(ON value) {
+    public void addHl7Name(org.husky.common.hl7cdar2.ON value) {
         getName().add(value);
     }
 
     /**
      * Adds a hl7Telecom
      */
-    public void addHl7Telecom(TEL value) {
+    public void addHl7Telecom(org.husky.common.hl7cdar2.TEL value) {
         getTelecom().add(value);
     }
 
@@ -81,9 +96,9 @@ public class Cdaorganization extends POCDMT000040Organization {
      *
      * @param classCode the desired fixed value for this argument.
      */
-    private static POCDMT000040OrganizationPartOf createHl7AsOrganizationPartOfFixedValue(String classCode) {
+    private static org.husky.common.hl7cdar2.POCDMT000040OrganizationPartOf createHl7AsOrganizationPartOfFixedValue(String classCode) {
         ObjectFactory factory = new ObjectFactory();
-        POCDMT000040OrganizationPartOf retVal = factory.createPOCDMT000040OrganizationPartOf();
+        org.husky.common.hl7cdar2.POCDMT000040OrganizationPartOf retVal = factory.createPOCDMT000040OrganizationPartOf();
         retVal.getClassCode().add(classCode);
         return retVal;
     }
@@ -91,38 +106,36 @@ public class Cdaorganization extends POCDMT000040Organization {
     /**
      * Gets the hl7AsOrganizationPartOf
      */
-    public POCDMT000040OrganizationPartOf getHl7AsOrganizationPartOf() {
+    public org.husky.common.hl7cdar2.POCDMT000040OrganizationPartOf getHl7AsOrganizationPartOf() {
         return asOrganizationPartOf;
     }
 
     /**
-     * Gets the hl7StandardIndustryClassCode
-     * SHALL be chosen from domain OrganizationIndustryClass
+     * Gets the hl7StandardIndustryClassCode/SHALL be chosen from domain OrganizationIndustryClass
      */
-    public CE getHl7StandardIndustryClassCode() {
+    public org.husky.common.hl7cdar2.CE getHl7StandardIndustryClassCode() {
         return standardIndustryClassCode;
     }
 
     /**
-     * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040OrganizationPartOf, filled by: "PART"
+     * Adds a predefined org.husky.common.hl7cdar2.POCDMT000040OrganizationPartOf, filled by: "PART"
      * @return the predefined element.
      */
-    public static POCDMT000040OrganizationPartOf getPredefinedAsOrganizationPartOfPart() {
+    public static org.husky.common.hl7cdar2.POCDMT000040OrganizationPartOf getPredefinedAsOrganizationPartOfPart() {
         return createHl7AsOrganizationPartOfFixedValue("PART");
     }
 
     /**
      * Sets the hl7AsOrganizationPartOf
      */
-    public void setHl7AsOrganizationPartOf(POCDMT000040OrganizationPartOf value) {
+    public void setHl7AsOrganizationPartOf(org.husky.common.hl7cdar2.POCDMT000040OrganizationPartOf value) {
         this.asOrganizationPartOf = value;
     }
 
     /**
-     * Sets the hl7StandardIndustryClassCode
-     * SHALL be chosen from domain OrganizationIndustryClass
+     * Sets the hl7StandardIndustryClassCode/SHALL be chosen from domain OrganizationIndustryClass
      */
-    public void setHl7StandardIndustryClassCode(CE value) {
+    public void setHl7StandardIndustryClassCode(org.husky.common.hl7cdar2.CE value) {
         this.standardIndustryClassCode = value;
     }
 }

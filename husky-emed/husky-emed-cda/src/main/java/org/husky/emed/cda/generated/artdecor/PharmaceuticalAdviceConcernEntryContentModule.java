@@ -1,10 +1,24 @@
+/*
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ *
+ * Source code, documentation and other resources have been contributed by various people.
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
+ * For exact developer information, please refer to the commit history of the forge.
+ *
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ *
+ */
 package org.husky.emed.cda.generated.artdecor;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
-
-import org.husky.common.hl7cdar2.*;
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040Act;
 
@@ -18,12 +32,12 @@ import org.husky.common.hl7cdar2.POCDMT000040Act;
  * Version: 2017<br>
  * Status: draft
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-09-08")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-11-24")
 public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040Act {
 
     public PharmaceuticalAdviceConcernEntryContentModule() {
-        super.setClassCode(XActClassDocumentEntryAct.ACT);
-        super.setMoodCode(XDocumentActMood.EVN);
+        super.setClassCode(org.husky.common.hl7cdar2.XActClassDocumentEntryAct.ACT);
+        super.setMoodCode(org.husky.common.hl7cdar2.XDocumentActMood.EVN);
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.81"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.27"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.5.1"));
@@ -40,9 +54,9 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
      *
      * @param nullFlavor the desired fixed value for this argument.
      */
-    private static CD createHl7CodeFixedValue(String nullFlavor) {
+    private static org.husky.common.hl7cdar2.CD createHl7CodeFixedValue(String nullFlavor) {
         ObjectFactory factory = new ObjectFactory();
-        CD retVal = factory.createCD();
+        org.husky.common.hl7cdar2.CD retVal = factory.createCD();
         retVal.nullFlavor = new ArrayList<String>();
         retVal.nullFlavor.add(nullFlavor);
         return retVal;
@@ -54,10 +68,10 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
      * @param typeCode the desired fixed value for this argument.
      * @param inversionInd the desired fixed value for this argument.
      */
-    private static POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
+    private static org.husky.common.hl7cdar2.POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
         ObjectFactory factory = new ObjectFactory();
-        POCDMT000040EntryRelationship retVal = factory.createPOCDMT000040EntryRelationship();
-        retVal.setTypeCode(XActRelationshipEntryRelationship.fromValue(typeCode));
+        org.husky.common.hl7cdar2.POCDMT000040EntryRelationship retVal = factory.createPOCDMT000040EntryRelationship();
+        retVal.setTypeCode(org.husky.common.hl7cdar2.XActRelationshipEntryRelationship.fromValue(typeCode));
         if (inversionInd != null) {
             retVal.setInversionInd(Boolean.parseBoolean(inversionInd));
         }
@@ -69,9 +83,9 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
      *
      * @param code the desired fixed value for this argument.
      */
-    private static CS createHl7StatusCodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+    private static org.husky.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
         ObjectFactory factory = new ObjectFactory();
-        CS retVal = factory.createCS();
+        org.husky.common.hl7cdar2.CS retVal = factory.createCS();
         retVal.setCode(code);
         retVal.setCodeSystem(codeSystem);
         retVal.setCodeSystemName(codeSystemName);
@@ -84,150 +98,138 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
      *
      * @param root the desired fixed value for this argument.
      */
-    private static II createHl7TemplateIdFixedValue(String root) {
+    private static org.husky.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        II retVal = factory.createII();
+        org.husky.common.hl7cdar2.II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
 
     /**
-     * Gets the hl7Code
-     * An optional narrative description of the concern
+     * Gets the hl7Code/An optional narrative description of the concern
      */
-    public CD getHl7Code() {
+    public org.husky.common.hl7cdar2.CD getHl7Code() {
         return code;
     }
 
     /**
-     * Gets the hl7EffectiveTime
-     * Problems determined
+     * Gets the hl7EffectiveTime/Problems determined
      */
-    public IVLTS getHl7EffectiveTime() {
+    public org.husky.common.hl7cdar2.IVLTS getHl7EffectiveTime() {
         return effectiveTime;
     }
 
     /**
      * Gets the hl7EntryRelationship
      */
-    public List<POCDMT000040EntryRelationship> getHl7EntryRelationship() {
+    public List<org.husky.common.hl7cdar2.POCDMT000040EntryRelationship> getHl7EntryRelationship() {
         return entryRelationship;
     }
 
     /**
-     * Gets the hl7Id
-     * Pharmaceutical Advice Concern ID
+     * Gets the hl7Id/Pharmaceutical Advice Concern ID
      */
-    public List<II> getHl7Id() {
+    public List<org.husky.common.hl7cdar2.II> getHl7Id() {
         return id;
     }
 
     /**
-     * Gets the hl7StatusCode
-     * Status Code
+     * Gets the hl7StatusCode/Status Code
      */
-    public CS getHl7StatusCode() {
+    public org.husky.common.hl7cdar2.CS getHl7StatusCode() {
         return statusCode;
     }
 
     /**
-     * Gets the hl7TemplateId
-     * CH-PHARM Pharmaceutical Advice Concern Entry TemplateID
+     * Gets the hl7TemplateId/CH-PHARM Pharmaceutical Advice Concern Entry TemplateID
      */
-    public List<II> getHl7TemplateId() {
+    public List<org.husky.common.hl7cdar2.II> getHl7TemplateId() {
         return templateId;
     }
 
     /**
-     * Gets the hl7Text
-     * It shall contain both the narrative text content and a reference to the human readable part of the item. This human readable part may contain a simple text to redirect the reader to the PDF document (e.g. "See PDF version included").<br clear="none"/>There shall be a single non-blank text node (i.e. the text shall be completely before or after the reference, see examples). The text shall be raw (i.e. no markup shall be used).
+     * Gets the hl7Text/It shall contain both the narrative text content and a reference to the human readable part of the item. This human readable part may contain a simple text to redirect the reader to the PDF document (e.g. "See PDF version included").<br clear="none"/>There shall be a single non-blank text node (i.e. the text shall be completely before or after the reference, see examples). The text shall be raw (i.e. no markup shall be used).
      */
-    public ED getHl7Text() {
+    public org.husky.common.hl7cdar2.ED getHl7Text() {
         return text;
     }
 
     /**
-     * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship, filled by: "REFR", "false"
+     * Adds a predefined org.husky.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "REFR", "false"
      * @return the predefined element.
      */
-    public static POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrFalse() {
+    public static org.husky.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrFalse() {
         return createHl7EntryRelationshipFixedValue("REFR",
                                                     "false");
     }
 
     /**
-     * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship, filled by: "SUBJ", null
+     * Adds a predefined org.husky.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "SUBJ", null
      * @return the predefined element.
      */
-    public static POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjNull() {
+    public static org.husky.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjNull() {
         return createHl7EntryRelationshipFixedValue("SUBJ",
                                                     null);
     }
 
     /**
-     * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship, filled by: "SUBJ", "true"
+     * Adds a predefined org.husky.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "SUBJ", "true"
      * @return the predefined element.
      */
-    public static POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjTrue() {
+    public static org.husky.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjTrue() {
         return createHl7EntryRelationshipFixedValue("SUBJ",
                                                     "true");
     }
 
     /**
-     * Sets the hl7Code
-     * An optional narrative description of the concern
+     * Sets the hl7Code/An optional narrative description of the concern
      */
-    public void setHl7Code(CD value) {
+    public void setHl7Code(org.husky.common.hl7cdar2.CD value) {
         this.code = value;
     }
 
     /**
-     * Sets the hl7EffectiveTime
-     * Problems determined
+     * Sets the hl7EffectiveTime/Problems determined
      */
-    public void setHl7EffectiveTime(IVLTS value) {
+    public void setHl7EffectiveTime(org.husky.common.hl7cdar2.IVLTS value) {
         this.effectiveTime = value;
     }
 
     /**
      * Sets the hl7EntryRelationship
      */
-    public void setHl7EntryRelationship(POCDMT000040EntryRelationship value) {
+    public void setHl7EntryRelationship(org.husky.common.hl7cdar2.POCDMT000040EntryRelationship value) {
         getEntryRelationship().clear();
         getEntryRelationship().add(value);
     }
 
     /**
-     * Sets the hl7Id
-     * Pharmaceutical Advice Concern ID
+     * Sets the hl7Id/Pharmaceutical Advice Concern ID
      */
-    public void setHl7Id(II value) {
+    public void setHl7Id(org.husky.common.hl7cdar2.II value) {
         getId().clear();
         getId().add(value);
     }
 
     /**
-     * Sets the hl7StatusCode
-     * Status Code
+     * Sets the hl7StatusCode/Status Code
      */
-    public void setHl7StatusCode(CS value) {
+    public void setHl7StatusCode(org.husky.common.hl7cdar2.CS value) {
         this.statusCode = value;
     }
 
     /**
-     * Sets the hl7TemplateId
-     * CH-PHARM Pharmaceutical Advice Concern Entry TemplateID
+     * Sets the hl7TemplateId/CH-PHARM Pharmaceutical Advice Concern Entry TemplateID
      */
-    public void setHl7TemplateId(II value) {
+    public void setHl7TemplateId(org.husky.common.hl7cdar2.II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
 
     /**
-     * Sets the hl7Text
-     * It shall contain both the narrative text content and a reference to the human readable part of the item. This human readable part may contain a simple text to redirect the reader to the PDF document (e.g. "See PDF version included").<br clear="none"/>There shall be a single non-blank text node (i.e. the text shall be completely before or after the reference, see examples). The text shall be raw (i.e. no markup shall be used).
+     * Sets the hl7Text/It shall contain both the narrative text content and a reference to the human readable part of the item. This human readable part may contain a simple text to redirect the reader to the PDF document (e.g. "See PDF version included").<br clear="none"/>There shall be a single non-blank text node (i.e. the text shall be completely before or after the reference, see examples). The text shall be raw (i.e. no markup shall be used).
      */
-    public void setHl7Text(ED value) {
+    public void setHl7Text(org.husky.common.hl7cdar2.ED value) {
         this.text = value;
     }
 }

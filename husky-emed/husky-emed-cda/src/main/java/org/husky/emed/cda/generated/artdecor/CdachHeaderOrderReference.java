@@ -1,12 +1,25 @@
+/*
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ *
+ * Source code, documentation and other resources have been contributed by various people.
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
+ * For exact developer information, please refer to the commit history of the forge.
+ *
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ *
+ */
 package org.husky.emed.cda.generated.artdecor;
 
 import java.util.List;
 import javax.annotation.processing.Generated;
-
-import org.husky.common.hl7cdar2.II;
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040InFulfillmentOf;
-import org.husky.common.hl7cdar2.POCDMT000040Order;
 
 /**
  * cdach_header_OrderReference
@@ -19,7 +32,7 @@ import org.husky.common.hl7cdar2.POCDMT000040Order;
  * Version: 2017<br>
  * Status: active
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-09-08")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-11-24")
 public class CdachHeaderOrderReference extends POCDMT000040InFulfillmentOf {
 
     public CdachHeaderOrderReference() {
@@ -31,9 +44,9 @@ public class CdachHeaderOrderReference extends POCDMT000040InFulfillmentOf {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static II createHl7TemplateIdFixedValue(String root) {
+    private static org.husky.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        II retVal = factory.createII();
+        org.husky.common.hl7cdar2.II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -41,28 +54,28 @@ public class CdachHeaderOrderReference extends POCDMT000040InFulfillmentOf {
     /**
      * Gets the hl7Order
      */
-    public POCDMT000040Order getHl7Order() {
+    public org.husky.common.hl7cdar2.POCDMT000040Order getHl7Order() {
         return order;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<II> getHl7TemplateId() {
+    public List<org.husky.common.hl7cdar2.II> getHl7TemplateId() {
         return templateId;
     }
 
     /**
      * Sets the hl7Order
      */
-    public void setHl7Order(POCDMT000040Order value) {
+    public void setHl7Order(org.husky.common.hl7cdar2.POCDMT000040Order value) {
         this.order = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(II value) {
+    public void setHl7TemplateId(org.husky.common.hl7cdar2.II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }

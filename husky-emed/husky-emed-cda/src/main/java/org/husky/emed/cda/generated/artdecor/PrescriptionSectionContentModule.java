@@ -1,9 +1,24 @@
+/*
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ *
+ * Source code, documentation and other resources have been contributed by various people.
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
+ * For exact developer information, please refer to the commit history of the forge.
+ *
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ *
+ */
 package org.husky.emed.cda.generated.artdecor;
 
 import java.util.List;
 import javax.annotation.processing.Generated;
-
-import org.husky.common.hl7cdar2.*;
+import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040Section;
 
 /**
@@ -16,7 +31,7 @@ import org.husky.common.hl7cdar2.POCDMT000040Section;
  * Version: 2017<br>
  * Status: draft
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-09-08")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-11-24")
 public class PrescriptionSectionContentModule extends POCDMT000040Section {
 
     public PrescriptionSectionContentModule() {
@@ -29,23 +44,21 @@ public class PrescriptionSectionContentModule extends POCDMT000040Section {
     }
 
     /**
-     * Adds a hl7Author
-     * Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
+     * Adds a hl7Author/Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
      */
-    public void addHl7Author(POCDMT000040Author value) {
+    public void addHl7Author(org.husky.common.hl7cdar2.POCDMT000040Author value) {
         getAuthor().add(value);
     }
 
     /**
      * Adds a hl7Entry
      */
-    public void addHl7Entry(POCDMT000040Entry value) {
+    public void addHl7Entry(org.husky.common.hl7cdar2.POCDMT000040Entry value) {
         getEntry().add(value);
     }
 
     /**
-     * Adds a hl7Author
-     * Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
+     * Adds a hl7Author/Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
      */
     public void clearHl7Author() {
         getAuthor().clear();
@@ -63,9 +76,9 @@ public class PrescriptionSectionContentModule extends POCDMT000040Section {
      *
      * @param code the desired fixed value for this argument.
      */
-    private static CE createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+    private static org.husky.common.hl7cdar2.CE createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
         ObjectFactory factory = new ObjectFactory();
-        CE retVal = factory.createCE();
+        org.husky.common.hl7cdar2.CE retVal = factory.createCE();
         retVal.setCode(code);
         retVal.setCodeSystem(codeSystem);
         retVal.setCodeSystemName(codeSystemName);
@@ -78,9 +91,9 @@ public class PrescriptionSectionContentModule extends POCDMT000040Section {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static II createHl7TemplateIdFixedValue(String root) {
+    private static org.husky.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        II retVal = factory.createII();
+        org.husky.common.hl7cdar2.II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -88,57 +101,56 @@ public class PrescriptionSectionContentModule extends POCDMT000040Section {
     /**
      * Gets the hl7Code
      */
-    public CE getHl7Code() {
+    public org.husky.common.hl7cdar2.CE getHl7Code() {
         return code;
     }
 
     /**
      * Gets the hl7Id
      */
-    public II getHl7Id() {
+    public org.husky.common.hl7cdar2.II getHl7Id() {
         return id;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<II> getHl7TemplateId() {
+    public List<org.husky.common.hl7cdar2.II> getHl7TemplateId() {
         return templateId;
     }
 
     /**
      * Gets the hl7Text
      */
-    public StrucDocText getHl7Text() {
+    public org.husky.common.hl7cdar2.StrucDocText getHl7Text() {
         return text;
     }
 
     /**
-     * Gets the hl7Title
-     * <div>The German title shall be "Arzneimittelverordnung".</div><div>The French title shall be "Prescription médicamenteuse".</div><div>The Italian title shall be "Prescrizione di droga".</div><div>The English title shall be "Prescription for medication".</div><div>Titles in other languages are allowed and unrestricted.</div>
+     * Gets the hl7Title/<div>The German title shall be "Arzneimittelverordnung".</div><div>The French title shall be "Prescription médicamenteuse".</div><div>The Italian title shall be "Prescrizione di droga".</div><div>The English title shall be "Prescription for medication".</div><div>Titles in other languages are allowed and unrestricted.</div>
      */
-    public ST getHl7Title() {
+    public org.husky.common.hl7cdar2.ST getHl7Title() {
         return title;
     }
 
     /**
      * Sets the hl7Code
      */
-    public void setHl7Code(CE value) {
+    public void setHl7Code(org.husky.common.hl7cdar2.CE value) {
         this.code = value;
     }
 
     /**
      * Sets the hl7Id
      */
-    public void setHl7Id(II value) {
+    public void setHl7Id(org.husky.common.hl7cdar2.II value) {
         this.id = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(II value) {
+    public void setHl7TemplateId(org.husky.common.hl7cdar2.II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
@@ -146,15 +158,14 @@ public class PrescriptionSectionContentModule extends POCDMT000040Section {
     /**
      * Sets the hl7Text
      */
-    public void setHl7Text(StrucDocText value) {
+    public void setHl7Text(org.husky.common.hl7cdar2.StrucDocText value) {
         this.text = value;
     }
 
     /**
-     * Sets the hl7Title
-     * <div>The German title shall be "Arzneimittelverordnung".</div><div>The French title shall be "Prescription médicamenteuse".</div><div>The Italian title shall be "Prescrizione di droga".</div><div>The English title shall be "Prescription for medication".</div><div>Titles in other languages are allowed and unrestricted.</div>
+     * Sets the hl7Title/<div>The German title shall be "Arzneimittelverordnung".</div><div>The French title shall be "Prescription médicamenteuse".</div><div>The Italian title shall be "Prescrizione di droga".</div><div>The English title shall be "Prescription for medication".</div><div>Titles in other languages are allowed and unrestricted.</div>
      */
-    public void setHl7Title(ST value) {
+    public void setHl7Title(org.husky.common.hl7cdar2.ST value) {
         this.title = value;
     }
 }
