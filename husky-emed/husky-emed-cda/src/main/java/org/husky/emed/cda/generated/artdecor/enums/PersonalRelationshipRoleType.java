@@ -1681,6 +1681,11 @@ public enum PersonalRelationshipRoleType implements ValueSetEnumInterface {
     public static final String VALUE_SET_NAME = "PersonalRelationshipRoleType";
 
     /**
+     * Identifier of the code system (all values share the same).
+     */
+    public static final String CODE_SYSTEM_ID = "2.16.840.1.113883.5.111";
+
+    /**
      * Gets the Enum with a given code.
      *
      * @param code The code value.

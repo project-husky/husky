@@ -1,18 +1,11 @@
 /*
- * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. https://medshare.net
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
  *
- * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
- * For exact developer information, please refer to the commit history of the forge.
- *
- * This code is made available under the terms of the Eclipse Public License v1.0.
- *
- * Accompanying materials are made available under the terms of the Creative Commons
- * Attribution-ShareAlike 4.0 License.
- *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
- *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  */
 package org.husky.emed.cda.generated.artdecor;
 
@@ -198,7 +191,8 @@ public class IheproblemEntry extends POCDMT000040Observation {
     }
 
     /**
-     * Sets the hl7StatusCode/A clinical document normally records only those condition observation events that have been completed, not observations that are in any other state. Therefore, the &lt;statusCode&gt; shall always have code='completed'.
+     * Sets the hl7StatusCode<br/>
+     * A clinical document normally records only those condition observation events that have been completed, not observations that are in any other state. Therefore, the &lt;statusCode&gt; shall always have code='completed'.
      */
     public void setHl7StatusCode(org.husky.common.hl7cdar2.CS value) {
         this.statusCode = value;
@@ -213,7 +207,8 @@ public class IheproblemEntry extends POCDMT000040Observation {
     }
 
     /**
-     * Sets the hl7Text/<div>The &lt;text&gt; element is required and points to the text describing the problem being recorded; <span style="line-height: 1.22;">including any dates, comments, et cetera. The &lt;reference&gt; contains a URI in value attribute. This </span><span style="line-height: 1.22;">URI points to the free text description of the problem in the document that is being described</span></div>
+     * Sets the hl7Text<br/>
+     * <div>The &lt;text&gt; element is required and points to the text describing the problem being recorded; <span style="line-height: 1.22;">including any dates, comments, et cetera. The &lt;reference&gt; contains a URI in value attribute. This </span><span style="line-height: 1.22;">URI points to the free text description of the problem in the document that is being described</span></div>
      */
     public void setHl7Text(org.husky.common.hl7cdar2.ED value) {
         this.text = value;

@@ -1,18 +1,11 @@
 /*
- * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. https://medshare.net
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
  *
- * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
- * For exact developer information, please refer to the commit history of the forge.
- *
- * This code is made available under the terms of the Eclipse Public License v1.0.
- *
- * Accompanying materials are made available under the terms of the Creative Commons
- * Attribution-ShareAlike 4.0 License.
- *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
- *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  */
 package org.husky.emed.cda.generated.artdecor;
 
@@ -129,7 +122,8 @@ public class PadvreferenceEntryContentModule extends POCDMT000040Observation {
     }
 
     /**
-     * Sets the hl7Author/Author of the referenced item
+     * Sets the hl7Author<br/>
+     * Author of the referenced item
      */
     public void setHl7Author(org.husky.common.hl7cdar2.POCDMT000040Author value) {
         getAuthor().clear();
@@ -137,14 +131,16 @@ public class PadvreferenceEntryContentModule extends POCDMT000040Observation {
     }
 
     /**
-     * Sets the hl7Code/Reference to Pharmaceutical Advice Item code
+     * Sets the hl7Code<br/>
+     * Reference to Pharmaceutical Advice Item code
      */
     public void setHl7Code(org.husky.common.hl7cdar2.CD value) {
         this.code = value;
     }
 
     /**
-     * Sets the hl7Id/Reference to Pharmaceutical Advice Item ID
+     * Sets the hl7Id<br/>
+     * Reference to Pharmaceutical Advice Item ID
      */
     public void setHl7Id(org.husky.common.hl7cdar2.II value) {
         getId().clear();
@@ -152,7 +148,8 @@ public class PadvreferenceEntryContentModule extends POCDMT000040Observation {
     }
 
     /**
-     * Sets the hl7Reference/ID of parent container of referenced item
+     * Sets the hl7Reference<br/>
+     * ID of parent container of referenced item
      */
     public void setHl7Reference(org.husky.common.hl7cdar2.POCDMT000040Reference value) {
         getReference().clear();
@@ -160,7 +157,8 @@ public class PadvreferenceEntryContentModule extends POCDMT000040Observation {
     }
 
     /**
-     * Sets the hl7TemplateId/Reference to Pharmaceutical Advice Item Template ID
+     * Sets the hl7TemplateId<br/>
+     * Reference to Pharmaceutical Advice Item Template ID
      */
     public void setHl7TemplateId(org.husky.common.hl7cdar2.II value) {
         getTemplateId().clear();

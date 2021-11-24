@@ -1,18 +1,11 @@
 /*
- * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. https://medshare.net
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
  *
- * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
- * For exact developer information, please refer to the commit history of the forge.
- *
- * This code is made available under the terms of the Eclipse Public License v1.0.
- *
- * Accompanying materials are made available under the terms of the Creative Commons
- * Attribution-ShareAlike 4.0 License.
- *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
- *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  */
 package org.husky.emed.cda.generated.artdecor;
 
@@ -51,14 +44,16 @@ public class HeaderTemplateCompilationMedicationCardDocument extends POCDMT00004
     }
 
     /**
-     * Sets the hl7EffectiveTime/The document's creation date and time. If this document replaces a previous version (linked via parentDocument), this is the date and time of the new version.
+     * Sets the hl7EffectiveTime<br/>
+     * The document's creation date and time. If this document replaces a previous version (linked via parentDocument), this is the date and time of the new version.
      */
     public void setHl7EffectiveTime(org.husky.common.hl7cdar2.TS value) {
         this.effectiveTime = value;
     }
 
     /**
-     * Sets the hl7Title/<div>The German title shall be "Medikationsplan".</div><div>The French title shall be "Plan de médication".</div><div>The Italian title shall be "Piano farmacologico".</div><div>The English title shall be "Medication Card".</div><div>Titles in other languages are allowed and unrestricted.</div>
+     * Sets the hl7Title<br/>
+     * <div>The German title shall be "Medikationsplan".</div><div>The French title shall be "Plan de médication".</div><div>The Italian title shall be "Piano farmacologico".</div><div>The English title shall be "Medication Card".</div><div>Titles in other languages are allowed and unrestricted.</div>
      */
     public void setHl7Title(org.husky.common.hl7cdar2.ST value) {
         this.title = value;

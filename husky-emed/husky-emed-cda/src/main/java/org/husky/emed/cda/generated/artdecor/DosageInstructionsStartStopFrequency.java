@@ -1,18 +1,11 @@
 /*
- * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. https://medshare.net
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
  *
- * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
- * For exact developer information, please refer to the commit history of the forge.
- *
- * This code is made available under the terms of the Eclipse Public License v1.0.
- *
- * Accompanying materials are made available under the terms of the Creative Commons
- * Attribution-ShareAlike 4.0 License.
- *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
- *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  */
 package org.husky.emed.cda.generated.artdecor;
 
@@ -178,7 +171,8 @@ public class DosageInstructionsStartStopFrequency extends POCDMT000040SubstanceA
     }
 
     /**
-     * Sets the hl7EffectiveTime/<div>In case the (structured) dosage instructions include a dose regime this element SHALL be</div><div>present and specify the entire duration of the medication treatment. In case the Duration of Treatment is unknown the &lt;low&gt; and &lt;high&gt; sub-elements of this element SHALL be set to null flavor “UNK”.</div>
+     * Sets the hl7EffectiveTime<br/>
+     * <div>In case the (structured) dosage instructions include a dose regime this element SHALL be</div><div>present and specify the entire duration of the medication treatment. In case the Duration of Treatment is unknown the &lt;low&gt; and &lt;high&gt; sub-elements of this element SHALL be set to null flavor “UNK”.</div>
      */
     public void setHl7EffectiveTime(org.husky.common.hl7cdar2.IVLTS value) {
         getEffectiveTime().clear();
@@ -186,7 +180,8 @@ public class DosageInstructionsStartStopFrequency extends POCDMT000040SubstanceA
     }
 
     /**
-     * Sets the hl7EffectiveTime/Dosage Instructions PCC 6.3.4.16.12 - Frequency: Event based time interval, where the event is not a precise time, but is used for timing purposes (e.g., with meals, between meals, before breakfast, before sleep).
+     * Sets the hl7EffectiveTime<br/>
+     * Dosage Instructions PCC 6.3.4.16.12 - Frequency: Event based time interval, where the event is not a precise time, but is used for timing purposes (e.g., with meals, between meals, before breakfast, before sleep).
      */
     public void setHl7EffectiveTime(org.husky.common.hl7cdar2.EIVLTS value) {
         getEffectiveTime().clear();
@@ -194,7 +189,8 @@ public class DosageInstructionsStartStopFrequency extends POCDMT000040SubstanceA
     }
 
     /**
-     * Sets the hl7EffectiveTime/Dosage Instructions PCC 6.3.4.16.12 - Frequency: Multiple events within a day with the same dosage
+     * Sets the hl7EffectiveTime<br/>
+     * Dosage Instructions PCC 6.3.4.16.12 - Frequency: Multiple events within a day with the same dosage
      */
     public void setHl7EffectiveTime(org.husky.common.hl7cdar2.SXPRTS value) {
         getEffectiveTime().clear();
@@ -209,7 +205,8 @@ public class DosageInstructionsStartStopFrequency extends POCDMT000040SubstanceA
     }
 
     /**
-     * Sets the hl7RepeatNumber/Number of repeats/refills. Either the @value or @nullFlavor attribute shall be set. It's required in MTP, PRE and PADV items ; forbidden in DIS items.
+     * Sets the hl7RepeatNumber<br/>
+     * Number of repeats/refills. Either the @value or @nullFlavor attribute shall be set. It's required in MTP, PRE and PADV items ; forbidden in DIS items.
      */
     public void setHl7RepeatNumber(org.husky.common.hl7cdar2.IVLINT value) {
         this.repeatNumber = value;

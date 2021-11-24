@@ -1747,6 +1747,11 @@ public enum RouteOfAdministrationEdqm implements ValueSetEnumInterface {
     public static final String VALUE_SET_NAME = "RouteOfAdministrationEDQM";
 
     /**
+     * Identifier of the code system (all values share the same).
+     */
+    public static final String CODE_SYSTEM_ID = "0.4.0.127.0.16.1.1.2.1";
+
+    /**
      * Gets the Enum with a given code.
      *
      * @param code The code value.

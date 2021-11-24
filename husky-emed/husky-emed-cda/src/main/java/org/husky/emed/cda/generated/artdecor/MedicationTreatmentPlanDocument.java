@@ -1,18 +1,11 @@
 /*
- * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. https://medshare.net
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
  *
- * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
- * For exact developer information, please refer to the commit history of the forge.
- *
- * This code is made available under the terms of the Eclipse Public License v1.0.
- *
- * Accompanying materials are made available under the terms of the Creative Commons
- * Attribution-ShareAlike 4.0 License.
- *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
- *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  */
 package org.husky.emed.cda.generated.artdecor;
 
@@ -379,7 +372,8 @@ public class MedicationTreatmentPlanDocument extends POCDMT000040ClinicalDocumen
     }
 
     /**
-     * Sets the hl7Code/IHE PHARM MTP document code
+     * Sets the hl7Code<br/>
+     * IHE PHARM MTP document code
      */
     public void setHl7Code(org.husky.common.hl7cdar2.CE value) {
         this.code = value;
@@ -400,56 +394,64 @@ public class MedicationTreatmentPlanDocument extends POCDMT000040ClinicalDocumen
     }
 
     /**
-     * Sets the hl7ConfidentialityCode/Swiss Realm of Confidentiality Code according to the Swiss EPR regulation.
+     * Sets the hl7ConfidentialityCode<br/>
+     * Swiss Realm of Confidentiality Code according to the Swiss EPR regulation.
      */
     public void setHl7ConfidentialityCode(org.husky.common.hl7cdar2.CE value) {
         this.confidentialityCode = value;
     }
 
     /**
-     * Sets the hl7Custodian/The organization in whose name this CDA document has been created (corresponds to the sender of a letter).
+     * Sets the hl7Custodian<br/>
+     * The organization in whose name this CDA document has been created (corresponds to the sender of a letter).
      */
     public void setHl7Custodian(org.husky.common.hl7cdar2.POCDMT000040Custodian value) {
         this.custodian = value;
     }
 
     /**
-     * Sets the hl7DataEnterer/Information about the person that entered information in this CDA document. It SHALL be declared, when data recorded in this document has been entered by a person other than the author but only when this is relevant for some reason.
+     * Sets the hl7DataEnterer<br/>
+     * Information about the person that entered information in this CDA document. It SHALL be declared, when data recorded in this document has been entered by a person other than the author but only when this is relevant for some reason.
      */
     public void setHl7DataEnterer(org.husky.common.hl7cdar2.POCDMT000040DataEnterer value) {
         this.dataEnterer = value;
     }
 
     /**
-     * Sets the hl7EffectiveTime/The document's creation date and time. If this document replaces a previous version (linked via parentDocument), this is the date and time of the new version.
+     * Sets the hl7EffectiveTime<br/>
+     * The document's creation date and time. If this document replaces a previous version (linked via parentDocument), this is the date and time of the new version.
      */
     public void setHl7EffectiveTime(org.husky.common.hl7cdar2.TS value) {
         this.effectiveTime = value;
     }
 
     /**
-     * Sets the hl7Id/A unique identifier for each CDA document instance.
+     * Sets the hl7Id<br/>
+     * A unique identifier for each CDA document instance.
      */
     public void setHl7Id(org.husky.common.hl7cdar2.II value) {
         this.id = value;
     }
 
     /**
-     * Sets the hl7LanguageCode/The RFC5646 based language in which the narrative texts in this CDA document instance are written.
+     * Sets the hl7LanguageCode<br/>
+     * The RFC5646 based language in which the narrative texts in this CDA document instance are written.
      */
     public void setHl7LanguageCode(org.husky.common.hl7cdar2.CS value) {
         this.languageCode = value;
     }
 
     /**
-     * Sets the hl7LegalAuthenticator/Information about the legal authenticator of a CDA document. A legal authenticator MUST be a person.
+     * Sets the hl7LegalAuthenticator<br/>
+     * Information about the legal authenticator of a CDA document. A legal authenticator MUST be a person.
      */
     public void setHl7LegalAuthenticator(org.husky.common.hl7cdar2.POCDMT000040LegalAuthenticator value) {
         this.legalAuthenticator = value;
     }
 
     /**
-     * Sets the hl7RealmCode/Swiss Realm (CHE) of HL7 CDA.
+     * Sets the hl7RealmCode<br/>
+     * Swiss Realm (CHE) of HL7 CDA.
      */
     public void setHl7RealmCode(org.husky.common.hl7cdar2.CS value) {
         getRealmCode().clear();
@@ -457,7 +459,8 @@ public class MedicationTreatmentPlanDocument extends POCDMT000040ClinicalDocumen
     }
 
     /**
-     * Sets the hl7RecordTarget/A human patient for whom this CDA document instance was created.
+     * Sets the hl7RecordTarget<br/>
+     * A human patient for whom this CDA document instance was created.
      * - Target patientThe HL7 CDA R2 (2005) standard allows multiple patients.In order to ensure that the information in a CDA document is unambiguously assigned to one and only patient, a CDA-CH V2 based document MUST contain exactly one patient.Special cases: In exceptional cases (e.g., new-born twins, both having jaundice), multiple documents MUST be created (all of the same content, but each with a unique patient).
      * - Patient identifiersMultiple ids (patient identification number) MAY be declared.If multiple ids are known, it is highly recommended to declare all known ids. Especially in cases where the CDA document instance is kind of an answer to a preceding order (independent of its data format), all ids specified by the ordering system SHALL be declared in the CDA document instance. This allows the receiver to assign its internal patient identification.The patient identification number MUST be grouped with the OID of its assigning system. The patient identification number MUST be unique within the system identified by the OID.The declared OID MUST be found in one of the public OID registries, such as oid.refdata.ch (preferred), oid-info.com, hl7.org/oid, www.dimdi.de/static/de/klassi/oid/, gesundheit.gv.at/OID_Frontend/ etc.OIDs that can't be found in a public OID registry are NOT ALLOWED.
      * - PseudonymizingIn special cases, the demographic data of the patient are not allowed to be transmitted or they have to be pseudonymized.While HL7 CDA or its derivatives like CDA-CH or Swiss exchange formats nevertheless require these elements in the XML structure, the affected values MUST be replaced by a nullFlavor of type "MSK" (masked), in order to support the required data format structure and simultaneously to shield the real data.
@@ -468,14 +471,16 @@ public class MedicationTreatmentPlanDocument extends POCDMT000040ClinicalDocumen
     }
 
     /**
-     * Sets the hl7SetId/The setId element MUST match the document id of the very first version of that document. It MUST remain the same for all document versions.
+     * Sets the hl7SetId<br/>
+     * The setId element MUST match the document id of the very first version of that document. It MUST remain the same for all document versions.
      */
     public void setHl7SetId(org.husky.common.hl7cdar2.II value) {
         this.setId = value;
     }
 
     /**
-     * Sets the hl7TemplateId/Exchange format according to the Swiss EPR
+     * Sets the hl7TemplateId<br/>
+     * Exchange format according to the Swiss EPR
      */
     public void setHl7TemplateId(org.husky.common.hl7cdar2.II value) {
         getTemplateId().clear();
@@ -483,21 +488,24 @@ public class MedicationTreatmentPlanDocument extends POCDMT000040ClinicalDocumen
     }
 
     /**
-     * Sets the hl7Title/<div>The German title shall be "Therapieentscheid Medikation".</div><div>The French title shall be "Décision thérapeutique relative à la médication".<br clear="none"/></div><div>The Italian title shall be "Decisione terapeutica di trattamento farmacologico".<br clear="none"/></div><div>The English title shall be "Medication Treatment Plan".<br clear="none"/>Titles in other languages are allowed and unrestricted.</div>
+     * Sets the hl7Title<br/>
+     * <div>The German title shall be "Therapieentscheid Medikation".</div><div>The French title shall be "Décision thérapeutique relative à la médication".<br clear="none"/></div><div>The Italian title shall be "Decisione terapeutica di trattamento farmacologico".<br clear="none"/></div><div>The English title shall be "Medication Treatment Plan".<br clear="none"/>Titles in other languages are allowed and unrestricted.</div>
      */
     public void setHl7Title(org.husky.common.hl7cdar2.ST value) {
         this.title = value;
     }
 
     /**
-     * Sets the hl7TypeId/HL7 CDA R2, 2005
+     * Sets the hl7TypeId<br/>
+     * HL7 CDA R2, 2005
      */
     public void setHl7TypeId(org.husky.common.hl7cdar2.POCDMT000040InfrastructureRootTypeId value) {
         this.typeId = value;
     }
 
     /**
-     * Sets the hl7VersionNumber/The versionNumber element MUST contain the value 1 for the very first version of that document. For later versions, the version number MUST be increased by 1 each.
+     * Sets the hl7VersionNumber<br/>
+     * The versionNumber element MUST contain the value 1 for the very first version of that document. For later versions, the version number MUST be increased by 1 each.
      */
     public void setHl7VersionNumber(org.husky.common.hl7cdar2.INT value) {
         this.versionNumber = value;

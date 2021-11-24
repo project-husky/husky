@@ -1,18 +1,11 @@
 /*
- * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
- * All rights reserved. https://medshare.net
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
  *
- * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
- * For exact developer information, please refer to the commit history of the forge.
- *
- * This code is made available under the terms of the Eclipse Public License v1.0.
- *
- * Accompanying materials are made available under the terms of the Creative Commons
- * Attribution-ShareAlike 4.0 License.
- *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
- *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  */
 package org.husky.emed.cda.generated.artdecor;
 
@@ -131,14 +124,16 @@ public class IhehealthStatusObservation extends POCDMT000040Observation {
     }
 
     /**
-     * Sets the hl7Code/This observation is of health status, as indicated by the &lt;code&gt; element. This element must be present.
+     * Sets the hl7Code<br/>
+     * This observation is of health status, as indicated by the &lt;code&gt; element. This element must be present.
      */
     public void setHl7Code(org.husky.common.hl7cdar2.CD value) {
         this.code = value;
     }
 
     /**
-     * Sets the hl7StatusCode/The code attribute of &lt;statusCode&gt; for all clinical status observations shall be completed. While the &lt;statusCode&gt; element is required in all acts to record the status of the act, the only sensible value of this element in this context is completed.
+     * Sets the hl7StatusCode<br/>
+     * The code attribute of &lt;statusCode&gt; for all clinical status observations shall be completed. While the &lt;statusCode&gt; element is required in all acts to record the status of the act, the only sensible value of this element in this context is completed.
      */
     public void setHl7StatusCode(org.husky.common.hl7cdar2.CS value) {
         this.statusCode = value;
@@ -153,14 +148,16 @@ public class IhehealthStatusObservation extends POCDMT000040Observation {
     }
 
     /**
-     * Sets the hl7Text/The &lt;text&gt; element is required and points to the text describing the problem being recorded; including any dates, comments, et cetera. The &lt;reference&gt; contains a URI in value attribute. This URI points to the free text description of the problem in the document that is being described.
+     * Sets the hl7Text<br/>
+     * The &lt;text&gt; element is required and points to the text describing the problem being recorded; including any dates, comments, et cetera. The &lt;reference&gt; contains a URI in value attribute. This URI points to the free text description of the problem in the document that is being described.
      */
     public void setHl7Text(org.husky.common.hl7cdar2.ED value) {
         this.text = value;
     }
 
     /**
-     * Sets the hl7Value/The &lt;value&gt; element contains the health status. It is always represented using the CE datatype (xsi:type='CE'). It shall contain a code from the following set of values from SNOMED CT.
+     * Sets the hl7Value<br/>
+     * The &lt;value&gt; element contains the health status. It is always represented using the CE datatype (xsi:type='CE'). It shall contain a code from the following set of values from SNOMED CT.
      */
     public void setHl7Value(org.husky.common.hl7cdar2.CE value) {
         getValue().clear();
