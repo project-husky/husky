@@ -5,4 +5,4 @@ In the Husky project, the ATNA profile is not been implemented directly. It uses
 
 ## Configuration
 
-An example for this configuration you can found in the integration tests of husky communication module. One class is called  [ConvenienceCommunicationAtnaAuditTest](javadoc/org/husky/communication/integration/ConvenienceCommunicationAtnaAuditTest.html). The corresponding configuration file can be found [here](../husky-communication/husky-communication-gen/src/test/resources/application-atna.properties).
+An example for this configuration you can found in the integration tests of husky communication module. One class is called   ConvenienceCommunicationAtnaAuditTest. The corresponding configuration file can be found [here](../husky-communication/husky-communication-gen/src/test/resources/application-atna.properties).

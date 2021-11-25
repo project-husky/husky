@@ -9,6 +9,7 @@ Before you can get started, your system must meet the following requirements:
 - JAVA_HOME Environment Variable set to Java 16
 - At least Eclipse Version 2021-06 must be installed
   Link to download <https://www.eclipse.org/downloads/packages/release/2021-06/r>
+- Installed lombok plugin <https://projectlombok.org/setup/eclipse>
 
 ## Import project to eclipse
 
