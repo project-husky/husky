@@ -2,6 +2,7 @@
 
 This profile should simplify the exchange of authorization policies and policy sets. The PPQ profile includes two actors, the policy source and the policy repository. More details you can find here [EPDV-EDI_Anhang_5_E1_DE_Ausgabe_4.pdf](https://www.bag.admin.ch/dam/bag/de/dokumente/nat-gesundheitsstrategien/strategie-ehealth/gesetzgebung-elektronisches-patientendossier/gesetze/anhang_5_ergaenzung_1_epdv_edi_ausgabe_4.pdf.download.pdf/EPDV-EDI_Anhang_5_E1_DE_Ausgabe_4.pdf).
 In Husky the PPQ profile is implemented in the `husky-ppq` module. There are four different use cases, where three of them are based on the same transaction (add, update and delete). The only difference between them is the use of a different method.
+We would appreciate if you could give us feedback on the PPQ requests.
 
 ## Add policies
 
