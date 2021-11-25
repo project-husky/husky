@@ -71,6 +71,32 @@ public class ValueSetManagerIntegrationTest {
 
 	/**
 	 * This test checks the behavior of the
+	 * {@link ValueSetManager#downloadValueSetRaw(ValueSetConfig)} when downloading
+	 * value sets with an ID, which doesn't exist. As an example the possible values
+	 * for EprAuthorRole (2.16.756.5.30.1.127.3.10.1) are downloaded.
+	 * 
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 */
+	@Test
+	public void downloadRawUnknwonIdTest() throws MalformedURLException, IOException {
+		// id in URL doesn't exists
+		String testUrl = "http://art-decor.org/decor/services/RetrieveValueSet?prefix=ch-epr-&format=json&id=1.2.3.4.5";
+
+		ValueSetManager valueSetManager = new ValueSetManager();
+
+		// configure URL and the source system type for downloading value sets
+		ValueSetConfig valueSetConfig = ValueSetConfig.builder().withSourceSystemType(SourceSystemType.ARTDECOR_FHIR)
+				.withSourceUrl(testUrl).build();
+
+		// download value sets
+		byte[] downloadedByteArray = valueSetManager.downloadValueSetRaw(valueSetConfig);
+		String byteArrayString = new String(downloadedByteArray, StandardCharsets.UTF_8);
+		assertEquals("null", byteArrayString);
+	}
+
+	/**
+	 * This test checks the behavior of the
 	 * {@link ValueSetManager#downloadValueSet(ValueSetConfig)} when downloading
 	 * value sets as {@link ValueSet} in JSON, XML or IHE SVS format. As an example
 	 * the possible values for DocumentEntry.author.authorRole
