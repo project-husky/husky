@@ -10,6 +10,7 @@
  */
 package org.husky.common.enums;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Code;
 
 import java.util.Collection;
@@ -18,12 +19,13 @@ import java.util.Collection;
  * @since Sep 22, 2015 10:00:45 AM
  */
 public interface CodedMetadataEnumInterface {
+
 	/**
-	 * <div class="en">Gets the CodeMetadataType</div> <div class="de">Liefert
-	 * das OHT CodedMetadataType Objekt</div>
+	 * Gets the IPF metadata {@link org.openehealth.ipf.commons.ihe.xds.core.metadata.Code}.
 	 *
-	 * @return the enum as codedMetadataType
+	 * @return the IPF code.
 	 */
+	@NonNull
 	Code getIpfCode();
 
 	/**
@@ -32,7 +34,7 @@ public interface CodedMetadataEnumInterface {
 	 * @param code The code to compare.
 	 * @return {@code true} if they are equal, {@code false} otherwise.
 	 */
-	boolean isEqualTo(final Code code);
+	boolean isEqualTo(@NonNull final Code code);
 
 	/**
 	 * Checks whether a collection of codes contains a particular value set code.
@@ -40,7 +42,7 @@ public interface CodedMetadataEnumInterface {
 	 * @param codes The collection of codes.
 	 * @return {@code true} if the collection contains the value set code, {@code false} otherwise.
 	 */
-	boolean isContainedIn(final Collection<Code> codes);
+	boolean isContainedIn(@NonNull final Collection<Code> codes);
 
 	/**
 	 * Encodes an eHC value set code to an IHE Coded String, as defined in ITI TF-3 Table 4.2.3.1.7-2. It is mostly
@@ -48,5 +50,6 @@ public interface CodedMetadataEnumInterface {
 	 *
 	 * @return the encoded IHE Coded String.
 	 */
+	@NonNull
 	String getCodedString();
 }
