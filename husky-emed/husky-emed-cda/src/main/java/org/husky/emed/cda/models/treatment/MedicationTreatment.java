@@ -20,9 +20,8 @@ import java.util.Optional;
 /**
  * An representation of the state of a medication in the treatment plan at a given time.
  * <p>
- * The medication treatment is constructed with the
- * {@link ch.qligier.hug.pmp.emed.aggregators.ItemAggregator}s. It should not be modified elsewhere,
- * as it requires a lot of business logic.
+ * The medication treatment is constructed with the {@link ch.qligier.hug.pmp.emed.aggregators.ItemAggregator}s. It
+ * should not be modified elsewhere, as it requires a lot of business logic.
  * <p>
  * TODO: check all dates: inclusives or exclusives? PRE stop time is exclusive in digest...
  *
@@ -41,7 +40,8 @@ public class MedicationTreatment /*extends PatientBound*/ {
     /**
      * Reference to the MTP item.
      */
-    @Nullable private EmedReference mtpReference;
+    @Nullable
+    private EmedReference mtpReference;
 
     /**
      * The MTP and treatment starting time.
@@ -54,7 +54,8 @@ public class MedicationTreatment /*extends PatientBound*/ {
      *
      * @see #treatmentStopTime
      */
-    @Nullable private Instant mtpStopTime;
+    @Nullable
+    private Instant mtpStopTime;
 
     /**
      * The treatment stop time. By default, it's equal to the {@code mtpStopTime}. It can be then moved sooner if a PADV
@@ -62,7 +63,8 @@ public class MedicationTreatment /*extends PatientBound*/ {
      *
      * @see #mtpStopTime
      */
-    @Nullable private Instant treatmentStopTime;
+    @Nullable
+    private Instant treatmentStopTime;
 
     /**
      * The actual status of the treatment.
@@ -74,7 +76,8 @@ public class MedicationTreatment /*extends PatientBound*/ {
     /**
      * Number of dispense repeats/refills (excluding the initial dispense). {@code null} means no limitation.
      */
-    @Nullable private Integer dispenseRepeatNumber = null;
+    @Nullable
+    private Integer dispenseRepeatNumber = null;
 
     /**
      * The substance substitution permissions, or {@code null} if substitution is authorized without condition.
@@ -99,7 +102,8 @@ public class MedicationTreatment /*extends PatientBound*/ {
     /**
      * The medication route of administration or {@code null} if it's not specified.
      */
-    @Nullable private RouteOfAdministrationEdqm routeOfAdministration;
+    @Nullable
+    private RouteOfAdministrationEdqm routeOfAdministration;
 
     /**
      * The dosage instructions.
@@ -121,15 +125,15 @@ public class MedicationTreatment /*extends PatientBound*/ {
      */
     public boolean isTreatmentActive() {
         return this.treatmentStatus == TreatmentStatus.ACTIVE
-            && !Instant.now().isBefore(this.treatmentStartTime)
-            && (this.treatmentStopTime == null || !Instant.now().isAfter(this.treatmentStopTime));
+                && !Instant.now().isBefore(this.treatmentStartTime)
+                && (this.treatmentStopTime == null || !Instant.now().isAfter(this.treatmentStopTime));
     }
 
     /**
-     * Checks if one of the prescriptions contained in the medication treatment may be ready for validation. The
-     * start dates of the treatment and the prescription are not checked because it could be not ready for validation
-     * when the status is calculated but effectively ready for validation when the PHARM-1 query comes. The end dates
-     * are checked because that could not happen.
+     * Checks if one of the prescriptions contained in the medication treatment may be ready for validation. The start
+     * dates of the treatment and the prescription are not checked because it could be not ready for validation when the
+     * status is calculated but effectively ready for validation when the PHARM-1 query comes. The end dates are checked
+     * because that could not happen.
      * <p>
      * The result is stored in the Mongo collection to facilitate PHARM-1 query search.
      *
@@ -137,14 +141,14 @@ public class MedicationTreatment /*extends PatientBound*/ {
      */
     public boolean mayHavePrescriptionReadyForValidationInTheFuture() {
         return (this.treatmentStopTime == null || !Instant.now().isAfter(this.treatmentStopTime))
-            && this.prescriptions.stream().anyMatch(MedicationPrescription::mayBeReadyForValidationInTheFuture);
+                && this.prescriptions.stream().anyMatch(MedicationPrescription::mayBeReadyForValidationInTheFuture);
     }
 
     /**
      * Checks if one of the prescriptions contained in the medication treatment may be ready for dispense. The start
      * dates of the treatment and the prescription are not checked because it could be not ready for dispense when the
-     * status is calculated but effectively ready for dispense when the PHARM-1 query comes. The end dates are
-     * checked because that could not happen.
+     * status is calculated but effectively ready for dispense when the PHARM-1 query comes. The end dates are checked
+     * because that could not happen.
      * <p>
      * The result is stored in the Mongo collection to facilitate PHARM-1 query search.
      *
@@ -152,8 +156,8 @@ public class MedicationTreatment /*extends PatientBound*/ {
      */
     public boolean mayHavePrescriptionReadyForDispenseInTheFuture() {
         return (this.treatmentStopTime == null || !Instant.now().isAfter(this.treatmentStopTime))
-            && this.treatmentStatus == TreatmentStatus.ACTIVE
-            && this.prescriptions.stream().anyMatch(MedicationPrescription::mayBeReadyForDispenseInTheFuture);
+                && this.treatmentStatus == TreatmentStatus.ACTIVE
+                && this.prescriptions.stream().anyMatch(MedicationPrescription::mayBeReadyForDispenseInTheFuture);
     }
 
     /**
@@ -164,8 +168,8 @@ public class MedicationTreatment /*extends PatientBound*/ {
      */
     public boolean isPrescriptionReadyForValidation(final MedicationPrescription prescription) {
         return this.isTreatmentActive()
-            && prescription.mayBeReadyForValidationInTheFuture()
-            && !Instant.now().isBefore(prescription.getStartTime());
+                && prescription.mayBeReadyForValidationInTheFuture()
+                && !Instant.now().isBefore(prescription.getStartTime());
     }
 
     /**
@@ -176,8 +180,8 @@ public class MedicationTreatment /*extends PatientBound*/ {
      */
     public boolean isPrescriptionReadyForDispense(final MedicationPrescription prescription) {
         return this.isTreatmentActive()
-            && prescription.mayBeReadyForDispenseInTheFuture()
-            && !Instant.now().isBefore(prescription.getStartTime());
+                && prescription.mayBeReadyForDispenseInTheFuture()
+                && !Instant.now().isBefore(prescription.getStartTime());
     }
 
     /**
@@ -188,8 +192,8 @@ public class MedicationTreatment /*extends PatientBound*/ {
      */
     public Optional<MedicationPrescription> getPrescriptionById(final String prescriptionId) {
         return this.prescriptions.stream()
-            .filter(prescription -> prescriptionId.equals(prescription.getPreReference().getItemId()))
-            .findAny();
+                .filter(prescription -> prescriptionId.equals(prescription.getPreReference().getItemId()))
+                .findAny();
     }
 
     /**
@@ -218,11 +222,11 @@ public class MedicationTreatment /*extends PatientBound*/ {
      * Returns the dosage type.
      * TODO: useful?
      *
-    public DosageType getDosageType() {
-        if (!this.dosageInstructions.isEmpty()) {
-            return DosageType.Split;
-        } else {
-            return DosageType.Normal;
-        }
-    }*/
+     public DosageType getDosageType() {
+     if (!this.dosageInstructions.isEmpty()) {
+     return DosageType.Split;
+     } else {
+     return DosageType.Normal;
+     }
+     }*/
 }

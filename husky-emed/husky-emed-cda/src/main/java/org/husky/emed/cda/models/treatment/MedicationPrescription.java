@@ -25,7 +25,8 @@ public class MedicationPrescription {
     /**
      * Reference to the PRE items.
      */
-    @Nullable private EmedReference preReference;
+    @Nullable
+    private EmedReference preReference;
 
     /**
      * The status of the prescription.
@@ -35,25 +36,28 @@ public class MedicationPrescription {
     /**
      * Number of dispense repeats/refills (excluding the initial dispense). {@code null} means no limitation.
      */
-    @Nullable private Integer dispenseRepeatNumber = null;
+    @Nullable
+    private Integer dispenseRepeatNumber = null;
 
     /**
      * PRE item starting time.
-     *
+     * <p>
      * TODO: mandatory?
      */
-    @Nullable private Instant startTime;
+    @Nullable
+    private Instant startTime;
 
     /**
      * PRE item ending time.
-     *
+     * <p>
      * TODO: mandatory?
      */
-    @Nullable private Instant endTime;
+    @Nullable
+    private Instant endTime;
 
     /**
      * The list of substance substitution permissions.
-     *
+     * <p>
      * SPEC: single value? default value?
      */
     private final List<ActSubstanceAdminSubstitutionCode> substitutionPermissions = new ArrayList<>();
@@ -69,7 +73,7 @@ public class MedicationPrescription {
     private boolean isDispenseCompleted() {
         for (final MedicationDispense dispense : this.dispenses) {
             if (dispense.getDispenseType() == DispenseSupplyType.FIRST_FILL_COMPLETE
-                || dispense.getDispenseType() == DispenseSupplyType.REFILL_COMPLETE
+                    || dispense.getDispenseType() == DispenseSupplyType.REFILL_COMPLETE
             ) {
                 return true;
             }
@@ -86,9 +90,10 @@ public class MedicationPrescription {
      * @return {@code true} if the prescription may be ready for validation, {@code false} otherwise.
      */
     public boolean mayBeReadyForValidationInTheFuture() {
-        return !Instant.now().isAfter(this.endTime) &&
-            (this.prescriptionStatus == PrescriptionStatus.PROVISIONAL ||
-                this.prescriptionStatus == PrescriptionStatus.SUBMITTED);
+        return (this.endTime == null || !Instant.now().isAfter(this.endTime)) // if end time null or in the future
+                &&
+                (this.prescriptionStatus == PrescriptionStatus.PROVISIONAL ||
+                        this.prescriptionStatus == PrescriptionStatus.SUBMITTED);
     }
 
     /**
@@ -100,6 +105,7 @@ public class MedicationPrescription {
      * @return {@code true} if the prescription may be ready for dispense, {@code false} otherwise.
      */
     public boolean mayBeReadyForDispenseInTheFuture() {
-        return !Instant.now().isAfter(this.endTime) && this.prescriptionStatus == PrescriptionStatus.ACTIVE;
+        return (this.endTime == null || !Instant.now().isAfter(this.endTime)) // if end time null or in the future
+                && this.prescriptionStatus == PrescriptionStatus.ACTIVE;
     }
 }
