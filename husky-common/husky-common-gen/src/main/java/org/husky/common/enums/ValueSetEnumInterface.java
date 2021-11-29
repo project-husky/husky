@@ -8,9 +8,10 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-
 package org.husky.common.enums;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.hl7cdar2.CE;
 import org.husky.common.model.Code;
 import org.husky.common.utils.datatypes.Hl7v25;
@@ -20,18 +21,16 @@ import java.util.Collection;
 import java.util.Objects;
 
 /**
- * <div class="en">Interface for all dynamically created/updated value
- * sets.</div> <div class="de">Interface für alle dynamisch
- * erstellten/aktualisierten Valuesets.</div>
+ * Interface for all dynamically created/updated value sets.
  */
 public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
 
     /**
-     * <div class="en">Gets the Code of this Enum.</div>
-     * <div class="de">Liefert den Code dieses Enum.</div>
+     * Gets the HL7 {@link CE}.
      *
-     * @return <div class="en">The MDHT Code</div>
+     * @return the HL7 CE.
      */
+    @NonNull
     default CE getCE() {
         final CE ce = new CE();
         ce.setCodeSystem(getCodeSystemId());
@@ -42,23 +41,22 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
     }
 
     /**
-     * <div class="en">Gets the husky Code Object</div>
-     * <div class="de">Liefert das husky Code Objekt</div>
+     * Gets the husky Code Object.
      *
-     * @return <div class="en">the code</div>
+     * @return the code.
      */
+    @NonNull
     default Code getCode() {
         return new Code(getCodeValue(), getCodeSystemId(), getDisplayName());
     }
 
     /**
-     * <div class="en">Gets the OHT CodedMetadataType Object</div>
-     * <div class="de">Liefert das OHT CodedMetadataType Objekt</div>
+     * Gets the IPF metadata {@link org.openehealth.ipf.commons.ihe.xds.core.metadata.Code}.
      *
-     * @return <div class="en">the codedMetadataType</div>
+     * @return the IPF code.
      */
     @Override
-    default org.openehealth.ipf.commons.ihe.xds.core.metadata.Code getIpfCode() {
+    default org.openehealth.ipf.commons.ihe.xds.core.metadata.@NonNull Code getIpfCode() {
 		return new org.openehealth.ipf.commons.ihe.xds.core.metadata.Code(
 				this.getCodeValue(),
 				new LocalizedString(this.getDisplayName(), LanguageCode.ENGLISH_CODE, "UTF-8"),
@@ -74,7 +72,7 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
      * @return {@code true} if they are equal, {@code false} otherwise.
      */
     @Override
-    default boolean isEqualTo(final org.openehealth.ipf.commons.ihe.xds.core.metadata.Code code) {
+    default boolean isEqualTo(final org.openehealth.ipf.commons.ihe.xds.core.metadata.@NonNull Code code) {
         return this.getCodeSystemId().equals(Objects.requireNonNull(code).getSchemeName())
                 && this.getCodeValue().equals(code.getCode());
     }
@@ -86,7 +84,7 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
      * @return {@code true} if the collection contains the value set code, {@code false} otherwise.
      */
     @Override
-    default boolean isContainedIn(final Collection<org.openehealth.ipf.commons.ihe.xds.core.metadata.Code> codes) {
+    default boolean isContainedIn(@NonNull final Collection<org.openehealth.ipf.commons.ihe.xds.core.metadata.Code> codes) {
         return Objects.requireNonNull(codes).stream().anyMatch(this::isEqualTo);
     }
 
@@ -97,6 +95,7 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
      * @return the encoded IHE Coded String.
      */
     @Override
+    @NonNull
     default String getCodedString() {
         return String.format(
                 "%s^^^&%s&ISO",
@@ -106,65 +105,61 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
     }
 
     /**
-     * <div class="en">Gets the code system id.</div> <div class="de">Liefert
-     * die code system id.</div>
+     * Gets the code system identifier.
      *
-     * @return <div class="en">the code system id</div>
+     * @return the code system identifier.
      */
+    @NonNull
     String getCodeSystemId();
 
     /**
-     * <div class="en">Gets the code system name.</div> <div class="de">Liefert
-     * den code system Namen.</div>
+     * Gets the code system name.
      *
-     * @return <div class="en">the code system id</div>
+     * @return the code system name.
      */
+    @NonNull
     String getCodeSystemName();
 
     /**
-     * <div class="en">Gets the actual Code as string</div>
-     * <div class="de">Liefert den eigentlichen Code als String</div>
+     * Gets the actual Code as string.
      *
-     * @return <div class="en">the code</div>
+     * @return the code.
      */
+    @NonNull
     String getCodeValue();
 
     /**
-     * <div class="en">Gets the display name.</div> <div class="de">Liefert
-     * display name.</div>
+     * Gets the default display name.
      *
-     * @return <div class="en">the display name</div>
+     * @return the default display name.
      */
+    @NonNull
     default String getDisplayName() {
         return getDisplayName(null);
     }
 
     /**
-     * <div class="en">Gets the display name defined by the language param. If
-     * language is unknow, german name is returned</div> <div class="de">Liefert
-     * display name gemäss Parameter, falls die Sprache unbekannt ist, wird
-     * standartmässig deutsch geliefert.</div>
+     * Gets the display name defined by the language param.
      *
-     * @param languageCode the language code to get the display name for
-     * @return returns the display name in the desired language. if language not found, display name in german will
-     * man will returned
+     * @param languageCode The language code to get the display name for, {@code null} to get the default display name.
+     * @return the display name in the desired language.
      */
-    String getDisplayName(LanguageCode languageCode);
+    @NonNull
+    String getDisplayName(@Nullable final LanguageCode languageCode);
 
     /**
-     * <div class="en">Gets the value set identifier.</div>
-     * <div class="de">Liefert den Value Set Identifikator.</div>
+     * Gets the value set identifier.
      *
-     * @return <div class="en">the value set identifier</div>
+     * @return the value set identifier.
      */
+    @NonNull
     String getValueSetId();
 
     /**
-     * <div class="en">Gets the value set name.</div> <div class="de">Liefert
-     * den Value Set Namen.</div>
+     * Gets the value set name.
      *
-     * @return <div class="en">the value set name</div>
+     * @return the value set name.
      */
+    @NonNull
     String getValueSetName();
-
 }
