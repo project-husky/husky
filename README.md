@@ -20,6 +20,7 @@ Husky offers support for multiple IHE ITI profiles. For each profile transaction
 | [XUA](docs/XUA.md)  | ITI-40               | Provide identity assertions              |
 
 ## eMed Module
+TODO: add documentation
 
 ## CDA validation
 
