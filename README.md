@@ -25,7 +25,7 @@ Husky offers support for multiple IHE ITI profiles. For each profile transaction
   * `husky-common`: The common parent module.
     * `husky-common-gen`: The common part that are generic.
     * `husky-common-ch`: The common part dedicated to the Swiss environment.
-  * `husky-communication`: Implementation of transactions with [https://github.com/oehf/ipf](IPF) and [https://github.com/apache/camel](Apache Camel).
+  * `husky-communication`: Implementation of transactions with [IPF](https://github.com/oehf/ipf) and [Apache Camel](https://github.com/apache/camel).
     * `husky-communication-gen`: Generic transactions.
     * `husky-communication-ch`: Swiss-specific transactions.
     * `husky-communication-ppq`: CH:PPQ (Privacy Policy Query) transactions.
