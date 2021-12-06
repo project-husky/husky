@@ -72,9 +72,9 @@ History:
 		StaticMifToXsd.xsl version 2.0</xs:documentation>
 	</xs:annotation>
 
-	<xs:import namespace="urn:hl7-org:v3" schemaLocation="../extPHARM/hl7v3_extPHARM.xsd"/>
+	<xs:import namespace="urn:hl7-org:v3" schemaLocation="hl7v3_extPHARM.xsd"/>
 	<xs:import namespace="urn:hl7-org:v3" schemaLocation="../coreschemas/datatypes-base.xsd"/>
-	<xs:include schemaLocation="../extPHARM/COCT_MT440001UV09_extPHARM.xsd"/>
+	<xs:include schemaLocation="COCT_MT440001UV09_extPHARM.xsd"/>
 
 	<xs:element name="subjectOf1" type="pharm:COCT_MT230100UV.Subject2" nillable="true"/>
 	<xs:element name="subjectOf2" type="pharm:COCT_MT230100UV.Subject1" nillable="true"/>

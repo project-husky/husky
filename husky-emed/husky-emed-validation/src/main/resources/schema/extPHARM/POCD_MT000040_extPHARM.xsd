@@ -59,8 +59,8 @@ History:
 			RoseTreeToMIFStaticModel.xsl version: 1.1
 		StaticMifToXsd.xsl version 2.0</xs:documentation>
 	</xs:annotation>
-	<xs:import namespace="urn:ihe:pharm" schemaLocation="../extPHARM/COCT_MT230100UV_extPHARM.xsd"/>
-	<xs:include schemaLocation="../extPHARM/hl7v3_extPHARM.xsd"/>
+	<xs:import namespace="urn:ihe:pharm" schemaLocation="COCT_MT230100UV_extPHARM.xsd"/>
+	<xs:include schemaLocation="hl7v3_extPHARM.xsd"/>
 	<xs:include schemaLocation="../coreschemas/datatypes.xsd"/>
 	<xs:include schemaLocation="../coreschemas/voc.xsd"/>
 	<xs:include schemaLocation="../coreschemas/narrative-block.xsd"/>

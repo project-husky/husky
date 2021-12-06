@@ -13,17 +13,10 @@
 		<version>2.0-ALPHA</version>
 	</parent>
 
-    <properties>
-        <schematron.version>6.2.4</schematron.version>
-    </properties>
+    <properties></properties>
 
     <dependencies>
         <!-- Own dependencies -->
-        <!-- <dependency>
-            <groupId>org.husky.emed.common</groupId>
-            <artifactId>husky-emed-common</artifactId>
-            <version>2.0-ALPHA</version>
-        </dependency> -->
         <dependency>
             <groupId>org.husky.common</groupId>
             <artifactId>husky-common-gen</artifactId>
@@ -36,19 +29,6 @@
 			<artifactId>hapi-base</artifactId>
 			<version>2.3</version>
 		</dependency>
-
-
-        <!-- Schematron validator (Apache 2.0) -->
-        <dependency>
-            <groupId>com.helger.schematron</groupId>
-            <artifactId>ph-schematron-api</artifactId>
-            <version>${schematron.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.helger.schematron</groupId>
-            <artifactId>ph-schematron-xslt</artifactId>
-            <version>${schematron.version}</version>
-        </dependency>
 
 		<!-- JAXB binding (EDL 1.0) -->
 		<dependency>
@@ -91,5 +71,4 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
 </project>

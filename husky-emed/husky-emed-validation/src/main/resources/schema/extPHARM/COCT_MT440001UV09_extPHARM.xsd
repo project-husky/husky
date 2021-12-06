@@ -71,7 +71,7 @@ History:
 		StaticMifToXsd.xsl version 2.0</xs:documentation>
 	</xs:annotation>
 
-	<xs:import namespace="urn:hl7-org:v3" schemaLocation="../extPHARM/hl7v3_extPHARM.xsd"/>
+	<xs:import namespace="urn:hl7-org:v3" schemaLocation="hl7v3_extPHARM.xsd"/>
 	<xs:import namespace="urn:hl7-org:v3" schemaLocation="../coreschemas/datatypes.xsd"/>
 	<xs:import namespace="urn:hl7-org:v3" schemaLocation="../coreschemas/datatypes-base.xsd"/>
 
