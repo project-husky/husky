@@ -15,6 +15,7 @@
 	<modules>
 		<module>husky-emed-cda</module>
 		<module>husky-emed-conversion</module>
+		<module>husky-emed-narrative</module>
 		<module>husky-emed-validation</module>
 	</modules>
 </project>
