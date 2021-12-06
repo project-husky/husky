@@ -11,6 +11,7 @@ import org.husky.common.enums.LanguageCode;
  * <div class="en">Available values for the header of the narrative text table</div>
  * <!-- @formatter:on -->
  */
+@Deprecated(forRemoval = true) // Move it to translation properties
 public enum EmedTextNarrativeAttributes {
 	/**
      * <!-- @formatter:off -->

@@ -1,3 +1,12 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
 package org.husky.emed.cda.services.readers;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -146,9 +155,9 @@ public class DosageInstructionsReader {
                 this.getEffectiveStopTime().orElse(null)
         );
 
-        if (this.getDosageType() == DosageType.Normal) {
+        if (this.getDosageType() == DosageType.NORMAL) {
             instructions.getIntakes().addAll(this.getIntakes(this.subAdm));
-        } else if (this.getDosageType() == DosageType.Split) {
+        } else if (this.getDosageType() == DosageType.SPLIT) {
             this.subAdm.getEntryRelationship().stream()
                     .filter(er -> er.getTypeCode() == XActRelationshipEntryRelationship.COMP)
                     .filter(er -> er.getSequenceNumber() != null)
@@ -202,9 +211,9 @@ public class DosageInstructionsReader {
             throw new InvalidEmedContentException("No or multiple dosage type template IDs found");
         }
         if (templateIds.contains(TemplateIds.DOSAGE_TYPE_NORMAL)) {
-            return DosageType.Normal;
+            return DosageType.NORMAL;
         } else if (templateIds.contains(TemplateIds.DOSAGE_TYPE_SPLIT)) {
-            return DosageType.Split;
+            return DosageType.SPLIT;
         } else {
             throw new InvalidEmedContentException("The dosage type isn't supported yet");
         }

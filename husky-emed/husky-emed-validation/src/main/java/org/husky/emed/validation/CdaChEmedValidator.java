@@ -1,4 +1,13 @@
-package org.husky.emed.cda.services.validation;
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
+package org.husky.emed.validation;
 
 import com.helger.schematron.svrl.jaxb.FailedAssert;
 import com.helger.schematron.xslt.SchematronResourceXSLT;
@@ -6,12 +15,15 @@ import com.helger.schematron.xslt.SchematronResourceXSLT;
 import org.husky.common.utils.xml.XmlSchemaValidator;
 import org.husky.emed.cda.enums.EmedDocumentType;
 import org.husky.emed.cda.errors.InvalidEmedContentException;
+import org.husky.validation.service.pdf.PdfA12Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
+import org.verapdf.pdfa.results.TestAssertion;
 import org.xml.sax.SAXException;
 
+import javax.annotation.concurrent.NotThreadSafe;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Validator;
 import java.io.*;
@@ -28,6 +40,7 @@ import java.util.regex.Pattern;
  * @author Quentin Ligier
  */
 @Component
+@NotThreadSafe
 public class CdaChEmedValidator {
 
     private static final Logger log = LoggerFactory.getLogger(CdaChEmedValidator.class);
@@ -66,6 +79,11 @@ public class CdaChEmedValidator {
     private final SchematronResourceXSLT pmlcValidator;
 
     /**
+     * The PDF/A-1 or PDF/A-2 validator.
+     */
+    private final PdfA12Validator pdfValidator;
+
+    /**
      * Constructor.
      *
      * @throws IOException  if the XML Schema file is not found.
@@ -80,6 +98,8 @@ public class CdaChEmedValidator {
         this.padvValidator = SchematronResourceXSLT.fromClassPath(CCE_XSLT_PATH + "cdachemed-PADV-error.xslt");
         this.pmlValidator = SchematronResourceXSLT.fromClassPath(CCE_XSLT_PATH + "cdachemed-PML-error.xslt");
         this.pmlcValidator = SchematronResourceXSLT.fromClassPath(CCE_XSLT_PATH + "cdachemed-PMLC-error.xslt");
+
+        this.pdfValidator = new PdfA12Validator();
     }
 
     /**
@@ -179,6 +199,23 @@ public class CdaChEmedValidator {
     }
 
     /**
+     * Extracts a PDF representation of a CDA-CH-EMED file and validates it against conformance levels A-1 or A-2.
+     */
+    private void validatePdfRepresentation() {
+        final byte[] pdf;
+
+        final var result = this.pdfValidator.validate(pdf);
+        if (!result.isCompliant()) {
+            final String message = result.getTestAssertions().stream()
+                    .filter(assertion -> assertion.getStatus() == TestAssertion.Status.FAILED)
+                    .findAny()
+                    .map(TestAssertion::getMessage)
+                    .orElse("unknown error");
+            throw new InvalidEmedContentException("PDF validation error: " + message);
+        }
+    }
+
+    /**
      * Returns the corresponding Schematron validator to a CDA-CH-EMED type.
      *
      * @param type The CDA-CH-EMED type of the document to validate.
@@ -186,11 +223,11 @@ public class CdaChEmedValidator {
      */
     private SchematronResourceXSLT getSchematronValidator(final EmedDocumentType type) {
         return switch (type) {
-            case MTP -> this.mtpValidator;
-            case PRE -> this.disValidator;
-            case DIS -> this.preValidator;
+            case MTP  -> this.mtpValidator;
+            case PRE  -> this.disValidator;
+            case DIS  -> this.preValidator;
             case PADV -> this.padvValidator;
-            case PML -> this.pmlValidator;
+            case PML  -> this.pmlValidator;
             case PMLC -> this.pmlcValidator;
         };
     }
