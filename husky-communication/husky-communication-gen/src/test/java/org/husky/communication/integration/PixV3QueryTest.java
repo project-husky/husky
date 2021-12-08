@@ -139,78 +139,6 @@ public class PixV3QueryTest {
 	 * (MCCI_IN000002UV01) back to your PIX Source.
 	 */
 	
-	
-	@Test
-	@Disabled
-	public void ITI44SourceFeedTestMaritalStatus() {
-
-		log.debug("ITI44SourceFeedTest with target " + pixUri);
-
-		final AffinityDomain affinityDomain = new AffinityDomain();
-		final Destination dest = new Destination();
-
-		dest.setUri(URI.create(pixUri));
-		dest.setSenderApplicationOid(senderApplicationOid);
-		dest.setReceiverApplicationOid(receiverApplicationOid);
-		dest.setReceiverFacilityOid(facilityName);
-		affinityDomain.setPdqDestination(dest);
-		affinityDomain.setPixDestination(dest);
-
-		PixV3Query pixV3Query = new PixV3Query(affinityDomain, homeCommunityOid, homeCommunityNamespace, spidEprOid, spidEprNamespace,
-				convenienceMasterPatientIndexV3Client.getContext(),
-				convenienceMasterPatientIndexV3Client.getAuditContext());
-
-		final FhirPatient patient = new FhirPatient();
-		
-		final Identifier identifier = new Identifier();
-		identifier.setValue(String.valueOf(System.currentTimeMillis()));
-		identifier.setSystem(FhirCommon.addUrnOid(homeCommunityOid));
-		patient.getIdentifier().add(identifier);
-	
-		final Identifier identifier2 = new Identifier();
-		identifier2.setValue(String.valueOf(System.currentTimeMillis()));
-		identifier2.setSystem(spidEprOid);
-		patient.getIdentifier().add(identifier2);
-		
-		
-		final HumanName humanName = new HumanName().setFamily("Baumann").addGiven("Anna").addGiven("Maria").addPrefix("Dr.").addSuffix("Bsc.").setUse(NameUse.OFFICIAL);
-		patient.getName().add(humanName);
-		
-		try {
-			patient.setBirthDate(new SimpleDateFormat("dd.MM.yyyy").parse("01.01.1980"));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
-		patient.setGender(AdministrativeGender.FEMALE);
-		
-		final org.hl7.fhir.r4.model.Address address = new org.hl7.fhir.r4.model.Address()
-				.addLine("Testgasse 15").setPostalCode("8010").setCity("Graz").setState("Steiermark");
-		address.setCountry("AUT");
-		patient.getAddress().add(address);
-		
-		
-		final CodeableConcept maritalStatus = new CodeableConcept();
-		maritalStatus.addCoding(new Coding(null, V3MaritalStatus.S.toCode(), V3MaritalStatus.S.getDisplay()));// single
-		patient.setMaritalStatus(maritalStatus);
-		
-		final CodeableConcept deCH = new CodeableConcept();
-		deCH.setText("de-CH");
-		
-		patient.getCommunication().add(new PatientCommunicationComponent().setLanguage(deCH));
-	
-		patient.getManagingOrganization().setResource(getScopingOrganization());
-		
-
-		final FhirContext ctx = new FhirContext(FhirVersionEnum.R4);
-		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
-		log.debug(encoded);
-
-		assertTrue(pixV3Query.addPatient(patient, null));
-		
-	}
-	
-	
 	@Test
 	public void ITI44SourceFeedTest() {
 
@@ -323,6 +251,8 @@ public class PixV3QueryTest {
 		log.debug(encoded);
 
 		assertTrue(pixV3Query.addPatient(patient, null));
+	
+
 		
 	}
 
@@ -342,8 +272,6 @@ public class PixV3QueryTest {
 	public void ITI44SourceMergeTest() {
 		log.debug("ITI44SourceMergeTest with target {}", pixUri);
 		
-		
-
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
 
@@ -383,7 +311,14 @@ public class PixV3QueryTest {
 		assertTrue(pixV3Query.mergePatient(patient, "1634721569120", null));
 	}
 
-	
+	/**
+	 * The purpose of this test is to update family name, address of patient, gender and birthdate
+	 * of patient identified by id 1634793774730
+	 * 
+	 * ids of patient in patient manager
+	 * 761337610436974489^^^&1.3.6.1.4.1.21367.2017.2.5.10&
+     * CHPAM4489^^^&1.3.6.1.4.1.12559.11.20.1&
+	 */
 	
 	@Test
 	@Disabled

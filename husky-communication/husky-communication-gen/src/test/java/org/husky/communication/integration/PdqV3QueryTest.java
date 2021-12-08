@@ -76,8 +76,6 @@ public class PdqV3QueryTest {
 	
 	
 	
-	
-	
 	/**
 	 * Method implementing
 	 *
@@ -94,7 +92,6 @@ public class PdqV3QueryTest {
 	}
     
 	
-
 	/**
 	 * Method implementing
 	 *
@@ -116,7 +113,8 @@ public class PdqV3QueryTest {
 	/**
 	 * Test method for
 	 * {@link org.husky.communication.mpi.impl.V3PixPdqAdapter#getPatientsFromPdqQuery(org.openhealthtools.ihe.pdq.consumer.v3.V3PdqConsumerResponse)}
-	 * .
+	 * this test loads a response from the file system and fills a V3PdqConsumerResponse object with the given data
+	 * afterwards it checks if the data was correctly loaded
 	 *
 	 * @throws Exception
 	 */
@@ -193,12 +191,11 @@ public class PdqV3QueryTest {
 		assertEquals("34827R534", jim.getIdentifierFirstRep().getValue());
 	}
 
-	
-	@Test
 	/*
-	 * check if the patient is correctly not found in case a random  identificator that does not
+	 * this test checks if the patient is correctly not found in case a random  identifier, that does not
 	 * identify any patient in the database is used
 	 */
+	@Test
 	public void ITI47ConsumerQueryPatientPatientIdNotFoundTest() {
 		
 
@@ -223,12 +220,16 @@ public class PdqV3QueryTest {
 				affinityDomain, null);
 		
 		// test patient not found 
+	
 		assertTrue(response.getSuccess());
 	    assertEquals(0,response.getTotalNumbers());
 	    
 	}
 	
-	
+	/**
+	 * this test searches for female patient Jasmin Schaub identified by given identificator
+	 * and checks that exactly this patient is found for the given identificator
+	 */
 	@Test
 	public void ITI47ConsumerQueryPatientPatientIdFoundTest() {
 		
@@ -259,14 +260,16 @@ public class PdqV3QueryTest {
 		assertTrue(response2.getSuccess());
 		assertEquals(patients.size(),1);
 		Patient patient = patients.get(0);
-		
 		assertEquals(patient.getCompleteName().trim(),"Jasmin Schaub");
-
 		assertEquals(patient.getAdministrativeGenderCode().getCodeValue(),AdministrativeGender.FEMALE.getCodeValue());
 		assertEquals(patient.getAddress().getCountry(),"CHE");
 	    
 	}
 
+	/**
+	 * this test searches for patients by name 
+	 * and checks that the query succeeds and at least one patient is found
+	 */
 	@Test
 	public void ITI47ConsumerQueryPatientPatientIdSearchByName() {
 		
@@ -290,12 +293,16 @@ public class PdqV3QueryTest {
 				.queryPatientDemographics(mpiQuery, affinityDomain, null);
 		
 		assertTrue(response.getSuccess());
-		assertEquals(response.getPatients().size(),9);
+		assertTrue(response.getPatients().size()>0);
+		
 	} 
 	
-	
+	/**
+	 * this test searches for patients by first name and address
+	 * and checks that the query succeeds and the correct patient is found
+	 */
 	@Test
-	public void ITI47ConsumerQueryPatientPatientIdSearchByfirstNameAndBirthdate() {
+	public void ITI47ConsumerQueryPatientPatientIdMultipleCriteria() {
 		
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
@@ -331,6 +338,7 @@ public class PdqV3QueryTest {
 		assertEquals(response.getPatients().size(),1);
 		Patient patient = response.getPatients().get(0);
 		assertEquals(patient.getCompleteName().trim(),"David Sanders");
+		assertEquals(patient.getAdministrativeGenderCode(),AdministrativeGender.MALE.getCodeValue());
 		
 	} 
 
