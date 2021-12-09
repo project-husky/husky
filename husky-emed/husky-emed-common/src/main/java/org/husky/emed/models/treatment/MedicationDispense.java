@@ -11,8 +11,8 @@ package org.husky.emed.models.treatment;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.enums.DispenseStatus;
-import org.husky.emed.cda.generated.artdecor.enums.DispenseSupplyType;
-import org.husky.emed.cda.models.common.QuantityWithUnit;
+import org.husky.emed.enums.DispenseSupplyType;
+import org.husky.emed.models.common.QuantityWithUnit;
 import org.husky.emed.models.entry.EmedDisEntryDigest;
 
 import lombok.Data;

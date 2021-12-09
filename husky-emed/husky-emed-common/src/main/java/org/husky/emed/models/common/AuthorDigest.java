@@ -11,7 +11,7 @@ package org.husky.emed.models.common;
 
 import lombok.Data;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.cda.generated.artdecor.enums.ParticipationFunction;
+import org.husky.emed.enums.ParticipationFunction;
 
 import java.util.ArrayList;
 import java.util.List;

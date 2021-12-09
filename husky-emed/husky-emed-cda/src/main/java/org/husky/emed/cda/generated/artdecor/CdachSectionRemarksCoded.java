@@ -25,7 +25,7 @@ import org.husky.common.hl7cdar2.POCDMT000040Section;
  * Version: 2017<br>
  * Status: active
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-11-24")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
 public class CdachSectionRemarksCoded extends POCDMT000040Section {
 
     public CdachSectionRemarksCoded() {

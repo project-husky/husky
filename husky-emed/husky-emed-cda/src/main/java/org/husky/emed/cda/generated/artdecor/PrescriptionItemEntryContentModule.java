@@ -27,7 +27,7 @@ import org.husky.common.hl7cdar2.SXCMTS;
  * Version: 2021<br>
  * Status: draft
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-11-24")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
 public class PrescriptionItemEntryContentModule extends POCDMT000040SubstanceAdministration {
 
     public PrescriptionItemEntryContentModule() {

@@ -13,13 +13,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.husky.common.ch.enums.ConfidentialityCode;
 import org.husky.emed.enums.EmedDocumentType;
-import org.husky.emed.cda.generated.artdecor.enums.DocumentEntryConfidentialityCode;
 import org.husky.common.hl7cdar2.StrucDocText;
-import org.husky.emed.cda.models.common.AuthorDigest;
-import org.husky.emed.cda.models.common.OrganizationDigest;
-import org.husky.emed.cda.models.common.PatientDigest;
-import org.husky.emed.cda.models.common.RecipientDigest;
+import org.husky.emed.models.common.AuthorDigest;
+import org.husky.emed.models.common.OrganizationDigest;
+import org.husky.emed.models.common.PatientDigest;
+import org.husky.emed.models.common.RecipientDigest;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -71,7 +71,7 @@ public abstract class EmedDocumentDigest {
      * The confidentiality code.
      */
     @NonNull
-    private DocumentEntryConfidentialityCode confidentialityCode;
+    private ConfidentialityCode confidentialityCode;
     /**
      * The document main language (some parts may be in another language, e.g. PML documents may contain entries in
      * different languages).
@@ -176,7 +176,7 @@ public abstract class EmedDocumentDigest {
                               final String setId,
                               final int version,
                               final OffsetDateTime effectiveTime,
-                              final DocumentEntryConfidentialityCode confidentialityCode,
+                              final ConfidentialityCode confidentialityCode,
                               final String languageCode,
                               final PatientDigest patient,
                               final List<@org.checkerframework.checker.nullness.qual.NonNull AuthorDigest> authors,

@@ -14,12 +14,12 @@ import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.husky.emed.enums.ActSubstanceAdminSubstitutionCode;
+import org.husky.emed.enums.ChEmedTimingEvent;
+import org.husky.emed.enums.RouteOfAdministrationEdqm;
 import org.husky.emed.enums.TreatmentStatus;
-import org.husky.emed.cda.generated.artdecor.enums.ActSubstanceAdminSubstitutionCode;
-import org.husky.emed.cda.generated.artdecor.enums.ChEmedTimingEvent;
-import org.husky.emed.cda.generated.artdecor.enums.RouteOfAdministrationEdqm;
-import org.husky.emed.cda.models.common.EmedReference;
-import org.husky.emed.cda.models.common.MedicationDosageInstructions;
+import org.husky.emed.models.common.EmedReference;
+import org.husky.emed.models.common.MedicationDosageInstructions;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -28,9 +28,6 @@ import java.util.Optional;
 
 /**
  * An representation of the state of a medication in the treatment plan at a given time.
- * <p>
- * The medication treatment is constructed with the {@link ch.qligier.hug.pmp.emed.aggregators.ItemAggregator}s. It
- * should not be modified elsewhere, as it requires a lot of business logic.
  * <p>
  * TODO: check all dates: inclusives or exclusives? PRE stop time is exclusive in digest...
  *

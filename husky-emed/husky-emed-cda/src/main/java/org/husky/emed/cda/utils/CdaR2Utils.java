@@ -12,6 +12,8 @@ package org.husky.emed.cda.utils;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.dataflow.qual.SideEffectFree;
 import org.husky.common.hl7cdar2.*;
+import org.husky.emed.errors.InvalidEmedContentException;
+import org.husky.emed.models.common.EmedReference;
 
 import java.math.BigInteger;
 import java.util.Collections;
@@ -111,5 +113,85 @@ public class CdaR2Utils {
      */
     public static INT createInt(final Integer value) {
         return createInt(BigInteger.valueOf(value));
+    }
+
+    /**
+     * Constructs a new eMed reference from a Supply reference.
+     *
+     * @param supply The Supply element.
+     * @return the created eMed reference.
+     * @throws InvalidEmedContentException if the CCE document is invalid.
+     */
+    public static EmedReference toEmedReference(final POCDMT000040Supply supply) {
+        Objects.requireNonNull(supply);
+        final II id = (!supply.getId().isEmpty()) ? supply.getId().get(0) : null;
+        if (!IiUtils.isValidUid(id) || supply.getId().size() > 1) {
+            throw new InvalidEmedContentException("The Supply item ID is invalid");
+        }
+        final String documentId;
+        if (!supply.getReference().isEmpty()) {
+            final II docIi = supply.getReference().get(0).getExternalDocument().getId().get(0);
+            if (!IiUtils.isValidUuid(docIi)) {
+                throw new InvalidEmedContentException("The Supply document ID is invalid");
+            }
+            documentId = IiUtils.getNormalizedUuid(docIi);
+        } else {
+            documentId = null;
+        }
+        return new EmedReference(documentId, null);
+    }
+
+
+    /**
+     * Constructs a new eMed reference from an Observation reference.
+     *
+     * @param observation The Observation element.
+     * @return the created eMed reference.
+     * @throws InvalidEmedContentException if the CCE document is invalid.
+     */
+    public static EmedReference toEmedReference(final POCDMT000040Observation observation) throws InvalidEmedContentException {
+        Objects.requireNonNull(observation);
+        final II id = (!observation.getId().isEmpty()) ? observation.getId().get(0) : null;
+        if (!IiUtils.isValidUid(id) || observation.getId().size() > 1) {
+            throw new InvalidEmedContentException("The Observation item ID is invalid");
+        }
+        final String documentId;
+        if (!observation.getReference().isEmpty()) {
+            final II docIi = observation.getReference().get(0).getExternalDocument().getId().get(0);
+            if (!IiUtils.isValidUuid(docIi)) {
+                throw new InvalidEmedContentException("The Observation document ID is invalid");
+            }
+            documentId = IiUtils.getNormalizedUuid(docIi);
+        } else {
+            documentId = null;
+        }
+        return new EmedReference(documentId, null);
+    }
+
+    /**
+     * Constructs a new eMed reference from a SubstanceAdministration reference.
+     *
+     * @param substanceAdministration The SubstanceAdministration element.
+     * @return the created eMed reference.
+     * @throws InvalidEmedContentException if the CCE document is invalid.
+     */
+    public static EmedReference toEmedReference(final POCDMT000040SubstanceAdministration substanceAdministration) throws InvalidEmedContentException {
+        Objects.requireNonNull(substanceAdministration);
+        final II id = (!substanceAdministration.getId().isEmpty()) ? substanceAdministration.getId().get(0) : null;
+        if (!IiUtils.isValidUid(id) || substanceAdministration.getId().size() > 1) {
+            throw new InvalidEmedContentException("The SubstanceAdministration item ID is invalid");
+        }
+        final var itemId = IiUtils.getNormalizedUid(substanceAdministration.getId().get(0));
+        final String documentId;
+        if (!substanceAdministration.getReference().isEmpty()) {
+            final II docIi = substanceAdministration.getReference().get(0).getExternalDocument().getId().get(0);
+            if (!IiUtils.isValidUuid(docIi)) {
+                throw new InvalidEmedContentException("The SubstanceAdministration document ID is invalid");
+            }
+            documentId = IiUtils.getNormalizedUuid(docIi);
+        } else {
+            documentId = null;
+        }
+        return new EmedReference(documentId, itemId);
     }
 }

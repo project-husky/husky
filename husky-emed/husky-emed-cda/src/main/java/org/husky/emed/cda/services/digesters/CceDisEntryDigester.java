@@ -11,6 +11,7 @@ package org.husky.emed.cda.services.digesters;
 
 import org.husky.common.hl7cdar2.*;
 import org.husky.common.utils.StreamUtils;
+import org.husky.emed.cda.utils.CdaR2Utils;
 import org.husky.emed.errors.InvalidEmedContentException;
 import org.husky.emed.enums.ActSubstanceAdminSubstitutionCode;
 import org.husky.emed.enums.DispenseSupplyType;
@@ -220,7 +221,7 @@ public class CceDisEntryDigester {
                 .map(POCDMT000040EntryRelationship::getSubstanceAdministration)
                 .filter(Objects::nonNull)
                 .filter(substanceAdministration -> hasAllIds(REFERENCE_TO_MTP, substanceAdministration.getTemplateId()))
-                .map(EmedReference::new)
+                .map(CdaR2Utils::toEmedReference)
                 .findAny();
     }
 
@@ -237,7 +238,7 @@ public class CceDisEntryDigester {
                 .filter(Objects::nonNull)
                 .filter(substanceAdministration -> hasAllIds(REFERENCE_TO_PRE, substanceAdministration.getTemplateId()))
                 .findAny()
-                .map(EmedReference::new);
+                .map(CdaR2Utils::toEmedReference);
     }
 
     /**
@@ -253,7 +254,7 @@ public class CceDisEntryDigester {
                 .filter(Objects::nonNull)
                 .filter(obs -> hasAllIds(REFERENCE_TO_PADV, obs.getTemplateId()))
                 .findAny()
-                .map(EmedReference::new);
+                .map(CdaR2Utils::toEmedReference);
     }
 
     /**

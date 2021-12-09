@@ -9,11 +9,11 @@
  */
 package org.husky.emed.cda.generated.artdecor.enums;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.Objects;
 import javax.annotation.processing.Generated;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.enums.CodeSystems;
 import org.husky.common.enums.LanguageCode;
 import org.husky.common.enums.ValueSetEnumInterface;
@@ -21,7 +21,7 @@ import org.husky.common.enums.ValueSetEnumInterface;
 /**
  * Enumeration of LanguageAbilityMode values
  * <p>
- * EN: <p> <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26</p><b>description: </b><p>A value representing the method of expression of the language.</p><p> <i>Example:</i> Expressed spoken, expressed written, expressed signed, received spoken, received written, received signed.</p><br>
+ * EN: <p> <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26</p><b>description: </b><p>A value representing the method of expression of the language.</p><p> <i>Example:</i> Expressed spoken, expressed written, expressed signed, received spoken, received written, received signed.</p>.<br>
  * DE: No designation found.<br>
  * FR: No designation found.<br>
  * IT: No designation found.<br>
@@ -31,11 +31,11 @@ import org.husky.common.enums.ValueSetEnumInterface;
  * Version: DEFN=UV=VO=1360-20160323<br>
  * Status: FINAL
  */
-@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-11-24")
+@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-12-09")
 public enum LanguageAbilityMode implements ValueSetEnumInterface {
 
     /**
-     * EN: Expressed signed<br>
+     * EN: Expressed signed.<br>
      */
     EXPRESSED_SIGNED("ESGN",
                      "2.16.840.1.113883.5.60",
@@ -45,7 +45,7 @@ public enum LanguageAbilityMode implements ValueSetEnumInterface {
                      "TOTRANSLATE",
                      "TOTRANSLATE"),
     /**
-     * EN: Expressed spoken<br>
+     * EN: Expressed spoken.<br>
      */
     EXPRESSED_SPOKEN("ESP",
                      "2.16.840.1.113883.5.60",
@@ -55,7 +55,7 @@ public enum LanguageAbilityMode implements ValueSetEnumInterface {
                      "TOTRANSLATE",
                      "TOTRANSLATE"),
     /**
-     * EN: Expressed written<br>
+     * EN: Expressed written.<br>
      */
     EXPRESSED_WRITTEN("EWR",
                       "2.16.840.1.113883.5.60",
@@ -65,7 +65,7 @@ public enum LanguageAbilityMode implements ValueSetEnumInterface {
                       "TOTRANSLATE",
                       "TOTRANSLATE"),
     /**
-     * EN: Received signed<br>
+     * EN: Received signed.<br>
      */
     RECEIVED_SIGNED("RSGN",
                     "2.16.840.1.113883.5.60",
@@ -75,7 +75,7 @@ public enum LanguageAbilityMode implements ValueSetEnumInterface {
                     "TOTRANSLATE",
                     "TOTRANSLATE"),
     /**
-     * EN: Received spoken<br>
+     * EN: Received spoken.<br>
      */
     RECEIVED_SPOKEN("RSP",
                     "2.16.840.1.113883.5.60",
@@ -85,7 +85,7 @@ public enum LanguageAbilityMode implements ValueSetEnumInterface {
                     "TOTRANSLATE",
                     "TOTRANSLATE"),
     /**
-     * EN: Received written<br>
+     * EN: Received written.<br>
      */
     RECEIVED_WRITTEN("RWR",
                      "2.16.840.1.113883.5.60",
@@ -96,32 +96,32 @@ public enum LanguageAbilityMode implements ValueSetEnumInterface {
                      "TOTRANSLATE");
 
     /**
-     * EN: Code for Expressed signed<br>
+     * EN: Code for Expressed signed.<br>
      */
     public static final String EXPRESSED_SIGNED_CODE = "ESGN";
 
     /**
-     * EN: Code for Expressed spoken<br>
+     * EN: Code for Expressed spoken.<br>
      */
     public static final String EXPRESSED_SPOKEN_CODE = "ESP";
 
     /**
-     * EN: Code for Expressed written<br>
+     * EN: Code for Expressed written.<br>
      */
     public static final String EXPRESSED_WRITTEN_CODE = "EWR";
 
     /**
-     * EN: Code for Received signed<br>
+     * EN: Code for Received signed.<br>
      */
     public static final String RECEIVED_SIGNED_CODE = "RSGN";
 
     /**
-     * EN: Code for Received spoken<br>
+     * EN: Code for Received spoken.<br>
      */
     public static final String RECEIVED_SPOKEN_CODE = "RSP";
 
     /**
-     * EN: Code for Received written<br>
+     * EN: Code for Received written.<br>
      */
     public static final String RECEIVED_WRITTEN_CODE = "RWR";
 
@@ -146,7 +146,8 @@ public enum LanguageAbilityMode implements ValueSetEnumInterface {
      * @param code The code value.
      * @return the enum value found or {@code null}.
      */
-    public static LanguageAbilityMode getEnum(final String code) {
+    @Nullable
+    public static LanguageAbilityMode getEnum(@Nullable final String code) {
         for (final LanguageAbilityMode x : values()) {
             if (x.getCodeValue().equals(code)) {
                 return x;
@@ -161,7 +162,7 @@ public enum LanguageAbilityMode implements ValueSetEnumInterface {
      * @param enumName The name of the enum.
      * @return {@code true} if the name is found in this value set, {@code false} otherwise.
      */
-    public static boolean isEnumOfValueSet(final String enumName) {
+    public static boolean isEnumOfValueSet(@Nullable final String enumName) {
         if (enumName == null) {
             return false;
         }
@@ -180,7 +181,7 @@ public enum LanguageAbilityMode implements ValueSetEnumInterface {
      * @param codeValue The code value.
      * @return {@code true} if the value is found in this value set, {@code false} otherwise.
      */
-    public static boolean isInValueSet(final String codeValue) {
+    public static boolean isInValueSet(@Nullable final String codeValue) {
         for (final LanguageAbilityMode x : values()) {
             if (x.getCodeValue().equals(codeValue)) {
                 return true;
@@ -192,17 +193,21 @@ public enum LanguageAbilityMode implements ValueSetEnumInterface {
     /**
      * Machine interpretable and (inside this class) unique code.
      */
-    private String code;
+    @NonNull
+    private final String code;
 
     /**
      * Identifier of the referencing code system.
      */
-    private String codeSystem;
+    @NonNull
+    private final String codeSystem;
 
     /**
-     * The display names per language.
+     * The display names per language. It's always stored in the given order: default display name (0), in English (1),
+     * in German (2), in French (3) and in Italian (4).
      */
-    private Map<LanguageCode, String> displayNames;
+    @NonNull
+    private final String[] displayNames;
 
     /**
      * Instantiates this enum with a given code and display names.
@@ -215,20 +220,15 @@ public enum LanguageAbilityMode implements ValueSetEnumInterface {
      * @param displayNameFr The display name in French.
      * @param displayNameIt The display name in Italian.
      */
-    LanguageAbilityMode(final String code, final String codeSystem, final String displayName, final String displayNameEn, final String displayNameDe, final String displayNameFr, final String displayNameIt) {
-        this.code = code;
-        this.codeSystem = codeSystem;
-        this.displayNames = new HashMap<>();
-        this.displayNames.put(null,
-                              displayName);
-        this.displayNames.put(LanguageCode.ENGLISH,
-                              displayNameEn);
-        this.displayNames.put(LanguageCode.GERMAN,
-                              displayNameDe);
-        this.displayNames.put(LanguageCode.FRENCH,
-                              displayNameFr);
-        this.displayNames.put(LanguageCode.ITALIAN,
-                              displayNameIt);
+    LanguageAbilityMode(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
+        this.code = Objects.requireNonNull(code);
+        this.codeSystem = Objects.requireNonNull(codeSystem);
+        this.displayNames = new String[5];
+        this.displayNames[0] = Objects.requireNonNull(displayName);
+        this.displayNames[1] = Objects.requireNonNull(displayNameEn);
+        this.displayNames[2] = Objects.requireNonNull(displayNameDe);
+        this.displayNames[3] = Objects.requireNonNull(displayNameFr);
+        this.displayNames[4] = Objects.requireNonNull(displayNameIt);
     }
 
     /**
@@ -237,6 +237,7 @@ public enum LanguageAbilityMode implements ValueSetEnumInterface {
      * @return the code system identifier.
      */
     @Override
+    @NonNull
     public String getCodeSystemId() {
         return this.codeSystem;
     }
@@ -244,13 +245,14 @@ public enum LanguageAbilityMode implements ValueSetEnumInterface {
     /**
      * Gets the code system name.
      *
-     * @return the code system identifier.
+     * @return the code system name.
      */
     @Override
+    @NonNull
     public String getCodeSystemName() {
-        final CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
-        if (cs != null) {
-            return cs.getCodeSystemName();
+        final var codeSystem = CodeSystems.getEnum(this.codeSystem);
+        if (codeSystem != null) {
+            return codeSystem.getCodeSystemName();
         }
         return "";
     }
@@ -261,24 +263,35 @@ public enum LanguageAbilityMode implements ValueSetEnumInterface {
      * @return the code value.
      */
     @Override
+    @NonNull
     public String getCodeValue() {
         return this.code;
     }
 
     /**
-     * Gets the display name defined by the language param. If there is no english translation, the default display name
-     *      is returned.
+     * Gets the display name defined by the language param.
      *
-     * @param languageCode The language code to get the display name for.
-     * @return the display name in the desired language. if language not found, display name in german will be returned.
+     * @param languageCode The language code to get the display name for, {@code null} to get the default display name.
+     * @return the display name in the desired language.
      */
     @Override
-    public String getDisplayName(final LanguageCode languageCode) {
-        final String displayName = this.displayNames.get(languageCode);
-        if (displayName == null && languageCode == LanguageCode.ENGLISH) {
-            return this.displayNames.get(null);
+    @NonNull
+    public String getDisplayName(@Nullable final LanguageCode languageCode) {
+        if (languageCode == null) {
+            return this.displayNames[0];
         }
-        return displayName;
+        return switch(languageCode) {
+            case ENGLISH ->
+                this.displayNames[1];
+            case GERMAN ->
+                this.displayNames[2];
+            case FRENCH ->
+                this.displayNames[3];
+            case ITALIAN ->
+                this.displayNames[4];
+            default ->
+                "TOTRANSLATE";
+        };
     }
 
     /**
@@ -287,6 +300,7 @@ public enum LanguageAbilityMode implements ValueSetEnumInterface {
      * @return the value set identifier.
      */
     @Override
+    @NonNull
     public String getValueSetId() {
         return VALUE_SET_ID;
     }
@@ -297,6 +311,7 @@ public enum LanguageAbilityMode implements ValueSetEnumInterface {
      * @return the value set name.
      */
     @Override
+    @NonNull
     public String getValueSetName() {
         return VALUE_SET_NAME;
     }

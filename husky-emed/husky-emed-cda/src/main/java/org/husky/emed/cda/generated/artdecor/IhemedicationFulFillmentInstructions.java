@@ -12,10 +12,10 @@ package org.husky.emed.cda.generated.artdecor;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
+import org.husky.common.basetypes.CodeBaseType;
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040Act;
-import org.husky.emed.models.common.Code;
-import org.husky.emed.models.common.basetypes.CodeBaseType;
+import org.husky.common.model.Code;
 
 /**
  * IHEMedicationFulFillmentInstructions
@@ -26,7 +26,7 @@ import org.husky.emed.models.common.basetypes.CodeBaseType;
  * Version: 2014<br>
  * Status: active
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-11-24")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
 public class IhemedicationFulFillmentInstructions extends POCDMT000040Act {
 
     public IhemedicationFulFillmentInstructions() {

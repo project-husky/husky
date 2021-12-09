@@ -12,8 +12,8 @@ package org.husky.emed.models.treatment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.cda.generated.artdecor.enums.ActivePharmaceuticalIngredient;
-import org.husky.emed.cda.models.common.QuantityWithUnit;
+import org.husky.emed.enums.ActivePharmaceuticalIngredient;
+import org.husky.emed.models.common.QuantityWithUnit;
 
 /**
  * An ingredient of a medication product.

@@ -10,13 +10,13 @@
 package org.husky.emed.models.document;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.husky.common.ch.enums.ConfidentialityCode;
 import org.husky.emed.enums.EmedDocumentType;
-import org.husky.emed.cda.generated.artdecor.enums.DocumentEntryConfidentialityCode;
 import org.husky.common.hl7cdar2.StrucDocText;
-import org.husky.emed.cda.models.common.AuthorDigest;
-import org.husky.emed.cda.models.common.OrganizationDigest;
-import org.husky.emed.cda.models.common.PatientDigest;
-import org.husky.emed.cda.models.common.RecipientDigest;
+import org.husky.emed.models.common.AuthorDigest;
+import org.husky.emed.models.common.OrganizationDigest;
+import org.husky.emed.models.common.PatientDigest;
+import org.husky.emed.models.common.RecipientDigest;
 import org.husky.emed.models.entry.EmedPadvEntryDigest;
 
 import java.time.OffsetDateTime;
@@ -55,7 +55,7 @@ public class EmedPadvDocumentDigest extends EmedDocumentDigest {
                                   final String setId,
                                   final int version,
                                   final OffsetDateTime effectiveTime,
-                                  final DocumentEntryConfidentialityCode confidentialityCode,
+                                  final ConfidentialityCode confidentialityCode,
                                   final String languageCode,
                                   final PatientDigest patient,
                                   final List<@NonNull AuthorDigest> authors,

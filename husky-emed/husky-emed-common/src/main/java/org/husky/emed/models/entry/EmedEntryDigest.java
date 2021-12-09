@@ -13,7 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.enums.EmedEntryType;
-import org.husky.emed.cda.models.common.AuthorDigest;
+import org.husky.emed.models.common.AuthorDigest;
 
 import java.time.Instant;
 import java.util.Objects;

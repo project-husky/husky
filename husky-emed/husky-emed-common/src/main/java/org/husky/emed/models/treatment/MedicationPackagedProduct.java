@@ -10,10 +10,10 @@
 package org.husky.emed.models.treatment;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.cda.generated.artdecor.enums.PharmaceuticalDoseFormEdqm;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.husky.emed.enums.PharmaceuticalDoseFormEdqm;
 
 /**
  * A data structure about the packaging of a medication product.

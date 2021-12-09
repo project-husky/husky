@@ -28,7 +28,7 @@ import org.husky.common.hl7cdar2.POCDMT000040SubstanceAdministration;
  * Version: 2017<br>
  * Status: pending
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-11-24")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
 public class MtpreferenceEntryContentModule extends POCDMT000040SubstanceAdministration {
 
     public MtpreferenceEntryContentModule() {

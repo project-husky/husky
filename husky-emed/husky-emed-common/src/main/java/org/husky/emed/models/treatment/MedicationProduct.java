@@ -12,7 +12,7 @@ package org.husky.emed.models.treatment;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.cda.generated.artdecor.enums.PharmaceuticalDoseFormEdqm;
+import org.husky.emed.enums.PharmaceuticalDoseFormEdqm;
 
 import java.util.ArrayList;
 import java.util.List;

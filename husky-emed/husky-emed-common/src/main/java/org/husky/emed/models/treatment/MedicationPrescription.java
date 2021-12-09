@@ -12,10 +12,11 @@ package org.husky.emed.models.treatment;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.husky.emed.enums.ActSubstanceAdminSubstitutionCode;
+import org.husky.emed.enums.DispenseSupplyType;
 import org.husky.emed.enums.PrescriptionStatus;
-import org.husky.emed.cda.generated.artdecor.enums.ActSubstanceAdminSubstitutionCode;
-import org.husky.emed.cda.generated.artdecor.enums.DispenseSupplyType;
-import org.husky.emed.cda.models.common.EmedReference;
+import org.husky.emed.models.common.EmedReference;
+import org.husky.emed.models.entry.EmedPreEntryDigest;
 
 import java.time.Instant;
 import java.util.ArrayList;

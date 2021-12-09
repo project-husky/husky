@@ -1,8 +1,8 @@
 package org.husky.emed.cda.services.digesters;
 
+import org.husky.common.ch.enums.ConfidentialityCode;
 import org.husky.emed.cda.TestUtils;
 import org.husky.emed.enums.EmedDocumentType;
-import org.husky.emed.cda.generated.artdecor.enums.DocumentEntryConfidentialityCode;
 import org.husky.emed.models.document.EmedMtpDocumentDigest;
 import org.husky.emed.models.entry.EmedEntryDigest;
 import org.husky.emed.cda.services.EmedEntryDigestService;
@@ -46,7 +46,7 @@ class CceDocumentDigesterTest {
         assertEquals("c9f758a1-296c-4710-84d4-e181db8c7478", digest.getSetId());
         assertEquals(1, digest.getVersion());
         assertEquals("de-CH", digest.getLanguageCode());
-        assertEquals(DocumentEntryConfidentialityCode.NORMALLY_ACCESSIBLE, digest.getConfidentialityCode());
+        assertEquals(ConfidentialityCode.NORMALLY_ACCESSIBLE, digest.getConfidentialityCode());
         //assertEquals("", digest.getAuthors());
         //assertEquals("", digest.getCustodian());
         assertEquals(OffsetDateTime.parse("2011-11-29T11:00:00+01:00"), digest.getEffectiveTime());

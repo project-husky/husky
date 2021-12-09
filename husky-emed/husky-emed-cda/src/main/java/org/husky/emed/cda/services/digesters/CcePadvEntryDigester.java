@@ -26,6 +26,7 @@ import org.husky.common.hl7cdar2.XActRelationshipEntryRelationship;
 import org.husky.common.utils.StreamUtils;
 import org.husky.common.utils.time.DateTimes;
 import org.husky.common.utils.time.Hl7Dtm;
+import org.husky.emed.cda.utils.CdaR2Utils;
 import org.husky.emed.enums.PharmaceuticalAdviceStatus;
 import org.husky.emed.errors.InvalidEmedContentException;
 import org.husky.emed.models.common.AuthorDigest;
@@ -295,7 +296,7 @@ public class CcePadvEntryDigester {
 				// .filter(substanceAdministration -> hasAllIds(REFERENCE_TO_MTP,
 				// substanceAdministration.getTemplateId()))
                 .findAny()
-                .map(EmedReference::new);
+                .map(CdaR2Utils::toEmedReference);
     }
 
     /**
@@ -312,7 +313,7 @@ public class CcePadvEntryDigester {
 				// .filter(substanceAdministration -> hasAllIds(REFERENCE_TO_PRE,
 				// substanceAdministration.getTemplateId()))
                 .findAny()
-                .map(EmedReference::new);
+                .map(CdaR2Utils::toEmedReference);
     }
 
     /**
@@ -328,7 +329,7 @@ public class CcePadvEntryDigester {
                 .filter(Objects::nonNull)
 				// .filter(su -> hasAllIds(REFERENCE_TO_DIS, su.getTemplateId()))
                 .findAny()
-                .map(EmedReference::new);
+                .map(CdaR2Utils::toEmedReference);
     }
 
     /**

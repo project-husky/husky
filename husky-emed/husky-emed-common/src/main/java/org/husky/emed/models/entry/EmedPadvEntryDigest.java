@@ -12,8 +12,8 @@ package org.husky.emed.models.entry;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.enums.EmedEntryType;
 import org.husky.emed.enums.PharmaceuticalAdviceStatus;
-import org.husky.emed.cda.models.common.AuthorDigest;
-import org.husky.emed.cda.models.common.EmedReference;
+import org.husky.emed.models.common.AuthorDigest;
+import org.husky.emed.models.common.EmedReference;
 
 import java.time.Instant;
 import java.util.Objects;

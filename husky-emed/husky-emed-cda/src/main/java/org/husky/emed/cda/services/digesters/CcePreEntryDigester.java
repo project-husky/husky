@@ -16,6 +16,7 @@ import java.util.Optional;
 
 import org.husky.common.hl7cdar2.*;
 import org.husky.common.utils.StreamUtils;
+import org.husky.emed.cda.utils.CdaR2Utils;
 import org.husky.emed.errors.InvalidEmedContentException;
 import org.husky.emed.models.common.AuthorDigest;
 import org.husky.emed.models.common.EmedReference;
@@ -168,7 +169,7 @@ public class CcePreEntryDigester {
                 .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.REFR)
                 .findAny()
                 .map(POCDMT000040EntryRelationship::getSubstanceAdministration)
-                .map(EmedReference::new);
+                .map(CdaR2Utils::toEmedReference);
     }
 
     /**

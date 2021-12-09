@@ -29,7 +29,7 @@ import org.husky.emed.cda.utils.CdaR2Utils;
  * Status: draft
  */
 @XmlRootElement(name = "ClinicalDocument", namespace = "urn:hl7-org:v3")
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-11-24")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
 public class MedicationPrescriptionDocument extends POCDMT000040ClinicalDocument {
 
     public MedicationPrescriptionDocument() {

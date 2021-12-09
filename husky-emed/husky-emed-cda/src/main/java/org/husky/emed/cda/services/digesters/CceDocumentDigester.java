@@ -11,13 +11,13 @@ package org.husky.emed.cda.services.digesters;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.dataflow.qual.SideEffectFree;
+import org.husky.common.ch.enums.ConfidentialityCode;
 import org.husky.common.hl7cdar2.*;
 import org.husky.common.utils.StreamUtils;
 import org.husky.common.utils.datatypes.Uuids;
 import org.husky.emed.ch.ChEmedSpec;
 import org.husky.emed.enums.EmedDocumentType;
 import org.husky.emed.errors.InvalidEmedContentException;
-import org.husky.emed.cda.generated.artdecor.enums.DocumentEntryConfidentialityCode;
 import org.husky.emed.models.common.AuthorDigest;
 import org.husky.emed.models.common.OrganizationDigest;
 import org.husky.emed.models.common.PatientDigest;
@@ -88,7 +88,7 @@ public class CceDocumentDigester {
                 .map(Hl7Dtm::toOffsetDateTime)
                 .orElseThrow(() -> new InvalidEmedContentException("The document effective time is missing"));
         final var confidentialityCode = Optional.ofNullable(cce.getConfidentialityCode())
-                .map(CD::getCode).map(DocumentEntryConfidentialityCode::getEnum)
+                .map(CD::getCode).map(ConfidentialityCode::getEnum)
                 .orElseThrow(() -> new InvalidEmedContentException("The confidentiality code is missing"));
         final var languageCode = Optional.ofNullable(cce.getLanguageCode()).map(CD::getCode)
                 .orElseThrow(() -> new InvalidEmedContentException("The language code is missing"));
