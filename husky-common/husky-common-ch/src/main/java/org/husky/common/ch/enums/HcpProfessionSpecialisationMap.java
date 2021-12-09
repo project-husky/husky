@@ -1,20 +1,19 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
- * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  */
 package org.husky.common.ch.enums;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.Objects;
 import javax.annotation.processing.Generated;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.enums.CodeSystems;
 import org.husky.common.enums.LanguageCode;
 import org.husky.common.enums.ValueSetEnumInterface;
@@ -32,11 +31,11 @@ import org.husky.common.enums.ValueSetEnumInterface;
  * Version: 202004.1-stable<br>
  * Status: FINAL
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-08-26")
+@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-12-09")
 public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
 
     /**
-     * EN: Allergology and clinical immunology<br>
+     * EN: Allergology and clinical immunology.<br>
      */
     ALLERGOLOGY_AND_CLINICAL_IMMUNOLOGY_L1("1019",
                                            "2.16.756.5.30.1.127.3.5",
@@ -46,7 +45,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                                            "TOTRANSLATE",
                                            "TOTRANSLATE"),
     /**
-     * EN: Anaesthesiology<br>
+     * EN: Anaesthesiology.<br>
      */
     ANAESTHESIOLOGY_L1("1012",
                        "2.16.756.5.30.1.127.3.5",
@@ -56,7 +55,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                        "TOTRANSLATE",
                        "TOTRANSLATE"),
     /**
-     * EN: Angiology<br>
+     * EN: Angiology.<br>
      */
     ANGIOLOGY_L1("1041",
                  "2.16.756.5.30.1.127.3.5",
@@ -66,7 +65,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                  "TOTRANSLATE",
                  "TOTRANSLATE"),
     /**
-     * EN: Cardiac and thoracic vascular surgery<br>
+     * EN: Cardiac and thoracic vascular surgery.<br>
      */
     CARDIAC_AND_THORACIC_VASCULAR_SURGERY_L1("1004",
                                              "2.16.756.5.30.1.127.3.5",
@@ -76,7 +75,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                                              "TOTRANSLATE",
                                              "TOTRANSLATE"),
     /**
-     * EN: Cardiology<br>
+     * EN: Cardiology.<br>
      */
     CARDIOLOGY_L1("1025",
                   "2.16.756.5.30.1.127.3.5",
@@ -86,7 +85,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                   "TOTRANSLATE",
                   "TOTRANSLATE"),
     /**
-     * EN: Child and adolescent psychiatry and psychotherapy<br>
+     * EN: Child and adolescent psychiatry and psychotherapy.<br>
      */
     CHILD_AND_ADOLESCENT_PSYCHIATRY_AND_PSYCHOTHERAPY_L1("1027",
                                                          "2.16.756.5.30.1.127.3.5",
@@ -96,7 +95,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                                                          "TOTRANSLATE",
                                                          "TOTRANSLATE"),
     /**
-     * EN: Child and adolescent psychology<br>
+     * EN: Child and adolescent psychology.<br>
      */
     CHILD_AND_ADOLESCENT_PSYCHOLOGY_L1("1055",
                                        "2.16.756.5.30.1.127.3.5",
@@ -106,7 +105,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                                        "TOTRANSLATE",
                                        "TOTRANSLATE"),
     /**
-     * EN: Chiropractic specialist<br>
+     * EN: Chiropractic specialist.<br>
      */
     CHIROPRACTIC_SPECIALIST_L1("1011",
                                "2.16.756.5.30.1.127.3.5",
@@ -116,7 +115,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                                "TOTRANSLATE",
                                "TOTRANSLATE"),
     /**
-     * EN: Chiropractor (occupation)<br>
+     * EN: Chiropractor (occupation).<br>
      */
     CHIROPRACTOR_OCCUPATION("3842006",
                             "2.16.840.1.113883.6.96",
@@ -126,7 +125,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                             "TOTRANSLATE",
                             "TOTRANSLATE"),
     /**
-     * EN: Clinical pharmacology and toxicology<br>
+     * EN: Clinical pharmacology and toxicology.<br>
      */
     CLINICAL_PHARMACOLOGY_AND_TOXICOLOGY_L1("1029",
                                             "2.16.756.5.30.1.127.3.5",
@@ -136,7 +135,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                                             "TOTRANSLATE",
                                             "TOTRANSLATE"),
     /**
-     * EN: Clinical psychology<br>
+     * EN: Clinical psychology.<br>
      */
     CLINICAL_PSYCHOLOGY_L1("1056",
                            "2.16.756.5.30.1.127.3.5",
@@ -146,7 +145,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                            "TOTRANSLATE",
                            "TOTRANSLATE"),
     /**
-     * EN: Community pharmacy<br>
+     * EN: Community pharmacy.<br>
      */
     COMMUNITY_PHARMACY_L1("1052",
                           "2.16.756.5.30.1.127.3.5",
@@ -156,7 +155,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                           "TOTRANSLATE",
                           "TOTRANSLATE"),
     /**
-     * EN: Dentist (occupation)<br>
+     * EN: Dentist (occupation).<br>
      */
     DENTIST_OCCUPATION("106289002",
                        "2.16.840.1.113883.6.96",
@@ -166,7 +165,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                        "TOTRANSLATE",
                        "TOTRANSLATE"),
     /**
-     * EN: Dermatology and venereology<br>
+     * EN: Dermatology and venereology.<br>
      */
     DERMATOLOGY_AND_VENEREOLOGY_L1("1021",
                                    "2.16.756.5.30.1.127.3.5",
@@ -176,7 +175,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                                    "TOTRANSLATE",
                                    "TOTRANSLATE"),
     /**
-     * EN: Endocrinology – Diabetology<br>
+     * EN: Endocrinology – Diabetology.<br>
      */
     ENDOCRINOLOGY_DIABETOLOGY_L1("1022",
                                  "2.16.756.5.30.1.127.3.5",
@@ -186,7 +185,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                                  "TOTRANSLATE",
                                  "TOTRANSLATE"),
     /**
-     * EN: Forensic medicine<br>
+     * EN: Forensic medicine.<br>
      */
     FORENSIC_MEDICINE_L1("1046",
                          "2.16.756.5.30.1.127.3.5",
@@ -196,7 +195,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                          "TOTRANSLATE",
                          "TOTRANSLATE"),
     /**
-     * EN: Gastroenterology<br>
+     * EN: Gastroenterology.<br>
      */
     GASTROENTEROLOGY_L1("1023",
                         "2.16.756.5.30.1.127.3.5",
@@ -206,7 +205,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                         "TOTRANSLATE",
                         "TOTRANSLATE"),
     /**
-     * EN: General internal medicine<br>
+     * EN: General internal medicine.<br>
      */
     GENERAL_INTERNAL_MEDICINE_L1("1051",
                                  "2.16.756.5.30.1.127.3.5",
@@ -216,7 +215,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                                  "TOTRANSLATE",
                                  "TOTRANSLATE"),
     /**
-     * EN: General medical practitioner<br>
+     * EN: General medical practitioner.<br>
      */
     GENERAL_MEDICAL_PRACTITIONER_L1("1040",
                                     "2.16.756.5.30.1.127.3.5",
@@ -226,7 +225,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                                     "TOTRANSLATE",
                                     "TOTRANSLATE"),
     /**
-     * EN: Gynaecology and obstetrics<br>
+     * EN: Gynaecology and obstetrics.<br>
      */
     GYNAECOLOGY_AND_OBSTETRICS_L1("1003",
                                   "2.16.756.5.30.1.127.3.5",
@@ -236,7 +235,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                                   "TOTRANSLATE",
                                   "TOTRANSLATE"),
     /**
-     * EN: Haematology<br>
+     * EN: Haematology.<br>
      */
     HAEMATOLOGY_L1("1024",
                    "2.16.756.5.30.1.127.3.5",
@@ -246,7 +245,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                    "TOTRANSLATE",
                    "TOTRANSLATE"),
     /**
-     * EN: Hand surgery<br>
+     * EN: Hand surgery.<br>
      */
     HAND_SURGERY_L1("1059",
                     "2.16.756.5.30.1.127.3.5",
@@ -256,7 +255,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                     "TOTRANSLATE",
                     "TOTRANSLATE"),
     /**
-     * EN: Health psychology<br>
+     * EN: Health psychology.<br>
      */
     HEALTH_PSYCHOLOGY_L1("1058",
                          "2.16.756.5.30.1.127.3.5",
@@ -266,7 +265,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                          "TOTRANSLATE",
                          "TOTRANSLATE"),
     /**
-     * EN: Hospital pharmacy<br>
+     * EN: Hospital pharmacy.<br>
      */
     HOSPITAL_PHARMACY_L1("1053",
                          "2.16.756.5.30.1.127.3.5",
@@ -276,7 +275,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                          "TOTRANSLATE",
                          "TOTRANSLATE"),
     /**
-     * EN: Infectology<br>
+     * EN: Infectology.<br>
      */
     INFECTOLOGY_L1("1039",
                    "2.16.756.5.30.1.127.3.5",
@@ -286,7 +285,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                    "TOTRANSLATE",
                    "TOTRANSLATE"),
     /**
-     * EN: Intensive care medicine<br>
+     * EN: Intensive care medicine.<br>
      */
     INTENSIVE_CARE_MEDICINE_L1("1042",
                                "2.16.756.5.30.1.127.3.5",
@@ -296,7 +295,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                                "TOTRANSLATE",
                                "TOTRANSLATE"),
     /**
-     * EN: Medical genetics<br>
+     * EN: Medical genetics.<br>
      */
     MEDICAL_GENETICS_L1("1043",
                         "2.16.756.5.30.1.127.3.5",
@@ -306,7 +305,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                         "TOTRANSLATE",
                         "TOTRANSLATE"),
     /**
-     * EN: Medical oncology<br>
+     * EN: Medical oncology.<br>
      */
     MEDICAL_ONCOLOGY_L1("1044",
                         "2.16.756.5.30.1.127.3.5",
@@ -316,7 +315,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                         "TOTRANSLATE",
                         "TOTRANSLATE"),
     /**
-     * EN: Nephrology<br>
+     * EN: Nephrology.<br>
      */
     NEPHROLOGY_L1("1033",
                   "2.16.756.5.30.1.127.3.5",
@@ -326,7 +325,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                   "TOTRANSLATE",
                   "TOTRANSLATE"),
     /**
-     * EN: Neurology<br>
+     * EN: Neurology.<br>
      */
     NEUROLOGY_L1("1014",
                  "2.16.756.5.30.1.127.3.5",
@@ -336,7 +335,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                  "TOTRANSLATE",
                  "TOTRANSLATE"),
     /**
-     * EN: Neuropsychology<br>
+     * EN: Neuropsychology.<br>
      */
     NEUROPSYCHOLOGY_L1("1057",
                        "2.16.756.5.30.1.127.3.5",
@@ -346,7 +345,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                        "TOTRANSLATE",
                        "TOTRANSLATE"),
     /**
-     * EN: Neurosurgery<br>
+     * EN: Neurosurgery.<br>
      */
     NEUROSURGERY_L1("1013",
                     "2.16.756.5.30.1.127.3.5",
@@ -356,7 +355,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                     "TOTRANSLATE",
                     "TOTRANSLATE"),
     /**
-     * EN: Nuclear medicine<br>
+     * EN: Nuclear medicine.<br>
      */
     NUCLEAR_MEDICINE_L1("1031",
                         "2.16.756.5.30.1.127.3.5",
@@ -366,7 +365,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                         "TOTRANSLATE",
                         "TOTRANSLATE"),
     /**
-     * EN: Occupational medicine<br>
+     * EN: Occupational medicine.<br>
      */
     OCCUPATIONAL_MEDICINE_L1("1020",
                              "2.16.756.5.30.1.127.3.5",
@@ -376,7 +375,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                              "TOTRANSLATE",
                              "TOTRANSLATE"),
     /**
-     * EN: Ophthalmology<br>
+     * EN: Ophthalmology.<br>
      */
     OPHTHALMOLOGY_L1("1007",
                      "2.16.756.5.30.1.127.3.5",
@@ -386,7 +385,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                      "TOTRANSLATE",
                      "TOTRANSLATE"),
     /**
-     * EN: Oral and maxillofacial surgery<br>
+     * EN: Oral and maxillofacial surgery.<br>
      */
     ORAL_AND_MAXILLOFACIAL_SURGERY_L1("1026",
                                       "2.16.756.5.30.1.127.3.5",
@@ -396,7 +395,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                                       "TOTRANSLATE",
                                       "TOTRANSLATE"),
     /**
-     * EN: Oral surgery<br>
+     * EN: Oral surgery.<br>
      */
     ORAL_SURGERY_L1("1047",
                     "2.16.756.5.30.1.127.3.5",
@@ -406,7 +405,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                     "TOTRANSLATE",
                     "TOTRANSLATE"),
     /**
-     * EN: Orthodontics<br>
+     * EN: Orthodontics.<br>
      */
     ORTHODONTICS_L1("1010",
                     "2.16.756.5.30.1.127.3.5",
@@ -416,7 +415,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                     "TOTRANSLATE",
                     "TOTRANSLATE"),
     /**
-     * EN: Orthopaedic surgery and traumatology of the locomotor apparatus<br>
+     * EN: Orthopaedic surgery and traumatology of the locomotor apparatus.<br>
      */
     ORTHOPAEDIC_SURGERY_AND_TRAUMATOLOGY_OF_THE_LOCOMOTOR_APPARATUS_L1("1015",
                                                                        "2.16.756.5.30.1.127.3.5",
@@ -426,7 +425,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                                                                        "TOTRANSLATE",
                                                                        "TOTRANSLATE"),
     /**
-     * EN: Otorhinolaryngology<br>
+     * EN: Otorhinolaryngology.<br>
      */
     OTORHINOLARYNGOLOGY_L1("1008",
                            "2.16.756.5.30.1.127.3.5",
@@ -436,7 +435,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                            "TOTRANSLATE",
                            "TOTRANSLATE"),
     /**
-     * EN: Paediatrics<br>
+     * EN: Paediatrics.<br>
      */
     PAEDIATRICS_L1("1006",
                    "2.16.756.5.30.1.127.3.5",
@@ -446,7 +445,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                    "TOTRANSLATE",
                    "TOTRANSLATE"),
     /**
-     * EN: Paediatric surgery<br>
+     * EN: Paediatric surgery.<br>
      */
     PAEDIATRIC_SURGERY_L1("1028",
                           "2.16.756.5.30.1.127.3.5",
@@ -456,7 +455,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                           "TOTRANSLATE",
                           "TOTRANSLATE"),
     /**
-     * EN: Paradontology<br>
+     * EN: Paradontology.<br>
      */
     PARADONTOLOGY_L1("1048",
                      "2.16.756.5.30.1.127.3.5",
@@ -466,7 +465,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                      "TOTRANSLATE",
                      "TOTRANSLATE"),
     /**
-     * EN: Pathology<br>
+     * EN: Pathology.<br>
      */
     PATHOLOGY_L1("1009",
                  "2.16.756.5.30.1.127.3.5",
@@ -476,7 +475,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                  "TOTRANSLATE",
                  "TOTRANSLATE"),
     /**
-     * EN: Pharmaceutical medicine<br>
+     * EN: Pharmaceutical medicine.<br>
      */
     PHARMACEUTICAL_MEDICINE_L1("1045",
                                "2.16.756.5.30.1.127.3.5",
@@ -486,7 +485,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                                "TOTRANSLATE",
                                "TOTRANSLATE"),
     /**
-     * EN: Pharmacist (occupation)<br>
+     * EN: Pharmacist (occupation).<br>
      */
     PHARMACIST_OCCUPATION("46255001",
                           "2.16.840.1.113883.6.96",
@@ -496,7 +495,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                           "TOTRANSLATE",
                           "TOTRANSLATE"),
     /**
-     * EN: Physical medicine and rehabilitation<br>
+     * EN: Physical medicine and rehabilitation.<br>
      */
     PHYSICAL_MEDICINE_AND_REHABILITATION_L1("1034",
                                             "2.16.756.5.30.1.127.3.5",
@@ -506,7 +505,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                                             "TOTRANSLATE",
                                             "TOTRANSLATE"),
     /**
-     * EN: Physician (occupation)<br>
+     * EN: Physician (occupation).<br>
      */
     PHYSICIAN_OCCUPATION("309343006",
                          "2.16.840.1.113883.6.96",
@@ -516,7 +515,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                          "TOTRANSLATE",
                          "TOTRANSLATE"),
     /**
-     * EN: Plastic, reconstructive and aesthetic surgery<br>
+     * EN: Plastic, reconstructive and aesthetic surgery.<br>
      */
     PLASTIC_RECONSTRUCTIVE_AND_AESTHETIC_SURGERY_L1("1035",
                                                     "2.16.756.5.30.1.127.3.5",
@@ -526,7 +525,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                                                     "TOTRANSLATE",
                                                     "TOTRANSLATE"),
     /**
-     * EN: Pneumology<br>
+     * EN: Pneumology.<br>
      */
     PNEUMOLOGY_L1("1016",
                   "2.16.756.5.30.1.127.3.5",
@@ -536,7 +535,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                   "TOTRANSLATE",
                   "TOTRANSLATE"),
     /**
-     * EN: Prevention and public health<br>
+     * EN: Prevention and public health.<br>
      */
     PREVENTION_AND_PUBLIC_HEALTH_L1("1036",
                                     "2.16.756.5.30.1.127.3.5",
@@ -546,7 +545,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                                     "TOTRANSLATE",
                                     "TOTRANSLATE"),
     /**
-     * EN: Psychiatry and psychotherapy<br>
+     * EN: Psychiatry and psychotherapy.<br>
      */
     PSYCHIATRY_AND_PSYCHOTHERAPY_L1("1017",
                                     "2.16.756.5.30.1.127.3.5",
@@ -556,7 +555,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                                     "TOTRANSLATE",
                                     "TOTRANSLATE"),
     /**
-     * EN: Psychologist (occupation)<br>
+     * EN: Psychologist (occupation).<br>
      */
     PSYCHOLOGIST_OCCUPATION("59944000",
                             "2.16.840.1.113883.6.96",
@@ -566,7 +565,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                             "TOTRANSLATE",
                             "TOTRANSLATE"),
     /**
-     * EN: Psychotherapy<br>
+     * EN: Psychotherapy.<br>
      */
     PSYCHOTHERAPY_L1("1054",
                      "2.16.756.5.30.1.127.3.5",
@@ -576,7 +575,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                      "TOTRANSLATE",
                      "TOTRANSLATE"),
     /**
-     * EN: Radiology<br>
+     * EN: Radiology.<br>
      */
     RADIOLOGY_L1("1030",
                  "2.16.756.5.30.1.127.3.5",
@@ -586,7 +585,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                  "TOTRANSLATE",
                  "TOTRANSLATE"),
     /**
-     * EN: Radio-oncology / radiotherapy<br>
+     * EN: Radio-oncology / radiotherapy.<br>
      */
     RADIO_ONCOLOGY_RADIOTHERAPY_L1("1032",
                                    "2.16.756.5.30.1.127.3.5",
@@ -596,7 +595,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                                    "TOTRANSLATE",
                                    "TOTRANSLATE"),
     /**
-     * EN: Reconstructive dentistry<br>
+     * EN: Reconstructive dentistry.<br>
      */
     RECONSTRUCTIVE_DENTISTRY_L1("1049",
                                 "2.16.756.5.30.1.127.3.5",
@@ -606,7 +605,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                                 "TOTRANSLATE",
                                 "TOTRANSLATE"),
     /**
-     * EN: Rheumatology<br>
+     * EN: Rheumatology.<br>
      */
     RHEUMATOLOGY_L1("1037",
                     "2.16.756.5.30.1.127.3.5",
@@ -616,7 +615,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                     "TOTRANSLATE",
                     "TOTRANSLATE"),
     /**
-     * EN: Surgery<br>
+     * EN: Surgery.<br>
      */
     SURGERY_L1("1002",
                "2.16.756.5.30.1.127.3.5",
@@ -626,7 +625,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                "TOTRANSLATE",
                "TOTRANSLATE"),
     /**
-     * EN: Thoracic surgery<br>
+     * EN: Thoracic surgery.<br>
      */
     THORACIC_SURGERY_L1("1061",
                         "2.16.756.5.30.1.127.3.5",
@@ -636,7 +635,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                         "TOTRANSLATE",
                         "TOTRANSLATE"),
     /**
-     * EN: Tropical and travel medicine<br>
+     * EN: Tropical and travel medicine.<br>
      */
     TROPICAL_AND_TRAVEL_MEDICINE_L1("1038",
                                     "2.16.756.5.30.1.127.3.5",
@@ -646,7 +645,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                                     "TOTRANSLATE",
                                     "TOTRANSLATE"),
     /**
-     * EN: Urology<br>
+     * EN: Urology.<br>
      */
     UROLOGY_L1("1018",
                "2.16.756.5.30.1.127.3.5",
@@ -656,7 +655,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                "TOTRANSLATE",
                "TOTRANSLATE"),
     /**
-     * EN: Vascular surgery<br>
+     * EN: Vascular surgery.<br>
      */
     VASCULAR_SURGERY_L1("1060",
                         "2.16.756.5.30.1.127.3.5",
@@ -667,317 +666,317 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
                         "TOTRANSLATE");
 
     /**
-     * EN: Code for Allergology and clinical immunology<br>
+     * EN: Code for Allergology and clinical immunology.<br>
      */
     public static final String ALLERGOLOGY_AND_CLINICAL_IMMUNOLOGY_L1_CODE = "1019";
 
     /**
-     * EN: Code for Anaesthesiology<br>
+     * EN: Code for Anaesthesiology.<br>
      */
     public static final String ANAESTHESIOLOGY_L1_CODE = "1012";
 
     /**
-     * EN: Code for Angiology<br>
+     * EN: Code for Angiology.<br>
      */
     public static final String ANGIOLOGY_L1_CODE = "1041";
 
     /**
-     * EN: Code for Cardiac and thoracic vascular surgery<br>
+     * EN: Code for Cardiac and thoracic vascular surgery.<br>
      */
     public static final String CARDIAC_AND_THORACIC_VASCULAR_SURGERY_L1_CODE = "1004";
 
     /**
-     * EN: Code for Cardiology<br>
+     * EN: Code for Cardiology.<br>
      */
     public static final String CARDIOLOGY_L1_CODE = "1025";
 
     /**
-     * EN: Code for Child and adolescent psychiatry and psychotherapy<br>
+     * EN: Code for Child and adolescent psychiatry and psychotherapy.<br>
      */
     public static final String CHILD_AND_ADOLESCENT_PSYCHIATRY_AND_PSYCHOTHERAPY_L1_CODE = "1027";
 
     /**
-     * EN: Code for Child and adolescent psychology<br>
+     * EN: Code for Child and adolescent psychology.<br>
      */
     public static final String CHILD_AND_ADOLESCENT_PSYCHOLOGY_L1_CODE = "1055";
 
     /**
-     * EN: Code for Chiropractic specialist<br>
+     * EN: Code for Chiropractic specialist.<br>
      */
     public static final String CHIROPRACTIC_SPECIALIST_L1_CODE = "1011";
 
     /**
-     * EN: Code for Chiropractor (occupation)<br>
+     * EN: Code for Chiropractor (occupation).<br>
      */
     public static final String CHIROPRACTOR_OCCUPATION_CODE = "3842006";
 
     /**
-     * EN: Code for Clinical pharmacology and toxicology<br>
+     * EN: Code for Clinical pharmacology and toxicology.<br>
      */
     public static final String CLINICAL_PHARMACOLOGY_AND_TOXICOLOGY_L1_CODE = "1029";
 
     /**
-     * EN: Code for Clinical psychology<br>
+     * EN: Code for Clinical psychology.<br>
      */
     public static final String CLINICAL_PSYCHOLOGY_L1_CODE = "1056";
 
     /**
-     * EN: Code for Community pharmacy<br>
+     * EN: Code for Community pharmacy.<br>
      */
     public static final String COMMUNITY_PHARMACY_L1_CODE = "1052";
 
     /**
-     * EN: Code for Dentist (occupation)<br>
+     * EN: Code for Dentist (occupation).<br>
      */
     public static final String DENTIST_OCCUPATION_CODE = "106289002";
 
     /**
-     * EN: Code for Dermatology and venereology<br>
+     * EN: Code for Dermatology and venereology.<br>
      */
     public static final String DERMATOLOGY_AND_VENEREOLOGY_L1_CODE = "1021";
 
     /**
-     * EN: Code for Endocrinology – Diabetology<br>
+     * EN: Code for Endocrinology – Diabetology.<br>
      */
     public static final String ENDOCRINOLOGY_DIABETOLOGY_L1_CODE = "1022";
 
     /**
-     * EN: Code for Forensic medicine<br>
+     * EN: Code for Forensic medicine.<br>
      */
     public static final String FORENSIC_MEDICINE_L1_CODE = "1046";
 
     /**
-     * EN: Code for Gastroenterology<br>
+     * EN: Code for Gastroenterology.<br>
      */
     public static final String GASTROENTEROLOGY_L1_CODE = "1023";
 
     /**
-     * EN: Code for General internal medicine<br>
+     * EN: Code for General internal medicine.<br>
      */
     public static final String GENERAL_INTERNAL_MEDICINE_L1_CODE = "1051";
 
     /**
-     * EN: Code for General medical practitioner<br>
+     * EN: Code for General medical practitioner.<br>
      */
     public static final String GENERAL_MEDICAL_PRACTITIONER_L1_CODE = "1040";
 
     /**
-     * EN: Code for Gynaecology and obstetrics<br>
+     * EN: Code for Gynaecology and obstetrics.<br>
      */
     public static final String GYNAECOLOGY_AND_OBSTETRICS_L1_CODE = "1003";
 
     /**
-     * EN: Code for Haematology<br>
+     * EN: Code for Haematology.<br>
      */
     public static final String HAEMATOLOGY_L1_CODE = "1024";
 
     /**
-     * EN: Code for Hand surgery<br>
+     * EN: Code for Hand surgery.<br>
      */
     public static final String HAND_SURGERY_L1_CODE = "1059";
 
     /**
-     * EN: Code for Health psychology<br>
+     * EN: Code for Health psychology.<br>
      */
     public static final String HEALTH_PSYCHOLOGY_L1_CODE = "1058";
 
     /**
-     * EN: Code for Hospital pharmacy<br>
+     * EN: Code for Hospital pharmacy.<br>
      */
     public static final String HOSPITAL_PHARMACY_L1_CODE = "1053";
 
     /**
-     * EN: Code for Infectology<br>
+     * EN: Code for Infectology.<br>
      */
     public static final String INFECTOLOGY_L1_CODE = "1039";
 
     /**
-     * EN: Code for Intensive care medicine<br>
+     * EN: Code for Intensive care medicine.<br>
      */
     public static final String INTENSIVE_CARE_MEDICINE_L1_CODE = "1042";
 
     /**
-     * EN: Code for Medical genetics<br>
+     * EN: Code for Medical genetics.<br>
      */
     public static final String MEDICAL_GENETICS_L1_CODE = "1043";
 
     /**
-     * EN: Code for Medical oncology<br>
+     * EN: Code for Medical oncology.<br>
      */
     public static final String MEDICAL_ONCOLOGY_L1_CODE = "1044";
 
     /**
-     * EN: Code for Nephrology<br>
+     * EN: Code for Nephrology.<br>
      */
     public static final String NEPHROLOGY_L1_CODE = "1033";
 
     /**
-     * EN: Code for Neurology<br>
+     * EN: Code for Neurology.<br>
      */
     public static final String NEUROLOGY_L1_CODE = "1014";
 
     /**
-     * EN: Code for Neuropsychology<br>
+     * EN: Code for Neuropsychology.<br>
      */
     public static final String NEUROPSYCHOLOGY_L1_CODE = "1057";
 
     /**
-     * EN: Code for Neurosurgery<br>
+     * EN: Code for Neurosurgery.<br>
      */
     public static final String NEUROSURGERY_L1_CODE = "1013";
 
     /**
-     * EN: Code for Nuclear medicine<br>
+     * EN: Code for Nuclear medicine.<br>
      */
     public static final String NUCLEAR_MEDICINE_L1_CODE = "1031";
 
     /**
-     * EN: Code for Occupational medicine<br>
+     * EN: Code for Occupational medicine.<br>
      */
     public static final String OCCUPATIONAL_MEDICINE_L1_CODE = "1020";
 
     /**
-     * EN: Code for Ophthalmology<br>
+     * EN: Code for Ophthalmology.<br>
      */
     public static final String OPHTHALMOLOGY_L1_CODE = "1007";
 
     /**
-     * EN: Code for Oral and maxillofacial surgery<br>
+     * EN: Code for Oral and maxillofacial surgery.<br>
      */
     public static final String ORAL_AND_MAXILLOFACIAL_SURGERY_L1_CODE = "1026";
 
     /**
-     * EN: Code for Oral surgery<br>
+     * EN: Code for Oral surgery.<br>
      */
     public static final String ORAL_SURGERY_L1_CODE = "1047";
 
     /**
-     * EN: Code for Orthodontics<br>
+     * EN: Code for Orthodontics.<br>
      */
     public static final String ORTHODONTICS_L1_CODE = "1010";
 
     /**
-     * EN: Code for Orthopaedic surgery and traumatology of the locomotor apparatus<br>
+     * EN: Code for Orthopaedic surgery and traumatology of the locomotor apparatus.<br>
      */
     public static final String ORTHOPAEDIC_SURGERY_AND_TRAUMATOLOGY_OF_THE_LOCOMOTOR_APPARATUS_L1_CODE = "1015";
 
     /**
-     * EN: Code for Otorhinolaryngology<br>
+     * EN: Code for Otorhinolaryngology.<br>
      */
     public static final String OTORHINOLARYNGOLOGY_L1_CODE = "1008";
 
     /**
-     * EN: Code for Paediatrics<br>
+     * EN: Code for Paediatrics.<br>
      */
     public static final String PAEDIATRICS_L1_CODE = "1006";
 
     /**
-     * EN: Code for Paediatric surgery<br>
+     * EN: Code for Paediatric surgery.<br>
      */
     public static final String PAEDIATRIC_SURGERY_L1_CODE = "1028";
 
     /**
-     * EN: Code for Paradontology<br>
+     * EN: Code for Paradontology.<br>
      */
     public static final String PARADONTOLOGY_L1_CODE = "1048";
 
     /**
-     * EN: Code for Pathology<br>
+     * EN: Code for Pathology.<br>
      */
     public static final String PATHOLOGY_L1_CODE = "1009";
 
     /**
-     * EN: Code for Pharmaceutical medicine<br>
+     * EN: Code for Pharmaceutical medicine.<br>
      */
     public static final String PHARMACEUTICAL_MEDICINE_L1_CODE = "1045";
 
     /**
-     * EN: Code for Pharmacist (occupation)<br>
+     * EN: Code for Pharmacist (occupation).<br>
      */
     public static final String PHARMACIST_OCCUPATION_CODE = "46255001";
 
     /**
-     * EN: Code for Physical medicine and rehabilitation<br>
+     * EN: Code for Physical medicine and rehabilitation.<br>
      */
     public static final String PHYSICAL_MEDICINE_AND_REHABILITATION_L1_CODE = "1034";
 
     /**
-     * EN: Code for Physician (occupation)<br>
+     * EN: Code for Physician (occupation).<br>
      */
     public static final String PHYSICIAN_OCCUPATION_CODE = "309343006";
 
     /**
-     * EN: Code for Plastic, reconstructive and aesthetic surgery<br>
+     * EN: Code for Plastic, reconstructive and aesthetic surgery.<br>
      */
     public static final String PLASTIC_RECONSTRUCTIVE_AND_AESTHETIC_SURGERY_L1_CODE = "1035";
 
     /**
-     * EN: Code for Pneumology<br>
+     * EN: Code for Pneumology.<br>
      */
     public static final String PNEUMOLOGY_L1_CODE = "1016";
 
     /**
-     * EN: Code for Prevention and public health<br>
+     * EN: Code for Prevention and public health.<br>
      */
     public static final String PREVENTION_AND_PUBLIC_HEALTH_L1_CODE = "1036";
 
     /**
-     * EN: Code for Psychiatry and psychotherapy<br>
+     * EN: Code for Psychiatry and psychotherapy.<br>
      */
     public static final String PSYCHIATRY_AND_PSYCHOTHERAPY_L1_CODE = "1017";
 
     /**
-     * EN: Code for Psychologist (occupation)<br>
+     * EN: Code for Psychologist (occupation).<br>
      */
     public static final String PSYCHOLOGIST_OCCUPATION_CODE = "59944000";
 
     /**
-     * EN: Code for Psychotherapy<br>
+     * EN: Code for Psychotherapy.<br>
      */
     public static final String PSYCHOTHERAPY_L1_CODE = "1054";
 
     /**
-     * EN: Code for Radiology<br>
+     * EN: Code for Radiology.<br>
      */
     public static final String RADIOLOGY_L1_CODE = "1030";
 
     /**
-     * EN: Code for Radio-oncology / radiotherapy<br>
+     * EN: Code for Radio-oncology / radiotherapy.<br>
      */
     public static final String RADIO_ONCOLOGY_RADIOTHERAPY_L1_CODE = "1032";
 
     /**
-     * EN: Code for Reconstructive dentistry<br>
+     * EN: Code for Reconstructive dentistry.<br>
      */
     public static final String RECONSTRUCTIVE_DENTISTRY_L1_CODE = "1049";
 
     /**
-     * EN: Code for Rheumatology<br>
+     * EN: Code for Rheumatology.<br>
      */
     public static final String RHEUMATOLOGY_L1_CODE = "1037";
 
     /**
-     * EN: Code for Surgery<br>
+     * EN: Code for Surgery.<br>
      */
     public static final String SURGERY_L1_CODE = "1002";
 
     /**
-     * EN: Code for Thoracic surgery<br>
+     * EN: Code for Thoracic surgery.<br>
      */
     public static final String THORACIC_SURGERY_L1_CODE = "1061";
 
     /**
-     * EN: Code for Tropical and travel medicine<br>
+     * EN: Code for Tropical and travel medicine.<br>
      */
     public static final String TROPICAL_AND_TRAVEL_MEDICINE_L1_CODE = "1038";
 
     /**
-     * EN: Code for Urology<br>
+     * EN: Code for Urology.<br>
      */
     public static final String UROLOGY_L1_CODE = "1018";
 
     /**
-     * EN: Code for Vascular surgery<br>
+     * EN: Code for Vascular surgery.<br>
      */
     public static final String VASCULAR_SURGERY_L1_CODE = "1060";
 
@@ -992,12 +991,18 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
     public static final String VALUE_SET_NAME = "HCProfessional.hcProfessionSpecialisationMap";
 
     /**
+     * Identifier of the code system (all values share the same).
+     */
+    public static final String CODE_SYSTEM_ID = "2.16.840.1.113883.6.96";
+
+    /**
      * Gets the Enum with a given code.
      *
      * @param code The code value.
      * @return the enum value found or {@code null}.
      */
-    public static HcpProfessionSpecialisationMap getEnum(final String code) {
+    @Nullable
+    public static HcpProfessionSpecialisationMap getEnum(@Nullable final String code) {
         for (final HcpProfessionSpecialisationMap x : values()) {
             if (x.getCodeValue().equals(code)) {
                 return x;
@@ -1012,7 +1017,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
      * @param enumName The name of the enum.
      * @return {@code true} if the name is found in this value set, {@code false} otherwise.
      */
-    public static boolean isEnumOfValueSet(final String enumName) {
+    public static boolean isEnumOfValueSet(@Nullable final String enumName) {
         if (enumName == null) {
             return false;
         }
@@ -1031,7 +1036,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
      * @param codeValue The code value.
      * @return {@code true} if the value is found in this value set, {@code false} otherwise.
      */
-    public static boolean isInValueSet(final String codeValue) {
+    public static boolean isInValueSet(@Nullable final String codeValue) {
         for (final HcpProfessionSpecialisationMap x : values()) {
             if (x.getCodeValue().equals(codeValue)) {
                 return true;
@@ -1043,17 +1048,21 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
     /**
      * Machine interpretable and (inside this class) unique code.
      */
-    private String code;
+    @NonNull
+    private final String code;
 
     /**
      * Identifier of the referencing code system.
      */
-    private String codeSystem;
+    @NonNull
+    private final String codeSystem;
 
     /**
-     * The display names per language.
+     * The display names per language. It's always stored in the given order: default display name (0), in English (1),
+     * in German (2), in French (3) and in Italian (4).
      */
-    private Map<LanguageCode, String> displayNames;
+    @NonNull
+    private final String[] displayNames;
 
     /**
      * Instantiates this enum with a given code and display names.
@@ -1066,20 +1075,15 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
      * @param displayNameFr The display name in French.
      * @param displayNameIt The display name in Italian.
      */
-    HcpProfessionSpecialisationMap(final String code, final String codeSystem, final String displayName, final String displayNameEn, final String displayNameDe, final String displayNameFr, final String displayNameIt) {
-        this.code = code;
-        this.codeSystem = codeSystem;
-        this.displayNames = new HashMap<>();
-        this.displayNames.put(null,
-                              displayName);
-        this.displayNames.put(LanguageCode.ENGLISH,
-                              displayNameEn);
-        this.displayNames.put(LanguageCode.GERMAN,
-                              displayNameDe);
-        this.displayNames.put(LanguageCode.FRENCH,
-                              displayNameFr);
-        this.displayNames.put(LanguageCode.ITALIAN,
-                              displayNameIt);
+    HcpProfessionSpecialisationMap(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
+        this.code = Objects.requireNonNull(code);
+        this.codeSystem = Objects.requireNonNull(codeSystem);
+        this.displayNames = new String[5];
+        this.displayNames[0] = Objects.requireNonNull(displayName);
+        this.displayNames[1] = Objects.requireNonNull(displayNameEn);
+        this.displayNames[2] = Objects.requireNonNull(displayNameDe);
+        this.displayNames[3] = Objects.requireNonNull(displayNameFr);
+        this.displayNames[4] = Objects.requireNonNull(displayNameIt);
     }
 
     /**
@@ -1088,6 +1092,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
      * @return the code system identifier.
      */
     @Override
+    @NonNull
     public String getCodeSystemId() {
         return this.codeSystem;
     }
@@ -1095,13 +1100,14 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
     /**
      * Gets the code system name.
      *
-     * @return the code system identifier.
+     * @return the code system name.
      */
     @Override
+    @NonNull
     public String getCodeSystemName() {
-        final CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
-        if (cs != null) {
-            return cs.getCodeSystemName();
+        final var codeSystem = CodeSystems.getEnum(this.codeSystem);
+        if (codeSystem != null) {
+            return codeSystem.getCodeSystemName();
         }
         return "";
     }
@@ -1112,24 +1118,35 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
      * @return the code value.
      */
     @Override
+    @NonNull
     public String getCodeValue() {
         return this.code;
     }
 
     /**
-     * Gets the display name defined by the language param. If there is no english translation, the default display name
-     *      is returned.
+     * Gets the display name defined by the language param.
      *
-     * @param languageCode The language code to get the display name for.
-     * @return the display name in the desired language. if language not found, display name in german will be returned.
+     * @param languageCode The language code to get the display name for, {@code null} to get the default display name.
+     * @return the display name in the desired language.
      */
     @Override
-    public String getDisplayName(final LanguageCode languageCode) {
-        final String displayName = this.displayNames.get(languageCode);
-        if (displayName == null && languageCode == LanguageCode.ENGLISH) {
-            return this.displayNames.get(null);
+    @NonNull
+    public String getDisplayName(@Nullable final LanguageCode languageCode) {
+        if (languageCode == null) {
+            return this.displayNames[0];
         }
-        return displayName;
+        return switch(languageCode) {
+            case ENGLISH ->
+                this.displayNames[1];
+            case GERMAN ->
+                this.displayNames[2];
+            case FRENCH ->
+                this.displayNames[3];
+            case ITALIAN ->
+                this.displayNames[4];
+            default ->
+                "TOTRANSLATE";
+        };
     }
 
     /**
@@ -1138,6 +1155,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
      * @return the value set identifier.
      */
     @Override
+    @NonNull
     public String getValueSetId() {
         return VALUE_SET_ID;
     }
@@ -1148,6 +1166,7 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
      * @return the value set name.
      */
     @Override
+    @NonNull
     public String getValueSetName() {
         return VALUE_SET_NAME;
     }

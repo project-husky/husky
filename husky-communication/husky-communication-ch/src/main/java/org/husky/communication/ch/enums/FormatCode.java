@@ -1,20 +1,19 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
- * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  */
 package org.husky.communication.ch.enums;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.Objects;
 import javax.annotation.processing.Generated;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.enums.CodeSystems;
 import org.husky.common.enums.LanguageCode;
 import org.husky.common.enums.ValueSetEnumInterface;
@@ -32,14 +31,14 @@ import org.husky.common.enums.ValueSetEnumInterface;
  * Version: 202104.0-stable<br>
  * Status: FINAL
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-08-26")
+@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-12-09")
 public enum FormatCode implements ValueSetEnumInterface {
 
     /**
-     * EN: CDA Imaging Report with Structured Headings<br>
-     * DE: CDA Imaging Report with Structured Headings<br>
-     * FR: CDA Imaging Report with Structured Headings<br>
-     * IT: CDA Imaging Report with Structured Headings<br>
+     * EN: CDA Imaging Report with Structured Headings.<br>
+     * DE: CDA Imaging Report with Structured Headings.<br>
+     * FR: CDA Imaging Report with Structured Headings.<br>
+     * IT: CDA Imaging Report with Structured Headings.<br>
      */
     CDA_IMAGING_REPORT_WITH_STRUCTURED_HEADINGS("urn:ihe:rad:CDA:ImagingReportStructuredHeadings:2013",
                                                 "1.3.6.1.4.1.19376.1.2.3",
@@ -49,10 +48,10 @@ public enum FormatCode implements ValueSetEnumInterface {
                                                 "CDA Imaging Report with Structured Headings",
                                                 "CDA Imaging Report with Structured Headings"),
     /**
-     * EN: CDA Laboratory Report<br>
-     * DE: CDA Laboratory Report<br>
-     * FR: CDA Laboratory Report<br>
-     * IT: CDA Laboratory Report<br>
+     * EN: CDA Laboratory Report.<br>
+     * DE: CDA Laboratory Report.<br>
+     * FR: CDA Laboratory Report.<br>
+     * IT: CDA Laboratory Report.<br>
      */
     CDA_LABORATORY_REPORT("urn:ihe:lab:xd-lab:2008",
                           "1.3.6.1.4.1.19376.1.2.3",
@@ -62,10 +61,10 @@ public enum FormatCode implements ValueSetEnumInterface {
                           "CDA Laboratory Report",
                           "CDA Laboratory Report"),
     /**
-     * EN: CDA Wrapped Text Report<br>
-     * DE: CDA Wrapped Text Report<br>
-     * FR: CDA Wrapped Text Report<br>
-     * IT: CDA Wrapped Text Report<br>
+     * EN: CDA Wrapped Text Report.<br>
+     * DE: CDA Wrapped Text Report.<br>
+     * FR: CDA Wrapped Text Report.<br>
+     * IT: CDA Wrapped Text Report.<br>
      */
     CDA_WRAPPED_TEXT_REPORT("urn:ihe:rad:TEXT",
                             "1.3.6.1.4.1.19376.1.2.3",
@@ -75,10 +74,10 @@ public enum FormatCode implements ValueSetEnumInterface {
                             "CDA Wrapped Text Report",
                             "CDA Wrapped Text Report"),
     /**
-     * EN: Community Dispense<br>
-     * DE: Community Dispense<br>
-     * FR: Community Dispense<br>
-     * IT: Community Dispense<br>
+     * EN: Community Dispense.<br>
+     * DE: Community Dispense.<br>
+     * FR: Community Dispense.<br>
+     * IT: Community Dispense.<br>
      */
     COMMUNITY_DISPENSE("urn:ihe:pharm:dis:2010",
                        "1.3.6.1.4.1.19376.1.2.3",
@@ -88,10 +87,10 @@ public enum FormatCode implements ValueSetEnumInterface {
                        "Community Dispense",
                        "Community Dispense"),
     /**
-     * EN: Community Medication List<br>
-     * DE: Community Medication List<br>
-     * FR: Community Medication List<br>
-     * IT: Community Medication List<br>
+     * EN: Community Medication List.<br>
+     * DE: Community Medication List.<br>
+     * FR: Community Medication List.<br>
+     * IT: Community Medication List.<br>
      */
     COMMUNITY_MEDICATION_LIST("urn:ihe:pharm:pml:2013",
                               "1.3.6.1.4.1.19376.1.2.3",
@@ -101,10 +100,10 @@ public enum FormatCode implements ValueSetEnumInterface {
                               "Community Medication List",
                               "Community Medication List"),
     /**
-     * EN: Community Medication Treatment Plan<br>
-     * DE: Community Medication Treatment Plan<br>
-     * FR: Community Medication Treatment Plan<br>
-     * IT: Community Medication Treatment Plan<br>
+     * EN: Community Medication Treatment Plan.<br>
+     * DE: Community Medication Treatment Plan.<br>
+     * FR: Community Medication Treatment Plan.<br>
+     * IT: Community Medication Treatment Plan.<br>
      */
     COMMUNITY_MEDICATION_TREATMENT_PLAN("urn:ihe:pharm:mtp:2015",
                                         "1.3.6.1.4.1.19376.1.2.3",
@@ -114,10 +113,10 @@ public enum FormatCode implements ValueSetEnumInterface {
                                         "Community Medication Treatment Plan",
                                         "Community Medication Treatment Plan"),
     /**
-     * EN: Community Pharmaceutical Advice<br>
-     * DE: Community Pharmaceutical Advice<br>
-     * FR: Community Pharmaceutical Advice<br>
-     * IT: Community Pharmaceutical Advice<br>
+     * EN: Community Pharmaceutical Advice.<br>
+     * DE: Community Pharmaceutical Advice.<br>
+     * FR: Community Pharmaceutical Advice.<br>
+     * IT: Community Pharmaceutical Advice.<br>
      */
     COMMUNITY_PHARMACEUTICAL_ADVICE("urn:ihe:pharm:padv:2010",
                                     "1.3.6.1.4.1.19376.1.2.3",
@@ -127,10 +126,10 @@ public enum FormatCode implements ValueSetEnumInterface {
                                     "Community Pharmaceutical Advice",
                                     "Community Pharmaceutical Advice"),
     /**
-     * EN: Community Prescription<br>
-     * DE: Community Prescription<br>
-     * FR: Community Prescription<br>
-     * IT: Community Prescription<br>
+     * EN: Community Prescription.<br>
+     * DE: Community Prescription.<br>
+     * FR: Community Prescription.<br>
+     * IT: Community Prescription.<br>
      */
     COMMUNITY_PRESCRIPTION("urn:ihe:pharm:pre:2010",
                            "1.3.6.1.4.1.19376.1.2.3",
@@ -140,10 +139,10 @@ public enum FormatCode implements ValueSetEnumInterface {
                            "Community Prescription",
                            "Community Prescription"),
     /**
-     * EN: IHE KOS document<br>
-     * DE: KOS Dokument<br>
-     * FR: Document KOS<br>
-     * IT: Documento KOS <br>
+     * EN: IHE KOS document.<br>
+     * DE: KOS Dokument.<br>
+     * FR: Document KOS.<br>
+     * IT: Documento KOS .<br>
      */
     IHE_KOS_DOCUMENT("1.2.840.10008.5.1.4.1.1.88.59",
                      "1.2.840.10008.2.6.1",
@@ -153,10 +152,10 @@ public enum FormatCode implements ValueSetEnumInterface {
                      "Document KOS",
                      "Documento KOS "),
     /**
-     * EN: Immunization Content (IC)<br>
-     * DE: Immunization Content (IC)<br>
-     * FR: Immunization Content (IC)<br>
-     * IT: Immunization Content (IC)<br>
+     * EN: Immunization Content (IC).<br>
+     * DE: Immunization Content (IC).<br>
+     * FR: Immunization Content (IC).<br>
+     * IT: Immunization Content (IC).<br>
      */
     IMMUNIZATION_CONTENT("urn:ihe:pcc:ic:2009",
                          "1.3.6.1.4.1.19376.1.2.3",
@@ -166,10 +165,10 @@ public enum FormatCode implements ValueSetEnumInterface {
                          "Immunization Content (IC)",
                          "Immunization Content (IC)"),
     /**
-     * EN: MimeType sufficient<br>
-     * DE: MimeType sufficient<br>
-     * FR: MimeType sufficient<br>
-     * IT: MimeType sufficient<br>
+     * EN: MimeType sufficient.<br>
+     * DE: MimeType sufficient.<br>
+     * FR: MimeType sufficient.<br>
+     * IT: MimeType sufficient.<br>
      */
     MIMETYPE_SUFFICIENT("urn:ihe:iti:xds:2017:mimeTypeSufficient",
                         "1.3.6.1.4.1.19376.1.2.3",
@@ -179,10 +178,10 @@ public enum FormatCode implements ValueSetEnumInterface {
                         "MimeType sufficient",
                         "MimeType sufficient"),
     /**
-     * EN: PDF embedded in CDA per XDS-SD profile<br>
-     * DE: PDF embedded in CDA per XDS-SD profile<br>
-     * FR: PDF embedded in CDA per XDS-SD profile<br>
-     * IT: PDF embedded in CDA per XDS-SD profile<br>
+     * EN: PDF embedded in CDA per XDS-SD profile.<br>
+     * DE: PDF embedded in CDA per XDS-SD profile.<br>
+     * FR: PDF embedded in CDA per XDS-SD profile.<br>
+     * IT: PDF embedded in CDA per XDS-SD profile.<br>
      */
     PDF_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE("urn:ihe:iti:xds-sd:pdf:2008",
                                            "1.3.6.1.4.1.19376.1.2.3",
@@ -192,10 +191,10 @@ public enum FormatCode implements ValueSetEnumInterface {
                                            "PDF embedded in CDA per XDS-SD profile",
                                            "PDF embedded in CDA per XDS-SD profile"),
     /**
-     * EN: PDF Radiology Report<br>
-     * DE: PDF Radiology Report<br>
-     * FR: PDF Radiology Report<br>
-     * IT: PDF Radiology Report<br>
+     * EN: PDF Radiology Report.<br>
+     * DE: PDF Radiology Report.<br>
+     * FR: PDF Radiology Report.<br>
+     * IT: PDF Radiology Report.<br>
      */
     PDF_RADIOLOGY_REPORT("urn:ihe:rad:PDF",
                          "1.3.6.1.4.1.19376.1.2.3",
@@ -205,10 +204,10 @@ public enum FormatCode implements ValueSetEnumInterface {
                          "PDF Radiology Report",
                          "PDF Radiology Report"),
     /**
-     * EN: Text embedded in CDA per XDS-SD profile<br>
-     * DE: Text embedded in CDA per XDS-SD profile<br>
-     * FR: Text embedded in CDA per XDS-SD profile<br>
-     * IT: Text embedded in CDA per XDS-SD profile<br>
+     * EN: Text embedded in CDA per XDS-SD profile.<br>
+     * DE: Text embedded in CDA per XDS-SD profile.<br>
+     * FR: Text embedded in CDA per XDS-SD profile.<br>
+     * IT: Text embedded in CDA per XDS-SD profile.<br>
      */
     TEXT_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE("urn:ihe:iti:xds-sd:text:2008",
                                             "1.3.6.1.4.1.19376.1.2.3",
@@ -218,10 +217,10 @@ public enum FormatCode implements ValueSetEnumInterface {
                                             "Text embedded in CDA per XDS-SD profile",
                                             "Text embedded in CDA per XDS-SD profile"),
     /**
-     * EN: Unstructured EPR document<br>
-     * DE: Unstrukturiertes EPD Dokument<br>
-     * FR: Document DEP non structuré<br>
-     * IT: Documento CIP non strutturato<br>
+     * EN: Unstructured EPR document.<br>
+     * DE: Unstrukturiertes EPD Dokument.<br>
+     * FR: Document DEP non structuré.<br>
+     * IT: Documento CIP non strutturato.<br>
      */
     UNSTRUCTURED_EPR_DOCUMENT("urn:che:epr:EPR_Unstructured_Document",
                               "2.16.756.5.30.1.127.3.10.10",
@@ -232,122 +231,122 @@ public enum FormatCode implements ValueSetEnumInterface {
                               "Documento CIP non strutturato");
 
     /**
-     * EN: Code for CDA Imaging Report with Structured Headings<br>
-     * DE: Code für CDA Imaging Report with Structured Headings<br>
-     * FR: Code de CDA Imaging Report with Structured Headings<br>
-     * IT: Code per CDA Imaging Report with Structured Headings<br>
+     * EN: Code for CDA Imaging Report with Structured Headings.<br>
+     * DE: Code für CDA Imaging Report with Structured Headings.<br>
+     * FR: Code de CDA Imaging Report with Structured Headings.<br>
+     * IT: Code per CDA Imaging Report with Structured Headings.<br>
      */
     public static final String CDA_IMAGING_REPORT_WITH_STRUCTURED_HEADINGS_CODE = "urn:ihe:rad:CDA:ImagingReportStructuredHeadings:2013";
 
     /**
-     * EN: Code for CDA Laboratory Report<br>
-     * DE: Code für CDA Laboratory Report<br>
-     * FR: Code de CDA Laboratory Report<br>
-     * IT: Code per CDA Laboratory Report<br>
+     * EN: Code for CDA Laboratory Report.<br>
+     * DE: Code für CDA Laboratory Report.<br>
+     * FR: Code de CDA Laboratory Report.<br>
+     * IT: Code per CDA Laboratory Report.<br>
      */
     public static final String CDA_LABORATORY_REPORT_CODE = "urn:ihe:lab:xd-lab:2008";
 
     /**
-     * EN: Code for CDA Wrapped Text Report<br>
-     * DE: Code für CDA Wrapped Text Report<br>
-     * FR: Code de CDA Wrapped Text Report<br>
-     * IT: Code per CDA Wrapped Text Report<br>
+     * EN: Code for CDA Wrapped Text Report.<br>
+     * DE: Code für CDA Wrapped Text Report.<br>
+     * FR: Code de CDA Wrapped Text Report.<br>
+     * IT: Code per CDA Wrapped Text Report.<br>
      */
     public static final String CDA_WRAPPED_TEXT_REPORT_CODE = "urn:ihe:rad:TEXT";
 
     /**
-     * EN: Code for Community Dispense<br>
-     * DE: Code für Community Dispense<br>
-     * FR: Code de Community Dispense<br>
-     * IT: Code per Community Dispense<br>
+     * EN: Code for Community Dispense.<br>
+     * DE: Code für Community Dispense.<br>
+     * FR: Code de Community Dispense.<br>
+     * IT: Code per Community Dispense.<br>
      */
     public static final String COMMUNITY_DISPENSE_CODE = "urn:ihe:pharm:dis:2010";
 
     /**
-     * EN: Code for Community Medication List<br>
-     * DE: Code für Community Medication List<br>
-     * FR: Code de Community Medication List<br>
-     * IT: Code per Community Medication List<br>
+     * EN: Code for Community Medication List.<br>
+     * DE: Code für Community Medication List.<br>
+     * FR: Code de Community Medication List.<br>
+     * IT: Code per Community Medication List.<br>
      */
     public static final String COMMUNITY_MEDICATION_LIST_CODE = "urn:ihe:pharm:pml:2013";
 
     /**
-     * EN: Code for Community Medication Treatment Plan<br>
-     * DE: Code für Community Medication Treatment Plan<br>
-     * FR: Code de Community Medication Treatment Plan<br>
-     * IT: Code per Community Medication Treatment Plan<br>
+     * EN: Code for Community Medication Treatment Plan.<br>
+     * DE: Code für Community Medication Treatment Plan.<br>
+     * FR: Code de Community Medication Treatment Plan.<br>
+     * IT: Code per Community Medication Treatment Plan.<br>
      */
     public static final String COMMUNITY_MEDICATION_TREATMENT_PLAN_CODE = "urn:ihe:pharm:mtp:2015";
 
     /**
-     * EN: Code for Community Pharmaceutical Advice<br>
-     * DE: Code für Community Pharmaceutical Advice<br>
-     * FR: Code de Community Pharmaceutical Advice<br>
-     * IT: Code per Community Pharmaceutical Advice<br>
+     * EN: Code for Community Pharmaceutical Advice.<br>
+     * DE: Code für Community Pharmaceutical Advice.<br>
+     * FR: Code de Community Pharmaceutical Advice.<br>
+     * IT: Code per Community Pharmaceutical Advice.<br>
      */
     public static final String COMMUNITY_PHARMACEUTICAL_ADVICE_CODE = "urn:ihe:pharm:padv:2010";
 
     /**
-     * EN: Code for Community Prescription<br>
-     * DE: Code für Community Prescription<br>
-     * FR: Code de Community Prescription<br>
-     * IT: Code per Community Prescription<br>
+     * EN: Code for Community Prescription.<br>
+     * DE: Code für Community Prescription.<br>
+     * FR: Code de Community Prescription.<br>
+     * IT: Code per Community Prescription.<br>
      */
     public static final String COMMUNITY_PRESCRIPTION_CODE = "urn:ihe:pharm:pre:2010";
 
     /**
-     * EN: Code for IHE KOS document<br>
-     * DE: Code für KOS Dokument<br>
-     * FR: Code de Document KOS<br>
-     * IT: Code per Documento KOS <br>
+     * EN: Code for IHE KOS document.<br>
+     * DE: Code für KOS Dokument.<br>
+     * FR: Code de Document KOS.<br>
+     * IT: Code per Documento KOS .<br>
      */
     public static final String IHE_KOS_DOCUMENT_CODE = "1.2.840.10008.5.1.4.1.1.88.59";
 
     /**
-     * EN: Code for Immunization Content (IC)<br>
-     * DE: Code für Immunization Content (IC)<br>
-     * FR: Code de Immunization Content (IC)<br>
-     * IT: Code per Immunization Content (IC)<br>
+     * EN: Code for Immunization Content (IC).<br>
+     * DE: Code für Immunization Content (IC).<br>
+     * FR: Code de Immunization Content (IC).<br>
+     * IT: Code per Immunization Content (IC).<br>
      */
     public static final String IMMUNIZATION_CONTENT_CODE = "urn:ihe:pcc:ic:2009";
 
     /**
-     * EN: Code for MimeType sufficient<br>
-     * DE: Code für MimeType sufficient<br>
-     * FR: Code de MimeType sufficient<br>
-     * IT: Code per MimeType sufficient<br>
+     * EN: Code for MimeType sufficient.<br>
+     * DE: Code für MimeType sufficient.<br>
+     * FR: Code de MimeType sufficient.<br>
+     * IT: Code per MimeType sufficient.<br>
      */
     public static final String MIMETYPE_SUFFICIENT_CODE = "urn:ihe:iti:xds:2017:mimeTypeSufficient";
 
     /**
-     * EN: Code for PDF embedded in CDA per XDS-SD profile<br>
-     * DE: Code für PDF embedded in CDA per XDS-SD profile<br>
-     * FR: Code de PDF embedded in CDA per XDS-SD profile<br>
-     * IT: Code per PDF embedded in CDA per XDS-SD profile<br>
+     * EN: Code for PDF embedded in CDA per XDS-SD profile.<br>
+     * DE: Code für PDF embedded in CDA per XDS-SD profile.<br>
+     * FR: Code de PDF embedded in CDA per XDS-SD profile.<br>
+     * IT: Code per PDF embedded in CDA per XDS-SD profile.<br>
      */
     public static final String PDF_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE_CODE = "urn:ihe:iti:xds-sd:pdf:2008";
 
     /**
-     * EN: Code for PDF Radiology Report<br>
-     * DE: Code für PDF Radiology Report<br>
-     * FR: Code de PDF Radiology Report<br>
-     * IT: Code per PDF Radiology Report<br>
+     * EN: Code for PDF Radiology Report.<br>
+     * DE: Code für PDF Radiology Report.<br>
+     * FR: Code de PDF Radiology Report.<br>
+     * IT: Code per PDF Radiology Report.<br>
      */
     public static final String PDF_RADIOLOGY_REPORT_CODE = "urn:ihe:rad:PDF";
 
     /**
-     * EN: Code for Text embedded in CDA per XDS-SD profile<br>
-     * DE: Code für Text embedded in CDA per XDS-SD profile<br>
-     * FR: Code de Text embedded in CDA per XDS-SD profile<br>
-     * IT: Code per Text embedded in CDA per XDS-SD profile<br>
+     * EN: Code for Text embedded in CDA per XDS-SD profile.<br>
+     * DE: Code für Text embedded in CDA per XDS-SD profile.<br>
+     * FR: Code de Text embedded in CDA per XDS-SD profile.<br>
+     * IT: Code per Text embedded in CDA per XDS-SD profile.<br>
      */
     public static final String TEXT_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE_CODE = "urn:ihe:iti:xds-sd:text:2008";
 
     /**
-     * EN: Code for Unstructured EPR document<br>
-     * DE: Code für Unstrukturiertes EPD Dokument<br>
-     * FR: Code de Document DEP non structuré<br>
-     * IT: Code per Documento CIP non strutturato<br>
+     * EN: Code for Unstructured EPR document.<br>
+     * DE: Code für Unstrukturiertes EPD Dokument.<br>
+     * FR: Code de Document DEP non structuré.<br>
+     * IT: Code per Documento CIP non strutturato.<br>
      */
     public static final String UNSTRUCTURED_EPR_DOCUMENT_CODE = "urn:che:epr:EPR_Unstructured_Document";
 
@@ -367,7 +366,8 @@ public enum FormatCode implements ValueSetEnumInterface {
      * @param code The code value.
      * @return the enum value found or {@code null}.
      */
-    public static FormatCode getEnum(final String code) {
+    @Nullable
+    public static FormatCode getEnum(@Nullable final String code) {
         for (final FormatCode x : values()) {
             if (x.getCodeValue().equals(code)) {
                 return x;
@@ -382,7 +382,7 @@ public enum FormatCode implements ValueSetEnumInterface {
      * @param enumName The name of the enum.
      * @return {@code true} if the name is found in this value set, {@code false} otherwise.
      */
-    public static boolean isEnumOfValueSet(final String enumName) {
+    public static boolean isEnumOfValueSet(@Nullable final String enumName) {
         if (enumName == null) {
             return false;
         }
@@ -401,7 +401,7 @@ public enum FormatCode implements ValueSetEnumInterface {
      * @param codeValue The code value.
      * @return {@code true} if the value is found in this value set, {@code false} otherwise.
      */
-    public static boolean isInValueSet(final String codeValue) {
+    public static boolean isInValueSet(@Nullable final String codeValue) {
         for (final FormatCode x : values()) {
             if (x.getCodeValue().equals(codeValue)) {
                 return true;
@@ -413,17 +413,21 @@ public enum FormatCode implements ValueSetEnumInterface {
     /**
      * Machine interpretable and (inside this class) unique code.
      */
-    private String code;
+    @NonNull
+    private final String code;
 
     /**
      * Identifier of the referencing code system.
      */
-    private String codeSystem;
+    @NonNull
+    private final String codeSystem;
 
     /**
-     * The display names per language.
+     * The display names per language. It's always stored in the given order: default display name (0), in English (1),
+     * in German (2), in French (3) and in Italian (4).
      */
-    private Map<LanguageCode, String> displayNames;
+    @NonNull
+    private final String[] displayNames;
 
     /**
      * Instantiates this enum with a given code and display names.
@@ -436,20 +440,15 @@ public enum FormatCode implements ValueSetEnumInterface {
      * @param displayNameFr The display name in French.
      * @param displayNameIt The display name in Italian.
      */
-    FormatCode(final String code, final String codeSystem, final String displayName, final String displayNameEn, final String displayNameDe, final String displayNameFr, final String displayNameIt) {
-        this.code = code;
-        this.codeSystem = codeSystem;
-        this.displayNames = new HashMap<>();
-        this.displayNames.put(null,
-                              displayName);
-        this.displayNames.put(LanguageCode.ENGLISH,
-                              displayNameEn);
-        this.displayNames.put(LanguageCode.GERMAN,
-                              displayNameDe);
-        this.displayNames.put(LanguageCode.FRENCH,
-                              displayNameFr);
-        this.displayNames.put(LanguageCode.ITALIAN,
-                              displayNameIt);
+    FormatCode(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
+        this.code = Objects.requireNonNull(code);
+        this.codeSystem = Objects.requireNonNull(codeSystem);
+        this.displayNames = new String[5];
+        this.displayNames[0] = Objects.requireNonNull(displayName);
+        this.displayNames[1] = Objects.requireNonNull(displayNameEn);
+        this.displayNames[2] = Objects.requireNonNull(displayNameDe);
+        this.displayNames[3] = Objects.requireNonNull(displayNameFr);
+        this.displayNames[4] = Objects.requireNonNull(displayNameIt);
     }
 
     /**
@@ -458,6 +457,7 @@ public enum FormatCode implements ValueSetEnumInterface {
      * @return the code system identifier.
      */
     @Override
+    @NonNull
     public String getCodeSystemId() {
         return this.codeSystem;
     }
@@ -465,13 +465,14 @@ public enum FormatCode implements ValueSetEnumInterface {
     /**
      * Gets the code system name.
      *
-     * @return the code system identifier.
+     * @return the code system name.
      */
     @Override
+    @NonNull
     public String getCodeSystemName() {
-        final CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
-        if (cs != null) {
-            return cs.getCodeSystemName();
+        final var codeSystem = CodeSystems.getEnum(this.codeSystem);
+        if (codeSystem != null) {
+            return codeSystem.getCodeSystemName();
         }
         return "";
     }
@@ -482,24 +483,35 @@ public enum FormatCode implements ValueSetEnumInterface {
      * @return the code value.
      */
     @Override
+    @NonNull
     public String getCodeValue() {
         return this.code;
     }
 
     /**
-     * Gets the display name defined by the language param. If there is no english translation, the default display name
-     *      is returned.
+     * Gets the display name defined by the language param.
      *
-     * @param languageCode The language code to get the display name for.
-     * @return the display name in the desired language. if language not found, display name in german will be returned.
+     * @param languageCode The language code to get the display name for, {@code null} to get the default display name.
+     * @return the display name in the desired language.
      */
     @Override
-    public String getDisplayName(final LanguageCode languageCode) {
-        final String displayName = this.displayNames.get(languageCode);
-        if (displayName == null && languageCode == LanguageCode.ENGLISH) {
-            return this.displayNames.get(null);
+    @NonNull
+    public String getDisplayName(@Nullable final LanguageCode languageCode) {
+        if (languageCode == null) {
+            return this.displayNames[0];
         }
-        return displayName;
+        return switch(languageCode) {
+            case ENGLISH ->
+                this.displayNames[1];
+            case GERMAN ->
+                this.displayNames[2];
+            case FRENCH ->
+                this.displayNames[3];
+            case ITALIAN ->
+                this.displayNames[4];
+            default ->
+                "TOTRANSLATE";
+        };
     }
 
     /**
@@ -508,6 +520,7 @@ public enum FormatCode implements ValueSetEnumInterface {
      * @return the value set identifier.
      */
     @Override
+    @NonNull
     public String getValueSetId() {
         return VALUE_SET_ID;
     }
@@ -518,6 +531,7 @@ public enum FormatCode implements ValueSetEnumInterface {
      * @return the value set name.
      */
     @Override
+    @NonNull
     public String getValueSetName() {
         return VALUE_SET_NAME;
     }
