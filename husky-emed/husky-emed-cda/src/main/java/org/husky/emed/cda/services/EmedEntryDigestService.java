@@ -12,7 +12,7 @@ package org.husky.emed.cda.services;
 import java.time.Instant;
 import java.util.Optional;
 
-import org.husky.emed.cda.models.entry.EmedEntryDigest;
+import org.husky.emed.models.entry.EmedEntryDigest;
 
 /**
  * The service of the {@link EmedEntryDigest} registry.

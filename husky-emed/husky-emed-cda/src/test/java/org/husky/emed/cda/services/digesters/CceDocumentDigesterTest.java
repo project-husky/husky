@@ -1,16 +1,11 @@
 package org.husky.emed.cda.services.digesters;
 
 import org.husky.emed.cda.TestUtils;
-import org.husky.emed.cda.enums.EmedDocumentType;
+import org.husky.emed.enums.EmedDocumentType;
 import org.husky.emed.cda.generated.artdecor.enums.DocumentEntryConfidentialityCode;
-import org.husky.emed.cda.models.document.EmedMtpDocumentDigest;
-import org.husky.emed.cda.models.entry.EmedEntryDigest;
+import org.husky.emed.models.document.EmedMtpDocumentDigest;
+import org.husky.emed.models.entry.EmedEntryDigest;
 import org.husky.emed.cda.services.EmedEntryDigestService;
-import org.husky.emed.cda.services.digesters.CceDisEntryDigester;
-import org.husky.emed.cda.services.digesters.CceDocumentDigester;
-import org.husky.emed.cda.services.digesters.CceMtpEntryDigester;
-import org.husky.emed.cda.services.digesters.CcePadvEntryDigester;
-import org.husky.emed.cda.services.digesters.CcePreEntryDigester;
 import org.junit.jupiter.api.*;
 
 import java.time.Instant;

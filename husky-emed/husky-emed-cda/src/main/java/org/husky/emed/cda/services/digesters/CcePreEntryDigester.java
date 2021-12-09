@@ -16,12 +16,12 @@ import java.util.Optional;
 
 import org.husky.common.hl7cdar2.*;
 import org.husky.common.utils.StreamUtils;
-import org.husky.emed.cda.errors.InvalidEmedContentException;
-import org.husky.emed.cda.models.common.AuthorDigest;
-import org.husky.emed.cda.models.common.EmedReference;
-import org.husky.emed.cda.models.common.RenewalInterval;
-import org.husky.emed.cda.models.entry.EmedEntryDigest;
-import org.husky.emed.cda.models.entry.EmedPreEntryDigest;
+import org.husky.emed.errors.InvalidEmedContentException;
+import org.husky.emed.models.common.AuthorDigest;
+import org.husky.emed.models.common.EmedReference;
+import org.husky.emed.models.common.RenewalInterval;
+import org.husky.emed.models.entry.EmedEntryDigest;
+import org.husky.emed.models.entry.EmedPreEntryDigest;
 import org.husky.emed.cda.services.EmedEntryDigestService;
 import org.husky.emed.cda.services.readers.SubAdmEntryReader;
 import org.husky.emed.cda.utils.IiUtils;

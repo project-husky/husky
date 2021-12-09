@@ -3,7 +3,7 @@ package org.husky.emed.cda.services.readers;
 import org.husky.common.enums.AdministrativeGender;
 import org.husky.common.hl7cdar2.*;
 import org.husky.common.utils.StreamUtils;
-import org.husky.emed.cda.errors.InvalidEmedContentException;
+import org.husky.emed.errors.InvalidEmedContentException;
 import org.husky.common.utils.time.DateTimes;
 
 import javax.xml.bind.JAXBElement;

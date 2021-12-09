@@ -10,7 +10,7 @@
 package org.husky.emed.cda.utils;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.cda.errors.InvalidEmedContentException;
+import org.husky.emed.errors.InvalidEmedContentException;
 import org.husky.common.hl7cdar2.POCDMT000040Act;
 import org.husky.common.hl7cdar2.POCDMT000040EntryRelationship;
 import org.husky.common.hl7cdar2.POCDMT000040Observation;

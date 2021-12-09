@@ -14,8 +14,8 @@ import java.util.List;
 import javax.annotation.processing.Generated;
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040Act;
-import org.husky.emed.cda.models.common.Code;
-import org.husky.emed.cda.models.common.basetypes.CodeBaseType;
+import org.husky.emed.models.common.Code;
+import org.husky.emed.models.common.basetypes.CodeBaseType;
 
 /**
  * IHESubstitutionActContentModule

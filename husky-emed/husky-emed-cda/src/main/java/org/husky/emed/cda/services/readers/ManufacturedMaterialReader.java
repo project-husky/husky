@@ -10,15 +10,15 @@
 package org.husky.emed.cda.services.readers;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.cda.errors.InvalidEmedContentException;
-import org.husky.emed.cda.generated.artdecor.enums.ActivePharmaceuticalIngredient;
-import org.husky.emed.cda.generated.artdecor.enums.PharmaceuticalDoseFormEdqm;
+import org.husky.emed.errors.InvalidEmedContentException;
+import org.husky.emed.enums.ActivePharmaceuticalIngredient;
+import org.husky.emed.enums.PharmaceuticalDoseFormEdqm;
 import org.husky.common.hl7cdar2.CD;
 import org.husky.common.hl7cdar2.COCTMT230100UVIngredient;
 import org.husky.common.hl7cdar2.POCDMT000040Material;
-import org.husky.emed.cda.models.common.QuantityWithUnit;
-import org.husky.emed.cda.models.treatment.MedicationProduct;
-import org.husky.emed.cda.models.treatment.MedicationProductIngredient;
+import org.husky.emed.models.common.QuantityWithUnit;
+import org.husky.emed.models.treatment.MedicationProduct;
+import org.husky.emed.models.treatment.MedicationProductIngredient;
 import org.husky.emed.cda.utils.CdaR2Utils;
 
 import java.util.Objects;

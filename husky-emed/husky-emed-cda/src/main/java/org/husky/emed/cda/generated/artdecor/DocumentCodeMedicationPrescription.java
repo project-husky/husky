@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.husky.common.hl7cdar2.CE;
-import org.husky.emed.cda.models.common.Code;
-import org.husky.emed.cda.models.common.basetypes.CodeBaseType;
+import org.husky.emed.models.common.Code;
+import org.husky.emed.models.common.basetypes.CodeBaseType;
 
 /**
  * DocumentCodeMedicationPrescription
