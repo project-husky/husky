@@ -15,7 +15,6 @@ import org.husky.common.hl7cdar2.*;
 import org.husky.emed.errors.InvalidEmedContentException;
 import org.husky.emed.models.common.EmedReference;
 
-import java.math.BigInteger;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -90,29 +89,6 @@ public class CdaR2Utils {
                         || TemplateIds.hasAllIds(TemplateIds.PML_SECTION, section.getTemplateId())
                         || TemplateIds.hasAllIds(TemplateIds.PMLC_SECTION, section.getTemplateId()))
                 .findAny();
-    }
-
-
-    /**
-     * Converts the given value to a HL7 CDA R2 INT.
-     *
-     * @param value The value.
-     * @return the int.
-     */
-    public static INT createInt(final BigInteger value) {
-        final var retVal = new INT();
-        retVal.setValue(value);
-        return retVal;
-    }
-
-    /**
-     * Converts the given value to a HL7 CDA R2 INT.
-     *
-     * @param value The value.
-     * @return the int.
-     */
-    public static INT createInt(final Integer value) {
-        return createInt(BigInteger.valueOf(value));
     }
 
     /**

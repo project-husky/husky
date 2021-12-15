@@ -54,4 +54,11 @@ public enum EmedEntryType {
         Objects.requireNonNull(displayName);
         this.displayName = displayName;
     }
+
+    /**
+     * Returns the display name.
+     */
+    public String getDisplayName() {
+        return displayName;
+    }
 }
