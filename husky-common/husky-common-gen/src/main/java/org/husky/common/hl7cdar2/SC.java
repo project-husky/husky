@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -24,17 +24,15 @@ import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
- *
- * A ST that optionally may have a code attached. The text must always be
- * present if a code is present. The code is often a local code.
+ * A ST that optionally may have a code attached. The text must always be present if a code is present. The code is
+ * often a local code.
  *
  *
  * <p>
  * Java-Klasse für SC complex type.
  *
  * <p>
- * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser
- * Klasse enthalten ist.
+ * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
  * &lt;complexType name="SC">
@@ -49,8 +47,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SC")
@@ -72,7 +68,6 @@ public class SC extends ST {
      * Ruft den Wert der code-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getCode() {
         return code;
@@ -82,7 +77,6 @@ public class SC extends ST {
      * Ruft den Wert der codeSystem-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getCodeSystem() {
         return codeSystem;
@@ -92,7 +86,6 @@ public class SC extends ST {
      * Ruft den Wert der codeSystemName-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getCodeSystemName() {
         return codeSystemName;
@@ -102,7 +95,6 @@ public class SC extends ST {
      * Ruft den Wert der codeSystemVersion-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getCodeSystemVersion() {
         return codeSystemVersion;
@@ -112,7 +104,6 @@ public class SC extends ST {
      * Ruft den Wert der displayName-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getDisplayName() {
         return displayName;
@@ -121,9 +112,7 @@ public class SC extends ST {
     /**
      * Legt den Wert der code-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setCode(String value) {
         this.code = value;
@@ -132,9 +121,7 @@ public class SC extends ST {
     /**
      * Legt den Wert der codeSystem-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setCodeSystem(String value) {
         this.codeSystem = value;
@@ -143,9 +130,7 @@ public class SC extends ST {
     /**
      * Legt den Wert der codeSystemName-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setCodeSystemName(String value) {
         this.codeSystemName = value;
@@ -154,9 +139,7 @@ public class SC extends ST {
     /**
      * Legt den Wert der codeSystemVersion-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setCodeSystemVersion(String value) {
         this.codeSystemVersion = value;
@@ -165,9 +148,7 @@ public class SC extends ST {
     /**
      * Legt den Wert der displayName-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setDisplayName(String value) {
         this.displayName = value;

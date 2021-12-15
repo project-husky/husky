@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -16,30 +16,22 @@
 
 package org.husky.common.hl7cdar2;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
- *
- * A monetary amount is a quantity expressing the amount of money in some
- * currency. Currencies are the units in which monetary amounts are denominated
- * in different economic regions. While the monetary amount is a single kind of
- * quantity (money) the exchange rates between the different units are variable.
- * This is the principle difference between physical quantity and monetary
- * amounts, and the reason why currency units are not physical units.
+ * A monetary amount is a quantity expressing the amount of money in some currency. Currencies are the units in which
+ * monetary amounts are denominated in different economic regions. While the monetary amount is a single kind of
+ * quantity (money) the exchange rates between the different units are variable. This is the principle difference
+ * between physical quantity and monetary amounts, and the reason why currency units are not physical units.
  *
  *
  * <p>
  * Java-Klasse für MO complex type.
  *
  * <p>
- * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser
- * Klasse enthalten ist.
+ * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
  * &lt;complexType name="MO">
@@ -51,12 +43,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MO")
-@XmlSeeAlso({ SXCMMO.class, IVXBMO.class })
+@XmlSeeAlso({SXCMMO.class, IVXBMO.class})
 public class MO extends QTY {
 
     @XmlAttribute(name = "value")
@@ -69,7 +59,6 @@ public class MO extends QTY {
      * Ruft den Wert der currency-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getCurrency() {
         return currency;
@@ -79,7 +68,6 @@ public class MO extends QTY {
      * Ruft den Wert der value-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getValue() {
         return value;
@@ -88,9 +76,7 @@ public class MO extends QTY {
     /**
      * Legt den Wert der currency-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setCurrency(String value) {
         this.currency = value;
@@ -99,9 +85,7 @@ public class MO extends QTY {
     /**
      * Legt den Wert der value-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setValue(String value) {
         this.value = value;

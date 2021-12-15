@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -16,31 +16,24 @@
 
 package org.husky.common.hl7cdar2;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-
 /**
- *
- * A character string that may have a type-tag signifying its role in the
- * address. Typical parts that exist in about every address are street, house
- * number, or post box, postal code, city, country but other roles may be
- * defined regionally, nationally, or on an enterprise level (e.g. in military
- * addresses). Addresses are usually broken up into lines, which are indicated
- * by special line-breaking delimiter elements (e.g., DEL).
+ * A character string that may have a type-tag signifying its role in the address. Typical parts that exist in about
+ * every address are street, house number, or post box, postal code, city, country but other roles may be defined
+ * regionally, nationally, or on an enterprise level (e.g. in military addresses). Addresses are usually broken up into
+ * lines, which are indicated by special line-breaking delimiter elements (e.g., DEL).
  *
  *
  * <p>
  * Java-Klasse für ADXP complex type.
  *
  * <p>
- * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser
- * Klasse enthalten ist.
+ * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
  * &lt;complexType name="ADXP">
@@ -51,12 +44,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ADXP")
-@XmlSeeAlso({ AdxpPostalCode.class, AdxpStreetName.class, AdxpCountry.class,
+@XmlSeeAlso({AdxpPostalCode.class, AdxpStreetName.class, AdxpCountry.class,
         AdxpDeliveryInstallationArea.class, AdxpDirection.class, AdxpDeliveryMode.class,
         AdxpUnitID.class, AdxpBuildingNumberSuffix.class, AdxpStreetAddressLine.class,
         AdxpDeliveryInstallationType.class, AdxpUnitType.class, AdxpCareOf.class,
@@ -64,7 +55,7 @@ import javax.xml.bind.annotation.XmlType;
         AdxpState.class, AdxpDeliveryAddressLine.class, AdxpPrecinct.class,
         AdxpHouseNumberNumeric.class, AdxpStreetNameType.class, AdxpStreetNameBase.class,
         AdxpPostBox.class, AdxpDeliveryModeIdentifier.class, AdxpAdditionalLocator.class,
-        AdxpDeliveryInstallationQualifier.class, AdxpDelimiter.class })
+        AdxpDeliveryInstallationQualifier.class, AdxpDelimiter.class})
 public class ADXP extends ST {
 
     @XmlAttribute(name = "partType")
@@ -74,9 +65,8 @@ public class ADXP extends ST {
      * Gets the value of the partType property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the partType property.
      *
      * <p>
@@ -87,12 +77,11 @@ public class ADXP extends ST {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link String }
-     *
-     *
      */
+    @NonNull
     public List<String> getPartType() {
         if (partType == null) {
-            partType = new ArrayList<String>();
+            partType = new ArrayList<>();
         }
         return this.partType;
     }

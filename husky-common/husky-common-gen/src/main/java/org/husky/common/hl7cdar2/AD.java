@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -16,31 +16,24 @@
 
 package org.husky.common.hl7cdar2;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
-import javax.xml.bind.annotation.XmlMixed;
-import javax.xml.bind.annotation.XmlType;
-
 /**
- *
- * Mailing and home or office addresses. A sequence of address parts, such as
- * street or post office Box, city, postal code, country, etc.
+ * Mailing and home or office addresses. A sequence of address parts, such as street or post office Box, city, postal
+ * code, country, etc.
  *
  *
  * <p>
  * Java-Klasse für AD complex type.
  *
  * <p>
- * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser
- * Klasse enthalten ist.
+ * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
  * &lt;complexType name="AD">
@@ -84,11 +77,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "AD", propOrder = { "content" })
+@XmlType(name = "AD", propOrder = {"content"})
 // Fix Tony Schaller, medshare GmbH: is an extension of ANY
 // (see datatypes-base.xsd)
 public class AD extends ANY {
@@ -121,7 +112,7 @@ public class AD extends ANY {
             @XmlElementRef(name = "direction", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
             @XmlElementRef(name = "streetNameType", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
             @XmlElementRef(name = "buildingNumberSuffix", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
-            @XmlElementRef(name = "unitType", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false) })
+            @XmlElementRef(name = "unitType", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false)})
     @XmlMixed
     protected List<Serializable> content;
     @XmlAttribute(name = "isNotOrdered")
@@ -130,15 +121,12 @@ public class AD extends ANY {
     protected List<String> use;
 
     /**
-     *
-     * Mailing and home or office addresses. A sequence of address parts, such
-     * as street or post office Box, city, postal code, country, etc. Gets the
-     * value of the content property.
+     * Mailing and home or office addresses. A sequence of address parts, such as street or post office Box, city,
+     * postal code, country, etc. Gets the value of the content property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the content property.
      *
      * <p>
@@ -148,41 +136,29 @@ public class AD extends ANY {
      *
      *
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link AdxpAdditionalLocator }{@code >}
-     * {@link JAXBElement }{@code <}{@link AdxpPostBox }{@code >}
-     * {@link JAXBElement }{@code <}{@link AdxpHouseNumberNumeric }{@code >}
-     * {@link JAXBElement }{@code <}{@link AdxpDeliveryInstallationType
-     * }{@code >} {@link JAXBElement }{@code <}{@link AdxpCareOf }{@code >}
-     * {@link JAXBElement }{@code <}{@link AdxpPostalCode }{@code >}
-     * {@link JAXBElement }{@code <}{@link AdxpStreetName }{@code >}
-     * {@link JAXBElement }{@code <}{@link AdxpDeliveryAddressLine }{@code >}
-     * {@link JAXBElement }{@code <}{@link AdxpCity }{@code >}
-     * {@link JAXBElement }{@code <}{@link AdxpStreetAddressLine }{@code >}
-     * {@link JAXBElement }{@code <}{@link AdxpUnitID }{@code >}
-     * {@link JAXBElement }{@code <}{@link AdxpPrecinct }{@code >} {@link String
-     * } {@link JAXBElement }{@code <}{@link AdxpDeliveryInstallationArea
-     * }{@code >} {@link JAXBElement }{@code <}{@link AdxpState }{@code >}
-     * {@link JAXBElement }{@code <}{@link AdxpStreetNameBase }{@code >}
-     * {@link JAXBElement }{@code <}{@link AdxpCountry }{@code >}
-     * {@link JAXBElement }{@code <}{@link AdxpCensusTract }{@code >}
-     * {@link JAXBElement }{@code <}{@link AdxpDeliveryModeIdentifier }{@code >}
-     * {@link JAXBElement }{@code <}{@link SXCMTS }{@code >} {@link JAXBElement
-     * }{@code <}{@link AdxpDelimiter }{@code >} {@link JAXBElement
-     * }{@code <}{@link AdxpDeliveryInstallationQualifier }{@code >}
-     * {@link JAXBElement }{@code <}{@link AdxpHouseNumber }{@code >}
-     * {@link JAXBElement }{@code <}{@link AdxpDeliveryMode }{@code >}
-     * {@link JAXBElement }{@code <}{@link AdxpCounty }{@code >}
-     * {@link JAXBElement }{@code <}{@link AdxpDirection }{@code >}
-     * {@link JAXBElement }{@code <}{@link AdxpStreetNameType }{@code >}
-     * {@link JAXBElement }{@code <}{@link AdxpBuildingNumberSuffix }{@code >}
-     * {@link JAXBElement }{@code <}{@link AdxpUnitType }{@code >}
-     *
-     *
+     * Objects of the following type(s) are allowed in the list {@link JAXBElement }{@code <}{@link
+     * AdxpAdditionalLocator }{@code >} {@link JAXBElement }{@code <}{@link AdxpPostBox }{@code >} {@link JAXBElement
+     * }{@code <}{@link AdxpHouseNumberNumeric }{@code >} {@link JAXBElement }{@code <}{@link
+     * AdxpDeliveryInstallationType }{@code >} {@link JAXBElement }{@code <}{@link AdxpCareOf }{@code >} {@link
+     * JAXBElement }{@code <}{@link AdxpPostalCode }{@code >} {@link JAXBElement }{@code <}{@link AdxpStreetName }{@code
+     * >} {@link JAXBElement }{@code <}{@link AdxpDeliveryAddressLine }{@code >} {@link JAXBElement }{@code <}{@link
+     * AdxpCity }{@code >} {@link JAXBElement }{@code <}{@link AdxpStreetAddressLine }{@code >} {@link JAXBElement
+     * }{@code <}{@link AdxpUnitID }{@code >} {@link JAXBElement }{@code <}{@link AdxpPrecinct }{@code >} {@link String
+     * } {@link JAXBElement }{@code <}{@link AdxpDeliveryInstallationArea }{@code >} {@link JAXBElement }{@code <}{@link
+     * AdxpState }{@code >} {@link JAXBElement }{@code <}{@link AdxpStreetNameBase }{@code >} {@link JAXBElement }{@code
+     * <}{@link AdxpCountry }{@code >} {@link JAXBElement }{@code <}{@link AdxpCensusTract }{@code >} {@link JAXBElement
+     * }{@code <}{@link AdxpDeliveryModeIdentifier }{@code >} {@link JAXBElement }{@code <}{@link SXCMTS }{@code >}
+     * {@link JAXBElement }{@code <}{@link AdxpDelimiter }{@code >} {@link JAXBElement }{@code <}{@link
+     * AdxpDeliveryInstallationQualifier }{@code >} {@link JAXBElement }{@code <}{@link AdxpHouseNumber }{@code >}
+     * {@link JAXBElement }{@code <}{@link AdxpDeliveryMode }{@code >} {@link JAXBElement }{@code <}{@link AdxpCounty
+     * }{@code >} {@link JAXBElement }{@code <}{@link AdxpDirection }{@code >} {@link JAXBElement }{@code <}{@link
+     * AdxpStreetNameType }{@code >} {@link JAXBElement }{@code <}{@link AdxpBuildingNumberSuffix }{@code >} {@link
+     * JAXBElement }{@code <}{@link AdxpUnitType }{@code >}
      */
+    @NonNull
     public List<Serializable> getContent() {
         if (content == null) {
-            content = new ArrayList<Serializable>();
+            content = new ArrayList<>();
         }
         return this.content;
     }
@@ -191,9 +167,8 @@ public class AD extends ANY {
      * Gets the value of the use property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the use property.
      *
      * <p>
@@ -204,12 +179,11 @@ public class AD extends ANY {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link String }
-     *
-     *
      */
+    @NonNull
     public List<String> getUse() {
         if (use == null) {
-            use = new ArrayList<String>();
+            use = new ArrayList<>();
         }
         return this.use;
     }
@@ -218,7 +192,6 @@ public class AD extends ANY {
      * Ruft den Wert der isNotOrdered-Eigenschaft ab.
      *
      * @return possible object is {@link Boolean }
-     *
      */
     public Boolean isIsNotOrdered() {
         return isNotOrdered;
@@ -227,9 +200,7 @@ public class AD extends ANY {
     /**
      * Legt den Wert der isNotOrdered-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link Boolean }
-     *
+     * @param value allowed object is {@link Boolean }
      */
     public void setIsNotOrdered(Boolean value) {
         this.isNotOrdered = value;

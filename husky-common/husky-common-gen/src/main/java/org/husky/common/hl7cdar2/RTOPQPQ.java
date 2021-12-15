@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -26,8 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  * Java-Klasse für RTO_PQ_PQ complex type.
  *
  * <p>
- * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser
- * Klasse enthalten ist.
+ * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
  * &lt;complexType name="RTO_PQ_PQ">
@@ -41,11 +40,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RTO_PQ_PQ", propOrder = { "numerator", "denominator" })
+@XmlType(name = "RTO_PQ_PQ", propOrder = {"numerator", "denominator"})
 public class RTOPQPQ extends QTY {
 
     @XmlElement(required = true)
@@ -57,7 +54,6 @@ public class RTOPQPQ extends QTY {
      * Ruft den Wert der denominator-Eigenschaft ab.
      *
      * @return possible object is {@link PQ }
-     *
      */
     public PQ getDenominator() {
         return denominator;
@@ -67,7 +63,6 @@ public class RTOPQPQ extends QTY {
      * Ruft den Wert der numerator-Eigenschaft ab.
      *
      * @return possible object is {@link PQ }
-     *
      */
     public PQ getNumerator() {
         return numerator;
@@ -76,9 +71,7 @@ public class RTOPQPQ extends QTY {
     /**
      * Legt den Wert der denominator-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link PQ }
-     *
+     * @param value allowed object is {@link PQ }
      */
     public void setDenominator(PQ value) {
         this.denominator = value;
@@ -87,9 +80,7 @@ public class RTOPQPQ extends QTY {
     /**
      * Legt den Wert der numerator-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link PQ }
-     *
+     * @param value allowed object is {@link PQ }
      */
     public void setNumerator(PQ value) {
         this.numerator = value;

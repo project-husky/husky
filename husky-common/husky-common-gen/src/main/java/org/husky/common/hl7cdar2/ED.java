@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -16,32 +16,25 @@
 
 package org.husky.common.hl7cdar2;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Objects;
 
 /**
- *
- * Data that is primarily intended for human interpretation or for further
- * machine processing is outside the scope of HL7. This includes unformatted or
- * formatted written language, multimedia data, or structured information as
- * defined by a different standard (e.g., XML-signatures.) Instead of the data
- * itself, an ED may contain only a reference (see TEL.) Note that the ST data
- * type is a specialization of the ED data type when the ED media type is
- * text/plain.
+ * Data that is primarily intended for human interpretation or for further machine processing is outside the scope of
+ * HL7. This includes unformatted or formatted written language, multimedia data, or structured information as defined
+ * by a different standard (e.g., XML-signatures.) Instead of the data itself, an ED may contain only a reference (see
+ * TEL.) Note that the ST data type is a specialization of the ED data type when the ED media type is text/plain.
  *
  *
  * <p>
  * Java-Klasse für ED complex type.
  *
  * <p>
- * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser
- * Klasse enthalten ist.
+ * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
  * &lt;complexType name="ED">
@@ -60,12 +53,10 @@ import java.util.Objects;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ED", propOrder = { "reference", "thumbnail" })
-@XmlSeeAlso({ Thumbnail.class, ST.class })
+@XmlType(name = "ED", propOrder = {"reference", "thumbnail"})
+@XmlSeeAlso({Thumbnail.class, ST.class})
 public class ED extends BIN {
 
     protected TEL reference;
@@ -83,17 +74,23 @@ public class ED extends BIN {
     @XmlAttribute(name = "integrityCheckAlgorithm")
     protected IntegrityCheckAlgorithm integrityCheckAlgorithm;
 
-    public ED() {}
+    public ED() {
+    }
 
     public ED(final String ed) {
         this.setXmlMixed(ed);
+    }
+
+    public ED(final String ed,
+              final String language) {
+        this.setXmlMixed(ed);
+        this.language = language;
     }
 
     /**
      * Ruft den Wert der compression-Eigenschaft ab.
      *
      * @return possible object is {@link CompressionAlgorithm }
-     *
      */
     public CompressionAlgorithm getCompression() {
         return compression;
@@ -112,8 +109,8 @@ public class ED extends BIN {
      * Ruft den Wert der integrityCheckAlgorithm-Eigenschaft ab.
      *
      * @return possible object is {@link IntegrityCheckAlgorithm }
-     *
      */
+    @NonNull
     public IntegrityCheckAlgorithm getIntegrityCheckAlgorithm() {
         if (integrityCheckAlgorithm == null) {
             return IntegrityCheckAlgorithm.SHA_1;
@@ -126,7 +123,6 @@ public class ED extends BIN {
      * Ruft den Wert der language-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getLanguage() {
         return language;
@@ -136,8 +132,8 @@ public class ED extends BIN {
      * Ruft den Wert der mediaType-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
+    @NonNull
     public String getMediaType() {
         if (mediaType == null) {
             return "text/plain";
@@ -150,7 +146,6 @@ public class ED extends BIN {
      * Ruft den Wert der reference-Eigenschaft ab.
      *
      * @return possible object is {@link TEL }
-     *
      */
     public TEL getReference() {
         return reference;
@@ -160,7 +155,6 @@ public class ED extends BIN {
      * Ruft den Wert der thumbnail-Eigenschaft ab.
      *
      * @return possible object is {@link Thumbnail }
-     *
      */
     public Thumbnail getThumbnail() {
         return thumbnail;
@@ -171,6 +165,7 @@ public class ED extends BIN {
      *
      * @return a string.
      */
+    @NonNull
     public String getTextContent() {
         if (this.getXmlMixed() == null) {
             return "";
@@ -190,9 +185,7 @@ public class ED extends BIN {
     /**
      * Legt den Wert der compression-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link CompressionAlgorithm }
-     *
+     * @param value allowed object is {@link CompressionAlgorithm }
      */
     public void setCompression(CompressionAlgorithm value) {
         this.compression = value;
@@ -201,8 +194,7 @@ public class ED extends BIN {
     /**
      * Legt den Wert der integrityCheck-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is byte[]
+     * @param value allowed object is byte[]
      */
     public void setIntegrityCheck(byte[] value) {
         this.integrityCheck = value;
@@ -211,9 +203,7 @@ public class ED extends BIN {
     /**
      * Legt den Wert der integrityCheckAlgorithm-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link IntegrityCheckAlgorithm }
-     *
+     * @param value allowed object is {@link IntegrityCheckAlgorithm }
      */
     public void setIntegrityCheckAlgorithm(IntegrityCheckAlgorithm value) {
         this.integrityCheckAlgorithm = value;
@@ -222,9 +212,7 @@ public class ED extends BIN {
     /**
      * Legt den Wert der language-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setLanguage(String value) {
         this.language = value;
@@ -233,9 +221,7 @@ public class ED extends BIN {
     /**
      * Legt den Wert der mediaType-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setMediaType(String value) {
         this.mediaType = value;
@@ -244,9 +230,7 @@ public class ED extends BIN {
     /**
      * Legt den Wert der reference-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link TEL }
-     *
+     * @param value allowed object is {@link TEL }
      */
     public void setReference(TEL value) {
         this.reference = value;
@@ -255,9 +239,7 @@ public class ED extends BIN {
     /**
      * Legt den Wert der thumbnail-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link Thumbnail }
-     *
+     * @param value allowed object is {@link Thumbnail }
      */
     public void setThumbnail(Thumbnail value) {
         this.thumbnail = value;

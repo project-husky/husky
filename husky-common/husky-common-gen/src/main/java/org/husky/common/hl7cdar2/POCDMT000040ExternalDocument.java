@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -16,21 +16,21 @@
 
 package org.husky.common.hl7cdar2;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
  * Java-Klasse für POCD_MT000040.ExternalDocument complex type.
  *
  * <p>
- * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser
- * Klasse enthalten ist.
+ * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
  * &lt;complexType name="POCD_MT000040.ExternalDocument">
@@ -53,12 +53,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "POCD_MT000040.ExternalDocument", propOrder = { "realmCode", "typeId", "templateId",
-        "id", "code", "text", "setId", "versionNumber" })
+@XmlType(name = "POCD_MT000040.ExternalDocument", propOrder = {"realmCode", "typeId", "templateId",
+        "id", "code", "text", "setId", "versionNumber"})
 public class POCDMT000040ExternalDocument {
 
     protected List<CS> realmCode;
@@ -80,8 +78,8 @@ public class POCDMT000040ExternalDocument {
      * Ruft den Wert der classCode-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
+    @NonNull
     public String getClassCode() {
         if (classCode == null) {
             return "DOC";
@@ -94,7 +92,6 @@ public class POCDMT000040ExternalDocument {
      * Ruft den Wert der code-Eigenschaft ab.
      *
      * @return possible object is {@link CD }
-     *
      */
     public CD getCode() {
         return code;
@@ -104,9 +101,8 @@ public class POCDMT000040ExternalDocument {
      * Gets the value of the id property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the id property.
      *
      * <p>
@@ -117,12 +113,11 @@ public class POCDMT000040ExternalDocument {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link II }
-     *
-     *
      */
+    @NonNull
     public List<II> getId() {
         if (id == null) {
-            id = new ArrayList<II>();
+            id = new ArrayList<>();
         }
         return this.id;
     }
@@ -131,9 +126,8 @@ public class POCDMT000040ExternalDocument {
      * Gets the value of the moodCode property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the moodCode property.
      *
      * <p>
@@ -144,12 +138,11 @@ public class POCDMT000040ExternalDocument {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link String }
-     *
-     *
      */
+    @NonNull
     public List<String> getMoodCode() {
         if (moodCode == null) {
-            moodCode = new ArrayList<String>();
+            moodCode = new ArrayList<>();
         }
         return this.moodCode;
     }
@@ -158,9 +151,8 @@ public class POCDMT000040ExternalDocument {
      * Gets the value of the nullFlavor property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the nullFlavor property.
      *
      * <p>
@@ -171,12 +163,11 @@ public class POCDMT000040ExternalDocument {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link String }
-     *
-     *
      */
+    @NonNull
     public List<String> getNullFlavor() {
         if (nullFlavor == null) {
-            nullFlavor = new ArrayList<String>();
+            nullFlavor = new ArrayList<>();
         }
         return this.nullFlavor;
     }
@@ -185,9 +176,8 @@ public class POCDMT000040ExternalDocument {
      * Gets the value of the realmCode property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the realmCode property.
      *
      * <p>
@@ -198,12 +188,11 @@ public class POCDMT000040ExternalDocument {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link CS }
-     *
-     *
      */
+    @NonNull
     public List<CS> getRealmCode() {
         if (realmCode == null) {
-            realmCode = new ArrayList<CS>();
+            realmCode = new ArrayList<>();
         }
         return this.realmCode;
     }
@@ -212,7 +201,6 @@ public class POCDMT000040ExternalDocument {
      * Ruft den Wert der setId-Eigenschaft ab.
      *
      * @return possible object is {@link II }
-     *
      */
     public II getSetId() {
         return setId;
@@ -222,9 +210,8 @@ public class POCDMT000040ExternalDocument {
      * Gets the value of the templateId property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the templateId property.
      *
      * <p>
@@ -235,12 +222,11 @@ public class POCDMT000040ExternalDocument {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link II }
-     *
-     *
      */
+    @NonNull
     public List<II> getTemplateId() {
         if (templateId == null) {
-            templateId = new ArrayList<II>();
+            templateId = new ArrayList<>();
         }
         return this.templateId;
     }
@@ -249,7 +235,6 @@ public class POCDMT000040ExternalDocument {
      * Ruft den Wert der text-Eigenschaft ab.
      *
      * @return possible object is {@link ED }
-     *
      */
     public ED getText() {
         return text;
@@ -259,7 +244,6 @@ public class POCDMT000040ExternalDocument {
      * Ruft den Wert der typeId-Eigenschaft ab.
      *
      * @return possible object is {@link POCDMT000040InfrastructureRootTypeId }
-     *
      */
     public POCDMT000040InfrastructureRootTypeId getTypeId() {
         return typeId;
@@ -269,7 +253,6 @@ public class POCDMT000040ExternalDocument {
      * Ruft den Wert der versionNumber-Eigenschaft ab.
      *
      * @return possible object is {@link INT }
-     *
      */
     public INT getVersionNumber() {
         return versionNumber;
@@ -278,9 +261,7 @@ public class POCDMT000040ExternalDocument {
     /**
      * Legt den Wert der classCode-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setClassCode(String value) {
         this.classCode = value;
@@ -289,9 +270,7 @@ public class POCDMT000040ExternalDocument {
     /**
      * Legt den Wert der code-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link CD }
-     *
+     * @param value allowed object is {@link CD }
      */
     public void setCode(CD value) {
         this.code = value;
@@ -300,9 +279,7 @@ public class POCDMT000040ExternalDocument {
     /**
      * Legt den Wert der setId-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link II }
-     *
+     * @param value allowed object is {@link II }
      */
     public void setSetId(II value) {
         this.setId = value;
@@ -311,9 +288,7 @@ public class POCDMT000040ExternalDocument {
     /**
      * Legt den Wert der text-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link ED }
-     *
+     * @param value allowed object is {@link ED }
      */
     public void setText(ED value) {
         this.text = value;
@@ -322,10 +297,7 @@ public class POCDMT000040ExternalDocument {
     /**
      * Legt den Wert der typeId-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link POCDMT000040InfrastructureRootTypeId
-     *            }
-     *
+     * @param value allowed object is {@link POCDMT000040InfrastructureRootTypeId }
      */
     public void setTypeId(POCDMT000040InfrastructureRootTypeId value) {
         this.typeId = value;
@@ -334,9 +306,7 @@ public class POCDMT000040ExternalDocument {
     /**
      * Legt den Wert der versionNumber-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link INT }
-     *
+     * @param value allowed object is {@link INT }
      */
     public void setVersionNumber(INT value) {
         this.versionNumber = value;

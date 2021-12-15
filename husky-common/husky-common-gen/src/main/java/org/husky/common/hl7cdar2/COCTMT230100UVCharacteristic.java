@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -16,22 +16,18 @@
 
 package org.husky.common.hl7cdar2;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>
  * Java-Klasse für COCT_MT230100UV.Characteristic complex type.
  *
  * <p>
- * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser
- * Klasse enthalten ist.
+ * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
  * &lt;complexType name="COCT_MT230100UV.Characteristic">
@@ -50,12 +46,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "COCT_MT230100UV.Characteristic", namespace = "urn:ihe:pharm", propOrder = {
-        "realmCode", "typeId", "templateId", "code", "text", "value" })
+        "realmCode", "typeId", "templateId", "code", "text", "value"})
 public class COCTMT230100UVCharacteristic {
 
     @XmlElement(namespace = "urn:hl7-org:v3")
@@ -79,9 +73,8 @@ public class COCTMT230100UVCharacteristic {
      * Gets the value of the classCode property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the classCode property.
      *
      * <p>
@@ -92,12 +85,11 @@ public class COCTMT230100UVCharacteristic {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link String }
-     *
-     *
      */
+    @NonNull
     public List<String> getClassCode() {
         if (classCode == null) {
-            classCode = new ArrayList<String>();
+            classCode = new ArrayList<>();
         }
         return this.classCode;
     }
@@ -106,7 +98,6 @@ public class COCTMT230100UVCharacteristic {
      * Ruft den Wert der code-Eigenschaft ab.
      *
      * @return possible object is {@link CE }
-     *
      */
     public CE getCode() {
         return code;
@@ -116,7 +107,6 @@ public class COCTMT230100UVCharacteristic {
      * Ruft den Wert der moodCode-Eigenschaft ab.
      *
      * @return possible object is {@link ActMoodEventOccurrence }
-     *
      */
     public ActMoodEventOccurrence getMoodCode() {
         return moodCode;
@@ -126,9 +116,8 @@ public class COCTMT230100UVCharacteristic {
      * Gets the value of the nullFlavor property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the nullFlavor property.
      *
      * <p>
@@ -139,12 +128,11 @@ public class COCTMT230100UVCharacteristic {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link String }
-     *
-     *
      */
+    @NonNull
     public List<String> getNullFlavor() {
         if (nullFlavor == null) {
-            nullFlavor = new ArrayList<String>();
+            nullFlavor = new ArrayList<>();
         }
         return this.nullFlavor;
     }
@@ -153,9 +141,8 @@ public class COCTMT230100UVCharacteristic {
      * Gets the value of the realmCode property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the realmCode property.
      *
      * <p>
@@ -166,12 +153,11 @@ public class COCTMT230100UVCharacteristic {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link CS }
-     *
-     *
      */
+    @NonNull
     public List<CS> getRealmCode() {
         if (realmCode == null) {
-            realmCode = new ArrayList<CS>();
+            realmCode = new ArrayList<>();
         }
         return this.realmCode;
     }
@@ -180,9 +166,8 @@ public class COCTMT230100UVCharacteristic {
      * Gets the value of the templateId property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the templateId property.
      *
      * <p>
@@ -192,14 +177,12 @@ public class COCTMT230100UVCharacteristic {
      *
      *
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link AllInfrastructureRootTemplateId }
-     *
-     *
+     * Objects of the following type(s) are allowed in the list {@link AllInfrastructureRootTemplateId }
      */
+    @NonNull
     public List<AllInfrastructureRootTemplateId> getTemplateId() {
         if (templateId == null) {
-            templateId = new ArrayList<AllInfrastructureRootTemplateId>();
+            templateId = new ArrayList<>();
         }
         return this.templateId;
     }
@@ -208,7 +191,6 @@ public class COCTMT230100UVCharacteristic {
      * Ruft den Wert der text-Eigenschaft ab.
      *
      * @return possible object is {@link ED }
-     *
      */
     public ED getText() {
         return text;
@@ -218,7 +200,6 @@ public class COCTMT230100UVCharacteristic {
      * Ruft den Wert der typeId-Eigenschaft ab.
      *
      * @return possible object is {@link AllInfrastructureRootTypeId }
-     *
      */
     public AllInfrastructureRootTypeId getTypeId() {
         return typeId;
@@ -228,7 +209,6 @@ public class COCTMT230100UVCharacteristic {
      * Ruft den Wert der value-Eigenschaft ab.
      *
      * @return possible object is {@link ANY }
-     *
      */
     public ANY getValue() {
         return value;
@@ -237,9 +217,7 @@ public class COCTMT230100UVCharacteristic {
     /**
      * Legt den Wert der code-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link CE }
-     *
+     * @param value allowed object is {@link CE }
      */
     public void setCode(CE value) {
         this.code = value;
@@ -248,9 +226,7 @@ public class COCTMT230100UVCharacteristic {
     /**
      * Legt den Wert der moodCode-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link ActMoodEventOccurrence }
-     *
+     * @param value allowed object is {@link ActMoodEventOccurrence }
      */
     public void setMoodCode(ActMoodEventOccurrence value) {
         this.moodCode = value;
@@ -259,9 +235,7 @@ public class COCTMT230100UVCharacteristic {
     /**
      * Legt den Wert der text-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link ED }
-     *
+     * @param value allowed object is {@link ED }
      */
     public void setText(ED value) {
         this.text = value;
@@ -270,9 +244,7 @@ public class COCTMT230100UVCharacteristic {
     /**
      * Legt den Wert der typeId-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link AllInfrastructureRootTypeId }
-     *
+     * @param value allowed object is {@link AllInfrastructureRootTypeId }
      */
     public void setTypeId(AllInfrastructureRootTypeId value) {
         this.typeId = value;
@@ -281,9 +253,7 @@ public class COCTMT230100UVCharacteristic {
     /**
      * Legt den Wert der value-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link ANY }
-     *
+     * @param value allowed object is {@link ANY }
      */
     public void setValue(ANY value) {
         this.value = value;
