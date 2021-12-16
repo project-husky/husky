@@ -1,7 +1,7 @@
 package org.husky.emed.cda.services.digesters;
 
 import org.husky.common.hl7cdar2.*;
-import org.husky.common.utils.StreamUtils;
+import org.husky.common.utils.OptionalUtils;
 import org.husky.emed.cda.errors.InvalidEmedContentException;
 import org.husky.emed.cda.generated.artdecor.enums.ActSubstanceAdminSubstitutionCode;
 import org.husky.emed.cda.generated.artdecor.enums.DispenseSupplyType;
@@ -18,11 +18,11 @@ import org.husky.emed.cda.utils.IiUtils;
 import org.husky.emed.cda.utils.TemplateIds;
 import org.springframework.stereotype.Component;
 
-import static org.husky.emed.cda.utils.TemplateIds.*;
-
 import java.time.Instant;
 import java.util.Objects;
 import java.util.Optional;
+
+import static org.husky.emed.cda.utils.TemplateIds.*;
 
 /**
  * Creator of CDA-CH-EMED DIS item entry digests.
@@ -118,7 +118,7 @@ public class CceDisEntryDigester {
      * @throws InvalidEmedContentException if the item entry ID is missing.
      */
     private String getEntryId(final POCDMT000040Supply supply) throws InvalidEmedContentException {
-        return Optional.ofNullable(StreamUtils.getListFirst(supply.getId()))
+        return Optional.ofNullable(OptionalUtils.getListFirstElement(supply.getId()))
                 .map(IiUtils::getNormalizedUid)
                 .orElseThrow(() -> new InvalidEmedContentException(""));
     }

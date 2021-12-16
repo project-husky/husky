@@ -2,7 +2,7 @@ package org.husky.emed.cda.services.digesters;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.hl7cdar2.*;
-import org.husky.common.utils.StreamUtils;
+import org.husky.common.utils.OptionalUtils;
 import org.husky.emed.cda.errors.InvalidEmedContentException;
 import org.husky.emed.cda.models.common.AuthorDigest;
 import org.husky.emed.cda.models.common.EmedReference;
@@ -109,10 +109,10 @@ public class CceMtpEntryDigester {
         }
         final EmedReference reference = new EmedReference(
                 Optional.of(sa.getReference())
-                        .map(StreamUtils::getListFirst)
+                        .map(OptionalUtils::getListFirstElement)
                         .map(POCDMT000040Reference::getExternalDocument)
                         .map(POCDMT000040ExternalDocument::getId)
-                        .map(StreamUtils::getListFirst)
+                        .map(OptionalUtils::getListFirstElement)
                         .map(II::getRoot)
                         .orElse(null),
                 sa.getId().get(0).getRoot()

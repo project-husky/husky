@@ -2,9 +2,9 @@ package org.husky.emed.cda.services.readers;
 
 import org.husky.common.enums.AdministrativeGender;
 import org.husky.common.hl7cdar2.*;
-import org.husky.common.utils.StreamUtils;
-import org.husky.emed.cda.errors.InvalidEmedContentException;
+import org.husky.common.utils.OptionalUtils;
 import org.husky.common.utils.time.DateTimes;
+import org.husky.emed.cda.errors.InvalidEmedContentException;
 
 import javax.xml.bind.JAXBElement;
 import java.time.LocalDate;
@@ -47,7 +47,7 @@ public class EmedDocumentReader {
      */
     public AdministrativeGender getPatientGender() throws InvalidEmedContentException {
         return Optional.ofNullable(this.clinicalDocument.getRecordTarget())
-                .map(StreamUtils::getListFirst)
+                .map(OptionalUtils::getListFirstElement)
                 .map(POCDMT000040RecordTarget::getPatientRole)
                 .map(POCDMT000040PatientRole::getPatient)
                 .map(POCDMT000040Patient::getAdministrativeGenderCode)
@@ -63,7 +63,7 @@ public class EmedDocumentReader {
      */
     public Optional<LocalDate> getPatientBirthDate() {
         return Optional.ofNullable(this.clinicalDocument.getRecordTarget())
-                .map(StreamUtils::getListFirst)
+                .map(OptionalUtils::getListFirstElement)
                 .map(POCDMT000040RecordTarget::getPatientRole)
                 .map(POCDMT000040PatientRole::getPatient)
                 .map(POCDMT000040Patient::getBirthTime)
@@ -80,11 +80,11 @@ public class EmedDocumentReader {
      */
     public String getPatientGivenName() throws InvalidEmedContentException {
         return Optional.ofNullable(this.clinicalDocument.getRecordTarget())
-                .map(StreamUtils::getListFirst)
+                .map(OptionalUtils::getListFirstElement)
                 .map(POCDMT000040RecordTarget::getPatientRole)
                 .map(POCDMT000040PatientRole::getPatient)
                 .map(POCDMT000040Patient::getName)
-                .map(StreamUtils::getListFirst)
+                .map(OptionalUtils::getListFirstElement)
                 .map(EN::getContent)
                 .orElse(Collections.emptyList())
                 .stream()
@@ -107,11 +107,11 @@ public class EmedDocumentReader {
      */
     public String getPatientFamilyName() throws InvalidEmedContentException {
         return Optional.ofNullable(this.clinicalDocument.getRecordTarget())
-                .map(StreamUtils::getListFirst)
+                .map(OptionalUtils::getListFirstElement)
                 .map(POCDMT000040RecordTarget::getPatientRole)
                 .map(POCDMT000040PatientRole::getPatient)
                 .map(POCDMT000040Patient::getName)
-                .map(StreamUtils::getListFirst)
+                .map(OptionalUtils::getListFirstElement)
                 .map(EN::getContent)
                 .orElse(Collections.emptyList())
                 .stream()

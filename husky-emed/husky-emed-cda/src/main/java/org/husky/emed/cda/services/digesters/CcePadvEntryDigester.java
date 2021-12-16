@@ -1,21 +1,8 @@
 package org.husky.emed.cda.services.digesters;
 
 
-import java.time.Instant;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Stream;
-
-import org.husky.common.hl7cdar2.CD;
-import org.husky.common.hl7cdar2.ED;
-import org.husky.common.hl7cdar2.II;
-import org.husky.common.hl7cdar2.POCDMT000040Act;
-import org.husky.common.hl7cdar2.POCDMT000040Author;
-import org.husky.common.hl7cdar2.POCDMT000040EntryRelationship;
-import org.husky.common.hl7cdar2.POCDMT000040Observation;
-import org.husky.common.hl7cdar2.TS;
-import org.husky.common.hl7cdar2.XActRelationshipEntryRelationship;
-import org.husky.common.utils.StreamUtils;
+import org.husky.common.hl7cdar2.*;
+import org.husky.common.utils.OptionalUtils;
 import org.husky.common.utils.time.DateTimes;
 import org.husky.common.utils.time.Hl7Dtm;
 import org.husky.emed.cda.enums.PharmaceuticalAdviceStatus;
@@ -24,17 +11,17 @@ import org.husky.emed.cda.models.common.AuthorDigest;
 import org.husky.emed.cda.models.common.EmedReference;
 import org.husky.emed.cda.models.entry.EmedEntryDigest;
 import org.husky.emed.cda.models.entry.EmedPadvEntryDigest;
-import org.husky.emed.cda.models.entry.padv.EmedPadvCancelEntryDigest;
-import org.husky.emed.cda.models.entry.padv.EmedPadvChangeEntryDigest;
-import org.husky.emed.cda.models.entry.padv.EmedPadvCommentEntryDigest;
-import org.husky.emed.cda.models.entry.padv.EmedPadvOkEntryDigest;
-import org.husky.emed.cda.models.entry.padv.EmedPadvRefuseEntryDigest;
-import org.husky.emed.cda.models.entry.padv.EmedPadvSuspendEntryDigest;
+import org.husky.emed.cda.models.entry.padv.*;
 import org.husky.emed.cda.services.EmedEntryDigestService;
 import org.husky.emed.cda.utils.EntryRelationshipUtils;
 import org.husky.emed.cda.utils.IiUtils;
 import org.husky.emed.cda.utils.TemplateIds;
 import org.springframework.stereotype.Component;
+
+import java.time.Instant;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * Creator of CDA-CH-EMED MTP item entry digests.
@@ -203,7 +190,7 @@ public class CcePadvEntryDigester {
      */
     private String getEntryId(final POCDMT000040Observation observation) throws InvalidEmedContentException {
         return Optional.of(observation.getId())
-                .map(StreamUtils::getListFirst)
+                .map(OptionalUtils::getListFirstElement)
                 .map(IiUtils::getNormalizedUid)
                 .orElseThrow(() -> new InvalidEmedContentException(""));
     }

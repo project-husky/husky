@@ -3,8 +3,10 @@ package org.husky.emed.cda.services.digesters;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.dataflow.qual.SideEffectFree;
 import org.husky.common.hl7cdar2.*;
-import org.husky.common.utils.StreamUtils;
+import org.husky.common.utils.OptionalUtils;
 import org.husky.common.utils.datatypes.Uuids;
+import org.husky.common.utils.time.DateTimes;
+import org.husky.common.utils.time.Hl7Dtm;
 import org.husky.emed.cda.ch.ChEmedSpec;
 import org.husky.emed.cda.enums.EmedDocumentType;
 import org.husky.emed.cda.errors.InvalidEmedContentException;
@@ -16,8 +18,6 @@ import org.husky.emed.cda.models.common.RecipientDigest;
 import org.husky.emed.cda.models.document.*;
 import org.husky.emed.cda.utils.IvlTsUtils;
 import org.husky.emed.cda.utils.TemplateIds;
-import org.husky.common.utils.time.DateTimes;
-import org.husky.common.utils.time.Hl7Dtm;
 
 import java.math.BigInteger;
 import java.time.Instant;
@@ -96,7 +96,7 @@ public class CceDocumentDigester {
         switch (this.getDocumentType(cce)) {
             case MTP -> {
                 final var mtpEntry = Optional.of(contentSection.getEntry())
-                        .map(StreamUtils::getListFirst)
+                        .map(OptionalUtils::getListFirstElement)
                         .map(POCDMT000040Entry::getSubstanceAdministration)
                         .orElseThrow(() -> new InvalidEmedContentException("The MTP entry is missing"));
                 final var mtpEntryDigest = this.mtpEntryDigester.createDigest(mtpEntry, id, effectiveTime.toInstant(),
@@ -120,7 +120,7 @@ public class CceDocumentDigester {
             }
             case DIS -> {
                 final var disEntryDigest = Optional.of(contentSection.getEntry())
-                        .map(StreamUtils::getListFirst)
+                        .map(OptionalUtils::getListFirstElement)
                         .map(POCDMT000040Entry::getSupply)
                         .map(disEntry -> this.disEntryDigester.createDigest(disEntry, id, effectiveTime.toInstant(), patientId))
                         .orElseThrow(() -> new InvalidEmedContentException("The DIS entry is missing"));
@@ -129,7 +129,7 @@ public class CceDocumentDigester {
             }
             case PADV -> {
                 final var padvEntryDigest = Optional.of(contentSection.getEntry())
-                        .map(StreamUtils::getListFirst)
+                        .map(OptionalUtils::getListFirstElement)
                         .map(POCDMT000040Entry::getObservation)
                         .map(padvEntry -> this.padvEntryDigester.createDigest(padvEntry, id, effectiveTime.toInstant(), patientId))
                         .orElseThrow(() -> new InvalidEmedContentException("The PADV entry is missing"));
@@ -306,7 +306,7 @@ public class CceDocumentDigester {
                 .filter(section -> TemplateIds.isInList(TemplateIds.ORIGINAL_REPRESENTATION_SECTION, section.getTemplateId()))
                 .findAny()
                 .map(POCDMT000040Section::getEntry)
-                .map(StreamUtils::getListFirst)
+                .map(OptionalUtils::getListFirstElement)
                 .map(POCDMT000040Entry::getObservationMedia)
                 .map(POCDMT000040ObservationMedia::getValue)
                 .map(ED::getTextContent)
