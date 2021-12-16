@@ -1,20 +1,19 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
- * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  */
 package org.husky.communication.ch.enums;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.Objects;
 import javax.annotation.processing.Generated;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.enums.CodeSystems;
 import org.husky.common.enums.LanguageCode;
 import org.husky.common.enums.ValueSetEnumInterface;
@@ -32,14 +31,14 @@ import org.husky.common.enums.ValueSetEnumInterface;
  * Version: 201907.2-stable<br>
  * Status: FINAL
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-08-26")
+@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-12-09")
 public enum PurposeOfUse implements ValueSetEnumInterface {
 
     /**
-     * EN: Automatic Upload<br>
-     * DE: Automatischer Upload<br>
-     * FR: Upload automatique<br>
-     * IT: Upload automatico<br>
+     * EN: Automatic Upload.<br>
+     * DE: Automatischer Upload.<br>
+     * FR: Upload automatique.<br>
+     * IT: Upload automatico.<br>
      */
     AUTOMATIC_UPLOAD("AUTO",
                      "2.16.756.5.30.1.127.3.10.5",
@@ -49,10 +48,10 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
                      "Upload automatique",
                      "Upload automatico"),
     /**
-     * EN: Emergency Access<br>
-     * DE: Notfallzugriff<br>
-     * FR: Accès d’urgence<br>
-     * IT: Accesso di emergenza<br>
+     * EN: Emergency Access.<br>
+     * DE: Notfallzugriff.<br>
+     * FR: Accès d’urgence.<br>
+     * IT: Accesso di emergenza.<br>
      */
     EMERGENCY_ACCESS("EMER",
                      "2.16.756.5.30.1.127.3.10.5",
@@ -62,10 +61,10 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
                      "Accès d’urgence",
                      "Accesso di emergenza"),
     /**
-     * EN: Normal Access<br>
-     * DE: Normaler Zugriff<br>
-     * FR: Accès normal<br>
-     * IT: Accesso normale<br>
+     * EN: Normal Access.<br>
+     * DE: Normaler Zugriff.<br>
+     * FR: Accès normal.<br>
+     * IT: Accesso normale.<br>
      */
     NORMAL_ACCESS("NORM",
                   "2.16.756.5.30.1.127.3.10.5",
@@ -76,26 +75,26 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
                   "Accesso normale");
 
     /**
-     * EN: Code for Automatic Upload<br>
-     * DE: Code für Automatischer Upload<br>
-     * FR: Code de Upload automatique<br>
-     * IT: Code per Upload automatico<br>
+     * EN: Code for Automatic Upload.<br>
+     * DE: Code für Automatischer Upload.<br>
+     * FR: Code de Upload automatique.<br>
+     * IT: Code per Upload automatico.<br>
      */
     public static final String AUTOMATIC_UPLOAD_CODE = "AUTO";
 
     /**
-     * EN: Code for Emergency Access<br>
-     * DE: Code für Notfallzugriff<br>
-     * FR: Code de Accès d’urgence<br>
-     * IT: Code per Accesso di emergenza<br>
+     * EN: Code for Emergency Access.<br>
+     * DE: Code für Notfallzugriff.<br>
+     * FR: Code de Accès d’urgence.<br>
+     * IT: Code per Accesso di emergenza.<br>
      */
     public static final String EMERGENCY_ACCESS_CODE = "EMER";
 
     /**
-     * EN: Code for Normal Access<br>
-     * DE: Code für Normaler Zugriff<br>
-     * FR: Code de Accès normal<br>
-     * IT: Code per Accesso normale<br>
+     * EN: Code for Normal Access.<br>
+     * DE: Code für Normaler Zugriff.<br>
+     * FR: Code de Accès normal.<br>
+     * IT: Code per Accesso normale.<br>
      */
     public static final String NORMAL_ACCESS_CODE = "NORM";
 
@@ -110,12 +109,18 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
     public static final String VALUE_SET_NAME = "EprPurposeOfUse";
 
     /**
+     * Identifier of the code system (all values share the same).
+     */
+    public static final String CODE_SYSTEM_ID = "2.16.756.5.30.1.127.3.10.5";
+
+    /**
      * Gets the Enum with a given code.
      *
      * @param code The code value.
      * @return the enum value found or {@code null}.
      */
-    public static PurposeOfUse getEnum(final String code) {
+    @Nullable
+    public static PurposeOfUse getEnum(@Nullable final String code) {
         for (final PurposeOfUse x : values()) {
             if (x.getCodeValue().equals(code)) {
                 return x;
@@ -130,7 +135,7 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
      * @param enumName The name of the enum.
      * @return {@code true} if the name is found in this value set, {@code false} otherwise.
      */
-    public static boolean isEnumOfValueSet(final String enumName) {
+    public static boolean isEnumOfValueSet(@Nullable final String enumName) {
         if (enumName == null) {
             return false;
         }
@@ -149,7 +154,7 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
      * @param codeValue The code value.
      * @return {@code true} if the value is found in this value set, {@code false} otherwise.
      */
-    public static boolean isInValueSet(final String codeValue) {
+    public static boolean isInValueSet(@Nullable final String codeValue) {
         for (final PurposeOfUse x : values()) {
             if (x.getCodeValue().equals(codeValue)) {
                 return true;
@@ -161,17 +166,21 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
     /**
      * Machine interpretable and (inside this class) unique code.
      */
-    private String code;
+    @NonNull
+    private final String code;
 
     /**
      * Identifier of the referencing code system.
      */
-    private String codeSystem;
+    @NonNull
+    private final String codeSystem;
 
     /**
-     * The display names per language.
+     * The display names per language. It's always stored in the given order: default display name (0), in English (1),
+     * in German (2), in French (3) and in Italian (4).
      */
-    private Map<LanguageCode, String> displayNames;
+    @NonNull
+    private final String[] displayNames;
 
     /**
      * Instantiates this enum with a given code and display names.
@@ -184,20 +193,15 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
      * @param displayNameFr The display name in French.
      * @param displayNameIt The display name in Italian.
      */
-    PurposeOfUse(final String code, final String codeSystem, final String displayName, final String displayNameEn, final String displayNameDe, final String displayNameFr, final String displayNameIt) {
-        this.code = code;
-        this.codeSystem = codeSystem;
-        this.displayNames = new HashMap<>();
-        this.displayNames.put(null,
-                              displayName);
-        this.displayNames.put(LanguageCode.ENGLISH,
-                              displayNameEn);
-        this.displayNames.put(LanguageCode.GERMAN,
-                              displayNameDe);
-        this.displayNames.put(LanguageCode.FRENCH,
-                              displayNameFr);
-        this.displayNames.put(LanguageCode.ITALIAN,
-                              displayNameIt);
+    PurposeOfUse(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
+        this.code = Objects.requireNonNull(code);
+        this.codeSystem = Objects.requireNonNull(codeSystem);
+        this.displayNames = new String[5];
+        this.displayNames[0] = Objects.requireNonNull(displayName);
+        this.displayNames[1] = Objects.requireNonNull(displayNameEn);
+        this.displayNames[2] = Objects.requireNonNull(displayNameDe);
+        this.displayNames[3] = Objects.requireNonNull(displayNameFr);
+        this.displayNames[4] = Objects.requireNonNull(displayNameIt);
     }
 
     /**
@@ -206,6 +210,7 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
      * @return the code system identifier.
      */
     @Override
+    @NonNull
     public String getCodeSystemId() {
         return this.codeSystem;
     }
@@ -213,13 +218,14 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
     /**
      * Gets the code system name.
      *
-     * @return the code system identifier.
+     * @return the code system name.
      */
     @Override
+    @NonNull
     public String getCodeSystemName() {
-        final CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
-        if (cs != null) {
-            return cs.getCodeSystemName();
+        final var codeSystem = CodeSystems.getEnum(this.codeSystem);
+        if (codeSystem != null) {
+            return codeSystem.getCodeSystemName();
         }
         return "";
     }
@@ -230,24 +236,35 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
      * @return the code value.
      */
     @Override
+    @NonNull
     public String getCodeValue() {
         return this.code;
     }
 
     /**
-     * Gets the display name defined by the language param. If there is no english translation, the default display name
-     *      is returned.
+     * Gets the display name defined by the language param.
      *
-     * @param languageCode The language code to get the display name for.
-     * @return the display name in the desired language. if language not found, display name in german will be returned.
+     * @param languageCode The language code to get the display name for, {@code null} to get the default display name.
+     * @return the display name in the desired language.
      */
     @Override
-    public String getDisplayName(final LanguageCode languageCode) {
-        final String displayName = this.displayNames.get(languageCode);
-        if (displayName == null && languageCode == LanguageCode.ENGLISH) {
-            return this.displayNames.get(null);
+    @NonNull
+    public String getDisplayName(@Nullable final LanguageCode languageCode) {
+        if (languageCode == null) {
+            return this.displayNames[0];
         }
-        return displayName;
+        return switch(languageCode) {
+            case ENGLISH ->
+                this.displayNames[1];
+            case GERMAN ->
+                this.displayNames[2];
+            case FRENCH ->
+                this.displayNames[3];
+            case ITALIAN ->
+                this.displayNames[4];
+            default ->
+                "TOTRANSLATE";
+        };
     }
 
     /**
@@ -256,6 +273,7 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
      * @return the value set identifier.
      */
     @Override
+    @NonNull
     public String getValueSetId() {
         return VALUE_SET_ID;
     }
@@ -266,6 +284,7 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
      * @return the value set name.
      */
     @Override
+    @NonNull
     public String getValueSetName() {
         return VALUE_SET_NAME;
     }

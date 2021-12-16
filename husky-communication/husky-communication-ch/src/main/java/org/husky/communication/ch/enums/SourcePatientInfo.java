@@ -1,20 +1,19 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
- * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  */
 package org.husky.communication.ch.enums;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.Objects;
 import javax.annotation.processing.Generated;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.enums.CodeSystems;
 import org.husky.common.enums.LanguageCode;
 import org.husky.common.enums.ValueSetEnumInterface;
@@ -32,14 +31,14 @@ import org.husky.common.enums.ValueSetEnumInterface;
  * Version: 202104.0-stable<br>
  * Status: FINAL
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-08-26")
+@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-12-09")
 public enum SourcePatientInfo implements ValueSetEnumInterface {
 
     /**
-     * EN: Female<br>
-     * DE: Weiblich<br>
-     * FR: Féminin<br>
-     * IT: Femminile<br>
+     * EN: Female.<br>
+     * DE: Weiblich.<br>
+     * FR: Féminin.<br>
+     * IT: Femminile.<br>
      */
     FEMALE("female",
            "2.16.840.1.113883.4.642.1.2",
@@ -49,10 +48,10 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
            "Féminin",
            "Femminile"),
     /**
-     * EN: Male<br>
-     * DE: Männlich<br>
-     * FR: Masculin<br>
-     * IT: Maschile<br>
+     * EN: Male.<br>
+     * DE: Männlich.<br>
+     * FR: Masculin.<br>
+     * IT: Maschile.<br>
      */
     MALE("male",
          "2.16.840.1.113883.4.642.1.2",
@@ -62,10 +61,10 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
          "Masculin",
          "Maschile"),
     /**
-     * EN: Other<br>
-     * DE: Anderes<br>
-     * FR: Autre<br>
-     * IT: Altro<br>
+     * EN: Other.<br>
+     * DE: Anderes.<br>
+     * FR: Autre.<br>
+     * IT: Altro.<br>
      */
     OTHER("other",
           "2.16.840.1.113883.4.642.1.2",
@@ -75,10 +74,10 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
           "Autre",
           "Altro"),
     /**
-     * EN: Unknown<br>
-     * DE: Unbekannt<br>
-     * FR: Inconnu<br>
-     * IT: Sconosciuto<br>
+     * EN: Unknown.<br>
+     * DE: Unbekannt.<br>
+     * FR: Inconnu.<br>
+     * IT: Sconosciuto.<br>
      */
     UNKNOWN("unknown",
             "2.16.840.1.113883.4.642.1.2",
@@ -89,34 +88,34 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
             "Sconosciuto");
 
     /**
-     * EN: Code for Female<br>
-     * DE: Code für Weiblich<br>
-     * FR: Code de Féminin<br>
-     * IT: Code per Femminile<br>
+     * EN: Code for Female.<br>
+     * DE: Code für Weiblich.<br>
+     * FR: Code de Féminin.<br>
+     * IT: Code per Femminile.<br>
      */
     public static final String FEMALE_CODE = "female";
 
     /**
-     * EN: Code for Male<br>
-     * DE: Code für Männlich<br>
-     * FR: Code de Masculin<br>
-     * IT: Code per Maschile<br>
+     * EN: Code for Male.<br>
+     * DE: Code für Männlich.<br>
+     * FR: Code de Masculin.<br>
+     * IT: Code per Maschile.<br>
      */
     public static final String MALE_CODE = "male";
 
     /**
-     * EN: Code for Other<br>
-     * DE: Code für Anderes<br>
-     * FR: Code de Autre<br>
-     * IT: Code per Altro<br>
+     * EN: Code for Other.<br>
+     * DE: Code für Anderes.<br>
+     * FR: Code de Autre.<br>
+     * IT: Code per Altro.<br>
      */
     public static final String OTHER_CODE = "other";
 
     /**
-     * EN: Code for Unknown<br>
-     * DE: Code für Unbekannt<br>
-     * FR: Code de Inconnu<br>
-     * IT: Code per Sconosciuto<br>
+     * EN: Code for Unknown.<br>
+     * DE: Code für Unbekannt.<br>
+     * FR: Code de Inconnu.<br>
+     * IT: Code per Sconosciuto.<br>
      */
     public static final String UNKNOWN_CODE = "unknown";
 
@@ -131,12 +130,18 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
     public static final String VALUE_SET_NAME = "DocumentEntry.sourcePatientInfo.PID-8";
 
     /**
+     * Identifier of the code system (all values share the same).
+     */
+    public static final String CODE_SYSTEM_ID = "2.16.840.1.113883.4.642.1.2";
+
+    /**
      * Gets the Enum with a given code.
      *
      * @param code The code value.
      * @return the enum value found or {@code null}.
      */
-    public static SourcePatientInfo getEnum(final String code) {
+    @Nullable
+    public static SourcePatientInfo getEnum(@Nullable final String code) {
         for (final SourcePatientInfo x : values()) {
             if (x.getCodeValue().equals(code)) {
                 return x;
@@ -151,7 +156,7 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
      * @param enumName The name of the enum.
      * @return {@code true} if the name is found in this value set, {@code false} otherwise.
      */
-    public static boolean isEnumOfValueSet(final String enumName) {
+    public static boolean isEnumOfValueSet(@Nullable final String enumName) {
         if (enumName == null) {
             return false;
         }
@@ -170,7 +175,7 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
      * @param codeValue The code value.
      * @return {@code true} if the value is found in this value set, {@code false} otherwise.
      */
-    public static boolean isInValueSet(final String codeValue) {
+    public static boolean isInValueSet(@Nullable final String codeValue) {
         for (final SourcePatientInfo x : values()) {
             if (x.getCodeValue().equals(codeValue)) {
                 return true;
@@ -182,17 +187,21 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
     /**
      * Machine interpretable and (inside this class) unique code.
      */
-    private String code;
+    @NonNull
+    private final String code;
 
     /**
      * Identifier of the referencing code system.
      */
-    private String codeSystem;
+    @NonNull
+    private final String codeSystem;
 
     /**
-     * The display names per language.
+     * The display names per language. It's always stored in the given order: default display name (0), in English (1),
+     * in German (2), in French (3) and in Italian (4).
      */
-    private Map<LanguageCode, String> displayNames;
+    @NonNull
+    private final String[] displayNames;
 
     /**
      * Instantiates this enum with a given code and display names.
@@ -205,20 +214,15 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
      * @param displayNameFr The display name in French.
      * @param displayNameIt The display name in Italian.
      */
-    SourcePatientInfo(final String code, final String codeSystem, final String displayName, final String displayNameEn, final String displayNameDe, final String displayNameFr, final String displayNameIt) {
-        this.code = code;
-        this.codeSystem = codeSystem;
-        this.displayNames = new HashMap<>();
-        this.displayNames.put(null,
-                              displayName);
-        this.displayNames.put(LanguageCode.ENGLISH,
-                              displayNameEn);
-        this.displayNames.put(LanguageCode.GERMAN,
-                              displayNameDe);
-        this.displayNames.put(LanguageCode.FRENCH,
-                              displayNameFr);
-        this.displayNames.put(LanguageCode.ITALIAN,
-                              displayNameIt);
+    SourcePatientInfo(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
+        this.code = Objects.requireNonNull(code);
+        this.codeSystem = Objects.requireNonNull(codeSystem);
+        this.displayNames = new String[5];
+        this.displayNames[0] = Objects.requireNonNull(displayName);
+        this.displayNames[1] = Objects.requireNonNull(displayNameEn);
+        this.displayNames[2] = Objects.requireNonNull(displayNameDe);
+        this.displayNames[3] = Objects.requireNonNull(displayNameFr);
+        this.displayNames[4] = Objects.requireNonNull(displayNameIt);
     }
 
     /**
@@ -227,6 +231,7 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
      * @return the code system identifier.
      */
     @Override
+    @NonNull
     public String getCodeSystemId() {
         return this.codeSystem;
     }
@@ -234,13 +239,14 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
     /**
      * Gets the code system name.
      *
-     * @return the code system identifier.
+     * @return the code system name.
      */
     @Override
+    @NonNull
     public String getCodeSystemName() {
-        final CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
-        if (cs != null) {
-            return cs.getCodeSystemName();
+        final var codeSystem = CodeSystems.getEnum(this.codeSystem);
+        if (codeSystem != null) {
+            return codeSystem.getCodeSystemName();
         }
         return "";
     }
@@ -251,24 +257,35 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
      * @return the code value.
      */
     @Override
+    @NonNull
     public String getCodeValue() {
         return this.code;
     }
 
     /**
-     * Gets the display name defined by the language param. If there is no english translation, the default display name
-     *      is returned.
+     * Gets the display name defined by the language param.
      *
-     * @param languageCode The language code to get the display name for.
-     * @return the display name in the desired language. if language not found, display name in german will be returned.
+     * @param languageCode The language code to get the display name for, {@code null} to get the default display name.
+     * @return the display name in the desired language.
      */
     @Override
-    public String getDisplayName(final LanguageCode languageCode) {
-        final String displayName = this.displayNames.get(languageCode);
-        if (displayName == null && languageCode == LanguageCode.ENGLISH) {
-            return this.displayNames.get(null);
+    @NonNull
+    public String getDisplayName(@Nullable final LanguageCode languageCode) {
+        if (languageCode == null) {
+            return this.displayNames[0];
         }
-        return displayName;
+        return switch(languageCode) {
+            case ENGLISH ->
+                this.displayNames[1];
+            case GERMAN ->
+                this.displayNames[2];
+            case FRENCH ->
+                this.displayNames[3];
+            case ITALIAN ->
+                this.displayNames[4];
+            default ->
+                "TOTRANSLATE";
+        };
     }
 
     /**
@@ -277,6 +294,7 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
      * @return the value set identifier.
      */
     @Override
+    @NonNull
     public String getValueSetId() {
         return VALUE_SET_ID;
     }
@@ -287,6 +305,7 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
      * @return the value set name.
      */
     @Override
+    @NonNull
     public String getValueSetName() {
         return VALUE_SET_NAME;
     }
