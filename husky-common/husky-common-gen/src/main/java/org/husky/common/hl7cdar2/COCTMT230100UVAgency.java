@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -16,22 +16,18 @@
 
 package org.husky.common.hl7cdar2;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>
  * Java-Klasse für COCT_MT230100UV.Agency complex type.
  *
  * <p>
- * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser
- * Klasse enthalten ist.
+ * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
  * &lt;complexType name="COCT_MT230100UV.Agency">
@@ -49,12 +45,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "COCT_MT230100UV.Agency", namespace = "urn:ihe:pharm", propOrder = { "realmCode",
-        "typeId", "templateId", "id", "name" })
+@XmlType(name = "COCT_MT230100UV.Agency", namespace = "urn:ihe:pharm", propOrder = {"realmCode",
+        "typeId", "templateId", "id", "name"})
 public class COCTMT230100UVAgency {
 
     @XmlElement(namespace = "urn:hl7-org:v3")
@@ -76,7 +70,6 @@ public class COCTMT230100UVAgency {
      * Ruft den Wert der classCode-Eigenschaft ab.
      *
      * @return possible object is {@link EntityClassPublicInstitution }
-     *
      */
     public EntityClassPublicInstitution getClassCode() {
         return classCode;
@@ -86,7 +79,6 @@ public class COCTMT230100UVAgency {
      * Ruft den Wert der determinerCode-Eigenschaft ab.
      *
      * @return possible object is {@link EntityDeterminerSpecific }
-     *
      */
     public EntityDeterminerSpecific getDeterminerCode() {
         return determinerCode;
@@ -96,7 +88,6 @@ public class COCTMT230100UVAgency {
      * Ruft den Wert der id-Eigenschaft ab.
      *
      * @return possible object is {@link II }
-     *
      */
     public II getId() {
         return id;
@@ -106,7 +97,6 @@ public class COCTMT230100UVAgency {
      * Ruft den Wert der name-Eigenschaft ab.
      *
      * @return possible object is {@link ON }
-     *
      */
     public ON getName() {
         return name;
@@ -116,9 +106,8 @@ public class COCTMT230100UVAgency {
      * Gets the value of the nullFlavor property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the nullFlavor property.
      *
      * <p>
@@ -129,12 +118,11 @@ public class COCTMT230100UVAgency {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link String }
-     *
-     *
      */
+    @NonNull
     public List<String> getNullFlavor() {
         if (nullFlavor == null) {
-            nullFlavor = new ArrayList<String>();
+            nullFlavor = new ArrayList<>();
         }
         return this.nullFlavor;
     }
@@ -143,9 +131,8 @@ public class COCTMT230100UVAgency {
      * Gets the value of the realmCode property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the realmCode property.
      *
      * <p>
@@ -156,12 +143,11 @@ public class COCTMT230100UVAgency {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link CS }
-     *
-     *
      */
+    @NonNull
     public List<CS> getRealmCode() {
         if (realmCode == null) {
-            realmCode = new ArrayList<CS>();
+            realmCode = new ArrayList<>();
         }
         return this.realmCode;
     }
@@ -170,9 +156,8 @@ public class COCTMT230100UVAgency {
      * Gets the value of the templateId property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the templateId property.
      *
      * <p>
@@ -182,14 +167,12 @@ public class COCTMT230100UVAgency {
      *
      *
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link AllInfrastructureRootTemplateId }
-     *
-     *
+     * Objects of the following type(s) are allowed in the list {@link AllInfrastructureRootTemplateId }
      */
+    @NonNull
     public List<AllInfrastructureRootTemplateId> getTemplateId() {
         if (templateId == null) {
-            templateId = new ArrayList<AllInfrastructureRootTemplateId>();
+            templateId = new ArrayList<>();
         }
         return this.templateId;
     }
@@ -198,7 +181,6 @@ public class COCTMT230100UVAgency {
      * Ruft den Wert der typeId-Eigenschaft ab.
      *
      * @return possible object is {@link AllInfrastructureRootTypeId }
-     *
      */
     public AllInfrastructureRootTypeId getTypeId() {
         return typeId;
@@ -207,9 +189,7 @@ public class COCTMT230100UVAgency {
     /**
      * Legt den Wert der classCode-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link EntityClassPublicInstitution }
-     *
+     * @param value allowed object is {@link EntityClassPublicInstitution }
      */
     public void setClassCode(EntityClassPublicInstitution value) {
         this.classCode = value;
@@ -218,9 +198,7 @@ public class COCTMT230100UVAgency {
     /**
      * Legt den Wert der determinerCode-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link EntityDeterminerSpecific }
-     *
+     * @param value allowed object is {@link EntityDeterminerSpecific }
      */
     public void setDeterminerCode(EntityDeterminerSpecific value) {
         this.determinerCode = value;
@@ -229,9 +207,7 @@ public class COCTMT230100UVAgency {
     /**
      * Legt den Wert der id-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link II }
-     *
+     * @param value allowed object is {@link II }
      */
     public void setId(II value) {
         this.id = value;
@@ -240,9 +216,7 @@ public class COCTMT230100UVAgency {
     /**
      * Legt den Wert der name-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link ON }
-     *
+     * @param value allowed object is {@link ON }
      */
     public void setName(ON value) {
         this.name = value;
@@ -251,9 +225,7 @@ public class COCTMT230100UVAgency {
     /**
      * Legt den Wert der typeId-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link AllInfrastructureRootTypeId }
-     *
+     * @param value allowed object is {@link AllInfrastructureRootTypeId }
      */
     public void setTypeId(AllInfrastructureRootTypeId value) {
         this.typeId = value;

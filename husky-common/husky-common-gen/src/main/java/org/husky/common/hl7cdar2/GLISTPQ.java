@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -16,21 +16,15 @@
 
 package org.husky.common.hl7cdar2;
 
+import javax.xml.bind.annotation.*;
 import java.math.BigInteger;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>
  * Java-Klasse für GLIST_PQ complex type.
  *
  * <p>
- * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser
- * Klasse enthalten ist.
+ * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
  * &lt;complexType name="GLIST_PQ">
@@ -46,11 +40,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "GLIST_PQ", propOrder = { "head", "increment" })
+@XmlType(name = "GLIST_PQ", propOrder = {"head", "increment"})
 public class GLISTPQ extends ANY {
 
     @XmlElement(required = true)
@@ -66,7 +58,6 @@ public class GLISTPQ extends ANY {
      * Ruft den Wert der denominator-Eigenschaft ab.
      *
      * @return possible object is {@link BigInteger }
-     *
      */
     public BigInteger getDenominator() {
         return denominator;
@@ -76,7 +67,6 @@ public class GLISTPQ extends ANY {
      * Ruft den Wert der head-Eigenschaft ab.
      *
      * @return possible object is {@link PQ }
-     *
      */
     public PQ getHead() {
         return head;
@@ -86,7 +76,6 @@ public class GLISTPQ extends ANY {
      * Ruft den Wert der increment-Eigenschaft ab.
      *
      * @return possible object is {@link PQ }
-     *
      */
     public PQ getIncrement() {
         return increment;
@@ -96,7 +85,6 @@ public class GLISTPQ extends ANY {
      * Ruft den Wert der period-Eigenschaft ab.
      *
      * @return possible object is {@link BigInteger }
-     *
      */
     public BigInteger getPeriod() {
         return period;
@@ -105,9 +93,7 @@ public class GLISTPQ extends ANY {
     /**
      * Legt den Wert der denominator-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link BigInteger }
-     *
+     * @param value allowed object is {@link BigInteger }
      */
     public void setDenominator(BigInteger value) {
         this.denominator = value;
@@ -116,9 +102,7 @@ public class GLISTPQ extends ANY {
     /**
      * Legt den Wert der head-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link PQ }
-     *
+     * @param value allowed object is {@link PQ }
      */
     public void setHead(PQ value) {
         this.head = value;
@@ -127,9 +111,7 @@ public class GLISTPQ extends ANY {
     /**
      * Legt den Wert der increment-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link PQ }
-     *
+     * @param value allowed object is {@link PQ }
      */
     public void setIncrement(PQ value) {
         this.increment = value;
@@ -138,9 +120,7 @@ public class GLISTPQ extends ANY {
     /**
      * Legt den Wert der period-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link BigInteger }
-     *
+     * @param value allowed object is {@link BigInteger }
      */
     public void setPeriod(BigInteger value) {
         this.period = value;

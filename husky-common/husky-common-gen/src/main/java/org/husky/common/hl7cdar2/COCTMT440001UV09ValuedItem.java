@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -16,22 +16,18 @@
 
 package org.husky.common.hl7cdar2;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>
  * Java-Klasse für COCT_MT440001UV09.ValuedItem complex type.
  *
  * <p>
- * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser
- * Klasse enthalten ist.
+ * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
  * &lt;complexType name="COCT_MT440001UV09.ValuedItem">
@@ -52,13 +48,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "COCT_MT440001UV09.ValuedItem", namespace = "urn:ihe:pharm", propOrder = {
         "realmCode", "typeId", "templateId", "id", "code", "effectiveTime", "unitQuantity",
-        "unitPriceAmt", "netAmt" })
+        "unitPriceAmt", "netAmt"})
 public class COCTMT440001UV09ValuedItem {
 
     @XmlElement(namespace = "urn:hl7-org:v3")
@@ -84,7 +78,6 @@ public class COCTMT440001UV09ValuedItem {
      * Ruft den Wert der classCode-Eigenschaft ab.
      *
      * @return possible object is {@link ActClassInvoiceElement }
-     *
      */
     public ActClassInvoiceElement getClassCode() {
         return classCode;
@@ -94,7 +87,6 @@ public class COCTMT440001UV09ValuedItem {
      * Ruft den Wert der code-Eigenschaft ab.
      *
      * @return possible object is {@link CD }
-     *
      */
     public CD getCode() {
         return code;
@@ -104,7 +96,6 @@ public class COCTMT440001UV09ValuedItem {
      * Ruft den Wert der effectiveTime-Eigenschaft ab.
      *
      * @return possible object is {@link IVLTS }
-     *
      */
     public IVLTS getEffectiveTime() {
         return effectiveTime;
@@ -114,9 +105,8 @@ public class COCTMT440001UV09ValuedItem {
      * Gets the value of the id property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the id property.
      *
      * <p>
@@ -127,12 +117,11 @@ public class COCTMT440001UV09ValuedItem {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link II }
-     *
-     *
      */
+    @NonNull
     public List<II> getId() {
         if (id == null) {
-            id = new ArrayList<II>();
+            id = new ArrayList<>();
         }
         return this.id;
     }
@@ -141,7 +130,6 @@ public class COCTMT440001UV09ValuedItem {
      * Ruft den Wert der moodCode-Eigenschaft ab.
      *
      * @return possible object is {@link XActMoodDefEvn }
-     *
      */
     public XActMoodDefEvn getMoodCode() {
         return moodCode;
@@ -151,7 +139,6 @@ public class COCTMT440001UV09ValuedItem {
      * Ruft den Wert der netAmt-Eigenschaft ab.
      *
      * @return possible object is {@link MO }
-     *
      */
     public MO getNetAmt() {
         return netAmt;
@@ -161,9 +148,8 @@ public class COCTMT440001UV09ValuedItem {
      * Gets the value of the realmCode property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the realmCode property.
      *
      * <p>
@@ -174,12 +160,11 @@ public class COCTMT440001UV09ValuedItem {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link CS }
-     *
-     *
      */
+    @NonNull
     public List<CS> getRealmCode() {
         if (realmCode == null) {
-            realmCode = new ArrayList<CS>();
+            realmCode = new ArrayList<>();
         }
         return this.realmCode;
     }
@@ -188,9 +173,8 @@ public class COCTMT440001UV09ValuedItem {
      * Gets the value of the templateId property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the templateId property.
      *
      * <p>
@@ -200,14 +184,12 @@ public class COCTMT440001UV09ValuedItem {
      *
      *
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link AllInfrastructureRootTemplateId }
-     *
-     *
+     * Objects of the following type(s) are allowed in the list {@link AllInfrastructureRootTemplateId }
      */
+    @NonNull
     public List<AllInfrastructureRootTemplateId> getTemplateId() {
         if (templateId == null) {
-            templateId = new ArrayList<AllInfrastructureRootTemplateId>();
+            templateId = new ArrayList<>();
         }
         return this.templateId;
     }
@@ -216,7 +198,6 @@ public class COCTMT440001UV09ValuedItem {
      * Ruft den Wert der typeId-Eigenschaft ab.
      *
      * @return possible object is {@link AllInfrastructureRootTypeId }
-     *
      */
     public AllInfrastructureRootTypeId getTypeId() {
         return typeId;
@@ -226,7 +207,6 @@ public class COCTMT440001UV09ValuedItem {
      * Ruft den Wert der unitPriceAmt-Eigenschaft ab.
      *
      * @return possible object is {@link RTOMOPQ }
-     *
      */
     public RTOMOPQ getUnitPriceAmt() {
         return unitPriceAmt;
@@ -236,7 +216,6 @@ public class COCTMT440001UV09ValuedItem {
      * Ruft den Wert der unitQuantity-Eigenschaft ab.
      *
      * @return possible object is {@link RTOPQPQ }
-     *
      */
     public RTOPQPQ getUnitQuantity() {
         return unitQuantity;
@@ -245,9 +224,7 @@ public class COCTMT440001UV09ValuedItem {
     /**
      * Legt den Wert der classCode-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link ActClassInvoiceElement }
-     *
+     * @param value allowed object is {@link ActClassInvoiceElement }
      */
     public void setClassCode(ActClassInvoiceElement value) {
         this.classCode = value;
@@ -256,9 +233,7 @@ public class COCTMT440001UV09ValuedItem {
     /**
      * Legt den Wert der code-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link CD }
-     *
+     * @param value allowed object is {@link CD }
      */
     public void setCode(CD value) {
         this.code = value;
@@ -267,9 +242,7 @@ public class COCTMT440001UV09ValuedItem {
     /**
      * Legt den Wert der effectiveTime-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link IVLTS }
-     *
+     * @param value allowed object is {@link IVLTS }
      */
     public void setEffectiveTime(IVLTS value) {
         this.effectiveTime = value;
@@ -278,9 +251,7 @@ public class COCTMT440001UV09ValuedItem {
     /**
      * Legt den Wert der moodCode-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link XActMoodDefEvn }
-     *
+     * @param value allowed object is {@link XActMoodDefEvn }
      */
     public void setMoodCode(XActMoodDefEvn value) {
         this.moodCode = value;
@@ -289,9 +260,7 @@ public class COCTMT440001UV09ValuedItem {
     /**
      * Legt den Wert der netAmt-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link MO }
-     *
+     * @param value allowed object is {@link MO }
      */
     public void setNetAmt(MO value) {
         this.netAmt = value;
@@ -300,9 +269,7 @@ public class COCTMT440001UV09ValuedItem {
     /**
      * Legt den Wert der typeId-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link AllInfrastructureRootTypeId }
-     *
+     * @param value allowed object is {@link AllInfrastructureRootTypeId }
      */
     public void setTypeId(AllInfrastructureRootTypeId value) {
         this.typeId = value;
@@ -311,9 +278,7 @@ public class COCTMT440001UV09ValuedItem {
     /**
      * Legt den Wert der unitPriceAmt-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link RTOMOPQ }
-     *
+     * @param value allowed object is {@link RTOMOPQ }
      */
     public void setUnitPriceAmt(RTOMOPQ value) {
         this.unitPriceAmt = value;
@@ -322,9 +287,7 @@ public class COCTMT440001UV09ValuedItem {
     /**
      * Legt den Wert der unitQuantity-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link RTOPQPQ }
-     *
+     * @param value allowed object is {@link RTOPQPQ }
      */
     public void setUnitQuantity(RTOPQPQ value) {
         this.unitQuantity = value;

@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -16,21 +16,21 @@
 
 package org.husky.common.hl7cdar2;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
  * Java-Klasse für SXPR_TS complex type.
  *
  * <p>
- * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser
- * Klasse enthalten ist.
+ * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
  * &lt;complexType name="SXPR_TS">
@@ -43,11 +43,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "SXPR_TS", propOrder = { "comp" })
+@XmlType(name = "SXPR_TS", propOrder = {"comp"})
 public class SXPRTS extends SXCMTS {
 
     @XmlElement(required = true)
@@ -57,9 +55,8 @@ public class SXPRTS extends SXCMTS {
      * Gets the value of the comp property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the comp property.
      *
      * <p>
@@ -70,12 +67,11 @@ public class SXPRTS extends SXCMTS {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link SXCMTS }
-     *
-     *
      */
+    @NonNull
     public List<SXCMTS> getComp() {
         if (comp == null) {
-            comp = new ArrayList<SXCMTS>();
+            comp = new ArrayList<>();
         }
         return this.comp;
     }

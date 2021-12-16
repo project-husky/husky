@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -16,24 +16,19 @@
 
 package org.husky.common.hl7cdar2;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
  * Java-Klasse für COCT_MT230100UV.Medicine complex type.
  *
  * <p>
- * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser
- * Klasse enthalten ist.
+ * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
  * &lt;complexType name="COCT_MT230100UV.Medicine">
@@ -64,14 +59,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "COCT_MT230100UV.Medicine", namespace = "urn:ihe:pharm", propOrder = { "realmCode",
+@XmlType(name = "COCT_MT230100UV.Medicine", namespace = "urn:ihe:pharm", propOrder = {"realmCode",
         "typeId", "templateId", "id", "code", "name", "desc", "riskCode", "handlingCode",
         "formCode", "lotNumberText", "expirationTime", "stabilityTime", "asDistributedProduct",
-        "asMedicineManufacturer", "asContent", "asSpecializedKind", "part", "ingredient" })
+        "asMedicineManufacturer", "asContent", "asSpecializedKind", "part", "ingredient"})
 public class COCTMT230100UVMedicine {
 
     @XmlElement(namespace = "urn:hl7-org:v3")
@@ -110,9 +103,7 @@ public class COCTMT230100UVMedicine {
     /**
      * Ruft den Wert der asContent-Eigenschaft ab.
      *
-     * @return possible object is {@link JAXBElement
-     *         }{@code <}{@link COCTMT230100UVContent }{@code >}
-     *
+     * @return possible object is {@link JAXBElement }{@code <}{@link COCTMT230100UVContent }{@code >}
      */
     public JAXBElement<COCTMT230100UVContent> getAsContent() {
         return asContent;
@@ -122,9 +113,8 @@ public class COCTMT230100UVMedicine {
      * Gets the value of the asDistributedProduct property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the asDistributedProduct property.
      *
      * <p>
@@ -134,14 +124,12 @@ public class COCTMT230100UVMedicine {
      *
      *
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link COCTMT230100UVDistributedProduct }
-     *
-     *
+     * Objects of the following type(s) are allowed in the list {@link COCTMT230100UVDistributedProduct }
      */
+    @NonNull
     public List<COCTMT230100UVDistributedProduct> getAsDistributedProduct() {
         if (asDistributedProduct == null) {
-            asDistributedProduct = new ArrayList<COCTMT230100UVDistributedProduct>();
+            asDistributedProduct = new ArrayList<>();
         }
         return this.asDistributedProduct;
     }
@@ -150,9 +138,8 @@ public class COCTMT230100UVMedicine {
      * Gets the value of the asMedicineManufacturer property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the asMedicineManufacturer property.
      *
      * <p>
@@ -162,14 +149,12 @@ public class COCTMT230100UVMedicine {
      *
      *
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link COCTMT230100UVMedicineManufacturer }
-     *
-     *
+     * Objects of the following type(s) are allowed in the list {@link COCTMT230100UVMedicineManufacturer }
      */
+    @NonNull
     public List<COCTMT230100UVMedicineManufacturer> getAsMedicineManufacturer() {
         if (asMedicineManufacturer == null) {
-            asMedicineManufacturer = new ArrayList<COCTMT230100UVMedicineManufacturer>();
+            asMedicineManufacturer = new ArrayList<>();
         }
         return this.asMedicineManufacturer;
     }
@@ -178,9 +163,8 @@ public class COCTMT230100UVMedicine {
      * Gets the value of the asSpecializedKind property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the asSpecializedKind property.
      *
      * <p>
@@ -190,14 +174,12 @@ public class COCTMT230100UVMedicine {
      *
      *
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link COCTMT230100UVSpecializedKind }
-     *
-     *
+     * Objects of the following type(s) are allowed in the list {@link COCTMT230100UVSpecializedKind }
      */
+    @NonNull
     public List<COCTMT230100UVSpecializedKind> getAsSpecializedKind() {
         if (asSpecializedKind == null) {
-            asSpecializedKind = new ArrayList<COCTMT230100UVSpecializedKind>();
+            asSpecializedKind = new ArrayList<>();
         }
         return this.asSpecializedKind;
     }
@@ -206,7 +188,6 @@ public class COCTMT230100UVMedicine {
      * Ruft den Wert der classCode-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getClassCode() {
         return classCode;
@@ -216,7 +197,6 @@ public class COCTMT230100UVMedicine {
      * Ruft den Wert der code-Eigenschaft ab.
      *
      * @return possible object is {@link CE }
-     *
      */
     public CE getCode() {
         return code;
@@ -226,7 +206,6 @@ public class COCTMT230100UVMedicine {
      * Ruft den Wert der desc-Eigenschaft ab.
      *
      * @return possible object is {@link ED }
-     *
      */
     public ED getDesc() {
         return desc;
@@ -236,7 +215,6 @@ public class COCTMT230100UVMedicine {
      * Ruft den Wert der determinerCode-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getDeterminerCode() {
         return determinerCode;
@@ -246,7 +224,6 @@ public class COCTMT230100UVMedicine {
      * Ruft den Wert der expirationTime-Eigenschaft ab.
      *
      * @return possible object is {@link IVLTS }
-     *
      */
     public IVLTS getExpirationTime() {
         return expirationTime;
@@ -256,7 +233,6 @@ public class COCTMT230100UVMedicine {
      * Ruft den Wert der formCode-Eigenschaft ab.
      *
      * @return possible object is {@link CE }
-     *
      */
     public CE getFormCode() {
         return formCode;
@@ -266,7 +242,6 @@ public class COCTMT230100UVMedicine {
      * Ruft den Wert der handlingCode-Eigenschaft ab.
      *
      * @return possible object is {@link CE }
-     *
      */
     public CE getHandlingCode() {
         return handlingCode;
@@ -276,7 +251,6 @@ public class COCTMT230100UVMedicine {
      * Ruft den Wert der id-Eigenschaft ab.
      *
      * @return possible object is {@link II }
-     *
      */
     public II getId() {
         return id;
@@ -286,9 +260,8 @@ public class COCTMT230100UVMedicine {
      * Gets the value of the ingredient property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the ingredient property.
      *
      * <p>
@@ -298,14 +271,11 @@ public class COCTMT230100UVMedicine {
      *
      *
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link COCTMT230100UVIngredient }
-     *
-     *
+     * Objects of the following type(s) are allowed in the list {@link COCTMT230100UVIngredient }
      */
     public List<COCTMT230100UVIngredient> getIngredient() {
         if (ingredient == null) {
-            ingredient = new ArrayList<COCTMT230100UVIngredient>();
+            ingredient = new ArrayList<>();
         }
         return this.ingredient;
     }
@@ -314,7 +284,6 @@ public class COCTMT230100UVMedicine {
      * Ruft den Wert der lotNumberText-Eigenschaft ab.
      *
      * @return possible object is {@link ST }
-     *
      */
     public ST getLotNumberText() {
         return lotNumberText;
@@ -324,9 +293,8 @@ public class COCTMT230100UVMedicine {
      * Gets the value of the name property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the name property.
      *
      * <p>
@@ -337,12 +305,10 @@ public class COCTMT230100UVMedicine {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link TN }
-     *
-     *
      */
     public List<TN> getName() {
         if (name == null) {
-            name = new ArrayList<TN>();
+            name = new ArrayList<>();
         }
         return this.name;
     }
@@ -351,9 +317,8 @@ public class COCTMT230100UVMedicine {
      * Gets the value of the part property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the part property.
      *
      * <p>
@@ -363,14 +328,11 @@ public class COCTMT230100UVMedicine {
      *
      *
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link COCTMT230100UVPart }
-     *
-     *
+     * Objects of the following type(s) are allowed in the list {@link COCTMT230100UVPart }
      */
     public List<COCTMT230100UVPart> getPart() {
         if (part == null) {
-            part = new ArrayList<COCTMT230100UVPart>();
+            part = new ArrayList<>();
         }
         return this.part;
     }
@@ -379,9 +341,8 @@ public class COCTMT230100UVMedicine {
      * Gets the value of the realmCode property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the realmCode property.
      *
      * <p>
@@ -392,12 +353,10 @@ public class COCTMT230100UVMedicine {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link CS }
-     *
-     *
      */
     public List<CS> getRealmCode() {
         if (realmCode == null) {
-            realmCode = new ArrayList<CS>();
+            realmCode = new ArrayList<>();
         }
         return this.realmCode;
     }
@@ -406,7 +365,6 @@ public class COCTMT230100UVMedicine {
      * Ruft den Wert der riskCode-Eigenschaft ab.
      *
      * @return possible object is {@link CE }
-     *
      */
     public CE getRiskCode() {
         return riskCode;
@@ -416,7 +374,6 @@ public class COCTMT230100UVMedicine {
      * Ruft den Wert der stabilityTime-Eigenschaft ab.
      *
      * @return possible object is {@link IVLTS }
-     *
      */
     public IVLTS getStabilityTime() {
         return stabilityTime;
@@ -426,9 +383,8 @@ public class COCTMT230100UVMedicine {
      * Gets the value of the templateId property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the templateId property.
      *
      * <p>
@@ -438,14 +394,11 @@ public class COCTMT230100UVMedicine {
      *
      *
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link AllInfrastructureRootTemplateId }
-     *
-     *
+     * Objects of the following type(s) are allowed in the list {@link AllInfrastructureRootTemplateId }
      */
     public List<AllInfrastructureRootTemplateId> getTemplateId() {
         if (templateId == null) {
-            templateId = new ArrayList<AllInfrastructureRootTemplateId>();
+            templateId = new ArrayList<>();
         }
         return this.templateId;
     }
@@ -454,7 +407,6 @@ public class COCTMT230100UVMedicine {
      * Ruft den Wert der typeId-Eigenschaft ab.
      *
      * @return possible object is {@link AllInfrastructureRootTypeId }
-     *
      */
     public AllInfrastructureRootTypeId getTypeId() {
         return typeId;
@@ -463,10 +415,7 @@ public class COCTMT230100UVMedicine {
     /**
      * Legt den Wert der asContent-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link JAXBElement
-     *            }{@code <}{@link COCTMT230100UVContent }{@code >}
-     *
+     * @param value allowed object is {@link JAXBElement }{@code <}{@link COCTMT230100UVContent }{@code >}
      */
     public void setAsContent(JAXBElement<COCTMT230100UVContent> value) {
         this.asContent = value;
@@ -475,9 +424,7 @@ public class COCTMT230100UVMedicine {
     /**
      * Legt den Wert der classCode-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setClassCode(String value) {
         this.classCode = value;
@@ -486,9 +433,7 @@ public class COCTMT230100UVMedicine {
     /**
      * Legt den Wert der code-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link CE }
-     *
+     * @param value allowed object is {@link CE }
      */
     public void setCode(CE value) {
         this.code = value;
@@ -497,9 +442,7 @@ public class COCTMT230100UVMedicine {
     /**
      * Legt den Wert der desc-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link ED }
-     *
+     * @param value allowed object is {@link ED }
      */
     public void setDesc(ED value) {
         this.desc = value;
@@ -508,9 +451,7 @@ public class COCTMT230100UVMedicine {
     /**
      * Legt den Wert der determinerCode-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setDeterminerCode(String value) {
         this.determinerCode = value;
@@ -519,9 +460,7 @@ public class COCTMT230100UVMedicine {
     /**
      * Legt den Wert der expirationTime-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link IVLTS }
-     *
+     * @param value allowed object is {@link IVLTS }
      */
     public void setExpirationTime(IVLTS value) {
         this.expirationTime = value;
@@ -530,9 +469,7 @@ public class COCTMT230100UVMedicine {
     /**
      * Legt den Wert der formCode-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link CE }
-     *
+     * @param value allowed object is {@link CE }
      */
     public void setFormCode(CE value) {
         this.formCode = value;
@@ -541,9 +478,7 @@ public class COCTMT230100UVMedicine {
     /**
      * Legt den Wert der handlingCode-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link CE }
-     *
+     * @param value allowed object is {@link CE }
      */
     public void setHandlingCode(CE value) {
         this.handlingCode = value;
@@ -552,9 +487,7 @@ public class COCTMT230100UVMedicine {
     /**
      * Legt den Wert der id-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link II }
-     *
+     * @param value allowed object is {@link II }
      */
     public void setId(II value) {
         this.id = value;
@@ -563,9 +496,7 @@ public class COCTMT230100UVMedicine {
     /**
      * Legt den Wert der lotNumberText-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link ST }
-     *
+     * @param value allowed object is {@link ST }
      */
     public void setLotNumberText(ST value) {
         this.lotNumberText = value;
@@ -574,9 +505,7 @@ public class COCTMT230100UVMedicine {
     /**
      * Legt den Wert der riskCode-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link CE }
-     *
+     * @param value allowed object is {@link CE }
      */
     public void setRiskCode(CE value) {
         this.riskCode = value;
@@ -585,9 +514,7 @@ public class COCTMT230100UVMedicine {
     /**
      * Legt den Wert der stabilityTime-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link IVLTS }
-     *
+     * @param value allowed object is {@link IVLTS }
      */
     public void setStabilityTime(IVLTS value) {
         this.stabilityTime = value;
@@ -596,9 +523,7 @@ public class COCTMT230100UVMedicine {
     /**
      * Legt den Wert der typeId-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link AllInfrastructureRootTypeId }
-     *
+     * @param value allowed object is {@link AllInfrastructureRootTypeId }
      */
     public void setTypeId(AllInfrastructureRootTypeId value) {
         this.typeId = value;

@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -16,22 +16,18 @@
 
 package org.husky.common.hl7cdar2;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>
  * Java-Klasse für POCD_MT000040.AssignedAuthor complex type.
  *
  * <p>
- * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser
- * Klasse enthalten ist.
+ * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
  * &lt;complexType name="POCD_MT000040.AssignedAuthor">
@@ -57,13 +53,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "POCD_MT000040.AssignedAuthor", propOrder = { "realmCode", "typeId", "templateId",
+@XmlType(name = "POCD_MT000040.AssignedAuthor", propOrder = {"realmCode", "typeId", "templateId",
         "id", "code", "addr", "telecom", "assignedPerson", "assignedAuthoringDevice",
-        "representedOrganization" })
+        "representedOrganization"})
 public class POCDMT000040AssignedAuthor {
 
     protected List<CS> realmCode;
@@ -86,9 +80,8 @@ public class POCDMT000040AssignedAuthor {
      * Gets the value of the addr property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the addr property.
      *
      * <p>
@@ -99,12 +92,11 @@ public class POCDMT000040AssignedAuthor {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link AD }
-     *
-     *
      */
+    @NonNull
     public List<AD> getAddr() {
         if (addr == null) {
-            addr = new ArrayList<AD>();
+            addr = new ArrayList<>();
         }
         return this.addr;
     }
@@ -113,7 +105,6 @@ public class POCDMT000040AssignedAuthor {
      * Ruft den Wert der assignedAuthoringDevice-Eigenschaft ab.
      *
      * @return possible object is {@link POCDMT000040AuthoringDevice }
-     *
      */
     public POCDMT000040AuthoringDevice getAssignedAuthoringDevice() {
         return assignedAuthoringDevice;
@@ -123,7 +114,6 @@ public class POCDMT000040AssignedAuthor {
      * Ruft den Wert der assignedPerson-Eigenschaft ab.
      *
      * @return possible object is {@link POCDMT000040Person }
-     *
      */
     public POCDMT000040Person getAssignedPerson() {
         return assignedPerson;
@@ -133,8 +123,8 @@ public class POCDMT000040AssignedAuthor {
      * Ruft den Wert der classCode-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
+    @NonNull
     public String getClassCode() {
         if (classCode == null) {
             return "ASSIGNED";
@@ -147,7 +137,6 @@ public class POCDMT000040AssignedAuthor {
      * Ruft den Wert der code-Eigenschaft ab.
      *
      * @return possible object is {@link CE }
-     *
      */
     public CE getCode() {
         return code;
@@ -157,9 +146,8 @@ public class POCDMT000040AssignedAuthor {
      * Gets the value of the id property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the id property.
      *
      * <p>
@@ -170,12 +158,11 @@ public class POCDMT000040AssignedAuthor {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link II }
-     *
-     *
      */
+    @NonNull
     public List<II> getId() {
         if (id == null) {
-            id = new ArrayList<II>();
+            id = new ArrayList<>();
         }
         return this.id;
     }
@@ -184,9 +171,8 @@ public class POCDMT000040AssignedAuthor {
      * Gets the value of the nullFlavor property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the nullFlavor property.
      *
      * <p>
@@ -197,12 +183,11 @@ public class POCDMT000040AssignedAuthor {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link String }
-     *
-     *
      */
+    @NonNull
     public List<String> getNullFlavor() {
         if (nullFlavor == null) {
-            nullFlavor = new ArrayList<String>();
+            nullFlavor = new ArrayList<>();
         }
         return this.nullFlavor;
     }
@@ -211,9 +196,8 @@ public class POCDMT000040AssignedAuthor {
      * Gets the value of the realmCode property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the realmCode property.
      *
      * <p>
@@ -224,12 +208,11 @@ public class POCDMT000040AssignedAuthor {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link CS }
-     *
-     *
      */
+    @NonNull
     public List<CS> getRealmCode() {
         if (realmCode == null) {
-            realmCode = new ArrayList<CS>();
+            realmCode = new ArrayList<>();
         }
         return this.realmCode;
     }
@@ -238,7 +221,6 @@ public class POCDMT000040AssignedAuthor {
      * Ruft den Wert der representedOrganization-Eigenschaft ab.
      *
      * @return possible object is {@link POCDMT000040Organization }
-     *
      */
     public POCDMT000040Organization getRepresentedOrganization() {
         return representedOrganization;
@@ -248,9 +230,8 @@ public class POCDMT000040AssignedAuthor {
      * Gets the value of the telecom property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the telecom property.
      *
      * <p>
@@ -261,12 +242,11 @@ public class POCDMT000040AssignedAuthor {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link TEL }
-     *
-     *
      */
+    @NonNull
     public List<TEL> getTelecom() {
         if (telecom == null) {
-            telecom = new ArrayList<TEL>();
+            telecom = new ArrayList<>();
         }
         return this.telecom;
     }
@@ -275,9 +255,8 @@ public class POCDMT000040AssignedAuthor {
      * Gets the value of the templateId property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the templateId property.
      *
      * <p>
@@ -288,12 +267,11 @@ public class POCDMT000040AssignedAuthor {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link II }
-     *
-     *
      */
+    @NonNull
     public List<II> getTemplateId() {
         if (templateId == null) {
-            templateId = new ArrayList<II>();
+            templateId = new ArrayList<>();
         }
         return this.templateId;
     }
@@ -302,7 +280,6 @@ public class POCDMT000040AssignedAuthor {
      * Ruft den Wert der typeId-Eigenschaft ab.
      *
      * @return possible object is {@link POCDMT000040InfrastructureRootTypeId }
-     *
      */
     public POCDMT000040InfrastructureRootTypeId getTypeId() {
         return typeId;
@@ -311,9 +288,7 @@ public class POCDMT000040AssignedAuthor {
     /**
      * Legt den Wert der assignedAuthoringDevice-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link POCDMT000040AuthoringDevice }
-     *
+     * @param value allowed object is {@link POCDMT000040AuthoringDevice }
      */
     public void setAssignedAuthoringDevice(POCDMT000040AuthoringDevice value) {
         this.assignedAuthoringDevice = value;
@@ -322,9 +297,7 @@ public class POCDMT000040AssignedAuthor {
     /**
      * Legt den Wert der assignedPerson-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link POCDMT000040Person }
-     *
+     * @param value allowed object is {@link POCDMT000040Person }
      */
     public void setAssignedPerson(POCDMT000040Person value) {
         this.assignedPerson = value;
@@ -333,9 +306,7 @@ public class POCDMT000040AssignedAuthor {
     /**
      * Legt den Wert der classCode-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setClassCode(String value) {
         this.classCode = value;
@@ -344,9 +315,7 @@ public class POCDMT000040AssignedAuthor {
     /**
      * Legt den Wert der code-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link CE }
-     *
+     * @param value allowed object is {@link CE }
      */
     public void setCode(CE value) {
         this.code = value;
@@ -355,9 +324,7 @@ public class POCDMT000040AssignedAuthor {
     /**
      * Legt den Wert der representedOrganization-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link POCDMT000040Organization }
-     *
+     * @param value allowed object is {@link POCDMT000040Organization }
      */
     public void setRepresentedOrganization(POCDMT000040Organization value) {
         this.representedOrganization = value;
@@ -366,10 +333,7 @@ public class POCDMT000040AssignedAuthor {
     /**
      * Legt den Wert der typeId-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link POCDMT000040InfrastructureRootTypeId
-     *            }
-     *
+     * @param value allowed object is {@link POCDMT000040InfrastructureRootTypeId }
      */
     public void setTypeId(POCDMT000040InfrastructureRootTypeId value) {
         this.typeId = value;

@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -16,31 +16,22 @@
 
 package org.husky.common.hl7cdar2;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.XmlMixed;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * <p>
  * Java-Klasse für StrucDoc.Td complex type.
  *
  * <p>
- * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser
- * Klasse enthalten ist.
+ * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
  * &lt;complexType name="StrucDoc.Td">
@@ -103,11 +94,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "StrucDoc.Td", propOrder = { "content" })
+@XmlType(name = "StrucDoc.Td", propOrder = {"content"})
 public class StrucDocTd {
 
     @XmlElementRefs({
@@ -120,7 +109,7 @@ public class StrucDocTd {
             @XmlElementRef(name = "sub", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
             @XmlElementRef(name = "renderMultiMedia", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
             @XmlElementRef(name = "content", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
-            @XmlElementRef(name = "footnoteRef", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false) })
+            @XmlElementRef(name = "footnoteRef", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false)})
     @XmlMixed
     protected List<Serializable> content;
     @XmlAttribute(name = "ID")
@@ -165,7 +154,6 @@ public class StrucDocTd {
      * Ruft den Wert der abbr-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getAbbr() {
         return abbr;
@@ -175,7 +163,6 @@ public class StrucDocTd {
      * Ruft den Wert der align-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getAlign() {
         return align;
@@ -185,7 +172,6 @@ public class StrucDocTd {
      * Ruft den Wert der axis-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getAxis() {
         return axis;
@@ -195,7 +181,6 @@ public class StrucDocTd {
      * Ruft den Wert der char-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getChar() {
         return _char;
@@ -205,7 +190,6 @@ public class StrucDocTd {
      * Ruft den Wert der charoff-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getCharoff() {
         return charoff;
@@ -215,8 +199,8 @@ public class StrucDocTd {
      * Ruft den Wert der colspan-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
+    @NonNull
     public String getColspan() {
         if (colspan == null) {
             return "1";
@@ -229,9 +213,8 @@ public class StrucDocTd {
      * Gets the value of the content property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the content property.
      *
      * <p>
@@ -241,23 +224,18 @@ public class StrucDocTd {
      *
      *
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link StrucDocLinkHtml }{@code >}
-     * {@link JAXBElement }{@code <}{@link StrucDocSup }{@code >}
-     * {@link JAXBElement }{@code <}{@link StrucDocParagraph }{@code >}
-     * {@link JAXBElement }{@code <}{@link StrucDocList }{@code >}
-     * {@link JAXBElement }{@code <}{@link StrucDocBr }{@code >} {@link String }
-     * {@link JAXBElement }{@code <}{@link StrucDocFootnote }{@code >}
-     * {@link JAXBElement }{@code <}{@link StrucDocSub }{@code >}
-     * {@link JAXBElement }{@code <}{@link StrucDocRenderMultiMedia }{@code >}
-     * {@link JAXBElement }{@code <}{@link StrucDocContent }{@code >}
-     * {@link JAXBElement }{@code <}{@link StrucDocFootnoteRef }{@code >}
-     *
-     *
+     * Objects of the following type(s) are allowed in the list {@link JAXBElement }{@code <}{@link StrucDocLinkHtml
+     * }{@code >} {@link JAXBElement }{@code <}{@link StrucDocSup }{@code >} {@link JAXBElement }{@code <}{@link
+     * StrucDocParagraph }{@code >} {@link JAXBElement }{@code <}{@link StrucDocList }{@code >} {@link JAXBElement
+     * }{@code <}{@link StrucDocBr }{@code >} {@link String } {@link JAXBElement }{@code <}{@link StrucDocFootnote
+     * }{@code >} {@link JAXBElement }{@code <}{@link StrucDocSub }{@code >} {@link JAXBElement }{@code <}{@link
+     * StrucDocRenderMultiMedia }{@code >} {@link JAXBElement }{@code <}{@link StrucDocContent }{@code >} {@link
+     * JAXBElement }{@code <}{@link StrucDocFootnoteRef }{@code >}
      */
+    @NonNull
     public List<Serializable> getContent() {
         if (content == null) {
-            content = new ArrayList<Serializable>();
+            content = new ArrayList<>();
         }
         return this.content;
     }
@@ -266,9 +244,8 @@ public class StrucDocTd {
      * Gets the value of the headers property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the headers property.
      *
      * <p>
@@ -279,12 +256,11 @@ public class StrucDocTd {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link Object }
-     *
-     *
      */
+    @NonNull
     public List<Object> getHeaders() {
         if (headers == null) {
-            headers = new ArrayList<Object>();
+            headers = new ArrayList<>();
         }
         return this.headers;
     }
@@ -293,7 +269,6 @@ public class StrucDocTd {
      * Ruft den Wert der id-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getID() {
         return id;
@@ -303,7 +278,6 @@ public class StrucDocTd {
      * Ruft den Wert der language-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getLanguage() {
         return language;
@@ -313,8 +287,8 @@ public class StrucDocTd {
      * Ruft den Wert der rowspan-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
+    @NonNull
     public String getRowspan() {
         if (rowspan == null) {
             return "1";
@@ -327,7 +301,6 @@ public class StrucDocTd {
      * Ruft den Wert der scope-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getScope() {
         return scope;
@@ -337,9 +310,8 @@ public class StrucDocTd {
      * Gets the value of the styleCode property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the styleCode property.
      *
      * <p>
@@ -350,12 +322,11 @@ public class StrucDocTd {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link String }
-     *
-     *
      */
+    @NonNull
     public List<String> getStyleCode() {
         if (styleCode == null) {
-            styleCode = new ArrayList<String>();
+            styleCode = new ArrayList<>();
         }
         return this.styleCode;
     }
@@ -364,7 +335,6 @@ public class StrucDocTd {
      * Ruft den Wert der valign-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getValign() {
         return valign;
@@ -373,9 +343,7 @@ public class StrucDocTd {
     /**
      * Legt den Wert der abbr-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setAbbr(String value) {
         this.abbr = value;
@@ -384,9 +352,7 @@ public class StrucDocTd {
     /**
      * Legt den Wert der align-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setAlign(String value) {
         this.align = value;
@@ -395,9 +361,7 @@ public class StrucDocTd {
     /**
      * Legt den Wert der axis-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setAxis(String value) {
         this.axis = value;
@@ -406,9 +370,7 @@ public class StrucDocTd {
     /**
      * Legt den Wert der char-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setChar(String value) {
         this._char = value;
@@ -417,9 +379,7 @@ public class StrucDocTd {
     /**
      * Legt den Wert der charoff-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setCharoff(String value) {
         this.charoff = value;
@@ -428,9 +388,7 @@ public class StrucDocTd {
     /**
      * Legt den Wert der colspan-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setColspan(String value) {
         this.colspan = value;
@@ -439,9 +397,7 @@ public class StrucDocTd {
     /**
      * Legt den Wert der id-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setID(String value) {
         this.id = value;
@@ -450,9 +406,7 @@ public class StrucDocTd {
     /**
      * Legt den Wert der language-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setLanguage(String value) {
         this.language = value;
@@ -461,9 +415,7 @@ public class StrucDocTd {
     /**
      * Legt den Wert der rowspan-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setRowspan(String value) {
         this.rowspan = value;
@@ -472,9 +424,7 @@ public class StrucDocTd {
     /**
      * Legt den Wert der scope-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setScope(String value) {
         this.scope = value;
@@ -483,9 +433,7 @@ public class StrucDocTd {
     /**
      * Legt den Wert der valign-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setValign(String value) {
         this.valign = value;

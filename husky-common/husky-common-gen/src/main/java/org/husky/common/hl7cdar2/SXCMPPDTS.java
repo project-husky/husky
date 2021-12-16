@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -16,19 +16,16 @@
 
 package org.husky.common.hl7cdar2;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import javax.xml.bind.annotation.*;
 
 /**
  * <p>
  * Java-Klasse für SXCM_PPD_TS complex type.
  *
  * <p>
- * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser
- * Klasse enthalten ist.
+ * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
  * &lt;complexType name="SXCM_PPD_TS">
@@ -39,12 +36,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SXCM_PPD_TS")
-@XmlSeeAlso({ IVLPPDTS.class, EIVLPPDTS.class, PIVLPPDTS.class })
+@XmlSeeAlso({IVLPPDTS.class, EIVLPPDTS.class, PIVLPPDTS.class})
 public class SXCMPPDTS extends PPDTS {
 
     @XmlAttribute(name = "operator")
@@ -54,8 +49,8 @@ public class SXCMPPDTS extends PPDTS {
      * Ruft den Wert der operator-Eigenschaft ab.
      *
      * @return possible object is {@link SetOperator }
-     *
      */
+    @NonNull
     public SetOperator getOperator() {
         if (operator == null) {
             return SetOperator.I;
@@ -67,9 +62,7 @@ public class SXCMPPDTS extends PPDTS {
     /**
      * Legt den Wert der operator-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link SetOperator }
-     *
+     * @param value allowed object is {@link SetOperator }
      */
     public void setOperator(SetOperator value) {
         this.operator = value;

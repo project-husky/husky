@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -16,29 +16,20 @@
 
 package org.husky.common.hl7cdar2;
 
+import javax.xml.bind.annotation.*;
 import java.math.BigInteger;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-
 /**
- *
- * Integer numbers (-1,0,1,2, 100, 3398129, etc.) are precise numbers that are
- * results of counting and enumerating. Integer numbers are discrete, the set of
- * integers is infinite but countable. No arbitrary limit is imposed on the
- * range of integer numbers. Two NULL flavors are defined for the positive and
- * negative infinity.
+ * Integer numbers (-1,0,1,2, 100, 3398129, etc.) are precise numbers that are results of counting and enumerating.
+ * Integer numbers are discrete, the set of integers is infinite but countable. No arbitrary limit is imposed on the
+ * range of integer numbers. Two NULL flavors are defined for the positive and negative infinity.
  *
  *
  * <p>
  * Java-Klasse für INT complex type.
  *
  * <p>
- * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser
- * Klasse enthalten ist.
+ * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
  * &lt;complexType name="INT">
@@ -49,22 +40,38 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "INT")
-@XmlSeeAlso({ IVXBINT.class, SXCMINT.class, POCDMT000040RegionOfInterestValue.class })
+@XmlSeeAlso({IVXBINT.class, SXCMINT.class, POCDMT000040RegionOfInterestValue.class})
 public class INT extends QTY {
 
     @XmlAttribute(name = "value")
     protected BigInteger value;
 
+    public INT() {
+    }
+
+    public INT(final BigInteger value) {
+        this.value = value;
+    }
+
+    public INT(final int value) {
+        this(BigInteger.valueOf(value));
+    }
+
+    public INT(final Integer value) {
+        if (value == null) {
+            this.value = null;
+        } else {
+            this.value = BigInteger.valueOf(value);
+        }
+    }
+
     /**
      * Ruft den Wert der value-Eigenschaft ab.
      *
      * @return possible object is {@link BigInteger }
-     *
      */
     public BigInteger getValue() {
         return value;
@@ -73,9 +80,7 @@ public class INT extends QTY {
     /**
      * Legt den Wert der value-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link BigInteger }
-     *
+     * @param value allowed object is {@link BigInteger }
      */
     public void setValue(BigInteger value) {
         this.value = value;

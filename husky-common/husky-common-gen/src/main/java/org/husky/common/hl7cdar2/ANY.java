@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -19,26 +19,25 @@ package org.husky.common.hl7cdar2;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlMixed;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.xml.bind.annotation.*;
-
 /**
- *
- * Defines the basic properties of every data value. This is an abstract type,
- * meaning that no value can be just a data value without belonging to any
- * concrete type. Every concrete type is a specialization of this general
- * abstract DataValue type.
+ * Defines the basic properties of every data value. This is an abstract type, meaning that no value can be just a data
+ * value without belonging to any concrete type. Every concrete type is a specialization of this general abstract
+ * DataValue type.
  *
  *
  * <p>
  * Java-Klasse für ANY complex type.
  *
  * <p>
- * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser
- * Klasse enthalten ist.
+ * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
  * &lt;complexType name="ANY">
@@ -49,12 +48,10 @@ import javax.xml.bind.annotation.*;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlType(name = "ANY")
-@XmlSeeAlso({ BL.class, ANYNonNull.class, CR.class, SLISTTS.class, GLISTPQ.class, SLISTPQ.class,
-        GLISTTS.class, II.class, QTY.class, CD.class, URL.class, BIN.class })
+@XmlSeeAlso({BL.class, ANYNonNull.class, CR.class, SLISTTS.class, GLISTPQ.class, SLISTPQ.class,
+        GLISTTS.class, II.class, QTY.class, CD.class, URL.class, BIN.class})
 // Fix Tony Schaller, medshare GmbH: make the JAXB classes for HL7 CDA R2
 // Serializable
 public abstract class ANY {
@@ -102,9 +99,8 @@ public abstract class ANY {
      * Gets the value of the nullFlavor property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the nullFlavor property.
      *
      * <p>
@@ -115,8 +111,6 @@ public abstract class ANY {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link String }
-     *
-     *
      */
     @NonNull
     public List<String> getNullFlavor() {

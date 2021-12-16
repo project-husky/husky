@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -18,35 +18,26 @@ package org.husky.common.hl7cdar2;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
 /**
- *
- * A concept descriptor represents any kind of concept usually by giving a code
- * defined in a code system. A concept descriptor can contain the original text
- * or phrase that served as the basis of the coding and one or more translations
- * into different coding systems. A concept descriptor can also contain
- * qualifiers to describe, e.g., the concept of a "left foot" as a
- * postcoordinated term built from the primary code "FOOT" and the qualifier
- * "LEFT". In exceptional cases, the concept descriptor need not contain a code
- * but only the original text describing that concept.
+ * A concept descriptor represents any kind of concept usually by giving a code defined in a code system. A concept
+ * descriptor can contain the original text or phrase that served as the basis of the coding and one or more
+ * translations into different coding systems. A concept descriptor can also contain qualifiers to describe, e.g., the
+ * concept of a "left foot" as a postcoordinated term built from the primary code "FOOT" and the qualifier "LEFT". In
+ * exceptional cases, the concept descriptor need not contain a code but only the original text describing that
+ * concept.
  *
  *
  * <p>
  * Java-Klasse für CD complex type.
  *
  * <p>
- * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser
- * Klasse enthalten ist.
+ * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
  * &lt;complexType name="CD">
@@ -66,12 +57,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "CD", propOrder = { "originalText", "qualifier", "translation" })
-@XmlSeeAlso({ BXITCD.class, SXCMCD.class, CE.class })
+@XmlType(name = "CD", propOrder = {"originalText", "qualifier", "translation"})
+@XmlSeeAlso({BXITCD.class, SXCMCD.class, CE.class})
 public class CD extends ANY {
 
     protected ED originalText;
@@ -89,11 +78,23 @@ public class CD extends ANY {
     @XmlAttribute(name = "displayName")
     protected String displayName;
 
+    public CD() {
+    }
+
+    public CD(final String code,
+              final String codeSystem,
+              final String codeSystemName,
+              final String displayName) {
+        this.code = code;
+        this.codeSystem = codeSystem;
+        this.codeSystemName = codeSystemName;
+        this.displayName = displayName;
+    }
+
     /**
      * Ruft den Wert der code-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getCode() {
         return code;
@@ -103,7 +104,6 @@ public class CD extends ANY {
      * Ruft den Wert der codeSystem-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getCodeSystem() {
         return codeSystem;
@@ -113,7 +113,6 @@ public class CD extends ANY {
      * Ruft den Wert der codeSystemName-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getCodeSystemName() {
         return codeSystemName;
@@ -123,7 +122,6 @@ public class CD extends ANY {
      * Ruft den Wert der codeSystemVersion-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getCodeSystemVersion() {
         return codeSystemVersion;
@@ -133,7 +131,6 @@ public class CD extends ANY {
      * Ruft den Wert der displayName-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getDisplayName() {
         return displayName;
@@ -143,7 +140,6 @@ public class CD extends ANY {
      * Ruft den Wert der originalText-Eigenschaft ab.
      *
      * @return possible object is {@link ED }
-     *
      */
     public ED getOriginalText() {
         return originalText;
@@ -153,9 +149,8 @@ public class CD extends ANY {
      * Gets the value of the qualifier property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the qualifier property.
      *
      * <p>
@@ -166,13 +161,11 @@ public class CD extends ANY {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link CR }
-     *
-     *
      */
     @NonNull
     public List<CR> getQualifier() {
         if (qualifier == null) {
-            qualifier = new ArrayList<CR>();
+            qualifier = new ArrayList<>();
         }
         return this.qualifier;
     }
@@ -181,9 +174,8 @@ public class CD extends ANY {
      * Gets the value of the translation property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the translation property.
      *
      * <p>
@@ -194,13 +186,11 @@ public class CD extends ANY {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link CD }
-     *
-     *
      */
     @NonNull
     public List<CD> getTranslation() {
         if (translation == null) {
-            translation = new ArrayList<CD>();
+            translation = new ArrayList<>();
         }
         return this.translation;
     }
@@ -208,9 +198,7 @@ public class CD extends ANY {
     /**
      * Legt den Wert der code-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setCode(String value) {
         this.code = value;
@@ -219,9 +207,7 @@ public class CD extends ANY {
     /**
      * Legt den Wert der codeSystem-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setCodeSystem(String value) {
         this.codeSystem = value;
@@ -230,9 +216,7 @@ public class CD extends ANY {
     /**
      * Legt den Wert der codeSystemName-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setCodeSystemName(String value) {
         this.codeSystemName = value;
@@ -241,9 +225,7 @@ public class CD extends ANY {
     /**
      * Legt den Wert der codeSystemVersion-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setCodeSystemVersion(String value) {
         this.codeSystemVersion = value;
@@ -252,9 +234,7 @@ public class CD extends ANY {
     /**
      * Legt den Wert der displayName-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setDisplayName(String value) {
         this.displayName = value;
@@ -263,9 +243,7 @@ public class CD extends ANY {
     /**
      * Legt den Wert der originalText-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link ED }
-     *
+     * @param value allowed object is {@link ED }
      */
     public void setOriginalText(ED value) {
         this.originalText = value;

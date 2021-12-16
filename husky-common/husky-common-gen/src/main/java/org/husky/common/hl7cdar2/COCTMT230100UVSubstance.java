@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -16,22 +16,18 @@
 
 package org.husky.common.hl7cdar2;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>
  * Java-Klasse für COCT_MT230100UV.Substance complex type.
  *
  * <p>
- * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser
- * Klasse enthalten ist.
+ * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
  * &lt;complexType name="COCT_MT230100UV.Substance">
@@ -53,13 +49,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "COCT_MT230100UV.Substance", namespace = "urn:ihe:pharm", propOrder = { "realmCode",
+@XmlType(name = "COCT_MT230100UV.Substance", namespace = "urn:ihe:pharm", propOrder = {"realmCode",
         "typeId", "templateId", "code", "name", "desc", "lotNumberText", "asSubstanceManufacturer",
-        "subIngredient" })
+        "subIngredient"})
 public class COCTMT230100UVSubstance {
 
     @XmlElement(namespace = "urn:hl7-org:v3")
@@ -87,9 +81,8 @@ public class COCTMT230100UVSubstance {
      * Gets the value of the asSubstanceManufacturer property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the asSubstanceManufacturer property.
      *
      * <p>
@@ -99,14 +92,12 @@ public class COCTMT230100UVSubstance {
      *
      *
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link COCTMT230100UVSubstanceManufacturer }
-     *
-     *
+     * Objects of the following type(s) are allowed in the list {@link COCTMT230100UVSubstanceManufacturer }
      */
+    @NonNull
     public List<COCTMT230100UVSubstanceManufacturer> getAsSubstanceManufacturer() {
         if (asSubstanceManufacturer == null) {
-            asSubstanceManufacturer = new ArrayList<COCTMT230100UVSubstanceManufacturer>();
+            asSubstanceManufacturer = new ArrayList<>();
         }
         return this.asSubstanceManufacturer;
     }
@@ -115,7 +106,6 @@ public class COCTMT230100UVSubstance {
      * Ruft den Wert der classCode-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getClassCode() {
         return classCode;
@@ -125,7 +115,6 @@ public class COCTMT230100UVSubstance {
      * Ruft den Wert der code-Eigenschaft ab.
      *
      * @return possible object is {@link CE }
-     *
      */
     public CE getCode() {
         return code;
@@ -135,7 +124,6 @@ public class COCTMT230100UVSubstance {
      * Ruft den Wert der desc-Eigenschaft ab.
      *
      * @return possible object is {@link ED }
-     *
      */
     public ED getDesc() {
         return desc;
@@ -145,7 +133,6 @@ public class COCTMT230100UVSubstance {
      * Ruft den Wert der determinerCode-Eigenschaft ab.
      *
      * @return possible object is {@link String }
-     *
      */
     public String getDeterminerCode() {
         return determinerCode;
@@ -155,7 +142,6 @@ public class COCTMT230100UVSubstance {
      * Ruft den Wert der lotNumberText-Eigenschaft ab.
      *
      * @return possible object is {@link ST }
-     *
      */
     public ST getLotNumberText() {
         return lotNumberText;
@@ -165,9 +151,8 @@ public class COCTMT230100UVSubstance {
      * Gets the value of the name property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the name property.
      *
      * <p>
@@ -178,12 +163,11 @@ public class COCTMT230100UVSubstance {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link TN }
-     *
-     *
      */
+    @NonNull
     public List<TN> getName() {
         if (name == null) {
-            name = new ArrayList<TN>();
+            name = new ArrayList<>();
         }
         return this.name;
     }
@@ -192,9 +176,8 @@ public class COCTMT230100UVSubstance {
      * Gets the value of the nullFlavor property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the nullFlavor property.
      *
      * <p>
@@ -205,12 +188,11 @@ public class COCTMT230100UVSubstance {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link String }
-     *
-     *
      */
+    @NonNull
     public List<String> getNullFlavor() {
         if (nullFlavor == null) {
-            nullFlavor = new ArrayList<String>();
+            nullFlavor = new ArrayList<>();
         }
         return this.nullFlavor;
     }
@@ -219,9 +201,8 @@ public class COCTMT230100UVSubstance {
      * Gets the value of the realmCode property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the realmCode property.
      *
      * <p>
@@ -232,12 +213,11 @@ public class COCTMT230100UVSubstance {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link CS }
-     *
-     *
      */
+    @NonNull
     public List<CS> getRealmCode() {
         if (realmCode == null) {
-            realmCode = new ArrayList<CS>();
+            realmCode = new ArrayList<>();
         }
         return this.realmCode;
     }
@@ -246,9 +226,8 @@ public class COCTMT230100UVSubstance {
      * Gets the value of the subIngredient property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the subIngredient property.
      *
      * <p>
@@ -258,14 +237,12 @@ public class COCTMT230100UVSubstance {
      *
      *
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link COCTMT230100UVSubIngredient }
-     *
-     *
+     * Objects of the following type(s) are allowed in the list {@link COCTMT230100UVSubIngredient }
      */
+    @NonNull
     public List<COCTMT230100UVSubIngredient> getSubIngredient() {
         if (subIngredient == null) {
-            subIngredient = new ArrayList<COCTMT230100UVSubIngredient>();
+            subIngredient = new ArrayList<>();
         }
         return this.subIngredient;
     }
@@ -274,9 +251,8 @@ public class COCTMT230100UVSubstance {
      * Gets the value of the templateId property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the templateId property.
      *
      * <p>
@@ -286,14 +262,12 @@ public class COCTMT230100UVSubstance {
      *
      *
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link AllInfrastructureRootTemplateId }
-     *
-     *
+     * Objects of the following type(s) are allowed in the list {@link AllInfrastructureRootTemplateId }
      */
+    @NonNull
     public List<AllInfrastructureRootTemplateId> getTemplateId() {
         if (templateId == null) {
-            templateId = new ArrayList<AllInfrastructureRootTemplateId>();
+            templateId = new ArrayList<>();
         }
         return this.templateId;
     }
@@ -302,7 +276,6 @@ public class COCTMT230100UVSubstance {
      * Ruft den Wert der typeId-Eigenschaft ab.
      *
      * @return possible object is {@link AllInfrastructureRootTypeId }
-     *
      */
     public AllInfrastructureRootTypeId getTypeId() {
         return typeId;
@@ -311,9 +284,7 @@ public class COCTMT230100UVSubstance {
     /**
      * Legt den Wert der classCode-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setClassCode(String value) {
         this.classCode = value;
@@ -322,9 +293,7 @@ public class COCTMT230100UVSubstance {
     /**
      * Legt den Wert der code-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link CE }
-     *
+     * @param value allowed object is {@link CE }
      */
     public void setCode(CE value) {
         this.code = value;
@@ -333,9 +302,7 @@ public class COCTMT230100UVSubstance {
     /**
      * Legt den Wert der desc-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link ED }
-     *
+     * @param value allowed object is {@link ED }
      */
     public void setDesc(ED value) {
         this.desc = value;
@@ -344,9 +311,7 @@ public class COCTMT230100UVSubstance {
     /**
      * Legt den Wert der determinerCode-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link String }
-     *
+     * @param value allowed object is {@link String }
      */
     public void setDeterminerCode(String value) {
         this.determinerCode = value;
@@ -355,9 +320,7 @@ public class COCTMT230100UVSubstance {
     /**
      * Legt den Wert der lotNumberText-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link ST }
-     *
+     * @param value allowed object is {@link ST }
      */
     public void setLotNumberText(ST value) {
         this.lotNumberText = value;
@@ -366,9 +329,7 @@ public class COCTMT230100UVSubstance {
     /**
      * Legt den Wert der typeId-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link AllInfrastructureRootTypeId }
-     *
+     * @param value allowed object is {@link AllInfrastructureRootTypeId }
      */
     public void setTypeId(AllInfrastructureRootTypeId value) {
         this.typeId = value;

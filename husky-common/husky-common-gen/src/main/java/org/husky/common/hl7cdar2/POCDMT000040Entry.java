@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -18,21 +18,19 @@ package org.husky.common.hl7cdar2;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
  * Java-Klasse für POCD_MT000040.Entry complex type.
  *
  * <p>
- * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser
- * Klasse enthalten ist.
+ * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
  * &lt;complexType name="POCD_MT000040.Entry">
@@ -61,13 +59,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- *
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "POCD_MT000040.Entry", propOrder = { "realmCode", "typeId", "templateId", "act",
+@XmlType(name = "POCD_MT000040.Entry", propOrder = {"realmCode", "typeId", "templateId", "act",
         "encounter", "observation", "observationMedia", "organizer", "procedure",
-        "regionOfInterest", "substanceAdministration", "supply" })
+        "regionOfInterest", "substanceAdministration", "supply"})
 public class POCDMT000040Entry {
 
     protected List<CS> realmCode;
@@ -93,7 +89,6 @@ public class POCDMT000040Entry {
      * Ruft den Wert der act-Eigenschaft ab.
      *
      * @return possible object is {@link POCDMT000040Act }
-     *
      */
     public POCDMT000040Act getAct() {
         return act;
@@ -103,7 +98,6 @@ public class POCDMT000040Entry {
      * Ruft den Wert der encounter-Eigenschaft ab.
      *
      * @return possible object is {@link POCDMT000040Encounter }
-     *
      */
     public POCDMT000040Encounter getEncounter() {
         return encounter;
@@ -113,9 +107,8 @@ public class POCDMT000040Entry {
      * Gets the value of the nullFlavor property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the nullFlavor property.
      *
      * <p>
@@ -126,13 +119,11 @@ public class POCDMT000040Entry {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link String }
-     *
-     *
      */
     @NonNull
     public List<String> getNullFlavor() {
         if (nullFlavor == null) {
-            nullFlavor = new ArrayList<String>();
+            nullFlavor = new ArrayList<>();
         }
         return this.nullFlavor;
     }
@@ -141,7 +132,6 @@ public class POCDMT000040Entry {
      * Ruft den Wert der observation-Eigenschaft ab.
      *
      * @return possible object is {@link POCDMT000040Observation }
-     *
      */
     public POCDMT000040Observation getObservation() {
         return observation;
@@ -151,7 +141,6 @@ public class POCDMT000040Entry {
      * Ruft den Wert der observationMedia-Eigenschaft ab.
      *
      * @return possible object is {@link POCDMT000040ObservationMedia }
-     *
      */
     public POCDMT000040ObservationMedia getObservationMedia() {
         return observationMedia;
@@ -161,7 +150,6 @@ public class POCDMT000040Entry {
      * Ruft den Wert der organizer-Eigenschaft ab.
      *
      * @return possible object is {@link POCDMT000040Organizer }
-     *
      */
     public POCDMT000040Organizer getOrganizer() {
         return organizer;
@@ -171,7 +159,6 @@ public class POCDMT000040Entry {
      * Ruft den Wert der procedure-Eigenschaft ab.
      *
      * @return possible object is {@link POCDMT000040Procedure }
-     *
      */
     public POCDMT000040Procedure getProcedure() {
         return procedure;
@@ -181,9 +168,8 @@ public class POCDMT000040Entry {
      * Gets the value of the realmCode property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the realmCode property.
      *
      * <p>
@@ -194,13 +180,11 @@ public class POCDMT000040Entry {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link CS }
-     *
-     *
      */
     @NonNull
     public List<CS> getRealmCode() {
         if (realmCode == null) {
-            realmCode = new ArrayList<CS>();
+            realmCode = new ArrayList<>();
         }
         return this.realmCode;
     }
@@ -209,7 +193,6 @@ public class POCDMT000040Entry {
      * Ruft den Wert der regionOfInterest-Eigenschaft ab.
      *
      * @return possible object is {@link POCDMT000040RegionOfInterest }
-     *
      */
     public POCDMT000040RegionOfInterest getRegionOfInterest() {
         return regionOfInterest;
@@ -219,7 +202,6 @@ public class POCDMT000040Entry {
      * Ruft den Wert der substanceAdministration-Eigenschaft ab.
      *
      * @return possible object is {@link POCDMT000040SubstanceAdministration }
-     *
      */
     public POCDMT000040SubstanceAdministration getSubstanceAdministration() {
         return substanceAdministration;
@@ -229,7 +211,6 @@ public class POCDMT000040Entry {
      * Ruft den Wert der supply-Eigenschaft ab.
      *
      * @return possible object is {@link POCDMT000040Supply }
-     *
      */
     public POCDMT000040Supply getSupply() {
         return supply;
@@ -239,9 +220,8 @@ public class POCDMT000040Entry {
      * Gets the value of the templateId property.
      *
      * <p>
-     * This accessor method returns a reference to the live list, not a
-     * snapshot. Therefore any modification you make to the returned list will
-     * be present inside the JAXB object. This is why there is not a
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
      * <CODE>set</CODE> method for the templateId property.
      *
      * <p>
@@ -252,13 +232,11 @@ public class POCDMT000040Entry {
      *
      * <p>
      * Objects of the following type(s) are allowed in the list {@link II }
-     *
-     *
      */
     @NonNull
     public List<II> getTemplateId() {
         if (templateId == null) {
-            templateId = new ArrayList<II>();
+            templateId = new ArrayList<>();
         }
         return this.templateId;
     }
@@ -267,7 +245,6 @@ public class POCDMT000040Entry {
      * Ruft den Wert der typeCode-Eigenschaft ab.
      *
      * @return possible object is {@link XActRelationshipEntry }
-     *
      */
     @NonNull
     public XActRelationshipEntry getTypeCode() {
@@ -282,7 +259,6 @@ public class POCDMT000040Entry {
      * Ruft den Wert der typeId-Eigenschaft ab.
      *
      * @return possible object is {@link POCDMT000040InfrastructureRootTypeId }
-     *
      */
     public POCDMT000040InfrastructureRootTypeId getTypeId() {
         return typeId;
@@ -292,7 +268,6 @@ public class POCDMT000040Entry {
      * Ruft den Wert der contextConductionInd-Eigenschaft ab.
      *
      * @return possible object is {@link Boolean }
-     *
      */
     public boolean isContextConductionInd() {
         if (contextConductionInd == null) {
@@ -305,9 +280,7 @@ public class POCDMT000040Entry {
     /**
      * Legt den Wert der act-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link POCDMT000040Act }
-     *
+     * @param value allowed object is {@link POCDMT000040Act }
      */
     public void setAct(POCDMT000040Act value) {
         this.act = value;
@@ -316,9 +289,7 @@ public class POCDMT000040Entry {
     /**
      * Legt den Wert der contextConductionInd-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link Boolean }
-     *
+     * @param value allowed object is {@link Boolean }
      */
     public void setContextConductionInd(Boolean value) {
         this.contextConductionInd = value;
@@ -327,9 +298,7 @@ public class POCDMT000040Entry {
     /**
      * Legt den Wert der encounter-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link POCDMT000040Encounter }
-     *
+     * @param value allowed object is {@link POCDMT000040Encounter }
      */
     public void setEncounter(POCDMT000040Encounter value) {
         this.encounter = value;
@@ -338,9 +307,7 @@ public class POCDMT000040Entry {
     /**
      * Legt den Wert der observation-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link POCDMT000040Observation }
-     *
+     * @param value allowed object is {@link POCDMT000040Observation }
      */
     public void setObservation(POCDMT000040Observation value) {
         this.observation = value;
@@ -349,9 +316,7 @@ public class POCDMT000040Entry {
     /**
      * Legt den Wert der observationMedia-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link POCDMT000040ObservationMedia }
-     *
+     * @param value allowed object is {@link POCDMT000040ObservationMedia }
      */
     public void setObservationMedia(POCDMT000040ObservationMedia value) {
         this.observationMedia = value;
@@ -360,9 +325,7 @@ public class POCDMT000040Entry {
     /**
      * Legt den Wert der organizer-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link POCDMT000040Organizer }
-     *
+     * @param value allowed object is {@link POCDMT000040Organizer }
      */
     public void setOrganizer(POCDMT000040Organizer value) {
         this.organizer = value;
@@ -371,9 +334,7 @@ public class POCDMT000040Entry {
     /**
      * Legt den Wert der procedure-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link POCDMT000040Procedure }
-     *
+     * @param value allowed object is {@link POCDMT000040Procedure }
      */
     public void setProcedure(POCDMT000040Procedure value) {
         this.procedure = value;
@@ -382,9 +343,7 @@ public class POCDMT000040Entry {
     /**
      * Legt den Wert der regionOfInterest-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link POCDMT000040RegionOfInterest }
-     *
+     * @param value allowed object is {@link POCDMT000040RegionOfInterest }
      */
     public void setRegionOfInterest(POCDMT000040RegionOfInterest value) {
         this.regionOfInterest = value;
@@ -393,9 +352,7 @@ public class POCDMT000040Entry {
     /**
      * Legt den Wert der substanceAdministration-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link POCDMT000040SubstanceAdministration }
-     *
+     * @param value allowed object is {@link POCDMT000040SubstanceAdministration }
      */
     public void setSubstanceAdministration(POCDMT000040SubstanceAdministration value) {
         this.substanceAdministration = value;
@@ -404,9 +361,7 @@ public class POCDMT000040Entry {
     /**
      * Legt den Wert der supply-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link POCDMT000040Supply }
-     *
+     * @param value allowed object is {@link POCDMT000040Supply }
      */
     public void setSupply(POCDMT000040Supply value) {
         this.supply = value;
@@ -415,9 +370,7 @@ public class POCDMT000040Entry {
     /**
      * Legt den Wert der typeCode-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link XActRelationshipEntry }
-     *
+     * @param value allowed object is {@link XActRelationshipEntry }
      */
     public void setTypeCode(XActRelationshipEntry value) {
         this.typeCode = value;
@@ -426,10 +379,7 @@ public class POCDMT000040Entry {
     /**
      * Legt den Wert der typeId-Eigenschaft fest.
      *
-     * @param value
-     *            allowed object is {@link POCDMT000040InfrastructureRootTypeId
-     *            }
-     *
+     * @param value allowed object is {@link POCDMT000040InfrastructureRootTypeId }
      */
     public void setTypeId(POCDMT000040InfrastructureRootTypeId value) {
         this.typeId = value;
