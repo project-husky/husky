@@ -30,15 +30,15 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * <p>
  * <pre>
- * &lt;simpleType name="ActMoodPredicate">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="EVN.CRT"/>
- *     &lt;enumeration value="GOL"/>
- *     &lt;enumeration value="OPT"/>
- *     &lt;enumeration value="PERM"/>
- *     &lt;enumeration value="PERMRQ"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="ActMoodPredicate"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="EVN.CRT"/&gt;
+ *     &lt;enumeration value="GOL"/&gt;
+ *     &lt;enumeration value="OPT"/&gt;
+ *     &lt;enumeration value="PERM"/&gt;
+ *     &lt;enumeration value="PERMRQ"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "ActMoodPredicate")

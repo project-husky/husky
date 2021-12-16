@@ -29,13 +29,13 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * <p>
  * <pre>
- * &lt;simpleType name="AdditionalLocator">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="ADL"/>
- *     &lt;enumeration value="UNID"/>
- *     &lt;enumeration value="UNIT"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="AdditionalLocator"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="ADL"/&gt;
+ *     &lt;enumeration value="UNID"/&gt;
+ *     &lt;enumeration value="UNIT"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "AdditionalLocator")

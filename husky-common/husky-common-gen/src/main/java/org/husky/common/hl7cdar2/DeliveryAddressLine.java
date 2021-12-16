@@ -29,16 +29,16 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * <p>
  * <pre>
- * &lt;simpleType name="DeliveryAddressLine">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="DAL"/>
- *     &lt;enumeration value="DINST"/>
- *     &lt;enumeration value="DINSTA"/>
- *     &lt;enumeration value="DINSTQ"/>
- *     &lt;enumeration value="DMOD"/>
- *     &lt;enumeration value="DMODID"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="DeliveryAddressLine"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="DAL"/&gt;
+ *     &lt;enumeration value="DINST"/&gt;
+ *     &lt;enumeration value="DINSTA"/&gt;
+ *     &lt;enumeration value="DINSTQ"/&gt;
+ *     &lt;enumeration value="DMOD"/&gt;
+ *     &lt;enumeration value="DMODID"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "DeliveryAddressLine")

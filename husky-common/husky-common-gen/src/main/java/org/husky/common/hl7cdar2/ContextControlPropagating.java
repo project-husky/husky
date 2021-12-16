@@ -29,12 +29,12 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * <p>
  * <pre>
- * &lt;simpleType name="ContextControlPropagating">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="AP"/>
- *     &lt;enumeration value="OP"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="ContextControlPropagating"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="AP"/&gt;
+ *     &lt;enumeration value="OP"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "ContextControlPropagating")

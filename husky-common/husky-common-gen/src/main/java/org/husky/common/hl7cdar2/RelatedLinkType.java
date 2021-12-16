@@ -29,16 +29,16 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * <p>
  * <pre>
- * &lt;simpleType name="RelatedLinkType">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="REL"/>
- *     &lt;enumeration value="BACKUP"/>
- *     &lt;enumeration value="DIRAUTH"/>
- *     &lt;enumeration value="INDAUTH"/>
- *     &lt;enumeration value="PART"/>
- *     &lt;enumeration value="REPL"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="RelatedLinkType"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="REL"/&gt;
+ *     &lt;enumeration value="BACKUP"/&gt;
+ *     &lt;enumeration value="DIRAUTH"/&gt;
+ *     &lt;enumeration value="INDAUTH"/&gt;
+ *     &lt;enumeration value="PART"/&gt;
+ *     &lt;enumeration value="REPL"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "RelatedLinkType")

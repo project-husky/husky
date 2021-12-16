@@ -13,7 +13,6 @@ package org.husky.xua.saml2.impl;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.husky.xua.saml2.ConditionsBuilder;
-import org.husky.xua.saml2.impl.ConditionsBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionsType;
@@ -28,7 +27,7 @@ public class ConditionsBuilderImplTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.xua.saml2.impl.AudienceBuilderImpl#create()}.
+	 * {@link org.husky.xua.saml2.impl.ConditionsBuilderImpl#create()}.
 	 */
 	@Test
 	public void testCreate() {

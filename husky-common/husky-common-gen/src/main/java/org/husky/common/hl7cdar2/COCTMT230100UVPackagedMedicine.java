@@ -31,28 +31,28 @@ import java.util.List;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="COCT_MT230100UV.PackagedMedicine">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;group ref="{urn:hl7-org:v3}InfrastructureRootElements"/>
- *         &lt;element name="id" type="{urn:hl7-org:v3}II" minOccurs="0"/>
- *         &lt;element name="code" type="{urn:hl7-org:v3}CE" minOccurs="0"/>
- *         &lt;element name="name" type="{urn:hl7-org:v3}TN" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="formCode" type="{urn:hl7-org:v3}CE" minOccurs="0"/>
- *         &lt;element name="lotNumberText" type="{urn:hl7-org:v3}ST" minOccurs="0"/>
- *         &lt;element name="capacityQuantity" type="{urn:hl7-org:v3}PQ" minOccurs="0"/>
- *         &lt;element name="capTypeCode" type="{urn:hl7-org:v3}CE" minOccurs="0"/>
- *         &lt;element name="asManufacturedProduct" type="{urn:ihe:pharm}COCT_MT230100UV.ManufacturedProduct" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="asSuperContent" type="{urn:ihe:pharm}COCT_MT230100UV.SuperContent" minOccurs="0"/>
- *         &lt;element name="subContent" type="{urn:ihe:pharm}COCT_MT230100UV.SubContent" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute name="nullFlavor" type="{urn:hl7-org:v3}NullFlavor" />
- *       &lt;attribute name="classCode" use="required" type="{urn:hl7-org:v3}EntityClassContainer" />
- *       &lt;attribute name="determinerCode" use="required" type="{urn:hl7-org:v3}EntityDeterminer" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="COCT_MT230100UV.PackagedMedicine"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;group ref="{urn:hl7-org:v3}InfrastructureRootElements"/&gt;
+ *         &lt;element name="id" type="{urn:hl7-org:v3}II" minOccurs="0"/&gt;
+ *         &lt;element name="code" type="{urn:hl7-org:v3}CE" minOccurs="0"/&gt;
+ *         &lt;element name="name" type="{urn:hl7-org:v3}TN" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="formCode" type="{urn:hl7-org:v3}CE" minOccurs="0"/&gt;
+ *         &lt;element name="lotNumberText" type="{urn:hl7-org:v3}ST" minOccurs="0"/&gt;
+ *         &lt;element name="capacityQuantity" type="{urn:hl7-org:v3}PQ" minOccurs="0"/&gt;
+ *         &lt;element name="capTypeCode" type="{urn:hl7-org:v3}CE" minOccurs="0"/&gt;
+ *         &lt;element name="asManufacturedProduct" type="{urn:ihe:pharm}COCT_MT230100UV.ManufacturedProduct" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="asSuperContent" type="{urn:ihe:pharm}COCT_MT230100UV.SuperContent" minOccurs="0"/&gt;
+ *         &lt;element name="subContent" type="{urn:ihe:pharm}COCT_MT230100UV.SubContent" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="nullFlavor" type="{urn:hl7-org:v3}NullFlavor" /&gt;
+ *       &lt;attribute name="classCode" use="required" type="{urn:hl7-org:v3}EntityClassContainer" /&gt;
+ *       &lt;attribute name="determinerCode" use="required" type="{urn:hl7-org:v3}EntityDeterminer" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

@@ -29,12 +29,12 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * <p>
  * <pre>
- * &lt;simpleType name="NamePseudonymUse">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="P"/>
- *     &lt;enumeration value="A"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="NamePseudonymUse"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="P"/&gt;
+ *     &lt;enumeration value="A"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "NamePseudonymUse")

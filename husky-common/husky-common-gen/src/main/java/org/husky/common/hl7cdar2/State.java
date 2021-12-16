@@ -29,12 +29,12 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * <p>
  * <pre>
- * &lt;simpleType name="State">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="STATE"/>
- *     &lt;enumeration value="NAT"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="State"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="STATE"/&gt;
+ *     &lt;enumeration value="NAT"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "State")

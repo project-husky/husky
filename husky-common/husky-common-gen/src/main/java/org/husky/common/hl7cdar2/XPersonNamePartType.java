@@ -29,15 +29,15 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * <p>
  * <pre>
- * &lt;simpleType name="x_PersonNamePartType">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="DEL"/>
- *     &lt;enumeration value="FAM"/>
- *     &lt;enumeration value="GIV"/>
- *     &lt;enumeration value="PFX"/>
- *     &lt;enumeration value="SFX"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="x_PersonNamePartType"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="DEL"/&gt;
+ *     &lt;enumeration value="FAM"/&gt;
+ *     &lt;enumeration value="GIV"/&gt;
+ *     &lt;enumeration value="PFX"/&gt;
+ *     &lt;enumeration value="SFX"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "x_PersonNamePartType")

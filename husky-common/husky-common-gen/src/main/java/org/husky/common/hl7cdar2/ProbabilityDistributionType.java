@@ -30,19 +30,19 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * <p>
  * <pre>
- * &lt;simpleType name="ProbabilityDistributionType">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="B"/>
- *     &lt;enumeration value="E"/>
- *     &lt;enumeration value="F"/>
- *     &lt;enumeration value="G"/>
- *     &lt;enumeration value="LN"/>
- *     &lt;enumeration value="N"/>
- *     &lt;enumeration value="T"/>
- *     &lt;enumeration value="U"/>
- *     &lt;enumeration value="X2"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="ProbabilityDistributionType"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="B"/&gt;
+ *     &lt;enumeration value="E"/&gt;
+ *     &lt;enumeration value="F"/&gt;
+ *     &lt;enumeration value="G"/&gt;
+ *     &lt;enumeration value="LN"/&gt;
+ *     &lt;enumeration value="N"/&gt;
+ *     &lt;enumeration value="T"/&gt;
+ *     &lt;enumeration value="U"/&gt;
+ *     &lt;enumeration value="X2"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "ProbabilityDistributionType")

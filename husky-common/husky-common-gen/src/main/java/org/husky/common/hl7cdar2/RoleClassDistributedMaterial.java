@@ -29,12 +29,12 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * <p>
  * <pre>
- * &lt;simpleType name="RoleClassDistributedMaterial">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="DST"/>
- *     &lt;enumeration value="RET"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="RoleClassDistributedMaterial"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="DST"/&gt;
+ *     &lt;enumeration value="RET"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "RoleClassDistributedMaterial")

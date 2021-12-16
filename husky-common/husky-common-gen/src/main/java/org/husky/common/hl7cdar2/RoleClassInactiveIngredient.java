@@ -29,15 +29,15 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * <p>
  * <pre>
- * &lt;simpleType name="RoleClassInactiveIngredient">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="IACT"/>
- *     &lt;enumeration value="COLR"/>
- *     &lt;enumeration value="FLVR"/>
- *     &lt;enumeration value="PRSV"/>
- *     &lt;enumeration value="STBL"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="RoleClassInactiveIngredient"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="IACT"/&gt;
+ *     &lt;enumeration value="COLR"/&gt;
+ *     &lt;enumeration value="FLVR"/&gt;
+ *     &lt;enumeration value="PRSV"/&gt;
+ *     &lt;enumeration value="STBL"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "RoleClassInactiveIngredient")

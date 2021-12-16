@@ -30,21 +30,21 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * <p>
  * <pre>
- * &lt;simpleType name="URLScheme">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="fax"/>
- *     &lt;enumeration value="file"/>
- *     &lt;enumeration value="ftp"/>
- *     &lt;enumeration value="http"/>
- *     &lt;enumeration value="mailto"/>
- *     &lt;enumeration value="mllp"/>
- *     &lt;enumeration value="modem"/>
- *     &lt;enumeration value="nfs"/>
- *     &lt;enumeration value="tel"/>
- *     &lt;enumeration value="telnet"/>
- *     &lt;enumeration value="me"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="URLScheme"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="fax"/&gt;
+ *     &lt;enumeration value="file"/&gt;
+ *     &lt;enumeration value="ftp"/&gt;
+ *     &lt;enumeration value="http"/&gt;
+ *     &lt;enumeration value="mailto"/&gt;
+ *     &lt;enumeration value="mllp"/&gt;
+ *     &lt;enumeration value="modem"/&gt;
+ *     &lt;enumeration value="nfs"/&gt;
+ *     &lt;enumeration value="tel"/&gt;
+ *     &lt;enumeration value="telnet"/&gt;
+ *     &lt;enumeration value="me"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "URLScheme")

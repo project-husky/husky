@@ -34,16 +34,16 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="EIVL_TS">
- *   &lt;complexContent>
- *     &lt;extension base="{urn:hl7-org:v3}SXCM_TS">
- *       &lt;sequence>
- *         &lt;element name="event" type="{urn:hl7-org:v3}EIVL.event" minOccurs="0"/>
- *         &lt;element name="offset" type="{urn:hl7-org:v3}IVL_PQ" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="EIVL_TS"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{urn:hl7-org:v3}SXCM_TS"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="event" type="{urn:hl7-org:v3}EIVL.event" minOccurs="0"/&gt;
+ *         &lt;element name="offset" type="{urn:hl7-org:v3}IVL_PQ" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

@@ -29,13 +29,13 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * <p>
  * <pre>
- * &lt;simpleType name="x_ParticipationPrfEntVrf">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="PRF"/>
- *     &lt;enumeration value="VRF"/>
- *     &lt;enumeration value="ENT"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="x_ParticipationPrfEntVrf"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="PRF"/&gt;
+ *     &lt;enumeration value="VRF"/&gt;
+ *     &lt;enumeration value="ENT"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "x_ParticipationPrfEntVrf")

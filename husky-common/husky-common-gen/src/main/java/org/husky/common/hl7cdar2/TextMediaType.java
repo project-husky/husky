@@ -30,16 +30,16 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * <p>
  * <pre>
- * &lt;simpleType name="TextMediaType">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="text/html"/>
- *     &lt;enumeration value="text/plain"/>
- *     &lt;enumeration value="text/rtf"/>
- *     &lt;enumeration value="text/sgml"/>
- *     &lt;enumeration value="text/x-hl7-ft"/>
- *     &lt;enumeration value="text/xml"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="TextMediaType"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="text/html"/&gt;
+ *     &lt;enumeration value="text/plain"/&gt;
+ *     &lt;enumeration value="text/rtf"/&gt;
+ *     &lt;enumeration value="text/sgml"/&gt;
+ *     &lt;enumeration value="text/x-hl7-ft"/&gt;
+ *     &lt;enumeration value="text/xml"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "TextMediaType")

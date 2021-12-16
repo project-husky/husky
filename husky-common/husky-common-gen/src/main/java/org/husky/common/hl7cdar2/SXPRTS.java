@@ -33,15 +33,15 @@ import java.util.List;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="SXPR_TS">
- *   &lt;complexContent>
- *     &lt;extension base="{urn:hl7-org:v3}SXCM_TS">
- *       &lt;sequence>
- *         &lt;element name="comp" type="{urn:hl7-org:v3}SXCM_TS" maxOccurs="unbounded" minOccurs="2"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="SXPR_TS"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{urn:hl7-org:v3}SXCM_TS"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="comp" type="{urn:hl7-org:v3}SXCM_TS" maxOccurs="unbounded" minOccurs="2"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

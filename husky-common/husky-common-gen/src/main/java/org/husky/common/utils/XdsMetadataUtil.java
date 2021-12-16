@@ -564,8 +564,6 @@ public class XdsMetadataUtil {
 	 *                    <div class="en"> code</div>
 	 * @param displayName <br>
 	 *                    <div class="en"> display name</div>
-	 * @param schemeUuid  <br>
-	 *                    <div class="en"> scheme uuid</div>
 	 * @return the code
 	 */
 	public static org.openehealth.ipf.commons.ihe.xds.core.metadata.Code createCodedMetadata(String schemeName,
@@ -593,8 +591,6 @@ public class XdsMetadataUtil {
 	 *                    <div class="en"> code</div>
 	 * @param displayName <br>
 	 *                    <div class="en"> display name</div>
-	 * @param schemeUuid  <br>
-	 *                    <div class="en"> scheme uuid</div>
 	 * @param language    <br>
 	 *                    language
 	 * @return the coded metadata type

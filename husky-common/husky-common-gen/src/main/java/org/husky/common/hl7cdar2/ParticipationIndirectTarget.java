@@ -29,16 +29,16 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * <p>
  * <pre>
- * &lt;simpleType name="ParticipationIndirectTarget">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="IND"/>
- *     &lt;enumeration value="BEN"/>
- *     &lt;enumeration value="COV"/>
- *     &lt;enumeration value="HLD"/>
- *     &lt;enumeration value="RCT"/>
- *     &lt;enumeration value="RCV"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="ParticipationIndirectTarget"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="IND"/&gt;
+ *     &lt;enumeration value="BEN"/&gt;
+ *     &lt;enumeration value="COV"/&gt;
+ *     &lt;enumeration value="HLD"/&gt;
+ *     &lt;enumeration value="RCT"/&gt;
+ *     &lt;enumeration value="RCV"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "ParticipationIndirectTarget")

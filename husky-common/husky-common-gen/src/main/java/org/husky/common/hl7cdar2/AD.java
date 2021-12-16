@@ -36,46 +36,46 @@ import java.util.List;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="AD">
- *   &lt;complexContent>
- *     &lt;extension base="{urn:hl7-org:v3}ANY">
- *       &lt;sequence>
- *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element name="delimiter" type="{urn:hl7-org:v3}adxp.delimiter"/>
- *           &lt;element name="country" type="{urn:hl7-org:v3}adxp.country"/>
- *           &lt;element name="state" type="{urn:hl7-org:v3}adxp.state"/>
- *           &lt;element name="county" type="{urn:hl7-org:v3}adxp.county"/>
- *           &lt;element name="city" type="{urn:hl7-org:v3}adxp.city"/>
- *           &lt;element name="postalCode" type="{urn:hl7-org:v3}adxp.postalCode"/>
- *           &lt;element name="streetAddressLine" type="{urn:hl7-org:v3}adxp.streetAddressLine"/>
- *           &lt;element name="houseNumber" type="{urn:hl7-org:v3}adxp.houseNumber"/>
- *           &lt;element name="houseNumberNumeric" type="{urn:hl7-org:v3}adxp.houseNumberNumeric"/>
- *           &lt;element name="direction" type="{urn:hl7-org:v3}adxp.direction"/>
- *           &lt;element name="streetName" type="{urn:hl7-org:v3}adxp.streetName"/>
- *           &lt;element name="streetNameBase" type="{urn:hl7-org:v3}adxp.streetNameBase"/>
- *           &lt;element name="streetNameType" type="{urn:hl7-org:v3}adxp.streetNameType"/>
- *           &lt;element name="additionalLocator" type="{urn:hl7-org:v3}adxp.additionalLocator"/>
- *           &lt;element name="unitID" type="{urn:hl7-org:v3}adxp.unitID"/>
- *           &lt;element name="unitType" type="{urn:hl7-org:v3}adxp.unitType"/>
- *           &lt;element name="careOf" type="{urn:hl7-org:v3}adxp.careOf"/>
- *           &lt;element name="censusTract" type="{urn:hl7-org:v3}adxp.censusTract"/>
- *           &lt;element name="deliveryAddressLine" type="{urn:hl7-org:v3}adxp.deliveryAddressLine"/>
- *           &lt;element name="deliveryInstallationType" type="{urn:hl7-org:v3}adxp.deliveryInstallationType"/>
- *           &lt;element name="deliveryInstallationArea" type="{urn:hl7-org:v3}adxp.deliveryInstallationArea"/>
- *           &lt;element name="deliveryInstallationQualifier" type="{urn:hl7-org:v3}adxp.deliveryInstallationQualifier"/>
- *           &lt;element name="deliveryMode" type="{urn:hl7-org:v3}adxp.deliveryMode"/>
- *           &lt;element name="deliveryModeIdentifier" type="{urn:hl7-org:v3}adxp.deliveryModeIdentifier"/>
- *           &lt;element name="buildingNumberSuffix" type="{urn:hl7-org:v3}adxp.buildingNumberSuffix"/>
- *           &lt;element name="postBox" type="{urn:hl7-org:v3}adxp.postBox"/>
- *           &lt;element name="precinct" type="{urn:hl7-org:v3}adxp.precinct"/>
- *         &lt;/choice>
- *         &lt;element name="useablePeriod" type="{urn:hl7-org:v3}SXCM_TS" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute name="use" type="{urn:hl7-org:v3}set_PostalAddressUse" />
- *       &lt;attribute name="isNotOrdered" type="{urn:hl7-org:v3}bl" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="AD"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{urn:hl7-org:v3}ANY"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;choice maxOccurs="unbounded" minOccurs="0"&gt;
+ *           &lt;element name="delimiter" type="{urn:hl7-org:v3}adxp.delimiter"/&gt;
+ *           &lt;element name="country" type="{urn:hl7-org:v3}adxp.country"/&gt;
+ *           &lt;element name="state" type="{urn:hl7-org:v3}adxp.state"/&gt;
+ *           &lt;element name="county" type="{urn:hl7-org:v3}adxp.county"/&gt;
+ *           &lt;element name="city" type="{urn:hl7-org:v3}adxp.city"/&gt;
+ *           &lt;element name="postalCode" type="{urn:hl7-org:v3}adxp.postalCode"/&gt;
+ *           &lt;element name="streetAddressLine" type="{urn:hl7-org:v3}adxp.streetAddressLine"/&gt;
+ *           &lt;element name="houseNumber" type="{urn:hl7-org:v3}adxp.houseNumber"/&gt;
+ *           &lt;element name="houseNumberNumeric" type="{urn:hl7-org:v3}adxp.houseNumberNumeric"/&gt;
+ *           &lt;element name="direction" type="{urn:hl7-org:v3}adxp.direction"/&gt;
+ *           &lt;element name="streetName" type="{urn:hl7-org:v3}adxp.streetName"/&gt;
+ *           &lt;element name="streetNameBase" type="{urn:hl7-org:v3}adxp.streetNameBase"/&gt;
+ *           &lt;element name="streetNameType" type="{urn:hl7-org:v3}adxp.streetNameType"/&gt;
+ *           &lt;element name="additionalLocator" type="{urn:hl7-org:v3}adxp.additionalLocator"/&gt;
+ *           &lt;element name="unitID" type="{urn:hl7-org:v3}adxp.unitID"/&gt;
+ *           &lt;element name="unitType" type="{urn:hl7-org:v3}adxp.unitType"/&gt;
+ *           &lt;element name="careOf" type="{urn:hl7-org:v3}adxp.careOf"/&gt;
+ *           &lt;element name="censusTract" type="{urn:hl7-org:v3}adxp.censusTract"/&gt;
+ *           &lt;element name="deliveryAddressLine" type="{urn:hl7-org:v3}adxp.deliveryAddressLine"/&gt;
+ *           &lt;element name="deliveryInstallationType" type="{urn:hl7-org:v3}adxp.deliveryInstallationType"/&gt;
+ *           &lt;element name="deliveryInstallationArea" type="{urn:hl7-org:v3}adxp.deliveryInstallationArea"/&gt;
+ *           &lt;element name="deliveryInstallationQualifier" type="{urn:hl7-org:v3}adxp.deliveryInstallationQualifier"/&gt;
+ *           &lt;element name="deliveryMode" type="{urn:hl7-org:v3}adxp.deliveryMode"/&gt;
+ *           &lt;element name="deliveryModeIdentifier" type="{urn:hl7-org:v3}adxp.deliveryModeIdentifier"/&gt;
+ *           &lt;element name="buildingNumberSuffix" type="{urn:hl7-org:v3}adxp.buildingNumberSuffix"/&gt;
+ *           &lt;element name="postBox" type="{urn:hl7-org:v3}adxp.postBox"/&gt;
+ *           &lt;element name="precinct" type="{urn:hl7-org:v3}adxp.precinct"/&gt;
+ *         &lt;/choice&gt;
+ *         &lt;element name="useablePeriod" type="{urn:hl7-org:v3}SXCM_TS" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="use" type="{urn:hl7-org:v3}set_PostalAddressUse" /&gt;
+ *       &lt;attribute name="isNotOrdered" type="{urn:hl7-org:v3}bl" /&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

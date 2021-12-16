@@ -29,13 +29,13 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * <p>
  * <pre>
- * &lt;simpleType name="x_ActRelationshipDocument">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="RPLC"/>
- *     &lt;enumeration value="APND"/>
- *     &lt;enumeration value="XFRM"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="x_ActRelationshipDocument"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="RPLC"/&gt;
+ *     &lt;enumeration value="APND"/&gt;
+ *     &lt;enumeration value="XFRM"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "x_ActRelationshipDocument")

@@ -30,12 +30,12 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * <p>
  * <pre>
- * &lt;simpleType name="IntegrityCheckAlgorithm">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="SHA-1"/>
- *     &lt;enumeration value="SHA-256"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="IntegrityCheckAlgorithm"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="SHA-1"/&gt;
+ *     &lt;enumeration value="SHA-256"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "IntegrityCheckAlgorithm")

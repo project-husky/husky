@@ -35,14 +35,14 @@ import java.util.List;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="ENXP">
- *   &lt;complexContent>
- *     &lt;extension base="{urn:hl7-org:v3}ST">
- *       &lt;attribute name="partType" type="{urn:hl7-org:v3}EntityNamePartType" />
- *       &lt;attribute name="qualifier" type="{urn:hl7-org:v3}set_EntityNamePartQualifier" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="ENXP"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{urn:hl7-org:v3}ST"&gt;
+ *       &lt;attribute name="partType" type="{urn:hl7-org:v3}EntityNamePartType" /&gt;
+ *       &lt;attribute name="qualifier" type="{urn:hl7-org:v3}set_EntityNamePartQualifier" /&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

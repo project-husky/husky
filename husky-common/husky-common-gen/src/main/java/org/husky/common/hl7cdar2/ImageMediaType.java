@@ -30,15 +30,15 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * <p>
  * <pre>
- * &lt;simpleType name="ImageMediaType">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="image/g3fax"/>
- *     &lt;enumeration value="image/gif"/>
- *     &lt;enumeration value="image/jpeg"/>
- *     &lt;enumeration value="image/png"/>
- *     &lt;enumeration value="image/tiff"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="ImageMediaType"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="image/g3fax"/&gt;
+ *     &lt;enumeration value="image/gif"/&gt;
+ *     &lt;enumeration value="image/jpeg"/&gt;
+ *     &lt;enumeration value="image/png"/&gt;
+ *     &lt;enumeration value="image/tiff"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "ImageMediaType")

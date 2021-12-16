@@ -29,16 +29,16 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * <p>
  * <pre>
- * &lt;simpleType name="x_ActRelationshipExternalReference">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="XCRPT"/>
- *     &lt;enumeration value="RPLC"/>
- *     &lt;enumeration value="SPRT"/>
- *     &lt;enumeration value="ELNK"/>
- *     &lt;enumeration value="REFR"/>
- *     &lt;enumeration value="SUBJ"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="x_ActRelationshipExternalReference"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="XCRPT"/&gt;
+ *     &lt;enumeration value="RPLC"/&gt;
+ *     &lt;enumeration value="SPRT"/&gt;
+ *     &lt;enumeration value="ELNK"/&gt;
+ *     &lt;enumeration value="REFR"/&gt;
+ *     &lt;enumeration value="SUBJ"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "x_ActRelationshipExternalReference")

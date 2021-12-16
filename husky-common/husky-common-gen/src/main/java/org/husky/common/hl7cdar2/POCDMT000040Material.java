@@ -30,35 +30,35 @@ import java.util.List;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="POCD_MT000040.Material">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="realmCode" type="{urn:hl7-org:v3}CS" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="typeId" type="{urn:hl7-org:v3}POCD_MT000040.InfrastructureRoot.typeId" minOccurs="0"/>
- *         &lt;element name="templateId" type="{urn:hl7-org:v3}II" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="code" type="{urn:hl7-org:v3}CE" minOccurs="0"/>
- *         &lt;element name="name" type="{urn:hl7-org:v3}EN" minOccurs="0"/>
- *         &lt;element ref="{urn:ihe:pharm}desc" minOccurs="0"/>
- *         &lt;element ref="{urn:ihe:pharm}riskCode" minOccurs="0"/>
- *         &lt;element ref="{urn:ihe:pharm}handlingCode" minOccurs="0"/>
- *         &lt;element ref="{urn:ihe:pharm}formCode" minOccurs="0"/>
- *         &lt;element name="lotNumberText" type="{urn:hl7-org:v3}ST" minOccurs="0"/>
- *         &lt;element ref="{urn:ihe:pharm}expirationTime" minOccurs="0"/>
- *         &lt;element ref="{urn:ihe:pharm}stabilityTime" minOccurs="0"/>
- *         &lt;element ref="{urn:ihe:pharm}asDistributedProduct" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{urn:ihe:pharm}asMedicineManufacturer" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{urn:ihe:pharm}asContent" minOccurs="0"/>
- *         &lt;element ref="{urn:ihe:pharm}asSpecializedKind" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{urn:ihe:pharm}part" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{urn:ihe:pharm}ingredient" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute name="nullFlavor" type="{urn:hl7-org:v3}NullFlavor" />
- *       &lt;attribute name="classCode" type="{urn:hl7-org:v3}EntityClassManufacturedMaterial" fixed="MMAT" />
- *       &lt;attribute name="determinerCode" type="{urn:hl7-org:v3}EntityDeterminerDetermined" fixed="KIND" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="POCD_MT000040.Material"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="realmCode" type="{urn:hl7-org:v3}CS" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="typeId" type="{urn:hl7-org:v3}POCD_MT000040.InfrastructureRoot.typeId" minOccurs="0"/&gt;
+ *         &lt;element name="templateId" type="{urn:hl7-org:v3}II" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="code" type="{urn:hl7-org:v3}CE" minOccurs="0"/&gt;
+ *         &lt;element name="name" type="{urn:hl7-org:v3}EN" minOccurs="0"/&gt;
+ *         &lt;element ref="{urn:ihe:pharm}desc" minOccurs="0"/&gt;
+ *         &lt;element ref="{urn:ihe:pharm}riskCode" minOccurs="0"/&gt;
+ *         &lt;element ref="{urn:ihe:pharm}handlingCode" minOccurs="0"/&gt;
+ *         &lt;element ref="{urn:ihe:pharm}formCode" minOccurs="0"/&gt;
+ *         &lt;element name="lotNumberText" type="{urn:hl7-org:v3}ST" minOccurs="0"/&gt;
+ *         &lt;element ref="{urn:ihe:pharm}expirationTime" minOccurs="0"/&gt;
+ *         &lt;element ref="{urn:ihe:pharm}stabilityTime" minOccurs="0"/&gt;
+ *         &lt;element ref="{urn:ihe:pharm}asDistributedProduct" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element ref="{urn:ihe:pharm}asMedicineManufacturer" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element ref="{urn:ihe:pharm}asContent" minOccurs="0"/&gt;
+ *         &lt;element ref="{urn:ihe:pharm}asSpecializedKind" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element ref="{urn:ihe:pharm}part" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element ref="{urn:ihe:pharm}ingredient" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="nullFlavor" type="{urn:hl7-org:v3}NullFlavor" /&gt;
+ *       &lt;attribute name="classCode" type="{urn:hl7-org:v3}EntityClassManufacturedMaterial" fixed="MMAT" /&gt;
+ *       &lt;attribute name="determinerCode" type="{urn:hl7-org:v3}EntityDeterminerDetermined" fixed="KIND" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

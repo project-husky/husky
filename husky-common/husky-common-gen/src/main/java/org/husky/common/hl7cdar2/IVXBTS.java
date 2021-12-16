@@ -29,13 +29,13 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="IVXB_TS">
- *   &lt;complexContent>
- *     &lt;extension base="{urn:hl7-org:v3}TS">
- *       &lt;attribute name="inclusive" type="{urn:hl7-org:v3}bl" default="true" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="IVXB_TS"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{urn:hl7-org:v3}TS"&gt;
+ *       &lt;attribute name="inclusive" type="{urn:hl7-org:v3}bl" default="true" /&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

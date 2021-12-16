@@ -29,19 +29,19 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * <p>
  * <pre>
- * &lt;simpleType name="x_ActClassDocumentEntryAct">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="ACT"/>
- *     &lt;enumeration value="ACCM"/>
- *     &lt;enumeration value="CONS"/>
- *     &lt;enumeration value="CTTEVENT"/>
- *     &lt;enumeration value="INC"/>
- *     &lt;enumeration value="INFRM"/>
- *     &lt;enumeration value="PCPR"/>
- *     &lt;enumeration value="REG"/>
- *     &lt;enumeration value="SPCTRT"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="x_ActClassDocumentEntryAct"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="ACT"/&gt;
+ *     &lt;enumeration value="ACCM"/&gt;
+ *     &lt;enumeration value="CONS"/&gt;
+ *     &lt;enumeration value="CTTEVENT"/&gt;
+ *     &lt;enumeration value="INC"/&gt;
+ *     &lt;enumeration value="INFRM"/&gt;
+ *     &lt;enumeration value="PCPR"/&gt;
+ *     &lt;enumeration value="REG"/&gt;
+ *     &lt;enumeration value="SPCTRT"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "x_ActClassDocumentEntryAct")

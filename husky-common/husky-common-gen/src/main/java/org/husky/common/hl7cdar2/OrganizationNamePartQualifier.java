@@ -29,11 +29,11 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * <p>
  * <pre>
- * &lt;simpleType name="OrganizationNamePartQualifier">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="LS"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="OrganizationNamePartQualifier"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="LS"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "OrganizationNamePartQualifier")

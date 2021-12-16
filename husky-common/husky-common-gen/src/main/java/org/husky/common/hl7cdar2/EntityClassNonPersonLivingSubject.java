@@ -29,14 +29,14 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * <p>
  * <pre>
- * &lt;simpleType name="EntityClassNonPersonLivingSubject">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="NLIV"/>
- *     &lt;enumeration value="ANM"/>
- *     &lt;enumeration value="MIC"/>
- *     &lt;enumeration value="PLNT"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="EntityClassNonPersonLivingSubject"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="NLIV"/&gt;
+ *     &lt;enumeration value="ANM"/&gt;
+ *     &lt;enumeration value="MIC"/&gt;
+ *     &lt;enumeration value="PLNT"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "EntityClassNonPersonLivingSubject")
