@@ -48,14 +48,16 @@ public class IherenewalPeriodContentModule extends POCDMT000040Supply {
     }
 
     /**
-     * Gets the hl7EffectiveTime/In case the renewal period is bound by a precise date
+     * Gets the hl7EffectiveTime<br/>
+     * In case the renewal period is bound by a precise date
      */
     public List<SXCMTS> getHl7EffectiveTimeListSxcmts() {
         return effectiveTime;
     }
 
     /**
-     * Gets the hl7TemplateId/Renewal Period effectiveTime
+     * Gets the hl7TemplateId<br/>
+     * Renewal Period effectiveTime
      */
     public List<org.husky.common.hl7cdar2.II> getHl7TemplateId() {
         return templateId;

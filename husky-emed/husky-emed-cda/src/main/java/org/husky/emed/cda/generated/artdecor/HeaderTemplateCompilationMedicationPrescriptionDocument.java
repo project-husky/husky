@@ -31,21 +31,24 @@ public class HeaderTemplateCompilationMedicationPrescriptionDocument extends POC
     }
 
     /**
-     * Gets the hl7DocumentationOf/Validity of document
+     * Gets the hl7DocumentationOf<br/>
+     * Validity of document
      */
     public List<org.husky.common.hl7cdar2.POCDMT000040DocumentationOf> getHl7DocumentationOf() {
         return documentationOf;
     }
 
     /**
-     * Gets the hl7EffectiveTime/The document's creation date and time. If this document replaces a previous version (linked via parentDocument), this is the date and time of the new version.
+     * Gets the hl7EffectiveTime<br/>
+     * The document's creation date and time. If this document replaces a previous version (linked via parentDocument), this is the date and time of the new version.
      */
     public org.husky.common.hl7cdar2.TS getHl7EffectiveTime() {
         return effectiveTime;
     }
 
     /**
-     * Gets the hl7Title/<div>The German title shall be "Rezept".</div><div>The French title shall be "Ordonnance".</div><div>The Italian title shall be "Ricetta".</div><div>The English title shall be "Prescription".</div><div>Titles in other languages are allowed and unrestricted.</div>
+     * Gets the hl7Title<br/>
+     * <div>The German title shall be "Rezept".</div><div>The French title shall be "Ordonnance".</div><div>The Italian title shall be "Ricetta".</div><div>The English title shall be "Prescription".</div><div>Titles in other languages are allowed and unrestricted.</div>
      */
     public org.husky.common.hl7cdar2.ST getHl7Title() {
         return title;

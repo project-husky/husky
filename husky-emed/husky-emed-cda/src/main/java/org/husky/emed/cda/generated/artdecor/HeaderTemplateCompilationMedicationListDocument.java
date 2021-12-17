@@ -30,14 +30,16 @@ public class HeaderTemplateCompilationMedicationListDocument extends POCDMT00004
     }
 
     /**
-     * Gets the hl7EffectiveTime/The document's creation date and time. If this document replaces a previous version (linked via parentDocument), this is the date and time of the new version.
+     * Gets the hl7EffectiveTime<br/>
+     * The document's creation date and time. If this document replaces a previous version (linked via parentDocument), this is the date and time of the new version.
      */
     public org.husky.common.hl7cdar2.TS getHl7EffectiveTime() {
         return effectiveTime;
     }
 
     /**
-     * Gets the hl7Title/<div>The German title shall be "Medikationsliste".</div><div>The French title shall be "Liste de médication".</div><div>The Italian title shall be "Elenco delle terapie farmacologiche".</div><div>The English title shall be "Medication List".</div><div>Titles in other languages are allowed and unrestricted.</div>
+     * Gets the hl7Title<br/>
+     * <div>The German title shall be "Medikationsliste".</div><div>The French title shall be "Liste de médication".</div><div>The Italian title shall be "Elenco delle terapie farmacologiche".</div><div>The English title shall be "Medication List".</div><div>Titles in other languages are allowed and unrestricted.</div>
      */
     public org.husky.common.hl7cdar2.ST getHl7Title() {
         return title;

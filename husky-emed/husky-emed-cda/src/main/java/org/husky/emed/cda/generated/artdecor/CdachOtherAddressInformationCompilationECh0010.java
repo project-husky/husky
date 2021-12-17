@@ -84,63 +84,72 @@ public class CdachOtherAddressInformationCompilationECh0010 {
     private org.husky.common.hl7cdar2.ADXP streetName;
 
     /**
-     * Gets the hl7AdditionalLocator/Number of addressed apartment. This is occasionally necessary for larger buildings. With a maximum length of 30 characters.
+     * Gets the hl7AdditionalLocator<br/>
+     * Number of addressed apartment. This is occasionally necessary for larger buildings. With a maximum length of 30 characters.
      */
     public org.husky.common.hl7cdar2.ADXP getHl7AdditionalLocator() {
         return additionalLocator;
     }
 
     /**
-     * Gets the hl7City/Addressed city (in foreign addresses if necessary including province, etc.).When using the information according to the Swiss Post, the 27-digit city name must be used.
+     * Gets the hl7City<br/>
+     * Addressed city (in foreign addresses if necessary including province, etc.).When using the information according to the Swiss Post, the 27-digit city name must be used.
      */
     public org.husky.common.hl7cdar2.ADXP getHl7City() {
         return city;
     }
 
     /**
-     * Gets the hl7Country/Two-digit, alphanumeric ISO country code according to [ISO 3166-1] of the country in which the address is located. The country defines the conventions for addressing.The country code MUST also be declared for Swiss postal addresses.Caution: Political changes or renaming of countries will result in adjustments to the ISO country list.The length of the feature is 2 characters.
+     * Gets the hl7Country<br/>
+     * Two-digit, alphanumeric ISO country code according to [ISO 3166-1] of the country in which the address is located. The country defines the conventions for addressing.The country code MUST also be declared for Swiss postal addresses.Caution: Political changes or renaming of countries will result in adjustments to the ISO country list.The length of the feature is 2 characters.
      */
     public org.husky.common.hl7cdar2.ADXP getHl7Country() {
         return country;
     }
 
     /**
-     * Gets the hl7HouseNumber/House number in postal addresses (including house number additives). With a maximum length of 30 characters.
+     * Gets the hl7HouseNumber<br/>
+     * House number in postal addresses (including house number additives). With a maximum length of 30 characters.
      */
     public org.husky.common.hl7cdar2.ADXP getHl7HouseNumber() {
         return houseNumber;
     }
 
     /**
-     * Gets the hl7PostBox/Number of the addressed post box in a maximum length of 8 characters.
+     * Gets the hl7PostBox<br/>
+     * Number of the addressed post box in a maximum length of 8 characters.
      */
     public org.husky.common.hl7cdar2.ADXP getHl7PostBox() {
         return postBox;
     }
 
     /**
-     * Gets the hl7PostalCode/Postal code given by Swiss Post or postal code issued by a post office abroad, that can consist of numbers, letters or a combination of both, possibly even special characters.
+     * Gets the hl7PostalCode<br/>
+     * Postal code given by Swiss Post or postal code issued by a post office abroad, that can consist of numbers, letters or a combination of both, possibly even special characters.
      */
     public org.husky.common.hl7cdar2.ADXP getHl7PostalCode() {
         return postalCode;
     }
 
     /**
-     * Gets the hl7State/Occasionally, additional geographic information must be provided in foreign addresses, in addition to city and country. This element can be used for such cases.It contains superordinate or subordinate information on a city, such as region, province, state or local district.Since it is difficult - especially with foreign addresses - to determine whether an indication is subordinate or subordinate, a separate mapping of superordinate and subordinate indication is omitted.
+     * Gets the hl7State<br/>
+     * Occasionally, additional geographic information must be provided in foreign addresses, in addition to city and country. This element can be used for such cases.It contains superordinate or subordinate information on a city, such as region, province, state or local district.Since it is difficult - especially with foreign addresses - to determine whether an indication is subordinate or subordinate, a separate mapping of superordinate and subordinate indication is omitted.
      */
     public org.husky.common.hl7cdar2.ADXP getHl7State() {
         return state;
     }
 
     /**
-     * Gets the hl7StreetAddressLine/Free additional lines for additional address information which can not be used in the other address fields (e.g. for c/o entries, etc.), with a maximum length of 150 characters.addressLine1 should be used for personalized addressing (e.g., c/o-Address).
+     * Gets the hl7StreetAddressLine<br/>
+     * Free additional lines for additional address information which can not be used in the other address fields (e.g. for c/o entries, etc.), with a maximum length of 150 characters.addressLine1 should be used for personalized addressing (e.g., c/o-Address).
      */
     public org.husky.common.hl7cdar2.ADXP getHl7StreetAddressLine() {
         return streetAddressLine;
     }
 
     /**
-     * Gets the hl7StreetName/Street names in postal addresses. It can also be the name of a locality, a hamlet, etc. With a maximum length of 150 characters.
+     * Gets the hl7StreetName<br/>
+     * Street names in postal addresses. It can also be the name of a locality, a hamlet, etc. With a maximum length of 150 characters.
      */
     public org.husky.common.hl7cdar2.ADXP getHl7StreetName() {
         return streetName;

@@ -73,8 +73,8 @@ public class PixPdqV3Utils {
 	/**
 	 * Convert an AD (Address) object into a String array containing each part as
 	 * follows: String[0] = Street Address Line String[1] = Additional Locator
-	 * String[2] = City String[3] = State String[4] = Postal Code String[5] = <not
-	 * populated> String[6] = <not populated> String[7] = <not populated> String[8]
+	 * String[2] = City String[3] = State String[4] = Postal Code String[5] = {@code <not
+	 * populated>} String[6] = {@code <not populated>} String[7] = {@code <not populated>} String[8]
 	 * = County
 	 *
 	 * @param ad (The AD object containing the address)
@@ -797,11 +797,11 @@ public class PixPdqV3Utils {
 	/**
 	 * Create a PN Object containing the supplied name parts.
 	 *
-	 * @param familyName
-	 * @param givenName
-	 * @param otherName
-	 * @param suffixName
-	 * @param prefixName
+	 * @param family
+	 * @param given
+	 * @param other
+	 * @param suffix
+	 * @param prefix
 	 * @return PN Object containing the supplied name parts.
 	 */
 	public static PN createPN(String family, String given, String other, String suffix, String prefix) {
@@ -877,7 +877,6 @@ public class PixPdqV3Utils {
 	 *
 	 * @param familyName
 	 * @param givenName
-	 * @param otherName
 	 * @param suffixName
 	 * @param prefixName
 	 * @return PN Object containing the supplied name parts.

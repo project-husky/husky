@@ -17,8 +17,7 @@ import org.husky.common.hl7cdar2.POCDMT000040Section;
 /**
  * MedicationCardSectionContentModule
  * <p>
- * Template description: The Meciation Card Section includes the current and planned medication of a patient. See
- * <a href="http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_PML.pdf">IHE Pharmacy PML Suppl</a>. It includes entries for Medication Treatment Plan Items as described in the Medication Treatment Plan Item Entry Content Module. See also<a class="" href="http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_MTP.pdf" target="" title="">IHE Pharmacy MTP Suppl</a>. Other entries like Prescription, Dispense and Pharmaceutical Advise entries which are allowd in a PML section are not allowed in the eCurrentMedication section.<br>
+ * Template description: The Meciation Card Section includes the current and planned medication of a patient. See<a href="http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_PML.pdf">IHE Pharmacy PML Suppl</a>. It includes entries for Medication Treatment Plan Items as described in the Medication Treatment Plan Item Entry Content Module. See also<a href="http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_MTP.pdf">IHE Pharmacy MTP Suppl</a>. Other entries like Prescription, Dispense and Pharmaceutical Advise entries which are allowd in a PML section are not allowed in the eCurrentMedication section.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.1.10.3.9<br>
  * Effective date: 2016-05-21 00:00:00<br>
@@ -38,7 +37,8 @@ public class MedicationCardSectionContentModule extends POCDMT000040Section {
     }
 
     /**
-     * Adds a hl7Author/Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
+     * Adds a hl7Author<br/>
+     * Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
      */
     public void addHl7Author(org.husky.common.hl7cdar2.POCDMT000040Author value) {
         getAuthor().add(value);
@@ -52,7 +52,8 @@ public class MedicationCardSectionContentModule extends POCDMT000040Section {
     }
 
     /**
-     * Adds a hl7Author/Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
+     * Adds a hl7Author<br/>
+     * Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
      */
     public void clearHl7Author() {
         getAuthor().clear();
@@ -93,7 +94,8 @@ public class MedicationCardSectionContentModule extends POCDMT000040Section {
     }
 
     /**
-     * Gets the hl7Code/IHE Pharm PML 6.3.3.10.S1.1
+     * Gets the hl7Code<br/>
+     * IHE Pharm PML 6.3.3.10.S1.1
      */
     public org.husky.common.hl7cdar2.CE getHl7Code() {
         return code;
@@ -107,7 +109,8 @@ public class MedicationCardSectionContentModule extends POCDMT000040Section {
     }
 
     /**
-     * Gets the hl7TemplateId/CH-PHARM Medication Card Section Content Module
+     * Gets the hl7TemplateId<br/>
+     * CH-PHARM Medication Card Section Content Module
      */
     public List<org.husky.common.hl7cdar2.II> getHl7TemplateId() {
         return templateId;
@@ -121,7 +124,8 @@ public class MedicationCardSectionContentModule extends POCDMT000040Section {
     }
 
     /**
-     * Gets the hl7Title/<div>The German title shall be "Medikamentenliste".</div><div>The French title shall be "Liste de médicaments".</div><div>The Italian title shall be "Lista farmaci".</div><div>The English title shall be "Medication List".</div><div>Titles in other languages are allowed and unrestricted.</div>
+     * Gets the hl7Title<br/>
+     * <div>The German title shall be "Medikamentenliste".</div><div>The French title shall be "Liste de médicaments".</div><div>The Italian title shall be "Lista farmaci".</div><div>The English title shall be "Medication List".</div><div>Titles in other languages are allowed and unrestricted.</div>
      */
     public org.husky.common.hl7cdar2.ST getHl7Title() {
         return title;

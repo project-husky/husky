@@ -40,14 +40,16 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
     }
 
     /**
-     * Adds a pharmIngredient/One or more active ingredients SHOULD be represented with this structure.
+     * Adds a pharmIngredient<br/>
+     * One or more active ingredients SHOULD be represented with this structure.
      */
     public void addPharmIngredient(org.husky.common.hl7cdar2.COCTMT230100UVIngredient value) {
         getIngredient().add(value);
     }
 
     /**
-     * Adds a pharmIngredient/One or more active ingredients SHOULD be represented with this structure.
+     * Adds a pharmIngredient<br/>
+     * One or more active ingredients SHOULD be represented with this structure.
      */
     public void clearPharmIngredient() {
         getIngredient().clear();
@@ -127,7 +129,8 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
     }
 
     /**
-     * Gets the hl7Code/The element SHALL be present and describes the code of the medication package (GTIN). If it is a magistral preparation/compound medicin @nullFlavor SHALL be "NA".
+     * Gets the hl7Code<br/>
+     * The element SHALL be present and describes the code of the medication package (GTIN). If it is a magistral preparation/compound medicin {@literal @}nullFlavor SHALL be "NA".
      */
     public org.husky.common.hl7cdar2.CE getHl7Code() {
         return code;
@@ -141,14 +144,16 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
     }
 
     /**
-     * Gets the hl7Name/The element SHALL contain the name of the medication.
+     * Gets the hl7Name<br/>
+     * The element SHALL contain the name of the medication.
      */
     public org.husky.common.hl7cdar2.EN getHl7Name() {
         return name;
     }
 
     /**
-     * Gets the hl7TemplateId/CH-PHARM Manufactured Material Content Module
+     * Gets the hl7TemplateId<br/>
+     * CH-PHARM Manufactured Material Content Module
      */
     public List<org.husky.common.hl7cdar2.II> getHl7TemplateId() {
         return templateId;
@@ -169,7 +174,8 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
     }
 
     /**
-     * Gets the pharmFormCode/This code represents the pharmaceutical dose form (e.g., tablet, capsule, liquid) and SHOULD be present, if not implied by the product.
+     * Gets the pharmFormCode<br/>
+     * This code represents the pharmaceutical dose form (e.g., tablet, capsule, liquid) and SHOULD be present, if not implied by the product.
      */
     public org.husky.common.hl7cdar2.CE getPharmFormCode() {
         return formCode;
@@ -201,7 +207,7 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
 
     /**
      * Sets the hl7Code<br/>
-     * The element SHALL be present and describes the code of the medication package (GTIN). If it is a magistral preparation/compound medicin @nullFlavor SHALL be "NA".
+     * The element SHALL be present and describes the code of the medication package (GTIN). If it is a magistral preparation/compound medicin {@literal @}nullFlavor SHALL be "NA".
      */
     public void setHl7Code(org.husky.common.hl7cdar2.CE value) {
         this.code = value;

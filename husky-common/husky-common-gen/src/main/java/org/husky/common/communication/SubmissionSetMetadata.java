@@ -42,7 +42,8 @@ public class SubmissionSetMetadata {
 		 * Extraction from the first Document Entry to the Submission Set uses
 		 * the following mapping:
 		 *
-		 * <table summary="Submission set attributes generation">
+		 * <table>
+		 * <caption>Submission set attributes generation</caption>
 		 * <thead>
 		 * <tr>
 		 * <th>Submission set attribute</th>

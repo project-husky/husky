@@ -37,14 +37,16 @@ public class MedicationTreatmenPlanSectionContentModule extends POCDMT000040Sect
     }
 
     /**
-     * Adds a hl7Author/Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
+     * Adds a hl7Author<br/>
+     * Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
      */
     public void addHl7Author(org.husky.common.hl7cdar2.POCDMT000040Author value) {
         getAuthor().add(value);
     }
 
     /**
-     * Adds a hl7Author/Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
+     * Adds a hl7Author<br/>
+     * Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
      */
     public void clearHl7Author() {
         getAuthor().clear();
@@ -113,7 +115,8 @@ public class MedicationTreatmenPlanSectionContentModule extends POCDMT000040Sect
     }
 
     /**
-     * Gets the hl7Title/<div>The German title shall be "Medikamentöser Behandlungsplan".</div><div>The French title shall be "Plan de traitement médicamenteux".</div><div>The Italian title shall be "Piano terapeutico farmacologico".</div><div>The English title shall be "Medication Treatment Plan".</div><div>Titles in other languages are allowed and unrestricted.</div>
+     * Gets the hl7Title<br/>
+     * <div>The German title shall be "Medikamentöser Behandlungsplan".</div><div>The French title shall be "Plan de traitement médicamenteux".</div><div>The Italian title shall be "Piano terapeutico farmacologico".</div><div>The English title shall be "Medication Treatment Plan".</div><div>Titles in other languages are allowed and unrestricted.</div>
      */
     public org.husky.common.hl7cdar2.ST getHl7Title() {
         return title;

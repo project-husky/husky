@@ -30,63 +30,72 @@ public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganizat
     }
 
     /**
-     * Adds a hl7Addr/The assigned entity's address.
+     * Adds a hl7Addr<br/>
+     * The assigned entity's address.
      */
     public void addHl7Addr(org.husky.common.hl7cdar2.AD value) {
         getAddr().add(value);
     }
 
     /**
-     * Adds a hl7Id/The assigned entity's id (including the assigned person's id).
+     * Adds a hl7Id<br/>
+     * The assigned entity's id (including the assigned person's id).
      */
     public void addHl7Id(org.husky.common.hl7cdar2.II value) {
         getId().add(value);
     }
 
     /**
-     * Adds a hl7Telecom/The assigned entity's means of communication (phone, eMail, ...).
+     * Adds a hl7Telecom<br/>
+     * The assigned entity's means of communication (phone, eMail, ...).
      */
     public void addHl7Telecom(org.husky.common.hl7cdar2.TEL value) {
         getTelecom().add(value);
     }
 
     /**
-     * Adds a hl7Addr/The assigned entity's address.
+     * Adds a hl7Addr<br/>
+     * The assigned entity's address.
      */
     public void clearHl7Addr() {
         getAddr().clear();
     }
 
     /**
-     * Adds a hl7Id/The assigned entity's id (including the assigned person's id).
+     * Adds a hl7Id<br/>
+     * The assigned entity's id (including the assigned person's id).
      */
     public void clearHl7Id() {
         getId().clear();
     }
 
     /**
-     * Adds a hl7Telecom/The assigned entity's means of communication (phone, eMail, ...).
+     * Adds a hl7Telecom<br/>
+     * The assigned entity's means of communication (phone, eMail, ...).
      */
     public void clearHl7Telecom() {
         getTelecom().clear();
     }
 
     /**
-     * Gets the hl7AssignedPerson/The assigned person.
+     * Gets the hl7AssignedPerson<br/>
+     * The assigned person.
      */
     public org.husky.common.hl7cdar2.POCDMT000040Person getHl7AssignedPerson() {
         return assignedPerson;
     }
 
     /**
-     * Gets the hl7Code/The human-readable text MUST be generated automatically from the structured information of this element. The text element MUST contain the reference to the corresponding text in the human readable part, ONLY.
+     * Gets the hl7Code<br/>
+     * The human-readable text MUST be generated automatically from the structured information of this element. The text element MUST contain the reference to the corresponding text in the human readable part, ONLY.
      */
     public org.husky.common.hl7cdar2.CE getHl7Code() {
         return code;
     }
 
     /**
-     * Gets the hl7RepresentedOrganization/The assigned organization.
+     * Gets the hl7RepresentedOrganization<br/>
+     * The assigned organization.
      */
     public org.husky.common.hl7cdar2.POCDMT000040Organization getHl7RepresentedOrganization() {
         return representedOrganization;

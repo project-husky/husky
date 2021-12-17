@@ -29,7 +29,8 @@ public class CdachOtherTextElementWithReferenceToNarrativeText extends ED {
     }
 
     /**
-     * Gets the hl7Reference/The reference to the corresponding text in the human readable part must be specified by reference to content[@ID]: reference[@value='#xxx']
+     * Gets the hl7Reference<br/>
+     * The reference to the corresponding text in the human readable part must be specified by reference to content[{@literal @}ID]: reference[{@literal @}value='#xxx']
      */
     public org.husky.common.hl7cdar2.TEL getHl7Reference() {
         return reference;
@@ -37,7 +38,7 @@ public class CdachOtherTextElementWithReferenceToNarrativeText extends ED {
 
     /**
      * Sets the hl7Reference<br/>
-     * The reference to the corresponding text in the human readable part must be specified by reference to content[@ID]: reference[@value='#xxx']
+     * The reference to the corresponding text in the human readable part must be specified by reference to content[{@literal @}ID]: reference[{@literal @}value='#xxx']
      */
     public void setHl7Reference(org.husky.common.hl7cdar2.TEL value) {
         this.reference = value;

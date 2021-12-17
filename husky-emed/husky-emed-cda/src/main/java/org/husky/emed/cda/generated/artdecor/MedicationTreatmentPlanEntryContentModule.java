@@ -150,7 +150,8 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
     }
 
     /**
-     * Gets the hl7Author/Medication Treatment Plan Author
+     * Gets the hl7Author<br/>
+     * Medication Treatment Plan Author
      */
     public List<org.husky.common.hl7cdar2.POCDMT000040Author> getHl7Author() {
         return author;
@@ -171,28 +172,32 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
     }
 
     /**
-     * Gets the hl7EffectiveTime/<div>In case the (structured) dosage instructions include a dose regime this element SHALL be</div><div>present and specify the entire duration of the medication treatment. In case the Duration of Treatment is unknown the &lt;low&gt; and &lt;high&gt; sub-elements of this element SHALL be set to null flavor “UNK”.</div>
+     * Gets the hl7EffectiveTime<br/>
+     * <div>In case the (structured) dosage instructions include a dose regime this element SHALL be</div><div>present and specify the entire duration of the medication treatment. In case the Duration of Treatment is unknown the &lt;low&gt; and &lt;high&gt; sub-elements of this element SHALL be set to null flavor “UNK”.</div>
      */
     public List<SXCMTS> getHl7EffectiveTimeListSxcmts() {
         return effectiveTime;
     }
 
     /**
-     * Gets the hl7EntryRelationship/IHE MTP Reason. Referencing to the Treatment Reason Entry Content Module below (required by IHE PHARM)
+     * Gets the hl7EntryRelationship<br/>
+     * IHE MTP Reason. Referencing to the Treatment Reason Entry Content Module below (required by IHE PHARM)
      */
     public List<org.husky.common.hl7cdar2.POCDMT000040EntryRelationship> getHl7EntryRelationship() {
         return entryRelationship;
     }
 
     /**
-     * Gets the hl7Id/Medication Treatment Plan Item ID
+     * Gets the hl7Id<br/>
+     * Medication Treatment Plan Item ID
      */
     public List<org.husky.common.hl7cdar2.II> getHl7Id() {
         return id;
     }
 
     /**
-     * Gets the hl7Precondition/Precondition Criterion
+     * Gets the hl7Precondition<br/>
+     * Precondition Criterion
      */
     public List<org.husky.common.hl7cdar2.POCDMT000040Precondition> getHl7Precondition() {
         return precondition;
@@ -206,14 +211,16 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
     }
 
     /**
-     * Gets the hl7Reference/ID of parent container (Community Medication Treatment Plan document)
+     * Gets the hl7Reference<br/>
+     * ID of parent container (Community Medication Treatment Plan document)
      */
     public List<org.husky.common.hl7cdar2.POCDMT000040Reference> getHl7Reference() {
         return reference;
     }
 
     /**
-     * Gets the hl7RepeatNumber/Number of repeats/refills. Either the @value or @nullFlavor attribute shall be set. It's required in MTP, PRE and PADV items ; forbidden in DIS items.
+     * Gets the hl7RepeatNumber<br/>
+     * Number of repeats/refills. Either the {@literal @}value or {@literal @}nullFlavor attribute shall be set. It's required in MTP, PRE and PADV items ; forbidden in DIS items.
      */
     public org.husky.common.hl7cdar2.IVLINT getHl7RepeatNumber() {
         return repeatNumber;
@@ -227,14 +234,16 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
     }
 
     /**
-     * Gets the hl7StatusCode/Status Code
+     * Gets the hl7StatusCode<br/>
+     * Status Code
      */
     public org.husky.common.hl7cdar2.CS getHl7StatusCode() {
         return statusCode;
     }
 
     /**
-     * Gets the hl7TemplateId/CH-PHARM Medication Treatment Plan Item Entry Content Module
+     * Gets the hl7TemplateId<br/>
+     * CH-PHARM Medication Treatment Plan Item Entry Content Module
      */
     public List<org.husky.common.hl7cdar2.II> getHl7TemplateId() {
         return templateId;
@@ -442,7 +451,7 @@ public class MedicationTreatmentPlanEntryContentModule extends POCDMT000040Subst
 
     /**
      * Sets the hl7RepeatNumber<br/>
-     * Number of repeats/refills. Either the @value or @nullFlavor attribute shall be set. It's required in MTP, PRE and PADV items ; forbidden in DIS items.
+     * Number of repeats/refills. Either the {@literal @}value or {@literal @}nullFlavor attribute shall be set. It's required in MTP, PRE and PADV items ; forbidden in DIS items.
      */
     public void setHl7RepeatNumber(org.husky.common.hl7cdar2.IVLINT value) {
         this.repeatNumber = value;

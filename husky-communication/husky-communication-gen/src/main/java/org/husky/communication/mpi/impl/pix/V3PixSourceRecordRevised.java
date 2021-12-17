@@ -263,7 +263,7 @@ public class V3PixSourceRecordRevised extends V3Message {
 	 *
 	 * @param familyName
 	 * @param givenName
-	 * @param otherName
+	 * @param other
 	 * @param prefixName
 	 * @param suffixName
 	 */
@@ -415,7 +415,6 @@ public class V3PixSourceRecordRevised extends V3Message {
 	 *
 	 * @param family
 	 * @param given
-	 * @param other
 	 * @param suffix
 	 * @param prefix
 	 */

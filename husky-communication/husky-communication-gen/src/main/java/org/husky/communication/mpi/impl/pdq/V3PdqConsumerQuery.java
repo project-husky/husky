@@ -389,7 +389,7 @@ public class V3PdqConsumerQuery extends V3Message {
 	/**
 	 * Set the minimum degree match to the provided value
 	 * 
-	 * @param minimumDegreeMatch
+	 * @param minimumDegreeInt
 	 *            - integer value of degree match (0 to 100)
 	 */
 	public void setMinimumDegreeMatch(Integer minimumDegreeInt) {

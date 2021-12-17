@@ -104,7 +104,8 @@ public class Cdaorganization extends POCDMT000040Organization {
     }
 
     /**
-     * Gets the hl7StandardIndustryClassCode/SHALL be chosen from domain OrganizationIndustryClass
+     * Gets the hl7StandardIndustryClassCode<br/>
+     * SHALL be chosen from domain OrganizationIndustryClass
      */
     public org.husky.common.hl7cdar2.CE getHl7StandardIndustryClassCode() {
         return standardIndustryClassCode;

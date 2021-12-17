@@ -63,21 +63,24 @@ public class IhesubstitutionPermissionContentModule extends POCDMT000040Act {
     }
 
     /**
-     * Gets the hl7Code/6.3.4.8.3.3 Substitution Permission code
+     * Gets the hl7Code<br/>
+     * 6.3.4.8.3.3 Substitution Permission code
      */
     public org.husky.common.hl7cdar2.CD getHl7Code() {
         return code;
     }
 
     /**
-     * Gets the hl7StatusCode/6.3.4.8.3.4 Substitution Permission statusCode
+     * Gets the hl7StatusCode<br/>
+     * 6.3.4.8.3.4 Substitution Permission statusCode
      */
     public org.husky.common.hl7cdar2.CS getHl7StatusCode() {
         return statusCode;
     }
 
     /**
-     * Gets the hl7TemplateId/6.3.4.8.3.2 Substitution Permission Template ID
+     * Gets the hl7TemplateId<br/>
+     * 6.3.4.8.3.2 Substitution Permission Template ID
      */
     public List<org.husky.common.hl7cdar2.II> getHl7TemplateId() {
         return templateId;

@@ -97,14 +97,16 @@ public class DosageInstructionsStartStopFrequency extends POCDMT000040SubstanceA
     }
 
     /**
-     * Gets the hl7EffectiveTime/Dosage Instructions PCC 6.3.4.16.12 - Frequency: Multiple events within a day with the same dosage
+     * Gets the hl7EffectiveTime<br/>
+     * Dosage Instructions PCC 6.3.4.16.12 - Frequency: Multiple events within a day with the same dosage
      */
     public List<SXCMTS> getHl7EffectiveTime() {
         return effectiveTime;
     }
 
     /**
-     * Gets the hl7EffectiveTime/<div>In case the (structured) dosage instructions include a dose regime this element SHALL be</div><div>present and specify the entire duration of the medication treatment. In case the Duration of Treatment is unknown the &lt;low&gt; and &lt;high&gt; sub-elements of this element SHALL be set to null flavor “UNK”.</div>
+     * Gets the hl7EffectiveTime<br/>
+     * <div>In case the (structured) dosage instructions include a dose regime this element SHALL be</div><div>present and specify the entire duration of the medication treatment. In case the Duration of Treatment is unknown the &lt;low&gt; and &lt;high&gt; sub-elements of this element SHALL be set to null flavor “UNK”.</div>
      */
     public List<SXCMTS> getHl7EffectiveTimeListSxcmts() {
         return effectiveTime;
@@ -118,7 +120,8 @@ public class DosageInstructionsStartStopFrequency extends POCDMT000040SubstanceA
     }
 
     /**
-     * Gets the hl7RepeatNumber/Number of repeats/refills. Either the @value or @nullFlavor attribute shall be set. It's required in MTP, PRE and PADV items ; forbidden in DIS items.
+     * Gets the hl7RepeatNumber<br/>
+     * Number of repeats/refills. Either the {@literal @}value or {@literal @}nullFlavor attribute shall be set. It's required in MTP, PRE and PADV items ; forbidden in DIS items.
      */
     public org.husky.common.hl7cdar2.IVLINT getHl7RepeatNumber() {
         return repeatNumber;
@@ -206,7 +209,7 @@ public class DosageInstructionsStartStopFrequency extends POCDMT000040SubstanceA
 
     /**
      * Sets the hl7RepeatNumber<br/>
-     * Number of repeats/refills. Either the @value or @nullFlavor attribute shall be set. It's required in MTP, PRE and PADV items ; forbidden in DIS items.
+     * Number of repeats/refills. Either the {@literal @}value or {@literal @}nullFlavor attribute shall be set. It's required in MTP, PRE and PADV items ; forbidden in DIS items.
      */
     public void setHl7RepeatNumber(org.husky.common.hl7cdar2.IVLINT value) {
         this.repeatNumber = value;

@@ -17,7 +17,6 @@ import org.husky.common.hl7cdar2.II;
 import org.husky.common.hl7cdar2.INT;
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
-import org.husky.emed.cda.utils.CdaR2Utils;
 
 /**
  * MedicationPrescriptionDocument
@@ -46,21 +45,32 @@ public class MedicationPrescriptionDocument extends POCDMT000040ClinicalDocument
     }
 
     /**
-     * Adds a hl7Authenticator/Information about an authenticator of a CDA document. An authenticator MUST be a person.
+     * Adds a hl7Authenticator<br/>
+     * Information about an authenticator of a CDA document. An authenticator MUST be a person.
      */
     public void addHl7Authenticator(org.husky.common.hl7cdar2.POCDMT000040Authenticator value) {
         getAuthenticator().add(value);
     }
 
     /**
-     * Adds a hl7Author/Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
+     * Adds a hl7Author<br/>
+     * Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
      */
     public void addHl7Author(org.husky.common.hl7cdar2.POCDMT000040Author value) {
         getAuthor().add(value);
     }
 
     /**
-     * Adds a hl7InFulfillmentOf/Reference to one or more orders which led to the creation of this CDA document. It SHALL be declared, when the order reference is relevant for some reason.
+     * Adds a hl7DocumentationOf<br/>
+     * Information about a health service describing the context of this CDA document.
+     */
+    public void addHl7DocumentationOf(org.husky.common.hl7cdar2.POCDMT000040DocumentationOf value) {
+        getDocumentationOf().add(value);
+    }
+
+    /**
+     * Adds a hl7InFulfillmentOf<br/>
+     * Reference to one or more orders which led to the creation of this CDA document. It SHALL be declared, when the order reference is relevant for some reason.
      */
     public void addHl7InFulfillmentOf(org.husky.common.hl7cdar2.POCDMT000040InFulfillmentOf value) {
         getInFulfillmentOf().add(value);
@@ -74,7 +84,8 @@ public class MedicationPrescriptionDocument extends POCDMT000040ClinicalDocument
     }
 
     /**
-     * Adds a hl7InformationRecipient/A recipient of this CDA document (corresponds to the addressee of a letter - person or organization).Recipient types:
+     * Adds a hl7InformationRecipient<br/>
+     * A recipient of this CDA document (corresponds to the addressee of a letter - person or organization).Recipient types:
      * - The main recipient of the document is indicated by typeCode 'PRCP' (primary recipient).Note: Since it makes no sense to create a CDA document without doing it for someone, in Switzerland at least one recipient MUST be declared. If the document is created for the user's own needs, the user itself or its organization will be the primary recipient.
      * - Other recipients (copy to; Cc) are indicated with typeCode, TRC '(secondary recipient).
      */
@@ -83,28 +94,40 @@ public class MedicationPrescriptionDocument extends POCDMT000040ClinicalDocument
     }
 
     /**
-     * Adds a hl7Participant/Information on a patient contact.
+     * Adds a hl7Participant<br/>
+     * Information on a patient contact.
      */
     public void addHl7Participant(org.husky.common.hl7cdar2.POCDMT000040Participant1 value) {
         getParticipant().add(value);
     }
 
     /**
-     * Adds a hl7Authenticator/Information about an authenticator of a CDA document. An authenticator MUST be a person.
+     * Adds a hl7Authenticator<br/>
+     * Information about an authenticator of a CDA document. An authenticator MUST be a person.
      */
     public void clearHl7Authenticator() {
         getAuthenticator().clear();
     }
 
     /**
-     * Adds a hl7Author/Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
+     * Adds a hl7Author<br/>
+     * Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
      */
     public void clearHl7Author() {
         getAuthor().clear();
     }
 
     /**
-     * Adds a hl7InFulfillmentOf/Reference to one or more orders which led to the creation of this CDA document. It SHALL be declared, when the order reference is relevant for some reason.
+     * Adds a hl7DocumentationOf<br/>
+     * Information about a health service describing the context of this CDA document.
+     */
+    public void clearHl7DocumentationOf() {
+        getDocumentationOf().clear();
+    }
+
+    /**
+     * Adds a hl7InFulfillmentOf<br/>
+     * Reference to one or more orders which led to the creation of this CDA document. It SHALL be declared, when the order reference is relevant for some reason.
      */
     public void clearHl7InFulfillmentOf() {
         getInFulfillmentOf().clear();
@@ -118,7 +141,8 @@ public class MedicationPrescriptionDocument extends POCDMT000040ClinicalDocument
     }
 
     /**
-     * Adds a hl7InformationRecipient/A recipient of this CDA document (corresponds to the addressee of a letter - person or organization).Recipient types:
+     * Adds a hl7InformationRecipient<br/>
+     * A recipient of this CDA document (corresponds to the addressee of a letter - person or organization).Recipient types:
      * - The main recipient of the document is indicated by typeCode 'PRCP' (primary recipient).Note: Since it makes no sense to create a CDA document without doing it for someone, in Switzerland at least one recipient MUST be declared. If the document is created for the user's own needs, the user itself or its organization will be the primary recipient.
      * - Other recipients (copy to; Cc) are indicated with typeCode, TRC '(secondary recipient).
      */
@@ -127,7 +151,8 @@ public class MedicationPrescriptionDocument extends POCDMT000040ClinicalDocument
     }
 
     /**
-     * Adds a hl7Participant/Information on a patient contact.
+     * Adds a hl7Participant<br/>
+     * Information on a patient contact.
      */
     public void clearHl7Participant() {
         getParticipant().clear();
@@ -160,7 +185,8 @@ public class MedicationPrescriptionDocument extends POCDMT000040ClinicalDocument
     }
 
     /**
-     * Gets the hl7Code/IHE PHARM PRE document code
+     * Gets the hl7Code<br/>
+     * IHE PHARM PRE document code
      */
     public org.husky.common.hl7cdar2.CE getHl7Code() {
         return code;
@@ -174,70 +200,72 @@ public class MedicationPrescriptionDocument extends POCDMT000040ClinicalDocument
     }
 
     /**
-     * Gets the hl7ConfidentialityCode/Swiss Realm of Confidentiality Code according to the Swiss EPR regulation.
+     * Gets the hl7ConfidentialityCode<br/>
+     * Swiss Realm of Confidentiality Code according to the Swiss EPR regulation.
      */
     public org.husky.common.hl7cdar2.CE getHl7ConfidentialityCode() {
         return confidentialityCode;
     }
 
     /**
-     * Gets the hl7Custodian/The organization in whose name this CDA document has been created (corresponds to the sender of a letter).
+     * Gets the hl7Custodian<br/>
+     * The organization in whose name this CDA document has been created (corresponds to the sender of a letter).
      */
     public org.husky.common.hl7cdar2.POCDMT000040Custodian getHl7Custodian() {
         return custodian;
     }
 
     /**
-     * Gets the hl7DataEnterer/Information about the person that entered information in this CDA document. It SHALL be declared, when data recorded in this document has been entered by a person other than the author but only when this is relevant for some reason.
+     * Gets the hl7DataEnterer<br/>
+     * Information about the person that entered information in this CDA document. It SHALL be declared, when data recorded in this document has been entered by a person other than the author but only when this is relevant for some reason.
      */
     public org.husky.common.hl7cdar2.POCDMT000040DataEnterer getHl7DataEnterer() {
         return dataEnterer;
     }
 
     /**
-     * Gets the hl7DocumentationOf/Validity of document
-     */
-    public List<org.husky.common.hl7cdar2.POCDMT000040DocumentationOf> getHl7DocumentationOf() {
-        return documentationOf;
-    }
-
-    /**
-     * Gets the hl7EffectiveTime/The document's creation date and time. If this document replaces a previous version (linked via parentDocument), this is the date and time of the new version.
+     * Gets the hl7EffectiveTime<br/>
+     * The document's creation date and time. If this document replaces a previous version (linked via parentDocument), this is the date and time of the new version.
      */
     public org.husky.common.hl7cdar2.TS getHl7EffectiveTime() {
         return effectiveTime;
     }
 
     /**
-     * Gets the hl7Id/A unique identifier for each CDA document instance.
+     * Gets the hl7Id<br/>
+     * A unique identifier for each CDA document instance.
      */
     public org.husky.common.hl7cdar2.II getHl7Id() {
         return id;
     }
 
     /**
-     * Gets the hl7LanguageCode/The RFC5646 based language in which the narrative texts in this CDA document instance are written.
+     * Gets the hl7LanguageCode<br/>
+     * The RFC5646 based language in which the narrative texts in this CDA document instance are written.
      */
     public org.husky.common.hl7cdar2.CS getHl7LanguageCode() {
         return languageCode;
     }
 
     /**
-     * Gets the hl7LegalAuthenticator/Information about the legal authenticator of a CDA document. A legal authenticator MUST be a person.
+     * Gets the hl7LegalAuthenticator<br/>
+     * Information about the legal authenticator of a CDA document. A legal authenticator MUST be a person.
      */
     public org.husky.common.hl7cdar2.POCDMT000040LegalAuthenticator getHl7LegalAuthenticator() {
         return legalAuthenticator;
     }
 
     /**
-     * Gets the hl7RealmCode/Swiss Realm (CHE) of HL7 CDA.
+     * Gets the hl7RealmCode<br/>
+     * Swiss Realm (CHE) of HL7 CDA.
      */
     public List<org.husky.common.hl7cdar2.CS> getHl7RealmCode() {
         return realmCode;
     }
 
     /**
-     * Gets the hl7RecordTarget/A human patient for whom this CDA document instance was created.
+     * Gets the hl7RecordTarget<br/>
+     * A human patient for whom this CDA document instance was created.
      * - Target patientThe HL7 CDA R2 (2005) standard allows multiple patients.In order to ensure that the information in a CDA document is unambiguously assigned to one and only patient, a CDA-CH V2 based document MUST contain exactly one patient.Special cases: In exceptional cases (e.g., new-born twins, both having jaundice), multiple documents MUST be created (all of the same content, but each with a unique patient).
      * - Patient identifiersMultiple ids (patient identification number) MAY be declared.If multiple ids are known, it is highly recommended to declare all known ids. Especially in cases where the CDA document instance is kind of an answer to a preceding order (independent of its data format), all ids specified by the ordering system SHALL be declared in the CDA document instance. This allows the receiver to assign its internal patient identification.The patient identification number MUST be grouped with the OID of its assigning system. The patient identification number MUST be unique within the system identified by the OID.The declared OID MUST be found in one of the public OID registries, such as oid.refdata.ch (preferred), oid-info.com, hl7.org/oid, www.dimdi.de/static/de/klassi/oid/, gesundheit.gv.at/OID_Frontend/ etc.OIDs that can't be found in a public OID registry are NOT ALLOWED.
      * - PseudonymizingIn special cases, the demographic data of the patient are not allowed to be transmitted or they have to be pseudonymized.While HL7 CDA or its derivatives like CDA-CH or Swiss exchange formats nevertheless require these elements in the XML structure, the affected values MUST be replaced by a nullFlavor of type "MSK" (masked), in order to support the required data format structure and simultaneously to shield the real data.
@@ -247,35 +275,40 @@ public class MedicationPrescriptionDocument extends POCDMT000040ClinicalDocument
     }
 
     /**
-     * Gets the hl7SetId/The setId element MUST match the document id of the very first version of that document. It MUST remain the same for all document versions.
+     * Gets the hl7SetId<br/>
+     * The setId element MUST match the document id of the very first version of that document. It MUST remain the same for all document versions.
      */
     public org.husky.common.hl7cdar2.II getHl7SetId() {
         return setId;
     }
 
     /**
-     * Gets the hl7TemplateId/Exchange format according to the Swiss EPR
+     * Gets the hl7TemplateId<br/>
+     * Exchange format according to the Swiss EPR
      */
     public List<org.husky.common.hl7cdar2.II> getHl7TemplateId() {
         return templateId;
     }
 
     /**
-     * Gets the hl7Title/<div>The German title shall be "Rezept".</div><div>The French title shall be "Ordonnance".</div><div>The Italian title shall be "Ricetta".</div><div>The English title shall be "Prescription".</div><div>Titles in other languages are allowed and unrestricted.</div>
+     * Gets the hl7Title<br/>
+     * <div>The German title shall be "Rezept".</div><div>The French title shall be "Ordonnance".</div><div>The Italian title shall be "Ricetta".</div><div>The English title shall be "Prescription".</div><div>Titles in other languages are allowed and unrestricted.</div>
      */
     public org.husky.common.hl7cdar2.ST getHl7Title() {
         return title;
     }
 
     /**
-     * Gets the hl7TypeId/HL7 CDA R2, 2005
+     * Gets the hl7TypeId<br/>
+     * HL7 CDA R2, 2005
      */
     public org.husky.common.hl7cdar2.POCDMT000040InfrastructureRootTypeId getHl7TypeId() {
         return typeId;
     }
 
     /**
-     * Gets the hl7VersionNumber/The versionNumber element MUST contain the value 1 for the very first version of that document. For later versions, the version number MUST be increased by 1 each.
+     * Gets the hl7VersionNumber<br/>
+     * The versionNumber element MUST contain the value 1 for the very first version of that document. For later versions, the version number MUST be increased by 1 each.
      */
     public org.husky.common.hl7cdar2.INT getHl7VersionNumber() {
         return versionNumber;
@@ -361,15 +394,6 @@ public class MedicationPrescriptionDocument extends POCDMT000040ClinicalDocument
      */
     public void setHl7DataEnterer(org.husky.common.hl7cdar2.POCDMT000040DataEnterer value) {
         this.dataEnterer = value;
-    }
-
-    /**
-     * Sets the hl7DocumentationOf<br/>
-     * Validity of document
-     */
-    public void setHl7DocumentationOf(org.husky.common.hl7cdar2.POCDMT000040DocumentationOf value) {
-        getDocumentationOf().clear();
-        getDocumentationOf().add(value);
     }
 
     /**

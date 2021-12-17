@@ -116,8 +116,10 @@ public class MedicationTreatment {
      * Returns whether the treatment is active now.
      * <p>
      * A medication treatment is active at date D if:
+     * <ul>
      * <li>The MTP Item is active, i.e. it started before or at date D and ended after date D;
      * <li>The MTP Item has not been made inactive by a PADV Item.
+     * </ul>
      */
     public boolean isTreatmentActive() {
         return this.treatmentStatus == TreatmentStatus.ACTIVE

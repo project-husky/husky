@@ -17,7 +17,7 @@ import java.util.Objects;
  * The different types of a Pharmaceutical Advice entry item.
  *
  * @see <a href="https://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_PADV.pdf">IHE PHARM PADV 6.5.1
- * IHE Pharmaceutical Advice Status List</>
+ * IHE Pharmaceutical Advice Status List</a>
  */
 public enum PharmaceuticalAdviceStatus {
 

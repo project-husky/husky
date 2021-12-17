@@ -71,7 +71,8 @@ public class IhevalidationStepEntryContentModule extends POCDMT000040SubstanceAd
     }
 
     /**
-     * Gets the hl7TemplateId/Reference to Medication Treatment Plan Item General Specification Template ID
+     * Gets the hl7TemplateId<br/>
+     * Reference to Medication Treatment Plan Item General Specification Template ID
      */
     public List<org.husky.common.hl7cdar2.II> getHl7TemplateId() {
         return templateId;

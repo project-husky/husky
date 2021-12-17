@@ -95,7 +95,8 @@ public class CdachSectionOriginalRepresentationCoded extends POCDMT000040Section
     }
 
     /**
-     * Gets the hl7Id/An ID for this section MAY be filled for traceability.
+     * Gets the hl7Id<br/>
+     * An ID for this section MAY be filled for traceability.
      */
     public org.husky.common.hl7cdar2.II getHl7Id() {
         return id;
@@ -109,14 +110,16 @@ public class CdachSectionOriginalRepresentationCoded extends POCDMT000040Section
     }
 
     /**
-     * Gets the hl7Text/MUST contain the reference (renderMultiMedia/@referencedObject) to the corrsponding observationMedia (embedded PDF) that shows the original representation signed by the legal authenticator.
+     * Gets the hl7Text<br/>
+     * MUST contain the reference (renderMultiMedia/{@literal @}referencedObject) to the corrsponding observationMedia (embedded PDF) that shows the original representation signed by the legal authenticator.
      */
     public org.husky.common.hl7cdar2.StrucDocText getHl7Text() {
         return text;
     }
 
     /**
-     * Gets the hl7Title/Fixed human readable title of this section.
+     * Gets the hl7Title<br/>
+     * Fixed human readable title of this section.
      * - [de]: 'Original Darstellung'
      * - [fr]: 'Représentation originale'
      * - [it]: 'Rappresentazione originale'
@@ -159,7 +162,7 @@ public class CdachSectionOriginalRepresentationCoded extends POCDMT000040Section
 
     /**
      * Sets the hl7Text<br/>
-     * MUST contain the reference (renderMultiMedia/@referencedObject) to the corrsponding observationMedia (embedded PDF) that shows the original representation signed by the legal authenticator.
+     * MUST contain the reference (renderMultiMedia/{@literal @}referencedObject) to the corrsponding observationMedia (embedded PDF) that shows the original representation signed by the legal authenticator.
      */
     public void setHl7Text(org.husky.common.hl7cdar2.StrucDocText value) {
         this.text = value;

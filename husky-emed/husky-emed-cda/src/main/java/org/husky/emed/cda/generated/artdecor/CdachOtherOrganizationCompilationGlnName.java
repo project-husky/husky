@@ -33,42 +33,48 @@ public class CdachOtherOrganizationCompilationGlnName extends POCDMT000040Organi
     }
 
     /**
-     * Adds a hl7Addr/The organization's address.
+     * Adds a hl7Addr<br/>
+     * The organization's address.
      */
     public void addHl7Addr(org.husky.common.hl7cdar2.AD value) {
         getAddr().add(value);
     }
 
     /**
-     * Adds a hl7Name/The organization's name.
+     * Adds a hl7Name<br/>
+     * The organization's name.
      */
     public void addHl7Name(org.husky.common.hl7cdar2.ON value) {
         getName().add(value);
     }
 
     /**
-     * Adds a hl7Telecom/The organization's means of communication (phone, eMail, ...).
+     * Adds a hl7Telecom<br/>
+     * The organization's means of communication (phone, eMail, ...).
      */
     public void addHl7Telecom(org.husky.common.hl7cdar2.TEL value) {
         getTelecom().add(value);
     }
 
     /**
-     * Adds a hl7Addr/The organization's address.
+     * Adds a hl7Addr<br/>
+     * The organization's address.
      */
     public void clearHl7Addr() {
         getAddr().clear();
     }
 
     /**
-     * Adds a hl7Name/The organization's name.
+     * Adds a hl7Name<br/>
+     * The organization's name.
      */
     public void clearHl7Name() {
         getName().clear();
     }
 
     /**
-     * Adds a hl7Telecom/The organization's means of communication (phone, eMail, ...).
+     * Adds a hl7Telecom<br/>
+     * The organization's means of communication (phone, eMail, ...).
      */
     public void clearHl7Telecom() {
         getTelecom().clear();
@@ -87,7 +93,8 @@ public class CdachOtherOrganizationCompilationGlnName extends POCDMT000040Organi
     }
 
     /**
-     * Gets the hl7Id/The organization's id (GLN).
+     * Gets the hl7Id<br/>
+     * The organization's id (GLN).
      */
     public List<org.husky.common.hl7cdar2.II> getHl7Id() {
         return id;

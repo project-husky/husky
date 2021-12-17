@@ -88,7 +88,8 @@ public class CdachSectionRemarksCoded extends POCDMT000040Section {
     }
 
     /**
-     * Gets the hl7Id/An ID for this section MAY be filled for traceability.
+     * Gets the hl7Id<br/>
+     * An ID for this section MAY be filled for traceability.
      */
     public org.husky.common.hl7cdar2.II getHl7Id() {
         return id;
@@ -102,14 +103,16 @@ public class CdachSectionRemarksCoded extends POCDMT000040Section {
     }
 
     /**
-     * Gets the hl7Text/Human readable text of this section.
+     * Gets the hl7Text<br/>
+     * Human readable text of this section.
      */
     public org.husky.common.hl7cdar2.StrucDocText getHl7Text() {
         return text;
     }
 
     /**
-     * Gets the hl7Title/Fixed human readable title of this section.
+     * Gets the hl7Title<br/>
+     * Fixed human readable title of this section.
      * - [ge]: 'Kommentar'
      * - [fr]: 'Commentaire'
      * - [it]: 'Osservazione'

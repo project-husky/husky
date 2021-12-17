@@ -49,28 +49,32 @@ public class PharmaceuticalAdviceItemEntryContentModule extends POCDMT000040Obse
     private final List<Code> vocabStatusCodeCode = new ArrayList<>();
 
     /**
-     * Adds a hl7Id/Pharmaceutical Advice Item ID
+     * Adds a hl7Id<br/>
+     * Pharmaceutical Advice Item ID
      */
     public void addHl7Id(org.husky.common.hl7cdar2.II value) {
         getId().add(value);
     }
 
     /**
-     * Adds a hl7Reference/ID of parent container (Community Pharmaceutical Advice document)
+     * Adds a hl7Reference<br/>
+     * ID of parent container (Community Pharmaceutical Advice document)
      */
     public void addHl7Reference(org.husky.common.hl7cdar2.POCDMT000040Reference value) {
         getReference().add(value);
     }
 
     /**
-     * Adds a hl7Id/Pharmaceutical Advice Item ID
+     * Adds a hl7Id<br/>
+     * Pharmaceutical Advice Item ID
      */
     public void clearHl7Id() {
         getId().clear();
     }
 
     /**
-     * Adds a hl7Reference/ID of parent container (Community Pharmaceutical Advice document)
+     * Adds a hl7Reference<br/>
+     * ID of parent container (Community Pharmaceutical Advice document)
      */
     public void clearHl7Reference() {
         getReference().clear();
@@ -117,21 +121,24 @@ public class PharmaceuticalAdviceItemEntryContentModule extends POCDMT000040Obse
     }
 
     /**
-     * Gets the hl7Author/Pharmaceutical Adviser
+     * Gets the hl7Author<br/>
+     * Pharmaceutical Adviser
      */
     public List<org.husky.common.hl7cdar2.POCDMT000040Author> getHl7Author() {
         return author;
     }
 
     /**
-     * Gets the hl7Code/Observation Code
+     * Gets the hl7Code<br/>
+     * Observation Code
      */
     public org.husky.common.hl7cdar2.CD getHl7Code() {
         return code;
     }
 
     /**
-     * Gets the hl7EffectiveTime/Effective Time (Date of becoming effective)
+     * Gets the hl7EffectiveTime<br/>
+     * Effective Time (Date of becoming effective)
      */
     public org.husky.common.hl7cdar2.IVLTS getHl7EffectiveTime() {
         return effectiveTime;
@@ -152,7 +159,8 @@ public class PharmaceuticalAdviceItemEntryContentModule extends POCDMT000040Obse
     }
 
     /**
-     * Gets the hl7TemplateId/CH-PHARM-PharmaceuticalAdviceItemEntryContentModule
+     * Gets the hl7TemplateId<br/>
+     * CH-PHARM-PharmaceuticalAdviceItemEntryContentModule
      */
     public List<org.husky.common.hl7cdar2.II> getHl7TemplateId() {
         return templateId;

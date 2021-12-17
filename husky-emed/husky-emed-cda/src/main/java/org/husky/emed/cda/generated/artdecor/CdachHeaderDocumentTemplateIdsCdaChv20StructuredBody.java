@@ -47,7 +47,8 @@ public class CdachHeaderDocumentTemplateIdsCdaChv20StructuredBody extends POCDMT
     }
 
     /**
-     * Gets the hl7TemplateId/CDA-CH v2.0 specification. This is an informational reference, only.
+     * Gets the hl7TemplateId<br/>
+     * CDA-CH v2.0 specification. This is an informational reference, only.
      */
     public List<org.husky.common.hl7cdar2.II> getHl7TemplateId() {
         return templateId;

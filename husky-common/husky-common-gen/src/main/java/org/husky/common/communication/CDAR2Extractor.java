@@ -1138,7 +1138,7 @@ public class CDAR2Extractor {
      * Checks to see if the list has at least one element.
      *
      * @param l
-     * @return false if l is null, if l.size() < 1 or if l.get(0) is null. Otherwise, return true.
+     * @return false if l is null, if l.size() &lt; 1 or if l.get(0) is null. Otherwise, return true.
      */
     protected boolean atLeastOne(List<?> l) {
         return l != null && !l.isEmpty() && l.get(0) != null;
@@ -1146,11 +1146,13 @@ public class CDAR2Extractor {
 
     /**
      * Maps CDA R2 AD datatype to the OHT model version of the HL7 v2.5 XAD data type
+     * <ul>
      * <li>NOTES:</li>
      * <li>1. only the first entries in the sub lists for address parts are
      * extracted and processed for XAD.1.1, XAD.2 through XAD.6</li>
      * <li>2. XAD.9 is not extracted at this point due to IHE restrictions on
      * metadata, could be enabled in the future.</li>
+     * </ul>
      *
      * @param addr
      * @return
@@ -1381,9 +1383,11 @@ public class CDAR2Extractor {
 
     /**
      * Maps CDA R2 PN datatype to the OHT model version of the HL7 v2.5 XPN data type.
+     * <ul>
      * <li>NOTES:</li>
      * <li>1. only the first entries in the sub lists for name parts are extracted
      * and processed for XPN.1 to XPN.5</li>
+     * </ul>
      *
      * @param name
      * @return

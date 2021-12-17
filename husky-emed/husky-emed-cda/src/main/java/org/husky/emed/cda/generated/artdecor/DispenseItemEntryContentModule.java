@@ -35,14 +35,16 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
     }
 
     /**
-     * Adds a hl7Reference/ID of parent container (Community Dispense document)
+     * Adds a hl7Reference<br/>
+     * ID of parent container (Community Dispense document)
      */
     public void addHl7Reference(org.husky.common.hl7cdar2.POCDMT000040Reference value) {
         getReference().add(value);
     }
 
     /**
-     * Adds a hl7Reference/ID of parent container (Community Dispense document)
+     * Adds a hl7Reference<br/>
+     * ID of parent container (Community Dispense document)
      */
     public void clearHl7Reference() {
         getReference().clear();
@@ -98,42 +100,48 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
     }
 
     /**
-     * Gets the hl7Author/Dispenser
+     * Gets the hl7Author<br/>
+     * Dispenser
      */
     public List<org.husky.common.hl7cdar2.POCDMT000040Author> getHl7Author() {
         return author;
     }
 
     /**
-     * Gets the hl7Code/Code
+     * Gets the hl7Code<br/>
+     * Code
      */
     public org.husky.common.hl7cdar2.CD getHl7Code() {
         return code;
     }
 
     /**
-     * Gets the hl7EntryRelationship/If the dispense is related to a Medication Treatment Plan Item, the reference to it SHALL be present.
+     * Gets the hl7EntryRelationship<br/>
+     * If the dispense is related to a Medication Treatment Plan Item, the reference to it SHALL be present.
      */
     public List<org.husky.common.hl7cdar2.POCDMT000040EntryRelationship> getHl7EntryRelationship() {
         return entryRelationship;
     }
 
     /**
-     * Gets the hl7Id/Dispense Item ID
+     * Gets the hl7Id<br/>
+     * Dispense Item ID
      */
     public List<org.husky.common.hl7cdar2.II> getHl7Id() {
         return id;
     }
 
     /**
-     * Gets the hl7Product/Product
+     * Gets the hl7Product<br/>
+     * Product
      */
     public org.husky.common.hl7cdar2.POCDMT000040Product getHl7Product() {
         return product;
     }
 
     /**
-     * Gets the hl7Quantity/Quantity Value
+     * Gets the hl7Quantity<br/>
+     * Quantity Value
      */
     public org.husky.common.hl7cdar2.PQ getHl7Quantity() {
         return quantity;
@@ -147,7 +155,8 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
     }
 
     /**
-     * Gets the hl7Text/Narrative Text
+     * Gets the hl7Text<br/>
+     * Narrative Text
      */
     public org.husky.common.hl7cdar2.ED getHl7Text() {
         return text;

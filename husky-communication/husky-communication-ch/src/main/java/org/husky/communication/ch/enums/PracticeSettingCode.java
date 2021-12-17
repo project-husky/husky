@@ -35,7 +35,7 @@ import org.husky.common.enums.ValueSetEnumInterface;
 public enum PracticeSettingCode implements ValueSetEnumInterface {
 
     /**
-     * EN: Accident & emergency.<br>
+     * EN: Accident &amp; emergency.<br>
      * DE: Notfall- und Rettungsmedizin.<br>
      * FR: Médecine d'urgence et de sauvetage.<br>
      * IT: Medicina d'urgenza e di salvataggio.<br>
@@ -829,7 +829,7 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
                       "Angiologia");
 
     /**
-     * EN: Code for Accident & emergency.<br>
+     * EN: Code for Accident &amp; emergency.<br>
      * DE: Code für Notfall- und Rettungsmedizin.<br>
      * FR: Code de Médecine d'urgence et de sauvetage.<br>
      * IT: Code per Medicina d'urgenza e di salvataggio.<br>

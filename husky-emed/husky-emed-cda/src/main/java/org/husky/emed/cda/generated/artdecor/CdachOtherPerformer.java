@@ -62,7 +62,8 @@ public class CdachOtherPerformer extends POCDMT000040Performer1 {
     }
 
     /**
-     * Gets the hl7Time/Duration of the performance.
+     * Gets the hl7Time<br/>
+     * Duration of the performance.
      */
     public org.husky.common.hl7cdar2.IVLTS getHl7Time() {
         return time;

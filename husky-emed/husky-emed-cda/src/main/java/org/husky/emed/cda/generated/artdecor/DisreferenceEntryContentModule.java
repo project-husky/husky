@@ -79,28 +79,32 @@ public class DisreferenceEntryContentModule extends POCDMT000040Supply {
     }
 
     /**
-     * Gets the hl7Author/Author of the referenced item
+     * Gets the hl7Author<br/>
+     * Author of the referenced item
      */
     public List<org.husky.common.hl7cdar2.POCDMT000040Author> getHl7Author() {
         return author;
     }
 
     /**
-     * Gets the hl7Code/Reference to Dispense Item code
+     * Gets the hl7Code<br/>
+     * Reference to Dispense Item code
      */
     public org.husky.common.hl7cdar2.CD getHl7Code() {
         return code;
     }
 
     /**
-     * Gets the hl7Id/Reference to Dispense Item ID
+     * Gets the hl7Id<br/>
+     * Reference to Dispense Item ID
      */
     public List<org.husky.common.hl7cdar2.II> getHl7Id() {
         return id;
     }
 
     /**
-     * Gets the hl7Reference/ID of parent container of referenced item
+     * Gets the hl7Reference<br/>
+     * ID of parent container of referenced item
      */
     public List<org.husky.common.hl7cdar2.POCDMT000040Reference> getHl7Reference() {
         return reference;

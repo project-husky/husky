@@ -30,14 +30,16 @@ public class CdachOtherDeviceCompilationWithName extends POCDMT000040AuthoringDe
     }
 
     /**
-     * Gets the hl7ManufacturerModelName/The model name of the device MAY be declared.
+     * Gets the hl7ManufacturerModelName<br/>
+     * The model name of the device MAY be declared.
      */
     public org.husky.common.hl7cdar2.SC getHl7ManufacturerModelName() {
         return manufacturerModelName;
     }
 
     /**
-     * Gets the hl7SoftwareName/The name of the device MUST be declared.Note:Altough this element is called softwareName, it contains also the name of physical devices (e.g. laboratory analyzer).
+     * Gets the hl7SoftwareName<br/>
+     * The name of the device MUST be declared.Note:Altough this element is called softwareName, it contains also the name of physical devices (e.g. laboratory analyzer).
      */
     public org.husky.common.hl7cdar2.SC getHl7SoftwareName() {
         return softwareName;

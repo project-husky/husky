@@ -17,7 +17,7 @@ import org.husky.common.hl7cdar2.POCDMT000040Act;
 /**
  * chpharm_entry_AnnotationComments
  * <p>
- * Template description: This entry allows for a comment to be supplied with each entry. This is a modification of the CH-PCC template to change the<text>element include.</text><br>
+ * Template description: This entry allows for a comment to be supplied with each entry. This is a modification of the CH-PCC template to change theelement include.<br>
  * Element description: A comment to the parent entry.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.1.10.4.82<br>
@@ -42,14 +42,16 @@ public class ChpharmEntryAnnotationComments extends POCDMT000040Act {
     }
 
     /**
-     * Adds a hl7Author/The author of the statement SHALL be specified either here or in one of the ancestors.
+     * Adds a hl7Author<br/>
+     * The author of the statement SHALL be specified either here or in one of the ancestors.
      */
     public void addHl7Author(org.husky.common.hl7cdar2.POCDMT000040Author value) {
         getAuthor().add(value);
     }
 
     /**
-     * Adds a hl7Author/The author of the statement SHALL be specified either here or in one of the ancestors.
+     * Adds a hl7Author<br/>
+     * The author of the statement SHALL be specified either here or in one of the ancestors.
      */
     public void clearHl7Author() {
         getAuthor().clear();
@@ -98,21 +100,24 @@ public class ChpharmEntryAnnotationComments extends POCDMT000040Act {
     }
 
     /**
-     * Gets the hl7Code/The reference to the text in the narrative section of the section MUST be specified.
+     * Gets the hl7Code<br/>
+     * The reference to the text in the narrative section of the section MUST be specified.
      */
     public org.husky.common.hl7cdar2.CD getHl7Code() {
         return code;
     }
 
     /**
-     * Gets the hl7Id/An ID for this item MAY be filled for traceability.
+     * Gets the hl7Id<br/>
+     * An ID for this item MAY be filled for traceability.
      */
     public List<org.husky.common.hl7cdar2.II> getHl7Id() {
         return id;
     }
 
     /**
-     * Gets the hl7StatusCode/The status 'completed' indicates that the comment is final.
+     * Gets the hl7StatusCode<br/>
+     * The status 'completed' indicates that the comment is final.
      */
     public org.husky.common.hl7cdar2.CS getHl7StatusCode() {
         return statusCode;
@@ -126,7 +131,8 @@ public class ChpharmEntryAnnotationComments extends POCDMT000040Act {
     }
 
     /**
-     * Gets the hl7Text/It shall contain both the narrative text content and a reference to the human readable part of the item. This human readable part may contain a simple text to redirect the reader to the PDF document (e.g. "See PDF version included").<br clear="none"/>There shall be a single non-blank text node (i.e. the text shall be completely before or after the reference, see examples). The text shall be raw (i.e. no markup shall be used).
+     * Gets the hl7Text<br/>
+     * It shall contain both the narrative text content and a reference to the human readable part of the item. This human readable part may contain a simple text to redirect the reader to the PDF document (e.g. "See PDF version included").<br/>There shall be a single non-blank text node (i.e. the text shall be completely before or after the reference, see examples). The text shall be raw (i.e. no markup shall be used).
      */
     public org.husky.common.hl7cdar2.ED getHl7Text() {
         return text;
@@ -167,7 +173,7 @@ public class ChpharmEntryAnnotationComments extends POCDMT000040Act {
 
     /**
      * Sets the hl7Text<br/>
-     * It shall contain both the narrative text content and a reference to the human readable part of the item. This human readable part may contain a simple text to redirect the reader to the PDF document (e.g. "See PDF version included").<br clear="none"/>There shall be a single non-blank text node (i.e. the text shall be completely before or after the reference, see examples). The text shall be raw (i.e. no markup shall be used).
+     * It shall contain both the narrative text content and a reference to the human readable part of the item. This human readable part may contain a simple text to redirect the reader to the PDF document (e.g. "See PDF version included").<br/>There shall be a single non-blank text node (i.e. the text shall be completely before or after the reference, see examples). The text shall be raw (i.e. no markup shall be used).
      */
     public void setHl7Text(org.husky.common.hl7cdar2.ED value) {
         this.text = value;

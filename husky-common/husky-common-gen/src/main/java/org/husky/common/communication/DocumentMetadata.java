@@ -48,7 +48,8 @@ public class DocumentMetadata {
 		 * Entries uses the following mapping (for more details see
 		 * CDAR2Extractor.pdf in
 		 * org.openhealthtools.ihe.xds.metadata.extract.cdar2):
-		 * <table summary="CDA Metadata to XDS Metadata mapping">
+		 * <table>
+		 * <caption>CDA Metadata to XDS Metadata mapping</caption>
 		 * <thead>
 		 * <tr>
 		 * <th>XDS Metadata Attribute</th>
@@ -104,8 +105,8 @@ public class DocumentMetadata {
 		 * The following attributes will be generated as described, if they are
 		 * not present in the document entries:
 		 *
-		 * <table summary= "Empty document entries attributes generation" width=
-		 * "100%">
+		 * <table>
+		 * <caption>Empty document entries attributes generation</caption>
 		 * <thead>
 		 * <tr>
 		 * <th>XDS Metadata Attribute</th>
@@ -467,18 +468,18 @@ public class DocumentMetadata {
 	}
 
 	/**
-	 * <div class="en">Gets the document source actors organization id
+	 * Gets the document source actors organization id
 	 *
-	 * @return the document source actors organization id </div>
+	 * @return the document source actors organization id
 	 */
 	public String getDocSourceActorOrganizationId() {
 		return docSourceActorOrgId;
 	}
 
 	/**
-	 * <div class="en">Gets the document descriptor of the document
+	 * Gets the document descriptor of the document
 	 *
-	 * @return the document descriptor of the document</div>
+	 * @return the document descriptor of the document
 	 */
 	public DocumentDescriptor getDocumentDescriptor() {
 		return documentDescriptor;
@@ -707,20 +708,20 @@ public class DocumentMetadata {
 	}
 
 	/**
-	 * <div class="en">Sets the document source actors organization id
+	 * Sets the document source actors organization id
 	 *
 	 * @param docSourceActorOrgId
-	 *            the document source actors organization id </div>
+	 *            the document source actors organization id
 	 */
 	public void setDocSourceActorOrganizationId(String docSourceActorOrgId) {
 		this.docSourceActorOrgId = docSourceActorOrgId;
 	}
 
 	/**
-	 * <div class="en">Sets the document descriptor of the document
+	 * Sets the document descriptor of the document
 	 *
 	 * @param documentDescriptor
-	 *            the document descriptor of the document</div>
+	 *            the document descriptor of the document
 	 */
 	public void setDocumentDescriptor(DocumentDescriptor documentDescriptor) {
 		this.documentDescriptor = documentDescriptor;

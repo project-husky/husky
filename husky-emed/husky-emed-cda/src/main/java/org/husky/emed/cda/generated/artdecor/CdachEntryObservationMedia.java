@@ -34,14 +34,16 @@ public class CdachEntryObservationMedia extends POCDMT000040ObservationMedia {
     }
 
     /**
-     * Adds a hl7Id/IDs for this item MAY be filled for traceability.
+     * Adds a hl7Id<br/>
+     * IDs for this item MAY be filled for traceability.
      */
     public void addHl7Id(org.husky.common.hl7cdar2.II value) {
         getId().add(value);
     }
 
     /**
-     * Adds a hl7Id/IDs for this item MAY be filled for traceability.
+     * Adds a hl7Id<br/>
+     * IDs for this item MAY be filled for traceability.
      */
     public void clearHl7Id() {
         getId().clear();
@@ -81,7 +83,8 @@ public class CdachEntryObservationMedia extends POCDMT000040ObservationMedia {
     }
 
     /**
-     * Gets the hl7LanguageCode/The RFC 1766 (ISO-639-1 and ISO 3166) based language in which the multimedia object is written. If it isn't known or not available (e.g. for pictures), use nullFlavor instead.
+     * Gets the hl7LanguageCode<br/>
+     * The RFC 1766 (ISO-639-1 and ISO 3166) based language in which the multimedia object is written. If it isn't known or not available (e.g. for pictures), use nullFlavor instead.
      */
     public org.husky.common.hl7cdar2.CS getHl7LanguageCode() {
         return languageCode;
@@ -95,7 +98,8 @@ public class CdachEntryObservationMedia extends POCDMT000040ObservationMedia {
     }
 
     /**
-     * Gets the hl7Value/This template defines only the embedding of multimedia objects in the CDA document.
+     * Gets the hl7Value<br/>
+     * This template defines only the embedding of multimedia objects in the CDA document.
      */
     public org.husky.common.hl7cdar2.ED getHl7Value() {
         return value;

@@ -214,7 +214,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 * demographic information of the patient in the mpi.
 	 *
 	 * @param patient the patient
-	 * @assertion a security header element for example an assertion
+	 * @param assertion a security header element for example an assertion
 	 * 
 	 * @return true, if successful
 	 */
@@ -255,7 +255,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 * Query patient id.
 	 *
 	 * @param patient the patient
-	 * @assertion a security header element for example an assertion
+	 * @param assertion a security header element for example an assertion
 	 * 
 	 * @return the string
 	 */

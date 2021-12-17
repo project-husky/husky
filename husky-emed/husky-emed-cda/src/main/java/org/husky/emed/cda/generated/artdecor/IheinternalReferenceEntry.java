@@ -18,7 +18,7 @@ import org.husky.common.hl7cdar2.POCDMT000040Act;
 /**
  * IHEInternalReferenceEntry
  * <p>
- * Template description: <div>CDA and HL7 Version 3 Entries may reference (point to) information contained in other entries <span style="line-height: 1.22;">within the same document </span></div><br>
+ * Template description: <div>CDA and HL7 Version 3 Entries may reference (point to) information contained in other entries within the same document </div><br>
  * <p>
  * Identifier: 1.3.6.1.4.1.19376.1.5.3.1.4.4.1<br>
  * Effective date: 2013-12-20 00:00:00<br>
