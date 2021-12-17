@@ -324,13 +324,13 @@ public enum ObservationInterpretation {
 	 *         found, display name in german will returned
 	 */
 	public String getDisplayName(LanguageCode languageCode) {
-		String displayName = null;
+		String displayNameL = null;
 		if (languageCode != null && displayNames.get(languageCode) != null) {
-			displayName = displayNames.get(languageCode);
+			displayNameL = displayNames.get(languageCode);
 		} else {
-			displayName = displayNames.get(LanguageCode.GERMAN);
+			displayNameL = displayNames.get(LanguageCode.GERMAN);
 		}
-		return displayName;
+		return displayNameL;
 	}
 
 }

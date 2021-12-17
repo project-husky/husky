@@ -38,12 +38,17 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.Person;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Telecom;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.XpnName;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.query.QueryList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <div class="de">Class XdsUtil provides helper methods for the IHE XDS
  * Context.</div>
  */
 public class XdsMetadataUtil {
+
+	/** The SLF4J logger instance. */
+	private static final Logger LOGGER = LoggerFactory.getLogger(XdsMetadataUtil.class);
 
 	public static final String DTM_FMT_Y = "yyyy";
 	public static final String DTM_FMT_YM = "yyyyMM";
@@ -91,6 +96,7 @@ public class XdsMetadataUtil {
 				try {
 					retVal = sdf.parse(dateTimeString);
 				} catch (final ParseException e) {
+					LOGGER.info("Date {} could not be parsed", dateTimeString);
 				}
 				++count;
 			}

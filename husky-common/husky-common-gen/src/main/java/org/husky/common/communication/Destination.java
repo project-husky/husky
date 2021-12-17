@@ -24,7 +24,6 @@ public class Destination {
 	/** The SLF4J logger instance. */
 	private static Logger log = LoggerFactory.getLogger(Destination.class);
 
-
 	/**
 	 * <div class="en">The key store for TLS</div>
 	 */

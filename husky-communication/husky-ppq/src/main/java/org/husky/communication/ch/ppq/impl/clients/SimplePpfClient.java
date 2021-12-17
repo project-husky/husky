@@ -34,8 +34,6 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.ehealthswiss.UpdatePolicyReq
 public class SimplePpfClient extends CamelService
 		implements PpfClient {
 
-	private static final String EHS_2015_POLYADMIN = "urn:e-health-suisse:2015:policy-administration:";
-
 	private PpClientConfig config;
 	
 

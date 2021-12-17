@@ -115,10 +115,8 @@ public class Util {
 		/**
 		 * Instantiates a new stream gobbler.
 		 *
-		 * @param inputStream
-		 *            the input stream
-		 * @param consumer
-		 *            the consumer
+		 * @param inputStream the input stream
+		 * @param consumer    the consumer
 		 */
 		public StreamGobbler(InputStream inputStream, Consumer<String> consumer) {
 			this.inputStream = inputStream;
@@ -150,8 +148,8 @@ public class Util {
 	public static final String TELECOMS_PHONE_PREFIX = "tel:";
 
 	/**
-	 * The Constant TELECOMS_WEBSITE_PREFIX. Note: omitting the : here in order
-	 * to support http and https
+	 * The Constant TELECOMS_WEBSITE_PREFIX. Note: omitting the : here in order to
+	 * support http and https
 	 */
 	public static final String TELECOMS_WEBSITE_PREFIX = "http";
 
@@ -163,8 +161,7 @@ public class Util {
 	/**
 	 * Checks to see if the list has at least one element.
 	 *
-	 * @param l
-	 *            the list
+	 * @param l the list
 	 * @return false if l is null, if l.size() smaller 1 or if l.get(0) is null.
 	 *         Otherwise, return true.
 	 */
@@ -191,8 +188,7 @@ public class Util {
 	/**
 	 * Escapes all non java character in the inputsream that is expected as XML.
 	 *
-	 * @param inputStream
-	 *            the input stream to be escaped
+	 * @param inputStream the input stream to be escaped
 	 * @return the input stream
 	 */
 	public static InputStream convertNonAsciiText2Unicode(InputStream inputStream) {
@@ -218,8 +214,7 @@ public class Util {
 	/**
 	 * Escapes all non java character in the node text.
 	 *
-	 * @param node
-	 *            the node to be escaped
+	 * @param node the node to be escaped
 	 */
 	public static void convertNonAsciiText2Unicode(Node node) {
 		if (node.getFirstChild() != null) {
@@ -242,12 +237,9 @@ public class Util {
 	/**
 	 * Creates an address.
 	 *
-	 * @param zip
-	 *            ZIP code
-	 * @param city
-	 *            the city
-	 * @param usage
-	 *            usage of this address
+	 * @param zip   ZIP code
+	 * @param city  the city
+	 * @param usage usage of this address
 	 * @return HL7 AD Object
 	 */
 	public static AD createAddress(String zip, String city, PostalAddressUse usage) {
@@ -278,8 +270,7 @@ public class Util {
 	/**
 	 * Creates an MDHT assignedEntity object from an MDHT AssignedAuthor object.
 	 *
-	 * @param a
-	 *            the assignedAuthor
+	 * @param a the assignedAuthor
 	 * @return the assignedEntity
 	 */
 	public static POCDMT000040AssignedAuthor createAssignedAuthorFromAssignedEntity(POCDMT000040AssignedEntity a) {
@@ -311,7 +302,8 @@ public class Util {
 	 * @deprecated (it will be replace by method
 	 *             {@link Organization#createHl7CdaR2Pocdmt000040AssignedAuthor()}
 	 */
-	public static POCDMT000040AssignedAuthor createAssignedAuthorFromOrganization(org.husky.common.model.Organization organization) {
+	public static POCDMT000040AssignedAuthor createAssignedAuthorFromOrganization(
+			org.husky.common.model.Organization organization) {
 		final var o = organization.getHl7CdaR2Pocdmt000040Organization();
 		final var a = new POCDMT000040AssignedAuthor();
 		if (!o.getAddr().isEmpty()) {
@@ -358,8 +350,7 @@ public class Util {
 	/**
 	 * Creates the assigned entity from organization.
 	 *
-	 * @param organization
-	 *            the organization
+	 * @param organization the organization
 	 * @return the assigned entity
 	 */
 	public static POCDMT000040AssignedEntity createAssignedEntityFromOrganization(Organization organization) {
@@ -380,12 +371,10 @@ public class Util {
 	/**
 	 * Creates the authenticator from author.
 	 *
-	 * @param author
-	 *            the author
+	 * @param author the author
 	 * @return the authenticator
 	 */
-	public static POCDMT000040Authenticator createAuthenticatorFromAuthor(
-			org.husky.common.model.Author author) {
+	public static POCDMT000040Authenticator createAuthenticatorFromAuthor(org.husky.common.model.Author author) {
 		final POCDMT000040Author a = author.getAuthorMdht();
 		final var auth = new POCDMT000040Authenticator();
 		auth.setAssignedEntity(createAssignedEntityFromAssignedAuthor(a.getAssignedAuthor()));
@@ -402,17 +391,14 @@ public class Util {
 	/**
 	 * Creates a new MDHT Author object from an MDHT LegalAuthenticator object.
 	 *
-	 * @param authenticator
-	 *            <br>
-	 *            <div class="de">the authenticator</div>
+	 * @param authenticator <br>
+	 *                      <div class="de">the authenticator</div>
 	 * @return the Author
 	 */
-	public static POCDMT000040Author createAuthorFromAuthenticator(
-			POCDMT000040Authenticator authenticator) {
+	public static POCDMT000040Author createAuthorFromAuthenticator(POCDMT000040Authenticator authenticator) {
 		final var a = new POCDMT000040Author();
 
-		a.setAssignedAuthor(
-				createAssignedAuthorFromAssignedEntity(authenticator.getAssignedEntity()));
+		a.setAssignedAuthor(createAssignedAuthorFromAssignedEntity(authenticator.getAssignedEntity()));
 
 		// Copy Time
 		a.setTime(authenticator.getTime());
@@ -423,16 +409,14 @@ public class Util {
 	/**
 	 * Creates a new MDHT Author object from an MDHT LegalAuthenticator object.
 	 *
-	 * @param authenticator
-	 *            <br>
-	 *            <div class="de">the authenticator</div>
+	 * @param authenticator <br>
+	 *                      <div class="de">the authenticator</div>
 	 * @return the Author
 	 */
 	public static POCDMT000040Author createAuthorFromLegalAuthenticator(POCDMT000040LegalAuthenticator authenticator) {
 		final var a = new POCDMT000040Author();
 
-		a.setAssignedAuthor(
-				createAssignedAuthorFromAssignedEntity(authenticator.getAssignedEntity()));
+		a.setAssignedAuthor(createAssignedAuthorFromAssignedEntity(authenticator.getAssignedEntity()));
 
 		// Copy Time
 		a.setTime(authenticator.getTime());
@@ -444,8 +428,7 @@ public class Util {
 	 * Creates a new MDHT CustodianOrganization object from an eHC Organization
 	 * object.
 	 *
-	 * @param organization
-	 *            the Organization
+	 * @param organization the Organization
 	 * @return CustodianOrganization the CustodianOrganization
 	 */
 	public static POCDMT000040CustodianOrganization createCustodianOrganizationFromOrganization(
@@ -458,11 +441,10 @@ public class Util {
 			on.setXmlMixed(organization.getPrimaryName().getFullName());
 
 			if (!organization.getHl7CdaR2Pocdmt000040Organization().getName().isEmpty()) {
-					on.getUse().clear();
-					for (String item : organization.getHl7CdaR2Pocdmt000040Organization().getName().get(0)
-							.getUse()) {
-						on.getUse().add(item);
-					}
+				on.getUse().clear();
+				for (String item : organization.getHl7CdaR2Pocdmt000040Organization().getName().get(0).getUse()) {
+					on.getUse().add(item);
+				}
 			}
 			mdhtCustOrg.setName(on);
 
@@ -480,9 +462,7 @@ public class Util {
 			if (!organization.getHl7CdaR2Pocdmt000040Organization().getTelecom().isEmpty()) {
 				mdhtCustOrg.setTelecom(organization.getHl7CdaR2Pocdmt000040Organization().getTelecom().get(0));
 				mdhtCustOrg.getTelecom().getUse()
-						.add(
-								organization.getHl7CdaR2Pocdmt000040Organization().getTelecom().get(0).getUse()
-										.get(0));
+						.add(organization.getHl7CdaR2Pocdmt000040Organization().getTelecom().get(0).getUse().get(0));
 			}
 			return mdhtCustOrg;
 		}
@@ -504,12 +484,10 @@ public class Util {
 	/**
 	 * <div class="en">Creates the MDHT email TEL object.</div>
 	 *
-	 * @param eMail
-	 *            <br>
-	 *            <div class="en"> e mail</div>
-	 * @param usage
-	 *            <br>
-	 *            <div class="en"> usage</div>
+	 * @param eMail <br>
+	 *              <div class="en"> e mail</div>
+	 * @param usage <br>
+	 *              <div class="en"> usage</div>
 	 * @return the tel
 	 */
 	public static TEL createEMail(String eMail, TelecomAddressUse usage) {
@@ -522,26 +500,24 @@ public class Util {
 	/**
 	 * <div class="en">Creates the eur date str from ts.</div>
 	 *
-	 * @param hl7Stimestamp
-	 *            <br>
-	 *            <div class="en"> hl7 stimestamp</div><div class="de"></div>
-	 *            <div class="fr"> </div> <div class="it"></div>
+	 * @param hl7Stimestamp <br>
+	 *                      <div class="en"> hl7
+	 *                      stimestamp</div><div class="de"></div> <div class="fr">
+	 *                      </div> <div class="it"></div>
 	 * @return the string
 	 */
 	public static String createEurDateStrFromTS(String hl7Stimestamp) {
-		return hl7Stimestamp.substring(6, 8) + "."
-				+ hl7Stimestamp.substring(4, 6) + "." + hl7Stimestamp.substring(0, 4);
+		return hl7Stimestamp.substring(6, 8) + "." + hl7Stimestamp.substring(4, 6) + "."
+				+ hl7Stimestamp.substring(0, 4);
 	}
 
 	/**
 	 * <div class="en">Creates the MDHT fax TEL object.</div>
 	 *
-	 * @param faxNr
-	 *            <br>
-	 *            <div class="en"> fax nr</div>
-	 * @param usage
-	 *            <br>
-	 *            <div class="en"> usage</div>
+	 * @param faxNr <br>
+	 *              <div class="en"> fax nr</div>
+	 * @param usage <br>
+	 *              <div class="en"> usage</div>
 	 * @return the tel
 	 */
 	public static TEL createFax(String faxNr, TelecomAddressUse usage) {
@@ -552,20 +528,18 @@ public class Util {
 	}
 
 	/**
-	 * Creates a new MDHT LegalAuthor object from an MDHT Author object.
-	 * Signature Code will be set to fixed 's'
+	 * Creates a new MDHT LegalAuthor object from an MDHT Author object. Signature
+	 * Code will be set to fixed 's'
 	 *
-	 * @param author
-	 *            <br>
-	 *            <div class="de">the author</div>
+	 * @param author <br>
+	 *               <div class="de">the author</div>
 	 * @return the legal authenticator
 	 */
 	public static POCDMT000040LegalAuthenticator createLegalAuthenticatorFromAuthor(
 			org.husky.common.model.Author author) {
 		final POCDMT000040Author a = author.getAuthorMdht();
 		final var mdhtLegAuth = new POCDMT000040LegalAuthenticator();
-		mdhtLegAuth
-				.setAssignedEntity(createAssignedEntityFromAssignedAuthor(a.getAssignedAuthor()));
+		mdhtLegAuth.setAssignedEntity(createAssignedEntityFromAssignedAuthor(a.getAssignedAuthor()));
 
 		// Set signature Code to 's'
 		final var cs = Signature.SIGNED.getCS();
@@ -579,8 +553,7 @@ public class Util {
 	/**
 	 * Creates the on from pn.
 	 *
-	 * @param pn
-	 *            the pn
+	 * @param pn the pn
 	 * @return the on
 	 */
 	private static ON createOnFromPn(PN pn) {
@@ -592,8 +565,7 @@ public class Util {
 	/**
 	 * Creates the organization from custodian organization.
 	 *
-	 * @param mdhtCO
-	 *            the mdht CO
+	 * @param mdhtCO the mdht CO
 	 * @return the org.openhealthtools.mdht.uml.cda. organization
 	 */
 	public static POCDMT000040CustodianOrganization createOrganizationFromCustodianOrganization(
@@ -623,8 +595,7 @@ public class Util {
 	/**
 	 * Creates the organization from participant.
 	 *
-	 * @param p
-	 *            the p
+	 * @param p the p
 	 * @return the organization
 	 */
 	public static Organization createOrganizationFromParticipant(Participant p) {
@@ -661,8 +632,7 @@ public class Util {
 	/**
 	 * Creates the pn from on.
 	 *
-	 * @param on
-	 *            the on
+	 * @param on the on
 	 * @return the pn
 	 */
 	public static PN createPnFromOn(org.husky.common.hl7cdar2.ON on) {
@@ -675,10 +645,8 @@ public class Util {
 	 * Creates an MDHT ED reference from a given String. Adds the hashtag '#'
 	 * automatically, if not present as first character.
 	 *
-	 * @param existingText
-	 *            the existing text
-	 * @param reference
-	 *            the reference
+	 * @param existingText the existing text
+	 * @param reference    the reference
 	 * @return the MDHT ED
 	 */
 	public static ED createReference(ED existingText, String reference) {
@@ -692,12 +660,10 @@ public class Util {
 	/**
 	 * <div class="en">Creates the reference.</div>
 	 *
-	 * @param contentId
-	 *            <br>
-	 *            <div class="en">content id</div>
-	 * @param prefix
-	 *            <br>
-	 *            <div class="en">prefix</div>
+	 * @param contentId <br>
+	 *                  <div class="en">content id</div>
+	 * @param prefix    <br>
+	 *                  <div class="en">prefix</div>
 	 * @return the ed
 	 */
 	public static ED createReference(int contentId, String prefix) {
@@ -714,8 +680,7 @@ public class Util {
 	 * Creates an MDHT ED reference from a given String. Adds the hashtag '#'
 	 * automatically, if not present as first character.
 	 *
-	 * @param reference
-	 *            the reference value
+	 * @param reference the reference value
 	 * @return the MDHT ED
 	 */
 	public static ED createReference(String reference) {
@@ -727,10 +692,8 @@ public class Util {
 	/**
 	 * Creates an MDHT ED reference from a given String.
 	 *
-	 * @param url
-	 *            the reference url
-	 * @param narrativeText
-	 *            the reference narrative text
+	 * @param url           the reference url
+	 * @param narrativeText the reference narrative text
 	 * @return the MDHT ED
 	 */
 	public static ED createReference(String url, String narrativeText) {
@@ -745,8 +708,7 @@ public class Util {
 	/**
 	 * Creates the reference tel.
 	 *
-	 * @param value
-	 *            the value
+	 * @param value the value
 	 * @return the tel
 	 */
 	public static TEL createReferenceTel(String value) {
@@ -761,12 +723,10 @@ public class Util {
 	/**
 	 * <div class="en">Creates the MDHT phone TEL object.</div>
 	 *
-	 * @param telNr
-	 *            <br>
-	 *            <div class="en"> tel nr</div>
-	 * @param usage
-	 *            <br>
-	 *            <div class="en"> usage</div>
+	 * @param telNr <br>
+	 *              <div class="en"> tel nr</div>
+	 * @param usage <br>
+	 *              <div class="en"> usage</div>
 	 * @return the tel
 	 */
 	public static TEL createTel(String telNr, TelecomAddressUse usage) {
@@ -782,8 +742,7 @@ public class Util {
 	 * <div class="en"> Extracts a file from embedded resources in the Jar as
 	 * temporary file on the local filesystem.
 	 *
-	 * @param rscPath
-	 *            path to the desired file in the Jar
+	 * @param rscPath path to the desired file in the Jar
 	 * @return Full path and file name of the created temporary file </div>
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
@@ -795,10 +754,8 @@ public class Util {
 	 * <div class="en"> Extracts a file from embedded resources in the Jar as
 	 * temporary file on the local filesystem.
 	 *
-	 * @param rscPath
-	 *            path to the desired file in the Jar
-	 * @param pathfix
-	 *            if path should be corrected at start depending on ox system
+	 * @param rscPath path to the desired file in the Jar
+	 * @param pathfix if path should be corrected at start depending on ox system
 	 * @return Full path and file name of the created temporary file </div>
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
@@ -835,8 +792,7 @@ public class Util {
 	/**
 	 * Creates a document ID with the eHC root ID.
 	 *
-	 * @param applicationOidRoot
-	 *            identifiziert diese Version des eHCs
+	 * @param applicationOidRoot identifiziert diese Version des eHCs
 	 * @return HL7 II Objekt
 	 */
 	public static II generateDocId(String applicationOidRoot) {
@@ -852,8 +808,7 @@ public class Util {
 			}
 		}
 
-		final String documentOid = OID
-				.createOIDGivenRoot("ehealthconnctor");
+		final String documentOid = OID.createOIDGivenRoot("ehealthconnctor");
 		// Creates a random extension ID to identify the document
 
 		final var id = new II();
@@ -865,8 +820,7 @@ public class Util {
 	/**
 	 * Gets the checksum of a serializable object.
 	 *
-	 * @param object
-	 *            the object
+	 * @param object the object
 	 * @return the checksum
 	 */
 	public static int getChecksum(Serializable object) {
@@ -890,19 +844,16 @@ public class Util {
 	 * Extracts the reference to a comment from a given list of MDHT
 	 * EntryRelationship objects.
 	 *
-	 * @param e
-	 *            the EntryRelationship list
+	 * @param e the EntryRelationship list
 	 * @return the reference to the comment
 	 */
 	public static String getCommentRef(List<POCDMT000040EntryRelationship> e) {
 		for (final POCDMT000040EntryRelationship er : e) {
-			if (er.getTypeCode().equals(XActRelationshipEntryRelationship.SUBJ)) {
+			if (er.getTypeCode().equals(XActRelationshipEntryRelationship.SUBJ) && er.getAct().getText() != null) {
 				// Get the ed and update it with the reference
-				if (er.getAct().getText() != null) {
-					final var ed = er.getAct().getText();
-					if (ed.getReference() != null) {
-						return ed.getReference().getValue();
-					}
+				final var ed = er.getAct().getText();
+				if (ed.getReference() != null) {
+					return ed.getReference().getValue();
 				}
 			}
 		}
@@ -913,8 +864,7 @@ public class Util {
 	 * Returns the text of a comment from a given list of MDHT EntryRelationship
 	 * objects.
 	 *
-	 * @param e
-	 *            the EntryRelationship list
+	 * @param e the EntryRelationship list
 	 * @return the tet of the comment
 	 */
 	public static String getCommentText(List<POCDMT000040EntryRelationship> e) {
@@ -932,10 +882,8 @@ public class Util {
 	 * Returns the text of a comment from a given list of MDHT EntryRelationship
 	 * objects and sets the text reference.
 	 *
-	 * @param e
-	 *            the EntryRelationship list
-	 * @param contentId
-	 *            the content id for the text reference
+	 * @param e         the EntryRelationship list
+	 * @param contentId the content id for the text reference
 	 * @return the tet of the comment
 	 */
 	public static String getCommentText(List<POCDMT000040EntryRelationship> e, String contentId) {
@@ -969,9 +917,8 @@ public class Util {
 	 * <div class="en">Gets the e mail from an ArrayList of TEL.</div>
 	 * <div class="de">Liefert e mail aus einer ArrayList of TEL.</div>
 	 *
-	 * @param telecoms
-	 *            <br>
-	 *            <div class="en"> the telecoms</div>
+	 * @param telecoms <br>
+	 *                 <div class="en"> the telecoms</div>
 	 * @return <div class="en">the e mail</div>
 	 */
 	public static Map<String, TelecomAddressUse> getEMail(List<TEL> telecoms) {
@@ -982,9 +929,8 @@ public class Util {
 	 * <div class="en">Gets the fax from an ArrayList of TEL.</div>
 	 * <div class="de">Liefert cax aus einer ArrayList von TEL.</div>
 	 *
-	 * @param telecoms
-	 *            <br>
-	 *            <div class="en">the telecoms</div>
+	 * @param telecoms <br>
+	 *                 <div class="en">the telecoms</div>
 	 * @return <div class="en">the fax</div>
 	 */
 	public static Map<String, TelecomAddressUse> getFax(List<TEL> telecoms) {
@@ -995,9 +941,8 @@ public class Util {
 	 * <div class="en">Gets the e mail from an ArrayList of TEL.</div>
 	 * <div class="de">Liefert e mail aus einer ArrayList von TEL.</div>
 	 *
-	 * @param telecoms
-	 *            <br>
-	 *            <div class="en">the telecoms</div>
+	 * @param telecoms <br>
+	 *                 <div class="en">the telecoms</div>
 	 * @return <div class="en">the phone</div>
 	 */
 	public static Map<String, TelecomAddressUse> getPhones(List<TEL> telecoms) {
@@ -1034,9 +979,9 @@ public class Util {
 	}
 
 	/**
-	 * <div class="en">Gets the system fonts paths in relation to the current
-	 * OS. This is where all the fonts must be found in order to embed them into
-	 * the PDF/A document.</div>
+	 * <div class="en">Gets the system fonts paths in relation to the current OS.
+	 * This is where all the fonts must be found in order to embed them into the
+	 * PDF/A document.</div>
 	 *
 	 * @return <div class="en">the system fonts paths</div>
 	 */
@@ -1071,11 +1016,9 @@ public class Util {
 	 * Extracts a HashMap<String, AddressUse> with a given Type from a given eHC
 	 * ArrayList<TEL>.
 	 *
-	 * @param telecoms
-	 *            the List with unsorted MDHT TEL objects
-	 * @param type
-	 *            the type of telecommunication endpoint that should be
-	 *            extracted
+	 * @param telecoms the List with unsorted MDHT TEL objects
+	 * @param type     the type of telecommunication endpoint that should be
+	 *                 extracted
 	 * @return the HashMap with TEL objects of the given type
 	 */
 	private static Map<String, TelecomAddressUse> getTelecomType(List<TEL> telecoms, String type) {
@@ -1083,9 +1026,7 @@ public class Util {
 		for (final TEL tel : telecoms) {
 			if (tel.getValue().toLowerCase().contains(type)) {
 				tl.put(tel.getValue(),
-						(!tel.getUse().isEmpty()
-								? TelecomAddressUse.getEnum(tel.getUse().get(0))
-								: null));
+						(!tel.getUse().isEmpty() ? TelecomAddressUse.getEnum(tel.getUse().get(0)) : null));
 			}
 		}
 		return tl;
@@ -1093,10 +1034,10 @@ public class Util {
 
 	/**
 	 * <div class="en">Gets a temp folder for output files. If you set an
-	 * environment variable with the name 'eHCTempPath' the Husky
-	 * will use the path specified in this environment variable. If no such
-	 * environment variable is set, it will try to use /temp. If the path is not
-	 * writable the Husky will use the system temp folder.
+	 * environment variable with the name 'eHCTempPath' the Husky will use the path
+	 * specified in this environment variable. If no such environment variable is
+	 * set, it will try to use /temp. If the path is not writable the Husky will use
+	 * the system temp folder.
 	 *
 	 * @return path to temp folder</div> <div class="de"></div>
 	 *         <div class="fr"></div>
@@ -1132,8 +1073,7 @@ public class Util {
 	 *
 	 * Gets the used memory as string for display e.g. to console.
 	 *
-	 * @param hint
-	 *            to be added to the string
+	 * @param hint to be added to the string
 	 * @return the used memory string
 	 */
 	public static String getUsedMemoryString(String hint) {
@@ -1145,8 +1085,7 @@ public class Util {
 	/**
 	 * Gets the utf 8 input stream from file.
 	 *
-	 * @param file
-	 *            the file
+	 * @param file the file
 	 * @return the utf 8 input stream from file
 	 */
 	public static InputStream getUtf8InputStream(File file) {
@@ -1160,14 +1099,12 @@ public class Util {
 	/**
 	 * Gets the utf 8 input stream from file.
 	 *
-	 * @param fis
-	 *            the fis
+	 * @param fis the fis
 	 * @return the utf 8 input stream from file
 	 */
 	public static InputStream getUtf8InputStream(FileInputStream fis) {
 		try {
-			return IOUtils.toInputStream(IOUtils.toString(new InputStreamReader(fis, Charsets.UTF_8)),
-					Charsets.UTF_8);
+			return IOUtils.toInputStream(IOUtils.toString(new InputStreamReader(fis, Charsets.UTF_8)), Charsets.UTF_8);
 		} catch (IOException e) {
 			return null;
 		}
@@ -1176,14 +1113,12 @@ public class Util {
 	/**
 	 * Gets the utf 8 input stream from file.
 	 *
-	 * @param is
-	 *            the is
+	 * @param is the is
 	 * @return the utf 8 input stream from file
 	 */
 	public static InputStream getUtf8InputStream(InputStream is) {
 		try {
-			return IOUtils.toInputStream(IOUtils.toString(new InputStreamReader(is, Charsets.UTF_8)),
-					Charsets.UTF_8);
+			return IOUtils.toInputStream(IOUtils.toString(new InputStreamReader(is, Charsets.UTF_8)), Charsets.UTF_8);
 		} catch (IOException e) {
 			return null;
 		}
@@ -1192,8 +1127,7 @@ public class Util {
 	/**
 	 * Gets the utf 8 input stream from file.
 	 *
-	 * @param fileName
-	 *            the file name
+	 * @param fileName the file name
 	 * @return the utf 8 input stream from file
 	 */
 	public static InputStream getUtf8InputStream(String fileName) {
@@ -1224,17 +1158,15 @@ public class Util {
 	 * @return the used Java VM heap space in mega bytes.
 	 */
 	public static int getVmMemoryUsedInMegaBytes() {
-		return (int) ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())
-				/ (1024 * 1024));
+		return (int) ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024 * 1024));
 	}
 
 	/**
 	 * <div class="en">Gets the website from an ArrayList of TEL.</div>
 	 * <div class="de">Liefert die Webseite aus einer ArrayList von TEL.</div>
 	 *
-	 * @param telecoms
-	 *            <br>
-	 *            <div class="en">the telecoms</div>
+	 * @param telecoms <br>
+	 *                 <div class="en">the telecoms</div>
 	 * @return <div class="en">the webside</div>
 	 */
 	public static Map<String, TelecomAddressUse> getWebsites(List<TEL> telecoms) {
@@ -1244,8 +1176,7 @@ public class Util {
 	/**
 	 * Checks if an EntryRelationship is a comment.
 	 *
-	 * @param er
-	 *            the EntryRelationship
+	 * @param er the EntryRelationship
 	 * @return true if the EntryRelationship is a comment, false otherwise
 	 */
 	public static boolean isComment(POCDMT000040EntryRelationship er) {
@@ -1303,12 +1234,10 @@ public class Util {
 	 * <div class="en">Join an ArrayList of String with person names to a whole
 	 * name</div>.
 	 *
-	 * @param nameList
-	 *            <br>
-	 *            <div class="en"> name list</div>
-	 * @param delimiter
-	 *            <br>
-	 *            <div class="en"> delimiter</div>
+	 * @param nameList  <br>
+	 *                  <div class="en"> name list</div>
+	 * @param delimiter <br>
+	 *                  <div class="en"> delimiter</div>
 	 * @return the string
 	 */
 	public static String join(List<String> nameList, String delimiter) {
@@ -1334,9 +1263,8 @@ public class Util {
 	 * <div class="en">Join a list of MDHT ENXP (name parts) to a whole person
 	 * name</div>.
 	 *
-	 * @param list
-	 *            <br>
-	 *            <div class="en">the list</div>
+	 * @param list <br>
+	 *             <div class="en">the list</div>
 	 * @return the string
 	 */
 	public static String joinEListStr(List<ENXP> list) {
@@ -1357,35 +1285,27 @@ public class Util {
 	/**
 	 * Logs the available memory.
 	 *
-	 * @param theClass
-	 *            the the class Class to be used in the Log4J log
-	 * @param hint
-	 *            the hint hint to be added to the log message
+	 * @param theClass the the class Class to be used in the Log4J log
+	 * @param hint     the hint hint to be added to the log message
 	 */
-	public static void logAvailableMemory(@SuppressWarnings("rawtypes") Class theClass,
-			String hint) {
+	public static void logAvailableMemory(@SuppressWarnings("rawtypes") Class theClass, String hint) {
 
 		final Logger log = LoggerFactory.getLogger(theClass);
-		log.info(
-				"{}: freeMemory: {} MB", hint, Util.getVmMemoryFreeInMegaBytes());
+		log.info("{}: freeMemory: {} MB", hint, Util.getVmMemoryFreeInMegaBytes());
 
 	}
 
 	/**
 	 * Runs the given external command.
 	 *
-	 * @param cmd
-	 *            the command to run
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @throws InterruptedException
-	 *             the interrupted exception
+	 * @param cmd the command to run
+	 * @throws IOException          Signals that an I/O exception has occurred.
+	 * @throws InterruptedException the interrupted exception
 	 */
 	public static void runExternalCommand(String cmd) throws IOException, InterruptedException {
 		Process process;
 		process = Runtime.getRuntime().exec(cmd);
-		var streamGobbler = new StreamGobbler(process.getInputStream(),
-				System.out::println);
+		var streamGobbler = new StreamGobbler(process.getInputStream(), System.out::println);
 		final ExecutorService ex = Executors.newSingleThreadExecutor();
 		ex.submit(streamGobbler);
 		int exitCode = process.waitFor();
@@ -1396,9 +1316,8 @@ public class Util {
 	/**
 	 * <div class="en">Creates an MDHT ST</div>.
 	 *
-	 * @param text
-	 *            <br>
-	 *            <div class="de">the text</div>
+	 * @param text <br>
+	 *             <div class="de">the text</div>
 	 * @return the st
 	 */
 	public static ST st(String text) {
@@ -1410,8 +1329,7 @@ public class Util {
 	/**
 	 * Converts the given string to an InputStream.
 	 *
-	 * @param inputStr
-	 *            the input string
+	 * @param inputStr the input string
 	 * @return the input stream
 	 */
 	public static InputStream string2InputStream(String inputStr) {
