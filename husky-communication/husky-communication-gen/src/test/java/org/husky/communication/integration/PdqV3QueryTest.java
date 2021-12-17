@@ -258,11 +258,11 @@ public class PdqV3QueryTest {
 		
 		List<Patient> patients = response2.getPatients();
 		assertTrue(response2.getSuccess());
-		assertEquals(patients.size(),1);
+		assertEquals(1, patients.size());
 		Patient patient = patients.get(0);
-		assertEquals(patient.getCompleteName().trim(),"Jasmin Schaub");
+		assertEquals("Jasmin Schaub", patient.getCompleteName().trim());
 		assertEquals(patient.getAdministrativeGenderCode().getCodeValue(),AdministrativeGender.FEMALE.getCodeValue());
-		assertEquals(patient.getAddress().getCountry(),"CHE");
+		assertEquals("CHE", patient.getAddress().getCountry());
 	    
 	}
 
@@ -335,10 +335,10 @@ public class PdqV3QueryTest {
 				.queryPatientDemographics(mpiQuery, affinityDomain, null);
 		
 		assertTrue(response.getSuccess());
-		assertEquals(response.getPatients().size(),1);
+		assertEquals(1, response.getPatients().size());
 		Patient patient = response.getPatients().get(0);
-		assertEquals(patient.getCompleteName().trim(),"David Sanders");
-		assertEquals(patient.getAdministrativeGenderCode(),AdministrativeGender.MALE.getCodeValue());
+		assertEquals("David Sanders", patient.getCompleteName().trim());
+		assertEquals(AdministrativeGender.MALE.getCodeValue(), patient.getAdministrativeGenderCode().getCodeValue());
 		
 	} 
 
