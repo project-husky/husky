@@ -1115,20 +1115,20 @@ public class Util {
 			final String env = System.getenv(envVariable);
 			if (env != null) {
 				tempDirectoryPath = env;
-				log.debug("Trying to use temp folder set by environment variable '" + envVariable
-						+ "': " + tempDirectoryPath);
+				log.debug("Trying to use temp folder set by environment variable '{}': {}", envVariable,
+						tempDirectoryPath);
 			} else {
 				tempDirectoryPath = "/temp";
-				log.debug("Trying to use hardcoded temp folder: " + tempDirectoryPath);
+				log.debug("Trying to use hardcoded temp folder: {}", tempDirectoryPath);
 			}
 			final var uniqueFile = File.createTempFile("eHC", ".tmp", new File(tempDirectoryPath));
 			FileUtils.writeStringToFile(uniqueFile, "write check");
 			FileUtils.deleteQuietly(uniqueFile);
 		} catch (final Exception e) {
 			tempDirectoryPath = FileUtils.getTempDirectoryPath();
-			log.debug("failed... Will use system temp folder: " + tempDirectoryPath);
+			log.debug("failed... Will use system temp folder: {}", tempDirectoryPath);
 		}
-		log.info("Temp folder: " + tempDirectoryPath);
+		log.info("Temp folder: {}", tempDirectoryPath);
 		return tempDirectoryPath;
 	}
 
@@ -1376,7 +1376,7 @@ public class Util {
 
 		final Logger log = LoggerFactory.getLogger(theClass);
 		log.info(
-				hint + ": freeMemory: " + Long.toString(Util.getVmMemoryFreeInMegaBytes()) + " MB");
+				"{}: freeMemory: {} MB", hint, Long.toString(Util.getVmMemoryFreeInMegaBytes()));
 
 	}
 
