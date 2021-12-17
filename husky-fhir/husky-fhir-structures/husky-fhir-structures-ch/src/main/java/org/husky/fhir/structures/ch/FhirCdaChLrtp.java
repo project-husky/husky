@@ -104,7 +104,7 @@ public class FhirCdaChLrtp /* extends AbstractFhirCdaCh */ {
 		@Child(name = "patient")
 		@Extension(url = FhirCommon.URN_USE_AS_PATIENT, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "patient")
-		private Reference patient;
+		private Reference patientReference;
 
 		/**
 		 * Gets the comment.
@@ -196,8 +196,8 @@ public class FhirCdaChLrtp /* extends AbstractFhirCdaCh */ {
 		 * @return the patient
 		 */
 		public Patient getPatient() {
-			if (this.patient != null) {
-				return (Patient) this.patient.getResource();
+			if (this.patientReference != null) {
+				return (Patient) this.patientReference.getResource();
 			}
 			return null;
 		}
@@ -295,7 +295,7 @@ public class FhirCdaChLrtp /* extends AbstractFhirCdaCh */ {
 		public void setPatient(Patient patient) {
 			final Reference resourceRef = new Reference();
 			resourceRef.setResource(patient);
-			this.patient = resourceRef;
+			this.patientReference = resourceRef;
 		}
 	}
 

@@ -54,7 +54,7 @@ public class FhirCdaChVacd /* extends AbstractFhirCdaCh */ {
 	 * CDA document contains full or masked patient demographics</div>
 	 * <div class="de"></div><div class="fr"></div>
 	 */
-	public static enum DocTypeCode {
+	public enum DocTypeCode {
 		/**
 		 * <div class="en">the resulting CDA document contains full patient
 		 * demographics</div><div class="de"></div><div class="fr"></div>
@@ -100,7 +100,7 @@ public class FhirCdaChVacd /* extends AbstractFhirCdaCh */ {
 		@Child(name = "code")
 		@Extension(url = FhirCommon.URN_USE_AS_CODE, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "Code of the medication administration")
-		private Coding code;
+		private Coding codeReference;
 
 		/**
 		 * <div class="en">Remark for this medication statement</div>
@@ -174,7 +174,7 @@ public class FhirCdaChVacd /* extends AbstractFhirCdaCh */ {
 		 *         <div class="fr">code de ce MedicationStatement</div>
 		 */
 		public Coding getCode() {
-			return code;
+			return codeReference;
 		}
 
 		/**
@@ -246,7 +246,7 @@ public class FhirCdaChVacd /* extends AbstractFhirCdaCh */ {
 		 */
 		@Override
 		public boolean isEmpty() {
-			return super.isEmpty() && ElementUtil.isEmpty(code, performer, author, comment);
+			return super.isEmpty() && ElementUtil.isEmpty(codeReference, performer, author, comment);
 		}
 
 		/**
@@ -266,7 +266,7 @@ public class FhirCdaChVacd /* extends AbstractFhirCdaCh */ {
 		 *            <div class="fr">code de ce MedicationStatement</div>
 		 */
 		public void setCode(Coding code) {
-			this.code = code;
+			this.codeReference = code;
 		}
 
 		/**
@@ -420,7 +420,7 @@ public class FhirCdaChVacd /* extends AbstractFhirCdaCh */ {
 		@Child(name = "patient")
 		@Extension(url = FhirCommon.URN_USE_AS_PATIENT, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "patient")
-		private Reference patient;
+		private Reference patientReference;
 
 		/** The pregnancy observation. */
 		@Child(name = "pregnancyObservation,", max = Child.MAX_UNLIMITED)
@@ -728,8 +728,8 @@ public class FhirCdaChVacd /* extends AbstractFhirCdaCh */ {
 		 * @return the patient
 		 */
 		public Patient getPatient() {
-			if (this.patient != null) {
-				return (Patient) this.patient.getResource();
+			if (this.patientReference != null) {
+				return (Patient) this.patientReference.getResource();
 			}
 			return null;
 		}
@@ -839,7 +839,7 @@ public class FhirCdaChVacd /* extends AbstractFhirCdaCh */ {
 		public void setPatient(Patient patient) {
 			final Reference resourceRef = new Reference();
 			resourceRef.setResource(patient);
-			this.patient = resourceRef;
+			this.patientReference = resourceRef;
 		}
 
 		/**
@@ -854,7 +854,7 @@ public class FhirCdaChVacd /* extends AbstractFhirCdaCh */ {
 			this.pregnancyObservation = resourceRef;
 		}
 
-	};
+	}
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this OID</div>

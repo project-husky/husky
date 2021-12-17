@@ -29,7 +29,7 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
  * Supports the FHIR to eHC conversion for EDES CTNN documents
  *
  */
-public class FhirCdaChEdesCtnn /* extends AbstractFhirCdaCh */ {
+public class FhirCdaChEdesCtnn {
 
 	/**
 	 * The class EdesCtnnDocument is a derived FHIR resource containing all
@@ -82,7 +82,7 @@ public class FhirCdaChEdesCtnn /* extends AbstractFhirCdaCh */ {
 		@Child(name = "patient")
 		@Extension(url = FhirCommon.URN_USE_AS_PATIENT, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "patient")
-		private Reference patient;
+		private Reference patientReference;
 
 		/** The comment. */
 		@Child(name = "comment")
@@ -180,8 +180,8 @@ public class FhirCdaChEdesCtnn /* extends AbstractFhirCdaCh */ {
 		 * @return the patient
 		 */
 		public Patient getPatient() {
-			if (this.patient != null) {
-				return (Patient) this.patient.getResource();
+			if (this.patientReference != null) {
+				return (Patient) this.patientReference.getResource();
 			}
 			return null;
 		}
@@ -279,7 +279,7 @@ public class FhirCdaChEdesCtnn /* extends AbstractFhirCdaCh */ {
 		public void setPatient(Patient patient) {
 			final var resourceRef = new Reference();
 			resourceRef.setResource(patient);
-			this.patient = resourceRef;
+			this.patientReference = resourceRef;
 		}
 	}
 }
