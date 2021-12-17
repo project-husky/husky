@@ -36,12 +36,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Class implementing the simple ppq client.</div>
- * <div class="de">Klasse die den Simple PPQ Client implementiert.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Class implementing the simple ppq client.
  */
 public class SimplePpqClient extends CamelService implements PpqClient {
 

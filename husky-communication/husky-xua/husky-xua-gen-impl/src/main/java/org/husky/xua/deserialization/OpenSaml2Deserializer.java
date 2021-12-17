@@ -14,12 +14,7 @@ import org.husky.xua.exceptions.DeserializeException;
 import org.w3c.dom.Element;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Interface describing the generic methods of OpenSaml2Deserializer for the templated type T.</div>
- * <div class="de">Interface welches die Methoden des OpenSaml2Deserializer für den templated Typ T beschreibt.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Interface describing the generic methods of OpenSaml2Deserializer for the templated type T.
  */
 public interface OpenSaml2Deserializer<T> {
 

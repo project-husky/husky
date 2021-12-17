@@ -22,12 +22,7 @@ import org.opensaml.saml.saml2.core.Response;
 import org.opensaml.saml.saml2.core.impl.ResponseBuilder;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Class implementing the corresponding interfaces for PrivacyPolicyQueryResponse and SecurityObject.</div>
- * <div class="de">Die Klasse implementiert das entsprechende Interfaces PrivacyPolicyQueryResponse und SecurityObject.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Class implementing the corresponding interfaces for PrivacyPolicyQueryResponse and SecurityObject.
  */
 public class PrivacyPolicyQueryResponseImpl
 		implements PrivacyPolicyQueryResponse, SecurityObject<Response> {

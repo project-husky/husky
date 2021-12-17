@@ -31,33 +31,33 @@ import java.util.List;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="COCT_MT230100UV.Medicine">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;group ref="{urn:hl7-org:v3}InfrastructureRootElements"/>
- *         &lt;element name="id" type="{urn:hl7-org:v3}II" minOccurs="0"/>
- *         &lt;element name="code" type="{urn:hl7-org:v3}CE" minOccurs="0"/>
- *         &lt;element name="name" type="{urn:hl7-org:v3}TN" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="desc" type="{urn:hl7-org:v3}ED" minOccurs="0"/>
- *         &lt;element name="riskCode" type="{urn:hl7-org:v3}CE" minOccurs="0"/>
- *         &lt;element name="handlingCode" type="{urn:hl7-org:v3}CE" minOccurs="0"/>
- *         &lt;element name="formCode" type="{urn:hl7-org:v3}CE" minOccurs="0"/>
- *         &lt;element name="lotNumberText" type="{urn:hl7-org:v3}ST" minOccurs="0"/>
- *         &lt;element name="expirationTime" type="{urn:hl7-org:v3}IVL_TS" minOccurs="0"/>
- *         &lt;element name="stabilityTime" type="{urn:hl7-org:v3}IVL_TS" minOccurs="0"/>
- *         &lt;element name="asDistributedProduct" type="{urn:ihe:pharm}COCT_MT230100UV.DistributedProduct" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="asMedicineManufacturer" type="{urn:ihe:pharm}COCT_MT230100UV.MedicineManufacturer" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="asContent" type="{urn:ihe:pharm}COCT_MT230100UV.Content" minOccurs="0"/>
- *         &lt;element name="asSpecializedKind" type="{urn:ihe:pharm}COCT_MT230100UV.SpecializedKind" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="part" type="{urn:ihe:pharm}COCT_MT230100UV.Part" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="ingredient" type="{urn:ihe:pharm}COCT_MT230100UV.Ingredient" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute name="classCode" use="required" type="{urn:hl7-org:v3}EntityClassManufacturedMaterial" />
- *       &lt;attribute name="determinerCode" use="required" type="{urn:hl7-org:v3}EntityDeterminer" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="COCT_MT230100UV.Medicine"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;group ref="{urn:hl7-org:v3}InfrastructureRootElements"/&gt;
+ *         &lt;element name="id" type="{urn:hl7-org:v3}II" minOccurs="0"/&gt;
+ *         &lt;element name="code" type="{urn:hl7-org:v3}CE" minOccurs="0"/&gt;
+ *         &lt;element name="name" type="{urn:hl7-org:v3}TN" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="desc" type="{urn:hl7-org:v3}ED" minOccurs="0"/&gt;
+ *         &lt;element name="riskCode" type="{urn:hl7-org:v3}CE" minOccurs="0"/&gt;
+ *         &lt;element name="handlingCode" type="{urn:hl7-org:v3}CE" minOccurs="0"/&gt;
+ *         &lt;element name="formCode" type="{urn:hl7-org:v3}CE" minOccurs="0"/&gt;
+ *         &lt;element name="lotNumberText" type="{urn:hl7-org:v3}ST" minOccurs="0"/&gt;
+ *         &lt;element name="expirationTime" type="{urn:hl7-org:v3}IVL_TS" minOccurs="0"/&gt;
+ *         &lt;element name="stabilityTime" type="{urn:hl7-org:v3}IVL_TS" minOccurs="0"/&gt;
+ *         &lt;element name="asDistributedProduct" type="{urn:ihe:pharm}COCT_MT230100UV.DistributedProduct" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="asMedicineManufacturer" type="{urn:ihe:pharm}COCT_MT230100UV.MedicineManufacturer" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="asContent" type="{urn:ihe:pharm}COCT_MT230100UV.Content" minOccurs="0"/&gt;
+ *         &lt;element name="asSpecializedKind" type="{urn:ihe:pharm}COCT_MT230100UV.SpecializedKind" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="part" type="{urn:ihe:pharm}COCT_MT230100UV.Part" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="ingredient" type="{urn:ihe:pharm}COCT_MT230100UV.Ingredient" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="classCode" use="required" type="{urn:hl7-org:v3}EntityClassManufacturedMaterial" /&gt;
+ *       &lt;attribute name="determinerCode" use="required" type="{urn:hl7-org:v3}EntityDeterminer" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

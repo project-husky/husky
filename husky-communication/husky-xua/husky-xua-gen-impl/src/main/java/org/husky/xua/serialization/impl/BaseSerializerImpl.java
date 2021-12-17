@@ -18,12 +18,7 @@ import org.opensaml.core.xml.XMLObject;
 import org.w3c.dom.Element;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Base Serializer for OpenSaml objects.</div>
- * <div class="de">Basis Serializer für OpenSaml-Objekte.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Base Serializer for OpenSaml objects.
  */
 public class BaseSerializerImpl extends AbstractSerializerImpl implements Serializer<Base> {
 

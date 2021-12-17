@@ -40,22 +40,22 @@ import java.util.List;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="CD">
- *   &lt;complexContent>
- *     &lt;extension base="{urn:hl7-org:v3}ANY">
- *       &lt;sequence>
- *         &lt;element name="originalText" type="{urn:hl7-org:v3}ED" minOccurs="0"/>
- *         &lt;element name="qualifier" type="{urn:hl7-org:v3}CR" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="translation" type="{urn:hl7-org:v3}CD" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute name="code" type="{urn:hl7-org:v3}cs" />
- *       &lt;attribute name="codeSystem" type="{urn:hl7-org:v3}uid" />
- *       &lt;attribute name="codeSystemName" type="{urn:hl7-org:v3}st" />
- *       &lt;attribute name="codeSystemVersion" type="{urn:hl7-org:v3}st" />
- *       &lt;attribute name="displayName" type="{urn:hl7-org:v3}st" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="CD"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{urn:hl7-org:v3}ANY"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="originalText" type="{urn:hl7-org:v3}ED" minOccurs="0"/&gt;
+ *         &lt;element name="qualifier" type="{urn:hl7-org:v3}CR" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="translation" type="{urn:hl7-org:v3}CD" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="code" type="{urn:hl7-org:v3}cs" /&gt;
+ *       &lt;attribute name="codeSystem" type="{urn:hl7-org:v3}uid" /&gt;
+ *       &lt;attribute name="codeSystemName" type="{urn:hl7-org:v3}st" /&gt;
+ *       &lt;attribute name="codeSystemVersion" type="{urn:hl7-org:v3}st" /&gt;
+ *       &lt;attribute name="displayName" type="{urn:hl7-org:v3}st" /&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

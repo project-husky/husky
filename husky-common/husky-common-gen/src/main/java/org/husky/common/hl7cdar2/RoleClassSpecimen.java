@@ -27,15 +27,15 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ * 
  * <pre>
- * &lt;simpleType name="RoleClassSpecimen">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="SPEC"/>
- *     &lt;enumeration value="ALQT"/>
- *     &lt;enumeration value="ISLT"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="RoleClassSpecimen"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="SPEC"/&gt;
+ *     &lt;enumeration value="ALQT"/&gt;
+ *     &lt;enumeration value="ISLT"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "RoleClassSpecimen")

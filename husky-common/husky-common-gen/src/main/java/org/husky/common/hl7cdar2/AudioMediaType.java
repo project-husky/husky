@@ -28,15 +28,15 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ * 
  * <pre>
- * &lt;simpleType name="AudioMediaType">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="audio/basic"/>
- *     &lt;enumeration value="audio/k32adpcm"/>
- *     &lt;enumeration value="audio/mpeg"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="AudioMediaType"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="audio/basic"/&gt;
+ *     &lt;enumeration value="audio/k32adpcm"/&gt;
+ *     &lt;enumeration value="audio/mpeg"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "AudioMediaType")

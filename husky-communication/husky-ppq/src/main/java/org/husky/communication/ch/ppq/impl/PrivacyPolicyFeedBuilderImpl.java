@@ -18,12 +18,7 @@ import org.opensaml.saml.saml2.core.Assertion;
 import org.opensaml.saml.saml2.core.impl.AssertionBuilder;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Class implementing the interfaces PrivacyPolicyFeedBuilder and SecurityObjectBuilder.</div>
- * <div class="de">Klasse welche das Interface PrivacyPolicyFeedBuilder and SecurityObjectBuilder implementiert.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Class implementing the interfaces PrivacyPolicyFeedBuilder and SecurityObjectBuilder.
  */
 public class PrivacyPolicyFeedBuilderImpl
 		implements PrivacyPolicyFeedBuilder, SecurityObjectBuilder<Assertion, PrivacyPolicyFeed> {

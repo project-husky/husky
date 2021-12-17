@@ -27,14 +27,14 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ *
  * <pre>
- * &lt;simpleType name="hasSupport">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="SPRT"/>
- *     &lt;enumeration value="SPRTBND"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="hasSupport"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="SPRT"/&gt;
+ *     &lt;enumeration value="SPRTBND"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "hasSupport")

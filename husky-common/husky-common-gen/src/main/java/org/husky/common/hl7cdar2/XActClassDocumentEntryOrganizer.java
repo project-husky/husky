@@ -27,14 +27,14 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ * 
  * <pre>
- * &lt;simpleType name="x_ActClassDocumentEntryOrganizer">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="BATTERY"/>
- *     &lt;enumeration value="CLUSTER"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="x_ActClassDocumentEntryOrganizer"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="BATTERY"/&gt;
+ *     &lt;enumeration value="CLUSTER"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "x_ActClassDocumentEntryOrganizer")

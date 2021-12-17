@@ -31,16 +31,16 @@ import javax.xml.bind.annotation.*;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="II">
- *   &lt;complexContent>
- *     &lt;extension base="{urn:hl7-org:v3}ANY">
- *       &lt;attribute name="root" type="{urn:hl7-org:v3}uid" />
- *       &lt;attribute name="extension" type="{urn:hl7-org:v3}st" />
- *       &lt;attribute name="assigningAuthorityName" type="{urn:hl7-org:v3}st" />
- *       &lt;attribute name="displayable" type="{urn:hl7-org:v3}bl" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="II"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{urn:hl7-org:v3}ANY"&gt;
+ *       &lt;attribute name="root" type="{urn:hl7-org:v3}uid" /&gt;
+ *       &lt;attribute name="extension" type="{urn:hl7-org:v3}st" /&gt;
+ *       &lt;attribute name="assigningAuthorityName" type="{urn:hl7-org:v3}st" /&gt;
+ *       &lt;attribute name="displayable" type="{urn:hl7-org:v3}bl" /&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

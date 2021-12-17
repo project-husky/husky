@@ -34,23 +34,23 @@ import java.util.List;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="StrucDoc.TitleContent">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;choice maxOccurs="unbounded" minOccurs="0">
- *         &lt;element name="content" type="{urn:hl7-org:v3}StrucDoc.TitleContent"/>
- *         &lt;element name="sub" type="{urn:hl7-org:v3}StrucDoc.Sub"/>
- *         &lt;element name="sup" type="{urn:hl7-org:v3}StrucDoc.Sup"/>
- *         &lt;element name="br" type="{urn:hl7-org:v3}StrucDoc.Br"/>
- *         &lt;element name="footnote" type="{urn:hl7-org:v3}StrucDoc.TitleFootnote"/>
- *         &lt;element name="footnoteRef" type="{urn:hl7-org:v3}StrucDoc.FootnoteRef"/>
- *       &lt;/choice>
- *       &lt;attribute name="ID" type="{http://www.w3.org/2001/XMLSchema}ID" />
- *       &lt;attribute name="language" type="{http://www.w3.org/2001/XMLSchema}NMTOKEN" />
- *       &lt;attribute name="styleCode" type="{http://www.w3.org/2001/XMLSchema}NMTOKENS" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="StrucDoc.TitleContent"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;choice maxOccurs="unbounded" minOccurs="0"&gt;
+ *         &lt;element name="content" type="{urn:hl7-org:v3}StrucDoc.TitleContent"/&gt;
+ *         &lt;element name="sub" type="{urn:hl7-org:v3}StrucDoc.Sub"/&gt;
+ *         &lt;element name="sup" type="{urn:hl7-org:v3}StrucDoc.Sup"/&gt;
+ *         &lt;element name="br" type="{urn:hl7-org:v3}StrucDoc.Br"/&gt;
+ *         &lt;element name="footnote" type="{urn:hl7-org:v3}StrucDoc.TitleFootnote"/&gt;
+ *         &lt;element name="footnoteRef" type="{urn:hl7-org:v3}StrucDoc.FootnoteRef"/&gt;
+ *       &lt;/choice&gt;
+ *       &lt;attribute name="ID" type="{http://www.w3.org/2001/XMLSchema}ID" /&gt;
+ *       &lt;attribute name="language" type="{http://www.w3.org/2001/XMLSchema}NMTOKEN" /&gt;
+ *       &lt;attribute name="styleCode" type="{http://www.w3.org/2001/XMLSchema}NMTOKENS" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

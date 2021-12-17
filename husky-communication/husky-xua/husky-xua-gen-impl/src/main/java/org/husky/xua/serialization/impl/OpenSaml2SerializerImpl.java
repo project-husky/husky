@@ -25,12 +25,7 @@ import org.opensaml.core.xml.io.MarshallingException;
 import org.w3c.dom.Element;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Implementation class of OpenSaml2Serializer</div>
- * <div class="de">Implementations Klasse von OpenSaml2Serializer</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Implementation class of OpenSaml2Serializer
  */
 public class OpenSaml2SerializerImpl implements OpenSaml2Serializer {
 

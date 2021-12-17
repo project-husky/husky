@@ -31,15 +31,15 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="TN">
- *   &lt;complexContent>
- *     &lt;restriction base="{urn:hl7-org:v3}EN">
- *       &lt;sequence>
- *         &lt;element name="validTime" type="{urn:hl7-org:v3}IVL_TS" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="TN"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{urn:hl7-org:v3}EN"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="validTime" type="{urn:hl7-org:v3}IVL_TS" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

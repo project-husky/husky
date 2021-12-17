@@ -33,13 +33,13 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="BN">
- *   &lt;complexContent>
- *     &lt;extension base="{urn:hl7-org:v3}ANYNonNull">
- *       &lt;attribute name="value" type="{urn:hl7-org:v3}bn" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="BN"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{urn:hl7-org:v3}ANYNonNull"&gt;
+ *       &lt;attribute name="value" type="{urn:hl7-org:v3}bn" /&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

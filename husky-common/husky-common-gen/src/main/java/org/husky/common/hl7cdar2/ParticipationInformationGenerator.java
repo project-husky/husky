@@ -27,16 +27,16 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ *
  * <pre>
- * &lt;simpleType name="ParticipationInformationGenerator">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="AUT"/>
- *     &lt;enumeration value="ENT"/>
- *     &lt;enumeration value="INF"/>
- *     &lt;enumeration value="WIT"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="ParticipationInformationGenerator"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="AUT"/&gt;
+ *     &lt;enumeration value="ENT"/&gt;
+ *     &lt;enumeration value="INF"/&gt;
+ *     &lt;enumeration value="WIT"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "ParticipationInformationGenerator")

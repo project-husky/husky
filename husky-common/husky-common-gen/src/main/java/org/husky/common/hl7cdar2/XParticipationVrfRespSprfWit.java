@@ -27,16 +27,16 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ * 
  * <pre>
- * &lt;simpleType name="x_ParticipationVrfRespSprfWit">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="VRF"/>
- *     &lt;enumeration value="RESP"/>
- *     &lt;enumeration value="SPRF"/>
- *     &lt;enumeration value="WIT"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="x_ParticipationVrfRespSprfWit"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="VRF"/&gt;
+ *     &lt;enumeration value="RESP"/&gt;
+ *     &lt;enumeration value="SPRF"/&gt;
+ *     &lt;enumeration value="WIT"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "x_ParticipationVrfRespSprfWit")

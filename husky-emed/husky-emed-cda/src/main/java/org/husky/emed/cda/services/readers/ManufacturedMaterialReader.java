@@ -1,15 +1,24 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
 package org.husky.emed.cda.services.readers;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.cda.errors.InvalidEmedContentException;
-import org.husky.emed.cda.generated.artdecor.enums.ActivePharmaceuticalIngredient;
-import org.husky.emed.cda.generated.artdecor.enums.PharmaceuticalDoseFormEdqm;
+import org.husky.emed.errors.InvalidEmedContentException;
+import org.husky.emed.enums.ActivePharmaceuticalIngredient;
+import org.husky.emed.enums.PharmaceuticalDoseFormEdqm;
 import org.husky.common.hl7cdar2.CD;
 import org.husky.common.hl7cdar2.COCTMT230100UVIngredient;
 import org.husky.common.hl7cdar2.POCDMT000040Material;
-import org.husky.emed.cda.models.common.QuantityWithUnit;
-import org.husky.emed.cda.models.treatment.MedicationProduct;
-import org.husky.emed.cda.models.treatment.MedicationProductIngredient;
+import org.husky.emed.models.common.QuantityWithUnit;
+import org.husky.emed.models.treatment.MedicationProduct;
+import org.husky.emed.models.treatment.MedicationProductIngredient;
 import org.husky.emed.cda.utils.CdaR2Utils;
 
 import java.util.Objects;

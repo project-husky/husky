@@ -14,6 +14,9 @@
 // Generiert: 2020.07.09 um 01:07:39 PM CEST
 //
 
+/**
+ * Generated classes from the HL7 CDA R2 specifications with JAXB.
+ */
 @XmlSchema(namespace = "urn:hl7-org:v3", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
 @DefaultQualifier(value = Nullable.class, locations = {TypeUseLocation.PARAMETER, TypeUseLocation.RETURN,
         TypeUseLocation.FIELD})

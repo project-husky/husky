@@ -30,18 +30,18 @@ import java.util.List;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="COCT_MT230100UV.Subject7">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;group ref="{urn:hl7-org:v3}InfrastructureRootElements"/>
- *         &lt;element name="valuedItem" type="{urn:ihe:pharm}COCT_MT440001UV09.ValuedItem"/>
- *       &lt;/sequence>
- *       &lt;attribute name="nullFlavor" type="{urn:hl7-org:v3}NullFlavor" />
- *       &lt;attribute name="typeCode" type="{urn:hl7-org:v3}ParticipationType" fixed="SBJ" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="COCT_MT230100UV.Subject7"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;group ref="{urn:hl7-org:v3}InfrastructureRootElements"/&gt;
+ *         &lt;element name="valuedItem" type="{urn:ihe:pharm}COCT_MT440001UV09.ValuedItem"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="nullFlavor" type="{urn:hl7-org:v3}NullFlavor" /&gt;
+ *       &lt;attribute name="typeCode" type="{urn:hl7-org:v3}ParticipationType" fixed="SBJ" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

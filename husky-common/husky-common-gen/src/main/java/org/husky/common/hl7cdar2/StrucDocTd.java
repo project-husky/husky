@@ -34,65 +34,65 @@ import java.util.List;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="StrucDoc.Td">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;choice maxOccurs="unbounded" minOccurs="0">
- *         &lt;element name="content" type="{urn:hl7-org:v3}StrucDoc.Content"/>
- *         &lt;element name="linkHtml" type="{urn:hl7-org:v3}StrucDoc.LinkHtml"/>
- *         &lt;element name="sub" type="{urn:hl7-org:v3}StrucDoc.Sub"/>
- *         &lt;element name="sup" type="{urn:hl7-org:v3}StrucDoc.Sup"/>
- *         &lt;element name="br" type="{urn:hl7-org:v3}StrucDoc.Br"/>
- *         &lt;element name="footnote" type="{urn:hl7-org:v3}StrucDoc.Footnote"/>
- *         &lt;element name="footnoteRef" type="{urn:hl7-org:v3}StrucDoc.FootnoteRef"/>
- *         &lt;element name="renderMultiMedia" type="{urn:hl7-org:v3}StrucDoc.RenderMultiMedia"/>
- *         &lt;element name="paragraph" type="{urn:hl7-org:v3}StrucDoc.Paragraph"/>
- *         &lt;element name="list" type="{urn:hl7-org:v3}StrucDoc.List"/>
- *       &lt;/choice>
- *       &lt;attribute name="ID" type="{http://www.w3.org/2001/XMLSchema}ID" />
- *       &lt;attribute name="language" type="{http://www.w3.org/2001/XMLSchema}NMTOKEN" />
- *       &lt;attribute name="styleCode" type="{http://www.w3.org/2001/XMLSchema}NMTOKENS" />
- *       &lt;attribute name="abbr" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="axis" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="headers" type="{http://www.w3.org/2001/XMLSchema}IDREFS" />
- *       &lt;attribute name="scope">
- *         &lt;simpleType>
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}NMTOKEN">
- *             &lt;enumeration value="row"/>
- *             &lt;enumeration value="col"/>
- *             &lt;enumeration value="rowgroup"/>
- *             &lt;enumeration value="colgroup"/>
- *           &lt;/restriction>
- *         &lt;/simpleType>
+ * &lt;complexType name="StrucDoc.Td"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;choice maxOccurs="unbounded" minOccurs="0"&gt;
+ *         &lt;element name="content" type="{urn:hl7-org:v3}StrucDoc.Content"/&gt;
+ *         &lt;element name="linkHtml" type="{urn:hl7-org:v3}StrucDoc.LinkHtml"/&gt;
+ *         &lt;element name="sub" type="{urn:hl7-org:v3}StrucDoc.Sub"/&gt;
+ *         &lt;element name="sup" type="{urn:hl7-org:v3}StrucDoc.Sup"/&gt;
+ *         &lt;element name="br" type="{urn:hl7-org:v3}StrucDoc.Br"/&gt;
+ *         &lt;element name="footnote" type="{urn:hl7-org:v3}StrucDoc.Footnote"/&gt;
+ *         &lt;element name="footnoteRef" type="{urn:hl7-org:v3}StrucDoc.FootnoteRef"/&gt;
+ *         &lt;element name="renderMultiMedia" type="{urn:hl7-org:v3}StrucDoc.RenderMultiMedia"/&gt;
+ *         &lt;element name="paragraph" type="{urn:hl7-org:v3}StrucDoc.Paragraph"/&gt;
+ *         &lt;element name="list" type="{urn:hl7-org:v3}StrucDoc.List"/&gt;
+ *       &lt;/choice&gt;
+ *       &lt;attribute name="ID" type="{http://www.w3.org/2001/XMLSchema}ID" /&gt;
+ *       &lt;attribute name="language" type="{http://www.w3.org/2001/XMLSchema}NMTOKEN" /&gt;
+ *       &lt;attribute name="styleCode" type="{http://www.w3.org/2001/XMLSchema}NMTOKENS" /&gt;
+ *       &lt;attribute name="abbr" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="axis" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="headers" type="{http://www.w3.org/2001/XMLSchema}IDREFS" /&gt;
+ *       &lt;attribute name="scope"&gt;
+ *         &lt;simpleType&gt;
+ *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}NMTOKEN"&gt;
+ *             &lt;enumeration value="row"/&gt;
+ *             &lt;enumeration value="col"/&gt;
+ *             &lt;enumeration value="rowgroup"/&gt;
+ *             &lt;enumeration value="colgroup"/&gt;
+ *           &lt;/restriction&gt;
+ *         &lt;/simpleType&gt;
  *       &lt;/attribute>
- *       &lt;attribute name="rowspan" type="{http://www.w3.org/2001/XMLSchema}string" default="1" />
- *       &lt;attribute name="colspan" type="{http://www.w3.org/2001/XMLSchema}string" default="1" />
- *       &lt;attribute name="align">
- *         &lt;simpleType>
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}NMTOKEN">
- *             &lt;enumeration value="left"/>
- *             &lt;enumeration value="center"/>
- *             &lt;enumeration value="right"/>
- *             &lt;enumeration value="justify"/>
- *             &lt;enumeration value="char"/>
- *           &lt;/restriction>
- *         &lt;/simpleType>
+ *       &lt;attribute name="rowspan" type="{http://www.w3.org/2001/XMLSchema}string" default="1" /&gt;
+ *       &lt;attribute name="colspan" type="{http://www.w3.org/2001/XMLSchema}string" default="1" /&gt;
+ *       &lt;attribute name="align"&gt;
+ *         &lt;simpleType&gt;
+ *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}NMTOKEN"&gt;
+ *             &lt;enumeration value="left"/&gt;
+ *             &lt;enumeration value="center"/&gt;
+ *             &lt;enumeration value="right"/&gt;
+ *             &lt;enumeration value="justify"/&gt;
+ *             &lt;enumeration value="char"/&gt;
+ *           &lt;/restriction&gt;
+ *         &lt;/simpleType&gt;
  *       &lt;/attribute>
- *       &lt;attribute name="char" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="charoff" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="valign">
- *         &lt;simpleType>
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}NMTOKEN">
- *             &lt;enumeration value="top"/>
- *             &lt;enumeration value="middle"/>
- *             &lt;enumeration value="bottom"/>
- *             &lt;enumeration value="baseline"/>
- *           &lt;/restriction>
- *         &lt;/simpleType>
+ *       &lt;attribute name="char" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="charoff" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="valign"&gt;
+ *         &lt;simpleType&gt;
+ *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}NMTOKEN"&gt;
+ *             &lt;enumeration value="top"/&gt;
+ *             &lt;enumeration value="middle"/&gt;
+ *             &lt;enumeration value="bottom"/&gt;
+ *             &lt;enumeration value="baseline"/&gt;
+ *           &lt;/restriction&gt;
+ *         &lt;/simpleType&gt;
  *       &lt;/attribute>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

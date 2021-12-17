@@ -32,45 +32,45 @@ import java.util.List;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="POCD_MT000040.ClinicalDocument">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="realmCode" type="{urn:hl7-org:v3}CS" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="typeId" type="{urn:hl7-org:v3}POCD_MT000040.InfrastructureRoot.typeId"/>
- *         &lt;element name="templateId" type="{urn:hl7-org:v3}II" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="id" type="{urn:hl7-org:v3}II"/>
- *         &lt;element name="code" type="{urn:hl7-org:v3}CE"/>
- *         &lt;element name="title" type="{urn:hl7-org:v3}ST" minOccurs="0"/>
- *         &lt;element name="effectiveTime" type="{urn:hl7-org:v3}TS"/>
- *         &lt;element name="confidentialityCode" type="{urn:hl7-org:v3}CE"/>
- *         &lt;element name="languageCode" type="{urn:hl7-org:v3}CS" minOccurs="0"/>
- *         &lt;element name="setId" type="{urn:hl7-org:v3}II" minOccurs="0"/>
- *         &lt;element name="versionNumber" type="{urn:hl7-org:v3}INT" minOccurs="0"/>
- *         &lt;element name="copyTime" type="{urn:hl7-org:v3}TS" minOccurs="0"/>
- *         &lt;element name="recordTarget" type="{urn:hl7-org:v3}POCD_MT000040.RecordTarget" maxOccurs="unbounded"/>
- *         &lt;element name="author" type="{urn:hl7-org:v3}POCD_MT000040.Author" maxOccurs="unbounded"/>
- *         &lt;element name="dataEnterer" type="{urn:hl7-org:v3}POCD_MT000040.DataEnterer" minOccurs="0"/>
- *         &lt;element name="informant" type="{urn:hl7-org:v3}POCD_MT000040.Informant12" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="custodian" type="{urn:hl7-org:v3}POCD_MT000040.Custodian"/>
- *         &lt;element name="informationRecipient" type="{urn:hl7-org:v3}POCD_MT000040.InformationRecipient" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="legalAuthenticator" type="{urn:hl7-org:v3}POCD_MT000040.LegalAuthenticator" minOccurs="0"/>
- *         &lt;element name="authenticator" type="{urn:hl7-org:v3}POCD_MT000040.Authenticator" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="participant" type="{urn:hl7-org:v3}POCD_MT000040.Participant1" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="inFulfillmentOf" type="{urn:hl7-org:v3}POCD_MT000040.InFulfillmentOf" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="documentationOf" type="{urn:hl7-org:v3}POCD_MT000040.DocumentationOf" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="relatedDocument" type="{urn:hl7-org:v3}POCD_MT000040.RelatedDocument" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="authorization" type="{urn:hl7-org:v3}POCD_MT000040.Authorization" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="componentOf" type="{urn:hl7-org:v3}POCD_MT000040.Component1" minOccurs="0"/>
- *         &lt;element name="component" type="{urn:hl7-org:v3}POCD_MT000040.Component2"/>
- *       &lt;/sequence>
- *       &lt;attribute name="ID" type="{http://www.w3.org/2001/XMLSchema}ID" />
- *       &lt;attribute name="nullFlavor" type="{urn:hl7-org:v3}NullFlavor" />
- *       &lt;attribute name="classCode" type="{urn:hl7-org:v3}ActClinicalDocument" fixed="DOCCLIN" />
- *       &lt;attribute name="moodCode" type="{urn:hl7-org:v3}ActMood" fixed="EVN" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="POCD_MT000040.ClinicalDocument"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="realmCode" type="{urn:hl7-org:v3}CS" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="typeId" type="{urn:hl7-org:v3}POCD_MT000040.InfrastructureRoot.typeId"/&gt;
+ *         &lt;element name="templateId" type="{urn:hl7-org:v3}II" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="id" type="{urn:hl7-org:v3}II"/&gt;
+ *         &lt;element name="code" type="{urn:hl7-org:v3}CE"/&gt;
+ *         &lt;element name="title" type="{urn:hl7-org:v3}ST" minOccurs="0"/&gt;
+ *         &lt;element name="effectiveTime" type="{urn:hl7-org:v3}TS"/&gt;
+ *         &lt;element name="confidentialityCode" type="{urn:hl7-org:v3}CE"/&gt;
+ *         &lt;element name="languageCode" type="{urn:hl7-org:v3}CS" minOccurs="0"/&gt;
+ *         &lt;element name="setId" type="{urn:hl7-org:v3}II" minOccurs="0"/&gt;
+ *         &lt;element name="versionNumber" type="{urn:hl7-org:v3}INT" minOccurs="0"/&gt;
+ *         &lt;element name="copyTime" type="{urn:hl7-org:v3}TS" minOccurs="0"/&gt;
+ *         &lt;element name="recordTarget" type="{urn:hl7-org:v3}POCD_MT000040.RecordTarget" maxOccurs="unbounded"/&gt;
+ *         &lt;element name="author" type="{urn:hl7-org:v3}POCD_MT000040.Author" maxOccurs="unbounded"/&gt;
+ *         &lt;element name="dataEnterer" type="{urn:hl7-org:v3}POCD_MT000040.DataEnterer" minOccurs="0"/&gt;
+ *         &lt;element name="informant" type="{urn:hl7-org:v3}POCD_MT000040.Informant12" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="custodian" type="{urn:hl7-org:v3}POCD_MT000040.Custodian"/&gt;
+ *         &lt;element name="informationRecipient" type="{urn:hl7-org:v3}POCD_MT000040.InformationRecipient" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="legalAuthenticator" type="{urn:hl7-org:v3}POCD_MT000040.LegalAuthenticator" minOccurs="0"/&gt;
+ *         &lt;element name="authenticator" type="{urn:hl7-org:v3}POCD_MT000040.Authenticator" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="participant" type="{urn:hl7-org:v3}POCD_MT000040.Participant1" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="inFulfillmentOf" type="{urn:hl7-org:v3}POCD_MT000040.InFulfillmentOf" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="documentationOf" type="{urn:hl7-org:v3}POCD_MT000040.DocumentationOf" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="relatedDocument" type="{urn:hl7-org:v3}POCD_MT000040.RelatedDocument" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="authorization" type="{urn:hl7-org:v3}POCD_MT000040.Authorization" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="componentOf" type="{urn:hl7-org:v3}POCD_MT000040.Component1" minOccurs="0"/&gt;
+ *         &lt;element name="component" type="{urn:hl7-org:v3}POCD_MT000040.Component2"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="ID" type="{http://www.w3.org/2001/XMLSchema}ID" /&gt;
+ *       &lt;attribute name="nullFlavor" type="{urn:hl7-org:v3}NullFlavor" /&gt;
+ *       &lt;attribute name="classCode" type="{urn:hl7-org:v3}ActClinicalDocument" fixed="DOCCLIN" /&gt;
+ *       &lt;attribute name="moodCode" type="{urn:hl7-org:v3}ActMood" fixed="EVN" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

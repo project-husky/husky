@@ -16,12 +16,7 @@ import org.husky.xua.saml2.impl.AssertionBuilderImpl;
 import org.w3c.dom.Element;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Class implementing the corresponding interface Deserializer<Assertion> .</div>
- * <div class="de">Die Klasse implementiert das entsprechende Interface Deserializer<Assertion> .</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Class implementing the corresponding interface {@code Deserializer<Assertion>}.
  */
 public class AssertionDeserializerImpl
 		extends AbstractDeserializerImpl<org.opensaml.saml.saml2.core.Assertion, Assertion> {

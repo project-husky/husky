@@ -47,7 +47,7 @@ public class XdmTestUtils extends XdsTestUtils {
 	private static final DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 
 	/** The SLF4J logger instance. */
-	protected static Logger log = LoggerFactory.getLogger(XdmTestUtils.class);;
+	protected static Logger log = LoggerFactory.getLogger(XdmTestUtils.class);
 
 	public static String getTempFilePath() {
 		String tmpPath = "";

@@ -1,9 +1,18 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
 package org.husky.emed.cda.generated.artdecor;
 
 import java.util.List;
 import javax.annotation.processing.Generated;
-
-import org.husky.common.hl7cdar2.*;
+import org.husky.common.hl7cdar2.ObjectFactory;
+import org.husky.common.hl7cdar2.POCDMT000040Performer1;
 
 /**
  * cdach_other_Performer
@@ -16,11 +25,11 @@ import org.husky.common.hl7cdar2.*;
  * Version: 2020<br>
  * Status: active
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-09-08")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
 public class CdachOtherPerformer extends POCDMT000040Performer1 {
 
     public CdachOtherPerformer() {
-        super.setTypeCode(XServiceEventPerformer.PRF);
+        super.setTypeCode(org.husky.common.hl7cdar2.XServiceEventPerformer.PRF);
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.9.31"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.24.3.5"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.323"));
@@ -31,9 +40,9 @@ public class CdachOtherPerformer extends POCDMT000040Performer1 {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static II createHl7TemplateIdFixedValue(String root) {
+    private static org.husky.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        II retVal = factory.createII();
+        org.husky.common.hl7cdar2.II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -41,45 +50,44 @@ public class CdachOtherPerformer extends POCDMT000040Performer1 {
     /**
      * Gets the hl7AssignedEntity
      */
-    public POCDMT000040AssignedEntity getHl7AssignedEntity() {
+    public org.husky.common.hl7cdar2.POCDMT000040AssignedEntity getHl7AssignedEntity() {
         return assignedEntity;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<II> getHl7TemplateId() {
+    public List<org.husky.common.hl7cdar2.II> getHl7TemplateId() {
         return templateId;
     }
 
     /**
-     * Gets the hl7Time
-     * Duration of the performance.
+     * Gets the hl7Time/Duration of the performance.
      */
-    public IVLTS getHl7Time() {
+    public org.husky.common.hl7cdar2.IVLTS getHl7Time() {
         return time;
     }
 
     /**
      * Sets the hl7AssignedEntity
      */
-    public void setHl7AssignedEntity(POCDMT000040AssignedEntity value) {
+    public void setHl7AssignedEntity(org.husky.common.hl7cdar2.POCDMT000040AssignedEntity value) {
         this.assignedEntity = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(II value) {
+    public void setHl7TemplateId(org.husky.common.hl7cdar2.II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
 
     /**
-     * Sets the hl7Time
+     * Sets the hl7Time<br/>
      * Duration of the performance.
      */
-    public void setHl7Time(IVLTS value) {
+    public void setHl7Time(org.husky.common.hl7cdar2.IVLTS value) {
         this.time = value;
     }
 }

@@ -338,7 +338,7 @@ public class PdqV3QueryTest {
 		assertEquals(response.getPatients().size(),1);
 		Patient patient = response.getPatients().get(0);
 		assertEquals(patient.getCompleteName().trim(),"David Sanders");
-		assertEquals(patient.getAdministrativeGenderCode(),AdministrativeGender.MALE.getCodeValue());
+		assertEquals(patient.getAdministrativeGenderCode(),AdministrativeGender.MALE);
 		
 	} 
 

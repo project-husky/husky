@@ -15,12 +15,7 @@ import org.husky.xua.saml2.ConditionsBuilder;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionsType;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Class implementing the corresponding interface for Condition building.</div>
- * <div class="de">Die Klasse implementiert das entsprechende Interface um Conditions bilden zu k&ooml;nnen.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Class implementing the corresponding interface for Condition building.
  */
 public class ConditionsBuilderImpl implements ConditionsBuilder,
 		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Conditions, ConditionsType> {

@@ -27,13 +27,13 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ * 
  * <pre>
- * &lt;simpleType name="TemporallyPertains">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="SAS"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="TemporallyPertains"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="SAS"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "TemporallyPertains")

@@ -27,16 +27,16 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ * 
  * <pre>
- * &lt;simpleType name="ActRelationshipFulfills">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="FLFS"/>
- *     &lt;enumeration value="OCCR"/>
- *     &lt;enumeration value="OREF"/>
- *     &lt;enumeration value="SCH"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="ActRelationshipFulfills"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="FLFS"/&gt;
+ *     &lt;enumeration value="OCCR"/&gt;
+ *     &lt;enumeration value="OREF"/&gt;
+ *     &lt;enumeration value="SCH"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "ActRelationshipFulfills")

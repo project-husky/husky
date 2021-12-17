@@ -1,17 +1,26 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
 package org.husky.emed.cda.services.readers;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.husky.common.hl7cdar2.*;
-import org.husky.emed.cda.enums.DosageType;
-import org.husky.emed.cda.errors.InvalidEmedContentException;
-import org.husky.emed.cda.generated.artdecor.enums.ChEmedTimingEvent;
-import org.husky.emed.cda.generated.artdecor.enums.RouteOfAdministrationEdqm;
-import org.husky.emed.cda.models.common.MedicationDosageInstructions;
-import org.husky.emed.cda.models.common.MedicationDosageIntake;
-import org.husky.emed.cda.models.common.QuantityWithUnit;
 import org.husky.emed.cda.utils.EntryRelationshipUtils;
 import org.husky.emed.cda.utils.IvlTsUtils;
 import org.husky.emed.cda.utils.TemplateIds;
+import org.husky.emed.enums.ChEmedTimingEvent;
+import org.husky.emed.enums.DosageType;
+import org.husky.emed.enums.RouteOfAdministrationEdqm;
+import org.husky.emed.errors.InvalidEmedContentException;
+import org.husky.emed.models.common.MedicationDosageInstructions;
+import org.husky.emed.models.common.MedicationDosageIntake;
+import org.husky.emed.models.common.QuantityWithUnit;
 
 import java.math.BigInteger;
 import java.time.Instant;
@@ -22,8 +31,14 @@ import java.util.stream.Collectors;
  * A reader for CDA-CH-EMED Dosage Instructions Content Module (1.3.6.1.4.1.19376.1.9.1.3.6).
  *
  * <p>The following elements part of the Dosage Instructions:
- * - Prescription Item Entry Additional Template ID - Effective Time (Duration of Treatment) - Medication Frequency -
- * Route of Administration - Approach Site Code - Dose Quantity - Rate Quantity - Related Components
+ * <li> Prescription Item Entry Additional Template ID
+ * <li> Effective Time (Duration of Treatment)
+ * <li> Medication Frequency
+ * <li> Route of Administration
+ * <li> Approach Site Code
+ * <li> Dose Quantity
+ * <li> Rate Quantity
+ * <li> Related Components
  *
  * @author Quentin Ligier
  */
@@ -140,9 +155,9 @@ public class DosageInstructionsReader {
                 this.getEffectiveStopTime().orElse(null)
         );
 
-        if (this.getDosageType() == DosageType.Normal) {
+        if (this.getDosageType() == DosageType.NORMAL) {
             instructions.getIntakes().addAll(this.getIntakes(this.subAdm));
-        } else if (this.getDosageType() == DosageType.Split) {
+        } else if (this.getDosageType() == DosageType.SPLIT) {
             this.subAdm.getEntryRelationship().stream()
                     .filter(er -> er.getTypeCode() == XActRelationshipEntryRelationship.COMP)
                     .filter(er -> er.getSequenceNumber() != null)
@@ -196,9 +211,9 @@ public class DosageInstructionsReader {
             throw new InvalidEmedContentException("No or multiple dosage type template IDs found");
         }
         if (templateIds.contains(TemplateIds.DOSAGE_TYPE_NORMAL)) {
-            return DosageType.Normal;
+            return DosageType.NORMAL;
         } else if (templateIds.contains(TemplateIds.DOSAGE_TYPE_SPLIT)) {
-            return DosageType.Split;
+            return DosageType.SPLIT;
         } else {
             throw new InvalidEmedContentException("The dosage type isn't supported yet");
         }

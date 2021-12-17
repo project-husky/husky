@@ -498,7 +498,7 @@
 		<repository>
 			<id>mvnrepository.com</id>
 			<name>MVN Repository</name>
-			<url>http://mvnrepository.com/artifact/</url>
+			<url>https://mvnrepository.com/artifact/</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
@@ -506,10 +506,6 @@
 		<repository>
 			<id>Shibboleth repo</id>
 			<url>https://build.shibboleth.net/nexus/content/repositories/releases</url>
-		</repository>
-		<repository>
-			<id>local-repo</id>
-			<url>file://${project.basedir}/lib/repo</url>
 		</repository>
 	</repositories>
 
@@ -672,6 +668,12 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.3.1</version>
+
 			</plugin>
 
 			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-javadoc-plugin</artifactId> 

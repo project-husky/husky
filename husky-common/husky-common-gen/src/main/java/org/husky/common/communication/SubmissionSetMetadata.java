@@ -97,7 +97,7 @@ public class SubmissionSetMetadata {
 	/**
 	 * Constructor with IPF SubmissionSet object.
 	 *
-	 * @param ohtSubmissionSet the IPF submission set object
+	 * @param submissionSet the IPF submission set object
 	 */
 	public SubmissionSetMetadata(SubmissionSet submissionSet) {
 		this.s = submissionSet;

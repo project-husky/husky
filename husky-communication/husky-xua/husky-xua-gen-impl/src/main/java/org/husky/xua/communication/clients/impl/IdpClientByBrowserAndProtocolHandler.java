@@ -10,7 +10,6 @@
  */
 package org.husky.xua.communication.clients.impl;
 
-import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -18,12 +17,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URI;
 import java.nio.file.Files;
 import java.util.Base64;
 import java.util.Calendar;
 
-import org.husky.common.utils.Util;
 import org.husky.xua.authentication.AuthnRequest;
 import org.husky.xua.communication.clients.IdpClient;
 import org.husky.xua.communication.config.impl.IdpClientByBrowserAndProtocolHandlerConfigImpl;
@@ -46,9 +43,9 @@ import org.slf4j.LoggerFactory;
  */
 public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 
-	private IdpClientByBrowserAndProtocolHandlerConfigImpl config;
+	private final IdpClientByBrowserAndProtocolHandlerConfigImpl config;
 
-	private Logger logger = LoggerFactory.getLogger(getClass());
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	public IdpClientByBrowserAndProtocolHandler(
 			IdpClientByBrowserAndProtocolHandlerConfigImpl clientConfiguration) {
@@ -139,45 +136,12 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 					config.getProtocolHandlerName() + ".io");			
 			Files.deleteIfExists(tempFile.toPath());
 			final var htmlFile = getHtmlFormPage(aAuthnRequest);
-			startBrowser(htmlFile.toURI());
+			logger.info("Please open {} in your browser", htmlFile.toURI());
 
 			return startWaitForResponse(tempFile);
 
 		} catch (final Exception t) {
 			throw new ClientSendException(t);
-		}
-	}
-
-	private void startBrowser(URI requestUri) {
-		try {
-			if (Desktop.isDesktopSupported()
-					&& Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-				final var desktop = Desktop.getDesktop();
-				desktop.browse(requestUri);
-			} else {
-				if (Util.isWindows()) {
-					Runtime.getRuntime().exec("cmd /c start " + requestUri);
-				} else if (Util.isUnix()) {
-					final String[] browsers = { "epiphany", "firefox", "mozilla", "konqueror",
-							"netscape", "opera", "links", "lynx" };
-
-					final var cmd = new StringBuilder();
-					for (var i = 0; i < browsers.length; i++) {
-						if (i == 0)
-							cmd.append(String.format("%s \"%s\"", browsers[i], requestUri));
-						else
-							cmd.append(String.format(" || %s \"%s\"", browsers[i], requestUri));
-						// If the first didn't work, try the next browser and so
-						// on
-					}
-					Runtime.getRuntime().exec(new String[] { "sh", "-c", cmd.toString() });
-				} else if (Util.isMac()) {
-					final String command = "open " + requestUri;
-					Runtime.getRuntime().exec(command);
-				}
-			}
-		} catch (final Exception t) {
-			logger.error("An error occured starting the browser.", t);
 		}
 	}
 

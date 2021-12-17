@@ -32,56 +32,56 @@ import java.util.List;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="StrucDoc.Table">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="caption" type="{urn:hl7-org:v3}StrucDoc.Caption" minOccurs="0"/>
- *         &lt;choice>
- *           &lt;element name="col" type="{urn:hl7-org:v3}StrucDoc.Col" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element name="colgroup" type="{urn:hl7-org:v3}StrucDoc.Colgroup" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;/choice>
- *         &lt;element name="thead" type="{urn:hl7-org:v3}StrucDoc.Thead" minOccurs="0"/>
- *         &lt;element name="tfoot" type="{urn:hl7-org:v3}StrucDoc.Tfoot" minOccurs="0"/>
- *         &lt;element name="tbody" type="{urn:hl7-org:v3}StrucDoc.Tbody" maxOccurs="unbounded"/>
- *       &lt;/sequence>
- *       &lt;attribute name="ID" type="{http://www.w3.org/2001/XMLSchema}ID" />
- *       &lt;attribute name="language" type="{http://www.w3.org/2001/XMLSchema}NMTOKEN" />
- *       &lt;attribute name="styleCode" type="{http://www.w3.org/2001/XMLSchema}NMTOKENS" />
- *       &lt;attribute name="summary" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="width" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="border" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="frame">
- *         &lt;simpleType>
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}NMTOKEN">
- *             &lt;enumeration value="void"/>
- *             &lt;enumeration value="above"/>
- *             &lt;enumeration value="below"/>
- *             &lt;enumeration value="hsides"/>
- *             &lt;enumeration value="lhs"/>
- *             &lt;enumeration value="rhs"/>
- *             &lt;enumeration value="vsides"/>
- *             &lt;enumeration value="box"/>
- *             &lt;enumeration value="border"/>
- *           &lt;/restriction>
- *         &lt;/simpleType>
+ * &lt;complexType name="StrucDoc.Table"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="caption" type="{urn:hl7-org:v3}StrucDoc.Caption" minOccurs="0"/&gt;
+ *         &lt;choice&gt;
+ *           &lt;element name="col" type="{urn:hl7-org:v3}StrucDoc.Col" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *           &lt;element name="colgroup" type="{urn:hl7-org:v3}StrucDoc.Colgroup" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;/choice&gt;
+ *         &lt;element name="thead" type="{urn:hl7-org:v3}StrucDoc.Thead" minOccurs="0"/&gt;
+ *         &lt;element name="tfoot" type="{urn:hl7-org:v3}StrucDoc.Tfoot" minOccurs="0"/&gt;
+ *         &lt;element name="tbody" type="{urn:hl7-org:v3}StrucDoc.Tbody" maxOccurs="unbounded"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="ID" type="{http://www.w3.org/2001/XMLSchema}ID" /&gt;
+ *       &lt;attribute name="language" type="{http://www.w3.org/2001/XMLSchema}NMTOKEN" /&gt;
+ *       &lt;attribute name="styleCode" type="{http://www.w3.org/2001/XMLSchema}NMTOKENS" /&gt;
+ *       &lt;attribute name="summary" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="width" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="border" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="frame"&gt;
+ *         &lt;simpleType&gt;
+ *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}NMTOKEN"&gt;
+ *             &lt;enumeration value="void"/&gt;
+ *             &lt;enumeration value="above"/&gt;
+ *             &lt;enumeration value="below"/&gt;
+ *             &lt;enumeration value="hsides"/&gt;
+ *             &lt;enumeration value="lhs"/&gt;
+ *             &lt;enumeration value="rhs"/&gt;
+ *             &lt;enumeration value="vsides"/&gt;
+ *             &lt;enumeration value="box"/&gt;
+ *             &lt;enumeration value="border"/&gt;
+ *           &lt;/restriction&gt;
+ *         &lt;/simpleType&gt;
  *       &lt;/attribute>
- *       &lt;attribute name="rules">
- *         &lt;simpleType>
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}NMTOKEN">
- *             &lt;enumeration value="none"/>
- *             &lt;enumeration value="groups"/>
- *             &lt;enumeration value="rows"/>
- *             &lt;enumeration value="cols"/>
- *             &lt;enumeration value="all"/>
- *           &lt;/restriction>
- *         &lt;/simpleType>
+ *       &lt;attribute name="rules"&gt;
+ *         &lt;simpleType&gt;
+ *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}NMTOKEN"&gt;
+ *             &lt;enumeration value="none"/&gt;
+ *             &lt;enumeration value="groups"/&gt;
+ *             &lt;enumeration value="rows"/&gt;
+ *             &lt;enumeration value="cols"/&gt;
+ *             &lt;enumeration value="all"/&gt;
+ *           &lt;/restriction&gt;
+ *         &lt;/simpleType&gt;
  *       &lt;/attribute>
- *       &lt;attribute name="cellspacing" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="cellpadding" type="{http://www.w3.org/2001/XMLSchema}string" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ *       &lt;attribute name="cellspacing" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="cellpadding" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

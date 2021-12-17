@@ -17,12 +17,7 @@ import org.husky.xua.wssecurity.impl.UsernameTokenImpl;
 import org.w3c.dom.Element;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Implementation class of Serializer<UsernameToken</div>
- * <div class="de">Implementations Klasse von Serializer<UsernameToken</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Implementation class of {@code Serializer<UsernameToken>}.
  */
 public class UsernameTokenSerializerImpl extends AbstractSerializerImpl
 		implements Serializer<UsernameToken> {

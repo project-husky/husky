@@ -1,14 +1,21 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
 package org.husky.emed.cda.generated.artdecor;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
-
-import org.husky.common.hl7cdar2.*;
+import org.husky.common.basetypes.CodeBaseType;
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040Observation;
-import org.husky.emed.cda.models.common.Code;
-import org.husky.emed.cda.models.common.basetypes.CodeBaseType;
+import org.husky.common.model.Code;
 
 /**
  * PharmaceuticalAdviceItemEntryContentModule
@@ -20,11 +27,11 @@ import org.husky.emed.cda.models.common.basetypes.CodeBaseType;
  * Version: 2020<br>
  * Status: draft
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-09-08")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
 public class PharmaceuticalAdviceItemEntryContentModule extends POCDMT000040Observation {
 
     public PharmaceuticalAdviceItemEntryContentModule() {
-        super.setMoodCode(XActMoodDocumentObservation.EVN);
+        super.setMoodCode(org.husky.common.hl7cdar2.XActMoodDocumentObservation.EVN);
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.44"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.3"));
         vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("OK").withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").build()));
@@ -42,32 +49,28 @@ public class PharmaceuticalAdviceItemEntryContentModule extends POCDMT000040Obse
     private final List<Code> vocabStatusCodeCode = new ArrayList<>();
 
     /**
-     * Adds a hl7Id
-     * Pharmaceutical Advice Item ID
+     * Adds a hl7Id/Pharmaceutical Advice Item ID
      */
-    public void addHl7Id(II value) {
+    public void addHl7Id(org.husky.common.hl7cdar2.II value) {
         getId().add(value);
     }
 
     /**
-     * Adds a hl7Reference
-     * ID of parent container (Community Pharmaceutical Advice document)
+     * Adds a hl7Reference/ID of parent container (Community Pharmaceutical Advice document)
      */
-    public void addHl7Reference(POCDMT000040Reference value) {
+    public void addHl7Reference(org.husky.common.hl7cdar2.POCDMT000040Reference value) {
         getReference().add(value);
     }
 
     /**
-     * Adds a hl7Id
-     * Pharmaceutical Advice Item ID
+     * Adds a hl7Id/Pharmaceutical Advice Item ID
      */
     public void clearHl7Id() {
         getId().clear();
     }
 
     /**
-     * Adds a hl7Reference
-     * ID of parent container (Community Pharmaceutical Advice document)
+     * Adds a hl7Reference/ID of parent container (Community Pharmaceutical Advice document)
      */
     public void clearHl7Reference() {
         getReference().clear();
@@ -79,10 +82,10 @@ public class PharmaceuticalAdviceItemEntryContentModule extends POCDMT000040Obse
      * @param typeCode the desired fixed value for this argument.
      * @param inversionInd the desired fixed value for this argument.
      */
-    private static POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
+    private static org.husky.common.hl7cdar2.POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
         ObjectFactory factory = new ObjectFactory();
-        POCDMT000040EntryRelationship retVal = factory.createPOCDMT000040EntryRelationship();
-        retVal.setTypeCode(XActRelationshipEntryRelationship.fromValue(typeCode));
+        org.husky.common.hl7cdar2.POCDMT000040EntryRelationship retVal = factory.createPOCDMT000040EntryRelationship();
+        retVal.setTypeCode(org.husky.common.hl7cdar2.XActRelationshipEntryRelationship.fromValue(typeCode));
         if (inversionInd != null) {
             retVal.setInversionInd(Boolean.parseBoolean(inversionInd));
         }
@@ -94,10 +97,10 @@ public class PharmaceuticalAdviceItemEntryContentModule extends POCDMT000040Obse
      *
      * @param typeCode the desired fixed value for this argument.
      */
-    private static POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
+    private static org.husky.common.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
         ObjectFactory factory = new ObjectFactory();
-        POCDMT000040Reference retVal = factory.createPOCDMT000040Reference();
-        retVal.setTypeCode(XActRelationshipExternalReference.fromValue(typeCode));
+        org.husky.common.hl7cdar2.POCDMT000040Reference retVal = factory.createPOCDMT000040Reference();
+        retVal.setTypeCode(org.husky.common.hl7cdar2.XActRelationshipExternalReference.fromValue(typeCode));
         return retVal;
     }
 
@@ -106,98 +109,94 @@ public class PharmaceuticalAdviceItemEntryContentModule extends POCDMT000040Obse
      *
      * @param root the desired fixed value for this argument.
      */
-    private static II createHl7TemplateIdFixedValue(String root) {
+    private static org.husky.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        II retVal = factory.createII();
+        org.husky.common.hl7cdar2.II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
 
     /**
-     * Gets the hl7Author
-     * Pharmaceutical Adviser
+     * Gets the hl7Author/Pharmaceutical Adviser
      */
-    public List<POCDMT000040Author> getHl7Author() {
+    public List<org.husky.common.hl7cdar2.POCDMT000040Author> getHl7Author() {
         return author;
     }
 
     /**
-     * Gets the hl7Code
-     * Observation Code
+     * Gets the hl7Code/Observation Code
      */
-    public CD getHl7Code() {
+    public org.husky.common.hl7cdar2.CD getHl7Code() {
         return code;
     }
 
     /**
-     * Gets the hl7EffectiveTime
-     * Effective Time (Date of becoming effective)
+     * Gets the hl7EffectiveTime/Effective Time (Date of becoming effective)
      */
-    public IVLTS getHl7EffectiveTime() {
+    public org.husky.common.hl7cdar2.IVLTS getHl7EffectiveTime() {
         return effectiveTime;
     }
 
     /**
      * Gets the hl7EntryRelationship
      */
-    public List<POCDMT000040EntryRelationship> getHl7EntryRelationship() {
+    public List<org.husky.common.hl7cdar2.POCDMT000040EntryRelationship> getHl7EntryRelationship() {
         return entryRelationship;
     }
 
     /**
      * Gets the hl7StatusCode
      */
-    public CS getHl7StatusCode() {
+    public org.husky.common.hl7cdar2.CS getHl7StatusCode() {
         return statusCode;
     }
 
     /**
-     * Gets the hl7TemplateId
-     * CH-PHARM-PharmaceuticalAdviceItemEntryContentModule
+     * Gets the hl7TemplateId/CH-PHARM-PharmaceuticalAdviceItemEntryContentModule
      */
-    public List<II> getHl7TemplateId() {
+    public List<org.husky.common.hl7cdar2.II> getHl7TemplateId() {
         return templateId;
     }
 
     /**
      * Gets the hl7Text
      */
-    public ED getHl7Text() {
+    public org.husky.common.hl7cdar2.ED getHl7Text() {
         return text;
     }
 
     /**
-     * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship, filled by: "COMP", null
+     * Adds a predefined org.husky.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "COMP", null
      * @return the predefined element.
      */
-    public static POCDMT000040EntryRelationship getPredefinedEntryRelationshipCompNull() {
+    public static org.husky.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipCompNull() {
         return createHl7EntryRelationshipFixedValue("COMP",
                                                     null);
     }
 
     /**
-     * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship, filled by: "REFR", "false"
+     * Adds a predefined org.husky.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "REFR", "false"
      * @return the predefined element.
      */
-    public static POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrFalse() {
+    public static org.husky.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrFalse() {
         return createHl7EntryRelationshipFixedValue("REFR",
                                                     "false");
     }
 
     /**
-     * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040EntryRelationship, filled by: "REFR", null
+     * Adds a predefined org.husky.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "REFR", null
      * @return the predefined element.
      */
-    public static POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrNull() {
+    public static org.husky.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrNull() {
         return createHl7EntryRelationshipFixedValue("REFR",
                                                     null);
     }
 
     /**
-     * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.POCDMT000040Reference, filled by: "XCRPT"
+     * Adds a predefined org.husky.common.hl7cdar2.POCDMT000040Reference, filled by: "XCRPT"
      * @return the predefined element.
      */
-    public static POCDMT000040Reference getPredefinedReferenceXcrpt() {
+    public static org.husky.common.hl7cdar2.POCDMT000040Reference getPredefinedReferenceXcrpt() {
         return createHl7ReferenceFixedValue("XCRPT");
     }
 
@@ -216,34 +215,34 @@ public class PharmaceuticalAdviceItemEntryContentModule extends POCDMT000040Obse
     }
 
     /**
-     * Sets the hl7Author
+     * Sets the hl7Author<br/>
      * Pharmaceutical Adviser
      */
-    public void setHl7Author(POCDMT000040Author value) {
+    public void setHl7Author(org.husky.common.hl7cdar2.POCDMT000040Author value) {
         getAuthor().clear();
         getAuthor().add(value);
     }
 
     /**
-     * Sets the hl7Code
+     * Sets the hl7Code<br/>
      * Observation Code
      */
-    public void setHl7Code(CD value) {
+    public void setHl7Code(org.husky.common.hl7cdar2.CD value) {
         this.code = value;
     }
 
     /**
-     * Sets the hl7EffectiveTime
+     * Sets the hl7EffectiveTime<br/>
      * Effective Time (Date of becoming effective)
      */
-    public void setHl7EffectiveTime(IVLTS value) {
+    public void setHl7EffectiveTime(org.husky.common.hl7cdar2.IVLTS value) {
         this.effectiveTime = value;
     }
 
     /**
      * Sets the hl7EntryRelationship
      */
-    public void setHl7EntryRelationship(POCDMT000040EntryRelationship value) {
+    public void setHl7EntryRelationship(org.husky.common.hl7cdar2.POCDMT000040EntryRelationship value) {
         getEntryRelationship().clear();
         getEntryRelationship().add(value);
     }
@@ -251,15 +250,15 @@ public class PharmaceuticalAdviceItemEntryContentModule extends POCDMT000040Obse
     /**
      * Sets the hl7StatusCode
      */
-    public void setHl7StatusCode(CS value) {
+    public void setHl7StatusCode(org.husky.common.hl7cdar2.CS value) {
         this.statusCode = value;
     }
 
     /**
-     * Sets the hl7TemplateId
+     * Sets the hl7TemplateId<br/>
      * CH-PHARM-PharmaceuticalAdviceItemEntryContentModule
      */
-    public void setHl7TemplateId(II value) {
+    public void setHl7TemplateId(org.husky.common.hl7cdar2.II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
@@ -267,7 +266,7 @@ public class PharmaceuticalAdviceItemEntryContentModule extends POCDMT000040Obse
     /**
      * Sets the hl7Text
      */
-    public void setHl7Text(ED value) {
+    public void setHl7Text(org.husky.common.hl7cdar2.ED value) {
         this.text = value;
     }
 }

@@ -26,16 +26,16 @@ import javax.xml.bind.annotation.*;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="PPD_PQ">
- *   &lt;complexContent>
- *     &lt;extension base="{urn:hl7-org:v3}PQ">
- *       &lt;sequence>
- *         &lt;element name="standardDeviation" type="{urn:hl7-org:v3}PQ" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute name="distributionType" type="{urn:hl7-org:v3}ProbabilityDistributionType" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="PPD_PQ"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{urn:hl7-org:v3}PQ"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="standardDeviation" type="{urn:hl7-org:v3}PQ" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="distributionType" type="{urn:hl7-org:v3}ProbabilityDistributionType" /&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

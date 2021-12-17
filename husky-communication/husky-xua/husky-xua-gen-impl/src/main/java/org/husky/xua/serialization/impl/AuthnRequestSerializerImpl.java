@@ -17,12 +17,7 @@ import org.husky.xua.serialization.Serializer;
 import org.w3c.dom.Element;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Implementation class of Serializer<AuthnRequest></div>
- * <div class="de">Implementations Klasse von Serializer<AuthnRequest></div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Implementation class of {@code Serializer<AuthnRequest>}.
  */
 public class AuthnRequestSerializerImpl extends AbstractSerializerImpl
 		implements Serializer<AuthnRequest> {

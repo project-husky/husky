@@ -17,13 +17,7 @@ import org.husky.xua.saml2.SubjectConfirmationBuilder;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConfirmationType;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Class implementing the corresponding interface for SubjectConfirmation building.</div>
- * <div class="de">Die Klasse implementiert das entsprechende Interface um SubjectConfirmation bilden zu k&ooml;nnen.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
- *
+ * Class implementing the corresponding interface for SubjectConfirmation building.
  */
 public class SubjectConfirmationBuilderImpl implements SubjectConfirmationBuilder,
 		SecurityObjectBuilder<org.opensaml.saml.saml2.core.SubjectConfirmation, SubjectConfirmationType> {

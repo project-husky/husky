@@ -35,17 +35,17 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="CR">
- *   &lt;complexContent>
- *     &lt;extension base="{urn:hl7-org:v3}ANY">
- *       &lt;sequence>
- *         &lt;element name="name" type="{urn:hl7-org:v3}CV" minOccurs="0"/>
- *         &lt;element name="value" type="{urn:hl7-org:v3}CD" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute name="inverted" type="{urn:hl7-org:v3}bn" default="false" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="CR"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{urn:hl7-org:v3}ANY"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="name" type="{urn:hl7-org:v3}CV" minOccurs="0"/&gt;
+ *         &lt;element name="value" type="{urn:hl7-org:v3}CD" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="inverted" type="{urn:hl7-org:v3}bn" default="false" /&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

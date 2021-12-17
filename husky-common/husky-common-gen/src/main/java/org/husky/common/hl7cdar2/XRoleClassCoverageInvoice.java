@@ -27,14 +27,14 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ * 
  * <pre>
- * &lt;simpleType name="x_RoleClassCoverageInvoice">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="PAYEE"/>
- *     &lt;enumeration value="PAYOR"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="x_RoleClassCoverageInvoice"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="PAYEE"/&gt;
+ *     &lt;enumeration value="PAYOR"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "x_RoleClassCoverageInvoice")

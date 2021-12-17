@@ -20,13 +20,7 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.protocol.ResponseType
 import org.opensaml.saml.saml2.core.Response;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Class implementing the interfaces PrivacyPolicyQueryResponseBuilder and SecurityObjectBuilder.</div>
- * <div class="de">Klasse welche das Interface PrivacyPolicyQueryResponseBuilder and SecurityObjectBuilder implementiert.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->/div>
- * <!-- @formatter:on -->
+ * Class implementing the interfaces PrivacyPolicyQueryResponseBuilder and SecurityObjectBuilder.
  */
 public class PrivacyPolicyQueryResponseBuilderImpl implements PrivacyPolicyQueryResponseBuilder,
 		SecurityObjectBuilder<Response, PrivacyPolicyQueryResponse> {

@@ -29,7 +29,7 @@ public class EprPolicyRepositoryResponseBuilderImplTest extends InitializerTestH
 
 	/**
 	 * Test method for
-	 * {@link org.husky.xua.ch.epr.policyadmin.impl.EprPolicyRepositoryResponseBuilderImpl#status(java.lang.String)}.
+	 * {@link org.husky.communication.ch.ppq.epr.policyadmin.impl.EprPolicyRepositoryResponseBuilderImpl#status(java.lang.String)}.
 	 */
 	@Test
 	public void testStatus() {
