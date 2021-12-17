@@ -235,6 +235,8 @@ public class ValueSet implements Serializable {
 			case "9":
 				number = "Nine";
 				break;
+			default:
+				number = "";
 			}
 			number = number.toUpperCase();
 			enumName = number + "_" + enumName.substring(2, enumName.length());

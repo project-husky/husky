@@ -25,13 +25,13 @@ public interface UpdatePolicyRequest extends AssertionBasedRequest {
 	public static final String DEFAULT_ELEMENT_LOCAL_NAME = "UpdatePolicyRequest";
 
 	/** Default element name. */
-	public static final QName ELEMENT_NAME = new QName(DEFAULT_NS_URI, DEFAULT_ELEMENT_LOCAL_NAME,
-			DEFAULT_PREFIX);
+	public static final QName ELEMENT_NAME = new QName(PolicyAdministrationConstants.DEFAULT_NS_URI,
+			DEFAULT_ELEMENT_LOCAL_NAME, PolicyAdministrationConstants.DEFAULT_PREFIX);
 
 	/** Local name of the XSI type. */
 	public static final String TYPE_LOCAL_NAME = "UpdatePolicyRequest";
 
 	/** QName of the XSI type. */
-	public static final QName TYPE_NAME = new QName(DEFAULT_NS_URI, TYPE_LOCAL_NAME,
-			DEFAULT_PREFIX);
+	public static final QName TYPE_NAME = new QName(PolicyAdministrationConstants.DEFAULT_NS_URI, TYPE_LOCAL_NAME,
+			PolicyAdministrationConstants.DEFAULT_PREFIX);
 }

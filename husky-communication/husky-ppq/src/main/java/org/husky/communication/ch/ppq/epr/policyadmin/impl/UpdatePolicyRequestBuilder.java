@@ -10,8 +10,8 @@
  */
 package org.husky.communication.ch.ppq.epr.policyadmin.impl;
 
-import org.husky.communication.ch.ppq.epr.policyadmin.api.BasePolicyAdministration;
 import org.husky.communication.ch.ppq.epr.policyadmin.api.OpenSamlUpdatePolicyRequest;
+import org.husky.communication.ch.ppq.epr.policyadmin.api.PolicyAdministrationConstants;
 import org.husky.communication.ch.ppq.epr.policyadmin.api.UpdatePolicyRequest;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.opensaml.core.xml.AbstractXMLObjectBuilder;
@@ -35,8 +35,8 @@ public class UpdatePolicyRequestBuilder
 	}
 
 	public OpenSamlUpdatePolicyRequest buildObject() {
-		return buildObject(BasePolicyAdministration.DEFAULT_NS_URI, UpdatePolicyRequest.DEFAULT_ELEMENT_LOCAL_NAME,
-				BasePolicyAdministration.DEFAULT_PREFIX);
+		return buildObject(PolicyAdministrationConstants.DEFAULT_NS_URI, UpdatePolicyRequest.DEFAULT_ELEMENT_LOCAL_NAME,
+				PolicyAdministrationConstants.DEFAULT_PREFIX);
 	}
 
 	@Override

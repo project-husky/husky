@@ -10,8 +10,8 @@
  */
 package org.husky.communication.ch.ppq.epr.policyadmin.impl;
 
-import org.husky.communication.ch.ppq.epr.policyadmin.api.BasePolicyAdministration;
 import org.husky.communication.ch.ppq.epr.policyadmin.api.OpenSamlUnknownPolicySetId;
+import org.husky.communication.ch.ppq.epr.policyadmin.api.PolicyAdministrationConstants;
 import org.husky.communication.ch.ppq.epr.policyadmin.api.UnknownPolicySetId;
 import org.husky.communication.ch.ppq.epr.policyadmin.api.UnknownPolicySetIdBuilder;
 import org.opensaml.core.xml.AbstractXMLObjectBuilder;
@@ -30,8 +30,8 @@ public class UnknownPolicySetIdBuilderImpl extends
 	private String message;
 
 	public OpenSamlUnknownPolicySetId buildObject() {
-		return buildObject(BasePolicyAdministration.DEFAULT_NS_URI, UnknownPolicySetId.DEFAULT_ELEMENT_LOCAL_NAME,
-				BasePolicyAdministration.DEFAULT_PREFIX);
+		return buildObject(PolicyAdministrationConstants.DEFAULT_NS_URI, UnknownPolicySetId.DEFAULT_ELEMENT_LOCAL_NAME,
+				PolicyAdministrationConstants.DEFAULT_PREFIX);
 	}
 
 	@Override

@@ -10,9 +10,9 @@
  */
 package org.husky.communication.ch.ppq.epr.policyadmin.impl;
 
-import org.husky.communication.ch.ppq.epr.policyadmin.api.BasePolicyAdministration;
 import org.husky.communication.ch.ppq.epr.policyadmin.api.DeletePolicyRequest;
 import org.husky.communication.ch.ppq.epr.policyadmin.api.OpenSamlDeletePolicyRequest;
+import org.husky.communication.ch.ppq.epr.policyadmin.api.PolicyAdministrationConstants;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.opensaml.core.xml.AbstractXMLObjectBuilder;
 
@@ -35,8 +35,8 @@ public class DeletePolicyRequestBuilder
 	}
 
 	public OpenSamlDeletePolicyRequest buildObject() {
-		return buildObject(BasePolicyAdministration.DEFAULT_NS_URI, DeletePolicyRequest.DEFAULT_ELEMENT_LOCAL_NAME,
-				BasePolicyAdministration.DEFAULT_PREFIX);
+		return buildObject(PolicyAdministrationConstants.DEFAULT_NS_URI, DeletePolicyRequest.DEFAULT_ELEMENT_LOCAL_NAME,
+				PolicyAdministrationConstants.DEFAULT_PREFIX);
 	}
 
 	@Override
