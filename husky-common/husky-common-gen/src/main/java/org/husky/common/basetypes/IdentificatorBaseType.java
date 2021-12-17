@@ -75,8 +75,7 @@ public class IdentificatorBaseType implements Serializable {
 		/**
 		 * With assigning authority name.
 		 *
-		 * @param assigningAuthorityName
-		 *            the assigning authority name
+		 * @param assigningAuthorityName the assigning authority name
 		 * @return the builder
 		 */
 		public Builder withAssigningAuthorityName(String assigningAuthorityName) {
@@ -87,8 +86,7 @@ public class IdentificatorBaseType implements Serializable {
 		/**
 		 * With displayable.
 		 *
-		 * @param displayable
-		 *            the displayable
+		 * @param displayable the displayable
 		 * @return the builder
 		 */
 		public Builder withDisplayable(Boolean displayable) {
@@ -99,8 +97,7 @@ public class IdentificatorBaseType implements Serializable {
 		/**
 		 * With extension.
 		 *
-		 * @param extension
-		 *            the extension
+		 * @param extension the extension
 		 * @return the builder
 		 */
 		public Builder withExtension(String extension) {
@@ -111,8 +108,7 @@ public class IdentificatorBaseType implements Serializable {
 		/**
 		 * With null flavor.
 		 *
-		 * @param nullFlavor
-		 *            the null flavor
+		 * @param nullFlavor the null flavor
 		 * @return the builder
 		 */
 		public Builder withNullFlavor(NullFlavor nullFlavor) {
@@ -123,8 +119,7 @@ public class IdentificatorBaseType implements Serializable {
 		/**
 		 * With root.
 		 *
-		 * @param root
-		 *            the root
+		 * @param root the root
 		 * @return the builder
 		 */
 		public Builder withRoot(String root) {
@@ -174,8 +169,7 @@ public class IdentificatorBaseType implements Serializable {
 	/**
 	 * Instantiates a new identificator base type.
 	 *
-	 * @param builder
-	 *            the builder
+	 * @param builder the builder
 	 */
 	@Generated("SparkTools")
 	private IdentificatorBaseType(Builder builder) {
@@ -190,11 +184,10 @@ public class IdentificatorBaseType implements Serializable {
 	 * <div class="en">Checks whether the two objects are equal (based on their
 	 * content).</div>
 	 *
-	 * <div class="de">Prüft, ob die beiden Objekte gleich sind (basierend auf
-	 * ihrem Inhalt).</div>
+	 * <div class="de">Prüft, ob die beiden Objekte gleich sind (basierend auf ihrem
+	 * Inhalt).</div>
 	 *
-	 * @param obj
-	 *            the IdentificatorBaseType to compare
+	 * @param obj the IdentificatorBaseType to compare
 	 * @return true, if equal; false otherwise.
 	 */
 	@Override
@@ -204,6 +197,21 @@ public class IdentificatorBaseType implements Serializable {
 			return false;
 		if (!(obj instanceof IdentificatorBaseType))
 			return false;
+
+		if (this.extension == null) {
+			retVal = (((IdentificatorBaseType) obj).getExtension() == null);
+		} else {
+			retVal = this.extension.equals(((IdentificatorBaseType) obj).getExtension());
+		}
+
+		if (retVal) {
+			if (this.root == null) {
+				retVal = (((IdentificatorBaseType) obj).getRoot() == null);
+			} else {
+				retVal = this.root.equals(((IdentificatorBaseType) obj).getRoot());
+			}
+		}
+
 		// only business rules are applied, here. rest was initially implemented
 		// and stays here for future use. If you use it, you need to imnplement
 		// another method and not change the currenty methos.
@@ -216,21 +224,6 @@ public class IdentificatorBaseType implements Serializable {
 		// }
 		// if (retVal)
 		// retVal = (this.displayable == obj.isDisplayable());
-		if (retVal) {
-			if (this.extension == null) {
-				retVal = (((IdentificatorBaseType) obj).getExtension() == null);
-			} else {
-				retVal = this.extension.equals(((IdentificatorBaseType) obj).getExtension());
-			}
-		}
-
-		if (retVal) {
-			if (this.root == null) {
-				retVal = (((IdentificatorBaseType) obj).getRoot() == null);
-			} else {
-				retVal = this.root.equals(((IdentificatorBaseType) obj).getRoot());
-			}
-		}
 
 		return retVal;
 	}
@@ -247,11 +240,11 @@ public class IdentificatorBaseType implements Serializable {
 	}
 
 	/**
-	 * <div class="en">Gets the extension. A character string as a unique
-	 * identifier within the scope of the identifier root.</div>
+	 * <div class="en">Gets the extension. A character string as a unique identifier
+	 * within the scope of the identifier root.</div>
 	 *
-	 * <div class="de">Ruft die Erweiterung ab. Eine, innerhalb der Domäne
-	 * (root) eindeutige Zeichenfolge.</div>
+	 * <div class="de">Ruft die Erweiterung ab. Eine, innerhalb der Domäne (root)
+	 * eindeutige Zeichenfolge.</div>
 	 *
 	 * @return the extension
 	 */
@@ -271,10 +264,10 @@ public class IdentificatorBaseType implements Serializable {
 	}
 
 	/**
-	 * <div class="en">Gets the OID or UUID of the domain. A unique identifier
-	 * that guarantees the global uniqueness of the instance identifier. The
-	 * root alone may be the entire instance identifier (e.g. UUID without
-	 * further definition by the extension).</div>
+	 * <div class="en">Gets the OID or UUID of the domain. A unique identifier that
+	 * guarantees the global uniqueness of the instance identifier. The root alone
+	 * may be the entire instance identifier (e.g. UUID without further definition
+	 * by the extension).</div>
 	 *
 	 * <div class="de">Ruft die OID oder UUID der Domäne ab. Ein eindeutiger
 	 * Bezeichner, der die globale Eindeutigkeit der Domäne garantiert. Die Root
@@ -304,13 +297,12 @@ public class IdentificatorBaseType implements Serializable {
 
 	/**
 	 * <div class="en">Checks if is displayable. Specifies if the identifier is
-	 * intended for human display and data entry (displayable = true) as opposed
-	 * to pure machine interoperation (displayable = false).</div>
+	 * intended for human display and data entry (displayable = true) as opposed to
+	 * pure machine interoperation (displayable = false).</div>
 	 *
 	 * <div class="de">Prüft, ob anzeigbar. Gibt an, ob der Bezeichner für die
-	 * Anzeige und Dateneingabe durch den Benutzer vorgesehen ist (anzeigbar =
-	 * true) und nicht für die reine Maschineninteraktion (anzeigbar =
-	 * false).</div>
+	 * Anzeige und Dateneingabe durch den Benutzer vorgesehen ist (anzeigbar = true)
+	 * und nicht für die reine Maschineninteraktion (anzeigbar = false).</div>
 	 *
 	 * @return true, if is displayable
 	 */
@@ -321,8 +313,8 @@ public class IdentificatorBaseType implements Serializable {
 	/**
 	 * <div class="en">Checks if the current instance is null flavored.</div>
 	 *
-	 * <div class="de">Überprüft, ob die aktuelle Instanz mit Null-Flavor
-	 * versehen ist.</div>
+	 * <div class="de">Überprüft, ob die aktuelle Instanz mit Null-Flavor versehen
+	 * ist.</div>
 	 *
 	 * @return true, if is null flavor
 	 */
@@ -336,11 +328,10 @@ public class IdentificatorBaseType implements Serializable {
 	 * details.</div>
 	 *
 	 * <div class="de">Legt den Namen der zuständigen Herausgeberin fest. Siehe
-	 * Getter {@link IdentificatorBaseType#getAssigningAuthorityName} für
-	 * weitere Details.</div>
+	 * Getter {@link IdentificatorBaseType#getAssigningAuthorityName} für weitere
+	 * Details.</div>
 	 *
-	 * @param assigningAuthorityName
-	 *            the new assigning authority name
+	 * @param assigningAuthorityName the new assigning authority name
 	 */
 	public void setAssigningAuthorityName(String assigningAuthorityName) {
 		this.assigningAuthorityName = assigningAuthorityName;
@@ -353,8 +344,7 @@ public class IdentificatorBaseType implements Serializable {
 	 * <div class="de">Legt Setzt das Flag 'anzeigbar' fest. Siehe Getter
 	 * {@link IdentificatorBaseType#isDisplayable} für weitere Details.</div>
 	 *
-	 * @param displayable
-	 *            the new displayable
+	 * @param displayable the new displayable
 	 */
 	public void setDisplayable(Boolean displayable) {
 		this.displayable = displayable;
@@ -367,8 +357,7 @@ public class IdentificatorBaseType implements Serializable {
 	 * <div class="de">Legt die Erweiterung fest. Siehe Getter
 	 * {@link IdentificatorBaseType#getExtension} für weitere Details.</div>
 	 *
-	 * @param extension
-	 *            the new extension
+	 * @param extension the new extension
 	 */
 	public void setExtension(String extension) {
 		this.extension = extension;
@@ -379,8 +368,7 @@ public class IdentificatorBaseType implements Serializable {
 	 *
 	 * <div class="de">Legt den nullFlavor fest.</div>
 	 *
-	 * @param nullFlavor
-	 *            the new null flavor
+	 * @param nullFlavor the new null flavor
 	 */
 	public void setNullFlavor(NullFlavor nullFlavor) {
 		this.nullFlavor = nullFlavor;
@@ -393,8 +381,7 @@ public class IdentificatorBaseType implements Serializable {
 	 * <div class="de">Legt die Domäne fest. Siehe Getter
 	 * {@link IdentificatorBaseType#getRoot} für weitere Details.</div>
 	 *
-	 * @param root
-	 *            the new root
+	 * @param root the new root
 	 */
 	public void setRoot(String root) {
 		this.root = root;

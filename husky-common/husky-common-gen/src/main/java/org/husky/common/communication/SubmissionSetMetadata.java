@@ -222,8 +222,7 @@ public class SubmissionSetMetadata {
 		// Workaround for a Bug in the CDAR2Extractor, which causes a
 		// NullpointerException, if no Telecom value is inserted and
 		// logger.Debug is set to true
-		if ((author.getAuthorMdht().getAssignedAuthor().getTelecom() == null)
-				|| author.getAuthorMdht().getAssignedAuthor().getTelecom().isEmpty()) {
+		if (author.getAuthorMdht().getAssignedAuthor().getTelecom().isEmpty()) {
 			final var tel = new TEL();
 			author.getAuthorMdht().getAssignedAuthor().getTelecom().add(tel);
 		}

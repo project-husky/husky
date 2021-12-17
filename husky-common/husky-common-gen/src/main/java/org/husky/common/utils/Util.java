@@ -285,17 +285,14 @@ public class Util {
 	public static POCDMT000040AssignedAuthor createAssignedAuthorFromAssignedEntity(POCDMT000040AssignedEntity a) {
 		final var asAut = new POCDMT000040AssignedAuthor();
 		// Copy Addresses
-		if (a.getAddr() != null) {
-			asAut.getAddr().addAll(a.getAddr());
-		}
+		asAut.getAddr().addAll(a.getAddr());
+
 		// Copy Ids
-		if (a.getId() != null) {
-			asAut.getId().addAll(a.getId());
-		}
+		asAut.getId().addAll(a.getId());
+
 		// Copy Telecoms
-		if (a.getTelecom() != null) {
-			asAut.getTelecom().addAll(a.getTelecom());
-		}
+		asAut.getTelecom().addAll(a.getTelecom());
+
 		// Copy Represented Organization
 		asAut.setRepresentedOrganization(a.getRepresentedOrganization());
 
@@ -338,17 +335,14 @@ public class Util {
 	public static POCDMT000040AssignedEntity createAssignedEntityFromAssignedAuthor(POCDMT000040AssignedAuthor a) {
 		final var asEnt = new POCDMT000040AssignedEntity();
 		// Copy Addresses
-		if (a.getAddr() != null) {
-			asEnt.getAddr().addAll(a.getAddr());
-		}
+		asEnt.getAddr().addAll(a.getAddr());
+
 		// Copy Ids
-		if (a.getId() != null) {
-			asEnt.getId().addAll(a.getId());
-		}
+		asEnt.getId().addAll(a.getId());
+
 		// Copy Telecoms
-		if (a.getTelecom() != null) {
-			asEnt.getTelecom().addAll(a.getTelecom());
-		}
+		asEnt.getTelecom().addAll(a.getTelecom());
+
 		// Copy Represented Organization
 		if (a.getRepresentedOrganization() != null) {
 			asEnt.setRepresentedOrganization(a.getRepresentedOrganization());
@@ -463,8 +457,7 @@ public class Util {
 			final var on = new ON();
 			on.setXmlMixed(organization.getPrimaryName().getFullName());
 
-			if (!organization.getHl7CdaR2Pocdmt000040Organization().getName().isEmpty()
-					&& organization.getHl7CdaR2Pocdmt000040Organization().getName().get(0).getUse() != null) {
+			if (!organization.getHl7CdaR2Pocdmt000040Organization().getName().isEmpty()) {
 					on.getUse().clear();
 					for (String item : organization.getHl7CdaR2Pocdmt000040Organization().getName().get(0)
 							.getUse()) {
@@ -1325,12 +1318,7 @@ public class Util {
 
 		final var builder = new StringBuilder();
 		final Iterator<String> iter = nameList.iterator();
-		// String string = iter.next();
-		// if ("".equals(string)) {
-		// builder = new StringBuilder(iter.next());
-		// } else {
-		// builder = new StringBuilder(iter.next());
-		// }
+
 		while (iter.hasNext()) {
 			final var string = iter.next();
 			if (builder.length() > 0) {
@@ -1379,7 +1367,7 @@ public class Util {
 
 		final Logger log = LoggerFactory.getLogger(theClass);
 		log.info(
-				"{}: freeMemory: {} MB", hint, Long.toString(Util.getVmMemoryFreeInMegaBytes()));
+				"{}: freeMemory: {} MB", hint, Util.getVmMemoryFreeInMegaBytes());
 
 	}
 
@@ -1394,7 +1382,6 @@ public class Util {
 	 *             the interrupted exception
 	 */
 	public static void runExternalCommand(String cmd) throws IOException, InterruptedException {
-		// String homeDirectory = System.getProperty("user.home");
 		Process process;
 		process = Runtime.getRuntime().exec(cmd);
 		var streamGobbler = new StreamGobbler(process.getInputStream(),

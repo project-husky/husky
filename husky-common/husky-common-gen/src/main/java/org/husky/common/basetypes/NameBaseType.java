@@ -33,10 +33,10 @@ public class NameBaseType implements Serializable {
 	 *
 	 * Important Note:
 	 *
-	 * This class has a builder, generated SparkTools, but it has been adopted,
-	 * in order to fill default values for full name and usage. Thus, if you
-	 * generate the builder again, you must re-implement the changes again (use
-	 * diff to find them).
+	 * This class has a builder, generated SparkTools, but it has been adopted, in
+	 * order to fill default values for full name and usage. Thus, if you generate
+	 * the builder again, you must re-implement the changes again (use diff to find
+	 * them).
 	 *
 	 */
 
@@ -92,8 +92,7 @@ public class NameBaseType implements Serializable {
 		/**
 		 * With delimiter.
 		 *
-		 * @param delimiter
-		 *            the delimiter
+		 * @param delimiter the delimiter
 		 * @return the builder
 		 */
 		public Builder withDelimiter(String delimiter) {
@@ -104,8 +103,7 @@ public class NameBaseType implements Serializable {
 		/**
 		 * With family.
 		 *
-		 * @param family
-		 *            the family
+		 * @param family the family
 		 * @return the builder
 		 */
 		public Builder withFamily(String family) {
@@ -116,8 +114,7 @@ public class NameBaseType implements Serializable {
 		/**
 		 * With given.
 		 *
-		 * @param given
-		 *            the given
+		 * @param given the given
 		 * @return the builder
 		 */
 		public Builder withGiven(String given) {
@@ -128,8 +125,7 @@ public class NameBaseType implements Serializable {
 		/**
 		 * With name.
 		 *
-		 * @param name
-		 *            the name
+		 * @param name the name
 		 * @return the builder
 		 */
 		public Builder withName(String name) {
@@ -140,8 +136,7 @@ public class NameBaseType implements Serializable {
 		/**
 		 * With null flavor.
 		 *
-		 * @param nullFlavor
-		 *            the null flavor
+		 * @param nullFlavor the null flavor
 		 * @return the builder
 		 */
 		public Builder withNullFlavor(NullFlavor nullFlavor) {
@@ -152,8 +147,7 @@ public class NameBaseType implements Serializable {
 		/**
 		 * With prefix.
 		 *
-		 * @param prefix
-		 *            the prefix
+		 * @param prefix the prefix
 		 * @return the builder
 		 */
 		public Builder withPrefix(String prefix) {
@@ -164,8 +158,7 @@ public class NameBaseType implements Serializable {
 		/**
 		 * With suffix.
 		 *
-		 * @param suffix
-		 *            the suffix
+		 * @param suffix the suffix
 		 * @return the builder
 		 */
 		public Builder withSuffix(String suffix) {
@@ -176,8 +169,7 @@ public class NameBaseType implements Serializable {
 		/**
 		 * With usage.
 		 *
-		 * @param usage
-		 *            the usage
+		 * @param usage the usage
 		 * @return the builder
 		 */
 		public Builder withUsage(EntityNameUse usage) {
@@ -224,8 +216,7 @@ public class NameBaseType implements Serializable {
 	private EntityNameUse usage = EntityNameUse.LEGAL;
 
 	/**
-	 * <div class="en">Instantiates a new name base type. Default
-	 * constructor.</div>
+	 * <div class="en">Instantiates a new name base type. Default constructor.</div>
 	 *
 	 * <div class="de">Instanziiert einen neuen Namensbasistyp.
 	 * Standardkonstruktor.</div>
@@ -237,8 +228,7 @@ public class NameBaseType implements Serializable {
 	/**
 	 * Instantiates a new name base type.
 	 *
-	 * @param builder
-	 *            the builder
+	 * @param builder the builder
 	 */
 	@Generated("SparkTools")
 	private NameBaseType(Builder builder) {
@@ -256,11 +246,10 @@ public class NameBaseType implements Serializable {
 	 * <div class="en">Checks whether the two objects are equal (based on their
 	 * content).</div>
 	 *
-	 * <div class="de">Prüft, ob die beiden Objekte gleich sind (basierend auf
-	 * ihrem Inhalt).</div>
+	 * <div class="de">Prüft, ob die beiden Objekte gleich sind (basierend auf ihrem
+	 * Inhalt).</div>
 	 *
-	 * @param obj
-	 *            the NameType to compare
+	 * @param obj the NameType to compare
 	 * @return true, if equal; false otherwise.
 	 */
 	@Override
@@ -272,12 +261,11 @@ public class NameBaseType implements Serializable {
 		if (!(obj instanceof NameBaseType))
 			return false;
 
-		if (retVal) {
-			if (this.delimiter == null)
-				retVal = (((NameBaseType) obj).getDelimiter() == null);
-			else
-				retVal = this.delimiter.equals(((NameBaseType) obj).getDelimiter());
-		}
+		if (this.delimiter == null)
+			retVal = (((NameBaseType) obj).getDelimiter() == null);
+		else
+			retVal = this.delimiter.equals(((NameBaseType) obj).getDelimiter());
+
 		if (retVal) {
 			if (this.family == null)
 				retVal = (((NameBaseType) obj).getFamily() == null);
@@ -313,12 +301,12 @@ public class NameBaseType implements Serializable {
 
 	/**
 	 * <div class="en">Gets the name delimiter. A delimiter has no meaning other
-	 * than being literally printed in this name representation. A delimiter has
-	 * no implicit leading and trailing white space.<div>
+	 * than being literally printed in this name representation. A delimiter has no
+	 * implicit leading and trailing white space.<div>
 	 *
-	 * <div class="de">Ruft das Namens-Trennzeichen ab. Ein Trennzeichen hat
-	 * keine andere Bedeutung, als in dieser Namensdarstellung wörtlich gedruckt
-	 * zu werden. Ein Trennzeichen hat kein führendes und nachfolgendes
+	 * <div class="de">Ruft das Namens-Trennzeichen ab. Ein Trennzeichen hat keine
+	 * andere Bedeutung, als in dieser Namensdarstellung wörtlich gedruckt zu
+	 * werden. Ein Trennzeichen hat kein führendes und nachfolgendes
 	 * Leerzeichen.<div>
 	 *
 	 * @return the delimiter
@@ -329,12 +317,12 @@ public class NameBaseType implements Serializable {
 
 	/**
 	 * <div class="en">Gets the family name. This is the name that links to the
-	 * genealogy. In some cultures (e.g. Eritrea) the family name of a son is
-	 * the first name of his father.<div>
+	 * genealogy. In some cultures (e.g. Eritrea) the family name of a son is the
+	 * first name of his father.<div>
 	 *
 	 * <div class="de">Ruft den Familiennamen ab. Dies ist der Name, der auf die
-	 * Genealogie verweist. In einigen Kulturen (z. B. Eritrea) ist der
-	 * Familienname eines Sohnes der Vorname seines Vaters.<div>
+	 * Genealogie verweist. In einigen Kulturen (z. B. Eritrea) ist der Familienname
+	 * eines Sohnes der Vorname seines Vaters.<div>
 	 *
 	 * @return the family
 	 */
@@ -381,12 +369,12 @@ public class NameBaseType implements Serializable {
 	}
 
 	/**
-	 * <div class="en">Gets the given name (be careful when calling it "first
-	 * name" since this given names do not always come first).<div>
+	 * <div class="en">Gets the given name (be careful when calling it "first name"
+	 * since this given names do not always come first).<div>
 	 *
-	 * <div class="de">Ruft den Vornamen ab (English: given name. Sei
-	 * vorsichtig, ihn "first name" zu nennen, da diese Vornamen nicht immer an
-	 * erster Stelle stehen).<div>
+	 * <div class="de">Ruft den Vornamen ab (English: given name. Sei vorsichtig,
+	 * ihn "first name" zu nennen, da diese Vornamen nicht immer an erster Stelle
+	 * stehen).<div>
 	 *
 	 *
 	 * @return the given
@@ -400,9 +388,9 @@ public class NameBaseType implements Serializable {
 	 * different name parts, but if there are none, you may also set this
 	 * directly.<div>
 	 *
-	 * <div class="de">Ruft den vollständigen Namen ab. Standardmässig wird er
-	 * aus den verschiedenen Namensteilen zusammengesetzt. Wenn jedoch keine
-	 * vorhanden sind, kann er auch direkt festlegen.<div>
+	 * <div class="de">Ruft den vollständigen Namen ab. Standardmässig wird er aus
+	 * den verschiedenen Namensteilen zusammengesetzt. Wenn jedoch keine vorhanden
+	 * sind, kann er auch direkt festlegen.<div>
 	 *
 	 *
 	 * @return the name
@@ -423,8 +411,8 @@ public class NameBaseType implements Serializable {
 	}
 
 	/**
-	 * <div class="en">Gets the name prefix. A prefix has a strong association
-	 * to the immediately following name part.<div>
+	 * <div class="en">Gets the name prefix. A prefix has a strong association to
+	 * the immediately following name part.<div>
 	 *
 	 * <div class="de">Ruft den Namens-Präfix ab. Ein Präfix ist stark mit dem
 	 * unmittelbar folgenden Namensteil verknüpft.<div>
@@ -437,8 +425,8 @@ public class NameBaseType implements Serializable {
 	}
 
 	/**
-	 * <div class="en">Gets the name suffix. A suffix has a strong association
-	 * to the immediately preceding name part.<div>
+	 * <div class="en">Gets the name suffix. A suffix has a strong association to
+	 * the immediately preceding name part.<div>
 	 *
 	 * <div class="de">Ruft den Namens-Suffix ab. Ein Suffix ist stark mit dem
 	 * unmittelbar vorhergehenden Namensteil verknüpft.<div>
@@ -451,11 +439,11 @@ public class NameBaseType implements Serializable {
 	}
 
 	/**
-	 * <div class="en">Gets the name usage. Gets the type of usage (legal,
-	 * artist, pseudonym, ...).<div>
+	 * <div class="en">Gets the name usage. Gets the type of usage (legal, artist,
+	 * pseudonym, ...).<div>
 	 *
-	 * <div class="de">Ruft die Verwendung des Namens ab (legaler Name,
-	 * Künstler, Pseudonym, ...).<div>
+	 * <div class="de">Ruft die Verwendung des Namens ab (legaler Name, Künstler,
+	 * Pseudonym, ...).<div>
 	 *
 	 *
 	 * @return the usage
@@ -483,8 +471,8 @@ public class NameBaseType implements Serializable {
 	/**
 	 * <div class="en">Checks if the current instance is null flavored.</div>
 	 *
-	 * <div class="de">Überprüft, ob die aktuelle Instanz mit Null-Flavor
-	 * versehen ist.</div>
+	 * <div class="de">Überprüft, ob die aktuelle Instanz mit Null-Flavor versehen
+	 * ist.</div>
 	 *
 	 * @return true, if is null flavor
 	 */
@@ -494,16 +482,15 @@ public class NameBaseType implements Serializable {
 
 	/**
 	 * <div class="en">Sets the name delimiter. A delimiter has no meaning other
-	 * than being literally printed in this name representation. A delimiter has
-	 * no implicit leading and trailing white space.<div>
+	 * than being literally printed in this name representation. A delimiter has no
+	 * implicit leading and trailing white space.<div>
 	 *
-	 * <div class="de">Legt das Namens-Trennzeichen fest. Ein Trennzeichen hat
-	 * keine andere Bedeutung, als in dieser Namensdarstellung wörtlich gedruckt
-	 * zu werden. Ein Trennzeichen hat kein führendes und nachfolgendes
+	 * <div class="de">Legt das Namens-Trennzeichen fest. Ein Trennzeichen hat keine
+	 * andere Bedeutung, als in dieser Namensdarstellung wörtlich gedruckt zu
+	 * werden. Ein Trennzeichen hat kein führendes und nachfolgendes
 	 * Leerzeichen.<div>
 	 *
-	 * @param delimiter
-	 *            the new delimiter
+	 * @param delimiter the new delimiter
 	 */
 	public void setDelimiter(String delimiter) {
 		this.delimiter = delimiter;
@@ -512,15 +499,14 @@ public class NameBaseType implements Serializable {
 
 	/**
 	 * <div class="en">Sets the family name. This is the name that links to the
-	 * genealogy. In some cultures (e.g. Eritrea) the family name of a son is
-	 * the first name of his father.<div>
+	 * genealogy. In some cultures (e.g. Eritrea) the family name of a son is the
+	 * first name of his father.<div>
 	 *
-	 * <div class="de">Legt den Familiennamen fest. Dies ist der Name, der auf
-	 * die Genealogie verweist. In einigen Kulturen (z. B. Eritrea) ist der
-	 * Familienname eines Sohnes der Vorname seines Vaters.<div>
+	 * <div class="de">Legt den Familiennamen fest. Dies ist der Name, der auf die
+	 * Genealogie verweist. In einigen Kulturen (z. B. Eritrea) ist der Familienname
+	 * eines Sohnes der Vorname seines Vaters.<div>
 	 *
-	 * @param family
-	 *            the new family
+	 * @param family the new family
 	 */
 	public void setFamily(String family) {
 		this.family = family;
@@ -528,15 +514,14 @@ public class NameBaseType implements Serializable {
 	}
 
 	/**
-	 * <div class="en">Sets the given name (be careful when calling it "first
-	 * name" since this given names do not always come first).<div>
+	 * <div class="en">Sets the given name (be careful when calling it "first name"
+	 * since this given names do not always come first).<div>
 	 *
-	 * <div class="de">Legt den Vornamen fest (English: given name. Sei
-	 * vorsichtig, ihn "first name" zu nennen, da diese Vornamen nicht immer an
-	 * erster Stelle stehen).<div>
+	 * <div class="de">Legt den Vornamen fest (English: given name. Sei vorsichtig,
+	 * ihn "first name" zu nennen, da diese Vornamen nicht immer an erster Stelle
+	 * stehen).<div>
 	 *
-	 * @param given
-	 *            the new given
+	 * @param given the new given
 	 */
 	public void setGiven(String given) {
 		this.given = given;
@@ -548,12 +533,11 @@ public class NameBaseType implements Serializable {
 	 * different name parts, but if there are none, you may also set this
 	 * directly.<div>
 	 *
-	 * <div class="de">Ruft den vollständigen Namen ab. Standardmässig wird er
-	 * aus den verschiedenen Namensteilen zusammengesetzt. Wenn jedoch keine
-	 * vorhanden sind, kann er auch direkt festlegen.<div>
+	 * <div class="de">Ruft den vollständigen Namen ab. Standardmässig wird er aus
+	 * den verschiedenen Namensteilen zusammengesetzt. Wenn jedoch keine vorhanden
+	 * sind, kann er auch direkt festlegen.<div>
 	 *
-	 * @param name
-	 *            the new name
+	 * @param name the new name
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -564,22 +548,20 @@ public class NameBaseType implements Serializable {
 	 *
 	 * <div class="de">Legt den nullFlavor fest.<div>
 	 *
-	 * @param nullFlavor
-	 *            the new null flavor
+	 * @param nullFlavor the new null flavor
 	 */
 	public void setNullFlavor(NullFlavor nullFlavor) {
 		this.nullFlavor = nullFlavor;
 	}
 
 	/**
-	 * <div class="en">Sets the name prefix. A prefix has a strong association
-	 * to the immediately following name part.<div>
+	 * <div class="en">Sets the name prefix. A prefix has a strong association to
+	 * the immediately following name part.<div>
 	 *
 	 * <div class="de">Legt den Namens-Präfix fest. Ein Präfix ist stark mit dem
 	 * unmittelbar folgenden Namensteil verknüpft.<div>
 	 *
-	 * @param prefix
-	 *            the new prefix
+	 * @param prefix the new prefix
 	 */
 	public void setPrefix(String prefix) {
 		this.prefix = prefix;
@@ -587,14 +569,13 @@ public class NameBaseType implements Serializable {
 	}
 
 	/**
-	 * <div class="en">Sets the name suffix. A suffix has a strong association
-	 * to the immediately preceding name part.<div>
+	 * <div class="en">Sets the name suffix. A suffix has a strong association to
+	 * the immediately preceding name part.<div>
 	 *
 	 * <div class="de">Legt den Namen-Suffix fest. Ein Suffix ist stark mit dem
 	 * unmittelbar vorhergehenden Namensteil verknüpft.<div>
 	 *
-	 * @param suffix
-	 *            the new suffix
+	 * @param suffix the new suffix
 	 */
 	public void setSuffix(String suffix) {
 		this.suffix = suffix;
@@ -602,14 +583,13 @@ public class NameBaseType implements Serializable {
 	}
 
 	/**
-	 * <div class="en">Sets the name usage. Gets the type of usage (legal,
-	 * artist, pseudonym, ...).<div>
+	 * <div class="en">Sets the name usage. Gets the type of usage (legal, artist,
+	 * pseudonym, ...).<div>
 	 *
-	 * <div class="de">Legt die Verwendung des Namens fest (legaler Name,
-	 * Künstler, Pseudonym, ...).<div>
+	 * <div class="de">Legt die Verwendung des Namens fest (legaler Name, Künstler,
+	 * Pseudonym, ...).<div>
 	 *
-	 * @param usage
-	 *            the new usage
+	 * @param usage the new usage
 	 */
 	public void setUsage(EntityNameUse usage) {
 		this.usage = usage;

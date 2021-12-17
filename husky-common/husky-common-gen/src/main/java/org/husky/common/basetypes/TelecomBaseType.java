@@ -62,8 +62,7 @@ public class TelecomBaseType implements Serializable {
 		/**
 		 * With null flavor.
 		 *
-		 * @param nullFlavor
-		 *            the null flavor
+		 * @param nullFlavor the null flavor
 		 * @return the builder
 		 */
 		public Builder withNullFlavor(NullFlavor nullFlavor) {
@@ -74,8 +73,7 @@ public class TelecomBaseType implements Serializable {
 		/**
 		 * With usage.
 		 *
-		 * @param usage
-		 *            the usage
+		 * @param usage the usage
 		 * @return the builder
 		 */
 		public Builder withUsage(TelecomAddressUse usage) {
@@ -86,8 +84,7 @@ public class TelecomBaseType implements Serializable {
 		/**
 		 * With value.
 		 *
-		 * @param value
-		 *            the value
+		 * @param value the value
 		 * @return the builder
 		 */
 		public Builder withValue(String value) {
@@ -131,8 +128,7 @@ public class TelecomBaseType implements Serializable {
 	/**
 	 * Instantiates a new telecom base type.
 	 *
-	 * @param builder
-	 *            the builder
+	 * @param builder the builder
 	 */
 	@Generated("SparkTools")
 	private TelecomBaseType(Builder builder) {
@@ -145,11 +141,10 @@ public class TelecomBaseType implements Serializable {
 	 * <div class="en">Checks whether the two objects are equal (based on their
 	 * content).</div>
 	 *
-	 * <div class="de">Prüft, ob die beiden Objekte gleich sind (basierend auf
-	 * ihrem Inhalt).</div>
+	 * <div class="de">Prüft, ob die beiden Objekte gleich sind (basierend auf ihrem
+	 * Inhalt).</div>
 	 *
-	 * @param obj
-	 *            the TelecomBaseType to compare
+	 * @param obj the TelecomBaseType to compare
 	 * @return true, if equal; false otherwise.
 	 */
 	@Override
@@ -159,12 +154,12 @@ public class TelecomBaseType implements Serializable {
 			return false;
 		if (!(obj instanceof TelecomBaseType))
 			return false;
-		if (retVal) {
-			if (this.usage == null)
-				retVal = (((TelecomBaseType) obj).getUsage() == null);
-			else
-				retVal = this.usage.equals(((TelecomBaseType) obj).getUsage());
-		}
+
+		if (this.usage == null)
+			retVal = (((TelecomBaseType) obj).getUsage() == null);
+		else
+			retVal = this.usage.equals(((TelecomBaseType) obj).getUsage());
+
 		if (retVal) {
 			if (this.value == null)
 				retVal = (((TelecomBaseType) obj).getValue() == null);
@@ -189,8 +184,8 @@ public class TelecomBaseType implements Serializable {
 	 * <div class="en">Gets the type of usage (business, private, emergency,
 	 * vacation, ...).</div>
 	 *
-	 * <div class="de">Ruft die Art der Nutzung ab (geschäftlich, privat,
-	 * Notfall, Urlaub, ...).</div>
+	 * <div class="de">Ruft die Art der Nutzung ab (geschäftlich, privat, Notfall,
+	 * Urlaub, ...).</div>
 	 *
 	 * @return the usage
 	 */
@@ -199,8 +194,8 @@ public class TelecomBaseType implements Serializable {
 	}
 
 	/**
-	 * <div class="en">Gets the value. This is the real phone number, eMail
-	 * Address, URL, ...</div>
+	 * <div class="en">Gets the value. This is the real phone number, eMail Address,
+	 * URL, ...</div>
 	 *
 	 * <div class="de">Ruft den Wert ab. Dies ist die echte Telefonnummer,
 	 * E-Mail-Adresse, URL, ...</div>
@@ -230,8 +225,8 @@ public class TelecomBaseType implements Serializable {
 	/**
 	 * <div class="en">Checks if the current instance is null flavored.</div>
 	 *
-	 * <div class="de">Überprüft, ob die aktuelle Instanz mit Null-Flavor
-	 * versehen ist.</div>
+	 * <div class="de">Überprüft, ob die aktuelle Instanz mit Null-Flavor versehen
+	 * ist.</div>
 	 *
 	 * @return true, if is null flavor
 	 */
@@ -245,8 +240,7 @@ public class TelecomBaseType implements Serializable {
 	 * <div class="de">Legt den Wert als Telefonnummer fest</div>
 	 *
 	 *
-	 * @param value
-	 *            the new phone
+	 * @param value the new phone
 	 */
 	public void setFax(String value) {
 		setValue("fax:" + value);
@@ -258,8 +252,7 @@ public class TelecomBaseType implements Serializable {
 	 * <div class="de">Legt den Wert als eMail Adresse fest</div>
 	 *
 	 *
-	 * @param value
-	 *            the new phone
+	 * @param value the new phone
 	 */
 	public void setMail(String value) {
 		setValue("mailto:" + value);
@@ -270,8 +263,7 @@ public class TelecomBaseType implements Serializable {
 	 *
 	 * <div class="de">Legt den nullFlavor fest.</div>
 	 *
-	 * @param nullFlavor
-	 *            the new null flavor
+	 * @param nullFlavor the new null flavor
 	 */
 	public void setNullFlavor(NullFlavor nullFlavor) {
 		this.nullFlavor = nullFlavor;
@@ -283,8 +275,7 @@ public class TelecomBaseType implements Serializable {
 	 * <div class="de">Legt den Wert als Telefonnummer fest</div>
 	 *
 	 *
-	 * @param value
-	 *            the new phone
+	 * @param value the new phone
 	 */
 	public void setPhone(String value) {
 		setValue("tel:" + value);
@@ -294,25 +285,23 @@ public class TelecomBaseType implements Serializable {
 	 * <div class="en">Sets the type of usage (business, private, emergency,
 	 * vacation, ...).</div>
 	 *
-	 * <div class="de">Legt die Art der Nutzung fest (geschäftlich, privat,
-	 * Notfall, Urlaub, ...).</div>
+	 * <div class="de">Legt die Art der Nutzung fest (geschäftlich, privat, Notfall,
+	 * Urlaub, ...).</div>
 	 *
-	 * @param usage
-	 *            the new usage
+	 * @param usage the new usage
 	 */
 	public void setUsage(TelecomAddressUse usage) {
 		this.usage = usage;
 	}
 
 	/**
-	 * <div class="en">Sets the value. This is the real phone number, eMail
-	 * Address, URL, ...</div>
+	 * <div class="en">Sets the value. This is the real phone number, eMail Address,
+	 * URL, ...</div>
 	 *
 	 * <div class="de">Legt den Wert fest. Dies ist die echte Telefonnummer,
 	 * E-Mail-Adresse, URL, ...</div>
 	 *
-	 * @param value
-	 *            the new value
+	 * @param value the new value
 	 */
 	public void setValue(String value) {
 		this.value = value;

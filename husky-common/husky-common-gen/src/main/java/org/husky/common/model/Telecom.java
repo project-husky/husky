@@ -94,7 +94,7 @@ public class Telecom extends TelecomBaseType {
 			if (nullFlavor != null)
 				retVal.setNullFlavor(NullFlavor.getEnum(nullFlavor));
 			else {
-				if (hl7CdaR2Value.getUse() != null && !hl7CdaR2Value.getUse().isEmpty())
+				if (!hl7CdaR2Value.getUse().isEmpty())
 						usage = hl7CdaR2Value.getUse().get(0);
 				if (usage != null)
 					retVal.setUsage(TelecomAddressUse.getEnum(usage));

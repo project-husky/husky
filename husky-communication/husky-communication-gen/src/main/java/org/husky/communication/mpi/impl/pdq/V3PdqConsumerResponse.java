@@ -38,11 +38,7 @@ public class V3PdqConsumerResponse extends V3Response {
 	 */
 	public V3PdqConsumerResponse(PRPAIN201306UV02Type pdqConsumerResponseElement) {
 
-		// convert the response to the model
-		// this.v3Message = this.getDocumentRoot(pdqConsumerResponseElement);
-
 		// if we got a pdq response
-		// if (null != this.v3Message.getPRPAIN201306UV02()) {
 		rootElement = pdqConsumerResponseElement;
 
 		// set the id
@@ -339,9 +335,7 @@ public class V3PdqConsumerResponse extends V3Response {
 			if (response) {
 				return "true";
 			}
-			if (!response) {
-				return "false";
-			}
+			return "false";
 		}
 		return null;
 	}

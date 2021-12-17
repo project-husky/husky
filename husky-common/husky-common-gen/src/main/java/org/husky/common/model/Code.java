@@ -405,10 +405,10 @@ public class Code extends CodeBaseType {
 	public Code(ValueSetEnumInterface enumValue) {
 		CodeBaseType codeBt = CodeBaseType.builder().withCode(enumValue.getCodeValue())
 				.withCodeSystem(enumValue.getCodeSystemId()).build();
-		if (enumValue.getCodeSystemName() != null && !enumValue.getCodeSystemName().isEmpty())
+		if (!enumValue.getCodeSystemName().isEmpty())
 				codeBt.setCodeSystemName(enumValue.getCodeSystemName());
 
-		if (enumValue.getDisplayName() != null && !enumValue.getDisplayName().isEmpty())
+		if (!enumValue.getDisplayName().isEmpty())
 				codeBt.setDisplayName(enumValue.getDisplayName());
 
 		initFromBaseType(codeBt);

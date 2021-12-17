@@ -397,6 +397,18 @@ public class CodeBaseType implements Serializable {
 		if (!(obj instanceof CodeBaseType))
 			return false;
 
+		if (this.code == null)
+			retVal = (((CodeBaseType) obj).getCode() == null);
+		else
+			retVal = this.code.equals(((CodeBaseType) obj).getCode());
+
+		if (retVal) {
+			if (this.codeSystem == null)
+				retVal = (((CodeBaseType) obj).getCodeSystem() == null);
+			else
+				retVal = this.codeSystem.equals(((CodeBaseType) obj).getCodeSystem());
+		}
+
 		// only business rules are applied, here. Rest was initially implemented
 		// and stays here for future use. If you use it, you need to implement
 		// another method and not change the current method.
@@ -418,18 +430,6 @@ public class CodeBaseType implements Serializable {
 		// break;
 		// }
 		// }
-		if (retVal) {
-			if (this.code == null)
-				retVal = (((CodeBaseType) obj).getCode() == null);
-			else
-				retVal = this.code.equals(((CodeBaseType) obj).getCode());
-		}
-		if (retVal) {
-			if (this.codeSystem == null)
-				retVal = (((CodeBaseType) obj).getCodeSystem() == null);
-			else
-				retVal = this.codeSystem.equals(((CodeBaseType) obj).getCodeSystem());
-		}
 		// if (retVal) {
 		// if (this.codeSystemName == null)
 		// retVal = (obj.getCodeSystemName() == null);

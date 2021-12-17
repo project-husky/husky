@@ -83,7 +83,7 @@ public class Person {
 	 */
 	public String getCompleteName() {
 		var retVal = "";
-		if (mPerson.getName() != null && !mPerson.getName().isEmpty()) {
+		if (!mPerson.getName().isEmpty()) {
 			final var name = new Name(mPerson.getName().get(0));
 			retVal = name.getFullName();
 		}
@@ -128,7 +128,7 @@ public class Person {
 	public org.openehealth.ipf.commons.ihe.xds.core.metadata.Person getIpfPerson() {
 		var person = new org.openehealth.ipf.commons.ihe.xds.core.metadata.Person();
 
-		if(mPerson.getName() != null && !mPerson.getName().isEmpty()) {
+		if (!mPerson.getName().isEmpty()) {
 			person.setName(Name.getIpfXpnName(mPerson.getName().get(0)));
 		}
 		

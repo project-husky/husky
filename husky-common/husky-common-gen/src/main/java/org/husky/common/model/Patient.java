@@ -29,7 +29,7 @@ import org.husky.common.hl7cdar2.POCDMT000040PatientRole;
 import org.husky.common.hl7cdar2.POCDMT000040RecordTarget;
 import org.husky.common.hl7cdar2.TEL;
 import org.husky.common.hl7cdar2.TS;
-import org.husky.common.utils.DateUtil;
+import org.husky.common.utils.time.DateTimes;
 
 /**
  * <div class="en">Class Patient</div>
@@ -54,8 +54,7 @@ public class Patient extends Person {
 
 	/**
 	 * The multipleBirthOrderNumber extension is used to record the order number
-	 * within a multiple birth that the recordTarget or subjectPerson was born
-	 * in.
+	 * within a multiple birth that the recordTarget or subjectPerson was born in.
 	 */
 	private Integer multipleBirthOrderNumber;
 
@@ -72,12 +71,11 @@ public class Patient extends Person {
 	private Date deceasedTime;
 
 	/**
-	 * Mother's Maiden Name Citing Keith Boone, the CDA Book p237: in CDA
-	 * Release 2.0 there is no appropriate place beneath <recordTarget> where
-	 * this information would appear instead a <participant> would need to be
-	 * added to the CDA header that identified the mother of the patient: only
-	 * use at the moment in the OHT PIX communication, for CDA no functionality
-	 * yet
+	 * Mother's Maiden Name Citing Keith Boone, the CDA Book p237: in CDA Release
+	 * 2.0 there is no appropriate place beneath <recordTarget> where this
+	 * information would appear instead a <participant> would need to be added to
+	 * the CDA header that identified the mother of the patient: only use at the
+	 * moment in the OHT PIX communication, for CDA no functionality yet
 	 */
 	private String mothersMaidenName;
 
@@ -113,12 +111,9 @@ public class Patient extends Person {
 	/**
 	 * Erstellt einen neuen Patienten.
 	 *
-	 * @param name
-	 *            Name
-	 * @param sex
-	 *            Geschlecht
-	 * @param birthDay
-	 *            Geburtsdatum
+	 * @param name     Name
+	 * @param sex      Geschlecht
+	 * @param birthDay Geburtsdatum
 	 */
 	public Patient(Name name, AdministrativeGender sex, Date birthDay) {
 		this();
@@ -133,25 +128,21 @@ public class Patient extends Person {
 
 		// Create and fill birth date
 		if (birthDay != null) {
-				mPatient.setBirthTime(DateUtil.date2TsDateOnly(birthDay));
+			mPatient.setBirthTime(DateTimes.toDateTs(birthDay.toInstant()));
 		}
 	}
 
 	/**
-	 * Erstellt einen neuen Patienten inkl. einer Patienten Id. Wenn es sich bei
-	 * dem Dokument um einen Impfausweis handelt dann MUSS dieser Konstruktor
-	 * verwendet werden.
+	 * Erstellt einen neuen Patienten inkl. einer Patienten Id. Wenn es sich bei dem
+	 * Dokument um einen Impfausweis handelt dann MUSS dieser Konstruktor verwendet
+	 * werden.
 	 *
-	 * @param name
-	 *            Name
-	 * @param sex
-	 *            Geschlecht
-	 * @param birthDay
-	 *            Geburtsdatum
-	 * @param id
-	 *            <br>
-	 *            <div class="de">ID</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 * @param name     Name
+	 * @param sex      Geschlecht
+	 * @param birthDay Geburtsdatum
+	 * @param id       <br>
+	 *                 <div class="de">ID</div> <div class="fr"></div>
+	 *                 <div class="it"></div>
 	 */
 	public Patient(Name name, AdministrativeGender sex, Date birthDay, Identificator id) {
 		// Create the RecordTarget, PatientRole and Patient
@@ -178,9 +169,8 @@ public class Patient extends Person {
 	/**
 	 * Constructor (used when deserializing CDA document).
 	 *
-	 * @param recordTarget
-	 *            <br>
-	 *            <div class="en"> record target</div>
+	 * @param recordTarget <br>
+	 *                     <div class="en"> record target</div>
 	 */
 	public Patient(POCDMT000040RecordTarget recordTarget) {
 		mRecordTarget = recordTarget;
@@ -191,20 +181,16 @@ public class Patient extends Person {
 	/**
 	 * Fügt eine Adresse hinzu.
 	 *
-	 * @param address
-	 *            Adresse
+	 * @param address Adresse
 	 */
 	public void addAddress(Address address) {
-		if (mPatientRole.getAddr() != null) {
-			mPatientRole.getAddr().add(address.getHl7CdaR2Ad());
-		}
+		mPatientRole.getAddr().add(address.getHl7CdaR2Ad());
 	}
 
 	/**
 	 * Fügt einen Identifikator hinzu.
 	 *
-	 * @param identificator
-	 *            Identificator
+	 * @param identificator Identificator
 	 */
 	public void addId(Identificator identificator) {
 		final var id = new II();
@@ -217,10 +203,9 @@ public class Patient extends Person {
 	 * <div class="en">Adds the name.</div> <div class="de"></div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @param name
-	 *            <br>
-	 *            <div class="de"> name</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 * @param name <br>
+	 *             <div class="de"> name</div> <div class="fr"></div>
+	 *             <div class="it"></div>
 	 */
 	@Override
 	public void addName(Name name) {
@@ -228,8 +213,8 @@ public class Patient extends Person {
 	}
 
 	/**
-	 * <div class="en">Gets the address.</div> <div class="de">Liefert die
-	 * (erste) Adresse</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the address.</div> <div class="de">Liefert die (erste)
+	 * Adresse</div> <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @return <div class="en">the address</div>
 	 */
@@ -294,9 +279,9 @@ public class Patient extends Person {
 	@Override
 	public String getCompleteName() {
 		var retVal = "";
-		if (mPatient.getName() != null && !mPatient.getName().isEmpty()) {
+		if (!mPatient.getName().isEmpty()) {
 			final var name = new Name(mPatient.getName().get(0));
-				retVal = name.getFullName();
+			retVal = name.getFullName();
 		}
 		return retVal;
 	}
@@ -329,8 +314,8 @@ public class Patient extends Person {
 	}
 
 	/**
-	 * <div class="en">Gets the ids.</div> <div class="de">Liefert alle
-	 * ids.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the ids.</div> <div class="de">Liefert alle ids.</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @return <div class="en">the ids</div>
 	 */
@@ -365,9 +350,8 @@ public class Patient extends Person {
 	}
 
 	/**
-	 * <div class="en">Gets the mdht record target.</div>
-	 * <div class="de">Liefert mdht record target.</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Gets the mdht record target.</div> <div class="de">Liefert
+	 * mdht record target.</div> <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @return RecordTarget <div class="en">the mdht record target</div>
 	 */
@@ -470,8 +454,7 @@ public class Patient extends Person {
 	}
 
 	/**
-	 * Indicates whether this Patient is not a human patient but a non human
-	 * subject
+	 * Indicates whether this Patient is not a human patient but a non human subject
 	 *
 	 * @return true for non human subjects, false for human patients
 	 */
@@ -485,12 +468,11 @@ public class Patient extends Person {
 	}
 
 	/**
-	 * <div class="en">Sets the gender.</div> <div class="de">Setzt
-	 * gender.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Sets the gender.</div> <div class="de">Setzt gender.</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 *
-	 * @param sex
-	 *            <div class="en">the new (administrative) gender</div>
+	 * @param sex <div class="en">the new (administrative) gender</div>
 	 *            <div class="de">das neue (administrative) Geschlecht</div>
 	 *            <div class="fr"></div> <div class="it"></div>
 	 */
@@ -502,13 +484,12 @@ public class Patient extends Person {
 	 * <div class="en">Sets the birthday.</div> <div class="de">Setzt
 	 * birthday.</div> <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @param birthDay
-	 *            <div class="en">the new birthday</div> <div class="de">das
-	 *            neue birthday.</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 * @param birthDay <div class="en">the new birthday</div> <div class="de">das
+	 *                 neue birthday.</div> <div class="fr"></div>
+	 *                 <div class="it"></div>
 	 */
 	public void setBirthday(Date birthDay) {
-		mPatient.setBirthTime(DateUtil.date2TsDateOnly(birthDay));
+		mPatient.setBirthTime(DateTimes.toDateTs(birthDay.toInstant()));
 	}
 
 	/**
@@ -520,14 +501,13 @@ public class Patient extends Person {
 	 *                 <div class="it"></div>
 	 */
 	public void setBirthday(ZonedDateTime birthDay) {
-		mPatient.setBirthTime(DateUtil.date2TsDateOnly(birthDay));
+		mPatient.setBirthTime(DateTimes.toDateTs(birthDay));
 	}
 
 	/**
 	 * Sets the deceased Indicator
 	 *
-	 * @param deceasedInd
-	 *            the new deceased ind
+	 * @param deceasedInd the new deceased ind
 	 */
 	public void setDeceasedInd(Boolean deceasedInd) {
 		this.deceasedInd = deceasedInd;
@@ -536,8 +516,7 @@ public class Patient extends Person {
 	/**
 	 * Sets the deceased time.
 	 *
-	 * @param deceasedTime
-	 *            the new deceased time
+	 * @param deceasedTime the new deceased time
 	 */
 	public void setDeceasedTime(Date deceasedTime) {
 		this.deceasedTime = deceasedTime;
@@ -546,16 +525,15 @@ public class Patient extends Person {
 	/**
 	 * Sets the employee occupation.
 	 *
-	 * @param employeeOccupation
-	 *            the new employee occupation
+	 * @param employeeOccupation the new employee occupation
 	 */
 	public void setEmployeeOccupation(String employeeOccupation) {
 		this.employeeOccupation = employeeOccupation;
 	}
 
 	/**
-	 * Configures the eHC Patient objects purpose: It is a human patient
-	 * (default setting)
+	 * Configures the eHC Patient objects purpose: It is a human patient (default
+	 * setting)
 	 */
 	public void setIsHumanPatient() {
 		this.isNonHumenSubject = false;
@@ -571,8 +549,7 @@ public class Patient extends Person {
 	/**
 	 * Sets the mothers maiden name.
 	 *
-	 * @param mothersMaidenName
-	 *            the new mothers maiden name
+	 * @param mothersMaidenName the new mothers maiden name
 	 */
 	public void setMothersMaidenName(String mothersMaidenName) {
 		this.mothersMaidenName = mothersMaidenName;
@@ -581,8 +558,7 @@ public class Patient extends Person {
 	/**
 	 * Sets the multiple birth Indicator
 	 *
-	 * @param multipleBirthInd
-	 *            the new multiple birth ind
+	 * @param multipleBirthInd the new multiple birth ind
 	 */
 	public void setMultipleBirthInd(Boolean multipleBirthInd) {
 		this.multipleBirthInd = multipleBirthInd;
@@ -591,8 +567,7 @@ public class Patient extends Person {
 	/**
 	 * Sets the multiple birth order number.
 	 *
-	 * @param multipleBirthOrderNumber
-	 *            the new multiple birth order number
+	 * @param multipleBirthOrderNumber the new multiple birth order number
 	 */
 	public void setMultipleBirthOrderNumber(Integer multipleBirthOrderNumber) {
 		this.multipleBirthOrderNumber = multipleBirthOrderNumber;
@@ -601,8 +576,7 @@ public class Patient extends Person {
 	/**
 	 * Sets the nation.
 	 *
-	 * @param nation
-	 *            the new nation
+	 * @param nation the new nation
 	 */
 	public void setNation(String nation) {
 		this.nation = nation;
@@ -611,8 +585,7 @@ public class Patient extends Person {
 	/**
 	 * Sets the provider organization.
 	 *
-	 * @param organization
-	 *            the new provider organization
+	 * @param organization the new provider organization
 	 */
 	public void setProviderOrganization(Organization organization) {
 		mPatientRole.setProviderOrganization(organization.getHl7CdaR2Pocdmt000040Organization());
@@ -621,8 +594,7 @@ public class Patient extends Person {
 	/**
 	 * Sets the religious affiliation.
 	 *
-	 * @param religiousAffiliation
-	 *            the new religious affiliation
+	 * @param religiousAffiliation the new religious affiliation
 	 */
 	public void setReligiousAffiliation(String religiousAffiliation) {
 		this.religiousAffiliation = religiousAffiliation;
@@ -633,10 +605,9 @@ public class Patient extends Person {
 	 * telecoms.</div> <div class="fr"></div> <div class="it"></div>
 	 *
 	 *
-	 * @param telecoms
-	 *            <div class="en">the new telecoms</div> <div class="de">das
-	 *            neue telecoms.</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 * @param telecoms <div class="en">the new telecoms</div> <div class="de">das
+	 *                 neue telecoms.</div> <div class="fr"></div>
+	 *                 <div class="it"></div>
 	 */
 	public void setTelecoms(List<Telecom> telecoms) {
 
