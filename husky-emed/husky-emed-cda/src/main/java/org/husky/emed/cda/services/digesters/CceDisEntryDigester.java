@@ -3,20 +3,19 @@ package org.husky.emed.cda.services.digesters;
 import org.husky.common.hl7cdar2.*;
 import org.husky.common.utils.OptionalUtils;
 import org.husky.emed.cda.utils.CdaR2Utils;
-import org.husky.emed.errors.InvalidEmedContentException;
-import org.husky.emed.enums.ActSubstanceAdminSubstitutionCode;
-import org.husky.emed.enums.DispenseSupplyType;
-import org.husky.emed.models.common.AuthorDigest;
-import org.husky.emed.models.common.EmedReference;
-import org.husky.emed.models.common.QuantityWithUnit;
-import org.husky.emed.models.entry.EmedDisEntryDigest;
-import org.husky.emed.models.entry.EmedEntryDigest;
-import org.husky.emed.models.treatment.MedicationProduct;
 import org.husky.emed.cda.services.EmedEntryDigestService;
 import org.husky.emed.cda.services.readers.ManufacturedMaterialReader;
 import org.husky.emed.cda.utils.EntryRelationshipUtils;
 import org.husky.emed.cda.utils.IiUtils;
 import org.husky.emed.cda.utils.TemplateIds;
+import org.husky.emed.enums.ActSubstanceAdminSubstitutionCode;
+import org.husky.emed.enums.DispenseSupplyType;
+import org.husky.emed.errors.InvalidEmedContentException;
+import org.husky.emed.models.common.AuthorDigest;
+import org.husky.emed.models.common.EmedReference;
+import org.husky.emed.models.common.QuantityWithUnit;
+import org.husky.emed.models.entry.EmedDisEntryDigest;
+import org.husky.emed.models.treatment.MedicationProduct;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -34,14 +33,14 @@ import static org.husky.emed.cda.utils.TemplateIds.*;
 public class CceDisEntryDigester {
 
     /**
-     * The registry of {@link EmedEntryDigest}.
+     * The registry of {@link org.husky.emed.models.entry.EmedEntryDigest}.
      */
     private final EmedEntryDigestService emedEntryService;
 
     /**
      * Constructor.
      *
-     * @param emedEntryService The registry of {@link EmedEntryDigest}.
+     * @param emedEntryService The registry of {@link org.husky.emed.models.entry.EmedEntryDigest}.
      */
     public CceDisEntryDigester(final EmedEntryDigestService emedEntryService) {
         this.emedEntryService = emedEntryService;

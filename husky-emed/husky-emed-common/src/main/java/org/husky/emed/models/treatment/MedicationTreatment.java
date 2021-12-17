@@ -66,9 +66,6 @@ public class MedicationTreatment {
      */
     @Nullable
     private EmedReference mtpReference;
-
-    @Nullable
-    private EmedReference mtpReference;
     /**
      * The MTP and treatment starting time.
      */

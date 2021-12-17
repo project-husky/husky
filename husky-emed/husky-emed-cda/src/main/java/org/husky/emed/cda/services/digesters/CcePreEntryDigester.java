@@ -15,19 +15,19 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.husky.common.hl7cdar2.*;
-import org.husky.common.utils.StreamUtils;
+import org.husky.common.utils.OptionalUtils;
 import org.husky.emed.cda.utils.CdaR2Utils;
+import org.husky.emed.cda.services.EmedEntryDigestService;
+import org.husky.emed.cda.services.readers.SubAdmEntryReader;
+import org.husky.emed.cda.utils.IiUtils;
+import org.husky.emed.cda.utils.IvlTsUtils;
+import org.husky.emed.cda.utils.TemplateIds;
 import org.husky.emed.errors.InvalidEmedContentException;
 import org.husky.emed.models.common.AuthorDigest;
 import org.husky.emed.models.common.EmedReference;
 import org.husky.emed.models.common.RenewalInterval;
 import org.husky.emed.models.entry.EmedEntryDigest;
 import org.husky.emed.models.entry.EmedPreEntryDigest;
-import org.husky.emed.cda.services.EmedEntryDigestService;
-import org.husky.emed.cda.services.readers.SubAdmEntryReader;
-import org.husky.emed.cda.utils.IiUtils;
-import org.husky.emed.cda.utils.IvlTsUtils;
-import org.husky.emed.cda.utils.TemplateIds;
 import org.springframework.stereotype.Component;
 
 /**
@@ -202,7 +202,7 @@ public class CcePreEntryDigester {
                 .filter(supply -> TemplateIds.isInList(TemplateIds.RENEWAL_PERIOD, supply.getTemplateId()))
                 .findAny()
                 .map(POCDMT000040Supply::getEffectiveTime)
-                .map(StreamUtils::getListFirst)
+                .map(OptionalUtils::getListFirstElement)
                 .filter(IVLTS.class::isInstance)
                 .map(IVLTS.class::cast)
                 .orElse(null);

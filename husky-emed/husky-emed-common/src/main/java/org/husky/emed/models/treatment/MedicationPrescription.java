@@ -16,7 +16,6 @@ import org.husky.emed.enums.ActSubstanceAdminSubstitutionCode;
 import org.husky.emed.enums.DispenseSupplyType;
 import org.husky.emed.enums.PrescriptionStatus;
 import org.husky.emed.models.common.EmedReference;
-import org.husky.emed.models.entry.EmedPreEntryDigest;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -24,8 +23,8 @@ import java.util.List;
 
 /**
  * A data structure that represents a medication prescription. Contrary to a {@link
- * org.husky.emed.cda.models.entry.EmedPreEntryDigest}, it contains the full state of the prescription (i.e the initial
- * PRE item and all PADV items that have been aggregated).
+ * org.husky.emed.models.entry.EmedPreEntryDigest}, it contains the full state of the prescription (i.e the initial PRE
+ * item and all PADV items that have been aggregated).
  *
  * @author Quentin Ligier
  */

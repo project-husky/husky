@@ -12,12 +12,12 @@ package org.husky.emed.models.treatment;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.cda.enums.DispenseStatus;
-import org.husky.emed.cda.generated.artdecor.enums.DispenseSupplyType;
-import org.husky.emed.cda.models.common.QuantityWithUnit;
+import org.husky.emed.enums.DispenseStatus;
+import org.husky.emed.enums.DispenseSupplyType;
+import org.husky.emed.models.common.QuantityWithUnit;
 
 /**
- * A data structure that represents a medication dispense. Contrary to a {@link org.husky.emed.cda.models.entry.EmedDisEntryDigest},
+ * A data structure that represents a medication dispense. Contrary to a {@link org.husky.emed.models.entry.EmedDisEntryDigest},
  * it contains the full state of the dispense (i.e the initial DIS item and all PADV items that have been aggregated).
  *
  * @author Quentin Ligier
@@ -50,7 +50,7 @@ public class MedicationDispense {
     @Nullable
     private QuantityWithUnit quantity;
 
-    /**
+    /*
      * List of aggregated PADV?
      */
 

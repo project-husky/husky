@@ -14,9 +14,9 @@ import java.util.UUID;
 import javax.annotation.processing.Generated;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.husky.common.hl7cdar2.II;
+import org.husky.common.hl7cdar2.INT;
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
-import org.husky.emed.cda.utils.CdaR2Utils;
 
 /**
  * MedicationCardDocument
@@ -522,6 +522,6 @@ public class MedicationCardDocument extends POCDMT000040ClinicalDocument {
         final var id = new II();
         id.setRoot(idVersion1);
         super.setSetId(id);
-        super.setVersionNumber(CdaR2Utils.createInt(version));
+        super.setVersionNumber(new INT(version));
     }
 }

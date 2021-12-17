@@ -15,16 +15,17 @@ import org.husky.common.utils.OptionalUtils;
 import org.husky.common.utils.time.DateTimes;
 import org.husky.common.utils.time.Hl7Dtm;
 import org.husky.emed.cda.enums.PharmaceuticalAdviceStatus;
-import org.husky.emed.cda.errors.InvalidEmedContentException;
-import org.husky.emed.cda.models.common.AuthorDigest;
-import org.husky.emed.cda.models.common.EmedReference;
-import org.husky.emed.cda.models.entry.EmedEntryDigest;
-import org.husky.emed.cda.models.entry.EmedPadvEntryDigest;
-import org.husky.emed.cda.models.entry.padv.*;
 import org.husky.emed.cda.services.EmedEntryDigestService;
+import org.husky.emed.cda.utils.CdaR2Utils;
 import org.husky.emed.cda.utils.EntryRelationshipUtils;
 import org.husky.emed.cda.utils.IiUtils;
 import org.husky.emed.cda.utils.TemplateIds;
+import org.husky.emed.errors.InvalidEmedContentException;
+import org.husky.emed.models.common.AuthorDigest;
+import org.husky.emed.models.common.EmedReference;
+import org.husky.emed.models.entry.EmedEntryDigest;
+import org.husky.emed.models.entry.EmedPadvEntryDigest;
+import org.husky.emed.models.entry.padv.*;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -195,7 +196,7 @@ public class CcePadvEntryDigester {
      */
     private String getEntryId(final POCDMT000040Observation observation) throws InvalidEmedContentException {
         return Optional.of(observation.getId())
-                .map(StreamUtils::getListFirst)
+                .map(OptionalUtils::getListFirstElement)
                 .map(IiUtils::getNormalizedUid)
                 .orElseThrow(() -> new InvalidEmedContentException(""));
     }
