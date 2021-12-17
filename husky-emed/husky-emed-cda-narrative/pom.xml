@@ -8,8 +8,8 @@
     <name>Husky eMedication CDA Narrative</name>
 
     <parent>
-        <artifactId>husky-api</artifactId>
-        <groupId>org.husky</groupId>
+        <groupId>org.husky.emed</groupId>
+        <artifactId>husky-emed</artifactId>
         <version>2.0-ALPHA</version>
     </parent>
 
