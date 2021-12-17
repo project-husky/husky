@@ -122,15 +122,6 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * <div class="en">Instantiates a ValueSetManager. Default constructor.</div>
-	 *
-	 * <div class="de">Instanziiert einen ValueSetManager.
-	 * Standardkonstruktor.</div>
-	 */
-	public ValueSetManager() {
-	}
-
-	/**
 	 * <div class="en">Downloads a value set as defined in the given
 	 * configuration.</div>
 	 *

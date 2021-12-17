@@ -143,13 +143,6 @@ public class ObjectFactory {
             "urn:ihe:pharm", "asSuperContent");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package:
-     * org.ehealth_connector.emed.cda.generated.hl7cdar2
-     */
-    public ObjectFactory() {
-    }
-
-    /**
      * Create an instance of {@link AD }
      */
     public AD createAD() {

@@ -6,11 +6,6 @@ import org.opensaml.saml.saml2.core.Statement;
 public class XACMLPolicySetIdReferenceStatementTypeImplBuilder
 		extends AbstractSAMLObjectBuilder<XACMLPolicySetIdReferenceStatement> {
 
-	/** Constructor. */
-	public XACMLPolicySetIdReferenceStatementTypeImplBuilder() {
-
-    }
-
 	/** {@inheritDoc} */
 	public XACMLPolicySetIdReferenceStatement buildObject() {
 		return buildObject(Statement.DEFAULT_ELEMENT_NAME, Statement.TYPE_NAME);
