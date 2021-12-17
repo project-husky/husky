@@ -12,7 +12,11 @@
 package org.husky.common.model;
 
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.enums.CodeSystems;
@@ -204,7 +208,7 @@ public class Author {
 			mAuthor.getAssignedAuthor().setAssignedPerson(person);
 		}
 
-		if (patientAsAuthor.getHl7CdaPerson().getName() != null) {
+		if (!patientAsAuthor.getHl7CdaPerson().getName().isEmpty()) {
 			for (final org.husky.common.model.Name name : patientAsAuthor.getNames()) {
 				mAuthor.getAssignedAuthor().getAssignedPerson().getName().add(name.getHl7CdaR2Pn());
 			}

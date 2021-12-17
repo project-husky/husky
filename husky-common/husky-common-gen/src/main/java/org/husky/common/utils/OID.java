@@ -12,7 +12,7 @@ package org.husky.common.utils;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Random;
+import java.security.SecureRandom;
 
 /**
  *
@@ -37,6 +37,8 @@ public class OID {
 	static int sequence = 0;
 
 	static final String ROOT_PREFIX = "1.2.820";
+
+	static SecureRandom random = new SecureRandom();
 
 	public static final int OID_MAX_LENGTH_DEFAULT = 256;
 
@@ -99,7 +101,7 @@ public class OID {
 		// to the the "fake" MAC address, munch this real MAC
 		// with the host IP address as follows..
 		for (var i = 0; i < mac.length; i++)
-			mac[i] = ((hostip[i % hostip.length] - mac[i]) * (new Random()).nextInt());
+			mac[i] = ((hostip[i % hostip.length] - mac[i]) * (random).nextInt());
 
 		var macString = new StringBuilder();
 		for (var i = 0; i < mac.length; i++) {
@@ -178,7 +180,7 @@ public class OID {
 		// to the the "fake" MAC address, munch this real MAC
 		// with the host IP address as follows..
 		for (var i = 0; i < mac.length; i++) {
-			mac[i] = ((hostip[i % hostip.length] - mac[i]) * (new Random().nextInt()));
+			mac[i] = ((hostip[i % hostip.length] - mac[i]) * (random.nextInt()));
 		}
 
 		var macString = new StringBuilder();
