@@ -16,8 +16,8 @@ import java.util.List;
 
 import javax.annotation.processing.Generated;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.husky.common.enums.NullFlavor;
-import org.husky.common.utils.Util;
 
 /**
  * <div class="en">A formally or informally recognized grouping of people or
@@ -635,7 +635,8 @@ public class OrganizationBaseType implements Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		return Util.getChecksum(this);
+		return new HashCodeBuilder(17, 37).append(this.addressList).append(this.identificatorList).append(this.nameList)
+				.append(this.telecomList).toHashCode();
 	}
 
 	/**

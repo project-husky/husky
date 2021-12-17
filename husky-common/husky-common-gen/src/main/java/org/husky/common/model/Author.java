@@ -33,8 +33,7 @@ import org.husky.common.hl7cdar2.POCDMT000040AuthoringDevice;
 import org.husky.common.hl7cdar2.POCDMT000040Person;
 import org.husky.common.hl7cdar2.TEL;
 import org.husky.common.hl7cdar2.TS;
-import org.husky.common.utils.DateUtil;
-import org.husky.common.utils.Util;
+import org.husky.common.utils.time.DateTimes;
 import org.husky.common.utils.time.Hl7Dtm;
 
 /**
@@ -60,7 +59,7 @@ public class Author {
 
 		// add functionCode and time
 		mAuthor.setFunctionCode(Isco08.MEDICAL_DOCTORS.getCE());
-		mAuthor.setTime(DateUtil.date2TsTzon(getTimeAsDate()));
+		mAuthor.setTime(DateTimes.toDateTs(getTimeAsDate().toInstant()));
 
 		setTime(null);
 	}
@@ -133,7 +132,7 @@ public class Author {
 		if (functionCode != null) {
 			mAuthor.setFunctionCode(functionCode.getHl7CdaR2Ce());
 		}
-		mAuthor.setTime(DateUtil.date2TsTzon(new Date()));
+		mAuthor.setTime(DateTimes.toDateTs(new Date().toInstant()));
 
 		setTime(null);
 	}
@@ -187,7 +186,8 @@ public class Author {
 	public Author(org.husky.common.model.Organization organizationAsAuthor) {
 		mAuthor = new POCDMT000040Author();
 		if (organizationAsAuthor.getHl7CdaR2Pocdmt000040Organization() != null) {
-			mAuthor.setAssignedAuthor(Util.createAssignedAuthorFromOrganization(organizationAsAuthor));
+			mAuthor.setAssignedAuthor(
+					organizationAsAuthor.createHl7CdaR2Pocdmt000040AssignedAuthor());
 		}
 		setTime(null);
 	}
@@ -406,7 +406,7 @@ public class Author {
 	 * @return <div class="en">the ids</div>
 	 */
 	public List<Identificator> getIds() {
-		return Util.convertIds(mAuthor.getAssignedAuthor().getId());
+		return Identificator.getIdentificatorList(mAuthor.getAssignedAuthor().getId());
 	}
 
 	public List<TEL> getMdhtTelecoms() {
@@ -732,9 +732,9 @@ public class Author {
 	 */
 	public void setTime(Date date) {
 		if (date != null) {
-			mAuthor.setTime(DateUtil.date2TsTzon(date));
+			mAuthor.setTime(DateTimes.toDateTs(date.toInstant()));
 		} else {
-			mAuthor.setTime(DateUtil.date2TsTzon(new Date()));
+			mAuthor.setTime(DateTimes.toDateTs(new Date().toInstant()));
 		}
 	}
 

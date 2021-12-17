@@ -53,7 +53,7 @@ public class XdsMetadataUtil {
 
 	public static final String DTM_FMT_YMDHMS = "yyyyMMddHHmmss";
 
-	public static final String[] DTM_FMT = { DTM_FMT_YMDHMS, DTM_FMT_YMDHM, DTM_FMT_YMDH, DTM_FMT_YMD, DTM_FMT_YM,
+	protected static final String[] DTM_FMT = { DTM_FMT_YMDHMS, DTM_FMT_YMDHM, DTM_FMT_YMDH, DTM_FMT_YMD, DTM_FMT_YM,
 			DTM_FMT_Y };
 
 	/**
@@ -269,7 +269,8 @@ public class XdsMetadataUtil {
 
 			// Institution
 			org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization xon = null;
-			if (Util.atLeastOne(at.getAuthorInstitution())) {
+			if (at.getAuthorInstitution() != null && !at.getAuthorInstitution().isEmpty()
+					&& at.getAuthorInstitution().get(0) != null) {
 				for (var i = 0; i < at.getAuthorInstitution().size(); i++) {
 					xon = at.getAuthorInstitution().get(i);
 					final var org = new OrganizationBaseType();
@@ -282,26 +283,24 @@ public class XdsMetadataUtil {
 
 			// Role
 			Code role = null;
-			if (Util.atLeastOne(at.getAuthorRole())) {
-				if (at.getAuthorRole().get(0) != null) {
+			if (at.getAuthorRole() != null && !at.getAuthorRole().isEmpty()
+					&& at.getAuthorRole().get(0) != null) {
 					role = new Code();
 					role.setCode(at.getAuthorRole().get(0).getId());
 					if (at.getAuthorRole().get(0).getAssigningAuthority() != null) {
 						role.setCodeSystem(at.getAuthorRole().get(0).getAssigningAuthority().getUniversalId());
 					}
-				}
 
 				a.setRoleFunction(role);
 			}
 
 			// Speciality
 			Code speciality = null;
-			if (Util.atLeastOne(at.getAuthorSpecialty())) {
-				if (at.getAuthorSpecialty().get(0) != null) {
+			if (at.getAuthorSpecialty() != null && !at.getAuthorSpecialty().isEmpty()
+					&& at.getAuthorSpecialty().get(0) != null) {
 					speciality = new Code();
 					speciality.setCode(at.getAuthorSpecialty().get(0).getId());
 					speciality.setCodeSystem(at.getAuthorSpecialty().get(0).getAssigningAuthority().getUniversalId());
-				}
 
 				a.setSpeciality(speciality);
 			}
@@ -309,7 +308,8 @@ public class XdsMetadataUtil {
 			// Telecoms
 			Telecom xtn = null;
 			final List<org.husky.common.model.Telecom> t = new LinkedList<>();
-			if (Util.atLeastOne(at.getAuthorTelecom())) {
+			if (at.getAuthorTelecom() != null && !at.getAuthorTelecom().isEmpty()
+					&& at.getAuthorTelecom().get(0) != null) {
 				for (var i = 0; i < at.getAuthorTelecom().size(); i++) {
 					xtn = at.getAuthorTelecom().get(i);
 					if (xtn.getType() != null) {

@@ -34,6 +34,8 @@ public class FileUtil {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(FileUtil.class.getName());
 	
+	private static Random rand;
+
 	private FileUtil() {
 		throw new IllegalStateException("This is a utility class!");
 	}
@@ -41,11 +43,11 @@ public class FileUtil {
 	/**
 	 * Returns a combined Path of path1 and path2.
 	 *
-	 * @param path1
-	 *            the first part (head) of the combined path.
-	 * @param path2
-	 *            the second part (tail) of the combined path.
+	 * @param path1 the first part (head) of the combined path.
+	 * @param path2 the second part (tail) of the combined path.
 	 * @return the combined Path of path1 and path2.
+	 * 
+	 * @deprecated (at next version)
 	 */
 	@Deprecated(forRemoval = true) // Use File or Path
 	public static String combinePath(String path1, String path2) {
@@ -67,16 +69,16 @@ public class FileUtil {
 		var dir = new File(path);
 		File[] files = dir.listFiles();
 
-		if (Util.getRand() == null) {
+		if (rand == null) {
 			try {
-				Util.setRand(SecureRandom.getInstanceStrong());
+				rand = SecureRandom.getInstanceStrong();
 			} catch (NoSuchAlgorithmException e) {
 				LOGGER.error(e.getMessage(), e);
-				Util.setRand(new Random());
+				rand = new Random();
 			}
 		}
 
-		retVal = files[Util.getRand().nextInt(files.length)];
+		retVal = files[rand.nextInt(files.length)];
 		return retVal;
 	}
 

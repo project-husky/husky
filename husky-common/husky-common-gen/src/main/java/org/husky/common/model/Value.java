@@ -36,7 +36,6 @@ import org.husky.common.hl7cdar2.QTY;
 import org.husky.common.hl7cdar2.RTO;
 import org.husky.common.hl7cdar2.ST;
 import org.husky.common.hl7cdar2.TEL;
-import org.husky.common.utils.Util;
 
 /**
  * Ein Wert bestehend aus eigentlichem Wert und der zugehörigen Einheit.
@@ -428,7 +427,7 @@ public class Value {
 	public Value(String value, boolean isText) {
 		final ED ed;
 		if (!isText) {
-			ed = Util.createReference(value);
+			ed = Reference.createReference(value);
 		} else {
 			ed = new ED(value);
 		}

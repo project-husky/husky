@@ -279,4 +279,21 @@ public class Identificator extends IdentificatorBaseType {
 		}
 		return null;
 	}
+
+	/**
+	 * <div class="en">Gets a list of identificators from a list of ids.</div>
+	 * <div class="de">Liefert eine Liste von identificator aus der liste der
+	 * Ids.</div>
+	 *
+	 * @param iiList <br>
+	 *               <div class="de"> ii list</div>
+	 * @return <div class="en">the list of identificator</div>
+	 */
+	public static List<Identificator> getIdentificatorList(List<II> iiList) {
+		final List<Identificator> il = new ArrayList<>();
+		for (final org.husky.common.hl7cdar2.II mId : iiList) {
+			il.add(new Identificator(mId));
+		}
+		return il;
+	}
 }

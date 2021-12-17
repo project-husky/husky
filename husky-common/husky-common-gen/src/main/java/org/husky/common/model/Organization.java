@@ -11,6 +11,8 @@
 package org.husky.common.model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.husky.common.basetypes.AddressBaseType;
 import org.husky.common.basetypes.IdentificatorBaseType;
@@ -22,6 +24,7 @@ import org.husky.common.hl7cdar2.AD;
 import org.husky.common.hl7cdar2.II;
 import org.husky.common.hl7cdar2.ON;
 import org.husky.common.hl7cdar2.ObjectFactory;
+import org.husky.common.hl7cdar2.POCDMT000040AssignedAuthor;
 import org.husky.common.hl7cdar2.POCDMT000040AssignedCustodian;
 import org.husky.common.hl7cdar2.POCDMT000040Custodian;
 import org.husky.common.hl7cdar2.POCDMT000040CustodianOrganization;
@@ -240,7 +243,7 @@ public class Organization extends OrganizationBaseType {
 					.createPOCDMT000040CustodianOrganization();
 			assignedCustodian.setRepresentedCustodianOrganization(org);
 			retVal.setAssignedCustodian(assignedCustodian);
-			if (baseType.getAddressList().size() > 0)
+			if (!baseType.getAddressList().isEmpty())
 				org.setAddr(Address.createHl7CdaR2Ad(baseType.getAddressList().get(0)));
 
 			for (IdentificatorBaseType item : baseType.getIdentificatorList()) {
@@ -248,10 +251,10 @@ public class Organization extends OrganizationBaseType {
 					org.getId().add(Identificator.createHl7CdaR2Ii(item));
 			}
 
-			if (baseType.getNameList().size() > 0)
+			if (!baseType.getNameList().isEmpty())
 				org.setName(createHl7CdaR2On(baseType.getNameList().get(0)));
 
-			if (baseType.getTelecomList().size() > 0)
+			if (!baseType.getTelecomList().isEmpty())
 				org.setTelecom(Telecom.createHl7CdaR2Tel(baseType.getTelecomList().get(0)));
 		}
 
@@ -309,31 +312,20 @@ public class Organization extends OrganizationBaseType {
 			intendedRecipient.setReceivedOrganization(org);
 			retVal.setIntendedRecipient(intendedRecipient);
 
-			for (AddressBaseType item : baseType.getAddressList()) {
-				if (item != null) {
-					AD ad = Address.createHl7CdaR2Ad(item);
-					org.getAddr().add(ad);
-					retVal.getIntendedRecipient().getAddr().add(ad);
-				}
-			}
+			List<AD> addresses = createHl7AdList(baseType.getAddressList());
+			org.getAddr().addAll(addresses);
+			retVal.getIntendedRecipient().getAddr().addAll(addresses);
 
-			for (IdentificatorBaseType item : baseType.getIdentificatorList()) {
-				if (item != null)
-					org.getId().add(Identificator.createHl7CdaR2Ii(item));
-			}
+			org.getId().addAll(createHl7IiList(baseType.getIdentificatorList()));
 
 			for (NameBaseType item : baseType.getNameList()) {
 				if (item != null)
 					org.getName().add(createHl7CdaR2On(item));
 			}
 
-			for (TelecomBaseType item : baseType.getTelecomList()) {
-				if (item != null) {
-					TEL tel = Telecom.createHl7CdaR2Tel(item);
-					org.getTelecom().add(tel);
-					retVal.getIntendedRecipient().getTelecom().add(tel);
-				}
-			}
+			List<TEL> tels = createHl7TelList(baseType.getTelecomList());
+			org.getTelecom().addAll(tels);
+			retVal.getIntendedRecipient().getTelecom().addAll(tels);
 		}
 
 		return retVal;
@@ -384,29 +376,91 @@ public class Organization extends OrganizationBaseType {
 		org.husky.common.hl7cdar2.POCDMT000040Organization retVal = base;
 
 		if (baseType != null) {
-			for (AddressBaseType item : baseType.getAddressList()) {
-				if (item != null)
-					retVal.getAddr().add(Address.createHl7CdaR2Ad(item));
-			}
-
-			for (IdentificatorBaseType item : baseType.getIdentificatorList()) {
-				if (item != null)
-					retVal.getId().add(Identificator.createHl7CdaR2Ii(item));
-			}
+			retVal.getAddr().addAll(createHl7AdList(baseType.getAddressList()));
+			retVal.getId().addAll(createHl7IiList(baseType.getIdentificatorList()));
+			retVal.getTelecom().addAll(createHl7TelList(baseType.getTelecomList()));
 
 			for (NameBaseType item : baseType.getNameList()) {
 				if (item != null)
 					retVal.getName().add(createHl7CdaR2On(item));
 			}
-
-			for (TelecomBaseType item : baseType.getTelecomList()) {
-				if (item != null)
-					retVal.getTelecom().add(Telecom.createHl7CdaR2Tel(item));
-			}
 		}
 
 		return retVal;
 
+	}
+
+	/**
+	 * <div class="en">Gets the HL7 CDA R2 data type from the given base type.<div>
+	 *
+	 * <div class="de">Ruft den HL7 CDA R2 Datentyp vom angegebenen Basistyp
+	 * ab.<div>
+	 *
+	 * @param baseType the base type
+	 * @return the CDA R2 data type
+	 */
+	public org.husky.common.hl7cdar2.POCDMT000040AssignedAuthor createHl7CdaR2Pocdmt000040AssignedAuthor() {
+
+		org.husky.common.hl7cdar2.POCDMT000040AssignedAuthor retVal = null;
+		ObjectFactory factory = new ObjectFactory();
+
+		retVal = createHl7CdaR2Pocdmt000040AssignedAuthor(factory.createPOCDMT000040AssignedAuthor());
+
+		return retVal;
+
+	}
+
+	/**
+	 * <div class="en">Gets the HL7 CDA R2 data type from the given base type.<div>
+	 *
+	 * <div class="de">Ruft den HL7 CDA R2 Datentyp vom angegebenen Basistyp
+	 * ab.<div>
+	 *
+	 * @param base     the assigned author to be used as base
+	 * @param baseType the base type
+	 * @return the CDA R2 data type
+	 */
+	public org.husky.common.hl7cdar2.POCDMT000040AssignedAuthor createHl7CdaR2Pocdmt000040AssignedAuthor(
+			POCDMT000040AssignedAuthor base) {
+
+		org.husky.common.hl7cdar2.POCDMT000040AssignedAuthor retVal = base;
+
+		retVal.getAddr().addAll(createHl7AdList(getAddressList()));
+		retVal.getId().addAll(createHl7IiList(getIdentificatorList()));
+		retVal.getTelecom().addAll(createHl7TelList(getTelecomList()));
+
+		return retVal;
+
+	}
+
+	private List<II> createHl7IiList(List<IdentificatorBaseType> listIdent) {
+		List<II> ids = new LinkedList<>();
+		for (IdentificatorBaseType item : listIdent) {
+			if (item != null)
+				ids.add(Identificator.createHl7CdaR2Ii(item));
+		}
+
+		return ids;
+	}
+
+	private List<TEL> createHl7TelList(List<TelecomBaseType> listTelecom) {
+		List<TEL> tels = new LinkedList<>();
+		for (TelecomBaseType item : listTelecom) {
+			if (item != null)
+				tels.add(Telecom.createHl7CdaR2Tel(item));
+		}
+
+		return tels;
+	}
+
+	private List<AD> createHl7AdList(List<AddressBaseType> listAddresses) {
+		List<AD> addresses = new LinkedList<>();
+		for (AddressBaseType item : listAddresses) {
+			if (item != null)
+				addresses.add(Address.createHl7CdaR2Ad(item));
+		}
+
+		return addresses;
 	}
 
 	/**
@@ -496,6 +550,30 @@ public class Organization extends OrganizationBaseType {
 	public org.husky.common.hl7cdar2.POCDMT000040Organization getHl7CdaR2Pocdmt000040Organization(
 			POCDMT000040Organization base) {
 		return createHl7CdaR2Pocdmt000040Organization(base, this);
+	}
+
+	/**
+	 * <div class="en">Gets the HL7 CDA R2 data type from the current instance.<div>
+	 *
+	 * <div class="de">Ruft den HL7 CDA R2 Datentyp aus der aktuellen Instanz
+	 * ab.<div>
+	 *
+	 * @param base the Organization to be used as base (e.g. containing templateIds)
+	 * @return the HL7 CDA R2 data type
+	 */
+	public org.husky.common.hl7cdar2.POCDMT000040AssignedAuthor getHl7CdaR2Pocdmt000040AssignedAuthor() {
+		final var o = createHl7CdaR2Pocdmt000040Organization(this);
+		final var a = new POCDMT000040AssignedAuthor();
+		if (!o.getAddr().isEmpty()) {
+			a.getAddr().addAll(o.getAddr());
+		}
+		if (!o.getTelecom().isEmpty()) {
+			a.getTelecom().addAll(o.getTelecom());
+		}
+		if (!o.getId().isEmpty()) {
+			a.getId().addAll(o.getId());
+		}
+		return a;
 	}
 
 	/**

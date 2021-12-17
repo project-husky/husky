@@ -28,7 +28,6 @@ import org.husky.common.hl7cdar2.POCDMT000040Performer2;
 import org.husky.common.hl7cdar2.POCDMT000040Person;
 import org.husky.common.hl7cdar2.TEL;
 import org.husky.common.utils.DateUtil;
-import org.husky.common.utils.Util;
 
 /**
  * A Person or Organization performing an action
@@ -284,7 +283,7 @@ public class Performer {
 	 * @return <div class="en">the ids</div>
 	 */
 	public List<org.husky.common.model.Identificator> getIds() {
-		return Util.convertIds(mAsEntity.getId());
+		return Identificator.getIdentificatorList(mAsEntity.getId());
 	}
 
 	/**

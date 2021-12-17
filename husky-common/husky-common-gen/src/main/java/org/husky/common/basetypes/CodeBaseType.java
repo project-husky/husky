@@ -16,10 +16,10 @@ import java.util.List;
 
 import javax.annotation.processing.Generated;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.husky.common.enums.LanguageCode;
 import org.husky.common.enums.NullFlavor;
 import org.husky.common.utils.LangText;
-import org.husky.common.utils.Util;
 
 /**
  * <div class="en">This class provides the basic information for a code
@@ -591,7 +591,7 @@ public class CodeBaseType implements Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		return Util.getChecksum(this);
+		return new HashCodeBuilder(17, 37).append(this.code).append(this.codeSystem).toHashCode();
 	}
 
 	/**

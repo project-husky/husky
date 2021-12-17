@@ -13,7 +13,6 @@ package org.husky.common.model;
 import java.util.List;
 
 import org.husky.common.hl7cdar2.POCDMT000040SpecimenRole;
-import org.husky.common.utils.Util;
 
 /**
  * The Class SpecimenRole.
@@ -59,7 +58,7 @@ public class SpecimenRole extends PlayingEntity {
 	 * @return the id list
 	 */
 	public List<Identificator> getIdList() {
-		return Util.convertIds(getSpecimenRole().getId());
+		return Identificator.getIdentificatorList(getSpecimenRole().getId());
 	}
 
 	/**

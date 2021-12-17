@@ -14,8 +14,8 @@ import java.io.Serializable;
 
 import javax.annotation.processing.Generated;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.husky.common.enums.NullFlavor;
-import org.husky.common.utils.Util;
 
 /**
  * <div class="en"> An identifier that uniquely identifies a thing or object.
@@ -299,7 +299,7 @@ public class IdentificatorBaseType implements Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		return Util.getChecksum(this);
+		return new HashCodeBuilder(17, 37).append(this.extension).append(this.root).toHashCode();
 	}
 
 	/**

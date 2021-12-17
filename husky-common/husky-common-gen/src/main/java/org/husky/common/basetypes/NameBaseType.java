@@ -14,9 +14,9 @@ import java.io.Serializable;
 
 import javax.annotation.processing.Generated;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.husky.common.enums.EntityNameUse;
 import org.husky.common.enums.NullFlavor;
-import org.husky.common.utils.Util;
 
 /**
  * <div class="en">A name for a person, organization, place or thing. A sequence
@@ -476,7 +476,8 @@ public class NameBaseType implements Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		return Util.getChecksum(this);
+		return new HashCodeBuilder(17, 37).append(this.delimiter).append(this.family).append(this.given)
+				.append(this.prefix).append(this.suffix).toHashCode();
 	}
 
 	/**

@@ -18,7 +18,6 @@ import org.husky.common.hl7cdar2.AD;
 import org.husky.common.hl7cdar2.POCDMT000040IntendedRecipient;
 import org.husky.common.hl7cdar2.POCDMT000040Person;
 import org.husky.common.hl7cdar2.TEL;
-import org.husky.common.utils.Util;
 
 /**
  * The Class IntendedRecipient. This element contains information about a
@@ -96,7 +95,7 @@ public class IntendedRecipient {
 		}
 		if (!mdht.getName().isEmpty()) {
 			final var p = new POCDMT000040Person();
-			p.getName().add(Util.createPnFromOn(mdht.getName().get(0)));
+			p.getName().add(new Name(mdht.getName().get(0)).getHl7CdaR2Pn());
 			getIntendedRecipient().setInformationRecipient(p);
 		}
 		setOrganization(organization);
@@ -143,7 +142,7 @@ public class IntendedRecipient {
 	 * @return <div class="en">the ids</div>
 	 */
 	public List<Identificator> getIds() {
-		return Util.convertIds(getIntendedRecipient().getId());
+		return Identificator.getIdentificatorList(getIntendedRecipient().getId());
 	}
 
 	/**

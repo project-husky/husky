@@ -18,7 +18,6 @@ import org.husky.common.hl7cdar2.AD;
 import org.husky.common.hl7cdar2.POCDMT000040ParticipantRole;
 import org.husky.common.hl7cdar2.POCDMT000040PlayingEntity;
 import org.husky.common.hl7cdar2.TEL;
-import org.husky.common.utils.Util;
 
 /**
  * The Class ParticipantRole. This element does not necessarily contain
@@ -95,7 +94,7 @@ public class ParticipantRole {
 	 * @return the id list
 	 */
 	public List<Identificator> getIdList() {
-		return Util.convertIds(mParticipantRole.getId());
+		return Identificator.getIdentificatorList(mParticipantRole.getId());
 	}
 
 	/**

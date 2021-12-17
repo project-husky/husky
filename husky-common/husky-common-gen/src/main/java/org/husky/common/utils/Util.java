@@ -175,9 +175,10 @@ public class Util {
 	/**
 	 * <div class="en"> Converts a list of II int a list of Identificators.
 	 *
-	 * @param mII
-	 *            the list to convert
+	 * @param mII the list to convert
 	 * @return </div> <div class="de"></div> <div class="fr"></div>
+	 * 
+	 * @deprecated (replaced by {@link Identificator#getIdentificatorList(List)}
 	 */
 	public static List<Identificator> convertIds(List<org.husky.common.hl7cdar2.II> mII) {
 		final List<Identificator> il = new ArrayList<>();
@@ -307,9 +308,11 @@ public class Util {
 	/**
 	 * Creates the assigned author from organization.
 	 *
-	 * @param organization
-	 *            the organization
+	 * @param organization the organization
 	 * @return the assigned author
+	 * 
+	 * @deprecated (it will be replace by method
+	 *             {@link Organization#createHl7CdaR2Pocdmt000040AssignedAuthor()}
 	 */
 	public static POCDMT000040AssignedAuthor createAssignedAuthorFromOrganization(org.husky.common.model.Organization organization) {
 		final var o = organization.getHl7CdaR2Pocdmt000040Organization();

@@ -13,6 +13,7 @@ package org.husky.common.utils;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.husky.common.enums.LanguageCode;
 
 /**
@@ -39,10 +40,8 @@ public class LangText implements Serializable {
 	/**
 	 * Instantiates class
 	 *
-	 * @param lang
-	 *            the language
-	 * @param text
-	 *            the text
+	 * @param lang the language
+	 * @param text the text
 	 */
 	public LangText(LanguageCode lang, String text) {
 		langCode = lang;
@@ -53,11 +52,10 @@ public class LangText implements Serializable {
 	 * <div class="en">Checks whether the two objects are equal (based on their
 	 * content).</div>
 	 *
-	 * <div class="de">Prüft, ob die beiden Objekte gleich sind (basierend auf
-	 * ihrem Inhalt).</div>
+	 * <div class="de">Prüft, ob die beiden Objekte gleich sind (basierend auf ihrem
+	 * Inhalt).</div>
 	 *
-	 * @param obj
-	 *            the ValueSetPackage to compare
+	 * @param obj the ValueSetPackage to compare
 	 * @return true, if equal; false otherwise.
 	 */
 	@Override
@@ -68,12 +66,11 @@ public class LangText implements Serializable {
 		if (!(obj instanceof LangText))
 			return false;
 
-		if (retVal) {
-			if (this.langCode == null)
-				retVal = (((LangText) obj).getLangCode() == null);
-			else
-				retVal = this.langCode.equals(((LangText) obj).getLangCode());
-		}
+		if (this.langCode == null)
+			retVal = (((LangText) obj).getLangCode() == null);
+		else
+			retVal = this.langCode.equals(((LangText) obj).getLangCode());
+
 		if (retVal) {
 			if (this.text == null)
 				retVal = (((LangText) obj).getLangText() == null);
@@ -108,7 +105,8 @@ public class LangText implements Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		return Util.getChecksum(this);
+		return new HashCodeBuilder(17, 37).append(this.text)
+				.append(this.langCode != null ? this.langCode.hashCode() : null).toHashCode();
 	}
 
 	public void setLangCode(LanguageCode langCode) {

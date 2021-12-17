@@ -20,7 +20,7 @@ public class LangTexts {
 	private final List<LangText> myLangTexts;
 
 	public LangTexts() {
-		myLangTexts = new ArrayList<LangText>();
+		myLangTexts = new ArrayList<>();
 	}
 
 	public void add(LangText langText) {

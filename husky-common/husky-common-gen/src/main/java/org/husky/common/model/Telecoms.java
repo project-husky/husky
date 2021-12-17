@@ -18,7 +18,6 @@ import java.util.Map;
 
 import org.husky.common.enums.TelecomAddressUse;
 import org.husky.common.hl7cdar2.TEL;
-import org.husky.common.utils.Util;
 
 /**
  * <div class="en">Class Telecom represents a list of telecommunication
@@ -26,6 +25,27 @@ import org.husky.common.utils.Util;
  * eine Liste mit Telekommunikationsendpunkten</div>
  */
 public class Telecoms {
+
+	/**
+	 * The Constant TELECOMS_EMAIL_PREFIX.
+	 */
+	public static final String TELECOMS_EMAIL_PREFIX = "mailto:";
+
+	/**
+	 * The Constant TELECOMS_FAX_PREFIX.
+	 */
+	public static final String TELECOMS_FAX_PREFIX = "fax:";
+
+	/**
+	 * The Constant TELECOMS_PHONE_PREFIX.
+	 */
+	public static final String TELECOMS_PHONE_PREFIX = "tel:";
+
+	/**
+	 * The Constant TELECOMS_WEBSITE_PREFIX. Note: omitting the : here in order to
+	 * support http and https
+	 */
+	public static final String TELECOMS_WEBSITE_PREFIX = "http";
 
 	/**
 	 * The mdht tels.
@@ -37,7 +57,7 @@ public class Telecoms {
 	 * <div class="de">Instantiiert eine neue Liste mit Telcoms</div>
 	 */
 	public Telecoms() {
-		mTels = new ArrayList<TEL>();
+		mTels = new ArrayList<>();
 	}
 
 	/**
@@ -72,20 +92,20 @@ public class Telecoms {
 	 */
 	public void add(String type, String endpointIdentifier, TelecomAddressUse usage) {
 		TEL tel = null;
-		if (type.equals(Util.TELECOMS_EMAIL_PREFIX) || (type.equals(Util.TELECOMS_EMAIL_PREFIX
-				.substring(0, Util.TELECOMS_EMAIL_PREFIX.length() - 1)))) {
+		if (type.equals(TELECOMS_EMAIL_PREFIX)
+				|| (type.equals(TELECOMS_EMAIL_PREFIX.substring(0, TELECOMS_EMAIL_PREFIX.length() - 1)))) {
 			tel = createTel(endpointIdentifier, usage);
 		}
-		if (type.equals(Util.TELECOMS_FAX_PREFIX) || (type.equals(
-				Util.TELECOMS_FAX_PREFIX.substring(0, Util.TELECOMS_FAX_PREFIX.length() - 1)))) {
+		if (type.equals(TELECOMS_FAX_PREFIX)
+				|| (type.equals(TELECOMS_FAX_PREFIX.substring(0, TELECOMS_FAX_PREFIX.length() - 1)))) {
 			tel = createTel(endpointIdentifier, usage);
 		}
-		if (type.equals(Util.TELECOMS_PHONE_PREFIX) || (type.equals(Util.TELECOMS_PHONE_PREFIX
-				.substring(0, Util.TELECOMS_PHONE_PREFIX.length() - 1)))) {
+		if (type.equals(TELECOMS_PHONE_PREFIX)
+				|| (type.equals(TELECOMS_PHONE_PREFIX.substring(0, TELECOMS_PHONE_PREFIX.length() - 1)))) {
 			tel = createTel(endpointIdentifier, usage);
 		}
-		if (type.equals(Util.TELECOMS_WEBSITE_PREFIX) || (type.equals(Util.TELECOMS_WEBSITE_PREFIX
-				.substring(0, Util.TELECOMS_WEBSITE_PREFIX.length() - 1)))) {
+		if (type.equals(TELECOMS_WEBSITE_PREFIX)
+				|| (type.equals(TELECOMS_WEBSITE_PREFIX.substring(0, TELECOMS_WEBSITE_PREFIX.length() - 1)))) {
 			tel = createTel(endpointIdentifier, usage);
 		}
 
@@ -121,7 +141,7 @@ public class Telecoms {
 		if (usage != null) {
 			tel.getUse().add(usage.getCodeValue());
 		}
-		tel.setValue("mailto:" + eMail);
+		tel.setValue(TELECOMS_EMAIL_PREFIX + eMail);
 		return tel;
 	}
 

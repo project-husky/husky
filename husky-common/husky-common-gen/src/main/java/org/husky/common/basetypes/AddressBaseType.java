@@ -14,9 +14,9 @@ import java.io.Serializable;
 
 import javax.annotation.processing.Generated;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.husky.common.enums.NullFlavor;
 import org.husky.common.enums.PostalAddressUse;
-import org.husky.common.utils.Util;
 
 /**
  * <div class="en">This class provides the basic information for a postal
@@ -96,8 +96,7 @@ public class AddressBaseType implements Serializable {
 		/**
 		 * With additional locator.
 		 *
-		 * @param additionalLocator
-		 *            the additional locator
+		 * @param additionalLocator the additional locator
 		 * @return the builder
 		 */
 		public Builder withAdditionalLocator(String additionalLocator) {
@@ -108,8 +107,7 @@ public class AddressBaseType implements Serializable {
 		/**
 		 * With building number.
 		 *
-		 * @param buildingNumber
-		 *            the building number
+		 * @param buildingNumber the building number
 		 * @return the builder
 		 */
 		public Builder withBuildingNumber(String buildingNumber) {
@@ -120,8 +118,7 @@ public class AddressBaseType implements Serializable {
 		/**
 		 * With city.
 		 *
-		 * @param city
-		 *            the city
+		 * @param city the city
 		 * @return the builder
 		 */
 		public Builder withCity(String city) {
@@ -132,8 +129,7 @@ public class AddressBaseType implements Serializable {
 		/**
 		 * With country.
 		 *
-		 * @param country
-		 *            the country
+		 * @param country the country
 		 * @return the builder
 		 */
 		public Builder withCountry(String country) {
@@ -144,8 +140,7 @@ public class AddressBaseType implements Serializable {
 		/**
 		 * With null flavor.
 		 *
-		 * @param nullFlavor
-		 *            the null flavor
+		 * @param nullFlavor the null flavor
 		 * @return the builder
 		 */
 		public Builder withNullFlavor(NullFlavor nullFlavor) {
@@ -156,8 +151,7 @@ public class AddressBaseType implements Serializable {
 		/**
 		 * With postal code.
 		 *
-		 * @param postalCode
-		 *            the postal code
+		 * @param postalCode the postal code
 		 * @return the builder
 		 */
 		public Builder withPostalCode(String postalCode) {
@@ -168,8 +162,7 @@ public class AddressBaseType implements Serializable {
 		/**
 		 * With post box.
 		 *
-		 * @param postBox
-		 *            the post box
+		 * @param postBox the post box
 		 * @return the builder
 		 */
 		public Builder withPostBox(String postBox) {
@@ -180,8 +173,7 @@ public class AddressBaseType implements Serializable {
 		/**
 		 * With state.
 		 *
-		 * @param state
-		 *            the state
+		 * @param state the state
 		 * @return the builder
 		 */
 		public Builder withState(String state) {
@@ -192,8 +184,7 @@ public class AddressBaseType implements Serializable {
 		/**
 		 * With street address line 1.
 		 *
-		 * @param streetAddressLine1
-		 *            the street address line 1
+		 * @param streetAddressLine1 the street address line 1
 		 * @return the builder
 		 */
 		public Builder withStreetAddressLine1(String streetAddressLine1) {
@@ -204,8 +195,7 @@ public class AddressBaseType implements Serializable {
 		/**
 		 * With street address line 2.
 		 *
-		 * @param streetAddressLine2
-		 *            the street address line 2
+		 * @param streetAddressLine2 the street address line 2
 		 * @return the builder
 		 */
 		public Builder withStreetAddressLine2(String streetAddressLine2) {
@@ -216,8 +206,7 @@ public class AddressBaseType implements Serializable {
 		/**
 		 * With street name.
 		 *
-		 * @param streetName
-		 *            the street name
+		 * @param streetName the street name
 		 * @return the builder
 		 */
 		public Builder withStreetName(String streetName) {
@@ -228,8 +217,7 @@ public class AddressBaseType implements Serializable {
 		/**
 		 * With usage.
 		 *
-		 * @param usage
-		 *            the usage
+		 * @param usage the usage
 		 * @return the builder
 		 */
 		public Builder withUsage(PostalAddressUse usage) {
@@ -300,8 +288,7 @@ public class AddressBaseType implements Serializable {
 	/**
 	 * Instantiates a new address base type.
 	 *
-	 * @param builder
-	 *            the builder
+	 * @param builder the builder
 	 */
 	@Generated("SparkTools")
 	private AddressBaseType(Builder builder) {
@@ -323,11 +310,10 @@ public class AddressBaseType implements Serializable {
 	 * <div class="en">Checks whether the two objects are equal (based on their
 	 * content).</div>
 	 *
-	 * <div class="de">Prüft, ob die beiden Objekte gleich sind (basierend auf
-	 * ihrem Inhalt).</div>
+	 * <div class="de">Prüft, ob die beiden Objekte gleich sind (basierend auf ihrem
+	 * Inhalt).</div>
 	 *
-	 * @param obj
-	 *            the AddressBaseType to compare
+	 * @param obj the AddressBaseType to compare
 	 * @return true, if equal; false otherwise.
 	 */
 	@Override
@@ -343,8 +329,7 @@ public class AddressBaseType implements Serializable {
 			if (this.additionalLocator == null)
 				retVal = (((AddressBaseType) obj).getAdditionalLocator() == null);
 			else
-				retVal = this.additionalLocator
-						.equals(((AddressBaseType) obj).getAdditionalLocator());
+				retVal = this.additionalLocator.equals(((AddressBaseType) obj).getAdditionalLocator());
 		}
 		if (retVal) {
 			if (this.buildingNumber == null)
@@ -386,15 +371,13 @@ public class AddressBaseType implements Serializable {
 			if (this.streetAddressLine1 == null)
 				retVal = (((AddressBaseType) obj).getStreetAddressLine1() == null);
 			else
-				retVal = this.streetAddressLine1
-						.equals(((AddressBaseType) obj).getStreetAddressLine1());
+				retVal = this.streetAddressLine1.equals(((AddressBaseType) obj).getStreetAddressLine1());
 		}
 		if (retVal) {
 			if (this.streetAddressLine2 == null)
 				retVal = (((AddressBaseType) obj).getStreetAddressLine2() == null);
 			else
-				retVal = this.streetAddressLine2
-						.equals(((AddressBaseType) obj).getStreetAddressLine2());
+				retVal = this.streetAddressLine2.equals(((AddressBaseType) obj).getStreetAddressLine2());
 		}
 		if (retVal) {
 			if (this.streetName == null)
@@ -412,21 +395,20 @@ public class AddressBaseType implements Serializable {
 	}
 
 	/**
-	 * <div class="en">Gets the additional locator. This can be a unit
-	 * designator, such as apartment number, suite number, or floor. There may
-	 * be several unit designators in an address (e.g., "3rd floor, Appt. 342").
-	 * This can also be a designator pointing away from the location, rather
-	 * than specifying a smaller location within some larger one (e.g., Dutch
-	 * "t.o." means "opposite to" for house boats located across the street
-	 * facing houses).</div>
+	 * <div class="en">Gets the additional locator. This can be a unit designator,
+	 * such as apartment number, suite number, or floor. There may be several unit
+	 * designators in an address (e.g., "3rd floor, Appt. 342"). This can also be a
+	 * designator pointing away from the location, rather than specifying a smaller
+	 * location within some larger one (e.g., Dutch "t.o." means "opposite to" for
+	 * house boats located across the street facing houses).</div>
 	 *
-	 * <div class="de">Ruft die Zusatzangabe ab. Dies kann eine
-	 * Einheitenbezeichnung sein, z. B. Wohnungsnummer oder Etage. Eine Adresse
-	 * kann mehrere Zusatzangaben im gleichen Feld enthalten (z. B. "3rd floor,
-	 * Appt. 342"). Dies kann auch ein Bezeichner sein, der vom Standort weg
-	 * zeigt, anstatt einen kleineren Standort in einem größeren anzugeben (z.
-	 * B. "t.o." bedeutet in den Niederlanden "gegenüber" für Hausboote, die
-	 * sich gegenüber den Häusern befinden).</div>
+	 * <div class="de">Ruft die Zusatzangabe ab. Dies kann eine Einheitenbezeichnung
+	 * sein, z. B. Wohnungsnummer oder Etage. Eine Adresse kann mehrere
+	 * Zusatzangaben im gleichen Feld enthalten (z. B. "3rd floor, Appt. 342"). Dies
+	 * kann auch ein Bezeichner sein, der vom Standort weg zeigt, anstatt einen
+	 * kleineren Standort in einem größeren anzugeben (z. B. "t.o." bedeutet in den
+	 * Niederlanden "gegenüber" für Hausboote, die sich gegenüber den Häusern
+	 * befinden).</div>
 	 *
 	 * @return the additional locator
 	 */
@@ -435,13 +417,13 @@ public class AddressBaseType implements Serializable {
 	}
 
 	/**
-	 * <div class="en">Gets the building number. The number of a building, house
-	 * or lot alongside the street. Also known as "primary street number". This
-	 * does not number the street but rather the building.</div>
+	 * <div class="en">Gets the building number. The number of a building, house or
+	 * lot alongside the street. Also known as "primary street number". This does
+	 * not number the street but rather the building.</div>
 	 *
-	 * <div class="de">Ruft die Gebäudenummer ab. Die Nummer eines Gebäudes,
-	 * Hauses oder Grundstücks neben der Straße. Auch als "primäre Hausnummer"
-	 * bekannt. Das ist nicht die Straße, sondern das Gebäude.</div>
+	 * <div class="de">Ruft die Gebäudenummer ab. Die Nummer eines Gebäudes, Hauses
+	 * oder Grundstücks neben der Straße. Auch als "primäre Hausnummer" bekannt. Das
+	 * ist nicht die Straße, sondern das Gebäude.</div>
 	 *
 	 * @return the building number
 	 */
@@ -450,11 +432,11 @@ public class AddressBaseType implements Serializable {
 	}
 
 	/**
-	 * <div class="en">Gets the city. The name of the city, town, village, or
-	 * other community or delivery center.</div>
+	 * <div class="en">Gets the city. The name of the city, town, village, or other
+	 * community or delivery center.</div>
 	 *
-	 * <div class="de">Ruft den Ort ab. Der Name der Stadt, des Dorfes oder
-	 * einer anderen Gemeinde oder eines anderen Lieferzentrums.</div>
+	 * <div class="de">Ruft den Ort ab. Der Name der Stadt, des Dorfes oder einer
+	 * anderen Gemeinde oder eines anderen Lieferzentrums.</div>
 	 *
 	 * @return the city
 	 */
@@ -526,12 +508,11 @@ public class AddressBaseType implements Serializable {
 	}
 
 	/**
-	 * <div class="en">Gets the street address line 1. Can be used for an
-	 * additional locator, a delivery address or a street address. </div>
+	 * <div class="en">Gets the street address line 1. Can be used for an additional
+	 * locator, a delivery address or a street address. </div>
 	 *
-	 * <div class="de">Ruft die Adresszeile 1 ab. Sie kann für eine
-	 * Zusatzangabe, eine Lieferadresse oder eine Strassenadresse verwendet
-	 * werden.</div>
+	 * <div class="de">Ruft die Adresszeile 1 ab. Sie kann für eine Zusatzangabe,
+	 * eine Lieferadresse oder eine Strassenadresse verwendet werden.</div>
 	 *
 	 * @return the street address line 1
 	 */
@@ -540,12 +521,11 @@ public class AddressBaseType implements Serializable {
 	}
 
 	/**
-	 * <div class="en">Gets the street address line 2. Can be used for an
-	 * additional locator, a delivery address or a street address. </div>
+	 * <div class="en">Gets the street address line 2. Can be used for an additional
+	 * locator, a delivery address or a street address. </div>
 	 *
-	 * <div class="de">Ruft die Adresszeile 2 ab. Sie kann für eine
-	 * Zusatzangabe, eine Lieferadresse oder eine Strassenadresse verwendet
-	 * werden.</div>
+	 * <div class="de">Ruft die Adresszeile 2 ab. Sie kann für eine Zusatzangabe,
+	 * eine Lieferadresse oder eine Strassenadresse verwendet werden.</div>
 	 *
 	 * @return the street address line 2
 	 */
@@ -557,8 +537,8 @@ public class AddressBaseType implements Serializable {
 	 * <div class="en">Gets the street name. The name of a roadway or artery
 	 * recognized by a municipality.</div>
 	 *
-	 * <div class="de">Ruft den Straßennamen ab. Der Name einer von einer
-	 * Gemeinde anerkannten Haupt- oder Nebenstrasse.</div>
+	 * <div class="de">Ruft den Straßennamen ab. Der Name einer von einer Gemeinde
+	 * anerkannten Haupt- oder Nebenstrasse.</div>
 	 *
 	 * @return the street name
 	 */
@@ -567,8 +547,7 @@ public class AddressBaseType implements Serializable {
 	}
 
 	/**
-	 * <div class="en">Gets type of usage (such as private, business,
-	 * ...).</div>
+	 * <div class="en">Gets type of usage (such as private, business, ...).</div>
 	 *
 	 * <div class="de">Ruft die Art der Nutzung ab (wie privat, geschäftlich,
 	 * ...).</div>
@@ -591,14 +570,17 @@ public class AddressBaseType implements Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		return Util.getChecksum(this);
+		return new HashCodeBuilder(17, 37).append(this.additionalLocator).append(this.buildingNumber).append(this.city)
+				.append(this.country).append(this.postalCode).append(this.postBox).append(this.state)
+				.append(this.streetAddressLine1).append(this.streetAddressLine2).append(this.streetName)
+				.append(this.usage.hashCode()).toHashCode();
 	}
 
 	/**
 	 * <div class="en">Checks if the current instance is null flavored.</div>
 	 *
-	 * <div class="de">Überprüft, ob die aktuelle Instanz mit Null-Flavor
-	 * versehen ist.</div>
+	 * <div class="de">Überprüft, ob die aktuelle Instanz mit Null-Flavor versehen
+	 * ist.</div>
 	 *
 	 * @return true, if is null flavor
 	 */
@@ -613,8 +595,7 @@ public class AddressBaseType implements Serializable {
 	 * <div class="de">Legt die Zusatzangabe fest. Siehe Getter
 	 * {@link AddressBaseType#getAdditionalLocator} für weitere Details.</div>
 	 *
-	 * @param additionalLocator
-	 *            the new additional locator
+	 * @param additionalLocator the new additional locator
 	 */
 	public void setAdditionalLocator(String additionalLocator) {
 		this.additionalLocator = additionalLocator;
@@ -627,22 +608,20 @@ public class AddressBaseType implements Serializable {
 	 * <div class="de">Legt die Gebäudenummer fest. Siehe Getter
 	 * {@link AddressBaseType#getBuildingNumber} für weitere Details.</div>
 	 *
-	 * @param buildingNumber
-	 *            the new building number
+	 * @param buildingNumber the new building number
 	 */
 	public void setBuildingNumber(String buildingNumber) {
 		this.buildingNumber = buildingNumber;
 	}
 
 	/**
-	 * <div class="en">Sets the city. See getter {@link AddressBaseType#getCity}
-	 * for more details.</div>
+	 * <div class="en">Sets the city. See getter {@link AddressBaseType#getCity} for
+	 * more details.</div>
 	 *
 	 * <div class="de">Legt den Ort fest. Siehe Getter
 	 * {@link AddressBaseType#getBuildingNumber} für weitere Details.</div>
 	 *
-	 * @param city
-	 *            the new city
+	 * @param city the new city
 	 */
 	public void setCity(String city) {
 		this.city = city;
@@ -655,8 +634,7 @@ public class AddressBaseType implements Serializable {
 	 * <div class="de">Legt das Land fest. Siehe Getter
 	 * {@link AddressBaseType#getBuildingNumber} für weitere Details.</div>
 	 *
-	 * @param country
-	 *            the new country
+	 * @param country the new country
 	 */
 	public void setCountry(String country) {
 		this.country = country;
@@ -667,8 +645,7 @@ public class AddressBaseType implements Serializable {
 	 *
 	 * <div class="de">Legt den nullFlavor fest.</div>
 	 *
-	 * @param nullFlavor
-	 *            the new null flavor
+	 * @param nullFlavor the new null flavor
 	 */
 	public void setNullFlavor(NullFlavor nullFlavor) {
 		this.nullFlavor = nullFlavor;
@@ -681,8 +658,7 @@ public class AddressBaseType implements Serializable {
 	 * <div class="de">Legt die Postleitzahl fest. Siehe Getter
 	 * {@link AddressBaseType#getBuildingNumber} für weitere Details.</div>
 	 *
-	 * @param postalCode
-	 *            the new postal code
+	 * @param postalCode the new postal code
 	 */
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
@@ -695,22 +671,20 @@ public class AddressBaseType implements Serializable {
 	 * <div class="de">Legt das Postfach fest. Siehe Getter
 	 * {@link AddressBaseType#getPostBox} für weitere Details.</div>
 	 *
-	 * @param postBox
-	 *            the new post box
+	 * @param postBox the new post box
 	 */
 	public void setPostBox(String postBox) {
 		this.postBox = postBox;
 	}
 
 	/**
-	 * <div class="en">Sets the state See getter
-	 * {@link AddressBaseType#getState} for more details.</div>
+	 * <div class="en">Sets the state See getter {@link AddressBaseType#getState}
+	 * for more details.</div>
 	 *
 	 * <div class="de">Legt den Staat/Kanton fest. Siehe Getter
 	 * {@link AddressBaseType#getState} für weitere Details.</div>
 	 *
-	 * @param state
-	 *            the new state
+	 * @param state the new state
 	 */
 	public void setState(String state) {
 		this.state = state;
@@ -723,8 +697,7 @@ public class AddressBaseType implements Serializable {
 	 * <div class="de">Legt die Adresszeile 1 fest. Siehe Getter
 	 * {@link AddressBaseType#getStreetAddressLine1} für weitere Details.</div>
 	 *
-	 * @param streetAddressLine1
-	 *            the new street address line 1
+	 * @param streetAddressLine1 the new street address line 1
 	 */
 	public void setStreetAddressLine1(String streetAddressLine1) {
 		this.streetAddressLine1 = streetAddressLine1;
@@ -737,8 +710,7 @@ public class AddressBaseType implements Serializable {
 	 * <div class="de">Legt die Adresszeile 2 fest. Siehe Getter
 	 * {@link AddressBaseType#getStreetAddressLine2} für weitere Details.</div>
 	 *
-	 * @param streetAddressLine2
-	 *            the new street address line 2
+	 * @param streetAddressLine2 the new street address line 2
 	 */
 	public void setStreetAddressLine2(String streetAddressLine2) {
 		this.streetAddressLine2 = streetAddressLine2;
@@ -751,8 +723,7 @@ public class AddressBaseType implements Serializable {
 	 * <div class="de">Legt die Strasse fest. Siehe Getter
 	 * {@link AddressBaseType#getStreetName} für weitere Details.</div>
 	 *
-	 * @param streetName
-	 *            the new street name
+	 * @param streetName the new street name
 	 */
 	public void setStreetName(String streetName) {
 		this.streetName = streetName;
@@ -765,8 +736,7 @@ public class AddressBaseType implements Serializable {
 	 * <div class="de">Legt die Art der Nutzung fest. Siehe Getter
 	 * {@link AddressBaseType#getUsage} für weitere Details.</div>
 	 *
-	 * @param usage
-	 *            the new usage
+	 * @param usage the new usage
 	 */
 	public void setUsage(PostalAddressUse usage) {
 		this.usage = usage;
