@@ -89,6 +89,11 @@ public class ValueSetManager {
 	/** The SLF4J logger instance. */
 	private static Logger log = LoggerFactory.getLogger(ValueSetManager.class);
 
+	private static final String ELEMENT_NAME_CODE_SYSTEM = "codeSystem";
+	private static final String ELEMENT_NAME_CODE = "code";
+	private static final String ELEMENT_NAME_DISPLAY_NAME = "displayName";
+	private static final String ELEMENT_NAME_LANGUAGE = "language";
+
 	/**
 	 * <div class="en">The JSONPath path to extract a value set from the JSON
 	 * definition file</div>
@@ -421,15 +426,15 @@ public class ValueSetManager {
 					var valueSetEntry = new ValueSetEntry();
 					var code = new CodeBaseType();
 
-					textContent = node.getAttributes().getNamedItem("code").getNodeValue();
+					textContent = node.getAttributes().getNamedItem(ELEMENT_NAME_CODE).getNodeValue();
 					if (textContent != null)
 						code.setCode(textContent);
 
-					textContent = node.getAttributes().getNamedItem("codeSystem").getNodeValue();
+					textContent = node.getAttributes().getNamedItem(ELEMENT_NAME_CODE_SYSTEM).getNodeValue();
 					if (textContent != null)
 						code.setCodeSystem(textContent);
 
-					textContent = node.getAttributes().getNamedItem("displayName").getNodeValue();
+					textContent = node.getAttributes().getNamedItem(ELEMENT_NAME_DISPLAY_NAME).getNodeValue();
 					if (textContent != null)
 						code.setDisplayName(textContent);
 
@@ -456,7 +461,6 @@ public class ValueSetManager {
 		valueSet.setVersion(version);
 
 		// Name is not available in IHE SVS format
-		// valueSet.setName(name);
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//ihesvs:ValueSet/ihesvs:Status/text()");
 		if (textContent != null) {
@@ -468,12 +472,6 @@ public class ValueSetManager {
 				valueSet.setStatus(ValueSetStatus.DEPRECATED);
 
 		}
-
-		// This is for debugging purposes, only:
-		// ValueSetManager mgr = new ValueSetManager();
-		// mgr.saveValueSet(valueSet,
-		// Util.getTempDirectory() + FileUtil.getPlatformSpecificPathSeparator()
-		// + "testDownloadedValueSetIheSvs.yaml");
 
 		return valueSet;
 	}
@@ -538,7 +536,7 @@ public class ValueSetManager {
 						IdentificatorBaseType.builder().withRoot(entry.getValue().toString()).build());
 			if ("name".contentEquals(key) && (entry.getValue() != null))
 				valueSet.setName(entry.getValue().toString());
-			if ("displayName".contentEquals(key) && (entry.getValue() != null))
+			if (ELEMENT_NAME_DISPLAY_NAME.contentEquals(key) && (entry.getValue() != null))
 				valueSet.setDisplayName(entry.getValue().toString());
 			if ("versionLabel".contentEquals(key) && (entry.getValue() != null))
 				version.setLabel(entry.getValue().toString());
@@ -589,7 +587,7 @@ public class ValueSetManager {
 					LanguageCode languageCode = null;
 					for (Entry<String, Object> subEntry : subMap.entrySet()) {
 						String subKey = subEntry.getKey();
-						if ("language".contentEquals(subKey) && (subEntry.getValue() != null)) {
+						if (ELEMENT_NAME_LANGUAGE.contentEquals(subKey) && (subEntry.getValue() != null)) {
 							String lang = subEntry.getValue().toString();
 							languageCode = getLanguageCode(lang);
 						}
@@ -681,11 +679,13 @@ public class ValueSetManager {
 								String entryType = null;
 								for (Entry<String, Object> subEntry2 : subMap2.entrySet()) {
 									String subKey2 = subEntry2.getKey();
-									if ("code".contentEquals(subKey2) && (subEntry2.getValue() != null))
+									if (ELEMENT_NAME_CODE.contentEquals(subKey2) && (subEntry2.getValue() != null))
 										entryCode = subEntry2.getValue().toString();
-									if ("codeSystem".contentEquals(subKey2) && (subEntry2.getValue() != null))
+									if (ELEMENT_NAME_CODE_SYSTEM.contentEquals(subKey2)
+											&& (subEntry2.getValue() != null))
 										entryCodeSystem = subEntry2.getValue().toString();
-									if ("displayName".contentEquals(subKey2) && (subEntry2.getValue() != null))
+									if (ELEMENT_NAME_DISPLAY_NAME.contentEquals(subKey2)
+											&& (subEntry2.getValue() != null))
 										entryDisplayName = subEntry2.getValue().toString();
 									if ("level".contentEquals(subKey2) && (subEntry2.getValue() != null))
 										entryLevel = subEntry2.getValue().toString();
@@ -701,7 +701,7 @@ public class ValueSetManager {
 											var designation = new Designation();
 											for (Entry<String, Object> subEntry3 : subMap3.entrySet()) {
 												String subKey3 = subEntry3.getKey();
-												if ("language".contentEquals(subKey3)
+												if (ELEMENT_NAME_LANGUAGE.contentEquals(subKey3)
 														&& (subEntry3.getValue() != null)) {
 													var languageCode = LanguageCode
 															.getEnum(subEntry3.getValue().toString().toLowerCase());
@@ -721,7 +721,7 @@ public class ValueSetManager {
 													if ("synonym".equalsIgnoreCase(subEntry3.getValue().toString()))
 														designation.setType(DesignationType.SYNONYM);
 												}
-												if ("displayName".contentEquals(subKey3)
+												if (ELEMENT_NAME_DISPLAY_NAME.contentEquals(subKey3)
 														&& (subEntry3.getValue() != null))
 													designation.setDisplayName(subEntry3.getValue().toString());
 											}
@@ -919,15 +919,15 @@ public class ValueSetManager {
 				var valueSetEntry = new ValueSetEntry();
 				var code = new CodeBaseType();
 
-				textContent = node.getAttributes().getNamedItem("code").getNodeValue();
+				textContent = node.getAttributes().getNamedItem(ELEMENT_NAME_CODE).getNodeValue();
 				if (textContent != null)
 					code.setCode(textContent);
 
-				textContent = node.getAttributes().getNamedItem("codeSystem").getNodeValue();
+				textContent = node.getAttributes().getNamedItem(ELEMENT_NAME_CODE_SYSTEM).getNodeValue();
 				if (textContent != null)
 					code.setCodeSystem(textContent);
 
-				textContent = node.getAttributes().getNamedItem("displayName").getNodeValue();
+				textContent = node.getAttributes().getNamedItem(ELEMENT_NAME_DISPLAY_NAME).getNodeValue();
 				if (textContent != null)
 					code.setDisplayName(textContent);
 
@@ -950,7 +950,7 @@ public class ValueSetManager {
 						var subNode = subNnodeList.item(j);
 						var designation = new Designation();
 
-						textContent = subNode.getAttributes().getNamedItem("language").getNodeValue();
+						textContent = subNode.getAttributes().getNamedItem(ELEMENT_NAME_LANGUAGE).getNodeValue();
 						if (textContent != null) {
 							var languageCode = LanguageCode.getEnum(textContent.toLowerCase());
 							if (languageCode == null)
@@ -963,7 +963,7 @@ public class ValueSetManager {
 							designation.setType(DesignationType.getEnum(textContent));
 						}
 
-						textContent = subNode.getAttributes().getNamedItem("displayName").getNodeValue();
+						textContent = subNode.getAttributes().getNamedItem(ELEMENT_NAME_DISPLAY_NAME).getNodeValue();
 						if (textContent != null)
 							designation.setDisplayName(textContent);
 

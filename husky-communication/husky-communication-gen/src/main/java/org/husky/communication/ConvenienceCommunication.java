@@ -27,16 +27,15 @@ import javax.mail.util.ByteArrayDataSource;
 import org.apache.camel.CamelContext;
 import org.husky.common.communication.AffinityDomain;
 import org.husky.common.communication.AtnaConfig;
+import org.husky.common.communication.AtnaConfig.AtnaConfigMode;
 import org.husky.common.communication.Destination;
 import org.husky.common.communication.DocumentMetadata;
-import org.husky.common.communication.SubmissionSetMetadata;
-import org.husky.common.communication.AtnaConfig.AtnaConfigMode;
 import org.husky.common.communication.DocumentMetadata.DocumentMetadataExtractionMode;
+import org.husky.common.communication.SubmissionSetMetadata;
 import org.husky.common.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
 import org.husky.common.enums.DocumentDescriptor;
 import org.husky.common.enums.EhcVersions;
 import org.husky.common.model.Code;
-import org.husky.common.utils.DateUtil;
 import org.husky.common.utils.OID;
 import org.husky.common.utils.Util;
 import org.husky.common.utils.XdsMetadataUtil;
@@ -99,6 +98,8 @@ public class ConvenienceCommunication extends CamelService {
 	private static final String SERVER_IN_LOGGER = "#serverInLogger";
 	private static final String SERVER_OUT_LOGGER = "#serverOutLogger";
 	private static final String AUDIT_CONTEXT = "#auditContext";
+	private static final String HTTPS_LITERAL = "https://";
+	private static final String HTTP_LITERAL = "http://";
 
 	@Autowired
 	private CamelContext context;
@@ -751,15 +752,14 @@ public class ConvenienceCommunication extends CamelService {
 		final var queryRegistry = new QueryRegistry(query.getIpfQuery());
 		queryRegistry.setReturnType(returnType);
 
-		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains("https://");
+		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains(HTTPS_LITERAL);
 
 		final var endpoint = String.format(
 				"xds-iti18://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=%s",
-				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", "").replace(
-						"http://", ""),
+				this.affinityDomain.getRepositoryDestination().getUri().toString().replace(HTTPS_LITERAL, "").replace(
+						HTTP_LITERAL, ""),
 				SERVER_IN_LOGGER, SERVER_IN_LOGGER, SERVER_OUT_LOGGER, SERVER_OUT_LOGGER, secure,
 				this.atnaConfigMode.equals(AtnaConfigMode.SECURE), AUDIT_CONTEXT);
-		log.info("Sending request to '{}' endpoint", endpoint);
 
 		final var exchange = send(endpoint, queryRegistry, securityHeader, null);
 
@@ -816,14 +816,13 @@ public class ConvenienceCommunication extends CamelService {
 			}
 		}
 
-		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains("https://");
+		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains(HTTPS_LITERAL);
 		final var endpoint = String.format(
 				"xds-iti43://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=%s",
-				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", "").replace(
-						"http://", ""),
+				this.affinityDomain.getRepositoryDestination().getUri().toString().replace(HTTPS_LITERAL, "").replace(
+						HTTP_LITERAL, ""),
 				SERVER_IN_LOGGER, SERVER_IN_LOGGER, SERVER_OUT_LOGGER, SERVER_OUT_LOGGER, secure,
 				this.atnaConfigMode.equals(AtnaConfigMode.SECURE), AUDIT_CONTEXT);
-		log.info("Sending request to '{}' endpoint", endpoint);
 
 		final var exchange = send(endpoint, retrieveDocumentSet, security, null);
 
@@ -998,14 +997,13 @@ public class ConvenienceCommunication extends CamelService {
 			}
 		}
 
-		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains("https://");
+		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains(HTTPS_LITERAL);
 		final var endpoint = String.format(
 				"xds-iti41://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=%s",
-				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", "")
-						.replace("http://", ""),
+				this.affinityDomain.getRepositoryDestination().getUri().toString().replace(HTTPS_LITERAL, "")
+						.replace(HTTP_LITERAL, ""),
 				SERVER_IN_LOGGER, SERVER_IN_LOGGER, SERVER_OUT_LOGGER, SERVER_OUT_LOGGER, secure,
 				this.atnaConfigMode.equals(AtnaConfigMode.SECURE), AUDIT_CONTEXT);
-		log.info("Sending request to '{}' endpoint", endpoint);
 
 		final var exchange = send(endpoint, txnData, security, null);
 

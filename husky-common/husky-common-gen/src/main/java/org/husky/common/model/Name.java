@@ -43,6 +43,13 @@ public class Name extends NameBaseType {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1233422782853908534L;
 
+	private static final String ELEMENT_NAME_NAMESPACE_DELIMITER = "hl7:delimiter";
+	private static final String ELEMENT_NAME_NAMESPACE_FAMILY = "hl7:family";
+	private static final String ELEMENT_NAME_NAMESPACE_GIVEN = "hl7:given";
+	private static final String ELEMENT_NAME_NAMESPACE_SUFFIX = "hl7:suffix";
+	private static final String ELEMENT_NAME_NAMESPACE_PREFIX = "hl7:prefix";
+	private static final String NAMESPACE_HL7 = "urn:hl7-org:v3";
+
 	/**
 	 * <div class="en">Creates the HL7 CDA R2 data type from the given base
 	 * type.<div>
@@ -72,35 +79,38 @@ public class Name extends NameBaseType {
 				var obj = new EnDelimiter();
 				obj.setXmlMixed(value);
 				retVal.getContent()
-						.add(new JAXBElement<EnDelimiter>(new QName("hl7:delimiter"), EnDelimiter.class, obj));
+						.add(new JAXBElement<EnDelimiter>(new QName(ELEMENT_NAME_NAMESPACE_DELIMITER), EnDelimiter.class, obj));
 			}
 
 			value = baseType.getFamily();
 			if (value != null) {
 				var obj = new EnFamily();
 				obj.setXmlMixed(value);
-				retVal.getContent().add(new JAXBElement<EnFamily>(new QName("hl7:family"), EnFamily.class, obj));
+				retVal.getContent().add(new JAXBElement<EnFamily>(new QName(ELEMENT_NAME_NAMESPACE_FAMILY), EnFamily.class, obj));
 			}
 
 			value = baseType.getGiven();
 			if (value != null) {
 				var obj = new EnGiven();
 				obj.setXmlMixed(value);
-				retVal.getContent().add(new JAXBElement<EnGiven>(new QName("hl7:given"), EnGiven.class, obj));
+				retVal.getContent()
+						.add(new JAXBElement<EnGiven>(new QName(ELEMENT_NAME_NAMESPACE_GIVEN), EnGiven.class, obj));
 			}
 
 			value = baseType.getPrefix();
 			if (value != null) {
 				var obj = new EnPrefix();
 				obj.setXmlMixed(value);
-				retVal.getContent().add(new JAXBElement<EnPrefix>(new QName("hl7:prefix"), EnPrefix.class, obj));
+				retVal.getContent()
+						.add(new JAXBElement<EnPrefix>(new QName(ELEMENT_NAME_NAMESPACE_PREFIX), EnPrefix.class, obj));
 			}
 
 			value = baseType.getSuffix();
 			if (value != null) {
 				var obj = new EnSuffix();
 				obj.setXmlMixed(value);
-				retVal.getContent().add(new JAXBElement<EnSuffix>(new QName("hl7:suffix"), EnSuffix.class, obj));
+				retVal.getContent()
+						.add(new JAXBElement<EnSuffix>(new QName(ELEMENT_NAME_NAMESPACE_SUFFIX), EnSuffix.class, obj));
 			}
 
 			value = baseType.getName();
@@ -142,35 +152,38 @@ public class Name extends NameBaseType {
 				var obj = new EnDelimiter();
 				obj.setXmlMixed(value);
 				retVal.getContent()
-						.add(new JAXBElement<EnDelimiter>(new QName("hl7:delimiter"), EnDelimiter.class, obj));
+						.add(new JAXBElement<EnDelimiter>(new QName(ELEMENT_NAME_NAMESPACE_DELIMITER), EnDelimiter.class, obj));
 			}
 
 			value = baseType.getFamily();
 			if (value != null) {
 				var obj = new EnFamily();
 				obj.setXmlMixed(value);
-				retVal.getContent().add(new JAXBElement<EnFamily>(new QName("hl7:family"), EnFamily.class, obj));
+				retVal.getContent().add(new JAXBElement<EnFamily>(new QName(ELEMENT_NAME_NAMESPACE_FAMILY), EnFamily.class, obj));
 			}
 
 			value = baseType.getGiven();
 			if (value != null) {
 				var obj = new EnGiven();
 				obj.setXmlMixed(value);
-				retVal.getContent().add(new JAXBElement<EnGiven>(new QName("hl7:given"), EnGiven.class, obj));
+				retVal.getContent()
+						.add(new JAXBElement<EnGiven>(new QName(ELEMENT_NAME_NAMESPACE_GIVEN), EnGiven.class, obj));
 			}
 
 			value = baseType.getPrefix();
 			if (value != null) {
 				var obj = new EnPrefix();
 				obj.setXmlMixed(value);
-				retVal.getContent().add(new JAXBElement<EnPrefix>(new QName("hl7:prefix"), EnPrefix.class, obj));
+				retVal.getContent()
+						.add(new JAXBElement<EnPrefix>(new QName(ELEMENT_NAME_NAMESPACE_PREFIX), EnPrefix.class, obj));
 			}
 
 			value = baseType.getSuffix();
 			if (value != null) {
 				var obj = new EnSuffix();
 				obj.setXmlMixed(value);
-				retVal.getContent().add(new JAXBElement<EnSuffix>(new QName("hl7:suffix"), EnSuffix.class, obj));
+				retVal.getContent()
+						.add(new JAXBElement<EnSuffix>(new QName(ELEMENT_NAME_NAMESPACE_SUFFIX), EnSuffix.class, obj));
 			}
 
 			value = baseType.getName();
@@ -217,7 +230,7 @@ public class Name extends NameBaseType {
 				var obj = new EnDelimiter();
 				obj.setXmlMixed(value);
 				retVal.getContent().add(
-						new JAXBElement<EnDelimiter>(new QName("urn:hl7-org:v3", "delimiter"), EnDelimiter.class, obj));
+						new JAXBElement<EnDelimiter>(new QName(NAMESPACE_HL7, "delimiter"), EnDelimiter.class, obj));
 			}
 
 			value = baseType.getFamily();
@@ -225,7 +238,7 @@ public class Name extends NameBaseType {
 				var obj = new EnFamily();
 				obj.setXmlMixed(value);
 				retVal.getContent()
-						.add(new JAXBElement<EnFamily>(new QName("urn:hl7-org:v3", "family"), EnFamily.class, obj));
+						.add(new JAXBElement<EnFamily>(new QName(NAMESPACE_HL7, "family"), EnFamily.class, obj));
 			}
 
 			value = baseType.getGiven();
@@ -233,7 +246,7 @@ public class Name extends NameBaseType {
 				var obj = new EnGiven();
 				obj.setXmlMixed(value);
 				retVal.getContent()
-						.add(new JAXBElement<EnGiven>(new QName("urn:hl7-org:v3", "given"), EnGiven.class, obj));
+						.add(new JAXBElement<EnGiven>(new QName(NAMESPACE_HL7, "given"), EnGiven.class, obj));
 			}
 
 			value = baseType.getPrefix();
@@ -244,7 +257,7 @@ public class Name extends NameBaseType {
 				// contribute.
 				obj.getQualifier().add("AC");
 				retVal.getContent()
-						.add(new JAXBElement<EnPrefix>(new QName("urn:hl7-org:v3", "prefix"), EnPrefix.class, obj));
+						.add(new JAXBElement<EnPrefix>(new QName(NAMESPACE_HL7, "prefix"), EnPrefix.class, obj));
 			}
 
 			value = baseType.getSuffix();
@@ -252,7 +265,7 @@ public class Name extends NameBaseType {
 				var obj = new EnSuffix();
 				obj.setXmlMixed(value);
 				retVal.getContent()
-						.add(new JAXBElement<EnSuffix>(new QName("urn:hl7-org:v3", "suffix"), EnSuffix.class, obj));
+						.add(new JAXBElement<EnSuffix>(new QName(NAMESPACE_HL7, "suffix"), EnSuffix.class, obj));
 			}
 
 			value = baseType.getName();
@@ -299,35 +312,38 @@ public class Name extends NameBaseType {
 				var obj = new EnDelimiter();
 				obj.setXmlMixed(value);
 				retVal.getContent()
-						.add(new JAXBElement<EnDelimiter>(new QName("hl7:delimiter"), EnDelimiter.class, obj));
+						.add(new JAXBElement<EnDelimiter>(new QName(ELEMENT_NAME_NAMESPACE_DELIMITER), EnDelimiter.class, obj));
 			}
 
 			value = baseType.getFamily();
 			if (value != null) {
 				var obj = new EnFamily();
 				obj.setXmlMixed(value);
-				retVal.getContent().add(new JAXBElement<EnFamily>(new QName("hl7:family"), EnFamily.class, obj));
+				retVal.getContent().add(new JAXBElement<EnFamily>(new QName(ELEMENT_NAME_NAMESPACE_FAMILY), EnFamily.class, obj));
 			}
 
 			value = baseType.getGiven();
 			if (value != null) {
 				var obj = new EnGiven();
 				obj.setXmlMixed(value);
-				retVal.getContent().add(new JAXBElement<EnGiven>(new QName("hl7:given"), EnGiven.class, obj));
+				retVal.getContent()
+						.add(new JAXBElement<EnGiven>(new QName(ELEMENT_NAME_NAMESPACE_GIVEN), EnGiven.class, obj));
 			}
 
 			value = baseType.getPrefix();
 			if (value != null) {
 				var obj = new EnPrefix();
 				obj.setXmlMixed(value);
-				retVal.getContent().add(new JAXBElement<EnPrefix>(new QName("hl7:prefix"), EnPrefix.class, obj));
+				retVal.getContent()
+						.add(new JAXBElement<EnPrefix>(new QName(ELEMENT_NAME_NAMESPACE_PREFIX), EnPrefix.class, obj));
 			}
 
 			value = baseType.getSuffix();
 			if (value != null) {
 				var obj = new EnSuffix();
 				obj.setXmlMixed(value);
-				retVal.getContent().add(new JAXBElement<EnSuffix>(new QName("hl7:suffix"), EnSuffix.class, obj));
+				retVal.getContent()
+						.add(new JAXBElement<EnSuffix>(new QName(ELEMENT_NAME_NAMESPACE_SUFFIX), EnSuffix.class, obj));
 			}
 
 			value = baseType.getName();

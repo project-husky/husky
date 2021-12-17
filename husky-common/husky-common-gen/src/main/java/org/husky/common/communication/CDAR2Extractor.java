@@ -58,7 +58,6 @@ import org.husky.common.hl7cdar2.POCDMT000040ServiceEvent;
 import org.husky.common.hl7cdar2.QTY;
 import org.husky.common.hl7cdar2.TEL;
 import org.husky.common.hl7cdar2.TS;
-import org.husky.common.utils.DateUtil;
 import org.husky.common.utils.time.Hl7Dtm;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Address;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssigningAuthority;
@@ -90,6 +89,17 @@ public class CDAR2Extractor {
 	 * logger
 	 */
 	private static Logger logger = LoggerFactory.getLogger(CDAR2Extractor.class);
+
+	private static final String INFORMATION_NOT_EXTRACTED = """
+			DocumentEntry.parentDocument expresses the id and relationship of a parent document to this CDA document in the XDS Registry.
+			         This is not necessarily the same parent document that is documented within the CDA.
+			         Thus, this information is not extracted.
+			       """;
+	private static final String INFO_PART_NOT_EXTRACTED = """
+			is an XDS specific attribute and outside the scope of any CDA R2 document.
+			Thus, it cannot be extracted.
+			""";
+	private static final String TIMEZONE = "-ZZZZ";
 
 	/**
 	 * Map between CDA R2 Administrative Gender codes and HL7v2.5 Table
@@ -344,7 +354,7 @@ public class CDAR2Extractor {
 			logger.debug("found author specialty");
 			aut.getAuthorSpecialty().add(speciality);
 		}
-		logger.debug("looking for telcom in:" + aAuth.getTelecom().toString());
+		logger.debug("looking for telcom in: {}", aAuth.getTelecom());
 		if (!aAuth.getTelecom().isEmpty()) {
 			logger.debug("telcom not empty");
 			Iterator<TEL> j = aAuth.getTelecom().iterator();
@@ -440,9 +450,7 @@ public class CDAR2Extractor {
 	 * @return null
 	 */
 	public String extractEntryUUID() {
-		logger.info("DocumentEntry.entryUUID "
-				+ "is an XDS specific attribute and outside the scope of any CDA R2 document. \nThus, it cannot be"
-				+ " extracted.");
+		logger.info("DocumentEntry.entryUUID " + INFO_PART_NOT_EXTRACTED);
 		return "";
 	}
 
@@ -477,9 +485,7 @@ public class CDAR2Extractor {
 	 * @return null
 	 */
 	public Code extractFormatCode() {
-		logger.info("DocumentEntry.formatCode "
-				+ "is an XDS specific attribute and outside the scope of any CDA R2 document. \nThus, it cannot be"
-				+ " extracted.");
+		logger.info("DocumentEntry.formatCode " + INFO_PART_NOT_EXTRACTED);
 		return null;
 	}
 
@@ -490,9 +496,7 @@ public class CDAR2Extractor {
 	 * @return null
 	 */
 	public String extractHash() {
-		logger.info("DocumentEntry.hash "
-				+ "is a comptuted value and outside the scope of any CDA R2 document. \nThus, it cannot be"
-				+ " extracted.");
+		logger.info("DocumentEntry.hash " + INFO_PART_NOT_EXTRACTED);
 		return "";
 	}
 
@@ -582,9 +586,7 @@ public class CDAR2Extractor {
 	 * @return null
 	 */
 	public String extractMimeType() {
-		logger.info("DocumentEntry.mimeType"
-				+ "is an XDS specific attribute and outside the scope of any CDA R2 document. \nThus, it cannot be"
-				+ " extracted.");
+		logger.info("DocumentEntry.mimeType" + INFO_PART_NOT_EXTRACTED);
 		return null;
 	}
 
@@ -597,9 +599,7 @@ public class CDAR2Extractor {
 	 * @return null
 	 */
 	public Identifiable extractParentDocument() {
-		logger.info("DocumentEntry.parentDocument expresses the id and relationship of a parent document to this CDA"
-				+ " document in the XDS Regisry.\nThis is not necessairly the same parent document that is"
-				+ " documented within the CDA. \nThus, this information is not" + " extracted.");
+		logger.info(INFORMATION_NOT_EXTRACTED);
 		return null;
 	}
 
@@ -611,9 +611,7 @@ public class CDAR2Extractor {
 	 * @return null
 	 */
 	public Identifiable extractPatientId() {
-		logger.info("DocumentEntry.patientId expresses the Affinity Domain level patient id used"
-				+ " in the XDS Regisry.\nIn all cases, this is not necessairly the same patientId that is"
-				+ " documented within the CDA. \nThus, this information is not" + " extracted.");
+		logger.info(INFORMATION_NOT_EXTRACTED);
 		return null;
 	}
 
@@ -626,9 +624,7 @@ public class CDAR2Extractor {
 	 * XDS, XDM and XDR.
 	 */
 	public Code extractPracticeSettingCode() {
-		logger.info("DocumentEntry.practiceSettingCode is recommended to be supplied by the document source"
-				+ " from an established vocabulary approved by the affinity domain, \n such as that described by the Subject Matter Domain in LOINC."
-				+ " \nThus, this information is not extracted.");
+		logger.info(INFORMATION_NOT_EXTRACTED);
 		return null;
 	}
 
@@ -639,9 +635,7 @@ public class CDAR2Extractor {
 	 * @return null
 	 */
 	public String extractRepositoryUniqueId() {
-		logger.info("DocumentEntry.repositoryUniqueId"
-				+ "is an XDS specific attribute and outside the scope of any CDA R2 document. \nThus, it cannot be"
-				+ " extracted.");
+		logger.info("DocumentEntry.repositoryUniqueId" + INFO_PART_NOT_EXTRACTED);
 		return null;
 	}
 
@@ -682,7 +676,7 @@ public class CDAR2Extractor {
 	}
 
 	private Timestamp extractMinLowTime(IVLTS range, Timestamp minLowTime) {
-		if (range == null || range.getRest() == null) {
+		if (range == null || range.getRest().isEmpty()) {
 			return minLowTime;
 		}
 
@@ -741,7 +735,7 @@ public class CDAR2Extractor {
 	}
 
 	private Timestamp extractMaxHighTime(IVLTS range, Timestamp maxHighTime) {
-		if (range == null || range.getRest() == null) {
+		if (range == null || range.getRest().isEmpty()) {
 			return maxHighTime;
 		}
 
@@ -1582,14 +1576,12 @@ public class CDAR2Extractor {
 
 		// Updated CP 524, 627 and 628 for IHE ITI TF v9 (2012-2013)
 		// XTN.3
-		// FIXME 12/19/12 SEK - not sure if this is required, no matching concept for
-		// this in CDA
 		xtn.setType("");
 		// XTN.4
 		xtn.setEmail(tel.getValue());
 
 		// XTN.12 - unformatted telephone number
-		// xtn.setUnformattedTelephoneNumber(tel.getValue());
+		// not implemented here
 
 		return xtn;
 	}
@@ -1619,14 +1611,14 @@ public class CDAR2Extractor {
 		String tm = time.getValue();
 		// Check for time zone
 		var offset = "";
-		if (tm.length() > "-ZZZZ".length()) {
+		if (tm.length() > TIMEZONE.length()) {
 			// check for minus GMT
-			if (tm.charAt(tm.length() - "-ZZZZ".length()) == '-') {
+			if (tm.charAt(tm.length() - TIMEZONE.length()) == '-') {
 				// found timezone offset
-				offset = tm.substring(tm.length() - "-ZZZZ".length());
+				offset = tm.substring(tm.length() - TIMEZONE.length());
 			}
 			// check for plus GMT
-			else if (tm.charAt(tm.length() - "-ZZZZ".length()) == '+') {
+			else if (tm.charAt(tm.length() - TIMEZONE.length()) == '+') {
 				// found timezone offset
 				offset = tm.substring(tm.length() - "+ZZZZ".length());
 			}
@@ -1643,15 +1635,12 @@ public class CDAR2Extractor {
 			// first, set up time in current time zone
 			sdf.setTimeZone(TimeZone.getTimeZone("GMT" + offset));
 			Date specifiedTime;
-			// System.out.println("Specified time is: " + tm);
-			// System.out.println("time zone is:GMT" + offset);
+
 			try {
 				// switch timezone
 				specifiedTime = sdf.parse(tm);
 				sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 				tm = sdf.format(specifiedTime);
-				// System.out.println("Specified time post conversion: "+ tm);
-				// System.exit(0);
 			} catch (ParseException e) {
 				// FIXME just skip the conversion, bad time stamp, hence bad
 				// CDA!
