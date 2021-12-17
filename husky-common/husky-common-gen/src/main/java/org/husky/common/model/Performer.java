@@ -11,7 +11,11 @@
 
 package org.husky.common.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
 
 import org.husky.common.basetypes.IdentificatorBaseType;
 import org.husky.common.enums.CodeSystems;
@@ -228,12 +232,12 @@ public class Performer {
 		// organisation name.
 		var retVal = "";
 		if ((mAsEntity != null) && (mAsEntity.getAssignedPerson() != null)) {
-			if (mAsEntity.getAssignedPerson().getName() != null) {
+			if (!mAsEntity.getAssignedPerson().getName().isEmpty()) {
 				final var name = new Name(mAsEntity.getAssignedPerson().getName().get(0));
 				retVal = name.getFullName();
 			} else {
 				if ((mAsEntity.getRepresentedOrganization() != null)
-						&& (mAsEntity.getRepresentedOrganization().getName() != null)) {
+						&& (!mAsEntity.getRepresentedOrganization().getName().isEmpty())) {
 					final var name = new Name(
 							mAsEntity.getRepresentedOrganization().getName().get(0));
 					retVal = name.getFullName();
