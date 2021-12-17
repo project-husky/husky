@@ -42,12 +42,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Implementation class of Interface Assertion</div>
- * <div class="de">Implementations Klasse von Interface Assertion</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Implementation class of Interface Assertion
  */
 public class AssertionImpl extends Assertion implements SecurityObject<org.opensaml.saml.saml2.core.Assertion> {
 
@@ -98,8 +93,6 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 
 	/**
 	 * {@inheritDoc}
-	 *
-	 * @see org.husky.xua.saml2.Assertion#getAttributes()
 	 */
 	public void setAttributes() {
 		if (this.statementOrAuthnStatementOrAuthzDecisionStatement == null) {
@@ -122,8 +115,6 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 
 	/**
 	 * {@inheritDoc}
-	 *
-	 * @see org.husky.xua.saml2.Assertion#getAttributes()
 	 */
 	public void getStatements(List<StatementAbstractType> statements) {
 		if (this.assertion == null) {
@@ -159,8 +150,6 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 	/**
 	 *
 	 * {@inheritDoc}
-	 *
-	 * @see org.husky.xua.saml2.Assertion#getAuthnStatements()
 	 */
 	public void setAuthnStatements() {
 		if (this.statementOrAuthnStatementOrAuthzDecisionStatement == null) {
@@ -175,8 +164,6 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 	/**
 	 *
 	 * {@inheritDoc}
-	 *
-	 * @see org.husky.xua.saml2.Assertion#getStatements()
 	 */
 	public void setStatements() {
 		if (this.statementOrAuthnStatementOrAuthzDecisionStatement == null) {
@@ -249,10 +236,7 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 	}
 
 	/**
-	 *
 	 * {@inheritDoc}
-	 *
-	 * @see org.husky.xua.saml2.Assertion#getId()
 	 */
 	public void setId() {
 		setID(assertion.getID());

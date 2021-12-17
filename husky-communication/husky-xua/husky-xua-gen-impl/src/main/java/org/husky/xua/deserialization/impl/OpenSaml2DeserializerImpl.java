@@ -19,12 +19,7 @@ import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.w3c.dom.Element;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Class implementing the corresponding interface OpenSaml2Deserializer<T> .</div>
- * <div class="de">Die Klasse implementiert das entsprechende interfaceOpenSaml2Deserializer<T> .</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Class implementing the corresponding interface {@code OpenSaml2Deserializer<T>}.
  */
 public class OpenSaml2DeserializerImpl<T> implements OpenSaml2Deserializer<T> {
 

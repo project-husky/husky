@@ -13,8 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A data structure that represents a medication prescription. Contrary to a {@link EmedPreEntryDigest}, it contains the
- * full state of the prescription (i.e the initial PRE item and all PADV items that have been aggregated).
+ * A data structure that represents a medication prescription. Contrary to a {@link
+ * org.husky.emed.cda.models.entry.EmedPreEntryDigest}, it contains the full state of the prescription (i.e the initial
+ * PRE item and all PADV items that have been aggregated).
  *
  * @author Quentin Ligier
  */
@@ -23,45 +24,43 @@ import java.util.List;
 public class MedicationPrescription {
 
     /**
-     * Reference to the PRE items.
-     */
-    @Nullable private EmedReference preReference;
-
-    /**
-     * The status of the prescription.
-     */
-    private PrescriptionStatus prescriptionStatus;
-
-    /**
-     * Number of dispense repeats/refills (excluding the initial dispense). {@code null} means no limitation.
-     */
-    @Nullable private Integer dispenseRepeatNumber = null;
-
-    /**
-     * PRE item starting time.
-     *
-     * TODO: mandatory?
-     */
-    @Nullable private Instant startTime;
-
-    /**
-     * PRE item ending time.
-     *
-     * TODO: mandatory?
-     */
-    @Nullable private Instant endTime;
-
-    /**
      * The list of substance substitution permissions.
-     *
+     * <p>
      * SPEC: single value? default value?
      */
     private final List<ActSubstanceAdminSubstitutionCode> substitutionPermissions = new ArrayList<>();
-
     /**
      * The list of 'over-the-counter' dispenses (OTC, without prescription).
      */
     private final List<MedicationDispense> dispenses = new ArrayList<>();
+    /**
+     * Reference to the PRE items.
+     */
+    @Nullable
+    private EmedReference preReference;
+    /**
+     * The status of the prescription.
+     */
+    private PrescriptionStatus prescriptionStatus;
+    /**
+     * Number of dispense repeats/refills (excluding the initial dispense). {@code null} means no limitation.
+     */
+    @Nullable
+    private Integer dispenseRepeatNumber = null;
+    /**
+     * PRE item starting time.
+     * <p>
+     * TODO: mandatory?
+     */
+    @Nullable
+    private Instant startTime;
+    /**
+     * PRE item ending time.
+     * <p>
+     * TODO: mandatory?
+     */
+    @Nullable
+    private Instant endTime;
 
     /**
      * Returns whether the dispense has been completed.
@@ -69,7 +68,7 @@ public class MedicationPrescription {
     private boolean isDispenseCompleted() {
         for (final MedicationDispense dispense : this.dispenses) {
             if (dispense.getDispenseType() == DispenseSupplyType.FIRST_FILL_COMPLETE
-                || dispense.getDispenseType() == DispenseSupplyType.REFILL_COMPLETE
+                    || dispense.getDispenseType() == DispenseSupplyType.REFILL_COMPLETE
             ) {
                 return true;
             }
@@ -87,8 +86,8 @@ public class MedicationPrescription {
      */
     public boolean mayBeReadyForValidationInTheFuture() {
         return !Instant.now().isAfter(this.endTime) &&
-            (this.prescriptionStatus == PrescriptionStatus.PROVISIONAL ||
-                this.prescriptionStatus == PrescriptionStatus.SUBMITTED);
+                (this.prescriptionStatus == PrescriptionStatus.PROVISIONAL ||
+                        this.prescriptionStatus == PrescriptionStatus.SUBMITTED);
     }
 
     /**

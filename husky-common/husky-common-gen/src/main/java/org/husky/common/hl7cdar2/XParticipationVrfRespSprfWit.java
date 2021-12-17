@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ * 
  * <pre>
  * &lt;simpleType name="x_ParticipationVrfRespSprfWit"&gt;
  *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;

@@ -15,12 +15,7 @@ import org.husky.xua.communication.clients.impl.ClientFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Class implementing the factory to instantiate correct clients according to the configuration for CH implementations.</div>
- * <div class="de">Klasse implementiert die factory um client instanzen entsprechend der Konfiguration zu erstellen für CH spezifische clients.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Class implementing the factory to instantiate correct clients according to the configuration for CH implementations.
  */
 
 @Component

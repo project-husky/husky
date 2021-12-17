@@ -26,12 +26,7 @@ import org.opensaml.saml.saml2.core.impl.AttributeStatementBuilder;
 import org.opensaml.saml.saml2.core.impl.IssuerBuilder;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Class implementing the corresponding interface for Assertion building.</div>
- * <div class="de">Die Klasse implementiert das entsprechende Interface um Assertion bilden zu k&ooml;nnen.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Class implementing the corresponding interface for Assertion building.
  */
 public class AssertionBuilderImpl implements AssertionBuilder,
 		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Assertion, Assertion> {
@@ -50,8 +45,6 @@ public class AssertionBuilderImpl implements AssertionBuilder,
 
 	/**
 	 * {@inheritDoc}
-	 *
-	 * @see org.husky.xua.saml2.AssertionBuilder#addAttribute(org.husky.xua.saml2.Attribute)
 	 */
 	@Override
 	public AssertionBuilder addAttribute(AttributeType attribute) {

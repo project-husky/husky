@@ -4,13 +4,6 @@
  * <p>Current CDA-CH-EMED release supported: <strong>v0.97.0</strong>
  *
  * <p>To update the code to a new CDA-CH-EMED release:
- * <ul>
- *     <li>1. The XML Schema must be adapted to the new release.
- *     <li>2.1. If large changes happen,
- *     <li>2.2. For small changes (e.g. ), the models can be adapted manually.
- *     <li>3. The {@link org.husky.emed.cda.CdaChEmedUtils} and
- *     {@link org.husky.emed.cda.NarrativeTextGenerator} should be adapted, if needed.
- * </ul>
  *
  * <p>There is currently no versioning of the module, apart from the natural eHC versioning; the code is continually
  * adapted to support the latest CDA-CH-EMED release. Breaking changes can happen at any time. There is actually no

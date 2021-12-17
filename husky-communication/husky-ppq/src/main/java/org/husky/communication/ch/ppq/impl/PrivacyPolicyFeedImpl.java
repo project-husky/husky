@@ -16,12 +16,7 @@ import org.husky.xua.saml2.impl.AssertionBuilderImpl;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Class implementing the corresponding interface for PrivacyPolicyFeed.</div>
- * <div class="de">Die Klasse implementiert das entsprechende Interface PrivacyPolicyFeed.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Class implementing the corresponding interface for PrivacyPolicyFeed.
  */
 public class PrivacyPolicyFeedImpl
 		implements PrivacyPolicyFeed, SecurityObject<org.opensaml.saml.saml2.core.Assertion> {

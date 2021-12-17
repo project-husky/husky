@@ -14,12 +14,7 @@ import org.husky.xua.deserialization.Deserializer;
 import org.husky.xua.deserialization.OpenSaml2Deserializer;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Abstract implementation class with the common methods and fields.</div>
- * <div class="de">Abstrakte implementations Klasse mit den gemeinsamen Methoden und Feldern.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Abstract implementation class with the common methods and fields.
  */
 public abstract class AbstractDeserializerImpl<T, U> implements Deserializer<U> {
 	private OpenSaml2Deserializer<T> openSamlDeserializer;

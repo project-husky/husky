@@ -89,21 +89,21 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">Adds a document to the XDS Submission set.
+	 * Adds a document to the XDS Submission set.
 	 *
 	 * @param desc
 	 *            the document descriptor (which kind of document do you want to
 	 *            transfer? e.g. PDF, CDA,...)
 	 * @param inputStream
 	 *            the input stream to the document
-	 * @return the document metadata (which have to be completed)</div>
+	 * @return the document metadata (which have to be completed)
 	 */
 	public DocumentMetadataCh addChDocument(DocumentDescriptor desc, InputStream inputStream) {
 		return addChDocument(desc, inputStream, null);
 	}
 
 	/**
-	 * <div class="en">Adds a document to the XDS Submission set.
+	 * Adds a document to the XDS Submission set.
 	 *
 	 * @param desc
 	 *            the document descriptor (which kind of document do you want to
@@ -112,7 +112,7 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	 *            the input stream to the document
 	 * @param inputStream4Metadata
 	 *            the input stream 4 metadata
-	 * @return the document metadata (which have to be completed)</div>
+	 * @return the document metadata (which have to be completed)
 	 */
 	public DocumentMetadataCh addChDocument(DocumentDescriptor desc, InputStream inputStream,
 			InputStream inputStream4Metadata) {
@@ -143,14 +143,14 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">Adds a document to the XDS Submission set.
+	 * Adds a document to the XDS Submission set.
 	 *
 	 * @param desc
 	 *            the document descriptor (which kind of document do you want to
 	 *            transfer? e.g. PDF, CDA,...)
 	 * @param filePath
 	 *            the file path
-	 * @return the document metadata (which have to be completed)</div>
+	 * @return the document metadata (which have to be completed)
 	 * @throws FileNotFoundException
 	 *             exception
 	 */
@@ -160,7 +160,7 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">Queries the registry of the affinity domain for all documents
+	 * Queries the registry of the affinity domain for all documents
 	 * of one patient. This is useful if the number of results is limited in the
 	 * registry and your query would exceed this limit. In this case, precise your
 	 * query or do a query for references first, choose the possible matches (e.g.
@@ -170,7 +170,7 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	 * @param security  a security header element for example an assertion
 	 * 
 	 * @return the IPF QueryResponse containing references instead of the complete
-	 *         document metadata</div>
+	 *         document metadata
 	 * @throws Exception
 	 */
 	public QueryResponse queryDocumentReferencesOnly(Identificator patientId, SecurityHeaderElement security)
@@ -180,13 +180,13 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">Queries the registry of the affinity domain for all documents
+	 * Queries the registry of the affinity domain for all documents
 	 * of one patient.
 	 *
 	 * @param patientId the ID of the patient
 	 * @param security  a security header element for example an assertion
 	 * 
-	 * @return the IPF Response containing full document metadata</div>
+	 * @return the IPF Response containing full document metadata
 	 * @throws Exception
 	 */
 	public QueryResponse queryDocuments(Identificator patientId, SecurityHeaderElement security)
@@ -196,7 +196,7 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">Submission of the previously prepared document(s) to the
+	 * Submission of the previously prepared document(s) to the
 	 * repository<br>
 	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE ITI
 	 * Document Source actor
@@ -206,7 +206,7 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	 *                   Switzerland.
 	 * @param security   a security header element for example an assertion
 	 * 
-	 * @return the IPF Response</div>
+	 * @return the IPF Response
 	 * @throws Exception if the transfer is not successful
 	 */
 	public Response submit(AuthorRole authorRole, SecurityHeaderElement security) throws Exception {

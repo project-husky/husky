@@ -15,12 +15,7 @@ import org.husky.communication.ch.ppq.api.PrivacyPolicyFeedResponseBuilder;
 import org.husky.communication.ch.ppq.api.PrivacyPolicyFeed.PpfMethod;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Class implementing the interfaces PrivacyPolicyFeedResponseBuilder.</div>
- * <div class="de">Klasse welche das Interface PrivacyPolicyFeedResponseBuilder implementiert.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Class implementing the interfaces PrivacyPolicyFeedResponseBuilder.
  */
 public class PrivacyPolicyFeedResponseBuilderImpl implements PrivacyPolicyFeedResponseBuilder {
 

@@ -20,12 +20,7 @@ import org.opensaml.saml.saml2.core.Issuer;
 import org.opensaml.saml.saml2.core.impl.IssuerBuilder;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Class implementing the corresponding interface for Assertion building.</div>
- * <div class="de">Die Klasse implementiert das entsprechende Interface um Assertion bilden zu k&ooml;nnen.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Class implementing the corresponding interface for Assertion building.
  */
 public class ArtifactResolveBuilderImpl implements ArtifactResolveBuilder,
 		SecurityObjectBuilder<org.opensaml.saml.saml2.core.ArtifactResolve, ArtifactResolve> {
