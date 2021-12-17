@@ -49,7 +49,8 @@ public class CdachHeaderDocumentReplacement extends POCDMT000040RelatedDocument 
     }
 
     /**
-     * Gets the hl7ParentDocument/Relationship to the document that needs to be replaced.
+     * Gets the hl7ParentDocument<br/>
+     * Relationship to the document that needs to be replaced.
      */
     public org.husky.common.hl7cdar2.POCDMT000040ParentDocument getHl7ParentDocument() {
         return parentDocument;

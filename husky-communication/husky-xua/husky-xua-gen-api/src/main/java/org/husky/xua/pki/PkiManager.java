@@ -86,7 +86,7 @@ public interface PkiManager {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to add a certificate to a keystore./div>
+	 * <div class="en">Method to add a certificate to a keystore.</div>
 	 * <div class="de">Methode um ein öffentliches Zertifikat im Key Store zu registrieren.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>

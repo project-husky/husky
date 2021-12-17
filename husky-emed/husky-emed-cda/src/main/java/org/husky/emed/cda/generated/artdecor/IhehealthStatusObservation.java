@@ -82,14 +82,16 @@ public class IhehealthStatusObservation extends POCDMT000040Observation {
     }
 
     /**
-     * Gets the hl7Code/This observation is of health status, as indicated by the &lt;code&gt; element. This element must be present.
+     * Gets the hl7Code<br/>
+     * This observation is of health status, as indicated by the &lt;code&gt; element. This element must be present.
      */
     public org.husky.common.hl7cdar2.CD getHl7Code() {
         return code;
     }
 
     /**
-     * Gets the hl7StatusCode/The code attribute of &lt;statusCode&gt; for all clinical status observations shall be completed. While the &lt;statusCode&gt; element is required in all acts to record the status of the act, the only sensible value of this element in this context is completed.
+     * Gets the hl7StatusCode<br/>
+     * The code attribute of &lt;statusCode&gt; for all clinical status observations shall be completed. While the &lt;statusCode&gt; element is required in all acts to record the status of the act, the only sensible value of this element in this context is completed.
      */
     public org.husky.common.hl7cdar2.CS getHl7StatusCode() {
         return statusCode;
@@ -103,14 +105,16 @@ public class IhehealthStatusObservation extends POCDMT000040Observation {
     }
 
     /**
-     * Gets the hl7Text/The &lt;text&gt; element is required and points to the text describing the problem being recorded; including any dates, comments, et cetera. The &lt;reference&gt; contains a URI in value attribute. This URI points to the free text description of the problem in the document that is being described.
+     * Gets the hl7Text<br/>
+     * The &lt;text&gt; element is required and points to the text describing the problem being recorded; including any dates, comments, et cetera. The &lt;reference&gt; contains a URI in value attribute. This URI points to the free text description of the problem in the document that is being described.
      */
     public org.husky.common.hl7cdar2.ED getHl7Text() {
         return text;
     }
 
     /**
-     * Gets the hl7Value/The &lt;value&gt; element contains the health status. It is always represented using the CE datatype (xsi:type='CE'). It shall contain a code from the following set of values from SNOMED CT.
+     * Gets the hl7Value<br/>
+     * The &lt;value&gt; element contains the health status. It is always represented using the CE datatype (xsi:type='CE'). It shall contain a code from the following set of values from SNOMED CT.
      */
     public List<ANY> getHl7Value() {
         return value;

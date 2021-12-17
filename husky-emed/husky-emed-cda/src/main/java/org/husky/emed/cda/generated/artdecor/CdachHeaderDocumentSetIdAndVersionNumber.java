@@ -30,14 +30,16 @@ public class CdachHeaderDocumentSetIdAndVersionNumber extends POCDMT000040Clinic
     }
 
     /**
-     * Gets the hl7SetId/The setId element MUST match the document id of the very first version of that document. It MUST remain the same for all document versions.
+     * Gets the hl7SetId<br/>
+     * The setId element MUST match the document id of the very first version of that document. It MUST remain the same for all document versions.
      */
     public org.husky.common.hl7cdar2.II getHl7SetId() {
         return setId;
     }
 
     /**
-     * Gets the hl7VersionNumber/The versionNumber element MUST contain the value 1 for the very first version of that document. For later versions, the version number MUST be increased by 1 each.
+     * Gets the hl7VersionNumber<br/>
+     * The versionNumber element MUST contain the value 1 for the very first version of that document. For later versions, the version number MUST be increased by 1 each.
      */
     public org.husky.common.hl7cdar2.INT getHl7VersionNumber() {
         return versionNumber;

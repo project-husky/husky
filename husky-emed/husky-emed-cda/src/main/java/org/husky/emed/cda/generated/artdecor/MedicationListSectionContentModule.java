@@ -17,7 +17,7 @@ import org.husky.common.hl7cdar2.POCDMT000040Section;
 /**
  * MedicationListSectionContentModule
  * <p>
- * Template description: The Medication List section shall contain a description of the Medication Treatment Plan-, Prescription-, Dispense- and Medication Administration Items assembled to a medication list. It shall include zero to many Medication Treatment Plan items and/or Prescription items and/or Dispense items and/or Medication Administration Items altogether with related Pharmaceutical Advice Items. See<a class="" href="http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_PML.pdf" target="" title="">IHE Pharmacy PML Suppl</a>.<br>
+ * Template description: The Medication List section shall contain a description of the Medication Treatment Plan-, Prescription-, Dispense- and Medication Administration Items assembled to a medication list. It shall include zero to many Medication Treatment Plan items and/or Prescription items and/or Dispense items and/or Medication Administration Items altogether with related Pharmaceutical Advice Items. See<a href="http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_PML.pdf">IHE Pharmacy PML Suppl</a>.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.1.10.3.44<br>
  * Effective date: 2018-01-22 15:40:38<br>
@@ -37,7 +37,8 @@ public class MedicationListSectionContentModule extends POCDMT000040Section {
     }
 
     /**
-     * Adds a hl7Author/Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
+     * Adds a hl7Author<br/>
+     * Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
      */
     public void addHl7Author(org.husky.common.hl7cdar2.POCDMT000040Author value) {
         getAuthor().add(value);
@@ -51,7 +52,8 @@ public class MedicationListSectionContentModule extends POCDMT000040Section {
     }
 
     /**
-     * Adds a hl7Author/Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
+     * Adds a hl7Author<br/>
+     * Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
      */
     public void clearHl7Author() {
         getAuthor().clear();
@@ -92,7 +94,8 @@ public class MedicationListSectionContentModule extends POCDMT000040Section {
     }
 
     /**
-     * Gets the hl7Code/IHE Pharm PML 6.3.3.10.S1.1<br clear="none"/>
+     * Gets the hl7Code<br/>
+     * IHE Pharm PML 6.3.3.10.S1.1<br/>
      */
     public org.husky.common.hl7cdar2.CE getHl7Code() {
         return code;
@@ -120,7 +123,8 @@ public class MedicationListSectionContentModule extends POCDMT000040Section {
     }
 
     /**
-     * Gets the hl7Title/<div>The German title shall be "Medikamentenliste".</div><div>The French title shall be "Liste de médicaments".</div><div>The Italian title shall be "Lista farmaci".</div><div>The English title shall be "Medication List".</div><div>Titles in other languages are allowed and unrestricted.</div>
+     * Gets the hl7Title<br/>
+     * <div>The German title shall be "Medikamentenliste".</div><div>The French title shall be "Liste de médicaments".</div><div>The Italian title shall be "Lista farmaci".</div><div>The English title shall be "Medication List".</div><div>Titles in other languages are allowed and unrestricted.</div>
      */
     public org.husky.common.hl7cdar2.ST getHl7Title() {
         return title;
@@ -128,7 +132,7 @@ public class MedicationListSectionContentModule extends POCDMT000040Section {
 
     /**
      * Sets the hl7Code<br/>
-     * IHE Pharm PML 6.3.3.10.S1.1<br clear="none"/>
+     * IHE Pharm PML 6.3.3.10.S1.1<br/>
      */
     public void setHl7Code(org.husky.common.hl7cdar2.CE value) {
         this.code = value;

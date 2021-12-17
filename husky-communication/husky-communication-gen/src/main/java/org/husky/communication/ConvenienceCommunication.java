@@ -683,7 +683,7 @@ public class ConvenienceCommunication extends CamelService {
      * query for metadata.
      *
      * @param queryParameter a findDocumentsQuery object filled with your query parameters
-     * @param security       a security header element for example an assertion
+     * @param securityHeader a security header element for example an assertion
      * @return the IPF QueryResponse containing references instead of the complete document metadata
      * @throws Exception
      */
@@ -696,7 +696,7 @@ public class ConvenienceCommunication extends CamelService {
      * Queries the document registry of the affinity domain for documents, using a find documents query.
      *
      * @param queryParameter a findDocumentsQuery object filled with your query parameters
-     * @param security       a security header element for example an assertion
+     * @param securityHeader a security header element for example an assertion
      * @return the IPF QueryResponse containing full document metadata
      * @throws Exception
      */
@@ -708,10 +708,10 @@ public class ConvenienceCommunication extends CamelService {
     /**
      * Queries the registry of the affinity domain for all documents satisfying the given query parameters.
      *
-     * @param query      one of the given queries (@see org.husky.communication.storedquery and
-     *                   org.husky.communication.storedquery.ch)
-     * @param security   a security header element for example an assertion
-     * @param returnType return type for XDS query
+     * @param query          one of the given queries (@see org.husky.communication.storedquery and
+     *                       org.husky.communication.storedquery.ch)
+     * @param securityHeader a security header element for example an assertion
+     * @param returnType     return type for XDS query
      * @return the IPF QueryResponse containing full document metadata
      * @throws Exception
      */

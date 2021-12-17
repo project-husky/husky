@@ -20,7 +20,7 @@ import org.husky.common.model.Code;
 /**
  * IHESeverityEntry
  * <p>
- * Template description: Any condition or allergy may be the subject of a severity observation. This structure is included <span style="line-height: 1.22;">in the target act using the &lt;entryRelationship&gt; element defined in the CDA Schema.</span><br>
+ * Template description: Any condition or allergy may be the subject of a severity observation. This structure is included in the target act using the &lt;entryRelationship&gt; element defined in the CDA Schema.<br>
  * <p>
  * Identifier: 1.3.6.1.4.1.19376.1.5.3.1.4.1<br>
  * Effective date: 2013-12-20 00:00:00<br>
@@ -92,14 +92,16 @@ public class IheseverityEntry extends POCDMT000040Observation {
     }
 
     /**
-     * Gets the hl7Code/This observation is of severity, as indicated by the &lt;code&gt; element listed above. This element is required.
+     * Gets the hl7Code<br/>
+     * This observation is of severity, as indicated by the &lt;code&gt; element listed above. This element is required.
      */
     public org.husky.common.hl7cdar2.CD getHl7Code() {
         return code;
     }
 
     /**
-     * Gets the hl7StatusCode/The code attribute of &lt;statusCode&gt; for all severity observations shall be completed. While the &lt;statusCode&gt; element is required in all acts to record the status of the act, the only sensible value of this element in this context is completed.
+     * Gets the hl7StatusCode<br/>
+     * The code attribute of &lt;statusCode&gt; for all severity observations shall be completed. While the &lt;statusCode&gt; element is required in all acts to record the status of the act, the only sensible value of this element in this context is completed.
      */
     public org.husky.common.hl7cdar2.CS getHl7StatusCode() {
         return statusCode;
@@ -113,7 +115,8 @@ public class IheseverityEntry extends POCDMT000040Observation {
     }
 
     /**
-     * Gets the hl7Text/The &lt;observation&gt; element shall contain a &lt;text&gt; element. The &lt;text&gt; element shall contain a &lt;reference&gt; element pointing to the narrative where the severity is recorded,
+     * Gets the hl7Text<br/>
+     * The &lt;observation&gt; element shall contain a &lt;text&gt; element. The &lt;text&gt; element shall contain a &lt;reference&gt; element pointing to the narrative where the severity is recorded,
      */
     public org.husky.common.hl7cdar2.ED getHl7Text() {
         return text;

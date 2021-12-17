@@ -25,7 +25,6 @@ public class V3Acknowledgement extends V3Response {
 	 * Constructor that accepts the XML containing the Acknowledgement message (MCCIIN000002UV01).
 	 * 
 	 * @param v3Acknowledgement
-	 * @throws Exception
 	 */
 	public V3Acknowledgement(MCCIIN000002UV01Type v3Acknowledgement) {
 

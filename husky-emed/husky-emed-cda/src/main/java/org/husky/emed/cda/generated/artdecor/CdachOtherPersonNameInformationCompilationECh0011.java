@@ -45,7 +45,8 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends POCDMT000
     }
 
     /**
-     * Gets the hl7Name/The person's legal name (with required family and given name).
+     * Gets the hl7Name<br/>
+     * The person's legal name (with required family and given name).
      */
     public List<org.husky.common.hl7cdar2.PN> getHl7Name() {
         return name;

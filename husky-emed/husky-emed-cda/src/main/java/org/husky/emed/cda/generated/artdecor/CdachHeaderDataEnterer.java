@@ -59,7 +59,8 @@ public class CdachHeaderDataEnterer extends POCDMT000040DataEnterer {
     }
 
     /**
-     * Gets the hl7Time/Timestamp of the data input.
+     * Gets the hl7Time<br/>
+     * Timestamp of the data input.
      */
     public org.husky.common.hl7cdar2.TS getHl7Time() {
         return time;

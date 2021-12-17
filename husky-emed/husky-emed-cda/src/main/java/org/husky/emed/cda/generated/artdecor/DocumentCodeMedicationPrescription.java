@@ -42,7 +42,8 @@ public class DocumentCodeMedicationPrescription extends CE {
     private final List<Code> vocabTranslationCode = new ArrayList<>();
 
     /**
-     * Gets the hl7Translation/Translation to the Swiss EPR XDS.b metadata.
+     * Gets the hl7Translation<br/>
+     * Translation to the Swiss EPR XDS.b metadata.
      */
     public List<org.husky.common.hl7cdar2.CD> getHl7Translation() {
         return translation;

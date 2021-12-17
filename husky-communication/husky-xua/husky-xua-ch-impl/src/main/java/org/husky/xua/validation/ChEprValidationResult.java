@@ -23,7 +23,9 @@ import org.opensaml.saml.common.assertion.ValidationContext;
 import org.opensaml.saml.common.assertion.ValidationResult;
 
 /**
+ * The result of a CH:EPR XUA SAML token validation.
  *
+ * @author Quentin Ligier
  */
 public class ChEprValidationResult {
 
@@ -110,6 +112,7 @@ public class ChEprValidationResult {
      *     <li>PADM: the unique ID the administrator is registered within the community.
      *     <li>PAT: the patient EPR-SPID.
      *     <li>REP: the unique ID the representative is registered within the community.
+     * </ul>
      */
     @Nullable
     public String getResponsibleSubjectId() {

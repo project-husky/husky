@@ -185,8 +185,10 @@ public class CceDocumentDigester {
 
     /**
      * Returns the starting time of the PRE document. It's the first known time from:
+     * <ul>
      * <li>The start date of the 'documentationOf' attribute of the PRE document;
      * <li>The creationTime of the document.
+     * </ul>
      *
      * @param cce           The PRE document.
      * @param effectiveTime The document effective time.
@@ -206,8 +208,10 @@ public class CceDocumentDigester {
 
     /**
      * Returns the ending time of the PRE document. It's the first known time from:
+     * <ul>
      * <li>The end date of the 'documentationOf' attribute of the MTP document.
      * <li>Three months after the document start time (see {@link ChEmedSpec#PRE_DEFAULT_DURATION_MONTHS}.
+     * </ul>
      *
      * @param cce           The PRE document.
      * @param effectiveTime The document effective time.

@@ -41,7 +41,7 @@ public class XmlFactories {
      *
      * @return a configured {@link DocumentBuilder}.
      * @throws ParserConfigurationException if the parser is not Xerces2 compatible.
-     * @see <a href="https://cheatsheetseries.owasp.org/cheatsheets/XML_External_Entity_Prevention_Cheat_Sheet.html#html#jaxp-documentbuilderfactory-saxparserfactory-and-dom4j">XML
+     * @see <a href="https://cheatsheetseries.owasp.org/cheatsheets/XML_External_Entity_Prevention_Cheat_Sheet.html#jaxp-documentbuilderfactory-saxparserfactory-and-dom4j">XML
      * External Entity Prevention Cheat Sheet</a>
      */
     public static DocumentBuilder newSafeDocumentBuilder() throws ParserConfigurationException {

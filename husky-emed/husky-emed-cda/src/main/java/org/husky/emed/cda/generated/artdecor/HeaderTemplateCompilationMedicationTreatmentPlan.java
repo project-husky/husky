@@ -30,14 +30,16 @@ public class HeaderTemplateCompilationMedicationTreatmentPlan extends POCDMT0000
     }
 
     /**
-     * Gets the hl7EffectiveTime/The document's creation date and time. If this document replaces a previous version (linked via parentDocument), this is the date and time of the new version.
+     * Gets the hl7EffectiveTime<br/>
+     * The document's creation date and time. If this document replaces a previous version (linked via parentDocument), this is the date and time of the new version.
      */
     public org.husky.common.hl7cdar2.TS getHl7EffectiveTime() {
         return effectiveTime;
     }
 
     /**
-     * Gets the hl7Title/<div>The German title shall be "Therapieentscheid Medikation".</div><div>The French title shall be "Décision thérapeutique relative à la médication".<br clear="none"/></div><div>The Italian title shall be "Decisione terapeutica di trattamento farmacologico".<br clear="none"/></div><div>The English title shall be "Medication Treatment Plan".<br clear="none"/>Titles in other languages are allowed and unrestricted.</div>
+     * Gets the hl7Title<br/>
+     * <div>The German title shall be "Therapieentscheid Medikation".</div><div>The French title shall be "Décision thérapeutique relative à la médication".<br/></div><div>The Italian title shall be "Decisione terapeutica di trattamento farmacologico".<br/></div><div>The English title shall be "Medication Treatment Plan".<br/>Titles in other languages are allowed and unrestricted.</div>
      */
     public org.husky.common.hl7cdar2.ST getHl7Title() {
         return title;
@@ -53,7 +55,7 @@ public class HeaderTemplateCompilationMedicationTreatmentPlan extends POCDMT0000
 
     /**
      * Sets the hl7Title<br/>
-     * <div>The German title shall be "Therapieentscheid Medikation".</div><div>The French title shall be "Décision thérapeutique relative à la médication".<br clear="none"/></div><div>The Italian title shall be "Decisione terapeutica di trattamento farmacologico".<br clear="none"/></div><div>The English title shall be "Medication Treatment Plan".<br clear="none"/>Titles in other languages are allowed and unrestricted.</div>
+     * <div>The German title shall be "Therapieentscheid Medikation".</div><div>The French title shall be "Décision thérapeutique relative à la médication".<br/></div><div>The Italian title shall be "Decisione terapeutica di trattamento farmacologico".<br/></div><div>The English title shall be "Medication Treatment Plan".<br/>Titles in other languages are allowed and unrestricted.</div>
      */
     public void setHl7Title(org.husky.common.hl7cdar2.ST value) {
         this.title = value;

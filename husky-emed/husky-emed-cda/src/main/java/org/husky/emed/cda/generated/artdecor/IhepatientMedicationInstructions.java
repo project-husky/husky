@@ -20,7 +20,7 @@ import org.husky.common.model.Code;
 /**
  * IHEPatientMedicationInstructions
  * <p>
- * Template description: <div>Any medication may be the subject of further instructions to the patient, for example to indicate <span style="line-height: 1.22;">that it should be taken with food, et cetera.</span></div><br>
+ * Template description: <div>Any medication may be the subject of further instructions to the patient, for example to indicate that it should be taken with food, et cetera.</div><br>
  * <p>
  * Identifier: 1.3.6.1.4.1.19376.1.5.3.1.4.3<br>
  * Effective date: 2013-12-20 00:00:00<br>

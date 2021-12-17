@@ -120,7 +120,8 @@ public class IheproblemEntry extends POCDMT000040Observation {
     }
 
     /**
-     * Gets the hl7StatusCode/A clinical document normally records only those condition observation events that have been completed, not observations that are in any other state. Therefore, the &lt;statusCode&gt; shall always have code='completed'.
+     * Gets the hl7StatusCode<br/>
+     * A clinical document normally records only those condition observation events that have been completed, not observations that are in any other state. Therefore, the &lt;statusCode&gt; shall always have code='completed'.
      */
     public org.husky.common.hl7cdar2.CS getHl7StatusCode() {
         return statusCode;
@@ -134,7 +135,8 @@ public class IheproblemEntry extends POCDMT000040Observation {
     }
 
     /**
-     * Gets the hl7Text/<div>The &lt;text&gt; element is required and points to the text describing the problem being recorded; <span style="line-height: 1.22;">including any dates, comments, et cetera. The &lt;reference&gt; contains a URI in value attribute. This </span><span style="line-height: 1.22;">URI points to the free text description of the problem in the document that is being described</span></div>
+     * Gets the hl7Text<br/>
+     * <div>The &lt;text&gt; element is required and points to the text describing the problem being recorded; including any dates, comments, et cetera. The &lt;reference&gt; contains a URI in value attribute. This URI points to the free text description of the problem in the document that is being described</div>
      */
     public org.husky.common.hl7cdar2.ED getHl7Text() {
         return text;
@@ -208,7 +210,7 @@ public class IheproblemEntry extends POCDMT000040Observation {
 
     /**
      * Sets the hl7Text<br/>
-     * <div>The &lt;text&gt; element is required and points to the text describing the problem being recorded; <span style="line-height: 1.22;">including any dates, comments, et cetera. The &lt;reference&gt; contains a URI in value attribute. This </span><span style="line-height: 1.22;">URI points to the free text description of the problem in the document that is being described</span></div>
+     * <div>The &lt;text&gt; element is required and points to the text describing the problem being recorded; including any dates, comments, et cetera. The &lt;reference&gt; contains a URI in value attribute. This URI points to the free text description of the problem in the document that is being described</div>
      */
     public void setHl7Text(org.husky.common.hl7cdar2.ED value) {
         this.text = value;

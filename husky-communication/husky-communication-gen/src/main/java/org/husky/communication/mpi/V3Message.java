@@ -51,7 +51,7 @@ public abstract class V3Message {
 	 * 
 	 * @param i
 	 *            (the index of the receiving application to get)
-	 * @returnString - Receiving Application
+	 * @return String - Receiving Application
 	 */
 	public String getReceivingApplication(int i) {
 		String returnValue = null;

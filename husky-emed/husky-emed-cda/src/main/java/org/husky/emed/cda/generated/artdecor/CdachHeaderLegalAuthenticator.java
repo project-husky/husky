@@ -79,7 +79,8 @@ public class CdachHeaderLegalAuthenticator extends POCDMT000040LegalAuthenticato
     }
 
     /**
-     * Gets the hl7Time/Timestamp of the signature.
+     * Gets the hl7Time<br/>
+     * Timestamp of the signature.
      */
     public org.husky.common.hl7cdar2.TS getHl7Time() {
         return time;

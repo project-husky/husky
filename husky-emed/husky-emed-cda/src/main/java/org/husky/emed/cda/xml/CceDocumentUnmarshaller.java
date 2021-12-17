@@ -35,12 +35,14 @@ public class CceDocumentUnmarshaller {
     /**
      * Unmarshalles a CDA-CH-EMED document as a specialized {@link POCDMT000040ClinicalDocument} object.
      *
+     * <ul>
      * <li>A PML document will be unmarshalled as {@link MedicationListDocument}.
      * <li>A PMLC document will be unmarshalled as {@link MedicationCardDocument}.
      * <li>An MTP document will be unmarshalled as {@link MedicationTreatmentPlanDocument}.
      * <li>A PRE document will be unmarshalled as {@link MedicationPrescriptionDocument}.
      * <li>A DIS document will be unmarshalled as {@link MedicationDispenseDocument}.
      * <li>A PADV document will be unmarshalled as {@link PharmaceuticalAdviceDocument}.
+     * </ul>
      *
      * @param cdaContent The CDA XML content as a string.
      * @return the unmarshalled clinical document.
@@ -56,12 +58,14 @@ public class CceDocumentUnmarshaller {
     /**
      * Unmarshalles a CDA-CH-EMED document as a specialized {@link POCDMT000040ClinicalDocument} object.
      *
+     * <ul>
      * <li>A PML document will be unmarshalled as {@link MedicationListDocument}.
      * <li>A PMLC document will be unmarshalled as {@link MedicationCardDocument}.
      * <li>An MTP document will be unmarshalled as {@link MedicationTreatmentPlanDocument}.
      * <li>A PRE document will be unmarshalled as {@link MedicationPrescriptionDocument}.
      * <li>A DIS document will be unmarshalled as {@link MedicationDispenseDocument}.
      * <li>A PADV document will be unmarshalled as {@link PharmaceuticalAdviceDocument}.
+     * </ul>
      *
      * @param cdaInputStream The CDA XML content as an {@link InputStream}.
      * @return the unmarshalled clinical document.
@@ -77,12 +81,14 @@ public class CceDocumentUnmarshaller {
     /**
      * Unmarshalles a CDA-CH-EMED document as a specialized {@link POCDMT000040ClinicalDocument} object.
      *
+     * <ul>
      * <li>A PML document will be unmarshalled as {@link MedicationListDocument}.
      * <li>A PMLC document will be unmarshalled as {@link MedicationCardDocument}.
      * <li>An MTP document will be unmarshalled as {@link MedicationTreatmentPlanDocument}.
      * <li>A PRE document will be unmarshalled as {@link MedicationPrescriptionDocument}.
      * <li>A DIS document will be unmarshalled as {@link MedicationDispenseDocument}.
      * <li>A PADV document will be unmarshalled as {@link PharmaceuticalAdviceDocument}.
+     * </ul>
      *
      * @param inputSource The CDA XML content as an {@link InputSource}.
      * @return the unmarshalled clinical document.

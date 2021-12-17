@@ -474,8 +474,7 @@ public class Value {
     }
 
     /**
-     * Returns the higher bound of an interval of physical measurements</div> Gibt den oberen Wert eines Intervals
-     * physikalischer Größen zurück.
+     * Returns the higher bound of an interval of physical measurements
      *
      * @return the measurement
      */

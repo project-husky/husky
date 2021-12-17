@@ -105,7 +105,7 @@ public class V3PdqQuery implements MpiQuery {
 	/**
 	 * Adds a patient address to the query.
 	 *
-	 * @param Address
+	 * @param address
 	 *            the address to be queried for
 	 * @return the query object
 	 */
@@ -149,7 +149,7 @@ public class V3PdqQuery implements MpiQuery {
 	/**
 	 * Adds a patient identifier to be queried for
 	 *
-	 * @param Identifier
+	 * @param identifier
 	 *            patient identifier
 	 * @return the query object
 	 */
@@ -186,7 +186,7 @@ public class V3PdqQuery implements MpiQuery {
 	/**
 	 * Adds a patient telecom to be queried for.
 	 *
-	 * @param ContactPoint
+	 * @param contactPoint
 	 *            telecom
 	 * @return the query object
 	 */

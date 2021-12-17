@@ -47,7 +47,8 @@ public class CdachHeaderPatientContact extends POCDMT000040Participant1 {
     }
 
     /**
-     * Gets the hl7AssociatedEntity/Either the contact person or the contact's organization SHALL be present.
+     * Gets the hl7AssociatedEntity<br/>
+     * Either the contact person or the contact's organization SHALL be present.
      */
     public org.husky.common.hl7cdar2.POCDMT000040AssociatedEntity getHl7AssociatedEntity() {
         return associatedEntity;
@@ -61,7 +62,8 @@ public class CdachHeaderPatientContact extends POCDMT000040Participant1 {
     }
 
     /**
-     * Gets the hl7Time/Validity period of the participation.
+     * Gets the hl7Time<br/>
+     * Validity period of the participation.
      */
     public org.husky.common.hl7cdar2.IVLTS getHl7Time() {
         return time;

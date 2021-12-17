@@ -99,14 +99,16 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
     }
 
     /**
-     * Gets the hl7Code/An optional narrative description of the concern
+     * Gets the hl7Code<br/>
+     * An optional narrative description of the concern
      */
     public org.husky.common.hl7cdar2.CD getHl7Code() {
         return code;
     }
 
     /**
-     * Gets the hl7EffectiveTime/Problems determined
+     * Gets the hl7EffectiveTime<br/>
+     * Problems determined
      */
     public org.husky.common.hl7cdar2.IVLTS getHl7EffectiveTime() {
         return effectiveTime;
@@ -120,28 +122,32 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
     }
 
     /**
-     * Gets the hl7Id/Pharmaceutical Advice Concern ID
+     * Gets the hl7Id<br/>
+     * Pharmaceutical Advice Concern ID
      */
     public List<org.husky.common.hl7cdar2.II> getHl7Id() {
         return id;
     }
 
     /**
-     * Gets the hl7StatusCode/Status Code
+     * Gets the hl7StatusCode<br/>
+     * Status Code
      */
     public org.husky.common.hl7cdar2.CS getHl7StatusCode() {
         return statusCode;
     }
 
     /**
-     * Gets the hl7TemplateId/CH-PHARM Pharmaceutical Advice Concern Entry TemplateID
+     * Gets the hl7TemplateId<br/>
+     * CH-PHARM Pharmaceutical Advice Concern Entry TemplateID
      */
     public List<org.husky.common.hl7cdar2.II> getHl7TemplateId() {
         return templateId;
     }
 
     /**
-     * Gets the hl7Text/It shall contain both the narrative text content and a reference to the human readable part of the item. This human readable part may contain a simple text to redirect the reader to the PDF document (e.g. "See PDF version included").<br clear="none"/>There shall be a single non-blank text node (i.e. the text shall be completely before or after the reference, see examples). The text shall be raw (i.e. no markup shall be used).
+     * Gets the hl7Text<br/>
+     * It shall contain both the narrative text content and a reference to the human readable part of the item. This human readable part may contain a simple text to redirect the reader to the PDF document (e.g. "See PDF version included").<br/>There shall be a single non-blank text node (i.e. the text shall be completely before or after the reference, see examples). The text shall be raw (i.e. no markup shall be used).
      */
     public org.husky.common.hl7cdar2.ED getHl7Text() {
         return text;
@@ -226,7 +232,7 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends POCDMT000040A
 
     /**
      * Sets the hl7Text<br/>
-     * It shall contain both the narrative text content and a reference to the human readable part of the item. This human readable part may contain a simple text to redirect the reader to the PDF document (e.g. "See PDF version included").<br clear="none"/>There shall be a single non-blank text node (i.e. the text shall be completely before or after the reference, see examples). The text shall be raw (i.e. no markup shall be used).
+     * It shall contain both the narrative text content and a reference to the human readable part of the item. This human readable part may contain a simple text to redirect the reader to the PDF document (e.g. "See PDF version included").<br/>There shall be a single non-blank text node (i.e. the text shall be completely before or after the reference, see examples). The text shall be raw (i.e. no markup shall be used).
      */
     public void setHl7Text(org.husky.common.hl7cdar2.ED value) {
         this.text = value;

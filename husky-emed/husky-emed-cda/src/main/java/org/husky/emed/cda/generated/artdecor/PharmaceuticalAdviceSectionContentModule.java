@@ -37,14 +37,16 @@ public class PharmaceuticalAdviceSectionContentModule extends POCDMT000040Sectio
     }
 
     /**
-     * Adds a hl7Author/Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
+     * Adds a hl7Author<br/>
+     * Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
      */
     public void addHl7Author(org.husky.common.hl7cdar2.POCDMT000040Author value) {
         getAuthor().add(value);
     }
 
     /**
-     * Adds a hl7Author/Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
+     * Adds a hl7Author<br/>
+     * Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
      */
     public void clearHl7Author() {
         getAuthor().clear();
@@ -113,7 +115,8 @@ public class PharmaceuticalAdviceSectionContentModule extends POCDMT000040Sectio
     }
 
     /**
-     * Gets the hl7Title/<div>The German title shall be "Hinweise zur Medikation".</div><div>The French title shall be "Conseils sur les médicaments".</div><div>The Italian title shall be "Consigli sui medicamenti".</div><div>The English title shall be "Pharmaceutical Advice".</div><div>Titles in other languages are allowed and unrestricted.</div>
+     * Gets the hl7Title<br/>
+     * <div>The German title shall be "Hinweise zur Medikation".</div><div>The French title shall be "Conseils sur les médicaments".</div><div>The Italian title shall be "Consigli sui medicamenti".</div><div>The English title shall be "Pharmaceutical Advice".</div><div>Titles in other languages are allowed and unrestricted.</div>
      */
     public org.husky.common.hl7cdar2.ST getHl7Title() {
         return title;

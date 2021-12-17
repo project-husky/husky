@@ -54,7 +54,8 @@ public class IheallergyAndIntoleranceEntry extends POCDMT000040Observation {
     }
 
     /**
-     * Adds a hl7Value/<br clear="none"/>
+     * Adds a hl7Value<br/>
+     * <br/>
      */
     public void addHl7Value(org.husky.common.hl7cdar2.CD value) {
         getValue().add(value);
@@ -75,7 +76,8 @@ public class IheallergyAndIntoleranceEntry extends POCDMT000040Observation {
     }
 
     /**
-     * Adds a hl7Value/<br clear="none"/>
+     * Adds a hl7Value<br/>
+     * <br/>
      */
     public void clearHl7Value() {
         getValue().clear();
@@ -151,7 +153,8 @@ public class IheallergyAndIntoleranceEntry extends POCDMT000040Observation {
     }
 
     /**
-     * Gets the hl7Participant/<br clear="none"/>
+     * Gets the hl7Participant<br/>
+     * <br/>
      */
     public List<org.husky.common.hl7cdar2.POCDMT000040Participant2> getHl7Participant() {
         return participant;
@@ -229,7 +232,7 @@ public class IheallergyAndIntoleranceEntry extends POCDMT000040Observation {
 
     /**
      * Sets the hl7Participant<br/>
-     * <br clear="none"/>
+     * <br/>
      */
     public void setHl7Participant(org.husky.common.hl7cdar2.POCDMT000040Participant2 value) {
         getParticipant().clear();

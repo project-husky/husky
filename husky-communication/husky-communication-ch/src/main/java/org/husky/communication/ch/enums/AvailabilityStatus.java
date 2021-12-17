@@ -20,12 +20,9 @@ import org.husky.common.enums.LanguageCode;
 import org.husky.common.enums.ValueSetEnumInterface;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Document availability status as per Annex 3&amp;#160; EPRO-FDHA, Chapter 2.2.&lt;br clear="none"/&gt;</div>
- * <div class="de">Verfügbarkeitsstatus des Dokumentes gemäss Anhang 3 EPDV-EDI, Kapitel 2.2.&lt;br clear="none"/&gt;</div>
- * <div class="fr">Statut de disponibilité du document selon l'annexe 3 ODEP-DFI, chapitre 2.2.&lt;br clear="none"/&gt;</div>
- * <div class="it">Stato di disponibilità del documento secondo l'allegato 3 OCIP-DFI, capitolo 2.2. &lt;br clear="none"/&gt;</div>
- * <!-- @formatter:on -->
+ * Document availability status.
+ *
+ * This is not a value set anymore and won't be updated again.
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
 public enum AvailabilityStatus implements ValueSetEnumInterface {

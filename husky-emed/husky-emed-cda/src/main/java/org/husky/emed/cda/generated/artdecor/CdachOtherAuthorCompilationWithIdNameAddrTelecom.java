@@ -53,7 +53,8 @@ public class CdachOtherAuthorCompilationWithIdNameAddrTelecom extends POCDMT0000
     }
 
     /**
-     * Gets the hl7Time/Timestamp of the authorship.
+     * Gets the hl7Time<br/>
+     * Timestamp of the authorship.
      */
     public org.husky.common.hl7cdar2.TS getHl7Time() {
         return time;

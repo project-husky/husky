@@ -42,14 +42,16 @@ public class ChpccEntryAnnotationComments extends POCDMT000040Act {
     }
 
     /**
-     * Adds a hl7Author/The author of the statement SHALL be specified either here or in one of the ancestors.
+     * Adds a hl7Author<br/>
+     * The author of the statement SHALL be specified either here or in one of the ancestors.
      */
     public void addHl7Author(org.husky.common.hl7cdar2.POCDMT000040Author value) {
         getAuthor().add(value);
     }
 
     /**
-     * Adds a hl7Author/The author of the statement SHALL be specified either here or in one of the ancestors.
+     * Adds a hl7Author<br/>
+     * The author of the statement SHALL be specified either here or in one of the ancestors.
      */
     public void clearHl7Author() {
         getAuthor().clear();
@@ -98,21 +100,24 @@ public class ChpccEntryAnnotationComments extends POCDMT000040Act {
     }
 
     /**
-     * Gets the hl7Code/The reference to the text in the narrative section of the section MUST be specified.
+     * Gets the hl7Code<br/>
+     * The reference to the text in the narrative section of the section MUST be specified.
      */
     public org.husky.common.hl7cdar2.CD getHl7Code() {
         return code;
     }
 
     /**
-     * Gets the hl7Id/An ID for this item MAY be filled for traceability.
+     * Gets the hl7Id<br/>
+     * An ID for this item MAY be filled for traceability.
      */
     public List<org.husky.common.hl7cdar2.II> getHl7Id() {
         return id;
     }
 
     /**
-     * Gets the hl7StatusCode/The status 'completed' indicates that the comment is final.
+     * Gets the hl7StatusCode<br/>
+     * The status 'completed' indicates that the comment is final.
      */
     public org.husky.common.hl7cdar2.CS getHl7StatusCode() {
         return statusCode;

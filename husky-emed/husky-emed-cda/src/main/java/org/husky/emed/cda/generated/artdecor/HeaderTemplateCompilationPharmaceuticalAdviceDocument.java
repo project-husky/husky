@@ -30,14 +30,16 @@ public class HeaderTemplateCompilationPharmaceuticalAdviceDocument extends POCDM
     }
 
     /**
-     * Gets the hl7EffectiveTime/The document's creation date and time. If this document replaces a previous version (linked via parentDocument), this is the date and time of the new version.
+     * Gets the hl7EffectiveTime<br/>
+     * The document's creation date and time. If this document replaces a previous version (linked via parentDocument), this is the date and time of the new version.
      */
     public org.husky.common.hl7cdar2.TS getHl7EffectiveTime() {
         return effectiveTime;
     }
 
     /**
-     * Gets the hl7Title/<div>The German title shall be "Kommentar zur Medikation".</div><div>The French title shall be "Commentaire relatif à la médication".</div><div>The Italian title shall be "Commento sulla terapia farmacologica".</div><div>The English title shall be "Pharmaceutical Advice".</div><div>Titles in other languages are allowed and unrestricted.</div>
+     * Gets the hl7Title<br/>
+     * <div>The German title shall be "Kommentar zur Medikation".</div><div>The French title shall be "Commentaire relatif à la médication".</div><div>The Italian title shall be "Commento sulla terapia farmacologica".</div><div>The English title shall be "Pharmaceutical Advice".</div><div>Titles in other languages are allowed and unrestricted.</div>
      */
     public org.husky.common.hl7cdar2.ST getHl7Title() {
         return title;

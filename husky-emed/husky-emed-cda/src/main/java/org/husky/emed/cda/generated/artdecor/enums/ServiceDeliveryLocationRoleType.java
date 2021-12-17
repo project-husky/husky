@@ -1175,7 +1175,7 @@ public enum ServiceDeliveryLocationRoleType implements ValueSetEnumInterface {
               "TOTRANSLATE",
               "TOTRANSLATE"),
     /**
-     * EN: Skilled nursing facility Nursing & Custodial Care Facilities; Skilled Nursing Facility.<br>
+     * EN: Skilled nursing facility Nursing &amp; Custodial Care Facilities; Skilled Nursing Facility.<br>
      */
     SKILLED_NURSING_FACILITY_NURSING_CUSTODIAL_CARE_FACILITIES_SKILLED_NURSING_FACILITY_L4("SNF",
                                                                                            "2.16.840.1.113883.5.111",
@@ -1876,7 +1876,7 @@ public enum ServiceDeliveryLocationRoleType implements ValueSetEnumInterface {
     public static final String SCHOOL_L2_CODE = "SCHOOL";
 
     /**
-     * EN: Code for Skilled nursing facility Nursing & Custodial Care Facilities; Skilled Nursing Facility.<br>
+     * EN: Code for Skilled nursing facility Nursing &amp; Custodial Care Facilities; Skilled Nursing Facility.<br>
      */
     public static final String SKILLED_NURSING_FACILITY_NURSING_CUSTODIAL_CARE_FACILITIES_SKILLED_NURSING_FACILITY_L4_CODE = "SNF";
 

@@ -21,7 +21,7 @@ import org.husky.common.model.Code;
 /**
  * IHEProblemStatusObservation
  * <p>
- * Template description: Any problem or allergy observation may reference a problem status observation. This structure is <span style="line-height: 1.22;">included in the target observation using the &lt;entryRelationship&gt; element defined in the CDA </span><span style="line-height: 1.22;">Schema. The clinical status observation records information about the current status of the </span><span style="line-height: 1.22;">problem or allergy, for example, whether it is active, in remission, resolved, et cetera. The </span><span style="line-height: 1.22;">example below shows the recording of clinical status of a condition or allergy, and is used as the </span><span style="line-height: 1.22;">context for the following sections.</span><br>
+ * Template description: Any problem or allergy observation may reference a problem status observation. This structure is included in the target observation using the &lt;entryRelationship&gt; element defined in the CDA Schema. The clinical status observation records information about the current status of the problem or allergy, for example, whether it is active, in remission, resolved, et cetera. The example below shows the recording of clinical status of a condition or allergy, and is used as the context for the following sections.<br>
  * <p>
  * Identifier: 1.3.6.1.4.1.19376.1.5.3.1.4.1.1<br>
  * Effective date: 2013-12-20 00:00:00<br>
@@ -83,14 +83,16 @@ public class IheproblemStatusObservation extends POCDMT000040Observation {
     }
 
     /**
-     * Gets the hl7Code/This observation is of clinical status, as indicated by the &lt;code&gt; element. This element must be present.
+     * Gets the hl7Code<br/>
+     * This observation is of clinical status, as indicated by the &lt;code&gt; element. This element must be present.
      */
     public org.husky.common.hl7cdar2.CD getHl7Code() {
         return code;
     }
 
     /**
-     * Gets the hl7StatusCode/The code attribute of &lt;statusCode&gt; for all clinical status observations shall be completed. While the &lt;statusCode&gt; element is required in all acts to record the status of the act, the only sensible value of this element in this context is completed.
+     * Gets the hl7StatusCode<br/>
+     * The code attribute of &lt;statusCode&gt; for all clinical status observations shall be completed. While the &lt;statusCode&gt; element is required in all acts to record the status of the act, the only sensible value of this element in this context is completed.
      */
     public org.husky.common.hl7cdar2.CS getHl7StatusCode() {
         return statusCode;
@@ -104,14 +106,16 @@ public class IheproblemStatusObservation extends POCDMT000040Observation {
     }
 
     /**
-     * Gets the hl7Text/The &lt;text&gt; element is required and points to the text describing the problem being recorded; including any dates, comments, et cetera. The &lt;reference&gt; contains a URI in value attribute. This URI points to the free text description of the problem in the document that is being described.
+     * Gets the hl7Text<br/>
+     * The &lt;text&gt; element is required and points to the text describing the problem being recorded; including any dates, comments, et cetera. The &lt;reference&gt; contains a URI in value attribute. This URI points to the free text description of the problem in the document that is being described.
      */
     public org.husky.common.hl7cdar2.ED getHl7Text() {
         return text;
     }
 
     /**
-     * Gets the hl7Value/The &lt;value&gt; element contains the clinical status. It is always represented using the CE datatype (xsi:type='CE'). It shall contain a code from the following set of values from SNOMED CT.
+     * Gets the hl7Value<br/>
+     * The &lt;value&gt; element contains the clinical status. It is always represented using the CE datatype (xsi:type='CE'). It shall contain a code from the following set of values from SNOMED CT.
      */
     public List<ANY> getHl7Value() {
         return value;

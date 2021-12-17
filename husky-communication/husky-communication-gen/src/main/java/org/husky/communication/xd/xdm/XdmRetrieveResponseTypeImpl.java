@@ -58,8 +58,6 @@ public class XdmRetrieveResponseTypeImpl {
 	/**
 	 * Determines whether or not the transfer is complete. Not used in the XDM
 	 * implementation.
-	 *
-	 * @see org.openhealthtools.ihe.xds.response.XDSResponseType#isComplete()
 	 */
 	public boolean isComplete() {
 		return true;
@@ -68,8 +66,6 @@ public class XdmRetrieveResponseTypeImpl {
 	/**
 	 * Determines whether or not the processing is complete. Not used in the XDM
 	 * implementation.
-	 *
-	 * @see org.openhealthtools.ihe.xds.response.impl.XDSResponseTypeImpl#isProcessed()
 	 */
 	protected boolean isProcessed() {
 		return true;
