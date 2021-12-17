@@ -1,21 +1,32 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
 package org.husky.emed.cda.services.digesters;
 
 import java.time.Instant;
+import java.time.temporal.TemporalAmount;
 import java.util.Objects;
 import java.util.Optional;
 
-import org.husky.common.hl7cdar2.POCDMT000040EntryRelationship;
-import org.husky.common.hl7cdar2.POCDMT000040SubstanceAdministration;
-import org.husky.common.hl7cdar2.XActRelationshipEntryRelationship;
-import org.husky.common.hl7cdar2.XDocumentSubstanceMood;
-import org.husky.emed.cda.errors.InvalidEmedContentException;
-import org.husky.emed.cda.models.common.AuthorDigest;
-import org.husky.emed.cda.models.common.EmedReference;
-import org.husky.emed.cda.models.entry.EmedEntryDigest;
-import org.husky.emed.cda.models.entry.EmedPreEntryDigest;
+import org.husky.common.hl7cdar2.*;
+import org.husky.common.utils.StreamUtils;
+import org.husky.emed.cda.utils.CdaR2Utils;
+import org.husky.emed.errors.InvalidEmedContentException;
+import org.husky.emed.models.common.AuthorDigest;
+import org.husky.emed.models.common.EmedReference;
+import org.husky.emed.models.common.RenewalInterval;
+import org.husky.emed.models.entry.EmedEntryDigest;
+import org.husky.emed.models.entry.EmedPreEntryDigest;
 import org.husky.emed.cda.services.EmedEntryDigestService;
 import org.husky.emed.cda.services.readers.SubAdmEntryReader;
 import org.husky.emed.cda.utils.IiUtils;
+import org.husky.emed.cda.utils.IvlTsUtils;
 import org.husky.emed.cda.utils.TemplateIds;
 import org.springframework.stereotype.Component;
 
@@ -90,8 +101,11 @@ public class CcePreEntryDigester {
                 preEntry.getManufacturedMaterialReader().toMedicationProduct(),
                 preEntry.getRepeatNumber().orElse(null),
                 preEntry.getRouteOfAdministration().orElse(null),
+                prescriptionValidityStart,
+                prescriptionValidityStop,
                 this.getServiceStartTime(preEntry, prescriptionValidityStart),
                 this.getServiceStopTime(preEntry, prescriptionValidityStop),
+                this.getRenewalInterval(substanceAdministration).orElse(null),
                 this.getTargetedMtpReference(substanceAdministration).orElse(null),
                 this.isProvisional(substanceAdministration),
                 preEntry.getSubstitutionPermissions(),
@@ -117,7 +131,7 @@ public class CcePreEntryDigester {
 
     /**
      * Returns the ending time of the PRE item. It's the first known time from:
-     * <li>The end date of the 'renewalPeriod' of the PRE item;
+     * <li>The end date of the 'renewalPeriod' of the PRE item; TODO: mistake?
      * <li>The treatment period end date, defined by the first 'effectiveTime' of the PRE item;
      * <li>The end date of the PRE document.
      * <p>
@@ -155,7 +169,7 @@ public class CcePreEntryDigester {
                 .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.REFR)
                 .findAny()
                 .map(POCDMT000040EntryRelationship::getSubstanceAdministration)
-                .map(EmedReference::new);
+                .map(CdaR2Utils::toEmedReference);
     }
 
     /**
@@ -172,5 +186,38 @@ public class CcePreEntryDigester {
                 .filter(sa -> sa.getMoodCode() == XDocumentSubstanceMood.PRP)
                 .filter(sa -> sa.getClassCode().contains("SBADM"))
                 .anyMatch(sa -> TemplateIds.isInList(TemplateIds.VALIDATION_STEP, sa.getTemplateId()));
+    }
+
+    /**
+     * Returns the renewal period.
+     *
+     * @param substanceAdministration The PRE item SubstanceAdministration.
+     * @return an {@link Optional} that may contain the renewal period.
+     */
+    private Optional<RenewalInterval> getRenewalInterval(final POCDMT000040SubstanceAdministration substanceAdministration) {
+        final var effectiveTime = substanceAdministration.getEntryRelationship().stream()
+                .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.COMP)
+                .map(POCDMT000040EntryRelationship::getSupply)
+                .filter(Objects::nonNull)
+                .filter(supply -> TemplateIds.isInList(TemplateIds.RENEWAL_PERIOD, supply.getTemplateId()))
+                .findAny()
+                .map(POCDMT000040Supply::getEffectiveTime)
+                .map(StreamUtils::getListFirst)
+                .filter(IVLTS.class::isInstance)
+                .map(IVLTS.class::cast)
+                .orElse(null);
+        if (effectiveTime == null) {
+            return Optional.empty();
+        }
+        final Instant low = IvlTsUtils.getInclusiveLowInstant(effectiveTime);
+        final Instant high = IvlTsUtils.getInclusiveHighInstant(effectiveTime);
+        final TemporalAmount duration = IvlTsUtils.getWidth(effectiveTime);
+        if (high != null) {
+            return Optional.of(new RenewalInterval(low, high));
+        } else if (duration != null) {
+            return Optional.of(new RenewalInterval(low, duration));
+        } else {
+            throw new IllegalArgumentException("The renewal period has no higher bound and duration");
+        }
     }
 }

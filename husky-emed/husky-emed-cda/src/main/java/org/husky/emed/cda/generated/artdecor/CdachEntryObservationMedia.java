@@ -1,11 +1,16 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
 package org.husky.emed.cda.generated.artdecor;
 
 import java.util.List;
 import javax.annotation.processing.Generated;
-
-import org.husky.common.hl7cdar2.CS;
-import org.husky.common.hl7cdar2.ED;
-import org.husky.common.hl7cdar2.II;
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040ObservationMedia;
 
@@ -19,7 +24,7 @@ import org.husky.common.hl7cdar2.POCDMT000040ObservationMedia;
  * Version: 2017<br>
  * Status: active
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-09-08")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
 public class CdachEntryObservationMedia extends POCDMT000040ObservationMedia {
 
     public CdachEntryObservationMedia() {
@@ -29,16 +34,14 @@ public class CdachEntryObservationMedia extends POCDMT000040ObservationMedia {
     }
 
     /**
-     * Adds a hl7Id
-     * IDs for this item MAY be filled for traceability.
+     * Adds a hl7Id/IDs for this item MAY be filled for traceability.
      */
-    public void addHl7Id(II value) {
+    public void addHl7Id(org.husky.common.hl7cdar2.II value) {
         getId().add(value);
     }
 
     /**
-     * Adds a hl7Id
-     * IDs for this item MAY be filled for traceability.
+     * Adds a hl7Id/IDs for this item MAY be filled for traceability.
      */
     public void clearHl7Id() {
         getId().clear();
@@ -47,9 +50,9 @@ public class CdachEntryObservationMedia extends POCDMT000040ObservationMedia {
     /**
      * Creates fixed contents for CDA Element hl7LanguageCode
      */
-    private static CS createHl7LanguageCodeFixedValue() {
+    private static org.husky.common.hl7cdar2.CS createHl7LanguageCodeFixedValue() {
         ObjectFactory factory = new ObjectFactory();
-        CS retVal = factory.createCS();
+        org.husky.common.hl7cdar2.CS retVal = factory.createCS();
         return retVal;
     }
 
@@ -58,9 +61,9 @@ public class CdachEntryObservationMedia extends POCDMT000040ObservationMedia {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static II createHl7TemplateIdFixedValue(String root) {
+    private static org.husky.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        II retVal = factory.createII();
+        org.husky.common.hl7cdar2.II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -70,57 +73,55 @@ public class CdachEntryObservationMedia extends POCDMT000040ObservationMedia {
      *
      * @param representation the desired fixed value for this argument.
      */
-    private static ED createHl7ValueFixedValue(String representation) {
+    private static org.husky.common.hl7cdar2.ED createHl7ValueFixedValue(String representation) {
         ObjectFactory factory = new ObjectFactory();
-        ED retVal = factory.createED();
+        org.husky.common.hl7cdar2.ED retVal = factory.createED();
         return retVal;
-        // TODO: Contents shall be taken from enum: org.ehealth_connector.emed.cda.generated.hl7cdar2.VideoMediaType
+        // TODO: Contents shall be taken from enum: org.husky.common.hl7cdar2.VideoMediaType
     }
 
     /**
-     * Gets the hl7LanguageCode
-     * The RFC 1766 (ISO-639-1 and ISO 3166) based language in which the multimedia object is written. If it isn't known or not available (e.g. for pictures), use nullFlavor instead.
+     * Gets the hl7LanguageCode/The RFC 1766 (ISO-639-1 and ISO 3166) based language in which the multimedia object is written. If it isn't known or not available (e.g. for pictures), use nullFlavor instead.
      */
-    public CS getHl7LanguageCode() {
+    public org.husky.common.hl7cdar2.CS getHl7LanguageCode() {
         return languageCode;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<II> getHl7TemplateId() {
+    public List<org.husky.common.hl7cdar2.II> getHl7TemplateId() {
         return templateId;
     }
 
     /**
-     * Gets the hl7Value
-     * This template defines only the embedding of multimedia objects in the CDA document.
+     * Gets the hl7Value/This template defines only the embedding of multimedia objects in the CDA document.
      */
-    public ED getHl7Value() {
+    public org.husky.common.hl7cdar2.ED getHl7Value() {
         return value;
     }
 
     /**
-     * Sets the hl7LanguageCode
+     * Sets the hl7LanguageCode<br/>
      * The RFC 1766 (ISO-639-1 and ISO 3166) based language in which the multimedia object is written. If it isn't known or not available (e.g. for pictures), use nullFlavor instead.
      */
-    public void setHl7LanguageCode(CS value) {
+    public void setHl7LanguageCode(org.husky.common.hl7cdar2.CS value) {
         this.languageCode = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(II value) {
+    public void setHl7TemplateId(org.husky.common.hl7cdar2.II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
 
     /**
-     * Sets the hl7Value
+     * Sets the hl7Value<br/>
      * This template defines only the embedding of multimedia objects in the CDA document.
      */
-    public void setHl7Value(ED value) {
+    public void setHl7Value(org.husky.common.hl7cdar2.ED value) {
         this.value = value;
     }
 }

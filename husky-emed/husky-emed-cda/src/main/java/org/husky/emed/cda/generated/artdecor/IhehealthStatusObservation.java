@@ -1,14 +1,22 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
 package org.husky.emed.cda.generated.artdecor;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
-
-import org.husky.common.hl7cdar2.*;
+import org.husky.common.basetypes.CodeBaseType;
+import org.husky.common.hl7cdar2.ANY;
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040Observation;
-import org.husky.emed.cda.models.common.Code;
-import org.husky.emed.cda.models.common.basetypes.CodeBaseType;
+import org.husky.common.model.Code;
 
 /**
  * IHEHealthStatusObservation
@@ -20,7 +28,7 @@ import org.husky.emed.cda.models.common.basetypes.CodeBaseType;
  * Version: 2014<br>
  * Status: active
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-09-08")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
 public class IhehealthStatusObservation extends POCDMT000040Observation {
 
     public IhehealthStatusObservation() {
@@ -42,9 +50,9 @@ public class IhehealthStatusObservation extends POCDMT000040Observation {
      *
      * @param code the desired fixed value for this argument.
      */
-    private static CD createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+    private static org.husky.common.hl7cdar2.CD createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
         ObjectFactory factory = new ObjectFactory();
-        CD retVal = factory.createCD();
+        org.husky.common.hl7cdar2.CD retVal = factory.createCD();
         retVal.setCode(code);
         retVal.setCodeSystem(codeSystem);
         retVal.setCodeSystemName(codeSystemName);
@@ -57,9 +65,9 @@ public class IhehealthStatusObservation extends POCDMT000040Observation {
      *
      * @param root the desired fixed value for this argument.
      */
-    private static II createHl7TemplateIdFixedValue(String root) {
+    private static org.husky.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        II retVal = factory.createII();
+        org.husky.common.hl7cdar2.II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -67,46 +75,42 @@ public class IhehealthStatusObservation extends POCDMT000040Observation {
     /**
      * Creates fixed contents for CDA Element hl7Value
      */
-    private static CE createHl7ValueFixedValue() {
+    private static org.husky.common.hl7cdar2.CE createHl7ValueFixedValue() {
         ObjectFactory factory = new ObjectFactory();
-        CE retVal = factory.createCE();
+        org.husky.common.hl7cdar2.CE retVal = factory.createCE();
         return retVal;
     }
 
     /**
-     * Gets the hl7Code
-     * This observation is of health status, as indicated by the &lt;code&gt; element. This element must be present.
+     * Gets the hl7Code/This observation is of health status, as indicated by the &lt;code&gt; element. This element must be present.
      */
-    public CD getHl7Code() {
+    public org.husky.common.hl7cdar2.CD getHl7Code() {
         return code;
     }
 
     /**
-     * Gets the hl7StatusCode
-     * The code attribute of &lt;statusCode&gt; for all clinical status observations shall be completed. While the &lt;statusCode&gt; element is required in all acts to record the status of the act, the only sensible value of this element in this context is completed.
+     * Gets the hl7StatusCode/The code attribute of &lt;statusCode&gt; for all clinical status observations shall be completed. While the &lt;statusCode&gt; element is required in all acts to record the status of the act, the only sensible value of this element in this context is completed.
      */
-    public CS getHl7StatusCode() {
+    public org.husky.common.hl7cdar2.CS getHl7StatusCode() {
         return statusCode;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<II> getHl7TemplateId() {
+    public List<org.husky.common.hl7cdar2.II> getHl7TemplateId() {
         return templateId;
     }
 
     /**
-     * Gets the hl7Text
-     * The &lt;text&gt; element is required and points to the text describing the problem being recorded; including any dates, comments, et cetera. The &lt;reference&gt; contains a URI in value attribute. This URI points to the free text description of the problem in the document that is being described.
+     * Gets the hl7Text/The &lt;text&gt; element is required and points to the text describing the problem being recorded; including any dates, comments, et cetera. The &lt;reference&gt; contains a URI in value attribute. This URI points to the free text description of the problem in the document that is being described.
      */
-    public ED getHl7Text() {
+    public org.husky.common.hl7cdar2.ED getHl7Text() {
         return text;
     }
 
     /**
-     * Gets the hl7Value
-     * The &lt;value&gt; element contains the health status. It is always represented using the CE datatype (xsi:type='CE'). It shall contain a code from the following set of values from SNOMED CT.
+     * Gets the hl7Value/The &lt;value&gt; element contains the health status. It is always represented using the CE datatype (xsi:type='CE'). It shall contain a code from the following set of values from SNOMED CT.
      */
     public List<ANY> getHl7Value() {
         return value;
@@ -120,42 +124,42 @@ public class IhehealthStatusObservation extends POCDMT000040Observation {
     }
 
     /**
-     * Sets the hl7Code
+     * Sets the hl7Code<br/>
      * This observation is of health status, as indicated by the &lt;code&gt; element. This element must be present.
      */
-    public void setHl7Code(CD value) {
+    public void setHl7Code(org.husky.common.hl7cdar2.CD value) {
         this.code = value;
     }
 
     /**
-     * Sets the hl7StatusCode
+     * Sets the hl7StatusCode<br/>
      * The code attribute of &lt;statusCode&gt; for all clinical status observations shall be completed. While the &lt;statusCode&gt; element is required in all acts to record the status of the act, the only sensible value of this element in this context is completed.
      */
-    public void setHl7StatusCode(CS value) {
+    public void setHl7StatusCode(org.husky.common.hl7cdar2.CS value) {
         this.statusCode = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(II value) {
+    public void setHl7TemplateId(org.husky.common.hl7cdar2.II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }
 
     /**
-     * Sets the hl7Text
+     * Sets the hl7Text<br/>
      * The &lt;text&gt; element is required and points to the text describing the problem being recorded; including any dates, comments, et cetera. The &lt;reference&gt; contains a URI in value attribute. This URI points to the free text description of the problem in the document that is being described.
      */
-    public void setHl7Text(ED value) {
+    public void setHl7Text(org.husky.common.hl7cdar2.ED value) {
         this.text = value;
     }
 
     /**
-     * Sets the hl7Value
+     * Sets the hl7Value<br/>
      * The &lt;value&gt; element contains the health status. It is always represented using the CE datatype (xsi:type='CE'). It shall contain a code from the following set of values from SNOMED CT.
      */
-    public void setHl7Value(CE value) {
+    public void setHl7Value(org.husky.common.hl7cdar2.CE value) {
         getValue().clear();
         getValue().add(value);
     }

@@ -2,15 +2,16 @@ package org.husky.emed.cda.services.digesters;
 
 import org.husky.common.hl7cdar2.*;
 import org.husky.common.utils.OptionalUtils;
-import org.husky.emed.cda.errors.InvalidEmedContentException;
-import org.husky.emed.cda.generated.artdecor.enums.ActSubstanceAdminSubstitutionCode;
-import org.husky.emed.cda.generated.artdecor.enums.DispenseSupplyType;
-import org.husky.emed.cda.models.common.AuthorDigest;
-import org.husky.emed.cda.models.common.EmedReference;
-import org.husky.emed.cda.models.common.QuantityWithUnit;
-import org.husky.emed.cda.models.entry.EmedDisEntryDigest;
-import org.husky.emed.cda.models.entry.EmedEntryDigest;
-import org.husky.emed.cda.models.treatment.MedicationProduct;
+import org.husky.emed.cda.utils.CdaR2Utils;
+import org.husky.emed.errors.InvalidEmedContentException;
+import org.husky.emed.enums.ActSubstanceAdminSubstitutionCode;
+import org.husky.emed.enums.DispenseSupplyType;
+import org.husky.emed.models.common.AuthorDigest;
+import org.husky.emed.models.common.EmedReference;
+import org.husky.emed.models.common.QuantityWithUnit;
+import org.husky.emed.models.entry.EmedDisEntryDigest;
+import org.husky.emed.models.entry.EmedEntryDigest;
+import org.husky.emed.models.treatment.MedicationProduct;
 import org.husky.emed.cda.services.EmedEntryDigestService;
 import org.husky.emed.cda.services.readers.ManufacturedMaterialReader;
 import org.husky.emed.cda.utils.EntryRelationshipUtils;
@@ -211,7 +212,7 @@ public class CceDisEntryDigester {
                 .map(POCDMT000040EntryRelationship::getSubstanceAdministration)
                 .filter(Objects::nonNull)
                 .filter(substanceAdministration -> hasAllIds(REFERENCE_TO_MTP, substanceAdministration.getTemplateId()))
-                .map(EmedReference::new)
+                .map(CdaR2Utils::toEmedReference)
                 .findAny();
     }
 
@@ -228,7 +229,7 @@ public class CceDisEntryDigester {
                 .filter(Objects::nonNull)
                 .filter(substanceAdministration -> hasAllIds(REFERENCE_TO_PRE, substanceAdministration.getTemplateId()))
                 .findAny()
-                .map(EmedReference::new);
+                .map(CdaR2Utils::toEmedReference);
     }
 
     /**
@@ -244,7 +245,7 @@ public class CceDisEntryDigester {
                 .filter(Objects::nonNull)
                 .filter(obs -> hasAllIds(REFERENCE_TO_PADV, obs.getTemplateId()))
                 .findAny()
-                .map(EmedReference::new);
+                .map(CdaR2Utils::toEmedReference);
     }
 
     /**

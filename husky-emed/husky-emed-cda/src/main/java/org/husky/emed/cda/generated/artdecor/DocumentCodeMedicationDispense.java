@@ -1,13 +1,20 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
 package org.husky.emed.cda.generated.artdecor;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
-
-import org.husky.common.hl7cdar2.CD;
+import org.husky.common.basetypes.CodeBaseType;
 import org.husky.common.hl7cdar2.CE;
-import org.husky.emed.cda.models.common.Code;
-import org.husky.emed.cda.models.common.basetypes.CodeBaseType;
+import org.husky.common.model.Code;
 
 /**
  * DocumentCodeMedicationDispense
@@ -20,7 +27,7 @@ import org.husky.emed.cda.models.common.basetypes.CodeBaseType;
  * Version: 2020<br>
  * Status: draft
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-09-08")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
 public class DocumentCodeMedicationDispense extends CE {
 
     public DocumentCodeMedicationDispense() {
@@ -35,10 +42,9 @@ public class DocumentCodeMedicationDispense extends CE {
     private final List<Code> vocabTranslationCode = new ArrayList<>();
 
     /**
-     * Gets the hl7Translation
-     * Translation to the Swiss EPR XDS.b metadata.
+     * Gets the hl7Translation/Translation to the Swiss EPR XDS.b metadata.
      */
-    public List<CD> getHl7Translation() {
+    public List<org.husky.common.hl7cdar2.CD> getHl7Translation() {
         return translation;
     }
 
@@ -50,10 +56,10 @@ public class DocumentCodeMedicationDispense extends CE {
     }
 
     /**
-     * Sets the hl7Translation
+     * Sets the hl7Translation<br/>
      * Translation to the Swiss EPR XDS.b metadata.
      */
-    public void setHl7Translation(CD value) {
+    public void setHl7Translation(org.husky.common.hl7cdar2.CD value) {
         getTranslation().clear();
         getTranslation().add(value);
     }

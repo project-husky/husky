@@ -1,9 +1,18 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
 package org.husky.emed.cda.generated.artdecor;
 
 import java.util.List;
 import javax.annotation.processing.Generated;
-
-import org.husky.common.hl7cdar2.*;
+import org.husky.common.hl7cdar2.ObjectFactory;
+import org.husky.common.hl7cdar2.POCDMT000040Organization;
 
 /**
  * cdach_other_OrganizationCompilationGlnName
@@ -16,7 +25,7 @@ import org.husky.common.hl7cdar2.*;
  * Version: 2017<br>
  * Status: active
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-09-08")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
 public class CdachOtherOrganizationCompilationGlnName extends POCDMT000040Organization {
 
     public CdachOtherOrganizationCompilationGlnName() {
@@ -24,48 +33,42 @@ public class CdachOtherOrganizationCompilationGlnName extends POCDMT000040Organi
     }
 
     /**
-     * Adds a hl7Addr
-     * The organization's address.
+     * Adds a hl7Addr/The organization's address.
      */
-    public void addHl7Addr(AD value) {
+    public void addHl7Addr(org.husky.common.hl7cdar2.AD value) {
         getAddr().add(value);
     }
 
     /**
-     * Adds a hl7Name
-     * The organization's name.
+     * Adds a hl7Name/The organization's name.
      */
-    public void addHl7Name(ON value) {
+    public void addHl7Name(org.husky.common.hl7cdar2.ON value) {
         getName().add(value);
     }
 
     /**
-     * Adds a hl7Telecom
-     * The organization's means of communication (phone, eMail, ...).
+     * Adds a hl7Telecom/The organization's means of communication (phone, eMail, ...).
      */
-    public void addHl7Telecom(TEL value) {
+    public void addHl7Telecom(org.husky.common.hl7cdar2.TEL value) {
         getTelecom().add(value);
     }
 
     /**
-     * Adds a hl7Addr
-     * The organization's address.
+     * Adds a hl7Addr/The organization's address.
      */
     public void clearHl7Addr() {
         getAddr().clear();
     }
 
     /**
-     * Adds a hl7Name
-     * The organization's name.
+     * Adds a hl7Name/The organization's name.
      */
     public void clearHl7Name() {
         getName().clear();
     }
 
     /**
-     * Adds a hl7Telecom
-     * The organization's means of communication (phone, eMail, ...).
+     * Adds a hl7Telecom/The organization's means of communication (phone, eMail, ...).
      */
     public void clearHl7Telecom() {
         getTelecom().clear();
@@ -76,26 +79,25 @@ public class CdachOtherOrganizationCompilationGlnName extends POCDMT000040Organi
      *
      * @param root the desired fixed value for this argument.
      */
-    private static II createHl7IdFixedValue(String root) {
+    private static org.husky.common.hl7cdar2.II createHl7IdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        II retVal = factory.createII();
+        org.husky.common.hl7cdar2.II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
 
     /**
-     * Gets the hl7Id
-     * The organization's id (GLN).
+     * Gets the hl7Id/The organization's id (GLN).
      */
-    public List<II> getHl7Id() {
+    public List<org.husky.common.hl7cdar2.II> getHl7Id() {
         return id;
     }
 
     /**
-     * Sets the hl7Id
+     * Sets the hl7Id<br/>
      * The organization's id (GLN).
      */
-    public void setHl7Id(II value) {
+    public void setHl7Id(org.husky.common.hl7cdar2.II value) {
         getId().clear();
         getId().add(value);
     }

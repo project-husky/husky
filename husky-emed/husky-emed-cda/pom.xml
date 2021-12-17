@@ -6,6 +6,7 @@
 	<groupId>org.husky.emed.cda</groupId>
 	<artifactId>husky-emed-cda</artifactId>
 	<name>Husky eMedication CDA</name>
+	<packaging>jar</packaging>
 
 	<parent>
 		<groupId>org.husky.emed</groupId>
@@ -13,83 +14,40 @@
 		<version>2.0-ALPHA</version>
 	</parent>
 
-    <properties>
-        <schematron.version>6.2.4</schematron.version>
-    </properties>
+    <properties></properties>
 
     <dependencies>
         <!-- Own dependencies -->
-        <!-- <dependency>
-            <groupId>org.husky.emed.common</groupId>
+        <dependency>
+            <groupId>org.husky.emed</groupId>
             <artifactId>husky-emed-common</artifactId>
             <version>2.0-ALPHA</version>
-        </dependency> -->
-        <dependency>
-            <groupId>org.husky.common</groupId>
-            <artifactId>husky-common-gen</artifactId>
-            <version>2.0-ALPHA</version>
         </dependency>
 
-		<!-- HAPI Java HL7 API Base Module, (GPL + MPL 1.1) -->
+		<!-- Spring annotations (Apache 2.0) -->
 		<dependency>
-			<groupId>ca.uhn.hapi</groupId>
-			<artifactId>hapi-base</artifactId>
-			<version>2.3</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
 		</dependency>
 
-
-        <!-- Schematron validator (Apache 2.0) -->
-        <dependency>
-            <groupId>com.helger.schematron</groupId>
-            <artifactId>ph-schematron-api</artifactId>
-            <version>${schematron.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.helger.schematron</groupId>
-            <artifactId>ph-schematron-xslt</artifactId>
-            <version>${schematron.version}</version>
-        </dependency>
-
-		<!-- JAXB binding (EDL 1.0) -->
 		<dependency>
-			<groupId>org.glassfish.jaxb</groupId>
-			<artifactId>jaxb-runtime</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-impl</artifactId>
+			<!-- The Checker Framework enhances Java's type system to make it more powerful and useful. -->
+			<groupId>org.checkerframework</groupId>
+			<artifactId>checker-qual</artifactId> <!-- MIT -->
 		</dependency>
 
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-text</artifactId>
-        </dependency>
+		<!-- Tests (EPL 2.0) -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+		</dependency>
 
-        <!-- Spring annotations (Apache 2.0) -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-
-        <dependency>
-            <!-- The Checker Framework enhances Java's type system to make it more powerful and useful. -->
-            <groupId>org.checkerframework</groupId>
-            <artifactId>checker-qual</artifactId> <!-- MIT -->
-        </dependency>
-
-        <!-- Tests (EPL 2.0) -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <!-- Temporary dependency for dev -->
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.22</version>
-            <scope>provided</scope>
-        </dependency>
+		<dependency>
+			<!-- Temporary dependency for dev -->
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.22</version>
+			<scope>provided</scope>
+		</dependency>
     </dependencies>
-
 </project>

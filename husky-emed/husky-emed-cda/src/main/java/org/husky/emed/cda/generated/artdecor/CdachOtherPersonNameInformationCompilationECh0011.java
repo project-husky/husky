@@ -1,10 +1,17 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
 package org.husky.emed.cda.generated.artdecor;
 
 import java.util.List;
 import javax.annotation.processing.Generated;
-
 import org.husky.common.hl7cdar2.ObjectFactory;
-import org.husky.common.hl7cdar2.PN;
 import org.husky.common.hl7cdar2.POCDMT000040Patient;
 
 /**
@@ -18,7 +25,7 @@ import org.husky.common.hl7cdar2.POCDMT000040Patient;
  * Version: 2017<br>
  * Status: active
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-09-08")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
 public class CdachOtherPersonNameInformationCompilationECh0011 extends POCDMT000040Patient {
 
     public CdachOtherPersonNameInformationCompilationECh0011() {
@@ -30,42 +37,41 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends POCDMT000
      *
      * @param use the desired fixed value for this argument.
      */
-    private static PN createHl7NameFixedValue(String use) {
+    private static org.husky.common.hl7cdar2.PN createHl7NameFixedValue(String use) {
         ObjectFactory factory = new ObjectFactory();
-        PN retVal = factory.createPN();
+        org.husky.common.hl7cdar2.PN retVal = factory.createPN();
         retVal.getUse().add(use);
         return retVal;
     }
 
     /**
-     * Gets the hl7Name
-     * The person's legal name (with required family and given name).
+     * Gets the hl7Name/The person's legal name (with required family and given name).
      */
-    public List<PN> getHl7Name() {
+    public List<org.husky.common.hl7cdar2.PN> getHl7Name() {
         return name;
     }
 
     /**
-     * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.PN, filled by: "ASGN"
+     * Adds a predefined org.husky.common.hl7cdar2.PN, filled by: "ASGN"
      * @return the predefined element.
      */
-    public static PN getPredefinedNameAsgn() {
+    public static org.husky.common.hl7cdar2.PN getPredefinedNameAsgn() {
         return createHl7NameFixedValue("ASGN");
     }
 
     /**
-     * Adds a predefined org.ehealth_connector.emed.cda.generated.hl7cdar2.PN, filled by: "P"
+     * Adds a predefined org.husky.common.hl7cdar2.PN, filled by: "P"
      * @return the predefined element.
      */
-    public static PN getPredefinedNameP() {
+    public static org.husky.common.hl7cdar2.PN getPredefinedNameP() {
         return createHl7NameFixedValue("P");
     }
 
     /**
-     * Sets the hl7Name
+     * Sets the hl7Name<br/>
      * The person's legal name (with required family and given name).
      */
-    public void setHl7Name(PN value) {
+    public void setHl7Name(org.husky.common.hl7cdar2.PN value) {
         getName().clear();
         getName().add(value);
     }
