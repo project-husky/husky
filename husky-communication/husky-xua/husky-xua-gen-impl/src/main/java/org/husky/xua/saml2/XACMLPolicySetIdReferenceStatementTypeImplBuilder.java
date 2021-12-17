@@ -13,7 +13,7 @@ public class XACMLPolicySetIdReferenceStatementTypeImplBuilder
 
 	/** {@inheritDoc} */
 	public XACMLPolicySetIdReferenceStatement buildObject() {
-		return buildObject(Statement.DEFAULT_ELEMENT_NAME, XACMLPolicySetIdReferenceStatement.TYPE_NAME);
+		return buildObject(Statement.DEFAULT_ELEMENT_NAME, Statement.TYPE_NAME);
 	}
 
 	/** {@inheritDoc} */
