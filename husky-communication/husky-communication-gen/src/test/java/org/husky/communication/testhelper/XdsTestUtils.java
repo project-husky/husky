@@ -31,8 +31,8 @@ import org.husky.common.model.Code;
 import org.husky.common.model.Identificator;
 import org.husky.common.model.Name;
 import org.husky.common.utils.DateUtil;
-import org.husky.common.utils.OID;
 import org.husky.communication.xd.storedquery.DateTimeRange;
+import org.openehealth.ipf.commons.core.OidGenerator;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationType;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.slf4j.Logger;
@@ -188,7 +188,7 @@ public class XdsTestUtils {
 
 	protected void setSubmissionMetadata(SubmissionSetMetadata metadata, Identificator patientId) {
 		metadata.getAuthor().add(authorPerson);
-		metadata.setUniqueId(OID.createOIDGivenRoot(EhcVersions.getCurrentVersion().getOid(), 64));
+		metadata.setUniqueId(OidGenerator.uniqueOid().toString());
 		metadata.setSourceId(EhcVersions.getCurrentVersion().getOid());
 		metadata.setEntryUUID(UUID.randomUUID().toString());
 		metadata.setDestinationPatientId(patientId);

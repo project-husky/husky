@@ -59,7 +59,12 @@ public class Author {
 
 		// add functionCode and time
 		mAuthor.setFunctionCode(Isco08.MEDICAL_DOCTORS.getCE());
-		mAuthor.setTime(DateTimes.toDateTs(getTimeAsDate().toInstant()));
+
+		Date dateTime = getTimeAsDate();
+
+		if (dateTime != null) {
+			mAuthor.setTime(DateTimes.toDateTs(dateTime.toInstant()));
+		}
 
 		setTime(null);
 	}

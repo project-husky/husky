@@ -22,7 +22,6 @@ import org.husky.common.model.Author;
 import org.husky.common.model.Code;
 import org.husky.common.model.Identificator;
 import org.husky.common.utils.DateUtil;
-import org.husky.common.utils.OID;
 import org.husky.common.utils.XdsMetadataUtil;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
@@ -373,7 +372,7 @@ public class SubmissionSetMetadata {
 			final String organizationalId = EhcVersions.getCurrentVersion().getOid();
 
 			if (ohtSubmissionSetType.getUniqueId() == null) {
-				ohtSubmissionSetType.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+				ohtSubmissionSetType.setUniqueId(UUID.fromString(organizationalId).toString());
 			}
 		}
 

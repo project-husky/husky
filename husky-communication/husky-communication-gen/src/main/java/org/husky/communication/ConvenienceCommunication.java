@@ -36,7 +36,6 @@ import org.husky.common.communication.SubmissionSetMetadata.SubmissionSetMetadat
 import org.husky.common.enums.DocumentDescriptor;
 import org.husky.common.enums.EhcVersions;
 import org.husky.common.model.Code;
-import org.husky.common.utils.OID;
 import org.husky.common.utils.Util;
 import org.husky.common.utils.XdsMetadataUtil;
 import org.husky.communication.xd.storedquery.AbstractStoredQuery;
@@ -45,6 +44,7 @@ import org.husky.communication.xd.xdm.IndexHtm;
 import org.husky.communication.xd.xdm.ReadmeTxt;
 import org.husky.communication.xd.xdm.XdmContents;
 import org.husky.xua.core.SecurityHeaderElement;
+import org.openehealth.ipf.commons.core.OidGenerator;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Association;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationLabel;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationType;
@@ -286,8 +286,7 @@ public class ConvenienceCommunication extends CamelService {
 		folder.assignEntryUuid();
 
 		if (folder.getUniqueId() == null) {
-			final String organizationalId = EhcVersions.getCurrentVersion().getOid();
-			folder.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+			folder.assignUniqueId();
 		}
 
 		txnData.getFolders().add(folder);
@@ -367,7 +366,7 @@ public class ConvenienceCommunication extends CamelService {
 		// Checks if the unique ID is longer than 64 or if no unique ID is set a new unique ID should be generated
 		if (docMetadata.getUniqueId() == null
 				|| (docMetadata.getUniqueId() != null && docMetadata.getUniqueId().length() > 64)) {
-			docMetadata.setUniqueId(OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
+			docMetadata.setUniqueId(OidGenerator.uniqueOid().toString());
 		}
 
 	}
@@ -568,7 +567,7 @@ public class ConvenienceCommunication extends CamelService {
 					String organizationalId = EhcVersions.getCurrentVersion().getOid();
 
 					if (subSet.getUniqueId() == null) {
-						subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+						subSet.assignUniqueId();
 					}
 
 					if (subSet.getEntryUuid() == null) {
@@ -614,7 +613,7 @@ public class ConvenienceCommunication extends CamelService {
 					String organizationalId = EhcVersions.getCurrentVersion().getOid();
 
 					if (subSet.getUniqueId() == null) {
-						subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+						subSet.assignUniqueId();
 					}
 
 					if (folder.getPatientId() != null) {

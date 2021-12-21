@@ -10,7 +10,6 @@
  */
 package org.husky.communication.mpi.impl.pdq;
 
-import org.husky.common.utils.OID;
 import org.husky.communication.mpi.V3Message;
 import org.husky.communication.utils.PixPdqV3Utils;
 
@@ -72,7 +71,7 @@ public class V3PdqConsumerQuery extends V3Message {
 		rootElement.setITSVersion("XML_1.0");
 
 		// create an id and set it
-		this.messageId = PixPdqV3Utils.createII(OID.createOIDGivenRoot(senderApplicationOID), "", "");
+		this.messageId = PixPdqV3Utils.createII(senderApplicationOID, "", "");
 		rootElement.setId(messageId);
 
 		// set current time

@@ -27,7 +27,6 @@ import java.lang.management.ManagementFactory;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -82,6 +81,7 @@ import org.husky.common.hl7cdar2.XActRelationshipEntryRelationship;
 import org.husky.common.model.Identificator;
 import org.husky.common.model.Organization;
 import org.husky.common.model.Participant;
+import org.husky.common.model.Reference;
 import org.husky.common.utils.xml.XmlFactories;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -648,7 +648,10 @@ public class Util {
 	 * @param existingText the existing text
 	 * @param reference    the reference
 	 * @return the MDHT ED
+	 * 
+	 * @deprecated moved to {@link Reference#createReference(ED, String)}
 	 */
+	@Deprecated
 	public static ED createReference(ED existingText, String reference) {
 		var ed = existingText;
 		if (ed == null)
@@ -665,7 +668,10 @@ public class Util {
 	 * @param prefix    <br>
 	 *                  <div class="en">prefix</div>
 	 * @return the ed
+	 * 
+	 * @deprecated moved to {@link Reference#createReference(int, String)}
 	 */
+	@Deprecated
 	public static ED createReference(int contentId, String prefix) {
 		final var text = new ED();
 		final var tel = new TEL();
@@ -682,7 +688,10 @@ public class Util {
 	 *
 	 * @param reference the reference value
 	 * @return the MDHT ED
+	 * 
+	 * @deprecated moved to {@link Reference#createReference(String)}
 	 */
+	@Deprecated
 	public static ED createReference(String reference) {
 		var ed = new ED();
 		ed.setReference(createReferenceTel(reference));
@@ -695,7 +704,10 @@ public class Util {
 	 * @param url           the reference url
 	 * @param narrativeText the reference narrative text
 	 * @return the MDHT ED
+	 * 
+	 * @deprecated moved to {@link Reference#createReference(String, String)}
 	 */
+	@Deprecated
 	public static ED createReference(String url, String narrativeText) {
 		final var tel = new TEL();
 		final var ed = new ED();
@@ -710,7 +722,10 @@ public class Util {
 	 *
 	 * @param value the value
 	 * @return the tel
+	 * 
+	 * @deprecated moved to {@link Reference#createReferenceTel(String)}
 	 */
+	@Deprecated
 	public static TEL createReferenceTel(String value) {
 		final var tel = new TEL();
 		if (!value.startsWith("#")) {
@@ -787,34 +802,6 @@ public class Util {
 		}
 
 		return targetPath;
-	}
-
-	/**
-	 * Creates a document ID with the eHC root ID.
-	 *
-	 * @param applicationOidRoot identifiziert diese Version des eHCs
-	 * @return HL7 II Objekt
-	 */
-	public static II generateDocId(String applicationOidRoot) {
-		// Unique identifier of the document. The root part identifies the
-		// application instance, the extension part identifies the document
-		// instance.
-
-		if (Util.getRand() == null) {
-			try {
-				Util.setRand(SecureRandom.getInstanceStrong());
-			} catch (NoSuchAlgorithmException e) {
-				Util.setRand(new Random());
-			}
-		}
-
-		final String documentOid = OID.createOIDGivenRoot("ehealthconnctor");
-		// Creates a random extension ID to identify the document
-
-		final var id = new II();
-		id.setRoot(documentOid);
-		id.setExtension(String.valueOf(rand.nextInt()));
-		return id;
 	}
 
 	/**

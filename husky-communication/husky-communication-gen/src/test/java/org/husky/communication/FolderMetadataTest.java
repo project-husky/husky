@@ -24,8 +24,6 @@ import java.util.UUID;
 
 import org.husky.common.model.Code;
 import org.husky.common.model.Identificator;
-import org.husky.common.utils.OID;
-import org.husky.communication.FolderMetadata;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -88,8 +86,8 @@ class FolderMetadataTest {
 		testTitle1 = "The Folder Title 1";
 		testTitle2 = "The Folder Title to be tested to";
 
-		testUniqueId1 = OID.createOIDGivenRoot("1.2.3.9999");
-		testUniqueId2 = OID.createOIDGivenRoot("1.2.3.9999");
+		testUniqueId1 = "1.2.3.9999";
+		testUniqueId2 = "1.2.3.9999";
 	}
 
 	/**
