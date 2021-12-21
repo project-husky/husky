@@ -10,8 +10,9 @@
  */
 package org.husky.communication.ch.ppq.hl7v3;
 
+import org.husky.xua.hl7v3.CE;
 import org.husky.xua.hl7v3.Role;
-import org.husky.xua.hl7v3.impl.RoleBuilder;
+import org.husky.xua.hl7v3.impl.CodedWithEquivalentsBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -21,7 +22,7 @@ import org.husky.xua.hl7v3.impl.RoleBuilder;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public abstract class RoleChImpl {
+public interface RoleChImpl {
 	public static final String CODE_SYSTEM_NAME = "eHealth Suisse EPR Akteure";
 	public static final String CODE_SYSTEM = "2.16.756.5.30.1.127.3.10.6";
 	public static final String CODE_ASS = "ASS";
@@ -35,57 +36,57 @@ public abstract class RoleChImpl {
 	// <Role code="ASS" codeSystem="2.16.756.5.30.1.127.3.10.6"
 	// codeSystemName="eHealth Suisse EPR Akteure" displayName="Assistent"
 	// xsi:type="CE"/>
-	public static Role ASSISTENT() {
+	public static CE assistent() {
 		return generateRole(CODE_ASS, "Assistent");
 	}
 
 	// <Role code="DADM" codeSystem="2.16.756.5.30.1.127.3.10.6"
 	// codeSystemName="eHealth Suisse EPR Akteure" displayName="Document
 	// Administrator" xsi:type="CE"/>
-	public static Role DOCUMENT_ADMINISTRATOR() {
+	public static CE documentAdministrator() {
 		return generateRole(CODE_DADM, "Document Administrator");
 	}
 
-	private static Role generateRole(String code, String displayName) {
-		return new RoleBuilder() //
+	private static CE generateRole(String code, String displayName) {
+		return new CodedWithEquivalentsBuilder() //
 				.code(code) //
 				.codeSystem(CODE_SYSTEM) //
 				.codeSystemName(CODE_SYSTEM_NAME).displayName(displayName) //
-				.buildObject();
+				.buildObject(Role.DEFAULT_NS_URI, Role.DEFAULT_ELEMENT_LOCAL_NAME, Role.DEFAULT_PREFIX);
 	}
 
 	// <Role code="ASS" codeSystem="2.16.756.5.30.1.127.3.10.6"
 	// codeSystemName="eHealth Suisse EPR Akteure" displayName="Assistent"
 	// xsi:type="CE"/>
-	public static Role HEALT_CARE_PROFESSIONAL() {
+	public static CE healthCareProfessional() {
 		return generateRole(CODE_HCP, "Behandelnde(r)");
 	}
 
 	// <Role code="PAT" codeSystem="2.16.756.5.30.1.127.3.10.6"
 	// codeSystemName="eHealth Suisse EPR Akteure" displayName="Patient"
 	// xsi:type="CE"/>
-	public static Role PATIENT() {
+	public static CE patient() {
 		return generateRole(CODE_PAT, "Patient");
 	}
 
 	// <Role code="PADM" codeSystem="2.16.756.5.30.1.127.3.10.6"
 	// codeSystemName="eHealth Suisse EPR Akteure" displayName="Policy
 	// Administrator" xsi:type="CE"/>
-	public static Role POLICY_ADMINISTRATOR() {
+	public static CE policyAdministrator() {
 		return generateRole(CODE_PADM, "Policy Administrator");
 	}
 
 	// <Role code="REP" codeSystem="2.16.756.5.30.1.127.3.10.6"
 	// codeSystemName="eHealth Suisse EPR Akteure" displayName="Representative"
 	// xsi:type="CE"/>
-	public static Role REPRESENTATIVE() {
+	public static CE representative() {
 		return generateRole(CODE_REP, "Representative");
 	}
 
 	// <Role code="TCU" codeSystem="2.16.756.5.30.1.127.3.10.6"
 	// codeSystemName="eHealth Suisse EPR Akteure" displayName="Technical user"
 	// xsi:type="CE"/>
-	public static Role TECHNICAL_USER() {
+	public static CE technicalUser() {
 		return generateRole(CODE_TCU, "Technical user");
 	}
 }

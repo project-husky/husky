@@ -19,7 +19,7 @@ import org.husky.xua.communication.xua.XUserAssertionRequest;
 import org.husky.xua.communication.xua.impl.XUserAssertionRequestBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
 
-public class XUserAssertionRequestBuilderChImplTest {
+class XUserAssertionRequestBuilderChImplTest {
 
 	private XUserAssertionRequestBuilderImpl builder;
 	private String testDialect;
@@ -31,7 +31,7 @@ public class XUserAssertionRequestBuilderChImplTest {
 	}
 
 	@org.junit.jupiter.api.Test
-	public void testDialect() {
+	void testDialect() {
 		final XUserAssertionRequest ref = builder.dialect(testDialect).create();
 		assertNotNull(ref);
 		assertNotEquals(testDialect, ref.getDialect());

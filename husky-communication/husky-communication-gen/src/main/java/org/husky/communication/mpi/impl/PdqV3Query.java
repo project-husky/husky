@@ -1,20 +1,16 @@
 package org.husky.communication.mpi.impl;
 
-import java.io.ByteArrayInputStream;
-import java.io.StringWriter;
 import java.net.URI;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-
 import org.apache.camel.CamelContext;
 import org.husky.common.communication.AffinityDomain;
+import org.husky.common.utils.xml.XmlMarshaller;
+import org.husky.common.utils.xml.XmlUnmarshaller;
 import org.husky.communication.mpi.impl.pdq.V3PdqConsumerQuery;
 import org.husky.communication.mpi.impl.pdq.V3PdqConsumerResponse;
 import org.husky.communication.mpi.impl.pdq.V3PdqContinuationBase;
@@ -30,10 +26,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import net.ihe.gazelle.hl7v3.datatypes.INT;
-import net.ihe.gazelle.hl7v3.prpain201305UV02.PRPAIN201305UV02Type;
 import net.ihe.gazelle.hl7v3.prpain201306UV02.PRPAIN201306UV02Type;
 import net.ihe.gazelle.hl7v3.prpamt201310UV02.PRPAMT201310UV02Patient;
-import net.ihe.gazelle.hl7v3.quqiin000003UV01.QUQIIN000003UV01Type;
 
 /**
  * PdqV3Query
@@ -180,25 +174,18 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 				pdqDest.toString().replace("https://", ""), true, getAuditContext().isAuditEnabled());
 		LOGGER.info("Sending request to '{}' endpoint", endpoint);
 
-		final var marshaller = JAXBContext.newInstance(PRPAIN201305UV02Type.class).createMarshaller();
-		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);
-		marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
-		marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF8");
-		final var stringWriter = new StringWriter();
-		marshaller.marshal(request.getRootElement(), stringWriter);
+		String message = XmlMarshaller.marshall(request.getRootElement());
 
 		Map<String, String> outgoingHeaders = new HashMap<>();
 		outgoingHeaders.put("Accept", "application/soap+xml");
 		outgoingHeaders.put("Content-Type",
 				"application/soap+xml; charset=UTF-8; action=\"urn:hl7-org:v3:PRPA_IN201305UV02\"");
 
-		final var exchange = send(endpoint, stringWriter.toString(), assertion, outgoingHeaders);
+		final var exchange = send(endpoint, message, assertion, outgoingHeaders);
 
 		var xml = exchange.getMessage().getBody(String.class);
 
-		final var unmarshaller = JAXBContext.newInstance(PRPAIN201306UV02Type.class).createUnmarshaller();
-		return (PRPAIN201306UV02Type) unmarshaller
-				.unmarshal(new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8)));
+		return XmlUnmarshaller.unmarshallStringAsType(xml, PRPAIN201306UV02Type.class);
 	}
 
 	private PRPAIN201306UV02Type sendITI47ContinuationQuery(V3PdqContinuationBase request,
@@ -208,25 +195,18 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 				pdqDest.toString().replace("https://", ""), true, true, getAuditContext().isAuditEnabled());
 		LOGGER.info("Sending request to '{}' endpoint", endpoint);
 
-		final var marshaller = JAXBContext.newInstance(QUQIIN000003UV01Type.class).createMarshaller();
-		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);
-		marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
-		marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF8");
-		final var stringWriter = new StringWriter();
-		marshaller.marshal(request.getRootElement(), stringWriter);
+		String message = XmlMarshaller.marshall(request.getRootElement());
 
 		Map<String, String> outgoingHeaders = new HashMap<>();
 		outgoingHeaders.put("Accept", "application/soap+xml");
 		outgoingHeaders.put("Content-Type",
 				"application/soap+xml; charset=UTF-8; action=\"urn:hl7-org:v3:QUQI_IN000003UV01\"");
 
-		final var exchange = send(endpoint, stringWriter.toString(), assertion, outgoingHeaders);
+		final var exchange = send(endpoint, message, assertion, outgoingHeaders);
 
 		var xml = exchange.getMessage().getBody(String.class);
 
-		final var unmarshaller = JAXBContext.newInstance(PRPAIN201306UV02Type.class).createUnmarshaller();
-		return (PRPAIN201306UV02Type) unmarshaller
-				.unmarshal(new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8)));
+		return XmlUnmarshaller.unmarshallStringAsType(xml, PRPAIN201306UV02Type.class);
 	}
 
 }

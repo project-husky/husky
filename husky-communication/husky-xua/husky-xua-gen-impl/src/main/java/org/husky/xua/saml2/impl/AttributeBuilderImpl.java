@@ -11,10 +11,10 @@
 package org.husky.xua.saml2.impl;
 
 import org.husky.xua.core.SecurityObjectBuilder;
+import org.husky.xua.hl7v3.CE;
 import org.husky.xua.hl7v3.InstanceIdentifier;
+import org.husky.xua.hl7v3.OpenSamlCodedWithEquivalent;
 import org.husky.xua.hl7v3.OpenSamlInstanceIdentifier;
-import org.husky.xua.hl7v3.OpenSamlPurposeOfUse;
-import org.husky.xua.hl7v3.OpenSamlRole;
 import org.husky.xua.hl7v3.PurposeOfUse;
 import org.husky.xua.hl7v3.Role;
 import org.husky.xua.saml2.AttributeBuilder;
@@ -130,9 +130,9 @@ public class AttributeBuilderImpl implements AttributeBuilder,
 		final var anyBuilder = new XSAnyBuilder();
 		final XSAny any = anyBuilder.buildObject(AttributeValue.DEFAULT_ELEMENT_NAME);
 		if (aValue instanceof Role) {
-			any.getUnknownXMLObjects().add((OpenSamlRole) aValue);
+			any.getUnknownXMLObjects().add((OpenSamlCodedWithEquivalent) aValue);
 		} else if (aValue instanceof PurposeOfUse) {
-			any.getUnknownXMLObjects().add((OpenSamlPurposeOfUse) aValue);
+			any.getUnknownXMLObjects().add((OpenSamlCodedWithEquivalent) aValue);
 		} else if (aValue instanceof InstanceIdentifier) {
 			any.getUnknownXMLObjects().add((OpenSamlInstanceIdentifier) aValue);
 		}
@@ -166,14 +166,14 @@ public class AttributeBuilderImpl implements AttributeBuilder,
 		return null;
 	}
 
-	public PurposeOfUse getValueAsPurposeOfUse() {
+	public CE getValueAsPurposeOfUse() {
 		if (this.attributeImpl != null) {
 			return attributeImpl.getValueAsPurposeOfUse();
 		}
 		return null;
 	}
 
-	public Role getValueAsRole() {
+	public CE getValueAsRole() {
 		if (this.attributeImpl != null) {
 			return attributeImpl.getValueAsRole();
 		}

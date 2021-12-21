@@ -10,7 +10,7 @@
  */
 package org.husky.xua.hl7v3.impl;
 
-import org.husky.xua.hl7v3.OpenSamlRole;
+import org.husky.xua.hl7v3.OpenSamlCodedWithEquivalent;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.core.xml.io.AbstractXMLObjectUnmarshaller;
 import org.opensaml.core.xml.io.UnmarshallingException;
@@ -25,7 +25,7 @@ import org.w3c.dom.Element;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class RoleUnmarshaller extends AbstractXMLObjectUnmarshaller {
+public class CodedWithEquivalentsUnmarshaller extends AbstractXMLObjectUnmarshaller {
 
 	/**
 	 * {@inheritDoc}
@@ -36,7 +36,7 @@ public class RoleUnmarshaller extends AbstractXMLObjectUnmarshaller {
 	@Override
 	protected void processAttribute(XMLObject xmlObject, Attr attribute)
 			throws UnmarshallingException {
-		final OpenSamlRole purposeOfUse = (OpenSamlRole) xmlObject;
+		final OpenSamlCodedWithEquivalent purposeOfUse = (OpenSamlCodedWithEquivalent) xmlObject;
 		if ("code".equalsIgnoreCase(attribute.getName())) {
 			purposeOfUse.setCode(attribute.getValue());
 		}
@@ -58,8 +58,8 @@ public class RoleUnmarshaller extends AbstractXMLObjectUnmarshaller {
 	 * @see org.opensaml.core.xml.io.AbstractXMLObjectUnmarshaller#unmarshall(org.w3c.dom.Element)
 	 */
 	@Override
-	public OpenSamlRole unmarshall(Element domElement) throws UnmarshallingException {
-		return (OpenSamlRole) super.unmarshall(domElement);
+	public OpenSamlCodedWithEquivalent unmarshall(Element domElement) throws UnmarshallingException {
+		return (OpenSamlCodedWithEquivalent) super.unmarshall(domElement);
 	}
 
 }

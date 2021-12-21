@@ -13,8 +13,8 @@ package org.husky.xua.hl7v3.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.husky.xua.hl7v3.OpenSamlPurposeOfUse;
-import org.husky.xua.hl7v3.impl.PurposeOfUseUnmarshaller;
+import org.husky.xua.hl7v3.OpenSamlCodedWithEquivalent;
+import org.husky.xua.hl7v3.impl.CodedWithEquivalentsUnmarshaller;
 import org.husky.xua.utilities.impl.InitializerTestHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,8 +33,8 @@ public class PurposeOfUseUnmarshallerTest extends InitializerTestHelper {
 
 	@Test
 	public void testUnmarshall() throws UnmarshallingException {
-		final PurposeOfUseUnmarshaller unmarshaller = new PurposeOfUseUnmarshaller();
-		final OpenSamlPurposeOfUse ref = unmarshaller.unmarshall(testDomElement);
+		final CodedWithEquivalentsUnmarshaller unmarshaller = new CodedWithEquivalentsUnmarshaller();
+		final OpenSamlCodedWithEquivalent ref = unmarshaller.unmarshall(testDomElement);
 		assertNotNull(ref);
 		assertEquals("NORM", ref.getCode());
 		assertEquals("2.16.756.5.30.1.127.3.10.5", ref.getCodeSystem());

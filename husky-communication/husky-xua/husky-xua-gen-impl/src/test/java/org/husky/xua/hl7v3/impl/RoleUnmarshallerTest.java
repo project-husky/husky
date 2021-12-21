@@ -13,8 +13,7 @@ package org.husky.xua.hl7v3.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.husky.xua.hl7v3.OpenSamlRole;
-import org.husky.xua.hl7v3.impl.RoleUnmarshaller;
+import org.husky.xua.hl7v3.OpenSamlCodedWithEquivalent;
 import org.husky.xua.utilities.impl.InitializerTestHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,8 +32,8 @@ public class RoleUnmarshallerTest extends InitializerTestHelper {
 
 	@Test
 	public void testUnmarshall() throws UnmarshallingException {
-		final RoleUnmarshaller unmarshaller = new RoleUnmarshaller();
-		final OpenSamlRole ref = unmarshaller.unmarshall(testDomElement);
+		final CodedWithEquivalentsUnmarshaller unmarshaller = new CodedWithEquivalentsUnmarshaller();
+		final OpenSamlCodedWithEquivalent ref = unmarshaller.unmarshall(testDomElement);
 		assertNotNull(ref);
 		assertEquals("HCP", ref.getCode());
 		assertEquals("2.16.756.5.30.1.127.3.10.6", ref.getCodeSystem());

@@ -12,10 +12,10 @@ package org.husky.xua.saml2.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.husky.xua.hl7v3.Role;
-import org.husky.xua.hl7v3.impl.RoleBuilder;
+import org.husky.xua.hl7v3.CE;
+import org.husky.xua.hl7v3.PurposeOfUse;
+import org.husky.xua.hl7v3.impl.CodedWithEquivalentsBuilder;
 import org.husky.xua.saml2.AttributeBuilder;
-import org.husky.xua.saml2.impl.AttributeBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeType;
@@ -24,7 +24,7 @@ public class AttributeBuilderImplTest {
 
 	private String testAttributeName;
 	private String testAttributeValue;
-	public Role testAttributeValueRole;
+	public CE testAttributeValueRole;
 
 	public AttributeBuilder testBuilder;
 
@@ -34,7 +34,9 @@ public class AttributeBuilderImplTest {
 		testAttributeName = "My Attribute Name";
 		testAttributeValue = "My Attribute Value";
 
-		testAttributeValueRole = new RoleBuilder().buildObject();
+		testAttributeValueRole = new CodedWithEquivalentsBuilder().buildObject(PurposeOfUse.DEFAULT_NS_URI,
+				PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME,
+				PurposeOfUse.DEFAULT_PREFIX);
 		testAttributeValueRole.setCode("My Code");
 		testAttributeValueRole.setCode("My Code System");
 	}

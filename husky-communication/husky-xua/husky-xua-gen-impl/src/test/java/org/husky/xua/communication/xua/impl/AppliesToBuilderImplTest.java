@@ -15,8 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.husky.xua.communication.xua.AppliesTo;
 import org.husky.xua.communication.xua.AppliesToBuilder;
-import org.husky.xua.communication.xua.impl.AppliesToBuilderImpl;
-import org.husky.xua.communication.xua.impl.AppliesToImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.opensaml.soap.wsaddressing.Address;
@@ -24,7 +22,7 @@ import org.opensaml.soap.wsaddressing.EndpointReference;
 import org.opensaml.soap.wsaddressing.impl.AddressBuilder;
 import org.opensaml.soap.wsaddressing.impl.EndpointReferenceBuilder;
 
-public class AppliesToBuilderImplTest {
+class AppliesToBuilderImplTest {
 
 	private AppliesToBuilder builder;
 	private String testAddress;
@@ -44,14 +42,14 @@ public class AppliesToBuilderImplTest {
 	}
 
 	@Test
-	public void testAddress() {
+	void testAddress() {
 		final AppliesTo ref = builder.address(testAddress).create();
 		assertNotNull(ref);
 		assertEquals(testAddress, ref.getAddress());
 	}
 
 	@Test
-	public void testCreateAppliesTo() {
+	void testCreateAppliesTo() {
 		final AppliesTo ref = ((AppliesToBuilderImpl) builder).create(testFromOutsietAppliesTo);
 		assertNotNull(ref);
 		assertEquals(testFromOutsietAppliesTo, ((AppliesToImpl) ref).getWrappedObject());

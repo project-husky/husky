@@ -11,7 +11,6 @@
 package org.husky.xua.saml2.impl;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import org.husky.xua.core.SecurityObject;
@@ -60,13 +59,6 @@ public class ArtifactResponseImpl
 	}
 
 	@Override
-	public Calendar getIssueInstant() {
-		final var retVal = Calendar.getInstance();
-		retVal.setTimeInMillis(wrappedObject.getIssueInstant().toEpochMilli());
-		return retVal;
-	}
-
-	@Override
 	public String getIssuer() {
 		if (wrappedObject.getIssuer() != null) {
 			return wrappedObject.getIssuer().getValue();
@@ -75,14 +67,21 @@ public class ArtifactResponseImpl
 	}
 
 	@Override
+	public Calendar getIssueInstant() {
+		final var retVal = Calendar.getInstance();
+		retVal.setTimeInMillis(wrappedObject.getIssueInstant().toEpochMilli());
+		return retVal;
+	}
+
+	@Override
 	public List<Response> getResponses() {
 		final List<Response> retVal = new ArrayList<>();
 
 		final List<XMLObject> orderedChildren = wrappedObject.getOrderedChildren();
 		orderedChildren.forEach(c -> {
-			if (c instanceof org.opensaml.saml.saml2.core.Response) {
+			if (c instanceof org.opensaml.saml.saml2.core.Response response) {
 				retVal.add(new ResponseBuilderImpl()
-						.create((org.opensaml.saml.saml2.core.Response) c));
+						.create(response));
 			}
 		});
 		return retVal;

@@ -11,19 +11,17 @@
 package org.husky.xua.hl7v3.impl;
 
 import org.apache.commons.lang3.StringUtils;
-import org.husky.xua.hl7v3.OpenSamlRole;
-import org.husky.xua.hl7v3.Role;
 import org.opensaml.core.xml.AbstractXMLObjectBuilder;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Class extending the abstract class AbstractXMLObjectBuilder with type OpenSaml PurposeOfUse.</div>
- * <div class="de">Die Klasse erweitert die abstrakte Klasse AbstractXMLObjectBuilder mit typ OpenSaml PurposeOfUse.</div>
+ * <div class="en">Class extending the abstract class AbstractXMLObjectBuilder with type OpenSaml XMLObject (CE).</div>
+ * <div class="de">Die Klasse erweitert die abstrakte Klasse AbstractXMLObjectBuilder mit typ OpenSaml XMLObject (CE).</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class RoleBuilder extends AbstractXMLObjectBuilder<OpenSamlRole> {
+public class CodedWithEquivalentsBuilder extends AbstractXMLObjectBuilder<CodedWithEquivalentImpl> {
 
 	/** The code. */
 	protected String code;
@@ -42,80 +40,58 @@ public class RoleBuilder extends AbstractXMLObjectBuilder<OpenSamlRole> {
 
 	/**
 	 *
-	 * <!-- @formatter:off -->
-	 * <div class="en">Method to build an OpenSamlPurposeOfUse instance.</div>
-	 * <div class="de">Methode um eine OpenSamlPurposeOfUse Instanz zu kreiiren.</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div>
-	 *
-	 * @return
-	 * <div class="en">the OpenSamlPurposeOfUse instance.</div>
-	 * <div class="de">Die OpenSamlPurposeOfUse Instanz.</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div>
-	 * <!-- @formatter:on -->
-	 */
-	public OpenSamlRole buildObject() {
-		return buildObject(Role.DEFAULT_NS_URI, Role.DEFAULT_ELEMENT_LOCAL_NAME,
-				Role.DEFAULT_PREFIX);
-	}
-
-	/**
-	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.opensaml.core.xml.AbstractXMLObjectBuilder#buildObject(java.lang.String,
 	 *      java.lang.String, java.lang.String)
 	 */
 	@Override
-	public OpenSamlRole buildObject(String namespaceURI, String localName, String namespacePrefix) {
+	public CodedWithEquivalentImpl buildObject(String namespaceURI, String localName,
+			String namespacePrefix) {
 		// This is just to make the assertion Valid in the Gazelle EVS Client:
 		// https://ehealthsuisse.ihe-europe.net/EVSClient/xml/validator.seam?extension=CH%3AXUA&standard=CH%3AXUA&type=XML
-		// The prefox lead to schema error on 19.7.2018
-		// final OpenSamlPurposeOfUse ppou = new PurposeOfUseImpl(namespaceURI,
-		// localName,
-		// namespacePrefix);
-		final OpenSamlRole ppou = new RoleImpl(namespaceURI, localName, "");
+		// The prefix lead to schema error on 19.7.2018
+		final CodedWithEquivalentImpl ce = new CodedWithEquivalentImpl(namespaceURI, localName, "");
 
 		if (!StringUtils.isEmpty(code)) {
-			ppou.setCode(code);
+			ce.setCode(code);
 		}
 		if (!StringUtils.isEmpty(codeSystem)) {
-			ppou.setCodeSystem(codeSystem);
+			ce.setCodeSystem(codeSystem);
 		}
 		if (!StringUtils.isEmpty(codeSystemName)) {
-			ppou.setCodeSystemName(codeSystemName);
+			ce.setCodeSystemName(codeSystemName);
 		}
 		if (!StringUtils.isEmpty(codeSystemVersion)) {
-			ppou.setCodeSystemVersion(codeSystemVersion);
+			ce.setCodeSystemVersion(codeSystemVersion);
 		}
 		if (!StringUtils.isEmpty(displayName)) {
-			ppou.setDisplayName(displayName);
+			ce.setDisplayName(displayName);
 		}
-		return ppou;
+		return ce;
 	}
 
-	public RoleBuilder code(String aCode) {
+	public CodedWithEquivalentsBuilder code(String aCode) {
 		code = aCode;
 		return this;
 	}
 
-	public RoleBuilder codeSystem(String aCodeSystem) {
+	public CodedWithEquivalentsBuilder codeSystem(String aCodeSystem) {
 		codeSystem = aCodeSystem;
 		return this;
 	}
 
-	public RoleBuilder codeSystemName(String aCodeSystemName) {
+	public CodedWithEquivalentsBuilder codeSystemName(String aCodeSystemName) {
 		codeSystemName = aCodeSystemName;
 		return this;
 	}
 
-	public RoleBuilder codeSystemVersion(String aCodeSystemVersion) {
+	public CodedWithEquivalentsBuilder codeSystemVersion(String aCodeSystemVersion) {
 		codeSystemVersion = aCodeSystemVersion;
 		return this;
 	}
 
-	public RoleBuilder displayName(String aDisplayNamen) {
+	public CodedWithEquivalentsBuilder displayName(String aDisplayNamen) {
 		displayName = aDisplayNamen;
 		return this;
 	}

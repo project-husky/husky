@@ -13,7 +13,6 @@ import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.io.IOUtils;
-import org.husky.communication.ch.enums.Role;
 import org.husky.xua.authentication.AuthnRequest;
 import org.husky.xua.authentication.impl.AuthnRequestBuilderImpl;
 import org.husky.xua.communication.clients.XuaClient;
@@ -33,8 +32,9 @@ import org.husky.xua.deserialization.impl.AssertionDeserializerImpl;
 import org.husky.xua.exceptions.ClientSendException;
 import org.husky.xua.exceptions.DeserializeException;
 import org.husky.xua.exceptions.SerializeException;
-import org.husky.xua.hl7v3.impl.PurposeOfUseBuilder;
-import org.husky.xua.hl7v3.impl.RoleBuilder;
+import org.husky.xua.hl7v3.PurposeOfUse;
+import org.husky.xua.hl7v3.Role;
+import org.husky.xua.hl7v3.impl.CodedWithEquivalentsBuilder;
 import org.husky.xua.saml2.Assertion;
 import org.husky.xua.saml2.impl.AttributeImpl;
 import org.junit.jupiter.api.Test;
@@ -76,12 +76,16 @@ public class XuaClientTest extends ServerTestHelper {
 		var idpAssertion = requestIdpAssertion("ltieche", "azerty");
 
 		// set role of subject
-		var role = new RoleBuilder().code(Role.ASSISTANT_CODE).codeSystem("2.16.756.5.30.1.127.3.10.6")
-				.displayName("Behandelnde(r)").buildObject();
+		var role = new CodedWithEquivalentsBuilder().code(org.husky.communication.ch.enums.Role.ASSISTANT_CODE)
+				.codeSystem("2.16.756.5.30.1.127.3.10.6")
+				.displayName("Behandelnde(r)")
+				.buildObject(Role.DEFAULT_NS_URI, Role.DEFAULT_ELEMENT_LOCAL_NAME,
+						Role.DEFAULT_PREFIX);
 
 		// set the purpose of use
-		var purposeOfUse = new PurposeOfUseBuilder().code("NORM").codeSystem("2.16.756.5.30.1.127.3.10.6")
-				.displayName("Normal Access").buildObject();
+		var purposeOfUse = new CodedWithEquivalentsBuilder().code("NORM").codeSystem("2.16.756.5.30.1.127.3.10.6")
+				.displayName("Normal Access").buildObject(PurposeOfUse.DEFAULT_NS_URI,
+						PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME, PurposeOfUse.DEFAULT_PREFIX);
 
 		// specify information about the principal
 		var principalId = "7601002467373";
@@ -171,12 +175,14 @@ public class XuaClientTest extends ServerTestHelper {
 			var idpAssertion = new AssertionDeserializerImpl().fromXmlByteArray(IOUtils.toByteArray(is));
 
 			// set role of subject
-			var role = new RoleBuilder().code("TCU").codeSystem("2.16.756.5.30.1.127.3.10.6")
-					.displayName("Behandelnde(r)").buildObject();
+			var role = new CodedWithEquivalentsBuilder().code("TCU").codeSystem("2.16.756.5.30.1.127.3.10.6")
+					.displayName("Behandelnde(r)")
+					.buildObject(Role.DEFAULT_NS_URI, Role.DEFAULT_ELEMENT_LOCAL_NAME, Role.DEFAULT_PREFIX);
 
 			// set the purpose of use
-			var purposeOfUse = new PurposeOfUseBuilder().code("AUTO").codeSystem("2.16.756.5.30.1.127.3.10.6")
-					.displayName("Normal Access").buildObject();
+			var purposeOfUse = new CodedWithEquivalentsBuilder().code("AUTO").codeSystem("2.16.756.5.30.1.127.3.10.6")
+					.displayName("Normal Access").buildObject(PurposeOfUse.DEFAULT_NS_URI,
+							PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME, PurposeOfUse.DEFAULT_PREFIX);
 
 			// specify information about the principal
 			var principalId = "7601000050717";
@@ -272,12 +278,14 @@ public class XuaClientTest extends ServerTestHelper {
 			var idpAssertion = new AssertionDeserializerImpl().fromXmlByteArray(IOUtils.toByteArray(is));
 
 			// set role of subject
-			var role = new RoleBuilder().code("PADM").codeSystem("2.16.756.5.30.1.127.3.10.6")
-					.displayName("Behandelnde(r)").buildObject();
+			var role = new CodedWithEquivalentsBuilder().code("PADM").codeSystem("2.16.756.5.30.1.127.3.10.6")
+					.displayName("Behandelnde(r)")
+					.buildObject(Role.DEFAULT_NS_URI, Role.DEFAULT_ELEMENT_LOCAL_NAME, Role.DEFAULT_PREFIX);
 
 			// set the purpose of use
-			var purposeOfUse = new PurposeOfUseBuilder().code("NORM").codeSystem("2.16.756.5.30.1.127.3.10.6")
-					.displayName("Normal Access").buildObject();
+			var purposeOfUse = new CodedWithEquivalentsBuilder().code("NORM").codeSystem("2.16.756.5.30.1.127.3.10.6")
+					.displayName("Normal Access").buildObject(PurposeOfUse.DEFAULT_NS_URI,
+							PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME, PurposeOfUse.DEFAULT_PREFIX);
 
 			// set ID of patient with namespace EPR_SPID
 			String resourceId = "761337610411265304^^^SPID&2.16.756.5.30.1.127.3.10.3&ISO";
@@ -368,12 +376,14 @@ public class XuaClientTest extends ServerTestHelper {
 			var idpAssertion = new AssertionDeserializerImpl().fromXmlByteArray(IOUtils.toByteArray(is));
 
 			// set role of subject
-			var role = new RoleBuilder().code("DADM").codeSystem("2.16.756.5.30.1.127.3.10.6")
-					.displayName("Behandelnde(r)").buildObject();
+			var role = new CodedWithEquivalentsBuilder().code("DADM").codeSystem("2.16.756.5.30.1.127.3.10.6")
+					.displayName("Behandelnde(r)")
+					.buildObject(Role.DEFAULT_NS_URI, Role.DEFAULT_ELEMENT_LOCAL_NAME, Role.DEFAULT_PREFIX);
 
 			// set the purpose of use
-			var purposeOfUse = new PurposeOfUseBuilder().code("NORM").codeSystem("2.16.756.5.30.1.127.3.10.6")
-					.displayName("Normal Access").buildObject();
+			var purposeOfUse = new CodedWithEquivalentsBuilder().code("NORM").codeSystem("2.16.756.5.30.1.127.3.10.6")
+					.displayName("Normal Access").buildObject(PurposeOfUse.DEFAULT_NS_URI,
+							PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME, PurposeOfUse.DEFAULT_PREFIX);
 
 			// set ID of patient with namespace EPR_SPID
 			String resourceId = "761337610411265304^^^SPID&2.16.756.5.30.1.127.3.10.3&ISO";

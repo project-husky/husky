@@ -1,6 +1,9 @@
 package org.husky.xua.validation.statement;
 
 import static org.husky.common.enums.CodeSystems.SwissEprSpid;
+import static org.husky.communication.ch.enums.PurposeOfUse.AUTOMATIC_UPLOAD;
+import static org.husky.communication.ch.enums.PurposeOfUse.EMERGENCY_ACCESS;
+import static org.husky.communication.ch.enums.PurposeOfUse.NORMAL_ACCESS;
 import static org.husky.communication.ch.enums.Role.ASSISTANT;
 import static org.husky.communication.ch.enums.Role.DOCUMENT_ADMINISTRATOR;
 import static org.husky.communication.ch.enums.Role.HEALTHCARE_PROFESSIONAL;
@@ -14,9 +17,6 @@ import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACM
 import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_PURPOSEOFUSE;
 import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_RESOURCEID;
 import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_SUBJECTID;
-import static org.husky.communication.ch.enums.PurposeOfUse.AUTOMATIC_UPLOAD;
-import static org.husky.communication.ch.enums.PurposeOfUse.EMERGENCY_ACCESS;
-import static org.husky.communication.ch.enums.PurposeOfUse.NORMAL_ACCESS;
 import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_HOME_COMMUNITY_ID;
 import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ORGANIZATIONS_ID;
 import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ORGANIZATIONS_NAME;
@@ -30,10 +30,10 @@ import java.util.Optional;
 
 import javax.xml.namespace.QName;
 
-import org.husky.communication.ch.enums.Role;
 import org.husky.communication.ch.enums.PurposeOfUse;
+import org.husky.communication.ch.enums.Role;
 import org.husky.xua.hl7v3.impl.AbstractImpl;
-import org.husky.xua.hl7v3.impl.PurposeOfUseImpl;
+import org.husky.xua.hl7v3.impl.CodedWithEquivalentImpl;
 import org.husky.xua.validation.ChEprAssertionValidationParameters;
 import org.opensaml.core.xml.schema.XSString;
 import org.opensaml.saml.common.assertion.ValidationContext;
@@ -120,8 +120,7 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 .map(attributeValue -> attributeValue.getUnknownXMLObjects(new QName("urn:hl7-org:v3", "PurposeOfUse")))
                 .filter(l -> l.size() == 1)
                 .map(l -> l.get(0))
-                .filter(PurposeOfUseImpl.class::isInstance)
-                .map(PurposeOfUseImpl.class::cast)
+				.filter(CodedWithEquivalentImpl.class::isInstance).map(CodedWithEquivalentImpl.class::cast)
                 .filter(p -> PurposeOfUse.VALUE_SET_ID.equals(p.getCodeSystem()))
                 .map(AbstractImpl::getCode)
                 .map(PurposeOfUse::getEnum)

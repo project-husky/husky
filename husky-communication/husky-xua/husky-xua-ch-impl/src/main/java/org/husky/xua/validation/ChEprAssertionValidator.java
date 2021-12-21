@@ -1,10 +1,42 @@
 package org.husky.xua.validation;
 
-import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
+import static org.husky.common.ch.ChEpr.EPR_SPID_URN;
+import static org.husky.xua.ChEprXuaSpecifications.DOCUMENT_ADMINISTRATOR_ID;
+import static org.husky.xua.ChEprXuaSpecifications.POLICY_ADMINISTRATOR_ID;
+import static org.husky.xua.ChEprXuaSpecifications.REPRESENTATIVE_ID;
+import static org.husky.xua.ChEprXuaSpecifications.TECHNICAL_USER_ID;
+import static org.husky.xua.communication.xua.XUserAssertionConstants.IHE_XCA_HOMECOMMUNITYID;
+import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_ORGANISATION;
+import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_ORGANIZATIONID;
+import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_PURPOSEOFUSE;
+import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_ROLE;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ASSISTANT_GLN;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ASSISTANT_NAME;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_HOME_COMMUNITY_ID;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ORGANIZATIONS_ID;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ORGANIZATIONS_NAME;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_PURPOSE_OF_USE;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_RESPONSIBLE_SUBJECT_ID;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ROLE;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_TCU_ID;
+import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.CLOCK_SKEW;
+import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.SIGNATURE_REQUIRED;
+
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+
+import javax.xml.namespace.QName;
+
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.communication.ch.enums.Role;
 import org.husky.xua.hl7v3.impl.AbstractImpl;
-import org.husky.xua.hl7v3.impl.RoleImpl;
+import org.husky.xua.hl7v3.impl.CodedWithEquivalentImpl;
 import org.husky.xua.validation.condition.ChEprAudienceRestrictionConditionValidator;
 import org.husky.xua.validation.condition.ChEprDelegationRestrictionConditionValidator;
 import org.husky.xua.validation.statement.ChEprAttributeStatementValidator;
@@ -29,16 +61,7 @@ import org.opensaml.storage.ReplayCache;
 import org.opensaml.storage.impl.MemoryStorageService;
 import org.opensaml.xmlsec.signature.support.impl.ExplicitKeySignatureTrustEngine;
 
-import javax.xml.namespace.QName;
-import java.time.Duration;
-import java.util.*;
-
-import static org.husky.common.ch.ChEpr.EPR_SPID_URN;
-import static org.husky.xua.ChEprXuaSpecifications.*;
-import static org.husky.xua.communication.xua.XUserAssertionConstants.*;
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.*;
-import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.CLOCK_SKEW;
-import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.SIGNATURE_REQUIRED;
+import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 
 /**
  * A component capable of performing core validation of SAML version 2.0 {@link Assertion} instances in use in the
@@ -178,8 +201,7 @@ public class ChEprAssertionValidator {
                 .map(attributeValue -> attributeValue.getUnknownXMLObjects(new QName("urn:hl7-org:v3", "Role")))
                 .filter(l -> l.size() == 1)
                 .map(l -> l.get(0))
-                .filter(RoleImpl.class::isInstance)
-                .map(RoleImpl.class::cast)
+				.filter(CodedWithEquivalentImpl.class::isInstance).map(CodedWithEquivalentImpl.class::cast)
                 .filter(r -> "2.16.756.5.30.1.127.3.10.6".equals(r.getCodeSystem()))
                 .map(AbstractImpl::getCode)
                 .map(Role::getEnum)

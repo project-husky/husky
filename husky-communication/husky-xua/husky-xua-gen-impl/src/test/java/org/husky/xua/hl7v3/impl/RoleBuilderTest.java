@@ -12,8 +12,8 @@ package org.husky.xua.hl7v3.impl;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import org.husky.xua.hl7v3.CE;
 import org.husky.xua.hl7v3.Role;
-import org.husky.xua.hl7v3.impl.RoleBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -48,7 +48,8 @@ public class RoleBuilderTest {
 	 */
 	@Test
 	public void testBuildObject() {
-		final Role ref = new RoleBuilder().buildObject();
+		final CE ref = new CodedWithEquivalentsBuilder().buildObject(Role.DEFAULT_NS_URI,
+				Role.DEFAULT_ELEMENT_LOCAL_NAME, Role.DEFAULT_PREFIX);
 		assertNotNull(ref);
 	}
 

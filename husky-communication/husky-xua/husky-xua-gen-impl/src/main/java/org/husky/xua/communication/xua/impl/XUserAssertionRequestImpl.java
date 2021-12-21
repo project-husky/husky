@@ -19,8 +19,8 @@ import org.husky.xua.communication.xua.XUserAssertionConstants;
 import org.husky.xua.communication.xua.XUserAssertionRequest;
 import org.husky.xua.core.SecurityObject;
 import org.husky.xua.helpers.ListXmlObjectHelper;
-import org.husky.xua.hl7v3.PurposeOfUse;
-import org.husky.xua.hl7v3.Role;
+import org.husky.xua.hl7v3.CE;
+import org.husky.xua.hl7v3.OpenSamlCodedWithEquivalent;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.core.xml.schema.XSAny;
 import org.opensaml.core.xml.schema.XSString;
@@ -126,11 +126,11 @@ public class XUserAssertionRequestImpl implements XUserAssertionRequest,
 	}
 
 	@Override
-	public PurposeOfUse getPurposeOfUse() {
+	public CE getPurposeOfUse() {
 		final Claims claimes = new ListXmlObjectHelper<Claims>().getComponent(ClaimsImpl.class,
 				requestSecurityToken.getUnknownXMLObjects());
 		if (claimes != null) {
-			return (PurposeOfUse) getAttributeValueAsXmlObjectByName(claimes.getUnknownXMLObjects(),
+			return (OpenSamlCodedWithEquivalent) getAttributeValueAsXmlObjectByName(claimes.getUnknownXMLObjects(),
 					XUserAssertionConstants.OASIS_XACML_PURPOSEOFUSE);
 		}
 		return null;
@@ -172,11 +172,11 @@ public class XUserAssertionRequestImpl implements XUserAssertionRequest,
 	}
 
 	@Override
-	public Role getSubjectRole() {
+	public CE getSubjectRole() {
 		final Claims claimes = new ListXmlObjectHelper<Claims>().getComponent(ClaimsImpl.class,
 				requestSecurityToken.getUnknownXMLObjects());
 		if (claimes != null) {
-			return (Role) getAttributeValueAsXmlObjectByName(claimes.getUnknownXMLObjects(),
+			return (OpenSamlCodedWithEquivalent) getAttributeValueAsXmlObjectByName(claimes.getUnknownXMLObjects(),
 					XUserAssertionConstants.OASIS_XACML_ROLE);
 		}
 		return null;

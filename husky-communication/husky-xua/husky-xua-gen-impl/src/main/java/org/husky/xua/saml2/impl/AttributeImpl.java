@@ -11,13 +11,13 @@
 package org.husky.xua.saml2.impl;
 
 import org.husky.xua.core.SecurityObject;
+import org.husky.xua.hl7v3.CE;
 import org.husky.xua.hl7v3.InstanceIdentifier;
 import org.husky.xua.hl7v3.PurposeOfUse;
 import org.husky.xua.hl7v3.Role;
+import org.husky.xua.hl7v3.impl.CodedWithEquivalentImpl;
+import org.husky.xua.hl7v3.impl.CodedWithEquivalentsBuilder;
 import org.husky.xua.hl7v3.impl.InstanceIdentifierImpl;
-import org.husky.xua.hl7v3.impl.PurposeOfUseBuilder;
-import org.husky.xua.hl7v3.impl.PurposeOfUseImpl;
-import org.husky.xua.hl7v3.impl.RoleImpl;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeType;
 import org.opensaml.core.xml.schema.XSString;
 import org.opensaml.core.xml.schema.impl.XSStringImpl;
@@ -62,7 +62,8 @@ public class AttributeImpl
 		for (Object obj : aAttribute.getAttributeValue()) {
 			if (obj instanceof org.openehealth.ipf.commons.audit.types.PurposeOfUse.PurposeOfUseImpl) {
 				var purposeOfUse = (org.openehealth.ipf.commons.audit.types.PurposeOfUse.PurposeOfUseImpl) obj;
-				var retVal = new PurposeOfUseBuilder().buildObject();
+				var retVal = new CodedWithEquivalentsBuilder().buildObject(PurposeOfUse.DEFAULT_NS_URI,
+						PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME, PurposeOfUse.DEFAULT_PREFIX);
 				retVal.setCode(purposeOfUse.getCode());
 				retVal.setCodeSystemName(purposeOfUse.getCodeSystemName());
 				retVal.setDisplayName(purposeOfUse.getDisplayName());
@@ -114,9 +115,9 @@ public class AttributeImpl
 		return null;
 	}
 
-	public PurposeOfUse getValueAsPurposeOfUse() {
+	public CE getValueAsPurposeOfUse() {
 		if (isValueAPurposeOfUse()) {
-			var purposeOfUse = (PurposeOfUseImpl) ((AttributeValueImpl) attribute.getAttributeValues().get(0))
+			var purposeOfUse = (CodedWithEquivalentImpl) ((AttributeValueImpl) attribute.getAttributeValues().get(0))
 					.getUnknownXMLObjects().get(0);
 			getAttributeValue().add(purposeOfUse);
 			return purposeOfUse;
@@ -124,9 +125,10 @@ public class AttributeImpl
 		return null;
 	}
 
-	public Role getValueAsRole() {
+	public CE getValueAsRole() {
 		if (isValueARole()) {
-			var role = (RoleImpl) ((AttributeValueImpl) attribute.getAttributeValues().get(0)).getUnknownXMLObjects()
+			var role = (CodedWithEquivalentImpl) ((AttributeValueImpl) attribute.getAttributeValues().get(0))
+					.getUnknownXMLObjects()
 					.get(0);
 			getAttributeValue().add(role);
 			return role;
@@ -157,38 +159,43 @@ public class AttributeImpl
 	public boolean isValueAInstanceIdentifier() {
 		return (attribute.getAttributeValues() != null) //
 				&& (!attribute.getAttributeValues().isEmpty()) //
-				&& attribute.getAttributeValues().get(0) instanceof AttributeValueImpl
-				&& ((AttributeValueImpl) attribute.getAttributeValues().get(0)).getUnknownXMLObjects() != null
-				&& !((AttributeValueImpl) attribute.getAttributeValues().get(0)).getUnknownXMLObjects().isEmpty()
-				&& ((AttributeValueImpl) attribute.getAttributeValues().get(0)).getUnknownXMLObjects()
+				&& attribute.getAttributeValues().get(0)instanceof AttributeValueImpl attributevalueimpl
+				&& attributevalueimpl.getUnknownXMLObjects() != null
+				&& !attributevalueimpl.getUnknownXMLObjects().isEmpty()
+				&& attributevalueimpl.getUnknownXMLObjects()
 						.get(0) instanceof InstanceIdentifierImpl;
 	}
 
 	public boolean isValueAPurposeOfUse() {
 		return (attribute.getAttributeValues() != null) //
 				&& (!attribute.getAttributeValues().isEmpty()) //
-				&& attribute.getAttributeValues().get(0) instanceof AttributeValueImpl
-				&& ((AttributeValueImpl) attribute.getAttributeValues().get(0)).getUnknownXMLObjects() != null
-				&& !((AttributeValueImpl) attribute.getAttributeValues().get(0)).getUnknownXMLObjects().isEmpty()
-				&& ((AttributeValueImpl) attribute.getAttributeValues().get(0)).getUnknownXMLObjects()
-						.get(0) instanceof PurposeOfUseImpl;
+				&& attribute.getAttributeValues().get(0)instanceof AttributeValueImpl attributevalueimpl
+				&& attributevalueimpl.getUnknownXMLObjects() != null
+				&& !attributevalueimpl.getUnknownXMLObjects().isEmpty()
+				&& attributevalueimpl.getUnknownXMLObjects()
+						.get(0)instanceof CodedWithEquivalentImpl codedWithEquivalentImpl
+				&& codedWithEquivalentImpl.getElementQName() != null
+				&& PurposeOfUse.TYPE_LOCAL_NAME
+						.equalsIgnoreCase(codedWithEquivalentImpl.getElementQName().getLocalPart());
 	}
 
 	public boolean isValueARole() {
 		return (attribute.getAttributeValues() != null) //
 				&& (!attribute.getAttributeValues().isEmpty()) //
-				&& attribute.getAttributeValues().get(0) instanceof AttributeValueImpl
-				&& ((AttributeValueImpl) attribute.getAttributeValues().get(0)).getUnknownXMLObjects() != null
-				&& !((AttributeValueImpl) attribute.getAttributeValues().get(0)).getUnknownXMLObjects().isEmpty()
-				&& ((AttributeValueImpl) attribute.getAttributeValues().get(0)).getUnknownXMLObjects()
-						.get(0) instanceof RoleImpl;
+				&& attribute.getAttributeValues().get(0)instanceof AttributeValueImpl attributevalueimpl
+				&& attributevalueimpl.getUnknownXMLObjects() != null
+				&& !attributevalueimpl.getUnknownXMLObjects().isEmpty()
+				&& attributevalueimpl.getUnknownXMLObjects()
+						.get(0)instanceof CodedWithEquivalentImpl codedWithEquivalentImpl
+				&& codedWithEquivalentImpl.getElementQName() != null
+				&& Role.TYPE_LOCAL_NAME.equalsIgnoreCase(codedWithEquivalentImpl.getElementQName().getLocalPart());
 	}
 
 	public boolean isValueAString() {
 		return (attribute.getAttributeValues() != null) //
 				&& (!attribute.getAttributeValues().isEmpty()) //
-				&& attribute.getAttributeValues().get(0) instanceof XSStringImpl
-				&& ((XSStringImpl) attribute.getAttributeValues().get(0)).getValue() != null;
+				&& attribute.getAttributeValues().get(0)instanceof XSStringImpl xsstringimpl
+				&& xsstringimpl.getValue() != null;
 	}
 
 }

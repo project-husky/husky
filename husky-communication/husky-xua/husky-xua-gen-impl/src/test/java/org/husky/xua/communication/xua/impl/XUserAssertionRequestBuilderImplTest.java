@@ -19,19 +19,16 @@ import org.husky.xua.communication.xua.AppliesTo;
 import org.husky.xua.communication.xua.RequestType;
 import org.husky.xua.communication.xua.TokenType;
 import org.husky.xua.communication.xua.XUserAssertionRequest;
-import org.husky.xua.communication.xua.impl.AppliesToBuilderImpl;
-import org.husky.xua.communication.xua.impl.XUserAssertionRequestBuilderImpl;
-import org.husky.xua.communication.xua.impl.XUserAssertionRequestImpl;
+import org.husky.xua.hl7v3.CE;
 import org.husky.xua.hl7v3.PurposeOfUse;
 import org.husky.xua.hl7v3.Role;
-import org.husky.xua.hl7v3.impl.PurposeOfUseBuilder;
-import org.husky.xua.hl7v3.impl.RoleBuilder;
+import org.husky.xua.hl7v3.impl.CodedWithEquivalentsBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.opensaml.soap.wstrust.RequestSecurityToken;
 import org.opensaml.soap.wstrust.impl.RequestSecurityTokenBuilder;
 
-public class XUserAssertionRequestBuilderImplTest {
+class XUserAssertionRequestBuilderImplTest {
 
 	private XUserAssertionRequestBuilderImpl builder;
 	private String testAddress;
@@ -45,9 +42,9 @@ public class XUserAssertionRequestBuilderImplTest {
 	private String testPoUCodeSystem;
 	private String testPoUCodeSystemName;
 	private String testPoUDisplayName;
-	private PurposeOfUse testPurposeOfUse;
+	private CE testPurposeOfUse;
 	private String testResourceId;
-	private Role testRole;
+	private CE testRole;
 	private String testSubjectId;
 	private String testSubjectName;
 	private String testRoleCode;
@@ -66,7 +63,8 @@ public class XUserAssertionRequestBuilderImplTest {
 		testOrganizationName = "My Best organisation";
 		testResourceId = UUID.randomUUID().toString();
 
-		testRole = new RoleBuilder().buildObject();
+		testRole = new CodedWithEquivalentsBuilder().buildObject(Role.DEFAULT_NS_URI, Role.DEFAULT_ELEMENT_LOCAL_NAME,
+				Role.DEFAULT_PREFIX);
 
 		testRoleCode = "HCP";
 		testRoleCodeSystem = "2.16.756.5.30.1.127.3.10.6";
@@ -83,7 +81,8 @@ public class XUserAssertionRequestBuilderImplTest {
 		testAddress = "https://guguseli.org/test/access/endpoint/address";
 		testAppliesTo = new AppliesToBuilderImpl().address(testAddress).create();
 
-		testPurposeOfUse = new PurposeOfUseBuilder().buildObject();
+		testPurposeOfUse = new CodedWithEquivalentsBuilder().buildObject(PurposeOfUse.DEFAULT_NS_URI,
+				PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME, PurposeOfUse.DEFAULT_PREFIX);
 		testPoUCode = "987654321";
 		testPoUCodeSystem = "1.2.3.4.5.6.7.8.9.0";
 		testPoUCodeSystemName = "My Code System";
@@ -96,21 +95,21 @@ public class XUserAssertionRequestBuilderImplTest {
 	}
 
 	@Test
-	public void testAppliesTo() {
+	void testAppliesTo() {
 		final XUserAssertionRequest ref = builder.appliesTo(testAppliesTo).create();
 		assertNotNull(ref);
 		assertEquals(testAppliesTo.getAddress(), ref.getAppliesTo().getAddress());
 	}
 
 	@Test
-	public void testContext() {
+	void testContext() {
 		final XUserAssertionRequest ref = builder.context(testContext).create();
 		assertNotNull(ref);
 		assertEquals(testContext, ref.getContext());
 	}
 
 	@Test
-	public void testCreateRequestSecurityToken() {
+	void testCreateRequestSecurityToken() {
 		final XUserAssertionRequest ref = builder.create(testInternalFromOutside);
 		assertNotNull(ref);
 		assertEquals(testInternalFromOutside, ((XUserAssertionRequestImpl) ref).getWrappedObject());
@@ -118,35 +117,35 @@ public class XUserAssertionRequestBuilderImplTest {
 	}
 
 	@Test
-	public void testDialect() {
+	void testDialect() {
 		final XUserAssertionRequest ref = builder.dialect(testDialect).create();
 		assertNotNull(ref);
 		assertEquals(testDialect, ref.getDialect());
 	}
 
 	@Test
-	public void testOrganizationId() {
+	void testOrganizationId() {
 		final XUserAssertionRequest ref = builder.organizationId(testOrganizationId).create();
 		assertNotNull(ref);
 		assertEquals(testOrganizationId, ref.getOrganizationId());
 	}
 
 	@Test
-	public void testOrganizationName() {
+	void testOrganizationName() {
 		final XUserAssertionRequest ref = builder.organizationName(testOrganizationName).create();
 		assertNotNull(ref);
 		assertEquals(testOrganizationName, ref.getOrganizationName());
 	}
 
 	@Test
-	public void testPurposeOfUse() {
+	void testPurposeOfUse() {
 		final XUserAssertionRequest ref = builder.purposeOfUse(testPurposeOfUse).create();
 		assertNotNull(ref);
 		assertEquals(testPurposeOfUse, ref.getPurposeOfUse());
 	}
 
 	@Test
-	public void testRequestType() {
+	void testRequestType() {
 		final XUserAssertionRequest ref = builder.requestType(RequestType.WST_ISSUE).create();
 		assertNotNull(ref);
 		assertEquals(RequestType.WST_ISSUE, ref.getRequestType());
@@ -160,28 +159,28 @@ public class XUserAssertionRequestBuilderImplTest {
 	}
 
 	@Test
-	public void testSubjectId() {
+	void testSubjectId() {
 		final XUserAssertionRequest ref = builder.subjectId(testSubjectId).create();
 		assertNotNull(ref);
 		assertEquals(testSubjectId, ref.getSubjectId());
 	}
 
 	@Test
-	public void testSubjectName() {
+	void testSubjectName() {
 		final XUserAssertionRequest ref = builder.subjectName(testSubjectName).create();
 		assertNotNull(ref);
 		assertEquals(testSubjectName, ref.getSubjectName());
 	}
 
 	@Test
-	public void testSubjectRole() {
+	void testSubjectRole() {
 		final XUserAssertionRequest ref = builder.subjectRole(testRole).create();
 		assertNotNull(ref);
 		assertEquals(testRole, ref.getSubjectRole());
 	}
 
 	@Test
-	public void testTokenType() {
+	void testTokenType() {
 		final XUserAssertionRequest ref = builder
 				.tokenType(TokenType.OASIS_WSS_SAML_PROFILE_11_SAMLV20).create();
 		assertNotNull(ref);
