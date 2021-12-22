@@ -83,4 +83,19 @@ public class OptionalUtils {
         }
         return list.get(0);
     }
+
+    /**
+     * Cast the given object to the required class or return {@code null} to filter the value in the {@link
+     * java.util.Optional}.
+     *
+     * @param object The instance to cast or filter.
+     * @param type   The required type.
+     * @param <T>    The required type.
+     * @return the casted object or {@code null} if it wasn't an instance of the required type.
+     */
+    @Nullable
+    public static <T> T castOrFilter(final Object object,
+                                     final Class<T> type) {
+        return type.isInstance(object) ? type.cast(object) : null;
+    }
 }
