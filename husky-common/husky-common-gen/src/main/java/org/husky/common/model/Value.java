@@ -106,36 +106,6 @@ public class Value {
 	 *
 	 * @param high The upper bound
 	 */
-	public Value(BigDecimal low, BigDecimal high) {
-		final var ivlPq = new IVLPQ();
-		final var mlow = new IVXBPQ();
-		final var mhigh = new IVXBPQ();
-
-		if (low != null && high != null) {
-
-			mlow.setValue(low.toString());
-			mlow.setUnit("");
-			ivlPq.getRest().add(new JAXBElement<>(new QName(NAMESPACE_HL7_V3, "low", ""), IVXBPQ.class, mlow));
-
-			mhigh.setValue(high.toString());
-			mhigh.setUnit("");
-			ivlPq.getRest().add(new JAXBElement<>(new QName(NAMESPACE_HL7_V3, "high", ""), IVXBPQ.class, mhigh));
-		}
-
-		mValue = ivlPq;
-	}
-
-	/**
-	 * <div class="en">Instantiates a new value with the parameters for a MDHT
-	 * IVL_PQ Objekt with two PQ Values (A low and high bound of physical
-	 * quantities).</div> <div class="de">Instantiiert eine neues Value MDHT IVL_PQ
-	 * Objekt mit zwei PQ Werten (entspricht zwei Grenzen von physikalischen
-	 * Messgrößen).</div> <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @param low  The lower bound
-	 *
-	 * @param high The upper bound
-	 */
 	public Value(BigDecimal low, String lowUnit, BigDecimal high, String highUnit) {
 		final var ivlPq = new IVLPQ();
 		final var mlow = new IVXBPQ();
@@ -258,9 +228,9 @@ public class Value {
 	}
 
 	/**
-	 * <div class="en">Instantiates a new value with the parameters for a MDHT
-	 * IVL_PQ Objekt with two PQ Values (A low and high bound of physical
-	 * quantities).</div> <div class="de">Instantiiert eine neues Value MDHT IVL_PQ
+	 * <div class="en">Instantiates a new value with the parameters for a IVL_PQ
+	 * Objekt with two PQ Values (A low and high bound of physical
+	 * quantities).</div> <div class="de">Instantiiert eine neues Value IVL_PQ
 	 * Objekt mit zwei PQ Werten (entspricht zwei Grenzen von physikalischen
 	 * Messgrößen).</div> <div class="fr"></div> <div class="it"></div>
 	 *

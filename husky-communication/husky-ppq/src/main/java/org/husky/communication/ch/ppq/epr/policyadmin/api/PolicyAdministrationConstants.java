@@ -6,4 +6,8 @@ public class PolicyAdministrationConstants {
 
 	public static final String DEFAULT_PREFIX = "epr";
 
+	private PolicyAdministrationConstants() {
+		throw new IllegalStateException("This is a utility class");
+	}
+
 }

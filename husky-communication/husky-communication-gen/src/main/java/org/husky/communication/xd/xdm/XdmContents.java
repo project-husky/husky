@@ -14,7 +14,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -141,12 +140,18 @@ public class XdmContents {
 	 */
 	public XdmContents(String indexHtm, String readmeTxt) {
 		this();
-		try {
-			this.indexHtm = new IndexHtm(new FileInputStream(indexHtm));
-			this.readmeTxt = new ReadmeTxt(new FileInputStream(readmeTxt));
-		} catch (final FileNotFoundException e) {
+		try (FileInputStream isIndexHtm = new FileInputStream(indexHtm)) {
+			this.indexHtm = new IndexHtm(isIndexHtm);
+		} catch (final IOException e) {
 			this.resp.setStatus(Status.FAILURE);
-			log.error("IO Exception during reading of INDEX.HTM and README.TXT. ", e);
+			log.error("IO Exception during reading of INDEX.HTM. ", e);
+		}
+
+		try (FileInputStream isReadme = new FileInputStream(readmeTxt)) {
+			this.readmeTxt = new ReadmeTxt(isReadme);
+		} catch (final IOException e) {
+			this.resp.setStatus(Status.FAILURE);
+			log.error("IO Exception during reading of README.TXT. ", e);
 		}
 	}
 
@@ -267,10 +272,9 @@ public class XdmContents {
 	 */
 	public void createZip(String filePath, ProvideAndRegisterDocumentSet txnData) {
 		final var targetFile = new File(filePath);
-		try {
-			final var outputStream = new FileOutputStream(targetFile);
+		try (var outputStream = new FileOutputStream(targetFile)) {
 			createZip(outputStream, txnData);
-		} catch (final FileNotFoundException e) {
+		} catch (final IOException e) {
 			this.resp.setStatus(Status.FAILURE);
 			log.error("FileNotFoundException during target file creation. ", e);
 		}
@@ -289,6 +293,7 @@ public class XdmContents {
 		DocumentEntry docMetadata = null;
 		String docHash = null;
 		long docSize = 0;
+		boolean integrityCheck = true;
 
 		for (var i = 0; i < txnData.size(); i++) {
 			for (final Document doc : txnData.get(i).getDocuments()) {
@@ -302,45 +307,60 @@ public class XdmContents {
 				}
 
 				if ((docMetadata.getHash() == null) || !docMetadata.getHash().equals(docHash)) {
-					log.warn(
-							"Integrity check failed for document hash in Submission Set: {} DocumentEntry with UUID: {}",
-							i, doc.getDocumentEntry().getEntryUuid());
-					this.resp.setStatus(Status.PARTIAL_SUCCESS);
-
-					final var error = new ErrorInfo();
-					error.setErrorCode(ErrorCode.NON_IDENTICAL_HASH);
-					error.setLocation(
-							"Document in submission set: " + i + " with Entry UUID: " + docMetadata.getEntryUuid());
-					error.setCustomErrorCode(
-							"The hash value of the document does not match the hash value, which is provided in the document metadata.");
-					error.setSeverity(Severity.WARNING);
-					if (this.resp.getErrorList() == null) {
-						this.resp.setErrorList(new LinkedList<>());
-					}
-					this.resp.getErrorList().add(error);
-					return false;
+					integrityCheck = checkHash(docMetadata, docHash, i);
 				}
 				if (docMetadata.getSize() == null || docMetadata.getSize() != docSize) {
-					log.warn(
-							"Integrity check failed for document size in Submission Set: {}  DocumentEntry with UUID: {}",
-							i, doc.getDocumentEntry().getEntryUuid());
-					this.resp.setStatus(Status.PARTIAL_SUCCESS);
-
-					final var error = new ErrorInfo();
-					error.setErrorCode(ErrorCode.NON_IDENTICAL_SIZE);
-					error.setLocation(
-							"Document in submission set: " + i + " with Entry UUID: " + docMetadata.getEntryUuid());
-					error.setCustomErrorCode(
-							"The size value of the document does not match the size value, which is provided in the document metadata.");
-					error.setSeverity(Severity.WARNING);
-					if (this.resp.getErrorList() == null) {
-						this.resp.setErrorList(new LinkedList<>());
-					}
-					this.resp.getErrorList().add(error);
-					return false;
+					integrityCheck = checkSize(docMetadata, docSize, i);
 				}
 			}
 		}
+		return integrityCheck;
+	}
+
+	private boolean checkHash(DocumentEntry docMetadata, String docHash, int index) {
+		if ((docMetadata.getHash() == null) || !docMetadata.getHash().equals(docHash)) {
+			log.warn("Integrity check failed for document hash in Submission Set: {} DocumentEntry with UUID: {}",
+					index, docMetadata.getEntryUuid());
+			this.resp.setStatus(Status.PARTIAL_SUCCESS);
+
+			final var error = new ErrorInfo();
+			error.setErrorCode(ErrorCode.NON_IDENTICAL_HASH);
+			error.setLocation(
+					"Document in submission set: " + index + " with Entry UUID: " + docMetadata.getEntryUuid());
+			error.setCustomErrorCode(
+					"The hash value of the document does not match the hash value, which is provided in the document metadata.");
+			error.setSeverity(Severity.WARNING);
+			if (this.resp.getErrorList() == null) {
+				this.resp.setErrorList(new LinkedList<>());
+			}
+			this.resp.getErrorList().add(error);
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean checkSize(DocumentEntry docMetadata, long docSize, int index) {
+		if (docMetadata.getSize() == null || docMetadata.getSize() != docSize) {
+			log.warn("Integrity check failed for document size in Submission Set: {}  DocumentEntry with UUID: {}",
+					index,
+					docMetadata.getEntryUuid());
+			this.resp.setStatus(Status.PARTIAL_SUCCESS);
+
+			final var error = new ErrorInfo();
+			error.setErrorCode(ErrorCode.NON_IDENTICAL_SIZE);
+			error.setLocation(
+					"Document in submission set: " + index + " with Entry UUID: " + docMetadata.getEntryUuid());
+			error.setCustomErrorCode(
+					"The size value of the document does not match the size value, which is provided in the document metadata.");
+			error.setSeverity(Severity.WARNING);
+			if (this.resp.getErrorList() == null) {
+				this.resp.setErrorList(new LinkedList<>());
+			}
+			this.resp.getErrorList().add(error);
+			return false;
+		}
+
 		return true;
 	}
 
@@ -554,8 +574,7 @@ public class XdmContents {
 			ZipEntry zipEntry = null;
 
 			// load the descriptive files
-			readmeTxt = new ReadmeTxt(zipFile.getInputStream(getXDMZipEntry(zipFile, "", XDM_README, true)));
-			indexHtm = new IndexHtm(zipFile.getInputStream(getXDMZipEntry(zipFile, "", XDM_INDEX, true)));
+			loadDescriptiveFilesFromZipFile();
 
 			// load the ZIP archive into memory
 			while (zipEntries.hasMoreElements()) {
@@ -581,32 +600,8 @@ public class XdmContents {
 							}
 
 							if (request != null) {
-								ProvideAndRegisterDocumentSet docSet = importXDMMetadata(request);
-
-								for (Document xdsDocument : docSet.getDocuments()) {
-									var xdsDocumentEntry = xdsDocument.getDocumentEntry();
-									final String subsetFilespec = xdsDocumentEntry.getUri();
-									// xdsDocumentEntry.setUri(null); // is not
-									// a valid 'URI' value for a repository
-									// submission
-
-									final var docZipEntry = getXDMZipEntry(zipFile, subsetDirspec, subsetFilespec,
-											false);
-									if (docZipEntry != null) {
-										final var docStream = zipFile.getInputStream(docZipEntry);
-										var dataSource = new ByteArrayDataSource(docStream,
-												xdsDocumentEntry.getMimeType());
-										xdsDocument.setDataHandler(new DataHandler(dataSource));
-									} else {
-										log.error(
-												"{} in XDM submission folder {} has XDSDocumentEntry.URI '{}' that cannot be found in ZIP",
-												XDM_METADATA, subsetDirspec, xdsDocumentEntry.getUri());
-									}
-								}
-
-								results.put(subsetDirspec, docSet);
+								results.put(subsetDirspec, getProvideAndRegisterDocumentSet(request, subsetDirspec));
 							}
-
 						}
 					}
 				}
@@ -623,6 +618,49 @@ public class XdmContents {
 
 		this.txnData = results.values().stream().toList();
 		documentsIntegrityCheck();
+	}
+
+	private void loadDescriptiveFilesFromZipFile() {
+		try (InputStream isIndexHtm = zipFile.getInputStream(getXDMZipEntry(zipFile, "", XDM_INDEX, true))) {
+			this.indexHtm = new IndexHtm(isIndexHtm);
+		} catch (final IOException e) {
+			this.resp.setStatus(Status.FAILURE);
+			log.error("IO Exception during loading INDEX.HTM. ", e);
+		}
+
+		try (InputStream isReadme = zipFile.getInputStream(getXDMZipEntry(zipFile, "", XDM_README, true))) {
+			this.readmeTxt = new ReadmeTxt(isReadme);
+		} catch (final IOException e) {
+			this.resp.setStatus(Status.FAILURE);
+			log.error("IO Exception during loading README.TXT. ", e);
+		}
+	}
+
+	private ProvideAndRegisterDocumentSet getProvideAndRegisterDocumentSet(SubmitObjectsRequest request,
+			String subsetDirspec) throws IOException {
+		ProvideAndRegisterDocumentSet docSet = importXDMMetadata(request);
+
+		for (Document xdsDocument : docSet.getDocuments()) {
+			var xdsDocumentEntry = xdsDocument.getDocumentEntry();
+			final String subsetFilespec = xdsDocumentEntry.getUri();
+			// xdsDocumentEntry.setUri(null); // is not
+			// a valid 'URI' value for a repository
+			// submission
+
+			final var docZipEntry = getXDMZipEntry(zipFile, subsetDirspec, subsetFilespec, false);
+			if (docZipEntry != null) {
+				try (var docStream = zipFile.getInputStream(docZipEntry)) {
+					var dataSource = new ByteArrayDataSource(docStream, xdsDocumentEntry.getMimeType());
+					xdsDocument.setDataHandler(new DataHandler(dataSource));
+				}
+
+			} else {
+				log.error("{} in XDM submission folder {} has XDSDocumentEntry.URI '{}' that cannot be found in ZIP",
+						XDM_METADATA, subsetDirspec, xdsDocumentEntry.getUri());
+			}
+		}
+
+		return docSet;
 	}
 
 	public ProvideAndRegisterDocumentSet importXDMMetadata(SubmitObjectsRequest txnData) {

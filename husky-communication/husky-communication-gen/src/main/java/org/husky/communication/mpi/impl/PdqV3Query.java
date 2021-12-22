@@ -71,14 +71,8 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 			if (!mpiQuery.doCancelQuery()) {
 				PRPAIN201306UV02Type lastPdqConsumerResponse = null;
 				if (!mpiQuery.doContinueQuery()) {
-					try {
-						lastPdqConsumerResponse = sendITI47Query(mpiQuery.getV3PdqConsumerQuery(), assertion,
-								this.pdqConsumerUri);
-					} catch (final Exception e) {
-						LOGGER.error("queryPatient failed", e);
-						queryResponse.setSuccess(false);
-						return queryResponse;
-					}
+					lastPdqConsumerResponse = sendITI47Query(mpiQuery.getV3PdqConsumerQuery(), assertion,
+							this.pdqConsumerUri);
 				} else {
 					final var continuationQuery = new V3PdqContinuationQuery(
 							mpiQuery.getV3PdqConsumerQuery().getSendingApplication(),

@@ -48,7 +48,7 @@ import org.xml.sax.SAXException;
  * The purpose of this test class is to check if the assertion query works for a
  * user.
  */
-public class XuaClientTest extends ServerTestHelper {
+class XuaClientTest extends ServerTestHelper {
 
 	private String urlToXua = "https://ehealthsuisse.ihe-europe.net:10443/STS?wsdl";
 	private String urlToIdp = "https://ehealthsuisse.ihe-europe.net/idp/profile/SAML2/SOAP/ECP";
@@ -63,7 +63,7 @@ public class XuaClientTest extends ServerTestHelper {
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetAssertionWithForAssistant() throws ClientSendException, DeserializeException, SAXException,
+	void testGetAssertionWithForAssistant() throws ClientSendException, DeserializeException, SAXException,
 			IOException, ParserConfigurationException, SerializeException {
 
 		// initialize XUA client to query XUA assertion
@@ -161,7 +161,7 @@ public class XuaClientTest extends ServerTestHelper {
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetAssertionWithForTechnicalUser()
+	void testGetAssertionWithForTechnicalUser()
 			throws ClientSendException, DeserializeException, SAXException, IOException, ParserConfigurationException {
 
 		// initialize XUA client to query XUA assertion
@@ -264,7 +264,7 @@ public class XuaClientTest extends ServerTestHelper {
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetAssertionWithForPolicyAdministration()
+	void testGetAssertionWithForPolicyAdministration()
 			throws ClientSendException, DeserializeException, SAXException, IOException, ParserConfigurationException {
 
 		// initialize XUA client to query XUA assertion
@@ -361,7 +361,7 @@ public class XuaClientTest extends ServerTestHelper {
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetAssertionWithForDocumentAdministration()
+	void testGetAssertionWithForDocumentAdministration()
 			throws ClientSendException, DeserializeException, SAXException, IOException, ParserConfigurationException {
 
 		// initialize XUA client to query XUA assertion

@@ -12,7 +12,6 @@ package org.husky.communication.ch.ppq.impl;
 
 import java.util.Calendar;
 
-import org.husky.common.ch.ChEpr;
 import org.husky.communication.ch.ppq.api.PrivacyPolicyQuery;
 import org.husky.xua.core.SecurityObject;
 import org.husky.xua.hl7v3.InstanceIdentifier;
@@ -63,20 +62,29 @@ public class PrivacyPolicyQueryImpl
 		for (final RequestType request : internalObject.getRequests()) {
 			for (final ResourceType resource : request.getResources()) {
 				for (final AttributeType attribute : resource.getAttributes()) {
-					if ("urn:e-health-suisse:2015:epr-spid".equalsIgnoreCase(attribute.getAttributeId())) {
-						for (final AttributeValueType attVal : attribute.getAttributeValues()) {
-							for (final XMLObject value : attVal.getUnknownXMLObjects()) {
-								if (value instanceof InstanceIdentifier) {
-									final InstanceIdentifier retVal = (InstanceIdentifier) value;
-									return retVal;
-								}
-							}
+					var instanceIdent = extractEprSpidFromAttributes(attribute);
 
-						}
+					if (instanceIdent != null) {
+						return instanceIdent;
 					}
 				}
 			}
 		}
+		return null;
+	}
+
+	private InstanceIdentifier extractEprSpidFromAttributes(AttributeType attribute) {
+		if ("urn:e-health-suisse:2015:epr-spid".equalsIgnoreCase(attribute.getAttributeId())) {
+			for (final AttributeValueType attVal : attribute.getAttributeValues()) {
+				for (final XMLObject value : attVal.getUnknownXMLObjects()) {
+					if (value instanceof InstanceIdentifier retVal) {
+						return retVal;
+					}
+				}
+
+			}
+		}
+
 		return null;
 	}
 

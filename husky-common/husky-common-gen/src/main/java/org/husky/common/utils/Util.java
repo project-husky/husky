@@ -1172,52 +1172,6 @@ public class Util {
 	}
 
 	/**
-	 * Detects whether the current platform is Mac.
-	 *
-	 * @return true for Mac platforms; false otherwise
-	 */
-	public static boolean isMac() {
-
-		return (System.getProperty("os.name").toLowerCase().indexOf("mac") >= 0);
-
-	}
-
-	/**
-	 * Detects whether the current platform is Solaris.
-	 *
-	 * @return true for Solaris platforms; false otherwise
-	 */
-	public static boolean isSolaris() {
-
-		return (System.getProperty("os.name").toLowerCase().indexOf("sunos") >= 0);
-
-	}
-
-	/**
-	 * Detects whether the current platform is Unix.
-	 *
-	 * @return true for Unix platforms; false otherwise
-	 */
-	public static boolean isUnix() {
-
-		return ((System.getProperty("os.name").toLowerCase().indexOf("nix") >= 0)
-				|| (System.getProperty("os.name").toLowerCase().indexOf("nux") >= 0)
-				|| (System.getProperty("os.name").toLowerCase().indexOf("aix") >= 0));
-
-	}
-
-	/**
-	 * Detects whether the current platform is Windows.
-	 *
-	 * @return true for Windows platforms; false otherwise
-	 */
-	public static boolean isWindows() {
-
-		return (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0);
-
-	}
-
-	/**
 	 * <div class="en">Join an ArrayList of String with person names to a whole
 	 * name</div>.
 	 *

@@ -144,8 +144,8 @@ public class PolicyBuilderImpl
 
 		if (aInternalObject.getAdditionalInformation() != null) {
 			for (Object obj : aInternalObject.getAdditionalInformation()) {
-				if (obj instanceof RuleType) {
-					policy.getRules().add(new RuleBuilderImpl().create((RuleType) obj));
+				if (obj instanceof RuleType rule) {
+					policy.getRules().add(new RuleBuilderImpl().create(rule));
 				}
 			}
 

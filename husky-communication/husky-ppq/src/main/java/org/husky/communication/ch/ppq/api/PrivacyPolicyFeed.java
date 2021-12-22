@@ -31,8 +31,8 @@ public interface PrivacyPolicyFeed {
 	 * <!-- @formatter:on -->
 	 */
 	public enum PpfMethod {
-		AddPolicy, UpdatePolicy, DeletePolicy
-	};
+		ADD_POLICY, UPDATE_POLICY, DELETE_POLICY
+	}
 
 	/**
 	 *

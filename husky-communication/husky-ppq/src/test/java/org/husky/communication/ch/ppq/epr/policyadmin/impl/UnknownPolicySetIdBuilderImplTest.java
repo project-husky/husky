@@ -18,7 +18,7 @@ import org.husky.communication.ch.ppq.utilities.impl.InitializerTestHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class UnknownPolicySetIdBuilderImplTest extends InitializerTestHelper {
+class UnknownPolicySetIdBuilderImplTest extends InitializerTestHelper {
 
 	private String testMessage;
 
@@ -32,7 +32,7 @@ public class UnknownPolicySetIdBuilderImplTest extends InitializerTestHelper {
 	 * {@link org.husky.xua.ch.epr.policyadmin.impl.UnknownPolicySetIdBuilderImpl#message(java.lang.String)}.
 	 */
 	@Test
-	public void testMessage() {
+	void testMessage() {
 		final OpenSamlUnknownPolicySetId ref = new UnknownPolicySetIdBuilderImpl()
 				.message(testMessage).buildObject();
 		assertNotNull(ref);

@@ -33,16 +33,14 @@ public class ClientFactory {
 	}
 	
 	public static IdpClient getIdpClient(IdpClientConfig clientConfiguration) {
-		if (clientConfiguration instanceof IdpClientViaHttpProxyConfigImpl) {
-			return new IdpClientByProxy((IdpClientViaHttpProxyConfigImpl) clientConfiguration);
-		} else if (clientConfiguration instanceof IdpClientCertificateAuthConfigImpl) {
-			return new IdpClientByCert((IdpClientCertificateAuthConfigImpl) clientConfiguration);
-		} else if (clientConfiguration instanceof IdpClientBasicAuthConfigImpl) {
-			return new IdpSoapBindingClientByBasicAuth(
-					(IdpClientBasicAuthConfigImpl) clientConfiguration);
-		} else if (clientConfiguration instanceof IdpClientByBrowserAndProtocolHandlerConfigImpl) {
-			return new IdpClientByBrowserAndProtocolHandler(
-					(IdpClientByBrowserAndProtocolHandlerConfigImpl) clientConfiguration);
+		if (clientConfiguration instanceof IdpClientViaHttpProxyConfigImpl idpClientViaHttpProxyConfigImpl) {
+			return new IdpClientByProxy(idpClientViaHttpProxyConfigImpl);
+		} else if (clientConfiguration instanceof IdpClientCertificateAuthConfigImpl idpClientCertificateAuthConfigImpl) {
+			return new IdpClientByCert(idpClientCertificateAuthConfigImpl);
+		} else if (clientConfiguration instanceof IdpClientBasicAuthConfigImpl idpClientBasicAuthConfigImpl) {
+			return new IdpSoapBindingClientByBasicAuth(idpClientBasicAuthConfigImpl);
+		} else if (clientConfiguration instanceof IdpClientByBrowserAndProtocolHandlerConfigImpl idpClientByBrowserAndProtocolHandlerConfigImpl) {
+			return new IdpClientByBrowserAndProtocolHandler(idpClientByBrowserAndProtocolHandlerConfigImpl);
 		}
 		return null;
 	}

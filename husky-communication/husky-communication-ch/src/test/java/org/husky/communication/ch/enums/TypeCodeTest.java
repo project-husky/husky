@@ -13,13 +13,12 @@ package org.husky.communication.ch.enums;
 import static org.husky.common.model.ValueSetEnumInterfaceTest.assertValueSetEnumEntries;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.husky.communication.ch.enums.TypeCode;
 import org.junit.jupiter.api.Test;
 
-public class TypeCodeTest {
+class TypeCodeTest {
 
 	@Test
-	public void testTypeCode() {
+	void testTypeCode() {
 
 		assertEquals("2.16.756.5.30.1.127.3.10.1.27", TypeCode.VALUE_SET_ID);
 		assertValueSetEnumEntries(TypeCode.values());

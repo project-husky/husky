@@ -12,11 +12,10 @@ package org.husky.xua.saml2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.husky.xua.saml2.StatusCode;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class StatusCodeTest {
+class StatusCodeTest {
 
 	private String testCode1 = "urn:oasis:names:tc:SAML:2.0:status:VersionMismatch";
 	private String testCode2 = "urn:oasis:names:tc:SAML:2.0:status:RequestVersionDeprecated";
@@ -26,19 +25,19 @@ public class StatusCodeTest {
 	}
 
 	@Test
-	public void testGetEnum1() {
+	void testGetEnum1() {
 		final StatusCode ref = StatusCode.getEnum(testCode1);
 		assertEquals(StatusCode.VERSION_MISMATCH, ref);
 	}
 
 	@Test
-	public void testGetEnum2() {
+	void testGetEnum2() {
 		final StatusCode ref = StatusCode.getEnum(testCode2);
 		assertEquals(StatusCode.REQUEST_VERSION_DEPRECATED, ref);
 	}
 
 	@Test
-	public void testGetEnumToString() {
+	void testGetEnumToString() {
 		assertEquals(testCode1, StatusCode.VERSION_MISMATCH.toString());
 	}
 

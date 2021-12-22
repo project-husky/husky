@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.husky.communication.ch.ppq.epr.policyadmin.api.OpenSamlUnknownPolicySetId;
-import org.husky.communication.ch.ppq.epr.policyadmin.impl.UnknownPolicySetIdBuilderImpl;
 import org.husky.communication.ch.ppq.utilities.impl.InitializerTestHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +23,7 @@ import org.opensaml.core.xml.io.MarshallerFactory;
 import org.opensaml.core.xml.io.MarshallingException;
 import org.w3c.dom.Element;
 
-public class UnknownPolicySetIdMarshallerTest extends InitializerTestHelper {
+class UnknownPolicySetIdMarshallerTest extends InitializerTestHelper {
 
 	private String testMessage;
 	private OpenSamlUnknownPolicySetId testOpenSamlUnknownPolicySetId;
@@ -43,7 +42,7 @@ public class UnknownPolicySetIdMarshallerTest extends InitializerTestHelper {
 	 * @throws MarshallingException
 	 */
 	@Test
-	public void testMarshallXMLObject() throws MarshallingException {
+	void testMarshallXMLObject() throws MarshallingException {
 		final MarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport
 				.getMarshallerFactory();
 		final Marshaller marshaller = marshallerFactory

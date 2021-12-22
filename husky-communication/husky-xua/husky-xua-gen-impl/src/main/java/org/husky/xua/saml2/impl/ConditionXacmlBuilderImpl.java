@@ -65,8 +65,7 @@ public class ConditionXacmlBuilderImpl implements SimpleBuilder<ConditionType>,
 	}
 
 	private JAXBElement<?> getJaxbElementForExpression(org.opensaml.xacml.policy.ExpressionType expType) {
-		if (expType instanceof SubjectAttributeDesignatorTypeImpl) {
-			SubjectAttributeDesignatorTypeImpl internalObj = (SubjectAttributeDesignatorTypeImpl) expType;
+		if (expType instanceof SubjectAttributeDesignatorTypeImpl internalObj) {
 			var subjectAttrDesign = new SubjectAttributeDesignatorType();
 			subjectAttrDesign.setAttributeId(internalObj.getAttributeId());
 			subjectAttrDesign.setDataType(new DataTypeAttributeBuilderImpl().create(internalObj.getDataType()));
@@ -75,30 +74,25 @@ public class ConditionXacmlBuilderImpl implements SimpleBuilder<ConditionType>,
 			subjectAttrDesign.setSubjectCategory(internalObj.getSubjectCategory());
 			return new JAXBElement<>(expType.getElementQName(), SubjectAttributeDesignatorType.class,
 					subjectAttrDesign);
-		} else if (expType instanceof AttributeSelectorTypeImpl) {
-			AttributeSelectorTypeImpl internalObj = (AttributeSelectorTypeImpl) expType;
+		} else if (expType instanceof AttributeSelectorTypeImpl internalObj) {
 			var attrSelect = new AttributeSelectorType();
 			attrSelect.setDataType(internalObj.getDataType());
 			attrSelect.setRequestContextPath(internalObj.getRequestContextPath());
 			attrSelect.setMustBePresent(internalObj.getMustBePresent());
 			return new JAXBElement<>(expType.getElementQName(), AttributeSelectorType.class, attrSelect);
-		} else if (expType instanceof VariableReferenceTypeImpl) {
-			VariableReferenceTypeImpl internalObj = (VariableReferenceTypeImpl) expType;
+		} else if (expType instanceof VariableReferenceTypeImpl internalObj) {
 			var varRef = new VariableReferenceType();
 			varRef.setVariableId(internalObj.getVariableId());
 			return new JAXBElement<>(expType.getElementQName(), VariableReferenceType.class, varRef);
-		} else if (expType instanceof AttributeValueTypeImpl) {
-			AttributeValueTypeImpl internalObj = (AttributeValueTypeImpl) expType;
+		} else if (expType instanceof AttributeValueTypeImpl internalObj) {
 			var attrVal = new AttributeValueType();
 			attrVal.setDataType(new DataTypeAttributeBuilderImpl().create(internalObj.getDataType()));
 			return new JAXBElement<>(expType.getElementQName(), AttributeValueType.class, attrVal);
-		} else if (expType instanceof FunctionTypeImpl) {
-			FunctionTypeImpl internalObj = (FunctionTypeImpl) expType;
+		} else if (expType instanceof FunctionTypeImpl internalObj) {
 			return new JAXBElement<>(expType.getElementQName(), Function.class,
 					new FunctionBuilderImpl().create(internalObj.getFunctionId()));
-		} else if (expType instanceof ApplyTypeImpl) {
+		} else if (expType instanceof ApplyTypeImpl aInternalApply) {
 			var applyType = new ApplyType();
-			ApplyTypeImpl aInternalApply = (ApplyTypeImpl) expType;
 
 			applyType.setFunction(new FunctionBuilderImpl().create(aInternalApply.getFunctionId()));
 
@@ -109,8 +103,8 @@ public class ConditionXacmlBuilderImpl implements SimpleBuilder<ConditionType>,
 			}
 
 			return new JAXBElement<>(expType.getElementQName(), ApplyType.class, applyType);
-		} else if (expType instanceof AttributeDesignatorTypeImpl) {
-			return getJaxbElementForExpression((AttributeDesignatorTypeImpl) expType, expType.getElementQName());
+		} else if (expType instanceof AttributeDesignatorTypeImpl internalObj) {
+			return getJaxbElementForExpression(internalObj, expType.getElementQName());
 		}
 
 		return null;

@@ -36,8 +36,7 @@ public class ConditionsImpl
 		
 		if(aInternalObject != null) {
 			for(ConditionAbstractType condition: aInternalObject.getConditionOrAudienceRestrictionOrOneTimeUse()) {
-				if(condition instanceof AudienceRestrictionType) {
-					var audienceRestr = (AudienceRestrictionType) condition;
+				if (condition instanceof AudienceRestrictionType audienceRestr) {
 					wrappedObject.getAudienceRestrictions().add(new AudienceRestrictionBuilderImpl().create(audienceRestr));
 				}
 			}

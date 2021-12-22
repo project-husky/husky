@@ -60,7 +60,7 @@ import net.ihe.gazelle.hl7v3.prpain201306UV02.PRPAIN201306UV02Type;
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
 @EnableAutoConfiguration
-public class PdqV3QueryTest {
+class PdqV3QueryTest {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(PdqV3QueryTest.class.getName());
 
@@ -84,11 +84,13 @@ public class PdqV3QueryTest {
 	 */
 	private V3PdqConsumerResponse loadV3PdqResponse() throws Exception {
 
-		final InputStream inputStream = getClass().getResourceAsStream("/02_PDQQuery1Response.xml");
-		final var unmarshaller = JAXBContext.newInstance(PRPAIN201306UV02Type.class).createUnmarshaller();
-		var rootElement = (PRPAIN201306UV02Type) unmarshaller.unmarshal(inputStream);
+		try (InputStream inputStream = getClass().getResourceAsStream("/02_PDQQuery1Response.xml")) {
+			final var unmarshaller = JAXBContext.newInstance(PRPAIN201306UV02Type.class).createUnmarshaller();
+			var rootElement = (PRPAIN201306UV02Type) unmarshaller.unmarshal(inputStream);
 
-		return new V3PdqConsumerResponse(rootElement);
+			return new V3PdqConsumerResponse(rootElement);
+		}
+
 	}
     
 	
@@ -105,7 +107,7 @@ public class PdqV3QueryTest {
 	}
 
 	@Test
-	public void contextLoads() {
+	void contextLoads() {
 		assertNotNull(convenienceMasterPatientIndexV3Client);
 		assertNotNull(convenienceMasterPatientIndexV3Client.getContext());
 	}
@@ -119,7 +121,7 @@ public class PdqV3QueryTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetPatientsFromPdqQuery() throws Exception {
+	void testGetPatientsFromPdqQuery() throws Exception {
 		
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
@@ -196,7 +198,7 @@ public class PdqV3QueryTest {
 	 * identify any patient in the database is used
 	 */
 	@Test
-	public void ITI47ConsumerQueryPatientPatientIdNotFoundTest() {
+	void ITI47ConsumerQueryPatientPatientIdNotFoundTest() {
 		
 
 		final AffinityDomain affinityDomain = new AffinityDomain();
@@ -231,7 +233,7 @@ public class PdqV3QueryTest {
 	 * and checks that exactly this patient is found for the given identificator
 	 */
 	@Test
-	public void ITI47ConsumerQueryPatientPatientIdFoundTest() {
+	void ITI47ConsumerQueryPatientPatientIdFoundTest() {
 		
 
 		final AffinityDomain affinityDomain = new AffinityDomain();
@@ -271,7 +273,7 @@ public class PdqV3QueryTest {
 	 * and checks that the query succeeds and at least one patient is found
 	 */
 	@Test
-	public void ITI47ConsumerQueryPatientPatientIdSearchByName() {
+	void ITI47ConsumerQueryPatientPatientIdSearchByName() {
 		
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
@@ -302,7 +304,7 @@ public class PdqV3QueryTest {
 	 * and checks that the query succeeds and the correct patient is found
 	 */
 	@Test
-	public void ITI47ConsumerQueryPatientPatientIdMultipleCriteria() {
+	void ITI47ConsumerQueryPatientPatientIdMultipleCriteria() {
 		
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();

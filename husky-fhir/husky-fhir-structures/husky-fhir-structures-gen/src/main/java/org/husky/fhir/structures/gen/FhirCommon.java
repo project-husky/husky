@@ -24,6 +24,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.Basic;
 import org.hl7.fhir.r4.model.Bundle.BundleEntryComponent;
 import org.hl7.fhir.r4.model.CodeableConcept;
@@ -31,7 +32,6 @@ import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.ContactPoint;
 import org.hl7.fhir.r4.model.ContactPoint.ContactPointUse;
 import org.hl7.fhir.r4.model.DocumentManifest;
-import org.hl7.fhir.r4.model.DocumentManifest.DocumentManifestRelatedComponent;
 import org.hl7.fhir.r4.model.DocumentReference;
 import org.hl7.fhir.r4.model.DomainResource;
 import org.hl7.fhir.r4.model.Enumeration;
@@ -45,8 +45,6 @@ import org.hl7.fhir.r4.model.Practitioner;
 import org.hl7.fhir.r4.model.Reference;
 import org.hl7.fhir.r4.model.Resource;
 import org.hl7.fhir.r4.model.StringType;
-import org.hl7.fhir.exceptions.FHIRException;
-import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.utilities.xhtml.XhtmlNode;
 import org.husky.common.basetypes.AddressBaseType;
 import org.husky.common.basetypes.CodeBaseType;
@@ -952,14 +950,14 @@ public class FhirCommon {
 	 */
 	public static org.husky.common.model.Author getAuthor(IBaseResource res) {
 		org.husky.common.model.Author retVal = null;
-		if (res instanceof org.hl7.fhir.r4.model.Person) {
-			retVal = FhirCommon.getAuthor((org.hl7.fhir.r4.model.Person) res);
+		if (res instanceof org.hl7.fhir.r4.model.Person person) {
+			retVal = FhirCommon.getAuthor(person);
 		}
-		if (res instanceof Practitioner) {
-			retVal = FhirCommon.getAuthor((Practitioner) res);
+		if (res instanceof Practitioner practitioner) {
+			retVal = FhirCommon.getAuthor(practitioner);
 		}
-		if (res instanceof org.hl7.fhir.r4.model.Organization) {
-			retVal = FhirCommon.getAuthor((org.hl7.fhir.r4.model.Organization) res);
+		if (res instanceof org.hl7.fhir.r4.model.Organization organization) {
+			retVal = FhirCommon.getAuthor(organization);
 		}
 		return retVal;
 	}
@@ -986,36 +984,7 @@ public class FhirCommon {
 		// Set Function Code
 		setAuthorFuntionCode(retVal, fhirObject);
 
-		// Add Identifiers
-		for (final Identifier id : fhirObject.getIdentifier()) {
-			final String codeSystem = FhirCommon.removeUrnOidPrefix(id.getSystem());
-			retVal.addId(new Identificator(codeSystem, id.getValue()));
-		}
-
-		// Add Addresses
-		for (final org.hl7.fhir.r4.model.Address addr : fhirObject.getAddress()) {
-			org.husky.common.enums.PostalAddressUse usage = org.husky.common.enums.PostalAddressUse.WORK_PLACE;
-			if (addr.getUseElement()
-					.getValue() == org.hl7.fhir.r4.model.Address.AddressUse.HOME) {
-				usage = org.husky.common.enums.PostalAddressUse.HOME_ADDRESS;
-			}
-			if (addr.getUseElement()
-					.getValue() == org.hl7.fhir.r4.model.Address.AddressUse.TEMP) {
-				usage = org.husky.common.enums.PostalAddressUse.PUBLIC;
-			}
-			final var eHCAddr = new Address(new AddressBaseType());
-			eHCAddr.setStreetAddressLine1(addr.getLine().get(0).toString());
-			eHCAddr.setPostalCode(addr.getPostalCode());
-			eHCAddr.setCity(addr.getCity());
-			eHCAddr.setUsage(usage);
-			if (addr.getCountry() != null) {
-				eHCAddr.setCountry(addr.getCountry());
-			}
-			retVal.addAddress(eHCAddr);
-		}
-
-		// Add Telecoms
-		retVal.setTelecoms(getTelecoms(fhirObject.getTelecom()));
+		createAuthor(retVal, fhirObject.getIdentifier(), fhirObject.getAddress(), fhirObject.getTelecom());
 
 		// Add OrganizationName
 		final OrganizationContactComponent contact = fhirObject.getContactFirstRep();
@@ -1047,29 +1016,43 @@ public class FhirCommon {
 		final var personName = new Name();
 		personName.setGiven(fhirObject.getNameFirstRep().getGivenAsSingleString());
 		personName.setFamily(fhirObject.getNameFirstRep().getFamily());
-
-
+		
 		// Create the author
 		retVal = new org.husky.common.model.Author(personName);
+		createAuthor(retVal, fhirObject.getIdentifier(),
+				fhirObject.getAddress(), fhirObject.getTelecom());
 
 		// Set Function Code
 		setAuthorFuntionCode(retVal, fhirObject);
 
+		// Add organization
+		if ((fhirObject.getManagingOrganization().getResource() != null)
+				&& !fhirObject.getManagingOrganization().getResource().isEmpty()) {
+			retVal.setOrganization(
+					getOrganization(fhirObject.getManagingOrganization().getResource()));
+		}
+
+		return retVal;
+
+	}
+
+	private static void createAuthor(Author retVal, List<Identifier> ids,
+			List<org.hl7.fhir.r4.model.Address> addresses,
+			List<ContactPoint> telecoms) {
+
 		// Add Identifiers
-		for (final Identifier id : fhirObject.getIdentifier()) {
+		for (final Identifier id : ids) {
 			final String codeSystem = FhirCommon.removeUrnOidPrefix(id.getSystem());
 			retVal.addId(new Identificator(codeSystem, id.getValue()));
 		}
 
 		// Add Addresses
-		for (final org.hl7.fhir.r4.model.Address addr : fhirObject.getAddress()) {
+		for (final org.hl7.fhir.r4.model.Address addr : addresses) {
 			org.husky.common.enums.PostalAddressUse usage = org.husky.common.enums.PostalAddressUse.WORK_PLACE;
-			if (addr.getUseElement()
-					.getValue() == org.hl7.fhir.r4.model.Address.AddressUse.HOME) {
+			if (addr.getUseElement().getValue() == org.hl7.fhir.r4.model.Address.AddressUse.HOME) {
 				usage = org.husky.common.enums.PostalAddressUse.HOME_ADDRESS;
 			}
-			if (addr.getUseElement()
-					.getValue() == org.hl7.fhir.r4.model.Address.AddressUse.TEMP) {
+			if (addr.getUseElement().getValue() == org.hl7.fhir.r4.model.Address.AddressUse.TEMP) {
 				usage = org.husky.common.enums.PostalAddressUse.PUBLIC;
 			}
 			final var eHCAddr = new Address(new AddressBaseType());
@@ -1082,17 +1065,7 @@ public class FhirCommon {
 		}
 
 		// Add Telecoms
-		retVal.setTelecoms(getTelecoms(fhirObject.getTelecom()));
-
-		// Add organization
-		if ((fhirObject.getManagingOrganization().getResource() != null)
-				&& !fhirObject.getManagingOrganization().getResource().isEmpty()) {
-			retVal.setOrganization(
-					getOrganization(fhirObject.getManagingOrganization().getResource()));
-		}
-
-		return retVal;
-
+		retVal.setTelecoms(getTelecoms(telecoms));
 	}
 
 	/**
@@ -1137,18 +1110,7 @@ public class FhirCommon {
 
 		// Add Addresses
 		for (final org.hl7.fhir.r4.model.Address addr : fhirObject.getAddress()) {
-			org.husky.common.enums.PostalAddressUse usage = org.husky.common.enums.PostalAddressUse.WORK_PLACE;
-			if (addr.getUseElement()
-					.getValue() == org.hl7.fhir.r4.model.Address.AddressUse.HOME) {
-				usage = org.husky.common.enums.PostalAddressUse.HOME_ADDRESS;
-			}
-			final var eHCAddr = new Address(new AddressBaseType());
-			eHCAddr.setStreetAddressLine1(addr.getLine().get(0).toString());
-			eHCAddr.setPostalCode(addr.getPostalCode());
-			eHCAddr.setCity(addr.getCity());
-			eHCAddr.setUsage(usage);
-			eHCAddr.setCountry(addr.getCountry());
-			retVal.addAddress(eHCAddr);
+			retVal.addAddress(getAddress(addr));
 		}
 
 		// Add Telecoms
@@ -1159,6 +1121,27 @@ public class FhirCommon {
 
 		return retVal;
 
+	}
+
+	public static Address getAddress(org.hl7.fhir.r4.model.Address addr) {
+		org.husky.common.enums.PostalAddressUse usage = org.husky.common.enums.PostalAddressUse.WORK_PLACE;
+		if (addr.getUseElement().getValue() == org.hl7.fhir.r4.model.Address.AddressUse.HOME) {
+			usage = org.husky.common.enums.PostalAddressUse.HOME_ADDRESS;
+		}
+		if (addr.getUseElement().getValue() == org.hl7.fhir.r4.model.Address.AddressUse.TEMP) {
+			usage = org.husky.common.enums.PostalAddressUse.PUBLIC;
+		}
+		final var eHCAddr = new Address(new AddressBaseType());
+		eHCAddr.setStreetAddressLine1(addr.getLine().get(0).toString());
+		if (addr.getLine().size() > 1) {
+			eHCAddr.setStreetAddressLine2(addr.getLine().get(1).getValueAsString());
+		}
+		eHCAddr.setPostalCode(addr.getPostalCode());
+		eHCAddr.setCity(addr.getCity());
+		eHCAddr.setCountry(addr.getCountry());
+		eHCAddr.setUsage(usage);
+
+		return eHCAddr;
 	}
 
 	/**
@@ -1212,29 +1195,6 @@ public class FhirCommon {
 		return docRestrictedConfidentiality;
 
 	}
-
-	// /**
-	// * <div class="en">Gets an OHT DocumentDescriptor object from the given
-	// FHIR
-	// * object.
-	// *
-	// * @param fhirObject
-	// * the FHIR object
-	// * @return OHT DocumentDescriptor object </div> <div class="de"></div>
-	// * <div class="fr"></div>
-	// */
-	// public static DocumentDescriptor getDocumentDescriptor(DocumentReference
-	// fhirObject) {
-	// String mimeType = "";
-	// fhirObject.getContentFirstRep().getFormat();
-	// Coding item = fhirObject.getContentFirstRep().getFormat();
-	// final List<Extension> extensions =
-	// item.getExtensionsByUrl(FhirCommon.urnUseAsMimeType);
-	// if (!extensions.isEmpty()) {
-	// mimeType = item.getCode();
-	// }
-	// return DocumentDescriptor.getDocumentDescriptorForMimeType(mimeType);
-	// }
 
 	/**
 	 * <div class="en">Gets the file path to a document from the given FHIR
@@ -1644,8 +1604,8 @@ public class FhirCommon {
 	public static org.husky.common.model.Organization getOrganization(
 			IBaseResource res) {
 		org.husky.common.model.Organization retVal = null;
-		if (res instanceof org.hl7.fhir.r4.model.Organization) {
-			retVal = FhirCommon.getOrganization((org.hl7.fhir.r4.model.Organization) res);
+		if (res instanceof org.hl7.fhir.r4.model.Organization organization) {
+			retVal = FhirCommon.getOrganization(organization);
 		}
 		return retVal;
 	}
@@ -1678,25 +1638,7 @@ public class FhirCommon {
 
 			// Add Addresses
 			for (final org.hl7.fhir.r4.model.Address addr : fhirOrganization.getAddress()) {
-				org.husky.common.enums.PostalAddressUse usage = org.husky.common.enums.PostalAddressUse.WORK_PLACE;
-				if (addr.getUseElement()
-						.getValue() == org.hl7.fhir.r4.model.Address.AddressUse.HOME) {
-					usage = org.husky.common.enums.PostalAddressUse.HOME_ADDRESS;
-				}
-				if (addr.getUseElement()
-						.getValue() == org.hl7.fhir.r4.model.Address.AddressUse.TEMP) {
-					usage = org.husky.common.enums.PostalAddressUse.PUBLIC;
-				}
-				final var eHCAddr = new Address(new AddressBaseType());
-				eHCAddr.setStreetAddressLine1(addr.getLine().get(0).toString());
-				if (addr.getLine().size() > 1) {
-					eHCAddr.setStreetAddressLine2(addr.getLine().get(1).getValueAsString());
-				}
-				eHCAddr.setPostalCode(addr.getPostalCode());
-				eHCAddr.setCity(addr.getCity());
-				eHCAddr.setCountry(addr.getCountry());
-				eHCAddr.setUsage(usage);
-				retVal.addAddress(eHCAddr);
+				retVal.addAddress(getAddress(addr));
 			}
 
 			// Add Telecoms
@@ -1731,8 +1673,8 @@ public class FhirCommon {
 	 */
 	public static org.husky.common.model.Patient getPatient(IBaseResource res) {
 		org.husky.common.model.Patient retVal = null;
-		if (res instanceof org.hl7.fhir.r4.model.Patient) {
-			retVal = FhirCommon.getPatient((org.hl7.fhir.r4.model.Patient) res);
+		if (res instanceof org.hl7.fhir.r4.model.Patient patient) {
+			retVal = FhirCommon.getPatient(patient);
 		}
 		return retVal;
 	}
@@ -1748,8 +1690,8 @@ public class FhirCommon {
 	public static org.husky.common.model.Patient getPatient(
 			org.hl7.fhir.r4.model.Bundle bundle) {
 		for (final BundleEntryComponent entry : bundle.getEntry()) {
-			if (entry.getResource() instanceof org.hl7.fhir.r4.model.Patient)
-				return getPatient((org.hl7.fhir.r4.model.Patient) entry.getResource());
+			if (entry.getResource()instanceof org.hl7.fhir.r4.model.Patient patient)
+				return getPatient(patient);
 		}
 		return null;
 	}
@@ -1765,8 +1707,8 @@ public class FhirCommon {
 	public static org.husky.common.model.Patient getPatient(
 			org.hl7.fhir.r4.model.DocumentManifest docManifest) {
 		for (final Reference ref : docManifest.getContent()) {
-			if (ref != null && ref.getResource() instanceof org.hl7.fhir.r4.model.Patient) {
-					return getPatient((org.hl7.fhir.r4.model.Patient) ref.getResource());
+			if (ref != null && ref.getResource()instanceof org.hl7.fhir.r4.model.Patient patient) {
+				return getPatient(patient);
 			}
 		}
 		return null;
@@ -1809,21 +1751,7 @@ public class FhirCommon {
 
 			// Add Addresses
 			for (final org.hl7.fhir.r4.model.Address addr : fhirPatient.getAddress()) {
-				org.husky.common.enums.PostalAddressUse usage = org.husky.common.enums.PostalAddressUse.WORK_PLACE;
-				if (addr.getUseElement()
-						.getValue() == org.hl7.fhir.r4.model.Address.AddressUse.HOME) {
-					usage = org.husky.common.enums.PostalAddressUse.HOME_ADDRESS;
-				}
-				String addrLine = null;
-				if (!addr.getLine().isEmpty())
-					addrLine = addr.getLine().get(0).toString();
-				final var eHCAddr = new Address(new AddressBaseType());
-				eHCAddr.setStreetAddressLine1(addrLine);
-				eHCAddr.setPostalCode(addr.getPostalCode());
-				eHCAddr.setCity(addr.getCity());
-				eHCAddr.setUsage(usage);
-				eHCAddr.setCountry(addr.getCountry());
-				retVal.addAddress(eHCAddr);
+				retVal.addAddress(getAddress(addr));
 			}
 
 			// Add Telecoms
@@ -1883,20 +1811,7 @@ public class FhirCommon {
 
 		// Add Addresses
 		for (final org.hl7.fhir.r4.model.Address addr : fhirObject.getAddress()) {
-			org.husky.common.enums.PostalAddressUse usage = org.husky.common.enums.PostalAddressUse.WORK_PLACE;
-			if (addr.getUseElement().getValue() == org.hl7.fhir.r4.model.Address.AddressUse.HOME) {
-				usage = org.husky.common.enums.PostalAddressUse.HOME_ADDRESS;
-			}
-			if (addr.getUseElement().getValue() == org.hl7.fhir.r4.model.Address.AddressUse.TEMP) {
-				usage = org.husky.common.enums.PostalAddressUse.PUBLIC;
-			}
-			final var eHCAddr = new Address(new AddressBaseType());
-			eHCAddr.setStreetAddressLine1(addr.getLine().get(0).toString());
-			eHCAddr.setPostalCode(addr.getPostalCode());
-			eHCAddr.setCity(addr.getCity());
-			eHCAddr.setUsage(usage);
-			eHCAddr.setCountry(addr.getCountry());
-			retVal.getAssignedEntity().getAddr().add(eHCAddr.getHl7CdaR2Ad());
+			retVal.getAssignedEntity().getAddr().add(getAddress(addr).getHl7CdaR2Ad());
 		}
 
 		// Add Telecoms
@@ -2056,7 +1971,7 @@ public class FhirCommon {
 		if ((saveMode == null) || (saveMode == SaveMode.NONE)) {
 			return true;
 		}
-		Writer writer;
+		Writer writer = null;
 		try {
 			if (saveMode == SaveMode.LOG) {
 				writer = new StringWriter();
@@ -2080,6 +1995,15 @@ public class FhirCommon {
 			if (log != null)
 				log.error(e.getMessage());
 			retVal = false;
+		} finally {
+			if (writer != null) {
+				try {
+					writer.close();
+				} catch (IOException e) {
+					if (log != null)
+						log.error(e.getMessage());
+				}
+			}
 		}
 		return retVal;
 	}

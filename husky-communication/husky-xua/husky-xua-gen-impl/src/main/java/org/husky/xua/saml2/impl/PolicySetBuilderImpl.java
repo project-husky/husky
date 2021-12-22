@@ -10,9 +10,13 @@
  */
 package org.husky.xua.saml2.impl;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
+import org.herasaf.xacml.core.combiningAlgorithm.policy.AbstractPolicyCombiningAlgorithm;
 import org.herasaf.xacml.core.combiningAlgorithm.policy.impl.PolicyDenyOverridesAlgorithm;
 import org.herasaf.xacml.core.combiningAlgorithm.policy.impl.PolicyFirstApplicableAlgorithm;
 import org.herasaf.xacml.core.combiningAlgorithm.policy.impl.PolicyOnlyOneApplicableAlgorithm;
@@ -42,9 +46,11 @@ import org.opensaml.xacml.policy.impl.PolicySetTypeImplBuilder;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class PolicySetBuilderImpl
-		implements SimpleBuilder<PolicySetType>,
+public class PolicySetBuilderImpl implements SimpleBuilder<PolicySetType>,
 		SecurityObjectBuilder<org.opensaml.xacml.policy.PolicySetType, PolicySetType> {
+
+	private static final String XACML_NAMESPACE = "urn:oasis:names:tc:xacml:2.0:policy:schema:os";
+	private static final String ELEMENT_NAME_POLICY_SET_ID_REFERENCE = "PolicySetIdReference";
 
 	@Override
 	public PolicySetType create(org.opensaml.xacml.policy.PolicySetType aInternalObject) {
@@ -55,25 +61,7 @@ public class PolicySetBuilderImpl
 			policySet.setDescription(aInternalObject.getDescription().getValue());
 		}
 
-		if ("urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:deny-overrides"
-				.equalsIgnoreCase(aInternalObject.getPolicyCombiningAlgoId())) {
-			policySet.setCombiningAlg(new PolicyDenyOverridesAlgorithm());
-		} else if ("urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:only-one-applicable"
-				.equalsIgnoreCase(aInternalObject.getPolicyCombiningAlgoId())) {
-			policySet.setCombiningAlg(new PolicyOnlyOneApplicableAlgorithm());
-		} else if ("urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:permit-overrides"
-				.equalsIgnoreCase(aInternalObject.getPolicyCombiningAlgoId())) {
-			policySet.setCombiningAlg(new PolicyPermitOverridesAlgorithm());
-		} else if ("urn:oasis:names:tc:xacml:1.1:policy-combining-algorithm:ordered-permit-overrides"
-				.equalsIgnoreCase(aInternalObject.getPolicyCombiningAlgoId())) {
-			policySet.setCombiningAlg(new PolicyOrderedDenyOverridesAlgorithm());
-		} else if ("urn:oasis:names:tc:xacml:1.1:policy-combining-algorithm:ordered-deny-overrides"
-				.equalsIgnoreCase(aInternalObject.getPolicyCombiningAlgoId())) {
-			policySet.setCombiningAlg(new PolicyOrderedDenyOverridesAlgorithm());
-		} else if ("urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:first-applicable"
-				.equalsIgnoreCase(aInternalObject.getPolicyCombiningAlgoId())) {
-			policySet.setCombiningAlg(new PolicyFirstApplicableAlgorithm());
-		}
+		policySet.setCombiningAlg(getCombiningAlg(aInternalObject.getPolicyCombiningAlgoId()));
 
 		if (aInternalObject.getObligations() != null) {
 			policySet.setHasObligations(true);
@@ -97,7 +85,7 @@ public class PolicySetBuilderImpl
 		policySet.setPolicySetId(new EvaluatableIDImpl(aInternalObject.getPolicySetId()));
 
 		if (aInternalObject.getPolicySetIdReferences() != null) {
-			var qnameIdReference = new QName("urn:oasis:names:tc:xacml:2.0:policy:schema:os", "PolicySetIdReference");
+			var qnameIdReference = new QName(XACML_NAMESPACE, ELEMENT_NAME_POLICY_SET_ID_REFERENCE);
 			for (org.opensaml.xacml.policy.IdReferenceType idReference : aInternalObject.getPolicySetIdReferences()) {
 				if (idReference != null) {
 					var idReferenceType = new IdReferenceType();
@@ -123,6 +111,30 @@ public class PolicySetBuilderImpl
 		return new PolicySetType();
 	}
 
+	private AbstractPolicyCombiningAlgorithm getCombiningAlg(String policyCombiningAlgoId) {
+		if ("urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:deny-overrides"
+				.equalsIgnoreCase(policyCombiningAlgoId)) {
+			return new PolicyDenyOverridesAlgorithm();
+		} else if ("urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:only-one-applicable"
+				.equalsIgnoreCase(policyCombiningAlgoId)) {
+			return new PolicyOnlyOneApplicableAlgorithm();
+		} else if ("urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:permit-overrides"
+				.equalsIgnoreCase(policyCombiningAlgoId)) {
+			return new PolicyPermitOverridesAlgorithm();
+		} else if ("urn:oasis:names:tc:xacml:1.1:policy-combining-algorithm:ordered-permit-overrides"
+				.equalsIgnoreCase(policyCombiningAlgoId)) {
+			return new PolicyOrderedDenyOverridesAlgorithm();
+		} else if ("urn:oasis:names:tc:xacml:1.1:policy-combining-algorithm:ordered-deny-overrides"
+				.equalsIgnoreCase(policyCombiningAlgoId)) {
+			return new PolicyOrderedDenyOverridesAlgorithm();
+		} else if ("urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:first-applicable"
+				.equalsIgnoreCase(policyCombiningAlgoId)) {
+			return new PolicyFirstApplicableAlgorithm();
+		}
+
+		return null;
+	}
+
 	public org.opensaml.xacml.policy.PolicySetType create(PolicySetType policySetType) {
 		var policySet = new PolicySetTypeImplBuilder().buildObject();
 		policySet.setVersion(policySetType.getVersion());
@@ -138,7 +150,6 @@ public class PolicySetBuilderImpl
 			policySet.setPolicyCombiningAlgoId(policySetType.getCombiningAlg().getCombiningAlgorithmId());
 		}
 
-
 		if (policySetType.getObligations() != null) {
 			var obligationsType = new ObligationsTypeImplBuilder().buildObject();
 
@@ -152,8 +163,7 @@ public class PolicySetBuilderImpl
 		if (policySetType.getPolicySetDefaults() != null
 				&& policySetType.getPolicySetDefaults().getXPathVersion() != null) {
 			var defaultType = new DefaultsTypeImplBuilder().buildObject();
-			var xPathVersion = new XSStringBuilder().buildObject("urn:oasis:names:tc:xacml:2.0:policy:schema:os",
-					"XPathVersion", "xacml");
+			var xPathVersion = new XSStringBuilder().buildObject(XACML_NAMESPACE, "XPathVersion", "xacml");
 			xPathVersion.setValue(policySetType.getPolicySetDefaults().getXPathVersion());
 			defaultType.setXPathVersion(xPathVersion);
 			policySet.setPolicySetDefaults(defaultType);
@@ -165,40 +175,8 @@ public class PolicySetBuilderImpl
 		}
 
 		if (policySetType.getAdditionalInformation() != null) {
-			for (JAXBElement<?> element : policySetType.getAdditionalInformation()) {
-				if (element != null) {
-					if (element.getValue() instanceof XACMLPolicySetIdReferenceStatementType) {
-						var idReferenceType = (XACMLPolicySetIdReferenceStatementType) element.getValue();
-
-						if (idReferenceType != null && idReferenceType.getPolicySetIdReference() != null
-								&& !idReferenceType.getPolicySetIdReference().isEmpty()
-								&& idReferenceType.getPolicySetIdReference().get(0) != null) {
-							var idReference = new IdReferenceTypeImplBuilder().buildObject(
-									new QName("urn:oasis:names:tc:xacml:2.0:policy:schema:os", "PolicySetIdReference"));
-							idReference.setVersion(idReferenceType.getPolicySetIdReference().get(0).getVersion());
-							idReference.setValue(idReferenceType.getPolicySetIdReference().get(0).getValue());
-							idReference.setEarliestVersion(
-									idReferenceType.getPolicySetIdReference().get(0).getEarliestVersion());
-							idReference.setLatestVersion(
-									idReferenceType.getPolicySetIdReference().get(0).getLatestVersion());
-							policySet.getPolicySetIdReferences().add(idReference);
-						}
-					} else if (element.getValue() instanceof IdReferenceType) {
-						var idReferenceType = (IdReferenceType) element.getValue();
-
-						if (idReferenceType != null) {
-							var idReference = new IdReferenceTypeImplBuilder().buildObject(
-									new QName("urn:oasis:names:tc:xacml:2.0:policy:schema:os", "PolicySetIdReference"));
-							idReference.setVersion(idReferenceType.getVersion());
-							idReference.setValue(idReferenceType.getValue());
-							idReference.setEarliestVersion(idReferenceType.getEarliestVersion());
-							idReference.setLatestVersion(idReferenceType.getLatestVersion());
-							policySet.getPolicySetIdReferences().add(idReference);
-						}
-					}
-				}
-
-			}
+			policySet.getPolicySetIdReferences()
+					.addAll(extractIdsFromAdditionalInformation(policySetType.getAdditionalInformation()));
 		}
 
 		if (policySetType.getTarget() != null) {
@@ -206,6 +184,40 @@ public class PolicySetBuilderImpl
 		}
 
 		return policySet;
+	}
+
+	private List<org.opensaml.xacml.policy.IdReferenceType> extractIdsFromAdditionalInformation(
+			List<JAXBElement<?>> elements) {
+		List<org.opensaml.xacml.policy.IdReferenceType> ids = new LinkedList<>();
+		for (JAXBElement<?> element : elements) {
+			if (element != null) {
+				if (element.getValue()instanceof XACMLPolicySetIdReferenceStatementType idReferenceType) {
+					if (idReferenceType.getPolicySetIdReference() != null
+							&& !idReferenceType.getPolicySetIdReference().isEmpty()
+							&& idReferenceType.getPolicySetIdReference().get(0) != null) {
+						var idReference = new IdReferenceTypeImplBuilder()
+								.buildObject(new QName(XACML_NAMESPACE, ELEMENT_NAME_POLICY_SET_ID_REFERENCE));
+						idReference.setVersion(idReferenceType.getPolicySetIdReference().get(0).getVersion());
+						idReference.setValue(idReferenceType.getPolicySetIdReference().get(0).getValue());
+						idReference.setEarliestVersion(
+								idReferenceType.getPolicySetIdReference().get(0).getEarliestVersion());
+						idReference
+								.setLatestVersion(idReferenceType.getPolicySetIdReference().get(0).getLatestVersion());
+						ids.add(idReference);
+					}
+				} else if (element.getValue()instanceof IdReferenceType idReferenceType) {
+					var idReference = new IdReferenceTypeImplBuilder()
+							.buildObject(new QName(XACML_NAMESPACE, ELEMENT_NAME_POLICY_SET_ID_REFERENCE));
+					idReference.setVersion(idReferenceType.getVersion());
+					idReference.setValue(idReferenceType.getValue());
+					idReference.setEarliestVersion(idReferenceType.getEarliestVersion());
+					idReference.setLatestVersion(idReferenceType.getLatestVersion());
+					ids.add(idReference);
+				}
+			}
+		}
+
+		return ids;
 	}
 
 }

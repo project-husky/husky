@@ -341,10 +341,6 @@ public class ValueSet implements Serializable {
 		retVal.addAll(globalList);
 		if (valueSetEntryList != null) {
 			for (ValueSetEntry valueSetEntry : valueSetEntryList) {
-				// This is for debugging purposes, only
-				// String entryName = ValueSet
-				// .buildEnumName(valueSetEntry.getCodeBaseType().getDisplayName());
-
 				var isAlreadyThere = false;
 				for (ValueSetEntry temp : globalList) {
 					isAlreadyThere = (temp.equals(valueSetEntry));

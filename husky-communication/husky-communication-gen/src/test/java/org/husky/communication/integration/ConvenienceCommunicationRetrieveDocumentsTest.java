@@ -46,7 +46,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
 @EnableAutoConfiguration
-public class ConvenienceCommunicationRetrieveDocumentsTest extends XdsTestUtils {
+class ConvenienceCommunicationRetrieveDocumentsTest extends XdsTestUtils {
 
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(ConvenienceCommunicationRetrieveDocumentsTest.class.getName());
@@ -65,7 +65,7 @@ public class ConvenienceCommunicationRetrieveDocumentsTest extends XdsTestUtils 
 	 * correct.
 	 */
 	@Test
-	public void contextLoads() {
+	void contextLoads() {
 		assertNotNull(convenienceCommunication);
 		assertNotNull(convenienceCommunication.getCamelContext());
 	}
@@ -78,7 +78,7 @@ public class ConvenienceCommunicationRetrieveDocumentsTest extends XdsTestUtils 
 	 * @throws Exception
 	 */
 	@Test
-	public void retrieveDocumentTest() throws Exception {
+	void retrieveDocumentTest() throws Exception {
 
 		// sets XDS service endpoint
 		final AffinityDomain affinityDomain = new AffinityDomain();
@@ -131,7 +131,7 @@ public class ConvenienceCommunicationRetrieveDocumentsTest extends XdsTestUtils 
 	 * @throws Exception
 	 */
 	@Test
-	public void retrieveDocumentCdaTest() throws Exception {
+	void retrieveDocumentCdaTest() throws Exception {
 		// sets XDS service endpoint
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
@@ -183,7 +183,7 @@ public class ConvenienceCommunicationRetrieveDocumentsTest extends XdsTestUtils 
 	 * @throws Exception
 	 */
 	@Test
-	public void retrieveDocumentUnknownIdTest() throws Exception {
+	void retrieveDocumentUnknownIdTest() throws Exception {
 		// sets XDS service endpoint
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();

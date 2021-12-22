@@ -68,6 +68,21 @@ public class V3PdqConsumerResponse extends V3Response {
 		this.acknowledgementCode = rootElement.getAcknowledgement().get(0).getTypeCode().getCode();
 
 		// if there is acknowledgement detail
+		setAcknowledgementDetails();
+
+		// if the code was AA, then:
+		if (acknowledgementCode.equalsIgnoreCase("AA")) {
+			// set up the response for data retrieval
+			queryAcknowledgement = rootElement.getControlActProcess().getQueryAck().getQueryResponseCode().getCode();
+
+			setErrorText();
+		} else {
+			// error occurred, unknown ack
+			errorText = "Acknowledgement Code: " + acknowledgementCode + " not understood.";
+		}
+	}
+
+	private void setAcknowledgementDetails() {
 		if (!rootElement.getAcknowledgement().get(0).getAcknowledgementDetail().isEmpty()) {
 			var detailCode = "";
 			var detailText = "";
@@ -89,34 +104,27 @@ public class V3PdqConsumerResponse extends V3Response {
 			this.acknowledgementDetailCode = detailCode;
 			this.acknowledgementDetailText = detailText;
 		}
+	}
 
-		// if the code was AA, then:
-		if (acknowledgementCode.equalsIgnoreCase("AA")) {
-			// set up the response for data retrieval
-			queryAcknowledgement = rootElement.getControlActProcess().getQueryAck().getQueryResponseCode().getCode();
-
-			// if this was an app error
-			if (queryAcknowledgement.equalsIgnoreCase("AE")) {
-				// set the error text
-				errorText = "Query Acknowledgement: AE - Application Error";
-			} else if (queryAcknowledgement.equalsIgnoreCase("QE")) {
-				// set the error text
-				errorText = "Query Acknowledgement: QE - Query Parameter Error";
-			} else if (queryAcknowledgement.equalsIgnoreCase("NF")) {
-				// Technically, this shouldn't be an error
-				hasError = false;
-				// set the error text
-				errorText = "No patients found.";
-			} else if (queryAcknowledgement.equalsIgnoreCase("OK")) {
-				// Success!
-				hasError = false;
-			} else {
-				// error occurred, unknown ack
-				errorText = "Query Acknowledgement: " + queryAcknowledgement + " not understood.";
-			}
+	private void setErrorText() {
+		// if this was an app error
+		if (queryAcknowledgement.equalsIgnoreCase("AE")) {
+			// set the error text
+			errorText = "Query Acknowledgement: AE - Application Error";
+		} else if (queryAcknowledgement.equalsIgnoreCase("QE")) {
+			// set the error text
+			errorText = "Query Acknowledgement: QE - Query Parameter Error";
+		} else if (queryAcknowledgement.equalsIgnoreCase("NF")) {
+			// Technically, this shouldn't be an error
+			hasError = false;
+			// set the error text
+			errorText = "No patients found.";
+		} else if (queryAcknowledgement.equalsIgnoreCase("OK")) {
+			// Success!
+			hasError = false;
 		} else {
 			// error occurred, unknown ack
-			errorText = "Acknowledgement Code: " + acknowledgementCode + " not understood.";
+			errorText = "Query Acknowledgement: " + queryAcknowledgement + " not understood.";
 		}
 	}
 
@@ -210,8 +218,8 @@ public class V3PdqConsumerResponse extends V3Response {
 	public String getPatientBirthOrderNumber(int patientIndex) {
 
 		if (getPatientByIndex(patientIndex).getPatientPerson().getMultipleBirthOrderNumber() != null) {
-			final Integer birthOrder = getPatientByIndex(patientIndex).getPatientPerson()
-					.getMultipleBirthOrderNumber().getValue();
+			final Integer birthOrder = getPatientByIndex(patientIndex).getPatientPerson().getMultipleBirthOrderNumber()
+					.getValue();
 			return birthOrder.toString();
 		}
 		return null;
@@ -319,7 +327,7 @@ public class V3PdqConsumerResponse extends V3Response {
 				}
 			}
 		}
-		return null;
+		return new String[0];
 	}
 
 	/**

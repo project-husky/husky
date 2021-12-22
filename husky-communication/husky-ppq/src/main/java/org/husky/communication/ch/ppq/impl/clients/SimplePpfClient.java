@@ -48,11 +48,11 @@ public class SimplePpfClient extends CamelService
 		try {
 			AssertionBasedRequestType requestToSend = null;
 			if(request != null) {
-				if(PrivacyPolicyFeed.PpfMethod.AddPolicy.equals(request.getMethod())) {
+				if(PrivacyPolicyFeed.PpfMethod.ADD_POLICY.equals(request.getMethod())) {
 					requestToSend = new AddPolicyRequest();			
-				} else if(PrivacyPolicyFeed.PpfMethod.DeletePolicy.equals(request.getMethod())) {
+				} else if(PrivacyPolicyFeed.PpfMethod.DELETE_POLICY.equals(request.getMethod())) {
 					requestToSend = new DeletePolicyRequest();
-				} else if(PrivacyPolicyFeed.PpfMethod.UpdatePolicy.equals(request.getMethod())) {
+				} else if(PrivacyPolicyFeed.PpfMethod.UPDATE_POLICY.equals(request.getMethod())) {
 					requestToSend = new UpdatePolicyRequest();
 				}
 				

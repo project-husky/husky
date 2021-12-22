@@ -131,25 +131,21 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 		}
 
 		for (StatementAbstractType statement : statements) {
-			if (statement instanceof org.openehealth.ipf.commons.ihe.xacml20.stub.xacml20.saml.assertion.XACMLPolicyStatementType) {
-				var policyStat = (org.openehealth.ipf.commons.ihe.xacml20.stub.xacml20.saml.assertion.XACMLPolicyStatementType) statement;
+			if (statement instanceof org.openehealth.ipf.commons.ihe.xacml20.stub.xacml20.saml.assertion.XACMLPolicyStatementType policyStat) {
 				this.assertion.getStatements().add(new StatementBuilderImpl().create(policyStat));
-			} else if(statement instanceof AttributeStatementType) {
-				var attrStat = (AttributeStatementType) statement;
+			} else if (statement instanceof AttributeStatementType attrStat) {
 				var retVal = new AttributeStatementBuilder().buildObject();
 				
 				for(Object obj: attrStat.getAttributeOrEncryptedAttribute()) {
-					if(obj instanceof AttributeType) {
-						retVal.getAttributes().add(new AttributeBuilderImpl().create((AttributeType) obj));
+					if (obj instanceof AttributeType attributeType) {
+						retVal.getAttributes().add(new AttributeBuilderImpl().create(attributeType));
 					}
 				}
 				
 				this.assertion.getStatements().add(retVal);
-			} else if (statement instanceof AuthnStatementType) {
-				var attrStat = (AuthnStatementType) statement;
+			} else if (statement instanceof AuthnStatementType attrStat) {
 				this.assertion.getAuthnStatements().add(new AuthnStatementBuilderImpl().create(attrStat));
-			} else if (statement instanceof XACMLPolicySetIdReferenceStatementType) {
-				var policyStat = (XACMLPolicySetIdReferenceStatementType) statement;
+			} else if (statement instanceof XACMLPolicySetIdReferenceStatementType policyStat) {
 				this.assertion.getStatements()
 						.add(new XacmlPolicySetIdReferenceStatementBuilderImpl().create(policyStat));
 			}
@@ -185,13 +181,13 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 
 		final List<org.opensaml.saml.saml2.core.Statement> innerList = assertion.getStatements();
 		innerList.forEach(c -> {
-			if (c instanceof XACMLPolicyStatementType) {
+			if (c instanceof XACMLPolicyStatementType xacmlPolicyStatementType) {
 				this.statementOrAuthnStatementOrAuthzDecisionStatement
-						.add(new StatementBuilderImpl().create((XACMLPolicyStatementType) c));
-			} else if (c instanceof XACMLPolicySetIdReferenceStatement) {
+						.add(new StatementBuilderImpl().create(xacmlPolicyStatementType));
+			} else if (c instanceof XACMLPolicySetIdReferenceStatement xacmlPolicySetIdReferenceStatement) {
 				this.statementOrAuthnStatementOrAuthzDecisionStatement
 						.add(new XacmlPolicySetIdReferenceStatementBuilderImpl()
-								.create((XACMLPolicySetIdReferenceStatement) c));
+								.create(xacmlPolicySetIdReferenceStatement));
 			}
 
 		});

@@ -50,7 +50,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
 @EnableAutoConfiguration
-public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
+class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(ConvenienceCommunicationSubmitDocumentTest.class.getName());
@@ -105,7 +105,7 @@ public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 	 * correct.
 	 */
 	@Test
-	public void contextLoads() {
+	void contextLoads() {
 		assertNotNull(convenienceCommunication);
 		assertNotNull(convenienceCommunication.getCamelContext());
 	}
@@ -118,7 +118,7 @@ public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 	 * @throws Exception
 	 */
 	@Test
-	public void submitPdfDocTest() throws Exception {
+	void submitPdfDocTest() throws Exception {
 		convenienceCommunication.setAffinityDomain(affinityDomain);
 		convenienceCommunication.clearDocuments();
 
@@ -148,7 +148,7 @@ public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 	 * @throws Exception
 	 */
 	@Test
-	public void submitCdaDocTest() throws Exception {
+	void submitCdaDocTest() throws Exception {
 		convenienceCommunication.setAffinityDomain(affinityDomain);
 		convenienceCommunication.clearDocuments();
 
@@ -179,7 +179,7 @@ public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 	 * @throws Exception
 	 */
 	@Test
-	public void submitDocumentWrongMetadataTest() throws Exception {
+	void submitDocumentWrongMetadataTest() throws Exception {
 		convenienceCommunication.setAffinityDomain(affinityDomain);
 		convenienceCommunication.clearDocuments();
 
@@ -218,7 +218,7 @@ public class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 	 * @throws Exception
 	 */
 	@Test
-	public void replaceCdaDocTest() throws Exception {
+	void replaceCdaDocTest() throws Exception {
 		convenienceCommunication.setAffinityDomain(affinityDomain);
 		convenienceCommunication.clearDocuments();
 

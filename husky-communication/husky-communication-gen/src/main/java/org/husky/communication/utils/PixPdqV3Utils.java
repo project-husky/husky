@@ -595,7 +595,6 @@ public class PixPdqV3Utils {
 		// receiver device above
 		device.setDeterminerCode(EntityDeterminer.INSTANCE);
 
-		// instII.setExtension("PRPA_IN201305UV02");
 		device.getId().add(createII(applicationOID, "", ""));
 
 		// if there is a facility OID
@@ -705,7 +704,6 @@ public class PixPdqV3Utils {
 		// receiver device above
 		device.setDeterminerCode(EntityDeterminer.INSTANCE);
 
-		// instII.setExtension("PRPA_IN201305UV02");
 		device.getId().add(createII(applicationOID, "", ""));
 
 		// if there is a facility OID
@@ -1008,8 +1006,8 @@ public class PixPdqV3Utils {
 	private static String getMixedValue(List<Serializable> mixed) {
 		var returnValue = "";
 		// if we have a mixed
-		if (!mixed.isEmpty() && mixed.get(0) instanceof String)
-			returnValue = (String) mixed.get(0);
+		if (!mixed.isEmpty() && mixed.get(0)instanceof String mixedStr)
+			returnValue = mixedStr;
 		return returnValue;
 	}
 

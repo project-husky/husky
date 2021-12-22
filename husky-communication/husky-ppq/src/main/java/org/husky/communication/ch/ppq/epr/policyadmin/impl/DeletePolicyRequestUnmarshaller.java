@@ -30,10 +30,10 @@ public class DeletePolicyRequestUnmarshaller extends AbstractXMLObjectUnmarshall
 	@Override
 	protected void processChildElement(XMLObject parentXMLObject, XMLObject childXMLObject)
 			throws UnmarshallingException {
-		if (childXMLObject instanceof org.opensaml.saml.saml2.core.Assertion) {
+		if (childXMLObject instanceof org.opensaml.saml.saml2.core.Assertion assertion) {
 			final OpenSamlDeletePolicyRequest request = (OpenSamlDeletePolicyRequest) parentXMLObject;
 			request.setAssertion(new AssertionBuilderImpl()
-					.create((org.opensaml.saml.saml2.core.Assertion) childXMLObject));
+					.create(assertion));
 		} else {
 			super.processChildElement(parentXMLObject, childXMLObject);
 		}

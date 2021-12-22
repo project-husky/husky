@@ -593,11 +593,9 @@ public class ValueSetEntry implements Serializable {
 	public String getDesignation(LanguageCode language, DesignationType designationType) {
 		String retVal = null;
 		for (Designation designation : getDesignationList()) {
-			if (language.equals(designation.getLanguageCode()) && (designationType == null))
+			if (language.equals(designation.getLanguageCode())) {
 				retVal = designation.getDisplayName();
-			else if (language.equals(designation.getLanguageCode())
-					&& (designationType != null && designationType.equals(designation.getType())))
-				retVal = designation.getDisplayName();
+			}
 		}
 		return retVal;
 	}

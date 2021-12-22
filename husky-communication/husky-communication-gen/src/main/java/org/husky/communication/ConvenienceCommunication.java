@@ -12,7 +12,6 @@ package org.husky.communication;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -52,6 +51,7 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Folder;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Identifiable;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp.Precision;
@@ -236,9 +236,9 @@ public class ConvenienceCommunication extends CamelService {
 	 *                 to transfer? e.g. PDF, CDA,...)
 	 * @param filePath the file path
 	 * @return the document metadata (which have to be completed) </div>
-	 * @throws FileNotFoundException exception
+	 * @throws IOException
 	 */
-	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath) throws FileNotFoundException {
+	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath) throws IOException {
 		return addDocument(desc, filePath, null);
 	}
 
@@ -250,11 +250,13 @@ public class ConvenienceCommunication extends CamelService {
 	 * @param filePath         the file path
 	 * @param filePathMetadata the file path metadata
 	 * @return the document metadata (which have to be completed) </div>
-	 * @throws FileNotFoundException exception
+	 * @throws IOException
 	 */
 	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath, String filePathMetadata)
-			throws FileNotFoundException {
-		return addDocument(desc, new FileInputStream(new File(filePath)));
+			throws IOException {
+		try (InputStream is = new FileInputStream(new File(filePath))) {
+			return addDocument(desc, is);
+		}
 	}
 
 	/**
@@ -491,7 +493,6 @@ public class ConvenienceCommunication extends CamelService {
 		if (docMetadata.getDocumentEntry().getUniqueId() == null) {
 			document.getDocumentEntry().assignUniqueId();
 			docMetadata.setUniqueId(document.getDocumentEntry().getUniqueId());
-			System.out.println(document.getDocumentEntry().getUniqueId().length());
 		}
 
 		// Generate the UUID
@@ -552,96 +553,80 @@ public class ConvenienceCommunication extends CamelService {
 		final var subSet = txnData.getSubmissionSet();
 
 		if (txnData.getDocuments() != null && !txnData.getDocuments().isEmpty()) {
-
-			for (Document document : txnData.getDocuments()) {
-				final var docEntry = document.getDocumentEntry();
-				if (docEntry.getPatientId() == null) {
-					throw new IllegalStateException(
-							"Missing destination patient ID in DocumentMetadata of first document.");
-				}
-
-				if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
-
-					// This is the Husky Root OID
-					// default value just in case...
-					String organizationalId = EhcVersions.getCurrentVersion().getOid();
-
-					if (subSet.getUniqueId() == null) {
-						subSet.assignUniqueId();
-					}
-
-					if (subSet.getEntryUuid() == null) {
-						subSet.setEntryUuid(UUID.randomUUID().toString());
-					}
-
-					if (docEntry.getPatientId() != null) {
-						organizationalId = docEntry.getPatientId().getAssigningAuthority().getUniversalId();
-					}
-					// set submission set source id
-					if (subSet.getSourceId() == null) {
-						subSet.setSourceId(organizationalId);
-					}
-				}
-
-				// set submission time
-				if (subSet.getSubmissionTime() == null) {
-					subSet.setSubmissionTime(new Timestamp(ZonedDateTime.now(), Precision.SECOND));
-				}
-
-				// Use the PatientId of the first Document for the Submission set ID
-				if (subSet.getPatientId() == null) {
-					subSet.setPatientId(docEntry.getPatientId());
-				}
-
-				// set ContentTypeCode
-				if (subSet.getContentTypeCode() == null && docEntry.getTypeCode() != null) {
-					subSet.setContentTypeCode(docEntry.getTypeCode());
-
-				}
-			}
+			setSubSetDetailsFromDocument(subSet);
 		} else if (txnData.getFolders() != null && !txnData.getFolders().isEmpty()) {
-			for (Folder folder : txnData.getFolders()) {
-				if (folder.getPatientId() == null) {
-					throw new IllegalStateException(
-							"Missing destination patient ID in DocumentMetadata of first document.");
-				}
-
-				if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
-
-					// This is the Husky Root OID
-					// default value just in case...
-					String organizationalId = EhcVersions.getCurrentVersion().getOid();
-
-					if (subSet.getUniqueId() == null) {
-						subSet.assignUniqueId();
-					}
-
-					if (folder.getPatientId() != null) {
-						organizationalId = folder.getPatientId().getAssigningAuthority().getUniversalId();
-					}
-					// set submission set source id
-					if (subSet.getSourceId() == null) {
-						subSet.setSourceId(organizationalId);
-					}
-				}
-
-				// set submission time
-				if (subSet.getSubmissionTime() == null) {
-					subSet.setSubmissionTime(new Timestamp(ZonedDateTime.now(), Precision.SECOND));
-				}
-
-				// Use the PatientId of the first Document for the Submission set ID
-				if (subSet.getPatientId() == null) {
-					subSet.setPatientId(folder.getPatientId());
-				}
-
-				if (subSet.getContentTypeCode() == null && folder.getCodeList() != null
-						&& folder.getCodeList().get(0) != null) {
-					subSet.setContentTypeCode(folder.getCodeList().get(0));
-				}
-			}
+			setSubSetDetailsFromFolder(subSet);
 		}
 		return subSet;
+	}
+
+	private void setSubSetDetailsFromDocument(SubmissionSet subSet) {
+		for (Document document : txnData.getDocuments()) {
+			final var docEntry = document.getDocumentEntry();
+			if (docEntry.getPatientId() == null) {
+				throw new IllegalStateException(
+						"Missing destination patient ID in DocumentMetadata of first document.");
+			}
+
+			// set ContentTypeCode
+			if (subSet.getContentTypeCode() == null && docEntry.getTypeCode() != null) {
+				subSet.setContentTypeCode(docEntry.getTypeCode());
+			}
+
+			setGeneralSubSetDetails(subSet, docEntry.getPatientId());
+		}
+	}
+
+	private void setSubSetDetailsFromFolder(SubmissionSet subSet) {
+		for (Folder folder : txnData.getFolders()) {
+			if (folder.getPatientId() == null) {
+				throw new IllegalStateException(
+						"Missing destination patient ID in DocumentMetadata of first document.");
+			}
+
+			if (subSet.getContentTypeCode() == null && folder.getCodeList() != null
+					&& folder.getCodeList().get(0) != null) {
+				subSet.setContentTypeCode(folder.getCodeList().get(0));
+			}
+
+			setGeneralSubSetDetails(subSet, folder.getPatientId());
+		}
+	}
+
+	private void setGeneralSubSetDetails(SubmissionSet subSet, Identifiable patientId) {
+		// set submission time
+		if (subSet.getSubmissionTime() == null) {
+			subSet.setSubmissionTime(new Timestamp(ZonedDateTime.now(), Precision.SECOND));
+		}
+
+		if (subSet.getEntryUuid() == null) {
+			subSet.setEntryUuid(UUID.randomUUID().toString());
+		}
+
+		if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
+
+			if (subSet.getUniqueId() == null) {
+				subSet.assignUniqueId();
+			}
+
+			// set submission set source id
+			if (subSet.getSourceId() == null) {
+				subSet.setSourceId(getSourceId(patientId));
+			}
+		}
+
+		// Use the PatientId of the first Document for the Submission set ID
+		if (subSet.getPatientId() == null) {
+			subSet.setPatientId(patientId);
+		}
+	}
+
+	private String getSourceId(Identifiable patientId) {
+		if (patientId != null) {
+			return patientId.getAssigningAuthority().getUniversalId();
+		} else {
+			return EhcVersions.getCurrentVersion().getOid();
+		}
 	}
 
 

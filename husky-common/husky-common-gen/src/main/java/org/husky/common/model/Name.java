@@ -12,6 +12,7 @@ package org.husky.common.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
@@ -20,6 +21,7 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.husky.common.basetypes.NameBaseType;
 import org.husky.common.enums.EntityNameUse;
 import org.husky.common.enums.NullFlavor;
+import org.husky.common.hl7cdar2.EN;
 import org.husky.common.hl7cdar2.EnDelimiter;
 import org.husky.common.hl7cdar2.EnFamily;
 import org.husky.common.hl7cdar2.EnGiven;
@@ -48,7 +50,6 @@ public class Name extends NameBaseType {
 	private static final String ELEMENT_NAME_NAMESPACE_GIVEN = "hl7:given";
 	private static final String ELEMENT_NAME_NAMESPACE_SUFFIX = "hl7:suffix";
 	private static final String ELEMENT_NAME_NAMESPACE_PREFIX = "hl7:prefix";
-	private static final String NAMESPACE_HL7 = "urn:hl7-org:v3";
 
 	/**
 	 * <div class="en">Creates the HL7 CDA R2 data type from the given base
@@ -65,59 +66,7 @@ public class Name extends NameBaseType {
 
 		if (baseType != null) {
 			retVal = new org.husky.common.hl7cdar2.EN();
-			String value;
-
-			var nf = baseType.getNullFlavor();
-			if (nf != null) {
-				if (retVal.nullFlavor == null)
-					retVal.nullFlavor = new ArrayList<String>();
-				retVal.nullFlavor.add(nf.getCodeValue());
-			}
-
-			value = baseType.getDelimiter();
-			if (value != null) {
-				var obj = new EnDelimiter();
-				obj.setXmlMixed(value);
-				retVal.getContent()
-						.add(new JAXBElement<EnDelimiter>(new QName(ELEMENT_NAME_NAMESPACE_DELIMITER), EnDelimiter.class, obj));
-			}
-
-			value = baseType.getFamily();
-			if (value != null) {
-				var obj = new EnFamily();
-				obj.setXmlMixed(value);
-				retVal.getContent().add(new JAXBElement<EnFamily>(new QName(ELEMENT_NAME_NAMESPACE_FAMILY), EnFamily.class, obj));
-			}
-
-			value = baseType.getGiven();
-			if (value != null) {
-				var obj = new EnGiven();
-				obj.setXmlMixed(value);
-				retVal.getContent()
-						.add(new JAXBElement<EnGiven>(new QName(ELEMENT_NAME_NAMESPACE_GIVEN), EnGiven.class, obj));
-			}
-
-			value = baseType.getPrefix();
-			if (value != null) {
-				var obj = new EnPrefix();
-				obj.setXmlMixed(value);
-				retVal.getContent()
-						.add(new JAXBElement<EnPrefix>(new QName(ELEMENT_NAME_NAMESPACE_PREFIX), EnPrefix.class, obj));
-			}
-
-			value = baseType.getSuffix();
-			if (value != null) {
-				var obj = new EnSuffix();
-				obj.setXmlMixed(value);
-				retVal.getContent()
-						.add(new JAXBElement<EnSuffix>(new QName(ELEMENT_NAME_NAMESPACE_SUFFIX), EnSuffix.class, obj));
-			}
-
-			value = baseType.getName();
-			if (value != null && retVal.getContent().isEmpty()) {
-				retVal.setXmlMixed(value);
-			}
-
+			createName(retVal, baseType);
 		}
 
 		return retVal;
@@ -138,58 +87,8 @@ public class Name extends NameBaseType {
 
 		if (baseType != null) {
 			retVal = new org.husky.common.hl7cdar2.ON();
-			String value;
 
-			var nf = baseType.getNullFlavor();
-			if (nf != null) {
-				if (retVal.nullFlavor == null)
-					retVal.nullFlavor = new ArrayList<String>();
-				retVal.nullFlavor.add(nf.getCodeValue());
-			}
-
-			value = baseType.getDelimiter();
-			if (value != null) {
-				var obj = new EnDelimiter();
-				obj.setXmlMixed(value);
-				retVal.getContent()
-						.add(new JAXBElement<EnDelimiter>(new QName(ELEMENT_NAME_NAMESPACE_DELIMITER), EnDelimiter.class, obj));
-			}
-
-			value = baseType.getFamily();
-			if (value != null) {
-				var obj = new EnFamily();
-				obj.setXmlMixed(value);
-				retVal.getContent().add(new JAXBElement<EnFamily>(new QName(ELEMENT_NAME_NAMESPACE_FAMILY), EnFamily.class, obj));
-			}
-
-			value = baseType.getGiven();
-			if (value != null) {
-				var obj = new EnGiven();
-				obj.setXmlMixed(value);
-				retVal.getContent()
-						.add(new JAXBElement<EnGiven>(new QName(ELEMENT_NAME_NAMESPACE_GIVEN), EnGiven.class, obj));
-			}
-
-			value = baseType.getPrefix();
-			if (value != null) {
-				var obj = new EnPrefix();
-				obj.setXmlMixed(value);
-				retVal.getContent()
-						.add(new JAXBElement<EnPrefix>(new QName(ELEMENT_NAME_NAMESPACE_PREFIX), EnPrefix.class, obj));
-			}
-
-			value = baseType.getSuffix();
-			if (value != null) {
-				var obj = new EnSuffix();
-				obj.setXmlMixed(value);
-				retVal.getContent()
-						.add(new JAXBElement<EnSuffix>(new QName(ELEMENT_NAME_NAMESPACE_SUFFIX), EnSuffix.class, obj));
-			}
-
-			value = baseType.getName();
-			if (value != null && retVal.getContent().isEmpty()) {
-				retVal.setXmlMixed(value);
-			}
+			createName(retVal, baseType);
 
 			EntityNameUse usage = baseType.getUsage();
 			if (usage != null) {
@@ -216,62 +115,8 @@ public class Name extends NameBaseType {
 
 		if (baseType != null) {
 			retVal = new org.husky.common.hl7cdar2.PN();
-			String value;
 
-			var nf = baseType.getNullFlavor();
-			if (nf != null) {
-				if (retVal.nullFlavor == null)
-					retVal.nullFlavor = new ArrayList<String>();
-				retVal.nullFlavor.add(nf.getCodeValue());
-			}
-
-			value = baseType.getDelimiter();
-			if (value != null) {
-				var obj = new EnDelimiter();
-				obj.setXmlMixed(value);
-				retVal.getContent().add(
-						new JAXBElement<EnDelimiter>(new QName(NAMESPACE_HL7, "delimiter"), EnDelimiter.class, obj));
-			}
-
-			value = baseType.getFamily();
-			if (value != null) {
-				var obj = new EnFamily();
-				obj.setXmlMixed(value);
-				retVal.getContent()
-						.add(new JAXBElement<EnFamily>(new QName(NAMESPACE_HL7, "family"), EnFamily.class, obj));
-			}
-
-			value = baseType.getGiven();
-			if (value != null) {
-				var obj = new EnGiven();
-				obj.setXmlMixed(value);
-				retVal.getContent()
-						.add(new JAXBElement<EnGiven>(new QName(NAMESPACE_HL7, "given"), EnGiven.class, obj));
-			}
-
-			value = baseType.getPrefix();
-			if (value != null) {
-				var obj = new EnPrefix();
-				obj.setXmlMixed(value);
-				// Note: This need probably to become more dynamic. Feel free to
-				// contribute.
-				obj.getQualifier().add("AC");
-				retVal.getContent()
-						.add(new JAXBElement<EnPrefix>(new QName(NAMESPACE_HL7, "prefix"), EnPrefix.class, obj));
-			}
-
-			value = baseType.getSuffix();
-			if (value != null) {
-				var obj = new EnSuffix();
-				obj.setXmlMixed(value);
-				retVal.getContent()
-						.add(new JAXBElement<EnSuffix>(new QName(NAMESPACE_HL7, "suffix"), EnSuffix.class, obj));
-			}
-
-			value = baseType.getName();
-			if (value != null && retVal.getContent().isEmpty()) {
-				retVal.setXmlMixed(value);
-			}
+			createName(retVal, baseType);
 
 			EntityNameUse usage = baseType.getUsage();
 			if (usage != null) {
@@ -298,62 +143,79 @@ public class Name extends NameBaseType {
 
 		if (baseType != null) {
 			retVal = new org.husky.common.hl7cdar2.TN();
-			String value;
-
-			var nf = baseType.getNullFlavor();
-			if (nf != null) {
-				if (retVal.nullFlavor == null)
-					retVal.nullFlavor = new ArrayList<String>();
-				retVal.nullFlavor.add(nf.getCodeValue());
-			}
-
-			value = baseType.getDelimiter();
-			if (value != null) {
-				var obj = new EnDelimiter();
-				obj.setXmlMixed(value);
-				retVal.getContent()
-						.add(new JAXBElement<EnDelimiter>(new QName(ELEMENT_NAME_NAMESPACE_DELIMITER), EnDelimiter.class, obj));
-			}
-
-			value = baseType.getFamily();
-			if (value != null) {
-				var obj = new EnFamily();
-				obj.setXmlMixed(value);
-				retVal.getContent().add(new JAXBElement<EnFamily>(new QName(ELEMENT_NAME_NAMESPACE_FAMILY), EnFamily.class, obj));
-			}
-
-			value = baseType.getGiven();
-			if (value != null) {
-				var obj = new EnGiven();
-				obj.setXmlMixed(value);
-				retVal.getContent()
-						.add(new JAXBElement<EnGiven>(new QName(ELEMENT_NAME_NAMESPACE_GIVEN), EnGiven.class, obj));
-			}
-
-			value = baseType.getPrefix();
-			if (value != null) {
-				var obj = new EnPrefix();
-				obj.setXmlMixed(value);
-				retVal.getContent()
-						.add(new JAXBElement<EnPrefix>(new QName(ELEMENT_NAME_NAMESPACE_PREFIX), EnPrefix.class, obj));
-			}
-
-			value = baseType.getSuffix();
-			if (value != null) {
-				var obj = new EnSuffix();
-				obj.setXmlMixed(value);
-				retVal.getContent()
-						.add(new JAXBElement<EnSuffix>(new QName(ELEMENT_NAME_NAMESPACE_SUFFIX), EnSuffix.class, obj));
-			}
-
-			value = baseType.getName();
-			if (value != null && retVal.getContent().isEmpty()) {
-				retVal.setXmlMixed(value);
-			}
-
+			createName(retVal, baseType);
 		}
 
 		return retVal;
+	}
+
+	private static void createName(EN retVal, NameBaseType baseType) {
+		var nf = baseType.getNullFlavor();
+		if (nf != null) {
+			if (retVal.nullFlavor == null)
+				retVal.nullFlavor = new ArrayList<String>();
+			retVal.nullFlavor.add(nf.getCodeValue());
+		}
+
+		List<Serializable> content = createNameContent(baseType);
+
+		String value = baseType.getName();
+		if (value != null && content.isEmpty()) {
+			retVal.setXmlMixed(value);
+		} else {
+			retVal.getContent().addAll(content);
+		}
+	}
+
+	private static List<Serializable> createNameContent(NameBaseType baseType) {
+		List<Serializable> content = new ArrayList<>();
+
+		String value;
+
+		value = baseType.getDelimiter();
+		if (value != null) {
+			var obj = new EnDelimiter();
+			obj.setXmlMixed(value);
+			content.add(
+					new JAXBElement<EnDelimiter>(new QName(ELEMENT_NAME_NAMESPACE_DELIMITER), EnDelimiter.class, obj));
+		}
+
+		value = baseType.getFamily();
+		if (value != null) {
+			var obj = new EnFamily();
+			obj.setXmlMixed(value);
+			content
+					.add(new JAXBElement<EnFamily>(new QName(ELEMENT_NAME_NAMESPACE_FAMILY), EnFamily.class, obj));
+		}
+
+		value = baseType.getGiven();
+		if (value != null) {
+			var obj = new EnGiven();
+			obj.setXmlMixed(value);
+			content
+					.add(new JAXBElement<EnGiven>(new QName(ELEMENT_NAME_NAMESPACE_GIVEN), EnGiven.class, obj));
+		}
+
+		value = baseType.getPrefix();
+		if (value != null) {
+			var obj = new EnPrefix();
+			obj.setXmlMixed(value);
+			// Note: This need probably to become more dynamic. Feel free to
+			// contribute.
+			obj.getQualifier().add("AC");
+			content
+					.add(new JAXBElement<EnPrefix>(new QName(ELEMENT_NAME_NAMESPACE_PREFIX), EnPrefix.class, obj));
+		}
+
+		value = baseType.getSuffix();
+		if (value != null) {
+			var obj = new EnSuffix();
+			obj.setXmlMixed(value);
+			content
+					.add(new JAXBElement<EnSuffix>(new QName(ELEMENT_NAME_NAMESPACE_SUFFIX), EnSuffix.class, obj));
+		}
+
+		return content;
 	}
 
 	/**

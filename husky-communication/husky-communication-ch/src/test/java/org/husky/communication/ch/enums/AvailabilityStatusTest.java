@@ -13,14 +13,12 @@ package org.husky.communication.ch.enums;
 import static org.husky.common.model.ValueSetEnumInterfaceTest.assertValueSetEnumEntries;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.husky.communication.ch.enums.AvailabilityStatus;
 import org.junit.jupiter.api.Test;
 
-
-public class AvailabilityStatusTest {
+class AvailabilityStatusTest {
 
 	@Test
-	public void testAvailabilityStatus() {
+	void testAvailabilityStatus() {
 
 		assertEquals("2.16.756.5.30.1.127.3.10.1.2", AvailabilityStatus.VALUE_SET_ID);
 		assertValueSetEnumEntries(AvailabilityStatus.values());

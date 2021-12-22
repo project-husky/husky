@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Testclass to the the CH specific client factory.
  */
-public class ClientFactoryChTest {
+class ClientFactoryChTest {
 
 	private PpClientConfig testPpClientConfiguration;
 	private String testPortName;
@@ -41,7 +41,7 @@ public class ClientFactoryChTest {
 	 * {@link org.husky.xua.communication.ch.clients.impl.ClientFactoryCh#getPpfClient(org.husky.xua.communication.ch.ppq.config.PpClientConfig)}.
 	 */
 	@Test
-	public void testGetPpfClient() {
+	void testGetPpfClient() {
 		final PpfClient ref = ClientFactoryCh.getPpfClient(testPpClientConfiguration);
 		assertNotNull(ref);
 	}
@@ -51,7 +51,7 @@ public class ClientFactoryChTest {
 	 * {@link org.husky.xua.communication.ch.clients.impl.ClientFactoryCh#getPpqClient(org.husky.xua.communication.ch.ppq.config.PpClientConfig)}.
 	 */
 	@Test
-	public void testGetPpqClient() {
+	void testGetPpqClient() {
 		final PpqClient ref = ClientFactoryCh.getPpqClient(testPpClientConfiguration);
 		assertNotNull(ref);
 	}

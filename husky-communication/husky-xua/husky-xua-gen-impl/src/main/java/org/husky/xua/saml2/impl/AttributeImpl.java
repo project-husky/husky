@@ -60,8 +60,7 @@ public class AttributeImpl
 		attribute.setNameFormat(aAttribute.getNameFormat());
 
 		for (Object obj : aAttribute.getAttributeValue()) {
-			if (obj instanceof org.openehealth.ipf.commons.audit.types.PurposeOfUse.PurposeOfUseImpl) {
-				var purposeOfUse = (org.openehealth.ipf.commons.audit.types.PurposeOfUse.PurposeOfUseImpl) obj;
+			if (obj instanceof org.openehealth.ipf.commons.audit.types.PurposeOfUse.PurposeOfUseImpl purposeOfUse) {
 				var retVal = new CodedWithEquivalentsBuilder().buildObject(PurposeOfUse.DEFAULT_NS_URI,
 						PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME, PurposeOfUse.DEFAULT_PREFIX);
 				retVal.setCode(purposeOfUse.getCode());

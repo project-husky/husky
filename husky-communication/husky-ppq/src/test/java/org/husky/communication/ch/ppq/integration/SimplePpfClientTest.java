@@ -201,7 +201,7 @@ public class SimplePpfClientTest {
 	 */
 	@Test
 	@Order(1)
-	public void testSendPpq1AddPolicy() throws Exception {
+	void testSendPpq1AddPolicy() throws Exception {
 
 		// initialize client to add policy
 		PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
@@ -332,7 +332,7 @@ public class SimplePpfClientTest {
 				.getWrappedObject();
 
 		// create policy feed object with method add to add policy
-		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.AddPolicy)
+		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.ADD_POLICY)
 				.create(addPolicyAssertionOpenSaml);
 
 		// add policy
@@ -352,7 +352,7 @@ public class SimplePpfClientTest {
 	 */
 	@Test
 	@Order(2)
-	public void testSendPpq1UpdatePolicy() throws Exception {
+	void testSendPpq1UpdatePolicy() throws Exception {
 		assertNotNull(xuaAssertion);
 
 		// initialize client to query policies
@@ -540,7 +540,7 @@ public class SimplePpfClientTest {
 				.getWrappedObject();
 
 		// create policy feed object with method update to update policy
-		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.UpdatePolicy)
+		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.UPDATE_POLICY)
 				.create(updatePolicyAssertionOpenSaml);
 
 		// update policy
@@ -561,7 +561,7 @@ public class SimplePpfClientTest {
 	 */
 	@Test
 	@Order(3)
-	public void testSendPpq1DeletePolicy() throws Exception {
+	void testSendPpq1DeletePolicy() throws Exception {
 		// initialize client to query policies
 		PpClientConfig configQuery = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).create();
@@ -634,7 +634,7 @@ public class SimplePpfClientTest {
 				.create(deletePolicyAssertion).getWrappedObject();
 
 		// create policy feed object with method delete to delete policy
-		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.DeletePolicy)
+		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.DELETE_POLICY)
 				.create(deletePolicyAssertionOpenSaml);
 
 		// delete policy
@@ -654,7 +654,7 @@ public class SimplePpfClientTest {
 	 */
 	@Test
 	@Order(4)
-	public void testSendPpq1AddPolicyWrongPolicyStructure() throws Exception {
+	void testSendPpq1AddPolicyWrongPolicyStructure() throws Exception {
 		// initialize client to add policy
 		PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).create();
@@ -754,7 +754,7 @@ public class SimplePpfClientTest {
 				.create(addPolicyAssertion).getWrappedObject();
 
 		// create policy feed object with method add to add policy
-		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.AddPolicy)
+		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.ADD_POLICY)
 				.create(addPolicyAssertionOpenSaml);
 
 		// add policy

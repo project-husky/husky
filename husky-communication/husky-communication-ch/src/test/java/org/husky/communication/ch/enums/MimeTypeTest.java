@@ -13,13 +13,12 @@ package org.husky.communication.ch.enums;
 import static org.husky.common.model.ValueSetEnumInterfaceTest.assertValueSetEnumEntries;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.husky.communication.ch.enums.MimeType;
 import org.junit.jupiter.api.Test;
 
-public class MimeTypeTest {
+class MimeTypeTest {
 
 	@Test
-	public void testMimeType() {
+	void testMimeType() {
 
 		assertEquals("2.16.756.5.30.1.127.3.10.1.16", MimeType.VALUE_SET_ID);
 		assertValueSetEnumEntries(MimeType.values());

@@ -20,13 +20,13 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.husky.common.utils.CustomizedYaml;
@@ -155,7 +155,7 @@ public class ValueSetPackageManager {
 			throws IOException, ConfigurationException {
 		ValueSetPackageConfig retVal = null;
 		// download a package config
-		var downloadedString = IOUtils.toString(sourceUrl, Charsets.UTF_8);
+		var downloadedString = IOUtils.toString(sourceUrl, StandardCharsets.UTF_8);
 		retVal = loadValueSetPackageConfig(IOUtils.toInputStream(downloadedString));
 		return retVal;
 	}
@@ -235,16 +235,7 @@ public class ValueSetPackageManager {
 					Date from = valueSetPackageConfig.getVersion().getValidFrom();
 					Date to = valueSetPackageConfig.getVersion().getValidTo();
 
-					boolean dateFits = (date == null);
-					if (!dateFits) {
-						if (from != null)
-							dateFits = ((date.equals(from)) || (date.after(from)));
-						if (dateFits && to != null) {
-							dateFits = ((date.equals(to)) || (date.before(to)));
-						}
-					}
-
-					if (ignoreDate || dateFits) {
+					if (ignoreDate || fitsDate(date, from, to)) {
 
 						if (retVal == null)
 							retVal = valueSetPackageConfig;
@@ -291,7 +282,6 @@ public class ValueSetPackageManager {
 								// get the new choice
 								if (isCandidate)
 									retVal = valueSetPackageConfig;
-								isCandidate = true;
 							}
 						} else if (isCandidate)
 							// in this case, a from candidate with a null to
@@ -306,6 +296,19 @@ public class ValueSetPackageManager {
 
 		return retVal;
 
+	}
+
+	private boolean fitsDate(Date date, Date from, Date to) {
+		boolean dateFits = (date == null);
+		if (!dateFits) {
+			if (from != null)
+				dateFits = ((date.equals(from)) || (date.after(from)));
+			if (dateFits && to != null) {
+				dateFits = ((date.equals(to)) || (date.before(to)));
+			}
+		}
+
+		return dateFits;
 	}
 
 	/**
@@ -351,7 +354,7 @@ public class ValueSetPackageManager {
 	 * @return the value set package
 	 */
 	public ValueSetPackage loadValueSetPackage(InputStream inputStream) {
-		var reader = new InputStreamReader(inputStream, Charsets.UTF_8);
+		var reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
 		return CustomizedYaml.getCustomizedYaml().loadAs(reader,
 				ValueSetPackage.class);
 
@@ -415,7 +418,7 @@ public class ValueSetPackageManager {
 	 */
 	public ValueSetPackageConfig loadValueSetPackageConfig(InputStream inputStream)
 			throws ConfigurationException {
-		var reader = new InputStreamReader(inputStream, Charsets.UTF_8);
+		var reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
 		if (this.valueSetPackageConfigList == null) {
 			this.valueSetPackageConfigList = new ArrayList<>();
 		}
@@ -477,7 +480,9 @@ public class ValueSetPackageManager {
 	 *             Signals that an I/O exception has occurred.
 	 */
 	public void saveValueSetPackage(ValueSetPackage valueSetPackage, File file) throws IOException {
-		saveValueSetPackage(valueSetPackage, new FileOutputStream(file));
+		try (var fileOutputStream = new FileOutputStream(file)) {
+			saveValueSetPackage(valueSetPackage, fileOutputStream);
+		}
 	}
 
 	/**
@@ -496,7 +501,7 @@ public class ValueSetPackageManager {
 	 */
 	public void saveValueSetPackage(ValueSetPackage valueSetPackage, OutputStream outputStream)
 			throws IOException {
-		var writer = new OutputStreamWriter(outputStream, Charsets.UTF_8);
+		var writer = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
 		writer.write(CustomizedYaml.getCustomizedYaml().dumpAsMap(valueSetPackage));
 		writer.flush();
 		writer.close();
@@ -540,7 +545,7 @@ public class ValueSetPackageManager {
 	public void saveValueSetPackageConfig(ValueSetPackageConfig config, File file)
 			throws IOException {
 		FileUtils.writeByteArrayToFile(file,
-				CustomizedYaml.getCustomizedYaml().dumpAsMap(config).getBytes(Charsets.UTF_8));
+				CustomizedYaml.getCustomizedYaml().dumpAsMap(config).getBytes(StandardCharsets.UTF_8));
 	}
 
 	/**
@@ -559,7 +564,7 @@ public class ValueSetPackageManager {
 	 */
 	public void saveValueSetPackageConfig(ValueSetPackageConfig config, OutputStream outputStream)
 			throws IOException {
-		var writer = new OutputStreamWriter(outputStream, Charsets.UTF_8);
+		var writer = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
 		writer.write(CustomizedYaml.getCustomizedYaml().dumpAsMap(config));
 		writer.flush();
 		writer.close();

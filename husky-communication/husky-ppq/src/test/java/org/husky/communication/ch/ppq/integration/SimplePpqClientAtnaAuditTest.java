@@ -45,7 +45,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
 @EnableAutoConfiguration
 @ActiveProfiles("atna")
-public class SimplePpqClientAtnaAuditTest {
+class SimplePpqClientAtnaAuditTest {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SimplePpqClientAtnaAuditTest.class.getName());
 
@@ -85,7 +85,7 @@ public class SimplePpqClientAtnaAuditTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testSendPpq2() throws Exception {
+	void testSendPpq2() throws Exception {
 
 		// initialize client to query policies
 		PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)

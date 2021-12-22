@@ -81,7 +81,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
 @EnableAutoConfiguration
 @ActiveProfiles("atna")
-public class SimplePpfClientAtnaAuditTest {
+class SimplePpfClientAtnaAuditTest {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SimplePpfClientAtnaAuditTest.class.getName());
 
@@ -121,7 +121,7 @@ public class SimplePpfClientAtnaAuditTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testSendPpq1AddDeletePolicy() throws Exception {
+	void testSendPpq1AddDeletePolicy() throws Exception {
 
 		// initialize client to add and delete policy
 		PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
@@ -242,7 +242,7 @@ public class SimplePpfClientAtnaAuditTest {
 				.getWrappedObject();
 
 		// create policy feed object with method add to add policy
-		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.AddPolicy)
+		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.ADD_POLICY)
 				.create(addPolicyAssertionOpenSaml);
 
 		// add policy
@@ -272,7 +272,7 @@ public class SimplePpfClientAtnaAuditTest {
 				.create(deletePolicyAssertion).getWrappedObject();
 
 		// create policy feed object with method delete to delete policy
-		ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.DeletePolicy)
+		ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.DELETE_POLICY)
 				.create(deletePolicyAssertionOpenSaml);
 
 		// delete policy

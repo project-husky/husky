@@ -16,12 +16,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import org.husky.communication.DocumentRequest;
 import org.husky.communication.testhelper.TestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class DocumentRequestTest extends TestUtils {
+class DocumentRequestTest extends TestUtils {
 
 	String testUri = "ihexds.nist.gov";
 
@@ -31,7 +30,7 @@ public class DocumentRequestTest extends TestUtils {
 	}
 
 	@Test
-	public void testDocumentRequest() throws URISyntaxException {
+	void testDocumentRequest() throws URISyntaxException {
 		final DocumentRequest dr = new DocumentRequest(ts1, new URI(testUri), ts2, ts3);
 
 		assertEquals(ts1, dr.getRepositoryId());

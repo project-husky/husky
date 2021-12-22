@@ -39,24 +39,21 @@ public class FunctionInteractedPreviously extends AbstractFunction {
 			// AllOfAnyFunction.
 			if (args[2] instanceof List<?>) {
 				for (Object obj : ((List<?>) args[2])) {
-					if ((Boolean) function.handle(args[1], obj)) {
+					if ((boolean) function.handle(args[1], obj)) {
 						return true;
 					}
 				}
 			} else if (args[1] instanceof List<?>) {
 				for (Object obj : ((List<?>) args[1])) {
-					if ((Boolean) function.handle(obj, args[2])) {
+					if ((boolean) function.handle(obj, args[2])) {
 						return true;
 					}
 				}
 			}
 
 			return false;
-		} catch (ClassCastException e) {
-			throw new FunctionProcessingException(e);
 		} catch (FunctionProcessingException e) {
 			throw e;
-
 		} catch (Exception e) {
 			throw new FunctionProcessingException(e);
 		}

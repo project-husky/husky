@@ -26,7 +26,7 @@ import org.w3c.dom.Element;
 /**
  * TestClass to test the class PrivacyPolicyFeedBuilderImpl
  */
-public class PrivacyPolicyFeedBuilderImplTest extends InitializerTestHelper {
+class PrivacyPolicyFeedBuilderImplTest extends InitializerTestHelper {
 
 	private PrivacyPolicyFeedBuilderImpl builder;
 	private PpfMethod testMethod;
@@ -41,7 +41,7 @@ public class PrivacyPolicyFeedBuilderImplTest extends InitializerTestHelper {
 	@BeforeEach
 	public void setUp() throws Exception {
 		builder = new PrivacyPolicyFeedBuilderImpl();
-		testMethod = PpfMethod.AddPolicy;
+		testMethod = PpfMethod.ADD_POLICY;
 
 		final Element xmlElement = loadXmlDokument("/ch-ppq/add_policy_request_assertion_only.xml");
 		testAssertion = (Assertion) new AssertionUnmarshaller().unmarshall(xmlElement);
@@ -52,7 +52,7 @@ public class PrivacyPolicyFeedBuilderImplTest extends InitializerTestHelper {
 	 * {@link org.husky.xua.ch.ppq.impl.PrivacyPolicyFeedBuilderImpl#create()}.
 	 */
 	@Test
-	public void testCreate() {
+	void testCreate() {
 		final PrivacyPolicyFeed ref = builder.create();
 		assertNotNull(ref);
 		assertNotNull(ref.getAssertion());
@@ -63,7 +63,7 @@ public class PrivacyPolicyFeedBuilderImplTest extends InitializerTestHelper {
 	 * {@link org.husky.xua.ch.ppq.impl.PrivacyPolicyFeedBuilderImpl#create(org.opensaml.saml.saml2.core.Assertion)}.
 	 */
 	@Test
-	public void testCreateAssertion() {
+	void testCreateAssertion() {
 		final PrivacyPolicyFeed ref = builder.create(testAssertion);
 		assertNotNull(ref);
 		assertNotNull(ref.getAssertion());
@@ -75,7 +75,7 @@ public class PrivacyPolicyFeedBuilderImplTest extends InitializerTestHelper {
 	 * {@link org.husky.xua.ch.ppq.impl.PrivacyPolicyFeedBuilderImpl#method(org.husky.xua.ch.ppq.PrivacyPolicyFeed.PpfMethod)}.
 	 */
 	@Test
-	public void testMethod() {
+	void testMethod() {
 		final PrivacyPolicyFeed ref = builder.method(testMethod).create();
 		assertNotNull(ref);
 		assertEquals(testMethod, ref.getMethod());
