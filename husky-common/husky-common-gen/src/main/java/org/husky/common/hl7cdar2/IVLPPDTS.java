@@ -31,30 +31,30 @@ import java.util.List;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="IVL_PPD_TS">
- *   &lt;complexContent>
- *     &lt;extension base="{urn:hl7-org:v3}SXCM_PPD_TS">
- *       &lt;choice minOccurs="0">
- *         &lt;sequence>
- *           &lt;element name="low" type="{urn:hl7-org:v3}IVXB_PPD_TS"/>
- *           &lt;choice minOccurs="0">
- *             &lt;element name="width" type="{urn:hl7-org:v3}PPD_PQ" minOccurs="0"/>
- *             &lt;element name="high" type="{urn:hl7-org:v3}IVXB_PPD_TS" minOccurs="0"/>
- *           &lt;/choice>
- *         &lt;/sequence>
- *         &lt;element name="high" type="{urn:hl7-org:v3}IVXB_PPD_TS"/>
- *         &lt;sequence>
- *           &lt;element name="width" type="{urn:hl7-org:v3}PPD_PQ"/>
- *           &lt;element name="high" type="{urn:hl7-org:v3}IVXB_PPD_TS" minOccurs="0"/>
- *         &lt;/sequence>
- *         &lt;sequence>
- *           &lt;element name="center" type="{urn:hl7-org:v3}PPD_TS"/>
- *           &lt;element name="width" type="{urn:hl7-org:v3}PPD_PQ" minOccurs="0"/>
- *         &lt;/sequence>
- *       &lt;/choice>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="IVL_PPD_TS"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{urn:hl7-org:v3}SXCM_PPD_TS"&gt;
+ *       &lt;choice minOccurs="0"&gt;
+ *         &lt;sequence&gt;
+ *           &lt;element name="low" type="{urn:hl7-org:v3}IVXB_PPD_TS"/&gt;
+ *           &lt;choice minOccurs="0"&gt;
+ *             &lt;element name="width" type="{urn:hl7-org:v3}PPD_PQ" minOccurs="0"/&gt;
+ *             &lt;element name="high" type="{urn:hl7-org:v3}IVXB_PPD_TS" minOccurs="0"/&gt;
+ *           &lt;/choice&gt;
+ *         &lt;/sequence&gt;
+ *         &lt;element name="high" type="{urn:hl7-org:v3}IVXB_PPD_TS"/&gt;
+ *         &lt;sequence&gt;
+ *           &lt;element name="width" type="{urn:hl7-org:v3}PPD_PQ"/&gt;
+ *           &lt;element name="high" type="{urn:hl7-org:v3}IVXB_PPD_TS" minOccurs="0"/&gt;
+ *         &lt;/sequence&gt;
+ *         &lt;sequence&gt;
+ *           &lt;element name="center" type="{urn:hl7-org:v3}PPD_TS"/&gt;
+ *           &lt;element name="width" type="{urn:hl7-org:v3}PPD_PQ" minOccurs="0"/&gt;
+ *         &lt;/sequence&gt;
+ *       &lt;/choice&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

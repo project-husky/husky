@@ -14,12 +14,7 @@ import org.husky.communication.ch.ppq.api.config.PpClientConfig;
 import org.husky.xua.communication.config.impl.BaseSoapClientConfigImpl;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Implementation class of Interface PpClientConfig</div>
- * <div class="de">Implementations Klasse von Interface PpClientConfig</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Implementation class of Interface PpClientConfig
  */
 public class PpClientConfigImpl extends BaseSoapClientConfigImpl implements PpClientConfig {
 

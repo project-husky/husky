@@ -11,11 +11,7 @@
 package org.husky.xua.saml2;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Interface describing the methods of the AudienceBuilder. </div>
- * <div class="de">Interface welches die Methoden des AudienceBuilder beschreibt.</div>
- * <div class="fr"></div>
- * <div class="it"></div
+ * Interface describing the methods of the AudienceBuilder.
  */
 public interface AudienceBuilder extends SimpleBuilder<Audience> {
 

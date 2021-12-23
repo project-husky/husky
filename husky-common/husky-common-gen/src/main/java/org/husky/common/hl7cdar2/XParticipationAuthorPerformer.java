@@ -27,14 +27,14 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ * 
  * <pre>
- * &lt;simpleType name="x_ParticipationAuthorPerformer">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="PRF"/>
- *     &lt;enumeration value="AUT"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="x_ParticipationAuthorPerformer"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="PRF"/&gt;
+ *     &lt;enumeration value="AUT"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "x_ParticipationAuthorPerformer")

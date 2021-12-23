@@ -27,17 +27,17 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ * 
  * <pre>
- * &lt;simpleType name="EntityClassPlace">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="PLC"/>
- *     &lt;enumeration value="CITY"/>
- *     &lt;enumeration value="COUNTRY"/>
- *     &lt;enumeration value="COUNTY"/>
- *     &lt;enumeration value="PROVINCE"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="EntityClassPlace"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="PLC"/&gt;
+ *     &lt;enumeration value="CITY"/&gt;
+ *     &lt;enumeration value="COUNTRY"/&gt;
+ *     &lt;enumeration value="COUNTY"/&gt;
+ *     &lt;enumeration value="PROVINCE"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "EntityClassPlace")

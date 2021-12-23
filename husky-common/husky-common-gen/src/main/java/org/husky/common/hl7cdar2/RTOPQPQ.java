@@ -29,16 +29,16 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="RTO_PQ_PQ">
- *   &lt;complexContent>
- *     &lt;extension base="{urn:hl7-org:v3}QTY">
- *       &lt;sequence>
- *         &lt;element name="numerator" type="{urn:hl7-org:v3}PQ"/>
- *         &lt;element name="denominator" type="{urn:hl7-org:v3}PQ"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="RTO_PQ_PQ"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{urn:hl7-org:v3}QTY"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="numerator" type="{urn:hl7-org:v3}PQ"/&gt;
+ *         &lt;element name="denominator" type="{urn:hl7-org:v3}PQ"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

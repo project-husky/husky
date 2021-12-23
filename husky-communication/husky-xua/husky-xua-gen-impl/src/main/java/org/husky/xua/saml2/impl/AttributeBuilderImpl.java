@@ -26,12 +26,7 @@ import org.opensaml.core.xml.schema.impl.XSStringBuilder;
 import org.opensaml.saml.saml2.core.AttributeValue;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Class implementing the corresponding interface for Attribute building.</div>
- * <div class="de">Die Klasse implementiert das entsprechende Interface um Attribute bilden zu k&ooml;nnen.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Class implementing the corresponding interface for Attribute building.
  */
 public class AttributeBuilderImpl implements AttributeBuilder,
 		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Attribute, AttributeType> {
@@ -41,14 +36,7 @@ public class AttributeBuilderImpl implements AttributeBuilder,
 	private AttributeImpl attributeImpl;
 
 	/**
-	 *
-	 * <!-- @formatter:off -->
-	 * <div class="en">Default constructor to instanciate the object.</div>
-	 * <div class="de">Default Konstruktor für die Instanziierung des Objekts.</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div>
-	 *
-	 * <!-- @formatter:on -->
+	 *Default constructor to instanciate the object.
 	 */
 	public AttributeBuilderImpl() {
 		attribute = new org.opensaml.saml.saml2.core.impl.AttributeBuilder().buildObject();

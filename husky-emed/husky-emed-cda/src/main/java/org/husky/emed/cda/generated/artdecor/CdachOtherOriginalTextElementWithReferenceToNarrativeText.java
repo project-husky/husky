@@ -1,9 +1,16 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
 package org.husky.emed.cda.generated.artdecor;
 
 import javax.annotation.processing.Generated;
-
 import org.husky.common.hl7cdar2.ED;
-import org.husky.common.hl7cdar2.TEL;
 
 /**
  * cdach_other_OriginalTextElementWithReferenceToNarrativeText
@@ -15,25 +22,25 @@ import org.husky.common.hl7cdar2.TEL;
  * Version: 2021<br>
  * Status: draft
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-09-08")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
 public class CdachOtherOriginalTextElementWithReferenceToNarrativeText extends ED {
 
     public CdachOtherOriginalTextElementWithReferenceToNarrativeText() {
     }
 
     /**
-     * Gets the hl7Reference
-     * The reference to the corresponding text in the human readable part must be specified by reference to content[@ID]: reference[@value='#xxx']
+     * Gets the hl7Reference<br/>
+     * The reference to the corresponding text in the human readable part must be specified by reference to content[{@literal @}ID]: reference[{@literal @}value='#xxx']
      */
-    public TEL getHl7Reference() {
+    public org.husky.common.hl7cdar2.TEL getHl7Reference() {
         return reference;
     }
 
     /**
-     * Sets the hl7Reference
-     * The reference to the corresponding text in the human readable part must be specified by reference to content[@ID]: reference[@value='#xxx']
+     * Sets the hl7Reference<br/>
+     * The reference to the corresponding text in the human readable part must be specified by reference to content[{@literal @}ID]: reference[{@literal @}value='#xxx']
      */
-    public void setHl7Reference(TEL value) {
+    public void setHl7Reference(org.husky.common.hl7cdar2.TEL value) {
         this.reference = value;
     }
 }

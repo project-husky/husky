@@ -27,16 +27,16 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ * 
  * <pre>
- * &lt;simpleType name="x_RoleClassCoverage">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="COVPTY"/>
- *     &lt;enumeration value="POLHOLD"/>
- *     &lt;enumeration value="SPNSR"/>
- *     &lt;enumeration value="UNDWRT"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="x_RoleClassCoverage"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="COVPTY"/&gt;
+ *     &lt;enumeration value="POLHOLD"/&gt;
+ *     &lt;enumeration value="SPNSR"/&gt;
+ *     &lt;enumeration value="UNDWRT"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "x_RoleClassCoverage")

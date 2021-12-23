@@ -16,12 +16,7 @@ import org.husky.xua.saml2.impl.ArtifactResponseBuilderImpl;
 import org.w3c.dom.Element;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Class implementing the corresponding interface Deserializer<ArtifactResponse> .</div>
- * <div class="de">Die Klasse implementiert das entsprechende Interface Deserializer<ArtifactResponse> .</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Class implementing the corresponding interface {@code Deserializer<ArtifactResponse>}.
  */
 public class ArtifactResponseDeserializerImpl extends
 		AbstractDeserializerImpl<org.opensaml.saml.saml2.core.ArtifactResponse, ArtifactResponse> {

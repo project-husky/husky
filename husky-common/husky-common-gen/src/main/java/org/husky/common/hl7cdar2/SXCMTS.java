@@ -28,13 +28,13 @@ import javax.xml.bind.annotation.*;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="SXCM_TS">
- *   &lt;complexContent>
- *     &lt;extension base="{urn:hl7-org:v3}TS">
- *       &lt;attribute name="operator" type="{urn:hl7-org:v3}SetOperator" default="I" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="SXCM_TS"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{urn:hl7-org:v3}TS"&gt;
+ *       &lt;attribute name="operator" type="{urn:hl7-org:v3}SetOperator" default="I" /&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

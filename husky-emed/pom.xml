@@ -13,9 +13,10 @@
 	<packaging>pom</packaging>
 	<name>Husky eMedication</name>
 	<modules>
-		<!-- <module>husky-emed-common</module> -->
 		<module>husky-emed-cda</module>
-		<!-- <module>husky-emed-fhir</module> -->
+		<module>husky-emed-cda-narrative</module>
+		<module>husky-emed-cda-validation</module>
+		<module>husky-emed-common</module>
 		<module>husky-emed-conversion</module>
 	</modules>
 </project>

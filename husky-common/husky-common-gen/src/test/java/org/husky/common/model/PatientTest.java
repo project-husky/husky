@@ -33,7 +33,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.common.model.Patient#addAddress(org.husky.common.Address)}
+	 * {@link org.husky.common.model.Patient#addAddress(org.husky.common.model.Address)}
 	 * .
 	 */
 	@Test
@@ -43,7 +43,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.common.model.Patient#addId(org.husky.common.Identificator)}
+	 * {@link org.husky.common.model.Patient#addId(org.husky.common.model.Identificator)}
 	 * .
 	 */
 	@Test
@@ -53,38 +53,11 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.common.model.Patient#addName(org.husky.common.Name)}
+	 * {@link org.husky.common.model.Patient#addName(org.husky.common.model.Name)}
 	 * .
 	 */
 	@Test
 	public void testAddName() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.husky.common.model.Patient#copyMdhtPatient()}.
-	 */
-	@Test
-	public void testCopyMdhtPatient() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.husky.common.model.Patient#copyMdhtPatientRole()}.
-	 */
-	@Test
-	public void testCopyMdhtPatientRole() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.husky.common.model.Patient#copyMdhtRecordTarget()}.
-	 */
-	@Test
-	public void testCopyMdhtRecordTarget() {
 		fail("Not yet implemented");
 	}
 
@@ -108,7 +81,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.common.model.Patient#Patient(org.husky.common.Name, org.husky.common.enums.AdministrativeGender, java.util.Date)}
+	 * {@link org.husky.common.model.Patient#Patient(org.husky.common.model.Name, org.husky.common.enums.AdministrativeGender, java.util.Date)}
 	 * .
 	 */
 	@Test
@@ -118,7 +91,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.common.model.Patient#Patient(org.husky.common.Name, org.husky.common.enums.AdministrativeGender, java.util.Date, org.husky.common.Identificator)}
+	 * {@link org.husky.common.model.Patient#Patient(org.husky.common.model.Name, org.husky.common.enums.AdministrativeGender, java.util.Date, org.husky.common.model.Identificator)}
 	 * .
 	 */
 	@Test
@@ -128,7 +101,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.common.model.Patient#Patient(org.openhealthtools.mdht.uml.cda.RecordTarget)}
+	 * {@link org.husky.common.model.Patient#Patient(org.husky.common.hl7cdar2.POCDMT000040RecordTarget)}
 	 * .
 	 */
 	@Test
@@ -236,7 +209,7 @@ public class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.common.model.Patient#setTelecoms(org.husky.common.Telecoms)}
+	 * {@link org.husky.common.model.Patient#setTelecoms(java.util.List<Telecom>)}
 	 * .
 	 */
 	@Test

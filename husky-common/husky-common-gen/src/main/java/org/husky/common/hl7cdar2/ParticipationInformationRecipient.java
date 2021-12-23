@@ -27,18 +27,18 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ *
  * <pre>
- * &lt;simpleType name="ParticipationInformationRecipient">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="IRCP"/>
- *     &lt;enumeration value="NOT"/>
- *     &lt;enumeration value="PRCP"/>
- *     &lt;enumeration value="REFB"/>
- *     &lt;enumeration value="REFT"/>
- *     &lt;enumeration value="TRC"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="ParticipationInformationRecipient"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="IRCP"/&gt;
+ *     &lt;enumeration value="NOT"/&gt;
+ *     &lt;enumeration value="PRCP"/&gt;
+ *     &lt;enumeration value="REFB"/&gt;
+ *     &lt;enumeration value="REFT"/&gt;
+ *     &lt;enumeration value="TRC"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "ParticipationInformationRecipient")

@@ -27,19 +27,19 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ * 
  * <pre>
- * &lt;simpleType name="ActMoodIntent">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="INT"/>
- *     &lt;enumeration value="APT"/>
- *     &lt;enumeration value="ARQ"/>
- *     &lt;enumeration value="PRMS"/>
- *     &lt;enumeration value="PRP"/>
- *     &lt;enumeration value="RQO"/>
- *     &lt;enumeration value="SLOT"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="ActMoodIntent"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="INT"/&gt;
+ *     &lt;enumeration value="APT"/&gt;
+ *     &lt;enumeration value="ARQ"/&gt;
+ *     &lt;enumeration value="PRMS"/&gt;
+ *     &lt;enumeration value="PRP"/&gt;
+ *     &lt;enumeration value="RQO"/&gt;
+ *     &lt;enumeration value="SLOT"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "ActMoodIntent")

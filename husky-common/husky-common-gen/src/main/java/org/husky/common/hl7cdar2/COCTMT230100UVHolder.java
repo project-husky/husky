@@ -30,18 +30,18 @@ import java.util.List;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="COCT_MT230100UV.Holder">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;group ref="{urn:hl7-org:v3}InfrastructureRootElements"/>
- *         &lt;element name="role" type="{urn:ihe:pharm}COCT_MT230100UV.Role"/>
- *       &lt;/sequence>
- *       &lt;attribute name="nullFlavor" type="{urn:hl7-org:v3}NullFlavor" />
- *       &lt;attribute name="typeCode" use="required" type="{urn:hl7-org:v3}ParticipationHolder" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="COCT_MT230100UV.Holder"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;group ref="{urn:hl7-org:v3}InfrastructureRootElements"/&gt;
+ *         &lt;element name="role" type="{urn:ihe:pharm}COCT_MT230100UV.Role"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="nullFlavor" type="{urn:hl7-org:v3}NullFlavor" /&gt;
+ *       &lt;attribute name="typeCode" use="required" type="{urn:hl7-org:v3}ParticipationHolder" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

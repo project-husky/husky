@@ -38,7 +38,7 @@ class ClientFactoryChTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.xua.communication.ch.clients.impl.ClientFactoryCh#getPpfClient(org.husky.xua.communication.ch.ppq.config.PpClientConfig)}.
+	 * {@link org.husky.communication.ch.ppq.impl.clients.ClientFactoryCh#getPpfClient(org.husky.communication.ch.ppq.api.config.PpClientConfig)}.
 	 */
 	@Test
 	void testGetPpfClient() {
@@ -48,7 +48,7 @@ class ClientFactoryChTest {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.xua.communication.ch.clients.impl.ClientFactoryCh#getPpqClient(org.husky.xua.communication.ch.ppq.config.PpClientConfig)}.
+	 * {@link org.husky.communication.ch.ppq.impl.clients.ClientFactoryCh#getPpqClient(org.husky.communication.ch.ppq.api.config.PpClientConfig)}.
 	 */
 	@Test
 	void testGetPpqClient() {

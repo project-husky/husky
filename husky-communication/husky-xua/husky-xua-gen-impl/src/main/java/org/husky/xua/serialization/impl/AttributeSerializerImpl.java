@@ -17,12 +17,7 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeTy
 import org.w3c.dom.Element;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Implementation class of Serializer<Attribute</div>
- * <div class="de">Implementations Klasse von Serializer<Attribute</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Implementation class of {@code Serializer<Attribute>}.
  */
 public class AttributeSerializerImpl extends AbstractSerializerImpl
 		implements Serializer<AttributeType> {

@@ -27,13 +27,13 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ *
  * <pre>
- * &lt;simpleType name="EntityDeterminerSpecific">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="INSTANCE"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="EntityDeterminerSpecific"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="INSTANCE"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "EntityDeterminerSpecific")

@@ -52,7 +52,7 @@ public class V3PixSource extends CamelService {
 	/**
 	 * Constructor:
 	 * 
-	 * @param pdqServerURI the URI for the server to use for query requests
+	 * @param pixServerURI the URI for the server to use for query requests
 	 *                     (required, cannot be null)
 	 */
 	public V3PixSource(URI pixServerURI, CamelContext context, AuditContext auditorContext) {

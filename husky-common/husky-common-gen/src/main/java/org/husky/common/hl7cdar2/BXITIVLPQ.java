@@ -32,13 +32,13 @@ import java.math.BigInteger;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="BXIT_IVL_PQ">
- *   &lt;complexContent>
- *     &lt;extension base="{urn:hl7-org:v3}IVL_PQ">
- *       &lt;attribute name="qty" type="{urn:hl7-org:v3}int" default="1" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="BXIT_IVL_PQ"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{urn:hl7-org:v3}IVL_PQ"&gt;
+ *       &lt;attribute name="qty" type="{urn:hl7-org:v3}int" default="1" /&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

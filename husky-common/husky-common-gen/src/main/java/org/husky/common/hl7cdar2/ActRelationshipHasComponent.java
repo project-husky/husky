@@ -27,16 +27,16 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ * 
  * <pre>
- * &lt;simpleType name="ActRelationshipHasComponent">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="COMP"/>
- *     &lt;enumeration value="ARR"/>
- *     &lt;enumeration value="CTRLV"/>
- *     &lt;enumeration value="DEP"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="ActRelationshipHasComponent"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="COMP"/&gt;
+ *     &lt;enumeration value="ARR"/&gt;
+ *     &lt;enumeration value="CTRLV"/&gt;
+ *     &lt;enumeration value="DEP"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "ActRelationshipHasComponent")

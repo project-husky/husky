@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -79,16 +79,33 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Extracts XDS Document Entry Metadata from generic CDA R2 document
- * 
- * @author <a href="mailto:seknoop@us.ibm.com">Sarah Knoop</a>
  *
+ * @author <a href="mailto:seknoop@us.ibm.com">Sarah Knoop</a>
  */
 public class CDAR2Extractor {
+
+	/**
+	 * Map between CDA R2 Administrative Gender codes and HL7v2.5 Table
+	 * 001(Administrative Sex). Keys are CDAR2 AdministrativeGender object literal
+	 * string representations and values are corresponding HL7v2.5 gender code
+	 * values as strings.
+	 */
+	private static final Map<String, String> ADMIN_GENDER_TABLE_001;
 
 	/**
 	 * logger
 	 */
 	private static Logger logger = LoggerFactory.getLogger(CDAR2Extractor.class);
+
+	static {
+		ADMIN_GENDER_TABLE_001 = new HashMap<>();
+		ADMIN_GENDER_TABLE_001.put(AdministrativeGender.MALE_CODE, "M");
+		ADMIN_GENDER_TABLE_001.put(AdministrativeGender.FEMALE_CODE, "F");
+		ADMIN_GENDER_TABLE_001.put(AdministrativeGender.UNDIFFERENTIATED_CODE, "O");
+	}
+
+	/** CDA R2 document object */
+	protected POCDMT000040ClinicalDocument cda;
 
 	private static final String INFORMATION_NOT_EXTRACTED = """
 			DocumentEntry.parentDocument expresses the id and relationship of a parent document to this CDA document in the XDS Registry.
@@ -100,23 +117,6 @@ public class CDAR2Extractor {
 			Thus, it cannot be extracted.
 			""";
 	private static final String TIMEZONE = "-ZZZZ";
-
-	/**
-	 * Map between CDA R2 Administrative Gender codes and HL7v2.5 Table
-	 * 001(Administrative Sex). Keys are CDAR2 AdministrativeGender object literal
-	 * string representations and values are corresponding HL7v2.5 gender code
-	 * values as strings.
-	 */
-	private static final Map<String, String> ADMIN_GENDER_TABLE_001;
-	static {
-		ADMIN_GENDER_TABLE_001 = new HashMap<>();
-		ADMIN_GENDER_TABLE_001.put(AdministrativeGender.MALE_CODE, "M");
-		ADMIN_GENDER_TABLE_001.put(AdministrativeGender.FEMALE_CODE, "F");
-		ADMIN_GENDER_TABLE_001.put(AdministrativeGender.UNDIFFERENTIATED_CODE, "O");
-	}
-
-	/** CDA R2 document object */
-	protected POCDMT000040ClinicalDocument cda;
 
 	/**
 	 * Loads CDA Document
@@ -131,6 +131,7 @@ public class CDAR2Extractor {
 	/**
 	 * Entry point to invoke extraction process. <br>
 	 * NOTES:
+	 * <ul>
 	 * <li>1. Only the first ClinicalDocument/documentationOf instance will be
 	 * considered for it's ServiceEvent time to fill values for serviceStartTime and
 	 * serviceStopTime</li>
@@ -147,6 +148,7 @@ public class CDAR2Extractor {
 	 * SourcePatientInfo beyond local patient ids, patient name, address, birthdate
 	 * and gender. Other patient info in the CDA that corresponds to source patient
 	 * info will not be extracted.</li>
+	 * </ul>
 	 */
 	public DocumentEntry extract() throws MetadataExtractionException {
 		logger.info("BEGIN CDAR2Extractor.extract()");
@@ -295,10 +297,6 @@ public class CDAR2Extractor {
 		return docEntry;
 	}
 
-/////////////////////////////////////////////////////////////////////////////
-// Implementations for DocumentEntryElementExtractor interface
-/////////////////////////////////////////////////////////////////////////////
-
 	/**
 	 * Extracts the relevant authorInstitution, authorPerson, authorRole and
 	 * authorSpeciality information from the author list in the CDA: <br>
@@ -376,7 +374,7 @@ public class CDAR2Extractor {
 	/**
 	 * CDA R2 document header does not contain information corresponding to
 	 * availablity status metadata.
-	 * 
+	 *
 	 * @return null
 	 */
 	public AvailabilityStatus extractAvailabilityStatus() {
@@ -390,7 +388,6 @@ public class CDAR2Extractor {
 	 * ClinicalDocument/code. Implementation consistent with PCC TF-2 Medical
 	 * Document Binding to XDS, XDM and XDR. <br>
 	 * Note: typeCode and classCode data sources are the same in the CDA
-	 *
 	 */
 	public Code extractClassCode() {
 		if (cda.getCode() == null) {
@@ -403,7 +400,7 @@ public class CDAR2Extractor {
 	/**
 	 * CDA R2 document header does not contain information corresponding to comments
 	 * metadata.
-	 * 
+	 *
 	 * @return null
 	 */
 	public LocalizedString extractComments() {
@@ -446,7 +443,7 @@ public class CDAR2Extractor {
 	/**
 	 * DocumentEntry.entryUUID is an XDS specific attribute and outside the scope of
 	 * any CDA R2 document. Thus, it cannot be extracted.
-	 * 
+	 *
 	 * @return null
 	 */
 	public String extractEntryUUID() {
@@ -509,8 +506,6 @@ public class CDAR2Extractor {
 	 * Note: healthcareFacilityTypeCode and practiceSettingCode data sources are the
 	 * same in the CDA
 	 */
-// FIXME Implementation ALMOST consistent with PCC TF-2 Medical Document Binding
-// * to XDS, XDM and XDR.
 	public Code extractHealthCareFacilityTypeCode() {
 		if (cda.getComponentOf() != null && cda.getComponentOf().getEncompassingEncounter() != null
 				&& cda.getComponentOf().getEncompassingEncounter().getLocation() != null
@@ -538,12 +533,14 @@ public class CDAR2Extractor {
 	 * ClinicalDocument/legalAuthenticator/assignedEntity/id and
 	 * ClinicalDocument/legalAuthenticator/assignedEntity/assignedPerson/name <br>
 	 * NOTES:
+	 * <ul>
 	 * <li>1. Only the first ClinicalDocument/legalAuthenticator/assignedEntity/id
 	 * instance and first
 	 * ClinicalDocument/legalAuthenticator/assignedEntity/assignedPerson/name
 	 * instance will be considered for values for the legal authenticator XCN</li>
 	 * <li>2. Implementation consistent with PCC TF-2 Medical Document Binding to
 	 * XDS, XDM and XDR.</li>
+	 * </ul>
 	 */
 	public Person extractLegalAuthenticator() {
 		if (cda.getLegalAuthenticator() != null && cda.getLegalAuthenticator().getAssignedEntity() != null) {
@@ -647,6 +644,7 @@ public class CDAR2Extractor {
 	 * the timestamp in the corresponding CDA element contains the timezone offset,
 	 * this method will convert the timestamp to GMT. If the timezone offset is
 	 * ommitted, then the timestamp is assumed to be in GMT. NOTES:
+	 * <ul>
 	 * <li>1. Finds the minimum low time among
 	 * ClinicalDocument/documentationOf/serviceEvent/effectiveTime instance will be
 	 * for serviceStartTime.</li>
@@ -656,6 +654,7 @@ public class CDAR2Extractor {
 	 * UTC.</li>
 	 * <li>3. Implementation consistent with PCC TF-2 Medical Document Binding to
 	 * XDS, XDM and XDR.</li>
+	 * </ul>
 	 */
 	public Timestamp extractServiceStartTime() {
 		if (!atLeastOne(cda.getDocumentationOf())) {
@@ -706,6 +705,7 @@ public class CDAR2Extractor {
 	 * this method will convert the timestamp to GMT. If the timezone offset is
 	 * ommitted, then the timestamp is assumed to be in GMT. <br>
 	 * NOTES:
+	 * <ul>
 	 * <li>1. Finds the maximum high time among
 	 * ClinicalDocument/documentationOf/serviceEvent/effectiveTime instance will be
 	 * for serviceStartTime.</li>
@@ -715,6 +715,7 @@ public class CDAR2Extractor {
 	 * UTC.</li>
 	 * <li>3.Implementation consistent with PCC TF-2 Medical Document Binding to
 	 * XDS, XDM and XDR.</li>
+	 * </ul>
 	 */
 	public Timestamp extractServiceStopTime() {
 		if (!atLeastOne(cda.getDocumentationOf())) {
@@ -773,6 +774,7 @@ public class CDAR2Extractor {
 	 * Extracts the relevant sourcePatientId information from the CDA:
 	 * ClinicalDocument/recordTarget/patientRole/id <br>
 	 * NOTES:
+	 * <ul>
 	 * <li>1. Only the first ClinicalDocument/recordTarget instance will be
 	 * considered for sourcePatientId (for which only the first patientRole/id on
 	 * it's list will be taken) and sourcePatientInfo .</li>
@@ -781,6 +783,7 @@ public class CDAR2Extractor {
 	 * be extracted.</li>
 	 * <li>3. Implementation consistent with PCC TF-2 Medical Document Binding to
 	 * XDS, XDM and XDR.</li>
+	 * </ul>
 	 */
 	public Identifiable extractSourcePatientId() {
 		if (!atLeastOne(cda.getRecordTarget())) {
@@ -805,6 +808,7 @@ public class CDAR2Extractor {
 	 * Extracts the relevant sourcePatientInfo information from the CDA:
 	 * ClinicalDocument/recordTarget/patientRole <br>
 	 * NOTES:
+	 * <ul>
 	 * <li>1. Only the first ClinicalDocument/recordTarget instance will be
 	 * considered for sourcePatientId (for which only the first patientRole/id on
 	 * it's list will be taken) and sourcePatientInfo .</li>
@@ -821,6 +825,7 @@ public class CDAR2Extractor {
 	 * first subelements of the AD type will be considered for extraction.</li>
 	 * <li>6. Implementation consistent with PCC TF-2 Medical Document Binding to
 	 * XDS, XDM and XDR.</li>
+	 * </ul>
 	 */
 	public PatientInfo extractSourcePatientInfo() {
 		if (!atLeastOne(cda.getRecordTarget())) {
@@ -967,168 +972,168 @@ public class CDAR2Extractor {
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 
-	/**
-	 * Extracts authorInstitution from CDAR2
-	 * <li>NOTES:</li>
-	 * <li>1. only the first organization name of the list is extracted and
-	 * processed as XON.1</li>
-	 * <li>2. only the first id of the list of ids is extracted for XON.3 and
-	 * XON.6.1, XON.6.2 (pending resolution to IT CP 316)</li>
-	 * <li>3. Implementation consistent with PCC TF-2 Medical Document Binding to
-	 * XDS, XDM and XDR, pending resolution to ITI CP 316.</li>
-	 * 
-	 * @param org ClinicalDocument/author/assignedAuthor/representedOrganization of
-	 *          type Organization expected.
-	 * @return Returns null if institution cannot be extracted
-	 */
-	private Organization extractAuthorInstitution(
-			POCDMT000040Organization org) {
-		if (org == null) {
-			return null;
-		}
+    /**
+     * Extracts authorInstitution from CDAR2
+     * <ul>
+     * <li>NOTES:</li>
+     * <li>1. only the first organization name of the list is extracted and
+     * processed as XON.1</li>
+     * <li>2. only the first id of the list of ids is extracted for XON.3 and
+     * XON.6.1, XON.6.2 (pending resolution to IT CP 316)</li>
+     * <li>3. Implementation consistent with PCC TF-2 Medical Document Binding to
+     * XDS, XDM and XDR, pending resolution to ITI CP 316.</li>
+     * </ul>
+     *
+     * @param org ClinicalDocument/author/assignedAuthor/representedOrganization of type Organization expected.
+     * @return Returns null if institution cannot be extracted
+     */
+    private Organization extractAuthorInstitution(
+            POCDMT000040Organization org) {
+        if (org == null) {
+            return null;
+        }
 
-		Organization retVal = null;
-		var idNull = false;
-		var nameNull = false;
+        Organization retVal = null;
+        var idNull = false;
+        var nameNull = false;
 
-		// XON.3 and XON.6
-		if (!atLeastOne(org.getId())) {
-			idNull = true;
-		}
+        // XON.3 and XON.6
+        if (!atLeastOne(org.getId())) {
+            idNull = true;
+        }
 
-		// XON.1
-		if (!atLeastOne(org.getName())) {
-			nameNull = true;
-		}
+        // XON.1
+        if (!atLeastOne(org.getName())) {
+            nameNull = true;
+        }
 
-		if (idNull) {
-			retVal = map(org.getName().get(0), null);
-		} else if (nameNull) {
-			retVal = map(null, org.getId().get(0));
-		} else {
-			retVal = map(org.getName().get(0), org.getId().get(0));
-		}
+        if (idNull) {
+            retVal = map(org.getName().get(0), null);
+        } else if (nameNull) {
+            retVal = map(null, org.getId().get(0));
+        } else {
+            retVal = map(org.getName().get(0), org.getId().get(0));
+        }
 
-		return retVal;
+        return retVal;
 
-	}
+    }
 
-	/**
-	 * Extracts authorPerson from CDAR2 of type AssignedAuthor expected.
-	 * <li>NOTES:</li>
-	 * <li>1. only the first id of the list of ids is extracted for XCN.1, XCN.9.1,
-	 * XCN.9.2</li>
-	 * <li>2. only the first person name of the assignedAuthor/assignedPerson name
-	 * list (and first entries in the sub lists) are extracted and processed for
-	 * XCN.2 to XCN.6</li>
-	 * <li>3. Implementation consistent with PCC TF-2 Medical Document Binding to
-	 * XDS, XDM and XDR</li>
-	 * 
-	 * @param aAuth ClinicalDocument/author/assignedAuthor/ object
-	 * @return Returns null if author cannot be extracted
-	 */
-	private Person extractAuthorPerson(POCDMT000040AssignedAuthor aAuth) {
-		if (aAuth == null) {
-			return null;
-		}
-		var idNull = false;
+    /**
+     * Extracts authorPerson from CDAR2 of type AssignedAuthor expected.
+     * <ul>
+     * <li>NOTES:</li>
+     * <li>1. only the first id of the list of ids is extracted for XCN.1, XCN.9.1,
+     * XCN.9.2</li>
+     * <li>2. only the first person name of the assignedAuthor/assignedPerson name
+     * list (and first entries in the sub lists) are extracted and processed for
+     * XCN.2 to XCN.6</li>
+     * <li>3. Implementation consistent with PCC TF-2 Medical Document Binding to
+     * XDS, XDM and XDR</li>
+     * </ul>
+     *
+     * @param aAuth ClinicalDocument/author/assignedAuthor/ object
+     * @return Returns null if author cannot be extracted
+     */
+    private Person extractAuthorPerson(POCDMT000040AssignedAuthor aAuth) {
+        if (aAuth == null) {
+            return null;
+        }
+        var idNull = false;
 
-		// XCN.1, XCN.9.1, XCN.9.2
-		if (!atLeastOne(aAuth.getId())) {
-			idNull = true;
-		} else {
-			if (aAuth.getId().get(0).getExtension() == null && aAuth.getId().get(0).getRoot() != null) {
-				aAuth.getId().get(0).setExtension(aAuth.getId().get(0).getRoot());
-				aAuth.getId().get(0).setRoot(null);
-			}
-		}
-		// XCN.2 through XCN.6
-		if (aAuth.getAssignedPerson() == null || !atLeastOne(aAuth.getAssignedPerson().getName())) {
-			if (idNull) {
-				return null;
-			}
-			return map(aAuth.getId().get(0), null);
-		} else {
-			if (idNull) {
-				return map(null, aAuth.getAssignedPerson().getName().get(0));
-			}
-			return map(aAuth.getId().get(0), aAuth.getAssignedPerson().getName().get(0));
-		}
+        // XCN.1, XCN.9.1, XCN.9.2
+        if (!atLeastOne(aAuth.getId())) {
+            idNull = true;
+        } else {
+            if (aAuth.getId().get(0).getExtension() == null && aAuth.getId().get(0).getRoot() != null) {
+                aAuth.getId().get(0).setExtension(aAuth.getId().get(0).getRoot());
+                aAuth.getId().get(0).setRoot(null);
+            }
+        }
+        // XCN.2 through XCN.6
+        if (aAuth.getAssignedPerson() == null || !atLeastOne(aAuth.getAssignedPerson().getName())) {
+            if (idNull) {
+                return null;
+            }
+            return map(aAuth.getId().get(0), null);
+        } else {
+            if (idNull) {
+                return map(null, aAuth.getAssignedPerson().getName().get(0));
+            }
+            return map(aAuth.getId().get(0), aAuth.getAssignedPerson().getName().get(0));
+        }
 
-	}
+    }
 
-	/**
-	 * Extracts authorRole from CDAR2. Implementation consistent with PCC TF-2
-	 * Medical Document Binding to XDS, XDM and XDR.
-	 * 
-	 * @param role ClinicalDocument/author/functionCode of type CE expected
-	 * @return Returns null if code cannot be extracted
-	 */
-	private Identifiable extractAuthorRole(CE role) {
-		if (role == null)
-			return null;
+    /**
+     * Extracts authorRole from CDAR2. Implementation consistent with PCC TF-2 Medical Document Binding to XDS, XDM and
+     * XDR.
+     *
+     * @param role ClinicalDocument/author/functionCode of type CE expected
+     * @return Returns null if code cannot be extracted
+     */
+    private Identifiable extractAuthorRole(CE role) {
+        if (role == null)
+            return null;
 
-		var identifiable = new Identifiable();
-		if (role.getCode() == null) {
-			return null;
-		}
+        var identifiable = new Identifiable();
+        if (role.getCode() == null) {
+            return null;
+        }
 
-		identifiable.setId(role.getCode());
+        identifiable.setId(role.getCode());
 
-		return identifiable;
-	}
+        return identifiable;
+    }
 
-	/**
-	 * Extracts authorSpeciality from CDAR2. Implementation consistent with PCC TF-2
-	 * Medical Document Binding to XDS, XDM and XDR.
-	 * 
-	 * @param spec ClinicalDocument/author/assignedAuthor/code of type CE expected
-	 * @return Returns null if code cannot be extracted
-	 */
-	private Identifiable extractAuthorSpeciality(CE spec) {
-		if (spec == null)
-			return null;
+    /**
+     * Extracts authorSpeciality from CDAR2. Implementation consistent with PCC TF-2 Medical Document Binding to XDS,
+     * XDM and XDR.
+     *
+     * @param spec ClinicalDocument/author/assignedAuthor/code of type CE expected
+     * @return Returns null if code cannot be extracted
+     */
+    private Identifiable extractAuthorSpeciality(CE spec) {
+        if (spec == null)
+            return null;
 
-		var identifiable = new Identifiable();
-		if (spec.getCode() == null) {
-			return null;
-		}
+        var identifiable = new Identifiable();
+        if (spec.getCode() == null) {
+            return null;
+        }
 
-		identifiable.setId(spec.getCode());
-		return identifiable;
-	}
+        identifiable.setId(spec.getCode());
+        return identifiable;
+    }
 
-	/**
+    /**
 	 * Extracts authorTelecommunication from CDAR2
+	 * <ul>
 	 * <li>NOTES:</li>
 	 * <li>1. only the first telcom is extracted
-	 * 
+	 * </ul>
+	 *
 	 * @param tel ClinicalDocument/author/assignedAuthor/representedOrganization of
-	 *          type Organization expected.
+	 *            type Organization expected.
 	 * @return Returns null if telcom cannot be extracted
 	 */
-	private Telecom extractAuthorTelecommunication(TEL tel) {
-		if (tel == null) {
-			return null;
-		}
-		return map(tel);
-	}
+    private Telecom extractAuthorTelecommunication(TEL tel) {
+        if (tel == null) {
+            return null;
+        }
+        return map(tel);
+    }
 
-	/**
-	 * Extracts Pid-11 (patient address)
-	 * 
-	 * @param addr ClinicalDocument / recordTarget / patient / addr of type AD expected
-	 * @return
-	 */
-	private Address extractPid11(AD addr) {
-		return map(addr);
-	}
+    /**
+     * Extracts Pid-11 (patient address)
+     *
+     * @param addr ClinicalDocument / recordTarget / patient / addr of type AD expected
+     * @return
+     */
+    private Address extractPid11(AD addr) {
+        return map(addr);
+    }
 
-////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-// Support methods for extractSourcePatientInfo() - the PID segment
-/////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 	/**
 	 * Extracts Pid-3 (patient id)
 	 * 
@@ -1205,7 +1210,7 @@ public class CDAR2Extractor {
 	 * Checks to see if the list has at least one element.
 	 * 
 	 * @param l
-	 * @return false if l is null, if l.size() < 1 or if l.get(0) is null.
+	 * @return false if l is null, if l.size() &lt; 1 or if l.get(0) is null.
 	 *         Otherwise, return true.
 	 */
 	protected boolean atLeastOne(List<?> l) {
@@ -1215,11 +1220,13 @@ public class CDAR2Extractor {
 	/**
 	 * Maps CDA R2 AD datatype to the OHT model version of the HL7 v2.5 XAD data
 	 * type
+	 * <ul>
 	 * <li>NOTES:</li>
 	 * <li>1. only the first entries in the sub lists for address parts are
 	 * extracted and processed for XAD.1.1, XAD.2 through XAD.6</li>
 	 * <li>2. XAD.9 is not extracted at this point due to IHE restrictions on
 	 * metadata, could be enabled in the future.</li>
+	 * </ul>
 	 * 
 	 * @param addr
 	 * @return
@@ -1349,12 +1356,14 @@ public class CDAR2Extractor {
 	/**
 	 * Maps CDA R2 II data type to components to the OHT model version of a HL7 v2.5
 	 * CX data type
+	 * <ul>
 	 * <li>NOTES:</li>
 	 * <li>1. Always sets CX.4.3 to "ISO"</li>
 	 * <li>2. XDS metadata does not accept CX types that have more or fewer
 	 * components than CX.1, CX.4.2,CX.4.3. Other corresponding componets will not
 	 * be extracted. (ie. will not extract assigningAuthorityName attribute from II
 	 * type)</li>
+	 * </ul>
 	 * 
 	 * @param id
 	 * @return
@@ -1452,9 +1461,12 @@ public class CDAR2Extractor {
 	/**
 	 * Maps CDA R2 PN datatype to the OHT model version of the HL7 v2.5 XPN data
 	 * type.
+	 * 
+	 * <ul>
 	 * <li>NOTES:</li>
 	 * <li>1. only the first entries in the sub lists for name parts are extracted
 	 * and processed for XPN.1 to XPN.5</li>
+	 * </ul>
 	 * 
 	 * @param name
 	 * @return

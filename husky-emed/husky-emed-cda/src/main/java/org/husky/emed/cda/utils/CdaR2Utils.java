@@ -1,10 +1,20 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
 package org.husky.emed.cda.utils;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.dataflow.qual.SideEffectFree;
 import org.husky.common.hl7cdar2.*;
+import org.husky.emed.errors.InvalidEmedContentException;
+import org.husky.emed.models.common.EmedReference;
 
-import java.math.BigInteger;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -81,26 +91,83 @@ public class CdaR2Utils {
                 .findAny();
     }
 
+    /**
+     * Constructs a new eMed reference from a Supply reference.
+     *
+     * @param supply The Supply element.
+     * @return the created eMed reference.
+     * @throws InvalidEmedContentException if the CCE document is invalid.
+     */
+    public static EmedReference toEmedReference(final POCDMT000040Supply supply) {
+        Objects.requireNonNull(supply);
+        final II id = (!supply.getId().isEmpty()) ? supply.getId().get(0) : null;
+        if (!IiUtils.isValidUid(id) || supply.getId().size() > 1) {
+            throw new InvalidEmedContentException("The Supply item ID is invalid");
+        }
+        final String documentId;
+        if (!supply.getReference().isEmpty()) {
+            final II docIi = supply.getReference().get(0).getExternalDocument().getId().get(0);
+            if (!IiUtils.isValidUuid(docIi)) {
+                throw new InvalidEmedContentException("The Supply document ID is invalid");
+            }
+            documentId = IiUtils.getNormalizedUuid(docIi);
+        } else {
+            documentId = null;
+        }
+        return new EmedReference(documentId, null);
+    }
+
 
     /**
-     * Converts the given value to a HL7 CDA R2 INT.
+     * Constructs a new eMed reference from an Observation reference.
      *
-     * @param value The value.
-     * @return the int.
+     * @param observation The Observation element.
+     * @return the created eMed reference.
+     * @throws InvalidEmedContentException if the CCE document is invalid.
      */
-    public static INT createInt(final BigInteger value) {
-        final var retVal = new INT();
-        retVal.setValue(value);
-        return retVal;
+    public static EmedReference toEmedReference(final POCDMT000040Observation observation) throws InvalidEmedContentException {
+        Objects.requireNonNull(observation);
+        final II id = (!observation.getId().isEmpty()) ? observation.getId().get(0) : null;
+        if (!IiUtils.isValidUid(id) || observation.getId().size() > 1) {
+            throw new InvalidEmedContentException("The Observation item ID is invalid");
+        }
+        final String documentId;
+        if (!observation.getReference().isEmpty()) {
+            final II docIi = observation.getReference().get(0).getExternalDocument().getId().get(0);
+            if (!IiUtils.isValidUuid(docIi)) {
+                throw new InvalidEmedContentException("The Observation document ID is invalid");
+            }
+            documentId = IiUtils.getNormalizedUuid(docIi);
+        } else {
+            documentId = null;
+        }
+        return new EmedReference(documentId, null);
     }
 
     /**
-     * Converts the given value to a HL7 CDA R2 INT.
+     * Constructs a new eMed reference from a SubstanceAdministration reference.
      *
-     * @param value The value.
-     * @return the int.
+     * @param substanceAdministration The SubstanceAdministration element.
+     * @return the created eMed reference.
+     * @throws InvalidEmedContentException if the CCE document is invalid.
      */
-    public static INT createInt(final Integer value) {
-        return createInt(BigInteger.valueOf(value));
+    public static EmedReference toEmedReference(final POCDMT000040SubstanceAdministration substanceAdministration) throws InvalidEmedContentException {
+        Objects.requireNonNull(substanceAdministration);
+        final II id = (!substanceAdministration.getId().isEmpty()) ? substanceAdministration.getId().get(0) : null;
+        if (!IiUtils.isValidUid(id) || substanceAdministration.getId().size() > 1) {
+            throw new InvalidEmedContentException("The SubstanceAdministration item ID is invalid");
+        }
+        final var itemId = IiUtils.getNormalizedUid(substanceAdministration.getId().get(0));
+        final String documentId;
+        if (!substanceAdministration.getReference().isEmpty()) {
+            final II docIi = substanceAdministration.getReference().get(0).getExternalDocument().getId().get(0);
+            if (!IiUtils.isValidUuid(docIi)) {
+                throw new InvalidEmedContentException("The SubstanceAdministration document ID is invalid");
+            }
+            documentId = IiUtils.getNormalizedUuid(docIi);
+        } else {
+            documentId = null;
+        }
+        return new EmedReference(documentId, itemId);
     }
 }

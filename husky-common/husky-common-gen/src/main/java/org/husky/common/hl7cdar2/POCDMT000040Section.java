@@ -32,32 +32,32 @@ import java.util.List;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="POCD_MT000040.Section">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="realmCode" type="{urn:hl7-org:v3}CS" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="typeId" type="{urn:hl7-org:v3}POCD_MT000040.InfrastructureRoot.typeId" minOccurs="0"/>
- *         &lt;element name="templateId" type="{urn:hl7-org:v3}II" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="id" type="{urn:hl7-org:v3}II" minOccurs="0"/>
- *         &lt;element name="code" type="{urn:hl7-org:v3}CE" minOccurs="0"/>
- *         &lt;element name="title" type="{urn:hl7-org:v3}ST" minOccurs="0"/>
- *         &lt;element name="text" type="{urn:hl7-org:v3}StrucDoc.Text" minOccurs="0"/>
- *         &lt;element name="confidentialityCode" type="{urn:hl7-org:v3}CE" minOccurs="0"/>
- *         &lt;element name="languageCode" type="{urn:hl7-org:v3}CS" minOccurs="0"/>
- *         &lt;element name="subject" type="{urn:hl7-org:v3}POCD_MT000040.Subject" minOccurs="0"/>
- *         &lt;element name="author" type="{urn:hl7-org:v3}POCD_MT000040.Author" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="informant" type="{urn:hl7-org:v3}POCD_MT000040.Informant12" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="entry" type="{urn:hl7-org:v3}POCD_MT000040.Entry" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="component" type="{urn:hl7-org:v3}POCD_MT000040.Component5" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute name="ID" type="{http://www.w3.org/2001/XMLSchema}ID" />
- *       &lt;attribute name="nullFlavor" type="{urn:hl7-org:v3}NullFlavor" />
- *       &lt;attribute name="classCode" type="{urn:hl7-org:v3}ActClass" fixed="DOCSECT" />
- *       &lt;attribute name="moodCode" type="{urn:hl7-org:v3}ActMood" fixed="EVN" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="POCD_MT000040.Section"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="realmCode" type="{urn:hl7-org:v3}CS" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="typeId" type="{urn:hl7-org:v3}POCD_MT000040.InfrastructureRoot.typeId" minOccurs="0"/&gt;
+ *         &lt;element name="templateId" type="{urn:hl7-org:v3}II" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="id" type="{urn:hl7-org:v3}II" minOccurs="0"/&gt;
+ *         &lt;element name="code" type="{urn:hl7-org:v3}CE" minOccurs="0"/&gt;
+ *         &lt;element name="title" type="{urn:hl7-org:v3}ST" minOccurs="0"/&gt;
+ *         &lt;element name="text" type="{urn:hl7-org:v3}StrucDoc.Text" minOccurs="0"/&gt;
+ *         &lt;element name="confidentialityCode" type="{urn:hl7-org:v3}CE" minOccurs="0"/&gt;
+ *         &lt;element name="languageCode" type="{urn:hl7-org:v3}CS" minOccurs="0"/&gt;
+ *         &lt;element name="subject" type="{urn:hl7-org:v3}POCD_MT000040.Subject" minOccurs="0"/&gt;
+ *         &lt;element name="author" type="{urn:hl7-org:v3}POCD_MT000040.Author" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="informant" type="{urn:hl7-org:v3}POCD_MT000040.Informant12" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="entry" type="{urn:hl7-org:v3}POCD_MT000040.Entry" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="component" type="{urn:hl7-org:v3}POCD_MT000040.Component5" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="ID" type="{http://www.w3.org/2001/XMLSchema}ID" /&gt;
+ *       &lt;attribute name="nullFlavor" type="{urn:hl7-org:v3}NullFlavor" /&gt;
+ *       &lt;attribute name="classCode" type="{urn:hl7-org:v3}ActClass" fixed="DOCSECT" /&gt;
+ *       &lt;attribute name="moodCode" type="{urn:hl7-org:v3}ActMood" fixed="EVN" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

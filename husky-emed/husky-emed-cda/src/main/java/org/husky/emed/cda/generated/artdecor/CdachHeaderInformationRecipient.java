@@ -1,12 +1,18 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
 package org.husky.emed.cda.generated.artdecor;
 
 import java.util.List;
 import javax.annotation.processing.Generated;
-
-import org.husky.common.hl7cdar2.II;
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040InformationRecipient;
-import org.husky.common.hl7cdar2.POCDMT000040IntendedRecipient;
 
 /**
  * cdach_header_InformationRecipient
@@ -21,7 +27,7 @@ import org.husky.common.hl7cdar2.POCDMT000040IntendedRecipient;
  * Version: 2017<br>
  * Status: active
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-09-08")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
 public class CdachHeaderInformationRecipient extends POCDMT000040InformationRecipient {
 
     public CdachHeaderInformationRecipient() {
@@ -33,9 +39,9 @@ public class CdachHeaderInformationRecipient extends POCDMT000040InformationReci
      *
      * @param root the desired fixed value for this argument.
      */
-    private static II createHl7TemplateIdFixedValue(String root) {
+    private static org.husky.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        II retVal = factory.createII();
+        org.husky.common.hl7cdar2.II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -43,28 +49,28 @@ public class CdachHeaderInformationRecipient extends POCDMT000040InformationReci
     /**
      * Gets the hl7IntendedRecipient
      */
-    public POCDMT000040IntendedRecipient getHl7IntendedRecipient() {
+    public org.husky.common.hl7cdar2.POCDMT000040IntendedRecipient getHl7IntendedRecipient() {
         return intendedRecipient;
     }
 
     /**
      * Gets the hl7TemplateId
      */
-    public List<II> getHl7TemplateId() {
+    public List<org.husky.common.hl7cdar2.II> getHl7TemplateId() {
         return templateId;
     }
 
     /**
      * Sets the hl7IntendedRecipient
      */
-    public void setHl7IntendedRecipient(POCDMT000040IntendedRecipient value) {
+    public void setHl7IntendedRecipient(org.husky.common.hl7cdar2.POCDMT000040IntendedRecipient value) {
         this.intendedRecipient = value;
     }
 
     /**
      * Sets the hl7TemplateId
      */
-    public void setHl7TemplateId(II value) {
+    public void setHl7TemplateId(org.husky.common.hl7cdar2.II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }

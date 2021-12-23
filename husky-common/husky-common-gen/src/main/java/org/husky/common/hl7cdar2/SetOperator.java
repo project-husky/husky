@@ -27,17 +27,17 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ * 
  * <pre>
- * &lt;simpleType name="SetOperator">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="A"/>
- *     &lt;enumeration value="E"/>
- *     &lt;enumeration value="H"/>
- *     &lt;enumeration value="I"/>
- *     &lt;enumeration value="P"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="SetOperator"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="A"/&gt;
+ *     &lt;enumeration value="E"/&gt;
+ *     &lt;enumeration value="H"/&gt;
+ *     &lt;enumeration value="I"/&gt;
+ *     &lt;enumeration value="P"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "SetOperator")

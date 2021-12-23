@@ -21,10 +21,10 @@ import org.husky.common.enums.ValueSetEnumInterface;
 /**
  * Enumeration of DocumentEntry.typeCode values
  * <p>
- * EN: Type of document as per Annex 3 EPRO-FDHA.<br clear="none"/><br clear="none"/>The code defines a document’s type (e.g. discharge report, laboratory report). Each document type should be assigned to precisely one document class.<br clear="none"/>.<br>
- * DE: Typ des Dokumentes (2.16.756.5.30.1.127.3.10.1.27) gemäss Anhang 3 der Verordnungen zum EPDG.<br clear="none"/><br clear="none"/>Der Code definiert den Typ eines Dokuments (z.B. Austrittsbericht, Labor-Bericht). Jeder Dokumenten-Typ sollte genau einer Dokumentenklasse zugeordnet sein.<br clear="none"/>.<br>
- * FR: Type du document selon l'annexe 3 ODEP-DFI.<br clear="none"/><br clear="none"/>Le code définit le type de document (p. ex. rapport de sortie, rapport de laboratoire). Chaque type de document doit être associé à une seule classification.<br clear="none"/>.<br>
- * IT: Tipo di documento secondo l'allegato 3 OCIP-DFI.<br clear="none"/><br clear="none"/>Il codice definisce il tipo di documento (p. es. rapporto di dimissione, rapporto di laboratorio). Ciascun tipo di documento dovrebbe essere associato a una sola classe di documenti.<br clear="none"/>.<br>
+ * EN: Type of document as per Annex 3 EPRO-FDHA.<br/><br/>The code defines a document’s type (e.g. discharge report, laboratory report). Each document type should be assigned to precisely one document class.<br/>.<br>
+ * DE: Typ des Dokumentes (2.16.756.5.30.1.127.3.10.1.27) gemäss Anhang 3 der Verordnungen zum EPDG.<br/><br/>Der Code definiert den Typ eines Dokuments (z.B. Austrittsbericht, Labor-Bericht). Jeder Dokumenten-Typ sollte genau einer Dokumentenklasse zugeordnet sein.<br/>.<br>
+ * FR: Type du document selon l'annexe 3 ODEP-DFI.<br/><br/>Le code définit le type de document (p. ex. rapport de sortie, rapport de laboratoire). Chaque type de document doit être associé à une seule classification.<br/>.<br>
+ * IT: Tipo di documento secondo l'allegato 3 OCIP-DFI.<br/><br/>Il codice definisce il tipo di documento (p. es. rapporto di dimissione, rapporto di laboratorio). Ciascun tipo di documento dovrebbe essere associato a una sola classe di documenti.<br/>.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.127.3.10.1.27<br>
  * Effective date: 2021-04-01 16:49<br>

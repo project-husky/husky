@@ -15,12 +15,7 @@ import org.husky.xua.communication.xua.XUserAssertionRequestBuilder;
 import org.husky.xua.communication.xua.impl.XUserAssertionRequestBuilderImpl;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Class implementing the corresponding interface for XUserAssertionRequest building for Swiss EPR.</div>
- * <div class="de">Die Klasse implementiert das entsprechende Interface um XUserAssertionRequest bilden zu k&ooml;nnen für Swiss EPR.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Class implementing the corresponding interface for XUserAssertionRequest building for Swiss EPR.
  */
 public class XUserAssertionRequestBuilderChImpl extends XUserAssertionRequestBuilderImpl {
 

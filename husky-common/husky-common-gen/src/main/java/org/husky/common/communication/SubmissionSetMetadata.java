@@ -41,7 +41,8 @@ public class SubmissionSetMetadata {
 		 * Extraction from the first Document Entry to the Submission Set uses
 		 * the following mapping:
 		 *
-		 * <table summary="Submission set attributes generation">
+		 * <table>
+		 * <caption>Submission set attributes generation</caption>
 		 * <thead>
 		 * <tr>
 		 * <th>Submission set attribute</th>
@@ -96,7 +97,7 @@ public class SubmissionSetMetadata {
 	/**
 	 * Constructor with IPF SubmissionSet object.
 	 *
-	 * @param ohtSubmissionSet the IPF submission set object
+	 * @param submissionSet the IPF submission set object
 	 */
 	public SubmissionSetMetadata(SubmissionSet submissionSet) {
 		this.s = submissionSet;

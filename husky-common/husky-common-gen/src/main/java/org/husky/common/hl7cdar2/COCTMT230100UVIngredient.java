@@ -31,20 +31,20 @@ import java.util.List;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="COCT_MT230100UV.Ingredient">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;group ref="{urn:hl7-org:v3}InfrastructureRootElements"/>
- *         &lt;element name="quantity" type="{urn:hl7-org:v3}RTO_PQ_PQ" minOccurs="0"/>
- *         &lt;element name="ingredient" type="{urn:ihe:pharm}COCT_MT230100UV.Substance" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute name="nullFlavor" type="{urn:hl7-org:v3}NullFlavor" />
- *       &lt;attribute name="classCode" use="required" type="{urn:hl7-org:v3}RoleClassIngredientEntity" />
- *       &lt;attribute name="negationInd" type="{urn:hl7-org:v3}bl" default="false" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="COCT_MT230100UV.Ingredient"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;group ref="{urn:hl7-org:v3}InfrastructureRootElements"/&gt;
+ *         &lt;element name="quantity" type="{urn:hl7-org:v3}RTO_PQ_PQ" minOccurs="0"/&gt;
+ *         &lt;element name="ingredient" type="{urn:ihe:pharm}COCT_MT230100UV.Substance" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="nullFlavor" type="{urn:hl7-org:v3}NullFlavor" /&gt;
+ *       &lt;attribute name="classCode" use="required" type="{urn:hl7-org:v3}RoleClassIngredientEntity" /&gt;
+ *       &lt;attribute name="negationInd" type="{urn:hl7-org:v3}bl" default="false" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

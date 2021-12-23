@@ -34,7 +34,6 @@ public class V3PdqConsumerResponse extends V3Response {
 	 * Create the V3PdqConsumerResponse given the provided XML element
 	 *
 	 * @param pdqConsumerResponseElement
-	 * @throws Exception
 	 */
 	public V3PdqConsumerResponse(PRPAIN201306UV02Type pdqConsumerResponseElement) {
 
@@ -181,8 +180,8 @@ public class V3PdqConsumerResponse extends V3Response {
 	 * @return String[] - first address for specified patient in String Array
 	 *         String[0] = Street Address Line String[1] = Additional Locator
 	 *         String[2] = City String[3] = State String[4] = Postal Code String[5]
-	 *         = <not populated> String[6] = <not populated> String[7] = <not
-	 *         populated> String[8] = County
+	 *         = {@code <not populated>} String[6] = {@code <not populated>} String[7] = {@code <not
+	 *         populated>} String[8] = County
 	 */
 	public String[] getPatientAddress(int patientIndex) {
 		// just get the first address
@@ -197,8 +196,8 @@ public class V3PdqConsumerResponse extends V3Response {
 	 * @return String[] - specified address for specified patient in String Array
 	 *         String[0] = Street Address Line String[1] = Additional Locator
 	 *         String[2] = City String[3] = State String[4] = Postal Code String[5]
-	 *         = <not populated> String[6] = <not populated> String[7] = <not
-	 *         populated> String[8] = County
+	 *         = {@code <not populated>} String[6] = {@code <not populated>} String[7] = {@code <not
+	 *         populated>} String[8] = County
 	 */
 	public String[] getPatientAddress(int patientIndex, int addrIndex) {
 		var addressArray = new String[9];

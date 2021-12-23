@@ -37,21 +37,21 @@ import java.util.Objects;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="ED">
- *   &lt;complexContent>
- *     &lt;extension base="{urn:hl7-org:v3}BIN">
- *       &lt;sequence>
- *         &lt;element name="reference" type="{urn:hl7-org:v3}TEL" minOccurs="0"/>
- *         &lt;element name="thumbnail" type="{urn:hl7-org:v3}thumbnail" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute name="mediaType" type="{urn:hl7-org:v3}cs" default="text/plain" />
- *       &lt;attribute name="language" type="{urn:hl7-org:v3}cs" />
- *       &lt;attribute name="compression" type="{urn:hl7-org:v3}CompressionAlgorithm" />
- *       &lt;attribute name="integrityCheck" type="{urn:hl7-org:v3}bin" />
- *       &lt;attribute name="integrityCheckAlgorithm" type="{urn:hl7-org:v3}IntegrityCheckAlgorithm" default="SHA-1" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="ED"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{urn:hl7-org:v3}BIN"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="reference" type="{urn:hl7-org:v3}TEL" minOccurs="0"/&gt;
+ *         &lt;element name="thumbnail" type="{urn:hl7-org:v3}thumbnail" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="mediaType" type="{urn:hl7-org:v3}cs" default="text/plain" /&gt;
+ *       &lt;attribute name="language" type="{urn:hl7-org:v3}cs" /&gt;
+ *       &lt;attribute name="compression" type="{urn:hl7-org:v3}CompressionAlgorithm" /&gt;
+ *       &lt;attribute name="integrityCheck" type="{urn:hl7-org:v3}bin" /&gt;
+ *       &lt;attribute name="integrityCheckAlgorithm" type="{urn:hl7-org:v3}IntegrityCheckAlgorithm" default="SHA-1" /&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

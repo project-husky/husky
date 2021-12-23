@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -31,13 +31,8 @@ import org.husky.common.hl7cdar2.AdxpStreetAddressLine;
 import org.husky.common.hl7cdar2.AdxpStreetName;
 
 /**
- * <div class="en">The class Address contains all necessary fields for a postal
- * address. This class also provides mapping methods to other data types. <div>
- *
- * <div class="de">Die Klasse Address enthält alle erforderlichen Felder für
- * eine Postanschrift. Diese Klasse bietet auch Zuordnungsmethoden für andere
- * Datentypen.<div>
- *
+ * The class Address contains all necessary fields for a postal address. This class also provides mapping methods to
+ * other data types.
  */
 public class Address extends AddressBaseType {
 
@@ -47,14 +42,27 @@ public class Address extends AddressBaseType {
 	private static final String HL7_NAMESPACE = "urn:hl7-org:v3";
 
 	/**
-	 * <div class="en">Creates the base type from the given HL7 CDA R2
-	 * value.<div>
+	 * Instantiates a new instance from the given base type.
 	 *
-	 * <div class="de">Erstellt den Basistyp aus dem angegebenen HL7 CDA R2
-	 * Wert.<div>
+	 * @param baseType the base type
+	 */
+	public Address(AddressBaseType baseType) {
+		initFromBaseType(baseType);
+	}
+
+	 /**
+     * Instantiates a new instance from the given HL7 CDA R2 data type.
+     *
+     * @param hl7CdaR2Value the HL7 CDA R2 data type
+     */
+	public Address(org.husky.common.hl7cdar2.AD hl7CdaR2Value) {
+		initFromHl7CdaR2(hl7CdaR2Value);
+	}
+
+	/**
+	 * Creates the base type from the given HL7 CDA R2 value.
 	 *
-	 * @param hl7CdaR2Value
-	 *            the HL7 CDA R2 value
+	 * @param hl7CdaR2Value the HL7 CDA R2 value
 	 * @return the base type
 	 */
 	public static AddressBaseType createAddressBaseType(
@@ -122,14 +130,9 @@ public class Address extends AddressBaseType {
 	}
 
 	/**
-	 * <div class="en">Creates the HL7 CDA R2 data type from the given base
-	 * type.<div>
+	 * Creates the HL7 CDA R2 data type from the given base type.
 	 *
-	 * <div class="de">Erstellt den HL7 CDA R2 Datentyp aus dem angegebenen
-	 * Basistyp.<div>
-	 *
-	 * @param baseType
-	 *            the base type
+	 * @param baseType the base type
 	 * @return the HL7 CDA R2 data typed value
 	 */
 	public static org.husky.common.hl7cdar2.AD createHl7CdaR2Ad(
@@ -245,40 +248,10 @@ public class Address extends AddressBaseType {
 
 	}
 
-	/**
-	 * <div class="en">Instantiates a new instance from the given base
-	 * type.<div>
-	 *
-	 * <div class="de">Instanziiert eine neue Instanz vom angegebenen
-	 * Basistyp.<div>
-	 *
-	 * @param baseType
-	 *            the base type
-	 */
-	public Address(AddressBaseType baseType) {
-		initFromBaseType(baseType);
-	}
+
 
 	/**
-	 * <div class="en">Instantiates a new instance from the given HL7 CDA R2
-	 * data type.<div>
-	 *
-	 * <div class="de">Instanziiert eine neue Instanz vom angegebenen HL7 CDA R2
-	 * Datentyp.<div>
-	 *
-	 * @param hl7CdaR2Value
-	 *            the HL7 CDA R2 data type
-	 */
-	public Address(org.husky.common.hl7cdar2.AD hl7CdaR2Value) {
-		initFromHl7CdaR2(hl7CdaR2Value);
-	}
-
-	/**
-	 * <div class="en">Gets the HL7 CDA R2 data type from the current
-	 * instance.<div>
-	 *
-	 * <div class="de">Ruft den HL7 CDA R2 Datentyp aus der aktuellen Instanz
-	 * ab.<div>
+	 * Gets the HL7 CDA R2 data type from the current instance.
 	 *
 	 * @return the HL7 CDA R2 data type
 	 */
@@ -289,8 +262,7 @@ public class Address extends AddressBaseType {
 	/**
 	 * Inits from the base type.
 	 *
-	 * @param baseType
-	 *            the base type
+	 * @param baseType the base type
 	 */
 	private void initFromBaseType(AddressBaseType baseType) {
 		if (baseType != null) {
@@ -314,38 +286,28 @@ public class Address extends AddressBaseType {
 	/**
 	 * Inits from the HL7 CDA R2 data type.
 	 *
-	 * @param hl7CdaR2Value
-	 *            the HL7 CDA R2 data type value
+	 * @param hl7CdaR2Value the HL7 CDA R2 data type value
 	 */
 	private void initFromHl7CdaR2(org.husky.common.hl7cdar2.AD hl7CdaR2Value) {
 		initFromBaseType(createAddressBaseType(hl7CdaR2Value));
 	}
 
 	/**
-	 * <div class="en">Sets the fields of the current instance by the given base
-	 * type.<div>
+	 * Sets the fields of the current instance by the given base type.
 	 *
-	 * <div class="de">Legt die Felder der aktuellen Instanz durch den
-	 * angegebenen Basistyp fest.<div>
-	 *
-	 * @param baseType
-	 *            the base type
+	 * @param baseType the base type
 	 */
 	public void set(AddressBaseType baseType) {
 		initFromBaseType(baseType);
 	}
 
 	/**
-	 * <div class="en">Sets the fields of the current instance by the given HL7
-	 * CDA R2 data type.<div>
+	 * Sets the fields of the current instance by the given HL7 CDA R2 data type.
 	 *
-	 * <div class="de">Legt die Felder der aktuellen Instanz durch den
-	 * angegebenen HL7 CDA R2 Datentyp fest.<div>
-	 *
-	 * @param hl7CdaR2Value
-	 *            the HL7 CDA R2 data typed value
+	 * @param hl7CdaR2Value the HL7 CDA R2 data typed value
 	 */
 	public void set(org.husky.common.hl7cdar2.AD hl7CdaR2Value) {
 		initFromHl7CdaR2(hl7CdaR2Value);
 	}
+
 }

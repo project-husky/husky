@@ -24,12 +24,7 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.ehealthswiss.EprPolicyReposi
 import org.openehealth.ipf.commons.ihe.xacml20.stub.ehealthswiss.UpdatePolicyRequest;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Class implementing the simple ppq client.</div>
- * <div class="de">Klasse die den Simple PPQ Client implementiert.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Class implementing the simple ppq client.
  */
 public class SimplePpfClient extends CamelService
 		implements PpfClient {

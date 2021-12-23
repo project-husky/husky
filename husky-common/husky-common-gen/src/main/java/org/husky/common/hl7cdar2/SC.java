@@ -35,17 +35,17 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="SC">
- *   &lt;complexContent>
- *     &lt;extension base="{urn:hl7-org:v3}ST">
- *       &lt;attribute name="code" type="{urn:hl7-org:v3}cs" />
- *       &lt;attribute name="codeSystem" type="{urn:hl7-org:v3}uid" />
- *       &lt;attribute name="codeSystemName" type="{urn:hl7-org:v3}st" />
- *       &lt;attribute name="codeSystemVersion" type="{urn:hl7-org:v3}st" />
- *       &lt;attribute name="displayName" type="{urn:hl7-org:v3}st" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="SC"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{urn:hl7-org:v3}ST"&gt;
+ *       &lt;attribute name="code" type="{urn:hl7-org:v3}cs" /&gt;
+ *       &lt;attribute name="codeSystem" type="{urn:hl7-org:v3}uid" /&gt;
+ *       &lt;attribute name="codeSystemName" type="{urn:hl7-org:v3}st" /&gt;
+ *       &lt;attribute name="codeSystemVersion" type="{urn:hl7-org:v3}st" /&gt;
+ *       &lt;attribute name="displayName" type="{urn:hl7-org:v3}st" /&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

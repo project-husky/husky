@@ -1,9 +1,15 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
 package org.husky.emed.cda.generated.artdecor;
 
 import javax.annotation.processing.Generated;
-
-import org.husky.common.hl7cdar2.AD;
-import org.husky.common.hl7cdar2.EN;
 import org.husky.common.hl7cdar2.POCDMT000040Place;
 
 /**
@@ -15,7 +21,7 @@ import org.husky.common.hl7cdar2.POCDMT000040Place;
  * Effective date: 2005-09-07 00:00:00<br>
  * Status: active
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-09-08")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
 public class Cdaplace extends POCDMT000040Place {
 
     public Cdaplace() {
@@ -24,28 +30,28 @@ public class Cdaplace extends POCDMT000040Place {
     /**
      * Gets the hl7Addr
      */
-    public AD getHl7Addr() {
+    public org.husky.common.hl7cdar2.AD getHl7Addr() {
         return addr;
     }
 
     /**
      * Gets the hl7Name
      */
-    public EN getHl7Name() {
+    public org.husky.common.hl7cdar2.EN getHl7Name() {
         return name;
     }
 
     /**
      * Sets the hl7Addr
      */
-    public void setHl7Addr(AD value) {
+    public void setHl7Addr(org.husky.common.hl7cdar2.AD value) {
         this.addr = value;
     }
 
     /**
      * Sets the hl7Name
      */
-    public void setHl7Name(EN value) {
+    public void setHl7Name(org.husky.common.hl7cdar2.EN value) {
         this.name = value;
     }
 }

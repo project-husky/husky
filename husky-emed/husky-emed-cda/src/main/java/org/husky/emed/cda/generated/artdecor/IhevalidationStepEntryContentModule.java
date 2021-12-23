@@ -1,9 +1,21 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
 package org.husky.emed.cda.generated.artdecor;
 
 import java.util.List;
 import javax.annotation.processing.Generated;
-
-import org.husky.common.hl7cdar2.*;
+import org.husky.common.hl7cdar2.ObjectFactory;
+import org.husky.common.hl7cdar2.POCDMT000040Consumable;
+import org.husky.common.hl7cdar2.POCDMT000040ManufacturedProduct;
+import org.husky.common.hl7cdar2.POCDMT000040Material;
+import org.husky.common.hl7cdar2.POCDMT000040SubstanceAdministration;
 
 /**
  * IHEValidationStepEntryContentModule
@@ -16,12 +28,12 @@ import org.husky.common.hl7cdar2.*;
  * Version: 2020<br>
  * Status: pending
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-09-08")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
 public class IhevalidationStepEntryContentModule extends POCDMT000040SubstanceAdministration {
 
     public IhevalidationStepEntryContentModule() {
         super.getClassCode().add("SBADM");
-        super.setMoodCode(XDocumentSubstanceMood.PRP);
+        super.setMoodCode(org.husky.common.hl7cdar2.XDocumentSubstanceMood.PRP);
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.16"));
         super.setConsumable(createHl7ConsumableNa());
     }
@@ -44,9 +56,9 @@ public class IhevalidationStepEntryContentModule extends POCDMT000040SubstanceAd
      *
      * @param root the desired fixed value for this argument.
      */
-    private static II createHl7TemplateIdFixedValue(String root) {
+    private static org.husky.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
         ObjectFactory factory = new ObjectFactory();
-        II retVal = factory.createII();
+        org.husky.common.hl7cdar2.II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
     }
@@ -54,30 +66,30 @@ public class IhevalidationStepEntryContentModule extends POCDMT000040SubstanceAd
     /**
      * Gets the hl7Consumable
      */
-    public POCDMT000040Consumable getHl7Consumable() {
+    public org.husky.common.hl7cdar2.POCDMT000040Consumable getHl7Consumable() {
         return consumable;
     }
 
     /**
-     * Gets the hl7TemplateId
+     * Gets the hl7TemplateId<br/>
      * Reference to Medication Treatment Plan Item General Specification Template ID
      */
-    public List<II> getHl7TemplateId() {
+    public List<org.husky.common.hl7cdar2.II> getHl7TemplateId() {
         return templateId;
     }
 
     /**
      * Sets the hl7Consumable
      */
-    public void setHl7Consumable(POCDMT000040Consumable value) {
+    public void setHl7Consumable(org.husky.common.hl7cdar2.POCDMT000040Consumable value) {
         this.consumable = value;
     }
 
     /**
-     * Sets the hl7TemplateId
+     * Sets the hl7TemplateId<br/>
      * Reference to Medication Treatment Plan Item General Specification Template ID
      */
-    public void setHl7TemplateId(II value) {
+    public void setHl7TemplateId(org.husky.common.hl7cdar2.II value) {
         getTemplateId().clear();
         getTemplateId().add(value);
     }

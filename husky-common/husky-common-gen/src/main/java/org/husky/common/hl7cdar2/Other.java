@@ -27,15 +27,15 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ * 
  * <pre>
- * &lt;simpleType name="Other">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="OTH"/>
- *     &lt;enumeration value="NINF"/>
- *     &lt;enumeration value="PINF"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="Other"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="OTH"/&gt;
+ *     &lt;enumeration value="NINF"/&gt;
+ *     &lt;enumeration value="PINF"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "Other")

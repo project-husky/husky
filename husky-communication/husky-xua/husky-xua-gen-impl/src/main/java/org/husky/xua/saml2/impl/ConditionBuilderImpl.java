@@ -15,12 +15,7 @@ import org.husky.xua.saml2.Condition;
 import org.husky.xua.saml2.ConditionBuilder;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Class implementing the corresponding interface for Condition building.</div>
- * <div class="de">Die Klasse implementiert das entsprechende Interface um Conditions bilden zu k&ooml;nnen.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Class implementing the corresponding interface for Condition building.
  */
 public class ConditionBuilderImpl implements ConditionBuilder,
 		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Condition, Condition> {

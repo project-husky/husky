@@ -26,16 +26,16 @@ import javax.xml.bind.annotation.*;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="RTO_QTY_QTY">
- *   &lt;complexContent>
- *     &lt;extension base="{urn:hl7-org:v3}QTY">
- *       &lt;sequence>
- *         &lt;element name="numerator" type="{urn:hl7-org:v3}QTY"/>
- *         &lt;element name="denominator" type="{urn:hl7-org:v3}QTY"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="RTO_QTY_QTY"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{urn:hl7-org:v3}QTY"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="numerator" type="{urn:hl7-org:v3}QTY"/&gt;
+ *         &lt;element name="denominator" type="{urn:hl7-org:v3}QTY"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

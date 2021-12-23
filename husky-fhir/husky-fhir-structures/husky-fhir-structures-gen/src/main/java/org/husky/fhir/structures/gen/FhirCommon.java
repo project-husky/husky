@@ -71,8 +71,7 @@ import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.context.FhirVersionEnum;
 
 /**
- * <div class="en">Common material for Fhir package</div> <div class="de"></div>
- * <div class="fr"></div>.
+ * Common material for Fhir package
  */
 public class FhirCommon {
 
@@ -102,512 +101,427 @@ public class FhirCommon {
 	public static final String UUID_URN = "urn:uuid:";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this OID</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this OID
 	 */
 	public static final String OID_LANGUAGE = OID_URN + CodeSystems.LanguageCode.getCodeSystemId();
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension
 	 */
 	public static final String URN_USE_AS_ACTIVE_PROBLEM_CONCERN = "urn:ehealth_connector:FhirExtension:useAsActiveProblemConcern";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_ACTIVE_PROBLEM_CONCERN_ENTRIES = "urn:ehealth_connector:FhirExtension:uAsActiveProblemConcernEntries";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_ACUITY_ASSESSMENT = "urn:ehealth_connector:FhirExtension:useAsAcuityAssessment";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_ADVANCE_DIRECTIVES = "urn:ehealth_connector:FhirExtension:useAsAdvanceDirectives";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_ALLERGY_PROBLEM_CONCERN = "urn:ehealth_connector:FhirExtension:useAsAllergyProblemConcern";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_ALLERGY_PROBLEM_CONCERN_ENTRIES = "urn:ehealth_connector:FhirExtension:useAsAllergyProblemConcernEntries";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_ASSESSMENT_AND_PLAN = "urn:ehealth_connector:FhirExtension:useAsAssessmentAndPlan";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_AUTHOR = "urn:ehealth_connector:FhirExtension:useAsAuthor";
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_AUTHOR_LRQC = "urn:ehealth_connector:FhirExtension:useAsAuthorLrqc";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_BLOOD_GROUP = "urn:ehealth_connector:FhirExtension:useAsBloodGroup";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_CHIEF_COMPLAINT = "urn:ehealth_connector:FhirExtension:useAsChiefComplaint";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_CODE = "urn:ehealth_connector:FhirExtension:urnUseAsCode";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_CODED_PHYSICAL_EXAM = "urn:ehealth_connector:FhirExtension:useAsCodedPhysicalExam";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_CODED_RESULT_OBSERVATIONS = "urn:ehealth_connector:FhirExtension:useAsCodedResultObservations";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_CODED_VITAL_SIGN_LIST = "urn:ehealth_connector:FhirExtension:urnUseAsCodedVitalSignList";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_CODED_VITAL_SIGN_OBSERVATION = "urn:ehealth_connector:FhirExtension:useAsCodedVitalSignObservation";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_CODED_VITAL_SIGNS = "urn:ehealth_connector:FhirExtension:useAsCodedVitalSigns";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_COMMENT = "urn:ehealth_connector:FhirExtension:useAsComment";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_CONFIDENTIALITY = "urn:ehealth_connector:FhirExtension:useAsConfidentiality";
 
-	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	/*
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_CRITERION = "urn:ehealth_connector:FhirExtension:useAsCriterion";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_CURRENT_MEDICATIONS = "urn:ehealth_connector:FhirExtension:useAsCurrentMedications";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_CUSTODIAN = "urn:ehealth_connector:FhirExtension:useAsCustodian";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_DOC_TYPE = "urn:ehealth_connector:FhirExtension:useAsDocType";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_DOCUMENTATION_OF = "urn:ehealth_connector:FhirExtension:useAsDocumentationOf";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_DOCUMENT_DESCRIPTOR = "urn:ehealth_connector:FhirExtension:useAsDocumentDescriptor";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_DOC_VERSION = "urn:ehealth_connector:FhirExtension:urnUseAsDocVersion";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_ED_CONSULTATIONS = "urn:ehealth_connector:FhirExtension:useAsEdConsultations";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_ED_DIAGNOSIS = "urn:ehealth_connector:FhirExtension:useAsEdDiagnosis";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_ED_DISPOSITION = "urn:ehealth_connector:FhirExtension:useAsEdDisposition";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_EXTERNAL_DOCUMENT = "urn:ehealth_connector:FhirExtension:useAsExternalDocument";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_FORMAT_CODE = "urn:ehealth_connector:FhirExtension:useAsFormatCode";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_FUNCTION_CODE = "urn:ehealth_connector:FhirExtension:urnUseAsFunctionCode";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_FAMILY_MEDICAL_HISTORY = "urn:ehealth_connector:FhirExtension:useAsFamilyMedicalHistory";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension
 	 */
 	public static final String URN_USE_AS_HISTORY_OF_IMMUNIZATION = "urn:ehealth_connector:FhirExtension:useAsHistoryOfImmunization";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension
 	 */
 	public static final String URN_USE_AS_HISTORY_OF_PRESENT_ILLNESS = "urn:ehealth_connector:FhirExtension:useAsHistoryOfPresentIllness";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_IDENTIFIER = "urn:ehealth_connector:FhirExtension:useAsIdentifier";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_IMMUNIZATION = "urn:ehealth_connector:FhirExtension:useAsImmunization";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_IMMUNIZATION_RECOMMENDATION = "urn:ehealth_connector:FhirExtension:useAsImmunizationRecommendation";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_INFORMATION_RECIPIENT = "urn:ehealth_connector:FhirExtension:useAsInformationRecipient";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_CLAIMER = "urn:ehealth_connector:FhirExtension:useAsClaimer";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_IN_FULFILLMENT_OF = "urn:ehealth_connector:FhirExtension:urnUseAsInFulfillmentOf";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_LABORATORY_BATTERY_ORGANIZER = "urn:ehealth_connector:FhirExtension:useAsLaboratoryBatteryOrganizer";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_LABORATORY_ISOLATE_ORGANIZER = "urn:ehealth_connector:FhirExtension:useAsLaboratoryIsolateOrganizer";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String UNR_USE_AS_LABORATORY_OBSERVATION = "urn:ehealth_connector:FhirExtension:useAsLaboratoryObservation";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_LABORATORY_OBSERVATIONS = "urn:ehealth_connector:FhirExtension:useAsLaboratoryObservations";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_LABORATORY_REPORT_DATA_PROCESSING_ENTRY = "urn:ehealth_connector:FhirExtension:useAsLaboratoryReportDataProcessingEntry";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_LABORATORY_SPECIALTY_SECTION = "urn:ehealth_connector:FhirExtension:useAsLaboratorySpecialtySection";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_LANGUAGE = "urn:ehealth_connector:FhirExtension:useAsLanguage";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_LEGAL_AUTHENTICATOR = "urn:ehealth_connector:FhirExtension:useAsLegalAuthenticator";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_LIST_OF_SURGERIES = "urn:ehealth_connector:FhirExtension:useAsListOfSurgeries";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_LOT_NUMBERTEXT = "urn:ehealth_connector:FhirExtension:urnUseAsLotNumbertext";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_MEDICATION_TARGET = "urn:ehealth_connector:FhirExtension:useAsMedicationTarget";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_METADATA_LANGUAGE = "urn:ehealth_connector:FhirExtension:useAsMetadataLanguage";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_MIME_TYPE = "urn:ehealth_connector:FhirExtension:useAsMimeType";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_MODEL_OF_ARRIVAL = "urn:ehealth_connector:FhirExtension:useAsModeOfArrival";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_NON_LIVING_SUBJECT = "urn:ehealth_connector:FhirExtension:useAsNonLivingSubject";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_NOTIFICATION_ORGANIZER = "urn:ehealth_connector:FhirExtension:useAsNotificationOrganizer";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_OBSERVATION_MEDIA = "urn:ehealth_connector:FhirExtension:useAsObservationMedia";
 
 	public static final String URN_USE_AS_ORGANIZER = "urn:ehealth_connector:FhirExtension:useAsOrganizer";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_OUTBREAK_IDENTIFICATION = "urn:ehealth_connector:FhirExtension:useAsOutbreakIdentification";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_PARTICIPANT = "urn:ehealth_connector:FhirExtension:useAsParticipant";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_PAST_PROBLEM_CONCERN = "urn:ehealth_connector:FhirExtension:useAsPastProblemConcern";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_PAST_PROBLEM_CONCERN_ENTRIES = "urn:ehealth_connector:FhirExtension:useAsPastProblemConcernEntries";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_PATIENT = "urn:ehealth_connector:FhirExtension:useAsPatient";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_PERFORMER = "urn:ehealth_connector:FhirExtension:useAsPerformer";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_PRACTICE_SETTING_CODE = "urn:ehealth_connector:FhirExtension:useAsPracticeSettingCode";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_PREGNANCY_OBSERVATION = "urn:ehealth_connector:FhirExtension:urnUseAsPregnancyObservation";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_PROCEDURES = "urn:ehealth_connector:FhirExtension:useAsProcedures";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_PROGRESS_NOTE = "urn:ehealth_connector:FhirExtension:useAsProgressNote";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_REASON = "urn:ehealth_connector:FhirExtension:useAsReason";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_REASON_FOR_VISIT = "urn:ehealth_connector:FhirExtension:useAsReasonForVisit";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_REFERENCE_RANGE = "urn:ehealth_connector:FhirExtension:useAsReferenceRange";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_REFERRAL_ORDERING_PHYSICIAN = "urn:ehealth_connector:FhirExtension:useAsReferralOrderingPhysician";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_REFERRAL_SOURCE = "urn:ehealth_connector:FhirExtension:useAsReferralSource";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_REGISTRY_DESTINATION = "urn:ehealth_connector:FhirExtension:useAsRegistryDestination";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_RELATED_DOCUMENT = "urn:ehealth_connector:FhirExtension:useAsRelatedDocument";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_REPOSITORY_DESTINATION = "urn:ehealth_connector:FhirExtension:useAsRepositoryDestination";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_RESULTS = "urn:ehealth_connector:FhirExtension:useAsResults";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_SOCIAL_HISTORY = "urn:ehealth_connector:FhirExtension:useAsSocialHistory";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_SPECIMEN_COLLECTION = "urn:ehealth_connector:FhirExtension:useAsSpecimenCollection";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_SPECIMEN_RECEIVED = "urn:ehealth_connector:FhirExtension:useAsSpecimenReceived";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_STUDIES_SUMMARY = "urn:ehealth_connector:FhirExtension:useAsStudiesSummary";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_VITAL_SIGNS_OBSERVATION = "urn:ehealth_connector:FhirExtension:useAsVitalSignsObservation";
 
 	/**
-	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
-	 * <div class="de"></div><div class="fr"></div>.
+	 * uniform resource name (urn) of this FHIR extension.
 	 */
 	public static final String URN_USE_AS_VITAL_SIGNS_ORGANIZER = "urn:ehealth_connector:FhirExtension:useAsVitalSignsOrganizer";
 
@@ -941,12 +855,11 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets an eHC Author from FHIR base resource.
+	 * Gets an eHC Author from FHIR base resource.
 	 *
 	 * @param res
 	 *            the FHIR object
-	 * @return the eHC Author </div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @return the eHC Author
 	 */
 	public static org.husky.common.model.Author getAuthor(IBaseResource res) {
 		org.husky.common.model.Author retVal = null;
@@ -966,10 +879,8 @@ public class FhirCommon {
 	 * Gets an eHC Author from FHIR Organization.
 	 *
 	 * @param fhirObject
-	 *            <div class="en">FHIR Organization resource</div>
-	 *            <div class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">the eHC Author</div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 *            FHIR Organization resource
+	 * @return the eHC Author
 	 */
 	public static org.husky.common.model.Author getAuthor(
 			org.hl7.fhir.r4.model.Organization fhirObject) {
@@ -1005,10 +916,8 @@ public class FhirCommon {
 	 * Gets an eHC Author from FHIR Person.
 	 *
 	 * @param fhirObject
-	 *            <div class="en">FHIR Person resource</div>
-	 *            <div class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">the eHC Author</div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 *            FHIR Person resource
+	 * @return the eHC Author
 	 */
 	public static org.husky.common.model.Author getAuthor(
 			org.hl7.fhir.r4.model.Person fhirObject) {
@@ -1069,12 +978,11 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets an eHC Author from FHIR resource reference.
+	 * Gets an eHC Author from FHIR resource reference.
 	 *
 	 * @param ref
 	 *            the FHIR object
-	 * @return the eHC Author </div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @return the eHC Author
 	 */
 	public static org.husky.common.model.Author getAuthor(
 			org.hl7.fhir.r4.model.Reference ref) {
@@ -1085,10 +993,8 @@ public class FhirCommon {
 	 * Gets an eHC Author from FHIR Practitioner.
 	 *
 	 * @param fhirObject
-	 *            <div class="en">FHIR Person resource</div>
-	 *            <div class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">the eHC Author</div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 *            FHIR Person resource
+	 * @return the eHC Author
 	 */
 	public static org.husky.common.model.Author getAuthor(Practitioner fhirObject) {
 		org.husky.common.model.Author retVal = null;
@@ -1197,13 +1103,12 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets the file path to a document from the given FHIR
+	 * Gets the file path to a document from the given FHIR
 	 * object.
 	 *
 	 * @param fhirObject
 	 *            the FHIR object
-	 * @return file path to a document </div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @return file path to a document
 	 */
 	public static String getDocumentFilepath(DocumentReference fhirObject) {
 		return fhirObject.getContentFirstRep().getAttachment().getUrl();
@@ -1242,8 +1147,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension
 	 *
 	 * @return the extension ActiveProblemConcern
 	 */
@@ -1252,8 +1156,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension
 	 *
 	 * @return the extension AdvanceDirectives
 	 */
@@ -1262,8 +1165,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension
 	 *
 	 * @return the extension AllergyProblemConcern
 	 */
@@ -1272,8 +1174,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension
 	 *
 	 * @return the extension author
 	 */
@@ -1282,8 +1183,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension
 	 *
 	 * @return the extension ChiefComplaint
 	 */
@@ -1292,8 +1192,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension
 	 *
 	 * @return the extension custodian
 	 */
@@ -1302,8 +1201,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension
 	 *
 	 * @return the extension CodedVitalSignObservation
 	 */
@@ -1312,8 +1210,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension
 	 *
 	 * @return the extension comment
 	 */
@@ -1322,8 +1219,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension
 	 *
 	 * @return the extension criterion
 	 */
@@ -1332,8 +1228,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension
 	 *
 	 * @return the extension custodian
 	 */
@@ -1342,8 +1237,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension
 	 *
 	 * @return the extension criterion
 	 */
@@ -1352,8 +1246,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension
 	 *
 	 * @return the extension document descriptor
 	 */
@@ -1362,8 +1255,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension.
 	 *
 	 * @return the extension external document
 	 */
@@ -1372,8 +1264,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension.
 	 *
 	 * @return the extension format code
 	 */
@@ -1382,8 +1273,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension.
 	 *
 	 * @return the extension FunctionCodeDoctor
 	 */
@@ -1395,8 +1285,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension.
 	 *
 	 * @return the extension FunctionCodeDoctor
 	 */
@@ -1411,8 +1300,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension.
 	 *
 	 * @return the extension InformationRecipient
 	 */
@@ -1421,8 +1309,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension.
 	 */
 	public static Extension getExtensionLaboratoryBatteryOrganizer() {
 		return new Extension(FhirCommon.URN_USE_AS_LABORATORY_BATTERY_ORGANIZER,
@@ -1430,16 +1317,14 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension.
 	 */
 	public static Extension getExtensionLaboratoryObservations() {
 		return new Extension(FhirCommon.URN_USE_AS_LABORATORY_OBSERVATIONS, new StringType(DUMMY_CODE));
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension.
 	 *
 	 * @return the extension medication target
 	 */
@@ -1448,8 +1333,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension.
 	 *
 	 * @return the extension metadata language
 	 */
@@ -1458,8 +1342,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension.
 	 *
 	 * @return the extension mime type
 	 */
@@ -1468,8 +1351,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension.
 	 *
 	 * @return the extension author
 	 */
@@ -1478,8 +1360,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension.
 	 *
 	 * @return the extension author
 	 */
@@ -1488,8 +1369,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension.
 	 *
 	 * @return the extension performer
 	 */
@@ -1498,8 +1378,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension.
 	 *
 	 * @return the extension practice setting code
 	 */
@@ -1508,8 +1387,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension.
 	 *
 	 * @return the extension reason
 	 */
@@ -1518,8 +1396,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension.
 	 *
 	 * @return the extension repository destination
 	 */
@@ -1528,13 +1405,12 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets a eHC Code to be used as format code from the FHIR
+	 * Gets a eHC Code to be used as format code from the FHIR
 	 * DocumentReference object.
 	 *
 	 * @param fhirObject
 	 *            the FHIR object
-	 * @return eHC Code to be used as format code </div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @return eHC Code to be used as format code
 	 */
 	public static Code getFormatCode(DocumentReference fhirObject) {
 		Code retVal = null;
@@ -1546,8 +1422,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
-	 * <div class="fr"></div>.
+	 * Gets this FHIR extension.
 	 *
 	 * @return the information recipient
 	 */
@@ -1556,13 +1431,12 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en"> Gets a string describing the language of the meta data
+	 *  Gets a string describing the language of the meta data
 	 * from the FHIR DocumentReference object.
 	 *
 	 * @param fhirObject
 	 *            the FHIR object
-	 * @return string describing the language of the meta data</div>
-	 *         <div class="de"></div> <div class="fr"></div>
+	 * @return string describing the language of the meta data
 	 */
 	public static String getMetadataLanguage(DocumentReference fhirObject) {
 		var retVal = "";
@@ -1574,13 +1448,12 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en"> Gets a string describing the mime type from the FHIR
+	 *  Gets a string describing the mime type from the FHIR
 	 * DocumentReference object.
 	 *
 	 * @param fhirObject
 	 *            the FHIR object
-	 * @return string describing the mime type</div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @return string describing the mime type
 	 */
 	public static String getMimeType(DocumentReference fhirObject) {
 		var retVal = "";
@@ -1593,13 +1466,12 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets an eHC Organization object from the given FHIR base
+	 * Gets an eHC Organization object from the given FHIR base
 	 * resource object.
 	 *
 	 * @param res
 	 *            the FHIR base resource object
-	 * @return the eHC Organization </div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @return the eHC Organization
 	 */
 	public static org.husky.common.model.Organization getOrganization(
 			IBaseResource res) {
@@ -1611,14 +1483,12 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets an eHC Organization object from the given FHIR
+	 * Gets an eHC Organization object from the given FHIR
 	 * Organization object.
 	 *
 	 * @param fhirOrganization
-	 *            <div class="en">FHIR Organization resource</div>
-	 *            <div class="de"></div> <div class="fr"></div>
-	 * @return eHC Organization object eHC Organization</div>
-	 *         <div class="de"></div> <div class="fr"></div>
+	 *            FHIR Organization resource
+	 * @return eHC Organization object eHC Organization
 	 */
 	public static org.husky.common.model.Organization getOrganization(
 			org.hl7.fhir.r4.model.Organization fhirOrganization) {
@@ -1663,13 +1533,12 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en"> Gets an eHC Patient object from the given FHIR base
+	 *  Gets an eHC Patient object from the given FHIR base
 	 * resource object.
 	 *
 	 * @param res
 	 *            the FHIR base resource object
-	 * @return the eHC Patient object </div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @return the eHC Patient object
 	 */
 	public static org.husky.common.model.Patient getPatient(IBaseResource res) {
 		org.husky.common.model.Patient retVal = null;
@@ -1680,12 +1549,11 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en"> Gets an eHC Patient object from the given FHIR resource.
+	 *  Gets an eHC Patient object from the given FHIR resource.
 	 *
 	 * @param bundle
 	 *            the FHIR resource
-	 * @return eHC Patient object </div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @return eHC Patient object
 	 */
 	public static org.husky.common.model.Patient getPatient(
 			org.hl7.fhir.r4.model.Bundle bundle) {
@@ -1697,12 +1565,11 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en"> Gets an eHC Patient object from the given FHIR resource.
+	 *  Gets an eHC Patient object from the given FHIR resource.
 	 *
 	 * @param docManifest
 	 *            the FHIR resource
-	 * @return eHC Patient object </div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @return eHC Patient object
 	 */
 	public static org.husky.common.model.Patient getPatient(
 			org.hl7.fhir.r4.model.DocumentManifest docManifest) {
@@ -1715,13 +1582,12 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets an eHC Patient object from the given FHIR Patient
+	 * Gets an eHC Patient object from the given FHIR Patient
 	 * object.
 	 *
 	 * @param fhirPatient
 	 *            the FHIR Patient object
-	 * @return the eHC Patient object </div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @return the eHC Patient object
 	 */
 	public static org.husky.common.model.Patient getPatient(
 			org.hl7.fhir.r4.model.Patient fhirPatient) {
@@ -1767,13 +1633,12 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets an eHC Patient object from the given FHIR reference
+	 * Gets an eHC Patient object from the given FHIR reference
 	 * object.
 	 *
 	 * @param orgRef
 	 *            the FHIR reference object
-	 * @return the eHC Patient object </div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @return the eHC Patient object
 	 */
 	public static org.husky.common.model.Patient getPatient(
 			org.hl7.fhir.r4.model.Reference orgRef) {
@@ -1783,10 +1648,8 @@ public class FhirCommon {
 	/**
 	 * Gets an eHC Author from FHIR Person.
 	 *
-	 * @param fhirObject <div class="en">FHIR Person resource</div>
-	 *                   <div class="de"></div> <div class="fr"></div>
-	 * @return <div class="en">the eHC Author</div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @param fhirObject FHIR Person resource
+	 * @return the eHC Author
 	 */
 	public static POCDMT000040Performer2 getPerformer(org.hl7.fhir.r4.model.Person fhirObject) {
 		POCDMT000040Performer2 retVal = null;
@@ -1836,13 +1699,12 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets a eHC Code to be used as practice setting code from
+	 * Gets a eHC Code to be used as practice setting code from
 	 * the FHIR DocumentReference object.
 	 *
 	 * @param fhirObject
 	 *            the FHIR object
-	 * @return eHC Code to be used as format code </div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @return eHC Code to be used as format code
 	 */
 	public static Code getPracticeSettingCode(DocumentReference fhirObject) {
 		Code retVal = null;
@@ -1854,11 +1716,11 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Gets the eHC Telecoms from the given FHIR object.
+	 * Gets the eHC Telecoms from the given FHIR object.
 	 *
 	 * @param fhirContactPoints
 	 *            a list of FHIR ContactPoint resources
-	 * @return eHC Telecoms</div> <div class="de"></div> <div class="fr"></div>
+	 * @return eHC Telecoms
 	 */
 	public static List<Telecom> getTelecoms(List<ContactPoint> fhirContactPoints) {
 		final List<Telecom> eHCTelecoms = new LinkedList<>();
@@ -1889,16 +1751,12 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">reads the given XML file (UTF-8) into a string</div>
-	 * <div class="de"></div> <div class="fr"></div>.
+	 * reads the given XML file (UTF-8) into a string
 	 *
 	 * @param fileName
-	 *            <div class="en">file to read</div> <div class="de"></div>
-	 *            <div class="fr"></div>
-	 * @return the given XML file (UTF-8)<div class="en">string containing the
-	 *         XML file content</div> <div class="de"></div>
-	 *         <div class="fr"></div>
-	 * @throws IOException 
+	 *            file to read
+	 * @return the given XML file (UTF-8)string containing the
+	 *         XML file content
 	 */
 	public static String getXmlResource(String fileName){
 		final var sb = new StringBuilder();
@@ -1921,15 +1779,12 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">removes urn:oid: prefix of the given string</div>
-	 * <div class="de"></div> <div class="fr"></div>.
+	 * removes urn:oid: prefix of the given string
 	 *
 	 * @param value
-	 *            <div class="en">value string beginning with the
-	 *            urn:oid:prefix</div> <div class="de"></div>
-	 *            <div class="fr"></div>
-	 * @return <div class="en">string without the prefix</div>
-	 *         <div class="de"></div> <div class="fr"></div>
+	 *            value string beginning with the
+	 *            urn:oid:prefix
+	 * @return string without the prefix
 	 */
 	public static String removeUrnOidPrefix(String value) {
 		var retVal = "";
@@ -1944,7 +1799,7 @@ public class FhirCommon {
 	}
 
 	/**
-	 * <div class="en">Stores the given FHIR resource to disk</div>
+	 * Stores the given FHIR resource to disk
 	 *
 	 * @param log
 	 *            the logger

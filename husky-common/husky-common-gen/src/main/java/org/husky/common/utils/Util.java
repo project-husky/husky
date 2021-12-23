@@ -161,8 +161,9 @@ public class Util {
 	/**
 	 * Checks to see if the list has at least one element.
 	 *
-	 * @param l the list
-	 * @return false if l is null, if l.size() smaller 1 or if l.get(0) is null.
+	 * @param l
+	 *            the list
+	 * @return false if l is null, if l.size() &lt; 1 or if l.get(0) is null.
 	 *         Otherwise, return true.
 	 */
 	public static boolean atLeastOne(List<?> l) {
@@ -170,10 +171,10 @@ public class Util {
 	}
 
 	/**
-	 * <div class="en"> Converts a list of II int a list of Identificators.
+	 * Converts a list of II int a list of Identificators.
 	 *
 	 * @param mII the list to convert
-	 * @return </div> <div class="de"></div> <div class="fr"></div>
+	 * @return
 	 * 
 	 * @deprecated (replaced by {@link Identificator#getIdentificatorList(List)}
 	 */
@@ -754,25 +755,26 @@ public class Util {
 	}
 
 	/**
-	 * <div class="en"> Extracts a file from embedded resources in the Jar as
+	 * Extracts a file from embedded resources in the Jar as
 	 * temporary file on the local filesystem.
 	 *
-	 * @param rscPath path to the desired file in the Jar
-	 * @return Full path and file name of the created temporary file </div>
-	 *         <div class="de"></div> <div class="fr"></div>
+	 * @param rscPath
+	 *            path to the desired file in the Jar
+	 * @return Full path and file name of the created temporary file
 	 */
 	public static String extractFileFromResource(String rscPath) {
 		return extractFileFromResource(rscPath, true);
 	}
 
 	/**
-	 * <div class="en"> Extracts a file from embedded resources in the Jar as
+	 * Extracts a file from embedded resources in the Jar as
 	 * temporary file on the local filesystem.
 	 *
-	 * @param rscPath path to the desired file in the Jar
-	 * @param pathfix if path should be corrected at start depending on ox system
-	 * @return Full path and file name of the created temporary file </div>
-	 *         <div class="de"></div> <div class="fr"></div>
+	 * @param rscPath
+	 *            path to the desired file in the Jar
+	 * @param pathfix
+	 *            if path should be corrected at start depending on ox system
+	 * @return Full path and file name of the created temporary file
 	 */
 	public static String extractFileFromResource(String rscPath, boolean pathfix) {
 		final String filename = FilenameUtils.getName(rscPath);
@@ -966,11 +968,11 @@ public class Util {
 	}
 
 	/**
-	 * <div class="en">Gets the system fonts paths in relation to the current OS.
-	 * This is where all the fonts must be found in order to embed them into the
-	 * PDF/A document.</div>
+	 * Gets the system fonts paths in relation to the current
+	 * OS. This is where all the fonts must be found in order to embed them into
+	 * the PDF/A document.
 	 *
-	 * @return <div class="en">the system fonts paths</div>
+	 * @return the system fonts paths
 	 */
 	public static List<String> getSystemFontsPaths() {
 		List<String> result = new ArrayList<>();
@@ -1000,8 +1002,8 @@ public class Util {
 	}
 
 	/**
-	 * Extracts a HashMap<String, AddressUse> with a given Type from a given eHC
-	 * ArrayList<TEL>.
+	 * Extracts a {@link HashMap<String, TelecomAddressUse>} with a given Type from a given eHC
+	 * {@link List<TEL>}.
 	 *
 	 * @param telecoms the List with unsorted MDHT TEL objects
 	 * @param type     the type of telecommunication endpoint that should be
@@ -1020,14 +1022,13 @@ public class Util {
 	}
 
 	/**
-	 * <div class="en">Gets a temp folder for output files. If you set an
-	 * environment variable with the name 'eHCTempPath' the Husky will use the path
-	 * specified in this environment variable. If no such environment variable is
-	 * set, it will try to use /temp. If the path is not writable the Husky will use
-	 * the system temp folder.
+	 * Gets a temp folder for output files. If you set an
+	 * environment variable with the name 'eHCTempPath' the Husky
+	 * will use the path specified in this environment variable. If no such
+	 * environment variable is set, it will try to use /temp. If the path is not
+	 * writable the Husky will use the system temp folder.
 	 *
-	 * @return path to temp folder</div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @return path to temp folder
 	 */
 	public static String getTempDirectory() {
 		final var envVariable = "eHCTempPath";

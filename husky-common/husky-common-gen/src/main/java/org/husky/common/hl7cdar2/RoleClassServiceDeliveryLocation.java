@@ -27,15 +27,15 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ * 
  * <pre>
- * &lt;simpleType name="RoleClassServiceDeliveryLocation">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="SDLOC"/>
- *     &lt;enumeration value="DSDLOC"/>
- *     &lt;enumeration value="ISDLOC"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="RoleClassServiceDeliveryLocation"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="SDLOC"/&gt;
+ *     &lt;enumeration value="DSDLOC"/&gt;
+ *     &lt;enumeration value="ISDLOC"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "RoleClassServiceDeliveryLocation")

@@ -32,15 +32,15 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="EIVL.event">
- *   &lt;complexContent>
- *     &lt;restriction base="{urn:hl7-org:v3}CE">
- *       &lt;attribute name="code" type="{urn:hl7-org:v3}TimingEvent" />
- *       &lt;attribute name="codeSystem" type="{urn:hl7-org:v3}uid" fixed="2.16.840.1.113883.5.139" />
- *       &lt;attribute name="codeSystemName" type="{urn:hl7-org:v3}st" fixed="TimingEvent" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="EIVL.event"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{urn:hl7-org:v3}CE"&gt;
+ *       &lt;attribute name="code" type="{urn:hl7-org:v3}TimingEvent" /&gt;
+ *       &lt;attribute name="codeSystem" type="{urn:hl7-org:v3}uid" fixed="2.16.840.1.113883.5.139" /&gt;
+ *       &lt;attribute name="codeSystemName" type="{urn:hl7-org:v3}st" fixed="TimingEvent" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

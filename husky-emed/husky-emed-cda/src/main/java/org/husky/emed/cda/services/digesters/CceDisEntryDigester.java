@@ -1,28 +1,28 @@
 package org.husky.emed.cda.services.digesters;
 
 import org.husky.common.hl7cdar2.*;
-import org.husky.common.utils.StreamUtils;
-import org.husky.emed.cda.errors.InvalidEmedContentException;
-import org.husky.emed.cda.generated.artdecor.enums.ActSubstanceAdminSubstitutionCode;
-import org.husky.emed.cda.generated.artdecor.enums.DispenseSupplyType;
-import org.husky.emed.cda.models.common.AuthorDigest;
-import org.husky.emed.cda.models.common.EmedReference;
-import org.husky.emed.cda.models.common.QuantityWithUnit;
-import org.husky.emed.cda.models.entry.EmedDisEntryDigest;
-import org.husky.emed.cda.models.entry.EmedEntryDigest;
-import org.husky.emed.cda.models.treatment.MedicationProduct;
+import org.husky.common.utils.OptionalUtils;
+import org.husky.emed.cda.utils.CdaR2Utils;
 import org.husky.emed.cda.services.EmedEntryDigestService;
 import org.husky.emed.cda.services.readers.ManufacturedMaterialReader;
 import org.husky.emed.cda.utils.EntryRelationshipUtils;
 import org.husky.emed.cda.utils.IiUtils;
 import org.husky.emed.cda.utils.TemplateIds;
+import org.husky.emed.enums.ActSubstanceAdminSubstitutionCode;
+import org.husky.emed.enums.DispenseSupplyType;
+import org.husky.emed.errors.InvalidEmedContentException;
+import org.husky.emed.models.common.AuthorDigest;
+import org.husky.emed.models.common.EmedReference;
+import org.husky.emed.models.common.QuantityWithUnit;
+import org.husky.emed.models.entry.EmedDisEntryDigest;
+import org.husky.emed.models.treatment.MedicationProduct;
 import org.springframework.stereotype.Component;
-
-import static org.husky.emed.cda.utils.TemplateIds.*;
 
 import java.time.Instant;
 import java.util.Objects;
 import java.util.Optional;
+
+import static org.husky.emed.cda.utils.TemplateIds.*;
 
 /**
  * Creator of CDA-CH-EMED DIS item entry digests.
@@ -33,14 +33,14 @@ import java.util.Optional;
 public class CceDisEntryDigester {
 
     /**
-     * The registry of {@link EmedEntryDigest}.
+     * The registry of {@link org.husky.emed.models.entry.EmedEntryDigest}.
      */
     private final EmedEntryDigestService emedEntryService;
 
     /**
      * Constructor.
      *
-     * @param emedEntryService The registry of {@link EmedEntryDigest}.
+     * @param emedEntryService The registry of {@link org.husky.emed.models.entry.EmedEntryDigest}.
      */
     public CceDisEntryDigester(final EmedEntryDigestService emedEntryService) {
         this.emedEntryService = emedEntryService;
@@ -118,7 +118,7 @@ public class CceDisEntryDigester {
      * @throws InvalidEmedContentException if the item entry ID is missing.
      */
     private String getEntryId(final POCDMT000040Supply supply) throws InvalidEmedContentException {
-        return Optional.ofNullable(StreamUtils.getListFirst(supply.getId()))
+        return Optional.ofNullable(OptionalUtils.getListFirstElement(supply.getId()))
                 .map(IiUtils::getNormalizedUid)
                 .orElseThrow(() -> new InvalidEmedContentException(""));
     }
@@ -211,7 +211,7 @@ public class CceDisEntryDigester {
                 .map(POCDMT000040EntryRelationship::getSubstanceAdministration)
                 .filter(Objects::nonNull)
                 .filter(substanceAdministration -> hasAllIds(REFERENCE_TO_MTP, substanceAdministration.getTemplateId()))
-                .map(EmedReference::new)
+                .map(CdaR2Utils::toEmedReference)
                 .findAny();
     }
 
@@ -228,7 +228,7 @@ public class CceDisEntryDigester {
                 .filter(Objects::nonNull)
                 .filter(substanceAdministration -> hasAllIds(REFERENCE_TO_PRE, substanceAdministration.getTemplateId()))
                 .findAny()
-                .map(EmedReference::new);
+                .map(CdaR2Utils::toEmedReference);
     }
 
     /**
@@ -244,7 +244,7 @@ public class CceDisEntryDigester {
                 .filter(Objects::nonNull)
                 .filter(obs -> hasAllIds(REFERENCE_TO_PADV, obs.getTemplateId()))
                 .findAny()
-                .map(EmedReference::new);
+                .map(CdaR2Utils::toEmedReference);
     }
 
     /**

@@ -1,20 +1,19 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
- * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  */
 package org.husky.emed.cda.generated.artdecor.enums;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.Objects;
 import javax.annotation.processing.Generated;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.enums.CodeSystems;
 import org.husky.common.enums.LanguageCode;
 import org.husky.common.enums.ValueSetEnumInterface;
@@ -22,7 +21,7 @@ import org.husky.common.enums.ValueSetEnumInterface;
 /**
  * Enumeration of RoleClassMutualRelationship values
  * <p>
- * EN: <p> <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26</p><b>description: </b><p>A relationship that is based on mutual behavior of the two Entities as being related. The basis of such relationship may be agreements (e.g., spouses, contract parties) or they may be <i>de facto</i> behavior (e.g. friends) or may be an incidental involvement with each other (e.g. parties over a dispute, siblings, children).</p><br>
+ * EN: <p> <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26</p><b>description: </b><p>A relationship that is based on mutual behavior of the two Entities as being related. The basis of such relationship may be agreements (e.g., spouses, contract parties) or they may be <i>de facto</i> behavior (e.g. friends) or may be an incidental involvement with each other (e.g. parties over a dispute, siblings, children).</p>.<br>
  * DE: No designation found.<br>
  * FR: No designation found.<br>
  * IT: No designation found.<br>
@@ -32,11 +31,11 @@ import org.husky.common.enums.ValueSetEnumInterface;
  * Version: DEFN=UV=VO=1360-20160323<br>
  * Status: FINAL
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-09-08")
+@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-12-09")
 public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
 
     /**
-     * EN: affiliate<br>
+     * EN: affiliate.<br>
      */
     AFFILIATE_L2("AFFL",
                  "2.16.840.1.113883.5.110",
@@ -46,7 +45,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                  "TOTRANSLATE",
                  "TOTRANSLATE"),
     /**
-     * EN: agent<br>
+     * EN: agent.<br>
      */
     AGENT_L2("AGNT",
              "2.16.840.1.113883.5.110",
@@ -56,7 +55,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
              "TOTRANSLATE",
              "TOTRANSLATE"),
     /**
-     * EN: assigned entity<br>
+     * EN: assigned entity.<br>
      */
     ASSIGNED_ENTITY_L3("ASSIGNED",
                        "2.16.840.1.113883.5.110",
@@ -66,7 +65,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                        "TOTRANSLATE",
                        "TOTRANSLATE"),
     /**
-     * EN: caregiver<br>
+     * EN: caregiver.<br>
      */
     CAREGIVER_L1("CAREGIVER",
                  "2.16.840.1.113883.5.110",
@@ -76,7 +75,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                  "TOTRANSLATE",
                  "TOTRANSLATE"),
     /**
-     * EN: Case Subject<br>
+     * EN: Case Subject.<br>
      */
     CASE_SUBJECT_L3("CASEBJ",
                     "2.16.840.1.113883.5.110",
@@ -86,7 +85,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                     "TOTRANSLATE",
                     "TOTRANSLATE"),
     /**
-     * EN: citizen<br>
+     * EN: citizen.<br>
      */
     CITIZEN_L2("CIT",
                "2.16.840.1.113883.5.110",
@@ -96,7 +95,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                "TOTRANSLATE",
                "TOTRANSLATE"),
     /**
-     * EN: claimant<br>
+     * EN: claimant.<br>
      */
     CLAIMANT_L3("CLAIM",
                 "2.16.840.1.113883.5.110",
@@ -106,7 +105,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                 "TOTRANSLATE",
                 "TOTRANSLATE"),
     /**
-     * EN: clinical research investigator<br>
+     * EN: clinical research investigator.<br>
      */
     CLINICAL_RESEARCH_INVESTIGATOR_L2("CRINV",
                                       "2.16.840.1.113883.5.110",
@@ -116,7 +115,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                                       "TOTRANSLATE",
                                       "TOTRANSLATE"),
     /**
-     * EN: clinical research sponsor<br>
+     * EN: clinical research sponsor.<br>
      */
     CLINICAL_RESEARCH_SPONSOR_L2("CRSPNSR",
                                  "2.16.840.1.113883.5.110",
@@ -126,7 +125,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                                  "TOTRANSLATE",
                                  "TOTRANSLATE"),
     /**
-     * EN: commissioning party<br>
+     * EN: commissioning party.<br>
      */
     COMMISSIONING_PARTY_L4("COMPAR",
                            "2.16.840.1.113883.5.110",
@@ -136,7 +135,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                            "TOTRANSLATE",
                            "TOTRANSLATE"),
     /**
-     * EN: contact<br>
+     * EN: contact.<br>
      */
     CONTACT_L3("CON",
                "2.16.840.1.113883.5.110",
@@ -146,7 +145,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                "TOTRANSLATE",
                "TOTRANSLATE"),
     /**
-     * EN: coverage sponsor<br>
+     * EN: coverage sponsor.<br>
      */
     COVERAGE_SPONSOR_L2("SPNSR",
                         "2.16.840.1.113883.5.110",
@@ -156,7 +155,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                         "TOTRANSLATE",
                         "TOTRANSLATE"),
     /**
-     * EN: covered party<br>
+     * EN: covered party.<br>
      */
     COVERED_PARTY_L2("COVPTY",
                      "2.16.840.1.113883.5.110",
@@ -166,7 +165,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                      "TOTRANSLATE",
                      "TOTRANSLATE"),
     /**
-     * EN: dependent<br>
+     * EN: dependent.<br>
      */
     DEPENDENT_L4("DEPEN",
                  "2.16.840.1.113883.5.110",
@@ -176,7 +175,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                  "TOTRANSLATE",
                  "TOTRANSLATE"),
     /**
-     * EN: emergency contact<br>
+     * EN: emergency contact.<br>
      */
     EMERGENCY_CONTACT_L4("ECON",
                          "2.16.840.1.113883.5.110",
@@ -186,7 +185,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                          "TOTRANSLATE",
                          "TOTRANSLATE"),
     /**
-     * EN: employee<br>
+     * EN: employee.<br>
      */
     EMPLOYEE_L2("EMP",
                 "2.16.840.1.113883.5.110",
@@ -196,7 +195,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                 "TOTRANSLATE",
                 "TOTRANSLATE"),
     /**
-     * EN: guarantor GuarantorRole<br>
+     * EN: guarantor GuarantorRole.<br>
      */
     GUARANTOR_GUARANTORROLE_L2("GUAR",
                                "2.16.840.1.113883.5.110",
@@ -206,7 +205,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                                "TOTRANSLATE",
                                "TOTRANSLATE"),
     /**
-     * EN: guardian<br>
+     * EN: guardian.<br>
      */
     GUARDIAN_L3("GUARD",
                 "2.16.840.1.113883.5.110",
@@ -216,7 +215,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                 "TOTRANSLATE",
                 "TOTRANSLATE"),
     /**
-     * EN: healthcare provider<br>
+     * EN: healthcare provider.<br>
      */
     HEALTHCARE_PROVIDER_L3("PROV",
                            "2.16.840.1.113883.5.110",
@@ -226,7 +225,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                            "TOTRANSLATE",
                            "TOTRANSLATE"),
     /**
-     * EN: individual<br>
+     * EN: individual.<br>
      */
     INDIVIDUAL_L4("INDIV",
                   "2.16.840.1.113883.5.110",
@@ -236,7 +235,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                   "TOTRANSLATE",
                   "TOTRANSLATE"),
     /**
-     * EN: Investigation Subject<br>
+     * EN: Investigation Subject.<br>
      */
     INVESTIGATION_SUBJECT_L2("INVSBJ",
                              "2.16.840.1.113883.5.110",
@@ -246,7 +245,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                              "TOTRANSLATE",
                              "TOTRANSLATE"),
     /**
-     * EN: invoice payor<br>
+     * EN: invoice payor.<br>
      */
     INVOICE_PAYOR_L2("PAYOR",
                      "2.16.840.1.113883.5.110",
@@ -256,7 +255,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                      "TOTRANSLATE",
                      "TOTRANSLATE"),
     /**
-     * EN: licensed entity<br>
+     * EN: licensed entity.<br>
      */
     LICENSED_ENTITY_L2("LIC",
                        "2.16.840.1.113883.5.110",
@@ -266,7 +265,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                        "TOTRANSLATE",
                        "TOTRANSLATE"),
     /**
-     * EN: military person<br>
+     * EN: military person.<br>
      */
     MILITARY_PERSON_L3("MIL",
                        "2.16.840.1.113883.5.110",
@@ -276,7 +275,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                        "TOTRANSLATE",
                        "TOTRANSLATE"),
     /**
-     * EN: named insured<br>
+     * EN: named insured.<br>
      */
     NAMED_INSURED_L3("NAMED",
                      "2.16.840.1.113883.5.110",
@@ -286,7 +285,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                      "TOTRANSLATE",
                      "TOTRANSLATE"),
     /**
-     * EN: next of kin<br>
+     * EN: next of kin.<br>
      */
     NEXT_OF_KIN_L4("NOK",
                    "2.16.840.1.113883.5.110",
@@ -296,7 +295,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                    "TOTRANSLATE",
                    "TOTRANSLATE"),
     /**
-     * EN: notary public<br>
+     * EN: notary public.<br>
      */
     NOTARY_PUBLIC_L3("NOT",
                      "2.16.840.1.113883.5.110",
@@ -306,7 +305,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                      "TOTRANSLATE",
                      "TOTRANSLATE"),
     /**
-     * EN: patient<br>
+     * EN: patient.<br>
      */
     PATIENT_L2("PAT",
                "2.16.840.1.113883.5.110",
@@ -316,7 +315,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                "TOTRANSLATE",
                "TOTRANSLATE"),
     /**
-     * EN: payee<br>
+     * EN: payee.<br>
      */
     PAYEE_L2("PAYEE",
              "2.16.840.1.113883.5.110",
@@ -326,7 +325,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
              "TOTRANSLATE",
              "TOTRANSLATE"),
     /**
-     * EN: personal relationship<br>
+     * EN: personal relationship.<br>
      */
     PERSONAL_RELATIONSHIP_L1("PRS",
                              "2.16.840.1.113883.5.110",
@@ -336,7 +335,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                              "TOTRANSLATE",
                              "TOTRANSLATE"),
     /**
-     * EN: policy holder<br>
+     * EN: policy holder.<br>
      */
     POLICY_HOLDER_L2("POLHOLD",
                      "2.16.840.1.113883.5.110",
@@ -346,7 +345,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                      "TOTRANSLATE",
                      "TOTRANSLATE"),
     /**
-     * EN: program eligible<br>
+     * EN: program eligible.<br>
      */
     PROGRAM_ELIGIBLE_L3("PROG",
                         "2.16.840.1.113883.5.110",
@@ -356,7 +355,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                         "TOTRANSLATE",
                         "TOTRANSLATE"),
     /**
-     * EN: qualified entity<br>
+     * EN: qualified entity.<br>
      */
     QUALIFIED_ENTITY_L2("QUAL",
                         "2.16.840.1.113883.5.110",
@@ -366,7 +365,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                         "TOTRANSLATE",
                         "TOTRANSLATE"),
     /**
-     * EN: research subject<br>
+     * EN: research subject.<br>
      */
     RESEARCH_SUBJECT_L3("RESBJ",
                         "2.16.840.1.113883.5.110",
@@ -376,7 +375,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                         "TOTRANSLATE",
                         "TOTRANSLATE"),
     /**
-     * EN: RoleClassRelationshipFormal<br>
+     * EN: RoleClassRelationshipFormal.<br>
      */
     ROLECLASSRELATIONSHIPFORMAL_L1("_RoleClassRelationshipFormal",
                                    "2.16.840.1.113883.5.110",
@@ -386,7 +385,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                                    "TOTRANSLATE",
                                    "TOTRANSLATE"),
     /**
-     * EN: signing authority or officer<br>
+     * EN: signing authority or officer.<br>
      */
     SIGNING_AUTHORITY_OR_OFFICER_L4("SGNOFF",
                                     "2.16.840.1.113883.5.110",
@@ -396,7 +395,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                                     "TOTRANSLATE",
                                     "TOTRANSLATE"),
     /**
-     * EN: student<br>
+     * EN: student.<br>
      */
     STUDENT_L2("STD",
                "2.16.840.1.113883.5.110",
@@ -406,7 +405,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                "TOTRANSLATE",
                "TOTRANSLATE"),
     /**
-     * EN: subscriber<br>
+     * EN: subscriber.<br>
      */
     SUBSCRIBER_L4("SUBSCR",
                   "2.16.840.1.113883.5.110",
@@ -416,7 +415,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                   "TOTRANSLATE",
                   "TOTRANSLATE"),
     /**
-     * EN: underwriter<br>
+     * EN: underwriter.<br>
      */
     UNDERWRITER_L2("UNDWRT",
                    "2.16.840.1.113883.5.110",
@@ -427,197 +426,197 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
                    "TOTRANSLATE");
 
     /**
-     * EN: Code for affiliate<br>
+     * EN: Code for affiliate.<br>
      */
     public static final String AFFILIATE_L2_CODE = "AFFL";
 
     /**
-     * EN: Code for agent<br>
+     * EN: Code for agent.<br>
      */
     public static final String AGENT_L2_CODE = "AGNT";
 
     /**
-     * EN: Code for assigned entity<br>
+     * EN: Code for assigned entity.<br>
      */
     public static final String ASSIGNED_ENTITY_L3_CODE = "ASSIGNED";
 
     /**
-     * EN: Code for caregiver<br>
+     * EN: Code for caregiver.<br>
      */
     public static final String CAREGIVER_L1_CODE = "CAREGIVER";
 
     /**
-     * EN: Code for Case Subject<br>
+     * EN: Code for Case Subject.<br>
      */
     public static final String CASE_SUBJECT_L3_CODE = "CASEBJ";
 
     /**
-     * EN: Code for citizen<br>
+     * EN: Code for citizen.<br>
      */
     public static final String CITIZEN_L2_CODE = "CIT";
 
     /**
-     * EN: Code for claimant<br>
+     * EN: Code for claimant.<br>
      */
     public static final String CLAIMANT_L3_CODE = "CLAIM";
 
     /**
-     * EN: Code for clinical research investigator<br>
+     * EN: Code for clinical research investigator.<br>
      */
     public static final String CLINICAL_RESEARCH_INVESTIGATOR_L2_CODE = "CRINV";
 
     /**
-     * EN: Code for clinical research sponsor<br>
+     * EN: Code for clinical research sponsor.<br>
      */
     public static final String CLINICAL_RESEARCH_SPONSOR_L2_CODE = "CRSPNSR";
 
     /**
-     * EN: Code for commissioning party<br>
+     * EN: Code for commissioning party.<br>
      */
     public static final String COMMISSIONING_PARTY_L4_CODE = "COMPAR";
 
     /**
-     * EN: Code for contact<br>
+     * EN: Code for contact.<br>
      */
     public static final String CONTACT_L3_CODE = "CON";
 
     /**
-     * EN: Code for coverage sponsor<br>
+     * EN: Code for coverage sponsor.<br>
      */
     public static final String COVERAGE_SPONSOR_L2_CODE = "SPNSR";
 
     /**
-     * EN: Code for covered party<br>
+     * EN: Code for covered party.<br>
      */
     public static final String COVERED_PARTY_L2_CODE = "COVPTY";
 
     /**
-     * EN: Code for dependent<br>
+     * EN: Code for dependent.<br>
      */
     public static final String DEPENDENT_L4_CODE = "DEPEN";
 
     /**
-     * EN: Code for emergency contact<br>
+     * EN: Code for emergency contact.<br>
      */
     public static final String EMERGENCY_CONTACT_L4_CODE = "ECON";
 
     /**
-     * EN: Code for employee<br>
+     * EN: Code for employee.<br>
      */
     public static final String EMPLOYEE_L2_CODE = "EMP";
 
     /**
-     * EN: Code for guarantor GuarantorRole<br>
+     * EN: Code for guarantor GuarantorRole.<br>
      */
     public static final String GUARANTOR_GUARANTORROLE_L2_CODE = "GUAR";
 
     /**
-     * EN: Code for guardian<br>
+     * EN: Code for guardian.<br>
      */
     public static final String GUARDIAN_L3_CODE = "GUARD";
 
     /**
-     * EN: Code for healthcare provider<br>
+     * EN: Code for healthcare provider.<br>
      */
     public static final String HEALTHCARE_PROVIDER_L3_CODE = "PROV";
 
     /**
-     * EN: Code for individual<br>
+     * EN: Code for individual.<br>
      */
     public static final String INDIVIDUAL_L4_CODE = "INDIV";
 
     /**
-     * EN: Code for Investigation Subject<br>
+     * EN: Code for Investigation Subject.<br>
      */
     public static final String INVESTIGATION_SUBJECT_L2_CODE = "INVSBJ";
 
     /**
-     * EN: Code for invoice payor<br>
+     * EN: Code for invoice payor.<br>
      */
     public static final String INVOICE_PAYOR_L2_CODE = "PAYOR";
 
     /**
-     * EN: Code for licensed entity<br>
+     * EN: Code for licensed entity.<br>
      */
     public static final String LICENSED_ENTITY_L2_CODE = "LIC";
 
     /**
-     * EN: Code for military person<br>
+     * EN: Code for military person.<br>
      */
     public static final String MILITARY_PERSON_L3_CODE = "MIL";
 
     /**
-     * EN: Code for named insured<br>
+     * EN: Code for named insured.<br>
      */
     public static final String NAMED_INSURED_L3_CODE = "NAMED";
 
     /**
-     * EN: Code for next of kin<br>
+     * EN: Code for next of kin.<br>
      */
     public static final String NEXT_OF_KIN_L4_CODE = "NOK";
 
     /**
-     * EN: Code for notary public<br>
+     * EN: Code for notary public.<br>
      */
     public static final String NOTARY_PUBLIC_L3_CODE = "NOT";
 
     /**
-     * EN: Code for patient<br>
+     * EN: Code for patient.<br>
      */
     public static final String PATIENT_L2_CODE = "PAT";
 
     /**
-     * EN: Code for payee<br>
+     * EN: Code for payee.<br>
      */
     public static final String PAYEE_L2_CODE = "PAYEE";
 
     /**
-     * EN: Code for personal relationship<br>
+     * EN: Code for personal relationship.<br>
      */
     public static final String PERSONAL_RELATIONSHIP_L1_CODE = "PRS";
 
     /**
-     * EN: Code for policy holder<br>
+     * EN: Code for policy holder.<br>
      */
     public static final String POLICY_HOLDER_L2_CODE = "POLHOLD";
 
     /**
-     * EN: Code for program eligible<br>
+     * EN: Code for program eligible.<br>
      */
     public static final String PROGRAM_ELIGIBLE_L3_CODE = "PROG";
 
     /**
-     * EN: Code for qualified entity<br>
+     * EN: Code for qualified entity.<br>
      */
     public static final String QUALIFIED_ENTITY_L2_CODE = "QUAL";
 
     /**
-     * EN: Code for research subject<br>
+     * EN: Code for research subject.<br>
      */
     public static final String RESEARCH_SUBJECT_L3_CODE = "RESBJ";
 
     /**
-     * EN: Code for RoleClassRelationshipFormal<br>
+     * EN: Code for RoleClassRelationshipFormal.<br>
      */
     public static final String ROLECLASSRELATIONSHIPFORMAL_L1_CODE = "_RoleClassRelationshipFormal";
 
     /**
-     * EN: Code for signing authority or officer<br>
+     * EN: Code for signing authority or officer.<br>
      */
     public static final String SIGNING_AUTHORITY_OR_OFFICER_L4_CODE = "SGNOFF";
 
     /**
-     * EN: Code for student<br>
+     * EN: Code for student.<br>
      */
     public static final String STUDENT_L2_CODE = "STD";
 
     /**
-     * EN: Code for subscriber<br>
+     * EN: Code for subscriber.<br>
      */
     public static final String SUBSCRIBER_L4_CODE = "SUBSCR";
 
     /**
-     * EN: Code for underwriter<br>
+     * EN: Code for underwriter.<br>
      */
     public static final String UNDERWRITER_L2_CODE = "UNDWRT";
 
@@ -632,12 +631,18 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
     public static final String VALUE_SET_NAME = "RoleClassMutualRelationship";
 
     /**
+     * Identifier of the code system (all values share the same).
+     */
+    public static final String CODE_SYSTEM_ID = "2.16.840.1.113883.5.110";
+
+    /**
      * Gets the Enum with a given code.
      *
      * @param code The code value.
      * @return the enum value found or {@code null}.
      */
-    public static RoleClassMutualRelationship getEnum(final String code) {
+    @Nullable
+    public static RoleClassMutualRelationship getEnum(@Nullable final String code) {
         for (final RoleClassMutualRelationship x : values()) {
             if (x.getCodeValue().equals(code)) {
                 return x;
@@ -652,7 +657,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
      * @param enumName The name of the enum.
      * @return {@code true} if the name is found in this value set, {@code false} otherwise.
      */
-    public static boolean isEnumOfValueSet(final String enumName) {
+    public static boolean isEnumOfValueSet(@Nullable final String enumName) {
         if (enumName == null) {
             return false;
         }
@@ -671,7 +676,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
      * @param codeValue The code value.
      * @return {@code true} if the value is found in this value set, {@code false} otherwise.
      */
-    public static boolean isInValueSet(final String codeValue) {
+    public static boolean isInValueSet(@Nullable final String codeValue) {
         for (final RoleClassMutualRelationship x : values()) {
             if (x.getCodeValue().equals(codeValue)) {
                 return true;
@@ -683,17 +688,21 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
     /**
      * Machine interpretable and (inside this class) unique code.
      */
-    private String code;
+    @NonNull
+    private final String code;
 
     /**
      * Identifier of the referencing code system.
      */
-    private String codeSystem;
+    @NonNull
+    private final String codeSystem;
 
     /**
-     * The display names per language.
+     * The display names per language. It's always stored in the given order: default display name (0), in English (1),
+     * in German (2), in French (3) and in Italian (4).
      */
-    private Map<LanguageCode, String> displayNames;
+    @NonNull
+    private final String[] displayNames;
 
     /**
      * Instantiates this enum with a given code and display names.
@@ -706,20 +715,15 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
      * @param displayNameFr The display name in French.
      * @param displayNameIt The display name in Italian.
      */
-    RoleClassMutualRelationship(final String code, final String codeSystem, final String displayName, final String displayNameEn, final String displayNameDe, final String displayNameFr, final String displayNameIt) {
-        this.code = code;
-        this.codeSystem = codeSystem;
-        this.displayNames = new HashMap<>();
-        this.displayNames.put(null,
-                              displayName);
-        this.displayNames.put(LanguageCode.ENGLISH,
-                              displayNameEn);
-        this.displayNames.put(LanguageCode.GERMAN,
-                              displayNameDe);
-        this.displayNames.put(LanguageCode.FRENCH,
-                              displayNameFr);
-        this.displayNames.put(LanguageCode.ITALIAN,
-                              displayNameIt);
+    RoleClassMutualRelationship(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
+        this.code = Objects.requireNonNull(code);
+        this.codeSystem = Objects.requireNonNull(codeSystem);
+        this.displayNames = new String[5];
+        this.displayNames[0] = Objects.requireNonNull(displayName);
+        this.displayNames[1] = Objects.requireNonNull(displayNameEn);
+        this.displayNames[2] = Objects.requireNonNull(displayNameDe);
+        this.displayNames[3] = Objects.requireNonNull(displayNameFr);
+        this.displayNames[4] = Objects.requireNonNull(displayNameIt);
     }
 
     /**
@@ -728,6 +732,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
      * @return the code system identifier.
      */
     @Override
+    @NonNull
     public String getCodeSystemId() {
         return this.codeSystem;
     }
@@ -735,13 +740,14 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
     /**
      * Gets the code system name.
      *
-     * @return the code system identifier.
+     * @return the code system name.
      */
     @Override
+    @NonNull
     public String getCodeSystemName() {
-        final CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
-        if (cs != null) {
-            return cs.getCodeSystemName();
+        final var codeSystem = CodeSystems.getEnum(this.codeSystem);
+        if (codeSystem != null) {
+            return codeSystem.getCodeSystemName();
         }
         return "";
     }
@@ -752,24 +758,35 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
      * @return the code value.
      */
     @Override
+    @NonNull
     public String getCodeValue() {
         return this.code;
     }
 
     /**
-     * Gets the display name defined by the language param. If there is no english translation, the default display name
-     *      is returned.
+     * Gets the display name defined by the language param.
      *
-     * @param languageCode The language code to get the display name for.
-     * @return the display name in the desired language. if language not found, display name in german will be returned.
+     * @param languageCode The language code to get the display name for, {@code null} to get the default display name.
+     * @return the display name in the desired language.
      */
     @Override
-    public String getDisplayName(final LanguageCode languageCode) {
-        final String displayName = this.displayNames.get(languageCode);
-        if (displayName == null && languageCode == LanguageCode.ENGLISH) {
-            return this.displayNames.get(null);
+    @NonNull
+    public String getDisplayName(@Nullable final LanguageCode languageCode) {
+        if (languageCode == null) {
+            return this.displayNames[0];
         }
-        return displayName;
+        return switch(languageCode) {
+            case ENGLISH ->
+                this.displayNames[1];
+            case GERMAN ->
+                this.displayNames[2];
+            case FRENCH ->
+                this.displayNames[3];
+            case ITALIAN ->
+                this.displayNames[4];
+            default ->
+                "TOTRANSLATE";
+        };
     }
 
     /**
@@ -778,6 +795,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
      * @return the value set identifier.
      */
     @Override
+    @NonNull
     public String getValueSetId() {
         return VALUE_SET_ID;
     }
@@ -788,6 +806,7 @@ public enum RoleClassMutualRelationship implements ValueSetEnumInterface {
      * @return the value set name.
      */
     @Override
+    @NonNull
     public String getValueSetName() {
         return VALUE_SET_NAME;
     }

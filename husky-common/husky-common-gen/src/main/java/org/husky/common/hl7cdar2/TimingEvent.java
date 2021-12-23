@@ -27,28 +27,28 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ * 
  * <pre>
- * &lt;simpleType name="TimingEvent">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="AC"/>
- *     &lt;enumeration value="ACD"/>
- *     &lt;enumeration value="ACM"/>
- *     &lt;enumeration value="ACV"/>
- *     &lt;enumeration value="HS"/>
- *     &lt;enumeration value="IC"/>
- *     &lt;enumeration value="ICD"/>
- *     &lt;enumeration value="ICM"/>
- *     &lt;enumeration value="ICV"/>
- *     &lt;enumeration value="PC"/>
- *     &lt;enumeration value="PCD"/>
- *     &lt;enumeration value="PCM"/>
- *     &lt;enumeration value="PCV"/>
- *     &lt;enumeration value="CM"/>
- *     &lt;enumeration value="CD"/>
- *     &lt;enumeration value="CV"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="TimingEvent"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="AC"/&gt;
+ *     &lt;enumeration value="ACD"/&gt;
+ *     &lt;enumeration value="ACM"/&gt;
+ *     &lt;enumeration value="ACV"/&gt;
+ *     &lt;enumeration value="HS"/&gt;
+ *     &lt;enumeration value="IC"/&gt;
+ *     &lt;enumeration value="ICD"/&gt;
+ *     &lt;enumeration value="ICM"/&gt;
+ *     &lt;enumeration value="ICV"/&gt;
+ *     &lt;enumeration value="PC"/&gt;
+ *     &lt;enumeration value="PCD"/&gt;
+ *     &lt;enumeration value="PCM"/&gt;
+ *     &lt;enumeration value="PCV"/&gt;
+ *     &lt;enumeration value="CM"/&gt;
+ *     &lt;enumeration value="CD"/&gt;
+ *     &lt;enumeration value="CV"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "TimingEvent")

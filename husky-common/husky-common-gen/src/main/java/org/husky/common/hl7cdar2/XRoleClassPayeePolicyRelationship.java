@@ -27,17 +27,17 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ * 
  * <pre>
- * &lt;simpleType name="x_RoleClassPayeePolicyRelationship">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="COVPTY"/>
- *     &lt;enumeration value="GUAR"/>
- *     &lt;enumeration value="POLHOLD"/>
- *     &lt;enumeration value="PROV"/>
- *     &lt;enumeration value="PRS"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="x_RoleClassPayeePolicyRelationship"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="COVPTY"/&gt;
+ *     &lt;enumeration value="GUAR"/&gt;
+ *     &lt;enumeration value="POLHOLD"/&gt;
+ *     &lt;enumeration value="PROV"/&gt;
+ *     &lt;enumeration value="PRS"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "x_RoleClassPayeePolicyRelationship")

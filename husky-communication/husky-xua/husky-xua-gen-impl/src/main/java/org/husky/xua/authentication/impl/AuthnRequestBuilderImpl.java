@@ -28,12 +28,7 @@ import org.opensaml.saml.saml2.core.impl.NameIDPolicyBuilder;
 import org.opensaml.saml.saml2.core.impl.ScopingBuilder;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Class implementing the corresponding interface for authnrequest building.</div>
- * <div class="de">Die Klasse implementiert das entsprechende Interface um authnrequests bilden zu k&ooml;nnen.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Class implementing the corresponding interface for authnrequest building.
  */
 public class AuthnRequestBuilderImpl implements AuthnRequestBuilder,
 		SecurityObjectBuilder<org.opensaml.saml.saml2.core.AuthnRequest, AuthnRequest> {

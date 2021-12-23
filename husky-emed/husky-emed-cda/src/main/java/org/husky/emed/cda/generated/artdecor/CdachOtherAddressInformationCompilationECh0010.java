@@ -1,6 +1,13 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
 package org.husky.emed.cda.generated.artdecor;
-
-import org.husky.common.hl7cdar2.ADXP;
 
 import javax.annotation.processing.Generated;
 import javax.xml.bind.annotation.XmlTransient;
@@ -16,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * Version: 2017<br>
  * Status: active
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-09-08")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
 public class CdachOtherAddressInformationCompilationECh0010 {
 
     public CdachOtherAddressInformationCompilationECh0010() {
@@ -26,197 +33,197 @@ public class CdachOtherAddressInformationCompilationECh0010 {
      * Number of addressed apartment. This is occasionally necessary for larger buildings. With a maximum length of 30 characters.
      */
     @XmlTransient()
-    private ADXP additionalLocator;
+    private org.husky.common.hl7cdar2.ADXP additionalLocator;
 
     /**
      * Addressed city (in foreign addresses if necessary including province, etc.).When using the information according to the Swiss Post, the 27-digit city name must be used.
      */
     @XmlTransient()
-    private ADXP city;
+    private org.husky.common.hl7cdar2.ADXP city;
 
     /**
      * Two-digit, alphanumeric ISO country code according to [ISO 3166-1] of the country in which the address is located. The country defines the conventions for addressing.The country code MUST also be declared for Swiss postal addresses.Caution: Political changes or renaming of countries will result in adjustments to the ISO country list.The length of the feature is 2 characters.
      */
     @XmlTransient()
-    private ADXP country;
+    private org.husky.common.hl7cdar2.ADXP country;
 
     /**
      * House number in postal addresses (including house number additives). With a maximum length of 30 characters.
      */
     @XmlTransient()
-    private ADXP houseNumber;
+    private org.husky.common.hl7cdar2.ADXP houseNumber;
 
     /**
      * Number of the addressed post box in a maximum length of 8 characters.
      */
     @XmlTransient()
-    private ADXP postBox;
+    private org.husky.common.hl7cdar2.ADXP postBox;
 
     /**
      * Postal code given by Swiss Post or postal code issued by a post office abroad, that can consist of numbers, letters or a combination of both, possibly even special characters.
      */
     @XmlTransient()
-    private ADXP postalCode;
+    private org.husky.common.hl7cdar2.ADXP postalCode;
 
     /**
      * Occasionally, additional geographic information must be provided in foreign addresses, in addition to city and country. This element can be used for such cases.It contains superordinate or subordinate information on a city, such as region, province, state or local district.Since it is difficult - especially with foreign addresses - to determine whether an indication is subordinate or subordinate, a separate mapping of superordinate and subordinate indication is omitted.
      */
     @XmlTransient()
-    private ADXP state;
+    private org.husky.common.hl7cdar2.ADXP state;
 
     /**
      * Free additional lines for additional address information which can not be used in the other address fields (e.g. for c/o entries, etc.), with a maximum length of 150 characters.addressLine1 should be used for personalized addressing (e.g., c/o-Address).
      */
     @XmlTransient()
-    private ADXP streetAddressLine;
+    private org.husky.common.hl7cdar2.ADXP streetAddressLine;
 
     /**
      * Street names in postal addresses. It can also be the name of a locality, a hamlet, etc. With a maximum length of 150 characters.
      */
     @XmlTransient()
-    private ADXP streetName;
+    private org.husky.common.hl7cdar2.ADXP streetName;
 
     /**
-     * Gets the hl7AdditionalLocator
+     * Gets the hl7AdditionalLocator<br/>
      * Number of addressed apartment. This is occasionally necessary for larger buildings. With a maximum length of 30 characters.
      */
-    public ADXP getHl7AdditionalLocator() {
+    public org.husky.common.hl7cdar2.ADXP getHl7AdditionalLocator() {
         return additionalLocator;
     }
 
     /**
-     * Gets the hl7City
+     * Gets the hl7City<br/>
      * Addressed city (in foreign addresses if necessary including province, etc.).When using the information according to the Swiss Post, the 27-digit city name must be used.
      */
-    public ADXP getHl7City() {
+    public org.husky.common.hl7cdar2.ADXP getHl7City() {
         return city;
     }
 
     /**
-     * Gets the hl7Country
+     * Gets the hl7Country<br/>
      * Two-digit, alphanumeric ISO country code according to [ISO 3166-1] of the country in which the address is located. The country defines the conventions for addressing.The country code MUST also be declared for Swiss postal addresses.Caution: Political changes or renaming of countries will result in adjustments to the ISO country list.The length of the feature is 2 characters.
      */
-    public ADXP getHl7Country() {
+    public org.husky.common.hl7cdar2.ADXP getHl7Country() {
         return country;
     }
 
     /**
-     * Gets the hl7HouseNumber
+     * Gets the hl7HouseNumber<br/>
      * House number in postal addresses (including house number additives). With a maximum length of 30 characters.
      */
-    public ADXP getHl7HouseNumber() {
+    public org.husky.common.hl7cdar2.ADXP getHl7HouseNumber() {
         return houseNumber;
     }
 
     /**
-     * Gets the hl7PostBox
+     * Gets the hl7PostBox<br/>
      * Number of the addressed post box in a maximum length of 8 characters.
      */
-    public ADXP getHl7PostBox() {
+    public org.husky.common.hl7cdar2.ADXP getHl7PostBox() {
         return postBox;
     }
 
     /**
-     * Gets the hl7PostalCode
+     * Gets the hl7PostalCode<br/>
      * Postal code given by Swiss Post or postal code issued by a post office abroad, that can consist of numbers, letters or a combination of both, possibly even special characters.
      */
-    public ADXP getHl7PostalCode() {
+    public org.husky.common.hl7cdar2.ADXP getHl7PostalCode() {
         return postalCode;
     }
 
     /**
-     * Gets the hl7State
+     * Gets the hl7State<br/>
      * Occasionally, additional geographic information must be provided in foreign addresses, in addition to city and country. This element can be used for such cases.It contains superordinate or subordinate information on a city, such as region, province, state or local district.Since it is difficult - especially with foreign addresses - to determine whether an indication is subordinate or subordinate, a separate mapping of superordinate and subordinate indication is omitted.
      */
-    public ADXP getHl7State() {
+    public org.husky.common.hl7cdar2.ADXP getHl7State() {
         return state;
     }
 
     /**
-     * Gets the hl7StreetAddressLine
+     * Gets the hl7StreetAddressLine<br/>
      * Free additional lines for additional address information which can not be used in the other address fields (e.g. for c/o entries, etc.), with a maximum length of 150 characters.addressLine1 should be used for personalized addressing (e.g., c/o-Address).
      */
-    public ADXP getHl7StreetAddressLine() {
+    public org.husky.common.hl7cdar2.ADXP getHl7StreetAddressLine() {
         return streetAddressLine;
     }
 
     /**
-     * Gets the hl7StreetName
+     * Gets the hl7StreetName<br/>
      * Street names in postal addresses. It can also be the name of a locality, a hamlet, etc. With a maximum length of 150 characters.
      */
-    public ADXP getHl7StreetName() {
+    public org.husky.common.hl7cdar2.ADXP getHl7StreetName() {
         return streetName;
     }
 
     /**
-     * Sets the hl7AdditionalLocator
+     * Sets the hl7AdditionalLocator<br/>
      * Number of addressed apartment. This is occasionally necessary for larger buildings. With a maximum length of 30 characters.
      */
-    public void setHl7AdditionalLocator(ADXP value) {
+    public void setHl7AdditionalLocator(org.husky.common.hl7cdar2.ADXP value) {
         this.additionalLocator = value;
     }
 
     /**
-     * Sets the hl7City
+     * Sets the hl7City<br/>
      * Addressed city (in foreign addresses if necessary including province, etc.).When using the information according to the Swiss Post, the 27-digit city name must be used.
      */
-    public void setHl7City(ADXP value) {
+    public void setHl7City(org.husky.common.hl7cdar2.ADXP value) {
         this.city = value;
     }
 
     /**
-     * Sets the hl7Country
+     * Sets the hl7Country<br/>
      * Two-digit, alphanumeric ISO country code according to [ISO 3166-1] of the country in which the address is located. The country defines the conventions for addressing.The country code MUST also be declared for Swiss postal addresses.Caution: Political changes or renaming of countries will result in adjustments to the ISO country list.The length of the feature is 2 characters.
      */
-    public void setHl7Country(ADXP value) {
+    public void setHl7Country(org.husky.common.hl7cdar2.ADXP value) {
         this.country = value;
     }
 
     /**
-     * Sets the hl7HouseNumber
+     * Sets the hl7HouseNumber<br/>
      * House number in postal addresses (including house number additives). With a maximum length of 30 characters.
      */
-    public void setHl7HouseNumber(ADXP value) {
+    public void setHl7HouseNumber(org.husky.common.hl7cdar2.ADXP value) {
         this.houseNumber = value;
     }
 
     /**
-     * Sets the hl7PostBox
+     * Sets the hl7PostBox<br/>
      * Number of the addressed post box in a maximum length of 8 characters.
      */
-    public void setHl7PostBox(ADXP value) {
+    public void setHl7PostBox(org.husky.common.hl7cdar2.ADXP value) {
         this.postBox = value;
     }
 
     /**
-     * Sets the hl7PostalCode
+     * Sets the hl7PostalCode<br/>
      * Postal code given by Swiss Post or postal code issued by a post office abroad, that can consist of numbers, letters or a combination of both, possibly even special characters.
      */
-    public void setHl7PostalCode(ADXP value) {
+    public void setHl7PostalCode(org.husky.common.hl7cdar2.ADXP value) {
         this.postalCode = value;
     }
 
     /**
-     * Sets the hl7State
+     * Sets the hl7State<br/>
      * Occasionally, additional geographic information must be provided in foreign addresses, in addition to city and country. This element can be used for such cases.It contains superordinate or subordinate information on a city, such as region, province, state or local district.Since it is difficult - especially with foreign addresses - to determine whether an indication is subordinate or subordinate, a separate mapping of superordinate and subordinate indication is omitted.
      */
-    public void setHl7State(ADXP value) {
+    public void setHl7State(org.husky.common.hl7cdar2.ADXP value) {
         this.state = value;
     }
 
     /**
-     * Sets the hl7StreetAddressLine
+     * Sets the hl7StreetAddressLine<br/>
      * Free additional lines for additional address information which can not be used in the other address fields (e.g. for c/o entries, etc.), with a maximum length of 150 characters.addressLine1 should be used for personalized addressing (e.g., c/o-Address).
      */
-    public void setHl7StreetAddressLine(ADXP value) {
+    public void setHl7StreetAddressLine(org.husky.common.hl7cdar2.ADXP value) {
         this.streetAddressLine = value;
     }
 
     /**
-     * Sets the hl7StreetName
+     * Sets the hl7StreetName<br/>
      * Street names in postal addresses. It can also be the name of a locality, a hamlet, etc. With a maximum length of 150 characters.
      */
-    public void setHl7StreetName(ADXP value) {
+    public void setHl7StreetName(org.husky.common.hl7cdar2.ADXP value) {
         this.streetName = value;
     }
 }

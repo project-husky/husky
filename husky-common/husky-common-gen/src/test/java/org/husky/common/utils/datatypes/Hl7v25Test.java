@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.husky.common.utils.datatypes.Hl7v25;
-
 /**
  * Tests of the {@link Hl7v25} class.
  *

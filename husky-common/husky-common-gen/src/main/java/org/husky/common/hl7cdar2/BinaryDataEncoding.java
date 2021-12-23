@@ -28,14 +28,14 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ * 
  * <pre>
- * &lt;simpleType name="BinaryDataEncoding">
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}NMTOKEN">
- *     &lt;enumeration value="B64"/>
- *     &lt;enumeration value="TXT"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="BinaryDataEncoding"&gt;
+ *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}NMTOKEN"&gt;
+ *     &lt;enumeration value="B64"/&gt;
+ *     &lt;enumeration value="TXT"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "BinaryDataEncoding")

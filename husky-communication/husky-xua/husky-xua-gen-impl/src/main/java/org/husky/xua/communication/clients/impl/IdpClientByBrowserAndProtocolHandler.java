@@ -10,7 +10,6 @@
  */
 package org.husky.xua.communication.clients.impl;
 
-import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -46,9 +45,9 @@ import org.slf4j.LoggerFactory;
  */
 public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 
-	private IdpClientByBrowserAndProtocolHandlerConfigImpl config;
+	private final IdpClientByBrowserAndProtocolHandlerConfigImpl config;
 
-	private Logger logger = LoggerFactory.getLogger(getClass());
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	public IdpClientByBrowserAndProtocolHandler(
 			IdpClientByBrowserAndProtocolHandlerConfigImpl clientConfiguration) {
@@ -139,7 +138,7 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 					config.getProtocolHandlerName() + ".io");			
 			Files.deleteIfExists(tempFile.toPath());
 			final var htmlFile = getHtmlFormPage(aAuthnRequest);
-			startBrowser(htmlFile.toURI());
+			logger.info("Please open {} in your browser", htmlFile.toURI());
 
 			return startWaitForResponse(tempFile);
 

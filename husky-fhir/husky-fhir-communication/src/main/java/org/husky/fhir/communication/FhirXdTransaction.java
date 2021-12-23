@@ -10,7 +10,6 @@
  */
 package org.husky.fhir.communication;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -90,13 +89,11 @@ public class FhirXdTransaction {
 
 	private final FhirContext fhirCtx = new FhirContext(FhirVersionEnum.R4);
 
-
 	/**
-	 * <div class="en"> Gets the eHC affinity domain object from the FHIR resource
+	 *  Gets the eHC affinity domain object from the FHIR resource
 	 *
 	 * @param transaction the FHIR resource
-	 * @return the eHC affinity domain object </div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @return the eHC affinity domain object
 	 */
 	public AffinityDomain getAffinityDomain(Transaction transaction) {
 		final var afinityDomain = new AffinityDomain();
@@ -113,12 +110,11 @@ public class FhirXdTransaction {
 	}
 
 	/**
-	 * <div class="en">Gets an eHC author object from the FHIR DocumentManifest
+	 * Gets an eHC author object from the FHIR DocumentManifest
 	 * object
 	 *
 	 * @param fhirObject the FHIR object
-	 * @return eHC author object </div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @return eHC author object 
 	 */
 	public org.husky.common.model.Author getAuthor(DocumentManifest fhirObject) {
 		if (!fhirObject.getAuthor().isEmpty())
@@ -128,12 +124,11 @@ public class FhirXdTransaction {
 	}
 
 	/**
-	 * <div class="en">Gets an eHC author object from the FHIR DocumentReference
+	 * Gets an eHC author object from the FHIR DocumentReference
 	 * object
 	 *
 	 * @param fhirObject the FHIR object
-	 * @return eHC author object </div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @return eHC author object 
 	 */
 	public org.husky.common.model.Author getAuthor(DocumentReference fhirObject) {
 		if (!fhirObject.getAuthor().isEmpty())
@@ -143,12 +138,11 @@ public class FhirXdTransaction {
 	}
 
 	/**
-	 * <div class="en"> Gets an eHC Destination object from the given FHIR
+	 *  Gets an eHC Destination object from the given FHIR
 	 * MessageHeader object
 	 *
 	 * @param fhirObject the FHIR object
-	 * @return the eHC Destination </div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @return the eHC Destination 
 	 */
 	private org.husky.common.communication.Destination getDestination(MessageHeader fhirObject) {
 		org.husky.common.communication.Destination retVal = null;
@@ -198,7 +192,7 @@ public class FhirXdTransaction {
 	}
 
 	/**
-	 * <div class="en">Gets a list containing all document metadatas from the FHIR
+	 * Gets a list containing all document metadatas from the FHIR
 	 * resource
 	 *
 	 * @param transaction         the FHIR resource
@@ -207,8 +201,7 @@ public class FhirXdTransaction {
 	 *                            patient id
 	 * @param senderFacilityOid   the senderFacilityOid will be used to determine
 	 *                            which of the patient ids is the source patient id
-	 * @return list containing all document metadatas </div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @return list containing all document metadatas 
 	 */
 	public List<DocumentMetadata> getDocumentMetadatas(Transaction transaction, String receiverFacilityOid,
 			String senderFacilityOid) {
@@ -246,12 +239,11 @@ public class FhirXdTransaction {
 	}
 
 	/**
-	 * <div class="en"> Gets the registry as eHC Destination object from the FHIR
+	 *  Gets the registry as eHC Destination object from the FHIR
 	 * resource
 	 *
 	 * @param docManifest the FHIR resource
-	 * @return the registry as eHC Destination object </div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @return the registry as eHC Destination object 
 	 */
 	public org.husky.common.communication.Destination getRegistry(DocumentManifest docManifest) {
 		org.husky.common.communication.Destination retVal = null;
@@ -266,12 +258,11 @@ public class FhirXdTransaction {
 	}
 
 	/**
-	 * <div class="en"> Gets a list of repositories as eHC Destination objects from
+	 *  Gets a list of repositories as eHC Destination objects from
 	 * the FHIR resource
 	 *
 	 * @param docManifest the FHIR resource
-	 * @return list of repositories</div> <div class="de"></div>
-	 *         <div class="fr"></div>
+	 * @return list of repositories
 	 */
 	public List<org.husky.common.communication.Destination> getRepositories(DocumentManifest docManifest) {
 		final List<org.husky.common.communication.Destination> retVal = new ArrayList<>();
@@ -302,13 +293,13 @@ public class FhirXdTransaction {
 	}
 
 	/**
-	 * <div class="en"> Gets the eHC submission-set metadata from the FHIR resource
+	 *  Gets the eHC submission-set metadata from the FHIR resource
 	 *
 	 * @param transaction         the FHIR resource
 	 * @param receiverFacilityOid the receiverFacilityOid will be used to determine
 	 *                            which of the patient ids is the destination
 	 *                            patient id
-	 * @return </div> <div class="de"></div> <div class="fr"></div>
+	 * @return the submission-set metadata
 	 */
 	public SubmissionSetMetadata getSubmissionSetMetadata(Transaction transaction, String receiverFacilityOid) {
 		final var retVal = new SubmissionSetMetadata();
@@ -348,7 +339,6 @@ public class FhirXdTransaction {
 	 *
 	 * @param fileName the file name
 	 * @return the transaction
-	 * @throws IOException
 	 */
 	public Transaction readTransactionFromFile(String fileName) {
 		final var resourceString = FhirCommon.getXmlResource(fileName);

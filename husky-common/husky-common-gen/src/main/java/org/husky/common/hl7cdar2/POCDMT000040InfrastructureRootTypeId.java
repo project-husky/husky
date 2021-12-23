@@ -28,14 +28,14 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="POCD_MT000040.InfrastructureRoot.typeId">
- *   &lt;complexContent>
- *     &lt;restriction base="{urn:hl7-org:v3}II">
- *       &lt;attribute name="root" use="required" type="{urn:hl7-org:v3}uid" fixed="2.16.840.1.113883.1.3" />
- *       &lt;attribute name="extension" use="required" type="{urn:hl7-org:v3}st" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="POCD_MT000040.InfrastructureRoot.typeId"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{urn:hl7-org:v3}II"&gt;
+ *       &lt;attribute name="root" use="required" type="{urn:hl7-org:v3}uid" fixed="2.16.840.1.113883.1.3" /&gt;
+ *       &lt;attribute name="extension" use="required" type="{urn:hl7-org:v3}st" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

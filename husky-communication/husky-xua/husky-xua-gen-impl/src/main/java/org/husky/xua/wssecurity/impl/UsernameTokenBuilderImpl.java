@@ -16,12 +16,7 @@ import org.husky.xua.wssecurity.UsernameTokenBuilder;
 import org.opensaml.soap.wssecurity.EncodedString;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Class implementing the corresponding interface for UsernameToken building.</div>
- * <div class="de">Die Klasse implementiert das entsprechende Interface um UsernameToken bilden zu k&ooml;nnen.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Class implementing the corresponding interface for UsernameToken building.
  */
 public class UsernameTokenBuilderImpl implements UsernameTokenBuilder,
 		SecurityObjectBuilder<org.opensaml.soap.wssecurity.UsernameToken, UsernameToken> {

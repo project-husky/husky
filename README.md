@@ -1,5 +1,7 @@
 This convenience API for IHE transactions and CDA documents allows easy access and conformity to eHealth affinity domains. The project is based on a country independent architecture, but implements also Swiss extensions. Other country extensions are possible, your contributions are welcome. 
 
+The latest Javadoc is published on <a href="https://project-husky.github.io/husky/">project-husky.github.io/husky</a>.
+
 ## Installation
 
 - **[Install Guide](docs/Installation.md)**

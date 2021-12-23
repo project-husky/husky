@@ -32,13 +32,13 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="CS">
- *   &lt;complexContent>
- *     &lt;restriction base="{urn:hl7-org:v3}CV">
- *       &lt;attribute name="code" type="{urn:hl7-org:v3}cs" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="CS"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{urn:hl7-org:v3}CV"&gt;
+ *       &lt;attribute name="code" type="{urn:hl7-org:v3}cs" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

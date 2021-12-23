@@ -66,7 +66,7 @@ public class ValidationException extends Exception {
 	 *
 	 * @param cause
 	 * <div class="en">the reason of the exception.</div>
-	 * <div class="de">Der Grund des Fehlers<./div>
+	 * <div class="de">Der Grund des Fehlers</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

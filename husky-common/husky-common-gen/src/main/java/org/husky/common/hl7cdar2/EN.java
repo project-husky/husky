@@ -38,23 +38,23 @@ import java.util.List;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="EN">
- *   &lt;complexContent>
- *     &lt;extension base="{urn:hl7-org:v3}ANY">
- *       &lt;sequence>
- *         &lt;choice maxOccurs="unbounded" minOccurs="0">
- *           &lt;element name="delimiter" type="{urn:hl7-org:v3}en.delimiter"/>
- *           &lt;element name="family" type="{urn:hl7-org:v3}en.family"/>
- *           &lt;element name="given" type="{urn:hl7-org:v3}en.given"/>
- *           &lt;element name="prefix" type="{urn:hl7-org:v3}en.prefix"/>
- *           &lt;element name="suffix" type="{urn:hl7-org:v3}en.suffix"/>
- *         &lt;/choice>
- *         &lt;element name="validTime" type="{urn:hl7-org:v3}IVL_TS" minOccurs="0"/>
- *       &lt;/sequence>
- *       &lt;attribute name="use" type="{urn:hl7-org:v3}set_EntityNameUse" />
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="EN"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{urn:hl7-org:v3}ANY"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;choice maxOccurs="unbounded" minOccurs="0"&gt;
+ *           &lt;element name="delimiter" type="{urn:hl7-org:v3}en.delimiter"/&gt;
+ *           &lt;element name="family" type="{urn:hl7-org:v3}en.family"/&gt;
+ *           &lt;element name="given" type="{urn:hl7-org:v3}en.given"/&gt;
+ *           &lt;element name="prefix" type="{urn:hl7-org:v3}en.prefix"/&gt;
+ *           &lt;element name="suffix" type="{urn:hl7-org:v3}en.suffix"/&gt;
+ *         &lt;/choice&gt;
+ *         &lt;element name="validTime" type="{urn:hl7-org:v3}IVL_TS" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="use" type="{urn:hl7-org:v3}set_EntityNameUse" /&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

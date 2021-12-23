@@ -21,7 +21,7 @@ import org.husky.common.enums.ValueSetEnumInterface;
 /**
  * Enumeration of EprAgentRole values
  * <p>
- * EN: <span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;">Role codes as per Annex 5 EPRO-FDHA, CH:ATC, </span><span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;">version</span> <span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;">July 2019 </span><br clear="none"/>.<br>
+ * EN: Role codes as per Annex 5 EPRO-FDHA, CH:ATC, version July 2019 <br/>.<br>
  * DE: No designation found.<br>
  * FR: No designation found.<br>
  * IT: No designation found.<br>

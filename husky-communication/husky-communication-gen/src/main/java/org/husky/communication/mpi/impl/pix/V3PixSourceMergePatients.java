@@ -235,7 +235,7 @@ public class V3PixSourceMergePatients extends V3Message {
 	 *
 	 * @param familyName
 	 * @param givenName
-	 * @param otherName
+	 * @param other
 	 * @param prefixName
 	 * @param suffixName
 	 */

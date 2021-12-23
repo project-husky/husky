@@ -7,7 +7,10 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import javax.xml.bind.*;
+import javax.xml.bind.DataBindingException;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.JAXBIntrospector;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 
@@ -36,7 +39,8 @@ public class XmlUnmarshaller {
      * @throws ParserConfigurationException if the unmarshalling fails because of the parser.
      */
     public static <T> T unmarshallStringAsType(final String xmlContent,
-                                               final Class<T> returnType) throws ParserConfigurationException {
+                                               final Class<T> returnType) throws DataBindingException,
+            ParserConfigurationException {
         return unmarshallAsType(new InputSource(new StringReader(xmlContent)), returnType);
     }
 
@@ -53,7 +57,8 @@ public class XmlUnmarshaller {
      * @throws IOException                  if an I/O error occurs.
      */
     public static <T> T unmarshallFileAsType(final File xmlFile,
-                                             final Class<T> returnType) throws IOException, ParserConfigurationException {
+                                             final Class<T> returnType) throws DataBindingException, IOException,
+            ParserConfigurationException {
         try (final var is = new FileInputStream(xmlFile)) {
             return unmarshallAsType(new InputSource(is), returnType);
         }
@@ -71,7 +76,8 @@ public class XmlUnmarshaller {
      */
     @SuppressWarnings("unchecked")
     public static <T> T unmarshallAsType(final InputSource inputSource,
-                                         final Class<T> returnType) throws ParserConfigurationException {
+                                         final Class<T> returnType) throws DataBindingException,
+            ParserConfigurationException {
         try {
             final Document document = XmlFactories.newSafeDocumentBuilder().parse(inputSource);
             final var context = JAXBContext.newInstance(returnType);

@@ -1,3 +1,12 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
 package org.husky.emed.cda.utils;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -88,6 +97,7 @@ public class TemplateIds {
     public static final String DOSAGE_INSTRUCTIONS = "1.3.6.1.4.1.19376.1.9.1.3.6";
     public static final String SUBSTITUTION_PERMISSION = "1.3.6.1.4.1.19376.1.9.1.3.9.1";
     public static final String SUBSTITUTION_ACT = "1.3.6.1.4.1.19376.1.9.1.3.9.2";
+    public static final String RENEWAL_PERIOD = "1.3.6.1.4.1.19376.1.9.1.3.15";
 
     /**
      * CDA-CH Author (cdach_other_Author).

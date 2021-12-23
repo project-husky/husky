@@ -13,11 +13,7 @@ package org.husky.xua.saml2;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AudienceRestrictionType;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Interface describing the methods of the AudienceRestrictionBuilder. </div>
- * <div class="de">Interface welches die Methoden des AudienceRestrictionBuilder beschreibt.</div>
- * <div class="fr"></div>
- * <div class="it"></div
+ * Interface describing the methods of the AudienceRestrictionBuilder.
  */
 public interface AudienceRestrictionBuilder extends SimpleBuilder<AudienceRestrictionType> {
 

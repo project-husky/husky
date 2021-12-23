@@ -18,12 +18,7 @@ import org.husky.xua.serialization.impl.AbstractSerializerImpl;
 import org.w3c.dom.Element;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Class implementating the interface Serializer&gt;Assertion&lt; </div>
- * <div class="de">Klasse die das Interface Serializer&gt;Assertion&lt; implementiert.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Class implementating the interface Serializer&gt;Assertion&lt;.
  */
 public class PrivacyPolicyFeedSerializerImpl extends AbstractSerializerImpl
 		implements Serializer<PrivacyPolicyFeed> {

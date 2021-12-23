@@ -31,23 +31,23 @@ import java.util.List;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="COCT_MT230100UV.Approval">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;group ref="{urn:hl7-org:v3}InfrastructureRootElements"/>
- *         &lt;element name="id" type="{urn:hl7-org:v3}II"/>
- *         &lt;element name="code" type="{urn:hl7-org:v3}CD" minOccurs="0"/>
- *         &lt;element name="statusCode" type="{urn:hl7-org:v3}CS" minOccurs="0"/>
- *         &lt;element name="holder" type="{urn:ihe:pharm}COCT_MT230100UV.Holder" minOccurs="0"/>
- *         &lt;element name="author" type="{urn:ihe:pharm}COCT_MT230100UV.Author"/>
- *       &lt;/sequence>
- *       &lt;attribute name="nullFlavor" type="{urn:hl7-org:v3}NullFlavor" />
- *       &lt;attribute name="classCode" use="required" type="{urn:hl7-org:v3}ActClassContract" />
- *       &lt;attribute name="moodCode" use="required" type="{urn:hl7-org:v3}ActMoodEventOccurrence" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="COCT_MT230100UV.Approval"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;group ref="{urn:hl7-org:v3}InfrastructureRootElements"/&gt;
+ *         &lt;element name="id" type="{urn:hl7-org:v3}II"/&gt;
+ *         &lt;element name="code" type="{urn:hl7-org:v3}CD" minOccurs="0"/&gt;
+ *         &lt;element name="statusCode" type="{urn:hl7-org:v3}CS" minOccurs="0"/&gt;
+ *         &lt;element name="holder" type="{urn:ihe:pharm}COCT_MT230100UV.Holder" minOccurs="0"/&gt;
+ *         &lt;element name="author" type="{urn:ihe:pharm}COCT_MT230100UV.Author"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="nullFlavor" type="{urn:hl7-org:v3}NullFlavor" /&gt;
+ *       &lt;attribute name="classCode" use="required" type="{urn:hl7-org:v3}ActClassContract" /&gt;
+ *       &lt;attribute name="moodCode" use="required" type="{urn:hl7-org:v3}ActMoodEventOccurrence" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

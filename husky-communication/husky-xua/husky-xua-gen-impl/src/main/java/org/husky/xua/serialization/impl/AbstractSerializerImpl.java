@@ -13,12 +13,7 @@ package org.husky.xua.serialization.impl;
 import org.husky.xua.serialization.OpenSaml2Serializer;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Abstract implementation class with the common methods and fields.</div>
- * <div class="de">Abstrakte implementations Klasse mit den gemeinsamen Methoden und Feldern.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
+ * Abstract implementation class with the common methods and fields.
  */
 public abstract class AbstractSerializerImpl {
 

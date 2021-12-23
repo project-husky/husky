@@ -28,13 +28,13 @@ import javax.xml.bind.annotation.XmlType;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="adxp.careOf">
- *   &lt;complexContent>
- *     &lt;restriction base="{urn:hl7-org:v3}ADXP">
- *       &lt;attribute name="partType" type="{urn:hl7-org:v3}AddressPartType" fixed="CAR" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="adxp.careOf"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{urn:hl7-org:v3}ADXP"&gt;
+ *       &lt;attribute name="partType" type="{urn:hl7-org:v3}AddressPartType" fixed="CAR" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

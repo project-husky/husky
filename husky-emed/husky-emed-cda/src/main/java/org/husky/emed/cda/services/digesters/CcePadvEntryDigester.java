@@ -1,40 +1,37 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
 package org.husky.emed.cda.services.digesters;
 
+
+import org.husky.common.hl7cdar2.*;
+import org.husky.common.utils.OptionalUtils;
+import org.husky.common.utils.time.DateTimes;
+import org.husky.common.utils.time.Hl7Dtm;
+import org.husky.emed.cda.services.EmedEntryDigestService;
+import org.husky.emed.cda.utils.CdaR2Utils;
+import org.husky.emed.cda.utils.EntryRelationshipUtils;
+import org.husky.emed.cda.utils.IiUtils;
+import org.husky.emed.cda.utils.TemplateIds;
+import org.husky.emed.enums.PharmaceuticalAdviceStatus;
+import org.husky.emed.errors.InvalidEmedContentException;
+import org.husky.emed.models.common.AuthorDigest;
+import org.husky.emed.models.common.EmedReference;
+import org.husky.emed.models.entry.EmedEntryDigest;
+import org.husky.emed.models.entry.EmedPadvEntryDigest;
+import org.husky.emed.models.entry.padv.*;
+import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
-
-import org.husky.common.hl7cdar2.CD;
-import org.husky.common.hl7cdar2.ED;
-import org.husky.common.hl7cdar2.II;
-import org.husky.common.hl7cdar2.POCDMT000040Act;
-import org.husky.common.hl7cdar2.POCDMT000040Author;
-import org.husky.common.hl7cdar2.POCDMT000040EntryRelationship;
-import org.husky.common.hl7cdar2.POCDMT000040Observation;
-import org.husky.common.hl7cdar2.TS;
-import org.husky.common.hl7cdar2.XActRelationshipEntryRelationship;
-import org.husky.common.utils.StreamUtils;
-import org.husky.common.utils.time.DateTimes;
-import org.husky.common.utils.time.Hl7Dtm;
-import org.husky.emed.cda.enums.PharmaceuticalAdviceStatus;
-import org.husky.emed.cda.errors.InvalidEmedContentException;
-import org.husky.emed.cda.models.common.AuthorDigest;
-import org.husky.emed.cda.models.common.EmedReference;
-import org.husky.emed.cda.models.entry.EmedEntryDigest;
-import org.husky.emed.cda.models.entry.EmedPadvEntryDigest;
-import org.husky.emed.cda.models.entry.padv.EmedPadvCancelEntryDigest;
-import org.husky.emed.cda.models.entry.padv.EmedPadvChangeEntryDigest;
-import org.husky.emed.cda.models.entry.padv.EmedPadvCommentEntryDigest;
-import org.husky.emed.cda.models.entry.padv.EmedPadvOkEntryDigest;
-import org.husky.emed.cda.models.entry.padv.EmedPadvRefuseEntryDigest;
-import org.husky.emed.cda.models.entry.padv.EmedPadvSuspendEntryDigest;
-import org.husky.emed.cda.services.EmedEntryDigestService;
-import org.husky.emed.cda.utils.EntryRelationshipUtils;
-import org.husky.emed.cda.utils.IiUtils;
-import org.husky.emed.cda.utils.TemplateIds;
-import org.springframework.stereotype.Component;
 
 /**
  * Creator of CDA-CH-EMED MTP item entry digests.
@@ -48,10 +45,6 @@ public class CcePadvEntryDigester {
      * The registry of {@link EmedEntryDigest}.
      */
     private final EmedEntryDigestService emedEntryService;
-
-	public static final II REFERENCE_TO_MTP = new II();
-	public static final II REFERENCE_TO_PRE = new II();
-	public static final II REFERENCE_TO_DIS = new II();
 
     /**
      * Constructor.
@@ -203,7 +196,7 @@ public class CcePadvEntryDigester {
      */
     private String getEntryId(final POCDMT000040Observation observation) throws InvalidEmedContentException {
         return Optional.of(observation.getId())
-                .map(StreamUtils::getListFirst)
+                .map(OptionalUtils::getListFirstElement)
                 .map(IiUtils::getNormalizedUid)
                 .orElseThrow(() -> new InvalidEmedContentException(""));
     }
@@ -291,7 +284,7 @@ public class CcePadvEntryDigester {
 				// .filter(substanceAdministration -> hasAllIds(REFERENCE_TO_MTP,
 				// substanceAdministration.getTemplateId()))
                 .findAny()
-                .map(EmedReference::new);
+                .map(CdaR2Utils::toEmedReference);
     }
 
     /**
@@ -308,7 +301,7 @@ public class CcePadvEntryDigester {
 				// .filter(substanceAdministration -> hasAllIds(REFERENCE_TO_PRE,
 				// substanceAdministration.getTemplateId()))
                 .findAny()
-                .map(EmedReference::new);
+                .map(CdaR2Utils::toEmedReference);
     }
 
     /**
@@ -324,7 +317,7 @@ public class CcePadvEntryDigester {
                 .filter(Objects::nonNull)
 				// .filter(su -> hasAllIds(REFERENCE_TO_DIS, su.getTemplateId()))
                 .findAny()
-                .map(EmedReference::new);
+                .map(CdaR2Utils::toEmedReference);
     }
 
     /**

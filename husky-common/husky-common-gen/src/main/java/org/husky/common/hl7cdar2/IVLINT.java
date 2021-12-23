@@ -31,30 +31,30 @@ import java.util.List;
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  *
  * <pre>
- * &lt;complexType name="IVL_INT">
- *   &lt;complexContent>
- *     &lt;extension base="{urn:hl7-org:v3}SXCM_INT">
- *       &lt;choice minOccurs="0">
- *         &lt;sequence>
- *           &lt;element name="low" type="{urn:hl7-org:v3}IVXB_INT"/>
- *           &lt;choice minOccurs="0">
- *             &lt;element name="width" type="{urn:hl7-org:v3}INT" minOccurs="0"/>
- *             &lt;element name="high" type="{urn:hl7-org:v3}IVXB_INT" minOccurs="0"/>
- *           &lt;/choice>
- *         &lt;/sequence>
- *         &lt;element name="high" type="{urn:hl7-org:v3}IVXB_INT"/>
- *         &lt;sequence>
- *           &lt;element name="width" type="{urn:hl7-org:v3}INT"/>
- *           &lt;element name="high" type="{urn:hl7-org:v3}IVXB_INT" minOccurs="0"/>
- *         &lt;/sequence>
- *         &lt;sequence>
- *           &lt;element name="center" type="{urn:hl7-org:v3}INT"/>
- *           &lt;element name="width" type="{urn:hl7-org:v3}INT" minOccurs="0"/>
- *         &lt;/sequence>
- *       &lt;/choice>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="IVL_INT"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{urn:hl7-org:v3}SXCM_INT"&gt;
+ *       &lt;choice minOccurs="0"&gt;
+ *         &lt;sequence&gt;
+ *           &lt;element name="low" type="{urn:hl7-org:v3}IVXB_INT"/&gt;
+ *           &lt;choice minOccurs="0"&gt;
+ *             &lt;element name="width" type="{urn:hl7-org:v3}INT" minOccurs="0"/&gt;
+ *             &lt;element name="high" type="{urn:hl7-org:v3}IVXB_INT" minOccurs="0"/&gt;
+ *           &lt;/choice&gt;
+ *         &lt;/sequence&gt;
+ *         &lt;element name="high" type="{urn:hl7-org:v3}IVXB_INT"/&gt;
+ *         &lt;sequence&gt;
+ *           &lt;element name="width" type="{urn:hl7-org:v3}INT"/&gt;
+ *           &lt;element name="high" type="{urn:hl7-org:v3}IVXB_INT" minOccurs="0"/&gt;
+ *         &lt;/sequence&gt;
+ *         &lt;sequence&gt;
+ *           &lt;element name="center" type="{urn:hl7-org:v3}INT"/&gt;
+ *           &lt;element name="width" type="{urn:hl7-org:v3}INT" minOccurs="0"/&gt;
+ *         &lt;/sequence&gt;
+ *       &lt;/choice&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)

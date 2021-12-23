@@ -27,14 +27,14 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ * 
  * <pre>
- * &lt;simpleType name="ActClassPublicHealthCase">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="CASE"/>
- *     &lt;enumeration value="OUTB"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="ActClassPublicHealthCase"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="CASE"/&gt;
+ *     &lt;enumeration value="OUTB"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "ActClassPublicHealthCase")

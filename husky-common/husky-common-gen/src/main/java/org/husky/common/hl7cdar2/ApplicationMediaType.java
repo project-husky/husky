@@ -28,15 +28,15 @@ import javax.xml.bind.annotation.XmlType;
  *
  * <p>
  * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- * <p>
+ * 
  * <pre>
- * &lt;simpleType name="ApplicationMediaType">
- *   &lt;restriction base="{urn:hl7-org:v3}cs">
- *     &lt;enumeration value="application/dicom"/>
- *     &lt;enumeration value="application/msword"/>
- *     &lt;enumeration value="application/pdf"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
+ * &lt;simpleType name="ApplicationMediaType"&gt;
+ *   &lt;restriction base="{urn:hl7-org:v3}cs"&gt;
+ *     &lt;enumeration value="application/dicom"/&gt;
+ *     &lt;enumeration value="application/msword"/&gt;
+ *     &lt;enumeration value="application/pdf"/&gt;
+ *   &lt;/restriction&gt;
+ * &lt;/simpleType&gt;
  * </pre>
  */
 @XmlType(name = "ApplicationMediaType")
