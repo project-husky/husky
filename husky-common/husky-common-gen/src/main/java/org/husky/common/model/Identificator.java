@@ -96,7 +96,6 @@ public class Identificator extends IdentificatorBaseType {
 
         if (baseType != null) {
             retVal = new org.husky.common.hl7cdar2.II();
-            String value;
 
             var nf = baseType.getNullFlavor();
             if (nf != null) {
@@ -104,32 +103,35 @@ public class Identificator extends IdentificatorBaseType {
                     retVal.nullFlavor = new ArrayList<String>();
                 retVal.nullFlavor.add(nf.getCodeValue());
             } else {
-
-                value = baseType.getAssigningAuthorityName();
-                if (value != null) {
-                    retVal.setAssigningAuthorityName(value);
-                }
-
-                Boolean bValue = baseType.isDisplayable();
-                if (bValue != null) {
-                    retVal.setDisplayable(bValue);
-                }
-
-                value = baseType.getExtension();
-                if (value != null) {
-                    retVal.setExtension(value);
-                }
-
-                value = baseType.getRoot();
-                if (value != null) {
-                    retVal.setRoot(value);
-                }
+				createIdentificator(retVal, baseType);
             }
         }
 
         return retVal;
 
     }
+
+	private static void createIdentificator(II retVal, IdentificatorBaseType baseType) {
+		String value = baseType.getAssigningAuthorityName();
+		if (value != null) {
+			retVal.setAssigningAuthorityName(value);
+		}
+
+		Boolean bValue = baseType.isDisplayable();
+		if (bValue != null) {
+			retVal.setDisplayable(bValue);
+		}
+
+		value = baseType.getExtension();
+		if (value != null) {
+			retVal.setExtension(value);
+		}
+
+		value = baseType.getRoot();
+		if (value != null) {
+			retVal.setRoot(value);
+		}
+	}
 
     /**
      * Creates the base type from the given HL7 CDA R2 value.

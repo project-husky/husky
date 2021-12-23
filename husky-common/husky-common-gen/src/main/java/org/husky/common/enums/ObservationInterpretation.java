@@ -11,11 +11,11 @@
 
 package org.husky.common.enums;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
-import org.husky.common.hl7cdar2.CE;
-import org.husky.common.model.Code;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * <div class="en">The Enum containing the supported ObservationInterpretation
@@ -23,7 +23,7 @@ import org.husky.common.model.Code;
  * 2.16.840.1.113883.5.83).</div> <div class="fr">Domaine de valeurs pour « Code
  * dinterprétation »</div>
  */
-public enum ObservationInterpretation {
+public enum ObservationInterpretation implements ValueSetEnumInterface {
 
 	//@formatter:off
 	/**
@@ -215,12 +215,6 @@ public enum ObservationInterpretation {
 	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div>
-	 * <div class="de">Menschenlesbarer Name</div>
-	 */
-	private String displayName;
-
-	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
 	 * Display Name</div> <div class="de">Instantsiert dieses Enum Object
 	 * mittels eines Codes und einem Display Name</div>.
@@ -241,35 +235,11 @@ public enum ObservationInterpretation {
 			String displayNameFr, String displayNameIt) {
 		this.code = code;
 
-		displayNames = new HashMap<>();
+		displayNames = new EnumMap<>(LanguageCode.class);
 		displayNames.put(LanguageCode.ENGLISH, displayNameEn);
 		displayNames.put(LanguageCode.GERMAN, displayNameDe);
 		displayNames.put(LanguageCode.FRENCH, displayNameFr);
 		displayNames.put(LanguageCode.ITALIAN, displayNameIt);
-	}
-
-	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
-	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
-	 *
-	 * @return <div class="en">The MDHT Code</div>
-	 */
-	public CE getCE() {
-		final var ce = new CE();
-		ce.setCodeSystem(CODE_SYSTEM_OID);
-		ce.setCode(code);
-		ce.setDisplayName(displayName);
-		return ce;
-	}
-
-	/**
-	 * <div class="en">Gets the husky Code Object</div>
-	 * <div class="de">Liefert das husky Code Objekt</div>
-	 *
-	 * @return <div class="en">the code</div>
-	 */
-	public Code getCode() {
-		return new Code(code, CODE_SYSTEM_OID, displayName);
 	}
 
 	/**
@@ -278,6 +248,7 @@ public enum ObservationInterpretation {
 	 *
 	 * @return <div class="en">the code system name</div>
 	 */
+	@Override
 	public String getCodeSystemName() {
 		return CODE_SYSTEM_NAME;
 	}
@@ -288,7 +259,8 @@ public enum ObservationInterpretation {
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */
-	public String getCodeSystemOid() {
+	@Override
+	public @NonNull String getCodeSystemId() {
 		return CODE_SYSTEM_OID;
 	}
 
@@ -308,6 +280,7 @@ public enum ObservationInterpretation {
 	 *
 	 * @return <div class="en">the display name</div>
 	 */
+	@Override
 	public String getDisplayName() {
 		return getDisplayName(LanguageCode.ENGLISH);
 	}
@@ -323,7 +296,8 @@ public enum ObservationInterpretation {
 	 * @return returns the display name in the desired language. if language not
 	 *         found, display name in german will returned
 	 */
-	public String getDisplayName(LanguageCode languageCode) {
+	@Override
+	public @NonNull String getDisplayName(@Nullable LanguageCode languageCode) {
 		String displayNameL = null;
 		if (languageCode != null && displayNames.get(languageCode) != null) {
 			displayNameL = displayNames.get(languageCode);
@@ -331,6 +305,16 @@ public enum ObservationInterpretation {
 			displayNameL = displayNames.get(LanguageCode.GERMAN);
 		}
 		return displayNameL;
+	}
+
+	@Override
+	public @NonNull String getValueSetId() {
+		return CODE_SYSTEM_OID;
+	}
+
+	@Override
+	public @NonNull String getValueSetName() {
+		return CODE_SYSTEM_NAME;
 	}
 
 }

@@ -10,13 +10,13 @@
  */
 package org.husky.common.model;
 
+import javax.xml.bind.JAXBElement;
+
 import org.husky.common.enums.ObservationInterpretation;
 import org.husky.common.hl7cdar2.BL;
 import org.husky.common.hl7cdar2.IVLPQ;
 import org.husky.common.hl7cdar2.POCDMT000040ReferenceRange;
 import org.husky.common.hl7cdar2.PQ;
-
-import javax.xml.bind.JAXBElement;
 
 /**
  * The Class ReferenceRange. A reference range or reference interval is the range of values for a physiologic
@@ -78,53 +78,62 @@ public class ReferenceRange extends ObservationRange {
      * @return the Reference Range as narrative String
      */
     public String toNarrativeString() {
-        var retVal = "";
+		var retVal = "";
         var value = "";
-        var lowValue = "";
-        var lowUnit = "";
-        var highValue = "";
-        var highUnit = "";
 
         IVLPQ tempIvl = null;
         if (mRr != null && mRr.getObservationRange() != null && mRr.getObservationRange().getValue() != null) {
-            if (mRr.getObservationRange().getValue() instanceof IVLPQ)
-                tempIvl = (IVLPQ) mRr.getObservationRange().getValue();
-            if (mRr.getObservationRange().getValue() instanceof BL)
-                value = ((BL) mRr.getObservationRange().getValue()).isValue().toString();
+			if (mRr.getObservationRange().getValue()instanceof IVLPQ obj)
+				tempIvl = obj;
+			if (mRr.getObservationRange().getValue()instanceof BL obj)
+				value = obj.isValue().toString();
         }
 
         if (tempIvl != null) {
-            for (JAXBElement<? extends PQ> pqEl : tempIvl.getRest()) {
-                if (pqEl != null && pqEl.getName() != null) {
-                    if ("low".equalsIgnoreCase(pqEl.getName().getLocalPart())) {
-                        lowValue = tempIvl.getValue();
-                        lowUnit = tempIvl.getUnit();
-                    } else if ("high".equalsIgnoreCase(pqEl.getName().getLocalPart())) {
-                        highValue = tempIvl.getValue();
-                        highUnit = tempIvl.getUnit();
-                    }
-                }
-            }
-
-            if (lowUnit == null)
-                lowUnit = tempIvl.getUnit();
-            if (highUnit == null)
-                highUnit = tempIvl.getUnit();
-        }
+			value = extractValueFromIvlpq(tempIvl);
+		}
+        
         if (!value.isEmpty()) {
             retVal = value;
-        } else {
-            if (!lowUnit.isEmpty())
-                lowUnit = " " + lowUnit;
-            if (!highUnit.isEmpty())
-                highUnit = " " + highUnit;
+        } 
 
-            if (lowUnit.equals(highUnit))
-                retVal = lowValue + " - " + highValue + lowUnit;
-            else
-                retVal = lowValue + lowUnit + " - " + highValue + highUnit;
-        }
+		return retVal;
+	}
 
-        return retVal;
+	private String extractValueFromIvlpq(IVLPQ tempIvl) {
+		var lowValue = "";
+		var lowUnit = "";
+		var highValue = "";
+		var highUnit = "";
+		String retVal;
+		for (JAXBElement<? extends PQ> pqEl : tempIvl.getRest()) {
+			if (pqEl != null && pqEl.getName() != null) {
+				if ("low".equalsIgnoreCase(pqEl.getName().getLocalPart())) {
+					lowValue = tempIvl.getValue();
+					lowUnit = tempIvl.getUnit();
+				} else if ("high".equalsIgnoreCase(pqEl.getName().getLocalPart())) {
+					highValue = tempIvl.getValue();
+					highUnit = tempIvl.getUnit();
+                }
+            }
+		}
+
+		if (lowUnit.isEmpty())
+			lowUnit = tempIvl.getUnit();
+		if (highUnit.isEmpty())
+			highUnit = tempIvl.getUnit();
+
+		if (!lowUnit.isEmpty())
+			lowUnit = " " + lowUnit;
+		if (!highUnit.isEmpty())
+			highUnit = " " + highUnit;
+
+		if (lowUnit.equals(highUnit))
+			retVal = lowValue + " - " + highValue + lowUnit;
+		else
+			retVal = lowValue + lowUnit + " - " + highValue + highUnit;
+
+		return retVal;
     }
+
 }

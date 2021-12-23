@@ -12,6 +12,7 @@ package org.husky.common.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
@@ -20,6 +21,7 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.husky.common.basetypes.AddressBaseType;
 import org.husky.common.enums.NullFlavor;
 import org.husky.common.enums.PostalAddressUse;
+import org.husky.common.hl7cdar2.AD;
 import org.husky.common.hl7cdar2.AdxpAdditionalLocator;
 import org.husky.common.hl7cdar2.AdxpCity;
 import org.husky.common.hl7cdar2.AdxpCountry;
@@ -79,54 +81,43 @@ public class Address extends AddressBaseType {
 			if (!hl7CdaR2Value.getUse().isEmpty())
 				retVal.setUsage(PostalAddressUse.getEnum(hl7CdaR2Value.getUse().get(0)));
 
-			String streetAddressLine1 = null;
-			String streetAddressLine2 = null;
-
 			for (Serializable element : hl7CdaR2Value.getContent()) {
 				if (element instanceof JAXBElement) {
 					JAXBElement<?> elem = (JAXBElement<?>) element;
-					if (elem.getValue() instanceof AdxpAdditionalLocator) {
-						AdxpAdditionalLocator obj = (AdxpAdditionalLocator) elem.getValue();
-						retVal.setAdditionalLocator(obj.getTextContent());
-					} else if (elem.getValue() instanceof AdxpStreetName) {
-						AdxpStreetName obj = (AdxpStreetName) elem.getValue();
-						retVal.setStreetName(obj.getTextContent());
-					} else if (elem.getValue() instanceof AdxpHouseNumber) {
-						AdxpHouseNumber obj = (AdxpHouseNumber) elem.getValue();
-						retVal.setBuildingNumber(obj.getTextContent());
-					} else if (elem.getValue() instanceof AdxpPostBox) {
-						AdxpPostBox obj = (AdxpPostBox) elem.getValue();
-						retVal.setPostBox(obj.getTextContent());
-					} else if (elem.getValue() instanceof AdxpPostalCode) {
-						AdxpPostalCode obj = (AdxpPostalCode) elem.getValue();
-						retVal.setPostalCode(obj.getTextContent());
-					} else if (elem.getValue() instanceof AdxpCity) {
-						AdxpCity obj = (AdxpCity) elem.getValue();
-						retVal.setCity(obj.getTextContent());
-					} else if (elem.getValue() instanceof AdxpState) {
-						AdxpState obj = (AdxpState) elem.getValue();
-						retVal.setState(obj.getTextContent());
-					} else if (elem.getValue() instanceof AdxpCountry) {
-						AdxpCountry obj = (AdxpCountry) elem.getValue();
-						retVal.setCountry(obj.getTextContent());
-					} else if (elem.getValue() instanceof AdxpStreetAddressLine) {
-						if (streetAddressLine1 == null) {
-							AdxpStreetAddressLine obj = (AdxpStreetAddressLine) elem.getValue();
-							streetAddressLine1 = obj.getTextContent();
-							retVal.setStreetAddressLine1(streetAddressLine1);
-						} else if (streetAddressLine2 == null) {
-							AdxpStreetAddressLine obj = (AdxpStreetAddressLine) elem.getValue();
-							streetAddressLine2 = obj.getTextContent();
-							retVal.setStreetAddressLine2(streetAddressLine2);
-						}
-					} else
-						throw new NotImplementedException(elem.getValue().getClass().getName());
+					extractAddressFieldsFromContent(retVal, elem.getValue());
 				}
 			}
 		} else
 			retVal.setNullFlavor(NullFlavor.NOT_AVAILABLE);
 
 		return retVal;
+	}
+
+	private static void extractAddressFieldsFromContent(AddressBaseType retVal, Object value) {
+		if (value instanceof AdxpAdditionalLocator obj) {
+			retVal.setAdditionalLocator(obj.getTextContent());
+		} else if (value instanceof AdxpStreetName obj) {
+			retVal.setStreetName(obj.getTextContent());
+		} else if (value instanceof AdxpHouseNumber obj) {
+			retVal.setBuildingNumber(obj.getTextContent());
+		} else if (value instanceof AdxpPostBox obj) {
+			retVal.setPostBox(obj.getTextContent());
+		} else if (value instanceof AdxpPostalCode obj) {
+			retVal.setPostalCode(obj.getTextContent());
+		} else if (value instanceof AdxpCity obj) {
+			retVal.setCity(obj.getTextContent());
+		} else if (value instanceof AdxpState obj) {
+			retVal.setState(obj.getTextContent());
+		} else if (value instanceof AdxpCountry obj) {
+			retVal.setCountry(obj.getTextContent());
+		} else if (value instanceof AdxpStreetAddressLine obj) {
+			if (retVal.getStreetAddressLine1() == null) {
+				retVal.setStreetAddressLine1(obj.getTextContent());
+			} else if (retVal.getStreetAddressLine2() == null) {
+				retVal.setStreetAddressLine2(obj.getTextContent());
+			}
+		} else
+			throw new NotImplementedException(value.getClass().getName());
 	}
 
 	/**
@@ -142,110 +133,113 @@ public class Address extends AddressBaseType {
 
 		if (baseType != null) {
 			retVal = new org.husky.common.hl7cdar2.AD();
-			String value;
-
-			NullFlavor nf = baseType.getNullFlavor();
-			if (nf != null) {
-				if (retVal.nullFlavor == null)
-					retVal.nullFlavor = new ArrayList<String>();
-				retVal.nullFlavor.add(nf.getCodeValue());
-			}
-
-			value = baseType.getAdditionalLocator();
-			if (value != null) {
-				AdxpAdditionalLocator obj = new AdxpAdditionalLocator();
-				obj.setXmlMixed(value);
-				retVal.getContent()
-						.add(new JAXBElement<AdxpAdditionalLocator>(
-								new QName(HL7_NAMESPACE, "additionalLocator"),
-								AdxpAdditionalLocator.class, obj));
-			}
-
-			value = baseType.getBuildingNumber();
-			if (value != null) {
-				AdxpHouseNumber obj = new AdxpHouseNumber();
-				obj.setXmlMixed(value);
-				retVal.getContent().add(new JAXBElement<AdxpHouseNumber>(
-						new QName(HL7_NAMESPACE, "houseNumber"), AdxpHouseNumber.class, obj));
-			}
-
-			value = baseType.getCity();
-			if (value != null) {
-				AdxpCity obj = new AdxpCity();
-				obj.setXmlMixed(value);
-				retVal.getContent().add(new JAXBElement<AdxpCity>(
-						new QName(HL7_NAMESPACE, "city"), AdxpCity.class, obj));
-			}
-
-			value = baseType.getCountry();
-			if (value != null) {
-				AdxpCountry obj = new AdxpCountry();
-				obj.setXmlMixed(value);
-				retVal.getContent().add(new JAXBElement<AdxpCountry>(
-						new QName(HL7_NAMESPACE, "country"), AdxpCountry.class, obj));
-			}
-
-			value = baseType.getPostalCode();
-			if (value != null) {
-				AdxpPostalCode obj = new AdxpPostalCode();
-				obj.setXmlMixed(value);
-				retVal.getContent().add(new JAXBElement<AdxpPostalCode>(
-						new QName(HL7_NAMESPACE, "postalCode"), AdxpPostalCode.class, obj));
-			}
-
-			value = baseType.getPostBox();
-			if (value != null) {
-				AdxpPostBox obj = new AdxpPostBox();
-				obj.setXmlMixed(value);
-				retVal.getContent().add(new JAXBElement<AdxpPostBox>(
-						new QName(HL7_NAMESPACE, "postBox"), AdxpPostBox.class, obj));
-			}
-
-			value = baseType.getState();
-			if (value != null) {
-				AdxpState obj = new AdxpState();
-				obj.setXmlMixed(value);
-				retVal.getContent().add(new JAXBElement<AdxpState>(
-						new QName(HL7_NAMESPACE, "state"), AdxpState.class, obj));
-			}
-
-			value = baseType.getStreetAddressLine1();
-			if (value != null) {
-				AdxpStreetAddressLine obj = new AdxpStreetAddressLine();
-				obj.setXmlMixed(value);
-				retVal.getContent()
-						.add(new JAXBElement<AdxpStreetAddressLine>(
-								new QName(HL7_NAMESPACE, "streetAddressLine"),
-								AdxpStreetAddressLine.class, obj));
-			}
-
-			value = baseType.getStreetAddressLine2();
-			if (value != null) {
-				AdxpStreetAddressLine obj = new AdxpStreetAddressLine();
-				obj.setXmlMixed(value);
-				retVal.getContent()
-						.add(new JAXBElement<AdxpStreetAddressLine>(
-								new QName(HL7_NAMESPACE, "streetAddressLine"),
-								AdxpStreetAddressLine.class, obj));
-			}
-
-			value = baseType.getStreetName();
-			if (value != null) {
-				AdxpStreetName obj = new AdxpStreetName();
-				obj.setXmlMixed(value);
-				retVal.getContent().add(new JAXBElement<AdxpStreetName>(
-						new QName(HL7_NAMESPACE, "streetName"), AdxpStreetName.class, obj));
-			}
-
-			PostalAddressUse usage = baseType.getUsage();
-			if (usage != null) {
-				retVal.getUse().clear();
-				retVal.getUse().add(usage.getCode().getCode());
-			}
+			createAddress(retVal, baseType);
 		}
 
 		return retVal;
 
+	}
+
+	private static void createAddress(AD retVal, AddressBaseType baseType) {
+		NullFlavor nf = baseType.getNullFlavor();
+		if (nf != null) {
+			if (retVal.nullFlavor == null)
+				retVal.nullFlavor = new ArrayList<String>();
+			retVal.nullFlavor.add(nf.getCodeValue());
+		}
+
+		retVal.getContent().addAll(createAddressContent(baseType));
+
+		PostalAddressUse usage = baseType.getUsage();
+		if (usage != null) {
+			retVal.getUse().clear();
+			retVal.getUse().add(usage.getCode().getCode());
+		}
+	}
+
+	private static List<Serializable> createAddressContent(AddressBaseType baseType) {
+		List<Serializable> content = new ArrayList<>();
+
+		String value = baseType.getAdditionalLocator();
+		if (value != null) {
+			AdxpAdditionalLocator obj = new AdxpAdditionalLocator();
+			obj.setXmlMixed(value);
+			content.add(new JAXBElement<AdxpAdditionalLocator>(
+					new QName(HL7_NAMESPACE, "additionalLocator"), AdxpAdditionalLocator.class, obj));
+		}
+
+		value = baseType.getBuildingNumber();
+		if (value != null) {
+			AdxpHouseNumber obj = new AdxpHouseNumber();
+			obj.setXmlMixed(value);
+			content.add(new JAXBElement<AdxpHouseNumber>(new QName(HL7_NAMESPACE, "houseNumber"),
+					AdxpHouseNumber.class, obj));
+		}
+
+		value = baseType.getCity();
+		if (value != null) {
+			AdxpCity obj = new AdxpCity();
+			obj.setXmlMixed(value);
+			content.add(new JAXBElement<AdxpCity>(new QName(HL7_NAMESPACE, "city"), AdxpCity.class, obj));
+		}
+
+		value = baseType.getCountry();
+		if (value != null) {
+			AdxpCountry obj = new AdxpCountry();
+			obj.setXmlMixed(value);
+			content
+					.add(new JAXBElement<AdxpCountry>(new QName(HL7_NAMESPACE, "country"), AdxpCountry.class, obj));
+		}
+
+		value = baseType.getPostalCode();
+		if (value != null) {
+			AdxpPostalCode obj = new AdxpPostalCode();
+			obj.setXmlMixed(value);
+			content.add(
+					new JAXBElement<AdxpPostalCode>(new QName(HL7_NAMESPACE, "postalCode"), AdxpPostalCode.class, obj));
+		}
+
+		value = baseType.getPostBox();
+		if (value != null) {
+			AdxpPostBox obj = new AdxpPostBox();
+			obj.setXmlMixed(value);
+			content
+					.add(new JAXBElement<AdxpPostBox>(new QName(HL7_NAMESPACE, "postBox"), AdxpPostBox.class, obj));
+		}
+
+		value = baseType.getState();
+		if (value != null) {
+			AdxpState obj = new AdxpState();
+			obj.setXmlMixed(value);
+			content
+					.add(new JAXBElement<AdxpState>(new QName(HL7_NAMESPACE, "state"), AdxpState.class, obj));
+		}
+
+		value = baseType.getStreetAddressLine1();
+		if (value != null) {
+			AdxpStreetAddressLine obj = new AdxpStreetAddressLine();
+			obj.setXmlMixed(value);
+			content.add(new JAXBElement<AdxpStreetAddressLine>(
+					new QName(HL7_NAMESPACE, "streetAddressLine"), AdxpStreetAddressLine.class, obj));
+		}
+
+		value = baseType.getStreetAddressLine2();
+		if (value != null) {
+			AdxpStreetAddressLine obj = new AdxpStreetAddressLine();
+			obj.setXmlMixed(value);
+			content.add(new JAXBElement<AdxpStreetAddressLine>(
+					new QName(HL7_NAMESPACE, "streetAddressLine"), AdxpStreetAddressLine.class, obj));
+		}
+
+		value = baseType.getStreetName();
+		if (value != null) {
+			AdxpStreetName obj = new AdxpStreetName();
+			obj.setXmlMixed(value);
+			content.add(
+					new JAXBElement<AdxpStreetName>(new QName(HL7_NAMESPACE, "streetName"), AdxpStreetName.class, obj));
+		}
+
+		return content;
 	}
 
 

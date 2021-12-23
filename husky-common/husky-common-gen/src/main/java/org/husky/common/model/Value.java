@@ -90,32 +90,6 @@ public class Value {
      * @param low  The lower bound
      * @param high The upper bound
      */
-    public Value(BigDecimal low, BigDecimal high) {
-        final var ivlPq = new IVLPQ();
-        final var mlow = new IVXBPQ();
-        final var mhigh = new IVXBPQ();
-
-        if (low != null && high != null) {
-
-            mlow.setValue(low.toString());
-            mlow.setUnit("");
-            ivlPq.getRest().add(new JAXBElement<>(new QName(NAMESPACE_HL7_V3, "low", ""), IVXBPQ.class, mlow));
-
-            mhigh.setValue(high.toString());
-            mhigh.setUnit("");
-            ivlPq.getRest().add(new JAXBElement<>(new QName(NAMESPACE_HL7_V3, "high", ""), IVXBPQ.class, mhigh));
-        }
-
-        mValue = ivlPq;
-    }
-
-    /**
-     * Instantiates a new value with the parameters for a MDHT IVL_PQ Objekt with two PQ Values (A low and high bound of
-     * physical quantities).
-     *
-     * @param low  The lower bound
-     * @param high The upper bound
-     */
     public Value(BigDecimal low, String lowUnit, BigDecimal high, String highUnit) {
         final var ivlPq = new IVLPQ();
         final var mlow = new IVXBPQ();
@@ -468,13 +442,13 @@ public class Value {
 			final var code = new Code(cd);
             code.setOriginalText(originalText);
         }
-        if (mValue instanceof ED) {
+		if (mValue instanceof ED ed) {
             final var tel = new TEL();
             if (!originalText.startsWith("#")) {
                 originalText = "#" + originalText;
             }
             tel.setValue(originalText);
-            ((ED) mValue).setReference(tel);
+			ed.setReference(tel);
         }
     }
 
@@ -513,15 +487,8 @@ public class Value {
         Map<String, PQ> pqElements = new HashMap<>();
         if (range != null) {
             for (JAXBElement<? extends QTY> pq : range.getRest()) {
-                var value = new PQ();
+				var value = extractPqValue(pq);
                 var elementName = "";
-                if (pq != null && PQ.class.equals(pq.getDeclaredType()) && pq.getValue() != null) {
-                    value = (PQ) pq.getValue();
-                }
-
-                if (pq != null && IVXBPQ.class.equals(pq.getDeclaredType()) && pq.getValue() != null) {
-                    value = (IVXBPQ) pq.getValue();
-                }
 
                 if (pq != null && pq.getName() != null) {
                     elementName = pq.getName().getLocalPart();
@@ -535,6 +502,19 @@ public class Value {
 
         return pqElements;
     }
+
+	private PQ extractPqValue(JAXBElement<? extends QTY> pq) {
+		var value = new PQ();
+		if (pq != null && PQ.class.equals(pq.getDeclaredType()) && pq.getValue() != null) {
+			value = (PQ) pq.getValue();
+		}
+
+		if (pq != null && IVXBPQ.class.equals(pq.getDeclaredType()) && pq.getValue() != null) {
+			value = (IVXBPQ) pq.getValue();
+		}
+
+		return value;
+	}
 
     /**
      * Returns the lower bound of an interval of physical measurements
@@ -587,24 +567,16 @@ public class Value {
         if (isRto()) {
             final var rto = (RTO) mValue;
             var retVal = "";
-            var numeratorUnit = "";
             var denominatorUnit = "";
+			var numeratorUnit = "";
 
             if (rto != null) {
                 QTY numerator = rto.getNumerator();
                 QTY denominator = rto.getDenominator();
-				if (numerator instanceof PQ pq) {
-					numeratorUnit = pq.getUnit();
-                }
 
-				if (denominator instanceof PQ pq) {
-					denominatorUnit = pq.getUnit();
-                }
+				numeratorUnit = extractUnit(numerator);
+				denominatorUnit = extractUnit(denominator);
             }
-            if (!numeratorUnit.isEmpty())
-                numeratorUnit = " " + numeratorUnit;
-            if (!denominatorUnit.isEmpty())
-                denominatorUnit = " " + denominatorUnit;
 
             if (numeratorUnit.equals(denominatorUnit))
                 retVal = numeratorUnit;
@@ -615,6 +587,18 @@ public class Value {
         }
         return null;
     }
+
+	private String extractUnit(QTY numerator) {
+		var unit = "";
+		if (numerator instanceof PQ pq) {
+			unit = pq.getUnit();
+		}
+
+		if (!unit.isEmpty())
+			unit = " " + unit;
+
+		return unit;
+	}
 
     /**
      * Returns the text of the underlying MDHT type RTO (Ratio)

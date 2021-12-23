@@ -592,7 +592,7 @@ public class Author {
      */
     @Nullable
     public Instant getTimeAsInstant() {
-        return Optional.ofNullable(this.getTimeAsHl7Dtm()).map(Hl7Dtm::toInstant).orElse(null);
+		return Optional.ofNullable(this.getTimeAsHl7Dtm()).map(Hl7Dtm::toInstant).orElse(null);
     }
 
     /**

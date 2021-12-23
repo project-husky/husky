@@ -1,6 +1,6 @@
 package org.husky.xua.validation.statement;
 
-import static org.husky.common.enums.CodeSystems.SwissEprSpid;
+import static org.husky.common.enums.CodeSystems.SWISS_EPR_SPID;
 import static org.husky.communication.ch.enums.PurposeOfUse.AUTOMATIC_UPLOAD;
 import static org.husky.communication.ch.enums.PurposeOfUse.EMERGENCY_ACCESS;
 import static org.husky.communication.ch.enums.PurposeOfUse.NORMAL_ACCESS;
@@ -190,7 +190,7 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 .map(XSString.class::cast)
                 .map(XSString::getValue)
                 .orElse(null);
-        final var suffix = "^^^&" + SwissEprSpid.getCodeSystemId() + "&ISO";
+        final var suffix = "^^^&" + SWISS_EPR_SPID.getCodeSystemId() + "&ISO";
         if (resourceId == null || !resourceId.endsWith(suffix)) {
             context.setValidationFailureMessage("The attribute '" + OASIS_XACML_RESOURCEID + "' contains an invalid value");
             return ValidationResult.INVALID;

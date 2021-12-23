@@ -10,14 +10,14 @@
  */
 package org.husky.common.enums;
 
-import org.husky.common.hl7cdar2.CE;
-import org.husky.common.model.Code;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /*
 *<div class="de">Das Geschlecht einer Person, welches für verwaltungstechnische Belange verwendet wird</div>
 *<div class="fr"></div>
 */
-public enum AdministrativeGender {
+public enum AdministrativeGender implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en"></div> <div class="de">Weiblich</div>
@@ -113,82 +113,36 @@ public enum AdministrativeGender {
 
 	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
-	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
-	 * dieser Klasse) eindeutiger Code</div>
+	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb dieser
+	 * Klasse) eindeutiger Code</div>
 	 */
 	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div>
-	 * <div class="de">Menschenlesbarer Name</div>
+	 * <div class="en">Human readable name</div> <div class="de">Menschenlesbarer
+	 * Name</div>
 	 */
 	private String displayName;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
-	 * mittels eines Codes und einem Display Name</div>
+	 * <div class="en">Instantiates this Enum Object with a given Code and Display
+	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
+	 * Codes und einem Display Name</div>
 	 *
-	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div>
-	 * @param displayName
-	 *            <br>
-	 *            <div class="de"> display name</div>
+	 * @param code        <br>
+	 *                    <div class="de"> code</div>
+	 * @param displayName <br>
+	 *                    <div class="de"> display name</div>
 	 */
 	private AdministrativeGender(String code, String displayName) {
 		this.code = code;
 		this.displayName = displayName;
 	}
 
-	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
-	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
-	 *
-	 * @return <div class="en">The MDHT Code</div>
-	 */
-	public CE getCE() {
-		final var ce = new CE();
-		ce.setCodeSystem(CODE_SYSTEM_OID);
-		ce.setCodeSystemName(CODE_SYSTEM_NAME);
-		ce.setCode(code);
-		ce.setDisplayName(displayName);
-		return ce;
-	}
 
 	/**
-	 * <div class="en">Gets the husky Code Object</div>
-	 * <div class="de">Liefert das husky Code Objekt</div>
-	 *
-	 * @return <div class="en">the code</div>
-	 */
-	public Code getCode() {
-		return new Code(code, CODE_SYSTEM_OID, displayName);
-	}
-
-	/**
-	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
-	 * code system name.</div>
-	 *
-	 * @return <div class="en">the code system name</div>
-	 */
-	public String getCodeSystemName() {
-		return CODE_SYSTEM_NAME;
-	}
-
-	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
-	 * die code system id.</div>
-	 *
-	 * @return <div class="en">the code system id</div>
-	 */
-	public String getCodeSystemOid() {
-		return CODE_SYSTEM_OID;
-	}
-
-	/**
-	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="en">Gets the actual Code as string</div> <div class="de">Liefert
+	 * den eigentlichen Code als String</div>
 	 *
 	 * @return <div class="en">the code</div>
 	 */
@@ -196,14 +150,34 @@ public enum AdministrativeGender {
 		return this.code;
 	}
 
-	/**
-	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
-	 * display name.</div>
-	 *
-	 * @return <div class="en">the display name</div>
-	 */
+	@Override
+	public @NonNull String getCodeSystemId() {
+		return CODE_SYSTEM_OID;
+	}
+
+	@Override
 	public String getDisplayName() {
 		return this.displayName;
+	}
+
+	@Override
+	public @NonNull String getDisplayName(@Nullable LanguageCode languageCode) {
+		return getDisplayName();
+	}
+
+	@Override
+	public @NonNull String getValueSetId() {
+		return CODE_SYSTEM_OID;
+	}
+
+	@Override
+	public @NonNull String getValueSetName() {
+		return CODE_SYSTEM_NAME;
+	}
+
+	@Override
+	public @NonNull String getCodeSystemName() {
+		return CODE_SYSTEM_NAME;
 	}
 
 }

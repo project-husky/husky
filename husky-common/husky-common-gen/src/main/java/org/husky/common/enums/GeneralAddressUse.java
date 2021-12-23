@@ -11,14 +11,14 @@
 
 package org.husky.common.enums;
 
-import org.husky.common.hl7cdar2.CE;
-import org.husky.common.model.Code;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * <div class="en">Address uses that can apply to both postal and
  * telecommunication addresses. </div>
  */
-public enum GeneralAddressUse {
+public enum GeneralAddressUse implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">A flag indicating that the address is bad, in fact,
@@ -181,30 +181,6 @@ public enum GeneralAddressUse {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
-	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
-	 *
-	 * @return <div class="en">The MDHT Code</div>
-	 */
-	public CE getCE() {
-		final var ce = new CE();
-		ce.setCodeSystem(CODE_SYSTEM_OID);
-		ce.setCode(code);
-		ce.setDisplayName(displayName);
-		return ce;
-	}
-
-	/**
-	 * <div class="en">Gets the husky Code Object</div>
-	 * <div class="de">Liefert das husky Code Objekt</div>.
-	 *
-	 * @return <div class="en">the code</div>
-	 */
-	public Code getCode() {
-		return new Code(code, CODE_SYSTEM_OID, displayName);
-	}
-
-	/**
 	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
 	 * code system name.</div>
 	 *
@@ -220,7 +196,7 @@ public enum GeneralAddressUse {
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */
-	public String getCodeSystemOid() {
+	public String getCodeSystemId() {
 		return CODE_SYSTEM_OID;
 	}
 
@@ -240,8 +216,24 @@ public enum GeneralAddressUse {
 	 *
 	 * @return <div class="en">the display name</div>
 	 */
+	@Override
 	public String getDisplayName() {
 		return displayName;
+	}
+
+	@Override
+	public @NonNull String getDisplayName(@Nullable LanguageCode languageCode) {
+		return getDisplayName();
+	}
+
+	@Override
+	public @NonNull String getValueSetId() {
+		return CODE_SYSTEM_OID;
+	}
+
+	@Override
+	public @NonNull String getValueSetName() {
+		return CODE_SYSTEM_NAME;
 	}
 
 }

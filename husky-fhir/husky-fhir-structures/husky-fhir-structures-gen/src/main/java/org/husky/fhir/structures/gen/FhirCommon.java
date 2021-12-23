@@ -103,7 +103,7 @@ public class FhirCommon {
 	/**
 	 * uniform resource name (urn) of this OID
 	 */
-	public static final String OID_LANGUAGE = OID_URN + CodeSystems.LanguageCode.getCodeSystemId();
+	public static final String OID_LANGUAGE = OID_URN + CodeSystems.LANGUAGE_CODE.getCodeSystemId();
 
 	/**
 	 * uniform resource name (urn) of this FHIR extension
@@ -1083,7 +1083,7 @@ public class FhirCommon {
 		final var docRestrictedConfidentiality = new Basic();
 		final ConfidentialityCode conf = ConfidentialityCode.NORMAL;
 		docRestrictedConfidentiality.setCode(FhirCommon.createCodeableConcept(
-				conf.getCodeSystemOid(), conf.getCodeValue(), conf.getDisplayName()));
+				conf.getCodeSystemId(), conf.getCodeValue(), conf.getDisplayName()));
 		return docRestrictedConfidentiality;
 
 	}
@@ -1097,7 +1097,7 @@ public class FhirCommon {
 		final var docRestrictedConfidentiality = new Basic();
 		final ConfidentialityCode conf = ConfidentialityCode.RESTRICTED;
 		docRestrictedConfidentiality.setCode(FhirCommon.createCodeableConcept(
-				conf.getCodeSystemOid(), conf.getCodeValue(), conf.getDisplayName()));
+				conf.getCodeSystemId(), conf.getCodeValue(), conf.getDisplayName()));
 		return docRestrictedConfidentiality;
 
 	}

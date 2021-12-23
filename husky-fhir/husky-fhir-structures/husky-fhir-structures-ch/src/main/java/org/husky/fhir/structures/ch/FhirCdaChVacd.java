@@ -861,6 +861,6 @@ public class FhirCdaChVacd /* extends AbstractFhirCdaCh */ {
 	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String OID_CONFIDENTIALITY_CODE = FhirCommon
-			.addUrnOid(CodeSystems.ConfidentialityCode.getCodeSystemId());
+			.addUrnOid(CodeSystems.CONFIDENTIALITY_CODE.getCodeSystemId());
 
 }

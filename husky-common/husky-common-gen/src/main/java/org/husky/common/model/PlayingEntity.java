@@ -10,11 +10,11 @@
  */
 package org.husky.common.model;
 
-import org.husky.common.hl7cdar2.PN;
-import org.husky.common.hl7cdar2.POCDMT000040PlayingEntity;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.husky.common.hl7cdar2.PN;
+import org.husky.common.hl7cdar2.POCDMT000040PlayingEntity;
 
 /**
  * The Class PlayingEntity. An entity with a name.
@@ -31,7 +31,6 @@ public class PlayingEntity {
      */
     public PlayingEntity() {
         setPlayingEntity(new POCDMT000040PlayingEntity());
-        // mPlayingEntity.setClassCode(EntityClassRoot.MIC);
     }
 
     /**

@@ -227,7 +227,7 @@ public class DocumentMetadata {
 	public void addConfidentialityCode(ConfidentialityCode code) {
 		xDoc.getConfidentialityCodes().add(XdsMetadataUtil
 				.createCodedMetadata(
-				code.getCodeSystemOid(), code.getCodeValue(), code.getDisplayName(), null));
+						code.getCodeSystemId(), code.getCodeValue(), code.getDisplayName(), null));
 	}
 
 	/**

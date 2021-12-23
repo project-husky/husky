@@ -524,68 +524,68 @@ public class AddressBaseType implements Serializable {
     public static final class Builder {
 
         /**
-         * The additional locator.
-         */
-        private String additionalLocator;
+		 * The additional locator.
+		 */
+		private String additionalLocator;
 
-        /**
-         * The building number.
-         */
-        private String buildingNumber;
+		/**
+		 * The building number.
+		 */
+		private String buildingNumber;
 
-        /**
-         * The city.
-         */
-        private String city;
+		/**
+		 * The city.
+		 */
+		private String city;
 
-        /**
-         * The country.
-         */
-        private String country;
+		/**
+		 * The country.
+		 */
+		private String country;
 
-        /**
-         * The null flavor.
-         */
-        private NullFlavor nullFlavor;
+		/**
+		 * The null flavor.
+		 */
+		private NullFlavor nullFlavor;
 
-        /**
-         * The postal code.
-         */
-        private String postalCode;
+		/**
+		 * The postal code.
+		 */
+		private String postalCode;
 
-        /**
-         * The post box.
-         */
-        private String postBox;
+		/**
+		 * The post box.
+		 */
+		private String postBox;
 
-        /**
-         * The state.
-         */
-        private String state;
+		/**
+		 * The state.
+		 */
+		private String state;
 
-        /**
-         * The street address line 1.
-         */
-        private String streetAddressLine1;
+		/**
+		 * The street address line 1.
+		 */
+		private String streetAddressLine1;
 
-        /**
-         * The street address line 2.
-         */
-        private String streetAddressLine2;
+		/**
+		 * The street address line 2.
+		 */
+		private String streetAddressLine2;
 
-        /**
-         * The street name.
-         */
-        private String streetName;
+		/**
+		 * The street name.
+		 */
+		private String streetName;
 
-        /**
-         * The usage.
-         */
-        private PostalAddressUse usage;
+		/**
+		 * The usage.
+		 */
+		private PostalAddressUse usage;
 
-        /**
-         * Instantiates a new builder.
-         */
+		/**
+		 * Instantiates a new builder.
+		 */
         private Builder() {
         }
 

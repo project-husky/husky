@@ -17,12 +17,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URI;
 import java.nio.file.Files;
 import java.util.Base64;
 import java.util.Calendar;
 
-import org.husky.common.utils.OsUtil;
 import org.husky.xua.authentication.AuthnRequest;
 import org.husky.xua.communication.clients.IdpClient;
 import org.husky.xua.communication.config.impl.IdpClientByBrowserAndProtocolHandlerConfigImpl;
@@ -145,51 +143,6 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 		} catch (final Exception t) {
 			throw new ClientSendException(t);
 		}
-	}
-
-	private void startBrowser(URI requestUri) {
-		try {
-			if (Desktop.isDesktopSupported()
-					&& Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-				final var desktop = Desktop.getDesktop();
-				desktop.browse(requestUri);
-			} else {
-				if (OsUtil.isWindows()) {
-					startBrowserInWindows(requestUri);
-				} else if (OsUtil.isUnix()) {
-					startBrowserInUnix(requestUri);
-				} else if (OsUtil.isMac()) {
-					startBrowserInMac(requestUri);
-				}
-			}
-		} catch (final Exception t) {
-			logger.error("An error occured starting the browser.", t);
-		}
-	}
-
-	private void startBrowserInUnix(URI requestUri) throws IOException {
-		final String[] browsers = { "epiphany", "firefox", "mozilla", "konqueror", "netscape", "opera", "links",
-				"lynx" };
-
-		final var cmd = new StringBuilder();
-		for (var i = 0; i < browsers.length; i++) {
-			if (i == 0)
-				cmd.append(String.format("%s \"%s\"", browsers[i], requestUri));
-			else
-				cmd.append(String.format(" || %s \"%s\"", browsers[i], requestUri));
-			// If the first didn't work, try the next browser and so
-			// on
-		}
-		Runtime.getRuntime().exec(new String[] { "sh", "-c", cmd.toString() });
-	}
-
-	private void startBrowserInWindows(URI requestUri) throws IOException {
-		Runtime.getRuntime().exec("cmd /c start " + requestUri);
-	}
-
-	private void startBrowserInMac(URI requestUri) throws IOException {
-		final String command = "open " + requestUri;
-		Runtime.getRuntime().exec(command);
 	}
 
 	private Object startWaitForResponse(File response)

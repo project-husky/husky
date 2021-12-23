@@ -11,16 +11,12 @@
 package org.husky.common.communication;
 
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 
 import javax.xml.bind.JAXBElement;
 
@@ -58,7 +54,6 @@ import org.husky.common.hl7cdar2.POCDMT000040ServiceEvent;
 import org.husky.common.hl7cdar2.QTY;
 import org.husky.common.hl7cdar2.TEL;
 import org.husky.common.hl7cdar2.TS;
-import org.husky.common.utils.time.Hl7Dtm;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Address;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssigningAuthority;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Author;
@@ -67,6 +62,7 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.Code;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Identifiable;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.LocalizedString;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Name;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.PatientInfo;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Person;
@@ -116,7 +112,6 @@ public class CDAR2Extractor {
 			is an XDS specific attribute and outside the scope of any CDA R2 document.
 			Thus, it cannot be extracted.
 			""";
-	private static final String TIMEZONE = "-ZZZZ";
 
 	/**
 	 * Loads CDA Document
@@ -158,136 +153,75 @@ public class CDAR2Extractor {
 			throw new MetadataExtractionException("CDA is null, cannot execute extraction.");
 		}
 
-		// ***************** create target object *******************
 		var docEntry = new DocumentEntry();
 
 		// ** extract authorInstitution, authorPerson,authorRole, authorSpeciality **
-		if (logger.isDebugEnabled()) {
-			logger.debug("Extracting DocumentEntry.author(s)");
-		}
 		List<Author> authors = extractAuthors();
 		if (authors != null) {
 			docEntry.getAuthors().addAll(authors);
 		}
 
-		// ******************** extract classCode *********************
-		if (logger.isDebugEnabled()) {
-			logger.debug("Extracting DocumentEntry.classCode");
-		}
 		var classCode = extractClassCode();
 		if (classCode != null) {
 			docEntry.setClassCode(classCode);
 		}
 
-		// ******************** extract confidentialityCode **************
-		if (logger.isDebugEnabled()) {
-			logger.debug("Extracting DocumentEntry.confidentialityCode");
-		}
 		List<Code> confidentialityCodes = extractConfidentialityCodes();
 		if (confidentialityCodes != null) {
 			docEntry.getConfidentialityCodes().addAll(confidentialityCodes);
 		}
 
-		// ********************** extract creation time ************************
-		if (logger.isDebugEnabled()) {
-			logger.debug("Extracting DocumentEntry.creationTime");
-		}
 		Timestamp creationTime = extractCreationTime();
 		if (creationTime != null) {
 			docEntry.setCreationTime(creationTime);
 		}
 
-		// ******** extract healthCareFacilityType and practiceSetting code ************
-		if (logger.isDebugEnabled()) {
-			logger.debug("Extracting DocumentEntry.healthcareFacilityCode");
-		}
 		var hcfc = extractHealthCareFacilityTypeCode();
 		if (hcfc != null) {
 			docEntry.setHealthcareFacilityTypeCode(hcfc);
 		}
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("Extracting DocumentEntry.practiceSettingCode");
-		}
-		var psc = extractPracticeSettingCode();
-		if (psc != null) {
-			docEntry.setPracticeSettingCode(psc);
-		}
-
-		// ******************** extract languageCode ********************
-		if (logger.isDebugEnabled()) {
-			logger.debug("Extracting DocumentEntry.languageCode");
-		}
 		String langCode = extractLanguageCode();
 		if (langCode != null) {
 			docEntry.setLanguageCode(langCode);
 		}
 
-		// ******************** extract legalAuthenticator ********************
-		if (logger.isDebugEnabled()) {
-			logger.debug("Extracting DocumentEntry.legalAuthenticator");
-		}
 		Person legalAuth = extractLegalAuthenticator();
 		if (legalAuth != null) {
 			docEntry.setLegalAuthenticator(legalAuth);
 		}
 
 		// ************* extract serviceStartTime and serviceStopTime ******
-		if (logger.isDebugEnabled()) {
-			logger.debug("Extracting DocumentEntry.serviceStartTime");
-		}
 		Timestamp startTime = extractServiceStartTime();
 		if (startTime != null) {
 			docEntry.setServiceStartTime(startTime);
 		}
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("Extracting DocumentEntry.serviceStopTime");
-		}
 		Timestamp stopTime = extractServiceStopTime();
 		if (stopTime != null) {
 			docEntry.setServiceStopTime(stopTime);
 		}
 
-		// ******** extract sourcePatientId and sourcePatientInfo *********
-		if (logger.isDebugEnabled()) {
-			logger.debug("Extracting DocumentEntry.sourcePatientId");
-		}
 		Identifiable sourcePatientId = extractSourcePatientId();
 		if (sourcePatientId != null) {
 			docEntry.setSourcePatientId(sourcePatientId);
 		}
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("Extracting DocumentEntry.sourcePatientInfo");
-		}
 		var patientInfo = extractSourcePatientInfo();
 		if (patientInfo != null) {
 			docEntry.setSourcePatientInfo(patientInfo);
 		}
 
-		// ******************** extract title ********************
-		if (logger.isDebugEnabled()) {
-			logger.debug("Extracting DocumentEntry.title");
-		}
 		LocalizedString title = extractTitle();
 		if (title != null) {
 			docEntry.setTitle(title);
 		}
 
-		// ******************** extract typeCode ********************
-		if (logger.isDebugEnabled()) {
-			logger.debug("Extracting DocumentEntry.typeCode");
-		}
 		var typeCode = extractTypeCode();
 		if (typeCode != null) {
 			docEntry.setTypeCode(typeCode);
 		}
 
-		// ******************** extract uniqueId ********************
-		if (logger.isDebugEnabled()) {
-			logger.debug("Extracting DocumentEntry.uniqueId");
-		}
 		String uniqueId = extractUniqueId();
 		if (uniqueId != null) {
 			docEntry.setUniqueId(uniqueId);
@@ -308,7 +242,6 @@ public class CDAR2Extractor {
 			return new ArrayList<>();
 		} else {
 			Iterator<POCDMT000040Author> i = cda.getAuthor().iterator();
-			// SEK - extractor is back to supporting multiple authors as of 10/20/2011
 			List<Author> authorList = new ArrayList<>();
 			while (i.hasNext()) {
 				POCDMT000040Author author = i.next();
@@ -317,9 +250,9 @@ public class CDAR2Extractor {
 					// make sure that we have an author person and not authoring device
 					authorList.add(extractAuthor(author));
 				}
-			} // end iterator
+			}
 			return authorList;
-		} // end else
+		}
 	}
 
 	private Author extractAuthor(POCDMT000040Author author) {
@@ -436,7 +369,7 @@ public class CDAR2Extractor {
 		if (cda.getEffectiveTime().getValue() == null) {
 			return null;
 		} else {
-			return map(cda.getEffectiveTime());
+			return Timestamp.fromHL7(cda.getEffectiveTime().getValue());
 		}
 	}
 
@@ -472,7 +405,7 @@ public class CDAR2Extractor {
 	public Map<String, List<String>> extractExtensions() {
 		logger.info("This extraction routine, at this point,"
 				+ "does not attempt to extract extension metadata from a generic CDA R2 document.");
-		return null;
+		return new HashMap<>();
 	}
 
 	/**
@@ -558,22 +491,26 @@ public class CDAR2Extractor {
 			}
 
 			// XCN.2 through XCN.6
-			if (auth.getAssignedPerson() == null || !atLeastOne(auth.getAssignedPerson().getName())) {
-				if (idNull) {
-					return null;
-				}
-
-				return map(auth.getId().get(0), null);
-			} else {
-				if (idNull) {
-					return map(null, auth.getAssignedPerson().getName().get(0));
-				}
-				return map(auth.getId().get(0), auth.getAssignedPerson().getName().get(0));
-			}
+			extractPerson(auth, idNull);
 		}
 
 		return null;
 
+	}
+
+	private Person extractPerson(POCDMT000040AssignedEntity auth, boolean idNull) {
+		if (auth.getAssignedPerson() == null || !atLeastOne(auth.getAssignedPerson().getName())) {
+			if (idNull) {
+				return null;
+			}
+
+			return map(auth.getId().get(0), null);
+		} else {
+			if (idNull) {
+				return map(null, auth.getAssignedPerson().getName().get(0));
+			}
+			return map(auth.getId().get(0), auth.getAssignedPerson().getName().get(0));
+		}
 	}
 
 	/**
@@ -596,31 +533,6 @@ public class CDAR2Extractor {
 	 * @return null
 	 */
 	public Identifiable extractParentDocument() {
-		logger.info(INFORMATION_NOT_EXTRACTED);
-		return null;
-	}
-
-	/**
-	 * DocumentEntry.patientId expresses the Affinity Domain level patient id used
-	 * in the XDS Regisry. In all cases, this is not necessairly the same patientId
-	 * that is documented within the CDA. Thus, this information is not extracted.
-	 * 
-	 * @return null
-	 */
-	public Identifiable extractPatientId() {
-		logger.info(INFORMATION_NOT_EXTRACTED);
-		return null;
-	}
-
-	/**
-	 * DocumentEntry.practiceSettingCode is recommended to be supplied by the
-	 * document source from an established vocabulary approved by the affinity
-	 * domain, such as that described by the Subject Matter Domain in LOINC. Thus
-	 * this information is not extracted. <br>
-	 * Note: Implementation consistent with PCC TF-2 Medical Document Binding to
-	 * XDS, XDM and XDR.
-	 */
-	public Code extractPracticeSettingCode() {
 		logger.info(INFORMATION_NOT_EXTRACTED);
 		return null;
 	}
@@ -684,7 +596,7 @@ public class CDAR2Extractor {
 			if (qty != null && qty.getName() != null && qty.getName().getLocalPart().equalsIgnoreCase("low")
 					&& qty.getValue() instanceof IVXBTS) {
 				// determine if lowTime found is minimum
-				lowTime = map(((IVXBTS) qty.getValue()));
+				lowTime = Timestamp.fromHL7(((IVXBTS) qty.getValue()).getValue());
 			}
 		}
 
@@ -744,7 +656,7 @@ public class CDAR2Extractor {
 		for (JAXBElement<? extends QTY> qty : range.getRest()) {
 			if (qty != null && qty.getName() != null && qty.getName().getLocalPart().equalsIgnoreCase("high")
 					&& qty.getValue() instanceof IVXBTS) {
-				highTime = map(((IVXBTS) qty.getValue()));
+				highTime = Timestamp.fromHL7(((IVXBTS) qty.getValue()).getValue());
 			}
 		}
 
@@ -841,51 +753,19 @@ public class CDAR2Extractor {
 		var sourceInfo = new PatientInfo();
 
 		// PID-3: patientIdentifier list (from PatientRole/id)
-		if (atLeastOne(patient.getId())) {
-			List<Identifiable> ids = extractPid3(patient.getId());
-			for(Identifiable id: ids) {
-				sourceInfo.getIds().add(id);
-			}
-		}
+		addIds(patient.getId(), sourceInfo);
 
 		// PID-11: patient Address
-		if (atLeastOne(patient.getAddr())) {
-			// call pid11 method
-			Address xad = extractPid11(patient.getAddr().get(0));
-
-			if (xad != null && xad.getStreetAddress() != null && xad.getCity() != null
-					&& xad.getStateOrProvince() != null && xad.getZipOrPostalCode() != null
-					&& xad.getCountry() != null) {
-				sourceInfo.getAddresses().add(xad);
-			}
-		} else {
-			var xad = new Address();
-			xad.setStreetAddress("");
-			sourceInfo.getAddresses().add(xad);
-		}
+		addAddressesOfPatientInfo(patient.getAddr(), sourceInfo);
 
 		// Rest of PID 3, PID 5, PID 7 and PID 8
 		if (patient.getPatient() != null) {
 			POCDMT000040Patient p = patient.getPatient();
 			// PID-3: patientIdentifier list (from PatientRole/Patient/id)
-			if (p.getId() != null) {
-				List<Identifiable> ids = extractPid3(List.of(p.getId()));
-				if(ids != null && !ids.isEmpty()) {
-					sourceInfo.getIds().add(ids.get(0));
-				}
-			}
+			addIds(List.of(p.getId()), sourceInfo);
 
 			// PID-5: patientName list
-			if (atLeastOne(p.getName())) {
-				List<XpnName> names = extractPid5(p.getName());
-				for (XpnName name : names) {
-					sourceInfo.getNames().add(name);
-				}
-			} else {
-				var xpn = new XpnName();
-				xpn.setFamilyName("");
-				sourceInfo.getNames().add(xpn);
-			}
+			addNames(p.getName(), sourceInfo);
 
 			// PID-7: patientDateOfBirth
 			sourceInfo.setDateOfBirth(extractPid7(p.getBirthTime()));
@@ -904,6 +784,44 @@ public class CDAR2Extractor {
 
 		return sourceInfo;
 
+	}
+
+	private void addIds(List<II> iis, PatientInfo patientInfo) {
+		if (iis != null) {
+			List<Identifiable> ids = extractPid3(iis);
+			if (!ids.isEmpty()) {
+				patientInfo.getIds().add(ids.get(0));
+			}
+		}
+	}
+
+	private void addNames(List<PN> pn, PatientInfo patientInfo) {
+		if (atLeastOne(pn)) {
+			List<XpnName> names = extractPid5(pn);
+			for (XpnName name : names) {
+				patientInfo.getNames().add(name);
+			}
+		} else {
+			var xpn = new XpnName();
+			xpn.setFamilyName("");
+			patientInfo.getNames().add(xpn);
+		}
+	}
+
+	private void addAddressesOfPatientInfo(List<AD> ad, PatientInfo patientInfo) {
+		if (atLeastOne(ad)) {
+			Address xad = extractPid11(ad.get(0));
+
+			if (xad != null && xad.getStreetAddress() != null && xad.getCity() != null
+					&& xad.getStateOrProvince() != null && xad.getZipOrPostalCode() != null
+					&& xad.getCountry() != null) {
+				patientInfo.getAddresses().add(xad);
+			}
+		} else {
+			var xad = new Address();
+			xad.setStreetAddress("");
+			patientInfo.getAddresses().add(xad);
+		}
 	}
 
 	/**
@@ -965,12 +883,6 @@ public class CDAR2Extractor {
 				+ " extracted.");
 		return null;
 	}
-
-/////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-// Support functions for extractAuthors() function
-/////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
     /**
      * Extracts authorInstitution from CDAR2
@@ -1185,7 +1097,7 @@ public class CDAR2Extractor {
 			return new Timestamp();
 		}
 
-		return map(time);
+		return Timestamp.fromHL7(time.getValue());
 
 	}
 
@@ -1241,88 +1153,71 @@ public class CDAR2Extractor {
 		if (atLeastOne(addr.getContent())) {
 			for (Serializable obj : addr.getContent()) {
 				JAXBElement<?> element = (JAXBElement<?>) obj;
-
-				// XAD.1.1
-				if (element.getValue() instanceof AdxpStreetAddressLine) {
-					AdxpStreetAddressLine stl = (AdxpStreetAddressLine) element.getValue();
-					String txt = stl.getTextContent();
-					if (txt.length() > 0) {
-						xad.setStreetAddress(txt);
-					}
-				} else if (element.getValue() instanceof AdxpStreetName) {
-					AdxpStreetName stl = (AdxpStreetName) element.getValue();
-					String txt = stl.getTextContent();
-					if (txt.length() > 0) {
-						if (xad.getStreetAddress() != null && !xad.getStreetAddress().isEmpty()) {
-							xad.setStreetAddress(txt + " " + xad.getStreetAddress());
-						} else {
-							xad.setStreetAddress(txt);
-						}
-					}
-				}
-
-				if (element.getValue() instanceof AdxpHouseNumber) {
-					AdxpHouseNumber stl = (AdxpHouseNumber) element.getValue();
-					String txt = stl.getTextContent();
-					if (txt.length() > 0) {
-						if (xad.getStreetAddress() != null && !xad.getStreetAddress().isEmpty()) {
-							xad.setStreetAddress(xad.getStreetAddress() + " " + txt);
-						} else {
-							xad.setStreetAddress(txt);
-						}
-					}
-				}
-
-				// XAD.2
-				if (element.getValue() instanceof AdxpAdditionalLocator) {
-					AdxpAdditionalLocator stl = (AdxpAdditionalLocator) element.getValue();
-					String txt = stl.getTextContent();
-					if (txt.length() > 0) {
-						xad.setOtherDesignation(txt);
-					}
-				}
-
-				// XAD.3
-				if (element.getValue() instanceof AdxpCity) {
-					AdxpCity stl = (AdxpCity) element.getValue();
-					String txt = stl.getTextContent();
-					if (txt.length() > 0) {
-						xad.setCity(txt);
-					}
-				}
-
-				// XAD.4
-				if (element.getValue() instanceof AdxpState) {
-					AdxpState stl = (AdxpState) element.getValue();
-					String txt = stl.getTextContent();
-					if (txt.length() > 0) {
-						xad.setStateOrProvince(txt);
-					}
-				}
-
-				// XAD.5
-				if (element.getValue() instanceof AdxpPostalCode) {
-					AdxpPostalCode stl = (AdxpPostalCode) element.getValue();
-					String txt = stl.getTextContent();
-					if (txt.length() > 0) {
-						xad.setZipOrPostalCode(txt);
-					}
-				}
-
-				// XAD.6
-				if (element.getValue() instanceof AdxpCountry) {
-					AdxpCountry stl = (AdxpCountry) element.getValue();
-					String txt = stl.getTextContent();
-					if (txt.length() > 0) {
-						xad.setCountry(txt);
-					}
-				}
-
+				addXadElement(element.getValue(), xad);
 			}
 		}
 
 		return xad;
 
+	}
+
+	private void addXadElement(Object value, Address xad) {
+		// XAD.1.1
+		xad.setStreetAddress(extractXad1(value, xad.getStreetAddress()));
+
+		// XAD.2
+		if (value instanceof AdxpAdditionalLocator stl) {
+			String txt = stl.getTextContent();
+			if (txt.length() > 0) {
+				xad.setOtherDesignation(txt);
+			}
+		} else if (value instanceof AdxpCity stl) { // XAD.3
+			String txt = stl.getTextContent();
+			if (txt.length() > 0) {
+				xad.setCity(txt);
+			}
+		} else if (value instanceof AdxpState stl) { // XAD.4
+			String txt = stl.getTextContent();
+			if (txt.length() > 0) {
+				xad.setStateOrProvince(txt);
+			}
+		} else if (value instanceof AdxpPostalCode stl) { // XAD.5
+			String txt = stl.getTextContent();
+			if (txt.length() > 0) {
+				xad.setZipOrPostalCode(txt);
+			}
+		} else if (value instanceof AdxpCountry stl) { // XAD.6
+			String txt = stl.getTextContent();
+			if (txt.length() > 0) {
+				xad.setCountry(txt);
+			}
+		}
+	}
+
+	private String extractXad1(Object value, String streetAddress) {
+		if (value instanceof AdxpStreetAddressLine stl) {
+			return stl.getTextContent();
+		} else if (value instanceof AdxpStreetName stl) {
+			String txt = stl.getTextContent();
+			if (!txt.isEmpty()) {
+				if (!streetAddress.isEmpty()) {
+					streetAddress = txt + " " + streetAddress;
+				} else {
+					streetAddress = txt;
+				}
+			}
+		} else if (value instanceof AdxpHouseNumber stl) {
+			String txt = stl.getTextContent();
+			if (txt.length() > 0) {
+				if (!streetAddress.isEmpty()) {
+					streetAddress = streetAddress + " " + txt;
+				} else {
+					streetAddress = txt;
+				}
+			}
+		}
+
+		return streetAddress;
 	}
 
 	/**
@@ -1376,11 +1271,13 @@ public class CDAR2Extractor {
 		var cx = new Identifiable();
 		var assigningAuthority = new AssigningAuthority();
 
-		// CX.1 - id number
+		// CX.1 - id number or XCN.1 - id number
 		cx.setId(id.getExtension());
-		// CX.4.2 - assigning authority universal id
+		// CX.4.2 - assigning authority universal id or XCN.9.2 - assigning authority
+		// universal id
 		assigningAuthority.setUniversalId(id.getRoot());
-		// CX.4.3 - assigning authority universal id type
+		// CX.4.3 - assigning authority universal id type or XCN.9.3 - assigning
+		// authority universal id type
 		assigningAuthority.setUniversalIdType("ISO");
 
 		cx.setAssigningAuthority(assigningAuthority);
@@ -1402,17 +1299,7 @@ public class CDAR2Extractor {
 
 		var idNull = true;
 		if (id != null) {
-			var identifiable = new Identifiable();
-			var assigningAutority = new AssigningAuthority();
-			// XCN.1 - id number
-			identifiable.setId(id.getExtension());
-			// XCN.9.2 - assigning authority universal id
-			assigningAutority.setUniversalId(id.getRoot());
-			// XCN.9.3 - assigning authority universal id type
-			assigningAutority.setUniversalIdType("ISO");
-
-			identifiable.setAssigningAuthority(assigningAutority);
-			xcn.setId(identifiable);
+			xcn.setId(map(id));
 			idNull = false;
 		}
 		if (name != null) {
@@ -1480,42 +1367,7 @@ public class CDAR2Extractor {
 
 		for (Serializable obj : name.getContent()) {
 			JAXBElement<?> element = (JAXBElement<?>) obj;
-
-			// XPN.1.1 - family_name.surname
-			if (element.getValue() instanceof EnFamily) {
-				EnFamily family = (EnFamily) element.getValue();
-				String txt = family.getTextContent();
-				if (txt.length() > 0) {
-					xpn.setFamilyName(txt);
-				}
-			}
-
-			// XPN.2 and XPN.3 (given name and middle name)
-			if (element.getValue() instanceof EnGiven) {
-				EnGiven family = (EnGiven) element.getValue();
-				String txt = family.getTextContent();
-				if (txt.length() > 0) {
-					xpn.setGivenName(txt);
-				}
-			}
-
-			// XPN.4 - suffix
-			if (element.getValue() instanceof EnSuffix) {
-				EnSuffix suffix = (EnSuffix) element.getValue();
-				String txt = suffix.getTextContent();
-				if (txt.length() > 0) {
-					xpn.setSuffix(txt);
-				}
-			}
-
-			// XPN.5 - prefix
-			if (element.getValue() instanceof EnPrefix) {
-				EnPrefix prefix = (EnPrefix) element.getValue();
-				String txt = prefix.getTextContent();
-				if (txt.length() > 0) {
-					xpn.setPrefix(txt);
-				}
-			}
+			addNameElements(element.getValue(), xpn);
 		}
 
 		return xpn;
@@ -1531,46 +1383,37 @@ public class CDAR2Extractor {
 
 		for (Serializable obj : name.getContent()) {
 			JAXBElement<?> element = (JAXBElement<?>) obj;
-
-			// XCN 2.1
-			if (element.getValue() instanceof EnFamily) {
-				EnFamily family = (EnFamily) element.getValue();
-				String txt = family.getTextContent();
-				if (txt.length() > 0) {
-					xcn.setFamilyName(txt);
-				}
-			}
-
-			// XCN.3 and XCN.4 (given name and middle name)
-			if (element.getValue() instanceof EnGiven) {
-				EnGiven family = (EnGiven) element.getValue();
-				String txt = family.getTextContent();
-				if (txt.length() > 0) {
-					xcn.setGivenName(txt);
-				}
-			}
-
-			// XCN.5 - suffix
-			if (element.getValue() instanceof EnSuffix) {
-				EnSuffix suffix = (EnSuffix) element.getValue();
-				String txt = suffix.getTextContent();
-				if (txt.length() > 0) {
-					xcn.setSuffix(txt);
-				}
-			}
-
-			// XCN.6 - prefix
-			if (element.getValue() instanceof EnPrefix) {
-				EnPrefix prefix = (EnPrefix) element.getValue();
-				String txt = prefix.getTextContent();
-				if (txt.length() > 0) {
-					xcn.setPrefix(txt);
-				}
-			}
+			addNameElements(element.getValue(), xcn);
 		}
 
 		return xcn;
 
+	}
+
+	private void addNameElements(Object value, Name<?> xpn) {
+		// XPN.1.1 - family_name.surname or XCN 2.1
+		if (value instanceof EnFamily family) {
+			String txt = family.getTextContent();
+			if (!txt.isEmpty()) {
+				xpn.setFamilyName(txt);
+			}
+		} else if (value instanceof EnGiven given) { // XPN.2 and XPN.3 (given name and middle name) or XCN.3 and XCN.4
+														// (given name and middle name)
+			String txt = given.getTextContent();
+			if (!txt.isEmpty()) {
+				xpn.setGivenName(txt);
+			}
+		} else if (value instanceof EnSuffix suffix) { // XPN.4 - suffix or XCN.5 - suffix
+			String txt = suffix.getTextContent();
+			if (!txt.isEmpty()) {
+				xpn.setSuffix(txt);
+			}
+		} else if (value instanceof EnPrefix prefix) { // XPN.5 - prefix or XCN.6 - prefix
+			String txt = prefix.getTextContent();
+			if (!txt.isEmpty()) {
+				xpn.setPrefix(txt);
+			}
+		}
 	}
 
 	/**
@@ -1596,73 +1439,6 @@ public class CDAR2Extractor {
 		// not implemented here
 
 		return xtn;
-	}
-
-	/**
-	 * Maps CDA R2 TS1 data type to the OHT model version of the Hl7 v2.5 TS data
-	 * type. The XDS Metadata timestamp is to be in UTC, but without the timezone
-	 * offset or fractional seconds: [[[[[YYYY]MM]DD]HH]mm]ss]. Thus, this time is
-	 * assumed to be in GMT. So, if the timestamp in the corresponding CDA element
-	 * contains the timezone offset, this method will convert the timestamp to GMT.
-	 * If the timezone offset is ommitted, then the timestamp is assumed to be in
-	 * GMT. <br>
-	 * 
-	 * @param time
-	 * @return
-	 */
-	protected Timestamp map(TS time) {
-		if (time == null) {
-			return null;
-		}
-		if (time.getValue() == null) {
-			return null;
-		}
-		
-		var timestamp = new Timestamp();
-
-		String tm = time.getValue();
-		// Check for time zone
-		var offset = "";
-		if (tm.length() > TIMEZONE.length()) {
-			// check for minus GMT
-			if (tm.charAt(tm.length() - TIMEZONE.length()) == '-') {
-				// found timezone offset
-				offset = tm.substring(tm.length() - TIMEZONE.length());
-			}
-			// check for plus GMT
-			else if (tm.charAt(tm.length() - TIMEZONE.length()) == '+') {
-				// found timezone offset
-				offset = tm.substring(tm.length() - "+ZZZZ".length());
-			}
-		}
-		// trim length (get rid of time zone and fractional seconds)
-		if (tm.length() > "YYYYMMDDHHMMSS".length()) {
-			tm = tm.substring(0, "YYYYMMDDHHMMSS".length());
-		}
-
-		// factor in timezone offset, if applicable
-		if (tm.length() > "YYYYMMDDHH".length() && offset.length() > 0) {
-
-			var sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-			// first, set up time in current time zone
-			sdf.setTimeZone(TimeZone.getTimeZone("GMT" + offset));
-			Date specifiedTime;
-
-			try {
-				// switch timezone
-				specifiedTime = sdf.parse(tm);
-				sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-				tm = sdf.format(specifiedTime);
-			} catch (ParseException e) {
-				// FIXME just skip the conversion, bad time stamp, hence bad
-				// CDA!
-				// Maybe this should be more robust?? An Exception?
-			}
-		}
-
-		timestamp.setDateTime(Hl7Dtm.toOffsetDateTime(tm).toZonedDateTime());
-
-		return timestamp;
 	}
 
 }

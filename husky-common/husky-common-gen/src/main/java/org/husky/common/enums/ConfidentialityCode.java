@@ -10,13 +10,13 @@
  */
 package org.husky.common.enums;
 
-import org.husky.common.hl7cdar2.CE;
-import org.husky.common.model.Code;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * The Enum ConfidentialityCode contains the codes of the HL7 Vocabulary.
  */
-public enum ConfidentialityCode {
+public enum ConfidentialityCode implements ValueSetEnumInterface {
 
 	/** <div class="de">Normal</div> <div class="fr"></div>. */
 	LOW("L", "2.16.840.1.113883.5.25", "low"),
@@ -128,51 +128,6 @@ public enum ConfidentialityCode {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
-	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
-	 *
-	 * @return <div class="en">The MDHT Code</div>
-	 */
-	public CE getCE() {
-		final CE ce = new CE();
-		ce.setCodeSystem(oid);
-		ce.setCode(code);
-		ce.setDisplayName(displayName);
-		return ce;
-	}
-
-	/**
-	 * <div class="en">Gets the husky Code Object</div>
-	 * <div class="de">Liefert das husky Code Objekt</div>.
-	 *
-	 * @return <div class="en">the code</div>
-	 */
-	public Code getCode() {
-		final Code ehcCode = new Code(code, oid, displayName);
-		return ehcCode;
-	}
-
-	/**
-	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
-	 * code system name.</div>
-	 *
-	 * @return <div class="en">the code system name</div>
-	 */
-	public String getCodeSystemName() {
-		return CODE_SYSTEM_NAME;
-	}
-
-	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
-	 * die code system id.</div>
-	 *
-	 * @return <div class="en">the code system id</div>
-	 */
-	public String getCodeSystemOid() {
-		return this.oid;
-	}
-
-	/**
 	 * <div class="en">Gets the actual Code as string</div>
 	 * <div class="de">Liefert den eigentlichen Code als String</div>.
 	 *
@@ -188,7 +143,45 @@ public enum ConfidentialityCode {
 	 *
 	 * @return <div class="en">the display name</div>
 	 */
+	@Override
 	public String getDisplayName() {
 		return this.displayName;
+	}
+
+	/**
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert die
+	 * code system id.</div>
+	 *
+	 * @return <div class="en">the code system id</div>
+	 */
+	@Override
+	public @NonNull String getCodeSystemId() {
+		return this.oid;
+	}
+
+	@Override
+	public @NonNull String getDisplayName(@Nullable LanguageCode languageCode) {
+		return getDisplayName();
+	}
+
+	@Override
+	public @NonNull String getValueSetId() {
+		return CODE_SYSTEM_OID;
+	}
+
+	@Override
+	public @NonNull String getValueSetName() {
+		return CODE_SYSTEM_NAME;
+	}
+
+	/**
+	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert code
+	 * system name.</div>
+	 *
+	 * @return <div class="en">the code system name</div>
+	 */
+	@Override
+	public @NonNull String getCodeSystemName() {
+		return CODE_SYSTEM_NAME;
 	}
 }

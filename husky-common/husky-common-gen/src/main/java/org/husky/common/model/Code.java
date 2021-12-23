@@ -179,56 +179,7 @@ public class Code extends CodeBaseType {
         org.husky.common.hl7cdar2.CD retVal = null;
         if (baseType != null) {
             retVal = new org.husky.common.hl7cdar2.CD();
-            String value;
-
-            var nf = baseType.getNullFlavor();
-            if (nf != null) {
-                if (retVal.nullFlavor == null)
-                    retVal.nullFlavor = new ArrayList<String>();
-                retVal.nullFlavor.add(nf.getCodeValue());
-            } else {
-
-                value = baseType.getCode();
-                if (value != null) {
-                    retVal.setCode(value);
-                }
-
-                value = baseType.getCodeSystem();
-                if (value != null) {
-                    retVal.setCodeSystem(value);
-                }
-
-                value = baseType.getCodeSystemName();
-                if (value != null) {
-                    retVal.setCodeSystemName(value);
-                }
-
-                value = baseType.getCodeSystemVersion();
-                if (value != null) {
-                    retVal.setCodeSystemVersion(value);
-                }
-
-                value = baseType.getDisplayName();
-                if (value != null) {
-                    retVal.setDisplayName(value);
-                }
-
-                value = baseType.getOriginalText();
-                if (value != null) {
-                    ED ed = new ED();
-                    ed.setXmlMixed(List.of(value));
-                    retVal.setOriginalText(ed);
-                }
-            }
-
-            for (CodeBaseType item : baseType.getCodeTranslationList()) {
-                retVal.getTranslation().add(createHl7CdaR2Cd(item));
-            }
-
-            // listDisplayNameTranslations() is not implemented, because it
-            // is
-            // not
-            // supported by CD
+			createCode(retVal, baseType);
         }
         return retVal;
 
@@ -244,55 +195,7 @@ public class Code extends CodeBaseType {
         org.husky.common.hl7cdar2.CE retVal = null;
         if (baseType != null) {
             retVal = new org.husky.common.hl7cdar2.CE();
-            String value;
-
-            var nf = baseType.getNullFlavor();
-            if (nf != null) {
-                if (retVal.nullFlavor == null)
-                    retVal.nullFlavor = new ArrayList<String>();
-                retVal.nullFlavor.add(nf.getCodeValue());
-            } else {
-
-                value = baseType.getCode();
-                if (value != null) {
-                    retVal.setCode(value);
-                }
-
-                value = baseType.getCodeSystem();
-                if (value != null) {
-                    retVal.setCodeSystem(value);
-                }
-
-                value = baseType.getCodeSystemName();
-                if (value != null) {
-                    retVal.setCodeSystemName(value);
-                }
-
-                value = baseType.getCodeSystemVersion();
-                if (value != null) {
-                    retVal.setCodeSystemVersion(value);
-                }
-
-                value = baseType.getDisplayName();
-                if (value != null) {
-                    retVal.setDisplayName(value);
-                }
-
-                value = baseType.getOriginalText();
-                if (value != null) {
-                    var ed = new ED();
-                    ed.setXmlMixed(List.of(value));
-                    retVal.setOriginalText(ed);
-                }
-            }
-
-            for (CodeBaseType item : baseType.getCodeTranslationList()) {
-                retVal.getTranslation().add(createHl7CdaR2Cd(item));
-            }
-
-            // listDisplayNameTranslations() is not implemented, because it is
-            // not
-            // supported by CD
+			createCode(retVal, baseType);
         }
 
         return retVal;
@@ -309,60 +212,60 @@ public class Code extends CodeBaseType {
         org.husky.common.hl7cdar2.CS retVal = null;
         if (baseType != null) {
             retVal = new org.husky.common.hl7cdar2.CS();
-            String value;
-
-            var nf = baseType.getNullFlavor();
-            if (nf != null) {
-                if (retVal.nullFlavor == null)
-                    retVal.nullFlavor = new ArrayList<String>();
-                retVal.nullFlavor.add(nf.getCodeValue());
-            } else {
-
-                value = baseType.getCode();
-                if (value != null) {
-                    retVal.setCode(value);
-                }
-
-                value = baseType.getCodeSystem();
-                if (value != null) {
-                    retVal.setCodeSystem(value);
-                }
-
-                value = baseType.getCodeSystemName();
-                if (value != null) {
-                    retVal.setCodeSystemName(value);
-                }
-
-                value = baseType.getCodeSystemVersion();
-                if (value != null) {
-                    retVal.setCodeSystemVersion(value);
-                }
-
-                value = baseType.getDisplayName();
-                if (value != null) {
-                    retVal.setDisplayName(value);
-                }
-
-                value = baseType.getOriginalText();
-                if (value != null) {
-                    var ed = new ED();
-                    ed.setXmlMixed(List.of(value));
-                    retVal.setOriginalText(ed);
-                }
-            }
-
-            for (CodeBaseType item : baseType.getCodeTranslationList()) {
-                retVal.getTranslation().add(createHl7CdaR2Cd(item));
-            }
-
-            // listDisplayNameTranslations() is not implemented, because it is
-            // not
-            // supported by CD
+			createCode(retVal, baseType);
         }
 
         return retVal;
 
     }
+
+	private static void createCode(CD retVal, CodeBaseType baseType) {
+		String value;
+
+		var nf = baseType.getNullFlavor();
+		if (nf != null) {
+			if (retVal.nullFlavor == null)
+				retVal.nullFlavor = new ArrayList<String>();
+			retVal.nullFlavor.add(nf.getCodeValue());
+		} else {
+
+			value = baseType.getCode();
+			if (value != null) {
+				retVal.setCode(value);
+			}
+
+			value = baseType.getCodeSystem();
+			if (value != null) {
+				retVal.setCodeSystem(value);
+			}
+
+			value = baseType.getCodeSystemName();
+			if (value != null) {
+				retVal.setCodeSystemName(value);
+			}
+
+			value = baseType.getCodeSystemVersion();
+			if (value != null) {
+				retVal.setCodeSystemVersion(value);
+			}
+
+			value = baseType.getDisplayName();
+			if (value != null) {
+				retVal.setDisplayName(value);
+			}
+
+			value = baseType.getOriginalText();
+			if (value != null) {
+				ED ed = new ED();
+				ed.setXmlMixed(List.of(value));
+				retVal.setOriginalText(ed);
+			}
+		}
+
+		for (CodeBaseType item : baseType.getCodeTranslationList()) {
+			retVal.getTranslation().add(createHl7CdaR2Cd(item));
+		}
+	}
 
     /**
      * Gets the HL7 CDA R2 data type from the current instance.
