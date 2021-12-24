@@ -12,7 +12,6 @@ package org.husky.communication.ch;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -22,9 +21,9 @@ import javax.mail.util.ByteArrayDataSource;
 import org.husky.common.ch.AuthorCh;
 import org.husky.common.ch.enums.AuthorRole;
 import org.husky.common.communication.AffinityDomain;
-import org.husky.common.communication.SubmissionSetMetadata;
 import org.husky.common.communication.AtnaConfig.AtnaConfigMode;
 import org.husky.common.communication.DocumentMetadata.DocumentMetadataExtractionMode;
+import org.husky.common.communication.SubmissionSetMetadata;
 import org.husky.common.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
 import org.husky.common.enums.DocumentDescriptor;
 import org.husky.common.model.Identificator;
@@ -145,18 +144,17 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	/**
 	 * Adds a document to the XDS Submission set.
 	 *
-	 * @param desc
-	 *            the document descriptor (which kind of document do you want to
-	 *            transfer? e.g. PDF, CDA,...)
-	 * @param filePath
-	 *            the file path
+	 * @param desc     the document descriptor (which kind of document do you want
+	 *                 to transfer? e.g. PDF, CDA,...)
+	 * @param filePath the file path
 	 * @return the document metadata (which have to be completed)
-	 * @throws FileNotFoundException
-	 *             exception
+	 * @throws IOException
 	 */
 	public DocumentMetadataCh addChDocument(DocumentDescriptor desc, String filePath)
-			throws FileNotFoundException {
-		return addChDocument(desc, new FileInputStream(new File(filePath)));
+			throws IOException {
+		try (InputStream is = new FileInputStream(new File(filePath))) {
+			return addChDocument(desc, is);
+		}
 	}
 
 	/**

@@ -47,12 +47,12 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 * <div class="de">Armeeärztliche Dienste</div> <div class="fr">Service
 	 * sanitaire </div> <div class="it">Servizio di medicina militare</div>
 	 */
-	ARMEEÄRZTLICHE_DIENSTE("20006", "Armeeärztliche Dienste"),
+	ARMEEAERZTLICHE_DIENSTE("20006", "Armeeärztliche Dienste"),
 	/**
 	 * <div class="de">Gesundheitsbehörde </div> <div class="fr">Autorité de
 	 * santé</div> <div class="it">Autorità sanitaria</div>
 	 */
-	GESUNDHEITSBEHÖRDE("20003", "Gesundheitsbehörde"),
+	GESUNDHEITSBEHOERDE("20003", "Gesundheitsbehörde"),
 	/**
 	 * <div class="de">Gesundheitseinrichtung in der Haftanstalt</div>
 	 * <div class="fr">Service santé dans la prison</div>
@@ -65,7 +65,7 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 * <div class="fr"> Institut d’aide au diagnostic</div> <div class="it">
 	 * Istituto di diagnosi medica</div>
 	 */
-	INSTITUT_FÜR_MEDIZINISCHE_DIAGNOSTIK("20001", "Institut für medizinische Diagnostik"),
+	INSTITUT_FUER_MEDIZINISCHE_DIAGNOSTIK("20001", "Institut für medizinische Diagnostik"),
 	/**
 	 * <div class="de"> Notfall- / Rettungsdienste</div> <div class="fr">
 	 * Service d'urgence et de sauvetage</div> <div class="it"> Servizio di
@@ -77,13 +77,13 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 * <div class="fr">Soins à domicile</div> <div class="it">Servizio di cura e
 	 * assistenza a domicilio</div>
 	 */
-	ORGANISATION_FÜR_PFLEGE_ZU_HAUSE("20004", "Organisation für Pflege zu Hause"),
+	ORGANISATION_FUER_PFLEGE_ZU_HAUSE("20004", "Organisation für Pflege zu Hause"),
 	/**
 	 * <div class="de"> Organisation für stationäre Rehabilitation</div>
 	 * <div class="fr"> Organisation de réhabilitation stationnaire</div>
 	 * <div class="it">Istituto di riabilitazione stazionaria</div>
 	 */
-	ORGANISATION_FÜR_STATIONÄRE_REHABILITATION("20011",
+	ORGANISATION_FUER_STATIONAERE_REHABILITATION("20011",
 			"Organisation für stationäre Rehabilitation"),
 	/**
 	 * <div class="de"> Sozio- Medizinische Institution</div> <div class="fr">
@@ -95,7 +95,7 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 * <div class="de">stationäre Einrichtung / Spital</div>
 	 * <div class="fr">Hôpital</div> <div class="it">Ospedale </div>
 	 */
-	STATIONÄRE_EINRICHTUNG_SPITAL("20005", "stationäre Einrichtung / Spital"),
+	STATIONAERE_EINRICHTUNG_SPITAL("20005", "stationäre Einrichtung / Spital"),
 	/**
 	 * <div class="de">Unbekannt </div> <div class="fr">Inconnu</div>
 	 * <div class="it">Ignoto</div>
@@ -132,13 +132,13 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 * <div class="fr">Code de Service sanitaire </div> <div class="it">Code per
 	 * Servizio di medicina militare</div>
 	 */
-	public static final String ARMEEÄRZTLICHE_DIENSTE_CODE = "20006";
+	public static final String ARMEEAERZTLICHE_DIENSTE_CODE = "20006";
 
 	/**
 	 * <div class="de">Code für Gesundheitsbehörde</div> <div class="fr">Code de
 	 * Autorité de santé</div> <div class="it">Code per Autorità sanitaria</div>
 	 */
-	public static final String GESUNDHEITSBEHÖRDE_CODE = "20003";
+	public static final String GESUNDHEITSBEHOERDE_CODE = "20003";
 
 	/**
 	 * <div class="de">Code für Gesundheitseinrichtung in der Haftanstalt</div>
@@ -153,7 +153,7 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 * <div class="fr">Code de Institut d’aide au diagnostic</div>
 	 * <div class="it">Code per Istituto di diagnosi medica</div>
 	 */
-	public static final String INSTITUT_FÜR_MEDIZINISCHE_DIAGNOSTIK_CODE = "20001";
+	public static final String INSTITUT_FUER_MEDIZINISCHE_DIAGNOSTIK_CODE = "20001";
 
 	/**
 	 * <div class="de">Code für Notfall- / Rettungsdienste</div>
@@ -168,14 +168,14 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 * <div class="fr">Code de Soins à domicile</div> <div class="it">Code per
 	 * Servizio di cura e assistenza a domicilio</div>
 	 */
-	public static final String ORGANISATION_FÜR_PFLEGE_ZU_HAUSE_CODE = "20004";
+	public static final String ORGANISATION_FUER_PFLEGE_ZU_HAUSE_CODE = "20004";
 
 	/**
 	 * <div class="de">Code für Organisation für stationäre Rehabilitation</div>
 	 * <div class="fr">Code de Organisation de réhabilitation stationnaire</div>
 	 * <div class="it">Code per Istituto di riabilitazione stazionaria</div>
 	 */
-	public static final String ORGANISATION_FÜR_STATIONÄRE_REHABILITATION_CODE = "20011";
+	public static final String ORGANISATION_FUER_STATIONAERE_REHABILITATION_CODE = "20011";
 
 	/**
 	 * <div class="de">Code für Sozio-Medizinische Institution</div>
@@ -189,7 +189,7 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 * <div class="fr">Code de Hôpital</div> <div class="it">Code per
 	 * Ospedale</div>
 	 */
-	public static final String STATIONÄRE_EINRICHTUNG_SPITAL_CODE = "20005";
+	public static final String STATIONAERE_EINRICHTUNG_SPITAL_CODE = "20005";
 
 	/**
 	 * <div class="de">Code für Unbekannt</div> <div class="fr">Code de
@@ -331,7 +331,6 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 
 	@Override
 	public String getCodeSystemId() {
-		// TODO Auto-generated method stub
 		return CODE_SYSTEM_OID;
 	}
 

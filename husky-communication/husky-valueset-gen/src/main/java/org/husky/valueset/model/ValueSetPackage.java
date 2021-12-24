@@ -16,8 +16,8 @@ import java.util.List;
 
 import javax.annotation.processing.Generated;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.husky.common.basetypes.IdentificatorBaseType;
-import org.husky.common.utils.Util;
 import org.husky.valueset.config.ValueSetPackageConfig;
 import org.husky.valueset.enums.ValueSetPackageStatus;
 
@@ -328,74 +328,117 @@ public class ValueSetPackage implements Serializable {
 		if (!(obj instanceof ValueSetPackage))
 			return false;
 
+		retVal = compareMappingIdentificatorList((ValueSetPackage) obj);
+
 		if (retVal) {
-			if (this.mappingIdentificatorList == null)
-				this.mappingIdentificatorList = new ArrayList<>();
-			retVal = (this.mappingIdentificatorList.size() == ((ValueSetPackage) obj).getMappingIdentificatorList()
-					.size());
-			if (retVal) {
-				for (var i = 0; i < this.mappingIdentificatorList.size(); i++) {
-					retVal = ((ValueSetPackage) obj).containsMappingIdentificator(this.mappingIdentificatorList.get(i));
-					if (!retVal)
-						break;
-				}
-			}
+			retVal = compareMappingNameList((ValueSetPackage) obj);
 		}
 		if (retVal) {
-			if (this.mappingNameList == null)
-				this.mappingNameList = new ArrayList<>();
-			retVal = (this.mappingNameList.size() == ((ValueSetPackage) obj).getMappingNameList().size());
-			if (retVal) {
-				for (var i = 0; i < this.mappingNameList.size(); i++) {
-					retVal = ((ValueSetPackage) obj).containsMappingName(this.mappingNameList.get(i));
-					if (!retVal)
-						break;
-				}
-			}
+			retVal = compareValueSetList((ValueSetPackage) obj);
 		}
 		if (retVal) {
-			if (this.valueSetList == null)
-				this.valueSetList = new ArrayList<>();
-			retVal = (this.valueSetList.size() == ((ValueSetPackage) obj).getValueSetList().size());
-			if (retVal) {
-				for (var i = 0; i < this.valueSetList.size(); i++) {
-					retVal = ((ValueSetPackage) obj).containsValueSet(this.valueSetList.get(i));
-					if (!retVal)
-						break;
-				}
-			}
+			retVal = compareDescription((ValueSetPackage) obj);
 		}
 		if (retVal) {
-			if (this.description == null)
-				retVal = (((ValueSetPackage) obj).getDescription() == null);
-			else
-				retVal = this.description.equals(((ValueSetPackage) obj).getDescription());
+			retVal = compareIdentificator((ValueSetPackage) obj);
 		}
 		if (retVal) {
-			if (this.identificator == null)
-				retVal = (((ValueSetPackage) obj).getIdentificator() == null);
-			else
-				retVal = this.identificator.equals(((ValueSetPackage) obj).getIdentificator());
+			retVal = compareSourceUrl((ValueSetPackage) obj);
 		}
 		if (retVal) {
-			if (this.sourceUrl == null)
-				retVal = (((ValueSetPackage) obj).getSourceUrl() == null);
-			else
-				retVal = this.sourceUrl.equals(((ValueSetPackage) obj).getSourceUrl());
+			retVal = compareStatus((ValueSetPackage) obj);
 		}
 		if (retVal) {
-			if (this.status == null)
-				retVal = (((ValueSetPackage) obj).getStatus() == null);
-			else
-				retVal = this.status.equals(((ValueSetPackage) obj).getStatus());
-		}
-		if (retVal) {
-			if (this.version == null)
-				retVal = (((ValueSetPackage) obj).getVersion() == null);
-			else
-				retVal = this.version.equals(((ValueSetPackage) obj).getVersion());
+			retVal = compareVersion((ValueSetPackage) obj);
 		}
 		return retVal;
+	}
+
+	private boolean compareMappingIdentificatorList(ValueSetPackage obj) {
+		if (this.mappingIdentificatorList == null) {
+			this.mappingIdentificatorList = new ArrayList<>();
+		}
+
+		var retVal = this.mappingIdentificatorList.size() == obj.getMappingIdentificatorList().size();
+		if (retVal) {
+			for (var i = 0; i < this.mappingIdentificatorList.size(); i++) {
+				retVal = obj.containsMappingIdentificator(this.mappingIdentificatorList.get(i));
+				if (!retVal) {
+					return false;
+				}
+			}
+		}
+
+		return retVal;
+	}
+
+	private boolean compareMappingNameList(ValueSetPackage obj) {
+		if (this.mappingNameList == null)
+			this.mappingNameList = new ArrayList<>();
+		var retVal = this.mappingNameList.size() == obj.getMappingNameList().size();
+		if (retVal) {
+			for (var i = 0; i < this.mappingNameList.size(); i++) {
+				retVal = obj.containsMappingName(this.mappingNameList.get(i));
+				if (!retVal) {
+					return false;
+				}
+			}
+		}
+
+		return retVal;
+	}
+
+	private boolean compareValueSetList(ValueSetPackage obj) {
+		if (this.valueSetList == null) {
+			this.valueSetList = new ArrayList<>();
+		}
+
+		var retVal = this.valueSetList.size() == obj.getValueSetList().size();
+		if (retVal) {
+			for (var i = 0; i < this.valueSetList.size(); i++) {
+				retVal = obj.containsValueSet(this.valueSetList.get(i));
+				if (!retVal) {
+					return false;
+				}
+			}
+		}
+
+		return retVal;
+	}
+
+	private boolean compareDescription(ValueSetPackage obj) {
+		if (this.description == null)
+			return obj.getDescription() == null;
+		else
+			return this.description.equals(obj.getDescription());
+	}
+
+	private boolean compareIdentificator(ValueSetPackage obj) {
+		if (this.identificator == null)
+			return obj.getIdentificator() == null;
+		else
+			return this.identificator.equals(obj.getIdentificator());
+	}
+
+	private boolean compareSourceUrl(ValueSetPackage obj) {
+		if (this.sourceUrl == null)
+			return obj.getSourceUrl() == null;
+		else
+			return this.sourceUrl.equals(obj.getSourceUrl());
+	}
+
+	private boolean compareStatus(ValueSetPackage obj) {
+		if (this.status == null)
+			return (obj.getStatus() == null);
+		else
+			return this.status.equals(obj.getStatus());
+	}
+
+	private boolean compareVersion(ValueSetPackage obj) {
+		if (this.version == null)
+			return (obj.getVersion() == null);
+		else
+			return this.version.equals(obj.getVersion());
 	}
 
 	/**
@@ -550,7 +593,9 @@ public class ValueSetPackage implements Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		return Util.getChecksum(this);
+		return new HashCodeBuilder(17, 37).append(this.mappingIdentificatorList).append(this.mappingNameList)
+				.append(this.valueSetList).append(this.description).append(this.identificator).append(this.sourceUrl)
+				.append(this.status).append(this.version).toHashCode();
 	}
 
 	/**

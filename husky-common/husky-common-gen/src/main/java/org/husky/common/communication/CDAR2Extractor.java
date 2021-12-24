@@ -762,7 +762,10 @@ public class CDAR2Extractor {
 		if (patient.getPatient() != null) {
 			POCDMT000040Patient p = patient.getPatient();
 			// PID-3: patientIdentifier list (from PatientRole/Patient/id)
-			addIds(List.of(p.getId()), sourceInfo);
+
+			if (p.getId() != null) {
+				addIds(List.of(p.getId()), sourceInfo);
+			}
 
 			// PID-5: patientName list
 			addNames(p.getName(), sourceInfo);
@@ -1209,7 +1212,7 @@ public class CDAR2Extractor {
 		} else if (value instanceof AdxpHouseNumber stl) {
 			String txt = stl.getTextContent();
 			if (txt.length() > 0) {
-				if (!streetAddress.isEmpty()) {
+				if (streetAddress != null && !streetAddress.isEmpty()) {
 					streetAddress = streetAddress + " " + txt;
 				} else {
 					streetAddress = txt;

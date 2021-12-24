@@ -518,20 +518,28 @@ public class OrganizationBaseType implements Serializable {
     public int hashCode() {
 		HashCodeBuilder builder = new HashCodeBuilder(17, 37);
 
-		for (var address : this.addressList) {
-			builder.append(address.hashCode());
+		if (this.addressList != null) {
+			for (var address : this.addressList) {
+				builder.append(address.hashCode());
+			}
 		}
 
-		for (var id : this.identificatorList) {
-			builder.append(id.hashCode());
+		if (this.identificatorList != null) {
+			for (var id : this.identificatorList) {
+				builder.append(id.hashCode());
+			}
 		}
 
-		for (var name : this.nameList) {
-			builder.append(name.hashCode());
+		if (this.nameList != null) {
+			for (var name : this.nameList) {
+				builder.append(name.hashCode());
+			}
 		}
 
-		for (var telecom : this.telecomList) {
-			builder.append(telecom.hashCode());
+		if (this.telecomList != null) {
+			for (var telecom : this.telecomList) {
+				builder.append(telecom.hashCode());
+			}
 		}
 
 		return builder.toHashCode();

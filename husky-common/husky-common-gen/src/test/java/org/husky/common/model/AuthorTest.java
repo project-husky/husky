@@ -14,7 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.husky.common.basetypes.AddressBaseType;
@@ -25,13 +27,6 @@ import org.husky.common.enums.PostalAddressUse;
 import org.husky.common.enums.TelecomAddressUse;
 import org.husky.common.hl7cdar2.POCDMT000040Author;
 import org.husky.common.hl7cdar2.TS;
-import org.husky.common.model.Address;
-import org.husky.common.model.Author;
-import org.husky.common.model.Code;
-import org.husky.common.model.Identificator;
-import org.husky.common.model.Name;
-import org.husky.common.model.Organization;
-import org.husky.common.model.Telecom;
 import org.husky.common.testhelpers.AbstractTestHelper;
 import org.husky.common.utils.DateUtil;
 import org.junit.jupiter.api.BeforeEach;
@@ -292,7 +287,10 @@ public class AuthorTest {
 		a.addName(testName2);
 		a.setGln(testGln1);
 		a.setGln(testGln2);
-		a.setTime(testDate1);
+
+		Calendar cal = new GregorianCalendar();
+		cal.setTime(testDate1);
+		a.setTime(cal);
 
 		a.setRoleFunction(code1);
 		assertTrue(AbstractTestHelper.isEqual(code1, a.getRoleFunction()));

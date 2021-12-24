@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -111,7 +112,7 @@ public class Patient extends Person {
      * @param sex      Geschlecht
      * @param birthDay Geburtsdatum
      */
-    public Patient(Name name, AdministrativeGender sex, Date birthDay) {
+	public Patient(Name name, AdministrativeGender sex, Calendar birthDay) {
         this();
 
         // Create and fill gender
@@ -124,7 +125,7 @@ public class Patient extends Person {
 
         // Create and fill birth date
         if (birthDay != null) {
-			mPatient.setBirthTime(DateTimes.toDateTs(birthDay.toInstant()));
+			mPatient.setBirthTime(DateTimes.toDateTs(birthDay.toInstant(), birthDay.getTimeZone().toZoneId()));
         }
     }
 
@@ -137,7 +138,7 @@ public class Patient extends Person {
      * @param birthDay Geburtsdatum
      * @param id       ID
      */
-    public Patient(Name name, AdministrativeGender sex, Date birthDay, Identificator id) {
+	public Patient(Name name, AdministrativeGender sex, Calendar birthDay, Identificator id) {
         // Create the RecordTarget, PatientRole and Patient
         mRecordTarget = new POCDMT000040RecordTarget();
         mPatientRole = new POCDMT000040PatientRole();
@@ -260,8 +261,8 @@ public class Patient extends Person {
      *
      * @param birthDay the new birthday
      */
-    public void setBirthday(Date birthDay) {
-		mPatient.setBirthTime(DateTimes.toDateTs(birthDay.toInstant()));
+	public void setBirthday(Calendar birthDay) {
+		mPatient.setBirthTime(DateTimes.toDateTs(birthDay.toInstant(), birthDay.getTimeZone().toZoneId()));
     }
 
     /**

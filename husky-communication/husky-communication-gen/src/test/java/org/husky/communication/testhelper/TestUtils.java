@@ -11,7 +11,9 @@
 package org.husky.communication.testhelper;
 
 import java.io.File;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -225,7 +227,7 @@ public class TestUtils {
 
 	public Code problemCode;
 
-	public Date startDate;
+	public Calendar startDate;
 	public String startDateString;
 
 	public List<TelecomBaseType> telecoms1;
@@ -373,8 +375,8 @@ public class TestUtils {
 		return p;
 	}
 
-	public Date createStartDate() {
-		return DateUtil.parseDateyyyyMMdd("20141215");
+	public GregorianCalendar createStartDate() {
+		return new GregorianCalendar(2014, 11, 15);
 	}
 
 	public List<TelecomBaseType> createTelecoms1() {
@@ -443,7 +445,7 @@ public class TestUtils {
 		startDateString = "28.02.2015";
 		endDateString = "28.02.2018";
 
-		startDate = DateUtil.parseDateyyyyMMdd("20150228");
+		startDate = new GregorianCalendar(2015, 1, 28);
 		endDate = DateUtil.parseDateyyyyMMdd("20180228");
 
 		// Test String with German, French and Italic special characters

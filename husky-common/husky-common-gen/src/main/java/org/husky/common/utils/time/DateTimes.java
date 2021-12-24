@@ -206,6 +206,21 @@ public final class DateTimes {
         return ts;
     }
 
+	/**
+	 * Converts an {@link Instant} to a {@link TS} (TS.CH.TZ, Time Stamp) with a
+	 * precision to the day with passed time zone.
+	 *
+	 * @param temporal The temporal object to convert.
+	 * @param zone     time zone
+	 * @return the resulting timestamp.
+	 */
+	@NonNull
+	public static TS toDateTs(@NonNull final TemporalAccessor temporal, ZoneId zone) {
+		final TS ts = new TS();
+		ts.setValue(DateTimeFormatter.ofPattern("yyyyMMdd").withZone(zone).format(temporal));
+		return ts;
+	}
+
     /**
      * Converts a {@link TS} (TS.CH.TZ, Time Stamp) to a local date. Only two formats are allowed in the TS.CH.TZ.
      *

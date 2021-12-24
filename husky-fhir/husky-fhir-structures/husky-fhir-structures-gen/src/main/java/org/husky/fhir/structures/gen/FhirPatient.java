@@ -10,10 +10,12 @@
  */
 package org.husky.fhir.structures.gen;
 
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 
 import org.hl7.fhir.r4.model.Address;
+import org.hl7.fhir.r4.model.Address.AddressUse;
 import org.hl7.fhir.r4.model.BooleanType;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
@@ -23,11 +25,16 @@ import org.hl7.fhir.r4.model.ContactPoint.ContactPointUse;
 import org.hl7.fhir.r4.model.DateTimeType;
 import org.hl7.fhir.r4.model.HumanName;
 import org.hl7.fhir.r4.model.HumanName.NameUse;
+import org.hl7.fhir.r4.model.Identifier;
+import org.hl7.fhir.r4.model.IntegerType;
+import org.hl7.fhir.r4.model.StringType;
+import org.hl7.fhir.r4.model.Type;
 import org.husky.common.basetypes.AddressBaseType;
 import org.husky.common.basetypes.NameBaseType;
 import org.husky.common.basetypes.OrganizationBaseType;
 import org.husky.common.enums.AdministrativeGender;
 import org.husky.common.enums.EntityNameUse;
+import org.husky.common.enums.PostalAddressUse;
 import org.husky.common.hl7cdar2.CE;
 import org.husky.common.hl7cdar2.CS;
 import org.husky.common.hl7cdar2.POCDMT000040Birthplace;
@@ -38,11 +45,6 @@ import org.husky.common.model.Identificator;
 import org.husky.common.model.Name;
 import org.husky.common.model.Patient;
 import org.husky.common.model.Telecom;
-import org.husky.common.utils.Util;
-import org.hl7.fhir.r4.model.Identifier;
-import org.hl7.fhir.r4.model.IntegerType;
-import org.hl7.fhir.r4.model.StringType;
-import org.hl7.fhir.r4.model.Type;
 
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Description;
@@ -95,37 +97,38 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 				fhirAddr.setCountry(mdhtAddr.getCountry());
 			}
 			if (mdhtAddr.getUsage() != null) {
-				switch (mdhtAddr.getUsage()) {
-				case HOME_ADDRESS, VACATION_HOME, PRIMARY_HOME:
-					fhirAddr.setUse(org.hl7.fhir.r4.model.Address.AddressUse.HOME);
-					break;
-				case WORK_PLACE:
-					fhirAddr.setUse(org.hl7.fhir.r4.model.Address.AddressUse.WORK);
-					break;
-				case TEMPORARY:
-					fhirAddr.setUse(org.hl7.fhir.r4.model.Address.AddressUse.TEMP);
-					break;
-				case BAD_ADDRESS:
-					fhirAddr.setUse(org.hl7.fhir.r4.model.Address.AddressUse.NULL);
-					break;
-				case CONFIDENTIAL:
-					break;
-				case DIRECT:
-					break;
-				case PHYSICAL_VISIT_ADDRESS:
-					break;
-				case POSTAL_ADDRESS:
-					break;
-				case PUBLIC:
-					break;
-				default:
-					break;
-				}
-
+				fhirAddr.setUse(convertAddressUse(mdhtAddr.getUsage()));
 			}
 
 		}
 		return fhirAddr;
+	}
+
+	private static AddressUse convertAddressUse(PostalAddressUse usage) {
+		switch (usage) {
+		case HOME_ADDRESS, VACATION_HOME, PRIMARY_HOME:
+			return org.hl7.fhir.r4.model.Address.AddressUse.HOME;
+		case WORK_PLACE:
+			return org.hl7.fhir.r4.model.Address.AddressUse.WORK;
+		case TEMPORARY:
+			return org.hl7.fhir.r4.model.Address.AddressUse.TEMP;
+		case BAD_ADDRESS:
+			return org.hl7.fhir.r4.model.Address.AddressUse.NULL;
+		case CONFIDENTIAL:
+			break;
+		case DIRECT:
+			break;
+		case PHYSICAL_VISIT_ADDRESS:
+			break;
+		case POSTAL_ADDRESS:
+			break;
+		case PUBLIC:
+			break;
+		default:
+			break;
+		}
+
+		return null;
 	}
 
 	/**
@@ -572,7 +575,6 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 
 		final var patientName = new Name();
 		AdministrativeGender patientGender = null;
-		Date patientBirthdate = null;
 
 		final var humanName = this.getNameFirstRep();
 		if (humanName != null) {
@@ -620,8 +622,13 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 			}
 		}
 
-		patientBirthdate = getBirthDate();
-		final var patient = new Patient(patientName, patientGender, patientBirthdate);
+		Calendar calendar = new GregorianCalendar();
+
+		if (getBirthDate() != null) {
+			calendar.setTime(getBirthDate());
+		}
+
+		final var patient = new Patient(patientName, patientGender, calendar);
 		for (final Identifier identDt : getIdentifier()) {
 			var oid = "";
 			if (identDt.getSystem().startsWith(FhirCommon.OID_URN)) {
@@ -658,8 +665,8 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 			if (org != null && org.getTelecom() != null && !org.getTelecom().isEmpty()) {
 				final var contactPoint = org.getTelecomFirstRep();
 				if ((contactPoint != null) && (contactPoint.getValue() != null)) {
-					final var tel = Util.createTel(contactPoint.getValue(), null);
-					organization.addTelecom(new Telecom(tel));
+					organization.addTelecom(createTelecom(contactPoint.getValue(),
+							contactPoint.getSystemElement().getValue(), contactPoint.getUseElement().getValue()));
 				}
 			}
 
@@ -670,30 +677,8 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 		if (!getTelecom().isEmpty()) {
 			final var telecoms = new LinkedList<Telecom>();
 			for (final ContactPoint contactPoint : getTelecom()) {
-				if (ContactPointSystem.PHONE.equals(contactPoint.getSystemElement().getValue())) {
-					org.husky.common.enums.TelecomAddressUse addressUse = null;
-					if (ContactPointUse.HOME.equals(contactPoint.getUseElement().getValue())) {
-						addressUse = org.husky.common.enums.TelecomAddressUse.PRIVATE;
-					} else if (ContactPointUse.WORK.equals(contactPoint.getUseElement().getValue())) {
-						addressUse = org.husky.common.enums.TelecomAddressUse.BUSINESS;
-					} else if (ContactPointUse.MOBILE.equals(contactPoint.getUseElement().getValue())) {
-						addressUse = org.husky.common.enums.TelecomAddressUse.MOBILE;
-					}
-
-					final var tel = Util.createTel(contactPoint.getValue(), addressUse);
-					telecoms.add(new Telecom(tel));
-				}
-				if (ContactPointSystem.EMAIL.equals(contactPoint.getSystemElement().getValue())) {
-					org.husky.common.enums.TelecomAddressUse addressUse = null;
-					if (ContactPointUse.HOME.equals(contactPoint.getUseElement().getValue())) {
-						addressUse = org.husky.common.enums.TelecomAddressUse.PRIVATE;
-					} else if (ContactPointUse.WORK.equals(contactPoint.getUseElement().getValue())) {
-						addressUse = org.husky.common.enums.TelecomAddressUse.BUSINESS;
-					}
-
-					final var tel = Util.createEMail(contactPoint.getValue(), addressUse);
-					telecoms.add(new Telecom(tel));
-				}
+				telecoms.add(createTelecom(contactPoint.getValue(), contactPoint.getSystemElement().getValue(),
+						contactPoint.getUseElement().getValue()));
 			}
 			if (!telecoms.isEmpty()) {
 				patient.setTelecoms(telecoms);
@@ -720,38 +705,26 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 
 		// deceasedBooolean
 		final Type idDeceased = getDeceased();
-		if (idDeceased instanceof BooleanType) {
-			final BooleanType deceased = (BooleanType) idDeceased;
-			if (deceased.getValue() != null) {
-				patient.setDeceasedInd(deceased.getValue());
-			}
+		if (idDeceased instanceof BooleanType deceased && deceased.getValue() != null) {
+			patient.setDeceasedInd(deceased.getValue());
 		}
 
 		// deceasedDateTime
-		if (idDeceased instanceof DateTimeType) {
-			final DateTimeType deceased = (DateTimeType) idDeceased;
-			if (deceased.getValue() != null) {
+		if (idDeceased instanceof DateTimeType deceased && deceased.getValue() != null) {
 				patient.setDeceasedTime(deceased.getValue());
 				patient.setDeceasedInd(true);
-			}
 		}
 
 		// multipleBirthOrder
 		final Type iMultipleBirth = getMultipleBirth();
-		if (iMultipleBirth instanceof IntegerType) {
-			final IntegerType multipleBirth = (IntegerType) iMultipleBirth;
-			if (multipleBirth.getValue() != null) {
+		if (iMultipleBirth instanceof IntegerType multipleBirth && multipleBirth.getValue() != null) {
 				patient.setMultipleBirthOrderNumber(multipleBirth.getValue());
 				patient.setMultipleBirthInd(true);
-			}
 		}
 
 		// multipleBirth Indicator
-		if (iMultipleBirth instanceof BooleanType) {
-			final BooleanType multipleBirth = (BooleanType) iMultipleBirth;
-			if (multipleBirth.getValue() != null) {
+		if (iMultipleBirth instanceof BooleanType multipleBirth && multipleBirth.getValue() != null) {
 				patient.setMultipleBirthInd(true);
-			}
 		}
 
 		// mothersName
@@ -789,6 +762,42 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 		}
 
 		return patient;
+	}
+
+	public Telecom createTelecom(String value, ContactPointSystem system, ContactPointUse usage) {
+		final var tel = new Telecom();
+
+		if (system != null) {
+			org.husky.common.enums.TelecomAddressUse addressUse = null;
+			if (ContactPointSystem.PHONE.equals(system)) {
+
+				if (ContactPointUse.HOME.equals(usage)) {
+					addressUse = org.husky.common.enums.TelecomAddressUse.PRIVATE;
+				} else if (ContactPointUse.WORK.equals(usage)) {
+					addressUse = org.husky.common.enums.TelecomAddressUse.BUSINESS;
+				} else if (ContactPointUse.MOBILE.equals(usage)) {
+					addressUse = org.husky.common.enums.TelecomAddressUse.MOBILE;
+				}
+
+				tel.setValue("tel:" + value.replaceAll("\\s+", ""));
+			}
+			if (ContactPointSystem.EMAIL.equals(system)) {
+				if (ContactPointUse.HOME.equals(usage)) {
+					addressUse = org.husky.common.enums.TelecomAddressUse.PRIVATE;
+				} else if (ContactPointUse.WORK.equals(usage)) {
+					addressUse = org.husky.common.enums.TelecomAddressUse.BUSINESS;
+				}
+
+				tel.setValue("mailto:" + value);
+
+			}
+			tel.setUsage(addressUse);
+
+		} else {
+			tel.setValue(value);
+		}
+
+		return tel;
 	}
 
 	/**

@@ -21,6 +21,8 @@ import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -1612,8 +1614,10 @@ public class FhirCommon {
 			}
 
 			// Create eHC Patient
+			Calendar calendar = new GregorianCalendar();
+			calendar.setTime(fhirPatient.getBirthDate());
 			retVal = new org.husky.common.model.Patient(patientName, gender,
-					fhirPatient.getBirthDate());
+					calendar);
 
 			// Add Addresses
 			for (final org.hl7.fhir.r4.model.Address addr : fhirPatient.getAddress()) {

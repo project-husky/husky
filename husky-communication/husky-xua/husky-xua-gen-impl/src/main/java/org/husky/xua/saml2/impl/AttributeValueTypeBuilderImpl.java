@@ -12,6 +12,7 @@ package org.husky.xua.saml2.impl;
 
 import java.util.Map.Entry;
 
+import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 import org.herasaf.xacml.core.policy.impl.AttributeValueType;
@@ -26,8 +27,6 @@ import org.opensaml.core.xml.schema.XSAny;
 import org.opensaml.core.xml.schema.impl.XSAnyBuilder;
 import org.opensaml.core.xml.schema.impl.XSAnyImpl;
 import org.opensaml.xacml.policy.impl.AttributeValueTypeImplBuilder;
-
-import jakarta.xml.bind.JAXBElement;
 
 /**
  * <!-- @formatter:off -->

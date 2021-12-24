@@ -90,17 +90,17 @@ public class DocumentMetadataTest extends TestUtils {
 
 	@Test
 	void testCreationTime() {
-		startDate = createStartDate();
+		var creationTime = createStartDate().getTime();
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ssXXX");
-		System.out.println(sdf.format(startDate));
-		System.out.println(ZonedDateTime.parse(sdf.format(startDate),
+		System.out.println(sdf.format(creationTime));
+		System.out.println(ZonedDateTime.parse(sdf.format(creationTime),
 				DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneId.systemDefault())));
 
-		d.setCreationTime(ZonedDateTime.parse(sdf.format(startDate),
+		d.setCreationTime(ZonedDateTime.parse(sdf.format(creationTime),
 				DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneId.systemDefault())));
 
-		assertEquals(sdf.format(startDate),
+		assertEquals(sdf.format(creationTime),
 				d.getCreationTime().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneId.systemDefault())));
 	}
 

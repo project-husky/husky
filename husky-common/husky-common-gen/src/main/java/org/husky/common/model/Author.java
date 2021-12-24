@@ -13,6 +13,7 @@ package org.husky.common.model;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -665,9 +666,9 @@ public class Author {
      *
      * @param date the start time of the participation as date
      */
-    public void setTime(Date date) {
+	public void setTime(Calendar date) {
 		if (date != null) {
-			mAuthor.setTime(DateTimes.toDateTs(date.toInstant()));
+			mAuthor.setTime(DateTimes.toDateTs(date.toInstant(), date.getTimeZone().toZoneId()));
         } else {
 			mAuthor.setTime(DateTimes.toDateTs(new Date().toInstant()));
         }

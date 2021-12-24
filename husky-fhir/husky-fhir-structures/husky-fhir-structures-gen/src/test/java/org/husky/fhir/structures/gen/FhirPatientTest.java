@@ -15,7 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -79,7 +82,10 @@ public class FhirPatientTest {
 		} else {
 			gender = org.husky.common.enums.AdministrativeGender.UNDIFFERENTIATED;
 		}
-		final Patient conveniencePatient = new Patient(name, gender, patientMueller.getBirthDate());
+
+		Calendar calendar = new GregorianCalendar();
+		calendar.setTime(patientMueller.getBirthDate());
+		final Patient conveniencePatient = new Patient(name, gender, calendar);
 		return conveniencePatient;
 	}
 
@@ -100,6 +106,8 @@ public class FhirPatientTest {
 		if (tel != null) {
 			final ContactPoint fhirTel = org.addTelecom();
 			fhirTel.setValue(tel);
+			fhirTel.setSystem(ContactPointSystem.PHONE);
+			org.addTelecom(fhirTel);
 		}
 		return org;
 	}
@@ -453,7 +461,7 @@ public class FhirPatientTest {
 		name.setSuffix("suffix");
 		final org.husky.common.model.Patient conveniencePatient = new org.husky.common.model.Patient(
 				name, org.husky.common.enums.AdministrativeGender.MALE,
-				new Date());
+				new GregorianCalendar());
 
 		final org.husky.common.model.Address address = new org.husky.common.model.Address(
 				new AddressBaseType());
@@ -510,7 +518,7 @@ public class FhirPatientTest {
 		name.setSuffix("suffix suffix2");
 
 		final Patient conveniencePatient = new Patient(name,
-				org.husky.common.enums.AdministrativeGender.MALE, new Date());
+				org.husky.common.enums.AdministrativeGender.MALE, new GregorianCalendar());
 		final FhirPatient fhirPatient = new FhirPatient(conveniencePatient);
 		assertEquals("given middle", fhirPatient.getNameFirstRep().getGivenAsSingleString());
 
@@ -531,7 +539,7 @@ public class FhirPatientTest {
 		name.setSuffix("suffix");
 
 		final Patient conveniencePatient = new Patient(name,
-				org.husky.common.enums.AdministrativeGender.MALE, new Date());
+				org.husky.common.enums.AdministrativeGender.MALE, new GregorianCalendar());
 		final FhirPatient fhirPatient = new FhirPatient(conveniencePatient);
 		assertEquals("given", fhirPatient.getNameFirstRep().getGivenAsSingleString());
 		assertEquals("family", fhirPatient.getNameFirstRep().getFamily());
@@ -540,7 +548,7 @@ public class FhirPatientTest {
 	}
 
 	@Test
-	public void testFhirSerializeDeserialize() {
+	public void testFhirSerializeDeserialize() throws ParseException {
 
 		final FhirPatient fhirPatient = TestPatient.getFhirPatientMueller();
 
