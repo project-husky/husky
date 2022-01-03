@@ -13,33 +13,37 @@ package org.husky.common.enums;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
+
+
+
+
 /**
  * The Enum ConfidentialityCode contains the codes of the HL7 Vocabulary.
  */
 public enum ConfidentialityCode implements ValueSetEnumInterface {
+	
+	
 
 	/** <div class="de">Normal</div> <div class="fr"></div>. */
-	LOW("L", "2.16.840.1.113883.5.25", "low"),
+	LOW("L", EnumConstants.CONFIDENTIALITY_CODE_SYSTEM_OID, "low"),
 
 	/** <div class="de">Normal</div> <div class="fr"></div>. */
-	MODERATE("M", "2.16.840.1.113883.5.25", "moderate"),
+	MODERATE("M", EnumConstants.CONFIDENTIALITY_CODE_SYSTEM_OID, "moderate"),
 
 	/** <div class="de">Normal</div> <div class="fr"></div>. */
-	NORMAL("N", "2.16.840.1.113883.5.25", "normal"),
+	NORMAL("N", EnumConstants.CONFIDENTIALITY_CODE_SYSTEM_OID, "normal"),
 
 	/** <div class="de">Vertraulich </div> <div class="fr"></div>. */
-	RESTRICTED("R", "2.16.840.1.113883.5.25", "restricted"),
+	RESTRICTED("R", EnumConstants.CONFIDENTIALITY_CODE_SYSTEM_OID, "restricted"),
 
 	/** <div class="de">Vertraulich </div> <div class="fr"></div>. */
-	UNRESTRICTED("U", "2.16.840.1.113883.5.25", "unestricted"),
+	UNRESTRICTED("U", EnumConstants.CONFIDENTIALITY_CODE_SYSTEM_OID, "unestricted"),
 
 	/** <div class="de">Streng vertraulich</div> <div class="fr"></div>. */
-	VERY_RESTRICTED("V", "2.16.840.1.113883.5.25", "very restricted");
+	VERY_RESTRICTED("V", EnumConstants.CONFIDENTIALITY_CODE_SYSTEM_OID, "very restricted");
 
-	/** The Constant CODE_SYSTEM_NAME. */
-	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.25";
-	public static final String CODE_SYSTEM_NAME = "Confidentiality";
-
+	
+	
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>.
@@ -166,12 +170,12 @@ public enum ConfidentialityCode implements ValueSetEnumInterface {
 
 	@Override
 	public @NonNull String getValueSetId() {
-		return CODE_SYSTEM_OID;
+		return EnumConstants.CONFIDENTIALITY_CODE_SYSTEM_OID;
 	}
 
 	@Override
 	public @NonNull String getValueSetName() {
-		return CODE_SYSTEM_NAME;
+		return EnumConstants.CONFIDENTIALITY_CODE_SYSTEM_NAME;
 	}
 
 	/**
@@ -182,6 +186,6 @@ public enum ConfidentialityCode implements ValueSetEnumInterface {
 	 */
 	@Override
 	public @NonNull String getCodeSystemName() {
-		return CODE_SYSTEM_NAME;
+		return EnumConstants.CONFIDENTIALITY_CODE_SYSTEM_NAME;
 	}
 }

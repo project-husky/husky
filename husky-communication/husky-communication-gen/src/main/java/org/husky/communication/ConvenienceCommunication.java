@@ -95,6 +95,7 @@ public class ConvenienceCommunication extends CamelService {
     private static final String AUDIT_CONTEXT = "#auditContext";
 	private static final String HTTPS_LITERAL = "https://";
 	private static final String HTTP_LITERAL = "http://";
+	private static final String LOG_SEND_REQUEST = "Sending request to '{}' endpoint";
 
     /**
      * The SLF4J logger instance.
@@ -735,7 +736,7 @@ public class ConvenienceCommunication extends CamelService {
 						.replace(HTTP_LITERAL, ""),
                 SERVER_IN_LOGGER, SERVER_IN_LOGGER, SERVER_OUT_LOGGER, SERVER_OUT_LOGGER, secure,
                 this.atnaConfigMode.equals(AtnaConfigMode.SECURE), AUDIT_CONTEXT);
-        log.info("Sending request to '{}' endpoint", endpoint);
+        log.info(LOG_SEND_REQUEST, endpoint);
 
         final var exchange = send(endpoint, queryRegistry, securityHeader, null);
 
@@ -793,7 +794,7 @@ public class ConvenienceCommunication extends CamelService {
 						.replace(HTTP_LITERAL, ""),
                 SERVER_IN_LOGGER, SERVER_IN_LOGGER, SERVER_OUT_LOGGER, SERVER_OUT_LOGGER, secure,
                 this.atnaConfigMode.equals(AtnaConfigMode.SECURE), AUDIT_CONTEXT);
-        log.info("Sending request to '{}' endpoint", endpoint);
+        log.info(LOG_SEND_REQUEST, endpoint);
 
         final var exchange = send(endpoint, retrieveDocumentSet, security, null);
 
@@ -928,7 +929,7 @@ public class ConvenienceCommunication extends CamelService {
 						.replace(HTTP_LITERAL, ""),
                 SERVER_IN_LOGGER, SERVER_IN_LOGGER, SERVER_OUT_LOGGER, SERVER_OUT_LOGGER, secure,
                 this.atnaConfigMode.equals(AtnaConfigMode.SECURE), AUDIT_CONTEXT);
-        log.info("Sending request to '{}' endpoint", endpoint);
+        log.info(LOG_SEND_REQUEST, endpoint);
 
         final var exchange = send(endpoint, txnData, security, null);
 

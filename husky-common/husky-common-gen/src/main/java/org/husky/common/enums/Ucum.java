@@ -23,38 +23,38 @@ public enum Ucum {
 	 * <div class="en">AHGEquivalentsPerMilliLiter [Substance Concentration
 	 * Units]</div>
 	 */
-	AHG_EQUIVALENTS_PER_MILLILITER("{AHG}eq/mL",
+	AHG_EQUIVALENTS_PER_MILLILITER(Ucum.AHG_EQUIVALENTS_PER_MILLILITER_CODE,
 			"AHGEquivalentsPerMilliLiter [Substance Concentration Units]"),
 	/**
 	 * <div class = "en"> BillionPerLiter [Number Concentration Units] </div>
 	 */
-	BILLION_PER_LITER("10*9/L", "BillionPerLiter [Number Concentration Units]"),
+	BILLION_PER_LITER(Ucum.BILLION_PER_LITER_CODE, "BillionPerLiter [Number Concentration Units]"),
 	/**
 	 * <div class= "en"> BillionsPerMicroLiter [Number Concentration
 	 * Units]</div>
 	 */
-	BILLIONS_PER_MICROLITER("10*9/uL", "BillionsPerMicroLiter [Number Concentration Units]"),
+	BILLIONS_PER_MICROLITER(Ucum.BILLIONS_PER_MICROLITER_CODE, "BillionsPerMicroLiter [Number Concentration Units]"),
 	/**
 	 * <div class= "en"> BillionsPerMilliliter [Number Concentration Units]
 	 * </div>
 	 */
-	BILLIONS_PER_MILLILITER("10*9/mL", "BillionsPerMilliliter [Number Concentration Units]"),
+	BILLIONS_PER_MILLILITER(Ucum.BILLIONS_PER_MILLILITER_CODE, "BillionsPerMilliliter [Number Concentration Units]"),
 	/**
 	 * <div class= "en"> BoneCollagenEquivalentsPerMicroMoleCreatinine
 	 * [Substance Ratio Or Substance Fraction Units] </div>
 	 */
-	BONE_COLLAGEN_EQUIVALENTS_PER_MICRO_MOLE_CREATININE("{BoneCollagen}eq/umol{Cre}",
+	BONE_COLLAGEN_EQUIVALENTS_PER_MICRO_MOLE_CREATININE(Ucum.BONE_COLLAGEN_EQUIVALENTS_PER_MICROMOLE_CREATININE_CODE,
 			"BoneCollagenEquivalentsPerMicroMoleCreatinine [Substance Ratio Or Substance Fraction Units]"),
 	/**
 	 * <div class = "en"> BoneCollagenEquivalentsPerMilliMoleCreatinine
 	 * [Substance Ratio Or Substance Fraction Units] </div>
 	 */
-	BONE_COLLAGEN_EQUIVALENTS_PER_MILLI_MOLE_CREATININE("{BoneCollagen}eq/mmol{Cre}",
+	BONE_COLLAGEN_EQUIVALENTS_PER_MILLI_MOLE_CREATININE(Ucum.BONE_COLLAGEN_EQUIVALENTS_PER_MILLIOMOLE_CREATININE_CODE,
 			"BoneCollagenEquivalentsPerMilliMoleCreatinine [Substance Ratio Or Substance Fraction Units]"),
 	/**
 	 * <div class = "en"> CellsPerMicroLiter [Number Concentration Units] </div>
 	 */
-	CELLS_PER_MICROLITER("{Cells}/uL", "CellsPerMicroLiter [Number Concentration Units]"),
+	CELLS_PER_MICROLITER(Ucum.CELLS_PER_MICROLITER_CODE, "CellsPerMicroLiter [Number Concentration Units]"),
 	/**
 	 * <div class= "en"> CentiGram [SI Mass Units]</div>
 	 */
@@ -71,27 +71,27 @@ public enum Ucum {
 	 * <div class="en"> ColonyFormingUnitsPerMilliLiter [Number Concentration
 	 * Units]</div>
 	 */
-	COLONY_FORMING_UNITS_PER_MILLILITER("{cfu}/mL",
+	COLONY_FORMING_UNITS_PER_MILLILITER(Ucum.COLONY_FORMING_UNITS_PER_MILLILITER_CODE,
 			"ColonyFormingUnitsPerMilliLiter [Number Concentration Units]"),
 	/**
 	 * <div class = "en"> ComplementCh50UnitsPerMilliLiter [Arbitrary
 	 * Concentration Units] </div>
 	 */
-	COMPLEMENT_CH_50_UNITS_PER_MILLILITER("{ComplementCh50}U/mL",
+	COMPLEMENT_CH_50_UNITS_PER_MILLILITER(Ucum.COMPLEMENT_CH50_UNITS_PER_MILLILITER_CODE,
 			"ComplementCh50UnitsPerMilliLiter [Arbitrary Concentration Units]"),
 	/**
 	 * <div class = "en"> CopiesPerMilliLiter [Number Concentration Units]
 	 * </div>
 	 */
-	COPIES_PER_MILLILITER("{Copies}/mL", "CopiesPerMilliLiter [Number Concentration Units]"),
+	COPIES_PER_MILLILITER(Ucum.COPIES_PER_MILLILITER_CODE, "CopiesPerMilliLiter [Number Concentration Units]"),
 	/**
 	 * <div class= "en"> CubicInch [English Volume Units] </div>
 	 */
-	CUBIC_INCH("[cin_i]", "CubicInch [English Volume Units]"),
+	CUBIC_INCH(Ucum.CUBIC_INCH_CODE, "CubicInch [English Volume Units]"),
 	/**
 	 * <div class="en">Cup [English Volume Units]</div>
 	 */
-	CUP("[cup_us]", "Cup [English Volume Units]"),
+	CUP(Ucum.CUP_CODE, "Cup [English Volume Units]"),
 	/**
 	 * <div class="en">Day [Time Units]</div>
 	 */
@@ -115,7 +115,7 @@ public enum Ucum {
 	/**
 	 * <div class="en"> DegreesFahrenheit [Temperature Units]</div>
 	 */
-	DEGREES_FAHRENHEIT("[degF]", "DegreesFahrenheit [Temperature Units]"),
+	DEGREES_FAHRENHEIT(Ucum.DEGREES_FAHRENHEIT_CODE, "DegreesFahrenheit [Temperature Units]"),
 	/**
 	 * <div class="en"> DegreesKelvin [Temperature Units]</div>
 	 */
@@ -131,24 +131,24 @@ public enum Ucum {
 	/**
 	 * <div class="en">Dram [English Mass Units]</div>
 	 */
-	DRAM("[dr_av]", "Dram [English Mass Units]"),
+	DRAM(Ucum.DRAM_CODE, "Dram [English Mass Units]"),
 	/**
 	 * <div class="en"> EhrlichUnitsPer100Gram [Arbitrary Concentration Content
 	 * Units]</div>
 	 */
-	EHRLICH_UNITS_PER_100_GRAM("{Ehrlich_U}/100g",
+	EHRLICH_UNITS_PER_100_GRAM(Ucum.EHRLICH_UNITS_PER_100_GRAM_CODE,
 			"EhrlichUnitsPer100Gram [Arbitrary Concentration Content Units]"),
 	/**
 	 * <div class = "en"> EhrlichUnitsPerDeciLiter [Arbitrary Concentration
 	 * Units] </div>
 	 */
-	EHRLICH_UNITS_PER_DECI_LITER("{Ehrlich_U}/dL",
+	EHRLICH_UNITS_PER_DECI_LITER(Ucum.EHRLICH_UNITS_PER_DECILITER_CODE,
 			"EhrlichUnitsPerDeciLiter [Arbitrary Concentration Units]"),
 	/**
 	 * <div class = "en"> ElisaUnitsPerMilliLiter [Arbitrary Concentration
 	 * Units] </div>
 	 */
-	ELISA_UNITS_PER_MILLILITER("{Elisa_U}/mL",
+	ELISA_UNITS_PER_MILLILITER(Ucum.ELISA_UNITY_PER_MILLILITER_CODE,
 			"ElisaUnitsPerMilliLiter [Arbitrary Concentration Units]"),
 	/**
 	 * <div class = "en"> Equivalent [Substance Units] </div>
@@ -163,27 +163,27 @@ public enum Ucum {
 	 * <div class= "en"> EquivalentsPerMicroMole [Substance Ratio Or Substance
 	 * Fraction Units] </div>
 	 */
-	EQUIVALENTS_PER_MICRO_MOLE("eq/umol",
+	EQUIVALENTS_PER_MICRO_MOLE(Ucum.EQUIVALENTS_PER_MICROMOLE_CODE,
 			"EquivalentsPerMicroMole [Substance Ratio Or Substance Fraction Units]"),
 	/**
 	 * <div class = "en"> EquivalentsPerMilliLiter [Substance Concentration
 	 * Units] </div>
 	 */
-	EQUIVALENTS_PER_MILLILITER("eq/mL", "EquivalentsPerMilliLiter [Substance Concentration Units]"),
+	EQUIVALENTS_PER_MILLILITER(Ucum.EQUIVALENTS_PER_MILLILITER_CODE, "EquivalentsPerMilliLiter [Substance Concentration Units]"),
 	/**
 	 * <div class = "en"> EquivalentsPerMilliMole [Substance Ratio Or Substance
 	 * Fraction Units] </div>
 	 */
-	EQUIVALENTS_PER_MILLIMOLE("eq/mmol",
+	EQUIVALENTS_PER_MILLIMOLE(Ucum.EQUIVALENTS_PER_MILLIMOLE_CODE,
 			"EquivalentsPerMilliMole [Substance Ratio Or Substance Fraction Units]"),
 	/**
 	 * <div class = "en"> Fathom [English Length Units] </div>
 	 */
-	FATHOM("[fth_i]", "Fathom [English Length Units]"),
+	FATHOM(Ucum.FATHOM_CODE, "Fathom [English Length Units]"),
 	/**
 	 * <div class="en">Feet [English Length Units]</div>
 	 */
-	FEET("[ft_i]", "Feet [English Length Units]"),
+	FEET(Ucum.FEET_CODE, "Feet [English Length Units]"),
 	/**
 	 * <div class="en">FemtoGram [SI Mass Units]</div>
 	 */
@@ -203,24 +203,24 @@ public enum Ucum {
 	/**
 	 * <div class="en">FemtoMolesPerGram [Substance Content Units]</div>
 	 */
-	FEMTO_MOLES_PER_GRAM("fmol/g", "FemtoMolesPerGram [Substance Content Units]"),
+	FEMTO_MOLES_PER_GRAM(Ucum.FEMTOMOLES_PER_GRAM_CODE, "FemtoMolesPerGram [Substance Content Units]"),
 	/**
 	 * <div class="en"> FemtoMolesPerMilliGram [Substance Content Units]</div>
 	 */
-	FEMTO_MOLES_PER_MILLIGRAM("fmol/mg", "FemtoMolesPerMilliGram [Substance Content Units]"),
+	FEMTO_MOLES_PER_MILLIGRAM(Ucum.FEMTOMOLES_PER_MILLIGRAM_CODE, "FemtoMolesPerMilliGram [Substance Content Units]"),
 	/**
 	 * <div class= "en"> FemtoMolesPerMilliLiter [Substance Concentration Units]
 	 * </div>
 	 */
-	FEMTO_MOLES_PER_MILLILITER("fmol/mL", "FemtoMolesPerMilliLiter [Substance Concentration Units]"),
+	FEMTO_MOLES_PER_MILLILITER(Ucum.FEMTOMOLES_PER_MILLILITER_CODE, "FemtoMolesPerMilliLiter [Substance Concentration Units]"),
 	/**
 	 * <div class = "en"> FluidDram [English Volume Units] </div>
 	 */
-	FLUID_DRAM("[fdr_us]", "FluidDram [English Volume Units]"),
+	FLUID_DRAM(Ucum.FLUID_DRAM_CODE, "FluidDram [English Volume Units]"),
 	/**
 	 * <div class="en"> FluidOunce [English Volume Units]</div>
 	 */
-	FLUID_OUNCE("[foz_us]", "FluidOunce [English Volume Units]"),
+	FLUID_OUNCE(Ucum.FLUID_OUNCE_CODE, "FluidOunce [English Volume Units]"),
 	/**
 	 * <div class="en">French [English Length Units]</div>
 	 */
@@ -228,7 +228,7 @@ public enum Ucum {
 	/**
 	 * <div class="en">Gallon [English Volume Units]</div>
 	 */
-	GALLON("[gal_us]", "Gallon [English Volume Units]"),
+	GALLON(Ucum.GALLON_CODE, "Gallon [English Volume Units]"),
 	/**
 	 * <div class="en">Grain [English Mass Units]</div>
 	 */
@@ -244,18 +244,18 @@ public enum Ucum {
 	/**
 	 * <div class="en"> GramMeterPerHeartbeat [Massive Distance Units]</div>
 	 */
-	GRAM_METER_PER_HEARTBEAT("g.m/{hb}", "GramMeterPerHeartbeat [Massive Distance Units]"),
+	GRAM_METER_PER_HEARTBEAT(Ucum.GRAM_METER_PER_HEARTBEAT_CODE, "GramMeterPerHeartbeat [Massive Distance Units]"),
 	/**
 	 * <div class= "en"> GramMeterPerHeartbeatPerSquareMeter [Lineic Mass
 	 * Units]</div>
 	 */
-	GRAM_METER_PER_HEARTBEAT_PER_SQUARE_METER("g.m/({hb}.m2)",
+	GRAM_METER_PER_HEARTBEAT_PER_SQUARE_METER(Ucum.GRAM_METER_PER_HEARTBEAT_PER_SQUARE_METER_CODE,
 			"GramMeterPerHeartbeatPerSquareMeter [Lineic Mass Units]"),
 	/**
 	 * <div class = "en"> GramsPer100Gram [Mass Ratio Or Mass Fraction Or Mass
 	 * Content Units] </div>
 	 */
-	GRAMS_PER_100_GRAM("g/[100]g",
+	GRAMS_PER_100_GRAM(Ucum.GRAMS_PER_100_GRAM_CODE,
 			"GramsPer100Gram [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
 	 * <div class = "en"> GramsPerDeciLiter [Most Common Healthcare Units]
@@ -271,7 +271,7 @@ public enum Ucum {
 	 * <div class = "en"> GramsPerGramCreatinine [Mass Ratio Or Mass Fraction Or
 	 * Mass Content Units] </div>
 	 */
-	GRAMS_PER_GRAM_CREATININE("g/g{Cre}",
+	GRAMS_PER_GRAM_CREATININE(Ucum.GRAMS_PER_GRAM_CREATININE_CODE,
 			"GramsPerGramCreatinine [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
 	 * <div class = "en"> GramsPerKiloGram [Mass Ratio Or Mass Fraction Or Mass
@@ -294,7 +294,7 @@ public enum Ucum {
 	/**
 	 * <div class="en"> GramsPerTotalWeight [SI Mass Units]</div>
 	 */
-	GRAM_PER_TOTAL_WEIGHT("g/{TotalWeight}", "GramsPerTotalWeight [SI Mass Units]"),
+	GRAM_PER_TOTAL_WEIGHT(Ucum.GRAMS_PER_TOTAL_WEIGHT_CODE, "GramsPerTotalWeight [SI Mass Units]"),
 	/**
 	 * <div class="en"> HectoLiter [SI Volume Units]</div>
 	 */
@@ -307,24 +307,24 @@ public enum Ucum {
 	 * <div class="en"> IgAPhospholipidUnitsPerMilliLiter [Arbitrary
 	 * Concentration Units]</div>
 	 */
-	IGA_PHOSPHOLIPID_UNITS_PER_MILLILITER("{IgAPhospholipid}U/mL",
+	IGA_PHOSPHOLIPID_UNITS_PER_MILLILITER(Ucum.IGA_PHOSPHOLIPID_UNITS_PER_MILLILITER_CODE,
 			"IgAPhospholipidUnitsPerMilliLiter [Arbitrary Concentration Units]"),
 	/**
 	 * <div class = "en"> IgGPhospholipidUnitsPerMilliLiter [Arbitrary
 	 * Concentration Units] </div>
 	 */
-	IGG_PHOSPHOLIPID_UNITS_PER_MILLILITER("{IgGPhospholipid}U/mL",
+	IGG_PHOSPHOLIPID_UNITS_PER_MILLILITER(Ucum.IGG_PHOSPHOLIPID_UNITS_PER_MILLILITER_CODE,
 			"IgGPhospholipidUnitsPerMilliLiter [Arbitrary Concentration Units]"),
 	/**
 	 * <div class = "en"> IgMPhospholipidUnitsPerMilliLiter [Arbitrary
 	 * Concentration Units] </div>
 	 */
-	IGM_PHOSPHOLIPID_UNITS_PER_MILLILITER("{IgMPhospholipid}U/mL",
+	IGM_PHOSPHOLIPID_UNITS_PER_MILLILITER(Ucum.IGM_PHOSPHOLIPID_UNITS_PER_MILLILITER_CODE,
 			"IgMPhospholipidUnitsPerMilliLiter [Arbitrary Concentration Units]"),
 	/**
 	 * <div class = "en"> Inch [English Length Units] </div>
 	 */
-	INCH("[in_i]", "Inch [English Length Units]"),
+	INCH(Ucum.INCH_CODE, "Inch [English Length Units]"),
 	/**
 	 * <div class="en">InternationalUnit [Arbitrary Units]</div>
 	 */
@@ -333,42 +333,42 @@ public enum Ucum {
 	 * <div class="en"> InternationalUnitsPerDeciLiter [Arbitrary Concentration
 	 * Units]</div>
 	 */
-	INTERNATIONAL_UNITS_PER_DECILITER("[iU]/dL",
+	INTERNATIONAL_UNITS_PER_DECILITER(Ucum.INTERNATIONAL_UNITS_PER_DECILITER_CODE,
 			"InternationalUnitsPerDeciLiter [Arbitrary Concentration Units]"),
 	/**
 	 * <div class = "en"> InternationalUnitsPerGram [Arbitrary Concentration
 	 * Content Units] </div>
 	 */
-	INTERNATIONAL_UNITS_PER_GRAM("[iU]/g",
+	INTERNATIONAL_UNITS_PER_GRAM(Ucum.INTERNATIONAL_UNITS_PER_GRAM_CODE,
 			"InternationalUnitsPerGram [Arbitrary Concentration Content Units]"),
 	/**
 	 * <div class = "en"> InternationalUnitsPerGramHemoglobin [Arbitrary
 	 * Concentration Content Units] </div>
 	 */
-	INTERNATIONAL_UNITS_PER_GRAM_HEMOGLOBIN("[iU]/g{Hgb}",
+	INTERNATIONAL_UNITS_PER_GRAM_HEMOGLOBIN(Ucum.INTERNATIONAL_UNITS_PER_GRAM_HEMOGLOBIN_CODE,
 			"InternationalUnitsPerGramHemoglobin [Arbitrary Concentration Content Units]"),
 	/**
 	 * <div class = "en"> InternationalUnitsPerKilogram [Arbitrary Concentration
 	 * Content Units] </div>
 	 */
-	INTERNATIONAL_UNITS_PER_KILOGRAM("[iU]/kg",
+	INTERNATIONAL_UNITS_PER_KILOGRAM(Ucum.INTERNATIONAL_UNITS_PER_KILOGRAM_CODE,
 			"InternationalUnitsPerKilogram [Arbitrary Concentration Content Units]"),
 	/**
 	 * <div class = "en"> InternationalUnitsPerLiter [Most Common Healthcare
 	 * Units] </div>
 	 */
-	INTERNATIONAL_UNITS_PER_LITER("[iU]/L",
+	INTERNATIONAL_UNITS_PER_LITER(Ucum.INTERNATIONAL_UNITS_PER_LITER_CODE,
 			"InternationalUnitsPerLiter [Most Common Healthcare Units]"),
 	/**
 	 * <div class = "en"> InternationalUnitsPerMilliLiter [Arbitrary
 	 * Concentration Units] </div>
 	 */
-	INTERNATIONAL_UNIT_PER_MILLILITER("[iU]/mL",
+	INTERNATIONAL_UNIT_PER_MILLILITER(Ucum.INTERNATIONAL_UNITS_PER_MILLILITER_CODE,
 			"InternationalUnitsPerMilliLiter [Arbitrary Concentration Units]"),
 	/**
 	 * <div class = "en"> KatalPerKilogram [Substance Rate Content Units] </div>
 	 */
-	KATAL_PER_KILOGRAM("kat/kg", "KatalPerKilogram [Substance Rate Content Units]"),
+	KATAL_PER_KILOGRAM(Ucum.KATAL_PER_KILOGRAM_CODE, "KatalPerKilogram [Substance Rate Content Units]"),
 	/**
 	 * <div class= "en"> KelvinPerWatt [Thermal Resistance Units]</div>
 	 */
@@ -376,7 +376,7 @@ public enum Ucum {
 	/**
 	 * <div class="en"> KiloCaloriesPerOunce [Energy Content Units]</div>
 	 */
-	KILO_CALORIES_PER_OUNCE("kCal/[oz_av]", "KiloCaloriesPerOunce [Energy Content Units]"),
+	KILO_CALORIES_PER_OUNCE(Ucum.KILO_CALORIES_PER_OUNCE_CODE, "KiloCaloriesPerOunce [Energy Content Units]"),
 	/**
 	 * <div class="en"> KiloGram [SI Mass Units]</div>
 	 */
@@ -384,7 +384,7 @@ public enum Ucum {
 	/**
 	 * <div class="en"> KiloGramsPerCubicMeter [Mass Concentration Units]</div>
 	 */
-	KILOGRAMS_PER_CUBICMETER("kg/m3", "KiloGramsPerCubicMeter [Mass Concentration Units]"),
+	KILOGRAMS_PER_CUBICMETER(Ucum.KILOGRAMS_PER_CUBICMETER_CODE, "KiloGramsPerCubicMeter [Mass Concentration Units]"),
 	/**
 	 * <div class= "en"> KiloGramsPerLiter [Mass Concentration Units] </div>
 	 */
@@ -392,16 +392,16 @@ public enum Ucum {
 	/**
 	 * <div class= "en"> KiloGramsPerMole [Molar Mass Units]</div>
 	 */
-	KILOGRAMS_PER_MOLE("kg/mol", "KiloGramsPerMole [Molar Mass Units]"),
+	KILOGRAMS_PER_MOLE(Ucum.KILOGRAMS_PER_MOLE_CODE, "KiloGramsPerMole [Molar Mass Units]"),
 	/**
 	 * <div class="en"> KiloGramsPerSquareMeter [Areic Mass Units]</div>
 	 */
-	KILOGRAMS_PER_SQUARE_METER("kg/m2", "KiloGramsPerSquareMeter [Areic Mass Units]"),
+	KILOGRAMS_PER_SQUARE_METER(Ucum.KILOGRAMS_PER_SQUAREMETER_CODE, "KiloGramsPerSquareMeter [Areic Mass Units]"),
 	/**
 	 * <div class="en"> KiloInternationalUnitsPerMilliLiter [Arbitrary
 	 * Concentration Units]</div>
 	 */
-	KILO_INTERNATIONAL_UNITS_PER_MILLILITER("k[iU]/mL",
+	KILO_INTERNATIONAL_UNITS_PER_MILLILITER(Ucum.KILO_INTERNATIONAL_UNITS_PER_MILLILITER_CODE,
 			"KiloInternationalUnitsPerMilliLiter [Arbitrary Concentration Units]"),
 	/**
 	 * <div class = "en"> KiloLiter [SI Volume Units] </div>
@@ -434,7 +434,7 @@ public enum Ucum {
 	/**
 	 * <div class="en"> LiterSquareSecondPerSecond [Volume Duration Units]</div>
 	 */
-	LITER_SQUARE_SECOND_PER_SECOND("L.s2/s", "LiterSquareSecondPerSecond [Volume Duration Units]"),
+	LITER_SQUARE_SECOND_PER_SECOND(Ucum.LITER_SQUARE_SECOND_PER_SECOND_CODE, "LiterSquareSecondPerSecond [Volume Duration Units]"),
 	/**
 	 * <div class= "en"> Log10 [Unity] </div>
 	 */
@@ -459,12 +459,12 @@ public enum Ucum {
 	 * <div class="en"> MicroEquivalentsPerLiter [Substance Concentration
 	 * Units]</div>
 	 */
-	MICRO_EQUIVALENT_PER_LITER("ueq/L", "MicroEquivalentsPerLiter [Substance Concentration Units]"),
+	MICRO_EQUIVALENT_PER_LITER(Ucum.MICRO_EQUIVALENTS_PER_LITER_CODE, "MicroEquivalentsPerLiter [Substance Concentration Units]"),
 	/**
 	 * <div class = "en"> MicroEquivalentsPerMilliLiter [Substance Concentration
 	 * Units] </div>
 	 */
-	MICRO_EQUIVALENT_PER_MILLILITER("ueq/mL",
+	MICRO_EQUIVALENT_PER_MILLILITER(Ucum.MICRO_EQUIVALENTS_PER_MILLILITER_CODE,
 			"MicroEquivalentsPerMilliLiter [Substance Concentration Units]"),
 	/**
 	 * <div class = "en"> MicroGram [SI Mass Units] </div>
@@ -474,30 +474,30 @@ public enum Ucum {
 	 * <div class="en"> MicroGramPer100Gram [Mass Ratio Or Mass Fraction Or Mass
 	 * Content Units]</div>
 	 */
-	MICROGRAM_PER_100_GRAM("ug/[100]g",
+	MICROGRAM_PER_100_GRAM(Ucum.MICROGRAM_PER_100_GRAM_CODE,
 			"MicroGramPer100Gram [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
 	 * <div class = "en"> MicroGramPerGramCreatinine [Mass Ratio Or Mass
 	 * Fraction Or Mass Content Units] </div>
 	 */
-	MICROGRAM_PER_GRAM_CREATININE("ug/g{Cre}",
+	MICROGRAM_PER_GRAM_CREATININE(Ucum.MICROGRAM_PER_GRAM_CREATININE_CODE,
 			"MicroGramPerGramCreatinine [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
 	 * <div class = "en"> MicroGramPerGramDryWeight [Mass Ratio Or Mass Fraction
 	 * Or Mass Content Units] </div>
 	 */
-	MICROGRAM_PER_GRAM_DRY_WEIGHT("ug/g{DryWeight}",
+	MICROGRAM_PER_GRAM_DRY_WEIGHT(Ucum.MICROGRAM_PER_GRAM_DRY_WEIGHT_CODE,
 			"MicroGramPerGramDryWeight [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
 	 * <div class = "en"> MicroGramsPerDeciLiter [Most Common Healthcare Units]
 	 * </div>
 	 */
-	MICROGRAMS_PER_DECILITER("ug/dL", "MicroGramsPerDeciLiter [Most Common Healthcare Units]"),
+	MICROGRAMS_PER_DECILITER(Ucum.MICROGRAMS_PER_DECILITER_CODE, "MicroGramsPerDeciLiter [Most Common Healthcare Units]"),
 	/**
 	 * <div class = "en"> MicroGramsPerDeciLiterRedBloodCells [Mass
 	 * Concentration Units] </div>
 	 */
-	MICROGRAMS_PER_DECILITER_RED_BLOOD_CELLS("ug/dL{rbc}",
+	MICROGRAMS_PER_DECILITER_RED_BLOOD_CELLS(Ucum.MICROGRAMS_PER_DECILITER_RED_BLOOD_CELLS_CODE,
 			"MicroGramsPerDeciLiterRedBloodCells [Mass Concentration Units]"),
 	/**
 	 * <div class = "en"> MicroGramsPerGram [Mass Ratio Or Mass Fraction Or Mass
@@ -509,13 +509,13 @@ public enum Ucum {
 	 * <div class = "en"> MicroGramsPerGramHemoglobin [Mass Ratio Or Mass
 	 * Fraction Or Mass Content Units] </div>
 	 */
-	MICROGRAMS_PER_GRAM_HEMOGLOBIN("ug/g{Hgb}",
+	MICROGRAMS_PER_GRAM_HEMOGLOBIN(Ucum.MICROGRAMS_PER_GRAM_HEMOGLOBIN_CODE,
 			"MicroGramsPerGramHemoglobin [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
 	 * <div class = "en"> MicroGramsPerKiloGram [Mass Ratio Or Mass Fraction Or
 	 * Mass Content Units] </div>
 	 */
-	MICROGRAMS_PER_KILOGRAM("ug/kg",
+	MICROGRAMS_PER_KILOGRAM(Ucum.MICROGRAMS_PER_KILOGRAM_CODE,
 			"MicroGramsPerKiloGram [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
 	 * <div class = "en"> MicroGramsPerLiter [Mass Concentration Units] </div>
@@ -525,46 +525,46 @@ public enum Ucum {
 	 * <div class= "en"> MicroGramsPerMilliGram [Mass Ratio Or Mass Fraction Or
 	 * Mass Content Units]</div>
 	 */
-	MICROGRAMS_PER_MILLIGRAM("ug/mg",
+	MICROGRAMS_PER_MILLIGRAM(Ucum.MICROGRAMS_PER_MILLIGRAM_CODE,
 			"MicroGramsPerMilliGram [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
 	 * <div class = "en"> MicroGramsPerMilliGramCreatinine [Mass Ratio Or Mass
 	 * Fraction Or Mass Content Units] </div>
 	 */
-	MICROGRAMS_PER_MILLIGRAM_CREATININE("ug/mg{Cre}",
+	MICROGRAMS_PER_MILLIGRAM_CREATININE(Ucum.MICROGRAMS_PER_MILLIGRAM_CREATININE_CODE,
 			"MicroGramsPerMilliGramCreatinine [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
 	 * <div class = "en"> MicroGramsPerMilliLiter [Most Common Healthcare Units]
 	 * </div>
 	 */
-	MICROGRAMS_PER_MILLILITER("ug/mL", "MicroGramsPerMilliLiter [Most Common Healthcare Units]"),
+	MICROGRAMS_PER_MILLILITER(Ucum.MICROGRAMS_PER_MILLILITER_CODE, "MicroGramsPerMilliLiter [Most Common Healthcare Units]"),
 	/**
 	 * <div class = "en"> MicroGramsPerNanoGram [Mass Ratio Or Mass Fraction Or
 	 * Mass Content Units] </div>
 	 */
-	MICROGRAMS_PER_NANOGRAM("ug/ng",
+	MICROGRAMS_PER_NANOGRAM(Ucum.MICROGRAMS_PER_NANOGRAM_CODE,
 			"MicroGramsPerNanoGram [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
 	 * <div class = "en"> MicroGramsPerSpecimen [SI Mass Units] </div>
 	 */
-	MICROGRAMS_PER_SPECIMEN("ug/{Specimen}", "MicroGramsPerSpecimen [SI Mass Units]"),
+	MICROGRAMS_PER_SPECIMEN(Ucum.MICROGRAMS_PER_SPECIMEN_CODE, "MicroGramsPerSpecimen [SI Mass Units]"),
 	/**
 	 * <div class="en"> MicroGramsPerSquareMeter [Areic Mass Units]</div>
 	 */
-	MICROGRAMS_PER_SQUAREMETER("ug/m2", "MicroGramsPerSquareMeter [Areic Mass Units]"),
+	MICROGRAMS_PER_SQUAREMETER(Ucum.MICROGRAMS_PER_SQUAREMETER_CODE, "MicroGramsPerSquareMeter [Areic Mass Units]"),
 	/**
 	 * <div class="en"> MicroGramsPerTotalVolume [SI Mass Units]</div>
 	 */
-	MICROGRAMS_PER_TOTAL_VOLUME("ug/{TotalVolume}", "MicroGramsPerTotalVolume [SI Mass Units]"),
+	MICROGRAMS_PER_TOTAL_VOLUME(Ucum.MICROGRAMS_PER_TOTAL_VOLUME_CODE, "MicroGramsPerTotalVolume [SI Mass Units]"),
 	/**
 	 * <div class="en"> MicroInternationalUnit [Arbitrary Units]</div>
 	 */
-	MICRO_INTERNATIONAL_UNIT("u[iU]", "MicroInternationalUnit [Arbitrary Units]"),
+	MICRO_INTERNATIONAL_UNIT(Ucum.MICRO_INTERNATIONAL_UNIT_CODE, "MicroInternationalUnit [Arbitrary Units]"),
 	/**
 	 * <div class="en"> MicroInternationalUnitsPerMilliLiter [Arbitrary
 	 * Concentration Units]</div>
 	 */
-	MICRO_INTERNATIONAL_UNITY_PER_MILLILITER("u[iU]/mL",
+	MICRO_INTERNATIONAL_UNITY_PER_MILLILITER(Ucum.MICRO_INTERNATIONAL_UNITS_PER_MILLILITER_CODE,
 			"MicroInternationalUnitsPerMilliLiter [Arbitrary Concentration Units]"),
 	/**
 	 * <div class = "en"> MicroLiter [SI Volume Units] </div>
@@ -582,60 +582,60 @@ public enum Ucum {
 	 * <div class="en"> MicroMolesPerDeciLiter [Substance Concentration
 	 * Units]</div>
 	 */
-	MICROMOLES_PER_DECILITER("umol/dL", "MicroMolesPerDeciLiter [Substance Concentration Units]"),
+	MICROMOLES_PER_DECILITER(Ucum.MICROMOLES_PER_DECILITER_CODE, "MicroMolesPerDeciLiter [Substance Concentration Units]"),
 	/**
 	 * <div class = "en"> MicroMolesPerGram [Substance Content Units] </div>
 	 */
-	MICROMOLES_PER_GRAM("umol/g", "MicroMolesPerGram [Substance Content Units]"),
+	MICROMOLES_PER_GRAM(Ucum.MICROMOLES_PER_GRAM_CODE, "MicroMolesPerGram [Substance Content Units]"),
 	/**
 	 * <div class="en"> MicroMolesPerGramCreatinine [Substance Content
 	 * Units]</div>
 	 */
-	MICROMOLES_PER_GRAM_CREATININE("umol/g{Cre}",
+	MICROMOLES_PER_GRAM_CREATININE(Ucum.MICROMOLES_PER_GRAM_CREATININE_CODE,
 			"MicroMolesPerGramCreatinine [Substance Content Units]"),
 	/**
 	 * <div class = "en"> MicroMolesPerGramHemoglobin [Substance Content Units]
 	 * </div>
 	 */
-	MICROMOLES_PER_GRAM_HEMOGLOBIN("umol/g{Hgb}",
+	MICROMOLES_PER_GRAM_HEMOGLOBIN(Ucum.MICROMOLES_PER_GRAM_HEMOGLOBIN_CODE,
 			"MicroMolesPerGramHemoglobin [Substance Content Units]"),
 	/**
 	 * <div class = "en"> MicroMolesPerLiter [Most Common Healthcare Units]
 	 * </div>
 	 */
-	MICROMOLES_PER_LITER("umol/L", "MicroMolesPerLiter [Most Common Healthcare Units]"),
+	MICROMOLES_PER_LITER(Ucum.MICROMOLES_PER_LITER_CODE, "MicroMolesPerLiter [Most Common Healthcare Units]"),
 	/**
 	 * <div class= "en"> MicroMolesPerMilliGram [Substance Content Units] </div>
 	 */
-	MICROMOLES_PER_MILLIGRAM("umol/mg", "MicroMolesPerMilliGram [Substance Content Units]"),
+	MICROMOLES_PER_MILLIGRAM(Ucum.MICROMOLES_PER_MILLIGRAM_CODE, "MicroMolesPerMilliGram [Substance Content Units]"),
 	/**
 	 * <div class= "en"> MicroMolesPerMilliGramCreatinine [Substance Content
 	 * Units] </div>
 	 */
-	MICROMOLES_PER_MILLIGRAM_CREATININE("umol/mg{Cre}",
+	MICROMOLES_PER_MILLIGRAM_CREATININE(Ucum.MICROMOLES_PER_MILLIGRAM_CREATININE_CODE,
 			"MicroMolesPerMilliGramCreatinine [Substance Content Units]"),
 	/**
 	 * <div class = "en"> MicroMolesPerMilliLiter [Substance Concentration
 	 * Units] </div>
 	 */
-	MICROMOLES_PER_MILLILITER("umol/mL", "MicroMolesPerMilliLiter [Substance Concentration Units]"),
+	MICROMOLES_PER_MILLILITER(Ucum.MICROMOLES_PER_MILLILITER_CODE, "MicroMolesPerMilliLiter [Substance Concentration Units]"),
 	/**
 	 * <div class = "en"> MicroMolesPerMinutePerGram [Substance Rate Content
 	 * Units] </div>
 	 */
-	MICROMOLES_PER_MINUTE_PER_GRAM("umol/min/g",
+	MICROMOLES_PER_MINUTE_PER_GRAM(Ucum.MICROMOLES_PER_MINUTE_PER_GRAM_CODE,
 			"MicroMolesPerMinutePerGram [Substance Rate Content Units]"),
 	/**
 	 * <div class = "en"> MicroMolesPerMole [Substance Ratio Or Substance
 	 * Fraction Units] </div>
 	 */
-	MICROMOLES_PER_MOLE("umol/mol",
+	MICROMOLES_PER_MOLE(Ucum.MICROMOLES_PER_MOLE_CODE,
 			"MicroMolesPerMole [Substance Ratio Or Substance Fraction Units]"),
 	/**
 	 * <div class = "en"> MicroMolesPerMoleCreatinine [Substance Ratio Or
 	 * Substance Fraction Units] </div>
 	 */
-	MICROMOLES_PER_MOLE_CREATININE("umol/mol{Cre}",
+	MICROMOLES_PER_MOLE_CREATININE(Ucum.MICROMOLES_PER_MOLE_CREATININE_CODE,
 			"MicroMolesPerMoleCreatinine [Substance Ratio Or Substance Fraction Units]"),
 	/**
 	 * <div class = "en"> MicroSecond [Time Units] </div>
@@ -649,44 +649,44 @@ public enum Ucum {
 	 * <div class="en"> MilliEquivalentPerMilliLiter [Substance Concentration
 	 * Units]</div>
 	 */
-	MILLI_EQUIVALENT_PER_MILLILITER("meq/mL",
+	MILLI_EQUIVALENT_PER_MILLILITER(Ucum.MILLI_EQUIVALENT_PER_MILLILITER_CODE,
 			"MilliEquivalentPerMilliLiter [Substance Concentration Units]"),
 	/**
 	 * <div class = "en"> MilliEquivalentsPerDeciLiter [Substance Concentration
 	 * Units] </div>
 	 */
-	MILLI_EQUIVALENTS_PER_DECILITER("meq/dL",
+	MILLI_EQUIVALENTS_PER_DECILITER(Ucum.MILLI_EQUIVALENTS_PER_DECILITER_CODE,
 			"MilliEquivalentsPerDeciLiter [Substance Concentration Units]"),
 	/**
 	 * <div class = "en"> MilliEquivalentsPerGram [Substance Content Units]
 	 * </div>
 	 */
-	MILLI_EQUIVALENTS_PER_GRAM("meq/g", "MilliEquivalentsPerGram [Substance Content Units]"),
+	MILLI_EQUIVALENTS_PER_GRAM(Ucum.MILLI_EQUIVALENTS_PER_GRAM_CODE, "MilliEquivalentsPerGram [Substance Content Units]"),
 	/**
 	 * <div class= "en"> MilliEquivalentsPerGramCreatinine [Substance Content
 	 * Units] </div>
 	 */
-	MILLI_EQUIVALENTS_PER_GRAM_CREATININE("meq/g{Cre}",
+	MILLI_EQUIVALENTS_PER_GRAM_CREATININE(Ucum.MILLI_EQUIVALENTS_PER_GRAM_CREATININE_CODE,
 			"MilliEquivalentsPerGramCreatinine [Substance Content Units]"),
 	/**
 	 * <div class = "en"> MilliEquivalentsPerKiloGram [Substance Content Units]
 	 * </div>
 	 */
-	MILLI_EQUIVALENTS_PER_KILOGRAM("meq/kg", "MilliEquivalentsPerKiloGram [Substance Content Units]"),
+	MILLI_EQUIVALENTS_PER_KILOGRAM(Ucum.MILLI_EQUIVALENTS_PER_KILOGRAM_CODE, "MilliEquivalentsPerKiloGram [Substance Content Units]"),
 	/**
 	 * <div class = "en"> MilliEquivalentsPerLiter [Most Common Healthcare
 	 * Units] </div>
 	 */
-	MILLI_EQUIVALENTS_PER_LITER("meq/L", "MilliEquivalentsPerLiter [Most Common Healthcare Units]"),
+	MILLI_EQUIVALENTS_PER_LITER(Ucum.MILLI_EQUIVALENTS_PER_LITER_CODE, "MilliEquivalentsPerLiter [Most Common Healthcare Units]"),
 	/**
 	 * <div class = "en"> MilliEquivalentsPerSpecimen [Substance Units] </div>
 	 */
-	MILLI_EQUIVALENTS_PER_SPECIMEN("meq/{Specimen}", "MilliEquivalentsPerSpecimen [Substance Units]"),
+	MILLI_EQUIVALENTS_PER_SPECIMEN(Ucum.MILLI_EQUIVALENTS_PER_SPECIMEN_CODE, "MilliEquivalentsPerSpecimen [Substance Units]"),
 	/**
 	 * <div class= "en"> MilliEquivalentsPerSquareMeter [Areic Substance
 	 * Units]</div>
 	 */
-	MILLI_EQUIVALENTS_PER_SQUARE_METER("meq/m2",
+	MILLI_EQUIVALENTS_PER_SQUARE_METER(Ucum.MILLI_EQUIVALENTS_PER_SQUAREMETER_CODE,
 			"MilliEquivalentsPerSquareMeter [Areic Substance Units]"),
 	/**
 	 * <div class = "en"> MilliGram [SI Mass Units] </div>
@@ -696,12 +696,12 @@ public enum Ucum {
 	 * <div class="en"> MilliGramPerGramCreatinine [Mass Ratio Or Mass Fraction
 	 * Or Mass Content Units]</div>
 	 */
-	MILLIGRAM_PER_GRAM_CREATININE("mg/g{Cre}",
+	MILLIGRAM_PER_GRAM_CREATININE(Ucum.MILLIGRAM_PER_GRAM_CREATININE_CODE,
 			"MilliGramPerGramCreatinine [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
 	 * <div class = "en"> MilliGramPerTotalVolume [SI Mass Units] </div>
 	 */
-	MILLIGRAM_PER_TOTAL_VOLUME("mg/{TotalVolume}", "MilliGramPerTotalVolume [SI Mass Units]"),
+	MILLIGRAM_PER_TOTAL_VOLUME(Ucum.MILLIGRAM_PER_TOTAL_VOLUME_CODE, "MilliGramPerTotalVolume [SI Mass Units]"),
 	/**
 	 * <div class="en"> MilliGramsPerCubicMeter [Mass Concentration Units]</div>
 	 */
@@ -710,7 +710,7 @@ public enum Ucum {
 	 * <div class= "en"> MilliGramsPerDeciLiter [Most Common Healthcare Units]
 	 * </div>
 	 */
-	MILLIGRAMS_PER_DECILITER("mg/dL", "MilliGramsPerDeciLiter [Most Common Healthcare Units]"),
+	MILLIGRAMS_PER_DECILITER(Ucum.MILLIGRAMS_PER_DECILITER_CODE, "MilliGramsPerDeciLiter [Most Common Healthcare Units]"),
 	/**
 	 * <div class = "en"> MilliGramsPerGram [Mass Ratio Or Mass Fraction Or Mass
 	 * Content Units] </div>
@@ -721,7 +721,7 @@ public enum Ucum {
 	 * <div class = "en"> MilliGramsPerKiloGram [Mass Ratio Or Mass Fraction Or
 	 * Mass Content Units] </div>
 	 */
-	MILLIGRAMS_PER_KILOGRAM("mg/kg",
+	MILLIGRAMS_PER_KILOGRAM(Ucum.MILLIGRAMS_PER_KILOGRAM_CODE,
 			"MilliGramsPerKiloGram [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
 	 * <div class = "en"> MilliGramsPerLiter [Mass Concentration Units] </div>
@@ -731,44 +731,44 @@ public enum Ucum {
 	 * <div class= "en"> MilliGramsPerMilliGram [Mass Ratio Or Mass Fraction Or
 	 * Mass Content Units]</div>
 	 */
-	MILLIGRAMS_PER_MILLIGRAM("mg/mg",
+	MILLIGRAMS_PER_MILLIGRAM(Ucum.MILLIGRAMS_PER_MILLIGRAM_CODE,
 			"MilliGramsPerMilliGram [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
 	 * <div class = "en"> MilligramsPerMilligramCreatinine [Mass Ratio Or Mass
 	 * Fraction Or Mass Content Units] </div>
 	 */
-	MILLIGRAMS_PER_MILLIGRAM_CREATININE("mg/mg{Cre}",
+	MILLIGRAMS_PER_MILLIGRAM_CREATININE(Ucum.MILLIGRAMS_PER_MILLIGRAM_CREATININE_CODE,
 			"MilligramsPerMilligramCreatinine [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
 	 * <div class = "en"> MilliGramsPerMilliLiter [Mass Concentration Units]
 	 * </div>
 	 */
-	MILLIGRAMS_PER_MILLILITER("mg/mL", "MilliGramsPerMilliLiter [Mass Concentration Units]"),
+	MILLIGRAMS_PER_MILLILITER(Ucum.MILLIGRAMS_PER_MILLILITER_CODE, "MilliGramsPerMilliLiter [Mass Concentration Units]"),
 	/**
 	 * <div class= "en"> MilliGramsPerSquareMeter [Areic Mass Units] </div>
 	 */
-	MILLIGRAMS_PER_SQUARE_METER("mg/m2", "MilliGramsPerSquareMeter [Areic Mass Units]"),
+	MILLIGRAMS_PER_SQUARE_METER(Ucum.MILLIGRAMS_PER_SQUAREMETER_CODE, "MilliGramsPerSquareMeter [Areic Mass Units]"),
 	/**
 	 * <div class="en"> MilliGramsPerVolume [SI Mass Units]</div>
 	 */
-	MILLIGRAMS_PER_VOLUME("mg/{Volume}", "MilliGramsPerVolume [SI Mass Units]"),
+	MILLIGRAMS_PER_VOLUME(Ucum.MILLIGRAMS_PER_VOLUME_CODE, "MilliGramsPerVolume [SI Mass Units]"),
 	/**
 	 * <div class="en"> MilliGramsPhenylketonesPerDeciLiter [Mass Concentration
 	 * Units]</div>
 	 */
-	MILLIGRAMS_PER_PHENYLKETONES_PER_DECILITER("mg{Phenylketones}/dL",
+	MILLIGRAMS_PER_PHENYLKETONES_PER_DECILITER(Ucum.MILLIGRAMS_PHENYLKETONES_PER_DECILITER_CODE,
 			"MilliGramsPhenylketonesPerDeciLiter [Mass Concentration Units]"),
 	/**
 	 * <div class = "en"> MilliInternationalUnitsPerLiter [Arbitrary
 	 * Concentration Units] </div>
 	 */
-	MILLI_INTERNATIONAL_UNITS_PER_LITER("m[iU]/L",
+	MILLI_INTERNATIONAL_UNITS_PER_LITER(Ucum.MILLI_INTERNATIONAL_UNITS_PER_LITER_CODE,
 			"MilliInternationalUnitsPerLiter [Arbitrary Concentration Units]"),
 	/**
 	 * <div class = "en"> MilliInternationalUnitsPerMilliLiter [Most Common
 	 * Healthcare Units] </div>
 	 */
-	MILLI_INTERNATIONAL_UNITS_PER_MILLILITER("m[iU]/mL",
+	MILLI_INTERNATIONAL_UNITS_PER_MILLILITER(Ucum.MILLI_INTERNATIONAL_UNITS_PER_MILLILITER_CODE,
 			"MilliInternationalUnitsPerMilliLiter [Most Common Healthcare Units]"),
 	/**
 	 * <div class = "en"> MilliLiter [SI Volume Units] </div>
@@ -777,15 +777,15 @@ public enum Ucum {
 	/**
 	 * <div class="en"> MilliLitersPerDeciLiter [Volume Fraction Units]</div>
 	 */
-	MILLILITERS_PER_DECILITER("mL/dL", "MilliLitersPerDeciLiter [Volume Fraction Units]"),
+	MILLILITERS_PER_DECILITER(Ucum.MILLILITERS_PER_DECILITER_CODE, "MilliLitersPerDeciLiter [Volume Fraction Units]"),
 	/**
 	 * <div class= "en"> MilliLitersPerHeartbeat [SI Volume Units]</div>
 	 */
-	MILLILITERS_PER_HEARTBEAT("mL/{h`b}", "MilliLitersPerHeartbeat [SI Volume Units]"),
+	MILLILITERS_PER_HEARTBEAT(Ucum.MILLILITERS_PER_HEARTBEAT_CODE, "MilliLitersPerHeartbeat [SI Volume Units]"),
 	/**
 	 * <div class="en"> MilliLitersPerKiloGram [Volume Content Units]</div>
 	 */
-	MILLILITERS_PER_KILOGRAM("mL/kg", "MilliLitersPerKiloGram [Volume Content Units]"),
+	MILLILITERS_PER_KILOGRAM(Ucum.MILLILITERS_PER_KILOGRAM_CODE, "MilliLitersPerKiloGram [Volume Content Units]"),
 	/**
 	 * <div class= "en"> MilliMeter [SI Length Units]</div>
 	 */
@@ -794,7 +794,7 @@ public enum Ucum {
 	 * <div class="en"> MilliMetersOfMercury [Most Common Healthcare
 	 * Units]</div>
 	 */
-	MILLIMETERS_OF_MERCURY("mm[Hg]", "MilliMetersOfMercury [Most Common Healthcare Units]"),
+	MILLIMETERS_OF_MERCURY(Ucum.MILLIMETERS_OF_MERCURY_CODE, "MilliMetersOfMercury [Most Common Healthcare Units]"),
 	/**
 	 * <div class= "en"> MilliMole [Substance Units] </div>
 	 */
@@ -803,42 +803,42 @@ public enum Ucum {
 	 * <div class="en"> MilliMolesPerDeciLiter [Substance Concentration
 	 * Units]</div>
 	 */
-	MILLIMOLES_PER_DECILITER("mmol/dL", "MilliMolesPerDeciLiter [Substance Concentration Units]"),
+	MILLIMOLES_PER_DECILITER(Ucum.MILLIMOLES_PER_DECILITER_CODE, "MilliMolesPerDeciLiter [Substance Concentration Units]"),
 	/**
 	 * <div class = "en"> MilliMolesPerGram [Substance Content Units] </div>
 	 */
-	MILLIMOLES_PER_GRAM("mmol/g", "MilliMolesPerGram [Substance Content Units]"),
+	MILLIMOLES_PER_GRAM(Ucum.MILLIMOLES_PER_GRAM_CODE, "MilliMolesPerGram [Substance Content Units]"),
 	/**
 	 * <div class="en"> MilliMolesPerKiloGram [Most Common Healthcare
 	 * Units]</div>
 	 */
-	MILLIMOLES_PER_KILOGRAM("mmol/kg", "MilliMolesPerKiloGram [Most Common Healthcare Units]"),
+	MILLIMOLES_PER_KILOGRAM(Ucum.MILLIMOLES_PER_KILOGRAM_CODE, "MilliMolesPerKiloGram [Most Common Healthcare Units]"),
 	/**
 	 * <div class = "en"> MilliMolesPerLiter [Most Common Healthcare Units]
 	 * </div>
 	 */
-	MILLIMOLES_PER_LITER("mmol/L", "MilliMolesPerLiter [Most Common Healthcare Units]"),
+	MILLIMOLES_PER_LITER(Ucum.MILLIMOLES_PER_LITER_CODE, "MilliMolesPerLiter [Most Common Healthcare Units]"),
 	/**
 	 * <div class= "en"> MilliMolesPerMole [Substance Ratio Or Substance
 	 * Fraction Units] </div>
 	 */
-	MILLIMOLES_PER_MOLE("mmol/mol",
+	MILLIMOLES_PER_MOLE(Ucum.MILLIMOLES_PER_MOLE_CODE,
 			"MilliMolesPerMole [Substance Ratio Or Substance Fraction Units]"),
 	/**
 	 * <div class = "en"> MilliMolesPerMoleCreatinine [Substance Ratio Or
 	 * Substance Fraction Units] </div>
 	 */
-	MILLIMOLES_PER_MOLE_CREATININE("mmol/mol{Cre}",
+	MILLIMOLES_PER_MOLE_CREATININE(Ucum.MILLIMOLES_PER_MOLE_CREATININE_CODE,
 			"MilliMolesPerMoleCreatinine [Substance Ratio Or Substance Fraction Units]"),
 	/**
 	 * <div class = "en"> MilliMolesPerSquareMeter [Areic Substance Units]
 	 * </div>
 	 */
-	MILLIMOLES_PER_SQUARE_METER("mmol/m2", "MilliMolesPerSquareMeter [Areic Substance Units]"),
+	MILLIMOLES_PER_SQUARE_METER(Ucum.MILLIMOLES_PER_SQUAREMETER_CODE, "MilliMolesPerSquareMeter [Areic Substance Units]"),
 	/**
 	 * <div class= "en"> MilliMolesPerTotalVolume [Substance Units] </div>
 	 */
-	MILLIMOLES_PER_TOTAL_VOLUME("mmol/{TotalVolume}", "MilliMolesPerTotalVolume [Substance Units]"),
+	MILLIMOLES_PER_TOTAL_VOLUME(Ucum.MILLIMOLES_PER_TOTAL_VOLUME_CODE, "MilliMolesPerTotalVolume [Substance Units]"),
 	/**
 	 * <div class="en"> Million [Unity]</div>
 	 */
@@ -847,29 +847,29 @@ public enum Ucum {
 	 * <div class="en"> MillionEquivalentsPerMilliLiter [Substance Concentration
 	 * Units]</div>
 	 */
-	MILLION_EQUIVALENTS_PER_MILLILITER("10*6.eq/mL",
+	MILLION_EQUIVALENTS_PER_MILLILITER(Ucum.MILLION_EQUIVALENTS_PER_MILLILITER_CODE,
 			"MillionEquivalentsPerMilliLiter [Substance Concentration Units]"),
 	/**
 	 * <div class = "en"> MillionInternationalUnit [Arbitrary Units] </div>
 	 */
-	MILLION_INTERNATIONAL_UNIT("10*6.[iU]", "MillionInternationalUnit [Arbitrary Units]"),
+	MILLION_INTERNATIONAL_UNIT(Ucum.MILLION_INTERNATIONAL_UNIT_CODE, "MillionInternationalUnit [Arbitrary Units]"),
 	/**
 	 * <div class="en"> MillionPerLiter [Number Concentration Units]</div>
 	 */
-	MILLION_PER_LITER("10*6/L", "MillionPerLiter [Number Concentration Units]"),
+	MILLION_PER_LITER(Ucum.MILLION_PER_LITER_CODE, "MillionPerLiter [Number Concentration Units]"),
 	/**
 	 * <div class= "en"> MillionPerMilliLiter [Number Concentration Units]</div>
 	 */
-	MILLION_PER_MILLILITER("10*6/mL", "MillionPerMilliLiter [Number Concentration Units]"),
+	MILLION_PER_MILLILITER(Ucum.MILLION_PER_MILLILITER_CODE, "MillionPerMilliLiter [Number Concentration Units]"),
 	/**
 	 * <div class= "en"> MillionPerSpecimen [Unity] </div>
 	 */
-	MILLION_PER_SPECIMEN("10*6/{Specimen}", "MillionPerSpecimen [Unity]"),
+	MILLION_PER_SPECIMEN(Ucum.MILLION_PER_SPECIMEN_CODE, "MillionPerSpecimen [Unity]"),
 	/**
 	 * <div class="en"> MillionsPerMicroLiter [Most Common Healthcare
 	 * Units]</div>
 	 */
-	MILLIONS_PER_MICROLITER("10*6/uL", "MillionsPerMicroLiter [Most Common Healthcare Units]"),
+	MILLIONS_PER_MICROLITER(Ucum.MILLIONS_PER_MICROLITER_CODE, "MillionsPerMicroLiter [Most Common Healthcare Units]"),
 	/**
 	 * <div class = "en"> MilliOsmole [Substance Units] </div>
 	 */
@@ -878,12 +878,12 @@ public enum Ucum {
 	 * <div class="en"> MilliOsmolesPerKiloGram [Most Common Healthcare
 	 * Units]</div>
 	 */
-	MILLIOSMOLES_PER_KILOGRAM("mosm/kg", "MilliOsmolesPerKiloGram [Most Common Healthcare Units]"),
+	MILLIOSMOLES_PER_KILOGRAM(Ucum.MILLIOSMOLES_PER_KILOGRAM_CODE, "MilliOsmolesPerKiloGram [Most Common Healthcare Units]"),
 	/**
 	 * <div class = "en"> MilliOsmolesPerLiter [Substance Concentration Units]
 	 * </div>
 	 */
-	MILLIOSMOLES_PER_LITER("mosm/L", "MilliOsmolesPerLiter [Substance Concentration Units]"),
+	MILLIOSMOLES_PER_LITER(Ucum.MILLIOSMOLES_PER_LITER_CODE, "MilliOsmolesPerLiter [Substance Concentration Units]"),
 	/**
 	 * <div class = "en"> MilliSecond [Time Units] </div>
 	 */
@@ -896,18 +896,18 @@ public enum Ucum {
 	 * <div class= "en"> MilliUnitsPerGramHemoglobin [Substance Rate Content
 	 * Units] </div>
 	 */
-	MILLI_UNITS_PER_GRAM_HEMOGLOBIN("mU/g{Hgb}",
+	MILLI_UNITS_PER_GRAM_HEMOGLOBIN(Ucum.MILLI_UNITS_PER_GRAM_HEMOGLOBIN_CODE,
 			"MilliUnitsPerGramHemoglobin [Substance Rate Content Units]"),
 	/**
 	 * <div class = "en"> MilliUnitsPerMilligram [Substance Rate Content Units]
 	 * </div>
 	 */
-	MILLI_UNITS_PER_MILLIGRAM("mU/mg", "MilliUnitsPerMilligram [Substance Rate Content Units]"),
+	MILLI_UNITS_PER_MILLIGRAM(Ucum.MILLI_UNITS_PER_MILLIGRAM_CODE, "MilliUnitsPerMilligram [Substance Rate Content Units]"),
 	/**
 	 * <div class = "en"> MilliUnitsPerMilliGramCreatinine [Substance Rate
 	 * Content Units] </div>
 	 */
-	MILLI_UNITS_PER_MILLIGRAM_CREATININE("mU/mg{Cre}",
+	MILLI_UNITS_PER_MILLIGRAM_CREATININE(Ucum.MILLI_UNITS_PER_MILLIGRAM_CREATININE_CODE,
 			"MilliUnitsPerMilliGramCreatinine [Substance Rate Content Units]"),
 	/**
 	 * <div class = "en"> Minute [Time Units] </div>
@@ -920,20 +920,20 @@ public enum Ucum {
 	/**
 	 * <div class="en">MolesPerCubicMeter [Substance Concentration Units]</div>
 	 */
-	MOLES_PER_CUBICMETER("mol/m3", "MolesPerCubicMeter [Substance Concentration Units]"),
+	MOLES_PER_CUBICMETER(Ucum.MOLES_PER_CUBICMETER_CODE, "MolesPerCubicMeter [Substance Concentration Units]"),
 	/**
 	 * <div class= "en"> MolesPerKiloGram [Substance Content Units] </div>
 	 */
-	MOLES_PER_KILOGRAM("mol/kg", "MolesPerKiloGram [Substance Content Units]"),
+	MOLES_PER_KILOGRAM(Ucum.MOLES_PER_KILOGRAM_CODE, "MolesPerKiloGram [Substance Content Units]"),
 	/**
 	 * <div class="en"> MolesPerLiter [Substance Concentration Units]</div>
 	 */
-	MOLES_PER_LITER("mol/L", "MolesPerLiter [Substance Concentration Units]"),
+	MOLES_PER_LITER(Ucum.MOLES_PER_LITER_CODE, "MolesPerLiter [Substance Concentration Units]"),
 	/**
 	 * <div class= "en"> MolesPerMilliLiter [Substance Concentration
 	 * Units]</div>
 	 */
-	MOLES_PER_MILLILITER("mol/mL", "MolesPerMilliLiter [Substance Concentration Units]"),
+	MOLES_PER_MILLILITER(Ucum.MOLES_PER_MILLILITER_CODE, "MolesPerMilliLiter [Substance Concentration Units]"),
 	/**
 	 * <div class= "en"> Month [Time Units] </div>
 	 */
@@ -945,7 +945,7 @@ public enum Ucum {
 	/**
 	 * <div class="en"> NanoGramsPerDeciLiter [Mass Concentration Units]</div>
 	 */
-	NANOGRAMS_PER_DECILITER("ng/dL", "NanoGramsPerDeciLiter [Mass Concentration Units]"),
+	NANOGRAMS_PER_DECILITER(Ucum.NANOGRAMS_PER_DECILITER_CODE, "NanoGramsPerDeciLiter [Mass Concentration Units]"),
 	/**
 	 * <div class= "en"> NanoGramsPerGram [Mass Ratio Or Mass Fraction Or Mass
 	 * Content Units] </div>
@@ -956,13 +956,13 @@ public enum Ucum {
 	 * <div class = "en"> NanoGramsPerGramCreatinine [Mass Ratio Or Mass
 	 * Fraction Or Mass Content Units] </div>
 	 */
-	NANOGRAMS_PER_GRAM_CREATININE("ng/g{Cre}",
+	NANOGRAMS_PER_GRAM_CREATININE(Ucum.NANOGRAMS_PER_GRAM_CREATININE_CODE,
 			"NanoGramsPerGramCreatinine [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
 	 * <div class = "en"> NanoGramsPerKiloGram [Mass Ratio Or Mass Fraction Or
 	 * Mass Content Units] </div>
 	 */
-	NANOGRAMS_PER_KILOGRAM("ng/kg",
+	NANOGRAMS_PER_KILOGRAM(Ucum.NANOGRAMS_PER_KILOGRAM_CODE,
 			"NanoGramsPerKiloGram [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
 	 * <div class = "en"> NanoGramsPerLiter [Mass Concentration Units] </div>
@@ -972,29 +972,29 @@ public enum Ucum {
 	 * <div class= "en"> NanoGramsPerMilliGram [Mass Ratio Or Mass Fraction Or
 	 * Mass Content Units]</div>
 	 */
-	NANOGRAMS_PER_MILLIGRAM("ng/mg",
+	NANOGRAMS_PER_MILLIGRAM(Ucum.NANOGRAMS_PER_MILLIGRAM_CODE,
 			"NanoGramsPerMilliGram [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
 	 * <div class = "en"> NanoGramsPerMilliGramProtein [Mass Ratio Or Mass
 	 * Fraction Or Mass Content Units] </div>
 	 */
-	NANOGRAMS_PER_MILLIGRAM_PROTEIN("ng/mg{Protein}",
+	NANOGRAMS_PER_MILLIGRAM_PROTEIN(Ucum.NANOGRAMS_PER_MILLIGRAM_PROTEIN_CODE,
 			"NanoGramsPerMilliGramProtein [Mass Ratio Or Mass Fraction Or Mass Content Units]"),
 	/**
 	 * <div class = "en"> NanoGramsPerMilliLiter [Most Common Healthcare Units]
 	 * </div>
 	 */
-	NANOGRAMS_PER_MILLILITER("ng/mL", "NanoGramsPerMilliLiter [Mass Concentration Units]"),
+	NANOGRAMS_PER_MILLILITER(Ucum.NANOGRAMS_PER_MILLILITER_CODE, "NanoGramsPerMilliLiter [Mass Concentration Units]"),
 	/**
 	 * <div class= "en"> NanoGramsPerMilliLiterRedBloodCells [Mass Concentration
 	 * Units] </div>
 	 */
-	NANOGRAMS_PER_MILLILITER_RED_BLOOD_CELLS("ng/mL{rbc}",
+	NANOGRAMS_PER_MILLILITER_RED_BLOOD_CELLS(Ucum.NANOGRAMS_PER_MILLILITER_RED_BLOOD_CELLS_CODE,
 			"NanoGramsPerMilliLiterRedBloodCells [Mass Concentration Units]"),
 	/**
 	 * <div class = "en"> NanoGramsPerSquareMeter [Areic Mass Units] </div>
 	 */
-	NANOGRAMS_PER_SQUARE_METER("ng/m2", "NanoGramsPerSquareMeter [Areic Mass Units]"),
+	NANOGRAMS_PER_SQUARE_METER(Ucum.NANOGRAMS_PER_SQUAREMETER_CODE, "NanoGramsPerSquareMeter [Areic Mass Units]"),
 	/**
 	 * <div class="en"> NanoLiter [SI Volume Units]</div>
 	 */
@@ -1011,48 +1011,48 @@ public enum Ucum {
 	 * <div class="en"> NanoMolesPerDeciLiter [Substance Concentration
 	 * Units]</div>
 	 */
-	NANOMOLES_PER_DECILITER("nmol/dL", "NanoMolesPerDeciLiter [Substance Concentration Units]"),
+	NANOMOLES_PER_DECILITER(Ucum.NANOMOLES_PER_DECILITER_CODE, "NanoMolesPerDeciLiter [Substance Concentration Units]"),
 	/**
 	 * <div class = "en"> NanoMolesPerGram [Substance Content Units] </div>
 	 */
-	NANOMOLES_PER_GRAM("nmol/g", "NanoMolesPerGram [Substance Content Units]"),
+	NANOMOLES_PER_GRAM(Ucum.NANOMOLES_PER_GRAM_CODE, "NanoMolesPerGram [Substance Content Units]"),
 	/**
 	 * <div class="en"> NanoMolesPerGramCreatinine [Substance Content
 	 * Units]</div>
 	 */
-	NANOMOLES_PER_GRAM_CREATININE("nmol/g{Cre}",
+	NANOMOLES_PER_GRAM_CREATININE(Ucum.NANOMOLES_PER_GRAM_CREATININE_CODE,
 			"NanoMolesPerGramCreatinine [Substance Content Units]"),
 	/**
 	 * <div class = "en"> NanoMolesPerLiter [Most Common Healthcare Units]
 	 * </div>
 	 */
-	NANOMOLES_PER_LITER("nmol/L", "NanoMolesPerLiter [Most Common Healthcare Units]"),
+	NANOMOLES_PER_LITER(Ucum.NANOMOLES_PER_LITER_CODE, "NanoMolesPerLiter [Most Common Healthcare Units]"),
 	/**
 	 * <div class= "en"> NanoMolesPerMilliGram [Substance Content Units] </div>
 	 */
-	NANOMOLES_PER_MILLIGRAM("nmol/mg", "NanoMolesPerMilliGram [Substance Content Units]"),
+	NANOMOLES_PER_MILLIGRAM(Ucum.NANOMOLES_PER_MILLIGRAM_CODE, "NanoMolesPerMilliGram [Substance Content Units]"),
 	/**
 	 * <div class= "en"> NanoMolesPerMilliLiter [Substance Concentration
 	 * Units]</div>
 	 */
-	NANOMOLES_PER_MILLILITER("nmol/mL", "NanoMolesPerMilliLiter [Substance Concentration Units]"),
+	NANOMOLES_PER_MILLILITER(Ucum.NANOMOLES_PER_MILLILITER_CODE, "NanoMolesPerMilliLiter [Substance Concentration Units]"),
 	/**
 	 * <div class = "en"> NanoMolesPerMilliMole [Substance Ratio Or Substance
 	 * Fraction Units] </div>
 	 */
-	NANOMOLES_PER_MILLIMOLE("nmol/mmol",
+	NANOMOLES_PER_MILLIMOLE(Ucum.NANOMOLES_PER_MILLIMOLE_CODE,
 			"NanoMolesPerMilliMole [Substance Ratio Or Substance Fraction Units]"),
 	/**
 	 * <div class = "en"> NanoMolesPerMilliMoleCreatinine [Substance Ratio Or
 	 * Substance Fraction Units] </div>
 	 */
-	NANOMOLES_PER_MILLIMOLE_CREATININE("nmol/mmol{Cre}",
+	NANOMOLES_PER_MILLIMOLE_CREATININE(Ucum.NANOMOLES_PER_MILLIMOLE_CREATININE_CODE,
 			"NanoMolesPerMilliMoleCreatinine [Substance Ratio Or Substance Fraction Units]"),
 	/**
 	 * <div class = "en"> NanoMolesPerMole [Substance Ratio Or Substance
 	 * Fraction Units] </div>
 	 */
-	NANOMOLES_PER_MOLE("nmol/mol", "NanoMolesPerMole [Substance Ratio Or Substance Fraction Units]"),
+	NANOMOLES_PER_MOLE(Ucum.NANOMOLES_PER_MOLE_CODE, "NanoMolesPerMole [Substance Ratio Or Substance Fraction Units]"),
 	/**
 	 * <div class = "en"> NanoSecond [Time Units] </div>
 	 */
@@ -1060,7 +1060,7 @@ public enum Ucum {
 	/**
 	 * <div class="en">NauticalMile [English Length Units]</div>
 	 */
-	NAUTICAL_MILE("[nmi_i]", "NauticalMile [English Length Units]"),
+	NAUTICAL_MILE(Ucum.NAUTICAL_MILE_CODE, "NauticalMile [English Length Units]"),
 	/**
 	 * <div class="en"> OneHundredThousand [Unity]</div>
 	 */
@@ -1068,15 +1068,15 @@ public enum Ucum {
 	/**
 	 * <div class="en"> OsmolesPerKiloGram [Substance Content Units]</div>
 	 */
-	OSMOLES_PER_KILOGRAM("osm/kg", "OsmolesPerKiloGram [Substance Content Units]"),
+	OSMOLES_PER_KILOGRAM(Ucum.OSMOLES_PER_KILOGRAM_CODE, "OsmolesPerKiloGram [Substance Content Units]"),
 	/**
 	 * <div class= "en"> OsmolesPerLiter [Substance Concentration Units]</div>
 	 */
-	OSMOLES_PER_LITER("osm/L", "OsmolesPerLiter [Substance Concentration Units]"),
+	OSMOLES_PER_LITER(Ucum.OSMOLES_PER_LITER_CODE, "OsmolesPerLiter [Substance Concentration Units]"),
 	/**
 	 * <div class= "en">Ounce [English Mass Units]</div>
 	 */
-	OUNCE("[oz_av]", "Ounce [English Mass Units]"),
+	OUNCE(Ucum.OUNCE_CODE, "Ounce [English Mass Units]"),
 	/**
 	 * <div class="en">Per100 [Entitic Number Units]</div>
 	 */
@@ -1084,19 +1084,19 @@ public enum Ucum {
 	/**
 	 * <div class="en"> Per100Spermatozoa [Entitic Number Units]</div>
 	 */
-	PER100_SPERMATOZOA("/100{Spermatozoa}", "Per100Spermatozoa [Entitic Number Units]"),
+	PER100_SPERMATOZOA(Ucum.PER_100_SPERMATOZOA_CODE, "Per100Spermatozoa [Entitic Number Units]"),
 	/**
 	 * <div class="en"> Per100WBC [Entitic Number Units]</div>
 	 */
-	PER100_WBC("/100{WBC}", "Per100WBC [Entitic Number Units]"),
+	PER100_WBC(Ucum.PER_100_WBC_CODE, "Per100WBC [Entitic Number Units]"),
 	/**
 	 * <div class="en"> PerArbitraryUnit [Arbitrary Number Units]</div>
 	 */
-	PER_ARBITRARY_UNIT("/[arb`U]", "PerArbitraryUnit [Arbitrary Number Units]"),
+	PER_ARBITRARY_UNIT(Ucum.PER_ARBITRARY_UNIT_CODE, "PerArbitraryUnit [Arbitrary Number Units]"),
 	/**
 	 * <div class="en"> PerBillion [Number Fraction Units]</div>
 	 */
-	PER_BILLION("/10*9", "PerBillion [Number Fraction Units]"),
+	PER_BILLION(Ucum.PER_BILLION_CODE, "PerBillion [Number Fraction Units]"),
 	/**
 	 * <div class="en">Percent [Most Common Healthcare Units]</div>
 	 */
@@ -1104,137 +1104,137 @@ public enum Ucum {
 	/**
 	 * <div class="en"> Percent0to3Hours [General Fraction Unit]</div>
 	 */
-	PERCENT_0_TO_3_HOURS("%{0to3Hours}", "Percent0to3Hours [General Fraction Unit]"),
+	PERCENT_0_TO_3_HOURS(Ucum.PERCENT_0_TO_3_HOURS_CODE, "Percent0to3Hours [General Fraction Unit]"),
 	/**
 	 * <div class="en"> PercentAbnormal [Number Fraction Units]</div>
 	 */
-	PERCENT_ABNORMAL("%{Abnormal}", "PercentAbnormal [Number Fraction Units]"),
+	PERCENT_ABNORMAL(Ucum.PERCENT_ABNORMAL_CODE, "PercentAbnormal [Number Fraction Units]"),
 	/**
 	 * <div class="en"> PercentActivity [Catalytic Fraction Or Arbitrary
 	 * Fraction Units]</div>
 	 */
-	PERCENT_ACTIVITY("%{Activity}",
+	PERCENT_ACTIVITY(Ucum.PERCENT_ACTIVITY_CODE,
 			"PercentActivity [Catalytic Fraction Or Arbitrary Fraction Units]"),
 	/**
 	 * <div class = "en"> PercentBasalActivity [Catalytic Fraction Or Arbitrary
 	 * Fraction Units] </div>
 	 */
-	PERCENT_BASAL_ACTIVITY("%{BasalActivity}",
+	PERCENT_BASAL_ACTIVITY(Ucum.PERCENT_BASAL_ACTIVITY_CODE,
 			"PercentBasalActivity [Catalytic Fraction Or Arbitrary Fraction Units]"),
 	/**
 	 * <div class = "en"> PercentBinding [Mass Or Substance Fraction Units]
 	 * </div>
 	 */
-	PERCENT_BINDING("%{Binding}", "PercentBinding [Mass Or Substance Fraction Units]"),
+	PERCENT_BINDING(Ucum.PERCENT_BINDING_CODE, "PercentBinding [Mass Or Substance Fraction Units]"),
 	/**
 	 * <div class= "en"> PercentBlockade [Number Fraction Units] </div>
 	 */
-	PERCENT_BLOCKADE("%{Blockade}", "PercentBlockade [Number Fraction Units]"),
+	PERCENT_BLOCKADE(Ucum.PERCENT_BLOCKADE_CODE, "PercentBlockade [Number Fraction Units]"),
 	/**
 	 * <div class="en"> PercentBound [Mass Or Substance Fraction Units]</div>
 	 */
-	PERCENT_BOUND("%{Bound}", "PercentBound [Mass Or Substance Fraction Units]"),
+	PERCENT_BOUND(Ucum.PERCENT_BOUND_CODE, "PercentBound [Mass Or Substance Fraction Units]"),
 	/**
 	 * <div class= "en"> PercentCarboxyhemoglobin [Mass Or Substance Fraction
 	 * Units]</div>
 	 */
-	PERCENT_CARBOXY_HEMOGLOBIN("%{Carboxyhemoglobin}",
+	PERCENT_CARBOXY_HEMOGLOBIN(Ucum.PERCENT_CARBOXY_HEMOGLOBIN_CODE,
 			"PercentCarboxyhemoglobin [Mass Or Substance Fraction Units]"),
 	/**
 	 * <div class = "en"> PercentEosinophilsSeen [Number Fraction Units] </div>
 	 */
-	PERCENT_EOSINOPHILS_SEEN("%{EosSeen}", "PercentEosinophilsSeen [Number Fraction Units]"),
+	PERCENT_EOSINOPHILS_SEEN(Ucum.PERCENT_EOSINOPHILS_SEEN_CODE, "PercentEosinophilsSeen [Number Fraction Units]"),
 	/**
 	 * <div class= "en"> PercentExcretion [Mass Or Substance Rate Fraction
 	 * Units]</div>
 	 */
-	PERCENT_EXCRETION("%{Excretion}", "PercentExcretion [Mass Or Substance Rate Fraction Units]"),
+	PERCENT_EXCRETION(Ucum.PERCENT_EXCRETION_CODE, "PercentExcretion [Mass Or Substance Rate Fraction Units]"),
 	/**
 	 * <div class = "en"> PercentFetalErythrocytes [Number Fraction Units]
 	 * </div>
 	 */
-	PERCENT_FETAL_ERYTHROCYTES("%{FetalErythrocytes}",
+	PERCENT_FETAL_ERYTHROCYTES(Ucum.PERCENT_FETAL_ERYTHROCYTES_CODE,
 			"PercentFetalErythrocytes [Number Fraction Units]"),
 	/**
 	 * <div class= "en"> PercentHemoglobin [Mass Or Substance Fraction Units]
 	 * </div>
 	 */
-	PERCENT_HEMOGLOBIN("%{Hemoglobin}", "PercentHemoglobin [Mass Or Substance Fraction Units]"),
+	PERCENT_HEMOGLOBIN(Ucum.PERCENT_HEMOGLOBIN_CODE, "PercentHemoglobin [Mass Or Substance Fraction Units]"),
 	/**
 	 * <div class = "en"> PercentHemoglobinA1C [Mass Or Substance Fraction
 	 * Units] </div>
 	 */
-	PERCENT_HEMOGLOBIN_A1C("%{HemoglobinA1C}",
+	PERCENT_HEMOGLOBIN_A1C(Ucum.PERCENT_HEMOGLOBIN_A1C_CODE,
 			"PercentHemoglobinA1C [Mass Or Substance Fraction Units]"),
 	/**
 	 * <div class = "en"> PercentHemoglobinSaturation [Mass Or Substance
 	 * Fraction Units] </div>
 	 */
-	PERCENT_HEMOGLOBIN_SATURATION("%{HemoglobinSaturation}",
+	PERCENT_HEMOGLOBIN_SATURATION(Ucum.PERCENT_HEMOGLOBIN_SATURATION_CODE,
 			"PercentHemoglobinSaturation [Mass Or Substance Fraction Units]"),
 	/**
 	 * <div class = "en"> PercentHemolysis [Number Fraction Units] </div>
 	 */
-	PERCENT_HEMOLYSIS("%{Hemolysis}", "PercentHemolysis [Number Fraction Units]"),
+	PERCENT_HEMOLYSIS(Ucum.PERCENT_HEMOLYSIS_CODE, "PercentHemolysis [Number Fraction Units]"),
 	/**
 	 * <div class="en"> PercentInhibition [Catalytic Fraction Or Arbitrary
 	 * Fraction Units]</div>
 	 */
-	PERCENT_INHIBITION("%{Inhibition}",
+	PERCENT_INHIBITION(Ucum.PERCENT_INHIBITION_CODE,
 			"PercentInhibition [Catalytic Fraction Or Arbitrary Fraction Units]"),
 	/**
 	 * <div class = "en"> PercentNormal [Number Fraction Units] </div>
 	 */
-	PERCENT_NORMAL("%{Normal}", "PercentNormal [Number Fraction Units]"),
+	PERCENT_NORMAL(Ucum.PERCENT_NORMAL_CODE, "PercentNormal [Number Fraction Units]"),
 	/**
 	 * <div class="en"> PercentNormalPooledPlasma [Catalytic Fraction Or
 	 * Arbitrary Fraction Units]</div>
 	 */
-	PERCENT_NORMAL_POOLED_PLASMA("%{NormalPooledPlasma}",
+	PERCENT_NORMAL_POOLED_PLASMA(Ucum.PERCENT_NORMAL_POOLED_PLASMA_CODE,
 			"PercentNormalPooledPlasma [Catalytic Fraction Or Arbitrary Fraction Units]"),
 	/**
 	 * <div class = "en"> PercentofBacteria [Number Fraction Units] </div>
 	 */
-	PERCENT_OF_BACTERIA("%{ofBacteria}", "PercentofBacteria [Number Fraction Units]"),
+	PERCENT_OF_BACTERIA(Ucum.PERCENT_OF_BACTERIA_CODE, "PercentofBacteria [Number Fraction Units]"),
 	/**
 	 * <div class="en"> PercentOfLymphocytes [Number Fraction Units]</div>
 	 */
-	PERCENT_OF_LYMPHOCYTES("%{OfLymphocytes}", "PercentOfLymphocytes [Number Fraction Units]"),
+	PERCENT_OF_LYMPHOCYTES(Ucum.PERCENT_OF_LYMPHOCYTES_CODE, "PercentOfLymphocytes [Number Fraction Units]"),
 	/**
 	 * <div class= "en"> PercentOfWBCs [Number Fraction Units]</div>
 	 */
-	PERCENT_OF_WBCS("%{OfWBCs}", "PercentOfWBCs [Number Fraction Units]"),
+	PERCENT_OF_WBCS(Ucum.PERCENT_OF_WBCS_CODE, "PercentOfWBCs [Number Fraction Units]"),
 	/**
 	 * <div class="en"> PercentOxygen [Volume Fraction Units]</div>
 	 */
-	PERCENT_OXYGEN("%{Oxygen}", "PercentOxygen [Volume Fraction Units]"),
+	PERCENT_OXYGEN(Ucum.PERCENT_OXYGEN_CODE, "PercentOxygen [Volume Fraction Units]"),
 	/**
 	 * <div class="en"> PercentPer100WBC [Number Fraction Units]</div>
 	 */
-	PERCENT_PER_100WBC("%/100{WBC}", "PercentPer100WBC [Number Fraction Units]"),
+	PERCENT_PER_100WBC(Ucum.PERCENT_PER_100_WBC_CODE, "PercentPer100WBC [Number Fraction Units]"),
 	/**
 	 * <div class="en"> PercentPositive [Number Fraction Units]</div>
 	 */
-	PERCENT_POSITIVE("%{Positive}", "PercentPositive [Number Fraction Units]"),
+	PERCENT_POSITIVE(Ucum.PERCENT_POSITIVE_CODE, "PercentPositive [Number Fraction Units]"),
 	/**
 	 * <div class="en"> PercentSpermMotility [Number Fraction Units]</div>
 	 */
-	PERCENT_SPERM_MOTILITY("%{SpermMotility}", "PercentSpermMotility [Number Fraction Units]"),
+	PERCENT_SPERM_MOTILITY(Ucum.PERCENT_SPERM_MOTILITY_CODE, "PercentSpermMotility [Number Fraction Units]"),
 	/**
 	 * <div class= "en"> PercentTotal [General Fraction Unit]</div>
 	 */
-	PERCENT_TOTAL("%{Total}", "PercentTotal [General Fraction Unit]"),
+	PERCENT_TOTAL(Ucum.PERCENT_TOTAL_CODE, "PercentTotal [General Fraction Unit]"),
 	/**
 	 * <div class="en"> PercentTotalProtein [Mass Or Substance Fraction
 	 * Units]</div>
 	 */
-	PERCENT_TOTAL_PROTEIN("%{TotalProtein}",
+	PERCENT_TOTAL_PROTEIN(Ucum.PERCENT_TOTAL_PROTEIN_CODE,
 			"PercentTotalProtein [Mass Or Substance Fraction Units]"),
 	/**
 	 * <div class = "en"> PercentUptake [Mass Or Substance Rate Fraction Units]
 	 * </div>
 	 */
-	PERCENT_UPTAKE("%{Uptake}", "PercentUptake [Mass Or Substance Rate Fraction Units]"),
+	PERCENT_UPTAKE(Ucum.PERCENT_UPTAKE_CODE, "PercentUptake [Mass Or Substance Rate Fraction Units]"),
 	/**
 	 * <div class = "en"> PerDeciLiter [Number Concentration Units] </div>
 	 */
@@ -1242,7 +1242,7 @@ public enum Ucum {
 	/**
 	 * <div class="en"> PerEntity [Entitic Number Units]</div>
 	 */
-	PER_ENTITY("/{Entity}", "PerEntity [Entitic Number Units]"),
+	PER_ENTITY(Ucum.PER_ENTITY_CODE, "PerEntity [Entitic Number Units]"),
 	/**
 	 * <div class="en">PerGram [Number Content Units]</div>
 	 */
@@ -1250,23 +1250,23 @@ public enum Ucum {
 	/**
 	 * <div class="en"> PerGramCreatinine [Number Content Units]</div>
 	 */
-	PER_GRAM_CREATININE("/g{creat}", "PerGramCreatinine [Number Content Units]"),
+	PER_GRAM_CREATININE(Ucum.PER_GRAM_CREATININE_CODE, "PerGramCreatinine [Number Content Units]"),
 	/**
 	 * <div class="en"> PerGramHemoglobin [Number Content Units]</div>
 	 */
-	PER_GRAM_HEMOGLOBIN("/g{HGB}", "PerGramHemoglobin [Number Content Units]"),
+	PER_GRAM_HEMOGLOBIN(Ucum.PER_GRAM_HEMOGLOBIN_CODE, "PerGramHemoglobin [Number Content Units]"),
 	/**
 	 * <div class="en"> PerGramTotalNitrogen [Number Content Units]</div>
 	 */
-	PER_GRAM_TOTAL_NITROGEN("/g{tot`nit}", "PerGramTotalNitrogen [Number Content Units]"),
+	PER_GRAM_TOTAL_NITROGEN(Ucum.PER_GRAM_TOTAL_NITROGEN_CODE, "PerGramTotalNitrogen [Number Content Units]"),
 	/**
 	 * <div class="en"> PerGramTotalProtein [Number Content Units]</div>
 	 */
-	PER_GRAM_TOTAL_PROTEIN("/g{tot`prot}", "PerGramTotalProtein [Number Content Units]"),
+	PER_GRAM_TOTAL_PROTEIN(Ucum.PER_GRAM_TOTAL_PROTEIN_CODE, "PerGramTotalProtein [Number Content Units]"),
 	/**
 	 * <div class="en"> PerGramWetTissue [Number Content Units]</div>
 	 */
-	PER_GRAM_WET_TISSUE("/g{wet`tis}", "PerGramWetTissue [Number Content Units]"),
+	PER_GRAM_WET_TISSUE(Ucum.PER_GRAM_WET_TISSUE_CODE, "PerGramWetTissue [Number Content Units]"),
 	/**
 	 * <div class="en"> PerHour [Number Events]</div>
 	 */
@@ -1278,7 +1278,7 @@ public enum Ucum {
 	/**
 	 * <div class="en"> PerKiloGramBodyWeight [Number Content Units]</div>
 	 */
-	PER_KILOGRAM_BODY_WEIGHT("/kg{body`wt}", "PerKiloGramBodyWeight [Number Content Units]"),
+	PER_KILOGRAM_BODY_WEIGHT(Ucum.PER_KILOGRAM_BODY_WEIGHT_CODE, "PerKiloGramBodyWeight [Number Content Units]"),
 	/**
 	 * <div class= "en">PerLiter [Number Concentration Units]</div>
 	 */
@@ -1298,7 +1298,7 @@ public enum Ucum {
 	/**
 	 * <div class="en"> PerMillion [Number Fraction Units]</div>
 	 */
-	PER_MILLION("/10*6", "PerMillion [Number Fraction Units]"),
+	PER_MILLION(Ucum.PER_MILLION_CODE, "PerMillion [Number Fraction Units]"),
 	/**
 	 * <div class="en">PerMinute [Number Events]</div>
 	 */
@@ -1314,19 +1314,19 @@ public enum Ucum {
 	/**
 	 * <div class="en"> PerTenGiga [Number Fraction Units]</div>
 	 */
-	PER_TEN_GIGA("/10*10", "PerTenGiga [Number Fraction Units]"),
+	PER_TEN_GIGA(Ucum.PER_TEN_GIGA_CODE, "PerTenGiga [Number Fraction Units]"),
 	/**
 	 * <div class="en"> PerTotalCount [Unity]</div>
 	 */
-	PER_TOTAL_COUNT("/{tot}", "PerTotalCount [Unity]"),
+	PER_TOTAL_COUNT(Ucum.PER_TOTAL_COUNT_CODE, "PerTotalCount [Unity]"),
 	/**
 	 * <div class="en">PerTrillion [Number Fraction Units]</div>
 	 */
-	PER_TRILLION("/10*12", "PerTrillion [Number Fraction Units]"),
+	PER_TRILLION(Ucum.PER_TRILLION_CODE, "PerTrillion [Number Fraction Units]"),
 	/**
 	 * <div class="en"> PerTrillionRedBloodCells [Entitic Number Units]</div>
 	 */
-	PER_TRILLION_RED_BLOOD_CELLS("/10*12{rbc}", "PerTrillionRedBloodCells [Entitic Number Units]"),
+	PER_TRILLION_RED_BLOOD_CELLS(Ucum.PER_TRILLION_RED_BLOOD_CELLS_CODE, "PerTrillionRedBloodCells [Entitic Number Units]"),
 	/**
 	 * <div class= "en">pH [pH Units]</div>
 	 */
@@ -1342,7 +1342,7 @@ public enum Ucum {
 	/**
 	 * <div class="en"> PicoGramsPerDeciLiter [Mass Concentration Units]</div>
 	 */
-	PICOGRAMS_PER_DECILITER("pg/dL", "PicoGramsPerDeciLiter [Mass Concentration Units]"),
+	PICOGRAMS_PER_DECILITER(Ucum.PICOGRAMS_PER_DECILITER_CODE, "PicoGramsPerDeciLiter [Mass Concentration Units]"),
 	/**
 	 * <div class= "en"> PicoGramsPerLiter [Mass Concentration Units] </div>
 	 */
@@ -1351,11 +1351,11 @@ public enum Ucum {
 	 * <div class= "en"> PicoGramsPerMilliLiter [Most Common Healthcare
 	 * Units]</div>
 	 */
-	PICOGRAMS_PER_MILLILITER("pg/mL", "PicoGramsPerMilliLiter [Most Common Healthcare Units]"),
+	PICOGRAMS_PER_MILLILITER(Ucum.PICOGRAMS_PER_MILLILITER_CODE, "PicoGramsPerMilliLiter [Most Common Healthcare Units]"),
 	/**
 	 * <div class = "en"> PicoGramsPerMilliMeter [Lineic Mass Units] </div>
 	 */
-	PICOGRAMS_PER_MILLIMETER("pg/mm", "PicoGramsPerMilliMeter [Lineic Mass Units]"),
+	PICOGRAMS_PER_MILLIMETER(Ucum.PICOGRAMS_PER_MILLIMETER_CODE, "PicoGramsPerMilliMeter [Lineic Mass Units]"),
 	/**
 	 * <div class="en"> PicoLiter [SI Volume Units]</div>
 	 */
@@ -1372,23 +1372,23 @@ public enum Ucum {
 	 * <div class="en"> PicoMolesPerDeciLiter [Substance Concentration
 	 * Units]</div>
 	 */
-	PICOMOLES_PER_DECILITER("pmol/dL", "PicoMolesPerDeciLiter [Substance Concentration Units]"),
+	PICOMOLES_PER_DECILITER(Ucum.PICOMOLES_PER_DECILITER_CODE, "PicoMolesPerDeciLiter [Substance Concentration Units]"),
 	/**
 	 * <div class = "en"> PicoMolesPerLiter [Substance Concentration Units]
 	 * </div>
 	 */
-	PICOMOLES_PER_LITER("pmol/L", "PicoMolesPerLiter [Substance Concentration Units]"),
+	PICOMOLES_PER_LITER(Ucum.PICOMOLES_PER_LITER_CODE, "PicoMolesPerLiter [Substance Concentration Units]"),
 	/**
 	 * <div class= "en"> PicoMolesPerMicroMole [Substance Ratio Or Substance
 	 * Fraction Units] </div>
 	 */
-	PICOMOLES_PER_MICROMOLE("pmol/umol",
+	PICOMOLES_PER_MICROMOLE(Ucum.PICOMOLES_PER_MICROMOLE_CODE,
 			"PicoMolesPerMicroMole [Substance Ratio Or Substance Fraction Units]"),
 	/**
 	 * <div class = "en"> PicoMolesPerMilliLiter [Substance Concentration Units]
 	 * </div>
 	 */
-	PICOMOLES_PER_MILLILITER("pmol/mL", "PicoMolesPerMilliLiter [Substance Concentration Units]"),
+	PICOMOLES_PER_MILLILITER(Ucum.PICOMOLES_PER_MILLILITER_CODE, "PicoMolesPerMilliLiter [Substance Concentration Units]"),
 	/**
 	 * <div class = "en"> PicoSecond [Time Units] </div>
 	 */
@@ -1396,25 +1396,25 @@ public enum Ucum {
 	/**
 	 * <div class="en">Pint [English Volume Units]</div>
 	 */
-	PINT("[pt_us]", "Pint [English Volume Units]"),
+	PINT(Ucum.PINT_CODE, "Pint [English Volume Units]"),
 	/**
 	 * <div class="en">Pound [English Mass Units]</div>
 	 */
-	POUND("[lb_av]", "Pound [English Mass Units]"),
+	POUND(Ucum.POUND_CODE, "Pound [English Mass Units]"),
 	/**
 	 * <div class="en">Quart [English Volume Units]</div>
 	 */
-	QUART("[qt_us]", "Quart [English Volume Units]"),
+	QUART(Ucum.QUART_CODE, "Quart [English Volume Units]"),
 	/**
 	 * <div class="en"> RedBloodCellsPerMicroLiter [Number Concentration
 	 * Units]</div>
 	 */
-	RED_BLOOD_CELLS_PER_MICROLITER("{rbc}/uL",
+	RED_BLOOD_CELLS_PER_MICROLITER(Ucum.RED_BLOOD_CELLS_PER_MICROLITER_CODE,
 			"RedBloodCellsPerMicroLiter [Number Concentration Units]"),
 	/**
 	 * <div class = "en"> RelativePercent [General Fraction Unit] </div>
 	 */
-	RELATIVE_PERCENT("{Relative}%", "RelativePercent [General Fraction Unit]"),
+	RELATIVE_PERCENT(Ucum.RELATIVE_PERCENT_CODE, "RelativePercent [General Fraction Unit]"),
 	/**
 	 * <div class="en"> Second [Time Units]</div>
 	 */
@@ -1423,7 +1423,7 @@ public enum Ucum {
 	 * <div class="en">SpermatozoaPerMilliLiter [Number Concentration
 	 * Units]</div>
 	 */
-	SPERMATOZOA_PER_MILLILITER("{Spermatozoa}/mL",
+	SPERMATOZOA_PER_MILLILITER(Ucum.SPERMATOZOA_PER_MILLILITER_CODE,
 			"SpermatozoaPerMilliLiter [Number Concentration Units]"),
 	/**
 	 * <div class = "en"> SquareCentiMeter [SI Area Units] </div>
@@ -1432,11 +1432,11 @@ public enum Ucum {
 	/**
 	 * <div class="en"> SquareFeet [English Area Units]</div>
 	 */
-	SQUARE_FEET("[sft_i]", "SquareFeet [English Area Units]"),
+	SQUARE_FEET(Ucum.SQUAREFEET_CODE, "SquareFeet [English Area Units]"),
 	/**
 	 * <div class="en">SquareInch [English Area Units]</div>
 	 */
-	SQUARE_INCH("[sin_i]", "SquareInch [English Area Units]"),
+	SQUARE_INCH(Ucum.SQUAREINCH_CODE, "SquareInch [English Area Units]"),
 	/**
 	 * <div class="en">SquareMeter [SI Area Units]</div>
 	 */
@@ -1448,11 +1448,11 @@ public enum Ucum {
 	/**
 	 * <div class="en"> SquareYard [English Area Units]</div>
 	 */
-	SQUARE_YARD("[syd_i]", "SquareYard [English Area Units]"),
+	SQUARE_YARD(Ucum.SQUAREYARD_CODE, "SquareYard [English Area Units]"),
 	/**
 	 * <div class="en">StatuteMile [English Length Units]</div>
 	 */
-	STATUTEMILE("[mi_i]", "StatuteMile [English Length Units]"),
+	STATUTEMILE(Ucum.STATUS_MILE_CODE, "StatuteMile [English Length Units]"),
 	/**
 	 * <div class="en"> TenToEighth [Unity]</div>
 	 */
@@ -1465,38 +1465,38 @@ public enum Ucum {
 	 * <div class="en"> ThousandCopiesPerMilliLiter [Number Concentration
 	 * Units]</div>
 	 */
-	THOUSAND_COPIES_PER_MILLILITER("10*3{Copies}/mL",
+	THOUSAND_COPIES_PER_MILLILITER(Ucum.THOUSAND_COPIES_PER_MILLILITER_CODE,
 			"ThousandCopiesPerMilliLiter [Number Concentration Units]"),
 	/**
 	 * <div class = "en"> ThousandPerLiter [Number Concentration Units] </div>
 	 */
-	THOUSAND_PER_LITER("10*3/L", "ThousandPerLiter [Number Concentration Units]"),
+	THOUSAND_PER_LITER(Ucum.THOUSAND_PER_LITER_CODE, "ThousandPerLiter [Number Concentration Units]"),
 	/**
 	 * <div class= "en"> ThousandPerMilliLiter [Number Concentration
 	 * Units]</div>
 	 */
-	THOUSAND_PER_MILLILITER("10*3/mL", "ThousandPerMilliLiter [Number Concentration Units]"),
+	THOUSAND_PER_MILLILITER(Ucum.THOUSAND_PER_MILLILITER_CODE, "ThousandPerMilliLiter [Number Concentration Units]"),
 	/**
 	 * <div class= "en"> ThousandRedBloodCells [Unity] </div>
 	 */
-	THOUSAND_PER_RED_BLOOD_CELLS("10*3.{RBC}", "ThousandRedBloodCells [Unity]"),
+	THOUSAND_PER_RED_BLOOD_CELLS(Ucum.THOUSAND_RED_BLOOD_CELLS_CODE, "ThousandRedBloodCells [Unity]"),
 	/**
 	 * <div class="en"> ThousandsPerMicroLiter [Number Concentration
 	 * Units]</div>
 	 */
-	THOUSANDS_PER_MICROLITER("10*3/uL", "ThousandsPerMicroLiter [Number Concentration Units]"),
+	THOUSANDS_PER_MICROLITER(Ucum.THOUSANDS_PER_MICROLITER_CODE, "ThousandsPerMicroLiter [Number Concentration Units]"),
 	/**
 	 * <div class= "en">Ton [English Mass Units] </div>
 	 */
-	TON("[ston_av]", "Ton [English Mass Units]"),
+	TON(Ucum.TON_CODE, "Ton [English Mass Units]"),
 	/**
 	 * <div class="en">TrillionPerLiter [Number Concentration Units]</div>
 	 */
-	TRILLION_PER_LITER("10*12/L", "TrillionPerLiter [Number Concentration Units]"),
+	TRILLION_PER_LITER(Ucum.TRILLION_PER_LITER_CODE, "TrillionPerLiter [Number Concentration Units]"),
 	/**
 	 * <div class= "en"> TroyOunce [English Mass Units]</div>
 	 */
-	TROY_OUNCE("[oz_tr]", "TroyOunce [English Mass Units]"),
+	TROY_OUNCE(Ucum.TROY_OUNCE_CODE, "TroyOunce [English Mass Units]"),
 	/**
 	 * <div class="en">UnitsPerGram [Substance Rate Content Units]</div>
 	 */
@@ -1505,12 +1505,12 @@ public enum Ucum {
 	 * <div class="en"> UnitsPerGramCreatinine [Substance Rate Content
 	 * Units]</div>
 	 */
-	UNITS_PER_GRAM_CREATININE("U/g{Cre}", "UnitsPerGramCreatinine [Substance Rate Content Units]"),
+	UNITS_PER_GRAM_CREATININE(Ucum.UNITS_PER_GRAM_CREATININE_CODE, "UnitsPerGramCreatinine [Substance Rate Content Units]"),
 	/**
 	 * <div class = "en"> UnitsPerGramHemoglobin [Substance Rate Content Units]
 	 * </div>
 	 */
-	UNITS_PER_GRAM_HEMOGLOBIN("U/g{Hgb}", "UnitsPerGramHemoglobin [Substance Rate Content Units]"),
+	UNITS_PER_GRAM_HEMOGLOBIN(Ucum.UNITS_PER_GRAM_HEMOGLOBIN_CODE, "UnitsPerGramHemoglobin [Substance Rate Content Units]"),
 	/**
 	 * <div class = "en"> UnitsPerLiter [Most Common Healthcare Units] </div>
 	 */
@@ -1518,7 +1518,7 @@ public enum Ucum {
 	/**
 	 * <div class= "en"> VolumePercent [Volume Fraction Units]</div>
 	 */
-	VOLUME_PERCENT("%{vol}", "VolumePercent [Volume Fraction Units]"),
+	VOLUME_PERCENT(Ucum.VOLUME_PERCENT_CODE, "VolumePercent [Volume Fraction Units]"),
 	/**
 	 * <div class="en">Week [Time Units]</div>
 	 */
@@ -1526,7 +1526,7 @@ public enum Ucum {
 	/**
 	 * <div class="en">Yard [English Length Units]</div>
 	 */
-	YARD("[yd_i]", "Yard [English Length Units]"),
+	YARD(Ucum.YARD_CODE, "Yard [English Length Units]"),
 	/**
 	 * <div class="en">Year [Time Units]</div>
 	 */

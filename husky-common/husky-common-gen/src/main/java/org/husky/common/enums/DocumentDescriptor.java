@@ -1,9 +1,11 @@
 package org.husky.common.enums;
 
 public enum DocumentDescriptor {
+	
+	
 
-	CDA_R2("CDA-R2", "text/xml"), XDS_MS("XDS-MS", "text/x-cda-r2+xml"), XDS_LAB("XDS-LAB", "text/xml"),
-	XDS_SD("XDS-SD", "text/xml"), CDA_R1("CDA-R1", "text/xml"), CCR("CCR", "text/xml"), XML("XML", "text/xml"),
+	CDA_R2("CDA-R2", EnumConstants.TEXT_XML), XDS_MS("XDS-MS", "text/x-cda-r2+xml"), XDS_LAB("XDS-LAB", EnumConstants.TEXT_XML),
+	XDS_SD("XDS-SD", EnumConstants.TEXT_XML), CDA_R1("CDA-R1", EnumConstants.TEXT_XML), CCR("CCR", EnumConstants.TEXT_XML), XML("XML", EnumConstants.TEXT_XML),
 	PDF("PDF", "application/pdf"), DICOM("DICOM", "application/dicom"), HL7_LAB("HL7-lab", "application/x-hl7"),
 	UNKNOWN("UNKNOWN", "application/octet-stream");
 

@@ -44,7 +44,7 @@ import org.husky.common.hl7cdar2.TEL;
 public class Value {
 
     private static final String NAMESPACE_HL7_V3 = "urn:hl7-org:v3";
-
+    private static final String NOT_YET_IMPLEMENTED_TEXT = "*** TODO: This is not yet implemented value type...";
     /**
      * The m value.
      */
@@ -618,12 +618,12 @@ public class Value {
 				if (numerator instanceof PQ pq) {
 					numeratorValue = pq.getValue();
                 } else
-                    numeratorValue = "*** TODO: This is not yet implemented value type...";
+                    numeratorValue = NOT_YET_IMPLEMENTED_TEXT;
 
 				if (denominator instanceof PQ pq) {
 					denominatorValue = pq.getValue();
                 } else
-                    denominatorValue = "*** TODO: This is not yet implemented value type...";
+                    denominatorValue = NOT_YET_IMPLEMENTED_TEXT;
 
             }
             retVal = numeratorValue + " / " + denominatorValue;
@@ -759,7 +759,7 @@ public class Value {
         else if (isInt())
             resultText = getIntText();
         else
-            resultText = "*** TODO: This is not yet implemented value type...";
+            resultText = NOT_YET_IMPLEMENTED_TEXT;
 
         if (resultText == null)
             resultText = "";

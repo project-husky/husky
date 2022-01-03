@@ -33,6 +33,10 @@ import org.husky.common.hl7cdar2.TS;
  */
 @Deprecated
 public class DateUtil {
+	
+	public static final String SHORT_DATE_FORMAT = "yyyyMMdd";
+	public static final String LONG_DATE_FORMAT = "yyyyMMddHHmmss";
+	public static final String ERRORMSG_CANNOT_PARSE_DATE_VAL = "Cannot parse date, value=[";
 
 	/**
 	 * <div class="en">Converts the given date to a CDA R2 IVL_TS value (without
@@ -178,7 +182,7 @@ public class DateUtil {
 	 * @return the string
 	 */
 	public static String formatDateOnly(Date value) {
-		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		final SimpleDateFormat sdf = new SimpleDateFormat(SHORT_DATE_FORMAT);
 		return sdf.format(value);
 	}
 
@@ -192,7 +196,7 @@ public class DateUtil {
 	 * @return the string
 	 */
 	public static String formatDateOnly(ZonedDateTime value) {
-		return value.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		return value.format(DateTimeFormatter.ofPattern(SHORT_DATE_FORMAT));
 	}
 
 	/**
@@ -207,7 +211,7 @@ public class DateUtil {
 	 * @return the string
 	 */
 	public static String formatDateTime(Date value) {
-		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		final SimpleDateFormat sdf = new SimpleDateFormat(LONG_DATE_FORMAT);
 		return sdf.format(value);
 	}
 
@@ -221,7 +225,7 @@ public class DateUtil {
 	 * @return the string
 	 */
 	public static String formatDateTime(ZonedDateTime value) {
-		return value.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneId.systemDefault()));
+		return value.format(DateTimeFormatter.ofPattern(LONG_DATE_FORMAT).withZone(ZoneId.systemDefault()));
 	}
 
 	/**
@@ -329,7 +333,7 @@ public class DateUtil {
 			return sdf.parse(value);
 		} catch (final ParseException e) {
 			throw new IllegalArgumentException(
-					"Cannot parse date, value=[" + value + "]. Expected format is yyyyMM.", e);
+					ERRORMSG_CANNOT_PARSE_DATE_VAL + value + "]. Expected format is yyyyMM.", e);
 		}
 	}
 
@@ -347,11 +351,11 @@ public class DateUtil {
 	 */
 	public static Date parseDateyyyyMMdd(String value) {
 		try {
-			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			final SimpleDateFormat sdf = new SimpleDateFormat(SHORT_DATE_FORMAT);
 			return sdf.parse(value);
 		} catch (final ParseException e) {
 			throw new IllegalArgumentException(
-					"Cannot parse date, value=[" + value + "]. Expected format is yyyyMMdd.", e);
+					ERRORMSG_CANNOT_PARSE_DATE_VAL + value + "]. Expected format is yyyyMMdd.", e);
 		}
 	}
 
@@ -373,7 +377,7 @@ public class DateUtil {
 			return sdf.parse(value);
 		} catch (final ParseException e) {
 			throw new IllegalArgumentException(
-					"Cannot parse date, value=[" + value + "]. Expected format is yyyy-MM-dd.", e);
+					ERRORMSG_CANNOT_PARSE_DATE_VAL + value + "]. Expected format is yyyy-MM-dd.", e);
 		}
 	}
 
@@ -395,7 +399,7 @@ public class DateUtil {
 			return sdf.parse(value);
 		} catch (final ParseException e) {
 			throw new IllegalArgumentException(
-					"Cannot parse date, value=[" + value + "]. Expected format is yyyyMMddHHmm.",
+					ERRORMSG_CANNOT_PARSE_DATE_VAL + value + "]. Expected format is yyyyMMddHHmm.",
 					e);
 		}
 	}
@@ -414,12 +418,12 @@ public class DateUtil {
 	 */
 	public static Date parseDateyyyyMMddHHmmss(String value) {
 		try {
-			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+			final SimpleDateFormat sdf = new SimpleDateFormat(LONG_DATE_FORMAT);
 			sdf.setTimeZone(TimeZone.getDefault());
 			return sdf.parse(value);
 		} catch (final ParseException e) {
 			throw new IllegalArgumentException(
-					"Cannot parse date, value=[" + value + "]. Expected format is yyyyMMddHHmmss.",
+					ERRORMSG_CANNOT_PARSE_DATE_VAL + value + "]. Expected format is yyyyMMddHHmmss.",
 					e);
 		}
 	}
@@ -442,7 +446,7 @@ public class DateUtil {
 			return sdf.parse(value);
 		} catch (final ParseException e) {
 			throw new IllegalArgumentException(
-					"Cannot parse date, value=[" + value + "]. Expected format is yyyyMMdd.", e);
+					ERRORMSG_CANNOT_PARSE_DATE_VAL + value + "]. Expected format is yyyyMMdd.", e);
 		}
 	}
 
@@ -463,7 +467,7 @@ public class DateUtil {
 			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmZZZZ");
 			return sdf.parse(value);
 		} catch (final ParseException e) {
-			throw new IllegalArgumentException("Cannot parse date, value=[" + value
+			throw new IllegalArgumentException(ERRORMSG_CANNOT_PARSE_DATE_VAL + value
 					+ "]. Expected format is yyyyMMddHHmmZZZZ.", e);
 		}
 	}
@@ -486,7 +490,7 @@ public class DateUtil {
 			final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 			return sdf.parse(value);
 		} catch (final ParseException e) {
-			throw new IllegalArgumentException("Cannot parse date, value=[" + value
+			throw new IllegalArgumentException(ERRORMSG_CANNOT_PARSE_DATE_VAL + value
 					+ "]. Expected format is yyyy-MM-ddTHH:mm:ss.", e);
 		}
 	}
@@ -500,7 +504,7 @@ public class DateUtil {
 	 * @return true, if equal
 	 */
 	public static boolean equalsDateOnly(Date validFrom, Date validFrom2) {
-		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+		DateFormat dateFormat = new SimpleDateFormat(SHORT_DATE_FORMAT);
 		String validFromStr = dateFormat.format(validFrom);
 		String validFromStr2 = dateFormat.format(validFrom2);
 		return validFromStr.equals(validFromStr2);

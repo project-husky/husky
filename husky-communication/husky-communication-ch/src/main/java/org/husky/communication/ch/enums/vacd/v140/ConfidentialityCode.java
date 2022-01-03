@@ -33,27 +33,29 @@ public enum ConfidentialityCode implements ValueSetEnumInterface {
 	 * <div class="de">administrative Daten</div> <div class="fr">données
 	 * administratives</div> <div class="it">dati amministrativi</div>
 	 */
-	ADMINISTRATIVE_DATEN("30001", "administrative Daten"),
+	ADMINISTRATIVE_DATEN(ConfidentialityCode.ADMINISTRATIVE_DATEN_CODE, "administrative Daten"),
 	/**
 	 * <div class="de">geheime Daten</div> <div class="fr">données
 	 * secrètes</div> <div class="it">dati segreti</div>
 	 */
-	GEHEIME_DATEN("30005", "geheime Daten"),
+	GEHEIME_DATEN(ConfidentialityCode.GEHEIME_DATEN_CODE, "geheime Daten"),
 	/**
 	 * <div class="de">medizinische Daten</div> <div class="fr">données
 	 * médicales</div> <div class="it">dati medici</div>
 	 */
-	MEDIZINISCHE_DATEN("30003", "medizinische Daten"),
+	MEDIZINISCHE_DATEN(ConfidentialityCode.MEDIZINISCHE_DATEN_CODE, "medizinische Daten"),
 	/**
 	 * <div class="de">nützliche Daten</div> <div class="fr">données
 	 * utiles</div> <div class="it">dati utilitari</div>
 	 */
-	NUTZLICHE_DATEN("30002", "nützliche Daten"),
+	NUTZLICHE_DATEN(ConfidentialityCode.NUTZLICHE_DATEN_CODE, "nützliche Daten"),
 	/**
 	 * <div class="de">sensible Daten</div> <div class="fr">données
 	 * sensibles</div> <div class="it">dati stigmatizzanti</div>
 	 */
-	SENSIBLE_DATEN("30004", "sensible Daten");
+	SENSIBLE_DATEN(ConfidentialityCode.SENSIBLE_DATEN_CODE, "sensible Daten");
+	
+
 
 	/**
 	 * <div class="de">Code für administrative Daten</div> <div class="fr">Code

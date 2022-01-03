@@ -80,7 +80,7 @@ public enum ObservationInterpretation implements ValueSetEnumInterface {
 	 * <div class="fr">Normal</div>
 	 * <div class="it">Normale</div>
 	 * */
-	NORMAL("N",	"Normal", "Normal", "Normal", "Normale"),
+	NORMAL("N",	EnumConstants.NORMAL, EnumConstants.NORMAL, EnumConstants.NORMAL, "Normale"),
 
 	/**
 	 * <div class="en">Positive</div>

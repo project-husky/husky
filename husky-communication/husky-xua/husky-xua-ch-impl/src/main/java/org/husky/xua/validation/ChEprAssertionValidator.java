@@ -83,6 +83,12 @@ import net.shibboleth.utilities.java.support.component.ComponentInitializationEx
  * @author Quentin Ligier
  */
 public class ChEprAssertionValidator {
+	
+	public static final String ERRMSG_ATTRIBUTE = "The attribute '";
+	public static final String ERRMSG_IS_MISSING = "' is missing";
+	public static final String NAMESPACE_GS1_GLN = "urn:gs1:gln";
+	public static final String ERRMSG_SUBJECT_CONFIRMATION_MISSING = "The SubjectConfirmation is missing";
+	
 
     /**
      * The SAML 2 {@link Assertion} validator implemented by OpenSAML and configured for the CH-EPR specifications.
@@ -190,7 +196,7 @@ public class ChEprAssertionValidator {
                 .findAny()
                 .orElse(null);
         if (roleAttribute == null) {
-            context.setValidationFailureMessage("The attribute '" + OASIS_XACML_ROLE + "' is missing");
+            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ROLE + ERRMSG_IS_MISSING);
             return ValidationResult.INVALID;
         }
         var role = Optional.ofNullable(roleAttribute.getAttributeValues())
@@ -208,7 +214,7 @@ public class ChEprAssertionValidator {
                 .filter(r -> r != Role.ASSISTANT && r != Role.TECHNICAL_USER)
                 .orElse(null);
         if (role == null) {
-            context.setValidationFailureMessage("The attribute '" + OASIS_XACML_ROLE + "' contains " +
+            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ROLE + "' contains " +
                     "an invalid value");
             return ValidationResult.INVALID;
         }
@@ -226,7 +232,7 @@ public class ChEprAssertionValidator {
                         .filter(n -> NameIDType.PERSISTENT.equals(n.getFormat()))
                         .map(NameIDType::getNameQualifier)
                         .orElse(null);
-                if ("urn:gs1:gln".equals(nameQualifier)) {
+                if (NAMESPACE_GS1_GLN.equals(nameQualifier)) {
                     role = Role.ASSISTANT;
                 } else if (TECHNICAL_USER_ID.equals(nameQualifier)) {
                     role = Role.TECHNICAL_USER;
@@ -266,10 +272,10 @@ public class ChEprAssertionValidator {
         if (role == Role.HEALTHCARE_PROFESSIONAL && !"urn:gs1:gln".equals(nameId.getNameQualifier())) {
             context.setValidationFailureMessage("The healthcare professional GLN is missing in the Subject");
             return ValidationResult.INVALID;
-        } else if (role == Role.ASSISTANT && !"urn:gs1:gln".equals(nameId.getNameQualifier())) {
+        } else if (role == Role.ASSISTANT && !NAMESPACE_GS1_GLN.equals(nameId.getNameQualifier())) {
             context.setValidationFailureMessage("The responsible healthcare professional GLN is missing in the Subject");
             return ValidationResult.INVALID;
-        } else if (role == Role.TECHNICAL_USER && !"urn:gs1:gln".equals(nameId.getNameQualifier())) {
+        } else if (role == Role.TECHNICAL_USER && !NAMESPACE_GS1_GLN.equals(nameId.getNameQualifier())) {
             context.setValidationFailureMessage("The responsible healthcare professional GLN is missing in the Subject");
             return ValidationResult.INVALID;
         } else if (role == Role.POLICY_ADMINISTRATOR && !POLICY_ADMINISTRATOR_ID.equals(nameId.getNameQualifier())) {
@@ -303,19 +309,19 @@ public class ChEprAssertionValidator {
                                                         final ValidationContext context,
                                                         final Role role) {
         if (context.getDynamicParameters().getOrDefault(CH_EPR_PURPOSE_OF_USE, null) == null) {
-            context.setValidationFailureMessage("The attribute '" + OASIS_XACML_PURPOSEOFUSE + "' is missing");
+            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_PURPOSEOFUSE + ERRMSG_IS_MISSING);
             return ValidationResult.INVALID;
         }
         if (context.getDynamicParameters().getOrDefault(CH_EPR_ORGANIZATIONS_NAME, null) == null) {
-            context.setValidationFailureMessage("The attribute '" + OASIS_XACML_ORGANISATION + "' is missing");
+            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANISATION + ERRMSG_IS_MISSING);
             return ValidationResult.INVALID;
         }
         if (context.getDynamicParameters().getOrDefault(CH_EPR_ORGANIZATIONS_ID, null) == null) {
-            context.setValidationFailureMessage("The attribute '" + OASIS_XACML_ORGANIZATIONID + "' is missing");
+            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANIZATIONID + ERRMSG_IS_MISSING);
             return ValidationResult.INVALID;
         }
         if (context.getDynamicParameters().getOrDefault(CH_EPR_HOME_COMMUNITY_ID, null) == null) {
-            context.setValidationFailureMessage("The attribute '" + IHE_XCA_HOMECOMMUNITYID + "' is missing");
+            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + IHE_XCA_HOMECOMMUNITYID + ERRMSG_IS_MISSING);
             return ValidationResult.INVALID;
         }
         if (context.getDynamicParameters().getOrDefault(CH_EPR_RESPONSIBLE_SUBJECT_ID, null) == null) {
@@ -325,16 +331,16 @@ public class ChEprAssertionValidator {
 
         if (role == Role.ASSISTANT) {
             if (context.getDynamicParameters().getOrDefault(CH_EPR_ASSISTANT_NAME, null) == null) {
-                context.setValidationFailureMessage("The SubjectConfirmation is missing");
+                context.setValidationFailureMessage(ERRMSG_SUBJECT_CONFIRMATION_MISSING);
                 return ValidationResult.INVALID;
             }
             if (context.getDynamicParameters().getOrDefault(CH_EPR_ASSISTANT_GLN, null) == null) {
-                context.setValidationFailureMessage("The SubjectConfirmation is missing");
+                context.setValidationFailureMessage(ERRMSG_SUBJECT_CONFIRMATION_MISSING);
                 return ValidationResult.INVALID;
             }
         }
         if (role == Role.TECHNICAL_USER && context.getDynamicParameters().getOrDefault(CH_EPR_TCU_ID, null) == null) {
-            context.setValidationFailureMessage("The SubjectConfirmation is missing");
+            context.setValidationFailureMessage(ERRMSG_SUBJECT_CONFIRMATION_MISSING);
             return ValidationResult.INVALID;
         }
 

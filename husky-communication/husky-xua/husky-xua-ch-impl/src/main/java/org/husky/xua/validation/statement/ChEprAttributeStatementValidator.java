@@ -53,6 +53,9 @@ import com.google.common.annotations.VisibleForTesting;
  * @author Quentin Ligier
  */
 public class ChEprAttributeStatementValidator implements StatementValidator {
+	
+	public static final String ERRMSG_CONTAINS_INVALID_VALUE = "' contains an invalid value";
+	public static final String ERRMSG_ATTRIBUTE = "The attribute '";
 
     /**
      * Gets the element or schema type QName of the statement handled by this validator.
@@ -126,7 +129,7 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 .map(PurposeOfUse::getEnum)
                 .orElse(null);
         if (purposeOfUse == null) {
-            context.setValidationFailureMessage("The attribute '" + OASIS_XACML_PURPOSEOFUSE + "' contains an invalid value");
+            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_PURPOSEOFUSE + ERRMSG_CONTAINS_INVALID_VALUE);
             return ValidationResult.INVALID;
         }
 
@@ -165,7 +168,7 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 .orElse(null);
         final var prefix = "urn:oid:";
         if (homeCommunityId == null || !homeCommunityId.startsWith(prefix)) {
-            context.setValidationFailureMessage("The attribute '" + IHE_XCA_HOMECOMMUNITYID + "' contains an invalid value");
+            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + IHE_XCA_HOMECOMMUNITYID + ERRMSG_CONTAINS_INVALID_VALUE);
             return ValidationResult.INVALID;
         }
         homeCommunityId = homeCommunityId.substring(prefix.length());
@@ -192,7 +195,7 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 .orElse(null);
         final var suffix = "^^^&" + SWISS_EPR_SPID.getCodeSystemId() + "&ISO";
         if (resourceId == null || !resourceId.endsWith(suffix)) {
-            context.setValidationFailureMessage("The attribute '" + OASIS_XACML_RESOURCEID + "' contains an invalid value");
+            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_RESOURCEID + ERRMSG_CONTAINS_INVALID_VALUE);
             return ValidationResult.INVALID;
         }
         resourceId = resourceId.substring(0, resourceId.length() - suffix.length());
@@ -219,7 +222,7 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 .map(XSString::getValue)
                 .orElse(null);
         if (subjectId == null) {
-            context.setValidationFailureMessage("The attribute '" + OASIS_XACML_SUBJECTID + "' contains an invalid value");
+            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_SUBJECTID + ERRMSG_CONTAINS_INVALID_VALUE);
             return ValidationResult.INVALID;
         }
         context.getDynamicParameters().put(CH_EPR_SUBJECT_NAME, subjectId);
@@ -250,12 +253,12 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
             if (shallBeEmpty) {
                 return ValidationResult.VALID;
             } else {
-                context.setValidationFailureMessage("The attribute '" + OASIS_XACML_ORGANIZATIONID + "' contains an invalid value");
+                context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANIZATIONID + ERRMSG_CONTAINS_INVALID_VALUE);
                 return ValidationResult.INVALID;
             }
         }
         if (shallBeEmpty) {
-            context.setValidationFailureMessage("The attribute '" + OASIS_XACML_ORGANIZATIONID + "' must be empty");
+            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANIZATIONID + "' must be empty");
             return ValidationResult.INVALID;
         }
 
@@ -288,12 +291,12 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
             if (shallBeEmpty) {
                 return ValidationResult.VALID;
             } else {
-                context.setValidationFailureMessage("The attribute '" + OASIS_XACML_ORGANISATION + "' contains an invalid value");
+                context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANISATION + ERRMSG_CONTAINS_INVALID_VALUE);
                 return ValidationResult.INVALID;
             }
         }
         if (shallBeEmpty) {
-            context.setValidationFailureMessage("The attribute '" + OASIS_XACML_ORGANISATION + "' must be empty");
+            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANISATION + "' must be empty");
             return ValidationResult.INVALID;
         }
 

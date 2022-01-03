@@ -1196,28 +1196,30 @@ public class CDAR2Extractor {
 			}
 		}
 	}
+	
+	private String appendAddress(String txt, String streetAddress, boolean addressfirst) {
+		if (txt != null && txt.length() >0) {
+			if (streetAddress != null && !streetAddress.isEmpty()) {
+				if(addressfirst)
+					streetAddress = streetAddress + " " + txt;
+				else
+					streetAddress = txt + " " + streetAddress;
+			} else {
+				streetAddress = txt;
+			}
+		}
+		return streetAddress;
+	}
 
 	private String extractXad1(Object value, String streetAddress) {
 		if (value instanceof AdxpStreetAddressLine stl) {
 			return stl.getTextContent();
 		} else if (value instanceof AdxpStreetName stl) {
 			String txt = stl.getTextContent();
-			if (!txt.isEmpty()) {
-				if (!streetAddress.isEmpty()) {
-					streetAddress = txt + " " + streetAddress;
-				} else {
-					streetAddress = txt;
-				}
-			}
+			streetAddress = appendAddress(txt, streetAddress, false);	
 		} else if (value instanceof AdxpHouseNumber stl) {
 			String txt = stl.getTextContent();
-			if (txt.length() > 0) {
-				if (streetAddress != null && !streetAddress.isEmpty()) {
-					streetAddress = streetAddress + " " + txt;
-				} else {
-					streetAddress = txt;
-				}
-			}
+			streetAddress = appendAddress(txt, streetAddress, true);
 		}
 
 		return streetAddress;

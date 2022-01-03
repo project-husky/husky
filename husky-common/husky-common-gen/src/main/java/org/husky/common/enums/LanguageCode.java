@@ -19,22 +19,22 @@ import org.husky.common.model.Code;
  */
 public enum LanguageCode {
 
-	ENGLISH("en", "English"),
+	ENGLISH(EnumConstants.ENGLISH_CODE, "English"),
 	/**
 	 * <div class="de">französisch</div> <div class="fr"></div>
 	 */
-	FRENCH("fr-CH", "French"),
+	FRENCH(EnumConstants.FRENCH_CODE, "French"),
 	/**
 	 * <div class="de">deutsch</div> <div class="fr"></div>
 	 */
-	GERMAN("de-CH", "German"),
+	GERMAN(EnumConstants.GERMAN_CODE, "German"),
 
 	/**
 	 * <div class="de">italienisch</div> <div class="fr"></div>
 	 */
-	ITALIAN("it-CH", "Italian"),
+	ITALIAN(EnumConstants.ITALIAN_CODE, "Italian"),
 
-	ROMANSH("rm-CH", "Romansh");
+	ROMANSH(EnumConstants.ROMANSH_CODE, "Romansh");
 
 	public static final String CODE_SYSTEM_NAME = "";
 	public static final String CODE_SYSTEM_OID = "ISO 3166";
@@ -44,7 +44,7 @@ public enum LanguageCode {
 	public static final String GERMAN_CODE = "de-CH";
 	public static final String ITALIAN_CODE = "it-CH";
 	public static final String ROMANSH_CODE = "rm-CH";
-
+	
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
