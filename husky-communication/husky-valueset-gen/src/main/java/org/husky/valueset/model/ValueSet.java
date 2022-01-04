@@ -20,6 +20,7 @@ import javax.annotation.processing.Generated;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.husky.common.basetypes.CodeBaseType;
+import org.husky.common.basetypes.IdentificatorBaseType;
 import org.husky.common.enums.LanguageCode;
 import org.husky.common.utils.LangText;
 import org.husky.valueset.enums.ValueSetStatus;
@@ -43,13 +44,17 @@ public class ValueSet extends ValueSetBase implements Serializable {
 	 * Builder to build {@link ValueSet}.
 	 */
 	@Generated("SparkTools")
-	public static final class Builder extends ValueSetBuilder {
+	public static final class Builder {
 		private ArrayList<LangText> descriptionList;
 		private String displayName;
 		private Date effectiveDate;
 		private String name;
 		private ValueSetStatus status;
 		private ArrayList<ValueSetEntry> valueSetEntryList;
+		private IdentificatorBaseType identificator;
+		private ArrayList<IdentificatorBaseType> mappingIdentificatorList;
+		private ArrayList<String> mappingNameList;
+		private Version version;
 
 		private Builder() {
 		}
@@ -85,6 +90,26 @@ public class ValueSet extends ValueSetBase implements Serializable {
 
 		public Builder withValueSetEntryList(ArrayList<ValueSetEntry> valueSetEntryList) {
 			this.valueSetEntryList = valueSetEntryList;
+			return this;
+		}
+
+		public Builder withIdentificator(IdentificatorBaseType identificator) {
+			this.identificator = identificator;
+			return this;
+		}
+
+		public Builder withMappingIdentificatorList(ArrayList<IdentificatorBaseType> mappingIdentificatorList) {
+			this.mappingIdentificatorList = mappingIdentificatorList;
+			return this;
+		}
+
+		public Builder withMappingNameList(ArrayList<String> mappingNameList) {
+			this.mappingNameList = mappingNameList;
+			return this;
+		}
+
+		public Builder withVersion(Version version) {
+			this.version = version;
 			return this;
 		}
 

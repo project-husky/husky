@@ -38,11 +38,15 @@ public class ValueSetPackage extends ValueSetBase implements Serializable {
 	 * Builder to build {@link ValueSetPackage}.
 	 */
 	@Generated("SparkTools")
-	public static final class Builder extends ValueSetBuilder {
+	public static final class Builder {
 		private String description;
 		private String sourceUrl;
 		private ValueSetPackageStatus status;
 		private ArrayList<ValueSet> valueSetList;
+		private IdentificatorBaseType identificator;
+		private ArrayList<IdentificatorBaseType> mappingIdentificatorList;
+		private ArrayList<String> mappingNameList;
+		private Version version;
 
 		private Builder() {
 		}
@@ -68,6 +72,26 @@ public class ValueSetPackage extends ValueSetBase implements Serializable {
 
 		public Builder withValueSetList(ArrayList<ValueSet> valueSetList) {
 			this.valueSetList = valueSetList;
+			return this;
+		}
+
+		public Builder withIdentificator(IdentificatorBaseType identificator) {
+			this.identificator = identificator;
+			return this;
+		}
+
+		public Builder withMappingIdentificatorList(ArrayList<IdentificatorBaseType> mappingIdentificatorList) {
+			this.mappingIdentificatorList = mappingIdentificatorList;
+			return this;
+		}
+
+		public Builder withMappingNameList(ArrayList<String> mappingNameList) {
+			this.mappingNameList = mappingNameList;
+			return this;
+		}
+
+		public Builder withVersion(Version version) {
+			this.version = version;
 			return this;
 		}
 
