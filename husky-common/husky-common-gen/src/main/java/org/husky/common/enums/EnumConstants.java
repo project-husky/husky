@@ -20,4 +20,8 @@ public class EnumConstants {
 	public static final String CANCELLED_CODE = "cancelled";
 	public static final String COMPLETED_CODE = "completed";
 	public static final String SUSPENDED_CODE = "suspended";
+
+	private EnumConstants() {
+		throw new IllegalStateException("This is a utility class for constants");
+	}
 }

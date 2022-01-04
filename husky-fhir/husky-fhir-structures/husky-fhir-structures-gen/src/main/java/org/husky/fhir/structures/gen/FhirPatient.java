@@ -13,6 +13,7 @@ package org.husky.fhir.structures.gen;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.hl7.fhir.r4.model.Address;
 import org.hl7.fhir.r4.model.Address.AddressUse;
@@ -40,9 +41,11 @@ import org.husky.common.hl7cdar2.CS;
 import org.husky.common.hl7cdar2.POCDMT000040Birthplace;
 import org.husky.common.hl7cdar2.POCDMT000040LanguageCommunication;
 import org.husky.common.hl7cdar2.POCDMT000040Organization;
+import org.husky.common.hl7cdar2.POCDMT000040Patient;
 import org.husky.common.hl7cdar2.POCDMT000040Place;
 import org.husky.common.model.Identificator;
 import org.husky.common.model.Name;
+import org.husky.common.model.Organization;
 import org.husky.common.model.Patient;
 import org.husky.common.model.Telecom;
 
@@ -66,6 +69,8 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 	 */
 	private static final long serialVersionUID = -1520681931095452610L;
 
+	private static final String PARENT_LITERAL = "parent";
+
 	/**
 	 * converts the mdht AD to the fhir address
 	 *
@@ -76,13 +81,8 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 		org.hl7.fhir.r4.model.Address fhirAddr = null;
 		if (mdhtAddr != null) {
 			fhirAddr = new org.hl7.fhir.r4.model.Address();
-			if (mdhtAddr.getStreetAddressLine1() != null && !mdhtAddr.getStreetAddressLine1().isEmpty()) {
-				fhirAddr.addLine(mdhtAddr.getStreetAddressLine1());
-			}
 
-			if (mdhtAddr.getStreetAddressLine2() != null && !mdhtAddr.getStreetAddressLine2().isEmpty()) {
-				fhirAddr.addLine(mdhtAddr.getStreetAddressLine2());
-			}
+			fhirAddr.setLine(getStreetAdddressLines(mdhtAddr));
 
 			if (mdhtAddr.getCity() != null) {
 				fhirAddr.setCity(mdhtAddr.getCity());
@@ -102,6 +102,19 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 
 		}
 		return fhirAddr;
+	}
+
+	private static List<StringType> getStreetAdddressLines(org.husky.common.model.Address huskyAddr) {
+		List<StringType> lines = new LinkedList<>();
+		if (huskyAddr.getStreetAddressLine1() != null && !huskyAddr.getStreetAddressLine1().isEmpty()) {
+			lines.add(new StringType(huskyAddr.getStreetAddressLine1()));
+		}
+
+		if (huskyAddr.getStreetAddressLine2() != null && !huskyAddr.getStreetAddressLine2().isEmpty()) {
+			lines.add(new StringType(huskyAddr.getStreetAddressLine2()));
+		}
+
+		return lines;
 	}
 
 	private static AddressUse convertAddressUse(PostalAddressUse usage) {
@@ -137,8 +150,7 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 	 * @param gender the gender
 	 * @return the administrative gender enum
 	 */
-	public static org.hl7.fhir.r4.model.Enumerations.AdministrativeGender convertGender(
-			AdministrativeGender gender) {
+	public static org.hl7.fhir.r4.model.Enumerations.AdministrativeGender convertGender(AdministrativeGender gender) {
 		if (gender != null) {
 			if (gender.equals(AdministrativeGender.FEMALE)) {
 				return org.hl7.fhir.r4.model.Enumerations.AdministrativeGender.FEMALE;
@@ -192,8 +204,7 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 	 *
 	 * @param entityNameUse usage of name
 	 *
-	 * @return allocated value or {@link NameUse#USUAL} if no value can
-	 *         be allocated
+	 * @return allocated value or {@link NameUse#USUAL} if no value can be allocated
 	 */
 	private static NameUse getNameUse(EntityNameUse entityNameUse) {
 		if (entityNameUse == null) {
@@ -303,8 +314,7 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 	}
 
 	/**
-	 * Instantiates a new fhir patient based on the
-	 * org.husky.common.patient
+	 * Instantiates a new fhir patient based on the org.husky.common.patient
 	 *
 	 * @param patient the patient
 	 */
@@ -314,11 +324,7 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 			return;
 		}
 
-		if (patient.getNames() != null) {
-			for (final Name name : patient.getNames()) {
-				getName().add(convertName(name));
-			}
-		}
+		setNames(patient.getNames());
 
 		if (patient.getBirthday() != null) {
 			setBirthDate(patient.getBirthday());
@@ -328,82 +334,29 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 			setGender(convertGender(patient.getAdministrativeGenderCode()));
 		}
 
-		if (patient.getAddresses() != null && !patient.getAddresses().isEmpty()) {
-			for (final org.husky.common.model.Address address : patient.getAddresses()) {
-				getAddress().add(convertAddress(address));
-			}
-		}
-		for (final Identificator ident : patient.getIds()) {
-			var id = new Identifier();
-			id.setSystem(FhirCommon.addUrnOid(ident.getRoot()));
-			id.setValue(ident.getExtension());
-			this.getIdentifier().add(id);
-		}
+		setAddresses(patient.getAddresses());
+
+		setIds(patient.getIds());
+
 		final POCDMT000040Organization organization = patient.getMdhtPatientRole().getProviderOrganization();
 		if (organization != null) {
-			final var fhirOrganization = new org.hl7.fhir.r4.model.Organization();
-
-			if (organization != null && organization.getId() != null && !organization.getId().isEmpty()) {
-				final var ii = organization.getId().get(0);
-				final var identifier = new Identifier();
-				identifier.setValue(ii.getExtension());
-				identifier.setSystem(FhirCommon.addUrnOid(ii.getRoot()));
-				fhirOrganization.getIdentifier().add(identifier);
-			}
-
-			if (organization.getName() != null && !organization.getName().isEmpty()) {
-				final String name = organization.getName().get(0).getMergedXmlMixed();
-				fhirOrganization.setName(name);
-			}
-
-			if ((organization.getTelecom() != null) && !organization.getTelecom().isEmpty()) {
-				final var tel = organization.getTelecom().get(0);
-				final ContactPoint fhirTel = fhirOrganization.addTelecom();
-				if (tel.getValue().startsWith("tel:")) {
-					fhirTel.setValue(tel.getValue().substring(4));
-				}
-			}
-			getManagingOrganization().setResource(fhirOrganization);
+			getManagingOrganization().setResource(convertOrganization(organization));
 		}
 
-		if (patient.getTelecoms() != null) {
-			for (final Telecom tel : patient.getTelecoms()) {
-				this.getTelecom().add(convertTelecom(tel));
-			}
-		}
+		setTelecoms(patient.getTelecoms());
 
 		// languageCommunications
 		if (!patient.getMdhtPatient().getLanguageCommunication().isEmpty()) {
-			for (final POCDMT000040LanguageCommunication languageCommunication : patient.getMdhtPatient()
-					.getLanguageCommunication()) {
-				final var communication = new PatientCommunicationComponent();
-				final var language = new CodeableConcept();
-				language.setText(languageCommunication.getLanguageCode().getCode());
-				communication.setLanguage(language);
-				this.getCommunication().add(communication);
-			}
+			this.getCommunication().addAll(convertLanguageCommunication(patient.getMdhtPatient()));
 		}
 
 		// maritalStatus
 		if (((patient.getMdhtPatient().getMaritalStatusCode() != null)
 				&& (patient.getMdhtPatient().getMaritalStatusCode().getCode() != null))) {
-			final var maritalStatus = new CodeableConcept();
-			var code = new Coding();
-			code.setCode(patient.getMdhtPatient().getMaritalStatusCode().getCode());
-			code.setDisplay(patient.getMdhtPatient().getMaritalStatusCode().getDisplayName());
-			maritalStatus.addCoding(code);
-			this.setMaritalStatus(maritalStatus);
+			this.setMaritalStatus(convertMaritalStatus(patient.getMdhtPatient().getMaritalStatusCode()));
 		}
 
-		// deceasedBooolean
-		if (patient.getDeceasedInd() != null) {
-			setDeceased(new BooleanType(patient.getDeceasedInd()));
-		}
-
-		// deceasedDateTime
-		if (patient.getDeceasedTime() != null) {
-			setDeceased(new DateTimeType(patient.getDeceasedTime()));
-		}
+		setDeceased(patient);
 
 		// multipleBirthInd
 		if (patient.getMultipleBirthInd() != null) {
@@ -425,8 +378,8 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 		// birthplace
 		if ((patient.getMdhtPatient().getBirthplace() != null)
 				&& (patient.getMdhtPatient().getBirthplace().getPlace() != null)) {
-			setBirthPlace(convertAddress(new org.husky.common.model.Address(
-					patient.getMdhtPatient().getBirthplace().getPlace().getAddr())));
+			setBirthPlace(convertAddress(
+					new org.husky.common.model.Address(patient.getMdhtPatient().getBirthplace().getPlace().getAddr())));
 		}
 
 		// religiousAffiliation
@@ -437,19 +390,173 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 		}
 
 		// nationCode
-		if (patient.getNation() != null) {
-			final var nationCode = new CodeableConcept();
-			nationCode.setText(patient.getNation());
-			this.setNation(nationCode);
-		}
+		setNation(patient.getNation());
 
 		// employeeOccupationcode
-		if (patient.getEmployeeOccupation() != null) {
-			final var employeeOccupationCode = new CodeableConcept();
-			employeeOccupationCode.setText(patient.getEmployeeOccupation());
-			this.setEmployeeOccupation(employeeOccupationCode);
+		setEmployeeOccupation(patient.getEmployeeOccupation());
+	}
+
+	public void setTelecoms(List<Telecom> telecoms) {
+		if (telecoms != null) {
+			for (final Telecom tel : telecoms) {
+				this.getTelecom().add(convertTelecom(tel));
+			}
+		}
+	}
+
+	/**
+	 * set names of patient
+	 * 
+	 * @param names
+	 */
+	public void setNames(List<Name> names) {
+		if (names != null) {
+			for (final Name name : names) {
+				getName().add(convertName(name));
+			}
+		}
+	}
+
+	/**
+	 * set addresses of patient
+	 * 
+	 * @param addresses
+	 */
+	public void setAddresses(List<org.husky.common.model.Address> addresses) {
+		if (addresses != null && !addresses.isEmpty()) {
+			for (final org.husky.common.model.Address address : addresses) {
+				getAddress().add(convertAddress(address));
+			}
 		}
 
+	}
+
+	/**
+	 * set IDs of patient
+	 * 
+	 * @param ids list of id
+	 */
+	public void setIds(List<Identificator> ids) {
+		for (final Identificator ident : ids) {
+			var id = new Identifier();
+			id.setSystem(FhirCommon.addUrnOid(ident.getRoot()));
+			id.setValue(ident.getExtension());
+			this.getIdentifier().add(id);
+		}
+	}
+
+	/**
+	 * set nation
+	 * 
+	 * @param nation
+	 */
+	public void setNation(String nation) {
+		if (nation != null) {
+			final var nationCode = new CodeableConcept();
+			nationCode.setText(nation);
+			this.setNation(nationCode);
+		}
+	}
+
+	/**
+	 * set employee occupation
+	 * 
+	 * @param employeeOccupation
+	 */
+	public void setEmployeeOccupation(String employeeOccupation) {
+		if (employeeOccupation != null) {
+			final var employeeOccupationCode = new CodeableConcept();
+			employeeOccupationCode.setText(employeeOccupation);
+			this.setEmployeeOccupation(employeeOccupationCode);
+		}
+	}
+
+	/**
+	 * set deceased from patient deceased indicator or deceased time
+	 * 
+	 * @param patient
+	 */
+	public void setDeceased(Patient patient) {
+		// deceasedBooolean
+		if (patient.getDeceasedInd() != null) {
+			setDeceased(new BooleanType(patient.getDeceasedInd()));
+		}
+
+		// deceasedDateTime
+		if (patient.getDeceasedTime() != null) {
+			setDeceased(new DateTimeType(patient.getDeceasedTime()));
+		}
+	}
+
+	private CodeableConcept convertMaritalStatus(CE maritalStatusCe) {
+		if (maritalStatusCe == null) {
+			return null;
+		}
+
+		final var maritalStatus = new CodeableConcept();
+		var code = new Coding();
+		code.setCode(maritalStatusCe.getCode());
+		code.setDisplay(maritalStatusCe.getDisplayName());
+		maritalStatus.addCoding(code);
+		return maritalStatus;
+	}
+
+	/**
+	 * converts the hl7 cda r2 Patient to fhir patient communication
+	 * 
+	 * @param hl7cdar2Patient
+	 * @return fhir patient communication
+	 */
+	private List<org.hl7.fhir.r4.model.Patient.PatientCommunicationComponent> convertLanguageCommunication(
+			POCDMT000040Patient hl7cdar2Patient) {
+		List<org.hl7.fhir.r4.model.Patient.PatientCommunicationComponent> communications = new LinkedList<>();
+		for (final POCDMT000040LanguageCommunication languageCommunication : hl7cdar2Patient
+				.getLanguageCommunication()) {
+			final var communication = new PatientCommunicationComponent();
+			final var language = new CodeableConcept();
+			language.setText(languageCommunication.getLanguageCode().getCode());
+			communication.setLanguage(language);
+			communications.add(communication);
+		}
+
+		return communications;
+	}
+
+	/**
+	 * converts the convenience organization to fhir organization
+	 * 
+	 * @param organization
+	 * @return fhir organization
+	 */
+	private org.hl7.fhir.r4.model.Organization convertOrganization(POCDMT000040Organization organization) {
+		if (organization == null) {
+			return null;
+		}
+
+		final var fhirOrganization = new org.hl7.fhir.r4.model.Organization();
+
+		if (!organization.getId().isEmpty()) {
+			final var ii = organization.getId().get(0);
+			final var identifier = new Identifier();
+			identifier.setValue(ii.getExtension());
+			identifier.setSystem(FhirCommon.addUrnOid(ii.getRoot()));
+			fhirOrganization.getIdentifier().add(identifier);
+		}
+
+		if (!organization.getName().isEmpty()) {
+			final String name = organization.getName().get(0).getMergedXmlMixed();
+			fhirOrganization.setName(name);
+		}
+
+		if (!organization.getTelecom().isEmpty()) {
+			final var tel = organization.getTelecom().get(0);
+			final ContactPoint fhirTel = fhirOrganization.addTelecom();
+			if (tel.getValue().startsWith("tel:")) {
+				fhirTel.setValue(tel.getValue().substring(4));
+			}
+		}
+
+		return fhirOrganization;
 	}
 
 	/**
@@ -546,7 +653,7 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 		for (final ContactComponent contact : getContact()) {
 			for (final CodeableConcept CodeableConcept : contact.getRelationship()) {
 				for (final Coding Coding : CodeableConcept.getCoding()) {
-					if ("parent".equalsIgnoreCase(Coding.getCode())
+					if (PARENT_LITERAL.equalsIgnoreCase(Coding.getCode())
 							&& "female".equalsIgnoreCase(contact.getGender().toCode())
 							&& NameUse.MAIDEN.equals(contact.getName().getUseElement().getValue())) {
 						return contact.getName();
@@ -573,8 +680,180 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 	 */
 	public Patient getPatient() {
 
+		Calendar calendar = new GregorianCalendar();
+
+		if (getBirthDate() != null) {
+			calendar.setTime(getBirthDate());
+		}
+
+		final var patient = new Patient(getConvenienceName(), convertGender(getGender()), calendar);
+		patient.setIds(getIdentificators());
+
+		for (final Address Address : getAddress()) {
+			patient.addAddress(convertAddress(Address));
+		}
+
+		Organization organization = getOrganization();
+
+		if (organization != null) {
+			patient.setProviderOrganization(organization);
+		}
+
+		// telecommunications
+		if (!getTelecom().isEmpty()) {
+			patient.setTelecoms(getTelecommunications());
+		}
+
+		// languageCommunications
+		if (!getCommunication().isEmpty()) {
+			patient.getMdhtPatient().getLanguageCommunication().addAll(getLanguangeCommunication());
+		}
+
+		// maritalStatus
+		if (!getMaritalStatus().isEmpty()) {
+			final var maritalStatusCode = new CE();
+			maritalStatusCode.setCode(getMaritalStatus().getCodingFirstRep().getCode());
+			patient.getMdhtPatient().setMaritalStatusCode(maritalStatusCode);
+		}
+
+		setDeceasedToPatient(patient);
+		setMultipleBirth(patient);
+
+		// mothersName
+		final HumanName mothersMaidenName = getMothersMaidenName();
+		if (!mothersMaidenName.isEmpty()) {
+			patient.setMothersMaidenName(mothersMaidenName.getFamily());
+		}
+
+		// birth place
+		if ((getBirthPlace() != null) && !getBirthPlace().isEmpty()) {
+			patient.getMdhtPatient().setBirthplace(getHl7Cdar2Birthplace());
+		}
+
+		// religiousAffiliation
+		if ((getReligiousAffiliation() != null) && !getReligiousAffiliation().isEmpty()) {
+			patient.setReligiousAffiliation(getReligiousAffiliation().getText());
+		}
+
+		// nationCode
+		if ((getNation() != null) && !getNation().isEmpty()) {
+			patient.setNation(getNation().getText());
+		}
+
+		// employeeOccupationCode
+		if ((getEmployeeOccupation() != null) && !getEmployeeOccupation().isEmpty()) {
+			patient.setEmployeeOccupation(getEmployeeOccupation().getText());
+		}
+
+		return patient;
+	}
+
+	private void setDeceasedToPatient(Patient patient) {
+		// deceasedBooolean
+		final Type idDeceased = getDeceased();
+		if (idDeceased instanceof BooleanType deceased && deceased.getValue() != null) {
+			patient.setDeceasedInd(deceased.getValue());
+		}
+
+		// deceasedDateTime
+		if (idDeceased instanceof DateTimeType deceased && deceased.getValue() != null) {
+			patient.setDeceasedTime(deceased.getValue());
+			patient.setDeceasedInd(true);
+		}
+	}
+
+	private void setMultipleBirth(Patient patient) {
+		// multipleBirthOrder
+		final Type iMultipleBirth = getMultipleBirth();
+		if (iMultipleBirth instanceof IntegerType multipleBirth && multipleBirth.getValue() != null) {
+			patient.setMultipleBirthOrderNumber(multipleBirth.getValue());
+			patient.setMultipleBirthInd(true);
+		}
+
+		// multipleBirth Indicator
+		if (iMultipleBirth instanceof BooleanType multipleBirth && multipleBirth.getValue() != null) {
+			patient.setMultipleBirthInd(true);
+		}
+	}
+
+	/**
+	 * convert the fhir identifiers to a list of convenience identificator
+	 * 
+	 * @return list of convenience identificator
+	 */
+	public List<Identificator> getIdentificators() {
+		List<Identificator> ids = new LinkedList<>();
+		for (final Identifier identDt : getIdentifier()) {
+			var oid = "";
+			if (identDt.getSystem().startsWith(FhirCommon.OID_URN)) {
+				oid = FhirCommon.removeUrnOidPrefix(identDt.getSystem());
+			}
+			final String id = identDt.getValue();
+			final var identificator = new Identificator(oid, id);
+			ids.add(identificator);
+		}
+
+		return ids;
+	}
+
+	/**
+	 * convert the fhir telecoms to a list of convenience telecom
+	 * 
+	 * @return list of convenience telecom
+	 */
+	public List<Telecom> getTelecommunications() {
+		final var telecoms = new LinkedList<Telecom>();
+		for (final ContactPoint contactPoint : getTelecom()) {
+			telecoms.add(createTelecom(contactPoint.getValue(), contactPoint.getSystemElement().getValue(),
+					contactPoint.getUseElement().getValue()));
+		}
+
+		return telecoms;
+	}
+
+	/**
+	 * convert the fhir birth place to hl7 cda r2 birth place
+	 * 
+	 * @return hl7 cda r2 birth place
+	 */
+	public POCDMT000040Birthplace getHl7Cdar2Birthplace() {
+		final var birthplace = new POCDMT000040Birthplace();
+		final var place = new POCDMT000040Place();
+		birthplace.setPlace(place);
+
+		var address = this.convertAddress(getBirthPlace());
+		if (address != null) {
+			place.setAddr(address.getHl7CdaR2Ad());
+		}
+
+		return birthplace;
+	}
+
+	/**
+	 * convert the fhir communication to list of hl7 cda r2 languange communication
+	 * 
+	 * @return list of hl7 cda r2 languange communication
+	 */
+	public List<POCDMT000040LanguageCommunication> getLanguangeCommunication() {
+		List<POCDMT000040LanguageCommunication> communications = new LinkedList<>();
+		for (final PatientCommunicationComponent communication : getCommunication()) {
+			final var lang = new POCDMT000040LanguageCommunication();
+			final var languageCode = new CS();
+			languageCode.setCode(communication.getLanguage().getText());
+			lang.setLanguageCode(languageCode);
+			communications.add(lang);
+		}
+
+		return communications;
+	}
+
+	/**
+	 * convert the fhir patient human name to convenience name
+	 * 
+	 * @return convenience name
+	 */
+	public Name getConvenienceName() {
 		final var patientName = new Name();
-		AdministrativeGender patientGender = null;
 
 		final var humanName = this.getNameFirstRep();
 		if (humanName != null) {
@@ -604,164 +883,70 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 			patientName.setSuffix(suffixBuilder.toString());
 		}
 
-		final org.hl7.fhir.r4.model.Enumerations.AdministrativeGender gender = getGender();
-		if (gender != null) {
-			switch (gender) {
-			case FEMALE:
-				patientGender = AdministrativeGender.FEMALE;
-				break;
-			case MALE:
-				patientGender = AdministrativeGender.MALE;
-				break;
-			case OTHER:
-				patientGender = AdministrativeGender.UNDIFFERENTIATED;
-				break;
-			default:
-				patientGender = AdministrativeGender.UNDIFFERENTIATED;
-				break;
-			}
+		return patientName;
+	}
+
+	/**
+	 * convert the fhir managing organization to convenience Organization
+	 * 
+	 * @return convenience organization
+	 */
+	public Organization getOrganization() {
+		if (getManagingOrganization() == null) {
+			return null;
 		}
 
-		Calendar calendar = new GregorianCalendar();
+		var organization = new org.husky.common.model.Organization(new OrganizationBaseType());
 
-		if (getBirthDate() != null) {
-			calendar.setTime(getBirthDate());
+		final org.hl7.fhir.r4.model.Organization org = (org.hl7.fhir.r4.model.Organization) getManagingOrganization()
+				.getResource();
+
+		if (org == null) {
+			return null;
 		}
 
-		final var patient = new Patient(patientName, patientGender, calendar);
-		for (final Identifier identDt : getIdentifier()) {
+		if (org.getName() != null) {
+			var orgName = new NameBaseType();
+			orgName.setName(org.getName());
+			organization.addName(orgName);
+		}
+
+		if (org.getIdentifierFirstRep() != null && (org.getIdentifierFirstRep().getSystem() != null)
+				&& org.getIdentifierFirstRep().getSystem().startsWith(FhirCommon.OID_URN)) {
 			var oid = "";
-			if (identDt.getSystem().startsWith(FhirCommon.OID_URN)) {
-				oid = FhirCommon.removeUrnOidPrefix(identDt.getSystem());
-			}
-			final String id = identDt.getValue();
-			final var identificator = new Identificator(oid, id);
-			patient.addId(identificator);
+			oid = org.getIdentifierFirstRep().getSystem().substring(8);
+			organization.getIdentificatorList().add(new Identificator(oid, org.getIdentifierFirstRep().getValue()));
 		}
-
-		for (final Address Address : getAddress()) {
-			patient.addAddress(convertAddress(Address));
-		}
-
-		if (getManagingOrganization() != null) {
-			var organization = new org.husky.common.model.Organization(new OrganizationBaseType());
-
-			final org.hl7.fhir.r4.model.Organization org = (org.hl7.fhir.r4.model.Organization) getManagingOrganization()
-					.getResource();
-
-			if ((org != null) && (org.getName() != null)) {
-				var orgName = new NameBaseType();
-				orgName.setName(org.getName());
-				organization.addName(orgName);
-			}
-
-			if ((org != null) && (org.getIdentifierFirstRep() != null)
-					&& (org.getIdentifierFirstRep().getSystem() != null)
-					&& org.getIdentifierFirstRep().getSystem().startsWith(FhirCommon.OID_URN)) {
-				var oid = "";
-				oid = org.getIdentifierFirstRep().getSystem().substring(8);
-				organization.getIdentificatorList().add(new Identificator(oid, org.getIdentifierFirstRep().getValue()));
-			}
-			if (org != null && org.getTelecom() != null && !org.getTelecom().isEmpty()) {
-				final var contactPoint = org.getTelecomFirstRep();
-				if ((contactPoint != null) && (contactPoint.getValue() != null)) {
-					organization.addTelecom(createTelecom(contactPoint.getValue(),
-							contactPoint.getSystemElement().getValue(), contactPoint.getUseElement().getValue()));
-				}
-			}
-
-			patient.setProviderOrganization(organization);
-		}
-
-		// telecommunications
-		if (!getTelecom().isEmpty()) {
-			final var telecoms = new LinkedList<Telecom>();
-			for (final ContactPoint contactPoint : getTelecom()) {
-				telecoms.add(createTelecom(contactPoint.getValue(), contactPoint.getSystemElement().getValue(),
-						contactPoint.getUseElement().getValue()));
-			}
-			if (!telecoms.isEmpty()) {
-				patient.setTelecoms(telecoms);
+		if (org.getTelecom() != null && !org.getTelecom().isEmpty()) {
+			final var contactPoint = org.getTelecomFirstRep();
+			if ((contactPoint != null) && (contactPoint.getValue() != null)) {
+				organization.addTelecom(createTelecom(contactPoint.getValue(),
+						contactPoint.getSystemElement().getValue(), contactPoint.getUseElement().getValue()));
 			}
 		}
 
-		// languageCommunications
-		if (!getCommunication().isEmpty()) {
-			for (final PatientCommunicationComponent communication : getCommunication()) {
-				final var lang = new POCDMT000040LanguageCommunication();
-				final var languageCode = new CS();
-				languageCode.setCode(communication.getLanguage().getText());
-				lang.setLanguageCode(languageCode);
-				patient.getMdhtPatient().getLanguageCommunication().add(lang);
+		return organization;
+	}
+
+	/**
+	 * Convert the fhir gender to the cda gender.
+	 *
+	 * @param gender the gender
+	 * @return the administrative gender enum
+	 */
+	public AdministrativeGender convertGender(org.hl7.fhir.r4.model.Enumerations.AdministrativeGender gender) {
+		if (gender != null) {
+			if (gender.equals(org.hl7.fhir.r4.model.Enumerations.AdministrativeGender.FEMALE)) {
+				return AdministrativeGender.FEMALE;
+			} else if (gender.equals(org.hl7.fhir.r4.model.Enumerations.AdministrativeGender.MALE)) {
+				return AdministrativeGender.MALE;
+			} else if (gender.equals(org.hl7.fhir.r4.model.Enumerations.AdministrativeGender.OTHER)) {
+				return AdministrativeGender.UNDIFFERENTIATED;
+			} else {
+				return AdministrativeGender.UNDIFFERENTIATED;
 			}
 		}
-
-		// maritalStatus
-		if (!getMaritalStatus().isEmpty()) {
-			final var maritalStatusCode = new CE();
-			maritalStatusCode.setCode(getMaritalStatus().getCodingFirstRep().getCode());
-			patient.getMdhtPatient().setMaritalStatusCode(maritalStatusCode);
-		}
-
-		// deceasedBooolean
-		final Type idDeceased = getDeceased();
-		if (idDeceased instanceof BooleanType deceased && deceased.getValue() != null) {
-			patient.setDeceasedInd(deceased.getValue());
-		}
-
-		// deceasedDateTime
-		if (idDeceased instanceof DateTimeType deceased && deceased.getValue() != null) {
-				patient.setDeceasedTime(deceased.getValue());
-				patient.setDeceasedInd(true);
-		}
-
-		// multipleBirthOrder
-		final Type iMultipleBirth = getMultipleBirth();
-		if (iMultipleBirth instanceof IntegerType multipleBirth && multipleBirth.getValue() != null) {
-				patient.setMultipleBirthOrderNumber(multipleBirth.getValue());
-				patient.setMultipleBirthInd(true);
-		}
-
-		// multipleBirth Indicator
-		if (iMultipleBirth instanceof BooleanType multipleBirth && multipleBirth.getValue() != null) {
-				patient.setMultipleBirthInd(true);
-		}
-
-		// mothersName
-		final HumanName mothersMaidenName = getMothersMaidenName();
-		if (!mothersMaidenName.isEmpty()) {
-			patient.setMothersMaidenName(mothersMaidenName.getFamily());
-		}
-
-		if ((getBirthPlace() != null) && !getBirthPlace().isEmpty()) {
-			final var birthplace = new POCDMT000040Birthplace();
-			final var place = new POCDMT000040Place();
-			birthplace.setPlace(place);
-
-			var address = this.convertAddress(getBirthPlace());
-			if (address != null) {
-				place.setAddr(address.getHl7CdaR2Ad());
-			}
-
-			patient.getMdhtPatient().setBirthplace(birthplace);
-		}
-
-		// religiousAffiliation
-		if ((getReligiousAffiliation() != null) && !getReligiousAffiliation().isEmpty()) {
-			patient.setReligiousAffiliation(getReligiousAffiliation().getText());
-		}
-
-		// nationCode
-		if ((getNation() != null) && !getNation().isEmpty()) {
-			patient.setNation(getNation().getText());
-		}
-
-		// employeeOccupationCode
-		if ((getEmployeeOccupation() != null) && !getEmployeeOccupation().isEmpty()) {
-			patient.setEmployeeOccupation(getEmployeeOccupation().getText());
-		}
-
-		return patient;
+		return null;
 	}
 
 	public Telecom createTelecom(String value, ContactPointSystem system, ContactPointUse usage) {
@@ -839,7 +1024,7 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 		for (final ContactComponent contact : getContact()) {
 			for (final CodeableConcept CodeableConcept : contact.getRelationship()) {
 				for (final Coding Coding : CodeableConcept.getCoding()) {
-					if ("parent".equals(Coding.getCode())
+					if (PARENT_LITERAL.equals(Coding.getCode())
 							&& "female".equalsIgnoreCase(contact.getGender().getDefinition())
 							&& NameUse.MAIDEN.equals(contact.getName().getUseElement().getValue())) {
 						contact.setName(maidenName);
@@ -850,7 +1035,7 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 		}
 		final ContactComponent mother = addContact()
 				.setGender(org.hl7.fhir.r4.model.Enumerations.AdministrativeGender.FEMALE);
-		mother.addRelationship().addCoding().setCode("parent");
+		mother.addRelationship().addCoding().setCode(PARENT_LITERAL);
 		mother.setName(maidenName);
 	}
 

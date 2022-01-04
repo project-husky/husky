@@ -47,7 +47,6 @@ import org.husky.common.hl7cdar2.II;
 import org.husky.common.model.Name;
 import org.husky.common.model.Patient;
 import org.husky.common.model.Telecom;
-import org.husky.common.utils.DateUtil;
 import org.husky.fhir.structures.testhelper.TestPatient;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -64,7 +63,7 @@ import ca.uhn.fhir.validation.ValidationResult;
  *
  * @see org.org.husky.fhir.structures.gen.FhirPatient
  */
-public class FhirPatientTest {
+class FhirPatientTest {
 
 	private final FhirContext ctx = new FhirContext(FhirVersionEnum.R4);
 	/** The SLF4J logger instance. */
@@ -113,7 +112,7 @@ public class FhirPatientTest {
 	}
 
 	@Test
-	public void testConveniencePatient() {
+	void testConveniencePatient() {
 
 		// ALPHA ALAN
 		final FhirPatient fhirPatient = new FhirPatient();
@@ -125,7 +124,7 @@ public class FhirPatientTest {
 		identifier.setValue("PIX");
 		identifier.setSystem(FhirCommon.addUrnOid("2.16.840.1.113883.3.72.5.9.1"));
 		fhirPatient.getIdentifier().add(identifier);
-		fhirPatient.setBirthDate(DateUtil.parseDateyyyyMMdd("19380224"));
+		fhirPatient.setBirthDate(new GregorianCalendar(1938, 1, 24).getTime());
 		fhirPatient.getAddress().add(address);
 		fhirPatient.setGender(AdministrativeGender.MALE);
 		fhirPatient.getManagingOrganization().setResource(getScopingOrganization());
@@ -160,7 +159,7 @@ public class FhirPatientTest {
 	}
 
 	@Test
-	public void testConveniencePatientBirthPlace() {
+	void testConveniencePatientBirthPlace() {
 		final FhirPatient fhirPatient = new FhirPatient();
 
 		final Address Address = new Address();
@@ -187,7 +186,7 @@ public class FhirPatientTest {
 	}
 
 	@Test
-	public void testConveniencePatientDeceasedDateTime() {
+	void testConveniencePatientDeceasedDateTime() {
 		final FhirPatient fhirPatient = new FhirPatient();
 		final Date dtNow = new Date();
 		final DateTimeType DateTime = new DateTimeType(dtNow);
@@ -202,7 +201,7 @@ public class FhirPatientTest {
 	}
 
 	@Test
-	public void testConveniencePatientDeceasedIndicator() {
+	void testConveniencePatientDeceasedIndicator() {
 		final FhirPatient fhirPatient = new FhirPatient();
 		final BooleanType Boolean = new BooleanType();
 		Boolean.setValue(true);
@@ -216,7 +215,7 @@ public class FhirPatientTest {
 	}
 
 	@Test
-	public void testConveniencePatientEmployeeOccupationCode() {
+	void testConveniencePatientEmployeeOccupationCode() {
 		final FhirPatient fhirPatient = new FhirPatient();
 		final CodeableConcept employeeOccupationCode = new CodeableConcept();
 		employeeOccupationCode.setText("employeeOccupationCode");
@@ -230,7 +229,7 @@ public class FhirPatientTest {
 	}
 
 	@Test
-	public void testConveniencePatientLanguage() {
+	void testConveniencePatientLanguage() {
 		final FhirPatient fhirPatient = new FhirPatient();
 		final CodeableConcept deCH = new CodeableConcept();
 		deCH.setText("de-CH");
@@ -253,7 +252,7 @@ public class FhirPatientTest {
 	}
 
 	@Test
-	public void testConveniencePatientMaritalStatus() {
+	void testConveniencePatientMaritalStatus() {
 		final FhirPatient fhirPatient = new FhirPatient();
 		final CodeableConcept maritalStatus = new CodeableConcept();
 		maritalStatus.addCoding(
@@ -268,7 +267,7 @@ public class FhirPatientTest {
 	}
 
 	@Test
-	public void testConveniencePatientMothersName() {
+	void testConveniencePatientMothersName() {
 		final FhirPatient fhirPatient = new FhirPatient();
 
 		assertTrue(fhirPatient.getMothersMaidenName().isEmpty());
@@ -287,7 +286,7 @@ public class FhirPatientTest {
 	}
 
 	@Test
-	public void testConveniencePatientMultipleBirthIndicator() {
+	void testConveniencePatientMultipleBirthIndicator() {
 		final FhirPatient fhirPatient = new FhirPatient();
 		final BooleanType Boolean = new BooleanType();
 		Boolean.setValue(true);
@@ -301,7 +300,7 @@ public class FhirPatientTest {
 	}
 
 	@Test
-	public void testConveniencePatientMultipleBirthOrder() {
+	void testConveniencePatientMultipleBirthOrder() {
 		final FhirPatient fhirPatient = new FhirPatient();
 		final IntegerType Integer = new IntegerType(2);
 		fhirPatient.setMultipleBirth(Integer);
@@ -314,7 +313,7 @@ public class FhirPatientTest {
 	}
 
 	@Test
-	public void testConveniencePatientNation() {
+	void testConveniencePatientNation() {
 		final FhirPatient fhirPatient = new FhirPatient();
 		final CodeableConcept nation = new CodeableConcept();
 		nation.setText(CountryCode.SWITZERLAND.getCodeAlpha3());
@@ -330,7 +329,7 @@ public class FhirPatientTest {
 	}
 
 	@Test
-	public void testConveniencePatientOrganization() {
+	void testConveniencePatientOrganization() {
 		final FhirPatient fhirPatient = new FhirPatient();
 		fhirPatient.getManagingOrganization()
 				.setResource(getScopingOrganization("1234", "Test", "+417600000000"));
@@ -360,7 +359,7 @@ public class FhirPatientTest {
 	}
 
 	@Test
-	public void testConveniencePatientReligiousAffiliation() {
+	void testConveniencePatientReligiousAffiliation() {
 		final FhirPatient fhirPatient = new FhirPatient();
 		final CodeableConcept religion = new CodeableConcept();
 		religion.setText("1077");
@@ -376,7 +375,7 @@ public class FhirPatientTest {
 	}
 
 	@Test
-	public void testConveniencePatientTelecom() {
+	void testConveniencePatientTelecom() {
 
 		final FhirPatient fhirPatient = new FhirPatient();
 
@@ -453,7 +452,7 @@ public class FhirPatientTest {
 	}
 
 	@Test
-	public void testFhirPatientAddress() {
+	void testFhirPatientAddress() {
 		final Name name = new Name();
 		name.setGiven("given");
 		name.setFamily("family");
@@ -486,7 +485,7 @@ public class FhirPatientTest {
 	}
 
 	@Test
-	public void testFhirPatientLastGivenGenderBirthDayGenderFemale() {
+	void testFhirPatientLastGivenGenderBirthDayGenderFemale() {
 		final TestPatient patientMueller = TestPatient.getTestPatientMuellerPauline();
 		final Patient conveniencePatient = getPatient(patientMueller);
 		final FhirPatient fhirPatient = new FhirPatient(conveniencePatient);
@@ -498,7 +497,7 @@ public class FhirPatientTest {
 	}
 
 	@Test
-	public void testFhirPatientLastGivenGenderBirthDayGenderMale() {
+	void testFhirPatientLastGivenGenderBirthDayGenderMale() {
 		final TestPatient patientMueller = TestPatient.getTestPatientMueller();
 		final Patient conveniencePatient = getPatient(patientMueller);
 		final FhirPatient fhirPatient = new FhirPatient(conveniencePatient);
@@ -510,7 +509,7 @@ public class FhirPatientTest {
 	}
 
 	@Test
-	public void testFhirPatientMiddleName() {
+	void testFhirPatientMiddleName() {
 		final Name name = new Name();
 		name.setGiven("given middle");
 		name.setFamily("family");
@@ -531,7 +530,7 @@ public class FhirPatientTest {
 	}
 
 	@Test
-	public void testFhirPatientNames() {
+	void testFhirPatientNames() {
 		final Name name = new Name();
 		name.setGiven("given");
 		name.setFamily("family");
@@ -548,7 +547,7 @@ public class FhirPatientTest {
 	}
 
 	@Test
-	public void testFhirSerializeDeserialize() throws ParseException {
+	void testFhirSerializeDeserialize() throws ParseException {
 
 		final FhirPatient fhirPatient = TestPatient.getFhirPatientMueller();
 

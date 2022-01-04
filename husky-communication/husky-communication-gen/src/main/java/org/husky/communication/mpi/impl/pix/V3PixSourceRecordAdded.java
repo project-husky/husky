@@ -10,13 +10,11 @@
  */
 package org.husky.communication.mpi.impl.pix;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.husky.communication.mpi.V3Message;
 import org.husky.communication.utils.PixPdqV3Utils;
 
 import net.ihe.gazelle.hl7v3.coctmt030007UV.COCTMT030007UVPerson;
+import net.ihe.gazelle.hl7v3.datatypes.AD;
 import net.ihe.gazelle.hl7v3.prpain201301UV02.PRPAIN201301UV02MFMIMT700701UV01ControlActProcess;
 import net.ihe.gazelle.hl7v3.prpain201301UV02.PRPAIN201301UV02MFMIMT700701UV01RegistrationEvent;
 import net.ihe.gazelle.hl7v3.prpain201301UV02.PRPAIN201301UV02MFMIMT700701UV01Subject1;
@@ -168,35 +166,9 @@ public class V3PixSourceRecordAdded extends V3Message {
 	 * @param addressOtherDesignation
 	 * @param addressType
 	 */
-	public void addPatientAddress(List<String> addressStreetAddress, String addressCity,
-			String addressCounty, String addressState, String addressCountry, String addressZip,
-			String addressOtherDesignation, String addressType) {
-		final var patientAddress = PixPdqV3Utils.createAd(addressStreetAddress, addressCity,
-				addressCounty, addressState, addressCountry, addressZip, addressOtherDesignation,
-				addressType);
+	public void addPatientAddress(AD patientAddress) {
 		if (null != patientAddress)
 			patientPerson.getAddr().add(patientAddress);
-	}
-
-	/**
-	 * Add an address for the patient.
-	 *
-	 * @param addressStreetAddress
-	 * @param addressCity
-	 * @param addressCounty
-	 * @param addressState
-	 * @param addressCountry
-	 * @param addressZip
-	 * @param addressOtherDesignation
-	 * @param addressType
-	 */
-	public void addPatientAddress(String addressStreetAddress, String addressCity,
-			String addressCounty, String addressState, String addressCountry, String addressZip,
-			String addressOtherDesignation, String addressType) {
-		List<String> addressLines = new ArrayList<>();
-		addressLines.add(addressStreetAddress);
-		addPatientAddress(addressLines, addressCity, addressCounty, addressState, addressCountry,
-				addressZip, addressOtherDesignation, addressType);
 	}
 
 	/**
@@ -225,7 +197,6 @@ public class V3PixSourceRecordAdded extends V3Message {
 	 * @param namespace
 	 */
 	public void addPatientID(String extension, String root, String namespace) {
-		// patientId = root + "^" + extension;
 		final var idString = new StringBuilder();
 		idString.append(extension) //
 				.append("^^^");
@@ -235,8 +206,7 @@ public class V3PixSourceRecordAdded extends V3Message {
 		idString.append("&") //
 				.append(root) //
 				.append("&ISO");
-		patientId = idString.toString();// extension + "^^^" + namespace + "&" +
-										// root + "&ISO";
+		patientId = idString.toString();
 		subjectPatient.getId().add(PixPdqV3Utils.createII(root, extension, namespace));
 	}
 

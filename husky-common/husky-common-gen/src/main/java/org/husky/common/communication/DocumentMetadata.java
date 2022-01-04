@@ -294,102 +294,259 @@ public class DocumentMetadata {
 		if (!(obj instanceof DocumentMetadata)) {
 			return false; // different class
 		}
-		final DocumentMetadata other = (DocumentMetadata) obj;
-		if ((this.xDoc == other.xDoc) && (this.cda == other.cda)
-				&& (this.language == other.language)) {
-			return true;
+
+		return equals((DocumentMetadata) obj);
+	}
+
+	public boolean equals(DocumentMetadata other) {
+		var retVal = true;
+
+		retVal = compareAuthors(other.getAuthors());
+
+		if (retVal) {
+			retVal = compareReferences(other);
 		}
-		if (this.getAuthors() == null) {
-			if (other.getAuthors() != null)
-				return false;
-		} else if (this.getAuthors().size() != other.getAuthors().size())
-			return false;
 
-		if (this.getPatientId() == null) {
-			if (other.getPatientId() != null)
-				return false;
-		} else if (!this.getPatientId().equals(other.getPatientId()))
-			return false;
+		if (retVal) {
+			retVal = compareLanguange(other.language);
+		}
 
-		if (this.getSourcePatientId() == null) {
-			if (other.getSourcePatientId() != null)
-				return false;
-		} else if (!this.getSourcePatientId().equals(other.getSourcePatientId()))
-			return false;
+		if (retVal) {
+			retVal = comparePatientId(other.getPatientId());
+		}
 
-		if (this.getClassCode() == null) {
-			if (other.getClassCode() != null)
-				return false;
-		} else if (!this.getClassCode().equals(other.getClassCode()))
-			return false;
+		if (retVal) {
+			retVal = compareSourcePatientId(other.getSourcePatientId());
+		}
 
-		if (this.getConfidentialityCodes() == null) {
-			if (other.getConfidentialityCodes() != null)
-				return false;
-		} else if (!this.getConfidentialityCodes().equals(other.getConfidentialityCodes()))
-			return false;
+		if (retVal) {
+			retVal = compareClassCode(other.getClassCode());
+		}
 
-		if (this.getCodedLanguage() == null) {
-			if (other.getCodedLanguage() != null)
-				return false;
-		} else if (!this.getCodedLanguage().equals(other.getCodedLanguage()))
-			return false;
+		if (retVal) {
+			retVal = compareConfidentialityCode(other.getConfidentialityCodes());
+		}
 
-		if (this.getCreationTime() == null) {
-			if (other.getCreationTime() != null)
-				return false;
-		} else if (!this.getCreationTime().equals(other.getCreationTime()))
-			return false;
+		if (retVal) {
+			retVal = compareCodedLanguage(other.getCodedLanguage());
+		}
 
-		if (this.getFormatCode() == null) {
-			if (other.getFormatCode() != null)
-				return false;
-		} else if (!this.getFormatCode().equals(other.getFormatCode()))
-			return false;
+		if (retVal) {
+			retVal = compareCreationTime(other.getCreationTime());
+		}
 
-		if (this.getDocSourceActorOrganizationId() == null) {
-			if (other.getDocSourceActorOrganizationId() != null)
-				return false;
-		} else if (!this.getDocSourceActorOrganizationId()
-				.equals(other.getDocSourceActorOrganizationId()))
-			return false;
+		if (retVal) {
+			retVal = compareFormatCode(other.getFormatCode());
+		}
 
-		if (this.getHealthcareFacilityTypeCode() == null) {
-			if (other.getHealthcareFacilityTypeCode() != null)
-				return false;
-		} else if (!this.getHealthcareFacilityTypeCode()
-				.equals(other.getHealthcareFacilityTypeCode()))
-			return false;
+		if (retVal) {
+			retVal = compareDocSourceActorOrganizationId(other.getDocSourceActorOrganizationId());
+		}
 
-		if (this.getMimeType() == null) {
-			if (other.getMimeType() != null)
-				return false;
-		} else if (!this.getMimeType().equals(other.getMimeType()))
-			return false;
+		if (retVal) {
+			retVal = compareHealthcareFacilityTypeCode(other.getHealthcareFacilityTypeCode());
+		}
 
-		if (this.getPracticeSettingCode() == null) {
-			if (other.getPracticeSettingCode() != null)
-				return false;
-		} else if (!this.getPracticeSettingCode().equals(other.getPracticeSettingCode()))
-			return false;
+		if (retVal) {
+			retVal = compareMimeType(other.getMimeType());
+		}
 
-		if (this.getTitle() == null) {
-			if (other.getTitle() != null)
-				return false;
-		} else if (!this.getTitle().equals(other.getTitle()))
-			return false;
+		if (retVal) {
+			retVal = comparePracticeSettingCode(other.getPracticeSettingCode());
+		}
 
-		if (this.getTypeCode() == null) {
-			if (other.getTypeCode() != null)
-				return false;
-		} else if (!this.getTypeCode().equals(other.getTypeCode()))
-			return false;
+		if (retVal) {
+			retVal = compareTitle(other.getTitle());
+		}
 
+		if (retVal) {
+			retVal = compareTypeCode(other.getTypeCode());
+		}
+
+		if (retVal) {
+			retVal = compareUniqueId(other.getUniqueId());
+		}
+
+		return retVal;
+	}
+
+	private boolean compareReferences(DocumentMetadata other) {
+		return (this.xDoc == other.xDoc) && (this.cda == other.cda);
+	}
+
+	private boolean compareLanguange(String other) {
+		if (this.language == null) {
+			if (other != null)
+				return false;
+		} else if (!this.language.equals(other)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean compareUniqueId(String other) {
 		if (this.getUniqueId() == null) {
-			if (other.getUniqueId() != null)
+			if (other != null)
 				return false;
-		} else if (!this.getUniqueId().equals(other.getUniqueId()))
+		} else if (!this.getUniqueId().equals(other)) {
 			return false;
+		}
+
+		return true;
+	}
+
+	private boolean compareTypeCode(Code other) {
+		if (this.getTypeCode() == null) {
+			if (other != null)
+				return false;
+		} else if (!this.getTypeCode().equals(other)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean compareTitle(String other) {
+		if (this.getTitle() == null) {
+			if (other != null)
+				return false;
+		} else if (!this.getTitle().equals(other)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean comparePracticeSettingCode(Code other) {
+		if (this.getPracticeSettingCode() == null) {
+			if (other != null)
+				return false;
+		} else if (!this.getPracticeSettingCode().equals(other)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean compareMimeType(String other) {
+		if (this.getMimeType() == null) {
+			if (other != null)
+				return false;
+		} else if (!this.getMimeType().equals(other)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean compareHealthcareFacilityTypeCode(Code other) {
+		if (this.getHealthcareFacilityTypeCode() == null) {
+			if (other != null)
+				return false;
+		} else if (!this.getHealthcareFacilityTypeCode().equals(other)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean compareDocSourceActorOrganizationId(String other) {
+		if (this.getDocSourceActorOrganizationId() == null) {
+			if (other != null)
+				return false;
+		} else if (!this.getDocSourceActorOrganizationId().equals(other)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean compareFormatCode(Code other) {
+		if (this.getFormatCode() == null) {
+			if (other != null)
+				return false;
+		} else if (!this.getFormatCode().equals(other)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean compareCreationTime(ZonedDateTime other) {
+		if (this.getCreationTime() == null) {
+			if (other != null)
+				return false;
+		} else if (!this.getCreationTime().equals(other)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean compareCodedLanguage(String other) {
+		if (this.getCodedLanguage() == null) {
+			if (other != null)
+				return false;
+		} else if (!this.getCodedLanguage().equals(other)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean compareConfidentialityCode(List<Code> other) {
+		if (this.getConfidentialityCodes() == null) {
+			if (other != null)
+				return false;
+		} else if (!this.getConfidentialityCodes().equals(other)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean compareClassCode(Code other) {
+		if (this.getClassCode() == null) {
+			if (other != null)
+				return false;
+		} else if (!this.getClassCode().equals(other)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean compareSourcePatientId(Identificator other) {
+		if (this.getSourcePatientId() == null) {
+			if (other != null)
+				return false;
+		} else if (!this.getSourcePatientId().equals(other)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean comparePatientId(Identificator other) {
+		if (this.getPatientId() == null) {
+			if (other != null)
+				return false;
+		} else if (!this.getPatientId().equals(other)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean compareAuthors(List<Author> authors) {
+		if (this.getAuthors() == null) {
+			if (authors != null)
+				return false;
+		} else if (this.getAuthors().size() != authors.size()) {
+			return false;
+		}
+
 		return true;
 	}
 

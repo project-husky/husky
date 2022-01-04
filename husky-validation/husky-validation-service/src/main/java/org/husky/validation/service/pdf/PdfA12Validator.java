@@ -1,6 +1,13 @@
 package org.husky.validation.service.pdf;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Objects;
+
+import javax.annotation.concurrent.NotThreadSafe;
+
 import org.verapdf.core.EncryptedPdfException;
 import org.verapdf.core.ModelParsingException;
 import org.verapdf.core.ValidationException;
@@ -8,13 +15,6 @@ import org.verapdf.pdfa.Foundries;
 import org.verapdf.pdfa.VeraGreenfieldFoundryProvider;
 import org.verapdf.pdfa.flavours.PDFAFlavour;
 import org.verapdf.pdfa.results.ValidationResult;
-
-import javax.annotation.concurrent.NotThreadSafe;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Objects;
 
 /**
  * Validator of PDF to conformance level A-1 and A-2.

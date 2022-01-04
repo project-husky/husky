@@ -240,37 +240,41 @@ public class PixPdqV3QueryBase extends CamelService {
 	protected void addPatientAddresses(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
 		if (!patient.getAddress().isEmpty()) {
 			for (final Address address : patient.getAddress()) {
-
-				List<String> addressLines = new ArrayList<>();
-				for (StringType addressLine : address.getLine()) {
-					addressLines.add(addressLine.getValueAsString());
-				}
-
-				String adressOtherDesignation = null;
-
-				String addressType = null;
-				if ((address.getUseElement() != null) && (address.getUseElement().getValue() != null)) {
-					switch (address.getUseElement().getValue()) {
-					case HOME:
-						addressType = "H";
-						break;
-					case WORK:
-						addressType = "WP";
-						break;
-					case TEMP:
-						addressType = "TMP";
-						break;
-					case OLD:
-						addressType = "OLD";
-						break;
-					default:
-						break;
-					}
-				}
-				v3PixSourceMessage.addPatientAddress(addressLines, address.getCity(), null, address.getState(),
-						address.getCountry(), address.getPostalCode(), adressOtherDesignation, addressType);
+				v3PixSourceMessage.addPatientAddress(getPatientAddress(address));
 			}
 		}
+	}
+
+	protected net.ihe.gazelle.hl7v3.datatypes.AD getPatientAddress(Address address) {
+		List<String> addressLines = new ArrayList<>();
+		for (StringType addressLine : address.getLine()) {
+			addressLines.add(addressLine.getValueAsString());
+		}
+
+		String adressOtherDesignation = null;
+
+		String addressType = null;
+		if ((address.getUseElement() != null) && (address.getUseElement().getValue() != null)) {
+			switch (address.getUseElement().getValue()) {
+			case HOME:
+				addressType = "H";
+				break;
+			case WORK:
+				addressType = "WP";
+				break;
+			case TEMP:
+				addressType = "TMP";
+				break;
+			case OLD:
+				addressType = "OLD";
+				break;
+			default:
+				break;
+			}
+		}
+
+		return PixPdqV3Utils.createAd(addressLines, address.getCity(), null, address.getState(), address.getCountry(),
+				address.getPostalCode(), adressOtherDesignation, addressType);
 	}
 
 	/**
@@ -414,35 +418,37 @@ public class PixPdqV3QueryBase extends CamelService {
 				// system I 0..1 code phone | fax | email | url
 				// use M 0..1 code home | work | temp | old | mobile - purpose
 				// of this contact point
-				var telecomValue = "";
-				var useValue = "";
-
-				var system = "";
-				var use = "";
-				var value = "NULL";
-
-				if (contactPoint.getSystem() != null)
-					system = contactPoint.getSystem().toString().toLowerCase();
-				if (contactPoint.getUse() != null)
-					use = contactPoint.getUse().toString().toLowerCase();
-				if (contactPoint.getValue() != null)
-					value = contactPoint.getValue();
-
-				if ("phone".equals(system)) {
-					telecomValue = "tel:" + value;
-					useValue = getTelecomAddressUse(use);
-				}
-				if ("email".equals(system)) {
-					telecomValue = "mailto:" + value;
-					useValue = getTelecomAddressUse(use);
-				}
-
-				v3PixSourceMessage.addPatientTelecom(telecomValue, useValue);
+				v3PixSourceMessage.addPatientTelecom(getTelecomValue(contactPoint), getTelecomAddressUse(contactPoint));
 			}
 		}
 	}
 
-	private String getTelecomAddressUse(String use) {
+	private String getTelecomValue(ContactPoint contactPoint) {
+		var system = "";
+		var value = "NULL";
+
+		if (contactPoint.getSystem() != null)
+			system = contactPoint.getSystem().toString().toLowerCase();
+
+		if (contactPoint.getValue() != null)
+			value = contactPoint.getValue();
+
+		if ("phone".equals(system)) {
+			return "tel:" + value;
+		}
+		if ("email".equals(system)) {
+			return "mailto:" + value;
+		}
+
+		return value;
+	}
+
+	private String getTelecomAddressUse(ContactPoint contactPoint) {
+		var use = "";
+
+		if (contactPoint.getUse() != null)
+			use = contactPoint.getUse().toString().toLowerCase();
+
 		if ("home".equals(use)) {
 			return TelecomAddressUse.PRIVATE.getCodeValue();
 		}
@@ -901,24 +907,28 @@ public class PixPdqV3QueryBase extends CamelService {
 					.getPersonalRelationship()) {
 				if ((personalRelationship.getCode() != null) && "MTH".equals(personalRelationship.getCode().getCode())
 						&& "2.16.840.1.113883.5.111".equals(personalRelationship.getCode().getCodeSystem())) {
-					final COCTMT030007UVPerson motherRelationShipHolder = personalRelationship.getRelationshipHolder1();
-					if ((motherRelationShipHolder != null) && (motherRelationShipHolder.getName() != null)) {
-						final List<EN> names = motherRelationShipHolder.getName();
-						if ((names != null) && (!names.isEmpty())) {
-							// ITI 2b Rev. 11.0 Final Text – 2014-09-23
-							// MothersMaidenName Parameter (approx 6645)
-							// This optional parameter specifies the maiden name
-							// of the mother of the person whose
-							// information is being queried. For this parameter
-							// item, a single person name (PN) data item shall
-							// be specified in the Person.value attribute.
-							final EN pn = names.get(0);
-							patient.setMothersMaidenName(createHumanName(pn));
-						}
-					}
+					patient.setMothersMaidenName(getMothersMaidenName(personalRelationship));
 				}
 			}
 		}
+	}
+
+	private HumanName getMothersMaidenName(PRPAMT201310UV02PersonalRelationship personalRelationship) {
+		final COCTMT030007UVPerson motherRelationShipHolder = personalRelationship.getRelationshipHolder1();
+		if ((motherRelationShipHolder != null) && (motherRelationShipHolder.getName() != null)) {
+			final List<EN> names = motherRelationShipHolder.getName();
+			if ((names != null) && (!names.isEmpty())) {
+				// ITI 2b Rev. 11.0 Final Text – 2014-09-23
+				// MothersMaidenName Parameter (approx 6645)
+				// This optional parameter specifies the maiden name
+				// of the mother of the person whose
+				// information is being queried. For this parameter
+				// item, a single person name (PN) data item shall
+				// be specified in the Person.value attribute.
+				return createHumanName(names.get(0));
+			}
+		}
+		return null;
 	}
 
 	/**

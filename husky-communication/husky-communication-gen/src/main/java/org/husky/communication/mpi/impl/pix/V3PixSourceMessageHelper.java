@@ -10,8 +10,6 @@
  */
 package org.husky.communication.mpi.impl.pix;
 
-import java.util.List;
-
 import org.husky.communication.utils.PixPdqV3Utils;
 
 import net.ihe.gazelle.hl7v3.coctmt710007UV.COCTMT710007UVPlace;
@@ -203,22 +201,15 @@ public class V3PixSourceMessageHelper {
 	 * @param addressType
 	 *            address type
 	 */
-	public void addPatientAddress(List<String> addressStreetAddress, String addressCity,
-			String addressCounty, String addressState, String addressCountry, String addressZip,
-			String addressOtherDesignation, String addressType) {
+	public void addPatientAddress(AD address) {
 		if (v3RecordAddedMessage != null) {
-			v3RecordAddedMessage.addPatientAddress(addressStreetAddress, addressCity, addressCounty,
-					addressState, addressCountry, addressZip, addressOtherDesignation, addressType);
+			v3RecordAddedMessage.addPatientAddress(address);
 		}
 		if (v3RecordRevisedMessage != null) {
-			v3RecordRevisedMessage.addPatientAddress(addressStreetAddress, addressCity,
-					addressCounty, addressState, addressCountry, addressZip,
-					addressOtherDesignation, addressType);
+			v3RecordRevisedMessage.addPatientAddress(address);
 		}
 		if (v3MergePatientsMessage != null) {
-			v3MergePatientsMessage.addPatientAddress(addressStreetAddress, addressCity,
-					addressCounty, addressState, addressCountry, addressZip,
-					addressOtherDesignation, addressType);
+			v3MergePatientsMessage.addPatientAddress(address);
 		}
 	}
 

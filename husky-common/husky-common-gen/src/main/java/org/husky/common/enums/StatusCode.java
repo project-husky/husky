@@ -172,8 +172,7 @@ public enum StatusCode {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		final Code ehcCode = new Code(code, CODE_SYSTEM_OID, displayName);
-		return ehcCode;
+		return new Code(code, CODE_SYSTEM_OID, displayName);
 	}
 
 	/**

@@ -586,22 +586,10 @@ public class XdmContents {
 					if (!results.containsKey(subsetDirspec)) {
 
 						// extract METADATA.XML
-						final var metadataEntry = getXDMZipEntry(zipFile, subsetDirspec, XDM_METADATA, false);
-						if (metadataEntry == null) {
-							log.warn("XDM submission set folder '{}' has no metadata file: {}", subsetDirspec,
-									XDM_METADATA);
-						} else {
-							SubmitObjectsRequest request = null;
-							try (var in = zipFile.getInputStream(metadataEntry)) {
-								final var unmarshaller = JAXBContext.newInstance(SubmitObjectsRequest.class)
-										.createUnmarshaller();
+						var metadata = extractMetadata(subsetDirspec);
 
-								request = (SubmitObjectsRequest) unmarshaller.unmarshal(in);
-							}
-
-							if (request != null) {
-								results.put(subsetDirspec, getProvideAndRegisterDocumentSet(request, subsetDirspec));
-							}
+						if (metadata != null) {
+							results.put(subsetDirspec, metadata);
 						}
 					}
 				}
@@ -618,6 +606,35 @@ public class XdmContents {
 
 		this.txnData = results.values().stream().toList();
 		documentsIntegrityCheck();
+	}
+
+	/**
+	 * extracts metadata XML from ZIP entry
+	 * 
+	 * @param subsetDirspec path to zip entry
+	 * 
+	 * @return extracted metadata as ProvideAndRegisterDocumentSet
+	 * @throws IOException
+	 * @throws JAXBException
+	 */
+	private ProvideAndRegisterDocumentSet extractMetadata(String subsetDirspec) throws IOException, JAXBException {
+		final var metadataEntry = getXDMZipEntry(zipFile, subsetDirspec, XDM_METADATA, false);
+		if (metadataEntry == null) {
+			log.warn("XDM submission set folder '{}' has no metadata file: {}", subsetDirspec, XDM_METADATA);
+		} else {
+			SubmitObjectsRequest request = null;
+			try (var in = zipFile.getInputStream(metadataEntry)) {
+				final var unmarshaller = JAXBContext.newInstance(SubmitObjectsRequest.class).createUnmarshaller();
+
+				request = (SubmitObjectsRequest) unmarshaller.unmarshal(in);
+			}
+
+			if (request != null) {
+				return getProvideAndRegisterDocumentSet(request, subsetDirspec);
+			}
+		}
+
+		return null;
 	}
 
 	private void loadDescriptiveFilesFromZipFile() {

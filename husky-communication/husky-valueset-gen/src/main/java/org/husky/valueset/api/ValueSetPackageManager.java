@@ -156,7 +156,10 @@ public class ValueSetPackageManager {
 		ValueSetPackageConfig retVal = null;
 		// download a package config
 		var downloadedString = IOUtils.toString(sourceUrl, StandardCharsets.UTF_8);
-		retVal = loadValueSetPackageConfig(IOUtils.toInputStream(downloadedString));
+		try (InputStream is = IOUtils.toInputStream(downloadedString, StandardCharsets.UTF_8)) {
+			retVal = loadValueSetPackageConfig(is);
+		}
+
 		return retVal;
 	}
 

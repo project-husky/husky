@@ -27,7 +27,6 @@ import org.husky.common.communication.SubmissionSetMetadata;
 import org.husky.common.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
 import org.husky.common.enums.DocumentDescriptor;
 import org.husky.common.model.Identificator;
-import org.husky.common.utils.Util;
 import org.husky.communication.ConvenienceCommunication;
 import org.husky.communication.ch.enums.AvailabilityStatus;
 import org.husky.communication.ch.xd.storedquery.FindDocumentsQuery;
@@ -123,10 +122,12 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 				log.error(e.getMessage(), e);
 			}
 		var doc = new Document();
+		var doc4Metadata = new Document();
+		InputStream unicodeStream = null;
 		try {
-			var doc4Metadata = new Document();
+
 			if (inputStream4Metadata != null) {
-				InputStream unicodeStream = Util.convertNonAsciiText2Unicode(inputStream4Metadata);
+				unicodeStream = convertNonAsciiText2Unicode(inputStream4Metadata);
 				var dataSource = new ByteArrayDataSource(unicodeStream, desc.getMimeType());
 				doc4Metadata.setDataHandler(new DataHandler(dataSource));
 			}
@@ -135,7 +136,16 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 			retVal = new DocumentMetadataCh(addXdsDocument(doc, desc, doc4Metadata));
 		} catch (final IOException e) {
 			log.error(e.getMessage(), e);
+		} finally {
+			if (unicodeStream != null) {
+				try {
+					unicodeStream.close();
+				} catch (IOException e) {
+					log.error(e.getMessage(), e);
+				}
+			}
 		}
+
 		if (retVal != null)
 			retVal.setDocumentDescriptor(desc);
 		return retVal;

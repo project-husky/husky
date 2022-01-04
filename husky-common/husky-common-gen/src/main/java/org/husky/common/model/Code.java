@@ -220,7 +220,6 @@ public class Code extends CodeBaseType {
     }
 
 	private static void createCode(CD retVal, CodeBaseType baseType) {
-		String value;
 
 		var nf = baseType.getNullFlavor();
 		if (nf != null) {
@@ -228,42 +227,39 @@ public class Code extends CodeBaseType {
 				retVal.nullFlavor = new ArrayList<String>();
 			retVal.nullFlavor.add(nf.getCodeValue());
 		} else {
-
-			value = baseType.getCode();
-			if (value != null) {
-				retVal.setCode(value);
-			}
-
-			value = baseType.getCodeSystem();
-			if (value != null) {
-				retVal.setCodeSystem(value);
-			}
-
-			value = baseType.getCodeSystemName();
-			if (value != null) {
-				retVal.setCodeSystemName(value);
-			}
-
-			value = baseType.getCodeSystemVersion();
-			if (value != null) {
-				retVal.setCodeSystemVersion(value);
-			}
-
-			value = baseType.getDisplayName();
-			if (value != null) {
-				retVal.setDisplayName(value);
-			}
-
-			value = baseType.getOriginalText();
-			if (value != null) {
-				ED ed = new ED();
-				ed.setXmlMixed(List.of(value));
-				retVal.setOriginalText(ed);
-			}
+			setCodeValues(retVal, baseType);
 		}
 
 		for (CodeBaseType item : baseType.getCodeTranslationList()) {
 			retVal.getTranslation().add(createHl7CdaR2Cd(item));
+		}
+	}
+
+	private static void setCodeValues(CD retVal, CodeBaseType baseType) {
+		if (baseType.getCode() != null) {
+			retVal.setCode(baseType.getCode());
+		}
+
+		if (baseType.getCodeSystem() != null) {
+			retVal.setCodeSystem(baseType.getCodeSystem());
+		}
+
+		if (baseType.getCodeSystemName() != null) {
+			retVal.setCodeSystemName(baseType.getCodeSystemName());
+		}
+
+		if (baseType.getCodeSystemVersion() != null) {
+			retVal.setCodeSystemVersion(baseType.getCodeSystemVersion());
+		}
+
+		if (baseType.getDisplayName() != null) {
+			retVal.setDisplayName(baseType.getDisplayName());
+		}
+
+		if (baseType.getOriginalText() != null) {
+			ED ed = new ED();
+			ed.setXmlMixed(List.of(baseType.getOriginalText()));
+			retVal.setOriginalText(ed);
 		}
 	}
 

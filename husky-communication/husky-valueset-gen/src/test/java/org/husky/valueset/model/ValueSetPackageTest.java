@@ -15,31 +15,27 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.husky.common.basetypes.CodeBaseType;
 import org.husky.common.basetypes.IdentificatorBaseType;
 import org.husky.common.enums.LanguageCode;
-import org.husky.common.utils.DateUtil;
 import org.husky.common.utils.LangText;
 import org.husky.valueset.enums.ValueSetEntryType;
 import org.husky.valueset.enums.ValueSetPackageStatus;
 import org.husky.valueset.enums.ValueSetStatus;
-import org.husky.valueset.model.ValueSet;
-import org.husky.valueset.model.ValueSetEntry;
-import org.husky.valueset.model.ValueSetPackage;
-import org.husky.valueset.model.Version;
 import org.junit.jupiter.api.Test;
 
 /**
  * The Test Class for ValueSetPackage.
  */
-public class ValueSetPackageTest {
+class ValueSetPackageTest {
 
 	/**
 	 * Do all tests.
 	 */
 	@Test
-	public void doAllTests() {
+	void doAllTests() {
 
 		// Basic ValueSetPackage elements tests
 		String description = "description";
@@ -48,7 +44,7 @@ public class ValueSetPackageTest {
 		String sourceUrl = "http://foo.bar";
 		ValueSetPackageStatus status = ValueSetPackageStatus.ACTIVE;
 		Version version = Version.builder().withLabel("1.0")
-				.withValidFrom(DateUtil.parseDateyyyyMMddHHmmss("20190603000000")).build();
+				.withValidFrom(new GregorianCalendar(2019, 5, 3).getTime()).build();
 
 		ValueSetPackage valueSetPackage1 = ValueSetPackage.builder().withDescription(description)
 				.withIdentificator(identificator).withSourceUrl(sourceUrl).withStatus(status)
@@ -69,26 +65,26 @@ public class ValueSetPackageTest {
 		// ValueSet tests
 		String vsdescription1 = "vsdescription1";
 		String vsdisplayName1 = "vsdisplayName1";
-		Date vseffectiveDate1 = DateUtil.parseDateyyyyMMdd("20190606");
+		Date vseffectiveDate1 = new GregorianCalendar(2019, 5, 6).getTime();
 		IdentificatorBaseType vsidentificator1 = IdentificatorBaseType.builder().withRoot("2.999")
 				.withExtension("1").build();
 		String vsname1 = "myValueSetName1";
 		ValueSetStatus vsstatus1 = ValueSetStatus.FINAL;
 		Version vsversion1 = Version.builder().withLabel("1.0")
-				.withValidFrom(DateUtil.parseDateyyyyMMddHHmmss("20190603000000")).build();
+				.withValidFrom(new GregorianCalendar(2019, 5, 3).getTime()).build();
 		String mappingNameVs1 = "mappingNameVs1";
 		IdentificatorBaseType mappingIdVs1 = IdentificatorBaseType.builder().withRoot("2.999.9991")
 				.withExtension("myValueSet1").build();
 
 		String vsdescription2 = "vsdescription2";
 		String vsdisplayName2 = "vsdisplayName2";
-		Date vseffectiveDate2 = DateUtil.parseDateyyyyMMdd("20190605");
+		Date vseffectiveDate2 = new GregorianCalendar(2019, 5, 5).getTime();
 		IdentificatorBaseType vsidentificator2 = IdentificatorBaseType.builder().withRoot("2.999")
 				.withExtension("2").build();
 		String vsname2 = "myValueSetName2";
 		ValueSetStatus vsstatus2 = ValueSetStatus.DRAFT;
 		Version vsversion2 = Version.builder().withLabel("2.0")
-				.withValidFrom(DateUtil.parseDateyyyyMMddHHmmss("20190603000000")).build();
+				.withValidFrom(new GregorianCalendar(2019, 5, 3).getTime()).build();
 		String mappingNameVs2 = "mappingNameVs2";
 		IdentificatorBaseType mappingIdVs2 = IdentificatorBaseType.builder().withRoot("2.999.9992")
 				.withExtension("myValueSet2").build();
@@ -167,14 +163,13 @@ public class ValueSetPackageTest {
 		assertEquals(mappingName1, valueSetPackage1.getMappingNameList().get(0));
 		assertEquals(1, valueSetPackage1.getMappingNameList().size());
 
-		assertTrue(valueSet1.equals(valueSetPackage1.getValueSetyByMappingName(mappingNameVs1)));
-		assertTrue(valueSet2
-				.equals(valueSetPackage1.getValueSetyByMappingIdentificator(mappingIdVs2)));
+		assertEquals(valueSet1, valueSetPackage1.getValueSetyByMappingName(mappingNameVs1));
+		assertEquals(valueSet2, valueSetPackage1.getValueSetyByMappingIdentificator(mappingIdVs2));
 
 	}
 
 	@Test
-	public void testEqualsAddContainsMappingIdentificator() {
+	void testEqualsAddContainsMappingIdentificator() {
 
 		ValueSetPackage valueSetPackageA = new ValueSetPackage();
 		ValueSetPackage valueSetPackageB = new ValueSetPackage();
@@ -201,7 +196,7 @@ public class ValueSetPackageTest {
 	}
 
 	@Test
-	public void testEqualsAddContainsMappingName() {
+	void testEqualsAddContainsMappingName() {
 
 		ValueSetPackage valueSetPackageA = new ValueSetPackage();
 		ValueSetPackage valueSetPackageB = new ValueSetPackage();
@@ -225,7 +220,7 @@ public class ValueSetPackageTest {
 	}
 
 	@Test
-	public void testEqualsAddContainsValueSet() {
+	void testEqualsAddContainsValueSet() {
 
 		ValueSetPackage valueSetPackageA = new ValueSetPackage();
 		ValueSetPackage valueSetPackageB = new ValueSetPackage();

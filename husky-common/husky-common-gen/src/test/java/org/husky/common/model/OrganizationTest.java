@@ -11,7 +11,6 @@
 package org.husky.common.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.husky.common.basetypes.AddressBaseType;
 import org.husky.common.basetypes.IdentificatorBaseType;
@@ -23,18 +22,17 @@ import org.husky.common.enums.NullFlavor;
 import org.husky.common.enums.PostalAddressUse;
 import org.husky.common.enums.TelecomAddressUse;
 import org.husky.common.hl7cdar2.POCDMT000040Organization;
-import org.husky.common.model.Organization;
 import org.junit.jupiter.api.Test;
 
 /**
  * The test class for Organization.
  */
-public class OrganizationTest {
+class OrganizationTest {
 	/**
 	 * Do all tests.
 	 */
 	@Test
-	public void doAllTests() {
+	void doAllTests() {
 
 		NameBaseType name2;
 
@@ -84,7 +82,7 @@ public class OrganizationTest {
 		POCDMT000040Organization hl7CdaR2Type = organization1.getHl7CdaR2Pocdmt000040Organization();
 		Organization organization2 = new Organization(hl7CdaR2Type);
 
-		assertTrue(organization1.equals(organization2));
+		assertEquals(organization1, organization2);
 
 		// Null Flavor Tests (note, that POCD_MT000040.Organization does not
 		// currently is an extension of ANY (see POCD_MT000040.xsd) and

@@ -11,21 +11,19 @@
 package org.husky.common.basetypes;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.husky.common.basetypes.TelecomBaseType;
 import org.husky.common.enums.TelecomAddressUse;
 import org.junit.jupiter.api.Test;
 
 /**
  * The test class for TelecomBaseType.
  */
-public class TelecomBaseTypeTest {
+class TelecomBaseTypeTest {
 	/**
 	 * Do all tests.
 	 */
 	@Test
-	public void doAllTests() {
+	void doAllTests() {
 		TelecomAddressUse usage = TelecomAddressUse.ANSWERING_SERVICE;
 		String value = "033 888 77 66";
 
@@ -35,7 +33,7 @@ public class TelecomBaseTypeTest {
 				.build();
 
 		assertEquals(telecom1.hashCode(), telecom2.hashCode());
-		assertTrue(telecom1.equals(telecom2));
+		assertEquals(telecom1, telecom2);
 
 		assertEquals(usage, telecom1.getUsage());
 		assertEquals(value, telecom1.getValue());

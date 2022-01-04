@@ -71,15 +71,15 @@ public class SimpleXuaClient extends AbstractSoapClient<List<XUserAssertionRespo
 		final var envelopElement = createEnvelope();
 
 		Element headerAssertionElement = null;
-		if (aSecurityHeaderElement instanceof Assertion) {
+		if (aSecurityHeaderElement instanceof Assertion assertion) {
 			headerAssertionElement = new AssertionSerializerImpl()
-					.toXmlElement((Assertion) aSecurityHeaderElement);
-		} else if (aSecurityHeaderElement instanceof EncryptedAssertion) {
+					.toXmlElement(assertion);
+		} else if (aSecurityHeaderElement instanceof EncryptedAssertion assertion) {
 			headerAssertionElement = new EncryptedAssertionSerializerImpl()
-					.toXmlElement((EncryptedAssertion) aSecurityHeaderElement);
-		} else if (aSecurityHeaderElement instanceof UsernameToken) {
+					.toXmlElement(assertion);
+		} else if (aSecurityHeaderElement instanceof UsernameToken token) {
 			headerAssertionElement = new UsernameTokenSerializerImpl()
-					.toXmlElement((UsernameToken) aSecurityHeaderElement);
+					.toXmlElement(token);
 		}
 		createHeader(headerAssertionElement, wsHeaders, envelopElement);
 

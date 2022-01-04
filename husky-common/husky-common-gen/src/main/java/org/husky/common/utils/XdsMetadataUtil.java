@@ -248,16 +248,22 @@ public class XdsMetadataUtil {
 	 * @return the husky Organization
 	 */
 	public static Organization convertIpfOrganization(
-			org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization xon) {
-		if (xon == null) {
+			List<org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization> authorInstitutions) {
+		if (authorInstitutions == null) {
 			return null;
 		}
 
-		final var org = new OrganizationBaseType();
-		org.addIdentificator(convertOhtXcnIdToEhc(xon.getAssigningAuthority(), xon.getIdNumber()));
-		org.addName(new Name(xon.getOrganizationName()));
+		for (org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization xon : authorInstitutions) {
+			if (xon != null) {
+				final var org = new OrganizationBaseType();
+				org.addIdentificator(convertOhtXcnIdToEhc(xon.getAssigningAuthority(), xon.getIdNumber()));
+				org.addName(new Name(xon.getOrganizationName()));
 
-		return new Organization(org);
+				return new Organization(org);
+			}
+		}
+
+		return null;
 	}
 
 	/**
@@ -295,20 +301,12 @@ public class XdsMetadataUtil {
 
 			// Institution
 			if (!at.getAuthorInstitution().isEmpty()) {
-				for (org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization xon : at.getAuthorInstitution()) {
-					a.setOrganization(convertIpfOrganization(xon));
-				}
+				a.setOrganization(convertIpfOrganization(at.getAuthorInstitution()));
 			}
 
 			// Role
 			if (!at.getAuthorRole().isEmpty() && at.getAuthorRole().get(0) != null) {
-				var codeSystem = "";
-
-				if (at.getAuthorRole().get(0).getAssigningAuthority() != null) {
-					codeSystem = at.getAuthorRole().get(0).getAssigningAuthority().getUniversalId();
-				}
-
-				a.setRoleFunction(new Code(at.getAuthorRole().get(0).getId(), codeSystem, null));
+				a.setRoleFunction(convertIpfAuthorRole(at.getAuthorRole().get(0)));
 			}
 
 			// Speciality
@@ -325,6 +323,16 @@ public class XdsMetadataUtil {
 		}
 
 		return a;
+	}
+
+	private static Code convertIpfAuthorRole(Identifiable authorRole) {
+		var codeSystem = "";
+
+		if (authorRole.getAssigningAuthority() != null) {
+			codeSystem = authorRole.getAssigningAuthority().getUniversalId();
+		}
+
+		return new Code(authorRole.getId(), codeSystem, null);
 	}
 
 	public static List<org.husky.common.model.Telecom> convertIpfTelecoms(List<Telecom> xtnList) {

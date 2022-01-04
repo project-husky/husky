@@ -1,5 +1,13 @@
 package org.husky.xua.validation.subject;
 
+import static org.husky.xua.ChEprXuaSpecifications.TECHNICAL_USER_ID;
+import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_SUBJECTID;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ASSISTANT_GLN;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ASSISTANT_NAME;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_TCU_ID;
+
+import java.util.Optional;
+
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.communication.ch.enums.Role;
 import org.husky.xua.validation.ChEprAssertionValidationParameters;
@@ -12,12 +20,6 @@ import org.opensaml.saml.saml2.core.Assertion;
 import org.opensaml.saml.saml2.core.Attribute;
 import org.opensaml.saml.saml2.core.AttributeValue;
 import org.opensaml.saml.saml2.core.SubjectConfirmation;
-
-import java.util.Optional;
-
-import static org.husky.xua.ChEprXuaSpecifications.TECHNICAL_USER_ID;
-import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_SUBJECTID;
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.*;
 
 /**
  * Validator that confirms the {@link org.opensaml.saml.saml2.core.Subject} of the issuer by evaluating the {@link
@@ -92,20 +94,7 @@ public class ChEprSubjectConfirmationBearerValidator implements SubjectConfirmat
 
         // Extraction of the SubjectConfirmationData
         if (role == Role.ASSISTANT) {
-            final var assistantName = Optional.ofNullable(confirmation.getSubjectConfirmationData())
-                    .map(XMLObject::getOrderedChildren)
-                    .filter(l -> l.size() == 1)
-                    .map(l -> l.get(0))
-                    .filter(Attribute.class::isInstance)
-                    .map(Attribute.class::cast)
-                    .filter(attribute -> OASIS_XACML_SUBJECTID.equals(attribute.getName()))
-                    .map(Attribute::getAttributeValues)
-                    .filter(l -> l.size() == 1)
-                    .map(l -> l.get(0))
-                    .filter(AttributeValue.class::isInstance)
-                    .map(AttributeValue.class::cast)
-                    .map(XSAny::getTextContent)
-                    .orElse(null);
+            final var assistantName = extractAssistantName(confirmation);
             if (assistantName == null) {
                 context.setValidationFailureMessage("The assistant name is missing in the SubjectConfirmation");
                 return ValidationResult.INVALID;
@@ -115,4 +104,13 @@ public class ChEprSubjectConfirmationBearerValidator implements SubjectConfirmat
 
         return ValidationResult.VALID;
     }
+
+	private String extractAssistantName(SubjectConfirmation confirmation) {
+		return Optional.ofNullable(confirmation.getSubjectConfirmationData()).map(XMLObject::getOrderedChildren)
+				.filter(l -> l.size() == 1).map(l -> l.get(0)).filter(Attribute.class::isInstance)
+				.map(Attribute.class::cast).filter(attribute -> OASIS_XACML_SUBJECTID.equals(attribute.getName()))
+				.map(Attribute::getAttributeValues).filter(l -> l.size() == 1).map(l -> l.get(0))
+				.filter(AttributeValue.class::isInstance).map(AttributeValue.class::cast).map(XSAny::getTextContent)
+				.orElse(null);
+	}
 }

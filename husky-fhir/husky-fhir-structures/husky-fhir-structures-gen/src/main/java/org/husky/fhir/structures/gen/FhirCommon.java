@@ -1766,20 +1766,24 @@ public class FhirCommon {
 		final var sb = new StringBuilder();
 		try (final var bufferedReader = new BufferedReader(
 				new InputStreamReader(new FileInputStream(fileName), StandardCharsets.UTF_8))){
-			String line;
-			try {
-				while ((line = bufferedReader.readLine()) != null) {
-					sb.append(line);
-				}
-			} catch (final IOException e) {
-				log.error(e.getMessage(), e);
-			}
+			appendLine(sb, bufferedReader);
 		} catch (final FileNotFoundException | UnsupportedEncodingException e1) {
 			log.error(e1.getMessage(), e1);
 		} catch (IOException e2) {
 			log.error(e2.getMessage(), e2);
 		}
 		return sb.toString();
+	}
+
+	private static void appendLine(StringBuilder sb, BufferedReader bufferedReader) {
+		String line;
+		try {
+			while ((line = bufferedReader.readLine()) != null) {
+				sb.append(line);
+			}
+		} catch (final IOException e) {
+			log.error(e.getMessage(), e);
+		}
 	}
 
 	/**
@@ -1822,49 +1826,66 @@ public class FhirCommon {
 	public static boolean saveResource(Logger log, String path, IBaseResource fhirResource,
 			String fileName, SaveMode saveMode) {
 		var retVal = true;
-		final String separator = "/";
-		String fullFn = path;
-		if (!path.endsWith(separator))
-			fullFn = fullFn + separator;
-		fullFn = fullFn + fileName;
+		var fullFn = getFullFileName(path, fileName, "/");
+
 		if ((saveMode == null) || (saveMode == SaveMode.NONE)) {
 			return true;
 		}
-		Writer writer = null;
-		try {
-			if (saveMode == SaveMode.LOG) {
-				writer = new StringWriter();
-				writer.write(fullFn + "\n");
-				writer.write("----------------------------------------\n");
-			} else {
-				writer = new BufferedWriter(new FileWriter(fullFn));
-			}
+
+		if (saveMode == SaveMode.LOG) {
+			retVal = saveResourceInLog(log, fullFn, fhirResource);
+		} else {
+			retVal = saveResourceInFile(log, fullFn, fhirResource);
+		}
+
+		return retVal;
+	}
+
+	private static boolean saveResourceInFile(Logger log, String fullFn, IBaseResource fhirResource) {
+		var retVal = true;
+		try (Writer writer = new BufferedWriter(new FileWriter(fullFn))) {
 			final var fhirCtx = new FhirContext(FhirVersionEnum.R4);
-			fhirCtx.newXmlParser().setPrettyPrint(true).encodeResourceToWriter(fhirResource,
-					writer);
+			fhirCtx.newXmlParser().setPrettyPrint(true).encodeResourceToWriter(fhirResource, writer);
 
 			if (log != null && log.isDebugEnabled()) {
-				if (saveMode == SaveMode.LOG) {
-					log.debug(writer.toString());
-				} else {
-					log.debug(fullFn);
-				}
+				log.debug(fullFn);
 			}
 		} catch (final IOException e) {
 			if (log != null)
 				log.error(e.getMessage());
 			retVal = false;
-		} finally {
-			if (writer != null) {
-				try {
-					writer.close();
-				} catch (IOException e) {
-					if (log != null)
-						log.error(e.getMessage());
-				}
-			}
 		}
+
 		return retVal;
+	}
+
+	private static boolean saveResourceInLog(Logger log, String fullFn, IBaseResource fhirResource) {
+		var retVal = true;
+
+		try (Writer writer = new StringWriter()) {
+			writer.write(fullFn + "\n");
+			writer.write("----------------------------------------\n");
+
+			final var fhirCtx = new FhirContext(FhirVersionEnum.R4);
+			fhirCtx.newXmlParser().setPrettyPrint(true).encodeResourceToWriter(fhirResource, writer);
+
+			if (log != null && log.isDebugEnabled()) {
+				log.debug(writer.toString());
+			}
+		} catch (final IOException e) {
+			if (log != null)
+				log.error(e.getMessage());
+			retVal = false;
+		}
+
+		return retVal;
+	}
+
+	public static String getFullFileName(String path, String fileName, String separator) {
+		String fullFn = path;
+		if (!path.endsWith(separator))
+			fullFn = fullFn + separator;
+		return fullFn + fileName;
 	}
 
 	/**

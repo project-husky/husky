@@ -192,6 +192,22 @@ public class Patient extends Person {
         mPatientRole.getId().add(id);
     }
 
+	/**
+	 * Adds a list of identificator
+	 * 
+	 * @param identificators list of identificator
+	 */
+	public void setIds(List<Identificator> identificators) {
+		for (Identificator identificator : identificators) {
+			if (identificator != null) {
+				var id = new II();
+				id.setRoot(identificator.getRoot());
+				id.setExtension(identificator.getExtension());
+				mPatientRole.getId().add(id);
+			}
+		}
+	}
+
     /**
      * Adds the name.
      *

@@ -23,6 +23,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,7 +55,6 @@ import org.husky.common.basetypes.NameBaseType;
 import org.husky.common.basetypes.OrganizationBaseType;
 import org.husky.common.enums.LanguageCode;
 import org.husky.common.utils.CustomizedYaml;
-import org.husky.common.utils.DateUtil;
 import org.husky.common.utils.LangText;
 import org.husky.common.utils.xml.XmlFactories;
 import org.husky.valueset.config.ValueSetConfig;
@@ -390,7 +390,7 @@ public class ValueSetManager {
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//ihesvs:ValueSet/ihesvs:EffectiveDate/text()");
 		if (textContent != null)
-			version.setValidFrom(DateUtil.parseDateyyyyMMdd2(textContent));
+			version.setValidFrom(getValidFromDate(textContent));
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//ihesvs:ValueSet/@version");
 		if (textContent != null)
@@ -521,46 +521,63 @@ public class ValueSetManager {
 		var reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
 		var valueSet = new ValueSet();
 		var version = new Version();
+		valueSet.setVersion(version);
 		Map<String, Object> map = getValueSetJsonMap(reader);
 		for (Entry<String, Object> entry : map.entrySet()) {
-			String key = entry.getKey();
-
-			if ("id".contentEquals(key) && (entry.getValue() != null))
-				valueSet.setIdentificator(
-						IdentificatorBaseType.builder().withRoot(entry.getValue().toString()).build());
-			if ("name".contentEquals(key) && (entry.getValue() != null))
-				valueSet.setName(entry.getValue().toString());
-			if (ELEMENT_NAME_DISPLAY_NAME.contentEquals(key) && (entry.getValue() != null))
-				valueSet.setDisplayName(entry.getValue().toString());
-			if ("versionLabel".contentEquals(key) && (entry.getValue() != null))
-				version.setLabel(entry.getValue().toString());
-			if ("effectiveDate".contentEquals(key) && (entry.getValue() != null))
-				version.setValidFrom(DateUtil.parseDateyyyyMMddTHHmmss(entry.getValue().toString()));
-			if ("statusCode".contentEquals(key) && (entry.getValue() != null)) {
-				var status = entry.getValue().toString();
-				valueSet.setStatus(getStatusCode(status));
-			}
-			if ("desc".contentEquals(key) && (entry.getValue() != null)
-					&& (entry.getValue().getClass() == JSONArray.class)) {
-				JSONArray descs = (JSONArray) entry.getValue();
-				valueSet.getDescriptionList().addAll(getDescriptions(descs));
-			}
-			if ("publishingAuthority".contentEquals(key) && (entry.getValue() != null)
-					&& (entry.getValue().getClass() == JSONArray.class)) {
-				JSONArray descs = (JSONArray) entry.getValue();
-				version.setPublishingAuthority(getPublishingAuthority(descs));
-			}
-			if ("conceptList".contentEquals(key) && (entry.getValue() != null)
-					&& (entry.getValue().getClass() == JSONArray.class)) {
-				JSONArray concepts = (JSONArray) entry.getValue();
-				addValueSetEntries(concepts, valueSet);
-			}
-
+			setValueSetValues(valueSet, entry.getKey(), entry.getValue());
 		}
-		valueSet.setVersion(version);
 
 		return valueSet;
 
+	}
+
+	private void setValueSetValues(ValueSet valueSet, String key, Object value) {
+		if (value == null) {
+			return;
+		}
+
+		if ("id".contentEquals(key)) {
+			valueSet.setIdentificator(IdentificatorBaseType.builder().withRoot(value.toString()).build());
+		} else if ("name".contentEquals(key)) {
+			valueSet.setName(value.toString());
+		} else if (ELEMENT_NAME_DISPLAY_NAME.contentEquals(key)) {
+			valueSet.setDisplayName(value.toString());
+		} else if ("versionLabel".contentEquals(key)) {
+			valueSet.getVersion().setLabel(value.toString());
+		} else if ("effectiveDate".contentEquals(key)) {
+			valueSet.getVersion().setValidFrom(getValidFromDate(value.toString()));
+		} else if ("statusCode".contentEquals(key)) {
+			var status = value.toString();
+			valueSet.setStatus(getStatusCode(status));
+		} else if ("desc".contentEquals(key)
+				&& (value.getClass() == JSONArray.class)) {
+			JSONArray descs = (JSONArray) value;
+			valueSet.getDescriptionList().addAll(getDescriptions(descs));
+		} else if ("publishingAuthority".contentEquals(key)
+				&& (value.getClass() == JSONArray.class)) {
+			JSONArray descs = (JSONArray) value;
+			valueSet.getVersion().setPublishingAuthority(getPublishingAuthority(descs));
+		} else if ("conceptList".contentEquals(key) 
+				&& (value.getClass() == JSONArray.class)) {
+			JSONArray concepts = (JSONArray) value;
+			addValueSetEntries(concepts, valueSet);
+		}
+	}
+
+	private Date getValidFromDate(String value) {
+		try {
+			SimpleDateFormat sdf = null;
+			if (value.length() == 10) {
+				sdf = new SimpleDateFormat("yyyy-MM-dd");
+			} else {
+				sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+			}
+
+			return sdf.parse(value);
+		} catch (final ParseException e) {
+			throw new IllegalArgumentException(
+					"Cannot parse date: [" + value + "]. Expected format is yyyy-MM-ddTHH:mm:ss.", e);
+		}
 	}
 
 	private OrganizationBaseType getPublishingAuthority(JSONArray descs) {
@@ -587,51 +604,42 @@ public class ValueSetManager {
 	}
 
 	private AddressBaseType getAddress(JSONArray contents) {
-		String addrLine1 = null;
-		String addrLine2 = null;
+		var addr = AddressBaseType.builder().build();
 		for (Object object2 : contents) {
-			String type = null;
-			String content = null;
-			if (object2 instanceof String) {
-				content = (String) object2;
-			} else if (object2 instanceof Map) {
-				@SuppressWarnings("unchecked")
-				Map<String, Object> subMap2 = (Map<String, Object>) object2;
-				for (Entry<String, Object> subEntry2 : subMap2.entrySet()) {
-					type = null;
-					String subKey2 = subEntry2.getKey();
-					if ("type".contentEquals(subKey2) && (subEntry2.getValue() != null))
-						type = subEntry2.getValue().toString();
-
-					if ("content".contentEquals(subKey2) && (subEntry2.getValue() != null))
-						content = subEntry2.getValue().toString();
-				}
-			}
-
-			// type:uri is not implemented, yet. Feel free
-			// to add when you use it.
-			if (type == null) {
-				if (addrLine1 == null)
-					addrLine1 = content;
-				else if (addrLine2 == null)
-					addrLine2 = content;
-			}
-		}
-
-		return buildAddressFromLines(addrLine1, addrLine2);
-	}
-
-	private AddressBaseType buildAddressFromLines(String addrLine1, String addrLine2) {
-		AddressBaseType addr = null;
-
-		if (addrLine1 != null) {
-			addr = AddressBaseType.builder().withStreetAddressLine1(addrLine1).build();
-		}
-		if (addr != null && addrLine2 != null) {
-			addr.setStreetAddressLine2(addrLine2);
+			extractAddressLines(addr, object2);
 		}
 
 		return addr;
+	}
+
+	private void extractAddressLines(AddressBaseType addr, Object object2) {
+		String type = null;
+		String content = null;
+		if (object2 instanceof String contentString) {
+			content = contentString;
+		} else if (object2 instanceof Map) {
+			@SuppressWarnings("unchecked")
+			Map<String, Object> subMap2 = (Map<String, Object>) object2;
+			for (Entry<String, Object> subEntry2 : subMap2.entrySet()) {
+				type = null;
+				String subKey2 = subEntry2.getKey();
+				if ("type".contentEquals(subKey2) && (subEntry2.getValue() != null))
+					type = subEntry2.getValue().toString();
+
+				if ("content".contentEquals(subKey2) && (subEntry2.getValue() != null))
+					content = subEntry2.getValue().toString();
+			}
+		}
+
+		// type:uri is not implemented, yet. Feel free
+		// to add when you use it.
+		if (type == null) {
+			if (addr.getStreetAddressLine1() == null) {
+				addr.setStreetAddressLine1(content);
+			} else if (addr.getStreetAddressLine2() == null) {
+				addr.setStreetAddressLine2(content);
+			}
+		}
 	}
 
 	private List<LangText> getDescriptions(JSONArray descs) {
@@ -741,38 +749,34 @@ public class ValueSetManager {
 
 		@SuppressWarnings("unchecked")
 		Map<String, Object> subMap2 = (Map<String, Object>) object2;
-		String entryCode = null;
-		String entryCodeSystem = null;
-		String entryDisplayName = null;
-		String entryType = null;
-		for (Entry<String, Object> subEntry2 : subMap2.entrySet()) {
-			String subKey2 = subEntry2.getKey();
-			if (ELEMENT_NAME_CODE.contentEquals(subKey2) && (subEntry2.getValue() != null))
-				entryCode = subEntry2.getValue().toString();
-			if (ELEMENT_NAME_CODE_SYSTEM.contentEquals(subKey2) && (subEntry2.getValue() != null))
-				entryCodeSystem = subEntry2.getValue().toString();
-			if (ELEMENT_NAME_DISPLAY_NAME.contentEquals(subKey2) && (subEntry2.getValue() != null))
-				entryDisplayName = subEntry2.getValue().toString();
-			if ("level".contentEquals(subKey2) && (subEntry2.getValue() != null)) {
-				valueSetEntry.setLevel(getLevel(subEntry2.getValue().toString()));
-			}
+		valueSetEntry.setCodeBaseType(CodeBaseType.builder().build());
 
-			if ("type".contentEquals(subKey2) && (subEntry2.getValue() != null)) {
-				entryType = subEntry2.getValue().toString();
-				valueSetEntry.setValueSetEntryType(ValueSetEntryType.getEnum(entryType));
-			}
-			if ("designation".contentEquals(subKey2) && (subEntry2.getValue() != null)) {
-				JSONArray designations = (JSONArray) subEntry2.getValue();
-				valueSetEntry.getDesignationList().addAll(getDesignations(designations));
-			}
+		for (Entry<String, Object> subEntry2 : subMap2.entrySet()) {
+			setValueSetEntryValues(valueSetEntry, subEntry2.getKey(), subEntry2.getValue());
 		}
 
-		CodeBaseType code = CodeBaseType.builder().withCode(entryCode).withCodeSystem(entryCodeSystem)
-				.withDisplayName(entryDisplayName).build();
-		valueSetEntry.setCodeBaseType(code);
-
-
 		return valueSetEntry;
+	}
+
+	private void setValueSetEntryValues(ValueSetEntry valueSetEntry, String subKey2, Object value) {
+		if (value == null) {
+			return;
+		}
+
+		if (ELEMENT_NAME_CODE.contentEquals(subKey2)) {
+			valueSetEntry.getCodeBaseType().setCode(value.toString());
+		} else if (ELEMENT_NAME_CODE_SYSTEM.contentEquals(subKey2)) {
+			valueSetEntry.getCodeBaseType().setCodeSystem(value.toString());
+		} else if (ELEMENT_NAME_DISPLAY_NAME.contentEquals(subKey2)) {
+			valueSetEntry.getCodeBaseType().setDisplayName(value.toString());
+		} else if ("level".contentEquals(subKey2)) {
+			valueSetEntry.setLevel(getLevel(value.toString()));
+		} else if ("type".contentEquals(subKey2)) {
+			valueSetEntry.setValueSetEntryType(ValueSetEntryType.getEnum(value.toString()));
+		} else if ("designation".contentEquals(subKey2)) {
+			JSONArray designations = (JSONArray) value;
+			valueSetEntry.getDesignationList().addAll(getDesignations(designations));
+		}
 	}
 
 	private int getLevel(String levelLit) {
@@ -935,7 +939,7 @@ public class ValueSetManager {
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//valueSets/project/valueSet/@effectiveDate");
 		if (textContent != null)
-			version.setValidFrom(DateUtil.parseDateyyyyMMddTHHmmss(textContent));
+			version.setValidFrom(getValidFromDate(textContent));
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//valueSets/project/valueSet/@versionLabel");
 		if (textContent != null)

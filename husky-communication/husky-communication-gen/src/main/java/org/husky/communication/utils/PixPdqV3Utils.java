@@ -135,111 +135,37 @@ public class PixPdqV3Utils {
 		// make sure we actually add an address
 		var addressAdded = false;
 
-		for (String addressStreetAddress : addressStreetAddressLines) {
-			// if there is a street address
-			if (addressStreetAddress != null && !addressStreetAddress.equals("")) {
-				// create the street address
-				var streetAddress = new AdxpStreetAddressLine();
-
-				// set the street address value
-				streetAddress.addMixed(addressStreetAddress);
-
-				// Add the street address to the AD
-				addressAD.addStreetAddressLine(streetAddress);
-
-				// indicate that some part of the address was added
-				addressAdded = true;
-			}
+		if (addStreetAddressLinesToAd(addressStreetAddressLines, addressAD)) {
+			addressAdded = true;
 		}
 
 		// if there is a city
-		if (addressCity != null && !addressCity.equals("")) {
-			// create the city
-			var city = new AdxpCity();
-
-			// set the street address value
-			city.addMixed(addressCity);
-
-			// Add the city to the AD
-			addressAD.addCity(city);
-
-			// indicate that some part of the address was added
-			addressAdded = true;
-		}
-
-		// if there is a county code
-		if (addressCounty != null && !addressCounty.isEmpty()) {
-			// create the county
-			var county = new AdxpCounty();
-
-			// set the county value
-			county.addMixed(addressCounty);
-
-			// Add the county to the AD
-			addressAD.addCounty(county);
-
-			// indicate that some part of the address was added
-			addressAdded = true;
-		}
-
-		// if there is a state
-		if (addressState != null && !addressState.isEmpty()) {
-			// create the state
-			var state = new AdxpState();
-
-			// set the state value
-			state.addMixed(addressState);
-
-			// Add the state to the AD
-			addressAD.addState(state);
-
-			// indicate that some part of the address was added
+		if (addCityToAd(addressCity, addressAD)) {
 			addressAdded = true;
 		}
 
 		// if there is a country
-		if (addressCountry != null && !addressCountry.isEmpty()) {
-			// create the state
-			var country = new AdxpCountry();
+		if (addCountryToAd(addressCountry, addressAD)) {
+			addressAdded = true;
+		}
 
-			// set the state value
-			country.addMixed(addressCountry);
+		// if there is a state
+		if (addStateToAd(addressState, addressAD)) {
+			addressAdded = true;
+		}
 
-			// Add the country to the AD
-			addressAD.addCountry(country);
-
-			// indicate that some part of the address was added
+		// if there is a county code
+		if (addCountyToAd(addressCounty, addressAD)) {
 			addressAdded = true;
 		}
 
 		// if there is a zip code
-		if (addressZip != null && !addressZip.isEmpty()) {
-			// create the zipCode
-			var zipCode = new AdxpPostalCode();
-
-			// set the zip code
-			zipCode.addMixed(addressZip);
-
-			// add the zip code to the AD
-			addressAD.addPostalCode(zipCode);
-
-			// indicate that some part of the address was added
+		if (addZipToAd(addressZip, addressAD)) {
 			addressAdded = true;
 		}
 
 		// if there is an other designation
-		if (addressOtherDesignation != null && !addressOtherDesignation.isEmpty()) {
-			// create the other designation object
-			// TODO: is this the right place for other designation??
-			var otherDesignation = new AdxpAdditionalLocator();
-
-			// set the other designation
-			otherDesignation.addMixed(addressOtherDesignation);
-
-			// add the other designation to the AD
-			addressAD.addAdditionalLocator(otherDesignation);
-
-			// indicate that some part of the address was added
+		if (addOtherDesignationToAd(addressOtherDesignation, addressAD)) {
 			addressAdded = true;
 		}
 
@@ -257,6 +183,136 @@ public class PixPdqV3Utils {
 
 		// return the value
 		return addressAD;
+	}
+
+	private static boolean addOtherDesignationToAd(String addressOtherDesignation, AD addressAD) {
+		if (addressOtherDesignation != null && !addressOtherDesignation.isEmpty()) {
+			// create the other designation object
+			// TODO: is this the right place for other designation??
+			var otherDesignation = new AdxpAdditionalLocator();
+
+			// set the other designation
+			otherDesignation.addMixed(addressOtherDesignation);
+
+			// add the other designation to the AD
+			addressAD.addAdditionalLocator(otherDesignation);
+
+			// indicate that some part of the address was added
+			return true;
+		}
+
+		return false;
+	}
+
+	private static boolean addZipToAd(String addressZip, AD addressAD) {
+		if (addressZip != null && !addressZip.isEmpty()) {
+			// create the zipCode
+			var zipCode = new AdxpPostalCode();
+
+			// set the zip code
+			zipCode.addMixed(addressZip);
+
+			// add the zip code to the AD
+			addressAD.addPostalCode(zipCode);
+
+			// indicate that some part of the address was added
+			return true;
+		}
+
+		return false;
+	}
+
+	private static boolean addCountyToAd(String addressCounty, AD addressAD) {
+		if (addressCounty != null && !addressCounty.isEmpty()) {
+			// create the state
+			var county = new AdxpCounty();
+
+			// set the state value
+			county.addMixed(addressCounty);
+
+			// Add the country to the AD
+			addressAD.addCounty(county);
+
+			// indicate that some part of the address was added
+			return true;
+		}
+
+		return false;
+	}
+
+	private static boolean addStateToAd(String addressState, AD addressAD) {
+		if (addressState != null && !addressState.isEmpty()) {
+			// create the state
+			var state = new AdxpState();
+
+			// set the state value
+			state.addMixed(addressState);
+
+			// Add the state to the AD
+			addressAD.addState(state);
+
+			// indicate that some part of the address was added
+			return true;
+		}
+
+		return false;
+	}
+
+	private static boolean addCountryToAd(String addressCountry, AD addressAD) {
+		if (addressCountry != null && !addressCountry.isEmpty()) {
+			// create the state
+			var country = new AdxpCountry();
+
+			// set the state value
+			country.addMixed(addressCountry);
+
+			// Add the country to the AD
+			addressAD.addCountry(country);
+
+			// indicate that some part of the address was added
+			return true;
+		}
+
+		return false;
+	}
+
+	private static boolean addCityToAd(String addressCity, AD addressAD) {
+		if (addressCity != null && !addressCity.equals("")) {
+			// create the city
+			var city = new AdxpCity();
+
+			// set the street address value
+			city.addMixed(addressCity);
+
+			// Add the city to the AD
+			addressAD.addCity(city);
+
+			// indicate that some part of the address was added
+			return true;
+		}
+
+		return false;
+	}
+
+	private static boolean addStreetAddressLinesToAd(List<String> addressStreetAddressLines, AD addressAD) {
+		for (String addressStreetAddress : addressStreetAddressLines) {
+			// if there is a street address
+			if (addressStreetAddress != null && !addressStreetAddress.equals("")) {
+				// create the street address
+				var streetAddress = new AdxpStreetAddressLine();
+
+				// set the street address value
+				streetAddress.addMixed(addressStreetAddress);
+
+				// Add the street address to the AD
+				addressAD.addStreetAddressLine(streetAddress);
+
+				// indicate that some part of the address was added
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**

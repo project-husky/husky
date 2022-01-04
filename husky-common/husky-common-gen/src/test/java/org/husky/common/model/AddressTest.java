@@ -11,7 +11,6 @@
 package org.husky.common.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
@@ -21,19 +20,18 @@ import org.husky.common.enums.NullFlavor;
 import org.husky.common.enums.PostalAddressUse;
 import org.husky.common.hl7cdar2.AD;
 import org.husky.common.hl7cdar2.ObjectFactory;
-import org.husky.common.model.Address;
 import org.junit.jupiter.api.Test;
 
 /**
  * The test class for Address.
  */
-public class AddressTest {
+class AddressTest {
 
 	/**
 	 * Do all tests.
 	 */
 	@Test
-	public void doAllTests() {
+	void doAllTests() {
 
 		String streetName = "Leidensgasse";
 		String buildingNumber = "1";
@@ -58,7 +56,7 @@ public class AddressTest {
 		AD hl7CdaR2Type = address1.getHl7CdaR2Ad();
 		Address address2 = new Address(hl7CdaR2Type);
 
-		assertTrue(address1.equals(address2));
+		assertEquals(address1, address2);
 
 		addressBt.setStreetAddressLine1(streetAddressLine1);
 		addressBt.setStreetAddressLine2(streetAddressLine2);
@@ -67,7 +65,7 @@ public class AddressTest {
 		hl7CdaR2Type = address3.getHl7CdaR2Ad();
 		Address address4 = new Address(hl7CdaR2Type);
 
-		assertTrue(address3.equals(address4));
+		assertEquals(address3, address4);
 
 		// Null Flavor Tests
 		AD nullHl7CdaR2Value = null;

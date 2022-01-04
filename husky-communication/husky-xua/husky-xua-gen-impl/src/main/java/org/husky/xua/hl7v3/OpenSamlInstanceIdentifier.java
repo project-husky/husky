@@ -10,7 +10,6 @@
  */
 package org.husky.xua.hl7v3;
 
-import org.husky.xua.hl7v3.InstanceIdentifier;
 import org.opensaml.core.xml.XMLObject;
 
 /**

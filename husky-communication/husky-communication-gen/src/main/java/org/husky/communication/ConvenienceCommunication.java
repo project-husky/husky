@@ -10,6 +10,8 @@
  */
 package org.husky.communication;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -22,8 +24,17 @@ import java.util.zip.ZipFile;
 
 import javax.activation.DataHandler;
 import javax.mail.util.ByteArrayDataSource;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.apache.camel.CamelContext;
+import org.apache.commons.text.StringEscapeUtils;
 import org.husky.common.communication.AffinityDomain;
 import org.husky.common.communication.AtnaConfig;
 import org.husky.common.communication.AtnaConfig.AtnaConfigMode;
@@ -35,8 +46,8 @@ import org.husky.common.communication.SubmissionSetMetadata.SubmissionSetMetadat
 import org.husky.common.enums.DocumentDescriptor;
 import org.husky.common.enums.EhcVersions;
 import org.husky.common.model.Code;
-import org.husky.common.utils.Util;
 import org.husky.common.utils.XdsMetadataUtil;
+import org.husky.common.utils.xml.XmlFactories;
 import org.husky.communication.xd.storedquery.AbstractStoredQuery;
 import org.husky.communication.xd.storedquery.FindFoldersStoredQuery;
 import org.husky.communication.xd.xdm.IndexHtm;
@@ -66,6 +77,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
 
 /**
  * The ConvenienceCommunication class provides a convenience API for transactions to different destinations such as
@@ -194,11 +207,14 @@ public class ConvenienceCommunication extends CamelService {
                                         InputStream inputStream4Metadata) {
         DocumentMetadata retVal = null;
         var doc = new Document();
+		var doc4Metadata = new Document();
+		doc4Metadata.setDocumentEntry(new DocumentEntry());
+
+		InputStream unicodeStream = null;
         try {
-            var doc4Metadata = new Document();
-            doc4Metadata.setDocumentEntry(new DocumentEntry());
+
             if (inputStream4Metadata != null) {
-                InputStream unicodeStream = Util.convertNonAsciiText2Unicode(inputStream4Metadata);
+				unicodeStream = convertNonAsciiText2Unicode(inputStream4Metadata);
                 var dataSource = new ByteArrayDataSource(unicodeStream, desc.getMimeType());
                 doc4Metadata.setDataHandler(new DataHandler(dataSource));
             }
@@ -209,11 +225,69 @@ public class ConvenienceCommunication extends CamelService {
         } catch (final IOException e) {
             log.error("Error adding document from inputstream.", e);
             log.error(e.getMessage(), e);
+		} finally {
+			if (unicodeStream != null) {
+				try {
+					unicodeStream.close();
+				} catch (IOException e) {
+					log.error("Error adding document from inputstream.", e);
+					log.error(e.getMessage(), e);
+				}
+			}
         }
         if (retVal != null)
             retVal.setDocumentDescriptor(desc);
         return retVal;
     }
+
+	/**
+	 * Escapes all non java character in the inputsream that is expected as XML.
+	 *
+	 * @param inputStream the input stream to be escaped
+	 * @return the input stream
+	 */
+	protected InputStream convertNonAsciiText2Unicode(InputStream inputStream) {
+		InputStream retVal = null;
+		DocumentBuilder docBuilder;
+		try (var outputStream = new ByteArrayOutputStream()) {
+			docBuilder = XmlFactories.newSafeDocumentBuilder();
+			var document = docBuilder.parse(inputStream);
+			convertNonAsciiText2Unicode(document.getDocumentElement());
+			Source xmlSource = new DOMSource(document);
+			Result outputTarget = new StreamResult(outputStream);
+
+			var transformer = XmlFactories.newTransformer();
+			transformer.transform(xmlSource, outputTarget);
+			retVal = new ByteArrayInputStream(outputStream.toByteArray());
+		} catch (ParserConfigurationException | SAXException | IOException | TransformerException
+				| TransformerFactoryConfigurationError e) {
+			// Do nothing
+		}
+		return retVal;
+	}
+
+	/**
+	 * Escapes all non java character in the node text.
+	 *
+	 * @param node the node to be escaped
+	 */
+	protected void convertNonAsciiText2Unicode(Node node) {
+		if (node.getFirstChild() != null) {
+			String nodeValue = node.getFirstChild().getNodeValue();
+			if (nodeValue != null) {
+				nodeValue = nodeValue.replace("\n", "").replace("\t", "");
+				node.getFirstChild().setNodeValue(StringEscapeUtils.escapeJava(nodeValue));
+			}
+		}
+		var nodeList = node.getChildNodes();
+		for (var i = 0; i < nodeList.getLength(); i++) {
+			var currentNode = nodeList.item(i);
+			if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
+				// calls this method for all the children which is Element
+				convertNonAsciiText2Unicode(currentNode);
+			}
+		}
+	}
 
     /**
 	 * Adds a document to the XDS Submission set.

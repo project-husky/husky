@@ -11,10 +11,8 @@
 package org.husky.communication.xd.storedquery;
 
 import java.time.ZonedDateTime;
-import java.util.Date;
 
 import org.husky.common.enums.DateTimeRangeAttributes;
-import org.husky.common.utils.DateUtil;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.TimeRange;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp.Precision;
@@ -36,10 +34,10 @@ public class DateTimeRange {
 	 * @param from The point in time where this range starts
 	 * @param to   The point in time where this range ends
 	 */
-	public DateTimeRange(DateTimeRangeAttributes name, Date from, Date to) {
+	public DateTimeRange(DateTimeRangeAttributes name, ZonedDateTime from, ZonedDateTime to) {
 		ipfDtr = new TimeRange();
-		ipfDtr.setFrom(DateUtil.formatDateTimeTzon(from));
-		ipfDtr.setTo(DateUtil.formatDateTimeTzon(to));
+		ipfDtr.setFrom(new Timestamp(from, null));
+		ipfDtr.setTo(new Timestamp(to, null));
 		dateTimeRangeAttribute = name;
 	}
 
@@ -58,7 +56,7 @@ public class DateTimeRange {
 	 * @return the start point
 	 */
 	public String getFromAsUsFormattedString() {
-		return DateUtil.formatDateTimeTzon(ipfDtr.getFrom().getDateTime());
+		return ipfDtr.getFrom().toHL7();
 	}
 
 	/**
@@ -85,25 +83,7 @@ public class DateTimeRange {
 	 * @return the end point
 	 */
 	public String getToAsUsFormattedString() {
-		return DateUtil.formatDateTimeTzon(ipfDtr.getTo().getDateTime());
-	}
-
-	/**
-	 * Sets the point in time where this range starts
-	 *
-	 * @param from the starting point
-	 */
-	public void setFrom(Date from) {
-		ipfDtr.setFrom(DateUtil.formatDateTimeTzon(from));
-	}
-
-	/**
-	 * Sets the point in time where this range ends
-	 *
-	 * @param to the end point
-	 */
-	public void setTo(Date to) {
-		ipfDtr.setTo(DateUtil.formatDateTimeTzon(to));
+		return ipfDtr.getTo().toHL7();
 	}
 
 	/**

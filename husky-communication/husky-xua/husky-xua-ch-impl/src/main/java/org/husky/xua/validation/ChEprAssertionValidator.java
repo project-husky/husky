@@ -269,14 +269,9 @@ public class ChEprAssertionValidator {
             return ValidationResult.INVALID;
         }
 
-        if (role == Role.HEALTHCARE_PROFESSIONAL && !"urn:gs1:gln".equals(nameId.getNameQualifier())) {
+		if ((role == Role.HEALTHCARE_PROFESSIONAL || role == Role.ASSISTANT || role == Role.TECHNICAL_USER)
+				&& !NAMESPACE_GS1_GLN.equals(nameId.getNameQualifier())) {
             context.setValidationFailureMessage("The healthcare professional GLN is missing in the Subject");
-            return ValidationResult.INVALID;
-        } else if (role == Role.ASSISTANT && !NAMESPACE_GS1_GLN.equals(nameId.getNameQualifier())) {
-            context.setValidationFailureMessage("The responsible healthcare professional GLN is missing in the Subject");
-            return ValidationResult.INVALID;
-        } else if (role == Role.TECHNICAL_USER && !NAMESPACE_GS1_GLN.equals(nameId.getNameQualifier())) {
-            context.setValidationFailureMessage("The responsible healthcare professional GLN is missing in the Subject");
             return ValidationResult.INVALID;
         } else if (role == Role.POLICY_ADMINISTRATOR && !POLICY_ADMINISTRATOR_ID.equals(nameId.getNameQualifier())) {
             context.setValidationFailureMessage("The policy administrator ID is missing in the Subject");

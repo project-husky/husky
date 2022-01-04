@@ -50,8 +50,8 @@ public class MasterPatientIndexQueryResponse {
 			this.totalNumbers = mpiQueryResponse.getTotalNumbers();
 			this.currentNumbers = mpiQueryResponse.getCurrentNumbers();
 			this.remainingNumbers = mpiQueryResponse.getRemainingNumbers();
-			if ((mpiQueryResponse.getPatients() != null)
-					&& (mpiQueryResponse.getPatients().size() > 0)) {
+			if (mpiQueryResponse.getPatients() != null
+					&& !mpiQueryResponse.getPatients().isEmpty()) {
 				patients = new ArrayList<>();
 				for (final FhirPatient patient : mpiQueryResponse.getPatients()) {
 					patients.add(patient.getPatient());

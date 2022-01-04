@@ -11,13 +11,7 @@
 package org.husky.common.basetypes;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.husky.common.basetypes.AddressBaseType;
-import org.husky.common.basetypes.IdentificatorBaseType;
-import org.husky.common.basetypes.NameBaseType;
-import org.husky.common.basetypes.OrganizationBaseType;
-import org.husky.common.basetypes.TelecomBaseType;
 import org.husky.common.enums.CountryCode;
 import org.husky.common.enums.PostalAddressUse;
 import org.husky.common.enums.TelecomAddressUse;
@@ -26,12 +20,12 @@ import org.junit.jupiter.api.Test;
 /**
  * The test class for OrganizationBaseType.
  */
-public class OrganizationBaseTypeTest {
+class OrganizationBaseTypeTest {
 	/**
 	 * Do all tests.
 	 */
 	@Test
-	public void doAllTests() {
+	void doAllTests() {
 
 		NameBaseType name1;
 		NameBaseType name2;
@@ -94,7 +88,7 @@ public class OrganizationBaseTypeTest {
 				.build();
 
 		assertEquals(org1.hashCode(), org2.hashCode());
-		assertTrue(org1.equals(org2));
+		assertEquals(org1, org2);
 
 		// Check setting primary elements
 		assertEquals(address2, org1.getPrimaryAddress());
