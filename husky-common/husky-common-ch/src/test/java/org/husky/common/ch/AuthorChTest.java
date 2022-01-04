@@ -35,7 +35,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-public class AuthorChTest {
+class AuthorChTest {
 
 	private Address testAddress;
 
@@ -131,7 +131,7 @@ public class AuthorChTest {
 	}
 
 	@Test
-	public void testAuthorCd() {
+	void testAuthorCd() {
 		final org.husky.common.ch.AuthorCh b = new org.husky.common.ch.AuthorCh();
 
 		b.addId(testIdentificator1);
@@ -146,7 +146,7 @@ public class AuthorChTest {
 	}
 
 	@Test
-	public void testAuthorCh() {
+	void testAuthorCh() {
 		final AuthorCh b1 = new AuthorCh();
 
 		b1.addId(testIdentificator2);

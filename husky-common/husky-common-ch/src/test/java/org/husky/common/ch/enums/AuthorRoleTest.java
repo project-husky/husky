@@ -16,10 +16,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.husky.common.ch.enums.AuthorRole;
 import org.junit.jupiter.api.Test;
 
-public class AuthorRoleTest {
+class AuthorRoleTest {
 
 	@Test
-	public void testAuthorRole() {
+	void testAuthorRole() {
 
 		assertEquals("2.16.756.5.30.1.127.3.10.1.1.3", AuthorRole.VALUE_SET_ID);
 		assertValueSetEnumEntries(AuthorRole.values());

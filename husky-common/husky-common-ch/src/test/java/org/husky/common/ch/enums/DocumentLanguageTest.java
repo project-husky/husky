@@ -16,10 +16,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.husky.common.ch.enums.DocumentLanguage;
 import org.junit.jupiter.api.Test;
 
-public class DocumentLanguageTest {
+class DocumentLanguageTest {
 
 	@Test
-	public void testDocumentLanguage() {
+	void testDocumentLanguage() {
 
 		assertEquals("2.16.756.5.30.1.127.3.10.1.13", DocumentLanguage.VALUE_SET_ID);
 		assertValueSetEnumEntries(DocumentLanguage.values());

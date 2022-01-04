@@ -297,6 +297,7 @@ public class DocumentMetadata {
 
 		return equals((DocumentMetadata) obj);
 	}
+    
 
 	public boolean equals(DocumentMetadata other) {
 		var retVal = true;
