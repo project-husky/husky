@@ -16,16 +16,15 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import org.husky.common.model.Code;
 import org.husky.common.model.Identificator;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 
@@ -48,7 +47,7 @@ class FolderMetadataTest {
 	private String testEntryUUID1;
 	private String testEntryUUID2;
 
-	private Date testLastUpdateTime;
+	private ZonedDateTime testLastUpdateTime;
 
 	private Identificator testPatientId;
 
@@ -79,7 +78,7 @@ class FolderMetadataTest {
 		testEntryUUID1 = UUID.randomUUID().toString();
 		testEntryUUID2 = UUID.randomUUID().toString();
 
-		testLastUpdateTime = Calendar.getInstance().getTime();
+		testLastUpdateTime = ZonedDateTime.now(ZoneOffset.UTC);
 
 		testPatientId = new Identificator("1.2.3.4", "1234.345.23456.2346");
 
@@ -185,8 +184,6 @@ class FolderMetadataTest {
 	@Test
 	void testSetGetLastUpdateTime() {
 		final FolderMetadata ref = new FolderMetadata();
-		assertNull(ref.getLastUpdateTime());
-
 		ref.setLastUpdateTime(testLastUpdateTime);
 		assertEquals(testLastUpdateTime.toInstant(), ref.getLastUpdateTime().toInstant());
 	}

@@ -61,6 +61,8 @@ public class V3PdqConsumerQuery extends V3Message {
 	public V3PdqConsumerQuery(String senderApplicationOID, String senderFacilityOID, String receiverApplicationOID,
 			String receiverFacilityOID) {
 
+		super(senderApplicationOID);
+
 		// create the root v3 pdq element
 		rootElement = new PRPAIN201305UV02Type();
 
@@ -71,7 +73,6 @@ public class V3PdqConsumerQuery extends V3Message {
 		rootElement.setITSVersion("XML_1.0");
 
 		// create an id and set it
-		this.messageId = PixPdqV3Utils.createII(senderApplicationOID, "", "");
 		rootElement.setId(messageId);
 
 		// set current time
@@ -95,11 +96,14 @@ public class V3PdqConsumerQuery extends V3Message {
 		this.addReceiver(receiverApplicationOID, receiverFacilityOID);
 
 		// create the controlActProcess
-		queryControlActProcess = new PRPAIN201305UV02QUQIMT021001UV01ControlActProcess();
+		createControlActProcess();
 
 		// add the control act process to the message
 		rootElement.setControlActProcess(queryControlActProcess);
+	}
 
+	private void createControlActProcess() {
+		queryControlActProcess = new PRPAIN201305UV02QUQIMT021001UV01ControlActProcess();
 		// set the class code
 		queryControlActProcess.setClassCode(ActClassControlAct.CACT);
 		queryControlActProcess.setMoodCode(XActMoodIntentEvent.EVN);
@@ -107,10 +111,14 @@ public class V3PdqConsumerQuery extends V3Message {
 		queryControlActProcess.setCode(PixPdqV3Utils.createCD("PRPA_TE201305UV02", "2.16.840.1.113883.1.18", "", ""));
 
 		// create the query by parameter
-		queryByParameter = new PRPAMT201306UV02QueryByParameter();
+		createQueryByParameter();
 
 		// add the query by parameter object to the control act process
 		queryControlActProcess.setQueryByParameter(queryByParameter);
+	}
+
+	private void createQueryByParameter() {
+		queryByParameter = new PRPAMT201306UV02QueryByParameter();
 
 		// set the queryId
 		queryByParameter.setQueryId(PixPdqV3Utils.createIIwithUniqueExtension("1.2.840.114350.1.13.28.1.18.5.999"));
@@ -118,10 +126,12 @@ public class V3PdqConsumerQuery extends V3Message {
 		// QueryByParameter.statusCode is defaulted to "new".
 		queryByParameter.setStatusCode(PixPdqV3Utils.createCS("new"));
 
-		// QueryByParameter.responseModalityCode is required and is fixed to R (Real Time)
+		// QueryByParameter.responseModalityCode is required and is fixed to R (Real
+		// Time)
 		queryByParameter.setResponseModalityCode(PixPdqV3Utils.createCS("R"));
 
-		// QueryByParameter.responsePriorityCode is required and is fixed to I (Immediate)
+		// QueryByParameter.responsePriorityCode is required and is fixed to I
+		// (Immediate)
 		queryByParameter.setResponsePriorityCode(PixPdqV3Utils.createCS("I"));
 
 		// create the parameter list
@@ -464,11 +474,10 @@ public class V3PdqConsumerQuery extends V3Message {
 	 * @param facilityOID
 	 *            (Sender Organization ID)
 	 */
+	@Override
 	public void setSender(String applicationOID, String facilityOID) {
+		super.setSender(applicationOID, facilityOID);
 		// set the sender/application OIDs
 		rootElement.setSender(PixPdqV3Utils.createMCCIMT000100UV01Sender(applicationOID, facilityOID));
-
-		this.sendingApplication = applicationOID;
-		this.sendingFacility = facilityOID;
 	}
 }

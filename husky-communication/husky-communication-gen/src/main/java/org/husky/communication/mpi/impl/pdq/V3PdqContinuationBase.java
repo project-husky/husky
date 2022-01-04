@@ -49,14 +49,14 @@ public abstract class V3PdqContinuationBase extends V3Message {
 			String receiverApplicationOID,
 			String receiverFacilityOID, V3PdqConsumerResponse v3pdqresponse) {
 
+		super(senderApplicationOID);
+
 		// set the interaction id
 		rootElement.setInteractionId(PixPdqV3Utils.createII("2.16.840.1.113883.1.6", "QUQI_IN000003UV01", ""));
 
 		// indicate ITSVersion XML_1.0
 		rootElement.setITSVersion("XML_1.0");
 
-		// create an id and set it
-		this.messageId = PixPdqV3Utils.createII(senderApplicationOID, "", "");
 		rootElement.setId(messageId);
 
 		// set current time
@@ -146,10 +146,10 @@ public abstract class V3PdqContinuationBase extends V3Message {
 	 * @param facilityOID
 	 *            (Sender Organization ID)
 	 */
+	@Override
 	public void setSender(String applicationOID, String facilityOID) {
 		// set the sender/application OIDs
-		this.sendingApplication = applicationOID;
-		this.sendingFacility = facilityOID;
+		super.setSender(applicationOID, facilityOID);
 		rootElement.setSender(PixPdqV3Utils.createMCCIMT000300UV01Sender(applicationOID, facilityOID));
 	}
 

@@ -11,16 +11,16 @@
 
 package org.husky.communication;
 
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.husky.common.model.Code;
 import org.husky.common.model.Identificator;
 import org.husky.common.utils.XdsMetadataUtil;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Folder;
-
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 
 /**
  * Class FolderMetadata. Provides metadata attributes as specified in [IHE ITI TF-3, Sep 9, 2016], Table 4.1.3.4-1:
@@ -143,9 +143,6 @@ public class FolderMetadata {
         f.setEntryUuid(entryUuid);
     }
 
-    // getHomeCommunityId()
-    // setHomeCommunityId()
-
     /**
      * Gets the last update time of the folder.
      * <p>
@@ -160,8 +157,8 @@ public class FolderMetadata {
     /**
      * @param lastUpdateTime
      */
-    public void setLastUpdateTime(Date lastUpdateTime) {
-        f.setLastUpdateTime(XdsMetadataUtil.convertDateToDtmString(lastUpdateTime));
+	public void setLastUpdateTime(ZonedDateTime lastUpdateTime) {
+		f.setLastUpdateTime(new Timestamp(lastUpdateTime, null));
     }
 
     /**

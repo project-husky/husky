@@ -13,7 +13,6 @@ package org.husky.communication.mpi.impl.pix;
 import org.husky.communication.mpi.V3Message;
 import org.husky.communication.utils.PixPdqV3Utils;
 
-import net.ihe.gazelle.hl7v3.coctmt030007UV.COCTMT030007UVPerson;
 import net.ihe.gazelle.hl7v3.datatypes.AD;
 import net.ihe.gazelle.hl7v3.prpain201301UV02.PRPAIN201301UV02MFMIMT700701UV01ControlActProcess;
 import net.ihe.gazelle.hl7v3.prpain201301UV02.PRPAIN201301UV02MFMIMT700701UV01RegistrationEvent;
@@ -31,7 +30,6 @@ import net.ihe.gazelle.hl7v3.voc.EntityClass;
 import net.ihe.gazelle.hl7v3.voc.EntityDeterminer;
 import net.ihe.gazelle.hl7v3.voc.ParticipationTargetSubject;
 import net.ihe.gazelle.hl7v3.voc.XActMoodIntentEvent;
-import net.ihe.gazelle.hl7v3.voc.XDeterminerInstanceKind;
 
 /**
  * @author <a href="mailto:anthony.larocca@sage.com">Anthony Larocca</a>
@@ -60,6 +58,8 @@ public class V3PixSourceRecordAdded extends V3Message {
 	public V3PixSourceRecordAdded(String senderApplicationOID, String senderFacilityOID,
 			String receiverApplicationOID, String receiverFacilityOID) {
 
+		super(senderApplicationOID);
+
 		// set the interaction id (Patient Record Added)
 		rootElement.setInteractionId(
 				PixPdqV3Utils.createII("2.16.840.1.113883.1.6", "PRPA_IN201301UV02", ""));
@@ -67,9 +67,6 @@ public class V3PixSourceRecordAdded extends V3Message {
 		// indicate ITSVersion XML_1.0
 		rootElement.setITSVersion("XML_1.0");
 
-		// create an id and set it
-		this.messageId = PixPdqV3Utils.createII(senderApplicationOID, "",
-				"");
 		rootElement.setId(messageId);
 
 		// set current time
@@ -373,12 +370,7 @@ public class V3PixSourceRecordAdded extends V3Message {
 		motherRelationship.setClassCode("PRS");
 		motherRelationship.setCode(PixPdqV3Utils.createCE("MTH", "2.16.840.1.113883.5.111",
 				"PersonalRelationshipRoleType", "Mother"));
-		final var motherRelationshipHolder = new COCTMT030007UVPerson();
-		motherRelationship.setRelationshipHolder1(motherRelationshipHolder);
-		motherRelationshipHolder.setClassCode(EntityClass.PSN);
-		motherRelationshipHolder.setDeterminerCode(XDeterminerInstanceKind.INSTANCE);
-		motherRelationshipHolder.getName()
-				.add(PixPdqV3Utils.createPN(family, given, other, suffix, prefix));
+		motherRelationship.setRelationshipHolder1(getMotherRelationshipHolder(family, given, other, suffix, prefix));
 	}
 
 	/**

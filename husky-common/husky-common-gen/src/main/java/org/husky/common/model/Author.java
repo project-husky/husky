@@ -591,9 +591,9 @@ public class Author {
     /**
      * Returns the participation start time as an {@link Hl7Dtm} or {@code null}.
      */
-    @Nullable
+	@Nullable
     public Instant getTimeAsInstant() {
-		return Optional.ofNullable(this.getTimeAsHl7Dtm()).map(Hl7Dtm::toInstant).orElse(null);
+		return Optional.ofNullable(this.getTimeAsHl7Dtm()).map(Hl7Dtm::toInstant).orElse(Hl7Dtm.now().toInstant());
     }
 
     /**
