@@ -24,13 +24,13 @@ public class Oids {
 	/**
 	 * Pattern that matches a OID.
 	 */
-	public static final Pattern PATTERN = Pattern.compile("^(?:[0-2])(?:(?:\\.0)|(?:\\.[1-9][0-9]*))*$");
+	public static final Pattern PATTERN = Pattern.compile("^(?:[0-2])(?:(?:\\.0)|(?:\\.[1-9][0-9]*+))*+$");
 
 	/**
 	 * Pattern that matches an URN-encoded OID.
 	 */
 	public static final Pattern PATTERN_WITH_URN = Pattern
-			.compile("^urn:oid:(?:[0-2])(?:(?:\\.0)|(?:\\.[1-9][0-9]*))*$");
+			.compile("^urn:oid:(?:[0-2])(?:(?:\\.0)|(?:\\.[1-9][0-9]*+))*+$");
 
 	/**
 	 * Normalizes an OID by removing the URN-encoding part if needed.
