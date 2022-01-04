@@ -304,10 +304,6 @@ public class DocumentMetadata {
 		retVal = compareAuthors(other.getAuthors());
 
 		if (retVal) {
-			retVal = compareReferences(other);
-		}
-
-		if (retVal) {
 			retVal = compareLanguange(other.language);
 		}
 
@@ -368,10 +364,6 @@ public class DocumentMetadata {
 		}
 
 		return retVal;
-	}
-
-	private boolean compareReferences(DocumentMetadata other) {
-		return (this.xDoc == other.xDoc) && (this.cda == other.cda);
 	}
 
 	private boolean compareLanguange(String other) {

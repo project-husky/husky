@@ -20,6 +20,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.Base64;
 import java.util.Calendar;
+import java.util.UUID;
 
 import org.husky.xua.authentication.AuthnRequest;
 import org.husky.xua.communication.clients.IdpClient;
@@ -52,7 +53,7 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 		config = clientConfiguration;
 	}
 
-	private File getHtmlFormPage(AuthnRequest aAuthnRequest)
+	private void openHtmlFormPage(AuthnRequest aAuthnRequest)
 			throws SerializeException, IOException {
 		final var serializer = new AuthnRequestSerializerImpl();
 		final byte[] authnByteArray = serializer.toXmlByteArray(aAuthnRequest);
@@ -65,14 +66,15 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 
 		logger.debug("html to send to browser: {}", template);
 
-		final var tempFile = File.createTempFile("saml_", ".html");
-		tempFile.deleteOnExit();
+		final var tempFile = File.createTempFile(String.format("saml_%s", UUID.randomUUID().toString()), ".html");
 
 		try(final var os = new FileOutputStream(tempFile)){
 			os.write(template.getBytes());
 		}
 
-		return tempFile;
+		logger.info("Please open {} in your browser", tempFile.toURI());
+
+		Files.deleteIfExists(tempFile.toPath());
 	}
 
 	private Response getResponse(String samlReponse)
@@ -135,8 +137,7 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 			final var tempFile = new File(System.getProperty("java.io.tmpdir"),
 					config.getProtocolHandlerName() + ".io");			
 			Files.deleteIfExists(tempFile.toPath());
-			final var htmlFile = getHtmlFormPage(aAuthnRequest);
-			logger.info("Please open {} in your browser", htmlFile.toURI());
+			openHtmlFormPage(aAuthnRequest);
 
 			return startWaitForResponse(tempFile);
 

@@ -343,8 +343,7 @@ public class XdmContents {
 	private boolean checkSize(DocumentEntry docMetadata, long docSize, int index) {
 		if (docMetadata.getSize() == null || docMetadata.getSize() != docSize) {
 			log.warn("Integrity check failed for document size in Submission Set: {}  DocumentEntry with UUID: {}",
-					index,
-					docMetadata.getEntryUuid());
+					index, docMetadata.getEntryUuid());
 			this.resp.setStatus(Status.PARTIAL_SUCCESS);
 
 			final var error = new ErrorInfo();
@@ -557,7 +556,7 @@ public class XdmContents {
 	 */
 	private void lazyLoadCheck() {
 		if (txnData != null && zipFile != null && txnData.isEmpty()) {
-				loadXdmArchive();
+			loadXdmArchive();
 		}
 	}
 
@@ -568,7 +567,6 @@ public class XdmContents {
 	private void loadXdmArchive() {
 		this.resp.setStatus(Status.SUCCESS);
 		final Map<String, ProvideAndRegisterDocumentSet> results = new HashMap<>();
-
 		try {
 			final Enumeration<? extends ZipEntry> zipEntries = zipFile.entries();
 			ZipEntry zipEntry = null;
@@ -593,7 +591,9 @@ public class XdmContents {
 						}
 					}
 				}
+
 			}
+
 		} catch (final IOException e) {
 			log.error("IO Error during loading of ZIP File. ", e);
 			this.resp.setStatus(Status.FAILURE);

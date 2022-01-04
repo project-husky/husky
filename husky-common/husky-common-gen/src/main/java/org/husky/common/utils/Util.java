@@ -16,12 +16,10 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.io.Serializable;
 import java.lang.management.ManagementFactory;
 import java.nio.charset.StandardCharsets;
@@ -51,7 +49,6 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.text.StringEscapeUtils;
@@ -752,58 +749,6 @@ public class Util {
 		}
 		tel.setValue(TELECOMS_PHONE_PREFIX + telNr.replaceAll("\\s+", ""));
 		return tel;
-	}
-
-	/**
-	 * Extracts a file from embedded resources in the Jar as
-	 * temporary file on the local filesystem.
-	 *
-	 * @param rscPath
-	 *            path to the desired file in the Jar
-	 * @return Full path and file name of the created temporary file
-	 */
-	public static String extractFileFromResource(String rscPath) {
-		return extractFileFromResource(rscPath, true);
-	}
-
-	/**
-	 * Extracts a file from embedded resources in the Jar as
-	 * temporary file on the local filesystem.
-	 *
-	 * @param rscPath
-	 *            path to the desired file in the Jar
-	 * @param pathfix
-	 *            if path should be corrected at start depending on ox system
-	 * @return Full path and file name of the created temporary file
-	 */
-	public static String extractFileFromResource(String rscPath, boolean pathfix) {
-		final String filename = FilenameUtils.getName(rscPath);
-		String targetPath = null;
-
-		if (pathfix && !rscPath.startsWith("/")) {
-			rscPath = "/" + rscPath;
-		}
-
-		try {
-			targetPath = File.createTempFile(filename, "").getAbsolutePath();
-			final InputStream input = Util.class.getResourceAsStream(rscPath);
-			if (input == null) {
-				throw new IOException("File '" + filename + "' not found.");
-			}
-			try (OutputStream output = new FileOutputStream(targetPath)) {
-				final var buffer = new byte[2048];
-				int bytesRead;
-				while ((bytesRead = input.read(buffer)) != -1) {
-					output.write(buffer, 0, bytesRead);
-				}
-			}
-
-			input.close();
-		} catch (final IOException e1) {
-			log.error(e1.getMessage(), e1);
-		}
-
-		return targetPath;
 	}
 
 	/**
