@@ -12,7 +12,12 @@ package org.husky.communication.mpi;
 
 import java.util.ArrayList;
 
+import org.husky.communication.utils.PixPdqV3Utils;
+
+import net.ihe.gazelle.hl7v3.coctmt030007UV.COCTMT030007UVPerson;
 import net.ihe.gazelle.hl7v3.datatypes.II;
+import net.ihe.gazelle.hl7v3.voc.EntityClass;
+import net.ihe.gazelle.hl7v3.voc.XDeterminerInstanceKind;
 
 /**
  * @author <a href="mailto:anthony.larocca@sage.com">Anthony Larocca</a>
@@ -25,6 +30,16 @@ public abstract class V3Message {
 	private ArrayList<String> receivingApplication = new ArrayList<>(0);
 	private ArrayList<String> receivingFacility = new ArrayList<>(0);
 	protected II messageId;
+
+	protected V3Message(String senderApplicationOID) {
+		// create an id and set it
+		this.messageId = PixPdqV3Utils.createII(senderApplicationOID, "", "");
+
+	}
+
+	protected V3Message() {
+
+	}
 
 	/**
 	 * Adds the receiving application ID provided
@@ -98,6 +113,26 @@ public abstract class V3Message {
 
 	public void setMessageId(II messageId) {
 		this.messageId = messageId;
+	}
+
+	/**
+	 * Set the sender for the query
+	 * 
+	 * @param applicationOID (Sender Device ID)
+	 * @param facilityOID    (Sender Organization ID)
+	 */
+	public void setSender(String applicationOID, String facilityOID) {
+		this.sendingApplication = applicationOID;
+		this.sendingFacility = facilityOID;
+	}
+
+	public COCTMT030007UVPerson getMotherRelationshipHolder(String family, String given, String other, String suffix,
+			String prefix) {
+		var motherRelationshipHolder = new COCTMT030007UVPerson();
+		motherRelationshipHolder.setClassCode(EntityClass.PSN);
+		motherRelationshipHolder.setDeterminerCode(XDeterminerInstanceKind.INSTANCE);
+		motherRelationshipHolder.getName().add(PixPdqV3Utils.createPN(family, given, other, suffix, prefix));
+		return motherRelationshipHolder;
 	}
 
 }

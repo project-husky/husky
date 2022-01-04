@@ -27,6 +27,10 @@ public abstract class V3Response extends V3Message {
 	protected List<String> infoCodes = new LinkedList<>();
 	protected boolean hasError = false;
 
+	protected V3Response() {
+		super();
+	}
+
 	/**
 	 * Get the acknowledgement code
 	 * 
