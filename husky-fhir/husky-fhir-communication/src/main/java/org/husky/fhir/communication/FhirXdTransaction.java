@@ -12,6 +12,8 @@ package org.husky.fhir.communication;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +31,6 @@ import org.husky.common.communication.AffinityDomain;
 import org.husky.common.communication.DocumentMetadata;
 import org.husky.common.communication.SubmissionSetMetadata;
 import org.husky.common.enums.DocumentDescriptor;
-import org.husky.common.utils.DateUtil;
 import org.husky.fhir.structures.gen.FhirCommon;
 import org.husky.fhir.structures.utils.FhirUtilities;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
@@ -216,7 +217,8 @@ public class FhirXdTransaction {
 				metaData.setClassCode(FhirUtilities.toCode(fhirObject.getCategoryFirstRep()));
 				metaData.setCodedLanguage(
 						fhirObject.getContentFirstRep().getAttachment().getLanguageElement().getValueAsString());
-				metaData.setCreationTime(DateUtil.parseZonedDate(fhirObject.getDate()));
+				metaData.setCreationTime(
+						ZonedDateTime.from(fhirObject.getDate().toInstant().atZone(ZoneId.systemDefault())));
 				metaData.setDocumentDescriptor(getDocumentDescriptor(fhirObject));
 				metaData.setFormatCode(FhirCommon.getFormatCode(fhirObject));
 				metaData.setHealthcareFacilityTypeCode(FhirUtilities.toCode(fhirObject.getContext().getFacilityType()));
