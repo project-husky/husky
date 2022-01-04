@@ -112,19 +112,6 @@ public class IdentificatorBaseType implements Serializable {
 			}
 		}
 
-		// only business rules are applied, here. rest was initially implemented
-		// and stays here for future use. If you use it, you need to imnplement
-		// another method and not change the currenty methos.
-		// if (retVal) {
-		// if (this.assigningAuthorityName == null)
-		// retVal = (obj.getAssigningAuthorityName() == null);
-		// else
-		// retVal =
-		// this.assigningAuthorityName.equals(obj.getAssigningAuthorityName());
-		// }
-		// if (retVal)
-		// retVal = (this.displayable == obj.isDisplayable());
-
 		return retVal;
 	}
 

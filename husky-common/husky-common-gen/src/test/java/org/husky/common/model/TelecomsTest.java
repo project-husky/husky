@@ -128,7 +128,7 @@ public class TelecomsTest {
 	 * .
 	 */
 	@Test
-	@Disabled
+	@Disabled("Not yet implemented")
 	public void testTelecomsEListOfTEL() {
 		fail("Not yet implemented");
 	}

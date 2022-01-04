@@ -24,8 +24,6 @@ import java.util.Objects;
 @DefaultQualifier(value = NonNull.class, locations = {TypeUseLocation.PARAMETER, TypeUseLocation.RETURN})
 public class XmlSchemaValidator {
 
-    private static final Logger log = LoggerFactory.getLogger(XmlSchemaValidator.class);
-
     /**
      * The XML Schema that instantiates Schema {@link Validator}s.
      */
@@ -84,9 +82,8 @@ public class XmlSchemaValidator {
         final Validator schemaValidator = this.schema.newValidator();
         try {
             schemaValidator.validate(source);
-        } catch (final SAXException | IOException exception) {
-            log.debug("XmlSchemaValidator.validate(): ", exception);
-            throw new ValidationException("XML Schema error", exception);
-        }
+        } catch (final SAXException | IOException exception) {      
+            throw new ValidationException("XmlSchemaValidator.validate() - found XML Schema error", exception);
+        } 
     }
 }

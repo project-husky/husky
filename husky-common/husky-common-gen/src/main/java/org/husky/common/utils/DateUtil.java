@@ -30,6 +30,7 @@ import org.husky.common.hl7cdar2.TS;
  *
  * Deprecated, use {@link org.husky.common.utils.time.Hl7Dtm}, {@link org.husky.common.utils.time.DateTimes} and the
  * new Java time API.
+ * @deprecated
  */
 @Deprecated (since="1.0", forRemoval=true)
 public class DateUtil {

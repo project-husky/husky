@@ -90,6 +90,7 @@ import org.xml.sax.SAXException;
 
 /**
  * Helper methods for the Husky and CDA.
+ * @deprecated 
  */
 @Deprecated(forRemoval = true)
 public class Util {
@@ -186,54 +187,7 @@ public class Util {
 		return il;
 	}
 
-	/**
-	 * Escapes all non java character in the inputsream that is expected as XML.
-	 *
-	 * @param inputStream the input stream to be escaped
-	 * @return the input stream
-	 */
-	public static InputStream convertNonAsciiText2Unicode(InputStream inputStream) {
-		InputStream retVal = null;
-		DocumentBuilder docBuilder;
-		try (var outputStream = new ByteArrayOutputStream()) {
-			docBuilder = XmlFactories.newSafeDocumentBuilder();
-			var document = docBuilder.parse(inputStream);
-			convertNonAsciiText2Unicode(document.getDocumentElement());
-			Source xmlSource = new DOMSource(document);
-			Result outputTarget = new StreamResult(outputStream);
-
-			var transformer = XmlFactories.newTransformer();
-			transformer.transform(xmlSource, outputTarget);
-			retVal = new ByteArrayInputStream(outputStream.toByteArray());
-		} catch (ParserConfigurationException | SAXException | IOException | TransformerException
-				| TransformerFactoryConfigurationError e) {
-			// Do nothing
-		}
-		return retVal;
-	}
-
-	/**
-	 * Escapes all non java character in the node text.
-	 *
-	 * @param node the node to be escaped
-	 */
-	public static void convertNonAsciiText2Unicode(Node node) {
-		if (node.getFirstChild() != null) {
-			String nodeValue = node.getFirstChild().getNodeValue();
-			if (nodeValue != null) {
-				nodeValue = nodeValue.replace("\n", "").replace("\t", "");
-				node.getFirstChild().setNodeValue(StringEscapeUtils.escapeJava(nodeValue));
-			}
-		}
-		var nodeList = node.getChildNodes();
-		for (var i = 0; i < nodeList.getLength(); i++) {
-			var currentNode = nodeList.item(i);
-			if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
-				// calls this method for all the children which is Element
-				convertNonAsciiText2Unicode(currentNode);
-			}
-		}
-	}
+	
 
 	/**
 	 * Creates an address.
