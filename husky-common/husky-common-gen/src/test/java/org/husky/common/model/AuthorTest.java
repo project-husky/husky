@@ -305,7 +305,6 @@ public class AuthorTest {
 	 * .
 	 */
 	@Test
-	@Disabled
 	public void testAuthorAuthor() {
 		final Author auth = new Author(testAuthorMdht);
 		final POCDMT000040Author ref = auth.getAuthorMdht();
