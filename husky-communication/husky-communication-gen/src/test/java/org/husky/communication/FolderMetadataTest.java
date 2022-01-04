@@ -183,7 +183,6 @@ class FolderMetadataTest {
 	 * {@link org.husky.communication.FolderMetadata#getLastUpdateTime()}.
 	 */
 	@Test
-	@Disabled
 	void testSetGetLastUpdateTime() {
 		final FolderMetadata ref = new FolderMetadata();
 		assertNull(ref.getLastUpdateTime());

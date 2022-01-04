@@ -170,28 +170,5 @@ public class AuthorChTest {
 
 	}
 
-	@Test
-	@Disabled
-	public void testAuthorChAuthor() {
-		final Author a = new Author();
-		a.addAddress(testAddress);
-		a.addId(testIdentificator1);
-		a.addName(testName1);
-		a.setGln(testGln1);
-
-		Calendar cal = new GregorianCalendar();
-		cal.setTime(testDate1);
-		cal.setTimeZone(TimeZone.getTimeZone("UTC"));
-		a.setTime(cal);
-
-		final AuthorCh autCh = new AuthorCh(a);
-
-		assertEquals(testDate1, autCh.getTimeAsDate());
-
-		assertEquals(testAddress.getCity(), autCh.getAddress().getCity());
-		assertNotNull(autCh.getIds());
-		assertFalse(autCh.getIds().isEmpty());
-		assertEquals(testIdentificator1, autCh.getIds().get(0));
-		assertEquals(testName1.getFamily(), autCh.getName().getFamily());
-	}
+	
 }

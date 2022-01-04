@@ -268,7 +268,6 @@ class PixV3QueryTest {
 	 */
 	
 	@Test
-	@Disabled
 	void ITI44SourceMergeTest() {
 		log.debug("ITI44SourceMergeTest with target {}", pixUri);
 		
@@ -321,7 +320,6 @@ class PixV3QueryTest {
 	 */
 	
 	@Test
-	@Disabled
 	void ITI44SourceUpdateTest() {
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();

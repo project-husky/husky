@@ -31,12 +31,16 @@ import org.husky.common.hl7cdar2.TS;
  * Deprecated, use {@link org.husky.common.utils.time.Hl7Dtm}, {@link org.husky.common.utils.time.DateTimes} and the
  * new Java time API.
  */
-@Deprecated
+@Deprecated (since="1.0", forRemoval=true)
 public class DateUtil {
 	
 	public static final String SHORT_DATE_FORMAT = "yyyyMMdd";
 	public static final String LONG_DATE_FORMAT = "yyyyMMddHHmmss";
 	public static final String ERRORMSG_CANNOT_PARSE_DATE_VAL = "Cannot parse date, value=[";
+	
+	private DateUtil() {
+		
+	}
 
 	/**
 	 * <div class="en">Converts the given date to a CDA R2 IVL_TS value (without
@@ -44,11 +48,12 @@ public class DateUtil {
 	 *
 	 * <div class="de">Konvertiert das angegebene Datum in einen CDA R2
 	 * IVL_TS-Wert (ohne Zeitzonenangabe).</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            the value
 	 * @return the ivlts
 	 */
+	
 	public static IVLTS date2Ivlts(Date value) {
 		if (value == null) {
 			return new IVLTS(NullFlavor.UNKNOWN);
@@ -63,7 +68,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Konvertiert das angegebene Datum in einen CDA R2
 	 * IVL_TS-Wert (ohne Tageszeit und Zeitzonenangabe).</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            the value
 	 * @return the ivlts
@@ -82,7 +87,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Konvertiert das angegebene Datum in einen CDA R2
 	 * IVL_TS-Wert (mit Zeitzonenangabe).</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            the value
 	 * @return the ivlts
@@ -102,7 +107,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Konvertiert das angegebene Datum inkl. Tageszeit in ein
 	 * CDA R2 TS (ohne Zeitzone).</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            the value
 	 * @return the ts
@@ -121,7 +126,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Konvertiert das angegebene Datum ohne Tageszeit in ein
 	 * CDA R2 TS (ohne Zeitzone).</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            the value
 	 * @return the ts
@@ -140,7 +145,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Konvertiert das angegebene Datum ohne Tageszeit in ein CDA R2
 	 * TS (ohne Zeitzone).</div>
-	 *
+	 * @deprecated
 	 * @param value the value
 	 * @return the ts
 	 */
@@ -158,7 +163,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Konvertiert das angegebene Datum inkl. Tageszeit in ein
 	 * CDA R2 TS (mit Zeitzone).</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            the value
 	 * @return the ts
@@ -176,7 +181,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Formatiert den angegebenen Zeitstempel als String:
 	 * yyyyMMdd</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            the value
 	 * @return the string
@@ -191,7 +196,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Formatiert den angegebenen Zeitstempel als String:
 	 * yyyyMMdd</div>
-	 *
+	 * @deprecated
 	 * @param value the value
 	 * @return the string
 	 */
@@ -205,7 +210,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Formatiert den angegebenen Zeitstempel als String:
 	 * yyyyMMddHHmmss</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            the value
 	 * @return the string
@@ -220,7 +225,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Formatiert den angegebenen Zeitstempel als String:
 	 * yyyyMMddHHmmss</div>
-	 *
+	 * @deprecated
 	 * @param value the value
 	 * @return the string
 	 */
@@ -234,7 +239,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Formatiert den angegebenen Zeitstempel als String:
 	 * yyyyMMddHHmmssXXXX</div>
-	 *
+	 * @deprecated
 	 * @param value the value
 	 * @return the string
 	 */
@@ -250,7 +255,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Formatiert den angegebenen Zeitstempel als String:
 	 * yyyyMMddHHmmssXXXX</div>
-	 *
+	 * @deprecated
 	 * @param value the value
 	 * @return the string
 	 */
@@ -272,7 +277,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
 	 * Erwartetes Format: dd.MM.yyyy</div>
-	 *
+	 * @deprecated
 	 * @param dateSt
 	 *            <br>
 	 *            <div class="en"> date String</div>
@@ -294,7 +299,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
 	 * Erwartetes Format: dd.MM.yyyy HH:mm oder dd.MM.yyyy HH:mm:ss</div>
-	 *
+	 * @deprecated
 	 * @param dateSt
 	 *            <br>
 	 *            <div class="de"> date String</div>
@@ -321,7 +326,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
 	 * Erwartetes Format: yyyyMM</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            <br>
 	 *            <div class="de">value</div>
@@ -343,7 +348,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
 	 * Erwartetes Format: yyyyMMdd</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            <br>
 	 *            <div class="de">value</div>
@@ -365,7 +370,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
 	 * Erwartetes Format: yyyy-MM-dd</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            <br>
 	 *            <div class="de">value</div>
@@ -387,7 +392,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
 	 * Erwartetes Format: yyyyMMddHHmm</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            <br>
 	 *            <div class="de"> value</div>
@@ -410,7 +415,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
 	 * Erwartetes Format: yyyyMMddHHmmss</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            <br>
 	 *            <div class="de"> value</div>
@@ -434,7 +439,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
 	 * Erwartetes Format: yyyyMMddHHmmZ</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            <br>
 	 *            <div class="de"> value</div>
@@ -456,7 +461,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
 	 * Erwartetes Format: yyyyMMddHHmmZZZZ</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            <br>
 	 *            <div class="de"> value</div>
@@ -478,7 +483,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
 	 * Erwartetes Format: yyyy-MM-dd'T'HH:mm:ss</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            <br>
 	 *            <div class="de"> value</div>
@@ -498,7 +503,7 @@ public class DateUtil {
 	/**
 	 * Check whether the dates of the two dates are equal (ignoring the time of the
 	 * day).
-	 *
+	 * @deprecated
 	 * @param validFrom  the valid from
 	 * @param validFrom2 the valid from 2
 	 * @return true, if equal
