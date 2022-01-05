@@ -82,21 +82,6 @@ public class ValueSet extends ValueSetBase implements Serializable {
 			return this;
 		}
 
-		public Builder withName(String name) {
-			this.name = name;
-			return this;
-		}
-
-		public Builder withStatus(ValueSetStatus status) {
-			this.status = status;
-			return this;
-		}
-
-		public Builder withValueSetEntryList(ArrayList<ValueSetEntry> valueSetEntryList) {
-			this.valueSetEntryList = valueSetEntryList;
-			return this;
-		}
-
 		public Builder withIdentificator(IdentificatorBaseType identificator) {
 			this.identificator = identificator;
 			return this;
@@ -107,8 +92,23 @@ public class ValueSet extends ValueSetBase implements Serializable {
 			return this;
 		}
 
+		public Builder withName(String name) {
+			this.name = name;
+			return this;
+		}
+
 		public Builder withMappingNameList(ArrayList<String> mappingNameList) {
 			this.mappingNameList = mappingNameList;
+			return this;
+		}
+
+		public Builder withStatus(ValueSetStatus status) {
+			this.status = status;
+			return this;
+		}
+
+		public Builder withValueSetEntryList(ArrayList<ValueSetEntry> valueSetEntryList) {
+			this.valueSetEntryList = valueSetEntryList;
 			return this;
 		}
 

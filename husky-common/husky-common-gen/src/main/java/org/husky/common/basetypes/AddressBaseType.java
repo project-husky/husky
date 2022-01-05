@@ -36,45 +36,42 @@ public class AddressBaseType implements Serializable {
 	 * The additional locator.
 	 */
 	private String additionalLocator;
-	
-	/**
-	 * The city.
-	 */
-	private String city;
 	/**
 	 * The building number.
 	 */
 	private String buildingNumber;
 	/**
-	 * The null flavor.
+	 * The city.
 	 */
-	private NullFlavor nullFlavor;
+	private String city;
 	/**
 	 * The country.
 	 */
 	private String country;
 	/**
+	 * The null flavor.
+	 */
+	private NullFlavor nullFlavor;
+	/**
 	 * The postal code.
 	 */
 	private String postalCode;
+	/**
+	 * The post box.
+	 */
+	private String postBox;
 	/**
 	 * The state.
 	 */
 	private String state;
 	/**
-	 * The post box.
+	 * The street address line 1.
 	 */
-	private String postBox;
-	
+	private String streetAddressLine1;
 	/**
 	 * The street address line 2.
 	 */
 	private String streetAddressLine2;
-	
-	/**
-	 * The street address line 1.
-	 */
-	private String streetAddressLine1;
 	/**
 	 * The street name.
 	 */
@@ -98,17 +95,17 @@ public class AddressBaseType implements Serializable {
 	@Generated("SparkTools")
 	private AddressBaseType(Builder builder) {
 		this.additionalLocator = builder.additionalLocator;
+		this.buildingNumber = builder.buildingNumber;
 		this.city = builder.city;
+		this.country = builder.country;
 		this.postalCode = builder.postalCode;
 		this.postBox = builder.postBox;
+		this.state = builder.state;
 		this.streetAddressLine1 = builder.streetAddressLine1;
 		this.streetAddressLine2 = builder.streetAddressLine2;
 		this.streetName = builder.streetName;
-		this.country = builder.country;
 		this.nullFlavor = builder.nullFlavor;
 		this.usage = builder.usage;
-		this.state = builder.state;
-		this.buildingNumber = builder.buildingNumber;
 	}
 
 	/**
@@ -526,47 +523,15 @@ public class AddressBaseType implements Serializable {
     @Generated("SparkTools")
     public static final class Builder {
 
-        
+		/**
+		 * The usage.
+		 */
+		private PostalAddressUse usage;
 
 		/**
-		 * The building number.
+		 * The street name.
 		 */
-		private String buildingNumber;
-
-		/**
-		 * The city.
-		 */
-		private String city;
-
-		/**
-		 * The country.
-		 */
-		private String country;
-
-		/**
-		 * The null flavor.
-		 */
-		private NullFlavor nullFlavor;
-
-		/**
-		 * The postal code.
-		 */
-		private String postalCode;
-
-		/**
-		 * The post box.
-		 */
-		private String postBox;
-
-		/**
-		 * The state.
-		 */
-		private String state;
-
-		/**
-		 * The street address line 1.
-		 */
-		private String streetAddressLine1;
+		private String streetName;
 
 		/**
 		 * The street address line 2.
@@ -574,19 +539,49 @@ public class AddressBaseType implements Serializable {
 		private String streetAddressLine2;
 
 		/**
-		 * The street name.
+		 * The street address line 1.
 		 */
-		private String streetName;
-		
+		private String streetAddressLine1;
+
+		/**
+		 * The state.
+		 */
+		private String state;
+
+		/**
+		 * The post box.
+		 */
+		private String postBox;
+
+		/**
+		 * The postal code.
+		 */
+		private String postalCode;
+
+		/**
+		 * The null flavor.
+		 */
+		private NullFlavor nullFlavor;
+
+		/**
+		 * The country.
+		 */
+		private String country;
+
+		/**
+		 * The city.
+		 */
+		private String city;
+
+		/**
+		 * The building number.
+		 */
+		private String buildingNumber;
+
 		/**
 		 * The additional locator.
 		 */
 		private String additionalLocator;
-
-		/**
-		 * The usage.
-		 */
-		private PostalAddressUse usage;
 
 		/**
 		 * Instantiates a new builder.

@@ -112,13 +112,10 @@ public abstract class V3PdqContinuationBase extends V3Message {
 		getRootElement().getReceiver().add(PixPdqV3Utils.createMCCIMT000300UV01Receiver(applicationOID, facilityOID));
 	}
 
-	/**
-	 * Set the processing code
-	 * 
-	 * @param processingCode
-	 */
-	public void setProcessingCode(String processingCode) {
-		getRootElement().setProcessingCode(PixPdqV3Utils.createCS(processingCode));
+	@Override
+	protected void setAcceptAckCode() {
+		// The acceptAckCode SHALL be set to AL
+		getRootElement().setAcceptAckCode(PixPdqV3Utils.createCS(acceptAckCode));
 	}
 
 	/**
@@ -170,6 +167,11 @@ public abstract class V3PdqContinuationBase extends V3Message {
 		getRootElement().setCreationTime(PixPdqV3Utils.createTSCurrentTime());
 	}
 
+	/**
+	 * Set the processing code
+	 * 
+	 * @param processingCode
+	 */
 	@Override
 	protected void setProcessingCode() {
 		// set ProcessingCode. This attribute defines whether the message is
@@ -178,7 +180,11 @@ public abstract class V3PdqContinuationBase extends V3Message {
 		// (Testing), P (Production)
 		// Will default to production because it will need to be that way in the
 		// field.
-		this.setProcessingCode(processingCode);
+		getRootElement().setProcessingCode(PixPdqV3Utils.createCS(processingCode));
+	}
+
+	public void setProcessingCode(String code) {
+		getRootElement().setProcessingCode(PixPdqV3Utils.createCS(code));
 	}
 
 	@Override
@@ -187,10 +193,5 @@ public abstract class V3PdqContinuationBase extends V3Message {
 		getRootElement().setProcessingModeCode(PixPdqV3Utils.createCS(processingModeCode));
 	}
 
-	@Override
-	protected void setAcceptAckCode() {
-		// The acceptAckCode SHALL be set to AL
-		getRootElement().setAcceptAckCode(PixPdqV3Utils.createCS(acceptAckCode));
-	}
 
 }

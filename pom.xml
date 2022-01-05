@@ -655,7 +655,7 @@
 									<Version>${project.version}</Version>
 									<GroupId>${project.groupId}</GroupId>
 									<ArtifactId>${project.artifactId}</ArtifactId>
-									<Url>https://sourceforge.net/projects/ehealthconnector/</Url> <!-- TODO -->
+									<Url>https://github.com/project-husky/husky</Url>
 								</manifestEntries>
 							</manifestSection>
 						</manifestSections>

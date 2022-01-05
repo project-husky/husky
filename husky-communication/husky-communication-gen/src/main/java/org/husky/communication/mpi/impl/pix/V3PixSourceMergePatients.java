@@ -177,17 +177,6 @@ public class V3PixSourceMergePatients extends V3Message {
 	}
 
 	@Override
-	protected void setId() {
-		getRootElement().setId(messageId);
-	}
-
-	@Override
-	protected void setCreationTime() {
-		// set current time
-		getRootElement().setCreationTime(PixPdqV3Utils.createTSCurrentTime());
-	}
-
-	@Override
 	protected void setProcessingCode() {
 		// set ProcessingCode. This attribute defines whether the message is
 		// part of a production,
@@ -202,6 +191,17 @@ public class V3PixSourceMergePatients extends V3Message {
 	protected void setProcessingModeCode() {
 		// The value of processingModeCode SHALL be set to T
 		getRootElement().setProcessingModeCode(PixPdqV3Utils.createCS(processingModeCode));
+	}
+
+	@Override
+	protected void setId() {
+		getRootElement().setId(messageId);
+	}
+
+	@Override
+	protected void setCreationTime() {
+		// set current time
+		getRootElement().setCreationTime(PixPdqV3Utils.createTSCurrentTime());
 	}
 
 	@Override
