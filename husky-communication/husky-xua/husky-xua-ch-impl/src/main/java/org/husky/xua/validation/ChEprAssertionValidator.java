@@ -94,6 +94,7 @@ public class ChEprAssertionValidator {
                 conditionValidators,
                 List.of(new ChEprSubjectConfirmationBearerValidator()),
                 List.of(new ChEprAttributeStatementValidator()),
+                null,
                 null, // TODO
                 null // No signature pre-validation needed, CH-EPR does not add requirements
         );
