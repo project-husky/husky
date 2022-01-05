@@ -923,6 +923,7 @@ public class Util {
 	 *
 	 * @return path to temp folder
 	 */
+	@SuppressWarnings("java:S1075")
 	public static String getTempDirectory() {
 		final var envVariable = "eHCTempPath";
 		String tempDirectoryPath = null;
