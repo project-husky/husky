@@ -48,9 +48,9 @@ public class V3Acknowledgement extends V3Response {
 		// for each reciever
 		for (var i = 0; i < numReceivers; i++) {
 			// get the application and (if available) facility
-			this.addReceivingApplication(rootElement.getReceiver().get(i).getDevice().getId().get(0).getRoot());
+			receivingApplication.add(rootElement.getReceiver().get(i).getDevice().getId().get(0).getRoot());
 			if (null != rootElement.getReceiver().get(i).getDevice().getAsAgent())
-				this.addReceivingFacility(rootElement.getReceiver().get(i).getDevice().getAsAgent()
+				receivingFacility.add(rootElement.getReceiver().get(i).getDevice().getAsAgent()
 						.getRepresentedOrganization().getId().get(0).getRoot());
 		}
 
@@ -78,11 +78,6 @@ public class V3Acknowledgement extends V3Response {
 
 			this.setAcknowledgementDetail(detailCode, detailText, null, null);
 		}
-	}
-
-	@Override
-	protected void addControlActProcess() {
-		// This is not necessary here
 	}
 
 }

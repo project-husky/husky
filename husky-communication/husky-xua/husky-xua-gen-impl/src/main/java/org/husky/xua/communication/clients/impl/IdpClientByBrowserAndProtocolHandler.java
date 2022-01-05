@@ -18,10 +18,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
+import java.nio.file.attribute.FileAttribute;
+import java.nio.file.attribute.PosixFilePermission;
+import java.nio.file.attribute.PosixFilePermissions;
 import java.util.Base64;
 import java.util.Calendar;
+import java.util.Set;
 import java.util.UUID;
 
+import org.apache.commons.lang3.SystemUtils;
 import org.husky.xua.authentication.AuthnRequest;
 import org.husky.xua.communication.clients.IdpClient;
 import org.husky.xua.communication.config.impl.IdpClientByBrowserAndProtocolHandlerConfigImpl;
@@ -53,6 +58,12 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 		config = clientConfiguration;
 	}
 
+	/*
+	 * Here the sonar issue
+	 * "Make sure publicly writable directories are used safely here." is
+	 * suppressed, because file is only writeable for the owner
+	 */
+	@SuppressWarnings("java:S5443")
 	private void openHtmlFormPage(AuthnRequest aAuthnRequest)
 			throws SerializeException, IOException {
 		final var serializer = new AuthnRequestSerializerImpl();
@@ -66,7 +77,18 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 
 		logger.debug("html to send to browser: {}", template);
 
-		final var tempFile = File.createTempFile(String.format("saml_%s", UUID.randomUUID().toString()), ".html");
+		File tempFile;
+		if (SystemUtils.IS_OS_UNIX) {
+			FileAttribute<Set<PosixFilePermission>> attr = PosixFilePermissions
+					.asFileAttribute(PosixFilePermissions.fromString("rwx------"));
+			tempFile = Files.createTempFile(String.format("saml_%s", UUID.randomUUID().toString()), ".html", attr)
+					.toFile();
+		} else {
+			tempFile = File.createTempFile(String.format("saml_%s", UUID.randomUUID().toString()), ".html");
+			tempFile.setWritable(false, true);
+			tempFile.setReadable(true);
+			tempFile.setExecutable(false);
+		}
 
 		try(final var os = new FileOutputStream(tempFile)){
 			os.write(template.getBytes());
@@ -74,7 +96,7 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 
 		logger.info("Please open {} in your browser", tempFile.toURI());
 
-		Files.deleteIfExists(tempFile.toPath());
+		tempFile.deleteOnExit();
 	}
 
 	private Response getResponse(String samlReponse)
