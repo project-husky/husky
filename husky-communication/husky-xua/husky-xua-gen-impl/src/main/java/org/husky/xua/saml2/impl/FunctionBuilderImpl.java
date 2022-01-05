@@ -57,6 +57,8 @@ public class FunctionBuilderImpl
 		implements SimpleBuilder<Function>, SecurityObjectBuilder<String, Function> {
 
 	@Override
+	/* simple function for comparing namespaces amm creating an object based on namespace, reducing complexity not necessary */
+	@SuppressWarnings("java:S3776")
 	public Function create(String aInternalObject) {
 		Function function = null;
 		if ("urn:hl7-org:v3:function:CV-equal".equalsIgnoreCase(aInternalObject)) {
@@ -99,7 +101,9 @@ public class FunctionBuilderImpl
 
 		return function;
 	}
-
+    
+	/* simple function for comparing namespaces and get a Date function based on namespace, reducing complexity not necessary */
+	@SuppressWarnings("java:S3776")
 	private Function getDateFunction(String aInternalObject) {
 		if ("urn:oasis:names:tc:xacml:1.0:function:date-equal".equalsIgnoreCase(aInternalObject)) {
 			return new DateEqualFunction();

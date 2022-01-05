@@ -612,6 +612,8 @@ public class ValueSetManager {
 		return addr;
 	}
 
+	/* complexity currently 16 (borderline) => do not fix */
+	@SuppressWarnings("java:S3776")
 	private void extractAddressLines(AddressBaseType addr, Object object2) {
 		String type = null;
 		String content = null;
@@ -682,6 +684,8 @@ public class ValueSetManager {
 		}
 	}
 
+	/* complexity borderline => do not fix */
+	@SuppressWarnings("java:S3776")
 	private ValueSetEntry addValueSetEntry(Object object2, ValueSet valueSet, ValueSetEntry lastValueSetEntry) {
 
 		var valueSetEntry = getValueSetEntry(object2);
