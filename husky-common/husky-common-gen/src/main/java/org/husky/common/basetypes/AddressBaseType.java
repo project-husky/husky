@@ -523,55 +523,10 @@ public class AddressBaseType implements Serializable {
     @Generated("SparkTools")
     public static final class Builder {
 
-        /**
-		 * The additional locator.
-		 */
-		private String additionalLocator;
-
 		/**
-		 * The building number.
+		 * The usage.
 		 */
-		private String buildingNumber;
-
-		/**
-		 * The city.
-		 */
-		private String city;
-
-		/**
-		 * The country.
-		 */
-		private String country;
-
-		/**
-		 * The null flavor.
-		 */
-		private NullFlavor nullFlavor;
-
-		/**
-		 * The postal code.
-		 */
-		private String postalCode;
-
-		/**
-		 * The post box.
-		 */
-		private String postBox;
-
-		/**
-		 * The state.
-		 */
-		private String state;
-
-		/**
-		 * The street address line 1.
-		 */
-		private String streetAddressLine1;
-
-		/**
-		 * The street address line 2.
-		 */
-		private String streetAddressLine2;
+		private PostalAddressUse usage;
 
 		/**
 		 * The street name.
@@ -579,9 +534,54 @@ public class AddressBaseType implements Serializable {
 		private String streetName;
 
 		/**
-		 * The usage.
+		 * The street address line 2.
 		 */
-		private PostalAddressUse usage;
+		private String streetAddressLine2;
+
+		/**
+		 * The street address line 1.
+		 */
+		private String streetAddressLine1;
+
+		/**
+		 * The state.
+		 */
+		private String state;
+
+		/**
+		 * The post box.
+		 */
+		private String postBox;
+
+		/**
+		 * The postal code.
+		 */
+		private String postalCode;
+
+		/**
+		 * The null flavor.
+		 */
+		private NullFlavor nullFlavor;
+
+		/**
+		 * The country.
+		 */
+		private String country;
+
+		/**
+		 * The city.
+		 */
+		private String city;
+
+		/**
+		 * The building number.
+		 */
+		private String buildingNumber;
+
+		/**
+		 * The additional locator.
+		 */
+		private String additionalLocator;
 
 		/**
 		 * Instantiates a new builder.

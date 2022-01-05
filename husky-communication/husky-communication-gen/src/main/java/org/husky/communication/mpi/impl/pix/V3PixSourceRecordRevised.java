@@ -56,6 +56,13 @@ public class V3PixSourceRecordRevised extends V3Message {
 		addControlActProcess();
 	}
 
+	@Override
+	protected void addControlActProcess() {
+		// add the control act process to the message
+		getRootElement()
+				.setControlActProcess(queryControlActProcess.getPRPAIN201302UV02MFMIMT700701UV01ControlActProcess());
+	}
+
 	/**
 	 * Add a Receiver with the supplied IDs
 	 *
@@ -98,8 +105,15 @@ public class V3PixSourceRecordRevised extends V3Message {
 	 *
 	 * @param processingCode
 	 */
-	public void setProcessingCode(String processingCode) {
+	@Override
+	protected void setProcessingCode() {
 		getRootElement().setProcessingCode(PixPdqV3Utils.createCS(processingCode));
+	}
+
+	@Override
+	protected void setProcessingModeCode() {
+		// The value of processingModeCode SHALL be set to T
+		getRootElement().setProcessingModeCode(PixPdqV3Utils.createCS(processingModeCode));
 	}
 
 	/**
@@ -120,10 +134,15 @@ public class V3PixSourceRecordRevised extends V3Message {
 	}
 
 	@Override
-	protected void addControlActProcess() {
-		// add the control act process to the message
-		getRootElement()
-				.setControlActProcess(queryControlActProcess.getPRPAIN201302UV02MFMIMT700701UV01ControlActProcess());
+	protected void setAcceptAckCode() {
+		// The acceptAckCode SHALL be set to AL
+		getRootElement().setAcceptAckCode(PixPdqV3Utils.createCS(acceptAckCode));
+	}
+
+	@Override
+	protected void setCreationTime() {
+		// set current time
+		getRootElement().setCreationTime(PixPdqV3Utils.createTSCurrentTime());
 	}
 
 	@Override
@@ -135,35 +154,6 @@ public class V3PixSourceRecordRevised extends V3Message {
 	@Override
 	protected void setId() {
 		getRootElement().setId(messageId);
-	}
-
-	@Override
-	protected void setCreationTime() {
-		// set current time
-		getRootElement().setCreationTime(PixPdqV3Utils.createTSCurrentTime());
-	}
-
-	@Override
-	protected void setProcessingCode() {
-		// set ProcessingCode. This attribute defines whether the message is
-		// part of a production,
-		// training, or debugging system. Valid values are D (Debugging), T
-		// (Testing), P (Production)
-		// Will default to production because it will need to be that way in the
-		// field.
-		this.setProcessingCode(processingCode);
-	}
-
-	@Override
-	protected void setProcessingModeCode() {
-		// The value of processingModeCode SHALL be set to T
-		getRootElement().setProcessingModeCode(PixPdqV3Utils.createCS(processingModeCode));
-	}
-
-	@Override
-	protected void setAcceptAckCode() {
-		// The acceptAckCode SHALL be set to AL
-		getRootElement().setAcceptAckCode(PixPdqV3Utils.createCS(acceptAckCode));
 	}
 
 }
