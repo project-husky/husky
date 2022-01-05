@@ -62,7 +62,9 @@ public class FhirXdTransaction {
 	 * about destination and submission-set including documents for a transaction
 	 * (e.g. IHE XDS submission or IHE XDM portable media creation)
 	 */
+	/* derived from external library */
 	@ResourceDef(name = "DocumentManifest")
+	@SuppressWarnings("java:S110")
 	public static class Transaction extends DocumentManifest {
 
 		/** The Constant urnUseAsAffinityDomain. */

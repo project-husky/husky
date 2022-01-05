@@ -200,6 +200,8 @@ public class Destination {
 	 * @param trustStoreType
 	 *            the type of the truststore file (default: jks)
 	 */
+	/* in use by external libraries */
+	@SuppressWarnings("java:S107")
 	public Destination(String senderOrganizationalOid, URI uri, String keyStore,
 			String keyStorePassword, String keyStoreType, String trustStore,
 			String trustStorePassword, String trustStoreType) {

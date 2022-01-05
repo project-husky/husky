@@ -61,6 +61,8 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
  *
  * @see "http://jamesagnew.github.io/hapi-fhir/index.html"
  */
+/* derived from external library */
+@SuppressWarnings("java:S110")
 @ResourceDef(name = "Patient")
 public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 

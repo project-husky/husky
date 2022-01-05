@@ -120,7 +120,9 @@ class PdqV3QueryTest {
 	 *
 	 * @throws Exception
 	 */
+	/* number of assertions needed to compare all elements */
 	@Test
+	@SuppressWarnings("java:S5961")
 	void testGetPatientsFromPdqQuery() throws Exception {
 		
 		final AffinityDomain affinityDomain = new AffinityDomain();

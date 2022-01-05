@@ -43,6 +43,8 @@ import ca.uhn.fhir.util.ElementUtil;
 /**
  * <div class="en"></div><div class="de"></div><div class="fr"></div>
  */
+/* derived from external library */
+@SuppressWarnings("java:S110")
 public class FhirCdaChVacd /* extends AbstractFhirCdaCh */ {
 
 	/**

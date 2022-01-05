@@ -23,6 +23,8 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
  * Supports the FHIR to eHC conversion for CDA-CH-LRPH documents
  *
  */
+/* derived from external library */
+@SuppressWarnings("java:S110")
 public class FhirCdaChLr {
 	/**
 	 * <div class="en">Type of the FHIR resource to define whether the resulting

@@ -13,6 +13,8 @@ import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Description;
 import ca.uhn.fhir.model.api.annotation.Extension;
 
+/* derived from external library */
+@SuppressWarnings("java:S110")
 public class CdaFhirDocument extends DocumentManifest {
 
 	/**
