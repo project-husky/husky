@@ -46,6 +46,8 @@ public class ChEprSubjectConfirmationBearerValidator implements SubjectConfirmat
      * @param context      The current Assertion validation context.
      * @return the validation result.
      */
+    /* reduction of complexity not necessary, value still below 20 */
+    @SuppressWarnings("java:S3776")
     public ValidationResult validate(final SubjectConfirmation confirmation,
                                      @Nullable final Assertion assertion,
                                      final ValidationContext context) {

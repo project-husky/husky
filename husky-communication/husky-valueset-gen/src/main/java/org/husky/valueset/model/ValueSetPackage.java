@@ -28,6 +28,8 @@ import org.husky.valueset.enums.ValueSetPackageStatus;
  * <div class="de">Die Klasse ValueSetPackage dient zum Sammeln aller
  * Informationen zu einem Paket mit mehreren Wertesätzen.</div>
  */
+/* contains generated code */
+@SuppressWarnings("java:DuplicatedBlocks")
 public class ValueSetPackage extends ValueSetBase implements Serializable {
 
 	/**

@@ -201,7 +201,35 @@ public class ValueSetPackageManager {
 			ValueSetPackageStatus status) {
 		return getValueSetPackageConfigByStatusAndDate(status, null);
 	}
+	
+	
+	private Date setDateValIfNull(Date latest, Date current) {
+		if (latest == null)
+			latest = current;
+		return latest;
+	}
+	
+	private ValueSetPackageConfig setRetval(boolean isCandidate, ValueSetPackageConfig valueSetPackageConfig, ValueSetPackageConfig retVal) {
+		if (isCandidate)
+			retVal = valueSetPackageConfig;
+		return retVal;
+	}
+	
+	private boolean fitsDate(Date date, Date from, Date to) {
+		boolean dateFits = (date == null);
+		if (!dateFits) {
+			if (from != null)
+				dateFits = ((date.equals(from)) || (date.after(from)));
+			if (dateFits && to != null) {
+				dateFits = ((date.equals(to)) || (date.before(to)));
+			}
+		}
 
+		return dateFits;
+	}
+	
+	
+	
 	/**
 	 * <div class="en">Gets the value set package config by status and date.
 	 * Elements not having the given status and elements that are not valid at
@@ -222,6 +250,8 @@ public class ValueSetPackageManager {
 	 *            the date
 	 * @return the value set package config by status and date
 	 */
+	/* shown complexity in detail view is 17, effort for further reduction too high*/
+	@SuppressWarnings("java:S3776")
 	public ValueSetPackageConfig getValueSetPackageConfigByStatusAndDate(
 			ValueSetPackageStatus status, Date date) {
 		ValueSetPackageConfig retVal = null;
@@ -243,23 +273,20 @@ public class ValueSetPackageManager {
 						if (retVal == null)
 							retVal = valueSetPackageConfig;
 
-						if (from != null) {
-							if (latestFrom == null)
-								latestFrom = from;
-						} else
+						if (from != null) 
+							latestFrom = setDateValIfNull(latestFrom, from);
+						else
 							isCandidate = true;
 
-						if (to != null) {
-							if (latestTo == null)
-								latestTo = to;
-						} else {
+						if (to != null) 
+							latestTo = setDateValIfNull(latestTo, to);
+						else {
 							// from null and to null => this always valid
 							// -> the first entry makes it
-							if (isCandidate)
-								retVal = valueSetPackageConfig;
+							retVal = setRetval(isCandidate, valueSetPackageConfig, retVal);
 							isCandidate = true;
 						}
-
+						
 						if (from != null) {
 							if (from.after(latestFrom)) {
 								latestFrom = from;
@@ -268,8 +295,7 @@ public class ValueSetPackageManager {
 								// date
 								// will
 								// get the new choice
-								if (isCandidate)
-									retVal = valueSetPackageConfig;
+								retVal = setRetval(isCandidate, valueSetPackageConfig, retVal);
 								isCandidate = true;
 							} else
 								isCandidate = false;
@@ -283,8 +309,7 @@ public class ValueSetPackageManager {
 								// date
 								// will
 								// get the new choice
-								if (isCandidate)
-									retVal = valueSetPackageConfig;
+								retVal = setRetval(isCandidate, valueSetPackageConfig, retVal);
 							}
 						} else if (isCandidate)
 							// in this case, a from candidate with a null to
@@ -301,18 +326,7 @@ public class ValueSetPackageManager {
 
 	}
 
-	private boolean fitsDate(Date date, Date from, Date to) {
-		boolean dateFits = (date == null);
-		if (!dateFits) {
-			if (from != null)
-				dateFits = ((date.equals(from)) || (date.after(from)));
-			if (dateFits && to != null) {
-				dateFits = ((date.equals(to)) || (date.before(to)));
-			}
-		}
-
-		return dateFits;
-	}
+	
 
 	/**
 	 * <div class="en">Gets the value set package config list.</div>

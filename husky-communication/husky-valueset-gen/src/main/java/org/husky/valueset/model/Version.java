@@ -183,16 +183,6 @@ public class Version implements Serializable {
 		else
 			retVal = this.label.equals(((Version) obj).getLabel());
 
-		// only business rules are applied, here. Rest was initially implemented
-		// and stays here for future use. If you use it, you need to implement
-		// another method and not change the current method.
-		// if (retVal) {
-		// if (this.publishingAuthority == null)
-		// retVal = (obj.getPublishingAuthority() == null);
-		// else
-		// retVal =
-		// this.publishingAuthority.equals(obj.getPublishingAuthority());
-		// }
 		if (retVal) {
 			retVal = compareDate(this.validFrom, ((Version) obj).getValidFrom());
 		}
