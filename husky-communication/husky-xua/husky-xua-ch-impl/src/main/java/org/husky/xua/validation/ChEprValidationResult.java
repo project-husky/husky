@@ -27,6 +27,8 @@ import org.opensaml.saml.common.assertion.ValidationResult;
  *
  * @author Quentin Ligier
  */
+/* record feature only availble from java 16 onwards */
+@SuppressWarnings("java:S6205")
 public class ChEprValidationResult {
 
     /**

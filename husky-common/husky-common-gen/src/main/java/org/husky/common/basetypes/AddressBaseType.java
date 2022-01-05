@@ -36,42 +36,45 @@ public class AddressBaseType implements Serializable {
 	 * The additional locator.
 	 */
 	private String additionalLocator;
-	/**
-	 * The building number.
-	 */
-	private String buildingNumber;
+	
 	/**
 	 * The city.
 	 */
 	private String city;
 	/**
-	 * The country.
+	 * The building number.
 	 */
-	private String country;
+	private String buildingNumber;
 	/**
 	 * The null flavor.
 	 */
 	private NullFlavor nullFlavor;
 	/**
+	 * The country.
+	 */
+	private String country;
+	/**
 	 * The postal code.
 	 */
 	private String postalCode;
-	/**
-	 * The post box.
-	 */
-	private String postBox;
 	/**
 	 * The state.
 	 */
 	private String state;
 	/**
-	 * The street address line 1.
+	 * The post box.
 	 */
-	private String streetAddressLine1;
+	private String postBox;
+	
 	/**
 	 * The street address line 2.
 	 */
 	private String streetAddressLine2;
+	
+	/**
+	 * The street address line 1.
+	 */
+	private String streetAddressLine1;
 	/**
 	 * The street name.
 	 */
@@ -95,17 +98,17 @@ public class AddressBaseType implements Serializable {
 	@Generated("SparkTools")
 	private AddressBaseType(Builder builder) {
 		this.additionalLocator = builder.additionalLocator;
-		this.buildingNumber = builder.buildingNumber;
 		this.city = builder.city;
-		this.country = builder.country;
 		this.postalCode = builder.postalCode;
 		this.postBox = builder.postBox;
-		this.state = builder.state;
 		this.streetAddressLine1 = builder.streetAddressLine1;
 		this.streetAddressLine2 = builder.streetAddressLine2;
 		this.streetName = builder.streetName;
+		this.country = builder.country;
 		this.nullFlavor = builder.nullFlavor;
 		this.usage = builder.usage;
+		this.state = builder.state;
+		this.buildingNumber = builder.buildingNumber;
 	}
 
 	/**
@@ -523,10 +526,7 @@ public class AddressBaseType implements Serializable {
     @Generated("SparkTools")
     public static final class Builder {
 
-        /**
-		 * The additional locator.
-		 */
-		private String additionalLocator;
+        
 
 		/**
 		 * The building number.
@@ -577,6 +577,11 @@ public class AddressBaseType implements Serializable {
 		 * The street name.
 		 */
 		private String streetName;
+		
+		/**
+		 * The additional locator.
+		 */
+		private String additionalLocator;
 
 		/**
 		 * The usage.
