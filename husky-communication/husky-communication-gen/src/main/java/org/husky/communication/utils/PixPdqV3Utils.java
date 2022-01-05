@@ -127,6 +127,8 @@ public class PixPdqV3Utils {
 	 * @param addressType             (possible values are "H", "W", or "WP")
 	 * @return AD type object containing the non-empty address parts provided.
 	 */
+	/* in use by external libraries */
+	@SuppressWarnings("java:S107")
 	public static AD createAd(List<String> addressStreetAddressLines, String addressCity, String addressCounty,
 			String addressState, String addressCountry, String addressZip, String addressOtherDesignation,
 			String addressType) {
@@ -330,6 +332,8 @@ public class PixPdqV3Utils {
 	 * @param addressType             (possible values are "H", "W", or "WP")
 	 * @return AD type object containing the non-empty address parts provided.
 	 */
+	/* in use by external libraries */
+	@SuppressWarnings("java:S107")
 	public static AD createAd(String addressStreetAddress, String addressCity, String addressCounty,
 			String addressState, String addressCountry, String addressZip, String addressOtherDesignation,
 			String addressType) {

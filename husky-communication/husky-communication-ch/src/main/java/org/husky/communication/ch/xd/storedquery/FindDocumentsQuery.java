@@ -71,6 +71,8 @@ public class FindDocumentsQuery extends AbstractStoredQuery {
 	 * @param status
 	 *            the availability status of the document (required)
 	 */
+	/* in use by external libraries */
+	@SuppressWarnings("java:S107")
 	public FindDocumentsQuery(Identificator patientId,
 			org.husky.communication.ch.enums.ClassCode[] classCodes,
 			org.husky.communication.xd.storedquery.DateTimeRange[] dateTimeRanges,

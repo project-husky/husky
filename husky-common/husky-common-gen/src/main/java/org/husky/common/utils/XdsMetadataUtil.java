@@ -483,6 +483,8 @@ public class XdsMetadataUtil {
 		final var p = new Patient();
 
 		// Name
+		@SuppressWarnings("rawtypes")
+		/* usage of external framework */
 		ListIterator<org.openehealth.ipf.commons.ihe.xds.core.metadata.Name> names = spit.getNames();
 		if (names.hasNext()) {
 			while (names.hasNext()) {

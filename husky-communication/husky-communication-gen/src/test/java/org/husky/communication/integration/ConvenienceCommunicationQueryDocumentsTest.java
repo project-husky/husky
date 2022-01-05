@@ -192,7 +192,9 @@ class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 	 * 
 	 * @throws Exception
 	 */
+	/* test function to checks  attributes - no need to reduce number of assertions */
 	@Test
+	@SuppressWarnings("java:S5961")
 	void queryFindDocumentsMetadataOfPdf() throws Exception {
 
 		Identificator patientId = new Identificator("1.3.6.1.4.1.21367.13.20.1000", "IHERED-1024");
@@ -312,7 +314,9 @@ class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 	 * 
 	 * @throws Exception
 	 */
+	/* test function to checks  attributes - no need to reduce number of assertions */
 	@Test
+	@SuppressWarnings("java:S5961")
 	void queryFindDocumentsMetadataOfCda() throws Exception {
 
 		Identificator patientId = new Identificator("1.3.6.1.4.1.21367.13.20.3000", "IHEBLUE-2599");

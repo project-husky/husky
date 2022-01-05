@@ -79,7 +79,10 @@ import org.slf4j.LoggerFactory;
  * Helper methods for the Husky and CDA.
  * @deprecated 
  */
+/* class deprecated and marked for removal - no further optimizations will be done */
 @Deprecated(forRemoval = true)
+@SuppressWarnings("java:S1133")
+
 public class Util {
 
 	/** The SLF4J logger instance. */
@@ -833,6 +836,7 @@ public class Util {
 	 *
 	 * @return the rsc dir
 	 */
+	@SuppressWarnings ("java:S112")
 	public static String getRscDir() {
 
 		String rscDir = new File("").getAbsoluteFile().getAbsolutePath() + "/rsc";
@@ -1133,6 +1137,7 @@ public class Util {
 	 * @throws IOException          Signals that an I/O exception has occurred.
 	 * @throws InterruptedException the interrupted exception
 	 */
+	@SuppressWarnings ("java:S106")
 	public static void runExternalCommand(String cmd) throws IOException, InterruptedException {
 		Process process;
 		process = Runtime.getRuntime().exec(cmd);

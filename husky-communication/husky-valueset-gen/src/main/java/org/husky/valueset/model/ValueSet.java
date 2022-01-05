@@ -36,7 +36,7 @@ import org.husky.valueset.enums.ValueSetStatus;
  * Wertesatzes.</div>
  */
 /* generated code - duplicated blocks will not be removed*/
-@SuppressWarnings("java:DuplicatedBlocks")
+@SuppressWarnings("common-java:DuplicatedBlocks")
 public class ValueSet extends ValueSetBase implements Serializable {
 
 	/**
@@ -46,6 +46,7 @@ public class ValueSet extends ValueSetBase implements Serializable {
 	/**
 	 * Builder to build {@link ValueSet}.
 	 */
+	@SuppressWarnings("common-java:DuplicatedBlocks")
 	@Generated("SparkTools")
 	public static final class Builder {
 		private ArrayList<LangText> descriptionList;

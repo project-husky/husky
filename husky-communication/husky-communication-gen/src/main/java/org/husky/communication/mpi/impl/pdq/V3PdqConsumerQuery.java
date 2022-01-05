@@ -152,6 +152,8 @@ public class V3PdqConsumerQuery extends V3Message {
 	 * @param addressOtherDesignation
 	 * @param addressType
 	 */
+	/* in use by external libraries */
+	@SuppressWarnings("java:S107")
 	public void addPatientAddress(String addressStreetAddress, String addressCity, String addressCounty,
 			String addressState, String addressCountry, String addressZip, String addressOtherDesignation,
 			String addressType) {

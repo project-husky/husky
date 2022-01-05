@@ -24,6 +24,8 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
  * Supports the FHIR to eHC conversion for EDES CTNN documents
  *
  */
+/* derived from external library */
+@SuppressWarnings("java:S110")
 public class FhirCdaChEdes {
 	
 	private FhirCdaChEdes() {

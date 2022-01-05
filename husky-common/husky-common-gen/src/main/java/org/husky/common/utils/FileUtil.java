@@ -19,7 +19,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.Random;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +32,6 @@ public class FileUtil {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(FileUtil.class.getName());
 	
-	private static Random rand;
 
 	private FileUtil() {
 		throw new IllegalStateException("This is a utility class!");
