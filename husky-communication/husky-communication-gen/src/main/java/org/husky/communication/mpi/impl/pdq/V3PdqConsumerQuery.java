@@ -10,6 +10,7 @@
  */
 package org.husky.communication.mpi.impl.pdq;
 
+import org.hl7.fhir.r4.model.Address;
 import org.husky.communication.mpi.V3Message;
 import org.husky.communication.utils.PixPdqV3Utils;
 
@@ -149,15 +150,12 @@ public class V3PdqConsumerQuery extends V3Message {
 	 * @param addressOtherDesignation
 	 * @param addressType
 	 */
-	public void addPatientAddress(String addressStreetAddress, String addressCity, String addressCounty,
-			String addressState, String addressCountry, String addressZip, String addressOtherDesignation,
-			String addressType) {
-		queryParams += "Patient Address: " + addressStreetAddress + " " + addressCity + " " + addressCounty + " "
-				+ addressState + " " + addressCountry + " " + addressZip + " " + addressOtherDesignation + ","
-				+ addressType + ",";
+	public void addPatientAddress(Address address) {
+		queryParams += "Patient Address: " + address.getLine() + " " + address.getCity() + " " + address.getState()
+				+ " " + address.getCountry() + " " + address.getPostalCode() + ","
+				+ address.getUse() + ",";
 		// Create an AD type to store the address information
-		var patientAddressAD = PixPdqV3Utils.createAd(addressStreetAddress, addressCity, addressCounty, addressState,
-				addressCountry, addressZip, addressOtherDesignation, addressType);
+		var patientAddressAD = PixPdqV3Utils.createAd(address);
 
 		// Add the AD to the patient Address
 		if (null != patientAddressAD) {

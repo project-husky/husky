@@ -3,7 +3,6 @@ package org.husky.communication.mpi.impl;
 import java.io.Serializable;
 import java.net.URI;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -23,7 +22,6 @@ import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.IntegerType;
 import org.hl7.fhir.r4.model.Organization;
 import org.hl7.fhir.r4.model.Patient.PatientCommunicationComponent;
-import org.hl7.fhir.r4.model.StringType;
 import org.hl7.fhir.r4.model.Type;
 import org.husky.common.communication.AffinityDomain;
 import org.husky.common.enums.TelecomAddressUse;
@@ -246,35 +244,7 @@ public class PixPdqV3QueryBase extends CamelService {
 	}
 
 	protected net.ihe.gazelle.hl7v3.datatypes.AD getPatientAddress(Address address) {
-		List<String> addressLines = new ArrayList<>();
-		for (StringType addressLine : address.getLine()) {
-			addressLines.add(addressLine.getValueAsString());
-		}
-
-		String adressOtherDesignation = null;
-
-		String addressType = null;
-		if ((address.getUseElement() != null) && (address.getUseElement().getValue() != null)) {
-			switch (address.getUseElement().getValue()) {
-			case HOME:
-				addressType = "H";
-				break;
-			case WORK:
-				addressType = "WP";
-				break;
-			case TEMP:
-				addressType = "TMP";
-				break;
-			case OLD:
-				addressType = "OLD";
-				break;
-			default:
-				break;
-			}
-		}
-
-		return PixPdqV3Utils.createAd(addressLines, address.getCity(), null, address.getState(), address.getCountry(),
-				address.getPostalCode(), adressOtherDesignation, addressType);
+		return PixPdqV3Utils.createAd(address);
 	}
 
 	/**
@@ -593,14 +563,7 @@ public class PixPdqV3QueryBase extends CamelService {
 	 */
 	protected void setBirthPlace(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
 		if (patient.getBirthPlace() != null) {
-			final var fhirAddress = patient.getBirthPlace();
-			String adressOtherDesignation = null;
-			if (fhirAddress.getLine().size() > 1) {
-				adressOtherDesignation = fhirAddress.getLine().get(1).getValueAsString();
-			}
-			final var patientAddress = PixPdqV3Utils.createAd(fhirAddress.getLine().get(0).getValue(),
-					fhirAddress.getCity(), null, fhirAddress.getState(), fhirAddress.getCountry(),
-					fhirAddress.getPostalCode(), adressOtherDesignation, null);
+			final var patientAddress = PixPdqV3Utils.createAd(patient.getBirthPlace());
 			v3PixSourceMessage.setPatientBirthPlace(patientAddress);
 		}
 	}
