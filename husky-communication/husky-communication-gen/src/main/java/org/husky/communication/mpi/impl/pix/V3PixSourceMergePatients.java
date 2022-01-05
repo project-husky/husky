@@ -31,7 +31,7 @@ import net.ihe.gazelle.hl7v3.voc.ParticipationTargetSubject;
 public class V3PixSourceMergePatients extends V3Message {
 
 	// the PIX query
-	private PRPAIN201304UV02Type rootElement = new PRPAIN201304UV02Type();
+	private PRPAIN201304UV02Type rootElement;
 	private String patientId = "";
 
 	/**
@@ -48,7 +48,7 @@ public class V3PixSourceMergePatients extends V3Message {
 		super(senderApplicationOID);
 
 		// set the interaction id (Patient Record Added)
-		rootElement.setInteractionId(
+		getRootElement().setInteractionId(
 				PixPdqV3Utils.createII("2.16.840.1.113883.1.6", "PRPA_IN201304UV02", ""));
 
 		// set the sender
@@ -74,7 +74,7 @@ public class V3PixSourceMergePatients extends V3Message {
 	public void addReceiver(String applicationOID, String facilityOID) {
 		this.addReceivingApplication(applicationOID);
 		this.addReceivingFacility(facilityOID);
-		rootElement.getReceiver()
+		getRootElement().getReceiver()
 				.add(PixPdqV3Utils.createMCCIMT000100UV01Receiver(applicationOID, facilityOID));
 	}
 
@@ -93,6 +93,10 @@ public class V3PixSourceMergePatients extends V3Message {
 	 * @return PRPAIN201304UV02Type - the root element
 	 */
 	public PRPAIN201304UV02Type getRootElement() {
+		if (rootElement == null) {
+			rootElement = new PRPAIN201304UV02Type();
+		}
+
 		return rootElement;
 	}
 
@@ -140,7 +144,7 @@ public class V3PixSourceMergePatients extends V3Message {
 	 * @param processingCode
 	 */
 	public void setProcessingCode(String processingCode) {
-		rootElement.setProcessingCode(PixPdqV3Utils.createCS(processingCode));
+		getRootElement().setProcessingCode(PixPdqV3Utils.createCS(processingCode));
 	}
 
 	/**
@@ -155,31 +159,32 @@ public class V3PixSourceMergePatients extends V3Message {
 	public void setSender(String applicationOID, String facilityOID) {
 		super.setSender(applicationOID, facilityOID);
 		// set the sender/application OIDs
-		rootElement
+		getRootElement()
 				.setSender(PixPdqV3Utils.createMCCIMT000100UV01Sender(applicationOID, facilityOID));
 	}
 
 	@Override
 	protected void addControlActProcess() {
 		// add the control act process to the message
-		rootElement.setControlActProcess(queryControlActProcess.getPRPAIN201304UV02MFMIMT700701UV01ControlActProcess());
+		getRootElement()
+				.setControlActProcess(queryControlActProcess.getPRPAIN201304UV02MFMIMT700701UV01ControlActProcess());
 	}
 
 	@Override
 	protected void setITSVersion() {
 		// indicate ITSVersion XML_1.0
-		rootElement.setITSVersion(itsVersion);
+		getRootElement().setITSVersion(itsVersion);
 	}
 
 	@Override
 	protected void setId() {
-		rootElement.setId(messageId);
+		getRootElement().setId(messageId);
 	}
 
 	@Override
 	protected void setCreationTime() {
 		// set current time
-		rootElement.setCreationTime(PixPdqV3Utils.createTSCurrentTime());
+		getRootElement().setCreationTime(PixPdqV3Utils.createTSCurrentTime());
 	}
 
 	@Override
@@ -196,13 +201,13 @@ public class V3PixSourceMergePatients extends V3Message {
 	@Override
 	protected void setProcessingModeCode() {
 		// The value of processingModeCode SHALL be set to T
-		rootElement.setProcessingModeCode(PixPdqV3Utils.createCS(processingModeCode));
+		getRootElement().setProcessingModeCode(PixPdqV3Utils.createCS(processingModeCode));
 	}
 
 	@Override
 	protected void setAcceptAckCode() {
 		// The acceptAckCode SHALL be set to AL
-		rootElement.setAcceptAckCode(PixPdqV3Utils.createCS(acceptAckCode));
+		getRootElement().setAcceptAckCode(PixPdqV3Utils.createCS(acceptAckCode));
 	}
 
 }

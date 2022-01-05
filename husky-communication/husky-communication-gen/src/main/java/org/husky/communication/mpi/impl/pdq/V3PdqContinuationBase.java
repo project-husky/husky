@@ -28,7 +28,7 @@ import net.ihe.gazelle.hl7v3.voc.XActMoodIntentEvent;
  */
 public abstract class V3PdqContinuationBase extends V3Message {
 
-	protected QUQIIN000003UV01Type rootElement = new QUQIIN000003UV01Type();
+	protected QUQIIN000003UV01Type rootElement;
 	protected QUQIMT000001UV01QueryContinuation queryContinuation = new QUQIMT000001UV01QueryContinuation();
 
 	/**
@@ -52,7 +52,7 @@ public abstract class V3PdqContinuationBase extends V3Message {
 		super(senderApplicationOID);
 
 		// set the interaction id
-		rootElement.setInteractionId(PixPdqV3Utils.createII("2.16.840.1.113883.1.6", "QUQI_IN000003UV01", ""));
+		getRootElement().setInteractionId(PixPdqV3Utils.createII("2.16.840.1.113883.1.6", "QUQI_IN000003UV01", ""));
 
 		// set the sender
 		this.setSender(senderApplicationOID, senderFacilityOID);
@@ -64,7 +64,7 @@ public abstract class V3PdqContinuationBase extends V3Message {
 		var acknowledgement = new MCCIMT000300UV01Acknowledgement();
 
 		// add the acknowledgement to the root element
-		rootElement.getAcknowledgement().add(acknowledgement);
+		getRootElement().getAcknowledgement().add(acknowledgement);
 
 		// add the typecode
 		acknowledgement.setTypeCode(PixPdqV3Utils.createCS("AA"));
@@ -82,7 +82,7 @@ public abstract class V3PdqContinuationBase extends V3Message {
 		var continuationCAP = new QUQIMT000001UV01ControlActProcess();
 
 		// add the control act process
-		rootElement.setControlActProcess(continuationCAP);
+		getRootElement().setControlActProcess(continuationCAP);
 
 		// set the class code
 		continuationCAP.setClassCode(ActClassControlAct.CACT);
@@ -109,7 +109,7 @@ public abstract class V3PdqContinuationBase extends V3Message {
 	public void addReceiver(String applicationOID, String facilityOID) {
 		this.addReceivingApplication(applicationOID);
 		this.addReceivingFacility(facilityOID);
-		rootElement.getReceiver().add(PixPdqV3Utils.createMCCIMT000300UV01Receiver(applicationOID, facilityOID));
+		getRootElement().getReceiver().add(PixPdqV3Utils.createMCCIMT000300UV01Receiver(applicationOID, facilityOID));
 	}
 
 	/**
@@ -118,7 +118,7 @@ public abstract class V3PdqContinuationBase extends V3Message {
 	 * @param processingCode
 	 */
 	public void setProcessingCode(String processingCode) {
-		rootElement.setProcessingCode(PixPdqV3Utils.createCS(processingCode));
+		getRootElement().setProcessingCode(PixPdqV3Utils.createCS(processingCode));
 	}
 
 	/**
@@ -133,7 +133,7 @@ public abstract class V3PdqContinuationBase extends V3Message {
 	public void setSender(String applicationOID, String facilityOID) {
 		// set the sender/application OIDs
 		super.setSender(applicationOID, facilityOID);
-		rootElement.setSender(PixPdqV3Utils.createMCCIMT000300UV01Sender(applicationOID, facilityOID));
+		getRootElement().setSender(PixPdqV3Utils.createMCCIMT000300UV01Sender(applicationOID, facilityOID));
 	}
 
 	/**
@@ -146,24 +146,28 @@ public abstract class V3PdqContinuationBase extends V3Message {
 	}
 
 	public QUQIIN000003UV01Type getRootElement() {
+		if (this.rootElement == null) {
+			this.rootElement = new QUQIIN000003UV01Type();
+		}
+
 		return this.rootElement;
 	}
 
 	@Override
 	protected void setITSVersion() {
 		// indicate ITSVersion XML_1.0
-		rootElement.setITSVersion(itsVersion);
+		getRootElement().setITSVersion(itsVersion);
 	}
 
 	@Override
 	protected void setId() {
-		rootElement.setId(messageId);
+		getRootElement().setId(messageId);
 	}
 
 	@Override
 	protected void setCreationTime() {
 		// set current time
-		rootElement.setCreationTime(PixPdqV3Utils.createTSCurrentTime());
+		getRootElement().setCreationTime(PixPdqV3Utils.createTSCurrentTime());
 	}
 
 	@Override
@@ -180,13 +184,13 @@ public abstract class V3PdqContinuationBase extends V3Message {
 	@Override
 	protected void setProcessingModeCode() {
 		// The value of processingModeCode SHALL be set to T
-		rootElement.setProcessingModeCode(PixPdqV3Utils.createCS(processingModeCode));
+		getRootElement().setProcessingModeCode(PixPdqV3Utils.createCS(processingModeCode));
 	}
 
 	@Override
 	protected void setAcceptAckCode() {
 		// The acceptAckCode SHALL be set to AL
-		rootElement.setAcceptAckCode(PixPdqV3Utils.createCS(acceptAckCode));
+		getRootElement().setAcceptAckCode(PixPdqV3Utils.createCS(acceptAckCode));
 	}
 
 }
