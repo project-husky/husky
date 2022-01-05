@@ -24,7 +24,7 @@ import net.ihe.gazelle.hl7v3.prpain201302UV02.PRPAIN201302UV02Type;
 public class V3PixSourceRecordRevised extends V3Message {
 
 	// the PIX query
-	private PRPAIN201302UV02Type rootElement = new PRPAIN201302UV02Type();
+	private PRPAIN201302UV02Type rootElement;
 	private String patientId = "";
 
 	/**

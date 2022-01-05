@@ -67,10 +67,6 @@ public class PixPdqQueryControlActProcess {
 			getPRPAIN201301UV02MFMIMT700701UV01Subject1()
 					.setRegistrationEvent(getPRPAIN201301UV02MFMIMT700701UV01RegistrationEvent());
 
-			// add the subject to the control act process
-			getPRPAIN201301UV02MFMIMT700701UV01ControlActProcess().getSubject()
-					.add(getPRPAIN201301UV02MFMIMT700701UV01Subject1());
-
 		} else if (obj instanceof PRPAIN201302UV02MFMIMT700701UV01ControlActProcess) {
 
 			// set the class code
@@ -101,10 +97,6 @@ public class PixPdqQueryControlActProcess {
 			getPRPAIN201302UV02MFMIMT700701UV01Subject1()
 					.setRegistrationEvent(getPRPAIN201302UV02MFMIMT700701UV01RegistrationEvent());
 
-			// add the subject to the control act process
-			getPRPAIN201302UV02MFMIMT700701UV01ControlActProcess().getSubject()
-					.add(getPRPAIN201302UV02MFMIMT700701UV01Subject1());
-
 		} else if (obj instanceof PRPAIN201304UV02MFMIMT700701UV01ControlActProcess) {
 
 			// set the class code
@@ -132,11 +124,6 @@ public class PixPdqQueryControlActProcess {
 			// add the registrationevent
 			getPRPAIN201304UV02MFMIMT700701UV01Subject1()
 					.setRegistrationEvent(getPRPAIN201304UV02MFMIMT700701UV01RegistrationEvent());
-
-			// add the subject to the control act process
-			getPRPAIN201304UV02MFMIMT700701UV01ControlActProcess().getSubject()
-					.add(getPRPAIN201304UV02MFMIMT700701UV01Subject1());
-
 		}
 
 	}

@@ -273,7 +273,7 @@ public class PixPdqV3Utils {
 				var streetAddress = new AdxpStreetAddressLine();
 
 				// set the street address value
-				streetAddress.addMixed(addressStreetAddress);
+				streetAddress.addMixed(addressStreetAddress.getValue());
 
 				// Add the street address to the AD
 				addressAD.addStreetAddressLine(streetAddress);

@@ -35,8 +35,6 @@ import org.husky.valueset.enums.ValueSetStatus;
  * Wertesatzes (wie ID, Name, Version, Datum ...) und aller Einträge (Codes) des
  * Wertesatzes.</div>
  */
-/* generated code - duplicated blocks will not be removed*/
-@SuppressWarnings("common-java:DuplicatedBlocks")
 public class ValueSet extends ValueSetBase implements Serializable {
 
 	/**
@@ -204,41 +202,8 @@ public class ValueSet extends ValueSetBase implements Serializable {
 		// (e.g. 3 Self-Sustaining Sequence Replication)
 		// https://art-decor.org/art-decor/decor-valuesets--cdachvacd-?id=2.16.840.1.113883.1.11.14079&effectiveDate=2014-03-26T00:00:00&language=en-US
 		if (enumName.substring(0, 1).matches("[0-9]")) {
-			var number = "";
-			switch (enumName.substring(0, 1)) {
-			case "0":
-				number = "Zero";
-				break;
-			case "1":
-				number = "One";
-				break;
-			case "2":
-				number = "Two";
-				break;
-			case "3":
-				number = "Three";
-				break;
-			case "4":
-				number = "Four";
-				break;
-			case "5":
-				number = "Five";
-				break;
-			case "6":
-				number = "Six";
-				break;
-			case "7":
-				number = "Seven";
-				break;
-			case "8":
-				number = "Eight";
-				break;
-			case "9":
-				number = "Nine";
-				break;
-			default:
-				number = "";
-			}
+			var number = getNumberLiteral(enumName.substring(0, 1));
+
 			number = number.toUpperCase();
 			enumName = number + "_" + enumName.substring(2, enumName.length());
 		}
@@ -247,6 +212,32 @@ public class ValueSet extends ValueSetBase implements Serializable {
 			enumName += "_L" + Integer.toString(hierarchyLevel);
 
 		return enumName;
+	}
+
+	private static String getNumberLiteral(String subString) {
+		if ("0".equalsIgnoreCase(subString)) {
+			return "Zero";
+		} else if ("1".equalsIgnoreCase(subString)) {
+			return "One";
+		} else if ("2".equalsIgnoreCase(subString)) {
+			return "Two";
+		} else if ("3".equalsIgnoreCase(subString)) {
+			return "Three";
+		} else if ("4".equalsIgnoreCase(subString)) {
+			return "Four";
+		} else if ("5".equalsIgnoreCase(subString)) {
+			return "Five";
+		} else if ("6".equalsIgnoreCase(subString)) {
+			return "Six";
+		} else if ("7".equalsIgnoreCase(subString)) {
+			return "Seven";
+		} else if ("8".equalsIgnoreCase(subString)) {
+			return "Eight";
+		} else if ("9".equalsIgnoreCase(subString)) {
+			return "Nine";
+		} else {
+			return "";
+		}
 	}
 
 	/**
