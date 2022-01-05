@@ -26,6 +26,7 @@ import org.husky.common.utils.LangText;
 import org.husky.valueset.enums.ValueSetStatus;
 
 /**
+ * 
  * <div class="en">The Class ValueSet is intended to collect all metadata of a
  * value set (such as id, name, version, date ...) and all Entries (codes) of
  * the value set.</div>
@@ -34,6 +35,8 @@ import org.husky.valueset.enums.ValueSetStatus;
  * Wertesatzes (wie ID, Name, Version, Datum ...) und aller Einträge (Codes) des
  * Wertesatzes.</div>
  */
+/* generated code - duplicated blocks will not be removed*/
+@SuppressWarnings("java:DuplicatedBlocks")
 public class ValueSet extends ValueSetBase implements Serializable {
 
 	/**

@@ -38,20 +38,12 @@ import java.util.function.Consumer;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactoryConfigurationError;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
+
 
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SystemUtils;
-import org.apache.commons.text.StringEscapeUtils;
 import org.husky.common.basetypes.OrganizationBaseType;
 import org.husky.common.enums.PostalAddressUse;
 import org.husky.common.enums.Signature;
@@ -79,11 +71,9 @@ import org.husky.common.model.Identificator;
 import org.husky.common.model.Organization;
 import org.husky.common.model.Participant;
 import org.husky.common.model.Reference;
-import org.husky.common.utils.xml.XmlFactories;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.w3c.dom.Node;
-import org.xml.sax.SAXException;
 
 /**
  * Helper methods for the Husky and CDA.

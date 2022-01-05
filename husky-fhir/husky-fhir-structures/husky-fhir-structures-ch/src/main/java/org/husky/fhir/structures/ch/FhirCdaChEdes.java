@@ -25,6 +25,10 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
  *
  */
 public class FhirCdaChEdes {
+	
+	private FhirCdaChEdes() {
+		
+	}
 
 	/**
 	 * The class EdesCtnnDocument is a derived FHIR resource containing all
