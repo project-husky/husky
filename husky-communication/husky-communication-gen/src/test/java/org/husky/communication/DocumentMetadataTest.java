@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.LocalizedString;
 
-public class DocumentMetadataTest extends TestUtils {
+class DocumentMetadataTest extends TestUtils {
 
 	private DocumentMetadata d = new DocumentMetadata();
 	private LocalizedString l;

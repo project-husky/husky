@@ -2,9 +2,12 @@ package org.husky.communication.utils;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.hl7.fhir.r4.model.Address;
+import org.hl7.fhir.r4.model.Address.AddressUse;
+import org.hl7.fhir.r4.model.StringType;
 
 import net.ihe.gazelle.hl7v3.coctmt090003UV01.COCTMT090003UV01AssignedEntity;
 import net.ihe.gazelle.hl7v3.coctmt090003UV01.COCTMT090003UV01Organization;
@@ -12,7 +15,6 @@ import net.ihe.gazelle.hl7v3.coctmt150002UV01.COCTMT150002UV01Organization;
 import net.ihe.gazelle.hl7v3.coctmt150003UV03.COCTMT150003UV03ContactParty;
 import net.ihe.gazelle.hl7v3.coctmt150003UV03.COCTMT150003UV03Organization;
 import net.ihe.gazelle.hl7v3.datatypes.AD;
-import net.ihe.gazelle.hl7v3.datatypes.AdxpAdditionalLocator;
 import net.ihe.gazelle.hl7v3.datatypes.AdxpCity;
 import net.ihe.gazelle.hl7v3.datatypes.AdxpCountry;
 import net.ihe.gazelle.hl7v3.datatypes.AdxpCounty;
@@ -119,64 +121,49 @@ public class PixPdqV3Utils {
 	 *
 	 * @param addressStreetAddressLines
 	 * @param addressCity
-	 * @param addressCounty
 	 * @param addressState
 	 * @param addressCountry
 	 * @param addressZip
-	 * @param addressOtherDesignation
 	 * @param addressType             (possible values are "H", "W", or "WP")
 	 * @return AD type object containing the non-empty address parts provided.
 	 */
-	/* in use by external libraries */
-	@SuppressWarnings("java:S107")
-	public static AD createAd(List<String> addressStreetAddressLines, String addressCity, String addressCounty,
-			String addressState, String addressCountry, String addressZip, String addressOtherDesignation,
-			String addressType) {
+	public static AD createAd(Address address) {
 		var addressAD = new AD();
 
 		// make sure we actually add an address
 		var addressAdded = false;
 
-		if (addStreetAddressLinesToAd(addressStreetAddressLines, addressAD)) {
+		if (addStreetAddressLinesToAd(address.getLine(), addressAD)) {
 			addressAdded = true;
 		}
 
 		// if there is a city
-		if (addCityToAd(addressCity, addressAD)) {
+		if (addCityToAd(address.getCity(), addressAD)) {
 			addressAdded = true;
 		}
 
 		// if there is a country
-		if (addCountryToAd(addressCountry, addressAD)) {
+		if (addCountryToAd(address.getCountry(), addressAD)) {
 			addressAdded = true;
 		}
 
 		// if there is a state
-		if (addStateToAd(addressState, addressAD)) {
-			addressAdded = true;
-		}
-
-		// if there is a county code
-		if (addCountyToAd(addressCounty, addressAD)) {
+		if (addStateToAd(address.getState(), addressAD)) {
 			addressAdded = true;
 		}
 
 		// if there is a zip code
-		if (addZipToAd(addressZip, addressAD)) {
-			addressAdded = true;
-		}
-
-		// if there is an other designation
-		if (addOtherDesignationToAd(addressOtherDesignation, addressAD)) {
+		if (addZipToAd(address.getPostalCode(), addressAD)) {
 			addressAdded = true;
 		}
 
 		// if there is an addressType
-		if (addressType != null && !addressType.equals("")) {
-			if ("H".equalsIgnoreCase(addressType))
+		if (address.getUseElement() != null && address.getUseElement().getValue() != null) {
+			if (AddressUse.HOME.equals(address.getUseElement().getValue())) {
 				addressAD.setUse(HomeAddressUse.H.value());
-			if (("W".equalsIgnoreCase(addressType)) || ("WP".equalsIgnoreCase(addressType)))
+			} else if (AddressUse.WORK.equals(address.getUseElement().getValue())) {
 				addressAD.setUse(WorkPlaceAddressUse.WP.value());
+			}
 		}
 
 		// if address wasn't added, null it out
@@ -185,25 +172,6 @@ public class PixPdqV3Utils {
 
 		// return the value
 		return addressAD;
-	}
-
-	private static boolean addOtherDesignationToAd(String addressOtherDesignation, AD addressAD) {
-		if (addressOtherDesignation != null && !addressOtherDesignation.isEmpty()) {
-			// create the other designation object
-			// TODO: is this the right place for other designation??
-			var otherDesignation = new AdxpAdditionalLocator();
-
-			// set the other designation
-			otherDesignation.addMixed(addressOtherDesignation);
-
-			// add the other designation to the AD
-			addressAD.addAdditionalLocator(otherDesignation);
-
-			// indicate that some part of the address was added
-			return true;
-		}
-
-		return false;
 	}
 
 	private static boolean addZipToAd(String addressZip, AD addressAD) {
@@ -224,7 +192,7 @@ public class PixPdqV3Utils {
 		return false;
 	}
 
-	private static boolean addCountyToAd(String addressCounty, AD addressAD) {
+	public static boolean addCountyToAd(String addressCounty, AD addressAD) {
 		if (addressCounty != null && !addressCounty.isEmpty()) {
 			// create the state
 			var county = new AdxpCounty();
@@ -296,10 +264,11 @@ public class PixPdqV3Utils {
 		return false;
 	}
 
-	private static boolean addStreetAddressLinesToAd(List<String> addressStreetAddressLines, AD addressAD) {
-		for (String addressStreetAddress : addressStreetAddressLines) {
+	private static boolean addStreetAddressLinesToAd(List<StringType> addressStreetAddressLines, AD addressAD) {
+		for (StringType addressStreetAddress : addressStreetAddressLines) {
 			// if there is a street address
-			if (addressStreetAddress != null && !addressStreetAddress.equals("")) {
+			if (addressStreetAddress != null && addressStreetAddress.getValue() != null
+					&& !addressStreetAddress.getValue().equals("")) {
 				// create the street address
 				var streetAddress = new AdxpStreetAddressLine();
 
@@ -315,32 +284,6 @@ public class PixPdqV3Utils {
 		}
 
 		return false;
-	}
-
-	/**
-	 * Create an AD type object containing the supplied address parts that are
-	 * non-empty (all are optional). If no address parts are supplied, the returned
-	 * value will be null.
-	 *
-	 * @param addressStreetAddress
-	 * @param addressCity
-	 * @param addressCounty
-	 * @param addressState
-	 * @param addressCountry
-	 * @param addressZip
-	 * @param addressOtherDesignation
-	 * @param addressType             (possible values are "H", "W", or "WP")
-	 * @return AD type object containing the non-empty address parts provided.
-	 */
-	/* in use by external libraries */
-	@SuppressWarnings("java:S107")
-	public static AD createAd(String addressStreetAddress, String addressCity, String addressCounty,
-			String addressState, String addressCountry, String addressZip, String addressOtherDesignation,
-			String addressType) {
-		List<String> adressLines = new ArrayList<>();
-		adressLines.add(addressStreetAddress);
-		return createAd(adressLines, addressCity, addressCounty, addressState, addressCountry, addressZip,
-				addressOtherDesignation, addressType);
 	}
 
 	/**
@@ -454,7 +397,6 @@ public class PixPdqV3Utils {
 		organization.getName().add(on);
 		var contactParty = new COCTMT150003UV03ContactParty();
 		contactParty.setClassCode(net.ihe.gazelle.hl7v3.voc.RoleClassContact.CON);
-		// TODO: Should this have a "use" value? Possibly "WP" (Work Phone)
 		contactParty.getTelecom().add(createTEL(telecomValue, ""));
 		organization.getContactParty().add(contactParty);
 		return organization;
@@ -651,7 +593,6 @@ public class PixPdqV3Utils {
 		// Set the device class code
 		device.setClassCode(EntityClassDevice.DEV);
 
-		// get the device determiner code and set it TODO: same issue as
 		// receiver device above
 		device.setDeterminerCode(EntityDeterminer.INSTANCE);
 
@@ -671,7 +612,6 @@ public class PixPdqV3Utils {
 			// Set the device class code
 			senderRepresentedOrganization.setClassCode(EntityClassOrganization.ORG);
 
-			// get the device determiner code and set it TODO: same issue as
 			// receiver device above
 			senderRepresentedOrganization.setDeterminerCode(EntityDeterminer.INSTANCE);
 
@@ -760,7 +700,6 @@ public class PixPdqV3Utils {
 		// Set the device class code
 		device.setClassCode(EntityClassDevice.DEV);
 
-		// get the device determiner code and set it TODO: same issue as
 		// receiver device above
 		device.setDeterminerCode(EntityDeterminer.INSTANCE);
 
@@ -780,7 +719,6 @@ public class PixPdqV3Utils {
 			// Set the device class code
 			senderRepresentedOrganization.setClassCode(EntityClassOrganization.ORG);
 
-			// get the device determiner code and set it TODO: same issue as
 			// receiver device above
 			senderRepresentedOrganization.setDeterminerCode(EntityDeterminer.INSTANCE);
 

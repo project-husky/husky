@@ -17,11 +17,11 @@ import org.hl7.fhir.r4.model.ContactPoint;
 import org.hl7.fhir.r4.model.ContactPoint.ContactPointSystem;
 import org.hl7.fhir.r4.model.ContactPoint.ContactPointUse;
 import org.hl7.fhir.r4.model.Enumerations.AdministrativeGender;
+import org.hl7.fhir.r4.model.HumanName;
+import org.hl7.fhir.r4.model.Identifier;
 import org.husky.communication.mpi.MpiQuery;
 import org.husky.communication.utils.PixPdqV3Utils;
 import org.husky.fhir.structures.gen.FhirCommon;
-import org.hl7.fhir.r4.model.HumanName;
-import org.hl7.fhir.r4.model.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -116,33 +116,7 @@ public class V3PdqQuery implements MpiQuery {
 			return this;
 		}
 
-		String addressStreetAddress = null;
-		if (!address.getLine().isEmpty()) {
-			addressStreetAddress = address.getLine().get(0).getValueAsString();
-		}
-
-		String addressOtherDesignation = null;
-		if (address.getLine().size() > 1) {
-			addressOtherDesignation = address.getLine().get(1).getValueAsString();
-		}
-
-		// H, W WP
-		String addressType = null;
-		if ((address.getUseElement() != null) && (address.getUseElement().getValue() != null)) {
-			switch (address.getUseElement().getValue()) {
-			case HOME:
-				addressType = "H";
-				break;
-			case WORK:
-				addressType = "WP";
-				break;
-			default:
-				break;
-			}
-		}
-		v3PdqConsumerQuery.addPatientAddress(addressStreetAddress, address.getCity(), null, address.getState(),
-				address.getCountry(), address.getPostalCode(),
-				addressOtherDesignation, addressType);
+		v3PdqConsumerQuery.addPatientAddress(address);
 		return this;
 	}
 

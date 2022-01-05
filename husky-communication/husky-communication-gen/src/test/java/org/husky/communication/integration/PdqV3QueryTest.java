@@ -173,7 +173,11 @@ class PdqV3QueryTest {
 		assertEquals("Good Health Clinic", organization.getName());
 		assertEquals("+1-342-555-8394", organization.getTelecomFirstRep().getValue());
 
-		final FhirPatient jim = patients.get(1);
+		testSecondPatient(patients.get(1));
+
+	}
+
+	private void testSecondPatient(FhirPatient jim) {
 		assertEquals("Jones", jim.getNameFirstRep().getFamily());
 		assertEquals("Jim", jim.getNameFirstRep().getGivenAsSingleString());
 		assertEquals("home", jim.getTelecom().get(0).getUse().toCode().toLowerCase());
@@ -184,7 +188,7 @@ class PdqV3QueryTest {
 		assertEquals("Other City", jim.getAddressFirstRep().getCity());
 		assertEquals("IL", jim.getAddressFirstRep().getState());
 
-		organization = (Organization) jim.getManagingOrganization().getResource();
+		var organization = (Organization) jim.getManagingOrganization().getResource();
 		assertEquals(FhirCommon.addUrnOid("1.2.840.114350.1.13.99998.8734"),
 				organization.getIdentifier().get(0).getValue());
 		assertEquals("Good Health Clinic", organization.getName());
