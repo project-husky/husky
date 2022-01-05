@@ -85,9 +85,20 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 					.toFile();
 		} else {
 			tempFile = File.createTempFile(String.format("saml_%s", UUID.randomUUID().toString()), ".html");
-			tempFile.setWritable(false, true);
-			tempFile.setReadable(true);
-			tempFile.setExecutable(false);
+			var permission = tempFile.setWritable(false, true);
+
+			if (permission) {
+				permission = tempFile.setReadable(true);
+			}
+
+			if (permission) {
+				permission = tempFile.setExecutable(false);
+			}
+
+			if (!permission) {
+				Files.deleteIfExists(tempFile.toPath());
+				logger.error("Application has no permission to change access rights for files");
+			}
 		}
 
 		try(final var os = new FileOutputStream(tempFile)){

@@ -370,7 +370,7 @@ public abstract class AbstractSoapClient<T> {
 			if (content.trim().startsWith("<") && content.trim().endsWith(">")) {
 				retVal = content;
 			} else {
-				final var regex = Pattern.compile("<([a-zA-Z:]+)Envelope(.+)>(.+)</([a-zA-Z:]+)Envelope>");
+				final var regex = Pattern.compile("<([a-zA-Z:]*)Envelope(.*)>(.+)</([a-zA-Z:]*)Envelope>");
 				final var matcher = regex.matcher(content);
 				while (matcher.find()) {
 					retVal = matcher.group();
