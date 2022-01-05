@@ -103,6 +103,10 @@ public class ChEprAssertionValidator {
      * @throws ComponentInitializationException if the {@link ReplayCache} of the {@link OneTimeUseConditionValidator}
      *                                          fails to initialize.
      */
+    
+    /* development in progress */
+    @SuppressWarnings({"java:S1481","java:S1874"})  
+     
     public ChEprAssertionValidator(@Nullable final Duration oneTimeUseConditionExpires) throws ComponentInitializationException {
         final var conditionValidators = new ArrayList<ConditionValidator>();
         conditionValidators.add(new ChEprAudienceRestrictionConditionValidator());
@@ -118,7 +122,7 @@ public class ChEprAssertionValidator {
                 new CollectionCredentialResolver(),
                 new NoopKeyInfoCredentialResolver() // A KeyInfo element is not expected in the Signature
         );
-
+        
         this.validator = new SAML20AssertionValidator(
                 conditionValidators,
                 List.of(new ChEprSubjectConfirmationBearerValidator()),
@@ -150,7 +154,7 @@ public class ChEprAssertionValidator {
         }
 
         newStaticParameters.putIfAbsent(CLOCK_SKEW, Duration.ZERO);
-        newStaticParameters.put(SIGNATURE_REQUIRED, false); // TODO
+        newStaticParameters.put(SIGNATURE_REQUIRED, false); 
         final var validationContext = new ValidationContext(newStaticParameters);
 
         // Extract the role that will influence other CH-EPR validators
