@@ -620,7 +620,7 @@ public class V3PixSourceMessageHelper {
 			v3RecordAddedMessage.setPatientMothersMaidenName(family, given, other, suffix, prefix);
 		}
 		if (v3RecordRevisedMessage != null) {
-			v3RecordRevisedMessage.setPatientMothersMaidenName(family, given, suffix,
+			v3RecordRevisedMessage.setPatientMothersMaidenName(family, given, other, suffix,
 					prefix);
 		}
 		if (v3MergePatientsMessage != null) {

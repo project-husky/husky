@@ -423,4 +423,10 @@ public class V3PdqConsumerResponse extends V3Response {
 		return queryAcknowledgement;
 	}
 
+	@Override
+	protected void addControlActProcess() {
+		// TODO Auto-generated method stub
+
+	}
+
 }

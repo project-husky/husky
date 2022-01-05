@@ -80,4 +80,9 @@ public class V3Acknowledgement extends V3Response {
 		}
 	}
 
+	@Override
+	protected void addControlActProcess() {
+		// This is not necessary here
+	}
+
 }

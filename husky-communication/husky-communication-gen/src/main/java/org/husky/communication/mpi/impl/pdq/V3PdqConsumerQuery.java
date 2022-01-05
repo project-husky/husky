@@ -480,4 +480,10 @@ public class V3PdqConsumerQuery extends V3Message {
 		// set the sender/application OIDs
 		rootElement.setSender(PixPdqV3Utils.createMCCIMT000100UV01Sender(applicationOID, facilityOID));
 	}
+
+	@Override
+	protected void addControlActProcess() {
+		// TODO Auto-generated method stub
+
+	}
 }

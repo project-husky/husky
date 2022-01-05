@@ -41,7 +41,6 @@ import org.husky.communication.testhelper.TestApplication;
 import org.husky.fhir.structures.gen.FhirCommon;
 import org.husky.fhir.structures.gen.FhirPatient;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openehealth.ipf.commons.audit.AuditContext;
@@ -252,8 +251,6 @@ class PixV3QueryTest {
 
 		assertTrue(pixV3Query.addPatient(patient, null));
 	
-
-		
 	}
 
 
