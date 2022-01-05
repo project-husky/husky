@@ -10,6 +10,7 @@
  */
 package org.husky.communication.xd.xdm;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -568,18 +569,11 @@ public class XdmContents {
 		this.resp.setStatus(Status.SUCCESS);
 		final Map<String, ProvideAndRegisterDocumentSet> results = new HashMap<>();
 		try {
-			final Enumeration<? extends ZipEntry> zipEntries = zipFile.entries();
-			ZipEntry zipEntry = null;
+			List<String> subsetDirspecs = unzip();
 
-			// load the descriptive files
-			loadDescriptiveFilesFromZipFile();
-
-			// load the ZIP archive into memory
-			while (zipEntries.hasMoreElements()) {
-				zipEntry = zipEntries.nextElement();
-				if (!zipEntry.isDirectory() && zipEntry.getName().startsWith(XDM_PAYLOAD_ROOT)) {
-					final String subsetDirspec = getSubmissionSetDirspec(zipEntry.getName());
-
+			if (!subsetDirspecs.isEmpty()) {
+				// extract metadata
+				for (String subsetDirspec : subsetDirspecs) {
 					// we've found a new submission set
 					if (!results.containsKey(subsetDirspec)) {
 
@@ -592,8 +586,9 @@ public class XdmContents {
 					}
 				}
 
+				// load the descriptive files
+				loadDescriptiveFilesFromZipFile();
 			}
-
 		} catch (final IOException e) {
 			log.error("IO Error during loading of ZIP File. ", e);
 			this.resp.setStatus(Status.FAILURE);
@@ -606,6 +601,65 @@ public class XdmContents {
 
 		this.txnData = results.values().stream().toList();
 		documentsIntegrityCheck();
+	}
+
+	/**
+	 * unzip {@link ZipFile} and check size before.
+	 * 
+	 * @return list of pathes of subdirectories
+	 * @throws IOException
+	 */
+	private List<String> unzip() throws IOException {
+		List<String> results = new LinkedList<>();
+		final Enumeration<? extends ZipEntry> zipEntries = zipFile.entries();
+		ZipEntry zipEntry = null;
+
+		int thresholdEntries = 10000;
+		int thresholdSize = 1000000000; // 1 GB
+		double thresholdRatio = 10;
+		int totalSizeArchive = 0;
+		int totalEntryArchive = 0;
+
+		// load the ZIP archive into memory
+		while (zipEntries.hasMoreElements()) {
+			zipEntry = zipEntries.nextElement();
+
+			totalEntryArchive++;
+
+			int nBytes = -1;
+			byte[] buffer = new byte[2048];
+			double totalSizeEntry = 0;
+
+			try (InputStream in = new BufferedInputStream(zipFile.getInputStream(zipEntry))) {
+				while ((nBytes = in.read(buffer)) > 0) {
+					totalSizeEntry += nBytes;
+					totalSizeArchive += nBytes;
+
+					double compressionRatio = totalSizeEntry / zipEntry.getCompressedSize();
+					if (compressionRatio > thresholdRatio) {
+						// ratio between compressed and uncompressed data is highly suspicious, looks
+						// like a Zip Bomb Attack
+						return new LinkedList<>();
+					}
+				}
+
+				if (totalSizeArchive > thresholdSize) {
+					// the uncompressed data size is too much for the application resource capacity
+					return new LinkedList<>();
+				}
+
+				if (totalEntryArchive > thresholdEntries) {
+					// too much entries in this archive, can lead to inodes exhaustion of the system
+					return new LinkedList<>();
+				}
+
+				if (!zipEntry.isDirectory() && zipEntry.getName().startsWith(XDM_PAYLOAD_ROOT)) {
+					results.add(getSubmissionSetDirspec(zipEntry.getName()));
+				}
+			}
+		}
+
+		return results;
 	}
 
 	/**

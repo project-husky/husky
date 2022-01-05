@@ -54,23 +54,6 @@ public abstract class V3PdqContinuationBase extends V3Message {
 		// set the interaction id
 		rootElement.setInteractionId(PixPdqV3Utils.createII("2.16.840.1.113883.1.6", "QUQI_IN000003UV01", ""));
 
-		// indicate ITSVersion XML_1.0
-		rootElement.setITSVersion("XML_1.0");
-
-		rootElement.setId(messageId);
-
-		// set current time
-		rootElement.setCreationTime(PixPdqV3Utils.createTSCurrentTime());
-
-		// set the processing code
-		this.setProcessingCode("T");
-
-		// The value of processingModeCode SHALL be set to T
-		rootElement.setProcessingModeCode(PixPdqV3Utils.createCS("T"));
-
-		// The acceptAckCode SHALL be set to AL
-		rootElement.setAcceptAckCode(PixPdqV3Utils.createCS("AL"));
-
 		// set the sender
 		this.setSender(senderApplicationOID, senderFacilityOID);
 
@@ -164,6 +147,46 @@ public abstract class V3PdqContinuationBase extends V3Message {
 
 	public QUQIIN000003UV01Type getRootElement() {
 		return this.rootElement;
+	}
+
+	@Override
+	protected void setITSVersion() {
+		// indicate ITSVersion XML_1.0
+		rootElement.setITSVersion(itsVersion);
+	}
+
+	@Override
+	protected void setId() {
+		rootElement.setId(messageId);
+	}
+
+	@Override
+	protected void setCreationTime() {
+		// set current time
+		rootElement.setCreationTime(PixPdqV3Utils.createTSCurrentTime());
+	}
+
+	@Override
+	protected void setProcessingCode() {
+		// set ProcessingCode. This attribute defines whether the message is
+		// part of a production,
+		// training, or debugging system. Valid values are D (Debugging), T
+		// (Testing), P (Production)
+		// Will default to production because it will need to be that way in the
+		// field.
+		this.setProcessingCode(processingCode);
+	}
+
+	@Override
+	protected void setProcessingModeCode() {
+		// The value of processingModeCode SHALL be set to T
+		rootElement.setProcessingModeCode(PixPdqV3Utils.createCS(processingModeCode));
+	}
+
+	@Override
+	protected void setAcceptAckCode() {
+		// The acceptAckCode SHALL be set to AL
+		rootElement.setAcceptAckCode(PixPdqV3Utils.createCS(acceptAckCode));
 	}
 
 }

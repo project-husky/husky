@@ -24,6 +24,11 @@ import net.ihe.gazelle.hl7v3.datatypes.II;
  */
 public abstract class V3Message {
 
+	protected String itsVersion = "XML_1.0";
+	protected String processingCode = "P";
+	protected String processingModeCode = "T";
+	protected String acceptAckCode = "AL";
+
 	protected String sendingApplication = null;
 	protected String sendingFacility = null;
 	private ArrayList<String> receivingApplication = new ArrayList<>(0);
@@ -34,7 +39,12 @@ public abstract class V3Message {
 	protected V3Message(String senderApplicationOID) {
 		// create an id and set it
 		this.messageId = PixPdqV3Utils.createII(senderApplicationOID, "", "");
-
+		setITSVersion();
+		setId();
+		setCreationTime();
+		setProcessingCode();
+		setProcessingModeCode();
+		setAcceptAckCode();
 	}
 
 	protected V3Message() {
@@ -125,6 +135,18 @@ public abstract class V3Message {
 		this.sendingApplication = applicationOID;
 		this.sendingFacility = facilityOID;
 	}
+
+	protected abstract void setITSVersion();
+
+	protected abstract void setId();
+
+	protected abstract void setCreationTime();
+
+	protected abstract void setProcessingCode();
+
+	protected abstract void setProcessingModeCode();
+
+	protected abstract void setAcceptAckCode();
 
 	protected void addControlActProcess() {
 		// This class should be overridden

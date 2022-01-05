@@ -44,35 +44,11 @@ public class V3PixSourceRecordRevised extends V3Message {
 		rootElement.setInteractionId(
 				PixPdqV3Utils.createII("2.16.840.1.113883.1.6", "PRPA_IN201302UV02", ""));
 
-		// indicate ITSVersion XML_1.0
-		rootElement.setITSVersion("XML_1.0");
-
-		rootElement.setId(messageId);
-
-		// set current time
-		rootElement.setCreationTime(PixPdqV3Utils.createTSCurrentTime());
-
-		// set ProcessingCode. This attribute defines whether the message is
-		// part of a production,
-		// training, or debugging system. Valid values are D (Debugging), T
-		// (Testing), P (Production)
-		// TODO: how can this be indicated outside of the system? New
-		// bridge.properties global to indicate "testing"?
-		// Will default to production because it will need to be that way in the
-		// field.
-		this.setProcessingCode("P");
-
-		// The value of processingModeCode SHALL be set to T
-		rootElement.setProcessingModeCode(PixPdqV3Utils.createCS("T"));
-
 		// set the sender
 		this.setSender(senderApplicationOID, senderFacilityOID);
 
 		// add the receiver
 		this.addReceiver(receiverApplicationOID, receiverFacilityOID);
-
-		// The acceptAckCode SHALL be set to AL
-		rootElement.setAcceptAckCode(PixPdqV3Utils.createCS("AL"));
 
 		queryControlActProcess = new PixPdqQueryControlActProcess(
 				new PRPAIN201302UV02MFMIMT700701UV01ControlActProcess());
@@ -143,6 +119,46 @@ public class V3PixSourceRecordRevised extends V3Message {
 	protected void addControlActProcess() {
 		// add the control act process to the message
 		rootElement.setControlActProcess(queryControlActProcess.getPRPAIN201302UV02MFMIMT700701UV01ControlActProcess());
+	}
+
+	@Override
+	protected void setITSVersion() {
+		// indicate ITSVersion XML_1.0
+		rootElement.setITSVersion(itsVersion);
+	}
+
+	@Override
+	protected void setId() {
+		rootElement.setId(messageId);
+	}
+
+	@Override
+	protected void setCreationTime() {
+		// set current time
+		rootElement.setCreationTime(PixPdqV3Utils.createTSCurrentTime());
+	}
+
+	@Override
+	protected void setProcessingCode() {
+		// set ProcessingCode. This attribute defines whether the message is
+		// part of a production,
+		// training, or debugging system. Valid values are D (Debugging), T
+		// (Testing), P (Production)
+		// Will default to production because it will need to be that way in the
+		// field.
+		this.setProcessingCode(processingCode);
+	}
+
+	@Override
+	protected void setProcessingModeCode() {
+		// The value of processingModeCode SHALL be set to T
+		rootElement.setProcessingModeCode(PixPdqV3Utils.createCS(processingModeCode));
+	}
+
+	@Override
+	protected void setAcceptAckCode() {
+		// The acceptAckCode SHALL be set to AL
+		rootElement.setAcceptAckCode(PixPdqV3Utils.createCS(acceptAckCode));
 	}
 
 }

@@ -170,18 +170,6 @@ public class MasterPatientIndexQuery {
 		return v3PdqQuery;
 	}
 
-
-	/**
-	 * Special test preperation IHE PIX and PDQ Pre-Connectathon Test Tool
-	 * ITI-47-Consumer Query Continuation Option.
-	 *
-	 * @return the query object
-	 */
-	public MasterPatientIndexQuery setNistContinuationQueryId() {
-		v3PdqQuery.getV3PdqConsumerQuery().setQueryId("1.2.3.4", "NIST_CONTINUATION", "");
-		return this;
-	}
-
 	/**
 	 * Sets the page count for partial lists of search results
 	 * (QueryByParameter.initialQuantity).

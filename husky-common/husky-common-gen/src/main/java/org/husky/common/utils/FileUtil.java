@@ -19,8 +19,6 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.Random;
 
 import org.slf4j.Logger;
@@ -55,31 +53,6 @@ public class FileUtil {
 			return path1 + "/" + path2;
 		else
 			return path1 + path2;
-	}
-
-	/**
-	 * Returns a random File from within the given path
-	 *
-	 * @param path
-	 *            The path where a random file will be selected
-	 * @return A random File from within the given path
-	 */
-	public static File getRandomFileFromPath(String path) {
-		File retVal = null;
-		var dir = new File(path);
-		File[] files = dir.listFiles();
-
-		if (rand == null) {
-			try {
-				rand = SecureRandom.getInstanceStrong();
-			} catch (NoSuchAlgorithmException e) {
-				LOGGER.error(e.getMessage(), e);
-				rand = new Random();
-			}
-		}
-
-		retVal = files[rand.nextInt(files.length)];
-		return retVal;
 	}
 
 	/**
