@@ -11,8 +11,8 @@ package org.husky.emed.models.treatment;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.enums.ActSubstanceAdminSubstitutionCode;
 import org.husky.emed.enums.ChEmedTimingEvent;
@@ -44,19 +44,19 @@ public class MedicationTreatment {
     /**
      * The substance substitution permissions, or {@code null} if substitution is authorized without condition.
      */
-    private final List<ActSubstanceAdminSubstitutionCode> substitutionPermissions = new ArrayList<>();
+    private final List<@NonNull ActSubstanceAdminSubstitutionCode> substitutionPermissions = new ArrayList<>();
     /**
      * The list of prescriptions.
      */
-    private final List<MedicationPrescription> prescriptions = new ArrayList<>();
+    private final List<@NonNull MedicationPrescription> prescriptions = new ArrayList<>();
     /**
      * The list of 'over-the-counter' dispenses (OTC, without prescription).
      */
-    private final List<MedicationDispense> otcDispenses = new ArrayList<>();
+    private final List<@NonNull MedicationDispense> otcDispenses = new ArrayList<>();
     /**
      * Multiple events within a day with the same dosage, or an empty list if it's not specified.
      */
-    private final List<ChEmedTimingEvent> timingEvents = new ArrayList<>();
+    private final List<@NonNull ChEmedTimingEvent> timingEvents = new ArrayList<>();
     /**
      * The medication treatment ID.
      */
