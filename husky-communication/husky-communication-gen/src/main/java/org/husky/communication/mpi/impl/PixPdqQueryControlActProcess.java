@@ -29,6 +29,9 @@ import net.ihe.gazelle.hl7v3.voc.XActMoodIntentEvent;
 
 public class PixPdqQueryControlActProcess {
 
+	private static final String ACTIVE_LITERAL = "active";
+	private static final String OID_PRPA_ELEMENT = "2.16.840.1.113883.1.18";
+
 	private Object internalObj;
 	protected PixPdqSubjectPatient subjectPatient;
 	protected PixPdqPerson patientPerson;
@@ -47,7 +50,7 @@ public class PixPdqQueryControlActProcess {
 			// CP 506: <code code="PRPA_TE201309UV02"
 			// codeSystem="2.16.840.1.113883.1.18"/>
 			getPRPAIN201301UV02MFMIMT700701UV01ControlActProcess()
-					.setCode(PixPdqV3Utils.createCD("PRPA_TE201301UV02", "2.16.840.1.113883.1.18", "", ""));
+					.setCode(PixPdqV3Utils.createCD("PRPA_TE201301UV02", OID_PRPA_ELEMENT, "", ""));
 
 			// set the subject type code
 			getPRPAIN201301UV02MFMIMT700701UV01Subject1().setTypeCode("SUBJ");
@@ -80,7 +83,7 @@ public class PixPdqQueryControlActProcess {
 			// CP 506: <code code="PRPA_TE201309UV02"
 			// codeSystem="2.16.840.1.113883.1.18"/>
 			getPRPAIN201302UV02MFMIMT700701UV01ControlActProcess()
-					.setCode(PixPdqV3Utils.createCD("PRPA_TE201302UV02", "2.16.840.1.113883.1.18", "", ""));
+					.setCode(PixPdqV3Utils.createCD("PRPA_TE201302UV02", OID_PRPA_ELEMENT, "", ""));
 
 			// set the subject type code
 			getPRPAIN201302UV02MFMIMT700701UV01Subject1().setTypeCode("SUBJ");
@@ -114,7 +117,7 @@ public class PixPdqQueryControlActProcess {
 			// CP 506: <code code="PRPA_TE201309UV02"
 			// codeSystem="2.16.840.1.113883.1.18"/>
 			getPRPAIN201304UV02MFMIMT700701UV01ControlActProcess()
-					.setCode(PixPdqV3Utils.createCD("PRPA_TE201304UV02", "2.16.840.1.113883.1.18", "", ""));
+					.setCode(PixPdqV3Utils.createCD("PRPA_TE201304UV02", OID_PRPA_ELEMENT, "", ""));
 
 			// set the subject type code
 			getPRPAIN201304UV02MFMIMT700701UV01Subject1().setTypeCode("SUBJ");
@@ -149,7 +152,8 @@ public class PixPdqQueryControlActProcess {
 			getPRPAIN201301UV02MFMIMT700701UV01RegistrationEvent().getId().add(PixPdqV3Utils.createIINullFlavor("NA"));
 
 			// RegistrationEvent.statusCode SHALL be set to �active�
-			getPRPAIN201301UV02MFMIMT700701UV01RegistrationEvent().setStatusCode(PixPdqV3Utils.createCS("active"));
+			getPRPAIN201301UV02MFMIMT700701UV01RegistrationEvent()
+					.setStatusCode(PixPdqV3Utils.createCS(ACTIVE_LITERAL));
 
 			// add it to the registration event
 			getPRPAIN201301UV02MFMIMT700701UV01RegistrationEvent()
@@ -167,7 +171,8 @@ public class PixPdqQueryControlActProcess {
 			getPRPAIN201302UV02MFMIMT700701UV01RegistrationEvent().getId().add(PixPdqV3Utils.createIINullFlavor("NA"));
 
 			// RegistrationEvent.statusCode SHALL be set to �active�
-			getPRPAIN201302UV02MFMIMT700701UV01RegistrationEvent().setStatusCode(PixPdqV3Utils.createCS("active"));
+			getPRPAIN201302UV02MFMIMT700701UV01RegistrationEvent()
+					.setStatusCode(PixPdqV3Utils.createCS(ACTIVE_LITERAL));
 
 			// add it to the registration event
 			getPRPAIN201302UV02MFMIMT700701UV01RegistrationEvent()
@@ -185,7 +190,8 @@ public class PixPdqQueryControlActProcess {
 			getPRPAIN201304UV02MFMIMT700701UV01RegistrationEvent().getId().add(PixPdqV3Utils.createIINullFlavor("NA"));
 
 			// RegistrationEvent.statusCode SHALL be set to �active�
-			getPRPAIN201304UV02MFMIMT700701UV01RegistrationEvent().setStatusCode(PixPdqV3Utils.createCS("active"));
+			getPRPAIN201304UV02MFMIMT700701UV01RegistrationEvent()
+					.setStatusCode(PixPdqV3Utils.createCS(ACTIVE_LITERAL));
 
 			// add it to the registration event
 			getPRPAIN201304UV02MFMIMT700701UV01RegistrationEvent()

@@ -46,9 +46,4 @@ public class V3PdqContinuationCancel extends V3PdqContinuationBase {
 
 	}
 
-	@Override
-	protected void addControlActProcess() {
-		// TODO Auto-generated method stub
-
-	}
 }

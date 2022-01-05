@@ -48,9 +48,4 @@ public class V3PdqContinuationQuery extends V3PdqContinuationBase {
 
 	}
 
-	@Override
-	protected void addControlActProcess() {
-		// TODO Auto-generated method stub
-
-	}
 }

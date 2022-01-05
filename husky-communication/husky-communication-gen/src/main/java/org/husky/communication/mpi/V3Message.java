@@ -126,7 +126,9 @@ public abstract class V3Message {
 		this.sendingFacility = facilityOID;
 	}
 
-	protected abstract void addControlActProcess();
+	protected void addControlActProcess() {
+		// This class should be overridden
+	}
 
 	/**
 	 * Add an address for the patient.

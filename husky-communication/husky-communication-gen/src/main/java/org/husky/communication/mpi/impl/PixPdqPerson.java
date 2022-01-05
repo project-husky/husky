@@ -21,6 +21,8 @@ import net.ihe.gazelle.hl7v3.voc.XDeterminerInstanceKind;
 
 public class PixPdqPerson {
 
+	private static final String OID_GENDER = "2.16.840.1.113883.5.1";
+
 	private Object internalObj;
 
 	public PixPdqPerson(Object obj) {
@@ -271,13 +273,13 @@ public class PixPdqPerson {
 	public void setPatientGender(String gender) {
 		if (internalObj instanceof PRPAMT201303UV02Person) {
 			getPRPAMT201303UV02Person()
-					.setAdministrativeGenderCode(PixPdqV3Utils.createCE(gender, "2.16.840.1.113883.5.1", "", ""));
+					.setAdministrativeGenderCode(PixPdqV3Utils.createCE(gender, OID_GENDER, "", ""));
 		} else if (internalObj instanceof PRPAMT201302UV02PatientPatientPerson) {
 			getPRPAMT201302UV02PatientPatientPerson()
-					.setAdministrativeGenderCode(PixPdqV3Utils.createCE(gender, "2.16.840.1.113883.5.1", "", ""));
+					.setAdministrativeGenderCode(PixPdqV3Utils.createCE(gender, OID_GENDER, "", ""));
 		} else if (internalObj instanceof PRPAMT201301UV02Person) {
 			getPRPAMT201301UV02Person()
-					.setAdministrativeGenderCode(PixPdqV3Utils.createCE(gender, "2.16.840.1.113883.5.1", "", ""));
+					.setAdministrativeGenderCode(PixPdqV3Utils.createCE(gender, OID_GENDER, "", ""));
 		}
 	}
 

@@ -250,7 +250,7 @@ class PixV3QueryTest {
 		log.debug(encoded);
 
 		assertTrue(pixV3Query.addPatient(patient, null));
-	
+
 	}
 
 

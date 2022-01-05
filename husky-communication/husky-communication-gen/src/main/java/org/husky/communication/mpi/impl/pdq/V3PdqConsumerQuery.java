@@ -40,7 +40,7 @@ public class V3PdqConsumerQuery extends V3Message {
 
 	// the PIX query
 	private PRPAIN201305UV02Type rootElement = null;
-	private PRPAIN201305UV02QUQIMT021001UV01ControlActProcess queryControlActProcess = null;
+	private PRPAIN201305UV02QUQIMT021001UV01ControlActProcess queryControlActProcessPdq = null;
 	private PRPAMT201306UV02QueryByParameter queryByParameter = null;
 	private PRPAMT201306UV02ParameterList parameterList = null;
 	private PRPAMT201306UV02MatchCriterionList matchCriterionList = null;
@@ -99,22 +99,22 @@ public class V3PdqConsumerQuery extends V3Message {
 		createControlActProcess();
 
 		// add the control act process to the message
-		rootElement.setControlActProcess(queryControlActProcess);
+		rootElement.setControlActProcess(queryControlActProcessPdq);
 	}
 
 	private void createControlActProcess() {
-		queryControlActProcess = new PRPAIN201305UV02QUQIMT021001UV01ControlActProcess();
+		queryControlActProcessPdq = new PRPAIN201305UV02QUQIMT021001UV01ControlActProcess();
 		// set the class code
-		queryControlActProcess.setClassCode(ActClassControlAct.CACT);
-		queryControlActProcess.setMoodCode(XActMoodIntentEvent.EVN);
+		queryControlActProcessPdq.setClassCode(ActClassControlAct.CACT);
+		queryControlActProcessPdq.setMoodCode(XActMoodIntentEvent.EVN);
 
-		queryControlActProcess.setCode(PixPdqV3Utils.createCD("PRPA_TE201305UV02", "2.16.840.1.113883.1.18", "", ""));
+		queryControlActProcessPdq.setCode(PixPdqV3Utils.createCD("PRPA_TE201305UV02", "2.16.840.1.113883.1.18", "", ""));
 
 		// create the query by parameter
 		createQueryByParameter();
 
 		// add the query by parameter object to the control act process
-		queryControlActProcess.setQueryByParameter(queryByParameter);
+		queryControlActProcessPdq.setQueryByParameter(queryByParameter);
 	}
 
 	private void createQueryByParameter() {
@@ -204,6 +204,7 @@ public class V3PdqConsumerQuery extends V3Message {
 	 * @param extension
 	 * @param namespace
 	 */
+	@Override
 	public void addPatientID(String root, String extension, String namespace) {
 		queryParams += "Patient ID: " + root + "^" + extension + ",";
 		// create livingSubjectId
@@ -282,6 +283,7 @@ public class V3PdqConsumerQuery extends V3Message {
 	 * @param type
 	 *            ("HP" or "WP"
 	 */
+	@Override
 	public void addPatientTelecom(String telecom, String type) {
 
 		var patientTel = new PRPAMT201306UV02PatientTelecom();
@@ -308,7 +310,7 @@ public class V3PdqConsumerQuery extends V3Message {
 	 * @return PRPAIN201305UV02QUQIMT021001UV01ControlActProcess - the pix query control act process element
 	 */
 	public PRPAIN201305UV02QUQIMT021001UV01ControlActProcess getControlActProcess() {
-		return queryControlActProcess;
+		return queryControlActProcessPdq;
 	}
 
 	// expose a method to get message id
@@ -481,9 +483,4 @@ public class V3PdqConsumerQuery extends V3Message {
 		rootElement.setSender(PixPdqV3Utils.createMCCIMT000100UV01Sender(applicationOID, facilityOID));
 	}
 
-	@Override
-	protected void addControlActProcess() {
-		// TODO Auto-generated method stub
-
-	}
 }
