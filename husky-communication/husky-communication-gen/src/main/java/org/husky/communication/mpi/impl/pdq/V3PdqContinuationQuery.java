@@ -47,4 +47,10 @@ public class V3PdqContinuationQuery extends V3PdqContinuationBase {
 		queryContinuation.setContinuationQuantity(PixPdqV3Utils.createINT1(quantityLimit));
 
 	}
+
+	@Override
+	protected void addControlActProcess() {
+		// TODO Auto-generated method stub
+
+	}
 }
