@@ -18,6 +18,7 @@ import org.husky.emed.models.common.OrganizationDigest;
 import org.husky.emed.models.common.PatientDigest;
 import org.husky.emed.models.common.RecipientDigest;
 import org.husky.emed.models.document.*;
+import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
 import java.time.Instant;
@@ -30,6 +31,7 @@ import java.util.*;
  *
  * @author Quentin Ligier
  */
+@Component
 public class CceDocumentDigester {
 
     /**

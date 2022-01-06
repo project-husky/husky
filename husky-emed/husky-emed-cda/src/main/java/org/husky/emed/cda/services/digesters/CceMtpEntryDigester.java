@@ -9,6 +9,7 @@
  */
 package org.husky.emed.cda.services.digesters;
 
+import net.shibboleth.utilities.java.support.xml.BasicParserPool;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.hl7cdar2.*;
 import org.husky.common.utils.OptionalUtils;

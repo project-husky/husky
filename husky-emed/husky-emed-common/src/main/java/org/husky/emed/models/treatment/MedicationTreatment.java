@@ -15,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.enums.ActSubstanceAdminSubstitutionCode;
-import org.husky.emed.enums.ChEmedTimingEvent;
 import org.husky.emed.enums.RouteOfAdministrationEdqm;
 import org.husky.emed.enums.TreatmentStatus;
 import org.husky.emed.models.common.EmedReference;
@@ -117,7 +116,6 @@ public class MedicationTreatment {
     /**
      * The dosage instructions.
      */
-    @NonNull
     private MedicationDosageInstructions dosageInstructions;
 
     /**
