@@ -83,6 +83,12 @@ public class EN extends ANY {
         this.setXmlMixed(name);
     }
 
+    public EN(final String name,
+              final String use) {
+        this.setXmlMixed(name);
+        this.getUse().add(use);
+    }
+
     /**
      * A name for a person, organization, place or thing. A sequence of name parts, such as given name or family name,
      * prefix, suffix, etc. Examples for entity name values are "Jim Bob Walton, Jr.", "Health Level Seven, Inc.", "Lake

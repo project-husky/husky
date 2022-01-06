@@ -69,6 +69,19 @@ public class IVLPQ extends SXCMPQ {
             @XmlElementRef(name = "low", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false)})
     protected List<JAXBElement<? extends PQ>> rest;
 
+    public IVLPQ() {
+    }
+
+    public IVLPQ(final String value) {
+        this.value = value;
+    }
+
+    public IVLPQ(final String value,
+                 final String unit) {
+        this.value = value;
+        this.unit = unit;
+    }
+
     /**
      * Ruft das restliche Contentmodell ab.
      *
