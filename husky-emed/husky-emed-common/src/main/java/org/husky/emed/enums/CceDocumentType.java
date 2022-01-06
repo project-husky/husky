@@ -24,7 +24,7 @@ import java.util.Objects;
  *
  * @author Quentin Ligier
  */
-public enum CceType {
+public enum CceDocumentType {
 
     MTP(
             EmedDocumentType.MTP.getName(),
@@ -118,13 +118,13 @@ public enum CceType {
      */
     private final String templateId;
 
-    CceType(final String name,
-            final String description,
-            final String loincCode,
-            final FormatCode formatCode,
-            final TypeCode typeCode,
-            final ClassCode classCode,
-            final String templateId) {
+    CceDocumentType(final String name,
+                    final String description,
+                    final String loincCode,
+                    final FormatCode formatCode,
+                    final TypeCode typeCode,
+                    final ClassCode classCode,
+                    final String templateId) {
         this.name = Objects.requireNonNull(name);
         this.description = Objects.requireNonNull(description);
         this.loincCode = Objects.requireNonNull(loincCode);
@@ -157,9 +157,9 @@ public enum CceType {
      * Returns the type corresponding to a LOINC code.
      *
      * @param loincCode The LOINC code.
-     * @return the corresponding {@link CceType}.
+     * @return the corresponding {@link CceDocumentType}.
      */
-    public static CceType getByLoincCode(final String loincCode) {
+    public static CceDocumentType getByLoincCode(final String loincCode) {
         Objects.requireNonNull(loincCode);
         if (DIS.getLoincCode().equals(loincCode)) {
             return DIS;
@@ -182,10 +182,10 @@ public enum CceType {
      * Returns the type corresponding to a template ID.
      *
      * @param templateId the template ID value.
-     * @return the corresponding {@link CceType}.
+     * @return the corresponding {@link CceDocumentType}.
      */
     @Nullable
-    public static CceType getByTemplateId(final String templateId) {
+    public static CceDocumentType getByTemplateId(final String templateId) {
         Objects.requireNonNull(templateId);
         if (DIS.getTemplateId().equals(templateId)) {
             return DIS;

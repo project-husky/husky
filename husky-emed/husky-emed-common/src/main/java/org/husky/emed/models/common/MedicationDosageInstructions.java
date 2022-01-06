@@ -121,9 +121,9 @@ public class MedicationDosageInstructions {
         if (this.narrativeDosageInstructions != null) {
             return Type.NARRATIVE;
         }
-        final long nbDifferentTimings =
-                this.intakes.stream().map(MedicationDosageIntake::getEventTiming).distinct().count();
-        return (nbDifferentTimings < 2) ? Type.NORMAL : Type.NARRATIVE;
+        final long nbDifferentDosis =
+                this.intakes.stream().map(MedicationDosageIntake::getDoseQuantity).distinct().count();
+        return (nbDifferentDosis < 2) ? Type.NORMAL : Type.NARRATIVE;
     }
 
     @Override

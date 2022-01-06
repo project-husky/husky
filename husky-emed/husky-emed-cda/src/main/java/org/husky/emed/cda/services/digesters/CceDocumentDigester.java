@@ -89,11 +89,11 @@ public class CceDocumentDigester {
         final var custodian = new OrganizationDigest();
         final var recipients = List.of(new RecipientDigest());
 
-        final var narrativeText = this.getNarrativeText(cce);
-        final var contentSection = this.getContentSection(cce);
+        final var narrativeText = getNarrativeText(cce);
+        final var contentSection = getContentSection(cce);
 
         final EmedDocumentDigest doc;
-        switch (this.getDocumentType(cce)) {
+        switch (getDocumentType(cce)) {
             case MTP -> {
                 final var mtpEntry = Optional.of(contentSection.getEntry())
                         .map(OptionalUtils::getListFirstElement)
@@ -105,8 +105,8 @@ public class CceDocumentDigester {
                         languageCode, patient, authors, custodian, recipients, narrativeText, mtpEntryDigest);
             }
             case PRE -> {
-                final var preStartTime = this.getPreValidityStartTime(cce, effectiveTime.toInstant());
-                final var preStopTime = this.getPreValidityStopTime(cce, effectiveTime.toInstant());
+                final var preStartTime = getPreValidityStartTime(cce, effectiveTime.toInstant());
+                final var preStopTime = getPreValidityStopTime(cce, effectiveTime.toInstant());
                 final var preEntryDigests = Optional.of(contentSection.getEntry())
                         .orElse(Collections.emptyList()).stream()
                         .map(POCDMT000040Entry::getSubstanceAdministration)
@@ -155,8 +155,8 @@ public class CceDocumentDigester {
             }
             default -> throw new UnsupportedOperationException("Unknown document type");
         }
-        doc.setRemarks(this.getRemarks(cce));
-        doc.setPdfRepresentation(this.getPdfRepresentation(cce));
+        doc.setRemarks(getRemarks(cce));
+        doc.setPdfRepresentation(getPdfRepresentation(cce));
         return doc;
     }
 
@@ -165,7 +165,7 @@ public class CceDocumentDigester {
      *
      * @return an instance of {@link EmedDocumentType}.
      */
-    public EmedDocumentType getDocumentType(final POCDMT000040ClinicalDocument cce) {
+    public static EmedDocumentType getDocumentType(final POCDMT000040ClinicalDocument cce) {
         if (TemplateIds.hasAllIds(TemplateIds.MTP_DOCUMENT, cce.getTemplateId())) {
             return EmedDocumentType.MTP;
         } else if (TemplateIds.hasAllIds(TemplateIds.PRE_DOCUMENT, cce.getTemplateId())) {
@@ -195,7 +195,7 @@ public class CceDocumentDigester {
      * @return the inclusive prescription validity start time as an {@link Instant}.
      */
     @SideEffectFree
-    public Instant getPreValidityStartTime(final POCDMT000040ClinicalDocument cce,
+    public static Instant getPreValidityStartTime(final POCDMT000040ClinicalDocument cce,
                                            final Instant effectiveTime) {
         return cce.getDocumentationOf().stream()
                 .filter(documentationOf -> documentationOf.getTemplateId().isEmpty()) // The only one without template IDs
@@ -218,7 +218,7 @@ public class CceDocumentDigester {
      * @return the inclusive prescription validity stop time as an {@link Instant}.
      */
     @SideEffectFree
-    public Instant getPreValidityStopTime(final POCDMT000040ClinicalDocument cce,
+    public static Instant getPreValidityStopTime(final POCDMT000040ClinicalDocument cce,
                                           final Instant effectiveTime) {
         return cce.getDocumentationOf().stream()
                 .filter(documentationOf -> documentationOf.getTemplateId().isEmpty()) // The only one without template IDs
@@ -238,7 +238,7 @@ public class CceDocumentDigester {
      *
      * @throws InvalidEmedContentException if the section is missing.
      */
-    public POCDMT000040Section getContentSection(final POCDMT000040ClinicalDocument cce) throws InvalidEmedContentException {
+    public static POCDMT000040Section getContentSection(final POCDMT000040ClinicalDocument cce) throws InvalidEmedContentException {
         return Optional.ofNullable(cce.getComponent())
                 .map(POCDMT000040Component2::getStructuredBody)
                 .map(POCDMT000040StructuredBody::getComponent)
@@ -263,8 +263,8 @@ public class CceDocumentDigester {
      * @throws InvalidEmedContentException if the narrative text is missing.
      */
     @SideEffectFree
-    public StrucDocText getNarrativeText(final POCDMT000040ClinicalDocument cce) {
-        return Optional.of(this.getContentSection(cce))
+    public static StrucDocText getNarrativeText(final POCDMT000040ClinicalDocument cce) {
+        return Optional.of(getContentSection(cce))
                 .map(POCDMT000040Section::getText)
                 .orElseThrow(() -> new InvalidEmedContentException("Unable to retrieve the narrative text"));
 
@@ -277,7 +277,7 @@ public class CceDocumentDigester {
      */
     @Nullable
     @SideEffectFree
-    public StrucDocText getRemarks(final POCDMT000040ClinicalDocument cce) {
+    public static StrucDocText getRemarks(final POCDMT000040ClinicalDocument cce) {
         return Optional.ofNullable(cce.getComponent())
                 .map(POCDMT000040Component2::getStructuredBody)
                 .map(POCDMT000040StructuredBody::getComponent)
@@ -299,7 +299,7 @@ public class CceDocumentDigester {
      *                                  InvalidEmedContentException
      */
     @SideEffectFree
-    public byte[] getPdfRepresentation(final POCDMT000040ClinicalDocument cce) {
+    public static byte[] getPdfRepresentation(final POCDMT000040ClinicalDocument cce) {
         return Optional.ofNullable(cce.getComponent())
                 .map(POCDMT000040Component2::getStructuredBody)
                 .map(POCDMT000040StructuredBody::getComponent)

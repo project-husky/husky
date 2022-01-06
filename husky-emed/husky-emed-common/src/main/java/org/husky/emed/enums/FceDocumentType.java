@@ -21,7 +21,7 @@ import java.util.Objects;
  *
  * @author Quentin Ligier
  */
-public enum FceType {
+public enum FceDocumentType {
 
     MTP_JSON(
             EmedDocumentType.MTP.getName(),
@@ -154,12 +154,12 @@ public enum FceType {
      */
     private final String profile;
 
-    FceType(final String name,
-            final FormatCode formatCode,
-            final TypeCode typeCode,
-            final ClassCode classCode,
-            final String mimeType,
-            final String profile) {
+    FceDocumentType(final String name,
+                    final FormatCode formatCode,
+                    final TypeCode typeCode,
+                    final ClassCode classCode,
+                    final String mimeType,
+                    final String profile) {
         this.name = Objects.requireNonNull(name);
         this.formatCode = Objects.requireNonNull(formatCode);
         this.typeCode = Objects.requireNonNull(typeCode);
