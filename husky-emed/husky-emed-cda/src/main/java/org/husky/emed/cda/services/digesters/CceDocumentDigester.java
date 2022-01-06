@@ -64,12 +64,10 @@ public class CceDocumentDigester {
      * Creates a digest of a CDA-CH-EMED document and its entries.
      *
      * @param cce       The CDA-CH-EMED document to digest.
-     * @param patientId The ID of the patient.
      * @return an implementation of {@link EmedDocumentDigest}.
      */
     @SideEffectFree
-    public EmedDocumentDigest digest(final POCDMT000040ClinicalDocument cce,
-                                     final String patientId) throws InvalidEmedContentException {
+    public EmedDocumentDigest digest(final POCDMT000040ClinicalDocument cce) throws InvalidEmedContentException {
         final var id = Optional.ofNullable(cce.getId()).map(II::getRoot).map(Uuids::normalize)
                 .orElseThrow(() -> new InvalidEmedContentException("The document ID is missing"));
         final var setId = Optional.ofNullable(cce.getSetId()).map(II::getRoot).map(Uuids::normalize)
@@ -101,8 +99,7 @@ public class CceDocumentDigester {
                         .map(OptionalUtils::getListFirstElement)
                         .map(POCDMT000040Entry::getSubstanceAdministration)
                         .orElseThrow(() -> new InvalidEmedContentException("The MTP entry is missing"));
-                final var mtpEntryDigest = this.mtpEntryDigester.createDigest(mtpEntry, id, effectiveTime.toInstant(),
-                        patientId);
+                final var mtpEntryDigest = this.mtpEntryDigester.createDigest(mtpEntry, id, effectiveTime.toInstant());
                 doc = new EmedMtpDocumentDigest(id, setId, version, effectiveTime, confidentialityCode,
                         languageCode, patient, authors, custodian, recipients, narrativeText, mtpEntryDigest);
             }
@@ -114,7 +111,7 @@ public class CceDocumentDigester {
                         .map(POCDMT000040Entry::getSubstanceAdministration)
                         .filter(Objects::nonNull)
                         .map(preEntry -> this.preEntryDigester.createDigest(preEntry, id, effectiveTime.toInstant(), preStartTime
-                                , preStopTime, patientId))
+                                , preStopTime))
                         .toList();
 
                 doc = new EmedPreDocumentDigest(id, setId, version, effectiveTime, confidentialityCode, languageCode,
@@ -124,7 +121,7 @@ public class CceDocumentDigester {
                 final var disEntryDigest = Optional.of(contentSection.getEntry())
                         .map(OptionalUtils::getListFirstElement)
                         .map(POCDMT000040Entry::getSupply)
-                        .map(disEntry -> this.disEntryDigester.createDigest(disEntry, id, effectiveTime.toInstant(), patientId))
+                        .map(disEntry -> this.disEntryDigester.createDigest(disEntry, id, effectiveTime.toInstant()))
                         .orElseThrow(() -> new InvalidEmedContentException("The DIS entry is missing"));
                 doc = new EmedDisDocumentDigest(id, setId, version, effectiveTime, confidentialityCode,
                         languageCode, patient, authors, custodian, recipients, narrativeText, disEntryDigest);
@@ -133,7 +130,7 @@ public class CceDocumentDigester {
                 final var padvEntryDigest = Optional.of(contentSection.getEntry())
                         .map(OptionalUtils::getListFirstElement)
                         .map(POCDMT000040Entry::getObservation)
-                        .map(padvEntry -> this.padvEntryDigester.createDigest(padvEntry, id, effectiveTime.toInstant(), patientId))
+                        .map(padvEntry -> this.padvEntryDigester.createDigest(padvEntry, id, effectiveTime.toInstant()))
                         .orElseThrow(() -> new InvalidEmedContentException("The PADV entry is missing"));
                 doc = new EmedPadvDocumentDigest(id, setId, version, effectiveTime, confidentialityCode,
                         languageCode, patient, authors, custodian, recipients, narrativeText, padvEntryDigest);
@@ -149,8 +146,7 @@ public class CceDocumentDigester {
                         .orElse(Collections.emptyList()).stream()
                         .map(POCDMT000040Entry::getSubstanceAdministration)
                         .filter(Objects::nonNull)
-                        .map(mtpEntry -> this.mtpEntryDigester.createDigest(mtpEntry, id, effectiveTime.toInstant()
-                                , patientId))
+                        .map(mtpEntry -> this.mtpEntryDigester.createDigest(mtpEntry, id, effectiveTime.toInstant()))
                         .toList();
                 doc = new EmedPmlcDocumentDigest(id, setId, version, effectiveTime, confidentialityCode,
                         languageCode, patient, authors, custodian, recipients, narrativeText, mtpEntryDigests);

@@ -34,7 +34,6 @@ public class EmedPadvRefuseEntryDigest extends EmedPadvEntryDigest {
      * @param sectionAuthor         The author of the original parent section.
      * @param entryId               The item entry ID.
      * @param medicationTreatmentId The ID of the medication treatment this item entry belongs to.
-     * @param patientId             The patient ID.
      * @param sequence              The sequence of addition.
      * @param annotationComment     The annotation comment or {@code null} if it isn't provided.
      * @param completed             Whether the PADV status is completed or not.
@@ -48,15 +47,14 @@ public class EmedPadvRefuseEntryDigest extends EmedPadvEntryDigest {
                                      final AuthorDigest sectionAuthor,
                                      final String entryId,
                                      final String medicationTreatmentId,
-                                     final String patientId,
                                      final int sequence,
                                      @Nullable final String annotationComment,
                                      final boolean completed,
                                      final Instant effectiveTime,
                                      final EmedReference targetedEntryRef,
                                      final EmedEntryType targetedEntryType) {
-        super(creationTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, patientId,
-                sequence, annotationComment, completed, effectiveTime, targetedEntryRef, targetedEntryType);
+        super(creationTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId,  sequence,
+                annotationComment, completed, effectiveTime, targetedEntryRef, targetedEntryType);
 
         if (targetedEntryType != EmedEntryType.MTP && targetedEntryType != EmedEntryType.PRE) {
             throw new IllegalArgumentException("The entry targeted by a PADV REFUSE shall be of MTP or PRE type");

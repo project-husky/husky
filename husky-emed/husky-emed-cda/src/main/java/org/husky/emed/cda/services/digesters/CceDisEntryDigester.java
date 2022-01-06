@@ -52,14 +52,12 @@ public class CceDisEntryDigester {
      * @param supply                   The DIS Supply element.
      * @param disDocumentId            The MTP document ID.
      * @param disDocumentEffectiveTime The MTP document effective time.
-     * @param patientId                The patient ID.
      * @return a digest of the element.
      * @throws InvalidEmedContentException if the CCE document is invalid.
      */
     protected EmedDisEntryDigest createDigest(final POCDMT000040Supply supply,
                                               final String disDocumentId,
-                                              final Instant disDocumentEffectiveTime,
-                                              final String patientId) throws InvalidEmedContentException {
+                                              final Instant disDocumentEffectiveTime) throws InvalidEmedContentException {
 
         final var refMtpEntry = this.getMtpReference(supply).orElse(null);
         final var refMtpEntryDigest = Optional.ofNullable(refMtpEntry)
@@ -94,7 +92,6 @@ public class CceDisEntryDigester {
                 new AuthorDigest(), // TODO
                 this.getEntryId(supply),
                 medicationTreatmentId,
-                patientId,
                 sequence,
                 this.getAnnotationComment(supply).orElse(null),
                 this.getDispenseType(supply),

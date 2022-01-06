@@ -40,13 +40,11 @@ public class CceMtpEntryDigester {
      * @param substanceAdministration  The MTP SubstanceAdministration element.
      * @param mtpDocumentId            The MTP document ID.
      * @param mtpDocumentEffectiveTime The MTP document effective time.
-     * @param patientId                The patient ID.
      * @return a digest of the element.
      */
     protected EmedMtpEntryDigest createDigest(final POCDMT000040SubstanceAdministration substanceAdministration,
                                               final String mtpDocumentId,
-                                              final Instant mtpDocumentEffectiveTime,
-                                              final String patientId) throws InvalidEmedContentException {
+                                              final Instant mtpDocumentEffectiveTime) throws InvalidEmedContentException {
         if (!TemplateIds.hasAllIds(TemplateIds.MTP_ENTRY, substanceAdministration.getTemplateId())) {
             throw new InvalidEmedContentException("The given substance administration is not an MTP item entry");
         }
@@ -59,7 +57,6 @@ public class CceMtpEntryDigester {
                 new AuthorDigest(), // TODO
                 IiUtils.getNormalizedUid(mtpEntry.getEntryId()),
                 IiUtils.getNormalizedUid(mtpEntry.getEntryId()), // Use the MTP entry ID as treatment ID
-                Objects.requireNonNull(patientId),
                 0,
                 mtpEntry.getAnnotationComment().orElse(null),
                 mtpEntry.getDosageInstructions(),

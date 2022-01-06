@@ -40,7 +40,7 @@ class CceDocumentDigesterTest {
     @Order(1)
     void testDigestMtpDocument() throws Exception {
         final var mtpDoc = TestUtils.loadCdaChEmedResource("CDA-CH-EMED/eHealthSuisse/v1.0/1-1-MedicationTreatmentPlan.xml");
-        final var digest = (EmedMtpDocumentDigest) this.digester.digest(mtpDoc, "1234");
+        final var digest = (EmedMtpDocumentDigest) this.digester.digest(mtpDoc);
 
         assertEquals("c9f758a1-296c-4710-84d4-e181db8c7478", digest.getId());
         assertEquals("c9f758a1-296c-4710-84d4-e181db8c7478", digest.getSetId());

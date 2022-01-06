@@ -65,11 +65,6 @@ public abstract class EmedEntryDigest {
     protected int sequence;
 
     /**
-     * The patient ID.
-     */
-    protected String patientId;
-
-    /**
      * The annotation comment or {@code null} if it isn't provided.
      */
     @Nullable protected String annotationComment;
@@ -83,7 +78,6 @@ public abstract class EmedEntryDigest {
      * @param sectionAuthor         The author of the original parent section
      * @param entryId               The item entry ID.
      * @param medicationTreatmentId The ID of the medication treatment this item entry belongs to.
-     * @param patientId             The patient ID.
      * @param sequence              The sequence of addition.
      * @param annotationComment     The annotation comment or {@code null} if it isn't provided.
      */
@@ -93,7 +87,6 @@ public abstract class EmedEntryDigest {
                               final AuthorDigest sectionAuthor,
                               final String entryId,
                               final String medicationTreatmentId,
-                              final String patientId,
                               final int sequence,
                               @Nullable final String annotationComment) {
         this.creationTime = Objects.requireNonNull(creationTime);
@@ -102,7 +95,6 @@ public abstract class EmedEntryDigest {
         this.sectionAuthor = Objects.requireNonNull(sectionAuthor);
         this.entryId = Objects.requireNonNull(entryId);
         this.medicationTreatmentId = Objects.requireNonNull(medicationTreatmentId);
-        this.patientId = Objects.requireNonNull(patientId);
         this.sequence = sequence;
         this.annotationComment = annotationComment;
     }
@@ -122,7 +114,6 @@ public abstract class EmedEntryDigest {
                 ", entryId='" + entryId + '\'' +
                 ", medicationTreatmentId='" + medicationTreatmentId + '\'' +
                 ", sequence=" + sequence +
-                ", patientId='" + patientId + '\'' +
                 ", annotationComment='" + annotationComment + '\'' +
                 '}';
     }
