@@ -59,4 +59,9 @@ class ChEprAssertionValidatorTest {
                 .getDocumentElement();
         return (Assertion) UNMARSHALLER.unmarshall(element);
     }
+
+    /**
+     * TODO:
+     * test notBefore, notOnOrAfter, notOnOrAfter <= notBefore
+     */
 }
