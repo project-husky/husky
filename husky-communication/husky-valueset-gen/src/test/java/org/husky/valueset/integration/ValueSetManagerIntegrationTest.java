@@ -39,7 +39,7 @@ import org.xml.sax.SAXException;
  * The Test Class for ValueSetManager with downloading value sets from
  * ART-DECOR.
  */
-public class ValueSetManagerIntegrationTest {
+class ValueSetManagerIntegrationTest {
 
 
 	/**
@@ -52,7 +52,7 @@ public class ValueSetManagerIntegrationTest {
 	 * @throws IOException
 	 */
 	@Test
-	public void downloadRawTest() throws MalformedURLException, IOException {
+	void downloadRawTest() throws MalformedURLException, IOException {
 		String testUrl = "http://art-decor.org/decor/services/RetrieveValueSet?prefix=ch-epr-&format=json&id=2.16.756.5.30.1.127.3.10.1";
 
 		// download expected values from fixed URL
@@ -79,7 +79,7 @@ public class ValueSetManagerIntegrationTest {
 	 * @throws IOException
 	 */
 	@Test
-	public void downloadRawUnknwonIdTest() throws MalformedURLException, IOException {
+	void downloadRawUnknwonIdTest() throws MalformedURLException, IOException {
 		// id in URL doesn't exists
 		String testUrl = "http://art-decor.org/decor/services/RetrieveValueSet?prefix=ch-epr-&format=json&id=1.2.3.4.5";
 
@@ -108,7 +108,7 @@ public class ValueSetManagerIntegrationTest {
 	 * @throws InitializationException
 	 */
 	@Test
-	public void downloadValueSetTest() throws IOException, ParserConfigurationException,
+	void downloadValueSetTest() throws IOException, ParserConfigurationException,
 			SAXException, InitializationException {
 		String baseUrlJson = "http://art-decor.org/decor/services/RetrieveValueSet?prefix=ch-epr-&format=json";
 		String baseUrlIheSvs = "http://art-decor.org/decor/services/RetrieveValueSet?prefix=ch-epr-&format=svs";

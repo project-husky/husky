@@ -25,7 +25,7 @@ import org.husky.xua.pki.impl.PkiManagerImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class IdpClientCertificateAuthConfigBuilderTest {
+class IdpClientCertificateAuthConfigBuilderTest {
 
 	private IdpClientCertificateAuthConfigBuilder builder;
 	private KeyStore testClientKeyStore;
@@ -57,7 +57,7 @@ public class IdpClientCertificateAuthConfigBuilderTest {
 	 * {@link org.husky.xua.communication.config.impl.IdpClientCertificateAuthConfigBuilder#keyStore(java.security.KeyStore)}.
 	 */
 	@Test
-	public void testKeyStore() {
+	void testKeyStore() {
 		final IdpClientCertificateAuthConfigImpl ref = builder.keyStore(testClientKeyStore)
 				.create();
 		assertNotNull(ref);
@@ -65,7 +65,7 @@ public class IdpClientCertificateAuthConfigBuilderTest {
 	}
 
 	@Test
-	public void testKeyStorePassword() {
+	void testKeyStorePassword() {
 		final IdpClientCertificateAuthConfigImpl ref = builder.keyStorePassword(testStorePassword)
 				.create();
 		assertNotNull(ref);

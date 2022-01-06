@@ -29,7 +29,7 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.NameIDType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConfirmationType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectType;
 
-public class SubjectBuilderImplTest {
+class SubjectBuilderImplTest {
 
 	private SubjectBuilderImpl builder;
 	private String testAddress;
@@ -68,7 +68,7 @@ public class SubjectBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.SubjectBuilderImpl#addSubjectConfirmations(org.husky.xua.saml2.SubjectConfirmation)}.
 	 */
 	@Test
-	public void testAddSubjectConfirmations() {
+	void testAddSubjectConfirmations() {
 		final SubjectType ref = builder.addSubjectConfirmations(testSubjectConfirm).create();
 		assertEquals(testSubjectConfirm.getSubjectConfirmationData().getAddress(),
 				extractSubjectConfirmationTypeFromJaxbElements(ref).get(0).getSubjectConfirmationData().getAddress());
@@ -79,7 +79,7 @@ public class SubjectBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.SubjectBuilderImpl#create(org.opensaml.saml.saml2.core.Subject)}.
 	 */
 	@Test
-	public void testCreateSubject() {
+	void testCreateSubject() {
 		final SubjectType ref = builder.create(testInnerObject);
 		assertEquals(testInnerObject, ((SubjectImpl) ref).getWrappedObject());
 	}
@@ -89,13 +89,13 @@ public class SubjectBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.SubjectBuilderImpl#nameIDFormat(java.lang.String)}.
 	 */
 	@Test
-	public void testNameIDFormat() {
+	void testNameIDFormat() {
 		final SubjectType ref = builder.nameIDFormat(testNameIdFormat).create();
 		assertEquals(testNameIdFormat, extractNameIDTypeFromJaxbElements(ref).getFormat());
 	}
 
 	@Test
-	public void testNameIDNameQualifier() {
+	void testNameIDNameQualifier() {
 		final SubjectType ref = builder.nameIDNameQualifier(testNameIDNameQualifier).create();
 		assertEquals(testNameIDNameQualifier, extractNameIDTypeFromJaxbElements(ref).getNameQualifier());
 	}
@@ -105,7 +105,7 @@ public class SubjectBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.SubjectBuilderImpl#nameIDValue(java.lang.String)}.
 	 */
 	@Test
-	public void testNameIDValue() {
+	void testNameIDValue() {
 		final SubjectType ref = builder.nameIDValue(testNameIdValue).create();
 		assertEquals(testNameIdValue, extractNameIDTypeFromJaxbElements(ref).getValue());
 	}
@@ -115,7 +115,7 @@ public class SubjectBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.SubjectBuilderImpl#subjectConfirmations(java.util.List)}.
 	 */
 	@Test
-	public void testSubjectConfirmations() {
+	void testSubjectConfirmations() {
 		final SubjectType ref = builder.subjectConfirmations(testSubjectConfirmations).create();
 		assertArrayEquals(
 				testSubjectConfirmations

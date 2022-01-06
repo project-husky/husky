@@ -28,13 +28,13 @@ import org.junit.jupiter.api.Test;
 /**
  * The Test Class for ValueSetPackageConfig.
  */
-public class ValueSetPackageConfigTest {
+class ValueSetPackageConfigTest {
 
 	/**
 	 * Do all tests.
 	 */
 	@Test
-	public void doAllTests() {
+	void doAllTests() {
 
 		// Basic ValueSetPackageConfig elements tests
 		Date validFrom = DateUtil.parseDateyyyyMMddHHmmss("20190603000000");
@@ -96,7 +96,7 @@ public class ValueSetPackageConfigTest {
 	 * Test method for {@link ValueSetPackageConfig#getValueSetConfigList()}.
 	 */
 	@Test
-	public void testGetValueSetConfigList() {
+	void testGetValueSetConfigList() {
 
 		ValueSetPackageConfig config = new ValueSetPackageConfig();
 		assertNotNull(config.getValueSetConfigList());

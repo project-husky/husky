@@ -22,7 +22,7 @@ import org.husky.xua.wssecurity.impl.UsernameTokenImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class UsernameTokenBuilderImplTest {
+class UsernameTokenBuilderImplTest {
 
 	private UsernameTokenBuilderImpl builder;
 	private org.opensaml.soap.wssecurity.UsernameToken testInternalObject;
@@ -48,7 +48,7 @@ public class UsernameTokenBuilderImplTest {
 	 * {@link org.husky.xua.wssecurity.impl.UsernameTokenBuilderImpl#create(org.opensaml.soap.wssecurity.UsernameToken)}.
 	 */
 	@Test
-	public void testCreateUsernameToken() {
+	void testCreateUsernameToken() {
 		final UsernameToken ref = builder.create(testInternalObject);
 		assertNotNull(ref);
 		assertEquals(testInternalObject, ((UsernameTokenImpl) ref).getWrappedObject());
@@ -59,7 +59,7 @@ public class UsernameTokenBuilderImplTest {
 	 * {@link org.husky.xua.wssecurity.impl.UsernameTokenBuilderImpl#nonce(java.lang.String)}.
 	 */
 	@Test
-	public void testNonce() {
+	void testNonce() {
 		final UsernameToken ref = builder.nonce(testNonce).create();
 		assertNotNull(ref);
 		assertEquals(testNonce, ref.getNonce());
@@ -70,7 +70,7 @@ public class UsernameTokenBuilderImplTest {
 	 * {@link org.husky.xua.wssecurity.impl.UsernameTokenBuilderImpl#password(java.lang.String)}.
 	 */
 	@Test
-	public void testPassword() {
+	void testPassword() {
 		final UsernameToken ref = builder.password(testPassword).create();
 		assertNotNull(ref);
 		assertEquals(testPassword, ref.getPassword());
@@ -81,7 +81,7 @@ public class UsernameTokenBuilderImplTest {
 	 * {@link org.husky.xua.wssecurity.impl.UsernameTokenBuilderImpl#username(java.lang.String)}.
 	 */
 	@Test
-	public void testUsername() {
+	void testUsername() {
 		final UsernameToken ref = builder.username(testUsername).create();
 		assertNotNull(ref);
 		assertEquals(testUsername, ref.getUsername());

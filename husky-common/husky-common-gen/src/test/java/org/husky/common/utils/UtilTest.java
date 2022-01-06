@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test of Util
  */
-public class UtilTest {
+class UtilTest {
 
 	private List<String> testFilledList;
 	private List<?> testEmptyList;
@@ -66,14 +66,14 @@ public class UtilTest {
 	 * .
 	 */
 	@Test
-	public void testAtLeastOne() {
+	void testAtLeastOne() {
 		assertTrue(Util.atLeastOne(testFilledList));
 		assertFalse(Util.atLeastOne(testEmptyList));
 		assertFalse(Util.atLeastOne(testNullList));
 	}
 
 	@Test
-	public void testJoinEListStr() {
+	void testJoinEListStr() {
 		final String ref1 = Util.joinEListStr(testEnxpList1);
 		assertNotNull(ref1);
 		assertEquals("ENXP11", ref1);

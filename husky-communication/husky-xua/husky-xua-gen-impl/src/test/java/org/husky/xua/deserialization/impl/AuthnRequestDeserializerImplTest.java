@@ -25,7 +25,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Element;
 
-public class AuthnRequestDeserializerImplTest extends AbstractTestHelper {
+class AuthnRequestDeserializerImplTest extends AbstractTestHelper {
 
 	private AuthnRequestDeserializerImpl testDeserializer;
 	private byte[] testXmlByteArray;
@@ -51,7 +51,7 @@ public class AuthnRequestDeserializerImplTest extends AbstractTestHelper {
 	 * @throws DeserializeException
 	 */
 	@Test
-	public void testFromXmlByteArray() throws DeserializeException {
+	void testFromXmlByteArray() throws DeserializeException {
 		final AuthnRequest ref = testDeserializer.fromXmlByteArray(testXmlByteArray);
 		assertNotNull(ref);
 	}
@@ -63,7 +63,7 @@ public class AuthnRequestDeserializerImplTest extends AbstractTestHelper {
 	 * @throws DeserializeException
 	 */
 	@Test
-	public void testFromXmlElement() throws DeserializeException {
+	void testFromXmlElement() throws DeserializeException {
 		final AuthnRequest ref = testDeserializer.fromXmlElement(testXmlElement);
 		assertNotNull(ref);
 	}
@@ -75,7 +75,7 @@ public class AuthnRequestDeserializerImplTest extends AbstractTestHelper {
 	 * @throws DeserializeException
 	 */
 	@Test
-	public void testFromXmlElement_InputNull() throws DeserializeException {
+	void testFromXmlElement_InputNull() throws DeserializeException {
 		assertThrows(DeserializeException.class, () -> testDeserializer.fromXmlElement(null));
 	}
 
@@ -86,7 +86,7 @@ public class AuthnRequestDeserializerImplTest extends AbstractTestHelper {
 	 * @throws DeserializeException
 	 */
 	@Test
-	public void testFromXmlString() throws DeserializeException {
+	void testFromXmlString() throws DeserializeException {
 		final AuthnRequest ref = testDeserializer.fromXmlString(testXmlString);
 		assertNotNull(ref);
 	}

@@ -22,7 +22,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.opensaml.xmlsec.encryption.EncryptedData;
 
-public class EncryptedAssertionBuilderImplTest {
+class EncryptedAssertionBuilderImplTest {
 
 	private EncryptedAssertionBuilderImpl builder;
 	private String testId;
@@ -45,7 +45,7 @@ public class EncryptedAssertionBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.EncryptedAssertionBuilderImpl#create()}.
 	 */
 	@Test
-	public void testCreate() {
+	void testCreate() {
 		final EncryptedAssertion ref = builder.create();
 		assertNotNull(ref);
 	}
@@ -55,7 +55,7 @@ public class EncryptedAssertionBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.EncryptedAssertionBuilderImpl#create(org.opensaml.saml.saml2.core.EncryptedAssertion)}.
 	 */
 	@Test
-	public void testCreateEncryptedAssertion() {
+	void testCreateEncryptedAssertion() {
 		final EncryptedAssertion ref = builder.create(testInnerObject);
 		assertEquals(testInnerObject, ((EncryptedAssertionImpl) ref).getWrappedObject());
 	}

@@ -120,7 +120,7 @@ public class ValueSetEnumInterfaceTest {
 	}
 
 	@Test
-	public void testInterfaceDefaultMethodImplementation() {
+	void testInterfaceDefaultMethodImplementation() {
 
 		final String codeValue = "1234";
 		final String codeSystemValue = "1.2.3.4";

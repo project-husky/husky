@@ -214,6 +214,7 @@ public class ValueSet extends ValueSetBase implements Serializable {
 		return enumName;
 	}
 
+	/* falsely identified as duplicate code */
 	private static String getNumberLiteral(String subString) {
 		if ("0".equalsIgnoreCase(subString)) {
 			return "Zero";

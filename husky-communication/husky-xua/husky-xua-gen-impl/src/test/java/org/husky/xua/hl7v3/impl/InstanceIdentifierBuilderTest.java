@@ -18,7 +18,7 @@ import org.husky.xua.utilities.impl.InitializerTestHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class InstanceIdentifierBuilderTest extends InitializerTestHelper {
+class InstanceIdentifierBuilderTest extends InitializerTestHelper {
 
 	@BeforeEach
 	public void setUp() throws Exception {
@@ -29,7 +29,7 @@ public class InstanceIdentifierBuilderTest extends InitializerTestHelper {
 	 * {@link org.husky.xua.hl7v3.impl.InstanceIdentifierBuilder#buildObject()}.
 	 */
 	@Test
-	public void testBuildObject() {
+	void testBuildObject() {
 		final OpenSamlInstanceIdentifier ref = new InstanceIdentifierBuilder().buildObject();
 		assertNotNull(ref);
 	}

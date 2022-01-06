@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 import org.opensaml.core.xml.io.UnmarshallingException;
 import org.w3c.dom.Element;
 
-public class InstanceIdentifierUnmarshallerTest extends InitializerTestHelper {
+class InstanceIdentifierUnmarshallerTest extends InitializerTestHelper {
 
 	private Element testDomElement;
 
@@ -32,7 +32,7 @@ public class InstanceIdentifierUnmarshallerTest extends InitializerTestHelper {
 	}
 
 	@Test
-	public void testUnmarshall() throws UnmarshallingException {
+	void testUnmarshall() throws UnmarshallingException {
 		final InstanceIdentifierUnmarshaller unmarshaller = new InstanceIdentifierUnmarshaller();
 		final OpenSamlInstanceIdentifier ref = unmarshaller.unmarshall(testDomElement);
 		assertNotNull(ref);

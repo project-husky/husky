@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
  *
  * <!-- @formatter:on -->
  */
-public class RoleBuilderTest {
+class RoleBuilderTest {
 
 	/**
 	 * <!-- @formatter:off -->
@@ -47,7 +47,7 @@ public class RoleBuilderTest {
 	 * {@link org.husky.xua.hl7v3.impl.ch.ppq.hl7v3.RoleBuilder#buildObject(java.lang.String, java.lang.String, java.lang.String)}.
 	 */
 	@Test
-	public void testBuildObject() {
+	void testBuildObject() {
 		final CE ref = new CodedWithEquivalentsBuilder().buildObject(Role.DEFAULT_NS_URI,
 				Role.DEFAULT_ELEMENT_LOCAL_NAME, Role.DEFAULT_PREFIX);
 		assertNotNull(ref);

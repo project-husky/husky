@@ -20,7 +20,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeType;
 
-public class AttributeBuilderImplTest {
+class AttributeBuilderImplTest {
 
 	private String testAttributeName;
 	private String testAttributeValue;
@@ -46,7 +46,7 @@ public class AttributeBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.AttributeBuilderImpl#name(java.lang.String)}.
 	 */
 	@Test
-	public void testName() {
+	void testName() {
 		final AttributeType ref = testBuilder.name(testAttributeName).create();
 		assertEquals(testAttributeName, ref.getName());
 	}
@@ -56,12 +56,13 @@ public class AttributeBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.AttributeBuilderImpl#value(java.lang.String)}.
 	 */
 	@Test
-	public void testValue() {
+	void testValue() {
 		final AttributeType ref = testBuilder.value(testAttributeValue).create();
 		assertEquals(testAttributeValue, testBuilder.getValueAsString());
 	}
 
-	public void testValueRole() {
+	@Test
+	void testValueRole() {
 		final AttributeType ref = testBuilder.value(testAttributeValueRole).create();
 		assertEquals(testAttributeValueRole, testBuilder.getValueAsRole());
 	}

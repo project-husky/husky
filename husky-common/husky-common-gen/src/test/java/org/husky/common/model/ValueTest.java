@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
  * Test of class Value
  */
 @Disabled
-public class ValueTest {
+class ValueTest {
 
 	/**
 	 * Method implementing
@@ -37,7 +37,7 @@ public class ValueTest {
 	 * .
 	 */
 	@Test
-	public void testValueANY() {
+	void testValueANY() {
 		fail("Not yet implemented");
 	}
 
@@ -47,7 +47,7 @@ public class ValueTest {
 	 * .
 	 */
 	@Test
-	public void testValueCD() {
+	void testValueCD() {
 		fail("Not yet implemented");
 	}
 
@@ -57,7 +57,7 @@ public class ValueTest {
 	 * .
 	 */
 	@Test
-	public void testValueCode() {
+	void testValueCode() {
 		fail("Not yet implemented");
 	}
 
@@ -67,7 +67,7 @@ public class ValueTest {
 	 * .
 	 */
 	@Test
-	public void testValueDoubleDoubleUcum() {
+	void testValueDoubleDoubleUcum() {
 		fail("Not yet implemented");
 	}
 
@@ -77,7 +77,7 @@ public class ValueTest {
 	 * .
 	 */
 	@Test
-	public void testValuePQ() {
+	void testValuePQ() {
 		fail("Not yet implemented");
 	}
 
@@ -87,7 +87,7 @@ public class ValueTest {
 	 * .
 	 */
 	@Test
-	public void testValueRTO() {
+	void testValueRTO() {
 		fail("Not yet implemented");
 	}
 
@@ -97,7 +97,7 @@ public class ValueTest {
 	 * .
 	 */
 	@Test
-	public void testValueStringString() {
+	void testValueStringString() {
 		fail("Not yet implemented");
 	}
 
@@ -107,7 +107,7 @@ public class ValueTest {
 	 * .
 	 */
 	@Test
-	public void testValueStringUcum() {
+	void testValueStringUcum() {
 		fail("Not yet implemented");
 	}
 

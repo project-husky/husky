@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
  * Test of class Patient
  */
 @Disabled
-public class PatientTest {
+class PatientTest {
 
 	/**
 	 * Method implementing
@@ -37,7 +37,7 @@ public class PatientTest {
 	 * .
 	 */
 	@Test
-	public void testAddAddress() {
+	void testAddAddress() {
 		fail("Not yet implemented");
 	}
 
@@ -47,7 +47,7 @@ public class PatientTest {
 	 * .
 	 */
 	@Test
-	public void testAddId() {
+	void testAddId() {
 		fail("Not yet implemented");
 	}
 
@@ -57,7 +57,7 @@ public class PatientTest {
 	 * .
 	 */
 	@Test
-	public void testAddName() {
+	void testAddName() {
 		fail("Not yet implemented");
 	}
 
@@ -66,7 +66,7 @@ public class PatientTest {
 	 * {@link org.husky.common.model.Patient#getName()}.
 	 */
 	@Test
-	public void testGetName() {
+	void testGetName() {
 		fail("Not yet implemented");
 	}
 
@@ -75,7 +75,7 @@ public class PatientTest {
 	 * {@link org.husky.common.model.Patient#getNames()}.
 	 */
 	@Test
-	public void testGetNames() {
+	void testGetNames() {
 		fail("Not yet implemented");
 	}
 
@@ -85,7 +85,7 @@ public class PatientTest {
 	 * .
 	 */
 	@Test
-	public void testPatientNameAdministrativeGenderDate() {
+	void testPatientNameAdministrativeGenderDate() {
 		fail("Not yet implemented");
 	}
 
@@ -95,7 +95,7 @@ public class PatientTest {
 	 * .
 	 */
 	@Test
-	public void testPatientNameAdministrativeGenderDateIdentificator() {
+	void testPatientNameAdministrativeGenderDateIdentificator() {
 		fail("Not yet implemented");
 	}
 
@@ -105,7 +105,7 @@ public class PatientTest {
 	 * .
 	 */
 	@Test
-	public void testPatientRecordTarget() {
+	void testPatientRecordTarget() {
 		fail("Not yet implemented");
 	}
 
@@ -115,7 +115,7 @@ public class PatientTest {
 	 * .
 	 */
 	@Test
-	public void testSetAdministrativeGender() {
+	void testSetAdministrativeGender() {
 		fail("Not yet implemented");
 	}
 
@@ -124,7 +124,7 @@ public class PatientTest {
 	 * {@link org.husky.common.model.Patient#setBirthday(java.util.Date)}.
 	 */
 	@Test
-	public void testSetBirthday() {
+	void testSetBirthday() {
 		fail("Not yet implemented");
 	}
 
@@ -134,7 +134,7 @@ public class PatientTest {
 	 * .
 	 */
 	@Test
-	public void testSetDeceasedInd() {
+	void testSetDeceasedInd() {
 		fail("Not yet implemented");
 	}
 
@@ -144,7 +144,7 @@ public class PatientTest {
 	 * .
 	 */
 	@Test
-	public void testSetDeceasedTime() {
+    void testSetDeceasedTime() {
 		fail("Not yet implemented");
 	}
 
@@ -154,7 +154,7 @@ public class PatientTest {
 	 * .
 	 */
 	@Test
-	public void testSetEmployeeOccupation() {
+	void testSetEmployeeOccupation() {
 		fail("Not yet implemented");
 	}
 
@@ -164,7 +164,7 @@ public class PatientTest {
 	 * .
 	 */
 	@Test
-	public void testSetMothersMaidenName() {
+	void testSetMothersMaidenName() {
 		fail("Not yet implemented");
 	}
 
@@ -174,7 +174,7 @@ public class PatientTest {
 	 * .
 	 */
 	@Test
-	public void testSetMultipleBirthInd() {
+	void testSetMultipleBirthInd() {
 		fail("Not yet implemented");
 	}
 
@@ -184,7 +184,7 @@ public class PatientTest {
 	 * .
 	 */
 	@Test
-	public void testSetMultipleBirthOrderNumber() {
+	void testSetMultipleBirthOrderNumber() {
 		fail("Not yet implemented");
 	}
 
@@ -193,7 +193,7 @@ public class PatientTest {
 	 * {@link org.husky.common.model.Patient#setNation(java.lang.String)}.
 	 */
 	@Test
-	public void testSetNation() {
+	void testSetNation() {
 		fail("Not yet implemented");
 	}
 
@@ -203,7 +203,7 @@ public class PatientTest {
 	 * .
 	 */
 	@Test
-	public void testSetReligiousAffiliation() {
+	void testSetReligiousAffiliation() {
 		fail("Not yet implemented");
 	}
 
@@ -213,7 +213,7 @@ public class PatientTest {
 	 * .
 	 */
 	@Test
-	public void testSetTelecoms() {
+	void testSetTelecoms() {
 		fail("Not yet implemented");
 	}
 

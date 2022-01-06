@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
  * Test of class Person
  */
 @Disabled
-public class PersonTest {
+class PersonTest {
 
 	/**
 	 * Method implementing
@@ -36,7 +36,7 @@ public class PersonTest {
 	 * {@link org.husky.common.model.Person#Person()}.
 	 */
 	@Test
-	public void testPerson() {
+	void testPerson() {
 		fail("Not yet implemented");
 	}
 
@@ -46,7 +46,7 @@ public class PersonTest {
 	 * .
 	 */
 	@Test
-	public void testPersonName() {
+    void testPersonName() {
 		fail("Not yet implemented");
 	}
 
@@ -56,7 +56,7 @@ public class PersonTest {
 	 * .
 	 */
 	@Test
-	public void testPersonPerson() {
+	void testPersonPerson() {
 		fail("Not yet implemented");
 	}
 

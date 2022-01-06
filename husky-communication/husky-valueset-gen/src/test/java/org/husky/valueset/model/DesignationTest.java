@@ -19,12 +19,12 @@ import org.junit.jupiter.api.Test;
 /**
  * The Test Class for Designation.
  */
-public class DesignationTest {
+class DesignationTest {
 	/**
 	 * Do all tests.
 	 */
 	@Test
-	public void doAllTests() {
+	void doAllTests() {
 
 		LanguageCode languageCode = LanguageCode.GERMAN;
 		DesignationType type = DesignationType.FULLY_SPECIFIED_NAME;

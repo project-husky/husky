@@ -24,7 +24,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Element;
 
-public class AuthnRequestSerializerImplTest extends AbstractTestHelper {
+class AuthnRequestSerializerImplTest extends AbstractTestHelper {
 
 	private AuthnRequestSerializerImpl testSerializer;
 
@@ -57,7 +57,7 @@ public class AuthnRequestSerializerImplTest extends AbstractTestHelper {
 	 * @throws SerializeException
 	 */
 	@Test
-	public void testSerializeToXml_InputNull() throws SerializeException {
+	void testSerializeToXml_InputNull() throws SerializeException {
 		assertThrows(SerializeException.class, () -> testSerializer.toXmlElement(null));
 	}
 
@@ -68,7 +68,7 @@ public class AuthnRequestSerializerImplTest extends AbstractTestHelper {
 	 * @throws SerializeException
 	 */
 	@Test
-	public void testToXmlByteArray() throws SerializeException {
+	void testToXmlByteArray() throws SerializeException {
 		final byte[] xmlArray = testSerializer.toXmlByteArray(testXmlObject);
 		assertNotNull(xmlArray);
 	}
@@ -80,7 +80,7 @@ public class AuthnRequestSerializerImplTest extends AbstractTestHelper {
 	 * @throws SerializeException
 	 */
 	@Test
-	public void testToXmlElement() throws SerializeException {
+	void testToXmlElement() throws SerializeException {
 
 		final Element xmlElement = testSerializer.toXmlElement(testXmlObject);
 		assertNotNull(xmlElement);
@@ -100,7 +100,7 @@ public class AuthnRequestSerializerImplTest extends AbstractTestHelper {
 	 * @throws SerializeException
 	 */
 	@Test
-	public void testToXmlString() throws SerializeException {
+	void testToXmlString() throws SerializeException {
 		final String xmlString = testSerializer.toXmlString(testXmlObject);
 		System.out.println(xmlString);
 		assertNotNull(xmlString);

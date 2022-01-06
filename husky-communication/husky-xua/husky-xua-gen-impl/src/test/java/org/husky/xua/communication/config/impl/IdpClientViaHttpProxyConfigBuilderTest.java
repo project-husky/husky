@@ -18,7 +18,7 @@ import org.husky.xua.communication.config.impl.IdpClientViaHttpProxyConfigImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class IdpClientViaHttpProxyConfigBuilderTest {
+class IdpClientViaHttpProxyConfigBuilderTest {
 
 	private IdpClientViaHttpProxyConfigBuilder builder;
 	private String testEnpointUrl;
@@ -40,7 +40,7 @@ public class IdpClientViaHttpProxyConfigBuilderTest {
 	 * {@link org.husky.xua.communication.config.impl.IdpClientViaHttpProxyConfigBuilder#proxyHost(java.lang.String)}.
 	 */
 	@Test
-	public void testProxyHost() {
+	void testProxyHost() {
 		final IdpClientViaHttpProxyConfigImpl ref = builder.proxyHost(testProxyHost).create();
 		assertNotNull(ref);
 		assertEquals(testProxyHost, ref.getProxyHost());
@@ -51,7 +51,7 @@ public class IdpClientViaHttpProxyConfigBuilderTest {
 	 * {@link org.husky.xua.communication.config.impl.IdpClientViaHttpProxyConfigBuilder#proxyPort(int)}.
 	 */
 	@Test
-	public void testProxyPort() {
+	void testProxyPort() {
 		final IdpClientViaHttpProxyConfigImpl ref = builder.proxyPort(testProxyPort).create();
 		assertNotNull(ref);
 		assertEquals(testProxyPort, ref.getProxyPort());
@@ -62,7 +62,7 @@ public class IdpClientViaHttpProxyConfigBuilderTest {
 	 * {@link org.husky.xua.communication.config.impl.IdpClientViaHttpProxyConfigBuilder#proxyProtocol(java.lang.String)}.
 	 */
 	@Test
-	public void testProxyProtocol() {
+	void testProxyProtocol() {
 		final IdpClientViaHttpProxyConfigImpl ref = builder.proxyProtocol(testProxyProtocol)
 				.create();
 		assertNotNull(ref);
@@ -74,7 +74,7 @@ public class IdpClientViaHttpProxyConfigBuilderTest {
 	 * {@link org.husky.xua.communication.config.impl.IdpClientViaHttpProxyConfigBuilder#url(java.lang.String)}.
 	 */
 	@Test
-	public void testUrl() {
+	void testUrl() {
 		final IdpClientViaHttpProxyConfigImpl ref = builder.url(testEnpointUrl).create();
 		assertNotNull(ref);
 		assertEquals(testEnpointUrl, ref.getUrl());

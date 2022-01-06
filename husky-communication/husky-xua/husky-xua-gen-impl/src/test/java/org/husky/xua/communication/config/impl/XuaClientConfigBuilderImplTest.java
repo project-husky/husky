@@ -19,7 +19,7 @@ import org.husky.xua.communication.config.impl.XuaClientConfigBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class XuaClientConfigBuilderImplTest {
+class XuaClientConfigBuilderImplTest {
 
 	private XuaClientConfigBuilder builder;
 	private String testEndpointUrl;
@@ -38,7 +38,7 @@ public class XuaClientConfigBuilderImplTest {
 	 * {@link org.husky.xua.communication.config.impl.XuaClientConfigBuilderImpl#portName(java.lang.String)}.
 	 */
 	@Test
-	public void testPortName() {
+	void testPortName() {
 		final XuaClientConfig ref = builder.portName(testPortName).create();
 		assertNotNull(ref);
 		assertEquals(testPortName, ref.getPortName());
@@ -49,7 +49,7 @@ public class XuaClientConfigBuilderImplTest {
 	 * {@link org.husky.xua.communication.config.impl.XuaClientConfigBuilderImpl#portNamespace(java.lang.String)}.
 	 */
 	@Test
-	public void testPortNamespace() {
+	void testPortNamespace() {
 		final XuaClientConfig ref = builder.portNamespace(testPortNamespace).create();
 		assertNotNull(ref);
 		assertEquals(testPortNamespace, ref.getPortNamespace());
@@ -60,7 +60,7 @@ public class XuaClientConfigBuilderImplTest {
 	 * {@link org.husky.xua.communication.config.impl.XuaClientConfigBuilderImpl#serviceName(java.lang.String)}.
 	 */
 	@Test
-	public void testServiceName() {
+	void testServiceName() {
 		final XuaClientConfig ref = builder.serviceName(testServiceName).create();
 		assertNotNull(ref);
 		assertEquals(testServiceName, ref.getServiceName());
@@ -71,7 +71,7 @@ public class XuaClientConfigBuilderImplTest {
 	 * {@link org.husky.xua.communication.config.impl.XuaClientConfigBuilderImpl#serviceNamespace(java.lang.String)}.
 	 */
 	@Test
-	public void testServiceNamespace() {
+	void testServiceNamespace() {
 		final XuaClientConfig ref = builder.serviceNamespace(testServiceNamespace).create();
 		assertNotNull(ref);
 		assertEquals(testServiceNamespace, ref.getServiceNamespace());
@@ -82,7 +82,7 @@ public class XuaClientConfigBuilderImplTest {
 	 * {@link org.husky.xua.communication.config.impl.XuaClientConfigBuilderImpl#url(java.lang.String)}.
 	 */
 	@Test
-	public void testUrl() {
+	void testUrl() {
 		final XuaClientConfig ref = builder.url(testEndpointUrl).create();
 		assertNotNull(ref);
 		assertEquals(testEndpointUrl, ref.getUrl());

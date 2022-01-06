@@ -152,7 +152,7 @@ class XUserAssertionRequestBuilderImplTest {
 	}
 
 	@Test
-	public void testResourceId() {
+	void testResourceId() {
 		final XUserAssertionRequest ref = builder.resourceId(testResourceId).create();
 		assertNotNull(ref);
 		assertEquals(testResourceId, ref.getResourceId());

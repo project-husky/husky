@@ -54,7 +54,7 @@ public class InstanceIdentifierMarshallerTest extends InitializerTestHelper {
 	 * @throws MarshallingException
 	 */
 	@Test
-	public void testMarshallXMLObjectDocument() throws MarshallingException {
+	void testMarshallXMLObjectDocument() throws MarshallingException {
 		final InstanceIdentifierMarshaller marshaller = new InstanceIdentifierMarshaller();
 		final Element ref = marshaller.marshall(testXmlObject);
 		assertNotNull(ref);

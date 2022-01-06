@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
  *
  * <!-- @formatter:on -->
  */
-public class IdpClientBasicAuthConfigBuilderImplTest {
+class IdpClientBasicAuthConfigBuilderImplTest {
 
 	private IdpClientBasicAuthConfigBuilderImpl builder;
 	private String testBasicAuthPassword;
@@ -51,7 +51,7 @@ public class IdpClientBasicAuthConfigBuilderImplTest {
 	 * {@link org.husky.xua.communication.config.impl.IdpClientBasicAuthConfigBuilderImpl#basicAuthPassword(java.lang.String)}.
 	 */
 	@Test
-	public void testBasicAuthPassword() {
+	void testBasicAuthPassword() {
 		final IdpClientBasicAuthConfigImpl config = builder.basicAuthPassword(testBasicAuthPassword)//
 				.create();
 		assertNotNull(config);
@@ -63,7 +63,7 @@ public class IdpClientBasicAuthConfigBuilderImplTest {
 	 * {@link org.husky.xua.communication.config.impl.IdpClientBasicAuthConfigBuilderImpl#basicAuthUsername(java.lang.String)}.
 	 */
 	@Test
-	public void testBasicAuthUsername() {
+	void testBasicAuthUsername() {
 		final IdpClientBasicAuthConfigImpl config = builder.basicAuthUsername(testBasicAuthUsername)//
 				.create();
 		assertNotNull(config);
@@ -75,7 +75,7 @@ public class IdpClientBasicAuthConfigBuilderImplTest {
 	 * {@link org.husky.xua.communication.config.impl.IdpClientBasicAuthConfigBuilderImpl#url(java.lang.String)}.
 	 */
 	@Test
-	public void testUrl() {
+	void testUrl() {
 		final IdpClientBasicAuthConfigImpl config = builder.url(testUrl)//
 				.create();
 		assertNotNull(config);

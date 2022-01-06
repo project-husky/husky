@@ -43,7 +43,7 @@ import org.xml.sax.SAXException;
  * The purpose of this test class is to check if the assertion query works for a
  * user.
  */
-public class XuaClientTest extends ServerTestHelper {
+class XuaClientTest extends ServerTestHelper {
 
 	private String urlToXua = "https://ehealthsuisse.ihe-europe.net:10443/STS?wsdl";
 	private String clientKeyStore = "src/test/resources/testKeystoreXua.jks";
@@ -57,7 +57,7 @@ public class XuaClientTest extends ServerTestHelper {
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetAssertionForHcp()
+	void testGetAssertionForHcp()
 			throws ClientSendException, DeserializeException, SAXException, IOException, ParserConfigurationException {
 
 		// initialize XUA client to query XUA assertion
@@ -154,7 +154,7 @@ public class XuaClientTest extends ServerTestHelper {
 	 * @throws Exception
 	 */
 	@Test
-	public void testWrongAssertionDetailsForHcp()
+	void testWrongAssertionDetailsForHcp()
 			throws ClientSendException, DeserializeException, SAXException, IOException, ParserConfigurationException {
 
 		// initialize XUA client to query XUA assertion
@@ -194,7 +194,7 @@ public class XuaClientTest extends ServerTestHelper {
 	 * @throws Exception
 	 */
 	@Test
-	public void testInvalidXmlAssertionForHcp()
+	void testInvalidXmlAssertionForHcp()
 			throws ClientSendException, DeserializeException, SAXException, IOException, ParserConfigurationException {
 
 		// initialize XUA client to query XUA assertion

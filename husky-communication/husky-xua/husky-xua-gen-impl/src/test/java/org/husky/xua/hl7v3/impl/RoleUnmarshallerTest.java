@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 import org.opensaml.core.xml.io.UnmarshallingException;
 import org.w3c.dom.Element;
 
-public class RoleUnmarshallerTest extends InitializerTestHelper {
+class RoleUnmarshallerTest extends InitializerTestHelper {
 
 	private Element testDomElement;
 
@@ -31,7 +31,7 @@ public class RoleUnmarshallerTest extends InitializerTestHelper {
 	}
 
 	@Test
-	public void testUnmarshall() throws UnmarshallingException {
+	void testUnmarshall() throws UnmarshallingException {
 		final CodedWithEquivalentsUnmarshaller unmarshaller = new CodedWithEquivalentsUnmarshaller();
 		final OpenSamlCodedWithEquivalent ref = unmarshaller.unmarshall(testDomElement);
 		assertNotNull(ref);

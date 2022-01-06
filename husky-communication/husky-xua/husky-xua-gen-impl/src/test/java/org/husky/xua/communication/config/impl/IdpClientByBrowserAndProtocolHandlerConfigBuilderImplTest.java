@@ -18,7 +18,7 @@ import org.husky.xua.communication.config.impl.IdpClientByBrowserAndProtocolHand
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class IdpClientByBrowserAndProtocolHandlerConfigBuilderImplTest {
+class IdpClientByBrowserAndProtocolHandlerConfigBuilderImplTest {
 
 	private IdpClientByBrowserAndProtocolHandlerConfigBuilderImpl builder;
 	private String testProtocolHandlerName;
@@ -41,7 +41,7 @@ public class IdpClientByBrowserAndProtocolHandlerConfigBuilderImplTest {
 	 * {@link org.husky.xua.communication.config.impl.IdpClientByBrowserAndProtocolHandlerConfigBuilderImpl#protocolHandlerName(java.lang.String)}.
 	 */
 	@Test
-	public void testProtocolHandlerName() {
+	void testProtocolHandlerName() {
 		final IdpClientByBrowserAndProtocolHandlerConfigImpl config = builder
 				.protocolHandlerName(testProtocolHandlerName)//
 				.create();
@@ -54,7 +54,7 @@ public class IdpClientByBrowserAndProtocolHandlerConfigBuilderImplTest {
 	 * {@link org.husky.xua.communication.config.impl.IdpClientByBrowserAndProtocolHandlerConfigBuilderImpl#url(java.lang.String)}.
 	 */
 	@Test
-	public void testUrl() {
+	void testUrl() {
 		final IdpClientByBrowserAndProtocolHandlerConfigImpl config = builder.url(testUrl)//
 				.create();
 		assertNotNull(config);

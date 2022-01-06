@@ -59,7 +59,7 @@ public class CodedWithEquivalentsMarshallerTest extends InitializerTestHelper {
 	}
 
 	@Test
-	public void testMarshallXMLObjectDocument() throws MarshallingException {
+	void testMarshallXMLObjectDocument() throws MarshallingException {
 		final CodedWithEquivalentsMarshaller marshaller = new CodedWithEquivalentsMarshaller();
 		final Element ref = marshaller.marshall(testXmlObject);
 		assertNotNull(ref);

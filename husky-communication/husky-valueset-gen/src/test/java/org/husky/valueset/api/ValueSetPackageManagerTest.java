@@ -43,7 +43,7 @@ import org.junit.jupiter.api.Test;
 /**
  * The Test Class for ValueSetPackageManager.
  */
-public class ValueSetPackageManagerTest {
+class ValueSetPackageManagerTest {
 
 	private String testValueSetPackageConfigOnTheWeb = "https://medshare.net/fileadmin/downloads/ehc/testValueSetPackageConfig.yaml";
 	private File testValueSetPackageConfigFile = new File(Util.getTempDirectory()
@@ -165,7 +165,7 @@ public class ValueSetPackageManagerTest {
 	}
 
 	@Test
-	public void dateMissingTest() throws IOException {
+	void dateMissingTest() throws IOException {
 		// Timestamp in validFrom does not exist -> invalid
 		ValueSetPackageManager valueSetPackageManager = new ValueSetPackageManager();
 		try {
@@ -184,7 +184,7 @@ public class ValueSetPackageManagerTest {
 	}
 
 	@Test
-	public void getLatestValueSetPackageConfigByStatusTest()
+	void getLatestValueSetPackageConfigByStatusTest()
 			throws ConfigurationException, IOException {
 		ValueSetPackageManager valueSetPackageManager = loadPackageConfigs();
 		ValueSetPackageConfig valueSetPackageConfig;
@@ -207,7 +207,7 @@ public class ValueSetPackageManagerTest {
 	}
 
 	@Test
-	public void getLatestValueSetPackageConfigTest() throws ConfigurationException, IOException {
+	void getLatestValueSetPackageConfigTest() throws ConfigurationException, IOException {
 		ValueSetPackageManager valueSetPackageManager = loadPackageConfigs();
 		ValueSetPackageConfig valueSetPackageConfig = valueSetPackageManager
 				.getLatestValueSetPackageConfig();
@@ -216,7 +216,7 @@ public class ValueSetPackageManagerTest {
 	}
 
 	@Test
-	public void getValueSetPackageConfigByStatusAndDateTest()
+	void getValueSetPackageConfigByStatusAndDateTest()
 			throws ConfigurationException, IOException {
 		ValueSetPackageManager valueSetPackageManager = loadPackageConfigs();
 		ValueSetPackageConfig valueSetPackageConfig;
@@ -265,7 +265,7 @@ public class ValueSetPackageManagerTest {
 	}
 
 	@Test
-	public void saveLoadTestConfig() throws IOException, ConfigurationException {
+	void saveLoadTestConfig() throws IOException, ConfigurationException {
 
 		ValueSetPackageManager valueSetPackageManager = new ValueSetPackageManager();
 
@@ -294,7 +294,7 @@ public class ValueSetPackageManagerTest {
 	}
 
 	@Test
-	public void saveLoadTestPackage() throws IOException {
+	void saveLoadTestPackage() throws IOException {
 		ValueSetPackageManager valueSetPackageManager = new ValueSetPackageManager();
 
 		// Save a package
@@ -375,7 +375,7 @@ public class ValueSetPackageManagerTest {
 	}
 
 	@Test
-	public void versionMissingTest() throws IOException {
+	void versionMissingTest() throws IOException {
 		// Timestamp in validFrom nicht vorhanden -> ungültig
 		ValueSetPackageManager valueSetPackageManager = new ValueSetPackageManager();
 		try {

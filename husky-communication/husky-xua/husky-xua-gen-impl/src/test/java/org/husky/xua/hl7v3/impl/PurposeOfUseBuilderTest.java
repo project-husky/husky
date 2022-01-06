@@ -18,7 +18,7 @@ import org.husky.xua.utilities.impl.InitializerTestHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class PurposeOfUseBuilderTest extends InitializerTestHelper {
+class PurposeOfUseBuilderTest extends InitializerTestHelper {
 
 	@BeforeEach
 	public void setUp() throws Exception {
@@ -29,7 +29,7 @@ public class PurposeOfUseBuilderTest extends InitializerTestHelper {
 	 * {@link org.husky.xua.hl7v3.impl.PurposeOfUseBuilder.ppq.hl7v3.PurposeOfUseBuilder#buildObject()}.
 	 */
 	@Test
-	public void testBuildObject() {
+	void testBuildObject() {
 		final CE ref = new CodedWithEquivalentsBuilder().buildObject(PurposeOfUse.DEFAULT_NS_URI,
 				PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME, PurposeOfUse.DEFAULT_PREFIX);
 		assertNotNull(ref);

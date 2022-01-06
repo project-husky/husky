@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
  * @since Jan 2, 2018 11:32:48 AM
  *
  */
-public class FhirCommonTest {
+class FhirCommonTest {
 
 	private String testOidString;
 	private String testUuid;
@@ -65,7 +65,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testAddDocManifestContent() {
+	void testAddDocManifestContent() {
 		fail("Not yet implemented");
 	}
 
@@ -74,7 +74,7 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#addUrnOid(java.lang.String)}.
 	 */
 	@Test
-	public void testAddUrnOid() {
+	void testAddUrnOid() {
 		final String ref = FhirCommon.addUrnOid(testOidString);
 		assertNotNull(ref);
 		assertTrue(ref.startsWith(FhirCommon.OID_URN));
@@ -86,7 +86,7 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#addUrnUuid(java.lang.String)}.
 	 */
 	@Test
-	public void testAddUrnUuid() {
+	void testAddUrnUuid() {
 		final String ref = FhirCommon.addUrnUuid(testUuid);
 		assertNotNull(ref);
 		assertTrue(ref.startsWith(FhirCommon.UUID_URN));
@@ -98,7 +98,7 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#createCodeableConcept(java.lang.String, java.lang.String)}.
 	 */
 	@Test
-	public void testCreateCodeableConceptStringString() {
+	void testCreateCodeableConceptStringString() {
 		final CodeableConcept ref = FhirCommon.createCodeableConcept(testSystemOid, testOidString);
 		assertNotNull(ref);
 		assertNotNull(ref.getCodingFirstRep());
@@ -111,7 +111,7 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#createCodeableConcept(java.lang.String, java.lang.String, java.lang.String)}.
 	 */
 	@Test
-	public void testCreateCodeableConceptStringStringString() {
+	void testCreateCodeableConceptStringStringString() {
 		final CodeableConcept ref = FhirCommon.createCodeableConcept(testSystemOid, testOidString,
 				testDisplayName);
 		assertNotNull(ref);
@@ -126,7 +126,7 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#createCoding(java.lang.String, java.lang.String)}.
 	 */
 	@Test
-	public void testCreateCodingStringString() {
+	void testCreateCodingStringString() {
 		final Coding ref = FhirCommon.createCoding(testSystemOid, testOidString);
 		assertNotNull(ref);
 		assertTrue(ref.getSystem().endsWith(testSystemOid));
@@ -138,7 +138,7 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#createCoding(java.lang.String, java.lang.String, java.lang.String)}.
 	 */
 	@Test
-	public void testCreateCodingStringStringString() {
+	void testCreateCodingStringStringString() {
 		final Coding ref = FhirCommon.createCoding(testSystemOid, testOidString, testDisplayName);
 		assertNotNull(ref);
 		assertTrue(ref.getSystem().endsWith(testSystemOid));
@@ -151,7 +151,7 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#createIdentifier(org.org.husky.common.model.Identificator)}.
 	 */
 	@Test
-	public void testCreateIdentifierIdentificator() {
+	void testCreateIdentifierIdentificator() {
 		final Identifier ref = FhirCommon.createIdentifier(testIdentificator);
 		assertNotNull(ref);
 		assertTrue(ref.getSystem().endsWith(testSystemOid));
@@ -163,7 +163,7 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#createIdentifier(java.lang.String, java.lang.String)}.
 	 */
 	@Test
-	public void testCreateIdentifierStringString() {
+	void testCreateIdentifierStringString() {
 		final Identifier ref = FhirCommon.createIdentifier(testSystemOid, testOidString);
 		assertNotNull(ref);
 		assertTrue(ref.getSystem().endsWith(testSystemOid));
@@ -176,7 +176,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testCreateObservation() {
+	void testCreateObservation() {
 		fail("Not yet implemented");
 	}
 
@@ -186,7 +186,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testCreateObservationCodeableConcept() {
+	void testCreateObservationCodeableConcept() {
 		fail("Not yet implemented");
 	}
 
@@ -195,7 +195,7 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#ehcCodeToFhirCode(org.org.husky.common.model.Code)}.
 	 */
 	@Test
-	public void testEhcCodeToFhirCode() {
+	void testEhcCodeToFhirCode() {
 		final CodeableConcept ref = FhirCommon.ehcCodeToFhirCode(testCode);
 		assertNotNull(ref);
 		assertTrue(ref.getCodingFirstRep().getSystem().endsWith(testSystemOid));
@@ -208,7 +208,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testFhirAddressToEhcAddress() {
+	void testFhirAddressToEhcAddress() {
 		fail("Not yet implemented");
 	}
 
@@ -218,7 +218,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testFhirCodeToEhcCode() {
+	void testFhirCodeToEhcCode() {
 		fail("Not yet implemented");
 	}
 
@@ -228,7 +228,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testFhirIdentifierToEhcIdentificator() {
+	void testFhirIdentifierToEhcIdentificator() {
 		fail("Not yet implemented");
 	}
 
@@ -238,7 +238,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testFhirNameToEhcName() {
+	void testFhirNameToEhcName() {
 		fail("Not yet implemented");
 	}
 
@@ -248,7 +248,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testGetAuthorIBaseResource() {
+	void testGetAuthorIBaseResource() {
 		fail("Not yet implemented");
 	}
 
@@ -258,7 +258,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testGetAuthorOrganization() {
+	void testGetAuthorOrganization() {
 		fail("Not yet implemented");
 	}
 
@@ -268,7 +268,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testGetAuthorPerson() {
+	void testGetAuthorPerson() {
 		fail("Not yet implemented");
 	}
 
@@ -278,7 +278,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testGetAuthorPractitioner() {
+	void testGetAuthorPractitioner() {
 		fail("Not yet implemented");
 	}
 
@@ -288,7 +288,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testGetAuthorReference() {
+	void testGetAuthorReference() {
 		fail("Not yet implemented");
 	}
 
@@ -298,7 +298,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testGetCommunityPatientId() {
+	void testGetCommunityPatientId() {
 		fail("Not yet implemented");
 	}
 
@@ -308,7 +308,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testGetDocumentFilepath() {
+	void testGetDocumentFilepath() {
 		fail("Not yet implemented");
 	}
 
@@ -318,7 +318,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testGetFormatCode() {
+	void testGetFormatCode() {
 		fail("Not yet implemented");
 	}
 
@@ -328,7 +328,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testGetMetadataLanguage() {
+	void testGetMetadataLanguage() {
 		fail("Not yet implemented");
 	}
 
@@ -338,7 +338,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testGetMimeType() {
+	void testGetMimeType() {
 		fail("Not yet implemented");
 	}
 
@@ -348,7 +348,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testGetOrganizationIBaseResource() {
+	void testGetOrganizationIBaseResource() {
 		fail("Not yet implemented");
 	}
 
@@ -358,7 +358,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testGetOrganizationOrganization() {
+	void testGetOrganizationOrganization() {
 		fail("Not yet implemented");
 	}
 
@@ -368,7 +368,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testGetOrganizationReference() {
+	void testGetOrganizationReference() {
 		fail("Not yet implemented");
 	}
 
@@ -378,7 +378,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testGetPatientBundle() {
+	void testGetPatientBundle() {
 		fail("Not yet implemented");
 	}
 
@@ -388,7 +388,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testGetPatientDocumentManifest() {
+	void testGetPatientDocumentManifest() {
 		fail("Not yet implemented");
 	}
 
@@ -398,7 +398,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testGetPatientIBaseResource() {
+	void testGetPatientIBaseResource() {
 		fail("Not yet implemented");
 	}
 
@@ -408,7 +408,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testGetPatientPatient() {
+    void testGetPatientPatient() {
 		fail("Not yet implemented");
 	}
 
@@ -418,7 +418,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testGetPatientReference() {
+	void testGetPatientReference() {
 		fail("Not yet implemented");
 	}
 
@@ -428,7 +428,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testGetPracticeSettingCode() {
+	void testGetPracticeSettingCode() {
 		fail("Not yet implemented");
 	}
 
@@ -438,7 +438,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testGetTelecoms() {
+	void testGetTelecoms() {
 		fail("Not yet implemented");
 	}
 
@@ -448,7 +448,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testGetXmlResource() {
+	void testGetXmlResource() {
 		fail("Not yet implemented");
 	}
 
@@ -458,7 +458,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testRemoveUrnOidPrefix() {
+	void testRemoveUrnOidPrefix() {
 		fail("Not yet implemented");
 	}
 
@@ -468,7 +468,7 @@ public class FhirCommonTest {
 	 */
 	@Test
 	@Disabled("Not yet implemented")
-	public void testSaveResource() {
+	void testSaveResource() {
 		fail("Not yet implemented");
 	}
 
