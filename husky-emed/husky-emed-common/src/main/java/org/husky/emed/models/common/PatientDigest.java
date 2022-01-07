@@ -9,5 +9,51 @@
  */
 package org.husky.emed.models.common;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.husky.common.enums.AdministrativeGender;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Represents the digest of a patient in an Emed document.
+ * <p>
+ * Creating these digests is typically done from a CDA-CH-EMED document with the digesters.
+ *
+ * @author Quentin Ligier
+ */
+@Data
+@EqualsAndHashCode
 public class PatientDigest {
+
+    /**
+     * The list of patient Ids.
+     */
+    private final List<@NonNull String> ids = new ArrayList<>();
+
+    /**
+     * The legal given name.
+     */
+    private String givenName;
+
+    /**
+     * The legal family name.
+     */
+    private String familyName;
+
+    /**
+     * The gender.
+     */
+    @Nullable
+    private AdministrativeGender gender;
+
+    /**
+     * The birth date.
+     */
+    @Nullable
+    private LocalDate birthDate;
 }

@@ -11,7 +11,7 @@ package org.husky.emed.models.document;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.husky.common.ch.enums.ConfidentialityCode;
-import org.husky.emed.enums.EmedDocumentType;
+import org.husky.emed.enums.CceDocumentType;
 import org.husky.common.hl7cdar2.StrucDocText;
 import org.husky.emed.models.common.AuthorDigest;
 import org.husky.emed.models.common.OrganizationDigest;
@@ -79,8 +79,8 @@ public class EmedPmlcDocumentDigest extends EmedDocumentDigest {
     /**
      * Returns the type of the Emed document.
      */
-    public EmedDocumentType getEmedDocumentType() {
-        return EmedDocumentType.PMLC;
+    public CceDocumentType getDocumentType() {
+        return CceDocumentType.PMLC;
     }
 
     public String toString() {

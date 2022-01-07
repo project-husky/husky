@@ -18,6 +18,11 @@ import org.husky.emed.cda.utils.TemplateIds;
 import java.time.Instant;
 import java.util.Objects;
 
+/**
+ * A reader for CDA-CH-EMED POCDMT000040Author.
+ *
+ * @author Quentin Ligier
+ */
 public class AuthorReader {
 
     /**

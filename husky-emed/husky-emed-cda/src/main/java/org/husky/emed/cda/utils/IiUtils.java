@@ -9,7 +9,9 @@
  */
 package org.husky.emed.cda.utils;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.husky.common.utils.datatypes.Hl7v25;
 import org.husky.common.utils.datatypes.Oids;
 import org.husky.common.utils.datatypes.Uuids;
 import org.husky.common.hl7cdar2.II;
@@ -110,5 +112,23 @@ public class IiUtils {
             return "";
         }
         return Uuids.normalize(ii.getRoot());
+    }
+
+    /**
+     * Normalizes an HL7 V2.5 CX field. The code is escaped, the code system ID shall be an OID so escaping it
+     * shouldn't be needed.
+     *
+     * @param ii The validated identifier to normalizes.
+     * @return the normalized CX field.
+     */
+    public static String getNormalizedCx(final II ii) {
+        if (ii.getRoot() == null) {
+            return "";
+        }
+        return String.format(
+                "%s^^^&%s&ISO",
+                Hl7v25.encodeSt(ii.getRoot()),
+                ii.getExtension()
+        );
     }
 }
