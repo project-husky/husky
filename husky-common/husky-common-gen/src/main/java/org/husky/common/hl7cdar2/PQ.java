@@ -60,6 +60,19 @@ public class PQ extends QTY {
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String unit;
 
+    public PQ() {
+    }
+
+    public PQ(final String value) {
+        this.value = value;
+    }
+
+    public PQ(final String value,
+              final String unit) {
+        this.value = value;
+        this.unit = unit;
+    }
+
     /**
      * Gets the value of the translation property.
      *

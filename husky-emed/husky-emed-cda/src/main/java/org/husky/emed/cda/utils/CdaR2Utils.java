@@ -21,7 +21,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Utils around CDA R2 classes.
+ * Utilities for CDA R2 classes.
  *
  * @author Quentin Ligier
  */
@@ -42,7 +42,7 @@ public class CdaR2Utils {
      */
     public String getSingleNonNullMixedOrThrow(final ANY any) {
         final List<String> mixed = any.getXmlMixed();
-        if (mixed.size() != 1) {
+        if (mixed == null || mixed.size() != 1) {
             throw new IllegalArgumentException("");
         }
         return mixed.get(0);
@@ -59,7 +59,7 @@ public class CdaR2Utils {
     @Nullable
     public static String getSingleNullableMixedOrThrow(final ANY any) {
         final List<String> mixed = any.getXmlMixed();
-        if (mixed.isEmpty()) {
+        if (mixed == null || mixed.isEmpty()) {
             return null;
         } else if (mixed.size() > 1) {
             throw new IllegalArgumentException("");

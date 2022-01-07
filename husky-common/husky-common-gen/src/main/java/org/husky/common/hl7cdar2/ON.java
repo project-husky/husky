@@ -52,4 +52,16 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "ON")
 public class ON extends EN {
 
+    public ON() {
+    }
+
+    public ON(final String name) {
+        this.setXmlMixed(name);
+    }
+
+    public ON(final String name,
+              final String use) {
+        this.setXmlMixed(name);
+        this.getUse().add(use);
+    }
 }

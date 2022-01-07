@@ -51,12 +51,10 @@ public class QuantityWithUnit {
     public static QuantityWithUnit fromPq(final PQ qty) {
         final var newValue = Objects.requireNonNull(qty).getValue();
         UnitCode newUnit = null;
-        if (qty.getUnit() != null) {
-            if (!UnitCode.isInValueSet(qty.getUnit())) {
-                throw new IllegalArgumentException("The quantity unit is invalid");
-            }
-            newUnit = UnitCode.getEnum(qty.getUnit());
+        if (!UnitCode.isInValueSet(qty.getUnit())) {
+            throw new IllegalArgumentException("The quantity unit is invalid");
         }
+        newUnit = UnitCode.getEnum(qty.getUnit());
         return new QuantityWithUnit(Objects.requireNonNull(newValue), Objects.requireNonNull(newUnit));
     }
 
@@ -78,5 +76,17 @@ public class QuantityWithUnit {
 
     public String toString() {
         return "QuantityWithUnit(value=" + this.getValue() + ", unit=" + this.getUnit() + ")";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof QuantityWithUnit that)) return false;
+        return getValue().equals(that.getValue()) && getUnit() == that.getUnit();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getValue(), getUnit());
     }
 }

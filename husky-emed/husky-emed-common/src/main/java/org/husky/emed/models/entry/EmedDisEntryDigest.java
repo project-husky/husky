@@ -92,7 +92,6 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
      * @param sectionAuthor                 The author of the original parent section.
      * @param entryId                       The item entry ID.
      * @param medicationTreatmentId         The ID of the medication treatment this item entry belongs to.
-     * @param patientId                     The patient ID.
      * @param sequence                      The sequence of addition.
      * @param annotationComment             The annotation comment or {@code null} if it isn't provided.
      * @param dispenseType                  The dispense type (first fill or refill, complete or partial).
@@ -113,7 +112,6 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
                               final AuthorDigest sectionAuthor,
                               final String entryId,
                               final String medicationTreatmentId,
-                              final String patientId,
                               final int sequence,
                               @Nullable final String annotationComment,
                               final DispenseSupplyType dispenseType,
@@ -125,8 +123,8 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
                               @Nullable final ActSubstanceAdminSubstitutionCode substitutionAct,
                               @Nullable final String patientMedicationInstructions,
                               @Nullable final String fulfilmentNotes) {
-        super(creationTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, patientId,
-                sequence, annotationComment);
+        super(creationTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
+                annotationComment);
         this.dispenseType = Objects.requireNonNull(dispenseType);
         this.otc = otc;
         this.mtpEntryRef = mtpEntryRef;

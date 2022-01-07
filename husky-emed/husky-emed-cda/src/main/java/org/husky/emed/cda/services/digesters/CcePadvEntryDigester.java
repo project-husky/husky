@@ -61,14 +61,12 @@ public class CcePadvEntryDigester {
      * @param observation               The PADV Observation element.
      * @param padvDocumentId            The MTP document ID.
      * @param padvDocumentEffectiveTime The MTP document effective time.
-     * @param patientId                 The patient ID.
      * @return a digest of the element.
      * @throws InvalidEmedContentException if the CCE document is invalid.
      */
     protected EmedPadvEntryDigest createDigest(final POCDMT000040Observation observation,
                                                final String padvDocumentId,
-                                               final Instant padvDocumentEffectiveTime,
-                                               final String patientId) throws InvalidEmedContentException {
+                                               final Instant padvDocumentEffectiveTime) throws InvalidEmedContentException {
         final var entryId = this.getEntryId(observation);
         final var documentAuthor = new AuthorDigest();
         final var sectionAuthor = new AuthorDigest();
@@ -98,7 +96,6 @@ public class CcePadvEntryDigester {
                     sectionAuthor,
                     entryId,
                     medicationTreatmentId,
-                    patientId,
                     sequence,
                     annotationComment,
                     isCompleted,
@@ -113,7 +110,6 @@ public class CcePadvEntryDigester {
                     sectionAuthor,
                     entryId,
                     medicationTreatmentId,
-                    patientId,
                     sequence,
                     annotationComment,
                     isCompleted,
@@ -128,7 +124,6 @@ public class CcePadvEntryDigester {
                     sectionAuthor,
                     entryId,
                     medicationTreatmentId,
-                    patientId,
                     sequence,
                     annotationComment,
                     isCompleted,
@@ -146,7 +141,6 @@ public class CcePadvEntryDigester {
                     sectionAuthor,
                     entryId,
                     medicationTreatmentId,
-                    patientId,
                     sequence,
                     annotationComment,
                     isCompleted,
@@ -161,7 +155,6 @@ public class CcePadvEntryDigester {
                     sectionAuthor,
                     entryId,
                     medicationTreatmentId,
-                    patientId,
                     sequence,
                     annotationComment,
                     isCompleted,
@@ -176,7 +169,6 @@ public class CcePadvEntryDigester {
                     sectionAuthor,
                     entryId,
                     medicationTreatmentId,
-                    patientId,
                     sequence,
                     annotationComment,
                     isCompleted,

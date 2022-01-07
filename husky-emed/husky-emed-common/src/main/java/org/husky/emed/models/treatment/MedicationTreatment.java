@@ -11,11 +11,10 @@ package org.husky.emed.models.treatment;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.enums.ActSubstanceAdminSubstitutionCode;
-import org.husky.emed.enums.ChEmedTimingEvent;
 import org.husky.emed.enums.RouteOfAdministrationEdqm;
 import org.husky.emed.enums.TreatmentStatus;
 import org.husky.emed.models.common.EmedReference;
@@ -44,32 +43,34 @@ public class MedicationTreatment {
     /**
      * The substance substitution permissions, or {@code null} if substitution is authorized without condition.
      */
-    private final List<ActSubstanceAdminSubstitutionCode> substitutionPermissions = new ArrayList<>();
+    private final List<@NonNull ActSubstanceAdminSubstitutionCode> substitutionPermissions = new ArrayList<>();
+
     /**
      * The list of prescriptions.
      */
-    private final List<MedicationPrescription> prescriptions = new ArrayList<>();
+    private final List<@NonNull MedicationPrescription> prescriptions = new ArrayList<>();
+
     /**
      * The list of 'over-the-counter' dispenses (OTC, without prescription).
      */
-    private final List<MedicationDispense> otcDispenses = new ArrayList<>();
-    /**
-     * Multiple events within a day with the same dosage, or an empty list if it's not specified.
-     */
-    private final List<ChEmedTimingEvent> timingEvents = new ArrayList<>();
+    private final List<@NonNull MedicationDispense> otcDispenses = new ArrayList<>();
+
     /**
      * The medication treatment ID.
      */
     private String id;
+
     /**
      * Reference to the MTP item.
      */
     @Nullable
     private EmedReference mtpReference;
+
     /**
      * The MTP and treatment starting time.
      */
     private Instant treatmentStartTime;
+
     /**
      * The MTP planned stop time. It's the maximum time at which the medication treatment can be valid, but it may
      * already be stopped by a PADV CANCEL or REFUSE item.
@@ -78,6 +79,7 @@ public class MedicationTreatment {
      */
     @Nullable
     private Instant mtpStopTime;
+
     /**
      * The treatment stop time. By default, it's equal to the {@code mtpStopTime}. It can be then moved sooner if a PADV
      * CANCEL or REFUSE targets the MTP.
@@ -86,30 +88,34 @@ public class MedicationTreatment {
      */
     @Nullable
     private Instant treatmentStopTime;
+
     /**
      * The actual status of the treatment.
      * <p>
      * TODO: Can it change with the date?
      */
     private TreatmentStatus treatmentStatus;
+
     /**
      * Number of dispense repeats/refills (excluding the initial dispense). {@code null} means no limitation.
      */
     @Nullable
     private Integer dispenseRepeatNumber = null;
+
     /**
      * The medication product.
      */
     private MedicationProduct product;
+
     /**
      * The medication route of administration or {@code null} if it's not specified.
      */
     @Nullable
     private RouteOfAdministrationEdqm routeOfAdministration;
+
     /**
      * The dosage instructions.
      */
-    @NonNull
     private MedicationDosageInstructions dosageInstructions;
 
     /**

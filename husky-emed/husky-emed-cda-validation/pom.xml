@@ -14,7 +14,7 @@
     </parent>
 
     <properties>
-        <schematron.version>6.2.4</schematron.version>
+        <schematron.version>6.2.7</schematron.version>
     </properties>
 
     <dependencies>

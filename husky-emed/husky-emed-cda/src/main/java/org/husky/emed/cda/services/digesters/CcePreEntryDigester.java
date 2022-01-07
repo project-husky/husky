@@ -60,15 +60,13 @@ public class CcePreEntryDigester {
      * @param preDocumentEffectiveTime  The PRE document effective time.
      * @param prescriptionValidityStart The prescription validity start time (inclusive).
      * @param prescriptionValidityStop  The prescription validity stop time (inclusive).
-     * @param patientId                 The patient ID.
      * @return a digest of the element.
      */
     protected EmedPreEntryDigest createDigest(final POCDMT000040SubstanceAdministration substanceAdministration,
                                               final String preDocumentId,
                                               final Instant preDocumentEffectiveTime,
                                               final Instant prescriptionValidityStart,
-                                              final Instant prescriptionValidityStop,
-                                              final String patientId) throws InvalidEmedContentException {
+                                              final Instant prescriptionValidityStop) throws InvalidEmedContentException {
         if (!TemplateIds.hasAllIds(TemplateIds.PRE_ENTRY, substanceAdministration.getTemplateId())) {
             throw new InvalidEmedContentException("The given substance administration is not a PRE item entry");
         }
@@ -94,7 +92,6 @@ public class CcePreEntryDigester {
                 new AuthorDigest(), // TODO
                 IiUtils.getNormalizedUid(preEntry.getEntryId()),
                 medicationTreatmentId,
-                Objects.requireNonNull(patientId),
                 sequence,
                 preEntry.getAnnotationComment().orElse(null),
                 preEntry.getDosageInstructions(),

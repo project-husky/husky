@@ -114,6 +114,18 @@ public class MedicationDosageInstructions {
         this.treatmentStop = treatmentStop;
     }
 
+    /**
+     * Returns the type of the dosage instructions.
+     */
+    public Type getType() {
+        if (this.narrativeDosageInstructions != null) {
+            return Type.NARRATIVE;
+        }
+        final long nbDifferentDosis =
+                this.intakes.stream().map(MedicationDosageIntake::getDoseQuantity).distinct().count();
+        return (nbDifferentDosis < 2) ? Type.NORMAL : Type.NARRATIVE;
+    }
+
     @Override
     public String toString() {
         return "MedicationDosageInstructions{" +
@@ -122,5 +134,12 @@ public class MedicationDosageInstructions {
                 ", treatmentStart=" + treatmentStart +
                 ", treatmentStop=" + treatmentStop +
                 '}';
+    }
+
+    /**
+     * The types of dosage instructions.
+     */
+    public enum Type {
+        NORMAL, SPLIT, NARRATIVE
     }
 }

@@ -1,5 +1,6 @@
 package org.husky.common.utils.time;
 
+
 import static java.util.Calendar.DAY_OF_MONTH;
 import static java.util.Calendar.HOUR_OF_DAY;
 import static java.util.Calendar.MILLISECOND;
@@ -21,6 +22,7 @@ import java.util.GregorianCalendar;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.hl7cdar2.TS;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,7 +65,7 @@ public final class DateTimes {
      * filling missing values to the start of the year, month, day, hour and minute if needed (i.e. sets it to the
      * earliest instant covered by the partial date). The DTM value must be given in UTC.
      * <p>
-     * By example, if the value "201903" is given, the day is fixed to the start of the month (the first of march) and
+     * For example, if the value "201903" is given, the day is fixed to the start of the month (the first of march) and
      * the time is set to 00:00:00, which results in: "20190301000000".
      * <p>
      * If the HL7 DTM is already precise to the fraction of seconds, it will be returned as-is.
@@ -122,7 +124,6 @@ public final class DateTimes {
         if (hl7Dtm.getPrecision() == Hl7Dtm.Precision.FRAC_SECOND) {
             return hl7Dtm;
         }
-
         final var calendar = GregorianCalendar.from(ZonedDateTime.from(hl7Dtm.getDateTime()));
         // Voluntarily not using breaks in the switch
         switch (hl7Dtm.getPrecision()) {
@@ -143,6 +144,87 @@ public final class DateTimes {
         }
 
         return new Hl7Dtm(OffsetDateTime.ofInstant(calendar.toInstant(), hl7Dtm.getDateTime().getOffset()),
+                Hl7Dtm.Precision.FRAC_SECOND);
+    }
+
+    /**
+     * Takes an HL7 DTM-formatted value given as a {@link Hl7Dtm}, sets the resolution to the fraction of seconds by
+     * filling missing values to the start of the year, month, day, hour and minute if needed (i.e. sets it to the
+     * earliest instant covered by the partial date). The DTM value must be given in UTC.
+     * <p>
+     * For example, if the value "201903" is given, the day is fixed to the start of the month (the first of march) and
+     * the time is set to 00:00:00, which results in: "20190301000000".
+     * <p>
+     * If the HL7 DTM is already precise to the fraction of seconds, it will be returned as-is.
+     *
+     * @param timestamp The HL7 DTM-formatted dateTime to process.
+     * @return the full precision dateTime.
+     */
+    @NonNull
+    @SuppressWarnings("fallthrough")
+    public static Hl7Dtm completeToEarliestInstant(@NonNull final Timestamp timestamp) {
+        final var calendar = GregorianCalendar.from(ZonedDateTime.from(timestamp.getDateTime()));
+        // Voluntarily not using breaks in the switch. We have to recreate the
+        switch (timestamp.getPrecision()) {
+            case YEAR:
+                calendar.set(MONTH, calendar.getActualMinimum(MONTH));
+            case MONTH:
+                calendar.set(DAY_OF_MONTH, calendar.getActualMinimum(DAY_OF_MONTH));
+            case DAY:
+                calendar.set(HOUR_OF_DAY, calendar.getActualMinimum(HOUR_OF_DAY));
+            case HOUR:
+                calendar.set(MINUTE, calendar.getActualMinimum(MINUTE));
+            case MINUTE:
+                calendar.set(SECOND, calendar.getActualMinimum(SECOND));
+            case SECOND:
+                calendar.set(MILLISECOND, calendar.getActualMinimum(MILLISECOND));
+            default:
+                break;
+        }
+
+        return new Hl7Dtm(OffsetDateTime.ofInstant(calendar.toInstant(), timestamp.getDateTime().getOffset()),
+                Hl7Dtm.Precision.FRAC_SECOND);
+    }
+
+    /**
+     * Takes an HL7 DTM-formatted value given as a {@link Hl7Dtm}, sets the resolution to the fraction of seconds by
+     * filling missing values to the end of the year, month, day, hour and minute if needed (i.e. sets it to the
+     * latest instant covered by the partial date). The DTM value must be given in UTC.
+     * <p>
+     * By example, if the value "201903" is given, the day is fixed to the end of the month (the last of march) and the
+     * time is set to the end of the day (usually 23:59:59), which results in: "20190331235959".
+     * <p>
+     * If the HL7 DTM is already precise to the fraction of seconds, it will be returned as-is.
+     *
+     * TODO: Can we get more precision while setting the nanoseconds? As of now, the max resolution is to the
+     * millisecond, so we might get 23:59:59.999_000_000 instead of 23:59:59.999_999_999.
+     *
+     * @param timestamp The HL7 DTM-formatted dateTime to process.
+     * @return the full precision dateTime.
+     */
+    @NonNull
+    @SuppressWarnings("fallthrough")
+    public static Hl7Dtm completeToLatestInstant(@NonNull final Timestamp timestamp) {
+        final var calendar = GregorianCalendar.from(ZonedDateTime.from(timestamp.getDateTime()));
+        // Voluntarily not using breaks in the switch
+        switch (timestamp.getPrecision()) {
+            case YEAR:
+                calendar.set(MONTH, calendar.getActualMaximum(MONTH));
+            case MONTH:
+                calendar.set(DAY_OF_MONTH, calendar.getActualMaximum(DAY_OF_MONTH));
+            case DAY:
+                calendar.set(HOUR_OF_DAY, calendar.getActualMaximum(HOUR_OF_DAY));
+            case HOUR:
+                calendar.set(MINUTE, calendar.getActualMaximum(MINUTE));
+            case MINUTE:
+                calendar.set(SECOND, calendar.getActualMaximum(SECOND));
+            case SECOND:
+                calendar.set(MILLISECOND, calendar.getActualMaximum(MILLISECOND));
+            default:
+                break;
+        }
+
+        return new Hl7Dtm(OffsetDateTime.ofInstant(calendar.toInstant(), timestamp.getDateTime().getOffset()),
                 Hl7Dtm.Precision.FRAC_SECOND);
     }
 

@@ -13,7 +13,7 @@ import com.helger.schematron.svrl.jaxb.FailedAssert;
 import com.helger.schematron.xslt.SchematronResourceXSLT;
 
 import org.husky.common.utils.xml.XmlSchemaValidator;
-import org.husky.emed.enums.EmedDocumentType;
+import org.husky.emed.enums.CceDocumentType;
 import org.husky.emed.errors.InvalidEmedContentException;
 import org.husky.validation.service.pdf.PdfA12Validator;
 import org.slf4j.Logger;
@@ -43,7 +43,6 @@ import java.util.regex.Pattern;
 @Component
 @NotThreadSafe
 public class CdaChEmedValidator {
-
     private static final Logger log = LoggerFactory.getLogger(CdaChEmedValidator.class);
 
     /**
@@ -125,7 +124,7 @@ public class CdaChEmedValidator {
      * @throws Exception                   if the validation raised an exception.
      */
     public void validate(final String content,
-                         final EmedDocumentType type) throws Exception {
+                         final CceDocumentType type) throws Exception {
         Objects.requireNonNull(content);
         // No need to close the ByteArrayInputStream
         this.validate(new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8)), type);
@@ -140,7 +139,7 @@ public class CdaChEmedValidator {
      * @throws Exception                   if the validation raised an exception.
      */
     public void validate(final File file,
-                         final EmedDocumentType type) throws Exception {
+                         final CceDocumentType type) throws Exception {
         Objects.requireNonNull(file);
         if (!file.isFile() || !file.canRead()) {
             throw new FileNotFoundException();
@@ -159,7 +158,7 @@ public class CdaChEmedValidator {
      * @throws Exception                   if the validation raised an exception.
      */
     public void validate(final InputStream inputStream,
-                         final EmedDocumentType type) throws Exception {
+                         final CceDocumentType type) throws Exception {
         this.schemaValidator.validate(new StreamSource(inputStream));
         this.validateAgainstSchematron(inputStream, type);
     }
@@ -172,7 +171,7 @@ public class CdaChEmedValidator {
      * @throws Exception                   if the validation raised an exception.
      */
     private void validateAgainstSchematron(final InputStream inputStream,
-                                           final EmedDocumentType type) throws Exception {
+                                           final CceDocumentType type) throws Exception {
         final var validator = this.getSchematronValidator(type);
 
         final var output = validator.applySchematronValidationToSVRL(new StreamSource(inputStream));
@@ -222,7 +221,7 @@ public class CdaChEmedValidator {
      * @param type The CDA-CH-EMED type of the document to validate.
      * @return the corresponding validator.
      */
-    private SchematronResourceXSLT getSchematronValidator(final EmedDocumentType type) {
+    private SchematronResourceXSLT getSchematronValidator(final CceDocumentType type) {
         return switch (type) {
             case MTP  -> this.mtpValidator;
             case PRE  -> this.disValidator;

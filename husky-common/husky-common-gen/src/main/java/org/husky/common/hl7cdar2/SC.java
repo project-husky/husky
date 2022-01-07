@@ -64,6 +64,18 @@ public class SC extends ST {
     @XmlAttribute(name = "displayName")
     protected String displayName;
 
+    public SC() {
+    }
+
+    public SC(final String ed) {
+        super(ed);
+    }
+
+    public SC(final String ed,
+              final String language) {
+        super(ed, language);
+    }
+
     /**
      * Ruft den Wert der code-Eigenschaft ab.
      *

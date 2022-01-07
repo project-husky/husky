@@ -131,7 +131,6 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
      * @param sectionAuthor                 The author of the original parent section.
      * @param entryId                       The item entry ID.
      * @param medicationTreatmentId         The ID of the medication treatment this item entry belongs to.
-     * @param patientId                     The patient ID.
      * @param sequence                      The sequence of addition.
      * @param annotationComment             The annotation comment or {@code null} if it isn't provided.
      * @param dosageInstructions            The dosage instructions.
@@ -163,7 +162,6 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
                               final AuthorDigest sectionAuthor,
                               final String entryId,
                               final String medicationTreatmentId,
-                              final String patientId,
                               final int sequence,
                               @Nullable final String annotationComment,
                               final MedicationDosageInstructions dosageInstructions,
@@ -181,8 +179,8 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
                               @Nullable final String treatmentReason,
                               @Nullable final String patientMedicationInstructions,
                               @Nullable final String fulfilmentInstructions) {
-        super(creationTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, patientId,
-                sequence, annotationComment);
+        super(creationTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
+                annotationComment);
         this.dosageInstructions = Objects.requireNonNull(dosageInstructions);
         this.product = Objects.requireNonNull(product);
         this.routeOfAdministration = routeOfAdministration;
@@ -219,7 +217,6 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
                 ", entryId='" + entryId + '\'' +
                 ", medicationTreatmentId='" + medicationTreatmentId + '\'' +
                 ", sequence=" + sequence +
-                ", patientId='" + patientId + '\'' +
                 ", annotationComment='" + annotationComment + '\'' +
                 ", substitutionPermissions=" + substitutionPermissions +
                 ", dosageInstructions=" + dosageInstructions +

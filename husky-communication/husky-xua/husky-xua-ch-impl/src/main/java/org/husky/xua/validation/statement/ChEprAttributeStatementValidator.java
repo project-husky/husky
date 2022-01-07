@@ -133,8 +133,8 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
             return ValidationResult.INVALID;
         }
 
-        if ((role == HEALTHCARE_PROFESSIONAL && !List.of(NORMAL_ACCESS, EMERGENCY_ACCESS).contains(purposeOfUse))
-                || (role == ASSISTANT && !List.of(NORMAL_ACCESS, EMERGENCY_ACCESS).contains(purposeOfUse))
+        if ((role == HEALTHCARE_PROFESSIONAL && purposeOfUse != NORMAL_ACCESS && purposeOfUse != EMERGENCY_ACCESS)
+                || (role == ASSISTANT && purposeOfUse != NORMAL_ACCESS && purposeOfUse != EMERGENCY_ACCESS)
                 || (role == TECHNICAL_USER && purposeOfUse != AUTOMATIC_UPLOAD)
                 || (role == PATIENT && purposeOfUse != NORMAL_ACCESS)
                 || (role == REPRESENTATIVE && purposeOfUse != NORMAL_ACCESS)
