@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.husky.xua.hl7v3.CE;
 import org.husky.xua.hl7v3.PurposeOfUse;
+import org.husky.xua.hl7v3.Role;
 import org.husky.xua.hl7v3.impl.CodedWithEquivalentsBuilder;
 import org.husky.xua.saml2.AttributeBuilder;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,8 +36,7 @@ class AttributeBuilderImplTest {
 		testAttributeValue = "My Attribute Value";
 
 		testAttributeValueRole = new CodedWithEquivalentsBuilder().buildObject(PurposeOfUse.DEFAULT_NS_URI,
-				PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME,
-				PurposeOfUse.DEFAULT_PREFIX);
+				Role.DEFAULT_ELEMENT_LOCAL_NAME, Role.DEFAULT_PREFIX);
 		testAttributeValueRole.setCode("My Code");
 		testAttributeValueRole.setCode("My Code System");
 	}
