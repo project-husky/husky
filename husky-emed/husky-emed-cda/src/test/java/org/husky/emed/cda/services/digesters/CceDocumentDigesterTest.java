@@ -50,7 +50,7 @@ class CceDocumentDigesterTest {
         //assertEquals("", digest.getAuthors());
         //assertEquals("", digest.getCustodian());
         assertEquals(OffsetDateTime.parse("2011-11-29T11:00:00+01:00"), digest.getEffectiveTime());
-        assertEquals(EmedDocumentType.MTP, digest.getEmedDocumentType());
+        assertEquals(EmedDocumentType.MTP, digest.getDocumentType());
         //assertEquals("", digest.getPatient());
         assertArrayEquals(new byte[]{}, digest.getPdfRepresentation());
         //assertEquals("", digest.getRecipients());

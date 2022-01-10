@@ -14,8 +14,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.ch.enums.ConfidentialityCode;
-import org.husky.emed.enums.EmedDocumentType;
 import org.husky.common.hl7cdar2.StrucDocText;
+import org.husky.emed.enums.CceDocumentType;
 import org.husky.emed.models.common.AuthorDigest;
 import org.husky.emed.models.common.OrganizationDigest;
 import org.husky.emed.models.common.PatientDigest;
@@ -32,7 +32,7 @@ import java.util.Objects;
  * EmedPreDocumentDigest}, {@link EmedDisDocumentDigest}, {@link EmedPadvDocumentDigest}, {@link EmedPmlDocumentDigest}
  * and {@link EmedPmlcDocumentDigest}.
  * <p>
- * Creating these digests is typically done from a CDA-CH-EMED document with the digesters ({@link }).
+ * Creating these digests is typically done from a CDA-CH-EMED document with the digesters.
  *
  * @author Quentin Ligier
  */
@@ -44,34 +44,41 @@ public abstract class EmedDocumentDigest {
      * The author(s).
      */
     private final List<@org.checkerframework.checker.nullness.qual.NonNull AuthorDigest> authors = new ArrayList<>();
+
     /**
      * The intended recipient(s).
      */
     private final List<@org.checkerframework.checker.nullness.qual.NonNull RecipientDigest> recipients = new ArrayList<>();
+
     /**
      * The document ID.
      */
     @NonNull
     private String id;
+
     /**
      * The document set ID.
      */
     @NonNull
     private String setId;
+
     /**
      * The document version.
      */
     private int version;
+
     /**
      * The document effective time.
      */
     @NonNull
     private OffsetDateTime effectiveTime;
+
     /**
      * The confidentiality code.
      */
     @NonNull
     private ConfidentialityCode confidentialityCode;
+
     /**
      * The document main language (some parts may be in another language, e.g. PML documents may contain entries in
      * different languages).
@@ -79,65 +86,67 @@ public abstract class EmedDocumentDigest {
     @NonNull
     private String languageCode;
 
-    /**
+    /*
      * The data enterer or {@code null} if it's not provided.
      */
 
-    /**
+    /*
      * The CDA informant(s).
      */
+
     /**
      * The targeted patient.
      */
     @NonNull
     private PatientDigest patient;
+
     /**
      * The custodian.
      */
     @NonNull
     private OrganizationDigest custodian;
 
-    /**
+    /*
      * The legal authenticator or {@code null} if it's not provided.
      */
 
-    /**
+    /*
      * The authenticator(s).
      */
 
-    /**
+    /*
      * The employer(s).
      */
 
-    /**
+    /*
      * The insurance(s).
      */
 
-    /**
+    /*
      * The insurance card(s).
      */
 
-    /**
+    /*
      * The patient contact(s).
      */
 
-    /**
+    /*
      * The order reference(s).
      */
 
-    /**
+    /*
      * The health service(s).
      */
 
-    /**
+    /*
      * The document replacement(s).
      */
 
-    /**
+    /*
      * The CDA authorization(s).
      */
 
-    /**
+    /*
      * The component of or {@code null} if it's not provided.
      */
 
@@ -199,7 +208,7 @@ public abstract class EmedDocumentDigest {
     /**
      * Returns the type of the Emed document.
      */
-    public abstract EmedDocumentType getEmedDocumentType();
+    public abstract CceDocumentType getDocumentType();
 
     @Override
     public String toString() {

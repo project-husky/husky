@@ -38,24 +38,29 @@ public class MedicationPrescription {
      * SPEC: single value? default value?
      */
     private final List<ActSubstanceAdminSubstitutionCode> substitutionPermissions = new ArrayList<>();
+
     /**
      * The list of 'over-the-counter' dispenses (OTC, without prescription).
      */
     private final List<MedicationDispense> dispenses = new ArrayList<>();
+
     /**
      * Reference to the PRE items.
      */
     @Nullable
     private EmedReference preReference;
+
     /**
      * The status of the prescription.
      */
     private PrescriptionStatus prescriptionStatus;
+
     /**
      * Number of dispense repeats/refills (excluding the initial dispense). {@code null} means no limitation.
      */
     @Nullable
     private Integer dispenseRepeatNumber = null;
+
     /**
      * PRE item starting time.
      * <p>
@@ -63,6 +68,7 @@ public class MedicationPrescription {
      */
     @Nullable
     private Instant startTime;
+
     /**
      * PRE item ending time.
      * <p>
