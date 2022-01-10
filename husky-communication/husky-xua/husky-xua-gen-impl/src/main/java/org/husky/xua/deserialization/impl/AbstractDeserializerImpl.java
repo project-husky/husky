@@ -19,10 +19,18 @@ import org.husky.xua.deserialization.OpenSaml2Deserializer;
 public abstract class AbstractDeserializerImpl<T, U> implements Deserializer<U> {
 	private OpenSaml2Deserializer<T> openSamlDeserializer;
 
+	/**
+	 * default constructor
+	 */
 	protected AbstractDeserializerImpl() {
 		openSamlDeserializer = new OpenSaml2DeserializerImpl<>();
 	}
 
+	/**
+	 * Method to get deserializer
+	 * 
+	 * @return org.husky.xua.deserialization.OpenSaml2Deserializer
+	 */
 	protected OpenSaml2Deserializer<T> getOpenSamlDeserializer() {
 		return openSamlDeserializer;
 	}

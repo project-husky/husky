@@ -17,16 +17,32 @@ import org.husky.xua.serialization.OpenSaml2Serializer;
  */
 public abstract class AbstractSerializerImpl {
 
+	/**
+	 * The opensaml serializer
+	 */
 	private OpenSaml2Serializer openSamlSerializer;
 
+	/**
+	 * default constructor
+	 */
 	protected AbstractSerializerImpl() {
 		openSamlSerializer = new OpenSaml2SerializerImpl();
 	}
 
+	/**
+	 * method to get serializer
+	 * 
+	 * @return serializer
+	 */
 	public OpenSaml2Serializer getOpenSamlSerializer() {
 		return openSamlSerializer;
 	}
 
+	/**
+	 * method to set serializer
+	 * 
+	 * @param openSamlSerializer serializer
+	 */
 	public void setOpenSamlSerializer(OpenSaml2Serializer openSamlSerializer) {
 		this.openSamlSerializer = openSamlSerializer;
 	}

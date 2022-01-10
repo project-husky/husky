@@ -22,6 +22,22 @@ import org.opensaml.core.xml.XMLObject;
 * <!-- @formatter:on -->
 */
 public interface OpenSamlAssertionBasedRequest extends AssertionBasedRequest, XMLObject {
+
+	/**
+	 *
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the assertion</div>
+	 * <div class="de">Methode um die Assertion zu setzen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param aAssertion
+	 * <div class="en">the assertion to be set.</div>
+	 * <div class="de">die Assertion die gesetzt werden soll.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
 	public void setAssertion(AssertionType aAssertion);
 	// There are no special methods defined, but this intermediate interface has
 	// to be declared for opensaml reasons

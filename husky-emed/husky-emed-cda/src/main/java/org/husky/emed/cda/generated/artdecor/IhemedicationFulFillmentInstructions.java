@@ -11,16 +11,17 @@ package org.husky.emed.cda.generated.artdecor;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.processing.Generated;
+
 import org.husky.common.basetypes.CodeBaseType;
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040Act;
 import org.husky.common.model.Code;
 
 /**
- * IHEMedicationFulFillmentInstructions
- * <p>
- * <p>
+ * IHEMedicationFulFillmentInstructions <br>
+ * <br>
  * Identifier: 1.3.6.1.4.1.19376.1.5.3.1.4.3.1<br>
  * Effective date: 2013-12-20 00:00:00<br>
  * Version: 2014<br>

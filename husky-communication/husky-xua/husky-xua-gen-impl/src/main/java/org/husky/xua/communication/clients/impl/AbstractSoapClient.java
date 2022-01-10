@@ -78,10 +78,22 @@ import net.shibboleth.utilities.java.support.xml.XMLParserException;
  */
 public abstract class AbstractSoapClient<T> {
 
+	/**
+	 * The configuration of the soap client
+	 */
 	private SoapClientConfig config;
 
+	/**
+	 * The logger
+	 */
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
+	/**
+	 * creates body of soap message
+	 * 
+	 * @param aBodyElement   body element
+	 * @param envelopElement soap envelope element
+	 */
 	protected void createBody(Element aBodyElement, Element envelopElement) {
 		// create soap body
 		final var soapBody = envelopElement.getOwnerDocument().createElementNS(getSoapNs(),
@@ -93,6 +105,13 @@ public abstract class AbstractSoapClient<T> {
 		soapBody.appendChild(importedNode);
 	}
 
+	/**
+	 * creates SOAP envelope
+	 * 
+	 * @return created soap envelope
+	 * 
+	 * @throws ParserConfigurationException
+	 */
 	protected Element createEnvelope() throws ParserConfigurationException {
 		// create xml dokument
 		final var docBuilder = XmlFactories.newSafeDocumentBuilder();
@@ -107,6 +126,13 @@ public abstract class AbstractSoapClient<T> {
 		return envelopElement;
 	}
 
+	/**
+	 * creates SOAP header
+	 * 
+	 * @param aSecurityHeaderElement SOAP security header element
+	 * @param wsHeaders              WSA headers
+	 * @param envelopElement         soap envelope
+	 */
 	protected void createHeader(Element aSecurityHeaderElement, WsaHeaderValue wsHeaders,
 			Element envelopElement) {
 
@@ -138,6 +164,14 @@ public abstract class AbstractSoapClient<T> {
 		}
 	}
 
+	/**
+	 * creates XML String from passed SOAP envelope
+	 * 
+	 * @param aEnvelope soap envelope
+	 * 
+	 * @return XML String
+	 * @throws TransformerException
+	 */
 	protected String createXmlString(Element aEnvelope) throws TransformerException {// transform
 																						// to
 																						// string
@@ -153,6 +187,16 @@ public abstract class AbstractSoapClient<T> {
 
 	}
 
+	/**
+	 * sends soap message
+	 * 
+	 * @param post http post
+	 * 
+	 * @return response
+	 * 
+	 * @throws ClientSendException
+	 * @throws IOException
+	 */
 	protected T execute(HttpPost post)
 			throws ClientSendException, IOException {
 		final CloseableHttpClient httpclient = getHttpClient();
@@ -211,10 +255,22 @@ public abstract class AbstractSoapClient<T> {
 		return new byte[0];
 	}
 
+	/**
+	 * Method to get soap client configuration
+	 * 
+	 * @return configuration
+	 */
 	protected SoapClientConfig getConfig() {
 		return config;
 	}
 
+	/**
+	 * Method to get HTTP client. This HTTP client uses keystore details from
+	 * configuration
+	 * 
+	 * @return closeable HTTP client
+	 * @throws ClientSendException
+	 */
 	protected CloseableHttpClient getHttpClient() throws ClientSendException {
 		if (!StringUtils.isEmpty(config.getKeyStore())) {
 			try (var fis = new FileInputStream(config.getKeyStore())) {
@@ -238,6 +294,12 @@ public abstract class AbstractSoapClient<T> {
 		return HttpClients.createDefault();
 	}
 
+	/**
+	 * Method to get HTTP Post with URI from configuration. Application/soap+xml ist
+	 * set as content type header.
+	 * 
+	 * @return
+	 */
 	protected HttpPost getHttpPost() {
 		final var post = new HttpPost(config.getUrl());
 		post.setConfig(getRequestConfig());
@@ -245,10 +307,24 @@ public abstract class AbstractSoapClient<T> {
 		return post;
 	}
 
+	/**
+	 * Method to get Logger
+	 * 
+	 * @return logger
+	 */
 	protected Logger getLogger() {
 		return logger;
 	}
 
+	/**
+	 * Method to get Node of element with passed XPath expression.
+	 * 
+	 * @param element         element to search in
+	 * @param xPathExpression XPath expression
+	 * 
+	 * @return found node
+	 * @throws XPathExpressionException
+	 */
 	protected Node getNode(Element element, String xPathExpression)
 			throws XPathExpressionException {
 		final var xPath = XPathFactory.newInstance().newXPath();
@@ -283,10 +359,29 @@ public abstract class AbstractSoapClient<T> {
 
 	}
 
+	/**
+	 * Method to get request configuration
+	 * 
+	 * @return request configuration
+	 */
 	protected RequestConfig getRequestConfig() {
 		return RequestConfig.custom().build();
 	}
 
+	/**
+	 * Method to get response element as {@link Element} from content. The passed
+	 * local name and namespace is used to filter the response element.
+	 * 
+	 * @param content      response as xml
+	 * @param nameSpaceUri namespace
+	 * @param localName    name of element
+	 * 
+	 * @return response element
+	 * 
+	 * @throws UnsupportedOperationException
+	 * @throws XPathExpressionException
+	 * @throws XMLParserException
+	 */
 	protected Element getResponseElement(String content, String nameSpaceUri, String localName)
 			throws UnsupportedOperationException, XPathExpressionException, XMLParserException {
 
@@ -318,6 +413,13 @@ public abstract class AbstractSoapClient<T> {
 		return doc.getDocumentElement();
 	}
 
+	/**
+	 * Method to get soap exception of Axis2 fault Node.
+	 * 
+	 * @param faultnode
+	 * 
+	 * @return extracted SOAP exception
+	 */
 	protected SoapException getSoapException(Node faultnode) {
 		var faultCode = "";
 		var faultMessage = "";
@@ -361,8 +463,26 @@ public abstract class AbstractSoapClient<T> {
 
 	}
 
+	/**
+	 * Method to extract response from XML String
+	 * 
+	 * @param content XML String
+	 * 
+	 * @return extracted element
+	 * 
+	 * @throws ClientSendException
+	 */
 	protected abstract T parseResponse(String content) throws ClientSendException;
 
+	/**
+	 * Method to extract error from XML response
+	 * 
+	 * @param content XML String
+	 * 
+	 * @return extracted error
+	 * 
+	 * @throws ClientSendException
+	 */
 	protected T parseResponseError(String content) throws ClientSendException {
 		logger.debug("parseResponseError: {}", content);
 		try {
@@ -408,10 +528,20 @@ public abstract class AbstractSoapClient<T> {
 		throw getSoapException(faultnode);
 	}
 
+	/**
+	 * Method to set SOAP client configuration
+	 * 
+	 * @param config
+	 */
 	protected void setConfig(SoapClientConfig config) {
 		this.config = config;
 	}
 
+	/**
+	 * Method to set logger
+	 * 
+	 * @param logger
+	 */
 	protected void setLogger(Logger logger) {
 		this.logger = logger;
 	}

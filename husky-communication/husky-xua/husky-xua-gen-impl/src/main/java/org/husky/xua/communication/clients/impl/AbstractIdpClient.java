@@ -94,6 +94,12 @@ public abstract class AbstractIdpClient implements IdpClient {
 		}
 	}
 
+	/**
+	 * Method to get http client
+	 * 
+	 * @return closeable http client
+	 * @throws ClientSendException
+	 */
 	public abstract CloseableHttpClient getHttpClient() throws ClientSendException;
 
 	/**
@@ -126,10 +132,11 @@ public abstract class AbstractIdpClient implements IdpClient {
 		return post;
 	}
 
-	protected Logger getLogger() {
-		return logger;
-	}
-
+	/**
+	 * Method to get request config
+	 * 
+	 * @return request config
+	 */
 	public abstract RequestConfig getRequestConfig();
 
 	/**

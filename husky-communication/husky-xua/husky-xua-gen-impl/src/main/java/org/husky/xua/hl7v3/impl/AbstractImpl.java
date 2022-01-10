@@ -28,12 +28,24 @@ import org.opensaml.core.xml.XMLObject;
  */
 public abstract class AbstractImpl extends AbstractXMLObject implements CE {
 
+	/** The code */
 	protected String code;
+	/** The code system */
 	protected String codeSystem;
+	/** The code system name */
 	protected String codeSystemName;
+	/** The code system version */
 	protected String codeSystemVersion;
+	/** The display name */
 	protected String displayName;
 
+	/**
+	 * Constructor to create element with certain namespace, name and prefix
+	 * 
+	 * @param namespaceURI
+	 * @param elementLocalName
+	 * @param namespacePrefix
+	 */
 	protected AbstractImpl(String namespaceURI, String elementLocalName, String namespacePrefix) {
 		super(namespaceURI, elementLocalName, namespacePrefix);
 	}

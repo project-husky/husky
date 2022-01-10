@@ -22,6 +22,11 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionTy
  */
 public interface AssertionBasedRequest extends BasePolicyAdministration {
 
+	/**
+	 * Method to get the assertion
+	 * 
+	 * @return org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType
+	 */
 	public AssertionType getAssertion();
 
 }
