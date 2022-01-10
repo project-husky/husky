@@ -18,13 +18,9 @@ import org.husky.common.hl7cdar2.ED;
 import org.husky.common.hl7cdar2.TEL;
 
 /**
- * <div class="en">The class Reference contains all necessary fields for an HL7
- * CDA R2 reference. This class also provides mapping methods to other data
- * types. <div>
+ * The class Reference contains all necessary fields for an HL7 CDA R2
+ * reference. This class also provides mapping methods to other data types.
  *
- * <div class="de">Die Klasse Reference enthält alle erforderlichen Felder für
- * eine Referenz. Diese Klasse bietet auch Zuordnungsmethoden für andere
- * Datentypen.<div>
  *
  */
 public class Reference {
@@ -42,10 +38,9 @@ public class Reference {
 	private List<String> narrativeText;
 
 	/**
-	 * <div class="en">Createsfrom the given HL7 CDA R2 value.<div>
+	 * Creates from the given HL7 CDA R2 value.
 	 *
-	 * <div class="de">Erstellt aus dem angegebenen HL7 CDA R2 Wert.<div>
-	 *
+	 * 
 	 * @param hl7CdaR2Value the HL7 CDA R2 value
 	 * @return the reference type
 	 */
@@ -74,11 +69,8 @@ public class Reference {
 	}
 
 	/**
-	 * <div class="en">Creates the HL7 CDA R2 data type from the given base
-	 * type.<div>
+	 * Creates the HL7 CDA R2 data type from the given base type.
 	 *
-	 * <div class="de">Erstellt den HL7 CDA R2 Datentyp aus dem angegebenen
-	 * Basistyp.<div>
 	 *
 	 * @param baseType the base type
 	 * @return the HL7 CDA R2 data typed value
@@ -123,14 +115,9 @@ public class Reference {
 	}
 
 	/**
-	 * <div class="en">Instantiates a new instance from the given base
-	 * type.<div>
+	 * Instantiates a new instance from the given base type.
 	 *
-	 * <div class="de">Instanziiert eine neue Instanz vom angegebenen
-	 * Basistyp.<div>
-	 *
-	 * @param baseType
-	 *            the base type
+	 * @param baseType the base type
 	 */
 	public Reference(String value, List<String> narrativeText) {
 		this.value = value;
@@ -141,14 +128,9 @@ public class Reference {
 	}
 
 	/**
-	 * <div class="en">Instantiates a new instance from the given HL7 CDA R2
-	 * data type.<div>
-	 *
-	 * <div class="de">Instanziiert eine neue Instanz vom angegebenen HL7 CDA R2
-	 * Datentyp.<div>
-	 *
-	 * @param hl7CdaR2Value
-	 *            the HL7 CDA R2 data type
+	 * Instantiates a new instance from the given HL7 CDA R2 data type.
+	 * 
+	 * @param hl7CdaR2Value the HL7 CDA R2 data type
 	 */
 	public Reference(org.husky.common.hl7cdar2.ED hl7CdaR2Value) {
 		initFromHl7CdaR2(hl7CdaR2Value);
@@ -207,14 +189,9 @@ public class Reference {
 	}
 
 	/**
-	 * <div class="en">Sets the fields of the current instance by the given HL7
-	 * CDA R2 data type.<div>
+	 * Sets the fields of the current instance by the given HL7 CDA R2 data type.
 	 *
-	 * <div class="de">Legt die Felder der aktuellen Instanz durch den
-	 * angegebenen HL7 CDA R2 Datentyp fest.<div>
-	 *
-	 * @param hl7CdaR2Value
-	 *            the HL7 CDA R2 data typed value
+	 * @param hl7CdaR2Value the HL7 CDA R2 data typed value
 	 */
 	public void set(org.husky.common.hl7cdar2.ED hl7CdaR2Value) {
 		init(createReferenceType(hl7CdaR2Value));

@@ -17,8 +17,8 @@ package org.husky.xua.core;
  * <div class="fr"></div>
  * <div class="it"></div>
  *
- * @param <T>
- * @param <U>
+ * @param <T> given object
+ * @param <U> created type of instance
  * <!-- @formatter:on -->
  */
 public interface SecurityObjectBuilder<T, U> {
