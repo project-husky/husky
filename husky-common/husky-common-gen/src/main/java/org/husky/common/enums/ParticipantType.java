@@ -11,5 +11,5 @@
 package org.husky.common.enums;
 
 public enum ParticipantType {
-	Insurance, Employer;
+	INSURANCE, EMPLOYER;
 }

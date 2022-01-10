@@ -41,7 +41,6 @@ import org.husky.communication.testhelper.TestApplication;
 import org.husky.fhir.structures.gen.FhirCommon;
 import org.husky.fhir.structures.gen.FhirPatient;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openehealth.ipf.commons.audit.AuditContext;
@@ -73,7 +72,7 @@ import ca.uhn.fhir.context.FhirVersionEnum;
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
 @EnableAutoConfiguration
-public class PixV3QueryTest {
+class PixV3QueryTest {
 
 	/** The SLF4J logger instance. */
 	protected static Logger log = LoggerFactory.getLogger(PixV3QueryTest.class);
@@ -121,7 +120,7 @@ public class PixV3QueryTest {
 	}
 
 	@Test
-	public void contextLoads() {
+	void contextLoads() {
 		assertNotNull(convenienceMasterPatientIndexV3Client);
 		assertNotNull(convenienceMasterPatientIndexV3Client.getContext());
 		assertNotNull(auditContext);
@@ -140,7 +139,7 @@ public class PixV3QueryTest {
 	 */
 	
 	@Test
-	public void ITI44SourceFeedTest() {
+	void ITI44SourceFeedTest() {
 
 		log.debug("ITI44SourceFeedTest with target " + pixUri);
 
@@ -251,9 +250,7 @@ public class PixV3QueryTest {
 		log.debug(encoded);
 
 		assertTrue(pixV3Query.addPatient(patient, null));
-	
 
-		
 	}
 
 
@@ -268,8 +265,7 @@ public class PixV3QueryTest {
 	 */
 	
 	@Test
-	@Disabled
-	public void ITI44SourceMergeTest() {
+	void ITI44SourceMergeTest() {
 		log.debug("ITI44SourceMergeTest with target {}", pixUri);
 		
 		final AffinityDomain affinityDomain = new AffinityDomain();
@@ -321,8 +317,7 @@ public class PixV3QueryTest {
 	 */
 	
 	@Test
-	@Disabled
-	public void ITI44SourceUpdateTest() {
+	void ITI44SourceUpdateTest() {
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
 
@@ -375,7 +370,7 @@ public class PixV3QueryTest {
      * CHPAM4489^^^&1.3.6.1.4.1.12559.11.20.1&
 	 */
 	@Test
-	public void ITI45ConsumerTest() {
+	void ITI45ConsumerTest() {
 
 		log.debug("ITI45ConsumerTest with target " + pixUri);
 		final AffinityDomain affinityDomain = new AffinityDomain();

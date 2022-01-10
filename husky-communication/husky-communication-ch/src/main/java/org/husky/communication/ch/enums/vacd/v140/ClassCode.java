@@ -26,92 +26,92 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * <div class="de">Warnungen /Risiken</div> <div class="fr">Alertes</div>
 	 * <div class="it">Allertamenti</div>
 	 */
-	ALERTS("DTC13", "Alerts"),
+	ALERTS(ClassCode.ALERTS_CODE, "Alerts"),
 	/**
 	 * <div class="de">Behandlungspläne, Behandlungsschemata</div>
 	 * <div class="fr">Plans de soins</div> <div class="it">Schema di
 	 * terapia</div>
 	 */
-	CARE_PLANS("DTC12", "Care Plans"),
+	CARE_PLANS(ClassCode.CARE_PLANS_CODE, "Care Plans"),
 	/**
 	 * <div class="de">Zuweisungen/Überweisungen</div> <div class="fr">Demandes
 	 * de prise en charge</div> <div class="it">Richieste di presa a
 	 * carico</div>
 	 */
-	CLINICAL_CARE_REFERRALS("DTC05", "Clinical Care Referrals"),
+	CLINICAL_CARE_REFERRALS(ClassCode.CLINICAL_CARE_REFERRALS_CODE, "Clinical Care Referrals"),
 	/**
 	 * <div class="de">Eigene Daten des Patienten</div>
 	 * <div class="fr">Documents introduits par le patients</div>
 	 * <div class="it">Documenti inseriti dal paziente</div>
 	 */
-	DATA_FROM_PATIENT("DTC21", "Data from Patient"),
+	DATA_FROM_PATIENT(ClassCode.DATA_FROM_PATIENT_CODE, "Data from Patient"),
 	/**
 	 * <div class="de">Diagnostische Untersuchungsbefunde</div>
 	 * <div class="fr">Résultats d'examen diagnostic</div>
 	 * <div class="it">Risultati di esame diagnostico</div>
 	 */
-	DIAGNOSTIC_TEST_RESULTS("DTC08", "Diagnostic Test Results"),
+	DIAGNOSTIC_TEST_RESULTS(ClassCode.DIAGNOSTIC_TEST_RESULTS_CODE, "Diagnostic Test Results"),
 	/**
 	 * <div class="de">Zusammenfassende Berichte</div> <div class="fr">Résumés
 	 * d'épisode</div> <div class="it">Riassunti di episodio</div>
 	 */
-	EPISODE_SUMMARY_REPORTS("DTC06", "Episode Summary Reports"),
+	EPISODE_SUMMARY_REPORTS(ClassCode.EPISODE_SUMMARY_REPORTS_CODE, "Episode Summary Reports"),
 	/**
 	 * <div class="de">Zusammenfassungen der Krankengeschichte</div>
 	 * <div class="fr">Résumés d'antécédents</div> <div class="it">Riassunti
 	 * della storia clinica</div>
 	 */
-	HISTORIC_OVERVIEWS("DTC10", "Historic Overviews"),
+	HISTORIC_OVERVIEWS(ClassCode.HISTORIC_OVERVIEWS_CODE, "Historic Overviews"),
 	/**
 	 * <div class="de">Konsultationseinträge/- Notizen</div>
 	 * <div class="fr">Notes de consultation</div> <div class="it">Rapporti e
 	 * note di consultazione</div>
 	 */
-	NOTES_ON_CONSULTATIONS("DTC01", "Notes on Consultations"),
+	NOTES_ON_CONSULTATIONS(ClassCode.NOTES_ON_CONSULTATIONS_CODE, "Notes on Consultations"),
 	/**
 	 * <div class="de">Interventionseinträge /-Notizen</div>
 	 * <div class="fr">Notes d'interventions</div> <div class="it">Rapporti e
 	 * note d'intervento</div>
 	 */
-	NOTES_ON_PROCEDURES("DTC03", "Notes on Procedures"),
+	NOTES_ON_PROCEDURES(ClassCode.NOTES_ON_PROCEDURES_CODE, "Notes on Procedures"),
 	/**
 	 * <div class="de">Meldungen</div> <div class="fr">
 	 * "Notifications/Déclarations"</div>
 	 * <div class="it">Notifiche/dichiarazioni </div>
 	 */
-	NOTIFICATIONS("DTC09", "Notifications"),
+	NOTIFICATIONS(ClassCode.NOTIFICATIONS_CODE, "Notifications"),
 	/**
 	 * <div class="de">anderweitige Dokumente</div> <div class="fr">Autre</div>
 	 * <div class="it">Altro</div>
 	 */
-	OTHER_COMPOSITION("DTC90", "Other Composition"),
+	OTHER_COMPOSITION(ClassCode.OTHER_COMPOSITION_CODE, "Other Composition"),
 	/**
 	 * <div class="de">Zusammenfassungen aktueller Zustand</div>
 	 * <div class="fr">Résumés de l'état actuel</div> <div class="it">Riassunti
 	 * dello stato attuale</div>
 	 */
-	PRESENT_STATE_SUMMARIES("DTC11", "Present State Summaries"),
+	PRESENT_STATE_SUMMARIES(ClassCode.PRESENT_STATE_SUMMARIES_CODE, "Present State Summaries"),
 	/**
 	 * <div class="de">Verlaufseinträge/- Notizen</div> <div class="fr">Notes de
 	 * suivi</div> <div class="it">Note di evoluzione</div>
 	 */
-	PROGRESS_NOTES("DTC02", "Progress Notes"),
+	PROGRESS_NOTES(ClassCode.PROGRESS_NOTES_CODE, "Progress Notes"),
 	/**
 	 * <div class="de">Verlaufs-Berichte</div> <div class="fr">Rapports
 	 * d'évolution</div> <div class="it">Rapporti di evoluzione</div>
 	 */
-	PROGRESS_REPORTS("DTC07", "Progress Reports"),
+	PROGRESS_REPORTS(ClassCode.PROGRESS_REPORTS_CODE, "Progress Reports"),
 	/**
 	 * <div class="de">Gescannte Dokumente</div> <div class="fr">Documents
 	 * scannés</div> <div class="it">Documenti scansionati</div>
 	 */
-	SCANNED_DOCUMENTS("DTC20", "Scanned Documents"),
+	SCANNED_DOCUMENTS(ClassCode.SCANNED_DOCUMENTS_CODE, "Scanned Documents"),
 	/**
 	 * <div class="de">Untersuchungs-/ Prozedur-Anforderungen</div>
 	 * <div class="fr">Demandes d'examen / procédure</div>
 	 * <div class="it">Richieste d'esame</div>
 	 */
-	TESTSPROCEDURE_REQUESTS("DTC04", "Tests/Procedure Requests");
+	TESTSPROCEDURE_REQUESTS(ClassCode.TESTSPROCEDURE_REQUESTS_CODE, "Tests/Procedure Requests");
 
 	/**
 	 * <div class="de">Code für Warnungen /Risiken</div> <div class="fr">Code de

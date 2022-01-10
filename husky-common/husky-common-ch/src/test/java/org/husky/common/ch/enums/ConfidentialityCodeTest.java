@@ -16,10 +16,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.husky.common.ch.enums.ConfidentialityCode;
 import org.junit.jupiter.api.Test;
 
-public class ConfidentialityCodeTest {
+class ConfidentialityCodeTest {
 
 	@Test
-	public void testConfidentialityCode() {
+	void testConfidentialityCode() {
 
 		assertEquals("2.16.756.5.30.1.127.3.10.1.5", ConfidentialityCode.VALUE_SET_ID);
 		assertValueSetEnumEntries(ConfidentialityCode.values());

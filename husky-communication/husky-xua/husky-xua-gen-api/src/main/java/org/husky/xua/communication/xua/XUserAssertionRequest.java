@@ -10,8 +10,7 @@
  */
 package org.husky.xua.communication.xua;
 
-import org.husky.xua.hl7v3.PurposeOfUse;
-import org.husky.xua.hl7v3.Role;
+import org.husky.xua.hl7v3.CE;
 
 /**
  * <!-- @formatter:off -->
@@ -122,7 +121,7 @@ public interface XUserAssertionRequest {
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	PurposeOfUse getPurposeOfUse();
+	CE getPurposeOfUse();
 
 	/**
 	 *
@@ -207,7 +206,7 @@ public interface XUserAssertionRequest {
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	Role getSubjectRole();
+	CE getSubjectRole();
 
 	/**
 	 *

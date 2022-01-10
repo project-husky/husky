@@ -10,15 +10,14 @@
  */
 package org.husky.common.model;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.husky.common.hl7cdar2.AD;
 import org.husky.common.hl7cdar2.POCDMT000040ParticipantRole;
 import org.husky.common.hl7cdar2.POCDMT000040PlayingEntity;
 import org.husky.common.hl7cdar2.TEL;
-import org.husky.common.utils.Util;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * The Class ParticipantRole. This element does not necessarily contain information about a person, but also about an
@@ -103,7 +102,7 @@ public class ParticipantRole {
      * @return the id list
      */
     public List<Identificator> getIdList() {
-        return Util.convertIds(mParticipantRole.getId());
+		return Identificator.getIdentificatorList(mParticipantRole.getId());
     }
 
     /**

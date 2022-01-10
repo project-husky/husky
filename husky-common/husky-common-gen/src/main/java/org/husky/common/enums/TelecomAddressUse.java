@@ -10,14 +10,14 @@
  */
 package org.husky.common.enums;
 
-import org.husky.common.hl7cdar2.CE;
-import org.husky.common.model.Code;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * <div class="en">Address uses that only apply to telecommunication addresses,
  * not postal addresses.</div>
  */
-public enum TelecomAddressUse {
+public enum TelecomAddressUse implements ValueSetEnumInterface {
 	/**
 	 * <div class="en">An automated answering machine used for less urgent cases
 	 * and if the main purpose of contact is to leave a message or access an
@@ -210,74 +210,6 @@ public enum TelecomAddressUse {
 	}
 
 	/**
-	 * Gets the address use as telecommunication address use.
-	 *
-	 * @return the address use as telecommunication address use
-	 */
-	/*
-	 * public Telecom getAddressUseAsTelecommunicationAddressUse() {
-	 * TelecommunicationAddressUse retVal = TelecommunicationAddressUse.HP; switch
-	 * (this) { case ANSWERING_SERVICE: retVal = TelecommunicationAddressUse.AS;
-	 * break; case BAD: retVal = TelecommunicationAddressUse.BAD; break; case
-	 * CONFIDENTIAL: retVal = TelecommunicationAddressUse.H; break; case
-	 * EMERGENCY_CONTACT: retVal = TelecommunicationAddressUse.EC; break; case
-	 * MOBILE: retVal = TelecommunicationAddressUse.MC; break; case OLD: retVal =
-	 * TelecommunicationAddressUse.H; break; case PAGER: retVal =
-	 * TelecommunicationAddressUse.PG; break; case PRIVATE: retVal =
-	 * TelecommunicationAddressUse.H; break; case PRIVATE_PRIMARY: retVal =
-	 * TelecommunicationAddressUse.HP; break; case PRIVATE_VACATION: retVal =
-	 * TelecommunicationAddressUse.HV; break; case TEMPORARY: retVal =
-	 * TelecommunicationAddressUse.TMP; break; case BUSINESS: retVal =
-	 * TelecommunicationAddressUse.WP; break; case BUSINESS_DIRECT: retVal =
-	 * TelecommunicationAddressUse.WP; break; case PUBLIC: retVal =
-	 * TelecommunicationAddressUse.PUB; break; } return retVal; }
-	 */
-
-	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
-	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
-	 *
-	 * @return <div class="en">The MDHT Code</div>
-	 */
-	public CE getCE() {
-		final var ce = new CE();
-		ce.setCodeSystem(CODE_SYSTEM_OID);
-		ce.setCode(code);
-		ce.setDisplayName(displayName);
-		return ce;
-	}
-
-	/**
-	 * <div class="en">Gets the husky Code Object</div>
-	 * <div class="de">Liefert das husky Code Objekt</div>.
-	 *
-	 * @return <div class="en">the code</div>
-	 */
-	public Code getCode() {
-		return new Code(code, CODE_SYSTEM_OID, displayName);
-	}
-
-	/**
-	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
-	 * code system name.</div>
-	 *
-	 * @return <div class="en">the code system name</div>
-	 */
-	public String getCodeSystemName() {
-		return CODE_SYSTEM_NAME;
-	}
-
-	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
-	 * die code system id.</div>
-	 *
-	 * @return <div class="en">the code system id</div>
-	 */
-	public String getCodeSystemOid() {
-		return CODE_SYSTEM_OID;
-	}
-
-	/**
 	 * <div class="en">Gets the actual Code as string</div>
 	 * <div class="de">Liefert den eigentlichen Code als String</div>.
 	 *
@@ -293,7 +225,33 @@ public enum TelecomAddressUse {
 	 *
 	 * @return <div class="en">the display name</div>
 	 */
+	@Override
 	public String getDisplayName() {
 		return displayName;
+	}
+
+	@Override
+	public @NonNull String getCodeSystemId() {
+		return CODE_SYSTEM_OID;
+	}
+
+	@Override
+	public @NonNull String getDisplayName(@Nullable LanguageCode languageCode) {
+		return getDisplayName();
+	}
+
+	@Override
+	public @NonNull String getValueSetId() {
+		return CODE_SYSTEM_OID;
+	}
+
+	@Override
+	public @NonNull String getValueSetName() {
+		return CODE_SYSTEM_NAME;
+	}
+
+	@Override
+	public @NonNull String getCodeSystemName() {
+		return CODE_SYSTEM_NAME;
 	}
 }

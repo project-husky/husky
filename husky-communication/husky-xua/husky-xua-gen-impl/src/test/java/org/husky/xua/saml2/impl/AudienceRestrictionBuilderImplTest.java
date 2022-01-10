@@ -21,7 +21,7 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AudienceRes
 /**
  *
  */
-public class AudienceRestrictionBuilderImplTest {
+class AudienceRestrictionBuilderImplTest {
 
 	public AudienceRestrictionBuilder testBuilder;
 
@@ -35,7 +35,7 @@ public class AudienceRestrictionBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.AudienceRestrictionBuilderImpl#create()}.
 	 */
 	@Test
-	public void testCreate() {
+	void testCreate() {
 		final AudienceRestrictionType audience = testBuilder.create();
 		assertNotNull(audience);
 	}

@@ -10,13 +10,13 @@
  */
 package org.husky.common.model;
 
+import java.util.Map;
+
 import org.husky.common.enums.ObservationInterpretation;
 import org.husky.common.hl7cdar2.ANY;
 import org.husky.common.hl7cdar2.IVLPQ;
 import org.husky.common.hl7cdar2.POCDMT000040ObservationRange;
 import org.husky.common.hl7cdar2.PQ;
-
-import java.util.Map;
 
 /**
  * The Class ObservationRange. This elements holds information about the range of an observation.
@@ -109,9 +109,7 @@ public class ObservationRange {
      */
     public void setValue(Value value) {
         ANY val = value.getValue();
-        if (val instanceof IVLPQ) {
-            var valIvlPq = (IVLPQ) val;
-
+		if (val instanceof IVLPQ valIvlPq) {
             Map<String, PQ> elements = value.getPqElement(valIvlPq);
 
             if (elements.get("low") != null && !elements.get("low").getUnit().isEmpty()) {

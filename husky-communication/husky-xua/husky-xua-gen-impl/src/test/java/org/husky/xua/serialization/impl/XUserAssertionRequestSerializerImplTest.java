@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test;
 import org.opensaml.core.config.InitializationService;
 import org.w3c.dom.Element;
 
-public class XUserAssertionRequestSerializerImplTest {
+class XUserAssertionRequestSerializerImplTest {
 
 	private String testContext;
 	private String testDialect;
@@ -48,7 +48,7 @@ public class XUserAssertionRequestSerializerImplTest {
 	}
 
 	@Test
-	public void testSerializeToXml_InputNull() throws SerializeException {
+	void testSerializeToXml_InputNull() throws SerializeException {
 		assertThrows(SerializeException.class, () -> testSerializer.toXmlElement(null));
 	}
 
@@ -59,7 +59,7 @@ public class XUserAssertionRequestSerializerImplTest {
 	 * @throws SerializeException
 	 */
 	@Test
-	public void testToXmlByteArray() throws SerializeException {
+	void testToXmlByteArray() throws SerializeException {
 		final byte[] xmlArray = testSerializer.toXmlByteArray(testXmlObject);
 		assertNotNull(xmlArray);
 		final byte[] startPart = new byte["<?xml version=".length()];
@@ -74,7 +74,7 @@ public class XUserAssertionRequestSerializerImplTest {
 	 * @throws SerializeException
 	 */
 	@Test
-	public void testToXmlElement() throws SerializeException {
+	void testToXmlElement() throws SerializeException {
 		final Element xmlElement = testSerializer.toXmlElement(testXmlObject);
 		assertNotNull(xmlElement);
 		assertTrue(xmlElement.hasAttribute("Context"));
@@ -88,7 +88,7 @@ public class XUserAssertionRequestSerializerImplTest {
 	 * @throws SerializeException
 	 */
 	@Test
-	public void testToXmlString() throws SerializeException {
+	void testToXmlString() throws SerializeException {
 		final String xmlString = testSerializer.toXmlString(testXmlObject);
 		System.out.println(xmlString);
 		assertNotNull(xmlString);

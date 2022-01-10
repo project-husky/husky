@@ -13,7 +13,6 @@ package org.husky.communication.ch.ppq.epr.policyadmin.impl;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.husky.communication.ch.ppq.epr.policyadmin.api.OpenSamlAddPolicyRequest;
-import org.husky.communication.ch.ppq.epr.policyadmin.impl.AddPolicyRequestBuilder;
 import org.husky.communication.ch.ppq.utilities.impl.InitializerTestHelper;
 import org.husky.xua.saml2.impl.AssertionBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +26,7 @@ import org.opensaml.core.xml.io.Unmarshaller;
 import org.opensaml.core.xml.io.UnmarshallerFactory;
 import org.w3c.dom.Element;
 
-public class AddPolicyRequestMarshallerTest extends InitializerTestHelper {
+class AddPolicyRequestMarshallerTest extends InitializerTestHelper {
 
 	private OpenSamlAddPolicyRequest testAddPolicyRequest;
 
@@ -50,7 +49,7 @@ public class AddPolicyRequestMarshallerTest extends InitializerTestHelper {
 	}
 
 	@Test
-	public void testMarshall() throws MarshallingException {
+	void testMarshall() throws MarshallingException {
 		final MarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport
 				.getMarshallerFactory();
 		final Marshaller marshaller = marshallerFactory.getMarshaller(testAddPolicyRequest);

@@ -47,4 +47,5 @@ public class V3PdqContinuationQuery extends V3PdqContinuationBase {
 		queryContinuation.setContinuationQuantity(PixPdqV3Utils.createINT1(quantityLimit));
 
 	}
+
 }

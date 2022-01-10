@@ -10,10 +10,13 @@
  */
 package org.husky.xua.saml2.impl;
 
+import java.util.List;
+
 import org.herasaf.xacml.core.policy.impl.ActionType;
 import org.herasaf.xacml.core.policy.impl.ActionsType;
 import org.herasaf.xacml.core.policy.impl.ResourceType;
 import org.herasaf.xacml.core.policy.impl.ResourcesType;
+import org.herasaf.xacml.core.policy.impl.SubjectType;
 import org.herasaf.xacml.core.policy.impl.SubjectsType;
 import org.herasaf.xacml.core.policy.impl.TargetType;
 import org.husky.xua.core.SecurityObjectBuilder;
@@ -42,51 +45,63 @@ public class TargetBuilderImpl
 			var targetType = new TargetType();
 
 			if (aInternalObject.getActions() != null && aInternalObject.getActions().getActions() != null) {
-				var actionsType = new ActionsType();
-				for (var type : aInternalObject.getActions().getActions()) {
-					var actionType = new ActionType();
-
-					for (var typeMatch : type.getActionMatches()) {
-						actionType.getActionMatches().add(new ActionMatchBuilderImpl().create(typeMatch));
-					}
-
-					actionsType.getActions().add(actionType);
-				}
-
-				targetType.setActions(actionsType);
+				targetType.setActions(createActionsType(aInternalObject.getActions().getActions()));
 			}
 
 			if (aInternalObject.getSubjects() != null && aInternalObject.getSubjects().getSubjects() != null) {
-				var subjectsType = new SubjectsType();
-
-				for (var type : aInternalObject.getSubjects().getSubjects()) {
-					var subjectType = new org.herasaf.xacml.core.policy.impl.SubjectType();
-
-					for (var typeMatch : type.getSubjectMatches()) {
-						subjectType.getSubjectMatches().add(new SubjectMatchBuilderImpl().create(typeMatch));
-					}
-
-					subjectsType.getSubjects().add(subjectType);
-				}
-				targetType.setSubjects(subjectsType);
+				targetType.setSubjects(createSubjectsType(aInternalObject.getSubjects().getSubjects()));
 			}
 
 			if (aInternalObject.getResources() != null && aInternalObject.getResources().getResources() != null) {
-				var resourcesType = new ResourcesType();
-
-				for (var type : aInternalObject.getResources().getResources()) {
-					var resourceType = new ResourceType();
-
-					for (var typeMatch : type.getResourceMatches()) {
-						resourceType.getResourceMatches().add(new ResourceMatchBuilderImpl().create(typeMatch));
-					}
-
-					resourcesType.getResources().add(resourceType);
-				}
-				targetType.setResources(resourcesType);
+				targetType.setResources(createResourcesType(aInternalObject.getResources().getResources()));
 			}
 
 			return targetType;
+	}
+
+	private ActionsType createActionsType(List<org.opensaml.xacml.policy.ActionType> internalObjects) {
+		var actionsType = new ActionsType();
+		for (var type : internalObjects) {
+			var actionType = new ActionType();
+
+			for (var typeMatch : type.getActionMatches()) {
+				actionType.getActionMatches().add(new ActionMatchBuilderImpl().create(typeMatch));
+			}
+
+			actionsType.getActions().add(actionType);
+		}
+
+		return actionsType;
+	}
+
+	private ResourcesType createResourcesType(List<org.opensaml.xacml.policy.ResourceType> internalObjects) {
+		var resourcesType = new ResourcesType();
+
+		for (var type : internalObjects) {
+			var resourceType = new ResourceType();
+
+			for (var typeMatch : type.getResourceMatches()) {
+				resourceType.getResourceMatches().add(new ResourceMatchBuilderImpl().create(typeMatch));
+			}
+
+			resourcesType.getResources().add(resourceType);
+		}
+		return resourcesType;
+	}
+
+	private SubjectsType createSubjectsType(List<org.opensaml.xacml.policy.SubjectType> internalObjects) {
+		var subjectsType = new SubjectsType();
+
+		for (var type : internalObjects) {
+			var subjectType = new org.herasaf.xacml.core.policy.impl.SubjectType();
+
+			for (var typeMatch : type.getSubjectMatches()) {
+				subjectType.getSubjectMatches().add(new SubjectMatchBuilderImpl().create(typeMatch));
+			}
+
+			subjectsType.getSubjects().add(subjectType);
+		}
+		return subjectsType;
 	}
 
 	@Override
@@ -98,51 +113,64 @@ public class TargetBuilderImpl
 		var targetType = new TargetTypeImplBuilder().buildObject();
 
 		if (aInternalObject.getActions() != null && aInternalObject.getActions().getActions() != null) {
-			var actionsType = new ActionsTypeImplBuilder().buildObject();
-			for (var type : aInternalObject.getActions().getActions()) {
-				var actionType = new ActionTypeImplBuilder().buildObject();
-
-				for (var typeMatch : type.getActionMatches()) {
-					actionType.getActionMatches().add(new ActionMatchBuilderImpl().create(typeMatch));
-				}
-
-				actionsType.getActions().add(actionType);
-			}
-
-			targetType.setActions(actionsType);
+			targetType.setActions(createOpensamlActionsType(aInternalObject.getActions().getActions()));
 		}
 
 		if (aInternalObject.getSubjects() != null && aInternalObject.getSubjects().getSubjects() != null) {
-			var subjectsType = new SubjectsTypeImplBuilder().buildObject();
-
-			for (var type : aInternalObject.getSubjects().getSubjects()) {
-				var subjectType = new SubjectTypeImplBuilder().buildObject();
-
-				for (var typeMatch : type.getSubjectMatches()) {
-					subjectType.getSubjectMatches().add(new SubjectMatchBuilderImpl().create(typeMatch));
-				}
-
-				subjectsType.getSubjects().add(subjectType);
-			}
-			targetType.setSubjects(subjectsType);
+			targetType.setSubjects(createOpensamlSubjectsType(aInternalObject.getSubjects().getSubjects()));
 		}
 
 		if (aInternalObject.getResources() != null && aInternalObject.getResources().getResources() != null) {
-			var resourcesType = new ResourcesTypeImplBuilder().buildObject();
-
-			for (var type : aInternalObject.getResources().getResources()) {
-				var resourceType = new ResourceTypeImplBuilder().buildObject();
-
-				for (var typeMatch : type.getResourceMatches()) {
-					resourceType.getResourceMatches().add(new ResourceMatchBuilderImpl().create(typeMatch));
-				}
-
-				resourcesType.getResources().add(resourceType);
-			}
-			targetType.setResources(resourcesType);
+			targetType.setResources(createOpensamlResourcesType(aInternalObject.getResources().getResources()));
 		}
 
 		return targetType;
+	}
+
+	private org.opensaml.xacml.policy.ActionsType createOpensamlActionsType(List<ActionType> internalObjects) {
+		var actionsType = new ActionsTypeImplBuilder().buildObject();
+		for (var type : internalObjects) {
+			var actionType = new ActionTypeImplBuilder().buildObject();
+
+			for (var typeMatch : type.getActionMatches()) {
+				actionType.getActionMatches().add(new ActionMatchBuilderImpl().create(typeMatch));
+			}
+
+			actionsType.getActions().add(actionType);
+		}
+
+
+		return actionsType;
+	}
+
+	private org.opensaml.xacml.policy.ResourcesType createOpensamlResourcesType(List<ResourceType> internalObjects) {
+		var resourcesType = new ResourcesTypeImplBuilder().buildObject();
+
+		for (var type : internalObjects) {
+			var resourceType = new ResourceTypeImplBuilder().buildObject();
+
+			for (var typeMatch : type.getResourceMatches()) {
+				resourceType.getResourceMatches().add(new ResourceMatchBuilderImpl().create(typeMatch));
+			}
+
+			resourcesType.getResources().add(resourceType);
+		}
+		return resourcesType;
+	}
+
+	private org.opensaml.xacml.policy.SubjectsType createOpensamlSubjectsType(List<SubjectType> internalObjects) {
+		var subjectsType = new SubjectsTypeImplBuilder().buildObject();
+
+		for (var type : internalObjects) {
+			var subjectType = new SubjectTypeImplBuilder().buildObject();
+
+			for (var typeMatch : type.getSubjectMatches()) {
+				subjectType.getSubjectMatches().add(new SubjectMatchBuilderImpl().create(typeMatch));
+			}
+
+			subjectsType.getSubjects().add(subjectType);
+		}
+		return subjectsType;
 	}
 
 }

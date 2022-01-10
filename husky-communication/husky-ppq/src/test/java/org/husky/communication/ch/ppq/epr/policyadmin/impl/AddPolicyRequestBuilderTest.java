@@ -24,7 +24,7 @@ import org.opensaml.core.xml.io.Unmarshaller;
 import org.opensaml.core.xml.io.UnmarshallerFactory;
 import org.w3c.dom.Element;
 
-public class AddPolicyRequestBuilderTest extends InitializerTestHelper {
+class AddPolicyRequestBuilderTest extends InitializerTestHelper {
 
 	private AssertionType testAssertion;
 
@@ -46,7 +46,7 @@ public class AddPolicyRequestBuilderTest extends InitializerTestHelper {
 	 * {@link org.husky.xua.ch.epr.policyadmin.impl.AddPolicyRequestBuilder#assertion(org.husky.xua.saml2.Assertion)}.
 	 */
 	@Test
-	public void testAssertion() {
+	void testAssertion() {
 		final OpenSamlAddPolicyRequest ref = new AddPolicyRequestBuilder().assertion(testAssertion)
 				.buildObject();
 		assertNotNull(ref);

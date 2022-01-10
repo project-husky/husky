@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test of class Telecoms
  */
-public class TelecomsTest {
+class TelecomsTest {
 
 	private String numS1;
 	private String numS2;
@@ -52,7 +52,7 @@ public class TelecomsTest {
 	 * .
 	 */
 	@Test
-	public void testAddEMail() {
+	void testAddEMail() {
 		final Telecom t = new Telecom();
 
 		t.setMail("axel.helmer.job@gmail.com");
@@ -73,7 +73,7 @@ public class TelecomsTest {
 	 * .
 	 */
 	@Test
-	public void testAddFax() {
+	void testAddFax() {
 		final Telecom t = new Telecom();
 
 		t.setFax(numS1);
@@ -93,7 +93,7 @@ public class TelecomsTest {
 	 * .
 	 */
 	@Test
-	public void testAddPhone() {
+	void testAddPhone() {
 		final Telecom t = new Telecom();
 
 		t.setPhone(telS1);
@@ -112,7 +112,7 @@ public class TelecomsTest {
 	 * .
 	 */
 	@Test
-	public void testAddWebsite() {
+	void testAddWebsite() {
 		final Telecom t = new Telecom();
 
 		t.setValue(testWebsite1);
@@ -128,8 +128,8 @@ public class TelecomsTest {
 	 * .
 	 */
 	@Test
-	@Disabled
-	public void testTelecomsEListOfTEL() {
+	@Disabled("Not yet implemented")
+	void testTelecomsEListOfTEL() {
 		fail("Not yet implemented");
 	}
 

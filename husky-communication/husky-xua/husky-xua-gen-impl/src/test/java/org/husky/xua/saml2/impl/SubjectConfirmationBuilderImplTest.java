@@ -23,7 +23,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConfirmationType;
 
-public class SubjectConfirmationBuilderImplTest {
+class SubjectConfirmationBuilderImplTest {
 
 	private SubjectConfirmationBuilder builder;
 	private String testAddress;
@@ -61,7 +61,7 @@ public class SubjectConfirmationBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.SubjectConfirmationBuilderImpl#address(java.lang.String)}.
 	 */
 	@Test
-	public void testAddress() {
+	void testAddress() {
 		final SubjectConfirmationType ref = builder.address(testAddress).create();
 		assertEquals(testAddress, ref.getSubjectConfirmationData().getAddress());
 	}
@@ -71,7 +71,7 @@ public class SubjectConfirmationBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.SubjectConfirmationBuilderImpl#create(org.opensaml.saml.saml2.core.SubjectConfirmation)}.
 	 */
 	@Test
-	public void testCreateSubjectConfirmation() {
+	void testCreateSubjectConfirmation() {
 		final SubjectConfirmationType ref = ((SubjectConfirmationBuilderImpl) builder)
 				.create(testInternalObject);
 		assertEquals(testInternalObject, ((SubjectConfirmationImpl) ref).getWrappedObject());
@@ -82,7 +82,7 @@ public class SubjectConfirmationBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.SubjectConfirmationBuilderImpl#inResponseTo(java.lang.String)}.
 	 */
 	@Test
-	public void testInResponseTo() {
+	void testInResponseTo() {
 		final SubjectConfirmationType ref = builder.inResponseTo(testInResponseTO).create();
 		assertEquals(testInResponseTO, ref.getSubjectConfirmationData().getInResponseTo());
 	}
@@ -92,7 +92,7 @@ public class SubjectConfirmationBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.SubjectConfirmationBuilderImpl#method(java.lang.String)}.
 	 */
 	@Test
-	public void testMethod() {
+	void testMethod() {
 		final SubjectConfirmationType ref = builder.method(testMethod).create();
 		assertEquals(testMethod, ref.getMethod());
 	}
@@ -102,7 +102,7 @@ public class SubjectConfirmationBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.SubjectConfirmationBuilderImpl#notBefore(java.util.Calendar)}.
 	 */
 	@Test
-	public void testNotBefore() {
+	void testNotBefore() {
 		final SubjectConfirmationType ref = builder.notBefore(testNotBefore).create();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmssZ");
 		assertEquals(sdf.format(testNotBefore.getTime()), sdf.format(ref.getSubjectConfirmationData().getNotBefore().toGregorianCalendar().getTime()));
@@ -113,7 +113,7 @@ public class SubjectConfirmationBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.SubjectConfirmationBuilderImpl#notOnOrAfter(java.util.Calendar)}.
 	 */
 	@Test
-	public void testNotOnOrAfter() {
+	void testNotOnOrAfter() {
 		final SubjectConfirmationType ref = builder.notOnOrAfter(testNotOnOrAfter).create();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmssZ");
 		assertEquals(sdf.format(testNotOnOrAfter.getTime()), sdf.format(ref.getSubjectConfirmationData().getNotOnOrAfter().toGregorianCalendar().getTime()));
@@ -124,7 +124,7 @@ public class SubjectConfirmationBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.SubjectConfirmationBuilderImpl#recipient(java.lang.String)}.
 	 */
 	@Test
-	public void testRecipient() {
+	void testRecipient() {
 		final SubjectConfirmationType ref = builder.recipient(testRecepient).create();
 		assertEquals(testRecepient, ref.getSubjectConfirmationData().getRecipient());
 	}

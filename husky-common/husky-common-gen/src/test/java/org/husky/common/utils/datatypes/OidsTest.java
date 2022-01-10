@@ -1,10 +1,10 @@
 package org.husky.common.utils.datatypes;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.husky.common.utils.datatypes.Oids;
 
 /**
  * Tests of the {@link Oids} class.
@@ -65,4 +65,5 @@ class OidsTest {
         assertEquals("2.16.756.5.30.1.1.10.4.45", Oids.normalize("urn:oid:2.16.756.5.30.1.1.10.4.45"));
         assertEquals("2.999", Oids.normalize("2.999"));
     }
+
 }

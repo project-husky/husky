@@ -10,7 +10,6 @@
  */
 package org.husky.communication.mpi.impl.pdq;
 
-import org.husky.common.utils.OID;
 import org.husky.communication.mpi.V3Message;
 import org.husky.communication.utils.PixPdqV3Utils;
 
@@ -29,7 +28,7 @@ import net.ihe.gazelle.hl7v3.voc.XActMoodIntentEvent;
  */
 public abstract class V3PdqContinuationBase extends V3Message {
 
-	protected QUQIIN000003UV01Type rootElement = new QUQIIN000003UV01Type();
+	protected QUQIIN000003UV01Type rootElement;
 	protected QUQIMT000001UV01QueryContinuation queryContinuation = new QUQIMT000001UV01QueryContinuation();
 
 	/**
@@ -50,27 +49,10 @@ public abstract class V3PdqContinuationBase extends V3Message {
 			String receiverApplicationOID,
 			String receiverFacilityOID, V3PdqConsumerResponse v3pdqresponse) {
 
+		super(senderApplicationOID);
+
 		// set the interaction id
-		rootElement.setInteractionId(PixPdqV3Utils.createII("2.16.840.1.113883.1.6", "QUQI_IN000003UV01", ""));
-
-		// indicate ITSVersion XML_1.0
-		rootElement.setITSVersion("XML_1.0");
-
-		// create an id and set it
-		this.messageId = PixPdqV3Utils.createII(OID.createOIDGivenRoot(senderApplicationOID), "", "");
-		rootElement.setId(messageId);
-
-		// set current time
-		rootElement.setCreationTime(PixPdqV3Utils.createTSCurrentTime());
-
-		// set the processing code
-		this.setProcessingCode("T");
-
-		// The value of processingModeCode SHALL be set to T
-		rootElement.setProcessingModeCode(PixPdqV3Utils.createCS("T"));
-
-		// The acceptAckCode SHALL be set to AL
-		rootElement.setAcceptAckCode(PixPdqV3Utils.createCS("AL"));
+		getRootElement().setInteractionId(PixPdqV3Utils.createII("2.16.840.1.113883.1.6", "QUQI_IN000003UV01", ""));
 
 		// set the sender
 		this.setSender(senderApplicationOID, senderFacilityOID);
@@ -82,7 +64,7 @@ public abstract class V3PdqContinuationBase extends V3Message {
 		var acknowledgement = new MCCIMT000300UV01Acknowledgement();
 
 		// add the acknowledgement to the root element
-		rootElement.getAcknowledgement().add(acknowledgement);
+		getRootElement().getAcknowledgement().add(acknowledgement);
 
 		// add the typecode
 		acknowledgement.setTypeCode(PixPdqV3Utils.createCS("AA"));
@@ -100,7 +82,7 @@ public abstract class V3PdqContinuationBase extends V3Message {
 		var continuationCAP = new QUQIMT000001UV01ControlActProcess();
 
 		// add the control act process
-		rootElement.setControlActProcess(continuationCAP);
+		getRootElement().setControlActProcess(continuationCAP);
 
 		// set the class code
 		continuationCAP.setClassCode(ActClassControlAct.CACT);
@@ -127,16 +109,13 @@ public abstract class V3PdqContinuationBase extends V3Message {
 	public void addReceiver(String applicationOID, String facilityOID) {
 		this.addReceivingApplication(applicationOID);
 		this.addReceivingFacility(facilityOID);
-		rootElement.getReceiver().add(PixPdqV3Utils.createMCCIMT000300UV01Receiver(applicationOID, facilityOID));
+		getRootElement().getReceiver().add(PixPdqV3Utils.createMCCIMT000300UV01Receiver(applicationOID, facilityOID));
 	}
 
-	/**
-	 * Set the processing code
-	 * 
-	 * @param processingCode
-	 */
-	public void setProcessingCode(String processingCode) {
-		rootElement.setProcessingCode(PixPdqV3Utils.createCS(processingCode));
+	@Override
+	protected void setAcceptAckCode() {
+		// The acceptAckCode SHALL be set to AL
+		getRootElement().setAcceptAckCode(PixPdqV3Utils.createCS(acceptAckCode));
 	}
 
 	/**
@@ -147,11 +126,11 @@ public abstract class V3PdqContinuationBase extends V3Message {
 	 * @param facilityOID
 	 *            (Sender Organization ID)
 	 */
+	@Override
 	public void setSender(String applicationOID, String facilityOID) {
 		// set the sender/application OIDs
-		this.sendingApplication = applicationOID;
-		this.sendingFacility = facilityOID;
-		rootElement.setSender(PixPdqV3Utils.createMCCIMT000300UV01Sender(applicationOID, facilityOID));
+		super.setSender(applicationOID, facilityOID);
+		getRootElement().setSender(PixPdqV3Utils.createMCCIMT000300UV01Sender(applicationOID, facilityOID));
 	}
 
 	/**
@@ -164,7 +143,55 @@ public abstract class V3PdqContinuationBase extends V3Message {
 	}
 
 	public QUQIIN000003UV01Type getRootElement() {
+		if (this.rootElement == null) {
+			this.rootElement = new QUQIIN000003UV01Type();
+		}
+
 		return this.rootElement;
 	}
+
+	@Override
+	protected void setITSVersion() {
+		// indicate ITSVersion XML_1.0
+		getRootElement().setITSVersion(itsVersion);
+	}
+
+	@Override
+	protected void setId() {
+		getRootElement().setId(messageId);
+	}
+
+	@Override
+	protected void setCreationTime() {
+		// set current time
+		getRootElement().setCreationTime(PixPdqV3Utils.createTSCurrentTime());
+	}
+
+	/**
+	 * Set the processing code
+	 * 
+	 * @param processingCode
+	 */
+	@Override
+	protected void setProcessingCode() {
+		// set ProcessingCode. This attribute defines whether the message is
+		// part of a production,
+		// training, or debugging system. Valid values are D (Debugging), T
+		// (Testing), P (Production)
+		// Will default to production because it will need to be that way in the
+		// field.
+		getRootElement().setProcessingCode(PixPdqV3Utils.createCS(processingCode));
+	}
+
+	public void setProcessingCode(String code) {
+		getRootElement().setProcessingCode(PixPdqV3Utils.createCS(code));
+	}
+
+	@Override
+	protected void setProcessingModeCode() {
+		// The value of processingModeCode SHALL be set to T
+		getRootElement().setProcessingModeCode(PixPdqV3Utils.createCS(processingModeCode));
+	}
+
 
 }

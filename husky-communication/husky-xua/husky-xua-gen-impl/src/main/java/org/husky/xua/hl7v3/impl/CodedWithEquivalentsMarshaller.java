@@ -10,7 +10,6 @@
  */
 package org.husky.xua.hl7v3.impl;
 
-import org.husky.xua.hl7v3.OpenSamlPurposeOfUse;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.core.xml.io.AbstractXMLObjectMarshaller;
 import org.opensaml.core.xml.io.MarshallingException;
@@ -24,27 +23,25 @@ import org.w3c.dom.Element;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class PurposeOfUseMarshaller extends AbstractXMLObjectMarshaller {
+public class CodedWithEquivalentsMarshaller extends AbstractXMLObjectMarshaller {
 
 	@Override
-	protected void marshallAttributes(XMLObject xmlObject, Element domElement)
-			throws MarshallingException {
-		final OpenSamlPurposeOfUse purposeOfUse = (OpenSamlPurposeOfUse) xmlObject;
-		if (purposeOfUse.getCode() != null) {
-			domElement.setAttributeNS(null, "code", purposeOfUse.getCode());
+	protected void marshallAttributes(XMLObject xmlObject, Element domElement) throws MarshallingException {
+		AbstractImpl obj = (AbstractImpl) xmlObject;
+
+		if (obj.getCode() != null) {
+			domElement.setAttributeNS(null, "code", obj.getCode());
 		}
-		if (purposeOfUse.getCodeSystem() != null) {
-			domElement.setAttributeNS(null, "codeSystem", purposeOfUse.getCodeSystem());
+		if (obj.getCodeSystem() != null) {
+			domElement.setAttributeNS(null, "codeSystem", obj.getCodeSystem());
 		}
-		if (purposeOfUse.getCodeSystemName() != null) {
-			domElement.setAttributeNS(null, "codeSystemName", purposeOfUse.getCodeSystemName());
+		if (obj.getCodeSystemName() != null) {
+			domElement.setAttributeNS(null, "codeSystemName", obj.getCodeSystemName());
 		}
-		if (purposeOfUse.getDisplayName() != null) {
-			domElement.setAttributeNS(null, "displayName", purposeOfUse.getDisplayName());
+		if (obj.getDisplayName() != null) {
+			domElement.setAttributeNS(null, "displayName", obj.getDisplayName());
 		}
 		domElement.setAttribute("xsi:type", "CE");
 		domElement.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
-
 	}
-
 }

@@ -11,22 +11,20 @@
 package org.husky.valueset.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.husky.common.enums.LanguageCode;
 import org.husky.valueset.enums.DesignationType;
-import org.husky.valueset.model.Designation;
 import org.junit.jupiter.api.Test;
 
 /**
  * The Test Class for Designation.
  */
-public class DesignationTest {
+class DesignationTest {
 	/**
 	 * Do all tests.
 	 */
 	@Test
-	public void doAllTests() {
+	void doAllTests() {
 
 		LanguageCode languageCode = LanguageCode.GERMAN;
 		DesignationType type = DesignationType.FULLY_SPECIFIED_NAME;
@@ -38,7 +36,7 @@ public class DesignationTest {
 				.withLanguageCode(languageCode).withType(type).build();
 
 		assertEquals(designation1.hashCode(), designation2.hashCode());
-		assertTrue(designation1.equals(designation2));
+		assertEquals(designation1, designation2);
 
 		assertEquals(languageCode, designation1.getLanguageCode());
 		assertEquals(type, designation1.getType());

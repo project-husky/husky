@@ -37,29 +37,4 @@ public enum SourceSystemType {
 	 */
 	ARTDECOR_FHIR;
 
-	// TODO: These interfaces are not going to be implemented in the first
-	// release of dynamic value set handling.
-	// /**
-	// * <div class="en">Using this source type, the SOAP interface to
-	// terminology
-	// * server will be used (e.g.
-	// * https://termpub.gesundheit.gv.at/TermBrowser/gui/main/main.zul).</div>
-	// *
-	// * <div class="de">Bei Verwendung dieses Quellentyps wird die SOAP
-	// * Schnittstelle zu Terminologoie-Server verwendet (z.B.
-	// * https://termpub.gesundheit.gv.at/TermBrowser/gui/main/main.zul).</div>
-	// */
-	// TERMINOLOGIESERVER_SOAP,
-	//
-	// /**
-	// * <div class="en">Using this source type, the SOAP interface to the Swiss
-	// * Metadata Index will be used (e.g.
-	// * https://ws.epd-ad-a.bag.admin.ch/Mdi/ValueSetRepository.svc).</div>
-	// *
-	// * <div class="de">Bei Verwendung dieses Quellentyps wird die SOAP
-	// * Schnittstelle zu Schweizerischen Metadaten Index verwendet (z.B.
-	// * https://ws.epd-ad-a.bag.admin.ch/Mdi/ValueSetRepository.svc).</div>
-	// */
-	// SWISS_MDI_SOAP;
-
 }

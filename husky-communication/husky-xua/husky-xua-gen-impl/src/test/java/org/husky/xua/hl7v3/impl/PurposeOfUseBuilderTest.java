@@ -12,13 +12,13 @@ package org.husky.xua.hl7v3.impl;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.husky.xua.hl7v3.OpenSamlPurposeOfUse;
-import org.husky.xua.hl7v3.impl.PurposeOfUseBuilder;
+import org.husky.xua.hl7v3.CE;
+import org.husky.xua.hl7v3.PurposeOfUse;
 import org.husky.xua.utilities.impl.InitializerTestHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class PurposeOfUseBuilderTest extends InitializerTestHelper {
+class PurposeOfUseBuilderTest extends InitializerTestHelper {
 
 	@BeforeEach
 	public void setUp() throws Exception {
@@ -26,11 +26,12 @@ public class PurposeOfUseBuilderTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.xua.hl7v3.impl.ch.ppq.hl7v3.PurposeOfUseBuilder#buildObject()}.
+	 * {@link org.husky.xua.hl7v3.impl.PurposeOfUseBuilder.ppq.hl7v3.PurposeOfUseBuilder#buildObject()}.
 	 */
 	@Test
-	public void testBuildObject() {
-		final OpenSamlPurposeOfUse ref = new PurposeOfUseBuilder().buildObject();
+	void testBuildObject() {
+		final CE ref = new CodedWithEquivalentsBuilder().buildObject(PurposeOfUse.DEFAULT_NS_URI,
+				PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME, PurposeOfUse.DEFAULT_PREFIX);
 		assertNotNull(ref);
 	}
 

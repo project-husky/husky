@@ -11,7 +11,6 @@
 package org.husky.common.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
@@ -19,19 +18,18 @@ import org.husky.common.basetypes.CodeBaseType;
 import org.husky.common.enums.NullFlavor;
 import org.husky.common.hl7cdar2.CD;
 import org.husky.common.hl7cdar2.ObjectFactory;
-import org.husky.common.model.Code;
 import org.junit.jupiter.api.Test;
 
 /**
  * The test class for Code.
  */
-public class CodeTest {
+class CodeTest {
 
 	/**
 	 * Do all tests.
 	 */
 	@Test
-	public void doAllTests() {
+	void doAllTests() {
 
 		String codeStr1 = "784.0";
 		String codeSystem1 = "2.999";
@@ -85,7 +83,7 @@ public class CodeTest {
 		CD hl7CdaR2Type = code1.getHl7CdaR2Cd();
 		Code code2 = new Code(hl7CdaR2Type);
 
-		assertTrue(code1.equals(code2));
+		assertEquals(code1, code2);
 
 		// Null Flavor Tests
 		CD nullHl7CdaR2Value = null;

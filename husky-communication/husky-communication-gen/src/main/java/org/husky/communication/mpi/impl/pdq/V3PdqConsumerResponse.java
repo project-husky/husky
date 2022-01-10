@@ -37,11 +37,7 @@ public class V3PdqConsumerResponse extends V3Response {
 	 */
 	public V3PdqConsumerResponse(PRPAIN201306UV02Type pdqConsumerResponseElement) {
 
-		// convert the response to the model
-		// this.v3Message = this.getDocumentRoot(pdqConsumerResponseElement);
-
 		// if we got a pdq response
-		// if (null != this.v3Message.getPRPAIN201306UV02()) {
 		rootElement = pdqConsumerResponseElement;
 
 		// set the id
@@ -61,9 +57,9 @@ public class V3PdqConsumerResponse extends V3Response {
 		// for each reciever
 		for (var i = 0; i < numReceivers; i++) {
 			// get the application and (if available) facility
-			this.addReceivingApplication(rootElement.getReceiver().get(i).getDevice().getId().get(0).getRoot());
+			this.receivingApplication.add(rootElement.getReceiver().get(i).getDevice().getId().get(0).getRoot());
 			if (null != rootElement.getReceiver().get(i).getDevice().getAsAgent())
-				this.addReceivingFacility(rootElement.getReceiver().get(i).getDevice().getAsAgent()
+				this.receivingFacility.add(rootElement.getReceiver().get(i).getDevice().getAsAgent()
 						.getRepresentedOrganization().getId().get(0).getRoot());
 		}
 
@@ -71,6 +67,21 @@ public class V3PdqConsumerResponse extends V3Response {
 		this.acknowledgementCode = rootElement.getAcknowledgement().get(0).getTypeCode().getCode();
 
 		// if there is acknowledgement detail
+		setAcknowledgementDetails();
+
+		// if the code was AA, then:
+		if (acknowledgementCode.equalsIgnoreCase("AA")) {
+			// set up the response for data retrieval
+			queryAcknowledgement = rootElement.getControlActProcess().getQueryAck().getQueryResponseCode().getCode();
+
+			setErrorText();
+		} else {
+			// error occurred, unknown ack
+			errorText = "Acknowledgement Code: " + acknowledgementCode + " not understood.";
+		}
+	}
+
+	private void setAcknowledgementDetails() {
 		if (!rootElement.getAcknowledgement().get(0).getAcknowledgementDetail().isEmpty()) {
 			var detailCode = "";
 			var detailText = "";
@@ -92,34 +103,27 @@ public class V3PdqConsumerResponse extends V3Response {
 			this.acknowledgementDetailCode = detailCode;
 			this.acknowledgementDetailText = detailText;
 		}
+	}
 
-		// if the code was AA, then:
-		if (acknowledgementCode.equalsIgnoreCase("AA")) {
-			// set up the response for data retrieval
-			queryAcknowledgement = rootElement.getControlActProcess().getQueryAck().getQueryResponseCode().getCode();
-
-			// if this was an app error
-			if (queryAcknowledgement.equalsIgnoreCase("AE")) {
-				// set the error text
-				errorText = "Query Acknowledgement: AE - Application Error";
-			} else if (queryAcknowledgement.equalsIgnoreCase("QE")) {
-				// set the error text
-				errorText = "Query Acknowledgement: QE - Query Parameter Error";
-			} else if (queryAcknowledgement.equalsIgnoreCase("NF")) {
-				// Technically, this shouldn't be an error
-				hasError = false;
-				// set the error text
-				errorText = "No patients found.";
-			} else if (queryAcknowledgement.equalsIgnoreCase("OK")) {
-				// Success!
-				hasError = false;
-			} else {
-				// error occurred, unknown ack
-				errorText = "Query Acknowledgement: " + queryAcknowledgement + " not understood.";
-			}
+	private void setErrorText() {
+		// if this was an app error
+		if (queryAcknowledgement.equalsIgnoreCase("AE")) {
+			// set the error text
+			errorText = "Query Acknowledgement: AE - Application Error";
+		} else if (queryAcknowledgement.equalsIgnoreCase("QE")) {
+			// set the error text
+			errorText = "Query Acknowledgement: QE - Query Parameter Error";
+		} else if (queryAcknowledgement.equalsIgnoreCase("NF")) {
+			// Technically, this shouldn't be an error
+			hasError = false;
+			// set the error text
+			errorText = "No patients found.";
+		} else if (queryAcknowledgement.equalsIgnoreCase("OK")) {
+			// Success!
+			hasError = false;
 		} else {
 			// error occurred, unknown ack
-			errorText = "Acknowledgement Code: " + acknowledgementCode + " not understood.";
+			errorText = "Query Acknowledgement: " + queryAcknowledgement + " not understood.";
 		}
 	}
 
@@ -213,8 +217,8 @@ public class V3PdqConsumerResponse extends V3Response {
 	public String getPatientBirthOrderNumber(int patientIndex) {
 
 		if (getPatientByIndex(patientIndex).getPatientPerson().getMultipleBirthOrderNumber() != null) {
-			final Integer birthOrder = getPatientByIndex(patientIndex).getPatientPerson()
-					.getMultipleBirthOrderNumber().getValue();
+			final Integer birthOrder = getPatientByIndex(patientIndex).getPatientPerson().getMultipleBirthOrderNumber()
+					.getValue();
 			return birthOrder.toString();
 		}
 		return null;
@@ -322,7 +326,7 @@ public class V3PdqConsumerResponse extends V3Response {
 				}
 			}
 		}
-		return null;
+		return new String[0];
 	}
 
 	/**
@@ -338,9 +342,7 @@ public class V3PdqConsumerResponse extends V3Response {
 			if (response) {
 				return "true";
 			}
-			if (!response) {
-				return "false";
-			}
+			return "false";
 		}
 		return null;
 	}

@@ -11,8 +11,8 @@
 package org.husky.communication.ch.ppq.impl;
 
 import org.husky.communication.ch.ppq.api.PrivacyPolicyFeed;
-import org.husky.communication.ch.ppq.api.PrivacyPolicyFeedBuilder;
 import org.husky.communication.ch.ppq.api.PrivacyPolicyFeed.PpfMethod;
+import org.husky.communication.ch.ppq.api.PrivacyPolicyFeedBuilder;
 import org.husky.xua.core.SecurityObjectBuilder;
 import org.opensaml.saml.saml2.core.Assertion;
 import org.opensaml.saml.saml2.core.impl.AssertionBuilder;
@@ -24,10 +24,6 @@ public class PrivacyPolicyFeedBuilderImpl
 		implements PrivacyPolicyFeedBuilder, SecurityObjectBuilder<Assertion, PrivacyPolicyFeed> {
 
 	private PpfMethod ppfMethod;
-
-	public PrivacyPolicyFeedBuilderImpl() {
-
-	}
 
 	@Override
 	public PrivacyPolicyFeed create() {

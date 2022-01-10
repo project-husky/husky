@@ -10,10 +10,9 @@
  */
 package org.husky.common.model;
 
-import org.husky.common.hl7cdar2.POCDMT000040SpecimenRole;
-import org.husky.common.utils.Util;
-
 import java.util.List;
+
+import org.husky.common.hl7cdar2.POCDMT000040SpecimenRole;
 
 /**
  * The Class SpecimenRole.
@@ -53,14 +52,14 @@ public class SpecimenRole extends PlayingEntity {
         getSpecimenRole().getId().add(id.getHl7CdaR2Ii());
     }
 
-    /**
-     * Gets the id list.
-     *
-     * @return the id list
-     */
-    public List<Identificator> getIdList() {
-        return Util.convertIds(getSpecimenRole().getId());
-    }
+	/**
+	 * Gets the id list.
+	 *
+	 * @return the id list
+	 */
+	public List<Identificator> getIdList() {
+		return Identificator.getIdentificatorList(getSpecimenRole().getId());
+	}
 
     /**
      * Method to get

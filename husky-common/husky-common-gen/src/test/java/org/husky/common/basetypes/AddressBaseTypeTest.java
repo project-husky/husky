@@ -11,9 +11,7 @@
 package org.husky.common.basetypes;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.husky.common.basetypes.AddressBaseType;
 import org.husky.common.enums.CountryCode;
 import org.husky.common.enums.PostalAddressUse;
 import org.junit.jupiter.api.Test;
@@ -21,13 +19,13 @@ import org.junit.jupiter.api.Test;
 /**
  * The test class for AddressBaseType.
  */
-public class AddressBaseTypeTest {
+class AddressBaseTypeTest {
 
 	/**
 	 * Do all tests.
 	 */
 	@Test
-	public void doAllTests() {
+	void doAllTests() {
 
 		String streetName = "Leidensgasse";
 		String buildingNumber = "1";
@@ -54,7 +52,7 @@ public class AddressBaseTypeTest {
 				.withState(state).withUsage(usage).build();
 
 		assertEquals(address1.hashCode(), address2.hashCode());
-		assertTrue(address1.equals(address2));
+		assertEquals(address1, address2);
 
 		assertEquals(streetName, address1.getStreetName());
 		assertEquals(buildingNumber, address1.getBuildingNumber());

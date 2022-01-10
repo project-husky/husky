@@ -32,7 +32,7 @@ import org.opensaml.xacml.profile.saml.impl.XACMLPolicyQueryTypeUnmarshaller;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
+class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 
 	private PrivacyPolicyQueryBuilderImpl builder;
 	private String testConsent;
@@ -87,7 +87,7 @@ public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 	 * {@link org.husky.xua.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#consent(java.lang.String)}.
 	 */
 	@Test
-	public void testConsent() {
+	void testConsent() {
 		final PrivacyPolicyQuery ref = builder.consent(testConsent).create();
 		assertNotNull(ref);
 		assertEquals(testConsent, ref.getConsent());
@@ -98,7 +98,7 @@ public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 	 * {@link org.husky.xua.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#create(org.opensaml.xacml.profile.saml.XACMLPolicyQueryType)}.
 	 */
 	@Test
-	public void testCreateXACMLPolicyQueryType() {
+	void testCreateXACMLPolicyQueryType() {
 		final PrivacyPolicyQuery ref = builder.create(testXacmlPolicyQuery);
 		assertNotNull(ref);
 		assertEquals(testXacmlPolicyQuery, ((PrivacyPolicyQueryImpl) ref).getWrappedObject());
@@ -109,7 +109,7 @@ public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 	 * {@link org.husky.xua.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#destination(java.lang.String)}.
 	 */
 	@Test
-	public void testDestination() {
+	void testDestination() {
 		final PrivacyPolicyQuery ref = builder.destination(testDestination).create();
 		assertNotNull(ref);
 		assertEquals(testDestination, ref.getDestination());
@@ -120,7 +120,7 @@ public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 	 * {@link org.husky.xua.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#id(java.lang.String)}.
 	 */
 	@Test
-	public void testId() {
+	void testId() {
 		final PrivacyPolicyQuery ref = builder.id(testId).create();
 		assertNotNull(ref);
 		assertEquals(testId, ref.getId());
@@ -131,7 +131,7 @@ public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 	 * {@link org.husky.xua.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#version(java.lang.String)}.
 	 */
 	@Test
-	public void testInstanceIdentifier() {
+	void testInstanceIdentifier() {
 		final PrivacyPolicyQuery ref = builder.instanceIdentifier(testInstanceIdentifier).create();
 		assertNotNull(ref);
 		assertEquals(testInstanceIdentifier, ref.getInstanceIdentifier());
@@ -142,7 +142,7 @@ public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 	 * {@link org.husky.xua.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#issueInstant(java.util.Calendar)}.
 	 */
 	@Test
-	public void testIssueInstant() {
+	void testIssueInstant() {
 		final PrivacyPolicyQuery ref = builder.issueInstant(testIssueInstant).create();
 		assertNotNull(ref);
 		assertEquals(testIssueInstant, ref.getIssueInstant());
@@ -153,7 +153,7 @@ public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 	 * {@link org.husky.xua.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#issuer(java.lang.String)}.
 	 */
 	@Test
-	public void testIssuer() {
+	void testIssuer() {
 		final PrivacyPolicyQuery ref = builder.issuer(testIssuer).create();
 		assertNotNull(ref);
 		assertEquals(testIssuer, ref.getIssuer());
@@ -164,7 +164,7 @@ public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 	 * {@link org.husky.xua.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#version(java.lang.String)}.
 	 */
 	@Test
-	public void testVersion() {
+	void testVersion() {
 		final PrivacyPolicyQuery ref = builder.version(testVersion).create();
 		assertNotNull(ref);
 		assertEquals(testVersion, ref.getVersion());

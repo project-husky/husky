@@ -10,12 +10,13 @@
  */
 package org.husky.valueset.model;
 
-import org.husky.common.enums.LanguageCode;
-import org.husky.common.utils.Util;
-import org.husky.valueset.enums.DesignationType;
+import java.io.Serializable;
 
 import javax.annotation.processing.Generated;
-import java.io.Serializable;
+
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.husky.common.enums.LanguageCode;
+import org.husky.valueset.enums.DesignationType;
 
 /**
  * Designations are language dependent display names for the code. For any language there might be multiple, each
@@ -168,7 +169,8 @@ public class Designation implements Serializable {
      */
     @Override
     public int hashCode() {
-        return Util.getChecksum(this);
+		return new HashCodeBuilder(17, 37).append(this.languageCode).append(this.type).append(this.displayName)
+				.toHashCode();
     }
 
     /**

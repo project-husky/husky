@@ -10,15 +10,17 @@
  */
 package org.husky.common.model;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.common.hl7cdar2.POCDMT000040Participant2;
-import org.husky.common.utils.DateUtil;
-import org.husky.common.utils.time.Hl7Dtm;
-
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.husky.common.enums.NullFlavor;
+import org.husky.common.hl7cdar2.IVLTS;
+import org.husky.common.hl7cdar2.POCDMT000040Participant2;
+import org.husky.common.utils.time.DateTimes;
+import org.husky.common.utils.time.Hl7Dtm;
 
 /**
  * The Class Participant. E.g. employer and school informational contacts MAY be recorded as participants.
@@ -90,7 +92,7 @@ public class Participant {
      */
     @Nullable
     public Instant getTimeAsInstant() {
-        return Optional.ofNullable(this.getTimeAsHl7Dtm()).map(Hl7Dtm::toInstant).orElse(null);
+		return Optional.ofNullable(this.getTimeAsHl7Dtm()).map(Hl7Dtm::toInstant).orElse(Hl7Dtm.now().toInstant());
     }
 
     /**
@@ -108,7 +110,11 @@ public class Participant {
      * @param date the date
      */
     public void setTime(Date date) {
-        mParticipant.setTime(DateUtil.date2IvltsTzon(date));
+		if (date == null) {
+			mParticipant.setTime(new IVLTS(NullFlavor.UNKNOWN));
+		} else {
+			mParticipant.setTime(new IVLTS(DateTimes.toHl7Dtm(date.toInstant())));
+		}
     }
 
     /**

@@ -12,18 +12,11 @@ package org.husky.common.communication;
 
 import java.net.URI;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * The Class Destination. Describes an Endpoint for a transmission or
  * communication.
  */
 public class Destination {
-
-	/** The SLF4J logger instance. */
-	private static Logger log = LoggerFactory.getLogger(Destination.class);
-
 
 	/**
 	 * <div class="en">The key store for TLS</div>
@@ -207,6 +200,8 @@ public class Destination {
 	 * @param trustStoreType
 	 *            the type of the truststore file (default: jks)
 	 */
+	/* in use by external libraries */
+	@SuppressWarnings("java:S107")
 	public Destination(String senderOrganizationalOid, URI uri, String keyStore,
 			String keyStorePassword, String keyStoreType, String trustStore,
 			String trustStorePassword, String trustStoreType) {

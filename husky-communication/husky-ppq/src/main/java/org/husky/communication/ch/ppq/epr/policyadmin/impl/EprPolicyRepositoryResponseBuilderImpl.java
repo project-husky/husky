@@ -10,10 +10,10 @@
  */
 package org.husky.communication.ch.ppq.epr.policyadmin.impl;
 
-import org.husky.communication.ch.ppq.epr.policyadmin.api.BasePolicyAdministration;
 import org.husky.communication.ch.ppq.epr.policyadmin.api.EprPolicyRepositoryResponse;
 import org.husky.communication.ch.ppq.epr.policyadmin.api.EprPolicyRepositoryResponseBuilder;
 import org.husky.communication.ch.ppq.epr.policyadmin.api.OpenSamlEprPolicyRepositoryResponse;
+import org.husky.communication.ch.ppq.epr.policyadmin.api.PolicyAdministrationConstants;
 import org.opensaml.core.xml.AbstractXMLObjectBuilder;
 
 /**
@@ -31,9 +31,9 @@ public class EprPolicyRepositoryResponseBuilderImpl
 	private String status;
 
 	public OpenSamlEprPolicyRepositoryResponse buildObject() {
-		return buildObject(BasePolicyAdministration.DEFAULT_NS_URI,
+		return buildObject(PolicyAdministrationConstants.DEFAULT_NS_URI,
 				EprPolicyRepositoryResponse.DEFAULT_ELEMENT_LOCAL_NAME,
-				BasePolicyAdministration.DEFAULT_PREFIX);
+				PolicyAdministrationConstants.DEFAULT_PREFIX);
 	}
 
 	@Override

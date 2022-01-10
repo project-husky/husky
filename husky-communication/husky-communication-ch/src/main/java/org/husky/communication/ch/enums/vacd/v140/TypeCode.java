@@ -27,258 +27,258 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="fr">Autres sans spécification</div> <div class="it">Altri non
 	 * meglio precisati</div>
 	 */
-	ANDERE_NICHT_NAHER_SPEZIFIZIERT("60999", "Andere nicht näher spezifiziert"),
+	ANDERE_NICHT_NAHER_SPEZIFIZIERT(TypeCode.ANDERE_NICHT_NAHER_SPEZIFIZIERT_CODE, "Andere nicht näher spezifiziert"),
 	/**
 	 * <div class="de">Anästhesie Bericht</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 */
-	ANASTHESIE_BERICHT("60032", "Anästhesie Bericht"),
+	ANASTHESIE_BERICHT(TypeCode.ANASTHESIE_BERICHT_CODE, "Anästhesie Bericht"),
 	/**
 	 * <div class="de">Austrittsbericht (lang-pflegerisch)</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 */
-	AUSTRITTSBERICHT_LANG_PFLEGERISCH("60012", "Austrittsbericht (lang-pflegerisch)"),
+	AUSTRITTSBERICHT_LANG_PFLEGERISCH(TypeCode.AUSTRITTSBERICHT_LANG_PFLEGERISCH_CODE, "Austrittsbericht (lang-pflegerisch)"),
 	/**
 	 * <div class="de"> Austrittsbericht (lang-ärztlich)</div>
 	 * <div class="fr">Lettre de sortie</div> <div class="it"></div>
 	 */
-	AUSTRITTSBERICHT_LANG_ARZTLICH("60010", "Austrittsbericht (lang-ärztlich)"),
+	AUSTRITTSBERICHT_LANG_ARZTLICH(TypeCode.AUSTRITTSBERICHT_LANG_ARZTLICH_CODE, "Austrittsbericht (lang-ärztlich)"),
 	/**
 	 * <div class="de"> Behandlungsschema</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 */
-	BEHANDLUNGSSCHEMA("60045", "Behandlungsschema"),
+	BEHANDLUNGSSCHEMA(TypeCode.BEHANDLUNGSSCHEMA_CODE, "Behandlungsschema"),
 	/**
 	 * <div class="de">Beschlussprotokoll</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 */
-	BESCHLUSSPROTOKOLL("60039", "Beschlussprotokoll"),
+	BESCHLUSSPROTOKOLL(TypeCode.BESCHLUSSPROTOKOLL_CODE, "Beschlussprotokoll"),
 	/**
 	 * <div class="de">Dokument mit Kontraindikationen,
 	 * Unverträglichkeiten….</div> <div class="fr"></div> <div class="it"></div>
 	 */
-	DOKUMENT_MIT_KONTRAINDIKATIONEN_UNVERTRAGLICHKEITEN("60046",
+	DOKUMENT_MIT_KONTRAINDIKATIONEN_UNVERTRAGLICHKEITEN(TypeCode.DOKUMENT_MIT_KONTRAINDIKATIONEN_UNVERTRAGLICHKEITEN_CODE,
 			"Dokument mit Kontraindikationen, Unverträglichkeiten…."),
 	/**
 	 * <div class = "de"> Echokardiographie - Befund </div> <div class = "fr">
 	 * </div> <div class = "it"> </div>
 	 */
-	ECHOKARDIOGRAPHIE_BEFUND("60029", "Echokardiographie-Befund"),
+	ECHOKARDIOGRAPHIE_BEFUND(TypeCode.ECHOKARDIOGRAPHIE_BEFUND_CODE, "Echokardiographie-Befund"),
 	/**
 	 * <div class="de">Eintrittsbericht </div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 */
-	EINTRITTSBERICHT("60008", "Eintrittsbericht"),
+	EINTRITTSBERICHT(TypeCode.EINTRITTSBERICHT_CODE, "Eintrittsbericht"),
 	/**
 	 * <div class="de">elektronischer Impfausweis</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 */
-	ELEKTRONISCHER_IMPFAUSWEIS("60043", "elektronischer Impfausweis"),
+	ELEKTRONISCHER_IMPFAUSWEIS(TypeCode.ELEKTRONISCHER_IMPFAUSWEIS_CODE, "elektronischer Impfausweis"),
 	/**
 	 * <div class="de">elektronisches Rezept</div> <div class="fr">Ordonnance de
 	 * médicaments</div> <div class="it"></div>
 	 */
-	ELEKTRONISCHES_REZEPT("60006", "elektronisches Rezept"),
+	ELEKTRONISCHES_REZEPT(TypeCode.ELEKTRONISCHES_REZEPT_CODE, "elektronisches Rezept"),
 	/**
 	 * <div class="de">Geburtsanzeige</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 */
-	GEBURTSANZEIGE("60047", "Geburtsanzeige"),
+	GEBURTSANZEIGE(TypeCode.GEBURTSANZEIGE_CODE, "Geburtsanzeige"),
 	/**
 	 * <div class="de">Herzkatheter-Befund</div> <div class="fr">Rapport de
 	 * cathétérisme cardiaque</div> <div class="it"></div>
 	 */
-	HERZKATHETER_BEFUND("60028", "Herzkatheter-Befund"),
+	HERZKATHETER_BEFUND(TypeCode.HERZKATHETER_BEFUND_CODE, "Herzkatheter-Befund"),
 	/**
 	 * <div class="de">Histologie-Befund</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 */
-	HISTOLOGIE_BEFUND("60027", "Histologie-Befund"),
+	HISTOLOGIE_BEFUND(TypeCode.HISTOLOGIE_BEFUND_CODE, "Histologie-Befund"),
 	/**
 	 * <div class="de">Kardiologie Verlaufs-Bericht</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 */
-	KARDIOLOGIE_VERLAUFS_BERICHT("60037", "Kardiologie Verlaufs-Bericht"),
+	KARDIOLOGIE_VERLAUFS_BERICHT(TypeCode.KARDIOLOGIE_VERLAUFS_BERICHT_CODE, "Kardiologie Verlaufs-Bericht"),
 	/**
 	 * <div class="de">klinisches Verlaufsblatt</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 */
-	KLINISCHES_VERLAUFSBLATT("60036", "klinisches Verlaufsblatt"),
+	KLINISCHES_VERLAUFSBLATT(TypeCode.KLINISCHES_VERLAUFSBLATT_CODE, "klinisches Verlaufsblatt"),
 	/**
 	 * <div class="de">Knochenmark- Biopsie-Befund</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 */
-	KNOCHENMARK_BIOPSIE_BEFUND("60026", "Knochenmark-Biopsie-Befund"),
+	KNOCHENMARK_BIOPSIE_BEFUND(TypeCode.KNOCHENMARK_BIOPSIE_BEFUND_CODE, "Knochenmark-Biopsie-Befund"),
 	/**
 	 * <div class="de">Konsilauftrag (allgemein)</div> <div class="fr">Demande
 	 * de consultation</div> <div class="it"></div>
 	 */
-	KONSILAUFTRAG_ALLGEMEIN("60017", "Konsilauftrag (allgemein)"),
+	KONSILAUFTRAG_ALLGEMEIN(TypeCode.KONSILAUFTRAG_ALLGEMEIN_CODE, "Konsilauftrag (allgemein)"),
 	/**
 	 * <div class="de"> Konsultationsbericht</div> <div class="fr">Rapport de
 	 * consultation</div> <div class="it"></div>
 	 */
-	KONSULTATIONSBERICHT("60021", "Konsultationsbericht"),
+	KONSULTATIONSBERICHT(TypeCode.KONSULTATIONSBERICHT_CODE, "Konsultationsbericht"),
 	/**
 	 * <div class="de">Kostengutsprache </div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 */
-	KOSTENGUTSPRACHE("60048", "Kostengutsprache"),
+	KOSTENGUTSPRACHE(TypeCode.KOSTENGUTSPRACHE_CODE, "Kostengutsprache"),
 	/**
 	 * <div class="de">Kurve Intensivstation</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 */
-	KURVE_INTENSIVSTATION("60038", "Kurve Intensivstation"),
+	KURVE_INTENSIVSTATION(TypeCode.KURVE_INTENSIVSTATION_CODE, "Kurve Intensivstation"),
 	/**
 	 * <div class="de">Kurz-Austrittsbericht (pflegerisch)</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 */
-	KURZ_AUSTRITTSBERICHT_PFLEGERISCH("60011", "Kurz-Austrittsbericht (pflegerisch)"),
+	KURZ_AUSTRITTSBERICHT_PFLEGERISCH(TypeCode.KURZ_AUSTRITTSBERICHT_PFLEGERISCH_CODE, "Kurz-Austrittsbericht (pflegerisch)"),
 	/**
 	 * <div class="de">Kurz- Austrittsbericht (ärztlich)</div>
 	 * <div class="fr">Avis de sortie</div> <div class="it"></div>
 	 */
-	KURZ_AUSTRITTSBERICHT_ARZTLICH("60009", "Kurz-Austrittsbericht (ärztlich)"),
+	KURZ_AUSTRITTSBERICHT_ARZTLICH(TypeCode.KURZ_AUSTRITTSBERICHT_ARZTLICH_CODE, "Kurz-Austrittsbericht (ärztlich)"),
 	/**
 	 * <div class="de"> Laborauftrag</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 */
-	LABORAUFTRAG("60018", "Laborauftrag"),
+	LABORAUFTRAG(TypeCode.LABORAUFTRAG_CODE, "Laborauftrag"),
 	/**
 	 * <div class="de">Labor-Befund</div> <div class="fr">Résultat de
 	 * laboratoire</div> <div class="it"></div>
 	 */
-	LABOR_BEFUND("60023", "Labor-Befund"),
+	LABOR_BEFUND(TypeCode.LABOR_BEFUND_CODE, "Labor-Befund"),
 	/**
 	 * <div class="de">Lungenfunktions-Befund</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 */
-	LUNGENFUNKTIONS_BEFUND("60030", "Lungenfunktions-Befund"),
+	LUNGENFUNKTIONS_BEFUND(TypeCode.LUNGENFUNKTIONS_BEFUND_CODE, "Lungenfunktions-Befund"),
 	/**
 	 * <div class="de">Medikamentenliste (aktuell)</div> <div class="fr">Liste
 	 * des médicaments</div> <div class="it"></div>
 	 */
-	MEDIKAMENTENLISTE_AKTUELL("60005", "Medikamentenliste (aktuell)"),
+	MEDIKAMENTENLISTE_AKTUELL(TypeCode.MEDIKAMENTENLISTE_AKTUELL_CODE, "Medikamentenliste (aktuell)"),
 	/**
 	 * <div class="de">Meldung übertragbare Erkrankung</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 */
-	MELDUNG_UBERTRAGBARE_ERKRANKUNG("60042", "Meldung übertragbare Erkrankung"),
+	MELDUNG_UBERTRAGBARE_ERKRANKUNG(TypeCode.MELDUNG_UBERTRAGBARE_ERKRANKUNG_CODE, "Meldung übertragbare Erkrankung"),
 	/**
 	 * <div class="de">Nicht spezifizierte Bilddaten</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 */
-	NICHT_SPEZIFIZIERTE_BILDDATEN("60040", "Nicht spezifizierte Bilddaten"),
+	NICHT_SPEZIFIZIERTE_BILDDATEN(TypeCode.NICHT_SPEZIFIZIERTE_BILDDATEN_CODE, "Nicht spezifizierte Bilddaten"),
 	/**
 	 * <div class="de"> Notfallbericht</div> <div class="fr">Rapport de
 	 * consultation aux urgences</div> <div class="it"></div>
 	 */
-	NOTFALLBERICHT("60035", "Notfallbericht"),
+	NOTFALLBERICHT(TypeCode.NOTFALLBERICHT_CODE, "Notfallbericht"),
 	/**
 	 * <div class="de">Notfall-Ausweis</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 */
-	NOTFALL_AUSWEIS("60044", "Notfall-Ausweis"),
+	NOTFALL_AUSWEIS(TypeCode.NOTFALL_AUSWEIS_CODE, "Notfall-Ausweis"),
 	/**
 	 * <div class="de">OP-Bericht</div> <div class="fr">Protocole
 	 * opératoire</div> <div class="it"></div>
 	 */
-	OP_BERICHT("60033", "OP-Bericht"),
+	OP_BERICHT(TypeCode.OP_BERICHT_CODE, "OP-Bericht"),
 	/**
 	 * <div class="de">Pathologieauftrag</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 */
-	PATHOLOGIEAUFTRAG("60019", "Pathologieauftrag"),
+	PATHOLOGIEAUFTRAG(TypeCode.PATHOLOGIEAUFTRAG_CODE, "Pathologieauftrag"),
 	/**
 	 * <div class="de">Pathologie-Befund</div> <div class="fr">Rapport de
 	 * pathologie</div> <div class="it"></div>
 	 */
-	PATHOLOGIE_BEFUND("60025", "Pathologie-Befund"),
+	PATHOLOGIE_BEFUND(TypeCode.PATHOLOGIE_BEFUND_CODE, "Pathologie-Befund"),
 	/**
 	 * <div class="de">Patienteneinwilligung </div> <div class="fr">Consentement
 	 * du patient</div> <div class="it"></div>
 	 */
-	PATIENTENEINWILLIGUNG("60002", "Patienteneinwilligung "),
+	PATIENTENEINWILLIGUNG(TypeCode.PATIENTENEINWILLIGUNG_CODE, "Patienteneinwilligung "),
 	/**
 	 * <div class="de">Patienteneinwilligung für die Verwendung der
 	 * elektronischen Daten</div> <div class="fr">Consentement du patient au
 	 * dossier électronique</div> <div class="it"></div>
 	 */
-	PATIENTENEINWILLIGUNG_FUR_DIE_VERWENDUNG_DER_ELEKTRONISCHEN_DATEN("60001",
+	PATIENTENEINWILLIGUNG_FUR_DIE_VERWENDUNG_DER_ELEKTRONISCHEN_DATEN(TypeCode.PATIENTENEINWILLIGUNG_FUR_DIE_VERWENDUNG_DER_ELEKTRONISCHEN_DATEN_CODE,
 			"Patienteneinwilligung für die Verwendung der elektronischen Daten"),
 	/**
 	 * <div class = "de"> Patientenverfügung </div> <div class = "fr"> </div>
 	 * <div class = "it"> </div>
 	 */
-	PATIENTENVERFUGUNG("60003", "Patientenverfügung"),
+	PATIENTENVERFUGUNG(TypeCode.PATIENTENVERFUGUNG_CODE, "Patientenverfügung"),
 	/**
 	 * <div class="de">Patient Summary (medizinische Zusammenfassung)</div>
 	 * <div class="fr">Résumé d'un patient</div> <div class="it"></div>
 	 */
-	PATIENT_SUMMARY_MEDIZINISCHE_ZUSAMMENFASSUNG("60004",
+	PATIENT_SUMMARY_MEDIZINISCHE_ZUSAMMENFASSUNG(TypeCode.PATIENT_SUMMARY_MEDIZINISCHE_ZUSAMMENFASSUNG_CODE,
 			"Patient Summary (medizinische Zusammenfassung)"),
 	/**
 	 * <div class= "de"> Pflegebericht </div> <div class= "fr"></div>
 	 * <div class= "it"></div>
 	 */
-	PFLEGEBERICHT("60016", "Pflegebericht"),
+	PFLEGEBERICHT(TypeCode.PFLEGEBERICHT_CODE, "Pflegebericht"),
 	/**
 	 * <div class="de">Pflegeplan (allgemein)</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 */
-	PFLEGEPLAN_ALLGEMEIN("60015", "Pflegeplan (allgemein)"),
+	PFLEGEPLAN_ALLGEMEIN(TypeCode.PFLEGEPLAN_ALLGEMEIN_CODE, "Pflegeplan (allgemein)"),
 	/**
 	 * <div class="de">Physiotherapiebericht </div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 */
-	PHYSIOTHERAPIEBERICHT("60031", "Physiotherapiebericht"),
+	PHYSIOTHERAPIEBERICHT(TypeCode.PHYSIOTHERAPIEBERICHT_CODE, "Physiotherapiebericht"),
 	/**
 	 * <div class="de">Radiologieauftrag </div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 */
-	RADIOLOGIEAUFTRAG("60020", "Radiologieauftrag"),
+	RADIOLOGIEAUFTRAG(TypeCode.RADIOLOGIEAUFTRAG_CODE, "Radiologieauftrag"),
 	/**
 	 * <div class="de">Radiologie-Befund</div> <div class="fr">Rapport
 	 * d'imagerie</div> <div class="it"></div>
 	 */
-	RADIOLOGIE_BEFUND("60024", "Radiologie-Befund"),
+	RADIOLOGIE_BEFUND(TypeCode.RADIOLOGIE_BEFUND_CODE, "Radiologie-Befund"),
 	/**
 	 * <div class="de">Radiologische Bilddaten</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 */
-	RADIOLOGISCHE_BILDDATEN("60041", "Radiologische Bilddaten"),
+	RADIOLOGISCHE_BILDDATEN(TypeCode.RADIOLOGISCHE_BILDDATEN_CODE, "Radiologische Bilddaten"),
 	/**
 	 * <div class="de">Unbekannt</div> <div class="fr">Inconnu</div>
 	 * <div class="it">Ignoto</div>
 	 */
-	UNBEKANNT("60900", "Unbekannt"),
+	UNBEKANNT(TypeCode.UNBEKANNT_CODE, "Unbekannt"),
 	/**
 	 * <div class="de">Untersuchungsbefund (allgemein)</div>
 	 * <div class="fr">Rapport d'examen (non laboratoire)</div>
 	 * <div class="it"></div>
 	 */
-	UNTERSUCHUNGSBEFUND_ALLGEMEIN("60022", "Untersuchungsbefund (allgemein)"),
+	UNTERSUCHUNGSBEFUND_ALLGEMEIN(TypeCode.UNTERSUCHUNGSBEFUND_ALLGEMEIN_CODE, "Untersuchungsbefund (allgemein)"),
 	/**
 	 * <div class="de">Verlaufs- / Austrittsbericht Gynäkologie und
 	 * Geburtshilfe</div> <div class="fr"></div> <div class="it"></div>
 	 */
-	VERLAUFS_AUSTRITTSBERICHT_GYNAKOLOGIE_UND_GEBURTSHILFE("60014",
+	VERLAUFS_AUSTRITTSBERICHT_GYNAKOLOGIE_UND_GEBURTSHILFE(TypeCode.VERLAUFS_AUSTRITTSBERICHT_GYNAKOLOGIE_UND_GEBURTSHILFE_CODE,
 			"Verlaufs- / Austrittsbericht Gynäkologie und Geburtshilfe"),
 	/**
 	 * <div class = "de"> Verlegungsbericht </div> <div class = "fr"> </div>
 	 * <div class = "it"> </div>
 	 */
-	VERLEGUNGSBERICHT("60013", "Verlegungsbericht"),
+	VERLEGUNGSBERICHT(TypeCode.VERLEGUNGSBERICHT_CODE, "Verlegungsbericht"),
 	/**
 	 * <div class="de">Wundbefund</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 */
-	WUNDBEFUND("60034", "Wundbefund"),
+	WUNDBEFUND(TypeCode.WUNDBEFUND_CODE, "Wundbefund"),
 	/**
 	 * <div class="de">Zuweisungsschreiben/ Einweisungsschreiben</div>
 	 * <div class="fr">Demande d’admission</div> <div class="it"></div>
 	 */
-	ZUWEISUNGSSCHREIBENEINWEISUNGSSCHREIBEN("60007", "Zuweisungsschreiben/Einweisungsschreiben");
+	ZUWEISUNGSSCHREIBENEINWEISUNGSSCHREIBEN(TypeCode.ZUWEISUNGSSCHREIBENEINWEISUNGSSCHREIBEN_CODE, "Zuweisungsschreiben/Einweisungsschreiben");
 
 	/**
 	 * <div class="de">Code für Andere nicht näher spezifiziert</div>

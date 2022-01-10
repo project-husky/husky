@@ -24,7 +24,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Element;
 
-public class ResponseDeserializerImplTest extends AbstractTestHelper {
+class ResponseDeserializerImplTest extends AbstractTestHelper {
 
 	private ResponseDeserializerImpl testDeserializer;
 	private byte[] testXmlByteArray;
@@ -50,7 +50,7 @@ public class ResponseDeserializerImplTest extends AbstractTestHelper {
 	 * @throws DeserializeException
 	 */
 	@Test
-	public void testFromXmlByteArray() throws DeserializeException {
+	void testFromXmlByteArray() throws DeserializeException {
 		final Response ref = testDeserializer.fromXmlByteArray(testXmlByteArray);
 		assertNotNull(ref);
 	}
@@ -62,7 +62,7 @@ public class ResponseDeserializerImplTest extends AbstractTestHelper {
 	 * @throws DeserializeException
 	 */
 	@Test
-	public void testFromXmlElement() throws DeserializeException {
+	void testFromXmlElement() throws DeserializeException {
 		final Response ref = testDeserializer.fromXmlElement(testXmlElement);
 		assertNotNull(ref);
 	}
@@ -74,7 +74,7 @@ public class ResponseDeserializerImplTest extends AbstractTestHelper {
 	 * @throws DeserializeException
 	 */
 	@Test
-	public void testFromXmlString() throws DeserializeException {
+	void testFromXmlString() throws DeserializeException {
 		final Response ref = testDeserializer.fromXmlString(testXmlString);
 		assertNotNull(ref);
 	}

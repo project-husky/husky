@@ -11,18 +11,32 @@
 
 package org.husky.common.model;
 
-import org.husky.common.enums.NullFlavor;
-import org.husky.common.enums.Ucum;
-import org.husky.common.hl7cdar2.*;
-import org.husky.common.utils.Util;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
+
+import org.husky.common.enums.NullFlavor;
+import org.husky.common.enums.Ucum;
+import org.husky.common.hl7cdar2.ANY;
+import org.husky.common.hl7cdar2.BL;
+import org.husky.common.hl7cdar2.CD;
+import org.husky.common.hl7cdar2.ED;
+import org.husky.common.hl7cdar2.INT;
+import org.husky.common.hl7cdar2.IVLINT;
+import org.husky.common.hl7cdar2.IVLPQ;
+import org.husky.common.hl7cdar2.IVXBINT;
+import org.husky.common.hl7cdar2.IVXBPQ;
+import org.husky.common.hl7cdar2.PQ;
+import org.husky.common.hl7cdar2.QTY;
+import org.husky.common.hl7cdar2.RTO;
+import org.husky.common.hl7cdar2.ST;
+import org.husky.common.hl7cdar2.TEL;
+
 
 /**
  * Ein Wert bestehend aus eigentlichem Wert und der zugehörigen Einheit.
@@ -30,7 +44,7 @@ import java.util.Map;
 public class Value {
 
     private static final String NAMESPACE_HL7_V3 = "urn:hl7-org:v3";
-
+    private static final String NOT_YET_IMPLEMENTED_TEXT = "*** TODO: This is not yet implemented value type...";
     /**
      * The m value.
      */
@@ -67,32 +81,6 @@ public class Value {
         this(new PQ());
         final var pq = (PQ) mValue;
         pq.setValue(value.toString());
-    }
-
-    /**
-     * Instantiates a new value with the parameters for a MDHT IVL_PQ Objekt with two PQ Values (A low and high bound of
-     * physical quantities).
-     *
-     * @param low  The lower bound
-     * @param high The upper bound
-     */
-    public Value(BigDecimal low, BigDecimal high) {
-        final var ivlPq = new IVLPQ();
-        final var mlow = new IVXBPQ();
-        final var mhigh = new IVXBPQ();
-
-        if (low != null && high != null) {
-
-            mlow.setValue(low.toString());
-            mlow.setUnit("");
-            ivlPq.getRest().add(new JAXBElement<>(new QName(NAMESPACE_HL7_V3, "low", ""), IVXBPQ.class, mlow));
-
-            mhigh.setValue(high.toString());
-            mhigh.setUnit("");
-            ivlPq.getRest().add(new JAXBElement<>(new QName(NAMESPACE_HL7_V3, "high", ""), IVXBPQ.class, mhigh));
-        }
-
-        mValue = ivlPq;
     }
 
     /**
@@ -336,7 +324,7 @@ public class Value {
     public Value(String value, boolean isText) {
         final ED ed;
         if (!isText) {
-            ed = Util.createReference(value);
+			ed = Reference.createReference(value);
         } else {
             ed = new ED(value);
         }
@@ -450,17 +438,17 @@ public class Value {
     }
 
     public void setOriginalTextReference(String originalText) {
-        if (mValue instanceof CD) {
-            final var code = new Code((CD) mValue);
+		if (mValue instanceof CD cd) {
+			final var code = new Code(cd);
             code.setOriginalText(originalText);
         }
-        if (mValue instanceof ED) {
+		if (mValue instanceof ED ed) {
             final var tel = new TEL();
             if (!originalText.startsWith("#")) {
                 originalText = "#" + originalText;
             }
             tel.setValue(originalText);
-            ((ED) mValue).setReference(tel);
+			ed.setReference(tel);
         }
     }
 
@@ -499,15 +487,8 @@ public class Value {
         Map<String, PQ> pqElements = new HashMap<>();
         if (range != null) {
             for (JAXBElement<? extends QTY> pq : range.getRest()) {
-                var value = new PQ();
+				var value = extractPqValue(pq);
                 var elementName = "";
-                if (pq != null && PQ.class.equals(pq.getDeclaredType()) && pq.getValue() != null) {
-                    value = (PQ) pq.getValue();
-                }
-
-                if (pq != null && IVXBPQ.class.equals(pq.getDeclaredType()) && pq.getValue() != null) {
-                    value = (IVXBPQ) pq.getValue();
-                }
 
                 if (pq != null && pq.getName() != null) {
                     elementName = pq.getName().getLocalPart();
@@ -521,6 +502,19 @@ public class Value {
 
         return pqElements;
     }
+
+	private PQ extractPqValue(JAXBElement<? extends QTY> pq) {
+		var value = new PQ();
+		if (pq != null && PQ.class.equals(pq.getDeclaredType()) && pq.getValue() != null) {
+			value = (PQ) pq.getValue();
+		}
+
+		if (pq != null && IVXBPQ.class.equals(pq.getDeclaredType()) && pq.getValue() != null) {
+			value = (IVXBPQ) pq.getValue();
+		}
+
+		return value;
+	}
 
     /**
      * Returns the lower bound of an interval of physical measurements
@@ -573,24 +567,16 @@ public class Value {
         if (isRto()) {
             final var rto = (RTO) mValue;
             var retVal = "";
-            var numeratorUnit = "";
             var denominatorUnit = "";
+			var numeratorUnit = "";
 
             if (rto != null) {
                 QTY numerator = rto.getNumerator();
                 QTY denominator = rto.getDenominator();
-                if (numerator instanceof PQ) {
-                    numeratorUnit = ((PQ) numerator).getUnit();
-                }
 
-                if (denominator instanceof PQ) {
-                    denominatorUnit = ((PQ) denominator).getUnit();
-                }
+				numeratorUnit = extractUnit(numerator);
+				denominatorUnit = extractUnit(denominator);
             }
-            if (!numeratorUnit.isEmpty())
-                numeratorUnit = " " + numeratorUnit;
-            if (!denominatorUnit.isEmpty())
-                denominatorUnit = " " + denominatorUnit;
 
             if (numeratorUnit.equals(denominatorUnit))
                 retVal = numeratorUnit;
@@ -601,6 +587,18 @@ public class Value {
         }
         return null;
     }
+
+	private String extractUnit(QTY numerator) {
+		var unit = "";
+		if (numerator instanceof PQ pq) {
+			unit = pq.getUnit();
+		}
+
+		if (!unit.isEmpty())
+			unit = " " + unit;
+
+		return unit;
+	}
 
     /**
      * Returns the text of the underlying MDHT type RTO (Ratio)
@@ -617,15 +615,15 @@ public class Value {
             if (rto != null) {
                 QTY numerator = rto.getNumerator();
                 QTY denominator = rto.getDenominator();
-                if (numerator instanceof PQ) {
-                    numeratorValue = ((PQ) numerator).getValue();
+				if (numerator instanceof PQ pq) {
+					numeratorValue = pq.getValue();
                 } else
-                    numeratorValue = "*** TODO: This is not yet implemented value type...";
+                    numeratorValue = NOT_YET_IMPLEMENTED_TEXT;
 
-                if (denominator instanceof PQ) {
-                    denominatorValue = ((PQ) denominator).getValue();
+				if (denominator instanceof PQ pq) {
+					denominatorValue = pq.getValue();
                 } else
-                    denominatorValue = "*** TODO: This is not yet implemented value type...";
+                    denominatorValue = NOT_YET_IMPLEMENTED_TEXT;
 
             }
             retVal = numeratorValue + " / " + denominatorValue;
@@ -658,11 +656,6 @@ public class Value {
      * @return boolean true, if the Value is a code, false otherwise
      */
     public boolean isCode() {
-        // if (mValue instanceof CD) {
-        // return true;
-        // } else {
-        // return false;
-        // }
         return (mValue instanceof CD);
     }
 
@@ -722,15 +715,13 @@ public class Value {
     }
 
     private void setPqValue(String value) {
-        if (mValue instanceof PQ) {
-            final var pq = (PQ) mValue;
+		if (mValue instanceof PQ pq) {
             pq.setValue(value);
         }
     }
 
     public void setUcumUnit(String unit) {
-        if (mValue instanceof PQ) {
-            final var pq = (PQ) mValue;
+		if (mValue instanceof PQ pq) {
             pq.setUnit(unit);
         }
     }
@@ -768,7 +759,7 @@ public class Value {
         else if (isInt())
             resultText = getIntText();
         else
-            resultText = "*** TODO: This is not yet implemented value type...";
+            resultText = NOT_YET_IMPLEMENTED_TEXT;
 
         if (resultText == null)
             resultText = "";
@@ -778,4 +769,5 @@ public class Value {
 
         return resultText;
     }
+
 }

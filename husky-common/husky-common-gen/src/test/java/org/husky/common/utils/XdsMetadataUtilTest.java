@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
  * @since Mar 8, 2017 3:05:46 PM
  *
  */
-public class XdsMetadataUtilTest {
+class XdsMetadataUtilTest {
 
 	private Calendar testCalendar;
 	private String testDTM_Y;
@@ -76,7 +76,7 @@ public class XdsMetadataUtilTest {
 	 * {@link org.husky.common.utils.XdsMetadataUtil#convertDtmStringToDate(java.lang.String)}.
 	 */
 	@Test
-	public void testConvertDtmStringToDateYear() {
+	void testConvertDtmStringToDateYear() {
 		final Date ref1 = XdsMetadataUtil.convertDtmStringToDate(testDTM_Y);
 		assertNotNull(ref1);
 		final Calendar refCal1 = Calendar.getInstance();
@@ -94,7 +94,7 @@ public class XdsMetadataUtilTest {
 	 * {@link org.husky.common.utils.XdsMetadataUtil#convertDtmStringToDate(java.lang.String)}.
 	 */
 	@Test
-	public void testConvertDtmStringToDateYearMonth() {
+	void testConvertDtmStringToDateYearMonth() {
 		final Date ref1 = XdsMetadataUtil.convertDtmStringToDate(testDTM_YM);
 		assertNotNull(ref1);
 		final Calendar refCal1 = Calendar.getInstance();
@@ -112,7 +112,7 @@ public class XdsMetadataUtilTest {
 	 * {@link org.husky.common.utils.XdsMetadataUtil#convertDtmStringToDate(java.lang.String)}.
 	 */
 	@Test
-	public void testConvertDtmStringToDateYearMonthDay() {
+	void testConvertDtmStringToDateYearMonthDay() {
 		final Date ref1 = XdsMetadataUtil.convertDtmStringToDate(testDTM_YMD);
 		assertNotNull(ref1);
 		final Calendar refCal1 = Calendar.getInstance();
@@ -130,7 +130,7 @@ public class XdsMetadataUtilTest {
 	 * {@link org.husky.common.utils.XdsMetadataUtil#convertDtmStringToDate(java.lang.String)}.
 	 */
 	@Test
-	public void testConvertDtmStringToDateYearMonthDayHour() {
+	void testConvertDtmStringToDateYearMonthDayHour() {
 		final Date ref1 = XdsMetadataUtil.convertDtmStringToDate(testDTM_YMDH);
 		assertNotNull(ref1);
 		final Calendar refCal1 = Calendar.getInstance();
@@ -148,7 +148,7 @@ public class XdsMetadataUtilTest {
 	 * {@link org.husky.common.utils.XdsMetadataUtil#convertDtmStringToDate(java.lang.String)}.
 	 */
 	@Test
-	public void testConvertDtmStringToDateYearMonthDayHourMinute() {
+	void testConvertDtmStringToDateYearMonthDayHourMinute() {
 		final Date ref1 = XdsMetadataUtil.convertDtmStringToDate(testDTM_YMDHM);
 		assertNotNull(ref1);
 		final Calendar refCal1 = Calendar.getInstance();
@@ -166,7 +166,7 @@ public class XdsMetadataUtilTest {
 	 * {@link org.husky.common.utils.XdsMetadataUtil#convertDtmStringToDate(java.lang.String)}.
 	 */
 	@Test
-	public void testConvertDtmStringToDateYearMonthDayHourMinuteSecond() {
+	void testConvertDtmStringToDateYearMonthDayHourMinuteSecond() {
 		final Date ref1 = XdsMetadataUtil.convertDtmStringToDate(testDTM_YMDHMS);
 		assertNotNull(ref1);
 		final Calendar refCal1 = Calendar.getInstance();
@@ -184,7 +184,7 @@ public class XdsMetadataUtilTest {
 	 * {@link org.husky.common.utils.XdsMetadataUtil#convertDtmStringToDate(java.lang.String)}.
 	 */
 	@Test
-	public void testConvertDtmStringToDateYearNullEmpty() {
+	void testConvertDtmStringToDateYearNullEmpty() {
 		final Date ref1 = XdsMetadataUtil.convertDtmStringToDate(null);
 		assertNull(ref1);
 

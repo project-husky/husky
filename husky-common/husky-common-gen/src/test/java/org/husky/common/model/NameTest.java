@@ -11,7 +11,6 @@
 package org.husky.common.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
@@ -20,16 +19,15 @@ import org.husky.common.enums.EntityNameUse;
 import org.husky.common.enums.NullFlavor;
 import org.husky.common.hl7cdar2.EN;
 import org.husky.common.hl7cdar2.ObjectFactory;
-import org.husky.common.model.Name;
 import org.junit.jupiter.api.Test;
 
-public class NameTest {
+class NameTest {
 
 	/**
 	 * Do all tests.
 	 */
 	@Test
-	public void doAllTests() {
+	void doAllTests() {
 
 		String given = "John";
 		String family = "Doe";
@@ -44,7 +42,7 @@ public class NameTest {
 		EN hl7CdaR2Type2 = personName1.getHl7CdaR2En();
 		Name name2 = new Name(hl7CdaR2Type2);
 
-		assertTrue(personName1.equals(name2));
+		assertEquals(personName1, name2);
 
 		personNameBt.setName(fullName);
 
@@ -52,7 +50,7 @@ public class NameTest {
 		hl7CdaR2Type2 = name3.getHl7CdaR2En();
 		Name name4 = new Name(hl7CdaR2Type2);
 
-		assertTrue(name3.equals(name4));
+		assertEquals(name3, name4);
 
 		// Null Flavor Tests
 		EN nullHl7CdaR2Value = null;

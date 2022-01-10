@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
  * @since Jan 2, 2018 11:32:48 AM
  *
  */
-public class FhirCommonTest {
+class FhirCommonTest {
 
 	private String testOidString;
 	private String testUuid;
@@ -64,8 +64,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#addDocManifestContent(org.hl7.fhir.r4.model.DocumentManifest, org.hl7.fhir.r4.model.Resource)}.
 	 */
 	@Test
-	@Disabled
-	public void testAddDocManifestContent() {
+	@Disabled("Not yet implemented")
+	void testAddDocManifestContent() {
 		fail("Not yet implemented");
 	}
 
@@ -74,7 +74,7 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#addUrnOid(java.lang.String)}.
 	 */
 	@Test
-	public void testAddUrnOid() {
+	void testAddUrnOid() {
 		final String ref = FhirCommon.addUrnOid(testOidString);
 		assertNotNull(ref);
 		assertTrue(ref.startsWith(FhirCommon.OID_URN));
@@ -86,7 +86,7 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#addUrnUuid(java.lang.String)}.
 	 */
 	@Test
-	public void testAddUrnUuid() {
+	void testAddUrnUuid() {
 		final String ref = FhirCommon.addUrnUuid(testUuid);
 		assertNotNull(ref);
 		assertTrue(ref.startsWith(FhirCommon.UUID_URN));
@@ -98,7 +98,7 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#createCodeableConcept(java.lang.String, java.lang.String)}.
 	 */
 	@Test
-	public void testCreateCodeableConceptStringString() {
+	void testCreateCodeableConceptStringString() {
 		final CodeableConcept ref = FhirCommon.createCodeableConcept(testSystemOid, testOidString);
 		assertNotNull(ref);
 		assertNotNull(ref.getCodingFirstRep());
@@ -111,7 +111,7 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#createCodeableConcept(java.lang.String, java.lang.String, java.lang.String)}.
 	 */
 	@Test
-	public void testCreateCodeableConceptStringStringString() {
+	void testCreateCodeableConceptStringStringString() {
 		final CodeableConcept ref = FhirCommon.createCodeableConcept(testSystemOid, testOidString,
 				testDisplayName);
 		assertNotNull(ref);
@@ -126,7 +126,7 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#createCoding(java.lang.String, java.lang.String)}.
 	 */
 	@Test
-	public void testCreateCodingStringString() {
+	void testCreateCodingStringString() {
 		final Coding ref = FhirCommon.createCoding(testSystemOid, testOidString);
 		assertNotNull(ref);
 		assertTrue(ref.getSystem().endsWith(testSystemOid));
@@ -138,7 +138,7 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#createCoding(java.lang.String, java.lang.String, java.lang.String)}.
 	 */
 	@Test
-	public void testCreateCodingStringStringString() {
+	void testCreateCodingStringStringString() {
 		final Coding ref = FhirCommon.createCoding(testSystemOid, testOidString, testDisplayName);
 		assertNotNull(ref);
 		assertTrue(ref.getSystem().endsWith(testSystemOid));
@@ -151,7 +151,7 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#createIdentifier(org.org.husky.common.model.Identificator)}.
 	 */
 	@Test
-	public void testCreateIdentifierIdentificator() {
+	void testCreateIdentifierIdentificator() {
 		final Identifier ref = FhirCommon.createIdentifier(testIdentificator);
 		assertNotNull(ref);
 		assertTrue(ref.getSystem().endsWith(testSystemOid));
@@ -163,7 +163,7 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#createIdentifier(java.lang.String, java.lang.String)}.
 	 */
 	@Test
-	public void testCreateIdentifierStringString() {
+	void testCreateIdentifierStringString() {
 		final Identifier ref = FhirCommon.createIdentifier(testSystemOid, testOidString);
 		assertNotNull(ref);
 		assertTrue(ref.getSystem().endsWith(testSystemOid));
@@ -175,8 +175,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#createObservation()}.
 	 */
 	@Test
-	@Disabled
-	public void testCreateObservation() {
+	@Disabled("Not yet implemented")
+	void testCreateObservation() {
 		fail("Not yet implemented");
 	}
 
@@ -185,8 +185,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#createObservation(org.hl7.fhir.r4.model.CodeableConcept)}.
 	 */
 	@Test
-	@Disabled
-	public void testCreateObservationCodeableConcept() {
+	@Disabled("Not yet implemented")
+	void testCreateObservationCodeableConcept() {
 		fail("Not yet implemented");
 	}
 
@@ -195,7 +195,7 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#ehcCodeToFhirCode(org.org.husky.common.model.Code)}.
 	 */
 	@Test
-	public void testEhcCodeToFhirCode() {
+	void testEhcCodeToFhirCode() {
 		final CodeableConcept ref = FhirCommon.ehcCodeToFhirCode(testCode);
 		assertNotNull(ref);
 		assertTrue(ref.getCodingFirstRep().getSystem().endsWith(testSystemOid));
@@ -207,8 +207,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#fhirAddressToEhcAddress(org.hl7.fhir.r4.model.Address)}.
 	 */
 	@Test
-	@Disabled
-	public void testFhirAddressToEhcAddress() {
+	@Disabled("Not yet implemented")
+	void testFhirAddressToEhcAddress() {
 		fail("Not yet implemented");
 	}
 
@@ -217,8 +217,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#fhirCodeToEhcCode(org.hl7.fhir.r4.model.CodeableConcept)}.
 	 */
 	@Test
-	@Disabled
-	public void testFhirCodeToEhcCode() {
+	@Disabled("Not yet implemented")
+	void testFhirCodeToEhcCode() {
 		fail("Not yet implemented");
 	}
 
@@ -227,8 +227,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#fhirIdentifierToEhcIdentificator(org.hl7.fhir.r4.model.Identifier)}.
 	 */
 	@Test
-	@Disabled
-	public void testFhirIdentifierToEhcIdentificator() {
+	@Disabled("Not yet implemented")
+	void testFhirIdentifierToEhcIdentificator() {
 		fail("Not yet implemented");
 	}
 
@@ -237,8 +237,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#fhirNameToEhcName(org.hl7.fhir.r4.model.HumanName)}.
 	 */
 	@Test
-	@Disabled
-	public void testFhirNameToEhcName() {
+	@Disabled("Not yet implemented")
+	void testFhirNameToEhcName() {
 		fail("Not yet implemented");
 	}
 
@@ -247,8 +247,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#getAuthor(org.hl7.fhir.instance.model.api.IBaseResource)}.
 	 */
 	@Test
-	@Disabled
-	public void testGetAuthorIBaseResource() {
+	@Disabled("Not yet implemented")
+	void testGetAuthorIBaseResource() {
 		fail("Not yet implemented");
 	}
 
@@ -257,8 +257,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#getAuthor(org.hl7.fhir.r4.model.Organization)}.
 	 */
 	@Test
-	@Disabled
-	public void testGetAuthorOrganization() {
+	@Disabled("Not yet implemented")
+	void testGetAuthorOrganization() {
 		fail("Not yet implemented");
 	}
 
@@ -267,8 +267,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#getAuthor(org.hl7.fhir.r4.model.Person)}.
 	 */
 	@Test
-	@Disabled
-	public void testGetAuthorPerson() {
+	@Disabled("Not yet implemented")
+	void testGetAuthorPerson() {
 		fail("Not yet implemented");
 	}
 
@@ -277,8 +277,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#getAuthor(org.hl7.fhir.r4.model.Practitioner)}.
 	 */
 	@Test
-	@Disabled
-	public void testGetAuthorPractitioner() {
+	@Disabled("Not yet implemented")
+	void testGetAuthorPractitioner() {
 		fail("Not yet implemented");
 	}
 
@@ -287,8 +287,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#getAuthor(org.hl7.fhir.r4.model.Reference)}.
 	 */
 	@Test
-	@Disabled
-	public void testGetAuthorReference() {
+	@Disabled("Not yet implemented")
+	void testGetAuthorReference() {
 		fail("Not yet implemented");
 	}
 
@@ -297,8 +297,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#getCommunityPatientId(org.husky.common.mdht.Patient, java.lang.String)}.
 	 */
 	@Test
-	@Disabled
-	public void testGetCommunityPatientId() {
+	@Disabled("Not yet implemented")
+	void testGetCommunityPatientId() {
 		fail("Not yet implemented");
 	}
 
@@ -307,8 +307,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#getDocumentFilepath(org.hl7.fhir.r4.model.DocumentReference)}.
 	 */
 	@Test
-	@Disabled
-	public void testGetDocumentFilepath() {
+	@Disabled("Not yet implemented")
+	void testGetDocumentFilepath() {
 		fail("Not yet implemented");
 	}
 
@@ -317,8 +317,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#getFormatCode(org.hl7.fhir.r4.model.DocumentReference)}.
 	 */
 	@Test
-	@Disabled
-	public void testGetFormatCode() {
+	@Disabled("Not yet implemented")
+	void testGetFormatCode() {
 		fail("Not yet implemented");
 	}
 
@@ -327,8 +327,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#getMetadataLanguage(org.hl7.fhir.r4.model.DocumentReference)}.
 	 */
 	@Test
-	@Disabled
-	public void testGetMetadataLanguage() {
+	@Disabled("Not yet implemented")
+	void testGetMetadataLanguage() {
 		fail("Not yet implemented");
 	}
 
@@ -337,8 +337,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#getMimeType(org.hl7.fhir.r4.model.DocumentReference)}.
 	 */
 	@Test
-	@Disabled
-	public void testGetMimeType() {
+	@Disabled("Not yet implemented")
+	void testGetMimeType() {
 		fail("Not yet implemented");
 	}
 
@@ -347,8 +347,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#getOrganization(org.hl7.fhir.instance.model.api.IBaseResource)}.
 	 */
 	@Test
-	@Disabled
-	public void testGetOrganizationIBaseResource() {
+	@Disabled("Not yet implemented")
+	void testGetOrganizationIBaseResource() {
 		fail("Not yet implemented");
 	}
 
@@ -357,8 +357,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#getOrganization(org.hl7.fhir.r4.model.Organization)}.
 	 */
 	@Test
-	@Disabled
-	public void testGetOrganizationOrganization() {
+	@Disabled("Not yet implemented")
+	void testGetOrganizationOrganization() {
 		fail("Not yet implemented");
 	}
 
@@ -367,8 +367,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#getOrganization(org.hl7.fhir.r4.model.Reference)}.
 	 */
 	@Test
-	@Disabled
-	public void testGetOrganizationReference() {
+	@Disabled("Not yet implemented")
+	void testGetOrganizationReference() {
 		fail("Not yet implemented");
 	}
 
@@ -377,8 +377,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#getPatient(org.hl7.fhir.r4.model.Bundle)}.
 	 */
 	@Test
-	@Disabled
-	public void testGetPatientBundle() {
+	@Disabled("Not yet implemented")
+	void testGetPatientBundle() {
 		fail("Not yet implemented");
 	}
 
@@ -387,8 +387,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#getPatient(org.hl7.fhir.r4.model.DocumentManifest)}.
 	 */
 	@Test
-	@Disabled
-	public void testGetPatientDocumentManifest() {
+	@Disabled("Not yet implemented")
+	void testGetPatientDocumentManifest() {
 		fail("Not yet implemented");
 	}
 
@@ -397,8 +397,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#getPatient(org.hl7.fhir.instance.model.api.IBaseResource)}.
 	 */
 	@Test
-	@Disabled
-	public void testGetPatientIBaseResource() {
+	@Disabled("Not yet implemented")
+	void testGetPatientIBaseResource() {
 		fail("Not yet implemented");
 	}
 
@@ -407,8 +407,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#getPatient(org.hl7.fhir.r4.model.Patient)}.
 	 */
 	@Test
-	@Disabled
-	public void testGetPatientPatient() {
+	@Disabled("Not yet implemented")
+    void testGetPatientPatient() {
 		fail("Not yet implemented");
 	}
 
@@ -417,8 +417,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#getPatient(org.hl7.fhir.r4.model.Reference)}.
 	 */
 	@Test
-	@Disabled
-	public void testGetPatientReference() {
+	@Disabled("Not yet implemented")
+	void testGetPatientReference() {
 		fail("Not yet implemented");
 	}
 
@@ -427,8 +427,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#getPracticeSettingCode(org.hl7.fhir.r4.model.DocumentReference)}.
 	 */
 	@Test
-	@Disabled
-	public void testGetPracticeSettingCode() {
+	@Disabled("Not yet implemented")
+	void testGetPracticeSettingCode() {
 		fail("Not yet implemented");
 	}
 
@@ -437,8 +437,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#getTelecoms(java.util.List)}.
 	 */
 	@Test
-	@Disabled
-	public void testGetTelecoms() {
+	@Disabled("Not yet implemented")
+	void testGetTelecoms() {
 		fail("Not yet implemented");
 	}
 
@@ -447,8 +447,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#getXmlResource(java.lang.String)}.
 	 */
 	@Test
-	@Disabled
-	public void testGetXmlResource() {
+	@Disabled("Not yet implemented")
+	void testGetXmlResource() {
 		fail("Not yet implemented");
 	}
 
@@ -457,8 +457,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#removeUrnOidPrefix(java.lang.String)}.
 	 */
 	@Test
-	@Disabled
-	public void testRemoveUrnOidPrefix() {
+	@Disabled("Not yet implemented")
+	void testRemoveUrnOidPrefix() {
 		fail("Not yet implemented");
 	}
 
@@ -467,8 +467,8 @@ public class FhirCommonTest {
 	 * {@link org.husky.fhir.structures.gen.FhirCommon#saveResource(org.slf4j.Logger, java.lang.String, org.hl7.fhir.instance.model.api.IBaseResource, java.lang.String, org.husky.fhir.structures.gen.FhirCommon.SaveMode)}.
 	 */
 	@Test
-	@Disabled
-	public void testSaveResource() {
+	@Disabled("Not yet implemented")
+	void testSaveResource() {
 		fail("Not yet implemented");
 	}
 

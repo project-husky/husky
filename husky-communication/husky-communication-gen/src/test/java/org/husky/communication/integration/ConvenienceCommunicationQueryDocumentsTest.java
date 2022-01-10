@@ -60,7 +60,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
 @EnableAutoConfiguration
-public class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
+class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(ConvenienceCommunicationQueryDocumentsTest.class.getName());
@@ -113,7 +113,7 @@ public class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 	 * correct.
 	 */
 	@Test
-	public void contextLoads() {
+	void contextLoads() {
 		assertNotNull(convenienceCommunication);
 		assertNotNull(convenienceCommunication.getCamelContext());
 	}
@@ -126,7 +126,7 @@ public class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 	 * @throws Exception
 	 */
 	@Test
-	public void queryFindDocumentsEmptyResponseTest() throws Exception {
+	void queryFindDocumentsEmptyResponseTest() throws Exception {
 
 		// ID of the patient for whom the metadata is to be searched for
 		Identificator patientId = new Identificator("1.3.6.1.4.1.21367.13.20.3000", "IHEBLUE-2737");
@@ -158,7 +158,7 @@ public class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 	 * @throws Exception
 	 */
 	@Test
-	public void queryFindDocumentsNoPatientIdExpectedErrorTest() throws Exception {
+	void queryFindDocumentsNoPatientIdExpectedErrorTest() throws Exception {
 
 		FindDocumentsQuery findDocumentsQuery = new FindDocumentsQuery(null, AvailabilityStatus.APPROVED);
 
@@ -192,8 +192,10 @@ public class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 	 * 
 	 * @throws Exception
 	 */
+	/* test function to checks  attributes - no need to reduce number of assertions */
 	@Test
-	public void queryFindDocumentsMetadataOfPdf() throws Exception {
+	@SuppressWarnings("java:S5961")
+	void queryFindDocumentsMetadataOfPdf() throws Exception {
 
 		Identificator patientId = new Identificator("1.3.6.1.4.1.21367.13.20.1000", "IHERED-1024");
 
@@ -312,8 +314,10 @@ public class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 	 * 
 	 * @throws Exception
 	 */
+	/* test function to checks  attributes - no need to reduce number of assertions */
 	@Test
-	public void queryFindDocumentsMetadataOfCda() throws Exception {
+	@SuppressWarnings("java:S5961")
+	void queryFindDocumentsMetadataOfCda() throws Exception {
 
 		Identificator patientId = new Identificator("1.3.6.1.4.1.21367.13.20.3000", "IHEBLUE-2599");
 
@@ -441,7 +445,7 @@ public class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 	 * @throws Exception
 	 */
 	@Test
-	public void queryGetDocumentsMetadataOfCda() throws Exception {
+	void queryGetDocumentsMetadataOfCda() throws Exception {
 
 		// unique IDs of documents for which the document references are searched for
 		List<String> uniqueIds = new LinkedList<>();

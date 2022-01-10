@@ -10,9 +10,10 @@
  */
 package org.husky.fhir.communication;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,6 @@ import org.husky.common.communication.AffinityDomain;
 import org.husky.common.communication.DocumentMetadata;
 import org.husky.common.communication.SubmissionSetMetadata;
 import org.husky.common.enums.DocumentDescriptor;
-import org.husky.common.utils.DateUtil;
 import org.husky.fhir.structures.gen.FhirCommon;
 import org.husky.fhir.structures.utils.FhirUtilities;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
@@ -62,39 +62,35 @@ public class FhirXdTransaction {
 	 * about destination and submission-set including documents for a transaction
 	 * (e.g. IHE XDS submission or IHE XDM portable media creation)
 	 */
+	/* derived from external library */
 	@ResourceDef(name = "DocumentManifest")
+	@SuppressWarnings("java:S110")
 	public static class Transaction extends DocumentManifest {
 
 		/** The Constant urnUseAsAffinityDomain. */
-		public static final String urnUseAsAffinityDomain = "http://ehealth-connector.org/FhirExtension/useAsAffinityDomain";
+		public static final String URN_USE_AS_AFFINITY_DOMAIN = "http://ehealth-connector.org/FhirExtension/useAsAffinityDomain";
 
 		/** The Constant urnUseAsSubmissionSets. */
-		public static final String urnUseAsSubmissionSet = "http://ehealth-connector.org/FhirExtension/useAsSubmissionSet";
+		public static final String URN_USE_AS_SUBMISSION_SET = "http://ehealth-connector.org/FhirExtension/useAsSubmissionSet";
 
 		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = -928980987511039196L;
 
 		/** The affinity domain setting. */
 		@Child(name = "affinityDomain", max = 1)
-		@Extension(url = urnUseAsAffinityDomain, definedLocally = false, isModifier = true)
+		@Extension(url = URN_USE_AS_AFFINITY_DOMAIN, definedLocally = false, isModifier = true)
 		@Description(shortDefinition = "affinityDomain")
 		private Reference affinityDomain;
 
 		/** The submission-sets. */
 		@Child(name = "submissionSet", max = Child.MAX_UNLIMITED)
-		@Extension(url = urnUseAsSubmissionSet, definedLocally = false, isModifier = true)
+		@Extension(url = URN_USE_AS_SUBMISSION_SET, definedLocally = false, isModifier = true)
 		@Description(shortDefinition = "submissionSet")
 		private Reference submissionSet;
 
-	};
+	}
 
 	private final FhirContext fhirCtx = new FhirContext(FhirVersionEnum.R4);
-
-	/**
-	 * Empty constructor (default)
-	 */
-	public FhirXdTransaction() {
-	}
 
 	/**
 	 *  Gets the eHC affinity domain object from the FHIR resource
@@ -215,9 +211,7 @@ public class FhirXdTransaction {
 		final List<DocumentMetadata> retVal = new ArrayList<>();
 
 		for (final Resource entry : getResources(transaction)) {
-			if (entry instanceof DocumentReference) {
-				final DocumentReference fhirObject = (DocumentReference) entry;
-
+			if (entry instanceof DocumentReference fhirObject) {
 				final var metaData = new DocumentMetadata(FhirCommon.getMetadataLanguage(fhirObject));
 				metaData.addAuthor(getAuthor(fhirObject));
 				metaData.addConfidentialityCode(FhirUtilities.toCode(fhirObject.getSecurityLabelFirstRep()));
@@ -225,7 +219,8 @@ public class FhirXdTransaction {
 				metaData.setClassCode(FhirUtilities.toCode(fhirObject.getCategoryFirstRep()));
 				metaData.setCodedLanguage(
 						fhirObject.getContentFirstRep().getAttachment().getLanguageElement().getValueAsString());
-				metaData.setCreationTime(DateUtil.parseZonedDate(fhirObject.getDate()));
+				metaData.setCreationTime(
+						ZonedDateTime.from(fhirObject.getDate().toInstant().atZone(ZoneId.systemDefault())));
 				metaData.setDocumentDescriptor(getDocumentDescriptor(fhirObject));
 				metaData.setFormatCode(FhirCommon.getFormatCode(fhirObject));
 				metaData.setHealthcareFacilityTypeCode(FhirUtilities.toCode(fhirObject.getContext().getFacilityType()));
@@ -258,9 +253,8 @@ public class FhirXdTransaction {
 		org.husky.common.communication.Destination retVal = null;
 
 		for (final Reference ref : docManifest.getContent()) {
-			if (ref != null && ref.getResource() instanceof MessageHeader) {
-				final MessageHeader fhirObject = (MessageHeader) ref.getResource();
-				if (!fhirObject.getExtensionsByUrl(FhirCommon.URN_USE_AS_REGISTRY_DESTINATION).isEmpty())
+			if (ref != null && ref.getResource()instanceof MessageHeader fhirObject
+					&& !fhirObject.getExtensionsByUrl(FhirCommon.URN_USE_AS_REGISTRY_DESTINATION).isEmpty()) {
 					retVal = getDestination((MessageHeader) ref.getResource());
 			}
 		}
@@ -278,9 +272,8 @@ public class FhirXdTransaction {
 		final List<org.husky.common.communication.Destination> retVal = new ArrayList<>();
 
 		for (final Reference ref : docManifest.getContent()) {
-			if (ref != null && ref.getResource() instanceof MessageHeader) {
-				final MessageHeader fhirObject = (MessageHeader) ref.getResource();
-				if (!fhirObject.getExtensionsByUrl(FhirCommon.URN_USE_AS_REPOSITORY_DESTINATION).isEmpty())
+			if (ref != null && ref.getResource()instanceof MessageHeader fhirObject
+					&& !fhirObject.getExtensionsByUrl(FhirCommon.URN_USE_AS_REPOSITORY_DESTINATION).isEmpty()) {
 					retVal.add(getDestination((MessageHeader) ref.getResource()));
 			}
 		}
@@ -316,9 +309,7 @@ public class FhirXdTransaction {
 		final var retVal = new SubmissionSetMetadata();
 
 		for (final Resource entry : getResources(transaction)) {
-			if (entry instanceof DocumentManifest) {
-				final DocumentManifest fhirObject = (DocumentManifest) entry;
-
+			if (entry instanceof DocumentManifest fhirObject) {
 				retVal.setAuthor(getAuthor(fhirObject));
 
 				var availabilityStatus = AvailabilityStatus.APPROVED;

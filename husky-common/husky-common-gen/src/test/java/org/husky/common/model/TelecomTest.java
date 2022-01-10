@@ -11,7 +11,6 @@
 package org.husky.common.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
@@ -20,19 +19,18 @@ import org.husky.common.enums.NullFlavor;
 import org.husky.common.enums.TelecomAddressUse;
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.TEL;
-import org.husky.common.model.Telecom;
 import org.junit.jupiter.api.Test;
 
 /**
  * The test class for Telecom.
  */
-public class TelecomTest {
+class TelecomTest {
 
 	/**
 	 * Do all tests.
 	 */
 	@Test
-	public void doAllTests() {
+	void doAllTests() {
 
 		TelecomAddressUse usage = TelecomAddressUse.ANSWERING_SERVICE;
 		String value = "033 888 77 66";
@@ -44,7 +42,7 @@ public class TelecomTest {
 		TEL hl7CdaR2Type = telecom1.getHl7CdaR2Tel();
 		Telecom telecom2 = new Telecom(hl7CdaR2Type);
 
-		assertTrue(telecom1.equals(telecom2));
+		assertEquals(telecom1, telecom2);
 
 		// Null Flavor Tests
 		TEL nullHl7CdaR2Value = null;

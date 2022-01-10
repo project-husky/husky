@@ -63,9 +63,8 @@ import org.husky.xua.core.SecurityHeaderElement;
 import org.husky.xua.exceptions.ClientSendException;
 import org.husky.xua.exceptions.DeserializeException;
 import org.husky.xua.hl7v3.InstanceIdentifier;
+import org.husky.xua.hl7v3.impl.CodedWithEquivalentsBuilder;
 import org.husky.xua.hl7v3.impl.InstanceIdentifierBuilder;
-import org.husky.xua.hl7v3.impl.PurposeOfUseBuilder;
-import org.husky.xua.hl7v3.impl.RoleBuilder;
 import org.husky.xua.saml2.Assertion;
 import org.husky.xua.saml2.impl.AssertionBuilderImpl;
 import org.junit.jupiter.api.BeforeAll;
@@ -140,13 +139,16 @@ public class SimplePpfClientTest {
 
 		XuaClient xuaClient = ClientFactory.getXuaClient(xuaClientConfig);
 
-		var purposeOfUse = new PurposeOfUseBuilder().code(PurposeOfUse.NORMAL_ACCESS.getCodeValue())
+		var purposeOfUse = new CodedWithEquivalentsBuilder().code(PurposeOfUse.NORMAL_ACCESS.getCodeValue())
 				.codeSystem("2.16.756.5.30.1.127.3.10.6").displayName(PurposeOfUse.NORMAL_ACCESS.getDisplayName())
-				.buildObject();
+				.buildObject(org.husky.xua.hl7v3.PurposeOfUse.DEFAULT_NS_URI,
+						org.husky.xua.hl7v3.PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME,
+						org.husky.xua.hl7v3.PurposeOfUse.DEFAULT_PREFIX);
 
 		// set role of user
-		var role = new RoleBuilder().code("HCP").codeSystem("2.16.756.5.30.1.127.3.10.6").displayName("Behandelnde(r)")
-				.buildObject();
+		var role = new CodedWithEquivalentsBuilder().code("HCP").codeSystem("2.16.756.5.30.1.127.3.10.6")
+				.displayName("Behandelnde(r)").buildObject(org.husky.xua.hl7v3.Role.DEFAULT_NS_URI,
+						org.husky.xua.hl7v3.Role.DEFAULT_ELEMENT_LOCAL_NAME, org.husky.xua.hl7v3.Role.DEFAULT_PREFIX);
 
 		var assertionRequest = new XUserAssertionRequestBuilderImpl().requestType(RequestType.WST_ISSUE)
 				.tokenType(TokenType.OASIS_WSS_SAML_PROFILE_11_SAMLV20)
@@ -199,7 +201,7 @@ public class SimplePpfClientTest {
 	 */
 	@Test
 	@Order(1)
-	public void testSendPpq1AddPolicy() throws Exception {
+	void testSendPpq1AddPolicy() throws Exception {
 
 		// initialize client to add policy
 		PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
@@ -330,7 +332,7 @@ public class SimplePpfClientTest {
 				.getWrappedObject();
 
 		// create policy feed object with method add to add policy
-		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.AddPolicy)
+		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.ADD_POLICY)
 				.create(addPolicyAssertionOpenSaml);
 
 		// add policy
@@ -350,7 +352,7 @@ public class SimplePpfClientTest {
 	 */
 	@Test
 	@Order(2)
-	public void testSendPpq1UpdatePolicy() throws Exception {
+	void testSendPpq1UpdatePolicy() throws Exception {
 		assertNotNull(xuaAssertion);
 
 		// initialize client to query policies
@@ -538,7 +540,7 @@ public class SimplePpfClientTest {
 				.getWrappedObject();
 
 		// create policy feed object with method update to update policy
-		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.UpdatePolicy)
+		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.UPDATE_POLICY)
 				.create(updatePolicyAssertionOpenSaml);
 
 		// update policy
@@ -559,7 +561,7 @@ public class SimplePpfClientTest {
 	 */
 	@Test
 	@Order(3)
-	public void testSendPpq1DeletePolicy() throws Exception {
+	void testSendPpq1DeletePolicy() throws Exception {
 		// initialize client to query policies
 		PpClientConfig configQuery = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).create();
@@ -632,7 +634,7 @@ public class SimplePpfClientTest {
 				.create(deletePolicyAssertion).getWrappedObject();
 
 		// create policy feed object with method delete to delete policy
-		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.DeletePolicy)
+		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.DELETE_POLICY)
 				.create(deletePolicyAssertionOpenSaml);
 
 		// delete policy
@@ -652,7 +654,7 @@ public class SimplePpfClientTest {
 	 */
 	@Test
 	@Order(4)
-	public void testSendPpq1AddPolicyWrongPolicyStructure() throws Exception {
+	void testSendPpq1AddPolicyWrongPolicyStructure() throws Exception {
 		// initialize client to add policy
 		PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).create();
@@ -752,7 +754,7 @@ public class SimplePpfClientTest {
 				.create(addPolicyAssertion).getWrappedObject();
 
 		// create policy feed object with method add to add policy
-		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.AddPolicy)
+		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.ADD_POLICY)
 				.create(addPolicyAssertionOpenSaml);
 
 		// add policy

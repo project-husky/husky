@@ -60,7 +60,7 @@ import net.ihe.gazelle.hl7v3.prpain201306UV02.PRPAIN201306UV02Type;
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
 @EnableAutoConfiguration
-public class PdqV3QueryTest {
+class PdqV3QueryTest {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(PdqV3QueryTest.class.getName());
 
@@ -84,11 +84,13 @@ public class PdqV3QueryTest {
 	 */
 	private V3PdqConsumerResponse loadV3PdqResponse() throws Exception {
 
-		final InputStream inputStream = getClass().getResourceAsStream("/02_PDQQuery1Response.xml");
-		final var unmarshaller = JAXBContext.newInstance(PRPAIN201306UV02Type.class).createUnmarshaller();
-		var rootElement = (PRPAIN201306UV02Type) unmarshaller.unmarshal(inputStream);
+		try (InputStream inputStream = getClass().getResourceAsStream("/02_PDQQuery1Response.xml")) {
+			final var unmarshaller = JAXBContext.newInstance(PRPAIN201306UV02Type.class).createUnmarshaller();
+			var rootElement = (PRPAIN201306UV02Type) unmarshaller.unmarshal(inputStream);
 
-		return new V3PdqConsumerResponse(rootElement);
+			return new V3PdqConsumerResponse(rootElement);
+		}
+
 	}
     
 	
@@ -105,7 +107,7 @@ public class PdqV3QueryTest {
 	}
 
 	@Test
-	public void contextLoads() {
+	void contextLoads() {
 		assertNotNull(convenienceMasterPatientIndexV3Client);
 		assertNotNull(convenienceMasterPatientIndexV3Client.getContext());
 	}
@@ -118,8 +120,10 @@ public class PdqV3QueryTest {
 	 *
 	 * @throws Exception
 	 */
+	/* number of assertions needed to compare all elements */
 	@Test
-	public void testGetPatientsFromPdqQuery() throws Exception {
+	@SuppressWarnings("java:S5961")
+	void testGetPatientsFromPdqQuery() throws Exception {
 		
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
@@ -169,7 +173,11 @@ public class PdqV3QueryTest {
 		assertEquals("Good Health Clinic", organization.getName());
 		assertEquals("+1-342-555-8394", organization.getTelecomFirstRep().getValue());
 
-		final FhirPatient jim = patients.get(1);
+		testSecondPatient(patients.get(1));
+
+	}
+
+	private void testSecondPatient(FhirPatient jim) {
 		assertEquals("Jones", jim.getNameFirstRep().getFamily());
 		assertEquals("Jim", jim.getNameFirstRep().getGivenAsSingleString());
 		assertEquals("home", jim.getTelecom().get(0).getUse().toCode().toLowerCase());
@@ -180,7 +188,7 @@ public class PdqV3QueryTest {
 		assertEquals("Other City", jim.getAddressFirstRep().getCity());
 		assertEquals("IL", jim.getAddressFirstRep().getState());
 
-		organization = (Organization) jim.getManagingOrganization().getResource();
+		var organization = (Organization) jim.getManagingOrganization().getResource();
 		assertEquals(FhirCommon.addUrnOid("1.2.840.114350.1.13.99998.8734"),
 				organization.getIdentifier().get(0).getValue());
 		assertEquals("Good Health Clinic", organization.getName());
@@ -196,7 +204,7 @@ public class PdqV3QueryTest {
 	 * identify any patient in the database is used
 	 */
 	@Test
-	public void ITI47ConsumerQueryPatientPatientIdNotFoundTest() {
+	void ITI47ConsumerQueryPatientPatientIdNotFoundTest() {
 		
 
 		final AffinityDomain affinityDomain = new AffinityDomain();
@@ -231,7 +239,7 @@ public class PdqV3QueryTest {
 	 * and checks that exactly this patient is found for the given identificator
 	 */
 	@Test
-	public void ITI47ConsumerQueryPatientPatientIdFoundTest() {
+	void ITI47ConsumerQueryPatientPatientIdFoundTest() {
 		
 
 		final AffinityDomain affinityDomain = new AffinityDomain();
@@ -258,11 +266,11 @@ public class PdqV3QueryTest {
 		
 		List<Patient> patients = response2.getPatients();
 		assertTrue(response2.getSuccess());
-		assertEquals(patients.size(),1);
+		assertEquals(1, patients.size());
 		Patient patient = patients.get(0);
-		assertEquals(patient.getCompleteName().trim(),"Jasmin Schaub");
+		assertEquals("Jasmin Schaub", patient.getCompleteName().trim());
 		assertEquals(patient.getAdministrativeGenderCode().getCodeValue(),AdministrativeGender.FEMALE.getCodeValue());
-		assertEquals(patient.getAddress().getCountry(),"CHE");
+		assertEquals("CHE", patient.getAddress().getCountry());
 	    
 	}
 
@@ -271,7 +279,7 @@ public class PdqV3QueryTest {
 	 * and checks that the query succeeds and at least one patient is found
 	 */
 	@Test
-	public void ITI47ConsumerQueryPatientPatientIdSearchByName() {
+	void ITI47ConsumerQueryPatientPatientIdSearchByName() {
 		
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
@@ -302,7 +310,7 @@ public class PdqV3QueryTest {
 	 * and checks that the query succeeds and the correct patient is found
 	 */
 	@Test
-	public void ITI47ConsumerQueryPatientPatientIdMultipleCriteria() {
+	void ITI47ConsumerQueryPatientPatientIdMultipleCriteria() {
 		
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
@@ -335,10 +343,10 @@ public class PdqV3QueryTest {
 				.queryPatientDemographics(mpiQuery, affinityDomain, null);
 		
 		assertTrue(response.getSuccess());
-		assertEquals(response.getPatients().size(),1);
+		assertEquals(1, response.getPatients().size());
 		Patient patient = response.getPatients().get(0);
-		assertEquals(patient.getCompleteName().trim(),"David Sanders");
-		assertEquals(patient.getAdministrativeGenderCode(),AdministrativeGender.MALE);
+		assertEquals("David Sanders", patient.getCompleteName().trim());
+		assertEquals(AdministrativeGender.MALE.getCodeValue(), patient.getAdministrativeGenderCode().getCodeValue());
 		
 	} 
 

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
+import java.util.GregorianCalendar;
 
 import org.hl7.fhir.r4.model.Enumerations.AdministrativeGender;
 import org.hl7.fhir.r4.model.HumanName;
@@ -17,7 +18,6 @@ import org.hl7.fhir.r4.model.Organization;
 import org.husky.common.communication.AffinityDomain;
 import org.husky.common.communication.Destination;
 import org.husky.common.model.Identificator;
-import org.husky.common.utils.DateUtil;
 import org.husky.communication.ConvenienceMasterPatientIndexV3;
 import org.husky.communication.MasterPatientIndexQuery;
 import org.husky.communication.MasterPatientIndexQueryResponse;
@@ -47,7 +47,7 @@ import ca.uhn.fhir.context.FhirVersionEnum;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
 @EnableAutoConfiguration
 @ActiveProfiles("atna")
-public class ConvenienceMasterPatientIndexV3AtnaAuditTest {
+class ConvenienceMasterPatientIndexV3AtnaAuditTest {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ConvenienceMasterPatientIndexV3AtnaAuditTest.class.getName());
 
@@ -86,7 +86,7 @@ public class ConvenienceMasterPatientIndexV3AtnaAuditTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void queryPatientDemographicsWithAtnaAuditMessageTest() throws Exception {
+	void queryPatientDemographicsWithAtnaAuditMessageTest() throws Exception {
 		LOGGER.debug("ITI47ConsumerQueryPatientPatientIdStep1Test with ipAdress Target " + pdqUri);
 
 		// sets endpoint of PDQ service
@@ -125,7 +125,7 @@ public class ConvenienceMasterPatientIndexV3AtnaAuditTest {
 	}
 
 	@Test
-	public void updatePatientTest() throws IOException {
+	void updatePatientTest() throws IOException {
 		// sets endpoint of PIX service
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
@@ -156,7 +156,7 @@ public class ConvenienceMasterPatientIndexV3AtnaAuditTest {
 		identifier2.setSystem(spidEprOid);
 		patient.getIdentifier().add(identifier2);
 
-		patient.setBirthDate(DateUtil.parseDateyyyyMMdd("19500324"));
+		patient.setBirthDate(new GregorianCalendar(1950, 2, 24).getTime());
 		patient.getAddress().add(address);
 		patient.setGender(AdministrativeGender.MALE);
 		patient.getManagingOrganization().setResource(getScopingOrganization());
@@ -176,7 +176,7 @@ public class ConvenienceMasterPatientIndexV3AtnaAuditTest {
 	}
 
 	@Test
-	public void queryPatientIdTest() throws IOException {
+	void queryPatientIdTest() throws IOException {
 
 		// sets endpoint of PIX service
 		final AffinityDomain affinityDomain = new AffinityDomain();

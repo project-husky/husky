@@ -47,6 +47,8 @@ public class ConvenienceMasterPatientIndexV3 {
 	/** The SLF4J logger instance. */
 	private static Logger log = LoggerFactory.getLogger(ConvenienceMasterPatientIndexV3.class);
 
+	private static final String AFFINITY_DOMAIN_NOT_SPECIFIED = "affinityDomain has to be specified";
+
 	@Autowired
 	private CamelContext context;
 
@@ -54,34 +56,31 @@ public class ConvenienceMasterPatientIndexV3 {
 	private AuditContext auditContext;
 
 	/**
-	 * adds a patient to the mpi. implements ITI-44 Patient Identity Source –
-	 * Add Patient Record
+	 * adds a patient to the mpi. implements ITI-44 Patient Identity Source – Add
+	 * Patient Record
 	 *
 	 * <div class="de">
 	 * <p>
-	 * Registriert einen neuen Patienten mit demografischen Personendaten an
-	 * einen Master Patient Index (Patient Identity Cross-Reference Manager
-	 * Akteur gemäss IHE PIX).
+	 * Registriert einen neuen Patienten mit demografischen Personendaten an einen
+	 * Master Patient Index (Patient Identity Cross-Reference Manager Akteur gemäss
+	 * IHE PIX).
 	 * </p>
 	 * <p>
-	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE
-	 * PIX Patient Identity Source</b>
+	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE PIX
+	 * Patient Identity Source</b>
 	 * </p>
 	 * </div>
 	 *
-	 * @param patient
-	 *            demographic data of the patient
-	 * @param homeCommunityOid
-	 *            local patient domain (oid) of the source
-	 * @param affinityDomain
-	 *            affinityDomain configuration with pixDestination,
-	 *            homeCommunityId and Atna configuration
+	 * @param patient          demographic data of the patient
+	 * @param homeCommunityOid local patient domain (oid) of the source
+	 * @param affinityDomain   affinityDomain configuration with pixDestination,
+	 *                         homeCommunityId and Atna configuration
 	 * @return true, if successful
 	 */
-	public boolean addPatientDemographics(Patient patient, String homeCommunityOid,
-			AffinityDomain affinityDomain, SecurityHeaderElement security) {
+	public boolean addPatientDemographics(Patient patient, String homeCommunityOid, AffinityDomain affinityDomain,
+			SecurityHeaderElement security) {
 		if (affinityDomain == null) {
-			log.error("affinityDomain has to be specified");
+			log.error(AFFINITY_DOMAIN_NOT_SPECIFIED);
 			return false;
 		}
 
@@ -95,8 +94,8 @@ public class ConvenienceMasterPatientIndexV3 {
 	}
 
 	/**
-	 * Merge patient. implements ITI-44 Patient Identity Source – Patient
-	 * Identity Merge
+	 * Merge patient. implements ITI-44 Patient Identity Source – Patient Identity
+	 * Merge
 	 *
 	 * Patient Registry Duplicates Resolved message indicates that the Patient
 	 * Identity Source has done a merge within a specific Patient Identification
@@ -109,27 +108,23 @@ public class ConvenienceMasterPatientIndexV3 {
 	 * Cross-Reference Manager Akteur gemäss IHE PIX).
 	 * </p>
 	 * <p>
-	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE
-	 * PIX Patient Identity Source</b>
+	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE PIX
+	 * Patient Identity Source</b>
 	 * </p>
 	 * </div>
 	 *
-	 * @param finalPatient
-	 *            the patient with the surviving identifier
-	 * @param homeCommunityOid
-	 *            local patient domain (oid) of the source
-	 * @param mergeObsoleteId
-	 *            duplicate patient identifier
-	 * @param affinityDomain
-	 *            affinityDomain configuration with pixDestination,
-	 *            homeCommunityId and Atna configuration
+	 * @param finalPatient     the patient with the surviving identifier
+	 * @param homeCommunityOid local patient domain (oid) of the source
+	 * @param mergeObsoleteId  duplicate patient identifier
+	 * @param affinityDomain   affinityDomain configuration with pixDestination,
+	 *                         homeCommunityId and Atna configuration
 	 * @return true, if successful
 	 */
-	public boolean mergePatients(Patient finalPatient, String mergeObsoleteId,
-			String homeCommunityOid, AffinityDomain affinityDomain, SecurityHeaderElement security) {
+	public boolean mergePatients(Patient finalPatient, String mergeObsoleteId, String homeCommunityOid,
+			AffinityDomain affinityDomain, SecurityHeaderElement security) {
 
 		if (affinityDomain == null) {
-			log.error("affinityDomain has to be specified");
+			log.error(AFFINITY_DOMAIN_NOT_SPECIFIED);
 			return false;
 		}
 
@@ -143,34 +138,30 @@ public class ConvenienceMasterPatientIndexV3 {
 	}
 
 	/**
-	 * queries the mpi for patient according to the demographics criteria
-	 * specified.
+	 * queries the mpi for patient according to the demographics criteria specified.
 	 *
-	 * @param mpiQuery
-	 *            the mpi query criterias
-	 * @param affinityDomain
-	 *            affinityDomain configuration with pdqDestination,
-	 *            homeCommunityId and Atna configuration
+	 * @param mpiQuery       the mpi query criterias
+	 * @param affinityDomain affinityDomain configuration with pdqDestination,
+	 *                       homeCommunityId and Atna configuration
 	 * @return query response with patients
 	 */
-	public MasterPatientIndexQueryResponse queryPatientDemographics(
-			MasterPatientIndexQuery mpiQuery, AffinityDomain affinityDomain, SecurityHeaderElement security) {
+	public MasterPatientIndexQueryResponse queryPatientDemographics(MasterPatientIndexQuery mpiQuery,
+			AffinityDomain affinityDomain, SecurityHeaderElement security) {
 
 		if (affinityDomain == null) {
-			log.error("affinityDomain has to be specified");
+			log.error(AFFINITY_DOMAIN_NOT_SPECIFIED);
 			return null;
 		}
 
 		var query = new PdqV3Query(affinityDomain, null, context, auditContext);
 
-		final V3PdqQueryResponse pdqQueryRespones = query
-				.queryPatients(mpiQuery.getV3PdqQuery(), security);
+		final V3PdqQueryResponse pdqQueryRespones = query.queryPatients(mpiQuery.getV3PdqQuery(), security);
 		return new MasterPatientIndexQueryResponse(pdqQueryRespones);
 	}
 
 	/**
-	 * query the mpi with patient id and return the ids in the queried domains
-	 * from the mpi.
+	 * query the mpi with patient id and return the ids in the queried domains from
+	 * the mpi.
 	 *
 	 * Implements ITI-45 Patient Identifier Cross-reference Consumer Queries the
 	 * Patient Identifier Cross-reference Manager for a list of corresponding
@@ -182,55 +173,49 @@ public class ConvenienceMasterPatientIndexV3 {
 	 * Cross-Reference Manager Akteur gemäss IHE PIX).
 	 * </p>
 	 * <p>
-	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE
-	 * PIX Patient Identifier Cross-Reference Concumer</b>
+	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE PIX
+	 * Patient Identifier Cross-Reference Concumer</b>
 	 * </p>
 	 * </div>
 	 *
-	 * @param patient
-	 *            demographic data of the patient
-	 * @param homeCommunityOid
-	 *            local patient domain (oid) of the source
-	 * @param requestedCommunityOIDs
-	 *            array of oids for domains to query
-	 * @param affinityDomain
-	 *            affinityDomain configuration with pixDestination,
-	 *            homeCommunityId and Atna configuration
+	 * @param patient                demographic data of the patient
+	 * @param homeCommunityOid       local patient domain (oid) of the source
+	 * @param requestedCommunityOIDs array of oids for domains to query
+	 * @param affinityDomain         affinityDomain configuration with
+	 *                               pixDestination, homeCommunityId and Atna
+	 *                               configuration
 	 * @return list of ids
 	 */
 	public List<Identificator> queryPatientId(Patient patient, String homeCommunityOid,
 			List<String> requestedCommunityOIDs, AffinityDomain affinityDomain, SecurityHeaderElement security) {
 
 		if (affinityDomain == null) {
-			log.error("affinityDomain has to be specified");
+			log.error(AFFINITY_DOMAIN_NOT_SPECIFIED);
 			return new LinkedList<>();
 		}
 
-		var query = new PixV3Query(affinityDomain, homeCommunityOid, null, requestedCommunityOIDs.get(0),
-				null, this.context, getAuditContext());
+		var query = new PixV3Query(affinityDomain, homeCommunityOid, null, requestedCommunityOIDs.get(0), null,
+				this.context, getAuditContext());
 
-		// var query = new PixV3Query(affinityDomain, homeCommunityOid, context,
-		// auditContext);
 		List<String> ids = query.queryPatientId(new FhirPatient(patient), null, null, security);
 
 		final List<Identificator> list = new ArrayList<>();
-		if (requestedCommunityOIDs != null) {
-			for (var i = 0; i < requestedCommunityOIDs.size(); ++i) {
-				var id = "";
-				if (i < ids.size()) {
-					id = ids.get(i);
-				}
-				list.add(new Identificator(requestedCommunityOIDs.get(i), id));
+		for (var i = 0; i < requestedCommunityOIDs.size(); ++i) {
+			var id = "";
+			if (i < ids.size()) {
+				id = ids.get(i);
 			}
+			list.add(new Identificator(requestedCommunityOIDs.get(i), id));
 		}
+
 		return list;
 	}
 
 	/**
 	 * updates the demographic information of the patient in the mpi.
 	 *
-	 * implements ITI-44 Patient Identity Source – Revise Patient Record updates
-	 * the demographic information of the patient in the mpi.
+	 * implements ITI-44 Patient Identity Source – Revise Patient Record updates the
+	 * demographic information of the patient in the mpi.
 	 *
 	 * <div class="de">
 	 * <p>
@@ -238,25 +223,22 @@ public class ConvenienceMasterPatientIndexV3 {
 	 * Index (Patient Identity Cross-Reference Manager Akteur gemäss IHE PIX)
 	 * </p>
 	 * <p>
-	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE
-	 * PIX Patient Identity Source</b>
+	 * Rolle der API resp. der aufrufenden Anwendung für diese Methode: <b>IHE PIX
+	 * Patient Identity Source</b>
 	 * </p>
 	 * </div>
 	 *
-	 * @param patient
-	 *            demographic data of the patient
-	 * @param homeCommunityOid
-	 *            local patient domain (oid) of the source
-	 * @param affinityDomain
-	 *            affinityDomain configuration with pixDestination,
-	 *            homeCommunityId and Atna configuration
+	 * @param patient          demographic data of the patient
+	 * @param homeCommunityOid local patient domain (oid) of the source
+	 * @param affinityDomain   affinityDomain configuration with pixDestination,
+	 *                         homeCommunityId and Atna configuration
 	 * @return true, if successful
 	 */
-	public boolean updatePatientDemographics(Patient patient, String homeCommunityOid,
-			AffinityDomain affinityDomain, SecurityHeaderElement security) {
+	public boolean updatePatientDemographics(Patient patient, String homeCommunityOid, AffinityDomain affinityDomain,
+			SecurityHeaderElement security) {
 
 		if (affinityDomain == null) {
-			log.error("affinityDomain has to be specified");
+			log.error(AFFINITY_DOMAIN_NOT_SPECIFIED);
 			return false;
 		}
 

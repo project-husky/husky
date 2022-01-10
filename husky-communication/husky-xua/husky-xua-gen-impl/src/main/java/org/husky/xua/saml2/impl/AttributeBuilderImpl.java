@@ -11,19 +11,17 @@
 package org.husky.xua.saml2.impl;
 
 import org.husky.xua.core.SecurityObjectBuilder;
+import org.husky.xua.hl7v3.CE;
 import org.husky.xua.hl7v3.InstanceIdentifier;
+import org.husky.xua.hl7v3.OpenSamlCodedWithEquivalent;
 import org.husky.xua.hl7v3.OpenSamlInstanceIdentifier;
-import org.husky.xua.hl7v3.OpenSamlPurposeOfUse;
-import org.husky.xua.hl7v3.OpenSamlRole;
-import org.husky.xua.hl7v3.PurposeOfUse;
-import org.husky.xua.hl7v3.Role;
+import org.husky.xua.hl7v3.impl.CodedWithEquivalentImpl;
 import org.husky.xua.saml2.AttributeBuilder;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeType;
-import org.opensaml.core.xml.schema.XSAny;
 import org.opensaml.core.xml.schema.XSString;
-import org.opensaml.core.xml.schema.impl.XSAnyBuilder;
 import org.opensaml.core.xml.schema.impl.XSStringBuilder;
 import org.opensaml.saml.saml2.core.AttributeValue;
+import org.opensaml.saml.saml2.core.impl.AttributeValueBuilder;
 
 /**
  * Class implementing the corresponding interface for Attribute building.
@@ -115,16 +113,22 @@ public class AttributeBuilderImpl implements AttributeBuilder,
 
 	@Override
 	public AttributeBuilder value(Object aValue) {
-		final var anyBuilder = new XSAnyBuilder();
-		final XSAny any = anyBuilder.buildObject(AttributeValue.DEFAULT_ELEMENT_NAME);
-		if (aValue instanceof Role) {
-			any.getUnknownXMLObjects().add((OpenSamlRole) aValue);
-		} else if (aValue instanceof PurposeOfUse) {
-			any.getUnknownXMLObjects().add((OpenSamlPurposeOfUse) aValue);
-		} else if (aValue instanceof InstanceIdentifier) {
-			any.getUnknownXMLObjects().add((OpenSamlInstanceIdentifier) aValue);
+		AttributeValue attrValImpl = new AttributeValueBuilder().buildObject();
+
+		if (aValue instanceof CodedWithEquivalentImpl codedWithEquivalentImpl) {
+			if (codedWithEquivalentImpl.getElementQName().getLocalPart() != null
+					&& "Role".equalsIgnoreCase(codedWithEquivalentImpl.getElementQName().getLocalPart())) {
+				attrValImpl.getUnknownXMLObjects().add((OpenSamlCodedWithEquivalent) aValue);
+			} else if (codedWithEquivalentImpl.getElementQName().getLocalPart() != null
+					&& "PurposeOfUse".equalsIgnoreCase(codedWithEquivalentImpl.getElementQName().getLocalPart())) {
+				attrValImpl.getUnknownXMLObjects().add((OpenSamlCodedWithEquivalent) aValue);
+			} else if (codedWithEquivalentImpl.getElementQName().getLocalPart() != null && "InstanceIdentifier"
+					.equalsIgnoreCase(codedWithEquivalentImpl.getElementQName().getLocalPart())) {
+				attrValImpl.getUnknownXMLObjects().add((OpenSamlInstanceIdentifier) aValue);
+			}
 		}
-		attribute.getAttributeValues().add(any);
+
+		attribute.getAttributeValues().add(attrValImpl);
 		return this;
 	}
 
@@ -154,14 +158,14 @@ public class AttributeBuilderImpl implements AttributeBuilder,
 		return null;
 	}
 
-	public PurposeOfUse getValueAsPurposeOfUse() {
+	public CE getValueAsPurposeOfUse() {
 		if (this.attributeImpl != null) {
 			return attributeImpl.getValueAsPurposeOfUse();
 		}
 		return null;
 	}
 
-	public Role getValueAsRole() {
+	public CE getValueAsRole() {
 		if (this.attributeImpl != null) {
 			return attributeImpl.getValueAsRole();
 		}

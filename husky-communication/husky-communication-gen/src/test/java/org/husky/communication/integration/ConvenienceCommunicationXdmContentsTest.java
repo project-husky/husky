@@ -70,7 +70,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
 @EnableAutoConfiguration
-public class ConvenienceCommunicationXdmContentsTest extends XdmTestUtils {
+class ConvenienceCommunicationXdmContentsTest extends XdmTestUtils {
 
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(ConvenienceCommunicationXdmContentsTest.class.getName());
@@ -90,7 +90,7 @@ public class ConvenienceCommunicationXdmContentsTest extends XdmTestUtils {
 	 * correct.
 	 */
 	@Test
-	public void contextLoads() {
+	void contextLoads() {
 		assertNotNull(convenienceCommunication);
 		assertNotNull(convenienceCommunication.getCamelContext());
 	}
@@ -103,7 +103,7 @@ public class ConvenienceCommunicationXdmContentsTest extends XdmTestUtils {
 	 * @throws Exception
 	 */
 	@Test
-	public void createXdmContentsTest() throws Exception {
+	void createXdmContentsTest() throws Exception {
 		// add two files for the XDM Zip
 		// add CDA document with metadata
 		DocumentMetadata metaData = convenienceCommunication.addDocument(DocumentDescriptor.CDA_R2, getDocCda(),
@@ -366,7 +366,7 @@ public class ConvenienceCommunicationXdmContentsTest extends XdmTestUtils {
 	 * @throws IOException
 	 */
 	@Test
-	public void exportImportTest() throws IOException {
+	void exportImportTest() throws IOException {
 		// First an XDM ZIP File is exported. 
 		final File targetFile = new File(filePath + "/xdm_"
 				+ dateFormat.format(new Date()).replace(".", "").replace(" ", "").replace(":", "") + ".zip");
@@ -401,7 +401,7 @@ public class ConvenienceCommunicationXdmContentsTest extends XdmTestUtils {
 	 * metadata.xml
 	 */
 	@Test
-	public void importIntegrityCheck() {
+	void importIntegrityCheck() {
 		convenienceCommunication.clearDocuments();
 		assertTrue(importIntegrityCheck(XDM_FILE_PATH, convenienceCommunication));
 		assertFalse(importIntegrityCheck(XDM_CORRUPT_FILE_PATH, convenienceCommunication));

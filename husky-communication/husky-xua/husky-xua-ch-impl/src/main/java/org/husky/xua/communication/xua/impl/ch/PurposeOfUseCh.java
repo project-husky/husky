@@ -10,8 +10,9 @@
  */
 package org.husky.xua.communication.xua.impl.ch;
 
+import org.husky.xua.hl7v3.CE;
 import org.husky.xua.hl7v3.PurposeOfUse;
-import org.husky.xua.hl7v3.impl.PurposeOfUseBuilder;
+import org.husky.xua.hl7v3.impl.CodedWithEquivalentsBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -21,12 +22,13 @@ import org.husky.xua.hl7v3.impl.PurposeOfUseBuilder;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public abstract class PurposeOfUseChImpl {
+public interface PurposeOfUseCh {
 
-	private static PurposeOfUse createPurposeOfUse(org.husky.communication.ch.enums.PurposeOfUse code) {
-		return new PurposeOfUseBuilder().code(code.getCodeValue())
+	private static CE createPurposeOfUse(org.husky.communication.ch.enums.PurposeOfUse code) {
+		return new CodedWithEquivalentsBuilder().code(code.getCodeValue())
 				.codeSystem(code.getCodeSystemId()).codeSystemName(code.getValueSetName())
-				.displayName(code.getDisplayName()).buildObject();
+				.displayName(code.getDisplayName()).buildObject(PurposeOfUse.DEFAULT_NS_URI,
+						PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME, PurposeOfUse.DEFAULT_PREFIX);
 	}
 
 	/**
@@ -34,7 +36,7 @@ public abstract class PurposeOfUseChImpl {
 	 *
 	 * @return the purpose of use
 	 */
-	public static PurposeOfUse AUTO() {
+	public static CE auto() {
 		return createPurposeOfUse(org.husky.communication.ch.enums.PurposeOfUse.AUTOMATIC_UPLOAD);
 	}
 
@@ -43,7 +45,7 @@ public abstract class PurposeOfUseChImpl {
 	 *
 	 * @return the purpose of use
 	 */
-	public static PurposeOfUse EMER() {
+	public static CE emer() {
 		return createPurposeOfUse(org.husky.communication.ch.enums.PurposeOfUse.EMERGENCY_ACCESS);
 	}
 
@@ -52,7 +54,7 @@ public abstract class PurposeOfUseChImpl {
 	 *
 	 * @return the purpose of use
 	 */
-	public static PurposeOfUse NORM() {
+	public static CE norm() {
 		return createPurposeOfUse(org.husky.communication.ch.enums.PurposeOfUse.NORMAL_ACCESS);
 	}
 

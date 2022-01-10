@@ -11,20 +11,18 @@
 package org.husky.common.basetypes;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.husky.common.basetypes.IdentificatorBaseType;
 import org.junit.jupiter.api.Test;
 
 /**
  * The test class for IdentificatorBaseType.
  */
-public class IdentificatorBaseTypeTest {
+class IdentificatorBaseTypeTest {
 	/**
 	 * Do all tests.
 	 */
 	@Test
-	public void doAllTests() {
+	void doAllTests() {
 
 		String assigningAuthorityName = "assigningAuthorityName";
 		boolean displayable = false;
@@ -40,7 +38,7 @@ public class IdentificatorBaseTypeTest {
 				.withExtension(extension).withRoot(root).build();
 
 		assertEquals(id1.hashCode(), id2.hashCode());
-		assertTrue(id1.equals(id2));
+		assertEquals(id1, id2);
 
 		assertEquals(assigningAuthorityName, id1.getAssigningAuthorityName());
 		assertEquals(displayable, id1.isDisplayable());

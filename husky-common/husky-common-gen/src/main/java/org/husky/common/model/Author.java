@@ -11,17 +11,31 @@
 
 package org.husky.common.model;
 
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.enums.CodeSystems;
 import org.husky.common.enums.Isco08;
 import org.husky.common.enums.NullFlavor;
-import org.husky.common.hl7cdar2.*;
-import org.husky.common.utils.DateUtil;
-import org.husky.common.utils.Util;
+import org.husky.common.hl7cdar2.AD;
+import org.husky.common.hl7cdar2.CE;
+import org.husky.common.hl7cdar2.ED;
+import org.husky.common.hl7cdar2.II;
+import org.husky.common.hl7cdar2.PN;
+import org.husky.common.hl7cdar2.POCDMT000040AssignedAuthor;
+import org.husky.common.hl7cdar2.POCDMT000040Author;
+import org.husky.common.hl7cdar2.POCDMT000040AuthoringDevice;
+import org.husky.common.hl7cdar2.POCDMT000040Person;
+import org.husky.common.hl7cdar2.TEL;
+import org.husky.common.hl7cdar2.TS;
+import org.husky.common.utils.time.DateTimes;
 import org.husky.common.utils.time.Hl7Dtm;
-
-import java.time.Instant;
-import java.util.*;
 
 /**
  * Author
@@ -46,7 +60,12 @@ public class Author {
 
         // add functionCode and time
         mAuthor.setFunctionCode(Isco08.MEDICAL_DOCTORS.getCE());
-        mAuthor.setTime(DateUtil.date2TsTzon(getTimeAsDate()));
+        
+        Date dateTime = getTimeAsDate();
+
+		if (dateTime != null) {
+			mAuthor.setTime(DateTimes.toDateTs(dateTime.toInstant()));
+		}
 
         setTime(null);
     }
@@ -118,7 +137,12 @@ public class Author {
         if (functionCode != null) {
             mAuthor.setFunctionCode(functionCode.getHl7CdaR2Ce());
         }
-        mAuthor.setTime(DateUtil.date2TsTzon(new Date()));
+
+		Date dateTime = getTimeAsDate();
+
+		if (dateTime != null) {
+			mAuthor.setTime(DateTimes.toDateTs(dateTime.toInstant()));
+		}
 
         setTime(null);
     }
@@ -167,7 +191,7 @@ public class Author {
     public Author(org.husky.common.model.Organization organizationAsAuthor) {
         mAuthor = new POCDMT000040Author();
         if (organizationAsAuthor.getHl7CdaR2Pocdmt000040Organization() != null) {
-            mAuthor.setAssignedAuthor(Util.createAssignedAuthorFromOrganization(organizationAsAuthor));
+			mAuthor.setAssignedAuthor(organizationAsAuthor.createHl7CdaR2Pocdmt000040AssignedAuthor());
         }
         setTime(null);
     }
@@ -184,7 +208,7 @@ public class Author {
             mAuthor.getAssignedAuthor().setAssignedPerson(person);
         }
 
-        if (patientAsAuthor.getHl7CdaPerson().getName() != null) {
+		if (!patientAsAuthor.getHl7CdaPerson().getName().isEmpty()) {
             for (final org.husky.common.model.Name name : patientAsAuthor.getNames()) {
                 mAuthor.getAssignedAuthor().getAssignedPerson().getName().add(name.getHl7CdaR2Pn());
             }
@@ -404,7 +428,7 @@ public class Author {
      * @return the ids
      */
     public List<Identificator> getIds() {
-        return Util.convertIds(mAuthor.getAssignedAuthor().getId());
+		return Identificator.getIdentificatorList(mAuthor.getAssignedAuthor().getId());
     }
 
     public List<TEL> getMdhtTelecoms() {
@@ -567,9 +591,9 @@ public class Author {
     /**
      * Returns the participation start time as an {@link Hl7Dtm} or {@code null}.
      */
-    @Nullable
+	@Nullable
     public Instant getTimeAsInstant() {
-        return Optional.ofNullable(this.getTimeAsHl7Dtm()).map(Hl7Dtm::toInstant).orElse(null);
+		return Optional.ofNullable(this.getTimeAsHl7Dtm()).map(Hl7Dtm::toInstant).orElse(Hl7Dtm.now().toInstant());
     }
 
     /**
@@ -642,11 +666,11 @@ public class Author {
      *
      * @param date the start time of the participation as date
      */
-    public void setTime(Date date) {
-        if (date != null) {
-            mAuthor.setTime(DateUtil.date2TsTzon(date));
+	public void setTime(Calendar date) {
+		if (date != null) {
+			mAuthor.setTime(DateTimes.toDateTs(date.toInstant(), date.getTimeZone().toZoneId()));
         } else {
-            mAuthor.setTime(DateUtil.date2TsTzon(new Date()));
+			mAuthor.setTime(DateTimes.toDateTs(new Date().toInstant()));
         }
     }
 

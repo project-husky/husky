@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
  * Test of class Performer
  */
 @Disabled
-public class PerformerTest {
+class PerformerTest {
 
 	/**
 	 * Method implementing
@@ -37,7 +37,7 @@ public class PerformerTest {
 	 * .
 	 */
 	@Test
-	public void testAddAddress() {
+	void testAddAddress() {
 		fail("Not yet implemented");
 	}
 
@@ -47,7 +47,7 @@ public class PerformerTest {
 	 * .
 	 */
 	@Test
-	public void testAddId() {
+	void testAddId() {
 		fail("Not yet implemented");
 	}
 
@@ -57,7 +57,7 @@ public class PerformerTest {
 	 * .
 	 */
 	@Test
-	public void testAddName() {
+	void testAddName() {
 		fail("Not yet implemented");
 	}
 
@@ -66,7 +66,7 @@ public class PerformerTest {
 	 * {@link org.husky.common.model.Performer#copyMdhtPerfomer()}.
 	 */
 	@Test
-	public void testCopyMdhtPerfomer() {
+	void testCopyMdhtPerfomer() {
 		fail("Not yet implemented");
 	}
 
@@ -75,7 +75,7 @@ public class PerformerTest {
 	 * {@link org.husky.common.model.Performer#getCompleteName()}.
 	 */
 	@Test
-	public void testGetCompleteName() {
+	void testGetCompleteName() {
 		fail("Not yet implemented");
 	}
 
@@ -84,7 +84,7 @@ public class PerformerTest {
 	 * {@link org.husky.common.model.Performer#getGln()}.
 	 */
 	@Test
-	public void testGetGln() {
+	void testGetGln() {
 		fail("Not yet implemented");
 	}
 
@@ -93,7 +93,7 @@ public class PerformerTest {
 	 * {@link org.husky.common.model.Performer#getGlnAsIdentificator()}.
 	 */
 	@Test
-	public void testGetGlnAsIdentificator() {
+	void testGetGlnAsIdentificator() {
 		fail("Not yet implemented");
 	}
 
@@ -102,7 +102,7 @@ public class PerformerTest {
 	 * {@link org.husky.common.model.Performer#Performer()}.
 	 */
 	@Test
-	public void testPerformer() {
+	void testPerformer() {
 		fail("Not yet implemented");
 	}
 
@@ -112,7 +112,7 @@ public class PerformerTest {
 	 * .
 	 */
 	@Test
-	public void testPerformerName() {
+	void testPerformerName() {
 		fail("Not yet implemented");
 	}
 
@@ -122,7 +122,7 @@ public class PerformerTest {
 	 * .
 	 */
 	@Test
-	public void testPerformerNameString() {
+	void testPerformerNameString() {
 		fail("Not yet implemented");
 	}
 
@@ -132,7 +132,7 @@ public class PerformerTest {
 	 * .
 	 */
 	@Test
-	public void testPerformerOrganization() {
+	void testPerformerOrganization() {
 		fail("Not yet implemented");
 	}
 
@@ -142,7 +142,7 @@ public class PerformerTest {
 	 * .
 	 */
 	@Test
-	public void testPerformerPerformer2() {
+	void testPerformerPerformer2() {
 		fail("Not yet implemented");
 	}
 
@@ -151,7 +151,7 @@ public class PerformerTest {
 	 * {@link org.husky.common.model.Performer#setGln(java.lang.String)}.
 	 */
 	@Test
-	public void testSetGln() {
+	void testSetGln() {
 		fail("Not yet implemented");
 	}
 
@@ -161,7 +161,7 @@ public class PerformerTest {
 	 * .
 	 */
 	@Test
-	public void testSetOrganization() {
+	void testSetOrganization() {
 		fail("Not yet implemented");
 	}
 
@@ -171,7 +171,7 @@ public class PerformerTest {
 	 * .
 	 */
 	@Test
-	public void testSetTelecoms() {
+	void testSetTelecoms() {
 		fail("Not yet implemented");
 	}
 
@@ -181,7 +181,7 @@ public class PerformerTest {
 	 * .
 	 */
 	@Test
-	public void testSetTimeValue() {
+	void testSetTimeValue() {
 		fail("Not yet implemented");
 	}
 

@@ -304,15 +304,21 @@ public class PixV3Query extends PixPdqV3QueryBase {
 				}
 			}
 			if (retVal == null) {
-				for (var i = 0; i < v3PixConsumerResponse.getAsOtherIDs().size(); i++) {
-					final II id = v3PixConsumerResponse.getAsOtherIDs().get(i).getId().get(0);
-					if (id != null && id.getRoot() != null && id.getRoot().equals(rootOid)) {
-						retVal = id.getExtension();
-					}
-				}
+				retVal = getIdFromOthers(v3PixConsumerResponse, rootOid);
 			}
 		}
 		return retVal;
+	}
+
+	private String getIdFromOthers(PixV3QueryResponse v3PixConsumerResponse, String rootOid) {
+		for (var i = 0; i < v3PixConsumerResponse.getAsOtherIDs().size(); i++) {
+			final II id = v3PixConsumerResponse.getAsOtherIDs().get(i).getId().get(0);
+			if (id != null && id.getRoot() != null && id.getRoot().equals(rootOid)) {
+				return id.getExtension();
+			}
+		}
+
+		return null;
 	}
 
 	private PixV3QueryResponse sendQuery(PixV3QueryRequest request, SecurityHeaderElement assertion, URI pdqDest)

@@ -35,7 +35,7 @@ import org.junit.jupiter.api.Test;
 /**
  * The Test Class for ValueSetManager.
  */
-public class ValueSetManagerTest {
+class ValueSetManagerTest {
 
 	/** The test value set config file. */
 	private File testValueSetConfigFile = new File(Util.getTempDirectory()
@@ -51,7 +51,7 @@ public class ValueSetManagerTest {
 	 * @throws IOException
 	 */
 	@Test
-	public void saveLoadValueSetConfigTest() throws IOException {
+	void saveLoadValueSetConfigTest() throws IOException {
 		ValueSetManager valueSetManager = new ValueSetManager();
 
 		String className = "className";
@@ -88,7 +88,7 @@ public class ValueSetManagerTest {
 	 * @throws IOException
 	 */
 	@Test
-	public void saveLoadValueSetYamlTest() throws IOException {
+	void saveLoadValueSetYamlTest() throws IOException {
 		ValueSetManager valueSetManager = new ValueSetManager();
 
 		// Save a ValueSet

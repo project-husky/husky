@@ -22,7 +22,7 @@ import org.husky.xua.saml2.impl.ResponseBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class ResponseBuilderImplTest {
+class ResponseBuilderImplTest {
 
 	private ResponseBuilderImpl responseBuilder;
 	private String testConsent;
@@ -43,7 +43,7 @@ public class ResponseBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.ResponseBuilderImpl#create()}.
 	 */
 	@Test
-	public void testCreate() {
+	void testCreate() {
 		final Response ref = responseBuilder.create();
 
 		assertNull(ref.getConsent());
@@ -55,7 +55,7 @@ public class ResponseBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.ResponseBuilderImpl#create(org.opensaml.saml.saml2.core.Response)}.
 	 */
 	@Test
-	public void testCreateResponse() {
+	void testCreateResponse() {
 		final org.opensaml.saml.saml2.core.Response innerResponse = new org.opensaml.saml.saml2.core.impl.ResponseBuilder()
 				.buildObject();
 		innerResponse.setConsent(testConsent);

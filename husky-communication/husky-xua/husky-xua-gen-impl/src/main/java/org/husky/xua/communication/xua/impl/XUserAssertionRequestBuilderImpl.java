@@ -17,10 +17,8 @@ import org.husky.xua.communication.xua.XUserAssertionConstants;
 import org.husky.xua.communication.xua.XUserAssertionRequest;
 import org.husky.xua.communication.xua.XUserAssertionRequestBuilder;
 import org.husky.xua.core.SecurityObjectBuilder;
-import org.husky.xua.hl7v3.OpenSamlPurposeOfUse;
-import org.husky.xua.hl7v3.OpenSamlRole;
-import org.husky.xua.hl7v3.PurposeOfUse;
-import org.husky.xua.hl7v3.Role;
+import org.husky.xua.hl7v3.CE;
+import org.husky.xua.hl7v3.impl.CodedWithEquivalentImpl;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.core.xml.schema.XSAny;
 import org.opensaml.core.xml.schema.XSString;
@@ -190,11 +188,11 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 	 * @see org.husky.xua.communication.xua.XUserAssertionRequestBuilder#purposeOfUse(org.husky.xua.hl7v3.PurposeOfUse)
 	 */
 	@Override
-	public XUserAssertionRequestBuilder purposeOfUse(PurposeOfUse purposeOfUse) {
+	public XUserAssertionRequestBuilder purposeOfUse(CE purposeOfUse) {
 		if (purposeOfUse != null) {
 			addXMLObjectToClaims(
 					createObjectAttribute(XUserAssertionConstants.OASIS_XACML_PURPOSEOFUSE,
-							(OpenSamlPurposeOfUse) purposeOfUse));
+							(CodedWithEquivalentImpl) purposeOfUse));
 		}
 		return this;
 	}
@@ -264,10 +262,10 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 	 * @see org.husky.xua.communication.xua.XUserAssertionRequestBuilder#subjectRole(org.husky.xua.hl7v3.Role)
 	 */
 	@Override
-	public XUserAssertionRequestBuilder subjectRole(Role aRole) {
+	public XUserAssertionRequestBuilder subjectRole(CE aRole) {
 		if (aRole != null) {
 			addXMLObjectToClaims(createObjectAttribute(XUserAssertionConstants.OASIS_XACML_ROLE,
-					(OpenSamlRole) aRole));
+					(CodedWithEquivalentImpl) aRole));
 		}
 		return this;
 	}

@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 /**
  * TestClass to test the class PrivacyPolicyFeedResponseBuilderImpl
  */
-public class PrivacyPolicyFeedResponseBuilderImplTest {
+class PrivacyPolicyFeedResponseBuilderImplTest {
 
 	private PrivacyPolicyFeedResponseBuilder builder;
 	private Exception testException;
@@ -39,7 +39,7 @@ public class PrivacyPolicyFeedResponseBuilderImplTest {
 	public void setUp() throws Exception {
 		builder = new PrivacyPolicyFeedResponseBuilderImpl();
 		testException = new Exception("myTest Exception");
-		testMethod = PpfMethod.DeletePolicy;
+		testMethod = PpfMethod.DELETE_POLICY;
 		testStatus = "MyStatus";
 	}
 
@@ -48,7 +48,7 @@ public class PrivacyPolicyFeedResponseBuilderImplTest {
 	 * {@link org.husky.xua.ch.ppq.impl.PrivacyPolicyFeedResponseBuilderImpl#create()}.
 	 */
 	@Test
-	public void testCreate() {
+	void testCreate() {
 		final PrivacyPolicyFeedResponse ref = builder.create();
 		assertNotNull(ref);
 	}
@@ -58,7 +58,7 @@ public class PrivacyPolicyFeedResponseBuilderImplTest {
 	 * {@link org.husky.xua.ch.ppq.impl.PrivacyPolicyFeedResponseBuilderImpl#exception(java.lang.Exception)}.
 	 */
 	@Test
-	public void testException() {
+	void testException() {
 
 		final PrivacyPolicyFeedResponse ref = builder.exception(testException).create();
 		assertNotNull(ref);
@@ -70,7 +70,7 @@ public class PrivacyPolicyFeedResponseBuilderImplTest {
 	 * {@link org.husky.xua.ch.ppq.impl.PrivacyPolicyFeedResponseBuilderImpl#method(org.husky.xua.ch.ppq.PrivacyPolicyFeed.PpfMethod)}.
 	 */
 	@Test
-	public void testMethod() {
+	void testMethod() {
 		final PrivacyPolicyFeedResponse ref = builder.method(testMethod).create();
 		assertNotNull(ref);
 		assertEquals(testMethod, ref.getMethod());
@@ -81,7 +81,7 @@ public class PrivacyPolicyFeedResponseBuilderImplTest {
 	 * {@link org.husky.xua.ch.ppq.impl.PrivacyPolicyFeedResponseBuilderImpl#status(java.lang.String)}.
 	 */
 	@Test
-	public void testStatus() {
+	void testStatus() {
 		final PrivacyPolicyFeedResponse ref = builder.status(testStatus).create();
 		assertNotNull(ref);
 		assertEquals(testStatus, ref.getStatus());

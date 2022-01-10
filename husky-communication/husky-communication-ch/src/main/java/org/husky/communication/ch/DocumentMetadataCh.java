@@ -19,6 +19,7 @@ import org.husky.common.ch.ChEpr;
 import org.husky.common.ch.enums.ConfidentialityCode;
 import org.husky.common.communication.DocumentMetadata;
 import org.husky.common.enums.LanguageCode;
+import org.husky.common.enums.ValueSetEnumInterface;
 import org.husky.communication.ch.enums.ClassCode;
 import org.husky.communication.ch.enums.FormatCode;
 import org.husky.communication.ch.enums.HealthcareFacilityTypeCode;
@@ -65,7 +66,7 @@ public class DocumentMetadataCh extends org.husky.common.communication.DocumentM
 	 * @param code
 	 *            the code
 	 */
-	public void addConfidentialityCode(ConfidentialityCode code) {
+	public void addConfidentialityCode(ValueSetEnumInterface code) {
 		getDocumentEntry().getConfidentialityCodes().add(code.getIpfCode());
 	}
 

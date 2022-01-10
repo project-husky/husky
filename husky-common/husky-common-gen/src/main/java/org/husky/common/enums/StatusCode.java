@@ -23,22 +23,22 @@ public enum StatusCode {
 	 * <div class="en"></div> <div class="de">nicht mehr gewollt</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 */
-	ABORTED("aborted", "aborted"),
+	ABORTED(EnumConstants.ABORTED_CODE, EnumConstants.ABORTED_CODE),
 	/**
 	 * <div class="en"></div> <div class="de">aktiv</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 */
-	ACTIVE("active", "active"),
+	ACTIVE(EnumConstants.ACTIVE_CODE, EnumConstants.ACTIVE_CODE),
 	/**
 	 * <div class="en"></div> <div class="de">abgebrochen</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 */
-	CANCELLED("cancelled", "cancelled"),
+	CANCELLED(EnumConstants.CANCELLED_CODE, EnumConstants.CANCELLED_CODE),
 	/**
 	 * <div class="en"></div> <div class="de">erledigt</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 */
-	COMPLETED("completed", "completed"),
+	COMPLETED(EnumConstants.COMPLETED_CODE, EnumConstants.COMPLETED_CODE),
 	/**
 	 * <div class="en"></div> <div class="de">abwartend</div>
 	 * <div class="fr"></div> <div class="it"></div>
@@ -53,11 +53,11 @@ public enum StatusCode {
 	 * <div class="en"></div> <div class="de">ausgesetzt</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 */
-	SUSPENDED("suspended", "suspended");
+	SUSPENDED(EnumConstants.SUSPENDED_CODE, EnumConstants.SUSPENDED_CODE);
 
-	public static final String ABORTED_CODE = "aborted";
-	public static final String ACTIVE_CODE = "active";
-	public static final String CANCELLED_CODE = "cancelled";
+	public static final String ABORTED_CODE = EnumConstants.ABORTED_CODE;
+	public static final String ACTIVE_CODE = EnumConstants.ACTIVE_CODE;
+	public static final String CANCELLED_CODE = EnumConstants.CANCELLED_CODE;
 	/**
 	 * <div class="en">Name of the Code System</div> <div class="de">Name des
 	 * Codes Systems</div>
@@ -68,12 +68,12 @@ public enum StatusCode {
 	 * <div class="de">Identifikator für das Code System</div>
 	 */
 	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.14";
-	public static final String COMPLETED_CODE = "completed";
+	public static final String COMPLETED_CODE = EnumConstants.COMPLETED_CODE;
 	public static final String HELD_CODE = "held";
 
 	public static final String NEW_CODE = "new";
 
-	public static final String SUSPENDED_CODE = "suspended";
+	public static final String SUSPENDED_CODE = EnumConstants.SUSPENDED_CODE;
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -172,8 +172,7 @@ public enum StatusCode {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		final Code ehcCode = new Code(code, CODE_SYSTEM_OID, displayName);
-		return ehcCode;
+		return new Code(code, CODE_SYSTEM_OID, displayName);
 	}
 
 	/**

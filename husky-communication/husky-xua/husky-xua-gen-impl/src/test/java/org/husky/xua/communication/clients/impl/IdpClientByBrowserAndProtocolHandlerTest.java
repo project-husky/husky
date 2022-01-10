@@ -102,7 +102,7 @@ public class IdpClientByBrowserAndProtocolHandlerTest extends ServerTestHelper {
 	 * @throws IOException
 	 */
 	@Test
-	public void testReadFromJARFile() throws IOException {
+	void testReadFromJARFile() throws IOException {
 		final String content = client.readFromJARFile(testFilename);
 		assertNotNull(content);
 		assertTrue(content.startsWith("org.opensaml.core.criterion.EntityIdCriterion"));
@@ -116,7 +116,7 @@ public class IdpClientByBrowserAndProtocolHandlerTest extends ServerTestHelper {
 	 */
 	@Test
 	@Disabled("This test is not executable in this way.")
-	public void testSend() throws ClientSendException {
+	void testSend() throws ClientSendException {
 
 		final Object ref = client.send(testAuthnRequest);
 		assertNotNull(ref);

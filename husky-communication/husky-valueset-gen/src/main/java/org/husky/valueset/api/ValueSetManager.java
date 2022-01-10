@@ -23,9 +23,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -52,7 +55,6 @@ import org.husky.common.basetypes.NameBaseType;
 import org.husky.common.basetypes.OrganizationBaseType;
 import org.husky.common.enums.LanguageCode;
 import org.husky.common.utils.CustomizedYaml;
-import org.husky.common.utils.DateUtil;
 import org.husky.common.utils.LangText;
 import org.husky.common.utils.xml.XmlFactories;
 import org.husky.valueset.config.ValueSetConfig;
@@ -69,6 +71,7 @@ import org.husky.valueset.model.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -88,6 +91,11 @@ public class ValueSetManager {
 
 	/** The SLF4J logger instance. */
 	private static Logger log = LoggerFactory.getLogger(ValueSetManager.class);
+
+	private static final String ELEMENT_NAME_CODE_SYSTEM = "codeSystem";
+	private static final String ELEMENT_NAME_CODE = "code";
+	private static final String ELEMENT_NAME_DISPLAY_NAME = "displayName";
+	private static final String ELEMENT_NAME_LANGUAGE = "language";
 
 	/**
 	 * <div class="en">The JSONPath path to extract a value set from the JSON
@@ -114,15 +122,6 @@ public class ValueSetManager {
 		return new URL(
 				baseUrl + "&id=" + java.net.URLEncoder.encode(id.getRoot(), StandardCharsets.UTF_8) + "&effectiveDate="
 						+ java.net.URLEncoder.encode(dateFormat.format(effectiveDate), StandardCharsets.UTF_8));
-	}
-
-	/**
-	 * <div class="en">Instantiates a ValueSetManager. Default constructor.</div>
-	 *
-	 * <div class="de">Instanziiert einen ValueSetManager.
-	 * Standardkonstruktor.</div>
-	 */
-	public ValueSetManager() {
 	}
 
 	/**
@@ -372,13 +371,10 @@ public class ValueSetManager {
 	 */
 	public ValueSet loadValueSetIheSvs(InputStream inputStream)
 			throws IOException, ParserConfigurationException, SAXException {
-		var reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
 		var valueSet = new ValueSet();
 		var version = new Version();
-
 		String textContent;
-		DocumentBuilder docBuilder = XmlFactories.newSafeDocumentBuilder();
-		Document xmlDoc = docBuilder.parse(IOUtils.toInputStream(IOUtils.toString(reader), StandardCharsets.UTF_8));
+		Document xmlDoc = getDocument(inputStream);
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//ihesvs:ValueSet/@id");
 		if (textContent != null)
@@ -394,7 +390,7 @@ public class ValueSetManager {
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//ihesvs:ValueSet/ihesvs:EffectiveDate/text()");
 		if (textContent != null)
-			version.setValidFrom(DateUtil.parseDateyyyyMMdd2(textContent));
+			version.setValidFrom(getValidFromDate(textContent));
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//ihesvs:ValueSet/@version");
 		if (textContent != null)
@@ -415,23 +411,32 @@ public class ValueSetManager {
 		nodeList = evaluateXpathExprAsNodeList(xmlDoc, "//ihesvs:ValueSet/ihesvs:ConceptList[1]/ihesvs:Concept");
 
 		if (nodeList != null) {
+			valueSet.getValueSetEntryList().addAll(getValueSetEntries(nodeList, langCodes, xmlDoc));
+		}
+
+		valueSet.setVersion(version);
+
+		// Name is not available in IHE SVS format
+
+		textContent = evaluateXpathExprAsString(xmlDoc, "//ihesvs:ValueSet/ihesvs:Status/text()");
+		if (textContent != null) {
+			valueSet.setStatus(getValueSetStatus(textContent));
+		}
+
+		return valueSet;
+	}
+
+	private List<ValueSetEntry> getValueSetEntries(NodeList nodeList, ArrayList<LanguageCode> langCodes,
+			Document xmlDoc) {
+		List<ValueSetEntry> entries = new LinkedList<>();
+		String textContent = null;
+
+		if (nodeList != null) {
 			for (var i = 0; i < nodeList.getLength(); i++) {
 				var node = nodeList.item(i);
 				if ("Concept".equals(node.getNodeName())) {
 					var valueSetEntry = new ValueSetEntry();
-					var code = new CodeBaseType();
-
-					textContent = node.getAttributes().getNamedItem("code").getNodeValue();
-					if (textContent != null)
-						code.setCode(textContent);
-
-					textContent = node.getAttributes().getNamedItem("codeSystem").getNodeValue();
-					if (textContent != null)
-						code.setCodeSystem(textContent);
-
-					textContent = node.getAttributes().getNamedItem("displayName").getNodeValue();
-					if (textContent != null)
-						code.setDisplayName(textContent);
+					var code = createCode(node);
 
 					valueSetEntry.setCodeBaseType(code);
 
@@ -448,34 +453,21 @@ public class ValueSetManager {
 						}
 					}
 
-					valueSet.addValueSetEntry(valueSetEntry);
+					entries.add(valueSetEntry);
 				}
 			}
 		}
 
-		valueSet.setVersion(version);
+		return entries;
+	}
 
-		// Name is not available in IHE SVS format
-		// valueSet.setName(name);
+	private ValueSetStatus getValueSetStatus(String status) {
+		if ("active".equalsIgnoreCase(status))
+			return ValueSetStatus.FINAL;
+		if ("inactive".equalsIgnoreCase(status))
+			return ValueSetStatus.DEPRECATED;
 
-		textContent = evaluateXpathExprAsString(xmlDoc, "//ihesvs:ValueSet/ihesvs:Status/text()");
-		if (textContent != null) {
-			String status = textContent;
-
-			if ("active".equalsIgnoreCase(status))
-				valueSet.setStatus(ValueSetStatus.FINAL);
-			if ("inactive".equalsIgnoreCase(status))
-				valueSet.setStatus(ValueSetStatus.DEPRECATED);
-
-		}
-
-		// This is for debugging purposes, only:
-		// ValueSetManager mgr = new ValueSetManager();
-		// mgr.saveValueSet(valueSet,
-		// Util.getTempDirectory() + FileUtil.getPlatformSpecificPathSeparator()
-		// + "testDownloadedValueSetIheSvs.yaml");
-
-		return valueSet;
+		return null;
 	}
 
 	/**
@@ -529,291 +521,358 @@ public class ValueSetManager {
 		var reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
 		var valueSet = new ValueSet();
 		var version = new Version();
+		valueSet.setVersion(version);
 		Map<String, Object> map = getValueSetJsonMap(reader);
 		for (Entry<String, Object> entry : map.entrySet()) {
-			String key = entry.getKey();
+			setValueSetValues(valueSet, entry.getKey(), entry.getValue());
+		}
 
-			if ("id".contentEquals(key) && (entry.getValue() != null))
-				valueSet.setIdentificator(
-						IdentificatorBaseType.builder().withRoot(entry.getValue().toString()).build());
-			if ("name".contentEquals(key) && (entry.getValue() != null))
-				valueSet.setName(entry.getValue().toString());
-			if ("displayName".contentEquals(key) && (entry.getValue() != null))
-				valueSet.setDisplayName(entry.getValue().toString());
-			if ("versionLabel".contentEquals(key) && (entry.getValue() != null))
-				version.setLabel(entry.getValue().toString());
-			if ("effectiveDate".contentEquals(key) && (entry.getValue() != null))
-				version.setValidFrom(DateUtil.parseDateyyyyMMddTHHmmss(entry.getValue().toString()));
-			if ("statusCode".contentEquals(key) && (entry.getValue() != null)) {
-				var status = entry.getValue().toString();
+		return valueSet;
 
-				// new: Value set just created and is new and work in progress
-				// to become a draft/finalized value set. Beyond the author,
-				// nobody should look at this value set unless it's status code
-				// is draft or finalized.
-				if ("new".equalsIgnoreCase(status))
-					valueSet.setStatus(ValueSetStatus.NEW);
-				// draft: Value set under development (nascent). Metadata and
-				// value set may be incomplete. Entered primarily to encourage
-				// other users to be aware of ongoing process.
-				if ("draft".equalsIgnoreCase(status))
-					valueSet.setStatus(ValueSetStatus.DRAFT);
+	}
 
-				// final: Value set has been published by the custodian
-				// organization and deemed fit for use. May have associated
-				// adoption and annotation metadata
-				if ("final".equalsIgnoreCase(status))
-					valueSet.setStatus(ValueSetStatus.FINAL);
+	private void setValueSetValues(ValueSet valueSet, String key, Object value) {
+		if (value == null) {
+			return;
+		}
 
-				// deprecated: Value set retired: No longer fit for use.
-				// Information available for historical reference.
-				if ("deprecated".equalsIgnoreCase(status))
-					valueSet.setStatus(ValueSetStatus.DEPRECATED);
+		if ("id".contentEquals(key)) {
+			valueSet.setIdentificator(IdentificatorBaseType.builder().withRoot(value.toString()).build());
+		} else if ("name".contentEquals(key)) {
+			valueSet.setName(value.toString());
+		} else if (ELEMENT_NAME_DISPLAY_NAME.contentEquals(key)) {
+			valueSet.setDisplayName(value.toString());
+		} else if ("versionLabel".contentEquals(key)) {
+			valueSet.getVersion().setLabel(value.toString());
+		} else if ("effectiveDate".contentEquals(key)) {
+			valueSet.getVersion().setValidFrom(getValidFromDate(value.toString()));
+		} else if ("statusCode".contentEquals(key)) {
+			var status = value.toString();
+			valueSet.setStatus(getStatusCode(status));
+		} else if ("desc".contentEquals(key)
+				&& (value.getClass() == JSONArray.class)) {
+			JSONArray descs = (JSONArray) value;
+			valueSet.getDescriptionList().addAll(getDescriptions(descs));
+		} else if ("publishingAuthority".contentEquals(key)
+				&& (value.getClass() == JSONArray.class)) {
+			JSONArray descs = (JSONArray) value;
+			valueSet.getVersion().setPublishingAuthority(getPublishingAuthority(descs));
+		} else if ("conceptList".contentEquals(key) 
+				&& (value.getClass() == JSONArray.class)) {
+			JSONArray concepts = (JSONArray) value;
+			addValueSetEntries(concepts, valueSet);
+		}
+	}
 
-				// rejected: Value set is rejected
-				if ("rejected".equalsIgnoreCase(status))
-					valueSet.setStatus(ValueSetStatus.REJECTED);
-
-				// cancelled: Value set is withdrawn
-				if ("cancelled".equalsIgnoreCase(status))
-					valueSet.setStatus(ValueSetStatus.CANCELLED);
-
+	private Date getValidFromDate(String value) {
+		try {
+			SimpleDateFormat sdf = null;
+			if (value.length() == 10) {
+				sdf = new SimpleDateFormat("yyyy-MM-dd");
+			} else {
+				sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 			}
-			if ("desc".contentEquals(key) && (entry.getValue() != null)
-					&& (entry.getValue().getClass() == JSONArray.class)) {
-				JSONArray descs = (JSONArray) entry.getValue();
-				for (Object object : descs) {
-					@SuppressWarnings("unchecked")
-					Map<String, Object> subMap = (Map<String, Object>) object;
-					var content = "";
-					LanguageCode languageCode = null;
-					for (Entry<String, Object> subEntry : subMap.entrySet()) {
-						String subKey = subEntry.getKey();
-						if ("language".contentEquals(subKey) && (subEntry.getValue() != null)) {
-							String lang = subEntry.getValue().toString();
-							languageCode = getLanguageCode(lang);
-						}
-						if (("content".equals(subKey) || "#text".equals(subKey)) && (subEntry.getValue() != null))
-							content = subEntry.getValue().toString();
-					}
-					valueSet.addDescription(new LangText(languageCode,
-							content.replace("\r\n", "\n").replace("\n", "").replaceAll("\\s+", " ").trim()));
+
+			return sdf.parse(value);
+		} catch (final ParseException e) {
+			throw new IllegalArgumentException(
+					"Cannot parse date: [" + value + "]. Expected format is yyyy-MM-ddTHH:mm:ss.", e);
+		}
+	}
+
+	private OrganizationBaseType getPublishingAuthority(JSONArray descs) {
+		var org = new OrganizationBaseType();
+		AddressBaseType addr = null;
+		for (Object object : descs) {
+			@SuppressWarnings("unchecked")
+			Map<String, Object> subMap = (Map<String, Object>) object;
+			for (Entry<String, Object> subEntry : subMap.entrySet()) {
+				String subKey = subEntry.getKey();
+				if ("name".contentEquals(subKey) && (subEntry.getValue() != null)) {
+					org.addName(NameBaseType.builder().withName(subEntry.getValue().toString()).build());
+				}
+				if ("addrLine".contentEquals(subKey) && (subEntry.getValue() != null)) {
+					JSONArray contents = (JSONArray) subEntry.getValue();
+					addr = getAddress(contents);
 				}
 			}
-			if ("publishingAuthority".contentEquals(key) && (entry.getValue() != null)
-					&& (entry.getValue().getClass() == JSONArray.class)) {
-				JSONArray descs = (JSONArray) entry.getValue();
-				var org = new OrganizationBaseType();
-				AddressBaseType addr = null;
-				for (Object object : descs) {
-					@SuppressWarnings("unchecked")
-					Map<String, Object> subMap = (Map<String, Object>) object;
-					for (Entry<String, Object> subEntry : subMap.entrySet()) {
-						String subKey = subEntry.getKey();
-						if ("name".contentEquals(subKey) && (subEntry.getValue() != null)) {
-							org.addName(NameBaseType.builder().withName(subEntry.getValue().toString()).build());
-						}
-						if ("addrLine".contentEquals(subKey) && (subEntry.getValue() != null)) {
-							JSONArray contents = (JSONArray) subEntry.getValue();
-							String addrLine1 = null;
-							String addrLine2 = null;
-							for (Object object2 : contents) {
-								String type = null;
-								String content = null;
-								if (object2 instanceof String) {
-									content = (String) object2;
-								} else if (object2 instanceof Map) {
-									@SuppressWarnings("unchecked")
-									Map<String, Object> subMap2 = (Map<String, Object>) object2;
-									for (Entry<String, Object> subEntry2 : subMap2.entrySet()) {
-										type = null;
-										String subKey2 = subEntry2.getKey();
-										if ("type".contentEquals(subKey2) && (subEntry2.getValue() != null))
-											type = subEntry2.getValue().toString();
+		}
+		if (addr != null)
+			org.addAddress(addr);
 
-										if ("content".contentEquals(subKey2) && (subEntry2.getValue() != null))
-											content = subEntry2.getValue().toString();
-									}
-								}
+		return org;
+	}
 
-								// type:uri is not implemented, yet. Feel free
-								// to add when you use it.
-								if (type == null) {
-									if (addrLine1 == null)
-										addrLine1 = content;
-									else if (addrLine2 == null)
-										addrLine2 = content;
-								}
-							}
-							if (addrLine1 != null) {
-								addr = AddressBaseType.builder().withStreetAddressLine1(addrLine1).build();
-							}
-							if (addrLine2 != null) {
-								addr.setStreetAddressLine2(addrLine2);
-							}
-						}
+	private AddressBaseType getAddress(JSONArray contents) {
+		var addr = AddressBaseType.builder().build();
+		for (Object object2 : contents) {
+			extractAddressLines(addr, object2);
+		}
+
+		return addr;
+	}
+
+	/* complexity currently 16 (borderline) => do not fix */
+	@SuppressWarnings("java:S3776")
+	private void extractAddressLines(AddressBaseType addr, Object object2) {
+		String type = null;
+		String content = null;
+		if (object2 instanceof String contentString) {
+			content = contentString;
+		} else if (object2 instanceof Map) {
+			@SuppressWarnings("unchecked")
+			Map<String, Object> subMap2 = (Map<String, Object>) object2;
+			for (Entry<String, Object> subEntry2 : subMap2.entrySet()) {
+				type = null;
+				String subKey2 = subEntry2.getKey();
+				if ("type".contentEquals(subKey2) && (subEntry2.getValue() != null))
+					type = subEntry2.getValue().toString();
+
+				if ("content".contentEquals(subKey2) && (subEntry2.getValue() != null))
+					content = subEntry2.getValue().toString();
+			}
+		}
+
+		// type:uri is not implemented, yet. Feel free
+		// to add when you use it.
+		if (type == null) {
+			if (addr.getStreetAddressLine1() == null) {
+				addr.setStreetAddressLine1(content);
+			} else if (addr.getStreetAddressLine2() == null) {
+				addr.setStreetAddressLine2(content);
+			}
+		}
+	}
+
+	private List<LangText> getDescriptions(JSONArray descs) {
+		List<LangText> descriptions = new LinkedList<>();
+		for (Object object : descs) {
+			@SuppressWarnings("unchecked")
+			Map<String, Object> subMap = (Map<String, Object>) object;
+			var content = "";
+			LanguageCode languageCode = null;
+			for (Entry<String, Object> subEntry : subMap.entrySet()) {
+				String subKey = subEntry.getKey();
+				if (ELEMENT_NAME_LANGUAGE.contentEquals(subKey) && (subEntry.getValue() != null)) {
+					String lang = subEntry.getValue().toString();
+					languageCode = getLanguageCode(lang);
+				}
+				if (("content".equals(subKey) || "#text".equals(subKey)) && (subEntry.getValue() != null))
+					content = subEntry.getValue().toString();
+			}
+			descriptions.add(new LangText(languageCode,
+					content.replace("\r\n", "\n").replace("\n", "").replaceAll("\\s+", " ").trim()));
+		}
+
+		return descriptions;
+	}
+
+	private void addValueSetEntries(JSONArray concepts, ValueSet valueSet) {
+		ValueSetEntry lastValueSetEntry = null;
+		for (Object object : concepts) {
+			@SuppressWarnings("unchecked")
+			Map<String, Object> subMap = (Map<String, Object>) object;
+			for (Entry<String, Object> subEntry : subMap.entrySet()) {
+				String subKey = subEntry.getKey();
+				if ("concept".contentEquals(subKey) && (subEntry.getValue() != null)) {
+					JSONArray contents = (JSONArray) subEntry.getValue();
+					for (Object object2 : contents) {
+						lastValueSetEntry = addValueSetEntry(object2, valueSet, lastValueSetEntry);
 					}
 				}
-				if (addr != null)
-					org.addAddress(addr);
-				version.setPublishingAuthority(org);
 			}
-			if ("conceptList".contentEquals(key) && (entry.getValue() != null)
-					&& (entry.getValue().getClass() == JSONArray.class)) {
-				JSONArray concepts = (JSONArray) entry.getValue();
-				ValueSetEntry lastValueSetEntry = null;
-				for (Object object : concepts) {
-					@SuppressWarnings("unchecked")
-					Map<String, Object> subMap = (Map<String, Object>) object;
-					for (Entry<String, Object> subEntry : subMap.entrySet()) {
-						String subKey = subEntry.getKey();
-						if ("concept".contentEquals(subKey) && (subEntry.getValue() != null)) {
-							JSONArray contents = (JSONArray) subEntry.getValue();
-							for (Object object2 : contents) {
-								var valueSetEntry = new ValueSetEntry();
-								ValueSetEntryType valueSetEntryType = null;
-								@SuppressWarnings("unchecked")
-								Map<String, Object> subMap2 = (Map<String, Object>) object2;
-								String entryCode = null;
-								String entryCodeSystem = null;
-								String entryDisplayName = null;
-								String entryLevel = null;
-								String entryType = null;
-								for (Entry<String, Object> subEntry2 : subMap2.entrySet()) {
-									String subKey2 = subEntry2.getKey();
-									if ("code".contentEquals(subKey2) && (subEntry2.getValue() != null))
-										entryCode = subEntry2.getValue().toString();
-									if ("codeSystem".contentEquals(subKey2) && (subEntry2.getValue() != null))
-										entryCodeSystem = subEntry2.getValue().toString();
-									if ("displayName".contentEquals(subKey2) && (subEntry2.getValue() != null))
-										entryDisplayName = subEntry2.getValue().toString();
-									if ("level".contentEquals(subKey2) && (subEntry2.getValue() != null))
-										entryLevel = subEntry2.getValue().toString();
-									if ("type".contentEquals(subKey2) && (subEntry2.getValue() != null)) {
-										entryType = subEntry2.getValue().toString();
-										valueSetEntryType = ValueSetEntryType.getEnum(entryType);
-									}
-									if ("designation".contentEquals(subKey2) && (subEntry2.getValue() != null)) {
-										JSONArray designations = (JSONArray) subEntry2.getValue();
-										for (Object object3 : designations) {
-											@SuppressWarnings("unchecked")
-											Map<String, Object> subMap3 = (Map<String, Object>) object3;
-											var designation = new Designation();
-											for (Entry<String, Object> subEntry3 : subMap3.entrySet()) {
-												String subKey3 = subEntry3.getKey();
-												if ("language".contentEquals(subKey3)
-														&& (subEntry3.getValue() != null)) {
-													var languageCode = LanguageCode
-															.getEnum(subEntry3.getValue().toString().toLowerCase());
-													if (languageCode == null)
-														languageCode = LanguageCode.getEnum(subEntry3.getValue()
-																.toString().toLowerCase().substring(0, 2));
-													designation.setLanguageCode(languageCode);
-												}
-												if ("type".contentEquals(subKey3) && (subEntry3.getValue() != null)) {
-													if ("abbreviation"
-															.equalsIgnoreCase(subEntry3.getValue().toString()))
-														designation.setType(DesignationType.ABBREVIATION);
-													if ("fsn".equalsIgnoreCase(subEntry3.getValue().toString()))
-														designation.setType(DesignationType.FULLY_SPECIFIED_NAME);
-													if ("preferred".equalsIgnoreCase(subEntry3.getValue().toString()))
-														designation.setType(DesignationType.PREFERRED);
-													if ("synonym".equalsIgnoreCase(subEntry3.getValue().toString()))
-														designation.setType(DesignationType.SYNONYM);
-												}
-												if ("displayName".contentEquals(subKey3)
-														&& (subEntry3.getValue() != null))
-													designation.setDisplayName(subEntry3.getValue().toString());
-											}
-											valueSetEntry.addDesignation(designation);
-										}
-									}
-								}
-								var level = 0;
-								try {
-									level = Integer.parseInt(entryLevel);
-								} catch (Exception e) {
-									// do nothing; default is 0.
-								}
-								CodeBaseType code = CodeBaseType.builder().withCode(entryCode)
-										.withCodeSystem(entryCodeSystem).withDisplayName(entryDisplayName).build();
-								valueSetEntry.setCodeBaseType(code);
-								valueSetEntry.setLevel(level);
-								valueSetEntry.setValueSetEntryType(valueSetEntryType);
+		}
+	}
 
-								if (lastValueSetEntry == null)
-									// it is the very first entry. Thus it will
-									// be added to the main list
-									valueSet.addValueSetEntry(valueSetEntry);
-								else {
-									// note for developers:
-									// This code was tested with this value Set:
-									// http://ehealthsuisse.art-decor.org/ch-epr-html-20190701T210605/voc-2.16.756.5.30.1.127.3.10.1.30-2018-03-06T135538.html
-									// This value Set has 2 hierarchy levels,
-									// only. If you get into trouble with
-									// valueSets having 3 and more hierarchy
-									// levels, feel free to contribute bug fixes
-									// if needed.
-									if (lastValueSetEntry.getLevel() == valueSetEntry.getLevel()) {
-										// the new entry is a sibling of the
-										// last one. Therefore it will be added
-										// to the same parent
-										if (lastValueSetEntry.getParent() == null)
-											// there is no parent. The entry is
-											// added to the main list
-											valueSet.addValueSetEntry(valueSetEntry);
-										else {
-											// there is a parent. The entry is
-											// added to the parent
-											valueSetEntry.setParent(lastValueSetEntry.getParent());
-											lastValueSetEntry.getParent().addChild(valueSetEntry);
-										}
-									}
+	/* complexity borderline => do not fix */
+	@SuppressWarnings("java:S3776")
+	private ValueSetEntry addValueSetEntry(Object object2, ValueSet valueSet, ValueSetEntry lastValueSetEntry) {
 
-									if (lastValueSetEntry.getLevel() < valueSetEntry.getLevel()) {
-										// the new entry has a deeper level as
-										// the last one. It becomes a child of
-										// the last one and the last one becomes
-										// his parent
-										valueSetEntry.setParent(lastValueSetEntry);
-										lastValueSetEntry.addChild(valueSetEntry);
-									}
+		var valueSetEntry = getValueSetEntry(object2);
 
-									if (lastValueSetEntry.getLevel() > valueSetEntry.getLevel()) {
-										// the new entry has a higher level as
-										// the last one. It gets added to the
-										// parent list.
-										if (lastValueSetEntry.getParent().getParent() == null)
-											// there is no parent. The entry is
-											// added to the main list
-											valueSet.addValueSetEntry(valueSetEntry);
-										else {
-											// there is a parent. The entry is
-											// added to the parent
-											valueSetEntry.setParent(lastValueSetEntry.getParent().getParent());
-											lastValueSetEntry.getParent().getParent().addChild(valueSetEntry);
-										}
-									}
+		if (lastValueSetEntry == null)
+			// it is the very first entry. Thus it will
+			// be added to the main list
+			valueSet.addValueSetEntry(valueSetEntry);
+		else {
+			// note for developers:
+			// This code was tested with this value Set:
+			// http://ehealthsuisse.art-decor.org/ch-epr-html-20190701T210605/voc-2.16.756.5.30.1.127.3.10.1.30-2018-03-06T135538.html
+			// This value Set has 2 hierarchy levels,
+			// only. If you get into trouble with
+			// valueSets having 3 and more hierarchy
+			// levels, feel free to contribute bug fixes
+			// if needed.
+			if (lastValueSetEntry.getLevel() == valueSetEntry.getLevel()) {
+				// the new entry is a sibling of the
+				// last one. Therefore it will be added
+				// to the same parent
+				if (lastValueSetEntry.getParent() == null)
+					// there is no parent. The entry is
+					// added to the main list
+					valueSet.addValueSetEntry(valueSetEntry);
+				else {
+					// there is a parent. The entry is
+					// added to the parent
+					valueSetEntry.setParent(lastValueSetEntry.getParent());
+					lastValueSetEntry.getParent().addChild(valueSetEntry);
+				}
+			}
 
-								}
-								lastValueSetEntry = valueSetEntry;
-							}
-						}
-					}
+			if (lastValueSetEntry.getLevel() < valueSetEntry.getLevel()) {
+				// the new entry has a deeper level as
+				// the last one. It becomes a child of
+				// the last one and the last one becomes
+				// his parent
+				valueSetEntry.setParent(lastValueSetEntry);
+				lastValueSetEntry.addChild(valueSetEntry);
+			}
+
+			if (lastValueSetEntry.getLevel() > valueSetEntry.getLevel()) {
+				// the new entry has a higher level as
+				// the last one. It gets added to the
+				// parent list.
+				if (lastValueSetEntry.getParent().getParent() == null)
+					// there is no parent. The entry is
+					// added to the main list
+					valueSet.addValueSetEntry(valueSetEntry);
+				else {
+					// there is a parent. The entry is
+					// added to the parent
+					valueSetEntry.setParent(lastValueSetEntry.getParent().getParent());
+					lastValueSetEntry.getParent().getParent().addChild(valueSetEntry);
 				}
 			}
 
 		}
-		valueSet.setVersion(version);
+		return valueSetEntry;
+	}
 
-		// This is for debugging purposes, only:
-		// ValueSetManager mgr = new ValueSetManager();
-		// mgr.saveValueSet(valueSet, Util.getTempDirectory()
-		// + FileUtil.getPlatformSpecificPathSeparator() +
-		// "testDownloadedValueSetJson.yaml");
+	private ValueSetEntry getValueSetEntry(Object object2) {
+		var valueSetEntry = new ValueSetEntry();
 
-		return valueSet;
+		@SuppressWarnings("unchecked")
+		Map<String, Object> subMap2 = (Map<String, Object>) object2;
+		valueSetEntry.setCodeBaseType(CodeBaseType.builder().build());
 
+		for (Entry<String, Object> subEntry2 : subMap2.entrySet()) {
+			setValueSetEntryValues(valueSetEntry, subEntry2.getKey(), subEntry2.getValue());
+		}
+
+		return valueSetEntry;
+	}
+
+	private void setValueSetEntryValues(ValueSetEntry valueSetEntry, String subKey2, Object value) {
+		if (value == null) {
+			return;
+		}
+
+		if (ELEMENT_NAME_CODE.contentEquals(subKey2)) {
+			valueSetEntry.getCodeBaseType().setCode(value.toString());
+		} else if (ELEMENT_NAME_CODE_SYSTEM.contentEquals(subKey2)) {
+			valueSetEntry.getCodeBaseType().setCodeSystem(value.toString());
+		} else if (ELEMENT_NAME_DISPLAY_NAME.contentEquals(subKey2)) {
+			valueSetEntry.getCodeBaseType().setDisplayName(value.toString());
+		} else if ("level".contentEquals(subKey2)) {
+			valueSetEntry.setLevel(getLevel(value.toString()));
+		} else if ("type".contentEquals(subKey2)) {
+			valueSetEntry.setValueSetEntryType(ValueSetEntryType.getEnum(value.toString()));
+		} else if ("designation".contentEquals(subKey2)) {
+			JSONArray designations = (JSONArray) value;
+			valueSetEntry.getDesignationList().addAll(getDesignations(designations));
+		}
+	}
+
+	private int getLevel(String levelLit) {
+		var level = 0;
+		try {
+			level = Integer.parseInt(levelLit);
+		} catch (Exception e) {
+			// do nothing; default is 0.
+		}
+
+		return level;
+	}
+
+	private List<Designation> getDesignations(JSONArray designations) {
+		List<Designation> designationList = new LinkedList<>();
+		for (Object object3 : designations) {
+			@SuppressWarnings("unchecked")
+			Map<String, Object> subMap3 = (Map<String, Object>) object3;
+			var designation = new Designation();
+			for (Entry<String, Object> subEntry3 : subMap3.entrySet()) {
+				String subKey3 = subEntry3.getKey();
+				if (ELEMENT_NAME_LANGUAGE.contentEquals(subKey3) && (subEntry3.getValue() != null)) {
+					
+					designation.setLanguageCode(getLanguageCode(subEntry3.getValue()));
+				}
+				if ("type".contentEquals(subKey3) && (subEntry3.getValue() != null)) {
+					designation.setType(getDesignationType(subEntry3.getValue().toString()));
+				}
+				if (ELEMENT_NAME_DISPLAY_NAME.contentEquals(subKey3) && (subEntry3.getValue() != null))
+					designation.setDisplayName(subEntry3.getValue().toString());
+			}
+			designationList.add(designation);
+		}
+
+		return designationList;
+	}
+	
+	private LanguageCode getLanguageCode(Object value) {
+		var languageCode = LanguageCode.getEnum(value.toString().toLowerCase());
+		if (languageCode == null)
+			languageCode = LanguageCode
+					.getEnum(value.toString().toLowerCase().substring(0, 2));
+
+		return languageCode;
+	}
+
+	private DesignationType getDesignationType(String type) {
+		if ("abbreviation".equalsIgnoreCase(type))
+			return DesignationType.ABBREVIATION;
+		if ("fsn".equalsIgnoreCase(type))
+			return DesignationType.FULLY_SPECIFIED_NAME;
+		if ("preferred".equalsIgnoreCase(type))
+			return DesignationType.PREFERRED;
+		if ("synonym".equalsIgnoreCase(type))
+			return DesignationType.SYNONYM;
+
+		return null;
+	}
+
+	private ValueSetStatus getStatusCode(String status) {
+		// new: Value set just created and is new and work in progress
+		// to become a draft/finalized value set. Beyond the author,
+		// nobody should look at this value set unless it's status code
+		// is draft or finalized.
+		if ("new".equalsIgnoreCase(status))
+			return ValueSetStatus.NEW;
+		// draft: Value set under development (nascent). Metadata and
+		// value set may be incomplete. Entered primarily to encourage
+		// other users to be aware of ongoing process.
+		if ("draft".equalsIgnoreCase(status))
+			return ValueSetStatus.DRAFT;
+
+		// final: Value set has been published by the custodian
+		// organization and deemed fit for use. May have associated
+		// adoption and annotation metadata
+		if ("final".equalsIgnoreCase(status))
+			return ValueSetStatus.FINAL;
+
+		// deprecated: Value set retired: No longer fit for use.
+		// Information available for historical reference.
+		if ("deprecated".equalsIgnoreCase(status))
+			return ValueSetStatus.DEPRECATED;
+
+		// rejected: Value set is rejected
+		if ("rejected".equalsIgnoreCase(status))
+			return ValueSetStatus.REJECTED;
+
+		// cancelled: Value set is withdrawn
+		if ("cancelled".equalsIgnoreCase(status))
+			return ValueSetStatus.CANCELLED;
+
+		return null;
 	}
 
 	/**
@@ -867,37 +926,16 @@ public class ValueSetManager {
 	 */
 	public ValueSet loadValueSetXml(InputStream inputStream)
 			throws IOException, ParserConfigurationException, SAXException {
-		var reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
 		var valueSet = new ValueSet();
 		var version = new Version();
-
 		String textContent;
-		DocumentBuilder docBuilder = XmlFactories.newSafeDocumentBuilder();
-		Document xmlDoc = docBuilder.parse(IOUtils.toInputStream(IOUtils.toString(reader), StandardCharsets.UTF_8));
+		Document xmlDoc = getDocument(inputStream);
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//valueSets/project/valueSet/@id");
 		if (textContent != null)
 			valueSet.setIdentificator(IdentificatorBaseType.builder().withRoot(textContent).build());
 
-		ArrayList<LanguageCode> langCodes = new ArrayList<>();
-		var nodeList = evaluateXpathExprAsNodeList(xmlDoc, "//valueSets/project/valueSet/desc/@language");
-
-		if (nodeList != null) {
-			for (var i = 0; i < nodeList.getLength(); i++) {
-				var languageCode = getLanguageCode(nodeList.item(i).getTextContent().trim());
-				if (languageCode != null)
-					langCodes.add(languageCode);
-			}
-		}
-
-		for (LanguageCode languageCode : langCodes) {
-			textContent = evaluateXpathExprAsString(xmlDoc,
-					"//valueSets/project/valueSet/desc[@language='" + languageCode.getCodeValue()
-							+ "' or starts-with(@language,'" + languageCode.getCodeValue() + "')]/node()");
-			if (textContent != null)
-				valueSet.addDescription(new LangText(languageCode, textContent));
-
-		}
+		valueSet.getDescriptionList().addAll(getDescriptions(xmlDoc));
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//valueSets/project/valueSet/@displayName");
 		if (textContent != null)
@@ -905,75 +943,17 @@ public class ValueSetManager {
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//valueSets/project/valueSet/@effectiveDate");
 		if (textContent != null)
-			version.setValidFrom(DateUtil.parseDateyyyyMMddTHHmmss(textContent));
+			version.setValidFrom(getValidFromDate(textContent));
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//valueSets/project/valueSet/@versionLabel");
 		if (textContent != null)
 			version.setLabel(textContent);
 
-		nodeList = evaluateXpathExprAsNodeList(xmlDoc, "/valueSets/project/valueSet/conceptList/concept");
+		var nodeList = evaluateXpathExprAsNodeList(xmlDoc, "/valueSets/project/valueSet/conceptList/concept");
 
 		if (nodeList != null) {
 			for (var i = 0; i < nodeList.getLength(); i++) {
-				var node = nodeList.item(i);
-				var valueSetEntry = new ValueSetEntry();
-				var code = new CodeBaseType();
-
-				textContent = node.getAttributes().getNamedItem("code").getNodeValue();
-				if (textContent != null)
-					code.setCode(textContent);
-
-				textContent = node.getAttributes().getNamedItem("codeSystem").getNodeValue();
-				if (textContent != null)
-					code.setCodeSystem(textContent);
-
-				textContent = node.getAttributes().getNamedItem("displayName").getNodeValue();
-				if (textContent != null)
-					code.setDisplayName(textContent);
-
-				textContent = node.getAttributes().getNamedItem("level").getNodeValue();
-				if (textContent != null)
-					valueSetEntry.setLevel(Integer.parseInt(textContent));
-
-				textContent = node.getAttributes().getNamedItem("type").getNodeValue();
-				if (textContent != null) {
-					valueSetEntry.setValueSetEntryType(ValueSetEntryType.getEnum(textContent));
-				}
-
-				NodeList subNnodeList;
-				subNnodeList = evaluateXpathExprAsNodeList(xmlDoc,
-						"/valueSets/project/valueSet/conceptList/concept[@code='" + code.getCode()
-								+ "' and @codeSystem='" + code.getCodeSystem() + "']/designation");
-
-				if (subNnodeList != null) {
-					for (var j = 0; j < subNnodeList.getLength(); j++) {
-						var subNode = subNnodeList.item(j);
-						var designation = new Designation();
-
-						textContent = subNode.getAttributes().getNamedItem("language").getNodeValue();
-						if (textContent != null) {
-							var languageCode = LanguageCode.getEnum(textContent.toLowerCase());
-							if (languageCode == null)
-								languageCode = LanguageCode.getEnum(textContent.toLowerCase().substring(0, 2));
-							designation.setLanguageCode(languageCode);
-						}
-
-						textContent = subNode.getAttributes().getNamedItem("type").getNodeValue();
-						if (textContent != null) {
-							designation.setType(DesignationType.getEnum(textContent));
-						}
-
-						textContent = subNode.getAttributes().getNamedItem("displayName").getNodeValue();
-						if (textContent != null)
-							designation.setDisplayName(textContent);
-
-						valueSetEntry.addDesignation(designation);
-					}
-				}
-
-				valueSetEntry.setCodeBaseType(code);
-
-				valueSet.addValueSetEntry(valueSetEntry);
+				valueSet.addValueSetEntry(getValueSetEntry(nodeList.item(i), xmlDoc));
 			}
 		}
 
@@ -986,46 +966,116 @@ public class ValueSetManager {
 		textContent = evaluateXpathExprAsString(xmlDoc, "//valueSets/project/valueSet/@statusCode");
 		if (textContent != null) {
 			String status = textContent;
-
-			// new: Value set just created and is new and work in progress
-			// to become a draft/finalized value set. Beyond the author,
-			// nobody should look at this value set unless it's status code
-			// is draft or finalized.
-			if ("new".equalsIgnoreCase(status))
-				valueSet.setStatus(ValueSetStatus.NEW);
-			// draft: Value set under development (nascent). Metadata and
-			// value set may be incomplete. Entered primarily to encourage
-			// other users to be aware of ongoing process.
-			if ("draft".equalsIgnoreCase(status))
-				valueSet.setStatus(ValueSetStatus.DRAFT);
-
-			// final: Value set has been published by the custodian
-			// organization and deemed fit for use. May have associated
-			// adoption and annotation metadata
-			if ("final".equalsIgnoreCase(status))
-				valueSet.setStatus(ValueSetStatus.FINAL);
-
-			// deprecated: Value set retired: No longer fit for use.
-			// Information available for historical reference.
-			if ("deprecated".equalsIgnoreCase(status))
-				valueSet.setStatus(ValueSetStatus.DEPRECATED);
-
-			// rejected: Value set is rejected
-			if ("rejected".equalsIgnoreCase(status))
-				valueSet.setStatus(ValueSetStatus.REJECTED);
-
-			// cancelled: Value set is withdrawn
-			if ("cancelled".equalsIgnoreCase(status))
-				valueSet.setStatus(ValueSetStatus.CANCELLED);
-
+			valueSet.setStatus(getStatusCode(status));
 		}
-		// This is for debugging purposes, only:
-		// ValueSetManager mgr = new ValueSetManager();
-		// mgr.saveValueSet(valueSet, Util.getTempDirectory()
-		// + FileUtil.getPlatformSpecificPathSeparator() +
-		// "testDownloadedValueSetXml.yaml");
 
 		return valueSet;
+	}
+
+	private List<LangText> getDescriptions(Document xmlDoc) {
+		List<LangText> descriptions = new LinkedList<>();
+		ArrayList<LanguageCode> langCodes = new ArrayList<>();
+		var nodeList = evaluateXpathExprAsNodeList(xmlDoc, "//valueSets/project/valueSet/desc/@language");
+
+		if (nodeList != null) {
+			for (var i = 0; i < nodeList.getLength(); i++) {
+				var languageCode = getLanguageCode(nodeList.item(i).getTextContent().trim());
+				if (languageCode != null)
+					langCodes.add(languageCode);
+			}
+		}
+
+		String textContent = null;
+		for (LanguageCode languageCode : langCodes) {
+			textContent = evaluateXpathExprAsString(xmlDoc,
+					"//valueSets/project/valueSet/desc[@language='" + languageCode.getCodeValue()
+							+ "' or starts-with(@language,'" + languageCode.getCodeValue() + "')]/node()");
+			if (textContent != null)
+				descriptions.add(new LangText(languageCode, textContent));
+
+		}
+
+		return descriptions;
+	}
+
+	private ValueSetEntry getValueSetEntry(Node node, Document xmlDoc) {
+		var valueSetEntry = new ValueSetEntry();
+		var code = createCode(node);
+
+		String textContent = node.getAttributes().getNamedItem("level").getNodeValue();
+		if (textContent != null)
+			valueSetEntry.setLevel(Integer.parseInt(textContent));
+
+		textContent = node.getAttributes().getNamedItem("type").getNodeValue();
+		if (textContent != null) {
+			valueSetEntry.setValueSetEntryType(ValueSetEntryType.getEnum(textContent));
+		}
+
+		NodeList subNnodeList;
+		subNnodeList = evaluateXpathExprAsNodeList(xmlDoc, "/valueSets/project/valueSet/conceptList/concept[@code='"
+				+ code.getCode() + "' and @codeSystem='" + code.getCodeSystem() + "']/designation");
+
+		if (subNnodeList != null) {
+			for (var j = 0; j < subNnodeList.getLength(); j++) {
+				valueSetEntry.addDesignation(getDesignation(subNnodeList.item(j)));
+			}
+		}
+
+		valueSetEntry.setCodeBaseType(code);
+
+		return valueSetEntry;
+	}
+
+	private Designation getDesignation(Node subNode) {
+		var designation = new Designation();
+
+		String textContent = subNode.getAttributes().getNamedItem(ELEMENT_NAME_LANGUAGE).getNodeValue();
+		if (textContent != null) {
+			var languageCode = LanguageCode.getEnum(textContent.toLowerCase());
+			if (languageCode == null)
+				languageCode = LanguageCode.getEnum(textContent.toLowerCase().substring(0, 2));
+			designation.setLanguageCode(languageCode);
+		}
+
+		textContent = subNode.getAttributes().getNamedItem("type").getNodeValue();
+		if (textContent != null) {
+			designation.setType(DesignationType.getEnum(textContent));
+		}
+
+		textContent = subNode.getAttributes().getNamedItem(ELEMENT_NAME_DISPLAY_NAME).getNodeValue();
+		if (textContent != null)
+			designation.setDisplayName(textContent);
+
+		return designation;
+	}
+
+	private Document getDocument(InputStream inputStream)
+			throws ParserConfigurationException, SAXException, IOException {
+		var reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+
+		DocumentBuilder docBuilder = XmlFactories.newSafeDocumentBuilder();
+
+		try (InputStream is = IOUtils.toInputStream(IOUtils.toString(reader), StandardCharsets.UTF_8)) {
+			return docBuilder.parse(is);
+		}
+	}
+
+	private CodeBaseType createCode(org.w3c.dom.Node node) {
+		var code = new CodeBaseType();
+
+		String textContent = node.getAttributes().getNamedItem(ELEMENT_NAME_CODE).getNodeValue();
+		if (textContent != null)
+			code.setCode(textContent);
+
+		textContent = node.getAttributes().getNamedItem(ELEMENT_NAME_CODE_SYSTEM).getNodeValue();
+		if (textContent != null)
+			code.setCodeSystem(textContent);
+
+		textContent = node.getAttributes().getNamedItem(ELEMENT_NAME_DISPLAY_NAME).getNodeValue();
+		if (textContent != null)
+			code.setDisplayName(textContent);
+
+		return code;
 	}
 
 	/**
@@ -1108,7 +1158,9 @@ public class ValueSetManager {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void saveValueSet(ValueSet valueSet, File file) throws IOException {
-		saveValueSet(valueSet, new FileOutputStream(file));
+		try (var fileOutputStream = new FileOutputStream(file)) {
+			saveValueSet(valueSet, fileOutputStream);
+		}
 	}
 
 	/**
@@ -1158,7 +1210,9 @@ public class ValueSetManager {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void saveValueSetConfig(ValueSetConfig valueSetConfig, File file) throws IOException {
-		saveValueSetConfig(valueSetConfig, new FileOutputStream(file));
+		try (var fileOutputStream = new FileOutputStream(file)) {
+			saveValueSetConfig(valueSetConfig, fileOutputStream);
+		}
 	}
 
 	/**

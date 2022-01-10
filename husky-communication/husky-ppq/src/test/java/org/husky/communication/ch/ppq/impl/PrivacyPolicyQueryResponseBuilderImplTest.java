@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 import org.opensaml.saml.saml2.core.Response;
 import org.opensaml.saml.saml2.core.impl.ResponseBuilder;
 
-public class PrivacyPolicyQueryResponseBuilderImplTest extends InitializerTestHelper {
+class PrivacyPolicyQueryResponseBuilderImplTest extends InitializerTestHelper {
 
 	private PrivacyPolicyQueryResponseBuilderImpl builder;
 	private String testConsent;
@@ -40,7 +40,7 @@ public class PrivacyPolicyQueryResponseBuilderImplTest extends InitializerTestHe
 	 * {@link org.husky.xua.ch.ppq.impl.PrivacyPolicyQueryResponseBuilderImpl#create(org.opensaml.saml.saml2.core.Response)}.
 	 */
 	@Test
-	public void testCreate() {
+	void testCreate() {
 		final PrivacyPolicyQueryResponse ref = builder.create(testInternalObject);
 		assertNotNull(ref);
 		assertEquals(testInternalObject, ((PrivacyPolicyQueryResponseImpl) ref).getWrappedObject());

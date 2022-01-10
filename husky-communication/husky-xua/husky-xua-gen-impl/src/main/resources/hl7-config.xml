@@ -6,9 +6,9 @@
 
 		<!-- PurposeOfUse -->
 		<ObjectProvider qualifiedName="hl7:PurposeOfUse">
-			<BuilderClass className="org.husky.xua.hl7v3.impl.PurposeOfUseBuilder" />
-			<MarshallingClass className="org.husky.xua.hl7v3.impl.PurposeOfUseMarshaller" />
-			<UnmarshallingClass className="org.husky.xua.hl7v3.impl.PurposeOfUseUnmarshaller" />
+			<BuilderClass className="org.husky.xua.hl7v3.impl.CodedWithEquivalentsBuilder" />
+			<MarshallingClass className="org.husky.xua.hl7v3.impl.CodedWithEquivalentsMarshaller" />
+			<UnmarshallingClass className="org.husky.xua.hl7v3.impl.CodedWithEquivalentsUnmarshaller" />
 		</ObjectProvider>
 
 		<!-- InstanceIdentifier -->
@@ -20,9 +20,9 @@
 		
 		<!-- Role -->
 		<ObjectProvider qualifiedName="hl7:Role">
-			<BuilderClass className="org.husky.xua.hl7v3.impl.RoleBuilder" />
-			<MarshallingClass className="org.husky.xua.hl7v3.impl.RoleMarshaller" />
-			<UnmarshallingClass className="org.husky.xua.hl7v3.impl.RoleUnmarshaller" />
+			<BuilderClass className="org.husky.xua.hl7v3.impl.CodedWithEquivalentsBuilder" />
+			<MarshallingClass className="org.husky.xua.hl7v3.impl.CodedWithEquivalentsMarshaller" />
+			<UnmarshallingClass className="org.husky.xua.hl7v3.impl.CodedWithEquivalentsUnmarshaller" />
 		</ObjectProvider>
 
 	</ObjectProviders>

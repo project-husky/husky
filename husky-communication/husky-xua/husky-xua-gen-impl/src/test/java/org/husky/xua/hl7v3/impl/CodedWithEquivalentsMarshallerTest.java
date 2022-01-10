@@ -13,9 +13,7 @@ package org.husky.xua.hl7v3.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.husky.xua.hl7v3.OpenSamlRole;
-import org.husky.xua.hl7v3.impl.RoleBuilder;
-import org.husky.xua.hl7v3.impl.RoleMarshaller;
+import org.husky.xua.hl7v3.Role;
 import org.husky.xua.utilities.impl.InitializerTestHelper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +31,7 @@ import org.w3c.dom.Element;
  *
  * <!-- @formatter:on -->
  */
-public class RoleMarshallerTest extends InitializerTestHelper {
+public class CodedWithEquivalentsMarshallerTest extends InitializerTestHelper {
 
 	@BeforeAll
 	public static void setUpBeforeClass() throws Exception {
@@ -41,7 +39,7 @@ public class RoleMarshallerTest extends InitializerTestHelper {
 		InitializationService.initialize();
 	}
 
-	private OpenSamlRole testXmlObject;
+	private CodedWithEquivalentImpl testXmlObject;
 	private String testCode;
 	private String testCodeSystem;
 	private String testCodeSystemName;
@@ -52,15 +50,17 @@ public class RoleMarshallerTest extends InitializerTestHelper {
 		testCodeSystem = "1.2.3.4.5.6.7.8.9.0";
 		testCodeSystemName = "My Code System";
 
-		testXmlObject = new RoleBuilder().buildObject();
+		testXmlObject = new CodedWithEquivalentsBuilder().buildObject(Role.DEFAULT_NS_URI,
+				Role.DEFAULT_ELEMENT_LOCAL_NAME,
+				Role.DEFAULT_PREFIX);
 		testXmlObject.setCode(testCode);
 		testXmlObject.setCodeSystem(testCodeSystem);
 		testXmlObject.setCodeSystemName(testCodeSystemName);
 	}
 
 	@Test
-	public void testMarshallXMLObjectDocument() throws MarshallingException {
-		final RoleMarshaller marshaller = new RoleMarshaller();
+	void testMarshallXMLObjectDocument() throws MarshallingException {
+		final CodedWithEquivalentsMarshaller marshaller = new CodedWithEquivalentsMarshaller();
 		final Element ref = marshaller.marshall(testXmlObject);
 		assertNotNull(ref);
 		logXmlObject(ref);

@@ -57,6 +57,8 @@ public class FunctionBuilderImpl
 		implements SimpleBuilder<Function>, SecurityObjectBuilder<String, Function> {
 
 	@Override
+	/* simple function for comparing namespaces amm creating an object based on namespace, reducing complexity not necessary */
+	@SuppressWarnings("java:S3776")
 	public Function create(String aInternalObject) {
 		Function function = null;
 		if ("urn:hl7-org:v3:function:CV-equal".equalsIgnoreCase(aInternalObject)) {
@@ -66,49 +68,6 @@ public class FunctionBuilderImpl
 		} else if ("urn:oasis:names:tc:xacml:1.0:function:string-equal"
 				.equalsIgnoreCase(aInternalObject)) {
 			function = new StringEqualFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-equal".equalsIgnoreCase(aInternalObject)) {
-			function = new DateEqualFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-greater-than"
-				.equalsIgnoreCase(aInternalObject)) {
-			function = new DateGreaterThanFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-at-least-one-member-of"
-				.equalsIgnoreCase(aInternalObject)) {
-			function = new DateAtLeastOneMemberOfFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-bag".equalsIgnoreCase(aInternalObject)) {
-			function = new DateBagFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-bag-size"
-				.equalsIgnoreCase(aInternalObject)) {
-			function = new DateBagSizeFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-greater-than-or-equal"
-				.equalsIgnoreCase(aInternalObject)) {
-			function = new DateGreaterThanOrEqualFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-intersection"
-				.equalsIgnoreCase(aInternalObject)) {
-			function = new DateIntersectionFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-is-in".equalsIgnoreCase(aInternalObject)) {
-			function = new DateIsInFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-less-than"
-				.equalsIgnoreCase(aInternalObject)) {
-			function = new DateLessThanFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-less-than-or-equal"
-				.equalsIgnoreCase(aInternalObject)) {
-			function = new DateLessThanOrEqualFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-one-and-only"
-				.equalsIgnoreCase(aInternalObject)) {
-			function = new DateOneAndOnlyFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-set-equals"
-				.equalsIgnoreCase(aInternalObject)) {
-			function = new DateSetEqualsFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-subset".equalsIgnoreCase(aInternalObject)) {
-			function = new DateSubsetFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-union".equalsIgnoreCase(aInternalObject)) {
-			function = new DateUnionFunction();
-		} else if ("urn:oasis:names:tc:xacml:3.0:function:date-add-yearMonthDuration"
-				.equalsIgnoreCase(aInternalObject)) {
-			function = new DateAddYearMonthDurationFunction();
-		} else if ("urn:oasis:names:tc:xacml:3.0:function:date-subtract-yearMonthDuration"
-				.equalsIgnoreCase(aInternalObject)) {
-			function = new DateSubtractYearMonthDurationFunction();
 		} else if ("urn:oasis:names:tc:xacml:1.0:function:anyURI-equal"
 				.equalsIgnoreCase(aInternalObject)) {
 			function = new AnyURIEqualFunction();
@@ -136,9 +95,55 @@ public class FunctionBuilderImpl
 			function = new IntegerEqualFunction();
 		} else if ("urn:ihe:2017:record:function:interactedPreviously".equalsIgnoreCase(aInternalObject)) {
 			function = new FunctionInteractedPreviously();
+		} else if (aInternalObject.contains("date")) {
+			function = getDateFunction(aInternalObject);
 		}
 
 		return function;
+	}
+    
+	/* simple function for comparing namespaces and get a Date function based on namespace, reducing complexity not necessary */
+	@SuppressWarnings("java:S3776")
+	private Function getDateFunction(String aInternalObject) {
+		if ("urn:oasis:names:tc:xacml:1.0:function:date-equal".equalsIgnoreCase(aInternalObject)) {
+			return new DateEqualFunction();
+		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-greater-than".equalsIgnoreCase(aInternalObject)) {
+			return new DateGreaterThanFunction();
+		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-at-least-one-member-of"
+				.equalsIgnoreCase(aInternalObject)) {
+			return new DateAtLeastOneMemberOfFunction();
+		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-bag".equalsIgnoreCase(aInternalObject)) {
+			return new DateBagFunction();
+		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-bag-size".equalsIgnoreCase(aInternalObject)) {
+			return new DateBagSizeFunction();
+		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-greater-than-or-equal"
+				.equalsIgnoreCase(aInternalObject)) {
+			return new DateGreaterThanOrEqualFunction();
+		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-intersection".equalsIgnoreCase(aInternalObject)) {
+			return new DateIntersectionFunction();
+		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-is-in".equalsIgnoreCase(aInternalObject)) {
+			return new DateIsInFunction();
+		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-less-than".equalsIgnoreCase(aInternalObject)) {
+			return new DateLessThanFunction();
+		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-less-than-or-equal".equalsIgnoreCase(aInternalObject)) {
+			return new DateLessThanOrEqualFunction();
+		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-one-and-only".equalsIgnoreCase(aInternalObject)) {
+			return new DateOneAndOnlyFunction();
+		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-set-equals".equalsIgnoreCase(aInternalObject)) {
+			return new DateSetEqualsFunction();
+		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-subset".equalsIgnoreCase(aInternalObject)) {
+			return new DateSubsetFunction();
+		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-union".equalsIgnoreCase(aInternalObject)) {
+			return new DateUnionFunction();
+		} else if ("urn:oasis:names:tc:xacml:3.0:function:date-add-yearMonthDuration"
+				.equalsIgnoreCase(aInternalObject)) {
+			return new DateAddYearMonthDurationFunction();
+		} else if ("urn:oasis:names:tc:xacml:3.0:function:date-subtract-yearMonthDuration"
+				.equalsIgnoreCase(aInternalObject)) {
+			return new DateSubtractYearMonthDurationFunction();
+		}
+
+		return null;
 	}
 
 	@Override

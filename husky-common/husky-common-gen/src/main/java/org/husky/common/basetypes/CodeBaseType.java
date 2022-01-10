@@ -10,15 +10,16 @@
  */
 package org.husky.common.basetypes;
 
-import org.husky.common.enums.LanguageCode;
-import org.husky.common.enums.NullFlavor;
-import org.husky.common.utils.LangText;
-import org.husky.common.utils.Util;
-
-import javax.annotation.processing.Generated;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.processing.Generated;
+
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.husky.common.enums.LanguageCode;
+import org.husky.common.enums.NullFlavor;
+import org.husky.common.utils.LangText;
 
 /**
  * This class provides the basic information for a code according to HL7. This class does not have any foreign framework
@@ -200,63 +201,18 @@ public class CodeBaseType implements Serializable {
         if (!(obj instanceof CodeBaseType))
             return false;
 
-        // only business rules are applied, here. Rest was initially implemented
-        // and stays here for future use. If you use it, you need to implement
-        // another method and not change the current method.
-        // if (retVal) {
-        // if (this.codeTranslationList == null)
-        // this.codeTranslationList = new ArrayList<CodeBaseType>();
-        // for (int i = 0; i < this.codeTranslationList.size(); i++) {
-        // retVal = (obj.contains(this.codeTranslationList.get(i)));
-        // if (!retVal)
-        // break;
-        // }
-        // }
-        // if (retVal) {
-        // if (this.displayNameTranslationList == null)
-        // this.displayNameTranslationList = new ArrayList<LangText>();
-        // for (int i = 0; i < this.displayNameTranslationList.size(); i++) {
-        // retVal = obj.contains(this.displayNameTranslationList.get(i));
-        // if (!retVal)
-        // break;
-        // }
-        // }
-        if (retVal) {
-            if (this.code == null)
-                retVal = (((CodeBaseType) obj).getCode() == null);
-            else
-                retVal = this.code.equals(((CodeBaseType) obj).getCode());
-        }
+        if (this.code == null)
+            retVal = (((CodeBaseType) obj).getCode() == null);
+        else
+            retVal = this.code.equals(((CodeBaseType) obj).getCode());
+    
         if (retVal) {
             if (this.codeSystem == null)
                 retVal = (((CodeBaseType) obj).getCodeSystem() == null);
             else
                 retVal = this.codeSystem.equals(((CodeBaseType) obj).getCodeSystem());
         }
-        // if (retVal) {
-        // if (this.codeSystemName == null)
-        // retVal = (obj.getCodeSystemName() == null);
-        // else
-        // retVal = this.codeSystemName.equals(obj.getCodeSystemName());
-        // }
-        // if (retVal) {
-        // if (this.codeSystemVersion == null)
-        // retVal = (obj.getCodeSystemVersion() == null);
-        // else
-        // retVal = this.codeSystemVersion.equals(obj.getCodeSystemVersion());
-        // }
-        // if (retVal) {
-        // if (this.displayName == null)
-        // retVal = (obj.getDisplayName() == null);
-        // else
-        // retVal = this.displayName.equals(obj.getDisplayName());
-        // }
-        // if (retVal) {
-        // if (this.originalText == null)
-        // retVal = (obj.getOriginalText() == null);
-        // else
-        // retVal = this.originalText.equals(obj.getOriginalText());
-        // }
+       
         return retVal;
     }
 
@@ -433,7 +389,7 @@ public class CodeBaseType implements Serializable {
      */
     @Override
     public int hashCode() {
-        return Util.getChecksum(this);
+		return new HashCodeBuilder(17, 37).append(this.code).append(this.codeSystem).toHashCode();
     }
 
     /**

@@ -1,12 +1,12 @@
 package org.husky.validation.service.schematron;
 
-import com.helger.commons.io.resource.FileSystemResource;
-import com.helger.commons.io.resource.IReadableResource;
-import com.helger.commons.io.resource.inmemory.ReadableResourceByteArray;
-import com.helger.schematron.sch.SchematronProviderXSLTFromSCH;
-import com.helger.schematron.sch.TransformerCustomizerSCH;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.husky.common.utils.xml.XmlFactories;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 import javax.annotation.concurrent.NotThreadSafe;
 import javax.xml.transform.Transformer;
@@ -14,9 +14,14 @@ import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
+
+import org.husky.common.utils.xml.XmlFactories;
+
+import com.helger.commons.io.resource.FileSystemResource;
+import com.helger.commons.io.resource.IReadableResource;
+import com.helger.commons.io.resource.inmemory.ReadableResourceByteArray;
+import com.helger.schematron.sch.SchematronProviderXSLTFromSCH;
+import com.helger.schematron.sch.TransformerCustomizerSCH;
 
 /**
  * A transformer from Schematron files ({@code .sch}) to XML Stylesheet Transform files ({@code .xsl}). Schematron

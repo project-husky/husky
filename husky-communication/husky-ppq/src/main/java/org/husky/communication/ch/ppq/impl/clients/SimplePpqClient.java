@@ -43,10 +43,6 @@ public class SimplePpqClient extends CamelService implements PpqClient {
 	/** The SLF4J logger instance. */
 	private static Logger log = LoggerFactory.getLogger(SimplePpqClient.class);
 
-
-	// private static final String EHS_2015_POLYADMIN =
-	// "urn:e-health-suisse:2015:policy-administration:";
-
 	private PpClientConfig config;
 
 	public SimplePpqClient(PpClientConfig clientConfiguration) {

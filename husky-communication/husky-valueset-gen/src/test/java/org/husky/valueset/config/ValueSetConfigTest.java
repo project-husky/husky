@@ -20,13 +20,13 @@ import org.junit.jupiter.api.Test;
 /**
  * The Test Class for ValueSetConfig.
  */
-public class ValueSetConfigTest {
+class ValueSetConfigTest {
 
 	/**
 	 * Do all tests.
 	 */
 	@Test
-	public void doAllTests() {
+	void doAllTests() {
 
 		// Basic ValueSetConfig elements tests
 		String className = "className";

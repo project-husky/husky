@@ -30,9 +30,18 @@ import org.husky.common.hl7cdar2.TS;
  *
  * Deprecated, use {@link org.husky.common.utils.time.Hl7Dtm}, {@link org.husky.common.utils.time.DateTimes} and the
  * new Java time API.
+ * @deprecated
  */
-@Deprecated
+@Deprecated (since="1.0", forRemoval=true)
 public class DateUtil {
+	
+	public static final String SHORT_DATE_FORMAT = "yyyyMMdd";
+	public static final String LONG_DATE_FORMAT = "yyyyMMddHHmmss";
+	public static final String ERRORMSG_CANNOT_PARSE_DATE_VAL = "Cannot parse date, value=[";
+	
+	private DateUtil() {
+		
+	}
 
 	/**
 	 * <div class="en">Converts the given date to a CDA R2 IVL_TS value (without
@@ -40,11 +49,12 @@ public class DateUtil {
 	 *
 	 * <div class="de">Konvertiert das angegebene Datum in einen CDA R2
 	 * IVL_TS-Wert (ohne Zeitzonenangabe).</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            the value
 	 * @return the ivlts
 	 */
+	
 	public static IVLTS date2Ivlts(Date value) {
 		if (value == null) {
 			return new IVLTS(NullFlavor.UNKNOWN);
@@ -59,7 +69,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Konvertiert das angegebene Datum in einen CDA R2
 	 * IVL_TS-Wert (ohne Tageszeit und Zeitzonenangabe).</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            the value
 	 * @return the ivlts
@@ -78,7 +88,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Konvertiert das angegebene Datum in einen CDA R2
 	 * IVL_TS-Wert (mit Zeitzonenangabe).</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            the value
 	 * @return the ivlts
@@ -98,7 +108,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Konvertiert das angegebene Datum inkl. Tageszeit in ein
 	 * CDA R2 TS (ohne Zeitzone).</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            the value
 	 * @return the ts
@@ -117,7 +127,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Konvertiert das angegebene Datum ohne Tageszeit in ein
 	 * CDA R2 TS (ohne Zeitzone).</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            the value
 	 * @return the ts
@@ -136,7 +146,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Konvertiert das angegebene Datum ohne Tageszeit in ein CDA R2
 	 * TS (ohne Zeitzone).</div>
-	 *
+	 * @deprecated
 	 * @param value the value
 	 * @return the ts
 	 */
@@ -154,7 +164,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Konvertiert das angegebene Datum inkl. Tageszeit in ein
 	 * CDA R2 TS (mit Zeitzone).</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            the value
 	 * @return the ts
@@ -172,13 +182,13 @@ public class DateUtil {
 	 *
 	 * <div class="de">Formatiert den angegebenen Zeitstempel als String:
 	 * yyyyMMdd</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            the value
 	 * @return the string
 	 */
 	public static String formatDateOnly(Date value) {
-		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		final SimpleDateFormat sdf = new SimpleDateFormat(SHORT_DATE_FORMAT);
 		return sdf.format(value);
 	}
 
@@ -187,12 +197,12 @@ public class DateUtil {
 	 *
 	 * <div class="de">Formatiert den angegebenen Zeitstempel als String:
 	 * yyyyMMdd</div>
-	 *
+	 * @deprecated
 	 * @param value the value
 	 * @return the string
 	 */
 	public static String formatDateOnly(ZonedDateTime value) {
-		return value.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		return value.format(DateTimeFormatter.ofPattern(SHORT_DATE_FORMAT));
 	}
 
 	/**
@@ -201,13 +211,13 @@ public class DateUtil {
 	 *
 	 * <div class="de">Formatiert den angegebenen Zeitstempel als String:
 	 * yyyyMMddHHmmss</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            the value
 	 * @return the string
 	 */
 	public static String formatDateTime(Date value) {
-		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		final SimpleDateFormat sdf = new SimpleDateFormat(LONG_DATE_FORMAT);
 		return sdf.format(value);
 	}
 
@@ -216,12 +226,12 @@ public class DateUtil {
 	 *
 	 * <div class="de">Formatiert den angegebenen Zeitstempel als String:
 	 * yyyyMMddHHmmss</div>
-	 *
+	 * @deprecated
 	 * @param value the value
 	 * @return the string
 	 */
 	public static String formatDateTime(ZonedDateTime value) {
-		return value.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneId.systemDefault()));
+		return value.format(DateTimeFormatter.ofPattern(LONG_DATE_FORMAT).withZone(ZoneId.systemDefault()));
 	}
 
 	/**
@@ -230,7 +240,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Formatiert den angegebenen Zeitstempel als String:
 	 * yyyyMMddHHmmssXXXX</div>
-	 *
+	 * @deprecated
 	 * @param value the value
 	 * @return the string
 	 */
@@ -246,7 +256,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Formatiert den angegebenen Zeitstempel als String:
 	 * yyyyMMddHHmmssXXXX</div>
-	 *
+	 * @deprecated
 	 * @param value the value
 	 * @return the string
 	 */
@@ -268,7 +278,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
 	 * Erwartetes Format: dd.MM.yyyy</div>
-	 *
+	 * @deprecated
 	 * @param dateSt
 	 *            <br>
 	 *            <div class="en"> date String</div>
@@ -290,7 +300,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
 	 * Erwartetes Format: dd.MM.yyyy HH:mm oder dd.MM.yyyy HH:mm:ss</div>
-	 *
+	 * @deprecated
 	 * @param dateSt
 	 *            <br>
 	 *            <div class="de"> date String</div>
@@ -317,7 +327,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
 	 * Erwartetes Format: yyyyMM</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            <br>
 	 *            <div class="de">value</div>
@@ -329,7 +339,7 @@ public class DateUtil {
 			return sdf.parse(value);
 		} catch (final ParseException e) {
 			throw new IllegalArgumentException(
-					"Cannot parse date, value=[" + value + "]. Expected format is yyyyMM.", e);
+					ERRORMSG_CANNOT_PARSE_DATE_VAL + value + "]. Expected format is yyyyMM.", e);
 		}
 	}
 
@@ -339,7 +349,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
 	 * Erwartetes Format: yyyyMMdd</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            <br>
 	 *            <div class="de">value</div>
@@ -347,11 +357,11 @@ public class DateUtil {
 	 */
 	public static Date parseDateyyyyMMdd(String value) {
 		try {
-			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			final SimpleDateFormat sdf = new SimpleDateFormat(SHORT_DATE_FORMAT);
 			return sdf.parse(value);
 		} catch (final ParseException e) {
 			throw new IllegalArgumentException(
-					"Cannot parse date, value=[" + value + "]. Expected format is yyyyMMdd.", e);
+					ERRORMSG_CANNOT_PARSE_DATE_VAL + value + "]. Expected format is yyyyMMdd.", e);
 		}
 	}
 
@@ -361,7 +371,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
 	 * Erwartetes Format: yyyy-MM-dd</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            <br>
 	 *            <div class="de">value</div>
@@ -373,7 +383,7 @@ public class DateUtil {
 			return sdf.parse(value);
 		} catch (final ParseException e) {
 			throw new IllegalArgumentException(
-					"Cannot parse date, value=[" + value + "]. Expected format is yyyy-MM-dd.", e);
+					ERRORMSG_CANNOT_PARSE_DATE_VAL + value + "]. Expected format is yyyy-MM-dd.", e);
 		}
 	}
 
@@ -383,7 +393,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
 	 * Erwartetes Format: yyyyMMddHHmm</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            <br>
 	 *            <div class="de"> value</div>
@@ -395,7 +405,7 @@ public class DateUtil {
 			return sdf.parse(value);
 		} catch (final ParseException e) {
 			throw new IllegalArgumentException(
-					"Cannot parse date, value=[" + value + "]. Expected format is yyyyMMddHHmm.",
+					ERRORMSG_CANNOT_PARSE_DATE_VAL + value + "]. Expected format is yyyyMMddHHmm.",
 					e);
 		}
 	}
@@ -406,7 +416,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
 	 * Erwartetes Format: yyyyMMddHHmmss</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            <br>
 	 *            <div class="de"> value</div>
@@ -414,12 +424,12 @@ public class DateUtil {
 	 */
 	public static Date parseDateyyyyMMddHHmmss(String value) {
 		try {
-			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+			final SimpleDateFormat sdf = new SimpleDateFormat(LONG_DATE_FORMAT);
 			sdf.setTimeZone(TimeZone.getDefault());
 			return sdf.parse(value);
 		} catch (final ParseException e) {
 			throw new IllegalArgumentException(
-					"Cannot parse date, value=[" + value + "]. Expected format is yyyyMMddHHmmss.",
+					ERRORMSG_CANNOT_PARSE_DATE_VAL + value + "]. Expected format is yyyyMMddHHmmss.",
 					e);
 		}
 	}
@@ -430,7 +440,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
 	 * Erwartetes Format: yyyyMMddHHmmZ</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            <br>
 	 *            <div class="de"> value</div>
@@ -442,7 +452,7 @@ public class DateUtil {
 			return sdf.parse(value);
 		} catch (final ParseException e) {
 			throw new IllegalArgumentException(
-					"Cannot parse date, value=[" + value + "]. Expected format is yyyyMMdd.", e);
+					ERRORMSG_CANNOT_PARSE_DATE_VAL + value + "]. Expected format is yyyyMMdd.", e);
 		}
 	}
 
@@ -452,7 +462,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
 	 * Erwartetes Format: yyyyMMddHHmmZZZZ</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            <br>
 	 *            <div class="de"> value</div>
@@ -463,7 +473,7 @@ public class DateUtil {
 			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmZZZZ");
 			return sdf.parse(value);
 		} catch (final ParseException e) {
-			throw new IllegalArgumentException("Cannot parse date, value=[" + value
+			throw new IllegalArgumentException(ERRORMSG_CANNOT_PARSE_DATE_VAL + value
 					+ "]. Expected format is yyyyMMddHHmmZZZZ.", e);
 		}
 	}
@@ -474,7 +484,7 @@ public class DateUtil {
 	 *
 	 * <div class="de">Parst den angegebenen String in einen Zeitstempel.
 	 * Erwartetes Format: yyyy-MM-dd'T'HH:mm:ss</div>
-	 *
+	 * @deprecated
 	 * @param value
 	 *            <br>
 	 *            <div class="de"> value</div>
@@ -486,7 +496,7 @@ public class DateUtil {
 			final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 			return sdf.parse(value);
 		} catch (final ParseException e) {
-			throw new IllegalArgumentException("Cannot parse date, value=[" + value
+			throw new IllegalArgumentException(ERRORMSG_CANNOT_PARSE_DATE_VAL + value
 					+ "]. Expected format is yyyy-MM-ddTHH:mm:ss.", e);
 		}
 	}
@@ -494,13 +504,13 @@ public class DateUtil {
 	/**
 	 * Check whether the dates of the two dates are equal (ignoring the time of the
 	 * day).
-	 *
+	 * @deprecated
 	 * @param validFrom  the valid from
 	 * @param validFrom2 the valid from 2
 	 * @return true, if equal
 	 */
 	public static boolean equalsDateOnly(Date validFrom, Date validFrom2) {
-		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+		DateFormat dateFormat = new SimpleDateFormat(SHORT_DATE_FORMAT);
 		String validFromStr = dateFormat.format(validFrom);
 		String validFromStr2 = dateFormat.format(validFrom2);
 		return validFromStr.equals(validFromStr2);

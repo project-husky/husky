@@ -19,7 +19,7 @@ import org.husky.xua.saml2.impl.StatusImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class StatusBuilderImplTest {
+class StatusBuilderImplTest {
 
 	private StatusBuilderImpl builder;
 	private org.opensaml.saml.saml2.core.Status testInnerObject;
@@ -40,19 +40,19 @@ public class StatusBuilderImplTest {
 	}
 
 	@Test
-	public void testCreateStatus() {
+	void testCreateStatus() {
 		final Status ref = builder.create(testInnerObject);
 		assertEquals(testInnerObject, ((StatusImpl) ref).getWrappedObject());
 	}
 
 	@Test
-	public void testStatusCode() {
+	void testStatusCode() {
 		final Status ref = builder.statusCode(testStatusCode).create();
 		assertEquals(testStatusCode, ref.getStatusCode());
 	}
 
 	@Test
-	public void testStatusMessage() {
+    void testStatusMessage() {
 		final Status ref = builder.statusMessage(testStatusMessage).create();
 		assertEquals(testStatusMessage, ref.getStatusMessage());
 	}

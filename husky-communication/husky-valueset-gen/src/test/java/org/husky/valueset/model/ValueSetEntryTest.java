@@ -19,20 +19,18 @@ import org.husky.common.basetypes.CodeBaseType;
 import org.husky.common.enums.LanguageCode;
 import org.husky.valueset.enums.DesignationType;
 import org.husky.valueset.enums.ValueSetEntryType;
-import org.husky.valueset.model.Designation;
-import org.husky.valueset.model.ValueSetEntry;
 import org.junit.jupiter.api.Test;
 
 /**
  * The Test Class for ValueSetEntryTest.
  */
-public class ValueSetEntryTest {
+class ValueSetEntryTest {
 
 	/**
 	 * Do all tests.
 	 */
 	@Test
-	public void doAllTests() {
+	void doAllTests() {
 
 		// Basic ValueSetEntry elements tests
 		CodeBaseType codeBaseType1 = CodeBaseType.builder().withCode("abstractcode1")
@@ -50,7 +48,7 @@ public class ValueSetEntryTest {
 				.withValueSetEntryType(valueSetEntryType1).build();
 
 		assertEquals(valueSetEntry1.hashCode(), valueSetEntryA.hashCode());
-		assertTrue(valueSetEntry1.equals(valueSetEntryA));
+		assertEquals(valueSetEntry1, valueSetEntryA);
 
 		assertEquals(codeBaseType1, valueSetEntry1.getCodeBaseType());
 		assertEquals(defaultMappingName1, valueSetEntry1.getDefaultMappingName());
@@ -137,7 +135,7 @@ public class ValueSetEntryTest {
 	}
 
 	@Test
-	public void testEqualsAddContainsChild() {
+	void testEqualsAddContainsChild() {
 
 		ValueSetEntry valueSetEntryA = new ValueSetEntry();
 		ValueSetEntry valueSetEntryB = new ValueSetEntry();
@@ -173,7 +171,7 @@ public class ValueSetEntryTest {
 	}
 
 	@Test
-	public void testEqualsAddContainsDesignation() {
+	void testEqualsAddContainsDesignation() {
 
 		ValueSetEntry valueSetEntryA = new ValueSetEntry();
 		ValueSetEntry valueSetEntryB = new ValueSetEntry();
@@ -209,7 +207,7 @@ public class ValueSetEntryTest {
 	}
 
 	@Test
-	public void testEqualsAddContainsMappingCode() {
+	void testEqualsAddContainsMappingCode() {
 
 		ValueSetEntry valueSetEntryA = new ValueSetEntry();
 		ValueSetEntry valueSetEntryB = new ValueSetEntry();
@@ -247,7 +245,7 @@ public class ValueSetEntryTest {
 	}
 
 	@Test
-	public void testEqualsAddContainsMappingName() {
+	void testEqualsAddContainsMappingName() {
 
 		ValueSetEntry valueSetEntryA = new ValueSetEntry();
 		ValueSetEntry valueSetEntryB = new ValueSetEntry();

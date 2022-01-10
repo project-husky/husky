@@ -17,7 +17,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionsType;
 
-public class ConditionsBuilderImplTest {
+class ConditionsBuilderImplTest {
 	public ConditionsBuilder testBuilder;
 
 	@BeforeEach
@@ -30,7 +30,7 @@ public class ConditionsBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.ConditionsBuilderImpl#create()}.
 	 */
 	@Test
-	public void testCreate() {
+	void testCreate() {
 		final ConditionsType audience = testBuilder.create();
 		assertNotNull(audience);
 	}

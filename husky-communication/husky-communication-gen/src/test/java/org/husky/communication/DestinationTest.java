@@ -20,7 +20,7 @@ import org.husky.common.communication.Destination;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class DestinationTest {
+class DestinationTest {
 
 	public static final String NIST = "http://test.url";
 
@@ -56,7 +56,7 @@ public class DestinationTest {
 	}
 
 	@Test
-	public void testKeyStoreConstructor() {
+	void testKeyStoreConstructor() {
 		Destination dest = new Destination(ORGANIZATIONAL_ID, repUri, KEY_STORE, KEY_STORE_PASS);
 		assertEquals(ORGANIZATIONAL_ID, dest.getSenderOrganizationalOid());
 		assertEquals(repUri, dest.getUri());
@@ -67,7 +67,7 @@ public class DestinationTest {
 	}
 
 	@Test
-	public void testKeyStoreTrustStoreConstructor() {
+	void testKeyStoreTrustStoreConstructor() {
 		Destination dest = new Destination(ORGANIZATIONAL_ID, repUri, KEY_STORE, KEY_STORE_PASS,
 				TRUST_STORE, TRUST_STORE_PASS);
 		assertEquals(ORGANIZATIONAL_ID, dest.getSenderOrganizationalOid());
@@ -79,7 +79,7 @@ public class DestinationTest {
 	}
 
 	@Test
-	public void testSetterGetter() {
+	void testSetterGetter() {
 		Destination dest = new Destination();
 		dest.setKeyStore(KEY_STORE);
 		assertEquals(KEY_STORE, dest.getKeyStore());

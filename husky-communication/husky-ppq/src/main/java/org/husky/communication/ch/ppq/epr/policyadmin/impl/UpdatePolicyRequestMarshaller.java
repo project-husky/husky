@@ -30,15 +30,12 @@ public class UpdatePolicyRequestMarshaller extends AbstractXMLObjectMarshaller {
 	@Override
 	protected void marshallChildElements(XMLObject xmlObject, Element domElement)
 			throws MarshallingException {
-		if (xmlObject instanceof OpenSamlDeletePolicyRequest) {
-			final OpenSamlDeletePolicyRequest request = (OpenSamlDeletePolicyRequest) xmlObject;
-			if (request.getAssertion() != null) {
+		if (xmlObject instanceof OpenSamlDeletePolicyRequest request && request.getAssertion() != null) {
 				final AssertionImpl assertion = (AssertionImpl) request.getAssertion();
 				final var innerAssertion = assertion
 						.getWrappedObject();
 				final var assertionElement = marshall(innerAssertion);
 				domElement.appendChild(assertionElement);
-			}
 		}
 		super.marshallChildElements(xmlObject, domElement);
 	}

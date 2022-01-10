@@ -23,7 +23,7 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntryType;
 /**
  * Test of class GetFolderAndContentsQuery
  */
-public class GetFolderAndContentsQueryTest extends XdsChTestUtils {
+class GetFolderAndContentsQueryTest extends XdsChTestUtils {
 
 	/**
 	 * Method implementing
@@ -40,7 +40,7 @@ public class GetFolderAndContentsQueryTest extends XdsChTestUtils {
 	 * .
 	 */
 	@Test
-	public void testGetFolderAndContentsQueryStringBooleanFormatCodeArrayConfidentialityCodeArray() {
+	void testGetFolderAndContentsQueryStringBooleanFormatCodeArrayConfidentialityCodeArray() {
 		final GetFolderAndContentsQuery q1 = new GetFolderAndContentsQuery("1234", true,
 				formatCodes, confidentialityCodes);
 
@@ -62,7 +62,7 @@ public class GetFolderAndContentsQueryTest extends XdsChTestUtils {
 	 * .
 	 */
 	@Test
-	public void testGetFolderAndContentsQueryStringBooleanFormatCodeArrayConfidentialityCodeArrayString() {
+	void testGetFolderAndContentsQueryStringBooleanFormatCodeArrayConfidentialityCodeArrayString() {
 		final GetFolderAndContentsQuery q2 = new GetFolderAndContentsQuery("1234", true,
 				formatCodes, confidentialityCodes, "9876");
 		assertTrue(
@@ -76,7 +76,7 @@ public class GetFolderAndContentsQueryTest extends XdsChTestUtils {
 	 * .
 	 */
 	@Test
-	public void testGetFolderAndContentsQueryStringBooleanFormatCodeArrayConfidentialityCodeArrayStringObjectType() {
+	void testGetFolderAndContentsQueryStringBooleanFormatCodeArrayConfidentialityCodeArrayStringObjectType() {
 		final GetFolderAndContentsQuery q3 = new GetFolderAndContentsQuery("1234", true,
 				formatCodes, confidentialityCodes, "6565873dsdgsdg", DocumentEntryType.STABLE);
 

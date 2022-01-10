@@ -34,7 +34,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
 @EnableAutoConfiguration
-public class SimplePpqClientTest {
+class SimplePpqClientTest {
 
 	@Autowired
 	private CamelContext camelContext;
@@ -65,7 +65,7 @@ public class SimplePpqClientTest {
 	}
 
 	@Test
-	public void testQueryPolicyWithUnknownPid() throws Exception {
+	void testQueryPolicyWithUnknownPid() throws Exception {
 		// initialize client to query policies
 		PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
 				.clientKeyStorePassword(clientKeyStorePass).create();
@@ -97,7 +97,7 @@ public class SimplePpqClientTest {
 	}
 
 	@Test
-	public void testQueryPolicyWithUnknownPolicySetId() throws Exception {
+	void testQueryPolicyWithUnknownPolicySetId() throws Exception {
 
 		// initialize client to query policies
 		PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)
@@ -137,7 +137,7 @@ public class SimplePpqClientTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testQueryHcpPolicyWithPolicy() throws Exception {
+	void testQueryHcpPolicyWithPolicy() throws Exception {
 
 		// initialize client to query policies
 		PpClientConfig config = new PpClientConfigBuilderImpl().url(urlToPpq).clientKeyStore(clientKeyStore)

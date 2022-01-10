@@ -11,17 +11,26 @@
 
 package org.husky.common.model;
 
-import org.husky.common.enums.AdministrativeGender;
-import org.husky.common.hl7cdar2.*;
-import org.husky.common.utils.DateUtil;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.husky.common.enums.AdministrativeGender;
+import org.husky.common.hl7cdar2.AD;
+import org.husky.common.hl7cdar2.CE;
+import org.husky.common.hl7cdar2.II;
+import org.husky.common.hl7cdar2.PN;
+import org.husky.common.hl7cdar2.POCDMT000040Patient;
+import org.husky.common.hl7cdar2.POCDMT000040PatientRole;
+import org.husky.common.hl7cdar2.POCDMT000040RecordTarget;
+import org.husky.common.hl7cdar2.TEL;
+import org.husky.common.hl7cdar2.TS;
+import org.husky.common.utils.time.DateTimes;
 
 /**
  * Class Patient
@@ -103,7 +112,7 @@ public class Patient extends Person {
      * @param sex      Geschlecht
      * @param birthDay Geburtsdatum
      */
-    public Patient(Name name, AdministrativeGender sex, Date birthDay) {
+	public Patient(Name name, AdministrativeGender sex, Calendar birthDay) {
         this();
 
         // Create and fill gender
@@ -116,7 +125,7 @@ public class Patient extends Person {
 
         // Create and fill birth date
         if (birthDay != null) {
-            mPatient.setBirthTime(DateUtil.date2TsDateOnly(birthDay));
+			mPatient.setBirthTime(DateTimes.toDateTs(birthDay.toInstant(), birthDay.getTimeZone().toZoneId()));
         }
     }
 
@@ -129,7 +138,7 @@ public class Patient extends Person {
      * @param birthDay Geburtsdatum
      * @param id       ID
      */
-    public Patient(Name name, AdministrativeGender sex, Date birthDay, Identificator id) {
+	public Patient(Name name, AdministrativeGender sex, Calendar birthDay, Identificator id) {
         // Create the RecordTarget, PatientRole and Patient
         mRecordTarget = new POCDMT000040RecordTarget();
         mPatientRole = new POCDMT000040PatientRole();
@@ -168,9 +177,7 @@ public class Patient extends Person {
      * @param address Adresse
      */
     public void addAddress(Address address) {
-        if (mPatientRole.getAddr() != null) {
-            mPatientRole.getAddr().add(address.getHl7CdaR2Ad());
-        }
+		mPatientRole.getAddr().add(address.getHl7CdaR2Ad());
     }
 
     /**
@@ -184,6 +191,22 @@ public class Patient extends Person {
         id.setExtension(identificator.getExtension());
         mPatientRole.getId().add(id);
     }
+
+	/**
+	 * Adds a list of identificator
+	 * 
+	 * @param identificators list of identificator
+	 */
+	public void setIds(List<Identificator> identificators) {
+		for (Identificator identificator : identificators) {
+			if (identificator != null) {
+				var id = new II();
+				id.setRoot(identificator.getRoot());
+				id.setExtension(identificator.getExtension());
+				mPatientRole.getId().add(id);
+			}
+		}
+	}
 
     /**
      * Adds the name.
@@ -254,8 +277,8 @@ public class Patient extends Person {
      *
      * @param birthDay the new birthday
      */
-    public void setBirthday(Date birthDay) {
-        mPatient.setBirthTime(DateUtil.date2TsDateOnly(birthDay));
+	public void setBirthday(Calendar birthDay) {
+		mPatient.setBirthTime(DateTimes.toDateTs(birthDay.toInstant(), birthDay.getTimeZone().toZoneId()));
     }
 
     /**
@@ -264,7 +287,7 @@ public class Patient extends Person {
      * @param birthDay the new birthday
      */
     public void setBirthday(ZonedDateTime birthDay) {
-        mPatient.setBirthTime(DateUtil.date2TsDateOnly(birthDay));
+		mPatient.setBirthTime(DateTimes.toDateTs(birthDay));
     }
 
     /**
@@ -275,7 +298,7 @@ public class Patient extends Person {
     @Override
     public String getCompleteName() {
         var retVal = "";
-        if (mPatient.getName() != null && !mPatient.getName().isEmpty()) {
+		if (!mPatient.getName().isEmpty()) {
             final var name = new Name(mPatient.getName().get(0));
             retVal = name.getFullName();
         }

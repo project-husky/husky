@@ -30,9 +30,7 @@ public class AddPolicyRequestMarshaller extends AbstractXMLObjectMarshaller {
 	@Override
 	protected void marshallChildElements(XMLObject xmlObject, Element domElement)
 			throws MarshallingException {
-		if (xmlObject instanceof OpenSamlAddPolicyRequest) {
-			final OpenSamlAddPolicyRequest request = (OpenSamlAddPolicyRequest) xmlObject;
-			if (request.getAssertion() != null) {
+		if (xmlObject instanceof OpenSamlAddPolicyRequest request && request.getAssertion() != null) {
 				final AssertionImpl assertion = (AssertionImpl) request.getAssertion();
 				final var innerAssertion = assertion
 						.getWrappedObject();
@@ -40,7 +38,6 @@ public class AddPolicyRequestMarshaller extends AbstractXMLObjectMarshaller {
 				final var imported = domElement.getOwnerDocument().importNode(assertionElement,
 						true);
 				domElement.appendChild(imported);
-			}
 		}
 		super.marshallChildElements(xmlObject, domElement);
 	}

@@ -14,7 +14,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -30,9 +33,8 @@ import org.husky.common.model.Author;
 import org.husky.common.model.Code;
 import org.husky.common.model.Identificator;
 import org.husky.common.model.Name;
-import org.husky.common.utils.DateUtil;
-import org.husky.common.utils.OID;
 import org.husky.communication.xd.storedquery.DateTimeRange;
+import org.openehealth.ipf.commons.core.OidGenerator;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationType;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.slf4j.Logger;
@@ -67,8 +69,8 @@ public class XdsTestUtils {
 	public static org.husky.communication.xd.storedquery.DateTimeRange eDateTimeRange2;
 
 	public static org.husky.communication.xd.storedquery.DateTimeRange eDateTimeRanges[];
-	public static Date d1;
-	public static Date d2;
+	public static ZonedDateTime d1;
+	public static ZonedDateTime d2;
 	/** The SLF4J logger instance. */
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -77,13 +79,21 @@ public class XdsTestUtils {
 	public XdsTestUtils() {
 		// Initalize DateTimeRanges
 		dateTimeRange1 = new DateTimeRange(DateTimeRangeAttributes.CREATION_TIME,
-				DateUtil.parseDateyyyyMMddHHmm("201401012300"), DateUtil.parseDateyyyyMMddHHmm("201412310400"));
+				LocalDateTime.parse("201401012300", DateTimeFormatter.ofPattern("yyyyMMddHHmm"))
+						.atZone(ZoneId.systemDefault()),
+				LocalDateTime.parse("201412310400", DateTimeFormatter.ofPattern("yyyyMMddHHmm"))
+						.atZone(ZoneId.systemDefault()));
 		dateTimeRange2 = new DateTimeRange(DateTimeRangeAttributes.CREATION_TIME,
-				DateUtil.parseDateyyyyMMddHHmm("201501012300"), DateUtil.parseDateyyyyMMddHHmm("201502010400"));
+				LocalDateTime.parse("201501012300", DateTimeFormatter.ofPattern("yyyyMMddHHmm"))
+						.atZone(ZoneId.systemDefault()),
+				LocalDateTime.parse("201502010400", DateTimeFormatter.ofPattern("yyyyMMddHHmm"))
+						.atZone(ZoneId.systemDefault()));
 		dateTimeRanges = new DateTimeRange[] { dateTimeRange1, dateTimeRange2 };
 
-			d1 = DateUtil.parseDateyyyyMMddHHmmss("19800521022211");
-			d2 = DateUtil.parseDateyyyyMMddHHmmss("20150521133459");
+		d1 = LocalDateTime.parse("19800521022211", DateTimeFormatter.ofPattern("yyyyMMddHHmmss"))
+				.atZone(ZoneId.systemDefault());
+		d2 = LocalDateTime.parse("20150521133459", DateTimeFormatter.ofPattern("yyyyMMddHHmmss"))
+				.atZone(ZoneId.systemDefault());
 			eDateTimeRange1 = new org.husky.communication.xd.storedquery.DateTimeRange(
 					DateTimeRangeAttributes.CREATION_TIME, d1, d2);
 			eDateTimeRange2 = new org.husky.communication.xd.storedquery.DateTimeRange(
@@ -188,7 +198,7 @@ public class XdsTestUtils {
 
 	protected void setSubmissionMetadata(SubmissionSetMetadata metadata, Identificator patientId) {
 		metadata.getAuthor().add(authorPerson);
-		metadata.setUniqueId(OID.createOIDGivenRoot(EhcVersions.getCurrentVersion().getOid(), 64));
+		metadata.setUniqueId(OidGenerator.uniqueOid().toString());
 		metadata.setSourceId(EhcVersions.getCurrentVersion().getOid());
 		metadata.setEntryUUID(UUID.randomUUID().toString());
 		metadata.setDestinationPatientId(patientId);

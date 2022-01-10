@@ -10,276 +10,278 @@
  */
 package org.husky.common.basetypes;
 
-import org.husky.common.enums.NullFlavor;
-import org.husky.common.enums.TelecomAddressUse;
-import org.husky.common.utils.Util;
-
-import javax.annotation.processing.Generated;
 import java.io.Serializable;
 
+import javax.annotation.processing.Generated;
+
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.husky.common.enums.NullFlavor;
+import org.husky.common.enums.TelecomAddressUse;
+
 /**
- * Details for all kinds of technology-mediated contact points for a person or organization, including telephone, email,
- * etc.
+ * Details for all kinds of technology-mediated contact points for a person or
+ * organization, including telephone, email, etc.
  */
 public class TelecomBaseType implements Serializable {
 
-    /*
-     * See getter/setter for more details to the class members.
-     */
+	/*
+	 * See getter/setter for more details to the class members.
+	 */
 
-    /**
-     * The Constant serialVersionUID.
-     */
-    private static final long serialVersionUID = 6908791040642752931L;
-    /**
-     * The null flavor.
-     */
-    private NullFlavor nullFlavor;
-    /**
-     * The usage.
-     */
-    private TelecomAddressUse usage;
-    /**
-     * The value.
-     */
-    private String value;
+	/**
+	 * The Constant serialVersionUID.
+	 */
+	private static final long serialVersionUID = 6908791040642752931L;
+	/**
+	 * The null flavor.
+	 */
+	private NullFlavor nullFlavor;
+	/**
+	 * The usage.
+	 */
+	private TelecomAddressUse usage;
+	/**
+	 * The value.
+	 */
+	private String value;
 
-    /**
-     * Instantiates a new TelecomBaseType. Default constructor.
-     */
-    public TelecomBaseType() {
-    }
+	/**
+	 * Instantiates a new TelecomBaseType. Default constructor.
+	 */
+	public TelecomBaseType() {
+	}
 
-    /**
-     * Instantiates a new telecom base type.
-     *
-     * @param builder the builder
-     */
-    @Generated("SparkTools")
-    private TelecomBaseType(Builder builder) {
-        this.usage = builder.usage;
-        this.value = builder.value;
-        this.nullFlavor = builder.nullFlavor;
-    }
+	/**
+	 * Instantiates a new telecom base type.
+	 *
+	 * @param builder the builder
+	 */
+	@Generated("SparkTools")
+	private TelecomBaseType(Builder builder) {
+		this.usage = builder.usage;
+		this.value = builder.value;
+		this.nullFlavor = builder.nullFlavor;
+	}
 
-    /**
-     * Creates builder to build {@link TelecomBaseType}.
-     *
-     * @return created builder
-     */
-    @Generated("SparkTools")
-    public static Builder builder() {
-        return new Builder();
-    }
+	/**
+	 * Creates builder to build {@link TelecomBaseType}.
+	 *
+	 * @return created builder
+	 */
+	@Generated("SparkTools")
+	public static Builder builder() {
+		return new Builder();
+	}
 
-    /**
-     * Checks whether the two objects are equal (based on their content).
-     *
-     * @param obj the TelecomBaseType to compare
-     * @return true, if equal; false otherwise.
-     */
-    @Override
-    public boolean equals(Object obj) {
-        var retVal = true;
-        if (obj == null)
-            return false;
-        if (!(obj instanceof TelecomBaseType))
-            return false;
-        if (retVal) {
-            if (this.usage == null)
-                retVal = (((TelecomBaseType) obj).getUsage() == null);
-            else
-                retVal = this.usage.equals(((TelecomBaseType) obj).getUsage());
-        }
-        if (retVal) {
-            if (this.value == null)
-                retVal = (((TelecomBaseType) obj).getValue() == null);
-            else
-                retVal = this.value.equals(((TelecomBaseType) obj).getValue());
-        }
-        return retVal;
-    }
+	/**
+	 * Checks whether the two objects are equal (based on their content).
+	 *
+	 * @param obj the TelecomBaseType to compare
+	 * @return true, if equal; false otherwise.
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		var retVal = true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof TelecomBaseType))
+			return false;
 
-    /**
-     * Gets the null flavor.
-     *
-     * @return the null flavor
-     */
-    public NullFlavor getNullFlavor() {
-        return nullFlavor;
-    }
+		if (this.usage == null)
+			retVal = (((TelecomBaseType) obj).getUsage() == null);
+		else
+			retVal = this.usage.equals(((TelecomBaseType) obj).getUsage());
 
-    /**
-     * Gets the type of usage (business, private, emergency, vacation, ...).
-     *
-     * @return the usage
-     */
-    public TelecomAddressUse getUsage() {
-        return usage;
-    }
+		if (retVal) {
+			if (this.value == null)
+				retVal = (((TelecomBaseType) obj).getValue() == null);
+			else
+				retVal = this.value.equals(((TelecomBaseType) obj).getValue());
+		}
+		return retVal;
+	}
 
-    /**
-     * Sets the type of usage (business, private, emergency, vacation, ...).
-     *
-     * @param usage the new usage
-     */
-    public void setUsage(TelecomAddressUse usage) {
-        this.usage = usage;
-    }
+	/**
+	 * Gets the null flavor.
+	 *
+	 * @return the null flavor
+	 */
+	public NullFlavor getNullFlavor() {
+		return nullFlavor;
+	}
 
-    /**
-     * Gets the value. This is the real phone number, eMail Address, URL, ...
-     *
-     * @return the value
-     */
-    public String getValue() {
-        return value;
-    }
+	/**
+	 * Gets the type of usage (business, private, emergency, vacation, ...).
+	 *
+	 * @return the usage
+	 */
+	public TelecomAddressUse getUsage() {
+		return usage;
+	}
 
-    /**
-     * Sets the value. This is the real phone number, eMail Address, URL, ...
-     *
-     * @param value the new value
-     */
-    public void setValue(String value) {
-        this.value = value;
-    }
+	/**
+	 * Sets the type of usage (business, private, emergency, vacation, ...).
+	 *
+	 * @param usage the new usage
+	 */
+	public void setUsage(TelecomAddressUse usage) {
+		this.usage = usage;
+	}
 
-    /**
-     * Hash code.
-     *
-     * @return the int
-     */
-    /*
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        return Util.getChecksum(this);
-    }
+	/**
+	 * Gets the value. This is the real phone number, eMail Address, URL, ...
+	 *
+	 * @return the value
+	 */
+	public String getValue() {
+		return value;
+	}
 
-    /**
-     * Checks if the current instance is null flavored.
-     *
-     * @return true, if is null flavor
-     */
-    public boolean isNullFlavor() {
-        return (nullFlavor != null);
-    }
+	/**
+	 * Sets the value. This is the real phone number, eMail Address, URL, ...
+	 *
+	 * @param value the new value
+	 */
+	public void setValue(String value) {
+		this.value = value;
+	}
 
-    /**
-     * Sets the null flavor.
-     *
-     * @param nullFlavor the new null flavor
-     */
-    public void setNullFlavor(NullFlavor nullFlavor) {
-        this.nullFlavor = nullFlavor;
-    }
+	/**
+	 * Hash code.
+	 *
+	 * @return the int
+	 */
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder(17, 37).append(this.value).append(this.usage != null ? this.usage.hashCode() : null)
+				.toHashCode();
+	}
 
-    /**
-     * Sets the value as phone number.
-     *
-     * @param value the new phone
-     */
-    public void setFax(String value) {
-        setValue("fax:" + value);
-    }
+	/**
+	 * Checks if the current instance is null flavored.
+	 *
+	 * @return true, if is null flavor
+	 */
+	public boolean isNullFlavor() {
+		return (nullFlavor != null);
+	}
 
-    /**
-     * Sets the value as eMail Address.
-     *
-     * @param value the new phone
-     */
-    public void setMail(String value) {
-        setValue("mailto:" + value);
-    }
+	/**
+	 * Sets the null flavor.
+	 *
+	 * @param nullFlavor the new null flavor
+	 */
+	public void setNullFlavor(NullFlavor nullFlavor) {
+		this.nullFlavor = nullFlavor;
+	}
 
-    /**
-     * Sets the value as phone number.
-     *
-     * @param value the new phone
-     */
-    public void setPhone(String value) {
-        setValue("tel:" + value);
-    }
+	/**
+	 * Sets the value as phone number.
+	 *
+	 * @param value the new phone
+	 */
+	public void setFax(String value) {
+		setValue("fax:" + value);
+	}
 
-    /**
-     * Builds a string of the telecom.
-     *
-     * @return the string
-     */
-    @Override
-    public String toString() {
-        return getValue();
-    }
+	/**
+	 * Sets the value as eMail Address.
+	 *
+	 * @param value the new phone
+	 */
+	public void setMail(String value) {
+		setValue("mailto:" + value);
+	}
 
-    /**
-     * Builder to build {@link TelecomBaseType}.
-     */
-    @Generated("SparkTools")
-    public static final class Builder {
-        /**
-         * The null flavor.
-         */
-        private NullFlavor nullFlavor;
-        /**
-         * The usage.
-         */
-        private TelecomAddressUse usage;
-        /**
-         * The value.
-         */
-        private String value;
+	/**
+	 * Sets the value as phone number.
+	 *
+	 * @param value the new phone
+	 */
+	public void setPhone(String value) {
+		setValue("tel:" + value);
+	}
 
-        /**
-         * Instantiates a new builder.
-         */
-        private Builder() {
-        }
+	/**
+	 * Builds a string of the telecom.
+	 *
+	 * @return the string
+	 */
+	@Override
+	public String toString() {
+		return getValue();
+	}
 
-        /**
-         * Builds the.
-         *
-         * @return the telecom base type
-         */
-        public TelecomBaseType build() {
-            return new TelecomBaseType(this);
-        }
+	/**
+	 * Builder to build {@link TelecomBaseType}.
+	 */
+	@Generated("SparkTools")
+	public static final class Builder {
+		/**
+		 * The null flavor.
+		 */
+		private NullFlavor nullFlavor;
+		/**
+		 * The usage.
+		 */
+		private TelecomAddressUse usage;
+		/**
+		 * The value.
+		 */
+		private String value;
 
-        /**
-         * With null flavor.
-         *
-         * @param nullFlavor the null flavor
-         * @return the builder
-         */
-        public Builder withNullFlavor(NullFlavor nullFlavor) {
-            this.nullFlavor = nullFlavor;
-            return this;
-        }
+		/**
+		 * Instantiates a new builder.
+		 */
+		private Builder() {
+		}
 
-        /**
-         * With usage.
-         *
-         * @param usage the usage
-         * @return the builder
-         */
-        public Builder withUsage(TelecomAddressUse usage) {
-            this.usage = usage;
-            return this;
-        }
+		/**
+		 * Builds the.
+		 *
+		 * @return the telecom base type
+		 */
+		public TelecomBaseType build() {
+			return new TelecomBaseType(this);
+		}
 
-        /**
-         * With value.
-         *
-         * @param value the value
-         * @return the builder
-         */
-        public Builder withValue(String value) {
-            this.value = value;
-            return this;
-        }
-    }
+		/**
+		 * With null flavor.
+		 *
+		 * @param nullFlavor the null flavor
+		 * @return the builder
+		 */
+		public Builder withNullFlavor(NullFlavor nullFlavor) {
+			this.nullFlavor = nullFlavor;
+			return this;
+		}
+
+		/**
+		 * With usage.
+		 *
+		 * @param usage the usage
+		 * @return the builder
+		 */
+		public Builder withUsage(TelecomAddressUse usage) {
+			this.usage = usage;
+			return this;
+		}
+
+		/**
+		 * With value.
+		 *
+		 * @param value the value
+		 * @return the builder
+		 */
+		public Builder withValue(String value) {
+			this.value = value;
+			return this;
+		}
+	}
 
 }

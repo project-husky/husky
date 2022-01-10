@@ -12,7 +12,6 @@ package org.husky.communication.ch;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -22,13 +21,12 @@ import javax.mail.util.ByteArrayDataSource;
 import org.husky.common.ch.AuthorCh;
 import org.husky.common.ch.enums.AuthorRole;
 import org.husky.common.communication.AffinityDomain;
-import org.husky.common.communication.SubmissionSetMetadata;
 import org.husky.common.communication.AtnaConfig.AtnaConfigMode;
 import org.husky.common.communication.DocumentMetadata.DocumentMetadataExtractionMode;
+import org.husky.common.communication.SubmissionSetMetadata;
 import org.husky.common.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
 import org.husky.common.enums.DocumentDescriptor;
 import org.husky.common.model.Identificator;
-import org.husky.common.utils.Util;
 import org.husky.communication.ConvenienceCommunication;
 import org.husky.communication.ch.enums.AvailabilityStatus;
 import org.husky.communication.ch.xd.storedquery.FindDocumentsQuery;
@@ -124,10 +122,12 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 				log.error(e.getMessage(), e);
 			}
 		var doc = new Document();
+		var doc4Metadata = new Document();
+		InputStream unicodeStream = null;
 		try {
-			var doc4Metadata = new Document();
+
 			if (inputStream4Metadata != null) {
-				InputStream unicodeStream = Util.convertNonAsciiText2Unicode(inputStream4Metadata);
+				unicodeStream = convertNonAsciiText2Unicode(inputStream4Metadata);
 				var dataSource = new ByteArrayDataSource(unicodeStream, desc.getMimeType());
 				doc4Metadata.setDataHandler(new DataHandler(dataSource));
 			}
@@ -136,7 +136,16 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 			retVal = new DocumentMetadataCh(addXdsDocument(doc, desc, doc4Metadata));
 		} catch (final IOException e) {
 			log.error(e.getMessage(), e);
+		} finally {
+			if (unicodeStream != null) {
+				try {
+					unicodeStream.close();
+				} catch (IOException e) {
+					log.error(e.getMessage(), e);
+				}
+			}
 		}
+
 		if (retVal != null)
 			retVal.setDocumentDescriptor(desc);
 		return retVal;
@@ -145,18 +154,17 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	/**
 	 * Adds a document to the XDS Submission set.
 	 *
-	 * @param desc
-	 *            the document descriptor (which kind of document do you want to
-	 *            transfer? e.g. PDF, CDA,...)
-	 * @param filePath
-	 *            the file path
+	 * @param desc     the document descriptor (which kind of document do you want
+	 *                 to transfer? e.g. PDF, CDA,...)
+	 * @param filePath the file path
 	 * @return the document metadata (which have to be completed)
-	 * @throws FileNotFoundException
-	 *             exception
+	 * @throws IOException
 	 */
 	public DocumentMetadataCh addChDocument(DocumentDescriptor desc, String filePath)
-			throws FileNotFoundException {
-		return addChDocument(desc, new FileInputStream(new File(filePath)));
+			throws IOException {
+		try (InputStream is = new FileInputStream(new File(filePath))) {
+			return addChDocument(desc, is);
+		}
 	}
 
 	/**

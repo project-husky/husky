@@ -26,6 +26,10 @@ import org.husky.common.model.Identificator;
  */
 public class FhirUtilities {
 
+	private FhirUtilities() {
+		throw new IllegalStateException("This is a utitlity class");
+	}
+
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Instantiates a new code from FHIR CodeableConcept.</div>

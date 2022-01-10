@@ -30,10 +30,10 @@ public class AddPolicyRequestUnmarshaller extends AbstractXMLObjectUnmarshaller 
 	@Override
 	protected void processChildElement(XMLObject parentXMLObject, XMLObject childXMLObject)
 			throws UnmarshallingException {
-		if (childXMLObject instanceof org.opensaml.saml.saml2.core.Assertion) {
+		if (childXMLObject instanceof org.opensaml.saml.saml2.core.Assertion assertion) {
 			final OpenSamlAddPolicyRequest request = (OpenSamlAddPolicyRequest) parentXMLObject;
 			request.setAssertion(new AssertionBuilderImpl()
-					.create((org.opensaml.saml.saml2.core.Assertion) childXMLObject));
+					.create(assertion));
 		} else {
 			super.processChildElement(parentXMLObject, childXMLObject);
 		}

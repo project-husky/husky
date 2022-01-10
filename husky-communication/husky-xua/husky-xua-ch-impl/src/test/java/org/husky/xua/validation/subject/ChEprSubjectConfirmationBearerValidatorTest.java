@@ -42,7 +42,9 @@ class ChEprSubjectConfirmationBearerValidatorTest {
     /**
      * The context is dirtied by each call to validate(), recreate it each time.
      */
+    /* simple test function to compare results for various roles, no use reducing complexity */
     @Test
+    @SuppressWarnings("java:S5961")
     void testValidate() throws Exception {
         ValidationResult result;
         ValidationContext context;

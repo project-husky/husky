@@ -35,7 +35,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.LoggerFactory;
 
-public class PkiManagerImplTest {
+class PkiManagerImplTest {
 
 	private String testCertAlias;
 	private File testClientCertPemPath;
@@ -96,7 +96,7 @@ public class PkiManagerImplTest {
 	 * @throws NoSuchAlgorithmException
 	 */
 	@Test
-	public void testAddClientKeyAndCert() throws KeyStoreException, NoSuchAlgorithmException {
+	void testAddClientKeyAndCert() throws KeyStoreException, NoSuchAlgorithmException {
 		final KeyStore ref = testPkiManager.createNewStore(testKeyStoreCreateType);
 		testPkiManager.addClientKeyAndCert(testPrivateKeyPemPath, testClientCertPemPath,
 				testClientKeyAlias, ref, testStorePassword);
@@ -112,7 +112,7 @@ public class PkiManagerImplTest {
 	 * @throws FileNotFoundException
 	 */
 	@Test
-	public void testAddPublicCert() throws KeyStoreException, FileNotFoundException {
+	void testAddPublicCert() throws KeyStoreException, FileNotFoundException {
 		final KeyStore keyStore = testPkiManager.createNewStore(testKeyStoreCreateType);
 		testPkiManager.addPublicCert(testClientCertPemPath, testCertAlias, keyStore);
 		LoggerFactory.getLogger(getClass()).info("" + Collections.list(keyStore.aliases()));
@@ -130,7 +130,7 @@ public class PkiManagerImplTest {
 	 * @throws KeyStoreException
 	 */
 	@Test
-	public void testCreateNewStore() throws KeyStoreException {
+	void testCreateNewStore() throws KeyStoreException {
 		final KeyStore ref = testPkiManager.createNewStore(testKeyStoreCreateType);
 		assertNotNull(ref);
 	}
@@ -142,7 +142,7 @@ public class PkiManagerImplTest {
 	 * @throws KeyStoreException
 	 */
 	@Test
-	public void testListCertificateAliases() throws KeyStoreException {
+    void testListCertificateAliases() throws KeyStoreException {
 		final KeyStore ref = testPkiManager.loadStore(testKeyStorePkcs12InStream, testStorePassword,
 				PkiManager.TYPE_PKCS12);
 		final List<String> aliases = testPkiManager.listCertificateAliases(ref);
@@ -157,7 +157,7 @@ public class PkiManagerImplTest {
 	 * @throws KeyStoreException
 	 */
 	@Test
-	public void testListCertificates() throws KeyStoreException {
+	void testListCertificates() throws KeyStoreException {
 		final KeyStore ref = testPkiManager.loadStore(testKeyStorePkcs12InStream, testStorePassword,
 				PkiManager.TYPE_PKCS12);
 		final List<Certificate> certificates = testPkiManager.listCertificates(ref);
@@ -174,7 +174,7 @@ public class PkiManagerImplTest {
 	 * @throws UnrecoverableKeyException
 	 */
 	@Test
-	public void testLoadStoreJceks()
+	void testLoadStoreJceks()
 			throws KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException {
 		final KeyStore ref = testPkiManager.loadStore(testKeyStoreJceksInStream, testStorePassword,
 				PkiManager.TYPE_JCEKS);
@@ -192,7 +192,7 @@ public class PkiManagerImplTest {
 	 * @throws UnrecoverableKeyException
 	 */
 	@Test
-	public void testLoadStoreJks()
+	void testLoadStoreJks()
 			throws KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException {
 		final KeyStore ref = testPkiManager.loadStore(testKeyStoreJksInStream, testStorePassword,
 				PkiManager.TYPE_JKS);
@@ -210,7 +210,7 @@ public class PkiManagerImplTest {
 	 * @throws UnrecoverableKeyException
 	 */
 	@Test
-	public void testLoadStorePkcs12()
+	void testLoadStorePkcs12()
 			throws KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException {
 		final KeyStore ref = testPkiManager.loadStore(testKeyStorePkcs12InStream, testStorePassword,
 				PkiManager.TYPE_PKCS12);
@@ -226,7 +226,7 @@ public class PkiManagerImplTest {
 	 * @throws KeyStoreException
 	 */
 	@Test
-	public void testRemoveCert() throws KeyStoreException {
+	void testRemoveCert() throws KeyStoreException {
 		final KeyStore ref = testPkiManager.loadStore(testKeyStorePkcs12InStream, testStorePassword,
 				PkiManager.TYPE_PKCS12);
 		assertNotNull(ref);
@@ -244,7 +244,7 @@ public class PkiManagerImplTest {
 	 * @throws FileNotFoundException
 	 */
 	@Test
-	public void testStoreStore() throws KeyStoreException, FileNotFoundException {
+	void testStoreStore() throws KeyStoreException, FileNotFoundException {
 		final KeyStore ref = testPkiManager.createNewStore(testKeyStoreCreateType);
 		assertNotNull(ref);
 		testPkiManager.storeStore(ref, new FileOutputStream(testOutputFile), testStorePassword);

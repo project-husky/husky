@@ -23,13 +23,13 @@ import org.junit.jupiter.api.Test;
 /**
  * The Test Class for Version.
  */
-public class VersionTest {
+class VersionTest {
 
 	/**
 	 * Do all tests.
 	 */
 	@Test
-	public void doAllTests() {
+	void doAllTests() {
 
 		String label = "1.0";
 		NameBaseType name = NameBaseType.builder().withName("eHC").build();

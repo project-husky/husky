@@ -11,13 +11,24 @@
 
 package org.husky.common.model;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+
 import org.husky.common.basetypes.IdentificatorBaseType;
 import org.husky.common.enums.CodeSystems;
-import org.husky.common.hl7cdar2.*;
-import org.husky.common.utils.DateUtil;
-import org.husky.common.utils.Util;
-
-import java.util.*;
+import org.husky.common.enums.NullFlavor;
+import org.husky.common.hl7cdar2.AD;
+import org.husky.common.hl7cdar2.II;
+import org.husky.common.hl7cdar2.IVLTS;
+import org.husky.common.hl7cdar2.PN;
+import org.husky.common.hl7cdar2.POCDMT000040AssignedEntity;
+import org.husky.common.hl7cdar2.POCDMT000040Performer2;
+import org.husky.common.hl7cdar2.POCDMT000040Person;
+import org.husky.common.hl7cdar2.TEL;
+import org.husky.common.utils.time.DateTimes;
 
 /**
  * A Person or Organization performing an action
@@ -201,12 +212,12 @@ public class Performer {
         // organisation name.
         var retVal = "";
         if ((mAsEntity != null) && (mAsEntity.getAssignedPerson() != null)) {
-            if (mAsEntity.getAssignedPerson().getName() != null) {
+			if (!mAsEntity.getAssignedPerson().getName().isEmpty()) {
                 final var name = new Name(mAsEntity.getAssignedPerson().getName().get(0));
                 retVal = name.getFullName();
             } else {
                 if ((mAsEntity.getRepresentedOrganization() != null)
-                        && (mAsEntity.getRepresentedOrganization().getName() != null)) {
+						&& (!mAsEntity.getRepresentedOrganization().getName().isEmpty())) {
                     final var name = new Name(
                             mAsEntity.getRepresentedOrganization().getName().get(0));
                     retVal = name.getFullName();
@@ -256,7 +267,7 @@ public class Performer {
      * @return the ids
      */
     public List<org.husky.common.model.Identificator> getIds() {
-        return Util.convertIds(mAsEntity.getId());
+		return Identificator.getIdentificatorList(mAsEntity.getId());
     }
 
     /**
@@ -340,7 +351,11 @@ public class Performer {
      * @param eurDate the date
      */
     public void setTimeValue(Date eurDate) {
-        mPerfomer.setTime(DateUtil.date2IvltsTzon(eurDate));
+		if (eurDate == null) {
+			mPerfomer.setTime(new IVLTS(NullFlavor.UNKNOWN));
+		} else {
+			mPerfomer.setTime(new IVLTS(DateTimes.toHl7Dtm(eurDate.toInstant())));
+		}
     }
 
 }

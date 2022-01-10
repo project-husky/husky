@@ -17,7 +17,7 @@ import org.husky.communication.ch.ppq.api.config.PpClientConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class PpqClientConfigBuilderImplTest {
+class PpqClientConfigBuilderImplTest {
 
 	private PpClientConfigBuilderImpl builder;
 	private String testEnpointUrl;
@@ -41,7 +41,7 @@ public class PpqClientConfigBuilderImplTest {
 	 * {@link org.husky.xua.communication.ch.ppq.config.impl.PpClientConfigBuilderImpl#portName(java.lang.String)}.
 	 */
 	@Test
-	public void testPortName() {
+	void testPortName() {
 		final PpClientConfig ref = builder.portName(testPortName).create();
 		assertNotNull(ref);
 		assertEquals(testPortName, ref.getPortName());
@@ -52,7 +52,7 @@ public class PpqClientConfigBuilderImplTest {
 	 * {@link org.husky.xua.communication.ch.ppq.config.impl.PpClientConfigBuilderImpl#portNamespace(java.lang.String)}.
 	 */
 	@Test
-	public void testPortNamespace() {
+	void testPortNamespace() {
 		final PpClientConfig ref = builder.portNamespace(testPortNamespace).create();
 		assertNotNull(ref);
 		assertEquals(testPortNamespace, ref.getPortNamespace());
@@ -63,7 +63,7 @@ public class PpqClientConfigBuilderImplTest {
 	 * {@link org.husky.xua.communication.ch.ppq.config.impl.PpClientConfigBuilderImpl#serviceName(java.lang.String)}.
 	 */
 	@Test
-	public void testServiceName() {
+	void testServiceName() {
 		final PpClientConfig ref = builder.serviceName(testServiceName).create();
 		assertNotNull(ref);
 		assertEquals(testServiceName, ref.getServiceName());
@@ -74,7 +74,7 @@ public class PpqClientConfigBuilderImplTest {
 	 * {@link org.husky.xua.communication.ch.ppq.config.impl.PpClientConfigBuilderImpl#serviceNamespace(java.lang.String)}.
 	 */
 	@Test
-	public void testServiceNamespace() {
+	void testServiceNamespace() {
 		final PpClientConfig ref = builder.serviceNamespace(testServiceNamespace).create();
 		assertNotNull(ref);
 		assertEquals(testServiceNamespace, ref.getServiceNamespace());
@@ -85,7 +85,7 @@ public class PpqClientConfigBuilderImplTest {
 	 * {@link org.husky.xua.communication.ch.ppq.config.impl.PpClientConfigBuilderImpl#url(java.lang.String)}.
 	 */
 	@Test
-	public void testUrl() {
+	void testUrl() {
 		final PpClientConfig ref = builder.url(testEnpointUrl).create();
 		assertNotNull(ref);
 		assertEquals(testEnpointUrl, ref.getUrl());

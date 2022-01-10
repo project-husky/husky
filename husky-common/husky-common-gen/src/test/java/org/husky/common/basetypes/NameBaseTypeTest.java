@@ -12,20 +12,19 @@ package org.husky.common.basetypes;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.husky.common.basetypes.NameBaseType;
 import org.husky.common.enums.EntityNameUse;
 import org.junit.jupiter.api.Test;
 
 /**
  * The test class for NameBaseType.
  */
-public class NameBaseTypeTest {
+class NameBaseTypeTest {
 
 	/**
 	 * Do all tests.
 	 */
 	@Test
-	public void doAllTests() {
+	void doAllTests() {
 
 		String delimiter = ".";
 		String family = "family";

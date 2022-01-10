@@ -10,14 +10,17 @@
  */
 package org.husky.communication.mpi;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import net.ihe.gazelle.hl7v3.datatypes.II;
 
 /**
  * @author <a href="mailto:anthony.larocca@sage.com">Anthony Larocca</a>
  *
  */
-public abstract class V3Response extends V3Message {
+public abstract class V3Response {
 
 	protected String acknowledgementCode = null;
 	protected String acknowledgementDetailCode = null;
@@ -26,6 +29,15 @@ public abstract class V3Response extends V3Message {
 	protected List<String> infoText = new LinkedList<>();
 	protected List<String> infoCodes = new LinkedList<>();
 	protected boolean hasError = false;
+	protected String sendingApplication = null;
+	protected String sendingFacility = null;
+	protected ArrayList<String> receivingApplication = new ArrayList<>(0);
+	protected ArrayList<String> receivingFacility = new ArrayList<>(0);
+	protected II messageId;
+
+	protected V3Response() {
+		super();
+	}
 
 	/**
 	 * Get the acknowledgement code
@@ -69,6 +81,10 @@ public abstract class V3Response extends V3Message {
 
 	public List<String> getInfoCodes() {
 		return infoCodes;
+	}
+
+	public II getMessageId() {
+		return messageId;
 	}
 
 	/**

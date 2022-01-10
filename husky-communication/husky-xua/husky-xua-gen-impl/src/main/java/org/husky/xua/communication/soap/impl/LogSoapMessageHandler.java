@@ -42,6 +42,8 @@ public class LogSoapMessageHandler implements SOAPHandler<SOAPMessageContext> {
 
 	/** The Logger. */
 	private Logger mLogger;
+	
+	public static final String MSG_SEPARATOR = "------------------------------------";
 
 	/**
 	 *
@@ -69,10 +71,10 @@ public class LogSoapMessageHandler implements SOAPHandler<SOAPMessageContext> {
 
 	@PreDestroy
 	public void destroy() {
-		mLogger.debug("------------------------------------");
+		mLogger.debug(MSG_SEPARATOR);
 		mLogger.debug("In Handler {} :destroy()", this.getClass().getName());
 		mLogger.debug("Exiting Handler {} :destroy()", this.getClass().getName());
-		mLogger.debug("------------------------------------");
+		mLogger.debug(MSG_SEPARATOR);
 	}
 
 	/**
@@ -142,9 +144,9 @@ public class LogSoapMessageHandler implements SOAPHandler<SOAPMessageContext> {
 
 	@PostConstruct
 	public void init() {
-		mLogger.debug("------------------------------------");
+		mLogger.debug(MSG_SEPARATOR);
 		mLogger.debug("In Handler {} : init()", this.getClass().getName());
 		mLogger.debug("Exiting Handler {} : init()", this.getClass().getName());
-		mLogger.debug("------------------------------------");
+		mLogger.debug(MSG_SEPARATOR);
 	}
 }

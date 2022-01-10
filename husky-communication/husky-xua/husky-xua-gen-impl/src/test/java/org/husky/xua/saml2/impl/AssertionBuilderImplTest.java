@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeType;
 
-public class AssertionBuilderImplTest {
+class AssertionBuilderImplTest {
 
 	private String testAttributeName;
 	private String testAttributeValue;
@@ -45,7 +45,7 @@ public class AssertionBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.AssertionBuilderImpl#addAttribute(org.husky.xua.saml2.Attribute)}.
 	 */
 	@Test
-	public void testAddAttribute() {
+	void testAddAttribute() {
 		final AttributeType attribute = new AttributeBuilderImpl().name(testAttributeName)
 				.value(testAttributeValue).create();
 		final AssertionType ref = testBuilder.addAttribute(attribute).create();
@@ -57,7 +57,7 @@ public class AssertionBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.AssertionBuilderImpl#id(java.lang.String)}.
 	 */
 	@Test
-	public void testId() {
+	void testId() {
 		final AssertionType ref = testBuilder.id(testId).create();
 		assertEquals(testId, ref.getID());
 	}

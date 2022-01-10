@@ -1,12 +1,8 @@
 package org.husky.emed.cda.services.digesters;
 
-import org.husky.common.ch.enums.ConfidentialityCode;
-import org.husky.emed.cda.TestUtils;
-import org.husky.emed.enums.EmedDocumentType;
-import org.husky.emed.models.document.EmedMtpDocumentDigest;
-import org.husky.emed.models.entry.EmedEntryDigest;
-import org.husky.emed.cda.services.EmedEntryDigestService;
-import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.time.Instant;
 import java.time.OffsetDateTime;
@@ -14,7 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.husky.common.ch.enums.ConfidentialityCode;
+import org.husky.emed.cda.TestUtils;
+import org.husky.emed.cda.services.EmedEntryDigestService;
+import org.husky.emed.enums.CceDocumentType;
+import org.husky.emed.models.document.EmedMtpDocumentDigest;
+import org.husky.emed.models.entry.EmedEntryDigest;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 /**
  * Tests of the {@link CceDocumentDigester} class.
@@ -50,7 +56,7 @@ class CceDocumentDigesterTest {
         //assertEquals("", digest.getAuthors());
         //assertEquals("", digest.getCustodian());
         assertEquals(OffsetDateTime.parse("2011-11-29T11:00:00+01:00"), digest.getEffectiveTime());
-        assertEquals(EmedDocumentType.MTP, digest.getDocumentType());
+		assertEquals(CceDocumentType.MTP, digest.getDocumentType());
         //assertEquals("", digest.getPatient());
         assertArrayEquals(new byte[]{}, digest.getPdfRepresentation());
         //assertEquals("", digest.getRecipients());

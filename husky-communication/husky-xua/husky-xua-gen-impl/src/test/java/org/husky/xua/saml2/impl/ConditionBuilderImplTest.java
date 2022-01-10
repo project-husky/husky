@@ -18,7 +18,7 @@ import org.husky.xua.saml2.impl.ConditionImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class ConditionBuilderImplTest {
+class ConditionBuilderImplTest {
 
 	private ConditionBuilderImpl builder;
 	private org.opensaml.saml.saml2.core.Condition testInnerObject;
@@ -35,7 +35,7 @@ public class ConditionBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.ConditionBuilderImpl#create(org.opensaml.saml.saml2.core.Condition)}.
 	 */
 	@Test
-	public void testCreate() {
+	void testCreate() {
 		final Condition ref = builder.create(testInnerObject);
 		assertEquals(testInnerObject, ((ConditionImpl) ref).getWrappedObject());
 	}

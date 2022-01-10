@@ -13,13 +13,11 @@ package org.husky.communication.xd.storedquery;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 import org.husky.common.enums.DateTimeRangeAttributes;
-import org.husky.common.utils.DateUtil;
-import org.husky.communication.xd.storedquery.DateTimeRange;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,12 +26,11 @@ import org.junit.jupiter.api.Test;
  */
 class DateTimeRangeTest {
 
-	private Date testDate1;
-	private Date testDate2;
+	private ZonedDateTime testDate1;
+	private ZonedDateTime testDate2;
 	private String testDateToStr1;
-	private Date testDateTo1;
-	private String testDateToStr2;
-	private Date testDateTo2;
+	private ZonedDateTime testDateTo1;
+	private ZonedDateTime testDateTo2;
 
 	/**
 	 * Method implementing
@@ -42,14 +39,13 @@ class DateTimeRangeTest {
 	 */
 	@BeforeEach
 	public void setUp() throws Exception {
-		testDate1 = DateUtil.parseDateyyyyMMddHHmmss("19800521022211");
-		testDate2 = DateUtil.parseDateyyyyMMddHHmmss("20150521133459");
+		testDate1 = ZonedDateTime.of(1980, 5, 21, 2, 22, 11, 0, ZoneOffset.UTC);
+		testDate2 = ZonedDateTime.of(2015, 5, 21, 13, 34, 59, 0, ZoneOffset.UTC);
 
 		testDateToStr1 = "20381231235959";
-		testDateTo1 = DateUtil.parseDateyyyyMMddHHmmss(testDateToStr1);
+		testDateTo1 = ZonedDateTime.of(2038, 12, 31, 23, 59, 59, 0, ZoneOffset.UTC);
 
-		testDateToStr2 = "20270110003102";
-		testDateTo2 = DateUtil.parseDateyyyyMMddHHmmss(testDateToStr2);
+		testDateTo2 = ZonedDateTime.of(2027, 1, 10, 0, 31, 2, 0, ZoneOffset.UTC);
 	}
 
 	@Test
@@ -60,13 +56,15 @@ class DateTimeRangeTest {
 		assertEquals(d.getFrom().toInstant(), testDate1.toInstant());
 		assertEquals(d.getTo().toInstant(), testDate2.toInstant());// 201401012300
 
-		assertEquals(DateUtil.formatDateTime(d.getFrom()), "19800521022211");
-		assertEquals(DateUtil.formatDateTime(d.getTo()), "20150521133459");
+		assertEquals("19800521022211",
+				d.getFrom().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneOffset.UTC)));
+		assertEquals("20150521133459",
+				d.getTo().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneOffset.UTC)));
 
 		assertEquals("19800521022211", d.getOhtDateTimeRange().getFrom().getDateTime()
-				.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneId.systemDefault())));
+				.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneOffset.UTC)));
 		assertEquals("20150521133459", d.getOhtDateTimeRange().getTo().getDateTime()
-				.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneId.systemDefault())));
+				.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneOffset.UTC)));
 
 	}
 
@@ -74,7 +72,7 @@ class DateTimeRangeTest {
 	void testSetGetFrom() {
 		final DateTimeRange d = new DateTimeRange(DateTimeRangeAttributes.CREATION_TIME, testDate1,
 				testDate2);
-		d.setFrom(testDateTo2);
+		d.setFrom(testDateTo2, null);
 		assertEquals(testDateTo2.toInstant(), d.getFrom().toInstant());
 	}
 
@@ -83,12 +81,12 @@ class DateTimeRangeTest {
 		final DateTimeRange d = new DateTimeRange(DateTimeRangeAttributes.CREATION_TIME, testDate1,
 				testDate2);
 
-		d.setTo(testDateTo1);
+		d.setTo(testDateTo1, null);
 
 		assertEquals(testDateTo1.toInstant(), d.getTo().toInstant());
 
 		assertEquals(testDateToStr1,
 				d.getTo()
-						.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneId.systemDefault())));
+						.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneOffset.UTC)));
 	}
 }

@@ -18,7 +18,7 @@ import org.husky.communication.ch.ppq.utilities.impl.InitializerTestHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class EprPolicyRepositoryResponseBuilderImplTest extends InitializerTestHelper {
+class EprPolicyRepositoryResponseBuilderImplTest extends InitializerTestHelper {
 
 	private String testStatus;
 
@@ -32,7 +32,7 @@ public class EprPolicyRepositoryResponseBuilderImplTest extends InitializerTestH
 	 * {@link org.husky.communication.ch.ppq.epr.policyadmin.impl.EprPolicyRepositoryResponseBuilderImpl#status(java.lang.String)}.
 	 */
 	@Test
-	public void testStatus() {
+	void testStatus() {
 		final OpenSamlEprPolicyRepositoryResponse ref = new EprPolicyRepositoryResponseBuilderImpl()
 				.status(testStatus).buildObject();
 		assertNotNull(ref);

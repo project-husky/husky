@@ -31,13 +31,13 @@ import org.junit.jupiter.api.Test;
 /**
  * The Test Class for ValueSet.
  */
-public class ValueSetTest {
+class ValueSetTest {
 
 	/**
 	 * Do all tests.
 	 */
 	@Test
-	public void doAllTests() {
+	void doAllTests() {
 
 		// Basic ValueSet elements tests
 		String description = "description";
@@ -149,7 +149,7 @@ public class ValueSetTest {
 	}
 
 	@Test
-	public void testEqualsAddContainsDescription() {
+	void testEqualsAddContainsDescription() {
 
 		ValueSet valueSetA = new ValueSet();
 		ValueSet valueSetB = new ValueSet();
@@ -175,7 +175,7 @@ public class ValueSetTest {
 	}
 
 	@Test
-	public void testEqualsAddContainsMappingIdentificator() {
+	void testEqualsAddContainsMappingIdentificator() {
 
 		ValueSet valueSetA = new ValueSet();
 		ValueSet valueSetB = new ValueSet();
@@ -201,7 +201,7 @@ public class ValueSetTest {
 	}
 
 	@Test
-	public void testEqualsAddContainsMappingName() {
+	void testEqualsAddContainsMappingName() {
 
 		ValueSet valueSetA = new ValueSet();
 		ValueSet valueSetB = new ValueSet();
@@ -224,7 +224,7 @@ public class ValueSetTest {
 	}
 
 	@Test
-	public void testEqualsAddContainsValueSetEntry() {
+	void testEqualsAddContainsValueSetEntry() {
 
 		ValueSet valueSetA = new ValueSet();
 		ValueSet valueSetB = new ValueSet();

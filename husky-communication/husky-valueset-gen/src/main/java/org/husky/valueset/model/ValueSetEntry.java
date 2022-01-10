@@ -16,9 +16,9 @@ import java.util.List;
 
 import javax.annotation.processing.Generated;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.husky.common.basetypes.CodeBaseType;
 import org.husky.common.enums.LanguageCode;
-import org.husky.common.utils.Util;
 import org.husky.valueset.enums.DesignationType;
 import org.husky.valueset.enums.ValueSetEntryType;
 
@@ -466,80 +466,120 @@ public class ValueSetEntry implements Serializable {
 		if (!(obj instanceof ValueSetEntry))
 			return false;
 
+		retVal = compareValueChildList((ValueSetEntry) obj);
+
 		if (retVal) {
-			if (this.childList == null)
-				this.childList = new ArrayList<>();
-			retVal = (this.childList.size() == ((ValueSetEntry) obj).getChildList().size());
-			if (retVal) {
-				for (var i = 0; i < this.childList.size(); i++) {
-					retVal = ((ValueSetEntry) obj).containsChild(this.childList.get(i));
-					if (!retVal)
-						break;
-				}
-			}
+			retVal = compareDesignationList((ValueSetEntry) obj);
 		}
 		if (retVal) {
-			if (this.designationList == null)
-				this.designationList = new ArrayList<>();
-			retVal = (this.designationList.size() == ((ValueSetEntry) obj).getDesignationList()
-					.size());
-			if (retVal) {
-				for (var i = 0; i < this.designationList.size(); i++) {
-					retVal = ((ValueSetEntry) obj).containsDesignation(this.designationList.get(i));
-					if (!retVal)
-						break;
-				}
-			}
+			retVal = compareMappingCodeList((ValueSetEntry) obj);
 		}
 		if (retVal) {
-			if (this.mappingCodeList == null)
-				this.mappingCodeList = new ArrayList<>();
-			retVal = (this.mappingCodeList.size() == ((ValueSetEntry) obj).getMappingCodeList()
-					.size());
-			if (retVal) {
-				for (var i = 0; i < this.mappingCodeList.size(); i++) {
-					retVal = ((ValueSetEntry) obj).containsMappingCode(this.mappingCodeList.get(i));
-					if (!retVal)
-						break;
-				}
-			}
+			retVal = compareMappingNameList((ValueSetEntry) obj);
 		}
 		if (retVal) {
-			if (this.mappingNameList == null)
-				this.mappingNameList = new ArrayList<>();
-			retVal = (this.mappingNameList.size() == ((ValueSetEntry) obj).getMappingNameList()
-					.size());
-			if (retVal) {
-				for (var i = 0; i < this.mappingNameList.size(); i++) {
-					retVal = ((ValueSetEntry) obj).containsMappingName(this.mappingNameList.get(i));
-					if (!retVal)
-						break;
-				}
-			}
+			retVal = compareCodeBaseType((ValueSetEntry) obj);
 		}
 		if (retVal) {
-			if (this.codeBaseType == null)
-				retVal = (((ValueSetEntry) obj).getCodeBaseType() == null);
-			else
-				retVal = this.codeBaseType.equals(((ValueSetEntry) obj).getCodeBaseType());
-		}
-		if (retVal) {
-			if (this.defaultMappingName == null)
-				retVal = (((ValueSetEntry) obj).getDefaultMappingName() == null);
-			else
-				retVal = this.defaultMappingName
-						.equals(((ValueSetEntry) obj).getDefaultMappingName());
+			retVal = compareDefaultMappingName((ValueSetEntry) obj);
 		}
 		if (retVal) {
 			retVal = (this.level == ((ValueSetEntry) obj).getLevel());
 		}
 		if (retVal) {
-			if (this.valueSetEntryType == null)
-				retVal = (((ValueSetEntry) obj).getValueSetEntryType() == null);
-			else
-				retVal = this.valueSetEntryType
-						.equals(((ValueSetEntry) obj).getValueSetEntryType());
+			retVal = compareValueSetEntryType((ValueSetEntry) obj);
 		}
+		return retVal;
+	}
+
+	private boolean compareValueSetEntryType(ValueSetEntry obj) {
+		if (this.valueSetEntryType == null)
+			return obj.getValueSetEntryType() == null;
+		else
+			return this.valueSetEntryType.equals(obj.getValueSetEntryType());
+	}
+
+	private boolean compareDefaultMappingName(ValueSetEntry obj) {
+		if (this.defaultMappingName == null)
+			return obj.getDefaultMappingName() == null;
+		else
+			return this.defaultMappingName.equals(obj.getDefaultMappingName());
+	}
+
+	private boolean compareCodeBaseType(ValueSetEntry obj) {
+		if (this.codeBaseType == null)
+			return obj.getCodeBaseType() == null;
+		else
+			return this.codeBaseType.equals(obj.getCodeBaseType());
+	}
+
+	private boolean compareDesignationList(ValueSetEntry obj) {
+		if (this.designationList == null) {
+			this.designationList = new ArrayList<>();
+		}
+
+		var retVal = this.designationList.size() == obj.getDesignationList().size();
+		if (retVal) {
+			for (var i = 0; i < this.designationList.size(); i++) {
+				retVal = obj.containsDesignation(this.designationList.get(i));
+				if (!retVal) {
+					return false;
+				}
+			}
+		}
+
+		return retVal;
+	}
+
+	private boolean compareMappingCodeList(ValueSetEntry obj) {
+		if (this.mappingCodeList == null) {
+			this.mappingCodeList = new ArrayList<>();
+		}
+
+		var retVal = this.mappingCodeList.size() == obj.getMappingCodeList().size();
+		if (retVal) {
+			for (var i = 0; i < this.mappingCodeList.size(); i++) {
+				retVal = obj.containsMappingCode(this.mappingCodeList.get(i));
+				if (!retVal) {
+					return false;
+				}
+			}
+		}
+
+		return retVal;
+	}
+
+	private boolean compareMappingNameList(ValueSetEntry obj) {
+		if (this.mappingNameList == null)
+			this.mappingNameList = new ArrayList<>();
+		var retVal = this.mappingNameList.size() == obj.getMappingNameList().size();
+		if (retVal) {
+			for (var i = 0; i < this.mappingNameList.size(); i++) {
+				retVal = obj.containsMappingName(this.mappingNameList.get(i));
+				if (!retVal) {
+					return false;
+				}
+			}
+		}
+
+		return retVal;
+	}
+
+	private boolean compareValueChildList(ValueSetEntry obj) {
+		if (this.childList == null) {
+			this.childList = new ArrayList<>();
+		}
+
+		var retVal = this.childList.size() == obj.getChildList().size();
+		if (retVal) {
+			for (var i = 0; i < this.childList.size(); i++) {
+				retVal = obj.containsChild(this.childList.get(i));
+				if (!retVal) {
+					return false;
+				}
+			}
+		}
+
 		return retVal;
 	}
 
@@ -593,11 +633,9 @@ public class ValueSetEntry implements Serializable {
 	public String getDesignation(LanguageCode language, DesignationType designationType) {
 		String retVal = null;
 		for (Designation designation : getDesignationList()) {
-			if (language.equals(designation.getLanguageCode()) && (designationType == null))
+			if (language.equals(designation.getLanguageCode())) {
 				retVal = designation.getDisplayName();
-			else if (language.equals(designation.getLanguageCode())
-					&& (designationType != null && designationType.equals(designation.getType())))
-				retVal = designation.getDisplayName();
+			}
 		}
 		return retVal;
 	}
@@ -696,7 +734,9 @@ public class ValueSetEntry implements Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		return Util.getChecksum(this);
+		return new HashCodeBuilder(17, 37).append(this.childList).append(this.designationList).append(this.mappingCodeList)
+				.append(this.mappingNameList).append(this.codeBaseType).append(this.defaultMappingName)
+				.append(this.level).append(this.valueSetEntryType).toHashCode();
 	}
 
 	/**

@@ -15,10 +15,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import org.husky.common.basetypes.AddressBaseType;
-import org.husky.common.ch.AuthorCh;
 import org.husky.common.ch.enums.AuthorRole;
 import org.husky.common.ch.enums.AuthorSpeciality;
 import org.husky.common.enums.CodeSystems;
@@ -30,9 +32,10 @@ import org.husky.common.model.Name;
 import org.husky.common.testhelpers.AbstractTestHelper;
 import org.husky.common.utils.DateUtil;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-public class AuthorChTest {
+class AuthorChTest {
 
 	private Address testAddress;
 
@@ -128,7 +131,7 @@ public class AuthorChTest {
 	}
 
 	@Test
-	public void testAuthorCd() {
+	void testAuthorCd() {
 		final org.husky.common.ch.AuthorCh b = new org.husky.common.ch.AuthorCh();
 
 		b.addId(testIdentificator1);
@@ -143,7 +146,7 @@ public class AuthorChTest {
 	}
 
 	@Test
-	public void testAuthorCh() {
+	void testAuthorCh() {
 		final AuthorCh b1 = new AuthorCh();
 
 		b1.addId(testIdentificator2);
@@ -167,23 +170,5 @@ public class AuthorChTest {
 
 	}
 
-	@Test
-	public void testAuthorChAuthor() {
-		final Author a = new Author();
-		a.addAddress(testAddress);
-		a.addId(testIdentificator1);
-		a.addName(testName1);
-		a.setGln(testGln1);
-		a.setTime(testDate1);
-
-		final AuthorCh autCh = new AuthorCh(a);
-
-		assertEquals(testDate1, autCh.getTimeAsDate());
-
-		assertEquals(testAddress.getCity(), autCh.getAddress().getCity());
-		assertNotNull(autCh.getIds());
-		assertFalse(autCh.getIds().isEmpty());
-		assertEquals(testIdentificator1, autCh.getIds().get(0));
-		assertEquals(testName1.getFamily(), autCh.getName().getFamily());
-	}
+	
 }

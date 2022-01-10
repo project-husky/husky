@@ -135,7 +135,7 @@ public class IdpClientByCertTest extends InitializerTestHelper {
 	 * @throws ClientSendException
 	 */
 	@Test
-	public void testGetHttpClient() throws ClientSendException {
+	void testGetHttpClient() throws ClientSendException {
 		final IdpClientByCert icbc = new IdpClientByCert(clientConfig);
 		final CloseableHttpClient httpClient = icbc.getHttpClient();
 		assertNotNull(httpClient);
@@ -146,7 +146,7 @@ public class IdpClientByCertTest extends InitializerTestHelper {
 	 * {@link org.husky.xua.communication.clients.impl.IdpClientByCert#getRequestConfig()}.
 	 */
 	@Test
-	public void testGetRequestConfig() {
+	void testGetRequestConfig() {
 		final IdpClientByCert icbc = new IdpClientByCert(clientConfig);
 		final RequestConfig requestConfig = icbc.getRequestConfig();
 		assertNotNull(requestConfig);
@@ -160,7 +160,7 @@ public class IdpClientByCertTest extends InitializerTestHelper {
 	 */
 	@Test
 	@Disabled("TODO: client/server ssl stuff has to be resolved.")
-	public void testSend() throws ClientSendException {
+	void testSend() throws ClientSendException {
 		final IdpClientByCert icbc = new IdpClientByCert(clientConfig);
 		final Response resp = icbc.send(testAuthnRequest);
 		assertNotNull(resp);

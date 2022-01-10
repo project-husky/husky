@@ -46,8 +46,8 @@ public class AffinityDomain {
 	 * Instantiates a new affinity domain.
 	 */
 	public AffinityDomain() {
-		mRepositories = new ArrayList<Destination>();
-		otherIdsOidSet = new HashSet<String>();
+		mRepositories = new ArrayList<>();
+		otherIdsOidSet = new HashSet<>();
 	}
 
 	/**
@@ -64,9 +64,9 @@ public class AffinityDomain {
 			Destination destRepository) {
 		pixDestination = destPidSource;
 		registryDestination = destRegistry;
-		mRepositories = new ArrayList<Destination>();
+		mRepositories = new ArrayList<>();
 		mRepositories.add(destRepository);
-		otherIdsOidSet = new HashSet<String>();
+		otherIdsOidSet = new HashSet<>();
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class AffinityDomain {
 		pixDestination = destPidSource;
 		registryDestination = destRegistry;
 		mRepositories = destRepositories;
-		otherIdsOidSet = new HashSet<String>();
+		otherIdsOidSet = new HashSet<>();
 	}
 
 	/**
@@ -111,7 +111,7 @@ public class AffinityDomain {
 	 * Clear repositories.
 	 */
 	public void clearRepositories() {
-		mRepositories = new ArrayList<Destination>();
+		mRepositories = new ArrayList<>();
 	}
 
 	/**
@@ -263,7 +263,7 @@ public class AffinityDomain {
 	 *            the new repository
 	 */
 	public void setRepositoryDestination(Destination destRepository) {
-		mRepositories = new ArrayList<Destination>();
+		mRepositories = new ArrayList<>();
 		mRepositories.add(destRepository);
 	}
 

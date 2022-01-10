@@ -2,9 +2,12 @@ package org.husky.communication.utils;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.hl7.fhir.r4.model.Address;
+import org.hl7.fhir.r4.model.Address.AddressUse;
+import org.hl7.fhir.r4.model.StringType;
 
 import net.ihe.gazelle.hl7v3.coctmt090003UV01.COCTMT090003UV01AssignedEntity;
 import net.ihe.gazelle.hl7v3.coctmt090003UV01.COCTMT090003UV01Organization;
@@ -12,7 +15,6 @@ import net.ihe.gazelle.hl7v3.coctmt150002UV01.COCTMT150002UV01Organization;
 import net.ihe.gazelle.hl7v3.coctmt150003UV03.COCTMT150003UV03ContactParty;
 import net.ihe.gazelle.hl7v3.coctmt150003UV03.COCTMT150003UV03Organization;
 import net.ihe.gazelle.hl7v3.datatypes.AD;
-import net.ihe.gazelle.hl7v3.datatypes.AdxpAdditionalLocator;
 import net.ihe.gazelle.hl7v3.datatypes.AdxpCity;
 import net.ihe.gazelle.hl7v3.datatypes.AdxpCountry;
 import net.ihe.gazelle.hl7v3.datatypes.AdxpCounty;
@@ -119,100 +121,60 @@ public class PixPdqV3Utils {
 	 *
 	 * @param addressStreetAddressLines
 	 * @param addressCity
-	 * @param addressCounty
 	 * @param addressState
 	 * @param addressCountry
 	 * @param addressZip
-	 * @param addressOtherDesignation
 	 * @param addressType             (possible values are "H", "W", or "WP")
 	 * @return AD type object containing the non-empty address parts provided.
 	 */
-	public static AD createAd(List<String> addressStreetAddressLines, String addressCity, String addressCounty,
-			String addressState, String addressCountry, String addressZip, String addressOtherDesignation,
-			String addressType) {
+	public static AD createAd(Address address) {
 		var addressAD = new AD();
 
 		// make sure we actually add an address
 		var addressAdded = false;
 
-		for (String addressStreetAddress : addressStreetAddressLines) {
-			// if there is a street address
-			if (addressStreetAddress != null && !addressStreetAddress.equals("")) {
-				// create the street address
-				var streetAddress = new AdxpStreetAddressLine();
-
-				// set the street address value
-				streetAddress.addMixed(addressStreetAddress);
-
-				// Add the street address to the AD
-				addressAD.addStreetAddressLine(streetAddress);
-
-				// indicate that some part of the address was added
-				addressAdded = true;
-			}
+		if (addStreetAddressLinesToAd(address.getLine(), addressAD)) {
+			addressAdded = true;
 		}
 
 		// if there is a city
-		if (addressCity != null && !addressCity.equals("")) {
-			// create the city
-			var city = new AdxpCity();
-
-			// set the street address value
-			city.addMixed(addressCity);
-
-			// Add the city to the AD
-			addressAD.addCity(city);
-
-			// indicate that some part of the address was added
-			addressAdded = true;
-		}
-
-		// if there is a county code
-		if (addressCounty != null && !addressCounty.isEmpty()) {
-			// create the county
-			var county = new AdxpCounty();
-
-			// set the county value
-			county.addMixed(addressCounty);
-
-			// Add the county to the AD
-			addressAD.addCounty(county);
-
-			// indicate that some part of the address was added
-			addressAdded = true;
-		}
-
-		// if there is a state
-		if (addressState != null && !addressState.isEmpty()) {
-			// create the state
-			var state = new AdxpState();
-
-			// set the state value
-			state.addMixed(addressState);
-
-			// Add the state to the AD
-			addressAD.addState(state);
-
-			// indicate that some part of the address was added
+		if (addCityToAd(address.getCity(), addressAD)) {
 			addressAdded = true;
 		}
 
 		// if there is a country
-		if (addressCountry != null && !addressCountry.isEmpty()) {
-			// create the state
-			var country = new AdxpCountry();
+		if (addCountryToAd(address.getCountry(), addressAD)) {
+			addressAdded = true;
+		}
 
-			// set the state value
-			country.addMixed(addressCountry);
-
-			// Add the country to the AD
-			addressAD.addCountry(country);
-
-			// indicate that some part of the address was added
+		// if there is a state
+		if (addStateToAd(address.getState(), addressAD)) {
 			addressAdded = true;
 		}
 
 		// if there is a zip code
+		if (addZipToAd(address.getPostalCode(), addressAD)) {
+			addressAdded = true;
+		}
+
+		// if there is an addressType
+		if (address.getUseElement() != null && address.getUseElement().getValue() != null) {
+			if (AddressUse.HOME.equals(address.getUseElement().getValue())) {
+				addressAD.setUse(HomeAddressUse.H.value());
+			} else if (AddressUse.WORK.equals(address.getUseElement().getValue())) {
+				addressAD.setUse(WorkPlaceAddressUse.WP.value());
+			}
+		}
+
+		// if address wasn't added, null it out
+		if (!addressAdded)
+			addressAD = null;
+
+		// return the value
+		return addressAD;
+	}
+
+	private static boolean addZipToAd(String addressZip, AD addressAD) {
 		if (addressZip != null && !addressZip.isEmpty()) {
 			// create the zipCode
 			var zipCode = new AdxpPostalCode();
@@ -224,63 +186,104 @@ public class PixPdqV3Utils {
 			addressAD.addPostalCode(zipCode);
 
 			// indicate that some part of the address was added
-			addressAdded = true;
+			return true;
 		}
 
-		// if there is an other designation
-		if (addressOtherDesignation != null && !addressOtherDesignation.isEmpty()) {
-			// create the other designation object
-			// TODO: is this the right place for other designation??
-			var otherDesignation = new AdxpAdditionalLocator();
-
-			// set the other designation
-			otherDesignation.addMixed(addressOtherDesignation);
-
-			// add the other designation to the AD
-			addressAD.addAdditionalLocator(otherDesignation);
-
-			// indicate that some part of the address was added
-			addressAdded = true;
-		}
-
-		// if there is an addressType
-		if (addressType != null && !addressType.equals("")) {
-			if ("H".equalsIgnoreCase(addressType))
-				addressAD.setUse(HomeAddressUse.H.value());
-			if (("W".equalsIgnoreCase(addressType)) || ("WP".equalsIgnoreCase(addressType)))
-				addressAD.setUse(WorkPlaceAddressUse.WP.value());
-		}
-
-		// if address wasn't added, null it out
-		if (!addressAdded)
-			addressAD = null;
-
-		// return the value
-		return addressAD;
+		return false;
 	}
 
-	/**
-	 * Create an AD type object containing the supplied address parts that are
-	 * non-empty (all are optional). If no address parts are supplied, the returned
-	 * value will be null.
-	 *
-	 * @param addressStreetAddress
-	 * @param addressCity
-	 * @param addressCounty
-	 * @param addressState
-	 * @param addressCountry
-	 * @param addressZip
-	 * @param addressOtherDesignation
-	 * @param addressType             (possible values are "H", "W", or "WP")
-	 * @return AD type object containing the non-empty address parts provided.
-	 */
-	public static AD createAd(String addressStreetAddress, String addressCity, String addressCounty,
-			String addressState, String addressCountry, String addressZip, String addressOtherDesignation,
-			String addressType) {
-		List<String> adressLines = new ArrayList<>();
-		adressLines.add(addressStreetAddress);
-		return createAd(adressLines, addressCity, addressCounty, addressState, addressCountry, addressZip,
-				addressOtherDesignation, addressType);
+	public static boolean addCountyToAd(String addressCounty, AD addressAD) {
+		if (addressCounty != null && !addressCounty.isEmpty()) {
+			// create the state
+			var county = new AdxpCounty();
+
+			// set the state value
+			county.addMixed(addressCounty);
+
+			// Add the country to the AD
+			addressAD.addCounty(county);
+
+			// indicate that some part of the address was added
+			return true;
+		}
+
+		return false;
+	}
+
+	private static boolean addStateToAd(String addressState, AD addressAD) {
+		if (addressState != null && !addressState.isEmpty()) {
+			// create the state
+			var state = new AdxpState();
+
+			// set the state value
+			state.addMixed(addressState);
+
+			// Add the state to the AD
+			addressAD.addState(state);
+
+			// indicate that some part of the address was added
+			return true;
+		}
+
+		return false;
+	}
+
+	private static boolean addCountryToAd(String addressCountry, AD addressAD) {
+		if (addressCountry != null && !addressCountry.isEmpty()) {
+			// create the state
+			var country = new AdxpCountry();
+
+			// set the state value
+			country.addMixed(addressCountry);
+
+			// Add the country to the AD
+			addressAD.addCountry(country);
+
+			// indicate that some part of the address was added
+			return true;
+		}
+
+		return false;
+	}
+
+	private static boolean addCityToAd(String addressCity, AD addressAD) {
+		if (addressCity != null && !addressCity.equals("")) {
+			// create the city
+			var city = new AdxpCity();
+
+			// set the street address value
+			city.addMixed(addressCity);
+
+			// Add the city to the AD
+			addressAD.addCity(city);
+
+			// indicate that some part of the address was added
+			return true;
+		}
+
+		return false;
+	}
+
+	private static boolean addStreetAddressLinesToAd(List<StringType> addressStreetAddressLines, AD addressAD) {
+		for (StringType addressStreetAddress : addressStreetAddressLines) {
+			// if there is a street address
+			if (addressStreetAddress != null && addressStreetAddress.getValue() != null
+					&& !addressStreetAddress.getValue().equals("")) {
+				// create the street address
+				var streetAddress = new AdxpStreetAddressLine();
+
+				// set the street address value
+				streetAddress.addMixed(addressStreetAddress.getValue());
+
+				// Add the street address to the AD
+				addressAD.addStreetAddressLine(streetAddress);
+
+				// indicate that some part of the address was added
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
@@ -394,7 +397,6 @@ public class PixPdqV3Utils {
 		organization.getName().add(on);
 		var contactParty = new COCTMT150003UV03ContactParty();
 		contactParty.setClassCode(net.ihe.gazelle.hl7v3.voc.RoleClassContact.CON);
-		// TODO: Should this have a "use" value? Possibly "WP" (Work Phone)
 		contactParty.getTelecom().add(createTEL(telecomValue, ""));
 		organization.getContactParty().add(contactParty);
 		return organization;
@@ -591,11 +593,9 @@ public class PixPdqV3Utils {
 		// Set the device class code
 		device.setClassCode(EntityClassDevice.DEV);
 
-		// get the device determiner code and set it TODO: same issue as
 		// receiver device above
 		device.setDeterminerCode(EntityDeterminer.INSTANCE);
 
-		// instII.setExtension("PRPA_IN201305UV02");
 		device.getId().add(createII(applicationOID, "", ""));
 
 		// if there is a facility OID
@@ -612,7 +612,6 @@ public class PixPdqV3Utils {
 			// Set the device class code
 			senderRepresentedOrganization.setClassCode(EntityClassOrganization.ORG);
 
-			// get the device determiner code and set it TODO: same issue as
 			// receiver device above
 			senderRepresentedOrganization.setDeterminerCode(EntityDeterminer.INSTANCE);
 
@@ -701,11 +700,9 @@ public class PixPdqV3Utils {
 		// Set the device class code
 		device.setClassCode(EntityClassDevice.DEV);
 
-		// get the device determiner code and set it TODO: same issue as
 		// receiver device above
 		device.setDeterminerCode(EntityDeterminer.INSTANCE);
 
-		// instII.setExtension("PRPA_IN201305UV02");
 		device.getId().add(createII(applicationOID, "", ""));
 
 		// if there is a facility OID
@@ -722,7 +719,6 @@ public class PixPdqV3Utils {
 			// Set the device class code
 			senderRepresentedOrganization.setClassCode(EntityClassOrganization.ORG);
 
-			// get the device determiner code and set it TODO: same issue as
 			// receiver device above
 			senderRepresentedOrganization.setDeterminerCode(EntityDeterminer.INSTANCE);
 
@@ -1007,8 +1003,8 @@ public class PixPdqV3Utils {
 	private static String getMixedValue(List<Serializable> mixed) {
 		var returnValue = "";
 		// if we have a mixed
-		if (!mixed.isEmpty() && mixed.get(0) instanceof String)
-			returnValue = (String) mixed.get(0);
+		if (!mixed.isEmpty() && mixed.get(0)instanceof String mixedStr)
+			returnValue = mixedStr;
 		return returnValue;
 	}
 

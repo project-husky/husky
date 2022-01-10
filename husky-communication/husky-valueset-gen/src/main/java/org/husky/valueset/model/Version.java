@@ -11,13 +11,14 @@
 package org.husky.valueset.model;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.annotation.processing.Generated;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.husky.common.basetypes.OrganizationBaseType;
-import org.husky.common.utils.DateUtil;
-import org.husky.common.utils.Util;
 
 /**
  * <div class="en">The Class Version contains all information describing a
@@ -182,36 +183,29 @@ public class Version implements Serializable {
 		else
 			retVal = this.label.equals(((Version) obj).getLabel());
 
-		// only business rules are applied, here. Rest was initially implemented
-		// and stays here for future use. If you use it, you need to implement
-		// another method and not change the current method.
-		// if (retVal) {
-		// if (this.publishingAuthority == null)
-		// retVal = (obj.getPublishingAuthority() == null);
-		// else
-		// retVal =
-		// this.publishingAuthority.equals(obj.getPublishingAuthority());
-		// }
 		if (retVal) {
-			if (this.validFrom == null)
-				retVal = (((Version) obj).getValidFrom() == null);
-			else {
-				retVal = this.validFrom.equals(((Version) obj).getValidFrom());
-				if (!retVal) {
-					retVal = DateUtil.equalsDateOnly(this.validFrom, ((Version) obj).getValidFrom());
-				}
-			}
+			retVal = compareDate(this.validFrom, ((Version) obj).getValidFrom());
 		}
 		if (retVal) {
-			if (this.validTo == null)
-				retVal = (((Version) obj).getValidTo() == null);
-			else {
-				retVal = this.validTo.equals(((Version) obj).getValidTo());
-				if (!retVal) {
-					retVal = DateUtil.equalsDateOnly(this.validTo, ((Version) obj).getValidTo());
-				}
+			retVal = compareDate(this.validTo, ((Version) obj).getValidTo());
+		}
+		return retVal;
+	}
+
+	private boolean compareDate(Date valid, Date valid2) {
+		var retVal = true;
+		if (valid == null) {
+			retVal = (valid2 == null);
+		} else {
+			retVal = valid.equals(valid2);
+			if (!retVal) {
+				DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+				String validStr = dateFormat.format(valid);
+				String validStr2 = dateFormat.format(valid2);
+				retVal = validStr.equals(validStr2);
 			}
 		}
+
 		return retVal;
 	}
 
@@ -268,7 +262,7 @@ public class Version implements Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		return Util.getChecksum(this);
+		return new HashCodeBuilder(17, 37).append(this.label).append(this.validFrom).append(this.validTo).toHashCode();
 	}
 
 	/**

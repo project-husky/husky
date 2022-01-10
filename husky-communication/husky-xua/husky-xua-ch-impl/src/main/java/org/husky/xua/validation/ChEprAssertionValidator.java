@@ -1,10 +1,42 @@
 package org.husky.xua.validation;
 
-import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
+import static org.husky.common.ch.ChEpr.EPR_SPID_URN;
+import static org.husky.xua.ChEprXuaSpecifications.DOCUMENT_ADMINISTRATOR_ID;
+import static org.husky.xua.ChEprXuaSpecifications.POLICY_ADMINISTRATOR_ID;
+import static org.husky.xua.ChEprXuaSpecifications.REPRESENTATIVE_ID;
+import static org.husky.xua.ChEprXuaSpecifications.TECHNICAL_USER_ID;
+import static org.husky.xua.communication.xua.XUserAssertionConstants.IHE_XCA_HOMECOMMUNITYID;
+import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_ORGANISATION;
+import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_ORGANIZATIONID;
+import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_PURPOSEOFUSE;
+import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_ROLE;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ASSISTANT_GLN;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ASSISTANT_NAME;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_HOME_COMMUNITY_ID;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ORGANIZATIONS_ID;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ORGANIZATIONS_NAME;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_PURPOSE_OF_USE;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_RESPONSIBLE_SUBJECT_ID;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ROLE;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_TCU_ID;
+import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.CLOCK_SKEW;
+import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.SIGNATURE_REQUIRED;
+
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+
+import javax.xml.namespace.QName;
+
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.communication.ch.enums.Role;
 import org.husky.xua.hl7v3.impl.AbstractImpl;
-import org.husky.xua.hl7v3.impl.RoleImpl;
+import org.husky.xua.hl7v3.impl.CodedWithEquivalentImpl;
 import org.husky.xua.validation.condition.ChEprAudienceRestrictionConditionValidator;
 import org.husky.xua.validation.condition.ChEprDelegationRestrictionConditionValidator;
 import org.husky.xua.validation.statement.ChEprAttributeStatementValidator;
@@ -29,16 +61,7 @@ import org.opensaml.storage.ReplayCache;
 import org.opensaml.storage.impl.MemoryStorageService;
 import org.opensaml.xmlsec.signature.support.impl.ExplicitKeySignatureTrustEngine;
 
-import javax.xml.namespace.QName;
-import java.time.Duration;
-import java.util.*;
-
-import static org.husky.common.ch.ChEpr.EPR_SPID_URN;
-import static org.husky.xua.ChEprXuaSpecifications.*;
-import static org.husky.xua.communication.xua.XUserAssertionConstants.*;
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.*;
-import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.CLOCK_SKEW;
-import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.SIGNATURE_REQUIRED;
+import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 
 /**
  * A component capable of performing core validation of SAML version 2.0 {@link Assertion} instances in use in the
@@ -60,6 +83,12 @@ import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParamete
  * @author Quentin Ligier
  */
 public class ChEprAssertionValidator {
+	
+	public static final String ERRMSG_ATTRIBUTE = "The attribute '";
+	public static final String ERRMSG_IS_MISSING = "' is missing";
+	public static final String NAMESPACE_GS1_GLN = "urn:gs1:gln";
+	public static final String ERRMSG_SUBJECT_CONFIRMATION_MISSING = "The SubjectConfirmation is missing";
+	
 
     /**
      * The SAML 2 {@link Assertion} validator implemented by OpenSAML and configured for the CH-EPR specifications.
@@ -74,6 +103,10 @@ public class ChEprAssertionValidator {
      * @throws ComponentInitializationException if the {@link ReplayCache} of the {@link OneTimeUseConditionValidator}
      *                                          fails to initialize.
      */
+    
+    /* development in progress */
+    @SuppressWarnings({"java:S1481","java:S1874"})  
+     
     public ChEprAssertionValidator(@Nullable final Duration oneTimeUseConditionExpires) throws ComponentInitializationException {
         final var conditionValidators = new ArrayList<ConditionValidator>();
         conditionValidators.add(new ChEprAudienceRestrictionConditionValidator());
@@ -89,7 +122,7 @@ public class ChEprAssertionValidator {
                 new CollectionCredentialResolver(),
                 new NoopKeyInfoCredentialResolver() // A KeyInfo element is not expected in the Signature
         );
-
+        
         this.validator = new SAML20AssertionValidator(
                 conditionValidators,
                 List.of(new ChEprSubjectConfirmationBearerValidator()),
@@ -122,7 +155,7 @@ public class ChEprAssertionValidator {
         }
 
         newStaticParameters.putIfAbsent(CLOCK_SKEW, Duration.ZERO);
-        newStaticParameters.put(SIGNATURE_REQUIRED, false); // TODO
+        newStaticParameters.put(SIGNATURE_REQUIRED, false); 
         final var validationContext = new ValidationContext(newStaticParameters);
 
         // Extract the role that will influence other CH-EPR validators
@@ -168,7 +201,7 @@ public class ChEprAssertionValidator {
                 .findAny()
                 .orElse(null);
         if (roleAttribute == null) {
-            context.setValidationFailureMessage("The attribute '" + OASIS_XACML_ROLE + "' is missing");
+            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ROLE + ERRMSG_IS_MISSING);
             return ValidationResult.INVALID;
         }
         var role = Optional.ofNullable(roleAttribute.getAttributeValues())
@@ -179,15 +212,14 @@ public class ChEprAssertionValidator {
                 .map(attributeValue -> attributeValue.getUnknownXMLObjects(new QName("urn:hl7-org:v3", "Role")))
                 .filter(l -> l.size() == 1)
                 .map(l -> l.get(0))
-                .filter(RoleImpl.class::isInstance)
-                .map(RoleImpl.class::cast)
+				.filter(CodedWithEquivalentImpl.class::isInstance).map(CodedWithEquivalentImpl.class::cast)
                 .filter(r -> "2.16.756.5.30.1.127.3.10.6".equals(r.getCodeSystem()))
                 .map(AbstractImpl::getCode)
                 .map(Role::getEnum)
                 .filter(r -> r != Role.ASSISTANT && r != Role.TECHNICAL_USER)
                 .orElse(null);
         if (role == null) {
-            context.setValidationFailureMessage("The attribute '" + OASIS_XACML_ROLE + "' contains " +
+            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ROLE + "' contains " +
                     "an invalid value");
             return ValidationResult.INVALID;
         }
@@ -205,7 +237,7 @@ public class ChEprAssertionValidator {
                         .filter(n -> NameIDType.PERSISTENT.equals(n.getFormat()))
                         .map(NameIDType::getNameQualifier)
                         .orElse(null);
-                if ("urn:gs1:gln".equals(nameQualifier)) {
+                if (NAMESPACE_GS1_GLN.equals(nameQualifier)) {
                     role = Role.ASSISTANT;
                 } else if (TECHNICAL_USER_ID.equals(nameQualifier)) {
                     role = Role.TECHNICAL_USER;
@@ -242,14 +274,9 @@ public class ChEprAssertionValidator {
             return ValidationResult.INVALID;
         }
 
-        if (role == Role.HEALTHCARE_PROFESSIONAL && !"urn:gs1:gln".equals(nameId.getNameQualifier())) {
+		if ((role == Role.HEALTHCARE_PROFESSIONAL || role == Role.ASSISTANT || role == Role.TECHNICAL_USER)
+				&& !NAMESPACE_GS1_GLN.equals(nameId.getNameQualifier())) {
             context.setValidationFailureMessage("The healthcare professional GLN is missing in the Subject");
-            return ValidationResult.INVALID;
-        } else if (role == Role.ASSISTANT && !"urn:gs1:gln".equals(nameId.getNameQualifier())) {
-            context.setValidationFailureMessage("The responsible healthcare professional GLN is missing in the Subject");
-            return ValidationResult.INVALID;
-        } else if (role == Role.TECHNICAL_USER && !"urn:gs1:gln".equals(nameId.getNameQualifier())) {
-            context.setValidationFailureMessage("The responsible healthcare professional GLN is missing in the Subject");
             return ValidationResult.INVALID;
         } else if (role == Role.POLICY_ADMINISTRATOR && !POLICY_ADMINISTRATOR_ID.equals(nameId.getNameQualifier())) {
             context.setValidationFailureMessage("The policy administrator ID is missing in the Subject");
@@ -282,19 +309,19 @@ public class ChEprAssertionValidator {
                                                         final ValidationContext context,
                                                         final Role role) {
         if (context.getDynamicParameters().getOrDefault(CH_EPR_PURPOSE_OF_USE, null) == null) {
-            context.setValidationFailureMessage("The attribute '" + OASIS_XACML_PURPOSEOFUSE + "' is missing");
+            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_PURPOSEOFUSE + ERRMSG_IS_MISSING);
             return ValidationResult.INVALID;
         }
         if (context.getDynamicParameters().getOrDefault(CH_EPR_ORGANIZATIONS_NAME, null) == null) {
-            context.setValidationFailureMessage("The attribute '" + OASIS_XACML_ORGANISATION + "' is missing");
+            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANISATION + ERRMSG_IS_MISSING);
             return ValidationResult.INVALID;
         }
         if (context.getDynamicParameters().getOrDefault(CH_EPR_ORGANIZATIONS_ID, null) == null) {
-            context.setValidationFailureMessage("The attribute '" + OASIS_XACML_ORGANIZATIONID + "' is missing");
+            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANIZATIONID + ERRMSG_IS_MISSING);
             return ValidationResult.INVALID;
         }
         if (context.getDynamicParameters().getOrDefault(CH_EPR_HOME_COMMUNITY_ID, null) == null) {
-            context.setValidationFailureMessage("The attribute '" + IHE_XCA_HOMECOMMUNITYID + "' is missing");
+            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + IHE_XCA_HOMECOMMUNITYID + ERRMSG_IS_MISSING);
             return ValidationResult.INVALID;
         }
         if (context.getDynamicParameters().getOrDefault(CH_EPR_RESPONSIBLE_SUBJECT_ID, null) == null) {
@@ -304,16 +331,16 @@ public class ChEprAssertionValidator {
 
         if (role == Role.ASSISTANT) {
             if (context.getDynamicParameters().getOrDefault(CH_EPR_ASSISTANT_NAME, null) == null) {
-                context.setValidationFailureMessage("The SubjectConfirmation is missing");
+                context.setValidationFailureMessage(ERRMSG_SUBJECT_CONFIRMATION_MISSING);
                 return ValidationResult.INVALID;
             }
             if (context.getDynamicParameters().getOrDefault(CH_EPR_ASSISTANT_GLN, null) == null) {
-                context.setValidationFailureMessage("The SubjectConfirmation is missing");
+                context.setValidationFailureMessage(ERRMSG_SUBJECT_CONFIRMATION_MISSING);
                 return ValidationResult.INVALID;
             }
         }
         if (role == Role.TECHNICAL_USER && context.getDynamicParameters().getOrDefault(CH_EPR_TCU_ID, null) == null) {
-            context.setValidationFailureMessage("The SubjectConfirmation is missing");
+            context.setValidationFailureMessage(ERRMSG_SUBJECT_CONFIRMATION_MISSING);
             return ValidationResult.INVALID;
         }
 

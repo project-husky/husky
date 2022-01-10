@@ -120,13 +120,14 @@ class XmlUnmarshallerTest {
         assertEquals(title, unmarshalled.getTextContent());
     }
 
+    /*
     @Test
     @Disabled
     void testUnmarshallingFile() throws IOException {
-        /*final Resource disResource = new ClassPathResource("commons/hl7/cda/ClinicalDocumentHelpersTest/DIS1.xml");
+        final Resource disResource = new ClassPathResource("commons/hl7/cda/ClinicalDocumentHelpersTest/DIS1.xml");
         final POCDMT000040ClinicalDocument cda = XmlUnmarshaller.unmarshallFileAsType(disResource.getFile(),
                 POCDMT000040ClinicalDocument.class);
-        assertNotNull(cda);*/
-    }
+        assertNotNull(cda);
+    }*/
 
 }

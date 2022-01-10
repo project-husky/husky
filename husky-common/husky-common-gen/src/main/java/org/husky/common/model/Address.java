@@ -10,16 +10,27 @@
  */
 package org.husky.common.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
+
 import org.apache.commons.lang3.NotImplementedException;
 import org.husky.common.basetypes.AddressBaseType;
 import org.husky.common.enums.NullFlavor;
 import org.husky.common.enums.PostalAddressUse;
-import org.husky.common.hl7cdar2.*;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
-import java.io.Serializable;
-import java.util.ArrayList;
+import org.husky.common.hl7cdar2.AD;
+import org.husky.common.hl7cdar2.AdxpAdditionalLocator;
+import org.husky.common.hl7cdar2.AdxpCity;
+import org.husky.common.hl7cdar2.AdxpCountry;
+import org.husky.common.hl7cdar2.AdxpHouseNumber;
+import org.husky.common.hl7cdar2.AdxpPostBox;
+import org.husky.common.hl7cdar2.AdxpPostalCode;
+import org.husky.common.hl7cdar2.AdxpState;
+import org.husky.common.hl7cdar2.AdxpStreetAddressLine;
+import org.husky.common.hl7cdar2.AdxpStreetName;
 
 /**
  * The class Address contains all necessary fields for a postal address. This class also provides mapping methods to
@@ -27,276 +38,270 @@ import java.util.ArrayList;
  */
 public class Address extends AddressBaseType {
 
-    /**
-     * The Constant serialVersionUID.
-     */
-    private static final long serialVersionUID = 8984600430220953028L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 8984600430220953028L;
 
-    /**
-     * Instantiates a new instance from the given base type.
-     *
-     * @param baseType the base type
-     */
-    public Address(AddressBaseType baseType) {
-        initFromBaseType(baseType);
-    }
+	private static final String HL7_NAMESPACE = "urn:hl7-org:v3";
 
-    /**
+	/**
+	 * Instantiates a new instance from the given base type.
+	 *
+	 * @param baseType the base type
+	 */
+	public Address(AddressBaseType baseType) {
+		initFromBaseType(baseType);
+	}
+
+	 /**
      * Instantiates a new instance from the given HL7 CDA R2 data type.
      *
      * @param hl7CdaR2Value the HL7 CDA R2 data type
      */
-    public Address(org.husky.common.hl7cdar2.AD hl7CdaR2Value) {
-        initFromHl7CdaR2(hl7CdaR2Value);
-    }
+	public Address(org.husky.common.hl7cdar2.AD hl7CdaR2Value) {
+		initFromHl7CdaR2(hl7CdaR2Value);
+	}
 
-    /**
-     * Creates the base type from the given HL7 CDA R2 value.
-     *
-     * @param hl7CdaR2Value the HL7 CDA R2 value
-     * @return the base type
-     */
-    public static AddressBaseType createAddressBaseType(
-            org.husky.common.hl7cdar2.AD hl7CdaR2Value) {
-        AddressBaseType retVal = new AddressBaseType();
+	/**
+	 * Creates the base type from the given HL7 CDA R2 value.
+	 *
+	 * @param hl7CdaR2Value the HL7 CDA R2 value
+	 * @return the base type
+	 */
+	public static AddressBaseType createAddressBaseType(
+			org.husky.common.hl7cdar2.AD hl7CdaR2Value) {
+		AddressBaseType retVal = new AddressBaseType();
 
-        if (hl7CdaR2Value != null) {
-            String nullFlavor = null;
-            if (hl7CdaR2Value.nullFlavor != null)
-                if (hl7CdaR2Value.nullFlavor.size() > 0)
-                    nullFlavor = hl7CdaR2Value.nullFlavor.get(0);
-            if (nullFlavor != null)
-                retVal.setNullFlavor(NullFlavor.getEnum(nullFlavor));
+		if (hl7CdaR2Value != null) {
+			String nullFlavor = null;
+			if (hl7CdaR2Value.nullFlavor != null && !hl7CdaR2Value.nullFlavor.isEmpty())
+					nullFlavor = hl7CdaR2Value.nullFlavor.get(0);
+			if (nullFlavor != null)
+				retVal.setNullFlavor(NullFlavor.getEnum(nullFlavor));
 
-            if (hl7CdaR2Value.getUse().size() > 0)
-                retVal.setUsage(PostalAddressUse.getEnum(hl7CdaR2Value.getUse().get(0)));
+			if (!hl7CdaR2Value.getUse().isEmpty())
+				retVal.setUsage(PostalAddressUse.getEnum(hl7CdaR2Value.getUse().get(0)));
 
-            String streetAddressLine1 = null;
-            String streetAddressLine2 = null;
+			for (Serializable element : hl7CdaR2Value.getContent()) {
+				if (element instanceof JAXBElement) {
+					JAXBElement<?> elem = (JAXBElement<?>) element;
+					extractAddressFieldsFromContent(retVal, elem.getValue());
+				}
+			}
+		} else
+			retVal.setNullFlavor(NullFlavor.NOT_AVAILABLE);
 
-            for (Serializable element : hl7CdaR2Value.getContent()) {
-                if (element instanceof JAXBElement) {
-                    JAXBElement<?> elem = (JAXBElement<?>) element;
-                    if (elem.getValue() instanceof AdxpAdditionalLocator) {
-                        AdxpAdditionalLocator obj = (AdxpAdditionalLocator) elem.getValue();
-                        retVal.setAdditionalLocator(obj.getTextContent());
-                    } else if (elem.getValue() instanceof AdxpStreetName) {
-                        AdxpStreetName obj = (AdxpStreetName) elem.getValue();
-                        retVal.setStreetName(obj.getTextContent());
-                    } else if (elem.getValue() instanceof AdxpHouseNumber) {
-                        AdxpHouseNumber obj = (AdxpHouseNumber) elem.getValue();
-                        retVal.setBuildingNumber(obj.getTextContent());
-                    } else if (elem.getValue() instanceof AdxpPostBox) {
-                        AdxpPostBox obj = (AdxpPostBox) elem.getValue();
-                        retVal.setPostBox(obj.getTextContent());
-                    } else if (elem.getValue() instanceof AdxpPostalCode) {
-                        AdxpPostalCode obj = (AdxpPostalCode) elem.getValue();
-                        retVal.setPostalCode(obj.getTextContent());
-                    } else if (elem.getValue() instanceof AdxpCity) {
-                        AdxpCity obj = (AdxpCity) elem.getValue();
-                        retVal.setCity(obj.getTextContent());
-                    } else if (elem.getValue() instanceof AdxpState) {
-                        AdxpState obj = (AdxpState) elem.getValue();
-                        retVal.setState(obj.getTextContent());
-                    } else if (elem.getValue() instanceof AdxpCountry) {
-                        AdxpCountry obj = (AdxpCountry) elem.getValue();
-                        retVal.setCountry(obj.getTextContent());
-                    } else if (elem.getValue() instanceof AdxpStreetAddressLine) {
-                        if (streetAddressLine1 == null) {
-                            AdxpStreetAddressLine obj = (AdxpStreetAddressLine) elem.getValue();
-                            streetAddressLine1 = obj.getTextContent();
-                            retVal.setStreetAddressLine1(streetAddressLine1);
-                        } else if (streetAddressLine2 == null) {
-                            AdxpStreetAddressLine obj = (AdxpStreetAddressLine) elem.getValue();
-                            streetAddressLine2 = obj.getTextContent();
-                            retVal.setStreetAddressLine2(streetAddressLine2);
-                        }
-                    } else
-                        throw new NotImplementedException(elem.getValue().getClass().getName());
-                }
-            }
-        } else
-            retVal.setNullFlavor(NullFlavor.NOT_AVAILABLE);
+		return retVal;
+	}
 
-        return retVal;
-    }
+	private static void extractAddressFieldsFromContent(AddressBaseType retVal, Object value) {
+		if (value instanceof AdxpAdditionalLocator obj) {
+			retVal.setAdditionalLocator(obj.getTextContent());
+		} else if (value instanceof AdxpStreetName obj) {
+			retVal.setStreetName(obj.getTextContent());
+		} else if (value instanceof AdxpHouseNumber obj) {
+			retVal.setBuildingNumber(obj.getTextContent());
+		} else if (value instanceof AdxpPostBox obj) {
+			retVal.setPostBox(obj.getTextContent());
+		} else if (value instanceof AdxpPostalCode obj) {
+			retVal.setPostalCode(obj.getTextContent());
+		} else if (value instanceof AdxpCity obj) {
+			retVal.setCity(obj.getTextContent());
+		} else if (value instanceof AdxpState obj) {
+			retVal.setState(obj.getTextContent());
+		} else if (value instanceof AdxpCountry obj) {
+			retVal.setCountry(obj.getTextContent());
+		} else if (value instanceof AdxpStreetAddressLine obj) {
+			if (retVal.getStreetAddressLine1() == null) {
+				retVal.setStreetAddressLine1(obj.getTextContent());
+			} else if (retVal.getStreetAddressLine2() == null) {
+				retVal.setStreetAddressLine2(obj.getTextContent());
+			}
+		} else
+			throw new NotImplementedException(value.getClass().getName());
+	}
 
-    /**
-     * Creates the HL7 CDA R2 data type from the given base type.
-     *
-     * @param baseType the base type
-     * @return the HL7 CDA R2 data typed value
-     */
-    public static org.husky.common.hl7cdar2.AD createHl7CdaR2Ad(
-            AddressBaseType baseType) {
+	/**
+	 * Creates the HL7 CDA R2 data type from the given base type.
+	 *
+	 * @param baseType the base type
+	 * @return the HL7 CDA R2 data typed value
+	 */
+	public static org.husky.common.hl7cdar2.AD createHl7CdaR2Ad(
+			AddressBaseType baseType) {
 
-        org.husky.common.hl7cdar2.AD retVal = null;
+		org.husky.common.hl7cdar2.AD retVal = null;
 
-        if (baseType != null) {
-            retVal = new org.husky.common.hl7cdar2.AD();
-            String value;
+		if (baseType != null) {
+			retVal = new org.husky.common.hl7cdar2.AD();
+			createAddress(retVal, baseType);
+		}
 
-            NullFlavor nf = baseType.getNullFlavor();
-            if (nf != null) {
-                if (retVal.nullFlavor == null)
-                    retVal.nullFlavor = new ArrayList<String>();
-                retVal.nullFlavor.add(nf.getCodeValue());
-            }
+		return retVal;
 
-            value = baseType.getAdditionalLocator();
-            if (value != null) {
-                AdxpAdditionalLocator obj = new AdxpAdditionalLocator();
-                obj.setXmlMixed(value);
-                retVal.getContent()
-                        .add(new JAXBElement<AdxpAdditionalLocator>(
-                                new QName("urn:hl7-org:v3", "additionalLocator"),
-                                AdxpAdditionalLocator.class, obj));
-            }
+	}
 
-            value = baseType.getBuildingNumber();
-            if (value != null) {
-                AdxpHouseNumber obj = new AdxpHouseNumber();
-                obj.setXmlMixed(value);
-                retVal.getContent().add(new JAXBElement<AdxpHouseNumber>(
-                        new QName("urn:hl7-org:v3", "houseNumber"), AdxpHouseNumber.class, obj));
-            }
+	private static void createAddress(AD retVal, AddressBaseType baseType) {
+		NullFlavor nf = baseType.getNullFlavor();
+		if (nf != null) {
+			if (retVal.nullFlavor == null)
+				retVal.nullFlavor = new ArrayList<String>();
+			retVal.nullFlavor.add(nf.getCodeValue());
+		}
 
-            value = baseType.getCity();
-            if (value != null) {
-                AdxpCity obj = new AdxpCity();
-                obj.setXmlMixed(value);
-                retVal.getContent().add(new JAXBElement<AdxpCity>(
-                        new QName("urn:hl7-org:v3", "city"), AdxpCity.class, obj));
-            }
+		retVal.getContent().addAll(createAddressContent(baseType));
 
-            value = baseType.getCountry();
-            if (value != null) {
-                AdxpCountry obj = new AdxpCountry();
-                obj.setXmlMixed(value);
-                retVal.getContent().add(new JAXBElement<AdxpCountry>(
-                        new QName("urn:hl7-org:v3", "country"), AdxpCountry.class, obj));
-            }
+		PostalAddressUse usage = baseType.getUsage();
+		if (usage != null) {
+			retVal.getUse().clear();
+			retVal.getUse().add(usage.getCode().getCode());
+		}
+	}
 
-            value = baseType.getPostalCode();
-            if (value != null) {
-                AdxpPostalCode obj = new AdxpPostalCode();
-                obj.setXmlMixed(value);
-                retVal.getContent().add(new JAXBElement<AdxpPostalCode>(
-                        new QName("urn:hl7-org:v3", "postalCode"), AdxpPostalCode.class, obj));
-            }
+	private static List<Serializable> createAddressContent(AddressBaseType baseType) {
+		List<Serializable> content = new ArrayList<>();
 
-            value = baseType.getPostBox();
-            if (value != null) {
-                AdxpPostBox obj = new AdxpPostBox();
-                obj.setXmlMixed(value);
-                retVal.getContent().add(new JAXBElement<AdxpPostBox>(
-                        new QName("urn:hl7-org:v3", "postBox"), AdxpPostBox.class, obj));
-            }
+		String value = baseType.getAdditionalLocator();
+		if (value != null) {
+			AdxpAdditionalLocator obj = new AdxpAdditionalLocator();
+			obj.setXmlMixed(value);
+			content.add(new JAXBElement<AdxpAdditionalLocator>(
+					new QName(HL7_NAMESPACE, "additionalLocator"), AdxpAdditionalLocator.class, obj));
+		}
 
-            value = baseType.getState();
-            if (value != null) {
-                AdxpState obj = new AdxpState();
-                obj.setXmlMixed(value);
-                retVal.getContent().add(new JAXBElement<AdxpState>(
-                        new QName("urn:hl7-org:v3", "state"), AdxpState.class, obj));
-            }
+		value = baseType.getBuildingNumber();
+		if (value != null) {
+			AdxpHouseNumber obj = new AdxpHouseNumber();
+			obj.setXmlMixed(value);
+			content.add(new JAXBElement<AdxpHouseNumber>(new QName(HL7_NAMESPACE, "houseNumber"),
+					AdxpHouseNumber.class, obj));
+		}
 
-            value = baseType.getStreetAddressLine1();
-            if (value != null) {
-                AdxpStreetAddressLine obj = new AdxpStreetAddressLine();
-                obj.setXmlMixed(value);
-                retVal.getContent()
-                        .add(new JAXBElement<AdxpStreetAddressLine>(
-                                new QName("urn:hl7-org:v3", "streetAddressLine"),
-                                AdxpStreetAddressLine.class, obj));
-            }
+		value = baseType.getCity();
+		if (value != null) {
+			AdxpCity obj = new AdxpCity();
+			obj.setXmlMixed(value);
+			content.add(new JAXBElement<AdxpCity>(new QName(HL7_NAMESPACE, "city"), AdxpCity.class, obj));
+		}
 
-            value = baseType.getStreetAddressLine2();
-            if (value != null) {
-                AdxpStreetAddressLine obj = new AdxpStreetAddressLine();
-                obj.setXmlMixed(value);
-                retVal.getContent()
-                        .add(new JAXBElement<AdxpStreetAddressLine>(
-                                new QName("urn:hl7-org:v3", "streetAddressLine"),
-                                AdxpStreetAddressLine.class, obj));
-            }
+		value = baseType.getCountry();
+		if (value != null) {
+			AdxpCountry obj = new AdxpCountry();
+			obj.setXmlMixed(value);
+			content
+					.add(new JAXBElement<AdxpCountry>(new QName(HL7_NAMESPACE, "country"), AdxpCountry.class, obj));
+		}
 
-            value = baseType.getStreetName();
-            if (value != null) {
-                AdxpStreetName obj = new AdxpStreetName();
-                obj.setXmlMixed(value);
-                retVal.getContent().add(new JAXBElement<AdxpStreetName>(
-                        new QName("urn:hl7-org:v3", "streetName"), AdxpStreetName.class, obj));
-            }
+		value = baseType.getPostalCode();
+		if (value != null) {
+			AdxpPostalCode obj = new AdxpPostalCode();
+			obj.setXmlMixed(value);
+			content.add(
+					new JAXBElement<AdxpPostalCode>(new QName(HL7_NAMESPACE, "postalCode"), AdxpPostalCode.class, obj));
+		}
 
-            PostalAddressUse usage = baseType.getUsage();
-            if (usage != null) {
-                retVal.getUse().clear();
-                retVal.getUse().add(usage.getCode().getCode());
-            }
-        }
+		value = baseType.getPostBox();
+		if (value != null) {
+			AdxpPostBox obj = new AdxpPostBox();
+			obj.setXmlMixed(value);
+			content
+					.add(new JAXBElement<AdxpPostBox>(new QName(HL7_NAMESPACE, "postBox"), AdxpPostBox.class, obj));
+		}
 
-        return retVal;
+		value = baseType.getState();
+		if (value != null) {
+			AdxpState obj = new AdxpState();
+			obj.setXmlMixed(value);
+			content
+					.add(new JAXBElement<AdxpState>(new QName(HL7_NAMESPACE, "state"), AdxpState.class, obj));
+		}
 
-    }
+		value = baseType.getStreetAddressLine1();
+		if (value != null) {
+			AdxpStreetAddressLine obj = new AdxpStreetAddressLine();
+			obj.setXmlMixed(value);
+			content.add(new JAXBElement<AdxpStreetAddressLine>(
+					new QName(HL7_NAMESPACE, "streetAddressLine"), AdxpStreetAddressLine.class, obj));
+		}
 
-    /**
-     * Gets the HL7 CDA R2 data type from the current instance.
-     *
-     * @return the HL7 CDA R2 data type
-     */
-    public org.husky.common.hl7cdar2.AD getHl7CdaR2Ad() {
-        return createHl7CdaR2Ad(this);
-    }
+		value = baseType.getStreetAddressLine2();
+		if (value != null) {
+			AdxpStreetAddressLine obj = new AdxpStreetAddressLine();
+			obj.setXmlMixed(value);
+			content.add(new JAXBElement<AdxpStreetAddressLine>(
+					new QName(HL7_NAMESPACE, "streetAddressLine"), AdxpStreetAddressLine.class, obj));
+		}
 
-    /**
-     * Inits from the base type.
-     *
-     * @param baseType the base type
-     */
-    private void initFromBaseType(AddressBaseType baseType) {
-        if (baseType != null) {
-            setAdditionalLocator(baseType.getAdditionalLocator());
-            setBuildingNumber(baseType.getBuildingNumber());
-            setCity(baseType.getCity());
-            setCountry(baseType.getCountry());
-            setPostalCode(baseType.getPostalCode());
-            setPostBox(baseType.getPostBox());
-            setState(baseType.getState());
-            setStreetAddressLine1(baseType.getStreetAddressLine1());
-            setStreetAddressLine2(baseType.getStreetAddressLine2());
-            setStreetName(baseType.getStreetName());
-            setUsage(baseType.getUsage());
-            setNullFlavor(baseType.getNullFlavor());
-        } else
-            setNullFlavor(NullFlavor.NOT_AVAILABLE);
+		value = baseType.getStreetName();
+		if (value != null) {
+			AdxpStreetName obj = new AdxpStreetName();
+			obj.setXmlMixed(value);
+			content.add(
+					new JAXBElement<AdxpStreetName>(new QName(HL7_NAMESPACE, "streetName"), AdxpStreetName.class, obj));
+		}
 
-    }
+		return content;
+	}
 
-    /**
-     * Inits from the HL7 CDA R2 data type.
-     *
-     * @param hl7CdaR2Value the HL7 CDA R2 data type value
-     */
-    private void initFromHl7CdaR2(org.husky.common.hl7cdar2.AD hl7CdaR2Value) {
-        initFromBaseType(createAddressBaseType(hl7CdaR2Value));
-    }
 
-    /**
-     * Sets the fields of the current instance by the given base type.
-     *
-     * @param baseType the base type
-     */
-    public void set(AddressBaseType baseType) {
-        initFromBaseType(baseType);
-    }
 
-    /**
-     * Sets the fields of the current instance by the given HL7 CDA R2 data type.
-     *
-     * @param hl7CdaR2Value the HL7 CDA R2 data typed value
-     */
-    public void set(org.husky.common.hl7cdar2.AD hl7CdaR2Value) {
-        initFromHl7CdaR2(hl7CdaR2Value);
-    }
+	/**
+	 * Gets the HL7 CDA R2 data type from the current instance.
+	 *
+	 * @return the HL7 CDA R2 data type
+	 */
+	public org.husky.common.hl7cdar2.AD getHl7CdaR2Ad() {
+		return createHl7CdaR2Ad(this);
+	}
+
+	/**
+	 * Inits from the base type.
+	 *
+	 * @param baseType the base type
+	 */
+	private void initFromBaseType(AddressBaseType baseType) {
+		if (baseType != null) {
+			setAdditionalLocator(baseType.getAdditionalLocator());
+			setBuildingNumber(baseType.getBuildingNumber());
+			setCity(baseType.getCity());
+			setCountry(baseType.getCountry());
+			setPostalCode(baseType.getPostalCode());
+			setPostBox(baseType.getPostBox());
+			setState(baseType.getState());
+			setStreetAddressLine1(baseType.getStreetAddressLine1());
+			setStreetAddressLine2(baseType.getStreetAddressLine2());
+			setStreetName(baseType.getStreetName());
+			setUsage(baseType.getUsage());
+			setNullFlavor(baseType.getNullFlavor());
+		} else
+			setNullFlavor(NullFlavor.NOT_AVAILABLE);
+
+	}
+
+	/**
+	 * Inits from the HL7 CDA R2 data type.
+	 *
+	 * @param hl7CdaR2Value the HL7 CDA R2 data type value
+	 */
+	private void initFromHl7CdaR2(org.husky.common.hl7cdar2.AD hl7CdaR2Value) {
+		initFromBaseType(createAddressBaseType(hl7CdaR2Value));
+	}
+
+	/**
+	 * Sets the fields of the current instance by the given base type.
+	 *
+	 * @param baseType the base type
+	 */
+	public void set(AddressBaseType baseType) {
+		initFromBaseType(baseType);
+	}
+
+	/**
+	 * Sets the fields of the current instance by the given HL7 CDA R2 data type.
+	 *
+	 * @param hl7CdaR2Value the HL7 CDA R2 data typed value
+	 */
+	public void set(org.husky.common.hl7cdar2.AD hl7CdaR2Value) {
+		initFromHl7CdaR2(hl7CdaR2Value);
+	}
+
 }

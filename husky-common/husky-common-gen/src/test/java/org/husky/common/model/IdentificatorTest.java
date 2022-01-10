@@ -11,7 +11,6 @@
 package org.husky.common.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
@@ -19,19 +18,18 @@ import org.husky.common.basetypes.IdentificatorBaseType;
 import org.husky.common.enums.NullFlavor;
 import org.husky.common.hl7cdar2.II;
 import org.husky.common.hl7cdar2.ObjectFactory;
-import org.husky.common.model.Identificator;
 import org.junit.jupiter.api.Test;
 
 /**
  * The test class for Identificator.
  */
-public class IdentificatorTest {
+class IdentificatorTest {
 
 	/**
 	 * Do all tests.
 	 */
 	@Test
-	public void doAllTests() {
+	void doAllTests() {
 
 		String assigningAuthorityName = "assigningAuthorityName";
 		boolean displayable = false;
@@ -46,7 +44,7 @@ public class IdentificatorTest {
 		II hl7CdaR2Type = identificator1.getHl7CdaR2Ii();
 		Identificator identificator2 = new Identificator(hl7CdaR2Type);
 
-		assertTrue(identificator1.equals(identificator2));
+		assertEquals(identificator1, identificator2);
 
 		// Null Flavor Tests
 		II nullHl7CdaR2Value = null;

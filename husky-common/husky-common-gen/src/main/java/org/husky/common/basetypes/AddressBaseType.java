@@ -10,12 +10,13 @@
  */
 package org.husky.common.basetypes;
 
-import org.husky.common.enums.NullFlavor;
-import org.husky.common.enums.PostalAddressUse;
-import org.husky.common.utils.Util;
+import java.io.Serializable;
 
 import javax.annotation.processing.Generated;
-import java.io.Serializable;
+
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.husky.common.enums.NullFlavor;
+import org.husky.common.enums.PostalAddressUse;
 
 /**
  * This class provides the basic information for a postal address according to the HL7 address entity. This class does
@@ -23,186 +24,226 @@ import java.io.Serializable;
  */
 public class AddressBaseType implements Serializable {
 
-    /*
-     * See getter/setter for more details to the class members.
-     */
+	/*
+	 * See getter/setter for more details to the class members.
+	 */
 
-    /**
-     * The Constant serialVersionUID.
-     */
-    private static final long serialVersionUID = -5851119541693670862L;
-    /**
-     * The additional locator.
-     */
-    private String additionalLocator;
-    /**
-     * The building number.
-     */
-    private String buildingNumber;
-    /**
-     * The city.
-     */
-    private String city;
-    /**
-     * The country.
-     */
-    private String country;
-    /**
-     * The null flavor.
-     */
-    private NullFlavor nullFlavor;
-    /**
-     * The postal code.
-     */
-    private String postalCode;
-    /**
-     * The post box.
-     */
-    private String postBox;
-    /**
-     * The state.
-     */
-    private String state;
-    /**
-     * The street address line 1.
-     */
-    private String streetAddressLine1;
-    /**
-     * The street address line 2.
-     */
-    private String streetAddressLine2;
-    /**
-     * The street name.
-     */
-    private String streetName;
-    /**
-     * The usage.
-     */
-    private PostalAddressUse usage;
+	/**
+	 * The Constant serialVersionUID.
+	 */
+	private static final long serialVersionUID = -5851119541693670862L;
+	/**
+	 * The additional locator.
+	 */
+	private String additionalLocator;
+	/**
+	 * The building number.
+	 */
+	private String buildingNumber;
+	/**
+	 * The city.
+	 */
+	private String city;
+	/**
+	 * The country.
+	 */
+	private String country;
+	/**
+	 * The null flavor.
+	 */
+	private NullFlavor nullFlavor;
+	/**
+	 * The postal code.
+	 */
+	private String postalCode;
+	/**
+	 * The post box.
+	 */
+	private String postBox;
+	/**
+	 * The state.
+	 */
+	private String state;
+	/**
+	 * The street address line 1.
+	 */
+	private String streetAddressLine1;
+	/**
+	 * The street address line 2.
+	 */
+	private String streetAddressLine2;
+	/**
+	 * The street name.
+	 */
+	private String streetName;
+	/**
+	 * The usage.
+	 */
+	private PostalAddressUse usage;
 
-    /**
-     * Instantiates a new AddressBaseType. Default constructor.
-     */
-    public AddressBaseType() {
-    }
+	/**
+	 * Instantiates a new AddressBaseType. Default constructor.
+	 */
+	public AddressBaseType() {
+	}
 
-    /**
-     * Instantiates a new address base type.
-     *
-     * @param builder the builder
-     */
-    @Generated("SparkTools")
-    private AddressBaseType(Builder builder) {
-        this.additionalLocator = builder.additionalLocator;
-        this.buildingNumber = builder.buildingNumber;
-        this.city = builder.city;
-        this.country = builder.country;
-        this.postalCode = builder.postalCode;
-        this.postBox = builder.postBox;
-        this.state = builder.state;
-        this.streetAddressLine1 = builder.streetAddressLine1;
-        this.streetAddressLine2 = builder.streetAddressLine2;
-        this.streetName = builder.streetName;
-        this.nullFlavor = builder.nullFlavor;
-        this.usage = builder.usage;
-    }
+	/**
+	 * Instantiates a new address base type.
+	 *
+	 * @param builder the builder
+	 */
+	@Generated("SparkTools")
+	private AddressBaseType(Builder builder) {
+		this.additionalLocator = builder.additionalLocator;
+		this.buildingNumber = builder.buildingNumber;
+		this.city = builder.city;
+		this.country = builder.country;
+		this.postalCode = builder.postalCode;
+		this.postBox = builder.postBox;
+		this.state = builder.state;
+		this.streetAddressLine1 = builder.streetAddressLine1;
+		this.streetAddressLine2 = builder.streetAddressLine2;
+		this.streetName = builder.streetName;
+		this.nullFlavor = builder.nullFlavor;
+		this.usage = builder.usage;
+	}
 
-    /**
-     * Creates builder to build {@link AddressBaseType}.
-     *
-     * @return created builder
-     */
-    @Generated("SparkTools")
-    public static Builder builder() {
-        return new Builder();
-    }
+	/**
+	 * Creates builder to build {@link AddressBaseType}.
+	 *
+	 * @return created builder
+	 */
+	@Generated("SparkTools")
+	public static Builder builder() {
+		return new Builder();
+	}
 
-    /**
-     * Checks whether the two objects are equal (based on their content).
-     *
-     * @param obj the AddressBaseType to compare
-     * @return true, if equal; false otherwise.
-     */
-    @Override
-    public boolean equals(Object obj) {
-        boolean retVal = true;
-        if (obj == null)
-            return false;
+	/**
+	 * Checks whether the two objects are equal (based on their content).
+	 *
+	 * @param obj the AddressBaseType to compare
+	 * @return true, if equal; false otherwise.
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		boolean retVal = true;
+		if (obj == null)
+			return false;
 
-        if (!(obj instanceof AddressBaseType))
-            return false;
+		if (!(obj instanceof AddressBaseType))
+			return false;
 
-        if (retVal) {
-            if (this.additionalLocator == null)
-                retVal = (((AddressBaseType) obj).getAdditionalLocator() == null);
-            else
-                retVal = this.additionalLocator
-                        .equals(((AddressBaseType) obj).getAdditionalLocator());
-        }
-        if (retVal) {
-            if (this.buildingNumber == null)
-                retVal = (((AddressBaseType) obj).getBuildingNumber() == null);
-            else
-                retVal = this.buildingNumber.equals(((AddressBaseType) obj).getBuildingNumber());
-        }
-        if (retVal) {
-            if (this.city == null)
-                retVal = (((AddressBaseType) obj).getCity() == null);
-            else
-                retVal = this.city.equals(((AddressBaseType) obj).getCity());
-        }
-        if (retVal) {
-            if (this.country == null)
-                retVal = (((AddressBaseType) obj).getCountry() == null);
-            else
-                retVal = this.country.equals(((AddressBaseType) obj).getCountry());
-        }
-        if (retVal) {
-            if (this.postalCode == null)
-                retVal = (((AddressBaseType) obj).getPostalCode() == null);
-            else
-                retVal = this.postalCode.equals(((AddressBaseType) obj).getPostalCode());
-        }
-        if (retVal) {
-            if (this.postBox == null)
-                retVal = (((AddressBaseType) obj).getPostBox() == null);
-            else
-                retVal = this.postBox.equals(((AddressBaseType) obj).getPostBox());
-        }
-        if (retVal) {
-            if (this.state == null)
-                retVal = (((AddressBaseType) obj).getState() == null);
-            else
-                retVal = this.state.equals(((AddressBaseType) obj).getState());
-        }
-        if (retVal) {
-            if (this.streetAddressLine1 == null)
-                retVal = (((AddressBaseType) obj).getStreetAddressLine1() == null);
-            else
-                retVal = this.streetAddressLine1
-                        .equals(((AddressBaseType) obj).getStreetAddressLine1());
-        }
-        if (retVal) {
-            if (this.streetAddressLine2 == null)
-                retVal = (((AddressBaseType) obj).getStreetAddressLine2() == null);
-            else
-                retVal = this.streetAddressLine2
-                        .equals(((AddressBaseType) obj).getStreetAddressLine2());
-        }
-        if (retVal) {
-            if (this.streetName == null)
-                retVal = (((AddressBaseType) obj).getStreetName() == null);
-            else
-                retVal = this.streetName.equals(((AddressBaseType) obj).getStreetName());
-        }
-        if (retVal) {
-            if (this.usage == null)
-                retVal = (((AddressBaseType) obj).getUsage() == null);
-            else
-                retVal = this.usage.equals(((AddressBaseType) obj).getUsage());
-        }
-        return retVal;
-    }
+		retVal = compareAdditionalLocator((AddressBaseType) obj);
+
+		if (retVal) {
+			retVal = compareBuildingNumber((AddressBaseType) obj);
+		}
+		if (retVal) {
+			retVal = compareCity((AddressBaseType) obj);
+		}
+		if (retVal) {
+			retVal = compareCountry((AddressBaseType) obj);
+		}
+		if (retVal) {
+			retVal = comparePostalCode((AddressBaseType) obj);
+		}
+		if (retVal) {
+			retVal = comparePostBox((AddressBaseType) obj);
+		}
+		if (retVal) {
+			retVal = compareState((AddressBaseType) obj);
+		}
+		if (retVal) {
+			retVal = compareStreetAddressLine1((AddressBaseType) obj);
+		}
+		if (retVal) {
+			retVal = compareStreetAddressLine2((AddressBaseType) obj);
+		}
+		if (retVal) {
+			retVal = compareStreetName((AddressBaseType) obj);
+		}
+		if (retVal) {
+			retVal = compareUsage((AddressBaseType) obj);
+		}
+		return retVal;
+	}
+
+	private boolean compareAdditionalLocator(AddressBaseType obj) {
+		if (this.additionalLocator == null)
+			return (obj.getAdditionalLocator() == null);
+		else
+			return this.additionalLocator.equals(obj.getAdditionalLocator());
+	}
+
+	private boolean compareBuildingNumber(AddressBaseType obj) {
+		if (this.buildingNumber == null)
+			return obj.getBuildingNumber() == null;
+		else
+			return this.buildingNumber.equals(obj.getBuildingNumber());
+	}
+
+	private boolean compareCity(AddressBaseType obj) {
+		if (this.city == null)
+			return (obj.getCity() == null);
+		else
+			return this.city.equals(obj.getCity());
+	}
+
+	private boolean compareCountry(AddressBaseType obj) {
+		if (this.country == null)
+			return obj.getCountry() == null;
+		else
+			return this.country.equals(obj.getCountry());
+	}
+
+	private boolean comparePostalCode(AddressBaseType obj) {
+		if (this.postalCode == null)
+			return obj.getPostalCode() == null;
+		else
+			return this.postalCode.equals(obj.getPostalCode());
+	}
+
+	private boolean comparePostBox(AddressBaseType obj) {
+		if (this.postBox == null)
+			return obj.getPostBox() == null;
+		else
+			return this.postBox.equals(obj.getPostBox());
+	}
+
+	private boolean compareState(AddressBaseType obj) {
+		if (this.state == null)
+			return obj.getState() == null;
+		else
+			return this.state.equals(obj.getState());
+	}
+
+	private boolean compareStreetAddressLine1(AddressBaseType obj) {
+		if (this.streetAddressLine1 == null)
+			return obj.getStreetAddressLine1() == null;
+		else
+			return this.streetAddressLine1.equals(obj.getStreetAddressLine1());
+	}
+
+	private boolean compareStreetAddressLine2(AddressBaseType obj) {
+		if (this.streetAddressLine2 == null)
+			return obj.getStreetAddressLine2() == null;
+		else
+			return this.streetAddressLine2.equals(obj.getStreetAddressLine2());
+	}
+
+	private boolean compareStreetName(AddressBaseType obj) {
+		if (this.streetName == null)
+			return obj.getStreetName() == null;
+		else
+			return this.streetName.equals(obj.getStreetName());
+	}
+
+	private boolean compareUsage(AddressBaseType obj) {
+		if (this.usage == null)
+			return obj.getUsage() == null;
+		else
+			return this.usage.equals(obj.getUsage());
+	}
 
     /**
      * Gets the additional locator. This can be a unit designator, such as apartment number, suite number, or floor.
@@ -428,7 +469,9 @@ public class AddressBaseType implements Serializable {
      */
     @Override
     public int hashCode() {
-        return Util.getChecksum(this);
+		return new HashCodeBuilder(17, 37).append(this.additionalLocator).append(this.buildingNumber).append(this.city)
+				.append(this.country).append(this.postalCode).append(this.postBox).append(this.state)
+				.append(this.streetAddressLine1).append(this.streetAddressLine2).append(this.streetName).toHashCode();
     }
 
     /**
@@ -480,69 +523,69 @@ public class AddressBaseType implements Serializable {
     @Generated("SparkTools")
     public static final class Builder {
 
-        /**
-         * The additional locator.
-         */
-        private String additionalLocator;
+		/**
+		 * The usage.
+		 */
+		private PostalAddressUse usage;
 
-        /**
-         * The building number.
-         */
-        private String buildingNumber;
+		/**
+		 * The street name.
+		 */
+		private String streetName;
 
-        /**
-         * The city.
-         */
-        private String city;
+		/**
+		 * The street address line 2.
+		 */
+		private String streetAddressLine2;
 
-        /**
-         * The country.
-         */
-        private String country;
+		/**
+		 * The street address line 1.
+		 */
+		private String streetAddressLine1;
 
-        /**
-         * The null flavor.
-         */
-        private NullFlavor nullFlavor;
+		/**
+		 * The state.
+		 */
+		private String state;
 
-        /**
-         * The postal code.
-         */
-        private String postalCode;
+		/**
+		 * The post box.
+		 */
+		private String postBox;
 
-        /**
-         * The post box.
-         */
-        private String postBox;
+		/**
+		 * The postal code.
+		 */
+		private String postalCode;
 
-        /**
-         * The state.
-         */
-        private String state;
+		/**
+		 * The null flavor.
+		 */
+		private NullFlavor nullFlavor;
 
-        /**
-         * The street address line 1.
-         */
-        private String streetAddressLine1;
+		/**
+		 * The country.
+		 */
+		private String country;
 
-        /**
-         * The street address line 2.
-         */
-        private String streetAddressLine2;
+		/**
+		 * The city.
+		 */
+		private String city;
 
-        /**
-         * The street name.
-         */
-        private String streetName;
+		/**
+		 * The building number.
+		 */
+		private String buildingNumber;
 
-        /**
-         * The usage.
-         */
-        private PostalAddressUse usage;
+		/**
+		 * The additional locator.
+		 */
+		private String additionalLocator;
 
-        /**
-         * Instantiates a new builder.
-         */
+		/**
+		 * Instantiates a new builder.
+		 */
         private Builder() {
         }
 

@@ -24,7 +24,7 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeTy
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-public class AttributeSerializerImplTest extends AbstractTestHelper {
+class AttributeSerializerImplTest extends AbstractTestHelper {
 
 	private AttributeSerializerImpl testSerializer;
 
@@ -47,7 +47,7 @@ public class AttributeSerializerImplTest extends AbstractTestHelper {
 	 * @throws SerializeException
 	 */
 	@Test
-	public void testToXmlByteArray() throws SerializeException {
+	void testToXmlByteArray() throws SerializeException {
 		final byte[] xmlArray = testSerializer.toXmlByteArray(testXmlObject);
 		assertNotNull(xmlArray);
 	}
@@ -59,7 +59,7 @@ public class AttributeSerializerImplTest extends AbstractTestHelper {
 	 * @throws SerializeException
 	 */
 	@Test
-	public void testToXmlElement() throws SerializeException {
+	void testToXmlElement() throws SerializeException {
 		final Element xmlElement = testSerializer.toXmlElement(testXmlObject);
 		assertNotNull(xmlElement);
 		assertTrue(xmlElement.hasAttribute("Name"));
@@ -77,7 +77,7 @@ public class AttributeSerializerImplTest extends AbstractTestHelper {
 	 * @throws SerializeException
 	 */
 	@Test
-	public void testToXmlString() throws SerializeException {
+	void testToXmlString() throws SerializeException {
 		final String xmlString = testSerializer.toXmlString(testXmlObject);
 		assertNotNull(xmlString);
 		assertTrue(xmlString.startsWith("<?xml version="));

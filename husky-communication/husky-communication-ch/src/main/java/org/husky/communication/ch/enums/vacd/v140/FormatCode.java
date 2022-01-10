@@ -25,17 +25,17 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * <div class="de">eImpfdossier</div> <div class="fr"> </div>
 	 * <div class="it"> </div>
 	 */
-	EIMPFDOSSIER("urn:epd:2015:EPD_Immunization Content", "eImpfdossier"),
+	EIMPFDOSSIER(FormatCode.EIMPFDOSSIER_CODE, "eImpfdossier"),
 	/**
 	 * <div class="de">EPD Dokument</div> <div class="fr"></div>
 	 * <div class="it"></div>
 	 */
-	EPD_DOKUMENT("urn:epd:2015:EPD_Basic_Document", "EPD Dokument"),
+	EPD_DOKUMENT(FormatCode.EPD_DOKUMENT_CODE, "EPD Dokument"),
 	/**
 	 * <div class="de">KOS Dokument</div> <div class="fr">KOS Document</div>
 	 * <div class="it">KOS Document</div>
 	 */
-	KOS_DOKUMENT("urn:ihe:rad:1.2.840.10008.5.1.4.1.1.88.59", "KOS Dokument");
+	KOS_DOKUMENT(FormatCode.KOS_DOKUMENT_CODE, "KOS Dokument");
 
 	/**
 	 * <div class="de">Code für eImpfdossier</div> <div class="fr">Code de

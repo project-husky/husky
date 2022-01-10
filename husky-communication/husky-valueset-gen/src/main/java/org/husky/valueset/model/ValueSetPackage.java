@@ -16,8 +16,8 @@ import java.util.List;
 
 import javax.annotation.processing.Generated;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.husky.common.basetypes.IdentificatorBaseType;
-import org.husky.common.utils.Util;
 import org.husky.valueset.config.ValueSetPackageConfig;
 import org.husky.valueset.enums.ValueSetPackageStatus;
 
@@ -28,7 +28,9 @@ import org.husky.valueset.enums.ValueSetPackageStatus;
  * <div class="de">Die Klasse ValueSetPackage dient zum Sammeln aller
  * Informationen zu einem Paket mit mehreren Wertesätzen.</div>
  */
-public class ValueSetPackage implements Serializable {
+/* contains generated code */
+@SuppressWarnings("java:DuplicatedBlocks")
+public class ValueSetPackage extends ValueSetBase implements Serializable {
 
 	/**
 	 * See getter/setter for more details to the class members.
@@ -40,12 +42,12 @@ public class ValueSetPackage implements Serializable {
 	@Generated("SparkTools")
 	public static final class Builder {
 		private String description;
-		private IdentificatorBaseType identificator;
-		private ArrayList<IdentificatorBaseType> mappingIdentificatorList;
-		private ArrayList<String> mappingNameList;
 		private String sourceUrl;
 		private ValueSetPackageStatus status;
 		private ArrayList<ValueSet> valueSetList;
+		private IdentificatorBaseType identificator;
+		private ArrayList<IdentificatorBaseType> mappingIdentificatorList;
+		private ArrayList<String> mappingNameList;
 		private Version version;
 
 		private Builder() {
@@ -57,21 +59,6 @@ public class ValueSetPackage implements Serializable {
 
 		public Builder withDescription(String description) {
 			this.description = description;
-			return this;
-		}
-
-		public Builder withIdentificator(IdentificatorBaseType identificator) {
-			this.identificator = identificator;
-			return this;
-		}
-
-		public Builder withMappingIdentificatorList(ArrayList<IdentificatorBaseType> mappingIdentificatorList) {
-			this.mappingIdentificatorList = mappingIdentificatorList;
-			return this;
-		}
-
-		public Builder withMappingNameList(ArrayList<String> mappingNameList) {
-			this.mappingNameList = mappingNameList;
 			return this;
 		}
 
@@ -90,10 +77,26 @@ public class ValueSetPackage implements Serializable {
 			return this;
 		}
 
+		public Builder withIdentificator(IdentificatorBaseType identificator) {
+			this.identificator = identificator;
+			return this;
+		}
+
+		public Builder withMappingIdentificatorList(ArrayList<IdentificatorBaseType> mappingIdentificatorList) {
+			this.mappingIdentificatorList = mappingIdentificatorList;
+			return this;
+		}
+
+		public Builder withMappingNameList(ArrayList<String> mappingNameList) {
+			this.mappingNameList = mappingNameList;
+			return this;
+		}
+
 		public Builder withVersion(Version version) {
 			this.version = version;
 			return this;
 		}
+
 	}
 
 	/**
@@ -114,15 +117,6 @@ public class ValueSetPackage implements Serializable {
 	/** The description. */
 	private String description;
 
-	/** The identificator. */
-	private IdentificatorBaseType identificator;
-
-	/** The mapping identificator list. */
-	private List<IdentificatorBaseType> mappingIdentificatorList;
-
-	/** The mapping name list. */
-	private List<String> mappingNameList;
-
 	/** The source url. */
 	private String sourceUrl;
 
@@ -131,9 +125,6 @@ public class ValueSetPackage implements Serializable {
 
 	/** The value set list. */
 	private List<ValueSet> valueSetList;
-
-	/** The version. */
-	private Version version;
 
 	/**
 	 * <div class="en">Instantiates a new ValueSetPackage. Default
@@ -148,13 +139,14 @@ public class ValueSetPackage implements Serializable {
 	@Generated("SparkTools")
 	private ValueSetPackage(Builder builder) {
 		this.description = builder.description;
-		this.identificator = builder.identificator;
-		this.mappingIdentificatorList = builder.mappingIdentificatorList;
-		this.mappingNameList = builder.mappingNameList;
 		this.sourceUrl = builder.sourceUrl;
 		this.status = builder.status;
 		this.valueSetList = builder.valueSetList;
-		this.version = builder.version;
+
+		this.setIdentificator(builder.identificator);
+		this.setMappingIdentificatorList(builder.mappingIdentificatorList);
+		this.setMappingNameList(builder.mappingNameList);
+		this.setVersion(builder.version);
 	}
 
 	/**
@@ -171,38 +163,11 @@ public class ValueSetPackage implements Serializable {
 			this.valueSetList = new ArrayList<>();
 
 		this.description = valueSetPackageConfig.getDescription();
-		this.identificator = valueSetPackageConfig.getIdentificator();
 		this.sourceUrl = valueSetPackageConfig.getSourceUrl();
 		this.status = valueSetPackageConfig.getStatus();
-		this.version = valueSetPackageConfig.getVersion();
-	}
 
-	/**
-	 * <div class="en">Adds a mapping identificator.</div>
-	 *
-	 * <div class="de">Fügt einen Zuordnungsidentifikator hinzu.</div>
-	 *
-	 * @param value the value
-	 */
-	public void addMappingIdentificator(IdentificatorBaseType value) {
-		if (this.mappingIdentificatorList == null)
-			this.mappingIdentificatorList = new ArrayList<>();
-
-		this.mappingIdentificatorList.add(value);
-	}
-
-	/**
-	 * <div class="en">Adds a mapping name.</div>
-	 *
-	 * <div class="de">Fügt einen Zuordnungsnamen hinzu.</div>
-	 *
-	 * @param value the value
-	 */
-	public void addMappingName(String value) {
-		if (this.mappingNameList == null)
-			this.mappingNameList = new ArrayList<>();
-
-		this.mappingNameList.add(value);
+		this.setIdentificator(valueSetPackageConfig.getIdentificator());
+		this.setVersion(valueSetPackageConfig.getVersion());
 	}
 
 	/**
@@ -220,72 +185,12 @@ public class ValueSetPackage implements Serializable {
 	}
 
 	/**
-	 * <div class="en">Clears the mapping identificator list.</div>
-	 *
-	 * <div class="de">Löscht die Liste der Zuordnungsidentifikatoren.</div>
-	 */
-	public void clearMappingIdentificatorList() {
-		this.mappingIdentificatorList = new ArrayList<>();
-	}
-
-	/**
-	 * <div class="en">Clears the mapping name list.</div>
-	 *
-	 * <div class="de">Löscht die Liste der Zuordnungsnamen.</div>
-	 */
-	public void clearMappingNameList() {
-		this.mappingNameList = new ArrayList<>();
-	}
-
-	/**
 	 * <div class="en">Clears the value set list.</div>
 	 *
 	 * <div class="de">Löscht die Wertesatzliste.</div>
 	 */
 	public void clearValueSetList() {
 		this.valueSetList = new ArrayList<>();
-	}
-
-	/**
-	 * <div class="en">Checks whether the list member contains the given
-	 * value.</div>
-	 *
-	 * <div class="de">Überprüft, ob die Liste den angegebenen Wert enthält.</div>
-	 * Contains.
-	 *
-	 * @param value the value
-	 * @return true, if successful
-	 */
-	public boolean containsMappingIdentificator(IdentificatorBaseType value) {
-		if (mappingIdentificatorList != null) {
-			for (IdentificatorBaseType entry : mappingIdentificatorList) {
-				if (entry.equals(value)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * <div class="en">Checks whether the list member contains the given
-	 * value.</div>
-	 *
-	 * <div class="de">Überprüft, ob die Liste den angegebenen Wert enthält.</div>
-	 * Contains.
-	 *
-	 * @param value the value
-	 * @return true, if successful
-	 */
-	public boolean containsMappingName(String value) {
-		if (mappingNameList != null) {
-			for (String entry : mappingNameList) {
-				if (entry.equals(value)) {
-					return true;
-				}
-			}
-		}
-		return false;
 	}
 
 	/**
@@ -328,74 +233,69 @@ public class ValueSetPackage implements Serializable {
 		if (!(obj instanceof ValueSetPackage))
 			return false;
 
+		retVal = compareMappingIdentificatorList((ValueSetPackage) obj);
+
 		if (retVal) {
-			if (this.mappingIdentificatorList == null)
-				this.mappingIdentificatorList = new ArrayList<>();
-			retVal = (this.mappingIdentificatorList.size() == ((ValueSetPackage) obj).getMappingIdentificatorList()
-					.size());
-			if (retVal) {
-				for (var i = 0; i < this.mappingIdentificatorList.size(); i++) {
-					retVal = ((ValueSetPackage) obj).containsMappingIdentificator(this.mappingIdentificatorList.get(i));
-					if (!retVal)
-						break;
-				}
-			}
+			retVal = compareMappingNameList((ValueSetPackage) obj);
 		}
 		if (retVal) {
-			if (this.mappingNameList == null)
-				this.mappingNameList = new ArrayList<>();
-			retVal = (this.mappingNameList.size() == ((ValueSetPackage) obj).getMappingNameList().size());
-			if (retVal) {
-				for (var i = 0; i < this.mappingNameList.size(); i++) {
-					retVal = ((ValueSetPackage) obj).containsMappingName(this.mappingNameList.get(i));
-					if (!retVal)
-						break;
-				}
-			}
+			retVal = compareValueSetList((ValueSetPackage) obj);
 		}
 		if (retVal) {
-			if (this.valueSetList == null)
-				this.valueSetList = new ArrayList<>();
-			retVal = (this.valueSetList.size() == ((ValueSetPackage) obj).getValueSetList().size());
-			if (retVal) {
-				for (var i = 0; i < this.valueSetList.size(); i++) {
-					retVal = ((ValueSetPackage) obj).containsValueSet(this.valueSetList.get(i));
-					if (!retVal)
-						break;
-				}
-			}
+			retVal = compareDescription((ValueSetPackage) obj);
 		}
 		if (retVal) {
-			if (this.description == null)
-				retVal = (((ValueSetPackage) obj).getDescription() == null);
-			else
-				retVal = this.description.equals(((ValueSetPackage) obj).getDescription());
+			retVal = compareIdentificator((ValueSetPackage) obj);
 		}
 		if (retVal) {
-			if (this.identificator == null)
-				retVal = (((ValueSetPackage) obj).getIdentificator() == null);
-			else
-				retVal = this.identificator.equals(((ValueSetPackage) obj).getIdentificator());
+			retVal = compareSourceUrl((ValueSetPackage) obj);
 		}
 		if (retVal) {
-			if (this.sourceUrl == null)
-				retVal = (((ValueSetPackage) obj).getSourceUrl() == null);
-			else
-				retVal = this.sourceUrl.equals(((ValueSetPackage) obj).getSourceUrl());
+			retVal = compareStatus((ValueSetPackage) obj);
 		}
 		if (retVal) {
-			if (this.status == null)
-				retVal = (((ValueSetPackage) obj).getStatus() == null);
-			else
-				retVal = this.status.equals(((ValueSetPackage) obj).getStatus());
-		}
-		if (retVal) {
-			if (this.version == null)
-				retVal = (((ValueSetPackage) obj).getVersion() == null);
-			else
-				retVal = this.version.equals(((ValueSetPackage) obj).getVersion());
+			retVal = compareVersion((ValueSetPackage) obj);
 		}
 		return retVal;
+	}
+
+	private boolean compareValueSetList(ValueSetPackage obj) {
+		if (this.valueSetList == null) {
+			this.valueSetList = new ArrayList<>();
+		}
+
+		var retVal = this.valueSetList.size() == obj.getValueSetList().size();
+		if (retVal) {
+			for (var i = 0; i < this.valueSetList.size(); i++) {
+				retVal = obj.containsValueSet(this.valueSetList.get(i));
+				if (!retVal) {
+					return false;
+				}
+			}
+		}
+
+		return retVal;
+	}
+
+	private boolean compareDescription(ValueSetPackage obj) {
+		if (this.description == null)
+			return obj.getDescription() == null;
+		else
+			return this.description.equals(obj.getDescription());
+	}
+
+	private boolean compareSourceUrl(ValueSetPackage obj) {
+		if (this.sourceUrl == null)
+			return obj.getSourceUrl() == null;
+		else
+			return this.sourceUrl.equals(obj.getSourceUrl());
+	}
+
+	private boolean compareStatus(ValueSetPackage obj) {
+		if (this.status == null)
+			return (obj.getStatus() == null);
+		else
+			return this.status.equals(obj.getStatus());
 	}
 
 	/**
@@ -407,45 +307,6 @@ public class ValueSetPackage implements Serializable {
 	 */
 	public String getDescription() {
 		return description;
-	}
-
-	/**
-	 * <div class="en">Gets the identificator.</div>
-	 *
-	 * <div class="de">Ruft den Identifikator ab.</div>
-	 *
-	 * @return the identificator
-	 */
-	public IdentificatorBaseType getIdentificator() {
-		return identificator;
-	}
-
-	/**
-	 * <div class="en">Gets the mapping identificator list.</div>
-	 *
-	 * <div class="de">Ruft die Liste der Zuordnungskennungen ab.</div>
-	 *
-	 * @return the mapping identificator list
-	 */
-	public List<IdentificatorBaseType> getMappingIdentificatorList() {
-		if (mappingIdentificatorList == null) {
-			mappingIdentificatorList = new ArrayList<>();
-		}
-		return mappingIdentificatorList;
-	}
-
-	/**
-	 * <div class="en">Gets the mapping name list.</div>
-	 *
-	 * <div class="de">Ruft die Liste der Zuordnungsnamen ab.</div>
-	 *
-	 * @return the mapping name list
-	 */
-	public List<String> getMappingNameList() {
-		if (mappingNameList == null) {
-			mappingNameList = new ArrayList<>();
-		}
-		return mappingNameList;
 	}
 
 	/**
@@ -532,17 +393,6 @@ public class ValueSetPackage implements Serializable {
 		return retVal;
 	}
 
-	/**
-	 * <div class="en">Gets the version.</div>
-	 *
-	 * <div class="de">Ruft die Version ab.</div>
-	 *
-	 * @return the version
-	 */
-	public Version getVersion() {
-		return version;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 *
@@ -550,7 +400,9 @@ public class ValueSetPackage implements Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		return Util.getChecksum(this);
+		return new HashCodeBuilder(17, 37).append(this.getMappingIdentificatorList()).append(this.getMappingNameList())
+				.append(this.valueSetList).append(this.description).append(this.getIdentificator())
+				.append(this.sourceUrl).append(this.status).append(this.getVersion()).toHashCode();
 	}
 
 	/**
@@ -562,39 +414,6 @@ public class ValueSetPackage implements Serializable {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	/**
-	 * <div class="en">Sets the identificator.</div>
-	 *
-	 * <div class="de">Legt den Identifikator fest.</div>
-	 *
-	 * @param identificator the new identificator
-	 */
-	public void setIdentificator(IdentificatorBaseType identificator) {
-		this.identificator = identificator;
-	}
-
-	/**
-	 * <div class="en">Sets the mapping identificator list.</div>
-	 *
-	 * <div class="de">Legt die Liste der Zuordnungsidentifikatoren fest.</div>
-	 *
-	 * @param mappingIdentificatorList the new mapping identificator list
-	 */
-	public void setMappingIdentificatorList(List<IdentificatorBaseType> mappingIdentificatorList) {
-		this.mappingIdentificatorList = mappingIdentificatorList;
-	}
-
-	/**
-	 * <div class="en">Sets the mapping name list.</div>
-	 *
-	 * <div class="de">Legt die Liste der Zuordnungsnamen fest.</div>
-	 *
-	 * @param mappingNameList the new mapping name list
-	 */
-	public void setMappingNameList(List<String> mappingNameList) {
-		this.mappingNameList = mappingNameList;
 	}
 
 	/**
@@ -631,14 +450,4 @@ public class ValueSetPackage implements Serializable {
 		this.valueSetList = valueSetList;
 	}
 
-	/**
-	 * <div class="en">Sets the version.</div>
-	 *
-	 * <div class="de">Legt die Version fest.</div>
-	 *
-	 * @param version the new version
-	 */
-	public void setVersion(Version version) {
-		this.version = version;
-	}
 }

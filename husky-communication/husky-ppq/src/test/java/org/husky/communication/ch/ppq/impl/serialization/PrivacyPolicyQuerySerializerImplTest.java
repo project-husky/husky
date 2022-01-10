@@ -28,7 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 
-public class PrivacyPolicyQuerySerializerImplTest extends InitializerTestHelper {
+class PrivacyPolicyQuerySerializerImplTest extends InitializerTestHelper {
 
 	private Logger logger = LoggerFactory.getLogger(PrivacyPolicyQuerySerializerImplTest.class);
 
@@ -58,7 +58,7 @@ public class PrivacyPolicyQuerySerializerImplTest extends InitializerTestHelper 
 	}
 
 	@Test
-	public void testSerializeToXml_InputNull() throws SerializeException {
+	void testSerializeToXml_InputNull() throws SerializeException {
 		assertThrows(SerializeException.class, () -> testSerializer.toXmlElement(null));
 	}
 
@@ -69,7 +69,7 @@ public class PrivacyPolicyQuerySerializerImplTest extends InitializerTestHelper 
 	 * @throws SerializeException
 	 */
 	@Test
-	public void testToXmlByteArray() throws SerializeException {
+	void testToXmlByteArray() throws SerializeException {
 		final byte[] xmlArray = testSerializer.toXmlByteArray(testXmlObject);
 		assertNotNull(xmlArray);
 		final byte[] startPart = new byte["<?xml version=".length()];
@@ -84,7 +84,7 @@ public class PrivacyPolicyQuerySerializerImplTest extends InitializerTestHelper 
 	 * @throws SerializeException
 	 */
 	@Test
-	public void testToXmlElement() throws SerializeException {
+	void testToXmlElement() throws SerializeException {
 		final Element xmlElement = testSerializer.toXmlElement(testXmlObject);
 		assertNotNull(xmlElement);
 		assertTrue(xmlElement.hasAttribute("Consent"));
@@ -98,7 +98,7 @@ public class PrivacyPolicyQuerySerializerImplTest extends InitializerTestHelper 
 	 * @throws SerializeException
 	 */
 	@Test
-	public void testToXmlString() throws SerializeException {
+	void testToXmlString() throws SerializeException {
 		final String xmlString = testSerializer.toXmlString(testXmlObject);
 		logger.debug(xmlString);
 		assertNotNull(xmlString);

@@ -30,328 +30,328 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 * <div class="de">Allergologie</div> <div class="fr">Allergologie</div>
 	 * <div class="it">Allergologia</div>
 	 */
-	ALLERGOLOGIE("10001", "Allergologie"),
+	ALLERGOLOGIE(PracticeSettingCode.ALLERGOLOGIE_CODE, "Allergologie"),
 	/**
 	 * <div class="de">Allgemeinmedizin </div> <div class="fr">Médecine
 	 * générale </div> <div class="it">Medicina generale </div>
 	 */
-	ALLGEMEINMEDIZIN("10002", "Allgemeinmedizin"),
+	ALLGEMEINMEDIZIN(PracticeSettingCode.ALLGEMEINMEDIZIN_CODE, "Allgemeinmedizin"),
 	/**
 	 * <div class="de">Andere nicht näher spezifizierte medzinische
 	 * Fachrichtung</div> <div class="fr">Autres sans spécification</div>
 	 * <div class="it">Altri rami specialistici della medicina non meglio
 	 * precisati</div>
 	 */
-	ANDERE_NICHT_NAHER_SPEZIFIZIERTE_MEDZINISCHE_FACHRICHTUNG("10999",
+	ANDERE_NICHT_NAHER_SPEZIFIZIERTE_MEDZINISCHE_FACHRICHTUNG(PracticeSettingCode.ANDERE_NICHT_NAHER_SPEZIFIZIERTE_MEDZINISCHE_FACHRICHTUNG_CODE,
 			"Andere nicht näher spezifizierte medzinische Fachrichtung"),
 	/**
 	 * <div class = "de"> Angiologie </div> <div class = "fr"> Angiologie </div>
 	 * <div class = "it"> Angiologia </div>
 	 */
-	ANGIOLOGIE("10004", "Angiologie"),
+	ANGIOLOGIE(PracticeSettingCode.ANGIOLOGIE_CODE, "Angiologie"),
 	/**
 	 * <div class="de">Anästhesiologie</div>
 	 * <div class="fr">Anesthésiologie</div>
 	 * <div class="it">Anestesiologia</div>
 	 */
-	ANASTHESIOLOGIE("10003", "Anästhesiologie"),
+	ANASTHESIOLOGIE(PracticeSettingCode.ANASTHESIOLOGIE_CODE, "Anästhesiologie"),
 	/**
 	 * <div class="de">Arbeitsmedizin</div> <div class="fr">Médecine du
 	 * travail</div> <div class="it">Medicina del lavoro</div>
 	 */
-	ARBEITSMEDIZIN("10006", "Arbeitsmedizin"),
+	ARBEITSMEDIZIN(PracticeSettingCode.ARBEITSMEDIZIN_CODE, "Arbeitsmedizin"),
 	/**
 	 * <div class="de">Chiropraktik</div> <div class="fr">Chiropractie</div>
 	 * <div class="it">Chiropratica</div>
 	 */
-	CHIROPRAKTIK("10007", "Chiropraktik"),
+	CHIROPRAKTIK(PracticeSettingCode.CHIROPRAKTIK_CODE, "Chiropraktik"),
 	/**
 	 * <div class="de">Chirurgie</div> <div class="fr">Chirurgie</div>
 	 * <div class="it">Chirurgia</div>
 	 */
-	CHIRURGIE("10008", "Chirurgie"),
+	CHIRURGIE(PracticeSettingCode.CHIRURGIE_CODE, "Chirurgie"),
 	/**
 	 * <div class="de">Dermatologie und Venerologie</div>
 	 * <div class="fr">Dermatologie et vénéréologie</div>
 	 * <div class="it">Dermatologia e venereologia</div>
 	 */
-	DERMATOLOGIE_UND_VENEROLOGIE("10009", "Dermatologie und Venerologie"),
+	DERMATOLOGIE_UND_VENEROLOGIE(PracticeSettingCode.DERMATOLOGIE_UND_VENEROLOGIE_CODE, "Dermatologie und Venerologie"),
 	/**
 	 * <div class="de"> Endokrinologie/Diabetologie </div> <div class="fr">
 	 * Endocrinologie/diabétologie </div> <div class="it">
 	 * Endocrinologia/diabetologia </div>
 	 */
-	ENDOKRINOLOGIEDIABETOLOGIE("10010", "Endokrinologie/Diabetologie"),
+	ENDOKRINOLOGIEDIABETOLOGIE(PracticeSettingCode.ENDOKRINOLOGIEDIABETOLOGIE_CODE, "Endokrinologie/Diabetologie"),
 	/**
 	 * <div class="de">Ergotherapie </div> <div class="fr">Ergothérapie </div>
 	 * <div class="it">Ergoterapia</div>
 	 */
-	ERGOTHERAPIE("10011", "Ergotherapie"),
+	ERGOTHERAPIE(PracticeSettingCode.ERGOTHERAPIE_CODE, "Ergotherapie"),
 	/**
 	 * <div class="de">Ernährungsberatung</div> <div class="fr">Conseil en
 	 * nutrition</div> <div class="it">Dietetica</div>
 	 */
-	ERNAHRUNGSBERATUNG("10012", "Ernährungsberatung"),
+	ERNAHRUNGSBERATUNG(PracticeSettingCode.ERNAHRUNGSBERATUNG_CODE, "Ernährungsberatung"),
 	/**
 	 * <div class="de">Gastroenterologie</div>
 	 * <div class="fr">Gastroentérologie</div>
 	 * <div class="it">Gastroenterologia</div>
 	 */
-	GASTROENTEROLOGIE("10014", "Gastroenterologie"),
+	GASTROENTEROLOGIE(PracticeSettingCode.GASTROENTEROLOGIE_CODE, "Gastroenterologie"),
 	/**
 	 * <div class="de">Geriatrie</div> <div class="fr">Gériatrie</div>
 	 * <div class="it">Geriatria</div>
 	 */
-	GERIATRIE("10013", "Geriatrie"),
+	GERIATRIE(PracticeSettingCode.GERIATRIE_CODE, "Geriatrie"),
 	/**
 	 * <div class="de">Gynäkologie und Geburtshilfe</div>
 	 * <div class="fr">Gynécologie et obstétrique</div>
 	 * <div class="it">Ginecologia e ostetricia</div>
 	 */
-	GYNAKOLOGIE_UND_GEBURTSHILFE("10015", "Gynäkologie und Geburtshilfe"),
+	GYNAKOLOGIE_UND_GEBURTSHILFE(PracticeSettingCode.GYNAKOLOGIE_UND_GEBURTSHILFE_CODE, "Gynäkologie und Geburtshilfe"),
 	/**
 	 * <div class="de">Herz- und Gefässchirurgie</div> <div class="fr">Chirurgie
 	 * cardiovasculaire</div> <div class="it">Chirurgia cardiovascolare</div>
 	 */
-	HERZ_UND_GEFASSCHIRURGIE("10016", "Herz- und Gefässchirurgie"),
+	HERZ_UND_GEFASSCHIRURGIE(PracticeSettingCode.HERZ_UND_GEFASSCHIRURGIE_CODE, "Herz- und Gefässchirurgie"),
 	/**
 	 * <div class="de">Hämatologie</div> <div class="fr">Hématologie</div>
 	 * <div class="it">Ematologia</div>
 	 */
-	HAMATOLOGIE("10058", "Hämatologie"),
+	HAMATOLOGIE(PracticeSettingCode.HAMATOLOGIE_CODE, "Hämatologie"),
 	/**
 	 * <div class="de">Immunologie</div> <div class="fr">Immunologie</div>
 	 * <div class="it">Immunologia</div>
 	 */
-	IMMUNOLOGIE("10059", "Immunologie"),
+	IMMUNOLOGIE(PracticeSettingCode.IMMUNOLOGIE_CODE, "Immunologie"),
 	/**
 	 * <div class="de">Infektiologie</div> <div class="fr">Infectiologie</div>
 	 * <div class="it">Infettivologia</div>
 	 */
-	INFEKTIOLOGIE("10017", "Infektiologie"),
+	INFEKTIOLOGIE(PracticeSettingCode.INFEKTIOLOGIE_CODE, "Infektiologie"),
 	/**
 	 * <div class="de">Innere Medizin</div> <div class="fr">Médecine
 	 * interne</div> <div class="it">Medicina interna</div>
 	 */
-	INNERE_MEDIZIN("10018", "Innere Medizin"),
+	INNERE_MEDIZIN(PracticeSettingCode.INNERE_MEDIZIN_CODE, "Innere Medizin"),
 	/**
 	 * <div class="de">Intensivmedizin</div> <div class="fr">Médecine
 	 * intensive</div> <div class="it">Medicina intensiva</div>
 	 */
-	INTENSIVMEDIZIN("10019", "Intensivmedizin"),
+	INTENSIVMEDIZIN(PracticeSettingCode.INTENSIVMEDIZIN_CODE, "Intensivmedizin"),
 	/**
 	 * <div class="de">Kardiologie</div> <div class="fr">Cardiologie</div>
 	 * <div class="it">Cardiologia</div>
 	 */
-	KARDIOLOGIE("10020", "Kardiologie"),
+	KARDIOLOGIE(PracticeSettingCode.KARDIOLOGIE_CODE, "Kardiologie"),
 	/**
 	 * <div class="de">Komplementärmedizin</div> <div class="fr">Médecine
 	 * alternative et complémentaire</div> <div class="it">Medicina
 	 * complementare</div>
 	 */
-	KOMPLEMENTARMEDIZIN("10021", "Komplementärmedizin"),
+	KOMPLEMENTARMEDIZIN(PracticeSettingCode.KOMPLEMENTARMEDIZIN_CODE, "Komplementärmedizin"),
 	/**
 	 * <div class="de">Labormedizin</div> <div class="fr">Diagnostic de
 	 * laboratoire</div> <div class="it">Medicina di laboratorio</div>
 	 */
-	LABORMEDIZIN("10024", "Labormedizin"),
+	LABORMEDIZIN(PracticeSettingCode.LABORMEDIZIN_CODE, "Labormedizin"),
 	/**
 	 * <div class="de">Logopädie</div> <div class="fr">Orthophonie</div>
 	 * <div class="it">Logopedia</div>
 	 */
-	LOGOPADIE("10025", "Logopädie"),
+	LOGOPADIE(PracticeSettingCode.LOGOPADIE_CODE, "Logopädie"),
 	/**
 	 * <div class="de">Medizinische Genetik</div> <div class="fr">Génétique
 	 * médicale</div> <div class="it">Genetica medica</div>
 	 */
-	MEDIZINISCHE_GENETIK("10026", "Medizinische Genetik"),
+	MEDIZINISCHE_GENETIK(PracticeSettingCode.MEDIZINISCHE_GENETIK_CODE, "Medizinische Genetik"),
 	/**
 	 * <div class="de">Mund-, Kiefer- und Gesichtschirurgie</div>
 	 * <div class="fr">Chirurgie dento-maxillo-faciale</div>
 	 * <div class="it">Chirurgia maxillo-facciale</div>
 	 */
-	MUND_KIEFER_UND_GESICHTSCHIRURGIE("10027", "Mund-, Kiefer- und Gesichtschirurgie"),
+	MUND_KIEFER_UND_GESICHTSCHIRURGIE(PracticeSettingCode.MUND_KIEFER_UND_GESICHTSCHIRURGIE_CODE, "Mund-, Kiefer- und Gesichtschirurgie"),
 	/**
 	 * <div class="de"> Nephrologie</div> <div class="fr"> Néphrologie</div>
 	 * <div class="it"> Nefrologia</div>
 	 */
-	NEPHROLOGIE("10028", "Nephrologie"),
+	NEPHROLOGIE(PracticeSettingCode.NEPHROLOGIE_CODE, "Nephrologie"),
 	/**
 	 * <div class="de">Neurochirurgie</div> <div class="fr">Neurochirurgie</div>
 	 * <div class="it">Neurochirurgia</div>
 	 */
-	NEUROCHIRURGIE("10029", "Neurochirurgie"),
+	NEUROCHIRURGIE(PracticeSettingCode.NEUROCHIRURGIE_CODE, "Neurochirurgie"),
 	/**
 	 * <div class="de">Neurologie</div> <div class="fr">Neurologie</div>
 	 * <div class="it">Neurologia</div>
 	 */
-	NEUROLOGIE("10030", "Neurologie"),
+	NEUROLOGIE(PracticeSettingCode.NEUROLOGIE_CODE, "Neurologie"),
 	/**
 	 * <div class="de">Notfall und Rettungsmedizin</div>
 	 * <div class="fr">Médecine d'urgence</div> <div class="it">Medicina
 	 * d'urgenza e di salvataggio</div>
 	 */
-	NOTFALL_UND_RETTUNGSMEDIZIN("10051", "Notfall und Rettungsmedizin"),
+	NOTFALL_UND_RETTUNGSMEDIZIN(PracticeSettingCode.NOTFALL_UND_RETTUNGSMEDIZIN_CODE, "Notfall und Rettungsmedizin"),
 	/**
 	 * <div class="de">Nuklearmedizin </div> <div class="fr">Médecine
 	 * nucléaire</div> <div class="it">Medicina nucleare</div>
 	 */
-	NUKLEARMEDIZIN("10031", "Nuklearmedizin"),
+	NUKLEARMEDIZIN(PracticeSettingCode.NUKLEARMEDIZIN_CODE, "Nuklearmedizin"),
 	/**
 	 * <div class="de">Ophthalmologie</div> <div class="fr">Ophtalmologie</div>
 	 * <div class="it">Oftalmologia</div>
 	 */
-	OPHTHALMOLOGIE("10032", "Ophthalmologie"),
+	OPHTHALMOLOGIE(PracticeSettingCode.OPHTHALMOLOGIE_CODE, "Ophthalmologie"),
 	/**
 	 * <div class="de">Orthopädie und Traumatologie</div>
 	 * <div class="fr">Chirurgie orthopédique et traumatologie de l'appareil
 	 * locomoteur</div> <div class="it">Chirurgia ortopedica e traumatologia
 	 * dell'apparato locomotore</div>
 	 */
-	ORTHOPADIE_UND_TRAUMATOLOGIE("10033", "Orthopädie und Traumatologie"),
+	ORTHOPADIE_UND_TRAUMATOLOGIE(PracticeSettingCode.ORTHOPADIE_UND_TRAUMATOLOGIE_CODE, "Orthopädie und Traumatologie"),
 	/**
 	 * <div class="de">Osteopathie </div> <div class="fr">Ostéopathie </div>
 	 * <div class="it">Osteopatia </div>
 	 */
-	OSTEOPATHIE("10034", "Osteopathie"),
+	OSTEOPATHIE(PracticeSettingCode.OSTEOPATHIE_CODE, "Osteopathie"),
 	/**
 	 * <div class="de">Oto-Rhino-Laryngologie</div>
 	 * <div class="fr">Oto-Rhino-Laryngologie</div>
 	 * <div class="it">Otorinolaringoiatria</div>
 	 */
-	OTO_RHINO_LARYNGOLOGIE("10035", "Oto-Rhino-Laryngologie"),
+	OTO_RHINO_LARYNGOLOGIE(PracticeSettingCode.OTO_RHINO_LARYNGOLOGIE_CODE, "Oto-Rhino-Laryngologie"),
 	/**
 	 * <div class="de">Palliativmedizin </div> <div class="fr">Médecine
 	 * palliative</div> <div class="it">Medicina palliativa</div>
 	 */
-	PALLIATIVMEDIZIN("10036", "Palliativmedizin"),
+	PALLIATIVMEDIZIN(PracticeSettingCode.PALLIATIVMEDIZIN_CODE, "Palliativmedizin"),
 	/**
 	 * <div class="de">Pathologie </div> <div class="fr">Pathologie</div>
 	 * <div class="it">Patologia </div>
 	 */
-	PATHOLOGIE("10037", "Pathologie"),
+	PATHOLOGIE(PracticeSettingCode.PATHOLOGIE_CODE, "Pathologie"),
 	/**
 	 * <div class="de">Pflege</div> <div class="fr">Soins</div>
 	 * <div class="it">Cure</div>
 	 */
-	PFLEGE("10038", "Pflege"),
+	PFLEGE(PracticeSettingCode.PFLEGE_CODE, "Pflege"),
 	/**
 	 * <div class="de">Pharmakologie</div> <div class="fr">Pharmacologie</div>
 	 * <div class="it">Farmacologia</div>
 	 */
-	PHARMAKOLOGIE("10005", "Pharmakologie"),
+	PHARMAKOLOGIE(PracticeSettingCode.PHARMAKOLOGIE_CODE, "Pharmakologie"),
 	/**
 	 * <div class="de">Physikalische Medizin </div>
 	 * <div class="fr">Kinésithérapie </div> <div class="it">Medicina fisica
 	 * </div>
 	 */
-	PHYSIKALISCHE_MEDIZIN("10039", "Physikalische Medizin"),
+	PHYSIKALISCHE_MEDIZIN(PracticeSettingCode.PHYSIKALISCHE_MEDIZIN_CODE, "Physikalische Medizin"),
 	/**
 	 * <div class="de">Physiotherapie</div> <div class="fr">Physiothérapie</div>
 	 * <div class="it">Fisioterapia</div>
 	 */
-	PHYSIOTHERAPIE("10040", "Physiotherapie"),
+	PHYSIOTHERAPIE(PracticeSettingCode.PHYSIOTHERAPIE_CODE, "Physiotherapie"),
 	/**
 	 * <div class="de">Plastische, Rekonstruktive und Asthetische
 	 * Chirurgie</div> <div class="fr">Chirurgie plastique, reconstructrice et
 	 * esthétique</div> <div class="it">Chirurgia plastica, ricostruttiva ed
 	 * estetica</div>
 	 */
-	PLASTISCHE_REKONSTRUKTIVE_UND_ASTHETISCHE_CHIRURGIE("10041",
+	PLASTISCHE_REKONSTRUKTIVE_UND_ASTHETISCHE_CHIRURGIE(PracticeSettingCode.PLASTISCHE_REKONSTRUKTIVE_UND_ASTHETISCHE_CHIRURGIE_CODE,
 			"Plastische, Rekonstruktive und Asthetische Chirurgie"),
 	/**
 	 * <div class = "de"> Pneumologie </div> <div class = "fr"> Pneumologie
 	 * </div> <div class = "it"> Pneumologia </div>
 	 */
-	PNEUMOLOGIE("10042", "Pneumologie"),
+	PNEUMOLOGIE(PracticeSettingCode.PNEUMOLOGIE_CODE, "Pneumologie"),
 	/**
 	 * <div class="de">Podologie</div> <div class="fr">Podologie</div>
 	 * <div class="it">Podologia</div>
 	 */
-	PODOLOGIE("10043", "Podologie"),
+	PODOLOGIE(PracticeSettingCode.PODOLOGIE_CODE, "Podologie"),
 	/**
 	 * <div class="de">Prävention </div> <div class="fr">Prévention </div>
 	 * <div class="it">Prevenzione </div>
 	 */
-	PRAVENTION("10044", "Prävention"),
+	PRAVENTION(PracticeSettingCode.PRAVENTION_CODE, "Prävention"),
 	/**
 	 * <div class="de">Psychiatrie und Psychotherapie</div>
 	 * <div class="fr">Psychiatrie et psychothérapie</div>
 	 * <div class="it">Psichiatria e psicoterapia</div>
 	 */
-	PSYCHIATRIE_UND_PSYCHOTHERAPIE("10045", "Psychiatrie und Psychotherapie"),
+	PSYCHIATRIE_UND_PSYCHOTHERAPIE(PracticeSettingCode.PSYCHIATRIE_UND_PSYCHOTHERAPIE_CODE, "Psychiatrie und Psychotherapie"),
 	/**
 	 * <div class="de">Psychologie </div> <div class="fr">Psychologie </div>
 	 * <div class="it">Psicologia </div>
 	 */
-	PSYCHOLOGIE("10023", "Psychologie"),
+	PSYCHOLOGIE(PracticeSettingCode.PSYCHOLOGIE_CODE, "Psychologie"),
 	/**
 	 * <div class="de">Psychosomatik</div> <div class="fr">Psychosomatique</div>
 	 * <div class="it">Psicosomatica</div>
 	 */
-	PSYCHOSOMATIK("10046", "Psychosomatik"),
+	PSYCHOSOMATIK(PracticeSettingCode.PSYCHOSOMATIK_CODE, "Psychosomatik"),
 	/**
 	 * <div class="de">Pädiatrie</div> <div class="fr">Pédiatrie</div>
 	 * <div class="it">Pediatria</div>
 	 */
-	PADIATRIE("10022", "Pädiatrie"),
+	PADIATRIE(PracticeSettingCode.PADIATRIE_CODE, "Pädiatrie"),
 	/**
 	 * <div class="de">Radiologie</div> <div class="fr">Radiologie</div>
 	 * <div class="it">Radiologia</div>
 	 */
-	RADIOLOGIE("10047", "Radiologie"),
+	RADIOLOGIE(PracticeSettingCode.RADIOLOGIE_CODE, "Radiologie"),
 	/**
 	 * <div class="de">Radio-Onkologie/Strahlentherapie </div>
 	 * <div class="fr">Radio-oncologie / radiothérapie </div>
 	 * <div class="it">Radio-oncologia / radioterapia</div>
 	 */
-	RADIO_ONKOLOGIESTRAHLENTHERAPIE("10048", "Radio-Onkologie/Strahlentherapie"),
+	RADIO_ONKOLOGIESTRAHLENTHERAPIE(PracticeSettingCode.RADIO_ONKOLOGIESTRAHLENTHERAPIE_CODE, "Radio-Onkologie/Strahlentherapie"),
 	/**
 	 * <div class="de"> Rechtsmedizin</div> <div class="fr">Médecine
 	 * légale</div> <div class="it">Medicina legale</div>
 	 */
-	RECHTSMEDIZIN("10049", "Rechtsmedizin"),
+	RECHTSMEDIZIN(PracticeSettingCode.RECHTSMEDIZIN_CODE, "Rechtsmedizin"),
 	/**
 	 * <div class="de">Rehabilitation</div> <div class="fr">Réhabilitation</div>
 	 * <div class="it">Riabilitazione</div>
 	 */
-	REHABILITATION("10050", "Rehabilitation"),
+	REHABILITATION(PracticeSettingCode.REHABILITATION_CODE, "Rehabilitation"),
 	/**
 	 * <div class="de">Rheumatologie</div> <div class="fr">Rhumatologie</div>
 	 * <div class="it">Reumatologia</div>
 	 */
-	RHEUMATOLOGIE("10052", "Rheumatologie"),
+	RHEUMATOLOGIE(PracticeSettingCode.RHEUMATOLOGIE_CODE, "Rheumatologie"),
 	/**
 	 * <div class="de">Thoraxchirurgie</div> <div class="fr">Chirurgie
 	 * thoracique</div> <div class="it">Chirurgia toracica</div>
 	 */
-	THORAXCHIRURGIE("10053", "Thoraxchirurgie"),
+	THORAXCHIRURGIE(PracticeSettingCode.THORAXCHIRURGIE_CODE, "Thoraxchirurgie"),
 	/**
 	 * <div class="de">Transfusionsmedizin</div> <div class="fr">Médecine
 	 * transfusionnelle</div> <div class="it">Medicina trasfusionale</div>
 	 */
-	TRANSFUSIONSMEDIZIN("10054", "Transfusionsmedizin"),
+	TRANSFUSIONSMEDIZIN(PracticeSettingCode.TRANSFUSIONSMEDIZIN_CODE, "Transfusionsmedizin"),
 	/**
 	 * <div class="de">Tropen- und Reisemedizin</div> <div class="fr">Médecine
 	 * tropicale et des voyages</div> <div class="it">Medicina tropicale e di
 	 * viaggio</div>
 	 */
-	TROPEN_UND_REISEMEDIZIN("10055", "Tropen- und Reisemedizin"),
+	TROPEN_UND_REISEMEDIZIN(PracticeSettingCode.TROPEN_UND_REISEMEDIZIN_CODE, "Tropen- und Reisemedizin"),
 	/**
 	 * <div class="de">Unbekannt</div> <div class="fr">Inconnu</div>
 	 * <div class="it">Ignoto</div>
 	 */
-	UNBEKANNT("10900", "Unbekannt"),
+	UNBEKANNT(PracticeSettingCode.UNBEKANNT_CODE, "Unbekannt"),
 	/**
 	 * <div class="de">Urologie</div> <div class="fr">Urologie</div>
 	 * <div class="it">Urologia</div>
 	 */
-	UROLOGIE("10056", "Urologie"),
+	UROLOGIE(PracticeSettingCode.UROLOGIE_CODE, "Urologie"),
 	/**
 	 * <div class="de">Zahnheilkunde</div> <div class="fr">Odontologie</div>
 	 * <div class="it">Odontoiatria</div>
 	 */
-	ZAHNHEILKUNDE("10057", "Zahnheilkunde");
+	ZAHNHEILKUNDE(PracticeSettingCode.ZAHNHEILKUNDE_CODE, "Zahnheilkunde");
 
 	/**
 	 * <div class="de">Code für Allergologie</div> <div class="fr">Code de

@@ -10,24 +10,61 @@
  */
 package org.husky.communication;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.UUID;
+import java.util.zip.ZipFile;
+
+import javax.activation.DataHandler;
+import javax.mail.util.ByteArrayDataSource;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 import org.apache.camel.CamelContext;
-import org.husky.common.communication.*;
+import org.apache.commons.text.StringEscapeUtils;
+import org.husky.common.communication.AffinityDomain;
+import org.husky.common.communication.AtnaConfig;
 import org.husky.common.communication.AtnaConfig.AtnaConfigMode;
+import org.husky.common.communication.Destination;
+import org.husky.common.communication.DocumentMetadata;
 import org.husky.common.communication.DocumentMetadata.DocumentMetadataExtractionMode;
+import org.husky.common.communication.SubmissionSetMetadata;
 import org.husky.common.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
 import org.husky.common.enums.DocumentDescriptor;
 import org.husky.common.enums.EhcVersions;
 import org.husky.common.model.Code;
-import org.husky.common.utils.OID;
-import org.husky.common.utils.Util;
 import org.husky.common.utils.XdsMetadataUtil;
+import org.husky.common.utils.xml.XmlFactories;
 import org.husky.communication.xd.storedquery.AbstractStoredQuery;
 import org.husky.communication.xd.storedquery.FindFoldersStoredQuery;
 import org.husky.communication.xd.xdm.IndexHtm;
 import org.husky.communication.xd.xdm.ReadmeTxt;
 import org.husky.communication.xd.xdm.XdmContents;
 import org.husky.xua.core.SecurityHeaderElement;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.*;
+import org.openehealth.ipf.commons.core.OidGenerator;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Association;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationLabel;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationType;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Folder;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Identifiable;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp.Precision;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.QueryRegistry;
@@ -40,14 +77,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.activation.DataHandler;
-import javax.mail.util.ByteArrayDataSource;
-import java.io.*;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.UUID;
-import java.util.zip.ZipFile;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
 
 /**
  * The ConvenienceCommunication class provides a convenience API for transactions to different destinations such as
@@ -75,6 +106,10 @@ public class ConvenienceCommunication extends CamelService {
     private static final String SERVER_IN_LOGGER = "#serverInLogger";
     private static final String SERVER_OUT_LOGGER = "#serverOutLogger";
     private static final String AUDIT_CONTEXT = "#auditContext";
+	private static final String HTTPS_LITERAL = "https://";
+	private static final String HTTP_LITERAL = "http://";
+	private static final String LOG_SEND_REQUEST = "Sending request to '{}' endpoint";
+
     /**
      * The SLF4J logger instance.
      */
@@ -172,11 +207,14 @@ public class ConvenienceCommunication extends CamelService {
                                         InputStream inputStream4Metadata) {
         DocumentMetadata retVal = null;
         var doc = new Document();
+		var doc4Metadata = new Document();
+		doc4Metadata.setDocumentEntry(new DocumentEntry());
+
+		InputStream unicodeStream = null;
         try {
-            var doc4Metadata = new Document();
-            doc4Metadata.setDocumentEntry(new DocumentEntry());
+
             if (inputStream4Metadata != null) {
-                InputStream unicodeStream = Util.convertNonAsciiText2Unicode(inputStream4Metadata);
+				unicodeStream = convertNonAsciiText2Unicode(inputStream4Metadata);
                 var dataSource = new ByteArrayDataSource(unicodeStream, desc.getMimeType());
                 doc4Metadata.setDataHandler(new DataHandler(dataSource));
             }
@@ -187,37 +225,98 @@ public class ConvenienceCommunication extends CamelService {
         } catch (final IOException e) {
             log.error("Error adding document from inputstream.", e);
             log.error(e.getMessage(), e);
+		} finally {
+			if (unicodeStream != null) {
+				try {
+					unicodeStream.close();
+				} catch (IOException e) {
+					log.error("Error adding document from inputstream.", e);
+					log.error(e.getMessage(), e);
+				}
+			}
         }
         if (retVal != null)
             retVal.setDocumentDescriptor(desc);
         return retVal;
     }
 
+	/**
+	 * Escapes all non java character in the inputsream that is expected as XML.
+	 *
+	 * @param inputStream the input stream to be escaped
+	 * @return the input stream
+	 */
+	protected InputStream convertNonAsciiText2Unicode(InputStream inputStream) {
+		InputStream retVal = null;
+		DocumentBuilder docBuilder;
+		try (var outputStream = new ByteArrayOutputStream()) {
+			docBuilder = XmlFactories.newSafeDocumentBuilder();
+			var document = docBuilder.parse(inputStream);
+			convertNonAsciiText2Unicode(document.getDocumentElement());
+			Source xmlSource = new DOMSource(document);
+			Result outputTarget = new StreamResult(outputStream);
+
+			var transformer = XmlFactories.newTransformer();
+			transformer.transform(xmlSource, outputTarget);
+			retVal = new ByteArrayInputStream(outputStream.toByteArray());
+		} catch (ParserConfigurationException | SAXException | IOException | TransformerException
+				| TransformerFactoryConfigurationError e) {
+			// Do nothing
+		}
+		return retVal;
+	}
+
+	/**
+	 * Escapes all non java character in the node text.
+	 *
+	 * @param node the node to be escaped
+	 */
+	protected void convertNonAsciiText2Unicode(Node node) {
+		if (node.getFirstChild() != null) {
+			String nodeValue = node.getFirstChild().getNodeValue();
+			if (nodeValue != null) {
+				nodeValue = nodeValue.replace("\n", "").replace("\t", "");
+				node.getFirstChild().setNodeValue(StringEscapeUtils.escapeJava(nodeValue));
+			}
+		}
+		var nodeList = node.getChildNodes();
+		for (var i = 0; i < nodeList.getLength(); i++) {
+			var currentNode = nodeList.item(i);
+			if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
+				// calls this method for all the children which is Element
+				convertNonAsciiText2Unicode(currentNode);
+			}
+		}
+	}
+
     /**
-     * Adds a document to the XDS Submission set.
-     *
-     * @param desc     the document descriptor (which kind of document do you want to transfer? e.g. PDF, CDA,...)
-     * @param filePath the file path
-     * @return the document metadata (which have to be completed)
-     * @throws FileNotFoundException exception
-     */
-    public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath) throws FileNotFoundException {
+	 * Adds a document to the XDS Submission set.
+	 *
+	 * @param desc     the document descriptor (which kind of document do you want
+	 *                 to transfer? e.g. PDF, CDA,...)
+	 * @param filePath the file path
+	 * @return the document metadata (which have to be completed)
+	 * @throws IOException
+	 */
+	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath) throws IOException {
         return addDocument(desc, filePath, null);
     }
 
     /**
-     * Adds a document to the XDS Submission set.
-     *
-     * @param desc             the document descriptor (which kind of document do you want to transfer? e.g. PDF,
-     *                         CDA,...)
-     * @param filePath         the file path
-     * @param filePathMetadata the file path metadata
-     * @return the document metadata (which have to be completed)
-     * @throws FileNotFoundException exception
-     */
+	 * Adds a document to the XDS Submission set.
+	 *
+	 * @param desc             the document descriptor (which kind of document do
+	 *                         you want to transfer? e.g. PDF, CDA,...)
+	 * @param filePath         the file path
+	 * @param filePathMetadata the file path metadata
+	 * @return the document metadata (which have to be completed)
+	 * @throws IOException
+	 */
     public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath, String filePathMetadata)
-            throws FileNotFoundException {
-        return addDocument(desc, new FileInputStream(new File(filePath)));
+			throws IOException {
+		try (InputStream is = new FileInputStream(new File(filePath))) {
+			return addDocument(desc, is);
+		}
     }
 
     /**
@@ -248,8 +347,7 @@ public class ConvenienceCommunication extends CamelService {
         folder.assignEntryUuid();
 
         if (folder.getUniqueId() == null) {
-            final String organizationalId = EhcVersions.getCurrentVersion().getOid();
-            folder.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+			folder.assignUniqueId();
         }
 
         txnData.getFolders().add(folder);
@@ -329,7 +427,7 @@ public class ConvenienceCommunication extends CamelService {
         // Checks if the unique ID is longer than 64 or if no unique ID is set a new unique ID should be generated
         if (docMetadata.getUniqueId() == null
                 || (docMetadata.getUniqueId() != null && docMetadata.getUniqueId().length() > 64)) {
-            docMetadata.setUniqueId(OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
+			docMetadata.setUniqueId(OidGenerator.uniqueOid().toString());
         }
 
     }
@@ -444,7 +542,6 @@ public class ConvenienceCommunication extends CamelService {
         if (docMetadata.getDocumentEntry().getUniqueId() == null) {
             document.getDocumentEntry().assignUniqueId();
             docMetadata.setUniqueId(document.getDocumentEntry().getUniqueId());
-            System.out.println(document.getDocumentEntry().getUniqueId().length());
         }
 
         // Generate the UUID
@@ -505,97 +602,81 @@ public class ConvenienceCommunication extends CamelService {
         final var subSet = txnData.getSubmissionSet();
 
         if (txnData.getDocuments() != null && !txnData.getDocuments().isEmpty()) {
-
-            for (Document document : txnData.getDocuments()) {
-                final var docEntry = document.getDocumentEntry();
-                if (docEntry.getPatientId() == null) {
-                    throw new IllegalStateException(
-                            "Missing destination patient ID in DocumentMetadata of first document.");
-                }
-
-                if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
-
-                    // This is the Husky Root OID
-                    // default value just in case...
-                    String organizationalId = EhcVersions.getCurrentVersion().getOid();
-
-                    if (subSet.getUniqueId() == null) {
-                        subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
-                    }
-
-                    if (subSet.getEntryUuid() == null) {
-                        subSet.setEntryUuid(UUID.randomUUID().toString());
-                    }
-
-                    if (docEntry.getPatientId() != null) {
-                        organizationalId = docEntry.getPatientId().getAssigningAuthority().getUniversalId();
-                    }
-                    // set submission set source id
-                    if (subSet.getSourceId() == null) {
-                        subSet.setSourceId(organizationalId);
-                    }
-                }
-
-                // set submission time
-                if (subSet.getSubmissionTime() == null) {
-                    subSet.setSubmissionTime(new Timestamp(ZonedDateTime.now(), Precision.SECOND));
-                }
-
-                // Use the PatientId of the first Document for the Submission set ID
-                if (subSet.getPatientId() == null) {
-                    subSet.setPatientId(docEntry.getPatientId());
-                }
-
-                // set ContentTypeCode
-                if (subSet.getContentTypeCode() == null && docEntry.getTypeCode() != null) {
-                    subSet.setContentTypeCode(docEntry.getTypeCode());
-
-                }
-            }
+			setSubSetDetailsFromDocument(subSet);
         } else if (txnData.getFolders() != null && !txnData.getFolders().isEmpty()) {
-            for (Folder folder : txnData.getFolders()) {
-                if (folder.getPatientId() == null) {
-                    throw new IllegalStateException(
-                            "Missing destination patient ID in DocumentMetadata of first document.");
-                }
-
-                if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
-
-                    // This is the Husky Root OID
-                    // default value just in case...
-                    String organizationalId = EhcVersions.getCurrentVersion().getOid();
-
-                    if (subSet.getUniqueId() == null) {
-                        subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
-                    }
-
-                    if (folder.getPatientId() != null) {
-                        organizationalId = folder.getPatientId().getAssigningAuthority().getUniversalId();
-                    }
-                    // set submission set source id
-                    if (subSet.getSourceId() == null) {
-                        subSet.setSourceId(organizationalId);
-                    }
-                }
-
-                // set submission time
-                if (subSet.getSubmissionTime() == null) {
-                    subSet.setSubmissionTime(new Timestamp(ZonedDateTime.now(), Precision.SECOND));
-                }
-
-                // Use the PatientId of the first Document for the Submission set ID
-                if (subSet.getPatientId() == null) {
-                    subSet.setPatientId(folder.getPatientId());
-                }
-
-                if (subSet.getContentTypeCode() == null && folder.getCodeList() != null
-                        && folder.getCodeList().get(0) != null) {
-                    subSet.setContentTypeCode(folder.getCodeList().get(0));
-                }
-            }
+			setSubSetDetailsFromFolder(subSet);
         }
         return subSet;
     }
+
+	private void setSubSetDetailsFromDocument(SubmissionSet subSet) {
+		for (Document document : txnData.getDocuments()) {
+			final var docEntry = document.getDocumentEntry();
+			if (docEntry.getPatientId() == null) {
+				throw new IllegalStateException(
+						"Missing destination patient ID in DocumentMetadata of first document.");
+			}
+
+			// set ContentTypeCode
+			if (subSet.getContentTypeCode() == null && docEntry.getTypeCode() != null) {
+				subSet.setContentTypeCode(docEntry.getTypeCode());
+			}
+
+			setGeneralSubSetDetails(subSet, docEntry.getPatientId());
+		}
+	}
+
+	private void setSubSetDetailsFromFolder(SubmissionSet subSet) {
+		for (Folder folder : txnData.getFolders()) {
+			if (folder.getPatientId() == null) {
+				throw new IllegalStateException(
+						"Missing destination patient ID in DocumentMetadata of first document.");
+			}
+
+			if (subSet.getContentTypeCode() == null && folder.getCodeList() != null
+					&& folder.getCodeList().get(0) != null) {
+				subSet.setContentTypeCode(folder.getCodeList().get(0));
+			}
+
+			setGeneralSubSetDetails(subSet, folder.getPatientId());
+		}
+	}
+
+	private void setGeneralSubSetDetails(SubmissionSet subSet, Identifiable patientId) {
+		// set submission time
+		if (subSet.getSubmissionTime() == null) {
+			subSet.setSubmissionTime(new Timestamp(ZonedDateTime.now(), Precision.SECOND));
+		}
+
+		if (subSet.getEntryUuid() == null) {
+			subSet.setEntryUuid(UUID.randomUUID().toString());
+		}
+
+		if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
+
+			if (subSet.getUniqueId() == null) {
+				subSet.assignUniqueId();
+			}
+
+			// set submission set source id
+			if (subSet.getSourceId() == null) {
+				subSet.setSourceId(getSourceId(patientId));
+			}
+		}
+
+		// Use the PatientId of the first Document for the Submission set ID
+		if (subSet.getPatientId() == null) {
+			subSet.setPatientId(patientId);
+		}
+	}
+
+	private String getSourceId(Identifiable patientId) {
+		if (patientId != null) {
+			return patientId.getAssigningAuthority().getUniversalId();
+		} else {
+			return EhcVersions.getCurrentVersion().getOid();
+		}
+	}
 
 
     /**
@@ -721,15 +802,15 @@ public class ConvenienceCommunication extends CamelService {
         final var queryRegistry = new QueryRegistry(query.getIpfQuery());
         queryRegistry.setReturnType(returnType);
 
-        boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains("https://");
+		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains(HTTPS_LITERAL);
 
         final var endpoint = String.format(
                 "xds-iti18://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=%s",
-                this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", "").replace(
-                        "http://", ""),
+				this.affinityDomain.getRepositoryDestination().getUri().toString().replace(HTTPS_LITERAL, "")
+						.replace(HTTP_LITERAL, ""),
                 SERVER_IN_LOGGER, SERVER_IN_LOGGER, SERVER_OUT_LOGGER, SERVER_OUT_LOGGER, secure,
                 this.atnaConfigMode.equals(AtnaConfigMode.SECURE), AUDIT_CONTEXT);
-        log.info("Sending request to '{}' endpoint", endpoint);
+        log.info(LOG_SEND_REQUEST, endpoint);
 
         final var exchange = send(endpoint, queryRegistry, securityHeader, null);
 
@@ -780,14 +861,14 @@ public class ConvenienceCommunication extends CamelService {
             }
         }
 
-        boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains("https://");
+		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains(HTTPS_LITERAL);
         final var endpoint = String.format(
                 "xds-iti43://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=%s",
-                this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", "").replace(
-                        "http://", ""),
+				this.affinityDomain.getRepositoryDestination().getUri().toString().replace(HTTPS_LITERAL, "")
+						.replace(HTTP_LITERAL, ""),
                 SERVER_IN_LOGGER, SERVER_IN_LOGGER, SERVER_OUT_LOGGER, SERVER_OUT_LOGGER, secure,
                 this.atnaConfigMode.equals(AtnaConfigMode.SECURE), AUDIT_CONTEXT);
-        log.info("Sending request to '{}' endpoint", endpoint);
+        log.info(LOG_SEND_REQUEST, endpoint);
 
         final var exchange = send(endpoint, retrieveDocumentSet, security, null);
 
@@ -915,14 +996,14 @@ public class ConvenienceCommunication extends CamelService {
             }
         }
 
-        boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains("https://");
+		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains(HTTPS_LITERAL);
         final var endpoint = String.format(
                 "xds-iti41://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=%s",
-                this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", "")
-                        .replace("http://", ""),
+				this.affinityDomain.getRepositoryDestination().getUri().toString().replace(HTTPS_LITERAL, "")
+						.replace(HTTP_LITERAL, ""),
                 SERVER_IN_LOGGER, SERVER_IN_LOGGER, SERVER_OUT_LOGGER, SERVER_OUT_LOGGER, secure,
                 this.atnaConfigMode.equals(AtnaConfigMode.SECURE), AUDIT_CONTEXT);
-        log.info("Sending request to '{}' endpoint", endpoint);
+        log.info(LOG_SEND_REQUEST, endpoint);
 
         final var exchange = send(endpoint, txnData, security, null);
 

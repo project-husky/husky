@@ -10,13 +10,14 @@
  */
 package org.husky.common.basetypes;
 
-import org.husky.common.enums.NullFlavor;
-import org.husky.common.utils.Util;
-
-import javax.annotation.processing.Generated;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.processing.Generated;
+
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.husky.common.enums.NullFlavor;
 
 /**
  * A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form
@@ -269,44 +270,72 @@ public class OrganizationBaseType implements Serializable {
             return false;
         if (!(obj instanceof OrganizationBaseType))
             return false;
+
+		retVal = compareAddressList((OrganizationBaseType) obj);
+
         if (retVal) {
-            if (this.addressList == null)
-                this.addressList = new ArrayList<>();
-            for (var i = 0; i < this.addressList.size(); i++) {
-                retVal = ((OrganizationBaseType) obj).contains(this.addressList.get(i));
-                if (!retVal)
-                    break;
-            }
+			retVal = compareIdentificatorList((OrganizationBaseType) obj);
         }
         if (retVal) {
-            if (this.identificatorList == null)
-                this.identificatorList = new ArrayList<>();
-            for (var i = 0; i < this.identificatorList.size(); i++) {
-                retVal = ((OrganizationBaseType) obj).contains(this.identificatorList.get(i));
-                if (!retVal)
-                    break;
-            }
+			retVal = compareNameList((OrganizationBaseType) obj);
         }
         if (retVal) {
-            if (this.nameList == null)
-                this.nameList = new ArrayList<>();
-            for (var i = 0; i < this.nameList.size(); i++) {
-                retVal = ((OrganizationBaseType) obj).contains(this.nameList.get(i));
-                if (!retVal)
-                    break;
-            }
-        }
-        if (retVal) {
-            if (this.telecomList == null)
-                this.telecomList = new ArrayList<>();
-            for (var i = 0; i < this.telecomList.size(); i++) {
-                retVal = ((OrganizationBaseType) obj).contains(this.telecomList.get(i));
-                if (!retVal)
-                    break;
-            }
+			retVal = compareTelecomList((OrganizationBaseType) obj);
         }
         return retVal;
     }
+
+	private boolean compareAddressList(OrganizationBaseType obj) {
+		var retVal = true;
+		if (this.addressList == null)
+			this.addressList = new ArrayList<>();
+		for (var i = 0; i < this.addressList.size(); i++) {
+			retVal = obj.contains(this.addressList.get(i));
+			if (!retVal)
+				return false;
+		}
+
+		return retVal;
+	}
+
+	private boolean compareIdentificatorList(OrganizationBaseType obj) {
+		var retVal = true;
+		if (this.identificatorList == null)
+			this.identificatorList = new ArrayList<>();
+		for (var i = 0; i < this.identificatorList.size(); i++) {
+			retVal = obj.contains(this.identificatorList.get(i));
+			if (!retVal)
+				return false;
+		}
+
+		return retVal;
+	}
+
+	private boolean compareNameList(OrganizationBaseType obj) {
+		var retVal = true;
+		if (this.nameList == null)
+			this.nameList = new ArrayList<>();
+		for (var i = 0; i < this.nameList.size(); i++) {
+			retVal = obj.contains(this.nameList.get(i));
+			if (!retVal)
+				return false;
+		}
+
+		return retVal;
+	}
+
+	private boolean compareTelecomList(OrganizationBaseType obj) {
+		var retVal = true;
+		if (this.telecomList == null)
+			this.telecomList = new ArrayList<>();
+		for (var i = 0; i < this.telecomList.size(); i++) {
+			retVal = obj.contains(this.telecomList.get(i));
+			if (!retVal)
+				return false;
+		}
+
+		return retVal;
+	}
 
     /**
      * Gets the address list.
@@ -487,7 +516,33 @@ public class OrganizationBaseType implements Serializable {
      */
     @Override
     public int hashCode() {
-        return Util.getChecksum(this);
+		HashCodeBuilder builder = new HashCodeBuilder(17, 37);
+
+		if (this.addressList != null) {
+			for (var address : this.addressList) {
+				builder.append(address.hashCode());
+			}
+		}
+
+		if (this.identificatorList != null) {
+			for (var id : this.identificatorList) {
+				builder.append(id.hashCode());
+			}
+		}
+
+		if (this.nameList != null) {
+			for (var name : this.nameList) {
+				builder.append(name.hashCode());
+			}
+		}
+
+		if (this.telecomList != null) {
+			for (var telecom : this.telecomList) {
+				builder.append(telecom.hashCode());
+			}
+		}
+
+		return builder.toHashCode();
     }
 
     /**

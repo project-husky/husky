@@ -19,9 +19,6 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +30,7 @@ import org.slf4j.LoggerFactory;
 public class FileUtil {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(FileUtil.class.getName());
-	
+
 	private FileUtil() {
 		throw new IllegalStateException("This is a utility class!");
 	}
@@ -41,11 +38,11 @@ public class FileUtil {
 	/**
 	 * Returns a combined Path of path1 and path2.
 	 *
-	 * @param path1
-	 *            the first part (head) of the combined path.
-	 * @param path2
-	 *            the second part (tail) of the combined path.
+	 * @param path1 the first part (head) of the combined path.
+	 * @param path2 the second part (tail) of the combined path.
 	 * @return the combined Path of path1 and path2.
+	 * 
+	 * @deprecated (at next version)
 	 */
 	@Deprecated(forRemoval = true) // Use File or Path
 	public static String combinePath(String path1, String path2) {
@@ -53,31 +50,6 @@ public class FileUtil {
 			return path1 + "/" + path2;
 		else
 			return path1 + path2;
-	}
-
-	/**
-	 * Returns a random File from within the given path
-	 *
-	 * @param path
-	 *            The path where a random file will be selected
-	 * @return A random File from within the given path
-	 */
-	public static File getRandomFileFromPath(String path) {
-		File retVal = null;
-		var dir = new File(path);
-		File[] files = dir.listFiles();
-
-		if (Util.getRand() == null) {
-			try {
-				Util.setRand(SecureRandom.getInstanceStrong());
-			} catch (NoSuchAlgorithmException e) {
-				LOGGER.error(e.getMessage(), e);
-				Util.setRand(new Random());
-			}
-		}
-
-		retVal = files[Util.getRand().nextInt(files.length)];
-		return retVal;
 	}
 
 	/**

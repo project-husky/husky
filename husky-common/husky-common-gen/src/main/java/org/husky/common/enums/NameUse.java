@@ -11,8 +11,8 @@
 
 package org.husky.common.enums;
 
-import org.husky.common.hl7cdar2.CE;
-import org.husky.common.model.Code;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /*
  *<div class="de">Nutzungszweck von Namen gemäss HL7 Vocabulary EntityNameUse [2.16.840.1.113883.5.45], derzeit nur wichtigste für die Schweiz</div>
@@ -22,7 +22,7 @@ import org.husky.common.model.Code;
  * <div class="de">Enum NameUse.</div> <div class="fr">Enum NameUse.</div>
  * <div class="it">Enum NameUse.</div>
  */
-public enum NameUse {
+public enum NameUse implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">eCH-0011 V8.1 nameData: Other official person's family
@@ -125,36 +125,13 @@ public enum NameUse {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
-	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
-	 *
-	 * @return <div class="en">The MDHT Code</div>
-	 */
-	public CE getCE() {
-		final CE ce = new CE();
-		ce.setCodeSystem(CODE_SYSTEM_OID);
-		ce.setCode(code);
-		ce.setDisplayName(displayName);
-		return ce;
-	}
-
-	/**
-	 * <div class="en">Gets the husky Code Object</div>
-	 * <div class="de">Liefert das husky Code Objekt</div>
-	 *
-	 * @return <div class="en">the code</div>
-	 */
-	public Code getCode() {
-		return new Code(code, CODE_SYSTEM_OID, displayName);
-	}
-
-	/**
 	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
 	 * code system name.</div>
 	 *
 	 * @return <div class="en">the code system name</div>
 	 */
-	public String getCodeSystemName() {
+	@Override
+	public @NonNull String getCodeSystemName() {
 		return CODE_SYSTEM_NAME;
 	}
 
@@ -164,7 +141,8 @@ public enum NameUse {
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */
-	public String getCodeSystemOid() {
+	@Override
+	public @NonNull String getCodeSystemId() {
 		return CODE_SYSTEM_OID;
 	}
 
@@ -184,8 +162,24 @@ public enum NameUse {
 	 *
 	 * @return <div class="en">the display name</div>
 	 */
+	@Override
 	public String getDisplayName() {
 		return displayName;
+	}
+
+	@Override
+	public @NonNull String getDisplayName(@Nullable LanguageCode languageCode) {
+		return getDisplayName();
+	}
+
+	@Override
+	public @NonNull String getValueSetId() {
+		return CODE_SYSTEM_OID;
+	}
+
+	@Override
+	public @NonNull String getValueSetName() {
+		return CODE_SYSTEM_NAME;
 	}
 
 }

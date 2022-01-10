@@ -23,7 +23,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Element;
 
-public class XUserAssertionRequestDeserializerImplTest {
+class XUserAssertionRequestDeserializerImplTest {
 
 	private XUserAssertionRequestDeserializerImpl testDeserializer;
 	private byte[] testXmlByteArray;
@@ -47,7 +47,7 @@ public class XUserAssertionRequestDeserializerImplTest {
 	 * @throws DeserializeException
 	 */
 	@Test
-	public void testFromXmlByteArray() throws DeserializeException {
+	void testFromXmlByteArray() throws DeserializeException {
 		final XUserAssertionRequest ref = testDeserializer.fromXmlByteArray(testXmlByteArray);
 		assertNotNull(ref);
 	}
@@ -59,7 +59,7 @@ public class XUserAssertionRequestDeserializerImplTest {
 	 * @throws DeserializeException
 	 */
 	@Test
-	public void testFromXmlElement() throws DeserializeException {
+	void testFromXmlElement() throws DeserializeException {
 		final XUserAssertionRequest ref = testDeserializer.fromXmlElement(testXmlElement);
 		assertNotNull(ref);
 	}
@@ -71,7 +71,7 @@ public class XUserAssertionRequestDeserializerImplTest {
 	 * @throws DeserializeException
 	 */
 	@Test
-	public void testFromXmlString() throws DeserializeException {
+	void testFromXmlString() throws DeserializeException {
 		final XUserAssertionRequest ref = testDeserializer.fromXmlString(testXmlString);
 		assertNotNull(ref);
 	}

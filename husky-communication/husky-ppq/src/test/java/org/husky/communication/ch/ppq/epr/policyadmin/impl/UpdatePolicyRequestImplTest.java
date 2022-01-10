@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.husky.communication.ch.ppq.epr.policyadmin.api.UpdatePolicyRequest;
-import org.husky.communication.ch.ppq.epr.policyadmin.impl.UpdatePolicyRequestBuilder;
 import org.husky.communication.ch.ppq.utilities.impl.InitializerTestHelper;
 import org.husky.xua.saml2.impl.AssertionBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +24,7 @@ import org.opensaml.core.xml.io.Unmarshaller;
 import org.opensaml.core.xml.io.UnmarshallerFactory;
 import org.w3c.dom.Element;
 
-public class UpdatePolicyRequestImplTest extends InitializerTestHelper {
+class UpdatePolicyRequestImplTest extends InitializerTestHelper {
 
 	private AssertionType testAssertion;
 
@@ -43,7 +42,7 @@ public class UpdatePolicyRequestImplTest extends InitializerTestHelper {
 	}
 
 	@Test
-	public void testAssertion() {
+	void testAssertion() {
 		final UpdatePolicyRequest ref = new UpdatePolicyRequestBuilder().assertion(testAssertion)
 				.buildObject();
 		assertNotNull(ref);

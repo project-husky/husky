@@ -11,9 +11,7 @@
 package org.husky.common.basetypes;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.husky.common.basetypes.CodeBaseType;
 import org.husky.common.enums.LanguageCode;
 import org.husky.common.utils.LangText;
 import org.junit.jupiter.api.Test;
@@ -21,13 +19,13 @@ import org.junit.jupiter.api.Test;
 /**
  * The test class for CodeBaseType.
  */
-public class CodeBaseTypeTest {
+class CodeBaseTypeTest {
 
 	/**
 	 * Do all tests.
 	 */
 	@Test
-	public void doAllTests() {
+	void doAllTests() {
 
 		String code = "784.0";
 		String codeSystem = "2.999";
@@ -46,7 +44,7 @@ public class CodeBaseTypeTest {
 				.withOriginalText(originalText).build();
 
 		assertEquals(codeBaseType1.hashCode(), codeBaseTypeA.hashCode());
-		assertTrue(codeBaseType1.equals(codeBaseTypeA));
+		assertEquals(codeBaseType1, codeBaseTypeA);
 
 		assertEquals(code, codeBaseType1.getCode());
 		assertEquals(codeSystem, codeBaseType1.getCodeSystem());

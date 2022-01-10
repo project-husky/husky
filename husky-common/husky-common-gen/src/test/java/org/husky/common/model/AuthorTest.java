@@ -14,7 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.husky.common.basetypes.AddressBaseType;
@@ -25,13 +27,6 @@ import org.husky.common.enums.PostalAddressUse;
 import org.husky.common.enums.TelecomAddressUse;
 import org.husky.common.hl7cdar2.POCDMT000040Author;
 import org.husky.common.hl7cdar2.TS;
-import org.husky.common.model.Address;
-import org.husky.common.model.Author;
-import org.husky.common.model.Code;
-import org.husky.common.model.Identificator;
-import org.husky.common.model.Name;
-import org.husky.common.model.Organization;
-import org.husky.common.model.Telecom;
 import org.husky.common.testhelpers.AbstractTestHelper;
 import org.husky.common.utils.DateUtil;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,7 +37,7 @@ import org.junit.jupiter.api.Test;
  * Test of class Author
  */
 
-public class AuthorTest {
+class AuthorTest {
 
 	public static final int NUMBER_OF_RANDOM_STRING_LETTERS = 129;
 
@@ -224,7 +219,7 @@ public class AuthorTest {
 	 * .
 	 */
 	@Test
-	public void testAddGetAddress() {
+    void testAddGetAddress() {
 		final Author auth = new Author(testName1);
 		auth.addAddress(testAddress);
 		final Address ref = auth.getAddress();
@@ -250,7 +245,7 @@ public class AuthorTest {
 	 * .
 	 */
 	@Test
-	public void testAddId() {
+	void testAddId() {
 		final Author auth = new Author(testName1);
 		auth.addId(testIdentificator1);
 		final List<Identificator> ids1 = auth.getIds();
@@ -264,7 +259,7 @@ public class AuthorTest {
 	 * .
 	 */
 	@Test
-	public void testAddName() {
+	void testAddName() {
 		final Author auth = new Author(testName1);
 		final Name ref = auth.getName();
 		assertEquals(testName1.getFamily(), ref.getFamily());
@@ -282,7 +277,7 @@ public class AuthorTest {
 	}
 
 	@Test
-	public void testAuthor() {
+	void testAuthor() {
 		final Author a = new Author();
 		a.addAddress(testAddress);
 		a.addAddress(testAddress);
@@ -292,7 +287,10 @@ public class AuthorTest {
 		a.addName(testName2);
 		a.setGln(testGln1);
 		a.setGln(testGln2);
-		a.setTime(testDate1);
+
+		Calendar cal = new GregorianCalendar();
+		cal.setTime(testDate1);
+		a.setTime(cal);
 
 		a.setRoleFunction(code1);
 		assertTrue(AbstractTestHelper.isEqual(code1, a.getRoleFunction()));
@@ -307,8 +305,7 @@ public class AuthorTest {
 	 * .
 	 */
 	@Test
-	@Disabled
-	public void testAuthorAuthor() {
+	void testAuthorAuthor() {
 		final Author auth = new Author(testAuthorMdht);
 		final POCDMT000040Author ref = auth.getAuthorMdht();
 		assertNotNull(testAuthorMdht);
@@ -321,7 +318,7 @@ public class AuthorTest {
 	 * .
 	 */
 	@Test
-	public void testAuthorName() {
+	void testAuthorName() {
 		final Author auth = new Author(testName1);
 		final Name ref = auth.getName();
 		assertEquals(testFamilyName, ref.getFamily());
@@ -334,7 +331,7 @@ public class AuthorTest {
 	 * .
 	 */
 	@Test
-	public void testAuthorNameString() {
+	void testAuthorNameString() {
 		final Author auth = new Author(testName1, testGln1);
 
 		final Name ref = auth.getName();
@@ -349,7 +346,7 @@ public class AuthorTest {
 	 * {@link org.husky.common.model.Author#getCompleteName()}.
 	 */
 	@Test
-	public void testGetCompleteName() {
+	void testGetCompleteName() {
 		final Author auth = new Author(testName1);
 		final String ref = auth.getCompleteName();
 		assertNotNull(ref);
@@ -360,7 +357,7 @@ public class AuthorTest {
 	 * {@link org.husky.common.model.Author#getGlnAsIdentificator()}.
 	 */
 	@Test
-	public void testGetGlnAsIdentificator() {
+	void testGetGlnAsIdentificator() {
 		final Author auth = new Author(testName1, testGln1);
 		assertEquals(testGln1, auth.getGln());
 
@@ -375,7 +372,7 @@ public class AuthorTest {
 	 */
 	@Test
 	// @Ignore("setGln does not replace the gln set by constructor")
-	public void testSetGetGln() {
+	void testSetGetGln() {
 		final Author auth = new Author(testName1, testGln1);
 		assertEquals(testGln1, auth.getGln());
 
@@ -392,7 +389,7 @@ public class AuthorTest {
 	 * {@link org.husky.common.model.Author#getOrganization()}.
 	 */
 	@Test
-	public void testSetGetOrganization() {
+	void testSetGetOrganization() {
 		final Author auth = new Author(testName1, testGln1);
 		auth.setOrganization(testOrgcanization1);
 
@@ -407,7 +404,7 @@ public class AuthorTest {
 	 * {@link org.husky.common.model.Author#getTelecoms()} .
 	 */
 	@Test
-	public void testSetGetTelecoms() {
+	void testSetGetTelecoms() {
 		final Author auth = new Author(testName1, testGln1);
 		auth.setTelecoms(List.of(testTelecoms));
 

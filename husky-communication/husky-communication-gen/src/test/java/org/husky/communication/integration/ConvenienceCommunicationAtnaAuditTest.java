@@ -34,8 +34,6 @@ import org.openehealth.ipf.commons.ihe.xds.core.responses.QueryResponse;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.RetrievedDocument;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.RetrievedDocumentSet;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.Status;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
@@ -53,9 +51,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
 @EnableAutoConfiguration
 @ActiveProfiles("atna")
-public class ConvenienceCommunicationAtnaAuditTest extends XdsTestUtils {
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(ConvenienceCommunicationAtnaAuditTest.class.getName());
+class ConvenienceCommunicationAtnaAuditTest extends XdsTestUtils {
 
 	@Autowired
 	private ConvenienceCommunication convenienceCommunication;
@@ -87,7 +83,7 @@ public class ConvenienceCommunicationAtnaAuditTest extends XdsTestUtils {
 	 * @throws Exception
 	 */
 	@Test
-	public void queryGetDocumentsMetadataOfCdaWithAuditMessage() throws Exception {
+	void queryGetDocumentsMetadataOfCdaWithAuditMessage() throws Exception {
 
 		// sets the endpoint of XDS service for querying metadata
 		final AffinityDomain affinityDomain = new AffinityDomain();
@@ -144,7 +140,7 @@ public class ConvenienceCommunicationAtnaAuditTest extends XdsTestUtils {
 	 * @throws Exception
 	 */
 	@Test
-	public void retrieveDocumentCdaTest() throws Exception {
+	void retrieveDocumentCdaTest() throws Exception {
 
 		// sets the endpoint of XDS service for retrieving documents
 		final AffinityDomain affinityDomain = new AffinityDomain();
@@ -202,7 +198,7 @@ public class ConvenienceCommunicationAtnaAuditTest extends XdsTestUtils {
 	 * @throws Exception
 	 */
 	@Test
-	public void submitPdfDocTest() throws Exception {
+	void submitPdfDocTest() throws Exception {
 		// sets the endpoint of XDS service for submitting documents
 		var affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();

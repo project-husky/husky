@@ -10,6 +10,7 @@
  */
 package org.husky.xua.saml2.impl;
 
+import org.herasaf.xacml.core.combiningAlgorithm.rule.AbstractRuleCombiningAlgorithm;
 import org.herasaf.xacml.core.combiningAlgorithm.rule.impl.RuleDenyOverridesAlgorithm;
 import org.herasaf.xacml.core.combiningAlgorithm.rule.impl.RuleFirstApplicableAlgorithm;
 import org.herasaf.xacml.core.combiningAlgorithm.rule.impl.RuleOrderedDenyOverridesAlgorithm;
@@ -50,20 +51,7 @@ public class PolicyBuilderImpl
 		}
 
 		if (aInternalObject.getRuleCombiningAlgoId() != null) {
-			if (aInternalObject.getRuleCombiningAlgoId().contains("rule-combining-algorithm:deny-overrides")) {
-				policy.setCombiningAlg(new RuleDenyOverridesAlgorithm());
-			} else if (aInternalObject.getRuleCombiningAlgoId()
-					.contains("rule-combining-algorithm:only-one-applicable")) {
-				policy.setCombiningAlg(new RuleFirstApplicableAlgorithm());
-			} else if (aInternalObject.getRuleCombiningAlgoId().contains("rule-combining-algorithm:permit-overrides")) {
-				policy.setCombiningAlg(new RulePermitOverridesAlgorithm());
-			} else if (aInternalObject.getRuleCombiningAlgoId()
-					.contains("urn:oasis:names:tc:xacml:1.1:rule-combining-algorithm:ordered-permit-overrides")) {
-				policy.setCombiningAlg(new RuleOrderedPermitOverridesAlgorithm());
-			} else if (aInternalObject.getRuleCombiningAlgoId()
-					.contains("urn:oasis:names:tc:xacml:1.1:rule-combining-algorithm:ordered-deny-overrides")) {
-				policy.setCombiningAlg(new RuleOrderedDenyOverridesAlgorithm());
-			}
+			policy.setCombiningAlg(getCombiningAlg(aInternalObject.getRuleCombiningAlgoId()));
 		}
 
 		if (aInternalObject.getObligations() != null) {
@@ -96,6 +84,24 @@ public class PolicyBuilderImpl
 		}
 
 		return policy;
+	}
+
+	private AbstractRuleCombiningAlgorithm getCombiningAlg(String algoId) {
+		if (algoId.contains("rule-combining-algorithm:deny-overrides")) {
+			return new RuleDenyOverridesAlgorithm();
+		} else if (algoId.contains("rule-combining-algorithm:only-one-applicable")) {
+			return new RuleFirstApplicableAlgorithm();
+		} else if (algoId.contains("rule-combining-algorithm:permit-overrides")) {
+			return new RulePermitOverridesAlgorithm();
+		} else if (algoId
+				.contains("urn:oasis:names:tc:xacml:1.1:rule-combining-algorithm:ordered-permit-overrides")) {
+			return new RuleOrderedPermitOverridesAlgorithm();
+		} else if (algoId
+				.contains("urn:oasis:names:tc:xacml:1.1:rule-combining-algorithm:ordered-deny-overrides")) {
+			return new RuleOrderedDenyOverridesAlgorithm();
+		}
+
+		return null;
 	}
 
 	@Override
@@ -144,8 +150,8 @@ public class PolicyBuilderImpl
 
 		if (aInternalObject.getAdditionalInformation() != null) {
 			for (Object obj : aInternalObject.getAdditionalInformation()) {
-				if (obj instanceof RuleType) {
-					policy.getRules().add(new RuleBuilderImpl().create((RuleType) obj));
+				if (obj instanceof RuleType rule) {
+					policy.getRules().add(new RuleBuilderImpl().create(rule));
 				}
 			}
 

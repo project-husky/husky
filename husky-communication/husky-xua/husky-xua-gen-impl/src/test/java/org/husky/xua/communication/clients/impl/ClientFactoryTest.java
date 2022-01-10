@@ -42,7 +42,7 @@ import org.junit.jupiter.api.Test;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class ClientFactoryTest {
+class ClientFactoryTest {
 
 	private IdpClientViaHttpProxyConfigImpl testClientConfigurationHttpProxy;
 	private IdpClientCertificateAuthConfigImpl testClientConfigurationAuthConfig;
@@ -75,7 +75,7 @@ public class ClientFactoryTest {
 	 * {@link org.husky.xua.communication.clients.impl.ClientFactory#getIdpClient(org.husky.xua.communication.config.IdpClientConfig)}.
 	 */
 	@Test
-	public void testGetIdpClientBasicAuth() {
+	void testGetIdpClientBasicAuth() {
 		final IdpClient client = ClientFactory.getIdpClient(testClientBasicAuthConfig);
 		assertNotNull(client);
 		assertTrue(client instanceof IdpSoapBindingClientByBasicAuth);
@@ -86,7 +86,7 @@ public class ClientFactoryTest {
 	 * {@link org.husky.xua.communication.clients.impl.ClientFactory#getIdpClient(org.husky.xua.communication.config.IdpClientConfig)}.
 	 */
 	@Test
-	public void testGetIdpClientCertificateAuth() {
+	void testGetIdpClientCertificateAuth() {
 		final IdpClient client = ClientFactory.getIdpClient(testClientConfigurationAuthConfig);
 		assertNotNull(client);
 		assertTrue(client instanceof IdpClientByCert);
@@ -97,7 +97,7 @@ public class ClientFactoryTest {
 	 * {@link org.husky.xua.communication.clients.impl.ClientFactory#getIdpClient(org.husky.xua.communication.config.IdpClientConfig)}.
 	 */
 	@Test
-	public void testGetIdpClientHttpProxy() {
+	void testGetIdpClientHttpProxy() {
 		final IdpClient client = ClientFactory.getIdpClient(testClientConfigurationHttpProxy);
 		assertNotNull(client);
 		assertTrue(client instanceof IdpClientByProxy);
@@ -108,7 +108,7 @@ public class ClientFactoryTest {
 	 * {@link org.husky.xua.communication.clients.impl.ClientFactory#getXuaClient(org.husky.xua.communication.config.XuaClientConfig)}.
 	 */
 	@Test
-	public void testGetXuaClient() {
+	void testGetXuaClient() {
 		final XuaClient client = ClientFactory.getXuaClient(testClientConfigurationXua);
 		assertNotNull(client);
 		assertTrue(client instanceof SimpleXuaClient);
@@ -119,7 +119,7 @@ public class ClientFactoryTest {
 	 * {@link org.husky.xua.communication.clients.impl.ClientFactory#getIdpClient(org.husky.xua.communication.config.IdpClientConfig)}.
 	 */
 	@Test
-	public void testIdpClientByBrowserAndProtocolHandlerConfig() {
+	void testIdpClientByBrowserAndProtocolHandlerConfig() {
 		final IdpClient client = ClientFactory
 				.getIdpClient(testIdpClientByBrowserAndProtocolHandlerConfig);
 		assertNotNull(client);

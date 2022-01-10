@@ -1,17 +1,30 @@
 package org.husky.common.utils.time;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.common.hl7cdar2.TS;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 
-import java.time.*;
+import static java.util.Calendar.DAY_OF_MONTH;
+import static java.util.Calendar.HOUR_OF_DAY;
+import static java.util.Calendar.MILLISECOND;
+import static java.util.Calendar.MINUTE;
+import static java.util.Calendar.MONTH;
+import static java.util.Calendar.SECOND;
+
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
 import java.util.GregorianCalendar;
 
-import static java.util.Calendar.*;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.husky.common.hl7cdar2.TS;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Helper utilities related to HL7 DateTime (DTM) resources.
@@ -20,6 +33,9 @@ import static java.util.Calendar.*;
  * @author Quentin Ligier
  */
 public final class DateTimes {
+
+	/** The SLF4J logger instance. */
+	private static final Logger LOGGER = LoggerFactory.getLogger(DateTimes.class);
 
     /**
      * The HL7 V2.5 Date Time (DTM) format.
@@ -272,6 +288,21 @@ public final class DateTimes {
         return ts;
     }
 
+	/**
+	 * Converts an {@link Instant} to a {@link TS} (TS.CH.TZ, Time Stamp) with a
+	 * precision to the day with passed time zone.
+	 *
+	 * @param temporal The temporal object to convert.
+	 * @param zone     time zone
+	 * @return the resulting timestamp.
+	 */
+	@NonNull
+	public static TS toDateTs(@NonNull final TemporalAccessor temporal, ZoneId zone) {
+		final TS ts = new TS();
+		ts.setValue(DateTimeFormatter.ofPattern("yyyyMMdd").withZone(zone).format(temporal));
+		return ts;
+	}
+
     /**
      * Converts a {@link TS} (TS.CH.TZ, Time Stamp) to a local date. Only two formats are allowed in the TS.CH.TZ.
      *
@@ -286,10 +317,12 @@ public final class DateTimes {
         try {
             return LocalDate.parse(ts.getValue(), TS_DATETIME_FORMATTER);
         } catch (final DateTimeParseException ignored) {
+			LOGGER.debug("Date {} could not be parsed", ts);
         }
         try {
             return LocalDate.parse(ts.getValue(), TS_DATE_FORMATTER);
         } catch (final DateTimeParseException ignored) {
+			LOGGER.debug("Date {} could not be parsed", ts);
         }
         return null;
     }

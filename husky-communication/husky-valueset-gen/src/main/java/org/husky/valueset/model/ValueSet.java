@@ -18,14 +18,15 @@ import java.util.List;
 
 import javax.annotation.processing.Generated;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.husky.common.basetypes.CodeBaseType;
 import org.husky.common.basetypes.IdentificatorBaseType;
 import org.husky.common.enums.LanguageCode;
 import org.husky.common.utils.LangText;
-import org.husky.common.utils.Util;
 import org.husky.valueset.enums.ValueSetStatus;
 
 /**
+ * 
  * <div class="en">The Class ValueSet is intended to collect all metadata of a
  * value set (such as id, name, version, date ...) and all Entries (codes) of
  * the value set.</div>
@@ -34,7 +35,7 @@ import org.husky.valueset.enums.ValueSetStatus;
  * Wertesatzes (wie ID, Name, Version, Datum ...) und aller Einträge (Codes) des
  * Wertesatzes.</div>
  */
-public class ValueSet implements Serializable {
+public class ValueSet extends ValueSetBase implements Serializable {
 
 	/**
 	 * See getter/setter for more details to the class members.
@@ -43,17 +44,18 @@ public class ValueSet implements Serializable {
 	/**
 	 * Builder to build {@link ValueSet}.
 	 */
+	@SuppressWarnings("common-java:DuplicatedBlocks")
 	@Generated("SparkTools")
 	public static final class Builder {
 		private ArrayList<LangText> descriptionList;
 		private String displayName;
 		private Date effectiveDate;
-		private IdentificatorBaseType identificator;
-		private ArrayList<IdentificatorBaseType> mappingIdentificatorList;
-		private ArrayList<String> mappingNameList;
 		private String name;
 		private ValueSetStatus status;
 		private ArrayList<ValueSetEntry> valueSetEntryList;
+		private IdentificatorBaseType identificator;
+		private ArrayList<IdentificatorBaseType> mappingIdentificatorList;
+		private ArrayList<String> mappingNameList;
 		private Version version;
 
 		private Builder() {
@@ -83,19 +85,18 @@ public class ValueSet implements Serializable {
 			return this;
 		}
 
-		public Builder withMappingIdentificatorList(
-				ArrayList<IdentificatorBaseType> mappingIdentificatorList) {
+		public Builder withMappingIdentificatorList(ArrayList<IdentificatorBaseType> mappingIdentificatorList) {
 			this.mappingIdentificatorList = mappingIdentificatorList;
-			return this;
-		}
-
-		public Builder withMappingNameList(ArrayList<String> mappingNameList) {
-			this.mappingNameList = mappingNameList;
 			return this;
 		}
 
 		public Builder withName(String name) {
 			this.name = name;
+			return this;
+		}
+
+		public Builder withMappingNameList(ArrayList<String> mappingNameList) {
+			this.mappingNameList = mappingNameList;
 			return this;
 		}
 
@@ -113,13 +114,13 @@ public class ValueSet implements Serializable {
 			this.version = version;
 			return this;
 		}
+
 	}
 
 	/**
-	 * <div class="en">The Class
-	 * ValueSetEntryPreferredEnglishDesignationComparator is intended to sort
-	 * the value set entries in the same order as the Eclipse source code sorter
-	 * will do. This is just to optimize the generated Java code.
+	 * <div class="en">The Class ValueSetEntryPreferredEnglishDesignationComparator
+	 * is intended to sort the value set entries in the same order as the Eclipse
+	 * source code sorter will do. This is just to optimize the generated Java code.
 	 */
 	private class ValueSetEntryEnumNameComparator implements Comparator<ValueSetEntry> {
 
@@ -165,18 +166,16 @@ public class ValueSet implements Serializable {
 	 * <div class="en">Builds a Java compatible enum element name from a
 	 * string.</div>
 	 *
-	 * <div class="de">Erstellt einen Java-kompatiblen Enum-Elementnamen aus
-	 * einer Zeichenfolge.</div>
+	 * <div class="de">Erstellt einen Java-kompatiblen Enum-Elementnamen aus einer
+	 * Zeichenfolge.</div>
 	 *
-	 * @param displayName
-	 *            The string to build the enum name from.
-	 * @return An all upper case string with every non-word character replaced
-	 *         with an underscore.
-	 * @throws IllegalArgumentException
-	 *             When the provided displayName is null or empty.
+	 * @param displayName The string to build the enum name from.
+	 * @return An all upper case string with every non-word character replaced with
+	 *         an underscore.
+	 * @throws IllegalArgumentException When the provided displayName is null or
+	 *                                  empty.
 	 */
-	public static String buildEnumName(String displayName, int hierarchyLevel)
-			throws IllegalArgumentException {
+	public static String buildEnumName(String displayName, int hierarchyLevel) throws IllegalArgumentException {
 		if (displayName == null || displayName.trim().isEmpty()) {
 			throw new IllegalArgumentException("displayName cannot be null or empty");
 		}
@@ -203,39 +202,8 @@ public class ValueSet implements Serializable {
 		// (e.g. 3 Self-Sustaining Sequence Replication)
 		// https://art-decor.org/art-decor/decor-valuesets--cdachvacd-?id=2.16.840.1.113883.1.11.14079&effectiveDate=2014-03-26T00:00:00&language=en-US
 		if (enumName.substring(0, 1).matches("[0-9]")) {
-			var number = "";
-			switch (enumName.substring(0, 1)) {
-			case "0":
-				number = "Zero";
-				break;
-			case "1":
-				number = "One";
-				break;
-			case "2":
-				number = "Two";
-				break;
-			case "3":
-				number = "Three";
-				break;
-			case "4":
-				number = "Four";
-				break;
-			case "5":
-				number = "Five";
-				break;
-			case "6":
-				number = "Six";
-				break;
-			case "7":
-				number = "Seven";
-				break;
-			case "8":
-				number = "Eight";
-				break;
-			case "9":
-				number = "Nine";
-				break;
-			}
+			var number = getNumberLiteral(enumName.substring(0, 1));
+
 			number = number.toUpperCase();
 			enumName = number + "_" + enumName.substring(2, enumName.length());
 		}
@@ -244,6 +212,33 @@ public class ValueSet implements Serializable {
 			enumName += "_L" + Integer.toString(hierarchyLevel);
 
 		return enumName;
+	}
+
+	/* falsely identified as duplicate code */
+	private static String getNumberLiteral(String subString) {
+		if ("0".equalsIgnoreCase(subString)) {
+			return "Zero";
+		} else if ("1".equalsIgnoreCase(subString)) {
+			return "One";
+		} else if ("2".equalsIgnoreCase(subString)) {
+			return "Two";
+		} else if ("3".equalsIgnoreCase(subString)) {
+			return "Three";
+		} else if ("4".equalsIgnoreCase(subString)) {
+			return "Four";
+		} else if ("5".equalsIgnoreCase(subString)) {
+			return "Five";
+		} else if ("6".equalsIgnoreCase(subString)) {
+			return "Six";
+		} else if ("7".equalsIgnoreCase(subString)) {
+			return "Seven";
+		} else if ("8".equalsIgnoreCase(subString)) {
+			return "Eight";
+		} else if ("9".equalsIgnoreCase(subString)) {
+			return "Nine";
+		} else {
+			return "";
+		}
 	}
 
 	/**
@@ -265,15 +260,6 @@ public class ValueSet implements Serializable {
 	/** The effective date. */
 	private Date effectiveDate;
 
-	/** The identificator. */
-	private IdentificatorBaseType identificator;
-
-	/** The mapping identificator list. */
-	private List<IdentificatorBaseType> mappingIdentificatorList;
-
-	/** The mapping name list. */
-	private List<String> mappingNameList;
-
 	/** The name. */
 	private String name;
 
@@ -283,14 +269,10 @@ public class ValueSet implements Serializable {
 	/** The value set entry list. */
 	private List<ValueSetEntry> valueSetEntryList;
 
-	/** The version. */
-	private Version version;
-
 	/**
 	 * <div class="en">Instantiates a new ValueSet. Default constructor.</div>
 	 *
-	 * <div class="de">Instanziiert ein neues ValueSet.
-	 * Standardkonstruktor.</div>
+	 * <div class="de">Instanziiert ein neues ValueSet. Standardkonstruktor.</div>
 	 */
 	public ValueSet() {
 	}
@@ -300,13 +282,14 @@ public class ValueSet implements Serializable {
 		this.descriptionList = builder.descriptionList;
 		this.displayName = builder.displayName;
 		this.effectiveDate = builder.effectiveDate;
-		this.identificator = builder.identificator;
-		this.mappingIdentificatorList = builder.mappingIdentificatorList;
-		this.mappingNameList = builder.mappingNameList;
 		this.name = builder.name;
 		this.status = builder.status;
 		this.valueSetEntryList = builder.valueSetEntryList;
-		this.version = builder.version;
+
+		this.setIdentificator(builder.identificator);
+		this.setMappingIdentificatorList(builder.mappingIdentificatorList);
+		this.setMappingNameList(builder.mappingNameList);
+		this.setVersion(builder.version);
 	}
 
 	/**
@@ -314,8 +297,7 @@ public class ValueSet implements Serializable {
 	 *
 	 * <div class="de">Fügt eine Beschreibung hinzu.</div>
 	 *
-	 * @param value
-	 *            the value
+	 * @param value the value
 	 */
 	public void addDescription(LangText value) {
 		if (this.descriptionList == null)
@@ -324,8 +306,7 @@ public class ValueSet implements Serializable {
 		this.descriptionList.add(value);
 	}
 
-	private void addEntryList(List<ValueSetEntry> globalList,
-			List<ValueSetEntry> valueSetEntryList) {
+	private void addEntryList(List<ValueSetEntry> globalList, List<ValueSetEntry> valueSetEntryList) {
 		if (valueSetEntryList != null) {
 			for (ValueSetEntry valueSetEntry : valueSetEntryList) {
 				globalList.add(valueSetEntry);
@@ -333,62 +314,36 @@ public class ValueSet implements Serializable {
 		}
 	}
 
-	private ArrayList<ValueSetEntry> addEntryListRecursive(List<ValueSetEntry> globalList,
+	private List<ValueSetEntry> addEntryListRecursive(List<ValueSetEntry> globalList,
 			List<ValueSetEntry> valueSetEntryList) {
-		ArrayList<ValueSetEntry> retVal = new ArrayList<>();
+		List<ValueSetEntry> retVal = new ArrayList<>();
 		retVal.addAll(globalList);
 		if (valueSetEntryList != null) {
 			for (ValueSetEntry valueSetEntry : valueSetEntryList) {
-				// This is for debugging purposes, only
-				// String entryName = ValueSet
-				// .buildEnumName(valueSetEntry.getCodeBaseType().getDisplayName());
+				retVal = addEntryToList(globalList, valueSetEntry, retVal);
 
-				var isAlreadyThere = false;
-				for (ValueSetEntry temp : globalList) {
-					isAlreadyThere = (temp.equals(valueSetEntry));
-					if (isAlreadyThere)
-						break;
-				}
-
-				if (!isAlreadyThere)
-					retVal.add(valueSetEntry);
-
-				List<ValueSetEntry> children = valueSetEntry.getChildList();
-				if (children != null && !children.isEmpty())
-						retVal = addEntryListRecursive(retVal, children);
 			}
 		}
 		return retVal;
 	}
 
-	/**
-	 * <div class="en">Adds a mapping identificator.</div>
-	 *
-	 * <div class="de">Fügt einen Zuordnungsidentifikator hinzu.</div>
-	 *
-	 * @param value
-	 *            the value
-	 */
-	public void addMappingIdentificator(IdentificatorBaseType value) {
-		if (this.mappingIdentificatorList == null)
-			this.mappingIdentificatorList = new ArrayList<>();
+	private List<ValueSetEntry> addEntryToList(List<ValueSetEntry> globalList, ValueSetEntry valueSetEntry,
+			List<ValueSetEntry> retVal) {
+		var isAlreadyThere = false;
+		for (ValueSetEntry temp : globalList) {
+			isAlreadyThere = (temp.equals(valueSetEntry));
+			if (isAlreadyThere)
+				break;
+		}
 
-		this.mappingIdentificatorList.add(value);
-	}
+		if (!isAlreadyThere)
+			retVal.add(valueSetEntry);
 
-	/**
-	 * <div class="en">Adds a mapping name.</div>
-	 *
-	 * <div class="de">Fügt einen Zuordnungsnamen hinzu.</div>
-	 *
-	 * @param value
-	 *            the value
-	 */
-	public void addMappingName(String value) {
-		if (this.mappingNameList == null)
-			this.mappingNameList = new ArrayList<>();
+		List<ValueSetEntry> children = valueSetEntry.getChildList();
+		if (children != null && !children.isEmpty())
+			retVal = addEntryListRecursive(retVal, children);
 
-		this.mappingNameList.add(value);
+		return retVal;
 	}
 
 	/**
@@ -396,8 +351,7 @@ public class ValueSet implements Serializable {
 	 *
 	 * <div class="de">Fügt einen Wertesatzeintrag hinzu.</div>
 	 *
-	 * @param value
-	 *            the value
+	 * @param value the value
 	 */
 	public void addValueSetEntry(ValueSetEntry value) {
 		if (this.valueSetEntryList == null)
@@ -416,24 +370,6 @@ public class ValueSet implements Serializable {
 	}
 
 	/**
-	 * <div class="en">Clears the mapping identificator list.</div>
-	 *
-	 * <div class="de">Löscht die Liste der Zuordnungsidentifikatoren.</div>
-	 */
-	public void clearMappingIdentificatorList() {
-		this.mappingIdentificatorList = new ArrayList<>();
-	}
-
-	/**
-	 * <div class="en">Clears the mapping name list.</div>
-	 *
-	 * <div class="de">Löscht die Liste der Zuordnungsnamen.</div>
-	 */
-	public void clearMappingNameList() {
-		this.mappingNameList = new ArrayList<>();
-	}
-
-	/**
 	 * <div class="en">Clears the value set entry list.</div>
 	 *
 	 * <div class="de">Löscht die Wertesatz-Eintragsliste.</div>
@@ -446,11 +382,10 @@ public class ValueSet implements Serializable {
 	 * <div class="en">Checks whether the list member contains the given
 	 * value.</div>
 	 *
-	 * <div class="de">Überprüft, ob die Liste den angegebenen Wert
-	 * enthält.</div> Contains.
+	 * <div class="de">Überprüft, ob die Liste den angegebenen Wert enthält.</div>
+	 * Contains.
 	 *
-	 * @param value
-	 *            the value
+	 * @param value the value
 	 * @return true, if successful
 	 */
 	public boolean containsDescription(LangText value) {
@@ -468,55 +403,10 @@ public class ValueSet implements Serializable {
 	 * <div class="en">Checks whether the list member contains the given
 	 * value.</div>
 	 *
-	 * <div class="de">Überprüft, ob die Liste den angegebenen Wert
-	 * enthält.</div> Contains.
+	 * <div class="de">Überprüft, ob die Liste den angegebenen Wert enthält.</div>
+	 * Contains.
 	 *
-	 * @param value
-	 *            the value
-	 * @return true, if successful
-	 */
-	public boolean containsMappingIdentificator(IdentificatorBaseType value) {
-		if (mappingIdentificatorList != null) {
-			for (IdentificatorBaseType entry : mappingIdentificatorList) {
-				if (entry.equals(value)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * <div class="en">Checks whether the list member contains the given
-	 * value.</div>
-	 *
-	 * <div class="de">Überprüft, ob die Liste den angegebenen Wert
-	 * enthält.</div> Contains.
-	 *
-	 * @param value
-	 *            the value
-	 * @return true, if successful
-	 */
-	public boolean containsMappingName(String value) {
-		if (mappingNameList != null) {
-			for (String entry : mappingNameList) {
-				if (entry.equals(value)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * <div class="en">Checks whether the list member contains the given
-	 * value.</div>
-	 *
-	 * <div class="de">Überprüft, ob die Liste den angegebenen Wert
-	 * enthält.</div> Contains.
-	 *
-	 * @param value
-	 *            the value
+	 * @param value the value
 	 * @return true, if successful
 	 */
 	public boolean containsValueSetEntry(ValueSetEntry value) {
@@ -534,11 +424,10 @@ public class ValueSet implements Serializable {
 	 * <div class="en">Checks whether the two objects are equal (based on their
 	 * content).</div>
 	 *
-	 * <div class="de">Prüft, ob die beiden Objekte gleich sind (basierend auf
-	 * ihrem Inhalt).</div>
+	 * <div class="de">Prüft, ob die beiden Objekte gleich sind (basierend auf ihrem
+	 * Inhalt).</div>
 	 *
-	 * @param obj
-	 *            the ValueSet to compare
+	 * @param obj the ValueSet to compare
 	 * @return true, if equal; false otherwise.
 	 */
 	@Override
@@ -550,104 +439,116 @@ public class ValueSet implements Serializable {
 		if (!(obj instanceof ValueSet))
 			return false;
 
+		retVal = compareDescriptionList((ValueSet) obj);
+
 		if (retVal) {
-			if (this.descriptionList == null)
-				this.descriptionList = new ArrayList<>();
-			retVal = (this.descriptionList.size() == ((ValueSet) obj).getDescriptionList().size());
-			if (retVal) {
-				for (var i = 0; i < this.descriptionList.size(); i++) {
-					retVal = ((ValueSet) obj).containsDescription(this.descriptionList.get(i));
-					if (!retVal)
-						break;
-				}
+			retVal = compareMappingIdentificatorList((ValueSet) obj);
+		}
+		if (retVal) {
+			retVal = compareMappingNameList((ValueSet) obj);
+		}
+		if (retVal) {
+			retVal = compareValueSetEntryList((ValueSet) obj);
+		}
+		if (retVal) {
+			retVal = compareDisplayName((ValueSet) obj);
+		}
+		if (retVal) {
+			retVal = compareEffectiveDate((ValueSet) obj);
+		}
+		if (retVal) {
+			retVal = compareIdentificator((ValueSet) obj);
+		}
+		if (retVal) {
+			retVal = compareName((ValueSet) obj);
+		}
+		if (retVal) {
+			retVal = compareStatus((ValueSet) obj);
+		}
+		if (retVal) {
+			retVal = compareVersion((ValueSet) obj);
+		}
+		return retVal;
+	}
+
+	private boolean compareStatus(ValueSet obj) {
+		var retVal = true;
+		if (this.status == null)
+			retVal = (obj.getStatus() == null);
+		else
+			retVal = this.status.equals(obj.getStatus());
+
+		return retVal;
+	}
+
+	private boolean compareName(ValueSet obj) {
+		var retVal = true;
+		if (this.name == null)
+			retVal = (obj.getName() == null);
+		else
+			retVal = this.name.equals(obj.getName());
+
+		return retVal;
+	}
+
+	private boolean compareEffectiveDate(ValueSet obj) {
+		var retVal = true;
+		if (this.effectiveDate == null)
+			retVal = obj.getEffectiveDate() == null;
+		else
+			retVal = this.effectiveDate.equals(obj.getEffectiveDate());
+
+		return retVal;
+	}
+
+	private boolean compareDisplayName(ValueSet obj) {
+		var retVal = true;
+		if (this.displayName == null)
+			retVal = (obj.getDisplayName() == null);
+		else
+			retVal = this.displayName.equals(obj.getDisplayName());
+
+		return retVal;
+	}
+
+	private boolean compareValueSetEntryList(ValueSet obj) {
+		var retVal = true;
+		if (this.valueSetEntryList == null)
+			this.valueSetEntryList = new ArrayList<>();
+		retVal = (this.valueSetEntryList.size() == obj.getValueSetEntryList().size());
+		if (retVal) {
+			for (var i = 0; i < this.valueSetEntryList.size(); i++) {
+				retVal = obj.containsValueSetEntry(this.valueSetEntryList.get(i));
+				if (!retVal)
+					break;
 			}
 		}
+
+		return retVal;
+	}
+
+	private boolean compareDescriptionList(ValueSet obj) {
+		var retVal = true;
+		if (this.descriptionList == null)
+			this.descriptionList = new ArrayList<>();
+		retVal = (this.descriptionList.size() == obj.getDescriptionList().size());
 		if (retVal) {
-			if (this.mappingIdentificatorList == null)
-				this.mappingIdentificatorList = new ArrayList<>();
-			retVal = (this.mappingIdentificatorList.size() == ((ValueSet) obj)
-					.getMappingIdentificatorList().size());
-			if (retVal) {
-				for (var i = 0; i < this.mappingIdentificatorList.size(); i++) {
-					retVal = ((ValueSet) obj)
-							.containsMappingIdentificator(this.mappingIdentificatorList.get(i));
-					if (!retVal)
-						break;
-				}
+			for (var i = 0; i < this.descriptionList.size(); i++) {
+				retVal = obj.containsDescription(this.descriptionList.get(i));
+				if (!retVal)
+					break;
 			}
 		}
-		if (retVal) {
-			if (this.mappingNameList == null)
-				this.mappingNameList = new ArrayList<>();
-			retVal = (this.mappingNameList.size() == ((ValueSet) obj).getMappingNameList().size());
-			if (retVal) {
-				for (var i = 0; i < this.mappingNameList.size(); i++) {
-					retVal = ((ValueSet) obj).containsMappingName(this.mappingNameList.get(i));
-					if (!retVal)
-						break;
-				}
-			}
-		}
-		if (retVal) {
-			if (this.valueSetEntryList == null)
-				this.valueSetEntryList = new ArrayList<>();
-			retVal = (this.valueSetEntryList.size() == ((ValueSet) obj).getValueSetEntryList()
-					.size());
-			if (retVal) {
-				for (var i = 0; i < this.valueSetEntryList.size(); i++) {
-					retVal = ((ValueSet) obj).containsValueSetEntry(this.valueSetEntryList.get(i));
-					if (!retVal)
-						break;
-				}
-			}
-		}
-		if (retVal) {
-			if (this.displayName == null)
-				retVal = (((ValueSet) obj).getDisplayName() == null);
-			else
-				retVal = this.displayName.equals(((ValueSet) obj).getDisplayName());
-		}
-		if (retVal) {
-			if (this.effectiveDate == null)
-				retVal = (((ValueSet) obj).getEffectiveDate() == null);
-			else
-				retVal = this.effectiveDate.equals(((ValueSet) obj).getEffectiveDate());
-		}
-		if (retVal) {
-			if (this.identificator == null)
-				retVal = (((ValueSet) obj).getIdentificator() == null);
-			else
-				retVal = this.identificator.equals(((ValueSet) obj).getIdentificator());
-		}
-		if (retVal) {
-			if (this.name == null)
-				retVal = (((ValueSet) obj).getName() == null);
-			else
-				retVal = this.name.equals(((ValueSet) obj).getName());
-		}
-		if (retVal) {
-			if (this.status == null)
-				retVal = (((ValueSet) obj).getStatus() == null);
-			else
-				retVal = this.status.equals(((ValueSet) obj).getStatus());
-		}
-		if (retVal) {
-			if (this.version == null)
-				retVal = (((ValueSet) obj).getVersion() == null);
-			else
-				retVal = this.version.equals(((ValueSet) obj).getVersion());
-		}
+
 		return retVal;
 	}
 
 	/**
 	 * <div class="en">Gets the description in the given language.</div>
 	 *
-	 * <div class="de">Ruft die Beschreibung in der angegebenen Sprache
-	 * ab.</div>
+	 * <div class="de">Ruft die Beschreibung in der angegebenen Sprache ab.</div>
 	 *
-	 * @param language
-	 *            the language
+	 * @param language the language
 	 * @return the description
 	 */
 	public String getDescription(LanguageCode language) {
@@ -701,45 +602,6 @@ public class ValueSet implements Serializable {
 	}
 
 	/**
-	 * <div class="en">Gets the identificator.</div>
-	 *
-	 * <div class="de">Ruft den Identifikator ab.</div>
-	 *
-	 * @return the identificator
-	 */
-	public IdentificatorBaseType getIdentificator() {
-		return identificator;
-	}
-
-	/**
-	 * <div class="en">Gets the mapping identificator list.</div>
-	 *
-	 * <div class="de">Ruft die Liste der Zuordnungsidentifikatoren ab.</div>
-	 *
-	 * @return the mapping identificator list
-	 */
-	public List<IdentificatorBaseType> getMappingIdentificatorList() {
-		if (mappingIdentificatorList == null) {
-			mappingIdentificatorList = new ArrayList<>();
-		}
-		return mappingIdentificatorList;
-	}
-
-	/**
-	 * <div class="en">Gets the mapping name list.</div>
-	 *
-	 * <div class="de">Ruft die Liste der Zuordnungsnamen ab.</div>
-	 *
-	 * @return the mapping name list
-	 */
-	public List<String> getMappingNameList() {
-		if (mappingNameList == null) {
-			mappingNameList = new ArrayList<>();
-		}
-		return mappingNameList;
-	}
-
-	/**
 	 * <div class="en">Gets the name.</div>
 	 *
 	 * <div class="de">Ruft den Namen ab.</div>
@@ -765,8 +627,8 @@ public class ValueSet implements Serializable {
 	}
 
 	/**
-	 * <div class="en">Gets the sorted entry list. Contains also value set
-	 * entries from children.</div>
+	 * <div class="en">Gets the sorted entry list. Contains also value set entries
+	 * from children.</div>
 	 *
 	 * <div class="de">Ruft die sortierte Eintragsliste ab. Enthält auch
 	 * Werteeinträge von untergeordneten Elementen.</div>
@@ -774,7 +636,7 @@ public class ValueSet implements Serializable {
 	 * @return the sorted entry list
 	 */
 	public List<ValueSetEntry> getSortedEntryListRecursive() {
-		ArrayList<ValueSetEntry> retVal = new ArrayList<>();
+		List<ValueSetEntry> retVal = new ArrayList<>();
 		retVal = addEntryListRecursive(retVal, valueSetEntryList);
 		retVal.sort(new ValueSetEntryEnumNameComparator());
 		return retVal;
@@ -796,8 +658,7 @@ public class ValueSet implements Serializable {
 	 *
 	 * <div class="de">Ruft den Wertesatz-Eintrag anhand seines Codes ab.</div>
 	 *
-	 * @param value
-	 *            the value
+	 * @param value the value
 	 * @return the value set entry by code
 	 */
 	public ValueSetEntry getValueSetEntryByCode(CodeBaseType value) {
@@ -815,8 +676,7 @@ public class ValueSet implements Serializable {
 	 * <div class="de">Ruft den Wertesatz-Eintrag anhand des angegebenen
 	 * Zuordnungscodes ab.</div>
 	 *
-	 * @param value
-	 *            the value
+	 * @param value the value
 	 * @return the value set entry by mapping code
 	 */
 	public ValueSetEntry getValueSetEntryByMappingCode(CodeBaseType value) {
@@ -840,8 +700,7 @@ public class ValueSet implements Serializable {
 	 * <div class="de">Ruft den Wertesatz-Eintrag anhand des angegebenen
 	 * Zuordnungsnamenss ab.</div>
 	 *
-	 * @param value
-	 *            the value
+	 * @param value the value
 	 * @return the value set entry by mapping name
 	 */
 	public ValueSetEntry getValueSetEntryByMappingName(String value) {
@@ -850,16 +709,23 @@ public class ValueSet implements Serializable {
 			if (value != null && value.equals(valueSetEntry.getDefaultMappingName()))
 				retVal = valueSetEntry;
 			if (retVal == null) {
-				for (String mapping : valueSetEntry.getMappingNameList()) {
-					if (mapping.equals(value))
-						retVal = valueSetEntry;
-					if (retVal != null)
-						break;
-				}
+				retVal = getValueSetEntryBySingleMappingName(valueSetEntry, value);
 			}
 			if (retVal != null)
 				break;
 		}
+		return retVal;
+	}
+
+	private ValueSetEntry getValueSetEntryBySingleMappingName(ValueSetEntry valueSetEntry, String value) {
+		ValueSetEntry retVal = null;
+		for (String mapping : valueSetEntry.getMappingNameList()) {
+			if (mapping.equals(value))
+				retVal = valueSetEntry;
+			if (retVal != null)
+				break;
+		}
+
 		return retVal;
 	}
 
@@ -877,17 +743,6 @@ public class ValueSet implements Serializable {
 		return valueSetEntryList;
 	}
 
-	/**
-	 * <div class="en">Gets the version.</div>
-	 *
-	 * <div class="de">Ruft die Version ab.</div>
-	 *
-	 * @return the version
-	 */
-	public Version getVersion() {
-		return version;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 *
@@ -895,7 +750,11 @@ public class ValueSet implements Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		return Util.getChecksum(this);
+		return new HashCodeBuilder(17, 37).append(this.getVersion()).append(this.status).append(this.name)
+				.append(this.getIdentificator()).append(this.effectiveDate).append(this.displayName)
+				.append(this.valueSetEntryList).append(this.getMappingNameList())
+				.append(this.getMappingIdentificatorList())
+				.append(this.descriptionList).toHashCode();
 	}
 
 	/**
@@ -903,8 +762,7 @@ public class ValueSet implements Serializable {
 	 *
 	 * <div class="de">Legt die Liste der Wertesatz-Einträge fest.</div>
 	 *
-	 * @param descriptionList
-	 *            the new description list
+	 * @param descriptionList the new description list
 	 */
 	public void setDescriptionList(List<LangText> descriptionList) {
 		this.descriptionList = descriptionList;
@@ -915,8 +773,7 @@ public class ValueSet implements Serializable {
 	 *
 	 * <div class="de">Legt den Anzeigenamen fest.</div>
 	 *
-	 * @param displayName
-	 *            the new display name
+	 * @param displayName the new display name
 	 */
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
@@ -927,48 +784,10 @@ public class ValueSet implements Serializable {
 	 *
 	 * <div class="de">Legt den Anzeigenamen fest.</div>
 	 *
-	 * @param effectiveDate
-	 *            the new effective date
+	 * @param effectiveDate the new effective date
 	 */
 	public void setEffectiveDate(Date effectiveDate) {
 		this.effectiveDate = effectiveDate;
-	}
-
-	/**
-	 * <div class="en">Sets the identificator.</div>
-	 *
-	 * <div class="de">Legt den Identifikator fest.</div>
-	 *
-	 * @param identificator
-	 *            the new identificator
-	 */
-	public void setIdentificator(IdentificatorBaseType identificator) {
-		this.identificator = identificator;
-	}
-
-	/**
-	 * <div class="en">Sets the mapping identificator list.</div>
-	 *
-	 * <div class="de">Legt die Liste der Zuordnungsidentifikatoren fest.</div>
-	 *
-	 * @param mappingIdentificatorList
-	 *            the new mapping identificator list
-	 */
-	public void setMappingIdentificatorList(
-			List<IdentificatorBaseType> mappingIdentificatorList) {
-		this.mappingIdentificatorList = mappingIdentificatorList;
-	}
-
-	/**
-	 * <div class="en">Sets the mapping name list.</div>
-	 *
-	 * <div class="de">Legt die Liste der Zuordnungsnamen fest.</div>
-	 *
-	 * @param mappingNameList
-	 *            the new mapping name list
-	 */
-	public void setMappingNameList(List<String> mappingNameList) {
-		this.mappingNameList = mappingNameList;
 	}
 
 	/**
@@ -976,8 +795,7 @@ public class ValueSet implements Serializable {
 	 *
 	 * <div class="de">Legt den Namen fest.</div>
 	 *
-	 * @param name
-	 *            the new name
+	 * @param name the new name
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -988,8 +806,7 @@ public class ValueSet implements Serializable {
 	 *
 	 * <div class="de">Setzt den Status.</div>
 	 *
-	 * @param status
-	 *            the new status
+	 * @param status the new status
 	 */
 	public void setStatus(ValueSetStatus status) {
 		this.status = status;
@@ -1000,28 +817,14 @@ public class ValueSet implements Serializable {
 	 *
 	 * <div class="de">Legt die Liste der Ertesatz-Einträge fest.</div>
 	 *
-	 * @param valueSetEntryList
-	 *            the new value set entry list
+	 * @param valueSetEntryList the new value set entry list
 	 */
 	public void setValueSetEntryList(List<ValueSetEntry> valueSetEntryList) {
 		this.valueSetEntryList = valueSetEntryList;
 	}
 
 	/**
-	 * <div class="en">Sets the version.</div>
-	 *
-	 * <div class="de">Legt die Version fest.</div>
-	 *
-	 * @param version
-	 *            the new version
-	 */
-	public void setVersion(Version version) {
-		this.version = version;
-	}
-
-	/**
-	 * <div class="en">Sorts the value set entries by their Java Enum
-	 * name.</div>
+	 * <div class="en">Sorts the value set entries by their Java Enum name.</div>
 	 *
 	 * <div class="de">Sortiert die Wertemengeneinträge nach ihrem
 	 * Java-Enum-Namen.</div>

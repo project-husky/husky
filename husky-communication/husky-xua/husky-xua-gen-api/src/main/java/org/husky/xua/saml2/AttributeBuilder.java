@@ -10,9 +10,8 @@
  */
 package org.husky.xua.saml2;
 
+import org.husky.xua.hl7v3.CE;
 import org.husky.xua.hl7v3.InstanceIdentifier;
-import org.husky.xua.hl7v3.PurposeOfUse;
-import org.husky.xua.hl7v3.Role;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeType;
 
 /**
@@ -113,9 +112,9 @@ public interface AttributeBuilder extends SimpleBuilder<AttributeType> {
 
 	InstanceIdentifier getValueAsInstanceIdentifier();
 
-	PurposeOfUse getValueAsPurposeOfUse();
+	CE getValueAsPurposeOfUse();
 
-	Role getValueAsRole();
+	CE getValueAsRole();
 
 	String getValueAsString();
 }

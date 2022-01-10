@@ -8,22 +8,23 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-package org.husky.xua.hl7v3;
+package org.husky.xua.hl7v3.impl;
 
-import org.husky.xua.hl7v3.PurposeOfUse;
-import org.opensaml.core.xml.XMLObject;
+import org.husky.xua.hl7v3.OpenSamlCodedWithEquivalent;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Describing the methods of the PurposeOfUse Interface</div>
- * <div class="de">Beschreibung der Methoden des PurposeOfUse Interfaces</div>
- * <div class="fr"></div>
- * <div class="it"></div>
+ * <div class="en">HEREISENGLISH</div>
+ * <div class="de">HIERISTDEUTSCH</div>
+ * <div class="fr">VOICIFRANCAIS</div>
+ * <div class="it">ITALIANO</div>
+ *
  * <!-- @formatter:on -->
  */
-public interface OpenSamlPurposeOfUse extends PurposeOfUse, XMLObject {
+public class CodedWithEquivalentImpl extends AbstractImpl implements OpenSamlCodedWithEquivalent {
 
-	// There are no special methods defined, but the interface has to be
-	// declared for selection reasons.
+	protected CodedWithEquivalentImpl(String namespaceURI, String elementLocalName, String namespacePrefix) {
+		super(namespaceURI, elementLocalName, namespacePrefix);
+	}
 
 }

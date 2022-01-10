@@ -28,8 +28,9 @@ import org.husky.xua.deserialization.impl.AssertionDeserializerImpl;
 import org.husky.xua.exceptions.ClientSendException;
 import org.husky.xua.exceptions.DeserializeException;
 import org.husky.xua.exceptions.SoapException;
-import org.husky.xua.hl7v3.impl.PurposeOfUseBuilder;
-import org.husky.xua.hl7v3.impl.RoleBuilder;
+import org.husky.xua.hl7v3.PurposeOfUse;
+import org.husky.xua.hl7v3.Role;
+import org.husky.xua.hl7v3.impl.CodedWithEquivalentsBuilder;
 import org.husky.xua.saml2.impl.AttributeImpl;
 import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeStatementType;
@@ -42,7 +43,7 @@ import org.xml.sax.SAXException;
  * The purpose of this test class is to check if the assertion query works for a
  * user.
  */
-public class XuaClientTest extends ServerTestHelper {
+class XuaClientTest extends ServerTestHelper {
 
 	private String urlToXua = "https://ehealthsuisse.ihe-europe.net:10443/STS?wsdl";
 	private String clientKeyStore = "src/test/resources/testKeystoreXua.jks";
@@ -56,7 +57,7 @@ public class XuaClientTest extends ServerTestHelper {
 	 * @throws Exception
 	 */
 	@Test
-	public void testGetAssertionForHcp()
+	void testGetAssertionForHcp()
 			throws ClientSendException, DeserializeException, SAXException, IOException, ParserConfigurationException {
 
 		// initialize XUA client to query XUA assertion
@@ -70,12 +71,14 @@ public class XuaClientTest extends ServerTestHelper {
 			var idpAssertion = new AssertionDeserializerImpl().fromXmlByteArray(IOUtils.toByteArray(is));
 
 			// set role of subject
-			var role = new RoleBuilder().code("HCP").codeSystem("2.16.756.5.30.1.127.3.10.6")
-					.displayName("Behandelnde(r)").buildObject();
+			var role = new CodedWithEquivalentsBuilder().code("HCP").codeSystem("2.16.756.5.30.1.127.3.10.6")
+					.displayName("Behandelnde(r)")
+					.buildObject(Role.DEFAULT_NS_URI, Role.DEFAULT_ELEMENT_LOCAL_NAME, Role.DEFAULT_PREFIX);
 
 			// set the purpose of use
-			var purposeOfUse = new PurposeOfUseBuilder().code("NORM").codeSystem("2.16.756.5.30.1.127.3.10.6")
-					.displayName("Normal Access").buildObject();
+			var purposeOfUse = new CodedWithEquivalentsBuilder().code("NORM").codeSystem("2.16.756.5.30.1.127.3.10.6")
+					.displayName("Normal Access").buildObject(PurposeOfUse.DEFAULT_NS_URI,
+							PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME, PurposeOfUse.DEFAULT_PREFIX);
 
 			// set ID of patient with namespace EPR_SPID
 			String resourceId = "761337610411265304^^^SPID&2.16.756.5.30.1.127.3.10.3&ISO";
@@ -151,7 +154,7 @@ public class XuaClientTest extends ServerTestHelper {
 	 * @throws Exception
 	 */
 	@Test
-	public void testWrongAssertionDetailsForHcp()
+	void testWrongAssertionDetailsForHcp()
 			throws ClientSendException, DeserializeException, SAXException, IOException, ParserConfigurationException {
 
 		// initialize XUA client to query XUA assertion
@@ -164,10 +167,12 @@ public class XuaClientTest extends ServerTestHelper {
 
 			var idpAssertion = new AssertionDeserializerImpl().fromXmlByteArray(IOUtils.toByteArray(is));
 
-			var role = new RoleBuilder().code("AKT").codeSystem("1.2.3.4.5")
-					.displayName("Behandelnde(r)").buildObject();
-			var purposeOfUse = new PurposeOfUseBuilder().code("NORM").codeSystem("2.16.756.5.30.1.127.3.10.6")
-					.displayName("Normal Access").buildObject();
+			var role = new CodedWithEquivalentsBuilder().code("AKT").codeSystem("1.2.3.4.5")
+					.displayName("Behandelnde(r)")
+					.buildObject(Role.DEFAULT_NS_URI, Role.DEFAULT_ELEMENT_LOCAL_NAME, Role.DEFAULT_PREFIX);
+			var purposeOfUse = new CodedWithEquivalentsBuilder().code("NORM").codeSystem("2.16.756.5.30.1.127.3.10.6")
+					.displayName("Normal Access").buildObject(PurposeOfUse.DEFAULT_NS_URI,
+							PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME, PurposeOfUse.DEFAULT_PREFIX);
 			String resourceId = "761337610411265304^^^SPID&2.16.756.5.30.1.127.3.10.3&ISO";
 
 			var assertionRequest = new XUserAssertionRequestBuilderImpl().requestType(RequestType.WST_ISSUE)
@@ -189,7 +194,7 @@ public class XuaClientTest extends ServerTestHelper {
 	 * @throws Exception
 	 */
 	@Test
-	public void testInvalidXmlAssertionForHcp()
+	void testInvalidXmlAssertionForHcp()
 			throws ClientSendException, DeserializeException, SAXException, IOException, ParserConfigurationException {
 
 		// initialize XUA client to query XUA assertion
@@ -202,10 +207,12 @@ public class XuaClientTest extends ServerTestHelper {
 
 			var idpAssertion = new AssertionDeserializerImpl().fromXmlByteArray(IOUtils.toByteArray(is));
 
-			var role = new RoleBuilder().code("AKT").codeSystem("1.2.3.4.5").displayName("Behandelnde(r)")
-					.buildObject();
-			var purposeOfUse = new PurposeOfUseBuilder().code("1234").codeSystem("1.2.3.4.5.6.7")
-					.displayName("Normal Access").buildObject();
+			var role = new CodedWithEquivalentsBuilder().code("AKT").codeSystem("1.2.3.4.5")
+					.displayName("Behandelnde(r)")
+					.buildObject(Role.DEFAULT_NS_URI, Role.DEFAULT_ELEMENT_LOCAL_NAME, Role.DEFAULT_PREFIX);
+			var purposeOfUse = new CodedWithEquivalentsBuilder().code("1234").codeSystem("1.2.3.4.5.6.7")
+					.displayName("Normal Access").buildObject(PurposeOfUse.DEFAULT_NS_URI,
+							PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME, PurposeOfUse.DEFAULT_PREFIX);
 			String resourceId = "1234^^^SPID&2.16.756.5.30.1.127.3.10.3&ISO";
 
 			var assertionRequest = new XUserAssertionRequestBuilderImpl().requestType(RequestType.WST_ISSUE)

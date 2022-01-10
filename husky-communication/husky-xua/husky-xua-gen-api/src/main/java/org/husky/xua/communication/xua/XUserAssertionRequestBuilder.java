@@ -10,8 +10,7 @@
  */
 package org.husky.xua.communication.xua;
 
-import org.husky.xua.hl7v3.PurposeOfUse;
-import org.husky.xua.hl7v3.Role;
+import org.husky.xua.hl7v3.CE;
 
 /**
  * <!-- @formatter:off -->
@@ -168,7 +167,7 @@ public interface XUserAssertionRequestBuilder {
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
 	 */
-	XUserAssertionRequestBuilder purposeOfUse(PurposeOfUse aPurposeOfUse);
+	XUserAssertionRequestBuilder purposeOfUse(CE aPurposeOfUse);
 
 	/**
 	 * <!-- @formatter:off -->
@@ -276,7 +275,7 @@ public interface XUserAssertionRequestBuilder {
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
 	 */
-	XUserAssertionRequestBuilder subjectRole(Role roleId);
+	XUserAssertionRequestBuilder subjectRole(CE roleId);
 
 	/**
 	 * <!-- @formatter:off -->

@@ -45,4 +45,5 @@ public class V3PdqContinuationCancel extends V3PdqContinuationBase {
 		this.queryContinuation.setContinuationQuantity(PixPdqV3Utils.createINT1(0));
 
 	}
+
 }

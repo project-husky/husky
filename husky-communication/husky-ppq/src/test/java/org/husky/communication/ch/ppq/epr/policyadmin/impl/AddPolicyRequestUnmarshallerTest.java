@@ -25,7 +25,7 @@ import org.opensaml.core.xml.io.UnmarshallerFactory;
 import org.opensaml.core.xml.io.UnmarshallingException;
 import org.w3c.dom.Element;
 
-public class AddPolicyRequestUnmarshallerTest extends InitializerTestHelper {
+class AddPolicyRequestUnmarshallerTest extends InitializerTestHelper {
 
 	private Element testXmlElement;
 
@@ -35,7 +35,7 @@ public class AddPolicyRequestUnmarshallerTest extends InitializerTestHelper {
 	}
 
 	@Test
-	public void test() throws UnmarshallingException, MarshallingException {
+	void test() throws UnmarshallingException, MarshallingException {
 		final UnmarshallerFactory unmarshallerFactory = XMLObjectProviderRegistrySupport
 				.getUnmarshallerFactory();
 		final Unmarshaller unmarshaller = unmarshallerFactory.getUnmarshaller(testXmlElement);

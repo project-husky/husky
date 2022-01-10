@@ -12,19 +12,20 @@ package org.husky.xua.saml2.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.husky.xua.hl7v3.CE;
+import org.husky.xua.hl7v3.PurposeOfUse;
 import org.husky.xua.hl7v3.Role;
-import org.husky.xua.hl7v3.impl.RoleBuilder;
+import org.husky.xua.hl7v3.impl.CodedWithEquivalentsBuilder;
 import org.husky.xua.saml2.AttributeBuilder;
-import org.husky.xua.saml2.impl.AttributeBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeType;
 
-public class AttributeBuilderImplTest {
+class AttributeBuilderImplTest {
 
 	private String testAttributeName;
 	private String testAttributeValue;
-	public Role testAttributeValueRole;
+	public CE testAttributeValueRole;
 
 	public AttributeBuilder testBuilder;
 
@@ -34,7 +35,8 @@ public class AttributeBuilderImplTest {
 		testAttributeName = "My Attribute Name";
 		testAttributeValue = "My Attribute Value";
 
-		testAttributeValueRole = new RoleBuilder().buildObject();
+		testAttributeValueRole = new CodedWithEquivalentsBuilder().buildObject(PurposeOfUse.DEFAULT_NS_URI,
+				Role.DEFAULT_ELEMENT_LOCAL_NAME, Role.DEFAULT_PREFIX);
 		testAttributeValueRole.setCode("My Code");
 		testAttributeValueRole.setCode("My Code System");
 	}
@@ -44,7 +46,7 @@ public class AttributeBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.AttributeBuilderImpl#name(java.lang.String)}.
 	 */
 	@Test
-	public void testName() {
+	void testName() {
 		final AttributeType ref = testBuilder.name(testAttributeName).create();
 		assertEquals(testAttributeName, ref.getName());
 	}
@@ -54,12 +56,13 @@ public class AttributeBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.AttributeBuilderImpl#value(java.lang.String)}.
 	 */
 	@Test
-	public void testValue() {
+	void testValue() {
 		final AttributeType ref = testBuilder.value(testAttributeValue).create();
 		assertEquals(testAttributeValue, testBuilder.getValueAsString());
 	}
 
-	public void testValueRole() {
+	@Test
+	void testValueRole() {
 		final AttributeType ref = testBuilder.value(testAttributeValueRole).create();
 		assertEquals(testAttributeValueRole, testBuilder.getValueAsRole());
 	}

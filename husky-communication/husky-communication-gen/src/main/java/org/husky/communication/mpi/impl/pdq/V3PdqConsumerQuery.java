@@ -10,7 +10,7 @@
  */
 package org.husky.communication.mpi.impl.pdq;
 
-import org.husky.common.utils.OID;
+import org.hl7.fhir.r4.model.Address;
 import org.husky.communication.mpi.V3Message;
 import org.husky.communication.utils.PixPdqV3Utils;
 
@@ -40,8 +40,8 @@ import net.ihe.gazelle.hl7v3.voc.XActMoodIntentEvent;
 public class V3PdqConsumerQuery extends V3Message {
 
 	// the PIX query
-	private PRPAIN201305UV02Type rootElement = null;
-	private PRPAIN201305UV02QUQIMT021001UV01ControlActProcess queryControlActProcess = null;
+	private PRPAIN201305UV02Type rootElement;
+	private PRPAIN201305UV02QUQIMT021001UV01ControlActProcess queryControlActProcessPdq = null;
 	private PRPAMT201306UV02QueryByParameter queryByParameter = null;
 	private PRPAMT201306UV02ParameterList parameterList = null;
 	private PRPAMT201306UV02MatchCriterionList matchCriterionList = null;
@@ -62,32 +62,10 @@ public class V3PdqConsumerQuery extends V3Message {
 	public V3PdqConsumerQuery(String senderApplicationOID, String senderFacilityOID, String receiverApplicationOID,
 			String receiverFacilityOID) {
 
-		// create the root v3 pdq element
-		rootElement = new PRPAIN201305UV02Type();
+		super(senderApplicationOID);
 
 		// set the interaction id
-		rootElement.setInteractionId(PixPdqV3Utils.createII("2.16.840.1.113883.1.6", "PRPA_IN201305UV02", ""));
-
-		// indicate ITSVersion XML_1.0
-		rootElement.setITSVersion("XML_1.0");
-
-		// create an id and set it
-		this.messageId = PixPdqV3Utils.createII(OID.createOIDGivenRoot(senderApplicationOID), "", "");
-		rootElement.setId(messageId);
-
-		// set current time
-		rootElement.setCreationTime(PixPdqV3Utils.createTSCurrentTime());
-
-		// set ProcessingCode. This attribute defines whether the message is part of a production,
-		// training, or debugging system. Valid values are D (Debugging), T (Testing), P (Production)
-		// Will default to production because it will need to be that way in the field.
-		this.setProcessingCode("P");
-
-		// The value of processingModeCode SHALL be set to T
-		rootElement.setProcessingModeCode(PixPdqV3Utils.createCS("T"));
-
-		// The acceptAckCode SHALL be set to AL
-		rootElement.setAcceptAckCode(PixPdqV3Utils.createCS("AL"));
+		getRootElement().setInteractionId(PixPdqV3Utils.createII("2.16.840.1.113883.1.6", "PRPA_IN201305UV02", ""));
 
 		// set the sender
 		this.setSender(senderApplicationOID, senderFacilityOID);
@@ -96,22 +74,29 @@ public class V3PdqConsumerQuery extends V3Message {
 		this.addReceiver(receiverApplicationOID, receiverFacilityOID);
 
 		// create the controlActProcess
-		queryControlActProcess = new PRPAIN201305UV02QUQIMT021001UV01ControlActProcess();
+		createControlActProcess();
 
 		// add the control act process to the message
-		rootElement.setControlActProcess(queryControlActProcess);
+		getRootElement().setControlActProcess(queryControlActProcessPdq);
+	}
 
+	private void createControlActProcess() {
+		queryControlActProcessPdq = new PRPAIN201305UV02QUQIMT021001UV01ControlActProcess();
 		// set the class code
-		queryControlActProcess.setClassCode(ActClassControlAct.CACT);
-		queryControlActProcess.setMoodCode(XActMoodIntentEvent.EVN);
+		queryControlActProcessPdq.setClassCode(ActClassControlAct.CACT);
+		queryControlActProcessPdq.setMoodCode(XActMoodIntentEvent.EVN);
 
-		queryControlActProcess.setCode(PixPdqV3Utils.createCD("PRPA_TE201305UV02", "2.16.840.1.113883.1.18", "", ""));
+		queryControlActProcessPdq.setCode(PixPdqV3Utils.createCD("PRPA_TE201305UV02", "2.16.840.1.113883.1.18", "", ""));
 
 		// create the query by parameter
-		queryByParameter = new PRPAMT201306UV02QueryByParameter();
+		createQueryByParameter();
 
 		// add the query by parameter object to the control act process
-		queryControlActProcess.setQueryByParameter(queryByParameter);
+		queryControlActProcessPdq.setQueryByParameter(queryByParameter);
+	}
+
+	private void createQueryByParameter() {
+		queryByParameter = new PRPAMT201306UV02QueryByParameter();
 
 		// set the queryId
 		queryByParameter.setQueryId(PixPdqV3Utils.createIIwithUniqueExtension("1.2.840.114350.1.13.28.1.18.5.999"));
@@ -119,10 +104,12 @@ public class V3PdqConsumerQuery extends V3Message {
 		// QueryByParameter.statusCode is defaulted to "new".
 		queryByParameter.setStatusCode(PixPdqV3Utils.createCS("new"));
 
-		// QueryByParameter.responseModalityCode is required and is fixed to R (Real Time)
+		// QueryByParameter.responseModalityCode is required and is fixed to R (Real
+		// Time)
 		queryByParameter.setResponseModalityCode(PixPdqV3Utils.createCS("R"));
 
-		// QueryByParameter.responsePriorityCode is required and is fixed to I (Immediate)
+		// QueryByParameter.responsePriorityCode is required and is fixed to I
+		// (Immediate)
 		queryByParameter.setResponsePriorityCode(PixPdqV3Utils.createCS("I"));
 
 		// create the parameter list
@@ -163,15 +150,12 @@ public class V3PdqConsumerQuery extends V3Message {
 	 * @param addressOtherDesignation
 	 * @param addressType
 	 */
-	public void addPatientAddress(String addressStreetAddress, String addressCity, String addressCounty,
-			String addressState, String addressCountry, String addressZip, String addressOtherDesignation,
-			String addressType) {
-		queryParams += "Patient Address: " + addressStreetAddress + " " + addressCity + " " + addressCounty + " "
-				+ addressState + " " + addressCountry + " " + addressZip + " " + addressOtherDesignation + ","
-				+ addressType + ",";
+	public void addPatientAddress(Address address) {
+		queryParams += "Patient Address: " + address.getLine() + " " + address.getCity() + " " + address.getState()
+				+ " " + address.getCountry() + " " + address.getPostalCode() + ","
+				+ address.getUse() + ",";
 		// Create an AD type to store the address information
-		var patientAddressAD = PixPdqV3Utils.createAd(addressStreetAddress, addressCity, addressCounty, addressState,
-				addressCountry, addressZip, addressOtherDesignation, addressType);
+		var patientAddressAD = PixPdqV3Utils.createAd(address);
 
 		// Add the AD to the patient Address
 		if (null != patientAddressAD) {
@@ -195,6 +179,7 @@ public class V3PdqConsumerQuery extends V3Message {
 	 * @param extension
 	 * @param namespace
 	 */
+	@Override
 	public void addPatientID(String root, String extension, String namespace) {
 		queryParams += "Patient ID: " + root + "^" + extension + ",";
 		// create livingSubjectId
@@ -273,6 +258,7 @@ public class V3PdqConsumerQuery extends V3Message {
 	 * @param type
 	 *            ("HP" or "WP"
 	 */
+	@Override
 	public void addPatientTelecom(String telecom, String type) {
 
 		var patientTel = new PRPAMT201306UV02PatientTelecom();
@@ -290,7 +276,7 @@ public class V3PdqConsumerQuery extends V3Message {
 	 *            (Receiver Organization ID)
 	 */
 	public void addReceiver(String applicationOID, String facilityOID) {
-		rootElement.getReceiver().add(PixPdqV3Utils.createMCCIMT000100UV01Receiver(applicationOID, facilityOID));
+		getRootElement().getReceiver().add(PixPdqV3Utils.createMCCIMT000100UV01Receiver(applicationOID, facilityOID));
 	}
 
 	/**
@@ -299,7 +285,7 @@ public class V3PdqConsumerQuery extends V3Message {
 	 * @return PRPAIN201305UV02QUQIMT021001UV01ControlActProcess - the pix query control act process element
 	 */
 	public PRPAIN201305UV02QUQIMT021001UV01ControlActProcess getControlActProcess() {
-		return queryControlActProcess;
+		return queryControlActProcessPdq;
 	}
 
 	// expose a method to get message id
@@ -307,7 +293,7 @@ public class V3PdqConsumerQuery extends V3Message {
 	 * @see org.openhealthtools.ihe.common.hl7v3.client.V3Message#getId()
 	 */
 	public II getId() {
-		return rootElement.getId();
+		return getRootElement().getId();
 	}
 
 	/**
@@ -355,7 +341,28 @@ public class V3PdqConsumerQuery extends V3Message {
 	 * @return PRPAIN201305UV02Type - the root element
 	 */
 	public PRPAIN201305UV02Type getRootElement() {
+		if (rootElement == null) {
+			rootElement = new PRPAIN201305UV02Type();
+		}
+
 		return rootElement;
+	}
+
+	@Override
+	protected void setAcceptAckCode() {
+		// The acceptAckCode SHALL be set to AL
+		getRootElement().setAcceptAckCode(PixPdqV3Utils.createCS(acceptAckCode));
+	}
+
+	@Override
+	protected void setCreationTime() {
+		// set current time
+		getRootElement().setCreationTime(PixPdqV3Utils.createTSCurrentTime());
+	}
+
+	@Override
+	protected void setId() {
+		getRootElement().setId(messageId);
 	}
 
 	/**
@@ -376,6 +383,12 @@ public class V3PdqConsumerQuery extends V3Message {
 	public void setInitialQuantity(Integer initialQuantity, String units) {
 		queryByParameter.setInitialQuantity(PixPdqV3Utils.createINT1(initialQuantity));
 		queryByParameter.setInitialQuantityCode(PixPdqV3Utils.createCE(units));
+	}
+
+	@Override
+	protected void setITSVersion() {
+		// indicate ITSVersion XML_1.0
+		getRootElement().setITSVersion(itsVersion);
 	}
 
 	/**
@@ -442,8 +455,15 @@ public class V3PdqConsumerQuery extends V3Message {
 	 * 
 	 * @param processingCode
 	 */
-	public void setProcessingCode(String processingCode) {
-		rootElement.setProcessingCode(PixPdqV3Utils.createCS(processingCode));
+	@Override
+	protected void setProcessingCode() {
+		getRootElement().setProcessingCode(PixPdqV3Utils.createCS(processingCode));
+	}
+
+	@Override
+	protected void setProcessingModeCode() {
+		// The value of processingModeCode SHALL be set to T
+		getRootElement().setProcessingModeCode(PixPdqV3Utils.createCS(processingModeCode));
 	}
 
 	/**
@@ -465,11 +485,11 @@ public class V3PdqConsumerQuery extends V3Message {
 	 * @param facilityOID
 	 *            (Sender Organization ID)
 	 */
+	@Override
 	public void setSender(String applicationOID, String facilityOID) {
+		super.setSender(applicationOID, facilityOID);
 		// set the sender/application OIDs
-		rootElement.setSender(PixPdqV3Utils.createMCCIMT000100UV01Sender(applicationOID, facilityOID));
-
-		this.sendingApplication = applicationOID;
-		this.sendingFacility = facilityOID;
+		getRootElement().setSender(PixPdqV3Utils.createMCCIMT000100UV01Sender(applicationOID, facilityOID));
 	}
+
 }

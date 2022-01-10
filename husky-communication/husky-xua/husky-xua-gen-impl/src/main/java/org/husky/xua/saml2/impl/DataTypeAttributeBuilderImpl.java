@@ -43,6 +43,9 @@ import org.openehealth.ipf.commons.ihe.xacml20.herasaf.types.IiDataTypeAttribute
 public class DataTypeAttributeBuilderImpl
 		implements SimpleBuilder<DataTypeAttribute<?>>, SecurityObjectBuilder<String, DataTypeAttribute<?>> {
 
+	
+	/* simple selection function, reducing of complexity not necessary */
+	@SuppressWarnings("java:S3776")
 	@Override
 	public DataTypeAttribute<?> create(String aInternalObject) {
 		DataTypeAttribute<?> function = null;
@@ -105,6 +108,8 @@ public class DataTypeAttributeBuilderImpl
 		return new AnyURIDataTypeAttribute();
 	}
 
+	/* simple selection function, reducing of complexity not necessary */
+	@SuppressWarnings("java:S3776")
 	public String create(DataTypeAttribute<?> aInternalObject) {
 		String function = null;
 		if (aInternalObject instanceof AnyURIDataTypeAttribute) {

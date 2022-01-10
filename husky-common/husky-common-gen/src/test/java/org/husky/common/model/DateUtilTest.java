@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
  * Test of class DateUtil
  */
 @Disabled
-public class DateUtilTest {
+class DateUtilTest {
 
 	/**
 	 * Method implementing
@@ -37,7 +37,7 @@ public class DateUtilTest {
 	 * .
 	 */
 	@Test
-	public void testParseDate() {
+	void testParseDate() {
 		fail("Not yet implemented");
 	}
 
@@ -47,7 +47,7 @@ public class DateUtilTest {
 	 * .
 	 */
 	@Test
-	public void testParseDateyyyyMMdd() {
+	void testParseDateyyyyMMdd() {
 		fail("Not yet implemented");
 	}
 
@@ -57,7 +57,7 @@ public class DateUtilTest {
 	 * .
 	 */
 	@Test
-	public void testParseDateyyyyMMddHHmm() {
+    void testParseDateyyyyMMddHHmm() {
 		fail("Not yet implemented");
 	}
 
@@ -67,7 +67,7 @@ public class DateUtilTest {
 	 * .
 	 */
 	@Test
-	public void testParseDateyyyyMMddHHmmZ() {
+	void testParseDateyyyyMMddHHmmZ() {
 		fail("Not yet implemented");
 	}
 }

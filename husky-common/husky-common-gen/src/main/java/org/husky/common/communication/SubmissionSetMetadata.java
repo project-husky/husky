@@ -13,19 +13,17 @@ package org.husky.common.communication;
 import java.time.ZonedDateTime;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.UUID;
 
-import org.husky.common.enums.EhcVersions;
 import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
 import org.husky.common.hl7cdar2.TEL;
 import org.husky.common.model.Author;
 import org.husky.common.model.Code;
 import org.husky.common.model.Identificator;
-import org.husky.common.utils.DateUtil;
-import org.husky.common.utils.OID;
 import org.husky.common.utils.XdsMetadataUtil;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp.Precision;
 
 /**
  * Represents the metadata for a submission set (which can hold one or more
@@ -223,8 +221,7 @@ public class SubmissionSetMetadata {
 		// Workaround for a Bug in the CDAR2Extractor, which causes a
 		// NullpointerException, if no Telecom value is inserted and
 		// logger.Debug is set to true
-		if ((author.getAuthorMdht().getAssignedAuthor().getTelecom() == null)
-				|| author.getAuthorMdht().getAssignedAuthor().getTelecom().isEmpty()) {
+		if (author.getAuthorMdht().getAssignedAuthor().getTelecom().isEmpty()) {
 			final var tel = new TEL();
 			author.getAuthorMdht().getAssignedAuthor().getTelecom().add(tel);
 		}
@@ -365,22 +362,15 @@ public class SubmissionSetMetadata {
 		}
 
 		if (ohtSubmissionSetType.getSubmissionTime() == null) {
-			ohtSubmissionSetType.setSubmissionTime(DateUtil.formatDateTimeTzon(ZonedDateTime.now()));
+			ohtSubmissionSetType.setSubmissionTime(new Timestamp(ZonedDateTime.now(), Precision.SECOND));
 		}
-		if ((ohtSubmissionSetType.getUniqueId() == null)
-				|| (ohtSubmissionSetType.getSourceId() == null)) {
 
-			// This is the Husky Root OID
-			// default value just in case...
-			final String organizationalId = EhcVersions.getCurrentVersion().getOid();
-
-			if (ohtSubmissionSetType.getUniqueId() == null) {
-				ohtSubmissionSetType.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
-			}
+		if (ohtSubmissionSetType.getUniqueId() == null) {
+			ohtSubmissionSetType.assignUniqueId();
 		}
 
 		if (ohtSubmissionSetType.getEntryUuid() == null) {
-			ohtSubmissionSetType.setEntryUuid(UUID.randomUUID().toString());
+			ohtSubmissionSetType.assignEntryUuid();
 		}
 
 		return ohtSubmissionSetType;

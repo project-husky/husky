@@ -14,14 +14,15 @@ package org.husky.fhir.structures.testhelper;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 import org.hl7.fhir.r4.model.Address.AddressUse;
+import org.hl7.fhir.r4.model.DateType;
 import org.hl7.fhir.r4.model.Enumerations.AdministrativeGender;
 import org.hl7.fhir.r4.model.HumanName;
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Identifier.IdentifierUse;
 import org.husky.common.enums.CountryCode;
-import org.husky.common.utils.DateUtil;
 import org.husky.fhir.structures.gen.FhirCommon;
 import org.husky.fhir.structures.gen.FhirPatient;
 
@@ -34,7 +35,7 @@ public class TestPatient {
 
 	static private String oidLocalId = "1.2.3.4";
 
-	public static FhirPatient getFhirPatientMueller() {
+	public static FhirPatient getFhirPatientMueller() throws ParseException {
 		final FhirPatient patient = new FhirPatient();
 		final TestPatient testPatient = TestPatient.getTestPatientMueller();
 
@@ -55,7 +56,14 @@ public class TestPatient {
 
 		patient.getIdentifier().add(identifier);
 
-		patient.setBirthDate(DateUtil.parseDateyyyyMMdd2(testPatient.birthDate));
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+		DateType dateType = new DateType();
+		dateType.setTimeZone(TimeZone.getTimeZone("UTC"));
+		dateType.setValue(sdf.parse(testPatient.birthDate));
+
+		patient.setBirthDateElement(dateType);
 
 		patient.getAddress().add(address);
 		patient.setGender(AdministrativeGender.valueOf(testPatient.gender.toUpperCase()));
@@ -63,7 +71,7 @@ public class TestPatient {
 		return patient;
 	}
 
-	public static FhirPatient getFhirPatientMuellerObsoleteId() {
+	public static FhirPatient getFhirPatientMuellerObsoleteId() throws ParseException {
 		final FhirPatient patient = new FhirPatient();
 		final TestPatient testPatient = TestPatient.getTestPatientMuellerObsolete();
 
@@ -84,7 +92,8 @@ public class TestPatient {
 
 		patient.getIdentifier().add(identifier);
 
-		patient.setBirthDate(DateUtil.parseDateyyyyMMdd2(testPatient.birthDate));
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-ddZZZZ");
+		patient.setBirthDate(sdf.parse(testPatient.birthDate));
 
 		patient.getAddress().add(address);
 		patient.setGender(AdministrativeGender.valueOf(testPatient.gender.toUpperCase()));

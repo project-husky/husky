@@ -77,11 +77,9 @@ public class StatementBuilderImpl
 		
 		if(aInternalObject.getPolicyOrPolicySet() != null) {
 			for(Object obj : aInternalObject.getPolicyOrPolicySet()) {
-				if(obj instanceof PolicyType) {
-					var policy = (PolicyType) obj;		
+				if (obj instanceof PolicyType policy) {
 					retVal.getPolicies().add(new PolicyBuilderImpl().create(policy));	
-				} else if(obj instanceof org.herasaf.xacml.core.policy.impl.PolicySetType) {
-					var policySet = (org.herasaf.xacml.core.policy.impl.PolicySetType) obj;
+				} else if (obj instanceof org.herasaf.xacml.core.policy.impl.PolicySetType policySet) {
 					retVal.getPolicySets().add(new PolicySetBuilderImpl().create(policySet));
 				}
 			}
@@ -91,11 +89,9 @@ public class StatementBuilderImpl
 			var referencedPoliciesType = new ReferencedPoliciesTypeImplBuilder().buildObject();
 
 			for (Object obj : aInternalObject.getReferencedPolicies().getPolicyOrPolicySet()) {
-				if (obj instanceof PolicyType) {
-					var policy = (PolicyType) obj;
+				if (obj instanceof PolicyType policy) {
 					retVal.getReferencedPolicies().getPolicies().add(new PolicyBuilderImpl().create(policy));
-				} else if (obj instanceof org.herasaf.xacml.core.policy.impl.PolicySetType) {
-					var policySet = (org.herasaf.xacml.core.policy.impl.PolicySetType) obj;
+				} else if (obj instanceof org.herasaf.xacml.core.policy.impl.PolicySetType policySet) {
 					retVal.getReferencedPolicies().getPolicySets().add(new PolicySetBuilderImpl().create(policySet));
 				}
 			}

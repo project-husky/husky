@@ -10,13 +10,13 @@
  */
 package org.husky.common.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.husky.common.basetypes.IdentificatorBaseType;
 import org.husky.common.enums.NullFlavor;
 import org.husky.common.hl7cdar2.II;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Identifiable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The class Identificator contains all necessary fields for an id. This class also provides mapping methods to other
@@ -96,7 +96,6 @@ public class Identificator extends IdentificatorBaseType {
 
         if (baseType != null) {
             retVal = new org.husky.common.hl7cdar2.II();
-            String value;
 
             var nf = baseType.getNullFlavor();
             if (nf != null) {
@@ -104,32 +103,35 @@ public class Identificator extends IdentificatorBaseType {
                     retVal.nullFlavor = new ArrayList<String>();
                 retVal.nullFlavor.add(nf.getCodeValue());
             } else {
-
-                value = baseType.getAssigningAuthorityName();
-                if (value != null) {
-                    retVal.setAssigningAuthorityName(value);
-                }
-
-                Boolean bValue = baseType.isDisplayable();
-                if (bValue != null) {
-                    retVal.setDisplayable(bValue);
-                }
-
-                value = baseType.getExtension();
-                if (value != null) {
-                    retVal.setExtension(value);
-                }
-
-                value = baseType.getRoot();
-                if (value != null) {
-                    retVal.setRoot(value);
-                }
+				createIdentificator(retVal, baseType);
             }
         }
 
         return retVal;
 
     }
+
+	private static void createIdentificator(II retVal, IdentificatorBaseType baseType) {
+		String value = baseType.getAssigningAuthorityName();
+		if (value != null) {
+			retVal.setAssigningAuthorityName(value);
+		}
+
+		Boolean bValue = baseType.isDisplayable();
+		if (bValue != null) {
+			retVal.setDisplayable(bValue);
+		}
+
+		value = baseType.getExtension();
+		if (value != null) {
+			retVal.setExtension(value);
+		}
+
+		value = baseType.getRoot();
+		if (value != null) {
+			retVal.setRoot(value);
+		}
+	}
 
     /**
      * Creates the base type from the given HL7 CDA R2 value.
@@ -175,6 +177,20 @@ public class Identificator extends IdentificatorBaseType {
         }
         return null;
     }
+
+	/**
+	 * Gets a list of identificators from a list of ids.
+	 *
+	 * @param iiList ii list
+	 * @return the list of identificator
+	 */
+	public static List<Identificator> getIdentificatorList(List<II> iiList) {
+		final List<Identificator> il = new ArrayList<>();
+		for (final org.husky.common.hl7cdar2.II mId : iiList) {
+			il.add(new Identificator(mId));
+		}
+		return il;
+	}
 
     /**
      * Gets the HL7 CDA R2 data type from the current instance.
@@ -227,4 +243,5 @@ public class Identificator extends IdentificatorBaseType {
     public void set(org.husky.common.hl7cdar2.II hl7CdaR2Value) {
         initFromHl7CdaR2(hl7CdaR2Value);
     }
+
 }

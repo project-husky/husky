@@ -14,9 +14,7 @@ package org.husky.communication.ch.xd.storedquery;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.husky.common.utils.DateUtil;
 import org.husky.communication.ch.testhelper.XdsChTestUtils;
-import org.husky.communication.ch.xd.storedquery.FindDocumentsQuery;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +22,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Test of class FindDocumentsQuery
  */
-public class FindDocumentsQueryTest extends XdsChTestUtils {
+class FindDocumentsQueryTest extends XdsChTestUtils {
 
 	/** The SLF4J logger instance. */
 	protected final Logger log = LoggerFactory.getLogger(getClass());
@@ -35,7 +33,7 @@ public class FindDocumentsQueryTest extends XdsChTestUtils {
 	 * .
 	 */
 	@Test
-	public void testFindDocumentsQueryIdentificatorClassCodeArrayDateTimeRangeArrayPracticeSettingCodeArrayHealthcareFacilityTypeCodeArrayConfidentialityCodeArrayFormatCodeArrayXCNAvailabilityStatus() {
+	void testFindDocumentsQueryIdentificatorClassCodeArrayDateTimeRangeArrayPracticeSettingCodeArrayHealthcareFacilityTypeCodeArrayConfidentialityCodeArrayFormatCodeArrayXCNAvailabilityStatus() {
 		// Constructor Test
 		// Create a query
 		final FindDocumentsQuery q = new FindDocumentsQuery(patientId, classCodes, eDateTimeRanges,
@@ -54,10 +52,10 @@ public class FindDocumentsQueryTest extends XdsChTestUtils {
 		assertTrue(sqpl.getStatus().stream()
 				.anyMatch(t -> t.getQueryOpcode().equalsIgnoreCase(avaiabilityStatus.getCodeValue())));
 
-		assertEquals(DateUtil.formatDateTimeTzon(sqpl.getCreationTime().getFrom().getDateTime()),
+		assertEquals(sqpl.getCreationTime().getFrom().toHL7(),
 				eDateTimeRange1.getFromAsUsFormattedString());
 
-		assertEquals(DateUtil.formatDateTimeTzon(sqpl.getCreationTime().getTo().getDateTime()),
+		assertEquals(sqpl.getCreationTime().getTo().toHL7(),
 				eDateTimeRange1.getToAsUsFormattedString());
 
 		assertTrue(sqpl.getClassCodes().stream()

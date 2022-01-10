@@ -18,6 +18,8 @@ import javax.xml.namespace.QName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import jakarta.xml.soap.SOAPException;
+import jakarta.xml.soap.SOAPHeader;
 import jakarta.xml.soap.SOAPHeaderElement;
 import jakarta.xml.ws.handler.MessageContext;
 import jakarta.xml.ws.handler.soap.SOAPHandler;
@@ -100,28 +102,15 @@ public class WsaHeaderSoapHandler implements SOAPHandler<SOAPMessageContext> {
 				soapHeader.addNamespaceDeclaration(NAMESPACE_WSA, NAMESPACE_WSA_URI);
 
 				if ((mWsaValues.getAction() != null) && !"".equals(mWsaValues.getAction())) {
-					final SOAPHeaderElement actionHeader = soapHeader
-							.addHeaderElement(mActionHeader);
-					actionHeader.setValue(mWsaValues.getAction());
-					if (mWsaValues.isMustUnderstand()) {
-						actionHeader.addAttribute(mustUnderstandAttribute, "true");
-					}
+					setSOAPHeader(soapHeader, mustUnderstandAttribute, mActionHeader, mWsaValues.getAction());
 				}
+
 				if ((mWsaValues.getMessageId() != null) && !"".equals(mWsaValues.getMessageId())) {
-					final SOAPHeaderElement relatesMessageIdHeader = soapHeader
-							.addHeaderElement(mMessageIdHeader);
-					relatesMessageIdHeader.setValue(mWsaValues.getMessageId());
-					if (mWsaValues.isMustUnderstand()) {
-						relatesMessageIdHeader.addAttribute(mustUnderstandAttribute, "true");
-					}
+					setSOAPHeader(soapHeader, mustUnderstandAttribute, mMessageIdHeader, mWsaValues.getMessageId());
 				}
+
 				if ((mWsaValues.getTo() != null) && !"".equals(mWsaValues.getTo())) {
-					final SOAPHeaderElement relatesToHeader = soapHeader
-							.addHeaderElement(mToHeader);
-					relatesToHeader.setValue(mWsaValues.getTo());
-					if (mWsaValues.isMustUnderstand()) {
-						relatesToHeader.addAttribute(mustUnderstandAttribute, "true");
-					}
+					setSOAPHeader(soapHeader, mustUnderstandAttribute, mToHeader, mWsaValues.getTo());
 				}
 
 			}
@@ -131,5 +120,14 @@ public class WsaHeaderSoapHandler implements SOAPHandler<SOAPMessageContext> {
 			return false;
 		}
 		return true;
+	}
+
+	private void setSOAPHeader(SOAPHeader soapHeader, QName mustUnderstandAttribute, QName headerQName, String value)
+			throws SOAPException {
+		final SOAPHeaderElement specificHeader = soapHeader.addHeaderElement(headerQName);
+		specificHeader.setValue(value);
+		if (mWsaValues.isMustUnderstand()) {
+			specificHeader.addAttribute(mustUnderstandAttribute, "true");
+		}
 	}
 }

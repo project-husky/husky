@@ -10,12 +10,9 @@
  */
 package org.husky.communication.ch.ppq.impl;
 
-import javax.xml.bind.JAXBException;
-
 import org.husky.communication.ch.ppq.api.PrivacyPolicyQueryResponse;
 import org.husky.communication.ch.ppq.api.PrivacyPolicyQueryResponseBuilder;
 import org.husky.xua.core.SecurityObjectBuilder;
-import org.husky.xua.exceptions.DeserializeException;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.protocol.ResponseType;
 import org.opensaml.saml.saml2.core.Response;
 
@@ -30,7 +27,7 @@ public class PrivacyPolicyQueryResponseBuilderImpl implements PrivacyPolicyQuery
 		return new PrivacyPolicyQueryResponseImpl(request);
 	}
 
-	public PrivacyPolicyQueryResponse create(ResponseType request) throws JAXBException, DeserializeException {
+	public PrivacyPolicyQueryResponse create(ResponseType request) {
 		return new PrivacyPolicyQueryResponseImpl(request);
 	}
 

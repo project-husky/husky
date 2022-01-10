@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AuthnStatementType;
 import org.opensaml.saml.saml2.core.impl.AuthnContextClassRefImpl;
 
-public class AuthnStatementBuilderImplTest {
+class AuthnStatementBuilderImplTest {
 
 	private AuthnStatementBuilder builder;
 	private String testAuthnContextClassRef;
@@ -48,7 +48,7 @@ public class AuthnStatementBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.AuthnStatementBuilderImpl#authnContextClassRef(java.lang.String)}.
 	 */
 	@Test
-	public void testAuthnContextClassRef() {
+	void testAuthnContextClassRef() {
 		final AuthnStatementType ref = builder.authnContextClassRef(testAuthnContextClassRef).create();
 		assertEquals(testAuthnContextClassRef,
 				((AuthnContextClassRefImpl) ref.getAuthnContext().getContent().get(0).getValue())
@@ -60,7 +60,7 @@ public class AuthnStatementBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.AuthnStatementBuilderImpl#authnInstant(java.util.Calendar)}.
 	 */
 	@Test
-	public void testAuthnInstant() {
+	void testAuthnInstant() {
 		final AuthnStatementType ref = builder.authnInstant(testAuthnInstance).create();
 		assertEquals(testAuthnInstance.getTimeInMillis(),
 				ref.getAuthnInstant().toGregorianCalendar().getTimeInMillis());
@@ -71,7 +71,7 @@ public class AuthnStatementBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.AuthnStatementBuilderImpl#sessionIndex(java.lang.String)}.
 	 */
 	@Test
-	public void testSessionIndex() {
+	void testSessionIndex() {
 		final AuthnStatementType ref = builder.sessionIndex(testSessionIndex).create();
 		assertEquals(testSessionIndex, ref.getSessionIndex());
 	}
@@ -81,7 +81,7 @@ public class AuthnStatementBuilderImplTest {
 	 * {@link org.husky.xua.saml2.impl.AuthnStatementBuilderImpl#sessionNotOnOrAfter(java.util.Calendar)}.
 	 */
 	@Test
-	public void testSessionNotOnOrAfter() {
+	void testSessionNotOnOrAfter() {
 		final AuthnStatementType ref = builder.sessionNotOnOrAfter(testSessionNotOnOrAfter).create();
 		assertEquals(testSessionNotOnOrAfter.getTimeInMillis(),
 				ref.getSessionNotOnOrAfter().toGregorianCalendar().getTimeInMillis());
