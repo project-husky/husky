@@ -169,8 +169,6 @@ public abstract class V3PdqContinuationBase extends V3Message {
 
 	/**
 	 * Set the processing code
-	 * 
-	 * @param processingCode
 	 */
 	@Override
 	protected void setProcessingCode() {

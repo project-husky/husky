@@ -58,7 +58,7 @@ public class ActionMatchBuilderImpl
 	/**
 	 * Method to create an instance of type U from T.
 	 * 
-	 * @param the internal wrapped object of type U
+	 * @param aInternalObject the internal wrapped object of type U
 	 * 
 	 * @return the instance of type T
 	 */

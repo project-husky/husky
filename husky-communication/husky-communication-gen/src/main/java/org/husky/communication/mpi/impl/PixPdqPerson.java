@@ -54,14 +54,7 @@ public class PixPdqPerson {
 	/**
 	 * Add an address for the patient.
 	 *
-	 * @param addressStreetAddress
-	 * @param addressCity
-	 * @param addressCounty
-	 * @param addressState
-	 * @param addressCountry
-	 * @param addressZip
-	 * @param addressOtherDesignation
-	 * @param addressType
+	 * @param patientAddress
 	 */
 	public void addPatientAddress(AD patientAddress) {
 		if (patientAddress == null) {
