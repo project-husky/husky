@@ -55,6 +55,13 @@ public class ActionMatchBuilderImpl
 		return new ActionMatchType();
 	}
 
+	/**
+	 * Method to create an instance of type U from T.
+	 * 
+	 * @param the internal wrapped object of type U
+	 * 
+	 * @return the instance of type T
+	 */
 	public org.opensaml.xacml.policy.ActionMatchType create(ActionMatchType aInternalObject) {
 		var retVal = new ActionMatchTypeImplBuilder().buildObject();
 		var actionAttrDesType = new AttributeDesignatorTypeImplBuilder().buildObject();
