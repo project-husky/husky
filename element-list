@@ -47,6 +47,7 @@ org.husky.emed.cda.utils
 org.husky.emed.cda.validation
 org.husky.emed.cda.xml
 org.husky.emed.ch
+org.husky.emed.conversion
 org.husky.emed.enums
 org.husky.emed.errors
 org.husky.emed.models.common
