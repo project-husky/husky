@@ -94,8 +94,10 @@ public class OptionalUtils {
      * @return the casted object or {@code null} if it wasn't an instance of the required type.
      */
     @Nullable
-    public static <T> T castOrFilter(final Object object,
-                                     final Class<T> type) {
+    public static <T> T castOrNull(final Object object,
+                                   final Class<T> type) {
+        Objects.requireNonNull(object, "object shall not be null in castOrFilter()");
+        Objects.requireNonNull(type, "type shall not be null in castOrFilter()");
         return type.isInstance(object) ? type.cast(object) : null;
     }
 }
