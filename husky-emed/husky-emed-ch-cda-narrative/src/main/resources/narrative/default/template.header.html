@@ -1,0 +1,40 @@
+<!--
+  ~ This code is made available under the terms of the Eclipse Public License v1.0
+  ~ in the github project https://github.com/project-husky/husky there you also
+  ~ find a list of the contributors and the license information.
+  ~
+  ~ This project has been developed further and modified by the joined working group Husky
+  ~ on the basis of the eHealth Connector opensource project from June 28, 2021,
+  ~ whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+  ~
+  -->
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>${title}</title>
+        <meta name="subject" content="${subject}"/>
+        <meta name="author" content="${author}"/>
+        <meta name="description" content="${description}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <style>
+            @page {
+                size: a4 landscape;
+                margin: 50px;
+                @top-left {
+                    content: counter(page);
+                }
+
+                @bottom-center {
+                    content: 'Page ' counter(page) ' sur ' counter(pages);
+                }
+                font-family: arimo;
+            }
+            body {
+                margin: 0;
+            }
+        </style>
+    </head>
+    <body>
