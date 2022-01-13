@@ -15,5 +15,6 @@
   	<module>husky-xua</module>
   	<module>husky-valueset-gen</module>
   	<module>husky-ppq</module>
+  	<module>husky-communication-at</module>
   </modules>
 </project>

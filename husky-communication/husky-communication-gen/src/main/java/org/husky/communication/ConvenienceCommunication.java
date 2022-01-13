@@ -130,7 +130,7 @@ public class ConvenienceCommunication extends CamelService {
     /**
      * Determines if XDS document metadata will be extracted automatically (e.g. from CDA documents)
      */
-    private DocumentMetadataExtractionMode documentMetadataExtractionMode = DocumentMetadataExtractionMode.DEFAULT_EXTRACTION;
+	protected DocumentMetadataExtractionMode documentMetadataExtractionMode = DocumentMetadataExtractionMode.DEFAULT_EXTRACTION;
 
     /**
      * Determines if SubmissionSet metadata will be extracted automatically (e.g. from CDA documents)
@@ -139,7 +139,7 @@ public class ConvenienceCommunication extends CamelService {
     /**
      * The IPF transaction data to send XDS Documents
      */
-    private ProvideAndRegisterDocumentSet txnData = null;
+	private ProvideAndRegisterDocumentSet txnData = null;
 
     /**
      * Instantiates a new convenience communication without affinity domain set-up. ATNA audit is disabled (unsecure)
@@ -642,7 +642,7 @@ public class ConvenienceCommunication extends CamelService {
 		}
 	}
 
-	private void setGeneralSubSetDetails(SubmissionSet subSet, Identifiable patientId) {
+	protected void setGeneralSubSetDetails(SubmissionSet subSet, Identifiable patientId) {
 		// set submission time
 		if (subSet.getSubmissionTime() == null) {
 			subSet.setSubmissionTime(new Timestamp(ZonedDateTime.now(), Precision.SECOND));

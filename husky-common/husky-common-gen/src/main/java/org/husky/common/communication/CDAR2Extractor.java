@@ -950,7 +950,7 @@ public class CDAR2Extractor {
      * @param aAuth ClinicalDocument/author/assignedAuthor/ object
      * @return Returns null if author cannot be extracted
      */
-    private Person extractAuthorPerson(POCDMT000040AssignedAuthor aAuth) {
+	public Person extractAuthorPerson(POCDMT000040AssignedAuthor aAuth) {
         if (aAuth == null) {
             return null;
         }

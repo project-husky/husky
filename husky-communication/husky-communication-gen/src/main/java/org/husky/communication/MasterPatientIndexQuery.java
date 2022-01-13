@@ -83,7 +83,9 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery addMothersMaidenName(boolean useFuzzySearch, Name name) {
-		v3PdqQuery.addMothersMaidenName(useFuzzySearch, FhirPatient.convertName(name));
+		if (name != null) {
+			v3PdqQuery.addMothersMaidenName(useFuzzySearch, FhirPatient.convertName(name));
+		}
 		return this;
 	}
 
@@ -95,7 +97,9 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery addPatientAddress(Address address) {
-		v3PdqQuery.addPatientAddress(FhirPatient.convertAddress(address));
+		if (address != null) {
+			v3PdqQuery.addPatientAddress(FhirPatient.convertAddress(address));
+		}
 		return this;
 	}
 
@@ -107,10 +111,13 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery addPatientIdentificator(Identificator identificator) {
-		var id = new Identifier();
-		id.setSystem(identificator.getRoot());
-		id.setValue(identificator.getExtension());
-		v3PdqQuery.addPatientIdentifier(id);
+		if (identificator != null) {
+			var id = new Identifier();
+			id.setSystem(identificator.getRoot());
+			id.setValue(identificator.getExtension());
+			v3PdqQuery.addPatientIdentifier(id);
+		}
+
 		return this;
 	}
 
@@ -125,7 +132,9 @@ public class MasterPatientIndexQuery {
 	 * @return the master patient index query
 	 */
 	public MasterPatientIndexQuery addPatientName(boolean useFuzzySearch, Name name) {
-		v3PdqQuery.addPatientName(useFuzzySearch, FhirPatient.convertName(name));
+		if (name != null) {
+			v3PdqQuery.addPatientName(useFuzzySearch, FhirPatient.convertName(name));
+		}
 		return this;
 	}
 

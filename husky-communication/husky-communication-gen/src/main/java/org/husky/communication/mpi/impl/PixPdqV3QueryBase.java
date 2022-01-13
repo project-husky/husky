@@ -594,12 +594,13 @@ public class PixPdqV3QueryBase extends CamelService {
 	protected void setDeceased(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
 		final Type idDeceased = patient.getDeceased();
 		if (idDeceased instanceof DateTimeType deceased && deceased.getValue() != null) {
-			final var dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+			final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 			v3PixSourceMessage.setPatientDeceasedTime(dateFormat.format(deceased.getValue()));
 			v3PixSourceMessage.setPatientDeceased(true);
 		}
 		if (idDeceased instanceof BooleanType deceased && deceased.getValue() != null) {
 			v3PixSourceMessage.setPatientDeceased(deceased.getValue());
+
 		}
 	}
 
@@ -619,8 +620,7 @@ public class PixPdqV3QueryBase extends CamelService {
 				patient.setDeceased(dt);
 			}
 			if (pdqPatient.getPatientPerson().getDeceasedTime() != null) {
-				final var deceasedTime = pdqPatient.getPatientPerson().getDeceasedTime().getValue();
-				patient.setDeceased(new DateTimeType(deceasedTime));
+				patient.setDeceased(DateTimeType.parseV3(pdqPatient.getPatientPerson().getDeceasedTime().getValue()));
 			}
 		}
 	}

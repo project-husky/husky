@@ -189,6 +189,29 @@ public class DocumentMetadata {
 	}
 
 	/**
+	 * Instantiates a new document metadata.
+	 * 
+	 * @param cdaDoc   CDA document of metadata
+	 * @param language language of the meta data
+	 */
+	public DocumentMetadata(POCDMT000040ClinicalDocument cdaDoc, String language) {
+		xDoc = new DocumentEntry();
+		cda = cdaDoc;
+		this.language = language;
+	}
+
+	/**
+	 * Instantiates a new document metadata.
+	 * 
+	 * @param cdaDoc            CDA document of metadata
+	 * @param documentEntryType the document entry type
+	 */
+	public DocumentMetadata(POCDMT000040ClinicalDocument cdaDoc, DocumentEntry documentEntryType) {
+		xDoc = documentEntryType;
+		cda = cdaDoc;
+	}
+
+	/**
 	 * Adds an (optional) author element. All information relevant for the XDS
 	 * Document Metadata will be extracted from the Convenience API Author.
 	 *
@@ -1049,6 +1072,10 @@ public class DocumentMetadata {
 	 */
 	public void setUri(String uri) {
 		xDoc.setUri(uri);
+	}
+
+	public POCDMT000040ClinicalDocument getCda() {
+		return cda;
 	}
 
 }
