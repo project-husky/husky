@@ -24,8 +24,8 @@ import com.helger.schematron.svrl.jaxb.FailedAssert;
 import com.helger.schematron.xslt.SchematronResourceXSLT;
 
 import org.husky.common.utils.xml.XmlSchemaValidator;
-import org.husky.emed.enums.CceDocumentType;
-import org.husky.emed.errors.InvalidEmedContentException;
+import org.husky.emed.ch.enums.CceDocumentType;
+import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.validation.service.pdf.PdfA12Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

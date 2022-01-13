@@ -36,7 +36,7 @@ public enum FceDocumentType {
 
     MTP_JSON(
             EmedDocumentType.MTP.getName(),
-            FormatCode.FHIR_COMMUNITY_MEDICATION_TREATMENT_PLAN,
+            FormatCode.COMMUNITY_PHARMACEUTICAL_ADVICE, // TODO
             EmedDocumentType.MTP.getTypeCode(),
             EmedDocumentType.MTP.getClassCode(),
             MimeType.FHIR_JSON_CODE,
@@ -44,7 +44,7 @@ public enum FceDocumentType {
     ),
     PRE_JSON(
             EmedDocumentType.PRE.getName(),
-            FormatCode.FHIR_COMMUNITY_PRESCRIPTION,
+            FormatCode.COMMUNITY_PHARMACEUTICAL_ADVICE, // TODO
             EmedDocumentType.PRE.getTypeCode(),
             EmedDocumentType.PRE.getClassCode(),
             MimeType.FHIR_JSON_CODE,
@@ -52,7 +52,7 @@ public enum FceDocumentType {
     ),
     DIS_JSON(
             EmedDocumentType.DIS.getName(),
-            FormatCode.FHIR_COMMUNITY_DISPENSE,
+            FormatCode.COMMUNITY_PHARMACEUTICAL_ADVICE, // TODO
             EmedDocumentType.DIS.getTypeCode(),
             EmedDocumentType.DIS.getClassCode(),
             MimeType.FHIR_JSON_CODE,
@@ -68,7 +68,7 @@ public enum FceDocumentType {
     ),
     PML_JSON(
             EmedDocumentType.PML.getName(),
-            FormatCode.COMMUNITY_MEDICATION_LIST,
+            FormatCode.COMMUNITY_MEDICATION_LIST, // TODO
             EmedDocumentType.PML.getTypeCode(),
             EmedDocumentType.PML.getClassCode(),
             MimeType.FHIR_JSON_CODE,
@@ -76,7 +76,7 @@ public enum FceDocumentType {
     ),
     PMLC_JSON(
             EmedDocumentType.PMLC.getName(),
-            FormatCode.FHIR_MEDICATION_CARD,
+            FormatCode.COMMUNITY_MEDICATION_LIST, // TODO
             EmedDocumentType.PMLC.getTypeCode(),
             EmedDocumentType.PMLC.getClassCode(),
             MimeType.FHIR_JSON_CODE,
@@ -84,7 +84,7 @@ public enum FceDocumentType {
     ),
     MTP_XML(
             EmedDocumentType.MTP.getName(),
-            FormatCode.FHIR_COMMUNITY_MEDICATION_TREATMENT_PLAN,
+            FormatCode.COMMUNITY_MEDICATION_LIST, // TODO
             EmedDocumentType.MTP.getTypeCode(),
             EmedDocumentType.MTP.getClassCode(),
             MimeType.FHIR_XML_CODE,
@@ -92,7 +92,7 @@ public enum FceDocumentType {
     ),
     PRE_XML(
             EmedDocumentType.PRE.getName(),
-            FormatCode.FHIR_COMMUNITY_PRESCRIPTION,
+            FormatCode.COMMUNITY_MEDICATION_LIST, // TODO
             EmedDocumentType.PRE.getTypeCode(),
             EmedDocumentType.PRE.getClassCode(),
             MimeType.FHIR_XML_CODE,
@@ -100,7 +100,7 @@ public enum FceDocumentType {
     ),
     DIS_XML(
             EmedDocumentType.DIS.getName(),
-            FormatCode.FHIR_COMMUNITY_DISPENSE,
+            FormatCode.COMMUNITY_MEDICATION_LIST, // TODO
             EmedDocumentType.DIS.getTypeCode(),
             EmedDocumentType.DIS.getClassCode(),
             MimeType.FHIR_XML_CODE,
@@ -124,7 +124,7 @@ public enum FceDocumentType {
     ),
     PMLC_XML(
             EmedDocumentType.PMLC.getName(),
-            FormatCode.FHIR_MEDICATION_CARD,
+            FormatCode.COMMUNITY_MEDICATION_LIST, // TODO
             EmedDocumentType.PMLC.getTypeCode(),
             EmedDocumentType.PMLC.getClassCode(),
             MimeType.FHIR_XML_CODE,

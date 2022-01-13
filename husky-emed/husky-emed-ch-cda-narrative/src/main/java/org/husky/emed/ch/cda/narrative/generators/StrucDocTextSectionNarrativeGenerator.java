@@ -20,10 +20,10 @@
  */
 package org.husky.emed.ch.cda.narrative.generators;
 
-import org.husky.emed.models.document.EmedDisDocumentDigest;
-import org.husky.emed.models.document.EmedMtpDocumentDigest;
-import org.husky.emed.models.document.EmedPadvDocumentDigest;
-import org.husky.emed.models.document.EmedPmlDocumentDigest;
+import org.husky.emed.ch.models.document.EmedDisDocumentDigest;
+import org.husky.emed.ch.models.document.EmedMtpDocumentDigest;
+import org.husky.emed.ch.models.document.EmedPadvDocumentDigest;
+import org.husky.emed.ch.models.document.EmedPmlDocumentDigest;
 
 public class StrucDocTextSectionNarrativeGenerator {
 

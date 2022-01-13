@@ -21,10 +21,10 @@
 package org.husky.emed.ch.cda.services.readers;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.errors.InvalidEmedContentException;
-import org.husky.emed.enums.PharmaceuticalDoseFormEdqm;
+import org.husky.emed.ch.errors.InvalidEmedContentException;
+import org.husky.emed.ch.enums.PharmaceuticalDoseFormEdqm;
 import org.husky.common.hl7cdar2.COCTMT230100UVPackagedMedicine;
-import org.husky.emed.models.treatment.MedicationPackagedProduct;
+import org.husky.emed.ch.models.treatment.MedicationPackagedProduct;
 
 import java.util.Objects;
 

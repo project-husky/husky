@@ -23,8 +23,8 @@ package org.husky.emed.ch.cda.utils;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.dataflow.qual.SideEffectFree;
 import org.husky.common.hl7cdar2.*;
-import org.husky.emed.errors.InvalidEmedContentException;
-import org.husky.emed.models.common.EmedReference;
+import org.husky.emed.ch.errors.InvalidEmedContentException;
+import org.husky.emed.ch.models.common.EmedReference;
 
 import java.util.Collections;
 import java.util.List;

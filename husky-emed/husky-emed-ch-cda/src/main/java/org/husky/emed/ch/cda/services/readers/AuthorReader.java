@@ -20,10 +20,10 @@
  */
 package org.husky.emed.ch.cda.services.readers;
 
-import org.husky.emed.errors.InvalidEmedContentException;
-import org.husky.emed.enums.ParticipationFunction;
+import org.husky.emed.ch.errors.InvalidEmedContentException;
+import org.husky.emed.ch.enums.ParticipationFunction;
 import org.husky.common.hl7cdar2.POCDMT000040Author;
-import org.husky.emed.models.common.AuthorDigest;
+import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.cda.utils.TemplateIds;
 
 import java.time.Instant;

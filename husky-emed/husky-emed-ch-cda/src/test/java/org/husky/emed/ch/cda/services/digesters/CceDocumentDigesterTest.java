@@ -6,17 +6,6 @@
  * This project has been developed further and modified by the joined working group Husky
  * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
- *
- */
-
-/*
- * This code is made available under the terms of the Eclipse Public License v1.0
- * in the github project https://github.com/project-husky/husky there you also
- * find a list of the contributors and the license information.
- *
- * This project has been developed further and modified by the joined working group Husky
- * on the basis of the eHealth Connector opensource project from June 28, 2021,
- * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  */
 package org.husky.emed.ch.cda.services.digesters;
 
@@ -33,9 +22,9 @@ import java.util.Optional;
 import org.husky.common.ch.enums.ConfidentialityCode;
 import org.husky.emed.ch.cda.TestUtils;
 import org.husky.emed.ch.cda.services.EmedEntryDigestService;
-import org.husky.emed.enums.CceDocumentType;
-import org.husky.emed.models.document.EmedMtpDocumentDigest;
-import org.husky.emed.models.entry.EmedEntryDigest;
+import org.husky.emed.ch.enums.CceDocumentType;
+import org.husky.emed.ch.models.document.EmedMtpDocumentDigest;
+import org.husky.emed.ch.models.entry.EmedEntryDigest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;

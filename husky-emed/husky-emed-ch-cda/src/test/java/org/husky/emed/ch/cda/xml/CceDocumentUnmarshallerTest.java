@@ -24,7 +24,7 @@ import org.husky.emed.ch.cda.generated.artdecor.MedicationTreatmentPlanDocument;
  * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  */
-import org.husky.emed.errors.InvalidEmedContentException;
+import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.InputSource;
 

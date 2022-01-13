@@ -21,8 +21,8 @@
 package org.husky.emed.ch.cda.services.readers;
 
 import org.husky.common.hl7cdar2.*;
-import org.husky.emed.errors.InvalidEmedContentException;
-import org.husky.emed.enums.ActSubstanceAdminSubstitutionCode;
+import org.husky.emed.ch.errors.InvalidEmedContentException;
+import org.husky.emed.ch.enums.ActSubstanceAdminSubstitutionCode;
 import org.husky.emed.ch.cda.utils.EntryRelationshipUtils;
 import org.husky.emed.ch.cda.utils.TemplateIds;
 

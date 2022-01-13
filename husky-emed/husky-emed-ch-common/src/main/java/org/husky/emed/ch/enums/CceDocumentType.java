@@ -86,7 +86,7 @@ public enum CceDocumentType {
             EmedDocumentType.PMLC.getName(),
             "Medication Card document",
             "56445-0",
-            FormatCode.MEDICATION_CARD,
+            FormatCode.COMMUNITY_MEDICATION_LIST, // TODO
             EmedDocumentType.PMLC.getTypeCode(),
             EmedDocumentType.PMLC.getClassCode(),
             "2.16.756.5.30.1.1.10.1.3"

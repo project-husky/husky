@@ -14,7 +14,7 @@ package org.husky.emed.ch.cda.xml;
 import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
 import org.husky.common.utils.xml.XmlFactories;
 import org.husky.emed.ch.cda.generated.artdecor.*;
-import org.husky.emed.errors.InvalidEmedContentException;
+import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;

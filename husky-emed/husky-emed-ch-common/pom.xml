@@ -3,6 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <groupId>org.husky.emed.ch</groupId>
     <artifactId>husky-emed-ch-common</artifactId>
     <name>Husky eMedication Swiss Common</name>
     <packaging>jar</packaging>
@@ -10,7 +11,7 @@
     <parent>
         <groupId>org.husky.emed</groupId>
         <artifactId>husky-emed</artifactId>
-        <version>2.0-CARA</version>
+        <version>2.0-ALPHA</version>
     </parent>
 
     <dependencies>
@@ -18,12 +19,12 @@
         <dependency>
             <groupId>org.husky.common</groupId>
             <artifactId>husky-common-gen</artifactId>
-            <version>2.0-CARA</version>
+            <version>2.0-ALPHA</version>
         </dependency>
         <dependency>
             <groupId>org.husky.communication</groupId>
             <artifactId>husky-communication-ch</artifactId>
-            <version>2.0-CARA</version>
+            <version>2.0-ALPHA</version>
         </dependency>
 
         <!-- HAPI Java HL7 API Base Module, (GPL + MPL 1.1) -->

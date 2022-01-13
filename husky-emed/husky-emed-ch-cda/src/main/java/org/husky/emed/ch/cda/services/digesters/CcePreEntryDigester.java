@@ -33,12 +33,12 @@ import org.husky.emed.ch.cda.services.readers.SubAdmEntryReader;
 import org.husky.emed.ch.cda.utils.IiUtils;
 import org.husky.emed.ch.cda.utils.IvlTsUtils;
 import org.husky.emed.ch.cda.utils.TemplateIds;
-import org.husky.emed.errors.InvalidEmedContentException;
-import org.husky.emed.models.common.AuthorDigest;
-import org.husky.emed.models.common.EmedReference;
-import org.husky.emed.models.common.RenewalInterval;
-import org.husky.emed.models.entry.EmedEntryDigest;
-import org.husky.emed.models.entry.EmedPreEntryDigest;
+import org.husky.emed.ch.errors.InvalidEmedContentException;
+import org.husky.emed.ch.models.common.AuthorDigest;
+import org.husky.emed.ch.models.common.EmedReference;
+import org.husky.emed.ch.models.common.RenewalInterval;
+import org.husky.emed.ch.models.entry.EmedEntryDigest;
+import org.husky.emed.ch.models.entry.EmedPreEntryDigest;
 import org.springframework.stereotype.Component;
 
 /**

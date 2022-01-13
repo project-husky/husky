@@ -22,8 +22,8 @@ package org.husky.emed.ch.cda.narrative.generators;
 
 import org.husky.common.enums.ValueSetEnumInterface;
 import org.husky.emed.ch.cda.narrative.enums.NarrativeLanguage;
-import org.husky.emed.models.treatment.MedicationPackagedProduct;
-import org.husky.emed.models.treatment.MedicationProduct;
+import org.husky.emed.ch.models.treatment.MedicationPackagedProduct;
+import org.husky.emed.ch.models.treatment.MedicationProduct;
 
 import java.util.MissingResourceException;
 import java.util.Objects;

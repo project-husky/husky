@@ -19,14 +19,14 @@ import org.husky.emed.ch.cda.services.readers.ManufacturedMaterialReader;
 import org.husky.emed.ch.cda.utils.EntryRelationshipUtils;
 import org.husky.emed.ch.cda.utils.IiUtils;
 import org.husky.emed.ch.cda.utils.TemplateIds;
-import org.husky.emed.enums.ActSubstanceAdminSubstitutionCode;
-import org.husky.emed.enums.DispenseSupplyType;
-import org.husky.emed.errors.InvalidEmedContentException;
-import org.husky.emed.models.common.AuthorDigest;
-import org.husky.emed.models.common.EmedReference;
-import org.husky.emed.models.common.QuantityWithUnit;
-import org.husky.emed.models.entry.EmedDisEntryDigest;
-import org.husky.emed.models.treatment.MedicationProduct;
+import org.husky.emed.ch.enums.ActSubstanceAdminSubstitutionCode;
+import org.husky.emed.ch.enums.DispenseSupplyType;
+import org.husky.emed.ch.errors.InvalidEmedContentException;
+import org.husky.emed.ch.models.common.AuthorDigest;
+import org.husky.emed.ch.models.common.EmedReference;
+import org.husky.emed.ch.models.common.QuantityWithUnit;
+import org.husky.emed.ch.models.entry.EmedDisEntryDigest;
+import org.husky.emed.ch.models.treatment.MedicationProduct;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -44,14 +44,14 @@ import static org.husky.emed.ch.cda.utils.TemplateIds.*;
 public class CceDisEntryDigester {
 
     /**
-     * The registry of {@link org.husky.emed.models.entry.EmedEntryDigest}.
+     * The registry of {@link org.husky.emed.ch.models.entry.EmedEntryDigest}.
      */
     private final EmedEntryDigestService emedEntryService;
 
     /**
      * Constructor.
      *
-     * @param emedEntryService The registry of {@link org.husky.emed.models.entry.EmedEntryDigest}.
+     * @param emedEntryService The registry of {@link org.husky.emed.ch.models.entry.EmedEntryDigest}.
      */
     public CceDisEntryDigester(final EmedEntryDigestService emedEntryService) {
         this.emedEntryService = emedEntryService;

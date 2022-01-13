@@ -10,7 +10,7 @@
     <parent>
         <artifactId>husky-emed</artifactId>
         <groupId>org.husky.emed</groupId>
-        <version>2.0-CARA</version>
+        <version>2.0-ALPHA</version>
     </parent>
 
     <properties>
@@ -21,12 +21,12 @@
         <dependency>
             <groupId>org.husky.validation.service</groupId>
             <artifactId>husky-validation-service</artifactId>
-            <version>2.0-CARA</version>
+            <version>2.0-ALPHA</version>
         </dependency>
         <dependency>
             <groupId>org.husky.emed.ch.cda</groupId>
             <artifactId>husky-emed-ch-cda</artifactId>
-            <version>2.0-CARA</version>
+            <version>2.0-ALPHA</version>
         </dependency>
 
         <!-- Schematron validator (Apache 2.0) -->

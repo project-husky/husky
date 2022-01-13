@@ -27,7 +27,7 @@ import org.husky.emed.ch.cda.narrative.enums.NarrativeLanguage;
 import org.husky.emed.ch.cda.narrative.pdf.HtmlToPdfAConverter;
 import org.husky.emed.ch.cda.narrative.pdf.OpenHtmlToPdfAConverter;
 import org.husky.emed.ch.cda.narrative.utils.NarrativeUtils;
-import org.husky.emed.models.document.EmedPmlcDocumentDigest;
+import org.husky.emed.ch.models.document.EmedPmlcDocumentDigest;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

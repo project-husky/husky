@@ -6,7 +6,6 @@
  * This project has been developed further and modified by the joined working group Husky
  * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
- *
  */
 
 @DefaultQualifier(value = Nullable.class, locations = {TypeUseLocation.PARAMETER, TypeUseLocation.RETURN,

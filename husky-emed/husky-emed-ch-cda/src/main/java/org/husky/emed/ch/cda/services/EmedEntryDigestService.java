@@ -20,10 +20,10 @@
  */
 package org.husky.emed.ch.cda.services;
 
+import org.husky.emed.ch.models.entry.EmedEntryDigest;
+
 import java.time.Instant;
 import java.util.Optional;
-
-import org.husky.emed.models.entry.EmedEntryDigest;
 
 /**
  * The service of the {@link EmedEntryDigest} registry.

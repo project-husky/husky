@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.husky.emed</groupId>
         <artifactId>husky-emed</artifactId>
-        <version>2.0-CARA</version>
+        <version>2.0-ALPHA</version>
     </parent>
     <dependencies>
         <!-- Own dependencies -->
