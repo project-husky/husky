@@ -9,6 +9,7 @@ import org.verapdf.pdfa.validation.profiles.ProfileDetails;
 import org.verapdf.pdfa.validation.profiles.RuleId;
 import org.verapdf.pdfa.validation.profiles.ValidationProfile;
 
+import javax.annotation.concurrent.Immutable;
 import java.util.List;
 import java.util.Objects;
 
@@ -73,6 +74,7 @@ final class FailedValidationResult implements ValidationResult {
         return null;
     }
 
+    @Immutable
     public record FailedTestAssertion(String message) implements TestAssertion {
 
         public FailedTestAssertion(final String message) {

@@ -24,7 +24,9 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.enums.AdministrativeGender;
 
+import javax.annotation.concurrent.Immutable;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,25 +39,35 @@ import java.util.Objects;
  * @param givenName  The legal given name.
  * @param familyName The legal family name.
  * @param gender     The gender.
- * @param birthDate  The birth date.
+ * @param birthdate  The birthdate.
  * @author Quentin Ligier
  */
+@Immutable
 public record PatientDigest(List<@NonNull String> ids,
                             String givenName,
                             String familyName,
                             AdministrativeGender gender,
-                            @Nullable LocalDate birthDate) {
+                            @Nullable LocalDate birthdate) {
 
+    /**
+     * Constructor.
+     *
+     * @param ids        The list of patient Ids.
+     * @param givenName  The legal given name.
+     * @param familyName The legal family name.
+     * @param gender     The gender.
+     * @param birthdate  The birthdate.
+     */
     public PatientDigest(final List<@NonNull String> ids,
                          final String givenName,
                          final String familyName,
                          final AdministrativeGender gender,
-                         @Nullable final LocalDate birthDate) {
-        this.ids = Objects.requireNonNull(ids);
+                         @Nullable final LocalDate birthdate) {
+        this.ids = Collections.unmodifiableList(Objects.requireNonNull(ids));
         this.givenName = Objects.requireNonNull(givenName);
         this.familyName = Objects.requireNonNull(familyName);
         this.gender = Objects.requireNonNull(gender);
-        this.birthDate = birthDate;
+        this.birthdate = birthdate;
     }
 
     @Override
@@ -65,7 +77,7 @@ public record PatientDigest(List<@NonNull String> ids,
                 ", givenName='" + givenName + '\'' +
                 ", familyName='" + familyName + '\'' +
                 ", gender=" + gender +
-                ", birthDate=" + birthDate +
+                ", birthdate=" + birthdate +
                 '}';
     }
 }
