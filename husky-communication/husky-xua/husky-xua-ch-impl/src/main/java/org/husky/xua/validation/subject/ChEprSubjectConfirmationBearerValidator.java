@@ -1,3 +1,12 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
 package org.husky.xua.validation.subject;
 
 import static org.husky.xua.ChEprXuaSpecifications.TECHNICAL_USER_ID;
@@ -31,8 +40,6 @@ public class ChEprSubjectConfirmationBearerValidator implements SubjectConfirmat
 
     /**
      * Gets the subject confirmation method handled by this validator.
-     *
-     * @return subject confirmation method handled by this validator
      */
     public String getServicedMethod() {
         return SubjectConfirmation.METHOD_BEARER;
@@ -44,7 +51,7 @@ public class ChEprSubjectConfirmationBearerValidator implements SubjectConfirmat
      * @param confirmation The subject confirmation information.
      * @param assertion    The assertion bearing the subject. It is not used by the validator.
      * @param context      The current Assertion validation context.
-     * @return the validation result.
+     * @return The validation result.
      */
     /* reduction of complexity not necessary, value still below 20 */
     @SuppressWarnings("java:S3776")
@@ -97,22 +104,27 @@ public class ChEprSubjectConfirmationBearerValidator implements SubjectConfirmat
         // Extraction of the SubjectConfirmationData
         if (role == Role.ASSISTANT) {
             final var assistantName = extractAssistantName(confirmation);
-            if (assistantName == null) {
+            if (assistantName.isEmpty()) {
                 context.setValidationFailureMessage("The assistant name is missing in the SubjectConfirmation");
                 return ValidationResult.INVALID;
             }
-            context.getDynamicParameters().put(CH_EPR_ASSISTANT_NAME, assistantName);
+            context.getDynamicParameters().put(CH_EPR_ASSISTANT_NAME, assistantName.get());
         }
 
         return ValidationResult.VALID;
     }
 
-	private String extractAssistantName(SubjectConfirmation confirmation) {
+    /**
+     * Extracts the assistant name from the subject confirmation.
+     *
+     * @param confirmation The subject confirmation.
+     * @return An {@link Optional} that may contain the assistant name.
+     */
+    Optional<String> extractAssistantName(final SubjectConfirmation confirmation) {
 		return Optional.ofNullable(confirmation.getSubjectConfirmationData()).map(XMLObject::getOrderedChildren)
 				.filter(l -> l.size() == 1).map(l -> l.get(0)).filter(Attribute.class::isInstance)
 				.map(Attribute.class::cast).filter(attribute -> OASIS_XACML_SUBJECTID.equals(attribute.getName()))
 				.map(Attribute::getAttributeValues).filter(l -> l.size() == 1).map(l -> l.get(0))
-				.filter(AttributeValue.class::isInstance).map(AttributeValue.class::cast).map(XSAny::getTextContent)
-				.orElse(null);
+				.filter(AttributeValue.class::isInstance).map(AttributeValue.class::cast).map(XSAny::getTextContent);
 	}
 }

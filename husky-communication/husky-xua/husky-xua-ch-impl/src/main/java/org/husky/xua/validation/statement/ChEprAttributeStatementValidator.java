@@ -1,34 +1,13 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
 package org.husky.xua.validation.statement;
-
-import static org.husky.common.enums.CodeSystems.SWISS_EPR_SPID;
-import static org.husky.communication.ch.enums.PurposeOfUse.AUTOMATIC_UPLOAD;
-import static org.husky.communication.ch.enums.PurposeOfUse.EMERGENCY_ACCESS;
-import static org.husky.communication.ch.enums.PurposeOfUse.NORMAL_ACCESS;
-import static org.husky.communication.ch.enums.Role.ASSISTANT;
-import static org.husky.communication.ch.enums.Role.DOCUMENT_ADMINISTRATOR;
-import static org.husky.communication.ch.enums.Role.HEALTHCARE_PROFESSIONAL;
-import static org.husky.communication.ch.enums.Role.PATIENT;
-import static org.husky.communication.ch.enums.Role.POLICY_ADMINISTRATOR;
-import static org.husky.communication.ch.enums.Role.REPRESENTATIVE;
-import static org.husky.communication.ch.enums.Role.TECHNICAL_USER;
-import static org.husky.xua.communication.xua.XUserAssertionConstants.IHE_XCA_HOMECOMMUNITYID;
-import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_ORGANISATION;
-import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_ORGANIZATIONID;
-import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_PURPOSEOFUSE;
-import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_RESOURCEID;
-import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_SUBJECTID;
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_HOME_COMMUNITY_ID;
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ORGANIZATIONS_ID;
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ORGANIZATIONS_NAME;
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_PATIENT_EPR_SPID;
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_PURPOSE_OF_USE;
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_SUBJECT_NAME;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import javax.xml.namespace.QName;
 
 import org.husky.communication.ch.enums.PurposeOfUse;
 import org.husky.communication.ch.enums.Role;
@@ -45,22 +24,31 @@ import org.opensaml.saml.saml2.core.AttributeStatement;
 import org.opensaml.saml.saml2.core.Statement;
 import org.opensaml.saml.saml2.core.impl.AttributeValueImpl;
 
-import com.google.common.annotations.VisibleForTesting;
+import javax.annotation.concurrent.ThreadSafe;
+import javax.xml.namespace.QName;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static org.husky.common.enums.CodeSystems.SWISS_EPR_SPID;
+import static org.husky.communication.ch.enums.PurposeOfUse.*;
+import static org.husky.communication.ch.enums.Role.*;
+import static org.husky.xua.communication.xua.XUserAssertionConstants.*;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.*;
 
 /**
  * Validator used to validate {@link Statement}s within a given {@link Assertion} in the CH-EPR context.
  *
  * @author Quentin Ligier
  */
+@ThreadSafe
 public class ChEprAttributeStatementValidator implements StatementValidator {
-	
-	public static final String ERRMSG_CONTAINS_INVALID_VALUE = "' contains an invalid value";
-	public static final String ERRMSG_ATTRIBUTE = "The attribute '";
+
+    public static final String ERRMSG_CONTAINS_INVALID_VALUE = "' contains an invalid value";
+    public static final String ERRMSG_ATTRIBUTE = "The attribute '";
 
     /**
      * Gets the element or schema type QName of the statement handled by this validator.
-     *
-     * @return element or schema type QName of the statement handled by this validator
      */
     public QName getServicedStatement() {
         return AttributeStatement.DEFAULT_ELEMENT_NAME;
@@ -72,7 +60,7 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
      * @param statement The statement to be validated.
      * @param assertion The assertion bearing the statement.
      * @param context   The current Assertion validation context.
-     * @return the validation result.
+     * @return The validation result.
      */
     public ValidationResult validate(final Statement statement,
                                      final Assertion assertion,
@@ -109,12 +97,11 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
      * @param attribute The Attribute to be validated.
      * @param context   The current validation context.
      * @param role      The subject's role.
-     * @return the validation result.
+     * @return The validation result.
      */
-    @VisibleForTesting
-    protected ValidationResult validatePurposeOfUse(final Attribute attribute,
-                                                    final ValidationContext context,
-                                                    final Role role) {
+    ValidationResult validatePurposeOfUse(final Attribute attribute,
+                                          final ValidationContext context,
+                                          final Role role) {
         final var purposeOfUse = Optional.ofNullable(attribute.getAttributeValues())
                 .filter(l -> l.size() == 1)
                 .map(l -> l.get(0))
@@ -123,7 +110,7 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 .map(attributeValue -> attributeValue.getUnknownXMLObjects(new QName("urn:hl7-org:v3", "PurposeOfUse")))
                 .filter(l -> l.size() == 1)
                 .map(l -> l.get(0))
-				.filter(CodedWithEquivalentImpl.class::isInstance).map(CodedWithEquivalentImpl.class::cast)
+                .filter(CodedWithEquivalentImpl.class::isInstance).map(CodedWithEquivalentImpl.class::cast)
                 .filter(p -> PurposeOfUse.VALUE_SET_ID.equals(p.getCodeSystem()))
                 .map(AbstractImpl::getCode)
                 .map(PurposeOfUse::getEnum)
@@ -154,11 +141,10 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
      *
      * @param attribute The Attribute to be validated.
      * @param context   The current validation context.
-     * @return the validation result.
+     * @return The validation result.
      */
-    @VisibleForTesting
-    protected ValidationResult validateHomeCommunityId(final Attribute attribute,
-                                                       final ValidationContext context) {
+    ValidationResult validateHomeCommunityId(final Attribute attribute,
+                                             final ValidationContext context) {
         var homeCommunityId = Optional.ofNullable(attribute.getAttributeValues())
                 .filter(l -> l.size() == 1)
                 .map(l -> l.get(0))
@@ -181,11 +167,10 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
      *
      * @param attribute The Attribute to be validated.
      * @param context   The current validation context.
-     * @return the validation result.
+     * @return The validation result.
      */
-    @VisibleForTesting
-    protected ValidationResult validateResourceId(final Attribute attribute,
-                                                  final ValidationContext context) {
+    ValidationResult validateResourceId(final Attribute attribute,
+                                        final ValidationContext context) {
         var resourceId = Optional.ofNullable(attribute.getAttributeValues())
                 .filter(l -> l.size() == 1)
                 .map(l -> l.get(0))
@@ -209,11 +194,10 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
      *
      * @param attribute The Attribute to be validated.
      * @param context   The current validation context.
-     * @return the validation result.
+     * @return The validation result.
      */
-    @VisibleForTesting
-    protected ValidationResult validateSubjectId(final Attribute attribute,
-                                                 final ValidationContext context) {
+    ValidationResult validateSubjectId(final Attribute attribute,
+                                       final ValidationContext context) {
         final var subjectId = Optional.ofNullable(attribute.getAttributeValues())
                 .filter(l -> l.size() == 1)
                 .map(l -> l.get(0))
@@ -235,12 +219,12 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
      * @param attribute The Attribute to be validated.
      * @param context   The current validation context.
      * @param role      The subject's role.
-     * @return the validation result.
+     * @return The validation result.
      */
-    @VisibleForTesting
-    protected ValidationResult validateOrganizationsId(final Attribute attribute,
-                                                       final ValidationContext context,
-                                                       final Role role) {
+    @SuppressWarnings("unchecked")
+    ValidationResult validateOrganizationsId(final Attribute attribute,
+                                             final ValidationContext context,
+                                             final Role role) {
         final var shallBeEmpty = role == POLICY_ADMINISTRATOR || role == DOCUMENT_ADMINISTRATOR;
         final var organizationId = Optional.ofNullable(attribute.getAttributeValues())
                 .filter(l -> l.size() == 1)
@@ -273,12 +257,12 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
      * @param attribute The Attribute to be validated.
      * @param context   The current validation context.
      * @param role      The subject's role.
-     * @return the validation result.
+     * @return The validation result.
      */
-    @VisibleForTesting
-    protected ValidationResult validateOrganizationsName(final Attribute attribute,
-                                                         final ValidationContext context,
-                                                         final Role role) {
+    @SuppressWarnings("unchecked")
+    ValidationResult validateOrganizationsName(final Attribute attribute,
+                                               final ValidationContext context,
+                                               final Role role) {
         final var shallBeEmpty = role == POLICY_ADMINISTRATOR || role == DOCUMENT_ADMINISTRATOR;
         final var organizationName = Optional.ofNullable(attribute.getAttributeValues())
                 .filter(l -> l.size() == 1)
