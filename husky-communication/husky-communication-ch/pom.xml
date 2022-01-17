@@ -14,6 +14,22 @@
 			<groupId>org.husky.communication</groupId>
 			<artifactId>husky-communication-gen</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.openehealth.ipf.commons</groupId>
+			<artifactId>ipf-commons-ihe-fhir-core</artifactId>
+			<version>${ipf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openehealth.ipf.platform-camel</groupId>
+			<artifactId>ipf-platform-camel-ihe-fhir-core</artifactId>
+			<version>${ipf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openehealth.ipf.commons</groupId>
+			<artifactId>ipf-commons-ihe-fhir-r4-mhd</artifactId>
+			<version>${ipf.version}</version>
+		</dependency>
 	
 		<dependency>
 			<groupId>org.opensaml</groupId>
@@ -23,7 +39,6 @@
 			<groupId>org.opensaml</groupId>
 			<artifactId>opensaml-xacml-impl</artifactId>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.opensaml</groupId>
 			<artifactId>opensaml-saml-impl</artifactId>
