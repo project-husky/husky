@@ -17,18 +17,18 @@ import org.openehealth.ipf.platform.camel.ihe.fhir.core.FhirComponent;
 import org.openehealth.ipf.platform.camel.ihe.fhir.core.FhirEndpointConfiguration;
 
 /**
- * husky
+ * The Camel component for the CH:PHARM-5 transaction.
  *
  * @author Quentin Ligier
  **/
 public class ChPharm5Component extends FhirComponent<FhirQueryAuditDataset> {
 
     public ChPharm5Component() {
-        super(MHD.QueryDocumentReferenceInteractions.CHPHARM5);
+        super(MHD.QueryDocumentReferenceInteractions.CHPHARM_5);
     }
 
     public ChPharm5Component(final CamelContext context) {
-        super(context, MHD.QueryDocumentReferenceInteractions.CHPHARM5);
+        super(context, MHD.QueryDocumentReferenceInteractions.CHPHARM_5);
     }
 
     @Override

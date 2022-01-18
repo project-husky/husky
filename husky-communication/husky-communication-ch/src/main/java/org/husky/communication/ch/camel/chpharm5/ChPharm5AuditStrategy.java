@@ -26,11 +26,16 @@ import org.openehealth.ipf.commons.ihe.fhir.support.OperationOutcomeOperations;
  **/
 public class ChPharm5AuditStrategy extends FhirQueryAuditStrategy {
 
-    public ChPharm5AuditStrategy(boolean serverSide) {
+    public ChPharm5AuditStrategy(final boolean serverSide) {
         super(serverSide, OperationOutcomeOperations.INSTANCE);
     }
 
-    public AuditMessage[] makeAuditMessage(AuditContext auditContext, FhirQueryAuditDataset auditDataset) {
-        return (new QueryInformationBuilder(auditContext, auditDataset, FhirEventTypeCode.MobileDocumentReferenceQuery)).addPatients(auditDataset.getPatientIds()).setQueryParameters("MobileDocumentReferenceQuery", FhirParticipantObjectIdTypeCode.MobileDocumentReferenceQuery, auditDataset.getQueryString()).getMessages();
+    public AuditMessage[] makeAuditMessage(final AuditContext auditContext,
+                                           final FhirQueryAuditDataset auditDataset) {
+        // TODO: extract operation from auditDataset.getQueryString()
+        return (new QueryInformationBuilder<>(auditContext, auditDataset, FhirEventTypeCode.MobileDocumentReferenceQuery))
+                .addPatients(auditDataset.getPatientIds())
+                .setQueryParameters("MobileDocumentReferenceQuery", FhirParticipantObjectIdTypeCode.MobileDocumentReferenceQuery, auditDataset.getQueryString())
+                .getMessages();
     }
 }

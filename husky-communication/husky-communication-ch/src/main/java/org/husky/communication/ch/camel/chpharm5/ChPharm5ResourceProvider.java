@@ -31,6 +31,9 @@ import static ca.uhn.fhir.rest.annotation.OperationParam.MAX_UNLIMITED;
  **/
 public class ChPharm5ResourceProvider extends AbstractPlainProvider {
 
+    // TODO: create a resource for each operation
+    // TODO: create the searchParameters object with method toRelativeUrl()
+
     @Operation(name = "$find-dispenses", type = DocumentReference.class, idempotent = true)
     public Bundle findDispenses(
             @OperationParam(name = DocumentReference.SP_STATUS, min = 1, max = MAX_UNLIMITED) TokenOrListParam status,

@@ -10,6 +10,7 @@
  */
 package org.husky.communication.ch.camel.chpharm1.transform.requests;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.communication.ch.camel.chpharm1.requests.ChFindMedicationListQuery;
 import org.openehealth.ipf.commons.ihe.xds.core.ebxml.EbXMLAdhocQueryRequest;
 import org.openehealth.ipf.commons.ihe.xds.core.transform.requests.query.QuerySlotHelper;
@@ -33,7 +34,8 @@ public class ChFindMedicationListQueryTransformer extends ChPharmacyDocumentsQue
      * @param ebXML the EbXML representation.
      */
     @Override
-    public void toEbXML(ChFindMedicationListQuery query, EbXMLAdhocQueryRequest ebXML) {
+    public void toEbXML(@Nullable final ChFindMedicationListQuery query,
+                        @Nullable final EbXMLAdhocQueryRequest ebXML) {
         if (query == null || ebXML == null) {
             return;
         }
@@ -60,7 +62,8 @@ public class ChFindMedicationListQueryTransformer extends ChPharmacyDocumentsQue
      * @param ebXML the ebXML representation. Can be <code>null</code>.
      */
     @Override
-    public void fromEbXML(ChFindMedicationListQuery query, EbXMLAdhocQueryRequest ebXML) {
+    public void fromEbXML(@Nullable final ChFindMedicationListQuery query,
+                          @Nullable final EbXMLAdhocQueryRequest ebXML) {
         if (query == null || ebXML == null) {
             return;
         }

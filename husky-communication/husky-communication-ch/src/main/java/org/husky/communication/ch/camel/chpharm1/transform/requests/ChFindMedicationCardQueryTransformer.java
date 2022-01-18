@@ -10,6 +10,7 @@
  */
 package org.husky.communication.ch.camel.chpharm1.transform.requests;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.communication.ch.camel.chpharm1.requests.ChFindMedicationCardQuery;
 import org.openehealth.ipf.commons.ihe.xds.core.ebxml.EbXMLAdhocQueryRequest;
 import org.openehealth.ipf.commons.ihe.xds.core.transform.requests.query.QuerySlotHelper;
@@ -23,6 +24,12 @@ import static org.openehealth.ipf.commons.ihe.xds.core.transform.requests.QueryP
  * @author Quentin Ligier
  **/
 public class ChFindMedicationCardQueryTransformer extends ChPharmacyDocumentsQueryTransformer<ChFindMedicationCardQuery> {
+
+    /**
+     * This parameter doesn't exist in {@link org.openehealth.ipf.commons.ihe.xds.core.transform.requests.QueryParameter}.
+     */
+    public static final String DOC_ENTRY_LANGUAGE_CODE = "$XDSDocumentEntryLanguageCode";
+
     /**
      * Transforms the query into its EbXML representation.
      * <p>
@@ -32,7 +39,8 @@ public class ChFindMedicationCardQueryTransformer extends ChPharmacyDocumentsQue
      * @param ebXML the EbXML representation.
      */
     @Override
-    public void toEbXML(ChFindMedicationCardQuery query, EbXMLAdhocQueryRequest ebXML) {
+    public void toEbXML(@Nullable final ChFindMedicationCardQuery query,
+                        @Nullable final EbXMLAdhocQueryRequest ebXML) {
         if (query == null || ebXML == null) {
             return;
         }
@@ -48,6 +56,10 @@ public class ChFindMedicationCardQueryTransformer extends ChPharmacyDocumentsQue
 
         slots.fromNumber(DOC_ENTRY_SERVICE_END_FROM, toHL7(query.getServiceEnd().getFrom()));
         slots.fromNumber(DOC_ENTRY_SERVICE_END_TO, toHL7(query.getServiceEnd().getTo()));
+
+        if (query.getLanguageCode() != null) {
+            ebXML.addSlot(DOC_ENTRY_LANGUAGE_CODE, QuerySlotHelper.encodeAsString(query.getLanguageCode()));
+        }
     }
 
     /**
@@ -59,7 +71,8 @@ public class ChFindMedicationCardQueryTransformer extends ChPharmacyDocumentsQue
      * @param ebXML the ebXML representation. Can be <code>null</code>.
      */
     @Override
-    public void fromEbXML(ChFindMedicationCardQuery query, EbXMLAdhocQueryRequest ebXML) {
+    public void fromEbXML(@Nullable final ChFindMedicationCardQuery query,
+                          @Nullable final EbXMLAdhocQueryRequest ebXML) {
         if (query == null || ebXML == null) {
             return;
         }
@@ -75,5 +88,7 @@ public class ChFindMedicationCardQueryTransformer extends ChPharmacyDocumentsQue
 
         query.getServiceEnd().setFrom(slots.toNumber(DOC_ENTRY_SERVICE_END_FROM));
         query.getServiceEnd().setTo(slots.toNumber(DOC_ENTRY_SERVICE_END_TO));
+
+        query.setLanguageCode(QuerySlotHelper.decodeString(ebXML.getSingleSlotValue(DOC_ENTRY_LANGUAGE_CODE)));
     }
 }

@@ -21,14 +21,16 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * husky
+ * Definitions for the MHD transactions defined in this module.
  *
  * @author Quentin Ligier
  **/
 public class MHD implements IntegrationProfile {
+    public static final MHD Instance = new MHD();
+
     public enum QueryDocumentReferenceInteractions implements FhirInteractionId<FhirQueryAuditDataset> {
 
-        CHPHARM5(CHPHARM5_CONFIG);
+        CHPHARM_5(CHPHARM_5_CONFIG);
 
         final FhirTransactionConfiguration<FhirQueryAuditDataset> fhirTransactionConfiguration;
 
@@ -47,5 +49,5 @@ public class MHD implements IntegrationProfile {
         return Arrays.asList(QueryDocumentReferenceInteractions.values());
     }
 
-    private static final ChPharm5TransactionConfiguration CHPHARM5_CONFIG = new ChPharm5TransactionConfiguration();
+    private static final ChPharm5TransactionConfiguration CHPHARM_5_CONFIG = new ChPharm5TransactionConfiguration();
 }

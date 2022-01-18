@@ -11,6 +11,7 @@
 
 package org.husky.communication.ch.camel.chpharm1.requests;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntryType;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.TimeRange;
 
@@ -32,7 +33,7 @@ public class ChFindMedicationListQuery extends ChPharmacyDocumentsQuery {
     @Serial
     private static final long serialVersionUID = -3643837556544663781L;
 
-    @XmlElement(name = "documentEntryType")
+    @Nullable @XmlElement(name = "documentEntryType")
     private List<DocumentEntryType> documentEntryTypes;
     private final TimeRange serviceStart = new TimeRange();
     private final TimeRange serviceEnd = new TimeRange();
@@ -49,11 +50,12 @@ public class ChFindMedicationListQuery extends ChPharmacyDocumentsQuery {
         visitor.visit(this);
     }
 
+    @Nullable
     public List<DocumentEntryType> getDocumentEntryTypes() {
         return documentEntryTypes;
     }
 
-    public void setDocumentEntryTypes(List<DocumentEntryType> documentEntryTypes) {
+    public void setDocumentEntryTypes(@Nullable final List<DocumentEntryType> documentEntryTypes) {
         this.documentEntryTypes = documentEntryTypes;
     }
 

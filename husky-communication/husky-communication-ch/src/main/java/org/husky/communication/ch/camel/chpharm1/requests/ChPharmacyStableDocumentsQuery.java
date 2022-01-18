@@ -10,6 +10,7 @@
  */
 package org.husky.communication.ch.camel.chpharm1.requests;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Code;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Person;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.TimeRange;
@@ -38,19 +39,19 @@ public abstract class ChPharmacyStableDocumentsQuery extends ChPharmacyDocuments
     protected final TimeRange creationTime = new TimeRange();
     protected final TimeRange serviceStartTime = new TimeRange();
     protected final TimeRange serviceStopTime = new TimeRange();
-    @XmlElement(name = "uuid")
+    @Nullable @XmlElement(name = "uuid")
     protected List<String> uuids;
-    @XmlElement(name = "uniqueId")
+    @Nullable @XmlElement(name = "uniqueId")
     protected List<String> uniqueIds;
-    @XmlElement(name = "practiceSettingCode")
+    @Nullable @XmlElement(name = "practiceSettingCode")
     protected List<Code> practiceSettingCodes;
-    @XmlElement(name = "healthcareFacilityTypeCode")
+    @Nullable @XmlElement(name = "healthcareFacilityTypeCode")
     protected List<Code> healthcareFacilityTypeCodes;
-    @XmlElement(name = "eventCode")
+    @Nullable @XmlElement(name = "eventCode")
     protected List<Code> eventCodes;
-    @XmlElement(name = "confidentialityCode")
+    @Nullable @XmlElement(name = "confidentialityCode")
     protected List<Code> confidentialityCodes;
-    @XmlElement(name = "authorPerson")
+    @Nullable @XmlElement(name = "authorPerson")
     protected List<String> authorPersons;
 
     /**
@@ -80,59 +81,66 @@ public abstract class ChPharmacyStableDocumentsQuery extends ChPharmacyDocuments
         return serviceStopTime;
     }
 
+    @Nullable
     public List<String> getUuids() {
         return uuids;
     }
 
-    public void setUuids(final List<String> uuids) {
+    public void setUuids(@Nullable final List<String> uuids) {
         this.uuids = uuids;
     }
 
+    @Nullable
     public List<String> getUniqueIds() {
         return uniqueIds;
     }
 
-    public void setUniqueIds(final List<String> uniqueIds) {
+    public void setUniqueIds(@Nullable final List<String> uniqueIds) {
         this.uniqueIds = uniqueIds;
     }
 
+    @Nullable
     public List<Code> getPracticeSettingCodes() {
         return practiceSettingCodes;
     }
 
-    public void setPracticeSettingCodes(final List<Code> practiceSettingCodes) {
+    public void setPracticeSettingCodes(@Nullable final List<Code> practiceSettingCodes) {
         this.practiceSettingCodes = practiceSettingCodes;
     }
 
+    @Nullable
     public List<Code> getHealthcareFacilityTypeCodes() {
         return healthcareFacilityTypeCodes;
     }
 
-    public void setHealthcareFacilityTypeCodes(final List<Code> healthcareFacilityTypeCodes) {
+    public void setHealthcareFacilityTypeCodes(@Nullable final List<Code> healthcareFacilityTypeCodes) {
         this.healthcareFacilityTypeCodes = healthcareFacilityTypeCodes;
     }
 
+    @Nullable
     public List<Code> getEventCodes() {
         return eventCodes;
     }
 
-    public void setEventCodes(final List<Code> eventCodes) {
+    public void setEventCodes(@Nullable final List<Code> eventCodes) {
         this.eventCodes = eventCodes;
     }
 
+    @Nullable
     public List<Code> getConfidentialityCodes() {
         return confidentialityCodes;
     }
 
-    public void setConfidentialityCodes(final List<Code> confidentialityCodes) {
+    public void setConfidentialityCodes(@Nullable final List<Code> confidentialityCodes) {
         this.confidentialityCodes = confidentialityCodes;
     }
 
+    @Nullable
     public List<String> getAuthorPersons() {
         return authorPersons;
     }
 
-    public void setAuthorPersons(final List<String> authorPersons) {
+    public void setAuthorPersons(@Nullable final List<String> authorPersons) {
         this.authorPersons = authorPersons;
     }
 
