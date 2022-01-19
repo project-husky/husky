@@ -9,25 +9,21 @@
  */
 package org.husky.emed.ch.cda.services.readers;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.husky.common.hl7cdar2.AD;
+import org.husky.common.hl7cdar2.TEL;
 
 import java.util.List;
 import java.util.Objects;
 
 /**
- * A reader for CDA-CH-EMED addresses.
+ * A reader for CDA-CH-EMED telecoms.
  *
  * @author Quentin Ligier
- **/
-public record AddressReader(List<@NonNull AD> addresses) {
+ */
+public class TelecomReader {
 
-    /**
-     * Constructor.
-     *
-     * @param addresses The addresses.
-     */
-    public AddressReader(final List<@NonNull AD> addresses) {
-        this.addresses = Objects.requireNonNull(addresses);
+    private final List<TEL> telecoms;
+
+    public TelecomReader(final List<TEL> telecoms) {
+        this.telecoms = Objects.requireNonNull(telecoms);
     }
 }

@@ -70,6 +70,11 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
     private final HtmlToPdfAConverter pdfConverter;
 
     /**
+     * The PDF author.
+     */
+    private String author = "Husky PDF generator";
+
+    /**
      * Simplified constructor. It will use the default template and HTML-to-PDF/A generator.
      *
      * @param narrativeLanguage The language to use to generate the narrative text.
@@ -106,6 +111,14 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
         this.pdfConverter = Objects.requireNonNull(htmlToPdfAConverter);
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(final String author) {
+        this.author = Objects.requireNonNull(author);
+    }
+
     /**
      * @param digest
      * @return
@@ -117,7 +130,7 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
         final Map<String, String> variables = new HashMap<>(64);
         variables.put("title", "Carte de médication");
         variables.put("subject", "");
-        variables.put("author", "");
+        variables.put("author", this.author);
         variables.put("description", "");
 
         body.append("<h1>${title}</h1>");
@@ -154,7 +167,7 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
                             </tr>
                             """,
                     i,
-                    this.getMedicationName(entry.getProduct(), true),
+                    this.formatMedicationName(entry.getProduct(), true),
                     "",
                     routeSite
             ));
@@ -169,7 +182,7 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
         for (final var entry : digest.getMtpEntryDigests()) {
             body.append("<hr>");
             body.append(String.format("<h2 id='med_%1$d'><span class='n'>%1$d</span %2$s</h2>", i,
-                    this.getMedicationName(entry.getProduct(), true)));
+                    this.formatMedicationName(entry.getProduct(), true)));
 
             // Last author
             body.append("<div id='narrative last_author'>");
