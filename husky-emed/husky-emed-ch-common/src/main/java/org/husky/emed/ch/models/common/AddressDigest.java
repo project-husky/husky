@@ -110,6 +110,14 @@ public class AddressDigest {
         this.country = country;
     }
 
+    public boolean isEmpty() {
+        return this.streetName != null
+                || this.houseNumber != null
+                || this.city != null
+                || this.postalCode != null
+                || this.country != null;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;

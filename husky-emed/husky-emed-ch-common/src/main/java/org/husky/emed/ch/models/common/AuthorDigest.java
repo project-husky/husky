@@ -86,7 +86,6 @@ public class AuthorDigest {
     /**
      * The author telecoms or {@code null}.
      */
-    @Nullable
     private TelecomDigest telecoms;
 
     public AuthorDigest() {
@@ -102,7 +101,7 @@ public class AuthorDigest {
                         @Nullable final String deviceManufacturerModelName,
                         @Nullable final String deviceSoftwareName,
                         @Nullable final OrganizationDigest organization,
-                        @Nullable final TelecomDigest telecoms) {
+                        final TelecomDigest telecoms) {
         this.participationFunction = participationFunction;
         this.authorshipTimestamp = Objects.requireNonNull(authorshipTimestamp);
         this.givenName = givenName;
@@ -195,13 +194,12 @@ public class AuthorDigest {
         this.organization = organization;
     }
 
-    @Nullable
     public TelecomDigest getTelecoms() {
         return telecoms;
     }
 
-    public void setTelecoms(@Nullable final TelecomDigest telecoms) {
-        this.telecoms = telecoms;
+    public void setTelecoms(final TelecomDigest telecoms) {
+        this.telecoms = Objects.requireNonNull(telecoms);
     }
 
     @Override

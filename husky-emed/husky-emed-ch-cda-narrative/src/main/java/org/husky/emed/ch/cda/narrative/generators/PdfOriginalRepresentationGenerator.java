@@ -21,12 +21,18 @@
 package org.husky.emed.ch.cda.narrative.generators;
 
 import com.openhtmltopdf.outputdevice.helper.BaseRendererBuilder;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 import org.apache.commons.text.StringSubstitutor;
 import org.husky.emed.ch.cda.narrative.enums.NarrativeLanguage;
 import org.husky.emed.ch.cda.narrative.pdf.HtmlToPdfAConverter;
 import org.husky.emed.ch.cda.narrative.pdf.OpenHtmlToPdfAConverter;
 import org.husky.emed.ch.cda.narrative.utils.NarrativeUtils;
+import org.husky.emed.ch.enums.ChEmedTimingEvent;
+import org.husky.emed.ch.models.common.AuthorDigest;
+import org.husky.emed.ch.models.common.MedicationDosageInstructions;
+import org.husky.emed.ch.models.common.MedicationDosageIntake;
+import org.husky.emed.ch.models.common.QuantityWithUnit;
 import org.husky.emed.ch.models.document.EmedPmlcDocumentDigest;
 
 import java.io.IOException;
@@ -38,6 +44,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * This class provides a way to generate a CDA-CH-EMED PRE or PMLC document original representation as a PDF 1/A. The
@@ -124,16 +132,30 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
      * @return
      */
     public byte[] generate(final EmedPmlcDocumentDigest digest) throws Exception {
-        final var body = new StringBuilder();
-        body.append(this.templateHeader);
-
         final Map<String, String> variables = new HashMap<>(64);
         variables.put("title", "Carte de médication");
         variables.put("subject", "");
         variables.put("author", this.author);
         variables.put("description", "");
+        return this.generate(digest, variables);
+    }
 
-        body.append("<h1>${title}</h1>");
+    /**
+     * @param digest
+     * @param variables
+     * @return
+     */
+    public byte[] generate(final EmedPmlcDocumentDigest digest,
+                           final Map<String, String> variables) throws Exception {
+        Objects.requireNonNull(digest, "digest shall not be null in generate()");
+        Objects.requireNonNull(variables, "variables shall not be null in generate()");
+
+        final var stringSubstitutor = new StringSubstitutor(variables);
+
+        final var body = new StringBuilder();
+        body.append(stringSubstitutor.replace(this.templateHeader));
+
+        body.append(String.format("<h1>%s</h1>", variables.getOrDefault("title", "Carte de médication")));
         body.append("""
                 <table>
                     <thead>
@@ -160,15 +182,15 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
 
             body.append(String.format("""
                             <tr>
-                                <td class="col n">#%d</td>
+                                <td class="col n"><a href='#entry-%d'>#%1$d</a></td>
                                 <td class="col name">%s</td>
-                                <td class="col dosage" colspan="5">%s</td>
+                                %s
                                 <td class="col route-site">%s</td>
                             </tr>
                             """,
                     i,
                     this.formatMedicationName(entry.getProduct(), true),
-                    "",
+                    this.formatDosageCells(entry.getDosageInstructions()),
                     routeSite
             ));
             ++i;
@@ -180,14 +202,14 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
 
         i = 1;
         for (final var entry : digest.getMtpEntryDigests()) {
-            body.append("<hr>");
+            body.append(String.format("<hr id='entry-%d'>", i));
             body.append(String.format("<h2 id='med_%1$d'><span class='n'>%1$d</span %2$s</h2>", i,
                     this.formatMedicationName(entry.getProduct(), true)));
 
             // Last author
             body.append("<div id='narrative last_author'>");
             body.append("<h3>Dernier intervenant</h3><p>");
-            body.append("Auteur");
+            body.append(this.formatAuthorName(entry.getSectionAuthor()));
             body.append("</p></div>");
 
             if (entry.getTreatmentReason() != null) {
@@ -218,10 +240,15 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
             ++i;
         }
 
-        body.append(this.templateFooter);
+        body.append("<hr>");
+        body.append("<div id='narrative document_author'>");
+        body.append("<h3>Auteur du document</h3><p>");
+        body.append(this.formatAuthorName(digest.getAuthors().get(0)));
+        body.append("</p></div>");
 
-        final var stringSubstitutor = new StringSubstitutor(variables);
-        return this.pdfConverter.convert(stringSubstitutor.replace(body));
+        body.append(stringSubstitutor.replace(this.templateFooter));
+
+        return this.pdfConverter.convert(body.toString());
     }
 
     /**
@@ -237,6 +264,107 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
             throw new IllegalArgumentException("The resource '" + resource + "' is not found");
         }
         return url;
+    }
+
+    /**
+     * Gets the name of an author. It may be a person or a device.
+     *
+     * @param author The author.
+     * @return The author name.
+     */
+    protected String formatAuthorName(final AuthorDigest author) {
+        final var name = new StringBuilder();
+        if (author.getGivenName() != null || author.getFamilyName() != null) {
+            if (author.getGivenName() != null) {
+                name.append(author.getGivenName());
+            }
+            if (author.getFamilyName() != null) {
+                if (!name.isEmpty()) {
+                    name.append(" ");
+                }
+                name.append(author.getFamilyName());
+            }
+        }
+        if (author.getDeviceSoftwareName() != null) {
+            name.append("<span class='device'>");
+            name.append(author.getDeviceSoftwareName());
+            if (author.getDeviceManufacturerModelName() != null) {
+                name.append(" (");
+                name.append(author.getDeviceManufacturerModelName());
+                name.append(")");
+            }
+            name.append("</span>");
+        }
+        if (name.isEmpty()) {
+            name.append("<em>Inconnu</em>");
+        }
+        name.append("<br>");
+
+        if (!author.getTelecoms().getPhones().isEmpty()) {
+            final var phone = author.getTelecoms().getPhones().get(0);
+            name.append(String.format("<a href='%s'>%s</a><br>", phone, StringUtils.removeStart(phone, "tel:")));
+        }
+        if (!author.getTelecoms().getMails().isEmpty()) {
+            final var mail = author.getTelecoms().getMails().get(0);
+            name.append(String.format("<a href='%s'>%s</a><br>", mail, StringUtils.removeStart(mail, "mailto:")));
+        }
+        if (!author.getAddresses().isEmpty() && !author.getAddresses().get(0).isEmpty()) {
+            final var address = author.getAddresses().get(0);
+            name.append("<span class='address'>");
+
+            if (address.getStreetName() != null) {
+                name.append(address.getStreetName());
+                if (address.getHouseNumber() != null) {
+                    name.append(" ");
+                    name.append(address.getHouseNumber());
+                }
+                name.append("<br>");
+            }
+            if (address.getPostalCode() != null || address.getCity() != null) {
+                if (address.getPostalCode() != null) {
+                    name.append(address.getPostalCode());
+                    name.append(" ");
+                }
+                if (address.getCity() != null) {
+                    name.append(address.getCity());
+                }
+                name.append("<br>");
+            }
+            if (address.getCountry() != null) {
+                name.append(address.getCountry());
+                name.append("<br>");
+            }
+            name.append("</span>");
+        }
+
+        return name.toString();
+    }
+
+    protected String formatDosageCells(final MedicationDosageInstructions dosageInstructions) {
+        if (dosageInstructions.getNarrativeDosageInstructions() != null) {
+            return "<td class='col dosage' colspan='5'>%s</td>";
+        }
+        final var cells = new StringBuilder();
+
+        final Function<ChEmedTimingEvent, QuantityWithUnit> findIntake = event -> dosageInstructions.getIntakes().stream()
+                .filter(intake -> event.equals(intake.getEventTiming()))
+                .findAny()
+                .map(MedicationDosageIntake::getDoseQuantity)
+                .orElse(null);
+        final Consumer<QuantityWithUnit> displayQuantity = quantity -> {
+            if (quantity == null) {
+                cells.append("<td></td>");
+            } else {
+                cells.append(String.format("<td>%s <span class='unit'>%s</span></td>", quantity.getValue(),
+                        quantity.getUnit().getCodeValue()));
+            }
+        };
+        displayQuantity.accept(findIntake.apply(ChEmedTimingEvent.MORNING));
+        displayQuantity.accept(findIntake.apply(ChEmedTimingEvent.AFTERNOON));
+        displayQuantity.accept(findIntake.apply(ChEmedTimingEvent.EVENING));
+        displayQuantity.accept(findIntake.apply(ChEmedTimingEvent.NIGHT));
+        cells.append("<td></td>");
+        return cells.toString();
     }
 }
 /*
