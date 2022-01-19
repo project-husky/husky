@@ -10,15 +10,14 @@
 package org.husky.emed.ch.cda.services.readers;
 
 import org.husky.common.hl7cdar2.*;
-import org.husky.common.model.Identificator;
 import org.husky.common.utils.OptionalUtils;
-import org.husky.common.utils.datatypes.Gln;
 import org.husky.common.utils.time.DateTimes;
 import org.husky.common.utils.time.Hl7Dtm;
-import org.husky.emed.ch.errors.InvalidEmedContentException;
-import org.husky.emed.ch.enums.ParticipationFunction;
-import org.husky.emed.ch.models.common.AuthorDigest;
+import org.husky.emed.ch.cda.utils.IiUtils;
 import org.husky.emed.ch.cda.utils.TemplateIds;
+import org.husky.emed.ch.enums.ParticipationFunction;
+import org.husky.emed.ch.errors.InvalidEmedContentException;
+import org.husky.emed.ch.models.common.AuthorDigest;
 
 import java.time.Instant;
 import java.util.Collections;
@@ -101,13 +100,14 @@ public class AuthorReader {
     }
 
     /**
-     * Gets the author address wrapped in an {@link AddressReader}.
+     * Gets the author addresses wrapped in an {@link AddressReader}.
      */
-    public AddressReader getAddresses() {
+    public List<AddressReader> getAddresses() {
         return Optional.ofNullable(this.author.getAssignedAuthor())
                 .map(POCDMT000040AssignedAuthor::getAddr)
+                .orElseGet(Collections::emptyList).stream()
                 .map(AddressReader::new)
-                .orElseGet(() -> new AddressReader(Collections.emptyList()));
+                .toList();
     }
 
     /**
@@ -146,5 +146,25 @@ public class AuthorReader {
         return Optional.ofNullable(this.author.getAssignedAuthor())
                 .map(POCDMT000040AssignedAuthor::getRepresentedOrganization)
                 .map(OrganizationReader::new);
+    }
+
+    /**
+     * Creates and fills an {@link AuthorDigest}.
+     */
+    public AuthorDigest toDigest() {
+        return new AuthorDigest(
+                this.getParticipationFunction().orElse(null),
+                this.getAuthorshipTimestamp(),
+                this.getPersonNames().map(NameReader::getFirstLegalGivenName).orElse(null),
+                this.getPersonNames().map(NameReader::getFirstLegalFamilyName).orElse(null),
+                this.getGln().orElse(null),
+                this.getIds().stream().map(IiUtils::getNormalizedCx).toList(),
+                this.getAddresses().stream().map(AddressReader::toDigest).toList(),
+                this.getDevice().flatMap(DeviceReader::getManufacturerModelName).orElse(null),
+                this.getDevice().map(DeviceReader::getSoftwareName).orElse(null),
+                this.getOrganization().map(OrganizationReader::toDigest).orElse(null),
+                this.getTelecoms().toDigest()
+
+        );
     }
 }

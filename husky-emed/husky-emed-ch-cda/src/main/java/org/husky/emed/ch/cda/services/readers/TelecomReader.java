@@ -10,6 +10,8 @@
 package org.husky.emed.ch.cda.services.readers;
 
 import org.husky.common.hl7cdar2.TEL;
+import org.husky.common.hl7cdar2.URL;
+import org.husky.emed.ch.models.common.TelecomDigest;
 
 import java.util.List;
 import java.util.Objects;
@@ -25,5 +27,77 @@ public class TelecomReader {
 
     public TelecomReader(final List<TEL> telecoms) {
         this.telecoms = Objects.requireNonNull(telecoms);
+    }
+
+    /**
+     * Gets the phone numbers.
+     */
+    public List<String> getPhoneNumbers() {
+        return this.telecoms.stream()
+                .map(URL::getValue)
+                .filter(Objects::nonNull)
+                .filter(url -> url.startsWith("tel:"))
+                .toList();
+    }
+
+    /**
+     * Gets the fax numbers.
+     */
+    public List<String> getFaxNumbers() {
+        return this.telecoms.stream()
+                .map(URL::getValue)
+                .filter(Objects::nonNull)
+                .filter(url -> url.startsWith("fax:"))
+                .toList();
+    }
+
+    /**
+     * Gets the mail addresses.
+     */
+    public List<String> getMailAddresses() {
+        return this.telecoms.stream()
+                .map(URL::getValue)
+                .filter(Objects::nonNull)
+                .filter(url -> url.startsWith("mailto:"))
+                .toList();
+    }
+
+    /**
+     * Gets the website addresses.
+     */
+    public List<String> getWebsiteAddresses() {
+        return this.telecoms.stream()
+                .map(URL::getValue)
+                .filter(Objects::nonNull)
+                .filter(url -> url.startsWith("http://") || url.startsWith("https://"))
+                .toList();
+    }
+
+    /**
+     * Gets other telecoms.
+     */
+    public List<String> getOtherTelecoms() {
+        final var others = this.telecoms.stream()
+                .map(URL::getValue)
+                .filter(Objects::nonNull)
+                .toList();
+        others.removeAll(this.getPhoneNumbers());
+        others.removeAll(this.getFaxNumbers());
+        others.removeAll(this.getMailAddresses());
+        others.removeAll(this.getWebsiteAddresses());
+        return others;
+    }
+
+    /**
+     * Creates and fills a {@link TelecomDigest}.
+     */
+    public TelecomDigest toDigest() {
+        return new TelecomDigest(
+                this.getMailAddresses(),
+                this.getPhoneNumbers(),
+                this.getFaxNumbers(),
+                this.getWebsiteAddresses(),
+                this.getOtherTelecoms()
+        );
     }
 }

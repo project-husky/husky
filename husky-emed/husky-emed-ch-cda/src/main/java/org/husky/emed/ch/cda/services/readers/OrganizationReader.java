@@ -12,6 +12,8 @@ package org.husky.emed.ch.cda.services.readers;
 import org.husky.common.hl7cdar2.ANY;
 import org.husky.common.hl7cdar2.II;
 import org.husky.common.hl7cdar2.POCDMT000040Organization;
+import org.husky.emed.ch.cda.utils.IiUtils;
+import org.husky.emed.ch.models.common.OrganizationDigest;
 
 import java.util.List;
 import java.util.Objects;
@@ -55,7 +57,19 @@ public class OrganizationReader {
     /**
      * Gets the organization addresses wrapped in an {@link AddressReader}.
      */
-    public AddressReader getAddresses() {
-        return new AddressReader(this.organization.getAddr());
+    public List<AddressReader> getAddresses() {
+        return this.organization.getAddr().stream().map(AddressReader::new).toList();
+    }
+
+    /**
+     * Creates and fills an {@link OrganizationDigest}.
+     */
+    public OrganizationDigest toDigest() {
+        return new OrganizationDigest(
+                this.getIds().stream().map(IiUtils::getNormalizedCx).toList(),
+                this.getNames(),
+                this.getTelecoms().toDigest(),
+                this.getAddresses().stream().map(AddressReader::toDigest).toList()
+        );
     }
 }

@@ -21,13 +21,13 @@ import org.husky.common.utils.datatypes.Uuids;
 import org.husky.common.utils.time.DateTimes;
 import org.husky.common.utils.time.Hl7Dtm;
 import org.husky.emed.ch.ChEmedSpec;
+import org.husky.emed.ch.cda.services.readers.AuthorReader;
 import org.husky.emed.ch.cda.services.readers.NameReader;
 import org.husky.emed.ch.cda.utils.IiUtils;
 import org.husky.emed.ch.cda.utils.IvlTsUtils;
 import org.husky.emed.ch.cda.utils.TemplateIds;
 import org.husky.emed.ch.enums.CceDocumentType;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
-import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.OrganizationDigest;
 import org.husky.emed.ch.models.common.PatientDigest;
 import org.husky.emed.ch.models.common.RecipientDigest;
@@ -285,7 +285,10 @@ public class CceDocumentDigester {
                 .orElseThrow(() -> new InvalidEmedContentException("The language code is missing"));
 
         final var patient = getPatientDigest(cce);
-        final var authors = List.of(new AuthorDigest());
+        final var authors = cce.getAuthor().stream()
+                .map(AuthorReader::new)
+                .map(AuthorReader::toDigest)
+                .toList();
         final var custodian = new OrganizationDigest();
         final var recipients = List.of(new RecipientDigest());
 

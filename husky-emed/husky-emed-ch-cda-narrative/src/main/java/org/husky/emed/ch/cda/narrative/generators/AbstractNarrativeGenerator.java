@@ -22,6 +22,7 @@ package org.husky.emed.ch.cda.narrative.generators;
 
 import org.husky.common.enums.ValueSetEnumInterface;
 import org.husky.emed.ch.cda.narrative.enums.NarrativeLanguage;
+import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.treatment.MedicationPackagedProduct;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
 
@@ -115,5 +116,33 @@ public abstract class AbstractNarrativeGenerator {
         return magistral;
     }
 
-    protected String formatAuthorName(final )
+    /**
+     * Gets the name of an author. It may be a person or a device.
+     *
+     * @param author The author.
+     * @return The author name.
+     */
+    protected String formatAuthorName(final AuthorDigest author) {
+        final var name = new StringBuilder();
+        if (author.getGivenName() != null || author.getFamilyName() != null) {
+            if (author.getGivenName() != null) {
+                name.append(author.getGivenName());
+            }
+            if (author.getFamilyName() != null) {
+                if (!name.isEmpty()) {
+                    name.append(" ");
+                }
+                name.append(author.getFamilyName());
+            }
+        }
+        if (author.getDeviceSoftwareName() != null) {
+            name.append(author.getDeviceSoftwareName());
+            if (author.getDeviceManufacturerModelName() != null) {
+                name.append(" (");
+                name.append(author.getDeviceManufacturerModelName());
+                name.append(")");
+            }
+        }
+        return name.toString();
+    }
 }
