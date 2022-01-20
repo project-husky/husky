@@ -23,6 +23,7 @@ package org.husky.emed.ch.cda.services.digesters;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.hl7cdar2.*;
 import org.husky.common.utils.OptionalUtils;
+import org.husky.emed.ch.cda.services.readers.AuthorReader;
 import org.husky.emed.ch.cda.services.readers.SubAdmEntryReader;
 import org.husky.emed.ch.cda.utils.IiUtils;
 import org.husky.emed.ch.cda.utils.TemplateIds;
@@ -50,21 +51,38 @@ public class CceMtpEntryDigester {
      * @param substanceAdministration  The MTP SubstanceAdministration element.
      * @param mtpDocumentId            The MTP document ID.
      * @param mtpDocumentEffectiveTime The MTP document effective time.
+     * @param parentDocumentAuthor     The parent document author (not the original document author).
+     * @param parentSectionAuthor      The parent section author (not the original section author).
      * @return a digest of the element.
      */
     protected EmedMtpEntryDigest createDigest(final POCDMT000040SubstanceAdministration substanceAdministration,
                                               final String mtpDocumentId,
-                                              final Instant mtpDocumentEffectiveTime) throws InvalidEmedContentException {
+                                              final Instant mtpDocumentEffectiveTime,
+                                              final AuthorDigest parentDocumentAuthor,
+                                              final AuthorDigest parentSectionAuthor) throws InvalidEmedContentException {
         if (!TemplateIds.hasAllIds(TemplateIds.MTP_ENTRY, substanceAdministration.getTemplateId())) {
             throw new InvalidEmedContentException("The given substance administration is not an MTP item entry");
         }
         final var mtpEntry = new SubAdmEntryReader(Objects.requireNonNull(substanceAdministration));
 
+        final AuthorDigest documentAuthor;
+        final AuthorDigest sectionAuthor;
+        if (substanceAdministration.getAuthor().size() == 2) {
+            sectionAuthor = new AuthorReader(substanceAdministration.getAuthor().get(0)).toDigest();
+            documentAuthor = new AuthorReader(substanceAdministration.getAuthor().get(1)).toDigest();
+        } else if (substanceAdministration.getAuthor().size() == 1) {
+            sectionAuthor = new AuthorReader(substanceAdministration.getAuthor().get(0)).toDigest();
+            documentAuthor = sectionAuthor;
+        } else {
+            documentAuthor = parentDocumentAuthor;
+            sectionAuthor = parentSectionAuthor;
+        }
+
         return new EmedMtpEntryDigest(
                 Objects.requireNonNull(mtpDocumentEffectiveTime),
                 Objects.requireNonNull(mtpDocumentId),
-                new AuthorDigest(), // TODO
-                new AuthorDigest(), // TODO
+                documentAuthor,
+                sectionAuthor,
                 IiUtils.getNormalizedUid(mtpEntry.getEntryId()),
                 IiUtils.getNormalizedUid(mtpEntry.getEntryId()), // Use the MTP entry ID as treatment ID
                 0,

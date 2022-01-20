@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:cda="urn:hl7-org:v3"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:hl7="urn:hl7-org:v3"
+             xmlns:pharm="urn:ihe:pharm"
+             id="2.16.756.5.30.1.127.3.10.1.5"
+             name="DocumentEntry.confidentialityCode"
+             displayName="DocumentEntry.confidentialityCode"
+             statusCode="final"
+             versionLabel="202104.0-stable"
+             effectiveDate="2021-04-01T17:05:35"
+             url="http://art-decor.org/decor/services/"
+             ident="ch-epr-"
+             referencedFrom="cdachemed-">
+      <desc language="de-CH">Vertraulichkeitsstufe gemäss Anhang 3 EPDV-EDI.</desc>
+      <desc language="en-US">Document confidentiality as per Annex; EPRO-FDHA.</desc>
+      <desc language="fr-CH">Niveau de confidentialité selon l'annexe 3 ODEP-DFI.</desc>
+      <desc language="it-CH">Grado di riservatezza secondo l'allegato 3 OCIP-DFI.</desc>
+      <sourceCodeSystem id="2.16.840.1.113883.6.96"
+                        identifierName="SNOMED Clinical Terms"
+                        canonicalUri="http://snomed.info/sct"
+                        canonicalUriDSTU2="http://snomed.info/sct"
+                        canonicalUriSTU3="http://snomed.info/sct"
+                        canonicalUriR4="http://snomed.info/sct"/>
+      <sourceCodeSystem id="2.16.756.5.30.1.127.3.4"
+                        identifierName="SNOMED Clinical Terms Swiss Extension"
+                        canonicalUri="urn:oid:2.16.756.5.30.1.127.3.4"
+                        canonicalUriDSTU2="urn:oid:2.16.756.5.30.1.127.3.4"
+                        canonicalUriSTU3="urn:oid:2.16.756.5.30.1.127.3.4"
+                        canonicalUriR4="urn:oid:2.16.756.5.30.1.127.3.4"/>
+      <publishingAuthority name="eHealth Suisse">
+                <addrLine>Schwarzenburgstrasse 165</addrLine>
+                <addrLine>CH-3003 Bern</addrLine>
+                <addrLine type="uri">www.e-health-suisse.ch</addrLine>
+            </publishingAuthority>
+      <copyright language="en-US">This artefact includes content from SNOMED Clinical Terms® (SNOMED CT®) which is copyright of the International Health Terminology Standards Development Organisation (IHTSDO). Implementers of these artefacts must have the appropriate SNOMED CT Affiliate license - for more information contact http://www.snomed.org/snomed-ct/getsnomed-ct or info@snomed.org.</copyright>
+      <conceptList>
+                <concept code="17621005"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Normal (qualifier value)"
+                  level="0"
+                  type="L">
+                    <designation language="de-CH"
+                         type="preferred"
+                         displayName="Normal zugängliche Dokumente"/>
+                    <designation language="fr-CH" type="preferred" displayName="Normal"/>
+                    <designation language="it-CH"
+                         type="preferred"
+                         displayName="Dati normalmente accessibili"/>
+                    <designation language="en-US" type="preferred" displayName="Normally accessible"/>
+                    <designation language="rm-CH"
+                         type="preferred"
+                         displayName="Accessibel en moda normala"/>
+                </concept>
+                <concept code="263856008"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Restricted (qualifier value)"
+                  level="0"
+                  type="L">
+                    <designation language="de-CH"
+                         type="preferred"
+                         displayName="Eingeschränkt zugängliche Dokumente"/>
+                    <designation language="fr-CH" type="preferred" displayName="Restreint"/>
+                    <designation language="it-CH"
+                         type="preferred"
+                         displayName="Dati limitatamente accessibili"/>
+                    <designation language="en-US"
+                         type="preferred"
+                         displayName="Restricted accessible"/>
+                    <designation language="rm-CH"
+                         type="preferred"
+                         displayName="Accessibel en moda restrenschida"/>
+                </concept>
+                <concept code="1141000195107"
+                  codeSystem="2.16.756.5.30.1.127.3.4"
+                  displayName="Secret (qualifier value)"
+                  level="0"
+                  type="L">
+                    <designation language="de-CH" type="preferred" displayName="Geheime Dokumente"/>
+                    <designation language="fr-CH" type="preferred" displayName="Secret"/>
+                    <designation language="it-CH" type="preferred" displayName="Dati segreti"/>
+                    <designation language="en-US" type="preferred" displayName="Secret"/>
+                    <designation language="rm-CH" type="preferred" displayName="Secret"/>
+                </concept>
+            </conceptList>
+   </valueSet>
+</valueSets>

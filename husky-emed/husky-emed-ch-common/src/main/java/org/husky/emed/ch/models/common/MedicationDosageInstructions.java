@@ -57,11 +57,18 @@ public class MedicationDosageInstructions {
     /**
      * Constructor.
      *
-     * @param narrativeDosageInstructions The narrative description of the dosage instructions.
+     * @param intakes The list of dosage instructions intakes or {@code null}.
+     * @param narrativeDosageInstructions The narrative description of the dosage instructions or {@code null}.
+     * @param treatmentStart The inclusive treatment start time or {@code null}.
+     * @param treatmentStop The inclusive treatment stop time or {@code null}.
      */
-    public MedicationDosageInstructions(@Nullable final String narrativeDosageInstructions,
+    public MedicationDosageInstructions(@Nullable final List<@NonNull MedicationDosageIntake> intakes,
+                                        @Nullable final String narrativeDosageInstructions,
                                         @Nullable final Instant treatmentStart,
                                         @Nullable final Instant treatmentStop) {
+        if (intakes != null) {
+            this.intakes.addAll(intakes);
+        }
         this.narrativeDosageInstructions = narrativeDosageInstructions;
         this.treatmentStart = treatmentStart;
         this.treatmentStop = treatmentStop;

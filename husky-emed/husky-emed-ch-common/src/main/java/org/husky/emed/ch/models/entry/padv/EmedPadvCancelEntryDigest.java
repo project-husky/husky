@@ -41,8 +41,8 @@ public class EmedPadvCancelEntryDigest extends EmedPadvEntryDigest {
      *
      * @param creationTime          The instant at which the item entry was created.
      * @param documentId            The parent document unique ID.
-     * @param documentAuthor        The author of the original parent document.
-     * @param sectionAuthor         The author of the original parent section.
+     * @param documentAuthor        The author of the original parent document or {@code null} if they're not known.
+     * @param sectionAuthor         The author of the original parent section or {@code null} if they're not known.
      * @param entryId               The item entry ID.
      * @param medicationTreatmentId The ID of the medication treatment this item entry belongs to.
      * @param sequence              The sequence of addition.
@@ -54,8 +54,8 @@ public class EmedPadvCancelEntryDigest extends EmedPadvEntryDigest {
      */
     public EmedPadvCancelEntryDigest(final Instant creationTime,
                                      final String documentId,
-                                     final AuthorDigest documentAuthor,
-                                     final AuthorDigest sectionAuthor,
+                                     @Nullable final AuthorDigest documentAuthor,
+                                     @Nullable final AuthorDigest sectionAuthor,
                                      final String entryId,
                                      final String medicationTreatmentId,
                                      final int sequence,

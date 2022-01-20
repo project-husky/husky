@@ -44,12 +44,12 @@ public class MedicationDosageIntake {
     /**
      * Constructor.
      *
-     * @param timingEvent  The event timing.
+     * @param eventTiming  The event timing.
      * @param doseQuantity The dose quantity.
      */
-    public MedicationDosageIntake(final ChEmedTimingEvent timingEvent,
+    public MedicationDosageIntake(final ChEmedTimingEvent eventTiming,
                                   final QuantityWithUnit doseQuantity) {
-        this.eventTiming = Objects.requireNonNull(timingEvent);
+        this.eventTiming = Objects.requireNonNull(eventTiming);
         this.doseQuantity = Objects.requireNonNull(doseQuantity);
     }
 

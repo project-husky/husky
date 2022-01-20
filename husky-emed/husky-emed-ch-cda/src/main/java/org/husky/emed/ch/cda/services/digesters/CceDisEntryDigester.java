@@ -13,9 +13,10 @@ package org.husky.emed.ch.cda.services.digesters;
 
 import org.husky.common.hl7cdar2.*;
 import org.husky.common.utils.OptionalUtils;
-import org.husky.emed.ch.cda.utils.CdaR2Utils;
 import org.husky.emed.ch.cda.services.EmedEntryDigestService;
+import org.husky.emed.ch.cda.services.readers.AuthorReader;
 import org.husky.emed.ch.cda.services.readers.ManufacturedMaterialReader;
+import org.husky.emed.ch.cda.utils.CdaR2Utils;
 import org.husky.emed.ch.cda.utils.EntryRelationshipUtils;
 import org.husky.emed.ch.cda.utils.IiUtils;
 import org.husky.emed.ch.cda.utils.TemplateIds;
@@ -63,12 +64,16 @@ public class CceDisEntryDigester {
      * @param supply                   The DIS Supply element.
      * @param disDocumentId            The MTP document ID.
      * @param disDocumentEffectiveTime The MTP document effective time.
+     * @param parentDocumentAuthor     The parent document author (not the original document author).
+     * @param parentSectionAuthor      The parent section author (not the original section author).
      * @return a digest of the element.
      * @throws InvalidEmedContentException if the CCE document is invalid.
      */
     protected EmedDisEntryDigest createDigest(final POCDMT000040Supply supply,
                                               final String disDocumentId,
-                                              final Instant disDocumentEffectiveTime) throws InvalidEmedContentException {
+                                              final Instant disDocumentEffectiveTime,
+                                              final AuthorDigest parentDocumentAuthor,
+                                              final AuthorDigest parentSectionAuthor) throws InvalidEmedContentException {
 
         final var refMtpEntry = this.getMtpReference(supply).orElse(null);
         final var refMtpEntryDigest = Optional.ofNullable(refMtpEntry)
@@ -96,11 +101,24 @@ public class CceDisEntryDigester {
             isOtc = true;
         }
 
+        final AuthorDigest documentAuthor;
+        final AuthorDigest sectionAuthor;
+        if (supply.getAuthor().size() == 2) {
+            sectionAuthor = new AuthorReader(supply.getAuthor().get(0)).toDigest();
+            documentAuthor = new AuthorReader(supply.getAuthor().get(1)).toDigest();
+        } else if (supply.getAuthor().size() == 1) {
+            sectionAuthor = new AuthorReader(supply.getAuthor().get(0)).toDigest();
+            documentAuthor = sectionAuthor;
+        } else {
+            documentAuthor = parentDocumentAuthor;
+            sectionAuthor = parentSectionAuthor;
+        }
+
         return new EmedDisEntryDigest(
                 disDocumentEffectiveTime,
                 disDocumentId,
-                new AuthorDigest(), // TODO
-                new AuthorDigest(), // TODO
+                documentAuthor,
+                sectionAuthor,
                 this.getEntryId(supply),
                 medicationTreatmentId,
                 sequence,
@@ -271,7 +289,7 @@ public class CceDisEntryDigester {
 
     /**
      * Returns the medication dispensed quantity.
-     *
+     * <p>
      * TODO: another quantity in asContent
      *
      * @param supply The dispense entry Supply.

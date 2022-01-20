@@ -26,6 +26,7 @@ import org.husky.common.utils.OptionalUtils;
 import org.husky.common.utils.time.DateTimes;
 import org.husky.common.utils.time.Hl7Dtm;
 import org.husky.emed.ch.cda.services.EmedEntryDigestService;
+import org.husky.emed.ch.cda.services.readers.AuthorReader;
 import org.husky.emed.ch.cda.utils.CdaR2Utils;
 import org.husky.emed.ch.cda.utils.EntryRelationshipUtils;
 import org.husky.emed.ch.cda.utils.IiUtils;
@@ -72,15 +73,17 @@ public class CcePadvEntryDigester {
      * @param observation               The PADV Observation element.
      * @param padvDocumentId            The MTP document ID.
      * @param padvDocumentEffectiveTime The MTP document effective time.
+     * @param parentDocumentAuthor      The parent document author (not the original document author).
+     * @param parentSectionAuthor       The parent section author (not the original section author).
      * @return a digest of the element.
      * @throws InvalidEmedContentException if the CCE document is invalid.
      */
     protected EmedPadvEntryDigest createDigest(final POCDMT000040Observation observation,
                                                final String padvDocumentId,
-                                               final Instant padvDocumentEffectiveTime) throws InvalidEmedContentException {
+                                               final Instant padvDocumentEffectiveTime,
+                                               final AuthorDigest parentDocumentAuthor,
+                                               final AuthorDigest parentSectionAuthor) throws InvalidEmedContentException {
         final var entryId = this.getEntryId(observation);
-        final var documentAuthor = new AuthorDigest();
-        final var sectionAuthor = new AuthorDigest();
         final var isCompleted = this.isCompleted(observation);
 
         // If the effectiveTime is not present, the observation becomes effective at the creation date of the document
@@ -98,6 +101,18 @@ public class CcePadvEntryDigester {
         final var medicationTreatmentId = refEntryDigest.getMedicationTreatmentId();
         final var annotationComment = this.getAnnotationComment(observation).orElse(null);
 
+        final AuthorDigest documentAuthor;
+        final AuthorDigest sectionAuthor;
+        if (observation.getAuthor().size() == 2) {
+            sectionAuthor = new AuthorReader(observation.getAuthor().get(0)).toDigest();
+            documentAuthor = new AuthorReader(observation.getAuthor().get(1)).toDigest();
+        } else if (observation.getAuthor().size() == 1) {
+            sectionAuthor = new AuthorReader(observation.getAuthor().get(0)).toDigest();
+            documentAuthor = sectionAuthor;
+        } else {
+            documentAuthor = parentDocumentAuthor;
+            sectionAuthor = parentSectionAuthor;
+        }
 
         return switch (this.getStatus(observation)) {
             case OK -> new EmedPadvOkEntryDigest(
@@ -284,8 +299,8 @@ public class CcePadvEntryDigester {
                 .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.REFR)
                 .map(POCDMT000040EntryRelationship::getSubstanceAdministration)
                 .filter(Objects::nonNull)
-				// .filter(substanceAdministration -> hasAllIds(REFERENCE_TO_MTP,
-				// substanceAdministration.getTemplateId()))
+                // .filter(substanceAdministration -> hasAllIds(REFERENCE_TO_MTP,
+                // substanceAdministration.getTemplateId()))
                 .findAny()
                 .map(CdaR2Utils::toEmedReference);
     }
@@ -301,8 +316,8 @@ public class CcePadvEntryDigester {
                 .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.REFR)
                 .map(POCDMT000040EntryRelationship::getSubstanceAdministration)
                 .filter(Objects::nonNull)
-				// .filter(substanceAdministration -> hasAllIds(REFERENCE_TO_PRE,
-				// substanceAdministration.getTemplateId()))
+                // .filter(substanceAdministration -> hasAllIds(REFERENCE_TO_PRE,
+                // substanceAdministration.getTemplateId()))
                 .findAny()
                 .map(CdaR2Utils::toEmedReference);
     }
@@ -318,7 +333,7 @@ public class CcePadvEntryDigester {
                 .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.REFR)
                 .map(POCDMT000040EntryRelationship::getSupply)
                 .filter(Objects::nonNull)
-				// .filter(su -> hasAllIds(REFERENCE_TO_DIS, su.getTemplateId()))
+                // .filter(su -> hasAllIds(REFERENCE_TO_DIS, su.getTemplateId()))
                 .findAny()
                 .map(CdaR2Utils::toEmedReference);
     }

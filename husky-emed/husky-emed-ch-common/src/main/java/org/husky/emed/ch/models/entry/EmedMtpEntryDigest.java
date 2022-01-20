@@ -47,63 +47,53 @@ import java.util.Objects;
 public class EmedMtpEntryDigest extends EmedEntryDigest {
 
     /**
+     * The list of substance substitution permissions.
+     */
+    private final List<@NonNull ActSubstanceAdminSubstitutionCode> substitutionPermissions = new ArrayList<>();
+    /**
      * The dosage instructions.
      */
     private MedicationDosageInstructions dosageInstructions;
-
     /**
      * The fulfilment instructions or {@code null} if it isn't provided.
      */
     @Nullable
     private String fulfilmentInstructions;
-
     /**
      * The reference to the original MTP entry if this one is consolidated (i.e. part of a PMLC document instead of an
      * MTP one).
      */
     @Nullable
     private EmedReference originalMtpReference;
-
     /**
      * The patient medication instructions or {@code null} if it isn't provided.
      */
     @Nullable
     private String patientMedicationInstructions;
-
     /**
      * The medication product.
      */
     private MedicationProduct product;
-
     /**
      * Number of repeats/refills (excluding the initial dispense). It's a non-zero integer if it's limited, it's zero if
      * no repeat/refill is authorized and {@code null} if unlimited repeats/refills are authorized.
      */
     @Nullable
     private Integer repeatNumber;
-
     /**
      * The medication route of administration or {@code null} if it's not specified.
      */
     @Nullable
     private RouteOfAdministrationEdqm routeOfAdministration;
-
     /**
      * The inclusive instant at which the item shall start.
      */
     private Instant serviceStartTime;
-
     /**
      * The inclusive instant at which the item shall stop or {@code null} if it's unknown.
      */
     @Nullable
     private Instant serviceStopTime;
-
-    /**
-     * The list of substance substitution permissions.
-     */
-    private final List<@NonNull ActSubstanceAdminSubstitutionCode> substitutionPermissions = new ArrayList<>();
-
     /**
      * The treatment reason or {@code null} if it isn't provided.
      */
@@ -115,8 +105,10 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
      *
      * @param creationTime                  The instant at which the item entry was created.
      * @param documentId                    The parent document unique ID.
-     * @param documentAuthor                The author of the original parent document.
-     * @param sectionAuthor                 The author of the original parent section.
+     * @param documentAuthor                The author of the original parent document or {@code null} if they're not
+     *                                      known.
+     * @param sectionAuthor                 The author of the original parent section or {@code null} if they're not
+     *                                      known.
      * @param entryId                       The item entry ID.
      * @param medicationTreatmentId         The ID of the medication treatment this item entry belongs to.
      * @param sequence                      The sequence of addition.
@@ -140,8 +132,8 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
      */
     public EmedMtpEntryDigest(final Instant creationTime,
                               final String documentId,
-                              final AuthorDigest documentAuthor,
-                              final AuthorDigest sectionAuthor,
+                              @Nullable final AuthorDigest documentAuthor,
+                              @Nullable final AuthorDigest sectionAuthor,
                               final String entryId,
                               final String medicationTreatmentId,
                               final int sequence,

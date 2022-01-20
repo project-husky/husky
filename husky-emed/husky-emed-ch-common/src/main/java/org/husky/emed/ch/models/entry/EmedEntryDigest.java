@@ -51,8 +51,9 @@ public abstract class EmedEntryDigest {
     protected Instant creationTime;
 
     /**
-     * The author of the original parent document.
+     * The author of the original parent document or {@code null} if they're not known.
      */
+    @Nullable
     protected AuthorDigest documentAuthor;
 
     /**
@@ -71,8 +72,9 @@ public abstract class EmedEntryDigest {
     protected String medicationTreatmentId;
 
     /**
-     * The author of the original parent section.
+     * The author of the original parent section or {@code null} if they're not known.
      */
+    @Nullable
     protected AuthorDigest sectionAuthor;
 
     /**
@@ -86,8 +88,8 @@ public abstract class EmedEntryDigest {
      *
      * @param creationTime          The instant at which the item entry was created.
      * @param documentId            The parent document unique ID.
-     * @param documentAuthor        The author of the original parent document.
-     * @param sectionAuthor         The author of the original parent section
+     * @param documentAuthor        The author of the original parent document or {@code null} if they're not known.
+     * @param sectionAuthor         The author of the original parent section or {@code null} if they're not known.
      * @param entryId               The item entry ID.
      * @param medicationTreatmentId The ID of the medication treatment this item entry belongs to.
      * @param sequence              The sequence of addition.
@@ -95,16 +97,16 @@ public abstract class EmedEntryDigest {
      */
     protected EmedEntryDigest(final Instant creationTime,
                               final String documentId,
-                              final AuthorDigest documentAuthor,
-                              final AuthorDigest sectionAuthor,
+                              @Nullable final AuthorDigest documentAuthor,
+                              @Nullable final AuthorDigest sectionAuthor,
                               final String entryId,
                               final String medicationTreatmentId,
                               final int sequence,
                               @Nullable final String annotationComment) {
         this.creationTime = Objects.requireNonNull(creationTime);
         this.documentId = Objects.requireNonNull(documentId);
-        this.documentAuthor = Objects.requireNonNull(documentAuthor);
-        this.sectionAuthor = Objects.requireNonNull(sectionAuthor);
+        this.documentAuthor = documentAuthor;
+        this.sectionAuthor = sectionAuthor;
         this.entryId = Objects.requireNonNull(entryId);
         this.medicationTreatmentId = Objects.requireNonNull(medicationTreatmentId);
         this.sequence = sequence;

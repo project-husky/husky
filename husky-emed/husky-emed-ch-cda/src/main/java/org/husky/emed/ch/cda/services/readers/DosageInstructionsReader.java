@@ -25,7 +25,6 @@ import org.husky.emed.ch.models.common.QuantityWithUnit;
 import java.math.BigInteger;
 import java.time.Instant;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * A reader for CDA-CH-EMED Dosage Instructions Content Module (1.3.6.1.4.1.19376.1.9.1.3.6).
@@ -152,6 +151,7 @@ public class DosageInstructionsReader {
      */
     public MedicationDosageInstructions getDosageInstructions() {
         final var instructions = new MedicationDosageInstructions(
+                null,
                 this.getNarrativeDosageInstructions().orElse(null),
                 this.getEffectiveStartTime().orElse(null),
                 this.getEffectiveStopTime().orElse(null)
@@ -208,7 +208,7 @@ public class DosageInstructionsReader {
                 .filter(id -> TemplateIds.DOSAGE_TYPE_NORMAL.equals(id)
                         || TemplateIds.DOSAGE_TYPE_TAPERED.equals(id)
                         || TemplateIds.DOSAGE_TYPE_SPLIT.equals(id))
-                .collect(Collectors.toList());
+                .toList();
         if (templateIds.size() != 1) {
             throw new InvalidEmedContentException("No or multiple dosage type template IDs found");
         }

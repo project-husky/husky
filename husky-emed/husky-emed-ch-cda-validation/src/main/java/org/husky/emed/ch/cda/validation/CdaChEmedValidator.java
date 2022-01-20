@@ -103,12 +103,12 @@ public class CdaChEmedValidator {
     public CdaChEmedValidator() throws IOException, SAXException {
         this.schemaValidator = new XmlSchemaValidator((new ClassPathResource(CCE_XSD_FILE_PATH)).getURL());
 
-        this.mtpValidator = SchematronResourceXSLT.fromClassPath(CCE_XSLT_PATH + "cdachemed-MTP-error.xslt");
-        this.preValidator = SchematronResourceXSLT.fromClassPath(CCE_XSLT_PATH + "cdachemed-PRE-error.xslt");
-        this.disValidator = SchematronResourceXSLT.fromClassPath(CCE_XSLT_PATH + "cdachemed-DIS-error.xslt");
-        this.padvValidator = SchematronResourceXSLT.fromClassPath(CCE_XSLT_PATH + "cdachemed-PADV-error.xslt");
-        this.pmlValidator = SchematronResourceXSLT.fromClassPath(CCE_XSLT_PATH + "cdachemed-PML-error.xslt");
-        this.pmlcValidator = SchematronResourceXSLT.fromClassPath(CCE_XSLT_PATH + "cdachemed-PMLC-error.xslt");
+        this.mtpValidator = SchematronResourceXSLT.fromClassPath(CCE_XSLT_PATH + "cdachemed-MTP-error.xslt", getClass().getClassLoader());
+        this.preValidator = SchematronResourceXSLT.fromClassPath(CCE_XSLT_PATH + "cdachemed-PRE-error.xslt", getClass().getClassLoader());
+        this.disValidator = SchematronResourceXSLT.fromClassPath(CCE_XSLT_PATH + "cdachemed-DIS-error.xslt", getClass().getClassLoader());
+        this.padvValidator = SchematronResourceXSLT.fromClassPath(CCE_XSLT_PATH + "cdachemed-PADV-error.xslt", getClass().getClassLoader());
+        this.pmlValidator = SchematronResourceXSLT.fromClassPath(CCE_XSLT_PATH + "cdachemed-PML-error.xslt", getClass().getClassLoader());
+        this.pmlcValidator = SchematronResourceXSLT.fromClassPath(CCE_XSLT_PATH + "cdachemed-PMLC-error.xslt", getClass().getClassLoader());
 
         this.pdfValidator = new PdfA12Validator();
     }
@@ -137,8 +137,9 @@ public class CdaChEmedValidator {
     public void validate(final String content,
                          final CceDocumentType type) throws Exception {
         Objects.requireNonNull(content);
+        this.schemaValidator.validate(content);
         // No need to close the ByteArrayInputStream
-        this.validate(new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8)), type);
+        this.validateAgainstSchematron(new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8)), type);
     }
 
     /**
@@ -155,8 +156,9 @@ public class CdaChEmedValidator {
         if (!file.isFile() || !file.canRead()) {
             throw new FileNotFoundException();
         }
-        try (final var inputStream = new FileInputStream(file)) {
-            this.validate(inputStream, type);
+        this.schemaValidator.validate(file);
+        try (final var fileInputStream = new FileInputStream(file)) {
+            this.validateAgainstSchematron(fileInputStream, type);
         }
     }
 

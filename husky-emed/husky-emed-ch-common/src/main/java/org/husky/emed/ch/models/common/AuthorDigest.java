@@ -88,16 +88,13 @@ public class AuthorDigest {
      */
     private TelecomDigest telecoms;
 
-    public AuthorDigest() {
-    }
-
     public AuthorDigest(@Nullable final ParticipationFunction participationFunction,
                         final Instant authorshipTimestamp,
                         @Nullable final String givenName,
                         @Nullable final String familyName,
                         @Nullable final String authorGln,
-                        final List<String> otherIds,
-                        final List<AddressDigest> addresses,
+                        @Nullable final List<String> otherIds,
+                        @Nullable final List<AddressDigest> addresses,
                         @Nullable final String deviceManufacturerModelName,
                         @Nullable final String deviceSoftwareName,
                         @Nullable final OrganizationDigest organization,
@@ -107,8 +104,12 @@ public class AuthorDigest {
         this.givenName = givenName;
         this.familyName = familyName;
         this.authorGln = authorGln;
-        this.otherIds.addAll(otherIds);
-        this.addresses.addAll(addresses);
+        if (otherIds != null) {
+            this.otherIds.addAll(otherIds);
+        }
+        if (addresses != null) {
+            this.addresses.addAll(addresses);
+        }
         this.deviceManufacturerModelName = deviceManufacturerModelName;
         this.deviceSoftwareName = deviceSoftwareName;
         this.organization = organization;

@@ -20,16 +20,12 @@
  */
 package org.husky.emed.ch.cda.services.digesters;
 
-import java.time.Instant;
-import java.time.temporal.TemporalAmount;
-import java.util.Objects;
-import java.util.Optional;
-
 import org.husky.common.hl7cdar2.*;
 import org.husky.common.utils.OptionalUtils;
-import org.husky.emed.ch.cda.utils.CdaR2Utils;
 import org.husky.emed.ch.cda.services.EmedEntryDigestService;
+import org.husky.emed.ch.cda.services.readers.AuthorReader;
 import org.husky.emed.ch.cda.services.readers.SubAdmEntryReader;
+import org.husky.emed.ch.cda.utils.CdaR2Utils;
 import org.husky.emed.ch.cda.utils.IiUtils;
 import org.husky.emed.ch.cda.utils.IvlTsUtils;
 import org.husky.emed.ch.cda.utils.TemplateIds;
@@ -40,6 +36,11 @@ import org.husky.emed.ch.models.common.RenewalInterval;
 import org.husky.emed.ch.models.entry.EmedEntryDigest;
 import org.husky.emed.ch.models.entry.EmedPreEntryDigest;
 import org.springframework.stereotype.Component;
+
+import java.time.Instant;
+import java.time.temporal.TemporalAmount;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Creator of CDA-CH-EMED PRE item entry digests.
@@ -71,13 +72,17 @@ public class CcePreEntryDigester {
      * @param preDocumentEffectiveTime  The PRE document effective time.
      * @param prescriptionValidityStart The prescription validity start time (inclusive).
      * @param prescriptionValidityStop  The prescription validity stop time (inclusive).
+     * @param parentDocumentAuthor      The parent document author (not the original document author).
+     * @param parentSectionAuthor       The parent section author (not the original section author).
      * @return a digest of the element.
      */
     protected EmedPreEntryDigest createDigest(final POCDMT000040SubstanceAdministration substanceAdministration,
                                               final String preDocumentId,
                                               final Instant preDocumentEffectiveTime,
                                               final Instant prescriptionValidityStart,
-                                              final Instant prescriptionValidityStop) throws InvalidEmedContentException {
+                                              final Instant prescriptionValidityStop,
+                                              final AuthorDigest parentDocumentAuthor,
+                                              final AuthorDigest parentSectionAuthor) throws InvalidEmedContentException {
         if (!TemplateIds.hasAllIds(TemplateIds.PRE_ENTRY, substanceAdministration.getTemplateId())) {
             throw new InvalidEmedContentException("The given substance administration is not a PRE item entry");
         }
@@ -96,11 +101,24 @@ public class CcePreEntryDigester {
             medicationTreatmentId = IiUtils.getNormalizedUid(preEntry.getEntryId());
         }
 
+        final AuthorDigest documentAuthor;
+        final AuthorDigest sectionAuthor;
+        if (substanceAdministration.getAuthor().size() == 2) {
+            sectionAuthor = new AuthorReader(substanceAdministration.getAuthor().get(0)).toDigest();
+            documentAuthor = new AuthorReader(substanceAdministration.getAuthor().get(1)).toDigest();
+        } else if (substanceAdministration.getAuthor().size() == 1) {
+            sectionAuthor = new AuthorReader(substanceAdministration.getAuthor().get(0)).toDigest();
+            documentAuthor = sectionAuthor;
+        } else {
+            documentAuthor = parentDocumentAuthor;
+            sectionAuthor = parentSectionAuthor;
+        }
+
         return new EmedPreEntryDigest(
                 Objects.requireNonNull(preDocumentEffectiveTime),
                 Objects.requireNonNull(preDocumentId),
-                new AuthorDigest(), // TODO
-                new AuthorDigest(), // TODO
+                documentAuthor,
+                sectionAuthor,
                 IiUtils.getNormalizedUid(preEntry.getEntryId()),
                 medicationTreatmentId,
                 sequence,
@@ -181,8 +199,8 @@ public class CcePreEntryDigester {
     }
 
     /**
-     * Returns whether the PRE entry is provisional or not. It's provisional if it contains a single
-     * validation step, as per IHE Pharm PRE 6.3.4.16.
+     * Returns whether the PRE entry is provisional or not. It's provisional if it contains a single validation step, as
+     * per IHE Pharm PRE 6.3.4.16.
      *
      * @param substanceAdministration The PRE item SubstanceAdministration.
      */
