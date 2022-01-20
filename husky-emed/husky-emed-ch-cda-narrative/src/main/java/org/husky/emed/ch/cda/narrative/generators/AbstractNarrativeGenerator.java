@@ -20,11 +20,16 @@
  */
 package org.husky.emed.ch.cda.narrative.generators;
 
+import org.apache.commons.lang3.StringUtils;
 import org.husky.common.enums.ValueSetEnumInterface;
 import org.husky.emed.ch.cda.narrative.enums.NarrativeLanguage;
+import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.treatment.MedicationPackagedProduct;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
 
+import java.time.DateTimeException;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.MissingResourceException;
 import java.util.Objects;
 import java.util.Optional;
@@ -52,10 +57,16 @@ public abstract class AbstractNarrativeGenerator {
     }
 
     /**
-     * Gets the date formatter for the current language.
+     * Formats a temporal object to the given format, respecting the generation locale.
+     *
+     * @param temporal The temporal object to format.
+     * @param pattern The format, as described in the {@link DateTimeFormatter} class.
+     * @throws DateTimeException if an error occurs during formatting.
      */
-    protected void getDateFormatter() {
-
+    protected String formatTemporal(final TemporalAccessor temporal,
+                                    final String pattern) throws DateTimeException {
+        return DateTimeFormatter.ofPattern(pattern, this.lang.getLocale())
+                .format(temporal);
     }
 
     /**
@@ -87,8 +98,8 @@ public abstract class AbstractNarrativeGenerator {
      * @param isHtml  Whether it should be in HTML ({@code true}) or in StrucDocText ({@code false}).
      * @return The medication product name.
      */
-    protected String getMedicationName(final MedicationProduct product,
-                                       final boolean isHtml) {
+    protected String formatMedicationName(final MedicationProduct product,
+                                          final boolean isHtml) {
         final var name = Optional.ofNullable(product.getName()).orElse(
                 Optional.ofNullable(product.getPackagedProduct()).map(MedicationPackagedProduct::getName).orElse(null)
         );

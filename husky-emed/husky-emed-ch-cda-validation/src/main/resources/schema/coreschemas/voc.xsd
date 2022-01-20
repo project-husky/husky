@@ -588,14 +588,49 @@ History:
 			<xs:enumeration value="PCD"/>
 			<xs:enumeration value="PCM"/>
 			<xs:enumeration value="PCV"/>
-			<xs:enumeration value="CM"/>
-			<xs:enumeration value="CD"/>
-			<xs:enumeration value="CV"/>
+			<xs:enumeration value="AC"/>
+			<xs:enumeration value="ACD"/>
+			<xs:enumeration value="ACM"/>
+			<xs:enumeration value="ACV"/>
+			<xs:enumeration value="HS"/>
+			<xs:enumeration value="IC"/>
+			<xs:enumeration value="ICD"/>
+			<xs:enumeration value="ICM"/>
+			<xs:enumeration value="ICV"/>
+			<xs:enumeration value="PC"/>
+			<xs:enumeration value="PCD"/>
+			<xs:enumeration value="PCM"/>
+			<xs:enumeration value="PCV"/>
 			<!--
 			ELGA extensions
 			added: CM, CD, CV
 			Author: ELGA GmbH, 2014
 			-->
+			<xs:enumeration value="CM"/>
+			<xs:enumeration value="CD"/>
+			<xs:enumeration value="CV"/>
+			<!--
+			Completion of the HL7 value set
+			Author: eHealthSuisse, 2021
+			-->
+			<xs:enumeration value="C"/>
+			<xs:enumeration value="WAKE"/>
+			<!--
+			Adding the FHIR value set
+			Author: eHealthSuisse, 2021
+			-->
+			<xs:enumeration value="MORN"/>
+			<xs:enumeration value="MORN.early"/>
+			<xs:enumeration value="MORN.late"/>
+			<xs:enumeration value="NOON"/>
+			<xs:enumeration value="AFT"/>
+			<xs:enumeration value="AFT.early"/>
+			<xs:enumeration value="AFT.late"/>
+			<xs:enumeration value="EVE"/>
+			<xs:enumeration value="EVE.early"/>
+			<xs:enumeration value="EVE.late"/>
+			<xs:enumeration value="NIGHT"/>
+			<xs:enumeration value="PHS"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="URLScheme">
