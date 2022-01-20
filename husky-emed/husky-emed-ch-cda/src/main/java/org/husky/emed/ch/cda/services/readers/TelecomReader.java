@@ -15,6 +15,7 @@ import org.husky.emed.ch.models.common.TelecomDigest;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * A reader for CDA-CH-EMED telecoms.
@@ -80,7 +81,7 @@ public class TelecomReader {
         final var others = this.telecoms.stream()
                 .map(URL::getValue)
                 .filter(Objects::nonNull)
-                .toList();
+                .collect(Collectors.toList());
         others.removeAll(this.getPhoneNumbers());
         others.removeAll(this.getFaxNumbers());
         others.removeAll(this.getMailAddresses());
