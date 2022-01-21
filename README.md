@@ -22,8 +22,8 @@ Supported profiles are
 
 | Profile             | Transaction          | Description                              |
 | ------------------- | -------------------- | ---------------------------------------- |
-| [PDQ](docs/PDQ.md)  | ITI-47               | Query patient demographics               |
-| [PIX](docs/PIX.md)  | ITI-44, ITI-45       | Patient identity transactions            |
+| [PDQ](docs/PDQV3.md)  | ITI-47               | Query patient demographics               |
+| [PIX](docs/PIXV3.md)  | ITI-44, ITI-45       | Patient identity transactions            |
 | [PPQ](docs/PPQ.md)  | PPQ-1, PPQ-2         | Privacy Policy Queries                   |
 | [SVS](docs/SVS.md)  | ITI-48               | Retrieve value set                       |
 | [XDM](docs/XDM.md)  | ITI-32               | Exchange of documents via standard media |
