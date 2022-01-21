@@ -517,7 +517,6 @@
 				<scope>provided</scope>
 			</dependency>
 
-
 			<!-- Own modules -->
 			<dependency>
 				<groupId>org.husky.common</groupId>
@@ -528,7 +527,6 @@
 				<groupId>org.husky.common</groupId>
 				<artifactId>husky-common-gen</artifactId>
 				<type>test-jar</type>
-				<scope>test</scope>
 				<version>${husky.version}</version>
 			</dependency>
 			<dependency>
@@ -544,6 +542,12 @@
 			<dependency>
 				<groupId>org.husky.communication</groupId>
 				<artifactId>husky-communication-gen</artifactId>
+				<version>${husky.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.husky.communication</groupId>
+				<artifactId>husky-communication-gen</artifactId>
+				<type>test-jar</type>
 				<version>${husky.version}</version>
 			</dependency>
 			<dependency>
