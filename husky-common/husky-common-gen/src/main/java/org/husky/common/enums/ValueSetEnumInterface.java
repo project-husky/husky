@@ -35,8 +35,12 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
         final CE ce = new CE();
         ce.setCodeSystem(getCodeSystemId());
         ce.setCode(getCodeValue());
-        ce.setCodeSystemName(getCodeSystemName());
-        ce.setDisplayName(getDisplayName());
+        if (!getCodeSystemName().isEmpty()) {
+            ce.setCodeSystemName(getCodeSystemName());
+        }
+        if (!getDisplayName().isEmpty()) {
+            ce.setDisplayName(getDisplayName());
+        }
         return ce;
     }
 
