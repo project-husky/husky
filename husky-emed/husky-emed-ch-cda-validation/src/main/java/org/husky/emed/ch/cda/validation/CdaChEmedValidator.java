@@ -52,7 +52,7 @@ import java.util.regex.Pattern;
  * @author Quentin Ligier
  */
 @Component
-@NotThreadSafe
+@NotThreadSafe // SchematronResourceXSLT is not thread-safe
 public class CdaChEmedValidator {
     private static final Logger log = LoggerFactory.getLogger(CdaChEmedValidator.class);
 
