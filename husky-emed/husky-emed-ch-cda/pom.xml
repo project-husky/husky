@@ -14,19 +14,15 @@
 		<version>2.0-ALPHA</version>
 	</parent>
 
-    <properties></properties>
-
     <dependencies>
         <!-- Own dependencies -->
         <dependency>
             <groupId>org.husky.emed.ch</groupId>
             <artifactId>husky-emed-ch-common</artifactId>
-            <version>2.0-ALPHA</version>
         </dependency>
 		<dependency>
 			<groupId>org.husky.common</groupId>
 			<artifactId>husky-common-ch</artifactId>
-			<version>2.0-ALPHA</version>
 		</dependency>
 
 		<!-- Spring annotations (Apache 2.0) -->
@@ -57,7 +53,6 @@
 			<!-- Temporary dependency for dev -->
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.22</version>
 			<scope>provided</scope>
 		</dependency>
     </dependencies>

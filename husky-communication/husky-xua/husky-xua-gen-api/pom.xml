@@ -10,10 +10,10 @@
 	</parent>
 
 	<dependencies>
-	 <dependency>
-				<groupId>org.openehealth.ipf.platform-camel</groupId>
+		<dependency>
+			<groupId>org.openehealth.ipf.platform-camel</groupId>
 			<artifactId>ipf-platform-camel-ihe-xacml20</artifactId>
-			</dependency>
+		</dependency>
 	
 		<!-- test stuff -->
 		<dependency>
