@@ -46,19 +46,14 @@
 		<dependency>
 			<groupId>org.husky.communication</groupId>
 			<artifactId>husky-xua-gen-impl</artifactId>
-			<version>2.0-ALPHA</version>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.husky.communication</groupId>
 			<artifactId>husky-xua-ch-impl</artifactId>
-			<version>2.0-ALPHA</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.husky.communication</groupId>
 			<artifactId>husky-communication-gen</artifactId>
-			<version>2.0-ALPHA</version>
 		</dependency>
 
 		<dependency>
