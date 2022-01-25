@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type='text/xsl' href='../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl'?>
+<?xml-stylesheet type='text/css' href='../../../../stylesheets/HUG/PlanDeTraitement/v1.0/hug.css'?>
+<ClinicalDocument xmlns:pharm="urn:ihe:pharm:medication" xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 \Schemas\IHE+Pharmacy\CDA_extended_pharmacy.xsd">
+	<!--
+		=======================================================================
+		IHE Pharmacy - Technical Committee
+
+		Pharmaceutical ADVice (PADV) Demo-Document
+
+		Author:
+			Stephane Spahni
+			University Hospitals of Geneva
+			stephane.spahni@hcuge.ch
+			
+		Version:	1
+		Date:		24.03.2015
+		=======================================================================
+	-->
+
+	<realmCode code="CH"/>
+	<typeId root="2.16.840.1.113883.1.3" extension="POCD_HD000040"/>
+    <templateId root="1.3.6.1.4.1.19376.1.5.3.1.1.1"/>
+    <templateId root="1.3.6.1.4.1.19376.1.9.1.1.2"/>
+
+	<!-- PADV
+	-->
+    <templateId extension="PCC.PharmaceuticalAdvice" root="1.2.40.0.32.6.1.10.1.1.1"/>
+	<id root="2.16.756.5.30.4.9.1.1.9000.97005632.20150622100000.1" extension="MTPS-V1-PADV1"/>
+    <code code="61356-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Pharmaceutical advice"/>
+    <title>Pharmacy Pharmaceutical Advice</title>
+	
+	<effectiveTime value="20150622100000+0200"/>
+	<confidentialityCode code="N" displayName="normal" codeSystem="2.16.840.1.113883.5.25" codeSystemName="HL7:Confidentiality"/>
+	<languageCode code="fr-CH"/>
+	
+	<recordTarget>
+		<patientRole>
+			<id extension="80756999999999993000" root="2.16.756.5.30.4.9.1.1.1000.200.3"/>
+			<addr>
+				<streetAddressLine>rue des Abeilles, 50</streetAddressLine>
+				<city>Geneva</city>
+				<postalCode>1205</postalCode>
+				<state nullFlavor="UNK"/>
+				<country>CH</country>
+			</addr>
+			<telecom value="tel:+41.22.300.00.00" use="HP"/>
+			<telecom value="tel:+41.22.300.00.00" use="MC"/>
+			<telecom value="tel:+41.22.300.00.00" use="WP"/>
+			<telecom use="HP" value="mailto:jean.etoile@hcuge.ch"/>
+			<patient>
+				<name>
+					<family>Kalbermatten</family>
+					<given>Karin</given>
+				</name>
+				<administrativeGenderCode code="F" codeSystem="2.16.840.1.113883.5.1" displayName="Female"/>
+				<birthTime value="19320525"/>
+			</patient>
+		</patientRole>
+	</recordTarget>
+	<author>						
+		<functionCode code='2221' displayName='Nursing professionals' codeSystem='2.16.840.1.113883.2.9.6.2.7' codeSystemName='ISCO-08'/>	<!-- profession -->
+		<time value="20150622100000+0200"/>						
+		<assignedAuthor>						
+			<id root="1.3.88" extension="7601000000099"/>	<!-- GS1 GLN -->
+			<code code='50062' displayName="Infirmière diplômée / Infirmier diplômé" codeSystem='2.16.756.5.30.1.127.3.2.1.5' codeSystemName='EPD_XDS_healthcareFacilityTypeCode'/>
+			<addr>
+				<streetName>Rue des Soins</streetName>
+				<houseNumber>2</houseNumber>
+				<postalCode>1205</postalCode>
+				<city>Geneva</city>
+				<state>Geneva</state>
+				<country>Suisse</country>
+			</addr>					
+			<assignedPerson>							
+				<name>							
+					<prefix>Mrs</prefix>							
+					<given>Infirmiere</given>							
+					<family>SoinsDomicile</family>
+				</name>
+			</assignedPerson>
+			<representedOrganization>
+				<id root="1.3.88" extension="7601000000099"/>	<!-- GS1 GLN -->
+				<name>Infirmiere SoinsDomicile</name>
+				<telecom value="tel:+41.22.123.10.00"/>
+				<telecom value="mailto:Infirmiere.SoinsDomicile@hin.ch"/>
+				<addr>
+					<streetName>Rue des Soins</streetName>
+					<houseNumber>2</houseNumber>
+					<postalCode>1205</postalCode>
+					<city>Geneva</city>
+					<state>Geneva</state>
+					<country>Suisse</country>
+				</addr>					
+			</representedOrganization>						
+		</assignedAuthor>					
+	</author>
+	<custodian>
+		<assignedCustodian>
+			<representedCustodianOrganization>
+				<id root="1.3.88" extension="7601000000099"/>	<!-- GS1 GLN -->
+				<name>Soins a domicile</name>
+				<telecom value="tel:+41.22.123.10.00"/>
+				<addr>
+					<streetName>Rue des Soins</streetName>
+					<houseNumber>2</houseNumber>
+					<postalCode>1205</postalCode>
+					<city>Geneva</city>
+					<state>Geneva</state>
+					<country>Suisse</country>
+				</addr>					
+			</representedCustodianOrganization>
+		</assignedCustodian>
+	</custodian>
+	<legalAuthenticator>
+		<time value="20150622100000+0200"/>
+		<signatureCode code="S"/>
+		<assignedEntity>
+			<id root="1.3.88" extension="7601000000099"/>	<!-- GS1 GLN -->
+			<telecom value="tel:+41.22.123.01.02"/>
+			<telecom value="mailto:Soins.A.Domicile@hin.ch"/>
+			<assignedPerson>							
+				<name>							
+					<prefix>Mrs</prefix>							
+					<given>Infirmiere</given>							
+					<family>Responsable</family>
+				</name>
+			</assignedPerson>
+			<representedOrganization>
+				<id root="1.3.88" extension="7601000000099"/>	<!-- GS1 GLN -->
+				<name>Soins a domicile</name>
+				<telecom value="tel:+41.22.123.10.00"/>
+				<telecom value="mailto:Soins.A.Domicile@hin.ch"/>
+				<addr>
+					<streetName>Rue des Soins</streetName>
+					<houseNumber>2</houseNumber>
+					<postalCode>1205</postalCode>
+					<city>Geneva</city>
+					<state>Geneva</state>
+					<country>Suisse</country>
+				</addr>					
+			</representedOrganization>						
+		</assignedEntity>
+	</legalAuthenticator>
+    <component>
+        <structuredBody>
+            <component>
+                <section>
+                    <templateId root="1.3.6.1.4.1.19376.1.9.1.2.2"/>
+					<id root="2.16.756.5.30.4.9.1.1.9000.97005632.20150622100000.1" extension="MTPS-V1-PADV1"/>
+                    <code code="61357-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="MEDICATION PHARMACEUTICAL ADVICE.BRIEF"/>
+                    <title>Pharmaceutical advice</title>
+                    <text>
+                        <content>Prescribed medications</content>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Date</td>
+                                    <td>Branded Medication</td>
+                                    <td>Package name</td>
+                                    <td>Package form</td>
+                                    <td>LOT number</td>
+                                    <td>Package capacity</td>
+                                    <td>Ingredients</td>
+                                    <td>Date from</td>
+                                    <td>Date to</td>
+                                    <td>Frequency</td>
+                                    <td>Route code</td>
+                                    <td>Approach site</td>
+                                    <td>Dose quantity</td>
+                                    <td>Rate quantity</td>
+                                    <td>Reason</td>
+                                    <td>Patient instructions</td>
+                                    <td>Fulfilment instructions</td>
+                                    <td>Dispense amount</td>
+                                    <td>Substitution</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+								<!-- Prescription item entries corresponding to chapter 4.3.3 -->
+
+                                <tr ID="pre.3.1">
+                                    <td ID="pre.3.1_date">2015-06-08 08:35</td>
+                                    <td ID="pre.3.1_brandedmedication">TORASEMIDE</td>
+                                    <td ID="pre.3.1_packagename">TORASEMIDE Spirig HC cpr 5 mg</td>
+                                    <td ID="pre.3.1_packageform">Tablet</td>
+                                    <td ID="pre.3.1_lotnumber"/>
+                                    <td ID="pre.3.1_packagecapacity"/>
+                                    <td ID="pre.3.1_ingredients">
+                                        <list>
+                                            <item ID="pre.3.1_ingredient1">
+                                                <content ID="pre.3.1_ingredient1_name">torasemide</content>
+                                                <content ID="pre.3.1_ingredient1_quantity">5 mg</content>
+                                            </item>
+                                        </list>
+                                    </td>
+                                    <td ID="pre.3.1_datefrom">2015-06-08</td>
+                                    <td ID="pre.3.1_dateto">2015-06-28</td>
+                                    <td ID="pre.3.1_frequency">1 at breakfast</td>
+                                    <td ID="pre.3.1_routecode">per os</td>
+                                    <td ID="pre.3.1_approachsite"></td>
+                                    <td ID="pre.3.1_dosequantity">5 mg</td>
+                                    <td ID="pre.3.1_ratequantity">1/d</td>
+                                    <td ID="pre.3.1_reason"></td>
+                                    <td ID="pre.3.1_pinstruct"></td>
+                                    <td ID="pre.3.1_finstruct"></td>
+                                    <td ID="pre.3.1_dispenseamount">1 boxe of 20</td>
+                                    <td ID="pre.3.1_substitution">yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                        <content>Dispensed Medications</content>
+                        <table>
+                            <thead>
+                                <tr styleCode="TableHeader">
+                                    <td>Date</td>
+                                    <td>Branded Medication</td>
+                                    <td>Package name</td>
+                                    <td>Package form</td>
+									<td>LOT number</td>
+                                    <td>Package capacity</td>
+                                    <td>Ingredients</td>
+                                    <td>Date from</td>
+                                    <td>Date to</td>
+                                    <td>Frequency</td>
+                                    <td>Route code</td>
+                                    <td>Approach site</td>
+                                    <td>Dose quantity</td>
+                                    <td>Rate quantity</td>
+                                    <td>Reason</td>
+									<td>Patient instructions</td>
+									<td>Fulfilment instructions</td>
+                                    <td>Dispense amount</td>
+									<td>Substitution</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+							
+								<!-- Dispensed item entries corresponding to chapter 4.3.4 -->
+
+                                <tr ID="disp4">
+                                    <td ID="disp4_date">2015-06-08 09:30</td>
+                                    <td ID="disp4_brandedmedication">TORASEMIDE</td>
+                                    <td ID="disp4_packagename">TORASEMIDE Spirig HC cpr 5 mg 20 cpr</td>
+                                    <td ID="disp4_packageform">Tablet</td>
+                                    <td ID="disp4_lotnumber"/>
+                                    <td ID="disp4_packagecapacity">20</td>
+                                    <td ID="disp4_ingredients">
+                                        <list>
+                                            <item ID="disp4_ingredient1">
+                                                <content ID="disp4_ingredient1_name">torasemide</content>
+                                                <content ID="disp4_ingredient1_quantity">5 mg</content>
+                                            </item>
+                                        </list>
+                                    </td>
+                                    <td ID="disp4_datefrom">2015-06-08</td>
+                                    <td ID="disp4_dateto">2015-06-28</td>
+                                    <td ID="disp4_frequency">1 at breakfast</td>
+                                    <td ID="disp4_routecode">per os</td>
+                                    <td ID="disp4_approachsite"></td>
+                                    <td ID="disp4_dosequantity">5 mg</td>
+                                    <td ID="disp4_ratequantity">1/d</td>
+                                    <td ID="disp4_reason"></td>
+									<td ID="disp4_pinstruct"></td>
+									<td ID="disp4_finstruct"></td>
+									<td ID="disp4_dispenseamount">1</td>
+									<td ID="disp4_substit"></td>
+                                </tr>
+							</tbody>
+                        </table>
+                        <content>Pharmaceutical Advice Information</content>
+                        <table>
+                            <thead>
+                                <tr styleCode="TableHeader">
+                                    <td>Observation code</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ID="padv1">
+                                    <td ID="padv1_observation">Dispense, no change expected</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <content>Pharmaceutical Advice Information - Recommendation</content>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Date</td>
+                                    <td>Branded Medication</td>
+                                    <td>Package name</td>
+                                    <td>Package form</td>
+                                    <td>LOT number</td>
+                                    <td>Package capacity</td>
+                                    <td>Ingredients</td>
+                                    <td>Date from</td>
+                                    <td>Date to</td>
+                                    <td>Frequency</td>
+                                    <td>Route code</td>
+                                    <td>Approach site</td>
+                                    <td>Dose quantity</td>
+                                    <td>Rate quantity</td>
+                                    <td>Reason</td>
+                                    <td>Patient instructions</td>
+                                    <td>Fulfilment instructions</td>
+                                    <td>Dispense amount</td>
+                                    <td>Substitution</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ID="padv1_rec">
+                                    <td ID="padv1_date">2015-06-22 10:00</td>
+                                    <td ID="padv1_brandedmedication">TORASEMIDE</td>
+                                    <td ID="padv1_packagename">TORASEMIDE Spirig HC cpr 5 mg</td>
+                                    <td ID="padv1_rec_packageform"/>
+                                    <td ID="padv1_rec_lotnumber"/>
+                                    <td ID="padv1_rec_packagecapacity"/>
+                                    <td ID="padv1_rec_ingredients">
+                                    </td>
+                                    <td ID="padv1_rec_datefrom"></td>
+                                    <td ID="padv1_rec_dateto"></td>
+                                    <td ID="padv1_rec_frequency"></td>
+                                    <td ID="padv1_rec_routecode"></td>
+                                    <td ID="padv1_rec_approachsite"></td>
+                                    <td ID="padv1_rec_dosequantity"></td>
+                                    <td ID="padv1_rec_ratequantity"></td>
+                                    <td ID="padv1_rec_reason"></td>
+                                    <td ID="padv1_rec_pinstruct"></td>
+                                    <td ID="padv1_rec_finstruct">Mme Kalbermatten ne prend pas regulierement ce medicament</td>
+                                    <td ID="padv1_rec_dispenseamount"></td>
+                                    <td ID="padv1_rec_substitution"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </text>
+                    <entry>
+                        <observation classCode="OBS" moodCode="EVN">
+                            <templateId root="1.3.6.1.4.1.19376.1.9.1.3.3"/>
+							<id root="2.16.756.5.30.4.9.1.1.9000.97005632.20150622100000.1" extension="MTPS-V1-PADV1.1"/>
+                            <code code="OK" codeSystem="1.3.6.1.4.1.19376.1.9.2.1" codeSystemName="IHE Pharmaceutical Advice Status List" displayName="Dispense, no change expected"/>
+                            <text>
+                                <reference value="#padv1"/>
+                            </text>
+                            <statusCode code="completed"/>
+							<effectiveTime value='20150622100000' />
+                            <entryRelationship typeCode="REFR">
+								<supply classCode="SPLY" moodCode="EVN">
+									<templateId root="2.16.840.1.113883.10.20.1.34"/>
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.3"/>
+									<templateId root="1.3.6.1.4.1.19376.1.9.1.3.4"/>
+									<id root="2.16.756.5.30.4.9.1.1.9000.97005632.20150608093025.1" extension="MTPS-V1-DIS4.1"/>
+									<code code='FFC' displayName='First Fill - Complete' codeSystem='2.16.840.1.113883.5.4' codeSystemName='ActCode'/>
+									<effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+										<low value="20150608"/>
+										<high value="20150608"/>
+									</effectiveTime>
+									<quantity unit="1" value="1"/>
+									<product>
+										<manufacturedProduct classCode="MANU" xmlns:pharm="urn:ihe:pharm:medication">
+											<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+											<templateId root="2.16.840.1.113883.10.20.1.53"/>
+											<manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+												<templateId root="1.3.6.1.4.1.19376.1.9.1.3.1"/>
+												<code code="C03CA04" codeSystem="2.16.840.1.113883.6.73" codeSystemName="ATC WHO" displayName="torasemide">
+													<originalText>
+														<reference value="#disp4_ingredient1"/>
+													</originalText>
+												</code>
+												<name>Torasemide Spirig</name>
+												<pharm:formCode code="TAB" codeSystem="2.16.840.1.113883.5.85" displayName="Tablet"/>
+												<pharm:asContent classCode="CONT">
+													<pharm:containerPackagedMedicine classCode="CONT" determinerCode="INSTANCE">
+														<!-- National medicinal product code (package-level) -->
+														<pharm:code code="7680571860123" codeSystem="2.51.1.1" codeSystemName="GTIN" displayName="TORASEMIDE Spirig HC cpr 5 mg 20 pce"/>
+														<!-- Brand name (package) -->
+														<pharm:name>TORASEMIDE Spirig HC cpr 5 mg</pharm:name>
+														<pharm:formCode code="TAB" codeSystem="2.16.840.1.113883.5.85" displayName="Tablet"/>
+														<pharm:capacityQuantity value="20"/>
+													</pharm:containerPackagedMedicine>
+												</pharm:asContent>
+												<pharm:ingredient classCode="ACTI" xmlns:pharm="urn:ihe:pharm:medication">
+													<pharm:quantity>
+														<pharm:numerator unit="mg" value="5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="PQ"/>
+														<pharm:denominator value="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="PQ"/>
+													</pharm:quantity>
+													<pharm:ingredient classCode="MMAT" determinerCode="KIND">
+														<pharm:code code="C03CA04" codeSystem="2.16.840.1.113883.6.73" codeSystemName="ATC WHO" displayName="torasemide"/>
+														<pharm:name>various</pharm:name>
+													</pharm:ingredient>
+												</pharm:ingredient>
+											</manufacturedMaterial>
+										</manufacturedProduct>
+									</product>
+									<entryRelationship typeCode="REFR">
+										<substanceAdministration classCode='SBADM' moodCode='INT'>
+											<templateId root=' 1.3.6.1.4.1.19376.1.9.1.3.11'/>
+											<id root="2.16.756.5.30.4.9.1.1.9000.97005632.20150608083515.1" extension="MTPS-V1-PRE3.1"/>
+											<code code='PREItem' codeSystem='1.3.6.1.4.1.19376.1.9.2.2' displayName='Prescription Item' codeSystemName='IHE Pharmacy Item Type List'/>
+											<consumable>
+												<manufacturedProduct>
+													<manufacturedMaterial nullFlavor='NA'/>
+												</manufacturedProduct>
+											</consumable>
+										</substanceAdministration>
+									</entryRelationship>
+								</supply>
+
+                            </entryRelationship>
+							
+							<!--
+								One or more Pharmaceutical Advice Concern entries, representing validation issues
+								with the objective Prescription- or Dispense Item
+							-->
+							<entryRelationship typeCode='REFR' inversionInd='false'>
+								<act classCode='ACT' moodCode='EVN'>
+									<templateId root='2.16.840.1.113883.10.20.1.27'/>
+									<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.5.1'/>
+									<templateId root='1.3.6.1.4.1.19376.1.9.1.3.5'/>
+									<id root="2.16.756.5.30.4.9.1.1.9000.97005632.20150622100000.1" extension="MTPS-V1-PADV1.1.1"/>
+									<code nullFlavor='NA'/>
+									<text>
+										<reference value="#padv1_rec"/>
+									</text>
+									<statusCode code='completed'/>
+									<effectiveTime>
+										<low value='20150622100000'/>
+									</effectiveTime>
+
+									<!-- one or more entry relationships identifying problems of concern -->
+									<entryRelationship typeCode='SUBJ' inversionInd='false'>
+										<observation classCode='OBS' moodCode='EVN' negationInd=' false'>
+											<templateId root='2.16.840.1.113883.10.20.1.28'/>
+											<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.5'/>
+											<id root="2.16.756.5.30.4.9.1.1.9000.97005632.20150622100000.1" extension="MTPS-V1-PADV1.1.1.1"/>
+											<code code='404684003' displayName='Finding' codeSystem='2.16.840.1.113883.6.96' codeSystemName='SNOMED CT'/> <!-- cf 1.3.6.1.4.1.19376.1.5.3.1.4.5 -->
+											<text>
+												<reference value="#padv1_rec"/>
+											</text>
+											<statusCode code='completed'/>
+											<effectiveTime>
+												<low value='20150622100000'/>
+											</effectiveTime>
+											<value xsi:type='CD'> <!-- pas de terminologie référencée; sinon SNOMED -->
+												<originalText>
+													<reference value="#padv1_rec"/>
+												</originalText>
+											</value>
+										</observation>
+									</entryRelationship>
+								</act>
+							</entryRelationship>
+                        </observation>
+                    </entry>
+                </section>
+            </component>
+        </structuredBody>
+    </component>
+</ClinicalDocument>

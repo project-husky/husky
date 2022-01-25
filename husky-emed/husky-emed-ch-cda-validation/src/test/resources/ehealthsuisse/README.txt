@@ -1,0 +1,1 @@
+These samples come from https://github.com/hl7ch/hl7ch-cda/tree/master/projects/eHealthSuisse/eMedikation/v1.0

@@ -22,7 +22,7 @@ package org.husky.emed.ch.cda.validation;
 
 import com.helger.schematron.svrl.jaxb.FailedAssert;
 import com.helger.schematron.xslt.SchematronResourceXSLT;
-
+import org.husky.common.utils.xml.XmlFactories;
 import org.husky.common.utils.xml.XmlSchemaValidator;
 import org.husky.emed.ch.enums.CceDocumentType;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
@@ -33,26 +33,36 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.verapdf.core.ValidationException;
 import org.verapdf.pdfa.results.TestAssertion;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 import javax.annotation.concurrent.NotThreadSafe;
-import javax.xml.transform.stream.StreamSource;
+import javax.xml.namespace.NamespaceContext;
+import javax.xml.transform.dom.DOMSource;
 import javax.xml.validation.Validator;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import java.util.Iterator;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 /**
  * Validator of the structure of CDA-CH-EMED documents. Two passes are done with the XML Schema and the Schematron
  * definitions.
  * <p>
- * The XML Schema validation is done with the Java XML library. The Schematron validation is done with PhSchematron.
+ * The XML Schema validation is done with the Java XML library. The Schematron validation is done with ph-schematron.
  *
  * @author Quentin Ligier
  */
 @Component
-@NotThreadSafe // SchematronResourceXSLT is not thread-safe
+@NotThreadSafe // SchematronResourceXSLT and XPath are not thread-safe
 public class CdaChEmedValidator {
     private static final Logger log = LoggerFactory.getLogger(CdaChEmedValidator.class);
 
@@ -95,12 +105,18 @@ public class CdaChEmedValidator {
     private final PdfA12Validator pdfValidator;
 
     /**
+     * The XPath expression used to extract the PDF representation of the CDA-CH-EMED document.
+     */
+    private final XPathExpression pdfXpathExpression;
+
+    /**
      * Constructor.
      *
-     * @throws IOException  if the XML Schema file is not found.
-     * @throws SAXException if the XML Schema document is not valid.
+     * @throws IOException              if the XML Schema file is not found.
+     * @throws SAXException             if the XML Schema document is not valid.
+     * @throws XPathExpressionException if the XPath expression is not valid.
      */
-    public CdaChEmedValidator() throws IOException, SAXException {
+    public CdaChEmedValidator() throws IOException, SAXException, XPathExpressionException {
         this.schemaValidator = new XmlSchemaValidator((new ClassPathResource(CCE_XSD_FILE_PATH)).getURL());
 
         this.mtpValidator = SchematronResourceXSLT.fromClassPath(CCE_XSLT_PATH + "cdachemed-MTP-error.xslt", getClass().getClassLoader());
@@ -111,6 +127,26 @@ public class CdaChEmedValidator {
         this.pmlcValidator = SchematronResourceXSLT.fromClassPath(CCE_XSLT_PATH + "cdachemed-PMLC-error.xslt", getClass().getClassLoader());
 
         this.pdfValidator = new PdfA12Validator();
+        final var xPath = XPathFactory.newInstance().newXPath();
+        xPath.setNamespaceContext(new NamespaceContext() {
+            @Override
+            public String getNamespaceURI(final String prefix) {
+                return "urn:hl7-org:v3";
+            }
+
+            @Override
+            public String getPrefix(final String namespaceURI) {
+                return "hl7";
+            }
+
+            @Override
+            public Iterator<String> getPrefixes(final String namespaceURI) {
+                throw new UnsupportedOperationException();
+            }
+        });
+        this.pdfXpathExpression = xPath.compile("//hl7:ClinicalDocument/hl7:component/hl7:structuredBody/"
+                + "hl7:component/hl7:section[hl7:templateId[@root=\"2.16.756.5.30.1.1.10.3.45\"]]/hl7:entry/"
+                + "hl7:observationMedia[hl7:templateId[@root=\"2.16.756.5.30.1.1.10.4.83\"]]/hl7:value/text()");
     }
 
     /**
@@ -136,10 +172,7 @@ public class CdaChEmedValidator {
      */
     public void validate(final String content,
                          final CceDocumentType type) throws Exception {
-        Objects.requireNonNull(content);
-        this.schemaValidator.validate(content);
-        // No need to close the ByteArrayInputStream
-        this.validateAgainstSchematron(new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8)), type);
+        this.validate(new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8)), type);
     }
 
     /**
@@ -156,9 +189,8 @@ public class CdaChEmedValidator {
         if (!file.isFile() || !file.canRead()) {
             throw new FileNotFoundException();
         }
-        this.schemaValidator.validate(file);
         try (final var fileInputStream = new FileInputStream(file)) {
-            this.validateAgainstSchematron(fileInputStream, type);
+            this.validate(fileInputStream, type);
         }
     }
 
@@ -172,22 +204,44 @@ public class CdaChEmedValidator {
      */
     public void validate(final InputStream inputStream,
                          final CceDocumentType type) throws Exception {
-        this.schemaValidator.validate(new StreamSource(inputStream));
-        this.validateAgainstSchematron(inputStream, type);
+        final var document = XmlFactories.newSafeDocumentBuilder().parse(inputStream);
+        this.validate(new DOMSource(document), type);
+    }
+
+    /**
+     * Validates a CDA-CH-EMED document.
+     *
+     * @param source The CDA-CH-EMED document content as a {@link DOMSource}.
+     * @throws InvalidEmedContentException if the document content is invalid.
+     * @throws IllegalArgumentException    if the {@link DOMSource} doesn't contain a {@link Document}.
+     * @throws Exception                   if the validation raised an exception.
+     */
+    public void validate(final DOMSource source,
+                         final CceDocumentType type) throws Exception {
+        if (!(source.getNode() instanceof final Document document)) {
+            throw new IllegalArgumentException("The DOMSource does not contain a Document");
+        }
+        try {
+            this.schemaValidator.validate(source);
+        } catch (final javax.xml.bind.ValidationException exception) {
+            throw new InvalidEmedContentException(exception);
+        }
+        this.validateAgainstSchematron(source, type);
+        this.validatePdfRepresentation(document.getDocumentElement());
     }
 
     /**
      * Validates a CDA-CH-EMED document against the Schematron.
      *
-     * @param inputStream The CCE document content as an {@link InputStream}.
+     * @param cceSource The CCE document content as a {@link DOMSource}.
      * @throws InvalidEmedContentException if the CCE document is invalid.
      * @throws Exception                   if the validation raised an exception.
      */
-    private void validateAgainstSchematron(final InputStream inputStream,
-                                           final CceDocumentType type) throws Exception {
+    synchronized void validateAgainstSchematron(final DOMSource cceSource,
+                                   final CceDocumentType type) throws Exception {
         final var validator = this.getSchematronValidator(type);
 
-        final var output = validator.applySchematronValidationToSVRL(new StreamSource(inputStream));
+        final var output = validator.applySchematronValidationToSVRL(cceSource);
         if (output == null) {
             log.error("The Schematron XSLT '{}' is invalid", validator.getID());
             throw new RuntimeException("The schematron XSLT file is invalid");
@@ -199,7 +253,7 @@ public class CdaChEmedValidator {
         if (failedAssert != null) {
             String content = "";
             if (failedAssert.getDiagnosticReferenceOrPropertyReferenceOrTextCount() > 0) {
-                content = (String) failedAssert.getDiagnosticReferenceOrPropertyReferenceOrTextAtIndex(0);
+                content = String.valueOf(failedAssert.getDiagnosticReferenceOrPropertyReferenceOrTextAtIndex(0));
             }
             String location = failedAssert.getLocation();
             if (location != null) {
@@ -214,9 +268,18 @@ public class CdaChEmedValidator {
     /**
      * Extracts a PDF representation of a CDA-CH-EMED file and validates it against conformance levels A-1 or A-2.
      */
-    private void validatePdfRepresentation() throws ValidationException, IOException {
-        final byte[] pdf = {};
-
+    synchronized void validatePdfRepresentation(final Element cceElement) throws ValidationException, IOException,
+            XPathExpressionException {
+        final byte[] pdf = Optional.ofNullable(this.pdfXpathExpression.evaluate(cceElement, XPathConstants.STRING))
+                .map(String.class::cast)
+                .filter(string -> !string.isBlank())
+                .map(String::strip)
+                .map(string -> string.getBytes(StandardCharsets.UTF_8))
+                .map(bytes -> Base64.getDecoder().decode(bytes))
+                .orElse(null);
+        if (pdf == null) {
+            return;
+        }
         final var result = this.pdfValidator.validate(pdf);
         if (!result.isCompliant()) {
             final String message = result.getTestAssertions().stream()
@@ -234,13 +297,13 @@ public class CdaChEmedValidator {
      * @param type The CDA-CH-EMED type of the document to validate.
      * @return the corresponding validator.
      */
-    private SchematronResourceXSLT getSchematronValidator(final CceDocumentType type) {
+    SchematronResourceXSLT getSchematronValidator(final CceDocumentType type) {
         return switch (type) {
-            case MTP  -> this.mtpValidator;
-            case PRE  -> this.disValidator;
-            case DIS  -> this.preValidator;
+            case MTP -> this.mtpValidator;
+            case PRE -> this.preValidator;
+            case DIS -> this.disValidator;
             case PADV -> this.padvValidator;
-            case PML  -> this.pmlValidator;
+            case PML -> this.pmlValidator;
             case PMLC -> this.pmlcValidator;
         };
     }

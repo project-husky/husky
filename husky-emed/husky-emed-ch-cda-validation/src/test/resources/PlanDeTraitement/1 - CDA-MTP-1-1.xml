@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type='text/xsl' href='../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl'?>
+<?xml-stylesheet type='text/css' href='../../../../stylesheets/HUG/PlanDeTraitement/v1.0/hug.css'?>
+<ClinicalDocument xmlns:pharm="urn:ihe:pharm:medication" xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 \Schemas\IHE+Pharmacy\CDA_extended_pharmacy.xsd">
+	<!--
+		=======================================================================
+		IHE Pharmacy - Technical Committee
+
+		Medication Treatment List (MTP) Demo-Document
+
+		Author:
+			Stephane Spahni
+			University Hospitals of Geneva
+			stephane.spahni@hcuge.ch
+			
+		Version:	1
+		Date:		24.03.2015
+		=======================================================================
+	-->
+
+	<realmCode code="CH"/>
+	<typeId root="2.16.840.1.113883.1.3" extension="POCD_HD000040"/>
+	<templateId root="1.3.6.1.4.1.19376.1.5.3.1.1.1" assigningAuthorityName="IHE PCC"/>
+	<templateId root="1.3.6.1.4.1.19376.1.9.1.1.6"/>
+	<id root="2.16.756.5.30.4.9.1.1.9000.97005632.20150505140000.1" extension="MTPS-V1-MTP1.1"/>
+	<code code="77603-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Medication treatment plan.extended"/>
+    <title>Medication Treatment Plan</title>
+	
+	<effectiveTime value="20150505140000+0200"/>
+	<confidentialityCode code="N" displayName="normal" codeSystem="2.16.840.1.113883.5.25" codeSystemName="HL7:Confidentiality"/>
+	<languageCode code="fr-CH"/>
+	<recordTarget>
+		<patientRole>
+			<id extension="80756999999999993000" root="2.16.756.5.30.4.9.1.1.1000.200.3"/>
+			<addr>
+				<streetAddressLine>rue des Abeilles, 50</streetAddressLine>
+				<city>Geneva</city>
+				<postalCode>1205</postalCode>
+				<state nullFlavor="UNK"/>
+				<country>CH</country>
+			</addr>
+			<telecom value="tel:+41.22.300.00.00" use="HP"/>
+			<telecom value="tel:+41.22.300.00.00" use="MC"/>
+			<telecom value="tel:+41.22.300.00.00" use="WP"/>
+			<telecom use="HP" value="mailto:jean.etoile@hcuge.ch"/>
+			<patient>
+				<name>
+					<family>Kalbermatten</family>
+					<given>Karin</given>
+				</name>
+				<administrativeGenderCode code="F" codeSystem="2.16.840.1.113883.5.1" displayName="Female"/>
+				<birthTime value="19320525"/>
+			</patient>
+		</patientRole>
+	</recordTarget>
+	<author>						
+		<functionCode code='PCP' displayName='Medical doctors' codeSystem='2.16.756.5.30.2.1.1.1' codeSystemName='eCH ParticipationFunction'/>	<!-- profession -->
+		<time value="20150505140000+0200"/>						
+		<assignedAuthor>						
+			<id root="1.3.88" extension="7601000000000"/>	<!-- GS1 GLN -->
+			<code code='50001' displayName="Médecin spécialiste en médecine interne générale" codeSystem='2.16.756.5.30.1.127.3.2.1.5' codeSystemName='EPD_XDS_healthcareFacilityTypeCode'/>		
+			<addr>
+				<streetName>Rue des Malades</streetName>
+				<houseNumber>2</houseNumber>
+				<postalCode>1201</postalCode>
+				<city>Geneva</city>
+				<state>Geneva</state>
+				<country>Suisse</country>
+			</addr>					
+			<assignedPerson>							
+				<name>							
+					<prefix>Dr.</prefix>							
+					<given>Medecin</given>							
+					<family>Famille</family>
+				</name>
+			</assignedPerson>
+			<representedOrganization>
+				<id root="1.3.88" extension="7601000000000"/>	<!-- GS1 GLN -->
+				<name>Dr. Medecin Famille</name>
+				<telecom value="tel:+41.22.123.45.67"/>
+				<telecom value="mailto:Medecin.Famille@hin.ch"/>
+				<addr>
+					<streetName>Rue des Malades</streetName>
+					<houseNumber>2</houseNumber>
+					<postalCode>1201</postalCode>
+					<city>Geneva</city>
+					<state>Geneva</state>
+					<country>Suisse</country>
+				</addr>					
+			</representedOrganization>						
+		</assignedAuthor>					
+	</author>
+	<custodian>
+		<assignedCustodian>
+			<representedCustodianOrganization>
+				<id root="1.3.88" extension="7601000000000"/>	<!-- GS1 GLN -->
+				<name>Dr Medecin Famille</name>
+				<telecom value="tel:+41.22.123.45.67"/>
+				<addr>
+					<streetName>Rue des Malades</streetName>
+					<houseNumber>2</houseNumber>
+					<postalCode>1201</postalCode>
+					<city>Geneva</city>
+					<state>Geneva</state>
+					<country>Suisse</country>
+				</addr>					
+			</representedCustodianOrganization>
+		</assignedCustodian>
+	</custodian>
+	<legalAuthenticator>
+		<time value="20150505140000+0200"/>
+		<signatureCode code="S"/>
+		<assignedEntity>
+			<id root="1.3.88" extension="7601000000000"/>	<!-- GS1 GLN -->
+			<telecom value="tel:+41.22.123.45.67"/>
+			<telecom value="mailto:Medecin.Famille@hin.ch"/>
+			<assignedPerson>							
+				<name>							
+					<prefix>Dr.</prefix>							
+					<given>Medecin</given>							
+					<family>Famille</family>
+				</name>
+			</assignedPerson>
+			<representedOrganization>
+				<id root="1.3.88" extension="7601000000000"/>	<!-- GS1 GLN -->
+				<name>Dr. Medecin Famille</name>
+				<telecom value="tel:+41.22.123.45.67"/>
+				<telecom value="mailto:Medecin.Famille@hin.ch"/>
+				<addr>
+					<streetName>Rue des Malades</streetName>
+					<houseNumber>2</houseNumber>
+					<postalCode>1201</postalCode>
+					<city>Geneva</city>
+					<state>Geneva</state>
+					<country>Suisse</country>
+				</addr>					
+			</representedOrganization>						
+		</assignedEntity>
+	</legalAuthenticator>
+
+	<component>
+		<structuredBody>
+			<component>
+				<section>
+					<templateId root="1.3.6.1.4.1.19376.1.9.1.2.6"/>
+					<id root="2.16.756.5.30.4.9.1.1.9000.97005632.20150505140000.1" extension="MTPS-V1-MTP1.1"/>
+					<code code="77604-7" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Medication treatment plan.brief"/>
+					<title>Planned medications</title>
+
+					<text>
+
+						<!-- Planned medications -->
+
+                        <content>Planned medications</content>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Date</td>
+                                    <td>Branded Medication</td>
+                                    <td>Package name</td>
+                                    <td>Package form</td>
+                                    <td>LOT number</td>
+                                    <td>Package capacity</td>
+                                    <td>Ingredients</td>
+                                    <td>Date from</td>
+                                    <td>Date to</td>
+                                    <td>Frequency</td>
+                                    <td>Route code</td>
+                                    <td>Approach site</td>
+                                    <td>Dose quantity</td>
+                                    <td>Rate quantity</td>
+                                    <td>Reason</td>
+                                    <td>Patient instructions</td>
+                                    <td>Fulfilment instructions</td>
+                                    <td>Dispense amount</td>
+                                    <td>Substitution</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+								<!-- Planning item entries corresponding to chapter 4.3.1 -->
+
+                                <tr ID="mtp.1.1">
+                                    <td ID="mtp.1.1_date">2015-05-05 14:00</td>
+                                    <td ID="mtp.1.1_brandedmedication">CANDESARTAN</td>
+                                    <td ID="mtp.1.1_packagename">CANDESARTAN Spirig HC cpr 16 mg</td>
+                                    <td ID="mtp.1.1_packageform">Tablet</td>
+                                    <td ID="mtp.1.1_lotnumber"/>
+                                    <td ID="mtp.1.1_packagecapacity"/>
+                                    <td ID="mtp.1.1_ingredients">
+                                        <list>
+                                            <item ID="mtp.1.1_ingredient1">
+                                                <content ID="mtp.1.1_ingredient1_name">candesartan</content>
+                                                <content ID="mtp.1.1_ingredient1_quantity">16 mg</content>
+                                            </item>
+                                        </list>
+                                    </td>
+                                    <td ID="mtp.1.1_datefrom">2015-05-05</td>
+                                    <td ID="mtp.1.1_dateto">2015-11-05</td>
+                                    <td ID="mtp.1.1_frequency">1 at breakfast</td>
+                                    <td ID="mtp.1.1_routecode">per os</td>
+                                    <td ID="mtp.1.1_approachsite"></td>
+                                    <td ID="mtp.1.1_dosequantity">16 mg</td>
+                                    <td ID="mtp.1.1_ratequantity">1/d</td>
+                                    <td ID="mtp.1.1_reason"></td>
+                                    <td ID="mtp.1.1_pinstruct"></td>
+                                    <td ID="mtp.1.1_finstruct"></td>
+                                    <td ID="mtp.1.1_dispenseamount">2 boxes of 28</td>
+                                    <td ID="mtp.1.1_substitution">yes</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+					</text>
+
+					<!-- Initial Planning of Candesartan -->
+                    <entry>
+                        <substanceAdministration classCode="SBADM" moodCode="INT">
+							<templateId root="1.3.6.1.4.1.19376.1.9.1.3.7" assigningAuthorityName="IHE PHARM"/>
+							<templateId root="1.3.6.1.4.1.19376.1.9.1.3.6" assigningAuthorityName="IHE PHARM"/>
+							<templateId root="2.16.840.1.113883.10.20.1.24" assigningAuthorityName="HL7 CCD"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7" assigningAuthorityName="IHE PCC"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1" assigningAuthorityName="IHE PCC"/>
+                            <id root="2.16.756.5.30.4.9.1.1.9000.97005632.20150505140000.1" extension="MTPS-V1-MTP1.1.1"/>
+                            <text>
+                                <reference value="#mtp.1.1"/>
+                            </text>
+                            <statusCode code="completed"/>
+                            <effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+                                <low value="20150505"/>
+                                <high value="20151105"/>
+                            </effectiveTime>
+                            <effectiveTime xsi:type='EIVL_TS' operator='A'>
+								<event code='ACM'/>
+							</effectiveTime>
+                            <routeCode code="PO" displayName="Oral" codeSystem="2.16.840.1.113883.5.112" codeSystemName="RouteOfAdministration"/>
+                            <doseQuantity>
+                                <low unit="mg" value="16">
+                                    <translation>
+                                        <originalText>
+                                            <reference value="#mtp.1.1_dosequantity"/>
+                                        </originalText>
+                                    </translation>
+                                </low>
+                                <high unit="mg" value="16">
+                                    <translation>
+                                        <originalText>
+                                            <reference value="#mtp.1.1_dosequantity"/>
+                                        </originalText>
+                                    </translation>
+                                </high>
+                            </doseQuantity>
+                            <rateQuantity>
+                                <low unit="/d" value="1">
+                                    <translation>
+                                        <originalText>
+                                            <reference value="#mtp.1.1_ratequantity"/>
+                                        </originalText>
+                                    </translation>
+                                </low>
+                                <high unit="/d" value="1">
+                                    <translation>
+                                        <originalText>
+                                            <reference value="#mtp.1.1_ratequantity"/>
+                                        </originalText>
+                                    </translation>
+                                </high>
+                            </rateQuantity>		
+                            <consumable>
+                                <manufacturedProduct classCode="MANU" xmlns:pharm="urn:ihe:pharm:medication">
+                                    <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+                                    <templateId root="2.16.840.1.113883.10.20.1.53"/>
+                                    <manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+                                        <templateId root="1.3.6.1.4.1.19376.1.9.1.3.1"/>
+                                        <code code="C09CA06" codeSystem="2.16.840.1.113883.6.73" codeSystemName="ATC WHO" displayName="candesartan">
+                                            <originalText>
+                                                <reference value="#mtp.1.1_ingredient1"/>
+                                            </originalText>
+                                        </code>
+                                        <name>Candesartan Spirig</name>
+                                        <pharm:formCode code="TAB" codeSystem="2.16.840.1.113883.5.85" displayName="Tablet"/>
+                                        <pharm:asContent classCode="CONT">
+                                            <pharm:containerPackagedMedicine classCode="CONT" determinerCode="INSTANCE">
+                                                <!-- National medicinal product code (package-level) -->
+                                                <pharm:code code="7680624080126" codeSystem="2.51.1.1" codeSystemName="GTIN" displayName="CANDESARTAN Spirig HC cpr 16 mg 28 pce"/>
+                                                <!-- Brand name (package) -->
+                                                <pharm:name>CANDESARTAN Spirig HC cpr 16 mg</pharm:name>
+												<pharm:formCode code="TAB" codeSystem="2.16.840.1.113883.5.85" displayName="Tablet"/>
+                                                <pharm:capacityQuantity value="28"/>
+                                            </pharm:containerPackagedMedicine>
+                                        </pharm:asContent>
+                                        <pharm:ingredient classCode="ACTI" xmlns:pharm="urn:ihe:pharm:medication">
+                                            <pharm:quantity>
+                                                <pharm:numerator unit="mg" value="16" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="PQ"/>
+                                                <pharm:denominator value="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="PQ"/>
+                                            </pharm:quantity>
+                                            <pharm:ingredient classCode="MMAT" determinerCode="KIND">
+                                                <pharm:code code="C09CA06" codeSystem="2.16.840.1.113883.6.73" codeSystemName="ATC WHO" displayName="candesartan"/>
+                                                <pharm:name>various</pharm:name>
+                                            </pharm:ingredient>
+                                        </pharm:ingredient>
+                                    </manufacturedMaterial>
+                                </manufacturedProduct>
+                            </consumable>
+                            <entryRelationship typeCode="SUBJ" inversionInd="true" >
+                                <act classCode="ACT" moodCode="INT">
+                                    <templateId root="2.16.840.1.113883.10.20.1.49"/>
+                                    <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.3"/>
+                                    <code code="PINSTRUCT" codeSystem="1.3.6.1.4.1.19376.1.5.3.2" codeSystemName="IHEActCode"/>
+                                    <text>
+                                        <reference value="#mtp.1.1_pinstruct"/>
+                                    </text>
+                                    <statusCode code="completed"/>
+                                </act>
+                            </entryRelationship>
+                            <entryRelationship typeCode="SUBJ" inversionInd="true" >
+                                <act classCode="ACT" moodCode="INT">
+                                    <templateId root="2.16.840.1.113883.10.20.1.43"/>
+                                    <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.3.1"/>
+                                    <code code="FINSTRUCT" codeSystem="1.3.6.1.4.1.19376.1.5.3.2" codeSystemName="IHEActCode"/>
+                                    <text>
+                                        <reference value="#mtp.1.1_finstruct"/>
+                                    </text>
+                                    <statusCode code="completed"/>
+                                </act>
+                            </entryRelationship>
+                            <entryRelationship typeCode="COMP">
+                                <supply classCode="SPLY" moodCode="RQO">
+									<templateId root=' 1.3.6.1.4.1.19376.1.9.1.3.8'/>
+                                    <independentInd value="false"/>
+                                    <quantity unit="1" value="2"/>
+                                </supply>
+                            </entryRelationship>
+                            <entryRelationship typeCode='COMP'>
+                            	<supply classCode="SPLY" moodCode="RQO">
+									<templateId root=' 1.3.6.1.4.1.19376.1.9.1.3.9'/>
+									<independentInd value="false" />
+									<pharm:subjectOf4>
+										<pharm:substitutionPermission classCode="SUBST" moodCode="PERM">
+											<pharm:code code='E' displayName='equivalent' codeSystem='2.16.840.1.113883.5.1070' codeSystemName='HL7 Substance Admin Substitution'/>
+										</pharm:substitutionPermission>
+									</pharm:subjectOf4>
+                	            </supply>
+                            </entryRelationship>
+                        </substanceAdministration>
+                    </entry>
+				</section>
+			</component>
+		</structuredBody>
+	</component>
+</ClinicalDocument>
