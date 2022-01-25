@@ -34,9 +34,8 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    # CdaChEmedValidatorTest class is excluded because it requires a lot of memory, too much for the CI runner
     - name: Build and test with Maven
-      run: mvn -B test -Dtest=!CdaChEmedValidatorTest --file pom.xml
+      run: mvn -B test --file pom.xml
       
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL

@@ -14,6 +14,7 @@ import org.husky.emed.ch.enums.CceDocumentType;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -32,8 +33,11 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 /**
  * Tests for the {@link CdaChEmedValidator} class.
  *
+ * <p>It is excluded from CI runners because it requires too much memory.
+ *
  * @author Quentin Ligier
  **/
+@DisabledIfEnvironmentVariable(named = "CI", matches = "true")
 class CdaChEmedValidatorTest {
 
     private final CdaChEmedValidator validator;
