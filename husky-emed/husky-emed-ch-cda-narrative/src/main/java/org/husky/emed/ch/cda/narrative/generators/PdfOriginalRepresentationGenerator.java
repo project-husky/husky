@@ -24,6 +24,7 @@ import com.openhtmltopdf.outputdevice.helper.BaseRendererBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 import org.apache.commons.text.StringSubstitutor;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.ch.cda.narrative.enums.NarrativeLanguage;
 import org.husky.emed.ch.cda.narrative.pdf.HtmlToPdfAConverter;
 import org.husky.emed.ch.cda.narrative.pdf.OpenHtmlToPdfAConverter;
@@ -269,10 +270,13 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
     /**
      * Gets the name of an author. It may be a person or a device.
      *
-     * @param author The author.
+     * @param author The author or {@code null}.
      * @return The author name.
      */
-    protected String formatAuthorName(final AuthorDigest author) {
+    protected String formatAuthorName(@Nullable final AuthorDigest author) {
+        if (author == null) {
+            return "<em>Inconnu</em>";
+        }
         final var name = new StringBuilder();
         if (author.getGivenName() != null || author.getFamilyName() != null) {
             if (author.getGivenName() != null) {
