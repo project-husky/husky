@@ -32,7 +32,7 @@
 		<!-- The following dependencies should be kept up-to-date with IPF to avoid duplicating dependencies:
 			https://github.com/oehf/ipf/blob/master/dependencies/pom.xml (select the right version in the tags) -->
 		<spring.version>5.3.10</spring.version>
-		<spring.boot.version>2.5.5</spring.boot.version>
+		<spring.boot.version>2.6.2</spring.boot.version>
 		<hapi.fhir.version>5.5.1</hapi.fhir.version>
 		<jakarta-jwsapi-version>2.1.0</jakarta-jwsapi-version>
 		<camel.version>3.11.3</camel.version>
