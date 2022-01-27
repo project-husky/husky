@@ -10,10 +10,6 @@
 package org.husky.emed.ch.cda.services.readers;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.ch.cda.services.readers.ContainerPackagedMedicineReader;
-import org.husky.emed.ch.errors.InvalidEmedContentException;
-import org.husky.emed.ch.enums.ActivePharmaceuticalIngredient;
-import org.husky.emed.ch.enums.PharmaceuticalDoseFormEdqm;
 import org.husky.common.hl7cdar2.CD;
 import org.husky.common.hl7cdar2.COCTMT230100UVIngredient;
 import org.husky.common.hl7cdar2.POCDMT000040Material;
@@ -24,32 +20,29 @@ import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.models.common.QuantityWithUnitCode;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
 import org.husky.emed.ch.models.treatment.MedicationProductIngredient;
-import org.husky.emed.ch.cda.utils.CdaR2Utils;
 
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
- *
+ * A reader for CDA-CH-EMED manufactured material.
  *
  * @author Quentin Ligier
  */
 public class ManufacturedMaterialReader {
 
     /**
-     *
+     * The CDA-CH-EMED manufactured material.
      */
     private final POCDMT000040Material material;
 
     /**
      * Constructor.
      *
-     * @param material
+     * @param material The CDA-CH-EMED manufactured material.
      */
     public ManufacturedMaterialReader(final POCDMT000040Material material) {
-        Objects.requireNonNull(material);
-        this.material = material;
+        this.material = Objects.requireNonNull(material);
     }
 
     /**
@@ -57,7 +50,7 @@ public class ManufacturedMaterialReader {
      */
     @Nullable
     public String getGtinCode() {
-        return this.material.getCode().getCode();
+        return Optional.ofNullable(this.material.getCode()).map(CD::getCode).orElse(null);
     }
 
     /**
@@ -118,6 +111,8 @@ public class ManufacturedMaterialReader {
         }
 
         product.getIngredients().addAll(this.material.getIngredient().stream()
+                .filter(ingredient -> ingredient.getIngredient() != null)
+                .filter(ingredient -> ingredient.getIngredient().getValue() != null)
                 .map((COCTMT230100UVIngredient ingredient) -> {
                     final String name =
                             CdaR2Utils.getSingleNullableMixedOrThrow(ingredient.getIngredient().getValue().getName().get(0));
@@ -145,12 +140,14 @@ public class ManufacturedMaterialReader {
      * Returns an instance of {@link ActivePharmaceuticalIngredient} corresponding to an HL7R2 {@link CD} or {@code
      * null}.
      *
-     * @param cd The code to convert.
+     * @param cd The code to convert or {@code null}.
      * @return an instance of {@link ActivePharmaceuticalIngredient} or {@code null}.
      */
     @Nullable
-    private ActivePharmaceuticalIngredient activePharmaceuticalIngredientFromCdOrNull(final CD cd) {
-        Objects.requireNonNull(cd);
+    private ActivePharmaceuticalIngredient activePharmaceuticalIngredientFromCdOrNull(@Nullable final CD cd) {
+        if (cd == null) {
+            return null;
+        }
         final var activePharmaceuticalIngredient = ActivePharmaceuticalIngredient.getEnum(cd.getCode());
         if (activePharmaceuticalIngredient == null
                 || !activePharmaceuticalIngredient.getCodeSystemId().equals(cd.getCodeSystem())

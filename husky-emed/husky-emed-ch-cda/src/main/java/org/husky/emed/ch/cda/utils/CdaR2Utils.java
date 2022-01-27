@@ -52,12 +52,15 @@ public class CdaR2Utils {
      * Returns the single non-blank string of the {@code xmlMixed} parameter of an {@link ANY} instance. If no string
      * is present, {@code null} is returned and if more than one strings are present, the method throws an exception.
      *
-     * @param any The {@link ANY} instance.
+     * @param any The {@link ANY} instance or {@code null}.
      * @return the single non-blank string from {@code xmlMixed} or {@code null}.
      * @throws IllegalArgumentException if there is more than one {@code xmlMixed} value.
      */
     @Nullable
-    public static String getSingleNullableMixedOrThrow(final ANY any) {
+    public static String getSingleNullableMixedOrThrow(@Nullable final ANY any) {
+        if (any == null) {
+            return null;
+        }
         final List<String> mixed = any.getXmlMixed();
         if (mixed == null || mixed.isEmpty()) {
             return null;
