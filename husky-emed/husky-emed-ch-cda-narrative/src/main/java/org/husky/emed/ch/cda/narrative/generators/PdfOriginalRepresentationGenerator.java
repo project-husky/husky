@@ -22,7 +22,7 @@ import org.husky.emed.ch.enums.ChEmedTimingEvent;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.MedicationDosageInstructions;
 import org.husky.emed.ch.models.common.MedicationDosageIntake;
-import org.husky.emed.ch.models.common.QuantityWithUnit;
+import org.husky.emed.ch.models.common.QuantityWithUnitCode;
 import org.husky.emed.ch.models.document.EmedPmlcDocumentDigest;
 
 import java.io.FileNotFoundException;
@@ -339,12 +339,12 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
         }
         final var cells = new StringBuilder();
 
-        final Function<ChEmedTimingEvent, QuantityWithUnit> findIntake = event -> dosageInstructions.getIntakes().stream()
+        final Function<ChEmedTimingEvent, QuantityWithUnitCode> findIntake = event -> dosageInstructions.getIntakes().stream()
                 .filter(intake -> event.equals(intake.getEventTiming()))
                 .findAny()
                 .map(MedicationDosageIntake::getDoseQuantity)
                 .orElse(null);
-        final Consumer<QuantityWithUnit> displayQuantity = quantity -> {
+        final Consumer<QuantityWithUnitCode> displayQuantity = quantity -> {
             if (quantity == null) {
                 cells.append("<td></td>");
             } else {

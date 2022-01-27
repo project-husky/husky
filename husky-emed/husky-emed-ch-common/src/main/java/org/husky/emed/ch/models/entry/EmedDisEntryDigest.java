@@ -17,7 +17,7 @@ import org.husky.emed.ch.enums.DispenseSupplyType;
 import org.husky.emed.ch.enums.EmedEntryType;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.EmedReference;
-import org.husky.emed.ch.models.common.QuantityWithUnit;
+import org.husky.emed.ch.models.common.Quantity;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
 
 import java.time.Instant;
@@ -75,7 +75,7 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
     /**
      * The dispensed medication quantity.
      */
-    private QuantityWithUnit quantity;
+    private Quantity quantity;
 
     /**
      * The substitution act or {@code null} if it's not given.
@@ -121,7 +121,7 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
                               @Nullable final EmedReference mtpEntryRef,
                               @Nullable final EmedReference preEntryRef,
                               final MedicationProduct product,
-                              final QuantityWithUnit quantity,
+                              final Quantity quantity,
                               @Nullable final ActSubstanceAdminSubstitutionCode substitutionAct,
                               @Nullable final String patientMedicationInstructions,
                               @Nullable final String fulfilmentNotes) {

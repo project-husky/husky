@@ -28,7 +28,7 @@ public class MedicationDosageIntake {
     /**
      * The dose quantity.
      */
-    private QuantityWithUnit doseQuantity;
+    private QuantityWithUnitCode doseQuantity;
 
     /**
      * Constructor.
@@ -37,7 +37,7 @@ public class MedicationDosageIntake {
      * @param doseQuantity The dose quantity.
      */
     public MedicationDosageIntake(final ChEmedTimingEvent eventTiming,
-                                  final QuantityWithUnit doseQuantity) {
+                                  final QuantityWithUnitCode doseQuantity) {
         this.eventTiming = Objects.requireNonNull(eventTiming);
         this.doseQuantity = Objects.requireNonNull(doseQuantity);
     }
@@ -61,7 +61,7 @@ public class MedicationDosageIntake {
     /**
      * Returns the dose quantity.
      */
-    public QuantityWithUnit getDoseQuantity() {
+    public QuantityWithUnitCode getDoseQuantity() {
         return doseQuantity;
     }
 
@@ -70,7 +70,7 @@ public class MedicationDosageIntake {
      *
      * @param doseQuantity The dose quantity.
      */
-    public void setDoseQuantity(final QuantityWithUnit doseQuantity) {
+    public void setDoseQuantity(final QuantityWithUnitCode doseQuantity) {
         this.doseQuantity = Objects.requireNonNull(doseQuantity);
     }
 

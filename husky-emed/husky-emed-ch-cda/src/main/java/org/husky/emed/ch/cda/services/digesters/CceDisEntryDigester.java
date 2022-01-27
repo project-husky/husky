@@ -25,7 +25,7 @@ import org.husky.emed.ch.enums.DispenseSupplyType;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.EmedReference;
-import org.husky.emed.ch.models.common.QuantityWithUnit;
+import org.husky.emed.ch.models.common.Quantity;
 import org.husky.emed.ch.models.entry.EmedDisEntryDigest;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
 import org.springframework.stereotype.Component;
@@ -294,10 +294,10 @@ public class CceDisEntryDigester {
      *
      * @param supply The dispense entry Supply.
      */
-    private QuantityWithUnit getQuantity(final POCDMT000040Supply supply) throws InvalidEmedContentException {
+    private Quantity getQuantity(final POCDMT000040Supply supply) throws InvalidEmedContentException {
         return Optional.ofNullable(supply.getQuantity())
                 .filter(qty -> qty.getValue() != null && !qty.getValue().isBlank())
-                .map(QuantityWithUnit::fromPq)
+                .map(Quantity::fromPq)
                 .orElseThrow(() -> new InvalidEmedContentException("The quantity value is missing in the Supply"));
     }
 

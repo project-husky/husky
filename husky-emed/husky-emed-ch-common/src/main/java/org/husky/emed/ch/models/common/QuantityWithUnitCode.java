@@ -19,7 +19,7 @@ import java.util.Objects;
  *
  * @author Quentin Ligier
  */
-public class QuantityWithUnit {
+public class QuantityWithUnitCode {
 
     /**
      * The quantity value.
@@ -37,8 +37,8 @@ public class QuantityWithUnit {
      * @param value The quantity value.
      * @param unit The quantity unit.
      */
-    public QuantityWithUnit(final String value,
-                            final UnitCode unit) {
+    public QuantityWithUnitCode(final String value,
+                                final UnitCode unit) {
         this.value = Objects.requireNonNull(value);
         this.unit = Objects.requireNonNull(unit);
     }
@@ -48,14 +48,15 @@ public class QuantityWithUnit {
      *
      * @param qty The {@link PQ} to convert.
      */
-    public static QuantityWithUnit fromPq(final PQ qty) {
-        final var newValue = Objects.requireNonNull(qty).getValue();
-        UnitCode newUnit = null;
+    public static QuantityWithUnitCode fromPq(final PQ qty) {
+        Objects.requireNonNull(qty, "qty shall not be null in fromPq()");
         if (!UnitCode.isInValueSet(qty.getUnit())) {
-            throw new IllegalArgumentException("The quantity unit is invalid");
+            throw new IllegalArgumentException("The quantity unit '" + qty.getUnit() + "' is invalid");
         }
-        newUnit = UnitCode.getEnum(qty.getUnit());
-        return new QuantityWithUnit(Objects.requireNonNull(newValue), Objects.requireNonNull(newUnit));
+        return new QuantityWithUnitCode(
+                Objects.requireNonNull(qty.getValue()),
+                Objects.requireNonNull(UnitCode.getEnum(qty.getUnit()))
+        );
     }
 
     public String getValue() {
@@ -74,19 +75,24 @@ public class QuantityWithUnit {
         this.unit = Objects.requireNonNull(unit);
     }
 
-    public String toString() {
-        return "QuantityWithUnit(value=" + this.getValue() + ", unit=" + this.getUnit() + ")";
-    }
-
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
-        if (!(o instanceof QuantityWithUnit that)) return false;
-        return getValue().equals(that.getValue()) && getUnit() == that.getUnit();
+        if (!(o instanceof final QuantityWithUnitCode that)) return false;
+        return Objects.equals(value, that.value)
+                && unit == that.unit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getValue(), getUnit());
+        return Objects.hash(value, unit);
+    }
+
+    @Override
+    public String toString() {
+        return "QuantityWithUnitCode{" +
+                "value='" + this.value + '\'' +
+                ", unit=" + this.unit +
+                '}';
     }
 }

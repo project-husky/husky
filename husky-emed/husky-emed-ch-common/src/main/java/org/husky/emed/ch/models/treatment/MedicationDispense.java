@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.ch.enums.DispenseStatus;
 import org.husky.emed.ch.enums.DispenseSupplyType;
-import org.husky.emed.ch.models.common.QuantityWithUnit;
+import org.husky.emed.ch.models.common.QuantityWithUnitCode;
 import org.husky.emed.ch.models.entry.EmedDisEntryDigest;
 
 /**
@@ -49,7 +49,7 @@ public class MedicationDispense {
      * consumable units of the medication without units or the quantity in non-countable units.
      */
     @Nullable
-    private QuantityWithUnit quantity;
+    private QuantityWithUnitCode quantity;
 
     /*
      * List of aggregated PADV?

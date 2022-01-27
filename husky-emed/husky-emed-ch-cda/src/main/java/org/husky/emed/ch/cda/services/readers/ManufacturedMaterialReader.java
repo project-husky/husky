@@ -114,25 +114,24 @@ public class ManufacturedMaterialReader {
         }
 
         product.getIngredients().addAll(this.material.getIngredient().stream()
-            .map((COCTMT230100UVIngredient ingredient) -> {
-                final String name =
-                        CdaR2Utils.getSingleNullableMixedOrThrow(ingredient.getIngredient().getValue().getName().get(0));
-                final var code =
-                    this.activePharmaceuticalIngredientFromCdOrNull(ingredient.getIngredient().getValue().getCode());
+                .map((COCTMT230100UVIngredient ingredient) -> {
+                    final String name =
+                            CdaR2Utils.getSingleNullableMixedOrThrow(ingredient.getIngredient().getValue().getName().get(0));
+                    final var code =
+                            this.activePharmaceuticalIngredientFromCdOrNull(ingredient.getIngredient().getValue().getCode());
 
-                QuantityWithUnit numerator = null;
-                QuantityWithUnit denominator = null;
-                if (ingredient.getQuantity() != null) {
-                    if (ingredient.getQuantity().getNumerator() != null) {
-                        numerator = QuantityWithUnit.fromPq(ingredient.getQuantity().getNumerator());
+                    QuantityWithUnitCode numerator = null;
+                    QuantityWithUnitCode denominator = null;
+                    if (ingredient.getQuantity() != null) {
+                        if (ingredient.getQuantity().getNumerator() != null) {
+                            numerator = QuantityWithUnitCode.fromPq(ingredient.getQuantity().getNumerator());
+                        }
+                        if (ingredient.getQuantity().getDenominator() != null) {
+                            denominator = QuantityWithUnitCode.fromPq(ingredient.getQuantity().getDenominator());
+                        }
                     }
-                    if (ingredient.getQuantity().getDenominator() != null) {
-                        denominator = QuantityWithUnit.fromPq(ingredient.getQuantity().getDenominator());
-                    }
-                }
-                return new MedicationProductIngredient(name, numerator, denominator, code);
-            })
-            .collect(Collectors.toList())
+                    return new MedicationProductIngredient(name, numerator, denominator, code);
+                }).toList()
         );
 
         return product;

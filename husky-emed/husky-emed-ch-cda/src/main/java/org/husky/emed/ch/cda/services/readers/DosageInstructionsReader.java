@@ -20,7 +20,7 @@ import org.husky.emed.ch.enums.RouteOfAdministrationEdqm;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.models.common.MedicationDosageInstructions;
 import org.husky.emed.ch.models.common.MedicationDosageIntake;
-import org.husky.emed.ch.models.common.QuantityWithUnit;
+import org.husky.emed.ch.models.common.QuantityWithUnitCode;
 
 import java.math.BigInteger;
 import java.time.Instant;
@@ -114,7 +114,7 @@ public class DosageInstructionsReader {
      *
      * @return an {@link Optional} that may contain the dose quantity.
      */
-    public Optional<QuantityWithUnit> getDoseQuantity() {
+    public Optional<QuantityWithUnitCode> getDoseQuantity() {
         return this.getDoseQuantity(this.subAdm);
     }
 
@@ -247,9 +247,9 @@ public class DosageInstructionsReader {
      * @param subAdm The dosage instructions.
      * @return an {@link Optional} that may contain the dose quantity.
      */
-    private Optional<QuantityWithUnit> getDoseQuantity(@NonNull final POCDMT000040SubstanceAdministration subAdm) {
+    private Optional<QuantityWithUnitCode> getDoseQuantity(@NonNull final POCDMT000040SubstanceAdministration subAdm) {
         return Optional.ofNullable(subAdm.getDoseQuantity())
-                .map(QuantityWithUnit::fromPq);
+                .map(QuantityWithUnitCode::fromPq);
     }
 
     /**
