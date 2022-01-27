@@ -25,11 +25,10 @@ import org.husky.emed.ch.models.common.MedicationDosageIntake;
 import org.husky.emed.ch.models.common.QuantityWithUnit;
 import org.husky.emed.ch.models.document.EmedPmlcDocumentDigest;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -77,17 +76,18 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
      *
      * @param narrativeLanguage The language to use to generate the narrative text.
      */
-    public PdfOriginalRepresentationGenerator(final NarrativeLanguage narrativeLanguage) throws IOException, URISyntaxException {
+    public PdfOriginalRepresentationGenerator(final NarrativeLanguage narrativeLanguage) throws IOException {
         super(narrativeLanguage);
-        this.templateHeader = Files.readString(Paths.get(this.getResource("narrative/default/template.header" +
-                ".html").toURI()));
+        try (final var is = this.getResourceAsStream("/narrative/default/template.header.html")) {
+            this.templateHeader = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+        }
         this.templateFooter = "</body></html>";
         final var converter = new OpenHtmlToPdfAConverter();
         converter.setProducerName("The Husky library");
         converter.addFont("arimo", 400, BaseRendererBuilder.FontStyle.NORMAL,
-                () -> this.getResource("narrative/default/font/Arimo-Regular.ttf").openStream());
+                () -> this.getResourceAsStream("/narrative/default/font/Arimo-Regular.ttf"));
         converter.addFont("arimo", 700, BaseRendererBuilder.FontStyle.NORMAL,
-                () -> this.getResource("narrative/default/font/Arimo-Bold.ttf").openStream());
+                () -> this.getResourceAsStream("/narrative/default/font/Arimo-Bold.ttf"));
         this.pdfConverter = converter;
     }
 
@@ -168,7 +168,7 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
         int i = 1;
         for (final var entry : digest.getMtpEntryDigests()) {
             final var routeSite = Optional.ofNullable(entry.getRouteOfAdministration()).map(this::getEnumNarrative)
-                    .orElse("<span class='na'>N/A</span");
+                    .orElse("<span class='na'>N/A</span>");
 
             body.append(String.format("""
                             <tr>
@@ -192,8 +192,8 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
 
         i = 1;
         for (final var entry : digest.getMtpEntryDigests()) {
-            body.append(String.format("<hr id='entry-%d'>", i));
-            body.append(String.format("<h2 id='med_%1$d'><span class='n'>%1$d</span %2$s</h2>", i,
+            body.append(String.format("<hr id='entry-%d' />", i));
+            body.append(String.format("<h2 id='med_%1$d'><span class='n'>%1$d</span>%2$s</h2>", i,
                     this.formatMedicationName(entry.getProduct(), true)));
 
             // Last author
@@ -230,7 +230,7 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
             ++i;
         }
 
-        body.append("<hr>");
+        body.append("<hr />");
         body.append("<div id='narrative document_author'>");
         body.append("<h3>Auteur du document</h3><p>");
         body.append(this.formatAuthorName(digest.getAuthors().get(0)));
@@ -242,18 +242,18 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
     }
 
     /**
-     * Gets the {@link URL} of a resource.
+     * Gets the {@link InputStream} of a resource.
      *
      * @param resource The resource path.
-     * @return the non-null {@link URL} of the resource file.
-     * @throws IllegalArgumentException if the resource doesn't exist.
+     * @return the non-null {@link InputStream} of the resource file.
+     * @throws FileNotFoundException if the resource doesn't exist.
      */
-    protected URL getResource(final String resource) {
-        final var url = PdfOriginalRepresentationGenerator.class.getResource(resource);
-        if (url == null) {
-            throw new IllegalArgumentException("The resource '" + resource + "' is not found");
+    protected InputStream getResourceAsStream(final String resource) throws FileNotFoundException {
+        final var is = PdfOriginalRepresentationGenerator.class.getResourceAsStream(resource);
+        if (is == null) {
+            throw new FileNotFoundException("The resource '" + resource + "' is not found");
         }
-        return url;
+        return is;
     }
 
     /**
@@ -291,15 +291,15 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
         if (name.isEmpty()) {
             name.append("<em>Inconnu</em>");
         }
-        name.append("<br>");
+        name.append("<br />");
 
         if (!author.getTelecoms().getPhones().isEmpty()) {
             final var phone = author.getTelecoms().getPhones().get(0);
-            name.append(String.format("<a href='%s'>%s</a><br>", phone, StringUtils.removeStart(phone, "tel:")));
+            name.append(String.format("<a href='%s'>%s</a><br />", phone, StringUtils.removeStart(phone, "tel:")));
         }
         if (!author.getTelecoms().getMails().isEmpty()) {
             final var mail = author.getTelecoms().getMails().get(0);
-            name.append(String.format("<a href='%s'>%s</a><br>", mail, StringUtils.removeStart(mail, "mailto:")));
+            name.append(String.format("<a href='%s'>%s</a><br />", mail, StringUtils.removeStart(mail, "mailto:")));
         }
         if (!author.getAddresses().isEmpty() && !author.getAddresses().get(0).isEmpty()) {
             final var address = author.getAddresses().get(0);
@@ -311,7 +311,7 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
                     name.append(" ");
                     name.append(address.getHouseNumber());
                 }
-                name.append("<br>");
+                name.append("<br />");
             }
             if (address.getPostalCode() != null || address.getCity() != null) {
                 if (address.getPostalCode() != null) {
@@ -321,11 +321,11 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
                 if (address.getCity() != null) {
                     name.append(address.getCity());
                 }
-                name.append("<br>");
+                name.append("<br />");
             }
             if (address.getCountry() != null) {
                 name.append(address.getCountry());
-                name.append("<br>");
+                name.append("<br />");
             }
             name.append("</span>");
         }

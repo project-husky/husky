@@ -39,7 +39,6 @@ public class ColorProfiles {
     private ColorProfiles() {
     }
 
-
     /**
      * Gets the content of the sRGB ICC profile.
      *
@@ -48,7 +47,7 @@ public class ColorProfiles {
      */
     static byte[] getSrgbIccProfile() throws IOException {
         try (final InputStream colorProfile =
-                     HtmlToPdfAConverter.class.getResourceAsStream("/pdf/colorspaces/sRGB.icc")) {
+                     ColorProfiles.class.getResourceAsStream("/pdf/colorspace/sRGB.icc")) {
             if (colorProfile == null) {
                 throw new FileNotFoundException("The sRGB profile file hasn't been found");
             }

@@ -11,8 +11,8 @@ package org.husky.emed.ch.cda.utils;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.hl7cdar2.IVLTS;
-import org.husky.common.hl7cdar2.IVXBTS;
 import org.husky.common.hl7cdar2.PQ;
+import org.husky.common.hl7cdar2.TS;
 import org.husky.common.utils.time.DateTimes;
 import org.husky.common.utils.time.Hl7Dtm;
 
@@ -46,17 +46,11 @@ public class IvlTsUtils {
     @Nullable
     public static Instant getInclusiveLowInstant(final IVLTS ivlTs) {
         Objects.requireNonNull(ivlTs);
-        var low = getLowIvxbTs(ivlTs);
+        var low = getLowTs(ivlTs);
         if (low == null || !low.getNullFlavor().isEmpty()) {
             return null;
         }
-        final Instant instant =
-                DateTimes.toInstant(DateTimes.completeToEarliestInstant(Hl7Dtm.fromHl7(low.getValue())));
-        if (low.isInclusive()) {
-            return instant;
-        } else {
-            return instant.plusSeconds(1);
-        }
+        return DateTimes.toInstant(DateTimes.completeToEarliestInstant(Hl7Dtm.fromHl7(low.getValue())));
     }
 
     /**
@@ -68,11 +62,9 @@ public class IvlTsUtils {
     @Nullable
     public static Instant getExclusiveLowInstant(final IVLTS ivlTs) {
         Objects.requireNonNull(ivlTs);
-        var instant = getInclusiveLowInstant(ivlTs);
-        if (instant == null) {
-            return null;
-        }
-        return instant.plusSeconds(1);
+        return Optional.ofNullable(getInclusiveLowInstant(ivlTs))
+                .map(instant -> instant.plusSeconds(1))
+                .orElse(null);
     }
 
     /**
@@ -84,17 +76,11 @@ public class IvlTsUtils {
     @Nullable
     public static Instant getInclusiveHighInstant(final IVLTS ivlTs) {
         Objects.requireNonNull(ivlTs);
-        var high = getHighIvxbTs(ivlTs);
+        var high = getHighTs(ivlTs);
         if (high == null || !high.getNullFlavor().isEmpty()) {
             return null;
         }
-        final Instant instant =
-                DateTimes.toInstant(DateTimes.completeToEarliestInstant(Hl7Dtm.fromHl7(high.getValue())));
-        if (high.isInclusive()) {
-            return instant;
-        } else {
-            return instant.minusSeconds(1);
-        }
+        return DateTimes.toInstant(DateTimes.completeToEarliestInstant(Hl7Dtm.fromHl7(high.getValue())));
     }
 
     /**
@@ -106,24 +92,22 @@ public class IvlTsUtils {
     @Nullable
     public static Instant getExclusiveHighInstant(final IVLTS ivlTs) {
         Objects.requireNonNull(ivlTs);
-        var instant = getInclusiveHighInstant(ivlTs);
-        if (instant == null) {
-            return null;
-        }
-        return instant.minusSeconds(1);
+        return Optional.ofNullable(getInclusiveHighInstant(ivlTs))
+                .map(instant -> instant.minusSeconds(1))
+                .orElse(null);
     }
 
     /**
-     * Returns the lower value of the interval as an {@link IVXBTS} if defined or {@code null}. It can be inclusive or
-     * exclusive.
+     * Returns the lower value of the interval as an {@link TS} if defined or {@code null}. It is inclusive (closed
+     * bound).
      *
      * @param ivlTs The non-null IVL_TS to parse.
-     * @return the {@link IVXBTS} or {@code null}.
+     * @return the {@link TS} or {@code null}.
      */
     @Nullable
-    public static IVXBTS getLowIvxbTs(final IVLTS ivlTs) {
+    public static TS getLowTs(final IVLTS ivlTs) {
         Objects.requireNonNull(ivlTs);
-        return (IVXBTS) ivlTs.getRest().stream()
+        return (TS) ivlTs.getRest().stream()
                 .filter(rest -> "low".equals(rest.getName().getLocalPart()))
                 .findAny()
                 .map(JAXBElement::getValue)
@@ -131,16 +115,16 @@ public class IvlTsUtils {
     }
 
     /**
-     * Returns the higher value of the interval as an {@link IVXBTS} if defined or {@code null}. It can be inclusive or
-     * exclusive.
+     * Returns the higher value of the interval as an {@link TS} if defined or {@code null}. It is inclusive (closed
+     * bound).
      *
      * @param ivlTs The non-null IVL_TS to parse.
-     * @return the {@link IVXBTS} or {@code null}.
+     * @return the {@link TS} or {@code null}.
      */
     @Nullable
-    public static IVXBTS getHighIvxbTs(final IVLTS ivlTs) {
+    public static TS getHighTs(final IVLTS ivlTs) {
         Objects.requireNonNull(ivlTs);
-        return (IVXBTS) ivlTs.getRest().stream()
+        return (TS) ivlTs.getRest().stream()
                 .filter(rest -> "high".equals(rest.getName().getLocalPart()))
                 .findAny()
                 .map(JAXBElement::getValue)
@@ -168,9 +152,6 @@ public class IvlTsUtils {
         }
         if (width.getValue() == null) {
             throw new IllegalArgumentException("The IVL_TS width has no value");
-        }
-        if (width.getUnit() == null) {
-            throw new IllegalArgumentException("The IVL_TS width has no unit");
         }
         final long amount = Long.parseLong(width.getValue());
         return switch (width.getUnit()) {
