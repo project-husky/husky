@@ -60,7 +60,7 @@ public record NameReader(List<@NonNull PN> names) {
                 .filter(JAXBElement.class::isInstance)
                 .filter(jaxbElement -> ((JAXBElement<?>) jaxbElement).getValue() instanceof EnFamily)
                 .map(jaxbElement -> (EnFamily) ((JAXBElement<?>) jaxbElement).getValue())
-                .filter(enFamily -> enFamily.getQualifier().isEmpty())
+                .filter(enFamily -> enFamily.getQualifier(false).isEmpty())
                 .map(ANY::getMergedXmlMixed)
                 .toList();
     }
@@ -76,7 +76,7 @@ public record NameReader(List<@NonNull PN> names) {
                 .filter(JAXBElement.class::isInstance)
                 .filter(jaxbElement -> ((JAXBElement<?>) jaxbElement).getValue() instanceof EnGiven)
                 .map(jaxbElement -> (EnGiven) ((JAXBElement<?>) jaxbElement).getValue())
-                .filter(enGiven -> enGiven.getQualifier().isEmpty())
+                .filter(enGiven -> enGiven.getQualifier(false).isEmpty())
                 .map(ANY::getMergedXmlMixed)
                 .toList();
     }
@@ -92,7 +92,7 @@ public record NameReader(List<@NonNull PN> names) {
                 .filter(JAXBElement.class::isInstance)
                 .filter(jaxbElement -> ((JAXBElement<?>) jaxbElement).getValue() instanceof EnPrefix)
                 .map(jaxbElement -> (EnPrefix) ((JAXBElement<?>) jaxbElement).getValue())
-                .filter(enPrefix -> enPrefix.getQualifier().size() == 1 && "AC" .equals(enPrefix.getQualifier().get(0)))
+                .filter(enPrefix -> enPrefix.getQualifier(false).size() == 1 && "AC" .equals(enPrefix.getQualifier(false).get(0)))
                 .map(ANY::getMergedXmlMixed)
                 .toList();
     }

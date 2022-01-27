@@ -47,7 +47,7 @@ public class IvlTsUtils {
     public static Instant getInclusiveLowInstant(final IVLTS ivlTs) {
         Objects.requireNonNull(ivlTs);
         var low = getLowTs(ivlTs);
-        if (low == null || !low.getNullFlavor().isEmpty()) {
+        if (low == null || !low.getNullFlavor(false).isEmpty()) {
             return null;
         }
         return DateTimes.toInstant(DateTimes.completeToEarliestInstant(Hl7Dtm.fromHl7(low.getValue())));
@@ -77,7 +77,7 @@ public class IvlTsUtils {
     public static Instant getInclusiveHighInstant(final IVLTS ivlTs) {
         Objects.requireNonNull(ivlTs);
         var high = getHighTs(ivlTs);
-        if (high == null || !high.getNullFlavor().isEmpty()) {
+        if (high == null || !high.getNullFlavor(false).isEmpty()) {
             return null;
         }
         return DateTimes.toInstant(DateTimes.completeToEarliestInstant(Hl7Dtm.fromHl7(high.getValue())));
