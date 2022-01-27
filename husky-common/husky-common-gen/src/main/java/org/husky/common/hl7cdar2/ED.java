@@ -87,6 +87,12 @@ public class ED extends BIN {
         this.language = language;
     }
 
+    public ED(final String ed,
+              final TEL reference) {
+        this.setXmlMixed(ed);
+        this.reference = reference;
+    }
+
     /**
      * Ruft den Wert der compression-Eigenschaft ab.
      *

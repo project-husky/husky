@@ -49,6 +49,13 @@ public abstract class URL extends ANY {
     @XmlAttribute(name = "value")
     protected String value;
 
+    public URL() {
+    }
+
+    public URL(final String value) {
+        this.value = value;
+    }
+
     /**
      * Ruft den Wert der value-Eigenschaft ab.
      *
