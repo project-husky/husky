@@ -45,8 +45,7 @@ import java.util.function.Function;
  *
  * <p>HTML template file:
  *
- * <p>Internals: it first creates an HTML document with all the data and then converts it to a PDF.
- *
+ * @implNote It first creates an HTML document with all the data and then converts it to a PDF.
  * @author Quentin Ligier
  */
 public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerator {
@@ -172,7 +171,7 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
 
             body.append(String.format("""
                             <tr>
-                                <td class="col n"><a href='#entry-%d'>#%1$d</a></td>
+                                <td class="col n"><a href='#entry-%d' title='Voir les détails'>#%1$d</a></td>
                                 <td class="col name">%s</td>
                                 %s
                                 <td class="col route-site">%s</td>
@@ -295,11 +294,14 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
 
         if (!author.getTelecoms().getPhones().isEmpty()) {
             final var phone = author.getTelecoms().getPhones().get(0);
-            name.append(String.format("<a href='%s'>%s</a><br />", phone, StringUtils.removeStart(phone, "tel:")));
+            name.append(String.format("<a href='%s' title='Appeler'>%s</a><br />", phone, StringUtils.removeStart(phone,
+                    "tel:")));
         }
         if (!author.getTelecoms().getMails().isEmpty()) {
             final var mail = author.getTelecoms().getMails().get(0);
-            name.append(String.format("<a href='%s'>%s</a><br />", mail, StringUtils.removeStart(mail, "mailto:")));
+            name.append(String.format("<a href='%s' title='Ecrire un email'>%s</a><br />", mail,
+                    StringUtils.removeStart(mail,
+                    "mailto:")));
         }
         if (!author.getAddresses().isEmpty() && !author.getAddresses().get(0).isEmpty()) {
             final var address = author.getAddresses().get(0);
