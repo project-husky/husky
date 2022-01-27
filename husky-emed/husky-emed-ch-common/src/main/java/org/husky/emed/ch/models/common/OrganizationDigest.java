@@ -43,9 +43,6 @@ public class OrganizationDigest {
      */
     private final List<AddressDigest> addresses = new ArrayList<>();
 
-    public OrganizationDigest() {
-    }
-
     public OrganizationDigest(final List<String> ids,
                               final List<String> names,
                               @Nullable final TelecomDigest telecoms,

@@ -288,8 +288,9 @@ public class CceDocumentDigester {
                 .map(AuthorReader::new)
                 .map(AuthorReader::toDigest)
                 .toList();
-        final var custodian = new OrganizationDigest();
-        final var recipients = List.of(new RecipientDigest());
+        final var custodian = new OrganizationDigest(Collections.emptyList(), Collections.emptyList(), null,
+                Collections.emptyList()); // TODO
+        final var recipients = List.of(new RecipientDigest()); // TODO
 
         final var narrativeText = getNarrativeText(cce);
         final var contentSection = getContentSection(cce);

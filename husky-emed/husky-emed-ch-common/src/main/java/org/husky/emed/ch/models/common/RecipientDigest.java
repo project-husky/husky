@@ -9,5 +9,8 @@
  */
 package org.husky.emed.ch.models.common;
 
+/**
+ * TODO
+ */
 public class RecipientDigest {
 }

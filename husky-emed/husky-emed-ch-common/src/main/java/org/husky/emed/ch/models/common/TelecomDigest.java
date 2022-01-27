@@ -47,12 +47,6 @@ public class TelecomDigest {
     private final List<String> others = new ArrayList<>();
 
     /**
-     * Simple constructor.
-     */
-    public TelecomDigest() {
-    }
-
-    /**
      * Full constructor.
      *
      * @param mails    The email addresses.
