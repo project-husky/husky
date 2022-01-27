@@ -130,7 +130,7 @@ public class MedicationDosageInstructions {
         }
         final long nbDifferentDosis =
                 this.intakes.stream().map(MedicationDosageIntake::getDoseQuantity).distinct().count();
-        return (nbDifferentDosis < 2) ? Type.NORMAL : Type.NARRATIVE;
+        return (nbDifferentDosis < 2) ? Type.NORMAL : Type.SPLIT;
     }
 
     @Override
