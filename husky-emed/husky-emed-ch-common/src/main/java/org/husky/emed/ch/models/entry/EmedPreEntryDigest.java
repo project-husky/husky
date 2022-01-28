@@ -40,68 +40,82 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
      * The list of substance substitution permissions.
      */
     private final List<@NonNull ActSubstanceAdminSubstitutionCode> substitutionPermissions = new ArrayList<>();
+
     /**
      * The dosage instructions.
      */
     private MedicationDosageInstructions dosageInstructions;
+
     /**
      * The fulfilment instructions or {@code null} if it isn't provided.
      */
     @Nullable
     private String fulfilmentInstructions;
+
     /**
      * The inclusive instant at which the initial treatment shall start or {@code null} if it's unknown.
      */
     @Nullable
     private Instant initialTreatmentStartTime;
+
     /**
      * The inclusive instant at which the initial treatment shall stop or {@code null} if it's unknown.
      */
     @Nullable
     private Instant initialTreatmentStopTime;
+
     /**
      * The reference to the MTP entry, if any.
      */
     @Nullable
     private EmedReference mtpReference;
+
     /**
      * The patient medication instructions or {@code null} if it isn't provided.
      */
     @Nullable
     private String patientMedicationInstructions;
+
     /**
      * The inclusive instant at which the prescription shall start.
      */
     private Instant prescriptionStartTime;
+
     /**
      * The inclusive instant at which the prescription shall stop.
      */
     private Instant prescriptionStopTime;
+
     /**
      * The prescribed medication product.
      */
     private MedicationProduct product;
+
     /**
      * Whether this prescription item is provisional or not.
      */
     private boolean provisional;
+
     /**
      * The renewal period or {@code null}. If it's not specified, the renewal period is the prescription validity
      * period. If the lower bound is not specified, the period starts at the first dispense.
      */
     @Nullable
     private RenewalInterval renewalPeriod;
+
     /**
      * Number of repeats/refills (excluding the initial dispense). It's a non-zero integer if it's limited, it's zero if
      * no repeat/refill is authorized and {@code null} if unlimited repeats/refills are authorized.
      */
     @Nullable
     private Integer repeatNumber;
+
     /**
      * The medication route of administration, or {@code null} if it's not specified.
      */
     @Nullable
     private RouteOfAdministrationEdqm routeOfAdministration;
+
     /**
      * The treatment reason or {@code null} if it isn't provided.
      */

@@ -39,50 +39,60 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
      * The list of substance substitution permissions.
      */
     private final List<@NonNull ActSubstanceAdminSubstitutionCode> substitutionPermissions = new ArrayList<>();
+
     /**
      * The dosage instructions.
      */
     private MedicationDosageInstructions dosageInstructions;
+
     /**
      * The fulfilment instructions or {@code null} if it isn't provided.
      */
     @Nullable
     private String fulfilmentInstructions;
+
     /**
      * The reference to the original MTP entry if this one is consolidated (i.e. part of a PMLC document instead of an
      * MTP one).
      */
     @Nullable
     private EmedReference originalMtpReference;
+
     /**
      * The patient medication instructions or {@code null} if it isn't provided.
      */
     @Nullable
     private String patientMedicationInstructions;
+
     /**
      * The medication product.
      */
     private MedicationProduct product;
+
     /**
      * Number of repeats/refills (excluding the initial dispense). It's a non-zero integer if it's limited, it's zero if
      * no repeat/refill is authorized and {@code null} if unlimited repeats/refills are authorized.
      */
     @Nullable
     private Integer repeatNumber;
+
     /**
      * The medication route of administration or {@code null} if it's not specified.
      */
     @Nullable
     private RouteOfAdministrationEdqm routeOfAdministration;
+
     /**
      * The inclusive instant at which the item shall start.
      */
     private Instant serviceStartTime;
+
     /**
      * The inclusive instant at which the item shall stop or {@code null} if it's unknown.
      */
     @Nullable
     private Instant serviceStopTime;
+
     /**
      * The treatment reason or {@code null} if it isn't provided.
      */

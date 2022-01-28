@@ -29,10 +29,12 @@ public abstract class EmedPadvEntryDigest extends EmedEntryDigest {
      * The instant at which the advice becomes effective.
      */
     protected Instant effectiveTime;
+
     /**
      * Whether the PADV status is completed or not.
      */
     private boolean completed;
+
     /**
      * Reference to the targeted item entry.
      */
