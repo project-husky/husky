@@ -87,6 +87,10 @@ public class TelecomDigest {
         return others;
     }
 
+    public int size() {
+        return mails.size() + phones.size() + faxes.size() + websites.size() + others.size();
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
