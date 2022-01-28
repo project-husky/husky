@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "adxp.state")
 public class AdxpState extends ADXP {
 
+    public AdxpState() {
+    }
+
+    public AdxpState(final String ed) {
+        super(ed);
+    }
 }

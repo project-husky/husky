@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "adxp.precinct")
 public class AdxpPrecinct extends ADXP {
 
+    public AdxpPrecinct() {
+    }
+
+    public AdxpPrecinct(final String ed) {
+        super(ed);
+    }
 }

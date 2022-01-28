@@ -56,6 +56,13 @@ public class ENXP extends ST {
     @XmlAttribute(name = "qualifier")
     protected List<String> qualifier;
 
+    public ENXP() {
+    }
+
+    public ENXP(final String ed) {
+        super(ed);
+    }
+
     /**
      * Ruft den Wert der partType-Eigenschaft ab.
      *

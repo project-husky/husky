@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "en.prefix")
 public class EnPrefix extends ENXP {
 
+    public EnPrefix() {
+    }
+
+    public EnPrefix(final String ed) {
+        super(ed);
+    }
 }

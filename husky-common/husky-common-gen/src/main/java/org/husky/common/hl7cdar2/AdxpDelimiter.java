@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "adxp.delimiter")
 public class AdxpDelimiter extends ADXP {
 
+    public AdxpDelimiter() {
+    }
+
+    public AdxpDelimiter(final String ed) {
+        super(ed);
+    }
 }

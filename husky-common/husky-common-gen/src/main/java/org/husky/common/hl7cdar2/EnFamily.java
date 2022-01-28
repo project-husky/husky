@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "en.family")
 public class EnFamily extends ENXP {
 
+    public EnFamily() {
+    }
+
+    public EnFamily(final String ed) {
+        super(ed);
+    }
 }

@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "adxp.country")
 public class AdxpCountry extends ADXP {
 
+    public AdxpCountry() {
+    }
+
+    public AdxpCountry(final String ed) {
+        super(ed);
+    }
 }

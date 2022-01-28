@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "adxp.additionalLocator")
 public class AdxpAdditionalLocator extends ADXP {
 
+    public AdxpAdditionalLocator() {
+    }
+
+    public AdxpAdditionalLocator(final String ed) {
+        super(ed);
+    }
 }

@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "en.suffix")
 public class EnSuffix extends ENXP {
 
+    public EnSuffix() {
+    }
+
+    public EnSuffix(final String ed) {
+        super(ed);
+    }
 }

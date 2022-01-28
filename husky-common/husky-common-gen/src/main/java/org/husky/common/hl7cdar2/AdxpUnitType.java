@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "adxp.unitType")
 public class AdxpUnitType extends ADXP {
 
+    public AdxpUnitType() {
+    }
+
+    public AdxpUnitType(final String ed) {
+        super(ed);
+    }
 }

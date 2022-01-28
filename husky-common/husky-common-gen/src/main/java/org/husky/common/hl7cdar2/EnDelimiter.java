@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "en.delimiter")
 public class EnDelimiter extends ENXP {
 
+    public EnDelimiter() {
+    }
+
+    public EnDelimiter(final String ed) {
+        super(ed);
+    }
 }

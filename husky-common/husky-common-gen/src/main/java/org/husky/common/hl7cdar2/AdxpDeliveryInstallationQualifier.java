@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "adxp.deliveryInstallationQualifier")
 public class AdxpDeliveryInstallationQualifier extends ADXP {
 
+    public AdxpDeliveryInstallationQualifier() {
+    }
+
+    public AdxpDeliveryInstallationQualifier(final String ed) {
+        super(ed);
+    }
 }

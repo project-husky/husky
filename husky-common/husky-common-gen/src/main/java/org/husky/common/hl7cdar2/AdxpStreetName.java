@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "adxp.streetName")
 public class AdxpStreetName extends ADXP {
 
+    public AdxpStreetName() {
+    }
+
+    public AdxpStreetName(final String ed) {
+        super(ed);
+    }
 }

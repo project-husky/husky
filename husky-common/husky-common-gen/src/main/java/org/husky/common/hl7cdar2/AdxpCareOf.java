@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "adxp.careOf")
 public class AdxpCareOf extends ADXP {
 
+    public AdxpCareOf() {
+    }
+
+    public AdxpCareOf(final String ed) {
+        super(ed);
+    }
 }
