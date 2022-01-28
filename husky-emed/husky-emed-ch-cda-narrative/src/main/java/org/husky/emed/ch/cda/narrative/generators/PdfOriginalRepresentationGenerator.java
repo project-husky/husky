@@ -24,15 +24,14 @@ import org.husky.emed.ch.models.common.MedicationDosageInstructions;
 import org.husky.emed.ch.models.common.MedicationDosageIntake;
 import org.husky.emed.ch.models.common.QuantityWithUnitCode;
 import org.husky.emed.ch.models.document.EmedPmlcDocumentDigest;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -139,105 +138,102 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
         Objects.requireNonNull(digest, "digest shall not be null in generate()");
         Objects.requireNonNull(variables, "variables shall not be null in generate()");
 
-        final var stringSubstitutor = new StringSubstitutor(variables);
+        final var narDom = new NarrativeDomFactory(this.lang, true);
+        final var root = narDom.getDocument().getDocumentElement();
 
-        final var body = new StringBuilder();
-        body.append(stringSubstitutor.replace(this.templateHeader));
+        // Document title
+        root.appendChild(narDom.title1(variables.getOrDefault("title", "Carte de médication")));
 
-        body.append(String.format("<h1>%s</h1>", variables.getOrDefault("title", "Carte de médication")));
-        body.append("""
-                <table>
-                    <thead>
-                        <tr>
-                            <th rowspan="2">#n</th>
-                            <th rowspan="2">Nom du médicament</th>
-                            <th colspan="5">Dosage</th>
-                            <th rowspan="2">Voie et localisation</th>
-                        </tr>
-                        <tr>
-                            <th>Matin</th>
-                            <th>Midi</th>
-                            <th>Soir</th>
-                            <th>Nuit</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                """);
+        // Medication table
+        final var medicationTableRows = new ArrayList<Element>();
         int i = 1;
         for (final var entry : digest.getMtpEntryDigests()) {
-            final var routeSite = Optional.ofNullable(entry.getRouteOfAdministration()).map(this::getEnumNarrative)
-                    .orElse("<span class='na'>N/A</span>");
+            final var cells = new ArrayList<Element>();
 
-            body.append(String.format("""
-                            <tr>
-                                <td class="col n"><a href='#entry-%d' title='Voir les détails'>#%1$d</a></td>
-                                <td class="col name">%s</td>
-                                %s
-                                <td class="col route-site">%s</td>
-                            </tr>
-                            """,
-                    i,
-                    this.formatMedicationName(entry.getProduct(), true),
-                    this.formatDosageCells(entry.getDosageInstructions()),
-                    routeSite
-            ));
+            // Link to medication details
+            final var tdLink = narDom.td(null, "col n");
+            tdLink.appendChild(narDom.link("#entry-" + i, "#" + i, "Voir les détails", null));
+            cells.add(tdLink);
+
+            // Medication name
+            cells.add(narDom.td(this.formatMedicationName(narDom, entry.getProduct()), "col name"));
+
+            // Dosage instructions (5 columns)
+            cells.addAll(this.formatDosageCells(narDom, entry.getDosageInstructions()));
+
+            // Route and approach site
+            final Node routeSite = Optional.ofNullable(entry.getRouteOfAdministration())
+                    .map(this::getEnumNarrative)
+                    .map(narDom::text)
+                    .orElseGet(() -> narDom.span("N/A", "na"));
+            cells.add(narDom.td(routeSite, "col route-site"));
+
+            medicationTableRows.add(narDom.tr(cells));
             ++i;
         }
-        body.append("""
-                     </tbody>
-                </table>
-                 """);
+        root.appendChild(this.createMedicationTable(narDom, medicationTableRows));
 
+        // Medication details
         i = 1;
         for (final var entry : digest.getMtpEntryDigests()) {
-            body.append(String.format("<hr id='entry-%d' />", i));
-            body.append(String.format("<h2 id='med_%1$d'><span class='n'>%1$d</span>%2$s</h2>", i,
-                    this.formatMedicationName(entry.getProduct(), true)));
+            final var hr = narDom.getDocument().createElement("hr");
+            hr.setAttribute("id", "entry-" + i);
+            root.appendChild(hr);
+
+            final var title2 = narDom.title2(List.of(
+                    narDom.span(i, "n"),
+                    this.formatMedicationName(narDom, entry.getProduct())
+            ));
+            title2.setAttribute("id", "med_" + i);
+            root.appendChild(title2);
 
             // Last author
-            body.append("<div id='narrative last_author'>");
-            body.append("<h3>Dernier intervenant</h3><p>");
-            body.append(this.formatAuthorName(entry.getSectionAuthor()));
-            body.append("</p></div>");
+            root.appendChild(narDom.div(List.of(
+                    narDom.title3("Dernier intervenant"),
+                    narDom.p(this.formatAuthorName(narDom, entry.getSectionAuthor()))
+            ), "narrative last_author"));
 
             if (entry.getTreatmentReason() != null) {
-                body.append("<div id='narrative fulfilment_instructions'>");
-                body.append("<h3>Raison du traitement</h3><p>");
-                body.append(StringEscapeUtils.escapeXml11(entry.getTreatmentReason()));
-                body.append("</p></div>");
+                root.appendChild(narDom.div(List.of(
+                        narDom.title3("Raison du traitement"),
+                        narDom.p(StringEscapeUtils.escapeXml11(entry.getTreatmentReason()))
+                ), "narrative fulfilment_instructions"));
             }
             if (entry.getAnnotationComment() != null) {
-                body.append("<div id='narrative annotation_comment'>");
-                body.append("<h3>Commentaire</h3><p>");
-                body.append(StringEscapeUtils.escapeXml11(entry.getAnnotationComment()));
-                body.append("</p></div>");
+                root.appendChild(narDom.div(List.of(
+                        narDom.title3("Commentaire"),
+                        narDom.p(StringEscapeUtils.escapeXml11(entry.getAnnotationComment()))
+                ), "narrative annotation_comment"));
             }
             if (entry.getPatientMedicationInstructions() != null) {
-                body.append("<div id='narrative medication_instructions'>");
-                body.append("<h3>Instructions de médication</h3><p>");
-                body.append(StringEscapeUtils.escapeXml11(entry.getPatientMedicationInstructions()));
-                body.append("</p></div>");
+                root.appendChild(narDom.div(List.of(
+                        narDom.title3("Instructions de médication"),
+                        narDom.p(StringEscapeUtils.escapeXml11(entry.getPatientMedicationInstructions()))
+                ), "narrative medication_instructions"));
             }
             if (entry.getFulfilmentInstructions() != null) {
-                body.append("<div id='narrative fulfilment_instructions'>");
-                body.append("<h3>Instructions de fulfilment</h3><p>");
-                body.append(StringEscapeUtils.escapeXml11(entry.getFulfilmentInstructions()));
-                body.append("</p></div>");
+                root.appendChild(narDom.div(List.of(
+                        narDom.title3("Instructions de fulfilment"),
+                        narDom.p(StringEscapeUtils.escapeXml11(entry.getFulfilmentInstructions()))
+                ), "narrative fulfilment_instructions"));
             }
 
             ++i;
         }
 
-        body.append("<hr />");
-        body.append("<div id='narrative document_author'>");
-        body.append("<h3>Auteur du document</h3><p>");
-        body.append(this.formatAuthorName(digest.getAuthors().get(0)));
-        body.append("</p></div>");
+        root.appendChild(narDom.getDocument().createElement("hr"));
+        root.appendChild(narDom.div(List.of(
+                narDom.title3("Auteur du document"),
+                narDom.p(this.formatAuthorName(narDom, digest.getAuthors().get(0)))
+        ), "narrative document_author"));
 
-        body.append(stringSubstitutor.replace(this.templateFooter));
 
-        return this.pdfConverter.convert(body.toString());
+        final var stringSubstitutor = new StringSubstitutor(variables);
+        final String body = stringSubstitutor.replace(this.templateHeader)
+                + narDom.render()
+                + stringSubstitutor.replace(this.templateFooter);
+
+        return this.pdfConverter.convert(body);
     }
 
     /**
@@ -261,85 +257,85 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
      * @param author The author or {@code null}.
      * @return The author name.
      */
-    protected String formatAuthorName(@Nullable final AuthorDigest author) {
+    protected List<Node> formatAuthorName(final NarrativeDomFactory narDom,
+                                          @Nullable final AuthorDigest author) {
         if (author == null) {
-            return "<em>Inconnu</em>";
+            return List.of(narDom.em("Inconnu"));
         }
-        final var name = new StringBuilder();
+
+        final var nodes = new ArrayList<Node>();
         if (author.getGivenName() != null || author.getFamilyName() != null) {
             if (author.getGivenName() != null) {
-                name.append(author.getGivenName());
+                nodes.add(narDom.text(author.getGivenName()));
             }
             if (author.getFamilyName() != null) {
-                if (!name.isEmpty()) {
-                    name.append(" ");
+                if (!nodes.isEmpty()) {
+                    nodes.add(narDom.text(" "));
                 }
-                name.append(author.getFamilyName());
+                nodes.add(narDom.text(author.getFamilyName()));
             }
         }
         if (author.getDeviceSoftwareName() != null) {
-            name.append("<span class='device'>");
-            name.append(author.getDeviceSoftwareName());
+            final var deviceNodes = new ArrayList<>(2);
+            deviceNodes.add(narDom.text(author.getDeviceSoftwareName()));
             if (author.getDeviceManufacturerModelName() != null) {
-                name.append(" (");
-                name.append(author.getDeviceManufacturerModelName());
-                name.append(")");
+                deviceNodes.add(narDom.text(" (" + author.getDeviceManufacturerModelName() + ")"));
             }
-            name.append("</span>");
+            nodes.add(narDom.span(deviceNodes, "device"));
         }
-        if (name.isEmpty()) {
-            name.append("<em>Inconnu</em>");
+        if (nodes.isEmpty()) {
+            nodes.add(narDom.em("Inconnu"));
         }
-        name.append("<br />");
+        nodes.add(narDom.br());
 
         if (!author.getTelecoms().getPhones().isEmpty()) {
             final var phone = author.getTelecoms().getPhones().get(0);
-            name.append(String.format("<a href='%s' title='Appeler'>%s</a><br />", phone, StringUtils.removeStart(phone,
-                    "tel:")));
+            nodes.add(narDom.link(phone, StringUtils.removeStart(phone, "tel:"), "Appeler", "phone"));
+            nodes.add(narDom.br());
         }
         if (!author.getTelecoms().getMails().isEmpty()) {
             final var mail = author.getTelecoms().getMails().get(0);
-            name.append(String.format("<a href='%s' title='Ecrire un email'>%s</a><br />", mail,
-                    StringUtils.removeStart(mail,
-                    "mailto:")));
+            nodes.add(narDom.link(mail, StringUtils.removeStart(mail, "mailto:"), "Ecrire un email", "mail"));
+            nodes.add(narDom.br());
         }
         if (!author.getAddresses().isEmpty() && !author.getAddresses().get(0).isEmpty()) {
             final var address = author.getAddresses().get(0);
-            name.append("<span class='address'>");
+            final var addressNodes = new ArrayList<>(7);
 
             if (address.getStreetName() != null) {
-                name.append(address.getStreetName());
+                nodes.add(narDom.text(address.getStreetName()));
                 if (address.getHouseNumber() != null) {
-                    name.append(" ");
-                    name.append(address.getHouseNumber());
+                    nodes.add(narDom.text(" " + address.getHouseNumber()));
                 }
-                name.append("<br />");
+                nodes.add(narDom.br());
             }
             if (address.getPostalCode() != null || address.getCity() != null) {
                 if (address.getPostalCode() != null) {
-                    name.append(address.getPostalCode());
-                    name.append(" ");
+                    nodes.add(narDom.text(address.getPostalCode() + " "));
                 }
                 if (address.getCity() != null) {
-                    name.append(address.getCity());
+                    nodes.add(narDom.text(address.getCity()));
                 }
-                name.append("<br />");
+                nodes.add(narDom.br());
             }
             if (address.getCountry() != null) {
-                name.append(address.getCountry());
-                name.append("<br />");
+                nodes.add(narDom.text(address.getCountry()));
+                nodes.add(narDom.br());
             }
-            name.append("</span>");
+            nodes.add(narDom.span(addressNodes, "address"));
         }
 
-        return name.toString();
+        return nodes;
     }
 
-    protected String formatDosageCells(final MedicationDosageInstructions dosageInstructions) {
-        if (dosageInstructions.getNarrativeDosageInstructions() != null) {
-            return "<td class='col dosage' colspan='5'>%s</td>";
+    protected List<Element> formatDosageCells(final NarrativeDomFactory narDom,
+                                           final MedicationDosageInstructions dosageInstructions) {
+        if (dosageInstructions.getType() == MedicationDosageInstructions.Type.NARRATIVE) {
+            final var td = narDom.td(dosageInstructions.getNarrativeDosageInstructions(), "col dosage");
+            td.setAttribute("colspan", "5");
+            return List.of(td);
         }
-        final var cells = new StringBuilder();
+        final var cells = new ArrayList<Element>(5);
 
         final Function<ChEmedTimingEvent, QuantityWithUnitCode> findIntake = event -> dosageInstructions.getIntakes().stream()
                 .filter(intake -> event.equals(intake.getEventTiming()))
@@ -348,18 +344,20 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
                 .orElse(null);
         final Consumer<QuantityWithUnitCode> displayQuantity = quantity -> {
             if (quantity == null) {
-                cells.append("<td></td>");
+                cells.add(narDom.td(null, null));
             } else {
-                cells.append(String.format("<td>%s <span class='unit'>%s</span></td>", quantity.getValue(),
-                        quantity.getUnit().getCodeValue()));
+                cells.add(narDom.td(List.of(
+                        narDom.text(quantity.getValue() + " "),
+                        narDom.span(this.getEnumNarrative(quantity.getUnit()), "unit")
+                ), null));
             }
         };
         displayQuantity.accept(findIntake.apply(ChEmedTimingEvent.MORNING));
         displayQuantity.accept(findIntake.apply(ChEmedTimingEvent.AFTERNOON));
         displayQuantity.accept(findIntake.apply(ChEmedTimingEvent.EVENING));
         displayQuantity.accept(findIntake.apply(ChEmedTimingEvent.NIGHT));
-        cells.append("<td></td>");
-        return cells.toString();
+        cells.add(narDom.td(null, null));
+        return cells;
     }
 }
 /*
