@@ -17,6 +17,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.ch.enums.ActSubstanceAdminSubstitutionCode;
 import org.husky.emed.ch.enums.RouteOfAdministrationEdqm;
 import org.husky.emed.ch.enums.TreatmentStatus;
+import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.EmedReference;
 import org.husky.emed.ch.models.common.MedicationDosageInstructions;
 
@@ -41,19 +42,27 @@ import java.util.Optional;
 public class MedicationTreatment {
 
     /**
-     * The substance substitution permissions, or {@code null} if substitution is authorized without condition.
+     * The annotation comment or {@code null} if it isn't provided.
      */
-    protected final List<@NonNull ActSubstanceAdminSubstitutionCode> substitutionPermissions = new ArrayList<>();
+    @Nullable
+    protected String annotationComment;
 
     /**
-     * The list of prescriptions.
+     * Number of dispense repeats/refills (excluding the initial dispense). {@code null} means no limitation.
      */
-    protected final List<@NonNull MedicationPrescription> prescriptions = new ArrayList<>();
+    @Nullable
+    protected Integer dispenseRepeatNumber = null;
 
     /**
-     * The list of 'over-the-counter' dispenses (OTC, without prescription).
+     * The dosage instructions.
      */
-    protected final List<@NonNull MedicationDispense> otcDispenses = new ArrayList<>();
+    protected MedicationDosageInstructions dosageInstructions;
+
+    /**
+     * The fulfilment instructions or {@code null} if it isn't provided.
+     */
+    @Nullable
+    private String fulfilmentInstructions;
 
     /**
      * The medication treatment ID.
@@ -61,15 +70,16 @@ public class MedicationTreatment {
     protected String id;
 
     /**
+     * The last author in the medication treatment.
+     */
+    @Nullable
+    protected AuthorDigest lastAuthor;
+
+    /**
      * Reference to the MTP item.
      */
     @Nullable
     protected EmedReference mtpReference;
-
-    /**
-     * The MTP and treatment starting time.
-     */
-    protected Instant treatmentStartTime;
 
     /**
      * The MTP planned stop time. It's the maximum time at which the medication treatment can be valid, but it may
@@ -81,26 +91,20 @@ public class MedicationTreatment {
     protected Instant mtpStopTime;
 
     /**
-     * The treatment stop time. By default, it's equal to the {@code mtpStopTime}. It can be then moved sooner if a PADV
-     * CANCEL or REFUSE targets the MTP.
-     *
-     * @see #mtpStopTime
+     * The list of 'over-the-counter' dispenses (OTC, without prescription).
      */
-    @Nullable
-    protected Instant treatmentStopTime;
+    protected final List<@NonNull MedicationDispense> otcDispenses = new ArrayList<>();
 
     /**
-     * The actual status of the treatment.
-     * <p>
-     * TODO: Can it change with the date?
-     */
-    protected TreatmentStatus treatmentStatus;
-
-    /**
-     * Number of dispense repeats/refills (excluding the initial dispense). {@code null} means no limitation.
+     * The patient medication instructions or {@code null} if it isn't provided.
      */
     @Nullable
-    protected Integer dispenseRepeatNumber = null;
+    private String patientMedicationInstructions;
+
+    /**
+     * The list of prescriptions.
+     */
+    protected final List<@NonNull MedicationPrescription> prescriptions = new ArrayList<>();
 
     /**
      * The medication product.
@@ -114,9 +118,36 @@ public class MedicationTreatment {
     protected RouteOfAdministrationEdqm routeOfAdministration;
 
     /**
-     * The dosage instructions.
+     * The substance substitution permissions, or {@code null} if substitution is authorized without condition.
      */
-    protected MedicationDosageInstructions dosageInstructions;
+    protected final List<@NonNull ActSubstanceAdminSubstitutionCode> substitutionPermissions = new ArrayList<>();
+
+    /**
+     * The treatment reason or {@code null} if it isn't provided.
+     */
+    @Nullable
+    private String treatmentReason;
+
+    /**
+     * The MTP and treatment starting time.
+     */
+    protected Instant treatmentStartTime;
+
+    /**
+     * The actual status of the treatment.
+     * <p>
+     * TODO: Can it change with the date?
+     */
+    protected TreatmentStatus treatmentStatus;
+
+    /**
+     * The treatment stop time. By default, it's equal to the {@code mtpStopTime}. It can be then moved sooner if a PADV
+     * CANCEL or REFUSE targets the MTP.
+     *
+     * @see #mtpStopTime
+     */
+    @Nullable
+    protected Instant treatmentStopTime;
 
     /**
      * Returns whether the treatment is active now.
@@ -221,16 +252,4 @@ public class MedicationTreatment {
         }
         return Optional.empty();
     }
-
-    /**
-     * Returns the dosage type.
-     * TODO: useful?
-     *
-     public DosageType getDosageType() {
-     if (!this.dosageInstructions.isEmpty()) {
-     return DosageType.Split;
-     } else {
-     return DosageType.Normal;
-     }
-     }*/
 }
