@@ -197,7 +197,7 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
                 root.appendChild(narDom.div(List.of(
                         narDom.title3("Raison du traitement"),
                         narDom.p(StringEscapeUtils.escapeXml11(entry.getTreatmentReason()))
-                ), "narrative fulfilment_instructions"));
+                ), "narrative treatment_reason"));
             }
             if (entry.getAnnotationComment() != null) {
                 root.appendChild(narDom.div(List.of(
