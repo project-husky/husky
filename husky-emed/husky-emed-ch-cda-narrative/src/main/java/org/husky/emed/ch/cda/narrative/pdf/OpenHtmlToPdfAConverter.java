@@ -6,22 +6,10 @@
  * This project has been developed further and modified by the joined working group Husky
  * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
- *
  */
-
-/*
- * This code is made available under the terms of the Eclipse Public License v1.0
- * in the github project https://github.com/project-husky/husky there you also
- * find a list of the contributors and the license information.
- *
- * This project has been developed further and modified by the joined working group Husky
- * on the basis of the eHealth Connector opensource project from June 28, 2021,
- * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
- *
- */
-
 package org.husky.emed.ch.cda.narrative.pdf;
 
+import com.openhtmltopdf.extend.FSUriResolver;
 import com.openhtmltopdf.outputdevice.helper.BaseRendererBuilder;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -51,6 +39,12 @@ public class OpenHtmlToPdfAConverter implements HtmlToPdfAConverter {
      */
     @Nullable
     private String producerName = null;
+
+    /**
+     * The URI resolver to
+     */
+    @Nullable
+    private FSUriResolver uriResolver;
 
     /**
      * Sets the producer name that will be included in generated PDF documents. Use {@code null} to disable.
@@ -91,6 +85,15 @@ public class OpenHtmlToPdfAConverter implements HtmlToPdfAConverter {
         return this.fonts;
     }
 
+    @Nullable
+    public FSUriResolver getUriResolver() {
+        return uriResolver;
+    }
+
+    public void setUriResolver(@Nullable final FSUriResolver uriResolver) {
+        this.uriResolver = uriResolver;
+    }
+
     /**
      * Converts the HTML content to its PDF/A representation.
      *
@@ -108,6 +111,9 @@ public class OpenHtmlToPdfAConverter implements HtmlToPdfAConverter {
         builder.useFastMode();
         builder.usePdfAConformance(PdfRendererBuilder.PdfAConformance.PDFA_1_A);
         builder.usePdfUaAccessbility(false);
+        if (this.uriResolver != null) {
+            builder.useUriResolver(this.uriResolver);
+        }
 
         final List<InputStream> inputStreams = new ArrayList<>();
 
