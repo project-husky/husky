@@ -188,7 +188,12 @@ public enum CodeSystems implements IdentityDomain {
 	/**
 	 * OID: 2.16.756.5.30.1.127.3.10.3 Swiss EPR-SPID
 	 */
-	SWISS_EPR_SPID("2.16.756.5.30.1.127.3.10.3", "Swiss EPR-SPID");
+	SWISS_EPR_SPID("2.16.756.5.30.1.127.3.10.3", "Swiss EPR-SPID"),
+
+	/**
+	 * OID: 2.16.840.1.113883.5.88 Participation Function
+	 */
+	PARTICIPATION_FUNCTION("2.16.840.1.113883.5.88", "Participation Function");
 
 	/**
 	 * <div class="en">Gets the Enum with a given OID</div>

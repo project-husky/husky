@@ -4,12 +4,12 @@
 
 Before you can get started, your system must meet the following requirements:
 
-- Java OpenJDK Version 16
+- Java JDK version 17
   You can find this version under <https://jdk.java.net/archive/>
-- JAVA_HOME Environment Variable set to Java 16
-- At least Eclipse Version 2021-06 must be installed
-  Link to download <https://www.eclipse.org/downloads/packages/release/2021-06/r>
-- Installed lombok plugin <https://projectlombok.org/setup/eclipse>
+- JAVA_HOME Environment Variable set to Java 17
+- Eclipse (at least 2021-06) or Intellij IDEA (at least 2021.2.1)
+  Link to download <https://www.eclipse.org/downloads/packages/release/2021-06/r>, <https://www.jetbrains.com/idea/download/>
+- Installed lombok plugin <https://projectlombok.org/>
 
 ## Import project to eclipse
 

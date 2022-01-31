@@ -10,12 +10,17 @@
 	</parent>
 
 	<dependencies>
-	 <dependency>
-				<groupId>org.openehealth.ipf.platform-camel</groupId>
+		<dependency>
+			<groupId>org.openehealth.ipf.platform-camel</groupId>
 			<artifactId>ipf-platform-camel-ihe-xacml20</artifactId>
-			</dependency>
+		</dependency>
 	
 		<!-- test stuff -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>

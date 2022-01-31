@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "adxp.buildingNumberSuffix")
 public class AdxpBuildingNumberSuffix extends ADXP {
 
+    public AdxpBuildingNumberSuffix() {
+    }
+
+    public AdxpBuildingNumberSuffix(final String ed) {
+        super(ed);
+    }
 }

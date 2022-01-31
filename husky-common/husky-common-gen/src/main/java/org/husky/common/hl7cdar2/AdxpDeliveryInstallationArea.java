@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "adxp.deliveryInstallationArea")
 public class AdxpDeliveryInstallationArea extends ADXP {
 
+    public AdxpDeliveryInstallationArea() {
+    }
+
+    public AdxpDeliveryInstallationArea(final String ed) {
+        super(ed);
+    }
 }

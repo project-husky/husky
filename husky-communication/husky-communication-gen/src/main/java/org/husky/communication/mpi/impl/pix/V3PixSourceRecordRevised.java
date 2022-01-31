@@ -102,8 +102,6 @@ public class V3PixSourceRecordRevised extends V3Message {
 
 	/**
 	 * Set the processing code.
-	 *
-	 * @param processingCode
 	 */
 	@Override
 	protected void setProcessingCode() {

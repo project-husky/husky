@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:cda="urn:hl7-org:v3"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:hl7="urn:hl7-org:v3"
+             xmlns:pharm="urn:ihe:pharm"
+             id="2.16.840.1.113883.1.11.14835"
+             name="AudioMediaType"
+             displayName="AudioMediaType"
+             effectiveDate="2014-03-26T00:00:00"
+             statusCode="final"
+             versionLabel="DEFN=UV=VO=1360-20160323"
+             url="http://art-decor.org/decor/services/"
+             ident="ad2bbr-"
+             referencedFrom="cdachemed-">
+      <desc language="en-US">
+                <p>
+                    <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26</p>
+                <b>description: </b>
+                <p>Audio media type.</p>
+            </desc>
+      <sourceCodeSystem id="2.16.840.1.113883.5.79"
+                        identifierName="Media Type"
+                        canonicalUri="urn:oid:2.16.840.1.113883.5.79"
+                        canonicalUriDSTU2="urn:oid:2.16.840.1.113883.5.79"
+                        canonicalUriSTU3="urn:oid:2.16.840.1.113883.5.79"
+                        canonicalUriR4="urn:oid:2.16.840.1.113883.5.79"/>
+      <publishingAuthority name="eHealth Suisse">
+                <addrLine>Schwarzenburgstrasse 165</addrLine>
+                <addrLine>CH-3003 Bern</addrLine>
+                <addrLine type="uri">www.e-health-suisse.ch</addrLine>
+            </publishingAuthority>
+      <conceptList>
+                <concept code="audio/basic"
+                  codeSystem="2.16.840.1.113883.5.79"
+                  displayName="Basic Audio"
+                  level="1"
+                  type="L"/>
+                <concept code="audio/k32adpcm"
+                  codeSystem="2.16.840.1.113883.5.79"
+                  displayName="K32ADPCM Audio"
+                  level="1"
+                  type="L"/>
+                <concept code="audio/mpeg"
+                  codeSystem="2.16.840.1.113883.5.79"
+                  displayName="MPEG audio layer 3 MP3 Audio"
+                  level="1"
+                  type="L"/>
+            </conceptList>
+   </valueSet>
+</valueSets>

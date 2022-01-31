@@ -1,30 +1,28 @@
 package org.husky.common.utils.xml;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.StringReader;
-import java.net.URL;
-import java.util.Objects;
-
-import javax.xml.bind.ValidationException;
-import javax.xml.transform.Source;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.Validator;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.framework.qual.DefaultQualifier;
 import org.checkerframework.framework.qual.TypeUseLocation;
 import org.xml.sax.SAXException;
 
+import javax.annotation.concurrent.ThreadSafe;
+import javax.xml.bind.ValidationException;
+import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.Validator;
+import java.io.*;
+import java.net.URL;
+import java.util.Objects;
+
 /**
  * A validator of XML documents against an XML Schema Definition (XSD) file.
  *
+ * @implNote The {@link Validator} is not thread-safe and therefore instanced again at each validation.
  * @author Quentin Ligier
  */
 @DefaultQualifier(value = NonNull.class, locations = {TypeUseLocation.PARAMETER, TypeUseLocation.RETURN})
+@ThreadSafe
 public class XmlSchemaValidator {
 
     /**

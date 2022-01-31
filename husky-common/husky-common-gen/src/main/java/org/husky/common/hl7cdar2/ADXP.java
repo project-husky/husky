@@ -61,6 +61,13 @@ public class ADXP extends ST {
     @XmlAttribute(name = "partType")
     protected List<String> partType;
 
+    public ADXP() {
+    }
+
+    public ADXP(final String ed) {
+        super(ed);
+    }
+
     /**
      * Gets the value of the partType property.
      *

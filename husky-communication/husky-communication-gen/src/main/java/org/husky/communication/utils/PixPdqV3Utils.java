@@ -119,12 +119,7 @@ public class PixPdqV3Utils {
 	 * non-empty (all are optional). If no address parts are supplied, the returned
 	 * value will be null.
 	 *
-	 * @param addressStreetAddressLines
-	 * @param addressCity
-	 * @param addressState
-	 * @param addressCountry
-	 * @param addressZip
-	 * @param addressType             (possible values are "H", "W", or "WP")
+	 * @param address
 	 * @return AD type object containing the non-empty address parts provided.
 	 */
 	public static AD createAd(Address address) {

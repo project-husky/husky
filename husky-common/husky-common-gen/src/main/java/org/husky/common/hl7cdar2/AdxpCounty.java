@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "adxp.county")
 public class AdxpCounty extends ADXP {
 
+    public AdxpCounty() {
+    }
+
+    public AdxpCounty(final String ed) {
+        super(ed);
+    }
 }

@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "adxp.direction")
 public class AdxpDirection extends ADXP {
 
+    public AdxpDirection() {
+    }
+
+    public AdxpDirection(final String ed) {
+        super(ed);
+    }
 }

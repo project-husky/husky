@@ -17,9 +17,7 @@ public class OsUtil {
 	 * @return true for Mac platforms; false otherwise
 	 */
 	public static boolean isMac() {
-
-		return (System.getProperty(PROPERTY_OS_NAME).toLowerCase().indexOf("mac") >= 0);
-
+		return System.getProperty(PROPERTY_OS_NAME).toLowerCase().contains("mac");
 	}
 
 	/**
@@ -28,9 +26,7 @@ public class OsUtil {
 	 * @return true for Solaris platforms; false otherwise
 	 */
 	public static boolean isSolaris() {
-
-		return (System.getProperty(PROPERTY_OS_NAME).toLowerCase().indexOf("sunos") >= 0);
-
+		return System.getProperty(PROPERTY_OS_NAME).toLowerCase().contains("sunos");
 	}
 
 	/**
@@ -39,11 +35,9 @@ public class OsUtil {
 	 * @return true for Unix platforms; false otherwise
 	 */
 	public static boolean isUnix() {
-
-		return ((System.getProperty(PROPERTY_OS_NAME).toLowerCase().indexOf("nix") >= 0)
-				|| (System.getProperty(PROPERTY_OS_NAME).toLowerCase().indexOf("nux") >= 0)
-				|| (System.getProperty(PROPERTY_OS_NAME).toLowerCase().indexOf("aix") >= 0));
-
+		return System.getProperty(PROPERTY_OS_NAME).toLowerCase().contains("nix")
+				|| System.getProperty(PROPERTY_OS_NAME).toLowerCase().contains("nux")
+				|| System.getProperty(PROPERTY_OS_NAME).toLowerCase().contains("aix");
 	}
 
 	/**
@@ -52,9 +46,7 @@ public class OsUtil {
 	 * @return true for Windows platforms; false otherwise
 	 */
 	public static boolean isWindows() {
-
-		return (System.getProperty(PROPERTY_OS_NAME).toLowerCase().indexOf("win") >= 0);
-
+		return System.getProperty(PROPERTY_OS_NAME).toLowerCase().contains("win");
 	}
 
 }

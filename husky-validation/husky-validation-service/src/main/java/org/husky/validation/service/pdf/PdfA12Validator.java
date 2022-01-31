@@ -1,13 +1,5 @@
 package org.husky.validation.service.pdf;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Objects;
-
-import javax.annotation.concurrent.NotThreadSafe;
-
 import org.verapdf.core.EncryptedPdfException;
 import org.verapdf.core.ModelParsingException;
 import org.verapdf.core.ValidationException;
@@ -16,8 +8,15 @@ import org.verapdf.pdfa.VeraGreenfieldFoundryProvider;
 import org.verapdf.pdfa.flavours.PDFAFlavour;
 import org.verapdf.pdfa.results.ValidationResult;
 
+import javax.annotation.concurrent.ThreadSafe;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Objects;
+
 /**
- * Validator of PDF to conformance level A-1 and A-2.
+ * Validator of PDF documents to conformance level A-1 and A-2.
  *
  * <p>In the CH-EPR project, CDA-CH-EMED and CH-EMED, PDFs must conform to the level A-1 or A-2.
  *
@@ -30,11 +29,14 @@ import org.verapdf.pdfa.results.ValidationResult;
  *     <li>PDF/A-2u – PDF 1.7 – Level U (unicode) conformance
  * </ul>
  *
- * <p>The VeraPDF parser and validator seem to not be thread safe, beware.
+ * <p>The VeraPDF parser and validator seem to be thread safe as of version 1.12, see
+ * <a href="https://github.com/veraPDF/veraPDF-library/issues/1037">is veraPDF Processor API thread safe</a>:
+ * <q>this means that one can safely use the the API in multiple parallel threads <em>assuming that each thread
+ * processes a single PDF document at a time</em></q>.
  *
  * @author Quentin Ligier
  */
-@NotThreadSafe
+@ThreadSafe
 public class PdfA12Validator {
 
     /**
@@ -49,7 +51,7 @@ public class PdfA12Validator {
      *
      * @param pdf The PDF content as a {@link String}.
      * @return the validation result.
-     * @throws IOException if the parser or validator cannot be closed.
+     * @throws IOException         if the parser or validator cannot be closed.
      * @throws ValidationException if the validator encounters an issue.
      */
     public ValidationResult validate(final String pdf) throws IOException, ValidationException {
@@ -59,9 +61,9 @@ public class PdfA12Validator {
     /**
      * Validates that a PDF conforms to the PDF/A-1 or PDF/A-2 levels.
      *
-     * @param pdf The PDF content as a byte array.
+     * @param pdf The PDF content as a byte array. The document shall not be password protected.
      * @return the validation result.
-     * @throws IOException if the parser or validator cannot be closed.
+     * @throws IOException         if the parser or validator cannot be closed.
      * @throws ValidationException if the validator encounters an issue.
      */
     public ValidationResult validate(final byte[] pdf) throws IOException, ValidationException {
@@ -72,9 +74,9 @@ public class PdfA12Validator {
     /**
      * Validates that a PDF conforms to the PDF/A-1 or PDF/A-2 levels.
      *
-     * @param pdf The PDF content as an {@link InputStream}.
+     * @param pdf The PDF content as an {@link InputStream}. The document shall not be password protected.
      * @return the validation result.
-     * @throws IOException if the parser or validator cannot be closed.
+     * @throws IOException         if the parser or validator cannot be closed.
      * @throws ValidationException if the validator encounters an issue.
      */
     public ValidationResult validate(final InputStream pdf) throws IOException, ValidationException {

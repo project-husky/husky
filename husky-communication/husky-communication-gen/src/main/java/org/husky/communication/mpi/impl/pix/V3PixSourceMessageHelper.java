@@ -184,22 +184,7 @@ public class V3PixSourceMessageHelper {
 	/**
 	 * add an address for the patient.
 	 *
-	 * @param addressStreetAddress
-	 *            street
-	 * @param addressCity
-	 *            city
-	 * @param addressCounty
-	 *            county
-	 * @param addressState
-	 *            state
-	 * @param addressCountry
-	 *            country
-	 * @param addressZip
-	 *            zip
-	 * @param addressOtherDesignation
-	 *            streetline 2
-	 * @param addressType
-	 *            address type
+	 * @param address
 	 */
 	public void addPatientAddress(AD address) {
 		if (v3RecordAddedMessage != null) {

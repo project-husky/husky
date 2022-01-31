@@ -58,6 +58,13 @@ public class TEL extends URL {
     @XmlAttribute(name = "use")
     protected List<String> use;
 
+    public TEL() {
+    }
+
+    public TEL(final String value) {
+        this.value = value;
+    }
+
     /**
      * Gets the value of the use property.
      *

@@ -20,6 +20,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -55,6 +56,13 @@ public class ENXP extends ST {
     @XmlAttribute(name = "qualifier")
     protected List<String> qualifier;
 
+    public ENXP() {
+    }
+
+    public ENXP(final String ed) {
+        super(ed);
+    }
+
     /**
      * Ruft den Wert der partType-Eigenschaft ab.
      *
@@ -65,7 +73,7 @@ public class ENXP extends ST {
     }
 
     /**
-     * Gets the value of the qualifier property.
+     * Gets the value of the qualifier property and sets it to a new list if it was {@code null}.
      *
      * <p>
      * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to
@@ -85,6 +93,37 @@ public class ENXP extends ST {
     public List<String> getQualifier() {
         if (qualifier == null) {
             qualifier = new ArrayList<>();
+        }
+        return this.qualifier;
+    }
+
+    /**
+     * Gets the value of the qualifier property. If {@code replaceNullByEmptyList} is set to {@code true}, the
+     * property is set to a new list if it was {@code null}.
+     *
+     * <p>
+     * If {@code replaceNullByEmptyList} is set to {@code true}, this accessor method returns a reference to the
+     * live list, not a snapshot. Therefore any modification you make to
+     * the returned list will be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the qualifier property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getQualifier().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link String }
+     */
+    @NonNull
+    public List<String> getQualifier(final boolean replaceNullByEmptyList) {
+        if (qualifier == null) {
+            if (replaceNullByEmptyList) {
+                qualifier = new ArrayList<>();
+            } else {
+                return Collections.emptyList();
+            }
         }
         return this.qualifier;
     }

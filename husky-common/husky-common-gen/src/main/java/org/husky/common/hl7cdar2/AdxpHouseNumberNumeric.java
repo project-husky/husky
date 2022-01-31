@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "adxp.houseNumberNumeric")
 public class AdxpHouseNumberNumeric extends ADXP {
 
+    public AdxpHouseNumberNumeric() {
+    }
+
+    public AdxpHouseNumberNumeric(final String ed) {
+        super(ed);
+    }
 }

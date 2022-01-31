@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "adxp.postalCode")
 public class AdxpPostalCode extends ADXP {
 
+    public AdxpPostalCode() {
+    }
+
+    public AdxpPostalCode(final String ed) {
+        super(ed);
+    }
 }

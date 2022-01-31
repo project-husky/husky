@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.husky.emed.ch.cda.narrative</groupId>
+    <artifactId>husky-emed-ch-cda-narrative</artifactId>
+    <name>Husky eMedication Swiss CDA Narrative</name>
+
+    <parent>
+        <groupId>org.husky.emed</groupId>
+        <artifactId>husky-emed</artifactId>
+        <version>2.0-ALPHA</version>
+    </parent>
+
+    <properties>
+        <openhtmltopdf-version>1.0.10</openhtmltopdf-version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.husky.emed.ch.cda</groupId>
+            <artifactId>husky-emed-ch-cda</artifactId>
+        </dependency>
+
+        <!-- HTML to PDF conversion -->
+        <dependency>
+            <groupId>com.openhtmltopdf</groupId>
+            <artifactId>openhtmltopdf-core</artifactId> <!-- LGPL -->
+            <version>${openhtmltopdf-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.openhtmltopdf</groupId>
+            <artifactId>openhtmltopdf-pdfbox</artifactId> <!-- LGPL -->
+            <version>${openhtmltopdf-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+        </dependency>
+
+        <dependency>
+            <!-- The Checker Framework enhances Java's type system to make it more powerful and useful. -->
+            <groupId>org.checkerframework</groupId>
+            <artifactId>checker-qual</artifactId> <!-- MIT -->
+        </dependency>
+
+        <!-- Tests (EPL 2.0) -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

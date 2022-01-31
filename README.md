@@ -1,8 +1,15 @@
+# The Husky library
+
+[![GitHub license](https://img.shields.io/github/license/project-husky/husky)](https://github.com/project-husky/husky/blob/master/License.md)
+![JDK17](https://img.shields.io/badge/java-JDK17-blue)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/project-husky/husky/Java%20CI%20with%20Maven%20and%20CodeQL)
+![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/project-husky/husky)
+
 This convenience API for IHE transactions and CDA documents allows easy access and conformity to eHealth affinity
 domains. The project is based on a country independent architecture, but implements also Swiss extensions. Other country
 extensions are possible, your contributions are welcome.
 
-The latest Javadoc is published on <a href="https://project-husky.github.io/husky/">project-husky.github.io/husky</a>.
+The latest Javadoc is published on <a href="https://project-husky.github.io/husky/">project-husky.github.io/husky</a> and the documentation is available in the [wiki](https://github.com/project-husky/husky/wiki).
 
 ## Installation
 
@@ -15,23 +22,13 @@ Supported profiles are
 
 | Profile             | Transaction          | Description                              |
 | ------------------- | -------------------- | ---------------------------------------- |
-| [ATNA](docs/ATNA.md)| ITI-20               | Send audit events                        |
-| [PDQ](docs/PDQ.md)  | ITI-47               | Query patient demographics               |
-| [PIX](docs/PIX.md)  | ITI-44, ITI-45       | Patient identity transactions            |
+| [PDQ](docs/PDQV3.md)  | ITI-47               | Query patient demographics               |
+| [PIX](docs/PIXV3.md)  | ITI-44, ITI-45       | Patient identity transactions            |
 | [PPQ](docs/PPQ.md)  | PPQ-1, PPQ-2         | Privacy Policy Queries                   |
 | [SVS](docs/SVS.md)  | ITI-48               | Retrieve value set                       |
 | [XDM](docs/XDM.md)  | ITI-32               | Exchange of documents via standard media |
 | [XDS](docs/XDS.md)  | ITI-18,ITI-41,ITI-43 | Exchange of documents                    |
 | [XUA](docs/XUA.md)  | ITI-40               | Provide identity assertions              |
-
-## eMed Module
-
-TODO: add documentation
-
-## CDA validation
-
-This project also supports validation of CDA documents using schema, schematron and PDF validation. Details on how to
-use this feature can be found [here](docs/CDA_Validation.md).
 
 ## Modules
 
@@ -42,19 +39,23 @@ use this feature can be found [here](docs/CDA_Validation.md).
     * `husky-communication`: Implementation of transactions with [IPF](https://github.com/oehf/ipf)
       and [Apache Camel](https://github.com/apache/camel).
         * `husky-communication-gen`: Generic transactions.
-        * `husky-communication-ch`: Swiss-specific transactions.
+        * [`husky-communication-ch`](https://github.com/project-husky/husky/wiki/Module:-husky-communication-ch): Swiss-specific transactions.
         * `husky-communication-ppq`: CH:PPQ (Privacy Policy Query) transactions.
         * `husky-communication-valueset-gen`: Models and client to retrieve value sets from ArtDecor (please note that
           Swiss value sets are usually transformed into enums and put in other modules).
         * `husky-communication-xua`: Models, generator, parser and validator of CH-EPR SAML2 Assertions (per IHE XUA
           profile).
+            * `husky-xua-ch-impl`:
+            * `husky-xua-gen-api`:
+            * `husky-xua-gen-impl`:
     * `husky-emed`: The eMedication parent module.
-        * `husky-emed-cda`: Models, digesters and aggregators of CDA-CH-EMED documents.
-        * `husky-emed-validation`: A validator of CDA-CH-EMED documents with the IHE Pharm XML Schema, the CDA-CH-EMED
-          Schematrons and the PDF/A validator.
-        * `husky-emed-narrative`: Generator of narrative text for CDA-CH-EMED documents, in StrucDocText or HTML/PDF
+        * `husky-emed-ch-common`: Common parts for the eMedication modules.
+        * `husky-emed-ch-cda`: Models, digesters and aggregators of CDA-CH-EMED documents.
+        * `husky-emed-ch-cda-narrative`: Generator of narrative text for CDA-CH-EMED documents, in StrucDocText or HTML/PDF
           with customizable templates.
-        * `husky-emed-conversion`: Not implemented yet. A conveniance API to convert documents between CDA-CH-EMED and
+        * [`husky-emed-ch-cda-validation`](https://github.com/project-husky/husky/wiki/Module:-husky-emed-ch-cda-validation): A validator of CDA-CH-EMED documents with the IHE Pharm XML Schema, the CDA-CH-EMED
+          Schematrons and the PDF/A validator.
+        * `husky-emed-ch-conversion`: Not implemented yet. A conveniance API to convert documents between CDA-CH-EMED and
           CH-EMED specifications.
     * `husky-fhir`: The FHIR parent module.
         * `husky-fhir-communication`: Helper for FHIR communication.
@@ -62,7 +63,7 @@ use this feature can be found [here](docs/CDA_Validation.md).
             * `husky-fhir-structures-gen`: Generic FHIR structures.
             * `husky-fhir-structures-ch`: Swiss FHIR structures.
     * `husky-validation`: The validation parent module.
-        * `husky-validation-service`: The module implements services to validate XML documents with XML Schemas and
+        * [`husky-validation-service`](https://github.com/project-husky/husky/wiki/Module:-husky-validation-service): The module implements services to validate XML documents with XML Schemas and
           Schematron, as well as PDF documents for the A-1 and A-2 conformance levels.
 
 ## License
@@ -71,7 +72,8 @@ This code is made available under the terms of the Eclipse Public License v1.0 i
 [github project](https://github.com/project-husky/husky). There, you also find a list of the contributors and the
 license information. This project has been developed further and modified by the joined working group Husky on the basis
 of the eHealth Connector opensource project from June 28, 2021, whereas medshare GmbH is the initial and main
-contributor/author of the eHealth Connector.
+contributor/author of the eHealth Connector. The final version of the eHealthConnector is available as a release in this
+project.
 
 All other accompanying materials are made available under the terms of the Creative Commons license
 Attribution-ShareAlike 3.0 Switzerland (CC BY-SA 3.0 CH)

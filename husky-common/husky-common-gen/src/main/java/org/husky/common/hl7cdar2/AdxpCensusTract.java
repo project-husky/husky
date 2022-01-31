@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "adxp.censusTract")
 public class AdxpCensusTract extends ADXP {
 
+    public AdxpCensusTract() {
+    }
+
+    public AdxpCensusTract(final String ed) {
+        super(ed);
+    }
 }

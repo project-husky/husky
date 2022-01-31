@@ -13,19 +13,14 @@
 		<dependency>
 			<groupId>org.husky.communication</groupId>
 			<artifactId>husky-xua-gen-impl</artifactId>
-			<version>2.0-ALPHA</version>
 		</dependency>
-		
-		
 		<dependency>
 			<groupId>org.husky.common</groupId>
 			<artifactId>husky-common-ch</artifactId>
-			<version>2.0-ALPHA</version>
 		</dependency>
 		<dependency>
 			<groupId>org.husky.communication</groupId>
 			<artifactId>husky-communication-ch</artifactId>
-			<version>2.0-ALPHA</version>
 		</dependency>
 
 		<dependency>
@@ -41,6 +36,11 @@
 
 
 		<!-- test stuff -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>

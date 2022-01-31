@@ -56,7 +56,7 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 	}
 
 	/**
-	 * Perfoms a PDQ Query (ITI-47)
+	 * Performs a PDQ Query (ITI-47)
 	 *
 	 * @param mpiQuery  the mpi query object
 	 * @param assertion a security header element for example an assertion
@@ -65,7 +65,7 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 	public V3PdqQueryResponse queryPatients(V3PdqQuery mpiQuery, SecurityHeaderElement assertion) {
 		final var queryResponse = new V3PdqQueryResponse();
 
-		/** The last pdq consumer response. */
+		/* The last pdq consumer response. */
 
 		try {
 			if (!mpiQuery.doCancelQuery()) {
@@ -101,7 +101,7 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 				final INT totalNumbers = response.getPdqResponse().getControlActProcess().getQueryAck()
 						.getResultTotalQuantity();
 				if (totalNumbers != null) {
-					queryResponse.setTotalNumbers(totalNumbers.getValue().intValue());
+					queryResponse.setTotalNumbers(totalNumbers.getValue());
 				}
 
 				mpiQuery.setLastPdqConsumerResponse(response);

@@ -244,7 +244,7 @@ public class XdsMetadataUtil {
 	/**
 	 * Converts an IPF Organization to husky Organization
 	 *
-	 * @param at the husky Organization
+	 * @param authorInstitutions the IPF Organization
 	 * @return the husky Organization
 	 */
 	public static Organization convertIpfOrganization(
@@ -425,7 +425,7 @@ public class XdsMetadataUtil {
 	/**
 	 * Converts an husky Organization to IPF Organization
 	 *
-	 * @param at the husky Organization
+	 * @param xon the husky Organization
 	 * @return the IPF Organization
 	 */
 	public static org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization convertXonToIpfOrganization(

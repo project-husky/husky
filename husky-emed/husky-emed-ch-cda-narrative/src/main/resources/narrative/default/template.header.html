@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>${title}</title>
+        <meta name="subject" content="${subject}" />
+        <meta name="author" content="${author}" />
+        <meta name="description" content="${description}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <style>
+            @page {
+                size: a4 landscape;
+                margin: 50px;
+                @top-left {
+                    content: counter(page);
+                    font-family: arimo;
+                }
+
+                @bottom-center {
+                    content: 'Page ' counter(page) ' sur ' counter(pages);
+                    font-family: arimo;
+                }
+                font-family: arimo;
+            }
+            body {
+                margin: 0;
+                font-family: arimo;
+            }
+        </style>
+    </head>
+    <body>

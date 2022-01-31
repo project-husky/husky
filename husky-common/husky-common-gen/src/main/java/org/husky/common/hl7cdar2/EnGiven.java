@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "en.given")
 public class EnGiven extends ENXP {
 
+    public EnGiven() {
+    }
+
+    public EnGiven(final String ed) {
+        super(ed);
+    }
 }

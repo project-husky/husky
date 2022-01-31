@@ -141,14 +141,7 @@ public class V3PdqConsumerQuery extends V3Message {
 	/**
 	 * Add an address to the patient.
 	 * 
-	 * @param addressStreetAddress
-	 * @param addressCity
-	 * @param addressCounty
-	 * @param addressState
-	 * @param addressCountry
-	 * @param addressZip
-	 * @param addressOtherDesignation
-	 * @param addressType
+	 * @param address
 	 */
 	public void addPatientAddress(Address address) {
 		queryParams += "Patient Address: " + address.getLine() + " " + address.getCity() + " " + address.getState()
@@ -452,8 +445,6 @@ public class V3PdqConsumerQuery extends V3Message {
 
 	/**
 	 * Set the processing code
-	 * 
-	 * @param processingCode
 	 */
 	@Override
 	protected void setProcessingCode() {

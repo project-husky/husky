@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "adxp.deliveryAddressLine")
 public class AdxpDeliveryAddressLine extends ADXP {
 
+    public AdxpDeliveryAddressLine() {
+    }
+
+    public AdxpDeliveryAddressLine(final String ed) {
+        super(ed);
+    }
 }

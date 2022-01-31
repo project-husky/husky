@@ -1,3 +1,12 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
 package org.husky.xua.validation;
 
 import static org.husky.common.ch.ChEpr.EPR_SPID_URN;
@@ -31,6 +40,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.QName;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -82,13 +92,13 @@ import net.shibboleth.utilities.java.support.component.ComponentInitializationEx
  *
  * @author Quentin Ligier
  */
+@ThreadSafe // The only thread-unsafe object seems to be the ValidationContext
 public class ChEprAssertionValidator {
 	
 	public static final String ERRMSG_ATTRIBUTE = "The attribute '";
 	public static final String ERRMSG_IS_MISSING = "' is missing";
 	public static final String NAMESPACE_GS1_GLN = "urn:gs1:gln";
 	public static final String ERRMSG_SUBJECT_CONFIRMATION_MISSING = "The SubjectConfirmation is missing";
-	
 
     /**
      * The SAML 2 {@link Assertion} validator implemented by OpenSAML and configured for the CH-EPR specifications.
@@ -103,10 +113,6 @@ public class ChEprAssertionValidator {
      * @throws ComponentInitializationException if the {@link ReplayCache} of the {@link OneTimeUseConditionValidator}
      *                                          fails to initialize.
      */
-    
-    /* development in progress */
-    @SuppressWarnings({"java:S1481","java:S1874"})  
-     
     public ChEprAssertionValidator(@Nullable final Duration oneTimeUseConditionExpires) throws ComponentInitializationException {
         final var conditionValidators = new ArrayList<ConditionValidator>();
         conditionValidators.add(new ChEprAudienceRestrictionConditionValidator());
@@ -144,7 +150,7 @@ public class ChEprAssertionValidator {
      */
     public ChEprValidationResult validate(final Assertion assertion,
                                           @Nullable final Map<String, @Nullable Object> staticParameters) throws AssertionValidationException {
-        Objects.requireNonNull(assertion);
+        Objects.requireNonNull(assertion, "assertion shall not be null in validate()");
 
         // Create a ValidationContext with some of our static parameters
         final Map<String, @Nullable Object> newStaticParameters;

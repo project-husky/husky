@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -116,6 +117,37 @@ public abstract class ANY {
     public List<String> getNullFlavor() {
         if (nullFlavor == null) {
             nullFlavor = new ArrayList<>();
+        }
+        return this.nullFlavor;
+    }
+
+    /**
+     * Gets the value of the nullFlavor property. If {@code replaceNullByEmptyList} is set to {@code true}, the property
+     * is set to a new list if it was {@code null}.
+     *
+     * <p>
+     * If {@code replaceNullByEmptyList} is set to {@code true}, this accessor method returns a reference to the live
+     * list, not a snapshot. Therefore any modification you make to the returned list will be present inside the JAXB
+     * object. This is why there is not a
+     * <CODE>set</CODE> method for the nullFlavor property.
+     *
+     * <p>
+     * For example, to add a new item, do as follows: <pre>
+     *    getNullFlavor().add(newItem);
+     * </pre>
+     *
+     *
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link String }
+     */
+    @NonNull
+    public List<String> getNullFlavor(final boolean replaceNullByEmptyList) {
+        if (nullFlavor == null) {
+            if (replaceNullByEmptyList) {
+                nullFlavor = new ArrayList<>();
+            } else {
+                return Collections.emptyList();
+            }
         }
         return this.nullFlavor;
     }

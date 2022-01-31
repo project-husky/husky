@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "adxp.postBox")
 public class AdxpPostBox extends ADXP {
 
+    public AdxpPostBox() {
+    }
+
+    public AdxpPostBox(final String ed) {
+        super(ed);
+    }
 }

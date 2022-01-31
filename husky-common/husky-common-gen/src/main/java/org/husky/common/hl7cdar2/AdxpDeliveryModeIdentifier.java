@@ -41,4 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "adxp.deliveryModeIdentifier")
 public class AdxpDeliveryModeIdentifier extends ADXP {
 
+    public AdxpDeliveryModeIdentifier() {
+    }
+
+    public AdxpDeliveryModeIdentifier(final String ed) {
+        super(ed);
+    }
 }
