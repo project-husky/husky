@@ -51,6 +51,7 @@
 		<module>husky-fhir</module>
 		<module>husky-common</module>
 		<module>husky-emed</module>
+		<module>husky-cda</module>
 	</modules>
 
 	<dependencyManagement>
