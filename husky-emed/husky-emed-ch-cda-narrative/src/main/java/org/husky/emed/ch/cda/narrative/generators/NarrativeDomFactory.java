@@ -12,7 +12,6 @@ package org.husky.emed.ch.cda.narrative.generators;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.utils.xml.XmlFactories;
-import org.husky.emed.ch.cda.narrative.enums.NarrativeLanguage;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -24,7 +23,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.StringWriter;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * husky
@@ -34,11 +32,6 @@ import java.util.Objects;
 public class NarrativeDomFactory {
 
     private static final String NS_HL7 = "urn:hl7-org:v3";
-
-    /**
-     * The language of the narrative to be generated.
-     */
-    private final NarrativeLanguage lang;
 
     /**
      * Whether the generated DOM is for HTML output ({@code true}) or StrucDocText ({@code false}).
@@ -53,13 +46,10 @@ public class NarrativeDomFactory {
     /**
      * Constructor.
      *
-     * @param lang   The generation language.
      * @param isHtml Whether the generated DOM is for HTML output ({@code true}) or StrucDocText ({@code false}).
      * @throws ParserConfigurationException if there's an issue creating the DOM {@link Document}.
      */
-    public NarrativeDomFactory(final NarrativeLanguage lang,
-                               final boolean isHtml) throws ParserConfigurationException {
-        this.lang = Objects.requireNonNull(lang);
+    public NarrativeDomFactory(final boolean isHtml) throws ParserConfigurationException {
         this.isHtml = isHtml;
 
         this.document = XmlFactories.newSafeDocumentBuilder().newDocument();

@@ -9,9 +9,10 @@
  */
 package org.husky.emed.ch.cda.narrative.pdf;
 
-import com.openhtmltopdf.extend.FSUriResolver;
 import com.openhtmltopdf.outputdevice.helper.BaseRendererBuilder;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
+import com.openhtmltopdf.slf4j.Slf4jLogger;
+import com.openhtmltopdf.util.XRLog;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -21,6 +22,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.function.Consumer;
 
 /**
  * The implementation of {@link HtmlToPdfAConverter} with the Open HTML to PDF converter library.
@@ -41,18 +43,16 @@ public class OpenHtmlToPdfAConverter implements HtmlToPdfAConverter {
     private String producerName = null;
 
     /**
-     * The URI resolver to
+     * A {@link Consumer} of {@link PdfRendererBuilder} to customize it before the PDF generation.
      */
     @Nullable
-    private FSUriResolver uriResolver;
+    private Consumer<PdfRendererBuilder> pdfRendererBuilderConsumer;
 
     /**
-     * Sets the producer name that will be included in generated PDF documents. Use {@code null} to disable.
-     *
-     * @param producerName The producer name or {@code null}.
+     * Constructor.
      */
-    public void setProducerName(@Nullable final String producerName) {
-        this.producerName = producerName;
+    public OpenHtmlToPdfAConverter() {
+        XRLog.setLoggerImpl(new Slf4jLogger());
     }
 
     /**
@@ -64,7 +64,16 @@ public class OpenHtmlToPdfAConverter implements HtmlToPdfAConverter {
     }
 
     /**
-     * Declares a new font. Fonts are embedded only when they are used by the converter.
+     * Sets the producer name that will be included in generated PDF documents. Use {@code null} to disable.
+     *
+     * @param producerName The producer name or {@code null}.
+     */
+    public void setProducerName(@Nullable final String producerName) {
+        this.producerName = producerName;
+    }
+
+    /**
+     * Declares a new font. Fonts are embedded in the PDF document only when they are used by the converter.
      *
      * @param family      The font family (name).
      * @param weight      The font CSS weight (100-900).
@@ -86,12 +95,12 @@ public class OpenHtmlToPdfAConverter implements HtmlToPdfAConverter {
     }
 
     @Nullable
-    public FSUriResolver getUriResolver() {
-        return uriResolver;
+    public Consumer<PdfRendererBuilder> getPdfRendererBuilderConsumer() {
+        return this.pdfRendererBuilderConsumer;
     }
 
-    public void setUriResolver(@Nullable final FSUriResolver uriResolver) {
-        this.uriResolver = uriResolver;
+    public void setPdfRendererBuilderConsumer(@Nullable final Consumer<PdfRendererBuilder> pdfRendererBuilderConsumer) {
+        this.pdfRendererBuilderConsumer = pdfRendererBuilderConsumer;
     }
 
     /**
@@ -102,7 +111,7 @@ public class OpenHtmlToPdfAConverter implements HtmlToPdfAConverter {
      */
     @Override
     @SuppressWarnings("java:S2093") // Cannot use try-with-resources with font input streams
-    public byte[] convert(String htmlContent) throws IOException {
+    public byte[] convert(final String htmlContent) throws IOException {
         final PdfRendererBuilder builder = new PdfRendererBuilder();
         if (this.producerName != null) {
             builder.withProducer(this.producerName);
@@ -111,8 +120,8 @@ public class OpenHtmlToPdfAConverter implements HtmlToPdfAConverter {
         builder.useFastMode();
         builder.usePdfAConformance(PdfRendererBuilder.PdfAConformance.PDFA_1_A);
         builder.usePdfUaAccessbility(false);
-        if (this.uriResolver != null) {
-            builder.useUriResolver(this.uriResolver);
+        if (this.pdfRendererBuilderConsumer != null) {
+            this.pdfRendererBuilderConsumer.accept(builder);
         }
 
         final List<InputStream> inputStreams = new ArrayList<>();
@@ -151,9 +160,9 @@ public class OpenHtmlToPdfAConverter implements HtmlToPdfAConverter {
     /**
      * Record of a font declaration.
      */
-    private record Font(String family,
-                        int weight,
-                        BaseRendererBuilder.FontStyle style,
-                        Callable<InputStream> inputStream) {
+    public record Font(String family,
+                       int weight,
+                       BaseRendererBuilder.FontStyle style,
+                       Callable<InputStream> inputStream) {
     }
 }
