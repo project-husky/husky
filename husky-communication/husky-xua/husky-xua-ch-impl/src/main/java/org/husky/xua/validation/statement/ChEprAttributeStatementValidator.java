@@ -81,6 +81,7 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 case OASIS_XACML_SUBJECTID -> this.validateSubjectId(attribute, context);
                 case OASIS_XACML_ORGANIZATIONID -> this.validateOrganizationsId(attribute, context, role);
                 case OASIS_XACML_ORGANISATION -> this.validateOrganizationsName(attribute, context, role);
+                case OASIS_XACML_ROLE -> ValidationResult.VALID; // It has been validated by ChEprAssertionValidator.validateRole
                 default -> ValidationResult.INDETERMINATE;
             };
 
