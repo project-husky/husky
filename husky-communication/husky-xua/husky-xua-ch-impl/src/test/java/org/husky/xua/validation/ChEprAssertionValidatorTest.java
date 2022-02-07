@@ -46,7 +46,7 @@ class ChEprAssertionValidatorTest {
     public static void setUpBeforeClass() throws Exception {
         // Initialize the library
         InitializationService.initialize();
-        VALIDATOR = new ChEprAssertionValidator(Duration.ofSeconds(3));
+        VALIDATOR = new ChEprAssertionValidator(Duration.ofSeconds(3), null);
         UNMARSHALLER = XMLObjectSupport.getUnmarshaller(Assertion.TYPE_NAME);
         VALIDATION_PARAMS.put(CLOCK_SKEW, Duration.ofDays(3650));
     }

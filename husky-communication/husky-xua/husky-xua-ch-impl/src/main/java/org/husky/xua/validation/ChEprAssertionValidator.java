@@ -9,40 +9,7 @@
  */
 package org.husky.xua.validation;
 
-import static org.husky.common.ch.ChEpr.EPR_SPID_URN;
-import static org.husky.xua.ChEprXuaSpecifications.DOCUMENT_ADMINISTRATOR_ID;
-import static org.husky.xua.ChEprXuaSpecifications.POLICY_ADMINISTRATOR_ID;
-import static org.husky.xua.ChEprXuaSpecifications.REPRESENTATIVE_ID;
-import static org.husky.xua.ChEprXuaSpecifications.TECHNICAL_USER_ID;
-import static org.husky.xua.communication.xua.XUserAssertionConstants.IHE_XCA_HOMECOMMUNITYID;
-import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_ORGANISATION;
-import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_ORGANIZATIONID;
-import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_PURPOSEOFUSE;
-import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_ROLE;
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ASSISTANT_GLN;
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ASSISTANT_NAME;
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_HOME_COMMUNITY_ID;
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ORGANIZATIONS_ID;
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ORGANIZATIONS_NAME;
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_PURPOSE_OF_USE;
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_RESPONSIBLE_SUBJECT_ID;
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ROLE;
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_TCU_ID;
-import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.CLOCK_SKEW;
-import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.SIGNATURE_REQUIRED;
-
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-
-import javax.annotation.concurrent.ThreadSafe;
-import javax.xml.namespace.QName;
-
+import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.communication.ch.enums.Role;
 import org.husky.xua.hl7v3.impl.AbstractImpl;
@@ -61,17 +28,23 @@ import org.opensaml.saml.saml2.assertion.ConditionValidator;
 import org.opensaml.saml.saml2.assertion.SAML20AssertionValidator;
 import org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters;
 import org.opensaml.saml.saml2.assertion.impl.OneTimeUseConditionValidator;
-import org.opensaml.saml.saml2.core.Assertion;
-import org.opensaml.saml.saml2.core.AttributeStatement;
-import org.opensaml.saml.saml2.core.NameIDType;
-import org.opensaml.saml.saml2.core.Subject;
+import org.opensaml.saml.saml2.core.*;
 import org.opensaml.saml.saml2.core.impl.AttributeValueImpl;
-import org.opensaml.security.credential.impl.CollectionCredentialResolver;
 import org.opensaml.storage.ReplayCache;
 import org.opensaml.storage.impl.MemoryStorageService;
-import org.opensaml.xmlsec.signature.support.impl.ExplicitKeySignatureTrustEngine;
+import org.opensaml.xmlsec.signature.support.SignatureTrustEngine;
 
-import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
+import javax.annotation.concurrent.ThreadSafe;
+import javax.xml.namespace.QName;
+import java.time.Duration;
+import java.util.*;
+
+import static org.husky.common.ch.ChEpr.EPR_SPID_URN;
+import static org.husky.xua.ChEprXuaSpecifications.*;
+import static org.husky.xua.communication.xua.XUserAssertionConstants.*;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.*;
+import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.CLOCK_SKEW;
+import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.SIGNATURE_REQUIRED;
 
 /**
  * A component capable of performing core validation of SAML version 2.0 {@link Assertion} instances in use in the
@@ -113,7 +86,8 @@ public class ChEprAssertionValidator {
      * @throws ComponentInitializationException if the {@link ReplayCache} of the {@link OneTimeUseConditionValidator}
      *                                          fails to initialize.
      */
-    public ChEprAssertionValidator(@Nullable final Duration oneTimeUseConditionExpires) throws ComponentInitializationException {
+    public ChEprAssertionValidator(@Nullable final Duration oneTimeUseConditionExpires,
+                                   final SignatureTrustEngine signatureTrustEngine) throws ComponentInitializationException {
         final var conditionValidators = new ArrayList<ConditionValidator>();
         conditionValidators.add(new ChEprAudienceRestrictionConditionValidator());
         conditionValidators.add(new ChEprDelegationRestrictionConditionValidator());
@@ -124,17 +98,17 @@ public class ChEprAssertionValidator {
             conditionValidators.add(new OneTimeUseConditionValidator(cache, oneTimeUseConditionExpires));
         }
 
-        final var trustEngine = new ExplicitKeySignatureTrustEngine(
+        /*final var trustEngine = new ExplicitKeySignatureTrustEngine( TODO
                 new CollectionCredentialResolver(),
                 new NoopKeyInfoCredentialResolver() // A KeyInfo element is not expected in the Signature
-        );
+        );*/
         
         this.validator = new SAML20AssertionValidator(
                 conditionValidators,
                 List.of(new ChEprSubjectConfirmationBearerValidator()),
                 List.of(new ChEprAttributeStatementValidator()),
                 null,
-                null, // TODO
+                signatureTrustEngine,
                 null // No signature pre-validation needed, CH-EPR does not add requirements
         );
     }
