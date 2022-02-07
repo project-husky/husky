@@ -10,8 +10,6 @@
 package org.husky.xua.validation.condition;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.communication.ch.enums.Role;
-import org.husky.xua.ChEprXuaSpecifications;
 import org.husky.common.utils.OptionalUtils;
 import org.husky.xua.validation.ChEprAssertionValidationParameters;
 import org.opensaml.saml.common.assertion.ValidationContext;
@@ -24,10 +22,9 @@ import org.opensaml.saml.saml2.core.Condition;
 
 import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.QName;
+import java.util.Optional;
 
 import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_AUDIENCE;
-
-import java.util.Optional;
 
 /**
  * Validator of the CH-EPR AudienceRestriction Condition.
@@ -62,18 +59,12 @@ public class ChEprAudienceRestrictionConditionValidator implements ConditionVali
         if (!(condition instanceof final AudienceRestriction audienceRestriction)) {
             return ValidationResult.INDETERMINATE;
         }
-        final Role role = (Role) context.getDynamicParameters().get(ChEprAssertionValidationParameters.CH_EPR_ROLE);
-        if (role != Role.ASSISTANT && role != Role.TECHNICAL_USER) {
-            context.setValidationFailureMessage("The AudienceRestriction Condition shall not appear for other " +
-                    "extensions than TCU and ASS");
-            return ValidationResult.INVALID;
-        }
 
         final var audienceUri = Optional.ofNullable(audienceRestriction.getAudiences())
                 .map(OptionalUtils::getListOnlyElement)
                 .map(Audience::getURI)
                 .orElse(null);
-        if (!ChEprXuaSpecifications.AUDIENCE_ALL_COMMUNITIES.equals(audienceUri)) {
+        if (audienceUri == null) {
             context.setValidationFailureMessage("The AudienceRestriction Condition doesn't contain a valid " +
                     "URI");
             return ValidationResult.INVALID;
