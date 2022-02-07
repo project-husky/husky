@@ -167,6 +167,11 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
             medicationTableRows.add(narDom.tr(cells));
             ++i;
         }
+        if (medicationTableRows.isEmpty()) {
+            final var td = narDom.td(narDom.em("Il n'y a pas de traitement actif"), "no-treatment");
+            td.setAttribute("colspan", "8");
+            medicationTableRows.add(narDom.tr(td));
+        }
         root.appendChild(this.createMedicationTable(narDom, medicationTableRows, lang));
 
         // Medication details
