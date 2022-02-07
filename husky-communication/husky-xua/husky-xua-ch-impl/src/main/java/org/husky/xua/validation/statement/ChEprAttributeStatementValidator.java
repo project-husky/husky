@@ -218,7 +218,10 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
     ValidationResult validateOrganizationsId(final Attribute attribute,
                                              final ValidationContext context,
                                              final Role role) {
-        final var shallBeEmpty = role == POLICY_ADMINISTRATOR || role == DOCUMENT_ADMINISTRATOR;
+        final var shallBeEmpty = role == POLICY_ADMINISTRATOR
+                || role == DOCUMENT_ADMINISTRATOR
+                || role == PATIENT
+                || role == REPRESENTATIVE;
         final var organizationId = Optional.ofNullable(attribute.getAttributeValues())
                 .map(OptionalUtils::getListOnlyElement)
                 .map(xmlObject -> OptionalUtils.castOrNull(xmlObject, XSString.class))
@@ -254,7 +257,10 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
     ValidationResult validateOrganizationsName(final Attribute attribute,
                                                final ValidationContext context,
                                                final Role role) {
-        final var shallBeEmpty = role == POLICY_ADMINISTRATOR || role == DOCUMENT_ADMINISTRATOR;
+        final var shallBeEmpty = role == POLICY_ADMINISTRATOR
+                || role == DOCUMENT_ADMINISTRATOR
+                || role == PATIENT
+                || role == REPRESENTATIVE;
         final var organizationName = Optional.ofNullable(attribute.getAttributeValues())
                 .map(OptionalUtils::getListOnlyElement)
                 .map(xmlObject -> OptionalUtils.castOrNull(xmlObject, XSString.class))
