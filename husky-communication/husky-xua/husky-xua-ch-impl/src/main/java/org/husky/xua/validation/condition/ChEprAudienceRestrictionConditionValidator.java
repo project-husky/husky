@@ -12,6 +12,7 @@ package org.husky.xua.validation.condition;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.communication.ch.enums.Role;
 import org.husky.xua.ChEprXuaSpecifications;
+import org.husky.common.utils.OptionalUtils;
 import org.husky.xua.validation.ChEprAssertionValidationParameters;
 import org.opensaml.saml.common.assertion.ValidationContext;
 import org.opensaml.saml.common.assertion.ValidationResult;
@@ -69,8 +70,7 @@ public class ChEprAudienceRestrictionConditionValidator implements ConditionVali
         }
 
         final var audienceUri = Optional.ofNullable(audienceRestriction.getAudiences())
-                .filter(l -> l.size() == 1)
-                .map(l -> l.get(0))
+                .map(OptionalUtils::getListOnlyElement)
                 .map(Audience::getURI)
                 .orElse(null);
         if (!ChEprXuaSpecifications.AUDIENCE_ALL_COMMUNITIES.equals(audienceUri)) {

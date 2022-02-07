@@ -10,6 +10,7 @@
 package org.husky.xua.validation.condition;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.husky.common.utils.OptionalUtils;
 import org.husky.communication.ch.enums.Role;
 import org.husky.xua.validation.ChEprAssertionValidationParameters;
 import org.opensaml.saml.common.assertion.ValidationContext;
@@ -68,8 +69,7 @@ public class ChEprDelegationRestrictionConditionValidator implements ConditionVa
         }
 
         final var nameId = Optional.ofNullable(delegationRestriction.getDelegates())
-                .filter(l -> l.size() == 1)
-                .map(l -> l.get(0))
+                .map(OptionalUtils::getListOnlyElement)
                 .map(Delegate::getNameID)
                 .filter(n -> NameIDType.PERSISTENT.equals(n.getFormat()))
                 .orElse(null);

@@ -11,6 +11,7 @@ package org.husky.xua.validation;
 
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.husky.common.utils.OptionalUtils;
 import org.husky.communication.ch.enums.Role;
 import org.husky.xua.hl7v3.impl.AbstractImpl;
 import org.husky.xua.hl7v3.impl.CodedWithEquivalentImpl;
@@ -172,8 +173,7 @@ public class ChEprAssertionValidator {
     private ValidationResult validateRole(final Assertion assertion,
                                           final ValidationContext context) {
         final var roleAttribute = Optional.ofNullable(assertion.getAttributeStatements())
-                .filter(l -> l.size() == 1)
-                .map(l -> l.get(0))
+                .map(OptionalUtils::getListOnlyElement)
                 .map(AttributeStatement::getAttributes)
                 .orElse(Collections.emptyList())
                 .stream()
@@ -185,14 +185,11 @@ public class ChEprAssertionValidator {
             return ValidationResult.INVALID;
         }
         var role = Optional.ofNullable(roleAttribute.getAttributeValues())
-                .filter(l -> l.size() == 1)
-                .map(l -> l.get(0))
-                .filter(AttributeValueImpl.class::isInstance)
-                .map(AttributeValueImpl.class::cast)
+                .map(OptionalUtils::getListOnlyElement)
+                .map(xmlObject -> OptionalUtils.castOrNull(xmlObject, AttributeValueImpl.class))
                 .map(attributeValue -> attributeValue.getUnknownXMLObjects(new QName("urn:hl7-org:v3", "Role")))
-                .filter(l -> l.size() == 1)
-                .map(l -> l.get(0))
-				.filter(CodedWithEquivalentImpl.class::isInstance).map(CodedWithEquivalentImpl.class::cast)
+                .map(OptionalUtils::getListOnlyElement)
+                .map(xmlObject -> OptionalUtils.castOrNull(xmlObject, CodedWithEquivalentImpl.class))
                 .filter(r -> "2.16.756.5.30.1.127.3.10.6".equals(r.getCodeSystem()))
                 .map(AbstractImpl::getCode)
                 .map(Role::getEnum)
@@ -211,8 +208,7 @@ public class ChEprAssertionValidator {
                     continue;
                 }
                 final var nameQualifier = Optional.ofNullable(delegationRestriction.getDelegates())
-                        .filter(l -> l.size() == 1)
-                        .map(l -> l.get(0))
+                        .map(OptionalUtils::getListOnlyElement)
                         .map(Delegate::getNameID)
                         .filter(n -> NameIDType.PERSISTENT.equals(n.getFormat()))
                         .map(NameIDType::getNameQualifier)
