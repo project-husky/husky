@@ -108,9 +108,9 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 .map(OptionalUtils::getListOnlyElement)
                 .map(xmlObject -> OptionalUtils.castOrNull(xmlObject, AttributeValueImpl.class))
                 .map(attributeValue -> attributeValue.getUnknownXMLObjects(new QName("urn:hl7-org:v3", "PurposeOfUse")))
-                .filter(p -> PurposeOfUse.VALUE_SET_ID.equals(p.getCodeSystem()))
                 .map(OptionalUtils::getListOnlyElement)
                 .map(xmlObject -> OptionalUtils.castOrNull(xmlObject, CodedWithEquivalentImpl.class))
+                .filter(p -> PurposeOfUse.CODE_SYSTEM_ID.equals(p.getCodeSystem()))
                 .map(AbstractImpl::getCode)
                 .map(PurposeOfUse::getEnum)
                 .orElse(null);
