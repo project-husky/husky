@@ -229,6 +229,7 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 .orElse(null);
         if (organizationId == null) {
             if (shallBeEmpty) {
+                context.getDynamicParameters().computeIfAbsent(CH_EPR_ORGANIZATIONS_ID, key -> new ArrayList<String>());
                 return ValidationResult.VALID;
             } else {
                 context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANIZATIONID + ERRMSG_CONTAINS_INVALID_VALUE);
@@ -268,6 +269,7 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 .orElse(null);
         if (organizationName == null) {
             if (shallBeEmpty) {
+                context.getDynamicParameters().computeIfAbsent(CH_EPR_ORGANIZATIONS_NAME, key -> new ArrayList<String>());
                 return ValidationResult.VALID;
             } else {
                 context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANISATION + ERRMSG_CONTAINS_INVALID_VALUE);
