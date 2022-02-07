@@ -10,7 +10,9 @@
 package org.husky.cda.ems.generated.artdecor;
 
 import javax.annotation.processing.Generated;
-import org.husky.common.hl7cdar2.ObjectFactory;
+import javax.xml.bind.annotation.XmlElement;
+
+import org.husky.cda.ems.models.EpimsPatientRole;
 import org.husky.common.hl7cdar2.POCDMT000040RecordTarget;
 
 /**
@@ -25,10 +27,13 @@ import org.husky.common.hl7cdar2.POCDMT000040RecordTarget;
 @Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-02-01")
 public class EpimsHeaderRecordTarget extends POCDMT000040RecordTarget {
 
+	@XmlElement(name = "patientRole", namespace = "urn:hl7-org:v3")
+	protected EpimsPatientRole patientRole;
+
     public EpimsHeaderRecordTarget() {
         super.getTypeCode().add("RCT");
         super.setContextControlCode("OP");
-        super.setPatientRole(createHl7PatientRoleFixedValue("PAT"));
+		setPatientRole(createHl7PatientRoleFixedValue("PAT"));
     }
 
     /**
@@ -36,9 +41,8 @@ public class EpimsHeaderRecordTarget extends POCDMT000040RecordTarget {
      *
      * @param classCode the desired fixed value for this argument.
      */
-    private static org.husky.common.hl7cdar2.POCDMT000040PatientRole createHl7PatientRoleFixedValue(String classCode) {
-        ObjectFactory factory = new ObjectFactory();
-        org.husky.common.hl7cdar2.POCDMT000040PatientRole retVal = factory.createPOCDMT000040PatientRole();
+	private static EpimsPatientRole createHl7PatientRoleFixedValue(String classCode) {
+		EpimsPatientRole retVal = new EpimsPatientRole();
         retVal.getClassCode().add(classCode);
         return retVal;
     }
@@ -46,14 +50,14 @@ public class EpimsHeaderRecordTarget extends POCDMT000040RecordTarget {
     /**
      * Gets the hl7PatientRole
      */
-    public org.husky.common.hl7cdar2.POCDMT000040PatientRole getHl7PatientRole() {
-        return patientRole;
+	public EpimsPatientRole getPatientRole() {
+		return patientRole;
     }
 
     /**
      * Sets the hl7PatientRole
      */
-    public void setHl7PatientRole(org.husky.common.hl7cdar2.POCDMT000040PatientRole value) {
-        this.patientRole = value;
+	public void setPatientRole(EpimsPatientRole value) {
+		this.patientRole = value;
     }
 }

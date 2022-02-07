@@ -9,10 +9,12 @@
  */
 package org.husky.cda.ems.generated.artdecor;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.processing.Generated;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.husky.common.hl7cdar2.CS;
@@ -33,6 +35,9 @@ import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
 @XmlRootElement(name = "ClinicalDocument", namespace = "urn:hl7-org:v3")
 @Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-02-01")
 public class EpimsDocumentArztmeldung extends POCDMT000040ClinicalDocument {
+
+	@XmlElement(name = "recordTarget", namespace = "urn:hl7-org:v3")
+	protected List<EpimsHeaderRecordTarget> recordTarget;
 
     public EpimsDocumentArztmeldung() {
         super.setClassCode(org.husky.common.hl7cdar2.ActClinicalDocument.DOCCLIN);
@@ -199,8 +204,11 @@ public class EpimsDocumentArztmeldung extends POCDMT000040ClinicalDocument {
     /**
      * Gets the hl7RecordTarget
      */
-    public List<org.husky.common.hl7cdar2.POCDMT000040RecordTarget> getHl7RecordTarget() {
-        return recordTarget;
+	public List<EpimsHeaderRecordTarget> getHl7RecordTarget() {
+		if (recordTarget == null) {
+			recordTarget = new LinkedList<>();
+		}
+		return recordTarget;
     }
 
     /**
@@ -388,9 +396,9 @@ public class EpimsDocumentArztmeldung extends POCDMT000040ClinicalDocument {
     /**
      * Sets the hl7RecordTarget
      */
-    public void setHl7RecordTarget(org.husky.common.hl7cdar2.POCDMT000040RecordTarget value) {
-        getRecordTarget().clear();
-        getRecordTarget().add(value);
+	public void setHl7RecordTarget(EpimsHeaderRecordTarget value) {
+		getHl7RecordTarget().clear();
+		getHl7RecordTarget().add(value);
     }
 
     /**

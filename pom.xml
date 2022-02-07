@@ -546,6 +546,11 @@
 				<version>${husky.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>org.husky.common</groupId>
+				<artifactId>husky-common-at</artifactId>
+				<version>${husky.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>org.husky.validation.service</groupId>
 				<artifactId>husky-validation-service</artifactId>
 				<version>${husky.version}</version>

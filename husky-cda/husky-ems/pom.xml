@@ -11,7 +11,7 @@
       <!-- Own dependencies -->
 		<dependency>
 			<groupId>org.husky.common</groupId>
-			<artifactId>husky-common-ch</artifactId>
+			<artifactId>husky-common-at</artifactId>
 		</dependency>
   </dependencies>
 </project>
