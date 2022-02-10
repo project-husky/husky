@@ -11,9 +11,7 @@ package org.husky.emed.ch.models.entry;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.ch.enums.ActSubstanceAdminSubstitutionCode;
 import org.husky.emed.ch.enums.EmedEntryType;
 import org.husky.emed.ch.enums.RouteOfAdministrationEdqm;
 import org.husky.emed.ch.models.common.AuthorDigest;
@@ -22,8 +20,6 @@ import org.husky.emed.ch.models.common.MedicationDosageInstructions;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -34,11 +30,6 @@ import java.util.Objects;
 @Getter
 @Setter
 public class EmedMtpEntryDigest extends EmedEntryDigest {
-
-    /**
-     * The list of substance substitution permissions.
-     */
-    private final List<@NonNull ActSubstanceAdminSubstitutionCode> substitutionPermissions = new ArrayList<>();
 
     /**
      * The dosage instructions.
@@ -94,6 +85,11 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
     private Instant serviceStopTime;
 
     /**
+     * Whether the substitution is permitted (Equivalent) or not (None).
+     */
+    private boolean substitutionPermitted;
+
+    /**
      * The treatment reason or {@code null} if it isn't provided.
      */
     @Nullable
@@ -122,8 +118,7 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
      * @param serviceStartTime              The inclusive instant at which the item shall start.
      * @param serviceStopTime               The inclusive instant at which the item shall stop or {@code null} if it's
      *                                      unknown.
-     * @param substitutionPermissions       The list of substance substitution permissions or {@code null} if it's not
-     *                                      specified.
+     * @param substitutionPermitted         Whether the substitution is permitted (Equivalent) or not (None).
      * @param originalMtpReference          The reference to the original MTP entry if this one is consolidated.
      * @param treatmentReason               The treatment reason or {@code null} if it isn't provided.
      * @param patientMedicationInstructions The patient medication instructions or {@code null} if it isn't provided.
@@ -143,7 +138,7 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
                               @Nullable final RouteOfAdministrationEdqm routeOfAdministration,
                               final Instant serviceStartTime,
                               @Nullable final Instant serviceStopTime,
-                              @Nullable final List<@NonNull ActSubstanceAdminSubstitutionCode> substitutionPermissions,
+                              final boolean substitutionPermitted,
                               @Nullable final EmedReference originalMtpReference,
                               @Nullable final String treatmentReason,
                               @Nullable final String patientMedicationInstructions,
@@ -156,9 +151,7 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
         this.repeatNumber = repeatNumber;
         this.serviceStartTime = Objects.requireNonNull(serviceStartTime);
         this.serviceStopTime = serviceStopTime;
-        if (substitutionPermissions != null) {
-            this.substitutionPermissions.addAll(substitutionPermissions);
-        }
+        this.substitutionPermitted = substitutionPermitted;
         this.originalMtpReference = originalMtpReference;
         this.treatmentReason = treatmentReason;
         this.patientMedicationInstructions = patientMedicationInstructions;
@@ -192,7 +185,7 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
                 ", medicationTreatmentId='" + medicationTreatmentId + '\'' +
                 ", sequence=" + sequence +
                 ", annotationComment='" + annotationComment + '\'' +
-                ", substitutionPermissions=" + substitutionPermissions +
+                ", substitutionPermitted=" + substitutionPermitted +
                 ", dosageInstructions=" + dosageInstructions +
                 ", product=" + product +
                 ", repeatNumber=" + repeatNumber +

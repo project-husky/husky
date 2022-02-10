@@ -63,19 +63,21 @@ public class SubAdmEntryReader extends DosageInstructionsReader {
     }
 
     /**
-     * Returns the list of substance substitution acts.
+     * Returns whether the substitution is authorized (Equivalent, by default) or forbidden (None).
      */
-    public List<ActSubstanceAdminSubstitutionCode> getSubstitutionPermissions() {
+    public boolean isSubstitutionPermitted() {
         return this.subAdm.getEntryRelationship().stream()
             .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.COMP)
             .map(POCDMT000040EntryRelationship::getAct)
             .filter(Objects::nonNull)
             .filter(act -> TemplateIds.isInList(SUBSTITUTION_PERMISSION, act.getTemplateId()))
             .filter(act -> act.getCode() != null)
-            .filter(act -> ActSubstanceAdminSubstitutionCode.NONE_L1.getCodeSystemId().equals(act.getCode().getCodeSystem()))
+            .filter(act -> ActSubstanceAdminSubstitutionCode.CODE_SYSTEM_ID.equals(act.getCode().getCodeSystem()))
+            .findAny()
             .map(act -> act.getCode().getCode())
             .map(ActSubstanceAdminSubstitutionCode::getEnum)
-            .toList();
+            .map(substitution -> substitution == ActSubstanceAdminSubstitutionCode.EQUIVALENT_L1)
+            .orElse(true);
     }
 
     /**

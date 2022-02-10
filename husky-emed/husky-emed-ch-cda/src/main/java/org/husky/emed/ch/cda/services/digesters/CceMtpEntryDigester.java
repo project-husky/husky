@@ -82,7 +82,7 @@ public class CceMtpEntryDigester {
                 mtpEntry.getRouteOfAdministration().orElse(null),
                 this.getMtpStartTime(mtpEntry, mtpDocumentEffectiveTime),
                 this.getMtpStopTime(mtpEntry),
-                mtpEntry.getSubstitutionPermissions(),
+                mtpEntry.isSubstitutionPermitted(),
                 this.getReferenceToOriginalMtpEntry(substanceAdministration).orElse(null),
                 mtpEntry.getTreatmentReason().orElse(null),
                 mtpEntry.getPatientMedicationInstructions().orElse(null),

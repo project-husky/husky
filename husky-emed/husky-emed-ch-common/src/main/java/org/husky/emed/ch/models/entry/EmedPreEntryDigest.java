@@ -11,9 +11,7 @@ package org.husky.emed.ch.models.entry;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.ch.enums.ActSubstanceAdminSubstitutionCode;
 import org.husky.emed.ch.enums.EmedEntryType;
 import org.husky.emed.ch.enums.RouteOfAdministrationEdqm;
 import org.husky.emed.ch.models.common.AuthorDigest;
@@ -23,8 +21,6 @@ import org.husky.emed.ch.models.common.RenewalInterval;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -35,11 +31,6 @@ import java.util.Objects;
 @Getter
 @Setter
 public class EmedPreEntryDigest extends EmedEntryDigest {
-
-    /**
-     * The list of substance substitution permissions.
-     */
-    private final List<@NonNull ActSubstanceAdminSubstitutionCode> substitutionPermissions = new ArrayList<>();
 
     /**
      * The dosage instructions.
@@ -117,6 +108,11 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
     private RouteOfAdministrationEdqm routeOfAdministration;
 
     /**
+     * Whether the substitution is permitted (Equivalent) or not (None).
+     */
+    private boolean substitutionPermitted;
+
+    /**
      * The treatment reason or {@code null} if it isn't provided.
      */
     @Nullable
@@ -152,8 +148,7 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
      * @param renewalPeriod                 The renewal period or {@code null} if it's not specified.
      * @param mtpReference                  The reference to the MTP entry, if any.
      * @param provisional                   Whether this prescription item is provisional or not.
-     * @param substitutionPermissions       The list of substance substitution permissions or {@code null} if it's not
-     *                                      specified.
+     * @param substitutionPermitted         Whether the substitution is permitted (Equivalent) or not (None).
      * @param treatmentReason               The treatment reason or {@code null} if it isn't provided.
      * @param patientMedicationInstructions The patient medication instructions or {@code null} if it isn't provided.
      * @param fulfilmentInstructions        The fulfilment instructions or {@code null} if it isn't provided.
@@ -177,7 +172,7 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
                               @Nullable final RenewalInterval renewalPeriod,
                               @Nullable final EmedReference mtpReference,
                               final boolean provisional,
-                              @Nullable final List<@NonNull ActSubstanceAdminSubstitutionCode> substitutionPermissions,
+                              final boolean substitutionPermitted,
                               @Nullable final String treatmentReason,
                               @Nullable final String patientMedicationInstructions,
                               @Nullable final String fulfilmentInstructions) {
@@ -194,9 +189,7 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
         this.renewalPeriod = renewalPeriod;
         this.mtpReference = mtpReference;
         this.provisional = provisional;
-        if (substitutionPermissions != null) {
-            this.substitutionPermissions.addAll(substitutionPermissions);
-        }
+        this.substitutionPermitted = substitutionPermitted;
         this.treatmentReason = treatmentReason;
         this.patientMedicationInstructions = patientMedicationInstructions;
         this.fulfilmentInstructions = fulfilmentInstructions;
@@ -220,7 +213,7 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
                 ", medicationTreatmentId='" + medicationTreatmentId + '\'' +
                 ", sequence=" + sequence +
                 ", annotationComment='" + annotationComment + '\'' +
-                ", substitutionPermissions=" + substitutionPermissions +
+                ", substitutionPermitted=" + substitutionPermitted +
                 ", dosageInstructions=" + dosageInstructions +
                 ", product=" + product +
                 ", repeatNumber=" + repeatNumber +

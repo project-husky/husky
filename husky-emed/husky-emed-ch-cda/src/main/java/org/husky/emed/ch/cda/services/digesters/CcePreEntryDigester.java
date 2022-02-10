@@ -123,7 +123,7 @@ public class CcePreEntryDigester {
                 this.getRenewalInterval(substanceAdministration).orElse(null),
                 this.getTargetedMtpReference(substanceAdministration).orElse(null),
                 this.isProvisional(substanceAdministration),
-                preEntry.getSubstitutionPermissions(),
+                preEntry.isSubstitutionPermitted(),
                 preEntry.getTreatmentReason().orElse(null),
                 preEntry.getPatientMedicationInstructions().orElse(null),
                 preEntry.getFulfillmentInstructions().orElse(null)
