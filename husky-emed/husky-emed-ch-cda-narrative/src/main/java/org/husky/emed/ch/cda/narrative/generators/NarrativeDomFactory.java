@@ -133,21 +133,33 @@ public class NarrativeDomFactory {
         return this.element("br", "br");
     }
 
-    public Element title1(@Nullable final Object content) {
+    public Element title1(@Nullable final Object content,
+                          @Nullable final String id) {
         final var title = this.element("h1", "content");
         this.setNodeContent(title, content);
+        if (id != null) {
+            title.setAttribute("id", id);
+        }
         return title;
     }
 
-    public Element title2(@Nullable final Object content) {
+    public Element title2(@Nullable final Object content,
+                          @Nullable final String id) {
         final var title = this.element("h2", "content");
         this.setNodeContent(title, content);
+        if (id != null) {
+            title.setAttribute("id", id);
+        }
         return title;
     }
 
-    public Element title3(@Nullable final Object content) {
+    public Element title3(@Nullable final Object content,
+                          @Nullable final String id) {
         final var title = this.element("h3", "content");
         this.setNodeContent(title, content);
+        if (id != null) {
+            title.setAttribute("id", id);
+        }
         return title;
     }
 

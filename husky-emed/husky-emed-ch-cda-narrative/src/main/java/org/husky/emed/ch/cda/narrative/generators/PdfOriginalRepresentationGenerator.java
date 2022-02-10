@@ -139,7 +139,7 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
         final var root = narDom.getDocument().getDocumentElement();
 
         // Document title
-        root.appendChild(narDom.title1(variables.getOrDefault("title", "Carte de médication")));
+        root.appendChild(narDom.title1(variables.getOrDefault("title", "Carte de médication"), "title"));
 
         // Medication table
         final var medicationTableRows = new ArrayList<Element>();
@@ -182,40 +182,38 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
             hr.setAttribute("id", "entry-" + i);
             root.appendChild(hr);
 
-            final var title2 = narDom.title2(List.of(
+            root.appendChild(narDom.title2(List.of(
                     narDom.span(i, "n"),
                     this.formatMedicationName(narDom, entry.getProduct(), lang)
-            ));
-            title2.setAttribute("id", "med_" + i);
-            root.appendChild(title2);
+            ), "med_" + i));
 
             // Last author
             root.appendChild(narDom.div(List.of(
-                    narDom.title3("Dernier intervenant"),
+                    narDom.title3("Dernier intervenant", null),
                     narDom.p(this.formatAuthorName(narDom, entry.getSectionAuthor(), lang))
             ), "narrative last_author"));
 
             if (entry.getTreatmentReason() != null) {
                 root.appendChild(narDom.div(List.of(
-                        narDom.title3("Raison du traitement"),
+                        narDom.title3("Raison du traitement", null),
                         narDom.p(StringEscapeUtils.escapeXml11(entry.getTreatmentReason()))
                 ), "narrative treatment_reason"));
             }
             if (entry.getAnnotationComment() != null) {
                 root.appendChild(narDom.div(List.of(
-                        narDom.title3("Commentaire"),
+                        narDom.title3("Commentaire", null),
                         narDom.p(StringEscapeUtils.escapeXml11(entry.getAnnotationComment()))
                 ), "narrative annotation_comment"));
             }
             if (entry.getPatientMedicationInstructions() != null) {
                 root.appendChild(narDom.div(List.of(
-                        narDom.title3("Instructions de médication"),
+                        narDom.title3("Instructions de médication", null),
                         narDom.p(StringEscapeUtils.escapeXml11(entry.getPatientMedicationInstructions()))
                 ), "narrative medication_instructions"));
             }
             if (entry.getFulfilmentInstructions() != null) {
                 root.appendChild(narDom.div(List.of(
-                        narDom.title3("Instructions de fulfilment"),
+                        narDom.title3("Instructions de fulfilment", null),
                         narDom.p(StringEscapeUtils.escapeXml11(entry.getFulfilmentInstructions()))
                 ), "narrative fulfilment_instructions"));
             }
@@ -225,7 +223,7 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
 
         root.appendChild(narDom.getDocument().createElement("hr"));
         root.appendChild(narDom.div(List.of(
-                narDom.title3("Auteur du document"),
+                narDom.title3("Auteur du document", "document_author"),
                 narDom.p(this.formatAuthorName(narDom, digest.getAuthors().get(0), lang))
         ), "narrative document_author"));
 
