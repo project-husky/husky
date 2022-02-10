@@ -12,7 +12,6 @@ package org.husky.emed.ch.models.entry;
 import lombok.Getter;
 import lombok.Setter;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.ch.enums.ActSubstanceAdminSubstitutionCode;
 import org.husky.emed.ch.enums.DispenseSupplyType;
 import org.husky.emed.ch.enums.EmedEntryType;
 import org.husky.emed.ch.models.common.AuthorDigest;
@@ -78,12 +77,6 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
     private Quantity quantity;
 
     /**
-     * The substitution act or {@code null} if it's not given.
-     */
-    @Nullable
-    private ActSubstanceAdminSubstitutionCode substitutionAct;
-
-    /**
      * Constructor.
      *
      * @param creationTime                  The instant at which the item entry was created.
@@ -104,7 +97,6 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
      *                                      dispense.
      * @param product                       The dispensed medication product.
      * @param quantity                      The dispensed medication quantity.
-     * @param substitutionAct               The substitution act or {@code null} if it's not given.
      * @param patientMedicationInstructions The patient medication instructions or {@code null} if it isn't provided.
      * @param fulfilmentNotes               The fulfilment notes or {@code null} if it isn't provided.
      */
@@ -122,7 +114,6 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
                               @Nullable final EmedReference preEntryRef,
                               final MedicationProduct product,
                               final Quantity quantity,
-                              @Nullable final ActSubstanceAdminSubstitutionCode substitutionAct,
                               @Nullable final String patientMedicationInstructions,
                               @Nullable final String fulfilmentNotes) {
         super(creationTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
@@ -133,7 +124,6 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
         this.preEntryRef = preEntryRef;
         this.product = Objects.requireNonNull(product);
         this.quantity = Objects.requireNonNull(quantity);
-        this.substitutionAct = substitutionAct;
         this.patientMedicationInstructions = patientMedicationInstructions;
         this.fulfilmentNotes = fulfilmentNotes;
     }

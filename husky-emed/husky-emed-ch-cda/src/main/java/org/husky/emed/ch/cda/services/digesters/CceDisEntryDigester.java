@@ -20,7 +20,6 @@ import org.husky.emed.ch.cda.utils.CdaR2Utils;
 import org.husky.emed.ch.cda.utils.EntryRelationshipUtils;
 import org.husky.emed.ch.cda.utils.IiUtils;
 import org.husky.emed.ch.cda.utils.TemplateIds;
-import org.husky.emed.ch.enums.ActSubstanceAdminSubstitutionCode;
 import org.husky.emed.ch.enums.DispenseSupplyType;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.models.common.AuthorDigest;
@@ -129,7 +128,6 @@ public class CceDisEntryDigester {
                 refPreEntry,
                 this.getMedicationProduct(supply),
                 this.getQuantity(supply),
-                this.getSubstitutionAct(supply).orElse(null),
                 this.getPatientMedicationInstructions(supply).orElse(null),
                 this.getFulfilmentNotes(supply).orElse(null)
         );
@@ -161,25 +159,6 @@ public class CceDisEntryDigester {
                 .findFirst()
                 .map(POCDMT000040Act::getText)
                 .map(ED::getTextContent);
-    }
-
-    /**
-     * Returns the substitution act.
-     *
-     * @param supply The dispense entry Supply.
-     * @return an {@link Optional} that may contain the substitution act.
-     */
-    private Optional<ActSubstanceAdminSubstitutionCode> getSubstitutionAct(final POCDMT000040Supply supply) {
-        return supply.getEntryRelationship().stream()
-                .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.COMP)
-                .map(POCDMT000040EntryRelationship::getAct)
-                .filter(Objects::nonNull)
-                .filter(act -> isInList(SUBSTITUTION_ACT, act.getTemplateId()))
-                .filter(act -> act.getCode() != null)
-                .filter(act -> ActSubstanceAdminSubstitutionCode.NONE_L1.getCodeSystemId().equals(act.getCode().getCodeSystem()))
-                .findAny()
-                .map(act -> act.getCode().getCode())
-                .map(ActSubstanceAdminSubstitutionCode::getEnum);
     }
 
     /**
