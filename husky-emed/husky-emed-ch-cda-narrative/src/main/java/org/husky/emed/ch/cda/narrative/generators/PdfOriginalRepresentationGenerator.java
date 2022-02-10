@@ -120,11 +120,12 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
 
         if (variables == null) {
             variables = new HashMap<>(64);
-            variables.put("title", "Carte de médication");
-            variables.put("subject", "");
-            variables.put("author", this.author);
-            variables.put("description", "");
         }
+        variables.putIfAbsent("title", "Carte de médication");
+        variables.putIfAbsent("subject", "");
+        variables.putIfAbsent("author", this.author);
+        variables.putIfAbsent("description", "");
+        variables.putIfAbsent("lang", lang.getLanguageCode().getCodeValue());
         if (templateHeader == null) {
             try (final var is = this.getResourceAsStream("/narrative/default/template.header.html")) {
                 templateHeader = new String(is.readAllBytes(), StandardCharsets.UTF_8);
