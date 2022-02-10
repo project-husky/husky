@@ -9,6 +9,8 @@
  */
 package org.husky.emed.ch.cda.narrative.pdf;
 
+import com.openhtmltopdf.extend.FSCacheEx;
+import com.openhtmltopdf.extend.FSCacheValue;
 import com.openhtmltopdf.outputdevice.helper.BaseRendererBuilder;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import com.openhtmltopdf.slf4j.Slf4jLogger;
@@ -19,8 +21,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 
@@ -141,6 +142,7 @@ public class OpenHtmlToPdfAConverter implements HtmlToPdfAConverter {
                 inputStreams.add(inputStream);
                 builder.useFont(() -> inputStream, font.family(), font.weight(), font.style(), true);
             }
+            builder.useCacheStore(PdfRendererBuilder.CacheStore.PDF_FONT_METRICS, new FontCache());
 
             builder.withHtmlContent(htmlContent, "./");
             builder.useColorProfile(ColorProfiles.getSrgbIccProfile());
@@ -164,5 +166,37 @@ public class OpenHtmlToPdfAConverter implements HtmlToPdfAConverter {
                        int weight,
                        BaseRendererBuilder.FontStyle style,
                        Callable<InputStream> inputStream) {
+    }
+
+    /**
+     * Implementation of a font cache.
+     */
+    public static class FontCache implements FSCacheEx<String, FSCacheValue> {
+        private final Map<String, FSCacheValue> cache = new HashMap<>(4);
+
+        @Override
+        public void put(final String s, final FSCacheValue fsCacheValue) {
+            Objects.requireNonNull(s, "s shall not be null in put()");
+            Objects.requireNonNull(fsCacheValue, "fsCacheValue shall not be null in put()");
+            this.cache.put(s, fsCacheValue);
+        }
+
+        @Override
+        public FSCacheValue get(final String s, final Callable<? extends FSCacheValue> callable) {
+            return Optional.ofNullable(this.get(s))
+                    .orElseGet(() -> {
+                        try {
+                            return callable.call();
+                        } catch (final Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+        }
+
+        @Override
+        @Nullable
+        public FSCacheValue get(final String s) {
+            return this.cache.get(s);
+        }
     }
 }
