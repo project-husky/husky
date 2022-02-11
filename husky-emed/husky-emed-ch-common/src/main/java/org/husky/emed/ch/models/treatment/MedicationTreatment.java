@@ -14,7 +14,6 @@ import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.ch.enums.ActSubstanceAdminSubstitutionCode;
 import org.husky.emed.ch.enums.RouteOfAdministrationEdqm;
 import org.husky.emed.ch.enums.TreatmentStatus;
 import org.husky.emed.ch.models.common.AuthorDigest;
@@ -62,7 +61,7 @@ public class MedicationTreatment {
      * The fulfilment instructions or {@code null} if it isn't provided.
      */
     @Nullable
-    private String fulfilmentInstructions;
+    protected String fulfilmentInstructions;
 
     /**
      * The medication treatment ID.
@@ -99,7 +98,7 @@ public class MedicationTreatment {
      * The patient medication instructions or {@code null} if it isn't provided.
      */
     @Nullable
-    private String patientMedicationInstructions;
+    protected String patientMedicationInstructions;
 
     /**
      * The list of prescriptions.
@@ -118,15 +117,15 @@ public class MedicationTreatment {
     protected RouteOfAdministrationEdqm routeOfAdministration;
 
     /**
-     * The substance substitution permissions, or {@code null} if substitution is authorized without condition.
+     * Whether the substitution is permitted (Equivalent) or not (None).
      */
-    protected final List<@NonNull ActSubstanceAdminSubstitutionCode> substitutionPermissions = new ArrayList<>();
+    protected boolean substitutionPermitted;
 
     /**
      * The treatment reason or {@code null} if it isn't provided.
      */
     @Nullable
-    private String treatmentReason;
+    protected String treatmentReason;
 
     /**
      * The MTP and treatment starting time.
