@@ -116,7 +116,8 @@ public class CcePadvEntryDigester {
                     isCompleted,
                     effectiveTime,
                     targetedEntryRef,
-                    targetedEntryType
+                    targetedEntryType,
+                    null // TODO
             );
             case CANCEL -> new EmedPadvCancelEntryDigest(
                     padvDocumentEffectiveTime,
@@ -145,9 +146,9 @@ public class CcePadvEntryDigester {
                     effectiveTime,
                     targetedEntryRef,
                     targetedEntryType,
-                    null,
-                    null,
-                    null
+                    null, // TODO
+                    null, // TODO
+                    null // TODO
             );
             case REFUSE -> new EmedPadvRefuseEntryDigest(
                     padvDocumentEffectiveTime,

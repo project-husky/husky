@@ -49,18 +49,20 @@ public class EmedPadvOkEntryDigest extends EmedPadvEntryDigest {
     /**
      * Constructor.
      *
-     * @param creationTime          The instant at which the item entry was created.
-     * @param documentId            The parent document unique ID.
-     * @param documentAuthor        The author of the original parent document or {@code null} if they're not known.
-     * @param sectionAuthor         The author of the original parent section or {@code null} if they're not known.
-     * @param entryId               The item entry ID.
-     * @param medicationTreatmentId The ID of the medication treatment this item entry belongs to.
-     * @param sequence              The sequence of addition.
-     * @param annotationComment     The annotation comment or {@code null} if it isn't provided.
-     * @param completed             Whether the PADV status is completed or not.
-     * @param effectiveTime         The instant at which the advice becomes effective.
-     * @param targetedEntryRef      Reference to the targeted item entry.
-     * @param targetedEntryType     Document type of the targeted item entry (MTP, PRE or DIS).
+     * @param creationTime            The instant at which the item entry was created.
+     * @param documentId              The parent document unique ID.
+     * @param documentAuthor          The author of the original parent document or {@code null} if they're not known.
+     * @param sectionAuthor           The author of the original parent section or {@code null} if they're not known.
+     * @param entryId                 The item entry ID.
+     * @param medicationTreatmentId   The ID of the medication treatment this item entry belongs to.
+     * @param sequence                The sequence of addition.
+     * @param annotationComment       The annotation comment or {@code null} if it isn't provided.
+     * @param completed               Whether the PADV status is completed or not.
+     * @param effectiveTime           The instant at which the advice becomes effective.
+     * @param targetedEntryRef        Reference to the targeted item entry.
+     * @param targetedEntryType       Document type of the targeted item entry (MTP, PRE or DIS).
+     * @param recommendedPrescription Proposition of an alternative (drug, dosage, form, etc.) to the original
+     *                                Prescription Item, if any.
      */
     public EmedPadvOkEntryDigest(final Instant creationTime,
                                  final String documentId,
@@ -73,11 +75,18 @@ public class EmedPadvOkEntryDigest extends EmedPadvEntryDigest {
                                  final boolean completed,
                                  final Instant effectiveTime,
                                  final EmedReference targetedEntryRef,
-                                 final EmedEntryType targetedEntryType) {
-        super(creationTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId,  sequence,
+                                 final EmedEntryType targetedEntryType,
+                                 @Nullable final List<@NonNull EmedPreEntryDigest> recommendedPrescription) {
+        super(creationTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
                 annotationComment, completed, effectiveTime, targetedEntryRef, targetedEntryType);
         if (targetedEntryType == EmedEntryType.PRE) {
-            this.recommendedPrescriptions = new ArrayList<>();
+            this.recommendedPrescriptions = Collections.emptyList(); // Immutable
+            if (recommendedPrescription != null) {
+                throw new IllegalArgumentException("Recommended prescriptions can only be added when the PADV OK " +
+                        "targets a PRE entry");
+            }
+        } else if (recommendedPrescription != null) {
+            this.recommendedPrescriptions = new ArrayList<>(recommendedPrescription);
         } else {
             this.recommendedPrescriptions = Collections.emptyList(); // Immutable
         }
