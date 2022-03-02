@@ -13,6 +13,7 @@ package org.husky.common.model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -271,6 +272,15 @@ public class Patient extends Person {
             throw new IllegalArgumentException("Cannot convert birthdate", e);
         }
     }
+
+	public LocalDate getBirthdayAsLocalDate() {
+		final TS birthTime = getMdhtPatient().getBirthTime();
+		if (birthTime == null) {
+			return null;
+		}
+
+		return DateTimes.toLocalDate(birthTime);
+	}
 
     /**
      * Sets the birthday.

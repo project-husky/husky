@@ -301,6 +301,10 @@ public class DocumentMetadataAt extends org.husky.common.communication.DocumentM
 		return null;
 	}
 
+	public Identificator getSetId() {
+		return new Identificator(getCda().getSetId());
+	}
+
 	/**
 	 * Gets the practice setting code. This is the medical speciality of the
 	 * practice where the document was produced
@@ -476,4 +480,5 @@ public class DocumentMetadataAt extends org.husky.common.communication.DocumentM
 		setServiceEventStartTime(metaData.getServiceEventStartTime());
 		setServiceEventStopTime(metaData.getServiceEventStopTime());
 	}
+
 }

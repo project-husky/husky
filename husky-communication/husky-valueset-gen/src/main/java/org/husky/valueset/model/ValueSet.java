@@ -205,7 +205,13 @@ public class ValueSet extends ValueSetBase implements Serializable {
 			var number = getNumberLiteral(enumName.substring(0, 1));
 
 			number = number.toUpperCase();
-			enumName = number + "_" + enumName.substring(2, enumName.length());
+
+			if (enumName.length() > 2) {
+				enumName = number + "_" + enumName.substring(2, enumName.length());
+			} else {
+				enumName = number + "_" + enumName;
+			}
+
 		}
 
 		if (hierarchyLevel > 0)

@@ -9,6 +9,5 @@
   <packaging>pom</packaging>
   <modules>
   	<module>husky-elga</module>
-  	<module>husky-ems</module>
   </modules>
 </project>

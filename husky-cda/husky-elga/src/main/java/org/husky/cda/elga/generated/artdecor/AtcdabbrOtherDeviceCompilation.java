@@ -10,7 +10,8 @@
 package org.husky.cda.elga.generated.artdecor;
 
 import javax.annotation.processing.Generated;
-import org.husky.common.hl7cdar2.POCDMT000040AuthoringDevice;
+
+import org.husky.common.hl7cdar2.POCDMT000040Device;
 
 /**
  * atcdabbr_other_DeviceCompilation
@@ -22,7 +23,7 @@ import org.husky.common.hl7cdar2.POCDMT000040AuthoringDevice;
  * Status: active
  */
 @Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-02-18")
-public class AtcdabbrOtherDeviceCompilation extends POCDMT000040AuthoringDevice {
+public class AtcdabbrOtherDeviceCompilation extends POCDMT000040Device {
 
     public AtcdabbrOtherDeviceCompilation() {
     }

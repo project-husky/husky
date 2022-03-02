@@ -22,8 +22,8 @@ import org.husky.common.at.enums.TypeCode;
 import org.husky.common.model.Identificator;
 
 /**
- * <div class="de">Class XdsUtil provides helper methods for the austrian
- * specific IHE XDS Context.</div>
+ * Class XdsUtil provides helper methods for the austrian specific IHE XDS
+ * Context
  */
 public class XdsMetadataUtilAt {
 
@@ -53,6 +53,14 @@ public class XdsMetadataUtilAt {
 		}
 
 		return sb.toString();
+	}
+
+	public static String extractIdOfCxi(String cxi) {
+		if (cxi != null && !cxi.isEmpty()) {
+			return cxi.substring(0, cxi.indexOf('^'));
+		}
+
+		return null;
 	}
 
 	/**

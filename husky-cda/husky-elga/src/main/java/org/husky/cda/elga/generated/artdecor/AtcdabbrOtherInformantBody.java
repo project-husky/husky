@@ -10,8 +10,10 @@
 package org.husky.cda.elga.generated.artdecor;
 
 import javax.annotation.processing.Generated;
-import org.husky.common.hl7cdar2.ObjectFactory;
-import org.husky.common.hl7cdar2.POCDMT000040Entry;
+
+import org.husky.common.hl7cdar2.POCDMT000040AssignedEntity;
+import org.husky.common.hl7cdar2.POCDMT000040Informant12;
+import org.husky.common.hl7cdar2.POCDMT000040RelatedEntity;
 
 /**
  * atcdabbr_other_InformantBody
@@ -23,54 +25,81 @@ import org.husky.common.hl7cdar2.POCDMT000040Entry;
  * Status: active
  */
 @Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-02-18")
-public class AtcdabbrOtherInformantBody extends POCDMT000040Entry {
+public class AtcdabbrOtherInformantBody extends POCDMT000040Informant12 {
 
     public AtcdabbrOtherInformantBody() {
+		getTypeCode().add("INF");
+		setContextControlCode("OP");
     }
 
     /**
-     * Creates fixed contents for CDA Element hl7RelatedEntity
-     *
-     * @param classCode the desired fixed value for this argument.
-     */
-    private static org.husky.common.hl7cdar2.POCDMT000040Entry createHl7RelatedEntityFixedValue(String classCode) {
-        org.husky.common.hl7cdar2.POCDMT000040Entry retVal = new org.husky.common.hl7cdar2.POCDMT000040Entry();
-        return retVal;
-    }
+	 * Creates fixed contents for CDA Element hl7AssignedEntity
+	 *
+	 * @param classCode the desired fixed value for this argument.
+	 */
+	private static POCDMT000040AssignedEntity createHl7AssignedEntityFixedValue(String classCode) {
+		POCDMT000040AssignedEntity retVal = new POCDMT000040AssignedEntity();
+		retVal.setClassCode(classCode);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7RelatedEntity
+	 *
+	 * @param classCode the desired fixed value for this argument.
+	 */
+	private static POCDMT000040RelatedEntity createHl7RelatedEntityFixedValue(
+			String classCode) {
+		POCDMT000040RelatedEntity retVal = new POCDMT000040RelatedEntity();
+		retVal.getClassCode().add(classCode);
+		return retVal;
+	}
+
+	/**
+	 * Adds a predefined org.husky.common.hl7cdar2.POCDMT000040AssignedEntity,
+	 * filled by: "ASSIGNED"
+	 * 
+	 * @return the predefined element.
+	 */
+	public static POCDMT000040AssignedEntity getPredefinedAssignedEntityAssigned() {
+		return createHl7AssignedEntityFixedValue("ASSIGNED");
+	}
+
+	/**
+	 * Adds a predefined org.husky.common.hl7cdar2.POCDMT000040RelatedEntity, filled
+	 * by: "PRS"
+	 * 
+	 * @return the predefined element.
+	 */
+	public static POCDMT000040RelatedEntity getPredefinedRelatedEntityPrs() {
+		return createHl7RelatedEntityFixedValue("PRS");
+	}
 
     /**
      * Gets the hl7AssignedEntity
      */
-    public org.husky.common.hl7cdar2.POCDMT000040Entry getHl7AssignedEntity() {
-        return this;
+	public org.husky.common.hl7cdar2.POCDMT000040AssignedEntity getHl7AssignedEntity() {
+		return this.assignedEntity;
     }
 
     /**
      * Gets the hl7RelatedEntity
      */
-    public org.husky.common.hl7cdar2.POCDMT000040Entry getHl7RelatedEntity() {
-        return this;
-    }
-
-    /**
-     * Adds a predefined org.husky.common.hl7cdar2.POCDMT000040Entry, filled by: "PRS"
-     * @return the predefined element.
-     */
-    public static org.husky.common.hl7cdar2.POCDMT000040Entry getPredefinedRelatedEntityPrs() {
-        return createHl7RelatedEntityFixedValue("PRS");
+	public org.husky.common.hl7cdar2.POCDMT000040RelatedEntity getHl7RelatedEntity() {
+		return this.relatedEntity;
     }
 
     /**
      * Sets the hl7AssignedEntity
      */
-    public void setHl7AssignedEntity(org.husky.common.hl7cdar2.POCDMT000040Entry value) {
-        // TODO: NYI
+	public void setHl7AssignedEntity(org.husky.common.hl7cdar2.POCDMT000040AssignedEntity value) {
+		this.assignedEntity = value;
     }
 
     /**
      * Sets the hl7RelatedEntity
      */
-    public void setHl7RelatedEntity(org.husky.common.hl7cdar2.POCDMT000040Entry value) {
-        // TODO: NYI
+	public void setHl7RelatedEntity(org.husky.common.hl7cdar2.POCDMT000040RelatedEntity value) {
+		this.relatedEntity = value;
     }
 }
