@@ -11,7 +11,9 @@ package org.husky.cda.elga.generated.artdecor;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.processing.Generated;
+
 import org.husky.common.basetypes.CodeBaseType;
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040SubstanceAdministration;
@@ -40,12 +42,11 @@ public class AtcdabbrEntryImmunizationRecommendation extends POCDMT000040Substan
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.12.2"));
         vocabCodeValueSet.add(new Code(CodeBaseType.builder().withCode("IMMUNIZ").withCodeSystem("2.16.840.1.113883.5.4").build()));
         code = (new Code(CodeBaseType.builder().withCode("IMMUNIZ").withCodeSystem("2.16.840.1.113883.5.4").build())).getHl7CdaR2Cd();
-        super.setCode(createHl7CodeFixedValue());
+		super.setCode(code);
         super.setStatusCode(createHl7StatusCodeFixedValue("active"));
         super.setRouteCode(createHl7RouteCodeFixedValue("NA"));
         super.getEntryRelationship().add(createHl7EntryRelationshipFixedValue("RSON",
                                                                               "true"));
-        super.getPrecondition().add(createHl7PreconditionFixedValue("PRCN"));
     }
 
     private final List<Code> vocabCodeValueSet = new ArrayList<>();

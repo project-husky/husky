@@ -11,6 +11,7 @@ package org.husky.communication.at;
 
 import org.husky.common.at.AuthorAt;
 import org.husky.common.communication.SubmissionSetMetadata;
+import org.husky.common.model.Author;
 
 /**
  * Represents the metadata for a submission set (which can hold one or more
@@ -18,8 +19,8 @@ import org.husky.common.communication.SubmissionSetMetadata;
  */
 public class SubmissionSetMetadataAt extends SubmissionSetMetadata {
 
-	public void setAuthor(AuthorAt author) {
-		getIpfSubmissionSet().setAuthor(author.getIpfAuthor());
+	public void setAuthor(Author author) {
+		getIpfSubmissionSet().setAuthor(AuthorAt.getIpfAuthor(author));
 	}
 
 }

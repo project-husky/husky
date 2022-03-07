@@ -15,6 +15,7 @@ import java.util.List;
 import javax.annotation.processing.Generated;
 
 import org.husky.common.hl7cdar2.ObjectFactory;
+import org.husky.common.hl7cdar2.POCDMT000040Consumable;
 import org.husky.common.hl7cdar2.POCDMT000040SubstanceAdministration;
 import org.husky.common.hl7cdar2.SXCMTS;
 
@@ -39,9 +40,11 @@ public class AtcdabbrEntryImmunizationImpfungNichtAngegeben extends POCDMT000040
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.12"));
 		super.setCode(createHl7CodeFixedValue("90351000119108", "2.16.840.1.113883.6.96", "SNOMED CT",
 				"Vaccination not done (situation)"));
+		super.getEffectiveTime().add(createHl7EffectiveTimeFixedValue("UNK"));
         super.setStatusCode(createHl7StatusCodeFixedValue("completed"));
         super.setRouteCode(createHl7RouteCodeFixedValue("NA"));
         super.getApproachSiteCode().add(createHl7ApproachSiteCodeFixedValue("NA"));
+		super.setConsumable(createHl7ConsumableFixedValue("CSM"));
     }
 
     /**
@@ -74,6 +77,29 @@ public class AtcdabbrEntryImmunizationImpfungNichtAngegeben extends POCDMT000040
 		retVal.setDisplayName(displayName);
         return retVal;
     }
+
+	/**
+	 * Creates fixed contents for CDA Element hl7EffectiveTime
+	 *
+	 * @param nullFlavor the desired fixed value for this argument.
+	 */
+	private static SXCMTS createHl7EffectiveTimeFixedValue(String nullFlavor) {
+		SXCMTS retVal = new SXCMTS();
+		retVal.nullFlavor = new ArrayList<String>();
+		retVal.nullFlavor.add(nullFlavor);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7Consumable
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	private static POCDMT000040Consumable createHl7ConsumableFixedValue(String typeCode) {
+		POCDMT000040Consumable retVal = new POCDMT000040Consumable();
+		retVal.getTypeCode().add(typeCode);
+		return retVal;
+	}
 
     /**
      * Creates fixed contents for CDA Element hl7DoseQuantity

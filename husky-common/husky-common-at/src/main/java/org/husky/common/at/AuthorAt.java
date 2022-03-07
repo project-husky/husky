@@ -26,29 +26,31 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.XcnName;
  */
 public class AuthorAt extends Author {
 
+
 	public ON getAuthorInstitution() {
 		return super.getAuthorMdht().getAssignedAuthor().getRepresentedOrganization().getName().get(0);
 	}
 
-	public org.openehealth.ipf.commons.ihe.xds.core.metadata.Author getIpfAuthor() {
+	public static org.openehealth.ipf.commons.ihe.xds.core.metadata.Author getIpfAuthor(Author author) {
 		org.openehealth.ipf.commons.ihe.xds.core.metadata.Author at = new org.openehealth.ipf.commons.ihe.xds.core.metadata.Author();
 
 		org.openehealth.ipf.commons.ihe.xds.core.metadata.Person ap = new org.openehealth.ipf.commons.ihe.xds.core.metadata.Person();
 		XcnName namePerson = new XcnName();
 
-		if (getAsAuthor() != null && getAsAuthor().getAssignedAuthoringDevice() != null) {
+		if (author.getAsAuthor() != null && author.getAsAuthor().getAssignedAuthoringDevice() != null) {
 			namePerson.setFamilyName(
-					getAsAuthor().getAssignedAuthoringDevice().getManufacturerModelName().getDisplayName());
-			namePerson.setGivenName(this.getAsAuthor().getAssignedAuthoringDevice().getSoftwareName().getDisplayName());
+					author.getAsAuthor().getAssignedAuthoringDevice().getManufacturerModelName().getDisplayName());
+			namePerson
+					.setGivenName(author.getAsAuthor().getAssignedAuthoringDevice().getSoftwareName().getDisplayName());
 
 		} else {
-			if (this.getIds() != null && !this.getIds().isEmpty() && this.getIds().get(0) != null) {
-				ap.setId(XdsMetadataUtil.convertEhcIdentificator(this.getIds().get(0)));
+			if (author.getIds() != null && !author.getIds().isEmpty() && author.getIds().get(0) != null) {
+				ap.setId(XdsMetadataUtil.convertEhcIdentificator(author.getIds().get(0)));
 			}
 
-			if (this.getNames() != null) {
+			if (author.getNames() != null) {
 				// Name
-				ap.setName(Name.getIpfXpnName(this.getName().getHl7CdaR2Pn()));
+				ap.setName(Name.getIpfXpnName(author.getName().getHl7CdaR2Pn()));
 			}
 		}
 
@@ -56,23 +58,24 @@ public class AuthorAt extends Author {
 		at.setAuthorPerson(ap);
 
 		// Institution
-		if (this.getOrganization() != null) {
+		if (author.getOrganization() != null) {
 			org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization inst = new org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization();
-			if (this.getOrganization().getNameList() != null && !this.getOrganization().getNameList().isEmpty()
-					&& this.getOrganization().getNameList().get(0) != null) {
-				inst.setOrganizationName(this.getOrganization().getNameList().get(0).getFullName());
+			if (author.getOrganization().getNameList() != null && !author.getOrganization().getNameList().isEmpty()
+					&& author.getOrganization().getNameList().get(0) != null) {
+				inst.setOrganizationName(author.getOrganization().getNameList().get(0).getFullName());
 			}
 
-			if (this.getOrganization().getIdentificatorList() != null) {
-				for (IdentificatorBaseType id : this.getOrganization().getIdentificatorList()) {
+			if (author.getOrganization().getIdentificatorList() != null) {
+				for (IdentificatorBaseType id : author.getOrganization().getIdentificatorList()) {
 					if (id != null && id.getExtension() != null) {
 						inst.setIdNumber(id.getExtension());
 					}
 
 					if (id != null && id.getRoot() != null) {
-						inst.setAssigningAuthority(new AssigningAuthority());
-						inst.getAssigningAuthority().setUniversalId(id.getRoot());
-						inst.getAssigningAuthority().setUniversalIdType("ISO");
+						var assigningAuthority = new AssigningAuthority();
+						assigningAuthority.setUniversalId(id.getRoot());
+						assigningAuthority.setUniversalIdType("ISO");
+						inst.setAssigningAuthority(assigningAuthority);
 					}
 				}
 			}
@@ -80,13 +83,13 @@ public class AuthorAt extends Author {
 			at.getAuthorInstitution().add(inst);
 		}
 
-		if (this.getRoleFunction() != null) {
-			at.getAuthorRole().add(new Identifiable(this.getRoleFunction().getDisplayName()));
+		if (author.getRoleFunction() != null) {
+			at.getAuthorRole().add(new Identifiable(author.getRoleFunction().getDisplayName()));
 		}
 
-		if (this.getSpecialityEnum() != null && this.getSpecialityEnum().getCode() != null
-				&& this.getSpecialityEnum().getCode().getDisplayName() != null) {
-			at.getAuthorSpecialty().add(new Identifiable(this.getSpecialityEnum().getCode().getDisplayName()));
+		if (author.getSpeciality() != null && author.getSpeciality().getCode() != null
+				&& author.getSpeciality().getDisplayName() != null) {
+			at.getAuthorSpecialty().add(new Identifiable(author.getSpeciality().getDisplayName()));
 		}
 
 

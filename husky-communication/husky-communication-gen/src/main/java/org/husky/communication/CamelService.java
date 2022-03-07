@@ -117,10 +117,12 @@ public abstract class CamelService implements CamelContextAware {
 		Exchange exchange = new DefaultExchange(camelContext);
 		exchange.getIn().setBody(body);
 		if (securityHeaderElement != null) {
+			log.info("build wss header");
 			addWssHeader(securityHeaderElement, exchange);
 		}
 
 		if (outgoingHttpHeaders != null && !outgoingHttpHeaders.isEmpty()) {
+			log.info("add outgoing http headers");
 			addHttpHeader(exchange, outgoingHttpHeaders);
 		}
 

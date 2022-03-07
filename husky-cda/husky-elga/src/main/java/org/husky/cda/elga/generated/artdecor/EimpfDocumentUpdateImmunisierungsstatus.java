@@ -15,6 +15,7 @@ import java.util.UUID;
 import javax.annotation.processing.Generated;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.husky.common.hl7cdar2.CD;
 import org.husky.common.hl7cdar2.CS;
 import org.husky.common.hl7cdar2.II;
 import org.husky.common.hl7cdar2.INT;
@@ -42,8 +43,8 @@ public class EimpfDocumentUpdateImmunisierungsstatus extends POCDMT000040Clinica
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.6.0.11.0.1", null));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.7.19", null));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.6.0.11.0.2", null));
-        super.getTemplateId().add(createHl7TemplateIdFixedValue("XDSdocumentEntry.formatCode^urn:hl7-at:eImpf:2019",
-                                                                "1.2.40.0.34.6.0.11.0.2.1"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.6.0.11.0.2.1",
+				"XDSdocumentEntry.formatCode^urn:hl7-at:eImpf:2019"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.18.1.2",
                                                                 null));
         super.setCode(createHl7CodeFixedValue("11369-6",
@@ -66,8 +67,27 @@ public class EimpfDocumentUpdateImmunisierungsstatus extends POCDMT000040Clinica
         retVal.setCodeSystem(codeSystem);
         retVal.setCodeSystemName(codeSystemName);
         retVal.setDisplayName(displayName);
+
+		retVal.getTranslation()
+				.add(createHl7TranslationFixedValue("87273-9", "2.16.840.1.113883.6.1", null, "Immunization note"));
+
         return retVal;
     }
+
+	/**
+	 * Creates fixed contents for CDA Element hl7Translation
+	 *
+	 * @param code the desired fixed value for this argument.
+	 */
+	private static org.husky.common.hl7cdar2.CD createHl7TranslationFixedValue(String code, String codeSystem,
+			String codeSystemName, String displayName) {
+		org.husky.common.hl7cdar2.CD retVal = new CD();
+		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
+		return retVal;
+	}
 
     /**
      * Creates fixed contents for CDA Element hl7Component

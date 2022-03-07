@@ -610,11 +610,12 @@ public class ConvenienceCommunication extends CamelService {
     }
 
 	private void setSubSetDetailsFromDocument(SubmissionSet subSet) {
+		log.info("count of documents {}", txnData.getDocuments().size());
 		for (Document document : txnData.getDocuments()) {
 			final var docEntry = document.getDocumentEntry();
+			
 			if (docEntry.getPatientId() == null) {
-				throw new IllegalStateException(
-						"Missing destination patient ID in DocumentMetadata of first document.");
+				log.warn("Missing destination patient ID in DocumentMetadata of document.");
 			}
 
 			// set ContentTypeCode
@@ -670,7 +671,7 @@ public class ConvenienceCommunication extends CamelService {
 		}
 	}
 
-	private String getSourceId(Identifiable patientId) {
+	protected String getSourceId(Identifiable patientId) {
 		if (patientId != null) {
 			return patientId.getAssigningAuthority().getUniversalId();
 		} else {
@@ -979,14 +980,17 @@ public class ConvenienceCommunication extends CamelService {
      * @throws Exception if the transfer is not successful
      */
     private Response submit(SecurityHeaderElement security, Association association) throws Exception {
-        setDefaultKeystoreTruststore(affinityDomain.getRepositoryDestination());
+		log.info("submit document");
+		setDefaultKeystoreTruststore(affinityDomain.getRepositoryDestination());
 
         if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
+			log.info("extract submission set metadata");
             txnData.setSubmissionSet(generateDefaultSubmissionSetAttributes());
             linkDocumentEntryWithSubmissionSet();
         }
 
         if (association != null) {
+			log.info("set association data");
             if (txnData.getDocuments() != null && !txnData.getDocuments().isEmpty()
                     && txnData.getDocuments().get(0) != null) {
                 association.setSourceUuid(txnData.getDocuments().get(0).getDocumentEntry().getEntryUuid());
@@ -996,6 +1000,7 @@ public class ConvenienceCommunication extends CamelService {
             }
         }
 
+		log.info("prepare submit of document");
 		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains(HTTPS_LITERAL);
         final var endpoint = String.format(
                 "xds-iti41://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=%s",

@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.ZonedDateTime;
 import java.util.Iterator;
+import java.util.UUID;
 
 import javax.activation.DataHandler;
 import javax.mail.util.ByteArrayDataSource;
@@ -26,6 +27,7 @@ import org.husky.common.communication.DocumentMetadata.DocumentMetadataExtractio
 import org.husky.common.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
 import org.husky.common.enums.DocumentDescriptor;
 import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
+import org.husky.common.model.Author;
 import org.husky.common.model.Code;
 import org.husky.common.model.Identificator;
 import org.husky.common.utils.XdsMetadataUtil;
@@ -35,8 +37,11 @@ import org.husky.communication.xd.storedquery.FindDocumentsQuery;
 import org.husky.xua.core.SecurityHeaderElement;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Identifiable;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp.Precision;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.QueryResponse;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.Response;
 import org.slf4j.Logger;
@@ -143,22 +148,14 @@ public class ConvenienceCommunicationAt extends ConvenienceCommunication {
 
 		DocumentMetadataAt docMetadata = null;
 
-		Document targetDoc = null;
 		if (metadata != null) {
-			for (Document docEnt : getTxnData().getDocuments()) {
-				if (docEnt != null && docEnt.getDocumentEntry() != null
-						&& metadata.getEntryUUID().equalsIgnoreCase(docEnt.getDocumentEntry().getEntryUuid())) {
-					targetDoc = doc;
-				}
-			}
-
-			if (targetDoc == null) {
-				return null;
-			}
-
-			docMetadata = new DocumentMetadataAt(targetDoc.getDocumentEntry(), metadata.getCda(),
+			docMetadata = new DocumentMetadataAt(metadata.getDocumentEntry(), metadata.getCda(),
 					metadata.getPatientIdsHl7Cdar2());
-			docMetadata.setMetadata(metadata);
+			if (doc.getDocumentEntry() == null) {
+				doc.setDocumentEntry(metadata.getDocumentEntry());
+			}
+		} else {
+			log.warn("Document entry is null. No metadata known");
 		}
 
 		getTxnData().getDocuments().add(doc);
@@ -166,7 +163,7 @@ public class ConvenienceCommunicationAt extends ConvenienceCommunication {
 		if (docMetadata != null) {
 			if (documentMetadataExtractionMode == DocumentMetadataExtractionMode.DEFAULT_EXTRACTION) {
 				if (DocumentDescriptor.CDA_R2.equals(desc)) {
-					fixDocEntryAttributes(targetDoc, docMetadata);
+					fixDocEntryAttributes(doc, docMetadata, desc);
 				}
 				generateDefaultSubmissionSetAttributes();
 			} else {
@@ -178,14 +175,13 @@ public class ConvenienceCommunicationAt extends ConvenienceCommunication {
 		return docMetadata;
 	}
 
-	private void fixDocEntryAttributes(Document targetDoc, DocumentMetadataAt metadata) {
+	private void fixDocEntryAttributes(Document targetDoc, DocumentMetadataAt metadata, DocumentDescriptor desc) {
 		if (targetDoc == null) {
 			return;
 		}
 
 		final DocumentMetadataAt docMetadata = new DocumentMetadataAt(targetDoc.getDocumentEntry(), metadata.getCda(),
 				metadata.getPatientIdsHl7Cdar2());
-		final DocumentDescriptor desc = DocumentDescriptor.valueOf(targetDoc.getDocumentEntry().getMimeType());
 
 		// Derive MimeType from DocumentDescriptor
 		if (docMetadata.getDocumentEntry().getMimeType() == null) {
@@ -230,7 +226,7 @@ public class ConvenienceCommunicationAt extends ConvenienceCommunication {
 	 * @return the submission set
 	 */
 
-	public void generateSubmissionSetMetadata(AuthorAt author, Code contentTypeCode) {
+	public void generateSubmissionSetMetadata(Author author, Code contentTypeCode) {
 
 		if (getTxnData().getSubmissionSet() == null) {
 			getTxnData().setSubmissionSet(new SubmissionSet());
@@ -244,7 +240,8 @@ public class ConvenienceCommunicationAt extends ConvenienceCommunication {
 		}
 	}
 
-	private void setSubSetDetailsForDocuments(SubmissionSet subSet, AuthorAt author, Code contentTypeCode) {
+	private void setSubSetDetailsForDocuments(SubmissionSet subSet, Author author, Code contentTypeCode) {
+		log.info("count of documents {}", getTxnData().getDocuments().size());
 		for (Document document : getTxnData().getDocuments()) {
 			final var docEntry = document.getDocumentEntry();
 			if (docEntry.getPatientId() == null) {
@@ -261,15 +258,10 @@ public class ConvenienceCommunicationAt extends ConvenienceCommunication {
 				subSet.setContentTypeCode(docEntry.getTypeCode());
 			}
 
-			if (docEntry.getPatientId() == null) {
-				throw new IllegalStateException(
-						"Missing destination patient ID in DocumentMetadata of first document.");
-			}
-
-			setGeneralSubSetDetails(subSet, docEntry.getPatientId());
+			setGeneralSubSetDetails(subSet, docEntry.getPatientId(), docEntry.getSourcePatientId());
 
 			if (subSet.getAuthors().isEmpty()) {
-				subSet.getAuthors().add(author.getIpfAuthor());
+				subSet.getAuthors().add(AuthorAt.getIpfAuthor(author));
 			}
 
 			if (subSet.getAuthors() != null && !subSet.getAuthors().isEmpty()) {
@@ -305,6 +297,34 @@ public class ConvenienceCommunicationAt extends ConvenienceCommunication {
 				}
 
 			}
+		}
+	}
+
+	protected void setGeneralSubSetDetails(SubmissionSet subSet, Identifiable patientId, Identifiable sourcePatientId) {
+		// set submission time
+		if (subSet.getSubmissionTime() == null) {
+			subSet.setSubmissionTime(new Timestamp(ZonedDateTime.now(), Precision.SECOND));
+		}
+
+		if (subSet.getEntryUuid() == null) {
+			subSet.setEntryUuid(UUID.randomUUID().toString());
+		}
+
+		if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
+
+			if (subSet.getUniqueId() == null) {
+				subSet.assignUniqueId();
+			}
+
+			// set submission set source id
+			if (subSet.getSourceId() == null) {
+				subSet.setSourceId(getSourceId(sourcePatientId));
+			}
+		}
+
+		// Use the PatientId of the first Document for the Submission set ID
+		if (subSet.getPatientId() == null) {
+			subSet.setPatientId(patientId);
 		}
 	}
 
@@ -353,7 +373,7 @@ public class ConvenienceCommunicationAt extends ConvenienceCommunication {
 	 * @return the OHT XDSResponseType</div>
 	 * @throws Exception if the transfer is not successful
 	 */
-	public Response submit(boolean replace, AuthorAt author, Code codeContentType,
+	public Response submit(boolean replace, Author author, Code codeContentType,
 			SecurityHeaderElement security) throws Exception {
 		generateSubmissionSetMetadata(author, codeContentType);
 		return submit(security);

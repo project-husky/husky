@@ -477,6 +477,7 @@ public class CDAR2Extractor {
 	 */
 	public Person extractLegalAuthenticator() {
 		if (cda.getLegalAuthenticator() != null && cda.getLegalAuthenticator().getAssignedEntity() != null) {
+			logger.info("extract legal authenticator");
 			POCDMT000040AssignedEntity auth = cda.getLegalAuthenticator().getAssignedEntity();
 			var idNull = false;
 
@@ -792,8 +793,8 @@ public class CDAR2Extractor {
 	private void addIds(List<II> iis, PatientInfo patientInfo) {
 		if (iis != null) {
 			List<Identifiable> ids = extractPid3(iis);
-			if (!ids.isEmpty()) {
-				patientInfo.getIds().add(ids.get(0));
+			for (Identifiable id : ids) {
+				patientInfo.getIds().add(id);
 			}
 		}
 	}

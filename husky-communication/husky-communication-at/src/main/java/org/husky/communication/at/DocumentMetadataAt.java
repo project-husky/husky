@@ -13,7 +13,6 @@ import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.husky.common.at.AuthorAt;
@@ -24,7 +23,6 @@ import org.husky.common.at.enums.HealthcareFacilityTypeCode;
 import org.husky.common.at.enums.MimeType;
 import org.husky.common.at.enums.PracticeSettingCode;
 import org.husky.common.at.enums.TypeCode;
-import org.husky.common.at.utils.XdsMetadataUtilAt;
 import org.husky.common.enums.LanguageCode;
 import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
 import org.husky.common.model.Identificator;
@@ -32,11 +30,13 @@ import org.husky.common.utils.XdsMetadataUtil;
 import org.husky.common.utils.time.DateTimes;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationType;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Author;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.CXiAssigningAuthority;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Code;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Identifiable;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.LocalizedString;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.ReferenceId;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -390,9 +390,23 @@ public class DocumentMetadataAt extends org.husky.common.communication.DocumentM
 			getDocumentEntry().setExtraMetadata(new HashMap<>());
 		}
 
-		List<String> values = new LinkedList<>();
-		values.add(XdsMetadataUtilAt.createCxi(id, identifierTypeCode, homeCommunityId));
-		getDocumentEntry().getExtraMetadata().put("urn:ihe:iti:xds:2013:referenceIdList", values);
+		ReferenceId referenceId = new ReferenceId();
+		referenceId.setId(id.getExtension());
+		referenceId.setIdTypeCode(identifierTypeCode);
+		CXiAssigningAuthority assigninAuthority = new CXiAssigningAuthority();
+		assigninAuthority.setUniversalId(id.getRoot());
+		assigninAuthority.setUniversalIdType("ISO");
+		assigninAuthority.setNamespaceId(identifierTypeCode);
+		referenceId.setAssigningAuthority(assigninAuthority);
+		getDocumentEntry().getReferenceIdList().add(referenceId);
+
+		/*
+		 * List<String> values = new LinkedList<>();
+		 * values.add(XdsMetadataUtilAt.createCxi(id, identifierTypeCode,
+		 * homeCommunityId));
+		 * getDocumentEntry().getExtraMetadata().put("urn:iti:xds:2013:referenceIdList",
+		 * values);
+		 */
 
 	}
 
