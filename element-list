@@ -37,6 +37,7 @@ org.husky.communication.xd.storedquery
 org.husky.communication.xd.xdm
 org.husky.emed.ch
 org.husky.emed.ch.cda
+org.husky.emed.ch.cda.digesters
 org.husky.emed.ch.cda.generated
 org.husky.emed.ch.cda.generated.artdecor
 org.husky.emed.ch.cda.generated.artdecor.enums
@@ -46,9 +47,8 @@ org.husky.emed.ch.cda.narrative.generators
 org.husky.emed.ch.cda.narrative.pdf
 org.husky.emed.ch.cda.narrative.utils
 org.husky.emed.ch.cda.services
-org.husky.emed.ch.cda.services.digesters
-org.husky.emed.ch.cda.services.readers
 org.husky.emed.ch.cda.utils
+org.husky.emed.ch.cda.utils.readers
 org.husky.emed.ch.cda.validation
 org.husky.emed.ch.cda.xml
 org.husky.emed.ch.conversion
