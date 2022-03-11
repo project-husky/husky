@@ -11,17 +11,17 @@ import java.io.InputStream;
 import java.util.Objects;
 
 /**
- * Helper utilities related to streams.
+ * Helper utilities related to I/O streams.
  *
  * @author Quentin Ligier
  */
 @DefaultQualifier(value = NonNull.class, locations = {TypeUseLocation.PARAMETER, TypeUseLocation.RETURN})
-public class StreamUtils {
+public class IoStreamUtils {
 
     /**
      * This class is not instantiable.
      */
-    private StreamUtils() {
+    private IoStreamUtils() {
     }
 
     /**

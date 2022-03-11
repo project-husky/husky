@@ -1,6 +1,5 @@
 package org.husky.common.utils;
 
-import org.husky.common.utils.StreamUtils;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
@@ -11,25 +10,25 @@ import java.util.Objects;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Tests of the {@link StreamUtils} class.
+ * Tests of the {@link IoStreamUtils} class.
  *
  * @author Quentin Ligier
  */
 
-class StreamUtilsTest {
+class IoStreamUtilsTest {
 
     @Test
     void testCalculateSize() throws Exception {
-        assertEquals(4, StreamUtils.calculateSize(isFromString("asdf")));
-        assertEquals(0, StreamUtils.calculateSize(isFromString("")));
-        assertEquals(6, StreamUtils.calculateSize(isFromString("éàè")));
+        assertEquals(4, IoStreamUtils.calculateSize(isFromString("asdf")));
+        assertEquals(0, IoStreamUtils.calculateSize(isFromString("")));
+        assertEquals(6, IoStreamUtils.calculateSize(isFromString("éàè")));
     }
 
     @Test
     void testCalculateSizeOfReadInputStream() throws Exception {
         final InputStream is = isFromString("asdf");
         is.skip(2);
-        assertEquals(4, StreamUtils.calculateSize(is));
+        assertEquals(4, IoStreamUtils.calculateSize(is));
     }
 
     private InputStream isFromString(final String string) {
