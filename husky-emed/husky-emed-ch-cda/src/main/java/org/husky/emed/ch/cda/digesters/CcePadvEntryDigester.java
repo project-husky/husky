@@ -142,7 +142,7 @@ public class CcePadvEntryDigester {
                             if (targetedEntry instanceof final EmedPreEntryDigest targetedPreEntry) {
                                 return this.preEntryDigester.createDigest(
                                         subAdm,
-                                        targetedPreEntry.getDocumentId(),
+                                        padvDocumentId,
                                         targetedPreEntry.getPrescriptionTime(),
                                         targetedPreEntry.getPrescriptionDocumentValidityStart(),
                                         targetedPreEntry.getPrescriptionDocumentValidityStop(),
@@ -200,7 +200,7 @@ public class CcePadvEntryDigester {
                             .findAny()
                             .map(subAdm -> this.mtpEntryDigester.createDigest(
                                     subAdm,
-                                    targetedMtpEntry.getDocumentId(),
+                                    padvDocumentId,
                                     targetedMtpEntry.getPlanningTime(),
                                     documentAuthor,
                                     sectionAuthor))
@@ -220,7 +220,7 @@ public class CcePadvEntryDigester {
                             .findAny()
                             .map(subAdm -> this.preEntryDigester.createDigest(
                                     subAdm,
-                                    targetedPreEntry.getDocumentId(),
+                                    padvDocumentId,
                                     targetedPreEntry.getPrescriptionTime(),
                                     targetedPreEntry.getPrescriptionDocumentValidityStart(),
                                     targetedPreEntry.getPrescriptionDocumentValidityStop(),
