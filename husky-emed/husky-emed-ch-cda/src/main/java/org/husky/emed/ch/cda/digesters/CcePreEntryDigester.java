@@ -7,17 +7,19 @@
  * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  */
-package org.husky.emed.ch.cda.services.digesters;
+package org.husky.emed.ch.cda.digesters;
 
+import org.apache.commons.lang3.ObjectUtils;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.hl7cdar2.*;
 import org.husky.common.utils.OptionalUtils;
 import org.husky.emed.ch.cda.services.EmedEntryDigestService;
-import org.husky.emed.ch.cda.services.readers.AuthorReader;
-import org.husky.emed.ch.cda.services.readers.SubAdmEntryReader;
 import org.husky.emed.ch.cda.utils.CdaR2Utils;
 import org.husky.emed.ch.cda.utils.IiUtils;
 import org.husky.emed.ch.cda.utils.IvlTsUtils;
 import org.husky.emed.ch.cda.utils.TemplateIds;
+import org.husky.emed.ch.cda.utils.readers.AuthorReader;
+import org.husky.emed.ch.cda.utils.readers.SubAdmEntryReader;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.EmedReference;
@@ -57,19 +59,19 @@ public class CcePreEntryDigester {
      * Creates a new {@link EmedPreEntryDigest} from a PRE SubstanceAdministration element.
      *
      * @param substanceAdministration   The PRE SubstanceAdministration element.
-     * @param preDocumentId             The PRE document ID.
-     * @param preDocumentEffectiveTime  The PRE document effective time.
-     * @param prescriptionValidityStart The prescription validity start time (inclusive).
-     * @param prescriptionValidityStop  The prescription validity stop time (inclusive).
+     * @param documentId                The PRE document ID (PRE or PADV).
+     * @param prescriptionTime          The prescription time.
+     * @param prescriptionDocumentValidityStart The prescription validity start time (inclusive).
+     * @param prescriptionDocumentValidityStop  The prescription validity stop time (inclusive).
      * @param parentDocumentAuthor      The parent document author (not the original document author).
      * @param parentSectionAuthor       The parent section author (not the original section author).
      * @return a digest of the element.
      */
     protected EmedPreEntryDigest createDigest(final POCDMT000040SubstanceAdministration substanceAdministration,
-                                              final String preDocumentId,
-                                              final Instant preDocumentEffectiveTime,
-                                              final Instant prescriptionValidityStart,
-                                              final Instant prescriptionValidityStop,
+                                              final String documentId,
+                                              final Instant prescriptionTime,
+                                              final Instant prescriptionDocumentValidityStart,
+                                              @Nullable final Instant prescriptionDocumentValidityStop,
                                               final AuthorDigest parentDocumentAuthor,
                                               final AuthorDigest parentSectionAuthor) throws InvalidEmedContentException {
         if (!TemplateIds.hasAllIds(TemplateIds.PRE_ENTRY, substanceAdministration.getTemplateId())) {
@@ -83,7 +85,7 @@ public class CcePreEntryDigester {
         final String medicationTreatmentId;
         if (targetedMtp != null) {
             sequence = (int) this.emedEntryService.getSequence(targetedMtp.getMedicationTreatmentId(),
-                    preDocumentEffectiveTime);
+                    prescriptionTime);
             medicationTreatmentId = targetedMtp.getMedicationTreatmentId();
         } else {
             sequence = 0;
@@ -103,9 +105,14 @@ public class CcePreEntryDigester {
             sectionAuthor = parentSectionAuthor;
         }
 
+        final Instant itemValidityStart = ObjectUtils.firstNonNull(
+                preEntry.getEffectiveStartTime().orElse(null),
+                prescriptionTime
+        );
+
         return new EmedPreEntryDigest(
-                Objects.requireNonNull(preDocumentEffectiveTime),
-                Objects.requireNonNull(preDocumentId),
+                prescriptionTime,
+                documentId,
                 documentAuthor,
                 sectionAuthor,
                 IiUtils.getNormalizedUid(preEntry.getEntryId()),
@@ -116,10 +123,10 @@ public class CcePreEntryDigester {
                 preEntry.getManufacturedMaterialReader().toMedicationProduct(),
                 preEntry.getRepeatNumber().orElse(null),
                 preEntry.getRouteOfAdministration().orElse(null),
-                prescriptionValidityStart,
-                prescriptionValidityStop,
-                this.getServiceStartTime(preEntry, prescriptionValidityStart),
-                this.getServiceStopTime(preEntry, prescriptionValidityStop),
+                prescriptionDocumentValidityStart,
+                prescriptionDocumentValidityStop,
+                itemValidityStart,
+                preEntry.getEffectiveStopTime().orElse(null),
                 this.getRenewalInterval(substanceAdministration).orElse(null),
                 this.getTargetedMtpReference(substanceAdministration).orElse(null),
                 this.isProvisional(substanceAdministration),
@@ -128,37 +135,6 @@ public class CcePreEntryDigester {
                 preEntry.getPatientMedicationInstructions().orElse(null),
                 preEntry.getFulfillmentInstructions().orElse(null)
         );
-    }
-
-    /**
-     * Returns the starting time of the PRE item. It's the first known time from:
-     * <li>The treatment period start time, defined by the first “effectiveTime” of each PRE Item;
-     * <li>The start date of the PRE document.
-     *
-     * @param preEntry                  The PRE item reader.
-     * @param prescriptionValidityStart The prescription validity start time (inclusive).
-     * @return the starting time of the PRE item.
-     */
-    private Instant getServiceStartTime(final SubAdmEntryReader preEntry,
-                                        final Instant prescriptionValidityStart) {
-        return preEntry.getEffectiveStartTime().orElse(prescriptionValidityStart);
-    }
-
-    /**
-     * Returns the ending time of the PRE item. It's the first known time from:
-     * <li>The end date of the 'renewalPeriod' of the PRE item; TODO: mistake?
-     * <li>The treatment period end date, defined by the first 'effectiveTime' of the PRE item;
-     * <li>The end date of the PRE document.
-     * <p>
-     * TODO: Renewal period not considered yet
-     *
-     * @param preEntry                 The PRE item reader.
-     * @param prescriptionValidityStop The prescription validity stop time (inclusive).
-     * @return the ending time of the PRE item.
-     */
-    private Instant getServiceStopTime(final SubAdmEntryReader preEntry,
-                                       final Instant prescriptionValidityStop) {
-        return preEntry.getEffectiveStopTime().orElse(prescriptionValidityStop);
     }
 
     /**

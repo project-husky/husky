@@ -8,8 +8,9 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-package org.husky.emed.ch.cda.services.digesters;
+package org.husky.emed.ch.cda.digesters;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.dataflow.qual.SideEffectFree;
 import org.husky.common.ch.enums.ConfidentialityCode;
@@ -20,8 +21,8 @@ import org.husky.common.utils.datatypes.Uuids;
 import org.husky.common.utils.time.DateTimes;
 import org.husky.common.utils.time.Hl7Dtm;
 import org.husky.emed.ch.ChEmedSpec;
-import org.husky.emed.ch.cda.services.readers.AuthorReader;
-import org.husky.emed.ch.cda.services.readers.NameReader;
+import org.husky.emed.ch.cda.utils.readers.AuthorReader;
+import org.husky.emed.ch.cda.utils.readers.NameReader;
 import org.husky.emed.ch.cda.utils.IiUtils;
 import org.husky.emed.ch.cda.utils.IvlTsUtils;
 import org.husky.emed.ch.cda.utils.TemplateIds;
@@ -212,11 +213,10 @@ public class CceDocumentDigester {
      *
      * @param cce The CDA-CH-EMED document.
      * @return an optional that may contain the PDF content as a byte array.
-     * @throws IllegalArgumentException if the value is not in valid Base64 scheme. TODO throw
-     *                                  InvalidEmedContentException
+     * @throws InvalidEmedContentException if the value is not in valid Base64 scheme.
      */
     @SideEffectFree
-    public static byte[] getPdfRepresentation(final POCDMT000040ClinicalDocument cce) {
+    public static Optional<byte[]> getPdfRepresentation(final POCDMT000040ClinicalDocument cce) {
         return Optional.ofNullable(cce.getComponent())
                 .map(POCDMT000040Component2::getStructuredBody)
                 .map(POCDMT000040StructuredBody::getComponent)
@@ -231,8 +231,14 @@ public class CceDocumentDigester {
                 .map(POCDMT000040Entry::getObservationMedia)
                 .map(POCDMT000040ObservationMedia::getValue)
                 .map(ED::getTextContent)
-                .map(b64 -> Base64.getDecoder().decode(b64))
-                .orElse(new byte[]{});
+                .map(b64 -> {
+                    try {
+                        return Base64.getDecoder().decode(b64);
+                    } catch (final IllegalArgumentException exception) {
+                        throw new InvalidEmedContentException("The original representation is badly encoded",
+                                exception);
+                    }
+                });
     }
 
     /**
@@ -267,20 +273,20 @@ public class CceDocumentDigester {
      */
     @SideEffectFree
     public EmedDocumentDigest digest(final POCDMT000040ClinicalDocument cce) throws InvalidEmedContentException {
-        final var id = Optional.ofNullable(cce.getId()).map(II::getRoot).map(Uuids::normalize)
+        final String id = Optional.ofNullable(cce.getId()).map(II::getRoot).map(Uuids::normalize)
                 .orElseThrow(() -> new InvalidEmedContentException("The document ID is missing"));
-        final var setId = Optional.ofNullable(cce.getSetId()).map(II::getRoot).map(Uuids::normalize)
+        final String setId = Optional.ofNullable(cce.getSetId()).map(II::getRoot).map(Uuids::normalize)
                 .orElseThrow(() -> new InvalidEmedContentException("The document set ID is missing"));
-        final var version = Optional.ofNullable(cce.getVersionNumber()).map(INT::getValue)
+        final int version = Optional.ofNullable(cce.getVersionNumber()).map(INT::getValue)
                 .map(BigInteger::intValue)
                 .orElseThrow(() -> new InvalidEmedContentException("The document version is missing"));
-        final var effectiveTime = Optional.ofNullable(cce.getEffectiveTime()).map(TS::getValue)
+        final var creationTime = Optional.ofNullable(cce.getEffectiveTime()).map(TS::getValue)
                 .map(Hl7Dtm::toOffsetDateTime)
                 .orElseThrow(() -> new InvalidEmedContentException("The document effective time is missing"));
         final var confidentialityCode = Optional.ofNullable(cce.getConfidentialityCode())
                 .map(CD::getCode).map(ConfidentialityCode::getEnum)
                 .orElseThrow(() -> new InvalidEmedContentException("The confidentiality code is missing"));
-        final var languageCode = Optional.ofNullable(cce.getLanguageCode()).map(CD::getCode)
+        final String languageCode = Optional.ofNullable(cce.getLanguageCode()).map(CD::getCode)
                 .orElseThrow(() -> new InvalidEmedContentException("The language code is missing"));
 
         final var patient = getPatientDigest(cce);
@@ -292,13 +298,20 @@ public class CceDocumentDigester {
                 Collections.emptyList()); // TODO
         final var recipients = List.of(new RecipientDigest()); // TODO
 
-        final var narrativeText = getNarrativeText(cce);
+        final StrucDocText narrativeText = getNarrativeText(cce);
         final var contentSection = getContentSection(cce);
         final var sectionAuthor = Optional.of(contentSection.getAuthor())
                 .map(OptionalUtils::getListFirstElement)
                 .map(AuthorReader::new)
                 .map(AuthorReader::toDigest)
                 .orElseGet(() -> authors.get(0));
+
+
+        final Instant documentationTime = ObjectUtils.firstNonNull(
+                sectionAuthor.getAuthorshipTimestamp(),
+                authors.get(0).getAuthorshipTimestamp(),
+                creationTime.toInstant()
+        );
 
         final EmedDocumentDigest doc;
         switch (getDocumentType(cce)) {
@@ -308,62 +321,59 @@ public class CceDocumentDigester {
                         .map(POCDMT000040Entry::getSubstanceAdministration)
                         .orElseThrow(() -> new InvalidEmedContentException("The MTP entry is missing"));
                 final var mtpEntryDigest = this.mtpEntryDigester.createDigest(mtpEntry, id,
-                        effectiveTime.toInstant(), authors.get(0), sectionAuthor);
-                doc = new EmedMtpDocumentDigest(id, setId, version, effectiveTime, confidentialityCode,
-                        languageCode, patient, authors, custodian, recipients, narrativeText, mtpEntryDigest);
+                        documentationTime, authors.get(0), sectionAuthor);
+                doc = new EmedMtpDocumentDigest(id, setId, version, creationTime, documentationTime,
+                        confidentialityCode, languageCode, patient, authors, custodian, recipients, narrativeText,
+                        mtpEntryDigest);
             }
             case PRE -> {
-                final var preStartTime = getPreValidityStartTime(cce, effectiveTime.toInstant());
-                final var preStopTime = getPreValidityStopTime(cce, effectiveTime.toInstant());
+                final var preStartTime = getPreValidityStartTime(cce, creationTime.toInstant());
+                final var preStopTime = getPreValidityStopTime(cce, creationTime.toInstant());
                 final var preEntryDigests = Optional.of(contentSection.getEntry())
                         .orElse(Collections.emptyList()).stream()
                         .map(POCDMT000040Entry::getSubstanceAdministration)
                         .filter(Objects::nonNull)
-                        .map(preEntry -> this.preEntryDigester.createDigest(preEntry, id, effectiveTime.toInstant(), preStartTime
+                        .map(preEntry -> this.preEntryDigester.createDigest(preEntry, id, documentationTime, preStartTime
                                 , preStopTime, authors.get(0), sectionAuthor))
                         .toList();
 
-                doc = new EmedPreDocumentDigest(id, setId, version, effectiveTime, confidentialityCode, languageCode,
-                        patient, authors, custodian, recipients, narrativeText, preEntryDigests, preStartTime, preStopTime);
+                doc = new EmedPreDocumentDigest(id, setId, version, creationTime, documentationTime,
+                        confidentialityCode, languageCode, patient, authors, custodian, recipients, narrativeText,
+                        preEntryDigests, preStartTime, preStopTime);
             }
             case DIS -> {
                 final var disEntryDigest = Optional.of(contentSection.getEntry())
                         .map(OptionalUtils::getListFirstElement)
                         .map(POCDMT000040Entry::getSupply)
-                        .map(disEntry -> this.disEntryDigester.createDigest(disEntry, id, effectiveTime.toInstant(), authors.get(0), sectionAuthor))
+                        .map(disEntry -> this.disEntryDigester.createDigest(disEntry, id, documentationTime, authors.get(0), sectionAuthor))
                         .orElseThrow(() -> new InvalidEmedContentException("The DIS entry is missing"));
-                doc = new EmedDisDocumentDigest(id, setId, version, effectiveTime, confidentialityCode,
+                doc = new EmedDisDocumentDigest(id, setId, version, creationTime, documentationTime, confidentialityCode,
                         languageCode, patient, authors, custodian, recipients, narrativeText, disEntryDigest);
             }
             case PADV -> {
                 final var padvEntryDigest = Optional.of(contentSection.getEntry())
                         .map(OptionalUtils::getListFirstElement)
                         .map(POCDMT000040Entry::getObservation)
-                        .map(padvEntry -> this.padvEntryDigester.createDigest(padvEntry, id, effectiveTime.toInstant(), authors.get(0), sectionAuthor))
+                        .map(padvEntry -> this.padvEntryDigester.createDigest(padvEntry, id, documentationTime, authors.get(0), sectionAuthor))
                         .orElseThrow(() -> new InvalidEmedContentException("The PADV entry is missing"));
-                doc = new EmedPadvDocumentDigest(id, setId, version, effectiveTime, confidentialityCode,
+                doc = new EmedPadvDocumentDigest(id, setId, version, creationTime, documentationTime, confidentialityCode,
                         languageCode, patient, authors, custodian, recipients, narrativeText, padvEntryDigest);
             }
-            case PML -> {
-                // TODO: items: document dates are not available.
-                throw new UnsupportedOperationException("PML digestion not available yet");
-                /*doc = new EmedPmlDocumentDigest(id, setId, version, effectiveTime, confidentialityCode,
-                        languageCode, patient, authors, custodian, recipients, narrativeText, );*/
-            }
+            case PML -> throw new UnsupportedOperationException("PML digestion not available");
             case PMLC -> {
                 final var mtpEntryDigests = Optional.of(contentSection.getEntry())
                         .orElse(Collections.emptyList()).stream()
                         .map(POCDMT000040Entry::getSubstanceAdministration)
                         .filter(Objects::nonNull)
-                        .map(mtpEntry -> this.mtpEntryDigester.createDigest(mtpEntry, id, effectiveTime.toInstant(), authors.get(0), sectionAuthor))
+                        .map(mtpEntry -> this.mtpEntryDigester.createDigest(mtpEntry, id, documentationTime, authors.get(0), sectionAuthor))
                         .toList();
-                doc = new EmedPmlcDocumentDigest(id, setId, version, effectiveTime, confidentialityCode,
+                doc = new EmedPmlcDocumentDigest(id, setId, version, creationTime, documentationTime, confidentialityCode,
                         languageCode, patient, authors, custodian, recipients, narrativeText, mtpEntryDigests);
             }
             default -> throw new UnsupportedOperationException("Unknown document type");
         }
         doc.setRemarks(getRemarks(cce));
-        doc.setPdfRepresentation(getPdfRepresentation(cce));
+        doc.setPdfRepresentation(getPdfRepresentation(cce).orElse(new byte[]{}));
         return doc;
     }
 }

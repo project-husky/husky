@@ -20,6 +20,7 @@ import org.husky.emed.ch.models.entry.EmedPadvEntryDigest;
 import org.husky.emed.ch.models.entry.EmedPreEntryDigest;
 
 import java.time.Instant;
+import java.util.Objects;
 
 /**
  * Represents the digest of an EMED PADV document Change item entry.
@@ -149,5 +150,41 @@ public class EmedPadvChangeEntryDigest extends EmedPadvEntryDigest {
                     "targets a DIS entry");
         }
         this.changedDosageInstructions = changedDosageInstructions;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof final EmedPadvChangeEntryDigest that)) return false;
+        if (!super.equals(o)) return false;
+        return Objects.equals(changedMtpEntry, that.changedMtpEntry)
+                && Objects.equals(changedPreEntry, that.changedPreEntry)
+                && Objects.equals(changedDosageInstructions, that.changedDosageInstructions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), changedMtpEntry, changedPreEntry, changedDosageInstructions);
+    }
+
+    @Override
+    public String toString() {
+        return "EmedPadvChangeEntryDigest{" +
+                "annotationComment='" + this.annotationComment + '\'' +
+                ", creationTime=" + this.itemTime +
+                ", documentAuthor=" + this.documentAuthor +
+                ", documentId='" + this.documentId + '\'' +
+                ", entryId='" + this.entryId + '\'' +
+                ", medicationTreatmentId='" + this.medicationTreatmentId + '\'' +
+                ", sectionAuthor=" + this.sectionAuthor +
+                ", sequence=" + this.sequence +
+                ", effectiveTime=" + this.effectiveTime +
+                ", completed=" + this.completed +
+                ", targetedEntryRef=" + this.targetedEntryRef +
+                ", targetedEntryType=" + this.targetedEntryType +
+                ", changedMtpEntry=" + this.changedMtpEntry +
+                ", changedPreEntry=" + this.changedPreEntry +
+                ", changedDosageInstructions=" + this.changedDosageInstructions +
+                '}';
     }
 }

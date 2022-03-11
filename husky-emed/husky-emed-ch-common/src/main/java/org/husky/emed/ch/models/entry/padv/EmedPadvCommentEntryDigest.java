@@ -63,4 +63,22 @@ public class EmedPadvCommentEntryDigest extends EmedPadvEntryDigest {
     public PharmaceuticalAdviceStatus getPadvEntryType() {
         return PharmaceuticalAdviceStatus.COMMENT;
     }
+
+    @Override
+    public String toString() {
+        return "EmedPadvCommentEntryDigest{" +
+                "annotationComment='" + this.annotationComment + '\'' +
+                ", creationTime=" + this.itemTime +
+                ", documentAuthor=" + this.documentAuthor +
+                ", documentId='" + this.documentId + '\'' +
+                ", entryId='" + this.entryId + '\'' +
+                ", medicationTreatmentId='" + this.medicationTreatmentId + '\'' +
+                ", sectionAuthor=" + this.sectionAuthor +
+                ", sequence=" + this.sequence +
+                ", effectiveTime=" + this.effectiveTime +
+                ", completed=" + this.completed +
+                ", targetedEntryRef=" + this.targetedEntryRef +
+                ", targetedEntryType=" + this.targetedEntryType +
+                '}';
+    }
 }

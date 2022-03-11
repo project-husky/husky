@@ -7,7 +7,7 @@
  * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  */
-package org.husky.emed.ch.cda.services.readers;
+package org.husky.emed.ch.cda.utils.readers;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.husky.common.hl7cdar2.*;
@@ -63,10 +63,10 @@ public class DosageInstructionsReader {
      */
     public DosageInstructionsReader(final POCDMT000040SubstanceAdministration subAdm) throws InvalidEmedContentException {
         Objects.requireNonNull(subAdm);
-        /*if (!TemplateIds.isInList(TemplateIds.DOSAGE_INSTRUCTIONS, subAdm.getTemplateId())) {
+        if (!TemplateIds.isInList(TemplateIds.DOSAGE_INSTRUCTIONS, subAdm.getTemplateId())) {
             throw new InvalidEmedContentException("The given substance administration is not a dosage " +
                 "instructions content module");
-        } TODO SPEC This is required, update when ArtDecor is fixed */
+        }
         this.subAdm = subAdm;
         this.dosageType = this.getDosageTypeFromTemplateIds();
     }

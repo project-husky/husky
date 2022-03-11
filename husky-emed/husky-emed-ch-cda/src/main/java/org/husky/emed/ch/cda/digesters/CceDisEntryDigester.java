@@ -9,13 +9,24 @@
  *
  */
 
-package org.husky.emed.ch.cda.services.digesters;
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ *
+ */
+
+package org.husky.emed.ch.cda.digesters;
 
 import org.husky.common.hl7cdar2.*;
 import org.husky.common.utils.OptionalUtils;
 import org.husky.emed.ch.cda.services.EmedEntryDigestService;
-import org.husky.emed.ch.cda.services.readers.AuthorReader;
-import org.husky.emed.ch.cda.services.readers.ManufacturedMaterialReader;
+import org.husky.emed.ch.cda.utils.readers.AuthorReader;
+import org.husky.emed.ch.cda.utils.readers.ManufacturedMaterialReader;
 import org.husky.emed.ch.cda.utils.CdaR2Utils;
 import org.husky.emed.ch.cda.utils.EntryRelationshipUtils;
 import org.husky.emed.ch.cda.utils.IiUtils;

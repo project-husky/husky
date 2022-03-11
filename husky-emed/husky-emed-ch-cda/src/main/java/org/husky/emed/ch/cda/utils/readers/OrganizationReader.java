@@ -7,7 +7,7 @@
  * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  */
-package org.husky.emed.ch.cda.services.readers;
+package org.husky.emed.ch.cda.utils.readers;
 
 import org.husky.common.hl7cdar2.ANY;
 import org.husky.common.hl7cdar2.II;

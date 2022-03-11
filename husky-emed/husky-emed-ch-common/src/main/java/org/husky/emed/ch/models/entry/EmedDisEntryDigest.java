@@ -9,8 +9,6 @@
  */
 package org.husky.emed.ch.models.entry;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.ch.enums.DispenseSupplyType;
 import org.husky.emed.ch.enums.EmedEntryType;
@@ -27,8 +25,6 @@ import java.util.Objects;
  *
  * @author Quentin Ligier
  */
-@Getter
-@Setter
 public class EmedDisEntryDigest extends EmedEntryDigest {
 
     /**
@@ -133,5 +129,115 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
      */
     public EmedEntryType getEmedEntryType() {
         return EmedEntryType.DIS;
+    }
+
+    public DispenseSupplyType getDispenseType() {
+        return this.dispenseType;
+    }
+
+    public void setDispenseType(final DispenseSupplyType dispenseType) {
+        this.dispenseType = dispenseType;
+    }
+
+    @Nullable
+    public String getFulfilmentNotes() {
+        return this.fulfilmentNotes;
+    }
+
+    public void setFulfilmentNotes(@Nullable final String fulfilmentNotes) {
+        this.fulfilmentNotes = fulfilmentNotes;
+    }
+
+    @Nullable
+    public EmedReference getMtpEntryRef() {
+        return this.mtpEntryRef;
+    }
+
+    public void setMtpEntryRef(@Nullable final EmedReference mtpEntryRef) {
+        this.mtpEntryRef = mtpEntryRef;
+    }
+
+    public boolean isOtc() {
+        return this.otc;
+    }
+
+    public void setOtc(final boolean otc) {
+        this.otc = otc;
+    }
+
+    @Nullable
+    public String getPatientMedicationInstructions() {
+        return this.patientMedicationInstructions;
+    }
+
+    public void setPatientMedicationInstructions(@Nullable final String patientMedicationInstructions) {
+        this.patientMedicationInstructions = patientMedicationInstructions;
+    }
+
+    @Nullable
+    public EmedReference getPreEntryRef() {
+        return this.preEntryRef;
+    }
+
+    public void setPreEntryRef(@Nullable final EmedReference preEntryRef) {
+        this.preEntryRef = preEntryRef;
+    }
+
+    public MedicationProduct getProduct() {
+        return this.product;
+    }
+
+    public void setProduct(final MedicationProduct product) {
+        this.product = product;
+    }
+
+    public Quantity getQuantity() {
+        return this.quantity;
+    }
+
+    public void setQuantity(final Quantity quantity) {
+        this.quantity = quantity;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof final EmedDisEntryDigest that)) return false;
+        if (!super.equals(o)) return false;
+        return otc == that.otc
+                && dispenseType == that.dispenseType
+                && Objects.equals(fulfilmentNotes, that.fulfilmentNotes)
+                && Objects.equals(mtpEntryRef, that.mtpEntryRef)
+                && Objects.equals(patientMedicationInstructions, that.patientMedicationInstructions)
+                && Objects.equals(preEntryRef, that.preEntryRef)
+                && product.equals(that.product)
+                && quantity.equals(that.quantity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), dispenseType, fulfilmentNotes, mtpEntryRef, otc, patientMedicationInstructions, preEntryRef, product, quantity);
+    }
+
+    @Override
+    public String toString() {
+        return "EmedDisEntryDigest{" +
+                "dispenseType=" + this.dispenseType +
+                ", fulfilmentNotes='" + this.fulfilmentNotes + '\'' +
+                ", mtpEntryRef=" + this.mtpEntryRef +
+                ", otc=" + this.otc +
+                ", patientMedicationInstructions='" + this.patientMedicationInstructions + '\'' +
+                ", preEntryRef=" + this.preEntryRef +
+                ", product=" + this.product +
+                ", quantity=" + this.quantity +
+                ", annotationComment='" + this.annotationComment + '\'' +
+                ", creationTime=" + this.itemTime +
+                ", documentAuthor=" + this.documentAuthor +
+                ", documentId='" + this.documentId + '\'' +
+                ", entryId='" + this.entryId + '\'' +
+                ", medicationTreatmentId='" + this.medicationTreatmentId + '\'' +
+                ", sectionAuthor=" + this.sectionAuthor +
+                ", sequence=" + this.sequence +
+                '}';
     }
 }

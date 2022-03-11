@@ -7,25 +7,27 @@
  * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  */
-package org.husky.emed.ch.cda.services.digesters;
-
+package org.husky.emed.ch.cda.digesters;
 
 import org.husky.common.hl7cdar2.*;
 import org.husky.common.utils.OptionalUtils;
 import org.husky.common.utils.time.DateTimes;
 import org.husky.common.utils.time.Hl7Dtm;
 import org.husky.emed.ch.cda.services.EmedEntryDigestService;
-import org.husky.emed.ch.cda.services.readers.AuthorReader;
 import org.husky.emed.ch.cda.utils.CdaR2Utils;
 import org.husky.emed.ch.cda.utils.EntryRelationshipUtils;
 import org.husky.emed.ch.cda.utils.IiUtils;
 import org.husky.emed.ch.cda.utils.TemplateIds;
+import org.husky.emed.ch.cda.utils.readers.AuthorReader;
+import org.husky.emed.ch.cda.utils.readers.DosageInstructionsReader;
+import org.husky.emed.ch.enums.EmedEntryType;
 import org.husky.emed.ch.enums.PharmaceuticalAdviceStatus;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
+import org.husky.emed.ch.errors.InvalidMedicationTreatmentStateException;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.EmedReference;
-import org.husky.emed.ch.models.entry.EmedEntryDigest;
-import org.husky.emed.ch.models.entry.EmedPadvEntryDigest;
+import org.husky.emed.ch.models.common.MedicationDosageInstructions;
+import org.husky.emed.ch.models.entry.*;
 import org.husky.emed.ch.models.entry.padv.*;
 import org.springframework.stereotype.Component;
 
@@ -33,6 +35,8 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
+
+import static org.husky.emed.ch.cda.utils.TemplateIds.*;
 
 /**
  * Creator of CDA-CH-EMED MTP item entry digests.
@@ -48,12 +52,28 @@ public class CcePadvEntryDigester {
     private final EmedEntryDigestService emedEntryService;
 
     /**
+     * The MTP entry digester.
+     */
+    private final CceMtpEntryDigester mtpEntryDigester;
+
+    /**
+     * The PRE entry digester.
+     */
+    private final CcePreEntryDigester preEntryDigester;
+
+    /**
      * Constructor.
      *
      * @param emedEntryService The registry of {@link EmedEntryDigest}.
+     * @param mtpEntryDigester The MTP entry digester.
+     * @param preEntryDigester The PRE entry digester.
      */
-    public CcePadvEntryDigester(final EmedEntryDigestService emedEntryService) {
-        this.emedEntryService = emedEntryService;
+    public CcePadvEntryDigester(final EmedEntryDigestService emedEntryService,
+                                final CceMtpEntryDigester mtpEntryDigester,
+                                final CcePreEntryDigester preEntryDigester) {
+        this.emedEntryService = Objects.requireNonNull(emedEntryService);
+        this.mtpEntryDigester = Objects.requireNonNull(mtpEntryDigester);
+        this.preEntryDigester = Objects.requireNonNull(preEntryDigester);
     }
 
     /**
@@ -104,21 +124,50 @@ public class CcePadvEntryDigester {
         }
 
         return switch (this.getStatus(observation)) {
-            case OK -> new EmedPadvOkEntryDigest(
-                    padvDocumentEffectiveTime,
-                    padvDocumentId,
-                    documentAuthor,
-                    sectionAuthor,
-                    entryId,
-                    medicationTreatmentId,
-                    sequence,
-                    annotationComment,
-                    isCompleted,
-                    effectiveTime,
-                    targetedEntryRef,
-                    targetedEntryType,
-                    null // TODO
-            );
+            case OK -> {
+                final var recommendedPrescriptions = observation.getEntryRelationship().stream()
+                        .map(POCDMT000040EntryRelationship::getOrganizer)
+                        .filter(Objects::nonNull)
+                        .map(POCDMT000040Organizer::getComponent)
+                        .map(OptionalUtils::getListOnlyElement)
+                        .filter(Objects::nonNull)
+                        .map(POCDMT000040Component4::getSubstanceAdministration)
+                        .filter(Objects::nonNull)
+                        .map(subAdm -> {
+                            final EmedEntryDigest targetedEntry =
+                                    this.emedEntryService.getById(Objects.requireNonNull(targetedEntryRef.getItemId()))
+                                            .orElseThrow(() -> new InvalidMedicationTreatmentStateException(String.format("The " +
+                                                    "referenced entry '%s' cannot be found",
+                                                    targetedEntryRef.getItemId())));
+                            if (targetedEntry instanceof final EmedPreEntryDigest targetedPreEntry) {
+                                return this.preEntryDigester.createDigest(
+                                        subAdm,
+                                        targetedPreEntry.getDocumentId(),
+                                        targetedPreEntry.getPrescriptionTime(),
+                                        targetedPreEntry.getPrescriptionDocumentValidityStart(),
+                                        targetedPreEntry.getPrescriptionDocumentValidityStop(),
+                                        documentAuthor,
+                                        sectionAuthor);
+                            }
+                            throw new InvalidEmedContentException("The referenced PRE entry cannot be found");
+                        })
+                        .toList();
+                yield new EmedPadvOkEntryDigest(
+                        padvDocumentEffectiveTime,
+                        padvDocumentId,
+                        documentAuthor,
+                        sectionAuthor,
+                        entryId,
+                        medicationTreatmentId,
+                        sequence,
+                        annotationComment,
+                        isCompleted,
+                        effectiveTime,
+                        targetedEntryRef,
+                        targetedEntryType,
+                        recommendedPrescriptions
+                );
+            }
             case CANCEL -> new EmedPadvCancelEntryDigest(
                     padvDocumentEffectiveTime,
                     padvDocumentId,
@@ -133,23 +182,84 @@ public class CcePadvEntryDigester {
                     targetedEntryRef,
                     targetedEntryType
             );
-            case CHANGE -> new EmedPadvChangeEntryDigest(
-                    padvDocumentEffectiveTime,
-                    padvDocumentId,
-                    documentAuthor,
-                    sectionAuthor,
-                    entryId,
-                    medicationTreatmentId,
-                    sequence,
-                    annotationComment,
-                    isCompleted,
-                    effectiveTime,
-                    targetedEntryRef,
-                    targetedEntryType,
-                    null, // TODO
-                    null, // TODO
-                    null // TODO
-            );
+            case CHANGE -> {
+                final EmedEntryDigest targetedEntry =
+                        this.emedEntryService.getById(Objects.requireNonNull(targetedEntryRef.getItemId()))
+                                .orElseThrow(() -> new InvalidMedicationTreatmentStateException(String.format("The " +
+                                        "referenced entry '%s' cannot be found", targetedEntryRef.getItemId())));
+
+                final EmedMtpEntryDigest changedMtpEntry;
+                final EmedPreEntryDigest changedPreEntry;
+                final MedicationDosageInstructions changedDosageInstructions;
+
+                if (targetedEntryType == EmedEntryType.MTP && targetedEntry instanceof final EmedMtpEntryDigest targetedMtpEntry) {
+                    changedMtpEntry = observation.getEntryRelationship().stream()
+                            .map(POCDMT000040EntryRelationship::getSubstanceAdministration)
+                            .filter(Objects::nonNull)
+                            .filter(subAdmin -> hasAllIds(MTP_ENTRY, subAdmin.getTemplateId()))
+                            .findAny()
+                            .map(subAdm -> this.mtpEntryDigester.createDigest(
+                                    subAdm,
+                                    targetedMtpEntry.getDocumentId(),
+                                    targetedMtpEntry.getPlanningTime(),
+                                    documentAuthor,
+                                    sectionAuthor))
+                            .orElse(null);
+                    changedPreEntry = null;
+                    changedDosageInstructions = null;
+                } else if (targetedEntryType == EmedEntryType.PRE && targetedEntry instanceof final EmedPreEntryDigest targetedPreEntry) {
+                    changedMtpEntry = null;
+                    changedPreEntry = observation.getEntryRelationship().stream()
+                            .map(POCDMT000040EntryRelationship::getOrganizer)
+                            .filter(Objects::nonNull)
+                            .map(POCDMT000040Organizer::getComponent)
+                            .map(OptionalUtils::getListOnlyElement)
+                            .filter(Objects::nonNull)
+                            .map(POCDMT000040Component4::getSubstanceAdministration)
+                            .filter(Objects::nonNull)
+                            .findAny()
+                            .map(subAdm -> this.preEntryDigester.createDigest(
+                                    subAdm,
+                                    targetedPreEntry.getDocumentId(),
+                                    targetedPreEntry.getPrescriptionTime(),
+                                    targetedPreEntry.getPrescriptionDocumentValidityStart(),
+                                    targetedPreEntry.getPrescriptionDocumentValidityStop(),
+                                    documentAuthor,
+                                    sectionAuthor))
+                            .orElse(null);
+                    changedDosageInstructions = null;
+                } else if (targetedEntryType == EmedEntryType.DIS && targetedEntry instanceof EmedDisEntryDigest) {
+                    changedMtpEntry = null;
+                    changedPreEntry = null;
+                    changedDosageInstructions = observation.getEntryRelationship().stream()
+                            .map(POCDMT000040EntryRelationship::getSubstanceAdministration)
+                            .filter(Objects::nonNull)
+                            .filter(subAdmin -> isInList(DOSAGE_INSTRUCTIONS, subAdmin.getTemplateId()))
+                            .findAny()
+                            .map(DosageInstructionsReader::new)
+                            .map(DosageInstructionsReader::getDosageInstructions)
+                            .orElse(null);
+                } else {
+                    throw new InvalidEmedContentException("Unable to process the reference to the changed entry");
+                }
+                yield new EmedPadvChangeEntryDigest(
+                        padvDocumentEffectiveTime,
+                        padvDocumentId,
+                        documentAuthor,
+                        sectionAuthor,
+                        entryId,
+                        medicationTreatmentId,
+                        sequence,
+                        annotationComment,
+                        isCompleted,
+                        effectiveTime,
+                        targetedEntryRef,
+                        targetedEntryType,
+                        changedMtpEntry,
+                        changedPreEntry,
+                        changedDosageInstructions
+                );
+            }
             case REFUSE -> new EmedPadvRefuseEntryDigest(
                     padvDocumentEffectiveTime,
                     padvDocumentId,
@@ -210,25 +320,6 @@ public class CcePadvEntryDigester {
     }
 
     /**
-     * Returns the author of the item entry.
-     *
-     * @return an {@link Optional} that may contain the item entry author.
-     */
-    private Optional<POCDMT000040Author> getEntryAuthorElement(final POCDMT000040Observation observation) {
-        return Optional.ofNullable(!observation.getAuthor().isEmpty() ? observation.getAuthor().get(0) : null);
-    }
-
-    /**
-     * Returns the author of the original parent document. It's generally set in PML documents only, as the author of
-     * the PML document may be different than the author of the MTP/PRE/DIS/PADV document.
-     *
-     * @return an {@link Optional} tht may contain the parent document author.
-     */
-    private Optional<POCDMT000040Author> getParentDocumentAuthorElement(final POCDMT000040Observation observation) {
-        return Optional.ofNullable(observation.getAuthor().size() >= 2 ? observation.getAuthor().get(1) : null);
-    }
-
-    /**
      * Retrieves the status (OK, CHANGE, CANCEL, SUSPEND, REFUSE, COMMENT) of the PADV observation element.
      */
     private PharmaceuticalAdviceStatus getStatus(final POCDMT000040Observation observation) throws InvalidEmedContentException {
@@ -272,8 +363,8 @@ public class CcePadvEntryDigester {
     private EmedReference getItemReference(final POCDMT000040Observation observation) throws InvalidEmedContentException {
         return Stream.of(this.getMtpReference(observation), this.getPreReference(observation), this.getDisReference(observation))
                 .filter(Optional::isPresent)
-                .findAny()
                 .map(Optional::get)
+                .findAny()
                 .filter(ref -> ref.getItemId() != null)
                 .orElseThrow(() -> new InvalidEmedContentException("The mandatory referenced entry is missing"));
     }
@@ -289,8 +380,7 @@ public class CcePadvEntryDigester {
                 .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.REFR)
                 .map(POCDMT000040EntryRelationship::getSubstanceAdministration)
                 .filter(Objects::nonNull)
-                // .filter(substanceAdministration -> hasAllIds(REFERENCE_TO_MTP,
-                // substanceAdministration.getTemplateId()))
+                .filter(subAdm -> hasAllIds(REFERENCE_TO_MTP, subAdm.getTemplateId()))
                 .findAny()
                 .map(CdaR2Utils::toEmedReference);
     }
@@ -306,8 +396,7 @@ public class CcePadvEntryDigester {
                 .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.REFR)
                 .map(POCDMT000040EntryRelationship::getSubstanceAdministration)
                 .filter(Objects::nonNull)
-                // .filter(substanceAdministration -> hasAllIds(REFERENCE_TO_PRE,
-                // substanceAdministration.getTemplateId()))
+                .filter(subAdm -> hasAllIds(REFERENCE_TO_PRE, subAdm.getTemplateId()))
                 .findAny()
                 .map(CdaR2Utils::toEmedReference);
     }
@@ -323,7 +412,7 @@ public class CcePadvEntryDigester {
                 .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.REFR)
                 .map(POCDMT000040EntryRelationship::getSupply)
                 .filter(Objects::nonNull)
-                // .filter(su -> hasAllIds(REFERENCE_TO_DIS, su.getTemplateId()))
+                .filter(su -> hasAllIds(REFERENCE_TO_DIS, su.getTemplateId()))
                 .findAny()
                 .map(CdaR2Utils::toEmedReference);
     }

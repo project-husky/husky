@@ -9,8 +9,6 @@
  */
 package org.husky.emed.ch.models.entry;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.ch.enums.EmedEntryType;
 import org.husky.emed.ch.models.common.AuthorDigest;
@@ -24,8 +22,6 @@ import java.util.Objects;
  *
  * @author Quentin Ligier
  */
-@Getter
-@Setter
 public abstract class EmedEntryDigest {
 
     /**
@@ -37,7 +33,7 @@ public abstract class EmedEntryDigest {
     /**
      * The instant at which the item entry was created.
      */
-    protected Instant creationTime;
+    protected Instant itemTime;
 
     /**
      * The author of the original parent document or {@code null} if they're not known.
@@ -75,7 +71,7 @@ public abstract class EmedEntryDigest {
     /**
      * Constructor.
      *
-     * @param creationTime          The instant at which the item entry was created.
+     * @param itemTime          The planning time, prescription time, dispense time or pharmaceutical advice time.
      * @param documentId            The parent document unique ID.
      * @param documentAuthor        The author of the original parent document or {@code null} if they're not known.
      * @param sectionAuthor         The author of the original parent section or {@code null} if they're not known.
@@ -84,7 +80,7 @@ public abstract class EmedEntryDigest {
      * @param sequence              The sequence of addition.
      * @param annotationComment     The annotation comment or {@code null} if it isn't provided.
      */
-    protected EmedEntryDigest(final Instant creationTime,
+    protected EmedEntryDigest(final Instant itemTime,
                               final String documentId,
                               @Nullable final AuthorDigest documentAuthor,
                               @Nullable final AuthorDigest sectionAuthor,
@@ -92,7 +88,7 @@ public abstract class EmedEntryDigest {
                               final String medicationTreatmentId,
                               final int sequence,
                               @Nullable final String annotationComment) {
-        this.creationTime = Objects.requireNonNull(creationTime);
+        this.itemTime = Objects.requireNonNull(itemTime);
         this.documentId = Objects.requireNonNull(documentId);
         this.documentAuthor = documentAuthor;
         this.sectionAuthor = sectionAuthor;
@@ -107,10 +103,88 @@ public abstract class EmedEntryDigest {
      */
     public abstract EmedEntryType getEmedEntryType();
 
+    @Nullable
+    public String getAnnotationComment() {
+        return this.annotationComment;
+    }
+
+    public void setAnnotationComment(@Nullable final String annotationComment) {
+        this.annotationComment = annotationComment;
+    }
+
+    @Nullable
+    public AuthorDigest getDocumentAuthor() {
+        return this.documentAuthor;
+    }
+
+    public void setDocumentAuthor(@Nullable final AuthorDigest documentAuthor) {
+        this.documentAuthor = documentAuthor;
+    }
+
+    public String getDocumentId() {
+        return this.documentId;
+    }
+
+    public void setDocumentId(final String documentId) {
+        this.documentId = documentId;
+    }
+
+    public String getEntryId() {
+        return this.entryId;
+    }
+
+    public void setEntryId(final String entryId) {
+        this.entryId = entryId;
+    }
+
+    public String getMedicationTreatmentId() {
+        return this.medicationTreatmentId;
+    }
+
+    public void setMedicationTreatmentId(final String medicationTreatmentId) {
+        this.medicationTreatmentId = medicationTreatmentId;
+    }
+
+    @Nullable
+    public AuthorDigest getSectionAuthor() {
+        return this.sectionAuthor;
+    }
+
+    public void setSectionAuthor(@Nullable final AuthorDigest sectionAuthor) {
+        this.sectionAuthor = sectionAuthor;
+    }
+
+    public int getSequence() {
+        return this.sequence;
+    }
+
+    public void setSequence(final int sequence) {
+        this.sequence = sequence;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof final EmedEntryDigest that)) return false;
+        return sequence == that.sequence
+                && Objects.equals(annotationComment, that.annotationComment)
+                && itemTime.equals(that.itemTime)
+                && Objects.equals(documentAuthor, that.documentAuthor)
+                && documentId.equals(that.documentId)
+                && entryId.equals(that.entryId)
+                && medicationTreatmentId.equals(that.medicationTreatmentId)
+                && Objects.equals(sectionAuthor, that.sectionAuthor);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(annotationComment, itemTime, documentAuthor, documentId, entryId, medicationTreatmentId, sectionAuthor, sequence);
+    }
+
     @Override
     public String toString() {
         return "EmedEntryDigest{" +
-                "creationTime=" + creationTime +
+                "itemTime=" + itemTime +
                 ", documentId='" + documentId + '\'' +
                 ", sectionAuthor=" + sectionAuthor +
                 ", documentAuthor=" + documentAuthor +

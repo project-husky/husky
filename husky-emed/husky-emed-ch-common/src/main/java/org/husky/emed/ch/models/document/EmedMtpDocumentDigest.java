@@ -20,6 +20,7 @@ import org.husky.emed.ch.models.common.RecipientDigest;
 import org.husky.emed.ch.models.entry.EmedEntryDigest;
 import org.husky.emed.ch.models.entry.EmedMtpEntryDigest;
 
+import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -42,7 +43,8 @@ public class EmedMtpDocumentDigest extends EmedDocumentDigest {
      * @param id                  The document ID.
      * @param setId               The document set ID.
      * @param version             The document version.
-     * @param effectiveTime       The document effective time.
+     * @param creationTime        The document creation time.
+     * @param documentationTime   The planning time.
      * @param confidentialityCode The confidentiality code.
      * @param languageCode        The document main language.
      * @param patient             The targeted patient.
@@ -55,7 +57,8 @@ public class EmedMtpDocumentDigest extends EmedDocumentDigest {
     public EmedMtpDocumentDigest(final String id,
                                  final String setId,
                                  final int version,
-                                 final OffsetDateTime effectiveTime,
+                                 final OffsetDateTime creationTime,
+                                 final Instant documentationTime,
                                  final ConfidentialityCode confidentialityCode,
                                  final String languageCode,
                                  final PatientDigest patient,
@@ -64,8 +67,8 @@ public class EmedMtpDocumentDigest extends EmedDocumentDigest {
                                  final List<@NonNull RecipientDigest> recipients,
                                  final StrucDocText narrativeText,
                                  final EmedMtpEntryDigest mtpEntryDigest) {
-        super(id, setId, version, effectiveTime, confidentialityCode, languageCode, patient, authors, custodian,
-                recipients, narrativeText);
+        super(id, setId, version, creationTime, documentationTime, confidentialityCode, languageCode, patient, authors,
+                custodian, recipients, narrativeText);
         this.mtpEntryDigest = Objects.requireNonNull(mtpEntryDigest);
     }
 

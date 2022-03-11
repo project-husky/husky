@@ -63,4 +63,22 @@ public class EmedPadvCancelEntryDigest extends EmedPadvEntryDigest {
     public PharmaceuticalAdviceStatus getPadvEntryType() {
         return PharmaceuticalAdviceStatus.CANCEL;
     }
+
+    @Override
+    public String toString() {
+        return "EmedPadvCancelEntryDigest{" +
+                "annotationComment='" + this.annotationComment + '\'' +
+                ", creationTime=" + this.itemTime +
+                ", documentAuthor=" + this.documentAuthor +
+                ", documentId='" + this.documentId + '\'' +
+                ", entryId='" + this.entryId + '\'' +
+                ", medicationTreatmentId='" + this.medicationTreatmentId + '\'' +
+                ", sectionAuthor=" + this.sectionAuthor +
+                ", sequence=" + this.sequence +
+                ", effectiveTime=" + this.effectiveTime +
+                ", completed=" + this.completed +
+                ", targetedEntryRef=" + this.targetedEntryRef +
+                ", targetedEntryType=" + this.targetedEntryType +
+                '}';
+    }
 }

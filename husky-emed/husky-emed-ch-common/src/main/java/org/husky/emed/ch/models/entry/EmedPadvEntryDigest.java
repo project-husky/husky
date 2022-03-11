@@ -33,21 +33,17 @@ public abstract class EmedPadvEntryDigest extends EmedEntryDigest {
     /**
      * Whether the PADV status is completed or not.
      */
-    private boolean completed;
+    protected boolean completed;
 
     /**
      * Reference to the targeted item entry.
      */
-    private EmedReference targetedEntryRef;
+    protected EmedReference targetedEntryRef;
 
     /**
      * Document type of the targeted item entry.
      */
-    private EmedEntryType targetedEntryType;
-
-    /*
-     * Pharmaceutical Advice Concerns
-     */
+    protected EmedEntryType targetedEntryType;
 
     /**
      * Constructor.
@@ -133,19 +129,36 @@ public abstract class EmedPadvEntryDigest extends EmedEntryDigest {
     }
 
     @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof final EmedPadvEntryDigest that)) return false;
+        if (!super.equals(o)) return false;
+        return completed == that.completed
+                && effectiveTime.equals(that.effectiveTime)
+                && targetedEntryRef.equals(that.targetedEntryRef)
+                && targetedEntryType == that.targetedEntryType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), effectiveTime, completed, targetedEntryRef, targetedEntryType);
+    }
+
+    @Override
     public String toString() {
         return "EmedPadvEntryDigest{" +
-                "creationTime=" + creationTime +
-                ", documentId='" + documentId +
-                ", documentAuthor=" + documentAuthor +
-                ", sectionAuthor=" + sectionAuthor +
-                ", entryId='" + entryId +
-                ", medicationTreatmentId='" + medicationTreatmentId +
-                ", sequence=" + sequence +
-                ", effectiveTime=" + effectiveTime +
-                ", completed=" + completed +
-                ", targetedEntryRef=" + targetedEntryRef +
-                ", targetedEntryType=" + targetedEntryType +
+                "annotationComment='" + this.annotationComment + '\'' +
+                ", creationTime=" + this.itemTime +
+                ", documentAuthor=" + this.documentAuthor +
+                ", documentId='" + this.documentId + '\'' +
+                ", entryId='" + this.entryId + '\'' +
+                ", medicationTreatmentId='" + this.medicationTreatmentId + '\'' +
+                ", sectionAuthor=" + this.sectionAuthor +
+                ", sequence=" + this.sequence +
+                ", effectiveTime=" + this.effectiveTime +
+                ", completed=" + this.completed +
+                ", targetedEntryRef=" + this.targetedEntryRef +
+                ", targetedEntryType=" + this.targetedEntryType +
                 '}';
     }
 }

@@ -39,15 +39,15 @@ public interface EmedEntryDigestService {
 
     /**
      * Find the next number in the sequence. The sequence is necessary to order Emed entries belonging to the same
-     * medication treatment and having the same creation time (it should be quite rare but is allowed); one is
+     * medication treatment and having the same documentation time (it should be quite rare but is allowed); one is
      * necessarily aggregated before the other, in order of ascending sequence number.
      * <p>
      * The simplest implementation is to return the count of entries in the given medication treatment that have the
      * given creation time; this sequence begins at 0.
      *
      * @param medicationTreatmentId The medication treatment ID.
-     * @param creationTime The document creation time.
+     * @param documentationTime     The documentation time.
      * @return The next number in the sequence.
      */
-    long getSequence(final String medicationTreatmentId, final Instant creationTime);
+    long getSequence(final String medicationTreatmentId, final Instant documentationTime);
 }
