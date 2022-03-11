@@ -242,6 +242,7 @@
 					<!-- MTP -->
 					<entry>
 						<substanceAdministration classCode="SBADM" moodCode="INT">
+							<templateId root="1.3.6.1.4.1.19376.1.9.1.3.6" />
 							<!-- IHE PHARM MTP Required element indicating the Medication Treatment Plan entry content module -->
 							<templateId root="1.3.6.1.4.1.19376.1.9.1.3.7" />
 							<!-- CCD -->
