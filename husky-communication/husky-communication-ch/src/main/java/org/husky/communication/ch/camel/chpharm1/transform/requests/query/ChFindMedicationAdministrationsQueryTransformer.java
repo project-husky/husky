@@ -8,15 +8,15 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-package org.husky.communication.ch.camel.chpharm1.transform.requests;
+package org.husky.communication.ch.camel.chpharm1.transform.requests.query;
 
-import org.husky.communication.ch.camel.chpharm1.requests.ChFindMedicationTreatmentPlansQuery;
+import org.husky.communication.ch.camel.chpharm1.requests.query.ChFindMedicationAdministrationsQuery;
 import org.openehealth.ipf.commons.ihe.xds.core.ebxml.EbXMLAdhocQueryRequest;
 
 /**
- * Transforms between {@link ChFindMedicationTreatmentPlansQuery} and {@link EbXMLAdhocQueryRequest}.
+ * Transforms between {@link ChFindMedicationAdministrationsQuery} and {@link EbXMLAdhocQueryRequest}.
  *
  * @author Quentin Ligier
  **/
-public class ChFindMedicationTreatmentPlansQueryTransformer extends ChPharmacyStableDocumentsQueryTransformer<ChFindMedicationTreatmentPlansQuery> {
+public class ChFindMedicationAdministrationsQueryTransformer extends ChPharmacyStableDocumentsQueryTransformer<ChFindMedicationAdministrationsQuery> {
 }

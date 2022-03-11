@@ -9,7 +9,7 @@
  *
  */
 
-package org.husky.communication.ch.camel.chpharm1.requests;
+package org.husky.communication.ch.camel.chpharm1.requests.query;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -18,22 +18,22 @@ import javax.xml.bind.annotation.XmlType;
 import java.io.Serial;
 
 /**
- * Represents a stored query for FindPrescriptionsQuery (CH:PHARM-1).
+ * Represents a stored query for FindDispensesQuery (CH:PHARM-1).
  *
  * @author Quentin Ligier
  **/
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "FindPrescriptionsQuery", propOrder = {})
-@XmlRootElement(name = "findPrescriptionsQuery")
-public class ChFindPrescriptionsQuery extends ChPharmacyStableDocumentsQuery {
+@XmlType(name = "FindDispensesQuery", propOrder = {})
+@XmlRootElement(name = "findDispensesQuery")
+public class ChFindDispensesQuery extends ChPharmacyStableDocumentsQuery {
     @Serial
-    private static final long serialVersionUID = 3492506001787540389L;
+    private static final long serialVersionUID = -3372146149450085483L;
 
     /**
      * Constructs the query.
      */
-    public ChFindPrescriptionsQuery() {
-        super(ChPharm1QueryType.CH_FIND_PRESCRIPTIONS);
+    public ChFindDispensesQuery() {
+        super(ChPharm1QueryType.CH_FIND_DISPENSES);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class ChFindPrescriptionsQuery extends ChPharmacyStableDocumentsQuery {
 
     @Override
     public String toString() {
-        return "ChFindPrescriptionsQuery{" +
+        return "ChFindDispensesQuery{" +
                 "type=" + this.type +
                 ", homeCommunityId='" + this.homeCommunityId + '\'' +
                 ", extraParameters=" + this.extraParameters +

@@ -9,7 +9,7 @@
  *
  */
 
-package org.husky.communication.ch.camel.chpharm1.requests;
+package org.husky.communication.ch.camel.chpharm1.requests.query;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

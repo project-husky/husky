@@ -8,9 +8,9 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-package org.husky.communication.ch.camel.chpharm1.transform.requests;
+package org.husky.communication.ch.camel.chpharm1.transform.requests.query;
 
-import org.husky.communication.ch.camel.chpharm1.requests.ChFindPrescriptionsForValidationQuery;
+import org.husky.communication.ch.camel.chpharm1.requests.query.ChFindPrescriptionsForValidationQuery;
 import org.openehealth.ipf.commons.ihe.xds.core.ebxml.EbXMLAdhocQueryRequest;
 
 /**

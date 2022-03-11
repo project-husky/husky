@@ -29,6 +29,6 @@ public class ChPharm5Endpoint extends FhirEndpoint<FhirQueryAuditDataset, ChPhar
 
     @Override
     protected String createEndpointUri() {
-        return "cmpd-chpharm-5:" + "not-implemented yet";
+        return "cmpd-chpharm5:" + "not-implemented yet";
     }
 }

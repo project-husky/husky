@@ -11,8 +11,10 @@
 package org.husky.communication.ch.camel.chpharm1.transform;
 
 import org.apache.camel.Converter;
-import org.husky.communication.ch.camel.chpharm1.requests.*;
-import org.husky.communication.ch.camel.chpharm1.transform.requests.*;
+import org.husky.communication.ch.camel.chpharm1.requests.ChQueryRegistry;
+import org.husky.communication.ch.camel.chpharm1.requests.query.*;
+import org.husky.communication.ch.camel.chpharm1.transform.requests.ChQueryRegistryTransformer;
+import org.husky.communication.ch.camel.chpharm1.transform.requests.query.*;
 import org.openehealth.ipf.commons.ihe.xds.core.ebxml.EbXMLAdhocQueryRequest;
 import org.openehealth.ipf.commons.ihe.xds.core.ebxml.ebxml30.EbXMLAdhocQueryRequest30;
 import org.openehealth.ipf.commons.ihe.xds.core.stub.ebrs30.query.AdhocQueryRequest;
@@ -24,6 +26,19 @@ import org.openehealth.ipf.commons.ihe.xds.core.stub.ebrs30.query.AdhocQueryRequ
  **/
 @Converter(generateLoader = true)
 public class ChPharm1Converters {
+
+    /*
+     * ChQueryRegistry
+     */
+    @Converter
+    public AdhocQueryRequest convertChQueryRegistry(final ChQueryRegistry queryRegistry) {
+        return (AdhocQueryRequest)(new ChQueryRegistryTransformer()).toEbXML(queryRegistry).getInternal();
+    }
+
+    @Converter
+    public ChQueryRegistry convertChQueryRegistry(final AdhocQueryRequest ebXML) {
+        return (new ChQueryRegistryTransformer()).fromEbXML(new EbXMLAdhocQueryRequest30(ebXML));
+    }
 
     /*
      * ChFindMedicationTreatmentPlansQuery
@@ -40,7 +55,7 @@ public class ChPharm1Converters {
     public ChFindMedicationTreatmentPlansQuery convertFindMedicationTreatmentPlansQuery(final EbXMLAdhocQueryRequest30 ebXML) {
         final var transformer = new ChFindMedicationTreatmentPlansQueryTransformer();
         final var query = new ChFindMedicationTreatmentPlansQuery();
-        transformer.toEbXML(query, ebXML);
+        transformer.fromEbXML(query, ebXML);
         return query;
     }
 
@@ -59,7 +74,7 @@ public class ChPharm1Converters {
     public ChFindPrescriptionsQuery convertFindPrescriptionsQuery(final EbXMLAdhocQueryRequest30 ebXML) {
         final var transformer = new ChFindPrescriptionsQueryTransformer();
         final var query = new ChFindPrescriptionsQuery();
-        transformer.toEbXML(query, ebXML);
+        transformer.fromEbXML(query, ebXML);
         return query;
     }
 
@@ -68,7 +83,7 @@ public class ChPharm1Converters {
      */
     @Converter
     public EbXMLAdhocQueryRequest convertChFindDispensesQuery(final ChFindDispensesQuery query) {
-        final var transformer = new ChFindDispenseQueryTransformer();
+        final var transformer = new ChFindDispensesQueryTransformer();
         final var ebXML = new EbXMLAdhocQueryRequest30(new AdhocQueryRequest());
         transformer.toEbXML(query, ebXML);
         return ebXML;
@@ -76,9 +91,9 @@ public class ChPharm1Converters {
 
     @Converter
     public ChFindDispensesQuery convertChFindDispensesQuery(final EbXMLAdhocQueryRequest30 ebXML) {
-        final var transformer = new ChFindDispenseQueryTransformer();
+        final var transformer = new ChFindDispensesQueryTransformer();
         final var query = new ChFindDispensesQuery();
-        transformer.toEbXML(query, ebXML);
+        transformer.fromEbXML(query, ebXML);
         return query;
     }
 
@@ -97,7 +112,7 @@ public class ChPharm1Converters {
     public ChFindMedicationAdministrationsQuery convertChFindMedicationAdministrationsQuery(final EbXMLAdhocQueryRequest30 ebXML) {
         final var transformer = new ChFindMedicationAdministrationsQueryTransformer();
         final var query = new ChFindMedicationAdministrationsQuery();
-        transformer.toEbXML(query, ebXML);
+        transformer.fromEbXML(query, ebXML);
         return query;
     }
 
@@ -116,7 +131,7 @@ public class ChPharm1Converters {
     public ChFindPrescriptionsForDispenseQuery convertChFindPrescriptionsForDispenseQuery(final EbXMLAdhocQueryRequest30 ebXML) {
         final var transformer = new ChFindPrescriptionsForDispenseQueryTransformer();
         final var query = new ChFindPrescriptionsForDispenseQuery();
-        transformer.toEbXML(query, ebXML);
+        transformer.fromEbXML(query, ebXML);
         return query;
     }
 
@@ -135,7 +150,7 @@ public class ChPharm1Converters {
     public ChFindPrescriptionsForValidationQuery convertChFindPrescriptionsForValidationQuery(final EbXMLAdhocQueryRequest30 ebXML) {
         final var transformer = new ChFindPrescriptionsForValidationQueryTransformer();
         final var query = new ChFindPrescriptionsForValidationQuery();
-        transformer.toEbXML(query, ebXML);
+        transformer.fromEbXML(query, ebXML);
         return query;
     }
 
@@ -154,7 +169,7 @@ public class ChPharm1Converters {
     public ChFindMedicationListQuery convertChFindMedicationListQuery(final EbXMLAdhocQueryRequest30 ebXML) {
         final var transformer = new ChFindMedicationListQueryTransformer();
         final var query = new ChFindMedicationListQuery();
-        transformer.toEbXML(query, ebXML);
+        transformer.fromEbXML(query, ebXML);
         return query;
     }
 
@@ -173,7 +188,7 @@ public class ChPharm1Converters {
     public ChFindMedicationCardQuery convertChFindMedicationCardQuery(final EbXMLAdhocQueryRequest30 ebXML) {
         final var transformer = new ChFindMedicationCardQueryTransformer();
         final var query = new ChFindMedicationCardQuery();
-        transformer.toEbXML(query, ebXML);
+        transformer.fromEbXML(query, ebXML);
         return query;
     }
 }

@@ -6,8 +6,9 @@
  * This project has been developed further and modified by the joined working group Husky
  * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ *
  */
-package org.husky.communication.ch.camel.chpharm1.requests;
+package org.husky.communication.ch.camel.chpharm1.requests.query;
 
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Code;
@@ -114,7 +115,7 @@ public abstract class ChPharmacyDocumentsQuery implements PatientIdBasedStoredQu
      */
     public interface Visitor {
         // for CH:PHARM-1
-        void visit(final ChPharmacyDocumentsQuery query);
+        void visit(final ChFindMedicationTreatmentPlansQuery query);
         void visit(final ChFindPrescriptionsQuery query);
         void visit(final ChFindDispensesQuery query);
         void visit(final ChFindMedicationAdministrationsQuery query);

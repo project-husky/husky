@@ -9,7 +9,7 @@
  *
  */
 
-package org.husky.communication.ch.camel.chpharm1.requests;
+package org.husky.communication.ch.camel.chpharm1.requests.query;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntryType;
@@ -21,30 +21,28 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Represents a stored query for FindMedicationCardQuery (CH:PHARM-1).
+ * Represents a stored query for FindMedicationListQuery (CH:PHARM-1).
  *
  * @author Quentin Ligier
  **/
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "FindMedicationCardQuery", propOrder = {
+@XmlType(name = "FindMedicationListQuery", propOrder = {
         "documentEntryTypes", "serviceStart", "serviceEnd"})
-@XmlRootElement(name = "findMedicationCardQuery")
-public class ChFindMedicationCardQuery extends ChPharmacyDocumentsQuery {
+@XmlRootElement(name = "findMedicationListQuery")
+public class ChFindMedicationListQuery extends ChPharmacyDocumentsQuery {
     @Serial
-    private static final long serialVersionUID = 7643647733043294769L;
+    private static final long serialVersionUID = -3643837556544663781L;
 
     @Nullable @XmlElement(name = "documentEntryType")
     private List<DocumentEntryType> documentEntryTypes;
     private final TimeRange serviceStart = new TimeRange();
     private final TimeRange serviceEnd = new TimeRange();
-    @Nullable
-    private String languageCode;
 
     /**
      * Constructs the query.
      */
-    public ChFindMedicationCardQuery() {
-        super(ChPharm1QueryType.CH_FIND_MEDICATION_CARD);
+    public ChFindMedicationListQuery() {
+        super(ChPharm1QueryType.CH_FIND_MEDICATION_LIST);
     }
 
     @Override
@@ -69,41 +67,30 @@ public class ChFindMedicationCardQuery extends ChPharmacyDocumentsQuery {
         return serviceEnd;
     }
 
-    @Nullable
-    public String getLanguageCode() {
-        return languageCode;
-    }
-
-    public void setLanguageCode(@Nullable final String languageCode) {
-        this.languageCode = languageCode;
-    }
-
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
-        if (!(o instanceof final ChFindMedicationCardQuery that)) return false;
+        if (!(o instanceof final ChFindMedicationListQuery that)) return false;
         return Objects.equals(documentEntryTypes, that.documentEntryTypes)
                 && Objects.equals(serviceStart, that.serviceStart)
-                && Objects.equals(serviceEnd, that.serviceEnd)
-                && Objects.equals(languageCode, that.languageCode);
+                && Objects.equals(serviceEnd, that.serviceEnd);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), documentEntryTypes, serviceStart, serviceEnd, languageCode);
+        return Objects.hash(super.hashCode(), documentEntryTypes, serviceStart, serviceEnd);
     }
 
     @Override
     public String toString() {
-        return "ChFindMedicationCardQuery{" +
+        return "ChFindMedicationListQuery{" +
                 "documentEntryTypes=" + this.documentEntryTypes +
                 ", serviceStart=" + this.serviceStart +
                 ", serviceEnd=" + this.serviceEnd +
-                ", languageCode='" + this.languageCode + '\'' +
                 ", type=" + this.type +
                 ", homeCommunityId='" + this.homeCommunityId + '\'' +
                 ", extraParameters=" + this.extraParameters +
-                ", patientEprSpid=" + this.patientEprSpid +
+                ", patientId=" + this.patientEprSpid +
                 ", status=" + this.status +
                 ", metadataLevel=" + this.metadataLevel +
                 ", formatCodes=" + this.formatCodes +

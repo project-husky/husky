@@ -11,7 +11,7 @@
 package org.husky.communication.ch.camel.chpharm1;
 
 import org.apache.camel.Processor;
-import org.husky.communication.ch.camel.chpharm1.requests.ChPharm1RequestValidator;
+import org.husky.communication.ch.camel.chpharm1.validate.requests.query.ChPharm1RequestValidator;
 import org.openehealth.ipf.commons.ihe.xds.core.ebxml.ebxml30.EbXMLAdhocQueryRequest30;
 import org.openehealth.ipf.commons.ihe.xds.core.ebxml.ebxml30.EbXMLQueryResponse30;
 import org.openehealth.ipf.commons.ihe.xds.core.stub.ebrs30.query.AdhocQueryRequest;
