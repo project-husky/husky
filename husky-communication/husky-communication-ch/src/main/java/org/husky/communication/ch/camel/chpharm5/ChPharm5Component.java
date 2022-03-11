@@ -11,7 +11,7 @@
 package org.husky.communication.ch.camel.chpharm5;
 
 import org.apache.camel.CamelContext;
-import org.husky.communication.ch.camel.MHD;
+import org.husky.communication.ch.camel.ChMhd;
 import org.openehealth.ipf.commons.ihe.fhir.audit.FhirQueryAuditDataset;
 import org.openehealth.ipf.platform.camel.ihe.fhir.core.FhirComponent;
 import org.openehealth.ipf.platform.camel.ihe.fhir.core.FhirEndpointConfiguration;
@@ -24,11 +24,11 @@ import org.openehealth.ipf.platform.camel.ihe.fhir.core.FhirEndpointConfiguratio
 public class ChPharm5Component extends FhirComponent<FhirQueryAuditDataset> {
 
     public ChPharm5Component() {
-        super(MHD.QueryDocumentReferenceInteractions.CHPHARM_5);
+        super(ChMhd.QueryDocumentReferenceInteractions.CHPHARM_5);
     }
 
     public ChPharm5Component(final CamelContext context) {
-        super(context, MHD.QueryDocumentReferenceInteractions.CHPHARM_5);
+        super(context, ChMhd.QueryDocumentReferenceInteractions.CHPHARM_5);
     }
 
     @Override

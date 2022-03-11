@@ -21,12 +21,12 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Definitions for the MHD transactions defined in this module.
+ * Definitions for the Swiss extensions of the MHD transactions defined in this module.
  *
  * @author Quentin Ligier
  **/
-public class MHD implements IntegrationProfile {
-    public static final MHD Instance = new MHD();
+public class ChMhd implements IntegrationProfile {
+    public static final ChMhd Instance = new ChMhd();
 
     public enum QueryDocumentReferenceInteractions implements FhirInteractionId<FhirQueryAuditDataset> {
 

@@ -23,7 +23,7 @@ import org.openehealth.ipf.commons.ihe.fhir.audit.FhirQueryAuditDataset;
 public class ChPharm5TransactionConfiguration extends FhirTransactionConfiguration<FhirQueryAuditDataset> {
 
         public ChPharm5TransactionConfiguration() {
-            super("ch-pharm-5",
+            super("cmpd-chpharm-5",
                     "CH:PHARM-5",
                     true,
                     new ChPharm5AuditStrategy(false),
