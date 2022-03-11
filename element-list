@@ -11,6 +11,14 @@ org.husky.common.utils.time
 org.husky.common.utils.xml
 org.husky.communication
 org.husky.communication.ch
+org.husky.communication.ch.camel
+org.husky.communication.ch.camel.chpharm1
+org.husky.communication.ch.camel.chpharm1.requests
+org.husky.communication.ch.camel.chpharm1.transform
+org.husky.communication.ch.camel.chpharm1.transform.requests
+org.husky.communication.ch.camel.chpharm5
+org.husky.communication.ch.camel.chpharm5.requests
+org.husky.communication.ch.camel.validate
 org.husky.communication.ch.enums
 org.husky.communication.ch.enums.vacd.v140
 org.husky.communication.ch.ppq
