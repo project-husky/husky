@@ -28,20 +28,20 @@ public class EmedPadvRefuseEntryDigest extends EmedPadvEntryDigest {
     /**
      * Constructor.
      *
-     * @param creationTime          The instant at which the item entry was created.
-     * @param documentId            The parent document unique ID.
-     * @param documentAuthor        The author of the original parent document or {@code null} if they're not known.
-     * @param sectionAuthor         The author of the original parent section or {@code null} if they're not known.
-     * @param entryId               The item entry ID.
-     * @param medicationTreatmentId The ID of the medication treatment this item entry belongs to.
-     * @param sequence              The sequence of addition.
-     * @param annotationComment     The annotation comment or {@code null} if it isn't provided.
-     * @param completed             Whether the PADV status is completed or not.
-     * @param effectiveTime         The instant at which the advice becomes effective.
-     * @param targetedEntryRef      Reference to the targeted item entry.
-     * @param targetedEntryType     Document type of the targeted item entry (MTP or PRE).
+     * @param pharmaceuticalAdviceTime The pharmaceutical advice time.
+     * @param documentId               The parent document unique ID.
+     * @param documentAuthor           The author of the original parent document or {@code null} if they're not known.
+     * @param sectionAuthor            The author of the original parent section or {@code null} if they're not known.
+     * @param entryId                  The item entry ID.
+     * @param medicationTreatmentId    The ID of the medication treatment this item entry belongs to.
+     * @param sequence                 The sequence of addition.
+     * @param annotationComment        The annotation comment or {@code null} if it isn't provided.
+     * @param completed                Whether the PADV status is completed or not.
+     * @param effectiveTime            The instant at which the advice becomes effective.
+     * @param targetedEntryRef         Reference to the targeted item entry.
+     * @param targetedEntryType        Document type of the targeted item entry (MTP or PRE).
      */
-    public EmedPadvRefuseEntryDigest(final Instant creationTime,
+    public EmedPadvRefuseEntryDigest(final Instant pharmaceuticalAdviceTime,
                                      final String documentId,
                                      @Nullable final AuthorDigest documentAuthor,
                                      @Nullable final AuthorDigest sectionAuthor,
@@ -53,7 +53,7 @@ public class EmedPadvRefuseEntryDigest extends EmedPadvEntryDigest {
                                      final Instant effectiveTime,
                                      final EmedReference targetedEntryRef,
                                      final EmedEntryType targetedEntryType) {
-        super(creationTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId,  sequence,
+        super(pharmaceuticalAdviceTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
                 annotationComment, completed, effectiveTime, targetedEntryRef, targetedEntryType);
 
         if (targetedEntryType != EmedEntryType.MTP && targetedEntryType != EmedEntryType.PRE) {
@@ -72,7 +72,7 @@ public class EmedPadvRefuseEntryDigest extends EmedPadvEntryDigest {
     public String toString() {
         return "EmedPadvRefuseEntryDigest{" +
                 "annotationComment='" + this.annotationComment + '\'' +
-                ", creationTime=" + this.itemTime +
+                ", pharmaceuticalAdviceTime=" + this.itemTime +
                 ", documentAuthor=" + this.documentAuthor +
                 ", documentId='" + this.documentId + '\'' +
                 ", entryId='" + this.entryId + '\'' +

@@ -44,7 +44,7 @@ public class EmedPadvOkEntryDigest extends EmedPadvEntryDigest {
     /**
      * Constructor.
      *
-     * @param creationTime             The instant at which the item entry was created.
+     * @param pharmaceuticalAdviceTime The pharmaceutical advice time.
      * @param documentId               The parent document unique ID.
      * @param documentAuthor           The author of the original parent document or {@code null} if they're not known.
      * @param sectionAuthor            The author of the original parent section or {@code null} if they're not known.
@@ -59,7 +59,7 @@ public class EmedPadvOkEntryDigest extends EmedPadvEntryDigest {
      * @param recommendedPrescriptions Proposition of an alternative (drug, dosage, form, etc.) to the original
      *                                 Prescription Item, if any.
      */
-    public EmedPadvOkEntryDigest(final Instant creationTime,
+    public EmedPadvOkEntryDigest(final Instant pharmaceuticalAdviceTime,
                                  final String documentId,
                                  @Nullable final AuthorDigest documentAuthor,
                                  @Nullable final AuthorDigest sectionAuthor,
@@ -72,7 +72,7 @@ public class EmedPadvOkEntryDigest extends EmedPadvEntryDigest {
                                  final EmedReference targetedEntryRef,
                                  final EmedEntryType targetedEntryType,
                                  @Nullable final List<@NonNull EmedPreEntryDigest> recommendedPrescriptions) {
-        super(creationTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
+        super(pharmaceuticalAdviceTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
                 annotationComment, completed, effectiveTime, targetedEntryRef, targetedEntryType);
         if (targetedEntryType == EmedEntryType.PRE) {
             this.recommendedPrescriptions = Collections.emptyList(); // Immutable
@@ -115,7 +115,7 @@ public class EmedPadvOkEntryDigest extends EmedPadvEntryDigest {
     public String toString() {
         return "EmedPadvOkEntryDigest{" +
                 "annotationComment='" + this.annotationComment + '\'' +
-                ", creationTime=" + this.itemTime +
+                ", pharmaceuticalAdviceTime=" + this.itemTime +
                 ", documentAuthor=" + this.documentAuthor +
                 ", documentId='" + this.documentId + '\'' +
                 ", entryId='" + this.entryId + '\'' +

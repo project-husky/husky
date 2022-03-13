@@ -75,7 +75,7 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
     /**
      * Constructor.
      *
-     * @param creationTime                  The instant at which the item entry was created.
+     * @param dispenseTime                  The dispense time.
      * @param documentId                    The parent document unique ID.
      * @param documentAuthor                The author of the original parent document or {@code null} if they're not
      *                                      known.
@@ -96,7 +96,7 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
      * @param patientMedicationInstructions The patient medication instructions or {@code null} if it isn't provided.
      * @param fulfilmentNotes               The fulfilment notes or {@code null} if it isn't provided.
      */
-    public EmedDisEntryDigest(final Instant creationTime,
+    public EmedDisEntryDigest(final Instant dispenseTime,
                               final String documentId,
                               @Nullable final AuthorDigest documentAuthor,
                               @Nullable final AuthorDigest sectionAuthor,
@@ -112,7 +112,7 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
                               final Quantity quantity,
                               @Nullable final String patientMedicationInstructions,
                               @Nullable final String fulfilmentNotes) {
-        super(creationTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
+        super(dispenseTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
                 annotationComment);
         this.dispenseType = Objects.requireNonNull(dispenseType);
         this.otc = otc;
@@ -129,6 +129,14 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
      */
     public EmedEntryType getEmedEntryType() {
         return EmedEntryType.DIS;
+    }
+
+    public Instant getDispenseTime() {
+        return this.itemTime;
+    }
+
+    public void setDispenseTime(final Instant dispenseTime) {
+        this.itemTime = Objects.requireNonNull(dispenseTime);
     }
 
     public DispenseSupplyType getDispenseType() {
@@ -231,7 +239,7 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
                 ", product=" + this.product +
                 ", quantity=" + this.quantity +
                 ", annotationComment='" + this.annotationComment + '\'' +
-                ", creationTime=" + this.itemTime +
+                ", dispenseTime=" + this.itemTime +
                 ", documentAuthor=" + this.documentAuthor +
                 ", documentId='" + this.documentId + '\'' +
                 ", entryId='" + this.entryId + '\'' +

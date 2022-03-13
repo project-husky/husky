@@ -36,7 +36,8 @@ public class EmedPadvChangeEntryDigest extends EmedPadvEntryDigest {
     private EmedMtpEntryDigest changedMtpEntry;
 
     /**
-     * The changed Prescription Item, if any, which is allowed to be dispensed instead of the original prescribed item.
+     * The changed Prescription Item, if any, which is allowed to be dispensed instead of the original prescribed
+     * item. This may only be set when the PADV CHANGE item targets a prescription item entry.
      */
     @Nullable
     private EmedPreEntryDigest changedPreEntry;
@@ -51,7 +52,7 @@ public class EmedPadvChangeEntryDigest extends EmedPadvEntryDigest {
     /**
      * Constructor.
      *
-     * @param creationTime              The instant at which the item entry was created.
+     * @param pharmaceuticalAdviceTime  The pharmaceutical advice time.
      * @param documentId                The parent document unique ID.
      * @param documentAuthor            The author of the original parent document or {@code null} if they're not
      *                                  known.
@@ -69,9 +70,9 @@ public class EmedPadvChangeEntryDigest extends EmedPadvEntryDigest {
      * @param changedPreEntry           The changed Prescription Item, if any, which is allowed to be dispensed instead
      *                                  of the original prescribed item.
      * @param changedDosageInstructions The changed dosage instructions, if any. This may only be set when the PADV
-     *                                  CHANGE item targets a dispense * item entry.
+     *                                  CHANGE item targets a dispense item entry.
      */
-    public EmedPadvChangeEntryDigest(final Instant creationTime,
+    public EmedPadvChangeEntryDigest(final Instant pharmaceuticalAdviceTime,
                                      final String documentId,
                                      @Nullable final AuthorDigest documentAuthor,
                                      @Nullable final AuthorDigest sectionAuthor,
@@ -86,7 +87,7 @@ public class EmedPadvChangeEntryDigest extends EmedPadvEntryDigest {
                                      @Nullable final EmedMtpEntryDigest changedMtpEntry,
                                      @Nullable final EmedPreEntryDigest changedPreEntry,
                                      @Nullable final MedicationDosageInstructions changedDosageInstructions) {
-        super(creationTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
+        super(pharmaceuticalAdviceTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
                 annotationComment, completed, effectiveTime, targetedEntryRef, targetedEntryType);
 
         if (changedMtpEntry != null) {
@@ -171,7 +172,7 @@ public class EmedPadvChangeEntryDigest extends EmedPadvEntryDigest {
     public String toString() {
         return "EmedPadvChangeEntryDigest{" +
                 "annotationComment='" + this.annotationComment + '\'' +
-                ", creationTime=" + this.itemTime +
+                ", pharmaceuticalAdviceTime=" + this.itemTime +
                 ", documentAuthor=" + this.documentAuthor +
                 ", documentId='" + this.documentId + '\'' +
                 ", entryId='" + this.entryId + '\'' +

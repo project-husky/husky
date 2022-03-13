@@ -179,7 +179,7 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
     }
 
     public void setPlanningTime(final Instant planningTime) {
-        this.itemTime = planningTime;
+        this.itemTime = Objects.requireNonNull(planningTime);
     }
 
     public MedicationDosageInstructions getDosageInstructions() {

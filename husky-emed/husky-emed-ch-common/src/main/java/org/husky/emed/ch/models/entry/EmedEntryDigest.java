@@ -31,7 +31,7 @@ public abstract class EmedEntryDigest {
     protected String annotationComment;
 
     /**
-     * The instant at which the item entry was created.
+     * The planning time, prescription time, dispense time or pharmaceutical advice time.
      */
     protected Instant itemTime;
 
@@ -71,7 +71,7 @@ public abstract class EmedEntryDigest {
     /**
      * Constructor.
      *
-     * @param itemTime          The planning time, prescription time, dispense time or pharmaceutical advice time.
+     * @param itemTime              The planning time, prescription time, dispense time or pharmaceutical advice time.
      * @param documentId            The parent document unique ID.
      * @param documentAuthor        The author of the original parent document or {@code null} if they're not known.
      * @param sectionAuthor         The author of the original parent section or {@code null} if they're not known.

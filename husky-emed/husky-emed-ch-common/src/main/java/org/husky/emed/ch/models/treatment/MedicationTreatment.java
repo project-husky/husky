@@ -41,6 +41,16 @@ import java.util.Optional;
 public class MedicationTreatment {
 
     /**
+     * The list of 'over-the-counter' dispenses (OTC, without prescription).
+     */
+    protected final List<@NonNull MedicationDispense> otcDispenses = new ArrayList<>();
+
+    /**
+     * The list of prescriptions.
+     */
+    protected final List<@NonNull MedicationPrescription> prescriptions = new ArrayList<>();
+
+    /**
      * The annotation comment or {@code null} if it isn't provided.
      */
     @Nullable
@@ -81,29 +91,10 @@ public class MedicationTreatment {
     protected EmedReference mtpReference;
 
     /**
-     * The MTP planned stop time. It's the maximum time at which the medication treatment can be valid, but it may
-     * already be stopped by a PADV CANCEL or REFUSE item.
-     *
-     * @see #treatmentStopTime
-     */
-    @Nullable
-    protected Instant mtpStopTime;
-
-    /**
-     * The list of 'over-the-counter' dispenses (OTC, without prescription).
-     */
-    protected final List<@NonNull MedicationDispense> otcDispenses = new ArrayList<>();
-
-    /**
      * The patient medication instructions or {@code null} if it isn't provided.
      */
     @Nullable
     protected String patientMedicationInstructions;
-
-    /**
-     * The list of prescriptions.
-     */
-    protected final List<@NonNull MedicationPrescription> prescriptions = new ArrayList<>();
 
     /**
      * The medication product.
@@ -128,7 +119,7 @@ public class MedicationTreatment {
     protected String treatmentReason;
 
     /**
-     * The MTP and treatment starting time.
+     * The treatment start time (inclusive).
      */
     protected Instant treatmentStartTime;
 
@@ -140,10 +131,8 @@ public class MedicationTreatment {
     protected TreatmentStatus treatmentStatus;
 
     /**
-     * The treatment stop time. By default, it's equal to the {@code mtpStopTime}. It can be then moved sooner if a PADV
-     * CANCEL or REFUSE targets the MTP.
-     *
-     * @see #mtpStopTime
+     * The treatment stop time (inclusive). It's the maximum time at which the medication treatment can be valid. If
+     * {@code null}, the treatment is active forever (or until stopped).
      */
     @Nullable
     protected Instant treatmentStopTime;

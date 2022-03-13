@@ -44,12 +44,12 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
     private String fulfilmentInstructions;
 
     /**
-     * The inclusive instant at which the initial treatment shall start or {@code null} if it's unknown.
+     * The inclusive instant at which the initial treatment shall start.
      */
     private Instant itemValidityStart;
 
     /**
-     * The inclusive instant at which the initial treatment shall stop or {@code null} if it's unknown.
+     * The inclusive instant at which the initial treatment shall stop or {@code null} if it's not bounded.
      */
     @Nullable
     private Instant itemValidityStop;
@@ -72,7 +72,7 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
     private Instant prescriptionDocumentValidityStart;
 
     /**
-     * The inclusive instant at which the prescription shall stop.
+     * The inclusive instant at which the prescription shall stop or {@code null} if it's not bounded.
      */
     @Nullable
     private Instant prescriptionDocumentValidityStop;
@@ -141,10 +141,10 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
      *                                          specified.
      * @param prescriptionDocumentValidityStart The inclusive instant at which the prescription shall start.
      * @param prescriptionDocumentValidityStop  The inclusive instant at which the prescription shall stop or {@code
-     *                                          null}.
+     *                                          null} if it's not bounded.
      * @param itemValidityStart                 The inclusive instant at which the initial treatment shall start.
      * @param itemValidityStop                  The inclusive instant at which the initial treatment shall stop or
-     *                                          {@code null} if it's unknown.
+     *                                          {@code null} if it's not bounded.
      * @param renewalPeriod                     The renewal period or {@code null} if it's not specified.
      * @param mtpReference                      The reference to the MTP entry, if any.
      * @param provisional                       Whether this prescription item is provisional or not.
@@ -223,7 +223,7 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
     }
 
     public void setPrescriptionTime(final Instant prescriptionTime) {
-        this.itemTime = prescriptionTime;
+        this.itemTime = Objects.requireNonNull(prescriptionTime);
     }
 
     @Override
