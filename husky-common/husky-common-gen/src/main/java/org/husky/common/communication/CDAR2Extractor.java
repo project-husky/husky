@@ -500,7 +500,7 @@ public class CDAR2Extractor {
 	}
 
 	private Person extractPerson(POCDMT000040AssignedEntity auth, boolean idNull) {
-		if (auth.getAssignedPerson() == null || !atLeastOne(auth.getAssignedPerson().getName())) {
+		if (auth.getAssignedPerson() == null || auth.getAssignedPerson().getName().isEmpty()) {
 			if (idNull) {
 				return null;
 			}
@@ -840,6 +840,7 @@ public class CDAR2Extractor {
 
 		var dName = new LocalizedString();
 		dName.setValue(cda.getTitle().getTextContent());
+
 		return dName;
 	}
 
@@ -997,7 +998,7 @@ public class CDAR2Extractor {
             return null;
         }
 
-        identifiable.setId(role.getCode());
+		identifiable.setId(role.getDisplayName());
 
         return identifiable;
     }
@@ -1329,16 +1330,23 @@ public class CDAR2Extractor {
 	 */
 	protected Organization map(ON name, II id) {
 		var xon = new Organization();
-		var assigningAuthority = new AssigningAuthority();
 
 		if (id != null) {
-			// XON.3 - id number
-			xon.setIdNumber(id.getExtension());
-			// XON.6.2 - assigning authority universal id
-			assigningAuthority.setUniversalId(id.getRoot());
-			// XON.6.3 - assigning authority universal id type
-			assigningAuthority.setUniversalIdType("ISO");
-			xon.setAssigningAuthority(assigningAuthority);
+			// XON.10 - id number
+			if (id.getExtension() != null) {
+				xon.setIdNumber(id.getExtension());
+
+				var assigningAuthority = new AssigningAuthority();
+				// XON.6.2 - assigning authority universal id
+				assigningAuthority.setUniversalId(id.getRoot());
+
+				// XON.6.3 - assigning authority universal id type
+				assigningAuthority.setUniversalIdType("ISO");
+
+				xon.setAssigningAuthority(assigningAuthority);
+			} else {
+				xon.setIdNumber(id.getRoot());
+			}
 		}
 		if (name != null) {
 			// XON 1

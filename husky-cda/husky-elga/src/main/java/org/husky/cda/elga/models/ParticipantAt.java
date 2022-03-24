@@ -11,6 +11,7 @@ package org.husky.cda.elga.models;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.husky.cda.elga.generated.artdecor.AtcdabbrOtherParticipantBodyTranscriber;
@@ -83,16 +84,7 @@ public class ParticipantAt extends Participant {
 		POCDMT000040ParticipantRole participantRole = participant.getHl7ParticipantRole();
 
 		if (ids != null && !ids.isEmpty()) {
-			for (Identificator id : ids) {
-				if (id != null) {
-					participantRole.getId().add(id.getHl7CdaR2Ii());
-				} else {
-					II unkId = new II();
-					unkId.nullFlavor = new ArrayList<>();
-					unkId.nullFlavor.add("UNK");
-					participantRole.getId().add(unkId);
-				}
-			}
+			participantRole.getId().addAll(getIi());
 		}
 
 		if (addr != null) {
@@ -138,38 +130,29 @@ public class ParticipantAt extends Participant {
 	}
 
 	private POCDMT000040ParticipantRole getPOCDMT000040ParticipantRole() {
-		POCDMT000040ParticipantRole particpantRole = new POCDMT000040ParticipantRole();
-		particpantRole.getClassCode().add("ROL");
+		POCDMT000040ParticipantRole participantRole = new POCDMT000040ParticipantRole();
+		participantRole.getClassCode().add("ROL");
 
 		if (this.ids != null && !this.ids.isEmpty()) {
-			particpantRole.getId().clear();
-			for (Identificator id : ids) {
-				if (id != null) {
-					particpantRole.getId().add(id.getHl7CdaR2Ii());
-				} else {
-					II unkId = new II();
-					unkId.nullFlavor = new ArrayList<>();
-					unkId.nullFlavor.add("UNK");
-					particpantRole.getId().add(unkId);
-				}
-			}
+			participantRole.getId().clear();
+			participantRole.getId().addAll(getIi());
 		}
 
 		if (this.addr != null) {
-			particpantRole.getAddr().add(this.addr.getHl7CdaR2Ad());
+			participantRole.getAddr().add(this.addr.getHl7CdaR2Ad());
 		}
 
 		if (this.telecoms != null && !this.telecoms.isEmpty()) {
 			for (Telecom tel : this.telecoms) {
 				if (tel != null) {
-					particpantRole.getTelecom().add(tel.getHl7CdaR2Tel());
+					participantRole.getTelecom().add(tel.getHl7CdaR2Tel());
 				}
 			}
 		}
 
-		particpantRole.setPlayingEntity(getPOCDMT000040POCDMT000040PlayingEntity());
+		participantRole.setPlayingEntity(getPOCDMT000040POCDMT000040PlayingEntity());
 
-		return particpantRole;
+		return participantRole;
 	}
 
 	private POCDMT000040PlayingEntity getPOCDMT000040POCDMT000040PlayingEntity() {
@@ -182,6 +165,22 @@ public class ParticipantAt extends Participant {
 		}
 
 		return entity;
+	}
+
+	private List<II> getIi() {
+		List<II> iis = new LinkedList<>();
+		for (Identificator id : ids) {
+			if (id != null) {
+				iis.add(id.getHl7CdaR2Ii());
+			} else {
+				II unkId = new II();
+				unkId.nullFlavor = new ArrayList<>();
+				unkId.nullFlavor.add("UNK");
+				iis.add(unkId);
+			}
+		}
+
+		return iis;
 	}
 
 }

@@ -143,7 +143,7 @@ public class Drug {
 		this.dosageForm = dosageForm;
 	}
 
-	public POCDMT000040Consumable getVaccineProduct(int index, boolean immunizationRecommendaction) {
+	public POCDMT000040Consumable getVaccineProduct(boolean immunizationRecommendaction) {
 		POCDMT000040Consumable consumable = new POCDMT000040Consumable();
 		consumable.getTypeCode().clear();
 		consumable.getTypeCode().add("CSM");
@@ -187,7 +187,6 @@ public class Drug {
 			pharmName.setName(historicVaccination.getDisplayName());
 		}
 
-		// material.getCode().setOriginalText(createReference("#prodcode-" + index));
 		material.setName(pharmName.getHl7CdaR2En());
 
 		vaccineProd.setManufacturedMaterial(material);
@@ -220,7 +219,7 @@ public class Drug {
 		return product;
 	}
 
-	public POCDMT000040Consumable getArzneiEntry(int index) {
+	public POCDMT000040Consumable getArzneiEntry() {
 		POCDMT000040Consumable consumable = new POCDMT000040Consumable();
 		ArzneiEntry drugEntry = new ArzneiEntry();
 		POCDMT000040Material material = drugEntry.getHl7ManufacturedMaterial();
@@ -230,7 +229,6 @@ public class Drug {
 			Name pharmName = new Name();
 			pharmName.setName(this.name);
 
-			// material.getCode().setOriginalText(createReference("#prodcode-" + index));
 			material.setName(pharmName.getHl7CdaR2En());
 		} else {
 			material.getNullFlavor().add("NA");

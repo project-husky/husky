@@ -220,7 +220,7 @@ public class PrescriptionEntry  {
 		this.periodOfPrescription = periodOfPrescription;
 	}
 
-	public POCDMT000040Entry getMedikationVerordnungEntryemed(int indexPrescription) {
+	public POCDMT000040Entry getMedikationVerordnungEntryemed() {
 		POCDMT000040Entry entry = new POCDMT000040Entry();
 		MedikationVerordnungEntryemed substance = new MedikationVerordnungEntryemed();
 
@@ -243,84 +243,21 @@ public class PrescriptionEntry  {
 		substance.setRepeatNumber(ivlint);
 
 		if (this.doses != null && !this.doses.isEmpty()) {
-			int index = 1;
-			for (Dose dose : this.doses) {
-				if (dose != null) {
-					if (dose.getFrequence() != null && dose.getDays() != null && !dose.getDays().isEmpty()) {
-						POCDMT000040EntryRelationship entryRel = new POCDMT000040EntryRelationship();
-						POCDMT000040SubstanceAdministration substanceAdmin = new POCDMT000040SubstanceAdministration();
-						substanceAdmin.getEffectiveTime().add(dose.getDosierung3dqDailyDoseWithPauseMultipleWeekDays());
-						entryRel.setSubstanceAdministration(substanceAdmin);
-						substance.getEntryRelationship().add(entryRel);
-						substance.getTemplateId()
-								.add(MedikationVerordnungEntryemed.getPredefinedTemplateId136141193761531471());
-					} else if (dose.getFrequence() != null) {
-						substance.getEffectiveTime().add(dose.getDosierung1DailyDose());
-						substance.getTemplateId()
-								.add(MedikationVerordnungEntryemed.getPredefinedTemplateId136141193761531471());
-					}
-
-					if (dose.getIntakeTime() != null && dose.getDays() != null && !dose.getDays().isEmpty()) {
-						LOGGER.debug("add dose 4 single dose");
-						substance.getEntryRelationship().add(dose.getDosierung4erSingleDoseWithPause(index++));
-						substance.getTemplateId()
-								.remove(MedikationVerordnungEntryemed.getPredefinedTemplateId13614119376153149());
-						substance.getTemplateId()
-								.add(MedikationVerordnungEntryemed.getPredefinedTemplateId13614119376153149());
-					} else if (dose.getIntakeTime() != null) {
-						LOGGER.debug("add dose 2 single dose");
-						substance.getEntryRelationship().add(dose.getDosierung2erSingleDose(index++));
-						substance.getTemplateId()
-								.remove(MedikationVerordnungEntryemed.getPredefinedTemplateId13614119376153149());
-						substance.getTemplateId()
-								.add(MedikationVerordnungEntryemed.getPredefinedTemplateId13614119376153149());
-					}
-				}
-			}
-
+			setDoses(substance);
 		}
 
 		if (this.drug != null) {
-			substance.setConsumable(this.drug.getArzneiEntry(indexPrescription));
+			substance.setConsumable(this.drug.getArzneiEntry());
 		}
 
 		substance.getEntryRelationship().add(getHl7CdaR2Pocdmt000040EntryRelationshipForPackageAmount());
 
 		if (this.addInfoPat != null && !this.addInfoPat.isEmpty()) {
-			POCDMT000040EntryRelationship entryRel = new POCDMT000040EntryRelationship();
-			entryRel.setTypeCode(XActRelationshipEntryRelationship.SUBJ);
-			entryRel.setInversionInd(true);
-
-			PatientInstructions patInstructions = new PatientInstructions();
-			patInstructions.setText(new ED(null, new TEL("#patinfo-" + 0)));
-
-			int index = 1;
-			for (AdditionalInformation info : this.addInfoPat) {
-				if (info != null && info.getKindOfInformation() != null) {
-					patInstructions.addHl7EntryRelationship(info.getEntryRelationshipForPatientInformation(index++));
-				}
-			}
-
-			entryRel.setAct(patInstructions);
-			substance.getEntryRelationship().add(entryRel);
+			substance.getEntryRelationship().add(getAdditionalPatInformation());
 		}
 
 		if (this.addInfoPharm != null && !this.addInfoPharm.isEmpty()) {
-			POCDMT000040EntryRelationship entryRel = new POCDMT000040EntryRelationship();
-			entryRel.setTypeCode(XActRelationshipEntryRelationship.SUBJ);
-			entryRel.setInversionInd(true);
-			PharmacistInstructions pharmInstructions = new PharmacistInstructions();
-
-			int index = 1;
-			for (AdditionalInformation info : this.addInfoPharm) {
-				if (info != null && info.getKindOfInformation() != null) {
-					pharmInstructions.addHl7EntryRelationship(info.getEntryRelationshipForDispenseInformation(index++));
-					index++;
-				}
-			}
-
-			entryRel.setAct(pharmInstructions);
-			substance.getEntryRelationship().add(entryRel);
+			substance.getEntryRelationship().add(getAdditionalPharmInformation());
 		}
 
 		if (this.kindOfTherapy != null) {
@@ -334,6 +271,80 @@ public class PrescriptionEntry  {
 		entry.setSubstanceAdministration(substance);
 
 		return entry;
+	}
+
+	private void setDoses(MedikationVerordnungEntryemed substance) {
+		int index = 1;
+		for (Dose dose : this.doses) {
+			if (dose != null) {
+				if (dose.getFrequence() != null && dose.getDays() != null && !dose.getDays().isEmpty()) {
+					POCDMT000040EntryRelationship entryRel = new POCDMT000040EntryRelationship();
+					POCDMT000040SubstanceAdministration substanceAdmin = new POCDMT000040SubstanceAdministration();
+					substanceAdmin.getEffectiveTime().add(dose.getDosierung3dqDailyDoseWithPauseMultipleWeekDays());
+					entryRel.setSubstanceAdministration(substanceAdmin);
+					substance.getEntryRelationship().add(entryRel);
+					substance.getTemplateId()
+							.add(MedikationVerordnungEntryemed.getPredefinedTemplateId136141193761531471());
+				} else if (dose.getFrequence() != null) {
+					substance.getEffectiveTime().add(dose.getDosierung1DailyDose());
+					substance.getTemplateId()
+							.add(MedikationVerordnungEntryemed.getPredefinedTemplateId136141193761531471());
+				}
+
+				if (dose.getIntakeTime() != null && dose.getDays() != null && !dose.getDays().isEmpty()) {
+					LOGGER.debug("add dose 4 single dose");
+					substance.getEntryRelationship().add(dose.getDosierung4erSingleDoseWithPause(index++));
+					substance.getTemplateId()
+							.remove(MedikationVerordnungEntryemed.getPredefinedTemplateId13614119376153149());
+					substance.getTemplateId()
+							.add(MedikationVerordnungEntryemed.getPredefinedTemplateId13614119376153149());
+				} else if (dose.getIntakeTime() != null) {
+					LOGGER.debug("add dose 2 single dose");
+					substance.getEntryRelationship().add(dose.getDosierung2erSingleDose(index++));
+					substance.getTemplateId()
+							.remove(MedikationVerordnungEntryemed.getPredefinedTemplateId13614119376153149());
+					substance.getTemplateId()
+							.add(MedikationVerordnungEntryemed.getPredefinedTemplateId13614119376153149());
+				}
+			}
+		}
+	}
+
+	private POCDMT000040EntryRelationship getAdditionalPatInformation() {
+		POCDMT000040EntryRelationship entryRel = new POCDMT000040EntryRelationship();
+		entryRel.setTypeCode(XActRelationshipEntryRelationship.SUBJ);
+		entryRel.setInversionInd(true);
+
+		PatientInstructions patInstructions = new PatientInstructions();
+		patInstructions.setText(new ED(null, new TEL("#patinfo-" + 0)));
+
+		int index = 1;
+		for (AdditionalInformation info : this.addInfoPat) {
+			if (info != null && info.getKindOfInformation() != null) {
+				patInstructions.addHl7EntryRelationship(info.getEntryRelationshipForPatientInformation(index++));
+			}
+		}
+
+		entryRel.setAct(patInstructions);
+		return entryRel;
+	}
+
+	private POCDMT000040EntryRelationship getAdditionalPharmInformation() {
+		POCDMT000040EntryRelationship entryRel = new POCDMT000040EntryRelationship();
+		entryRel.setTypeCode(XActRelationshipEntryRelationship.SUBJ);
+		entryRel.setInversionInd(true);
+		PharmacistInstructions pharmInstructions = new PharmacistInstructions();
+
+		int index = 1;
+		for (AdditionalInformation info : this.addInfoPharm) {
+			if (info != null && info.getKindOfInformation() != null) {
+				pharmInstructions.addHl7EntryRelationship(info.getEntryRelationshipForDispenseInformation(index++));
+				index++;
+			}
+		}
+
+		entryRel.setAct(pharmInstructions);
+		return entryRel;
 	}
 
 	public POCDMT000040Entry getMedikationVerordnungEntryemedEmedication(int indexPrescription, Identificator gdaId,
@@ -374,94 +385,22 @@ public class PrescriptionEntry  {
 		}
 
 		if (this.doses != null && !this.doses.isEmpty()) {
-			int index = 1;
-			for (Dose dose : this.doses) {
-				if (dose != null) {
-					if (dose.getFrequence() != null && dose.getDays() != null && !dose.getDays().isEmpty()) {
-						POCDMT000040EntryRelationship entryRel = new POCDMT000040EntryRelationship();
-						POCDMT000040SubstanceAdministration substanceAdmin = new POCDMT000040SubstanceAdministration();
-						substanceAdmin.getEffectiveTime().add(dose.getDosierung3dqDailyDoseWithPauseMultipleWeekDays());
-						entryRel.setSubstanceAdministration(substanceAdmin);
-						substance.getEntryRelationship().add(entryRel);
-						if (!containsTemplateId(substance.getTemplateId(),
-								MedikationVerordnungEntryemed.getPredefinedTemplateId136141193761531471())) {
-							substance.getTemplateId()
-									.add(MedikationVerordnungEntryemed.getPredefinedTemplateId136141193761531471());
-						}
-					} else if (dose.getFrequence() != null) {
-						substance.getEffectiveTime().add(dose.getDosierung1DailyDose());
-
-						if (!containsTemplateId(substance.getTemplateId(),
-								MedikationVerordnungEntryemed.getPredefinedTemplateId136141193761531471())) {
-							substance.getTemplateId()
-									.add(MedikationVerordnungEntryemed.getPredefinedTemplateId136141193761531471());
-						}
-					}
-
-					if (dose.getIntakeTime() != null && dose.getDays() != null && !dose.getDays().isEmpty()) {
-						LOGGER.debug("add dose 4 single dose");
-						substance.getEntryRelationship().add(dose.getDosierung4erSingleDoseWithPause(index++));
-						if (!containsTemplateId(substance.getTemplateId(),
-								MedikationVerordnungEntryemed.getPredefinedTemplateId13614119376153149())) {
-							substance.getTemplateId()
-									.add(MedikationVerordnungEntryemed.getPredefinedTemplateId13614119376153149());
-						}
-					} else if (dose.getIntakeTime() != null) {
-						LOGGER.debug("add dose 2 single dose");
-						substance.getEntryRelationship().add(dose.getDosierung2erSingleDose(index++));
-						if (!containsTemplateId(substance.getTemplateId(),
-								MedikationVerordnungEntryemed.getPredefinedTemplateId13614119376153149())) {
-							substance.getTemplateId()
-									.add(MedikationVerordnungEntryemed.getPredefinedTemplateId13614119376153149());
-						}
-					}
-				}
-			}
-
+			setDoses(substance);
 		}
 
 		if (this.drug != null) {
-			substance.setConsumable(this.drug.getArzneiEntry(indexPrescription));
+			substance.setConsumable(this.drug.getArzneiEntry());
 		}
 
 		substance.getEntryRelationship().clear();
 		substance.getEntryRelationship().add(getHl7CdaR2Pocdmt000040EntryRelationshipForPackageAmount());
 
 		if (this.addInfoPat != null && !this.addInfoPat.isEmpty()) {
-			POCDMT000040EntryRelationship entryRel = new POCDMT000040EntryRelationship();
-			entryRel.setTypeCode(XActRelationshipEntryRelationship.SUBJ);
-			entryRel.setInversionInd(true);
-
-			PatientInstructions patInstructions = new PatientInstructions();
-			patInstructions.setText(new ED(null, new TEL("#patinfo-" + 0)));
-
-			int index = 1;
-			for (AdditionalInformation info : this.addInfoPat) {
-				if (info != null && info.getKindOfInformation() != null) {
-					patInstructions.addHl7EntryRelationship(info.getEntryRelationshipForPatientInformation(index++));
-				}
-			}
-
-			entryRel.setAct(patInstructions);
-			substance.getEntryRelationship().add(entryRel);
+			substance.getEntryRelationship().add(getAdditionalPatInformation());
 		}
 
 		if (this.addInfoPharm != null && !this.addInfoPharm.isEmpty()) {
-			POCDMT000040EntryRelationship entryRel = new POCDMT000040EntryRelationship();
-			entryRel.setTypeCode(XActRelationshipEntryRelationship.SUBJ);
-			entryRel.setInversionInd(true);
-			PharmacistInstructions pharmInstructions = new PharmacistInstructions();
-
-			int index = 1;
-			for (AdditionalInformation info : this.addInfoPharm) {
-				if (info != null && info.getKindOfInformation() != null) {
-					pharmInstructions.addHl7EntryRelationship(info.getEntryRelationshipForDispenseInformation(index++));
-					index++;
-				}
-			}
-
-			entryRel.setAct(pharmInstructions);
-			substance.getEntryRelationship().add(entryRel);
+			substance.getEntryRelationship().add(getAdditionalPharmInformation());
 		}
 
 		if (this.kindOfTherapy != null) {

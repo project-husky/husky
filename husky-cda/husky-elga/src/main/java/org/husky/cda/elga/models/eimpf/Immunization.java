@@ -200,7 +200,7 @@ public class Immunization {
 		if (this.drug != null) {
 			AtcdabbrEntryImmunization immunization = new AtcdabbrEntryImmunization();
 			setProperties(immunization, index, false);
-			immunization.setConsumable(this.drug.getVaccineProduct(index, false));
+			immunization.setConsumable(this.drug.getVaccineProduct(false));
 			entry.setSubstanceAdministration(immunization);
 		} else {
 			AtcdabbrEntryImmunizationImpfungNichtAngegeben immunizationNotDeclared = new AtcdabbrEntryImmunizationImpfungNichtAngegeben();

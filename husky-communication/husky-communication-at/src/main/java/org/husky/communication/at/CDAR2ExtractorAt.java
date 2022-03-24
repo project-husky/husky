@@ -13,6 +13,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.xml.bind.JAXBElement;
 
@@ -29,6 +30,7 @@ import org.husky.common.utils.time.Hl7Dtm;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationType;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Code;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Identifiable;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.PatientInfo;
 
 public class CDAR2ExtractorAt extends org.husky.common.communication.CDAR2Extractor {
 
@@ -243,5 +245,65 @@ public class CDAR2ExtractorAt extends org.husky.common.communication.CDAR2Extrac
 
 		return null;
 	}
+
+	/**
+	 * Extracts the relevant sourcePatientInfo information from the CDA:
+	 * ClinicalDocument/recordTarget/patientRole <br>
+	 * NOTES:
+	 * <ul>
+	 * <li>1. Only the first ClinicalDocument/recordTarget instance will be
+	 * considered for sourcePatientId (for which only the first patientRole/id on
+	 * it's list will be taken) and sourcePatientInfo .</li>
+	 * <li>2. Extracts all id of the list of ids for PatientRole to PID-3 and the
+	 * PatientRole/Patient/id</li>
+	 * <li>3. XDS metadata does not accept CX types that have more or fewer
+	 * components than CX.1, CX.4.2,CX.4.3. Other corresponding componets will not
+	 * be extracted.</li>
+	 * <li>4. XDS metadata validation for 2007 Connectathon will not accept
+	 * SourcePatientInfo beyond local patient ids, patient name, address, birthdate
+	 * and gender. Other patient info in the CDA that corresponds to source patient
+	 * info will not be extracted.</li>
+	 * <li>5.Only the first address will be considered for extraction, only the
+	 * first subelements of the AD type will be considered for extraction.</li>
+	 * <li>6. Implementation consistent with PCC TF-2 Medical Document Binding to
+	 * XDS, XDM and XDR.</li>
+	 * </ul>
+	 */
+	@Override
+	public PatientInfo extractSourcePatientInfo() {
+		PatientInfo patientInfo = super.extractSourcePatientInfo();
+
+		LinkedList<Identifiable> list = new LinkedList<>(
+				List.of(new Identifiable(), new Identifiable(), new Identifiable()));
+
+		ListIterator<Identifiable> listIterator = patientInfo.getIds();
+
+		while (listIterator.hasNext()) {
+			Identifiable next = listIterator.next();
+
+			if (next.getAssigningAuthority() != null
+					&& "1.2.40.0.10.2.1.1.149".equalsIgnoreCase(next.getAssigningAuthority().getUniversalId())) {
+				list.set(0, next);
+			} else if (next.getAssigningAuthority() != null
+					&& "1.2.40.0.10.1.4.3.1".equalsIgnoreCase(next.getAssigningAuthority().getUniversalId())) {
+				list.set(1, next);
+			} else {
+				list.set(2, next);
+			}
+		}
+
+		ListIterator<Identifiable> listIt = patientInfo.getIds();
+		while (listIt.hasNext()) {
+			listIt.next();
+			listIt.remove();
+		}
+
+		for (Identifiable id : list) {
+			patientInfo.getIds().add(id);
+		}
+
+		return patientInfo;
+	}
+
 
 }

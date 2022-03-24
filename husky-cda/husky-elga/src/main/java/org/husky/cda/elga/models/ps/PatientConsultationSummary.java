@@ -37,6 +37,7 @@ import org.husky.cda.elga.narrative.KonsUeberwGrundNarrativeTextGenerator;
 import org.husky.cda.elga.narrative.RecommendedMedNarrativeTextGenerator;
 import org.husky.common.hl7cdar2.ED;
 import org.husky.common.hl7cdar2.POCDMT000040Author;
+import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
 import org.husky.common.hl7cdar2.POCDMT000040Component2;
 import org.husky.common.hl7cdar2.POCDMT000040Component3;
 import org.husky.common.hl7cdar2.POCDMT000040Entry;
@@ -284,13 +285,6 @@ public class PatientConsultationSummary  {
 					allergySection.addHl7Entry(allergy.getHl7CdaR2AllergyEntry(index++));
 				}
 			}
-
-			/*
-			 * AllergienTextBuilder allergyTextBuilder = new
-			 * AllergienTextBuilder(allergies); StrucDocText docText = new StrucDocText();
-			 * docText.getContent().add(allergyTextBuilder.toString());
-			 * allergySection.setText(docText);
-			 */
 		} else {
 			StrucDocText structext = new StrucDocText();
 			structext.setMediaType("text/plain");
@@ -312,9 +306,8 @@ public class PatientConsultationSummary  {
 		recommendedMedSection.setTitle(stTitle);
 
 		if (prescriptions != null && !prescriptions.isEmpty()) {
-			int index = 0;
 			for (PrescriptionEntry prescription : prescriptions) {
-				recommendedMedSection.setHl7Entry(prescription.getMedikationVerordnungEntryemed(index++));
+				recommendedMedSection.setHl7Entry(prescription.getMedikationVerordnungEntryemed());
 			}
 		} else {
 			recommendedMedSection.setHl7Entry(getMedikationVerordnungEntryNoDrugTherapy());
@@ -399,10 +392,6 @@ public class PatientConsultationSummary  {
 	}
 
 	private void getHeader(ElgapatientConsultationSummary cda) {
-		String gdaIndex = this.author.getGdaIndex();
-		cda.setHl7Id(new Identificator(gdaIndex, docId).getHl7CdaR2Ii());
-		cda.setVersion(new Identificator(gdaIndex, this.setId), 1);
-
 		ST stTitle = new ST();
 		stTitle.setXmlMixed(title);
 		cda.setTitle(stTitle);
@@ -413,6 +402,9 @@ public class PatientConsultationSummary  {
 		}
 
 		if (author != null) {
+			String gdaIndex = this.author.getGdaIndex();
+			cda.setHl7Id(new Identificator(gdaIndex, docId).getHl7CdaR2Ii());
+			cda.setVersion(new Identificator(gdaIndex, this.setId), 1);
 			cda.setHl7Author(author.getAtcdabbrHeaderAuthor(this.authorTime));
 		}
 
@@ -459,80 +451,107 @@ public class PatientConsultationSummary  {
 
 	private void setStructuredBody(ElgapatientConsultationSummary cda) {
 		if (cda.getComponent() != null && cda.getComponent().getStructuredBody() != null) {
-			if (cda.getComponent().getStructuredBody().getComponent() != null) {
-				Code sectionCode;
-				for (POCDMT000040Component3 component3 : cda.getComponent().getStructuredBody().getComponent()) {
-					if (component3 != null && component3.getSection() != null
-							&& component3.getSection().getCode() != null) {
-						sectionCode = new Code(component3.getSection().getCode());
+			extractContent(cda);
 
-						if (component3.getSection() != null && component3.getSection().getText() != null
-								&& component3.getSection().getText().getMergedXmlMixed() != null) {
-							if (sectionCode.getCode().equalsIgnoreCase(ElgaSections.BRIEFTEXT_CODE)) {
-								this.lettertext = component3.getSection().getText().getMergedXmlMixed();
-							} else if (sectionCode.getCode().equalsIgnoreCase(ElgaSections.ALERT_CODE)) {
-								this.importantNotes = component3.getSection().getText().getMergedXmlMixed();
-							} else if (sectionCode.getCode().equalsIgnoreCase(ElgaSections.CLINICAL_INFORMATION_CODE)) {
-								this.furtherInformation = component3.getSection().getText().getMergedXmlMixed();
-							} else if (sectionCode.getCode().equalsIgnoreCase(ElgaSections.ABBEM_CODE)) {
-								this.finalRemarks = component3.getSection().getText().getMergedXmlMixed();
-							}
-						}
+			extractPatient(cda);
+			extractAuthor(cda);
+			extractLegalAuthenticator(cda);
+			extractCustodian(cda);
+		}
+	}
 
-						if (sectionCode.getCode().equalsIgnoreCase(ElgaSections.BEILAGEN_CODE)) {
-							this.appendices = new ArrayList<>();
-							for (POCDMT000040Entry entry : component3.getSection().getEntry()) {
-								this.appendices.add(new Appendix(entry));
-							}
-						} else if (sectionCode.getCode().equalsIgnoreCase(ElgaSections.DISCHARGE_MEDICATION_CODE)) {
-							this.prescriptions = new ArrayList<>();
-							for (POCDMT000040Entry entry : component3.getSection().getEntry()) {
-								this.prescriptions.add(new PrescriptionEntry(entry));
-							}
-						} else if (sectionCode.getCode().equalsIgnoreCase(ElgaSections.ALLERGIES_CODE)) {
-							this.allergies = new ArrayList<>();
-							if (component3.getSection().getEntry() != null
-									&& !component3.getSection().getEntry().isEmpty()) {
-								for (POCDMT000040Entry entry : component3.getSection().getEntry()) {
-									this.allergies.add(new Allergy(entry));
-								}
-							} else {
-								this.allergies.add(new Allergy(component3.getSection().getText().getMergedXmlMixed()));
-							}
-						} else if (sectionCode.getCode().equalsIgnoreCase(ElgaSections.CHIEF_COMPLAINT_CODE)
-								&& component3.getSection().getEntry() != null) {
-							this.diseases = new ArrayList<>();
-							for (POCDMT000040Entry entry : component3.getSection().getEntry()) {
-								this.diseases.add(new Disease(entry));
-							}
-						}
-					}
-				}
+	private void extractContent(POCDMT000040ClinicalDocument cda) {
+		Code sectionCode;
+		for (POCDMT000040Component3 component3 : cda.getComponent().getStructuredBody().getComponent()) {
+			if (component3 != null && component3.getSection() != null && component3.getSection().getCode() != null) {
+				sectionCode = new Code(component3.getSection().getCode());
 
-			}
+				extractText(sectionCode, component3);
 
-			if (cda.getRecordTarget() != null) {
-				for (POCDMT000040RecordTarget target : cda.getRecordTarget()) {
-					this.patient = new PatientCdaAt(target);
+				if (sectionCode.getCode().equalsIgnoreCase(ElgaSections.BEILAGEN_CODE)) {
+					extractAppendices(component3);
+				} else if (sectionCode.getCode().equalsIgnoreCase(ElgaSections.DISCHARGE_MEDICATION_CODE)) {
+					extractPrescriptions(component3);
+				} else if (sectionCode.getCode().equalsIgnoreCase(ElgaSections.ALLERGIES_CODE)) {
+					extractAllergies(component3);
+				} else if (sectionCode.getCode().equalsIgnoreCase(ElgaSections.CHIEF_COMPLAINT_CODE)) {
+					extractDiseases(component3);
 				}
 			}
+		}
+	}
 
-			if (cda.getAuthor() != null) {
-				for (POCDMT000040Author authorHl7cdar2 : cda.getAuthor()) {
-					this.author = new PractitionerCdaAt(authorHl7cdar2);
-				}
+	private void extractText(Code sectionCode, POCDMT000040Component3 component3) {
+		if (component3.getSection() != null && component3.getSection().getText() != null) {
+			if (sectionCode.getCode().equalsIgnoreCase(ElgaSections.BRIEFTEXT_CODE)) {
+				this.lettertext = component3.getSection().getText().getMergedXmlMixed();
+			} else if (sectionCode.getCode().equalsIgnoreCase(ElgaSections.ALERT_CODE)) {
+				this.importantNotes = component3.getSection().getText().getMergedXmlMixed();
+			} else if (sectionCode.getCode().equalsIgnoreCase(ElgaSections.CLINICAL_INFORMATION_CODE)) {
+				this.furtherInformation = component3.getSection().getText().getMergedXmlMixed();
+			} else if (sectionCode.getCode().equalsIgnoreCase(ElgaSections.ABBEM_CODE)) {
+				this.finalRemarks = component3.getSection().getText().getMergedXmlMixed();
 			}
+		}
 
-			if (cda.getCustodian() != null && cda.getCustodian().getAssignedCustodian() != null
-					&& cda.getCustodian().getAssignedCustodian().getRepresentedCustodianOrganization() != null) {
-				this.custodian = new Organization(
-						cda.getCustodian().getAssignedCustodian().getRepresentedCustodianOrganization());
-			}
+	}
 
-			if (cda.getLegalAuthenticator() != null && cda.getCustodian().getAssignedCustodian() != null
-					&& cda.getCustodian().getAssignedCustodian().getRepresentedCustodianOrganization() != null) {
-				this.legalAuthenticator = new PractitionerCdaAt(cda.getLegalAuthenticator());
+	private void extractAppendices(POCDMT000040Component3 component3) {
+		this.appendices = new ArrayList<>();
+		for (POCDMT000040Entry entry : component3.getSection().getEntry()) {
+			this.appendices.add(new Appendix(entry));
+		}
+	}
+
+	private void extractPrescriptions(POCDMT000040Component3 component3) {
+		this.prescriptions = new ArrayList<>();
+		for (POCDMT000040Entry entry : component3.getSection().getEntry()) {
+			this.prescriptions.add(new PrescriptionEntry(entry));
+		}
+	}
+
+	private void extractDiseases(POCDMT000040Component3 component3) {
+		this.diseases = new ArrayList<>();
+		for (POCDMT000040Entry entry : component3.getSection().getEntry()) {
+			this.diseases.add(new Disease(entry));
+		}
+	}
+
+	private void extractAllergies(POCDMT000040Component3 component3) {
+		this.allergies = new ArrayList<>();
+		if (!component3.getSection().getEntry().isEmpty()) {
+			for (POCDMT000040Entry entry : component3.getSection().getEntry()) {
+				this.allergies.add(new Allergy(entry));
 			}
+		} else {
+			this.allergies.add(new Allergy(component3.getSection().getText().getMergedXmlMixed()));
+		}
+	}
+
+	private void extractCustodian(POCDMT000040ClinicalDocument cda) {
+		if (cda.getCustodian() != null && cda.getCustodian().getAssignedCustodian() != null
+				&& cda.getCustodian().getAssignedCustodian().getRepresentedCustodianOrganization() != null) {
+			this.custodian = new Organization(
+					cda.getCustodian().getAssignedCustodian().getRepresentedCustodianOrganization());
+		}
+	}
+
+	private void extractLegalAuthenticator(POCDMT000040ClinicalDocument cda) {
+		if (cda.getLegalAuthenticator() != null && cda.getCustodian().getAssignedCustodian() != null
+				&& cda.getCustodian().getAssignedCustodian().getRepresentedCustodianOrganization() != null) {
+			this.legalAuthenticator = new PractitionerCdaAt(cda.getLegalAuthenticator());
+		}
+	}
+
+	private void extractAuthor(POCDMT000040ClinicalDocument cda) {
+		for (POCDMT000040Author authorHl7cdar2 : cda.getAuthor()) {
+			this.author = new PractitionerCdaAt(authorHl7cdar2);
+		}
+	}
+
+	private void extractPatient(POCDMT000040ClinicalDocument cda) {
+		for (POCDMT000040RecordTarget target : cda.getRecordTarget()) {
+			this.patient = new PatientCdaAt(target);
 		}
 	}
 

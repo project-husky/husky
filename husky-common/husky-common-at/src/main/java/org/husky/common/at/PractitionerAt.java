@@ -11,11 +11,13 @@ package org.husky.common.at;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 import org.husky.common.basetypes.AddressBaseType;
 import org.husky.common.enums.NullFlavor;
+import org.husky.common.hl7cdar2.AD;
 import org.husky.common.hl7cdar2.CE;
 import org.husky.common.hl7cdar2.EntityClassDevice;
 import org.husky.common.hl7cdar2.II;
@@ -202,27 +204,15 @@ public class PractitionerAt {
 		POCDMT000040AssociatedEntity associatedEntity = new POCDMT000040AssociatedEntity();
 
 		if (this.identifiers != null && !identifiers.isEmpty()) {
-			for (Identificator id : identifiers) {
-				if (id != null) {
-					associatedEntity.getId().add(id.getHl7CdaR2Ii());
-				}
-			}
+			associatedEntity.getId().addAll(getIis());
 		}
 
 		if (this.addresses != null && !this.addresses.isEmpty()) {
-			for (Address address : this.addresses) {
-				if (address != null) {
-					associatedEntity.getAddr().add(address.getHl7CdaR2Ad());
-				}
-			}
+			associatedEntity.getAddr().addAll(getAds());
 		}
 
 		if (this.telecoms != null && !this.telecoms.isEmpty()) {
-			for (Telecom tel : telecoms) {
-				if (tel != null) {
-					associatedEntity.getTelecom().add(tel.getHl7CdaR2Tel());
-				}
-			}
+			associatedEntity.getTelecom().addAll(getTels());
 		}
 
 		if (this.organization != null) {
@@ -267,27 +257,15 @@ public class PractitionerAt {
 		}
 
 		if (this.identifiers != null && !this.identifiers.isEmpty()) {
-			for (Identificator id : this.identifiers) {
-				if (id != null) {
-					assignedAuthor.getId().add(id.getHl7CdaR2Ii());
-				}
-			}
+			assignedAuthor.getId().addAll(getIis());
 		}
 
 		if (this.telecoms != null && !this.telecoms.isEmpty()) {
-			for (Telecom tel : this.telecoms) {
-				if (tel != null) {
-					assignedAuthor.getTelecom().add(tel.getHl7CdaR2Tel());
-				}
-			}
+			assignedAuthor.getTelecom().addAll(getTels());
 		}
 
 		if (this.addresses != null) {
-			for (Address address : this.addresses) {
-				if (address != null) {
-					assignedAuthor.getAddr().add(address.getHl7CdaR2Ad());
-				}
-			}
+			assignedAuthor.getAddr().addAll(getAds());
 		}
 
 		if (this.names != null) {
@@ -312,11 +290,7 @@ public class PractitionerAt {
 		}
 
 		if (this.identifiers != null && !identifiers.isEmpty()) {
-			for (Identificator id : identifiers) {
-				if (id != null) {
-					assignedEntity.getId().add(id.getHl7CdaR2Ii());
-				}
-			}
+			assignedEntity.getId().addAll(getIis());
 		}
 
 		if (this.code != null) {
@@ -329,11 +303,7 @@ public class PractitionerAt {
 		}
 
 		if (this.telecoms != null && !this.telecoms.isEmpty()) {
-			for (Telecom tel : telecoms) {
-				if (tel != null) {
-					assignedEntity.getTelecom().add(tel.getHl7CdaR2Tel());
-				}
-			}
+			assignedEntity.getTelecom().addAll(getTels());
 		}
 
 		if (this.organization != null) {
@@ -393,11 +363,7 @@ public class PractitionerAt {
 		assignedEntity.setClassCode("ASSIGNED");
 
 		if (this.identifiers != null) {
-			for (Identificator id : this.identifiers) {
-				if (id != null) {
-					assignedEntity.getId().add(id.getHl7CdaR2Ii());
-				}
-			}
+			assignedEntity.getId().addAll(getIis());
 		}
 
 		if (this.names != null) {
@@ -462,26 +428,12 @@ public class PractitionerAt {
 			niId.setNullFlavor(NullFlavor.NOINFORMATION);
 			assignedEntity.getId().add(niId.getHl7CdaR2Ii());
 		} else {
-			for (Identificator id : this.identifiers) {
-				if (id != null) {
-					assignedEntity.getId().add(id.getHl7CdaR2Ii());
-				} else {
-					Identificator unkId = new Identificator();
-					unkId.setNullFlavor(NullFlavor.UNKNOWN);
-					assignedEntity.getId().add(unkId.getHl7CdaR2Ii());
-				}
-			}
+			assignedEntity.getId().addAll(getIis());
 		}
 
 		if (this.addresses != null && !this.addresses.isEmpty()) {
 			assignedEntity.getAddr().clear();
-			if (this.addresses.get(0) != null) {
-				assignedEntity.getAddr().add(this.addresses.get(0).getHl7CdaR2Ad());
-			} else {
-				Address addressUnk = new Address(new AddressBaseType());
-				addressUnk.setNullFlavor(NullFlavor.UNKNOWN);
-				assignedEntity.getAddr().add(addressUnk.getHl7CdaR2Ad());
-			}
+			assignedEntity.getAddr().addAll(getAds());
 		}
 
 		if (this.names != null && !this.names.isEmpty()) {
@@ -489,11 +441,7 @@ public class PractitionerAt {
 		}
 
 		if (telecoms != null && !telecoms.isEmpty()) {
-			for (Telecom tel : telecoms) {
-				if (tel != null) {
-					assignedEntity.getTelecom().add(tel.getHl7CdaR2Tel());
-				}
-			}
+			assignedEntity.getTelecom().addAll(getTels());
 		}
 
 		if (organization != null) {
@@ -503,6 +451,48 @@ public class PractitionerAt {
 		responsibleParty.setAssignedEntity(assignedEntity);
 
 		return responsibleParty;
+	}
+
+	protected List<AD> getAds() {
+		List<AD> ads = new LinkedList<>();
+		for (Address address : this.addresses) {
+			if (address != null) {
+				ads.add(address.getHl7CdaR2Ad());
+			} else {
+				Address addressUnk = new Address(new AddressBaseType());
+				addressUnk.setNullFlavor(NullFlavor.UNKNOWN);
+				ads.add(addressUnk.getHl7CdaR2Ad());
+			}
+		}
+
+		return ads;
+	}
+
+	protected List<II> getIis() {
+		List<II> iis = new LinkedList<>();
+		for (Identificator id : this.identifiers) {
+			if (id != null) {
+				iis.add(id.getHl7CdaR2Ii());
+			} else {
+				Identificator unkId = new Identificator();
+				unkId.setNullFlavor(NullFlavor.UNKNOWN);
+				iis.add(unkId.getHl7CdaR2Ii());
+			}
+		}
+
+		return iis;
+	}
+
+	protected List<TEL> getTels() {
+		List<TEL> tels = new LinkedList<>();
+		for (Telecom tel : this.telecoms) {
+			if (tel != null) {
+				tels.add(tel.getHl7CdaR2Tel());
+			}
+		}
+
+		return tels;
+
 	}
 
 }

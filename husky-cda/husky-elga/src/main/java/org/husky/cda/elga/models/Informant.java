@@ -9,6 +9,7 @@
 */
 package org.husky.cda.elga.models;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.husky.cda.elga.generated.artdecor.AtcdabbrOtherInformantBody;
@@ -16,10 +17,12 @@ import org.husky.cda.elga.generated.artdecor.enums.ElgaAuthorSpeciality;
 import org.husky.cda.elga.generated.artdecor.enums.ElgaPersonalRelationship;
 import org.husky.common.enums.NullFlavor;
 import org.husky.common.hl7cdar2.CE;
+import org.husky.common.hl7cdar2.II;
 import org.husky.common.hl7cdar2.POCDMT000040AssignedEntity;
 import org.husky.common.hl7cdar2.POCDMT000040Organization;
 import org.husky.common.hl7cdar2.POCDMT000040Person;
 import org.husky.common.hl7cdar2.POCDMT000040RelatedEntity;
+import org.husky.common.hl7cdar2.TEL;
 import org.husky.common.model.Address;
 import org.husky.common.model.Identificator;
 import org.husky.common.model.Name;
@@ -114,7 +117,7 @@ public class Informant {
 	}
 
 	protected POCDMT000040RelatedEntity getHl7CdaR2Pocdmt000040RelatedEntity(POCDMT000040RelatedEntity entity) {
-		if (this.persRel != null && persRel.getCode() != null) {
+		if (this.persRel != null) {
 			entity.setCode(new CE(this.persRel.getCode().getCode(), this.persRel.getCode().getCodeSystem(),
 					this.persRel.getCode().getCodeSystemName(), this.persRel.getCode().getDisplayName()));
 		}
@@ -128,11 +131,7 @@ public class Informant {
 		}
 
 		if (this.telecoms != null && !this.telecoms.isEmpty()) {
-			for (Telecom telecom : this.telecoms) {
-				if (telecom != null) {
-					entity.getTelecom().add(telecom.getHl7CdaR2Tel());
-				}
-			}
+			entity.getTelecom().addAll(getTel());
 		}
 
 		if (this.name != null) {
@@ -140,6 +139,32 @@ public class Informant {
 		}
 
 		return entity;
+	}
+
+	private List<TEL> getTel() {
+		List<TEL> tel = new LinkedList<>();
+		for (Telecom telecom : this.telecoms) {
+			if (telecom != null) {
+				tel.add(telecom.getHl7CdaR2Tel());
+			}
+		}
+
+		return tel;
+	}
+
+	private List<II> getIi() {
+		List<II> iis = new LinkedList<>();
+		for (Identificator id : ids) {
+			if (id != null) {
+				iis.add(id.getHl7CdaR2Ii());
+			} else {
+				Identificator niId = new Identificator();
+				niId.setNullFlavor(NullFlavor.NOINFORMATION);
+				iis.add(niId.getHl7CdaR2Ii());
+			}
+		}
+
+		return iis;
 	}
 
 	/**
@@ -155,15 +180,7 @@ public class Informant {
 		assignedEntity.setClassCode("ASSIGNED");
 
 		if (ids != null && !ids.isEmpty()) {
-			for (Identificator id : ids) {
-				if (id != null) {
-					assignedEntity.getId().add(id.getHl7CdaR2Ii());
-				} else {
-					Identificator niId = new Identificator();
-					niId.setNullFlavor(NullFlavor.NOINFORMATION);
-					assignedEntity.getId().add(niId.getHl7CdaR2Ii());
-				}
-			}
+			assignedEntity.getId().addAll(getIi());
 		} else {
 			Identificator unknownId = new Identificator();
 			unknownId.setNullFlavor(NullFlavor.UNKNOWN);
@@ -182,7 +199,7 @@ public class Informant {
 					.setRepresentedOrganization(this.organization.getHl7CdaR2Pocdmt000040Organization(legalAuthenOrg));
 		}
 
-		if (this.authorSpeciality != null && this.authorSpeciality.getCode() != null) {
+		if (this.authorSpeciality != null) {
 			assignedEntity.setCode(
 					new CE(this.authorSpeciality.getCode().getCode(), this.authorSpeciality.getCode().getCodeSystem(),
 							this.authorSpeciality.getCode().getCodeSystemName(),
@@ -194,11 +211,7 @@ public class Informant {
 		}
 
 		if (this.telecoms != null && !this.telecoms.isEmpty()) {
-			for (Telecom telecom : this.telecoms) {
-				if (telecom != null) {
-					assignedEntity.getTelecom().add(telecom.getHl7CdaR2Tel());
-				}
-			}
+			assignedEntity.getTelecom().addAll(getTel());
 		}
 
 		return assignedEntity;
@@ -207,7 +220,7 @@ public class Informant {
 	protected POCDMT000040Person getHl7CdaR2Pocdmt000040Person(POCDMT000040Person person) {
 		if (this.name != null) {
 			person.getName().add(this.name.getHl7CdaR2Pn());
-			if (person.getClassCode() != null && person.getClassCode().isEmpty()) {
+			if (person.getClassCode().isEmpty()) {
 				person.getClassCode().add("PSN");
 			}
 			person.setDeterminerCode("INSTANCE");

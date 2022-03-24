@@ -19,6 +19,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import java.util.zip.ZipFile;
 
@@ -34,6 +36,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.util.URISupport;
 import org.apache.commons.text.StringEscapeUtils;
 import org.husky.common.communication.AffinityDomain;
 import org.husky.common.communication.AtnaConfig;
@@ -1002,12 +1005,15 @@ public class ConvenienceCommunication extends CamelService {
 
 		log.info("prepare submit of document");
 		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains(HTTPS_LITERAL);
-        final var endpoint = String.format(
-                "xds-iti41://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=%s",
+		Map<String, Object> properties = new HashMap<>();
+		properties.put("mtomEnabled", true);
+		URISupport.createQueryString(properties);
+		final var endpoint = String.format(
+				"xds-iti41://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=%s",
 				this.affinityDomain.getRepositoryDestination().getUri().toString().replace(HTTPS_LITERAL, "")
 						.replace(HTTP_LITERAL, ""),
                 SERVER_IN_LOGGER, SERVER_IN_LOGGER, SERVER_OUT_LOGGER, SERVER_OUT_LOGGER, secure,
-                this.atnaConfigMode.equals(AtnaConfigMode.SECURE), AUDIT_CONTEXT);
+				this.atnaConfigMode.equals(AtnaConfigMode.SECURE), AUDIT_CONTEXT);
         log.info(LOG_SEND_REQUEST, endpoint);
 
         final var exchange = send(endpoint, txnData, security, null);

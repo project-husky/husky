@@ -187,7 +187,7 @@ public class ImmunizationRecommendation {
 		}
 
 		if (this.drug != null) {
-			immunization.setConsumable(this.drug.getVaccineProduct(index, true));
+			immunization.setConsumable(this.drug.getVaccineProduct(true));
 		} else {
 			POCDMT000040Consumable consumable = new POCDMT000040Consumable();
 			consumable.getTypeCode().add("CSM");

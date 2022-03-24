@@ -10,6 +10,7 @@
 package org.husky.cda.elga.models;
 
 import java.time.ZonedDateTime;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.xml.XMLConstants;
@@ -58,7 +59,7 @@ public class Allergy  {
 	}
 
 	public Allergy(POCDMT000040Entry entry) {
-		//TODO: implement entry for coded allergies
+		// TODO: implement entry for coded allergies
 	}
 
 	public Code getAbsentAllergy() {
@@ -224,29 +225,13 @@ public class Allergy  {
 
 		allergyObservation.setStatusCode(new CS("completed"));
 
-		IVLTS time = new IVLTS();
-
-		time.getRest()
-				.add(new JAXBElement<>(new QName(NamespaceUtils.HL7_NAMESPACE, "low", XMLConstants.DEFAULT_NS_PREFIX),
-						TS.class, DateTimes.toDateTs(this.start)));
-
-		time.getRest()
-				.add(new JAXBElement<>(new QName(NamespaceUtils.HL7_NAMESPACE, "high", XMLConstants.DEFAULT_NS_PREFIX),
-						TS.class, DateTimes.toDateTs(this.stop)));
-
-		allergyObservation.setEffectiveTime(time);
+		allergyObservation.setEffectiveTime(getIVLTSTime());
 
 		if (this.absentAllergy != null) {
 			allergyObservation.setHl7Value(this.absentAllergy.getHl7CdaR2Cd());
 		} else {
 			if (this.reactions != null && !this.reactions.isEmpty()) {
-				int indexReaction = 0;
-				for (AllergyReaction reaction : this.reactions) {
-					if (reaction != null) {
-						allergyObservation.getEntryRelationship()
-								.add(reaction.getAllergyReactionObservationEntryRel(indexReaction++, index));
-					}
-				}
+				allergyObservation.getEntryRelationship().addAll(getAllergyReactions(this.reactions, index));
 			}
 
 			if (this.allergyAgent != null) {
@@ -268,6 +253,33 @@ public class Allergy  {
 
 		entry.setObservation(allergyObservation);
 		return entry;
+	}
+
+	private List<POCDMT000040EntryRelationship> getAllergyReactions(List<AllergyReaction> reactions, int index) {
+		List<POCDMT000040EntryRelationship> entryRels = new LinkedList<>();
+
+		int indexReaction = 0;
+		for (AllergyReaction reaction : reactions) {
+			if (reaction != null) {
+				entryRels.add(reaction.getAllergyReactionObservationEntryRel(indexReaction++, index));
+			}
+		}
+
+		return entryRels;
+	}
+
+	private IVLTS getIVLTSTime() {
+		IVLTS time = new IVLTS();
+
+		time.getRest()
+				.add(new JAXBElement<>(new QName(NamespaceUtils.HL7_NAMESPACE, "low", XMLConstants.DEFAULT_NS_PREFIX),
+						TS.class, DateTimes.toDateTs(this.start)));
+
+		time.getRest()
+				.add(new JAXBElement<>(new QName(NamespaceUtils.HL7_NAMESPACE, "high", XMLConstants.DEFAULT_NS_PREFIX),
+						TS.class, DateTimes.toDateTs(this.stop)));
+
+		return time;
 	}
 
 	protected POCDMT000040EntryRelationship getAllergyStatusObservationEntryRel(int index) {

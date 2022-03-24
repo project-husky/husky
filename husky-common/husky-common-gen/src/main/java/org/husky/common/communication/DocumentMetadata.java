@@ -206,9 +206,10 @@ public class DocumentMetadata {
 	 * @param cdaDoc            CDA document of metadata
 	 * @param documentEntryType the document entry type
 	 */
-	public DocumentMetadata(POCDMT000040ClinicalDocument cdaDoc, DocumentEntry documentEntryType) {
+	public DocumentMetadata(POCDMT000040ClinicalDocument cdaDoc, DocumentEntry documentEntryType, String language) {
 		xDoc = documentEntryType;
 		cda = cdaDoc;
+		this.language = language;
 	}
 
 	/**

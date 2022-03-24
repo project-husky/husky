@@ -12,7 +12,6 @@ package org.husky.communication.at;
 import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.husky.common.at.AuthorAt;
@@ -30,9 +29,9 @@ import org.husky.common.utils.XdsMetadataUtil;
 import org.husky.common.utils.time.DateTimes;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationType;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Author;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.CXiAssigningAuthority;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Code;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Hl7v2Based;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Identifiable;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.LocalizedString;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization;
@@ -62,7 +61,7 @@ public class DocumentMetadataAt extends org.husky.common.communication.DocumentM
 	 */
 	public DocumentMetadataAt(DocumentEntry documentEntryType, POCDMT000040ClinicalDocument cda,
 			List<Identificator> patientIds) {
-		super(cda, documentEntryType);
+		super(cda, documentEntryType, "de-AT");
 		this.patientIds = patientIds;
 	}
 
@@ -151,6 +150,7 @@ public class DocumentMetadataAt extends org.husky.common.communication.DocumentM
 		}
 
 		getDocumentEntry().setTitle(extractor.extractTitle());
+		getDocumentEntry().getTitle().setLang(getMetadataLanguage());
 
 		setUniqueId(extractor.extractUniqueId());
 
@@ -264,9 +264,9 @@ public class DocumentMetadataAt extends org.husky.common.communication.DocumentM
 		return PracticeSettingCode.getEnum(getDocumentEntry().getPracticeSettingCode().getCode());
 	}
 
-	public String getRefrencedIdList() {
-		if (getDocumentEntry().getExtraMetadata() != null) {
-			List<String> values = getDocumentEntry().getExtraMetadata().get("urn:ihe:iti:xds:2013:referenceIdList");
+	public ReferenceId getRefrencedIdList() {
+		if (getDocumentEntry().getReferenceIdList() != null) {
+			List<ReferenceId> values = getDocumentEntry().getReferenceIdList();
 
 			if (values != null && !values.isEmpty()) {
 				return values.get(0);
@@ -385,29 +385,37 @@ public class DocumentMetadataAt extends org.husky.common.communication.DocumentM
 		}
 	}
 
-	public void setRefrencedIdList(Identificator id, String homeCommunityId, String identifierTypeCode) {
-		if (getDocumentEntry().getExtraMetadata() == null) {
-			getDocumentEntry().setExtraMetadata(new HashMap<>());
-		}
+	public void setRefrencedIdList(Identificator id, String homeCommunityId) {
+		ReferenceId referenceId = Hl7v2Based.parse(
+				createCxi(id, "urn:elga:iti:xds:2014:ownDocument_setId", homeCommunityId),
+				ReferenceId.class);
 
-		ReferenceId referenceId = new ReferenceId();
-		referenceId.setId(id.getExtension());
-		referenceId.setIdTypeCode(identifierTypeCode);
-		CXiAssigningAuthority assigninAuthority = new CXiAssigningAuthority();
-		assigninAuthority.setUniversalId(id.getRoot());
-		assigninAuthority.setUniversalIdType("ISO");
-		assigninAuthority.setNamespaceId(identifierTypeCode);
-		referenceId.setAssigningAuthority(assigninAuthority);
 		getDocumentEntry().getReferenceIdList().add(referenceId);
 
-		/*
-		 * List<String> values = new LinkedList<>();
-		 * values.add(XdsMetadataUtilAt.createCxi(id, identifierTypeCode,
-		 * homeCommunityId));
-		 * getDocumentEntry().getExtraMetadata().put("urn:iti:xds:2013:referenceIdList",
-		 * values);
-		 */
+	}
 
+	public String createCxi(Identificator id, String identifierTypeCode, String homeCommunityId) {
+		StringBuilder sb = new StringBuilder();
+		if (id != null && id.getExtension() != null) {
+			sb.append(id.getExtension());
+		}
+		sb.append("^^^");
+		if (id != null && id.getRoot() != null) {
+			sb.append("&");
+			sb.append(id.getRoot());
+			sb.append("&ISO");
+		}
+		sb.append("^");
+		sb.append(identifierTypeCode);
+		sb.append("^");
+
+		if (homeCommunityId != null) {
+			sb.append("&");
+			sb.append(homeCommunityId);
+			sb.append("&ISO");
+		}
+
+		return sb.toString();
 	}
 
 	public void setServiceEventStartTime(ZonedDateTime startDate) {

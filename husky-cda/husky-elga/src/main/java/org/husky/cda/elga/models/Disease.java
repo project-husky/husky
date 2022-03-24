@@ -72,36 +72,27 @@ public class Disease {
 	}
 
 	public Disease(POCDMT000040Entry entry) {
-		if (entry != null && entry.getAct() != null && entry.getAct().getStatusCode() != null) {
-			this.active = "active".equalsIgnoreCase(entry.getAct().getStatusCode().getCode());
-		}
-
-		if (entry != null && entry.getAct() != null && entry.getAct().getEffectiveTime() != null) {
-			Map<String, TS> timeMap = getTsElement(entry.getAct().getEffectiveTime());
-			try {
-				this.start = DateTimes.toLocalDate(timeMap.get("low")).atStartOfDay(ZoneId.systemDefault());
-			} catch (Exception e) {
-				LOGGER.error("{}: {}", e.getMessage(), timeMap.get("low").getValue());
+		if (entry != null && entry.getAct() != null) {
+			if (entry.getAct().getStatusCode() != null) {
+				this.active = "active".equalsIgnoreCase(entry.getAct().getStatusCode().getCode());
 			}
 
-			try {
-				this.stop = DateTimes.toLocalDate(timeMap.get("high")).atStartOfDay(ZoneId.systemDefault());
-			} catch (Exception e) {
-				LOGGER.error("{}: {}", e.getMessage(), timeMap.get("high"));
-			}
-		}
+			if (entry.getAct().getEffectiveTime() != null) {
+				Map<String, TS> timeMap = getTsElement(entry.getAct().getEffectiveTime());
+				try {
+					this.start = DateTimes.toLocalDate(timeMap.get("low")).atStartOfDay(ZoneId.systemDefault());
+				} catch (Exception e) {
+					LOGGER.error("{}: {}", e.getMessage(), timeMap.get("low").getValue());
+				}
 
-		if (entry != null && entry.getAct() != null && entry.getAct().getEntryRelationship() != null) {
-			for (POCDMT000040EntryRelationship entryRel : entry.getAct().getEntryRelationship()) {
-				if (entryRel != null && entryRel.getObservation() != null
-						&& entryRel.getObservation().getValue() != null) {
-					for (ANY any : entryRel.getObservation().getValue()) {
-						if (any instanceof CD) {
-							this.problem = new Code((CD) any);
-						}
-					}
+				try {
+					this.stop = DateTimes.toLocalDate(timeMap.get("high")).atStartOfDay(ZoneId.systemDefault());
+				} catch (Exception e) {
+					LOGGER.error("{}: {}", e.getMessage(), timeMap.get("high"));
 				}
 			}
+
+			extractDiseaseCode(entry);
 		}
 
 	}
@@ -184,6 +175,18 @@ public class Disease {
 
 	public void setOriginalDoc(Appendix originalDoc) {
 		this.originalDoc = originalDoc;
+	}
+
+	private void extractDiseaseCode(POCDMT000040Entry entry) {
+		for (POCDMT000040EntryRelationship entryRel : entry.getAct().getEntryRelationship()) {
+			if (entryRel != null && entryRel.getObservation() != null) {
+				for (ANY any : entryRel.getObservation().getValue()) {
+					if (any instanceof CD cd) {
+						this.problem = new Code(cd);
+					}
+				}
+			}
+		}
 	}
 
 	public POCDMT000040Entry getGesundheitsProblemEntry(int referenceIndex) {
