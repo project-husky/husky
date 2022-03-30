@@ -26,7 +26,7 @@ import org.husky.cda.elga.models.AdditionalInformation;
 import org.husky.cda.elga.models.PatientCdaAt;
 import org.husky.cda.elga.models.PractitionerCdaAt;
 import org.husky.cda.elga.models.PrescriptionEntry;
-import org.husky.cda.elga.narrative.PrescriptionNarrativeTextGenerator;
+import org.husky.cda.elga.narrative.MedBaseTextGenerator;
 import org.husky.cda.elga.utils.NamespaceUtils;
 import org.husky.common.enums.NullFlavor;
 import org.husky.common.hl7cdar2.INT;
@@ -261,9 +261,8 @@ public class EmedPrescription  {
 		}
 
 		StrucDocText textKonsUeberwGrund = new StrucDocText();
-		PrescriptionNarrativeTextGenerator textbuilder = new PrescriptionNarrativeTextGenerator(
-				prescriptionSection.getEntry(), patientInstructions, pharmacistInstructions);
-		textKonsUeberwGrund.getContent().add(textbuilder.toString());
+		MedBaseTextGenerator textbuilder = new MedBaseTextGenerator(patientInstructions, pharmacistInstructions);
+		textKonsUeberwGrund.getContent().addAll(textbuilder.getTablesFromCda(prescriptionSection.getEntry()));
 		prescriptionSection.setText(textKonsUeberwGrund);
 
 		return prescriptionSection;
@@ -288,7 +287,7 @@ public class EmedPrescription  {
 		cda.setSetId(getSetId().getHl7CdaR2Ii());
 		cda.setVersionNumber(new INT(this.getVersion()));
 
-		if (patient != null && cda.getRecordTarget() != null) {
+		if (patient != null) {
 			cda.getRecordTarget().clear();
 			cda.getRecordTarget().add(patient.getHeaderRecordTargetBase());
 		}

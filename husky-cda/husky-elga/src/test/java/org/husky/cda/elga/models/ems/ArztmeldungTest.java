@@ -46,7 +46,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Anna Jungwirth
  */
-public class ArztmeldungTest {
+class ArztmeldungTest {
 
 	/**
 	 * Test method for {@link Arztmeldung()}.
@@ -55,7 +55,7 @@ public class ArztmeldungTest {
 	 * @throws IOException   Signals that an I/O exception has occurred.
 	 */
 	@Test
-	public void testCreateFirstElementsCda() throws JAXBException {
+	void testCreateFirstElementsCda() throws JAXBException {
 
 		Arztmeldung document = new Arztmeldung();
 		PatientCdaAt patient = new PatientCdaAt();

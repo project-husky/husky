@@ -19,7 +19,6 @@ import javax.xml.namespace.QName;
 import org.husky.common.hl7cdar2.ANY;
 import org.husky.common.hl7cdar2.BL;
 import org.husky.common.hl7cdar2.CD;
-import org.husky.common.hl7cdar2.CE;
 import org.husky.common.hl7cdar2.CV;
 import org.husky.common.hl7cdar2.INT;
 import org.husky.common.hl7cdar2.IVLINT;
@@ -39,12 +38,11 @@ import org.husky.common.hl7cdar2.StrucDocTable;
 import org.husky.common.hl7cdar2.StrucDocTbody;
 import org.husky.common.hl7cdar2.StrucDocTd;
 import org.husky.common.hl7cdar2.StrucDocText;
-import org.husky.common.hl7cdar2.StrucDocTh;
 import org.husky.common.hl7cdar2.StrucDocThead;
 import org.husky.common.hl7cdar2.StrucDocTr;
 import org.husky.common.hl7cdar2.TS;
 
-public class ImmunizationLabResultNarrativeTextGenerator {
+public class ImmunizationLabResultNarrativeTextGenerator extends BaseTextGenerator {
 
 	private List<POCDMT000040Entry> entries;
 
@@ -84,28 +82,6 @@ public class ImmunizationLabResultNarrativeTextGenerator {
 		return body;
 	}
 
-	protected StrucDocTd getCellTdCode(CD codeTest) {
-		return getCellTd(codeTest.getDisplayName());
-	}
-
-	protected StrucDocTd getCellTdCodes(List<CE> interpretationCodes) {
-		StringBuilder sb = new StringBuilder();
-
-		int index = 0;
-		for (CE interpret : interpretationCodes) {
-			if (interpret != null) {
-				sb.append(interpret.getDisplayName());
-			}
-
-			index++;
-			if (index != interpretationCodes.size()) {
-				sb.append(" , ");
-			}
-		}
-
-		return getCellTd(sb.toString());
-	}
-
 	protected StrucDocTd getCellTdReferenceRange(List<POCDMT000040ReferenceRange> referenceRange) {
 		StrucDocTd td = new StrucDocTd();
 
@@ -117,89 +93,100 @@ public class ImmunizationLabResultNarrativeTextGenerator {
 					td.setID(range.getObservationRange().getText().getReference().getValue().replace("#", ""));
 				}
 
-				StringBuilder sb = new StringBuilder();
-
-				if (range.getObservationRange().getValue() instanceof IVLPQ) {
-					IVLPQ ivlpq = (IVLPQ) range.getObservationRange().getValue();
-					Map<String, PQ> pq = getPqElement(ivlpq);
-
-					PQ lowElement = pq.get("low");
-
-					if (lowElement != null && lowElement.getValue() != null) {
-						sb.append(lowElement.getValue());
-
-						if (lowElement.getUnit() != null) {
-							sb.append(" ");
-							sb.append(lowElement.getUnit());
-						}
-						sb.append(" - ");
-					}
-
-					PQ highElement = pq.get("high");
-
-					if (highElement != null && highElement.getValue() != null) {
-						sb.append(highElement.getValue());
-
-						if (highElement.getUnit() != null) {
-							sb.append(" ");
-							sb.append(highElement.getUnit());
-						}
-					}
-
-					td.getContent().add(sb.toString());
-				} else if (range.getObservationRange().getValue() instanceof RTO) {
-					RTO rto = (RTO) range.getObservationRange().getValue();
-
-					String textNumerator = "";
-					if (rto.getNumerator() instanceof INT) {
-						INT numerator = (INT) rto.getNumerator();
-						textNumerator = numerator.getValue().toString();
-					}
-
-					if (rto.getDenominator() instanceof IVLINT) {
-						Map<String, IVXBINT> ivxbint = getIvxbIntElement((IVLINT) rto.getDenominator());
-
-						IVXBINT lowElement = ivxbint.get("low");
-
-						if (lowElement != null && lowElement.getValue() != null) {
-							sb.append(textNumerator);
-							sb.append(":");
-
-							if (lowElement.isInclusive()) {
-								sb.append("≥");
-							} else {
-								sb.append(">");
-							}
-
-							sb.append(lowElement.getValue());
-						}
-
-						IVXBINT highElement = ivxbint.get("high");
-
-						if (lowElement != null && highElement != null) {
-							sb.append(" - ");
-						}
-
-						if (highElement != null && highElement.getValue() != null) {
-							sb.append(textNumerator);
-							sb.append(":");
-
-							if (highElement.isInclusive()) {
-								sb.append("≤");
-							} else {
-								sb.append("<");
-							}
-
-							sb.append(highElement.getValue());
-						}
-					}
-
-					td.getContent().add(sb.toString());
+				if (range.getObservationRange().getValue() instanceof IVLPQ ivlpq) {
+					td.getContent().add(getPqString(ivlpq));
+				} else if (range.getObservationRange().getValue() instanceof RTO rto) {
+					td.getContent().add(getRatio(rto));
 				}
 			}
 		}
 
 		return td;
+	}
+
+	private String getRatio(RTO rto) {
+		StringBuilder sb = new StringBuilder();
+		String textNumerator = "";
+		if (rto.getNumerator() instanceof INT numerator) {
+			textNumerator = numerator.getValue().toString();
+		}
+
+		if (rto.getDenominator() instanceof IVLINT denominator) {
+			sb.append(getDenominator(denominator, textNumerator));
+		}
+
+		return sb.toString();
+	}
+
+	private String getDenominator(IVLINT denominator, String textNumerator) {
+		StringBuilder sb = new StringBuilder();
+		Map<String, IVXBINT> ivxbint = getIvxbIntElement(denominator);
+
+		IVXBINT lowElement = ivxbint.get("low");
+
+		if (lowElement != null && lowElement.getValue() != null) {
+			sb.append(textNumerator);
+			sb.append(":");
+
+			if (lowElement.isInclusive()) {
+				sb.append("≥");
+			} else {
+				sb.append(">");
+			}
+
+			sb.append(lowElement.getValue());
+		}
+
+		IVXBINT highElement = ivxbint.get("high");
+
+		if (lowElement != null && highElement != null) {
+			sb.append(" - ");
+		}
+
+		if (highElement != null && highElement.getValue() != null) {
+			sb.append(textNumerator);
+			sb.append(":");
+
+			if (highElement.isInclusive()) {
+				sb.append("≤");
+			} else {
+				sb.append("<");
+			}
+
+			sb.append(highElement.getValue());
+		}
+
+		return sb.toString();
+	}
+
+	private String getPqString(IVLPQ ivlpq) {
+		StringBuilder sb = new StringBuilder();
+		Map<String, PQ> pq = getPqElement(ivlpq);
+
+		PQ lowElement = pq.get("low");
+
+		if (lowElement != null && lowElement.getValue() != null) {
+			sb.append(lowElement.getValue());
+
+			if (!lowElement.getUnit().isEmpty()) {
+				sb.append(" ");
+				sb.append(lowElement.getUnit());
+			}
+			sb.append(" - ");
+		}
+
+		PQ highElement = pq.get("high");
+
+		if (highElement != null && highElement.getValue() != null) {
+			sb.append(highElement.getValue());
+
+			if (!highElement.getUnit().isEmpty()) {
+				sb.append(" ");
+				sb.append(highElement.getUnit());
+			}
+		}
+
+		return sb.toString();
 	}
 
 	/**
@@ -268,26 +255,19 @@ public class ImmunizationLabResultNarrativeTextGenerator {
 
 	protected StrucDocTd getCellTdAny(ANY resultTest) {
 		String text = "";
-		if (resultTest instanceof PQ) {
-			PQ pq = (PQ) resultTest;
+		if (resultTest instanceof PQ pq) {
 			return getCellTd(pq.getValue());
-		} else if (resultTest instanceof BL) {
-			BL bl = (BL) resultTest;
+		} else if (resultTest instanceof BL bl) {
 			return getCellTd(bl.isValue().toString());
-		} else if (resultTest instanceof INT) {
-			INT intVal = (INT) resultTest;
+		} else if (resultTest instanceof INT intVal) {
 			return getCellTd(intVal.getValue().toString());
-		} else if (resultTest instanceof ST) {
-			ST stVal = (ST) resultTest;
+		} else if (resultTest instanceof ST stVal) {
 			return getCellTd(stVal.getMergedXmlMixed());
-		} else if (resultTest instanceof CD) {
-			CD cdVal = (CD) resultTest;
+		} else if (resultTest instanceof CD cdVal) {
 			return getCellTd(cdVal.getDisplayName());
-		} else if (resultTest instanceof CV) {
-			CV cvVal = (CV) resultTest;
+		} else if (resultTest instanceof CV cvVal) {
 			return getCellTd(cvVal.getDisplayName());
-		} else if (resultTest instanceof TS) {
-			TS tsVal = (TS) resultTest;
+		} else if (resultTest instanceof TS tsVal) {
 			return getCellTd(tsVal.getValue());
 		}
 
@@ -296,31 +276,11 @@ public class ImmunizationLabResultNarrativeTextGenerator {
 
 	protected StrucDocTd getCellTdAnyUnit(ANY resultTest) {
 		String text = "";
-		if (resultTest instanceof PQ) {
-			PQ pq = (PQ) resultTest;
+		if (resultTest instanceof PQ pq) {
 			return getCellTd(pq.getUnit());
 		}
 
 		return getCellTd(text);
-	}
-
-	private StrucDocTd getCellTd(String text) {
-		if (text == null)
-			text = "";
-
-		StrucDocTd td = new StrucDocTd();
-		td.getContent().add(text);
-		return td;
-	}
-
-	private StrucDocTh getTableHeaderCell(String text, String styleCode) {
-		StrucDocTh th = new StrucDocTh();
-		if (styleCode != null) {
-			th.getStyleCode().add(styleCode);
-		}
-
-		th.getContent().add(text);
-		return th;
 	}
 
 	private StrucDocThead getTableHeader() {

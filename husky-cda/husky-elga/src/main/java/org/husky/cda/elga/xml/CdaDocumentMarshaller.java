@@ -51,16 +51,7 @@ public class CdaDocumentMarshaller {
 		marshaller.setProperty("com.sun.xml.bind.xmlHeaders",
 				String.format("<?xml-stylesheet type='text/xsl' href='%s' ?>", stylesheet));
 
-		/*
-		 * marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true); // Remove the
-		 * marshaller XML declaration
-		 */
-
 		final var writer = new StringWriter();
-		/*
-		 * writer.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"); // This is
-		 * required by the CCE spec
-		 */
         marshaller.marshal(clinicalDocument, writer);
         return writer.toString();
     }

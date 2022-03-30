@@ -11,7 +11,6 @@ package org.husky.cda.elga.models;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,8 +22,6 @@ import javax.xml.namespace.QName;
 import org.husky.cda.elga.generated.artdecor.AtcdabrrEntryComment;
 import org.husky.cda.elga.generated.artdecor.EimpfEntryImpfrelevanteErkrankungProblemEntry;
 import org.husky.cda.elga.generated.artdecor.EimpfEntryImpfrelevanteErkrankungenProblemConcern;
-import org.husky.cda.elga.generated.artdecor.ps.Beeintraechtigungen;
-import org.husky.cda.elga.generated.artdecor.ps.FunctionalStatusEntry;
 import org.husky.cda.elga.generated.artdecor.ps.GesundheitsproblemBedenkenEntry;
 import org.husky.cda.elga.generated.artdecor.ps.ProblemEntryGesundheitsproblem;
 import org.husky.cda.elga.utils.NamespaceUtils;
@@ -40,7 +37,6 @@ import org.husky.common.hl7cdar2.POCDMT000040Entry;
 import org.husky.common.hl7cdar2.POCDMT000040EntryRelationship;
 import org.husky.common.hl7cdar2.POCDMT000040Reference;
 import org.husky.common.hl7cdar2.QTY;
-import org.husky.common.hl7cdar2.ST;
 import org.husky.common.hl7cdar2.TEL;
 import org.husky.common.hl7cdar2.TS;
 import org.husky.common.hl7cdar2.XActRelationshipEntry;
@@ -340,30 +336,6 @@ public class Disease {
 		}
 
 		return problemConcernAct;
-	}
-
-	private Beeintraechtigungen createBeeintraechtigungenSection(ZonedDateTime start, ZonedDateTime stop, int index) {
-		Beeintraechtigungen section = new Beeintraechtigungen();
-		ST title = new ST();
-		title.setXmlMixed("Beeinträchtigungen");
-		section.setTitle(title);
-
-		FunctionalStatusEntry functionalStatusObs = new FunctionalStatusEntry();
-		IVLTS time = new IVLTS();
-		time.getRest().add(new JAXBElement<>(new QName(NamespaceUtils.HL7_NAMESPACE, "low", XMLConstants.DEFAULT_NS_PREFIX), TS.class, DateTimes.toDateTs(start)));
-		time.getRest()
-				.add(new JAXBElement<>(new QName(NamespaceUtils.HL7_NAMESPACE, "high", XMLConstants.DEFAULT_NS_PREFIX),
-						TS.class, DateTimes.toDateTs(stop)));
-		functionalStatusObs.setEffectiveTime(time);
-
-		CD cd = new CD();
-		cd.nullFlavor = new ArrayList<>();
-		cd.nullFlavor.add("NI");
-
-		cd.setOriginalText(new ED(null, new TEL("#ref-beeintr" + index)));
-		functionalStatusObs.setHl7Value(cd);
-
-		return section;
 	}
 
 	protected Map<String, TS> getTsElement(IVLTS time) {

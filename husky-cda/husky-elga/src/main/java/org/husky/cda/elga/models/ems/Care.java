@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 public class Care {
 
 	/** The SLF4J logger instance. */
-	private static Logger LOGGER = LoggerFactory.getLogger(Care.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(Care.class);
 	private Code facility;
 	private ZonedDateTime startDate;
 	private ZonedDateTime stopDate;

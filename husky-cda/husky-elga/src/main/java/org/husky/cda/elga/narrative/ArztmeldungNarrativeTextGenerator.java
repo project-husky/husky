@@ -20,13 +20,14 @@ import org.husky.cda.elga.models.ems.Arztmeldung;
 import org.husky.cda.elga.models.ems.CaseIdentification;
 import org.husky.cda.elga.models.ems.ClinicalManifestation;
 import org.husky.cda.elga.models.ems.ClinicalManifestationItem;
+import org.husky.cda.elga.utils.NamespaceUtils;
 import org.husky.common.hl7cdar2.StrucDocTable;
 import org.husky.common.hl7cdar2.StrucDocTbody;
 import org.husky.common.hl7cdar2.StrucDocTd;
 import org.husky.common.hl7cdar2.StrucDocTr;
 import org.husky.common.model.Code;
 
-public class ArztmeldungNarrativeTextGenerator {
+public class ArztmeldungNarrativeTextGenerator extends BaseTextGenerator {
 
 	private Arztmeldung document;
 
@@ -70,6 +71,18 @@ public class ArztmeldungNarrativeTextGenerator {
 			}
 		}
 
+		addClinicalManifestationRow(clinicalManifestation, body);
+
+		if (hospitalization != null) {
+			body.getTr().add(getRow("Hospitalisierung",
+					DateTimeFormatter.ofPattern("dd.MM.yyyy").format(hospitalization), "epims-hospitalization"));
+		}
+
+		table.getTbody().add(body);
+		return table;
+	}
+
+	private void addClinicalManifestationRow(ClinicalManifestation clinicalManifestation, StrucDocTbody body) {
 		if (clinicalManifestation != null && clinicalManifestation.getClinicalManifestationItems() != null
 				&& !clinicalManifestation.getClinicalManifestationItems().isEmpty()) {
 			int index = 1;
@@ -80,14 +93,6 @@ public class ArztmeldungNarrativeTextGenerator {
 				}
 			}
 		}
-
-		if (hospitalization != null) {
-			body.getTr().add(getRow("Hospitalisierung",
-					DateTimeFormatter.ofPattern("dd.MM.yyyy").format(hospitalization), "epims-hospitalization"));
-		}
-
-		table.getTbody().add(body);
-		return table;
 	}
 
 	private StrucDocTd getCellTd(String text, String id) {
@@ -109,7 +114,7 @@ public class ArztmeldungNarrativeTextGenerator {
 	 *
 	 */
 	public JAXBElement<StrucDocTable> getTable() {
-		return new JAXBElement<>(new QName("urn:hl7-org:v3", "table"), StrucDocTable.class,
+		return new JAXBElement<>(new QName(NamespaceUtils.HL7_NAMESPACE, "table"), StrucDocTable.class,
 				getBody(this.document.getCaseIdentification(), this.document.getClinicalManifestation(),
 						this.document.getHospitalisation()));
 	}

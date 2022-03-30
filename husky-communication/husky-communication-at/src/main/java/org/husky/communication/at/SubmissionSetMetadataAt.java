@@ -19,6 +19,7 @@ import org.husky.common.model.Author;
  */
 public class SubmissionSetMetadataAt extends SubmissionSetMetadata {
 
+	@Override
 	public void setAuthor(Author author) {
 		getIpfSubmissionSet().setAuthor(AuthorAt.getIpfAuthor(author));
 	}

@@ -16,16 +16,14 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 import org.husky.cda.elga.models.Appendix;
+import org.husky.cda.elga.utils.NamespaceUtils;
 import org.husky.common.hl7cdar2.POCDMT000040Entry;
-import org.husky.common.hl7cdar2.StrucDocRenderMultiMedia;
 import org.husky.common.hl7cdar2.StrucDocTable;
 import org.husky.common.hl7cdar2.StrucDocTbody;
-import org.husky.common.hl7cdar2.StrucDocTd;
-import org.husky.common.hl7cdar2.StrucDocTh;
 import org.husky.common.hl7cdar2.StrucDocThead;
 import org.husky.common.hl7cdar2.StrucDocTr;
 
-public class AppendixNarrativeTextGenerator {
+public class AppendixNarrativeTextGenerator extends BaseTextGenerator {
 
 	private List<Appendix> appendices;
 	private List<POCDMT000040Entry> entries;
@@ -52,35 +50,6 @@ public class AppendixNarrativeTextGenerator {
 		thead.getTr().add(tr);
 
 		return thead;
-	}
-
-	private StrucDocTh getTableHeaderCell(String text, String styleCode) {
-		StrucDocTh th = new StrucDocTh();
-		if (styleCode != null) {
-			th.getStyleCode().add(styleCode);
-		}
-
-		th.getContent().add(text);
-		return th;
-	}
-
-	private StrucDocTd getCellWithRenderMultiMedia(String referenceObject) {
-		StrucDocTd td = new StrucDocTd();
-		StrucDocRenderMultiMedia renderMultiMedia = new StrucDocRenderMultiMedia();
-		renderMultiMedia.getReferencedObject().add(referenceObject);
-
-		td.getContent().add(new JAXBElement<>(new QName("urn:hl7-org:v3", "RenderMultiMedia"),
-				StrucDocRenderMultiMedia.class, renderMultiMedia));
-		return td;
-	}
-
-	private StrucDocTd getCellTd(String text) {
-		if (text == null)
-			text = "";
-
-		StrucDocTd td = new StrucDocTd();
-		td.getContent().add(text);
-		return td;
 	}
 
 	private StrucDocTable getBody() {
@@ -112,7 +81,7 @@ public class AppendixNarrativeTextGenerator {
 		List<JAXBElement<StrucDocTable>> tables = new LinkedList<>();
 
 		tables.add(
-				new JAXBElement<>(new QName("urn:hl7-org:v3", "table"), StrucDocTable.class, getBody()));
+				new JAXBElement<>(new QName(NamespaceUtils.HL7_NAMESPACE, "table"), StrucDocTable.class, getBody()));
 
 		return tables;
 	}

@@ -9,33 +9,24 @@
 */
 package org.husky.cda.elga.narrative;
 
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
+import org.husky.cda.elga.utils.NamespaceUtils;
 import org.husky.common.hl7cdar2.ANY;
 import org.husky.common.hl7cdar2.CD;
-import org.husky.common.hl7cdar2.IVLTS;
-import org.husky.common.hl7cdar2.IVXBTS;
 import org.husky.common.hl7cdar2.POCDMT000040Act;
 import org.husky.common.hl7cdar2.POCDMT000040Entry;
 import org.husky.common.hl7cdar2.POCDMT000040EntryRelationship;
-import org.husky.common.hl7cdar2.QTY;
 import org.husky.common.hl7cdar2.StrucDocTable;
 import org.husky.common.hl7cdar2.StrucDocTbody;
 import org.husky.common.hl7cdar2.StrucDocTd;
 import org.husky.common.hl7cdar2.StrucDocTr;
-import org.husky.common.hl7cdar2.TS;
-import org.husky.common.utils.time.DateTimes;
-import org.husky.common.utils.time.Hl7Dtm;
 
-public class ExposureRiskNarrativeTextGenerator {
+public class ExposureRiskNarrativeTextGenerator extends BaseTextGenerator {
 
 	private List<POCDMT000040Entry> entries;
 
@@ -51,55 +42,12 @@ public class ExposureRiskNarrativeTextGenerator {
 	private StrucDocTable getBody(POCDMT000040Act act) {
 		var table = new StrucDocTable();
 		var body = new StrucDocTbody();
-		if (act != null && act.getEntryRelationship() != null) {
+		if (act != null) {
 			for (POCDMT000040EntryRelationship entryRel : act.getEntryRelationship()) {
 				if (entryRel != null && entryRel.getObservation() != null) {
-					Instant startDateDisease = null;
-					Instant endDateDisease = null;
-
-					var sb = new StringBuilder();
-
-					var tdTime = new StrucDocTd();
-
-					if (entryRel.getObservation().getEffectiveTime() != null
-							&& entryRel.getObservation().getEffectiveTime().getRest() != null) {
-						Map<String, String> timeMap = getTsElement(entryRel.getObservation().getEffectiveTime());
-						startDateDisease = DateTimes.toInstant(Hl7Dtm.fromHl7(timeMap.get("low")));
-						endDateDisease = DateTimes.toInstant(Hl7Dtm.fromHl7(timeMap.get("high")));
-
-						var sdf = new SimpleDateFormat("dd.MM.yyyy");
-						if (startDateDisease != null) {
-							sb.append(sdf.format(startDateDisease));
-							sb.append(" - ");
-						}
-
-						if (endDateDisease != null) {
-							sb.append(sdf.format(endDateDisease));
-						}
-					}
-
-					tdTime.getContent().add(sb.toString());
-
 					var tr = new StrucDocTr();
-
-					var td = new StrucDocTd();
-					if (entryRel.getObservation().getValue() != null
-							&& !entryRel.getObservation().getValue().isEmpty()) {
-						for (ANY value : entryRel.getObservation().getValue()) {
-							if (value instanceof CD) {
-								CD code = (CD) value;
-								td.getContent().add(code.getDisplayName());
-
-								if (code.getOriginalText() != null && code.getOriginalText().getReference() != null
-										&& code.getOriginalText().getReference().getValue() != null) {
-									td.setID(code.getOriginalText().getReference().getValue().replace("#", ""));
-								}
-							}
-						}
-					}
-
-					tr.getThOrTd().add(tdTime);
-					tr.getThOrTd().add(td);
+					tr.getThOrTd().add(getCellTdTime(entryRel.getObservation().getEffectiveTime()));
+					tr.getThOrTd().add(getCellCodeValue(entryRel.getObservation().getValue()));
 					body.getTr().add(tr);
 				}
 			}
@@ -110,12 +58,30 @@ public class ExposureRiskNarrativeTextGenerator {
 		return table;
 	}
 
+	private StrucDocTd getCellCodeValue(List<ANY> values) {
+		var td = new StrucDocTd();
+		if (values != null && !values.isEmpty()) {
+			for (ANY value : values) {
+				if (value instanceof CD code) {
+					td.getContent().add(code.getDisplayName());
+
+					if (code.getOriginalText() != null && code.getOriginalText().getReference() != null
+							&& code.getOriginalText().getReference().getValue() != null) {
+						td.setID(code.getOriginalText().getReference().getValue().replace("#", ""));
+					}
+				}
+			}
+		}
+
+		return td;
+	}
+
 	public List<JAXBElement<StrucDocTable>> getTablesFromCda() {
 		List<JAXBElement<StrucDocTable>> tables = new LinkedList<>();
 
 		for (POCDMT000040Entry entry : entries) {
 			if (entry != null && entry.getAct() != null) {
-				tables.add(new JAXBElement<>(new QName("urn:hl7-org:v3", "table"), StrucDocTable.class,
+				tables.add(new JAXBElement<>(new QName(NamespaceUtils.HL7_NAMESPACE, "table"), StrucDocTable.class,
 						getBody(entry.getAct())));
 			}
 		}
@@ -123,39 +89,7 @@ public class ExposureRiskNarrativeTextGenerator {
 		return tables;
 	}
 
-	/**
-	 * extracts all {@link TS} elements of passed {@link IVLTS}. Extracted elements
-	 * are stored in a map, where key is element name like "high" and value is
-	 * element value.
-	 *
-	 * @param time to be extracted
-	 *
-	 * @return map of element name and value
-	 */
-	private Map<String, String> getTsElement(IVLTS time) {
-		Map<String, String> tsElements = new HashMap<>();
-		if (time != null) {
-			for (JAXBElement<? extends QTY> ts : time.getRest()) {
-				String value = "";
-				String elementName = "";
-				if (ts != null && IVXBTS.class.equals(ts.getDeclaredType()) && ts.getValue() != null) {
-					value = ((IVXBTS) ts.getValue()).getValue();
-				} else if (ts != null && TS.class.equals(ts.getDeclaredType()) && ts.getValue() != null) {
-					value = ((TS) ts.getValue()).getValue();
-				}
 
-				if (ts != null && ts.getName() != null) {
-					elementName = ts.getName().getLocalPart();
-				}
-
-				if (value != null && elementName != null) {
-					tsElements.put(elementName, value);
-				}
-			}
-		}
-
-		return tsElements;
-	}
 
 
 

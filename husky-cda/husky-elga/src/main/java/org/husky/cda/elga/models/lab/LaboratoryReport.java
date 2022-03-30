@@ -18,7 +18,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 import org.husky.cda.elga.generated.artdecor.base.Annotation;
-import org.husky.cda.elga.generated.artdecor.base.Beilagen;
 import org.husky.cda.elga.generated.artdecor.base.Brieftext;
 import org.husky.cda.elga.generated.artdecor.base.HeaderInFulfillmentOf;
 import org.husky.cda.elga.generated.artdecor.base.HeaderRelatedDocument;
@@ -29,10 +28,10 @@ import org.husky.cda.elga.generated.artdecor.base.SpecialitySection;
 import org.husky.cda.elga.generated.artdecor.base.SpezimenSection;
 import org.husky.cda.elga.generated.artdecor.base.Ueberweisungsgrund;
 import org.husky.cda.elga.models.Appendix;
+import org.husky.cda.elga.models.BaseDocument;
 import org.husky.cda.elga.models.PatientCdaAt;
 import org.husky.cda.elga.models.PractitionerCdaAt;
 import org.husky.cda.elga.narrative.AnnotationTextBuilder;
-import org.husky.cda.elga.narrative.AppendixNarrativeTextGenerator;
 import org.husky.cda.elga.narrative.SpecimenNarrativeTextGenerator;
 import org.husky.cda.elga.utils.NamespaceUtils;
 import org.husky.common.hl7cdar2.ED;
@@ -60,7 +59,7 @@ import org.husky.common.model.Identificator;
 import org.husky.common.model.Organization;
 import org.husky.common.utils.time.DateTimes;
 
-public class LaboratoryReport  {
+public class LaboratoryReport extends BaseDocument {
 
 	private Identificator docId;
 	private Identificator setId;
@@ -364,47 +363,11 @@ public class LaboratoryReport  {
 
 		if (appendices != null && !appendices.isEmpty()) {
 			POCDMT000040Component3 comp3 = new POCDMT000040Component3();
-			comp3.setSection(getAppendixSection());
+			comp3.setSection(getAppendixSection(this.appendices, "laboratory-report"));
 			structuredBody.getComponent().add(comp3);
 		}
 
 		return structuredBody;
-	}
-
-	private POCDMT000040Component3 createComp3FreeText(POCDMT000040Section section, String text, String titleText) {
-		POCDMT000040Component3 comp3 = new POCDMT000040Component3();
-		StrucDocText structext = new StrucDocText();
-		structext.setMediaType("text/plain");
-		structext.getContent().add(text);
-		section.setText(structext);
-
-		ST stTitle = new ST();
-		stTitle.setXmlMixed(titleText);
-		section.setTitle(stTitle);
-		comp3.setSection(section);
-		return comp3;
-	}
-
-	private Beilagen getAppendixSection() {
-		Beilagen appendix = new Beilagen();
-
-		ST stTitle = new ST();
-		stTitle.setXmlMixed("Beilagen");
-		appendix.setHl7Title(stTitle);
-
-		int index = 0;
-		for (Appendix appendixDoc : this.appendices) {
-			appendix.addHl7Entry(appendixDoc.getHl7CdaR2AppendixEntry("laboratory-report", index));
-			index++;
-		}
-
-		StrucDocText text = new StrucDocText();
-		AppendixNarrativeTextGenerator textbuilder = new AppendixNarrativeTextGenerator(appendix.getEntry(),
-				this.appendices);
-		text.getContent().add(textbuilder.toString());
-		appendix.setHl7Text(text);
-
-		return appendix;
 	}
 
 	protected POCDMT000040Section getSpezimenSection() {
@@ -507,7 +470,7 @@ public class LaboratoryReport  {
 
 		cda.getHl7TemplateId().add(new Identificator("1.2.40.0.34.11.4.0.3").getHl7CdaR2Ii());
 
-		if (patient != null && cda.getRecordTarget() != null) {
+		if (patient != null) {
 			cda.getRecordTarget().clear();
 			cda.getRecordTarget().add(patient.getHeaderRecordTargetBase());
 		}

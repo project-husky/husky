@@ -13,12 +13,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.ZonedDateTime;
 import java.util.Iterator;
+import java.util.List;
 import java.util.UUID;
 
 import javax.activation.DataHandler;
 import javax.mail.util.ByteArrayDataSource;
 
-import org.apache.camel.CamelContext;
 import org.husky.common.at.AuthorAt;
 import org.husky.common.at.enums.ConfidentialityCode;
 import org.husky.common.communication.AffinityDomain;
@@ -39,6 +39,7 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Identifiable;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Person;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp.Precision;
@@ -46,7 +47,6 @@ import org.openehealth.ipf.commons.ihe.xds.core.responses.QueryResponse;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -57,16 +57,6 @@ public class ConvenienceCommunicationAt extends ConvenienceCommunication {
 
 	/** The SLF4J logger instance. */
 	private static Logger log = LoggerFactory.getLogger(ConvenienceCommunicationAt.class);
-
-	@Autowired
-	private CamelContext context;
-
-	private String lastError = "";
-
-	/**
-	 * <div class="en">The affinity domain set-up</div>
-	 */
-	private AffinityDomain affinityDomain = null;
 
 	/**
 	 * Default constructor to instanciate the object
@@ -82,7 +72,6 @@ public class ConvenienceCommunicationAt extends ConvenienceCommunication {
 	 */
 	public ConvenienceCommunicationAt(AffinityDomain affinityDomain) {
 		super(affinityDomain);
-		this.affinityDomain = affinityDomain;
 	}
 
 	/**
@@ -100,11 +89,10 @@ public class ConvenienceCommunicationAt extends ConvenienceCommunication {
 			org.husky.common.communication.DocumentMetadata.DocumentMetadataExtractionMode documentMetadataExtractionMode,
 			SubmissionSetMetadataExtractionMode submissionSetMetadataExtractionMode) {
 		super(affinityDomain, atnaConfigMode, documentMetadataExtractionMode, submissionSetMetadataExtractionMode);
-		this.affinityDomain = affinityDomain;
 	}
 
 	public DocumentMetadataAt addElgaDocument(DocumentDescriptor desc, InputStream inputStream,
-			POCDMT000040ClinicalDocument cda, boolean urnOidNeeded, boolean orgUrnOidNeeded) {
+			POCDMT000040ClinicalDocument cda, boolean urnOidNeeded) {
 		DocumentMetadataAt metadata = null;
 		if (inputStream == null)
 			try {
@@ -118,7 +106,7 @@ public class ConvenienceCommunicationAt extends ConvenienceCommunication {
 		Document doc;
 		try {
 			if (cda != null) {
-				metadata = new DocumentMetadataAt(cda, urnOidNeeded, orgUrnOidNeeded);
+				metadata = new DocumentMetadataAt(cda, urnOidNeeded);
 			}
 			doc = new Document();
 			var dataSource = new ByteArrayDataSource(inputStream, desc.getMimeType());
@@ -260,42 +248,53 @@ public class ConvenienceCommunicationAt extends ConvenienceCommunication {
 
 			setGeneralSubSetDetails(subSet, docEntry.getPatientId(), docEntry.getSourcePatientId());
 
-			if (subSet.getAuthors().isEmpty()) {
-				subSet.getAuthors().add(AuthorAt.getIpfAuthor(author));
-			}
+			addAuthorToSubSet(subSet, author);
+		}
+	}
 
-			if (subSet.getAuthors() != null && !subSet.getAuthors().isEmpty()) {
-				for (org.openehealth.ipf.commons.ihe.xds.core.metadata.Author ipfAuthor : subSet.getAuthors()) {
-					if (ipfAuthor != null && ipfAuthor.getAuthorInstitution() != null) {
-						Iterator<Organization> authorIterator = ipfAuthor.getAuthorInstitution().iterator();
-						while (authorIterator.hasNext()) {
-							var authorXon = authorIterator.next();
-							if (authorXon != null && authorXon.getAssigningAuthority() != null
-									&& authorXon.getAssigningAuthority().getUniversalId() != null
-									&& authorXon.getIdNumber() == null) {
-								authorXon.setIdNumber(authorXon.getAssigningAuthority().getUniversalId());
-								authorXon.setAssigningAuthority(null);
-							}
-						}
-					}
+	private void addAuthorToSubSet(SubmissionSet subSet, Author author) {
+		if (subSet.getAuthors().isEmpty()) {
+			subSet.getAuthors().add(AuthorAt.getIpfAuthor(author));
+		}
+
+		if (subSet.getAuthors() != null && !subSet.getAuthors().isEmpty()) {
+			for (org.openehealth.ipf.commons.ihe.xds.core.metadata.Author ipfAuthor : subSet.getAuthors()) {
+				if (ipfAuthor != null) {
+
+					fixAuthorInstitution(ipfAuthor.getAuthorInstitution());
 
 					if (ipfAuthor.getAuthorRole() != null && !ipfAuthor.getAuthorRole().isEmpty()
 							&& ipfAuthor.getAuthorRole().get(0) == null) {
 						ipfAuthor.getAuthorRole().clear();
 					}
 
-					if (ipfAuthor.getAuthorPerson() != null) {
-						var authorPerson = ipfAuthor.getAuthorPerson();
-						if (authorPerson != null && authorPerson.getId() != null
-								&& authorPerson.getId().getAssigningAuthority() != null
-								&& authorPerson.getId().getAssigningAuthority().getUniversalId() != null
-								&& authorPerson.getId().getId() == null) {
-							authorPerson.getId().setId(authorPerson.getId().getAssigningAuthority().getUniversalId());
-							authorPerson.getId().setAssigningAuthority(null);
-						}
-					}
+					fixAuthorPerson(ipfAuthor.getAuthorPerson());
 				}
+			}
 
+		}
+	}
+
+	private void fixAuthorPerson(Person authorPerson) {
+		if (authorPerson != null && authorPerson.getId() != null && authorPerson.getId().getAssigningAuthority() != null
+				&& authorPerson.getId().getAssigningAuthority().getUniversalId() != null
+				&& authorPerson.getId().getId() == null) {
+			authorPerson.getId().setId(authorPerson.getId().getAssigningAuthority().getUniversalId());
+			authorPerson.getId().setAssigningAuthority(null);
+		}
+	}
+
+	private void fixAuthorInstitution(List<Organization> institutions) {
+		if (institutions != null) {
+			Iterator<Organization> authorIterator = institutions.iterator();
+			while (authorIterator.hasNext()) {
+				var authorXon = authorIterator.next();
+				if (authorXon != null && authorXon.getAssigningAuthority() != null
+						&& authorXon.getAssigningAuthority().getUniversalId() != null
+						&& authorXon.getIdNumber() == null) {
+					authorXon.setIdNumber(authorXon.getAssigningAuthority().getUniversalId());
+					authorXon.setAssigningAuthority(null);
+				}
 			}
 		}
 	}
@@ -373,137 +372,10 @@ public class ConvenienceCommunicationAt extends ConvenienceCommunication {
 	 * @return the OHT XDSResponseType</div>
 	 * @throws Exception if the transfer is not successful
 	 */
-	public Response submit(boolean replace, Author author, Code codeContentType,
+	public Response submit(Author author, Code codeContentType,
 			SecurityHeaderElement security) throws Exception {
 		generateSubmissionSetMetadata(author, codeContentType);
 		return submit(security);
 	}
-
-	/**
-	 * <div class="en">Submission of the previously prepared document(s) to the
-	 * repository<br>
-	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE ITI
-	 * Document Source actor
-	 *
-	 * @param authorRole The AuthorRole is one of the minimal required information
-	 *                   according to IHE Suisse for classification of documents in
-	 *                   Switzerland.
-	 * @param security   assertion which should be used for request
-	 * @return the OHT XDSResponseType</div>
-	 * @throws Exception if the transfer is not successful
-	 */
-	/*
-	 * public Response submit(boolean replace, AuthorAt author, String
-	 * organizationId, CodedMetadataType codeContentType, SecurityHeaderElement
-	 * security) throws Exception { generateSubmissionSetMetadata(author,
-	 * organizationId, codeContentType);
-	 * 
-	 * if (affinityDomain.getRepositoryDestination().getKeyStore() == null) {
-	 * System.clearProperty("javax.net.ssl.keyStore");
-	 * System.clearProperty("javax.net.ssl.keyStorePassword");
-	 * System.clearProperty("javax.net.ssl.trustStore");
-	 * System.clearProperty("javax.net.ssl.trustStorePassword"); } else {
-	 * System.setProperty("javax.net.ssl.keyStore",
-	 * affinityDomain.getRepositoryDestination().getKeyStore());
-	 * System.setProperty("javax.net.ssl.keyStorePassword",
-	 * affinityDomain.getRepositoryDestination().getKeyStorePassword());
-	 * System.setProperty("javax.net.ssl.trustStore",
-	 * affinityDomain.getRepositoryDestination().getTrustStore());
-	 * System.setProperty("javax.net.ssl.trustStorePassword",
-	 * affinityDomain.getRepositoryDestination().getTrustStorePassword()); }
-	 * 
-	 * B_Source source = new
-	 * B_Source(affinityDomain.getRepositoryDestination().getUri(), this.context);
-	 * 
-	 * if (source.getRepositoryURI() == null) { throw new
-	 * SourceException(SourceException.XDS_REPOSITORY_UNDEFINED,
-	 * "Repository URI is null."); }
-	 * 
-	 * SourceAuditUtils.auditActorStart(source);
-	 * 
-	 * XDSResponseType responseObject = null;
-	 * ProvideAndRegisterDocumentSetBMetadataHandler metadataHandler = new
-	 * ProvideAndRegisterDocumentSetBMetadataHandler(); Element submitObjectsRequest
-	 * = metadataHandler.processRequest(getTxnData());
-	 * 
-	 * NodeList children =
-	 * submitObjectsRequest.getChildNodes().item(0).getChildNodes().item(0).
-	 * getChildNodes();
-	 * 
-	 * Node classificationChildNew = null; Node registryPackageChildNew = null; Node
-	 * classificationChildOld = null; Node registryPackageChildOld = null; Node
-	 * extrinsicObjectChildNew = null; Node extrinsicObjectChildOld = null; Node
-	 * associationRplcChildNew = null; Node associationRplcChildOld = null; Node
-	 * associationHasMemberChildNew = null; Node associationHasMemberChildOld =
-	 * null;
-	 * 
-	 * List<Node> nodesToDelete = new ArrayList<>();
-	 * 
-	 * for (int i = 0; i < children.getLength(); i++) { if
-	 * (children.item(i).getNodeName().contains("ExtrinsicObject")) {
-	 * extrinsicObjectChildNew = children.item(i).cloneNode(true);
-	 * extrinsicObjectChildOld = children.item(i); } else if
-	 * (children.item(i).getNodeName().contains("Classification")) {
-	 * classificationChildNew = children.item(i).cloneNode(true);
-	 * classificationChildOld = children.item(i); } else if
-	 * (children.item(i).getNodeName().contains("RegistryPackage")) {
-	 * registryPackageChildNew = children.item(i).cloneNode(true);
-	 * registryPackageChildOld = children.item(i); } else if
-	 * (children.item(i).getNodeName().contains("Association")) {
-	 * log.info("Association: {}",
-	 * children.item(i).getAttributes().getNamedItem("associationType").toString());
-	 * log.info("Association node value: {}",
-	 * children.item(i).getAttributes().getNamedItem("associationType").getNodeValue
-	 * ()); if (children.item(i).getAttributes().getNamedItem("associationType").
-	 * getNodeValue().contains("RPLC")) { log.debug("Association node value: {}",
-	 * children.item(i).getAttributes().getNamedItem("associationType").getNodeValue
-	 * ()); associationRplcChildNew = children.item(i).cloneNode(true);
-	 * associationRplcChildOld = children.item(i); } else if
-	 * (children.item(i).getAttributes().getNamedItem("associationType").
-	 * getNodeValue() .contains("HasMember")) {
-	 * log.debug("Association node value: {}",
-	 * children.item(i).getAttributes().getNamedItem("associationType").getNodeValue
-	 * ()); associationHasMemberChildNew = children.item(i).cloneNode(true);
-	 * associationHasMemberChildOld = children.item(i); } } else if (replace &&
-	 * children.item(i).getNodeName().contains("ObjectRef")) {
-	 * nodesToDelete.add(children.item(i)); } }
-	 * 
-	 * if (!nodesToDelete.isEmpty()) { for (Node node : nodesToDelete) {
-	 * submitObjectsRequest.getChildNodes().item(0).getChildNodes().item(0).
-	 * removeChild(node); } }
-	 * 
-	 * submitObjectsRequest.getChildNodes().item(0).getChildNodes().item(0).
-	 * replaceChild(classificationChildNew, registryPackageChildOld);
-	 * submitObjectsRequest.getChildNodes().item(0).getChildNodes().item(0).
-	 * replaceChild(extrinsicObjectChildNew, classificationChildOld);
-	 * submitObjectsRequest.getChildNodes().item(0).getChildNodes().item(0).
-	 * replaceChild(registryPackageChildNew, extrinsicObjectChildOld);
-	 * 
-	 * if (associationRplcChildNew != null && associationHasMemberChildNew != null)
-	 * { log.info("Replace Associations");
-	 * submitObjectsRequest.getChildNodes().item(0).getChildNodes().item(0)
-	 * .replaceChild(associationHasMemberChildNew, associationRplcChildOld);
-	 * submitObjectsRequest.getChildNodes().item(0).getChildNodes().item(0).
-	 * replaceChild(associationRplcChildNew, associationHasMemberChildOld); }
-	 * 
-	 * log.info("Request Submit transaction: {}", submitObjectsRequest);
-	 * 
-	 * XDSSOAPResponsePayload responsePayload =
-	 * source.getSenderClient().send(source.getRepositoryURI(),
-	 * submitObjectsRequest, getTxnData().getDocList(),
-	 * XDSConstants.PROVIDE_AND_REGISTER_DOCUMENT_SET_ACTION,
-	 * affinityDomain.getRepositoryDestination().getSenderAddressingTo()); Element
-	 * responseElement = responsePayload.getResponseElement();
-	 * 
-	 * log.info("Response Submit transaction: {}", responseElement); responseObject
-	 * = metadataHandler.processResponse(new SynchronousXDSResponseType(),
-	 * responseElement);
-	 * 
-	 * SourceAuditUtils.auditProvideAndRegister(source, getTxnData(),
-	 * responseObject); SourceAuditUtils.auditActorStop(source); return
-	 * responseObject;
-	 * 
-	 * }
-	 */
 
 }

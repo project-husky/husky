@@ -22,6 +22,7 @@ import org.husky.common.at.enums.HealthcareFacilityTypeCode;
 import org.husky.common.at.enums.MimeType;
 import org.husky.common.at.enums.PracticeSettingCode;
 import org.husky.common.at.enums.TypeCode;
+import org.husky.common.at.utils.XdsMetadataUtilAt;
 import org.husky.common.enums.LanguageCode;
 import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
 import org.husky.common.model.Identificator;
@@ -43,6 +44,7 @@ import org.slf4j.LoggerFactory;
 public class DocumentMetadataAt extends org.husky.common.communication.DocumentMetadata {
 	private static Logger log = LoggerFactory.getLogger(DocumentMetadataAt.class);
 
+	private static final String LANGUANGE_DE_AT = "de-AT";
 	private List<Identificator> patientIds;
 	private Identificator parentDocumentId;
 	private AssociationType parentDocumentType;
@@ -51,7 +53,7 @@ public class DocumentMetadataAt extends org.husky.common.communication.DocumentM
 	 * Instantiates a new document metadata.
 	 */
 	public DocumentMetadataAt() {
-		super("de-AT");
+		super(LANGUANGE_DE_AT);
 	}
 
 	/**
@@ -61,12 +63,12 @@ public class DocumentMetadataAt extends org.husky.common.communication.DocumentM
 	 */
 	public DocumentMetadataAt(DocumentEntry documentEntryType, POCDMT000040ClinicalDocument cda,
 			List<Identificator> patientIds) {
-		super(cda, documentEntryType, "de-AT");
+		super(cda, documentEntryType, LANGUANGE_DE_AT);
 		this.patientIds = patientIds;
 	}
 
-	public DocumentMetadataAt(POCDMT000040ClinicalDocument cda, boolean urnOidNeeded, boolean orgUrnOidNeeded) {
-		super(cda, "de-AT");
+	public DocumentMetadataAt(POCDMT000040ClinicalDocument cda, boolean urnOidNeeded) {
+		super(cda, LANGUANGE_DE_AT);
 
 		CDAR2ExtractorAt extractor = new CDAR2ExtractorAt(cda);
 		setAvailabilityStatus(extractor.extractAvailabilityStatus());
@@ -81,18 +83,8 @@ public class DocumentMetadataAt extends org.husky.common.communication.DocumentM
 		
 		getDocumentEntry().setLegalAuthenticator(extractor.extractLegalAuthenticator());
 
-		Code classCode = extractor.extractClassCode();
-		Code typeCode = extractor.extractTypeCode();
-		Code typeCodeFromTranslation = extractor.extractTypeCodeOfTranslation();
-
-		if (typeCodeFromTranslation == null && typeCode != null
-				&& !TypeCode.isImmunizationHistory(typeCode.getCode())) {
-			setClassCode(classCode, urnOidNeeded);
-			getDocumentEntry().setTypeCode(typeCode);
-		} else if (typeCodeFromTranslation != null && TypeCode.getEnum(typeCodeFromTranslation.getCode()) != null) {
-			setClassCode(typeCode, urnOidNeeded);
-			getDocumentEntry().setTypeCode(typeCodeFromTranslation);
-		}
+		setTypeCode(extractor.extractClassCode(), extractor.extractTypeCode(), extractor.extractTypeCodeOfTranslation(),
+				urnOidNeeded);
 
 		setCodedLanguage(extractor.extractLanguageCode());
 
@@ -158,13 +150,24 @@ public class DocumentMetadataAt extends org.husky.common.communication.DocumentM
 
 	}
 
+	private void setTypeCode(Code classCode, Code typeCode, Code typeCodeFromTranslation, boolean urnOidNeeded) {
+		if (typeCodeFromTranslation == null && typeCode != null
+				&& !TypeCode.isImmunizationHistory(typeCode.getCode())) {
+			setClassCode(classCode, urnOidNeeded);
+			getDocumentEntry().setTypeCode(typeCode);
+		} else if (typeCodeFromTranslation != null && TypeCode.getEnum(typeCodeFromTranslation.getCode()) != null) {
+			setClassCode(typeCode, urnOidNeeded);
+			getDocumentEntry().setTypeCode(typeCodeFromTranslation);
+		}
+	}
+
 	/**
 	 * Adds an (optional) author element. All information relevant for the XDS
 	 * Document Metadata will be extracted from the Convenience API Author.
 	 *
 	 * @param author the author
 	 */
-	public void addAuthor(AuthorAt author, boolean urnOidNeeded, boolean orgUrnOidNeeded) {
+	public void addAuthor(AuthorAt author, boolean orgUrnOidNeeded) {
 		log.debug("organization id: {}", author.getOrganization().getIdentificatorList());
 		super.addAuthor(author);
 		
@@ -387,35 +390,11 @@ public class DocumentMetadataAt extends org.husky.common.communication.DocumentM
 
 	public void setRefrencedIdList(Identificator id, String homeCommunityId) {
 		ReferenceId referenceId = Hl7v2Based.parse(
-				createCxi(id, "urn:elga:iti:xds:2014:ownDocument_setId", homeCommunityId),
+				XdsMetadataUtilAt.createCxi(id, "urn:elga:iti:xds:2014:ownDocument_setId", homeCommunityId),
 				ReferenceId.class);
 
 		getDocumentEntry().getReferenceIdList().add(referenceId);
 
-	}
-
-	public String createCxi(Identificator id, String identifierTypeCode, String homeCommunityId) {
-		StringBuilder sb = new StringBuilder();
-		if (id != null && id.getExtension() != null) {
-			sb.append(id.getExtension());
-		}
-		sb.append("^^^");
-		if (id != null && id.getRoot() != null) {
-			sb.append("&");
-			sb.append(id.getRoot());
-			sb.append("&ISO");
-		}
-		sb.append("^");
-		sb.append(identifierTypeCode);
-		sb.append("^");
-
-		if (homeCommunityId != null) {
-			sb.append("&");
-			sb.append(homeCommunityId);
-			sb.append("&ISO");
-		}
-
-		return sb.toString();
 	}
 
 	public void setServiceEventStartTime(ZonedDateTime startDate) {

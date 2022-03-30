@@ -144,17 +144,21 @@ public class CDAR2ExtractorAt extends org.husky.common.communication.CDAR2Extrac
 				if (!atLeastOne(patient.getId())) {
 					return new ArrayList<>();
 				} else {
-					List<Identifiable> list = new ArrayList<>();
-					for (II id : patient.getId()) {
-						if (id != null) {
-							list.add(map(id));
-						}
-					}
-
-					return list;
+					return extractIds(patient.getId());
 				}
 			}
 		}
+	}
+
+	private List<Identifiable> extractIds(List<II> ids) {
+		List<Identifiable> list = new ArrayList<>();
+		for (II id : ids) {
+			if (id != null) {
+				list.add(map(id));
+			}
+		}
+
+		return list;
 	}
 
 	/**

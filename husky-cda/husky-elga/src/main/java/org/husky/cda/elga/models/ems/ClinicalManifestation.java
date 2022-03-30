@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 public class ClinicalManifestation {
 
 	/** The SLF4J logger instance. */
-	private static Logger LOGGER = LoggerFactory.getLogger(ClinicalManifestation.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ClinicalManifestation.class);
 	private String rootId;
 	private ZonedDateTime startDate;
 	private ZonedDateTime stopDate;

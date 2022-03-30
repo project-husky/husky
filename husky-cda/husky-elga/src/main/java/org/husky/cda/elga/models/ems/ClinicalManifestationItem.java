@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 
 public class ClinicalManifestationItem {
 	/** The SLF4J logger instance. */
-	private static Logger LOGGER = LoggerFactory.getLogger(ClinicalManifestationItem.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ClinicalManifestationItem.class);
 	private ZonedDateTime startDate;
 	private ZonedDateTime stopDate;
 	private Code code;

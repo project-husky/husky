@@ -22,13 +22,12 @@ import org.husky.common.hl7cdar2.POCDMT000040Observation;
 import org.husky.common.hl7cdar2.StrucDocTable;
 import org.husky.common.hl7cdar2.StrucDocTbody;
 import org.husky.common.hl7cdar2.StrucDocTd;
-import org.husky.common.hl7cdar2.StrucDocTh;
 import org.husky.common.hl7cdar2.StrucDocThead;
 import org.husky.common.hl7cdar2.StrucDocTr;
 import org.husky.common.utils.time.DateTimes;
 import org.husky.common.utils.time.Hl7Dtm;
 
-public class PharmRecommendationNarrativeTextGenerator {
+public class PharmRecommendationNarrativeTextGenerator extends BaseTextGenerator {
 
 	private List<POCDMT000040Entry> entries;
 
@@ -51,16 +50,6 @@ public class PharmRecommendationNarrativeTextGenerator {
 		thead.getTr().add(tr);
 
 		return thead;
-	}
-
-	private StrucDocTh getTableHeaderCell(String text, String styleCode) {
-		StrucDocTh th = new StrucDocTh();
-		if (styleCode != null) {
-			th.getStyleCode().add(styleCode);
-		}
-
-		th.getContent().add(text);
-		return th;
 	}
 
 	private StrucDocTable getBody(POCDMT000040Observation observation) {

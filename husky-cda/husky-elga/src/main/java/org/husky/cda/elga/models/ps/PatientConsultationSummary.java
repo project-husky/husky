@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.husky.cda.elga.generated.artdecor.base.Beilagen;
 import org.husky.cda.elga.generated.artdecor.base.Brieftext;
 import org.husky.cda.elga.generated.artdecor.ps.AbschliessendeBemerkung;
 import org.husky.cda.elga.generated.artdecor.ps.AllergienUnvertraeglichkeiten;
@@ -28,13 +27,13 @@ import org.husky.cda.elga.generated.artdecor.ps.enums.ElgaSections;
 import org.husky.cda.elga.models.AdditionalInformation;
 import org.husky.cda.elga.models.Allergy;
 import org.husky.cda.elga.models.Appendix;
+import org.husky.cda.elga.models.BaseDocument;
 import org.husky.cda.elga.models.Disease;
 import org.husky.cda.elga.models.PatientCdaAt;
 import org.husky.cda.elga.models.PractitionerCdaAt;
 import org.husky.cda.elga.models.PrescriptionEntry;
-import org.husky.cda.elga.narrative.AppendixNarrativeTextGenerator;
 import org.husky.cda.elga.narrative.KonsUeberwGrundNarrativeTextGenerator;
-import org.husky.cda.elga.narrative.RecommendedMedNarrativeTextGenerator;
+import org.husky.cda.elga.narrative.MedBaseTextGenerator;
 import org.husky.common.hl7cdar2.ED;
 import org.husky.common.hl7cdar2.POCDMT000040Author;
 import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
@@ -52,11 +51,8 @@ import org.husky.common.model.Identificator;
 import org.husky.common.model.Organization;
 import org.husky.common.utils.time.DateTimes;
 import org.husky.common.utils.time.Hl7Dtm;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class PatientConsultationSummary  {
-	private static final Logger LOGGER = LoggerFactory.getLogger(PatientConsultationSummary.class.getName());
+public class PatientConsultationSummary extends BaseDocument {
 
 	private PatientCdaAt patient;
 	private PractitionerCdaAt author;
@@ -221,27 +217,6 @@ public class PatientConsultationSummary  {
 		this.legalAuthenticatorTime = legalAuthenticatorTime;
 	}
 
-	private Beilagen getAppendixSection() {
-		Beilagen appendix = new Beilagen();
-		ST stTitle = new ST();
-		stTitle.setXmlMixed("Beilagen");
-		appendix.setHl7Title(stTitle);
-
-		int index = 1;
-		for (Appendix appendixDoc : this.appendices) {
-			appendix.addHl7Entry(appendixDoc.getHl7CdaR2AppendixEntry("consultation", index));
-			index++;
-		}
-
-		StrucDocText text = new StrucDocText();
-		AppendixNarrativeTextGenerator textbuilder = new AppendixNarrativeTextGenerator(appendix.getEntry(),
-				this.appendices);
-		text.getContent().add(textbuilder.toString());
-		appendix.setHl7Text(text);
-
-		return appendix;
-	}
-
 	private KonsultationsUeberweisunggrund getConsultationCauseSection() {
 		if (this.diseases == null) {
 			return null;
@@ -324,9 +299,8 @@ public class PatientConsultationSummary  {
 		}
 
 		StrucDocText text = new StrucDocText();
-		RecommendedMedNarrativeTextGenerator textbuilder = new RecommendedMedNarrativeTextGenerator(
-				recommendedMedSection.getEntry(), patientInstructions, pharmacistInstructions);
-		text.getContent().add(textbuilder.toString());
+		MedBaseTextGenerator textbuilder = new MedBaseTextGenerator(patientInstructions, pharmacistInstructions);
+		text.getContent().addAll(textbuilder.getTablesFromCda(recommendedMedSection.getEntry()));
 		recommendedMedSection.setText(text);
 
 		return recommendedMedSection;
@@ -384,7 +358,7 @@ public class PatientConsultationSummary  {
 
 		if (appendices != null && !appendices.isEmpty()) {
 			POCDMT000040Component3 comp3 = new POCDMT000040Component3();
-			comp3.setSection(getAppendixSection());
+			comp3.setSection(getAppendixSection(this.appendices, "consultation"));
 			structuredBody.getComponent().add(comp3);
 		}
 
@@ -570,20 +544,6 @@ public class PatientConsultationSummary  {
 	public void setElgapatientConsultationSummaryCdaDocument(ElgapatientConsultationSummary cda) {
 		setHeader(cda);
 		setStructuredBody(cda);
-	}
-
-	protected POCDMT000040Component3 createComp3FreeText(POCDMT000040Section section, String text, String titleText) {
-		POCDMT000040Component3 comp3 = new POCDMT000040Component3();
-		StrucDocText structext = new StrucDocText();
-		structext.setMediaType("text/plain");
-		structext.getContent().add(text);
-		section.setText(structext);
-
-		ST stTitle = new ST();
-		stTitle.setXmlMixed(titleText);
-		section.setTitle(stTitle);
-		comp3.setSection(section);
-		return comp3;
 	}
 
 }

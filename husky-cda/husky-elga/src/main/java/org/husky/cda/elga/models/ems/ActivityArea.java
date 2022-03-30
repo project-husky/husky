@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 public class ActivityArea {
 
 	/** The SLF4J logger instance. */
-	private static Logger LOGGER = LoggerFactory.getLogger(ActivityArea.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ActivityArea.class);
 	private Code area;
 	private ZonedDateTime startDate;
 	private ZonedDateTime stopDate;

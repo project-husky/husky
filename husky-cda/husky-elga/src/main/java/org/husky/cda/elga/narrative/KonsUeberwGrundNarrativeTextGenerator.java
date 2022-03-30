@@ -15,6 +15,7 @@ import java.util.List;
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
+import org.husky.cda.elga.utils.NamespaceUtils;
 import org.husky.common.hl7cdar2.ANY;
 import org.husky.common.hl7cdar2.CD;
 import org.husky.common.hl7cdar2.POCDMT000040Act;
@@ -22,12 +23,10 @@ import org.husky.common.hl7cdar2.POCDMT000040Entry;
 import org.husky.common.hl7cdar2.POCDMT000040EntryRelationship;
 import org.husky.common.hl7cdar2.StrucDocTable;
 import org.husky.common.hl7cdar2.StrucDocTbody;
-import org.husky.common.hl7cdar2.StrucDocTd;
-import org.husky.common.hl7cdar2.StrucDocTh;
 import org.husky.common.hl7cdar2.StrucDocThead;
 import org.husky.common.hl7cdar2.StrucDocTr;
 
-public class KonsUeberwGrundNarrativeTextGenerator {
+public class KonsUeberwGrundNarrativeTextGenerator extends BaseTextGenerator {
 
 	private List<POCDMT000040Entry> entries;
 
@@ -50,25 +49,6 @@ public class KonsUeberwGrundNarrativeTextGenerator {
 		thead.getTr().add(tr);
 
 		return thead;
-	}
-
-	private StrucDocTh getTableHeaderCell(String text, String styleCode) {
-		StrucDocTh th = new StrucDocTh();
-		if (styleCode != null) {
-			th.getStyleCode().add(styleCode);
-		}
-
-		th.getContent().add(text);
-		return th;
-	}
-
-	private StrucDocTd getCellTd(String text) {
-		if (text == null)
-			text = "";
-
-		StrucDocTd td = new StrucDocTd();
-		td.getContent().add(text);
-		return td;
 	}
 
 	private StrucDocTable getBody(POCDMT000040Act act) {
@@ -103,7 +83,7 @@ public class KonsUeberwGrundNarrativeTextGenerator {
 
 		for (POCDMT000040Entry entry : entries) {
 			if (entry != null && entry.getAct() != null) {
-				tables.add(new JAXBElement<>(new QName("urn:hl7-org:v3", "table"), StrucDocTable.class,
+				tables.add(new JAXBElement<>(new QName(NamespaceUtils.HL7_NAMESPACE, "table"), StrucDocTable.class,
 						getBody(entry.getAct())));
 			}
 		}

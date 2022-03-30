@@ -13,7 +13,9 @@ import org.husky.common.utils.time.DateTimes;
 
 public class DateTimeUtils {
 
-	public static final String HL7_NAMESPACE = "urn:hl7-org:v3";
+	private DateTimeUtils() {
+		throw new IllegalStateException("Utility class");
+	}
 
 	public static IVLTS createIvlts(ZonedDateTime startDate, ZonedDateTime stopDate) {
 		if (startDate == null) {
@@ -21,15 +23,20 @@ public class DateTimeUtils {
 		}
 
 		IVLTS ivlts = new IVLTS();
-		ivlts.getRest().add(new JAXBElement<>(new QName(HL7_NAMESPACE, "low", XMLConstants.DEFAULT_NS_PREFIX),
+		ivlts.getRest()
+				.add(new JAXBElement<>(new QName(NamespaceUtils.HL7_NAMESPACE, "low", XMLConstants.DEFAULT_NS_PREFIX),
 				TS.class, DateTimes.toDatetimeTs(startDate)));
 
 		if (stopDate == null) {
 			TS ts = new TS(NullFlavor.UNKNOWN);
-			ivlts.getRest().add(new JAXBElement<>(new QName(HL7_NAMESPACE, "high", XMLConstants.DEFAULT_NS_PREFIX),
+			ivlts.getRest()
+					.add(new JAXBElement<>(
+							new QName(NamespaceUtils.HL7_NAMESPACE, "high", XMLConstants.DEFAULT_NS_PREFIX),
 					TS.class, ts));
 		} else {
-			ivlts.getRest().add(new JAXBElement<>(new QName(HL7_NAMESPACE, "high", XMLConstants.DEFAULT_NS_PREFIX),
+			ivlts.getRest()
+					.add(new JAXBElement<>(
+							new QName(NamespaceUtils.HL7_NAMESPACE, "high", XMLConstants.DEFAULT_NS_PREFIX),
 					TS.class, DateTimes.toDatetimeTs(stopDate)));
 		}
 

@@ -44,6 +44,7 @@ import org.husky.common.utils.time.DateTimes;
 
 public class PractitionerAt {
 
+	private static final String INSTANCE = "INSTANCE";
 	private List<Identificator> identifiers;
 	private OrganizationAt organization;
 	private List<Telecom> telecoms;
@@ -63,18 +64,9 @@ public class PractitionerAt {
 	public PractitionerAt(POCDMT000040Author author) {
 		if (author != null && author.getAssignedAuthor() != null) {
 
-			if (author.getAssignedAuthor().getAssignedPerson() != null) {
-				for (PN pn : author.getAssignedAuthor().getAssignedPerson().getName()) {
-					if (pn != null) {
-						this.names.add(new Name(pn));
-					}
-				}
-			}
+			setNames(author.getAssignedAuthor().getAssignedPerson());
 
-			this.identifiers = new ArrayList<>();
-			for (II id : author.getAssignedAuthor().getId()) {
-				this.identifiers.add(new Identificator(id));
-			}
+			setIdentifiers(author.getAssignedAuthor().getId());
 
 			if (author.getAssignedAuthor().getAssignedPerson() != null
 					&& author.getAssignedAuthor().getRepresentedOrganization() != null) {
@@ -85,28 +77,16 @@ public class PractitionerAt {
 				this.code = new Code(author.getAssignedAuthor().getCode());
 			}
 
-			this.telecoms = new ArrayList<>();
-			for (TEL tel : author.getAssignedAuthor().getTelecom()) {
-				this.telecoms.add(new Telecom(tel));
-			}
+			setTelecoms(author.getAssignedAuthor().getTelecom());
 		}
 	}
 
 	public PractitionerAt(POCDMT000040LegalAuthenticator authenticator) {
 		if (authenticator != null && authenticator.getAssignedEntity() != null) {
 
-			this.identifiers = new ArrayList<>();
-			for (II id : authenticator.getAssignedEntity().getId()) {
-				this.identifiers.add(new Identificator(id));
-			}
+			setIdentifiers(authenticator.getAssignedEntity().getId());
 
-			if (authenticator.getAssignedEntity().getAssignedPerson() != null) {
-				for (PN pn : authenticator.getAssignedEntity().getAssignedPerson().getName()) {
-					if (pn != null) {
-						this.names.add(new Name(pn));
-					}
-				}
-			}
+			setNames(authenticator.getAssignedEntity().getAssignedPerson());
 
 			if (authenticator.getAssignedEntity().getAssignedPerson() != null
 					&& authenticator.getAssignedEntity().getRepresentedOrganization() != null) {
@@ -117,10 +97,7 @@ public class PractitionerAt {
 				this.code = new Code(authenticator.getAssignedEntity().getCode());
 			}
 
-			this.telecoms = new ArrayList<>();
-			for (TEL tel : authenticator.getAssignedEntity().getTelecom()) {
-				this.telecoms.add(new Telecom(tel));
-			}
+			setTelecoms(authenticator.getAssignedEntity().getTelecom());
 
 			if (authenticator.getSignatureCode() != null) {
 				this.speciality = new Code(authenticator.getSignatureCode());
@@ -134,6 +111,13 @@ public class PractitionerAt {
 
 	public void setIdentifier(List<Identificator> identifier) {
 		this.identifiers = identifier;
+	}
+
+	public void setIdentifiers(List<II> ids) {
+		this.identifiers = new ArrayList<>();
+		for (II id : ids) {
+			this.identifiers.add(new Identificator(id));
+		}
 	}
 
 	public OrganizationAt getOrganization() {
@@ -152,12 +136,29 @@ public class PractitionerAt {
 		this.telecoms = telecom;
 	}
 
+	public void setTelecoms(List<TEL> tels) {
+		this.telecoms = new ArrayList<>();
+		for (TEL tel : tels) {
+			this.telecoms.add(new Telecom(tel));
+		}
+	}
+
 	public List<Name> getNames() {
 		return names;
 	}
 
 	public void setNames(List<Name> names) {
 		this.names = names;
+	}
+
+	public void setNames(POCDMT000040Person person) {
+		if (person != null) {
+			for (PN pn : person.getName()) {
+				if (pn != null) {
+					this.names.add(new Name(pn));
+				}
+			}
+		}
 	}
 
 	public List<Address> getAddresses() {
@@ -234,7 +235,7 @@ public class PractitionerAt {
 	protected POCDMT000040AuthoringDevice getAtcdabbrOtherDeviceCompilation() {
 		POCDMT000040AuthoringDevice device = new POCDMT000040AuthoringDevice();
 		device.setClassCode(EntityClassDevice.DEV);
-		device.setDeterminerCode("INSTANCE");
+		device.setDeterminerCode(INSTANCE);
 		device.setManufacturerModelName(new SC(modelNameOfDevice));
 		device.setSoftwareName(new SC(softwareName));
 		return device;
@@ -249,7 +250,7 @@ public class PractitionerAt {
 			if (representedOrganization == null) {
 				representedOrganization = new POCDMT000040Organization();
 				representedOrganization.setClassCode("ORG");
-				representedOrganization.setDeterminerCode("INSTANCE");
+				representedOrganization.setDeterminerCode(INSTANCE);
 			}
 
 			assignedAuthor.setRepresentedOrganization(
@@ -333,7 +334,7 @@ public class PractitionerAt {
 			if (person.getClassCode().isEmpty()) {
 				person.getClassCode().add("PSN");
 			}
-			person.setDeterminerCode("INSTANCE");
+			person.setDeterminerCode(INSTANCE);
 		}
 		return person;
 	}
@@ -373,7 +374,7 @@ public class PractitionerAt {
 		if (this.organization != null) {
 			POCDMT000040Organization legalAuthenOrg = new POCDMT000040Organization();
 			legalAuthenOrg.setClassCode("ORG");
-			legalAuthenOrg.setDeterminerCode("INSTANCE");
+			legalAuthenOrg.setDeterminerCode(INSTANCE);
 			legalAuthenOrg = this.organization.getHl7CdaR2Pocdmt000040Organization(legalAuthenOrg);
 			assignedEntity.setRepresentedOrganization(legalAuthenOrg);
 		}
@@ -397,7 +398,7 @@ public class PractitionerAt {
 		if (person.getClassCode().isEmpty()) {
 			person.getClassCode().add("PSN");
 		}
-		person.setDeterminerCode("INSTANCE");
+		person.setDeterminerCode(INSTANCE);
 		return person;
 	}
 

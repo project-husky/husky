@@ -15,22 +15,17 @@ import java.util.List;
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
-import org.husky.common.hl7cdar2.CD;
-import org.husky.common.hl7cdar2.CE;
-import org.husky.common.hl7cdar2.II;
 import org.husky.common.hl7cdar2.POCDMT000040Entry;
 import org.husky.common.hl7cdar2.POCDMT000040EntryRelationship;
 import org.husky.common.hl7cdar2.StrucDocTable;
 import org.husky.common.hl7cdar2.StrucDocTbody;
-import org.husky.common.hl7cdar2.StrucDocTd;
 import org.husky.common.hl7cdar2.StrucDocText;
-import org.husky.common.hl7cdar2.StrucDocTh;
 import org.husky.common.hl7cdar2.StrucDocThead;
 import org.husky.common.hl7cdar2.StrucDocTr;
 import org.husky.common.model.Name;
 import org.husky.common.utils.time.Hl7Dtm;
 
-public class SpecimenNarrativeTextGenerator {
+public class SpecimenNarrativeTextGenerator extends BaseTextGenerator {
 
 	private List<POCDMT000040Entry> entries;
 
@@ -56,62 +51,8 @@ public class SpecimenNarrativeTextGenerator {
 					tr.setID(component.getProcedure().getText().getReference().getValue().replace("#", ""));
 				}
 
-				if (component.getProcedure().getParticipant() != null
-						&& !component.getProcedure().getParticipant().isEmpty()
-						&& component.getProcedure().getParticipant().get(0) != null
-						&& component.getProcedure().getParticipant().get(0).getParticipantRole() != null) {
-
-					// Material-ID
-					if (component.getProcedure().getParticipant().get(0).getParticipantRole().getId() != null
-						&& !component.getProcedure().getParticipant().get(0).getParticipantRole().getId().isEmpty()) {
-						tr.getThOrTd().add(getCellTdId(
-								component.getProcedure().getParticipant().get(0).getParticipantRole().getId().get(0)));
-					}
-
-					// Untersuchtes Material
-					if (component.getProcedure().getParticipant().get(0).getParticipantRole().getPlayingEntity() != null
-							&& component.getProcedure().getParticipant().get(0).getParticipantRole().getPlayingEntity()
-									.getCode() != null) {
-						tr.getThOrTd().add(getCellTdCode(component.getProcedure().getParticipant().get(0)
-								.getParticipantRole().getPlayingEntity().getCode()));
-					}
-				}
-
-				// Probenentnahme
-				if (component.getProcedure().getEffectiveTime() != null
-						&& component.getProcedure().getEffectiveTime().getValue() != null) {
-					Hl7Dtm hl7Dtm = Hl7Dtm.fromHl7(component.getProcedure().getEffectiveTime().getValue());
-					String date = hl7Dtm.getDateTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-					tr.getThOrTd().add(getCellTd(date));
-				}
-
-				// Probenentnahme durch
-				if (component.getProcedure().getPerformer() != null
-						&& !component.getProcedure().getPerformer().isEmpty()
-						&& component.getProcedure().getPerformer().get(0) != null
-						&& component.getProcedure().getPerformer().get(0).getAssignedEntity() != null
-						&& component.getProcedure().getPerformer().get(0).getAssignedEntity()
-								.getRepresentedOrganization() != null) {
-					Name name = new Name(component.getProcedure().getPerformer().get(0).getAssignedEntity()
-							.getRepresentedOrganization().getName().get(0));
-					tr.getThOrTd().add(getCellTd(name.getName()));
-				}
-
-				if (component.getProcedure().getEntryRelationship() != null
-						&& !component.getProcedure().getEntryRelationship().isEmpty()
-						&& component.getProcedure().getEntryRelationship().get(0) != null
-						&& component.getProcedure().getEntryRelationship().get(0).getAct() != null) {
-
-					// Probeneingang
-					if (component.getProcedure().getEntryRelationship().get(0).getAct().getEffectiveTime() != null
-							&& component.getProcedure().getEntryRelationship().get(0).getAct().getEffectiveTime()
-									.getValue() != null) {
-						Hl7Dtm hl7Dtm = Hl7Dtm.fromHl7(component.getProcedure().getEntryRelationship().get(0).getAct()
-								.getEffectiveTime().getValue());
-						String date = hl7Dtm.getDateTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-						tr.getThOrTd().add(getCellTd(date));
-					}
-				}
+				addMaterialRows(component, tr);
+				addSampleRows(component, tr);
 
 				body.getTr().add(tr);
 			}
@@ -120,49 +61,60 @@ public class SpecimenNarrativeTextGenerator {
 		return body;
 	}
 
-	protected StrucDocTd getCellTdId(II codeId) {
-		return getCellTd(String.format("%s - %s", codeId.getExtension(), codeId.getRoot()));
-	}
+	private void addMaterialRows(POCDMT000040EntryRelationship component, StrucDocTr tr) {
+		if (!component.getProcedure().getParticipant().isEmpty()
+				&& component.getProcedure().getParticipant().get(0) != null
+				&& component.getProcedure().getParticipant().get(0).getParticipantRole() != null) {
 
-	protected StrucDocTd getCellTdCode(CD codeTest) {
-		return getCellTd(codeTest.getDisplayName());
-	}
-
-	protected StrucDocTd getCellTdCodes(List<CE> interpretationCodes) {
-		StringBuilder sb = new StringBuilder();
-
-		int index = 0;
-		for (CE interpret : interpretationCodes) {
-			if (interpret != null) {
-				sb.append(interpret.getDisplayName());
+			// Material-ID
+			if (!component.getProcedure().getParticipant().get(0).getParticipantRole().getId().isEmpty()) {
+				tr.getThOrTd().add(getCellTdId(
+						component.getProcedure().getParticipant().get(0).getParticipantRole().getId().get(0)));
 			}
 
-			index++;
-			if (index != interpretationCodes.size()) {
-				sb.append(" , ");
+			// Untersuchtes Material
+			if (component.getProcedure().getParticipant().get(0).getParticipantRole().getPlayingEntity() != null
+					&& component.getProcedure().getParticipant().get(0).getParticipantRole().getPlayingEntity()
+							.getCode() != null) {
+				tr.getThOrTd().add(getCellTdCode(component.getProcedure().getParticipant().get(0).getParticipantRole()
+						.getPlayingEntity().getCode()));
 			}
 		}
-
-		return getCellTd(sb.toString());
 	}
 
-	private StrucDocTd getCellTd(String text) {
-		if (text == null)
-			text = "";
-
-		StrucDocTd td = new StrucDocTd();
-		td.getContent().add(text);
-		return td;
-	}
-
-	private StrucDocTh getTableHeaderCell(String text, String styleCode) {
-		StrucDocTh th = new StrucDocTh();
-		if (styleCode != null) {
-			th.getStyleCode().add(styleCode);
+	private void addSampleRows(POCDMT000040EntryRelationship component, StrucDocTr tr) {
+		// Probenentnahme
+		if (component.getProcedure().getEffectiveTime() != null
+				&& component.getProcedure().getEffectiveTime().getValue() != null) {
+			Hl7Dtm hl7Dtm = Hl7Dtm.fromHl7(component.getProcedure().getEffectiveTime().getValue());
+			String date = hl7Dtm.getDateTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+			tr.getThOrTd().add(getCellTd(date));
 		}
 
-		th.getContent().add(text);
-		return th;
+		// Probenentnahme durch
+		if (!component.getProcedure().getPerformer().isEmpty()
+				&& component.getProcedure().getPerformer().get(0) != null
+				&& component.getProcedure().getPerformer().get(0).getAssignedEntity() != null
+				&& component.getProcedure().getPerformer().get(0).getAssignedEntity()
+						.getRepresentedOrganization() != null) {
+			Name name = new Name(component.getProcedure().getPerformer().get(0).getAssignedEntity()
+					.getRepresentedOrganization().getName().get(0));
+			tr.getThOrTd().add(getCellTd(name.getName()));
+		}
+
+		if (!component.getProcedure().getEntryRelationship().isEmpty()
+				&& component.getProcedure().getEntryRelationship().get(0) != null
+				&& component.getProcedure().getEntryRelationship().get(0).getAct() != null) {
+
+			// Probeneingang
+			if (component.getProcedure().getEntryRelationship().get(0).getAct().getEffectiveTime() != null && component
+					.getProcedure().getEntryRelationship().get(0).getAct().getEffectiveTime().getValue() != null) {
+				Hl7Dtm hl7Dtm = Hl7Dtm.fromHl7(
+						component.getProcedure().getEntryRelationship().get(0).getAct().getEffectiveTime().getValue());
+				String date = hl7Dtm.getDateTime().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+				tr.getThOrTd().add(getCellTd(date));
+			}
+		}
 	}
 
 	private StrucDocThead getTableHeader() {

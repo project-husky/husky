@@ -16,6 +16,7 @@ import org.husky.common.basetypes.IdentificatorBaseType;
 import org.husky.common.hl7cdar2.ON;
 import org.husky.common.model.Author;
 import org.husky.common.model.Name;
+import org.husky.common.model.Organization;
 import org.husky.common.utils.XdsMetadataUtil;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssigningAuthority;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Identifiable;
@@ -59,28 +60,7 @@ public class AuthorAt extends Author {
 
 		// Institution
 		if (author.getOrganization() != null) {
-			org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization inst = new org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization();
-			if (author.getOrganization().getNameList() != null && !author.getOrganization().getNameList().isEmpty()
-					&& author.getOrganization().getNameList().get(0) != null) {
-				inst.setOrganizationName(author.getOrganization().getNameList().get(0).getFullName());
-			}
-
-			if (author.getOrganization().getIdentificatorList() != null) {
-				for (IdentificatorBaseType id : author.getOrganization().getIdentificatorList()) {
-					if (id != null && id.getExtension() != null) {
-						inst.setIdNumber(id.getExtension());
-					}
-
-					if (id != null && id.getRoot() != null) {
-						var assigningAuthority = new AssigningAuthority();
-						assigningAuthority.setUniversalId(id.getRoot());
-						assigningAuthority.setUniversalIdType("ISO");
-						inst.setAssigningAuthority(assigningAuthority);
-					}
-				}
-			}
-
-			at.getAuthorInstitution().add(inst);
+			at.getAuthorInstitution().add(getIpfOrganization(author.getOrganization()));
 		}
 
 		if (author.getRoleFunction() != null) {
@@ -94,6 +74,30 @@ public class AuthorAt extends Author {
 
 
 		return at;
+	}
+
+	private static org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization getIpfOrganization(Organization org) {
+		org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization inst = new org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization();
+		if (org.getNameList() != null && !org.getNameList().isEmpty() && org.getNameList().get(0) != null) {
+			inst.setOrganizationName(org.getNameList().get(0).getFullName());
+		}
+
+		if (org.getIdentificatorList() != null) {
+			for (IdentificatorBaseType id : org.getIdentificatorList()) {
+				if (id != null && id.getExtension() != null) {
+					inst.setIdNumber(id.getExtension());
+				}
+
+				if (id != null && id.getRoot() != null) {
+					var assigningAuthority = new AssigningAuthority();
+					assigningAuthority.setUniversalId(id.getRoot());
+					assigningAuthority.setUniversalIdType("ISO");
+					inst.setAssigningAuthority(assigningAuthority);
+				}
+			}
+		}
+
+		return inst;
 	}
 
 	/**
