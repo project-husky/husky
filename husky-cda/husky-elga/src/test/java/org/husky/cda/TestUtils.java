@@ -24,8 +24,6 @@ import java.util.List;
 import java.util.Random;
 
 import javax.xml.bind.JAXBElement;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathFactory;
 
 import org.husky.cda.elga.generated.artdecor.enums.EImpfImpfrollenVs;
 import org.husky.cda.elga.models.Appendix;
@@ -317,13 +315,8 @@ public class TestUtils {
 
 	public String ts5;
 
-	protected XPath xpath;
-
-	protected XPathFactory xpathFactory;
-
 	public TestUtils() {
-		xpathFactory = XPathFactory.newInstance();
-		xpath = xpathFactory.newXPath();
+
 	}
 
 	public Address createAddress1() {
