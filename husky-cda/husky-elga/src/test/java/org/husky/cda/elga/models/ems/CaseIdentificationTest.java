@@ -114,35 +114,6 @@ class CaseIdentificationTest extends TestUtils {
 		assertEquals("1.2.40.0.34.6.0.11.3.57", observation.getTemplateId().get(0).getRoot());
 		assertEquals("1.3.6.1.4.1.19376.1.3.1.1.2", observation.getTemplateId().get(1).getRoot());
 
-		/*
-		 * assertEquals("416341003", observation.getCode().getCode());
-		 * assertEquals("2.16.840.1.113883.6.96",
-		 * observation.getCode().getCodeSystem());
-		 * 
-		 * assertEquals("completed", observation.getStatusCode().getCode());
-		 * 
-		 * assertEquals("20201008000000", observation.getEffectiveTime().getValue());
-		 * 
-		 * assertNotNull(observation.getValue()); assertEquals(1,
-		 * observation.getValue().size());
-		 * 
-		 * CD value = (CD) observation.getValue().get(0); assertEquals("A04.5",
-		 * value.getCode()); assertEquals("1.2.40.0.34.5.171", value.getCodeSystem());
-		 * assertEquals("Campylobakter spp., darmpathogen", value.getDisplayName());
-		 * 
-		 * assertNotNull(value.getQualifier()); assertEquals(1,
-		 * value.getQualifier().size()); CR qualifier = value.getQualifier().get(0);
-		 * 
-		 * assertNotNull(qualifier); assertNotNull(qualifier.getName());
-		 * assertEquals("8", qualifier.getName().getCode());
-		 * assertEquals("2.16.840.1.113883.3.7.1.0",
-		 * qualifier.getName().getCodeSystem()); assertNotNull(qualifier.getValue());
-		 * 
-		 * assertEquals("V", qualifier.getValue().getCode());
-		 * assertEquals("2.16.840.1.113883.3.7.1.8",
-		 * qualifier.getValue().getCodeSystem()); assertEquals("Verdacht auf",
-		 * qualifier.getValue().getDisplayName());
-		 */
 	}
 
 
