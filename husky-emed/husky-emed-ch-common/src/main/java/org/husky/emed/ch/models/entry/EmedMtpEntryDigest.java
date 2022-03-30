@@ -9,11 +9,7 @@
  */
 package org.husky.emed.ch.models.entry;
 
-import lombok.Getter;
-import lombok.Setter;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.ch.enums.ActSubstanceAdminSubstitutionCode;
 import org.husky.emed.ch.enums.EmedEntryType;
 import org.husky.emed.ch.enums.RouteOfAdministrationEdqm;
 import org.husky.emed.ch.models.common.AuthorDigest;
@@ -22,8 +18,6 @@ import org.husky.emed.ch.models.common.MedicationDosageInstructions;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -31,14 +25,7 @@ import java.util.Objects;
  *
  * @author Quentin Ligier
  */
-@Getter
-@Setter
 public class EmedMtpEntryDigest extends EmedEntryDigest {
-
-    /**
-     * The list of substance substitution permissions.
-     */
-    private final List<@NonNull ActSubstanceAdminSubstitutionCode> substitutionPermissions = new ArrayList<>();
 
     /**
      * The dosage instructions.
@@ -83,15 +70,20 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
     private RouteOfAdministrationEdqm routeOfAdministration;
 
     /**
-     * The inclusive instant at which the item shall start.
+     * The lower bound of the planned item validity period.
      */
-    private Instant serviceStartTime;
+    private Instant plannedItemValidityStart;
 
     /**
-     * The inclusive instant at which the item shall stop or {@code null} if it's unknown.
+     * The higher bound of the planned item validity period or {@code null} if it's not bounded.
      */
     @Nullable
-    private Instant serviceStopTime;
+    private Instant plannedItemValidityStop;
+
+    /**
+     * Whether the substitution is permitted (Equivalent) or not (None).
+     */
+    private boolean substitutionPermitted;
 
     /**
      * The treatment reason or {@code null} if it isn't provided.
@@ -102,7 +94,7 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
     /**
      * Constructor.
      *
-     * @param creationTime                  The instant at which the item entry was created.
+     * @param planningTime                  The planning time.
      * @param documentId                    The parent document unique ID.
      * @param documentAuthor                The author of the original parent document or {@code null} if they're not
      *                                      known.
@@ -119,17 +111,17 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
      *                                      {@code null} if unlimited repeats/refills are authorized.
      * @param routeOfAdministration         The medication route of administration or {@code null} if it's not
      *                                      specified.
-     * @param serviceStartTime              The inclusive instant at which the item shall start.
-     * @param serviceStopTime               The inclusive instant at which the item shall stop or {@code null} if it's
-     *                                      unknown.
-     * @param substitutionPermissions       The list of substance substitution permissions or {@code null} if it's not
-     *                                      specified.
+     * @param plannedItemValidityStart      The lower bound of the planned item validity period.
+     * @param plannedItemValidityStop       The higher bound of the planned item validity period or {@code null} if it's
+     *                                      not bounded.
+     * @param substitutionPermitted         Whether the substitution is permitted (Equivalent) or not (None).
      * @param originalMtpReference          The reference to the original MTP entry if this one is consolidated.
      * @param treatmentReason               The treatment reason or {@code null} if it isn't provided.
      * @param patientMedicationInstructions The patient medication instructions or {@code null} if it isn't provided.
      * @param fulfilmentInstructions        The fulfilment instructions or {@code null} if it isn't provided.
+     * @throws IllegalArgumentException if plannedItemValidityStop is before plannedItemValidityStart.
      */
-    public EmedMtpEntryDigest(final Instant creationTime,
+    public EmedMtpEntryDigest(final Instant planningTime,
                               final String documentId,
                               @Nullable final AuthorDigest documentAuthor,
                               @Nullable final AuthorDigest sectionAuthor,
@@ -141,28 +133,29 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
                               final MedicationProduct product,
                               @Nullable final Integer repeatNumber,
                               @Nullable final RouteOfAdministrationEdqm routeOfAdministration,
-                              final Instant serviceStartTime,
-                              @Nullable final Instant serviceStopTime,
-                              @Nullable final List<@NonNull ActSubstanceAdminSubstitutionCode> substitutionPermissions,
+                              final Instant plannedItemValidityStart,
+                              @Nullable final Instant plannedItemValidityStop,
+                              final boolean substitutionPermitted,
                               @Nullable final EmedReference originalMtpReference,
                               @Nullable final String treatmentReason,
                               @Nullable final String patientMedicationInstructions,
                               @Nullable final String fulfilmentInstructions) {
-        super(creationTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
+        super(planningTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
                 annotationComment);
         this.dosageInstructions = Objects.requireNonNull(dosageInstructions);
         this.product = Objects.requireNonNull(product);
         this.routeOfAdministration = routeOfAdministration;
         this.repeatNumber = repeatNumber;
-        this.serviceStartTime = Objects.requireNonNull(serviceStartTime);
-        this.serviceStopTime = serviceStopTime;
-        if (substitutionPermissions != null) {
-            this.substitutionPermissions.addAll(substitutionPermissions);
-        }
+        this.plannedItemValidityStart = Objects.requireNonNull(plannedItemValidityStart);
+        this.plannedItemValidityStop = plannedItemValidityStop;
+        this.substitutionPermitted = substitutionPermitted;
         this.originalMtpReference = originalMtpReference;
         this.treatmentReason = treatmentReason;
         this.patientMedicationInstructions = patientMedicationInstructions;
         this.fulfilmentInstructions = fulfilmentInstructions;
+        if (this.plannedItemValidityStop != null && this.plannedItemValidityStop.isBefore(this.plannedItemValidityStart)) {
+            throw new IllegalArgumentException("The planned item validity shall be a valid interval");
+        }
     }
 
     /**
@@ -181,28 +174,156 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
         return EmedEntryType.MTP;
     }
 
+    public Instant getPlanningTime() {
+        return this.itemTime;
+    }
+
+    public void setPlanningTime(final Instant planningTime) {
+        this.itemTime = Objects.requireNonNull(planningTime);
+    }
+
+    public MedicationDosageInstructions getDosageInstructions() {
+        return this.dosageInstructions;
+    }
+
+    public void setDosageInstructions(final MedicationDosageInstructions dosageInstructions) {
+        this.dosageInstructions = dosageInstructions;
+    }
+
+    @Nullable
+    public String getFulfilmentInstructions() {
+        return this.fulfilmentInstructions;
+    }
+
+    public void setFulfilmentInstructions(@Nullable final String fulfilmentInstructions) {
+        this.fulfilmentInstructions = fulfilmentInstructions;
+    }
+
+    @Nullable
+    public EmedReference getOriginalMtpReference() {
+        return this.originalMtpReference;
+    }
+
+    public void setOriginalMtpReference(@Nullable final EmedReference originalMtpReference) {
+        this.originalMtpReference = originalMtpReference;
+    }
+
+    @Nullable
+    public String getPatientMedicationInstructions() {
+        return this.patientMedicationInstructions;
+    }
+
+    public void setPatientMedicationInstructions(@Nullable final String patientMedicationInstructions) {
+        this.patientMedicationInstructions = patientMedicationInstructions;
+    }
+
+    public MedicationProduct getProduct() {
+        return this.product;
+    }
+
+    public void setProduct(final MedicationProduct product) {
+        this.product = product;
+    }
+
+    @Nullable
+    public Integer getRepeatNumber() {
+        return this.repeatNumber;
+    }
+
+    public void setRepeatNumber(@Nullable final Integer repeatNumber) {
+        this.repeatNumber = repeatNumber;
+    }
+
+    @Nullable
+    public RouteOfAdministrationEdqm getRouteOfAdministration() {
+        return this.routeOfAdministration;
+    }
+
+    public void setRouteOfAdministration(@Nullable final RouteOfAdministrationEdqm routeOfAdministration) {
+        this.routeOfAdministration = routeOfAdministration;
+    }
+
+    public Instant getPlannedItemValidityStart() {
+        return this.plannedItemValidityStart;
+    }
+
+    public void setPlannedItemValidityStart(final Instant plannedItemValidityStart) {
+        this.plannedItemValidityStart = plannedItemValidityStart;
+    }
+
+    @Nullable
+    public Instant getPlannedItemValidityStop() {
+        return this.plannedItemValidityStop;
+    }
+
+    public void setPlannedItemValidityStop(@Nullable final Instant plannedItemValidityStop) {
+        this.plannedItemValidityStop = plannedItemValidityStop;
+    }
+
+    public boolean isSubstitutionPermitted() {
+        return this.substitutionPermitted;
+    }
+
+    public void setSubstitutionPermitted(final boolean substitutionPermitted) {
+        this.substitutionPermitted = substitutionPermitted;
+    }
+
+    @Nullable
+    public String getTreatmentReason() {
+        return this.treatmentReason;
+    }
+
+    public void setTreatmentReason(@Nullable final String treatmentReason) {
+        this.treatmentReason = treatmentReason;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof final EmedMtpEntryDigest that)) return false;
+        if (!super.equals(o)) return false;
+        return substitutionPermitted == that.substitutionPermitted
+                && dosageInstructions.equals(that.dosageInstructions)
+                && Objects.equals(fulfilmentInstructions, that.fulfilmentInstructions)
+                && Objects.equals(originalMtpReference, that.originalMtpReference)
+                && Objects.equals(patientMedicationInstructions, that.patientMedicationInstructions)
+                && product.equals(that.product)
+                && Objects.equals(repeatNumber, that.repeatNumber)
+                && routeOfAdministration == that.routeOfAdministration
+                && plannedItemValidityStart.equals(that.plannedItemValidityStart)
+                && Objects.equals(plannedItemValidityStop, that.plannedItemValidityStop)
+                && Objects.equals(treatmentReason, that.treatmentReason);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), dosageInstructions, fulfilmentInstructions, originalMtpReference,
+                patientMedicationInstructions, product, repeatNumber, routeOfAdministration, plannedItemValidityStart,
+                plannedItemValidityStop, substitutionPermitted, treatmentReason);
+    }
+
     @Override
     public String toString() {
         return "EmedMtpEntryDigest{" +
-                "creationTime=" + creationTime +
-                ", documentId='" + documentId + '\'' +
-                ", sectionAuthor=" + sectionAuthor +
-                ", documentAuthor=" + documentAuthor +
-                ", entryId='" + entryId + '\'' +
-                ", medicationTreatmentId='" + medicationTreatmentId + '\'' +
-                ", sequence=" + sequence +
-                ", annotationComment='" + annotationComment + '\'' +
-                ", substitutionPermissions=" + substitutionPermissions +
-                ", dosageInstructions=" + dosageInstructions +
-                ", product=" + product +
-                ", repeatNumber=" + repeatNumber +
-                ", routeOfAdministration=" + routeOfAdministration +
-                ", serviceStartTime=" + serviceStartTime +
-                ", serviceStopTime=" + serviceStopTime +
-                ", originalMtpReference=" + originalMtpReference +
-                ", treatmentReason='" + treatmentReason + '\'' +
-                ", patientMedicationInstructions='" + patientMedicationInstructions + '\'' +
-                ", fulfilmentInstructions='" + fulfilmentInstructions + '\'' +
+                "annotationComment='" + this.annotationComment + '\'' +
+                ", planningTime=" + this.itemTime +
+                ", documentAuthor=" + this.documentAuthor +
+                ", documentId='" + this.documentId + '\'' +
+                ", entryId='" + this.entryId + '\'' +
+                ", medicationTreatmentId='" + this.medicationTreatmentId + '\'' +
+                ", sectionAuthor=" + this.sectionAuthor +
+                ", sequence=" + this.sequence +
+                ", dosageInstructions=" + this.dosageInstructions +
+                ", fulfilmentInstructions='" + this.fulfilmentInstructions + '\'' +
+                ", originalMtpReference=" + this.originalMtpReference +
+                ", patientMedicationInstructions='" + this.patientMedicationInstructions + '\'' +
+                ", product=" + this.product +
+                ", repeatNumber=" + this.repeatNumber +
+                ", routeOfAdministration=" + this.routeOfAdministration +
+                ", plannedItemValidityStart=" + this.plannedItemValidityStart +
+                ", plannedItemValidityStop=" + this.plannedItemValidityStop +
+                ", substitutionPermitted=" + this.substitutionPermitted +
+                ", treatmentReason='" + this.treatmentReason + '\'' +
                 '}';
     }
 }

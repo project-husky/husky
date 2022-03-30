@@ -14,7 +14,6 @@ import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.ch.enums.ActSubstanceAdminSubstitutionCode;
 import org.husky.emed.ch.enums.RouteOfAdministrationEdqm;
 import org.husky.emed.ch.enums.TreatmentStatus;
 import org.husky.emed.ch.models.common.AuthorDigest;
@@ -42,6 +41,16 @@ import java.util.Optional;
 public class MedicationTreatment {
 
     /**
+     * The list of 'over-the-counter' dispenses (OTC, without prescription).
+     */
+    protected final List<@NonNull MedicationDispense> otcDispenses = new ArrayList<>();
+
+    /**
+     * The list of prescriptions.
+     */
+    protected final List<@NonNull MedicationPrescription> prescriptions = new ArrayList<>();
+
+    /**
      * The annotation comment or {@code null} if it isn't provided.
      */
     @Nullable
@@ -62,7 +71,7 @@ public class MedicationTreatment {
      * The fulfilment instructions or {@code null} if it isn't provided.
      */
     @Nullable
-    private String fulfilmentInstructions;
+    protected String fulfilmentInstructions;
 
     /**
      * The medication treatment ID.
@@ -82,29 +91,10 @@ public class MedicationTreatment {
     protected EmedReference mtpReference;
 
     /**
-     * The MTP planned stop time. It's the maximum time at which the medication treatment can be valid, but it may
-     * already be stopped by a PADV CANCEL or REFUSE item.
-     *
-     * @see #treatmentStopTime
-     */
-    @Nullable
-    protected Instant mtpStopTime;
-
-    /**
-     * The list of 'over-the-counter' dispenses (OTC, without prescription).
-     */
-    protected final List<@NonNull MedicationDispense> otcDispenses = new ArrayList<>();
-
-    /**
      * The patient medication instructions or {@code null} if it isn't provided.
      */
     @Nullable
-    private String patientMedicationInstructions;
-
-    /**
-     * The list of prescriptions.
-     */
-    protected final List<@NonNull MedicationPrescription> prescriptions = new ArrayList<>();
+    protected String patientMedicationInstructions;
 
     /**
      * The medication product.
@@ -118,18 +108,18 @@ public class MedicationTreatment {
     protected RouteOfAdministrationEdqm routeOfAdministration;
 
     /**
-     * The substance substitution permissions, or {@code null} if substitution is authorized without condition.
+     * Whether the substitution is permitted (Equivalent) or not (None).
      */
-    protected final List<@NonNull ActSubstanceAdminSubstitutionCode> substitutionPermissions = new ArrayList<>();
+    protected boolean substitutionPermitted;
 
     /**
      * The treatment reason or {@code null} if it isn't provided.
      */
     @Nullable
-    private String treatmentReason;
+    protected String treatmentReason;
 
     /**
-     * The MTP and treatment starting time.
+     * The treatment start time (inclusive).
      */
     protected Instant treatmentStartTime;
 
@@ -141,10 +131,8 @@ public class MedicationTreatment {
     protected TreatmentStatus treatmentStatus;
 
     /**
-     * The treatment stop time. By default, it's equal to the {@code mtpStopTime}. It can be then moved sooner if a PADV
-     * CANCEL or REFUSE targets the MTP.
-     *
-     * @see #mtpStopTime
+     * The treatment stop time (inclusive). It's the maximum time at which the medication treatment can be valid. If
+     * {@code null}, the treatment is active forever (or until stopped).
      */
     @Nullable
     protected Instant treatmentStopTime;

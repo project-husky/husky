@@ -9,9 +9,14 @@
  */
 package org.husky.emed.ch.cda.services.digesters;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import org.husky.common.ch.enums.ConfidentialityCode;
+import org.husky.emed.ch.cda.TestUtils;
+import org.husky.emed.ch.cda.digesters.*;
+import org.husky.emed.ch.cda.services.EmedEntryDigestService;
+import org.husky.emed.ch.enums.CceDocumentType;
+import org.husky.emed.ch.models.document.EmedMtpDocumentDigest;
+import org.husky.emed.ch.models.entry.EmedEntryDigest;
+import org.junit.jupiter.api.*;
 
 import java.time.Instant;
 import java.time.OffsetDateTime;
@@ -19,17 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.husky.common.ch.enums.ConfidentialityCode;
-import org.husky.emed.ch.cda.TestUtils;
-import org.husky.emed.ch.cda.services.EmedEntryDigestService;
-import org.husky.emed.ch.enums.CceDocumentType;
-import org.husky.emed.ch.models.document.EmedMtpDocumentDigest;
-import org.husky.emed.ch.models.entry.EmedEntryDigest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests of the {@link CceDocumentDigester} class.
@@ -42,11 +37,13 @@ class CceDocumentDigesterTest {
 
     CceDocumentDigesterTest() {
         this.emedEntryDigestService = new EmedEntryDigestServiceImpl();
+        final var cceMtpEntryDigester = new CceMtpEntryDigester();
+        final var ccePreEntryDigester = new CcePreEntryDigester(this.emedEntryDigestService);
         this.digester = new CceDocumentDigester(
-                new CceMtpEntryDigester(),
-                new CcePreEntryDigester(emedEntryDigestService),
-                new CceDisEntryDigester(emedEntryDigestService),
-                new CcePadvEntryDigester(emedEntryDigestService)
+                cceMtpEntryDigester,
+                ccePreEntryDigester,
+                new CceDisEntryDigester(this.emedEntryDigestService),
+                new CcePadvEntryDigester(this.emedEntryDigestService, cceMtpEntryDigester, ccePreEntryDigester)
         );
     }
 
@@ -64,7 +61,7 @@ class CceDocumentDigesterTest {
         assertEquals(ConfidentialityCode.NORMALLY_ACCESSIBLE, digest.getConfidentialityCode());
         //assertEquals("", digest.getAuthors());
         //assertEquals("", digest.getCustodian());
-        assertEquals(OffsetDateTime.parse("2011-11-29T11:00:00+01:00"), digest.getEffectiveTime());
+        assertEquals(OffsetDateTime.parse("2011-11-29T11:00:00+01:00"), digest.getCreationTime());
 		assertEquals(CceDocumentType.MTP, digest.getDocumentType());
         //assertEquals("", digest.getPatient());
         assertArrayEquals(new byte[]{}, digest.getPdfRepresentation());

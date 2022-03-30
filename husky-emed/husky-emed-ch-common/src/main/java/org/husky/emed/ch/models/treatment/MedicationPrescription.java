@@ -12,7 +12,6 @@ package org.husky.emed.ch.models.treatment;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.ch.enums.ActSubstanceAdminSubstitutionCode;
 import org.husky.emed.ch.enums.DispenseSupplyType;
 import org.husky.emed.ch.enums.PrescriptionStatus;
 import org.husky.emed.ch.models.common.EmedReference;
@@ -34,16 +33,23 @@ import java.util.List;
 public class MedicationPrescription {
 
     /**
-     * The list of substance substitution permissions.
-     * <p>
-     * SPEC: single value? default value?
-     */
-    private final List<ActSubstanceAdminSubstitutionCode> substitutionPermissions = new ArrayList<>();
-
-    /**
      * The list of 'over-the-counter' dispenses (OTC, without prescription).
      */
     private final List<MedicationDispense> dispenses = new ArrayList<>();
+
+    /**
+     * Number of dispense repeats/refills (excluding the initial dispense). {@code null} means no limitation.
+     */
+    @Nullable
+    private Integer dispenseRepeatNumber = null;
+
+    /**
+     * PRE item ending time.
+     * <p>
+     * TODO: mandatory?
+     */
+    @Nullable
+    private Instant endTime;
 
     /**
      * Reference to the PRE items.
@@ -57,12 +63,6 @@ public class MedicationPrescription {
     private PrescriptionStatus prescriptionStatus;
 
     /**
-     * Number of dispense repeats/refills (excluding the initial dispense). {@code null} means no limitation.
-     */
-    @Nullable
-    private Integer dispenseRepeatNumber = null;
-
-    /**
      * PRE item starting time.
      * <p>
      * TODO: mandatory?
@@ -71,12 +71,9 @@ public class MedicationPrescription {
     private Instant startTime;
 
     /**
-     * PRE item ending time.
-     * <p>
-     * TODO: mandatory?
+     * Whether the substitution is permitted (Equivalent) or not (None).
      */
-    @Nullable
-    private Instant endTime;
+    private boolean substitutionPermitted;
 
     /**
      * Returns whether the dispense has been completed.

@@ -11,6 +11,7 @@ package org.husky.emed.ch.models.document;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.husky.common.ch.enums.ConfidentialityCode;
+import org.husky.common.hl7cdar2.StrucDocText;
 import org.husky.emed.ch.enums.CceDocumentType;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.OrganizationDigest;
@@ -18,8 +19,8 @@ import org.husky.emed.ch.models.common.PatientDigest;
 import org.husky.emed.ch.models.common.RecipientDigest;
 import org.husky.emed.ch.models.entry.EmedDisEntryDigest;
 import org.husky.emed.ch.models.entry.EmedEntryDigest;
-import org.husky.common.hl7cdar2.StrucDocText;
 
+import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -42,7 +43,8 @@ public class EmedDisDocumentDigest extends EmedDocumentDigest {
      * @param id                  The document ID.
      * @param setId               The document set ID.
      * @param version             The document version.
-     * @param effectiveTime       The document effective time.
+     * @param creationTime        The document creation time.
+     * @param documentationTime   The dispense time.
      * @param confidentialityCode The confidentiality code.
      * @param languageCode        The document main language.
      * @param patient             The targeted patient.
@@ -55,7 +57,8 @@ public class EmedDisDocumentDigest extends EmedDocumentDigest {
     public EmedDisDocumentDigest(final String id,
                                  final String setId,
                                  final int version,
-                                 final OffsetDateTime effectiveTime,
+                                 final OffsetDateTime creationTime,
+                                 final Instant documentationTime,
                                  final ConfidentialityCode confidentialityCode,
                                  final String languageCode,
                                  final PatientDigest patient,
@@ -64,8 +67,8 @@ public class EmedDisDocumentDigest extends EmedDocumentDigest {
                                  final List<@NonNull RecipientDigest> recipients,
                                  final StrucDocText narrativeText,
                                  final EmedDisEntryDigest disEntryDigest) {
-        super(id, setId, version, effectiveTime, confidentialityCode, languageCode, patient, authors, custodian,
-                recipients, narrativeText);
+        super(id, setId, version, creationTime, documentationTime, confidentialityCode, languageCode, patient, authors,
+                custodian, recipients, narrativeText);
         this.disEntryDigest = Objects.requireNonNull(disEntryDigest);
     }
 

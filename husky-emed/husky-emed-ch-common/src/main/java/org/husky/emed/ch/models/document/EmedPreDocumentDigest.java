@@ -11,8 +11,8 @@ package org.husky.emed.ch.models.document;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.husky.common.ch.enums.ConfidentialityCode;
-import org.husky.emed.ch.enums.CceDocumentType;
 import org.husky.common.hl7cdar2.StrucDocText;
+import org.husky.emed.ch.enums.CceDocumentType;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.OrganizationDigest;
 import org.husky.emed.ch.models.common.PatientDigest;
@@ -54,7 +54,8 @@ public class EmedPreDocumentDigest extends EmedDocumentDigest {
      * @param id                        The document ID.
      * @param setId                     The document set ID.
      * @param version                   The document version.
-     * @param effectiveTime             The document effective time.
+     * @param creationTime              The document creation time.
+     * @param documentationTime         The prescription time.
      * @param confidentialityCode       The confidentiality code.
      * @param languageCode              The document main language.
      * @param patient                   The targeted patient.
@@ -69,7 +70,8 @@ public class EmedPreDocumentDigest extends EmedDocumentDigest {
     public EmedPreDocumentDigest(final String id,
                                  final String setId,
                                  final int version,
-                                 final OffsetDateTime effectiveTime,
+                                 final OffsetDateTime creationTime,
+                                 final Instant documentationTime,
                                  final ConfidentialityCode confidentialityCode,
                                  final String languageCode,
                                  final PatientDigest patient,
@@ -80,8 +82,8 @@ public class EmedPreDocumentDigest extends EmedDocumentDigest {
                                  final List<@NonNull EmedPreEntryDigest> preEntryDigests,
                                  final Instant prescriptionValidityStart,
                                  final Instant prescriptionValidityStop) {
-        super(id, setId, version, effectiveTime, confidentialityCode, languageCode, patient, authors, custodian,
-                recipients, narrativeText);
+        super(id, setId, version, creationTime, documentationTime, confidentialityCode, languageCode, patient, authors,
+                custodian, recipients, narrativeText);
         this.preEntryDigests.addAll(Objects.requireNonNull(preEntryDigests));
         this.prescriptionValidityStart = Objects.requireNonNull(prescriptionValidityStart);
         this.prescriptionValidityStop = Objects.requireNonNull(prescriptionValidityStop);

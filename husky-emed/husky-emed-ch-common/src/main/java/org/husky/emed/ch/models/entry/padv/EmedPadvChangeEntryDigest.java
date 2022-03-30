@@ -9,7 +9,6 @@
  */
 package org.husky.emed.ch.models.entry.padv;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.ch.enums.EmedEntryType;
 import org.husky.emed.ch.enums.PharmaceuticalAdviceStatus;
@@ -21,8 +20,7 @@ import org.husky.emed.ch.models.entry.EmedPadvEntryDigest;
 import org.husky.emed.ch.models.entry.EmedPreEntryDigest;
 
 import java.time.Instant;
-import java.util.Collections;
-import java.util.List;
+import java.util.Objects;
 
 /**
  * Represents the digest of an EMED PADV document Change item entry.
@@ -38,18 +36,15 @@ public class EmedPadvChangeEntryDigest extends EmedPadvEntryDigest {
     private EmedMtpEntryDigest changedMtpEntry;
 
     /**
-     * The changed Prescription Item(s), which are allowed to be dispensed instead of the original prescribed item.
-     * More than one Prescription Items within the organizer indicate that the original Prescription Item has to be
-     * changed with the combination of Prescription Items as a whole.
-     * <p>
-     * This may only be set when the PADV CHANGE item targets a prescription item entry. In other cases, it's an
-     * immutable empty list.
+     * The changed Prescription Item, if any, which is allowed to be dispensed instead of the original prescribed
+     * item. This may only be set when the PADV CHANGE item targets a prescription item entry.
      */
-    private final List<@NonNull EmedPreEntryDigest> changedPreEntries;
+    @Nullable
+    private EmedPreEntryDigest changedPreEntry;
 
     /**
-     * The changed dosage instructions, if any. This may only be set when the PADV CHANGE item targets a dispense
-     * item entry.
+     * The changed dosage instructions, if any. This may only be set when the PADV CHANGE item targets a dispense item
+     * entry.
      */
     @Nullable
     private MedicationDosageInstructions changedDosageInstructions;
@@ -57,20 +52,27 @@ public class EmedPadvChangeEntryDigest extends EmedPadvEntryDigest {
     /**
      * Constructor.
      *
-     * @param creationTime          The instant at which the item entry was created.
-     * @param documentId            The parent document unique ID.
-     * @param documentAuthor        The author of the original parent document or {@code null} if they're not known.
-     * @param sectionAuthor         The author of the original parent section or {@code null} if they're not known.
-     * @param entryId               The item entry ID.
-     * @param medicationTreatmentId The ID of the medication treatment this item entry belongs to.
-     * @param sequence              The sequence of addition.
-     * @param annotationComment     The annotation comment or {@code null} if it isn't provided.
-     * @param completed             Whether the PADV status is completed or not.
-     * @param effectiveTime         The instant at which the advice becomes effective.
-     * @param targetedEntryRef      Reference to the targeted item entry.
-     * @param targetedEntryType     Document type of the targeted item entry (MTP, PRE or DIS).
+     * @param pharmaceuticalAdviceTime  The pharmaceutical advice time.
+     * @param documentId                The parent document unique ID.
+     * @param documentAuthor            The author of the original parent document or {@code null} if they're not
+     *                                  known.
+     * @param sectionAuthor             The author of the original parent section or {@code null} if they're not known.
+     * @param entryId                   The item entry ID.
+     * @param medicationTreatmentId     The ID of the medication treatment this item entry belongs to.
+     * @param sequence                  The sequence of addition.
+     * @param annotationComment         The annotation comment or {@code null} if it isn't provided.
+     * @param completed                 Whether the PADV status is completed or not.
+     * @param effectiveTime             The instant at which the advice becomes effective.
+     * @param targetedEntryRef          Reference to the targeted item entry.
+     * @param targetedEntryType         Document type of the targeted item entry (MTP, PRE or DIS).
+     * @param changedMtpEntry           The changed MTP entry, if any. This may only be set when the PADV CHANGE item
+     *                                  targets an MTP item entry.
+     * @param changedPreEntry           The changed Prescription Item, if any, which is allowed to be dispensed instead
+     *                                  of the original prescribed item.
+     * @param changedDosageInstructions The changed dosage instructions, if any. This may only be set when the PADV
+     *                                  CHANGE item targets a dispense item entry.
      */
-    public EmedPadvChangeEntryDigest(final Instant creationTime,
+    public EmedPadvChangeEntryDigest(final Instant pharmaceuticalAdviceTime,
                                      final String documentId,
                                      @Nullable final AuthorDigest documentAuthor,
                                      @Nullable final AuthorDigest sectionAuthor,
@@ -83,52 +85,34 @@ public class EmedPadvChangeEntryDigest extends EmedPadvEntryDigest {
                                      final EmedReference targetedEntryRef,
                                      final EmedEntryType targetedEntryType,
                                      @Nullable final EmedMtpEntryDigest changedMtpEntry,
-                                     @Nullable final List<@NonNull EmedPreEntryDigest> changedPreEntries,
+                                     @Nullable final EmedPreEntryDigest changedPreEntry,
                                      @Nullable final MedicationDosageInstructions changedDosageInstructions) {
-        super(creationTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
+        super(pharmaceuticalAdviceTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
                 annotationComment, completed, effectiveTime, targetedEntryRef, targetedEntryType);
 
         if (changedMtpEntry != null) {
             if (targetedEntryType != EmedEntryType.MTP) {
-                throw new IllegalStateException("A changed MTP entry can only be added when the PADV CHANGE targets an " +
+                throw new IllegalArgumentException("A changed MTP entry can only be added when the PADV CHANGE targets an " +
                         "MTP entry");
             }
             this.changedMtpEntry = changedMtpEntry;
         }
 
-        if (changedPreEntries != null) {
+        if (changedPreEntry != null) {
             if (targetedEntryType != EmedEntryType.PRE) {
-                throw new IllegalStateException("A changed PRE entry can only be added when the PADV CHANGE targets " +
+                throw new IllegalArgumentException("A changed PRE entry can only be added when the PADV CHANGE targets " +
                         "a PRE entry");
             }
-            this.changedPreEntries = changedPreEntries;
-        } else {
-            this.changedPreEntries = Collections.emptyList();
+            this.changedPreEntry = changedPreEntry;
         }
 
         if (changedDosageInstructions != null) {
             if (targetedEntryType != EmedEntryType.PRE) {
-                throw new IllegalStateException("A changed DIS entry can only be added when the PADV CHANGE targets " +
+                throw new IllegalArgumentException("A changed DIS entry can only be added when the PADV CHANGE targets " +
                         "a DIS entry");
             }
             this.changedDosageInstructions = changedDosageInstructions;
         }
-    }
-
-    public void setChangedMtpEntry(final EmedMtpEntryDigest changedMtpEntry) {
-        if (this.getTargetedEntryType() != EmedEntryType.MTP) {
-            throw new IllegalStateException("A changed MTP entry can only be added when the PADV CHANGE targets an " +
-                    "MTP entry");
-        }
-        this.changedMtpEntry = changedMtpEntry;
-    }
-
-    public void setChangedDosageInstructions(final MedicationDosageInstructions changedDosageInstructions) {
-        if (this.getTargetedEntryType() != EmedEntryType.DIS) {
-            throw new IllegalStateException("A changed dosage instructions can only be added when the PADV CHANGE " +
-                    "targets a DIS entry");
-        }
-        this.changedDosageInstructions = changedDosageInstructions;
     }
 
     /**
@@ -143,12 +127,65 @@ public class EmedPadvChangeEntryDigest extends EmedPadvEntryDigest {
         return this.changedMtpEntry;
     }
 
-    public List<@NonNull EmedPreEntryDigest> getChangedPreEntries() {
-        return this.changedPreEntries;
+    public void setChangedMtpEntry(final EmedMtpEntryDigest changedMtpEntry) {
+        if (this.getTargetedEntryType() != EmedEntryType.MTP) {
+            throw new IllegalStateException("A changed MTP entry can only be added when the PADV CHANGE targets an " +
+                    "MTP entry");
+        }
+        this.changedMtpEntry = changedMtpEntry;
+    }
+
+    @Nullable
+    public EmedPreEntryDigest getChangedPreEntry() {
+        return this.changedPreEntry;
     }
 
     @Nullable
     public MedicationDosageInstructions getChangedDosageInstructions() {
         return this.changedDosageInstructions;
+    }
+
+    public void setChangedDosageInstructions(final MedicationDosageInstructions changedDosageInstructions) {
+        if (this.getTargetedEntryType() != EmedEntryType.DIS) {
+            throw new IllegalStateException("A changed dosage instructions can only be added when the PADV CHANGE " +
+                    "targets a DIS entry");
+        }
+        this.changedDosageInstructions = changedDosageInstructions;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof final EmedPadvChangeEntryDigest that)) return false;
+        if (!super.equals(o)) return false;
+        return Objects.equals(changedMtpEntry, that.changedMtpEntry)
+                && Objects.equals(changedPreEntry, that.changedPreEntry)
+                && Objects.equals(changedDosageInstructions, that.changedDosageInstructions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), changedMtpEntry, changedPreEntry, changedDosageInstructions);
+    }
+
+    @Override
+    public String toString() {
+        return "EmedPadvChangeEntryDigest{" +
+                "annotationComment='" + this.annotationComment + '\'' +
+                ", pharmaceuticalAdviceTime=" + this.itemTime +
+                ", documentAuthor=" + this.documentAuthor +
+                ", documentId='" + this.documentId + '\'' +
+                ", entryId='" + this.entryId + '\'' +
+                ", medicationTreatmentId='" + this.medicationTreatmentId + '\'' +
+                ", sectionAuthor=" + this.sectionAuthor +
+                ", sequence=" + this.sequence +
+                ", effectiveTime=" + this.effectiveTime +
+                ", completed=" + this.completed +
+                ", targetedEntryRef=" + this.targetedEntryRef +
+                ", targetedEntryType=" + this.targetedEntryType +
+                ", changedMtpEntry=" + this.changedMtpEntry +
+                ", changedPreEntry=" + this.changedPreEntry +
+                ", changedDosageInstructions=" + this.changedDosageInstructions +
+                '}';
     }
 }

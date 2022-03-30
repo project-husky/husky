@@ -44,20 +44,10 @@ import java.util.function.Function;
  *
  * <p>HTML template file:
  *
- * @implNote It first creates an HTML document with all the data and then converts it to a PDF.
  * @author Quentin Ligier
+ * @implNote It first creates an HTML document with all the data and then converts it to a PDF.
  */
 public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerator {
-
-    /**
-     * The HTML template header (before the main content).
-     */
-    private final String templateHeader;
-
-    /**
-     * The HTML template footer (after the main content).
-     */
-    private final String templateFooter;
 
     /**
      * The HTML-to-PDF/A converter.
@@ -70,16 +60,10 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
     private String author = "Husky PDF generator";
 
     /**
-     * Simplified constructor. It will use the default template and HTML-to-PDF/A generator.
-     *
-     * @param narrativeLanguage The language to use to generate the narrative text.
+     * Simplified constructor. It will use the default HTML-to-PDF/A generator.
      */
-    public PdfOriginalRepresentationGenerator(final NarrativeLanguage narrativeLanguage) throws IOException {
-        super(narrativeLanguage);
-        try (final var is = this.getResourceAsStream("/narrative/default/template.header.html")) {
-            this.templateHeader = new String(is.readAllBytes(), StandardCharsets.UTF_8);
-        }
-        this.templateFooter = "</body></html>";
+    public PdfOriginalRepresentationGenerator() throws IOException {
+        super();
         final var converter = new OpenHtmlToPdfAConverter();
         converter.setProducerName("The Husky library");
         converter.addFont("arimo", 400, BaseRendererBuilder.FontStyle.NORMAL,
@@ -92,18 +76,10 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
     /**
      * Full constructor.
      *
-     * @param narrativeLanguage   The language to use to generate the narrative text.
-     * @param templateHeader      The HTML template header (before the main content).
-     * @param templateFooter      The HTML template footer (after the main content).
      * @param htmlToPdfAConverter The HTML-to-PDF/A converter.
      */
-    public PdfOriginalRepresentationGenerator(final NarrativeLanguage narrativeLanguage,
-                                              final String templateHeader,
-                                              final String templateFooter,
-                                              final HtmlToPdfAConverter htmlToPdfAConverter) {
-        super(narrativeLanguage);
-        this.templateHeader = Objects.requireNonNull(templateHeader);
-        this.templateFooter = Objects.requireNonNull(templateFooter);
+    public PdfOriginalRepresentationGenerator(final HtmlToPdfAConverter htmlToPdfAConverter) throws IOException {
+        super();
         this.pdfConverter = Objects.requireNonNull(htmlToPdfAConverter);
     }
 
@@ -116,33 +92,54 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
     }
 
     /**
+     * It will use the default template.
+     *
      * @param digest
      * @return
      */
-    public byte[] generate(final EmedPmlcDocumentDigest digest) throws Exception {
-        final Map<String, String> variables = new HashMap<>(64);
-        variables.put("title", "Carte de médication");
-        variables.put("subject", "");
-        variables.put("author", this.author);
-        variables.put("description", "");
-        return this.generate(digest, variables);
+    public byte[] generate(final EmedPmlcDocumentDigest digest,
+                           final NarrativeLanguage lang) throws Exception {
+        return this.generate(digest, lang, null, null, null);
     }
 
     /**
      * @param digest
+     * @param lang           The language to use to generate the narrative text.
      * @param variables
+     * @param templateHeader The HTML template header (before the main content).
+     * @param templateFooter The HTML template footer (after the main content).
      * @return
      */
     public byte[] generate(final EmedPmlcDocumentDigest digest,
-                           final Map<String, String> variables) throws Exception {
+                           final NarrativeLanguage lang,
+                           @Nullable Map<String, String> variables,
+                           @Nullable String templateHeader,
+                           @Nullable String templateFooter) throws Exception {
         Objects.requireNonNull(digest, "digest shall not be null in generate()");
-        Objects.requireNonNull(variables, "variables shall not be null in generate()");
+        Objects.requireNonNull(lang, "lang shall not be null in generate()");
 
-        final var narDom = new NarrativeDomFactory(this.lang, true);
+        if (variables == null) {
+            variables = new HashMap<>(64);
+        }
+        variables.putIfAbsent("title", "Carte de médication");
+        variables.putIfAbsent("subject", "");
+        variables.putIfAbsent("author", this.author);
+        variables.putIfAbsent("description", "");
+        variables.putIfAbsent("lang", lang.getLanguageCode().getCodeValue());
+        if (templateHeader == null) {
+            try (final var is = this.getResourceAsStream("/narrative/default/template.header.html")) {
+                templateHeader = new String(is.readAllBytes(), StandardCharsets.UTF_8);
+            }
+        }
+        if (templateFooter == null) {
+            templateFooter = "</body></html>";
+        }
+
+        final var narDom = new NarrativeDomFactory(true);
         final var root = narDom.getDocument().getDocumentElement();
 
         // Document title
-        root.appendChild(narDom.title1(variables.getOrDefault("title", "Carte de médication")));
+        root.appendChild(narDom.title1(variables.getOrDefault("title", "Carte de médication"), "title"));
 
         // Medication table
         final var medicationTableRows = new ArrayList<Element>();
@@ -156,14 +153,14 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
             cells.add(tdLink);
 
             // Medication name
-            cells.add(narDom.td(this.formatMedicationName(narDom, entry.getProduct()), "col name"));
+            cells.add(narDom.td(this.formatMedicationName(narDom, entry.getProduct(), lang), "col name"));
 
             // Dosage instructions (5 columns)
-            cells.addAll(this.formatDosageCells(narDom, entry.getDosageInstructions()));
+            cells.addAll(this.formatDosageCells(narDom, entry.getDosageInstructions(), lang));
 
             // Route and approach site
             final Node routeSite = Optional.ofNullable(entry.getRouteOfAdministration())
-                    .map(this::getEnumNarrative)
+                    .map(routeOfAdministration -> this.getEnumNarrative(routeOfAdministration, lang))
                     .map(narDom::text)
                     .orElseGet(() -> narDom.span("N/A", "na"));
             cells.add(narDom.td(routeSite, "col route-site"));
@@ -171,7 +168,12 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
             medicationTableRows.add(narDom.tr(cells));
             ++i;
         }
-        root.appendChild(this.createMedicationTable(narDom, medicationTableRows));
+        if (medicationTableRows.isEmpty()) {
+            final var td = narDom.td(narDom.em("Il n'y a pas de traitement actif"), "no-treatment");
+            td.setAttribute("colspan", "8");
+            medicationTableRows.add(narDom.tr(td));
+        }
+        root.appendChild(this.createMedicationTable(narDom, medicationTableRows, lang));
 
         // Medication details
         i = 1;
@@ -180,40 +182,38 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
             hr.setAttribute("id", "entry-" + i);
             root.appendChild(hr);
 
-            final var title2 = narDom.title2(List.of(
+            root.appendChild(narDom.title2(List.of(
                     narDom.span(i, "n"),
-                    this.formatMedicationName(narDom, entry.getProduct())
-            ));
-            title2.setAttribute("id", "med_" + i);
-            root.appendChild(title2);
+                    this.formatMedicationName(narDom, entry.getProduct(), lang)
+            ), "med_" + i));
 
             // Last author
             root.appendChild(narDom.div(List.of(
-                    narDom.title3("Dernier intervenant"),
-                    narDom.p(this.formatAuthorName(narDom, entry.getSectionAuthor()))
+                    narDom.title3("Dernier intervenant", null),
+                    narDom.p(this.formatAuthorName(narDom, entry.getSectionAuthor(), lang))
             ), "narrative last_author"));
 
             if (entry.getTreatmentReason() != null) {
                 root.appendChild(narDom.div(List.of(
-                        narDom.title3("Raison du traitement"),
+                        narDom.title3("Raison du traitement", null),
                         narDom.p(StringEscapeUtils.escapeXml11(entry.getTreatmentReason()))
                 ), "narrative treatment_reason"));
             }
             if (entry.getAnnotationComment() != null) {
                 root.appendChild(narDom.div(List.of(
-                        narDom.title3("Commentaire"),
+                        narDom.title3("Commentaire", null),
                         narDom.p(StringEscapeUtils.escapeXml11(entry.getAnnotationComment()))
                 ), "narrative annotation_comment"));
             }
             if (entry.getPatientMedicationInstructions() != null) {
                 root.appendChild(narDom.div(List.of(
-                        narDom.title3("Instructions de médication"),
+                        narDom.title3("Instructions de médication", null),
                         narDom.p(StringEscapeUtils.escapeXml11(entry.getPatientMedicationInstructions()))
                 ), "narrative medication_instructions"));
             }
             if (entry.getFulfilmentInstructions() != null) {
                 root.appendChild(narDom.div(List.of(
-                        narDom.title3("Instructions de fulfilment"),
+                        narDom.title3("Instructions de fulfilment", null),
                         narDom.p(StringEscapeUtils.escapeXml11(entry.getFulfilmentInstructions()))
                 ), "narrative fulfilment_instructions"));
             }
@@ -223,15 +223,15 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
 
         root.appendChild(narDom.getDocument().createElement("hr"));
         root.appendChild(narDom.div(List.of(
-                narDom.title3("Auteur du document"),
-                narDom.p(this.formatAuthorName(narDom, digest.getAuthors().get(0)))
+                narDom.title3("Auteur du document", "document_author"),
+                narDom.p(this.formatAuthorName(narDom, digest.getAuthors().get(0), lang))
         ), "narrative document_author"));
 
 
         final var stringSubstitutor = new StringSubstitutor(variables);
-        final String body = stringSubstitutor.replace(this.templateHeader)
+        final String body = stringSubstitutor.replace(templateHeader)
                 + narDom.render()
-                + stringSubstitutor.replace(this.templateFooter);
+                + stringSubstitutor.replace(templateFooter);
 
         return this.pdfConverter.convert(body);
     }
@@ -243,7 +243,7 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
      * @return the non-null {@link InputStream} of the resource file.
      * @throws FileNotFoundException if the resource doesn't exist.
      */
-    protected InputStream getResourceAsStream(final String resource) throws FileNotFoundException {
+    InputStream getResourceAsStream(final String resource) throws FileNotFoundException {
         final var is = PdfOriginalRepresentationGenerator.class.getResourceAsStream(resource);
         if (is == null) {
             throw new FileNotFoundException("The resource '" + resource + "' is not found");
@@ -257,8 +257,9 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
      * @param author The author or {@code null}.
      * @return The author name.
      */
-    protected List<Node> formatAuthorName(final NarrativeDomFactory narDom,
-                                          @Nullable final AuthorDigest author) {
+    List<Node> formatAuthorName(final NarrativeDomFactory narDom,
+                                @Nullable final AuthorDigest author,
+                                final NarrativeLanguage lang) {
         if (author == null) {
             return List.of(narDom.em("Inconnu"));
         }
@@ -328,8 +329,9 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
         return nodes;
     }
 
-    protected List<Element> formatDosageCells(final NarrativeDomFactory narDom,
-                                           final MedicationDosageInstructions dosageInstructions) {
+    List<Element> formatDosageCells(final NarrativeDomFactory narDom,
+                                    final MedicationDosageInstructions dosageInstructions,
+                                    final NarrativeLanguage lang) {
         if (dosageInstructions.getType() == MedicationDosageInstructions.Type.NARRATIVE) {
             final var td = narDom.td(dosageInstructions.getNarrativeDosageInstructions(), "col dosage");
             td.setAttribute("colspan", "5");
@@ -348,7 +350,7 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
             } else {
                 cells.add(narDom.td(List.of(
                         narDom.text(quantity.getValue() + " "),
-                        narDom.span(this.getEnumNarrative(quantity.getUnit()), "unit")
+                        narDom.span(this.getEnumNarrative(quantity.getUnit(), lang), "unit")
                 ), null));
             }
         };

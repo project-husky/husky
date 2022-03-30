@@ -16,10 +16,13 @@ import org.husky.emed.ch.models.treatment.MedicationProduct;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.DateTimeException;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
 import java.util.*;
+import java.util.function.Function;
 
 /**
  * Abstract base for narrative generators.
@@ -29,17 +32,18 @@ import java.util.*;
 public abstract class AbstractNarrativeGenerator {
 
     /**
-     * The language of the narrative to be generated.
-     */
-    protected final NarrativeLanguage lang;
-
-    /**
      * The resource bundle that contains the translations.
      */
-    protected final PropertyResourceBundle bundle = null;
+    protected final EnumMap<NarrativeLanguage, PropertyResourceBundle> bundles = new EnumMap<>(NarrativeLanguage.class);
 
-    protected AbstractNarrativeGenerator(final NarrativeLanguage lang) {
-        this.lang = Objects.requireNonNull(lang);
+    protected AbstractNarrativeGenerator() throws IOException {
+        final Function<String, InputStream> getRes = (final String lang) ->
+                Objects.requireNonNull(AbstractNarrativeGenerator.class.getResourceAsStream("/narrative/translations/Messages." + lang + ".properties"));
+
+        this.bundles.put(NarrativeLanguage.ENGLISH, new PropertyResourceBundle(getRes.apply("en")));
+        this.bundles.put(NarrativeLanguage.FRENCH, new PropertyResourceBundle(getRes.apply("fr")));
+        this.bundles.put(NarrativeLanguage.GERMAN, new PropertyResourceBundle(getRes.apply("de")));
+        this.bundles.put(NarrativeLanguage.ITALIAN, new PropertyResourceBundle(getRes.apply("it")));
     }
 
     /**
@@ -47,34 +51,40 @@ public abstract class AbstractNarrativeGenerator {
      *
      * @param temporal The temporal object to format.
      * @param pattern  The format, as described in the {@link DateTimeFormatter} class.
+     * @param lang     The language of the narrative to be generated.
      * @throws DateTimeException if an error occurs during formatting.
      */
-    protected String formatTemporal(final TemporalAccessor temporal,
-                                    final String pattern) throws DateTimeException {
-        return DateTimeFormatter.ofPattern(pattern, this.lang.getLocale())
+    String formatTemporal(final TemporalAccessor temporal,
+                          final String pattern,
+                          final NarrativeLanguage lang) throws DateTimeException {
+        return DateTimeFormatter.ofPattern(pattern, lang.getLocale())
                 .format(temporal);
     }
 
     /**
      * Gets a translated message for the given key.
      *
-     * @param key The key.
+     * @param key  The key.
+     * @param lang The language of the narrative to be generated.
      * @return The translated message.
      * @throws MissingResourceException if no object for the given key can be found.
      * @throws ClassCastException       if the object found for the given key is not a string.
      */
-    protected String getMessage(final String key) {
-        return this.bundle.getString(key);
+    String getMessage(final String key,
+                      final NarrativeLanguage lang) {
+        return this.bundles.get(lang).getString(key);
     }
 
     /**
      * Gets the translation of a value set enum element.
      *
      * @param valueSet The value set enum element.
+     * @param lang     The language of the narrative to be generated.
      * @return The display name in the right language.
      */
-    protected String getEnumNarrative(final ValueSetEnumInterface valueSet) {
-        return valueSet.getDisplayName(this.lang.getLanguageCode());
+    String getEnumNarrative(final ValueSetEnumInterface valueSet,
+                            final NarrativeLanguage lang) {
+        return valueSet.getDisplayName(lang.getLanguageCode());
     }
 
     /**
@@ -82,10 +92,12 @@ public abstract class AbstractNarrativeGenerator {
      *
      * @param narDom  The narrative DOM factory.
      * @param product The medication product.
+     * @param lang    The language of the narrative to be generated.
      * @return The medication product name.
      */
-    protected List<Node> formatMedicationName(final NarrativeDomFactory narDom,
-                                              final MedicationProduct product) {
+    List<Node> formatMedicationName(final NarrativeDomFactory narDom,
+                                    final MedicationProduct product,
+                                    final NarrativeLanguage lang) {
         final var name = Optional.ofNullable(product.getName()).orElse(
                 Optional.ofNullable(product.getPackagedProduct()).map(MedicationPackagedProduct::getName).orElse(null)
         );
@@ -107,7 +119,8 @@ public abstract class AbstractNarrativeGenerator {
     }
 
     Element createMedicationTable(final NarrativeDomFactory narDom,
-                                  final List<Element> bodyRows) {
+                                  final List<Element> bodyRows,
+                                  final NarrativeLanguage lang) {
         final var theadRow1 = narDom.tr(null);
         theadRow1.appendChild(narDom.th("#n", "2", null));
         theadRow1.appendChild(narDom.th("Nom du médicament", "2", null));

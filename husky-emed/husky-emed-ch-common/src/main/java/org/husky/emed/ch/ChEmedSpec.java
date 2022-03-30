@@ -18,11 +18,8 @@ public class ChEmedSpec {
 
     /**
      * Default duration of a PRE document in months, if not specified.
+     *
+     * TODO: This is possibly wrong.
      */
     public static final int PRE_DEFAULT_DURATION_MONTHS = 3;
-
-    /**
-     * Maximum duration of a PRE document, in months.
-     */
-    public static final int PRE_MAX_DURATION_MONTHS = 12;
 }

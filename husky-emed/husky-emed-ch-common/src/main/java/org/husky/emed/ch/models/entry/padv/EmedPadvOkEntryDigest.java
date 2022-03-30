@@ -9,7 +9,6 @@
  */
 package org.husky.emed.ch.models.entry.padv;
 
-import lombok.Getter;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.ch.enums.EmedEntryType;
@@ -23,6 +22,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Represents the digest of an EMED PADV Ok item entry.
@@ -39,30 +39,27 @@ public class EmedPadvOkEntryDigest extends EmedPadvEntryDigest {
      * This is only set when the PADV OK item targets a prescription item entry. In other cases, it's an immutable empty
      * list.
      */
-    @Getter
     private final List<@NonNull EmedPreEntryDigest> recommendedPrescriptions;
-
-    /*
-     * Recommended PRE entries
-     */
 
     /**
      * Constructor.
      *
-     * @param creationTime          The instant at which the item entry was created.
-     * @param documentId            The parent document unique ID.
-     * @param documentAuthor        The author of the original parent document or {@code null} if they're not known.
-     * @param sectionAuthor         The author of the original parent section or {@code null} if they're not known.
-     * @param entryId               The item entry ID.
-     * @param medicationTreatmentId The ID of the medication treatment this item entry belongs to.
-     * @param sequence              The sequence of addition.
-     * @param annotationComment     The annotation comment or {@code null} if it isn't provided.
-     * @param completed             Whether the PADV status is completed or not.
-     * @param effectiveTime         The instant at which the advice becomes effective.
-     * @param targetedEntryRef      Reference to the targeted item entry.
-     * @param targetedEntryType     Document type of the targeted item entry (MTP, PRE or DIS).
+     * @param pharmaceuticalAdviceTime The pharmaceutical advice time.
+     * @param documentId               The parent document unique ID.
+     * @param documentAuthor           The author of the original parent document or {@code null} if they're not known.
+     * @param sectionAuthor            The author of the original parent section or {@code null} if they're not known.
+     * @param entryId                  The item entry ID.
+     * @param medicationTreatmentId    The ID of the medication treatment this item entry belongs to.
+     * @param sequence                 The sequence of addition.
+     * @param annotationComment        The annotation comment or {@code null} if it isn't provided.
+     * @param completed                Whether the PADV status is completed or not.
+     * @param effectiveTime            The instant at which the advice becomes effective.
+     * @param targetedEntryRef         Reference to the targeted item entry.
+     * @param targetedEntryType        Document type of the targeted item entry (MTP, PRE or DIS).
+     * @param recommendedPrescriptions Proposition of an alternative (drug, dosage, form, etc.) to the original
+     *                                 Prescription Item, if any.
      */
-    public EmedPadvOkEntryDigest(final Instant creationTime,
+    public EmedPadvOkEntryDigest(final Instant pharmaceuticalAdviceTime,
                                  final String documentId,
                                  @Nullable final AuthorDigest documentAuthor,
                                  @Nullable final AuthorDigest sectionAuthor,
@@ -73,11 +70,18 @@ public class EmedPadvOkEntryDigest extends EmedPadvEntryDigest {
                                  final boolean completed,
                                  final Instant effectiveTime,
                                  final EmedReference targetedEntryRef,
-                                 final EmedEntryType targetedEntryType) {
-        super(creationTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId,  sequence,
+                                 final EmedEntryType targetedEntryType,
+                                 @Nullable final List<@NonNull EmedPreEntryDigest> recommendedPrescriptions) {
+        super(pharmaceuticalAdviceTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
                 annotationComment, completed, effectiveTime, targetedEntryRef, targetedEntryType);
         if (targetedEntryType == EmedEntryType.PRE) {
-            this.recommendedPrescriptions = new ArrayList<>();
+            this.recommendedPrescriptions = Collections.emptyList(); // Immutable
+            if (recommendedPrescriptions != null) {
+                throw new IllegalArgumentException("Recommended prescriptions can only be added when the PADV OK " +
+                        "targets a PRE entry");
+            }
+        } else if (recommendedPrescriptions != null) {
+            this.recommendedPrescriptions = new ArrayList<>(recommendedPrescriptions);
         } else {
             this.recommendedPrescriptions = Collections.emptyList(); // Immutable
         }
@@ -88,5 +92,41 @@ public class EmedPadvOkEntryDigest extends EmedPadvEntryDigest {
      */
     public PharmaceuticalAdviceStatus getPadvEntryType() {
         return PharmaceuticalAdviceStatus.OK;
+    }
+
+    public List<EmedPreEntryDigest> getRecommendedPrescriptions() {
+        return recommendedPrescriptions;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof final EmedPadvOkEntryDigest that)) return false;
+        if (!super.equals(o)) return false;
+        return recommendedPrescriptions.equals(that.recommendedPrescriptions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), recommendedPrescriptions);
+    }
+
+    @Override
+    public String toString() {
+        return "EmedPadvOkEntryDigest{" +
+                "annotationComment='" + this.annotationComment + '\'' +
+                ", pharmaceuticalAdviceTime=" + this.itemTime +
+                ", documentAuthor=" + this.documentAuthor +
+                ", documentId='" + this.documentId + '\'' +
+                ", entryId='" + this.entryId + '\'' +
+                ", medicationTreatmentId='" + this.medicationTreatmentId + '\'' +
+                ", sectionAuthor=" + this.sectionAuthor +
+                ", sequence=" + this.sequence +
+                ", effectiveTime=" + this.effectiveTime +
+                ", completed=" + this.completed +
+                ", targetedEntryRef=" + this.targetedEntryRef +
+                ", targetedEntryType=" + this.targetedEntryType +
+                ", recommendedPrescriptions=" + this.recommendedPrescriptions +
+                '}';
     }
 }

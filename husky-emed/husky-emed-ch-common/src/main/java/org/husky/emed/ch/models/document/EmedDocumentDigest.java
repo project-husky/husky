@@ -10,7 +10,6 @@
 package org.husky.emed.ch.models.document;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.ch.enums.ConfidentialityCode;
@@ -22,6 +21,7 @@ import org.husky.emed.ch.models.common.PatientDigest;
 import org.husky.emed.ch.models.common.RecipientDigest;
 import org.husky.emed.ch.models.entry.EmedEntryDigest;
 
+import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +38,6 @@ import java.util.Objects;
  * @author Quentin Ligier
  */
 @Data
-@EqualsAndHashCode
 public abstract class EmedDocumentDigest {
 
     /**
@@ -72,7 +71,13 @@ public abstract class EmedDocumentDigest {
      * The document effective time.
      */
     @NonNull
-    private OffsetDateTime effectiveTime;
+    private OffsetDateTime creationTime;
+
+    /**
+     * The documentation time (planning time, prescription time, dispense time or pharmaceutical advice time).
+     */
+    @NonNull
+    private Instant documentationTime;
 
     /**
      * The confidentiality code.
@@ -173,7 +178,9 @@ public abstract class EmedDocumentDigest {
      * @param id                  The document ID.
      * @param setId               The document set ID.
      * @param version             The document version.
-     * @param effectiveTime       The document effective time.
+     * @param creationTime        The document creation time.
+     * @param documentationTime   The time of the documentation (planning time, prescription time, dispense time or
+     *                            pharmaceutical advice time).
      * @param confidentialityCode The confidentiality code.
      * @param languageCode        The document main language.
      * @param patient             The targeted patient.
@@ -185,7 +192,8 @@ public abstract class EmedDocumentDigest {
     public EmedDocumentDigest(final String id,
                               final String setId,
                               final int version,
-                              final OffsetDateTime effectiveTime,
+                              final OffsetDateTime creationTime,
+                              final Instant documentationTime,
                               final ConfidentialityCode confidentialityCode,
                               final String languageCode,
                               final PatientDigest patient,
@@ -196,7 +204,8 @@ public abstract class EmedDocumentDigest {
         this.id = Objects.requireNonNull(id);
         this.setId = Objects.requireNonNull(setId);
         this.version = version;
-        this.effectiveTime = Objects.requireNonNull(effectiveTime);
+        this.creationTime = Objects.requireNonNull(creationTime);
+        this.documentationTime = Objects.requireNonNull(documentationTime);
         this.confidentialityCode = Objects.requireNonNull(confidentialityCode);
         this.languageCode = Objects.requireNonNull(languageCode);
         this.patient = Objects.requireNonNull(patient);
@@ -217,20 +226,50 @@ public abstract class EmedDocumentDigest {
     public abstract List<@org.checkerframework.checker.nullness.qual.NonNull EmedEntryDigest> getEntryDigests();
 
     @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof final EmedDocumentDigest that)) return false;
+        return version == that.version
+                && authors.equals(that.authors)
+                && recipients.equals(that.recipients)
+                && id.equals(that.id)
+                && setId.equals(that.setId)
+                && creationTime.equals(that.creationTime)
+                && documentationTime.equals(that.documentationTime)
+                && confidentialityCode == that.confidentialityCode
+                && languageCode.equals(that.languageCode)
+                && patient.equals(that.patient)
+                && custodian.equals(that.custodian)
+                && narrativeText.equals(that.narrativeText)
+                && Objects.equals(remarks, that.remarks)
+                && Arrays.equals(pdfRepresentation, that.pdfRepresentation);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(authors, recipients, id, setId, version, creationTime, documentationTime,
+                confidentialityCode, languageCode, patient, custodian, narrativeText, remarks);
+        result = 31 * result + Arrays.hashCode(pdfRepresentation);
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "EmedDocumentDigest{" +
-                "authors=" + authors +
-                ", recipients=" + recipients +
-                ", id='" + id + '\'' +
-                ", setId='" + setId + '\'' +
-                ", version=" + version +
-                ", effectiveTime=" + effectiveTime +
-                ", confidentialityCode=" + confidentialityCode +
-                ", languageCode='" + languageCode + '\'' +
-                ", patient=" + patient +
-                ", custodian=" + custodian +
-                ", remarks=" + remarks +
-                ", pdfRepresentation=" + Arrays.toString(pdfRepresentation) +
+                "authors=" + this.authors +
+                ", recipients=" + this.recipients +
+                ", id='" + this.id + '\'' +
+                ", setId='" + this.setId + '\'' +
+                ", version=" + this.version +
+                ", creationTime=" + this.creationTime +
+                ", documentationTime=" + this.documentationTime +
+                ", confidentialityCode=" + this.confidentialityCode +
+                ", languageCode='" + this.languageCode + '\'' +
+                ", patient=" + this.patient +
+                ", custodian=" + this.custodian +
+                ", narrativeText=" + this.narrativeText +
+                ", remarks=" + this.remarks +
+                ", pdfRepresentation=" + Arrays.toString(this.pdfRepresentation) +
                 '}';
     }
 }

@@ -1,0 +1,3 @@
+# Camel registration for the cmpd-chpharm1 component
+# https://camel.apache.org/manual/latest/configuring-camel.html
+class=org.husky.communication.ch.camel.chpharm1.ChPharm1Component

@@ -33,39 +33,35 @@ public abstract class EmedPadvEntryDigest extends EmedEntryDigest {
     /**
      * Whether the PADV status is completed or not.
      */
-    private boolean completed;
+    protected boolean completed;
 
     /**
      * Reference to the targeted item entry.
      */
-    private EmedReference targetedEntryRef;
+    protected EmedReference targetedEntryRef;
 
     /**
      * Document type of the targeted item entry.
      */
-    private EmedEntryType targetedEntryType;
-
-    /*
-     * Pharmaceutical Advice Concerns
-     */
+    protected EmedEntryType targetedEntryType;
 
     /**
      * Constructor.
      *
-     * @param creationTime          The instant at which the item entry was created.
-     * @param documentId            The parent document unique ID.
-     * @param documentAuthor        The author of the original parent document or {@code null} if they're not known.
-     * @param sectionAuthor         The author of the original parent section or {@code null} if they're not known.
-     * @param entryId               The item entry ID.
-     * @param medicationTreatmentId The ID of the medication treatment this item entry belongs to.
-     * @param sequence              The sequence of addition.
-     * @param annotationComment     The annotation comment or {@code null} if it isn't provided.
-     * @param completed             Whether the PADV status is completed or not.
-     * @param effectiveTime         The instant at which the advice becomes effective.
-     * @param targetedEntryRef      Reference to the targeted item entry.
-     * @param targetedEntryType     Document type of the targeted item entry.
+     * @param pharmaceuticalAdviceTime The pharmaceutical advice time.
+     * @param documentId               The parent document unique ID.
+     * @param documentAuthor           The author of the original parent document or {@code null} if they're not known.
+     * @param sectionAuthor            The author of the original parent section or {@code null} if they're not known.
+     * @param entryId                  The item entry ID.
+     * @param medicationTreatmentId    The ID of the medication treatment this item entry belongs to.
+     * @param sequence                 The sequence of addition.
+     * @param annotationComment        The annotation comment or {@code null} if it isn't provided.
+     * @param completed                Whether the PADV status is completed or not.
+     * @param effectiveTime            The instant at which the advice becomes effective.
+     * @param targetedEntryRef         Reference to the targeted item entry.
+     * @param targetedEntryType        Document type of the targeted item entry.
      */
-    protected EmedPadvEntryDigest(final Instant creationTime,
+    protected EmedPadvEntryDigest(final Instant pharmaceuticalAdviceTime,
                                   final String documentId,
                                   @Nullable final AuthorDigest documentAuthor,
                                   @Nullable final AuthorDigest sectionAuthor,
@@ -77,7 +73,7 @@ public abstract class EmedPadvEntryDigest extends EmedEntryDigest {
                                   final Instant effectiveTime,
                                   final EmedReference targetedEntryRef,
                                   final EmedEntryType targetedEntryType) {
-        super(creationTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
+        super(pharmaceuticalAdviceTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
                 annotationComment);
         this.completed = completed;
         this.effectiveTime = Objects.requireNonNull(effectiveTime);
@@ -99,6 +95,14 @@ public abstract class EmedPadvEntryDigest extends EmedEntryDigest {
      * Returns the type of the PADV item entry digest.
      */
     public abstract PharmaceuticalAdviceStatus getPadvEntryType();
+
+    public Instant getPharmaceuticalAdviceTime() {
+        return this.itemTime;
+    }
+
+    public void setPharmaceuticalAdviceTime(final Instant pharmaceuticalAdviceTime) {
+        this.itemTime = Objects.requireNonNull(pharmaceuticalAdviceTime);
+    }
 
     public Instant getEffectiveTime() {
         return this.effectiveTime;
@@ -133,19 +137,36 @@ public abstract class EmedPadvEntryDigest extends EmedEntryDigest {
     }
 
     @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof final EmedPadvEntryDigest that)) return false;
+        if (!super.equals(o)) return false;
+        return completed == that.completed
+                && effectiveTime.equals(that.effectiveTime)
+                && targetedEntryRef.equals(that.targetedEntryRef)
+                && targetedEntryType == that.targetedEntryType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), effectiveTime, completed, targetedEntryRef, targetedEntryType);
+    }
+
+    @Override
     public String toString() {
         return "EmedPadvEntryDigest{" +
-                "creationTime=" + creationTime +
-                ", documentId='" + documentId +
-                ", documentAuthor=" + documentAuthor +
-                ", sectionAuthor=" + sectionAuthor +
-                ", entryId='" + entryId +
-                ", medicationTreatmentId='" + medicationTreatmentId +
-                ", sequence=" + sequence +
-                ", effectiveTime=" + effectiveTime +
-                ", completed=" + completed +
-                ", targetedEntryRef=" + targetedEntryRef +
-                ", targetedEntryType=" + targetedEntryType +
+                "annotationComment='" + this.annotationComment + '\'' +
+                ", pharmaceuticalAdviceTime=" + this.itemTime +
+                ", documentAuthor=" + this.documentAuthor +
+                ", documentId='" + this.documentId + '\'' +
+                ", entryId='" + this.entryId + '\'' +
+                ", medicationTreatmentId='" + this.medicationTreatmentId + '\'' +
+                ", sectionAuthor=" + this.sectionAuthor +
+                ", sequence=" + this.sequence +
+                ", effectiveTime=" + this.effectiveTime +
+                ", completed=" + this.completed +
+                ", targetedEntryRef=" + this.targetedEntryRef +
+                ", targetedEntryType=" + this.targetedEntryType +
                 '}';
     }
 }

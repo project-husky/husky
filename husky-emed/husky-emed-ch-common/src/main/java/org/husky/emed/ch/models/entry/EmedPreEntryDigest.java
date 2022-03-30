@@ -11,9 +11,7 @@ package org.husky.emed.ch.models.entry;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.ch.enums.ActSubstanceAdminSubstitutionCode;
 import org.husky.emed.ch.enums.EmedEntryType;
 import org.husky.emed.ch.enums.RouteOfAdministrationEdqm;
 import org.husky.emed.ch.models.common.AuthorDigest;
@@ -23,8 +21,6 @@ import org.husky.emed.ch.models.common.RenewalInterval;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -35,11 +31,6 @@ import java.util.Objects;
 @Getter
 @Setter
 public class EmedPreEntryDigest extends EmedEntryDigest {
-
-    /**
-     * The list of substance substitution permissions.
-     */
-    private final List<@NonNull ActSubstanceAdminSubstitutionCode> substitutionPermissions = new ArrayList<>();
 
     /**
      * The dosage instructions.
@@ -53,16 +44,15 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
     private String fulfilmentInstructions;
 
     /**
-     * The inclusive instant at which the initial treatment shall start or {@code null} if it's unknown.
+     * The inclusive instant at which the initial treatment shall start.
      */
-    @Nullable
-    private Instant initialTreatmentStartTime;
+    private Instant itemValidityStart;
 
     /**
-     * The inclusive instant at which the initial treatment shall stop or {@code null} if it's unknown.
+     * The inclusive instant at which the initial treatment shall stop or {@code null} if it's not bounded.
      */
     @Nullable
-    private Instant initialTreatmentStopTime;
+    private Instant itemValidityStop;
 
     /**
      * The reference to the MTP entry, if any.
@@ -79,12 +69,13 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
     /**
      * The inclusive instant at which the prescription shall start.
      */
-    private Instant prescriptionStartTime;
+    private Instant prescriptionDocumentValidityStart;
 
     /**
-     * The inclusive instant at which the prescription shall stop.
+     * The inclusive instant at which the prescription shall stop or {@code null} if it's not bounded.
      */
-    private Instant prescriptionStopTime;
+    @Nullable
+    private Instant prescriptionDocumentValidityStop;
 
     /**
      * The prescribed medication product.
@@ -117,6 +108,11 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
     private RouteOfAdministrationEdqm routeOfAdministration;
 
     /**
+     * Whether the substitution is permitted (Equivalent) or not (None).
+     */
+    private boolean substitutionPermitted;
+
+    /**
      * The treatment reason or {@code null} if it isn't provided.
      */
     @Nullable
@@ -125,40 +121,41 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
     /**
      * Constructor.
      *
-     * @param creationTime                  The instant at which the item entry was created.
-     * @param documentId                    The parent document unique ID.
-     * @param documentAuthor                The author of the original parent document or {@code null} if they're not
-     *                                      known.
-     * @param sectionAuthor                 The author of the original parent section or {@code null} if they're not
-     *                                      known.
-     * @param entryId                       The item entry ID.
-     * @param medicationTreatmentId         The ID of the medication treatment this item entry belongs to.
-     * @param sequence                      The sequence of addition.
-     * @param annotationComment             The annotation comment or {@code null} if it isn't provided.
-     * @param dosageInstructions            The dosage instructions.
-     * @param product                       The medication product.
-     * @param repeatNumber                  Number of repeats/refills (excluding the initial dispense). It's a non-zero
-     *                                      integer if it's limited, it's zero if no repeat/refill is authorized and
-     *                                      {@code null} if unlimited repeats/refills are authorized.
-     * @param routeOfAdministration         The medication route of administration or {@code null} if it's not
-     *                                      specified.
-     * @param prescriptionStartTime         The inclusive instant at which the prescription shall start.
-     * @param prescriptionStopTime          The inclusive instant at which the prescription shall stop or {@code null}
-     *                                      if it's unknown.
-     * @param initialTreatmentStartTime     The inclusive instant at which the initial treatment shall start or {@code
-     *                                      null} if it's unknown.
-     * @param initialTreatmentStopTime      The inclusive instant at which the initial treatment shall stop or {@code
-     *                                      null} if it's unknown.
-     * @param renewalPeriod                 The renewal period or {@code null} if it's not specified.
-     * @param mtpReference                  The reference to the MTP entry, if any.
-     * @param provisional                   Whether this prescription item is provisional or not.
-     * @param substitutionPermissions       The list of substance substitution permissions or {@code null} if it's not
-     *                                      specified.
-     * @param treatmentReason               The treatment reason or {@code null} if it isn't provided.
-     * @param patientMedicationInstructions The patient medication instructions or {@code null} if it isn't provided.
-     * @param fulfilmentInstructions        The fulfilment instructions or {@code null} if it isn't provided.
+     * @param prescriptionTime                  The prescription time.
+     * @param documentId                        The parent document unique ID.
+     * @param documentAuthor                    The author of the original parent document or {@code null} if they're
+     *                                          not known.
+     * @param sectionAuthor                     The author of the original parent section or {@code null} if they're not
+     *                                          known.
+     * @param entryId                           The item entry ID.
+     * @param medicationTreatmentId             The ID of the medication treatment this item entry belongs to.
+     * @param sequence                          The sequence of addition.
+     * @param annotationComment                 The annotation comment or {@code null} if it isn't provided.
+     * @param dosageInstructions                The dosage instructions.
+     * @param product                           The medication product.
+     * @param repeatNumber                      Number of repeats/refills (excluding the initial dispense). It's a
+     *                                          non-zero integer if it's limited, it's zero if no repeat/refill is
+     *                                          authorized and {@code null} if unlimited repeats/refills are
+     *                                          authorized.
+     * @param routeOfAdministration             The medication route of administration or {@code null} if it's not
+     *                                          specified.
+     * @param prescriptionDocumentValidityStart The inclusive instant at which the prescription shall start.
+     * @param prescriptionDocumentValidityStop  The inclusive instant at which the prescription shall stop or {@code
+     *                                          null} if it's not bounded.
+     * @param itemValidityStart                 The inclusive instant at which the initial treatment shall start.
+     * @param itemValidityStop                  The inclusive instant at which the initial treatment shall stop or
+     *                                          {@code null} if it's not bounded.
+     * @param renewalPeriod                     The renewal period or {@code null} if it's not specified.
+     * @param mtpReference                      The reference to the MTP entry, if any.
+     * @param provisional                       Whether this prescription item is provisional or not.
+     * @param substitutionPermitted             Whether the substitution is permitted (Equivalent) or not (None).
+     * @param treatmentReason                   The treatment reason or {@code null} if it isn't provided.
+     * @param patientMedicationInstructions     The patient medication instructions or {@code null} if it isn't
+     *                                          provided.
+     * @param fulfilmentInstructions            The fulfilment instructions or {@code null} if it isn't provided.
+     * @throws IllegalArgumentException if the validity periods are invalid.
      */
-    public EmedPreEntryDigest(final Instant creationTime,
+    public EmedPreEntryDigest(final Instant prescriptionTime,
                               final String documentId,
                               @Nullable final AuthorDigest documentAuthor,
                               @Nullable final AuthorDigest sectionAuthor,
@@ -170,36 +167,48 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
                               final MedicationProduct product,
                               @Nullable final Integer repeatNumber,
                               @Nullable final RouteOfAdministrationEdqm routeOfAdministration,
-                              final Instant prescriptionStartTime,
-                              final Instant prescriptionStopTime,
-                              @Nullable final Instant initialTreatmentStartTime,
-                              @Nullable final Instant initialTreatmentStopTime,
+                              final Instant prescriptionDocumentValidityStart,
+                              @Nullable final Instant prescriptionDocumentValidityStop,
+                              final Instant itemValidityStart,
+                              @Nullable final Instant itemValidityStop,
                               @Nullable final RenewalInterval renewalPeriod,
                               @Nullable final EmedReference mtpReference,
                               final boolean provisional,
-                              @Nullable final List<@NonNull ActSubstanceAdminSubstitutionCode> substitutionPermissions,
+                              final boolean substitutionPermitted,
                               @Nullable final String treatmentReason,
                               @Nullable final String patientMedicationInstructions,
                               @Nullable final String fulfilmentInstructions) {
-        super(creationTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
+        super(prescriptionTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
                 annotationComment);
         this.dosageInstructions = Objects.requireNonNull(dosageInstructions);
         this.product = Objects.requireNonNull(product);
         this.routeOfAdministration = routeOfAdministration;
         this.repeatNumber = repeatNumber;
-        this.prescriptionStartTime = Objects.requireNonNull(prescriptionStartTime);
-        this.prescriptionStopTime = Objects.requireNonNull(prescriptionStopTime);
-        this.initialTreatmentStartTime = initialTreatmentStartTime;
-        this.initialTreatmentStopTime = initialTreatmentStopTime;
+        this.prescriptionDocumentValidityStart = Objects.requireNonNull(prescriptionDocumentValidityStart);
+        this.prescriptionDocumentValidityStop = prescriptionDocumentValidityStop;
+        this.itemValidityStart = Objects.requireNonNull(itemValidityStart);
+        this.itemValidityStop = itemValidityStop;
         this.renewalPeriod = renewalPeriod;
         this.mtpReference = mtpReference;
         this.provisional = provisional;
-        if (substitutionPermissions != null) {
-            this.substitutionPermissions.addAll(substitutionPermissions);
-        }
+        this.substitutionPermitted = substitutionPermitted;
         this.treatmentReason = treatmentReason;
         this.patientMedicationInstructions = patientMedicationInstructions;
         this.fulfilmentInstructions = fulfilmentInstructions;
+        if (this.prescriptionDocumentValidityStop != null && this.prescriptionDocumentValidityStop.isBefore(this.prescriptionDocumentValidityStart)) {
+            throw new IllegalArgumentException("The prescription document validity period shall be a valid interval");
+        }
+        if (this.itemValidityStop != null && this.itemValidityStop.isBefore(this.itemValidityStart)) {
+            throw new IllegalArgumentException("The prescription item validity period shall be a valid interval");
+        }
+        if (this.itemValidityStart.isBefore(this.prescriptionDocumentValidityStart)) {
+            throw new IllegalArgumentException("The item validity period shall not start before the document validity " +
+                    "period");
+        }
+        if (this.prescriptionDocumentValidityStop != null && (this.itemValidityStop == null || this.itemValidityStop.isBefore(this.prescriptionDocumentValidityStop))) {
+            throw new IllegalArgumentException("The item validity period shall not end after the document validity " +
+                    "period");
+        }
     }
 
     /**
@@ -209,10 +218,48 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
         return EmedEntryType.PRE;
     }
 
+    public Instant getPrescriptionTime() {
+        return this.itemTime;
+    }
+
+    public void setPrescriptionTime(final Instant prescriptionTime) {
+        this.itemTime = Objects.requireNonNull(prescriptionTime);
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof final EmedPreEntryDigest that)) return false;
+        if (!super.equals(o)) return false;
+        return provisional == that.provisional
+                && substitutionPermitted == that.substitutionPermitted
+                && dosageInstructions.equals(that.dosageInstructions)
+                && Objects.equals(fulfilmentInstructions, that.fulfilmentInstructions)
+                && itemValidityStart.equals(that.itemValidityStart)
+                && Objects.equals(itemValidityStop, that.itemValidityStop)
+                && Objects.equals(mtpReference, that.mtpReference)
+                && Objects.equals(patientMedicationInstructions, that.patientMedicationInstructions)
+                && prescriptionDocumentValidityStart.equals(that.prescriptionDocumentValidityStart)
+                && Objects.equals(prescriptionDocumentValidityStop, that.prescriptionDocumentValidityStop)
+                && product.equals(that.product)
+                && Objects.equals(renewalPeriod, that.renewalPeriod)
+                && Objects.equals(repeatNumber, that.repeatNumber)
+                && routeOfAdministration == that.routeOfAdministration
+                && Objects.equals(treatmentReason, that.treatmentReason);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), dosageInstructions, fulfilmentInstructions, itemValidityStart,
+                itemValidityStop, mtpReference, patientMedicationInstructions, prescriptionDocumentValidityStart,
+                prescriptionDocumentValidityStop, product, provisional, renewalPeriod, repeatNumber, routeOfAdministration,
+                substitutionPermitted, treatmentReason);
+    }
+
     @Override
     public String toString() {
         return "EmedPreEntryDigest{" +
-                "creationTime=" + creationTime +
+                "prescriptionTime=" + itemTime +
                 ", documentId='" + documentId + '\'' +
                 ", sectionAuthor=" + sectionAuthor +
                 ", documentAuthor=" + documentAuthor +
@@ -220,15 +267,15 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
                 ", medicationTreatmentId='" + medicationTreatmentId + '\'' +
                 ", sequence=" + sequence +
                 ", annotationComment='" + annotationComment + '\'' +
-                ", substitutionPermissions=" + substitutionPermissions +
+                ", substitutionPermitted=" + substitutionPermitted +
                 ", dosageInstructions=" + dosageInstructions +
                 ", product=" + product +
                 ", repeatNumber=" + repeatNumber +
                 ", routeOfAdministration=" + routeOfAdministration +
-                ", prescriptionStartTime=" + prescriptionStartTime +
-                ", prescriptionStopTime=" + prescriptionStopTime +
-                ", initialTreatmentStartTime=" + initialTreatmentStartTime +
-                ", initialTreatmentStopTime=" + initialTreatmentStopTime +
+                ", prescriptionDocumentValidityStart=" + prescriptionDocumentValidityStart +
+                ", prescriptionDocumentValidityStop=" + prescriptionDocumentValidityStop +
+                ", itemValidityStart=" + itemValidityStart +
+                ", itemValidityStop=" + itemValidityStop +
                 ", renewalPeriod=" + renewalPeriod +
                 ", mtpReference=" + mtpReference +
                 ", provisional=" + provisional +

@@ -9,10 +9,7 @@
  */
 package org.husky.emed.ch.models.entry;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.ch.enums.ActSubstanceAdminSubstitutionCode;
 import org.husky.emed.ch.enums.DispenseSupplyType;
 import org.husky.emed.ch.enums.EmedEntryType;
 import org.husky.emed.ch.models.common.AuthorDigest;
@@ -28,8 +25,6 @@ import java.util.Objects;
  *
  * @author Quentin Ligier
  */
-@Getter
-@Setter
 public class EmedDisEntryDigest extends EmedEntryDigest {
 
     /**
@@ -78,15 +73,9 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
     private Quantity quantity;
 
     /**
-     * The substitution act or {@code null} if it's not given.
-     */
-    @Nullable
-    private ActSubstanceAdminSubstitutionCode substitutionAct;
-
-    /**
      * Constructor.
      *
-     * @param creationTime                  The instant at which the item entry was created.
+     * @param dispenseTime                  The dispense time.
      * @param documentId                    The parent document unique ID.
      * @param documentAuthor                The author of the original parent document or {@code null} if they're not
      *                                      known.
@@ -104,11 +93,10 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
      *                                      dispense.
      * @param product                       The dispensed medication product.
      * @param quantity                      The dispensed medication quantity.
-     * @param substitutionAct               The substitution act or {@code null} if it's not given.
      * @param patientMedicationInstructions The patient medication instructions or {@code null} if it isn't provided.
      * @param fulfilmentNotes               The fulfilment notes or {@code null} if it isn't provided.
      */
-    public EmedDisEntryDigest(final Instant creationTime,
+    public EmedDisEntryDigest(final Instant dispenseTime,
                               final String documentId,
                               @Nullable final AuthorDigest documentAuthor,
                               @Nullable final AuthorDigest sectionAuthor,
@@ -122,10 +110,9 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
                               @Nullable final EmedReference preEntryRef,
                               final MedicationProduct product,
                               final Quantity quantity,
-                              @Nullable final ActSubstanceAdminSubstitutionCode substitutionAct,
                               @Nullable final String patientMedicationInstructions,
                               @Nullable final String fulfilmentNotes) {
-        super(creationTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
+        super(dispenseTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
                 annotationComment);
         this.dispenseType = Objects.requireNonNull(dispenseType);
         this.otc = otc;
@@ -133,7 +120,6 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
         this.preEntryRef = preEntryRef;
         this.product = Objects.requireNonNull(product);
         this.quantity = Objects.requireNonNull(quantity);
-        this.substitutionAct = substitutionAct;
         this.patientMedicationInstructions = patientMedicationInstructions;
         this.fulfilmentNotes = fulfilmentNotes;
     }
@@ -143,5 +129,123 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
      */
     public EmedEntryType getEmedEntryType() {
         return EmedEntryType.DIS;
+    }
+
+    public Instant getDispenseTime() {
+        return this.itemTime;
+    }
+
+    public void setDispenseTime(final Instant dispenseTime) {
+        this.itemTime = Objects.requireNonNull(dispenseTime);
+    }
+
+    public DispenseSupplyType getDispenseType() {
+        return this.dispenseType;
+    }
+
+    public void setDispenseType(final DispenseSupplyType dispenseType) {
+        this.dispenseType = dispenseType;
+    }
+
+    @Nullable
+    public String getFulfilmentNotes() {
+        return this.fulfilmentNotes;
+    }
+
+    public void setFulfilmentNotes(@Nullable final String fulfilmentNotes) {
+        this.fulfilmentNotes = fulfilmentNotes;
+    }
+
+    @Nullable
+    public EmedReference getMtpEntryRef() {
+        return this.mtpEntryRef;
+    }
+
+    public void setMtpEntryRef(@Nullable final EmedReference mtpEntryRef) {
+        this.mtpEntryRef = mtpEntryRef;
+    }
+
+    public boolean isOtc() {
+        return this.otc;
+    }
+
+    public void setOtc(final boolean otc) {
+        this.otc = otc;
+    }
+
+    @Nullable
+    public String getPatientMedicationInstructions() {
+        return this.patientMedicationInstructions;
+    }
+
+    public void setPatientMedicationInstructions(@Nullable final String patientMedicationInstructions) {
+        this.patientMedicationInstructions = patientMedicationInstructions;
+    }
+
+    @Nullable
+    public EmedReference getPreEntryRef() {
+        return this.preEntryRef;
+    }
+
+    public void setPreEntryRef(@Nullable final EmedReference preEntryRef) {
+        this.preEntryRef = preEntryRef;
+    }
+
+    public MedicationProduct getProduct() {
+        return this.product;
+    }
+
+    public void setProduct(final MedicationProduct product) {
+        this.product = product;
+    }
+
+    public Quantity getQuantity() {
+        return this.quantity;
+    }
+
+    public void setQuantity(final Quantity quantity) {
+        this.quantity = quantity;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof final EmedDisEntryDigest that)) return false;
+        if (!super.equals(o)) return false;
+        return otc == that.otc
+                && dispenseType == that.dispenseType
+                && Objects.equals(fulfilmentNotes, that.fulfilmentNotes)
+                && Objects.equals(mtpEntryRef, that.mtpEntryRef)
+                && Objects.equals(patientMedicationInstructions, that.patientMedicationInstructions)
+                && Objects.equals(preEntryRef, that.preEntryRef)
+                && product.equals(that.product)
+                && quantity.equals(that.quantity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), dispenseType, fulfilmentNotes, mtpEntryRef, otc, patientMedicationInstructions, preEntryRef, product, quantity);
+    }
+
+    @Override
+    public String toString() {
+        return "EmedDisEntryDigest{" +
+                "dispenseType=" + this.dispenseType +
+                ", fulfilmentNotes='" + this.fulfilmentNotes + '\'' +
+                ", mtpEntryRef=" + this.mtpEntryRef +
+                ", otc=" + this.otc +
+                ", patientMedicationInstructions='" + this.patientMedicationInstructions + '\'' +
+                ", preEntryRef=" + this.preEntryRef +
+                ", product=" + this.product +
+                ", quantity=" + this.quantity +
+                ", annotationComment='" + this.annotationComment + '\'' +
+                ", dispenseTime=" + this.itemTime +
+                ", documentAuthor=" + this.documentAuthor +
+                ", documentId='" + this.documentId + '\'' +
+                ", entryId='" + this.entryId + '\'' +
+                ", medicationTreatmentId='" + this.medicationTreatmentId + '\'' +
+                ", sectionAuthor=" + this.sectionAuthor +
+                ", sequence=" + this.sequence +
+                '}';
     }
 }

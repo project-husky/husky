@@ -9,15 +9,8 @@
  */
 package org.husky.xua.validation.subject;
 
-import static org.husky.xua.ChEprXuaSpecifications.TECHNICAL_USER_ID;
-import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_SUBJECTID;
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ASSISTANT_GLN;
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_ASSISTANT_NAME;
-import static org.husky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_TCU_ID;
-
-import java.util.Optional;
-
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.husky.common.utils.OptionalUtils;
 import org.husky.communication.ch.enums.Role;
 import org.husky.xua.validation.ChEprAssertionValidationParameters;
 import org.opensaml.core.xml.XMLObject;
@@ -29,6 +22,12 @@ import org.opensaml.saml.saml2.core.Assertion;
 import org.opensaml.saml.saml2.core.Attribute;
 import org.opensaml.saml.saml2.core.AttributeValue;
 import org.opensaml.saml.saml2.core.SubjectConfirmation;
+
+import java.util.Optional;
+
+import static org.husky.xua.ChEprXuaSpecifications.TECHNICAL_USER_ID;
+import static org.husky.xua.communication.xua.XUserAssertionConstants.OASIS_XACML_SUBJECTID;
+import static org.husky.xua.validation.ChEprAssertionValidationParameters.*;
 
 /**
  * Validator that confirms the {@link org.opensaml.saml.saml2.core.Subject} of the issuer by evaluating the {@link
@@ -121,10 +120,14 @@ public class ChEprSubjectConfirmationBearerValidator implements SubjectConfirmat
      * @return An {@link Optional} that may contain the assistant name.
      */
     Optional<String> extractAssistantName(final SubjectConfirmation confirmation) {
-		return Optional.ofNullable(confirmation.getSubjectConfirmationData()).map(XMLObject::getOrderedChildren)
-				.filter(l -> l.size() == 1).map(l -> l.get(0)).filter(Attribute.class::isInstance)
-				.map(Attribute.class::cast).filter(attribute -> OASIS_XACML_SUBJECTID.equals(attribute.getName()))
-				.map(Attribute::getAttributeValues).filter(l -> l.size() == 1).map(l -> l.get(0))
-				.filter(AttributeValue.class::isInstance).map(AttributeValue.class::cast).map(XSAny::getTextContent);
+		return Optional.ofNullable(confirmation.getSubjectConfirmationData())
+                .map(XMLObject::getOrderedChildren)
+                .map(OptionalUtils::getListOnlyElement)
+                .map(attribute -> OptionalUtils.castOrNull(attribute, Attribute.class))
+                .filter(attribute -> OASIS_XACML_SUBJECTID.equals(attribute.getName()))
+				.map(Attribute::getAttributeValues)
+                .map(OptionalUtils::getListOnlyElement)
+                .map(attributeValue -> OptionalUtils.castOrNull(attributeValue, AttributeValue.class))
+                .map(XSAny::getTextContent);
 	}
 }
