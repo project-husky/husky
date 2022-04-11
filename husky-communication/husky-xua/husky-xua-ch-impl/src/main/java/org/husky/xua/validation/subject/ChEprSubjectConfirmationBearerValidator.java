@@ -59,11 +59,9 @@ public class ChEprSubjectConfirmationBearerValidator implements SubjectConfirmat
                                      final ValidationContext context) {
         final var role = (Role) context.getDynamicParameters().get(ChEprAssertionValidationParameters.CH_EPR_ROLE);
 
-        // Validation of the SubjectConfirmation
         if (role != Role.ASSISTANT && role != Role.TECHNICAL_USER) {
-            context.setValidationFailureMessage("The SubjectConfirmation shall not appear for other " +
-                    "extensions than TCU and ASS");
-            return ValidationResult.INVALID;
+             // The SubjectConfirmation is allowed but not defined, ignore it
+            return ValidationResult.VALID;
         }
 
         final var nameId = confirmation.getNameID();
