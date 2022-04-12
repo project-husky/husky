@@ -145,8 +145,8 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                                              final ValidationContext context) {
         var homeCommunityId = Optional.ofNullable(attribute.getAttributeValues())
                 .map(OptionalUtils::getListOnlyElement)
-                .map(xmlObject -> OptionalUtils.castOrNull(xmlObject, XSString.class))
-                .map(XSString::getValue)
+                .map(xmlObject -> OptionalUtils.castOrNull(xmlObject, XSURI.class))
+                .map(XSURI::getURI)
                 .orElse(null);
         final var prefix = "urn:oid:";
         if (homeCommunityId == null || !homeCommunityId.startsWith(prefix)) {
