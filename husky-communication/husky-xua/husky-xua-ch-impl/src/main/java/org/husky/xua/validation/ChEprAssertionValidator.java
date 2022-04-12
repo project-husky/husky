@@ -296,6 +296,16 @@ public class ChEprAssertionValidator {
             context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANIZATIONID + ERRMSG_IS_MISSING);
             return ValidationResult.INVALID;
         }
+        if (role == Role.HEALTHCARE_PROFESSIONAL || role == Role.ASSISTANT || role == Role.TECHNICAL_USER) {
+            if (((List<String>) context.getDynamicParameters().get(CH_EPR_ORGANIZATIONS_NAME)).isEmpty()) {
+                context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANISATION + "' shall not be empty");
+                return ValidationResult.INVALID;
+            }
+            if (((List<String>) context.getDynamicParameters().get(CH_EPR_ORGANIZATIONS_ID)).isEmpty()) {
+                context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANIZATIONID + "' shall not be empty");
+                return ValidationResult.INVALID;
+            }
+        }
         if (context.getDynamicParameters().getOrDefault(CH_EPR_HOME_COMMUNITY_ID, null) == null) {
             context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + IHE_XCA_HOMECOMMUNITYID + ERRMSG_IS_MISSING);
             return ValidationResult.INVALID;

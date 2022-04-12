@@ -16,6 +16,7 @@ import org.husky.xua.hl7v3.impl.AbstractImpl;
 import org.husky.xua.hl7v3.impl.CodedWithEquivalentImpl;
 import org.husky.xua.validation.ChEprAssertionValidationParameters;
 import org.opensaml.core.xml.schema.XSString;
+import org.opensaml.core.xml.schema.XSURI;
 import org.opensaml.saml.common.assertion.ValidationContext;
 import org.opensaml.saml.common.assertion.ValidationResult;
 import org.opensaml.saml.saml2.assertion.StatementValidator;
@@ -27,9 +28,7 @@ import org.opensaml.saml.saml2.core.impl.AttributeValueImpl;
 
 import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.QName;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.husky.common.enums.CodeSystems.SWISS_EPR_SPID;
 import static org.husky.communication.ch.enums.PurposeOfUse.*;
@@ -222,27 +221,28 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 || role == DOCUMENT_ADMINISTRATOR
                 || role == PATIENT
                 || role == REPRESENTATIVE;
-        final var organizationId = Optional.ofNullable(attribute.getAttributeValues())
-                .map(OptionalUtils::getListOnlyElement)
-                .map(xmlObject -> OptionalUtils.castOrNull(xmlObject, XSString.class))
-                .map(XSString::getValue)
-                .orElse(null);
-        if (organizationId == null) {
+        final var organizationIds = Optional.ofNullable(attribute.getAttributeValues())
+                .orElseGet(Collections::emptyList).stream()
+                .map(xmlObject -> OptionalUtils.castOrNull(xmlObject, XSURI.class))
+                .filter(Objects::nonNull)
+                .map(XSURI::getURI)
+                .toList();
+
+        context.getDynamicParameters().computeIfAbsent(CH_EPR_ORGANIZATIONS_ID, key -> new ArrayList<String>());
+        if (organizationIds.isEmpty()) {
             if (shallBeEmpty) {
-                context.getDynamicParameters().computeIfAbsent(CH_EPR_ORGANIZATIONS_ID, key -> new ArrayList<String>());
                 return ValidationResult.VALID;
-            } else {
+            }/* else {
                 context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANIZATIONID + ERRMSG_CONTAINS_INVALID_VALUE);
                 return ValidationResult.INVALID;
-            }
+            }*/
         }
         if (shallBeEmpty) {
             context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANIZATIONID + "' must be empty");
             return ValidationResult.INVALID;
         }
 
-        context.getDynamicParameters().computeIfAbsent(CH_EPR_ORGANIZATIONS_ID, key -> new ArrayList<String>());
-        ((List<String>) context.getDynamicParameters().get(CH_EPR_ORGANIZATIONS_ID)).add(organizationId);
+        ((List<String>) context.getDynamicParameters().get(CH_EPR_ORGANIZATIONS_ID)).addAll(organizationIds);
         return ValidationResult.VALID;
     }
 
@@ -262,27 +262,28 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 || role == DOCUMENT_ADMINISTRATOR
                 || role == PATIENT
                 || role == REPRESENTATIVE;
-        final var organizationName = Optional.ofNullable(attribute.getAttributeValues())
-                .map(OptionalUtils::getListOnlyElement)
+        final var organizationNames = Optional.ofNullable(attribute.getAttributeValues())
+                .orElseGet(Collections::emptyList).stream()
                 .map(xmlObject -> OptionalUtils.castOrNull(xmlObject, XSString.class))
+                .filter(Objects::nonNull)
                 .map(XSString::getValue)
-                .orElse(null);
-        if (organizationName == null) {
+                .toList();
+
+        context.getDynamicParameters().computeIfAbsent(CH_EPR_ORGANIZATIONS_NAME, key -> new ArrayList<String>());
+        if (organizationNames.isEmpty()) {
             if (shallBeEmpty) {
-                context.getDynamicParameters().computeIfAbsent(CH_EPR_ORGANIZATIONS_NAME, key -> new ArrayList<String>());
                 return ValidationResult.VALID;
-            } else {
+            }/* else {
                 context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANISATION + ERRMSG_CONTAINS_INVALID_VALUE);
                 return ValidationResult.INVALID;
-            }
+            }*/
         }
         if (shallBeEmpty) {
             context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANISATION + "' must be empty");
             return ValidationResult.INVALID;
         }
 
-        context.getDynamicParameters().computeIfAbsent(CH_EPR_ORGANIZATIONS_NAME, key -> new ArrayList<String>());
-        ((List<String>) context.getDynamicParameters().get(CH_EPR_ORGANIZATIONS_NAME)).add(organizationName);
+        ((List<String>) context.getDynamicParameters().get(CH_EPR_ORGANIZATIONS_NAME)).addAll(organizationNames);
         return ValidationResult.VALID;
     }
 }
