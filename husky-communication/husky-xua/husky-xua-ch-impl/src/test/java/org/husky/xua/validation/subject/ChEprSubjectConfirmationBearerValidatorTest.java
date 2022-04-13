@@ -69,8 +69,8 @@ class ChEprSubjectConfirmationBearerValidatorTest {
         context = this.getContext(Role.HEALTHCARE_PROFESSIONAL);
         context.getDynamicParameters().put(CH_EPR_ASSISTANT_GLN, "2000000090108");
         result = VALIDATOR.validate(subjectConfirmation, null, context);
-        assertEquals(ValidationResult.INVALID, result);
-        assertNotNull(context.getValidationFailureMessage());
+        assertEquals(ValidationResult.VALID, result);
+        assertNull(context.getValidationFailureMessage());
 
         context = this.getContext(Role.ASSISTANT);
         context.getDynamicParameters().put(CH_EPR_ASSISTANT_GLN, "2000000090108");
@@ -87,26 +87,26 @@ class ChEprSubjectConfirmationBearerValidatorTest {
         context = this.getContext(Role.POLICY_ADMINISTRATOR);
         context.getDynamicParameters().put(CH_EPR_ASSISTANT_GLN, "2000000090108");
         result = VALIDATOR.validate(subjectConfirmation, null, context);
-        assertEquals(ValidationResult.INVALID, result);
-        assertNotNull(context.getValidationFailureMessage());
+        assertEquals(ValidationResult.VALID, result);
+        assertNull(context.getValidationFailureMessage());
 
         context = this.getContext(Role.DOCUMENT_ADMINISTRATOR);
         context.getDynamicParameters().put(CH_EPR_ASSISTANT_GLN, "2000000090108");
         result = VALIDATOR.validate(subjectConfirmation, null, context);
-        assertEquals(ValidationResult.INVALID, result);
-        assertNotNull(context.getValidationFailureMessage());
+        assertEquals(ValidationResult.VALID, result);
+        assertNull(context.getValidationFailureMessage());
 
         context = this.getContext(Role.PATIENT);
         context.getDynamicParameters().put(CH_EPR_ASSISTANT_GLN, "2000000090108");
         result = VALIDATOR.validate(subjectConfirmation, null, context);
-        assertEquals(ValidationResult.INVALID, result);
-        assertNotNull(context.getValidationFailureMessage());
+        assertEquals(ValidationResult.VALID, result);
+        assertNull(context.getValidationFailureMessage());
 
         context = this.getContext(Role.REPRESENTATIVE);
         context.getDynamicParameters().put(CH_EPR_ASSISTANT_GLN, "2000000090108");
         result = VALIDATOR.validate(subjectConfirmation, null, context);
-        assertEquals(ValidationResult.INVALID, result);
-        assertNotNull(context.getValidationFailureMessage());
+        assertEquals(ValidationResult.VALID, result);
+        assertNull(context.getValidationFailureMessage());
 
         subjectConfirmation = this.unmarshal("""
                <saml2:NameID Format="urn:oasis:names:tc:SAML:2.0:nameid-format:persistent" NameQualifier="urn:e-health-suisse:technical-user-id">urn:oid:1.3.6.1.4.1.343</saml2:NameID>
@@ -114,8 +114,8 @@ class ChEprSubjectConfirmationBearerValidatorTest {
         context = this.getContext(Role.HEALTHCARE_PROFESSIONAL);
         context.getDynamicParameters().put(CH_EPR_TCU_ID, "urn:oid:1.3.6.1.4.1.343");
         result = VALIDATOR.validate(subjectConfirmation, null, context);
-        assertEquals(ValidationResult.INVALID, result);
-        assertNotNull(context.getValidationFailureMessage());
+        assertEquals(ValidationResult.VALID, result);
+        assertNull(context.getValidationFailureMessage());
 
         context = this.getContext(Role.ASSISTANT);
         context.getDynamicParameters().put(CH_EPR_TCU_ID, "urn:oid:1.3.6.1.4.1.343");
@@ -132,26 +132,26 @@ class ChEprSubjectConfirmationBearerValidatorTest {
         context = this.getContext(Role.POLICY_ADMINISTRATOR);
         context.getDynamicParameters().put(CH_EPR_TCU_ID, "urn:oid:1.3.6.1.4.1.343");
         result = VALIDATOR.validate(subjectConfirmation, null, context);
-        assertEquals(ValidationResult.INVALID, result);
-        assertNotNull(context.getValidationFailureMessage());
+        assertEquals(ValidationResult.VALID, result);
+        assertNull(context.getValidationFailureMessage());
 
         context = this.getContext(Role.DOCUMENT_ADMINISTRATOR);
         context.getDynamicParameters().put(CH_EPR_TCU_ID, "urn:oid:1.3.6.1.4.1.343");
         result = VALIDATOR.validate(subjectConfirmation, null, context);
-        assertEquals(ValidationResult.INVALID, result);
-        assertNotNull(context.getValidationFailureMessage());
+        assertEquals(ValidationResult.VALID, result);
+        assertNull(context.getValidationFailureMessage());
 
         context = this.getContext(Role.PATIENT);
         context.getDynamicParameters().put(CH_EPR_TCU_ID, "urn:oid:1.3.6.1.4.1.343");
         result = VALIDATOR.validate(subjectConfirmation, null, context);
-        assertEquals(ValidationResult.INVALID, result);
-        assertNotNull(context.getValidationFailureMessage());
+        assertEquals(ValidationResult.VALID, result);
+        assertNull(context.getValidationFailureMessage());
 
         context = this.getContext(Role.REPRESENTATIVE);
         context.getDynamicParameters().put(CH_EPR_TCU_ID, "urn:oid:1.3.6.1.4.1.343");
         result = VALIDATOR.validate(subjectConfirmation, null, context);
-        assertEquals(ValidationResult.INVALID, result);
-        assertNotNull(context.getValidationFailureMessage());
+        assertEquals(ValidationResult.VALID, result);
+        assertNull(context.getValidationFailureMessage());
     }
 
     @Test
