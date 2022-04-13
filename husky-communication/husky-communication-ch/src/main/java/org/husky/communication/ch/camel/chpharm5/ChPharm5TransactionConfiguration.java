@@ -16,7 +16,7 @@ import org.openehealth.ipf.commons.ihe.fhir.FhirTransactionValidator;
 import org.openehealth.ipf.commons.ihe.fhir.audit.FhirQueryAuditDataset;
 
 /**
- *  Static configuration for FHIR CH:PHARM-5 transaction components
+ * Static configuration for FHIR CH:PHARM-5 transaction components
  *
  * @author Quentin Ligier
  **/
@@ -32,6 +32,6 @@ public class ChPharm5TransactionConfiguration extends FhirTransactionConfigurati
                     new ChPharm5ResourceProvider(), // Consumer side. accept registrations
                     new ChPharm5ClientRequestFactory(),
                     FhirTransactionValidator.NO_VALIDATION);
-            setSupportsLazyLoading(true);
+            setSupportsLazyLoading(false);
         }
 }
