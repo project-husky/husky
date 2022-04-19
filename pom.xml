@@ -21,7 +21,7 @@
 		<husky.version>2.0-ALPHA</husky.version>
 		<slf4j.version>1.7.36</slf4j.version>
 		<jaxws-version>2.3.4</jaxws-version>
-		<opensaml.version>4.1.1</opensaml.version>
+		<opensaml.version>4.2.0</opensaml.version>
 		<ph-schematron.version>6.3.0</ph-schematron.version>
 		<org.apache.ws.commons.axiom.version>1.3.0</org.apache.ws.commons.axiom.version>
 		<apache-httpcomponents>4.5.13</apache-httpcomponents>
@@ -523,7 +523,7 @@
 			<dependency>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
-				<version>1.18.22</version>
+				<version>1.18.24</version>
 				<scope>provided</scope>
 			</dependency>
 
@@ -723,7 +723,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.0.0-M5</version>
+				<version>3.0.0-M6</version>
 				<configuration>
 					<excludes>
 						<exclude>**/integration/*</exclude>
@@ -742,7 +742,7 @@
 					<dependency>
 						<groupId>org.apache.maven.surefire</groupId>
 						<artifactId>surefire-junit-platform</artifactId>
-						<version>3.0.0-M5</version>
+						<version>3.0.0-M6</version>
 					</dependency>
 					<dependency>
 						<groupId>org.junit.jupiter</groupId>
