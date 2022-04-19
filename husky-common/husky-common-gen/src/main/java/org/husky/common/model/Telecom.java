@@ -10,11 +10,11 @@
  */
 package org.husky.common.model;
 
-import java.util.ArrayList;
-
 import org.husky.common.basetypes.TelecomBaseType;
 import org.husky.common.enums.NullFlavor;
 import org.husky.common.enums.TelecomAddressUse;
+
+import java.util.ArrayList;
 
 /**
  * The class Telecom contains all necessary fields for mean of communication such as a eMail, phone or website. This
@@ -111,7 +111,7 @@ public class Telecom extends TelecomBaseType {
                 retVal.setValue(hl7CdaR2Value.getValue());
             }
         } else
-            retVal.setNullFlavor(NullFlavor.NOT_AVAILABLE);
+            retVal.setNullFlavor(NullFlavor.NOT_AVAILABLE_L2);
         return retVal;
 
     }
@@ -136,7 +136,7 @@ public class Telecom extends TelecomBaseType {
             setValue(baseType.getValue());
             setNullFlavor(baseType.getNullFlavor());
         } else
-            setNullFlavor(NullFlavor.NOT_AVAILABLE);
+            setNullFlavor(NullFlavor.NOT_AVAILABLE_L2);
     }
 
     /**

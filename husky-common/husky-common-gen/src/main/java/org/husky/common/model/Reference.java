@@ -97,7 +97,7 @@ public class Reference {
                 retVal.setNarrativeText(hl7CdaR2Value.getXmlMixed());
             }
         } else
-            retVal.setNullFlavor(NullFlavor.NOT_AVAILABLE);
+            retVal.setNullFlavor(NullFlavor.NOT_AVAILABLE_L2);
 
         return retVal;
 
@@ -240,7 +240,7 @@ public class Reference {
             setNarrativeText(baseType.getNarrativeText());
             setNullFlavor(baseType.getNullFlavor());
         } else
-            setNullFlavor(NullFlavor.NOT_AVAILABLE);
+            setNullFlavor(NullFlavor.NOT_AVAILABLE_L2);
     }
 
     /**

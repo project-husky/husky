@@ -11,69 +11,34 @@
 
 package org.husky.common.utils;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.lang.management.ManagementFactory;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.function.Consumer;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
-
-
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.husky.common.basetypes.OrganizationBaseType;
+import org.husky.common.enums.NullFlavor;
 import org.husky.common.enums.PostalAddressUse;
 import org.husky.common.enums.Signature;
 import org.husky.common.enums.TelecomAddressUse;
-import org.husky.common.hl7cdar2.AD;
-import org.husky.common.hl7cdar2.AdxpCity;
-import org.husky.common.hl7cdar2.AdxpPostalCode;
-import org.husky.common.hl7cdar2.ED;
-import org.husky.common.hl7cdar2.ENXP;
-import org.husky.common.hl7cdar2.II;
-import org.husky.common.hl7cdar2.IVLTS;
-import org.husky.common.hl7cdar2.ON;
-import org.husky.common.hl7cdar2.PN;
-import org.husky.common.hl7cdar2.POCDMT000040AssignedAuthor;
-import org.husky.common.hl7cdar2.POCDMT000040AssignedEntity;
-import org.husky.common.hl7cdar2.POCDMT000040Authenticator;
-import org.husky.common.hl7cdar2.POCDMT000040Author;
-import org.husky.common.hl7cdar2.POCDMT000040CustodianOrganization;
-import org.husky.common.hl7cdar2.POCDMT000040EntryRelationship;
-import org.husky.common.hl7cdar2.POCDMT000040LegalAuthenticator;
-import org.husky.common.hl7cdar2.ST;
-import org.husky.common.hl7cdar2.TEL;
-import org.husky.common.hl7cdar2.XActRelationshipEntryRelationship;
+import org.husky.common.hl7cdar2.*;
 import org.husky.common.model.Identificator;
 import org.husky.common.model.Organization;
 import org.husky.common.model.Participant;
 import org.husky.common.model.Reference;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
+import java.io.*;
+import java.lang.management.ManagementFactory;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.function.Consumer;
 
 /**
  * Helper methods for the Husky and CDA.
@@ -422,7 +387,7 @@ public class Util {
 	public static IVLTS createEffectiveTimeNullFlavorUnk() {
 		final var ivlts = new IVLTS();
 		ivlts.nullFlavor = new LinkedList<>();
-		ivlts.getNullFlavor().add(org.husky.common.enums.NullFlavor.UNKNOWN_CODE);
+		ivlts.getNullFlavor().add(NullFlavor.UNKNOWN_L1_CODE);
 		return ivlts;
 	}
 

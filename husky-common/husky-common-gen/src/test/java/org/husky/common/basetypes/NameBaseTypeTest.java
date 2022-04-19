@@ -10,10 +10,10 @@
  */
 package org.husky.common.basetypes;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.husky.common.enums.EntityNameUse;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * The test class for NameBaseType.
@@ -31,7 +31,7 @@ class NameBaseTypeTest {
 		String given = "given";
 		String prefix = "prefix";
 		String suffix = "suffix";
-		EntityNameUse usage = EntityNameUse.PHONETIC;
+		EntityNameUse usage = EntityNameUse.PHONETIC_L1;
 
 		String name1 = "prefix.given.family.suffix";
 		String name2 = "My own name";

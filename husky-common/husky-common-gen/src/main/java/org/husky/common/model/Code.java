@@ -10,14 +10,14 @@
  */
 package org.husky.common.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.husky.common.basetypes.CodeBaseType;
 import org.husky.common.enums.NullFlavor;
 import org.husky.common.enums.ValueSetEnumInterface;
 import org.husky.common.hl7cdar2.CD;
 import org.husky.common.hl7cdar2.ED;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The class Code contains all necessary fields for a coded element. This class also provides mapping methods to other
@@ -163,7 +163,7 @@ public class Code extends CodeBaseType {
             // it is
             // not supported by CD
         } else
-            retVal.setNullFlavor(NullFlavor.NOT_AVAILABLE);
+            retVal.setNullFlavor(NullFlavor.NOT_AVAILABLE_L2);
 
         return retVal;
 
@@ -307,7 +307,7 @@ public class Code extends CodeBaseType {
             setOriginalText(baseType.getOriginalText());
             setNullFlavor(baseType.getNullFlavor());
         } else
-            setNullFlavor(NullFlavor.NOT_AVAILABLE);
+            setNullFlavor(NullFlavor.NOT_AVAILABLE_L2);
 
     }
 

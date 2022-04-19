@@ -10,15 +10,15 @@
  */
 package org.husky.common.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.ArrayList;
-
 import org.husky.common.basetypes.IdentificatorBaseType;
 import org.husky.common.enums.NullFlavor;
 import org.husky.common.hl7cdar2.II;
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * The test class for Identificator.
@@ -49,14 +49,14 @@ class IdentificatorTest {
 		// Null Flavor Tests
 		II nullHl7CdaR2Value = null;
 		Identificator nullObj = new Identificator(nullHl7CdaR2Value);
-		assertEquals(NullFlavor.NOT_AVAILABLE, nullObj.getNullFlavor());
+		assertEquals(NullFlavor.NOT_AVAILABLE_L2, nullObj.getNullFlavor());
 
 		ObjectFactory factory = new ObjectFactory();
 		nullHl7CdaR2Value = factory.createII();
 		nullHl7CdaR2Value.nullFlavor = new ArrayList<String>();
 		nullHl7CdaR2Value.nullFlavor.add("UNK");
 		nullObj = new Identificator(nullHl7CdaR2Value);
-		assertEquals(NullFlavor.UNKNOWN, nullObj.getNullFlavor());
+		assertEquals(NullFlavor.UNKNOWN_L1, nullObj.getNullFlavor());
 
 		// This is for debugging purposes, only. When enabled, you need to IId
 		// @XmlRootElement(name = "debug") to class II
