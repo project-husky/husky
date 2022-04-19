@@ -19,11 +19,11 @@ import javax.xml.bind.annotation.XmlTransient;
  * Element description: Two-digit, alphanumeric ISO country code according to [ISO 3166-1] of the country in which the address is located. The country defines the conventions for addressing.The country code MUST also be declared for Swiss postal addresses.Caution: Political changes or renaming of countries will result in adjustments to the ISO country list.The length of the feature is 2 characters.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.1.10.9.35<br>
- * Effective date: 2018-04-18 00:00:00<br>
- * Version: 2017<br>
- * Status: active
+ * Effective date: 2022-02-24 10:06:00<br>
+ * Version: 2022<br>
+ * Status: draft
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-04-19")
 public class CdachOtherAddressInformationCompilationECh0010 {
 
     public CdachOtherAddressInformationCompilationECh0010() {
@@ -72,7 +72,7 @@ public class CdachOtherAddressInformationCompilationECh0010 {
     private org.husky.common.hl7cdar2.ADXP state;
 
     /**
-     * Free additional lines for additional address information which can not be used in the other address fields (e.g. for c/o entries, etc.), with a maximum length of 150 characters.addressLine1 should be used for personalized addressing (e.g., c/o-Address).
+     * Free additional lines for additional address information which can not be used in the other address fields (e.g. for c/o entries, etc.), with a maximum length of 150 characters.<br clear="none"/>addressLine1 should be used for personalized addressing (e.g., c/o-Address).<br clear="none"/>addressLine2 should be used for non-personalized address details (e.g., additional location information, e.g. "Chalet Edelweiss").<br clear="none"/>
      */
     @XmlTransient()
     private org.husky.common.hl7cdar2.ADXP streetAddressLine;
@@ -82,6 +82,14 @@ public class CdachOtherAddressInformationCompilationECh0010 {
      */
     @XmlTransient()
     private org.husky.common.hl7cdar2.ADXP streetName;
+
+    /**
+     * Adds a hl7StreetAddressLine<br/>
+     * Free additional lines for additional address information which can not be used in the other address fields (e.g. for c/o entries, etc.), with a maximum length of 150 characters.<br/>addressLine1 should be used for personalized addressing (e.g., c/o-Address).<br/>addressLine2 should be used for non-personalized address details (e.g., additional location information, e.g. "Chalet Edelweiss").<br/>
+     */
+    public void addHl7StreetAddressLine(org.husky.common.hl7cdar2.ADXP value) {
+        streetAddressLine = value;
+    }
 
     /**
      * Gets the hl7AdditionalLocator<br/>
@@ -137,14 +145,6 @@ public class CdachOtherAddressInformationCompilationECh0010 {
      */
     public org.husky.common.hl7cdar2.ADXP getHl7State() {
         return state;
-    }
-
-    /**
-     * Gets the hl7StreetAddressLine<br/>
-     * Free additional lines for additional address information which can not be used in the other address fields (e.g. for c/o entries, etc.), with a maximum length of 150 characters.addressLine1 should be used for personalized addressing (e.g., c/o-Address).
-     */
-    public org.husky.common.hl7cdar2.ADXP getHl7StreetAddressLine() {
-        return streetAddressLine;
     }
 
     /**
@@ -209,14 +209,6 @@ public class CdachOtherAddressInformationCompilationECh0010 {
      */
     public void setHl7State(org.husky.common.hl7cdar2.ADXP value) {
         this.state = value;
-    }
-
-    /**
-     * Sets the hl7StreetAddressLine<br/>
-     * Free additional lines for additional address information which can not be used in the other address fields (e.g. for c/o entries, etc.), with a maximum length of 150 characters.addressLine1 should be used for personalized addressing (e.g., c/o-Address).
-     */
-    public void setHl7StreetAddressLine(org.husky.common.hl7cdar2.ADXP value) {
-        this.streetAddressLine = value;
     }
 
     /**

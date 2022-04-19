@@ -24,7 +24,7 @@ import org.husky.common.hl7cdar2.POCDMT000040Supply;
  * Version: 2021<br>
  * Status: draft
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-04-19")
 public class DispenseItemEntryContentModule extends POCDMT000040Supply {
 
     public DispenseItemEntryContentModule() {
@@ -32,6 +32,7 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.4"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.7.3"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.34"));
+        super.setQuantity(createHl7QuantityFixedValue());
     }
 
     /**
@@ -76,6 +77,15 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
     }
 
     /**
+     * Creates fixed contents for CDA Element hl7Quantity
+     */
+    private static org.husky.common.hl7cdar2.PQ createHl7QuantityFixedValue() {
+        ObjectFactory factory = new ObjectFactory();
+        org.husky.common.hl7cdar2.PQ retVal = factory.createPQ();
+        return retVal;
+    }
+
+    /**
      * Creates fixed contents for CDA Element hl7Reference
      *
      * @param typeCode the desired fixed value for this argument.
@@ -97,14 +107,6 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
         org.husky.common.hl7cdar2.II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
-    }
-
-    /**
-     * Gets the hl7Author<br/>
-     * Dispenser
-     */
-    public List<org.husky.common.hl7cdar2.POCDMT000040Author> getHl7Author() {
-        return author;
     }
 
     /**
@@ -141,7 +143,7 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
 
     /**
      * Gets the hl7Quantity<br/>
-     * Quantity Value
+     * Quantity Value.<br/><div>If the product also contains package information (<i>pharm:asContent</i> element), the<i>hl7:quantity</i>element SHALL contain the amount of packages of the medication. The value shall refer to the primary layer of the package information given in the<i>pharm:asContent</i>element of the product (e.g., if the value is 2 and the<i>pharm:asContent</i>element describes a blister containing 30 tablets, this means that 2 blisters (with each 30 tablets in it) have been dispensed). In this case the unit attribute SHALL NOT be present.</div><div>If the product does not contain package information, the <i>hl7:quantity</i> element SHALL contain the amount of consumable units of the medication. In this case the unit attribute MAY be present, if the quantity is in non-countable units.</div>
      */
     public org.husky.common.hl7cdar2.PQ getHl7Quantity() {
         return quantity;
@@ -206,15 +208,6 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
     }
 
     /**
-     * Sets the hl7Author<br/>
-     * Dispenser
-     */
-    public void setHl7Author(org.husky.common.hl7cdar2.POCDMT000040Author value) {
-        getAuthor().clear();
-        getAuthor().add(value);
-    }
-
-    /**
      * Sets the hl7Code<br/>
      * Code
      */
@@ -250,7 +243,7 @@ public class DispenseItemEntryContentModule extends POCDMT000040Supply {
 
     /**
      * Sets the hl7Quantity<br/>
-     * Quantity Value
+     * Quantity Value.<br/><div>If the product also contains package information (<i>pharm:asContent</i> element), the<i>hl7:quantity</i>element SHALL contain the amount of packages of the medication. The value shall refer to the primary layer of the package information given in the<i>pharm:asContent</i>element of the product (e.g., if the value is 2 and the<i>pharm:asContent</i>element describes a blister containing 30 tablets, this means that 2 blisters (with each 30 tablets in it) have been dispensed). In this case the unit attribute SHALL NOT be present.</div><div>If the product does not contain package information, the <i>hl7:quantity</i> element SHALL contain the amount of consumable units of the medication. In this case the unit attribute MAY be present, if the quantity is in non-countable units.</div>
      */
     public void setHl7Quantity(org.husky.common.hl7cdar2.PQ value) {
         this.quantity = value;

@@ -23,7 +23,7 @@ import org.husky.common.hl7cdar2.POCDMT000040Organization;
  * Version: 2017<br>
  * Status: active
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-04-19")
 public class CdachOtherOrganizationCompilationWithName extends POCDMT000040Organization {
 
     public CdachOtherOrganizationCompilationWithName() {

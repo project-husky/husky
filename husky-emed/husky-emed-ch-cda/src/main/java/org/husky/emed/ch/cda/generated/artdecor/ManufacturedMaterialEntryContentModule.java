@@ -12,9 +12,11 @@ package org.husky.emed.ch.cda.generated.artdecor;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
+import org.husky.common.basetypes.CodeBaseType;
 import org.husky.common.hl7cdar2.IVLTS;
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040Material;
+import org.husky.common.model.Code;
 
 /**
  * ManufacturedMaterialEntryContentModule
@@ -26,7 +28,7 @@ import org.husky.common.hl7cdar2.POCDMT000040Material;
  * Version: 2020<br>
  * Status: draft
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-04-19")
 public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material {
 
     public ManufacturedMaterialEntryContentModule() {
@@ -34,10 +36,13 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
         super.setDeterminerCode(org.husky.common.hl7cdar2.EntityDeterminerDetermined.KIND);
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.33"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.1"));
-        super.setCode(createHl7CodeFixedValue("NA",
-                                              "2.51.1.1"));
+        vocabCodeCode.add(new Code(CodeBaseType.builder().withCodeSystem("2.51.1.1").build()));
+        vocabCodeCode.add(new Code(CodeBaseType.builder().withCodeSystem("2.16.840.1.113883.6.73").build()));
+        super.setCode(createHl7CodeFixedValue("NA"));
         super.setName(createHl7NameFixedValue("NA"));
     }
+
+    private final List<Code> vocabCodeCode = new ArrayList<>();
 
     /**
      * Adds a pharmIngredient<br/>
@@ -59,14 +64,12 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
      * Creates fixed contents for CDA Element hl7Code
      *
      * @param nullFlavor the desired fixed value for this argument.
-     * @param codeSystem the desired fixed value for this argument.
      */
-    private static org.husky.common.hl7cdar2.CE createHl7CodeFixedValue(String nullFlavor, String codeSystem) {
+    private static org.husky.common.hl7cdar2.CE createHl7CodeFixedValue(String nullFlavor) {
         ObjectFactory factory = new ObjectFactory();
         org.husky.common.hl7cdar2.CE retVal = factory.createCE();
         retVal.nullFlavor = new ArrayList<String>();
         retVal.nullFlavor.add(nullFlavor);
-        retVal.setCodeSystem(codeSystem);
         return retVal;
     }
 
@@ -130,7 +133,7 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
 
     /**
      * Gets the hl7Code<br/>
-     * The element SHALL be present and describes the code of the medication package (GTIN). If it is a magistral preparation/compound medicin {@literal @}nullFlavor SHALL be "NA".
+     * Must support. The element SHALL be present and describes the code of the medication package (GTIN) or the drug classification (WHO ATC). The {@literal @}nullFlavor "NA" for magistral preparations is currently disallowed.
      */
     public org.husky.common.hl7cdar2.CE getHl7Code() {
         return code;
@@ -145,7 +148,7 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
 
     /**
      * Gets the hl7Name<br/>
-     * The element SHALL contain the name of the medication.
+     * Must support. The element SHALL contain the name of the medication.
      */
     public org.husky.common.hl7cdar2.EN getHl7Name() {
         return name;
@@ -160,7 +163,8 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
     }
 
     /**
-     * Gets the pharmAsContent
+     * Gets the pharmAsContent<br/>
+     * Must support.<br/>
      */
     public org.husky.common.hl7cdar2.COCTMT230100UVContent getPharmAsContent() {
         return asContent;
@@ -206,8 +210,15 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
     }
 
     /**
+     * Returns a list of vocab codes as defined in the ART-DECOR model
+     */
+    public List<Code> getVocabCodeCode() {
+        return vocabCodeCode;
+    }
+
+    /**
      * Sets the hl7Code<br/>
-     * The element SHALL be present and describes the code of the medication package (GTIN). If it is a magistral preparation/compound medicin {@literal @}nullFlavor SHALL be "NA".
+     * Must support. The element SHALL be present and describes the code of the medication package (GTIN) or the drug classification (WHO ATC). The {@literal @}nullFlavor "NA" for magistral preparations is currently disallowed.
      */
     public void setHl7Code(org.husky.common.hl7cdar2.CE value) {
         this.code = value;
@@ -222,7 +233,7 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
 
     /**
      * Sets the hl7Name<br/>
-     * The element SHALL contain the name of the medication.
+     * Must support. The element SHALL contain the name of the medication.
      */
     public void setHl7Name(org.husky.common.hl7cdar2.EN value) {
         this.name = value;
@@ -238,7 +249,8 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
     }
 
     /**
-     * Sets the pharmAsContent
+     * Sets the pharmAsContent<br/>
+     * Must support.<br/>
      */
     public void setPharmAsContent(org.husky.common.hl7cdar2.COCTMT230100UVContent value) {
         this.asContent = value;

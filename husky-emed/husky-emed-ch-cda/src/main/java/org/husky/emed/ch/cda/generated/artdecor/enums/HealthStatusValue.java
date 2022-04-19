@@ -31,7 +31,7 @@ import org.husky.common.enums.ValueSetEnumInterface;
  * Version: 2014<br>
  * Status: FINAL
  */
-@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-04-19")
 public enum HealthStatusValue implements ValueSetEnumInterface {
 
     /**

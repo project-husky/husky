@@ -27,11 +27,11 @@ import org.husky.common.enums.ValueSetEnumInterface;
  * IT: No designation found.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.1.11.82<br>
- * Effective date: 2020-09-25 11:02<br>
- * Version: 2021<br>
- * Status: DRAFT
+ * Effective date: 2022-03-02 15:25<br>
+ * Version: 2022<br>
+ * Status: FINAL
  */
-@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-04-19")
 public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
 
     /**
@@ -363,7 +363,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * EN: Ajmaline.<br>
      * DE: Ajmalin.<br>
      * FR: ajmaline.<br>
-     * IT: TODO.<br>
+     * IT: ajmaline.<br>
      */
     AJMALINE("1156230005",
              "2.16.840.1.113883.6.96",
@@ -371,7 +371,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
              "Ajmaline",
              "Ajmalin",
              "ajmaline",
-             "TODO"),
+             "ajmaline"),
     /**
      * EN: Alanine.<br>
      * DE: Alanin.<br>
@@ -2066,7 +2066,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * EN: Butylscopolamine.<br>
      * DE: Butylscopolamin.<br>
      * FR: butylscopolamine.<br>
-     * IT: TODO.<br>
+     * IT: butilscopolamina.<br>
      */
     BUTYLSCOPOLAMINE("1156229000",
                      "2.16.840.1.113883.6.96",
@@ -2074,7 +2074,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
                      "Butylscopolamine",
                      "Butylscopolamin",
                      "butylscopolamine",
-                     "TODO"),
+                     "butilscopolamina"),
     /**
      * EN: Cabazitaxel.<br>
      * DE: Cabazitaxel.<br>
@@ -3730,7 +3730,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * EN: Darvadstrocel.<br>
      * DE: Darvadstrocel.<br>
      * FR: darvadstrocel.<br>
-     * IT: TODO.<br>
+     * IT: darvadstrocel.<br>
      */
     DARVADSTROCEL("1156228008",
                   "2.16.840.1.113883.6.96",
@@ -3738,7 +3738,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
                   "Darvadstrocel",
                   "Darvadstrocel",
                   "darvadstrocel",
-                  "TODO"),
+                  "darvadstrocel"),
     /**
      * EN: Dasatinib.<br>
      * DE: Dasatinib.<br>
@@ -5836,7 +5836,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * EN: Flufenamic acid.<br>
      * DE: Flufenaminsäure.<br>
      * FR: acide flufénamique.<br>
-     * IT: TODO.<br>
+     * IT: acido flufenamico.<br>
      */
     FLUFENAMIC_ACID("1156232002",
                     "2.16.840.1.113883.6.96",
@@ -5844,7 +5844,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
                     "Flufenamic acid",
                     "Flufenaminsäure",
                     "acide flufénamique",
-                    "TODO"),
+                    "acido flufenamico"),
     /**
      * EN: Flumazenil.<br>
      * DE: Flumazenil.<br>
@@ -8202,7 +8202,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * EN: Levomethadone.<br>
      * DE: Levomethadon.<br>
      * FR: lévométhadone.<br>
-     * IT: TODO.<br>
+     * IT: levomethadone.<br>
      */
     LEVOMETHADONE("1156227003",
                   "2.16.840.1.113883.6.96",
@@ -8210,7 +8210,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
                   "Levomethadone",
                   "Levomethadon",
                   "lévométhadone",
-                  "TODO"),
+                  "levomethadone"),
     /**
      * EN: Levonorgestrel.<br>
      * DE: Levonorgestrel.<br>
@@ -9785,6 +9785,19 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
                  "nicotinamide",
                  "Nicotinamide"),
     /**
+     * EN: Nicotine.<br>
+     * DE: Nicotin.<br>
+     * FR: nicotine.<br>
+     * IT: Nicotina.<br>
+     */
+    NICOTINE("68540007",
+             "2.16.840.1.113883.6.96",
+             "Nicotine (substance)",
+             "Nicotine",
+             "Nicotin",
+             "nicotine",
+             "Nicotina"),
+    /**
      * EN: Nifedipine.<br>
      * DE: Nifedipin.<br>
      * FR: nifédipine.<br>
@@ -9823,19 +9836,6 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
                "Nimodipin",
                "nimodipine",
                "Nimodipina"),
-    /**
-     * EN: nimésulide.<br>
-     * DE: Nicotin.<br>
-     * FR: nicotine.<br>
-     * IT: Nicotina.<br>
-     */
-    NIM_SULIDE("68540007",
-               "2.16.840.1.113883.6.96",
-               "Nicotine (substance)",
-               "nimésulide",
-               "Nicotin",
-               "nicotine",
-               "Nicotina"),
     /**
      * EN: Nintedanib.<br>
      * DE: Nintedanib.<br>
@@ -10074,7 +10074,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * EN: Obidoxime chloride.<br>
      * DE: Obidoxim chlorid.<br>
      * FR: obidoxime chlorure.<br>
-     * IT: TODO.<br>
+     * IT: obidoxima cloruro.<br>
      */
     OBIDOXIME_CHLORIDE("1156231009",
                        "2.16.840.1.113883.6.96",
@@ -10082,7 +10082,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
                        "Obidoxime chloride",
                        "Obidoxim chlorid",
                        "obidoxime chlorure",
-                       "TODO"),
+                       "obidoxima cloruro"),
     /**
      * EN: Obinutuzumab.<br>
      * DE: Obinutuzumab.<br>
@@ -10282,7 +10282,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * EN: Opipramol.<br>
      * DE: Opipramol.<br>
      * FR: opipramol.<br>
-     * IT: TODO.<br>
+     * IT: opipramolo.<br>
      */
     OPIPRAMOL("1156223004",
               "2.16.840.1.113883.6.96",
@@ -10290,7 +10290,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
               "Opipramol",
               "Opipramol",
               "opipramol",
-              "TODO"),
+              "opipramolo"),
     /**
      * EN: Orlistat.<br>
      * DE: Orlistat.<br>
@@ -13922,7 +13922,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * EN: Trofosfamide.<br>
      * DE: Trofosfamide.<br>
      * FR: trofosfamide.<br>
-     * IT: TODO.<br>
+     * IT: trofosfamide.<br>
      */
     TROFOSFAMIDE("1156222009",
                  "2.16.840.1.113883.6.96",
@@ -13930,7 +13930,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
                  "Trofosfamide",
                  "Trofosfamide",
                  "trofosfamide",
-                 "TODO"),
+                 "trofosfamide"),
     /**
      * EN: Tropicamide.<br>
      * DE: Tropicamid.<br>
@@ -14799,7 +14799,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * EN: Code for Ajmaline.<br>
      * DE: Code für Ajmalin.<br>
      * FR: Code de ajmaline.<br>
-     * IT: Code per TODO.<br>
+     * IT: Code per ajmaline.<br>
      */
     public static final String AJMALINE_CODE = "1156230005";
 
@@ -15847,7 +15847,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * EN: Code for Butylscopolamine.<br>
      * DE: Code für Butylscopolamin.<br>
      * FR: Code de butylscopolamine.<br>
-     * IT: Code per TODO.<br>
+     * IT: Code per butilscopolamina.<br>
      */
     public static final String BUTYLSCOPOLAMINE_CODE = "1156229000";
 
@@ -16871,7 +16871,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * EN: Code for Darvadstrocel.<br>
      * DE: Code für Darvadstrocel.<br>
      * FR: Code de darvadstrocel.<br>
-     * IT: Code per TODO.<br>
+     * IT: Code per darvadstrocel.<br>
      */
     public static final String DARVADSTROCEL_CODE = "1156228008";
 
@@ -18167,7 +18167,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * EN: Code for Flufenamic acid.<br>
      * DE: Code für Flufenaminsäure.<br>
      * FR: Code de acide flufénamique.<br>
-     * IT: Code per TODO.<br>
+     * IT: Code per acido flufenamico.<br>
      */
     public static final String FLUFENAMIC_ACID_CODE = "1156232002";
 
@@ -19623,7 +19623,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * EN: Code for Levomethadone.<br>
      * DE: Code für Levomethadon.<br>
      * FR: Code de lévométhadone.<br>
-     * IT: Code per TODO.<br>
+     * IT: Code per levomethadone.<br>
      */
     public static final String LEVOMETHADONE_CODE = "1156227003";
 
@@ -20596,6 +20596,14 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
     public static final String NICOTINAMIDE_CODE = "173196005";
 
     /**
+     * EN: Code for Nicotine.<br>
+     * DE: Code für Nicotin.<br>
+     * FR: Code de nicotine.<br>
+     * IT: Code per Nicotina.<br>
+     */
+    public static final String NICOTINE_CODE = "68540007";
+
+    /**
      * EN: Code for Nifedipine.<br>
      * DE: Code für Nifedipin.<br>
      * FR: Code de nifédipine.<br>
@@ -20618,14 +20626,6 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Code per Nimodipina.<br>
      */
     public static final String NIMODIPINE_CODE = "387502003";
-
-    /**
-     * EN: Code for nimésulide.<br>
-     * DE: Code für Nicotin.<br>
-     * FR: Code de nicotine.<br>
-     * IT: Code per Nicotina.<br>
-     */
-    public static final String NIM_SULIDE_CODE = "68540007";
 
     /**
      * EN: Code for Nintedanib.<br>
@@ -20775,7 +20775,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * EN: Code for Obidoxime chloride.<br>
      * DE: Code für Obidoxim chlorid.<br>
      * FR: Code de obidoxime chlorure.<br>
-     * IT: Code per TODO.<br>
+     * IT: Code per obidoxima cloruro.<br>
      */
     public static final String OBIDOXIME_CHLORIDE_CODE = "1156231009";
 
@@ -20903,7 +20903,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * EN: Code for Opipramol.<br>
      * DE: Code für Opipramol.<br>
      * FR: Code de opipramol.<br>
-     * IT: Code per TODO.<br>
+     * IT: Code per opipramolo.<br>
      */
     public static final String OPIPRAMOL_CODE = "1156223004";
 
@@ -23143,7 +23143,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * EN: Code for Trofosfamide.<br>
      * DE: Code für Trofosfamide.<br>
      * FR: Code de trofosfamide.<br>
-     * IT: Code per TODO.<br>
+     * IT: Code per trofosfamide.<br>
      */
     public static final String TROFOSFAMIDE_CODE = "1156222009";
 

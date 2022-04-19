@@ -24,10 +24,10 @@ import org.husky.common.model.Code;
  * <p>
  * Identifier: 2.16.756.5.30.1.1.10.2.50<br>
  * Effective date: 2019-12-02 14:35:36<br>
- * Version: 2020<br>
- * Status: pending
+ * Version: 2022<br>
+ * Status: active
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-04-19")
 public class DocumentCodeMedicationList extends CE {
 
     public DocumentCodeMedicationList() {

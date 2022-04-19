@@ -27,7 +27,7 @@ import org.husky.common.hl7cdar2.SXCMTS;
  * Version: 2021<br>
  * Status: draft
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-04-19")
 public class PrescriptionItemEntryContentModule extends POCDMT000040SubstanceAdministration {
 
     public PrescriptionItemEntryContentModule() {
@@ -35,6 +35,7 @@ public class PrescriptionItemEntryContentModule extends POCDMT000040SubstanceAdm
         super.setMoodCode(org.husky.common.hl7cdar2.XDocumentSubstanceMood.INT);
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.43"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.2"));
+        super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.6"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.24"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.7"));
         super.setStatusCode(createHl7StatusCodeFixedValue("completed"));
@@ -161,14 +162,6 @@ public class PrescriptionItemEntryContentModule extends POCDMT000040SubstanceAdm
         org.husky.common.hl7cdar2.II retVal = factory.createII();
         retVal.setRoot(root);
         return retVal;
-    }
-
-    /**
-     * Gets the hl7Author<br/>
-     * Prescriber
-     */
-    public List<org.husky.common.hl7cdar2.POCDMT000040Author> getHl7Author() {
-        return author;
     }
 
     /**
@@ -360,15 +353,6 @@ public class PrescriptionItemEntryContentModule extends POCDMT000040SubstanceAdm
      */
     public static org.husky.common.hl7cdar2.II getPredefinedTemplateId13614119376153149() {
         return createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.9");
-    }
-
-    /**
-     * Sets the hl7Author<br/>
-     * Prescriber
-     */
-    public void setHl7Author(org.husky.common.hl7cdar2.POCDMT000040Author value) {
-        getAuthor().clear();
-        getAuthor().add(value);
     }
 
     /**

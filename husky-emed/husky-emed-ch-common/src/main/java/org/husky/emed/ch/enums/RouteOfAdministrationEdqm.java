@@ -28,10 +28,10 @@ import org.husky.common.enums.ValueSetEnumInterface;
  * <p>
  * Identifier: 2.16.756.5.30.1.1.11.2<br>
  * Effective date: 2018-04-05 17:28<br>
- * Version: 2021<br>
- * Status: DRAFT
+ * Version: 2022<br>
+ * Status: FINAL
  */
-@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-04-19")
 public enum RouteOfAdministrationEdqm implements ValueSetEnumInterface {
 
     /**

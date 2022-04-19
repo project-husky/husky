@@ -7,7 +7,7 @@
  * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  */
-package org.husky.emed.ch.cda.generated.artdecor.enums;
+package org.husky.emed.ch.enums;
 
 import java.util.Objects;
 import javax.annotation.processing.Generated;
@@ -19,66 +19,99 @@ import org.husky.common.enums.LanguageCode;
 import org.husky.common.enums.ValueSetEnumInterface;
 
 /**
- * Enumeration of x_InformationRecipient values
+ * Enumeration of TimeUnitCodeAmbu values
  * <p>
- * EN: <p> <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26</p><b>description: </b><p>Used to represent participant(s) who should receive a copy of a document.</p>.<br>
+ * EN: No designation found.<br>
  * DE: No designation found.<br>
  * FR: No designation found.<br>
  * IT: No designation found.<br>
  * <p>
- * Identifier: 2.16.840.1.113883.1.11.19366<br>
- * Effective date: 2014-03-26 00:00<br>
- * Version: DEFN=UV=VO=1360-20160323<br>
- * Status: FINAL
+ * Identifier: 2.16.756.5.30.1.127.77.12.11.4<br>
+ * Effective date: 2022-04-15 09:05<br>
+ * Version: 2022<br>
+ * Status: DRAFT
  */
 @Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-04-19")
-public enum XInformationRecipient implements ValueSetEnumInterface {
+public enum TimeUnitCodeAmbu implements ValueSetEnumInterface {
 
     /**
-     * EN: primary information recipient.<br>
+     * EN: h.<br>
+     * DE: h.<br>
+     * FR: h.<br>
+     * IT: h.<br>
      */
-    PRIMARY_INFORMATION_RECIPIENT("PRCP",
-                                  "2.16.840.1.113883.5.90",
-                                  "primary information recipient",
-                                  "primary information recipient",
-                                  "TOTRANSLATE",
-                                  "TOTRANSLATE",
-                                  "TOTRANSLATE"),
+    H("h",
+      "2.16.840.1.113883.6.8",
+      "Hour",
+      "h",
+      "h",
+      "h",
+      "h"),
     /**
-     * EN: tracker.<br>
+     * EN: min.<br>
+     * DE: min.<br>
+     * FR: min.<br>
+     * IT: min.<br>
      */
-    TRACKER("TRC",
-            "2.16.840.1.113883.5.90",
-            "tracker",
-            "tracker",
-            "TOTRANSLATE",
-            "TOTRANSLATE",
-            "TOTRANSLATE");
+    MIN("min",
+        "2.16.840.1.113883.6.8",
+        "Minute",
+        "min",
+        "min",
+        "min",
+        "min"),
+    /**
+     * EN: sec.<br>
+     * DE: sec.<br>
+     * FR: sec.<br>
+     * IT: sec.<br>
+     */
+    SEC("s",
+        "2.16.840.1.113883.6.8",
+        "Second",
+        "sec",
+        "sec",
+        "sec",
+        "sec");
 
     /**
-     * EN: Code for primary information recipient.<br>
+     * EN: Code for h.<br>
+     * DE: Code für h.<br>
+     * FR: Code de h.<br>
+     * IT: Code per h.<br>
      */
-    public static final String PRIMARY_INFORMATION_RECIPIENT_CODE = "PRCP";
+    public static final String H_CODE = "h";
 
     /**
-     * EN: Code for tracker.<br>
+     * EN: Code for min.<br>
+     * DE: Code für min.<br>
+     * FR: Code de min.<br>
+     * IT: Code per min.<br>
      */
-    public static final String TRACKER_CODE = "TRC";
+    public static final String MIN_CODE = "min";
+
+    /**
+     * EN: Code for sec.<br>
+     * DE: Code für sec.<br>
+     * FR: Code de sec.<br>
+     * IT: Code per sec.<br>
+     */
+    public static final String SEC_CODE = "s";
 
     /**
      * Identifier of the value set.
      */
-    public static final String VALUE_SET_ID = "2.16.840.1.113883.1.11.19366";
+    public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.77.12.11.4";
 
     /**
      * Name of the value set.
      */
-    public static final String VALUE_SET_NAME = "x_InformationRecipient";
+    public static final String VALUE_SET_NAME = "TimeUnitCodeAmbu";
 
     /**
      * Identifier of the code system (all values share the same).
      */
-    public static final String CODE_SYSTEM_ID = "2.16.840.1.113883.5.90";
+    public static final String CODE_SYSTEM_ID = "2.16.840.1.113883.6.8";
 
     /**
      * Gets the Enum with a given code.
@@ -87,8 +120,8 @@ public enum XInformationRecipient implements ValueSetEnumInterface {
      * @return the enum value found or {@code null}.
      */
     @Nullable
-    public static XInformationRecipient getEnum(@Nullable final String code) {
-        for (final XInformationRecipient x : values()) {
+    public static TimeUnitCodeAmbu getEnum(@Nullable final String code) {
+        for (final TimeUnitCodeAmbu x : values()) {
             if (x.getCodeValue().equals(code)) {
                 return x;
             }
@@ -107,7 +140,7 @@ public enum XInformationRecipient implements ValueSetEnumInterface {
             return false;
         }
         try {
-            Enum.valueOf(XInformationRecipient.class,
+            Enum.valueOf(TimeUnitCodeAmbu.class,
                          enumName);
             return true;
         } catch (final IllegalArgumentException ex) {
@@ -122,7 +155,7 @@ public enum XInformationRecipient implements ValueSetEnumInterface {
      * @return {@code true} if the value is found in this value set, {@code false} otherwise.
      */
     public static boolean isInValueSet(@Nullable final String codeValue) {
-        for (final XInformationRecipient x : values()) {
+        for (final TimeUnitCodeAmbu x : values()) {
             if (x.getCodeValue().equals(codeValue)) {
                 return true;
             }
@@ -160,7 +193,7 @@ public enum XInformationRecipient implements ValueSetEnumInterface {
      * @param displayNameFr The display name in French.
      * @param displayNameIt The display name in Italian.
      */
-    XInformationRecipient(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
+    TimeUnitCodeAmbu(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
         this.code = Objects.requireNonNull(code);
         this.codeSystem = Objects.requireNonNull(codeSystem);
         this.displayNames = new String[5];

@@ -9,37 +9,29 @@
  */
 package org.husky.emed.ch.cda.generated.artdecor;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
-import org.husky.common.basetypes.CodeBaseType;
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040Act;
-import org.husky.common.model.Code;
 
 /**
- * IHESubstitutionPermissionContentModule
+ * MedicationInReserveEntryContentModule
  * <p>
- * Template description: <div>An act element, containing exactly one element describing the substitution permission.</div><br>
- * Element description: 6.3.4.8 Substitution Permission Content Module<br>
+ * Template description: This is an entry to specify if the medication is "in reserve" (Reservemedikation; to be taken by the patient only if the need arises - e.g. pains) or if it's regular (Grundmedikation; to be always taken).<br>
  * <p>
- * Identifier: 1.3.6.1.4.1.19376.1.9.1.3.9.1<br>
- * Effective date: 2018-01-10 15:34:25<br>
- * Version: 2017<br>
- * Status: pending
+ * Identifier: 2.16.756.5.30.1.1.10.10<br>
+ * Effective date: 2022-02-24 09:27:22<br>
+ * Version: 2022<br>
+ * Status: draft
  */
 @Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-04-19")
-public class IhesubstitutionPermissionContentModule extends POCDMT000040Act {
+public class MedicationInReserveEntryContentModule extends POCDMT000040Act {
 
-    public IhesubstitutionPermissionContentModule() {
-        super.setClassCode(org.husky.common.hl7cdar2.XActClassDocumentEntryAct.ACT);
+    public MedicationInReserveEntryContentModule() {
         super.setMoodCode(org.husky.common.hl7cdar2.XDocumentActMood.DEF);
-        super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.9.1"));
-        super.setCode(createHl7CodeFixedValue());
-        vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed").build()));
+        super.setClassCode(org.husky.common.hl7cdar2.XActClassDocumentEntryAct.ACT);
+        super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.10"));
     }
-
-    private final List<Code> vocabStatusCodeCode = new ArrayList<>();
 
     /**
      * Creates fixed contents for CDA Element hl7Code
@@ -47,6 +39,18 @@ public class IhesubstitutionPermissionContentModule extends POCDMT000040Act {
     private static org.husky.common.hl7cdar2.CD createHl7CodeFixedValue() {
         ObjectFactory factory = new ObjectFactory();
         org.husky.common.hl7cdar2.CD retVal = factory.createCD();
+        return retVal;
+    }
+
+    /**
+     * Creates fixed contents for CDA Element hl7StatusCode
+     *
+     * @param code the desired fixed value for this argument.
+     */
+    private static org.husky.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
+        ObjectFactory factory = new ObjectFactory();
+        org.husky.common.hl7cdar2.CS retVal = factory.createCS();
+        retVal.setCode(code);
         return retVal;
     }
 
@@ -63,55 +67,58 @@ public class IhesubstitutionPermissionContentModule extends POCDMT000040Act {
     }
 
     /**
-     * Gets the hl7Code<br/>
-     * 6.3.4.8.3.3 Substitution Permission code
+     * Gets the hl7Code
      */
     public org.husky.common.hl7cdar2.CD getHl7Code() {
         return code;
     }
 
     /**
-     * Gets the hl7StatusCode<br/>
-     * 6.3.4.8.3.4 Substitution Permission statusCode
+     * Gets the hl7StatusCode
      */
     public org.husky.common.hl7cdar2.CS getHl7StatusCode() {
         return statusCode;
     }
 
     /**
-     * Gets the hl7TemplateId<br/>
-     * 6.3.4.8.3.2 Substitution Permission Template ID
+     * Gets the hl7TemplateId
      */
     public List<org.husky.common.hl7cdar2.II> getHl7TemplateId() {
         return templateId;
     }
 
     /**
-     * Returns a list of vocab codes as defined in the ART-DECOR model
+     * Adds a predefined org.husky.common.hl7cdar2.CD, filled by:
+     * @return the predefined element.
      */
-    public List<Code> getVocabStatusCodeCode() {
-        return vocabStatusCodeCode;
+    public static org.husky.common.hl7cdar2.CD getPredefinedCode() {
+        return createHl7CodeFixedValue();
     }
 
     /**
-     * Sets the hl7Code<br/>
-     * 6.3.4.8.3.3 Substitution Permission code
+     * Adds a predefined org.husky.common.hl7cdar2.CS, filled by: "completed"
+     * @return the predefined element.
+     */
+    public static org.husky.common.hl7cdar2.CS getPredefinedStatusCodeCompleted() {
+        return createHl7StatusCodeFixedValue("completed");
+    }
+
+    /**
+     * Sets the hl7Code
      */
     public void setHl7Code(org.husky.common.hl7cdar2.CD value) {
         this.code = value;
     }
 
     /**
-     * Sets the hl7StatusCode<br/>
-     * 6.3.4.8.3.4 Substitution Permission statusCode
+     * Sets the hl7StatusCode
      */
     public void setHl7StatusCode(org.husky.common.hl7cdar2.CS value) {
         this.statusCode = value;
     }
 
     /**
-     * Sets the hl7TemplateId<br/>
-     * 6.3.4.8.3.2 Substitution Permission Template ID
+     * Sets the hl7TemplateId
      */
     public void setHl7TemplateId(org.husky.common.hl7cdar2.II value) {
         getTemplateId().clear();

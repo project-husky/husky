@@ -19,20 +19,20 @@ import org.husky.common.enums.LanguageCode;
 import org.husky.common.enums.ValueSetEnumInterface;
 
 /**
- * Enumeration of UnitCode values
+ * Enumeration of RegularUnitCodeAmbu values
  * <p>
  * EN: No designation found.<br>
  * DE: No designation found.<br>
  * FR: No designation found.<br>
  * IT: No designation found.<br>
  * <p>
- * Identifier: 2.16.756.5.30.1.1.11.83<br>
- * Effective date: 2021-02-10 22:24<br>
+ * Identifier: 2.16.756.5.30.1.127.77.12.11.3<br>
+ * Effective date: 2022-04-15 09:05<br>
  * Version: 2022<br>
- * Status: FINAL
+ * Status: DRAFT
  */
 @Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-04-19")
-public enum UnitCode implements ValueSetEnumInterface {
+public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
 
     /**
      * EN: Actuation.<br>
@@ -138,19 +138,6 @@ public enum UnitCode implements ValueSetEnumInterface {
            "Flasche",
            "flacon",
            "flacone"),
-    /**
-     * EN: Bq.<br>
-     * DE: Bq.<br>
-     * FR: Bq.<br>
-     * IT: Bq.<br>
-     */
-    BQ("Bq",
-       "2.16.840.1.113883.6.8",
-       "Becquerel",
-       "Bq",
-       "Bq",
-       "Bq",
-       "Bq"),
     /**
      * EN: Cachet.<br>
      * DE: Oblatenkapsel.<br>
@@ -295,19 +282,6 @@ public enum UnitCode implements ValueSetEnumInterface {
              "cylindre",
              "cilindro"),
     /**
-     * EN: d.<br>
-     * DE: d.<br>
-     * FR: d.<br>
-     * IT: d.<br>
-     */
-    D("d",
-      "2.16.840.1.113883.6.8",
-      "Day",
-      "d",
-      "d",
-      "d",
-      "d"),
-    /**
      * EN: Dose.<br>
      * DE: Dos.<br>
      * FR: dose.<br>
@@ -373,32 +347,6 @@ public enum UnitCode implements ValueSetEnumInterface {
       "g",
       "g"),
     /**
-     * EN: GBq.<br>
-     * DE: GBq.<br>
-     * FR: GBq.<br>
-     * IT: GBq.<br>
-     */
-    GBQ("GBq",
-        "2.16.840.1.113883.6.8",
-        "gigaBecquerel",
-        "GBq",
-        "GBq",
-        "GBq",
-        "GBq"),
-    /**
-     * EN: h.<br>
-     * DE: h.<br>
-     * FR: h.<br>
-     * IT: h.<br>
-     */
-    H("h",
-      "2.16.840.1.113883.6.8",
-      "Hour",
-      "h",
-      "h",
-      "h",
-      "h"),
-    /**
      * EN: Implant.<br>
      * DE: Implantat.<br>
      * FR: implant.<br>
@@ -463,19 +411,6 @@ public enum UnitCode implements ValueSetEnumInterface {
         "Weithalsgefäss",
         "pot",
         "vasetto"),
-    /**
-     * EN: kBq.<br>
-     * DE: kBq.<br>
-     * FR: kBq.<br>
-     * IT: kBq.<br>
-     */
-    KBQ("kBq",
-        "2.16.840.1.113883.6.8",
-        "kiloBecquerel",
-        "kBq",
-        "kBq",
-        "kBq",
-        "kBq"),
     /**
      * EN: kcal.<br>
      * DE: kcal.<br>
@@ -555,19 +490,6 @@ public enum UnitCode implements ValueSetEnumInterface {
            "matrice",
            "matrice"),
     /**
-     * EN: MBq.<br>
-     * DE: MBq.<br>
-     * FR: MBq.<br>
-     * IT: MBq.<br>
-     */
-    MBQ("MBq",
-        "2.16.840.1.113883.6.8",
-        "megaBecquerel",
-        "MBq",
-        "MBq",
-        "MBq",
-        "MBq"),
-    /**
      * EN: meq.<br>
      * DE: meq.<br>
      * FR: mEq.<br>
@@ -606,19 +528,6 @@ public enum UnitCode implements ValueSetEnumInterface {
                              "MioUI",
                              "MioUI",
                              "MioUI"),
-    /**
-     * EN: min.<br>
-     * DE: min.<br>
-     * FR: min.<br>
-     * IT: min.<br>
-     */
-    MIN("min",
-        "2.16.840.1.113883.6.8",
-        "Minute",
-        "min",
-        "min",
-        "min",
-        "min"),
     /**
      * EN: MioU.<br>
      * DE: MioU.<br>
@@ -905,19 +814,6 @@ public enum UnitCode implements ValueSetEnumInterface {
            "Beutel",
            "sachet",
            "bustina"),
-    /**
-     * EN: sec.<br>
-     * DE: sec.<br>
-     * FR: sec.<br>
-     * IT: sec.<br>
-     */
-    SEC("s",
-        "2.16.840.1.113883.6.8",
-        "Second",
-        "sec",
-        "sec",
-        "sec",
-        "sec"),
     /**
      * EN: Sponge.<br>
      * DE: Schwämmchen.<br>
@@ -1257,14 +1153,6 @@ public enum UnitCode implements ValueSetEnumInterface {
     public static final String BOTTLE_CODE = "732986007";
 
     /**
-     * EN: Code for Bq.<br>
-     * DE: Code für Bq.<br>
-     * FR: Code de Bq.<br>
-     * IT: Code per Bq.<br>
-     */
-    public static final String BQ_CODE = "Bq";
-
-    /**
      * EN: Code for Cachet.<br>
      * DE: Code für Oblatenkapsel.<br>
      * FR: Code de cachet.<br>
@@ -1353,14 +1241,6 @@ public enum UnitCode implements ValueSetEnumInterface {
     public static final String CYLINDER_CODE = "732992001";
 
     /**
-     * EN: Code for d.<br>
-     * DE: Code für d.<br>
-     * FR: Code de d.<br>
-     * IT: Code per d.<br>
-     */
-    public static final String D_CODE = "d";
-
-    /**
      * EN: Code for Dose.<br>
      * DE: Code für Dos.<br>
      * FR: Code de dose.<br>
@@ -1401,22 +1281,6 @@ public enum UnitCode implements ValueSetEnumInterface {
     public static final String G_CODE = "g";
 
     /**
-     * EN: Code for GBq.<br>
-     * DE: Code für GBq.<br>
-     * FR: Code de GBq.<br>
-     * IT: Code per GBq.<br>
-     */
-    public static final String GBQ_CODE = "GBq";
-
-    /**
-     * EN: Code for h.<br>
-     * DE: Code für h.<br>
-     * FR: Code de h.<br>
-     * IT: Code per h.<br>
-     */
-    public static final String H_CODE = "h";
-
-    /**
      * EN: Code for Implant.<br>
      * DE: Code für Implantat.<br>
      * FR: Code de implant.<br>
@@ -1455,14 +1319,6 @@ public enum UnitCode implements ValueSetEnumInterface {
      * IT: Code per vasetto.<br>
      */
     public static final String JAR_CODE = "732999005";
-
-    /**
-     * EN: Code for kBq.<br>
-     * DE: Code für kBq.<br>
-     * FR: Code de kBq.<br>
-     * IT: Code per kBq.<br>
-     */
-    public static final String KBQ_CODE = "kBq";
 
     /**
      * EN: Code for kcal.<br>
@@ -1513,14 +1369,6 @@ public enum UnitCode implements ValueSetEnumInterface {
     public static final String MATRIX_CODE = "733002003";
 
     /**
-     * EN: Code for MBq.<br>
-     * DE: Code für MBq.<br>
-     * FR: Code de MBq.<br>
-     * IT: Code per MBq.<br>
-     */
-    public static final String MBQ_CODE = "MBq";
-
-    /**
      * EN: Code for meq.<br>
      * DE: Code für meq.<br>
      * FR: Code de mEq.<br>
@@ -1543,14 +1391,6 @@ public enum UnitCode implements ValueSetEnumInterface {
      * IT: Code per MioUI.<br>
      */
     public static final String MILLIONINTERNATIONALUNIT_CODE = "10*6.[iU]";
-
-    /**
-     * EN: Code for min.<br>
-     * DE: Code für min.<br>
-     * FR: Code de min.<br>
-     * IT: Code per min.<br>
-     */
-    public static final String MIN_CODE = "min";
 
     /**
      * EN: Code for MioU.<br>
@@ -1729,14 +1569,6 @@ public enum UnitCode implements ValueSetEnumInterface {
     public static final String SACHET_CODE = "733013000";
 
     /**
-     * EN: Code for sec.<br>
-     * DE: Code für sec.<br>
-     * FR: Code de sec.<br>
-     * IT: Code per sec.<br>
-     */
-    public static final String SEC_CODE = "s";
-
-    /**
      * EN: Code for Sponge.<br>
      * DE: Code für Schwämmchen.<br>
      * FR: Code de eponge.<br>
@@ -1907,12 +1739,12 @@ public enum UnitCode implements ValueSetEnumInterface {
     /**
      * Identifier of the value set.
      */
-    public static final String VALUE_SET_ID = "2.16.756.5.30.1.1.11.83";
+    public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.77.12.11.3";
 
     /**
      * Name of the value set.
      */
-    public static final String VALUE_SET_NAME = "UnitCode";
+    public static final String VALUE_SET_NAME = "RegularUnitCodeAmbu";
 
     /**
      * Gets the Enum with a given code.
@@ -1921,8 +1753,8 @@ public enum UnitCode implements ValueSetEnumInterface {
      * @return the enum value found or {@code null}.
      */
     @Nullable
-    public static UnitCode getEnum(@Nullable final String code) {
-        for (final UnitCode x : values()) {
+    public static RegularUnitCodeAmbu getEnum(@Nullable final String code) {
+        for (final RegularUnitCodeAmbu x : values()) {
             if (x.getCodeValue().equals(code)) {
                 return x;
             }
@@ -1941,7 +1773,7 @@ public enum UnitCode implements ValueSetEnumInterface {
             return false;
         }
         try {
-            Enum.valueOf(UnitCode.class,
+            Enum.valueOf(RegularUnitCodeAmbu.class,
                          enumName);
             return true;
         } catch (final IllegalArgumentException ex) {
@@ -1956,7 +1788,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * @return {@code true} if the value is found in this value set, {@code false} otherwise.
      */
     public static boolean isInValueSet(@Nullable final String codeValue) {
-        for (final UnitCode x : values()) {
+        for (final RegularUnitCodeAmbu x : values()) {
             if (x.getCodeValue().equals(codeValue)) {
                 return true;
             }
@@ -1994,7 +1826,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * @param displayNameFr The display name in French.
      * @param displayNameIt The display name in Italian.
      */
-    UnitCode(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
+    RegularUnitCodeAmbu(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
         this.code = Objects.requireNonNull(code);
         this.codeSystem = Objects.requireNonNull(codeSystem);
         this.displayNames = new String[5];

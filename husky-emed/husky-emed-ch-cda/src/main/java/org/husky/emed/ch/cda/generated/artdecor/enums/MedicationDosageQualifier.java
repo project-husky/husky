@@ -19,66 +19,70 @@ import org.husky.common.enums.LanguageCode;
 import org.husky.common.enums.ValueSetEnumInterface;
 
 /**
- * Enumeration of x_InformationRecipient values
+ * Enumeration of MedicationDosageQualifier values
  * <p>
- * EN: <p> <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26</p><b>description: </b><p>Used to represent participant(s) who should receive a copy of a document.</p>.<br>
+ * EN: No designation found.<br>
  * DE: No designation found.<br>
  * FR: No designation found.<br>
  * IT: No designation found.<br>
  * <p>
- * Identifier: 2.16.840.1.113883.1.11.19366<br>
- * Effective date: 2014-03-26 00:00<br>
- * Version: DEFN=UV=VO=1360-20160323<br>
- * Status: FINAL
+ * Identifier: 2.16.756.5.30.1.1.11.85<br>
+ * Effective date: 2022-02-25 13:26<br>
+ * Version: 2022<br>
+ * Status: DRAFT
  */
 @Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-04-19")
-public enum XInformationRecipient implements ValueSetEnumInterface {
+public enum MedicationDosageQualifier implements ValueSetEnumInterface {
 
     /**
-     * EN: primary information recipient.<br>
+     * EN: As required (qualifier value).<br>
+     * DE: Reservemedikation.<br>
      */
-    PRIMARY_INFORMATION_RECIPIENT("PRCP",
-                                  "2.16.840.1.113883.5.90",
-                                  "primary information recipient",
-                                  "primary information recipient",
-                                  "TOTRANSLATE",
-                                  "TOTRANSLATE",
-                                  "TOTRANSLATE"),
+    AS_REQUIRED_QUALIFIER_VALUE("225761000",
+                                "2.16.840.1.113883.6.96",
+                                "As required (qualifier value)",
+                                "As required (qualifier value)",
+                                "Reservemedikation",
+                                "TOTRANSLATE",
+                                "TOTRANSLATE"),
     /**
-     * EN: tracker.<br>
+     * EN: Regular (qualifier value).<br>
+     * DE: Grundmedikation.<br>
      */
-    TRACKER("TRC",
-            "2.16.840.1.113883.5.90",
-            "tracker",
-            "tracker",
-            "TOTRANSLATE",
-            "TOTRANSLATE",
-            "TOTRANSLATE");
+    REGULAR_QUALIFIER_VALUE("17854005",
+                            "2.16.840.1.113883.6.96",
+                            "Regular (qualifier value)",
+                            "Regular (qualifier value)",
+                            "Grundmedikation",
+                            "TOTRANSLATE",
+                            "TOTRANSLATE");
 
     /**
-     * EN: Code for primary information recipient.<br>
+     * EN: Code for As required (qualifier value).<br>
+     * DE: Code für Reservemedikation.<br>
      */
-    public static final String PRIMARY_INFORMATION_RECIPIENT_CODE = "PRCP";
+    public static final String AS_REQUIRED_QUALIFIER_VALUE_CODE = "225761000";
 
     /**
-     * EN: Code for tracker.<br>
+     * EN: Code for Regular (qualifier value).<br>
+     * DE: Code für Grundmedikation.<br>
      */
-    public static final String TRACKER_CODE = "TRC";
+    public static final String REGULAR_QUALIFIER_VALUE_CODE = "17854005";
 
     /**
      * Identifier of the value set.
      */
-    public static final String VALUE_SET_ID = "2.16.840.1.113883.1.11.19366";
+    public static final String VALUE_SET_ID = "2.16.756.5.30.1.1.11.85";
 
     /**
      * Name of the value set.
      */
-    public static final String VALUE_SET_NAME = "x_InformationRecipient";
+    public static final String VALUE_SET_NAME = "MedicationDosageQualifier";
 
     /**
      * Identifier of the code system (all values share the same).
      */
-    public static final String CODE_SYSTEM_ID = "2.16.840.1.113883.5.90";
+    public static final String CODE_SYSTEM_ID = "2.16.840.1.113883.6.96";
 
     /**
      * Gets the Enum with a given code.
@@ -87,8 +91,8 @@ public enum XInformationRecipient implements ValueSetEnumInterface {
      * @return the enum value found or {@code null}.
      */
     @Nullable
-    public static XInformationRecipient getEnum(@Nullable final String code) {
-        for (final XInformationRecipient x : values()) {
+    public static MedicationDosageQualifier getEnum(@Nullable final String code) {
+        for (final MedicationDosageQualifier x : values()) {
             if (x.getCodeValue().equals(code)) {
                 return x;
             }
@@ -107,7 +111,7 @@ public enum XInformationRecipient implements ValueSetEnumInterface {
             return false;
         }
         try {
-            Enum.valueOf(XInformationRecipient.class,
+            Enum.valueOf(MedicationDosageQualifier.class,
                          enumName);
             return true;
         } catch (final IllegalArgumentException ex) {
@@ -122,7 +126,7 @@ public enum XInformationRecipient implements ValueSetEnumInterface {
      * @return {@code true} if the value is found in this value set, {@code false} otherwise.
      */
     public static boolean isInValueSet(@Nullable final String codeValue) {
-        for (final XInformationRecipient x : values()) {
+        for (final MedicationDosageQualifier x : values()) {
             if (x.getCodeValue().equals(codeValue)) {
                 return true;
             }
@@ -160,7 +164,7 @@ public enum XInformationRecipient implements ValueSetEnumInterface {
      * @param displayNameFr The display name in French.
      * @param displayNameIt The display name in Italian.
      */
-    XInformationRecipient(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
+    MedicationDosageQualifier(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
         this.code = Objects.requireNonNull(code);
         this.codeSystem = Objects.requireNonNull(codeSystem);
         this.displayNames = new String[5];

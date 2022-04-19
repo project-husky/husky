@@ -23,7 +23,7 @@ import org.husky.common.hl7cdar2.POCDMT000040AssignedEntity;
  * Version: 2020<br>
  * Status: active
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-04-19")
 public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganization extends POCDMT000040AssignedEntity {
 
     public CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganization() {
