@@ -28,11 +28,16 @@ import java.util.List;
 public class MedicationProduct {
 
     /**
-     * The medication code or {@code null} if it's a magistral preparation/compound medicine. It is given in the GTIN
-     * system.
+     * The medication code in the GTIN system or {@code null}.
      */
     @Nullable
     private String gtinCode;
+
+    /**
+     * The medication code in the ATC system or {@code null}.
+     */
+    @Nullable
+    private String atcCode;
 
     /**
      * The medication name or {@code null} if it's not known.

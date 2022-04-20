@@ -104,6 +104,7 @@ public abstract class AbstractNarrativeGenerator {
         final var gtin = Optional.ofNullable(product.getGtinCode()).orElse(
                 Optional.ofNullable(product.getPackagedProduct()).map(MedicationPackagedProduct::getGtinCode).orElse(null)
         );
+        // TODO: or ATC
         if (name != null && gtin != null) {
             final var url = "https://compendium.ch/search/setculture/fr-CH?backUrl=https://compendium.ch/search?q=" + gtin;
             return List.of(
