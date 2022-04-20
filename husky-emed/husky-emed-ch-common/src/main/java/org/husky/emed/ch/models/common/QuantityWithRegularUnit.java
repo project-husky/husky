@@ -10,6 +10,7 @@
 package org.husky.emed.ch.models.common;
 
 import org.husky.common.hl7cdar2.PQ;
+import org.husky.emed.ch.enums.RegularUnitCodeAmbu;
 import org.husky.emed.ch.enums.UnitCode;
 
 import java.util.Objects;
@@ -19,7 +20,7 @@ import java.util.Objects;
  *
  * @author Quentin Ligier
  */
-public class QuantityWithUnitCode {
+public class QuantityWithRegularUnit {
 
     /**
      * The quantity value.
@@ -29,7 +30,7 @@ public class QuantityWithUnitCode {
     /**
      * The quantity unit.
      */
-    private UnitCode unit;
+    private RegularUnitCodeAmbu unit;
 
     /**
      * Constructor.
@@ -37,8 +38,8 @@ public class QuantityWithUnitCode {
      * @param value The quantity value.
      * @param unit The quantity unit.
      */
-    public QuantityWithUnitCode(final String value,
-                                final UnitCode unit) {
+    public QuantityWithRegularUnit(final String value,
+                                   final RegularUnitCodeAmbu unit) {
         this.value = Objects.requireNonNull(value);
         this.unit = Objects.requireNonNull(unit);
     }
@@ -48,14 +49,14 @@ public class QuantityWithUnitCode {
      *
      * @param qty The {@link PQ} to convert.
      */
-    public static QuantityWithUnitCode fromPq(final PQ qty) {
+    public static QuantityWithRegularUnit fromPq(final PQ qty) {
         Objects.requireNonNull(qty, "qty shall not be null in fromPq()");
         if (!UnitCode.isInValueSet(qty.getUnit())) {
             throw new IllegalArgumentException("The quantity unit '" + qty.getUnit() + "' is invalid");
         }
-        return new QuantityWithUnitCode(
+        return new QuantityWithRegularUnit(
                 Objects.requireNonNull(qty.getValue()),
-                Objects.requireNonNull(UnitCode.getEnum(qty.getUnit()))
+                Objects.requireNonNull(RegularUnitCodeAmbu.getEnum(qty.getUnit()))
         );
     }
 
@@ -63,7 +64,7 @@ public class QuantityWithUnitCode {
         return this.value;
     }
 
-    public UnitCode getUnit() {
+    public RegularUnitCodeAmbu getUnit() {
         return this.unit;
     }
 
@@ -71,14 +72,14 @@ public class QuantityWithUnitCode {
         this.value = Objects.requireNonNull(value);
     }
 
-    public void setUnit(final UnitCode unit) {
+    public void setUnit(final RegularUnitCodeAmbu unit) {
         this.unit = Objects.requireNonNull(unit);
     }
 
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
-        if (!(o instanceof final QuantityWithUnitCode that)) return false;
+        if (!(o instanceof final QuantityWithRegularUnit that)) return false;
         return Objects.equals(value, that.value)
                 && unit == that.unit;
     }
@@ -90,7 +91,7 @@ public class QuantityWithUnitCode {
 
     @Override
     public String toString() {
-        return "QuantityWithUnitCode{" +
+        return "QuantityWithRegularUnit{" +
                 "value='" + this.value + '\'' +
                 ", unit=" + this.unit +
                 '}';

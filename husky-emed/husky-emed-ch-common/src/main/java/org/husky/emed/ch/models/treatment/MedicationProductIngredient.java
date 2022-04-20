@@ -13,7 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.ch.enums.ActivePharmaceuticalIngredient;
-import org.husky.emed.ch.models.common.QuantityWithUnitCode;
+import org.husky.emed.ch.models.common.QuantityWithRegularUnit;
 
 /**
  * An ingredient of a medication product.
@@ -34,13 +34,13 @@ public class MedicationProductIngredient {
      * The quantity numerator or {@code null}.
      */
     @Nullable
-    private QuantityWithUnitCode quantityNumerator;
+    private QuantityWithRegularUnit quantityNumerator;
 
     /**
      * The quantity denominator or {@code null}.
      */
     @Nullable
-    private QuantityWithUnitCode quantityDenominator;
+    private QuantityWithRegularUnit quantityDenominator;
 
     /**
      * The component code in SNOMED CT system or {@code null}.

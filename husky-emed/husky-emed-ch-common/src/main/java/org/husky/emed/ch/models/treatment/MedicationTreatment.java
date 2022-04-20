@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.ch.enums.RouteOfAdministrationEdqm;
+import org.husky.emed.ch.enums.RouteOfAdministrationAmbu;
 import org.husky.emed.ch.enums.TreatmentStatus;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.EmedReference;
@@ -105,7 +105,7 @@ public class MedicationTreatment {
      * The medication route of administration or {@code null} if it's not specified.
      */
     @Nullable
-    protected RouteOfAdministrationEdqm routeOfAdministration;
+    protected RouteOfAdministrationAmbu routeOfAdministration;
 
     /**
      * Whether the substitution is permitted (Equivalent) or not (None).

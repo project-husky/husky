@@ -53,7 +53,7 @@ public class ContainerPackagedMedicineReader {
     @Nullable
     public String getName() {
         return (!this.packagedMedicine.getName().isEmpty()) ?
-                this.packagedMedicine.getName().get(0).getXmlMixed().get(0) : // TODO
+                this.packagedMedicine.getName().get(0).getMergedXmlMixed() :
                 null;
     }
 

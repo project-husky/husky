@@ -13,7 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.ch.enums.EmedEntryType;
-import org.husky.emed.ch.enums.RouteOfAdministrationEdqm;
+import org.husky.emed.ch.enums.RouteOfAdministrationAmbu;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.EmedReference;
 import org.husky.emed.ch.models.common.MedicationDosageInstructions;
@@ -105,7 +105,7 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
      * The medication route of administration, or {@code null} if it's not specified.
      */
     @Nullable
-    private RouteOfAdministrationEdqm routeOfAdministration;
+    private RouteOfAdministrationAmbu routeOfAdministration;
 
     /**
      * Whether the substitution is permitted (Equivalent) or not (None).
@@ -166,7 +166,7 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
                               final MedicationDosageInstructions dosageInstructions,
                               final MedicationProduct product,
                               @Nullable final Integer repeatNumber,
-                              @Nullable final RouteOfAdministrationEdqm routeOfAdministration,
+                              @Nullable final RouteOfAdministrationAmbu routeOfAdministration,
                               final Instant prescriptionDocumentValidityStart,
                               @Nullable final Instant prescriptionDocumentValidityStop,
                               final Instant itemValidityStart,

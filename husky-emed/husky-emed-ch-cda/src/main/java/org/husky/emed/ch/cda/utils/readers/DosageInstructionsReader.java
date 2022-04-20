@@ -14,13 +14,13 @@ import org.husky.common.hl7cdar2.*;
 import org.husky.emed.ch.cda.utils.EntryRelationshipUtils;
 import org.husky.emed.ch.cda.utils.IvlTsUtils;
 import org.husky.emed.ch.cda.utils.TemplateIds;
-import org.husky.emed.ch.enums.ChEmedTimingEvent;
 import org.husky.emed.ch.enums.DosageType;
-import org.husky.emed.ch.enums.RouteOfAdministrationEdqm;
+import org.husky.emed.ch.enums.RouteOfAdministrationAmbu;
+import org.husky.emed.ch.enums.TimingEventAmbu;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.models.common.MedicationDosageInstructions;
 import org.husky.emed.ch.models.common.MedicationDosageIntake;
-import org.husky.emed.ch.models.common.QuantityWithUnitCode;
+import org.husky.emed.ch.models.common.QuantityWithRegularUnit;
 
 import java.math.BigInteger;
 import java.time.Instant;
@@ -114,7 +114,7 @@ public class DosageInstructionsReader {
      *
      * @return an {@link Optional} that may contain the dose quantity.
      */
-    public Optional<QuantityWithUnitCode> getDoseQuantity() {
+    public Optional<QuantityWithRegularUnit> getDoseQuantity() {
         return this.getDoseQuantity(this.subAdm);
     }
 
@@ -123,11 +123,11 @@ public class DosageInstructionsReader {
      *
      * @return an {@link Optional} that may contain the route of administration.
      */
-    public Optional<RouteOfAdministrationEdqm> getRouteOfAdministration() {
+    public Optional<RouteOfAdministrationAmbu> getRouteOfAdministration() {
         return Optional.ofNullable(this.subAdm.getRouteCode())
                 .map(CD::getCode)
-                .filter(RouteOfAdministrationEdqm::isInValueSet)
-                .map(RouteOfAdministrationEdqm::getEnum);
+                .filter(RouteOfAdministrationAmbu::isInValueSet)
+                .map(RouteOfAdministrationAmbu::getEnum);
     }
 
     /**
@@ -142,7 +142,7 @@ public class DosageInstructionsReader {
     /**
      * Returns the dosage instructions - frequency: a single or multiple events within a day with the same dosage.
      */
-    public List<@NonNull ChEmedTimingEvent> getEventTimings() {
+    public List<@NonNull TimingEventAmbu> getEventTimings() {
         return this.getEventTimings(this.subAdm);
     }
 
@@ -247,9 +247,9 @@ public class DosageInstructionsReader {
      * @param subAdm The dosage instructions.
      * @return an {@link Optional} that may contain the dose quantity.
      */
-    private Optional<QuantityWithUnitCode> getDoseQuantity(@NonNull final POCDMT000040SubstanceAdministration subAdm) {
+    private Optional<QuantityWithRegularUnit> getDoseQuantity(@NonNull final POCDMT000040SubstanceAdministration subAdm) {
         return Optional.ofNullable(subAdm.getDoseQuantity())
-                .map(QuantityWithUnitCode::fromPq);
+                .map(QuantityWithRegularUnit::fromPq);
     }
 
     /**
@@ -258,8 +258,8 @@ public class DosageInstructionsReader {
      * @param subAdm The dosage instructions.
      * @return a list of event timings.
      */
-    private List<@NonNull ChEmedTimingEvent> getEventTimings(@NonNull final POCDMT000040SubstanceAdministration subAdm) {
-        final List<ChEmedTimingEvent> eventTimings = new ArrayList<>();
+    private List<@NonNull TimingEventAmbu> getEventTimings(@NonNull final POCDMT000040SubstanceAdministration subAdm) {
+        final List<TimingEventAmbu> eventTimings = new ArrayList<>();
 
         // <effectiveTime operator='A' xsi:type='EIVL_TS' />
         subAdm.getEffectiveTime().stream()
@@ -267,7 +267,7 @@ public class DosageInstructionsReader {
                 .findAny()
                 .map(effectiveTime -> ((EIVLTS) effectiveTime).getEvent())
                 .map(CD::getCode)
-                .map(ChEmedTimingEvent::getEnum)
+                .map(TimingEventAmbu::getEnum)
                 .ifPresent(eventTimings::add);
 
         // <effectiveTime operator='A' xsi:type='SXPR_TS' />
@@ -280,7 +280,7 @@ public class DosageInstructionsReader {
                 .map(effectiveTime -> ((EIVLTS) effectiveTime).getEvent())
                 .filter(Objects::nonNull)
                 .map(CD::getCode)
-                .map(ChEmedTimingEvent::getEnum)
+                .map(TimingEventAmbu::getEnum)
                 .filter(Objects::nonNull)
                 .forEach(eventTimings::add);
         return eventTimings;

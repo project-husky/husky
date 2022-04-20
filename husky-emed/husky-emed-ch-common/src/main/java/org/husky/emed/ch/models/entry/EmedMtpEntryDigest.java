@@ -11,7 +11,7 @@ package org.husky.emed.ch.models.entry;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.ch.enums.EmedEntryType;
-import org.husky.emed.ch.enums.RouteOfAdministrationEdqm;
+import org.husky.emed.ch.enums.RouteOfAdministrationAmbu;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.EmedReference;
 import org.husky.emed.ch.models.common.MedicationDosageInstructions;
@@ -67,7 +67,7 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
      * The medication route of administration or {@code null} if it's not specified.
      */
     @Nullable
-    private RouteOfAdministrationEdqm routeOfAdministration;
+    private RouteOfAdministrationAmbu routeOfAdministration;
 
     /**
      * The lower bound of the planned item validity period.
@@ -132,7 +132,7 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
                               final MedicationDosageInstructions dosageInstructions,
                               final MedicationProduct product,
                               @Nullable final Integer repeatNumber,
-                              @Nullable final RouteOfAdministrationEdqm routeOfAdministration,
+                              @Nullable final RouteOfAdministrationAmbu routeOfAdministration,
                               final Instant plannedItemValidityStart,
                               @Nullable final Instant plannedItemValidityStop,
                               final boolean substitutionPermitted,
@@ -235,11 +235,11 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
     }
 
     @Nullable
-    public RouteOfAdministrationEdqm getRouteOfAdministration() {
+    public RouteOfAdministrationAmbu getRouteOfAdministration() {
         return this.routeOfAdministration;
     }
 
-    public void setRouteOfAdministration(@Nullable final RouteOfAdministrationEdqm routeOfAdministration) {
+    public void setRouteOfAdministration(@Nullable final RouteOfAdministrationAmbu routeOfAdministration) {
         this.routeOfAdministration = routeOfAdministration;
     }
 

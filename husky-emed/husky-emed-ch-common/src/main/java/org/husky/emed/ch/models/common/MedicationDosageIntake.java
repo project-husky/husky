@@ -9,7 +9,7 @@
  */
 package org.husky.emed.ch.models.common;
 
-import org.husky.emed.ch.enums.ChEmedTimingEvent;
+import org.husky.emed.ch.enums.TimingEventAmbu;
 
 import java.util.Objects;
 
@@ -23,12 +23,12 @@ public class MedicationDosageIntake {
     /**
      * The event timing.
      */
-    private ChEmedTimingEvent eventTiming;
+    private TimingEventAmbu eventTiming;
 
     /**
      * The dose quantity.
      */
-    private QuantityWithUnitCode doseQuantity;
+    private QuantityWithRegularUnit doseQuantity;
 
     /**
      * Constructor.
@@ -36,8 +36,8 @@ public class MedicationDosageIntake {
      * @param eventTiming  The event timing.
      * @param doseQuantity The dose quantity.
      */
-    public MedicationDosageIntake(final ChEmedTimingEvent eventTiming,
-                                  final QuantityWithUnitCode doseQuantity) {
+    public MedicationDosageIntake(final TimingEventAmbu eventTiming,
+                                  final QuantityWithRegularUnit doseQuantity) {
         this.eventTiming = Objects.requireNonNull(eventTiming);
         this.doseQuantity = Objects.requireNonNull(doseQuantity);
     }
@@ -45,7 +45,7 @@ public class MedicationDosageIntake {
     /**
      * Returns the event timing.
      */
-    public ChEmedTimingEvent getEventTiming() {
+    public TimingEventAmbu getEventTiming() {
         return eventTiming;
     }
 
@@ -54,14 +54,14 @@ public class MedicationDosageIntake {
      *
      * @param eventTiming The event timing.
      */
-    public void setEventTiming(final ChEmedTimingEvent eventTiming) {
+    public void setEventTiming(final TimingEventAmbu eventTiming) {
         this.eventTiming = Objects.requireNonNull(eventTiming);
     }
 
     /**
      * Returns the dose quantity.
      */
-    public QuantityWithUnitCode getDoseQuantity() {
+    public QuantityWithRegularUnit getDoseQuantity() {
         return doseQuantity;
     }
 
@@ -70,7 +70,7 @@ public class MedicationDosageIntake {
      *
      * @param doseQuantity The dose quantity.
      */
-    public void setDoseQuantity(final QuantityWithUnitCode doseQuantity) {
+    public void setDoseQuantity(final QuantityWithRegularUnit doseQuantity) {
         this.doseQuantity = Objects.requireNonNull(doseQuantity);
     }
 
