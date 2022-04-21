@@ -79,6 +79,11 @@ public class MedicationTreatment {
     protected String id;
 
     /**
+     * Whether the treatment is to be taken regularly ({@code false}) or only if required ({@code true}).
+     */
+    private boolean inReserve;
+
+    /**
      * The last author in the medication treatment.
      */
     @Nullable
