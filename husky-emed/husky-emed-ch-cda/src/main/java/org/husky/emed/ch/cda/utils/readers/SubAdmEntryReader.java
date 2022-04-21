@@ -10,6 +10,7 @@
 package org.husky.emed.ch.cda.utils.readers;
 
 import org.husky.common.hl7cdar2.*;
+import org.husky.emed.ch.cda.generated.artdecor.enums.MedicationDosageQualifier;
 import org.husky.emed.ch.cda.utils.EntryRelationshipUtils;
 import org.husky.emed.ch.cda.utils.TemplateIds;
 import org.husky.emed.ch.enums.ActSubstanceAdminSubstitutionCode;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import static org.husky.emed.ch.cda.utils.TemplateIds.IN_RESERVE;
 import static org.husky.emed.ch.cda.utils.TemplateIds.SUBSTITUTION_PERMISSION;
 
 /**
@@ -77,7 +79,25 @@ public class SubAdmEntryReader extends DosageInstructionsReader {
             .map(act -> act.getCode().getCode())
             .map(ActSubstanceAdminSubstitutionCode::getEnum)
             .map(substitution -> substitution != ActSubstanceAdminSubstitutionCode.NONE_L1)
-            .orElse(true);
+            .orElse(true); // Default is substitution permitted
+    }
+
+    /**
+     * Returns whether the treatment is to be taken regularly ({@code false}) or only if required ({@code true}).
+     */
+    public boolean isInReserve() {
+        return this.subAdm.getEntryRelationship().stream()
+                .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.COMP)
+                .map(POCDMT000040EntryRelationship::getAct)
+                .filter(Objects::nonNull)
+                .filter(act -> TemplateIds.isInList(IN_RESERVE, act.getTemplateId()))
+                .filter(act -> act.getCode() != null)
+                .filter(act -> MedicationDosageQualifier.CODE_SYSTEM_ID.equals(act.getCode().getCodeSystem()))
+                .findAny()
+                .map(act -> act.getCode().getCode())
+                .map(MedicationDosageQualifier::getEnum)
+                .map(substitution -> substitution == MedicationDosageQualifier.AS_REQUIRED_QUALIFIER_VALUE)
+                .orElse(false); // Default is regular medication
     }
 
     /**

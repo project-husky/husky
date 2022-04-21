@@ -133,7 +133,8 @@ public class CcePreEntryDigester {
                 preEntry.isSubstitutionPermitted(),
                 preEntry.getTreatmentReason().orElse(null),
                 preEntry.getPatientMedicationInstructions().orElse(null),
-                preEntry.getFulfillmentInstructions().orElse(null)
+                preEntry.getFulfillmentInstructions().orElse(null),
+                preEntry.isInReserve()
         );
     }
 

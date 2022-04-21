@@ -39,6 +39,11 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
     private String fulfilmentInstructions;
 
     /**
+     * Whether the treatment is to be taken regularly ({@code false}) or only if required ({@code true}).
+     */
+    private boolean inReserve;
+
+    /**
      * The reference to the original MTP entry if this one is consolidated (i.e. part of a PMLC document instead of an
      * MTP one).
      */
@@ -119,6 +124,8 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
      * @param treatmentReason               The treatment reason or {@code null} if it isn't provided.
      * @param patientMedicationInstructions The patient medication instructions or {@code null} if it isn't provided.
      * @param fulfilmentInstructions        The fulfilment instructions or {@code null} if it isn't provided.
+     * @param inReserve                     Whether the treatment is to be taken regularly ({@code false}) or only if
+     *                                      required ({@code true}).
      * @throws IllegalArgumentException if plannedItemValidityStop is before plannedItemValidityStart.
      */
     public EmedMtpEntryDigest(final Instant planningTime,
@@ -139,7 +146,8 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
                               @Nullable final EmedReference originalMtpReference,
                               @Nullable final String treatmentReason,
                               @Nullable final String patientMedicationInstructions,
-                              @Nullable final String fulfilmentInstructions) {
+                              @Nullable final String fulfilmentInstructions,
+                              final boolean inReserve) {
         super(planningTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
                 annotationComment);
         this.dosageInstructions = Objects.requireNonNull(dosageInstructions);
@@ -153,6 +161,7 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
         this.treatmentReason = treatmentReason;
         this.patientMedicationInstructions = patientMedicationInstructions;
         this.fulfilmentInstructions = fulfilmentInstructions;
+        this.inReserve = inReserve;
         if (this.plannedItemValidityStop != null && this.plannedItemValidityStop.isBefore(this.plannedItemValidityStart)) {
             throw new IllegalArgumentException("The planned item validity shall be a valid interval");
         }
@@ -277,12 +286,21 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
         this.treatmentReason = treatmentReason;
     }
 
+    public boolean isInReserve() {
+        return this.inReserve;
+    }
+
+    public void setInReserve(final boolean inReserve) {
+        this.inReserve = inReserve;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof final EmedMtpEntryDigest that)) return false;
         if (!super.equals(o)) return false;
-        return substitutionPermitted == that.substitutionPermitted
+        return inReserve == that.inReserve
+                && substitutionPermitted == that.substitutionPermitted
                 && dosageInstructions.equals(that.dosageInstructions)
                 && Objects.equals(fulfilmentInstructions, that.fulfilmentInstructions)
                 && Objects.equals(originalMtpReference, that.originalMtpReference)
@@ -297,16 +315,16 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), dosageInstructions, fulfilmentInstructions, originalMtpReference,
-                patientMedicationInstructions, product, repeatNumber, routeOfAdministration, plannedItemValidityStart,
-                plannedItemValidityStop, substitutionPermitted, treatmentReason);
+        return Objects.hash(super.hashCode(), dosageInstructions, fulfilmentInstructions, inReserve,
+                originalMtpReference, patientMedicationInstructions, product, repeatNumber, routeOfAdministration,
+                plannedItemValidityStart, plannedItemValidityStop, substitutionPermitted, treatmentReason);
     }
 
     @Override
     public String toString() {
         return "EmedMtpEntryDigest{" +
                 "annotationComment='" + this.annotationComment + '\'' +
-                ", planningTime=" + this.itemTime +
+                ", itemTime=" + this.itemTime +
                 ", documentAuthor=" + this.documentAuthor +
                 ", documentId='" + this.documentId + '\'' +
                 ", entryId='" + this.entryId + '\'' +
@@ -315,6 +333,7 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
                 ", sequence=" + this.sequence +
                 ", dosageInstructions=" + this.dosageInstructions +
                 ", fulfilmentInstructions='" + this.fulfilmentInstructions + '\'' +
+                ", inReserve=" + this.inReserve +
                 ", originalMtpReference=" + this.originalMtpReference +
                 ", patientMedicationInstructions='" + this.patientMedicationInstructions + '\'' +
                 ", product=" + this.product +

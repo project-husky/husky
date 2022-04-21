@@ -98,6 +98,7 @@ public class TemplateIds {
     public static final String SUBSTITUTION_PERMISSION = "1.3.6.1.4.1.19376.1.9.1.3.9.1";
     public static final String SUBSTITUTION_ACT = "1.3.6.1.4.1.19376.1.9.1.3.9.2";
     public static final String RENEWAL_PERIOD = "1.3.6.1.4.1.19376.1.9.1.3.15";
+    public static final String IN_RESERVE = "2.16.756.5.30.1.1.10.10";
 
     /**
      * CDA-CH Author (cdach_other_Author).

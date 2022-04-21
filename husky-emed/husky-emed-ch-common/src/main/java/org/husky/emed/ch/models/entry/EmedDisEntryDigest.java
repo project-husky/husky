@@ -39,6 +39,11 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
     private String fulfilmentNotes;
 
     /**
+     * Whether the treatment is to be taken regularly ({@code false}) or only if required ({@code true}).
+     */
+    private boolean inReserve;
+
+    /**
      * The targeted MTP entry reference or {@code null}.
      */
     @Nullable
@@ -95,6 +100,8 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
      * @param quantity                      The dispensed medication quantity.
      * @param patientMedicationInstructions The patient medication instructions or {@code null} if it isn't provided.
      * @param fulfilmentNotes               The fulfilment notes or {@code null} if it isn't provided.
+     * @param inReserve                     Whether the treatment is to be taken regularly ({@code false}) or only if
+     *                                      required ({@code true}).
      */
     public EmedDisEntryDigest(final Instant dispenseTime,
                               final String documentId,
@@ -111,7 +118,8 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
                               final MedicationProduct product,
                               final Quantity quantity,
                               @Nullable final String patientMedicationInstructions,
-                              @Nullable final String fulfilmentNotes) {
+                              @Nullable final String fulfilmentNotes,
+                              final boolean inReserve) {
         super(dispenseTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
                 annotationComment);
         this.dispenseType = Objects.requireNonNull(dispenseType);
@@ -122,6 +130,7 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
         this.quantity = Objects.requireNonNull(quantity);
         this.patientMedicationInstructions = patientMedicationInstructions;
         this.fulfilmentNotes = fulfilmentNotes;
+        this.inReserve = inReserve;
     }
 
     /**
@@ -207,45 +216,56 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
         this.quantity = quantity;
     }
 
+    public boolean isInReserve() {
+        return this.inReserve;
+    }
+
+    public void setInReserve(final boolean inReserve) {
+        this.inReserve = inReserve;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof final EmedDisEntryDigest that)) return false;
         if (!super.equals(o)) return false;
-        return otc == that.otc
+        return inReserve == that.inReserve
+                && otc == that.otc
                 && dispenseType == that.dispenseType
                 && Objects.equals(fulfilmentNotes, that.fulfilmentNotes)
                 && Objects.equals(mtpEntryRef, that.mtpEntryRef)
                 && Objects.equals(patientMedicationInstructions, that.patientMedicationInstructions)
                 && Objects.equals(preEntryRef, that.preEntryRef)
-                && product.equals(that.product)
-                && quantity.equals(that.quantity);
+                && Objects.equals(product, that.product)
+                && Objects.equals(quantity, that.quantity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), dispenseType, fulfilmentNotes, mtpEntryRef, otc, patientMedicationInstructions, preEntryRef, product, quantity);
+        return Objects.hash(super.hashCode(), dispenseType, fulfilmentNotes, inReserve, mtpEntryRef, otc,
+                patientMedicationInstructions, preEntryRef, product, quantity);
     }
 
     @Override
     public String toString() {
         return "EmedDisEntryDigest{" +
-                "dispenseType=" + this.dispenseType +
-                ", fulfilmentNotes='" + this.fulfilmentNotes + '\'' +
-                ", mtpEntryRef=" + this.mtpEntryRef +
-                ", otc=" + this.otc +
-                ", patientMedicationInstructions='" + this.patientMedicationInstructions + '\'' +
-                ", preEntryRef=" + this.preEntryRef +
-                ", product=" + this.product +
-                ", quantity=" + this.quantity +
-                ", annotationComment='" + this.annotationComment + '\'' +
-                ", dispenseTime=" + this.itemTime +
+                "annotationComment='" + this.annotationComment + '\'' +
+                ", itemTime=" + this.itemTime +
                 ", documentAuthor=" + this.documentAuthor +
                 ", documentId='" + this.documentId + '\'' +
                 ", entryId='" + this.entryId + '\'' +
                 ", medicationTreatmentId='" + this.medicationTreatmentId + '\'' +
                 ", sectionAuthor=" + this.sectionAuthor +
                 ", sequence=" + this.sequence +
+                ", dispenseType=" + this.dispenseType +
+                ", fulfilmentNotes='" + this.fulfilmentNotes + '\'' +
+                ", inReserve=" + this.inReserve +
+                ", mtpEntryRef=" + this.mtpEntryRef +
+                ", otc=" + this.otc +
+                ", patientMedicationInstructions='" + this.patientMedicationInstructions + '\'' +
+                ", preEntryRef=" + this.preEntryRef +
+                ", product=" + this.product +
+                ", quantity=" + this.quantity +
                 '}';
     }
 }

@@ -96,7 +96,8 @@ public class CceMtpEntryDigester {
                 this.getReferenceToOriginalMtpEntry(substanceAdministration).orElse(null),
                 mtpEntry.getTreatmentReason().orElse(null),
                 mtpEntry.getPatientMedicationInstructions().orElse(null),
-                mtpEntry.getFulfillmentInstructions().orElse(null)
+                mtpEntry.getFulfillmentInstructions().orElse(null),
+                mtpEntry.isInReserve()
         );
     }
 
