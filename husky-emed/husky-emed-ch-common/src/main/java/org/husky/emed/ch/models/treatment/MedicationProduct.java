@@ -40,9 +40,8 @@ public class MedicationProduct {
     private String atcCode;
 
     /**
-     * The medication name or {@code null} if it's not known.
+     * The medication name.
      */
-    @Nullable
     private String name;
 
     /**

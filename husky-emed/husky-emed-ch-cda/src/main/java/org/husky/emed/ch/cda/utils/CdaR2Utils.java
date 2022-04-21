@@ -40,7 +40,7 @@ public class CdaR2Utils {
      * @return the single non-blank string from {@code xmlMixed}.
      * @throws IllegalArgumentException if there is zero or more than one {@code xmlMixed} value.
      */
-    public String getSingleNonNullMixedOrThrow(final ANY any) {
+    public static String getSingleNonNullMixedOrThrow(final ANY any) {
         final List<String> mixed = any.getXmlMixed();
         if (mixed == null || mixed.size() != 1) {
             throw new IllegalArgumentException("");

@@ -11,7 +11,6 @@ package org.husky.emed.ch.models.common;
 
 import org.husky.common.hl7cdar2.PQ;
 import org.husky.emed.ch.enums.RegularUnitCodeAmbu;
-import org.husky.emed.ch.enums.UnitCode;
 
 import java.util.Objects;
 
@@ -51,7 +50,7 @@ public class QuantityWithRegularUnit {
      */
     public static QuantityWithRegularUnit fromPq(final PQ qty) {
         Objects.requireNonNull(qty, "qty shall not be null in fromPq()");
-        if (!UnitCode.isInValueSet(qty.getUnit())) {
+        if (!RegularUnitCodeAmbu.isInValueSet(qty.getUnit())) {
             throw new IllegalArgumentException("The quantity unit '" + qty.getUnit() + "' is invalid");
         }
         return new QuantityWithRegularUnit(

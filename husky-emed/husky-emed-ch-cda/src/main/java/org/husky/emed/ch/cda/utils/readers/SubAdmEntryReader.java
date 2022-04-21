@@ -10,16 +10,16 @@
 package org.husky.emed.ch.cda.utils.readers;
 
 import org.husky.common.hl7cdar2.*;
-import org.husky.emed.ch.errors.InvalidEmedContentException;
-import org.husky.emed.ch.enums.ActSubstanceAdminSubstitutionCode;
 import org.husky.emed.ch.cda.utils.EntryRelationshipUtils;
 import org.husky.emed.ch.cda.utils.TemplateIds;
-
-import static org.husky.emed.ch.cda.utils.TemplateIds.SUBSTITUTION_PERMISSION;
+import org.husky.emed.ch.enums.ActSubstanceAdminSubstitutionCode;
+import org.husky.emed.ch.errors.InvalidEmedContentException;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
+import static org.husky.emed.ch.cda.utils.TemplateIds.SUBSTITUTION_PERMISSION;
 
 /**
  * A reader for CDA-CH-EMED SubstanceAdministration elements.
@@ -76,7 +76,7 @@ public class SubAdmEntryReader extends DosageInstructionsReader {
             .findAny()
             .map(act -> act.getCode().getCode())
             .map(ActSubstanceAdminSubstitutionCode::getEnum)
-            .map(substitution -> substitution == ActSubstanceAdminSubstitutionCode.EQUIVALENT_L1)
+            .map(substitution -> substitution != ActSubstanceAdminSubstitutionCode.NONE_L1)
             .orElse(true);
     }
 

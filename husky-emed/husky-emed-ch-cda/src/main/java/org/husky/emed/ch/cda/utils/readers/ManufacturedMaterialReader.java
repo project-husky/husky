@@ -69,11 +69,10 @@ public class ManufacturedMaterialReader {
     }
 
     /**
-     * Returns the name or {@code null} if it doesn't exist.
+     * Returns the name.
      */
-    @Nullable
     public String getName() {
-        return CdaR2Utils.getSingleNullableMixedOrThrow(this.material.getName());
+        return CdaR2Utils.getSingleNonNullMixedOrThrow(this.material.getName());
     }
 
     /**
