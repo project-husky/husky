@@ -258,8 +258,8 @@ public class CceDocumentDigester {
         final var names = new NameReader(patient.getName());
         return new PatientDigest(
                 patientRole.getId().stream().map(IiUtils::getNormalizedCx).toList(),
-                names.getFirstLegalFamilyName(),
                 names.getFirstLegalGivenName(),
+                names.getFirstLegalFamilyName(),
                 Optional.ofNullable(patient.getAdministrativeGenderCode()).map(CD::getCode).map(AdministrativeGender::getEnum).orElseThrow(),
                 Optional.ofNullable(patient.getBirthTime()).map(DateTimes::toLocalDate).orElse(null)
         );
