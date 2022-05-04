@@ -19,12 +19,46 @@
 		<dependency>
 			<groupId>org.verapdf</groupId>
 			<artifactId>validation-model</artifactId>
+			<exclusions>
+				<!-- Exclude unused dependencies -->
+				<exclusion>
+					<groupId>javax.xml.bind</groupId>
+					<artifactId>jaxb-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.xml.bind</groupId>
+					<artifactId>jaxb-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>net.java.dev.stax-utils</groupId>
+					<artifactId>stax-utils</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.verapdf</groupId>
+					<artifactId>feature-reporting</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.verapdf</groupId>
+					<artifactId>metadata-fixer</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- Schematron validator (Apache 2.0) -->
 		<dependency>
 			<groupId>com.helger.schematron</groupId>
 			<artifactId>ph-schematron-api</artifactId>
+			<exclusions>
+				<!-- Exclude unused dependencies -->
+				<exclusion>
+					<groupId>org.apache.httpcomponents</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.helger.schematron</groupId>
