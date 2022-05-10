@@ -10,24 +10,21 @@
  */
 package org.husky.xua.helpers;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.opensaml.core.config.InitializationService;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.opensaml.core.xml.io.Marshaller;
 import org.opensaml.core.xml.io.Unmarshaller;
 import org.opensaml.core.xml.util.XMLObjectSupport;
 import org.opensaml.saml.saml2.core.Assertion;
+import org.opensaml.security.credential.BasicCredential;
 import org.opensaml.security.credential.Credential;
-import org.opensaml.security.credential.CredentialContextSet;
-import org.opensaml.security.credential.UsageType;
 import org.opensaml.xmlsec.SignatureSigningParameters;
 import org.opensaml.xmlsec.signature.Signature;
+import org.opensaml.xmlsec.signature.impl.SignatureImpl;
 import org.opensaml.xmlsec.signature.support.SignatureSupport;
 import org.opensaml.xmlsec.signature.support.Signer;
 import org.w3c.dom.Element;
 
-import javax.crypto.SecretKey;
 import javax.xml.crypto.dsig.CanonicalizationMethod;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -35,21 +32,25 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.StringWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.security.KeyFactory;
 import java.security.KeyStore;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.util.Collection;
-import java.util.List;
+import java.security.interfaces.RSAPrivateCrtKey;
+import java.security.spec.RSAPublicKeySpec;
 import java.util.Objects;
 
 /**
- * husky
+ * Utility to sign a XUA assertion with the given private key.
  *
  * @author Quentin Ligier
  **/
 public class SignXua {
 
     public static void main(String[] args) throws Exception {
+        // Initialize the library
+        InitializationService.initialize();
+
         // The XUA file to sign (it should contain no signature)
         final String xuaFile = "xua/assertion-hcp.xml";
 
@@ -67,60 +68,12 @@ public class SignXua {
         final KeyStore ks = KeyStore.getInstance("JKS");
         ks.load(SignXua.class.getResourceAsStream("/husky_test_keystore1.jks"), "password".toCharArray());
 
-        final Credential credential = new Credential() {
-            @Nullable
-            @Override
-            public String getEntityId() {
-                return null;
-            }
+        final RSAPrivateCrtKey privateKey = (RSAPrivateCrtKey) ((KeyStore.PrivateKeyEntry) ks.getEntry("testkey",
+                    new KeyStore.PasswordProtection("password".toCharArray()))).getPrivateKey();
+        final var publicKey =
+                KeyFactory.getInstance("RSA").generatePublic(new RSAPublicKeySpec(privateKey.getModulus(), privateKey.getPublicExponent()));
 
-            @Nullable
-            @Override
-            public UsageType getUsageType() {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            public Collection<String> getKeyNames() {
-                return List.of("testkey");
-            }
-
-            @Nullable
-            @Override
-            public PublicKey getPublicKey() {
-                return null;
-            }
-
-            @Nullable
-            @Override
-            public PrivateKey getPrivateKey() {
-                try {
-                    return ((KeyStore.PrivateKeyEntry) ks.getEntry("testkey",
-                            new KeyStore.PasswordProtection("password".toCharArray()))).getPrivateKey();
-                } catch (final Exception e) {
-                    return null;
-                }
-            }
-
-            @Nullable
-            @Override
-            public SecretKey getSecretKey() {
-                return null;
-            }
-
-            @Nullable
-            @Override
-            public CredentialContextSet getCredentialContextSet() {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            public Class<? extends Credential> getCredentialType() {
-                return Credential.class;
-            }
-        };
+        final Credential credential = new BasicCredential(publicKey, privateKey);
 
         // Prepare the signature
         final Signature signature = (Signature) XMLObjectProviderRegistrySupport.getBuilderFactory().getBuilder(Signature.DEFAULT_ELEMENT_NAME)
@@ -151,5 +104,11 @@ public class SignXua {
         StreamResult result = new StreamResult(new StringWriter());
         transformer.transform(source, result);
         System.out.println(result.getWriter().toString());
+        Files.writeString(Path.of(SignXua.class.getClassLoader().getResource(xuaFile).toURI()),
+                result.getWriter().toString());
+
+        // Check the XML Signature
+        boolean validated = ((SignatureImpl) signature).getXMLSignature().checkSignatureValue(publicKey);
+        System.out.println("Can be validated: " + validated);
     }
 }

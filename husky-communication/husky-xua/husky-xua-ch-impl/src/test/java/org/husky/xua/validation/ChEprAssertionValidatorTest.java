@@ -11,7 +11,9 @@ package org.husky.xua.validation;
 
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.husky.communication.ch.enums.PurposeOfUse;
 import org.husky.communication.ch.enums.Role;
+import org.husky.xua.helpers.SignXua;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -21,15 +23,23 @@ import org.opensaml.core.xml.io.Unmarshaller;
 import org.opensaml.core.xml.util.XMLObjectSupport;
 import org.opensaml.saml.common.assertion.ValidationResult;
 import org.opensaml.saml.saml2.core.Assertion;
+import org.opensaml.security.credential.BasicCredential;
+import org.opensaml.security.credential.UsageType;
+import org.opensaml.security.credential.impl.CollectionCredentialResolver;
+import org.opensaml.xmlsec.signature.support.impl.ExplicitKeySignatureTrustEngine;
 import org.w3c.dom.Element;
 
+import java.security.KeyFactory;
+import java.security.KeyStore;
+import java.security.interfaces.RSAPrivateCrtKey;
+import java.security.spec.RSAPublicKeySpec;
 import java.time.Duration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.CLOCK_SKEW;
 
 @Disabled
@@ -46,7 +56,26 @@ class ChEprAssertionValidatorTest {
     public static void setUpBeforeClass() throws Exception {
         // Initialize the library
         InitializationService.initialize();
-        VALIDATOR = new ChEprAssertionValidator(Duration.ofSeconds(3), null);
+
+        // Load the keystore
+        final KeyStore ks = KeyStore.getInstance("JKS");
+        ks.load(SignXua.class.getResourceAsStream("/husky_test_keystore1.jks"), "password".toCharArray());
+
+        final RSAPrivateCrtKey privateKey = (RSAPrivateCrtKey) ((KeyStore.PrivateKeyEntry) ks.getEntry("testkey",
+                new KeyStore.PasswordProtection("password".toCharArray()))).getPrivateKey();
+        final var publicKey =
+                KeyFactory.getInstance("RSA").generatePublic(new RSAPublicKeySpec(privateKey.getModulus(), privateKey.getPublicExponent()));
+
+        final var credential = new BasicCredential(publicKey);
+        credential.setUsageType(UsageType.SIGNING);
+        credential.setEntityId("xua.hin.ch");
+
+        final var trustEngine = new ExplicitKeySignatureTrustEngine(
+                new CollectionCredentialResolver(List.of(credential)),
+                new NoopKeyInfoCredentialResolver() // A KeyInfo element is not expected in the Signature
+        );
+
+        VALIDATOR = new ChEprAssertionValidator(Duration.ofSeconds(3), trustEngine);
         UNMARSHALLER = XMLObjectSupport.getUnmarshaller(Assertion.TYPE_NAME);
         VALIDATION_PARAMS.put(CLOCK_SKEW, Duration.ofDays(3650));
     }
@@ -58,8 +87,17 @@ class ChEprAssertionValidatorTest {
         assertNotNull(result);
         assertEquals(ValidationResult.VALID, result.getResult());
         assertEquals(Role.HEALTHCARE_PROFESSIONAL, result.getRole());
+        assertEquals(PurposeOfUse.NORMAL_ACCESS, result.getPurposeOfUse());
+        assertEquals("761337610411353650", result.getPatientEprSpid());
         assertEquals("2000000090092", result.getResponsibleSubjectId());
-        assertEquals(null, result.getResponsibleSubjectId());
+        assertEquals("Martina Musterarzt", result.getSubjectName());
+        assertEquals("http://ihe.connectathon.XUA/X-ServiceProvider-IHE-Connectathon", result.getAudienceRestriction());
+        assertEquals("3.3.3.1", result.getHomeCommunityId());
+        assertEquals(List.of("urn:oid:2.2.2.1", "urn:oid:2.2.2.2", "urn:oid:2.2.2.3"), result.getOrganizationsId());
+        assertEquals(List.of("Name of group with id urn:oid:2.2.2.1", "Name of group with id urn:oid:2.2.2.2", "Name of group with id urn:oid:2.2.2.3"), result.getOrganizationsName());
+        assertNull(result.getAssistantGln());
+        assertNull(result.getAssistantName());
+        assertNull(result.getTechnicalUserId());
     }
 
     private Assertion unmarshal(final String fileName) throws Exception {
