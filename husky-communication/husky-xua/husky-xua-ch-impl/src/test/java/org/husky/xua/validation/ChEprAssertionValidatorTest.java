@@ -15,7 +15,6 @@ import org.husky.communication.ch.enums.PurposeOfUse;
 import org.husky.communication.ch.enums.Role;
 import org.husky.xua.helpers.SignXua;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.opensaml.core.config.InitializationService;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
@@ -42,11 +41,24 @@ import java.util.Objects;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.CLOCK_SKEW;
 
-@Disabled
+/**
+ * Tests for the {@link ChEprAssertionValidator} class.
+ *
+ * @author Quentin Ligier
+ */
 class ChEprAssertionValidatorTest {
 
+    /**
+     * A validator with the 'husky_test_keystore1.jks' public key to validate signatures.
+     */
     @MonotonicNonNull
     private static ChEprAssertionValidator VALIDATOR = null;
+
+    /**
+     * A validator with no public key to validate signatures.
+     */
+    @MonotonicNonNull
+    private static ChEprAssertionValidator UNVALIDATOR = null;
     @MonotonicNonNull
     private static Unmarshaller UNMARSHALLER = null;
 
@@ -76,6 +88,10 @@ class ChEprAssertionValidatorTest {
         );
 
         VALIDATOR = new ChEprAssertionValidator(Duration.ofSeconds(3), trustEngine);
+        UNVALIDATOR = new ChEprAssertionValidator(Duration.ofSeconds(3), new ExplicitKeySignatureTrustEngine(
+                new CollectionCredentialResolver(),
+                new NoopKeyInfoCredentialResolver()
+        ));
         UNMARSHALLER = XMLObjectSupport.getUnmarshaller(Assertion.TYPE_NAME);
         VALIDATION_PARAMS.put(CLOCK_SKEW, Duration.ofDays(3650));
     }
@@ -98,6 +114,62 @@ class ChEprAssertionValidatorTest {
         assertNull(result.getAssistantGln());
         assertNull(result.getAssistantName());
         assertNull(result.getTechnicalUserId());
+    }
+
+    @Test
+    void testValidSignatureWithoutPublicKey() throws Exception {
+        final var assertion = this.unmarshal("assertion-hcp.xml");
+        final var result = UNVALIDATOR.validate(assertion, VALIDATION_PARAMS);
+        assertNotNull(result);
+        assertEquals(ValidationResult.INVALID, result.getResult());
+        assertEquals("Signature of Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' from Issuer 'xua.hin.ch' was not valid", result.getContext().getValidationFailureMessage());
+    }
+
+    @Test
+    void testInvalidSignatureWithPublicKey() throws Exception {
+        final var assertion = this.unmarshal("assertion-hcp.xml");
+        final var signatureValue = assertion.getSignature().getDOM().getElementsByTagNameNS("http://www.w3" +
+                ".org/2000/09/xmldsig#", "SignatureValue").item(0);
+        signatureValue.setTextContent(signatureValue.getTextContent().replace('a', 'e')); // Mess with the signature
+        final var result = VALIDATOR.validate(assertion, VALIDATION_PARAMS);
+        assertNotNull(result);
+        assertEquals(ValidationResult.INVALID, result.getResult());
+        assertEquals("Signature of Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' from Issuer 'xua.hin.ch' was not valid", result.getContext().getValidationFailureMessage());
+    }
+
+    @Test
+    void testInvalidReference() throws Exception {
+        final var assertion = this.unmarshal("assertion-hcp.xml");
+        final var reference = (Element) assertion.getSignature().getDOM().getElementsByTagNameNS("http://www.w3" +
+                ".org/2000/09/xmldsig#", "Reference").item(0);
+        reference.setAttribute("URI", reference.getAttribute("URI").replace('0', '6')); // Mess with the reference
+        final var result = VALIDATOR.validate(assertion, VALIDATION_PARAMS);
+        assertNotNull(result);
+        assertEquals(ValidationResult.INVALID, result.getResult());
+        assertEquals("Signature of Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' from Issuer 'xua.hin.ch' was not valid", result.getContext().getValidationFailureMessage());
+    }
+
+    @Test
+    void testInvalidDigest() throws Exception {
+        final var assertion = this.unmarshal("assertion-hcp.xml");
+        final var digestValue = assertion.getSignature().getDOM().getElementsByTagNameNS("http://www.w3" +
+                ".org/2000/09/xmldsig#", "DigestValue").item(0);
+        digestValue.setTextContent(digestValue.getTextContent().replace('W', 'k')); // Mess with the digest
+        final var result = VALIDATOR.validate(assertion, VALIDATION_PARAMS);
+        assertNotNull(result);
+        assertEquals(ValidationResult.INVALID, result.getResult());
+        assertEquals("Signature of Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' from Issuer 'xua.hin.ch' was not valid", result.getContext().getValidationFailureMessage());
+    }
+
+    @Test
+    void testModifiedContent() throws Exception {
+        final var assertion = this.unmarshal("assertion-hcp.xml");
+        final var audience = assertion.getDOM().getElementsByTagNameNS("urn:oasis:names:tc:SAML:2.0:assertion", "Audience").item(0);
+        audience.setTextContent("Not the original content");
+        final var result = VALIDATOR.validate(assertion, VALIDATION_PARAMS);
+        assertNotNull(result);
+        assertEquals(ValidationResult.INVALID, result.getResult());
+        assertEquals("Signature of Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' from Issuer 'xua.hin.ch' was not valid", result.getContext().getValidationFailureMessage());
     }
 
     private Assertion unmarshal(final String fileName) throws Exception {
