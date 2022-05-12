@@ -102,9 +102,13 @@ public class ChEprAssertionValidator {
         conditionValidators.add(new ChEprAudienceRestrictionConditionValidator());
         conditionValidators.add(new ChEprDelegationRestrictionConditionValidator());
         if (oneTimeUseConditionExpires != null) {
+            final var storageService = new MemoryStorageService();
+            storageService.setId("memory-storage-saml-onetimeuse");
+            storageService.setCleanupInterval(Duration.ofSeconds(900));
+            storageService.initialize();
             final var cache = new ReplayCache();
-            cache.setStorage(new MemoryStorageService());
-            cache.doInitialize();
+            cache.setStorage(storageService);
+            cache.initialize();
             conditionValidators.add(new OneTimeUseConditionValidator(cache, oneTimeUseConditionExpires));
         }
 
@@ -144,7 +148,7 @@ public class ChEprAssertionValidator {
         }
 
         newStaticParameters.putIfAbsent(CLOCK_SKEW, Duration.ZERO);
-        newStaticParameters.put(SIGNATURE_REQUIRED, false);
+        newStaticParameters.put(SIGNATURE_REQUIRED, true);
         final var validationContext = new ValidationContext(newStaticParameters);
 
         // Extract the role that will influence other CH-EPR validators
