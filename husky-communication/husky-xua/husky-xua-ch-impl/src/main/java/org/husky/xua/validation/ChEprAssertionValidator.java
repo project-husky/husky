@@ -61,7 +61,7 @@ import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParamete
  * <ul>
  *     <li>{@link SAML2AssertionValidationParameters#CLOCK_SKEW}: Optional. If not present the default clock skew of
  *     {@link Duration#ZERO} will be used.
- *     <li>Others?
+ *     <li>{@link SAML2AssertionValidationParameters#COND_VALID_AUDIENCES}: Optional. The set of allowed audiences.
  * </ul>
  *
  * <p>The required conditions and attributes are extracted, verified then put in the {@link ValidationContext}
