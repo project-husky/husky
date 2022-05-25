@@ -477,7 +477,7 @@ public class CDAR2Extractor {
 	 */
 	public Person extractLegalAuthenticator() {
 		if (cda.getLegalAuthenticator() != null && cda.getLegalAuthenticator().getAssignedEntity() != null) {
-			logger.info("extract legal authenticator");
+			logger.debug("extract legal authenticator");
 			POCDMT000040AssignedEntity auth = cda.getLegalAuthenticator().getAssignedEntity();
 			var idNull = false;
 

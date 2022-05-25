@@ -601,6 +601,18 @@
 				<artifactId>husky-emed-ch-cda</artifactId>
 				<version>${husky.version}</version>
 			</dependency>
+        <dependency>
+			<groupId>com.sun.xml.messaging.saaj</groupId>
+			<artifactId>saaj-impl</artifactId>
+			<version>1.5.1</version>
+									<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>4.3.1</version>
+			<scope>test</scope>
+		</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>

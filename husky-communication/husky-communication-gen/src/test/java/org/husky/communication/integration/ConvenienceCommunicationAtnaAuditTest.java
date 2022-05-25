@@ -111,7 +111,8 @@ class ConvenienceCommunicationAtnaAuditTest extends XdsTestUtils {
 
 		// In this example, only the references to the documents are retrieved in
 		// metadata.
-		final QueryResponse response = convenienceCommunication.queryDocumentReferencesOnly(getDocumentsQuery, null);
+		final QueryResponse response = convenienceCommunication.queryDocumentReferencesOnly(getDocumentsQuery, null,
+				null);
 
 		assertTrue(response.getErrors().isEmpty());
 		assertEquals(Status.SUCCESS, response.getStatus());
@@ -165,7 +166,7 @@ class ConvenienceCommunicationAtnaAuditTest extends XdsTestUtils {
 				"1.2.820.99999.18508463736145106181926975526539403561455330316563", "urn:oid:1.1.4567334.1.6");
 
 		// send request to retrieve document
-		final RetrievedDocumentSet response = convenienceCommunication.retrieveDocument(documentRequest, null);
+		final RetrievedDocumentSet response = convenienceCommunication.retrieveDocument(documentRequest, null, null);
 
 		assertEquals(Status.SUCCESS, response.getStatus());
 		assertTrue(response.getErrors().isEmpty());
@@ -231,7 +232,7 @@ class ConvenienceCommunicationAtnaAuditTest extends XdsTestUtils {
 		setSubmissionMetadata(subSet, patientId);
 
 		// send request to submit document
-		var response = convenienceCommunication.submit(subSet, null);
+		var response = convenienceCommunication.submit(subSet, null, null);
 
 		// check if request was successful
 		assertTrue(response.getErrors().isEmpty());

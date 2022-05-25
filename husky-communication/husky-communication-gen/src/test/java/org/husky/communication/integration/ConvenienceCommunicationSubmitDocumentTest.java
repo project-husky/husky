@@ -133,7 +133,7 @@ class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 		setSubmissionMetadata(subSet, patientId);
 
 		// submit added documents
-		var response = convenienceCommunication.submit(subSet, null);
+		var response = convenienceCommunication.submit(subSet, null, null);
 
 		// checks whether the document has been successfully submitted
 		assertTrue(response.getErrors().isEmpty());
@@ -164,7 +164,7 @@ class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 		setSubmissionMetadata(subSet, patientId);
 
 		// submit added documents
-		var response = convenienceCommunication.submit(subSet, null);
+		var response = convenienceCommunication.submit(subSet, null, null);
 
 		// checks whether the document has been successfully submitted
 		assertTrue(response.getErrors().isEmpty());
@@ -197,7 +197,7 @@ class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 		setSubmissionMetadata(subSet, patientId);
 
 		// submit added documents
-		var response = convenienceCommunication.submit(subSet, null);
+		var response = convenienceCommunication.submit(subSet, null, null);
 
 		// checks whether the submission of the document failed
 		assertEquals(Status.FAILURE, response.getStatus());
@@ -231,7 +231,7 @@ class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 		setSubmissionMetadata(subSet, patientId);
 
 		// submit added documents
-		var response = convenienceCommunication.submit(subSet, null);
+		var response = convenienceCommunication.submit(subSet, null, null);
 
 		// The entry UUID of the first submitted document is stored here, since it is
 		// needed when replacing the document.
@@ -253,7 +253,7 @@ class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 
 		// method to replace existing document with passed entry UUID is called. All
 		// added documents are submitted
-		response = convenienceCommunication.submitReplacement(subSet, entryUuid, null);
+		response = convenienceCommunication.submitReplacement(subSet, entryUuid, null, null);
 
 		// checks whether the document has been successfully replaced
 		assertTrue(response.getErrors().isEmpty());

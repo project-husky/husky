@@ -19,8 +19,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 import java.util.zip.ZipFile;
 
@@ -36,7 +34,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.apache.camel.CamelContext;
-import org.apache.camel.util.URISupport;
 import org.apache.commons.text.StringEscapeUtils;
 import org.husky.common.communication.AffinityDomain;
 import org.husky.common.communication.AtnaConfig;
@@ -133,7 +130,7 @@ public class ConvenienceCommunication extends CamelService {
     /**
      * Determines if XDS document metadata will be extracted automatically (e.g. from CDA documents)
      */
-	protected DocumentMetadataExtractionMode documentMetadataExtractionMode = DocumentMetadataExtractionMode.DEFAULT_EXTRACTION;
+	private DocumentMetadataExtractionMode documentMetadataExtractionMode = DocumentMetadataExtractionMode.DEFAULT_EXTRACTION;
 
     /**
      * Determines if SubmissionSet metadata will be extracted automatically (e.g. from CDA documents)
@@ -773,8 +770,8 @@ public class ConvenienceCommunication extends CamelService {
      * @throws Exception
      */
     public QueryResponse queryDocumentReferencesOnly(AbstractStoredQuery queryParameter,
-                                                     SecurityHeaderElement securityHeader) throws Exception {
-        return queryDocumentQuery(queryParameter, securityHeader, QueryReturnType.OBJECT_REF);
+			SecurityHeaderElement securityHeader, String messageId) throws Exception {
+		return queryDocumentQuery(queryParameter, securityHeader, QueryReturnType.OBJECT_REF, messageId);
     }
 
     /**
@@ -785,9 +782,10 @@ public class ConvenienceCommunication extends CamelService {
      * @return the IPF QueryResponse containing full document metadata
      * @throws Exception
      */
-    public QueryResponse queryDocuments(AbstractStoredQuery queryParameter, SecurityHeaderElement securityHeader)
+	public QueryResponse queryDocuments(AbstractStoredQuery queryParameter, SecurityHeaderElement securityHeader,
+			String messageId)
             throws Exception {
-        return queryDocumentQuery(queryParameter, securityHeader, QueryReturnType.LEAF_CLASS);
+		return queryDocumentQuery(queryParameter, securityHeader, QueryReturnType.LEAF_CLASS, messageId);
     }
 
     /**
@@ -801,7 +799,7 @@ public class ConvenienceCommunication extends CamelService {
      * @throws Exception
      */
     protected QueryResponse queryDocumentQuery(AbstractStoredQuery query, SecurityHeaderElement securityHeader,
-                                               QueryReturnType returnType)
+			QueryReturnType returnType, String messageId)
             throws Exception {
         final var queryRegistry = new QueryRegistry(query.getIpfQuery());
         queryRegistry.setReturnType(returnType);
@@ -816,7 +814,7 @@ public class ConvenienceCommunication extends CamelService {
                 this.atnaConfigMode.equals(AtnaConfigMode.SECURE), AUDIT_CONTEXT);
         log.info(LOG_SEND_REQUEST, endpoint);
 
-        final var exchange = send(endpoint, queryRegistry, securityHeader, null);
+		final var exchange = send(endpoint, queryRegistry, securityHeader, messageId, null);
 
         return exchange.getMessage().getBody(QueryResponse.class);
     }
@@ -829,9 +827,10 @@ public class ConvenienceCommunication extends CamelService {
      * @return the IPF QueryResponse containing full folder metadata
      * @throws Exception
      */
-    public QueryResponse queryFolders(FindFoldersStoredQuery queryParameter, SecurityHeaderElement security)
+	public QueryResponse queryFolders(FindFoldersStoredQuery queryParameter, SecurityHeaderElement security,
+			String messageId)
             throws Exception {
-        return queryDocumentQuery(queryParameter, security, QueryReturnType.LEAF_CLASS);
+		return queryDocumentQuery(queryParameter, security, QueryReturnType.LEAF_CLASS, messageId);
     }
 
     /**
@@ -842,9 +841,10 @@ public class ConvenienceCommunication extends CamelService {
      * @return the IPF RetrievedDocumentSet
      * @throws Exception
      */
-    public RetrievedDocumentSet retrieveDocument(DocumentRequest docReq, SecurityHeaderElement security)
+	public RetrievedDocumentSet retrieveDocument(DocumentRequest docReq, SecurityHeaderElement security,
+			String messageId)
             throws Exception {
-        return retrieveDocuments(new DocumentRequest[]{docReq}, security);
+		return retrieveDocuments(new DocumentRequest[] { docReq }, security, messageId);
     }
 
     /**
@@ -855,7 +855,8 @@ public class ConvenienceCommunication extends CamelService {
      * @return the IPF RetrievedDocumentSet
      * @throws Exception
      */
-    public RetrievedDocumentSet retrieveDocuments(DocumentRequest[] docReq, SecurityHeaderElement security)
+	public RetrievedDocumentSet retrieveDocuments(DocumentRequest[] docReq, SecurityHeaderElement security,
+			String messageId)
             throws Exception {
         final var retrieveDocumentSet = new RetrieveDocumentSet();
 
@@ -874,7 +875,7 @@ public class ConvenienceCommunication extends CamelService {
                 this.atnaConfigMode.equals(AtnaConfigMode.SECURE), AUDIT_CONTEXT);
         log.info(LOG_SEND_REQUEST, endpoint);
 
-        final var exchange = send(endpoint, retrieveDocumentSet, security, null);
+		final var exchange = send(endpoint, retrieveDocumentSet, security, messageId, null);
 
         return exchange.getMessage().getBody(RetrievedDocumentSet.class);
     }
@@ -915,8 +916,8 @@ public class ConvenienceCommunication extends CamelService {
      * @return the IPF Response
      * @throws Exception if the transfer is not successful
      */
-    public Response submit(SecurityHeaderElement security) throws Exception {
-        return submit(security, null);
+	public Response submit(SecurityHeaderElement security, String messageId) throws Exception {
+		return submit(security, null, messageId);
     }
 
     /**
@@ -931,14 +932,15 @@ public class ConvenienceCommunication extends CamelService {
      * @return the IPF Response
      * @throws Exception if the transfer is not successful
      */
-    public Response submit(SubmissionSetMetadata submissionSetMetadata, SecurityHeaderElement security)
+	public Response submit(SubmissionSetMetadata submissionSetMetadata, SecurityHeaderElement security,
+			String messageId)
             throws Exception {
         if (txnData.getSubmissionSet() == null) {
             txnData.setSubmissionSet(new SubmissionSet());
         }
 
         submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
-        return submit(security);
+		return submit(security, messageId);
     }
 
     /**
@@ -956,7 +958,7 @@ public class ConvenienceCommunication extends CamelService {
      * @throws Exception if the transfer is not successful
      */
     public Response submitReplacement(SubmissionSetMetadata submissionSetMetadata, String idOfOriginDocument,
-                                      SecurityHeaderElement security)
+			SecurityHeaderElement security, String messageId)
             throws Exception {
         if (txnData.getSubmissionSet() == null) {
             txnData.setSubmissionSet(new SubmissionSet());
@@ -971,7 +973,7 @@ public class ConvenienceCommunication extends CamelService {
         txnData.getAssociations().add(association);
 
         submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
-        return submit(security, association);
+		return submit(security, association, messageId);
     }
 
     /**
@@ -982,18 +984,19 @@ public class ConvenienceCommunication extends CamelService {
      * @return the IPF Response
      * @throws Exception if the transfer is not successful
      */
-    private Response submit(SecurityHeaderElement security, Association association) throws Exception {
-		log.info("submit document");
+	private Response submit(SecurityHeaderElement security, Association association, String messageId)
+			throws Exception {
+		log.debug("submit document");
 		setDefaultKeystoreTruststore(affinityDomain.getRepositoryDestination());
 
         if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
-			log.info("extract submission set metadata");
+			log.debug("extract submission set metadata");
             txnData.setSubmissionSet(generateDefaultSubmissionSetAttributes());
             linkDocumentEntryWithSubmissionSet();
         }
 
         if (association != null) {
-			log.info("set association data");
+			log.debug("set association data");
             if (txnData.getDocuments() != null && !txnData.getDocuments().isEmpty()
                     && txnData.getDocuments().get(0) != null) {
                 association.setSourceUuid(txnData.getDocuments().get(0).getDocumentEntry().getEntryUuid());
@@ -1003,20 +1006,17 @@ public class ConvenienceCommunication extends CamelService {
             }
         }
 
-		log.info("prepare submit of document");
+		log.debug("prepare submit of document");
 		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains(HTTPS_LITERAL);
-		Map<String, Object> properties = new HashMap<>();
-		properties.put("mtomEnabled", true);
-		URISupport.createQueryString(properties);
 		final var endpoint = String.format(
 				"xds-iti41://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=%s",
 				this.affinityDomain.getRepositoryDestination().getUri().toString().replace(HTTPS_LITERAL, "")
 						.replace(HTTP_LITERAL, ""),
                 SERVER_IN_LOGGER, SERVER_IN_LOGGER, SERVER_OUT_LOGGER, SERVER_OUT_LOGGER, secure,
 				this.atnaConfigMode.equals(AtnaConfigMode.SECURE), AUDIT_CONTEXT);
-        log.info(LOG_SEND_REQUEST, endpoint);
+		log.debug(LOG_SEND_REQUEST, endpoint);
 
-        final var exchange = send(endpoint, txnData, security, null);
+		final var exchange = send(endpoint, txnData, security, messageId, null);
 
         return exchange.getMessage().getBody(Response.class);
     }

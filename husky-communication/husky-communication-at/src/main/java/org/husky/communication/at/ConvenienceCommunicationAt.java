@@ -149,7 +149,7 @@ public class ConvenienceCommunicationAt extends ConvenienceCommunication {
 		getTxnData().getDocuments().add(doc);
 
 		if (docMetadata != null) {
-			if (documentMetadataExtractionMode == DocumentMetadataExtractionMode.DEFAULT_EXTRACTION) {
+			if (getAutomaticExtractionEnabled() == DocumentMetadataExtractionMode.DEFAULT_EXTRACTION) {
 				if (DocumentDescriptor.CDA_R2.equals(desc)) {
 					fixDocEntryAttributes(doc, docMetadata, desc);
 				}
@@ -340,10 +340,11 @@ public class ConvenienceCommunicationAt extends ConvenienceCommunication {
 	 *         document metadata
 	 * @throws Exception
 	 */
-	public QueryResponse queryDocumentReferencesOnly(Identificator patientId, SecurityHeaderElement assertion)
+	public QueryResponse queryDocumentReferencesOnly(Identificator patientId, SecurityHeaderElement assertion,
+			String messageId)
 			throws Exception {
 		return this.queryDocumentReferencesOnly(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED),
-				assertion);
+				assertion, messageId);
 	}
 
 	/**
@@ -355,8 +356,10 @@ public class ConvenienceCommunicationAt extends ConvenienceCommunication {
 	 * @return the IPF QueryResponse containing full document metadata</div>
 	 * @throws Exception
 	 */
-	public QueryResponse queryDocuments(Identificator patientId, SecurityHeaderElement assertion) throws Exception {
-		return this.queryDocuments(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED), assertion);
+	public QueryResponse queryDocuments(Identificator patientId, SecurityHeaderElement assertion, String messageId)
+			throws Exception {
+		return this.queryDocuments(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED), assertion,
+				messageId);
 	}
 
 	/**
@@ -373,9 +376,9 @@ public class ConvenienceCommunicationAt extends ConvenienceCommunication {
 	 * @throws Exception if the transfer is not successful
 	 */
 	public Response submit(Author author, Code codeContentType,
-			SecurityHeaderElement security) throws Exception {
+			SecurityHeaderElement security, String messageId) throws Exception {
 		generateSubmissionSetMetadata(author, codeContentType);
-		return submit(security);
+		return submit(security, messageId);
 	}
 
 }

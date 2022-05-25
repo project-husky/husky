@@ -62,7 +62,7 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 	 * @param assertion a security header element for example an assertion
 	 * @return the v3 pdq query response
 	 */
-	public V3PdqQueryResponse queryPatients(V3PdqQuery mpiQuery, SecurityHeaderElement assertion) {
+	public V3PdqQueryResponse queryPatients(V3PdqQuery mpiQuery, SecurityHeaderElement assertion, String messageId) {
 		final var queryResponse = new V3PdqQueryResponse();
 
 		/* The last pdq consumer response. */
@@ -72,7 +72,7 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 				PRPAIN201306UV02Type lastPdqConsumerResponse = null;
 				if (!mpiQuery.doContinueQuery()) {
 					lastPdqConsumerResponse = sendITI47Query(mpiQuery.getV3PdqConsumerQuery(), assertion,
-							this.pdqConsumerUri);
+							this.pdqConsumerUri, messageId);
 				} else {
 					final var continuationQuery = new V3PdqContinuationQuery(
 							mpiQuery.getV3PdqConsumerQuery().getSendingApplication(),
@@ -82,7 +82,7 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 							mpiQuery.getLastPdqConsumerResponse(), mpiQuery.getPageCount());
 					continuationQuery.setProcessingCode("T");
 					lastPdqConsumerResponse = sendITI47ContinuationQuery(continuationQuery, assertion,
-							this.pdqConsumerUri);
+							this.pdqConsumerUri, messageId);
 				}
 
 				var response = new V3PdqConsumerResponse(lastPdqConsumerResponse);
@@ -113,7 +113,7 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 						mpiQuery.getV3PdqConsumerQuery().getReceivingApplication(0),
 						mpiQuery.getV3PdqConsumerQuery().getReceivingFacility(0), lastPdqConsumerResponse);
 				var response = sendITI47ContinuationQuery(continuationCancel, assertion,
-						this.pdqConsumerUri);
+						this.pdqConsumerUri, messageId);
 
 				lastPdqConsumerResponse = new V3PdqConsumerResponse(response);
 				queryResponse.setSuccess(!lastPdqConsumerResponse.hasError());
@@ -162,7 +162,7 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 	}
 
 	private PRPAIN201306UV02Type sendITI47Query(V3PdqConsumerQuery request, SecurityHeaderElement assertion,
-			URI pdqDest) throws Exception {
+			URI pdqDest, String messageId) throws Exception {
 		final var endpoint = String.format(
 				"pdqv3-iti47://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&audit=%s&auditContext=#auditContext",
 				pdqDest.toString().replace("https://", ""), true, getAuditContext().isAuditEnabled());
@@ -175,7 +175,7 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 		outgoingHeaders.put("Content-Type",
 				"application/soap+xml; charset=UTF-8; action=\"urn:hl7-org:v3:PRPA_IN201305UV02\"");
 
-		final var exchange = send(endpoint, message, assertion, outgoingHeaders);
+		final var exchange = send(endpoint, message, assertion, messageId, outgoingHeaders);
 
 		var xml = exchange.getMessage().getBody(String.class);
 
@@ -183,7 +183,7 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 	}
 
 	private PRPAIN201306UV02Type sendITI47ContinuationQuery(V3PdqContinuationBase request,
-			SecurityHeaderElement assertion, URI pdqDest) throws Exception {
+			SecurityHeaderElement assertion, URI pdqDest, String messageId) throws Exception {
 		final var endpoint = String.format(
 				"pdqv3-iti47://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&supportContinuation=%s&defaultContinuationThreshold=50&audit=%s&auditContext=#auditContext",
 				pdqDest.toString().replace("https://", ""), true, true, getAuditContext().isAuditEnabled());
@@ -196,7 +196,7 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 		outgoingHeaders.put("Content-Type",
 				"application/soap+xml; charset=UTF-8; action=\"urn:hl7-org:v3:QUQI_IN000003UV01\"");
 
-		final var exchange = send(endpoint, message, assertion, outgoingHeaders);
+		final var exchange = send(endpoint, message, assertion, messageId, outgoingHeaders);
 
 		var xml = exchange.getMessage().getBody(String.class);
 

@@ -76,7 +76,8 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 * @return the list of string
 	 */
 	public List<String> queryPatientId(org.husky.fhir.structures.gen.FhirPatient patient,
-			List<String> queryDomainOids, List<String> queryDomainNamespaces, SecurityHeaderElement assertion) {
+			List<String> queryDomainOids, List<String> queryDomainNamespaces, SecurityHeaderElement assertion,
+			String messageId) {
 		List<String> domainToReturnOids = new LinkedList<>();
 
 		if (queryDomainOids != null) {
@@ -119,7 +120,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 			try {
 
 				v3PixConsumerResponse = sendQuery(v3PixConsumerQueryRequest, assertion,
-						this.pixQueryUri);
+						this.pixQueryUri, messageId);
 					final List<String> returnIds = new LinkedList<>();
 
 					for (String domainToReturnOid : domainToReturnOids) {
@@ -146,7 +147,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 * 
 	 * @return true, if successful
 	 */
-	public boolean addPatient(FhirPatient patient, SecurityHeaderElement assertion) {
+	public boolean addPatient(FhirPatient patient, SecurityHeaderElement assertion, String messageId) {
 		if (pixSource == null) {
 			pixSource = new V3PixSource(this.pixSourceUri, getCamelContext(), getAuditContext());
 		}
@@ -160,7 +161,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 		addDemographicData(patient, v3RecordAddedMessage);
 		try {
 			final V3Acknowledgement v3pixack = pixSource
-					.sendRecordAdded(v3RecordAddedMessage.getV3RecordAddedMessage(), assertion);
+					.sendRecordAdded(v3RecordAddedMessage.getV3RecordAddedMessage(), assertion, messageId);
 			ret = checkResponse(v3pixack);
 		} catch (final Exception e) {
 			LOGGER.error("addPatient failed", e);
@@ -183,7 +184,8 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 * 
 	 * @return true, if successful
 	 */
-	public boolean mergePatient(FhirPatient patient, String obsoleteId, SecurityHeaderElement assertion) {
+	public boolean mergePatient(FhirPatient patient, String obsoleteId, SecurityHeaderElement assertion,
+			String messageId) {
 		if (pixSource == null) {
 			pixSource = new V3PixSource(this.pixSourceUri, getCamelContext(), getAuditContext());
 		}
@@ -199,7 +201,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 				this.homeCommunityNamespace);
 		try {
 			final V3Acknowledgement v3pixack = pixSource
-					.sendMergePatients(v3pixSourceMsgMerge.getV3MergePatientsMessage(), assertion);
+					.sendMergePatients(v3pixSourceMsgMerge.getV3MergePatientsMessage(), assertion, messageId);
 			ret = checkResponse(v3pixack);
 		} catch (final Exception e) {
 			LOGGER.error("mergePatient failed", e);
@@ -218,7 +220,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 * 
 	 * @return true, if successful
 	 */
-	public boolean updatePatient(FhirPatient patient, SecurityHeaderElement assertion) {
+	public boolean updatePatient(FhirPatient patient, SecurityHeaderElement assertion, String messageId) {
 		if (pixSource == null) {
 			pixSource = new V3PixSource(this.pixSourceUri, getCamelContext(), getAuditContext());
 		}
@@ -228,7 +230,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 		addDemographicData(patient, v3RecordRevisedMessage);
 		try {
 			final V3Acknowledgement v3pixack = pixSource
-					.sendRecordRevised(v3RecordRevisedMessage.getV3RecordRevisedMessage(), assertion);
+					.sendRecordRevised(v3RecordRevisedMessage.getV3RecordRevisedMessage(), assertion, messageId);
 			return checkResponse(v3pixack);
 		} catch (final Exception e) {
 			LOGGER.error("updatePatient failed", e);
@@ -259,8 +261,8 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 * 
 	 * @return the string
 	 */
-	public String queryPatientId(FhirPatient patient, SecurityHeaderElement assertion) {
-		List<String> ids = queryPatientId(patient, null, null, assertion);
+	public String queryPatientId(FhirPatient patient, SecurityHeaderElement assertion, String messageId) {
+		List<String> ids = queryPatientId(patient, null, null, assertion, messageId);
 
 		if (ids != null && !ids.isEmpty()) {
 			return ids.get(0);
@@ -321,7 +323,8 @@ public class PixV3Query extends PixPdqV3QueryBase {
 		return null;
 	}
 
-	private PixV3QueryResponse sendQuery(PixV3QueryRequest request, SecurityHeaderElement assertion, URI pdqDest)
+	private PixV3QueryResponse sendQuery(PixV3QueryRequest request, SecurityHeaderElement assertion, URI pdqDest,
+			String messageId)
 			throws Exception {
 		final var endpoint = String.format(
 				"pixv3-iti45://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&audit=%s&auditContext=#auditContext",
@@ -333,7 +336,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 		outgoingHeaders.put("Content-Type",
 				"application/soap+xml; charset=UTF-8; action=\"urn:hl7-org:v3:PRPA_IN201309UV02\"");
 
-		final var exchange = send(endpoint, request, assertion, outgoingHeaders);
+		final var exchange = send(endpoint, request, assertion, messageId, outgoingHeaders);
 
 		return exchange.getMessage().getBody(PixV3QueryResponse.class);
 	}

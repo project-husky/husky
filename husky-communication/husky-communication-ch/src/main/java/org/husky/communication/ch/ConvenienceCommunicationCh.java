@@ -184,7 +184,7 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	public QueryResponse queryDocumentReferencesOnly(Identificator patientId, SecurityHeaderElement security)
 			throws Exception {
 		return queryDocumentQuery(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED), security,
-				QueryReturnType.OBJECT_REF);
+				QueryReturnType.OBJECT_REF, null);
 	}
 
 	/**
@@ -200,7 +200,7 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	public QueryResponse queryDocuments(Identificator patientId, SecurityHeaderElement security)
 			throws Exception {
 		return queryDocumentQuery(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED), security,
-				QueryReturnType.LEAF_CLASS);
+				QueryReturnType.LEAF_CLASS, null);
 	}
 
 	/**
@@ -222,7 +222,7 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 		final var author = new AuthorCh();
 		author.setRoleFunction(authorRole);
 		subSet.setAuthor(author);
-		return submit(subSet, security);
+		return submit(subSet, security, null);
 	}
 
 }
