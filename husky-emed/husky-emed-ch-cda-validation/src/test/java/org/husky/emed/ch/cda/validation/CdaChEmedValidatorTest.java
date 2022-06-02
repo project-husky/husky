@@ -22,12 +22,14 @@ import org.xml.sax.SAXException;
 
 import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
+import java.util.concurrent.*;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 /**
@@ -105,5 +107,43 @@ class CdaChEmedValidatorTest {
     void testInvalidPdf() {
         assertThrows(InvalidEmedContentException.class, () -> this.validator.validate(getClass().getResourceAsStream(
                 "/invalid-pdf.xml"), CceDocumentType.MTP));
+    }
+
+    @Test
+    @DisplayName("Ensure concurrent validations are not failing")
+    void testThreadSafety() {
+        final int nbOfThreads = Runtime.getRuntime().availableProcessors();
+        final var executor = Executors.newFixedThreadPool(nbOfThreads);
+        final var service = new ExecutorCompletionService<Boolean>(executor);
+        final List<Future<Boolean>> futures = new ArrayList<>(3);
+
+        try {
+            // Launch the threads
+            for (int i = 0; i < nbOfThreads; ++i) {
+                futures.add(service.submit(() -> {
+                    try {
+                        this.validator.validate(getClass().getResourceAsStream("/ehealthsuisse/1-1" +
+                             "-MedicationTreatmentPlan.xml"), CceDocumentType.MTP);
+                        return true;
+                    } catch (final Exception e) {
+                        e.printStackTrace();
+                        return false;
+                    }
+                }));
+            }
+            // And check the outputs
+            for (int i = 0; i < nbOfThreads; ++i) {
+                try {
+                    final Boolean bool = service.take().get();
+                    assertTrue(bool);
+                } catch (final ExecutionException | InterruptedException e) {
+                    fail();
+                }
+            }
+        } finally {
+            for (final var future : futures) {
+                future.cancel(true);
+            }
+        }
     }
 }
