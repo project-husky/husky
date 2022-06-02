@@ -9,7 +9,9 @@
  */
 package org.husky.emed.ch.cda.validation;
 
+import com.helger.commons.exception.InitializationException;
 import com.helger.schematron.svrl.jaxb.FailedAssert;
+import com.helger.schematron.svrl.jaxb.SchematronOutputType;
 import com.helger.schematron.xslt.SchematronResourceXSLT;
 import net.sf.saxon.xpath.XPathFactoryImpl;
 import org.husky.common.utils.xml.XmlFactories;
@@ -27,7 +29,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-import javax.annotation.concurrent.NotThreadSafe;
+import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.NamespaceContext;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.validation.Validator;
@@ -51,7 +53,7 @@ import java.util.regex.Pattern;
  * @author Quentin Ligier
  */
 @Component
-@NotThreadSafe // SchematronResourceXSLT and XPath are not thread-safe
+@ThreadSafe
 public class CdaChEmedValidator {
     private static final Logger log = LoggerFactory.getLogger(CdaChEmedValidator.class);
 
@@ -144,6 +146,7 @@ public class CdaChEmedValidator {
      * memory after the first validation). Useful for on-demand validation services.
      */
     public void prewarm() {
+        log.debug("Force-compiling all XSLT resources");
         this.mtpValidator.getXSLTProvider();
         this.preValidator.getXSLTProvider();
         this.disValidator.getXSLTProvider();
@@ -227,15 +230,15 @@ public class CdaChEmedValidator {
      * @throws InvalidEmedContentException if the CCE document is invalid.
      * @throws Exception                   if the validation raised an exception.
      */
-    synchronized void validateAgainstSchematron(final DOMSource cceSource,
+    void validateAgainstSchematron(final DOMSource cceSource,
                                    final CceDocumentType type) throws Exception {
         final var validator = this.getSchematronValidator(type);
-
-        final var output = validator.applySchematronValidationToSVRL(cceSource);
+        final SchematronOutputType output = validator.applySchematronValidationToSVRL(cceSource);
         if (output == null) {
             log.error("The Schematron XSLT '{}' is invalid", validator.getID());
-            throw new RuntimeException("The schematron XSLT file is invalid");
+            throw new InitializationException("The schematron XSLT file is invalid");
         }
+
         final var failedAssert = (FailedAssert) output.getActivePatternAndFiredRuleAndFailedAssert().stream()
                 .filter(FailedAssert.class::isInstance)
                 .findAny()
@@ -268,6 +271,7 @@ public class CdaChEmedValidator {
                 .map(bytes -> Base64.getDecoder().decode(bytes))
                 .orElse(null);
         if (pdf == null) {
+            log.debug("No PDF has been found in the CDA-CH-EMED document");
             return;
         }
         final var result = this.pdfValidator.validate(pdf);
