@@ -11,6 +11,7 @@ package org.husky.emed.ch.cda.validation;
 
 import com.helger.schematron.svrl.jaxb.FailedAssert;
 import com.helger.schematron.xslt.SchematronResourceXSLT;
+import net.sf.saxon.xpath.XPathFactoryImpl;
 import org.husky.common.utils.xml.XmlFactories;
 import org.husky.common.utils.xml.XmlSchemaValidator;
 import org.husky.emed.ch.enums.CceDocumentType;
@@ -33,7 +34,6 @@ import javax.xml.validation.Validator;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
@@ -116,7 +116,7 @@ public class CdaChEmedValidator {
         this.pmlcValidator = SchematronResourceXSLT.fromClassPath(CCE_XSLT_PATH + "cdachemed-PMLC-error.xslt", getClass().getClassLoader());
 
         this.pdfValidator = new PdfA12Validator();
-        final var xPath = XPathFactory.newInstance().newXPath();
+        final var xPath = new XPathFactoryImpl().newXPath();
         xPath.setNamespaceContext(new NamespaceContext() {
             @Override
             public String getNamespaceURI(final String prefix) {
@@ -133,6 +133,7 @@ public class CdaChEmedValidator {
                 throw new UnsupportedOperationException();
             }
         });
+        // Saxon's XPathExpression is thread-safe
         this.pdfXpathExpression = xPath.compile("//hl7:ClinicalDocument/hl7:component/hl7:structuredBody/"
                 + "hl7:component/hl7:section[hl7:templateId[@root=\"2.16.756.5.30.1.1.10.3.45\"]]/hl7:entry/"
                 + "hl7:observationMedia[hl7:templateId[@root=\"2.16.756.5.30.1.1.10.4.83\"]]/hl7:value/text()");
