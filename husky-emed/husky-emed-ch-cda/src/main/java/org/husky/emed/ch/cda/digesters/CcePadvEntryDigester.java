@@ -288,20 +288,25 @@ public class CcePadvEntryDigester {
                     targetedEntryRef,
                     targetedEntryType
             );
-            case COMMENT -> new EmedPadvCommentEntryDigest(
-                    padvDocumentEffectiveTime,
-                    padvDocumentId,
-                    documentAuthor,
-                    sectionAuthor,
-                    entryId,
-                    medicationTreatmentId,
-                    sequence,
-                    annotationComment,
-                    isCompleted,
-                    effectiveTime,
-                    targetedEntryRef,
-                    targetedEntryType
-            );
+            case COMMENT -> {
+                final String comment = Optional.ofNullable(observation.getText()).map(ED::getTextContent)
+                        .orElseThrow(() -> new InvalidEmedContentException("The comment is missing"));
+                yield new EmedPadvCommentEntryDigest(
+                        padvDocumentEffectiveTime,
+                        padvDocumentId,
+                        documentAuthor,
+                        sectionAuthor,
+                        entryId,
+                        medicationTreatmentId,
+                        sequence,
+                        annotationComment,
+                        isCompleted,
+                        effectiveTime,
+                        targetedEntryRef,
+                        targetedEntryType,
+                        comment
+                );
+            }
         };
     }
 
