@@ -12,43 +12,55 @@ package org.husky.emed.ch.models.common;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
- * A reference to an eMed document and/or item.
+ * A reference to an eMedication document and/or entry.
  *
  * @author Quentin Ligier
  */
 public class EmedReference {
 
     /**
-     * The EMED document ID; null if not specified.
+     * The document ID; {@code null} if not specified.
      */
-    @Nullable private String documentId;
+    @Nullable
+    private String documentId;
 
     /**
-     * The EMED item ID; null if not specified.
+     * The entry ID; {@code null} if not specified.
      */
-    @Nullable private String itemId;
+    @Nullable
+    private String entryId;
 
     /**
-     * Constructs a new EMED reference from a document ID and/or an item ID.
+     * Constructs a new eMedication reference from a document ID and/or an entry ID.
      *
-     * @param documentId The EMED document ID or {@code null} if not specified.
-     * @param itemId     The EMED item ID or {@code null} if not specified.
-     * @throws IllegalArgumentException if both documentId and itemId are null.
+     * @param documentId The document ID or {@code null} if not specified.
+     * @param entryId    The entry ID or {@code null} if not specified.
+     * @throws IllegalArgumentException if both documentId and entryId are null.
      */
     public EmedReference(@Nullable final String documentId,
-                         @Nullable final String itemId) {
-        if (documentId == null && itemId == null) {
-            throw new IllegalArgumentException("The document and item IDs shall not be both null");
+                         @Nullable final String entryId) {
+        if (documentId == null && entryId == null) {
+            throw new IllegalArgumentException("The document and entry IDs shall not be both null");
         }
         this.documentId = documentId;
-        this.itemId = itemId;
+        this.entryId = entryId;
     }
 
     /**
-     * Returns whether this instances references an item ({@code true}) or a document ({@code false}).
+     * Returns whether this instance references an entry ({@code true}) or a document ({@code false}).
      */
-    public boolean isItemReference() {
-        return this.itemId != null;
+    public boolean isEntryReference() {
+        return this.entryId != null;
+    }
+
+    public String toText() {
+        if (this.entryId != null) {
+            if (this.documentId != null) {
+                return String.format("entry '%s' (in document '%s')", this.entryId, this.documentId);
+            }
+            return String.format("entry '%s'", this.entryId);
+        }
+        return String.format("document '%s'", this.documentId);
     }
 
     @Nullable
@@ -57,19 +69,19 @@ public class EmedReference {
     }
 
     @Nullable
-    public String getItemId() {
-        return this.itemId;
+    public String getEntryId() {
+        return this.entryId;
     }
 
     public void setDocumentId(@Nullable final String documentId) {
         this.documentId = documentId;
     }
 
-    public void setItemId(@Nullable final String itemId) {
-        this.itemId = itemId;
+    public void setEntryId(@Nullable final String entryId) {
+        this.entryId = entryId;
     }
 
     public String toString() {
-        return "EmedReference(documentId=" + this.getDocumentId() + ", itemId=" + this.getItemId() + ")";
+        return "EmedReference(documentId=" + this.getDocumentId() + ", entryId=" + this.getEntryId() + ")";
     }
 }

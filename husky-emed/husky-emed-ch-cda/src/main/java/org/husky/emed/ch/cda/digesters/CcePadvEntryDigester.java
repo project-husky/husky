@@ -101,7 +101,7 @@ public class CcePadvEntryDigester {
         final Instant effectiveTime = this.getEffectiveTime(observation).orElse(padvDocumentEffectiveTime);
 
         // Fetch the referenced item
-        final var refItemId = Objects.requireNonNull(this.getItemReference(observation).getItemId());
+        final var refItemId = Objects.requireNonNull(this.getItemReference(observation).getEntryId());
         final EmedEntryDigest refEntryDigest = this.emedEntryService.getById(refItemId)
                 .orElseThrow(() -> new InvalidEmedContentException("Unable to find an item entry digest"));
         final var targetedEntryType = refEntryDigest.getEmedEntryType();
@@ -136,7 +136,7 @@ public class CcePadvEntryDigester {
                         .filter(Objects::nonNull)
                         .map(subAdm -> {
                             final EmedEntryDigest targetedEntry =
-                                    this.emedEntryService.getById(Objects.requireNonNull(targetedEntryRef.getItemId()))
+                                    this.emedEntryService.getById(Objects.requireNonNull(targetedEntryRef.getEntryId()))
                                             .orElseThrow(() -> new InvalidMedicationTreatmentStateException(String.format("The " +
                                                             "referenced %s is unknown",
                                                     targetedEntryRef.toText())));
@@ -185,7 +185,7 @@ public class CcePadvEntryDigester {
             );
             case CHANGE -> {
                 final EmedEntryDigest targetedEntry =
-                        this.emedEntryService.getById(Objects.requireNonNull(targetedEntryRef.getItemId()))
+                        this.emedEntryService.getById(Objects.requireNonNull(targetedEntryRef.getEntryId()))
                                 .orElseThrow(() -> new InvalidMedicationTreatmentStateException(String.format("The " +
                                         "referenced %s cannot be found", targetedEntryRef.toText())));
 
@@ -372,7 +372,7 @@ public class CcePadvEntryDigester {
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .findAny()
-                .filter(ref -> ref.getItemId() != null)
+                .filter(ref -> ref.getEntryId() != null)
                 .orElseThrow(() -> new InvalidEmedContentException("The mandatory referenced entry is missing"));
     }
 

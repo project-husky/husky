@@ -220,7 +220,7 @@ public class MedicationTreatment {
      */
     public Optional<MedicationPrescription> getPrescriptionById(final String prescriptionId) {
         return this.prescriptions.stream()
-                .filter(prescription -> prescriptionId.equals(prescription.getPreReference().getItemId()))
+                .filter(prescription -> prescriptionId.equals(prescription.getPreReference().getEntryId()))
                 .findAny();
     }
 

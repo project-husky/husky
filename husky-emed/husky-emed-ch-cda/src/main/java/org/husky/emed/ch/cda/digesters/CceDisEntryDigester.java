@@ -88,10 +88,10 @@ public class CceDisEntryDigester {
 
         final var refMtpEntry = this.getMtpReference(supply).orElse(null);
         final var refMtpEntryDigest = Optional.ofNullable(refMtpEntry)
-                .map(EmedReference::getItemId).flatMap(this.emedEntryService::getById).orElse(null);
+                .map(EmedReference::getEntryId).flatMap(this.emedEntryService::getById).orElse(null);
         final var refPreEntry = this.getPreReference(supply).orElse(null);
         final var refPreEntryDigest = Optional.ofNullable(refPreEntry)
-                .map(EmedReference::getItemId).flatMap(this.emedEntryService::getById).orElse(null);
+                .map(EmedReference::getEntryId).flatMap(this.emedEntryService::getById).orElse(null);
 
         final int sequence;
         final String medicationTreatmentId;
