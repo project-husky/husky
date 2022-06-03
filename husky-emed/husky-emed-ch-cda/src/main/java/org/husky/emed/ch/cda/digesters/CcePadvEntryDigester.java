@@ -85,13 +85,14 @@ public class CcePadvEntryDigester {
      * @param parentDocumentAuthor      The parent document author (not the original document author).
      * @param parentSectionAuthor       The parent section author (not the original section author).
      * @return a digest of the element.
-     * @throws InvalidEmedContentException if the CCE document is invalid.
+     * @throws InvalidEmedContentException              if the CCE document is invalid.
+     * @throws InvalidMedicationTreatmentStateException if the treatment state is invalid.
      */
     protected EmedPadvEntryDigest createDigest(final POCDMT000040Observation observation,
                                                final String padvDocumentId,
                                                final Instant padvDocumentEffectiveTime,
                                                final AuthorDigest parentDocumentAuthor,
-                                               final AuthorDigest parentSectionAuthor) throws InvalidEmedContentException {
+                                               final AuthorDigest parentSectionAuthor) throws InvalidEmedContentException, InvalidMedicationTreatmentStateException {
         final var entryId = this.getEntryId(observation);
         final var isCompleted = this.isCompleted(observation);
 
@@ -102,7 +103,7 @@ public class CcePadvEntryDigester {
         // Fetch the referenced item
         final var refItemId = Objects.requireNonNull(this.getItemReference(observation).getItemId());
         final EmedEntryDigest refEntryDigest = this.emedEntryService.getById(refItemId)
-                .orElseThrow(() -> new RuntimeException("Unable to recover an item entry digest"));
+                .orElseThrow(() -> new InvalidEmedContentException("Unable to find an item entry digest"));
         final var targetedEntryType = refEntryDigest.getEmedEntryType();
         final var targetedEntryRef = new EmedReference(refEntryDigest.getDocumentId(), refEntryDigest.getEntryId());
         final var sequence = (int) this.emedEntryService.getSequence(refEntryDigest.getMedicationTreatmentId(),
@@ -137,8 +138,8 @@ public class CcePadvEntryDigester {
                             final EmedEntryDigest targetedEntry =
                                     this.emedEntryService.getById(Objects.requireNonNull(targetedEntryRef.getItemId()))
                                             .orElseThrow(() -> new InvalidMedicationTreatmentStateException(String.format("The " +
-                                                    "referenced entry '%s' cannot be found",
-                                                    targetedEntryRef.getItemId())));
+                                                            "referenced %s is unknown",
+                                                    targetedEntryRef.toText())));
                             if (targetedEntry instanceof final EmedPreEntryDigest targetedPreEntry) {
                                 return this.preEntryDigester.createDigest(
                                         subAdm,
@@ -149,7 +150,7 @@ public class CcePadvEntryDigester {
                                         documentAuthor,
                                         sectionAuthor);
                             }
-                            throw new InvalidEmedContentException("The referenced PRE entry cannot be found");
+                            throw new InvalidEmedContentException("The reference to a PRE entry cannot be found");
                         })
                         .toList();
                 yield new EmedPadvOkEntryDigest(
@@ -186,7 +187,7 @@ public class CcePadvEntryDigester {
                 final EmedEntryDigest targetedEntry =
                         this.emedEntryService.getById(Objects.requireNonNull(targetedEntryRef.getItemId()))
                                 .orElseThrow(() -> new InvalidMedicationTreatmentStateException(String.format("The " +
-                                        "referenced entry '%s' cannot be found", targetedEntryRef.getItemId())));
+                                        "referenced %s cannot be found", targetedEntryRef.toText())));
 
                 final EmedMtpEntryDigest changedMtpEntry;
                 final EmedPreEntryDigest changedPreEntry;
@@ -321,7 +322,7 @@ public class CcePadvEntryDigester {
         return Optional.of(observation.getId())
                 .map(OptionalUtils::getListFirstElement)
                 .map(IiUtils::getNormalizedUid)
-                .orElseThrow(() -> new InvalidEmedContentException(""));
+                .orElseThrow(() -> new InvalidEmedContentException("The entry ID is missing"));
     }
 
     /**
@@ -332,7 +333,8 @@ public class CcePadvEntryDigester {
                 .filter(code -> PharmaceuticalAdviceStatus.CODE_SYSTEM_OID.equals(code.getCodeSystem()))
                 .map(CD::getCode)
                 .map(PharmaceuticalAdviceStatus::getEnum)
-                .orElseThrow(() -> new InvalidEmedContentException("The mandatory Code is missing or invalid in the PADV Observation element"));
+                .orElseThrow(() -> new InvalidEmedContentException("The mandatory code is missing or invalid in the " +
+                        "PADV Observation element"));
     }
 
     /**

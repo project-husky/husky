@@ -28,6 +28,7 @@ import org.husky.emed.ch.cda.utils.IvlTsUtils;
 import org.husky.emed.ch.cda.utils.TemplateIds;
 import org.husky.emed.ch.enums.CceDocumentType;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
+import org.husky.emed.ch.errors.InvalidMedicationTreatmentStateException;
 import org.husky.emed.ch.models.common.OrganizationDigest;
 import org.husky.emed.ch.models.common.PatientDigest;
 import org.husky.emed.ch.models.common.RecipientDigest;
@@ -78,6 +79,7 @@ public class CceDocumentDigester {
      * Returns the type of the CDA-CH-EMED document.
      *
      * @return an instance of {@link CceDocumentType}.
+     * @throws InvalidEmedContentException if the document type IDs cannot be found.
      */
     public static CceDocumentType getDocumentType(final POCDMT000040ClinicalDocument cce) {
         if (TemplateIds.hasAllIds(TemplateIds.MTP_DOCUMENT, cce.getTemplateId())) {
@@ -270,9 +272,11 @@ public class CceDocumentDigester {
      *
      * @param cce The CDA-CH-EMED document to digest.
      * @return an implementation of {@link EmedDocumentDigest}.
+     * @throws InvalidEmedContentException              if the CCE document is invalid.
+     * @throws InvalidMedicationTreatmentStateException if the treatment state is invalid.
      */
     @SideEffectFree
-    public EmedDocumentDigest digest(final POCDMT000040ClinicalDocument cce) throws InvalidEmedContentException {
+    public EmedDocumentDigest digest(final POCDMT000040ClinicalDocument cce) throws InvalidEmedContentException, InvalidMedicationTreatmentStateException {
         final String id = Optional.ofNullable(cce.getId()).map(II::getRoot).map(Uuids::normalize)
                 .orElseThrow(() -> new InvalidEmedContentException("The document ID is missing"));
         final String setId = Optional.ofNullable(cce.getSetId()).map(II::getRoot).map(Uuids::normalize)
