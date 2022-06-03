@@ -137,4 +137,20 @@ public class TemplateIds {
         return templateIds.stream().map(II::getRoot).toList().containsAll(Objects.requireNonNull(searchedIds));
     }
 
+    /**
+     * Searches whether any ID from a list is present in a list of template IDs.
+     *
+     * @param searchedIds The IDs to find. If the list is empty, the method returns {@code true}.
+     * @param templateIds The list of template IDs to search in.
+     */
+    public static boolean anyInList(final List<String> searchedIds,
+                                    @Nullable final List<II> templateIds) {
+        if (searchedIds.isEmpty()) {
+            return true;
+        }
+        if (templateIds == null || templateIds.isEmpty()) {
+            return false;
+        }
+        return templateIds.stream().map(II::getRoot).anyMatch(searchedIds::contains);
+    }
 }
