@@ -58,7 +58,7 @@ public class CceMtpEntryDigester {
         final AuthorDigest documentAuthor;
         final AuthorDigest sectionAuthor;
         /*
-         * In a PADV CHANGE, the original authors may be referenced in the entry and be different than the
+         * In a PADV CHANGE, the original authors may be referenced in the entry and be different from the
          * document/section authors.
          */
         if (substanceAdministration.getAuthor().size() == 2) {
