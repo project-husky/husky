@@ -27,15 +27,15 @@ import java.util.Objects;
  * @param ids        The list of patient Ids.
  * @param givenName  The legal given name.
  * @param familyName The legal family name.
- * @param gender     The gender.
- * @param birthdate  The birthdate.
+ * @param gender     The gender or {@code null}.
+ * @param birthdate  The birthdate or {@code null}.
  * @author Quentin Ligier
  */
 @Immutable
 public record PatientDigest(List<@NonNull String> ids,
                             String givenName,
                             String familyName,
-                            AdministrativeGender gender,
+                            @Nullable AdministrativeGender gender,
                             @Nullable LocalDate birthdate) {
 
     /**
@@ -44,18 +44,18 @@ public record PatientDigest(List<@NonNull String> ids,
      * @param ids        The list of patient Ids.
      * @param givenName  The legal given name.
      * @param familyName The legal family name.
-     * @param gender     The gender.
-     * @param birthdate  The birthdate.
+     * @param gender     The gender or {@code null}.
+     * @param birthdate  The birthdate or {@code null}.
      */
     public PatientDigest(final List<@NonNull String> ids,
                          final String givenName,
                          final String familyName,
-                         final AdministrativeGender gender,
+                         @Nullable final AdministrativeGender gender,
                          @Nullable final LocalDate birthdate) {
         this.ids = Collections.unmodifiableList(Objects.requireNonNull(ids));
         this.givenName = Objects.requireNonNull(givenName);
         this.familyName = Objects.requireNonNull(familyName);
-        this.gender = Objects.requireNonNull(gender);
+        this.gender = gender;
         this.birthdate = birthdate;
     }
 

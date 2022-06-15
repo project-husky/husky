@@ -414,7 +414,7 @@ public class CceDocumentDigester {
                 patientRole.getId().stream().map(IiUtils::getNormalizedCx).toList(),
                 names.getFirstLegalGivenName(),
                 names.getFirstLegalFamilyName(),
-                Optional.ofNullable(patient.getAdministrativeGenderCode()).map(CD::getCode).map(AdministrativeGender::getEnum).orElseThrow(),
+                Optional.ofNullable(patient.getAdministrativeGenderCode()).map(CD::getCode).map(AdministrativeGender::getEnum).orElse(null),
                 Optional.ofNullable(patient.getBirthTime()).map(DateTimes::toLocalDate).orElse(null)
         );
     }
