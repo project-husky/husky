@@ -15,6 +15,7 @@ import org.husky.emed.ch.enums.RouteOfAdministrationAmbu;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.EmedReference;
 import org.husky.emed.ch.models.common.MedicationDosageInstructions;
+import org.husky.emed.ch.models.common.QuantityWithRegularUnit;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
 
 import java.time.Instant;
@@ -86,6 +87,12 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
     private Instant plannedItemValidityStop;
 
     /**
+     * The quantity to dispense or {@code null} if it isn't provided.
+     */
+    @Nullable
+    private QuantityWithRegularUnit quantityToDispense;
+
+    /**
      * Whether the substitution is permitted (Equivalent) or not (None).
      */
     private boolean substitutionPermitted;
@@ -126,6 +133,7 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
      * @param fulfilmentInstructions        The fulfilment instructions or {@code null} if it isn't provided.
      * @param inReserve                     Whether the treatment is to be taken regularly ({@code false}) or only if
      *                                      required ({@code true}).
+     * @param quantityToDispense            The quantity to dispense or {@code null} if it isn't provided.
      * @throws IllegalArgumentException if plannedItemValidityStop is before plannedItemValidityStart.
      */
     public EmedMtpEntryDigest(final Instant planningTime,
@@ -147,7 +155,8 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
                               @Nullable final String treatmentReason,
                               @Nullable final String patientMedicationInstructions,
                               @Nullable final String fulfilmentInstructions,
-                              final boolean inReserve) {
+                              final boolean inReserve,
+                              @Nullable final QuantityWithRegularUnit quantityToDispense) {
         super(planningTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
                 annotationComment);
         this.dosageInstructions = Objects.requireNonNull(dosageInstructions);
@@ -162,6 +171,7 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
         this.patientMedicationInstructions = patientMedicationInstructions;
         this.fulfilmentInstructions = fulfilmentInstructions;
         this.inReserve = inReserve;
+        this.quantityToDispense = quantityToDispense;
         if (this.plannedItemValidityStop != null && this.plannedItemValidityStop.isBefore(this.plannedItemValidityStart)) {
             throw new IllegalArgumentException("The planned item validity shall be a valid interval");
         }
@@ -294,6 +304,15 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
         this.inReserve = inReserve;
     }
 
+    @Nullable
+    public QuantityWithRegularUnit getQuantityToDispense() {
+        return this.quantityToDispense;
+    }
+
+    public void setQuantityToDispense(@Nullable final QuantityWithRegularUnit quantityToDispense) {
+        this.quantityToDispense = quantityToDispense;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
@@ -301,15 +320,16 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
         if (!super.equals(o)) return false;
         return inReserve == that.inReserve
                 && substitutionPermitted == that.substitutionPermitted
-                && dosageInstructions.equals(that.dosageInstructions)
+                && Objects.equals(dosageInstructions, that.dosageInstructions)
                 && Objects.equals(fulfilmentInstructions, that.fulfilmentInstructions)
                 && Objects.equals(originalMtpReference, that.originalMtpReference)
                 && Objects.equals(patientMedicationInstructions, that.patientMedicationInstructions)
-                && product.equals(that.product)
+                && Objects.equals(product, that.product)
                 && Objects.equals(repeatNumber, that.repeatNumber)
                 && routeOfAdministration == that.routeOfAdministration
-                && plannedItemValidityStart.equals(that.plannedItemValidityStart)
+                && Objects.equals(plannedItemValidityStart, that.plannedItemValidityStart)
                 && Objects.equals(plannedItemValidityStop, that.plannedItemValidityStop)
+                && Objects.equals(quantityToDispense, that.quantityToDispense)
                 && Objects.equals(treatmentReason, that.treatmentReason);
     }
 
@@ -317,7 +337,8 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
     public int hashCode() {
         return Objects.hash(super.hashCode(), dosageInstructions, fulfilmentInstructions, inReserve,
                 originalMtpReference, patientMedicationInstructions, product, repeatNumber, routeOfAdministration,
-                plannedItemValidityStart, plannedItemValidityStop, substitutionPermitted, treatmentReason);
+                plannedItemValidityStart, plannedItemValidityStop, quantityToDispense, substitutionPermitted,
+                treatmentReason);
     }
 
     @Override
@@ -341,6 +362,7 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
                 ", routeOfAdministration=" + this.routeOfAdministration +
                 ", plannedItemValidityStart=" + this.plannedItemValidityStart +
                 ", plannedItemValidityStop=" + this.plannedItemValidityStop +
+                ", quantityToDispense=" + this.quantityToDispense +
                 ", substitutionPermitted=" + this.substitutionPermitted +
                 ", treatmentReason='" + this.treatmentReason + '\'' +
                 '}';

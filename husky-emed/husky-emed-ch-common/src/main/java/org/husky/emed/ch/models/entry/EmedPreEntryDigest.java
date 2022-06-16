@@ -14,10 +14,7 @@ import lombok.Setter;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.ch.enums.EmedEntryType;
 import org.husky.emed.ch.enums.RouteOfAdministrationAmbu;
-import org.husky.emed.ch.models.common.AuthorDigest;
-import org.husky.emed.ch.models.common.EmedReference;
-import org.husky.emed.ch.models.common.MedicationDosageInstructions;
-import org.husky.emed.ch.models.common.RenewalInterval;
+import org.husky.emed.ch.models.common.*;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
 
 import java.time.Instant;
@@ -93,6 +90,12 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
     private boolean provisional;
 
     /**
+     * The quantity to dispense or {@code null} if it isn't provided.
+     */
+    @Nullable
+    private QuantityWithRegularUnit quantityToDispense;
+
+    /**
      * The renewal period or {@code null}. If it's not specified, the renewal period is the prescription validity
      * period. If the lower bound is not specified, the period starts at the first dispense.
      */
@@ -160,6 +163,7 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
      * @param fulfilmentInstructions            The fulfilment instructions or {@code null} if it isn't provided.
      * @param inReserve                         Whether the treatment is to be taken regularly ({@code false}) or only
      *                                          if required ({@code true}).
+     * @param quantityToDispense                The quantity to dispense or {@code null} if it isn't provided.
      * @throws IllegalArgumentException if the validity periods are invalid.
      */
     public EmedPreEntryDigest(final Instant prescriptionTime,
@@ -185,7 +189,8 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
                               @Nullable final String treatmentReason,
                               @Nullable final String patientMedicationInstructions,
                               @Nullable final String fulfilmentInstructions,
-                              final boolean inReserve) {
+                              final boolean inReserve,
+                              @Nullable final QuantityWithRegularUnit quantityToDispense) {
         super(prescriptionTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
                 annotationComment);
         this.dosageInstructions = Objects.requireNonNull(dosageInstructions);
@@ -204,6 +209,7 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
         this.patientMedicationInstructions = patientMedicationInstructions;
         this.fulfilmentInstructions = fulfilmentInstructions;
         this.inReserve = inReserve;
+        this.quantityToDispense = quantityToDispense;
         if (this.prescriptionDocumentValidityStop != null && this.prescriptionDocumentValidityStop.isBefore(this.prescriptionDocumentValidityStart)) {
             throw new IllegalArgumentException("The prescription document validity period shall be a valid interval");
         }
@@ -363,6 +369,14 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
         this.treatmentReason = treatmentReason;
     }
 
+    public QuantityWithRegularUnit getQuantityToDispense() {
+        return this.quantityToDispense;
+    }
+
+    public void setQuantityToDispense(final QuantityWithRegularUnit quantityToDispense) {
+        this.quantityToDispense = quantityToDispense;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
@@ -380,6 +394,7 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
                 && Objects.equals(prescriptionDocumentValidityStart, that.prescriptionDocumentValidityStart)
                 && Objects.equals(prescriptionDocumentValidityStop, that.prescriptionDocumentValidityStop)
                 && Objects.equals(product, that.product)
+                && Objects.equals(quantityToDispense, that.quantityToDispense)
                 && Objects.equals(renewalPeriod, that.renewalPeriod)
                 && Objects.equals(repeatNumber, that.repeatNumber)
                 && routeOfAdministration == that.routeOfAdministration
@@ -388,10 +403,11 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), dosageInstructions, fulfilmentInstructions, inReserve, itemValidityStart,
-                itemValidityStop, mtpReference, patientMedicationInstructions, prescriptionDocumentValidityStart,
-                prescriptionDocumentValidityStop, product, provisional, renewalPeriod, repeatNumber,
-                routeOfAdministration, substitutionPermitted, treatmentReason);
+        return Objects.hash(super.hashCode(), dosageInstructions, fulfilmentInstructions, inReserve,
+                itemValidityStart, itemValidityStop, mtpReference, patientMedicationInstructions,
+                prescriptionDocumentValidityStart, prescriptionDocumentValidityStop, product, provisional,
+                quantityToDispense, renewalPeriod, repeatNumber, routeOfAdministration, substitutionPermitted,
+                treatmentReason);
     }
 
     @Override
@@ -416,6 +432,7 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
                 ", prescriptionDocumentValidityStop=" + this.prescriptionDocumentValidityStop +
                 ", product=" + this.product +
                 ", provisional=" + this.provisional +
+                ", quantityToDispense=" + this.quantityToDispense +
                 ", renewalPeriod=" + this.renewalPeriod +
                 ", repeatNumber=" + this.repeatNumber +
                 ", routeOfAdministration=" + this.routeOfAdministration +

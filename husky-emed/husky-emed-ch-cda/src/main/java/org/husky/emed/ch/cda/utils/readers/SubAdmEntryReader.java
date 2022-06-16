@@ -14,7 +14,9 @@ import org.husky.emed.ch.cda.generated.artdecor.enums.MedicationDosageQualifier;
 import org.husky.emed.ch.cda.utils.EntryRelationshipUtils;
 import org.husky.emed.ch.cda.utils.TemplateIds;
 import org.husky.emed.ch.enums.ActSubstanceAdminSubstitutionCode;
+import org.husky.emed.ch.enums.RegularUnitCodeAmbu;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
+import org.husky.emed.ch.models.common.QuantityWithRegularUnit;
 
 import java.util.List;
 import java.util.Objects;
@@ -199,5 +201,22 @@ public class SubAdmEntryReader extends DosageInstructionsReader {
                 .findFirst()
                 .map(POCDMT000040Act::getText)
                 .map(ED::getTextContent);
+    }
+
+    /**
+     * Returns the quantity to dispense.
+     *
+     * @return an {@link Optional} that may contain the quantity to dispense.
+     */
+    public Optional<QuantityWithRegularUnit> getQuantityToDispense() {
+         return EntryRelationshipUtils.getSupplyFromEntryRelationshipsByTemplateId(
+                 this.subAdm.getEntryRelationship(), TemplateIds.QUANTITY_TO_DISPENSE).stream()
+                .findFirst()
+                .map(POCDMT000040Supply::getQuantity)
+                .map(pq -> {
+                    final var unit = "1".equals(pq.getUnit()) ? RegularUnitCodeAmbu.PACKAGE :
+                             RegularUnitCodeAmbu.valueOf(pq.getUnit());
+                    return new QuantityWithRegularUnit(pq.getValue(), unit);
+                });
     }
 }

@@ -134,7 +134,8 @@ public class CcePreEntryDigester {
                 preEntry.getTreatmentReason().orElse(null),
                 preEntry.getPatientMedicationInstructions().orElse(null),
                 preEntry.getFulfillmentInstructions().orElse(null),
-                preEntry.isInReserve()
+                preEntry.isInReserve(),
+                preEntry.getQuantityToDispense().orElse(null)
         );
     }
 

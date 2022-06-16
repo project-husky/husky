@@ -15,6 +15,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.ch.enums.DispenseSupplyType;
 import org.husky.emed.ch.enums.PrescriptionStatus;
 import org.husky.emed.ch.models.common.EmedReference;
+import org.husky.emed.ch.models.common.QuantityWithRegularUnit;
 import org.husky.emed.ch.models.entry.EmedPreEntryDigest;
 
 import java.time.Instant;
@@ -61,6 +62,12 @@ public class MedicationPrescription {
      * The status of the prescription.
      */
     private PrescriptionStatus prescriptionStatus;
+
+    /**
+     * The quantity to dispense or {@code null} if it isn't provided.
+     */
+    @Nullable
+    private QuantityWithRegularUnit quantityToDispense;
 
     /**
      * PRE item starting time.

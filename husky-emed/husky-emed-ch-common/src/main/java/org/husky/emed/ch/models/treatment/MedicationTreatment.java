@@ -19,6 +19,7 @@ import org.husky.emed.ch.enums.TreatmentStatus;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.EmedReference;
 import org.husky.emed.ch.models.common.MedicationDosageInstructions;
+import org.husky.emed.ch.models.common.QuantityWithRegularUnit;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -105,6 +106,12 @@ public class MedicationTreatment {
      * The medication product.
      */
     protected MedicationProduct product;
+
+    /**
+     * The quantity to dispense or {@code null} if it isn't provided.
+     */
+    @Nullable
+    private QuantityWithRegularUnit quantityToDispense;
 
     /**
      * The medication route of administration or {@code null} if it's not specified.
