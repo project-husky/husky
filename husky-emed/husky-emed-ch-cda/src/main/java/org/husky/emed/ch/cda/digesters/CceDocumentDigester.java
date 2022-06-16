@@ -22,11 +22,11 @@ import org.husky.common.utils.time.DateTimes;
 import org.husky.common.utils.time.Hl7Dtm;
 import org.husky.emed.ch.ChEmedSpec;
 import org.husky.emed.ch.cda.services.EmedEntryDigestService;
-import org.husky.emed.ch.cda.utils.readers.AuthorReader;
-import org.husky.emed.ch.cda.utils.readers.NameReader;
 import org.husky.emed.ch.cda.utils.IiUtils;
 import org.husky.emed.ch.cda.utils.IvlTsUtils;
 import org.husky.emed.ch.cda.utils.TemplateIds;
+import org.husky.emed.ch.cda.utils.readers.AuthorReader;
+import org.husky.emed.ch.cda.utils.readers.NameReader;
 import org.husky.emed.ch.enums.CceDocumentType;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.errors.InvalidMedicationTreatmentStateException;
@@ -35,7 +35,6 @@ import org.husky.emed.ch.models.common.PatientDigest;
 import org.husky.emed.ch.models.common.RecipientDigest;
 import org.husky.emed.ch.models.document.*;
 import org.husky.emed.ch.models.entry.EmedEntryDigest;
-import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
 import java.time.Instant;
@@ -48,7 +47,6 @@ import java.util.*;
  *
  * @author Quentin Ligier
  */
-@Component
 public class CceDocumentDigester {
 
     /**
