@@ -85,10 +85,17 @@ public class MedicationTreatment {
     private boolean inReserve;
 
     /**
-     * The last author in the medication treatment.
+     * The author of the last item entry (of any kind) in this treatment. This is the last intervening.
      */
     @Nullable
-    protected AuthorDigest lastAuthor;
+    protected AuthorDigest lastInterveningAuthor;
+
+    /**
+     * The author of the last item entry (of type MTP, PRE, or any type of PADV except COMMENT that apply to an MTP
+     * or PRE) in this treatment. This is the last "medical" participant.
+     */
+    @Nullable
+    protected AuthorDigest lastMedicalAuthor;
 
     /**
      * Reference to the MTP item.
