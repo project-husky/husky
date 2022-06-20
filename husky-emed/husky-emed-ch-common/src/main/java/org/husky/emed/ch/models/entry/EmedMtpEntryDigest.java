@@ -12,6 +12,7 @@ package org.husky.emed.ch.models.entry;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.ch.enums.EmedEntryType;
 import org.husky.emed.ch.enums.RouteOfAdministrationAmbu;
+import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.EmedReference;
 import org.husky.emed.ch.models.common.MedicationDosageInstructions;
@@ -134,7 +135,7 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
      * @param inReserve                     Whether the treatment is to be taken regularly ({@code false}) or only if
      *                                      required ({@code true}).
      * @param quantityToDispense            The quantity to dispense or {@code null} if it isn't provided.
-     * @throws IllegalArgumentException if plannedItemValidityStop is before plannedItemValidityStart.
+     * @throws InvalidEmedContentException if plannedItemValidityStop is before plannedItemValidityStart.
      */
     public EmedMtpEntryDigest(final Instant planningTime,
                               final String documentId,
@@ -173,7 +174,7 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
         this.inReserve = inReserve;
         this.quantityToDispense = quantityToDispense;
         if (this.plannedItemValidityStop != null && this.plannedItemValidityStop.isBefore(this.plannedItemValidityStart)) {
-            throw new IllegalArgumentException("The planned item validity shall be a valid interval");
+            throw new InvalidEmedContentException("The planned item validity shall be a valid interval");
         }
     }
 

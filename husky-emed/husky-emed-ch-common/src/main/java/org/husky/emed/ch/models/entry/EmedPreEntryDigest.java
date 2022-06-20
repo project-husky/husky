@@ -14,6 +14,7 @@ import lombok.Setter;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.ch.enums.EmedEntryType;
 import org.husky.emed.ch.enums.RouteOfAdministrationAmbu;
+import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.models.common.*;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
 
@@ -164,7 +165,7 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
      * @param inReserve                         Whether the treatment is to be taken regularly ({@code false}) or only
      *                                          if required ({@code true}).
      * @param quantityToDispense                The quantity to dispense or {@code null} if it isn't provided.
-     * @throws IllegalArgumentException if the validity periods are invalid.
+     * @throws InvalidEmedContentException if the validity periods are invalid.
      */
     public EmedPreEntryDigest(final Instant prescriptionTime,
                               final String documentId,
@@ -211,17 +212,17 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
         this.inReserve = inReserve;
         this.quantityToDispense = quantityToDispense;
         if (this.prescriptionDocumentValidityStop != null && this.prescriptionDocumentValidityStop.isBefore(this.prescriptionDocumentValidityStart)) {
-            throw new IllegalArgumentException("The prescription document validity period shall be a valid interval");
+            throw new InvalidEmedContentException("The prescription document validity period shall be a valid interval");
         }
         if (this.itemValidityStop != null && this.itemValidityStop.isBefore(this.itemValidityStart)) {
-            throw new IllegalArgumentException("The prescription item validity period shall be a valid interval");
+            throw new InvalidEmedContentException("The prescription item validity period shall be a valid interval");
         }
         if (this.itemValidityStart.isBefore(this.prescriptionDocumentValidityStart)) {
-            throw new IllegalArgumentException("The item validity period shall not start before the document validity " +
+            throw new InvalidEmedContentException("The item validity period shall not start before the document validity " +
                     "period");
         }
         if (this.prescriptionDocumentValidityStop != null && (this.itemValidityStop == null || this.itemValidityStop.isBefore(this.prescriptionDocumentValidityStop))) {
-            throw new IllegalArgumentException("The item validity period shall not end after the document validity " +
+            throw new InvalidEmedContentException("The item validity period shall not end after the document validity " +
                     "period");
         }
     }

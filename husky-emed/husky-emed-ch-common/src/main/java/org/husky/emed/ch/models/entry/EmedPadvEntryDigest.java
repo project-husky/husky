@@ -12,6 +12,7 @@ package org.husky.emed.ch.models.entry;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.ch.enums.EmedEntryType;
 import org.husky.emed.ch.enums.PharmaceuticalAdviceStatus;
+import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.EmedReference;
 
@@ -80,7 +81,7 @@ public abstract class EmedPadvEntryDigest extends EmedEntryDigest {
         this.targetedEntryRef = Objects.requireNonNull(targetedEntryRef);
         this.targetedEntryType = Objects.requireNonNull(targetedEntryType);
         if (targetedEntryType == EmedEntryType.PADV) {
-            throw new IllegalArgumentException("The entry targeted by a PADV CANCEL shall be of MTP, PRE or DIS type");
+            throw new InvalidEmedContentException("The entry targeted by a PADV CANCEL shall be of MTP, PRE or DIS type");
         }
     }
 
