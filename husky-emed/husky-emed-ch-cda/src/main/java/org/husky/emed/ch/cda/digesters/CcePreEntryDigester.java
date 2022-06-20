@@ -62,7 +62,7 @@ public class CcePreEntryDigester {
      * @param documentId                The PRE document ID (PRE or PADV).
      * @param prescriptionTime          The prescription time.
      * @param prescriptionDocumentValidityStart The prescription validity start time (inclusive).
-     * @param prescriptionDocumentValidityStop  The prescription validity stop time (inclusive).
+     * @param prescriptionDocumentValidityStop  The prescription validity stop time (inclusive) or {@code null}.
      * @param parentDocumentAuthor      The parent document author (not the original document author).
      * @param parentSectionAuthor       The parent section author (not the original section author).
      * @return a digest of the element.

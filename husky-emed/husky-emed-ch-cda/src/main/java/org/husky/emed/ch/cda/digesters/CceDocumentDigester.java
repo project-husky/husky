@@ -20,7 +20,6 @@ import org.husky.common.utils.OptionalUtils;
 import org.husky.common.utils.datatypes.Uuids;
 import org.husky.common.utils.time.DateTimes;
 import org.husky.common.utils.time.Hl7Dtm;
-import org.husky.emed.ch.ChEmedSpec;
 import org.husky.emed.ch.cda.services.EmedEntryDigestService;
 import org.husky.emed.ch.cda.utils.IiUtils;
 import org.husky.emed.ch.cda.utils.IvlTsUtils;
@@ -38,7 +37,6 @@ import org.husky.emed.ch.models.entry.EmedEntryDigest;
 
 import java.math.BigInteger;
 import java.time.Instant;
-import java.time.ZonedDateTime;
 import java.util.*;
 
 /**
@@ -276,14 +274,14 @@ public class CceDocumentDigester {
      * Returns the ending time of the PRE document. It's the first known time from:
      * <ul>
      * <li>The end date of the 'documentationOf' attribute of the MTP document.
-     * <li>Three months after the document start time (see {@link ChEmedSpec#PRE_DEFAULT_DURATION_MONTHS}.
      * </ul>
      *
      * @param cce           The PRE document.
      * @param effectiveTime The document effective time.
-     * @return the inclusive prescription validity stop time as an {@link Instant}.
+     * @return the inclusive prescription validity stop time as an {@link Instant} or {@code null}.
      */
     @SideEffectFree
+    @Nullable
     public static Instant getPreValidityStopTime(final POCDMT000040ClinicalDocument cce,
                                                  final Instant effectiveTime) {
         return cce.getDocumentationOf().stream()
@@ -292,11 +290,7 @@ public class CceDocumentDigester {
                 .map(POCDMT000040DocumentationOf::getServiceEvent)
                 .map(POCDMT000040ServiceEvent::getEffectiveTime)
                 .map(IvlTsUtils::getInclusiveHighInstant)
-                .orElseGet(() -> {
-                    ZonedDateTime localDateTime = DateTimes.getZonedDateTime(effectiveTime);
-                    localDateTime = localDateTime.plusMonths(ChEmedSpec.PRE_DEFAULT_DURATION_MONTHS);
-                    return localDateTime.toInstant();
-                });
+                .orElse(null);
     }
 
     /**
