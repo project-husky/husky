@@ -26,16 +26,18 @@ import org.husky.common.hl7cdar2.*;
 import org.husky.common.utils.OptionalUtils;
 import org.husky.emed.ch.cda.generated.artdecor.enums.MedicationDosageQualifier;
 import org.husky.emed.ch.cda.services.EmedEntryDigestService;
-import org.husky.emed.ch.cda.utils.readers.AuthorReader;
-import org.husky.emed.ch.cda.utils.readers.ManufacturedMaterialReader;
 import org.husky.emed.ch.cda.utils.CdaR2Utils;
 import org.husky.emed.ch.cda.utils.EntryRelationshipUtils;
 import org.husky.emed.ch.cda.utils.IiUtils;
 import org.husky.emed.ch.cda.utils.TemplateIds;
+import org.husky.emed.ch.cda.utils.readers.AuthorReader;
+import org.husky.emed.ch.cda.utils.readers.DosageInstructionsReader;
+import org.husky.emed.ch.cda.utils.readers.ManufacturedMaterialReader;
 import org.husky.emed.ch.enums.DispenseSupplyType;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.EmedReference;
+import org.husky.emed.ch.models.common.MedicationDosageInstructions;
 import org.husky.emed.ch.models.common.Quantity;
 import org.husky.emed.ch.models.entry.EmedDisEntryDigest;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
@@ -142,7 +144,8 @@ public class CceDisEntryDigester {
                 this.getQuantity(supply),
                 this.getPatientMedicationInstructions(supply).orElse(null),
                 this.getFulfilmentNotes(supply).orElse(null),
-                this.isInReserve(supply)
+                this.isInReserve(supply),
+                this.getDosageInstructions(supply).orElse(null)
         );
     }
 
@@ -315,6 +318,19 @@ public class CceDisEntryDigester {
         return EntryRelationshipUtils.getFulfillmentInstructions(supply.getEntryRelationship())
                 .map(POCDMT000040Act::getText)
                 .map(ED::getTextContent);
+    }
+
+    /**
+     * Returns the dosage instructions.
+     *
+     * @param supply The dispense entry Supply.
+     * @return an {@link Optional} that may contain the dosage instructions.
+     */
+    Optional<MedicationDosageInstructions> getDosageInstructions(final POCDMT000040Supply supply) {
+        return EntryRelationshipUtils.getSubstanceAdministrationsFromEntryRelationshipsByTemplateId(supply.getEntryRelationship(), DOSAGE_INSTRUCTIONS)
+                .stream().findAny()
+                .map(DosageInstructionsReader::new)
+                .map(DosageInstructionsReader::getDosageInstructions);
     }
 
     /**

@@ -14,6 +14,7 @@ import org.husky.emed.ch.enums.DispenseSupplyType;
 import org.husky.emed.ch.enums.EmedEntryType;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.EmedReference;
+import org.husky.emed.ch.models.common.MedicationDosageInstructions;
 import org.husky.emed.ch.models.common.Quantity;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
 
@@ -31,6 +32,12 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
      * The dispense type (first fill or refill, complete or partial).
      */
     private DispenseSupplyType dispenseType;
+
+    /**
+     * The changed dosage instructions or {@code null} if they haven't changed.
+     */
+    @Nullable
+    private MedicationDosageInstructions dosageInstructions;
 
     /**
      * The fulfilment notes or {@code null} if it isn't provided.
@@ -102,6 +109,7 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
      * @param fulfilmentNotes               The fulfilment notes or {@code null} if it isn't provided.
      * @param inReserve                     Whether the treatment is to be taken regularly ({@code false}) or only if
      *                                      required ({@code true}).
+     * @param dosageInstructions            The changed dosage instructions or {@code null} if they haven't changed.
      */
     public EmedDisEntryDigest(final Instant dispenseTime,
                               final String documentId,
@@ -119,7 +127,8 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
                               final Quantity quantity,
                               @Nullable final String patientMedicationInstructions,
                               @Nullable final String fulfilmentNotes,
-                              final boolean inReserve) {
+                              final boolean inReserve,
+                              @Nullable final MedicationDosageInstructions dosageInstructions) {
         super(dispenseTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
                 annotationComment);
         this.dispenseType = Objects.requireNonNull(dispenseType);
@@ -131,6 +140,7 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
         this.patientMedicationInstructions = patientMedicationInstructions;
         this.fulfilmentNotes = fulfilmentNotes;
         this.inReserve = inReserve;
+        this.dosageInstructions = dosageInstructions;
     }
 
     /**
@@ -224,6 +234,15 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
         this.inReserve = inReserve;
     }
 
+    @Nullable
+    public MedicationDosageInstructions getDosageInstructions() {
+        return this.dosageInstructions;
+    }
+
+    public void setDosageInstructions(@Nullable final MedicationDosageInstructions dosageInstructions) {
+        this.dosageInstructions = dosageInstructions;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
@@ -232,6 +251,7 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
         return inReserve == that.inReserve
                 && otc == that.otc
                 && dispenseType == that.dispenseType
+                && Objects.equals(dosageInstructions, that.dosageInstructions)
                 && Objects.equals(fulfilmentNotes, that.fulfilmentNotes)
                 && Objects.equals(mtpEntryRef, that.mtpEntryRef)
                 && Objects.equals(patientMedicationInstructions, that.patientMedicationInstructions)
@@ -242,8 +262,8 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), dispenseType, fulfilmentNotes, inReserve, mtpEntryRef, otc,
-                patientMedicationInstructions, preEntryRef, product, quantity);
+        return Objects.hash(super.hashCode(), dispenseType, dosageInstructions, fulfilmentNotes, inReserve,
+                mtpEntryRef, otc, patientMedicationInstructions, preEntryRef, product, quantity);
     }
 
     @Override
@@ -258,6 +278,7 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
                 ", sectionAuthor=" + this.sectionAuthor +
                 ", sequence=" + this.sequence +
                 ", dispenseType=" + this.dispenseType +
+                ", dosageInstructions=" + this.dosageInstructions +
                 ", fulfilmentNotes='" + this.fulfilmentNotes + '\'' +
                 ", inReserve=" + this.inReserve +
                 ", mtpEntryRef=" + this.mtpEntryRef +
