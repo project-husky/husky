@@ -11,10 +11,12 @@ package org.husky.emed.ch.models.common;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.husky.emed.ch.enums.TimingEventAmbu;
 
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The dosage instructions of a medication.
@@ -85,6 +87,31 @@ public class MedicationDosageInstructions {
      */
     public List<@NonNull MedicationDosageIntake> getIntakes() {
         return this.intakes;
+    }
+
+    /**
+     * Sets a dosage instruction intake.
+     *
+     * @param eventTiming The event timing.
+     * @param doseQuantity The dose quantity.
+     */
+    public void setIntake(final TimingEventAmbu eventTiming,
+                          final QuantityWithRegularUnit doseQuantity) {
+        this.getIntake(eventTiming).ifPresentOrElse(oldIntake -> this.intakes.set(
+                this.intakes.indexOf(oldIntake),
+                new MedicationDosageIntake(eventTiming, doseQuantity)
+        ), () -> this.intakes.add(new MedicationDosageIntake(eventTiming, doseQuantity)));
+    }
+
+    /**
+     * Returns a dosage instruction intake by a timing event.
+     *
+     * @return an {@link Optional} that may contain the dosage instruction intake.
+     */
+    public Optional<MedicationDosageIntake> getIntake(final TimingEventAmbu eventTiming) {
+        return this.intakes.stream()
+                .filter(intake -> eventTiming.equals(intake.getEventTiming()))
+                .findAny();
     }
 
     /**
