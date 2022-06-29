@@ -13,6 +13,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.enums.PharmaceuticalDoseFormEdqm;
 import org.husky.common.hl7cdar2.COCTMT230100UVPackagedMedicine;
+import org.husky.emed.ch.models.common.QuantityWithRegularUnit;
 import org.husky.emed.ch.models.treatment.MedicationPackagedProduct;
 
 import java.util.Objects;
@@ -72,21 +73,13 @@ public class ContainerPackagedMedicineReader {
     }
 
     /**
-     * Returns the capacity value.
-     */
-    public String getCapacityValue() throws InvalidEmedContentException {
-        if (this.packagedMedicine.getCapacityQuantity() == null || this.packagedMedicine.getCapacityQuantity().getValue() == null) {
-            throw new InvalidEmedContentException("The capacity is missing its value");
-        }
-        return this.packagedMedicine.getCapacityQuantity().getValue();
-    }
-
-    /**
-     * Returns the capacity unit or {@code null} if it's not defined.
+     * Returns the capacity quantity or {@code null} if it's not defined.
      */
     @Nullable
-    public String getCapacityUnit() {
-        return (this.packagedMedicine.getCapacityQuantity() != null) ? this.packagedMedicine.getCapacityQuantity().getUnit() : null;
+    public QuantityWithRegularUnit getCapacityQuantity() {
+        return (this.packagedMedicine.getCapacityQuantity() != null)
+                ? QuantityWithRegularUnit.fromPq(this.packagedMedicine.getCapacityQuantity())
+                : null;
     }
 
     /**
@@ -98,8 +91,7 @@ public class ContainerPackagedMedicineReader {
         product.setGtinCode(this.getGtinCode());
         product.setName(this.getName());
         product.setFormCode(this.getFormCode());
-        product.setCapacity(this.getCapacityValue());
-        product.setCapacityUnit(this.getCapacityUnit());
+        product.setCapacityQuantity(this.getCapacityQuantity());
 
         return product;
     }

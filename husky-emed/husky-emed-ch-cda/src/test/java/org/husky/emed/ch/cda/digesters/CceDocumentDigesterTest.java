@@ -102,8 +102,8 @@ class CceDocumentDigesterTest {
         assertEquals("7680538751228", mtpEntryDigest.getProduct().getPackagedProduct().getGtinCode());
         assertEquals("TRIATEC Tabl 2.5 mg", mtpEntryDigest.getProduct().getPackagedProduct().getName());
         assertEquals(PharmaceuticalDoseFormEdqm.TABLET, mtpEntryDigest.getProduct().getPackagedProduct().getFormCode());
-        assertEquals("20", mtpEntryDigest.getProduct().getPackagedProduct().getCapacity());
-        assertEquals("732936001", mtpEntryDigest.getProduct().getPackagedProduct().getCapacityUnit());
+        assertEquals("20", mtpEntryDigest.getProduct().getPackagedProduct().getCapacityQuantity().getValue());
+        assertEquals("732936001", mtpEntryDigest.getProduct().getPackagedProduct().getCapacityQuantity().getUnit().getCodeValue());
         assertEquals(1, mtpEntryDigest.getProduct().getIngredients().size());
         assertEquals("Ramipril", mtpEntryDigest.getProduct().getIngredients().get(0).getName());
         assertEquals("2.5", mtpEntryDigest.getProduct().getIngredients().get(0).getQuantityNumerator().getValue());
