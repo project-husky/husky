@@ -37,7 +37,7 @@ public class AntibodyLaboratory extends Laboratory {
 
 		fillPOCDMT000040Observation(observation, index);
 
-		if (this.antibodyDetermination != null && this.antibodyDetermination.getCode() != null) {
+		if (this.antibodyDetermination != null) {
 			observation.setCode(new CE(this.antibodyDetermination.getCode().getCode(),
 					this.antibodyDetermination.getCode().getCodeSystem(),
 					this.antibodyDetermination.getCode().getCodeSystemName(),

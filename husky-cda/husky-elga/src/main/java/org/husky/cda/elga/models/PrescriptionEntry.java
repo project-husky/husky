@@ -416,21 +416,6 @@ public class PrescriptionEntry  {
 		return entry;
 	}
 
-	private boolean containsTemplateId(List<II> ids, II templateId) {
-		if (ids == null) {
-			return false;
-		}
-
-		for (II tempId : ids) {
-			if (tempId != null && tempId.getRoot() != null && templateId != null
-					&& tempId.getRoot().equalsIgnoreCase(templateId.getRoot())) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	protected Therapieart getKindOfTherapy(Code kindOfTherapy) {
 		Therapieart entryRelTherapy = new Therapieart();
 		POCDMT000040Act act = entryRelTherapy.getAct();

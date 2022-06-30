@@ -55,7 +55,7 @@ public class Dose {
 	public Dose(POCDMT000040SubstanceAdministration substance) {
 		days = new ArrayList<>();
 		if (substance != null) {
-			if (substance.getEffectiveTime() != null && !substance.getEffectiveTime().isEmpty()) {
+			if (!substance.getEffectiveTime().isEmpty()) {
 				setDoses(substance.getEffectiveTime());
 			}
 
@@ -96,7 +96,7 @@ public class Dose {
 			this.intakeTime = ElgaEinnahmezeitpunkte.getEnum(effectiveTime.getEvent().getCode()).getCode();
 		}
 
-		if (effectiveTime.getOffset() != null && effectiveTime.getOffset().getUnit() != null) {
+		if (effectiveTime.getOffset() != null && !effectiveTime.getOffset().getUnit().isEmpty()) {
 			this.frequence = ElgaMedikationFrequenz.getEnum(effectiveTime.getOffset().getUnit()).getCode();
 		}
 	}
@@ -110,7 +110,7 @@ public class Dose {
 			this.days.add(DateTimes.toLocalDate(effectiveTime.getPhase()));
 		}
 
-		if (effectiveTime.getPeriod() != null && effectiveTime.getPeriod().getUnit() != null) {
+		if (effectiveTime.getPeriod() != null && !effectiveTime.getPeriod().getUnit().isEmpty()) {
 			this.frequence = ElgaMedikationFrequenz.getEnum(effectiveTime.getPeriod().getUnit()).getCode();
 		}
 

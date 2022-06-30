@@ -41,12 +41,8 @@ import org.husky.common.hl7cdar2.XActRelationshipEntry;
 import org.husky.common.model.Code;
 import org.husky.common.model.Identificator;
 import org.husky.common.utils.time.DateTimes;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class ImmunizationRecommendation {
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(ImmunizationRecommendation.class.getName());
 
 	private Identificator id;
 	private Code vaccinationIndication;
