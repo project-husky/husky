@@ -147,7 +147,7 @@ public enum ConfidentialityCode implements ValueSetEnumInterfaceAt {
 
 	@Override
 	public Code getCode() {
-		return new Code(oid, code, codeSystemName, displayName);
+		return new Code(code, oid, codeSystemName, displayName);
 	}
 
 	@Override

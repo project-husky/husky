@@ -521,9 +521,11 @@ public class PixPdqV3QueryBase extends CamelService {
 			if ((pdqPatient.getProviderOrganization().getId() != null)
 					&& (!pdqPatient.getProviderOrganization().getId().isEmpty())) {
 				for (final II id : pdqPatient.getProviderOrganization().getId()) {
-					final var identifier = new Identifier();
-					identifier.setValue(FhirCommon.addUrnOid(id.getRoot()));
-					organization.getIdentifier().add(identifier);
+					if (id != null && id.getRoot() != null) {
+						final var identifier = new Identifier();
+						identifier.setValue(FhirCommon.addUrnOid(id.getRoot()));
+						organization.getIdentifier().add(identifier);
+					}
 				}
 			}
 
