@@ -83,7 +83,7 @@ public class MedicationPrescription {
     private boolean substitutionPermitted;
 
     /**
-     * Returns whether the dispense has been completed.
+     * Returns whether the prescription may be dispensed again.
      */
     private boolean isDispenseCompleted() {
         for (final MedicationDispense dispense : this.dispenses) {
@@ -105,9 +105,7 @@ public class MedicationPrescription {
      * @return {@code true} if the prescription may be ready for validation, {@code false} otherwise.
      */
     public boolean mayBeReadyForValidationInTheFuture() {
-        return !Instant.now().isAfter(this.endTime) &&
-                (this.prescriptionStatus == PrescriptionStatus.PROVISIONAL ||
-                        this.prescriptionStatus == PrescriptionStatus.SUBMITTED);
+        return !Instant.now().isAfter(this.endTime) && this.prescriptionStatus == PrescriptionStatus.PROVISIONAL;
     }
 
     /**
