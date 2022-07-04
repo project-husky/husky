@@ -158,7 +158,7 @@ public class AuthorReader {
                 this.getPersonNames().map(NameReader::getFirstLegalGivenName).orElse(null),
                 this.getPersonNames().map(NameReader::getFirstLegalFamilyName).orElse(null),
                 this.getGln().orElse(null),
-                this.getIds().stream().map(IiUtils::getNormalizedCx).toList(),
+                this.getIds().stream().map(IiUtils::toQualifiedIdentifier).toList(),
                 this.getAddresses().stream().map(AddressReader::toDigest).toList(),
                 this.getDevice().flatMap(DeviceReader::getManufacturerModelName).orElse(null),
                 this.getDevice().map(DeviceReader::getSoftwareName).orElse(null),

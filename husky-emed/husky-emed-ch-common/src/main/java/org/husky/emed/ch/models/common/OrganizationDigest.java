@@ -9,6 +9,7 @@
  */
 package org.husky.emed.ch.models.common;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.ArrayList;
@@ -23,14 +24,14 @@ import java.util.Objects;
 public class OrganizationDigest {
 
     /**
-     * The organization identifiers as HL7 CX.
+     * The organization identifiers.
      */
-    private final List<String> ids = new ArrayList<>();
+    private final List<@NonNull QualifiedIdentifier> ids = new ArrayList<>();
 
     /**
      * The organization names.
      */
-    private final List<String> names = new ArrayList<>();
+    private final List<@NonNull String> names = new ArrayList<>();
 
     /**
      * The organization telecoms or {@code null}.
@@ -43,8 +44,8 @@ public class OrganizationDigest {
      */
     private final List<AddressDigest> addresses = new ArrayList<>();
 
-    public OrganizationDigest(final List<String> ids,
-                              final List<String> names,
+    public OrganizationDigest(final List<@NonNull QualifiedIdentifier> ids,
+                              final List<@NonNull String> names,
                               @Nullable final TelecomDigest telecoms,
                               final List<AddressDigest> addresses) {
         this.ids.addAll(ids);
@@ -53,11 +54,11 @@ public class OrganizationDigest {
         this.addresses.addAll(addresses);
     }
 
-    public List<String> getIds() {
+    public List<@NonNull QualifiedIdentifier> getIds() {
         return ids;
     }
 
-    public List<String> getNames() {
+    public List<@NonNull String> getNames() {
         return names;
     }
 

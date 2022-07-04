@@ -10,6 +10,7 @@
  */
 package org.husky.emed.ch.models.common;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.ch.enums.ParticipationFunction;
 
@@ -56,14 +57,14 @@ public class AuthorDigest {
     private String authorGln;
 
     /**
-     * The list of author Ids appart from the GLN as HL7 CX. The list may be empty.
+     * The list of author Ids apart from the GLN. The list may be empty.
      */
-    private final List<String> otherIds = new ArrayList<>();
+    private final List<@NonNull QualifiedIdentifier> otherIds = new ArrayList<>();
 
     /**
      * The list of author addresses. The list may be empty.
      */
-    private final List<AddressDigest> addresses = new ArrayList<>();
+    private final List<@NonNull AddressDigest> addresses = new ArrayList<>();
 
     /**
      * The authoring device manufacturer model name or {@code null}.
@@ -93,8 +94,8 @@ public class AuthorDigest {
                         @Nullable final String givenName,
                         @Nullable final String familyName,
                         @Nullable final String authorGln,
-                        @Nullable final List<String> otherIds,
-                        @Nullable final List<AddressDigest> addresses,
+                        @Nullable final List<@NonNull QualifiedIdentifier> otherIds,
+                        @Nullable final List<@NonNull AddressDigest> addresses,
                         @Nullable final String deviceManufacturerModelName,
                         @Nullable final String deviceSoftwareName,
                         @Nullable final OrganizationDigest organization,
@@ -160,7 +161,7 @@ public class AuthorDigest {
         this.authorGln = authorGln;
     }
 
-    public List<String> getOtherIds() {
+    public List<@NonNull QualifiedIdentifier> getOtherIds() {
         return otherIds;
     }
 

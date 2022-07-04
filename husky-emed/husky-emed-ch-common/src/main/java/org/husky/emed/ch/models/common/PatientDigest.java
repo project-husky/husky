@@ -32,7 +32,7 @@ import java.util.Objects;
  * @author Quentin Ligier
  */
 @Immutable
-public record PatientDigest(List<@NonNull String> ids,
+public record PatientDigest(List<@NonNull QualifiedIdentifier> ids,
                             String givenName,
                             String familyName,
                             @Nullable AdministrativeGender gender,
@@ -47,7 +47,7 @@ public record PatientDigest(List<@NonNull String> ids,
      * @param gender     The gender or {@code null}.
      * @param birthdate  The birthdate or {@code null}.
      */
-    public PatientDigest(final List<@NonNull String> ids,
+    public PatientDigest(final List<@NonNull QualifiedIdentifier> ids,
                          final String givenName,
                          final String familyName,
                          @Nullable final AdministrativeGender gender,

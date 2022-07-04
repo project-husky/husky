@@ -61,7 +61,7 @@ class CceDocumentDigesterTest {
         assertInstanceOf(TelecomDigest.class, mtpDigest.getAuthors().get(0).getTelecoms());
         assertEquals(1, mtpDigest.getRecipients().size());
         assertInstanceOf(PatientDigest.class, mtpDigest.getPatient());
-        assertEquals(List.of("2.999^^^&11111111&ISO"), mtpDigest.getPatient().ids());
+        assertEquals(List.of(new QualifiedIdentifier("11111111", "2.999")), mtpDigest.getPatient().ids());
         assertEquals("Monika", mtpDigest.getPatient().givenName());
         assertEquals("Wegmüller", mtpDigest.getPatient().familyName());
         assertEquals(AdministrativeGender.FEMALE, mtpDigest.getPatient().gender());

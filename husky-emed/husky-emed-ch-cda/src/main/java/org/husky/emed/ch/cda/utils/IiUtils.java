@@ -9,12 +9,12 @@
  */
 package org.husky.emed.ch.cda.utils;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.utils.datatypes.Hl7v25;
 import org.husky.common.utils.datatypes.Oids;
 import org.husky.common.utils.datatypes.Uuids;
 import org.husky.common.hl7cdar2.II;
+import org.husky.emed.ch.models.common.QualifiedIdentifier;
 
 import java.util.Objects;
 
@@ -130,5 +130,28 @@ public class IiUtils {
                 Hl7v25.encodeSt(ii.getRoot()),
                 ii.getExtension()
         );
+    }
+
+    /**
+     * Transforms an HL7 II instance into a qualified identifier.
+     *
+     * @param ii The identifier to transform.
+     * @return the qualified identifier.
+     */
+    public static QualifiedIdentifier toQualifiedIdentifier(final II ii) {
+        return new QualifiedIdentifier(
+                ii.getExtension(),
+                ii.getRoot()
+        );
+    }
+
+    /**
+     * Transforms a qualified identifier into an HL7 II.
+     *
+     * @param qualifiedIdentifier The qualified identifier to transform.
+     * @return the HL7 II instance.
+     */
+    public static II fromQualifiedIdentifier(final QualifiedIdentifier qualifiedIdentifier) {
+        return new II(qualifiedIdentifier.getAssigningAuthority(), qualifiedIdentifier.getIdentifier());
     }
 }

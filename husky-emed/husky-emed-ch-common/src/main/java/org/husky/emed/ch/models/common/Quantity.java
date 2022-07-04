@@ -38,7 +38,7 @@ public class Quantity {
      * @param unit The quantity unit.
      */
     public Quantity(final String value,
-                                final String unit) {
+                    final String unit) {
         this.value = Objects.requireNonNull(value);
         this.unit = Objects.requireNonNull(unit);
     }

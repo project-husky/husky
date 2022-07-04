@@ -66,7 +66,7 @@ public class OrganizationReader {
      */
     public OrganizationDigest toDigest() {
         return new OrganizationDigest(
-                this.getIds().stream().map(IiUtils::getNormalizedCx).toList(),
+                this.getIds().stream().map(IiUtils::toQualifiedIdentifier).toList(),
                 this.getNames(),
                 this.getTelecoms().toDigest(),
                 this.getAddresses().stream().map(AddressReader::toDigest).toList()

@@ -403,7 +403,7 @@ public class CceDocumentDigester {
         final var patient = patientRole.getPatient();
         final var names = new NameReader(patient.getName());
         return new PatientDigest(
-                patientRole.getId().stream().map(IiUtils::getNormalizedCx).toList(),
+                patientRole.getId().stream().map(IiUtils::toQualifiedIdentifier).toList(),
                 names.getFirstLegalGivenName(),
                 names.getFirstLegalFamilyName(),
                 Optional.ofNullable(patient.getAdministrativeGenderCode()).map(CD::getCode).map(AdministrativeGender::getEnum).orElse(null),
