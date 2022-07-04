@@ -47,12 +47,12 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
     private boolean inReserve;
 
     /**
-     * The inclusive instant at which the initial treatment shall start.
+     * The inclusive instant after which the first full dispense shall happen.
      */
     private Instant itemValidityStart;
 
     /**
-     * The inclusive instant at which the initial treatment shall stop or {@code null} if it's not bounded.
+     * The inclusive instant before which the first full dispense shall happen.
      */
     @Nullable
     private Instant itemValidityStop;
@@ -151,8 +151,9 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
      * @param prescriptionDocumentValidityStart The inclusive instant at which the prescription shall start.
      * @param prescriptionDocumentValidityStop  The inclusive instant at which the prescription shall stop or
      *                                          {@code null} if it's not bounded.
-     * @param itemValidityStart                 The inclusive instant at which the initial treatment shall start.
-     * @param itemValidityStop                  The inclusive instant at which the initial treatment shall stop or
+     * @param itemValidityStart                 The inclusive instant after which the first full dispense shall happen.
+     * @param itemValidityStop                  The inclusive instant before which the first full dispense shall
+     *                                          happen or
      *                                          {@code null} if it's not bounded.
      * @param renewalPeriod                     The renewal period or {@code null} if it's not specified.
      * @param mtpReference                      The reference to the MTP entry, if any.
