@@ -14,7 +14,6 @@ import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.enums.PharmaceuticalDoseFormEdqm;
 import org.husky.common.hl7cdar2.COCTMT230100UVPackagedMedicine;
 import org.husky.emed.ch.models.common.QuantityWithRegularUnit;
-import org.husky.emed.ch.models.treatment.MedicationPackagedProduct;
 
 import java.util.Objects;
 
@@ -45,6 +44,9 @@ public class ContainerPackagedMedicineReader {
      */
     @Nullable
     public String getGtinCode() {
+        if (this.packagedMedicine.getCode() == null) {
+            throw new InvalidEmedContentException("The packaged medicine code is missing");
+        }
         return this.packagedMedicine.getCode().getCode();
     }
 
@@ -80,23 +82,5 @@ public class ContainerPackagedMedicineReader {
         return (this.packagedMedicine.getCapacityQuantity() != null)
                 ? QuantityWithRegularUnit.fromPq(this.packagedMedicine.getCapacityQuantity())
                 : null;
-    }
-
-    /**
-     * Converts the packaged medicine to a {@link MedicationPackagedProduct}.
-     */
-    public MedicationPackagedProduct toMedicationPackagedProduct() throws InvalidEmedContentException {
-        final MedicationPackagedProduct product = new MedicationPackagedProduct();
-
-        product.setGtinCode(this.getGtinCode());
-        product.setName(this.getName());
-        product.setFormCode(this.getFormCode());
-        product.setCapacityQuantity(this.getCapacityQuantity());
-
-        return product;
-    }
-
-    public COCTMT230100UVPackagedMedicine getPackagedMedicine() {
-        return this.packagedMedicine;
     }
 }
