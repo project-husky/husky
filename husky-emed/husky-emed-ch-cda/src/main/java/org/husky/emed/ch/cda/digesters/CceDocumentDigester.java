@@ -11,6 +11,7 @@
 package org.husky.emed.ch.cda.digesters;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.dataflow.qual.SideEffectFree;
 import org.husky.common.ch.enums.ConfidentialityCode;
@@ -24,8 +25,7 @@ import org.husky.emed.ch.cda.services.EmedEntryDigestService;
 import org.husky.emed.ch.cda.utils.IiUtils;
 import org.husky.emed.ch.cda.utils.IvlTsUtils;
 import org.husky.emed.ch.cda.utils.TemplateIds;
-import org.husky.emed.ch.cda.utils.readers.AuthorReader;
-import org.husky.emed.ch.cda.utils.readers.NameReader;
+import org.husky.emed.ch.cda.utils.readers.*;
 import org.husky.emed.ch.enums.CceDocumentType;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.errors.InvalidMedicationTreatmentStateException;
@@ -51,9 +51,12 @@ public class CceDocumentDigester {
      * The CDA-CH-EMED entry digesters.
      */
     private final CceMtpEntryDigester mtpEntryDigester;
-    @Nullable private final CcePreEntryDigester preEntryDigester;
-    @Nullable private final CceDisEntryDigester disEntryDigester;
-    @Nullable private final CcePadvEntryDigester padvEntryDigester;
+    @Nullable
+    private final CcePreEntryDigester preEntryDigester;
+    @Nullable
+    private final CceDisEntryDigester disEntryDigester;
+    @Nullable
+    private final CcePadvEntryDigester padvEntryDigester;
 
     /**
      * Constructor without parameters. It can only digest MTP, PMLC and PML (with only MTP item entries) documents.
@@ -127,9 +130,9 @@ public class CceDocumentDigester {
                 .map(AuthorReader::new)
                 .map(AuthorReader::toDigest)
                 .toList();
-        final var custodian = new OrganizationDigest(Collections.emptyList(), Collections.emptyList(), null,
-                Collections.emptyList()); // TODO
-        final var recipients = List.of(new RecipientDigest()); // TODO
+
+        final var custodian = getCustodian(cce);
+        final var recipients = getRecipients(cce);
 
         final StrucDocText narrativeText = getNarrativeText(cce);
         final var contentSection = getContentSection(cce);
@@ -138,7 +141,6 @@ public class CceDocumentDigester {
                 .map(AuthorReader::new)
                 .map(AuthorReader::toDigest)
                 .orElseGet(() -> authors.get(0));
-
 
         final Instant documentationTime = ObjectUtils.firstNonNull(
                 sectionAuthor.getAuthorshipTimestamp(),
@@ -165,7 +167,7 @@ public class CceDocumentDigester {
                 }
 
                 final var preStartTime = getPreValidityStartTime(cce, creationTime.toInstant());
-                final var preStopTime = getPreValidityStopTime(cce, creationTime.toInstant());
+                final var preStopTime = getPreValidityStopTime(cce);
                 final var preEntryDigests = Optional.of(contentSection.getEntry())
                         .orElse(Collections.emptyList()).stream()
                         .map(POCDMT000040Entry::getSubstanceAdministration)
@@ -276,14 +278,12 @@ public class CceDocumentDigester {
      * <li>The end date of the 'documentationOf' attribute of the MTP document.
      * </ul>
      *
-     * @param cce           The PRE document.
-     * @param effectiveTime The document effective time.
+     * @param cce The PRE document.
      * @return the inclusive prescription validity stop time as an {@link Instant} or {@code null}.
      */
     @SideEffectFree
     @Nullable
-    public static Instant getPreValidityStopTime(final POCDMT000040ClinicalDocument cce,
-                                                 final Instant effectiveTime) {
+    public static Instant getPreValidityStopTime(final POCDMT000040ClinicalDocument cce) {
         return cce.getDocumentationOf().stream()
                 .filter(documentationOf -> documentationOf.getTemplateId().isEmpty()) // The only one without template IDs
                 .findAny()
@@ -392,6 +392,7 @@ public class CceDocumentDigester {
      *
      * @param cce The CDA-CH-EMED document.
      * @return the patient digest.
+     * @throws InvalidEmedContentException if the patient is incomplete.
      */
     @SideEffectFree
     public static PatientDigest getPatientDigest(final POCDMT000040ClinicalDocument cce) {
@@ -399,8 +400,8 @@ public class CceDocumentDigester {
                 .map(OptionalUtils::getListOnlyElement)
                 .map(POCDMT000040RecordTarget::getPatientRole)
                 .filter(patientRole2 -> patientRole2.getPatient() != null)
-                .orElseThrow();
-        final var patient = patientRole.getPatient();
+                .orElseThrow(() -> new InvalidEmedContentException("The patient is missing"));
+        final var patient = Objects.requireNonNull(patientRole.getPatient());
         final var names = new NameReader(patient.getName());
         return new PatientDigest(
                 patientRole.getId().stream().map(IiUtils::toQualifiedIdentifier).toList(),
@@ -409,5 +410,64 @@ public class CceDocumentDigester {
                 Optional.ofNullable(patient.getAdministrativeGenderCode()).map(CD::getCode).map(AdministrativeGender::getEnum).orElse(null),
                 Optional.ofNullable(patient.getBirthTime()).map(DateTimes::toLocalDate).orElse(null)
         );
+    }
+
+    /**
+     * Returns the digest of the custodian.
+     *
+     * @param cce The CDA-CH-EMED document.
+     * @return the custodian digest.
+     * @throws InvalidEmedContentException if the custodian is incomplete.
+     */
+    @SideEffectFree
+    public static OrganizationDigest getCustodian(final POCDMT000040ClinicalDocument cce) {
+        final var custodian = Optional.ofNullable(cce.getCustodian())
+                .map(POCDMT000040Custodian::getAssignedCustodian)
+                .map(POCDMT000040AssignedCustodian::getRepresentedCustodianOrganization)
+                .orElseThrow(() -> new InvalidEmedContentException("The custodian is missing"));
+
+        final var name = Optional.ofNullable(custodian.getName())
+                .map(ANY::getMergedXmlMixed)
+                .orElseThrow(() -> new InvalidEmedContentException("The custodian is missing their name"));
+        final var telecoms = Optional.ofNullable(custodian.getTelecom())
+                .map(List::of)
+                .orElse(Collections.emptyList());
+        final var address = Optional.ofNullable(custodian.getAddr())
+                .map(AddressReader::new)
+                .map(AddressReader::toDigest)
+                .map(List::of)
+                .orElse(Collections.emptyList());
+
+        return new OrganizationDigest(
+                custodian.getId().stream().map(IiUtils::toQualifiedIdentifier).toList(),
+                List.of(name),
+                new TelecomReader(telecoms).toDigest(),
+                address
+        );
+    }
+
+    /**
+     * Returns the digests of the recipients.
+     *
+     * @param cce The CDA-CH-EMED document.
+     * @return the recipient digests.
+     */
+    @SideEffectFree
+    public static List<@NonNull RecipientDigest> getRecipients(final POCDMT000040ClinicalDocument cce) {
+        return cce.getInformationRecipient().stream()
+                .map(informationRecipient -> {
+                    final var recipient = Objects.requireNonNull(informationRecipient.getIntendedRecipient());
+                    final var organization = Optional.ofNullable(recipient.getReceivedOrganization())
+                            .map(OrganizationReader::new)
+                            .map(OrganizationReader::toDigest)
+                            .orElse(null);
+                    return new RecipientDigest(
+                            informationRecipient.getTypeCode() != XInformationRecipient.TRC,
+                            recipient.getId(),
+                            recipient.getAddr().stream().map(AddressReader::new).map(AddressReader::toDigest).toList(),
+                            new TelecomReader(recipient.getTelecom()).toDigest(),
+                            organization
+                    );
+                }).toList();
     }
 }
