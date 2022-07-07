@@ -19,7 +19,6 @@ import org.husky.common.utils.time.Hl7Dtm;
 import javax.xml.bind.JAXBElement;
 import java.time.Duration;
 import java.time.Instant;
-import java.time.Period;
 import java.time.temporal.TemporalAmount;
 import java.util.Objects;
 import java.util.Optional;
@@ -47,7 +46,7 @@ public class IvlTsUtils {
     public static Instant getInclusiveLowInstant(final IVLTS ivlTs) {
         Objects.requireNonNull(ivlTs);
         var low = getLowTs(ivlTs);
-        if (low == null || !low.getNullFlavor(false).isEmpty()) {
+        if (low == null || low.getValue() == null) {
             return null;
         }
         return DateTimes.toInstant(DateTimes.completeToEarliestInstant(Hl7Dtm.fromHl7(low.getValue())));
@@ -77,7 +76,7 @@ public class IvlTsUtils {
     public static Instant getInclusiveHighInstant(final IVLTS ivlTs) {
         Objects.requireNonNull(ivlTs);
         var high = getHighTs(ivlTs);
-        if (high == null || !high.getNullFlavor(false).isEmpty()) {
+        if (high == null || high.getValue() == null) {
             return null;
         }
         return DateTimes.toInstant(DateTimes.completeToEarliestInstant(Hl7Dtm.fromHl7(high.getValue())));
@@ -134,7 +133,7 @@ public class IvlTsUtils {
     /**
      * Returns the interval width as a {@link TemporalAmount} if defined or {@code null}.
      *
-     * TODO: Define the accepted temporal units.
+     * It's currently mapped to the "TimeUnitCode (Ambu)" value set.
      *
      * @param ivlTs The non-null IVL_TS to parse.
      * @return the parsed {@link TemporalAmount} or {@code null}.
@@ -155,14 +154,9 @@ public class IvlTsUtils {
         }
         final long amount = Long.parseLong(width.getValue());
         return switch (width.getUnit()) {
-            case "ms"  -> Duration.ofMillis(amount);
             case "s"   -> Duration.ofSeconds(amount);
             case "min" -> Duration.ofMinutes(amount);
             case "h"   -> Duration.ofHours(amount);
-            case "d"   -> Period.ofDays((int) amount);
-            case "wk"  -> Period.ofWeeks((int) amount);
-            case "mo" -> Period.ofMonths((int) amount); // Or mo_g?
-            case "a"  -> Period.ofYears((int) amount); // Or a_g?
             default -> throw new IllegalArgumentException("The IVL_TS width has an unknown unit: " + width.getUnit());
         };
     }

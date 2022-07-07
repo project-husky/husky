@@ -284,8 +284,6 @@ public class CceDisEntryDigester {
 
     /**
      * Returns the medication dispensed quantity.
-     * <p>
-     * TODO: another quantity in asContent
      *
      * @param supply The dispense entry Supply.
      */
@@ -347,7 +345,8 @@ public class CceDisEntryDigester {
                 .filter(act -> act.getCode() != null)
                 .filter(act -> MedicationDosageQualifier.CODE_SYSTEM_ID.equals(act.getCode().getCodeSystem()))
                 .findAny()
-                .map(act -> act.getCode().getCode())
+                .map(POCDMT000040Act::getCode)
+                .map(CD::getCode)
                 .map(MedicationDosageQualifier::getEnum)
                 .map(substitution -> substitution == MedicationDosageQualifier.AS_REQUIRED_QUALIFIER_VALUE)
                 .orElse(false); // Default is regular medication
