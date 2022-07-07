@@ -93,7 +93,6 @@ public class ChEprDelegationRestrictionConditionValidator implements ConditionVa
                         "technical user unique ID");
                 return ValidationResult.INVALID;
             }
-            // TODO: URN-encoded OID?
             context.getDynamicParameters().put(CH_EPR_TCU_ID, nameId.getValue());
             return ValidationResult.VALID;
         }
