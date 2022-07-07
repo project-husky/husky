@@ -46,7 +46,6 @@ org.husky.communication.mpi.impl.pix
 org.husky.communication.utils
 org.husky.communication.xd.storedquery
 org.husky.communication.xd.xdm
-org.husky.emed.ch
 org.husky.emed.ch.cda
 org.husky.emed.ch.cda.digesters
 org.husky.emed.ch.cda.generated
