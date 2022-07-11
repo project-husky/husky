@@ -11,6 +11,7 @@
 <!-- 2021.03.01: Annatina Foppa, eHealth Suisse: Update to CDA-CH EMED v0.97. Some issues remained unresolved, concerning repeatNumber and doseQuantity, see https://art-decor.org/art-decor/decor-issues%2D%2Dch-pharm -->
 <!-- 2021.04.28: Michaela Ziegler, ahdis ag: Remove original representation -->
 <!-- 2021.06.02: Oliver Egger: Update to next CDA-CH-EMED 0.97 -->
+<!-- 2022.07.11: Quentin Ligier: Update to CDA-CH-EMED 1.0.2 -->
 <!-- ************************************************************ -->
 <?xml-stylesheet type='text/xsl' href='../../../../stylesheets/HL7.ch/CDA-CH/v2.0/cda-ch.xsl'?>
 <ClinicalDocument xmlns:pharm="urn:ihe:pharm" xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ../../../../schemas/PHARM/schemas/cda/extendedschemas/CDA_extended_pharmacy.xsd">
@@ -242,21 +243,13 @@
 					<!-- MTP -->
 					<entry>
 						<substanceAdministration classCode="SBADM" moodCode="INT">
-							<!-- IHE PHARM MTP Required element indicating the Medication Treatment Plan entry content module -->
-							<templateId root="1.3.6.1.4.1.19376.1.9.1.3.7" />
-							<!-- CCD -->
-							<templateId root="2.16.840.1.113883.10.20.1.24" />
-							<!-- PCC Medication Entry Content Module -->
-							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7" />
-							<!-- CH-PHARM Medication Treatment Plan Item Entry Content Module -->
 							<templateId root="2.16.756.5.30.1.1.10.4.34" />
-
-							<!-- A normal substanceAdministration act that may not contain any subordinate substanceAdministration acts. -->
+							<templateId root="1.3.6.1.4.1.19376.1.9.1.3.6" />
+							<templateId root="1.3.6.1.4.1.19376.1.9.1.3.7" />
+							<templateId root="2.16.840.1.113883.10.20.1.24" />
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7" />
 							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1" />
-
-							<!-- ID of mtp item, PCC TF2 6.3.4.16.6 -->
 							<id root="C9F758A1-296C-4710-84D4-E181DB8C7478" />
-
 							<text>
 								<reference value="#mtp.1" />
 							</text>
@@ -265,8 +258,8 @@
 								<low value="20111129" />
 								<high nullFlavor="UNK" />
 							</effectiveTime>
-							<effectiveTime operator='A' xsi:type='EIVL_TS'>
-								<event code='MORN' />
+							<effectiveTime xsi:type="EIVL_TS" operator="A">
+								<event code="MORN" />
 							</effectiveTime>
 							<repeatNumber nullFlavor="NI" />
 							<routeCode code="20053000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Oral use" />
@@ -276,22 +269,18 @@
 									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2" />
 									<templateId root="2.16.840.1.113883.10.20.1.53" />
 									<manufacturedMaterial classCode="MMAT" determinerCode="KIND">
-										<!-- CH-PHARM Manufactured Material Content Module -->
 										<templateId root="2.16.756.5.30.1.1.10.4.33" />
-										<!-- Medicine Entry Module -->
 										<templateId root="1.3.6.1.4.1.19376.1.9.1.3.1" />
 										<code code="7680538751228" codeSystem="2.51.1.1" codeSystemName="GTIN" displayName="TRIATEC Tabl 2.5 mg 20 Stk">
 											<originalText>
-												<reference value="#mtp.1.brandedmedication" />
+												<reference value="#mtp.1" />
 											</originalText>
 										</code>
 										<name>TRIATEC Tabl 2.5 mg</name>
 										<pharm:formCode code="10219000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Tablet" />
 										<pharm:asContent classCode="CONT">
 											<pharm:containerPackagedMedicine classCode="CONT" determinerCode="INSTANCE">
-												<!-- National medicinal product code (package-level) -->
 												<pharm:code code="7680538751228" codeSystem="2.51.1.1" codeSystemName="GTIN" displayName="TRIATEC Tabl 2.5 mg 20 Stk" />
-												<!-- Brand name (package) -->
 												<pharm:name>TRIATEC Tabl 2.5 mg</pharm:name>
 												<pharm:formCode code="10219000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Tablet" />
 												<pharm:capacityQuantity unit="732936001" value="20" />
@@ -299,8 +288,8 @@
 										</pharm:asContent>
 										<pharm:ingredient classCode="ACTI">
 											<pharm:quantity>
-												<numerator unit="mg" value="2.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="PQ" />
-												<denominator unit="732936001" value="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="PQ" />
+												<numerator xsi:type="PQ" unit="mg" value="2.5" />
+												<denominator xsi:type="PQ" unit="732936001" value="1" />
 											</pharm:quantity>
 											<pharm:ingredient classCode="MMAT" determinerCode="KIND">
 												<pharm:code code="386872004" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Ramipril (substance)" />
@@ -313,8 +302,8 @@
 							<entryRelationship typeCode="RSON">
 								<observation classCode="OBS" moodCode="EVN">
 									<templateId root="2.16.756.5.30.1.1.10.4.41" />
-									<code code="75326-9" codeSystem="2.16.840.1.113883.6.1" displayName="Problem" codeSystemName='LOINC' />
-									<text>
+									<code xsi:type="CD" code="75326-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Problem" />
+									<text xsi:type="ED">
 										Bluthochdruck
 
 										<reference value="#mtp.1.reason" />
@@ -322,52 +311,27 @@
 									<statusCode code="completed" />
 								</observation>
 							</entryRelationship>
-							<entryRelationship typeCode="COMP">
-								<substanceAdministration moodCode="INT" classCode="SBADM">
-									<templateId root="2.16.756.5.30.1.1.10.4.52" />
-									<text>
-										Morgens 1/2 Tablette nehmen
-
-										<reference value="#mtp.1.dosageintakemode" />
-									</text>
-									<consumable>
-										<manufacturedProduct>
-											<manufacturedMaterial nullFlavor="NA" />
-										</manufacturedProduct>
-									</consumable>
-								</substanceAdministration>
-							</entryRelationship>
 						</substanceAdministration>
 					</entry>
 
 					<!-- DIS -->
 					<entry>
 						<supply classCode="SPLY" moodCode="EVN">
-
-							<!-- CH-PHARM-DispenseItemEntryContentModule -->
 							<templateId root="2.16.756.5.30.1.1.10.4.42" />
-
-							<!-- IHE PARM DIS 6.3.4.5.1 -->
 							<templateId root="1.3.6.1.4.1.19376.1.9.1.3.4" />
 							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.3" />
 							<templateId root="2.16.840.1.113883.10.20.1.34" />
-
-							<!-- ID of dis item, IHE PARM DIS 6.3.4.5.3.3 -->
 							<id root="488BD23A-20C6-11E6-B67B-9E71128CAE77" />
-
 							<text>
 								<reference value="#dis.1" />
 							</text>
-
 							<quantity value="1" />
 							<product>
 								<manufacturedProduct classCode="MANU">
 									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2" />
 									<templateId root="2.16.840.1.113883.10.20.1.53" />
 									<manufacturedMaterial classCode="MMAT" determinerCode="KIND">
-										<!-- CH-PHARM Manufactured Material Content Module -->
 										<templateId root="2.16.756.5.30.1.1.10.4.33" />
-										<!-- Medicine Entry Module -->
 										<templateId root="1.3.6.1.4.1.19376.1.9.1.3.1" />
 										<code code="7680538751228" codeSystem="2.51.1.1" codeSystemName="GTIN" displayName="TRIATEC Tabl 2.5 mg 20 Stk">
 											<originalText>
@@ -378,9 +342,7 @@
 										<pharm:formCode code="10219000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Tablet" />
 										<pharm:asContent classCode="CONT">
 											<pharm:containerPackagedMedicine classCode="CONT" determinerCode="INSTANCE">
-												<!-- National medicinal product code (package-level) -->
 												<pharm:code code="7680538751228" codeSystem="2.51.1.1" codeSystemName="GTIN" displayName="TRIATEC Tabl 2.5 mg 20 Stk" />
-												<!-- Brand name (package) -->
 												<pharm:name>TRIATEC Tabl 2.5 mg</pharm:name>
 												<pharm:formCode code="10219000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Tablet" />
 												<pharm:capacityQuantity unit="732936001" value="20" />
@@ -388,8 +350,8 @@
 										</pharm:asContent>
 										<pharm:ingredient classCode="ACTI">
 											<pharm:quantity>
-												<numerator unit="mg" value="2.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="PQ" />
-												<denominator unit="732936001" value="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="PQ" />
+												<numerator xsi:type="PQ" unit="mg" value="2.5" />
+												<denominator xsi:type="PQ" unit="732936001" value="1" />
 											</pharm:quantity>
 											<pharm:ingredient classCode="MMAT" determinerCode="KIND">
 												<pharm:code code="386872004" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Ramipril (substance)" />
@@ -399,15 +361,15 @@
 									</manufacturedMaterial>
 								</manufacturedProduct>
 							</product>
-							<entryRelationship typeCode='REFR'>
-								<substanceAdministration classCode='SBADM' moodCode='INT'>
-									<templateId root='1.3.6.1.4.1.19376.1.9.1.3.10' />
-									<templateId root='2.16.756.5.30.1.1.10.4.45' />
+							<entryRelationship typeCode="REFR">
+								<substanceAdministration classCode="SBADM" moodCode="INT">
+									<templateId root="1.3.6.1.4.1.19376.1.9.1.3.10" />
+									<templateId root="2.16.756.5.30.1.1.10.4.45" />
 									<id root="C9F758A1-296C-4710-84D4-E181DB8C7478" />
-									<code code='MTPItem' codeSystem='1.3.6.1.4.1.19376.1.9.2.2' displayName='Medication Treatment Plan Item' codeSystemName='IHE Pharmacy Item Type List' />
+									<code code="MTPItem" codeSystem="1.3.6.1.4.1.19376.1.9.2.2" codeSystemName="IHE Pharmacy Item Type List" displayName="Medication Treatment Plan Item" />
 									<consumable>
 										<manufacturedProduct>
-											<manufacturedMaterial nullFlavor='NA' />
+											<manufacturedMaterial nullFlavor="NA" />
 										</manufacturedProduct>
 									</consumable>
 									<reference typeCode="XCRPT">
@@ -417,37 +379,19 @@
 									</reference>
 								</substanceAdministration>
 							</entryRelationship>
-
-							<!-- dosage insruction -->
-							<entryRelationship typeCode='COMP'>
-								<substanceAdministration classCode='SBADM' moodCode='INT'>
-									<templateId root='1.3.6.1.4.1.19376.1.9.1.3.6' />
-									<!-- A normal substanceAdministration act that may not contain any subordinate substanceAdministration acts. -->
+							<entryRelationship typeCode="COMP">
+								<substanceAdministration classCode="SBADM" moodCode="INT">
+									<templateId root="1.3.6.1.4.1.19376.1.9.1.3.6" />
 									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1" />
-									<effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+									<effectiveTime xsi:type="IVL_TS">
 										<low value="20111129" />
 										<high nullFlavor="UNK" />
 									</effectiveTime>
-									<effectiveTime xsi:type='EIVL_TS' operator='A'>
-										<event code='MORN' />
+									<effectiveTime xsi:type="EIVL_TS" operator="A">
+										<event code="MORN" />
 									</effectiveTime>
 									<routeCode code="20053000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Oral use" />
 									<doseQuantity unit="732936001" value="0.5" />
-									<consumable>
-										<manufacturedProduct>
-											<manufacturedMaterial nullFlavor='NA' />
-										</manufacturedProduct>
-									</consumable>
-								</substanceAdministration>
-							</entryRelationship>
-							<entryRelationship typeCode="COMP">
-								<substanceAdministration moodCode="INT" classCode="SBADM">
-									<templateId root="2.16.756.5.30.1.1.10.4.52" />
-									<text>
-										Morgens 1/2 Tablette nehmen
-
-										<reference value="#dis.1.dosageintakemode" />
-									</text>
 									<consumable>
 										<manufacturedProduct>
 											<manufacturedMaterial nullFlavor="NA" />

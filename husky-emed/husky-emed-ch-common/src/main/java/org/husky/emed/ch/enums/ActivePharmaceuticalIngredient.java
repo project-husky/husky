@@ -31,7 +31,7 @@ import org.husky.common.enums.ValueSetEnumInterface;
  * Version: 2022<br>
  * Status: FINAL
  */
-@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-04-19")
+@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-07-11")
 public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
 
     /**

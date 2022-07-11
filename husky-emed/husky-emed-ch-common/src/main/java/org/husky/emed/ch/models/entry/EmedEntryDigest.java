@@ -168,11 +168,11 @@ public abstract class EmedEntryDigest {
         if (!(o instanceof final EmedEntryDigest that)) return false;
         return sequence == that.sequence
                 && Objects.equals(annotationComment, that.annotationComment)
-                && itemTime.equals(that.itemTime)
+                && Objects.equals(itemTime, that.itemTime)
                 && Objects.equals(documentAuthor, that.documentAuthor)
-                && documentId.equals(that.documentId)
-                && entryId.equals(that.entryId)
-                && medicationTreatmentId.equals(that.medicationTreatmentId)
+                && Objects.equals(documentId, that.documentId)
+                && Objects.equals(entryId, that.entryId)
+                && Objects.equals(medicationTreatmentId, that.medicationTreatmentId)
                 && Objects.equals(sectionAuthor, that.sectionAuthor);
     }
 
@@ -184,14 +184,14 @@ public abstract class EmedEntryDigest {
     @Override
     public String toString() {
         return "EmedEntryDigest{" +
-                "itemTime=" + itemTime +
-                ", documentId='" + documentId + '\'' +
-                ", sectionAuthor=" + sectionAuthor +
-                ", documentAuthor=" + documentAuthor +
-                ", entryId='" + entryId + '\'' +
-                ", medicationTreatmentId='" + medicationTreatmentId + '\'' +
-                ", sequence=" + sequence +
-                ", annotationComment='" + annotationComment + '\'' +
+                "annotationComment='" + this.annotationComment + '\'' +
+                ", itemTime=" + this.itemTime +
+                ", documentAuthor=" + this.documentAuthor +
+                ", documentId='" + this.documentId + '\'' +
+                ", entryId='" + this.entryId + '\'' +
+                ", medicationTreatmentId='" + this.medicationTreatmentId + '\'' +
+                ", sectionAuthor=" + this.sectionAuthor +
+                ", sequence=" + this.sequence +
                 '}';
     }
 }

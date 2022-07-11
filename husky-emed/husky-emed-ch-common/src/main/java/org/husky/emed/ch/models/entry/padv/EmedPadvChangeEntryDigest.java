@@ -172,7 +172,7 @@ public class EmedPadvChangeEntryDigest extends EmedPadvEntryDigest {
     public String toString() {
         return "EmedPadvChangeEntryDigest{" +
                 "annotationComment='" + this.annotationComment + '\'' +
-                ", pharmaceuticalAdviceTime=" + this.itemTime +
+                ", itemTime=" + this.itemTime +
                 ", documentAuthor=" + this.documentAuthor +
                 ", documentId='" + this.documentId + '\'' +
                 ", entryId='" + this.entryId + '\'' +

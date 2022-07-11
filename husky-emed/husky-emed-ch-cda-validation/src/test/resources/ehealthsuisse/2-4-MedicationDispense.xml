@@ -13,6 +13,7 @@
 <!-- 2021.03.01: Annatina Foppa, eHealth Suisse: Update to CDA-CH EMED v0.97. Some issues remained unresolved, concerning repeatNumber and doseQuantity, see https://art-decor.org/art-decor/decor-issues%2D%2Dch-pharm -->
 <!-- 2021.04.28: Michaela Ziegler, ahdis ag: Remove original representation -->
 <!-- 2021.06.07: Oliver Egger: Update to next CDA-CH-EMED 0.97 -->
+<!-- 2022.07.11: Quentin Ligier: Update to CDA-CH-EMED 1.0.2 -->
 <!-- ************************************************************ -->
 <?xml-stylesheet type='text/xsl' href='../../../../stylesheets/HL7.ch/CDA-CH/v2.0/cda-ch.xsl'?>
 <ClinicalDocument xmlns:pharm="urn:ihe:pharm" xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ../../../../schemas/PHARM/schemas/cda/extendedschemas/CDA_extended_pharmacy.xsd">
@@ -263,21 +264,6 @@
 											</consumable>
 										</substanceAdministration>
 									</entryRelationship>
-								</substanceAdministration>
-							</entryRelationship>
-							<entryRelationship typeCode="COMP">
-								<substanceAdministration classCode="SBADM" moodCode="INT">
-									<templateId root="2.16.756.5.30.1.1.10.4.52" />
-									<text>
-										Morgens 1 und abends 1/2 Tablette nehmen
-
-										<reference value="#dis.1.dosageintakemode" />
-									</text>
-									<consumable>
-										<manufacturedProduct>
-											<manufacturedMaterial nullFlavor="NA" />
-										</manufacturedProduct>
-									</consumable>
 								</substanceAdministration>
 							</entryRelationship>
 						</supply>

@@ -72,7 +72,7 @@ public class EmedPadvRefuseEntryDigest extends EmedPadvEntryDigest {
     public String toString() {
         return "EmedPadvRefuseEntryDigest{" +
                 "annotationComment='" + this.annotationComment + '\'' +
-                ", pharmaceuticalAdviceTime=" + this.itemTime +
+                ", itemTime=" + this.itemTime +
                 ", documentAuthor=" + this.documentAuthor +
                 ", documentId='" + this.documentId + '\'' +
                 ", entryId='" + this.entryId + '\'' +

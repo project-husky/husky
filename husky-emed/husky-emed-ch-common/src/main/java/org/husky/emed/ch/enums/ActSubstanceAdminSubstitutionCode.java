@@ -31,14 +31,14 @@ import org.husky.common.enums.ValueSetEnumInterface;
  * Version: 2020<br>
  * Status: DRAFT
  */
-@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-04-19")
+@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-07-11")
 public enum ActSubstanceAdminSubstitutionCode implements ValueSetEnumInterface {
 
     /**
      * EN: brand composition.<br>
      * DE: Äquivalent, andere Marke.<br>
      * FR: équivalent autre fabriquant.<br>
-     * IT: equivalente dello stesso produttore.<br>
+     * IT: equivalente altra marca.<br>
      */
     BRAND_COMPOSITION_L3("BC",
                          "2.16.840.1.113883.5.1070",
@@ -46,7 +46,7 @@ public enum ActSubstanceAdminSubstitutionCode implements ValueSetEnumInterface {
                          "brand composition",
                          "Äquivalent, andere Marke",
                          "équivalent autre fabriquant",
-                         "equivalente dello stesso produttore"),
+                         "equivalente altra marca"),
     /**
      * EN: equivalent composition.<br>
      * DE: äquivalente Zusammensetzung.<br>
@@ -74,20 +74,10 @@ public enum ActSubstanceAdminSubstitutionCode implements ValueSetEnumInterface {
                   "équivalent",
                   "equivalente"),
     /**
-     * EN: formulary.<br>
-     */
-    FORMULARY_L1("F",
-                 "2.16.840.1.113883.5.1070",
-                 "formulary",
-                 "formulary",
-                 "TOTRANSLATE",
-                 "TOTRANSLATE",
-                 "TOTRANSLATE"),
-    /**
      * EN: generic composition.<br>
      * DE: Äquivalent, Generikum.<br>
      * FR: équivalent générique.<br>
-     * IT: composizione identica.<br>
+     * IT: equivalente generico.<br>
      */
     GENERIC_COMPOSITION_L3("G",
                            "2.16.840.1.113883.5.1070",
@@ -95,7 +85,7 @@ public enum ActSubstanceAdminSubstitutionCode implements ValueSetEnumInterface {
                            "generic composition",
                            "Äquivalent, Generikum",
                            "équivalent générique",
-                           "composizione identica"),
+                           "equivalente generico"),
     /**
      * EN: none.<br>
      * DE: nicht autorisiert.<br>
@@ -126,7 +116,7 @@ public enum ActSubstanceAdminSubstitutionCode implements ValueSetEnumInterface {
      * EN: therapeutic brand.<br>
      * DE: therapeutische Alternative, andere Marke.<br>
      * FR: lternative thérapeutique autre marque.<br>
-     * IT: alternativa terapeutica stesso produttore.<br>
+     * IT: alternativa terapeutica altra marca.<br>
      */
     THERAPEUTIC_BRAND_L3("TB",
                          "2.16.840.1.113883.5.1070",
@@ -134,12 +124,12 @@ public enum ActSubstanceAdminSubstitutionCode implements ValueSetEnumInterface {
                          "therapeutic brand",
                          "therapeutische Alternative, andere Marke",
                          "lternative thérapeutique autre marque",
-                         "alternativa terapeutica stesso produttore"),
+                         "alternativa terapeutica altra marca"),
     /**
      * EN: therapeutic generic.<br>
      * DE: therapeutische Alternative, Generikum.<br>
      * FR: alternative thérapeutique générique.<br>
-     * IT: stesso effetto terapeutico.<br>
+     * IT: alternativa terapeutica generico.<br>
      */
     THERAPEUTIC_GENERIC_L3("TG",
                            "2.16.840.1.113883.5.1070",
@@ -147,13 +137,13 @@ public enum ActSubstanceAdminSubstitutionCode implements ValueSetEnumInterface {
                            "therapeutic generic",
                            "therapeutische Alternative, Generikum",
                            "alternative thérapeutique générique",
-                           "stesso effetto terapeutico");
+                           "alternativa terapeutica generico");
 
     /**
      * EN: Code for brand composition.<br>
      * DE: Code für Äquivalent, andere Marke.<br>
      * FR: Code de équivalent autre fabriquant.<br>
-     * IT: Code per equivalente dello stesso produttore.<br>
+     * IT: Code per equivalente altra marca.<br>
      */
     public static final String BRAND_COMPOSITION_L3_CODE = "BC";
 
@@ -174,15 +164,10 @@ public enum ActSubstanceAdminSubstitutionCode implements ValueSetEnumInterface {
     public static final String EQUIVALENT_L1_CODE = "E";
 
     /**
-     * EN: Code for formulary.<br>
-     */
-    public static final String FORMULARY_L1_CODE = "F";
-
-    /**
      * EN: Code for generic composition.<br>
      * DE: Code für Äquivalent, Generikum.<br>
      * FR: Code de équivalent générique.<br>
-     * IT: Code per composizione identica.<br>
+     * IT: Code per equivalente generico.<br>
      */
     public static final String GENERIC_COMPOSITION_L3_CODE = "G";
 
@@ -206,7 +191,7 @@ public enum ActSubstanceAdminSubstitutionCode implements ValueSetEnumInterface {
      * EN: Code for therapeutic brand.<br>
      * DE: Code für therapeutische Alternative, andere Marke.<br>
      * FR: Code de lternative thérapeutique autre marque.<br>
-     * IT: Code per alternativa terapeutica stesso produttore.<br>
+     * IT: Code per alternativa terapeutica altra marca.<br>
      */
     public static final String THERAPEUTIC_BRAND_L3_CODE = "TB";
 
@@ -214,7 +199,7 @@ public enum ActSubstanceAdminSubstitutionCode implements ValueSetEnumInterface {
      * EN: Code for therapeutic generic.<br>
      * DE: Code für therapeutische Alternative, Generikum.<br>
      * FR: Code de alternative thérapeutique générique.<br>
-     * IT: Code per stesso effetto terapeutico.<br>
+     * IT: Code per alternativa terapeutica generico.<br>
      */
     public static final String THERAPEUTIC_GENERIC_L3_CODE = "TG";
 

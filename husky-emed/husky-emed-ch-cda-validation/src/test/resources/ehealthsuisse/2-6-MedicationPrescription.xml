@@ -13,6 +13,7 @@
 <!-- 2021.03.01: Annatina Foppa, eHealth Suisse: Update to CDA-CH EMED v0.97. Some issues remained unresolved, concerning repeatNumber and doseQuantity, see https://art-decor.org/art-decor/decor-issues%2D%2Dch-pharm -->
 <!-- 2021.04.29: Michaela Ziegler: Update Original Represenation (PDF/A) -->
 <!-- 2021.05.31: Oliver Egger: Update to next CDA-CH-EMED 0.97 -->
+<!-- 2022.07.11: Quentin Ligier: Update to CDA-CH-EMED 1.0.2 -->
 <!-- ************************************************************ -->
 <?xml-stylesheet type='text/xsl' href='../../../../stylesheets/HL7.ch/CDA-CH/v2.0/cda-ch.xsl'?>
 <ClinicalDocument xmlns:pharm="urn:ihe:pharm" xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ../../../../schemas/PHARM/schemas/cda/extendedschemas/CDA_extended_pharmacy.xsd">
@@ -120,6 +121,7 @@
 						<substanceAdministration classCode="SBADM" moodCode="INT">
 							<templateId root="2.16.756.5.30.1.1.10.4.43" />
 							<templateId root="1.3.6.1.4.1.19376.1.9.1.3.2" />
+							<templateId root="1.3.6.1.4.1.19376.1.9.1.3.6" />
 							<templateId root="2.16.840.1.113883.10.20.1.24" />
 							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7" />
 							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1" />
@@ -213,21 +215,6 @@
 											<id root="5712FFFE-20C6-11E6-B67B-9E71128CAE77" />
 										</externalDocument>
 									</reference>
-								</substanceAdministration>
-							</entryRelationship>
-							<entryRelationship typeCode="COMP">
-								<substanceAdministration classCode="SBADM" moodCode="INT">
-									<templateId root="2.16.756.5.30.1.1.10.4.52" />
-									<text>
-										Morgens und abends je 1 Tablette nehmen
-
-										<reference value="#refpdf" />
-									</text>
-									<consumable>
-										<manufacturedProduct>
-											<manufacturedMaterial nullFlavor="NA" />
-										</manufacturedProduct>
-									</consumable>
 								</substanceAdministration>
 							</entryRelationship>
 							<entryRelationship typeCode="COMP">

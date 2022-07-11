@@ -27,7 +27,7 @@ import org.husky.common.model.Code;
  * Version: 2020<br>
  * Status: draft
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-04-19")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
 public class DocumentCodeMedicationDispense extends CE {
 
     public DocumentCodeMedicationDispense() {

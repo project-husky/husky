@@ -22,6 +22,7 @@ import org.husky.emed.ch.models.entry.EmedEntryDigest;
 
 import java.time.Instant;
 import java.time.OffsetDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -93,7 +94,37 @@ public class EmedDisDocumentDigest extends EmedDocumentDigest {
         return List.of(this.disEntryDigest);
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof final EmedDisDocumentDigest that)) return false;
+        if (!super.equals(o)) return false;
+        return Objects.equals(disEntryDigest, that.disEntryDigest);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), disEntryDigest);
+    }
+
+    @Override
     public String toString() {
-        return "EmedDisDocumentDigest(super=" + super.toString() + ", disEntryDigest=" + this.getDisEntryDigest() + ")";
+        return "EmedDisDocumentDigest{" +
+                "authors=" + this.authors +
+                ", recipients=" + this.recipients +
+                ", id='" + this.id + '\'' +
+                ", setId='" + this.setId + '\'' +
+                ", version=" + this.version +
+                ", creationTime=" + this.creationTime +
+                ", documentationTime=" + this.documentationTime +
+                ", confidentialityCode=" + this.confidentialityCode +
+                ", languageCode='" + this.languageCode + '\'' +
+                ", patient=" + this.patient +
+                ", custodian=" + this.custodian +
+                ", narrativeText=" + this.narrativeText +
+                ", remarks=" + this.remarks +
+                ", pdfRepresentation=" + Arrays.toString(this.pdfRepresentation) +
+                ", disEntryDigest=" + this.disEntryDigest +
+                '}';
     }
 }

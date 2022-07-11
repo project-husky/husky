@@ -65,7 +65,7 @@ public class CdaChEmedValidator {
     /**
      * The path of the directory that contains CDA-CH-EMED XSLT files.
      */
-    private static final String CCE_XSLT_PATH = "schematron/0.98.0/";
+    private static final String CCE_XSLT_PATH = "schematron/1.0.2/";
 
     /**
      * The patterns to transform the failed asserts location.

@@ -24,7 +24,7 @@ import org.husky.common.hl7cdar2.POCDMT000040EntryRelationship;
  * Version: 2021<br>
  * Status: draft
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-04-19")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
 public class DosageInstructionsEntryRelatedComponents extends POCDMT000040EntryRelationship {
 
     public DosageInstructionsEntryRelatedComponents() {
@@ -52,7 +52,8 @@ public class DosageInstructionsEntryRelatedComponents extends POCDMT000040EntryR
     }
 
     /**
-     * Gets the hl7SubstanceAdministration
+     * Gets the hl7SubstanceAdministration<br/>
+     * For split, tapered or conditional dosing, the subordinate component shall specify only the changed &lt;frequency&gt; and/or &lt;doseAmount&gt; elements.<br/>
      */
     public org.husky.common.hl7cdar2.POCDMT000040SubstanceAdministration getHl7SubstanceAdministration() {
         return substanceAdministration;
@@ -66,7 +67,8 @@ public class DosageInstructionsEntryRelatedComponents extends POCDMT000040EntryR
     }
 
     /**
-     * Sets the hl7SubstanceAdministration
+     * Sets the hl7SubstanceAdministration<br/>
+     * For split, tapered or conditional dosing, the subordinate component shall specify only the changed &lt;frequency&gt; and/or &lt;doseAmount&gt; elements.<br/>
      */
     public void setHl7SubstanceAdministration(org.husky.common.hl7cdar2.POCDMT000040SubstanceAdministration value) {
         this.substanceAdministration = value;

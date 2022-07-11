@@ -22,6 +22,7 @@ import org.husky.emed.ch.models.entry.EmedPadvEntryDigest;
 
 import java.time.Instant;
 import java.time.OffsetDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -93,8 +94,37 @@ public class EmedPadvDocumentDigest extends EmedDocumentDigest {
         return List.of(this.padvEntryDigest);
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof final EmedPadvDocumentDigest that)) return false;
+        if (!super.equals(o)) return false;
+        return Objects.equals(padvEntryDigest, that.padvEntryDigest);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), padvEntryDigest);
+    }
+
+    @Override
     public String toString() {
-        return "EmedPadvDocumentDigest(super=" + super.toString() + ", padvEntryDigest=" + this.getPadvEntryDigest() +
-                ")";
+        return "EmedPadvDocumentDigest{" +
+                "authors=" + this.authors +
+                ", recipients=" + this.recipients +
+                ", id='" + this.id + '\'' +
+                ", setId='" + this.setId + '\'' +
+                ", version=" + this.version +
+                ", creationTime=" + this.creationTime +
+                ", documentationTime=" + this.documentationTime +
+                ", confidentialityCode=" + this.confidentialityCode +
+                ", languageCode='" + this.languageCode + '\'' +
+                ", patient=" + this.patient +
+                ", custodian=" + this.custodian +
+                ", narrativeText=" + this.narrativeText +
+                ", remarks=" + this.remarks +
+                ", pdfRepresentation=" + Arrays.toString(this.pdfRepresentation) +
+                ", padvEntryDigest=" + this.padvEntryDigest +
+                '}';
     }
 }

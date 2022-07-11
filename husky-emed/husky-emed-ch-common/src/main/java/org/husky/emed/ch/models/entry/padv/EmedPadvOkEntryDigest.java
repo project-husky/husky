@@ -103,7 +103,7 @@ public class EmedPadvOkEntryDigest extends EmedPadvEntryDigest {
         if (this == o) return true;
         if (!(o instanceof final EmedPadvOkEntryDigest that)) return false;
         if (!super.equals(o)) return false;
-        return recommendedPrescriptions.equals(that.recommendedPrescriptions);
+        return Objects.equals(recommendedPrescriptions, that.recommendedPrescriptions);
     }
 
     @Override
@@ -115,7 +115,7 @@ public class EmedPadvOkEntryDigest extends EmedPadvEntryDigest {
     public String toString() {
         return "EmedPadvOkEntryDigest{" +
                 "annotationComment='" + this.annotationComment + '\'' +
-                ", pharmaceuticalAdviceTime=" + this.itemTime +
+                ", itemTime=" + this.itemTime +
                 ", documentAuthor=" + this.documentAuthor +
                 ", documentId='" + this.documentId + '\'' +
                 ", entryId='" + this.entryId + '\'' +

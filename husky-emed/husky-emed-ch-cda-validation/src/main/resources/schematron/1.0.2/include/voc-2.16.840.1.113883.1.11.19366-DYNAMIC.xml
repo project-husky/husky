@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets xmlns="urn:hl7-org:v3" xmlns:local="http://art-decor.org/functions" xmlns:hl7="urn:hl7-org:v3" xmlns:sch="http://purl.oclc.org/dsdl/schematron">
+    <valueSet xmlns="" id="2.16.840.1.113883.1.11.19366" name="x_InformationRecipient" displayName="x_InformationRecipient" effectiveDate="2014-03-26T00:00:00" statusCode="final" versionLabel="DEFN=UV=VO=1360-20160323" ident="ad2bbr-" url="http://art-decor.org/decor/services/" referencedFrom="cdachemed-">
+        <desc language="en-US">
+            <p>
+                <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26</p>
+            <b>description: </b>
+            <p>Used to represent participant(s) who should receive a copy of a document.</p>
+        </desc>
+        <sourceCodeSystem id="2.16.840.1.113883.5.90" identifierName="ParticipationType" canonicalUri="http://terminology.hl7.org/CodeSystem/v3-ParticipationType" canonicalUriDSTU2="http://hl7.org/fhir/v3/ParticipationType" canonicalUriSTU3="http://hl7.org/fhir/v3/ParticipationType" canonicalUriR4="http://terminology.hl7.org/CodeSystem/v3-ParticipationType"/>
+        <publishingAuthority name="eHealth Suisse">
+            <addrLine>Schwarzenburgstrasse 165</addrLine>
+            <addrLine>CH-3003 Bern</addrLine>
+            <addrLine type="uri">www.e-health-suisse.ch</addrLine>
+        </publishingAuthority>
+        <conceptList>
+            <concept code="PRCP" codeSystem="2.16.840.1.113883.5.90" displayName="primary information recipient" level="0" type="L"/>
+            <concept code="TRC" codeSystem="2.16.840.1.113883.5.90" displayName="tracker" level="0" type="L"/>
+        </conceptList>
+    </valueSet>
+</valueSets>

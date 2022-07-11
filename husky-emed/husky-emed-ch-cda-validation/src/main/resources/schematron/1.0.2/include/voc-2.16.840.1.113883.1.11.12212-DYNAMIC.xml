@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets xmlns="urn:hl7-org:v3" xmlns:local="http://art-decor.org/functions" xmlns:hl7="urn:hl7-org:v3" xmlns:sch="http://purl.oclc.org/dsdl/schematron">
+    <valueSet xmlns="" id="2.16.840.1.113883.1.11.12212" name="MaritalStatus" displayName="MaritalStatus" effectiveDate="2014-03-26T00:00:00" statusCode="final" versionLabel="DEFN=UV=VO=1360-20160323" ident="ad2bbr-" url="http://art-decor.org/decor/services/" referencedFrom="cdachemed-">
+        <desc language="en-US">
+            <p>
+                <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26</p>
+            <b>description: </b>
+            <p>The domestic partnership status of a person.</p>
+            <p>
+                <i>Example:</i> Married, separated, divorced, widowed, common-law marriage.</p>
+        </desc>
+        <sourceCodeSystem id="2.16.840.1.113883.5.2" identifierName="MaritalStatus" canonicalUri="http://terminology.hl7.org/CodeSystem/v3-MaritalStatus" canonicalUriDSTU2="http://hl7.org/fhir/v3/MaritalStatus" canonicalUriSTU3="http://hl7.org/fhir/v3/MaritalStatus" canonicalUriR4="http://terminology.hl7.org/CodeSystem/v3-MaritalStatus"/>
+        <publishingAuthority name="eHealth Suisse">
+            <addrLine>Schwarzenburgstrasse 165</addrLine>
+            <addrLine>CH-3003 Bern</addrLine>
+            <addrLine type="uri">www.e-health-suisse.ch</addrLine>
+        </publishingAuthority>
+        <conceptList>
+            <concept code="A" codeSystem="2.16.840.1.113883.5.2" displayName="Annulled" level="0" type="L"/>
+            <concept code="D" codeSystem="2.16.840.1.113883.5.2" displayName="Divorced" level="0" type="L"/>
+            <concept code="I" codeSystem="2.16.840.1.113883.5.2" displayName="Interlocutory" level="0" type="L"/>
+            <concept code="L" codeSystem="2.16.840.1.113883.5.2" displayName="Legally Separated" level="0" type="L"/>
+            <concept code="M" codeSystem="2.16.840.1.113883.5.2" displayName="Married" level="0" type="L"/>
+            <concept code="P" codeSystem="2.16.840.1.113883.5.2" displayName="Polygamous" level="0" type="L"/>
+            <concept code="S" codeSystem="2.16.840.1.113883.5.2" displayName="Never Married" level="0" type="L"/>
+            <concept code="T" codeSystem="2.16.840.1.113883.5.2" displayName="Domestic partner" level="0" type="L"/>
+            <concept code="W" codeSystem="2.16.840.1.113883.5.2" displayName="Widowed" level="0" type="L"/>
+        </conceptList>
+    </valueSet>
+</valueSets>

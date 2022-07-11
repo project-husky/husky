@@ -24,7 +24,7 @@ import org.husky.common.hl7cdar2.POCDMT000040ObservationMedia;
  * Version: 2022<br>
  * Status: draft
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-04-19")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
 public class CdachEntryObservationMedia extends POCDMT000040ObservationMedia {
 
     public CdachEntryObservationMedia() {
