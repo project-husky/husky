@@ -10,6 +10,7 @@
 package org.husky.emed.ch.models.document;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.ch.enums.ConfidentialityCode;
 import org.husky.common.hl7cdar2.StrucDocText;
 import org.husky.emed.ch.enums.CceDocumentType;
@@ -39,8 +40,9 @@ public class EmedPreDocumentDigest extends EmedDocumentDigest {
     final Instant prescriptionValidityStart;
 
     /**
-     * The prescription validity stop time (inclusive).
+     * The prescription validity stop time (inclusive) or {@code null}.
      */
+    @Nullable
     final Instant prescriptionValidityStop;
 
     /**
@@ -65,7 +67,7 @@ public class EmedPreDocumentDigest extends EmedDocumentDigest {
      * @param narrativeText             The narrative text.
      * @param preEntryDigests           The PRE entry digests.
      * @param prescriptionValidityStart The prescription validity start time (inclusive).
-     * @param prescriptionValidityStop  The prescription validity stop time (inclusive).
+     * @param prescriptionValidityStop  The prescription validity stop time (inclusive) or {@code null}.
      */
     public EmedPreDocumentDigest(final String id,
                                  final String setId,
@@ -81,12 +83,12 @@ public class EmedPreDocumentDigest extends EmedDocumentDigest {
                                  final StrucDocText narrativeText,
                                  final List<@NonNull EmedPreEntryDigest> preEntryDigests,
                                  final Instant prescriptionValidityStart,
-                                 final Instant prescriptionValidityStop) {
+                                 @Nullable final Instant prescriptionValidityStop) {
         super(id, setId, version, creationTime, documentationTime, confidentialityCode, languageCode, patient, authors,
                 custodian, recipients, narrativeText);
         this.preEntryDigests.addAll(Objects.requireNonNull(preEntryDigests));
         this.prescriptionValidityStart = Objects.requireNonNull(prescriptionValidityStart);
-        this.prescriptionValidityStop = Objects.requireNonNull(prescriptionValidityStop);
+        this.prescriptionValidityStop = prescriptionValidityStop;
     }
 
     /**
@@ -106,6 +108,7 @@ public class EmedPreDocumentDigest extends EmedDocumentDigest {
     /**
      * Returns the prescription validity stop time (inclusive).
      */
+    @Nullable
     public Instant getPrescriptionValidityStop() {
         return this.prescriptionValidityStop;
     }
