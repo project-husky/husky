@@ -45,14 +45,6 @@ public class MedicationPrescription {
     private Integer dispenseRepeatNumber = null;
 
     /**
-     * PRE item ending time.
-     * <p>
-     * TODO: mandatory?
-     */
-    @Nullable
-    private Instant endTime;
-
-    /**
      * Reference to the PRE items.
      */
     @Nullable
@@ -70,12 +62,15 @@ public class MedicationPrescription {
     private QuantityWithRegularUnit quantityToDispense;
 
     /**
-     * PRE item starting time.
-     * <p>
-     * TODO: mandatory?
+     * PRE item start time.
+     */
+    private Instant startTime;
+
+    /**
+     * PRE item stop time.
      */
     @Nullable
-    private Instant startTime;
+    private Instant stopTime;
 
     /**
      * Whether the substitution is permitted (Equivalent) or not (None).
@@ -105,7 +100,8 @@ public class MedicationPrescription {
      * @return {@code true} if the prescription may be ready for validation, {@code false} otherwise.
      */
     public boolean mayBeReadyForValidationInTheFuture() {
-        return !Instant.now().isAfter(this.endTime) && this.prescriptionStatus == PrescriptionStatus.PROVISIONAL;
+        return this.prescriptionStatus == PrescriptionStatus.PROVISIONAL &&
+                (this.stopTime == null || !Instant.now().isAfter(this.stopTime));
     }
 
     /**
@@ -117,7 +113,7 @@ public class MedicationPrescription {
      * @return {@code true} if the prescription may be ready for dispense, {@code false} otherwise.
      */
     public boolean mayBeReadyForDispenseInTheFuture() {
-        return (this.endTime == null || !Instant.now().isAfter(this.endTime)) // if end time null or in the future
-                && this.prescriptionStatus == PrescriptionStatus.ACTIVE;
+        return this.prescriptionStatus == PrescriptionStatus.ACTIVE &&
+                (this.stopTime == null || !Instant.now().isAfter(this.stopTime));
     }
 }
