@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets xmlns="urn:hl7-org:v3" xmlns:local="http://art-decor.org/functions" xmlns:hl7="urn:hl7-org:v3" xmlns:sch="http://purl.oclc.org/dsdl/schematron">
+    <valueSet xmlns="" id="2.16.756.5.30.1.127.77.12.11.1" name="RouteOfAdministrationAmbu" displayName="RouteOfAdministration (Ambu)" effectiveDate="2022-04-15T08:51:35" statusCode="draft" versionLabel="2022">
+        <desc language="en-US">Valueset RouteOfAdministration Ambu based on "RouteOfAdministration (EDQM)" (and EDQM, ROA, export 1.6.2021, see https://standardterms.edqm.eu/#), for ambulatory use.</desc>
+        <sourceCodeSystem id="0.4.0.127.0.16.1.1.2.1" identifierName="" canonicalUri="urn:oid:0.4.0.127.0.16.1.1.2.1" canonicalUriDSTU2="http://fhir.de/CodeSystem/edqm" canonicalUriSTU3="http://fhir.de/CodeSystem/edqm" canonicalUriR4="http://fhir.de/CodeSystem/edqm"/>
+        <publishingAuthority name="eHealth Suisse">
+            <addrLine>Schwarzenburgstrasse 165</addrLine>
+            <addrLine>CH-3003 Bern</addrLine>
+            <addrLine type="uri">www.e-health-suisse.ch</addrLine>
+        </publishingAuthority>
+        <conceptList>
+            <concept code="20001000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Auricular use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="Anwendung am Ohr"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie auriculaire"/>
+                <designation language="it-CH" type="preferred" displayName="Uso auricolare"/>
+                <designation language="rm-CH" type="preferred" displayName="Anwendung am Ohr"/>
+                <desc language="en-US">Administration of a medicinal product to the ear.</desc>
+            </concept>
+            <concept code="20002500" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Buccal use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="Buccale Anwendung"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie buccogingivale"/>
+                <designation language="it-CH" type="preferred" displayName="Somministrazione buccale"/>
+                <designation language="rm-CH" type="preferred" displayName="Buccale Anwendung"/>
+                <desc language="en-US">Administration of a medicinal product to the buccal cavity (pouch located between the cheek and the gum) to obtain a systemic effect</desc>
+            </concept>
+            <concept code="20003000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Cutaneous use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="Anwendung auf der Haut"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie cutanée"/>
+                <designation language="it-CH" type="preferred" displayName="Uso cutaneo"/>
+                <designation language="rm-CH" type="preferred" displayName="Anwendung auf der Haut"/>
+                <desc language="en-US">Administration of a medicinal product to the skin and/or cutaneous wounds and/or nails and/or hair in order to obtain a local effect.</desc>
+            </concept>
+            <concept code="20004000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Dental use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="dentale Anwendung"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie dentaire"/>
+                <designation language="it-CH" type="preferred" displayName="Uso dentale"/>
+                <designation language="rm-CH" type="preferred" displayName="dentale Anwendung"/>
+                <desc language="en-US">Administration of a medicinal product to and/or in the teeth or, on and/or around the nerves supplying the teeth.</desc>
+            </concept>
+            <concept code="20008000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Endotracheopulmonary use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="endotracheopulmonale Anwendung"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie endotrachéobronchique"/>
+                <designation language="it-CH" type="preferred" displayName="Uso endotracheobronchiale"/>
+                <designation language="rm-CH" type="preferred" displayName="endotracheopulmonale Anwendung"/>
+                <desc language="en-US">Administration of a medicinal product to the trachea and/or bronchi by instillation (preparations for inhalation are excluded</desc>
+            </concept>
+            <concept code="20010000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Epilesional use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="zum Auftragen auf die Wunde"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie épilésionnelle"/>
+                <designation language="it-CH" type="preferred" displayName="Uso epilesionale"/>
+                <designation language="rm-CH" type="preferred" displayName="zum Auftragen auf die Wunde"/>
+                <desc language="en-US">Administration of a medicinal product onto a lesion.</desc>
+            </concept>
+            <concept code="20013000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Gastroenteral use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="gastrointestinale Anwendung"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie gastro-entérale"/>
+                <designation language="it-CH" type="preferred" displayName="Uso gastrointestinale"/>
+                <designation language="rm-CH" type="preferred" displayName="gastrointestinale Anwendung"/>
+                <desc language="en-US">Administration of a medicinal product to the stomach or duodenum gastroenteral tract by means of an appropriate device. For use only when gastric use and intestinal use do not apply.</desc>
+            </concept>
+            <concept code="20013500" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Gastric use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="zur Anwendung mittels Magensonde"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie gastrique"/>
+                <designation language="it-CH" type="preferred" displayName="Uso gastrico"/>
+                <designation language="rm-CH" type="preferred" displayName="zur Anwendung mittels Magensonde"/>
+                <desc language="en-US">Administration of a medicinal product to the stomach by means of an appropriate device</desc>
+            </concept>
+            <concept code="20014000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Gingival use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="Anwendung am Zahnfleisch"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie gingivale"/>
+                <designation language="it-CH" type="preferred" displayName="Uso gengivale"/>
+                <designation language="rm-CH" type="preferred" displayName="Anwendung am Zahnfleisch"/>
+                <desc language="en-US">Administration of a medicinal product to the gingivae.</desc>
+            </concept>
+            <concept code="20015000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Haemodialysis" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="Hämodialyse"/>
+                <designation language="fr-CH" type="preferred" displayName="Hémodialyse"/>
+                <designation language="it-CH" type="preferred" displayName="Emodialisi"/>
+                <designation language="rm-CH" type="preferred" displayName="Hämodialyse"/>
+                <desc language="en-US">Clearance of the blood by means of a semipermeable membrane. Previous English term 'Hemodialysis' corrected 04/07/11.</desc>
+            </concept>
+            <concept code="20020000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Inhalation use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="zur Inhalation"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie inhalée"/>
+                <designation language="it-CH" type="preferred" displayName="Uso inalatorio"/>
+                <designation language="rm-CH" type="preferred" displayName="zur Inhalation"/>
+                <desc language="en-US">Administration of a medicinal product to the respiratory system by inhalation to obtain a systemic or a local effect in the lower respiratory tract. Nasal use and endotracheopulmonary use are excluded</desc>
+            </concept>
+            <concept code="20021000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Intestinal use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="intestinale Anwendung"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie intestinale"/>
+                <designation language="it-CH" type="preferred" displayName="Uso intestinale"/>
+                <designation language="rm-CH" type="preferred" displayName="intestinale Anwendung"/>
+                <desc language="en-US">Administration of a medicinal product to the intestine (duodenum, jejunum, ileum and colon) by means of an appropriate device. Gastroenteral use is excluded </desc>
+            </concept>
+            <concept code="20031500" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Intraepidermal use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="intraepidermale Anwendung"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie intraépidermique"/>
+                <designation language="it-CH" type="preferred" displayName="Uso intraepidermico"/>
+                <designation language="rm-CH" type="preferred" displayName="intraepidermale Anwendung"/>
+                <desc language="en-US">Administration of a medicinal product into the epidermis</desc>
+            </concept>
+            <concept code="20032000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Intralesional use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="intraläsionale Anwendung"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie intralésionnelle"/>
+                <designation language="it-CH" type="preferred" displayName="Uso intralesionale"/>
+                <designation language="rm-CH" type="preferred" displayName="intraläsionale Anwendung"/>
+                <desc language="en-US">Administration by injection or any other means of a medicinal product directly to a lesion.</desc>
+            </concept>
+            <concept code="20035000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Intramuscular use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="intramuskuläre Anwendung"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie intramusculaire"/>
+                <designation language="it-CH" type="preferred" displayName="Uso intramuscolare"/>
+                <designation language="rm-CH" type="preferred" displayName="intramuskuläre Anwendung"/>
+                <desc language="en-US">Injection of a medicinal product into muscular tissue.</desc>
+            </concept>
+            <concept code="20039000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Intrapleural use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="intrapleurale Anwendung"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie intrapleurale"/>
+                <designation language="it-CH" type="preferred" displayName="Uso intrapleurico"/>
+                <designation language="rm-CH" type="preferred" displayName="intrapleurale Anwendung"/>
+                <desc language="en-US">Injection of a medicinal product into the pleural cavity.</desc>
+            </concept>
+            <concept code="20044000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Intrauterine use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="intrauterine Anwendung"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie intra-utérine"/>
+                <designation language="it-CH" type="preferred" displayName="Uso intrauterino"/>
+                <designation language="rm-CH" type="preferred" displayName="intrauterine Anwendung"/>
+                <desc language="en-US">Administration of a medicinal product to the cavity of the uterus.</desc>
+            </concept>
+            <concept code="20045000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Intravenous use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="intravenöse Anwendung"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie intraveineuse"/>
+                <designation language="it-CH" type="preferred" displayName="Uso endovenoso"/>
+                <designation language="rm-CH" type="preferred" displayName="intravenöse Anwendung"/>
+                <desc language="en-US">Injection of a medicinal product into a vein.</desc>
+            </concept>
+            <concept code="20046000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Intravesical use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="intravesikale Anwendung"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie intravésicale"/>
+                <designation language="it-CH" type="preferred" displayName="Uso endovescicale"/>
+                <designation language="rm-CH" type="preferred" displayName="intravesikale Anwendung"/>
+                <desc language="en-US">Administration of a medicinal product to the urinary bladder.</desc>
+            </concept>
+            <concept code="20049000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Nasal use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="nasale Anwendung"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie nasale"/>
+                <designation language="it-CH" type="preferred" displayName="Uso nasale"/>
+                <designation language="rm-CH" type="preferred" displayName="nasale Anwendung"/>
+                <desc language="en-US">Administration of a medicinal product to the nose to obtain a systemic or local effect. Inhalation therapy intended for the lower respiratory tract is excluded</desc>
+            </concept>
+            <concept code="20051000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Ocular use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="Anwendung am Auge"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie ophtalmique"/>
+                <designation language="it-CH" type="preferred" displayName="Uso oftalmico"/>
+                <designation language="rm-CH" type="preferred" displayName="Anwendung am Auge"/>
+                <desc language="en-US">Administration of a medicinal product upon the eyeball and/or conjunctiva.</desc>
+            </concept>
+            <concept code="20053000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Oral use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="zum Einnehmen"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie orale"/>
+                <designation language="it-CH" type="preferred" displayName="Uso orale"/>
+                <designation language="rm-CH" type="preferred" displayName="zum Einnehmen"/>
+                <desc language="en-US">Taking a medicinal product by means of swallowing.</desc>
+            </concept>
+            <concept code="20054000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Oromucosal use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="Anwendung in der Mundhöhle"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie buccale"/>
+                <designation language="it-CH" type="preferred" displayName="Per mucosa orale"/>
+                <designation language="rm-CH" type="preferred" displayName="Anwendung in der Mundhöhle"/>
+                <desc language="en-US">Administration of a medicinal product to the oral cavity to obtain either a systemic or a local effect. The term oromucosal is only for use when a more specific term (e.g. buccal, gingival, sublingual...) does not apply. Oral use is excluded.</desc>
+            </concept>
+            <concept code="20055000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Oropharyngeal use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="zur Anwendung im Mund- und Rachenraum"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie oropharyngée"/>
+                <designation language="it-CH" type="preferred" displayName="Uso orofaringeo"/>
+                <designation language="rm-CH" type="preferred" displayName="zur Anwendung im Mund- und Rachenraum"/>
+                <desc language="en-US">Administration of a medicinal product to the oropharynx (throat) to obtain a local effect.</desc>
+            </concept>
+            <concept code="20061000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Rectal use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="rektale Anwendung"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie rectale"/>
+                <designation language="it-CH" type="preferred" displayName="Uso rettale"/>
+                <designation language="rm-CH" type="preferred" displayName="rektale Anwendung"/>
+                <desc language="en-US">Administration of a medicinal product to the rectum in order to obtain a local or systemic effect.</desc>
+            </concept>
+            <concept code="20066000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Subcutaneous use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="subkutane Anwendung"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie sous-cutanée"/>
+                <designation language="it-CH" type="preferred" displayName="Uso sottocutaneo"/>
+                <designation language="rm-CH" type="preferred" displayName="subkutane Anwendung"/>
+                <desc language="en-US">Injection of a medicinal product directly underneath the skin, i.e. subdermally</desc>
+            </concept>
+            <concept code="20067000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Sublingual use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="Sublingual"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie sublinguale"/>
+                <designation language="it-CH" type="preferred" displayName="Uso sublinguale"/>
+                <designation language="rm-CH" type="preferred" displayName="Sublingual"/>
+                <desc language="en-US">Administration of a medicinal product under the tongue to obtain a systemic effect.</desc>
+            </concept>
+            <concept code="20070000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Transdermal use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="transdermale Anwendung"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie transdermique"/>
+                <designation language="it-CH" type="preferred" displayName="Uso transdermico"/>
+                <designation language="rm-CH" type="preferred" displayName="transdermale Anwendung"/>
+                <desc language="en-US">Administration of a medicinal product to the skin in order to obtain a systemic effect after passing through the skin barrier.</desc>
+            </concept>
+            <concept code="20071000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Urethral use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="Anwendung in der Harnröhre"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie urétrale"/>
+                <designation language="it-CH" type="preferred" displayName="Uso uretrale"/>
+                <designation language="rm-CH" type="preferred" displayName="Anwendung in der Harnröhre"/>
+                <desc language="en-US">Administration of a medicinal product to the urethra.</desc>
+            </concept>
+            <concept code="20072000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Vaginal use" level="0" type="L">
+                <designation language="de-CH" type="preferred" displayName="vaginale Anwendung"/>
+                <designation language="fr-CH" type="preferred" displayName="Voie vaginale"/>
+                <designation language="it-CH" type="preferred" displayName="Uso vaginale"/>
+                <designation language="rm-CH" type="preferred" displayName="vaginale Anwendung"/>
+                <desc language="en-US">Administration of a medicinal product to the vagina.</desc>
+            </concept>
+        </conceptList>
+    </valueSet>
+</valueSets>

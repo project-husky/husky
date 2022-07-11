@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets xmlns="urn:hl7-org:v3" xmlns:local="http://art-decor.org/functions" xmlns:hl7="urn:hl7-org:v3" xmlns:sch="http://purl.oclc.org/dsdl/schematron">
+    <valueSet xmlns="" id="2.16.840.1.113883.1.11.19316" name="RoleClassMutualRelationship" displayName="RoleClassMutualRelationship" effectiveDate="2014-03-26T00:00:00" statusCode="final" versionLabel="DEFN=UV=VO=1360-20160323" ident="ad2bbr-" url="http://art-decor.org/decor/services/" referencedFrom="cdachemed-">
+        <desc language="en-US">
+            <p>
+                <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26</p>
+            <b>description: </b>
+            <p>A relationship that is based on mutual behavior of the two Entities as being related. The basis of such relationship may be agreements (e.g., spouses, contract parties) or they may be <i>de facto</i> behavior (e.g. friends) or may be an incidental involvement with each other (e.g. parties over a dispute, siblings, children).</p>
+        </desc>
+        <sourceCodeSystem id="2.16.840.1.113883.5.110" identifierName="Role&#160;Class" canonicalUri="http://terminology.hl7.org/CodeSystem/v3-RoleClass" canonicalUriDSTU2="http://hl7.org/fhir/v3/RoleClass" canonicalUriSTU3="http://hl7.org/fhir/v3/RoleClass" canonicalUriR4="http://terminology.hl7.org/CodeSystem/v3-RoleClass"/>
+        <publishingAuthority name="eHealth Suisse">
+            <addrLine>Schwarzenburgstrasse 165</addrLine>
+            <addrLine>CH-3003 Bern</addrLine>
+            <addrLine type="uri">www.e-health-suisse.ch</addrLine>
+        </publishingAuthority>
+        <conceptList>
+            <concept code="_RoleClassRelationshipFormal" codeSystem="2.16.840.1.113883.5.110" displayName="RoleClassRelationshipFormal" level="1" type="A"/>
+            <concept code="AFFL" codeSystem="2.16.840.1.113883.5.110" displayName="affiliate" level="2" type="L"/>
+            <concept code="AGNT" codeSystem="2.16.840.1.113883.5.110" displayName="agent" level="2" type="S"/>
+            <concept code="ASSIGNED" codeSystem="2.16.840.1.113883.5.110" displayName="assigned entity" level="3" type="S"/>
+            <concept code="COMPAR" codeSystem="2.16.840.1.113883.5.110" displayName="commissioning party" level="4" type="L"/>
+            <concept code="SGNOFF" codeSystem="2.16.840.1.113883.5.110" displayName="signing authority or officer" level="4" type="L"/>
+            <concept code="CON" codeSystem="2.16.840.1.113883.5.110" displayName="contact" level="3" type="S"/>
+            <concept code="ECON" codeSystem="2.16.840.1.113883.5.110" displayName="emergency contact" level="4" type="L"/>
+            <concept code="NOK" codeSystem="2.16.840.1.113883.5.110" displayName="next of kin" level="4" type="L"/>
+            <concept code="GUARD" codeSystem="2.16.840.1.113883.5.110" displayName="guardian" level="3" type="L"/>
+            <concept code="CIT" codeSystem="2.16.840.1.113883.5.110" displayName="citizen" level="2" type="L"/>
+            <concept code="COVPTY" codeSystem="2.16.840.1.113883.5.110" displayName="covered party" level="2" type="S"/>
+            <concept code="CLAIM" codeSystem="2.16.840.1.113883.5.110" displayName="claimant" level="3" type="L"/>
+            <concept code="NAMED" codeSystem="2.16.840.1.113883.5.110" displayName="named insured" level="3" type="S"/>
+            <concept code="DEPEN" codeSystem="2.16.840.1.113883.5.110" displayName="dependent" level="4" type="L"/>
+            <concept code="INDIV" codeSystem="2.16.840.1.113883.5.110" displayName="individual" level="4" type="L"/>
+            <concept code="SUBSCR" codeSystem="2.16.840.1.113883.5.110" displayName="subscriber" level="4" type="L"/>
+            <concept code="PROG" codeSystem="2.16.840.1.113883.5.110" displayName="program eligible" level="3" type="L"/>
+            <concept code="CRINV" codeSystem="2.16.840.1.113883.5.110" displayName="clinical research investigator" level="2" type="L"/>
+            <concept code="CRSPNSR" codeSystem="2.16.840.1.113883.5.110" displayName="clinical research sponsor" level="2" type="L"/>
+            <concept code="EMP" codeSystem="2.16.840.1.113883.5.110" displayName="employee" level="2" type="S"/>
+            <concept code="MIL" codeSystem="2.16.840.1.113883.5.110" displayName="military person" level="3" type="L"/>
+            <concept code="GUAR" codeSystem="2.16.840.1.113883.5.110" displayName="guarantor GuarantorRole" level="2" type="L"/>
+            <concept code="INVSBJ" codeSystem="2.16.840.1.113883.5.110" displayName="Investigation Subject" level="2" type="S"/>
+            <concept code="CASEBJ" codeSystem="2.16.840.1.113883.5.110" displayName="Case Subject" level="3" type="L"/>
+            <concept code="RESBJ" codeSystem="2.16.840.1.113883.5.110" displayName="research subject" level="3" type="L"/>
+            <concept code="LIC" codeSystem="2.16.840.1.113883.5.110" displayName="licensed entity" level="2" type="S"/>
+            <concept code="NOT" codeSystem="2.16.840.1.113883.5.110" displayName="notary public" level="3" type="L"/>
+            <concept code="PROV" codeSystem="2.16.840.1.113883.5.110" displayName="healthcare provider" level="3" type="L"/>
+            <concept code="PAT" codeSystem="2.16.840.1.113883.5.110" displayName="patient" level="2" type="L"/>
+            <concept code="PAYEE" codeSystem="2.16.840.1.113883.5.110" displayName="payee" level="2" type="L"/>
+            <concept code="PAYOR" codeSystem="2.16.840.1.113883.5.110" displayName="invoice payor" level="2" type="L"/>
+            <concept code="POLHOLD" codeSystem="2.16.840.1.113883.5.110" displayName="policy holder" level="2" type="L"/>
+            <concept code="QUAL" codeSystem="2.16.840.1.113883.5.110" displayName="qualified entity" level="2" type="L"/>
+            <concept code="SPNSR" codeSystem="2.16.840.1.113883.5.110" displayName="coverage sponsor" level="2" type="L"/>
+            <concept code="STD" codeSystem="2.16.840.1.113883.5.110" displayName="student" level="2" type="L"/>
+            <concept code="UNDWRT" codeSystem="2.16.840.1.113883.5.110" displayName="underwriter" level="2" type="L"/>
+            <concept code="CAREGIVER" codeSystem="2.16.840.1.113883.5.110" displayName="caregiver" level="1" type="L"/>
+            <concept code="PRS" codeSystem="2.16.840.1.113883.5.110" displayName="personal relationship" level="1" type="L"/>
+        </conceptList>
+    </valueSet>
+</valueSets>
