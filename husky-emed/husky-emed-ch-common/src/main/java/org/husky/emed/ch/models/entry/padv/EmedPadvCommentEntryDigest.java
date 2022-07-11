@@ -86,7 +86,7 @@ public class EmedPadvCommentEntryDigest extends EmedPadvEntryDigest {
         if (this == o) return true;
         if (!(o instanceof final EmedPadvCommentEntryDigest that)) return false;
         if (!super.equals(o)) return false;
-        return comment.equals(that.comment);
+        return Objects.equals(comment, that.comment);
     }
 
     @Override

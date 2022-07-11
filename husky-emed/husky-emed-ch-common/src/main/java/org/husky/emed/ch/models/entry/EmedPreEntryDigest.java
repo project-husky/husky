@@ -405,11 +405,7 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), dosageInstructions, fulfilmentInstructions, inReserve,
-                itemValidityStart, itemValidityStop, mtpReference, patientMedicationInstructions,
-                prescriptionDocumentValidityStart, prescriptionDocumentValidityStop, product, provisional,
-                quantityToDispense, renewalPeriod, repeatNumber, routeOfAdministration, substitutionPermitted,
-                treatmentReason);
+        return Objects.hash(super.hashCode(), dosageInstructions, fulfilmentInstructions, inReserve, itemValidityStart, itemValidityStop, mtpReference, patientMedicationInstructions, prescriptionDocumentValidityStart, prescriptionDocumentValidityStop, product, provisional, quantityToDispense, renewalPeriod, repeatNumber, routeOfAdministration, substitutionPermitted, treatmentReason);
     }
 
     @Override

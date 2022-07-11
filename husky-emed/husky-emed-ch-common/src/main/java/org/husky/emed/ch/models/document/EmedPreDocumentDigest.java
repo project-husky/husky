@@ -24,6 +24,7 @@ import org.husky.emed.ch.models.entry.EmedPreEntryDigest;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -127,9 +128,41 @@ public class EmedPreDocumentDigest extends EmedDocumentDigest {
         return new ArrayList<>(this.preEntryDigests);
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof final EmedPreDocumentDigest that)) return false;
+        if (!super.equals(o)) return false;
+        return Objects.equals(prescriptionValidityStart, that.prescriptionValidityStart)
+                && Objects.equals(prescriptionValidityStop, that.prescriptionValidityStop)
+                && Objects.equals(preEntryDigests, that.preEntryDigests);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), prescriptionValidityStart, prescriptionValidityStop, preEntryDigests);
+    }
+
+    @Override
     public String toString() {
-        return "EmedPreDocumentDigest(super=" + super.toString() + ", preEntryDigests=" + this.getPreEntryDigests() +
-                ", prescriptionValidityStart=" + this.getPrescriptionValidityStart() + ", prescriptionValidityStop=" +
-                this.getPrescriptionValidityStop() + ")";
+        return "EmedPreDocumentDigest{" +
+                "authors=" + this.authors +
+                ", recipients=" + this.recipients +
+                ", id='" + this.id + '\'' +
+                ", setId='" + this.setId + '\'' +
+                ", version=" + this.version +
+                ", creationTime=" + this.creationTime +
+                ", documentationTime=" + this.documentationTime +
+                ", confidentialityCode=" + this.confidentialityCode +
+                ", languageCode='" + this.languageCode + '\'' +
+                ", patient=" + this.patient +
+                ", custodian=" + this.custodian +
+                ", narrativeText=" + this.narrativeText +
+                ", remarks=" + this.remarks +
+                ", pdfRepresentation=" + Arrays.toString(this.pdfRepresentation) +
+                ", prescriptionValidityStart=" + this.prescriptionValidityStart +
+                ", prescriptionValidityStop=" + this.prescriptionValidityStop +
+                ", preEntryDigests=" + this.preEntryDigests +
+                '}';
     }
 }

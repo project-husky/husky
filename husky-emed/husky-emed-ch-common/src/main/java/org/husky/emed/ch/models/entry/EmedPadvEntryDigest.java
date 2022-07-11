@@ -143,8 +143,8 @@ public abstract class EmedPadvEntryDigest extends EmedEntryDigest {
         if (!(o instanceof final EmedPadvEntryDigest that)) return false;
         if (!super.equals(o)) return false;
         return completed == that.completed
-                && effectiveTime.equals(that.effectiveTime)
-                && targetedEntryRef.equals(that.targetedEntryRef)
+                && Objects.equals(effectiveTime, that.effectiveTime)
+                && Objects.equals(targetedEntryRef, that.targetedEntryRef)
                 && targetedEntryType == that.targetedEntryType;
     }
 
@@ -157,7 +157,7 @@ public abstract class EmedPadvEntryDigest extends EmedEntryDigest {
     public String toString() {
         return "EmedPadvEntryDigest{" +
                 "annotationComment='" + this.annotationComment + '\'' +
-                ", pharmaceuticalAdviceTime=" + this.itemTime +
+                ", itemTime=" + this.itemTime +
                 ", documentAuthor=" + this.documentAuthor +
                 ", documentId='" + this.documentId + '\'' +
                 ", entryId='" + this.entryId + '\'' +

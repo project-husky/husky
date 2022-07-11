@@ -68,7 +68,7 @@ public class EmedPadvCancelEntryDigest extends EmedPadvEntryDigest {
     public String toString() {
         return "EmedPadvCancelEntryDigest{" +
                 "annotationComment='" + this.annotationComment + '\'' +
-                ", pharmaceuticalAdviceTime=" + this.itemTime +
+                ", itemTime=" + this.itemTime +
                 ", documentAuthor=" + this.documentAuthor +
                 ", documentId='" + this.documentId + '\'' +
                 ", entryId='" + this.entryId + '\'' +

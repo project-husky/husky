@@ -336,10 +336,7 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), dosageInstructions, fulfilmentInstructions, inReserve,
-                originalMtpReference, patientMedicationInstructions, product, repeatNumber, routeOfAdministration,
-                plannedItemValidityStart, plannedItemValidityStop, quantityToDispense, substitutionPermitted,
-                treatmentReason);
+        return Objects.hash(super.hashCode(), dosageInstructions, fulfilmentInstructions, inReserve, originalMtpReference, patientMedicationInstructions, product, repeatNumber, routeOfAdministration, plannedItemValidityStart, plannedItemValidityStop, quantityToDispense, substitutionPermitted, treatmentReason);
     }
 
     @Override

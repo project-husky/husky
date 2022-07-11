@@ -230,8 +230,8 @@ public abstract class EmedDocumentDigest {
         if (this == o) return true;
         if (!(o instanceof final EmedDocumentDigest that)) return false;
         return version == that.version
-                && authors.equals(that.authors)
-                && recipients.equals(that.recipients)
+                && Objects.equals(authors, that.authors)
+                && Objects.equals(recipients, that.recipients)
                 && id.equals(that.id)
                 && setId.equals(that.setId)
                 && creationTime.equals(that.creationTime)
@@ -240,15 +240,14 @@ public abstract class EmedDocumentDigest {
                 && languageCode.equals(that.languageCode)
                 && patient.equals(that.patient)
                 && custodian.equals(that.custodian)
-                && narrativeText.equals(that.narrativeText)
+                && Objects.equals(narrativeText, that.narrativeText)
                 && Objects.equals(remarks, that.remarks)
                 && Arrays.equals(pdfRepresentation, that.pdfRepresentation);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(authors, recipients, id, setId, version, creationTime, documentationTime,
-                confidentialityCode, languageCode, patient, custodian, narrativeText, remarks);
+        int result = Objects.hash(authors, recipients, id, setId, version, creationTime, documentationTime, confidentialityCode, languageCode, patient, custodian, narrativeText, remarks);
         result = 31 * result + Arrays.hashCode(pdfRepresentation);
         return result;
     }
