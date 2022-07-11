@@ -12,6 +12,7 @@ package org.husky.common.enums;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.husky.common.hl7cdar2.CD;
 import org.husky.common.hl7cdar2.CE;
 import org.husky.common.model.Code;
 import org.husky.common.utils.datatypes.Hl7v25;
@@ -42,6 +43,25 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
             ce.setDisplayName(getDisplayName());
         }
         return ce;
+    }
+
+    /**
+     * Gets the HL7 {@link CD}.
+     *
+     * @return the HL7 CD.
+     */
+    @NonNull
+    default CD getCD() {
+        final CD cd = new CD();
+        cd.setCodeSystem(getCodeSystemId());
+        cd.setCode(getCodeValue());
+        if (!getCodeSystemName().isEmpty()) {
+            cd.setCodeSystemName(getCodeSystemName());
+        }
+        if (!getDisplayName().isEmpty()) {
+            cd.setDisplayName(getDisplayName());
+        }
+        return cd;
     }
 
     /**
