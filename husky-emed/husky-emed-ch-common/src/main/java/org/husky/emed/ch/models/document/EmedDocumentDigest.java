@@ -43,54 +43,54 @@ public abstract class EmedDocumentDigest {
     /**
      * The author(s).
      */
-    private final List<@org.checkerframework.checker.nullness.qual.NonNull AuthorDigest> authors = new ArrayList<>();
+    protected final List<@org.checkerframework.checker.nullness.qual.NonNull AuthorDigest> authors = new ArrayList<>();
 
     /**
      * The intended recipient(s).
      */
-    private final List<@org.checkerframework.checker.nullness.qual.NonNull RecipientDigest> recipients = new ArrayList<>();
+    protected final List<@org.checkerframework.checker.nullness.qual.NonNull RecipientDigest> recipients = new ArrayList<>();
 
     /**
      * The document ID.
      */
     @NonNull
-    private String id;
+    protected String id;
 
     /**
      * The document set ID.
      */
     @NonNull
-    private String setId;
+    protected String setId;
 
     /**
      * The document version.
      */
-    private int version;
+    protected int version;
 
     /**
      * The document effective time.
      */
     @NonNull
-    private OffsetDateTime creationTime;
+    protected OffsetDateTime creationTime;
 
     /**
      * The documentation time (planning time, prescription time, dispense time or pharmaceutical advice time).
      */
     @NonNull
-    private Instant documentationTime;
+    protected Instant documentationTime;
 
     /**
      * The confidentiality code.
      */
     @NonNull
-    private ConfidentialityCode confidentialityCode;
+    protected ConfidentialityCode confidentialityCode;
 
     /**
      * The document main language (some parts may be in another language, e.g. PML documents may contain entries in
      * different languages).
      */
     @NonNull
-    private String languageCode;
+    protected String languageCode;
 
     /*
      * The data enterer or {@code null} if it's not provided.
@@ -104,13 +104,13 @@ public abstract class EmedDocumentDigest {
      * The targeted patient.
      */
     @NonNull
-    private PatientDigest patient;
+    protected PatientDigest patient;
 
     /**
      * The custodian.
      */
     @NonNull
-    private OrganizationDigest custodian;
+    protected OrganizationDigest custodian;
 
     /*
      * The legal authenticator or {@code null} if it's not provided.
@@ -159,18 +159,18 @@ public abstract class EmedDocumentDigest {
     /**
      * The narrative text.
      */
-    private StrucDocText narrativeText;
+    protected StrucDocText narrativeText;
 
     /**
      * The document remarks or {@code null} if it's not provided.
      */
     @Nullable
-    private StrucDocText remarks = null;
+    protected StrucDocText remarks = null;
 
     /**
      * The PDF representation of the human representation; it may be empty.
      */
-    private byte[] pdfRepresentation = new byte[]{};
+    protected byte[] pdfRepresentation = new byte[]{};
 
     /**
      * Constructor.
