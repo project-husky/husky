@@ -60,8 +60,8 @@ class DosageInstructionsReaderTest {
                 """).getDosageInstructions();
 
         assertNull(dosageInstructions.getNarrativeDosageInstructions());
-        assertEquals(1641812400000L, dosageInstructions.getTreatmentStart().toEpochMilli());
-        assertEquals(1646910000000L, dosageInstructions.getTreatmentStop().toEpochMilli());
+        assertEquals(1641812400000L, dosageInstructions.getIntakePeriodStartTime().toEpochMilli());
+        assertEquals(1646910000000L, dosageInstructions.getIntakePeriodStopTime().toEpochMilli());
         assertEquals(1, dosageInstructions.getIntakes().size());
         assertEquals(RegularUnitCodeAmbu.MG, dosageInstructions.getIntakes().get(0).getDoseQuantity().getUnit());
         assertEquals("0.5", dosageInstructions.getIntakes().get(0).getDoseQuantity().getValue());
@@ -87,8 +87,8 @@ class DosageInstructionsReaderTest {
                 <doseQuantity unit="g" value="1" />
                 """).getDosageInstructions();
         assertNull(dosageInstructions.getNarrativeDosageInstructions());
-        assertEquals(1641807780000L, dosageInstructions.getTreatmentStart().toEpochMilli());
-        assertNull(dosageInstructions.getTreatmentStop());
+        assertEquals(1641807780000L, dosageInstructions.getIntakePeriodStartTime().toEpochMilli());
+        assertNull(dosageInstructions.getIntakePeriodStopTime());
         assertEquals(3, dosageInstructions.getIntakes().size());
         for (int i = 0; i < 3; ++i) {
             assertEquals(RegularUnitCodeAmbu.G, dosageInstructions.getIntakes().get(0).getDoseQuantity().getUnit());
@@ -121,8 +121,8 @@ class DosageInstructionsReaderTest {
                 """).getDosageInstructions();
 
         assertEquals("narrative", dosageInstructions.getNarrativeDosageInstructions());
-        assertNull(dosageInstructions.getTreatmentStart());
-        assertNull(dosageInstructions.getTreatmentStop());
+        assertNull(dosageInstructions.getIntakePeriodStartTime());
+        assertNull(dosageInstructions.getIntakePeriodStopTime());
         assertEquals(0, dosageInstructions.getIntakes().size());
     }
 
@@ -179,8 +179,8 @@ class DosageInstructionsReaderTest {
                 """).getDosageInstructions();
 
         assertNull(dosageInstructions.getNarrativeDosageInstructions());
-        assertEquals(1641807780000L, dosageInstructions.getTreatmentStart().toEpochMilli());
-        assertNull(dosageInstructions.getTreatmentStop());
+        assertEquals(1641807780000L, dosageInstructions.getIntakePeriodStartTime().toEpochMilli());
+        assertNull(dosageInstructions.getIntakePeriodStopTime());
         assertEquals(3, dosageInstructions.getIntakes().size());
         assertEquals(RegularUnitCodeAmbu.DOSE, dosageInstructions.getIntakes().get(0).getDoseQuantity().getUnit());
         assertEquals("2.0", dosageInstructions.getIntakes().get(0).getDoseQuantity().getValue());

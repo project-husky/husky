@@ -89,8 +89,8 @@ class CceDocumentDigesterTest {
         assertEquals("0.5", mtpEntryDigest.getDosageInstructions().getIntakes().get(0).getDoseQuantity().getValue());
         assertEquals(RegularUnitCodeAmbu.TABLET, mtpEntryDigest.getDosageInstructions().getIntakes().get(0).getDoseQuantity().getUnit());
         assertEquals("Morgens 1/2 Tablette nehmen", mtpEntryDigest.getDosageInstructions().getNarrativeDosageInstructions());
-        assertEquals(1322524800000L, mtpEntryDigest.getDosageInstructions().getTreatmentStart().toEpochMilli());
-        assertNull(mtpEntryDigest.getDosageInstructions().getTreatmentStop());
+        assertEquals(1322524800000L, mtpEntryDigest.getDosageInstructions().getIntakePeriodStartTime().toEpochMilli());
+        assertNull(mtpEntryDigest.getDosageInstructions().getIntakePeriodStopTime());
         assertInstanceOf(MedicationProduct.class, mtpEntryDigest.getProduct());
         assertEquals("7680538751228", mtpEntryDigest.getProduct().getGtinCode());
         assertNull(mtpEntryDigest.getProduct().getAtcCode());

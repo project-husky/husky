@@ -31,38 +31,41 @@ public class MedicationDosageInstructions {
     private final List<@NonNull MedicationDosageIntake> intakes = new ArrayList<>();
 
     /**
-     * The narrative description of the dosage instructions.
+     * The narrative description of the dosage instructions or {@code null} if it's not specified.
      */
-    @Nullable private String narrativeDosageInstructions;
+    @Nullable
+    private String narrativeDosageInstructions;
 
     /**
-     * The inclusive treatment start time.
+     * The inclusive intake period start time or {@code null} if it's not specified.
      */
-    @Nullable private Instant treatmentStart;
+    @Nullable
+    private Instant intakePeriodStartTime;
 
     /**
-     * The inclusive treatment stop time.
+     * The inclusive intake period stop time or {@code null} if it's not specified.
      */
-    @Nullable private Instant treatmentStop;
+    @Nullable
+    private Instant intakePeriodStopTime;
 
     /**
      * Constructor.
      *
-     * @param intakes The list of dosage instructions intakes or {@code null}.
+     * @param intakes                     The list of dosage instructions intakes or {@code null}.
      * @param narrativeDosageInstructions The narrative description of the dosage instructions or {@code null}.
-     * @param treatmentStart The inclusive treatment start time or {@code null}.
-     * @param treatmentStop The inclusive treatment stop time or {@code null}.
+     * @param intakePeriodStartTime       The inclusive intake period start time or {@code null}.
+     * @param intakePeriodStopTime        The inclusive intake period stop time or {@code null}.
      */
     public MedicationDosageInstructions(@Nullable final List<@NonNull MedicationDosageIntake> intakes,
                                         @Nullable final String narrativeDosageInstructions,
-                                        @Nullable final Instant treatmentStart,
-                                        @Nullable final Instant treatmentStop) {
+                                        @Nullable final Instant intakePeriodStartTime,
+                                        @Nullable final Instant intakePeriodStopTime) {
         if (intakes != null) {
             this.intakes.addAll(intakes);
         }
         this.narrativeDosageInstructions = narrativeDosageInstructions;
-        this.treatmentStart = treatmentStart;
-        this.treatmentStop = treatmentStop;
+        this.intakePeriodStartTime = intakePeriodStartTime;
+        this.intakePeriodStopTime = intakePeriodStopTime;
     }
 
     /**
@@ -92,7 +95,7 @@ public class MedicationDosageInstructions {
     /**
      * Sets a dosage instruction intake.
      *
-     * @param eventTiming The event timing.
+     * @param eventTiming  The event timing.
      * @param doseQuantity The dose quantity.
      */
     public void setIntake(final TimingEventAmbu eventTiming,
@@ -118,34 +121,34 @@ public class MedicationDosageInstructions {
      * Returns the inclusive treatment start time.
      */
     @Nullable
-    public Instant getTreatmentStart() {
-        return treatmentStart;
+    public Instant getIntakePeriodStartTime() {
+        return intakePeriodStartTime;
     }
 
     /**
      * Sets the treatment start time.
      *
-     * @param treatmentStart The inclusive treatment start time.
+     * @param intakePeriodStartTime The inclusive treatment start time.
      */
-    public void setTreatmentStart(@Nullable final Instant treatmentStart) {
-        this.treatmentStart = treatmentStart;
+    public void setIntakePeriodStartTime(@Nullable final Instant intakePeriodStartTime) {
+        this.intakePeriodStartTime = intakePeriodStartTime;
     }
 
     /**
      * Returns the inclusive treatment stop time.
      */
     @Nullable
-    public Instant getTreatmentStop() {
-        return treatmentStop;
+    public Instant getIntakePeriodStopTime() {
+        return intakePeriodStopTime;
     }
 
     /**
      * Sets the treatment stop time.
      *
-     * @param treatmentStop The inclusive treatment stop time.
+     * @param intakePeriodStopTime The inclusive treatment stop time.
      */
-    public void setTreatmentStop(@Nullable final Instant treatmentStop) {
-        this.treatmentStop = treatmentStop;
+    public void setIntakePeriodStopTime(@Nullable final Instant intakePeriodStopTime) {
+        this.intakePeriodStopTime = intakePeriodStopTime;
     }
 
     /**
@@ -165,8 +168,8 @@ public class MedicationDosageInstructions {
         return "MedicationDosageInstructions{" +
                 "intakes=" + intakes +
                 ", narrativeDosageInstructions='" + narrativeDosageInstructions + '\'' +
-                ", treatmentStart=" + treatmentStart +
-                ", treatmentStop=" + treatmentStop +
+                ", setIntakePeriodStartTime=" + intakePeriodStartTime +
+                ", intakePeriodStopTime=" + intakePeriodStopTime +
                 '}';
     }
 
