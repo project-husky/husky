@@ -24,11 +24,11 @@ import org.husky.common.hl7cdar2.POCDMT000040RecordTarget;
  * - PseudonymizingIn special cases, the demographic data of the patient are not allowed to be transmitted or they have to be pseudonymized.While HL7 CDA or its derivatives like CDA-CH or Swiss exchange formats nevertheless require these elements in the XML structure, the affected values MUST be replaced by a nullFlavor of type "MSK" (masked), in order to support the required data format structure and simultaneously to shield the real data.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.1.10.2.1<br>
- * Effective date: 2022-02-24 09:48:39<br>
+ * Effective date: 2022-06-21 13:45:28<br>
  * Version: 2022<br>
- * Status: active
+ * Status: draft
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-04-19")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
 public class CdachHeaderPatient extends POCDMT000040RecordTarget {
 
     public CdachHeaderPatient() {

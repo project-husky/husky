@@ -25,7 +25,7 @@ import org.husky.common.hl7cdar2.POCDMT000040Act;
  * Version: 2016<br>
  * Status: draft
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-04-19")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
 public class ChpharmEntryAnnotationComments extends POCDMT000040Act {
 
     public ChpharmEntryAnnotationComments() {

@@ -26,7 +26,7 @@ import org.husky.common.hl7cdar2.SXCMTS;
  * Version: 2021<br>
  * Status: draft
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-04-19")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
 public class IherenewalPeriodContentModule extends POCDMT000040Supply {
 
     public IherenewalPeriodContentModule() {

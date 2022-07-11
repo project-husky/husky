@@ -28,7 +28,7 @@ import org.husky.common.model.Code;
  * Version: 2020<br>
  * Status: draft
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-04-19")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
 public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material {
 
     public ManufacturedMaterialEntryContentModule() {
@@ -38,8 +38,6 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.1"));
         vocabCodeCode.add(new Code(CodeBaseType.builder().withCodeSystem("2.51.1.1").build()));
         vocabCodeCode.add(new Code(CodeBaseType.builder().withCodeSystem("2.16.840.1.113883.6.73").build()));
-        super.setCode(createHl7CodeFixedValue("NA"));
-        super.setName(createHl7NameFixedValue("NA"));
     }
 
     private final List<Code> vocabCodeCode = new ArrayList<>();
@@ -58,32 +56,6 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
      */
     public void clearPharmIngredient() {
         getIngredient().clear();
-    }
-
-    /**
-     * Creates fixed contents for CDA Element hl7Code
-     *
-     * @param nullFlavor the desired fixed value for this argument.
-     */
-    private static org.husky.common.hl7cdar2.CE createHl7CodeFixedValue(String nullFlavor) {
-        ObjectFactory factory = new ObjectFactory();
-        org.husky.common.hl7cdar2.CE retVal = factory.createCE();
-        retVal.nullFlavor = new ArrayList<String>();
-        retVal.nullFlavor.add(nullFlavor);
-        return retVal;
-    }
-
-    /**
-     * Creates fixed contents for CDA Element hl7Name
-     *
-     * @param nullFlavor the desired fixed value for this argument.
-     */
-    private static org.husky.common.hl7cdar2.EN createHl7NameFixedValue(String nullFlavor) {
-        ObjectFactory factory = new ObjectFactory();
-        org.husky.common.hl7cdar2.EN retVal = factory.createEN();
-        retVal.nullFlavor = new ArrayList<String>();
-        retVal.nullFlavor.add(nullFlavor);
-        return retVal;
     }
 
     /**

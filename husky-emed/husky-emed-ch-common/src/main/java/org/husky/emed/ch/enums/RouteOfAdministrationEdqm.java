@@ -27,11 +27,11 @@ import org.husky.common.enums.ValueSetEnumInterface;
  * IT: No designation found.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.1.11.2<br>
- * Effective date: 2018-04-05 17:28<br>
+ * Effective date: 2022-06-08 15:42<br>
  * Version: 2022<br>
- * Status: FINAL
+ * Status: DRAFT
  */
-@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-04-19")
+@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-07-11")
 public enum RouteOfAdministrationEdqm implements ValueSetEnumInterface {
 
     /**
@@ -177,6 +177,19 @@ public enum RouteOfAdministrationEdqm implements ValueSetEnumInterface {
                        "extrakorporale Anwendung",
                        "Voie extracorporelle",
                        "Uso extracorporeo"),
+    /**
+     * EN: Extrapleural use.<br>
+     * DE: extrapleurale Anwendung.<br>
+     * FR: voie extrapleural.<br>
+     * IT: uso extrapleurico.<br>
+     */
+    EXTRAPLEURAL_USE("20087000",
+                     "0.4.0.127.0.16.1.1.2.1",
+                     "Extrapleural use",
+                     "Extrapleural use",
+                     "extrapleurale Anwendung",
+                     "voie extrapleural",
+                     "uso extrapleurico"),
     /**
      * EN: Gastric use.<br>
      * DE: zur Anwendung mittels Magensonde.<br>
@@ -1175,6 +1188,14 @@ public enum RouteOfAdministrationEdqm implements ValueSetEnumInterface {
      * IT: Code per Uso extracorporeo.<br>
      */
     public static final String EXTRACORPOREAL_USE_CODE = "20011500";
+
+    /**
+     * EN: Code for Extrapleural use.<br>
+     * DE: Code für extrapleurale Anwendung.<br>
+     * FR: Code de voie extrapleural.<br>
+     * IT: Code per uso extrapleurico.<br>
+     */
+    public static final String EXTRAPLEURAL_USE_CODE = "20087000";
 
     /**
      * EN: Code for Gastric use.<br>

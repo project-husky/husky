@@ -21,11 +21,11 @@ import org.husky.common.hl7cdar2.POCDMT000040Patient;
  * Element description: Other person's name.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.1.10.9.34<br>
- * Effective date: 2018-04-18 00:00:00<br>
- * Version: 2017<br>
- * Status: active
+ * Effective date: 2022-06-21 14:05:06<br>
+ * Version: 2022<br>
+ * Status: draft
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-04-19")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
 public class CdachOtherPersonNameInformationCompilationECh0011 extends POCDMT000040Patient {
 
     public CdachOtherPersonNameInformationCompilationECh0011() {

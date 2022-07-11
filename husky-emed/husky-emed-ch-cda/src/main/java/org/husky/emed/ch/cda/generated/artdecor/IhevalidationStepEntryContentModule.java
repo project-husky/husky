@@ -28,7 +28,7 @@ import org.husky.common.hl7cdar2.POCDMT000040SubstanceAdministration;
  * Version: 2020<br>
  * Status: pending
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-04-19")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
 public class IhevalidationStepEntryContentModule extends POCDMT000040SubstanceAdministration {
 
     public IhevalidationStepEntryContentModule() {

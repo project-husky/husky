@@ -27,13 +27,26 @@ import org.husky.common.enums.ValueSetEnumInterface;
  * IT: No designation found.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.1.11.83<br>
- * Effective date: 2021-02-10 22:24<br>
+ * Effective date: 2022-06-08 15:00<br>
  * Version: 2022<br>
- * Status: FINAL
+ * Status: DRAFT
  */
-@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-04-19")
+@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-07-11")
 public enum UnitCode implements ValueSetEnumInterface {
 
+    /**
+     * EN: a.<br>
+     * DE: a.<br>
+     * FR: a.<br>
+     * IT: a.<br>
+     */
+    A("a",
+      "2.16.840.1.113883.6.8",
+      "Year",
+      "a",
+      "a",
+      "a",
+      "a"),
     /**
      * EN: Actuation.<br>
      * DE: Hub.<br>
@@ -672,6 +685,19 @@ public enum UnitCode implements ValueSetEnumInterface {
          "mmol",
          "mmol"),
     /**
+     * EN: mo.<br>
+     * DE: mo.<br>
+     * FR: mo.<br>
+     * IT: mo.<br>
+     */
+    MO("mo",
+       "2.16.840.1.113883.6.8",
+       "Month",
+       "mo",
+       "mo",
+       "mo",
+       "mo"),
+    /**
      * EN: mol.<br>
      * DE: mol.<br>
      * FR: mol.<br>
@@ -1193,6 +1219,14 @@ public enum UnitCode implements ValueSetEnumInterface {
          "flaconcino");
 
     /**
+     * EN: Code for a.<br>
+     * DE: Code für a.<br>
+     * FR: Code de a.<br>
+     * IT: Code per a.<br>
+     */
+    public static final String A_CODE = "a";
+
+    /**
      * EN: Code for Actuation.<br>
      * DE: Code für Hub.<br>
      * FR: Code de bouffée.<br>
@@ -1583,6 +1617,14 @@ public enum UnitCode implements ValueSetEnumInterface {
      * IT: Code per mmol.<br>
      */
     public static final String MMOL_CODE = "mmol";
+
+    /**
+     * EN: Code for mo.<br>
+     * DE: Code für mo.<br>
+     * FR: Code de mo.<br>
+     * IT: Code per mo.<br>
+     */
+    public static final String MO_CODE = "mo";
 
     /**
      * EN: Code for mol.<br>

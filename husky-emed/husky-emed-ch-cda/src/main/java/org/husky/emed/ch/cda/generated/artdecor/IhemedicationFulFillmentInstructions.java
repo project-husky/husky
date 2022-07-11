@@ -26,7 +26,7 @@ import org.husky.common.model.Code;
  * Version: 2014<br>
  * Status: active
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-04-19")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
 public class IhemedicationFulFillmentInstructions extends POCDMT000040Act {
 
     public IhemedicationFulFillmentInstructions() {

@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * Version: 2022<br>
  * Status: draft
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-04-19")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
 public class CdachOtherAddressInformationCompilationECh0010 {
 
     public CdachOtherAddressInformationCompilationECh0010() {
