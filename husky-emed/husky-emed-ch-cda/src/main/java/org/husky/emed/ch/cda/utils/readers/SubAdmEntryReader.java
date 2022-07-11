@@ -215,7 +215,7 @@ public class SubAdmEntryReader extends DosageInstructionsReader {
                 .map(POCDMT000040Supply::getQuantity)
                 .map(pq -> {
                     final var unit = "1".equals(pq.getUnit()) ? RegularUnitCodeAmbu.PACKAGE :
-                             RegularUnitCodeAmbu.valueOf(pq.getUnit());
+                             RegularUnitCodeAmbu.getEnum(pq.getUnit());
                     return new QuantityWithRegularUnit(pq.getValue(), unit);
                 });
     }
