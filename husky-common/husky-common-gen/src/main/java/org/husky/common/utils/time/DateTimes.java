@@ -31,19 +31,19 @@ public final class DateTimes {
      * The HL7 V2.5 Date Time (DTM) format.
      */
     private static final DateTimeFormatter HL7_DATETIME_FORMATTER =
-        DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneOffset.UTC);
+        DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneId.systemDefault());
 
     /**
      * The TS.CH.TZ (TS) date time format.
      */
     private static final DateTimeFormatter TS_DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMddHHmmssZ")
-        .withZone(ZoneOffset.UTC);
+        .withZone(ZoneId.systemDefault());
 
     /**
      * The TS.CH.TZ (TS) date format.
      */
     private static final DateTimeFormatter TS_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd")
-        .withZone(ZoneOffset.UTC);
+        .withZone(ZoneId.systemDefault());
 
     /**
      * This class is not instantiable.
