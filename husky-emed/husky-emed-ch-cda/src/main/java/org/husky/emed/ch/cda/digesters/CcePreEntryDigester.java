@@ -32,6 +32,7 @@ import java.time.Instant;
 import java.time.temporal.TemporalAmount;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Creator of CDA-CH-EMED PRE item entry digests.
@@ -68,7 +69,7 @@ public class CcePreEntryDigester {
      * @return a digest of the element.
      */
     protected EmedPreEntryDigest createDigest(final POCDMT000040SubstanceAdministration substanceAdministration,
-                                              final String documentId,
+                                              final UUID documentId,
                                               final Instant prescriptionTime,
                                               final Instant prescriptionDocumentValidityStart,
                                               @Nullable final Instant prescriptionDocumentValidityStop,
@@ -82,14 +83,14 @@ public class CcePreEntryDigester {
         final EmedEntryDigest targetedMtp = this.getTargetedEntryDigest(substanceAdministration).orElse(null);
 
         final int sequence;
-        final String medicationTreatmentId;
+        final UUID medicationTreatmentId;
         if (targetedMtp != null) {
             sequence = (int) this.emedEntryService.getSequence(targetedMtp.getMedicationTreatmentId(),
                     prescriptionTime);
             medicationTreatmentId = targetedMtp.getMedicationTreatmentId();
         } else {
             sequence = 0;
-            medicationTreatmentId = IiUtils.getNormalizedUid(preEntry.getEntryId());
+            medicationTreatmentId = IiUtils.getUuid(preEntry.getEntryId());
         }
 
         final AuthorDigest documentAuthor;
@@ -115,7 +116,7 @@ public class CcePreEntryDigester {
                 documentId,
                 documentAuthor,
                 sectionAuthor,
-                IiUtils.getNormalizedUid(preEntry.getEntryId()),
+                IiUtils.getUuid(preEntry.getEntryId()),
                 medicationTreatmentId,
                 sequence,
                 preEntry.getAnnotationComment().orElse(null),

@@ -46,6 +46,7 @@ import org.springframework.stereotype.Component;
 import java.time.Instant;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.husky.emed.ch.cda.utils.TemplateIds.*;
 
@@ -83,7 +84,7 @@ public class CceDisEntryDigester {
      * @throws InvalidEmedContentException if the CCE document is invalid.
      */
     protected EmedDisEntryDigest createDigest(final POCDMT000040Supply supply,
-                                              final String disDocumentId,
+                                              final UUID disDocumentId,
                                               final Instant disDocumentEffectiveTime,
                                               final AuthorDigest parentDocumentAuthor,
                                               final AuthorDigest parentSectionAuthor) throws InvalidEmedContentException {
@@ -96,7 +97,7 @@ public class CceDisEntryDigester {
                 .map(EmedReference::getEntryId).flatMap(this.emedEntryService::getById).orElse(null);
 
         final int sequence;
-        final String medicationTreatmentId;
+        final UUID medicationTreatmentId;
         final boolean isOtc;
         if (refPreEntryDigest != null) {
             sequence = (int) this.emedEntryService.getSequence(refPreEntryDigest.getMedicationTreatmentId(),
@@ -157,10 +158,10 @@ public class CceDisEntryDigester {
      * @return the item entry ID.
      * @throws InvalidEmedContentException if the item entry ID is missing.
      */
-    String getEntryId(final POCDMT000040Supply supply) throws InvalidEmedContentException {
+    UUID getEntryId(final POCDMT000040Supply supply) throws InvalidEmedContentException {
         return Optional.ofNullable(OptionalUtils.getListFirstElement(supply.getId()))
-                .map(IiUtils::getNormalizedUid)
-                .orElseThrow(() -> new InvalidEmedContentException(""));
+                .map(IiUtils::getUuid)
+                .orElseThrow(() -> new InvalidEmedContentException("Unable to retrieve the entry ID"));
     }
 
     /**

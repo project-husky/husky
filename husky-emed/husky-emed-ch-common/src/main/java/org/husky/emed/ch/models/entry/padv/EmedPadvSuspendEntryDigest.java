@@ -17,6 +17,7 @@ import org.husky.emed.ch.models.common.EmedReference;
 import org.husky.emed.ch.models.entry.EmedPadvEntryDigest;
 
 import java.time.Instant;
+import java.util.UUID;
 
 /**
  * Represents the digest of an EMED PADV document Suspend item entry.
@@ -42,11 +43,11 @@ public class EmedPadvSuspendEntryDigest extends EmedPadvEntryDigest {
      * @param targetedEntryType        Document type of the targeted item entry (MTP, PRE or DIS).
      */
     public EmedPadvSuspendEntryDigest(final Instant pharmaceuticalAdviceTime,
-                                      final String documentId,
+                                      final UUID documentId,
                                       @Nullable final AuthorDigest documentAuthor,
                                       @Nullable final AuthorDigest sectionAuthor,
-                                      final String entryId,
-                                      final String medicationTreatmentId,
+                                      final UUID entryId,
+                                      final UUID medicationTreatmentId,
                                       final int sequence,
                                       @Nullable final String annotationComment,
                                       final boolean completed,

@@ -20,6 +20,7 @@ import org.husky.emed.ch.models.treatment.MedicationProduct;
 
 import java.time.Instant;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Represents the digest of an eMed DIS document item entry.
@@ -112,11 +113,11 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
      * @param dosageInstructions            The changed dosage instructions or {@code null} if they haven't changed.
      */
     public EmedDisEntryDigest(final Instant dispenseTime,
-                              final String documentId,
+                              final UUID documentId,
                               @Nullable final AuthorDigest documentAuthor,
                               @Nullable final AuthorDigest sectionAuthor,
-                              final String entryId,
-                              final String medicationTreatmentId,
+                              final UUID entryId,
+                              final UUID medicationTreatmentId,
                               final int sequence,
                               @Nullable final String annotationComment,
                               final DispenseSupplyType dispenseType,

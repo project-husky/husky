@@ -18,7 +18,6 @@ import org.husky.common.ch.enums.ConfidentialityCode;
 import org.husky.common.enums.AdministrativeGender;
 import org.husky.common.hl7cdar2.*;
 import org.husky.common.utils.OptionalUtils;
-import org.husky.common.utils.datatypes.Uuids;
 import org.husky.common.utils.time.DateTimes;
 import org.husky.common.utils.time.Hl7Dtm;
 import org.husky.emed.ch.cda.services.EmedEntryDigestService;
@@ -109,9 +108,9 @@ public class CceDocumentDigester {
      */
     @SideEffectFree
     public EmedDocumentDigest digest(final POCDMT000040ClinicalDocument cce) throws InvalidEmedContentException, InvalidMedicationTreatmentStateException {
-        final String id = Optional.ofNullable(cce.getId()).map(II::getRoot).map(Uuids::normalize)
+        final UUID id = Optional.ofNullable(cce.getId()).map(IiUtils::getUuid)
                 .orElseThrow(() -> new InvalidEmedContentException("The document ID is missing"));
-        final String setId = Optional.ofNullable(cce.getSetId()).map(II::getRoot).map(Uuids::normalize)
+        final UUID setId = Optional.ofNullable(cce.getSetId()).map(IiUtils::getUuid)
                 .orElseThrow(() -> new InvalidEmedContentException("The document set ID is missing"));
         final int version = Optional.ofNullable(cce.getVersionNumber()).map(INT::getValue)
                 .map(BigInteger::intValue)

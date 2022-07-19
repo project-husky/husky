@@ -23,10 +23,7 @@ import org.husky.emed.ch.models.entry.EmedPreEntryDigest;
 
 import java.time.Instant;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Represents the digest of a PRE Emed document.
@@ -70,8 +67,8 @@ public class EmedPreDocumentDigest extends EmedDocumentDigest {
      * @param prescriptionValidityStart The prescription validity start time (inclusive).
      * @param prescriptionValidityStop  The prescription validity stop time (inclusive) or {@code null}.
      */
-    public EmedPreDocumentDigest(final String id,
-                                 final String setId,
+    public EmedPreDocumentDigest(final UUID id,
+                                 final UUID setId,
                                  final int version,
                                  final OffsetDateTime creationTime,
                                  final Instant documentationTime,

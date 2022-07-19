@@ -44,8 +44,8 @@ class CceDocumentDigesterTest {
         assertInstanceOf(EmedMtpDocumentDigest.class, digest);
         final var mtpDigest = (EmedMtpDocumentDigest) digest;
         assertNotNull(mtpDigest);
-        assertEquals("c9f758a1-296c-4710-84d4-e181db8c7478", mtpDigest.getId());
-        assertEquals("c9f758a1-296c-4710-84d4-e181db8c7478", mtpDigest.getSetId());
+        assertEquals("c9f758a1-296c-4710-84d4-e181db8c7478", mtpDigest.getId().toString());
+        assertEquals("c9f758a1-296c-4710-84d4-e181db8c7478", mtpDigest.getSetId().toString());
         assertEquals(1, mtpDigest.getVersion());
         assertEquals("de-CH", mtpDigest.getLanguageCode());
         assertEquals(ConfidentialityCode.NORMALLY_ACCESSIBLE, mtpDigest.getConfidentialityCode());
@@ -76,8 +76,8 @@ class CceDocumentDigesterTest {
         assertEquals(0, mtpEntryDigest.getSequence());
         assertEquals("Bluthochdruck", mtpEntryDigest.getTreatmentReason());
         assertEquals(mtpDigest.getId(), mtpEntryDigest.getDocumentId());
-        assertEquals("c9f758a1-296c-4710-84d4-e181db8c7478", mtpEntryDigest.getEntryId());
-        assertEquals("c9f758a1-296c-4710-84d4-e181db8c7478", mtpEntryDigest.getMedicationTreatmentId());
+        assertEquals("c9f758a1-296c-4710-84d4-e181db8c7478", mtpEntryDigest.getEntryId().toString());
+        assertEquals("c9f758a1-296c-4710-84d4-e181db8c7478", mtpEntryDigest.getMedicationTreatmentId().toString());
         assertEquals(EmedEntryType.MTP, mtpEntryDigest.getEmedEntryType());
         assertEquals(1322560800000L, mtpEntryDigest.getPlanningTime().toEpochMilli());
         assertEquals(1322524800000L, mtpEntryDigest.getPlannedItemValidityStart().toEpochMilli());

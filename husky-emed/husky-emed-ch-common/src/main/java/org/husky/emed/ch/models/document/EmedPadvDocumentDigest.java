@@ -25,6 +25,7 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Represents the digest of a PADV Emed document.
@@ -55,8 +56,8 @@ public class EmedPadvDocumentDigest extends EmedDocumentDigest {
      * @param narrativeText       The narrative text.
      * @param padvEntryDigest     The PADV entry digest.
      */
-    public EmedPadvDocumentDigest(final String id,
-                                  final String setId,
+    public EmedPadvDocumentDigest(final UUID id,
+                                  final UUID setId,
                                   final int version,
                                   final OffsetDateTime creationTime,
                                   final Instant documentationTime,

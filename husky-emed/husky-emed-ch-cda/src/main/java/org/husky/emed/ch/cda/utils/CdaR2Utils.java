@@ -15,10 +15,7 @@ import org.husky.common.hl7cdar2.*;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.models.common.EmedReference;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Utilities for CDA R2 classes.
@@ -107,13 +104,13 @@ public class CdaR2Utils {
         if (!IiUtils.isValidUid(id) || supply.getId().size() > 1) {
             throw new InvalidEmedContentException("The Supply item ID is invalid");
         }
-        final String documentId;
+        final UUID documentId;
         if (!supply.getReference().isEmpty()) {
             final II docIi = supply.getReference().get(0).getExternalDocument().getId().get(0);
             if (!IiUtils.isValidUuid(docIi)) {
                 throw new InvalidEmedContentException("The Supply document ID is invalid");
             }
-            documentId = IiUtils.getNormalizedUuid(docIi);
+            documentId = IiUtils.getUuid(docIi);
         } else {
             documentId = null;
         }
@@ -134,13 +131,13 @@ public class CdaR2Utils {
         if (!IiUtils.isValidUid(id) || observation.getId().size() > 1) {
             throw new InvalidEmedContentException("The Observation item ID is invalid");
         }
-        final String documentId;
+        final UUID documentId;
         if (!observation.getReference().isEmpty()) {
             final II docIi = observation.getReference().get(0).getExternalDocument().getId().get(0);
             if (!IiUtils.isValidUuid(docIi)) {
                 throw new InvalidEmedContentException("The Observation document ID is invalid");
             }
-            documentId = IiUtils.getNormalizedUuid(docIi);
+            documentId = IiUtils.getUuid(docIi);
         } else {
             documentId = null;
         }
@@ -160,14 +157,14 @@ public class CdaR2Utils {
         if (!IiUtils.isValidUid(id) || substanceAdministration.getId().size() > 1) {
             throw new InvalidEmedContentException("The SubstanceAdministration item ID is invalid");
         }
-        final var itemId = IiUtils.getNormalizedUid(substanceAdministration.getId().get(0));
-        final String documentId;
+        final var itemId = IiUtils.getUuid(substanceAdministration.getId().get(0));
+        final UUID documentId;
         if (!substanceAdministration.getReference().isEmpty()) {
             final II docIi = substanceAdministration.getReference().get(0).getExternalDocument().getId().get(0);
             if (!IiUtils.isValidUuid(docIi)) {
                 throw new InvalidEmedContentException("The SubstanceAdministration document ID is invalid");
             }
-            documentId = IiUtils.getNormalizedUuid(docIi);
+            documentId = IiUtils.getUuid(docIi);
         } else {
             documentId = null;
         }

@@ -23,10 +23,7 @@ import org.husky.emed.ch.models.entry.EmedEntryDigest;
 
 import java.time.Instant;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Represents the digest of an Emed document. This class is declined in subclasses {@link EmedMtpDocumentDigest}, {@link
@@ -54,13 +51,13 @@ public abstract class EmedDocumentDigest {
      * The document ID.
      */
     @NonNull
-    protected String id;
+    protected UUID id;
 
     /**
      * The document set ID.
      */
     @NonNull
-    protected String setId;
+    protected UUID setId;
 
     /**
      * The document version.
@@ -189,8 +186,8 @@ public abstract class EmedDocumentDigest {
      * @param recipients          The intended recipient(s).
      * @param narrativeText       The narrative text.
      */
-    public EmedDocumentDigest(final String id,
-                              final String setId,
+    public EmedDocumentDigest(final UUID id,
+                              final UUID setId,
                               final int version,
                               final OffsetDateTime creationTime,
                               final Instant documentationTime,

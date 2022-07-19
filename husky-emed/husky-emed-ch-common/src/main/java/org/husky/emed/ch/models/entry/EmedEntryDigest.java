@@ -15,6 +15,7 @@ import org.husky.emed.ch.models.common.AuthorDigest;
 
 import java.time.Instant;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Represents the digest of an EMED document item entry. This class is declined in subclasses {@link
@@ -44,17 +45,17 @@ public abstract class EmedEntryDigest {
     /**
      * The parent document unique ID.
      */
-    protected String documentId;
+    protected UUID documentId;
 
     /**
      * The item entry ID.
      */
-    protected String entryId;
+    protected UUID entryId;
 
     /**
      * The ID of the medication treatment this item entry belongs to.
      */
-    protected String medicationTreatmentId;
+    protected UUID medicationTreatmentId;
 
     /**
      * The author of the original parent section or {@code null} if they're not known.
@@ -81,11 +82,11 @@ public abstract class EmedEntryDigest {
      * @param annotationComment     The annotation comment or {@code null} if it isn't provided.
      */
     protected EmedEntryDigest(final Instant itemTime,
-                              final String documentId,
+                              final UUID documentId,
                               @Nullable final AuthorDigest documentAuthor,
                               @Nullable final AuthorDigest sectionAuthor,
-                              final String entryId,
-                              final String medicationTreatmentId,
+                              final UUID entryId,
+                              final UUID medicationTreatmentId,
                               final int sequence,
                               @Nullable final String annotationComment) {
         this.itemTime = Objects.requireNonNull(itemTime);
@@ -121,27 +122,27 @@ public abstract class EmedEntryDigest {
         this.documentAuthor = documentAuthor;
     }
 
-    public String getDocumentId() {
+    public UUID getDocumentId() {
         return this.documentId;
     }
 
-    public void setDocumentId(final String documentId) {
+    public void setDocumentId(final UUID documentId) {
         this.documentId = documentId;
     }
 
-    public String getEntryId() {
+    public UUID getEntryId() {
         return this.entryId;
     }
 
-    public void setEntryId(final String entryId) {
+    public void setEntryId(final UUID entryId) {
         this.entryId = entryId;
     }
 
-    public String getMedicationTreatmentId() {
+    public UUID getMedicationTreatmentId() {
         return this.medicationTreatmentId;
     }
 
-    public void setMedicationTreatmentId(final String medicationTreatmentId) {
+    public void setMedicationTreatmentId(final UUID medicationTreatmentId) {
         this.medicationTreatmentId = medicationTreatmentId;
     }
 

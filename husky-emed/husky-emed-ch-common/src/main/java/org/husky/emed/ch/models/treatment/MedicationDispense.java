@@ -17,6 +17,8 @@ import org.husky.emed.ch.enums.DispenseSupplyType;
 import org.husky.emed.ch.models.common.QuantityWithRegularUnit;
 import org.husky.emed.ch.models.entry.EmedDisEntryDigest;
 
+import java.util.UUID;
+
 /**
  * A data structure that represents a medication dispense. Contrary to a {@link EmedDisEntryDigest},
  * it contains the full state of the dispense (i.e the initial DIS item and all PADV items that have been aggregated).
@@ -30,7 +32,7 @@ public class MedicationDispense {
     /**
      * The DIS item ID.
      */
-    private String itemId;
+    private UUID itemId;
 
     /**
      * The dispense type (first fill or refill, complete or partial).

@@ -24,18 +24,18 @@ public class Uuids {
     private Uuids() {}
 
     /**
-     * Pattern that matches an UUID.
+     * Pattern that matches a UUID.
      */
     public static final Pattern PATTERN = Pattern.compile("^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$");
 
     /**
-     * Pattern that matches an URN-encoded UUID.
+     * Pattern that matches a URN-encoded UUID.
      */
     public static final Pattern PATTERN_WITH_URN =
             Pattern.compile("^urn:uuid:[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$");
 
     /**
-     * Normalizes an UUID by removing the URN-encoding part if needed and lowercasing it.
+     * Normalizes a UUID by removing the URN-encoding part if needed and lowercasing it.
      */
     public static String normalize(final String uuid) {
         Objects.requireNonNull(uuid);

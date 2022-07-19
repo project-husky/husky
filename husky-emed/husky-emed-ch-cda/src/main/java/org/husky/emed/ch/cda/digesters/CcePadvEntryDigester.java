@@ -34,6 +34,7 @@ import org.springframework.stereotype.Component;
 import java.time.Instant;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 import static org.husky.emed.ch.cda.utils.TemplateIds.*;
@@ -89,7 +90,7 @@ public class CcePadvEntryDigester {
      * @throws InvalidMedicationTreatmentStateException if the treatment state is invalid.
      */
     protected EmedPadvEntryDigest createDigest(final POCDMT000040Observation observation,
-                                               final String padvDocumentId,
+                                               final UUID padvDocumentId,
                                                final Instant padvDocumentEffectiveTime,
                                                final AuthorDigest parentDocumentAuthor,
                                                final AuthorDigest parentSectionAuthor) throws InvalidEmedContentException, InvalidMedicationTreatmentStateException {
@@ -318,10 +319,10 @@ public class CcePadvEntryDigester {
      * @return the item entry ID.
      * @throws InvalidEmedContentException if the item entry ID is missing.
      */
-    private String getEntryId(final POCDMT000040Observation observation) throws InvalidEmedContentException {
+    private UUID getEntryId(final POCDMT000040Observation observation) throws InvalidEmedContentException {
         return Optional.of(observation.getId())
                 .map(OptionalUtils::getListFirstElement)
-                .map(IiUtils::getNormalizedUid)
+                .map(IiUtils::getUuid)
                 .orElseThrow(() -> new InvalidEmedContentException("The entry ID is missing"));
     }
 

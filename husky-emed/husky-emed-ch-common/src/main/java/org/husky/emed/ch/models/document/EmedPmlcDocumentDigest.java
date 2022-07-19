@@ -22,10 +22,7 @@ import org.husky.emed.ch.models.entry.EmedMtpEntryDigest;
 
 import java.time.Instant;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Represents the digest of a PMLC Emed document.
@@ -56,8 +53,8 @@ public class EmedPmlcDocumentDigest extends EmedDocumentDigest {
      * @param narrativeText       The narrative text.
      * @param mtpEntryDigests     The MTP entry digests.
      */
-    public EmedPmlcDocumentDigest(final String id,
-                                  final String setId,
+    public EmedPmlcDocumentDigest(final UUID id,
+                                  final UUID setId,
                                   final int version,
                                   final OffsetDateTime creationTime,
                                   final Instant documentationTime,

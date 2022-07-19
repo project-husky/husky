@@ -11,6 +11,8 @@ package org.husky.emed.ch.models.common;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 
+import java.util.UUID;
+
 /**
  * A reference to an eMedication document and/or entry.
  *
@@ -22,13 +24,13 @@ public class EmedReference {
      * The document ID; {@code null} if not specified.
      */
     @Nullable
-    private String documentId;
+    private UUID documentId;
 
     /**
      * The entry ID; {@code null} if not specified.
      */
     @Nullable
-    private String entryId;
+    private UUID entryId;
 
     /**
      * Constructs a new eMedication reference from a document ID and/or an entry ID.
@@ -37,8 +39,8 @@ public class EmedReference {
      * @param entryId    The entry ID or {@code null} if not specified.
      * @throws IllegalArgumentException if both documentId and entryId are null.
      */
-    public EmedReference(@Nullable final String documentId,
-                         @Nullable final String entryId) {
+    public EmedReference(@Nullable final UUID documentId,
+                         @Nullable final UUID entryId) {
         if (documentId == null && entryId == null) {
             throw new IllegalArgumentException("The document and entry IDs shall not be both null");
         }
@@ -64,20 +66,20 @@ public class EmedReference {
     }
 
     @Nullable
-    public String getDocumentId() {
+    public UUID getDocumentId() {
         return this.documentId;
     }
 
     @Nullable
-    public String getEntryId() {
+    public UUID getEntryId() {
         return this.entryId;
     }
 
-    public void setDocumentId(@Nullable final String documentId) {
+    public void setDocumentId(@Nullable final UUID documentId) {
         this.documentId = documentId;
     }
 
-    public void setEntryId(@Nullable final String entryId) {
+    public void setEntryId(@Nullable final UUID entryId) {
         this.entryId = entryId;
     }
 

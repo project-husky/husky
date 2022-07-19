@@ -25,6 +25,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * An representation of the state of a medication in the treatment plan at a given time.
@@ -77,7 +78,7 @@ public class MedicationTreatment {
     /**
      * The medication treatment ID.
      */
-    protected String id;
+    protected UUID id;
 
     /**
      * Whether the treatment is to be taken regularly ({@code false}) or only if required ({@code true}).

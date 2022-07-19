@@ -25,6 +25,7 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Represents the digest of an MTP Emed document.
@@ -55,8 +56,8 @@ public class EmedMtpDocumentDigest extends EmedDocumentDigest {
      * @param narrativeText       The narrative text.
      * @param mtpEntryDigest      The MTP entry digest.
      */
-    public EmedMtpDocumentDigest(final String id,
-                                 final String setId,
+    public EmedMtpDocumentDigest(final UUID id,
+                                 final UUID setId,
                                  final int version,
                                  final OffsetDateTime creationTime,
                                  final Instant documentationTime,

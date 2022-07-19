@@ -18,6 +18,7 @@ import org.husky.emed.ch.models.entry.EmedPadvEntryDigest;
 
 import java.time.Instant;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Represents the digest of an eMed PADV document Comment item.
@@ -49,11 +50,11 @@ public class EmedPadvCommentEntryDigest extends EmedPadvEntryDigest {
      * @param comment                  The comment added by this PADV Comment.
      */
     public EmedPadvCommentEntryDigest(final Instant pharmaceuticalAdviceTime,
-                                      final String documentId,
+                                      final UUID documentId,
                                       @Nullable final AuthorDigest documentAuthor,
                                       @Nullable final AuthorDigest sectionAuthor,
-                                      final String entryId,
-                                      final String medicationTreatmentId,
+                                      final UUID entryId,
+                                      final UUID medicationTreatmentId,
                                       final int sequence,
                                       @Nullable final String annotationComment,
                                       final boolean completed,

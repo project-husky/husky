@@ -21,6 +21,7 @@ import org.husky.emed.ch.models.treatment.MedicationProduct;
 
 import java.time.Instant;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Represents the digest of an eMed MTP document item entry.
@@ -138,11 +139,11 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
      * @throws InvalidEmedContentException if plannedItemValidityStop is before plannedItemValidityStart.
      */
     public EmedMtpEntryDigest(final Instant planningTime,
-                              final String documentId,
+                              final UUID documentId,
                               @Nullable final AuthorDigest documentAuthor,
                               @Nullable final AuthorDigest sectionAuthor,
-                              final String entryId,
-                              final String medicationTreatmentId,
+                              final UUID entryId,
+                              final UUID medicationTreatmentId,
                               final int sequence,
                               @Nullable final String annotationComment,
                               final MedicationDosageInstructions dosageInstructions,

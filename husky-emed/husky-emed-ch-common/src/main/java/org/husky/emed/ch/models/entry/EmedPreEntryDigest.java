@@ -20,6 +20,7 @@ import org.husky.emed.ch.models.treatment.MedicationProduct;
 
 import java.time.Instant;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Represents the digest of an eMed PRE document item entry.
@@ -169,11 +170,11 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
      * @throws InvalidEmedContentException if the validity periods are invalid.
      */
     public EmedPreEntryDigest(final Instant prescriptionTime,
-                              final String documentId,
+                              final UUID documentId,
                               @Nullable final AuthorDigest documentAuthor,
                               @Nullable final AuthorDigest sectionAuthor,
-                              final String entryId,
-                              final String medicationTreatmentId,
+                              final UUID entryId,
+                              final UUID medicationTreatmentId,
                               final int sequence,
                               @Nullable final String annotationComment,
                               final MedicationDosageInstructions dosageInstructions,

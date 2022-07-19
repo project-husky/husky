@@ -26,6 +26,7 @@ import org.springframework.stereotype.Component;
 import java.time.Instant;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Creator of CDA-CH-EMED MTP item entry digests.
@@ -46,7 +47,7 @@ public class CceMtpEntryDigester {
      * @return a digest of the element.
      */
     protected EmedMtpEntryDigest createDigest(final POCDMT000040SubstanceAdministration substanceAdministration,
-                                              final String documentId,
+                                              final UUID documentId,
                                               final Instant planningDate,
                                               final AuthorDigest parentDocumentAuthor,
                                               final AuthorDigest parentSectionAuthor) throws InvalidEmedContentException {
@@ -82,8 +83,8 @@ public class CceMtpEntryDigester {
                 documentId,
                 documentAuthor,
                 sectionAuthor,
-                IiUtils.getNormalizedUid(mtpEntry.getEntryId()),
-                IiUtils.getNormalizedUid(mtpEntry.getEntryId()), // Use the MTP entry ID as treatment ID
+                IiUtils.getUuid(mtpEntry.getEntryId()),
+                IiUtils.getUuid(mtpEntry.getEntryId()), // Use the MTP entry ID as treatment ID
                 0,
                 mtpEntry.getAnnotationComment().orElse(null),
                 mtpEntry.getDosageInstructions(),
@@ -123,9 +124,9 @@ public class CceMtpEntryDigester {
                         .map(POCDMT000040Reference::getExternalDocument)
                         .map(POCDMT000040ExternalDocument::getId)
                         .map(OptionalUtils::getListFirstElement)
-                        .map(II::getRoot)
+                        .map(IiUtils::getUuid)
                         .orElse(null),
-                sa.getId().get(0).getRoot()
+                Optional.ofNullable(sa.getId().get(0)).map(IiUtils::getUuid).orElse(null)
         );
         return Optional.of(reference);
     }
