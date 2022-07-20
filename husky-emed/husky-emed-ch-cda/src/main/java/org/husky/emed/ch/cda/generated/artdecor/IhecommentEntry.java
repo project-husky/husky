@@ -27,7 +27,7 @@ import org.husky.common.model.Code;
  * Version: 2014<br>
  * Status: active
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-20")
 public class IhecommentEntry extends POCDMT000040Act {
 
     public IhecommentEntry() {
@@ -42,7 +42,7 @@ public class IhecommentEntry extends POCDMT000040Act {
         vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed").build()));
     }
 
-    private final List<Code> vocabStatusCodeCode = new ArrayList<>();
+    private final List<Code> vocabStatusCodeCode = new ArrayList<>(1);
 
     /**
      * Adds a hl7Author

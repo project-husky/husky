@@ -9,7 +9,6 @@
  */
 package org.husky.emed.ch.cda.generated.artdecor;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 import org.husky.common.basetypes.CodeBaseType;
@@ -28,7 +27,7 @@ import org.husky.common.model.Code;
  * Version: 2014<br>
  * Status: active
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-20")
 public class IheproblemStatusObservation extends POCDMT000040Observation {
 
     public IheproblemStatusObservation() {
@@ -39,12 +38,9 @@ public class IheproblemStatusObservation extends POCDMT000040Observation {
                                               "2.16.840.1.113883.6.1",
                                               "LOINC",
                                               "Status"));
-        vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed").withCodeSystem("2.16.840.1.113883.5.14").build()));
         statusCode = (new Code(CodeBaseType.builder().withCode("completed").withCodeSystem("2.16.840.1.113883.5.14").build())).getHl7CdaR2Cs();
         super.getValue().add(createHl7ValueFixedValue());
     }
-
-    private final List<Code> vocabStatusCodeCode = new ArrayList<>();
 
     /**
      * Creates fixed contents for CDA Element hl7Code
@@ -119,13 +115,6 @@ public class IheproblemStatusObservation extends POCDMT000040Observation {
      */
     public List<ANY> getHl7Value() {
         return value;
-    }
-
-    /**
-     * Returns a list of vocab codes as defined in the ART-DECOR model
-     */
-    public List<Code> getVocabStatusCodeCode() {
-        return vocabStatusCodeCode;
     }
 
     /**

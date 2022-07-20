@@ -28,7 +28,7 @@ import org.husky.common.model.Code;
  * Version: 2020<br>
  * Status: draft
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-20")
 public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material {
 
     public ManufacturedMaterialEntryContentModule() {
@@ -40,7 +40,7 @@ public class ManufacturedMaterialEntryContentModule extends POCDMT000040Material
         vocabCodeCode.add(new Code(CodeBaseType.builder().withCodeSystem("2.16.840.1.113883.6.73").build()));
     }
 
-    private final List<Code> vocabCodeCode = new ArrayList<>();
+    private final List<Code> vocabCodeCode = new ArrayList<>(2);
 
     /**
      * Adds a pharmIngredient<br/>

@@ -27,7 +27,7 @@ import org.husky.common.model.Code;
  * Version: 2017<br>
  * Status: draft
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-20")
 public class TreatmentReasonEntryContentModule extends POCDMT000040Observation {
 
     public TreatmentReasonEntryContentModule() {
@@ -41,7 +41,7 @@ public class TreatmentReasonEntryContentModule extends POCDMT000040Observation {
         vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed").build()));
     }
 
-    private final List<Code> vocabStatusCodeCode = new ArrayList<>();
+    private final List<Code> vocabStatusCodeCode = new ArrayList<>(1);
 
     /**
      * Creates fixed contents for CDA Element hl7Code

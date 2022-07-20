@@ -27,7 +27,7 @@ import org.husky.common.model.Code;
  * Version: 2020<br>
  * Status: draft
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-20")
 public class PharmaceuticalAdviceItemEntryContentModule extends POCDMT000040Observation {
 
     public PharmaceuticalAdviceItemEntryContentModule() {
@@ -44,9 +44,9 @@ public class PharmaceuticalAdviceItemEntryContentModule extends POCDMT000040Obse
         vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed").build()));
     }
 
-    private final List<Code> vocabCodeCode = new ArrayList<>();
+    private final List<Code> vocabCodeCode = new ArrayList<>(6);
 
-    private final List<Code> vocabStatusCodeCode = new ArrayList<>();
+    private final List<Code> vocabStatusCodeCode = new ArrayList<>(2);
 
     /**
      * Adds a hl7Author<br/>
