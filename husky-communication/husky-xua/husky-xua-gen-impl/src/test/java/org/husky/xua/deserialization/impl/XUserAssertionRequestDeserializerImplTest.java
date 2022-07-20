@@ -10,18 +10,17 @@
  */
 package org.husky.xua.deserialization.impl;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.husky.xua.communication.xua.XUserAssertionRequest;
+import org.husky.xua.exceptions.DeserializeException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.opensaml.core.config.InitializationService;
+import org.w3c.dom.Element;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import org.husky.xua.communication.xua.XUserAssertionRequest;
-import org.husky.xua.deserialization.impl.OpenSaml2DeserializerImpl;
-import org.husky.xua.deserialization.impl.XUserAssertionRequestDeserializerImpl;
-import org.husky.xua.exceptions.DeserializeException;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.w3c.dom.Element;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class XUserAssertionRequestDeserializerImplTest {
 
@@ -32,6 +31,7 @@ class XUserAssertionRequestDeserializerImplTest {
 
 	@BeforeEach
 	public void setUp() throws Exception {
+		InitializationService.initialize();
 		testDeserializer = new XUserAssertionRequestDeserializerImpl();
 		testXmlByteArray = Files.readAllBytes(
 				Paths.get(getClass().getResource("/wstrust/XUserAssertionRequest.xml").toURI()));
