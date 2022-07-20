@@ -100,8 +100,8 @@ public class MedicationPrescription {
      * @return {@code true} if the prescription may be ready for validation, {@code false} otherwise.
      */
     public boolean mayBeReadyForValidationInTheFuture() {
-        return this.prescriptionStatus == PrescriptionStatus.PROVISIONAL &&
-                (this.stopTime == null || !Instant.now().isAfter(this.stopTime));
+        return (this.prescriptionStatus == PrescriptionStatus.PROVISIONAL || this.prescriptionStatus == PrescriptionStatus.SUBMITTED)
+                && (this.stopTime == null || !Instant.now().isAfter(this.stopTime));
     }
 
     /**

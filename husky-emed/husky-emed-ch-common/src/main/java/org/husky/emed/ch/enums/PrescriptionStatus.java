@@ -11,13 +11,10 @@ package org.husky.emed.ch.enums;
 
 /**
  * The enumeration of all possible prescription statuses.
- * <p>
- * The {@code SUBMITTED} status is removed because prescriptions are either {@link #ACTIVE} or {@link #PROVISIONAL} when
- * created in Switzerland.
  *
  * @author Quentin Ligier
  */
 public enum PrescriptionStatus {
 
-    PROVISIONAL, ACTIVE, SUSPENDED, CANCELED, REFUSED
+    SUBMITTED, PROVISIONAL, ACTIVE, SUSPENDED, CANCELED, REFUSED
 }
