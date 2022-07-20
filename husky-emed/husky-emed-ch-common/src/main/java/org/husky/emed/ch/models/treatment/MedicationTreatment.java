@@ -54,9 +54,16 @@ public class MedicationTreatment {
 
     /**
      * The annotation comment or {@code null} if it isn't provided.
+     *
+     * TODO: Do not use yet, use case is unclear. May be deleted soon.
      */
     @Nullable
     protected String annotationComment;
+
+    /**
+     * All comments that have been made about the treatment.
+     */
+    protected final List<@NonNull MedicationTreatmentComment> comments = new ArrayList<>(0);
 
     /**
      * Number of dispense repeats/refills (excluding the initial dispense). {@code null} means no limitation.
