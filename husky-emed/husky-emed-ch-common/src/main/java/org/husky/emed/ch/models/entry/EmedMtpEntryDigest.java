@@ -16,7 +16,6 @@ import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.EmedReference;
 import org.husky.emed.ch.models.common.MedicationDosageInstructions;
-import org.husky.emed.ch.models.common.QuantityWithRegularUnit;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
 
 import java.time.Instant;
@@ -92,7 +91,7 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
      * The quantity to dispense or {@code null} if it isn't provided.
      */
     @Nullable
-    private QuantityWithRegularUnit quantityToDispense;
+    private String quantityToDispense;
 
     /**
      * Whether the substitution is permitted (Equivalent) or not (None).
@@ -158,7 +157,7 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
                               @Nullable final String patientMedicationInstructions,
                               @Nullable final String fulfilmentInstructions,
                               final boolean inReserve,
-                              @Nullable final QuantityWithRegularUnit quantityToDispense) {
+                              @Nullable final String quantityToDispense) {
         super(planningTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
                 annotationComment);
         this.dosageInstructions = Objects.requireNonNull(dosageInstructions);
@@ -307,11 +306,11 @@ public class EmedMtpEntryDigest extends EmedEntryDigest {
     }
 
     @Nullable
-    public QuantityWithRegularUnit getQuantityToDispense() {
+    public String getQuantityToDispense() {
         return this.quantityToDispense;
     }
 
-    public void setQuantityToDispense(@Nullable final QuantityWithRegularUnit quantityToDispense) {
+    public void setQuantityToDispense(@Nullable final String quantityToDispense) {
         this.quantityToDispense = quantityToDispense;
     }
 

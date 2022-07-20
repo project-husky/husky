@@ -95,7 +95,7 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
      * The quantity to dispense or {@code null} if it isn't provided.
      */
     @Nullable
-    private QuantityWithRegularUnit quantityToDispense;
+    private String quantityToDispense;
 
     /**
      * The renewal period or {@code null}. If it's not specified, the renewal period is the prescription validity
@@ -193,7 +193,7 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
                               @Nullable final String patientMedicationInstructions,
                               @Nullable final String fulfilmentInstructions,
                               final boolean inReserve,
-                              @Nullable final QuantityWithRegularUnit quantityToDispense) {
+                              @Nullable final String quantityToDispense) {
         super(prescriptionTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
                 annotationComment);
         this.dosageInstructions = Objects.requireNonNull(dosageInstructions);
@@ -252,11 +252,12 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
         this.dosageInstructions = dosageInstructions;
     }
 
+    @Nullable
     public String getFulfilmentInstructions() {
         return this.fulfilmentInstructions;
     }
 
-    public void setFulfilmentInstructions(final String fulfilmentInstructions) {
+    public void setFulfilmentInstructions(@Nullable final String fulfilmentInstructions) {
         this.fulfilmentInstructions = fulfilmentInstructions;
     }
 
@@ -276,27 +277,30 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
         this.itemValidityStart = itemValidityStart;
     }
 
+    @Nullable
     public Instant getItemValidityStop() {
         return this.itemValidityStop;
     }
 
-    public void setItemValidityStop(final Instant itemValidityStop) {
+    public void setItemValidityStop(@Nullable final Instant itemValidityStop) {
         this.itemValidityStop = itemValidityStop;
     }
 
+    @Nullable
     public EmedReference getMtpReference() {
         return this.mtpReference;
     }
 
-    public void setMtpReference(final EmedReference mtpReference) {
+    public void setMtpReference(@Nullable final EmedReference mtpReference) {
         this.mtpReference = mtpReference;
     }
 
+    @Nullable
     public String getPatientMedicationInstructions() {
         return this.patientMedicationInstructions;
     }
 
-    public void setPatientMedicationInstructions(final String patientMedicationInstructions) {
+    public void setPatientMedicationInstructions(@Nullable final String patientMedicationInstructions) {
         this.patientMedicationInstructions = patientMedicationInstructions;
     }
 
@@ -308,11 +312,12 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
         this.prescriptionDocumentValidityStart = prescriptionDocumentValidityStart;
     }
 
+    @Nullable
     public Instant getPrescriptionDocumentValidityStop() {
         return this.prescriptionDocumentValidityStop;
     }
 
-    public void setPrescriptionDocumentValidityStop(final Instant prescriptionDocumentValidityStop) {
+    public void setPrescriptionDocumentValidityStop(@Nullable final Instant prescriptionDocumentValidityStop) {
         this.prescriptionDocumentValidityStop = prescriptionDocumentValidityStop;
     }
 
@@ -332,27 +337,30 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
         this.provisional = provisional;
     }
 
+    @Nullable
     public RenewalInterval getRenewalPeriod() {
         return this.renewalPeriod;
     }
 
-    public void setRenewalPeriod(final RenewalInterval renewalPeriod) {
+    public void setRenewalPeriod(@Nullable final RenewalInterval renewalPeriod) {
         this.renewalPeriod = renewalPeriod;
     }
 
+    @Nullable
     public Integer getRepeatNumber() {
         return this.repeatNumber;
     }
 
-    public void setRepeatNumber(final Integer repeatNumber) {
+    public void setRepeatNumber(@Nullable final Integer repeatNumber) {
         this.repeatNumber = repeatNumber;
     }
 
+    @Nullable
     public RouteOfAdministrationAmbu getRouteOfAdministration() {
         return this.routeOfAdministration;
     }
 
-    public void setRouteOfAdministration(final RouteOfAdministrationAmbu routeOfAdministration) {
+    public void setRouteOfAdministration(@Nullable final RouteOfAdministrationAmbu routeOfAdministration) {
         this.routeOfAdministration = routeOfAdministration;
     }
 
@@ -364,19 +372,21 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
         this.substitutionPermitted = substitutionPermitted;
     }
 
+    @Nullable
     public String getTreatmentReason() {
         return this.treatmentReason;
     }
 
-    public void setTreatmentReason(final String treatmentReason) {
+    public void setTreatmentReason(@Nullable final String treatmentReason) {
         this.treatmentReason = treatmentReason;
     }
 
-    public QuantityWithRegularUnit getQuantityToDispense() {
+    @Nullable
+    public String getQuantityToDispense() {
         return this.quantityToDispense;
     }
 
-    public void setQuantityToDispense(final QuantityWithRegularUnit quantityToDispense) {
+    public void setQuantityToDispense(@Nullable final String quantityToDispense) {
         this.quantityToDispense = quantityToDispense;
     }
 
