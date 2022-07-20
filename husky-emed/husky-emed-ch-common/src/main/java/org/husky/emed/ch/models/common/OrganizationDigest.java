@@ -26,12 +26,12 @@ public class OrganizationDigest {
     /**
      * The organization identifiers.
      */
-    private final List<@NonNull QualifiedIdentifier> ids = new ArrayList<>();
+    private final List<@NonNull QualifiedIdentifier> ids = new ArrayList<>(0);
 
     /**
      * The organization names.
      */
-    private final List<@NonNull String> names = new ArrayList<>();
+    private final List<@NonNull String> names = new ArrayList<>(0);
 
     /**
      * The organization telecoms or {@code null}.
@@ -42,7 +42,7 @@ public class OrganizationDigest {
     /**
      * The organization addresses.
      */
-    private final List<AddressDigest> addresses = new ArrayList<>();
+    private final List<AddressDigest> addresses = new ArrayList<>(0);
 
     public OrganizationDigest(final List<@NonNull QualifiedIdentifier> ids,
                               final List<@NonNull String> names,

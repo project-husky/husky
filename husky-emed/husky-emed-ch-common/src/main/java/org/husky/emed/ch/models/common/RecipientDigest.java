@@ -30,7 +30,7 @@ public class RecipientDigest {
     /**
      * The list of the recipient
      */
-    private final List<@NonNull II> ids = new ArrayList<>();
+    private final List<@NonNull II> ids = new ArrayList<>(0);
 
     /**
      * The recipient addresses. It may be empty.

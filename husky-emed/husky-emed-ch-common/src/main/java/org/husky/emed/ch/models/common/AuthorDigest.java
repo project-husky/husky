@@ -59,12 +59,12 @@ public class AuthorDigest {
     /**
      * The list of author Ids apart from the GLN. The list may be empty.
      */
-    private final List<@NonNull QualifiedIdentifier> otherIds = new ArrayList<>();
+    private final List<@NonNull QualifiedIdentifier> otherIds = new ArrayList<>(0);
 
     /**
      * The list of author addresses. The list may be empty.
      */
-    private final List<@NonNull AddressDigest> addresses = new ArrayList<>();
+    private final List<@NonNull AddressDigest> addresses = new ArrayList<>(0);
 
     /**
      * The authoring device manufacturer model name or {@code null}.

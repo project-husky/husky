@@ -45,12 +45,12 @@ public class MedicationTreatment {
     /**
      * The list of 'over-the-counter' dispenses (OTC, without prescription).
      */
-    protected final List<@NonNull MedicationDispense> otcDispenses = new ArrayList<>();
+    protected final List<@NonNull MedicationDispense> otcDispenses = new ArrayList<>(0);
 
     /**
      * The list of prescriptions.
      */
-    protected final List<@NonNull MedicationPrescription> prescriptions = new ArrayList<>();
+    protected final List<@NonNull MedicationPrescription> prescriptions = new ArrayList<>(0);
 
     /**
      * The annotation comment or {@code null} if it isn't provided.

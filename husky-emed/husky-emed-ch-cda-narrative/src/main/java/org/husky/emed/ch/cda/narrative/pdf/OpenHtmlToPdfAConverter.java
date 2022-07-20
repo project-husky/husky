@@ -35,7 +35,7 @@ public class OpenHtmlToPdfAConverter implements HtmlToPdfAConverter {
     /**
      * The list of declared fonts.
      */
-    private final List<Font> fonts = new ArrayList<>();
+    private final List<Font> fonts = new ArrayList<>(1);
 
     /**
      * The name of the producer to set in generated PDF documents.
@@ -125,7 +125,7 @@ public class OpenHtmlToPdfAConverter implements HtmlToPdfAConverter {
             this.pdfRendererBuilderConsumer.accept(builder);
         }
 
-        final List<InputStream> inputStreams = new ArrayList<>();
+        final List<InputStream> inputStreams = new ArrayList<>(1);
 
         final byte[] pdfBytes;
         try {

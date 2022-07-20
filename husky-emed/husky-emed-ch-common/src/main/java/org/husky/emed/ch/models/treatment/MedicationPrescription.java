@@ -36,7 +36,7 @@ public class MedicationPrescription {
     /**
      * The list of 'over-the-counter' dispenses (OTC, without prescription).
      */
-    private final List<MedicationDispense> dispenses = new ArrayList<>();
+    private final List<MedicationDispense> dispenses = new ArrayList<>(0);
 
     /**
      * Number of dispense repeats/refills (excluding the initial dispense). {@code null} means no limitation.

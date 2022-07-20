@@ -46,7 +46,7 @@ public class EmedPreDocumentDigest extends EmedDocumentDigest {
     /**
      * The PRE entries contained in the document.
      */
-    private final List<@NonNull EmedPreEntryDigest> preEntryDigests = new ArrayList<>();
+    private final List<@NonNull EmedPreEntryDigest> preEntryDigests = new ArrayList<>(0);
 
     /**
      * Constructor.

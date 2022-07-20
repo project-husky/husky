@@ -26,27 +26,27 @@ public class TelecomDigest {
     /**
      * The email addresses.
      */
-    private final List<@NonNull String> mails = new ArrayList<>();
+    private final List<@NonNull String> mails = new ArrayList<>(0);
 
     /**
      * The phone numbers.
      */
-    private final List<@NonNull String> phones = new ArrayList<>();
+    private final List<@NonNull String> phones = new ArrayList<>(0);
 
     /**
      * The fax numbers.
      */
-    private final List<@NonNull String> faxes = new ArrayList<>();
+    private final List<@NonNull String> faxes = new ArrayList<>(0);
 
     /**
      * The website addresses.
      */
-    private final List<@NonNull String> websites = new ArrayList<>();
+    private final List<@NonNull String> websites = new ArrayList<>(0);
 
     /**
      * Other telecoms. The URL specifies the protocol.
      */
-    private final List<@NonNull String> others = new ArrayList<>();
+    private final List<@NonNull String> others = new ArrayList<>(0);
 
     /**
      * Full constructor.

@@ -40,12 +40,13 @@ public abstract class EmedDocumentDigest {
     /**
      * The author(s).
      */
-    protected final List<@org.checkerframework.checker.nullness.qual.NonNull AuthorDigest> authors = new ArrayList<>();
+    protected final List<@org.checkerframework.checker.nullness.qual.NonNull AuthorDigest> authors = new ArrayList<>(0);
 
     /**
      * The intended recipient(s).
      */
-    protected final List<@org.checkerframework.checker.nullness.qual.NonNull RecipientDigest> recipients = new ArrayList<>();
+    protected final List<@org.checkerframework.checker.nullness.qual.NonNull RecipientDigest> recipients =
+            new ArrayList<>(0);
 
     /**
      * The document ID.

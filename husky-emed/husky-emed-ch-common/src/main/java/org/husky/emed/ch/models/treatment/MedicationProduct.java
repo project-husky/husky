@@ -89,7 +89,7 @@ public class MedicationProduct {
     /**
      * The list of active ingredients.
      */
-    private final List<@NonNull MedicationProductIngredient> ingredients = new ArrayList<>();
+    private final List<@NonNull MedicationProductIngredient> ingredients = new ArrayList<>(0);
 
     /**
      * Constructor without packaging information.

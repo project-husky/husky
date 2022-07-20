@@ -28,7 +28,7 @@ public class MedicationDosageInstructions {
     /**
      * The list of dosage instructions intakes. It may be empty.
      */
-    private final List<@NonNull MedicationDosageIntake> intakes = new ArrayList<>();
+    private final List<@NonNull MedicationDosageIntake> intakes = new ArrayList<>(0);
 
     /**
      * The narrative description of the dosage instructions or {@code null} if it's not specified.

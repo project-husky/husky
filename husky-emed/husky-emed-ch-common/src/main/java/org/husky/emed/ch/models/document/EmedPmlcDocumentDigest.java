@@ -34,7 +34,7 @@ public class EmedPmlcDocumentDigest extends EmedDocumentDigest {
     /**
      * The MTP entries contained in the document.
      */
-    private final List<@NonNull EmedMtpEntryDigest> mtpEntryDigests = new ArrayList<>();
+    private final List<@NonNull EmedMtpEntryDigest> mtpEntryDigests = new ArrayList<>(0);
 
     /**
      * Constructor.

@@ -33,7 +33,7 @@ public class EmedPmlDocumentDigest extends EmedDocumentDigest {
     /**
      * The entries contained in the document.
      */
-    private final List<@NonNull EmedEntryDigest> entryDigests = new ArrayList<>();
+    private final List<@NonNull EmedEntryDigest> entryDigests = new ArrayList<>(0);
 
     /**
      * Constructor.
