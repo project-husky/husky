@@ -76,7 +76,7 @@ public class V3PixSource extends CamelService {
 	 * @throws Exception
 	 */
 	public V3Acknowledgement sendMergePatients(V3PixSourceMergePatients v3query,
-			SecurityHeaderElement assertion)
+			SecurityHeaderElement assertion, String messageId)
 			throws Exception {
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Beginning Send Patient Record Duplicates Resolved (V3)");
@@ -84,7 +84,7 @@ public class V3PixSource extends CamelService {
 
 		// send the request
 		var v3response = new V3Acknowledgement(sendITI44Query(v3query.getRootElement(), assertion,
-				getServerURI(), "urn:hl7-org:v3:PRPA_IN201304UV02"));
+				getServerURI(), "urn:hl7-org:v3:PRPA_IN201304UV02", messageId));
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Ending Send Patient Record Duplicates Resolved (V3)");
@@ -101,7 +101,8 @@ public class V3PixSource extends CamelService {
 	 * @return V3PixSourceAcknowledgement - The Server Ack
 	 * @throws Exception
 	 */
-	public V3Acknowledgement sendRecordAdded(V3PixSourceRecordAdded v3query, SecurityHeaderElement assertion)
+	public V3Acknowledgement sendRecordAdded(V3PixSourceRecordAdded v3query, SecurityHeaderElement assertion,
+			String messageId)
 			throws Exception {
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Beginning Send Patient Record Added (V3)");
@@ -109,7 +110,7 @@ public class V3PixSource extends CamelService {
 
 		// send the request
 		var v3response = new V3Acknowledgement(sendITI44Query(v3query.getRootElement(), assertion,
-				getServerURI(), "urn:hl7-org:v3:PRPA_IN201301UV02"));
+				getServerURI(), "urn:hl7-org:v3:PRPA_IN201301UV02", messageId));
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Ending Send Patient Record Added (V3)");
@@ -126,7 +127,8 @@ public class V3PixSource extends CamelService {
 	 * @return V3PixSourceAcknowledgement - The Server Ack
 	 * @throws Exception
 	 */
-	public V3Acknowledgement sendRecordRevised(V3PixSourceRecordRevised v3query, SecurityHeaderElement assertion)
+	public V3Acknowledgement sendRecordRevised(V3PixSourceRecordRevised v3query, SecurityHeaderElement assertion,
+			String messageId)
 			throws Exception {
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Beginning Send Patient Record Revised (V3)");
@@ -135,7 +137,7 @@ public class V3PixSource extends CamelService {
 		// send the request
 		var v3response = new V3Acknowledgement(
 				sendITI44Query(v3query.getRootElement(), assertion, getServerURI(),
-						"urn:hl7-org:v3:PRPA_IN201302UV02"));
+						"urn:hl7-org:v3:PRPA_IN201302UV02", messageId));
 				
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Ending Send Patient Record Revised (V3)");
@@ -146,7 +148,7 @@ public class V3PixSource extends CamelService {
 	}
 	
 	private MCCIIN000002UV01Type sendITI44Query(PRPAIN201304UV02Type request, SecurityHeaderElement assertion,
-			URI pdqDest, String action) throws Exception {
+			URI pdqDest, String action, String messageId) throws Exception {
 
 		final var marshaller = JAXBContext.newInstance(PRPAIN201304UV02Type.class).createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);
@@ -155,7 +157,7 @@ public class V3PixSource extends CamelService {
 		final var stringWriter = new StringWriter();
 		marshaller.marshal(request, stringWriter);
 
-		var xml = sendITI44Query(stringWriter.toString(), assertion, pdqDest, action);
+		var xml = sendITI44Query(stringWriter.toString(), assertion, pdqDest, action, messageId);
 
 		final var unmarshaller = JAXBContext.newInstance(MCCIIN000002UV01Type.class).createUnmarshaller();
 		return (MCCIIN000002UV01Type) unmarshaller
@@ -163,7 +165,7 @@ public class V3PixSource extends CamelService {
 	}
 
 	private MCCIIN000002UV01Type sendITI44Query(PRPAIN201302UV02Type request, SecurityHeaderElement assertion,
-			URI pdqDest, String action) throws Exception {
+			URI pdqDest, String action, String messageId) throws Exception {
 
 		final var marshaller = JAXBContext.newInstance(PRPAIN201302UV02Type.class).createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);
@@ -172,7 +174,7 @@ public class V3PixSource extends CamelService {
 		final var stringWriter = new StringWriter();
 		marshaller.marshal(request, stringWriter);
 
-		var xml = sendITI44Query(stringWriter.toString(), assertion, pdqDest, action);
+		var xml = sendITI44Query(stringWriter.toString(), assertion, pdqDest, action, messageId);
 
 		final var unmarshaller = JAXBContext.newInstance(MCCIIN000002UV01Type.class).createUnmarshaller();
 		return (MCCIIN000002UV01Type) unmarshaller
@@ -181,7 +183,7 @@ public class V3PixSource extends CamelService {
 
 	private MCCIIN000002UV01Type sendITI44Query(PRPAIN201301UV02Type request,
 			SecurityHeaderElement assertion,
-			URI pdqDest, String action) throws Exception {
+			URI pdqDest, String action, String messageId) throws Exception {
 
 
 		final var marshaller = JAXBContext.newInstance(PRPAIN201301UV02Type.class).createMarshaller();
@@ -191,14 +193,15 @@ public class V3PixSource extends CamelService {
 		final var stringWriter = new StringWriter();
 		marshaller.marshal(request, stringWriter);
 
-		var xml = sendITI44Query(stringWriter.toString(), assertion, pdqDest, action);
+		var xml = sendITI44Query(stringWriter.toString(), assertion, pdqDest, action, messageId);
 
 		final var unmarshaller = JAXBContext.newInstance(MCCIIN000002UV01Type.class).createUnmarshaller();
 		return (MCCIIN000002UV01Type) unmarshaller
 				.unmarshal(new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8)));
 	}
 
-	private String sendITI44Query(String request, SecurityHeaderElement assertion, URI pdqDest, String action)
+	private String sendITI44Query(String request, SecurityHeaderElement assertion, URI pdqDest, String action,
+			String messageId)
 			throws Exception {
 		final var endpoint = String.format(
 				"pixv3-iti44://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&audit=%s&auditContext=#auditContext",
@@ -210,7 +213,7 @@ public class V3PixSource extends CamelService {
 		outgoingHeaders.put("Content-Type",
 				String.format("application/soap+xml; charset=UTF-8; action=\"%s\"", action));
 
-		final var exchange = send(endpoint, request, assertion, outgoingHeaders);
+		final var exchange = send(endpoint, request, assertion, messageId, outgoingHeaders);
 
 		return exchange.getMessage().getBody(String.class);
 	}

@@ -225,7 +225,7 @@ class PdqV3QueryTest {
 		final MasterPatientIndexQueryResponse response = convenienceMasterPatientIndexV3Client
 				.queryPatientDemographics(
 				mpiQuery,
-				affinityDomain, null);
+						affinityDomain, null, null);
 		
 		// test patient not found 
 	
@@ -262,7 +262,7 @@ class PdqV3QueryTest {
 		final MasterPatientIndexQueryResponse response2 = convenienceMasterPatientIndexV3Client
 				.queryPatientDemographics(
 				mpiQuery2,
-				affinityDomain, null);
+						affinityDomain, null, null);
 		
 		List<Patient> patients = response2.getPatients();
 		assertTrue(response2.getSuccess());
@@ -298,7 +298,7 @@ class PdqV3QueryTest {
 		mpiQuery.addPatientName(false, patientName);
 		
 		final MasterPatientIndexQueryResponse response = convenienceMasterPatientIndexV3Client
-				.queryPatientDemographics(mpiQuery, affinityDomain, null);
+				.queryPatientDemographics(mpiQuery, affinityDomain, null, null);
 		
 		assertTrue(response.getSuccess());
 		assertTrue(response.getPatients().size()>0);
@@ -340,7 +340,7 @@ class PdqV3QueryTest {
 	    mpiQuery.addPatientAddress(address);
 		
 		final MasterPatientIndexQueryResponse response = convenienceMasterPatientIndexV3Client
-				.queryPatientDemographics(mpiQuery, affinityDomain, null);
+				.queryPatientDemographics(mpiQuery, affinityDomain, null, null);
 		
 		assertTrue(response.getSuccess());
 		assertEquals(1, response.getPatients().size());

@@ -80,8 +80,8 @@ public abstract class CamelService implements CamelContextAware {
 		if (soapHeaders == null) {
 			soapHeaders = new HashMap<>();
 		}
-		try {
 
+		try {
 			newHeader = new Header(wsseQName, wsseElement);
 			newHeader.setDirection(Direction.DIRECTION_OUT);
 			soapHeaders.put(wsseQName, newHeader);
@@ -112,15 +112,17 @@ public abstract class CamelService implements CamelContextAware {
 
 	/*exception is thrown by external library call*/
 	@SuppressWarnings("java:S112")
-	protected Exchange send(String endpoint, Object body, SecurityHeaderElement securityHeaderElement,
+	protected Exchange send(String endpoint, Object body, SecurityHeaderElement securityHeaderElement, String messageId,
 			Map<String, String> outgoingHttpHeaders) throws Exception {
 		Exchange exchange = new DefaultExchange(camelContext);
 		exchange.getIn().setBody(body);
 		if (securityHeaderElement != null) {
+			log.debug("build wss header");
 			addWssHeader(securityHeaderElement, exchange);
 		}
 
 		if (outgoingHttpHeaders != null && !outgoingHttpHeaders.isEmpty()) {
+			log.debug("add outgoing http headers");
 			addHttpHeader(exchange, outgoingHttpHeaders);
 		}
 

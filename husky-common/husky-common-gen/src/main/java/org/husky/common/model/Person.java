@@ -53,6 +53,15 @@ public class Person {
         mPerson = person;
     }
 
+	/**
+     * Instantiaties a new person
+     * 
+     */
+    public Person(org.openehealth.ipf.commons.ihe.xds.core.metadata.Person person) {
+		this();
+		setIpfPerson(person);
+    }
+
     /**
      * Adds the name.
      *
@@ -116,5 +125,14 @@ public class Person {
 
         return person;
     }
+
+	public void setIpfPerson(org.openehealth.ipf.commons.ihe.xds.core.metadata.Person ipfPerson) {
+		if (ipfPerson != null) {
+			if (ipfPerson.getName() != null) {
+				Name persName = new Name(ipfPerson.getName());
+				mPerson.getName().add(persName.getHl7CdaR2Pn());
+			}
+		}
+	}
 
 }

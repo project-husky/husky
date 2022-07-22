@@ -16,5 +16,6 @@
 	<modules>
 		<module>husky-common-gen</module>
 		<module>husky-common-ch</module>
+		<module>husky-common-at</module>
 	</modules>
 </project>

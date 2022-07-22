@@ -64,7 +64,7 @@ public class SimplePpfClient extends CamelService
 							serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
 							secure, getAuditContext().isAuditEnabled());
 
-					final var exchange = send(endpoint, requestToSend, aAssertion, null);
+					final var exchange = send(endpoint, requestToSend, aAssertion, null, null);
 
 					if (exchange.getException() != null) {
 						return new PrivacyPolicyFeedResponseBuilderImpl().exception(exchange.getException())

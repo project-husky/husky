@@ -249,7 +249,7 @@ class PixV3QueryTest {
 		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
 		log.debug(encoded);
 
-		assertTrue(pixV3Query.addPatient(patient, null));
+		assertTrue(pixV3Query.addPatient(patient, null, null));
 
 	}
 
@@ -304,7 +304,7 @@ class PixV3QueryTest {
 		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
 		log.debug(encoded);
 
-		assertTrue(pixV3Query.mergePatient(patient, "1634721569120", null));
+		assertTrue(pixV3Query.mergePatient(patient, "1634721569120", null, null));
 	}
 
 	/**
@@ -357,7 +357,7 @@ class PixV3QueryTest {
 		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
 		log.debug(encoded);
 
-		assertTrue(pixV3Query.updatePatient(patient, null));
+		assertTrue(pixV3Query.updatePatient(patient, null, null));
 	}
 
 	
@@ -394,7 +394,7 @@ class PixV3QueryTest {
 		identifier.setSystem(FhirCommon.addUrnOid(homeCommunityOid));
 		patient.getIdentifier().add(identifier);
 
-		String patId = pixV3Query.queryPatientId(patient, null);
+		String patId = pixV3Query.queryPatientId(patient, null, null);
 
 		assertEquals("761337610436974489", patId);
 	}

@@ -16,9 +16,13 @@
 
 package org.husky.common.hl7cdar2;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
 
-import javax.xml.bind.annotation.*;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * <p>
@@ -64,7 +68,7 @@ public class SXCMTS extends TS {
      *
      * @param value allowed object is {@link SetOperator }
      */
-    public void setOperator(SetOperator value) {
+	public void setOperator(SetOperator value) {
         this.operator = value;
     }
 
