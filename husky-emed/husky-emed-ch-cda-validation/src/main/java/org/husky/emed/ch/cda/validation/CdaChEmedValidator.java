@@ -14,6 +14,7 @@ import com.helger.schematron.svrl.jaxb.FailedAssert;
 import com.helger.schematron.svrl.jaxb.SchematronOutputType;
 import com.helger.schematron.xslt.SchematronResourceXSLT;
 import net.sf.saxon.xpath.XPathFactoryImpl;
+import org.husky.common.utils.Sources;
 import org.husky.common.utils.xml.XmlFactories;
 import org.husky.emed.ch.enums.CceDocumentType;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
@@ -28,6 +29,7 @@ import org.verapdf.pdfa.results.TestAssertion;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.NamespaceContext;
@@ -60,12 +62,12 @@ public class CdaChEmedValidator {
     /**
      * The path and file name of the XML Schema definition.
      */
-    private static final String CCE_XSD_FILE_PATH = "schema/CDA-CH-EMED.xsd";
+    public static final String CCE_XSD_FILE_PATH = "schema/CDA-CH-EMED.xsd";
 
     /**
      * The path of the directory that contains CDA-CH-EMED XSLT files.
      */
-    private static final String CCE_XSLT_PATH = "schematron/1.0.2/";
+    public static final String CCE_XSLT_PATH = "schematron/1.0.2/";
 
     /**
      * The patterns to transform the failed asserts location.

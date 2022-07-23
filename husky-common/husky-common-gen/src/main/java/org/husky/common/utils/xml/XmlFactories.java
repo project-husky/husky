@@ -41,7 +41,8 @@ public class XmlFactories {
      *
      * @return a configured {@link DocumentBuilder}.
      * @throws ParserConfigurationException if the parser is not Xerces2 compatible.
-     * @see <a href="https://cheatsheetseries.owasp.org/cheatsheets/XML_External_Entity_Prevention_Cheat_Sheet.html#jaxp-documentbuilderfactory-saxparserfactory-and-dom4j">XML
+     * @see <a
+     * href="https://cheatsheetseries.owasp.org/cheatsheets/XML_External_Entity_Prevention_Cheat_Sheet.html#jaxp-documentbuilderfactory-saxparserfactory-and-dom4j">XML
      * External Entity Prevention Cheat Sheet</a>
      */
     public static DocumentBuilder newSafeDocumentBuilder() throws ParserConfigurationException {
@@ -98,7 +99,8 @@ public class XmlFactories {
     }
 
     /**
-     * Initializes and configures a {@link Transformer} from a {@link Source}.
+     * Initializes and configures a {@link Transformer} from a {@link Source}. You can use
+     * {@link org.husky.common.utils.Sources} to convert different objects to {@link Source}s.
      *
      * @param source The source.
      * @return a configured {@link Transformer}.

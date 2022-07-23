@@ -82,7 +82,8 @@ public class XmlSchemaValidator {
     }
 
     /**
-     * Validates the XML content with the XML Schema.
+     * Validates the XML content with the XML Schema. You can use {@link org.husky.common.utils.Sources} to convert
+     * different objects to {@link Source}s.
      *
      * @param xml The source of the XML content to validate.
      * @return the validation report.
@@ -91,7 +92,7 @@ public class XmlSchemaValidator {
      * @throws SAXException if the {@link ErrorHandler} throws a {@link SAXException} or if a fatal error is found and
      *                      the {@link ErrorHandler} returns normally.
      */
-    public XmlSchemaReport validate(final StreamSource xml) throws IOException, SAXException {
+    public XmlSchemaReport validate(final Source xml) throws IOException, SAXException {
         final var report = new XmlSchemaReport();
         final var validator = this.schema.newValidator();
         validator.setErrorHandler(new ErrorHandlerToReport(report));
@@ -101,33 +102,5 @@ public class XmlSchemaValidator {
             // Ignore any SAXParseException, as they have been caught by the ErrorHandler
         }
         return report;
-    }
-
-    /**
-     * Validates the XML content with the XML Schema.
-     *
-     * @param xml The XML file to validate.
-     * @return the validation report.
-     * @throws IOException  if the validator is processing a {@link javax.xml.transform.sax.SAXSource} and the
-     *                      underlying {@link org.xml.sax.XMLReader} throws an {@link IOException}.
-     * @throws SAXException if the {@link ErrorHandler} throws a {@link SAXException} or if a fatal error is found and
-     *                      the {@link ErrorHandler} returns normally.
-     */
-    public XmlSchemaReport validate(final File xml) throws IOException, SAXException {
-        return this.validate(new StreamSource(Objects.requireNonNull(xml)));
-    }
-
-    /**
-     * Validates the XML content with the XML Schema.
-     *
-     * @param xml The XML content to validate.
-     * @return the validation report.
-     * @throws IOException  if the validator is processing a {@link javax.xml.transform.sax.SAXSource} and the
-     *                      underlying {@link org.xml.sax.XMLReader} throws an {@link IOException}.
-     * @throws SAXException if the {@link ErrorHandler} throws a {@link SAXException} or if a fatal error is found and
-     *                      the {@link ErrorHandler} returns normally.
-     */
-    public XmlSchemaReport validate(final byte[] xml) throws IOException, SAXException {
-        return this.validate(new StreamSource(new ByteArrayInputStream(Objects.requireNonNull(xml))));
     }
 }
