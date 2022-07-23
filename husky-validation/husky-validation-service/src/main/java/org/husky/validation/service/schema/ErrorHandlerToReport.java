@@ -99,7 +99,7 @@ public class ErrorHandlerToReport implements ErrorHandler {
      */
     @Override
     public void fatalError(final SAXParseException exception) throws SAXException {
-        this.report.getFatalErrors().add(exception);
+        this.report.setFatalError(exception);
         throw exception;
     }
 }

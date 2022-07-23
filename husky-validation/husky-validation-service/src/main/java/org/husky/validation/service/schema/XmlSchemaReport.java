@@ -1,6 +1,7 @@
 package org.husky.validation.service.schema;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.xml.sax.SAXParseException;
 
 import java.util.ArrayList;
@@ -24,9 +25,10 @@ public class XmlSchemaReport {
     private final List<@NonNull SAXParseException> errors = new ArrayList<>();
 
     /**
-     * The list of fatal errors.
+     * The fatal error or {@code null}.
      */
-    private final List<@NonNull SAXParseException> fatalErrors = new ArrayList<>();
+    @Nullable
+    private SAXParseException fatalError = null;
 
     /**
      * Returns the list of validation warnings.
@@ -43,16 +45,26 @@ public class XmlSchemaReport {
     }
 
     /**
-     * Returns the list of fatal errors.
+     * Returns the fatal error or {@code null}.
      */
-    public List<@NonNull SAXParseException> getFatalErrors() {
-        return fatalErrors;
+    @Nullable
+    public SAXParseException getFatalError() {
+        return fatalError;
+    }
+
+    /**
+     * Sets the fatal error.
+     *
+     * @param fatalError The fatal error or {@code null}.
+     */
+    public void setFatalError(@Nullable final SAXParseException fatalError) {
+        this.fatalError = fatalError;
     }
 
     /**
      * Return whether the validation was successful or not.
      */
     public boolean isValid() {
-        return this.errors.isEmpty() && this.fatalErrors.isEmpty();
+        return this.errors.isEmpty() && this.fatalError == null;
     }
 }

@@ -52,7 +52,7 @@ class XmlSchemaValidatorTest {
         assertFalse(result.isValid());
         assertEquals(0, result.getWarnings().size());
         assertEquals(4, result.getErrors().size());
-        assertEquals(0, result.getFatalErrors().size());
+        assertNull(result.getFatalError());
     }
 
     @Test
@@ -62,7 +62,7 @@ class XmlSchemaValidatorTest {
         assertFalse(result.isValid());
         assertEquals(0, result.getWarnings().size());
         assertEquals(1, result.getErrors().size());
-        assertEquals(1, result.getFatalErrors().size());
+        assertNotNull(result.getFatalError());
     }
 
     void validateEmptyReport(final XmlSchemaReport result) {
@@ -70,7 +70,7 @@ class XmlSchemaValidatorTest {
         assertTrue(result.isValid());
         assertEquals(0, result.getWarnings().size());
         assertEquals(0, result.getErrors().size());
-        assertEquals(0, result.getFatalErrors().size());
+        assertNull(result.getFatalError());
     }
 
     private byte[] getSampleContent(final String sampleName) throws IOException {

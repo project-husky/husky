@@ -230,8 +230,8 @@ public class CdaChEmedValidator {
         }
         final var report = this.schemaValidator.validate(source);
         SAXParseException exception = null;
-        if (!report.getFatalErrors().isEmpty()) {
-            exception = report.getFatalErrors().get(0);
+        if (report.getFatalError() != null) {
+            exception = report.getFatalError();
         } else if (!report.getErrors().isEmpty()) {
             exception = report.getErrors().get(0);
         }
