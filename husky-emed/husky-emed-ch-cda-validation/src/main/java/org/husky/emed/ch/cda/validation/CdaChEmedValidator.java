@@ -15,10 +15,10 @@ import com.helger.schematron.svrl.jaxb.SchematronOutputType;
 import com.helger.schematron.xslt.SchematronResourceXSLT;
 import net.sf.saxon.xpath.XPathFactoryImpl;
 import org.husky.common.utils.xml.XmlFactories;
-import org.husky.common.utils.xml.XmlSchemaValidator;
 import org.husky.emed.ch.enums.CceDocumentType;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.validation.service.pdf.PdfA12Validator;
+import org.husky.validation.service.schema.XmlSchemaValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -101,6 +101,18 @@ public class CdaChEmedValidator {
     private final XPathExpression pdfXpathExpression;
 
     /**
+     * Returns the XML Schema validator for CDA-CH-EMED documents.
+     *
+     * @return an XML Schema validator.
+     * @throws IOException  if the XML Schema file is not found.
+     * @throws SAXException if an error arises while parsing the XML Schema.
+     */
+    public static org.husky.validation.service.schema.XmlSchemaValidator getXmlSchemaValidator() throws IOException, SAXException {
+        return new XmlSchemaValidator(
+                Sources.fromFile(new File(new ClassPathResource(CCE_XSD_FILE_PATH).getURI())), false, true);
+    }
+
+    /**
      * Constructor.
      *
      * @throws IOException              if the XML Schema file is not found.
@@ -108,7 +120,7 @@ public class CdaChEmedValidator {
      * @throws XPathExpressionException if the XPath expression is not valid.
      */
     public CdaChEmedValidator() throws IOException, SAXException, XPathExpressionException {
-        this.schemaValidator = new XmlSchemaValidator((new ClassPathResource(CCE_XSD_FILE_PATH)).getURL());
+        this.schemaValidator = getXmlSchemaValidator();
 
         this.mtpValidator = SchematronResourceXSLT.fromClassPath(CCE_XSLT_PATH + "cdachemed-MTP-error.xslt", getClass().getClassLoader());
         this.preValidator = SchematronResourceXSLT.fromClassPath(CCE_XSLT_PATH + "cdachemed-PRE-error.xslt", getClass().getClassLoader());
@@ -214,10 +226,15 @@ public class CdaChEmedValidator {
         if (!(source.getNode() instanceof final Document document)) {
             throw new IllegalArgumentException("The DOMSource does not contain a Document");
         }
-        try {
-            this.schemaValidator.validate(source);
-        } catch (final javax.xml.bind.ValidationException exception) {
-            throw new InvalidEmedContentException(exception);
+        final var report = this.schemaValidator.validate(source);
+        SAXParseException exception = null;
+        if (!report.getFatalErrors().isEmpty()) {
+            exception = report.getFatalErrors().get(0);
+        } else if (!report.getErrors().isEmpty()) {
+            exception = report.getErrors().get(0);
+        }
+        if (exception != null) {
+            throw new InvalidEmedContentException("Schema error: " + exception.getMessage(), exception);
         }
         this.validateAgainstSchematron(source, type);
         this.validatePdfRepresentation(document.getDocumentElement());
