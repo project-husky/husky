@@ -85,8 +85,7 @@ public class CcePreEntryDigester {
         final int sequence;
         final UUID medicationTreatmentId;
         if (targetedMtp != null) {
-            sequence = (int) this.emedEntryService.getSequence(targetedMtp.getMedicationTreatmentId(),
-                    prescriptionTime);
+            sequence = this.emedEntryService.getSequence(targetedMtp.getMedicationTreatmentId(), prescriptionTime);
             medicationTreatmentId = targetedMtp.getMedicationTreatmentId();
         } else {
             sequence = 0;

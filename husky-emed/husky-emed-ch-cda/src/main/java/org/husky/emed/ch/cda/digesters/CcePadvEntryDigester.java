@@ -107,7 +107,7 @@ public class CcePadvEntryDigester {
                 .orElseThrow(() -> new InvalidEmedContentException("Unable to find an item entry digest"));
         final var targetedEntryType = refEntryDigest.getEmedEntryType();
         final var targetedEntryRef = new EmedReference(refEntryDigest.getDocumentId(), refEntryDigest.getEntryId());
-        final var sequence = (int) this.emedEntryService.getSequence(refEntryDigest.getMedicationTreatmentId(),
+        final var sequence = this.emedEntryService.getSequence(refEntryDigest.getMedicationTreatmentId(),
                 padvDocumentEffectiveTime);
         final var medicationTreatmentId = refEntryDigest.getMedicationTreatmentId();
         final var annotationComment = this.getAnnotationComment(observation).orElse(null);

@@ -100,12 +100,12 @@ public class CceDisEntryDigester {
         final UUID medicationTreatmentId;
         final boolean isOtc;
         if (refPreEntryDigest != null) {
-            sequence = (int) this.emedEntryService.getSequence(refPreEntryDigest.getMedicationTreatmentId(),
+            sequence = this.emedEntryService.getSequence(refPreEntryDigest.getMedicationTreatmentId(),
                     disDocumentEffectiveTime);
             medicationTreatmentId = refPreEntryDigest.getMedicationTreatmentId();
             isOtc = false;
         } else if (refMtpEntryDigest != null) {
-            sequence = (int) this.emedEntryService.getSequence(refMtpEntryDigest.getMedicationTreatmentId(),
+            sequence = this.emedEntryService.getSequence(refMtpEntryDigest.getMedicationTreatmentId(),
                     disDocumentEffectiveTime);
             medicationTreatmentId = refMtpEntryDigest.getMedicationTreatmentId();
             isOtc = true;

@@ -82,7 +82,7 @@ class CceDocumentDigesterTest {
         }
 
         @Override
-        public long getSequence(UUID medicationTreatmentId, Instant creationTime) {
+        public int getSequence(UUID medicationTreatmentId, Instant creationTime) {
             return 0;
         }
 

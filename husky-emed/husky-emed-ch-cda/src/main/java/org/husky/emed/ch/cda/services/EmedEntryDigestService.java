@@ -42,6 +42,6 @@ public interface EmedEntryDigestService {
      * @param documentationTime     The documentation time.
      * @return The next number in the sequence.
      */
-    long getSequence(final UUID medicationTreatmentId,
-                     final Instant documentationTime);
+    int getSequence(final UUID medicationTreatmentId,
+                    final Instant documentationTime);
 }
