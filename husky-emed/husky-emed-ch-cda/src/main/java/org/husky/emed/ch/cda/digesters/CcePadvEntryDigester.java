@@ -50,17 +50,17 @@ public class CcePadvEntryDigester {
     /**
      * The registry of {@link EmedEntryDigest}.
      */
-    private final EmedEntryDigestService emedEntryService;
+    protected final EmedEntryDigestService emedEntryService;
 
     /**
      * The MTP entry digester.
      */
-    private final CceMtpEntryDigester mtpEntryDigester;
+    protected final CceMtpEntryDigester mtpEntryDigester;
 
     /**
      * The PRE entry digester.
      */
-    private final CcePreEntryDigester preEntryDigester;
+    protected final CcePreEntryDigester preEntryDigester;
 
     /**
      * Constructor.
@@ -89,11 +89,11 @@ public class CcePadvEntryDigester {
      * @throws InvalidEmedContentException              if the CCE document is invalid.
      * @throws InvalidMedicationTreatmentStateException if the treatment state is invalid.
      */
-    protected EmedPadvEntryDigest createDigest(final POCDMT000040Observation observation,
-                                               final UUID padvDocumentId,
-                                               final Instant padvDocumentEffectiveTime,
-                                               final AuthorDigest parentDocumentAuthor,
-                                               final AuthorDigest parentSectionAuthor) throws InvalidEmedContentException, InvalidMedicationTreatmentStateException {
+    public EmedPadvEntryDigest createDigest(final POCDMT000040Observation observation,
+                                            final UUID padvDocumentId,
+                                            final Instant padvDocumentEffectiveTime,
+                                            final AuthorDigest parentDocumentAuthor,
+                                            final AuthorDigest parentSectionAuthor) throws InvalidEmedContentException, InvalidMedicationTreatmentStateException {
         final var entryId = this.getEntryId(observation);
         final var isCompleted = this.isCompleted(observation);
 
@@ -319,7 +319,7 @@ public class CcePadvEntryDigester {
      * @return the item entry ID.
      * @throws InvalidEmedContentException if the item entry ID is missing.
      */
-    private UUID getEntryId(final POCDMT000040Observation observation) throws InvalidEmedContentException {
+    UUID getEntryId(final POCDMT000040Observation observation) throws InvalidEmedContentException {
         return Optional.of(observation.getId())
                 .map(OptionalUtils::getListFirstElement)
                 .map(IiUtils::getUuid)
@@ -329,7 +329,7 @@ public class CcePadvEntryDigester {
     /**
      * Retrieves the status (OK, CHANGE, CANCEL, SUSPEND, REFUSE, COMMENT) of the PADV observation element.
      */
-    private PharmaceuticalAdviceStatus getStatus(final POCDMT000040Observation observation) throws InvalidEmedContentException {
+    PharmaceuticalAdviceStatus getStatus(final POCDMT000040Observation observation) throws InvalidEmedContentException {
         return Optional.ofNullable(observation.getCode())
                 .filter(code -> PharmaceuticalAdviceStatus.CODE_SYSTEM_OID.equals(code.getCodeSystem()))
                 .map(CD::getCode)
@@ -341,7 +341,7 @@ public class CcePadvEntryDigester {
     /**
      * Returns whether the status code is 'completed' or not ('active').
      */
-    private boolean isCompleted(final POCDMT000040Observation observation) throws InvalidEmedContentException {
+    boolean isCompleted(final POCDMT000040Observation observation) throws InvalidEmedContentException {
         return "completed".equals(
                 Optional.ofNullable(observation.getStatusCode())
                         .map(CD::getCode)
@@ -355,7 +355,7 @@ public class CcePadvEntryDigester {
      *
      * @return an {@link Optional} that may contain the effective time as an {@link Instant}.
      */
-    private Optional<Instant> getEffectiveTime(final POCDMT000040Observation observation) {
+    Optional<Instant> getEffectiveTime(final POCDMT000040Observation observation) {
         return Optional.ofNullable(observation.getEffectiveTime())
                 .map(TS::getValue)
                 .map(Hl7Dtm::fromHl7)
@@ -368,7 +368,7 @@ public class CcePadvEntryDigester {
      *
      * @throws InvalidEmedContentException if the entry is incorrect or is missing the targeted entry.
      */
-    private EmedReference getItemReference(final POCDMT000040Observation observation) throws InvalidEmedContentException {
+    EmedReference getItemReference(final POCDMT000040Observation observation) throws InvalidEmedContentException {
         return Stream.of(this.getMtpReference(observation), this.getPreReference(observation), this.getDisReference(observation))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
@@ -383,7 +383,7 @@ public class CcePadvEntryDigester {
      * @return an {@link Optional} that may contain a MTP entry reference.
      * @throws InvalidEmedContentException if the PADV entry is invalid.
      */
-    private Optional<EmedReference> getMtpReference(final POCDMT000040Observation observation) throws InvalidEmedContentException {
+    Optional<EmedReference> getMtpReference(final POCDMT000040Observation observation) throws InvalidEmedContentException {
         return observation.getEntryRelationship().stream()
                 .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.REFR)
                 .map(POCDMT000040EntryRelationship::getSubstanceAdministration)
@@ -399,7 +399,7 @@ public class CcePadvEntryDigester {
      * @return an {@link Optional} that may contain a PRE entry reference.
      * @throws InvalidEmedContentException if the PADV entry is invalid.
      */
-    private Optional<EmedReference> getPreReference(final POCDMT000040Observation observation) throws InvalidEmedContentException {
+    Optional<EmedReference> getPreReference(final POCDMT000040Observation observation) throws InvalidEmedContentException {
         return observation.getEntryRelationship().stream()
                 .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.REFR)
                 .map(POCDMT000040EntryRelationship::getSubstanceAdministration)
@@ -415,7 +415,7 @@ public class CcePadvEntryDigester {
      * @return an {@link Optional} that may contain a DIS entry reference.
      * @throws InvalidEmedContentException if the PADV entry is invalid.
      */
-    private Optional<EmedReference> getDisReference(final POCDMT000040Observation observation) throws InvalidEmedContentException {
+    Optional<EmedReference> getDisReference(final POCDMT000040Observation observation) throws InvalidEmedContentException {
         return observation.getEntryRelationship().stream()
                 .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.REFR)
                 .map(POCDMT000040EntryRelationship::getSupply)
@@ -430,7 +430,7 @@ public class CcePadvEntryDigester {
      *
      * @return an {@link Optional} that may contain the annotation comment.
      */
-    private Optional<String> getAnnotationComment(final POCDMT000040Observation observation) {
+    Optional<String> getAnnotationComment(final POCDMT000040Observation observation) {
         return EntryRelationshipUtils.getActsFromEntryRelationshipsByTemplateId(observation.getEntryRelationship(),
                         TemplateIds.ANNOTATION_COMMENT).stream()
                 .findFirst()

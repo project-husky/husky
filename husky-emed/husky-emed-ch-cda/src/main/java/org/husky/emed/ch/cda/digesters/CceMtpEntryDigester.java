@@ -46,11 +46,11 @@ public class CceMtpEntryDigester {
      * @param parentSectionAuthor     The parent section author (not the original section author).
      * @return a digest of the element.
      */
-    protected EmedMtpEntryDigest createDigest(final POCDMT000040SubstanceAdministration substanceAdministration,
-                                              final UUID documentId,
-                                              final Instant planningDate,
-                                              final AuthorDigest parentDocumentAuthor,
-                                              final AuthorDigest parentSectionAuthor) throws InvalidEmedContentException {
+    public EmedMtpEntryDigest createDigest(final POCDMT000040SubstanceAdministration substanceAdministration,
+                                           final UUID documentId,
+                                           final Instant planningDate,
+                                           final AuthorDigest parentDocumentAuthor,
+                                           final AuthorDigest parentSectionAuthor) throws InvalidEmedContentException {
         if (!TemplateIds.hasAllIds(TemplateIds.MTP_ENTRY, substanceAdministration.getTemplateId())) {
             throw new InvalidEmedContentException("The given substance administration is not an MTP item entry");
         }
@@ -109,7 +109,7 @@ public class CceMtpEntryDigester {
      * @param substanceAdministration The MTP item SubstanceAdministration.
      * @return an {@link Optional} that may contain a reference to the original MTP item entry.
      */
-    private Optional<EmedReference> getReferenceToOriginalMtpEntry(final POCDMT000040SubstanceAdministration substanceAdministration) {
+    Optional<EmedReference> getReferenceToOriginalMtpEntry(final POCDMT000040SubstanceAdministration substanceAdministration) {
         var sa = substanceAdministration.getEntryRelationship().stream()
                 .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.REFR)
                 .findAny()

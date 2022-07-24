@@ -45,7 +45,7 @@ public class CcePreEntryDigester {
     /**
      * The registry of {@link EmedEntryDigest}.
      */
-    private final EmedEntryDigestService emedEntryService;
+    protected final EmedEntryDigestService emedEntryService;
 
     /**
      * Constructor.
@@ -59,22 +59,22 @@ public class CcePreEntryDigester {
     /**
      * Creates a new {@link EmedPreEntryDigest} from a PRE SubstanceAdministration element.
      *
-     * @param substanceAdministration   The PRE SubstanceAdministration element.
-     * @param documentId                The PRE document ID (PRE or PADV).
-     * @param prescriptionTime          The prescription time.
+     * @param substanceAdministration           The PRE SubstanceAdministration element.
+     * @param documentId                        The PRE document ID (PRE or PADV).
+     * @param prescriptionTime                  The prescription time.
      * @param prescriptionDocumentValidityStart The prescription validity start time (inclusive).
      * @param prescriptionDocumentValidityStop  The prescription validity stop time (inclusive) or {@code null}.
-     * @param parentDocumentAuthor      The parent document author (not the original document author).
-     * @param parentSectionAuthor       The parent section author (not the original section author).
+     * @param parentDocumentAuthor              The parent document author (not the original document author).
+     * @param parentSectionAuthor               The parent section author (not the original section author).
      * @return a digest of the element.
      */
-    protected EmedPreEntryDigest createDigest(final POCDMT000040SubstanceAdministration substanceAdministration,
-                                              final UUID documentId,
-                                              final Instant prescriptionTime,
-                                              final Instant prescriptionDocumentValidityStart,
-                                              @Nullable final Instant prescriptionDocumentValidityStop,
-                                              final AuthorDigest parentDocumentAuthor,
-                                              final AuthorDigest parentSectionAuthor) throws InvalidEmedContentException {
+    public EmedPreEntryDigest createDigest(final POCDMT000040SubstanceAdministration substanceAdministration,
+                                           final UUID documentId,
+                                           final Instant prescriptionTime,
+                                           final Instant prescriptionDocumentValidityStart,
+                                           @Nullable final Instant prescriptionDocumentValidityStop,
+                                           final AuthorDigest parentDocumentAuthor,
+                                           final AuthorDigest parentSectionAuthor) throws InvalidEmedContentException {
         if (!TemplateIds.hasAllIds(TemplateIds.PRE_ENTRY, substanceAdministration.getTemplateId())) {
             throw new InvalidEmedContentException("The given substance administration is not a PRE item entry");
         }
@@ -158,7 +158,7 @@ public class CcePreEntryDigester {
      * @param substanceAdministration The PRE item SubstanceAdministration.
      * @return an {@link Optional} that may contain the reference to the targeted MTP document.
      */
-    private Optional<EmedReference> getTargetedMtpReference(final POCDMT000040SubstanceAdministration substanceAdministration) throws InvalidEmedContentException {
+    Optional<EmedReference> getTargetedMtpReference(final POCDMT000040SubstanceAdministration substanceAdministration) throws InvalidEmedContentException {
         return substanceAdministration.getEntryRelationship().stream()
                 .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.REFR)
                 .findAny()
@@ -172,7 +172,7 @@ public class CcePreEntryDigester {
      *
      * @param substanceAdministration The PRE item SubstanceAdministration.
      */
-    private boolean isProvisional(final POCDMT000040SubstanceAdministration substanceAdministration) {
+    boolean isProvisional(final POCDMT000040SubstanceAdministration substanceAdministration) {
         return substanceAdministration.getEntryRelationship().stream()
                 .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.REFR)
                 .map(POCDMT000040EntryRelationship::getSubstanceAdministration)
@@ -188,7 +188,7 @@ public class CcePreEntryDigester {
      * @param substanceAdministration The PRE item SubstanceAdministration.
      * @return an {@link Optional} that may contain the renewal period.
      */
-    private Optional<RenewalInterval> getRenewalInterval(final POCDMT000040SubstanceAdministration substanceAdministration) {
+    Optional<RenewalInterval> getRenewalInterval(final POCDMT000040SubstanceAdministration substanceAdministration) {
         final var effectiveTime = substanceAdministration.getEntryRelationship().stream()
                 .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.COMP)
                 .map(POCDMT000040EntryRelationship::getSupply)

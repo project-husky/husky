@@ -61,7 +61,7 @@ public class CceDisEntryDigester {
     /**
      * The registry of {@link org.husky.emed.ch.models.entry.EmedEntryDigest}.
      */
-    private final EmedEntryDigestService emedEntryService;
+    protected final EmedEntryDigestService emedEntryService;
 
     /**
      * Constructor.
@@ -83,11 +83,11 @@ public class CceDisEntryDigester {
      * @return a digest of the element.
      * @throws InvalidEmedContentException if the CCE document is invalid.
      */
-    protected EmedDisEntryDigest createDigest(final POCDMT000040Supply supply,
-                                              final UUID disDocumentId,
-                                              final Instant disDocumentEffectiveTime,
-                                              final AuthorDigest parentDocumentAuthor,
-                                              final AuthorDigest parentSectionAuthor) throws InvalidEmedContentException {
+    public EmedDisEntryDigest createDigest(final POCDMT000040Supply supply,
+                                           final UUID disDocumentId,
+                                           final Instant disDocumentEffectiveTime,
+                                           final AuthorDigest parentDocumentAuthor,
+                                           final AuthorDigest parentSectionAuthor) throws InvalidEmedContentException {
 
         final var refMtpEntry = this.getMtpReference(supply).orElse(null);
         final var refMtpEntryDigest = Optional.ofNullable(refMtpEntry)
