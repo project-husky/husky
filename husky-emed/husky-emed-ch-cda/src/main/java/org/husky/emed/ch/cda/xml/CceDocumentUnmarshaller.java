@@ -116,6 +116,27 @@ public class CceDocumentUnmarshaller {
             throw new SAXException("Error while parsing the XML source", exception);
         }
 
+        return unmarshall(document);
+    }
+
+    /**
+     * Unmarshalles a CDA-CH-EMED document as a specialized {@link POCDMT000040ClinicalDocument} object.
+     *
+     * <ul>
+     * <li>A PML document will be unmarshalled as {@link MedicationListDocument}.
+     * <li>A PMLC document will be unmarshalled as {@link MedicationCardDocument}.
+     * <li>An MTP document will be unmarshalled as {@link MedicationTreatmentPlanDocument}.
+     * <li>A PRE document will be unmarshalled as {@link MedicationPrescriptionDocument}.
+     * <li>A DIS document will be unmarshalled as {@link MedicationDispenseDocument}.
+     * <li>A PADV document will be unmarshalled as {@link PharmaceuticalAdviceDocument}.
+     * </ul>
+     *
+     * @param document The CDA XML content as a DOM document.
+     * @return the unmarshalled clinical document.
+     * @throws InvalidEmedContentException if the CDA-CH-EMED document is invalid.
+     */
+    public static POCDMT000040ClinicalDocument unmarshall(final Document document) throws InvalidEmedContentException {
+        Objects.requireNonNull(document);
         final Class<? extends POCDMT000040ClinicalDocument> unmarshalledClass = getUnmarshalledClass(document);
         try {
             final var context = JAXBContext.newInstance(unmarshalledClass);
