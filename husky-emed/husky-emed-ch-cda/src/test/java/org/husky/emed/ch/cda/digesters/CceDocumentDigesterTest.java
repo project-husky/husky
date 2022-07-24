@@ -123,16 +123,6 @@ class CceDocumentDigesterTest {
         assertTrue(mtpEntryDigest.isSubstitutionPermitted());
     }
 
-    @Test
-    void testGetDocumentType() throws Exception {
-        assertEquals(CceDocumentType.MTP, CceDocumentDigester.getDocumentType(this.loadDoc("1-1-MedicationTreatmentPlan.xml")));
-        assertEquals(CceDocumentType.PRE, CceDocumentDigester.getDocumentType(this.loadDoc("2-6-MedicationPrescription.xml")));
-        assertEquals(CceDocumentType.DIS, CceDocumentDigester.getDocumentType(this.loadDoc("1-2-MedicationDispense.xml")));
-        assertEquals(CceDocumentType.PADV, CceDocumentDigester.getDocumentType(this.loadDoc("2-2-PharmaceuticalAdvice.xml")));
-        assertEquals(CceDocumentType.PML, CceDocumentDigester.getDocumentType(this.loadDoc("2-1-MedicationList.xml")));
-        assertEquals(CceDocumentType.PMLC, CceDocumentDigester.getDocumentType(this.loadDoc("2-7-MedicationCard.xml")));
-    }
-
     private POCDMT000040ClinicalDocument loadDoc(final String docName) throws SAXException {
         return CceDocumentUnmarshaller.unmarshall(CceDocumentDigesterTest.class.getResourceAsStream("/CDA-CH-EMED" +
                 "/eHealthSuisse/v1.0/" + docName));
