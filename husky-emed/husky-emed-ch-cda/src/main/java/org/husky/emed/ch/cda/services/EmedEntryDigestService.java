@@ -31,14 +31,6 @@ public interface EmedEntryDigestService {
     Optional<EmedEntryDigest> getById(final UUID entryId);
 
     /**
-     * Find a single eMed entry digest by its document ID.
-     *
-     * @param documentUniqueId The eMed document ID.
-     * @return an {@link Optional} that may contain the found item entry.
-     */
-    Optional<EmedEntryDigest> getByDocument(final UUID documentUniqueId);
-
-    /**
      * Find the next number in the sequence. The sequence is necessary to order Emed entries belonging to the same
      * medication treatment and having the same documentation time (it should be quite rare but is allowed); one is
      * necessarily aggregated before the other, in order of ascending sequence number.

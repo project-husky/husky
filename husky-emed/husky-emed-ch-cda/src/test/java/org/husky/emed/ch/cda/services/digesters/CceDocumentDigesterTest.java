@@ -82,11 +82,6 @@ class CceDocumentDigesterTest {
         }
 
         @Override
-        public Optional<EmedEntryDigest> getByDocument(UUID documentUniqueId) {
-            return this.digests.stream().filter(digest -> digest.getDocumentId().equals(documentUniqueId)).findAny();
-        }
-
-        @Override
         public long getSequence(UUID medicationTreatmentId, Instant creationTime) {
             return 0;
         }

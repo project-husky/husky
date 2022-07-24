@@ -80,7 +80,7 @@ public class CcePreEntryDigester {
         }
         final var preEntry = new SubAdmEntryReader(substanceAdministration);
 
-        final EmedEntryDigest targetedMtp = this.getTargetedEntryDigest(substanceAdministration).orElse(null);
+        final EmedEntryDigest targetedMtp = this.fetchTargetedEntryDigest(substanceAdministration).orElse(null);
 
         final int sequence;
         final UUID medicationTreatmentId;
@@ -146,10 +146,10 @@ public class CcePreEntryDigester {
      * @param substanceAdministration The PRE item SubstanceAdministration.
      * @return an {@link Optional} that may contain the referenced MTP item entry digest.
      */
-    private Optional<EmedEntryDigest> getTargetedEntryDigest(final POCDMT000040SubstanceAdministration substanceAdministration) throws InvalidEmedContentException {
+    Optional<EmedEntryDigest> fetchTargetedEntryDigest(final POCDMT000040SubstanceAdministration substanceAdministration) throws InvalidEmedContentException {
         return this.getTargetedMtpReference(substanceAdministration)
-                .map(EmedReference::getDocumentId)
-                .flatMap(this.emedEntryService::getByDocument);
+                .map(EmedReference::getEntryId)
+                .flatMap(this.emedEntryService::getById);
     }
 
     /**
