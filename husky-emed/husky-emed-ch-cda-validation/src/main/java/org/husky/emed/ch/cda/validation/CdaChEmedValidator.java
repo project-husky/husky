@@ -14,6 +14,7 @@ import com.helger.schematron.svrl.jaxb.FailedAssert;
 import com.helger.schematron.svrl.jaxb.SchematronOutputType;
 import com.helger.schematron.xslt.SchematronResourceXSLT;
 import net.sf.saxon.xpath.XPathFactoryImpl;
+import org.apache.cxf.common.xmlschema.LSInputImpl;
 import org.husky.common.utils.Sources;
 import org.husky.common.utils.xml.XmlFactories;
 import org.husky.emed.ch.enums.CceDocumentType;
@@ -22,12 +23,12 @@ import org.husky.validation.service.pdf.PdfA12Validator;
 import org.husky.validation.service.schema.XmlSchemaValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.verapdf.core.ValidationException;
 import org.verapdf.pdfa.results.TestAssertion;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.ls.LSResourceResolver;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
@@ -62,7 +63,7 @@ public class CdaChEmedValidator {
     /**
      * The path and file name of the XML Schema definition.
      */
-    public static final String CCE_XSD_FILE_PATH = "schema/CDA-CH-EMED.xsd";
+    public static final String CCE_XSD_PATH = "/schema/";
 
     /**
      * The path of the directory that contains CDA-CH-EMED XSLT files.
@@ -106,12 +107,35 @@ public class CdaChEmedValidator {
      * Returns the XML Schema validator for CDA-CH-EMED documents.
      *
      * @return an XML Schema validator.
-     * @throws IOException  if the XML Schema file is not found.
      * @throws SAXException if an error arises while parsing the XML Schema.
      */
-    public static org.husky.validation.service.schema.XmlSchemaValidator getXmlSchemaValidator() throws IOException, SAXException {
-        return new XmlSchemaValidator(
-                Sources.fromFile(new File(new ClassPathResource(CCE_XSD_FILE_PATH).getURI())), false, true);
+    public static XmlSchemaValidator getXmlSchemaValidator() throws SAXException {
+        final LSResourceResolver resourceResolver = (type, namespaceURI, publicId, systemId, baseURI) -> {
+            String path = null;
+            if (systemId.endsWith("COCT_MT230100UV_extPHARM.xsd")) {
+                path = "extPHARM/COCT_MT230100UV_extPHARM.xsd";
+            } else if (systemId.endsWith("COCT_MT440001UV09_extPHARM.xsd")) {
+                path = "extPHARM/COCT_MT440001UV09_extPHARM.xsd";
+            } else if (systemId.endsWith("hl7v3_extPHARM.xsd")) {
+                path = "extPHARM/hl7v3_extPHARM.xsd";
+            } else if (systemId.endsWith("POCD_MT000040_extPHARM.xsd")) {
+                path = "extPHARM/POCD_MT000040_extPHARM.xsd";
+            } else if (systemId.endsWith("datatypes.xsd")) {
+                path = "coreschemas/datatypes.xsd";
+            } else if (systemId.endsWith("datatypes-base.xsd")) {
+                path = "coreschemas/datatypes-base.xsd";
+            } else if (systemId.endsWith("narrative-block.xsd")) {
+                path = "coreschemas/narrative-block.xsd";
+            } else if (systemId.endsWith("voc.xsd")) {
+                path = "coreschemas/voc.xsd";
+            }
+            final var inputStream = CdaChEmedValidator.class.getResourceAsStream(CCE_XSD_PATH + path);
+            return new LSInputImpl(null, path, Objects.requireNonNull(inputStream));
+        };
+
+        return new XmlSchemaValidator(Sources.fromInputStream(
+                        CdaChEmedValidator.class.getResourceAsStream(CCE_XSD_PATH + "CDA-CH-EMED.xsd")),
+                false, true, resourceResolver);
     }
 
     /**

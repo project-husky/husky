@@ -1,5 +1,7 @@
 package org.husky.validation.service.schema;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.w3c.dom.ls.LSResourceResolver;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
@@ -33,20 +35,25 @@ public class XmlSchemaValidator {
     /**
      * Constructor.
      *
-     * @param schema       The source of the XML Schema to use.
-     * @param allowDtd     Whether external DTDs and entities can be accessed or not.
-     * @param allowInclude Whether includes are resolved or not.
+     * @param schema           The source of the XML Schema to use.
+     * @param allowDtd         Whether external DTDs and entities can be accessed or not.
+     * @param allowInclude     Whether includes are resolved or not.
+     * @param resourceResolver The custom resource resolver or {@code null}.
      * @throws SAXException if an error arises while parsing the XML Schema.
      */
     public XmlSchemaValidator(final Source schema,
                               final boolean allowDtd,
-                              final boolean allowInclude) throws SAXException {
+                              final boolean allowInclude,
+                              @Nullable final LSResourceResolver resourceResolver) throws SAXException {
         final var schemaFactory = SchemaFactory.newDefaultInstance();
         if (!allowDtd) {
             schemaFactory.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
         }
         if (!allowInclude) {
             schemaFactory.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+        }
+        if (resourceResolver != null) {
+            schemaFactory.setResourceResolver(resourceResolver);
         }
         this.schema = schemaFactory.newSchema(Objects.requireNonNull(schema));
     }
@@ -58,7 +65,7 @@ public class XmlSchemaValidator {
      * @throws SAXException if an error arises while parsing the XML Schema.
      */
     public XmlSchemaValidator(final Source schema) throws SAXException {
-        this(Objects.requireNonNull(schema), false, false);
+        this(Objects.requireNonNull(schema), false, false, null);
     }
 
     /**
