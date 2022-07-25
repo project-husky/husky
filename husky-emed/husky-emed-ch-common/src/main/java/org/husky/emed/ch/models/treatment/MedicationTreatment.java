@@ -19,7 +19,6 @@ import org.husky.emed.ch.enums.TreatmentStatus;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.EmedReference;
 import org.husky.emed.ch.models.common.MedicationDosageInstructions;
-import org.husky.emed.ch.models.common.QuantityWithRegularUnit;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -126,7 +125,7 @@ public class MedicationTreatment {
      * The quantity to dispense or {@code null} if it isn't provided.
      */
     @Nullable
-    private QuantityWithRegularUnit quantityToDispense;
+    private String quantityToDispense;
 
     /**
      * The medication route of administration or {@code null} if it's not specified.
@@ -240,7 +239,7 @@ public class MedicationTreatment {
      * @param prescriptionId The ID of the prescription to find.
      * @return the retrieved entity or {@link Optional#empty()} if none found.
      */
-    public Optional<MedicationPrescription> getPrescriptionById(final String prescriptionId) {
+    public Optional<MedicationPrescription> getPrescriptionById(final UUID prescriptionId) {
         return this.prescriptions.stream()
                 .filter(prescription -> prescriptionId.equals(prescription.getPreReference().getEntryId()))
                 .findAny();
@@ -252,7 +251,7 @@ public class MedicationTreatment {
      * @param dispenseId The ID of the dispense to find.
      * @return the retrieved entity or {@link Optional#empty()} if none found.
      */
-    public Optional<MedicationDispense> getDispenseById(final String dispenseId) {
+    public Optional<MedicationDispense> getDispenseById(final UUID dispenseId) {
         for (final MedicationDispense dispense : this.otcDispenses) {
             if (dispenseId.equals(dispense.getItemId())) {
                 return Optional.of(dispense);
