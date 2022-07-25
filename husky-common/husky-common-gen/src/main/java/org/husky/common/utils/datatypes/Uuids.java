@@ -18,6 +18,8 @@ import java.util.regex.Pattern;
 @DefaultQualifier(value = NonNull.class, locations = {TypeUseLocation.PARAMETER, TypeUseLocation.RETURN})
 public class Uuids {
 
+    public static final String URN_PREFIX = "urn:uuid:";
+
     /**
      * This class is not instantiable.
      */
@@ -39,7 +41,7 @@ public class Uuids {
      */
     public static String normalize(final String uuid) {
         Objects.requireNonNull(uuid);
-        if (uuid.startsWith("urn:uuid:")) {
+        if (uuid.startsWith(URN_PREFIX)) {
             return uuid.substring(9).toLowerCase();
         }
         return uuid.toLowerCase();
