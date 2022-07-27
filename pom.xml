@@ -28,7 +28,7 @@
 		<apache-httpcore>4.4.15</apache-httpcore>
 		<junit.version>5.8.2</junit.version>
 
-		<ipf.version>4.3.2</ipf.version>
+		<ipf.version>4.4.0</ipf.version>
 		<!-- The following dependencies should be kept up-to-date with IPF to avoid duplicating dependencies:
 			https://github.com/oehf/ipf/blob/master/dependencies/pom.xml (select the right version in the tags) -->
 		<spring.version>5.3.20</spring.version>
