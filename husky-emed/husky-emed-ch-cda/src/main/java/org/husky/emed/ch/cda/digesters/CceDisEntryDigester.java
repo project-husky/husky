@@ -9,19 +9,9 @@
  *
  */
 
-/*
- * This code is made available under the terms of the Eclipse Public License v1.0
- * in the github project https://github.com/project-husky/husky there you also
- * find a list of the contributors and the license information.
- *
- * This project has been developed further and modified by the joined working group Husky
- * on the basis of the eHealth Connector opensource project from June 28, 2021,
- * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
- *
- */
-
 package org.husky.emed.ch.cda.digesters;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.hl7cdar2.*;
 import org.husky.common.utils.OptionalUtils;
 import org.husky.emed.ch.cda.generated.artdecor.enums.MedicationDosageQualifier;
@@ -34,11 +24,11 @@ import org.husky.emed.ch.cda.utils.readers.AuthorReader;
 import org.husky.emed.ch.cda.utils.readers.DosageInstructionsReader;
 import org.husky.emed.ch.cda.utils.readers.ManufacturedMaterialReader;
 import org.husky.emed.ch.enums.DispenseSupplyType;
+import org.husky.emed.ch.enums.RegularUnitCodeAmbu;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.EmedReference;
 import org.husky.emed.ch.models.common.MedicationDosageInstructions;
-import org.husky.emed.ch.models.common.Quantity;
 import org.husky.emed.ch.models.entry.EmedDisEntryDigest;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
 import org.springframework.stereotype.Component;
@@ -142,7 +132,8 @@ public class CceDisEntryDigester {
                 refMtpEntry,
                 refPreEntry,
                 this.getMedicationProduct(supply),
-                this.getQuantity(supply),
+                this.getQuantityUnit(supply),
+                this.getQuantityValue(supply),
                 this.getPatientMedicationInstructions(supply).orElse(null),
                 this.getFulfilmentNotes(supply).orElse(null),
                 this.isInReserve(supply),
@@ -212,7 +203,7 @@ public class CceDisEntryDigester {
 
     /**
      * Returns the author of the original parent document. It's generally set in PML documents only, as the author of
-     * the PML document may be different than the author of the MTP/PRE/DIS/PADV document.
+     * the PML document may be different from the author of the MTP/PRE/DIS/PADV document.
      *
      * @param supply The dispense entry Supply.
      * @return an {@link Optional} tht may contain the parent document author.
@@ -284,14 +275,28 @@ public class CceDisEntryDigester {
     }
 
     /**
-     * Returns the medication dispensed quantity.
+     * Returns the medication dispensed quantity unit, if any.
      *
      * @param supply The dispense entry Supply.
      */
-    Quantity getQuantity(final POCDMT000040Supply supply) throws InvalidEmedContentException {
+    @Nullable
+    RegularUnitCodeAmbu getQuantityUnit(final POCDMT000040Supply supply) throws InvalidEmedContentException {
         return Optional.ofNullable(supply.getQuantity())
                 .filter(qty -> qty.getValue() != null && !qty.getValue().isBlank())
-                .map(Quantity::fromPq)
+                .map(PQ::getUnit)
+                .map(RegularUnitCodeAmbu::getEnum)
+                .orElse(null);
+    }
+
+    /**
+     * Returns the medication dispensed quantity value.
+     *
+     * @param supply The dispense entry Supply.
+     */
+    String getQuantityValue(final POCDMT000040Supply supply) throws InvalidEmedContentException {
+        return Optional.ofNullable(supply.getQuantity())
+                .filter(qty -> qty.getValue() != null && !qty.getValue().isBlank())
+                .map(PQ::getValue)
                 .orElseThrow(() -> new InvalidEmedContentException("The quantity value is missing in the Supply"));
     }
 
