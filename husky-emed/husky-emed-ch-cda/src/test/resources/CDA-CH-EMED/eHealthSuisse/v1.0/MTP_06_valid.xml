@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ClinicalDocument xmlns:pharm="urn:ihe:pharm" xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ../../../../schemas/PHARM/schemas/cda/extendedschemas/CDA_extended_pharmacy.xsd">
+    <realmCode code="CHE" />
+    <typeId root="2.16.840.1.113883.1.3" extension="POCD_HD000040" />
+    <templateId root="2.16.756.5.30.1.1.10.1.9" />
+    <templateId root="2.16.840.1.113883.10.12.2" />
+    <templateId root="2.16.840.1.113883.10.12.1" />
+    <templateId root="2.16.756.5.30.1.127.1.4" />
+    <templateId root="1.3.6.1.4.1.19376.1.5.3.1.1.1" />
+    <templateId root="1.3.6.1.4.1.19376.1.9.1.1.6" />
+    <templateId root="2.16.756.5.30.1.1.10.1.7" />
+    <id root="00000000-0000-0000-0000-000000000002" />
+    <code code="77603-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Medication treatment plan.extended">
+        <translation xsi:type="CD" code="419891008" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Record artifact (record artifact)" />
+    </code>
+    <title>Medication Treatment Plan</title>
+    <effectiveTime value="20111129110000+0100" />
+    <confidentialityCode code="17621005" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Normally accessible" />
+    <languageCode code="en-US" />
+    <setId root="00000000-0000-0000-0000-000000000002" />
+    <versionNumber value="1" />
+    <recordTarget>
+        <templateId root="2.16.756.5.30.1.1.10.2.1" />
+        <patientRole>
+            <id root="2.999" extension="11111111" />
+            <patient>
+                <name use="L">
+                    <family>Wegmüller</family>
+                    <given>Monika</given>
+                </name>
+                <name use="P">
+                    <given>Artist</given>
+                </name>
+                <administrativeGenderCode code="F" codeSystem="2.16.840.1.113883.5.1" codeSystemName="HL7 AdministrativeGender" displayName="Female" />
+                <birthTime value="19430515" />
+            </patient>
+        </patientRole>
+    </recordTarget>
+    <author>
+        <templateId root="2.16.756.5.30.1.1.10.9.23" />
+        <time value="20111129110000+0100" />
+        <assignedAuthor>
+            <id root="2.51.1.3" extension="7601000234438" />
+            <assignedPerson>
+                <name>
+                    <family>Hausarzt</family>
+                    <given>Familien</given>
+                </name>
+            </assignedPerson>
+            <representedOrganization>
+                <name>Hausarzt</name>
+            </representedOrganization>
+        </assignedAuthor>
+    </author>
+    <custodian>
+        <templateId root="2.16.756.5.30.1.1.10.2.3" />
+        <assignedCustodian>
+            <representedCustodianOrganization>
+                <id root="2.51.1.3" extension="7601000234438" />
+                <name>Hausarzt</name>
+            </representedCustodianOrganization>
+        </assignedCustodian>
+    </custodian>
+    <informationRecipient typeCode="PRCP">
+        <templateId root="2.16.756.5.30.1.1.10.2.4" />
+        <intendedRecipient>
+            <informationRecipient>
+                <name>
+                    <family>Wegmüller</family>
+                    <given>Monika</given>
+                </name>
+            </informationRecipient>
+        </intendedRecipient>
+    </informationRecipient>
+    <component contextConductionInd="true">
+        <structuredBody>
+            <component>
+                <section>
+                    <templateId root="2.16.756.5.30.1.1.10.3.13" />
+                    <templateId root="1.3.6.1.4.1.19376.1.9.1.2.6" />
+                    <id root="00000000-0000-0000-0000-000000000002" />
+                    <code code="77604-7" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Medication treatment plan.brief" />
+                    <title>Medication Treatment Plan</title>
+                    <text>
+                        <content ID="mtp.content">content</content>
+                    </text>
+                    <entry>
+                        <substanceAdministration classCode="SBADM" moodCode="INT">
+                            <templateId root="2.16.756.5.30.1.1.10.4.34" />
+                            <templateId root="1.3.6.1.4.1.19376.1.9.1.3.7" />
+                            <templateId root="2.16.840.1.113883.10.20.1.24" />
+                            <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7" />
+                            <templateId root="1.3.6.1.4.1.19376.1.9.1.3.6" />
+                            <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.9" />
+                            <id root="00000000-0000-0000-0000-000000000002" />
+                            <text>
+                                <reference value="#mtp.content" />
+                            </text>
+                            <statusCode code="completed" />
+                            <effectiveTime xsi:type="IVL_TS">
+                                <low value="202201101043+0100" />
+                                <high nullFlavor="UNK" />
+                            </effectiveTime>
+                            <repeatNumber nullFlavor="NI"/>
+                            <routeCode code="20049000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Nasal use" />
+                            <consumable>
+                                <manufacturedProduct>
+                                    <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2" />
+                                    <templateId root="2.16.840.1.113883.10.20.1.53" />
+                                    <manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+                                        <templateId root="2.16.756.5.30.1.1.10.4.33" />
+                                        <templateId root="1.3.6.1.4.1.19376.1.9.1.3.1" />
+                                        <code code="7680541890365" codeSystem="2.51.1.1" codeSystemName="GTIN" displayName="NASONEX spray nasal doseur 50 mcg" />
+                                        <name>NASONEX spray nasal doseur 50 mcg</name>
+                                        <pharm:formCode code="10808000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Nasal spray, solution" />
+                                        <pharm:asContent classCode="CONT" >
+                                            <pharm:containerPackagedMedicine classCode="CONT" determinerCode="INSTANCE">
+                                                <pharm:code code="7680541890365" codeSystem="2.51.1.1" codeSystemName="GTIN" displayName="NASONEX spray nasal doseur 50 mcg" />
+                                                <pharm:name>NASONEX spray nasal doseur 50 mcg</pharm:name>
+                                                <pharm:capacityQuantity unit="{Dose}" value="140"/>
+                                            </pharm:containerPackagedMedicine>
+                                        </pharm:asContent>
+                                        <pharm:ingredient classCode="ACTI">
+                                            <pharm:quantity>
+                                                <numerator xsi:type="PQ" unit="ug" value="50" />
+                                                <denominator xsi:type="PQ" unit="{Dose}" value="1"/>
+                                            </pharm:quantity>
+                                            <pharm:ingredient classCode="MMAT" determinerCode="KIND">
+                                                <pharm:code code="395990009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Mometasone (substance)" />
+                                                <pharm:name>Mometasone</pharm:name>
+                                            </pharm:ingredient>
+                                        </pharm:ingredient>
+                                    </manufacturedMaterial>
+                                </manufacturedProduct>
+                            </consumable>
+                            <entryRelationship typeCode="COMP">
+                                <sequenceNumber value="1" />
+                                <substanceAdministration moodCode="INT" classCode="SBADM">
+                                    <effectiveTime xsi:type="EIVL_TS">
+                                        <event code="MORN" />
+                                    </effectiveTime>
+                                    <doseQuantity unit="{Dose}" value="2.0"/>
+                                    <consumable>
+                                        <manufacturedProduct>
+                                            <manufacturedMaterial nullFlavor="NA" />
+                                        </manufacturedProduct>
+                                    </consumable>
+                                </substanceAdministration>
+                            </entryRelationship>
+                            <entryRelationship typeCode="COMP">
+                                <sequenceNumber value="2" />
+                                <substanceAdministration moodCode="INT" classCode="SBADM">
+                                    <effectiveTime xsi:type="EIVL_TS">
+                                        <event code="NOON" />
+                                    </effectiveTime>
+                                    <doseQuantity unit="{Dose}" value="1.0"/>
+                                    <consumable>
+                                        <manufacturedProduct>
+                                            <manufacturedMaterial nullFlavor="NA" />
+                                        </manufacturedProduct>
+                                    </consumable>
+                                </substanceAdministration>
+                            </entryRelationship>
+                            <entryRelationship typeCode="COMP">
+                                <sequenceNumber value="3" />
+                                <substanceAdministration moodCode="INT" classCode="SBADM">
+                                    <effectiveTime xsi:type="EIVL_TS">
+                                        <event code="EVE" />
+                                    </effectiveTime>
+                                    <doseQuantity unit="{Dose}" value="2.0"/>
+                                    <consumable>
+                                        <manufacturedProduct>
+                                            <manufacturedMaterial nullFlavor="NA" />
+                                        </manufacturedProduct>
+                                    </consumable>
+                                </substanceAdministration>
+                            </entryRelationship>
+                            <entryRelationship typeCode="RSON">
+                                <observation classCode="OBS" moodCode="EVN">
+                                    <templateId root="2.16.756.5.30.1.1.10.4.41"/>
+                                    <code code="75326-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Problem"/>
+                                    <text xsi:type="ED">
+                                        Treatment Reason
+
+                                        <reference value="#mtp.content"/>
+                                    </text>
+                                    <statusCode code="completed"/>
+                                </observation>
+                            </entryRelationship>
+                        </substanceAdministration>
+                    </entry>
+                </section>
+            </component>
+        </structuredBody>
+    </component>
+</ClinicalDocument>
