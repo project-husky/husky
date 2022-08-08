@@ -444,7 +444,6 @@ class CceMtpDigesterTest {
         assertNull(mtpDigest.getRemarks());
         assertEquals(0, mtpDigest.getPdfRepresentation().length);
 
-
         // Entry
         final var mtpEntryDigest = mtpDigest.getMtpEntryDigest();
         assertNotNull(mtpEntryDigest);

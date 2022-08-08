@@ -13,6 +13,7 @@ package org.husky.emed.ch.cda.utils.readers;
 import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
 import org.husky.emed.ch.cda.xml.CceDocumentUnmarshaller;
 import org.husky.emed.ch.enums.CceDocumentType;
+import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
@@ -71,6 +72,20 @@ class ClinicalDocumentReaderTest {
 
         assertEquals(CceDocumentType.PMLC, reader.getDocumentType());
 
+    }
+
+    @Test
+    void testInvalidTemplateID() throws Exception {
+        final var reader = new ClinicalDocumentReader(this.loadDoc("MTP_04_invalid.xml"));
+
+        assertThrows(InvalidEmedContentException.class, reader::getDocumentType);
+    }
+
+    @Test
+    void testInvalidPdfRepresentation() throws Exception {
+        final var reader = new ClinicalDocumentReader(this.loadDoc("PRE_01_invalid.xml"));
+
+        assertThrows(InvalidEmedContentException.class, reader::getPdfRepresentation);
     }
 
     private POCDMT000040ClinicalDocument loadDoc(final String docName) throws SAXException {
