@@ -1,6 +1,5 @@
 package org.husky.emed.ch.cda.utils.readers;
 
-import org.husky.common.hl7cdar2.POCDMT000040Material;
 import org.husky.common.hl7cdar2.POCDMT000040SubstanceAdministration;
 import org.husky.common.utils.xml.XmlFactories;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
@@ -58,6 +57,141 @@ class SubAdmEntryReaderTest {
     }
 
     @Test
+    void testEntryAuthorElement() throws Exception {
+        var reader = this.unmarshall("""
+                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1" />
+                <id root="00000000-0000-0000-0000-000000000005" />
+                <text>
+                    <reference value="#mtp.content" />
+                </text>
+                <statusCode code="completed" />
+                <effectiveTime xsi:type="IVL_TS">
+                    <low value="20220110120000+0100" />
+                    <high value="20220310120000+0100" />
+                </effectiveTime>
+                <effectiveTime xsi:type="EIVL_TS" operator="A">
+                    <event code="MORN" />
+                </effectiveTime>
+                <repeatNumber value="1" />
+                <routeCode code="20053000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Oral use" />
+                <doseQuantity unit="mg" value="0.5" />
+                <author>
+                    <templateId root="2.16.756.5.30.1.1.10.9.23" />
+                    <time value="20111129110000+0100" />
+                    <assignedAuthor>
+                        <id root="2.51.1.3" extension="7601000234438" />
+                        <assignedPerson>
+                            <name>
+                                <family>Hausarzt</family>
+                                <given>Familien</given>
+                            </name>
+                        </assignedPerson>
+                    </assignedAuthor>
+                </author>""");
+
+        assertTrue(reader.getEntryAuthorElement().isPresent());
+        assertFalse(reader.getEntryAuthorElement().get().getAssignedAuthor().getId().isEmpty());
+        assertEquals("2.51.1.3", reader.getEntryAuthorElement().get().getAssignedAuthor().getId().get(0).getRoot());
+    }
+
+    @Test
+    void testParentDocumentAuthorElement() throws Exception {
+        var reader = this.unmarshall("""
+                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1" />
+                <id root="00000000-0000-0000-0000-000000000005" />
+                <text>
+                    <reference value="#mtp.content" />
+                </text>
+                <statusCode code="completed" />
+                <effectiveTime xsi:type="IVL_TS">
+                    <low value="20220110120000+0100" />
+                    <high value="20220310120000+0100" />
+                </effectiveTime>
+                <effectiveTime xsi:type="EIVL_TS" operator="A">
+                    <event code="MORN" />
+                </effectiveTime>
+                <repeatNumber value="1" />
+                <routeCode code="20053000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Oral use" />
+                <doseQuantity unit="mg" value="0.5" />
+                <author>
+                    <templateId root="2.16.756.5.30.1.1.10.9.23" />
+                    <time value="20111129110000+0100" />
+                    <assignedAuthor>
+                        <id root="2.51.1.3" extension="7600000000001" />
+                        <assignedPerson>
+                            <name>
+                                <family>Hausarzt</family>
+                                <given>Familien</given>
+                            </name>
+                        </assignedPerson>
+                    </assignedAuthor>
+                </author>
+                <author>
+                    <templateId root="2.16.756.5.30.1.1.10.9.23" />
+                    <time value="20111129110000+0100" />
+                    <assignedAuthor>
+                        <id root="2.51.1.4" extension="7600000000002" />
+                        <assignedPerson>
+                            <name>
+                                <family>Hau</family>
+                                <given>Len</given>
+                            </name>
+                        </assignedPerson>
+                    </assignedAuthor>
+                </author>""");
+
+        assertTrue(reader.getParentDocumentAuthorElement().isPresent());
+        assertFalse(reader.getParentDocumentAuthorElement().get().getAssignedAuthor().getId().isEmpty());
+        assertEquals("2.51.1.4", reader.getParentDocumentAuthorElement().get().getAssignedAuthor().getId().get(0).getRoot());
+    }
+
+    @Test
+    void testDosageIntakeModeElement() throws Exception {
+        var reader = this.unmarshall("""
+                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1" />
+                <id root="00000000-0000-0000-0000-000000000005" />
+                <text>
+                    <reference value="#mtp.content" />
+                </text>
+                <statusCode code="completed" />
+                <effectiveTime xsi:type="IVL_TS">
+                    <low value="20220110120000+0100" />
+                    <high value="20220310120000+0100" />
+                </effectiveTime>
+                <effectiveTime xsi:type="EIVL_TS" operator="A">
+                    <event code="MORN" />
+                </effectiveTime>
+                <repeatNumber value="1" />
+                <routeCode code="20053000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Oral use" />
+                <doseQuantity unit="mg" value="0.5" />""");
+
+        assertFalse(reader.getDosageIntakeModeElement().isPresent());
+    }
+
+    @Test
+    void testDosageInstructionsElement() throws Exception {
+        var reader = this.unmarshall("""
+                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1" />
+                <id root="00000000-0000-0000-0000-000000000005" />
+                <text>
+                    <reference value="#mtp.content" />
+                </text>
+                <statusCode code="completed" />
+                <effectiveTime xsi:type="IVL_TS">
+                    <low value="20220110120000+0100" />
+                    <high value="20220310120000+0100" />
+                </effectiveTime>
+                <effectiveTime xsi:type="EIVL_TS" operator="A">
+                    <event code="MORN" />
+                </effectiveTime>
+                <repeatNumber value="1" />
+                <routeCode code="20053000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Oral use" />
+                <doseQuantity unit="mg" value="0.5" />""");
+
+        assertFalse(reader.getDosageInstructionsElement().isPresent());
+    }
+
+    @Test
     void testPreconditionCriterion() throws Exception {
         var reader = this.unmarshall("""
                 <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1" />
@@ -77,7 +211,37 @@ class SubAdmEntryReaderTest {
                 <routeCode code="20053000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Oral use" />
                 <doseQuantity unit="mg" value="0.5" />""");
 
-        assertTrue(reader.getPreconditionCriterionElement().isEmpty());
+        assertFalse(reader.getPreconditionCriterionElement().isPresent());
+
+        reader = this.unmarshall("""
+                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1" />
+                <id root="00000000-0000-0000-0000-000000000005" />
+                <text>
+                    <reference value="#mtp.content" />
+                </text>
+                <statusCode code="completed" />
+                <effectiveTime xsi:type="IVL_TS">
+                    <low value="20220110120000+0100" />
+                    <high value="20220310120000+0100" />
+                </effectiveTime>
+                <effectiveTime xsi:type="EIVL_TS" operator="A">
+                    <event code="MORN" />
+                </effectiveTime>
+                <repeatNumber value="1" />
+                <routeCode code="20053000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Oral use" />
+                <doseQuantity unit="mg" value="0.5" />
+                <precondition>
+                    <criterion>
+                        <text>
+                        Precondition
+                        
+                        <reference value="#mtp.content" />
+                        </text>
+                    </criterion>
+                </precondition>""");
+
+        assertTrue(reader.getPreconditionCriterionElement().isPresent());
+        assertEquals("Precondition", reader.getPreconditionCriterionElement().get().getText().getTextContent());
     }
 
 

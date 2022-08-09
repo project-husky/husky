@@ -15,6 +15,7 @@ import org.husky.common.enums.AdministrativeGender;
 import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
 import org.husky.emed.ch.cda.xml.CceDocumentUnmarshaller;
 import org.husky.emed.ch.enums.*;
+import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.models.common.*;
 import org.husky.emed.ch.models.document.EmedMtpDocumentDigest;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
@@ -696,6 +697,14 @@ class CceMtpDigesterTest {
         assertNull(mtpEntryDigest.getAnnotationComment());
         assertFalse(mtpEntryDigest.isInReserve());
         assertNull(mtpEntryDigest.getQuantityToDispense());
+    }
+
+    @Test
+    void testMissingMtpEntryTemplateId() throws Exception {
+        final var mtpDocument = this.loadDoc("MTP_05_invalid.xml");
+        final var digester = new CceDocumentDigester();
+
+        assertThrows(InvalidEmedContentException.class, () -> digester.digest(mtpDocument));
     }
 
 
