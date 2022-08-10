@@ -11,11 +11,14 @@
 package org.husky.emed.ch.cda.utils.readers;
 
 import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
+import org.husky.common.hl7cdar2.POCDMT000040Section;
 import org.husky.emed.ch.cda.xml.CceDocumentUnmarshaller;
 import org.husky.emed.ch.enums.CceDocumentType;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
+
+import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,6 +35,7 @@ class ClinicalDocumentReaderTest {
 
         assertEquals(CceDocumentType.MTP, reader.getDocumentType());
         assertFalse(reader.getPdfRepresentation().isPresent());
+        assertEquals(POCDMT000040Section.class, reader.getContentSection().getClass());
     }
 
     @Test
@@ -40,6 +44,9 @@ class ClinicalDocumentReaderTest {
 
         assertEquals(CceDocumentType.PRE, reader.getDocumentType());
         assertTrue(reader.getPdfRepresentation().isPresent());
+        assertEquals(POCDMT000040Section.class, reader.getContentSection().getClass());
+        assertEquals(Instant.MIN.getEpochSecond(), reader.getPreValidityStartTime(Instant.MIN).getEpochSecond());
+        assertNull(reader.getPreValidityStopTime());
     }
 
     @Test
@@ -47,7 +54,7 @@ class ClinicalDocumentReaderTest {
         final var reader = new ClinicalDocumentReader(this.loadDoc("1-2-MedicationDispense.xml"));
 
         assertEquals(CceDocumentType.DIS, reader.getDocumentType());
-
+        assertEquals(POCDMT000040Section.class, reader.getContentSection().getClass());
     }
 
     @Test
@@ -55,7 +62,7 @@ class ClinicalDocumentReaderTest {
         final var reader = new ClinicalDocumentReader(this.loadDoc("2-2-PharmaceuticalAdvice.xml"));
 
         assertEquals(CceDocumentType.PADV, reader.getDocumentType());
-
+        assertEquals(POCDMT000040Section.class, reader.getContentSection().getClass());
     }
 
     @Test
@@ -63,7 +70,7 @@ class ClinicalDocumentReaderTest {
         final var reader = new ClinicalDocumentReader(this.loadDoc("2-1-MedicationList.xml"));
 
         assertEquals(CceDocumentType.PML, reader.getDocumentType());
-
+        assertEquals(POCDMT000040Section.class, reader.getContentSection().getClass());
     }
 
     @Test
@@ -71,7 +78,7 @@ class ClinicalDocumentReaderTest {
         final var reader = new ClinicalDocumentReader(this.loadDoc("2-7-MedicationCard.xml"));
 
         assertEquals(CceDocumentType.PMLC, reader.getDocumentType());
-
+        assertEquals(POCDMT000040Section.class, reader.getContentSection().getClass());
     }
 
     @Test
