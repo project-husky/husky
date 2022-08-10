@@ -204,6 +204,13 @@ public class AuthorDigest {
         this.telecoms = Objects.requireNonNull(telecoms);
     }
 
+    /**
+     * Returns the "usual" human name.
+     */
+    public String getHumanName() {
+        return String.join(" ", this.givenName, this.familyName);
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;

@@ -59,6 +59,13 @@ public record PatientDigest(List<@NonNull QualifiedIdentifier> ids,
         this.birthdate = birthdate;
     }
 
+    /**
+     * Returns the "usual" human name.
+     */
+    public String getHumanName() {
+        return String.join(" ", this.givenName, this.familyName);
+    }
+
     @Override
     public String toString() {
         return "PatientDigest{" +
