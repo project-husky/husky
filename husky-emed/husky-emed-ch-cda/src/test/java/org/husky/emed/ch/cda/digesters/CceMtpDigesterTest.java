@@ -592,7 +592,7 @@ class CceMtpDigesterTest {
 
         assertNull(mtpEntryDigest.getFulfilmentInstructions());
         assertNull(mtpEntryDigest.getOriginalMtpReference());
-        assertNull(mtpEntryDigest.getPatientMedicationInstructions());
+        assertEquals("Avaler le comprimé avec de l'eau.", mtpEntryDigest.getPatientMedicationInstructions());
         assertEquals("Treatment Reason", mtpEntryDigest.getTreatmentReason());
         assertTrue(mtpEntryDigest.isSubstitutionPermitted());
         assertEquals("Annotation Comments", mtpEntryDigest.getAnnotationComment());
@@ -611,8 +611,8 @@ class CceMtpDigesterTest {
         assertInstanceOf(EmedMtpDocumentDigest.class, digest);
         final var mtpDigest = (EmedMtpDocumentDigest) digest;
         assertNotNull(mtpDigest);
-        assertEquals("00000000-0000-0000-0000-000000000002", mtpDigest.getId().toString());
-        assertEquals("00000000-0000-0000-0000-000000000002", mtpDigest.getSetId().toString());
+        assertEquals("00000000-0000-0000-0000-000000000006", mtpDigest.getId().toString());
+        assertEquals("00000000-0000-0000-0000-000000000006", mtpDigest.getSetId().toString());
         assertEquals(1, mtpDigest.getVersion());
         assertEquals("en-US", mtpDigest.getLanguageCode());
         assertEquals(ConfidentialityCode.NORMALLY_ACCESSIBLE, mtpDigest.getConfidentialityCode());
@@ -644,8 +644,8 @@ class CceMtpDigesterTest {
         assertNotNull(mtpEntryDigest);
         assertEquals(0, mtpEntryDigest.getSequence());
         assertEquals(mtpDigest.getId(), mtpEntryDigest.getDocumentId());
-        assertEquals("00000000-0000-0000-0000-000000000002", mtpEntryDigest.getEntryId().toString());
-        assertEquals("00000000-0000-0000-0000-000000000002", mtpEntryDigest.getMedicationTreatmentId().toString());
+        assertEquals("00000000-0000-0000-0000-000000000006", mtpEntryDigest.getEntryId().toString());
+        assertEquals("00000000-0000-0000-0000-000000000006", mtpEntryDigest.getMedicationTreatmentId().toString());
         assertEquals(EmedEntryType.MTP, mtpEntryDigest.getEmedEntryType());
         assertEquals(1322560800000L, mtpEntryDigest.getPlanningTime().toEpochMilli());
         assertEquals(1641807780000L, mtpEntryDigest.getPlannedItemValidityStart().toEpochMilli());
@@ -691,7 +691,7 @@ class CceMtpDigesterTest {
 
         assertNull(mtpEntryDigest.getFulfilmentInstructions());
         assertNull(mtpEntryDigest.getOriginalMtpReference());
-        assertNull(mtpEntryDigest.getPatientMedicationInstructions());
+        assertEquals("Appliquer une dose dans chaque narine.", mtpEntryDigest.getPatientMedicationInstructions());
         assertEquals("Treatment Reason", mtpEntryDigest.getTreatmentReason());
         assertTrue(mtpEntryDigest.isSubstitutionPermitted());
         assertNull(mtpEntryDigest.getAnnotationComment());
