@@ -34,9 +34,12 @@ import static org.junit.jupiter.api.Assertions.*;
 @SuppressWarnings({"ConstantConditions", "java:S5961"}) // No null checks, no limit on number of assertions
 class CceMtpDigesterTest {
 
+    final String DIR_E_HEALTH_SUISSE = "/eHealthSuisse/v1.0/";
+    final String DIR_SAMPLES_BY_HAND = "/Samples/ByHand/mtp/valid/";
+
     @Test
     void testMtpDigestion() throws Exception {
-        final var mtpDocument = this.loadDoc("1-1-MedicationTreatmentPlan.xml");
+        final var mtpDocument = this.loadDoc(DIR_E_HEALTH_SUISSE + "1-1-MedicationTreatmentPlan.xml");
         final var digester = new CceDocumentDigester();
         final var digest = digester.digest(mtpDocument);
 
@@ -126,7 +129,7 @@ class CceMtpDigesterTest {
 
     @Test
     void testMtp1Digestion() throws Exception{
-        final var mtpDocument = this.loadDoc("MTP_01_valid.xml");
+        final var mtpDocument = this.loadDoc(DIR_SAMPLES_BY_HAND + "MTP_01_valid.xml");
         final var digester = new CceDocumentDigester();
         final var digest = digester.digest(mtpDocument);
 
@@ -218,7 +221,7 @@ class CceMtpDigesterTest {
 
     @Test
     void testMtp2Digestion() throws Exception{
-        final var mtpDocument = this.loadDoc("MTP_02_valid.xml");
+        final var mtpDocument = this.loadDoc(DIR_SAMPLES_BY_HAND + "MTP_02_valid.xml");
         final var digester = new CceDocumentDigester();
         final var digest = digester.digest(mtpDocument);
 
@@ -316,7 +319,7 @@ class CceMtpDigesterTest {
 
     @Test
     void testMtp3Digestion() throws Exception{
-        final var mtpDocument = this.loadDoc("MTP_03_valid.xml");
+        final var mtpDocument = this.loadDoc(DIR_SAMPLES_BY_HAND + "MTP_03_valid.xml");
         final var digester = new CceDocumentDigester();
         final var digest = digester.digest(mtpDocument);
 
@@ -410,7 +413,7 @@ class CceMtpDigesterTest {
 
     @Test
     void testMtp4Digestion() throws Exception{
-        final var mtpDocument = this.loadDoc("MTP_04_valid.xml");
+        final var mtpDocument = this.loadDoc(DIR_SAMPLES_BY_HAND + "MTP_04_valid.xml");
         final var digester = new CceDocumentDigester();
         final var digest = digester.digest(mtpDocument);
 
@@ -504,7 +507,7 @@ class CceMtpDigesterTest {
 
     @Test
     void testMtp5Digestion() throws Exception{
-        final var mtpDocument = this.loadDoc("MTP_05_valid.xml");
+        final var mtpDocument = this.loadDoc(DIR_SAMPLES_BY_HAND + "MTP_05_valid.xml");
         final var digester = new CceDocumentDigester();
         final var digest = digester.digest(mtpDocument);
 
@@ -602,7 +605,7 @@ class CceMtpDigesterTest {
 
     @Test
     void testMtp6Digestion() throws Exception{
-        final var mtpDocument = this.loadDoc("MTP_06_valid.xml");
+        final var mtpDocument = this.loadDoc(DIR_SAMPLES_BY_HAND + "MTP_06_valid.xml");
         final var digester = new CceDocumentDigester();
         final var digest = digester.digest(mtpDocument);
 
@@ -701,7 +704,7 @@ class CceMtpDigesterTest {
 
     @Test
     void testMissingMtpEntryTemplateId() throws Exception {
-        final var mtpDocument = this.loadDoc("MTP_05_invalid.xml");
+        final var mtpDocument = this.loadDoc("/Samples/ByHand/mtp/invalid/MTP_05_invalid.xml");
         final var digester = new CceDocumentDigester();
 
         assertThrows(InvalidEmedContentException.class, () -> digester.digest(mtpDocument));
@@ -710,7 +713,7 @@ class CceMtpDigesterTest {
 
 
     private POCDMT000040ClinicalDocument loadDoc(final String docName) throws SAXException {
-        return CceDocumentUnmarshaller.unmarshall(CceMtpDigesterTest.class.getResourceAsStream("/CDA-CH-EMED" +
-                "/eHealthSuisse/v1.0/" + docName));
+        return CceDocumentUnmarshaller.unmarshall(CceMtpDigesterTest.class.getResourceAsStream("/CDA-CH-EMED"
+                + docName));
     }
 }

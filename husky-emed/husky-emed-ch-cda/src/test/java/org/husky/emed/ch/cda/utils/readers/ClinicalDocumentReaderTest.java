@@ -29,9 +29,12 @@ import static org.junit.jupiter.api.Assertions.*;
  **/
 class ClinicalDocumentReaderTest {
 
+    final String DIR_E_HEALTH_SUISSE = "/eHealthSuisse/v1.0/";
+    final String DIR_SAMPLES_BY_HAND = "/Samples/ByHand/";
+
     @Test
     void testMtp() throws Exception {
-        final var reader = new ClinicalDocumentReader(this.loadDoc("1-1-MedicationTreatmentPlan.xml"));
+        final var reader = new ClinicalDocumentReader(this.loadDoc(DIR_E_HEALTH_SUISSE + "1-1-MedicationTreatmentPlan.xml"));
 
         assertEquals(CceDocumentType.MTP, reader.getDocumentType());
         assertFalse(reader.getPdfRepresentation().isPresent());
@@ -40,7 +43,7 @@ class ClinicalDocumentReaderTest {
 
     @Test
     void testPre() throws Exception {
-        final var reader = new ClinicalDocumentReader(this.loadDoc("2-6-MedicationPrescription.xml"));
+        final var reader = new ClinicalDocumentReader(this.loadDoc(DIR_E_HEALTH_SUISSE + "2-6-MedicationPrescription.xml"));
 
         assertEquals(CceDocumentType.PRE, reader.getDocumentType());
         assertTrue(reader.getPdfRepresentation().isPresent());
@@ -51,7 +54,7 @@ class ClinicalDocumentReaderTest {
 
     @Test
     void testDis() throws Exception {
-        final var reader = new ClinicalDocumentReader(this.loadDoc("1-2-MedicationDispense.xml"));
+        final var reader = new ClinicalDocumentReader(this.loadDoc(DIR_E_HEALTH_SUISSE + "1-2-MedicationDispense.xml"));
 
         assertEquals(CceDocumentType.DIS, reader.getDocumentType());
         assertEquals(POCDMT000040Section.class, reader.getContentSection().getClass());
@@ -59,7 +62,7 @@ class ClinicalDocumentReaderTest {
 
     @Test
     void testPadv() throws Exception {
-        final var reader = new ClinicalDocumentReader(this.loadDoc("2-2-PharmaceuticalAdvice.xml"));
+        final var reader = new ClinicalDocumentReader(this.loadDoc( DIR_E_HEALTH_SUISSE + "2-2-PharmaceuticalAdvice.xml"));
 
         assertEquals(CceDocumentType.PADV, reader.getDocumentType());
         assertEquals(POCDMT000040Section.class, reader.getContentSection().getClass());
@@ -67,7 +70,7 @@ class ClinicalDocumentReaderTest {
 
     @Test
     void testPml() throws Exception {
-        final var reader = new ClinicalDocumentReader(this.loadDoc("2-1-MedicationList.xml"));
+        final var reader = new ClinicalDocumentReader(this.loadDoc(DIR_E_HEALTH_SUISSE + "2-1-MedicationList.xml"));
 
         assertEquals(CceDocumentType.PML, reader.getDocumentType());
         assertEquals(POCDMT000040Section.class, reader.getContentSection().getClass());
@@ -75,7 +78,7 @@ class ClinicalDocumentReaderTest {
 
     @Test
     void testPmlc() throws Exception {
-        final var reader = new ClinicalDocumentReader(this.loadDoc("2-7-MedicationCard.xml"));
+        final var reader = new ClinicalDocumentReader(this.loadDoc(DIR_E_HEALTH_SUISSE + "2-7-MedicationCard.xml"));
 
         assertEquals(CceDocumentType.PMLC, reader.getDocumentType());
         assertEquals(POCDMT000040Section.class, reader.getContentSection().getClass());
@@ -83,20 +86,20 @@ class ClinicalDocumentReaderTest {
 
     @Test
     void testInvalidTemplateID() throws Exception {
-        final var reader = new ClinicalDocumentReader(this.loadDoc("MTP_04_invalid.xml"));
+        final var reader = new ClinicalDocumentReader(this.loadDoc(DIR_SAMPLES_BY_HAND + "mtp/invalid/MTP_04_invalid.xml"));
 
         assertThrows(InvalidEmedContentException.class, reader::getDocumentType);
     }
 
     @Test
     void testInvalidPdfRepresentation() throws Exception {
-        final var reader = new ClinicalDocumentReader(this.loadDoc("PRE_01_invalid.xml"));
+        final var reader = new ClinicalDocumentReader(this.loadDoc(DIR_SAMPLES_BY_HAND + "pre/invalid/PRE_01_invalid.xml"));
 
         assertThrows(InvalidEmedContentException.class, reader::getPdfRepresentation);
     }
 
     private POCDMT000040ClinicalDocument loadDoc(final String docName) throws SAXException {
         return CceDocumentUnmarshaller.unmarshall(ClinicalDocumentReaderTest.class.getResourceAsStream("/CDA-CH-EMED" +
-                "/eHealthSuisse/v1.0/" + docName));
+                docName));
     }
 }

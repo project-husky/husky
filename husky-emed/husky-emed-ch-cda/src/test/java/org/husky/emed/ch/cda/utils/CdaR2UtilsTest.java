@@ -29,7 +29,8 @@ class CdaR2UtilsTest {
 
     private final Unmarshaller UNMARSHALLER;
 
-
+    final String DIR_E_HEALTH_SUISSE = "/eHealthSuisse/v1.0/";
+    final String DIR_SAMPLES_BY_HAND = "/Samples/ByHand/";
 
     public CdaR2UtilsTest() throws JAXBException {
         final var context = JAXBContext.newInstance(POCDMT000040Entry.class);
@@ -262,12 +263,12 @@ class CdaR2UtilsTest {
 
     @Test
     void testGetContentSection() throws SAXException {
-        assertTrue(CdaR2Utils.getContentSection(this.loadDoc("MTP_01_valid.xml")).isPresent());
-        assertTrue(CdaR2Utils.getContentSection(this.loadDoc("2-6-MedicationPrescription.xml")).isPresent());
-        assertTrue(CdaR2Utils.getContentSection(this.loadDoc("2-4-MedicationDispense.xml")).isPresent());
-        assertTrue(CdaR2Utils.getContentSection(this.loadDoc("2-2-PharmaceuticalAdvice.xml")).isPresent());
-        assertTrue(CdaR2Utils.getContentSection(this.loadDoc("2-1-MedicationList.xml")).isPresent());
-        assertTrue(CdaR2Utils.getContentSection(this.loadDoc("2-7-MedicationCard.xml")).isPresent());
+        assertTrue(CdaR2Utils.getContentSection(this.loadDoc(DIR_SAMPLES_BY_HAND + "mtp/valid/MTP_01_valid.xml")).isPresent());
+        assertTrue(CdaR2Utils.getContentSection(this.loadDoc(DIR_E_HEALTH_SUISSE + "2-6-MedicationPrescription.xml")).isPresent());
+        assertTrue(CdaR2Utils.getContentSection(this.loadDoc(DIR_E_HEALTH_SUISSE + "2-4-MedicationDispense.xml")).isPresent());
+        assertTrue(CdaR2Utils.getContentSection(this.loadDoc(DIR_E_HEALTH_SUISSE + "2-2-PharmaceuticalAdvice.xml")).isPresent());
+        assertTrue(CdaR2Utils.getContentSection(this.loadDoc(DIR_E_HEALTH_SUISSE + "2-1-MedicationList.xml")).isPresent());
+        assertTrue(CdaR2Utils.getContentSection(this.loadDoc(DIR_E_HEALTH_SUISSE + "2-7-MedicationCard.xml")).isPresent());
     }
 
     private POCDMT000040Entry unmarshall(String entryContent) throws ParserConfigurationException, JAXBException, IOException, SAXException {
@@ -285,6 +286,6 @@ class CdaR2UtilsTest {
 
     private POCDMT000040ClinicalDocument loadDoc(final String docName) throws SAXException {
         return CceDocumentUnmarshaller.unmarshall(CdaR2UtilsTest.class.getResourceAsStream("/CDA-CH-EMED" +
-                "/eHealthSuisse/v1.0/" + docName));
+                docName));
     }
 }
