@@ -181,7 +181,7 @@ public class CceDisEntryDigester {
         if (fillCode == null) {
             return DispenseSupplyType.FIRST_FILL_COMPLETE;
         }
-        if (!DispenseSupplyType.isEnumOfValueSet(fillCode.getCode())) {
+        if (!DispenseSupplyType.isInValueSet(fillCode.getCode())) {
             throw new InvalidEmedContentException("The supply code is invalid");
         }
         final var dispenseSupplyType = DispenseSupplyType.getEnum(fillCode.getCode());
