@@ -2,6 +2,7 @@ package org.husky.emed.ch.cda.utils;
 
 import org.husky.common.hl7cdar2.IVLTS;
 import org.husky.common.hl7cdar2.POCDMT000040SubstanceAdministration;
+import org.husky.common.hl7cdar2.POCDMT000040Supply;
 import org.husky.common.utils.xml.XmlFactories;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.InputSource;
@@ -27,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class IvlTsUtilsTest {
 
-    private final static Class<?> UNMARSHALLED_CLASS = POCDMT000040SubstanceAdministration.class;
+    private final static Class<?> UNMARSHALLED_CLASS = POCDMT000040Supply.class;
     private final Unmarshaller UNMARSHALLER;
 
     public IvlTsUtilsTest() throws JAXBException {
@@ -113,16 +114,15 @@ class IvlTsUtilsTest {
     }
 
     private IVLTS createIvlts(String effectiveTime) throws ParserConfigurationException, JAXBException, IOException, SAXException {
-        final var completeElement = "<substanceAdministration classCode=\"SBADM\" moodCode=\"INT\" xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
-                + "<templateId root=\"1.3.6.1.4.1.19376.1.9.1.3.6\" />"
+        final var completeElement = "<supply classCode=\"SPLY\" moodCode=\"RQO\" xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
                 + effectiveTime
-                + "</substanceAdministration>";
+                + "</supply>";
 
         final var document =
                 XmlFactories.newSafeDocumentBuilder().parse(new InputSource(new StringReader(completeElement)));
 
         final Object root = UNMARSHALLER.unmarshal(document, UNMARSHALLED_CLASS);
-        final var substanceAdministration = (POCDMT000040SubstanceAdministration) JAXBIntrospector.getValue(root);
-        return (IVLTS) substanceAdministration.getEffectiveTime().get(0);
+        final var supply = (POCDMT000040Supply) JAXBIntrospector.getValue(root);
+        return (IVLTS) supply.getEffectiveTime().get(0);
     }
 }

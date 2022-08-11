@@ -107,7 +107,8 @@
                             <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.3" />
                             <templateId root="2.16.840.1.113883.10.20.1.34" />
                             <id root="D0000000-0000-0000-0000-000000000001" />
-                            <code code="FFC" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code" displayName="First Fill - Complete" />
+                            <!-- Bad Fill Code -->
+                            <code code="C" codeSystem="2.16.840.1.113883.5.4" codeSystemName="Act Code" displayName="Complete" />
                             <text>
                                 <reference value="#dis.content" />
                             </text>

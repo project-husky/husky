@@ -13,10 +13,10 @@
     <code code="60593-1" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Medication dispensed.extended">
         <translation xsi:type="CD" code="419891008" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Record artifact (record artifact)" />
     </code>
-    <title>Dispense</title>
+    <title>Remise</title>
     <effectiveTime value="20220101113900+0100" />
     <confidentialityCode code="17621005" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Normally accessible" />
-    <languageCode code="en-US" />
+    <languageCode code="fr-CH" />
     <setId root="D0000000-0000-0000-0000-000000000002" />
     <versionNumber value="1" />
     <recordTarget>
@@ -96,7 +96,7 @@
                     <templateId root="2.16.756.5.30.1.1.10.3.11" />
                     <id root="D0000000-0000-0000-0000-000000000002" />
                     <code code="60590-7" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Medication dispensed.brief" />
-                    <title>Medication dispensed</title>
+                    <title>Dispensation d'un médicament</title>
                     <text>
                         <content ID="dis.content">content</content>
                     </text>

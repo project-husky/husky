@@ -4,6 +4,7 @@ import org.husky.common.hl7cdar2.POCDMT000040Author;
 import org.husky.common.utils.xml.XmlFactories;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.junit.jupiter.api.Test;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 

@@ -166,6 +166,26 @@ class SubAdmEntryReaderTest {
                 <doseQuantity unit="mg" value="0.5" />""");
 
         assertFalse(reader.getDosageIntakeModeElement().isPresent());
+
+        var reader2 = this.unmarshall("""
+                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1" />
+                <id root="00000000-0000-0000-0000-000000000005" />
+                <text>
+                    <reference value="#mtp.content" />
+                </text>
+                <statusCode code="completed" />
+                <effectiveTime xsi:type="IVL_TS">
+                    <low value="20220110120000+0100" />
+                    <high value="20220310120000+0100" />
+                </effectiveTime>
+                <effectiveTime xsi:type="EIVL_TS" operator="A">
+                    <event code="MORN" />
+                </effectiveTime>
+                <repeatNumber value="1" />
+                <routeCode code="20053000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Oral use" />
+                <doseQuantity unit="mg" value="0.5" />""");
+
+        assertFalse(reader.getDosageIntakeModeElement().isPresent());
     }
 
     @Test
@@ -244,10 +264,81 @@ class SubAdmEntryReaderTest {
         assertEquals("Precondition", reader.getPreconditionCriterionElement().get().getText().getTextContent());
     }
 
+    @Test
+    void testManufacturedMaterialReader() throws Exception {
+        var reader = this.unmarshall("""
+                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1" />
+                <id root="00000000-0000-0000-0000-000000000005" />
+                <text>
+                    <reference value="#mtp.content" />
+                </text>
+                <statusCode code="completed" />
+                <effectiveTime xsi:type="IVL_TS">
+                    <low value="20220110120000+0100" />
+                    <high value="20220310120000+0100" />
+                </effectiveTime>
+                <effectiveTime xsi:type="EIVL_TS" operator="A">
+                    <event code="MORN" />
+                </effectiveTime>
+                <repeatNumber value="1" />
+                <routeCode code="20053000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Oral use" />
+                <doseQuantity unit="mg" value="0.5" />
+                """);
 
+        assertThrows(InvalidEmedContentException.class, reader::getManufacturedMaterialReader);
+    }
+
+    @Test
+    void testIsInReserve() throws Exception {
+
+        String base = """
+                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1" />
+                <id root="00000000-0000-0000-0000-000000000005" />
+                <text>
+                    <reference value="#mtp.content" />
+                </text>
+                <statusCode code="completed" />
+                <effectiveTime xsi:type="IVL_TS">
+                    <low value="20220110120000+0100" />
+                    <high value="20220310120000+0100" />
+                </effectiveTime>
+                <effectiveTime xsi:type="EIVL_TS" operator="A">
+                    <event code="MORN" />
+                </effectiveTime>
+                <repeatNumber value="1" />
+                <routeCode code="20053000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Oral use" />
+                <doseQuantity unit="mg" value="0.5" />
+                """;
+
+        var reader = this.unmarshall(base + """
+                <entryRelationship typeCode="COMP">
+                    <act classCode="ACT" moodCode="DEF">
+                        <templateId root="2.16.756.5.30.1.1.10.10" />
+                        <code code="225761000" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED Clinical Terms" displayName="As required (qualifier value)" />
+                        <statusCode code="completed"/>
+                    </act>
+                </entryRelationship>
+                """);
+
+        assertTrue(reader.isInReserve());
+
+        reader = this.unmarshall(base);
+        assertFalse(reader.isInReserve());
+
+        reader = this.unmarshall(base + """
+                <entryRelationship typeCode="COMP">
+                    <act classCode="ACT" moodCode="DEF">
+                        <templateId root="2.16.756.5.30.1.1.10.10" />
+                        <statusCode code="completed"/>
+                    </act>
+                </entryRelationship>
+                """);
+
+        assertFalse(reader.isInReserve());
+    }
 
     private SubAdmEntryReader unmarshall(final String substanceAdministrationContent) throws ParserConfigurationException, IOException, SAXException, JAXBException {
-        final var completeElement = "<substanceAdministration classCode=\"SBADM\" moodCode=\"INT\" xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
+        final var completeElement = "<substanceAdministration classCode=\"SBADM\" moodCode=\"INT\" xmlns:pharm=\"urn:ihe:pharm\" xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
                 + "<templateId root=\"1.3.6.1.4.1.19376.1.9.1.3.6\" />"
                 + substanceAdministrationContent
                 + "</substanceAdministration>";
