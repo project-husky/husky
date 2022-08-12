@@ -104,6 +104,7 @@ public class CdaR2Utils {
         if (!IiUtils.isValidUid(id) || supply.getId().size() > 1) {
             throw new InvalidEmedContentException("The Supply item ID is invalid");
         }
+        final var entryId = IiUtils.getUuid(supply.getId().get(0));
         final UUID documentId;
         if (!supply.getReference().isEmpty()) {
             final II docIi = supply.getReference().get(0).getExternalDocument().getId().get(0);
@@ -114,7 +115,7 @@ public class CdaR2Utils {
         } else {
             documentId = null;
         }
-        return new EmedReference(documentId, null);
+        return new EmedReference(documentId, entryId);
     }
 
 
@@ -157,7 +158,7 @@ public class CdaR2Utils {
         if (!IiUtils.isValidUid(id) || substanceAdministration.getId().size() > 1) {
             throw new InvalidEmedContentException("The SubstanceAdministration item ID is invalid");
         }
-        final var itemId = IiUtils.getUuid(substanceAdministration.getId().get(0));
+        final var entryId = IiUtils.getUuid(substanceAdministration.getId().get(0));
         final UUID documentId;
         if (!substanceAdministration.getReference().isEmpty()) {
             final II docIi = substanceAdministration.getReference().get(0).getExternalDocument().getId().get(0);
@@ -168,6 +169,6 @@ public class CdaR2Utils {
         } else {
             documentId = null;
         }
-        return new EmedReference(documentId, itemId);
+        return new EmedReference(documentId, entryId);
     }
 }
