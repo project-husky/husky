@@ -13,10 +13,10 @@
     <code code="61356-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Medication pharmaceutical advice.extended">
         <translation xsi:type="CD" code="419891008" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Record artifact (record artifact)" />
     </code>
-    <title>Pharmaceutical Advice</title>
+    <title>Commentaire relatif à la médication</title>
     <effectiveTime value="20220112094800+0100" />
     <confidentialityCode code="17621005" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Normally accessible" />
-    <languageCode code="en-US" />
+    <languageCode code="fr-CH" />
     <setId root="0AD00000-0000-0000-0000-000000000001" />
     <versionNumber value="1" />
     <recordTarget>
@@ -96,7 +96,7 @@
                     <templateId root="2.16.756.5.30.1.1.10.3.12" />
                     <id root="0AD00000-0000-0000-0000-000000000001" />
                     <code code="61357-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Medication pharmaceutical advice.brief" />
-                    <title>Pharmaceutical Advice</title>
+                    <title>Commentaire relatif à la médication</title>
                     <text>
                         <content ID="padv.content" />
                     </text>

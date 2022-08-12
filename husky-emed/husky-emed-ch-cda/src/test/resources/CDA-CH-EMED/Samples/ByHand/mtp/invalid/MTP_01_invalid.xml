@@ -1,23 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ClinicalDocument xmlns:pharm="urn:ihe:pharm" xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ../../../../schemas/PHARM/schemas/cda/extendedschemas/CDA_extended_pharmacy.xsd">
     <realmCode code="CHE" />
     <typeId root="2.16.840.1.113883.1.3" extension="POCD_HD000040" />
-    <templateId root="2.16.756.5.30.1.1.1.1.4" />
     <templateId root="2.16.756.5.30.1.1.10.1.9" />
     <templateId root="2.16.840.1.113883.10.12.2" />
     <templateId root="2.16.840.1.113883.10.12.1" />
     <templateId root="2.16.756.5.30.1.127.1.4" />
     <templateId root="1.3.6.1.4.1.19376.1.5.3.1.1.1" />
-    <templateId root="1.3.6.1.4.1.19376.1.9.1.1.3" />
-    <templateId root="2.16.756.5.30.1.1.10.1.5" />
-    <id root="00E00000-0000-0000-0000-000000000000" />
-    <code code="60593-1" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Medication dispensed.extended">
+    <templateId root="1.3.6.1.4.1.19376.1.9.1.1.6" />
+    <templateId root="2.16.756.5.30.1.1.10.1.7" />
+    <id root="00000000-0000-0000-0000-000000000000" />
+    <code code="77603-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Medication treatment plan.extended">
         <translation xsi:type="CD" code="419891008" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Record artifact (record artifact)" />
     </code>
-    <title>Remise</title>
-    <effectiveTime value="20220101113900+0100" />
+    <title>Décision thérapeutique relative à la médication</title>
+    <!-- invalid date-->
+    <effectiveTime value="20111132110000+0100" />
     <confidentialityCode code="17621005" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Normally accessible" />
-    <languageCode code="fr-CH" />
-    <setId root="00E00000-0000-0000-0000-000000000000" />
+    <languageCode code="en-CH" />
+    <setId root="00000000-0000-0000-0000-000000000000" />
     <versionNumber value="1" />
     <recordTarget>
         <templateId root="2.16.756.5.30.1.1.10.2.1" />
@@ -41,7 +42,7 @@
     </recordTarget>
     <author>
         <templateId root="2.16.756.5.30.1.1.10.9.23" />
-        <time value="20120204140000+0100" />
+        <time value="20111129110000+0100" />
         <assignedAuthor>
             <id root="2.51.1.3" extension="7601000234438" />
             <assignedPerson>
@@ -92,44 +93,62 @@
         <structuredBody>
             <component>
                 <section>
-                    <templateId root="1.3.6.1.4.1.19376.1.9.1.2.3" />
-                    <templateId root="2.16.756.5.30.1.1.10.3.11" />
-                    <id root="00E00000-0000-0000-0000-000000000000" />
-                    <code code="60590-7" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Medication dispensed.brief" />
-                    <title>Dispensation d'un médicament</title>
+                    <templateId root="2.16.756.5.30.1.1.10.3.13" />
+                    <templateId root="1.3.6.1.4.1.19376.1.9.1.2.6" />
+                    <id root="00000000-0000-0000-0000-000000000000" />
+                    <code code="77604-7" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Medication treatment plan.brief" />
+                    <!-- bad title -->
+                    <title>MTP</title>
                     <text>
-                        <content ID="dis.content">content</content>
+                        <content ID="mtp.content">content</content>
                     </text>
                     <entry>
-                        <supply classCode="SPLY" moodCode="EVN">
-                            <templateId root="2.16.756.5.30.1.1.10.4.42" />
-                            <templateId root="1.3.6.1.4.1.19376.1.9.1.3.4" />
-                            <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.3" />
-                            <templateId root="2.16.840.1.113883.10.20.1.34" />
-                            <id root="00E00000-0000-0000-0000-000000000000" />
-                            <!-- Bad Code System -->
-                            <code code="FFC" codeSystem="0.11.222.3.444444.5.6" codeSystemName="Act Code" displayName="First Fill - Complete" />
+                        <substanceAdministration classCode="SBADM" moodCode="INT">
+                            <templateId root="2.16.756.5.30.1.1.10.4.34" />
+                            <templateId root="1.3.6.1.4.1.19376.1.9.1.3.7" />
+                            <templateId root="2.16.840.1.113883.10.20.1.24" />
+                            <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7" />
+                            <templateId root="1.3.6.1.4.1.19376.1.9.1.3.6" />
+                            <!-- Multiple choice of Medication Treatment Plan Item Entry Additional Template ID -->
+                            <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1" />
+                            <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.8" />
+                            <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.9" />
+                            <id root="00000000-0000-0000-0000-000000000000" />
                             <text>
-                                <reference value="#dis.content" />
+                                 <reference value="#mtp.content" />
                             </text>
-                            <quantity value="1" />
-                            <product>
+                            <statusCode code="completed" />
+                            <effectiveTime xsi:type="IVL_TS">
+                                <!-- low > high -->
+                                <low value="20220110120000+0100" />
+                                <high value="20210310120000+0100" />
+                            </effectiveTime>
+                            <effectiveTime xsi:type="EIVL_TS" operator="A">
+                                <event code="MORN" />
+                            </effectiveTime>
+                            <!-- decimal value -->
+                            <repeatNumber value="1.1" />
+                            <routeCode code="20053000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Oral use" />
+                            <doseQuantity unit="mg" value="0.5" />
+                            <consumable>
                                 <manufacturedProduct classCode="MANU">
                                     <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2" />
                                     <templateId root="2.16.840.1.113883.10.20.1.53" />
                                     <manufacturedMaterial classCode="MMAT" determinerCode="KIND">
                                         <templateId root="2.16.756.5.30.1.1.10.4.33" />
                                         <templateId root="1.3.6.1.4.1.19376.1.9.1.3.1" />
-                                        <code code="7680531520746" codeSystem="2.51.1.1" codeSystemName="GTIN" displayName="PROGRAF caps 0.5 mg 50 Stk">
+                                        <!-- invalid GTIN -->
+                                        <code code="hello" codeSystem="2.51.1.1" codeSystemName="GTIN" displayName="PROGRAF caps 0.5 mg 50 Stk">
                                             <originalText>
-                                                <reference value="#dis.content" />
+                                                <reference value="#mtp.content" />
                                             </originalText>
                                         </code>
                                         <name>PROGRAF caps 0.5 mg 50 Stk</name>
                                         <pharm:formCode code="10210000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Capsule, hard" />
                                         <pharm:asContent classCode="CONT">
                                             <pharm:containerPackagedMedicine classCode="CONT" determinerCode="INSTANCE">
-                                                <pharm:code code="7680531520746" codeSystem="2.51.1.1" codeSystemName="GTIN" displayName="PROGRAF caps 0.5 mg 50 Stk" />
+                                                <!-- invalid GTIN -->
+                                                <pharm:code code="hello" codeSystem="2.51.1.1" codeSystemName="GTIN" displayName="PROGRAF caps 0.5 mg 50 Stk" />
                                                 <pharm:name>PROGRAF caps 0.5 mg 50 Stk</pharm:name>
                                                 <pharm:capacityQuantity unit="732937005" value="50" />
                                             </pharm:containerPackagedMedicine>
@@ -137,7 +156,8 @@
                                         <pharm:ingredient classCode="ACTI">
                                             <pharm:quantity>
                                                 <numerator xsi:type="PQ" unit="mg" value="0.5" />
-                                                <denominator xsi:type="PQ" unit="732937005" value="1" />
+                                                <!-- negative denominator -->
+                                                <denominator xsi:type="PQ" unit="732937005" value="-1"  />
                                             </pharm:quantity>
                                             <pharm:ingredient classCode="MMAT" determinerCode="KIND">
                                                 <pharm:code code="386975001" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Tacrolimus (substance)" />
@@ -146,38 +166,35 @@
                                         </pharm:ingredient>
                                     </manufacturedMaterial>
                                 </manufacturedProduct>
-                            </product>
-                            <entryRelationship typeCode="REFR">
-                                <substanceAdministration classCode="SBADM" moodCode="INT">
-                                    <templateId root="1.3.6.1.4.1.19376.1.9.1.3.11" />
-                                    <templateId root="2.16.756.5.30.1.1.10.4.47" />
-                                    <id root="00E00000-0000-0000-0000-000000000001" />
-                                    <code code="PREItem" codeSystem="1.3.6.1.4.1.19376.1.9.2.2" codeSystemName="IHE Pharmacy Item Type List" displayName="Prescription Item" />
-                                    <consumable>
-                                        <manufacturedProduct>
-                                            <manufacturedMaterial nullFlavor="NA" />
-                                        </manufacturedProduct>
-                                    </consumable>
-                                    <reference typeCode="XCRPT">
-                                        <externalDocument>
-                                            <id root="00E00000-0000-0000-0000-000000000001" />
-                                        </externalDocument>
-                                    </reference>
-                                </substanceAdministration>
+                            </consumable>
+                            <entryRelationship typeCode="RSON">
+                                <observation classCode="OBS" moodCode="EVN">
+                                    <templateId root="2.16.756.5.30.1.1.10.4.41" />
+                                    <code xsi:type="CD" code="75326-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Problem" />
+                                    <text xsi:type="ED">
+                                        Treatment Reason
+
+                                        <reference value="#mtp.content" />
+                                    </text>
+                                    <statusCode code="completed"/>
+                                </observation>
                             </entryRelationship>
                             <entryRelationship typeCode="COMP">
-                                <substanceAdministration moodCode="INT" classCode="SBADM">
-                                    <templateId root="1.3.6.1.4.1.19376.1.9.1.3.6" />
-                                    <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1" />
-                                    <effectiveTime xsi:type="IVL_TS">
-                                        <low value="20220110120000+0100" />
-                                        <high value="20220310120000+0100" />
-                                    </effectiveTime>
-                                    <effectiveTime xsi:type="EIVL_TS" operator="A">
-                                        <event code="MORN" />
-                                    </effectiveTime>
-                                    <routeCode code="20053000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Oral use" />
-                                    <doseQuantity unit="mg" value="0.5" />
+                                <act classCode="ACT" moodCode="DEF">
+                                    <templateId root="1.3.6.1.4.1.19376.1.9.1.3.9.1" />
+                                    <code code="E" codeSystem="2.16.840.1.113883.5.1070" codeSystemName="Substance Admin Substitution" displayName="equivalent" />
+                                    <statusCode code="completed" />
+                                </act>
+                            </entryRelationship>
+                            <!-- In normal dose regime, the dosage instructions can be given in structured form -->
+                            <entryRelationship typeCode="COMP">
+                                <substanceAdministration classCode="SBADM" moodCode="INT">
+                                    <templateId root="2.16.756.5.30.1.1.10.4.52" />
+                                    <text>
+                                        Dosage Intructions Non Structured
+
+                                        <reference value="#mtp.content" />
+                                    </text>
                                     <consumable>
                                         <manufacturedProduct>
                                             <manufacturedMaterial nullFlavor="NA" />
@@ -187,12 +204,19 @@
                             </entryRelationship>
                             <entryRelationship typeCode="COMP">
                                 <act classCode="ACT" moodCode="EVN">
-                                    <templateId root="1.3.6.1.4.1.19376.1.9.1.3.9.2" />
-                                    <code code="E" codeSystem="2.16.840.1.113883.5.1070" codeSystemName="Substance Admin Substitution" displayName="equivalent" />
-                                    <statusCode code="completed" />
+                                    <templateId root="2.16.756.5.30.1.1.10.4.2" />
+                                    <templateId root="2.16.840.1.113883.10.20.1.40" />
+                                    <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.2" />
+                                    <code code="48767-8" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Annotation comment" />
+                                    <text>
+                                        Annotation Comment
+
+                                        <reference value="#mtp.content" />
+                                    </text>
+                                    <statusCode code="completed"/>
                                 </act>
                             </entryRelationship>
-                        </supply>
+                        </substanceAdministration>
                     </entry>
                 </section>
             </component>

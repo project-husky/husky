@@ -141,7 +141,7 @@ class CceMtpDigesterTest {
         assertEquals("00000000-0000-0000-0000-000000000001", mtpDigest.getId().toString());
         assertEquals("00000000-0000-0000-0000-000000000001", mtpDigest.getSetId().toString());
         assertEquals(1, mtpDigest.getVersion());
-        assertEquals("en-US", mtpDigest.getLanguageCode());
+        assertEquals("fr-CH", mtpDigest.getLanguageCode());
         assertEquals(ConfidentialityCode.NORMALLY_ACCESSIBLE, mtpDigest.getConfidentialityCode());
         assertEquals(1322560800L, mtpDigest.getCreationTime().toEpochSecond());
         assertEquals(1322560800000L, mtpDigest.getDocumentationTime().toEpochMilli());
@@ -233,7 +233,7 @@ class CceMtpDigesterTest {
         assertEquals("00000000-0000-0000-0000-000000000002", mtpDigest.getId().toString());
         assertEquals("00000000-0000-0000-0000-000000000002", mtpDigest.getSetId().toString());
         assertEquals(1, mtpDigest.getVersion());
-        assertEquals("en-US", mtpDigest.getLanguageCode());
+        assertEquals("fr-CH", mtpDigest.getLanguageCode());
         assertEquals(ConfidentialityCode.NORMALLY_ACCESSIBLE, mtpDigest.getConfidentialityCode());
         assertEquals(1322560800L, mtpDigest.getCreationTime().toEpochSecond());
         assertEquals(1322560800000L, mtpDigest.getDocumentationTime().toEpochMilli());
@@ -331,7 +331,7 @@ class CceMtpDigesterTest {
         assertEquals("00000000-0000-0000-0000-000000000003", mtpDigest.getId().toString());
         assertEquals("00000000-0000-0000-0000-000000000003", mtpDigest.getSetId().toString());
         assertEquals(1, mtpDigest.getVersion());
-        assertEquals("en-US", mtpDigest.getLanguageCode());
+        assertEquals("fr-CH", mtpDigest.getLanguageCode());
         assertEquals(ConfidentialityCode.NORMALLY_ACCESSIBLE, mtpDigest.getConfidentialityCode());
         assertEquals(1322560800L, mtpDigest.getCreationTime().toEpochSecond());
         assertEquals(1322560800000L, mtpDigest.getDocumentationTime().toEpochMilli());
@@ -425,7 +425,7 @@ class CceMtpDigesterTest {
         assertEquals("00000000-0000-0000-0000-000000000004", mtpDigest.getId().toString());
         assertEquals("00000000-0000-0000-0000-000000000004", mtpDigest.getSetId().toString());
         assertEquals(1, mtpDigest.getVersion());
-        assertEquals("en-US", mtpDigest.getLanguageCode());
+        assertEquals("fr-CH", mtpDigest.getLanguageCode());
         assertEquals(ConfidentialityCode.NORMALLY_ACCESSIBLE, mtpDigest.getConfidentialityCode());
         assertEquals(1322560800L, mtpDigest.getCreationTime().toEpochSecond());
         assertEquals(1322560800000L, mtpDigest.getDocumentationTime().toEpochMilli());
@@ -519,7 +519,7 @@ class CceMtpDigesterTest {
         assertEquals("00000000-0000-0000-0000-000000000005", mtpDigest.getId().toString());
         assertEquals("00000000-0000-0000-0000-000000000005", mtpDigest.getSetId().toString());
         assertEquals(1, mtpDigest.getVersion());
-        assertEquals("en-US", mtpDigest.getLanguageCode());
+        assertEquals("fr-CH", mtpDigest.getLanguageCode());
         assertEquals(ConfidentialityCode.NORMALLY_ACCESSIBLE, mtpDigest.getConfidentialityCode());
         assertEquals(1322560800L, mtpDigest.getCreationTime().toEpochSecond());
         assertEquals(1322560800000L, mtpDigest.getDocumentationTime().toEpochMilli());
@@ -617,7 +617,7 @@ class CceMtpDigesterTest {
         assertEquals("00000000-0000-0000-0000-000000000006", mtpDigest.getId().toString());
         assertEquals("00000000-0000-0000-0000-000000000006", mtpDigest.getSetId().toString());
         assertEquals(1, mtpDigest.getVersion());
-        assertEquals("en-US", mtpDigest.getLanguageCode());
+        assertEquals("fr-CH", mtpDigest.getLanguageCode());
         assertEquals(ConfidentialityCode.NORMALLY_ACCESSIBLE, mtpDigest.getConfidentialityCode());
         assertEquals(1322560800L, mtpDigest.getCreationTime().toEpochSecond());
         assertEquals(1322560800000L, mtpDigest.getDocumentationTime().toEpochMilli());

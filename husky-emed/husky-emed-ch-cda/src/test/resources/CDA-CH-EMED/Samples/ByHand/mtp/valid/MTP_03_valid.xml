@@ -13,10 +13,10 @@
     <code code="77603-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Medication treatment plan.extended">
         <translation xsi:type="CD" code="419891008" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Record artifact (record artifact)" />
     </code>
-    <title>Medication Treatment Plan</title>
+    <title>Décision thérapeutique relative à la médication</title>
     <effectiveTime value="20111129110000+0100" />
     <confidentialityCode code="17621005" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Normally accessible" />
-    <languageCode code="en-US" />
+    <languageCode code="fr-CH" />
     <setId root="00000000-0000-0000-0000-000000000003" />
     <versionNumber value="1" />
     <recordTarget>
@@ -96,7 +96,7 @@
                     <templateId root="1.3.6.1.4.1.19376.1.9.1.2.6" />
                     <id root="00000000-0000-0000-0000-000000000003" />
                     <code code="77604-7" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Medication treatment plan.brief" />
-                    <title>Medication Treatment Plan</title>
+                    <title>Plan de traitement médicamenteux</title>
                     <text>
                         <content ID="mtp.content">content</content>
                     </text>

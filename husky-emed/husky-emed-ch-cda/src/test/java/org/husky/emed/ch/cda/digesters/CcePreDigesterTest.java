@@ -47,7 +47,7 @@ class CcePreDigesterTest {
         assertEquals("00E00000-0000-0000-0000-000000000001", preDigest.getId().toString().toUpperCase());
         assertEquals("00E00000-0000-0000-0000-000000000001", preDigest.getSetId().toString().toUpperCase());
         assertEquals(1, preDigest.getVersion());
-        assertEquals("en-US", preDigest.getLanguageCode());
+        assertEquals("fr-CH", preDigest.getLanguageCode());
         assertEquals(ConfidentialityCode.NORMALLY_ACCESSIBLE, preDigest.getConfidentialityCode());
         assertEquals(1641033240L, preDigest.getCreationTime().toEpochSecond());
         assertEquals(1322560800000L, preDigest.getDocumentationTime().toEpochMilli());

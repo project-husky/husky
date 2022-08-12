@@ -9,7 +9,7 @@
     <templateId root="1.3.6.1.4.1.19376.1.5.3.1.1.1" />
     <templateId root="1.3.6.1.4.1.19376.1.9.1.1.3" />
     <templateId root="2.16.756.5.30.1.1.10.1.5" />
-    <id root="D0000000-0000-0000-0000-000000000002" />
+    <id root="00E00000-0000-0000-0000-000000000000" />
     <code code="60593-1" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Medication dispensed.extended">
         <translation xsi:type="CD" code="419891008" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Record artifact (record artifact)" />
     </code>
@@ -17,7 +17,7 @@
     <effectiveTime value="20220101113900+0100" />
     <confidentialityCode code="17621005" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Normally accessible" />
     <languageCode code="fr-CH" />
-    <setId root="D0000000-0000-0000-0000-000000000002" />
+    <setId root="00E00000-0000-0000-0000-000000000000" />
     <versionNumber value="1" />
     <recordTarget>
         <templateId root="2.16.756.5.30.1.1.10.2.1" />
@@ -94,7 +94,7 @@
                 <section>
                     <templateId root="1.3.6.1.4.1.19376.1.9.1.2.3" />
                     <templateId root="2.16.756.5.30.1.1.10.3.11" />
-                    <id root="D0000000-0000-0000-0000-000000000002" />
+                    <id root="00E00000-0000-0000-0000-000000000000" />
                     <code code="60590-7" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Medication dispensed.brief" />
                     <title>Dispensation d'un médicament</title>
                     <text>
@@ -106,7 +106,7 @@
                             <templateId root="1.3.6.1.4.1.19376.1.9.1.3.4" />
                             <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.3" />
                             <templateId root="2.16.840.1.113883.10.20.1.34" />
-                            <id root="D0000000-0000-0000-0000-000000000002" />
+                            <id root="00E00000-0000-0000-0000-000000000000" />
                             <text>
                                 <reference value="#dis.content" />
                             </text>
