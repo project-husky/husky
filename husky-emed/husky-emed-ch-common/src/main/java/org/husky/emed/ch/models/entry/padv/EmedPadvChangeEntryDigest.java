@@ -108,7 +108,7 @@ public class EmedPadvChangeEntryDigest extends EmedPadvEntryDigest {
         }
 
         if (changedDosageInstructions != null) {
-            if (targetedEntryType != EmedEntryType.PRE) {
+            if (targetedEntryType != EmedEntryType.DIS) {
                 throw new IllegalArgumentException("A changed DIS entry can only be added when the PADV CHANGE targets " +
                         "a DIS entry");
             }
