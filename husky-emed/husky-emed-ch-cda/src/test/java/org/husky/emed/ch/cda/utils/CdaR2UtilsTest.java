@@ -164,7 +164,7 @@ class CdaR2UtilsTest {
                     <!-- Missing reference -->
                 </supply>""").getSupply();
 
-        assertThrows(IllegalArgumentException.class, () -> CdaR2Utils.toEmedReference(supply4));
+        assertInstanceOf(EmedReference.class, CdaR2Utils.toEmedReference(supply4));
     }
 
     @Test

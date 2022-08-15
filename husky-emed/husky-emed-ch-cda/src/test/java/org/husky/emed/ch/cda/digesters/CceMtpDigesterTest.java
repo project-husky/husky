@@ -708,9 +708,10 @@ class CceMtpDigesterTest {
         final var digester = new CceDocumentDigester();
 
         assertThrows(InvalidEmedContentException.class, () -> digester.digest(mtpDocument));
+
+        mtpDocument.getComponent().getStructuredBody().getComponent().get(0).getSection().getEntry().clear();
+        assertThrows(InvalidEmedContentException.class, () -> digester.digest(mtpDocument));
     }
-
-
 
     private POCDMT000040ClinicalDocument loadDoc(final String docName) throws SAXException {
         return CceDocumentUnmarshaller.unmarshall(CceMtpDigesterTest.class.getResourceAsStream("/CDA-CH-EMED"

@@ -5,18 +5,19 @@ import org.husky.common.enums.AdministrativeGender;
 import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
 import org.husky.emed.ch.cda.services.EmedEntryDigestService;
 import org.husky.emed.ch.cda.xml.CceDocumentUnmarshaller;
-import org.husky.emed.ch.enums.*;
+import org.husky.emed.ch.enums.ActivePharmaceuticalIngredient;
+import org.husky.emed.ch.enums.EmedEntryType;
+import org.husky.emed.ch.enums.PharmaceuticalDoseFormEdqm;
+import org.husky.emed.ch.enums.RegularUnitCodeAmbu;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.models.common.*;
 import org.husky.emed.ch.models.document.EmedDisDocumentDigest;
-import org.husky.emed.ch.models.document.EmedPreDocumentDigest;
 import org.husky.emed.ch.models.entry.EmedEntryDigest;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -34,6 +35,13 @@ class CceDisDigesterTest {
     final String DIR_E_HEALTH_SUISSE = "/eHealthSuisse/v1.0/";
     final String DIR_SAMPLES_BY_HAND = "/Samples/ByHand/dis/";
 
+    @Test
+    void testWithoutLoadDisDigester() throws Exception {
+        final var digester = new CceDocumentDigester();
+        final var disDocument = this.loadDoc(DIR_SAMPLES_BY_HAND + "valid/DIS_01_valid.xml");
+
+        assertThrows(NullPointerException.class, () -> digester.digest(disDocument));
+    }
 
     @Test
     void testDisDigester1() throws Exception {
@@ -202,6 +210,15 @@ class CceDisDigesterTest {
     }
 
     @Test
+    void testMissingEntry() throws Exception {
+        final var disDocument = this.loadDoc(DIR_SAMPLES_BY_HAND + "valid/DIS_02_valid.xml");
+        final var digester = new CceDocumentDigester(new EmedEntryDigestServiceImpl());
+
+        disDocument.getComponent().getStructuredBody().getComponent().get(0).getSection().getEntry().clear();
+        assertThrows(InvalidEmedContentException.class, () -> digester.digest(disDocument));
+    }
+
+    @Test
     void testBadFillCode() throws Exception {
         final var disDocument = this.loadDoc(DIR_SAMPLES_BY_HAND + "invalid/DIS_02_invalid.xml");
         final var digester = new CceDocumentDigester(new EmedEntryDigestServiceImpl());
@@ -221,6 +238,17 @@ class CceDisDigesterTest {
     void testMissingQuantity() throws Exception {
         final var disDocument = this.loadDoc(DIR_SAMPLES_BY_HAND + "invalid/DIS_04_invalid.xml");
         final var digester = new CceDocumentDigester(new EmedEntryDigestServiceImpl());
+
+        assertThrows(InvalidEmedContentException.class, () -> digester.digest(disDocument));
+    }
+
+    @Test
+    void testMissingManufacturedMaterial() throws Exception {
+        final var disDocument = this.loadDoc(DIR_SAMPLES_BY_HAND + "valid/DIS_01_valid.xml");
+        final var digester = new CceDocumentDigester(new EmedEntryDigestServiceImpl());
+
+        disDocument.getComponent().getStructuredBody().getComponent().get(0).getSection().getEntry().get(0).getSupply()
+                .getProduct().getManufacturedProduct().setManufacturedMaterial(null);
 
         assertThrows(InvalidEmedContentException.class, () -> digester.digest(disDocument));
     }

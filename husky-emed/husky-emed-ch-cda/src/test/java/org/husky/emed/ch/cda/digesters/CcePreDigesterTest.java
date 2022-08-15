@@ -33,6 +33,14 @@ class CcePreDigesterTest {
     final String DIR_SAMPLES_BY_HAND = "/Samples/ByHand/pre/";
 
     @Test
+    void testWithoutLoadPreDigester() throws Exception {
+        final var digester = new CceDocumentDigester();
+        final var preDocument = this.loadDoc(DIR_SAMPLES_BY_HAND + "valid/PRE_01_valid.xml");
+
+        assertThrows(NullPointerException.class, () -> digester.digest(preDocument));
+    }
+
+    @Test
     void testPreDigester1() throws Exception {
         final var preDocument = this.loadDoc(DIR_SAMPLES_BY_HAND + "valid/PRE_01_valid.xml");
         final var digester = new CceDocumentDigester(new CcePreDigesterTest.EmedEntryDigestServiceImpl());
