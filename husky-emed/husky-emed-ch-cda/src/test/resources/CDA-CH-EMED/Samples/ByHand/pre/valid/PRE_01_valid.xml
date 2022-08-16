@@ -13,7 +13,7 @@
     <code code="57833-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Prescription for medication">
         <translation xsi:type="CD" code="761938008" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Medicinal prescription record (record artifact)" />
     </code>
-    <title>Prescription</title>
+    <title>Ordonnance</title>
     <effectiveTime value="20220101113400+0100" />
     <confidentialityCode code="17621005" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Normally accessible" />
     <languageCode code="fr-CH" />
@@ -96,7 +96,7 @@
                     <templateId root="2.16.756.5.30.1.1.10.3.10" />
                     <id root="00E00000-0000-0000-0000-000000000001" />
                     <code code="57828-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="PRESCRIPTIONS" />
-                    <title>Prescription</title>
+                    <title>Ordonnance</title>
                     <text>
                         <content ID="pre.content"></content>
                     </text>
@@ -209,9 +209,9 @@
                     <templateId root="2.16.756.5.30.1.1.10.3.45" />
                     <id root="D41D72BA-2100-11E6-B67B-9E71128CAE77" />
                     <code code="55108-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Clinical presentation" />
-                    <title>Original representation</title>
+                    <title>Représentation originale</title>
                     <text>
-                        Representation of the original view:
+                        Représentation de la vue originale :
 
                         <renderMultiMedia referencedObject="pdf1" />
                     </text>

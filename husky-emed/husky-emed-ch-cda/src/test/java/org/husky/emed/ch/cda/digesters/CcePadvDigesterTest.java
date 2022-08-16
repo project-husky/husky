@@ -3,20 +3,29 @@ package org.husky.emed.ch.cda.digesters;
 import org.husky.common.ch.enums.ConfidentialityCode;
 import org.husky.common.enums.AdministrativeGender;
 import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
-import org.husky.common.hl7cdar2.TimingEvent;
+import org.husky.common.hl7cdar2.POCDMT000040Observation;
+import org.husky.common.hl7cdar2.POCDMT000040SubstanceAdministration;
+import org.husky.common.utils.xml.XmlFactories;
 import org.husky.emed.ch.cda.services.EmedEntryDigestService;
 import org.husky.emed.ch.cda.xml.CceDocumentUnmarshaller;
-import org.husky.emed.ch.enums.*;
+import org.husky.emed.ch.enums.EmedEntryType;
+import org.husky.emed.ch.enums.TimingEventAmbu;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.models.common.*;
-import org.husky.emed.ch.models.document.*;
+import org.husky.emed.ch.models.document.EmedPadvDocumentDigest;
 import org.husky.emed.ch.models.entry.EmedEntryDigest;
-import org.husky.emed.ch.models.entry.EmedPadvEntryDigest;
 import org.husky.emed.ch.models.entry.padv.*;
-import org.husky.emed.ch.models.treatment.MedicationProduct;
 import org.junit.jupiter.api.Test;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.JAXBIntrospector;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+import java.io.StringReader;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +41,14 @@ class CcePadvDigesterTest {
     final String DIR_SAMPLES_BY_HAND_MTP = "/Samples/ByHand/mtp/valid/";
     final String DIR_SAMPLES_BY_HAND_PRE = "/Samples/ByHand/pre/valid/";
     final String DIR_SAMPLES_BY_HAND_DIS = "/Samples/ByHand/dis/valid/";
+
+    private final static Class<?> UNMARSHALLED_CLASS = POCDMT000040Observation.class;
+    private final Unmarshaller UNMARSHALLER;
+
+    public CcePadvDigesterTest() throws JAXBException {
+        final var context = JAXBContext.newInstance(UNMARSHALLED_CLASS);
+        UNMARSHALLER = context.createUnmarshaller();
+    }
 
     @Test
     void testWithoutLoadPadvDigester() throws Exception {
@@ -686,6 +703,101 @@ class CcePadvDigesterTest {
         assertThrows(InvalidEmedContentException.class, () -> digester.digest(padvDocument));
     }
 
+    @Test
+    void testAuthorInSubstanceAdministration() throws Exception {
+        var sectionAuthor = """
+                <author>
+                    <templateId root="2.16.756.5.30.1.1.10.9.23" />
+                    <time value="20111129110000+0100" />
+                    <assignedAuthor>
+                        <id root="2.51.1.3" extension="7601000234438" />
+                        <assignedPerson>
+                            <name>
+                                <family>Hausarzt</family>
+                                <given>Familien</given>
+                            </name>
+                        </assignedPerson>
+                    </assignedAuthor>
+                </author>
+                """;
+
+        var documentAuthor = """
+                <author>
+                    <templateId root="2.16.756.5.30.1.1.10.9.23" />
+                    <time value="20111129110000+0100" />
+                    <assignedAuthor>
+                        <id root="2.51.1.3" extension="7601000234438" />
+                        <assignedPerson>
+                            <name>
+                                <family>Zarsauh</family>
+                                <given>Familien</given>
+                            </name>
+                        </assignedPerson>
+                    </assignedAuthor>
+                </author>
+                """;
+
+        var observation = """
+                <templateId root="2.16.756.5.30.1.1.10.4.44" />
+                <templateId root="1.3.6.1.4.1.19376.1.9.1.3.3" />
+                <id root="0AD00000-0000-0000-0000-000000000001" />
+                <code xsi:type="CD" code="OK" codeSystem="1.3.6.1.4.1.19376.1.9.2.1" codeSystemName="IHE Pharmaceutical Advice Status List" />
+                <text xsi:type="ED">
+                    Complementary information
+    
+                    <reference value="#padv.content" />
+                </text>
+                <statusCode code="completed" />
+                <effectiveTime value="20220201" />
+                <entryRelationship typeCode="REFR">
+                    <substanceAdministration classCode="SBADM" moodCode="INT">
+                        <templateId root="1.3.6.1.4.1.19376.1.9.1.3.10" />
+                        <templateId root="2.16.756.5.30.1.1.10.4.45" />
+                        <id root="00000000-0000-0000-0000-000000000001" />
+                        <code code="MTPItem" codeSystem="1.3.6.1.4.1.19376.1.9.2.2" codeSystemName="IHE Pharmacy Item Type List" displayName="Medication Treatment Plan Item" />
+                        <consumable>
+                            <manufacturedProduct>
+                                <manufacturedMaterial nullFlavor="NA" />
+                            </manufacturedProduct>
+                        </consumable>
+                        <reference typeCode="XCRPT">
+                            <externalDocument>
+                                <id root="00000000-0000-0000-0000-000000000001" />
+                            </externalDocument>
+                        </reference>
+                    </substanceAdministration>
+                </entryRelationship>
+                """ + sectionAuthor;
+
+        final var emedEntryDigestServiceImpl = new EmedEntryDigestServiceImpl();
+        final var digester = new CceDocumentDigester(emedEntryDigestServiceImpl);
+
+        emedEntryDigestServiceImpl.addAll(this.getEntryDigests(DIR_SAMPLES_BY_HAND_MTP + "MTP_01_valid.xml", digester));
+
+        var digest = new CcePadvEntryDigester(emedEntryDigestServiceImpl, new CceMtpEntryDigester(), new CcePreEntryDigester(emedEntryDigestServiceImpl))
+                .createDigest(
+                        this.unmarshall(observation),
+                        UUID.randomUUID(),
+                        Instant.now(),
+                        null,
+                        null);
+
+        assertEquals(digest.getSectionAuthor(), digest.getDocumentAuthor());
+
+        observation += documentAuthor;
+        digest = new CcePadvEntryDigester(
+                emedEntryDigestServiceImpl,
+                new CceMtpEntryDigester(),
+                new CcePreEntryDigester(emedEntryDigestServiceImpl))
+                .createDigest(this.unmarshall(observation),
+                        UUID.randomUUID(),
+                        Instant.now(),
+                        null,
+                        null);
+
+        assertNotEquals(digest.getSectionAuthor().getFamilyName(), digest.getDocumentAuthor().getFamilyName());
+    }
+
     private List<EmedEntryDigest> getEntryDigests(String docPath, CceDocumentDigester digester) throws Exception {
         final var document = this.loadDoc(docPath);
         return digester.digest(document).getEntryDigests();
@@ -696,7 +808,19 @@ class CcePadvDigesterTest {
                 + docName));
     }
 
-    public static class EmedEntryDigestServiceImpl implements EmedEntryDigestService {
+    private POCDMT000040Observation unmarshall(final String observation) throws ParserConfigurationException, IOException, SAXException, JAXBException {
+        final var completeElement = "<observation classCode=\"OBS\" moodCode=\"EVN\" xmlns:pharm=\"urn:ihe:pharm\" xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
+                + observation
+                + "</observation>";
+
+        final var document =
+                XmlFactories.newSafeDocumentBuilder().parse(new InputSource(new StringReader(completeElement)));
+
+        final Object root = UNMARSHALLER.unmarshal(document, POCDMT000040Observation.class);
+        return (POCDMT000040Observation) JAXBIntrospector.getValue(root);
+    }
+
+    private static class EmedEntryDigestServiceImpl implements EmedEntryDigestService {
 
         private final List<EmedEntryDigest> digests = new ArrayList<>();
 

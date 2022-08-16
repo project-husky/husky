@@ -3,6 +3,9 @@ package org.husky.emed.ch.cda.digesters;
 import org.husky.common.ch.enums.ConfidentialityCode;
 import org.husky.common.enums.AdministrativeGender;
 import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
+import org.husky.common.hl7cdar2.POCDMT000040SubstanceAdministration;
+import org.husky.common.hl7cdar2.POCDMT000040Supply;
+import org.husky.common.utils.xml.XmlFactories;
 import org.husky.emed.ch.cda.services.EmedEntryDigestService;
 import org.husky.emed.ch.cda.xml.CceDocumentUnmarshaller;
 import org.husky.emed.ch.enums.ActivePharmaceuticalIngredient;
@@ -15,8 +18,16 @@ import org.husky.emed.ch.models.document.EmedDisDocumentDigest;
 import org.husky.emed.ch.models.entry.EmedEntryDigest;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
 import org.junit.jupiter.api.Test;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.JAXBIntrospector;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+import java.io.StringReader;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +45,14 @@ class CceDisDigesterTest {
 
     final String DIR_E_HEALTH_SUISSE = "/eHealthSuisse/v1.0/";
     final String DIR_SAMPLES_BY_HAND = "/Samples/ByHand/dis/";
+
+    private final static Class<?> UNMARSHALLED_CLASS = POCDMT000040Supply.class;
+    private final Unmarshaller UNMARSHALLER;
+
+    public CceDisDigesterTest() throws JAXBException {
+        final var context = JAXBContext.newInstance(UNMARSHALLED_CLASS);
+        UNMARSHALLER = context.createUnmarshaller();
+    }
 
     @Test
     void testWithoutLoadDisDigester() throws Exception {
@@ -253,12 +272,103 @@ class CceDisDigesterTest {
         assertThrows(InvalidEmedContentException.class, () -> digester.digest(disDocument));
     }
 
+    @Test
+    void testAuthorInSupply() throws Exception {
+        var sectionAuthor = """
+                <author>
+                    <templateId root="2.16.756.5.30.1.1.10.9.23" />
+                    <time value="20111129110000+0100" />
+                    <assignedAuthor>
+                        <id root="2.51.1.3" extension="7601000234438" />
+                        <assignedPerson>
+                            <name>
+                                <family>Hausarzt</family>
+                                <given>Familien</given>
+                            </name>
+                        </assignedPerson>
+                    </assignedAuthor>
+                </author>
+                """;
+
+        var documentAuthor = """
+                <author>
+                    <templateId root="2.16.756.5.30.1.1.10.9.23" />
+                    <time value="20111129110000+0100" />
+                    <assignedAuthor>
+                        <id root="2.51.1.3" extension="7601000234438" />
+                        <assignedPerson>
+                            <name>
+                                <family>Zarsauh</family>
+                                <given>Familien</given>
+                            </name>
+                        </assignedPerson>
+                    </assignedAuthor>
+                </author>
+                """;
+
+        var supply = """
+                <templateId root="2.16.756.5.30.1.1.10.4.42" />
+                <templateId root="1.3.6.1.4.1.19376.1.9.1.3.4" />
+                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.3" />
+                <templateId root="2.16.840.1.113883.10.20.1.34" />
+                <id root="D0000000-0000-0000-0000-000000000002" />
+                <text>
+                    <reference value="#dis.content" />
+                </text>
+                <quantity value="1" unit="732997007" />
+                <product>
+                    <manufacturedProduct classCode="MANU">
+                        <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2" />
+                        <templateId root="2.16.840.1.113883.10.20.1.53" />
+                        <manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+                            <templateId root="2.16.756.5.30.1.1.10.4.33" />
+                            <templateId root="1.3.6.1.4.1.19376.1.9.1.3.1" />
+                            <code code="7680541890365" codeSystem="2.51.1.1" codeSystemName="GTIN" displayName="NASONEX spray nasal doseur 50 mcg" />
+                            <name>NASONEX spray nasal doseur 50 mcg</name>
+                        </manufacturedMaterial>
+                    </manufacturedProduct>
+                </product>
+                """ + sectionAuthor;
+
+        final var emedEntryDigestServiceImpl = new EmedEntryDigestServiceImpl();
+
+        var digest = new CceDisEntryDigester(emedEntryDigestServiceImpl).createDigest(this.unmarshall(supply),
+                UUID.randomUUID(),
+                Instant.now(),
+                null,
+                null);
+
+        assertEquals(digest.getSectionAuthor(), digest.getDocumentAuthor());
+
+        supply += documentAuthor;
+        digest = new CceDisEntryDigester(emedEntryDigestServiceImpl).createDigest(this.unmarshall(supply),
+                UUID.randomUUID(),
+                Instant.now(),
+                null,
+                null);
+
+        assertNotEquals(digest.getSectionAuthor().getFamilyName(), digest.getDocumentAuthor().getFamilyName());
+    }
+
+
     private POCDMT000040ClinicalDocument loadDoc(final String docName) throws SAXException {
         return CceDocumentUnmarshaller.unmarshall(CceDisDigesterTest.class.getResourceAsStream("/CDA-CH-EMED"
                 + docName));
     }
 
-    public static class EmedEntryDigestServiceImpl implements EmedEntryDigestService {
+    private POCDMT000040Supply unmarshall(final String supply) throws ParserConfigurationException, IOException, SAXException, JAXBException {
+        final var completeElement = "<supply classCode=\"SPLY\" moodCode=\"EVN\" xmlns:pharm=\"urn:ihe:pharm\" xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
+                + supply
+                + "</supply>";
+
+        final var document =
+                XmlFactories.newSafeDocumentBuilder().parse(new InputSource(new StringReader(completeElement)));
+
+        final Object root = UNMARSHALLER.unmarshal(document, POCDMT000040Supply.class);
+        return (POCDMT000040Supply) JAXBIntrospector.getValue(root);
+    }
+
+    private static class EmedEntryDigestServiceImpl implements EmedEntryDigestService {
 
         private final List<EmedEntryDigest> digests = new ArrayList<>();
 

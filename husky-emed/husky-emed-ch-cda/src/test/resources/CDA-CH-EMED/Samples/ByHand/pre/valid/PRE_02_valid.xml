@@ -96,7 +96,7 @@
                     <templateId root="2.16.756.5.30.1.1.10.3.10" />
                     <id root="00E00000-0000-0000-0000-000000000002" />
                     <code code="57828-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="PRESCRIPTIONS" />
-                    <title>Prescription</title>
+                    <title>Ordonnance</title>
                     <text>
                         <content ID="pre.content"></content>
                     </text>
