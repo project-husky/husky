@@ -89,6 +89,7 @@ class ClinicalDocumentReaderTest {
         final var reader = new ClinicalDocumentReader(this.loadDoc(DIR_SAMPLES_BY_HAND + "mtp/invalid/MTP_04_invalid.xml"));
 
         assertThrows(InvalidEmedContentException.class, reader::getDocumentType);
+        assertThrows(InvalidEmedContentException.class, reader::getContentSection);
     }
 
     @Test
@@ -96,6 +97,21 @@ class ClinicalDocumentReaderTest {
         final var reader = new ClinicalDocumentReader(this.loadDoc(DIR_SAMPLES_BY_HAND + "pre/invalid/PRE_01_invalid.xml"));
 
         assertThrows(InvalidEmedContentException.class, reader::getPdfRepresentation);
+    }
+
+    @Test
+    void testMissingPatient() throws Exception {
+        final var reader = new ClinicalDocumentReader(this.loadDoc(DIR_SAMPLES_BY_HAND + "mtp/invalid/MTP_06_invalid.xml"));
+        assertThrows(InvalidEmedContentException.class, reader::getPatientDigest);
+    }
+
+    @Test
+    void testGetCustodian() throws Exception {
+        final var reader = this.loadDoc(DIR_SAMPLES_BY_HAND + "mtp/valid/MTP_06_valid.xml");
+        reader.getCustodian().getAssignedCustodian().getRepresentedCustodianOrganization().setName(null);
+        assertThrows(InvalidEmedContentException.class, new ClinicalDocumentReader(reader)::getCustodian);
+        reader.setCustodian(null);
+        assertThrows(InvalidEmedContentException.class, new ClinicalDocumentReader(reader)::getCustodian);
     }
 
     private POCDMT000040ClinicalDocument loadDoc(final String docName) throws SAXException {

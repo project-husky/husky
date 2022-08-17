@@ -66,6 +66,7 @@ class IiUtilsTest {
         assertFalse(IiUtils.isValidUuid(this.createIi(null, "1.2.3")));
         assertFalse(IiUtils.isValidUuid(this.createIi("2.16.756.5.30.1.1.10.4.45", "1.2.3")));
         assertFalse(IiUtils.isValidUuid(this.createIi("urn:oid:1.2.3", null)));
+        assertFalse(IiUtils.isValidUuid(this.createIi("1FD28CE26AC94DE49C3F50883630d46F1FD28CE26AC94DE49C3F50883630d46F1FD28CE26AC94DE49C3F50883630d46F1FD28CE26AC94DE49C3F50883630d46F1FD28CE26AC94DE49C3F50883630d46F1FD28CE26AC94DE49C3F50883630d46F", null)));
     }
 
     @Test

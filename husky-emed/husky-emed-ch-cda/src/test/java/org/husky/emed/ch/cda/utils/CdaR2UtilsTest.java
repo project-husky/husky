@@ -74,6 +74,10 @@ class CdaR2UtilsTest {
                 CdaR2Utils.getSingleNonNullMixedOrThrow(ingredients.get(0).getIngredient().getValue().getName().get(0)));
         assertThrows(IllegalArgumentException.class,
                 () -> CdaR2Utils.getSingleNonNullMixedOrThrow(ingredients.get(0).getQuantity().getNumerator()));
+
+        ingredients.get(0).getIngredient().getValue().getName().get(0).setXmlMixed((String) null);
+        assertThrows(IllegalArgumentException.class,
+                () -> CdaR2Utils.getSingleNonNullMixedOrThrow(ingredients.get(0).getIngredient().getValue().getName().get(0)));
     }
 
     @Test
@@ -117,6 +121,9 @@ class CdaR2UtilsTest {
 
         assertEquals("Sulfamethoxazole",
                 CdaR2Utils.getSingleNullableMixedOrThrow(ingredients.get(0).getIngredient().getValue().getName().get(0)));
+
+        ingredients.get(0).getIngredient().getValue().getName().get(0).setXmlMixed((String) null);
+        assertNull(CdaR2Utils.getSingleNullableMixedOrThrow(ingredients.get(0).getIngredient().getValue().getName().get(0)));
     }
 
     @Test
@@ -165,6 +172,20 @@ class CdaR2UtilsTest {
                 </supply>""").getSupply();
 
         assertInstanceOf(EmedReference.class, CdaR2Utils.toEmedReference(supply4));
+
+        var supply5 = this.unmarshall("""
+                <supply classCode="SPLY" moodCode="EVN">
+                    <!-- Multiple IDs -->
+                    <id root="D0000000-0000-0000-0000-000000000001" />
+                    <id root="D0000000-0000-0000-0000-000000000002" />
+                    <reference typeCode="XCRPT">
+                        <externalDocument>
+                            <id root="D0000000-0000-0000-0000-000000000001"/>
+                        </externalDocument>
+                    </reference>
+                </supply>""").getSupply();
+
+        assertThrows(InvalidEmedContentException.class, () -> CdaR2Utils.toEmedReference(supply5));
     }
 
     @Test
@@ -212,6 +233,20 @@ class CdaR2UtilsTest {
                 </observation>""").getObservation();
 
         assertThrows(IllegalArgumentException.class, () -> CdaR2Utils.toEmedReference(obs4));
+
+        var obs5 = this.unmarshall("""
+                <observation classCode="OBS" moodCode="EVN">
+                    <!-- Multiple IDs -->
+                    <id root="0AD00000-0000-0000-0000-000000000006" />
+                    <id root="0AD00000-0000-0000-0000-000000000007" />
+                    <reference typeCode="XCRPT">
+                        <externalDocument>
+                            <id root="0AD00000-0000-0000-0000-000000000006"/>
+                        </externalDocument>
+                    </reference>
+                </observation>""").getObservation();
+
+        assertThrows(InvalidEmedContentException.class, () -> CdaR2Utils.toEmedReference(obs5));
     }
 
     @Test
@@ -259,6 +294,20 @@ class CdaR2UtilsTest {
                 </substanceAdministration>""").getSubstanceAdministration();
 
         assertEquals(EmedReference.class, CdaR2Utils.toEmedReference(substanceAdmin4).getClass());
+
+        var substanceAdmin5 = this.unmarshall("""
+                <substanceAdministration classCode="SBADM" moodCode="INT">
+                    <!-- Multiple IDs -->
+                    <id root="00000000-0000-0000-0000-000000000002" />
+                    <id root="00000000-0000-0000-0000-000000000003" />
+                    <reference typeCode="XCRPT">
+                        <externalDocument>
+                            <id root="00000000-0000-0000-0000-000000000002"/>
+                        </externalDocument>
+                    </reference>
+                </substanceAdministration>""").getSubstanceAdministration();
+
+        assertThrows(InvalidEmedContentException.class, () -> CdaR2Utils.toEmedReference(substanceAdmin5));
     }
 
     @Test
@@ -269,6 +318,7 @@ class CdaR2UtilsTest {
         assertTrue(CdaR2Utils.getContentSection(this.loadDoc(DIR_E_HEALTH_SUISSE + "2-2-PharmaceuticalAdvice.xml")).isPresent());
         assertTrue(CdaR2Utils.getContentSection(this.loadDoc(DIR_E_HEALTH_SUISSE + "2-1-MedicationList.xml")).isPresent());
         assertTrue(CdaR2Utils.getContentSection(this.loadDoc(DIR_E_HEALTH_SUISSE + "2-7-MedicationCard.xml")).isPresent());
+        assertFalse(CdaR2Utils.getContentSection(this.loadDoc(DIR_SAMPLES_BY_HAND + "pmlc/invalid/PMLC_01_invalid.xml")).isPresent());
     }
 
     private POCDMT000040Entry unmarshall(String entryContent) throws ParserConfigurationException, JAXBException, IOException, SAXException {

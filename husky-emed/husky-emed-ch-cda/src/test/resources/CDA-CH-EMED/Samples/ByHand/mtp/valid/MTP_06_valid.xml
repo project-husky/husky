@@ -49,6 +49,7 @@
             </assignedPerson>
             <representedOrganization>
                 <name>Hausarzt</name>
+                <telecom value="http://www.hausarzt.ch" use="WP"/>
             </representedOrganization>
         </assignedAuthor>
     </author>

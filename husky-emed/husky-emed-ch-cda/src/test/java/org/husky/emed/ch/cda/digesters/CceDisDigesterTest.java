@@ -273,6 +273,42 @@ class CceDisDigesterTest {
     }
 
     @Test
+    void testMissingEntryId() throws Exception {
+        var supply = """
+                <templateId root="2.16.756.5.30.1.1.10.4.42" />
+                <templateId root="1.3.6.1.4.1.19376.1.9.1.3.4" />
+                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.3" />
+                <templateId root="2.16.840.1.113883.10.20.1.34" />
+                <!-- Missing ID -->
+                <text>
+                    <reference value="#dis.content" />
+                </text>
+                <quantity value="1" unit="732997007" />
+                <product>
+                    <manufacturedProduct classCode="MANU">
+                        <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2" />
+                        <templateId root="2.16.840.1.113883.10.20.1.53" />
+                        <manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+                            <templateId root="2.16.756.5.30.1.1.10.4.33" />
+                            <templateId root="1.3.6.1.4.1.19376.1.9.1.3.1" />
+                            <code code="7680541890365" codeSystem="2.51.1.1" codeSystemName="GTIN" displayName="NASONEX spray nasal doseur 50 mcg" />
+                            <name>NASONEX spray nasal doseur 50 mcg</name>
+                        </manufacturedMaterial>
+                    </manufacturedProduct>
+                </product>
+                """;
+
+        final var emedEntryDigestServiceImpl = new EmedEntryDigestServiceImpl();
+
+        assertThrows(InvalidEmedContentException.class, () -> new CceDisEntryDigester(emedEntryDigestServiceImpl).createDigest(this.unmarshall(supply),
+                UUID.randomUUID(),
+                Instant.now(),
+                null,
+                null)
+        );
+    }
+
+    @Test
     void testAuthorInSupply() throws Exception {
         var sectionAuthor = """
                 <author>

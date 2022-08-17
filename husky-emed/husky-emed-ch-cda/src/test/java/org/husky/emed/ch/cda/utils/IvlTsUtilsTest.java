@@ -37,6 +37,16 @@ class IvlTsUtilsTest {
     }
 
     @Test
+    void testGetInclusiveLowInstant() throws Exception {
+        IVLTS ivlts = this.createIvlts("""
+                <effectiveTime xsi:type="IVL_TS">
+                    <high value="20220310120000+0100" />
+                </effectiveTime>""");
+
+        assertNull(IvlTsUtils.getInclusiveLowInstant(ivlts));
+    }
+
+    @Test
     void testGetExclusiveLowInstant() throws Exception {
         IVLTS ivlts = this.createIvlts("""
                 <effectiveTime xsi:type="IVL_TS">

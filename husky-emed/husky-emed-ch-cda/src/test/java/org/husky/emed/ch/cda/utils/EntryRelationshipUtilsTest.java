@@ -65,8 +65,8 @@ class EntryRelationshipUtilsTest {
     }
 
     @Test
-    void testMultipleFulfillmentInstructionsInstructions() throws Exception {
-        var substanceAdmin = this.unmarshall("""
+    void testGetFulfillmentInstructions() throws Exception {
+        final var substanceAdmin = this.unmarshall("""
                 <entryRelationship typeCode="SUBJ" inversionInd="true">
                     <act classCode="ACT" moodCode="INT">
                         <templateId root="2.16.840.1.113883.10.20.1.43"/>
@@ -92,24 +92,60 @@ class EntryRelationshipUtilsTest {
 
         assertThrows(InvalidEmedContentException.class,
                 () -> EntryRelationshipUtils.getFulfillmentInstructions(substanceAdmin.getEntryRelationship()));
+
+        var substanceAdmin2 = this.unmarshall("");
+        assertFalse(EntryRelationshipUtils.getFulfillmentInstructions(substanceAdmin2.getEntryRelationship()).isPresent());
+
+        var substanceAdmin3 = this.unmarshall("""
+                <entryRelationship typeCode="SUBJ" inversionInd="true">
+                    <act classCode="ACT" moodCode="INT">
+                        <templateId root="2.16.840.1.113883.10.20.1.43"/>
+                        <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.3.1"/>
+                        <code code="FINSTRUCT" codeSystem="1.3.6.1.4.1.19376.1.5.3.2" codeSystemName="IHEActCode"/>
+                        <text>Fulfillment instructions N°1
+                            <reference value="#ref"/>
+                        </text>
+                        <statusCode code="completed"/>
+                    </act>
+                </entryRelationship>""");
+
+        assertTrue(EntryRelationshipUtils.getFulfillmentInstructions(substanceAdmin3.getEntryRelationship()).isPresent());
     }
 
     @Test
     void testGetActsFromEntryRelationshipsListEmptyByTemplateId() throws Exception {
         assertTrue(EntryRelationshipUtils.getActsFromEntryRelationshipsByTemplateId(
                 this.unmarshall("").getEntryRelationship(), "2.16.840.1.113883.10.20.1.43").isEmpty());
+
+        assertTrue(EntryRelationshipUtils.getActsFromEntryRelationshipsByTemplateId(
+                null, "2.16.840.1.113883.10.20.1.43").isEmpty());
     }
 
     @Test
     void testGetObservationsFromEntryRelationshipsListEmptyByTemplateId() throws Exception {
         assertTrue(EntryRelationshipUtils.getObservationsFromEntryRelationshipsByTemplateId(
                 this.unmarshall("").getEntryRelationship(), "2.16.840.1.113883.10.20.1.43").isEmpty());
+
+        assertTrue(EntryRelationshipUtils.getObservationsFromEntryRelationshipsByTemplateId(
+                null, "2.16.840.1.113883.10.20.1.43").isEmpty());
+    }
+
+    @Test
+    void testGetSubstanceAdministrationsFromEntryRelationshipsByTemplateId() throws Exception {
+        assertTrue(EntryRelationshipUtils.getSubstanceAdministrationsFromEntryRelationshipsByTemplateId(
+                this.unmarshall("").getEntryRelationship(), "2.16.840.1.113883.10.20.1.43").isEmpty());
+
+        assertTrue(EntryRelationshipUtils.getSubstanceAdministrationsFromEntryRelationshipsByTemplateId(
+                null, "2.16.840.1.113883.10.20.1.43").isEmpty());
     }
 
     @Test
     void testGetSupplyFromEntryRelationshipsListEmptyByTemplateId() throws Exception {
         assertTrue(EntryRelationshipUtils.getSupplyFromEntryRelationshipsByTemplateId(
                 this.unmarshall("").getEntryRelationship(), "2.16.840.1.113883.10.20.1.43").isEmpty());
+
+        assertTrue(EntryRelationshipUtils.getSupplyFromEntryRelationshipsByTemplateId(
+                null, "2.16.840.1.113883.10.20.1.43").isEmpty());
     }
 
     private POCDMT000040SubstanceAdministration unmarshall(final String entriesRelationship) throws ParserConfigurationException, IOException, SAXException, JAXBException {

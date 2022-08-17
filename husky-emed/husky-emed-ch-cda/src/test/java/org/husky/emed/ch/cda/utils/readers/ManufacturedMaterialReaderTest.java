@@ -34,8 +34,8 @@ class ManufacturedMaterialReaderTest {
     }
 
     @Test
-    void testMissingName() throws Exception {
-        var reader = this.unmarshall("""
+    void testGetName() throws Exception {
+        var reader1 = this.unmarshall("""
                 <code code="7680581330012" codeSystem="2.51.1.1" codeSystemName="GTIN" />
                 <pharm:formCode code="50040500" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Solution/ solution pour pulvérisation buccale/ laryngopharyngée" />
                 <pharm:asContent classCode="CONT">
@@ -46,7 +46,21 @@ class ManufacturedMaterialReaderTest {
                     </pharm:containerPackagedMedicine>
                 </pharm:asContent>""");
 
-        assertThrows(InvalidEmedContentException.class, reader::getName);
+        assertThrows(InvalidEmedContentException.class, reader1::getName);
+
+        var reader2 = this.unmarshall("""
+                <code code="7680581330012" codeSystem="2.51.1.1" codeSystemName="GTIN" />
+                <name> </name>
+                <pharm:formCode code="50040500" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Solution/ solution pour pulvérisation buccale/ laryngopharyngée" />
+                <pharm:asContent classCode="CONT">
+                    <pharm:containerPackagedMedicine classCode="CONT" determinerCode="INSTANCE">
+                        <pharm:code code="7680581330012" codeSystem="2.51.1.1" codeSystemName="GTIN" />
+                        <pharm:name>NEO-ANGIN spray av lidocaïne chlorhexidin 50 ml</pharm:name>
+                        <pharm:capacityQuantity unit="mL" value="50" />
+                    </pharm:containerPackagedMedicine>
+                </pharm:asContent>""");
+
+        assertNull(reader2.getName());
     }
 
     @Test
@@ -77,6 +91,43 @@ class ManufacturedMaterialReaderTest {
                 </pharm:asContent>""");
 
         assertThrows(InvalidEmedContentException.class, reader::getFormCode);
+    }
+
+    @Test
+    void testGetPackageMedicine() throws Exception {
+        var manufacturedMaterialReader = this.unmarshall("""
+                <code code="7680483060499" codeSystem="2.51.1.1" codeSystemName="GTIN" displayName="BACTRIM forte cpr 800/160mg"/>
+                <name>BACTRIM forte cpr 800/160mg</name>
+                <pharm:formCode code="10219000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Tablet" />
+                <pharm:asContent classCode="CONT">
+                    <!-- Missing containerPackageMedicine -->
+                </pharm:asContent>""");
+
+        assertNull(manufacturedMaterialReader.getPackagedMedicine());
+    }
+
+    @Test
+    void testToMedicationProduct() throws Exception {
+        var medicationProduct = this.unmarshall("""
+                <code code="7680555680013" codeSystem="2.51.1.1" codeSystemName="GTIN" displayName="SYMBICORT 100/6 turbuhaler" />
+                <name>SYMBICORT 100/6 turbuhaler</name>
+                <pharm:formCode code="11109000" codeSystem="0.4.0.127.0.16.1.1.2.1" displayName="Inhalation powder" />
+                <pharm:expirationTime value="20221215"/>
+                <pharm:ingredient classCode="ACTI">
+                    <!-- Missing ingredient -->
+                </pharm:ingredient>
+                <pharm:ingredient classCode="ACTI">
+                    <pharm:quantity>
+                        <!-- Missing numerator -->
+                        <!-- Missing denominator -->
+                    </pharm:quantity>
+                    <pharm:ingredient classCode="MMAT" determinerCode="KIND">
+                        <pharm:code code="414289007" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Formoterol (substance)"/>
+                        <pharm:name>Formoterol</pharm:name>
+                    </pharm:ingredient>
+                </pharm:ingredient>""").toMedicationProduct();
+
+        assertEquals(1, medicationProduct.getIngredients().size());
     }
 
     @Test
@@ -112,11 +163,23 @@ class ManufacturedMaterialReaderTest {
                         <pharm:code code="000000000" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Trimethoprim (substance)" />
                         <pharm:name>Trimethoprim</pharm:name>
                     </pharm:ingredient>
+                </pharm:ingredient>
+                <pharm:ingredient classCode="ACTI">
+                    <pharm:quantity>
+                        <numerator xsi:type="PQ" unit="mg" value="800" />
+                        <denominator xsi:type="PQ" unit="732936001" value="1" />
+                    </pharm:quantity>
+                    <pharm:ingredient classCode="MMAT" determinerCode="KIND">
+                        <!-- With a non-existent code system -->
+                        <pharm:code code="386872004" codeSystem="0.00.00.00000.00.00.0" codeSystemName="SNOMED CT" displayName="Ramipril (substance)" />
+                        <pharm:name>Ramipril</pharm:name>
+                    </pharm:ingredient>
                 </pharm:ingredient>""").toMedicationProduct();
 
-        assertEquals(2, medicationProduct.getIngredients().size());
+        assertEquals(3, medicationProduct.getIngredients().size());
         assertNull(medicationProduct.getIngredients().get(0).getCode());
         assertNull(medicationProduct.getIngredients().get(1).getCode());
+        assertNull(medicationProduct.getIngredients().get(2).getCode());
     }
 
     private ManufacturedMaterialReader unmarshall(final String manufacturerMaterial) throws ParserConfigurationException, IOException, SAXException, JAXBException {

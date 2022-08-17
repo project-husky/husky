@@ -487,6 +487,47 @@ class DosageInstructionsReaderTest {
                         </consumable>
                     </substanceAdministration>
                 </entryRelationship>
+                <entryRelationship typeCode="COMP">
+                    <sequenceNumber value="0" />
+                </entryRelationship>
+                """);
+
+        assertThrows(InvalidEmedContentException.class, reader::getDosageInstructions);
+
+        reader = this.unmarshall("""
+                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.9" />
+                <effectiveTime xsi:type="IVL_TS">
+                    <low value="202201101043+0100" />
+                    <high nullFlavor="UNK" />
+                </effectiveTime>
+                <entryRelationship typeCode="COMP">
+                    <sequenceNumber nullFlavor="NA" />
+                    <substanceAdministration moodCode="INT" classCode="SBADM">
+                        <effectiveTime xsi:type="EIVL_TS">
+                            <event code="MORN" />
+                        </effectiveTime>
+                        <doseQuantity unit="{Dose}" value="2.0"/>
+                        <consumable>
+                            <manufacturedProduct>
+                                <manufacturedMaterial nullFlavor="NA" />
+                            </manufacturedProduct>
+                        </consumable>
+                    </substanceAdministration>
+                </entryRelationship>
+                <entryRelationship typeCode="COMP">
+                    <sequenceNumber value="0" />
+                    <substanceAdministration moodCode="INT" classCode="SBADM">
+                        <effectiveTime xsi:type="EIVL_TS">
+                            <event code="NOON" />
+                        </effectiveTime>
+                        <doseQuantity unit="{Dose}" value="1.0"/>
+                        <consumable>
+                            <manufacturedProduct>
+                                <manufacturedMaterial nullFlavor="NA" />
+                            </manufacturedProduct>
+                        </consumable>
+                    </substanceAdministration>
+                </entryRelationship>
                 """);
 
         assertThrows(InvalidEmedContentException.class, reader::getDosageInstructions);
