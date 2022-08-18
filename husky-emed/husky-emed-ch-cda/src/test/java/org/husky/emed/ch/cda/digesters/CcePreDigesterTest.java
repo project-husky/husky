@@ -3,6 +3,7 @@ package org.husky.emed.ch.cda.digesters;
 import org.husky.common.ch.enums.ConfidentialityCode;
 import org.husky.common.enums.AdministrativeGender;
 import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
+import org.husky.common.hl7cdar2.POCDMT000040EntryRelationship;
 import org.husky.common.hl7cdar2.POCDMT000040SubstanceAdministration;
 import org.husky.common.utils.xml.XmlFactories;
 import org.husky.emed.ch.cda.services.EmedEntryDigestService;
@@ -41,7 +42,8 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class CcePreDigesterTest {
 
-    final String DIR_SAMPLES_BY_HAND = "/Samples/ByHand/pre/";
+    final String DIR_SAMPLES_BY_HAND_MTP = "/Samples/ByHand/mtp/valid/";
+    final String DIR_SAMPLES_BY_HAND_PRE = "/Samples/ByHand/pre/";
 
     private final static Class<?> UNMARSHALLED_CLASS = POCDMT000040SubstanceAdministration.class;
     private final Unmarshaller UNMARSHALLER;
@@ -54,15 +56,19 @@ class CcePreDigesterTest {
     @Test
     void testWithoutLoadPreDigester() throws Exception {
         final var digester = new CceDocumentDigester();
-        final var preDocument = this.loadDoc(DIR_SAMPLES_BY_HAND + "valid/PRE_01_valid.xml");
+        final var preDocument = this.loadDoc(DIR_SAMPLES_BY_HAND_PRE + "valid/PRE_01_valid.xml");
 
         assertThrows(NullPointerException.class, () -> digester.digest(preDocument));
     }
 
     @Test
     void testPreDigester1() throws Exception {
-        final var preDocument = this.loadDoc(DIR_SAMPLES_BY_HAND + "valid/PRE_01_valid.xml");
-        final var digester = new CceDocumentDigester(new CcePreDigesterTest.EmedEntryDigestServiceImpl());
+        final var emedEntryDigestServiceImpl = new EmedEntryDigestServiceImpl();
+        final var digester = new CceDocumentDigester(emedEntryDigestServiceImpl);
+
+        emedEntryDigestServiceImpl.addAll(this.getEntryDigests(DIR_SAMPLES_BY_HAND_MTP + "MTP_04_valid.xml", digester));
+
+        final var preDocument = this.loadDoc(DIR_SAMPLES_BY_HAND_PRE + "valid/PRE_01_valid.xml");
         final var digest = digester.digest(preDocument);
 
         assertNotNull(digest);
@@ -70,7 +76,6 @@ class CcePreDigesterTest {
         final var preDigest = (EmedPreDocumentDigest) digest;
 
         // Document
-
         assertEquals("00E00000-0000-0000-0000-000000000001", preDigest.getId().toString().toUpperCase());
         assertEquals("00E00000-0000-0000-0000-000000000001", preDigest.getSetId().toString().toUpperCase());
         assertEquals(1, preDigest.getVersion());
@@ -113,7 +118,7 @@ class CcePreDigesterTest {
         assertEquals(0, preEntryDigest.getSequence());
         assertEquals(preDigest.getId(), preEntryDigest.getDocumentId());
         assertEquals("00E00000-0000-0000-0000-000000000001", preEntryDigest.getEntryId().toString().toUpperCase());
-        assertEquals("00E00000-0000-0000-0000-000000000001", preEntryDigest.getMedicationTreatmentId().toString().toUpperCase());
+        assertEquals("00000000-0000-0000-0000-000000000004", preEntryDigest.getMedicationTreatmentId().toString().toUpperCase());
         assertEquals(EmedEntryType.PRE, preEntryDigest.getEmedEntryType());
         assertEquals(Instant.parse("2022-01-10T11:00:00.00Z"), preEntryDigest.getItemValidityStart());
         assertEquals(Instant.parse("2022-03-10T11:00:00.00Z"), preEntryDigest.getItemValidityStop());
@@ -165,8 +170,12 @@ class CcePreDigesterTest {
 
     @Test
     void testPreDigester2() throws Exception {
-        final var preDocument = this.loadDoc(DIR_SAMPLES_BY_HAND + "valid/PRE_02_valid.xml");
-        final var digester = new CceDocumentDigester(new CcePreDigesterTest.EmedEntryDigestServiceImpl());
+        final var emedEntryDigestServiceImpl = new EmedEntryDigestServiceImpl();
+        final var digester = new CceDocumentDigester(emedEntryDigestServiceImpl);
+
+        emedEntryDigestServiceImpl.addAll(this.getEntryDigests(DIR_SAMPLES_BY_HAND_MTP + "MTP_05_valid.xml", digester));
+
+        final var preDocument = this.loadDoc(DIR_SAMPLES_BY_HAND_PRE + "valid/PRE_02_valid.xml");
         final var digest = digester.digest(preDocument);
 
         assertNotNull(digest);
@@ -218,7 +227,7 @@ class CcePreDigesterTest {
         assertEquals(0, preEntryDigest.getSequence());
         assertEquals(preDigest.getId(), preEntryDigest.getDocumentId());
         assertEquals("00E00000-0000-0000-0000-000000000002", preEntryDigest.getEntryId().toString().toUpperCase());
-        assertEquals("00E00000-0000-0000-0000-000000000002", preEntryDigest.getMedicationTreatmentId().toString().toUpperCase());
+        assertEquals("00000000-0000-0000-0000-000000000005", preEntryDigest.getMedicationTreatmentId().toString().toUpperCase());
         assertEquals(EmedEntryType.PRE, preEntryDigest.getEmedEntryType());
         assertEquals(Instant.parse("2022-01-10T11:00:00.00Z"), preEntryDigest.getItemValidityStart());
         assertEquals(Instant.parse("2022-03-10T11:00:00.00Z"), preEntryDigest.getItemValidityStop());
@@ -269,7 +278,7 @@ class CcePreDigesterTest {
 
     @Test
     void testPreWithoutMtpReference() throws Exception {
-        final var preDocument = this.loadDoc(DIR_SAMPLES_BY_HAND + "valid/PRE_02_valid.xml");
+        final var preDocument = this.loadDoc(DIR_SAMPLES_BY_HAND_PRE + "valid/PRE_02_valid.xml");
         final var digester = new CceDocumentDigester(new CcePreDigesterTest.EmedEntryDigestServiceImpl());
 
         var substanceAdministration = preDocument.getComponent()
@@ -302,7 +311,7 @@ class CcePreDigesterTest {
 
     @Test
     void testPreInvalidDigester1() throws Exception {
-        final var preDocument = this.loadDoc(DIR_SAMPLES_BY_HAND + "invalid/PRE_02_invalid.xml");
+        final var preDocument = this.loadDoc(DIR_SAMPLES_BY_HAND_PRE + "invalid/PRE_02_invalid.xml");
         final var digester = new CceDocumentDigester(new CcePreDigesterTest.EmedEntryDigestServiceImpl());
 
         assertThrows(InvalidEmedContentException.class, () -> digester.digest(preDocument));
@@ -310,7 +319,7 @@ class CcePreDigesterTest {
 
     @Test
     void testPreInvalidDigester2() throws Exception {
-        final var preDocument = this.loadDoc(DIR_SAMPLES_BY_HAND + "invalid/PRE_03_invalid.xml");
+        final var preDocument = this.loadDoc(DIR_SAMPLES_BY_HAND_PRE + "invalid/PRE_03_invalid.xml");
         final var digester = new CceDocumentDigester(new CcePreDigesterTest.EmedEntryDigestServiceImpl());
 
         assertThrows(IllegalArgumentException.class, () -> digester.digest(preDocument));
@@ -318,7 +327,7 @@ class CcePreDigesterTest {
 
     @Test
     void testPreInvalidDigester3() throws Exception {
-        final var preDocument = this.loadDoc(DIR_SAMPLES_BY_HAND + "invalid/PRE_04_invalid.xml");
+        final var preDocument = this.loadDoc(DIR_SAMPLES_BY_HAND_PRE + "invalid/PRE_04_invalid.xml");
         final var digester = new CceDocumentDigester(new EmedEntryDigestServiceImpl());
 
         assertThrows(InvalidEmedContentException.class, () -> digester.digest(preDocument));
@@ -421,6 +430,47 @@ class CcePreDigesterTest {
         assertNotEquals(digest.getSectionAuthor().getFamilyName(), digest.getDocumentAuthor().getFamilyName());
     }
 
+    @Test
+    void testIsProvisional() throws Exception {
+        var entryRelationship = """
+                 <entryRelationship typeCode="REFR">
+                  <substanceAdministration classCode="SBADM" moodCode="PRP">
+                    <templateId root="1.3.6.1.4.1.19376.1.9.1.3.16"/>
+                    <consumable>
+                      <manufacturedProduct>
+                        <manufacturedMaterial nullFlavor="NA"/>
+                      </manufacturedProduct>
+                    </consumable>
+                  </substanceAdministration>
+                 </entryRelationship>""";
+
+        var er = this.unmarshall(entryRelationship).getEntryRelationship().get(0);
+
+        var preDocument = this.loadDoc(DIR_SAMPLES_BY_HAND_PRE + "valid/PRE_01_valid.xml");
+        preDocument.getComponent()
+                .getStructuredBody()
+                .getComponent()
+                .get(0)
+                .getSection()
+                .getEntry()
+                .get(0)
+                .getSubstanceAdministration()
+                .getEntryRelationship()
+                .add(er);
+
+        final var digester = new CceDocumentDigester(new CcePreDigesterTest.EmedEntryDigestServiceImpl());
+        var digest = digester.digest(preDocument);
+
+        assertNotNull(digest);
+        assertInstanceOf(EmedPreDocumentDigest.class, digest);
+        final var preDigest = (EmedPreDocumentDigest) digest;
+        assertEquals(1, preDigest.getPreEntryDigests().size());
+        final var preEntryDigest = preDigest.getPreEntryDigests().get(0);
+        assertNotNull(preEntryDigest);
+
+        assertTrue(preEntryDigest.isProvisional());
+    }
+
     private POCDMT000040ClinicalDocument loadDoc(final String docName) throws SAXException {
         return CceDocumentUnmarshaller.unmarshall(CcePreDigesterTest.class.getResourceAsStream("/CDA-CH-EMED"
                 + docName));
@@ -436,6 +486,11 @@ class CcePreDigesterTest {
 
         final Object root = UNMARSHALLER.unmarshal(document, POCDMT000040SubstanceAdministration.class);
         return (POCDMT000040SubstanceAdministration) JAXBIntrospector.getValue(root);
+    }
+
+    private List<EmedEntryDigest> getEntryDigests(String docPath, CceDocumentDigester digester) throws Exception {
+        final var document = this.loadDoc(docPath);
+        return digester.digest(document).getEntryDigests();
     }
 
     private static class EmedEntryDigestServiceImpl implements EmedEntryDigestService {

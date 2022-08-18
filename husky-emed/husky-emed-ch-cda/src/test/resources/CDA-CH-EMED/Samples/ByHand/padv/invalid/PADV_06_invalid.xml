@@ -117,8 +117,8 @@
                                 <substanceAdministration classCode="SBADM" moodCode="INT">
                                     <templateId root="1.3.6.1.4.1.19376.1.9.1.3.11" />
                                     <templateId root="2.16.756.5.30.1.1.10.4.47" />
-                                    <id root="00E00000-0000-0000-0000-000000000001" />
-                                    <code code="PREItem" codeSystem="1.3.6.1.4.1.19376.1.9.2.2" codeSystemName="IHE Pharmacy Item Type List" displayName="Prescription Item" />
+                                    <id root="00000000-0000-0000-0000-000000000001" />
+                                    <code code="MTPItem" codeSystem="1.3.6.1.4.1.19376.1.9.2.2" codeSystemName="IHE Pharmacy Item Type List" displayName="Medication Treatment Plan Item" />
                                     <consumable>
                                         <manufacturedProduct>
                                             <manufacturedMaterial nullFlavor="NA" />
@@ -126,7 +126,7 @@
                                     </consumable>
                                     <reference typeCode="XCRPT">
                                         <externalDocument>
-                                            <id root="00E00000-0000-0000-0000-000000000001" />
+                                            <id root="00000000-0000-0000-0000-000000000001" />
                                         </externalDocument>
                                     </reference>
                                 </substanceAdministration>

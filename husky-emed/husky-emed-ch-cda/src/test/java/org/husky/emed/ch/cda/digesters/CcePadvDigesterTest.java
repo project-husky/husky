@@ -4,7 +4,6 @@ import org.husky.common.ch.enums.ConfidentialityCode;
 import org.husky.common.enums.AdministrativeGender;
 import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
 import org.husky.common.hl7cdar2.POCDMT000040Observation;
-import org.husky.common.hl7cdar2.POCDMT000040SubstanceAdministration;
 import org.husky.common.utils.xml.XmlFactories;
 import org.husky.emed.ch.cda.services.EmedEntryDigestService;
 import org.husky.emed.ch.cda.xml.CceDocumentUnmarshaller;
@@ -693,13 +692,24 @@ class CcePadvDigesterTest {
     }
 
     @Test
-    void testBadPreRecommanded() throws Exception {
+    void testBadPreRecommended1() throws Exception {
         final var emedEntryDigestServiceImpl = new EmedEntryDigestServiceImpl();
         final var digester = new CceDocumentDigester(emedEntryDigestServiceImpl);
 
         emedEntryDigestServiceImpl.addAll(this.getEntryDigests(DIR_SAMPLES_BY_HAND_PRE + "PRE_01_valid.xml", digester));
 
         final var padvDocument = this.loadDoc(DIR_SAMPLES_BY_HAND_PADV + "invalid/PADV_05_invalid.xml");
+        assertThrows(InvalidEmedContentException.class, () -> digester.digest(padvDocument));
+    }
+
+    @Test
+    void testBadPreRecommended2() throws Exception {
+        final var emedEntryDigestServiceImpl = new EmedEntryDigestServiceImpl();
+        final var digester = new CceDocumentDigester(emedEntryDigestServiceImpl);
+
+        emedEntryDigestServiceImpl.addAll(this.getEntryDigests(DIR_SAMPLES_BY_HAND_MTP + "MTP_01_valid.xml", digester));
+
+        final var padvDocument = this.loadDoc(DIR_SAMPLES_BY_HAND_PADV + "invalid/PADV_06_invalid.xml");
         assertThrows(InvalidEmedContentException.class, () -> digester.digest(padvDocument));
     }
 
