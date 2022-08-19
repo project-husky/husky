@@ -44,6 +44,7 @@ class TemplateIdsTest {
         assertFalse(TemplateIds.isInList("1.2.3.1", List.of(II2)));
         assertFalse(TemplateIds.isInList("1.2.3.1", List.of(II2, II3, II4, II5, II6, II7, II8, II7)));
         assertFalse(TemplateIds.isInList("1.2.3.1", List.of()));
+        assertFalse(TemplateIds.isInList("1.2.3.1", null));
     }
 
     @Test
@@ -61,6 +62,7 @@ class TemplateIdsTest {
         assertFalse(TemplateIds.hasAllIds(List.of("1.2.3.1"), List.of(II2, II3)));
         assertFalse(TemplateIds.hasAllIds(List.of("1.2.3.1", "1.2.3.2"), List.of(II2, II3)));
         assertFalse(TemplateIds.hasAllIds(List.of("1.2.3.1", "1.2.3.2"), List.of(II1, II3)));
+        assertFalse(TemplateIds.hasAllIds(List.of("1.2.3.1", "1.2.3.2"), null));
     }
 
     @Test
@@ -78,6 +80,7 @@ class TemplateIdsTest {
 
         assertFalse(TemplateIds.anyInList(List.of("1.2.3.1"), List.of()));
         assertFalse(TemplateIds.anyInList(List.of("1.2.3.1"), List.of(II2, II3)));
+        assertFalse(TemplateIds.anyInList(List.of("1.2.3.1"), null));
     }
 
     private static II stringToIi(final String oid) {

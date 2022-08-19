@@ -10,7 +10,9 @@
 package org.husky.emed.ch.cda.utils;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.checkerframework.common.returnsreceiver.qual.This;
 import org.husky.common.hl7cdar2.II;
+import org.husky.emed.ch.models.common.QualifiedIdentifier;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
@@ -50,6 +52,7 @@ class IiUtilsTest {
         assertThrows(IllegalArgumentException.class, () -> IiUtils.getUuid(this.createIi("urn:uuid:1fd28ce2-6ac9-4de4" +
                 "-9c3f-50883630d46f", null)));
         assertThrows(IllegalArgumentException.class, () -> IiUtils.getUuid(this.createIi("1.2.3", null)));
+        assertThrows(IllegalArgumentException.class, () -> IiUtils.getUuid(this.createIi(null, "1.2.3")));
     }
 
     @Test
@@ -63,6 +66,24 @@ class IiUtilsTest {
         assertFalse(IiUtils.isValidUuid(this.createIi(null, "1.2.3")));
         assertFalse(IiUtils.isValidUuid(this.createIi("2.16.756.5.30.1.1.10.4.45", "1.2.3")));
         assertFalse(IiUtils.isValidUuid(this.createIi("urn:oid:1.2.3", null)));
+        assertFalse(IiUtils.isValidUuid(this.createIi("1FD28CE26AC94DE49C3F50883630d46F1FD28CE26AC94DE49C3F50883630d46F1FD28CE26AC94DE49C3F50883630d46F1FD28CE26AC94DE49C3F50883630d46F1FD28CE26AC94DE49C3F50883630d46F1FD28CE26AC94DE49C3F50883630d46F", null)));
+    }
+
+    @Test
+    void testGetNormalizedCx() {
+        assertEquals("2.16.756.5.30.1.1.10.4.45^^^&1.2.3&ISO",
+                IiUtils.getNormalizedCx(this.createIi("2.16.756.5.30.1.1.10.4.45", "1.2.3")));
+
+        assertEquals("", IiUtils.getNormalizedCx(this.createIi(null, "1.2.3")));
+    }
+
+    @Test
+    void testFromQualifiedIdentifier() {
+        assertEquals(this.createIi("2.16.756.5.30.1.1.10.4.45", "1.2.3").getRoot(),
+                IiUtils.fromQualifiedIdentifier(new QualifiedIdentifier("1.2.3", "2.16.756.5.30.1.1.10.4.45")).getRoot());
+
+        assertEquals(this.createIi("2.16.756.5.30.1.1.10.4.45", "1.2.3").getExtension(),
+                IiUtils.fromQualifiedIdentifier(new QualifiedIdentifier("1.2.3", "2.16.756.5.30.1.1.10.4.45")).getExtension());
     }
 
     private II createIi(@Nullable final String root,

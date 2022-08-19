@@ -13,6 +13,7 @@ package org.husky.emed.ch.cda.utils.readers;
 import org.husky.common.hl7cdar2.POCDMT000040SubstanceAdministration;
 import org.husky.common.utils.xml.XmlFactories;
 import org.husky.emed.ch.enums.RegularUnitCodeAmbu;
+import org.husky.emed.ch.enums.RouteOfAdministrationAmbu;
 import org.husky.emed.ch.enums.TimingEventAmbu;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.junit.jupiter.api.Test;
@@ -253,6 +254,282 @@ class DosageInstructionsReaderTest {
                 </effectiveTime>
                 <doseQuantity unit="g" value="1" />
                 """);
+        assertThrows(InvalidEmedContentException.class, reader::getDosageInstructions);
+    }
+
+    @Test
+    void testBadDosageInstructionTemplateId() throws Exception {
+
+        final var completeElement = """
+                <substanceAdministration classCode="SBADM" moodCode="INT" xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <templateId root="0.0.0.0.0.0.00000.0.0.0.0.0" />
+                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1" />
+                <effectiveTime xsi:type="IVL_TS">
+                    <low value="202201101200+0100" />
+                    <high value="202203101200+0100" />
+                </effectiveTime>
+                <effectiveTime xsi:type="EIVL_TS" operator="A">
+                    <event code="MORN" />
+                </effectiveTime>
+                <doseQuantity unit="mg" value="0.5" />
+                </substanceAdministration>""";
+
+        final var document =
+                XmlFactories.newSafeDocumentBuilder().parse(new InputSource(new StringReader(completeElement)));
+
+        final Object root = UNMARSHALLER.unmarshal(document, POCDMT000040SubstanceAdministration.class);
+        final var substanceAdministration = (POCDMT000040SubstanceAdministration) JAXBIntrospector.getValue(root);
+
+        assertThrows(InvalidEmedContentException.class, () -> new DosageInstructionsReader(substanceAdministration));
+    }
+
+    @Test
+    void testGetDoseQuantity() throws Exception {
+        final var reader = this.unmarshall("""
+                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1" />
+                <effectiveTime xsi:type="IVL_TS">
+                    <low value="202201101200+0100" />
+                    <high value="202203101200+0100" />
+                </effectiveTime>
+                <effectiveTime xsi:type="EIVL_TS" operator="A">
+                    <event code="MORN" />
+                </effectiveTime>
+                <doseQuantity unit="mg" value="0.5" />""");
+
+        assertTrue(reader.getDoseQuantity().isPresent());
+        assertEquals(RegularUnitCodeAmbu.MG, reader.getDoseQuantity().get().getUnit());
+        assertEquals("0.5", reader.getDoseQuantity().get().getValue());
+    }
+
+    @Test
+    void testMissingRelatedComponentInSplitRegime() throws Exception {
+        var reader = this.unmarshall("""
+                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.9" />
+                <effectiveTime xsi:type="IVL_TS">
+                    <low value="202201101043+0100" />
+                    <high nullFlavor="UNK" />
+                </effectiveTime>""");
+
+        assertThrows(InvalidEmedContentException.class, reader::getDosageInstructions);
+    }
+
+    @Test
+    void testTimingEventsInSplitRegime() throws Exception  {
+        var reader = this.unmarshall("""
+                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.9" />
+                <effectiveTime xsi:type="SXPR_TS" operator="A">
+                    <comp xsi:type="EIVL_TS">
+                        <event code="MORN"/>
+                    </comp>
+                    <comp xsi:type="EIVL_TS" operator="I">
+                        <event code="NOON"/>
+                    </comp>
+                </effectiveTime>
+                <entryRelationship typeCode="COMP">
+                    <sequenceNumber value="1" />
+                    <substanceAdministration moodCode="INT" classCode="SBADM">
+                        <effectiveTime xsi:type="EIVL_TS">
+                            <event code="MORN" />
+                        </effectiveTime>
+                        <doseQuantity unit="{Dose}" value="2.0"/>
+                        <consumable>
+                            <manufacturedProduct>
+                                <manufacturedMaterial nullFlavor="NA" />
+                            </manufacturedProduct>
+                        </consumable>
+                    </substanceAdministration>
+                </entryRelationship>
+                <entryRelationship typeCode="COMP">
+                    <sequenceNumber value="2" />
+                    <substanceAdministration moodCode="INT" classCode="SBADM">
+                        <effectiveTime xsi:type="EIVL_TS">
+                            <event code="NOON" />
+                        </effectiveTime>
+                        <doseQuantity unit="{Dose}" value="1.0"/>
+                        <consumable>
+                            <manufacturedProduct>
+                                <manufacturedMaterial nullFlavor="NA" />
+                            </manufacturedProduct>
+                        </consumable>
+                    </substanceAdministration>
+                </entryRelationship>""");
+
+        assertThrows(InvalidEmedContentException.class, reader::getDosageInstructions);
+    }
+
+    @Test
+    void testDosageTypeFromBadTemplateIds() {
+        assertThrows(InvalidEmedContentException.class, () -> this.unmarshall("""
+                <templateId root="0.0.0.0.0.0.00000.0.0.0.0.0.0.0" />
+                <effectiveTime xsi:type="IVL_TS">
+                    <low value="202201101200+0100" />
+                    <high value="202203101200+0100" />
+                </effectiveTime>
+                <effectiveTime xsi:type="EIVL_TS" operator="A">
+                    <event code="MORN" />
+                </effectiveTime>
+                <doseQuantity unit="mg" value="0.5" />"""));
+    }
+
+    @Test
+    void testGetSubordinateIntakeWithoutTimingEvent() throws Exception {
+        var reader = this.unmarshall("""
+                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.9" />
+                <effectiveTime xsi:type="IVL_TS">
+                    <low value="202201101043+0100" />
+                    <high nullFlavor="UNK" />
+                </effectiveTime>
+                <entryRelationship typeCode="COMP">
+                    <sequenceNumber value="1" />
+                    <substanceAdministration moodCode="INT" classCode="SBADM">
+                        <effectiveTime xsi:type="EIVL_TS">
+                            <event code="MORN" />
+                        </effectiveTime>
+                        <doseQuantity unit="{Dose}" value="2.0"/>
+                        <consumable>
+                            <manufacturedProduct>
+                                <manufacturedMaterial nullFlavor="NA" />
+                            </manufacturedProduct>
+                        </consumable>
+                    </substanceAdministration>
+                </entryRelationship>
+                <entryRelationship typeCode="COMP">
+                    <sequenceNumber value="2" />
+                    <substanceAdministration moodCode="INT" classCode="SBADM">
+                        <!-- Missing timing event -->
+                        <doseQuantity unit="{Dose}" value="1.0"/>
+                        <consumable>
+                            <manufacturedProduct>
+                                <manufacturedMaterial nullFlavor="NA" />
+                            </manufacturedProduct>
+                        </consumable>
+                    </substanceAdministration>
+                </entryRelationship>
+                """);
+
+        assertThrows(InvalidEmedContentException.class, reader::getDosageInstructions);
+    }
+
+    @Test
+    void testGetSubordinateIntakeWithoutDoseQuantity() throws Exception {
+        var reader = this.unmarshall("""
+                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.9" />
+                <effectiveTime xsi:type="IVL_TS">
+                    <low value="202201101043+0100" />
+                    <high nullFlavor="UNK" />
+                </effectiveTime>
+                <entryRelationship typeCode="COMP">
+                    <sequenceNumber value="1" />
+                    <substanceAdministration moodCode="INT" classCode="SBADM">
+                        <effectiveTime xsi:type="EIVL_TS">
+                            <event code="MORN" />
+                        </effectiveTime>
+                        <doseQuantity unit="{Dose}" value="2.0"/>
+                        <consumable>
+                            <manufacturedProduct>
+                                <manufacturedMaterial nullFlavor="NA" />
+                            </manufacturedProduct>
+                        </consumable>
+                    </substanceAdministration>
+                </entryRelationship>
+                <entryRelationship typeCode="COMP">
+                    <sequenceNumber value="2" />
+                    <substanceAdministration moodCode="INT" classCode="SBADM">
+                        <effectiveTime xsi:type="EIVL_TS">
+                            <event code="EVE" />
+                        </effectiveTime>
+                        <!-- Missing dose quantity -->
+                        <consumable>
+                            <manufacturedProduct>
+                                <manufacturedMaterial nullFlavor="NA" />
+                            </manufacturedProduct>
+                        </consumable>
+                    </substanceAdministration>
+                </entryRelationship>
+                """);
+
+        assertThrows(InvalidEmedContentException.class, reader::getDosageInstructions);
+    }
+
+    @Test
+    void testGetRelatedComponentsWithBadSequenceNumber() throws Exception {
+        var reader = this.unmarshall("""
+                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.9" />
+                <effectiveTime xsi:type="IVL_TS">
+                    <low value="202201101043+0100" />
+                    <high nullFlavor="UNK" />
+                </effectiveTime>
+                <entryRelationship typeCode="COMP">
+                    <sequenceNumber value="1" />
+                    <substanceAdministration moodCode="INT" classCode="SBADM">
+                        <effectiveTime xsi:type="EIVL_TS">
+                            <event code="MORN" />
+                        </effectiveTime>
+                        <doseQuantity unit="{Dose}" value="2.0"/>
+                        <consumable>
+                            <manufacturedProduct>
+                                <manufacturedMaterial nullFlavor="NA" />
+                            </manufacturedProduct>
+                        </consumable>
+                    </substanceAdministration>
+                </entryRelationship>
+                <entryRelationship typeCode="COMP">
+                    <sequenceNumber value="0" />
+                    <substanceAdministration moodCode="INT" classCode="SBADM">
+                        <effectiveTime xsi:type="EIVL_TS">
+                            <event code="NOON" />
+                        </effectiveTime>
+                        <doseQuantity unit="{Dose}" value="1.0"/>
+                        <consumable>
+                            <manufacturedProduct>
+                                <manufacturedMaterial nullFlavor="NA" />
+                            </manufacturedProduct>
+                        </consumable>
+                    </substanceAdministration>
+                </entryRelationship>
+                <entryRelationship typeCode="COMP">
+                    <sequenceNumber value="0" />
+                </entryRelationship>
+                """);
+
+        assertThrows(InvalidEmedContentException.class, reader::getDosageInstructions);
+
+        reader = this.unmarshall("""
+                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.9" />
+                <effectiveTime xsi:type="IVL_TS">
+                    <low value="202201101043+0100" />
+                    <high nullFlavor="UNK" />
+                </effectiveTime>
+                <entryRelationship typeCode="COMP">
+                    <sequenceNumber nullFlavor="NA" />
+                    <substanceAdministration moodCode="INT" classCode="SBADM">
+                        <effectiveTime xsi:type="EIVL_TS">
+                            <event code="MORN" />
+                        </effectiveTime>
+                        <doseQuantity unit="{Dose}" value="2.0"/>
+                        <consumable>
+                            <manufacturedProduct>
+                                <manufacturedMaterial nullFlavor="NA" />
+                            </manufacturedProduct>
+                        </consumable>
+                    </substanceAdministration>
+                </entryRelationship>
+                <entryRelationship typeCode="COMP">
+                    <sequenceNumber value="0" />
+                    <substanceAdministration moodCode="INT" classCode="SBADM">
+                        <effectiveTime xsi:type="EIVL_TS">
+                            <event code="NOON" />
+                        </effectiveTime>
+                        <doseQuantity unit="{Dose}" value="1.0"/>
+                        <consumable>
+                            <manufacturedProduct>
+                                <manufacturedMaterial nullFlavor="NA" />
+                            </manufacturedProduct>
+                        </consumable>
+                    </substanceAdministration>
+                </entryRelationship>
+                """);
+
         assertThrows(InvalidEmedContentException.class, reader::getDosageInstructions);
     }
 
