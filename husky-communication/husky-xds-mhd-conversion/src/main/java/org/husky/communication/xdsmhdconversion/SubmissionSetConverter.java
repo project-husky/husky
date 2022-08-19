@@ -10,10 +10,11 @@
  */
 package org.husky.communication.xdsmhdconversion;
 
+import org.hl7.fhir.r4.model.ListResource;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
 
 /**
- * A converter between IHE's SubmissionSet and the equivalent MHD resource.
+ * A converter between XDS' SubmissionSet and the equivalent MHD resource.
  *
  * @author Quentin Ligier
  * @see <a href="https://ihe.github.io/publications/ITI/TF/Volume3/ch-4.2.html#4.2.3.3">SubmissionSet Attributes</a>
@@ -27,9 +28,24 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
 public class SubmissionSetConverter {
 
     /**
-     * Convert an MHD List to an IHE SubmissionSet.
+     * Convert an MHD List to an XDS SubmissionSet.
+     *
+     * @param list The MHD list to convert.
+     * @return the equivalent XDS SubmissionSet.
      */
     public SubmissionSet convertList(final ListResource list) {
+        // TODO: list contient un submission set et peut contenir d'autres resources qui ne sont pas utiles
+        return null;
+    }
+
+    /**
+     * Convert an XDS SubmissionSet to an MHD list.
+     *
+     * @param submissionSet The XDS SubmissionSet to convert.
+     * @param list          The MHD list in which to put the created resources.
+     */
+    public void convertSubmissionSet(final SubmissionSet submissionSet,
+                                     final ListResource list) {
 
     }
 }
