@@ -23,6 +23,7 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -54,8 +55,8 @@ class CceDocumentDigesterTest {
         final var mtpDoc = TestUtils.loadCdaChEmedResource("CDA-CH-EMED/eHealthSuisse/v1.0/1-1-MedicationTreatmentPlan.xml");
         final var digest = (EmedMtpDocumentDigest) this.digester.digest(mtpDoc);
 
-        assertEquals("c9f758a1-296c-4710-84d4-e181db8c7478", digest.getId());
-        assertEquals("c9f758a1-296c-4710-84d4-e181db8c7478", digest.getSetId());
+        assertEquals("c9f758a1-296c-4710-84d4-e181db8c7478", digest.getId().toString());
+        assertEquals("c9f758a1-296c-4710-84d4-e181db8c7478", digest.getSetId().toString());
         assertEquals(1, digest.getVersion());
         assertEquals("de-CH", digest.getLanguageCode());
         assertEquals(ConfidentialityCode.NORMALLY_ACCESSIBLE, digest.getConfidentialityCode());
@@ -76,17 +77,12 @@ class CceDocumentDigesterTest {
         private final List<EmedEntryDigest> digests = new ArrayList<>();
 
         @Override
-        public Optional<EmedEntryDigest> getById(String entryId) {
-            return this.digests.stream().filter(digest -> digest.getEntryId().equalsIgnoreCase(entryId)).findAny();
+        public Optional<EmedEntryDigest> getById(UUID entryId) {
+            return this.digests.stream().filter(digest -> digest.getEntryId().equals(entryId)).findAny();
         }
 
         @Override
-        public Optional<EmedEntryDigest> getByDocument(String documentUniqueId) {
-            return this.digests.stream().filter(digest -> digest.getDocumentId().equalsIgnoreCase(documentUniqueId)).findAny();
-        }
-
-        @Override
-        public long getSequence(String medicationTreatmentId, Instant creationTime) {
+        public int getSequence(UUID medicationTreatmentId, Instant creationTime) {
             return 0;
         }
 

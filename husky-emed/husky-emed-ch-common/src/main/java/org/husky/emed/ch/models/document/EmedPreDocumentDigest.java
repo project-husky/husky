@@ -10,6 +10,7 @@
 package org.husky.emed.ch.models.document;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.ch.enums.ConfidentialityCode;
 import org.husky.common.hl7cdar2.StrucDocText;
 import org.husky.emed.ch.enums.CceDocumentType;
@@ -22,9 +23,7 @@ import org.husky.emed.ch.models.entry.EmedPreEntryDigest;
 
 import java.time.Instant;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Represents the digest of a PRE Emed document.
@@ -39,14 +38,15 @@ public class EmedPreDocumentDigest extends EmedDocumentDigest {
     final Instant prescriptionValidityStart;
 
     /**
-     * The prescription validity stop time (inclusive).
+     * The prescription validity stop time (inclusive) or {@code null}.
      */
+    @Nullable
     final Instant prescriptionValidityStop;
 
     /**
      * The PRE entries contained in the document.
      */
-    private final List<@NonNull EmedPreEntryDigest> preEntryDigests = new ArrayList<>();
+    private final List<@NonNull EmedPreEntryDigest> preEntryDigests = new ArrayList<>(0);
 
     /**
      * Constructor.
@@ -65,10 +65,10 @@ public class EmedPreDocumentDigest extends EmedDocumentDigest {
      * @param narrativeText             The narrative text.
      * @param preEntryDigests           The PRE entry digests.
      * @param prescriptionValidityStart The prescription validity start time (inclusive).
-     * @param prescriptionValidityStop  The prescription validity stop time (inclusive).
+     * @param prescriptionValidityStop  The prescription validity stop time (inclusive) or {@code null}.
      */
-    public EmedPreDocumentDigest(final String id,
-                                 final String setId,
+    public EmedPreDocumentDigest(final UUID id,
+                                 final UUID setId,
                                  final int version,
                                  final OffsetDateTime creationTime,
                                  final Instant documentationTime,
@@ -81,12 +81,12 @@ public class EmedPreDocumentDigest extends EmedDocumentDigest {
                                  final StrucDocText narrativeText,
                                  final List<@NonNull EmedPreEntryDigest> preEntryDigests,
                                  final Instant prescriptionValidityStart,
-                                 final Instant prescriptionValidityStop) {
+                                 @Nullable final Instant prescriptionValidityStop) {
         super(id, setId, version, creationTime, documentationTime, confidentialityCode, languageCode, patient, authors,
                 custodian, recipients, narrativeText);
         this.preEntryDigests.addAll(Objects.requireNonNull(preEntryDigests));
         this.prescriptionValidityStart = Objects.requireNonNull(prescriptionValidityStart);
-        this.prescriptionValidityStop = Objects.requireNonNull(prescriptionValidityStop);
+        this.prescriptionValidityStop = prescriptionValidityStop;
     }
 
     /**
@@ -106,6 +106,7 @@ public class EmedPreDocumentDigest extends EmedDocumentDigest {
     /**
      * Returns the prescription validity stop time (inclusive).
      */
+    @Nullable
     public Instant getPrescriptionValidityStop() {
         return this.prescriptionValidityStop;
     }
@@ -124,9 +125,41 @@ public class EmedPreDocumentDigest extends EmedDocumentDigest {
         return new ArrayList<>(this.preEntryDigests);
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof final EmedPreDocumentDigest that)) return false;
+        if (!super.equals(o)) return false;
+        return Objects.equals(prescriptionValidityStart, that.prescriptionValidityStart)
+                && Objects.equals(prescriptionValidityStop, that.prescriptionValidityStop)
+                && Objects.equals(preEntryDigests, that.preEntryDigests);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), prescriptionValidityStart, prescriptionValidityStop, preEntryDigests);
+    }
+
+    @Override
     public String toString() {
-        return "EmedPreDocumentDigest(super=" + super.toString() + ", preEntryDigests=" + this.getPreEntryDigests() +
-                ", prescriptionValidityStart=" + this.getPrescriptionValidityStart() + ", prescriptionValidityStop=" +
-                this.getPrescriptionValidityStop() + ")";
+        return "EmedPreDocumentDigest{" +
+                "authors=" + this.authors +
+                ", recipients=" + this.recipients +
+                ", id='" + this.id + '\'' +
+                ", setId='" + this.setId + '\'' +
+                ", version=" + this.version +
+                ", creationTime=" + this.creationTime +
+                ", documentationTime=" + this.documentationTime +
+                ", confidentialityCode=" + this.confidentialityCode +
+                ", languageCode='" + this.languageCode + '\'' +
+                ", patient=" + this.patient +
+                ", custodian=" + this.custodian +
+                ", narrativeText=" + this.narrativeText +
+                ", remarks=" + this.remarks +
+                ", pdfRepresentation=" + Arrays.toString(this.pdfRepresentation) +
+                ", prescriptionValidityStart=" + this.prescriptionValidityStart +
+                ", prescriptionValidityStop=" + this.prescriptionValidityStop +
+                ", preEntryDigests=" + this.preEntryDigests +
+                '}';
     }
 }

@@ -16,5 +16,5 @@ package org.husky.emed.ch.enums;
  */
 public enum PrescriptionStatus {
 
-    PROVISIONAL, SUBMITTED, ACTIVE, SUSPENDED, CANCELED, REFUSED;
+    SUBMITTED, PROVISIONAL, ACTIVE, SUSPENDED, CANCELED, REFUSED
 }

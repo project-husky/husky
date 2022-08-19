@@ -18,11 +18,11 @@ import org.husky.emed.ch.cda.narrative.enums.NarrativeLanguage;
 import org.husky.emed.ch.cda.narrative.pdf.HtmlToPdfAConverter;
 import org.husky.emed.ch.cda.narrative.pdf.OpenHtmlToPdfAConverter;
 import org.husky.emed.ch.cda.narrative.utils.NarrativeUtils;
-import org.husky.emed.ch.enums.ChEmedTimingEvent;
+import org.husky.emed.ch.enums.TimingEventAmbu;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.MedicationDosageInstructions;
 import org.husky.emed.ch.models.common.MedicationDosageIntake;
-import org.husky.emed.ch.models.common.QuantityWithUnitCode;
+import org.husky.emed.ch.models.common.QuantityWithRegularUnit;
 import org.husky.emed.ch.models.document.EmedPmlcDocumentDigest;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -339,12 +339,12 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
         }
         final var cells = new ArrayList<Element>(5);
 
-        final Function<ChEmedTimingEvent, QuantityWithUnitCode> findIntake = event -> dosageInstructions.getIntakes().stream()
+        final Function<TimingEventAmbu, QuantityWithRegularUnit> findIntake = event -> dosageInstructions.getIntakes().stream()
                 .filter(intake -> event.equals(intake.getEventTiming()))
                 .findAny()
                 .map(MedicationDosageIntake::getDoseQuantity)
                 .orElse(null);
-        final Consumer<QuantityWithUnitCode> displayQuantity = quantity -> {
+        final Consumer<QuantityWithRegularUnit> displayQuantity = quantity -> {
             if (quantity == null) {
                 cells.add(narDom.td(null, null));
             } else {
@@ -354,10 +354,10 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
                 ), null));
             }
         };
-        displayQuantity.accept(findIntake.apply(ChEmedTimingEvent.MORNING));
-        displayQuantity.accept(findIntake.apply(ChEmedTimingEvent.AFTERNOON));
-        displayQuantity.accept(findIntake.apply(ChEmedTimingEvent.EVENING));
-        displayQuantity.accept(findIntake.apply(ChEmedTimingEvent.NIGHT));
+        displayQuantity.accept(findIntake.apply(TimingEventAmbu.MORNING));
+        displayQuantity.accept(findIntake.apply(TimingEventAmbu.NOON));
+        displayQuantity.accept(findIntake.apply(TimingEventAmbu.EVENING));
+        displayQuantity.accept(findIntake.apply(TimingEventAmbu.NIGHT));
         cells.add(narDom.td(null, null));
         return cells;
     }

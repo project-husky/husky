@@ -8,9 +8,8 @@ import com.helger.schematron.xslt.SchematronResourceXSLT;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import javax.annotation.concurrent.NotThreadSafe;
+import javax.xml.transform.Source;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.stream.StreamSource;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.util.Arrays;
 
@@ -77,7 +76,7 @@ public class SchematronValidator {
      *
      * @param schematronFile The Schematron file.
      * @return the constructed Schematron validator.
-     * @throws TransformerException if the Schematron content transformation fails.
+     * @throws TransformerException     if the Schematron content transformation fails.
      * @throws IllegalArgumentException if the Schematron resource is invalid.
      */
     public static SchematronValidator fromSchematronFile(final File schematronFile) throws TransformerException {
@@ -93,7 +92,7 @@ public class SchematronValidator {
      *
      * @param schematronContent The Schematron content.
      * @return the constructed Schematron validator.
-     * @throws TransformerException if the Schematron content transformation fails.
+     * @throws TransformerException     if the Schematron content transformation fails.
      * @throws IllegalArgumentException if the Schematron resource is invalid.
      */
     public static SchematronValidator fromSchematronContent(final byte[] schematronContent) throws TransformerException {
@@ -104,13 +103,14 @@ public class SchematronValidator {
     /**
      * Performs the Schematron validation of an XML content.
      *
-     * @param streamSource The source of the XML content to validate.
+     * @param source The source of the XML content to validate. You can use {@link org.husky.common.utils.Sources} to
+     *               convert different objects to {@link Source}s.
      * @return the SVRL object containing the result. May be {@code null} when interpreting the Schematron failed.
      * @throws Exception in case the transformation somehow goes wrong.
      */
     @Nullable
-    public SchematronReport validate(final StreamSource streamSource) throws Exception {
-        final var result = this.validator.applySchematronValidationToSVRL(streamSource);
+    public SchematronReport validate(final Source source) throws Exception {
+        final var result = this.validator.applySchematronValidationToSVRL(source);
         if (result == null) {
             return null;
         } else {
@@ -118,29 +118,5 @@ public class SchematronValidator {
             result.cloneTo(ret);
             return ret;
         }
-    }
-
-    /**
-     * Performs the Schematron validation of an XML content.
-     *
-     * @param xmlContent The XML content to validate.
-     * @return the SVRL object containing the result. May be {@code null} when interpreting the Schematron failed.
-     * @throws Exception in case the transformation somehow goes wrong.
-     */
-    @Nullable
-    public SchematronReport validate(final byte[] xmlContent) throws Exception {
-        return this.validate(new StreamSource(new ByteArrayInputStream(xmlContent)));
-    }
-
-    /**
-     * Performs the Schematron validation of an XML file.
-     *
-     * @param xmlFile The XML file to validate.
-     * @return the SVRL object containing the result. May be {@code null} when interpreting the Schematron failed.
-     * @throws Exception in case the transformation somehow goes wrong.
-     */
-    @Nullable
-    public SchematronReport validate(final File xmlFile) throws Exception {
-        return this.validate(new StreamSource(xmlFile));
     }
 }

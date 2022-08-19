@@ -9,14 +9,15 @@
  */
 package org.husky.emed.ch.cda.utils;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.husky.common.hl7cdar2.II;
 import org.husky.common.utils.datatypes.Hl7v25;
 import org.husky.common.utils.datatypes.Oids;
 import org.husky.common.utils.datatypes.Uuids;
-import org.husky.common.hl7cdar2.II;
+import org.husky.emed.ch.models.common.QualifiedIdentifier;
 
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Helpers for identifiers.
@@ -56,9 +57,9 @@ public class IiUtils {
         if (ii.getExtension() != null && ii.getExtension().length() > MAX_EXTENSION_LENGTH) {
             return false;
         }
-        if (Uuids.PATTERN.matcher(ii.getRoot()).matches() || Uuids.PATTERN_WITH_URN.matcher(ii.getRoot()).matches()) {
+        if (Uuids.PATTERN.matcher(ii.getRoot()).matches()) {
             return ii.getExtension() == null;
-        } else if (Oids.PATTERN.matcher(ii.getRoot()).matches() || Oids.PATTERN_WITH_URN.matcher(ii.getRoot()).matches()) {
+        } else if (Oids.PATTERN.matcher(ii.getRoot()).matches()) {
             return true;
         } else {
             return false;
@@ -66,26 +67,20 @@ public class IiUtils {
     }
 
     /**
-     * Normalizes an UID. The {@link II} instance should have been validated before.
+     * Extracts a UUID. The {@link II} instance should have been validated before.
      *
-     * @param ii The validated identifier to normalizes.
-     * @return the normalized UID identifier.
+     * @param ii The validated identifier.
+     * @return the UUID identifier.
      */
-    public static String getNormalizedUid(final II ii) {
+    public static UUID getUuid(final II ii) {
         Objects.requireNonNull(ii);
         if (ii.getRoot() == null) {
-            return "";
+            throw new IllegalArgumentException("The given II doesn't contain an II");
         }
-        if (Uuids.PATTERN.matcher(ii.getRoot()).matches() || Uuids.PATTERN_WITH_URN.matcher(ii.getRoot()).matches()) {
-            return Uuids.normalize(ii.getRoot());
-        } else {
-            final String oid = Oids.normalize(ii.getRoot());
-            if (ii.getExtension() != null) {
-                return oid + "^" + ii.getExtension();
-            } else {
-                return oid;
-            }
+        if (Uuids.PATTERN.matcher(ii.getRoot()).matches()) {
+            return UUID.fromString(Uuids.normalize(ii.getRoot()));
         }
+        throw new IllegalArgumentException("The given II doesn't contain an II");
     }
 
     /**
@@ -96,22 +91,7 @@ public class IiUtils {
      */
     public static boolean isValidUuid(@Nullable final II ii) {
         return ii != null && ii.getRoot() != null && ii.getRoot().length() <= MAX_ROOT_LENGTH
-                && ii.getExtension() == null &&
-                (Uuids.PATTERN.matcher(ii.getRoot()).matches() || Uuids.PATTERN_WITH_URN.matcher(ii.getRoot()).matches());
-    }
-
-    /**
-     * Normalizes an UUID.
-     *
-     * @param ii The validated identifier to normalizes.
-     * @return the normalized UUID identifier.
-     */
-    public static String getNormalizedUuid(final II ii) {
-        Objects.requireNonNull(ii);
-        if (ii.getRoot() == null) {
-            return "";
-        }
-        return Uuids.normalize(ii.getRoot());
+                && ii.getExtension() == null && Uuids.PATTERN.matcher(ii.getRoot()).matches();
     }
 
     /**
@@ -130,5 +110,28 @@ public class IiUtils {
                 Hl7v25.encodeSt(ii.getRoot()),
                 ii.getExtension()
         );
+    }
+
+    /**
+     * Transforms an HL7 II instance into a qualified identifier.
+     *
+     * @param ii The identifier to transform.
+     * @return the qualified identifier.
+     */
+    public static QualifiedIdentifier toQualifiedIdentifier(final II ii) {
+        return new QualifiedIdentifier(
+                ii.getExtension(),
+                ii.getRoot()
+        );
+    }
+
+    /**
+     * Transforms a qualified identifier into an HL7 II.
+     *
+     * @param qualifiedIdentifier The qualified identifier to transform.
+     * @return the HL7 II instance.
+     */
+    public static II fromQualifiedIdentifier(final QualifiedIdentifier qualifiedIdentifier) {
+        return new II(qualifiedIdentifier.getAssigningAuthority(), qualifiedIdentifier.getIdentifier());
     }
 }

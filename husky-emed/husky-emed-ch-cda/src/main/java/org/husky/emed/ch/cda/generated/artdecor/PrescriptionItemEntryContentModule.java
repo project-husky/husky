@@ -27,7 +27,7 @@ import org.husky.common.hl7cdar2.SXCMTS;
  * Version: 2021<br>
  * Status: draft
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
 public class PrescriptionItemEntryContentModule extends POCDMT000040SubstanceAdministration {
 
     public PrescriptionItemEntryContentModule() {
@@ -35,6 +35,7 @@ public class PrescriptionItemEntryContentModule extends POCDMT000040SubstanceAdm
         super.setMoodCode(org.husky.common.hl7cdar2.XDocumentSubstanceMood.INT);
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.43"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.2"));
+        super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.6"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.24"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.7"));
         super.setStatusCode(createHl7StatusCodeFixedValue("completed"));
@@ -164,14 +165,6 @@ public class PrescriptionItemEntryContentModule extends POCDMT000040SubstanceAdm
     }
 
     /**
-     * Gets the hl7Author<br/>
-     * Prescriber
-     */
-    public List<org.husky.common.hl7cdar2.POCDMT000040Author> getHl7Author() {
-        return author;
-    }
-
-    /**
      * Gets the hl7Consumable
      */
     public org.husky.common.hl7cdar2.POCDMT000040Consumable getHl7Consumable() {
@@ -226,7 +219,7 @@ public class PrescriptionItemEntryContentModule extends POCDMT000040SubstanceAdm
 
     /**
      * Gets the hl7RepeatNumber<br/>
-     * Number of repeats/refills. Either the {@literal @}value or {@literal @}nullFlavor attribute shall be set. It's required in MTP, PRE and PADV items ; forbidden in DIS items.
+     * Number of repeats/refills. Either the {@literal @}value or {@literal @}nullFlavor attribute shall be set. It's required in MTP, PRE and PADV (changed MTP, changed/recommended PRE) items ; forbidden in DIS and PADV (changed dosage instructions) items.
      */
     public org.husky.common.hl7cdar2.IVLINT getHl7RepeatNumber() {
         return repeatNumber;
@@ -363,15 +356,6 @@ public class PrescriptionItemEntryContentModule extends POCDMT000040SubstanceAdm
     }
 
     /**
-     * Sets the hl7Author<br/>
-     * Prescriber
-     */
-    public void setHl7Author(org.husky.common.hl7cdar2.POCDMT000040Author value) {
-        getAuthor().clear();
-        getAuthor().add(value);
-    }
-
-    /**
      * Sets the hl7Consumable
      */
     public void setHl7Consumable(org.husky.common.hl7cdar2.POCDMT000040Consumable value) {
@@ -448,7 +432,7 @@ public class PrescriptionItemEntryContentModule extends POCDMT000040SubstanceAdm
 
     /**
      * Sets the hl7RepeatNumber<br/>
-     * Number of repeats/refills. Either the {@literal @}value or {@literal @}nullFlavor attribute shall be set. It's required in MTP, PRE and PADV items ; forbidden in DIS items.
+     * Number of repeats/refills. Either the {@literal @}value or {@literal @}nullFlavor attribute shall be set. It's required in MTP, PRE and PADV (changed MTP, changed/recommended PRE) items ; forbidden in DIS and PADV (changed dosage instructions) items.
      */
     public void setHl7RepeatNumber(org.husky.common.hl7cdar2.IVLINT value) {
         this.repeatNumber = value;

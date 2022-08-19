@@ -13,15 +13,14 @@ import lombok.Getter;
 import lombok.Setter;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.ch.enums.EmedEntryType;
-import org.husky.emed.ch.enums.RouteOfAdministrationEdqm;
-import org.husky.emed.ch.models.common.AuthorDigest;
-import org.husky.emed.ch.models.common.EmedReference;
-import org.husky.emed.ch.models.common.MedicationDosageInstructions;
-import org.husky.emed.ch.models.common.RenewalInterval;
+import org.husky.emed.ch.enums.RouteOfAdministrationAmbu;
+import org.husky.emed.ch.errors.InvalidEmedContentException;
+import org.husky.emed.ch.models.common.*;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
 
 import java.time.Instant;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Represents the digest of an eMed PRE document item entry.
@@ -44,12 +43,17 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
     private String fulfilmentInstructions;
 
     /**
-     * The inclusive instant at which the initial treatment shall start.
+     * Whether the treatment is to be taken regularly ({@code false}) or only if required ({@code true}).
+     */
+    private boolean inReserve;
+
+    /**
+     * The inclusive instant after which the first full dispense shall happen.
      */
     private Instant itemValidityStart;
 
     /**
-     * The inclusive instant at which the initial treatment shall stop or {@code null} if it's not bounded.
+     * The inclusive instant before which the first full dispense shall happen.
      */
     @Nullable
     private Instant itemValidityStop;
@@ -88,6 +92,12 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
     private boolean provisional;
 
     /**
+     * The quantity to dispense or {@code null} if it isn't provided.
+     */
+    @Nullable
+    private String quantityToDispense;
+
+    /**
      * The renewal period or {@code null}. If it's not specified, the renewal period is the prescription validity
      * period. If the lower bound is not specified, the period starts at the first dispense.
      */
@@ -105,7 +115,7 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
      * The medication route of administration, or {@code null} if it's not specified.
      */
     @Nullable
-    private RouteOfAdministrationEdqm routeOfAdministration;
+    private RouteOfAdministrationAmbu routeOfAdministration;
 
     /**
      * Whether the substitution is permitted (Equivalent) or not (None).
@@ -140,10 +150,11 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
      * @param routeOfAdministration             The medication route of administration or {@code null} if it's not
      *                                          specified.
      * @param prescriptionDocumentValidityStart The inclusive instant at which the prescription shall start.
-     * @param prescriptionDocumentValidityStop  The inclusive instant at which the prescription shall stop or {@code
-     *                                          null} if it's not bounded.
-     * @param itemValidityStart                 The inclusive instant at which the initial treatment shall start.
-     * @param itemValidityStop                  The inclusive instant at which the initial treatment shall stop or
+     * @param prescriptionDocumentValidityStop  The inclusive instant at which the prescription shall stop or
+     *                                          {@code null} if it's not bounded.
+     * @param itemValidityStart                 The inclusive instant after which the first full dispense shall happen.
+     * @param itemValidityStop                  The inclusive instant before which the first full dispense shall
+     *                                          happen or
      *                                          {@code null} if it's not bounded.
      * @param renewalPeriod                     The renewal period or {@code null} if it's not specified.
      * @param mtpReference                      The reference to the MTP entry, if any.
@@ -153,20 +164,23 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
      * @param patientMedicationInstructions     The patient medication instructions or {@code null} if it isn't
      *                                          provided.
      * @param fulfilmentInstructions            The fulfilment instructions or {@code null} if it isn't provided.
-     * @throws IllegalArgumentException if the validity periods are invalid.
+     * @param inReserve                         Whether the treatment is to be taken regularly ({@code false}) or only
+     *                                          if required ({@code true}).
+     * @param quantityToDispense                The quantity to dispense or {@code null} if it isn't provided.
+     * @throws InvalidEmedContentException if the validity periods are invalid.
      */
     public EmedPreEntryDigest(final Instant prescriptionTime,
-                              final String documentId,
+                              final UUID documentId,
                               @Nullable final AuthorDigest documentAuthor,
                               @Nullable final AuthorDigest sectionAuthor,
-                              final String entryId,
-                              final String medicationTreatmentId,
+                              final UUID entryId,
+                              final UUID medicationTreatmentId,
                               final int sequence,
                               @Nullable final String annotationComment,
                               final MedicationDosageInstructions dosageInstructions,
                               final MedicationProduct product,
                               @Nullable final Integer repeatNumber,
-                              @Nullable final RouteOfAdministrationEdqm routeOfAdministration,
+                              @Nullable final RouteOfAdministrationAmbu routeOfAdministration,
                               final Instant prescriptionDocumentValidityStart,
                               @Nullable final Instant prescriptionDocumentValidityStop,
                               final Instant itemValidityStart,
@@ -177,7 +191,9 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
                               final boolean substitutionPermitted,
                               @Nullable final String treatmentReason,
                               @Nullable final String patientMedicationInstructions,
-                              @Nullable final String fulfilmentInstructions) {
+                              @Nullable final String fulfilmentInstructions,
+                              final boolean inReserve,
+                              @Nullable final String quantityToDispense) {
         super(prescriptionTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
                 annotationComment);
         this.dosageInstructions = Objects.requireNonNull(dosageInstructions);
@@ -195,18 +211,20 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
         this.treatmentReason = treatmentReason;
         this.patientMedicationInstructions = patientMedicationInstructions;
         this.fulfilmentInstructions = fulfilmentInstructions;
+        this.inReserve = inReserve;
+        this.quantityToDispense = quantityToDispense;
         if (this.prescriptionDocumentValidityStop != null && this.prescriptionDocumentValidityStop.isBefore(this.prescriptionDocumentValidityStart)) {
-            throw new IllegalArgumentException("The prescription document validity period shall be a valid interval");
+            throw new InvalidEmedContentException("The prescription document validity period shall be a valid interval");
         }
         if (this.itemValidityStop != null && this.itemValidityStop.isBefore(this.itemValidityStart)) {
-            throw new IllegalArgumentException("The prescription item validity period shall be a valid interval");
+            throw new InvalidEmedContentException("The prescription item validity period shall be a valid interval");
         }
         if (this.itemValidityStart.isBefore(this.prescriptionDocumentValidityStart)) {
-            throw new IllegalArgumentException("The item validity period shall not start before the document validity " +
+            throw new InvalidEmedContentException("The item validity period shall not start before the document validity " +
                     "period");
         }
         if (this.prescriptionDocumentValidityStop != null && (this.itemValidityStop == null || this.itemValidityStop.isBefore(this.prescriptionDocumentValidityStop))) {
-            throw new IllegalArgumentException("The item validity period shall not end after the document validity " +
+            throw new InvalidEmedContentException("The item validity period shall not end after the document validity " +
                     "period");
         }
     }
@@ -226,22 +244,170 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
         this.itemTime = Objects.requireNonNull(prescriptionTime);
     }
 
+    public MedicationDosageInstructions getDosageInstructions() {
+        return this.dosageInstructions;
+    }
+
+    public void setDosageInstructions(final MedicationDosageInstructions dosageInstructions) {
+        this.dosageInstructions = dosageInstructions;
+    }
+
+    @Nullable
+    public String getFulfilmentInstructions() {
+        return this.fulfilmentInstructions;
+    }
+
+    public void setFulfilmentInstructions(@Nullable final String fulfilmentInstructions) {
+        this.fulfilmentInstructions = fulfilmentInstructions;
+    }
+
+    public boolean isInReserve() {
+        return this.inReserve;
+    }
+
+    public void setInReserve(final boolean inReserve) {
+        this.inReserve = inReserve;
+    }
+
+    public Instant getItemValidityStart() {
+        return this.itemValidityStart;
+    }
+
+    public void setItemValidityStart(final Instant itemValidityStart) {
+        this.itemValidityStart = itemValidityStart;
+    }
+
+    @Nullable
+    public Instant getItemValidityStop() {
+        return this.itemValidityStop;
+    }
+
+    public void setItemValidityStop(@Nullable final Instant itemValidityStop) {
+        this.itemValidityStop = itemValidityStop;
+    }
+
+    @Nullable
+    public EmedReference getMtpReference() {
+        return this.mtpReference;
+    }
+
+    public void setMtpReference(@Nullable final EmedReference mtpReference) {
+        this.mtpReference = mtpReference;
+    }
+
+    @Nullable
+    public String getPatientMedicationInstructions() {
+        return this.patientMedicationInstructions;
+    }
+
+    public void setPatientMedicationInstructions(@Nullable final String patientMedicationInstructions) {
+        this.patientMedicationInstructions = patientMedicationInstructions;
+    }
+
+    public Instant getPrescriptionDocumentValidityStart() {
+        return this.prescriptionDocumentValidityStart;
+    }
+
+    public void setPrescriptionDocumentValidityStart(final Instant prescriptionDocumentValidityStart) {
+        this.prescriptionDocumentValidityStart = prescriptionDocumentValidityStart;
+    }
+
+    @Nullable
+    public Instant getPrescriptionDocumentValidityStop() {
+        return this.prescriptionDocumentValidityStop;
+    }
+
+    public void setPrescriptionDocumentValidityStop(@Nullable final Instant prescriptionDocumentValidityStop) {
+        this.prescriptionDocumentValidityStop = prescriptionDocumentValidityStop;
+    }
+
+    public MedicationProduct getProduct() {
+        return this.product;
+    }
+
+    public void setProduct(final MedicationProduct product) {
+        this.product = product;
+    }
+
+    public boolean isProvisional() {
+        return this.provisional;
+    }
+
+    public void setProvisional(final boolean provisional) {
+        this.provisional = provisional;
+    }
+
+    @Nullable
+    public RenewalInterval getRenewalPeriod() {
+        return this.renewalPeriod;
+    }
+
+    public void setRenewalPeriod(@Nullable final RenewalInterval renewalPeriod) {
+        this.renewalPeriod = renewalPeriod;
+    }
+
+    @Nullable
+    public Integer getRepeatNumber() {
+        return this.repeatNumber;
+    }
+
+    public void setRepeatNumber(@Nullable final Integer repeatNumber) {
+        this.repeatNumber = repeatNumber;
+    }
+
+    @Nullable
+    public RouteOfAdministrationAmbu getRouteOfAdministration() {
+        return this.routeOfAdministration;
+    }
+
+    public void setRouteOfAdministration(@Nullable final RouteOfAdministrationAmbu routeOfAdministration) {
+        this.routeOfAdministration = routeOfAdministration;
+    }
+
+    public boolean isSubstitutionPermitted() {
+        return this.substitutionPermitted;
+    }
+
+    public void setSubstitutionPermitted(final boolean substitutionPermitted) {
+        this.substitutionPermitted = substitutionPermitted;
+    }
+
+    @Nullable
+    public String getTreatmentReason() {
+        return this.treatmentReason;
+    }
+
+    public void setTreatmentReason(@Nullable final String treatmentReason) {
+        this.treatmentReason = treatmentReason;
+    }
+
+    @Nullable
+    public String getQuantityToDispense() {
+        return this.quantityToDispense;
+    }
+
+    public void setQuantityToDispense(@Nullable final String quantityToDispense) {
+        this.quantityToDispense = quantityToDispense;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof final EmedPreEntryDigest that)) return false;
         if (!super.equals(o)) return false;
-        return provisional == that.provisional
+        return inReserve == that.inReserve
+                && provisional == that.provisional
                 && substitutionPermitted == that.substitutionPermitted
-                && dosageInstructions.equals(that.dosageInstructions)
+                && Objects.equals(dosageInstructions, that.dosageInstructions)
                 && Objects.equals(fulfilmentInstructions, that.fulfilmentInstructions)
-                && itemValidityStart.equals(that.itemValidityStart)
+                && Objects.equals(itemValidityStart, that.itemValidityStart)
                 && Objects.equals(itemValidityStop, that.itemValidityStop)
                 && Objects.equals(mtpReference, that.mtpReference)
                 && Objects.equals(patientMedicationInstructions, that.patientMedicationInstructions)
-                && prescriptionDocumentValidityStart.equals(that.prescriptionDocumentValidityStart)
+                && Objects.equals(prescriptionDocumentValidityStart, that.prescriptionDocumentValidityStart)
                 && Objects.equals(prescriptionDocumentValidityStop, that.prescriptionDocumentValidityStop)
-                && product.equals(that.product)
+                && Objects.equals(product, that.product)
+                && Objects.equals(quantityToDispense, that.quantityToDispense)
                 && Objects.equals(renewalPeriod, that.renewalPeriod)
                 && Objects.equals(repeatNumber, that.repeatNumber)
                 && routeOfAdministration == that.routeOfAdministration
@@ -250,38 +416,37 @@ public class EmedPreEntryDigest extends EmedEntryDigest {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), dosageInstructions, fulfilmentInstructions, itemValidityStart,
-                itemValidityStop, mtpReference, patientMedicationInstructions, prescriptionDocumentValidityStart,
-                prescriptionDocumentValidityStop, product, provisional, renewalPeriod, repeatNumber, routeOfAdministration,
-                substitutionPermitted, treatmentReason);
+        return Objects.hash(super.hashCode(), dosageInstructions, fulfilmentInstructions, inReserve, itemValidityStart, itemValidityStop, mtpReference, patientMedicationInstructions, prescriptionDocumentValidityStart, prescriptionDocumentValidityStop, product, provisional, quantityToDispense, renewalPeriod, repeatNumber, routeOfAdministration, substitutionPermitted, treatmentReason);
     }
 
     @Override
     public String toString() {
         return "EmedPreEntryDigest{" +
-                "prescriptionTime=" + itemTime +
-                ", documentId='" + documentId + '\'' +
-                ", sectionAuthor=" + sectionAuthor +
-                ", documentAuthor=" + documentAuthor +
-                ", entryId='" + entryId + '\'' +
-                ", medicationTreatmentId='" + medicationTreatmentId + '\'' +
-                ", sequence=" + sequence +
-                ", annotationComment='" + annotationComment + '\'' +
-                ", substitutionPermitted=" + substitutionPermitted +
-                ", dosageInstructions=" + dosageInstructions +
-                ", product=" + product +
-                ", repeatNumber=" + repeatNumber +
-                ", routeOfAdministration=" + routeOfAdministration +
-                ", prescriptionDocumentValidityStart=" + prescriptionDocumentValidityStart +
-                ", prescriptionDocumentValidityStop=" + prescriptionDocumentValidityStop +
-                ", itemValidityStart=" + itemValidityStart +
-                ", itemValidityStop=" + itemValidityStop +
-                ", renewalPeriod=" + renewalPeriod +
-                ", mtpReference=" + mtpReference +
-                ", provisional=" + provisional +
-                ", treatmentReason='" + treatmentReason + '\'' +
-                ", patientMedicationInstructions='" + patientMedicationInstructions + '\'' +
-                ", fulfilmentInstructions='" + fulfilmentInstructions + '\'' +
+                "annotationComment='" + this.annotationComment + '\'' +
+                ", itemTime=" + this.itemTime +
+                ", documentAuthor=" + this.documentAuthor +
+                ", documentId='" + this.documentId + '\'' +
+                ", entryId='" + this.entryId + '\'' +
+                ", medicationTreatmentId='" + this.medicationTreatmentId + '\'' +
+                ", sectionAuthor=" + this.sectionAuthor +
+                ", sequence=" + this.sequence +
+                ", dosageInstructions=" + this.dosageInstructions +
+                ", fulfilmentInstructions='" + this.fulfilmentInstructions + '\'' +
+                ", inReserve=" + this.inReserve +
+                ", itemValidityStart=" + this.itemValidityStart +
+                ", itemValidityStop=" + this.itemValidityStop +
+                ", mtpReference=" + this.mtpReference +
+                ", patientMedicationInstructions='" + this.patientMedicationInstructions + '\'' +
+                ", prescriptionDocumentValidityStart=" + this.prescriptionDocumentValidityStart +
+                ", prescriptionDocumentValidityStop=" + this.prescriptionDocumentValidityStop +
+                ", product=" + this.product +
+                ", provisional=" + this.provisional +
+                ", quantityToDispense=" + this.quantityToDispense +
+                ", renewalPeriod=" + this.renewalPeriod +
+                ", repeatNumber=" + this.repeatNumber +
+                ", routeOfAdministration=" + this.routeOfAdministration +
+                ", substitutionPermitted=" + this.substitutionPermitted +
+                ", treatmentReason='" + this.treatmentReason + '\'' +
                 '}';
     }
 }

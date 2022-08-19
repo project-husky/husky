@@ -63,6 +63,23 @@ class TemplateIdsTest {
         assertFalse(TemplateIds.hasAllIds(List.of("1.2.3.1", "1.2.3.2"), List.of(II1, II3)));
     }
 
+    @Test
+    void anyInList() {
+        assertTrue(TemplateIds.anyInList(List.of(), List.of()));
+        assertTrue(TemplateIds.anyInList(List.of(), List.of(II1, II2, II3)));
+        assertTrue(TemplateIds.anyInList(List.of("1.2.3.1"), List.of(II1)));
+        assertTrue(TemplateIds.anyInList(List.of("1.2.3.1"), List.of(II2, II1)));
+        assertTrue(TemplateIds.anyInList(List.of("1.2.3.1"), List.of(II2, II3, II4, II5, II6, II7, II8, II7, II1)));
+        assertTrue(TemplateIds.anyInList(List.of("1.2.3.1", "1.2.3.2"), List.of(II2, II1)));
+        assertTrue(TemplateIds.anyInList(List.of("1.2.3.1", "1.2.3.2"), List.of(II2, II3, II4, II5, II6, II7, II8, II7, II1)));
+        assertTrue(TemplateIds.anyInList(List.of("1.2.3.1", "1.2.3.2", "1.2.3.7"), List.of(II2, II3, II4, II5, II6, II7, II8, II7, II1)));
+        assertTrue(TemplateIds.anyInList(List.of("1.2.3.1", "1.2.3.2"), List.of(II2, II3)));
+        assertTrue(TemplateIds.anyInList(List.of("1.2.3.1", "1.2.3.2"), List.of(II1, II3)));
+
+        assertFalse(TemplateIds.anyInList(List.of("1.2.3.1"), List.of()));
+        assertFalse(TemplateIds.anyInList(List.of("1.2.3.1"), List.of(II2, II3)));
+    }
+
     private static II stringToIi(final String oid) {
         final II ii = new II();
         ii.setRoot(oid);

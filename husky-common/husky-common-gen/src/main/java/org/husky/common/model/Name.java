@@ -10,25 +10,18 @@
  */
 package org.husky.common.model;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
-
 import org.apache.commons.lang3.NotImplementedException;
 import org.husky.common.basetypes.NameBaseType;
 import org.husky.common.enums.EntityNameUse;
 import org.husky.common.enums.NullFlavor;
-import org.husky.common.hl7cdar2.EN;
-import org.husky.common.hl7cdar2.EnDelimiter;
-import org.husky.common.hl7cdar2.EnFamily;
-import org.husky.common.hl7cdar2.EnGiven;
-import org.husky.common.hl7cdar2.EnPrefix;
-import org.husky.common.hl7cdar2.EnSuffix;
-import org.husky.common.hl7cdar2.PN;
+import org.husky.common.hl7cdar2.*;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.XpnName;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The class Name contains all fields for different name parts such as given or
@@ -278,7 +271,7 @@ public class Name extends NameBaseType {
 			} else
 				retVal.setName(hl7CdaR2Value.getMergedXmlMixed());
 		} else
-			retVal.setNullFlavor(NullFlavor.NOT_AVAILABLE);
+			retVal.setNullFlavor(NullFlavor.NOT_AVAILABLE_L2);
 
 		return retVal;
 	}
@@ -355,7 +348,7 @@ public class Name extends NameBaseType {
 				setUsage(EntityNameUse.LEGAL);
 			setNullFlavor(baseType.getNullFlavor());
 		} else
-			setNullFlavor(NullFlavor.NOT_AVAILABLE);
+			setNullFlavor(NullFlavor.NOT_AVAILABLE_L2);
 	}
 
 	/**
@@ -370,7 +363,7 @@ public class Name extends NameBaseType {
 			setPrefix(ipfType.getPrefix());
 			setSuffix(ipfType.getSuffix());
 		} else
-			setNullFlavor(NullFlavor.NOT_AVAILABLE);
+			setNullFlavor(NullFlavor.NOT_AVAILABLE_L2);
 	}
 
 	/**

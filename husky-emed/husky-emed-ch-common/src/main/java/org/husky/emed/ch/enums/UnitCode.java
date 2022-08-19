@@ -27,18 +27,31 @@ import org.husky.common.enums.ValueSetEnumInterface;
  * IT: No designation found.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.1.11.83<br>
- * Effective date: 2021-02-10 22:24<br>
- * Version: 2021<br>
+ * Effective date: 2022-06-08 15:00<br>
+ * Version: 2022<br>
  * Status: DRAFT
  */
-@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-07-11")
 public enum UnitCode implements ValueSetEnumInterface {
 
+    /**
+     * EN: a.<br>
+     * DE: a.<br>
+     * FR: a.<br>
+     * IT: a.<br>
+     */
+    A("a",
+      "2.16.840.1.113883.6.8",
+      "Year",
+      "a",
+      "a",
+      "a",
+      "a"),
     /**
      * EN: Actuation.<br>
      * DE: Hub.<br>
      * FR: bouffée.<br>
-     * IT: Erogazione.<br>
+     * IT: erogazione.<br>
      */
     ACTUATION("732981002",
               "2.16.840.1.113883.6.96",
@@ -46,12 +59,12 @@ public enum UnitCode implements ValueSetEnumInterface {
               "Actuation",
               "Hub",
               "bouffée",
-              "Erogazione"),
+              "erogazione"),
     /**
      * EN: Ampule.<br>
      * DE: Ampulle.<br>
      * FR: ampoule.<br>
-     * IT: Fiala.<br>
+     * IT: fiala.<br>
      */
     AMPULE("732978007",
            "2.16.840.1.113883.6.96",
@@ -59,12 +72,12 @@ public enum UnitCode implements ValueSetEnumInterface {
            "Ampule",
            "Ampulle",
            "ampoule",
-           "Fiala"),
+           "fiala"),
     /**
      * EN: Applicator.<br>
      * DE: Applikator.<br>
      * FR: applicateur.<br>
-     * IT: Applicatore.<br>
+     * IT: applicatore.<br>
      */
     APPLICATOR("732980001",
                "2.16.840.1.113883.6.96",
@@ -72,25 +85,25 @@ public enum UnitCode implements ValueSetEnumInterface {
                "Applicator",
                "Applikator",
                "applicateur",
-               "Applicatore"),
+               "applicatore"),
     /**
      * EN: Bag.<br>
      * DE: Tasche.<br>
-     * FR: poche.<br>
-     * IT: Sacca.<br>
+     * FR: sac.<br>
+     * IT: sacca.<br>
      */
     BAG("732982009",
         "2.16.840.1.113883.6.96",
         "Bag (unit of presentation)",
         "Bag",
         "Tasche",
-        "poche",
-        "Sacca"),
+        "sac",
+        "sacca"),
     /**
      * EN: Barrel.<br>
      * DE: Kanister.<br>
      * FR: fût.<br>
-     * IT: Fusto.<br>
+     * IT: fusto.<br>
      */
     BARREL("732983004",
            "2.16.840.1.113883.6.96",
@@ -98,12 +111,12 @@ public enum UnitCode implements ValueSetEnumInterface {
            "Barrel",
            "Kanister",
            "fût",
-           "Fusto"),
+           "fusto"),
     /**
      * EN: Blister.<br>
      * DE: Blisterpackung.<br>
      * FR: plaquette.<br>
-     * IT: Blister.<br>
+     * IT: blister.<br>
      */
     BLISTER("732984005",
             "2.16.840.1.113883.6.96",
@@ -111,12 +124,12 @@ public enum UnitCode implements ValueSetEnumInterface {
             "Blister",
             "Blisterpackung",
             "plaquette",
-            "Blister"),
+            "blister"),
     /**
      * EN: Block.<br>
      * DE: Block.<br>
      * FR: bloc.<br>
-     * IT: Blocco.<br>
+     * IT: blocco.<br>
      */
     BLOCK("732985006",
           "2.16.840.1.113883.6.96",
@@ -124,12 +137,12 @@ public enum UnitCode implements ValueSetEnumInterface {
           "Block",
           "Block",
           "bloc",
-          "Blocco"),
+          "blocco"),
     /**
      * EN: Bottle.<br>
      * DE: Flasche.<br>
      * FR: flacon.<br>
-     * IT: Flacone.<br>
+     * IT: flacone.<br>
      */
     BOTTLE("732986007",
            "2.16.840.1.113883.6.96",
@@ -137,7 +150,7 @@ public enum UnitCode implements ValueSetEnumInterface {
            "Bottle",
            "Flasche",
            "flacon",
-           "Flacone"),
+           "flacone"),
     /**
      * EN: Bq.<br>
      * DE: Bq.<br>
@@ -155,7 +168,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Cachet.<br>
      * DE: Oblatenkapsel.<br>
      * FR: cachet.<br>
-     * IT: Cachet.<br>
+     * IT: cachet.<br>
      */
     CACHET("732987003",
            "2.16.840.1.113883.6.96",
@@ -163,12 +176,12 @@ public enum UnitCode implements ValueSetEnumInterface {
            "Cachet",
            "Oblatenkapsel",
            "cachet",
-           "Cachet"),
+           "cachet"),
     /**
      * EN: Capsule.<br>
      * DE: Kapsel.<br>
      * FR: capsule.<br>
-     * IT: Capsula.<br>
+     * IT: capsula.<br>
      */
     CAPSULE("732937005",
             "2.16.840.1.113883.6.96",
@@ -176,12 +189,12 @@ public enum UnitCode implements ValueSetEnumInterface {
             "Capsule",
             "Kapsel",
             "capsule",
-            "Capsula"),
+            "capsula"),
     /**
      * EN: Cartridge.<br>
      * DE: Patrone.<br>
      * FR: cartouche.<br>
-     * IT: Cartuccia.<br>
+     * IT: cartuccia.<br>
      */
     CARTRIDGE("732988008",
               "2.16.840.1.113883.6.96",
@@ -189,7 +202,7 @@ public enum UnitCode implements ValueSetEnumInterface {
               "Cartridge",
               "Patrone",
               "cartouche",
-              "Cartuccia"),
+              "cartuccia"),
     /**
      * EN: CFU.<br>
      * DE: CFU.<br>
@@ -207,7 +220,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Chewing gum.<br>
      * DE: Kaugummi.<br>
      * FR: gomme à mâcher.<br>
-     * IT: Gomma da masticare.<br>
+     * IT: gomma da masticare.<br>
      */
     CHEWING_GUM("732989000",
                 "2.16.840.1.113883.6.96",
@@ -215,7 +228,7 @@ public enum UnitCode implements ValueSetEnumInterface {
                 "Chewing gum",
                 "Kaugummi",
                 "gomme à mâcher",
-                "Gomma da masticare"),
+                "gomma da masticare"),
     /**
      * EN: cm.<br>
      * DE: cm.<br>
@@ -259,7 +272,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Container.<br>
      * DE: Behältnis.<br>
      * FR: récipient.<br>
-     * IT: Contenitore.<br>
+     * IT: contenitore.<br>
      */
     CONTAINER("732990009",
               "2.16.840.1.113883.6.96",
@@ -267,12 +280,12 @@ public enum UnitCode implements ValueSetEnumInterface {
               "Container",
               "Behältnis",
               "récipient",
-              "Contenitore"),
+              "contenitore"),
     /**
      * EN: Cup.<br>
      * DE: Messbecher.<br>
      * FR: godet.<br>
-     * IT: Bicchiere dosatore.<br>
+     * IT: bicchiere dosatore.<br>
      */
     CUP("732991008",
         "2.16.840.1.113883.6.96",
@@ -280,12 +293,12 @@ public enum UnitCode implements ValueSetEnumInterface {
         "Cup",
         "Messbecher",
         "godet",
-        "Bicchiere dosatore"),
+        "bicchiere dosatore"),
     /**
      * EN: Cylinder.<br>
      * DE: Zylinder.<br>
      * FR: cylindre.<br>
-     * IT: Cilindro.<br>
+     * IT: cilindro.<br>
      */
     CYLINDER("732992001",
              "2.16.840.1.113883.6.96",
@@ -293,7 +306,7 @@ public enum UnitCode implements ValueSetEnumInterface {
              "Cylinder",
              "Zylinder",
              "cylindre",
-             "Cilindro"),
+             "cilindro"),
     /**
      * EN: d.<br>
      * DE: d.<br>
@@ -324,7 +337,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Dressing.<br>
      * DE: Verband.<br>
      * FR: compresse.<br>
-     * IT: Garza.<br>
+     * IT: garza.<br>
      */
     DRESSING("732993006",
              "2.16.840.1.113883.6.96",
@@ -332,12 +345,12 @@ public enum UnitCode implements ValueSetEnumInterface {
              "Dressing",
              "Verband",
              "compresse",
-             "Garza"),
+             "garza"),
     /**
      * EN: Drop.<br>
      * DE: Tropfen.<br>
      * FR: goutte.<br>
-     * IT: Goccia.<br>
+     * IT: goccia.<br>
      */
     DROP("732994000",
          "2.16.840.1.113883.6.96",
@@ -345,12 +358,12 @@ public enum UnitCode implements ValueSetEnumInterface {
          "Drop",
          "Tropfen",
          "goutte",
-         "Goccia"),
+         "goccia"),
     /**
      * EN: Film.<br>
      * DE: Film.<br>
      * FR: film.<br>
-     * IT: Film.<br>
+     * IT: film.<br>
      */
     FILM("732995004",
          "2.16.840.1.113883.6.96",
@@ -358,7 +371,7 @@ public enum UnitCode implements ValueSetEnumInterface {
          "Film",
          "Film",
          "film",
-         "Film"),
+         "film"),
     /**
      * EN: g.<br>
      * DE: g.<br>
@@ -402,7 +415,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Implant.<br>
      * DE: Implantat.<br>
      * FR: implant.<br>
-     * IT: Impianto.<br>
+     * IT: impianto.<br>
      */
     IMPLANT("732996003",
             "2.16.840.1.113883.6.96",
@@ -410,12 +423,12 @@ public enum UnitCode implements ValueSetEnumInterface {
             "Implant",
             "Implantat",
             "implant",
-            "Impianto"),
+            "impianto"),
     /**
      * EN: Inhaler.<br>
      * DE: Inhalator.<br>
      * FR: inhalateur.<br>
-     * IT: Inalatore.<br>
+     * IT: inalatore.<br>
      */
     INHALER("732997007",
             "2.16.840.1.113883.6.96",
@@ -423,12 +436,12 @@ public enum UnitCode implements ValueSetEnumInterface {
             "Inhaler",
             "Inhalator",
             "inhalateur",
-            "Inalatore"),
+            "inalatore"),
     /**
      * EN: Insert.<br>
      * DE: Insert.<br>
      * FR: insert.<br>
-     * IT: Inserto.<br>
+     * IT: inserto.<br>
      */
     INSERT("732998002",
            "2.16.840.1.113883.6.96",
@@ -436,7 +449,7 @@ public enum UnitCode implements ValueSetEnumInterface {
            "Insert",
            "Insert",
            "insert",
-           "Inserto"),
+           "inserto"),
     /**
      * EN: international unit.<br>
      * DE: Internationale Einheit.<br>
@@ -454,7 +467,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Jar.<br>
      * DE: Weithalsgefäss.<br>
      * FR: pot.<br>
-     * IT: Vasetto.<br>
+     * IT: vasetto.<br>
      */
     JAR("732999005",
         "2.16.840.1.113883.6.96",
@@ -462,7 +475,7 @@ public enum UnitCode implements ValueSetEnumInterface {
         "Jar",
         "Weithalsgefäss",
         "pot",
-        "Vasetto"),
+        "vasetto"),
     /**
      * EN: kBq.<br>
      * DE: kBq.<br>
@@ -532,7 +545,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Lyophilisate.<br>
      * DE: Lyophilisat.<br>
      * FR: lyophilisat.<br>
-     * IT: Liofilizzato.<br>
+     * IT: liofilizzato.<br>
      */
     LYOPHILISATE("733001005",
                  "2.16.840.1.113883.6.96",
@@ -540,12 +553,12 @@ public enum UnitCode implements ValueSetEnumInterface {
                  "Lyophilisate",
                  "Lyophilisat",
                  "lyophilisat",
-                 "Liofilizzato"),
+                 "liofilizzato"),
     /**
      * EN: Matrix.<br>
      * DE: Matrix.<br>
      * FR: matrice.<br>
-     * IT: Matrice.<br>
+     * IT: matrice.<br>
      */
     MATRIX("733002003",
            "2.16.840.1.113883.6.96",
@@ -553,7 +566,7 @@ public enum UnitCode implements ValueSetEnumInterface {
            "Matrix",
            "Matrix",
            "matrice",
-           "Matrice"),
+           "matrice"),
     /**
      * EN: MBq.<br>
      * DE: MBq.<br>
@@ -672,6 +685,19 @@ public enum UnitCode implements ValueSetEnumInterface {
          "mmol",
          "mmol"),
     /**
+     * EN: mo.<br>
+     * DE: mo.<br>
+     * FR: mo.<br>
+     * IT: mo.<br>
+     */
+    MO("mo",
+       "2.16.840.1.113883.6.8",
+       "Month",
+       "mo",
+       "mo",
+       "mo",
+       "mo"),
+    /**
      * EN: mol.<br>
      * DE: mol.<br>
      * FR: mol.<br>
@@ -727,7 +753,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Pad.<br>
      * DE: Pad.<br>
      * FR: tampon applicateur.<br>
-     * IT: Tampone.<br>
+     * IT: tampone.<br>
      */
     PAD("733003008",
         "2.16.840.1.113883.6.96",
@@ -735,12 +761,12 @@ public enum UnitCode implements ValueSetEnumInterface {
         "Pad",
         "Pad",
         "tampon applicateur",
-        "Tampone"),
+        "tampone"),
     /**
      * EN: Pastille.<br>
      * DE: Pastille.<br>
      * FR: pastille molle.<br>
-     * IT: Pastiglia molle.<br>
+     * IT: pastiglia molle.<br>
      */
     PASTILLE("733004002",
              "2.16.840.1.113883.6.96",
@@ -748,12 +774,12 @@ public enum UnitCode implements ValueSetEnumInterface {
              "Pastille",
              "Pastille",
              "pastille molle",
-             "Pastiglia molle"),
+             "pastiglia molle"),
     /**
      * EN: Patch.<br>
      * DE: Patch.<br>
      * FR: patch.<br>
-     * IT: Cerotto.<br>
+     * IT: cerotto.<br>
      */
     PATCH("733005001",
           "2.16.840.1.113883.6.96",
@@ -761,12 +787,12 @@ public enum UnitCode implements ValueSetEnumInterface {
           "Patch",
           "Patch",
           "patch",
-          "Cerotto"),
+          "cerotto"),
     /**
      * EN: Pen.<br>
      * DE: Pen.<br>
      * FR: stylo.<br>
-     * IT: Penna.<br>
+     * IT: penna.<br>
      */
     PEN("733006000",
         "2.16.840.1.113883.6.96",
@@ -774,7 +800,7 @@ public enum UnitCode implements ValueSetEnumInterface {
         "Pen",
         "Pen",
         "stylo",
-        "Penna"),
+        "penna"),
     /**
      * EN: %.<br>
      * DE: %.<br>
@@ -792,7 +818,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Pessary.<br>
      * DE: Pessar.<br>
      * FR: ovule.<br>
-     * IT: Ovulo.<br>
+     * IT: ovulo.<br>
      */
     PESSARY("733007009",
             "2.16.840.1.113883.6.96",
@@ -800,7 +826,7 @@ public enum UnitCode implements ValueSetEnumInterface {
             "Pessary",
             "Pessar",
             "ovule",
-            "Ovulo"),
+            "ovulo"),
     /**
      * EN: Piece(s).<br>
      * DE: Stk.<br>
@@ -818,7 +844,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Pillule.<br>
      * DE: Streukügelchen.<br>
      * FR: granule.<br>
-     * IT: Granuli.<br>
+     * IT: granuli.<br>
      */
     PILLULE("733008004",
             "2.16.840.1.113883.6.96",
@@ -826,12 +852,12 @@ public enum UnitCode implements ValueSetEnumInterface {
             "Pillule",
             "Streukügelchen",
             "granule",
-            "Granuli"),
+            "granuli"),
     /**
      * EN: Pipette.<br>
      * DE: Pipette.<br>
      * FR: pipette.<br>
-     * IT: Pipetta.<br>
+     * IT: pipetta.<br>
      */
     PIPETTE("733009007",
             "2.16.840.1.113883.6.96",
@@ -839,12 +865,12 @@ public enum UnitCode implements ValueSetEnumInterface {
             "Pipette",
             "Pipette",
             "pipette",
-            "Pipetta"),
+            "pipetta"),
     /**
      * EN: Plaster.<br>
      * DE: Pflaster.<br>
      * FR: emplâtre.<br>
-     * IT: Cerotto.<br>
+     * IT: cerotto.<br>
      */
     PLASTER("733010002",
             "2.16.840.1.113883.6.96",
@@ -852,12 +878,12 @@ public enum UnitCode implements ValueSetEnumInterface {
             "Plaster",
             "Pflaster",
             "emplâtre",
-            "Cerotto"),
+            "cerotto"),
     /**
      * EN: Plug.<br>
      * DE: Einsatz.<br>
      * FR: support poreux.<br>
-     * IT: Supporto.<br>
+     * IT: supporto.<br>
      */
     PLUG("733011003",
          "2.16.840.1.113883.6.96",
@@ -865,20 +891,20 @@ public enum UnitCode implements ValueSetEnumInterface {
          "Plug",
          "Einsatz",
          "support poreux",
-         "Supporto"),
+         "supporto"),
     /**
      * EN: Pouch.<br>
      * DE: Beutelchen.<br>
-     * FR: petit sachet.<br>
-     * IT: Sachetta.<br>
+     * FR: pochette.<br>
+     * IT: sachetta.<br>
      */
     POUCH("733012005",
           "2.16.840.1.113883.6.96",
           "Pouch (unit of presentation)",
           "Pouch",
           "Beutelchen",
-          "petit sachet",
-          "Sachetta"),
+          "pochette",
+          "sachetta"),
     /**
      * EN: ppm.<br>
      * DE: ppm.<br>
@@ -896,7 +922,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Sachet.<br>
      * DE: Beutel.<br>
      * FR: sachet.<br>
-     * IT: Bustina.<br>
+     * IT: bustina.<br>
      */
     SACHET("733013000",
            "2.16.840.1.113883.6.96",
@@ -904,7 +930,7 @@ public enum UnitCode implements ValueSetEnumInterface {
            "Sachet",
            "Beutel",
            "sachet",
-           "Bustina"),
+           "bustina"),
     /**
      * EN: sec.<br>
      * DE: sec.<br>
@@ -922,7 +948,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Sponge.<br>
      * DE: Schwämmchen.<br>
      * FR: eponge.<br>
-     * IT: Spugna.<br>
+     * IT: spugna.<br>
      */
     SPONGE("733014006",
            "2.16.840.1.113883.6.96",
@@ -930,12 +956,12 @@ public enum UnitCode implements ValueSetEnumInterface {
            "Sponge",
            "Schwämmchen",
            "eponge",
-           "Spugna"),
+           "spugna"),
     /**
      * EN: Spoonful.<br>
      * DE: ein Löffel voll.<br>
      * FR: cuillerée.<br>
-     * IT: Cucciaio.<br>
+     * IT: cucciaio.<br>
      */
     SPOONFUL("733015007",
              "2.16.840.1.113883.6.96",
@@ -943,12 +969,12 @@ public enum UnitCode implements ValueSetEnumInterface {
              "Spoonful",
              "ein Löffel voll",
              "cuillerée",
-             "Cucciaio"),
+             "cucciaio"),
     /**
      * EN: Stick.<br>
      * DE: Stäbchen.<br>
      * FR: bâton.<br>
-     * IT: Stick.<br>
+     * IT: stick.<br>
      */
     STICK("733016008",
           "2.16.840.1.113883.6.96",
@@ -956,12 +982,12 @@ public enum UnitCode implements ValueSetEnumInterface {
           "Stick",
           "Stäbchen",
           "bâton",
-          "Stick"),
+          "stick"),
     /**
      * EN: Straw.<br>
      * DE: Trinkhalm.<br>
      * FR: paille.<br>
-     * IT: Cannuccia.<br>
+     * IT: cannuccia.<br>
      */
     STRAW("733017004",
           "2.16.840.1.113883.6.96",
@@ -969,12 +995,12 @@ public enum UnitCode implements ValueSetEnumInterface {
           "Straw",
           "Trinkhalm",
           "paille",
-          "Cannuccia"),
+          "cannuccia"),
     /**
      * EN: Strip.<br>
      * DE: Streifen.<br>
      * FR: bandelette.<br>
-     * IT: Strip.<br>
+     * IT: strip.<br>
      */
     STRIP("733018009",
           "2.16.840.1.113883.6.96",
@@ -982,12 +1008,12 @@ public enum UnitCode implements ValueSetEnumInterface {
           "Strip",
           "Streifen",
           "bandelette",
-          "Strip"),
+          "strip"),
     /**
      * EN: Suppository.<br>
      * DE: Zäpfchen.<br>
      * FR: suppositoire.<br>
-     * IT: Supposta.<br>
+     * IT: supposta.<br>
      */
     SUPPOSITORY("733019001",
                 "2.16.840.1.113883.6.96",
@@ -995,12 +1021,12 @@ public enum UnitCode implements ValueSetEnumInterface {
                 "Suppository",
                 "Zäpfchen",
                 "suppositoire",
-                "Supposta"),
+                "supposta"),
     /**
      * EN: Syringe.<br>
      * DE: Spritze.<br>
      * FR: seringue.<br>
-     * IT: Siringa.<br>
+     * IT: siringa.<br>
      */
     SYRINGE("733020007",
             "2.16.840.1.113883.6.96",
@@ -1008,12 +1034,12 @@ public enum UnitCode implements ValueSetEnumInterface {
             "Syringe",
             "Spritze",
             "seringue",
-            "Siringa"),
+            "siringa"),
     /**
      * EN: System.<br>
      * DE: System.<br>
      * FR: système.<br>
-     * IT: Sistema.<br>
+     * IT: sistema.<br>
      */
     SYSTEM("733021006",
            "2.16.840.1.113883.6.96",
@@ -1021,7 +1047,7 @@ public enum UnitCode implements ValueSetEnumInterface {
            "System",
            "System",
            "système",
-           "Sistema"),
+           "sistema"),
     /**
      * EN: tablespoon - metric.<br>
      * DE: Esslöffel.<br>
@@ -1039,7 +1065,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Tablet.<br>
      * DE: Tablette.<br>
      * FR: comprimé.<br>
-     * IT: Compressa.<br>
+     * IT: compressa.<br>
      */
     TABLET("732936001",
            "2.16.840.1.113883.6.96",
@@ -1047,12 +1073,12 @@ public enum UnitCode implements ValueSetEnumInterface {
            "Tablet",
            "Tablette",
            "comprimé",
-           "Compressa"),
+           "compressa"),
     /**
      * EN: Tampon.<br>
      * DE: Tampon.<br>
      * FR: tampon diffuseur.<br>
-     * IT: Tampone.<br>
+     * IT: tampone.<br>
      */
     TAMPON("733022004",
            "2.16.840.1.113883.6.96",
@@ -1060,7 +1086,7 @@ public enum UnitCode implements ValueSetEnumInterface {
            "Tampon",
            "Tampon",
            "tampon diffuseur",
-           "Tampone"),
+           "tampone"),
     /**
      * EN: teaspoon - metric.<br>
      * DE: Teelöffel.<br>
@@ -1091,7 +1117,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Thread.<br>
      * DE: Faden.<br>
      * FR: fil.<br>
-     * IT: Filo.<br>
+     * IT: filo.<br>
      */
     THREAD("733023009",
            "2.16.840.1.113883.6.96",
@@ -1099,12 +1125,12 @@ public enum UnitCode implements ValueSetEnumInterface {
            "Thread",
            "Faden",
            "fil",
-           "Filo"),
+           "filo"),
     /**
      * EN: Tube.<br>
      * DE: Tube.<br>
      * FR: tube.<br>
-     * IT: Tubo.<br>
+     * IT: tubo.<br>
      */
     TUBE("733024003",
          "2.16.840.1.113883.6.96",
@@ -1112,7 +1138,7 @@ public enum UnitCode implements ValueSetEnumInterface {
          "Tube",
          "Tube",
          "tube",
-         "Tubo"),
+         "tubo"),
     /**
      * EN: µg.<br>
      * DE: µg.<br>
@@ -1169,7 +1195,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Vessel.<br>
      * DE: Gefäss.<br>
      * FR: récipient étanche.<br>
-     * IT: Recipiente a tenuta.<br>
+     * IT: recipiente a tenuta.<br>
      */
     VESSEL("733025002",
            "2.16.840.1.113883.6.96",
@@ -1177,12 +1203,12 @@ public enum UnitCode implements ValueSetEnumInterface {
            "Vessel",
            "Gefäss",
            "récipient étanche",
-           "Recipiente a tenuta"),
+           "recipiente a tenuta"),
     /**
      * EN: Vial.<br>
      * DE: Durchstechflasche.<br>
      * FR: petit flacon.<br>
-     * IT: Flaconcino.<br>
+     * IT: flaconcino.<br>
      */
     VIAL("733026001",
          "2.16.840.1.113883.6.96",
@@ -1190,13 +1216,21 @@ public enum UnitCode implements ValueSetEnumInterface {
          "Vial",
          "Durchstechflasche",
          "petit flacon",
-         "Flaconcino");
+         "flaconcino");
+
+    /**
+     * EN: Code for a.<br>
+     * DE: Code für a.<br>
+     * FR: Code de a.<br>
+     * IT: Code per a.<br>
+     */
+    public static final String A_CODE = "a";
 
     /**
      * EN: Code for Actuation.<br>
      * DE: Code für Hub.<br>
      * FR: Code de bouffée.<br>
-     * IT: Code per Erogazione.<br>
+     * IT: Code per erogazione.<br>
      */
     public static final String ACTUATION_CODE = "732981002";
 
@@ -1204,7 +1238,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Ampule.<br>
      * DE: Code für Ampulle.<br>
      * FR: Code de ampoule.<br>
-     * IT: Code per Fiala.<br>
+     * IT: Code per fiala.<br>
      */
     public static final String AMPULE_CODE = "732978007";
 
@@ -1212,15 +1246,15 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Applicator.<br>
      * DE: Code für Applikator.<br>
      * FR: Code de applicateur.<br>
-     * IT: Code per Applicatore.<br>
+     * IT: Code per applicatore.<br>
      */
     public static final String APPLICATOR_CODE = "732980001";
 
     /**
      * EN: Code for Bag.<br>
      * DE: Code für Tasche.<br>
-     * FR: Code de poche.<br>
-     * IT: Code per Sacca.<br>
+     * FR: Code de sac.<br>
+     * IT: Code per sacca.<br>
      */
     public static final String BAG_CODE = "732982009";
 
@@ -1228,7 +1262,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Barrel.<br>
      * DE: Code für Kanister.<br>
      * FR: Code de fût.<br>
-     * IT: Code per Fusto.<br>
+     * IT: Code per fusto.<br>
      */
     public static final String BARREL_CODE = "732983004";
 
@@ -1236,7 +1270,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Blister.<br>
      * DE: Code für Blisterpackung.<br>
      * FR: Code de plaquette.<br>
-     * IT: Code per Blister.<br>
+     * IT: Code per blister.<br>
      */
     public static final String BLISTER_CODE = "732984005";
 
@@ -1244,7 +1278,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Block.<br>
      * DE: Code für Block.<br>
      * FR: Code de bloc.<br>
-     * IT: Code per Blocco.<br>
+     * IT: Code per blocco.<br>
      */
     public static final String BLOCK_CODE = "732985006";
 
@@ -1252,7 +1286,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Bottle.<br>
      * DE: Code für Flasche.<br>
      * FR: Code de flacon.<br>
-     * IT: Code per Flacone.<br>
+     * IT: Code per flacone.<br>
      */
     public static final String BOTTLE_CODE = "732986007";
 
@@ -1268,7 +1302,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Cachet.<br>
      * DE: Code für Oblatenkapsel.<br>
      * FR: Code de cachet.<br>
-     * IT: Code per Cachet.<br>
+     * IT: Code per cachet.<br>
      */
     public static final String CACHET_CODE = "732987003";
 
@@ -1276,7 +1310,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Capsule.<br>
      * DE: Code für Kapsel.<br>
      * FR: Code de capsule.<br>
-     * IT: Code per Capsula.<br>
+     * IT: Code per capsula.<br>
      */
     public static final String CAPSULE_CODE = "732937005";
 
@@ -1284,7 +1318,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Cartridge.<br>
      * DE: Code für Patrone.<br>
      * FR: Code de cartouche.<br>
-     * IT: Code per Cartuccia.<br>
+     * IT: Code per cartuccia.<br>
      */
     public static final String CARTRIDGE_CODE = "732988008";
 
@@ -1300,7 +1334,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Chewing gum.<br>
      * DE: Code für Kaugummi.<br>
      * FR: Code de gomme à mâcher.<br>
-     * IT: Code per Gomma da masticare.<br>
+     * IT: Code per gomma da masticare.<br>
      */
     public static final String CHEWING_GUM_CODE = "732989000";
 
@@ -1332,7 +1366,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Container.<br>
      * DE: Code für Behältnis.<br>
      * FR: Code de récipient.<br>
-     * IT: Code per Contenitore.<br>
+     * IT: Code per contenitore.<br>
      */
     public static final String CONTAINER_CODE = "732990009";
 
@@ -1340,7 +1374,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Cup.<br>
      * DE: Code für Messbecher.<br>
      * FR: Code de godet.<br>
-     * IT: Code per Bicchiere dosatore.<br>
+     * IT: Code per bicchiere dosatore.<br>
      */
     public static final String CUP_CODE = "732991008";
 
@@ -1348,7 +1382,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Cylinder.<br>
      * DE: Code für Zylinder.<br>
      * FR: Code de cylindre.<br>
-     * IT: Code per Cilindro.<br>
+     * IT: Code per cilindro.<br>
      */
     public static final String CYLINDER_CODE = "732992001";
 
@@ -1372,7 +1406,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Dressing.<br>
      * DE: Code für Verband.<br>
      * FR: Code de compresse.<br>
-     * IT: Code per Garza.<br>
+     * IT: Code per garza.<br>
      */
     public static final String DRESSING_CODE = "732993006";
 
@@ -1380,7 +1414,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Drop.<br>
      * DE: Code für Tropfen.<br>
      * FR: Code de goutte.<br>
-     * IT: Code per Goccia.<br>
+     * IT: Code per goccia.<br>
      */
     public static final String DROP_CODE = "732994000";
 
@@ -1388,7 +1422,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Film.<br>
      * DE: Code für Film.<br>
      * FR: Code de film.<br>
-     * IT: Code per Film.<br>
+     * IT: Code per film.<br>
      */
     public static final String FILM_CODE = "732995004";
 
@@ -1420,7 +1454,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Implant.<br>
      * DE: Code für Implantat.<br>
      * FR: Code de implant.<br>
-     * IT: Code per Impianto.<br>
+     * IT: Code per impianto.<br>
      */
     public static final String IMPLANT_CODE = "732996003";
 
@@ -1428,7 +1462,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Inhaler.<br>
      * DE: Code für Inhalator.<br>
      * FR: Code de inhalateur.<br>
-     * IT: Code per Inalatore.<br>
+     * IT: Code per inalatore.<br>
      */
     public static final String INHALER_CODE = "732997007";
 
@@ -1436,7 +1470,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Insert.<br>
      * DE: Code für Insert.<br>
      * FR: Code de insert.<br>
-     * IT: Code per Inserto.<br>
+     * IT: Code per inserto.<br>
      */
     public static final String INSERT_CODE = "732998002";
 
@@ -1452,7 +1486,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Jar.<br>
      * DE: Code für Weithalsgefäss.<br>
      * FR: Code de pot.<br>
-     * IT: Code per Vasetto.<br>
+     * IT: Code per vasetto.<br>
      */
     public static final String JAR_CODE = "732999005";
 
@@ -1500,7 +1534,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Lyophilisate.<br>
      * DE: Code für Lyophilisat.<br>
      * FR: Code de lyophilisat.<br>
-     * IT: Code per Liofilizzato.<br>
+     * IT: Code per liofilizzato.<br>
      */
     public static final String LYOPHILISATE_CODE = "733001005";
 
@@ -1508,7 +1542,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Matrix.<br>
      * DE: Code für Matrix.<br>
      * FR: Code de matrice.<br>
-     * IT: Code per Matrice.<br>
+     * IT: Code per matrice.<br>
      */
     public static final String MATRIX_CODE = "733002003";
 
@@ -1585,6 +1619,14 @@ public enum UnitCode implements ValueSetEnumInterface {
     public static final String MMOL_CODE = "mmol";
 
     /**
+     * EN: Code for mo.<br>
+     * DE: Code für mo.<br>
+     * FR: Code de mo.<br>
+     * IT: Code per mo.<br>
+     */
+    public static final String MO_CODE = "mo";
+
+    /**
      * EN: Code for mol.<br>
      * DE: Code für mol.<br>
      * FR: Code de mol.<br>
@@ -1620,7 +1662,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Pad.<br>
      * DE: Code für Pad.<br>
      * FR: Code de tampon applicateur.<br>
-     * IT: Code per Tampone.<br>
+     * IT: Code per tampone.<br>
      */
     public static final String PAD_CODE = "733003008";
 
@@ -1628,7 +1670,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Pastille.<br>
      * DE: Code für Pastille.<br>
      * FR: Code de pastille molle.<br>
-     * IT: Code per Pastiglia molle.<br>
+     * IT: Code per pastiglia molle.<br>
      */
     public static final String PASTILLE_CODE = "733004002";
 
@@ -1636,7 +1678,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Patch.<br>
      * DE: Code für Patch.<br>
      * FR: Code de patch.<br>
-     * IT: Code per Cerotto.<br>
+     * IT: Code per cerotto.<br>
      */
     public static final String PATCH_CODE = "733005001";
 
@@ -1644,7 +1686,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Pen.<br>
      * DE: Code für Pen.<br>
      * FR: Code de stylo.<br>
-     * IT: Code per Penna.<br>
+     * IT: Code per penna.<br>
      */
     public static final String PEN_CODE = "733006000";
 
@@ -1660,7 +1702,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Pessary.<br>
      * DE: Code für Pessar.<br>
      * FR: Code de ovule.<br>
-     * IT: Code per Ovulo.<br>
+     * IT: Code per ovulo.<br>
      */
     public static final String PESSARY_CODE = "733007009";
 
@@ -1676,7 +1718,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Pillule.<br>
      * DE: Code für Streukügelchen.<br>
      * FR: Code de granule.<br>
-     * IT: Code per Granuli.<br>
+     * IT: Code per granuli.<br>
      */
     public static final String PILLULE_CODE = "733008004";
 
@@ -1684,7 +1726,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Pipette.<br>
      * DE: Code für Pipette.<br>
      * FR: Code de pipette.<br>
-     * IT: Code per Pipetta.<br>
+     * IT: Code per pipetta.<br>
      */
     public static final String PIPETTE_CODE = "733009007";
 
@@ -1692,7 +1734,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Plaster.<br>
      * DE: Code für Pflaster.<br>
      * FR: Code de emplâtre.<br>
-     * IT: Code per Cerotto.<br>
+     * IT: Code per cerotto.<br>
      */
     public static final String PLASTER_CODE = "733010002";
 
@@ -1700,15 +1742,15 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Plug.<br>
      * DE: Code für Einsatz.<br>
      * FR: Code de support poreux.<br>
-     * IT: Code per Supporto.<br>
+     * IT: Code per supporto.<br>
      */
     public static final String PLUG_CODE = "733011003";
 
     /**
      * EN: Code for Pouch.<br>
      * DE: Code für Beutelchen.<br>
-     * FR: Code de petit sachet.<br>
-     * IT: Code per Sachetta.<br>
+     * FR: Code de pochette.<br>
+     * IT: Code per sachetta.<br>
      */
     public static final String POUCH_CODE = "733012005";
 
@@ -1724,7 +1766,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Sachet.<br>
      * DE: Code für Beutel.<br>
      * FR: Code de sachet.<br>
-     * IT: Code per Bustina.<br>
+     * IT: Code per bustina.<br>
      */
     public static final String SACHET_CODE = "733013000";
 
@@ -1740,7 +1782,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Sponge.<br>
      * DE: Code für Schwämmchen.<br>
      * FR: Code de eponge.<br>
-     * IT: Code per Spugna.<br>
+     * IT: Code per spugna.<br>
      */
     public static final String SPONGE_CODE = "733014006";
 
@@ -1748,7 +1790,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Spoonful.<br>
      * DE: Code für ein Löffel voll.<br>
      * FR: Code de cuillerée.<br>
-     * IT: Code per Cucciaio.<br>
+     * IT: Code per cucciaio.<br>
      */
     public static final String SPOONFUL_CODE = "733015007";
 
@@ -1756,7 +1798,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Stick.<br>
      * DE: Code für Stäbchen.<br>
      * FR: Code de bâton.<br>
-     * IT: Code per Stick.<br>
+     * IT: Code per stick.<br>
      */
     public static final String STICK_CODE = "733016008";
 
@@ -1764,7 +1806,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Straw.<br>
      * DE: Code für Trinkhalm.<br>
      * FR: Code de paille.<br>
-     * IT: Code per Cannuccia.<br>
+     * IT: Code per cannuccia.<br>
      */
     public static final String STRAW_CODE = "733017004";
 
@@ -1772,7 +1814,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Strip.<br>
      * DE: Code für Streifen.<br>
      * FR: Code de bandelette.<br>
-     * IT: Code per Strip.<br>
+     * IT: Code per strip.<br>
      */
     public static final String STRIP_CODE = "733018009";
 
@@ -1780,7 +1822,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Suppository.<br>
      * DE: Code für Zäpfchen.<br>
      * FR: Code de suppositoire.<br>
-     * IT: Code per Supposta.<br>
+     * IT: Code per supposta.<br>
      */
     public static final String SUPPOSITORY_CODE = "733019001";
 
@@ -1788,7 +1830,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Syringe.<br>
      * DE: Code für Spritze.<br>
      * FR: Code de seringue.<br>
-     * IT: Code per Siringa.<br>
+     * IT: Code per siringa.<br>
      */
     public static final String SYRINGE_CODE = "733020007";
 
@@ -1796,7 +1838,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for System.<br>
      * DE: Code für System.<br>
      * FR: Code de système.<br>
-     * IT: Code per Sistema.<br>
+     * IT: Code per sistema.<br>
      */
     public static final String SYSTEM_CODE = "733021006";
 
@@ -1812,7 +1854,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Tablet.<br>
      * DE: Code für Tablette.<br>
      * FR: Code de comprimé.<br>
-     * IT: Code per Compressa.<br>
+     * IT: Code per compressa.<br>
      */
     public static final String TABLET_CODE = "732936001";
 
@@ -1820,7 +1862,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Tampon.<br>
      * DE: Code für Tampon.<br>
      * FR: Code de tampon diffuseur.<br>
-     * IT: Code per Tampone.<br>
+     * IT: Code per tampone.<br>
      */
     public static final String TAMPON_CODE = "733022004";
 
@@ -1844,7 +1886,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Thread.<br>
      * DE: Code für Faden.<br>
      * FR: Code de fil.<br>
-     * IT: Code per Filo.<br>
+     * IT: Code per filo.<br>
      */
     public static final String THREAD_CODE = "733023009";
 
@@ -1852,7 +1894,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Tube.<br>
      * DE: Code für Tube.<br>
      * FR: Code de tube.<br>
-     * IT: Code per Tubo.<br>
+     * IT: Code per tubo.<br>
      */
     public static final String TUBE_CODE = "733024003";
 
@@ -1892,7 +1934,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Vessel.<br>
      * DE: Code für Gefäss.<br>
      * FR: Code de récipient étanche.<br>
-     * IT: Code per Recipiente a tenuta.<br>
+     * IT: Code per recipiente a tenuta.<br>
      */
     public static final String VESSEL_CODE = "733025002";
 
@@ -1900,7 +1942,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * EN: Code for Vial.<br>
      * DE: Code für Durchstechflasche.<br>
      * FR: Code de petit flacon.<br>
-     * IT: Code per Flaconcino.<br>
+     * IT: Code per flaconcino.<br>
      */
     public static final String VIAL_CODE = "733026001";
 

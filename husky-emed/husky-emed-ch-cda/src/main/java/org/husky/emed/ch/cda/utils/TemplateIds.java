@@ -98,6 +98,8 @@ public class TemplateIds {
     public static final String SUBSTITUTION_PERMISSION = "1.3.6.1.4.1.19376.1.9.1.3.9.1";
     public static final String SUBSTITUTION_ACT = "1.3.6.1.4.1.19376.1.9.1.3.9.2";
     public static final String RENEWAL_PERIOD = "1.3.6.1.4.1.19376.1.9.1.3.15";
+    public static final String IN_RESERVE = "2.16.756.5.30.1.1.10.10";
+    public static final String QUANTITY_TO_DISPENSE = "1.3.6.1.4.1.19376.1.9.1.3.8";
 
     /**
      * CDA-CH Author (cdach_other_Author).
@@ -136,4 +138,20 @@ public class TemplateIds {
         return templateIds.stream().map(II::getRoot).toList().containsAll(Objects.requireNonNull(searchedIds));
     }
 
+    /**
+     * Searches whether any ID from a list is present in a list of template IDs.
+     *
+     * @param searchedIds The IDs to find. If the list is empty, the method returns {@code true}.
+     * @param templateIds The list of template IDs to search in.
+     */
+    public static boolean anyInList(final List<String> searchedIds,
+                                    @Nullable final List<II> templateIds) {
+        if (searchedIds.isEmpty()) {
+            return true;
+        }
+        if (templateIds == null || templateIds.isEmpty()) {
+            return false;
+        }
+        return templateIds.stream().map(II::getRoot).anyMatch(searchedIds::contains);
+    }
 }

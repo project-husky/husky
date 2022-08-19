@@ -1,9 +1,11 @@
 package org.husky.validation.service.schematron;
 
+import org.husky.common.utils.Sources;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import javax.xml.transform.Source;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -24,28 +26,28 @@ class SchematronValidatorTest {
     @Test
     void testBooksXslFile() throws Exception {
         final var validator = new SchematronValidator(this.getSampleFile("books.xsl"));
-        final var result = validator.validate(this.getSampleFile("books.xml"));
+        final var result = validator.validate(this.getSampleSource("books.xml"));
         this.validateBooksResult(result);
     }
 
     @Test
     void testBooksNsXslFile() throws Exception {
         final var validator = new SchematronValidator(this.getSampleFile("booksNs.xsl"));
-        final var result = validator.validate(this.getSampleFile("booksNs.xml"));
+        final var result = validator.validate(this.getSampleSource("booksNs.xml"));
         this.validateBooksNsResult(result);
     }
 
     @Test
     void testFlowersXslFile() throws Exception {
         final var validator = new SchematronValidator(this.getSampleFile("flowers.xsl"));
-        final var result = validator.validate(this.getSampleFile("flowers.xml"));
+        final var result = validator.validate(this.getSampleSource("flowers.xml"));
         this.validateFlowersResult(result);
     }
 
     @Test
     void testTournamentXslFile() throws Exception {
         final var validator = new SchematronValidator(this.getSampleFile("tournament.xsl"));
-        final var result = validator.validate(this.getSampleFile("tournament.xml"));
+        final var result = validator.validate(this.getSampleSource("tournament.xml"));
         this.validateTournamentResult(result);
     }
 
@@ -55,28 +57,28 @@ class SchematronValidatorTest {
     @Test
     void testBooksXslByte() throws Exception {
         final var validator = new SchematronValidator(this.getSampleContent("books.xsl"));
-        final var result = validator.validate(this.getSampleContent("books.xml"));
+        final var result = validator.validate(this.getSampleSource("books.xml"));
         this.validateBooksResult(result);
     }
 
     @Test
     void testBooksNsXslByte() throws Exception {
         final var validator = new SchematronValidator(this.getSampleContent("booksNs.xsl"));
-        final var result = validator.validate(this.getSampleContent("booksNs.xml"));
+        final var result = validator.validate(this.getSampleSource("booksNs.xml"));
         this.validateBooksNsResult(result);
     }
 
     @Test
     void testFlowersXslByte() throws Exception {
         final var validator = new SchematronValidator(this.getSampleContent("flowers.xsl"));
-        final var result = validator.validate(this.getSampleContent("flowers.xml"));
+        final var result = validator.validate(this.getSampleSource("flowers.xml"));
         this.validateFlowersResult(result);
     }
 
     @Test
     void testTournamentXslByte() throws Exception {
         final var validator = new SchematronValidator(this.getSampleContent("tournament.xsl"));
-        final var result = validator.validate(this.getSampleContent("tournament.xml"));
+        final var result = validator.validate(this.getSampleSource("tournament.xml"));
         this.validateTournamentResult(result);
     }
 
@@ -86,28 +88,28 @@ class SchematronValidatorTest {
     @Test
     void testBooksSchFile() throws Exception {
         final var validator = SchematronValidator.fromSchematronFile(this.getSampleFile("books.sch"));
-        final var result = validator.validate(this.getSampleFile("books.xml"));
+        final var result = validator.validate(this.getSampleSource("books.xml"));
         this.validateBooksResult(result);
     }
 
     @Test
     void testBooksNsSchFile() throws Exception {
         final var validator = SchematronValidator.fromSchematronFile(this.getSampleFile("booksNs.sch"));
-        final var result = validator.validate(this.getSampleFile("booksNs.xml"));
+        final var result = validator.validate(this.getSampleSource("booksNs.xml"));
         this.validateBooksNsResult(result);
     }
 
     @Test
     void testFlowersSchFile() throws Exception {
         final var validator = SchematronValidator.fromSchematronFile(this.getSampleFile("flowers.sch"));
-        final var result = validator.validate(this.getSampleFile("flowers.xml"));
+        final var result = validator.validate(this.getSampleSource("flowers.xml"));
         this.validateFlowersResult(result);
     }
 
     @Test
     void testTournamentSchFile() throws Exception {
         final var validator = SchematronValidator.fromSchematronFile(this.getSampleFile("tournament.sch"));
-        final var result = validator.validate(this.getSampleFile("tournament.xml"));
+        final var result = validator.validate(this.getSampleSource("tournament.xml"));
         this.validateTournamentResult(result);
     }
 
@@ -117,28 +119,28 @@ class SchematronValidatorTest {
     @Test
     void testBooksSchByte() throws Exception {
         final var validator = SchematronValidator.fromSchematronContent(this.getSampleContent("books.sch"));
-        final var result = validator.validate(this.getSampleContent("books.xml"));
+        final var result = validator.validate(this.getSampleSource("books.xml"));
         this.validateBooksResult(result);
     }
 
     @Test
     void testBooksNsSchByte() throws Exception {
         final var validator = SchematronValidator.fromSchematronContent(this.getSampleContent("booksNs.sch"));
-        final var result = validator.validate(this.getSampleContent("booksNs.xml"));
+        final var result = validator.validate(this.getSampleSource("booksNs.xml"));
         this.validateBooksNsResult(result);
     }
 
     @Test
     void testFlowersSchByte() throws Exception {
         final var validator = SchematronValidator.fromSchematronContent(this.getSampleContent("flowers.sch"));
-        final var result = validator.validate(this.getSampleContent("flowers.xml"));
+        final var result = validator.validate(this.getSampleSource("flowers.xml"));
         this.validateFlowersResult(result);
     }
 
     @Test
     void testTournamentSchByte() throws Exception {
         final var validator = SchematronValidator.fromSchematronContent(this.getSampleContent("tournament.sch"));
-        final var result = validator.validate(this.getSampleContent("tournament.xml"));
+        final var result = validator.validate(this.getSampleSource("tournament.xml"));
         this.validateTournamentResult(result);
     }
 
@@ -199,5 +201,9 @@ class SchematronValidatorTest {
 
     private File getSampleFile(final String sampleName) throws URISyntaxException {
         return new File(getClass().getClassLoader().getResource("schematron/" + sampleName).toURI());
+    }
+
+    private Source getSampleSource(final String sampleName) throws URISyntaxException {
+        return Sources.fromInputStream(getClass().getClassLoader().getResourceAsStream("schematron/" + sampleName));
     }
 }

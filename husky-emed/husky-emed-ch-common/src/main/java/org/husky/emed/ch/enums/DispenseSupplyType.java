@@ -31,7 +31,7 @@ import org.husky.common.enums.ValueSetEnumInterface;
  * Version: 2021<br>
  * Status: DRAFT
  */
-@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-07-11")
 public enum DispenseSupplyType implements ValueSetEnumInterface {
 
     /**

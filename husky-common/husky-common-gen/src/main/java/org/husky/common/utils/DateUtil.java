@@ -10,6 +10,10 @@
  */
 package org.husky.common.utils;
 
+import org.husky.common.enums.NullFlavor;
+import org.husky.common.hl7cdar2.IVLTS;
+import org.husky.common.hl7cdar2.TS;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,10 +22,6 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.TimeZone;
-
-import org.husky.common.enums.NullFlavor;
-import org.husky.common.hl7cdar2.IVLTS;
-import org.husky.common.hl7cdar2.TS;
 
 /**
  * <div class="en">Toolbox for date handling.</div>
@@ -57,7 +57,7 @@ public class DateUtil {
 	
 	public static IVLTS date2Ivlts(Date value) {
 		if (value == null) {
-			return new IVLTS(NullFlavor.UNKNOWN);
+			return new IVLTS(NullFlavor.UNKNOWN_L1);
 		} else {
 			return new IVLTS(formatDateTime(value));
 		}
@@ -76,7 +76,7 @@ public class DateUtil {
 	 */
 	public static IVLTS date2IvltsDateOnly(Date value) {
 		if (value == null) {
-			return new IVLTS(NullFlavor.UNKNOWN);
+			return new IVLTS(NullFlavor.UNKNOWN_L1);
 		} else {
 			return new IVLTS(formatDateOnly(value));
 		}
@@ -95,7 +95,7 @@ public class DateUtil {
 	 */
 	public static IVLTS date2IvltsTzon(Date value) {
 		if (value == null) {
-			return new IVLTS(NullFlavor.UNKNOWN);
+			return new IVLTS(NullFlavor.UNKNOWN_L1);
 		} else {
 			return new IVLTS(formatDateTimeTzon(value));
 		}
@@ -115,7 +115,7 @@ public class DateUtil {
 	 */
 	public static TS date2Ts(Date value) {
 		if (value == null) {
-			return new IVLTS(NullFlavor.UNKNOWN);
+			return new IVLTS(NullFlavor.UNKNOWN_L1);
 		} else {
 			return new TS(formatDateTime(value));
 		}
@@ -134,7 +134,7 @@ public class DateUtil {
 	 */
 	public static TS date2TsDateOnly(Date value) {
 		if (value == null) {
-			return new IVLTS(NullFlavor.UNKNOWN);
+			return new IVLTS(NullFlavor.UNKNOWN_L1);
 		} else {
 			return new TS(formatDateOnly(value));
 		}
@@ -152,7 +152,7 @@ public class DateUtil {
 	 */
 	public static TS date2TsDateOnly(ZonedDateTime value) {
 		if (value == null) {
-			return new IVLTS(NullFlavor.UNKNOWN);
+			return new IVLTS(NullFlavor.UNKNOWN_L1);
 		} else {
 			return new TS(formatDateOnly(value));
 		}
@@ -171,7 +171,7 @@ public class DateUtil {
 	 */
 	public static TS date2TsTzon(Date value) {
 		if (value == null) {
-			return new IVLTS(NullFlavor.UNKNOWN);
+			return new IVLTS(NullFlavor.UNKNOWN_L1);
 		} else {
 			return new TS(formatDateTimeTzon(value));
 		}

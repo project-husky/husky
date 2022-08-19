@@ -11,24 +11,13 @@
 
 package org.husky.common.model;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
-
 import org.husky.common.basetypes.IdentificatorBaseType;
 import org.husky.common.enums.CodeSystems;
 import org.husky.common.enums.NullFlavor;
-import org.husky.common.hl7cdar2.AD;
-import org.husky.common.hl7cdar2.II;
-import org.husky.common.hl7cdar2.IVLTS;
-import org.husky.common.hl7cdar2.PN;
-import org.husky.common.hl7cdar2.POCDMT000040AssignedEntity;
-import org.husky.common.hl7cdar2.POCDMT000040Performer2;
-import org.husky.common.hl7cdar2.POCDMT000040Person;
-import org.husky.common.hl7cdar2.TEL;
+import org.husky.common.hl7cdar2.*;
 import org.husky.common.utils.time.DateTimes;
+
+import java.util.*;
 
 /**
  * A Person or Organization performing an action
@@ -352,7 +341,7 @@ public class Performer {
      */
     public void setTimeValue(Date eurDate) {
 		if (eurDate == null) {
-			mPerfomer.setTime(new IVLTS(NullFlavor.UNKNOWN));
+			mPerfomer.setTime(new IVLTS(NullFlavor.UNKNOWN_L1));
 		} else {
 			mPerfomer.setTime(new IVLTS(DateTimes.toHl7Dtm(eurDate.toInstant())));
 		}

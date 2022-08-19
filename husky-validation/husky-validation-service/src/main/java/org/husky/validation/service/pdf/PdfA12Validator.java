@@ -81,19 +81,20 @@ public class PdfA12Validator {
      */
     public ValidationResult validate(final InputStream pdf) throws IOException, ValidationException {
         Objects.requireNonNull(pdf);
-        final var foundry = Foundries.defaultInstance();
-        try (final var parser = foundry.createParser(pdf)) {
-            if (!this.validateFlavour(parser.getFlavour())) {
-                return new FailedValidationResult(parser.getFlavour(), "The PDF does not conform to PDF/A-1 or " +
-                        "PDF/A-2 levels");
+        try (final var foundry = Foundries.defaultInstance()) {
+            try (final var parser = foundry.createParser(pdf)) {
+                if (!this.validateFlavour(parser.getFlavour())) {
+                    return new FailedValidationResult(parser.getFlavour(), "The PDF does not conform to PDF/A-1 or " +
+                            "PDF/A-2 levels");
+                }
+                try (final var validator = foundry.createFailFastValidator(parser.getFlavour(), 1)) {
+                    return validator.validate(parser);
+                }
+            } catch (final EncryptedPdfException e) {
+                return new FailedValidationResult(PDFAFlavour.NO_FLAVOUR, "The PDF is password protected");
+            } catch (final ModelParsingException e) {
+                return new FailedValidationResult(PDFAFlavour.NO_FLAVOUR, "The PDF is unparsable: " + e.getMessage());
             }
-            try (final var validator = foundry.createFailFastValidator(parser.getFlavour(), 1)) {
-                return validator.validate(parser);
-            }
-        } catch (final EncryptedPdfException e) {
-            return new FailedValidationResult(PDFAFlavour.NO_FLAVOUR, "The PDF is password protected");
-        } catch (final ModelParsingException e) {
-            return new FailedValidationResult(PDFAFlavour.NO_FLAVOUR, "The PDF is unparsable: " + e.getMessage());
         }
     }
 

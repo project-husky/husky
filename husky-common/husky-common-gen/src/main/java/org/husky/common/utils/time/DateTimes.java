@@ -1,30 +1,20 @@
 package org.husky.common.utils.time;
 
 
-import static java.util.Calendar.DAY_OF_MONTH;
-import static java.util.Calendar.HOUR_OF_DAY;
-import static java.util.Calendar.MILLISECOND;
-import static java.util.Calendar.MINUTE;
-import static java.util.Calendar.MONTH;
-import static java.util.Calendar.SECOND;
-
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.temporal.TemporalAccessor;
-import java.util.GregorianCalendar;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.hl7cdar2.TS;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAccessor;
+import java.util.GregorianCalendar;
+
+import static java.util.Calendar.*;
 
 /**
  * Helper utilities related to HL7 DateTime (DTM) resources.
@@ -41,19 +31,19 @@ public final class DateTimes {
      * The HL7 V2.5 Date Time (DTM) format.
      */
     private static final DateTimeFormatter HL7_DATETIME_FORMATTER =
-        DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneOffset.UTC);
+        DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneId.systemDefault());
 
     /**
      * The TS.CH.TZ (TS) date time format.
      */
     private static final DateTimeFormatter TS_DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMddHHmmssZ")
-        .withZone(ZoneOffset.UTC);
+        .withZone(ZoneId.systemDefault());
 
     /**
      * The TS.CH.TZ (TS) date format.
      */
     private static final DateTimeFormatter TS_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd")
-        .withZone(ZoneOffset.UTC);
+        .withZone(ZoneId.systemDefault());
 
     /**
      * This class is not instantiable.
@@ -111,9 +101,6 @@ public final class DateTimes {
      * time is set to the end of the day (usually 23:59:59), which results in: "20190331235959".
      * <p>
      * If the HL7 DTM is already precise to the fraction of seconds, it will be returned as-is.
-     *
-     * TODO: Can we get more precision while setting the nanoseconds? As of now, the max resolution is to the
-     * millisecond, so we might get 23:59:59.999_000_000 instead of 23:59:59.999_999_999.
      *
      * @param hl7Dtm The HL7 DTM-formatted dateTime to process.
      * @return the full precision dateTime.
@@ -195,9 +182,6 @@ public final class DateTimes {
      * time is set to the end of the day (usually 23:59:59), which results in: "20190331235959".
      * <p>
      * If the HL7 DTM is already precise to the fraction of seconds, it will be returned as-is.
-     *
-     * TODO: Can we get more precision while setting the nanoseconds? As of now, the max resolution is to the
-     * millisecond, so we might get 23:59:59.999_000_000 instead of 23:59:59.999_999_999.
      *
      * @param timestamp The HL7 DTM-formatted dateTime to process.
      * @return the full precision dateTime.

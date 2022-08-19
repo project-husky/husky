@@ -78,7 +78,7 @@ public class IVLTS extends SXCMTS {
     }
 
     public IVLTS(final NullFlavor value) {
-        this.getNullFlavor().add(Objects.requireNonNullElse(value, NullFlavor.UNKNOWN).getCodeValue());
+        this.getNullFlavor().add(Objects.requireNonNullElse(value, NullFlavor.UNKNOWN_L1).getCodeValue());
     }
 
     /**

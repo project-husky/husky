@@ -11,38 +11,23 @@
 
 package org.husky.common.model;
 
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
-
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.enums.CodeSystems;
 import org.husky.common.enums.Isco08;
 import org.husky.common.enums.NullFlavor;
-import org.husky.common.hl7cdar2.AD;
-import org.husky.common.hl7cdar2.CE;
-import org.husky.common.hl7cdar2.ED;
-import org.husky.common.hl7cdar2.II;
-import org.husky.common.hl7cdar2.PN;
-import org.husky.common.hl7cdar2.POCDMT000040AssignedAuthor;
-import org.husky.common.hl7cdar2.POCDMT000040Author;
-import org.husky.common.hl7cdar2.POCDMT000040AuthoringDevice;
-import org.husky.common.hl7cdar2.POCDMT000040Person;
-import org.husky.common.hl7cdar2.TEL;
-import org.husky.common.hl7cdar2.TS;
+import org.husky.common.hl7cdar2.*;
 import org.husky.common.utils.time.DateTimes;
 import org.husky.common.utils.time.Hl7Dtm;
+
+import java.time.Instant;
+import java.util.*;
 
 /**
  * Author
  */
 public class Author {
 
-    public static final Code FUNCTION_CODE_AUTHOR_PATIENT = new Code(NullFlavor.NOT_APPLICABLE);
+    public static final Code FUNCTION_CODE_AUTHOR_PATIENT = new Code(NullFlavor.NOT_APPLICABLE_L1);
     public static final Code FUNCTION_CODE_AUTHORDEVICE = new Code("TASST", "2.16.756.5.30.2.1.1.1", null);
 
     private POCDMT000040Author mAuthor;
@@ -111,14 +96,14 @@ public class Author {
         asAuthor.setAssignedPerson(person);
         mAuthor.setAssignedAuthor(asAuthor);
 
-        mAuthor.getNullFlavor().add(org.husky.common.enums.NullFlavor.NOT_APPLICABLE_CODE);
+        mAuthor.getNullFlavor().add(org.husky.common.enums.NullFlavor.NOT_APPLICABLE_L1_CODE);
         mAuthor.getAssignedAuthor().getNullFlavor()
-                .add(org.husky.common.enums.NullFlavor.NOT_APPLICABLE_CODE);
+                .add(org.husky.common.enums.NullFlavor.NOT_APPLICABLE_L1_CODE);
         final var ii = new II();
-        ii.getNullFlavor().add(org.husky.common.enums.NullFlavor.NOT_APPLICABLE_CODE);
+        ii.getNullFlavor().add(org.husky.common.enums.NullFlavor.NOT_APPLICABLE_L1_CODE);
         mAuthor.getAssignedAuthor().getId().add(ii);
         final var tsTime = new TS();
-        tsTime.getNullFlavor().add(org.husky.common.enums.NullFlavor.NOT_APPLICABLE_CODE);
+        tsTime.getNullFlavor().add(org.husky.common.enums.NullFlavor.NOT_APPLICABLE_L1_CODE);
         mAuthor.setTime(tsTime);
     }
 
@@ -404,7 +389,7 @@ public class Author {
             addId(new Identificator(CodeSystems.GLN.getCodeSystemId(), gln));
         } else {
             final var ii = new II();
-            ii.getNullFlavor().add(org.husky.common.enums.NullFlavor.NOT_APPLICABLE_CODE);
+            ii.getNullFlavor().add(org.husky.common.enums.NullFlavor.NOT_APPLICABLE_L1_CODE);
             mAuthor.getAssignedAuthor().getId().add(ii);
         }
     }
@@ -645,7 +630,7 @@ public class Author {
     public void setOtherFunctionCode(String codeSystem, String codeSystemName, String originalText) {
         if (originalText != null) {
             final var otherCode = new CE();
-            otherCode.getNullFlavor().add(org.husky.common.enums.NullFlavor.OTHER_CODE);
+            otherCode.getNullFlavor().add(NullFlavor.OTHER_L2_CODE);
             if (codeSystem != null)
                 otherCode.setCode(codeSystem);
             if (codeSystemName != null)

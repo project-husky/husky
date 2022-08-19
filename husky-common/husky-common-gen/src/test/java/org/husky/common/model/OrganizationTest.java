@@ -10,19 +10,15 @@
  */
 package org.husky.common.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.husky.common.basetypes.AddressBaseType;
-import org.husky.common.basetypes.IdentificatorBaseType;
-import org.husky.common.basetypes.NameBaseType;
-import org.husky.common.basetypes.OrganizationBaseType;
-import org.husky.common.basetypes.TelecomBaseType;
+import org.husky.common.basetypes.*;
 import org.husky.common.enums.CountryCode;
 import org.husky.common.enums.NullFlavor;
 import org.husky.common.enums.PostalAddressUse;
 import org.husky.common.enums.TelecomAddressUse;
 import org.husky.common.hl7cdar2.POCDMT000040Organization;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * The test class for Organization.
@@ -90,7 +86,7 @@ class OrganizationTest {
 		// property
 		POCDMT000040Organization nullHl7CdaR2Value = null;
 		Organization nullObj = new Organization(nullHl7CdaR2Value);
-		assertEquals(NullFlavor.NOT_AVAILABLE, nullObj.getNullFlavor());
+		assertEquals(NullFlavor.NOT_AVAILABLE_L2, nullObj.getNullFlavor());
 
 		// This is for debugging purposes, only. When enabled, you need to add
 		// @XmlRootElement(name = "debug") to class POCDMT000040Organization

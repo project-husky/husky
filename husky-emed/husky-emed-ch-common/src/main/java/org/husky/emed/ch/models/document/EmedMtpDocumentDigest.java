@@ -22,8 +22,10 @@ import org.husky.emed.ch.models.entry.EmedMtpEntryDigest;
 
 import java.time.Instant;
 import java.time.OffsetDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Represents the digest of an MTP Emed document.
@@ -54,8 +56,8 @@ public class EmedMtpDocumentDigest extends EmedDocumentDigest {
      * @param narrativeText       The narrative text.
      * @param mtpEntryDigest      The MTP entry digest.
      */
-    public EmedMtpDocumentDigest(final String id,
-                                 final String setId,
+    public EmedMtpDocumentDigest(final UUID id,
+                                 final UUID setId,
                                  final int version,
                                  final OffsetDateTime creationTime,
                                  final Instant documentationTime,
@@ -93,7 +95,37 @@ public class EmedMtpDocumentDigest extends EmedDocumentDigest {
         return List.of(this.mtpEntryDigest);
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof final EmedMtpDocumentDigest that)) return false;
+        if (!super.equals(o)) return false;
+        return Objects.equals(mtpEntryDigest, that.mtpEntryDigest);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), mtpEntryDigest);
+    }
+
+    @Override
     public String toString() {
-        return "EmedMtpDocumentDigest(super=" + super.toString() + ", mtpEntryDigest=" + this.getMtpEntryDigest() + ")";
+        return "EmedMtpDocumentDigest{" +
+                "authors=" + this.authors +
+                ", recipients=" + this.recipients +
+                ", id='" + this.id + '\'' +
+                ", setId='" + this.setId + '\'' +
+                ", version=" + this.version +
+                ", creationTime=" + this.creationTime +
+                ", documentationTime=" + this.documentationTime +
+                ", confidentialityCode=" + this.confidentialityCode +
+                ", languageCode='" + this.languageCode + '\'' +
+                ", patient=" + this.patient +
+                ", custodian=" + this.custodian +
+                ", narrativeText=" + this.narrativeText +
+                ", remarks=" + this.remarks +
+                ", pdfRepresentation=" + Arrays.toString(this.pdfRepresentation) +
+                ", mtpEntryDigest=" + this.mtpEntryDigest +
+                '}';
     }
 }

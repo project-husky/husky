@@ -24,7 +24,7 @@ import org.husky.common.hl7cdar2.POCDMT000040Section;
  * Version: 2021<br>
  * Status: draft
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
 public class MedicationCardSectionContentModule extends POCDMT000040Section {
 
     public MedicationCardSectionContentModule() {

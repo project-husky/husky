@@ -10,27 +10,17 @@
  */
 package org.husky.common.model;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
-
 import org.apache.commons.lang3.NotImplementedException;
 import org.husky.common.basetypes.AddressBaseType;
 import org.husky.common.enums.NullFlavor;
 import org.husky.common.enums.PostalAddressUse;
-import org.husky.common.hl7cdar2.AD;
-import org.husky.common.hl7cdar2.AdxpAdditionalLocator;
-import org.husky.common.hl7cdar2.AdxpCity;
-import org.husky.common.hl7cdar2.AdxpCountry;
-import org.husky.common.hl7cdar2.AdxpHouseNumber;
-import org.husky.common.hl7cdar2.AdxpPostBox;
-import org.husky.common.hl7cdar2.AdxpPostalCode;
-import org.husky.common.hl7cdar2.AdxpState;
-import org.husky.common.hl7cdar2.AdxpStreetAddressLine;
-import org.husky.common.hl7cdar2.AdxpStreetName;
+import org.husky.common.hl7cdar2.*;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The class Address contains all necessary fields for a postal address. This class also provides mapping methods to
@@ -88,7 +78,7 @@ public class Address extends AddressBaseType {
 				}
 			}
 		} else
-			retVal.setNullFlavor(NullFlavor.NOT_AVAILABLE);
+			retVal.setNullFlavor(NullFlavor.NOT_AVAILABLE_L2);
 
 		return retVal;
 	}
@@ -273,7 +263,7 @@ public class Address extends AddressBaseType {
 			setUsage(baseType.getUsage());
 			setNullFlavor(baseType.getNullFlavor());
 		} else
-			setNullFlavor(NullFlavor.NOT_AVAILABLE);
+			setNullFlavor(NullFlavor.NOT_AVAILABLE_L2);
 
 	}
 

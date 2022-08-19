@@ -31,7 +31,7 @@ import org.husky.common.enums.ValueSetEnumInterface;
  * Version: DEFN=UV=VO=1360-20160323<br>
  * Status: FINAL
  */
-@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-07-11")
 public enum ApplicationMediaType implements ValueSetEnumInterface {
 
     /**

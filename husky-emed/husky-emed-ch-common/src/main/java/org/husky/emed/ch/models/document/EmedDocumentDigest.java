@@ -23,10 +23,7 @@ import org.husky.emed.ch.models.entry.EmedEntryDigest;
 
 import java.time.Instant;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Represents the digest of an Emed document. This class is declined in subclasses {@link EmedMtpDocumentDigest}, {@link
@@ -43,54 +40,55 @@ public abstract class EmedDocumentDigest {
     /**
      * The author(s).
      */
-    private final List<@org.checkerframework.checker.nullness.qual.NonNull AuthorDigest> authors = new ArrayList<>();
+    protected final List<@org.checkerframework.checker.nullness.qual.NonNull AuthorDigest> authors = new ArrayList<>(0);
 
     /**
      * The intended recipient(s).
      */
-    private final List<@org.checkerframework.checker.nullness.qual.NonNull RecipientDigest> recipients = new ArrayList<>();
+    protected final List<@org.checkerframework.checker.nullness.qual.NonNull RecipientDigest> recipients =
+            new ArrayList<>(0);
 
     /**
      * The document ID.
      */
     @NonNull
-    private String id;
+    protected UUID id;
 
     /**
      * The document set ID.
      */
     @NonNull
-    private String setId;
+    protected UUID setId;
 
     /**
      * The document version.
      */
-    private int version;
+    protected int version;
 
     /**
      * The document effective time.
      */
     @NonNull
-    private OffsetDateTime creationTime;
+    protected OffsetDateTime creationTime;
 
     /**
      * The documentation time (planning time, prescription time, dispense time or pharmaceutical advice time).
      */
     @NonNull
-    private Instant documentationTime;
+    protected Instant documentationTime;
 
     /**
      * The confidentiality code.
      */
     @NonNull
-    private ConfidentialityCode confidentialityCode;
+    protected ConfidentialityCode confidentialityCode;
 
     /**
      * The document main language (some parts may be in another language, e.g. PML documents may contain entries in
      * different languages).
      */
     @NonNull
-    private String languageCode;
+    protected String languageCode;
 
     /*
      * The data enterer or {@code null} if it's not provided.
@@ -104,13 +102,13 @@ public abstract class EmedDocumentDigest {
      * The targeted patient.
      */
     @NonNull
-    private PatientDigest patient;
+    protected PatientDigest patient;
 
     /**
      * The custodian.
      */
     @NonNull
-    private OrganizationDigest custodian;
+    protected OrganizationDigest custodian;
 
     /*
      * The legal authenticator or {@code null} if it's not provided.
@@ -159,18 +157,18 @@ public abstract class EmedDocumentDigest {
     /**
      * The narrative text.
      */
-    private StrucDocText narrativeText;
+    protected StrucDocText narrativeText;
 
     /**
      * The document remarks or {@code null} if it's not provided.
      */
     @Nullable
-    private StrucDocText remarks = null;
+    protected StrucDocText remarks = null;
 
     /**
      * The PDF representation of the human representation; it may be empty.
      */
-    private byte[] pdfRepresentation = new byte[]{};
+    protected byte[] pdfRepresentation = new byte[]{};
 
     /**
      * Constructor.
@@ -189,8 +187,8 @@ public abstract class EmedDocumentDigest {
      * @param recipients          The intended recipient(s).
      * @param narrativeText       The narrative text.
      */
-    public EmedDocumentDigest(final String id,
-                              final String setId,
+    public EmedDocumentDigest(final UUID id,
+                              final UUID setId,
                               final int version,
                               final OffsetDateTime creationTime,
                               final Instant documentationTime,
@@ -230,8 +228,8 @@ public abstract class EmedDocumentDigest {
         if (this == o) return true;
         if (!(o instanceof final EmedDocumentDigest that)) return false;
         return version == that.version
-                && authors.equals(that.authors)
-                && recipients.equals(that.recipients)
+                && Objects.equals(authors, that.authors)
+                && Objects.equals(recipients, that.recipients)
                 && id.equals(that.id)
                 && setId.equals(that.setId)
                 && creationTime.equals(that.creationTime)
@@ -240,15 +238,14 @@ public abstract class EmedDocumentDigest {
                 && languageCode.equals(that.languageCode)
                 && patient.equals(that.patient)
                 && custodian.equals(that.custodian)
-                && narrativeText.equals(that.narrativeText)
+                && Objects.equals(narrativeText, that.narrativeText)
                 && Objects.equals(remarks, that.remarks)
                 && Arrays.equals(pdfRepresentation, that.pdfRepresentation);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(authors, recipients, id, setId, version, creationTime, documentationTime,
-                confidentialityCode, languageCode, patient, custodian, narrativeText, remarks);
+        int result = Objects.hash(authors, recipients, id, setId, version, creationTime, documentationTime, confidentialityCode, languageCode, patient, custodian, narrativeText, remarks);
         result = 31 * result + Arrays.hashCode(pdfRepresentation);
         return result;
     }

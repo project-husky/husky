@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets xmlns="urn:hl7-org:v3" xmlns:local="http://art-decor.org/functions" xmlns:hl7="urn:hl7-org:v3" xmlns:sch="http://purl.oclc.org/dsdl/schematron">
+    <valueSet xmlns="" id="2.16.840.1.113883.1.11.10267" name="ParticipationFunction" displayName="ParticipationFunction" effectiveDate="2014-03-26T00:00:00" statusCode="final" versionLabel="DEFN=UV=VO=1360-20160323" ident="ad2bbr-" url="http://art-decor.org/decor/services/" referencedFrom="cdachemed-">
+        <desc language="en-US">
+            <p>
+                <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26</p>
+            <b>description: </b>
+            <p>This code is used to specify the exact function an actor had in a service in all necessary detail. This domain may include local extensions (CWE).</p>
+        </desc>
+        <sourceCodeSystem id="2.16.840.1.113883.5.88" identifierName="Participation&#160;Function" canonicalUri="http://terminology.hl7.org/CodeSystem/v3-ParticipationFunction" canonicalUriDSTU2="http://hl7.org/fhir/v3/ParticipationFunction" canonicalUriSTU3="http://hl7.org/fhir/v3/ParticipationFunction" canonicalUriR4="http://terminology.hl7.org/CodeSystem/v3-ParticipationFunction"/>
+        <publishingAuthority name="eHealth Suisse">
+            <addrLine>Schwarzenburgstrasse 165</addrLine>
+            <addrLine>CH-3003 Bern</addrLine>
+            <addrLine type="uri">www.e-health-suisse.ch</addrLine>
+        </publishingAuthority>
+        <conceptList>
+            <concept code="_AuthorizedParticipationFunction" codeSystem="2.16.840.1.113883.5.88" displayName="AuthorizedParticipationFunction" level="0" type="A"/>
+            <concept code="_AuthorizedReceiverParticipationFunction" codeSystem="2.16.840.1.113883.5.88" displayName="AuthorizedReceiverParticipationFunction" level="1" type="A"/>
+            <concept code="AUCG" codeSystem="2.16.840.1.113883.5.88" displayName="caregiver information receiver" level="2" type="L"/>
+            <concept code="AULR" codeSystem="2.16.840.1.113883.5.88" displayName="legitimate relationship information receiver" level="2" type="L"/>
+            <concept code="AUTM" codeSystem="2.16.840.1.113883.5.88" displayName="care team information receiver" level="2" type="L"/>
+            <concept code="AUWA" codeSystem="2.16.840.1.113883.5.88" displayName="work area information receiver" level="2" type="L"/>
+            <concept code="_ConsenterParticipationFunction" codeSystem="2.16.840.1.113883.5.88" displayName="ConsenterParticipationFunction" level="1" type="A"/>
+            <concept code="GRDCON" codeSystem="2.16.840.1.113883.5.88" displayName="legal guardian consent author" level="2" type="L"/>
+            <concept code="POACON" codeSystem="2.16.840.1.113883.5.88" displayName="healthcare power of attorney consent author" level="2" type="L"/>
+            <concept code="PRCON" codeSystem="2.16.840.1.113883.5.88" displayName="personal representative consent author" level="2" type="L"/>
+            <concept code="PROMSK" codeSystem="2.16.840.1.113883.5.88" displayName="authorized provider masking author" level="2" type="L"/>
+            <concept code="SUBCON" codeSystem="2.16.840.1.113883.5.88" displayName="subject of consent author" level="2" type="L"/>
+            <concept code="_OverriderParticipationFunction" codeSystem="2.16.840.1.113883.5.88" displayName="OverriderParticipationFunction" level="1" type="A"/>
+            <concept code="AUCOV" codeSystem="2.16.840.1.113883.5.88" displayName="consent overrider" level="2" type="L"/>
+            <concept code="AUEMROV" codeSystem="2.16.840.1.113883.5.88" displayName="emergency overrider" level="2" type="L"/>
+            <concept code="_CoverageParticipationFunction" codeSystem="2.16.840.1.113883.5.88" displayName="CoverageParticipationFunction" level="0" type="A"/>
+            <concept code="_PayorParticipationFunction" codeSystem="2.16.840.1.113883.5.88" displayName="PayorParticipationFunction" level="1" type="A"/>
+            <concept code="CLMADJ" codeSystem="2.16.840.1.113883.5.88" displayName="claims adjudication" level="2" type="L"/>
+            <concept code="ENROLL" codeSystem="2.16.840.1.113883.5.88" displayName="enrollment broker" level="2" type="L"/>
+            <concept code="FFSMGT" codeSystem="2.16.840.1.113883.5.88" displayName="ffs management" level="2" type="L"/>
+            <concept code="MCMGT" codeSystem="2.16.840.1.113883.5.88" displayName="managed care management" level="2" type="L"/>
+            <concept code="PROVMGT" codeSystem="2.16.840.1.113883.5.88" displayName="provider management" level="2" type="L"/>
+            <concept code="UMGT" codeSystem="2.16.840.1.113883.5.88" displayName="utilization management" level="2" type="L"/>
+            <concept code="_SponsorParticipationFunction" codeSystem="2.16.840.1.113883.5.88" displayName="SponsorParticipationFunction" level="1" type="A"/>
+            <concept code="FULINRD" codeSystem="2.16.840.1.113883.5.88" displayName="fully insured" level="2" type="L"/>
+            <concept code="SELFINRD" codeSystem="2.16.840.1.113883.5.88" displayName="self insured" level="2" type="L"/>
+            <concept code="_UnderwriterParticipationFunction" codeSystem="2.16.840.1.113883.5.88" displayName="UnderwriterParticipationFunction" level="1" type="A"/>
+            <concept code="PAYORCNTR" codeSystem="2.16.840.1.113883.5.88" displayName="payor contracting" level="2" type="L"/>
+            <concept code="REINS" codeSystem="2.16.840.1.113883.5.88" displayName="reinsures" level="2" type="L"/>
+            <concept code="RETROCES" codeSystem="2.16.840.1.113883.5.88" displayName="retrocessionaires" level="2" type="L"/>
+            <concept code="SUBCTRT" codeSystem="2.16.840.1.113883.5.88" displayName="subcontracting risk" level="2" type="L"/>
+            <concept code="UNDERWRTNG" codeSystem="2.16.840.1.113883.5.88" displayName="underwriting" level="2" type="L"/>
+            <concept code="ADMPHYS" codeSystem="2.16.840.1.113883.5.88" displayName="admitting physician" level="0" type="L"/>
+            <concept code="ANEST" codeSystem="2.16.840.1.113883.5.88" displayName="anesthesist" level="0" type="L"/>
+            <concept code="ANRS" codeSystem="2.16.840.1.113883.5.88" displayName="anesthesia nurse" level="0" type="L"/>
+            <concept code="ASSEMBLER" codeSystem="2.16.840.1.113883.5.88" displayName="assembly software" level="0" type="L"/>
+            <concept code="ATTPHYS" codeSystem="2.16.840.1.113883.5.88" displayName="attending physician" level="0" type="L"/>
+            <concept code="COMPOSER" codeSystem="2.16.840.1.113883.5.88" displayName="composer software" level="0" type="L"/>
+            <concept code="DISPHYS" codeSystem="2.16.840.1.113883.5.88" displayName="discharging physician" level="0" type="L"/>
+            <concept code="FASST" codeSystem="2.16.840.1.113883.5.88" displayName="first assistant surgeon" level="0" type="L"/>
+            <concept code="MDWF" codeSystem="2.16.840.1.113883.5.88" displayName="midwife" level="0" type="L"/>
+            <concept code="NASST" codeSystem="2.16.840.1.113883.5.88" displayName="nurse assistant" level="0" type="L"/>
+            <concept code="PCP" codeSystem="2.16.840.1.113883.5.88" displayName="primary care physician" level="0" type="L"/>
+            <concept code="PRISURG" codeSystem="2.16.840.1.113883.5.88" displayName="primary surgeon" level="0" type="L"/>
+            <concept code="REVIEWER" codeSystem="2.16.840.1.113883.5.88" displayName="reviewer" level="0" type="L"/>
+            <concept code="RNDPHYS" codeSystem="2.16.840.1.113883.5.88" displayName="rounding physician" level="0" type="L"/>
+            <concept code="SASST" codeSystem="2.16.840.1.113883.5.88" displayName="second assistant surgeon" level="0" type="L"/>
+            <concept code="SNRS" codeSystem="2.16.840.1.113883.5.88" displayName="scrub nurse" level="0" type="L"/>
+            <concept code="TASST" codeSystem="2.16.840.1.113883.5.88" displayName="third assistant" level="0" type="L"/>
+        </conceptList>
+    </valueSet>
+</valueSets>

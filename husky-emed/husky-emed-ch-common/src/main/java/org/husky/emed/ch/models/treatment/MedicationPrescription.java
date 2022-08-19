@@ -15,6 +15,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.ch.enums.DispenseSupplyType;
 import org.husky.emed.ch.enums.PrescriptionStatus;
 import org.husky.emed.ch.models.common.EmedReference;
+import org.husky.emed.ch.models.common.QuantityWithRegularUnit;
 import org.husky.emed.ch.models.entry.EmedPreEntryDigest;
 
 import java.time.Instant;
@@ -35,21 +36,13 @@ public class MedicationPrescription {
     /**
      * The list of 'over-the-counter' dispenses (OTC, without prescription).
      */
-    private final List<MedicationDispense> dispenses = new ArrayList<>();
+    private final List<MedicationDispense> dispenses = new ArrayList<>(0);
 
     /**
      * Number of dispense repeats/refills (excluding the initial dispense). {@code null} means no limitation.
      */
     @Nullable
     private Integer dispenseRepeatNumber = null;
-
-    /**
-     * PRE item ending time.
-     * <p>
-     * TODO: mandatory?
-     */
-    @Nullable
-    private Instant endTime;
 
     /**
      * Reference to the PRE items.
@@ -63,12 +56,21 @@ public class MedicationPrescription {
     private PrescriptionStatus prescriptionStatus;
 
     /**
-     * PRE item starting time.
-     * <p>
-     * TODO: mandatory?
+     * The quantity to dispense or {@code null} if it isn't provided.
      */
     @Nullable
+    private QuantityWithRegularUnit quantityToDispense;
+
+    /**
+     * PRE item start time.
+     */
     private Instant startTime;
+
+    /**
+     * PRE item stop time.
+     */
+    @Nullable
+    private Instant stopTime;
 
     /**
      * Whether the substitution is permitted (Equivalent) or not (None).
@@ -76,7 +78,7 @@ public class MedicationPrescription {
     private boolean substitutionPermitted;
 
     /**
-     * Returns whether the dispense has been completed.
+     * Returns whether the prescription may be dispensed again.
      */
     private boolean isDispenseCompleted() {
         for (final MedicationDispense dispense : this.dispenses) {
@@ -98,9 +100,8 @@ public class MedicationPrescription {
      * @return {@code true} if the prescription may be ready for validation, {@code false} otherwise.
      */
     public boolean mayBeReadyForValidationInTheFuture() {
-        return !Instant.now().isAfter(this.endTime) &&
-                (this.prescriptionStatus == PrescriptionStatus.PROVISIONAL ||
-                        this.prescriptionStatus == PrescriptionStatus.SUBMITTED);
+        return (this.prescriptionStatus == PrescriptionStatus.PROVISIONAL || this.prescriptionStatus == PrescriptionStatus.SUBMITTED)
+                && (this.stopTime == null || !Instant.now().isAfter(this.stopTime));
     }
 
     /**
@@ -112,7 +113,7 @@ public class MedicationPrescription {
      * @return {@code true} if the prescription may be ready for dispense, {@code false} otherwise.
      */
     public boolean mayBeReadyForDispenseInTheFuture() {
-        return (this.endTime == null || !Instant.now().isAfter(this.endTime)) // if end time null or in the future
-                && this.prescriptionStatus == PrescriptionStatus.ACTIVE;
+        return this.prescriptionStatus == PrescriptionStatus.ACTIVE &&
+                (this.stopTime == null || !Instant.now().isAfter(this.stopTime));
     }
 }

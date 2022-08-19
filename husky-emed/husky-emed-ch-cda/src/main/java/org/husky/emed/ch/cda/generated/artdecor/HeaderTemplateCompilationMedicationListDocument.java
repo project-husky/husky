@@ -23,7 +23,7 @@ import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
  * Version: 2019<br>
  * Status: draft
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
 public class HeaderTemplateCompilationMedicationListDocument extends POCDMT000040ClinicalDocument {
 
     public HeaderTemplateCompilationMedicationListDocument() {

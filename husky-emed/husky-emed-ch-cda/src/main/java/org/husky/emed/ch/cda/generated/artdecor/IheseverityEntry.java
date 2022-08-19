@@ -27,7 +27,7 @@ import org.husky.common.model.Code;
  * Version: 2014<br>
  * Status: active
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-20")
 public class IheseverityEntry extends POCDMT000040Observation {
 
     public IheseverityEntry() {
@@ -39,16 +39,13 @@ public class IheseverityEntry extends POCDMT000040Observation {
                                               "2.16.840.1.113883.5.4",
                                               null,
                                               null));
-        vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed").withCodeSystem("2.16.840.1.113883.5.14").build()));
         statusCode = (new Code(CodeBaseType.builder().withCode("completed").withCodeSystem("2.16.840.1.113883.5.14").build())).getHl7CdaR2Cs();
         vocabValueCode.add(new Code(CodeBaseType.builder().withCode("L").withCodeSystem("2.16.840.1.113883.5.1063").build()));
         vocabValueCode.add(new Code(CodeBaseType.builder().withCode("H").withCodeSystem("2.16.840.1.113883.5.1063").build()));
         vocabValueCode.add(new Code(CodeBaseType.builder().withCode("M").withCodeSystem("2.16.840.1.113883.5.1063").build()));
     }
 
-    private final List<Code> vocabStatusCodeCode = new ArrayList<>();
-
-    private final List<Code> vocabValueCode = new ArrayList<>();
+    private final List<Code> vocabValueCode = new ArrayList<>(3);
 
     /**
      * Adds a hl7Value
@@ -120,13 +117,6 @@ public class IheseverityEntry extends POCDMT000040Observation {
      */
     public org.husky.common.hl7cdar2.ED getHl7Text() {
         return text;
-    }
-
-    /**
-     * Returns a list of vocab codes as defined in the ART-DECOR model
-     */
-    public List<Code> getVocabStatusCodeCode() {
-        return vocabStatusCodeCode;
     }
 
     /**

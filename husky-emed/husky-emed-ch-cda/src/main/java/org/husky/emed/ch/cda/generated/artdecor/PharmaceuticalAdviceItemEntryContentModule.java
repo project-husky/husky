@@ -27,7 +27,7 @@ import org.husky.common.model.Code;
  * Version: 2020<br>
  * Status: draft
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-20")
 public class PharmaceuticalAdviceItemEntryContentModule extends POCDMT000040Observation {
 
     public PharmaceuticalAdviceItemEntryContentModule() {
@@ -44,9 +44,17 @@ public class PharmaceuticalAdviceItemEntryContentModule extends POCDMT000040Obse
         vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed").build()));
     }
 
-    private final List<Code> vocabCodeCode = new ArrayList<>();
+    private final List<Code> vocabCodeCode = new ArrayList<>(6);
 
-    private final List<Code> vocabStatusCodeCode = new ArrayList<>();
+    private final List<Code> vocabStatusCodeCode = new ArrayList<>(2);
+
+    /**
+     * Adds a hl7Author<br/>
+     * Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
+     */
+    public void addHl7Author(org.husky.common.hl7cdar2.POCDMT000040Author value) {
+        getAuthor().add(value);
+    }
 
     /**
      * Adds a hl7Id<br/>
@@ -62,6 +70,14 @@ public class PharmaceuticalAdviceItemEntryContentModule extends POCDMT000040Obse
      */
     public void addHl7Reference(org.husky.common.hl7cdar2.POCDMT000040Reference value) {
         getReference().add(value);
+    }
+
+    /**
+     * Adds a hl7Author<br/>
+     * Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
+     */
+    public void clearHl7Author() {
+        getAuthor().clear();
     }
 
     /**
@@ -121,14 +137,6 @@ public class PharmaceuticalAdviceItemEntryContentModule extends POCDMT000040Obse
     }
 
     /**
-     * Gets the hl7Author<br/>
-     * Pharmaceutical Adviser
-     */
-    public List<org.husky.common.hl7cdar2.POCDMT000040Author> getHl7Author() {
-        return author;
-    }
-
-    /**
      * Gets the hl7Code<br/>
      * Observation Code
      */
@@ -138,7 +146,7 @@ public class PharmaceuticalAdviceItemEntryContentModule extends POCDMT000040Obse
 
     /**
      * Gets the hl7EffectiveTime<br/>
-     * Effective Time (Date of becoming effective)
+     * Referenced Medication Treatment Plan, Prescription-, Dispense- or Medication Administration Item
      */
     public org.husky.common.hl7cdar2.IVLTS getHl7EffectiveTime() {
         return effectiveTime;
@@ -223,15 +231,6 @@ public class PharmaceuticalAdviceItemEntryContentModule extends POCDMT000040Obse
     }
 
     /**
-     * Sets the hl7Author<br/>
-     * Pharmaceutical Adviser
-     */
-    public void setHl7Author(org.husky.common.hl7cdar2.POCDMT000040Author value) {
-        getAuthor().clear();
-        getAuthor().add(value);
-    }
-
-    /**
      * Sets the hl7Code<br/>
      * Observation Code
      */
@@ -241,7 +240,7 @@ public class PharmaceuticalAdviceItemEntryContentModule extends POCDMT000040Obse
 
     /**
      * Sets the hl7EffectiveTime<br/>
-     * Effective Time (Date of becoming effective)
+     * Referenced Medication Treatment Plan, Prescription-, Dispense- or Medication Administration Item
      */
     public void setHl7EffectiveTime(org.husky.common.hl7cdar2.IVLTS value) {
         this.effectiveTime = value;

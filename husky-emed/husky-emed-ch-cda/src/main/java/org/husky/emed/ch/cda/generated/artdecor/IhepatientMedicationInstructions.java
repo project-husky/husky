@@ -27,7 +27,7 @@ import org.husky.common.model.Code;
  * Version: 2014<br>
  * Status: active
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-20")
 public class IhepatientMedicationInstructions extends POCDMT000040Act {
 
     public IhepatientMedicationInstructions() {
@@ -42,7 +42,7 @@ public class IhepatientMedicationInstructions extends POCDMT000040Act {
         vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed").build()));
     }
 
-    private final List<Code> vocabStatusCodeCode = new ArrayList<>();
+    private final List<Code> vocabStatusCodeCode = new ArrayList<>(1);
 
     /**
      * Creates fixed contents for CDA Element hl7Code

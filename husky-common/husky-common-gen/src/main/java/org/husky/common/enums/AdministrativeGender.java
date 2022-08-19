@@ -1,183 +1,270 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
- * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  */
 package org.husky.common.enums;
+
+import java.util.Objects;
+import javax.annotation.processing.Generated;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
-/*
-*<div class="de">Das Geschlecht einer Person, welches für verwaltungstechnische Belange verwendet wird</div>
-*<div class="fr"></div>
-*/
+/**
+ * Enumeration of AdministrativeGender values
+ * <p>
+ * EN: <p> <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26</p><b>description: </b><p>The gender of a person used for adminstrative purposes (as opposed to clinical gender)</p>.<br>
+ * DE: No designation found.<br>
+ * FR: No designation found.<br>
+ * IT: No designation found.<br>
+ * <p>
+ * Identifier: 2.16.840.1.113883.1.11.1<br>
+ * Effective date: 2014-03-26 00:00<br>
+ * Version: DEFN=UV=VO=1360-20160323<br>
+ * Status: FINAL
+ */
+@Generated(value = "org.husky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-04-19")
 public enum AdministrativeGender implements ValueSetEnumInterface {
 
-	/**
-	 * <div class="en"></div> <div class="de">Weiblich</div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 */
-	FEMALE("F", "Female"),
-	/**
-	 * <div class="en"></div> <div class="de">Männlich</div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 */
-	MALE("M", "Male"),
-	/**
-	 * <div class="en"></div> <div class="de">Undifferenziert</div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 */
-	UNDIFFERENTIATED("UN", "Undifferentiated");
+    /**
+     * EN: Female.<br>
+     */
+    FEMALE("F",
+           "2.16.840.1.113883.5.1",
+           "Female",
+           "Female",
+           "TOTRANSLATE",
+           "TOTRANSLATE",
+           "TOTRANSLATE"),
+    /**
+     * EN: Male.<br>
+     */
+    MALE("M",
+         "2.16.840.1.113883.5.1",
+         "Male",
+         "Male",
+         "TOTRANSLATE",
+         "TOTRANSLATE",
+         "TOTRANSLATE"),
+    /**
+     * EN: Undifferentiated.<br>
+     */
+    UNDIFFERENTIATED("UN",
+                     "2.16.840.1.113883.5.1",
+                     "Undifferentiated",
+                     "Undifferentiated",
+                     "TOTRANSLATE",
+                     "TOTRANSLATE",
+                     "TOTRANSLATE");
 
-	/**
-	 * <div class="en">Name of the Code System</div> <div class="de">Name des
-	 * Codes Systems</div>
-	 */
-	public static final String CODE_SYSTEM_NAME = "HL7 AdministrativeGender";
-	/**
-	 * <div class="en">Identifier of the Code System</div>
-	 * <div class="de">Identifikator für das Code System</div>
-	 */
-	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.1";
-	public static final String FEMALE_CODE = "F";
+    /**
+     * EN: Code for Female.<br>
+     */
+    public static final String FEMALE_CODE = "F";
 
-	public static final String MALE_CODE = "M";
+    /**
+     * EN: Code for Male.<br>
+     */
+    public static final String MALE_CODE = "M";
 
-	public static final String UNDIFFERENTIATED_CODE = "UN";
+    /**
+     * EN: Code for Undifferentiated.<br>
+     */
+    public static final String UNDIFFERENTIATED_CODE = "UN";
 
-	/**
-	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
-	 *
-	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
-	 */
-	public static AdministrativeGender getEnum(String code) {
-		for (final AdministrativeGender x : values()) {
-			if (x.getCodeValue().equals(code)) {
-				return x;
-			}
-		}
-		return null;
-	}
+    /**
+     * Identifier of the value set.
+     */
+    public static final String VALUE_SET_ID = "2.16.840.1.113883.1.11.1";
 
-	/**
-	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
-	 * ist.</div>
-	 *
-	 *
-	 * @param enumName
-	 *            <br>
-	 *            <div class="de"> enumName</div>
-	 * @return true, if enum is in this value set
-	 */
-	public static boolean isEnumOfValueSet(String enumName) {
-		if (enumName == null) {
-			return false;
-		}
-		try {
-			Enum.valueOf(AdministrativeGender.class, enumName);
-			return true;
-		} catch (final IllegalArgumentException ex) {
-			return false;
-		}
-	}
+    /**
+     * Name of the value set.
+     */
+    public static final String VALUE_SET_NAME = "AdministrativeGender";
 
-	/**
-	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
-	 * ist.</div>
-	 *
-	 * @param codeValue
-	 *            <br>
-	 *            <div class="de"> code</div>
-	 * @return true, if is in value set
-	 */
-	public static boolean isInValueSet(String codeValue) {
-		for (final AdministrativeGender x : values()) {
-			if (x.getCodeValue().equals(codeValue)) {
-				return true;
-			}
-		}
-		return false;
-	}
+    /**
+     * Identifier of the code system (all values share the same).
+     */
+    public static final String CODE_SYSTEM_ID = "2.16.840.1.113883.5.1";
 
-	/**
-	 * <div class="en">Machine interpretable and (inside this class) unique
-	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb dieser
-	 * Klasse) eindeutiger Code</div>
-	 */
-	private String code;
+    /**
+     * Gets the Enum with a given code.
+     *
+     * @param code The code value.
+     * @return the enum value found or {@code null}.
+     */
+    @Nullable
+    public static AdministrativeGender getEnum(@Nullable final String code) {
+        for (final AdministrativeGender x : values()) {
+            if (x.getCodeValue().equals(code)) {
+                return x;
+            }
+        }
+        return null;
+    }
 
-	/**
-	 * <div class="en">Human readable name</div> <div class="de">Menschenlesbarer
-	 * Name</div>
-	 */
-	private String displayName;
+    /**
+     * Checks if a given enum is part of this value set.
+     *
+     * @param enumName The name of the enum.
+     * @return {@code true} if the name is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isEnumOfValueSet(@Nullable final String enumName) {
+        if (enumName == null) {
+            return false;
+        }
+        try {
+            Enum.valueOf(AdministrativeGender.class,
+                         enumName);
+            return true;
+        } catch (final IllegalArgumentException ex) {
+            return false;
+        }
+    }
 
-	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display
-	 * Name</div> <div class="de">Instantiiert dieses Enum Object mittels eines
-	 * Codes und einem Display Name</div>
-	 *
-	 * @param code        <br>
-	 *                    <div class="de"> code</div>
-	 * @param displayName <br>
-	 *                    <div class="de"> display name</div>
-	 */
-	private AdministrativeGender(String code, String displayName) {
-		this.code = code;
-		this.displayName = displayName;
-	}
+    /**
+     * Checks if a given code value is in this value set.
+     *
+     * @param codeValue The code value.
+     * @return {@code true} if the value is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isInValueSet(@Nullable final String codeValue) {
+        for (final AdministrativeGender x : values()) {
+            if (x.getCodeValue().equals(codeValue)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    /**
+     * Machine interpretable and (inside this class) unique code.
+     */
+    @NonNull
+    private final String code;
 
-	/**
-	 * <div class="en">Gets the actual Code as string</div> <div class="de">Liefert
-	 * den eigentlichen Code als String</div>
-	 *
-	 * @return <div class="en">the code</div>
-	 */
-	public String getCodeValue() {
-		return this.code;
-	}
+    /**
+     * Identifier of the referencing code system.
+     */
+    @NonNull
+    private final String codeSystem;
 
-	@Override
-	public @NonNull String getCodeSystemId() {
-		return CODE_SYSTEM_OID;
-	}
+    /**
+     * The display names per language. It's always stored in the given order: default display name (0), in English (1),
+     * in German (2), in French (3) and in Italian (4).
+     */
+    @NonNull
+    private final String[] displayNames;
 
-	@Override
-	public String getDisplayName() {
-		return this.displayName;
-	}
+    /**
+     * Instantiates this enum with a given code and display names.
+     *
+     * @param code          The code value.
+     * @param codeSystem    The code system (OID).
+     * @param displayName   The default display name.
+     * @param displayNameEn The display name in English.
+     * @param displayNameDe The display name in German.
+     * @param displayNameFr The display name in French.
+     * @param displayNameIt The display name in Italian.
+     */
+    AdministrativeGender(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
+        this.code = Objects.requireNonNull(code);
+        this.codeSystem = Objects.requireNonNull(codeSystem);
+        this.displayNames = new String[5];
+        this.displayNames[0] = Objects.requireNonNull(displayName);
+        this.displayNames[1] = Objects.requireNonNull(displayNameEn);
+        this.displayNames[2] = Objects.requireNonNull(displayNameDe);
+        this.displayNames[3] = Objects.requireNonNull(displayNameFr);
+        this.displayNames[4] = Objects.requireNonNull(displayNameIt);
+    }
 
-	@Override
-	public @NonNull String getDisplayName(@Nullable LanguageCode languageCode) {
-		return getDisplayName();
-	}
+    /**
+     * Gets the code system identifier.
+     *
+     * @return the code system identifier.
+     */
+    @Override
+    @NonNull
+    public String getCodeSystemId() {
+        return this.codeSystem;
+    }
 
-	@Override
-	public @NonNull String getValueSetId() {
-		return CODE_SYSTEM_OID;
-	}
+    /**
+     * Gets the code system name.
+     *
+     * @return the code system name.
+     */
+    @Override
+    @NonNull
+    public String getCodeSystemName() {
+        final var codeSystem = CodeSystems.getEnum(this.codeSystem);
+        if (codeSystem != null) {
+            return codeSystem.getCodeSystemName();
+        }
+        return "";
+    }
 
-	@Override
-	public @NonNull String getValueSetName() {
-		return CODE_SYSTEM_NAME;
-	}
+    /**
+     * Gets the code value as a string.
+     *
+     * @return the code value.
+     */
+    @Override
+    @NonNull
+    public String getCodeValue() {
+        return this.code;
+    }
 
-	@Override
-	public @NonNull String getCodeSystemName() {
-		return CODE_SYSTEM_NAME;
-	}
+    /**
+     * Gets the display name defined by the language param.
+     *
+     * @param languageCode The language code to get the display name for, {@code null} to get the default display name.
+     * @return the display name in the desired language.
+     */
+    @Override
+    @NonNull
+    public String getDisplayName(@Nullable final LanguageCode languageCode) {
+        if (languageCode == null) {
+            return this.displayNames[0];
+        }
+        return switch(languageCode) {
+            case ENGLISH ->
+                this.displayNames[1];
+            case GERMAN ->
+                this.displayNames[2];
+            case FRENCH ->
+                this.displayNames[3];
+            case ITALIAN ->
+                this.displayNames[4];
+            default ->
+                "TOTRANSLATE";
+        };
+    }
 
+    /**
+     * Gets the value set identifier.
+     *
+     * @return the value set identifier.
+     */
+    @Override
+    @NonNull
+    public String getValueSetId() {
+        return VALUE_SET_ID;
+    }
+
+    /**
+     * Gets the value set name.
+     *
+     * @return the value set name.
+     */
+    @Override
+    @NonNull
+    public String getValueSetName() {
+        return VALUE_SET_NAME;
+    }
 }

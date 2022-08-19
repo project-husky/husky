@@ -10,13 +10,13 @@
  */
 package org.husky.common.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.husky.common.basetypes.IdentificatorBaseType;
 import org.husky.common.enums.NullFlavor;
 import org.husky.common.hl7cdar2.II;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Identifiable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The class Identificator contains all necessary fields for an id. This class also provides mapping methods to other
@@ -156,7 +156,7 @@ public class Identificator extends IdentificatorBaseType {
             retVal.setExtension(hl7CdaR2Value.getExtension());
             retVal.setRoot(hl7CdaR2Value.getRoot());
         } else
-            retVal.setNullFlavor(NullFlavor.NOT_AVAILABLE);
+            retVal.setNullFlavor(NullFlavor.NOT_AVAILABLE_L2);
 
         return retVal;
 
@@ -214,7 +214,7 @@ public class Identificator extends IdentificatorBaseType {
             setRoot(baseType.getRoot());
             setNullFlavor(baseType.getNullFlavor());
         } else
-            setNullFlavor(NullFlavor.NOT_AVAILABLE);
+            setNullFlavor(NullFlavor.NOT_AVAILABLE_L2);
     }
 
     /**

@@ -33,7 +33,11 @@ import org.opensaml.saml.saml2.core.*;
 import org.opensaml.saml.saml2.core.impl.AttributeValueImpl;
 import org.opensaml.storage.ReplayCache;
 import org.opensaml.storage.impl.MemoryStorageService;
+import org.opensaml.xmlsec.keyinfo.KeyInfoCredentialResolver;
 import org.opensaml.xmlsec.signature.support.SignatureTrustEngine;
+import org.opensaml.xmlsec.signature.support.impl.ExplicitKeySignatureTrustEngine;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.QName;
@@ -57,7 +61,7 @@ import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParamete
  * <ul>
  *     <li>{@link SAML2AssertionValidationParameters#CLOCK_SKEW}: Optional. If not present the default clock skew of
  *     {@link Duration#ZERO} will be used.
- *     <li>Others?
+ *     <li>{@link SAML2AssertionValidationParameters#COND_VALID_AUDIENCES}: Optional. The set of allowed audiences.
  * </ul>
  *
  * <p>The required conditions and attributes are extracted, verified then put in the {@link ValidationContext}
@@ -68,11 +72,12 @@ import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParamete
  */
 @ThreadSafe // The only thread-unsafe object seems to be the ValidationContext
 public class ChEprAssertionValidator {
-	
-	public static final String ERRMSG_ATTRIBUTE = "The attribute '";
-	public static final String ERRMSG_IS_MISSING = "' is missing";
-	public static final String NAMESPACE_GS1_GLN = "urn:gs1:gln";
-	public static final String ERRMSG_SUBJECT_CONFIRMATION_MISSING = "The SubjectConfirmation is missing";
+    private static final Logger log = LoggerFactory.getLogger(ChEprAssertionValidator.class);
+
+    public static final String ERRMSG_ATTRIBUTE = "The attribute '";
+    public static final String ERRMSG_IS_MISSING = "' is missing";
+    public static final String NAMESPACE_GS1_GLN = "urn:gs1:gln";
+    public static final String ERRMSG_SUBJECT_CONFIRMATION_MISSING = "The SubjectConfirmation is missing";
 
     /**
      * The SAML 2 {@link Assertion} validator implemented by OpenSAML and configured for the CH-EPR specifications.
@@ -82,28 +87,35 @@ public class ChEprAssertionValidator {
     /**
      * Constructor.
      *
-     * @param oneTimeUseConditionExpires The time for disposal of tracked assertion from the replay cache. If {@code
-     *                                   null}, the OneTimeUseCondition is not processed.
+     * @param oneTimeUseConditionExpires The time for disposal of tracked assertion from the replay cache. If
+     *                                   {@code null}, the OneTimeUseCondition is not processed.
+     * @param signatureTrustEngine       The trust engine to use to validate signatures. This can be an
+     *                                   {@link ExplicitKeySignatureTrustEngine} or any other implementation. A
+     *                                   {@link KeyInfoCredentialResolver} is not needed, as we don't expect a
+     *                                   KeyInfo in the CH:XUA assertions.
      * @throws ComponentInitializationException if the {@link ReplayCache} of the {@link OneTimeUseConditionValidator}
      *                                          fails to initialize.
      */
     public ChEprAssertionValidator(@Nullable final Duration oneTimeUseConditionExpires,
-                                   final SignatureTrustEngine signatureTrustEngine) throws ComponentInitializationException {
+                                   @Nullable final SignatureTrustEngine signatureTrustEngine) throws ComponentInitializationException {
         final var conditionValidators = new ArrayList<ConditionValidator>();
         conditionValidators.add(new ChEprAudienceRestrictionConditionValidator());
         conditionValidators.add(new ChEprDelegationRestrictionConditionValidator());
         if (oneTimeUseConditionExpires != null) {
+            final var storageService = new MemoryStorageService();
+            storageService.setId("memory-storage-saml-onetimeuse");
+            storageService.setCleanupInterval(Duration.ofSeconds(900));
+            storageService.initialize();
             final var cache = new ReplayCache();
-            cache.setStorage(new MemoryStorageService());
-            cache.doInitialize();
+            cache.setStorage(storageService);
+            cache.initialize();
             conditionValidators.add(new OneTimeUseConditionValidator(cache, oneTimeUseConditionExpires));
         }
 
-        /*final var trustEngine = new ExplicitKeySignatureTrustEngine( TODO
-                new CollectionCredentialResolver(),
-                new NoopKeyInfoCredentialResolver() // A KeyInfo element is not expected in the Signature
-        );*/
-        
+        if (signatureTrustEngine == null) {
+            log.warn("Using ChEprAssertionValidator without signature validator!");
+        }
+
         this.validator = new SAML20AssertionValidator(
                 conditionValidators,
                 List.of(new ChEprSubjectConfirmationBearerValidator()),
@@ -115,8 +127,8 @@ public class ChEprAssertionValidator {
     }
 
     /**
-     * Validate the supplied SAML 2 {@link Assertion}, using the parameters from the supplied {@link
-     * ValidationContext}.
+     * Validate the supplied SAML 2 {@link Assertion}, using the parameters from the supplied
+     * {@link ValidationContext}.
      *
      * @param assertion        The assertion being evaluated.
      * @param staticParameters ?? or null.
@@ -136,7 +148,7 @@ public class ChEprAssertionValidator {
         }
 
         newStaticParameters.putIfAbsent(CLOCK_SKEW, Duration.ZERO);
-        newStaticParameters.put(SIGNATURE_REQUIRED, false); 
+        newStaticParameters.put(SIGNATURE_REQUIRED, true);
         final var validationContext = new ValidationContext(newStaticParameters);
 
         // Extract the role that will influence other CH-EPR validators
@@ -228,8 +240,8 @@ public class ChEprAssertionValidator {
     }
 
     /**
-     * Validates the Subject. The validation of the SubjectConfirmation is delegated to the {@link
-     * ChEprSubjectConfirmationBearerValidator}.
+     * Validates the Subject. The validation of the SubjectConfirmation is delegated to the
+     * {@link ChEprSubjectConfirmationBearerValidator}.
      *
      * @param subject The Subject to be validated.
      * @param context The current validation context.
@@ -250,8 +262,8 @@ public class ChEprAssertionValidator {
             return ValidationResult.INVALID;
         }
 
-		if ((role == Role.HEALTHCARE_PROFESSIONAL || role == Role.ASSISTANT || role == Role.TECHNICAL_USER)
-				&& !NAMESPACE_GS1_GLN.equals(nameId.getNameQualifier())) {
+        if ((role == Role.HEALTHCARE_PROFESSIONAL || role == Role.ASSISTANT || role == Role.TECHNICAL_USER)
+                && !NAMESPACE_GS1_GLN.equals(nameId.getNameQualifier())) {
             context.setValidationFailureMessage("The healthcare professional GLN is missing in the Subject");
             return ValidationResult.INVALID;
         } else if (role == Role.POLICY_ADMINISTRATOR && !POLICY_ADMINISTRATOR_ID.equals(nameId.getNameQualifier())) {
@@ -273,8 +285,8 @@ public class ChEprAssertionValidator {
     }
 
     /**
-     * Validates that all required attributes and conditions have been properly validated and put in the {@link
-     * ValidationContext} dynamic parameters.
+     * Validates that all required attributes and conditions have been properly validated and put in the
+     * {@link ValidationContext} dynamic parameters.
      *
      * @param assertion The assertion being evaluated.
      * @param context   The current validation context.
@@ -295,6 +307,16 @@ public class ChEprAssertionValidator {
         if (context.getDynamicParameters().getOrDefault(CH_EPR_ORGANIZATIONS_ID, null) == null) {
             context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANIZATIONID + ERRMSG_IS_MISSING);
             return ValidationResult.INVALID;
+        }
+        if (role == Role.HEALTHCARE_PROFESSIONAL || role == Role.ASSISTANT || role == Role.TECHNICAL_USER) {
+            if (((List<String>) context.getDynamicParameters().get(CH_EPR_ORGANIZATIONS_NAME)).isEmpty()) {
+                context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANISATION + "' shall not be empty");
+                return ValidationResult.INVALID;
+            }
+            if (((List<String>) context.getDynamicParameters().get(CH_EPR_ORGANIZATIONS_ID)).isEmpty()) {
+                context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANIZATIONID + "' shall not be empty");
+                return ValidationResult.INVALID;
+            }
         }
         if (context.getDynamicParameters().getOrDefault(CH_EPR_HOME_COMMUNITY_ID, null) == null) {
             context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + IHE_XCA_HOMECOMMUNITYID + ERRMSG_IS_MISSING);

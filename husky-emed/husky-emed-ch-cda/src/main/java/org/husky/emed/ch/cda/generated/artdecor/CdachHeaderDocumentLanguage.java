@@ -19,11 +19,11 @@ import org.husky.common.hl7cdar2.CS;
  * Element description: The RFC5646 based language in which the narrative texts in this CDA document instance are written.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.1.10.2.22<br>
- * Effective date: 2019-09-12 14:28:13<br>
- * Version: 2020<br>
+ * Effective date: 2022-02-24 10:11:09<br>
+ * Version: 2022<br>
  * Status: active
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
 public class CdachHeaderDocumentLanguage extends CS {
 
     public CdachHeaderDocumentLanguage() {

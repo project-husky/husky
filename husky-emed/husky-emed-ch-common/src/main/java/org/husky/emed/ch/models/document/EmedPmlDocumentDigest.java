@@ -21,9 +21,7 @@ import org.husky.emed.ch.models.entry.EmedEntryDigest;
 
 import java.time.Instant;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Represents the digest of a PML Emed document.
@@ -35,7 +33,7 @@ public class EmedPmlDocumentDigest extends EmedDocumentDigest {
     /**
      * The entries contained in the document.
      */
-    private final List<@NonNull EmedEntryDigest> entryDigests = new ArrayList<>();
+    private final List<@NonNull EmedEntryDigest> entryDigests = new ArrayList<>(0);
 
     /**
      * Constructor.
@@ -54,8 +52,8 @@ public class EmedPmlDocumentDigest extends EmedDocumentDigest {
      * @param narrativeText       The narrative text.
      * @param entryDigests        The entry digests.
      */
-    public EmedPmlDocumentDigest(final String id,
-                                 final String setId,
+    public EmedPmlDocumentDigest(final UUID id,
+                                 final UUID setId,
                                  final int version,
                                  final OffsetDateTime creationTime,
                                  final Instant documentationTime,
@@ -86,7 +84,37 @@ public class EmedPmlDocumentDigest extends EmedDocumentDigest {
         return this.entryDigests;
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof final EmedPmlDocumentDigest that)) return false;
+        if (!super.equals(o)) return false;
+        return Objects.equals(entryDigests, that.entryDigests);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), entryDigests);
+    }
+
+    @Override
     public String toString() {
-        return "EmedPmlDocumentDigest(super=" + super.toString() + ", entryDigests=" + this.getEntryDigests() + ")";
+        return "EmedPmlDocumentDigest{" +
+                "authors=" + this.authors +
+                ", recipients=" + this.recipients +
+                ", id='" + this.id + '\'' +
+                ", setId='" + this.setId + '\'' +
+                ", version=" + this.version +
+                ", creationTime=" + this.creationTime +
+                ", documentationTime=" + this.documentationTime +
+                ", confidentialityCode=" + this.confidentialityCode +
+                ", languageCode='" + this.languageCode + '\'' +
+                ", patient=" + this.patient +
+                ", custodian=" + this.custodian +
+                ", narrativeText=" + this.narrativeText +
+                ", remarks=" + this.remarks +
+                ", pdfRepresentation=" + Arrays.toString(this.pdfRepresentation) +
+                ", entryDigests=" + this.entryDigests +
+                '}';
     }
 }

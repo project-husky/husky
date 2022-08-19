@@ -14,12 +14,18 @@ import lombok.NoArgsConstructor;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.ch.enums.DispenseStatus;
 import org.husky.emed.ch.enums.DispenseSupplyType;
-import org.husky.emed.ch.models.common.QuantityWithUnitCode;
+import org.husky.emed.ch.enums.RegularUnitCodeAmbu;
+import org.husky.emed.ch.models.common.MedicationDosageInstructions;
 import org.husky.emed.ch.models.entry.EmedDisEntryDigest;
 
+import java.util.UUID;
+
 /**
- * A data structure that represents a medication dispense. Contrary to a {@link EmedDisEntryDigest},
- * it contains the full state of the dispense (i.e the initial DIS item and all PADV items that have been aggregated).
+ * A data structure that represents a medication dispense. Contrary to a {@link EmedDisEntryDigest}, it contains the
+ * full state of the dispense (i.e. the initial DIS item and all PADV items that have been aggregated).
+ * <p>
+ * PADV documents that are aggregated can only change the status and dosage instructions; other fields are not
+ * updatable.
  *
  * @author Quentin Ligier
  */
@@ -28,14 +34,32 @@ import org.husky.emed.ch.models.entry.EmedDisEntryDigest;
 public class MedicationDispense {
 
     /**
-     * The DIS item ID.
+     * The dispense comment, if any.
      */
-    private String itemId;
+    @Nullable
+    private String comment;
 
     /**
      * The dispense type (first fill or refill, complete or partial).
      */
     private DispenseSupplyType dispenseType;
+
+    /**
+     * The dosage instructions associated with the dispense, if any.
+     */
+    @Nullable
+    private MedicationDosageInstructions dosageInstructions;
+
+    /**
+     * The fulfillment notes, if any.
+     */
+    @Nullable
+    private String fulfillmentNotes;
+
+    /**
+     * The DIS item ID.
+     */
+    private UUID itemId;
 
     /**
      * The actual status of the dispense.
@@ -49,10 +73,12 @@ public class MedicationDispense {
      * consumable units of the medication without units or the quantity in non-countable units.
      */
     @Nullable
-    private QuantityWithUnitCode quantity;
+    private RegularUnitCodeAmbu quantityUnit;
 
-    /*
-     * List of aggregated PADV?
+    /**
+     * The dispensed medication quantity. If the dispensed product has information about the medication package, the
+     * quantity is the amount of packages of the medicine without units. Otherwise, it may be either the amount of
+     * consumable units of the medication without units or the quantity in non-countable units.
      */
-
+    private String quantityValue;
 }

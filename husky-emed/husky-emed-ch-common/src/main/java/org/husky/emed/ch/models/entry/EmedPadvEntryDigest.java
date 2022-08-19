@@ -12,11 +12,13 @@ package org.husky.emed.ch.models.entry;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.ch.enums.EmedEntryType;
 import org.husky.emed.ch.enums.PharmaceuticalAdviceStatus;
+import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.EmedReference;
 
 import java.time.Instant;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Represents the digest of an eMed PADV document item entry.
@@ -62,11 +64,11 @@ public abstract class EmedPadvEntryDigest extends EmedEntryDigest {
      * @param targetedEntryType        Document type of the targeted item entry.
      */
     protected EmedPadvEntryDigest(final Instant pharmaceuticalAdviceTime,
-                                  final String documentId,
+                                  final UUID documentId,
                                   @Nullable final AuthorDigest documentAuthor,
                                   @Nullable final AuthorDigest sectionAuthor,
-                                  final String entryId,
-                                  final String medicationTreatmentId,
+                                  final UUID entryId,
+                                  final UUID medicationTreatmentId,
                                   final int sequence,
                                   @Nullable final String annotationComment,
                                   final boolean completed,
@@ -80,7 +82,7 @@ public abstract class EmedPadvEntryDigest extends EmedEntryDigest {
         this.targetedEntryRef = Objects.requireNonNull(targetedEntryRef);
         this.targetedEntryType = Objects.requireNonNull(targetedEntryType);
         if (targetedEntryType == EmedEntryType.PADV) {
-            throw new IllegalArgumentException("The entry targeted by a PADV CANCEL shall be of MTP, PRE or DIS type");
+            throw new InvalidEmedContentException("The entry targeted by a PADV CANCEL shall be of MTP, PRE or DIS type");
         }
     }
 
@@ -142,8 +144,8 @@ public abstract class EmedPadvEntryDigest extends EmedEntryDigest {
         if (!(o instanceof final EmedPadvEntryDigest that)) return false;
         if (!super.equals(o)) return false;
         return completed == that.completed
-                && effectiveTime.equals(that.effectiveTime)
-                && targetedEntryRef.equals(that.targetedEntryRef)
+                && Objects.equals(effectiveTime, that.effectiveTime)
+                && Objects.equals(targetedEntryRef, that.targetedEntryRef)
                 && targetedEntryType == that.targetedEntryType;
     }
 
@@ -156,7 +158,7 @@ public abstract class EmedPadvEntryDigest extends EmedEntryDigest {
     public String toString() {
         return "EmedPadvEntryDigest{" +
                 "annotationComment='" + this.annotationComment + '\'' +
-                ", pharmaceuticalAdviceTime=" + this.itemTime +
+                ", itemTime=" + this.itemTime +
                 ", documentAuthor=" + this.documentAuthor +
                 ", documentId='" + this.documentId + '\'' +
                 ", entryId='" + this.entryId + '\'' +

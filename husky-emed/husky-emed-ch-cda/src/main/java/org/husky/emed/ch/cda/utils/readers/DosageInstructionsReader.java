@@ -10,17 +10,18 @@
 package org.husky.emed.ch.cda.utils.readers;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.hl7cdar2.*;
 import org.husky.emed.ch.cda.utils.EntryRelationshipUtils;
 import org.husky.emed.ch.cda.utils.IvlTsUtils;
 import org.husky.emed.ch.cda.utils.TemplateIds;
-import org.husky.emed.ch.enums.ChEmedTimingEvent;
 import org.husky.emed.ch.enums.DosageType;
-import org.husky.emed.ch.enums.RouteOfAdministrationEdqm;
+import org.husky.emed.ch.enums.RouteOfAdministrationAmbu;
+import org.husky.emed.ch.enums.TimingEventAmbu;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.models.common.MedicationDosageInstructions;
 import org.husky.emed.ch.models.common.MedicationDosageIntake;
-import org.husky.emed.ch.models.common.QuantityWithUnitCode;
+import org.husky.emed.ch.models.common.QuantityWithRegularUnit;
 
 import java.math.BigInteger;
 import java.time.Instant;
@@ -40,6 +41,8 @@ import java.util.*;
  * <li> Rate Quantity
  * <li> Related Components
  * </ul>
+ *
+ * LATER: Add support for the rateQuantity and approachSiteCode elements.
  *
  * @author Quentin Ligier
  */
@@ -114,7 +117,7 @@ public class DosageInstructionsReader {
      *
      * @return an {@link Optional} that may contain the dose quantity.
      */
-    public Optional<QuantityWithUnitCode> getDoseQuantity() {
+    public Optional<QuantityWithRegularUnit> getDoseQuantity() {
         return this.getDoseQuantity(this.subAdm);
     }
 
@@ -123,11 +126,11 @@ public class DosageInstructionsReader {
      *
      * @return an {@link Optional} that may contain the route of administration.
      */
-    public Optional<RouteOfAdministrationEdqm> getRouteOfAdministration() {
+    public Optional<RouteOfAdministrationAmbu> getRouteOfAdministration() {
         return Optional.ofNullable(this.subAdm.getRouteCode())
                 .map(CD::getCode)
-                .filter(RouteOfAdministrationEdqm::isInValueSet)
-                .map(RouteOfAdministrationEdqm::getEnum);
+                .filter(RouteOfAdministrationAmbu::isInValueSet)
+                .map(RouteOfAdministrationAmbu::getEnum);
     }
 
     /**
@@ -137,13 +140,6 @@ public class DosageInstructionsReader {
      */
     public DosageType getDosageType() {
         return this.dosageType;
-    }
-
-    /**
-     * Returns the dosage instructions - frequency: a single or multiple events within a day with the same dosage.
-     */
-    public List<@NonNull ChEmedTimingEvent> getEventTimings() {
-        return this.getEventTimings(this.subAdm);
     }
 
     /**
@@ -157,20 +153,45 @@ public class DosageInstructionsReader {
                 this.getEffectiveStopTime().orElse(null)
         );
 
+        final var timingEvent = this.getSingleTimingEvent(this.subAdm).orElse(null);
+        final var timingEvents = this.getMultipleTimingEvents(this.subAdm);
+        final var doseQuantity = this.getDoseQuantity(this.subAdm).orElse(null);
+        final var relatedComponents = this.getRelatedComponents(this.subAdm);
+
         if (this.getDosageType() == DosageType.NORMAL) {
-            instructions.getIntakes().addAll(this.getIntakes(this.subAdm));
+            if (!relatedComponents.isEmpty()) {
+                throw new InvalidEmedContentException("The related components shall not be present in a normal dose " +
+                        "regime");
+            }
+            if (timingEvent != null && !timingEvents.isEmpty()) {
+                throw new InvalidEmedContentException("Either the single or the multiple medication frequency shall " +
+                        "be specified in normal dose regime");
+            }
+            // The case where the normal dose regime contains both structured and narrative info or none is covered by
+            // the Schematron
+            if (timingEvent != null) {
+                instructions.getIntakes().add(new MedicationDosageIntake(timingEvent, doseQuantity));
+            }
+            timingEvents.forEach(timingEventAmbu -> instructions.getIntakes().add(new MedicationDosageIntake(timingEventAmbu, doseQuantity)));
         } else if (this.getDosageType() == DosageType.SPLIT) {
-            this.subAdm.getEntryRelationship().stream()
-                    .filter(er -> er.getTypeCode() == XActRelationshipEntryRelationship.COMP)
-                    .filter(er -> er.getSequenceNumber() != null)
-                    .map(POCDMT000040EntryRelationship::getSubstanceAdministration)
-                    .filter(Objects::nonNull)
-                    .flatMap(relatedSubAdm -> this.getIntakes(relatedSubAdm).stream())
-                    .forEach(intakes -> instructions.getIntakes().add(intakes));
+            if (relatedComponents.isEmpty()) {
+                throw new InvalidEmedContentException("The related components shall be present in a split dose regime");
+            }
+            if (!timingEvents.isEmpty()) {
+                throw new InvalidEmedContentException("The multiple medication frequencies shall not be present in a " +
+                        "split dose regime");
+            }
+            relatedComponents.forEach(relatedComponent -> {
+                final var newIntake = this.getSubordinateIntake(relatedComponent, timingEvent, doseQuantity);
+                instructions.getIntakes().add(newIntake);
+            });
         } else {
             throw new InvalidEmedContentException("The dosage type " + this.getDosageType() + " isn't supported yet");
         }
 
+        if (instructions.getIntakes().size() != instructions.getIntakes().stream().map(MedicationDosageIntake::getEventTiming).distinct().count()) {
+            throw new InvalidEmedContentException("A timing event was fount multiple times in the dosage instructions");
+        }
         return instructions;
     }
 
@@ -222,23 +243,29 @@ public class DosageInstructionsReader {
     }
 
     /**
-     * Returns the list of intakes for a given dosage instructions. It will only work on the main dosage instruction in
-     * normal dosage type, or on the related components in split dosage type.
+     * Returns the intake derived from a related component (which is a subordinate intake). If the dose or the
+     * frequency is not specified, the default value applies.
      *
      * @param subAdm The dosage instructions.
-     * @return a list of intakes.
+     * @param defaultTimingEvent The default timing event.
+     * @param defaultDoseQuantity The default dose quantity.
+     * @return an intake.
+     * @throws InvalidEmedContentException if the dose or the timing is missing.
      */
-    private List<@NonNull MedicationDosageIntake> getIntakes(@NonNull final POCDMT000040SubstanceAdministration subAdm) {
-        final List<MedicationDosageIntake> intakes = new ArrayList<>();
-        final var eventTimings = this.getEventTimings(subAdm);
-        final var doseQuantity = this.getDoseQuantity(subAdm).orElse(null);
-        if (!eventTimings.isEmpty() && doseQuantity == null) {
-            throw new InvalidEmedContentException("The doseQuantity is missing within normal dosage");
+    private MedicationDosageIntake getSubordinateIntake(@NonNull final POCDMT000040SubstanceAdministration subAdm,
+                                                        @Nullable final TimingEventAmbu defaultTimingEvent,
+                                                        @Nullable final QuantityWithRegularUnit defaultDoseQuantity) {
+        final var timingEvent = this.getSingleTimingEvent(subAdm).orElse(defaultTimingEvent);
+        final var doseQuantity = this.getDoseQuantity(subAdm).orElse(defaultDoseQuantity);
+        if (timingEvent == null) {
+            throw new InvalidEmedContentException("In a related component, the frequency is missing and no default " +
+                    "value is available");
         }
-        for (final var eventTiming : eventTimings) {
-            intakes.add(new MedicationDosageIntake(eventTiming, doseQuantity));
+        if (doseQuantity == null) {
+            throw new InvalidEmedContentException("In a related component, the doseQuantity is missing and no default" +
+                    " value is available");
         }
-        return intakes;
+        return new MedicationDosageIntake(timingEvent, doseQuantity);
     }
 
     /**
@@ -247,31 +274,36 @@ public class DosageInstructionsReader {
      * @param subAdm The dosage instructions.
      * @return an {@link Optional} that may contain the dose quantity.
      */
-    private Optional<QuantityWithUnitCode> getDoseQuantity(@NonNull final POCDMT000040SubstanceAdministration subAdm) {
+    private Optional<QuantityWithRegularUnit> getDoseQuantity(@NonNull final POCDMT000040SubstanceAdministration subAdm) {
         return Optional.ofNullable(subAdm.getDoseQuantity())
-                .map(QuantityWithUnitCode::fromPq);
+                .map(QuantityWithRegularUnit::fromPq);
     }
 
     /**
-     * Returns the dosage instructions - frequency: a single or multiple events within a day with the same dosage.
+     * Returns the dosage instructions - event: a single event within a day.
      *
      * @param subAdm The dosage instructions.
-     * @return a list of event timings.
+     * @return a timing event.
      */
-    private List<@NonNull ChEmedTimingEvent> getEventTimings(@NonNull final POCDMT000040SubstanceAdministration subAdm) {
-        final List<ChEmedTimingEvent> eventTimings = new ArrayList<>();
-
+    private Optional<TimingEventAmbu> getSingleTimingEvent(@NonNull final POCDMT000040SubstanceAdministration subAdm) {
         // <effectiveTime operator='A' xsi:type='EIVL_TS' />
-        subAdm.getEffectiveTime().stream()
+        return subAdm.getEffectiveTime().stream()
                 .filter(EIVLTS.class::isInstance)
                 .findAny()
                 .map(effectiveTime -> ((EIVLTS) effectiveTime).getEvent())
                 .map(CD::getCode)
-                .map(ChEmedTimingEvent::getEnum)
-                .ifPresent(eventTimings::add);
+                .map(TimingEventAmbu::getEnum);
+    }
 
+    /**
+     * Returns the dosage instructions - frequency: multiple events within a day with the same dosage.
+     *
+     * @param subAdm The dosage instructions.
+     * @return a list of timing events.
+     */
+    private List<@NonNull TimingEventAmbu> getMultipleTimingEvents(@NonNull final POCDMT000040SubstanceAdministration subAdm) {
         // <effectiveTime operator='A' xsi:type='SXPR_TS' />
-        subAdm.getEffectiveTime().stream()
+        return subAdm.getEffectiveTime().stream()
                 .filter(SXPRTS.class::isInstance)
                 .findAny()
                 .map(effectiveTime -> ((SXPRTS) effectiveTime).getComp())
@@ -280,9 +312,33 @@ public class DosageInstructionsReader {
                 .map(effectiveTime -> ((EIVLTS) effectiveTime).getEvent())
                 .filter(Objects::nonNull)
                 .map(CD::getCode)
-                .map(ChEmedTimingEvent::getEnum)
+                .map(TimingEventAmbu::getEnum)
                 .filter(Objects::nonNull)
-                .forEach(eventTimings::add);
-        return eventTimings;
+                .toList();
+    }
+
+    /**
+     * Returns the related components and checks the sequence numbers.
+     *
+     * @param subAdm The dosage instructions.
+     * @return a list of related components.
+     * @throws InvalidEmedContentException if the sequence number are incorrect.
+     */
+    private List<@NonNull POCDMT000040SubstanceAdministration> getRelatedComponents(@NonNull final POCDMT000040SubstanceAdministration subAdm) throws InvalidEmedContentException {
+        final var entryRelationships = subAdm.getEntryRelationship().stream()
+                .filter(er -> er.getTypeCode() == XActRelationshipEntryRelationship.COMP)
+                .filter(er -> er.getSequenceNumber() != null)
+                .filter(er -> er.getSubstanceAdministration() != null).toList();
+        for (int i = 1; i <= entryRelationships.size(); ++i) {
+            final var sequenceNumber = entryRelationships.get(i-1).getSequenceNumber();
+            if (sequenceNumber == null || sequenceNumber.getValue() == null || sequenceNumber.getValue().intValue() != i) {
+                throw new InvalidEmedContentException("The related components don't have an ordered, monotonic " +
+                        "sequence starting at 1");
+            }
+        }
+        return entryRelationships.stream()
+                .map(POCDMT000040EntryRelationship::getSubstanceAdministration)
+                .filter(Objects::nonNull)
+                .toList();
     }
 }

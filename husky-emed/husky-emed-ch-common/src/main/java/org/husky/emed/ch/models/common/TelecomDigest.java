@@ -10,6 +10,8 @@
  */
 package org.husky.emed.ch.models.common;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -24,27 +26,27 @@ public class TelecomDigest {
     /**
      * The email addresses.
      */
-    private final List<String> mails = new ArrayList<>();
+    private final List<@NonNull String> mails = new ArrayList<>(0);
 
     /**
      * The phone numbers.
      */
-    private final List<String> phones = new ArrayList<>();
+    private final List<@NonNull String> phones = new ArrayList<>(0);
 
     /**
      * The fax numbers.
      */
-    private final List<String> faxes = new ArrayList<>();
+    private final List<@NonNull String> faxes = new ArrayList<>(0);
 
     /**
      * The website addresses.
      */
-    private final List<String> websites = new ArrayList<>();
+    private final List<@NonNull String> websites = new ArrayList<>(0);
 
     /**
      * Other telecoms. The URL specifies the protocol.
      */
-    private final List<String> others = new ArrayList<>();
+    private final List<@NonNull String> others = new ArrayList<>(0);
 
     /**
      * Full constructor.
@@ -55,11 +57,11 @@ public class TelecomDigest {
      * @param websites The website addresses.
      * @param others   Other telecoms.
      */
-    public TelecomDigest(final List<String> mails,
-                         final List<String> phones,
-                         final List<String> faxes,
-                         final List<String> websites,
-                         final List<String> others) {
+    public TelecomDigest(final List<@NonNull String> mails,
+                         final List<@NonNull String> phones,
+                         final List<@NonNull String> faxes,
+                         final List<@NonNull String> websites,
+                         final List<@NonNull String> others) {
         this.mails.addAll(Objects.requireNonNull(mails));
         this.phones.addAll(Objects.requireNonNull(phones));
         this.faxes.addAll(Objects.requireNonNull(faxes));
@@ -67,23 +69,23 @@ public class TelecomDigest {
         this.others.addAll(Objects.requireNonNull(others));
     }
 
-    public List<String> getMails() {
+    public List<@NonNull String> getMails() {
         return mails;
     }
 
-    public List<String> getPhones() {
+    public List<@NonNull String> getPhones() {
         return phones;
     }
 
-    public List<String> getFaxes() {
+    public List<@NonNull String> getFaxes() {
         return faxes;
     }
 
-    public List<String> getWebsites() {
+    public List<@NonNull String> getWebsites() {
         return websites;
     }
 
-    public List<String> getOthers() {
+    public List<@NonNull String> getOthers() {
         return others;
     }
 

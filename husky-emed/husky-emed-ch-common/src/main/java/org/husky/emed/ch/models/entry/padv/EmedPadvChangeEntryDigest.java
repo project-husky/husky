@@ -21,6 +21,7 @@ import org.husky.emed.ch.models.entry.EmedPreEntryDigest;
 
 import java.time.Instant;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Represents the digest of an EMED PADV document Change item entry.
@@ -73,11 +74,11 @@ public class EmedPadvChangeEntryDigest extends EmedPadvEntryDigest {
      *                                  CHANGE item targets a dispense item entry.
      */
     public EmedPadvChangeEntryDigest(final Instant pharmaceuticalAdviceTime,
-                                     final String documentId,
+                                     final UUID documentId,
                                      @Nullable final AuthorDigest documentAuthor,
                                      @Nullable final AuthorDigest sectionAuthor,
-                                     final String entryId,
-                                     final String medicationTreatmentId,
+                                     final UUID entryId,
+                                     final UUID medicationTreatmentId,
                                      final int sequence,
                                      @Nullable final String annotationComment,
                                      final boolean completed,
@@ -107,7 +108,7 @@ public class EmedPadvChangeEntryDigest extends EmedPadvEntryDigest {
         }
 
         if (changedDosageInstructions != null) {
-            if (targetedEntryType != EmedEntryType.PRE) {
+            if (targetedEntryType != EmedEntryType.DIS) {
                 throw new IllegalArgumentException("A changed DIS entry can only be added when the PADV CHANGE targets " +
                         "a DIS entry");
             }
@@ -172,7 +173,7 @@ public class EmedPadvChangeEntryDigest extends EmedPadvEntryDigest {
     public String toString() {
         return "EmedPadvChangeEntryDigest{" +
                 "annotationComment='" + this.annotationComment + '\'' +
-                ", pharmaceuticalAdviceTime=" + this.itemTime +
+                ", itemTime=" + this.itemTime +
                 ", documentAuthor=" + this.documentAuthor +
                 ", documentId='" + this.documentId + '\'' +
                 ", entryId='" + this.entryId + '\'' +

@@ -9,33 +9,26 @@
  *
  */
 
-/*
- * This code is made available under the terms of the Eclipse Public License v1.0
- * in the github project https://github.com/project-husky/husky there you also
- * find a list of the contributors and the license information.
- *
- * This project has been developed further and modified by the joined working group Husky
- * on the basis of the eHealth Connector opensource project from June 28, 2021,
- * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
- *
- */
-
 package org.husky.emed.ch.cda.digesters;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.hl7cdar2.*;
 import org.husky.common.utils.OptionalUtils;
+import org.husky.emed.ch.cda.generated.artdecor.enums.MedicationDosageQualifier;
 import org.husky.emed.ch.cda.services.EmedEntryDigestService;
-import org.husky.emed.ch.cda.utils.readers.AuthorReader;
-import org.husky.emed.ch.cda.utils.readers.ManufacturedMaterialReader;
 import org.husky.emed.ch.cda.utils.CdaR2Utils;
 import org.husky.emed.ch.cda.utils.EntryRelationshipUtils;
 import org.husky.emed.ch.cda.utils.IiUtils;
 import org.husky.emed.ch.cda.utils.TemplateIds;
+import org.husky.emed.ch.cda.utils.readers.AuthorReader;
+import org.husky.emed.ch.cda.utils.readers.DosageInstructionsReader;
+import org.husky.emed.ch.cda.utils.readers.ManufacturedMaterialReader;
 import org.husky.emed.ch.enums.DispenseSupplyType;
+import org.husky.emed.ch.enums.RegularUnitCodeAmbu;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.EmedReference;
-import org.husky.emed.ch.models.common.Quantity;
+import org.husky.emed.ch.models.common.MedicationDosageInstructions;
 import org.husky.emed.ch.models.entry.EmedDisEntryDigest;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
 import org.springframework.stereotype.Component;
@@ -43,6 +36,7 @@ import org.springframework.stereotype.Component;
 import java.time.Instant;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.husky.emed.ch.cda.utils.TemplateIds.*;
 
@@ -57,7 +51,7 @@ public class CceDisEntryDigester {
     /**
      * The registry of {@link org.husky.emed.ch.models.entry.EmedEntryDigest}.
      */
-    private final EmedEntryDigestService emedEntryService;
+    protected final EmedEntryDigestService emedEntryService;
 
     /**
      * Constructor.
@@ -79,29 +73,29 @@ public class CceDisEntryDigester {
      * @return a digest of the element.
      * @throws InvalidEmedContentException if the CCE document is invalid.
      */
-    protected EmedDisEntryDigest createDigest(final POCDMT000040Supply supply,
-                                              final String disDocumentId,
-                                              final Instant disDocumentEffectiveTime,
-                                              final AuthorDigest parentDocumentAuthor,
-                                              final AuthorDigest parentSectionAuthor) throws InvalidEmedContentException {
+    public EmedDisEntryDigest createDigest(final POCDMT000040Supply supply,
+                                           final UUID disDocumentId,
+                                           final Instant disDocumentEffectiveTime,
+                                           final AuthorDigest parentDocumentAuthor,
+                                           final AuthorDigest parentSectionAuthor) throws InvalidEmedContentException {
 
         final var refMtpEntry = this.getMtpReference(supply).orElse(null);
         final var refMtpEntryDigest = Optional.ofNullable(refMtpEntry)
-                .map(EmedReference::getItemId).flatMap(this.emedEntryService::getById).orElse(null);
+                .map(EmedReference::getEntryId).flatMap(this.emedEntryService::getById).orElse(null);
         final var refPreEntry = this.getPreReference(supply).orElse(null);
         final var refPreEntryDigest = Optional.ofNullable(refPreEntry)
-                .map(EmedReference::getItemId).flatMap(this.emedEntryService::getById).orElse(null);
+                .map(EmedReference::getEntryId).flatMap(this.emedEntryService::getById).orElse(null);
 
         final int sequence;
-        final String medicationTreatmentId;
+        final UUID medicationTreatmentId;
         final boolean isOtc;
         if (refPreEntryDigest != null) {
-            sequence = (int) this.emedEntryService.getSequence(refPreEntryDigest.getMedicationTreatmentId(),
+            sequence = this.emedEntryService.getSequence(refPreEntryDigest.getMedicationTreatmentId(),
                     disDocumentEffectiveTime);
             medicationTreatmentId = refPreEntryDigest.getMedicationTreatmentId();
             isOtc = false;
         } else if (refMtpEntryDigest != null) {
-            sequence = (int) this.emedEntryService.getSequence(refMtpEntryDigest.getMedicationTreatmentId(),
+            sequence = this.emedEntryService.getSequence(refMtpEntryDigest.getMedicationTreatmentId(),
                     disDocumentEffectiveTime);
             medicationTreatmentId = refMtpEntryDigest.getMedicationTreatmentId();
             isOtc = true;
@@ -138,9 +132,12 @@ public class CceDisEntryDigester {
                 refMtpEntry,
                 refPreEntry,
                 this.getMedicationProduct(supply),
-                this.getQuantity(supply),
+                this.getQuantityUnit(supply),
+                this.getQuantityValue(supply),
                 this.getPatientMedicationInstructions(supply).orElse(null),
-                this.getFulfilmentNotes(supply).orElse(null)
+                this.getFulfilmentNotes(supply).orElse(null),
+                this.isInReserve(supply),
+                this.getDosageInstructions(supply).orElse(null)
         );
     }
 
@@ -152,10 +149,10 @@ public class CceDisEntryDigester {
      * @return the item entry ID.
      * @throws InvalidEmedContentException if the item entry ID is missing.
      */
-    private String getEntryId(final POCDMT000040Supply supply) throws InvalidEmedContentException {
+    UUID getEntryId(final POCDMT000040Supply supply) throws InvalidEmedContentException {
         return Optional.ofNullable(OptionalUtils.getListFirstElement(supply.getId()))
-                .map(IiUtils::getNormalizedUid)
-                .orElseThrow(() -> new InvalidEmedContentException(""));
+                .map(IiUtils::getUuid)
+                .orElseThrow(() -> new InvalidEmedContentException("Unable to retrieve the entry ID"));
     }
 
     /**
@@ -164,7 +161,7 @@ public class CceDisEntryDigester {
      * @param supply The dispense entry Supply.
      * @return an {@link Optional} that may contain the annotation comment.
      */
-    private Optional<String> getAnnotationComment(final POCDMT000040Supply supply) {
+    Optional<String> getAnnotationComment(final POCDMT000040Supply supply) {
         return EntryRelationshipUtils.getActsFromEntryRelationshipsByTemplateId(supply.getEntryRelationship(),
                         TemplateIds.ANNOTATION_COMMENT).stream()
                 .findFirst()
@@ -178,13 +175,13 @@ public class CceDisEntryDigester {
      *
      * @param supply The dispense entry Supply.
      */
-    private DispenseSupplyType getDispenseType(final POCDMT000040Supply supply) throws InvalidEmedContentException {
+    DispenseSupplyType getDispenseType(final POCDMT000040Supply supply) throws InvalidEmedContentException {
         final CD fillCode = supply.getCode();
         // The code "First Fill - Complete" is induced if the code is absent (IHE Pharm DIS, 6.3.4.5.3.4)
         if (fillCode == null) {
             return DispenseSupplyType.FIRST_FILL_COMPLETE;
         }
-        if (!DispenseSupplyType.isEnumOfValueSet(fillCode.getCode())) {
+        if (!DispenseSupplyType.isInValueSet(fillCode.getCode())) {
             throw new InvalidEmedContentException("The supply code is invalid");
         }
         final var dispenseSupplyType = DispenseSupplyType.getEnum(fillCode.getCode());
@@ -200,18 +197,18 @@ public class CceDisEntryDigester {
      * @param supply The dispense entry Supply.
      * @return an {@link Optional} that may contain the item entry author.
      */
-    private Optional<POCDMT000040Author> getEntryAuthorElement(final POCDMT000040Supply supply) {
+    Optional<POCDMT000040Author> getEntryAuthorElement(final POCDMT000040Supply supply) {
         return Optional.ofNullable(!supply.getAuthor().isEmpty() ? supply.getAuthor().get(0) : null);
     }
 
     /**
      * Returns the author of the original parent document. It's generally set in PML documents only, as the author of
-     * the PML document may be different than the author of the MTP/PRE/DIS/PADV document.
+     * the PML document may be different from the author of the MTP/PRE/DIS/PADV document.
      *
      * @param supply The dispense entry Supply.
      * @return an {@link Optional} tht may contain the parent document author.
      */
-    private Optional<POCDMT000040Author> getParentDocumentAuthorElement(final POCDMT000040Supply supply) {
+    Optional<POCDMT000040Author> getParentDocumentAuthorElement(final POCDMT000040Supply supply) {
         return Optional.ofNullable(supply.getAuthor().size() >= 2 ? supply.getAuthor().get(1) : null);
     }
 
@@ -221,7 +218,7 @@ public class CceDisEntryDigester {
      * @param supply The dispense entry Supply.
      * @return an {@link Optional} that may contain the reference to the targeted MTP document.
      */
-    private Optional<EmedReference> getMtpReference(final POCDMT000040Supply supply) throws InvalidEmedContentException {
+    Optional<EmedReference> getMtpReference(final POCDMT000040Supply supply) throws InvalidEmedContentException {
         return supply.getEntryRelationship().stream()
                 .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.REFR)
                 .map(POCDMT000040EntryRelationship::getSubstanceAdministration)
@@ -237,7 +234,7 @@ public class CceDisEntryDigester {
      * @param supply The dispense entry Supply.
      * @return an {@link Optional} that may contain the reference to the targeted PRE document.
      */
-    private Optional<EmedReference> getPreReference(final POCDMT000040Supply supply) throws InvalidEmedContentException {
+    Optional<EmedReference> getPreReference(final POCDMT000040Supply supply) throws InvalidEmedContentException {
         return supply.getEntryRelationship().stream()
                 .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.REFR)
                 .map(POCDMT000040EntryRelationship::getSubstanceAdministration)
@@ -253,7 +250,7 @@ public class CceDisEntryDigester {
      * @param supply The dispense entry Supply.
      * @return an {@link Optional} that may contain the reference to the targeted PADV document.
      */
-    private Optional<EmedReference> getPadvReference(final POCDMT000040Supply supply) throws InvalidEmedContentException {
+    Optional<EmedReference> getPadvReference(final POCDMT000040Supply supply) throws InvalidEmedContentException {
         return supply.getEntryRelationship().stream()
                 .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.REFR)
                 .map(POCDMT000040EntryRelationship::getObservation)
@@ -268,7 +265,7 @@ public class CceDisEntryDigester {
      *
      * @param supply The dispense entry Supply.
      */
-    private MedicationProduct getMedicationProduct(final POCDMT000040Supply supply) throws InvalidEmedContentException {
+    MedicationProduct getMedicationProduct(final POCDMT000040Supply supply) throws InvalidEmedContentException {
         return Optional.ofNullable(supply.getProduct())
                 .map(POCDMT000040Product::getManufacturedProduct)
                 .map(POCDMT000040ManufacturedProduct::getManufacturedMaterial)
@@ -278,16 +275,28 @@ public class CceDisEntryDigester {
     }
 
     /**
-     * Returns the medication dispensed quantity.
-     * <p>
-     * TODO: another quantity in asContent
+     * Returns the medication dispensed quantity unit, if any.
      *
      * @param supply The dispense entry Supply.
      */
-    private Quantity getQuantity(final POCDMT000040Supply supply) throws InvalidEmedContentException {
+    @Nullable
+    RegularUnitCodeAmbu getQuantityUnit(final POCDMT000040Supply supply) throws InvalidEmedContentException {
         return Optional.ofNullable(supply.getQuantity())
                 .filter(qty -> qty.getValue() != null && !qty.getValue().isBlank())
-                .map(Quantity::fromPq)
+                .map(PQ::getUnit)
+                .map(RegularUnitCodeAmbu::getEnum)
+                .orElse(null);
+    }
+
+    /**
+     * Returns the medication dispensed quantity value.
+     *
+     * @param supply The dispense entry Supply.
+     */
+    String getQuantityValue(final POCDMT000040Supply supply) throws InvalidEmedContentException {
+        return Optional.ofNullable(supply.getQuantity())
+                .filter(qty -> qty.getValue() != null && !qty.getValue().isBlank())
+                .map(PQ::getValue)
                 .orElseThrow(() -> new InvalidEmedContentException("The quantity value is missing in the Supply"));
     }
 
@@ -297,7 +306,7 @@ public class CceDisEntryDigester {
      * @param supply The dispense entry Supply.
      * @return an {@link Optional} that may contain the patient medication instructions.
      */
-    private Optional<String> getPatientMedicationInstructions(final POCDMT000040Supply supply) throws InvalidEmedContentException {
+    Optional<String> getPatientMedicationInstructions(final POCDMT000040Supply supply) throws InvalidEmedContentException {
         return EntryRelationshipUtils.getPatientMedicationInstructions(supply.getEntryRelationship())
                 .map(POCDMT000040Act::getText)
                 .map(ED::getTextContent);
@@ -309,9 +318,43 @@ public class CceDisEntryDigester {
      * @param supply The dispense entry Supply.
      * @return an {@link Optional} that may contain the fulfilment notes.
      */
-    private Optional<String> getFulfilmentNotes(final POCDMT000040Supply supply) throws InvalidEmedContentException {
+    Optional<String> getFulfilmentNotes(final POCDMT000040Supply supply) throws InvalidEmedContentException {
         return EntryRelationshipUtils.getFulfillmentInstructions(supply.getEntryRelationship())
                 .map(POCDMT000040Act::getText)
                 .map(ED::getTextContent);
+    }
+
+    /**
+     * Returns the dosage instructions.
+     *
+     * @param supply The dispense entry Supply.
+     * @return an {@link Optional} that may contain the dosage instructions.
+     */
+    Optional<MedicationDosageInstructions> getDosageInstructions(final POCDMT000040Supply supply) {
+        return EntryRelationshipUtils.getSubstanceAdministrationsFromEntryRelationshipsByTemplateId(supply.getEntryRelationship(), DOSAGE_INSTRUCTIONS)
+                .stream().findAny()
+                .map(DosageInstructionsReader::new)
+                .map(DosageInstructionsReader::getDosageInstructions);
+    }
+
+    /**
+     * Returns whether the treatment is to be taken regularly ({@code false}) or only if required ({@code true}).
+     *
+     * @param supply The dispense entry Supply.
+     */
+    boolean isInReserve(final POCDMT000040Supply supply) {
+        return supply.getEntryRelationship().stream()
+                .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.COMP)
+                .map(POCDMT000040EntryRelationship::getAct)
+                .filter(Objects::nonNull)
+                .filter(act -> TemplateIds.isInList(IN_RESERVE, act.getTemplateId()))
+                .filter(act -> act.getCode() != null)
+                .filter(act -> MedicationDosageQualifier.CODE_SYSTEM_ID.equals(act.getCode().getCodeSystem()))
+                .findAny()
+                .map(POCDMT000040Act::getCode)
+                .map(CD::getCode)
+                .map(MedicationDosageQualifier::getEnum)
+                .map(substitution -> substitution == MedicationDosageQualifier.AS_REQUIRED_QUALIFIER_VALUE)
+                .orElse(false); // Default is regular medication
     }
 }

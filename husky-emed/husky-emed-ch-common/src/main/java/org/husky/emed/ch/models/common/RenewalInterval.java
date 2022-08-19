@@ -9,7 +9,6 @@
  */
 package org.husky.emed.ch.models.common;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.time.Duration;
@@ -51,7 +50,7 @@ public class RenewalInterval {
      * @throws IllegalArgumentException if the lower bound is after the higher bound.
      */
     public RenewalInterval(@Nullable final Instant low,
-                           @NonNull final Instant high) {
+                           final Instant high) {
         this.low = low;
         this.high = Objects.requireNonNull(high);
         if (low != null && low.isAfter(high)) {
@@ -67,7 +66,7 @@ public class RenewalInterval {
      * @param duration The time interval duration. It shall not be negative.
      */
     public RenewalInterval(@Nullable final Instant low,
-                           @NonNull final TemporalAmount duration) {
+                           final TemporalAmount duration) {
         this.low = low;
         this.duration = Objects.requireNonNull(duration);
         this.high = (low != null) ? low.plus(duration) : null;
@@ -111,7 +110,6 @@ public class RenewalInterval {
     }
 
     @Override
-    @NonNull
     public String toString() {
         return "TimeInterval{" +
                 "low=" + this.low +

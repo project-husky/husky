@@ -10,15 +10,15 @@
  */
 package org.husky.common.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.ArrayList;
-
 import org.husky.common.basetypes.CodeBaseType;
 import org.husky.common.enums.NullFlavor;
 import org.husky.common.hl7cdar2.CD;
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * The test class for Code.
@@ -88,14 +88,14 @@ class CodeTest {
 		// Null Flavor Tests
 		CD nullHl7CdaR2Value = null;
 		Code nullObj = new Code(nullHl7CdaR2Value);
-		assertEquals(NullFlavor.NOT_AVAILABLE, nullObj.getNullFlavor());
+		assertEquals(NullFlavor.NOT_AVAILABLE_L2, nullObj.getNullFlavor());
 
 		ObjectFactory factory = new ObjectFactory();
 		nullHl7CdaR2Value = factory.createCD();
 		nullHl7CdaR2Value.nullFlavor = new ArrayList<String>();
 		nullHl7CdaR2Value.nullFlavor.add("UNK");
 		nullObj = new Code(nullHl7CdaR2Value);
-		assertEquals(NullFlavor.UNKNOWN, nullObj.getNullFlavor());
+		assertEquals(NullFlavor.UNKNOWN_L1, nullObj.getNullFlavor());
 
 		// This is for debugging purposes, only. When enabled, you need to CDd
 		// @XmlRootElement(name = "debug") to class CD

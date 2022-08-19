@@ -11,7 +11,6 @@ package org.husky.emed.ch.cda.narrative.generators;
 
 import org.husky.common.enums.ValueSetEnumInterface;
 import org.husky.emed.ch.cda.narrative.enums.NarrativeLanguage;
-import org.husky.emed.ch.models.treatment.MedicationPackagedProduct;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -98,12 +97,9 @@ public abstract class AbstractNarrativeGenerator {
     List<Node> formatMedicationName(final NarrativeDomFactory narDom,
                                     final MedicationProduct product,
                                     final NarrativeLanguage lang) {
-        final var name = Optional.ofNullable(product.getName()).orElse(
-                Optional.ofNullable(product.getPackagedProduct()).map(MedicationPackagedProduct::getName).orElse(null)
-        );
-        final var gtin = Optional.ofNullable(product.getGtinCode()).orElse(
-                Optional.ofNullable(product.getPackagedProduct()).map(MedicationPackagedProduct::getGtinCode).orElse(null)
-        );
+        final var name = Optional.ofNullable(product.getName()).orElse(product.getPackageName());
+        final var gtin = Optional.ofNullable(product.getGtinCode()).orElse(product.getPackageGtinCode());
+        // TODO: or ATC
         if (name != null && gtin != null) {
             final var url = "https://compendium.ch/search/setculture/fr-CH?backUrl=https://compendium.ch/search?q=" + gtin;
             return List.of(

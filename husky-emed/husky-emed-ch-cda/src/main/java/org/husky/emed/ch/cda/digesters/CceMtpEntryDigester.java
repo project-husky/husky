@@ -26,6 +26,7 @@ import org.springframework.stereotype.Component;
 import java.time.Instant;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Creator of CDA-CH-EMED MTP item entry digests.
@@ -45,11 +46,11 @@ public class CceMtpEntryDigester {
      * @param parentSectionAuthor     The parent section author (not the original section author).
      * @return a digest of the element.
      */
-    protected EmedMtpEntryDigest createDigest(final POCDMT000040SubstanceAdministration substanceAdministration,
-                                              final String documentId,
-                                              final Instant planningDate,
-                                              final AuthorDigest parentDocumentAuthor,
-                                              final AuthorDigest parentSectionAuthor) throws InvalidEmedContentException {
+    public EmedMtpEntryDigest createDigest(final POCDMT000040SubstanceAdministration substanceAdministration,
+                                           final UUID documentId,
+                                           final Instant planningDate,
+                                           final AuthorDigest parentDocumentAuthor,
+                                           final AuthorDigest parentSectionAuthor) throws InvalidEmedContentException {
         if (!TemplateIds.hasAllIds(TemplateIds.MTP_ENTRY, substanceAdministration.getTemplateId())) {
             throw new InvalidEmedContentException("The given substance administration is not an MTP item entry");
         }
@@ -58,7 +59,7 @@ public class CceMtpEntryDigester {
         final AuthorDigest documentAuthor;
         final AuthorDigest sectionAuthor;
         /*
-         * In a PADV CHANGE, the original authors may be referenced in the entry and be different than the
+         * In a PADV CHANGE, the original authors may be referenced in the entry and be different from the
          * document/section authors.
          */
         if (substanceAdministration.getAuthor().size() == 2) {
@@ -82,8 +83,8 @@ public class CceMtpEntryDigester {
                 documentId,
                 documentAuthor,
                 sectionAuthor,
-                IiUtils.getNormalizedUid(mtpEntry.getEntryId()),
-                IiUtils.getNormalizedUid(mtpEntry.getEntryId()), // Use the MTP entry ID as treatment ID
+                IiUtils.getUuid(mtpEntry.getEntryId()),
+                IiUtils.getUuid(mtpEntry.getEntryId()), // Use the MTP entry ID as treatment ID
                 0,
                 mtpEntry.getAnnotationComment().orElse(null),
                 mtpEntry.getDosageInstructions(),
@@ -96,7 +97,9 @@ public class CceMtpEntryDigester {
                 this.getReferenceToOriginalMtpEntry(substanceAdministration).orElse(null),
                 mtpEntry.getTreatmentReason().orElse(null),
                 mtpEntry.getPatientMedicationInstructions().orElse(null),
-                mtpEntry.getFulfillmentInstructions().orElse(null)
+                mtpEntry.getFulfillmentInstructions().orElse(null),
+                mtpEntry.isInReserve(),
+                mtpEntry.getQuantityToDispense().orElse(null)
         );
     }
 
@@ -106,7 +109,7 @@ public class CceMtpEntryDigester {
      * @param substanceAdministration The MTP item SubstanceAdministration.
      * @return an {@link Optional} that may contain a reference to the original MTP item entry.
      */
-    private Optional<EmedReference> getReferenceToOriginalMtpEntry(final POCDMT000040SubstanceAdministration substanceAdministration) {
+    Optional<EmedReference> getReferenceToOriginalMtpEntry(final POCDMT000040SubstanceAdministration substanceAdministration) {
         var sa = substanceAdministration.getEntryRelationship().stream()
                 .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.REFR)
                 .findAny()
@@ -121,9 +124,9 @@ public class CceMtpEntryDigester {
                         .map(POCDMT000040Reference::getExternalDocument)
                         .map(POCDMT000040ExternalDocument::getId)
                         .map(OptionalUtils::getListFirstElement)
-                        .map(II::getRoot)
+                        .map(IiUtils::getUuid)
                         .orElse(null),
-                sa.getId().get(0).getRoot()
+                Optional.ofNullable(sa.getId().get(0)).map(IiUtils::getUuid).orElse(null)
         );
         return Optional.of(reference);
     }

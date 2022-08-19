@@ -1,10 +1,10 @@
 /*
- * This code is made available under the terms of the Eclipse Public License v1.0 
- * in the github project https://github.com/project-husky/husky there you also 
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
  * find a list of the contributors and the license information.
- * 
- * This project has been developed further and modified by the joined working group Husky 
- * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
@@ -12,6 +12,7 @@ package org.husky.common.enums;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.husky.common.hl7cdar2.CD;
 import org.husky.common.hl7cdar2.CE;
 import org.husky.common.model.Code;
 import org.husky.common.utils.datatypes.Hl7v25;
@@ -32,16 +33,57 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
      */
     @NonNull
     default CE getCE() {
-        final CE ce = new CE();
+        return this.getCE(null);
+    }
+
+    /**
+     * Gets the HL7 {@link CE} in the given language.
+     *
+     * @param languageCode The language code to get the display name for, {@code null} to get the default display name.
+     * @return the HL7 CE.
+     */
+    @NonNull
+    default CE getCE(@Nullable final LanguageCode languageCode) {
+        final var ce = new CE();
         ce.setCodeSystem(getCodeSystemId());
         ce.setCode(getCodeValue());
         if (!getCodeSystemName().isEmpty()) {
             ce.setCodeSystemName(getCodeSystemName());
         }
         if (!getDisplayName().isEmpty()) {
-            ce.setDisplayName(getDisplayName());
+            ce.setDisplayName(getDisplayName(languageCode));
         }
         return ce;
+    }
+
+    /**
+     * Gets the HL7 {@link CD}.
+     *
+     * @return the HL7 CD.
+     */
+    @NonNull
+    default CD getCD() {
+        return this.getCD(null);
+    }
+
+    /**
+     * Gets the HL7 {@link CD}.
+     *
+     * @param languageCode The language code to get the display name for, {@code null} to get the default display name.
+     * @return the HL7 CD.
+     */
+    @NonNull
+    default CD getCD(@Nullable final LanguageCode languageCode) {
+        final var cd = new CD();
+        cd.setCodeSystem(getCodeSystemId());
+        cd.setCode(getCodeValue());
+        if (!getCodeSystemName().isEmpty()) {
+            cd.setCodeSystemName(getCodeSystemName());
+        }
+        if (!getDisplayName().isEmpty()) {
+            cd.setDisplayName(getDisplayName(languageCode));
+        }
+        return cd;
     }
 
     /**
@@ -51,7 +93,18 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
      */
     @NonNull
     default Code getCode() {
-        return new Code(getCodeValue(), getCodeSystemId(), getDisplayName());
+        return this.getCode(null);
+    }
+
+    /**
+     * Gets the husky Code Object.
+     *
+     * @param languageCode The language code to get the display name for, {@code null} to get the default display name.
+     * @return the code.
+     */
+    @NonNull
+    default Code getCode(@Nullable final LanguageCode languageCode) {
+        return new Code(getCodeValue(), getCodeSystemId(), getDisplayName(languageCode));
     }
 
     /**

@@ -107,7 +107,7 @@ public class Organization extends OrganizationBaseType {
 
             retVal.addTelecom(Telecom.createTelecomBaseType(hl7CdaR2Value.getTelecom()));
         } else
-            retVal.setNullFlavor(NullFlavor.NOT_AVAILABLE);
+            retVal.setNullFlavor(NullFlavor.NOT_AVAILABLE_L2);
 
         return retVal;
     }
@@ -139,7 +139,7 @@ public class Organization extends OrganizationBaseType {
                 retVal.addTelecom(Telecom.createTelecomBaseType(item));
             }
         } else
-            retVal.setNullFlavor(NullFlavor.NOT_AVAILABLE);
+            retVal.setNullFlavor(NullFlavor.NOT_AVAILABLE_L2);
 
         return retVal;
     }
@@ -453,7 +453,7 @@ public class Organization extends OrganizationBaseType {
             setTelecomList(baseType.getTelecomList());
             setNullFlavor(baseType.getNullFlavor());
         } else
-            setNullFlavor(NullFlavor.NOT_AVAILABLE);
+            setNullFlavor(NullFlavor.NOT_AVAILABLE_L2);
     }
 
     /**

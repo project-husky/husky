@@ -12,13 +12,15 @@ package org.husky.emed.ch.models.entry;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.emed.ch.enums.DispenseSupplyType;
 import org.husky.emed.ch.enums.EmedEntryType;
+import org.husky.emed.ch.enums.RegularUnitCodeAmbu;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.EmedReference;
-import org.husky.emed.ch.models.common.Quantity;
+import org.husky.emed.ch.models.common.MedicationDosageInstructions;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
 
 import java.time.Instant;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Represents the digest of an eMed DIS document item entry.
@@ -33,10 +35,21 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
     private DispenseSupplyType dispenseType;
 
     /**
+     * The changed dosage instructions or {@code null} if they haven't changed.
+     */
+    @Nullable
+    private MedicationDosageInstructions dosageInstructions;
+
+    /**
      * The fulfilment notes or {@code null} if it isn't provided.
      */
     @Nullable
     private String fulfilmentNotes;
+
+    /**
+     * Whether the treatment is to be taken regularly ({@code false}) or only if required ({@code true}).
+     */
+    private boolean inReserve;
 
     /**
      * The targeted MTP entry reference or {@code null}.
@@ -68,9 +81,19 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
     private MedicationProduct product;
 
     /**
-     * The dispensed medication quantity.
+     * The dispensed medication quantity. If the dispensed product has information about the medication package, the
+     * quantity is the amount of packages of the medicine without units. Otherwise, it may be either the amount of
+     * consumable units of the medication without units or the quantity in non-countable units.
      */
-    private Quantity quantity;
+    @Nullable
+    private RegularUnitCodeAmbu quantityUnit;
+
+    /**
+     * The dispensed medication quantity. If the dispensed product has information about the medication package, the
+     * quantity is the amount of packages of the medicine without units. Otherwise, it may be either the amount of
+     * consumable units of the medication without units or the quantity in non-countable units.
+     */
+    private String quantityValue;
 
     /**
      * Constructor.
@@ -92,16 +115,20 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
      * @param preEntryRef                   The targeted PRE entry reference or {@code null} if it's an over-the-counter
      *                                      dispense.
      * @param product                       The dispensed medication product.
-     * @param quantity                      The dispensed medication quantity.
+     * @param quantityUnit                  The dispensed medication quantity unit, if any.
+     * @param quantityValue                 The dispensed medication quantity value.
      * @param patientMedicationInstructions The patient medication instructions or {@code null} if it isn't provided.
      * @param fulfilmentNotes               The fulfilment notes or {@code null} if it isn't provided.
+     * @param inReserve                     Whether the treatment is to be taken regularly ({@code false}) or only if
+     *                                      required ({@code true}).
+     * @param dosageInstructions            The changed dosage instructions or {@code null} if they haven't changed.
      */
     public EmedDisEntryDigest(final Instant dispenseTime,
-                              final String documentId,
+                              final UUID documentId,
                               @Nullable final AuthorDigest documentAuthor,
                               @Nullable final AuthorDigest sectionAuthor,
-                              final String entryId,
-                              final String medicationTreatmentId,
+                              final UUID entryId,
+                              final UUID medicationTreatmentId,
                               final int sequence,
                               @Nullable final String annotationComment,
                               final DispenseSupplyType dispenseType,
@@ -109,19 +136,25 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
                               @Nullable final EmedReference mtpEntryRef,
                               @Nullable final EmedReference preEntryRef,
                               final MedicationProduct product,
-                              final Quantity quantity,
+                              @Nullable final RegularUnitCodeAmbu quantityUnit,
+                              final String quantityValue,
                               @Nullable final String patientMedicationInstructions,
-                              @Nullable final String fulfilmentNotes) {
+                              @Nullable final String fulfilmentNotes,
+                              final boolean inReserve,
+                              @Nullable final MedicationDosageInstructions dosageInstructions) {
         super(dispenseTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
-                annotationComment);
+              annotationComment);
         this.dispenseType = Objects.requireNonNull(dispenseType);
         this.otc = otc;
         this.mtpEntryRef = mtpEntryRef;
         this.preEntryRef = preEntryRef;
         this.product = Objects.requireNonNull(product);
-        this.quantity = Objects.requireNonNull(quantity);
+        this.quantityUnit = quantityUnit;
+        this.quantityValue = Objects.requireNonNull(quantityValue);
         this.patientMedicationInstructions = patientMedicationInstructions;
         this.fulfilmentNotes = fulfilmentNotes;
+        this.inReserve = inReserve;
+        this.dosageInstructions = dosageInstructions;
     }
 
     /**
@@ -199,12 +232,38 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
         this.product = product;
     }
 
-    public Quantity getQuantity() {
-        return this.quantity;
+    @Nullable
+    public RegularUnitCodeAmbu getQuantityUnit() {
+        return this.quantityUnit;
     }
 
-    public void setQuantity(final Quantity quantity) {
-        this.quantity = quantity;
+    public void setQuantityUnit(@Nullable final RegularUnitCodeAmbu quantityUnit) {
+        this.quantityUnit = quantityUnit;
+    }
+
+    public String getQuantityValue() {
+        return this.quantityValue;
+    }
+
+    public void setQuantityValue(final String quantityValue) {
+        this.quantityValue = quantityValue;
+    }
+
+    public boolean isInReserve() {
+        return this.inReserve;
+    }
+
+    public void setInReserve(final boolean inReserve) {
+        this.inReserve = inReserve;
+    }
+
+    @Nullable
+    public MedicationDosageInstructions getDosageInstructions() {
+        return this.dosageInstructions;
+    }
+
+    public void setDosageInstructions(@Nullable final MedicationDosageInstructions dosageInstructions) {
+        this.dosageInstructions = dosageInstructions;
     }
 
     @Override
@@ -212,40 +271,57 @@ public class EmedDisEntryDigest extends EmedEntryDigest {
         if (this == o) return true;
         if (!(o instanceof final EmedDisEntryDigest that)) return false;
         if (!super.equals(o)) return false;
-        return otc == that.otc
+        return inReserve == that.inReserve
+                && otc == that.otc
                 && dispenseType == that.dispenseType
+                && Objects.equals(dosageInstructions, that.dosageInstructions)
                 && Objects.equals(fulfilmentNotes, that.fulfilmentNotes)
                 && Objects.equals(mtpEntryRef, that.mtpEntryRef)
                 && Objects.equals(patientMedicationInstructions, that.patientMedicationInstructions)
                 && Objects.equals(preEntryRef, that.preEntryRef)
-                && product.equals(that.product)
-                && quantity.equals(that.quantity);
+                && Objects.equals(product, that.product)
+                && quantityUnit == that.quantityUnit
+                && Objects.equals(quantityValue, that.quantityValue);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), dispenseType, fulfilmentNotes, mtpEntryRef, otc, patientMedicationInstructions, preEntryRef, product, quantity);
+        return Objects.hash(super.hashCode(),
+                            dispenseType,
+                            dosageInstructions,
+                            fulfilmentNotes,
+                            inReserve,
+                            mtpEntryRef,
+                            otc,
+                            patientMedicationInstructions,
+                            preEntryRef,
+                            product,
+                            quantityUnit,
+                            quantityValue);
     }
 
     @Override
     public String toString() {
         return "EmedDisEntryDigest{" +
-                "dispenseType=" + this.dispenseType +
+                "annotationComment='" + this.annotationComment + '\'' +
+                ", itemTime=" + this.itemTime +
+                ", documentAuthor=" + this.documentAuthor +
+                ", documentId=" + this.documentId +
+                ", entryId=" + this.entryId +
+                ", medicationTreatmentId=" + this.medicationTreatmentId +
+                ", sectionAuthor=" + this.sectionAuthor +
+                ", sequence=" + this.sequence +
+                ", dispenseType=" + this.dispenseType +
+                ", dosageInstructions=" + this.dosageInstructions +
                 ", fulfilmentNotes='" + this.fulfilmentNotes + '\'' +
+                ", inReserve=" + this.inReserve +
                 ", mtpEntryRef=" + this.mtpEntryRef +
                 ", otc=" + this.otc +
                 ", patientMedicationInstructions='" + this.patientMedicationInstructions + '\'' +
                 ", preEntryRef=" + this.preEntryRef +
                 ", product=" + this.product +
-                ", quantity=" + this.quantity +
-                ", annotationComment='" + this.annotationComment + '\'' +
-                ", dispenseTime=" + this.itemTime +
-                ", documentAuthor=" + this.documentAuthor +
-                ", documentId='" + this.documentId + '\'' +
-                ", entryId='" + this.entryId + '\'' +
-                ", medicationTreatmentId='" + this.medicationTreatmentId + '\'' +
-                ", sectionAuthor=" + this.sectionAuthor +
-                ", sequence=" + this.sequence +
+                ", quantityUnit=" + this.quantityUnit +
+                ", quantityValue='" + this.quantityValue + '\'' +
                 '}';
     }
 }

@@ -17,6 +17,8 @@ import org.husky.emed.ch.models.common.EmedReference;
 import org.husky.emed.ch.models.entry.EmedPadvEntryDigest;
 
 import java.time.Instant;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Represents the digest of an eMed PADV document Comment item.
@@ -24,6 +26,11 @@ import java.time.Instant;
  * @author Quentin Ligier
  */
 public class EmedPadvCommentEntryDigest extends EmedPadvEntryDigest {
+
+    /**
+     * The comment added by this PADV Comment.
+     */
+    private String comment;
 
     /**
      * Constructor.
@@ -40,21 +47,32 @@ public class EmedPadvCommentEntryDigest extends EmedPadvEntryDigest {
      * @param effectiveTime            The instant at which the advice becomes effective.
      * @param targetedEntryRef         Reference to the targeted item entry.
      * @param targetedEntryType        Document type of the targeted item entry (MTP, PRE or DIS).
+     * @param comment                  The comment added by this PADV Comment.
      */
     public EmedPadvCommentEntryDigest(final Instant pharmaceuticalAdviceTime,
-                                      final String documentId,
+                                      final UUID documentId,
                                       @Nullable final AuthorDigest documentAuthor,
                                       @Nullable final AuthorDigest sectionAuthor,
-                                      final String entryId,
-                                      final String medicationTreatmentId,
+                                      final UUID entryId,
+                                      final UUID medicationTreatmentId,
                                       final int sequence,
                                       @Nullable final String annotationComment,
                                       final boolean completed,
                                       final Instant effectiveTime,
                                       final EmedReference targetedEntryRef,
-                                      final EmedEntryType targetedEntryType) {
+                                      final EmedEntryType targetedEntryType,
+                                      final String comment) {
         super(pharmaceuticalAdviceTime, documentId, documentAuthor, sectionAuthor, entryId, medicationTreatmentId, sequence,
                 annotationComment, completed, effectiveTime, targetedEntryRef, targetedEntryType);
+        this.comment = Objects.requireNonNull(comment);
+    }
+
+    public String getComment() {
+        return this.comment;
+    }
+
+    public void setComment(final String comment) {
+        this.comment = Objects.requireNonNull(comment);
     }
 
     /**
@@ -65,10 +83,23 @@ public class EmedPadvCommentEntryDigest extends EmedPadvEntryDigest {
     }
 
     @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof final EmedPadvCommentEntryDigest that)) return false;
+        if (!super.equals(o)) return false;
+        return Objects.equals(comment, that.comment);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), comment);
+    }
+
+    @Override
     public String toString() {
         return "EmedPadvCommentEntryDigest{" +
                 "annotationComment='" + this.annotationComment + '\'' +
-                ", pharmaceuticalAdviceTime=" + this.itemTime +
+                ", itemTime=" + this.itemTime +
                 ", documentAuthor=" + this.documentAuthor +
                 ", documentId='" + this.documentId + '\'' +
                 ", entryId='" + this.entryId + '\'' +
@@ -79,6 +110,7 @@ public class EmedPadvCommentEntryDigest extends EmedPadvEntryDigest {
                 ", completed=" + this.completed +
                 ", targetedEntryRef=" + this.targetedEntryRef +
                 ", targetedEntryType=" + this.targetedEntryType +
+                ", comment='" + this.comment + '\'' +
                 '}';
     }
 }

@@ -20,14 +20,16 @@ import org.husky.common.hl7cdar2.POCDMT000040ObservationMedia;
  * Template description: Multimedia objects (e.g., PDF representations of the CDA document, pictures, Reiber diagrams, electrophoresis, etc.) MAY be integrated into a CDA document, either by reference to external multimedia objects or by means of XML embedding.This template defines only the embedding of multimedia objects in the CDA document. References to external documents can be created with the ExternalDocument template.For embedding in XML, the multimedia objects Base-64 must be encoded.Due to the amount of data, only light objects should be embedded.Heavy objects should be integrated using links to external documents.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.1.10.4.83<br>
- * Effective date: 2018-04-18 00:00:00<br>
- * Version: 2017<br>
- * Status: active
+ * Effective date: 2022-02-24 09:56:48<br>
+ * Version: 2022<br>
+ * Status: draft
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
 public class CdachEntryObservationMedia extends POCDMT000040ObservationMedia {
 
     public CdachEntryObservationMedia() {
+        super.getClassCode().add("OBS");
+        super.getMoodCode().add("EVN");
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.83"));
         super.setLanguageCode(createHl7LanguageCodeFixedValue());
         super.setValue(createHl7ValueFixedValue("B64"));

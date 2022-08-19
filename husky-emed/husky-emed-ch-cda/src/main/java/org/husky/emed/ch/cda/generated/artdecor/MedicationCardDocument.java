@@ -25,11 +25,11 @@ import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
  * <p>
  * Identifier: 2.16.756.5.30.1.1.10.1.3<br>
  * Effective date: 2016-05-13 00:00:00<br>
- * Version: 2020<br>
- * Status: draft
+ * Version: 2022<br>
+ * Status: active
  */
 @XmlRootElement(name = "ClinicalDocument", namespace = "urn:hl7-org:v3")
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
 public class MedicationCardDocument extends POCDMT000040ClinicalDocument {
 
     public MedicationCardDocument() {

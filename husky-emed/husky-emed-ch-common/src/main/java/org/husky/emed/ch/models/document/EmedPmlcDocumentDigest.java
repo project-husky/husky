@@ -22,9 +22,7 @@ import org.husky.emed.ch.models.entry.EmedMtpEntryDigest;
 
 import java.time.Instant;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Represents the digest of a PMLC Emed document.
@@ -36,7 +34,7 @@ public class EmedPmlcDocumentDigest extends EmedDocumentDigest {
     /**
      * The MTP entries contained in the document.
      */
-    private final List<@NonNull EmedMtpEntryDigest> mtpEntryDigests = new ArrayList<>();
+    private final List<@NonNull EmedMtpEntryDigest> mtpEntryDigests = new ArrayList<>(0);
 
     /**
      * Constructor.
@@ -55,8 +53,8 @@ public class EmedPmlcDocumentDigest extends EmedDocumentDigest {
      * @param narrativeText       The narrative text.
      * @param mtpEntryDigests     The MTP entry digests.
      */
-    public EmedPmlcDocumentDigest(final String id,
-                                  final String setId,
+    public EmedPmlcDocumentDigest(final UUID id,
+                                  final UUID setId,
                                   final int version,
                                   final OffsetDateTime creationTime,
                                   final Instant documentationTime,
@@ -94,8 +92,37 @@ public class EmedPmlcDocumentDigest extends EmedDocumentDigest {
         return new ArrayList<>(this.mtpEntryDigests);
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof final EmedPmlcDocumentDigest that)) return false;
+        if (!super.equals(o)) return false;
+        return Objects.equals(mtpEntryDigests, that.mtpEntryDigests);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), mtpEntryDigests);
+    }
+
+    @Override
     public String toString() {
-        return "EmedPmlcDocumentDigest(super=" + super.toString() + ", mtpEntryDigests=" + this.getMtpEntryDigests() +
-                ")";
+        return "EmedPmlcDocumentDigest{" +
+                "authors=" + this.authors +
+                ", recipients=" + this.recipients +
+                ", id='" + this.id + '\'' +
+                ", setId='" + this.setId + '\'' +
+                ", version=" + this.version +
+                ", creationTime=" + this.creationTime +
+                ", documentationTime=" + this.documentationTime +
+                ", confidentialityCode=" + this.confidentialityCode +
+                ", languageCode='" + this.languageCode + '\'' +
+                ", patient=" + this.patient +
+                ", custodian=" + this.custodian +
+                ", narrativeText=" + this.narrativeText +
+                ", remarks=" + this.remarks +
+                ", pdfRepresentation=" + Arrays.toString(this.pdfRepresentation) +
+                ", mtpEntryDigests=" + this.mtpEntryDigests +
+                '}';
     }
 }

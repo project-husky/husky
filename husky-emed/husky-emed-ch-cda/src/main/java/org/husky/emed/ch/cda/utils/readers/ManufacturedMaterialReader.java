@@ -10,17 +10,20 @@
 package org.husky.emed.ch.cda.utils.readers;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.husky.common.enums.CodeSystems;
 import org.husky.common.hl7cdar2.CD;
 import org.husky.common.hl7cdar2.COCTMT230100UVIngredient;
 import org.husky.common.hl7cdar2.POCDMT000040Material;
+import org.husky.common.utils.time.DateTimes;
 import org.husky.emed.ch.cda.utils.CdaR2Utils;
 import org.husky.emed.ch.enums.ActivePharmaceuticalIngredient;
 import org.husky.emed.ch.enums.PharmaceuticalDoseFormEdqm;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
-import org.husky.emed.ch.models.common.QuantityWithUnitCode;
+import org.husky.emed.ch.models.common.QuantityWithRegularUnit;
 import org.husky.emed.ch.models.treatment.MedicationProduct;
 import org.husky.emed.ch.models.treatment.MedicationProductIngredient;
 
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -46,19 +49,37 @@ public class ManufacturedMaterialReader {
     }
 
     /**
-     * Returns the GTIN code value or {@code null} if it's a magistral preparation/compound medicine.
+     * Returns the GTIN code value or {@code null} if it's not specified.
      */
     @Nullable
     public String getGtinCode() {
-        return Optional.ofNullable(this.material.getCode()).map(CD::getCode).orElse(null);
+        return Optional.ofNullable(this.material.getCode())
+                .filter(ce -> CodeSystems.GTIN.getCodeSystemId().equals(ce.getCodeSystem()))
+                .map(CD::getCode)
+                .orElse(null);
     }
 
     /**
-     * Returns the name or {@code null} if it doesn't exist.
+     * Returns the ATC code value or {@code null} if it's not specified.
+     */
+    @Nullable
+    public String getAtcCode() {
+        return Optional.ofNullable(this.material.getCode())
+                .filter(ce -> CodeSystems.WHO_ATC_CODE.getCodeSystemId().equals(ce.getCodeSystem()))
+                .map(CD::getCode)
+                .orElse(null);
+    }
+
+    /**
+     * Returns the name or {@code null} if it's not specified.
      */
     @Nullable
     public String getName() {
-        return CdaR2Utils.getSingleNullableMixedOrThrow(this.material.getName());
+        if (this.material.getName() == null) {
+            throw new InvalidEmedContentException("The manufactured material name is missing");
+        }
+        final String name = this.material.getName().getMergedXmlMixed();
+        return (name.isBlank()) ? null : name;
     }
 
     /**
@@ -84,6 +105,16 @@ public class ManufacturedMaterialReader {
     }
 
     /**
+     * Returns the expiration date or {@code null} if it's not defined.
+     */
+    @Nullable
+    public LocalDate getExpirationDate() {
+        return Optional.ofNullable(this.material.getExpirationTime())
+                .map(DateTimes::toLocalDate)
+                .orElse(null);
+    }
+
+    /**
      * Returns the packaging of the medicine or {@code null} if it's not defined.
      */
     @Nullable
@@ -98,16 +129,22 @@ public class ManufacturedMaterialReader {
      * Converts the ManufacturedMaterial to a {@link MedicationProduct}.
      */
     public MedicationProduct toMedicationProduct() throws InvalidEmedContentException {
-        final MedicationProduct product = new MedicationProduct();
-
-        product.setGtinCode(this.getGtinCode());
-        product.setName(this.getName());
-        product.setFormCode(this.getFormCode());
-        product.setLotNumber(this.getLotNumberText());
+        final MedicationProduct product = new MedicationProduct(
+                this.getGtinCode(),
+                this.getAtcCode(),
+                this.getName(),
+                this.getLotNumberText(),
+                this.getFormCode(),
+                this.getExpirationDate(),
+                null
+        );
 
         final ContainerPackagedMedicineReader packagedMedicine = this.getPackagedMedicine();
         if (packagedMedicine != null) {
-            product.setPackagedProduct(packagedMedicine.toMedicationPackagedProduct());
+            product.setPackageGtinCode(packagedMedicine.getGtinCode());
+            product.setPackageName(packagedMedicine.getName());
+            product.setPackageFormCode(packagedMedicine.getFormCode());
+            product.setPackageCapacityQuantity(packagedMedicine.getCapacityQuantity());
         }
 
         product.getIngredients().addAll(this.material.getIngredient().stream()
@@ -119,14 +156,14 @@ public class ManufacturedMaterialReader {
                     final var code =
                             this.activePharmaceuticalIngredientFromCdOrNull(ingredient.getIngredient().getValue().getCode());
 
-                    QuantityWithUnitCode numerator = null;
-                    QuantityWithUnitCode denominator = null;
+                    QuantityWithRegularUnit numerator = null;
+                    QuantityWithRegularUnit denominator = null;
                     if (ingredient.getQuantity() != null) {
                         if (ingredient.getQuantity().getNumerator() != null) {
-                            numerator = QuantityWithUnitCode.fromPq(ingredient.getQuantity().getNumerator());
+                            numerator = QuantityWithRegularUnit.fromPq(ingredient.getQuantity().getNumerator());
                         }
                         if (ingredient.getQuantity().getDenominator() != null) {
-                            denominator = QuantityWithUnitCode.fromPq(ingredient.getQuantity().getDenominator());
+                            denominator = QuantityWithRegularUnit.fromPq(ingredient.getQuantity().getDenominator());
                         }
                     }
                     return new MedicationProductIngredient(name, numerator, denominator, code);

@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.emed.ch.enums.RouteOfAdministrationEdqm;
+import org.husky.emed.ch.enums.RouteOfAdministrationAmbu;
 import org.husky.emed.ch.enums.TreatmentStatus;
 import org.husky.emed.ch.models.common.AuthorDigest;
 import org.husky.emed.ch.models.common.EmedReference;
@@ -24,6 +24,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * An representation of the state of a medication in the treatment plan at a given time.
@@ -43,18 +44,25 @@ public class MedicationTreatment {
     /**
      * The list of 'over-the-counter' dispenses (OTC, without prescription).
      */
-    protected final List<@NonNull MedicationDispense> otcDispenses = new ArrayList<>();
+    protected final List<@NonNull MedicationDispense> otcDispenses = new ArrayList<>(0);
 
     /**
      * The list of prescriptions.
      */
-    protected final List<@NonNull MedicationPrescription> prescriptions = new ArrayList<>();
+    protected final List<@NonNull MedicationPrescription> prescriptions = new ArrayList<>(0);
 
     /**
      * The annotation comment or {@code null} if it isn't provided.
+     *
+     * TODO: Do not use yet, use case is unclear. May be deleted soon.
      */
     @Nullable
     protected String annotationComment;
+
+    /**
+     * All comments that have been made about the treatment.
+     */
+    protected final List<@NonNull MedicationTreatmentComment> comments = new ArrayList<>(0);
 
     /**
      * Number of dispense repeats/refills (excluding the initial dispense). {@code null} means no limitation.
@@ -76,13 +84,25 @@ public class MedicationTreatment {
     /**
      * The medication treatment ID.
      */
-    protected String id;
+    protected UUID id;
 
     /**
-     * The last author in the medication treatment.
+     * Whether the treatment is to be taken regularly ({@code false}) or only if required ({@code true}).
+     */
+    private boolean inReserve;
+
+    /**
+     * The author of the last item entry (of any kind) in this treatment. This is the last intervening.
      */
     @Nullable
-    protected AuthorDigest lastAuthor;
+    protected AuthorDigest lastInterveningAuthor;
+
+    /**
+     * The author of the last item entry (of type MTP, PRE, or any type of PADV except COMMENT that apply to an MTP
+     * or PRE) in this treatment. This is the last "medical" participant.
+     */
+    @Nullable
+    protected AuthorDigest lastMedicalAuthor;
 
     /**
      * Reference to the MTP item.
@@ -102,10 +122,16 @@ public class MedicationTreatment {
     protected MedicationProduct product;
 
     /**
+     * The quantity to dispense or {@code null} if it isn't provided.
+     */
+    @Nullable
+    private String quantityToDispense;
+
+    /**
      * The medication route of administration or {@code null} if it's not specified.
      */
     @Nullable
-    protected RouteOfAdministrationEdqm routeOfAdministration;
+    protected RouteOfAdministrationAmbu routeOfAdministration;
 
     /**
      * Whether the substitution is permitted (Equivalent) or not (None).
@@ -213,9 +239,9 @@ public class MedicationTreatment {
      * @param prescriptionId The ID of the prescription to find.
      * @return the retrieved entity or {@link Optional#empty()} if none found.
      */
-    public Optional<MedicationPrescription> getPrescriptionById(final String prescriptionId) {
+    public Optional<MedicationPrescription> getPrescriptionById(final UUID prescriptionId) {
         return this.prescriptions.stream()
-                .filter(prescription -> prescriptionId.equals(prescription.getPreReference().getItemId()))
+                .filter(prescription -> prescriptionId.equals(prescription.getPreReference().getEntryId()))
                 .findAny();
     }
 
@@ -225,7 +251,7 @@ public class MedicationTreatment {
      * @param dispenseId The ID of the dispense to find.
      * @return the retrieved entity or {@link Optional#empty()} if none found.
      */
-    public Optional<MedicationDispense> getDispenseById(final String dispenseId) {
+    public Optional<MedicationDispense> getDispenseById(final UUID dispenseId) {
         for (final MedicationDispense dispense : this.otcDispenses) {
             if (dispenseId.equals(dispense.getItemId())) {
                 return Optional.of(dispense);

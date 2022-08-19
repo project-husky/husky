@@ -24,16 +24,15 @@ import org.husky.common.hl7cdar2.POCDMT000040SubstanceAdministration;
  * Element description: Reference to Medication Treatment Plan Item General Specification<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.1.10.4.45<br>
- * Effective date: 2017-01-10 15:34:25<br>
- * Version: 2017<br>
- * Status: pending
+ * Effective date: 2022-02-23 10:07:46<br>
+ * Version: 2022<br>
+ * Status: draft
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
 public class MtpreferenceEntryContentModule extends POCDMT000040SubstanceAdministration {
 
     public MtpreferenceEntryContentModule() {
         super.getClassCode().add("SBADM");
-        super.setMoodCode(org.husky.common.hl7cdar2.XDocumentSubstanceMood.INT);
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.10"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.45"));
         super.setCode(createHl7CodeFixedValue("MTPItem",

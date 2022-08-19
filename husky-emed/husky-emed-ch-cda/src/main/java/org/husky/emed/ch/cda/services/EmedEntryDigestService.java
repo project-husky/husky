@@ -13,6 +13,7 @@ import org.husky.emed.ch.models.entry.EmedEntryDigest;
 
 import java.time.Instant;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * The service of the {@link EmedEntryDigest} registry.
@@ -22,20 +23,12 @@ import java.util.Optional;
 public interface EmedEntryDigestService {
 
     /**
-     * Find an Emed entry digest by its ID.
+     * Find an eMed entry digest by its ID.
      *
-     * @param entryId The Emed entry ID.
+     * @param entryId The eMed entry ID.
      * @return an {@link Optional} that may contain the found item entry.
      */
-    Optional<EmedEntryDigest> getById(final String entryId);
-
-    /**
-     * Find a single Emed entry digest by its document ID.
-     *
-     * @param documentUniqueId The Emed document ID.
-     * @return an {@link Optional} that may contain the found item entry.
-     */
-    Optional<EmedEntryDigest> getByDocument(final String documentUniqueId);
+    Optional<EmedEntryDigest> getById(final UUID entryId);
 
     /**
      * Find the next number in the sequence. The sequence is necessary to order Emed entries belonging to the same
@@ -49,5 +42,6 @@ public interface EmedEntryDigestService {
      * @param documentationTime     The documentation time.
      * @return The next number in the sequence.
      */
-    long getSequence(final String medicationTreatmentId, final Instant documentationTime);
+    int getSequence(final UUID medicationTreatmentId,
+                    final Instant documentationTime);
 }

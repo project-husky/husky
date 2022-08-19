@@ -10,11 +10,17 @@
  */
 package org.husky.communication.ch.camel.chpharm5.requests;
 
+import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.model.api.Include;
+import ca.uhn.fhir.rest.api.SortSpec;
 import ca.uhn.fhir.rest.param.DateRangeParam;
 import ca.uhn.fhir.rest.param.StringParam;
 import ca.uhn.fhir.rest.param.TokenOrListParam;
 import ca.uhn.fhir.rest.param.TokenParam;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.husky.communication.ch.camel.chpharm5.ChPharm5Operations;
+
+import java.util.Set;
 
 /**
  * husky
@@ -42,8 +48,9 @@ public abstract class ChPharm5StableSearchParameters extends ChPharm5SearchParam
     @Nullable
     protected StringParam authorGivenName;
 
-    protected ChPharm5StableSearchParameters(final String operation) {
-        super(operation);
+    public ChPharm5StableSearchParameters(final TokenParam patientIdentifier, final DateRangeParam date, final StringParam authorFamilyName, final StringParam authorGivenName, final TokenParam identifier, final TokenOrListParam status, final TokenOrListParam setting, final DateRangeParam period, final TokenOrListParam facility, final TokenOrListParam event, final TokenOrListParam securityLabel, final TokenOrListParam format, final ChPharm5Operations operation, final SortSpec sortSpec, final Set<Include> includeSpec, final FhirContext fhirContext) {
+        //super(patientIdentifier, date, authorFamilyName, authorGivenName, identifier, status, setting, period,
+                //facility, event, securityLabel, format, operation, sortSpec, includeSpec, fhirContext);
     }
 
     @Nullable

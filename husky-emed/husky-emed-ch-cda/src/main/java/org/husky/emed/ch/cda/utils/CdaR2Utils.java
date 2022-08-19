@@ -15,10 +15,7 @@ import org.husky.common.hl7cdar2.*;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.models.common.EmedReference;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Utilities for CDA R2 classes.
@@ -40,7 +37,7 @@ public class CdaR2Utils {
      * @return the single non-blank string from {@code xmlMixed}.
      * @throws IllegalArgumentException if there is zero or more than one {@code xmlMixed} value.
      */
-    public String getSingleNonNullMixedOrThrow(final ANY any) {
+    public static String getSingleNonNullMixedOrThrow(final ANY any) {
         final List<String> mixed = any.getXmlMixed();
         if (mixed == null || mixed.size() != 1) {
             throw new IllegalArgumentException("");
@@ -107,17 +104,18 @@ public class CdaR2Utils {
         if (!IiUtils.isValidUid(id) || supply.getId().size() > 1) {
             throw new InvalidEmedContentException("The Supply item ID is invalid");
         }
-        final String documentId;
+        final var entryId = IiUtils.getUuid(supply.getId().get(0));
+        final UUID documentId;
         if (!supply.getReference().isEmpty()) {
             final II docIi = supply.getReference().get(0).getExternalDocument().getId().get(0);
             if (!IiUtils.isValidUuid(docIi)) {
                 throw new InvalidEmedContentException("The Supply document ID is invalid");
             }
-            documentId = IiUtils.getNormalizedUuid(docIi);
+            documentId = IiUtils.getUuid(docIi);
         } else {
             documentId = null;
         }
-        return new EmedReference(documentId, null);
+        return new EmedReference(documentId, entryId);
     }
 
 
@@ -134,13 +132,13 @@ public class CdaR2Utils {
         if (!IiUtils.isValidUid(id) || observation.getId().size() > 1) {
             throw new InvalidEmedContentException("The Observation item ID is invalid");
         }
-        final String documentId;
+        final UUID documentId;
         if (!observation.getReference().isEmpty()) {
             final II docIi = observation.getReference().get(0).getExternalDocument().getId().get(0);
             if (!IiUtils.isValidUuid(docIi)) {
                 throw new InvalidEmedContentException("The Observation document ID is invalid");
             }
-            documentId = IiUtils.getNormalizedUuid(docIi);
+            documentId = IiUtils.getUuid(docIi);
         } else {
             documentId = null;
         }
@@ -160,17 +158,17 @@ public class CdaR2Utils {
         if (!IiUtils.isValidUid(id) || substanceAdministration.getId().size() > 1) {
             throw new InvalidEmedContentException("The SubstanceAdministration item ID is invalid");
         }
-        final var itemId = IiUtils.getNormalizedUid(substanceAdministration.getId().get(0));
-        final String documentId;
+        final var entryId = IiUtils.getUuid(substanceAdministration.getId().get(0));
+        final UUID documentId;
         if (!substanceAdministration.getReference().isEmpty()) {
             final II docIi = substanceAdministration.getReference().get(0).getExternalDocument().getId().get(0);
             if (!IiUtils.isValidUuid(docIi)) {
                 throw new InvalidEmedContentException("The SubstanceAdministration document ID is invalid");
             }
-            documentId = IiUtils.getNormalizedUuid(docIi);
+            documentId = IiUtils.getUuid(docIi);
         } else {
             documentId = null;
         }
-        return new EmedReference(documentId, itemId);
+        return new EmedReference(documentId, entryId);
     }
 }

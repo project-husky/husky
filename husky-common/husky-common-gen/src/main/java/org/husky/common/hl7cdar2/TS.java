@@ -58,7 +58,7 @@ public class TS extends QTY {
     }
 
     public TS(final NullFlavor value) {
-        this.getNullFlavor().add(Objects.requireNonNullElse(value, NullFlavor.UNKNOWN).getCodeValue());
+        this.getNullFlavor().add(Objects.requireNonNullElse(value, NullFlavor.UNKNOWN_L1).getCodeValue());
     }
 
     /**

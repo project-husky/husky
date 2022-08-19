@@ -19,10 +19,7 @@ import org.husky.emed.ch.models.entry.EmedPadvEntryDigest;
 import org.husky.emed.ch.models.entry.EmedPreEntryDigest;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Represents the digest of an EMED PADV Ok item entry.
@@ -60,11 +57,11 @@ public class EmedPadvOkEntryDigest extends EmedPadvEntryDigest {
      *                                 Prescription Item, if any.
      */
     public EmedPadvOkEntryDigest(final Instant pharmaceuticalAdviceTime,
-                                 final String documentId,
+                                 final UUID documentId,
                                  @Nullable final AuthorDigest documentAuthor,
                                  @Nullable final AuthorDigest sectionAuthor,
-                                 final String entryId,
-                                 final String medicationTreatmentId,
+                                 final UUID entryId,
+                                 final UUID medicationTreatmentId,
                                  final int sequence,
                                  @Nullable final String annotationComment,
                                  final boolean completed,
@@ -103,7 +100,7 @@ public class EmedPadvOkEntryDigest extends EmedPadvEntryDigest {
         if (this == o) return true;
         if (!(o instanceof final EmedPadvOkEntryDigest that)) return false;
         if (!super.equals(o)) return false;
-        return recommendedPrescriptions.equals(that.recommendedPrescriptions);
+        return Objects.equals(recommendedPrescriptions, that.recommendedPrescriptions);
     }
 
     @Override
@@ -115,7 +112,7 @@ public class EmedPadvOkEntryDigest extends EmedPadvEntryDigest {
     public String toString() {
         return "EmedPadvOkEntryDigest{" +
                 "annotationComment='" + this.annotationComment + '\'' +
-                ", pharmaceuticalAdviceTime=" + this.itemTime +
+                ", itemTime=" + this.itemTime +
                 ", documentAuthor=" + this.documentAuthor +
                 ", documentId='" + this.documentId + '\'' +
                 ", entryId='" + this.entryId + '\'' +

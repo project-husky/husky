@@ -10,11 +10,8 @@
 package org.husky.emed.ch.cda.utils;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.husky.common.hl7cdar2.*;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
-import org.husky.common.hl7cdar2.POCDMT000040Act;
-import org.husky.common.hl7cdar2.POCDMT000040EntryRelationship;
-import org.husky.common.hl7cdar2.POCDMT000040Observation;
-import org.husky.common.hl7cdar2.POCDMT000040SubstanceAdministration;
 
 import java.util.Collections;
 import java.util.List;
@@ -126,6 +123,28 @@ public class EntryRelationshipUtils {
         }
         return entryRelationships.stream()
                 .map(POCDMT000040EntryRelationship::getSubstanceAdministration)
+                .filter(Objects::nonNull)
+                .filter(observation -> TemplateIds.isInList(templateId, observation.getTemplateId()))
+                .toList();
+    }
+
+    /**
+     * Finds a list of Supply in EntryRelationships that contain a specified template ID.
+     *
+     * @param entryRelationships The list of EntryRelationships.
+     * @param templateId         The template ID to search.
+     * @return the list of corresponding Supply's.
+     */
+    public static List<POCDMT000040Supply> getSupplyFromEntryRelationshipsByTemplateId(
+            @Nullable final List<POCDMT000040EntryRelationship> entryRelationships,
+            final String templateId
+    ) {
+        Objects.requireNonNull(templateId);
+        if (entryRelationships == null || entryRelationships.isEmpty()) {
+            return Collections.emptyList();
+        }
+        return entryRelationships.stream()
+                .map(POCDMT000040EntryRelationship::getSupply)
                 .filter(Objects::nonNull)
                 .filter(observation -> TemplateIds.isInList(templateId, observation.getTemplateId()))
                 .toList();

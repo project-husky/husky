@@ -10,16 +10,18 @@
 package org.husky.emed.ch.cda.utils.readers;
 
 import org.husky.common.hl7cdar2.*;
-import org.husky.emed.ch.errors.InvalidEmedContentException;
-import org.husky.emed.ch.enums.ActSubstanceAdminSubstitutionCode;
+import org.husky.emed.ch.cda.generated.artdecor.enums.MedicationDosageQualifier;
 import org.husky.emed.ch.cda.utils.EntryRelationshipUtils;
 import org.husky.emed.ch.cda.utils.TemplateIds;
-
-import static org.husky.emed.ch.cda.utils.TemplateIds.SUBSTITUTION_PERMISSION;
+import org.husky.emed.ch.enums.ActSubstanceAdminSubstitutionCode;
+import org.husky.emed.ch.errors.InvalidEmedContentException;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
+import static org.husky.emed.ch.cda.utils.TemplateIds.IN_RESERVE;
+import static org.husky.emed.ch.cda.utils.TemplateIds.SUBSTITUTION_PERMISSION;
 
 /**
  * A reader for CDA-CH-EMED SubstanceAdministration elements.
@@ -76,8 +78,26 @@ public class SubAdmEntryReader extends DosageInstructionsReader {
             .findAny()
             .map(act -> act.getCode().getCode())
             .map(ActSubstanceAdminSubstitutionCode::getEnum)
-            .map(substitution -> substitution == ActSubstanceAdminSubstitutionCode.EQUIVALENT_L1)
-            .orElse(true);
+            .map(substitution -> substitution != ActSubstanceAdminSubstitutionCode.NONE_L1)
+            .orElse(true); // Default is substitution permitted
+    }
+
+    /**
+     * Returns whether the treatment is to be taken regularly ({@code false}) or only if required ({@code true}).
+     */
+    public boolean isInReserve() {
+        return this.subAdm.getEntryRelationship().stream()
+                .filter(entryRelationship -> entryRelationship.getTypeCode() == XActRelationshipEntryRelationship.COMP)
+                .map(POCDMT000040EntryRelationship::getAct)
+                .filter(Objects::nonNull)
+                .filter(act -> TemplateIds.isInList(IN_RESERVE, act.getTemplateId()))
+                .filter(act -> act.getCode() != null)
+                .filter(act -> MedicationDosageQualifier.CODE_SYSTEM_ID.equals(act.getCode().getCodeSystem()))
+                .findAny()
+                .map(act -> act.getCode().getCode())
+                .map(MedicationDosageQualifier::getEnum)
+                .map(substitution -> substitution == MedicationDosageQualifier.AS_REQUIRED_QUALIFIER_VALUE)
+                .orElse(false); // Default is regular medication
     }
 
     /**
@@ -179,5 +199,18 @@ public class SubAdmEntryReader extends DosageInstructionsReader {
                 .findFirst()
                 .map(POCDMT000040Act::getText)
                 .map(ED::getTextContent);
+    }
+
+    /**
+     * Returns the quantity to dispense. It's given in the
+     *
+     * @return an {@link Optional} that may contain the quantity to dispense.
+     */
+    public Optional<String> getQuantityToDispense() {
+         return EntryRelationshipUtils.getSupplyFromEntryRelationshipsByTemplateId(
+                 this.subAdm.getEntryRelationship(), TemplateIds.QUANTITY_TO_DISPENSE).stream()
+                .findFirst()
+                .map(POCDMT000040Supply::getQuantity)
+                .map(PQ::getValue);
     }
 }

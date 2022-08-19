@@ -25,7 +25,7 @@ import org.husky.common.hl7cdar2.POCDMT000040Custodian;
  * Version: 2020<br>
  * Status: active
  */
-@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-12-09")
+@Generated(value = "org.husky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-07-11")
 public class CdachHeaderCustodian extends POCDMT000040Custodian {
 
     public CdachHeaderCustodian() {
