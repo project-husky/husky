@@ -86,6 +86,20 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 
 			fhirAddr.setLine(getStreetAdddressLines(mdhtAddr));
 
+			if (mdhtAddr.getStreetName() != null) {
+				org.hl7.fhir.r4.model.Extension streetNameExt = new org.hl7.fhir.r4.model.Extension(
+						"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber",
+						new StringType(mdhtAddr.getStreetName()));
+				fhirAddr.addExtension(streetNameExt);
+			}
+
+			if (mdhtAddr.getBuildingNumber() != null) {
+				org.hl7.fhir.r4.model.Extension houseNumberExt = new org.hl7.fhir.r4.model.Extension(
+						"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber",
+						new StringType(mdhtAddr.getBuildingNumber()));
+				fhirAddr.addExtension(houseNumberExt);
+			}
+
 			if (mdhtAddr.getCity() != null) {
 				fhirAddr.setCity(mdhtAddr.getCity());
 			}

@@ -353,7 +353,7 @@ public class XdsMetadataUtil {
 				}
 
 				if (xtn.getUse() != null) {
-					telecom.setUsage(TelecomAddressUse.valueOf(xtn.getUse()));
+					telecom.setUsage(TelecomAddressUse.getEnum(xtn.getUse()));
 				}
 
 				t.add(telecom);
@@ -512,7 +512,9 @@ public class XdsMetadataUtil {
 		if (ids != null) {
 			while (ids.hasNext()) {
 				final Identifiable cx = ids.next();
-				p.addId(XdsMetadataUtil.convertOhtCx(cx));
+				if (cx != null) {
+					p.addId(XdsMetadataUtil.convertOhtCx(cx));
+				}
 			}
 
 		}

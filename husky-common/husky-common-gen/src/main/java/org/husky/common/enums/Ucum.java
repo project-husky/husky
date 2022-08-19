@@ -1981,7 +1981,7 @@ public enum Ucum {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		return new Code(CODE_SYSTEM_OID, code, displayName);
+		return new Code(code, CODE_SYSTEM_OID, displayName);
 	}
 
 	/**

@@ -9,7 +9,8 @@
 */
 package org.husky.cda.elga.narrative;
 
-import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -132,14 +133,14 @@ public class BaseTextGenerator {
 			startDateDisease = timeMap.get("low");
 			endDateDisease = timeMap.get("high");
 
-			var sdf = new SimpleDateFormat("dd.MM.yyyy");
+			var formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy").withZone(ZoneId.systemDefault());
 			if (startDateDisease != null) {
-				sb.append(sdf.format(DateTimes.toInstant(Hl7Dtm.fromHl7(startDateDisease))));
+				sb.append(formatter.format(DateTimes.toInstant(Hl7Dtm.fromHl7(startDateDisease))));
 				sb.append(" - ");
 			}
 
 			if (endDateDisease != null) {
-				sb.append(sdf.format(DateTimes.toInstant(Hl7Dtm.fromHl7(endDateDisease))));
+				sb.append(formatter.format(DateTimes.toInstant(Hl7Dtm.fromHl7(endDateDisease))));
 			}
 		}
 

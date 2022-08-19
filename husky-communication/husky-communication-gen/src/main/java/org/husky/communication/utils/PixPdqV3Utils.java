@@ -18,9 +18,11 @@ import net.ihe.gazelle.hl7v3.datatypes.AD;
 import net.ihe.gazelle.hl7v3.datatypes.AdxpCity;
 import net.ihe.gazelle.hl7v3.datatypes.AdxpCountry;
 import net.ihe.gazelle.hl7v3.datatypes.AdxpCounty;
+import net.ihe.gazelle.hl7v3.datatypes.AdxpHouseNumberNumeric;
 import net.ihe.gazelle.hl7v3.datatypes.AdxpPostalCode;
 import net.ihe.gazelle.hl7v3.datatypes.AdxpState;
 import net.ihe.gazelle.hl7v3.datatypes.AdxpStreetAddressLine;
+import net.ihe.gazelle.hl7v3.datatypes.AdxpStreetName;
 import net.ihe.gazelle.hl7v3.datatypes.BL;
 import net.ihe.gazelle.hl7v3.datatypes.CD;
 import net.ihe.gazelle.hl7v3.datatypes.CE;
@@ -129,6 +131,20 @@ public class PixPdqV3Utils {
 		var addressAdded = false;
 
 		if (addStreetAddressLinesToAd(address.getLine(), addressAD)) {
+			addressAdded = true;
+		}
+
+		// if there is a street name
+		if (addStreetNameToAd(
+				address.getExtensionString("http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName"),
+				addressAD)) {
+			addressAdded = true;
+		}
+
+		// if there is a house number
+		if (addHouseNumberToAd(
+				address.getExtensionString("http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber"),
+				addressAD)) {
 			addressAdded = true;
 		}
 
@@ -276,6 +292,42 @@ public class PixPdqV3Utils {
 				// indicate that some part of the address was added
 				return true;
 			}
+		}
+
+		return false;
+	}
+
+	private static boolean addStreetNameToAd(String addressStreetName, AD addressAD) {
+		if (addressStreetName != null && !addressStreetName.equals("")) {
+			// create the street name
+			var streetName = new AdxpStreetName();
+
+			// set the street address value
+			streetName.addMixed(addressStreetName);
+
+			// Add the street name to the AD
+			addressAD.addStreetName(streetName);
+
+			// indicate that some part of the address was added
+			return true;
+		}
+
+		return false;
+	}
+
+	private static boolean addHouseNumberToAd(String addressHouseNumber, AD addressAD) {
+		if (addressHouseNumber != null && !addressHouseNumber.equals("")) {
+			// create the house number
+			var houseNumber = new AdxpHouseNumberNumeric();
+
+			// set the house number value
+			houseNumber.addMixed(addressHouseNumber);
+
+			// Add the house number to the AD
+			addressAD.addHouseNumberNumeric(houseNumber);
+
+			// indicate that some part of the address was added
+			return true;
 		}
 
 		return false;
