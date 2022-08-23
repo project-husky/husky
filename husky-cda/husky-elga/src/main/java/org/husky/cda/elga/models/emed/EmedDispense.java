@@ -204,7 +204,7 @@ public class EmedDispense  {
 			} else {
 				IVLTS ivlts = new IVLTS();
 				ivlts.nullFlavor = new ArrayList<>();
-				ivlts.nullFlavor.add(NullFlavor.MASKED_CODE);
+				ivlts.nullFlavor.add(NullFlavor.MASKED_L1_CODE);
 				documentationOfServiceEvent.getServiceEvent().setEffectiveTime(ivlts);
 			}
 		}

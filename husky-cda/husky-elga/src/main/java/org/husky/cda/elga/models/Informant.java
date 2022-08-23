@@ -183,7 +183,7 @@ public class Informant {
 			assignedEntity.getId().addAll(getIi());
 		} else {
 			Identificator unknownId = new Identificator();
-			unknownId.setNullFlavor(NullFlavor.UNKNOWN);
+			unknownId.setNullFlavor(NullFlavor.UNKNOWN_L1);
 			assignedEntity.getId().add(unknownId.getHl7CdaR2Ii());
 		}
 
