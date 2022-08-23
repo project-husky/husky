@@ -101,16 +101,11 @@ public class AuthorAt extends Author {
 	}
 
 	/**
-	 * <div class="en">Gets the author time. The author/time element represents the
-	 * start time of the author’s participation in the creation of the clinical
-	 * document </div> <div class="de">Liefert die Zeit für den Autor. Diese gibt
-	 * den Startzeitpunkt an, an dem der Autor bei der Erstellung des Dokument
-	 * mitgewirkt hat.</div> <div class="fr"></div> <div class="it"></div>
+	 * Gets the author time. The author/time element represents the start time of
+	 * the author’s participation in the creation of the clinical document
 	 *
 	 *
-	 * @return date <div class="en">the start time of the participation as
-	 *         string</div> <div class="de">den Startzeitpunkt der Partizipation als
-	 *         String</div> <div class="fr"></div> <div class="it"></div>
+	 * @return date the start time of the participation as string
 	 */
 	public String getTimeAsString() {
 		if (getAuthorMdht().getTime() != null) {

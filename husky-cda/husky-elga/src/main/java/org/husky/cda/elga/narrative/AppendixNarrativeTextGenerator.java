@@ -31,8 +31,7 @@ public class AppendixNarrativeTextGenerator extends BaseTextGenerator {
 	/**
 	 * Constructor.
 	 *
-	 * @param problemConcerns a list of problem concerns
-	 * @param section         the section
+	 * @param entries a list of entries
 	 */
 	public AppendixNarrativeTextGenerator(List<POCDMT000040Entry> entries, List<Appendix> appendices) {
 		this.entries = entries;

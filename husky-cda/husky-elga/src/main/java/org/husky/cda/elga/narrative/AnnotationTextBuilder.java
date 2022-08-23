@@ -30,8 +30,8 @@ public class AnnotationTextBuilder extends BaseTextGenerator {
 	/**
 	 * Constructor.
 	 *
-	 * @param problemConcerns a list of problem concerns
-	 * @param section         the section
+	 * @param entries a list of entries
+	 * @param notes   list of notes
 	 */
 	public AnnotationTextBuilder(List<POCDMT000040Entry> entries, List<String> notes) {
 		this.entries = entries;

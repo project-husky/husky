@@ -98,26 +98,22 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterfaceAt {
 	public static final String SOCIAL_INSURANCE_CODE = "406";
 
 	/**
-	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
+	 * Identifier of the value set
 	 */
 	public static final String VALUE_SET_ID = "1.2.40.0.34.10.72";
 
 	/**
-	 * <div class="en">Name of the value set</div> <div class="de">Name des
-	 * Value Sets</div>
+	 * Name of the value set
 	 */
 	public static final String VALUE_SET_NAME = "ELGA_HealthcareFacilityTypeCode";
 
 	public static final String OID_HEALTHCAREFACILITYTYPES = "1.2.40.0.34.5.2";
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * Gets the Enum with a given code
 	 *
 	 * @param code
-	 *            <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
+	 * @return the enum
 	 */
 	public static HealthcareFacilityTypeCode getEnum(String code) {
 		for (final HealthcareFacilityTypeCode x : values()) {
@@ -129,12 +125,9 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
-	 * ist.</div>
+	 * Checks if a given enum is part of this value set.
 	 *
 	 * @param enumName
-	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -150,12 +143,9 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
-	 * ist.</div>
+	 * Checks if a given code value is in this value set.
 	 *
 	 * @param codeValue
-	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
@@ -168,15 +158,12 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Machine interpretable and (inside this class) unique
-	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
-	 * dieser Klasse) eindeutiger Code</div>
+	 * Machine interpretable and (inside this class) unique code
 	 */
 	private String code;
 
 	/**
-	 * <div class="en">Identifier of the referencing code system.</div>
-	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
+	 * Identifier of the referencing code system.
 	 */
 	private String codeSystem;
 
@@ -186,24 +173,15 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterfaceAt {
 	private Map<LanguageCode, String> displayNames;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div> <div class="de">Instanziiert dieses Enum Object
-	 * mittels eines Codes und einem Display Name</div>.
+	 * Instantiates this Enum Object with a given Code and Display Name
 	 *
-	 * @param code
-	 *            code
-	 * @param codeSystem
-	 *            codeSystem
-	 * @param displayName
-	 *            the default display name
-	 * @param displayNameEn
-	 *            the display name en
-	 * @param displayNameDe
-	 *            the display name de
-	 * @param displayNameFr
-	 *            the display name fr
-	 * @param displayNameIt
-	 *            the display name it
+	 * @param code          code
+	 * @param codeSystem    codeSystem
+	 * @param displayName   the default display name
+	 * @param displayNameEn the display name en
+	 * @param displayNameDe the display name de
+	 * @param displayNameFr the display name fr
+	 * @param displayNameIt the display name it
 	 */
 	HealthcareFacilityTypeCode(String code, String displayName, String displayNameDe) {
 		this.code = code;
@@ -214,10 +192,9 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Gets the code system identifier.</div>
-	 * <div class="de">Liefert den Code System Identifikator.</div>
+	 * Gets the code system identifier.
 	 *
-	 * @return <div class="en">the code system identifier</div>
+	 * @return the code system identifier
 	 */
 
 	@Override
@@ -226,10 +203,9 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
-	 * den Code System Namen.</div>
+	 * Gets the code system name
 	 *
-	 * @return <div class="en">the code system identifier</div>
+	 * @return the code system identifier
 	 */
 
 	@Override
@@ -242,10 +218,9 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>
+	 * Gets the actual Code as string
 	 *
-	 * @return <div class="en">the code</div>
+	 * @return the code
 	 */
 
 	@Override
@@ -254,14 +229,10 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Gets the display name defined by the language param. If
-	 * there is no english translation, the default display name is
-	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
-	 * falls es keine Englische Übersetzung gibt, wird der default-Name
-	 * zurückgegeben.</div>
+	 * Gets the display name defined by the language param. If there is no english
+	 * translation, the default display name is returned.
 	 *
-	 * @param languageCode
-	 *            the language code to get the display name for
+	 * @param languageCode the language code to get the display name for
 	 * @return returns the display name in the desired language. if language not
 	 *         found, display name in german will returned
 	 */
@@ -275,10 +246,9 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Gets the value set identifier.</div>
-	 * <div class="de">Liefert den Value Set Identifikator.</div>
+	 * Gets the value set identifier.
 	 *
-	 * @return <div class="en">the value set identifier</div>
+	 * @return the value set identifier
 	 */
 
 	@Override
@@ -287,10 +257,9 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Gets the value set name.</div> <div class="de">Liefert
-	 * den Value Set Namen.</div>
+	 * Gets the value set name.
 	 *
-	 * @return <div class="en">the value set name</div>
+	 * @return the value set name
 	 */
 
 	@Override

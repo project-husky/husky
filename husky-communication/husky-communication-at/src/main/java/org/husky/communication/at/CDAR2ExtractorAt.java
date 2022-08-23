@@ -49,7 +49,6 @@ public class CDAR2ExtractorAt extends org.husky.common.communication.CDAR2Extrac
 	 * ClinicalDocument/confidentialityCode. Implementation consistent with PCC TF-2
 	 * Medical Document Binding to XDS, XDM and XDR.
 	 * 
-	 * @see org.openhealthtools.ihe.xds.metadata.extract.DocumentEntryElementExtractor.extractConfidentialityCode()
 	 */
 	@Override
 	public List<Code> extractConfidentialityCodes() {
@@ -66,7 +65,6 @@ public class CDAR2ExtractorAt extends org.husky.common.communication.CDAR2Extrac
 	 * code metadata from a generic CDA R2 document.
 	 * 
 	 * @return null
-	 * @see org.openhealthtools.ihe.xds.metadata.extract.DocumentEntryElementExtractor.extractEventCodes()
 	 */
 	public Code extractEventCode() {
 		if (!cda.getDocumentationOf().isEmpty()) {
@@ -99,7 +97,6 @@ public class CDAR2ExtractorAt extends org.husky.common.communication.CDAR2Extrac
 	 * code metadata from a generic CDA R2 document.
 	 * 
 	 * @return null
-	 * @see org.openhealthtools.ihe.xds.metadata.extract.DocumentEntryElementExtractor.extractEventCodes()
 	 */
 	public Instant extractEventStopTime() {
 		if (!cda.getDocumentationOf().isEmpty()) {
@@ -123,14 +120,12 @@ public class CDAR2ExtractorAt extends org.husky.common.communication.CDAR2Extrac
 	/**
 	 * Extracts all patientId information from the CDA:
 	 * ClinicalDocument/recordTarget/patientRole/id <br>
-	 * NOTES:
-	 * <li>1. XDS metadata does not accept CX types that have more or fewer
+	 * NOTES: 1. XDS metadata does not accept CX types that have more or fewer
 	 * components than CX.1, CX.4.2,CX.4.3. Other corresponding componets will not
-	 * be extracted.</li>
-	 * <li>2. Implementation consistent with PCC TF-2 Medical Document Binding to
-	 * XDS, XDM and XDR.</li>
+	 * be extracted.<br>
+	 * 2. Implementation consistent with PCC TF-2 Medical Document Binding to XDS,
+	 * XDM and XDR.
 	 * 
-	 * @see org.openhealthtools.ihe.xds.metadata.extract.DocumentEntryElementExtractor.extractSourcePatientId()
 	 */
 	public List<Identifiable> extractPatientIds() {
 		if (!atLeastOne(cda.getRecordTarget())) {
@@ -167,7 +162,6 @@ public class CDAR2ExtractorAt extends org.husky.common.communication.CDAR2Extrac
 	 * ClinicalDocument/code <br>
 	 * Note: typeCode and classCode data sources are the same in the CDA
 	 * 
-	 * @see org.openhealthtools.ihe.xds.metadata.extract.DocumentEntryElementExtractor.extractTypeCode()
 	 */
 
 	public Code extractTypeCodeOfTranslation() {

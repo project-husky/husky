@@ -37,8 +37,7 @@ public class ImmunizationRelevantDiseasesNarrativeTextGenerator extends BaseText
 	/**
 	 * Constructor.
 	 *
-	 * @param problemConcerns a list of problem concerns
-	 * @param section         the section
+	 * @param entries a list of entries
 	 */
 	public ImmunizationRelevantDiseasesNarrativeTextGenerator(List<POCDMT000040Entry> entries) {
 		this.entries = entries;

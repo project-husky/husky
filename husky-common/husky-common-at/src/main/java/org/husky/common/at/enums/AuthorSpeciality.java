@@ -12,15 +12,14 @@ package org.husky.common.at.enums;
 import org.husky.common.model.Code;
 
 /**
- * <div class="de">Dieses Attribut ist ein beschreibendes Sub-Attribut von
- * author und dient der Beschreibung der Medizinischen Fachrichtung der Person,
- * welche ein Dokument verfasst hat. Diese Information kann für die Suche und
- * Filterung benutzt werden. Es ist denkbar, dass der Patient mit dieser
- * Information eine Hilfestellung erhält zum Setzen oder Verändern der
- * Vertraulichkeitsstufe von Dokumenten, welche relevant ist für die
- * Zugriffssteuerung. Passende internationale Codes werden in einem nächsten
- * Schritt definiert und können später in den IT-Systemen entsprechend
- * abgeglichen werden.</div> <div class="fr"></div>
+ * Dieses Attribut ist ein beschreibendes Sub-Attribut von author und dient der
+ * Beschreibung der Medizinischen Fachrichtung der Person, welche ein Dokument
+ * verfasst hat. Diese Information kann für die Suche und Filterung benutzt
+ * werden. Es ist denkbar, dass der Patient mit dieser Information eine
+ * Hilfestellung erhält zum Setzen oder Verändern der Vertraulichkeitsstufe von
+ * Dokumenten, welche relevant ist für die Zugriffssteuerung. Passende
+ * internationale Codes werden in einem nächsten Schritt definiert und können
+ * später in den IT-Systemen entsprechend abgeglichen werden.
  */
 public enum AuthorSpeciality implements ValueSetEnumInterfaceAt {
 
@@ -498,13 +497,10 @@ public enum AuthorSpeciality implements ValueSetEnumInterfaceAt {
 	public static final String VERRECHNUNGSSERVICE_CODE = "501";
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * Gets the Enum with a given code
 	 *
 	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
+	 * @return the enum
 	 */
 	public static AuthorSpeciality getEnum(String code) {
 		for (final AuthorSpeciality x : values()) {
@@ -516,13 +512,9 @@ public enum AuthorSpeciality implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
-	 * ist.</div>
+	 * Checks if a given enum is part of this value set.
 	 *
 	 * @param enumName
-	 *            <br>
-	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -538,12 +530,9 @@ public enum AuthorSpeciality implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
-	 * ist.</div>
+	 * Checks if a given code value is in this value set.
 	 *
 	 * @param codeValue
-	 *            <div class="de">code</div>
 	 * @return true, if one enum of this valueset contains the given code
 	 */
 	public static boolean isInValueSet(String codeValue) {
@@ -556,29 +545,20 @@ public enum AuthorSpeciality implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Machine interpretable and (inside this class) unique
-	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
-	 * dieser Klasse) eindeutiger Code</div>
+	 * Machine interpretable and (inside this class) unique code
 	 */
 	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div>
-	 * <div class="de">Menschenlesbarer Name</div>
+	 * Human readable name
 	 */
 	private String displayName;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
-	 * mittels eines Codes und einem Display Name</div>
+	 * Instantiates this Enum Object with a given Code and Display Name
 	 *
 	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div>
 	 * @param displayName
-	 *            <br>
-	 *            <div class="de"> display name</div>
 	 */
 	private AuthorSpeciality(String code, String displayName) {
 		this.code = code;
@@ -586,50 +566,45 @@ public enum AuthorSpeciality implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div>
-	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * Gets the ehealthconnector Code Object
 	 *
-	 * @return <div class="en">the code</div>
+	 * @return the code
 	 */
 	public Code getCode() {
 		return new Code(CODE_SYSTEM_OID, code, displayName);
 	}
 
 	/**
-	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
-	 * code system name.</div>
+	 * Gets the code system name.
 	 *
-	 * @return <div class="en">the code system name</div>
+	 * @return the code system name
 	 */
 	public String getCodeSystemName() {
 		return CODE_SYSTEM_NAME;
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
-	 * die code system id.</div>
+	 * Gets the code system id.
 	 *
-	 * @return <div class="en">the code system id</div>
+	 * @return the code system id
 	 */
 	public String getCodeSystemOid() {
 		return CODE_SYSTEM_OID;
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>
+	 * Gets the actual Code as string
 	 *
-	 * @return <div class="en">the code</div>
+	 * @return the code
 	 */
 	public String getCodeValue() {
 		return this.code;
 	}
 
 	/**
-	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
-	 * display name.</div>
+	 * Gets the display name.
 	 *
-	 * @return <div class="en">the display name</div>
+	 * @return the display name
 	 */
 	public String getDisplayName() {
 		return this.displayName;

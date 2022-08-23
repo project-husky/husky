@@ -115,11 +115,8 @@ public class Appendix {
 	}
 
 	/**
-	 * <div class="en">Creates the HL7 CDA R2 data type from the given type. Creates
-	 * an entry with nested object. <div>
-	 *
-	 * <div class="de">Erstellt den HL7 CDA R2 Datentyp aus dem angegebenen Typ.
-	 * Erstellt ein HL7 Entry mit einem eingebetteten Objekt.<div>
+	 * Creates the HL7 CDA R2 data type from the given type. Creates an entry with
+	 * nested object.
 	 *
 	 * @param index id for attr
 	 * @return the HL7 CDA R2 data typed value

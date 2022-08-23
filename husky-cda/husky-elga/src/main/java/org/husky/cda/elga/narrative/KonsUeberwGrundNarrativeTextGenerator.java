@@ -33,8 +33,7 @@ public class KonsUeberwGrundNarrativeTextGenerator extends BaseTextGenerator {
 	/**
 	 * Constructor.
 	 *
-	 * @param problemConcerns a list of problem concerns
-	 * @param section         the section
+	 * @param entries a list of entries
 	 */
 	public KonsUeberwGrundNarrativeTextGenerator(List<POCDMT000040Entry> entries) {
 		this.entries = entries;

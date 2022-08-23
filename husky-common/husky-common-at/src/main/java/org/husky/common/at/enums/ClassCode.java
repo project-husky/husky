@@ -41,24 +41,20 @@ public enum ClassCode implements ValueSetEnumInterfaceAt {
 	MEDICATIONS("52471-0", "2.16.840.1.113883.6.1", "Medications", "Medikation");
 
 	/**
-	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator für das Value Set</div>
+	 * Identifier of the value set
 	 */
 	public static final String VALUE_SET_ID = "2.16.840.1.113883.6.1";
 
 	/**
-	 * <div class="en">Name of the value set</div> <div class="de">Name des
-	 * Value Sets</div>
+	 * Name of the value set
 	 */
 	public static final String VALUE_SET_NAME = "ELGA_Dokumentenklassen";
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * Gets the Enum with a given code
 	 *
 	 * @param code
-	 *            <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
+	 * @return the enum
 	 */
 	public static ClassCode getEnum(String code) {
 		for (final ClassCode x : values()) {
@@ -70,12 +66,9 @@ public enum ClassCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
-	 * ist.</div>
+	 * Checks if a given enum is part of this value set.
 	 *
 	 * @param enumName
-	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -91,12 +84,9 @@ public enum ClassCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
-	 * ist.</div>
+	 * Checks if a given code value is in this value set.
 	 *
 	 * @param codeValue
-	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
@@ -109,15 +99,12 @@ public enum ClassCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Machine interpretable and (inside this class) unique
-	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
-	 * dieser Klasse) eindeutiger Code</div>
+	 * Machine interpretable and (inside this class) unique code
 	 */
 	private String code;
 
 	/**
-	 * <div class="en">Identifier of the referencing code system.</div>
-	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
+	 * Identifier of the referencing code system.
 	 */
 	private String codeSystem;
 
@@ -127,18 +114,12 @@ public enum ClassCode implements ValueSetEnumInterfaceAt {
 	private Map<LanguageCode, String> displayNames;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div> <div class="de">Instanziiert dieses Enum Object
-	 * mittels eines Codes und einem Display Name</div>.
+	 * Instantiates this Enum Object with a given Code and Display Name
 	 *
-	 * @param code
-	 *            code
-	 * @param codeSystem
-	 *            codeSystem
-	 * @param displayName
-	 *            the default display name
-	 * @param displayNameDe
-	 *            the display name de
+	 * @param code          code
+	 * @param codeSystem    codeSystem
+	 * @param displayName   the default display name
+	 * @param displayNameDe the display name de
 	 */
 	ClassCode(String code, String codeSystem, String displayName, String displayNameDe) {
 		this.code = code;
@@ -150,10 +131,9 @@ public enum ClassCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Gets the code system identifier.</div>
-	 * <div class="de">Liefert den Code System Identifikator.</div>
+	 * Gets the code system identifier.
 	 *
-	 * @return <div class="en">the code system identifier</div>
+	 * @return the code system identifier
 	 */
 	@Override
 	public String getCodeSystemId() {
@@ -161,10 +141,9 @@ public enum ClassCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
-	 * den Code System Namen.</div>
+	 * Gets the code system name.
 	 *
-	 * @return <div class="en">the code system identifier</div>
+	 * @return the code system identifier
 	 */
 	@Override
 	public String getCodeSystemName() {
@@ -176,10 +155,9 @@ public enum ClassCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>
+	 * Gets the actual Code as string
 	 *
-	 * @return <div class="en">the code</div>
+	 * @return the code
 	 */
 	@Override
 	public String getCodeValue() {
@@ -197,10 +175,9 @@ public enum ClassCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Gets the value set identifier.</div>
-	 * <div class="de">Liefert den Value Set Identifikator.</div>
+	 * Gets the value set identifier.
 	 *
-	 * @return <div class="en">the value set identifier</div>
+	 * @return the value set identifier
 	 */
 	@Override
 	public String getValueSetId() {
@@ -208,10 +185,9 @@ public enum ClassCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Gets the value set name.</div> <div class="de">Liefert
-	 * den Value Set Namen.</div>
+	 * Gets the value set name.
 	 *
-	 * @return <div class="en">the value set name</div>
+	 * @return the value set name
 	 */
 	@Override
 	public String getValueSetName() {

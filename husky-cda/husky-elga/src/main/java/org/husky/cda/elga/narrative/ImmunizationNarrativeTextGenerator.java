@@ -37,12 +37,6 @@ public class ImmunizationNarrativeTextGenerator extends ImmunizationBaseTextGene
 	private Map<String, Code> historicImmunization;
 	private List<POCDMT000040Entry> entries;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param problemConcerns a list of problem concerns
-	 * @param section         the section
-	 */
 	public ImmunizationNarrativeTextGenerator(Map<String, List<Code>> immunizationTargets,
 			Map<String, Code> immunizationSchemas, Map<String, Code> immunizationDose,
 			Map<String, Code> immunization,
@@ -54,6 +48,11 @@ public class ImmunizationNarrativeTextGenerator extends ImmunizationBaseTextGene
 		this.historicImmunization = historicImmunization;
 	}
 
+	/**
+	 * Constructor.
+	 *
+	 * @param entries a list of entries
+	 */
 	public ImmunizationNarrativeTextGenerator(List<POCDMT000040Entry> entries) {
 		this.entries = entries;
 	}

@@ -49,8 +49,7 @@ public class ImmunizationLabResultNarrativeTextGenerator extends BaseTextGenerat
 	/**
 	 * Constructor.
 	 *
-	 * @param problemConcerns a list of problem concerns
-	 * @param section         the section
+	 * @param entries a list of entries
 	 */
 	public ImmunizationLabResultNarrativeTextGenerator(List<POCDMT000040Entry> entries) {
 		this.entries = entries;

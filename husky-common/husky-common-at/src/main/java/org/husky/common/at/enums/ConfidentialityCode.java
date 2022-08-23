@@ -17,16 +17,12 @@ import org.husky.common.model.Code;
  */
 public enum ConfidentialityCode implements ValueSetEnumInterfaceAt {
 
-	/** <div class="de">Normal</div> <div class="fr"></div>. */
 	LOW("L", CodeSystems.ConfidentialityCode.getCodeSystemId(), "low"),
 
-	/** <div class="de">Normal</div> <div class="fr"></div>. */
 	NORMAL("N", CodeSystems.ConfidentialityCode.getCodeSystemId(), "normal"),
 
-	/** <div class="de">Vertraulich </div> <div class="fr"></div>. */
 	RESTRICTED("R", CodeSystems.ConfidentialityCode.getCodeSystemId(), "restricted"),
 
-	/** <div class="de">Streng vertraulich</div> <div class="fr"></div>. */
 	VERY_RESTRICTED("V", CodeSystems.ConfidentialityCode.getCodeSystemId(), "very restricted");
 
 	/** The Constant CODE_SYSTEM_NAME. */
@@ -34,13 +30,10 @@ public enum ConfidentialityCode implements ValueSetEnumInterfaceAt {
 	public static final String VALUE_SET_NAME = "ELGA_Confidentiality";
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>.
+	 * Gets the Enum with a given code
 	 *
 	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
+	 * @return the enum
 	 */
 	public static ConfidentialityCode getEnum(String code) {
 		for (final ConfidentialityCode x : values()) {
@@ -52,13 +45,9 @@ public enum ConfidentialityCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
-	 * ist.</div>
+	 * Checks if a given enum is part of this value set.
 	 *
-	 * @param enumName
-	 *            <br>
-	 *            <div class="de"> enumName</div>
+	 * @param enumName enumName
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -74,12 +63,9 @@ public enum ConfidentialityCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
-	 * ist.</div>
+	 * Checks if a given code value is in this value set.
 	 *
 	 * @param codeValue
-	 *            <div class="de">code</div>
 	 * @return true, if one enum of this valueset contains the given code
 	 */
 	public static boolean isInValueSet(String codeValue) {
@@ -104,18 +90,11 @@ public enum ConfidentialityCode implements ValueSetEnumInterfaceAt {
 	private String oid;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
-	 * mittels eines Codes und einem Display Name</div>.
+	 * Instantiates this Enum Object with a given Code and Display Name
 	 *
 	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div>
-	 * @param oid
-	 *            the oid
+	 * @param oid         the oid
 	 * @param displayName
-	 *            <br>
-	 *            <div class="de"> display name</div>
 	 */
 	private ConfidentialityCode(String code, String oid, String displayName) {
 		this.code = code;
@@ -124,10 +103,9 @@ public enum ConfidentialityCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
-	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * Gets the Code of this Enum as MDHT Object.
 	 *
-	 * @return <div class="en">The MDHT Code</div>
+	 * @return The MDHT Code
 	 */
 	@Override
 	public CE getCE() {
@@ -139,10 +117,9 @@ public enum ConfidentialityCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div>
-	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>.
+	 * Gets the ehealthconnector Code Object
 	 *
-	 * @return <div class="en">the code</div>
+	 * @return the code
 	 */
 
 	@Override
@@ -156,10 +133,9 @@ public enum ConfidentialityCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
-	 * code system name.</div>
+	 * Gets the code system name.
 	 *
-	 * @return <div class="en">the code system name</div>
+	 * @return the code system name
 	 */
 
 	@Override
@@ -172,20 +148,18 @@ public enum ConfidentialityCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
-	 * die code system id.</div>
-	 *
-	 * @return <div class="en">the code system id</div>
+	 * Gets the code system id.
+	 * 
+	 * @return the code system id
 	 */
 	public String getCodeSystemOid() {
 		return this.oid;
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>.
+	 * Gets the actual Code as string
 	 *
-	 * @return <div class="en">the code</div>
+	 * @return the code
 	 */
 
 	@Override
@@ -194,10 +168,9 @@ public enum ConfidentialityCode implements ValueSetEnumInterfaceAt {
 	}
 
 	/**
-	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
-	 * display name.</div>
+	 * Gets the display name.
 	 *
-	 * @return <div class="en">the display name</div>
+	 * @return the display name
 	 */
 
 	@Override

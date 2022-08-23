@@ -11,7 +11,9 @@ package org.husky.cda.elga.generated.artdecor.ps;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.processing.Generated;
+
 import org.husky.common.basetypes.CodeBaseType;
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040SubstanceAdministration;
@@ -20,9 +22,6 @@ import org.husky.common.model.Code;
 
 /**
  * ELGAMedicationStatement
- * <p>
- * Template description: <table><tbody><tr><th colspan="1" rowspan="1"/><th colspan="1" rowspan="1"/><th colspan="1" rowspan="1"/></tr></tbody><tbody><tr><td colspan="1" rowspan="1"/><td colspan="1" rowspan="1"/><td colspan="1" rowspan="1"/></tr><tr><td colspan="1" rowspan="1"/><td colspan="1" rowspan="1"/><td colspan="1" rowspan="1"/></tr><tr><td colspan="1" rowspan="1"/><td colspan="1" rowspan="1"/><td colspan="1" rowspan="1"/></tr><tr><td colspan="1" rowspan="1"/><td colspan="1" rowspan="1"/><td colspan="1" rowspan="1"/></tr><tr><td colspan="1" rowspan="1"/><td colspan="1" rowspan="1"/><td colspan="1" rowspan="1"/></tr><tr><td colspan="1" rowspan="1"/><td colspan="1" rowspan="1"/><td colspan="1" rowspan="1"/></tr><tr><td colspan="1" rowspan="1"/><td colspan="1" rowspan="1"/><td colspan="1" rowspan="1"/></tr><tr><td colspan="1" rowspan="1"/><td colspan="1" rowspan="1"/><td colspan="1" rowspan="1"/></tr><tr><td colspan="1" rowspan="1"/><td colspan="1" rowspan="1"/></tr></tbody></table><br>
- * <p>
  * Identifier: 1.2.40.0.34.11.13.3.27<br>
  * Effective date: 2018-10-18 11:16:13<br>
  * Version: 0.1<br>

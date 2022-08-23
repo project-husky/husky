@@ -10,6 +10,7 @@
 package org.husky.cda.elga.generated.artdecor.ems.enums;
 
 import java.util.Objects;
+
 import javax.annotation.processing.Generated;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -325,8 +326,8 @@ public enum ElgaObservationInterpretation implements ValueSetEnumInterface {
                                                                  "TOTRANSLATE",
                                                                  "TOTRANSLATE"),
     /**
-     * EN: < 0.35 kU/l (absent or undetectable allergen specific IgE).<br>
-     */
+	 * EN: &lt; 0.35 kU/l (absent or undetectable allergen specific IgE).<br>
+	 */
     _0_35_KU_L_ABSENT_OR_UNDETECTABLE_ALLERGEN_SPECIFIC_IGE_L1("RAST0",
                                                                "1.2.40.0.34.5.104",
                                                                "< 0.35 kU/l (absent or undetectable allergen specific IgE)",
@@ -335,8 +336,8 @@ public enum ElgaObservationInterpretation implements ValueSetEnumInterface {
                                                                "TOTRANSLATE",
                                                                "TOTRANSLATE"),
     /**
-     * EN: > 100.00 kU/l (extremely high level of allergen specific ige).<br>
-     */
+	 * EN: &gt; 100.00 kU/l (extremely high level of allergen specific ige).<br>
+	 */
     _100_00_KU_L_EXTREMELY_HIGH_LEVEL_OF_ALLERGEN_SPECIFIC_IGE_L1("RAST6",
                                                                   "1.2.40.0.34.5.104",
                                                                   "> 100.00 kU/l (extremely high level of allergen specific ige)",
@@ -491,13 +492,15 @@ public enum ElgaObservationInterpretation implements ValueSetEnumInterface {
     public static final String ZERO_70_3_49_KU_L_MODERATE_LEVEL_OF_ALLERGEN_SPECIFIC_IGE_L1_CODE = "RAST2";
 
     /**
-     * EN: Code for < 0.35 kU/l (absent or undetectable allergen specific IgE).<br>
-     */
+	 * EN: Code for &lt; 0.35 kU/l (absent or undetectable allergen specific
+	 * IgE).<br>
+	 */
     public static final String _0_35_KU_L_ABSENT_OR_UNDETECTABLE_ALLERGEN_SPECIFIC_IGE_L1_CODE = "RAST0";
 
     /**
-     * EN: Code for > 100.00 kU/l (extremely high level of allergen specific ige).<br>
-     */
+	 * EN: Code for &gt; 100.00 kU/l (extremely high level of allergen specific
+	 * ige).<br>
+	 */
     public static final String _100_00_KU_L_EXTREMELY_HIGH_LEVEL_OF_ALLERGEN_SPECIFIC_IGE_L1_CODE = "RAST6";
 
     /**

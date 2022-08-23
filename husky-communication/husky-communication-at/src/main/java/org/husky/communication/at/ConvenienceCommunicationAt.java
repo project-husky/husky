@@ -83,7 +83,7 @@ public class ConvenienceCommunicationAt extends ConvenienceCommunication {
 	 *                                            mode
 	 * @param submissionSetMetadataExtractionMode the submission set metadata
 	 *                                            extraction mode
-	 * @param srcPath                             path for the axis2 config file
+	 * 
 	 */
 	public ConvenienceCommunicationAt(AffinityDomain affinityDomain, AtnaConfigMode atnaConfigMode,
 			org.husky.common.communication.DocumentMetadata.DocumentMetadataExtractionMode documentMetadataExtractionMode,
@@ -124,11 +124,11 @@ public class ConvenienceCommunicationAt extends ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">Adds an XDSDocument to the Transaction data</div>.
+	 * Adds an XDSDocument to the Transaction data
 	 *
-	 * @param doc         the document
-	 * @param desc        the Document descriptor
-	 * @param metadataDoc the metadata doc
+	 * @param doc      the document
+	 * @param desc     the Document descriptor
+	 * @param metadata the metadata
 	 * @return the doc to get the metadata from
 	 */
 	protected DocumentMetadataAt addXdsDocument(Document doc, DocumentDescriptor desc, DocumentMetadataAt metadata) {
@@ -209,11 +209,9 @@ public class ConvenienceCommunicationAt extends ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">Generate missing Submission Set attributes</div>.
+	 * Generate missing Submission Set attributes
 	 *
-	 * @return the submission set
 	 */
-
 	public void generateSubmissionSetMetadata(Author author, Code contentTypeCode) {
 
 		if (getTxnData().getSubmissionSet() == null) {
@@ -348,12 +346,11 @@ public class ConvenienceCommunicationAt extends ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">Queries the registry of the affinity domain for all documents
-	 * of one patient.
+	 * Queries the registry of the affinity domain for all documents of one patient.
 	 *
 	 * @param patientId the ID of the patient
 	 * @param assertion which should be used for request
-	 * @return the IPF QueryResponse containing full document metadata</div>
+	 * @return the IPF QueryResponse containing full document metadata
 	 * @throws Exception
 	 */
 	public QueryResponse queryDocuments(Identificator patientId, SecurityHeaderElement assertion, String messageId)
@@ -363,16 +360,15 @@ public class ConvenienceCommunicationAt extends ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">Submission of the previously prepared document(s) to the
-	 * repository<br>
-	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE ITI
+	 * Submission of the previously prepared document(s) to the repository IHE
+	 * [ITI-41] Provide and Register Document Set – b in the role of the IHE ITI
 	 * Document Source actor
 	 *
-	 * @param authorRole The AuthorRole is one of the minimal required information
-	 *                   according to IHE Suisse for classification of documents in
-	 *                   Switzerland.
-	 * @param security   assertion which should be used for request
-	 * @return the OHT XDSResponseType</div>
+	 * @param author   The AuthorRole is one of the minimal required information
+	 *                 according to IHE Suisse for classification of documents in
+	 *                 Switzerland.
+	 * @param security assertion which should be used for request
+	 * @return the Response
 	 * @throws Exception if the transfer is not successful
 	 */
 	public Response submit(Author author, Code codeContentType,

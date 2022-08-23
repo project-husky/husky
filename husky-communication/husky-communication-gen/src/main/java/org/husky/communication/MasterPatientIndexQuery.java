@@ -136,7 +136,7 @@ public class MasterPatientIndexQuery {
 	/**
 	 * Adds a patient identifier to be queried for.
 	 *
-	 * @param id patient identifier
+	 * @param identificator patient identifier
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery addPatientIdentificator(Identificator identificator) {

@@ -10,15 +10,15 @@
 package org.husky.cda.elga.generated.artdecor.ps;
 
 import java.util.List;
+
 import javax.annotation.processing.Generated;
+
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040Supply;
 import org.husky.common.hl7cdar2.SXCMTS;
 
 /**
  * ELGAMedicalDevice
- * <p>
- * <p>
  * Identifier: 1.2.40.0.34.11.13.3.8<br>
  * Effective date: 2017-02-26 11:17:52<br>
  * Version: 0.1<br>

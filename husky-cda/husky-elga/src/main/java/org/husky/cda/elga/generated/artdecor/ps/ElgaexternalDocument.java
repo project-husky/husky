@@ -10,13 +10,14 @@
 package org.husky.cda.elga.generated.artdecor.ps;
 
 import java.util.List;
+
 import javax.annotation.processing.Generated;
+
 import org.husky.common.hl7cdar2.POCDMT000040ExternalDocument;
 
 /**
  * ELGAExternalDocument
- * <p>
- * <p>
+ * 
  * Identifier: 1.2.40.0.34.11.13.3.17<br>
  * Effective date: 2017-08-09 10:55:40<br>
  * Version: 0.1<br>

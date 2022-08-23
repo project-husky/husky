@@ -368,7 +368,6 @@ public class DocumentMetadataAt extends org.husky.common.communication.DocumentM
 	 *
 	 * @param id            reference to an other document
 	 * @param relationship  type of the relationship of the referenced document
-	 * @param parentDocCode code for the relationship of the referenced document
 	 *
 	 */
 	public void setParentDocument(Identifiable id, AssociationType relationship) {

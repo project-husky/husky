@@ -24,13 +24,11 @@ public enum LanguageCode {
 	public static final String GERMAN_CODE = "de-AT";
 
 	/**
-	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * Gets the Enum with a given code
 	 *
 	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
+	 * 
+	 * @return the enum
 	 */
 	public static LanguageCode getEnum(String code) {
 		for (final LanguageCode aLanguage : EnumUtils.getEnumList(LanguageCode.class)) {
@@ -42,13 +40,9 @@ public enum LanguageCode {
 	}
 
 	/**
-	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
-	 * ist.</div>
+	 * Checks if a given enum is part of this value set.
 	 *
-	 * @param enumName
-	 *            <br>
-	 *            <div class="de"> enumName</div>
+	 * @param enumName enumName
 	 * @return true, if enum is in this value set
 	 */
 	public static boolean isEnumOfValueSet(String enumName) {
@@ -56,13 +50,9 @@ public enum LanguageCode {
 	}
 
 	/**
-	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets
-	 * vorhanden ist.</div>
+	 * Checks if a given code value is in this value set.
 	 *
 	 * @param codeValue
-	 *            <br>
-	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
@@ -79,16 +69,10 @@ public enum LanguageCode {
 	private String displayName;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
-	 * mittels eines Codes und einem Display Name</div>
+	 * Instantiates this Enum Object with a given Code and Display Name
 	 *
 	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div>
 	 * @param displayName
-	 *            <br>
-	 *            <div class="de"> display name</div>
 	 */
 	private LanguageCode(String code, String displayName) {
 		this.code = code;
@@ -96,50 +80,45 @@ public enum LanguageCode {
 	}
 
 	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div>
-	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * Gets the ehealthconnector Code Object
 	 *
-	 * @return <div class="en">the code</div>
+	 * @return the code
 	 */
 	public Code getCode() {
 		return new Code(CODE_SYSTEM_OID, code, displayName);
 	}
 
 	/**
-	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
-	 * code system name.</div>
+	 * Gets the code system name.
 	 *
-	 * @return <div class="en">the code system name</div>
+	 * @return the code system name
 	 */
 	public String getCodeSystemName() {
 		return CODE_SYSTEM_NAME;
 	}
 
 	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
-	 * die code system id.</div>
+	 * Gets the code system id.
 	 *
-	 * @return <div class="en">the code system id</div>
+	 * @return the code system id
 	 */
 	public String getCodeSystemOid() {
 		return CODE_SYSTEM_OID;
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>
+	 * Gets the actual Code as string
 	 *
-	 * @return <div class="en">the code</div>
+	 * @return the code
 	 */
 	public String getCodeValue() {
 		return code;
 	}
 
 	/**
-	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
-	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 * Gets the Code of this Enum as MDHT Object.
 	 *
-	 * @return <div class="en">The MDHT Code</div>
+	 * @return The MDHT Code
 	 */
 	public CS getCS() {
 		final CS cs = new CS();
@@ -148,10 +127,9 @@ public enum LanguageCode {
 	}
 
 	/**
-	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
-	 * display name.</div>
+	 * Gets the display name.
 	 *
-	 * @return <div class="en">the display name</div>
+	 * @return the display name
 	 */
 	public String getDisplayName() {
 		return displayName;

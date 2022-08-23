@@ -43,11 +43,7 @@ public class MedBaseTextGenerator extends BaseTextGenerator {
 	protected List<List<AdditionalInformation>> patientInstructions;
 	protected List<List<AdditionalInformation>> pharmInstructions;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param entries list of POCDMT000040Entry
-	 */
+
 	public MedBaseTextGenerator(List<List<AdditionalInformation>> patientInstructions,
 			List<List<AdditionalInformation>> pharmInstructions) {
 		this.patientInstructions = patientInstructions;

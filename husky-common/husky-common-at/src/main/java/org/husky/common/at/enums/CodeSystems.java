@@ -19,174 +19,148 @@ package org.husky.common.at.enums;
 public enum CodeSystems implements org.husky.common.model.IdentityDomain {
 
 	/**
-	 * OID: 2.16.756.5.30.1.127.3.1.20080401.1 <div class="de">Krankheiten und
-	 * Unfallfolgen (VVK-EDI, Kapitel 2.1.1)</div> <div class="fr">Désignation
-	 * de la maladie ou de la séquelle d’accident (OCA-DFI, chapitre
-	 * 2.1.1)</div>
+	 * OID: 2.16.756.5.30.1.127.3.1.20080401.1
 	 */
 	IcrDha080401Disease("2.16.756.5.30.1.127.3.1.20080401.1",
 			"diseaseName (ICR-DHA, chapter 2.1.1)"),
 	/**
-	 * OID: 2.51.1.3 <div class="en"> Global Location Number</div>
+	 * OID: 2.51.1.3 Global Location Number
 	 */
 	GLN("2.51.1.3", "Global Location Number"),
 	/**
-	 * OID: 1.3.160 <div class="en">Global Trade Item Number</div>
+	 * OID: 1.3.160 Global Trade Item Number
 	 */
 	GTIN("2.51.1.1", "Global Trade Item Number"),
 	/**
-	 * <div class="en">SwissINDEX</div> OID: 2.16.756.5.32
-	 * <div class="de">SwissINDEX</div> <div class="fr">SwissIndex</div>
+	 * SwissINDEX OID: 2.16.756.5.32
 	 */
 	SwissINDEX("2.16.756.5.30.2.6.1", "SwissINDEX"),
 	/**
-	 * OID: 2.16.756.5.32 <div class="en">WHO ATC Code</div><div class="de">WHO
-	 * ATC Code</div> <div class="fr">WHO ATC Code</div>
+	 * OID: 2.16.756.5.32 WHO ATC Code
 	 */
 	WHOATCCode("2.16.840.1.113883.6.73", "WHO ATC Code"),
 	/**
-	 * OID: 2.16.756.5.30.1.129.1.3 <div class="en">Swiss Analysis List</div>
-	 * <div class="de">Analysenliste (AL)</div> <div class="fr">Liste des
-	 * analyses (LA)</div>
+	 * OID: 2.16.756.5.30.1.129.1.3 Swiss Analysis List
 	 */
 	SwissAL("2.16.756.5.30.1.129.1.3", "Swiss analysis list (AL)"),
 	/**
-	 * OID: 2.16.756.5.30.1.129.1.4 <div class="en">Swiss Tarmed</div>
-	 * <div class="de">Tarmed</div> <div class="fr">Tarmed</div>
+	 * OID: 2.16.756.5.30.1.129.1.4 Swiss Tarmed
 	 */
 	SwissTarmed("2.16.756.5.30.1.129.1.4", "Swiss Tarmed"),
 	/**
-	 * OID: 2.16.756.5.32 <div class="en">AHV Number (the new one)</div>
-	 * <div class="de">AHV Nummer (die Neue)</div> <div class="fr">No AVS (le
-	 * nouveaux)</div>
+	 * OID: 2.16.756.5.32 AHV Number (the new one)
 	 */
 	SwissSSN("2.16.756.5.32", "AHV Nummer (die Neue)"),
 	/**
-	 * OID: 2.16.756.5.32 <div class="en">AHV Number (the new one)</div>
-	 * <div class="de">AHV Nummer (die Neue)</div> <div class="fr">No AVS (le
-	 * nouveaux)</div>
+	 * OID: 2.16.756.5.32 AHV Number (the new one)
 	 */
 	SwissZSR("2.16.756.5.30.1.123.100.2.1.1", "ZSR Nummer der SASIS"),
 
 	/**
-	 * OID: 2.16.756.5.31 <div class="en">AHV Number (the old one)</div>
-	 * <div class="de">AHV Nummer (die Alte)</div> <div class="fr">No AVS (le
-	 * vieil)</div>
+	 * OID: 2.16.756.5.31 AHV Number (the old one)
 	 */
 	SwissSSNDeprecated("2.16.756.5.31", "AHV Nummer (die Alte)"),
 	/**
-	 * OID: 2.16.756.5.30.1.123.100.1.1.1 <div class="en">Insurance Card Number
-	 * (VeKa)</div> <div class="de">Kartennummern für die Versichertenkarte
-	 * (VeKa)</div> <div class="fr">No carte d insurance (VeKa)</div>
+	 * OID: 2.16.756.5.30.1.123.100.1.1.1 Insurance Card Number (VeKa)
 	 */
 	SWISS_VEKA_NR("2.16.756.5.30.1.123.100.1.1.1",
 			"Kartennummern für die Versichertenkarte (VeKa)"),
 	/**
-	 * OID: 2.16.756.5.31 <div class= "en">ICD-10 </div> <div class= "de">ICD-10
-	 * </div> <div class= "fr">ICD-10 </div>
+	 * OID: 2.16.756.5.31 ICD-10
 	 */
 	ICD10("2.16.756.5.30.1.126.3.2", "ICD-10"),
 	/**
-	 * OID: 2.16.840.1.113883.6.121 <div class="en">Language Code</div>
+	 * OID: 2.16.840.1.113883.6.121 Language Code
 	 */
 	LanguageCode("2.16.840.1.113883.6.121", "Language Code"),
 	/**
-	 * OID: 2.16.840.1.113883.5.25 <div class="en">HL7:Confidentiality</div>
+	 * OID: 2.16.840.1.113883.5.25 HL7:Confidentiality
 	 */
 	ConfidentialityCode("2.16.840.1.113883.5.25", "HL7:Confidentiality"),
 	/**
-	 * OID: 2.16.840.1.113883.5.1 <div class="en">AdministrativeGender </div>
+	 * OID: 2.16.840.1.113883.5.1 AdministrativeGender
 	 */
 	AdministrativeGender("2.16.840.1.113883.5.1", "HL7:AdministrativeGender"),
 
 	/**
-	 * OID: 2.16.840.1.113883.5.1119 <div class="en">AddressUse</div>
+	 * OID: 2.16.840.1.113883.5.1119 AddressUse
 	 */
 	AddressUse("2.16.840.1.113883.5.1119", "AddressUse"),
 
 	/**
-	 * OID: 2.16.840.1.113883.5.89 <div class="en">ParticipationSignature</div>
+	 * OID: 2.16.840.1.113883.5.89 ParticipationSignature
 	 */
 	ParticipationSignature("2.16.840.1.113883.5.89", "ParticipationSignature"),
 
 	/**
-	 * OID: 2.16.840.1.113883.5.14 <div class="en">ActStatus</div>
+	 * OID: 2.16.840.1.113883.5.14 ActStatus
 	 */
 	ActStatus("2.16.840.1.113883.5.14", "ActStatus"),
 
 	/**
-	 * OID: 2.16.840.1.113883.6.96 <div class="en">SNOMED CT</div>
+	 * OID: 2.16.840.1.113883.6.96 SNOMED CT
 	 */
 	SNOMEDCT("2.16.840.1.113883.6.96", "SNOMED CT"),
 
 	/**
-	 * OID: 2.16.756.5.30.1.127.3.3.2013.1 <div class="en">Risc of
-	 * complications</div><div class="de">Komplikationsrisiken</div>
+	 * OID: 2.16.756.5.30.1.127.3.3.2013.1 Risc of complications
 	 */
 	RiscOfComplications("2.16.756.5.30.1.127.3.3.2013.1", "Komplikationsrisiken"),
 
 	/**
-	 * OID: 2.16.756.5.30.1.127.3.3.2013.2 <div class="en">Risc of
-	 * Exposure</div><div class="de">Expositionsrisiken</div>
+	 * OID: 2.16.756.5.30.1.127.3.3.2013.2 Risc of Exposure
 	 */
 	RiscOfExposure("2.16.756.5.30.1.127.3.3.2015.2", "Expositionsrisiken"),
 
 	/**
-	 * OID: 2.16.840.1.113883.5.4 <div class="en">HL7ActCode</div>
+	 * OID: 2.16.840.1.113883.5.4 HL7ActCode
 	 */
 	HL7ActCode("2.16.840.1.113883.5.4", "HL7ActCode"),
 
 	/**
-	 * OID: 2.16.840.1.113883.5.1063
-	 * <div class="en">HL7SeverityObservation</div>
+	 * OID: 2.16.840.1.113883.5.1063 HL7SeverityObservation
 	 */
 	HL7SeverityObservation("2.16.840.1.113883.5.1063", "HL7SeverityObservation"),
 
 	/**
-	 * OID: 2.16.840.1.113883.5.112
-	 * <div class="en">HL7RouteOfAdministration</div>
+	 * OID: 2.16.840.1.113883.5.112 HL7RouteOfAdministration
 	 */
 	HL7RouteOfAdministration("2.16.840.1.113883.5.112", "HL7RouteOfAdministration"),
 
 	/**
-	 * OID: 2.16.840.1.113883.6.1 <div class="en">LOINC</div>
+	 * OID: 2.16.840.1.113883.6.1 LOINC
 	 */
 	LOINC("2.16.840.1.113883.6.1", "LOINC"),
 
 	/**
-	 * OID: 2.16.840.1.113883.5.83
-	 * <div class="en">HL7ObservationInterpretation</div>
+	 * OID: 2.16.840.1.113883.5.83 HL7ObservationInterpretation
 	 */
 	HL7ObservationInterpretation("2.16.840.1.113883.5.83", "HL7ObservationInterpretation"),
 
 	/**
-	 * OID: 2.16.840.1.113883.5.1008 <div class="en">HL7nullFlavor</div>
+	 * OID: 2.16.840.1.113883.5.1008 HL7nullFlavor
 	 */
 	HL7nullFlavor("2.16.840.1.113883.5.1008", "HL7nullFlavor"),
 
 	/**
-	 * OID: 2.16.840.1.113883.6.294 <div class="en">WHO Drug Dictionary
-	 * Medicinal Product ID</div>
+	 * OID: 2.16.840.1.113883.6.294 WHO Drug Dictionary Medicinal Product ID
 	 */
 	WHO_D_D_MED_PPROD_ID("2.16.840.1.113883.6.294", "WHO Drug Dictionary Medicinal Product ID"),
 
 	/**
-	 * OID: 2.16.756.5.30.1.129.1.1.8 <div class="en">Swiss SOAS HLA Codes</div>
+	 * OID: 2.16.756.5.30.1.129.1.1.8 Swiss SOAS HLA Codes
 	 */
 	SwissSoasHlaCodes("2.16.756.5.30.1.129.1.1.8", "Swiss SOAS HLA"),
 
 	/**
-	 * OID: 2.16.756.5.30.1.127.3.2.20121101.2 <div class="en">Swiss PLRR-DHA
-	 * LabObsList Codes</div>
+	 * OID: 2.16.756.5.30.1.127.3.2.20121101.2 Swiss PLRR-DHA LabObsList Codes
 	 */
 	SwissPlrrDhaLabObsList("2.16.756.5.30.1.127.3.2.20121101.2", "Swiss PLRR-DHA LabObsList");
 
 	/**
-	 * <div class="en">Gets the Enum with a given OID</div>
-	 * <div class="de">Liefert den Enum anhand einer gegebenen OID</div>
+	 * Gets the Enum with a given OID
 	 *
-	 * @param codeSystemId
-	 *            the code system OID.
+	 * @param codeSystemId the code system OID.
 	 * @return the desired Enum.
 	 */
 	public static CodeSystems getEnum(String codeSystemId) {

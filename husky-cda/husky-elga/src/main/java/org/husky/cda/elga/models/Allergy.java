@@ -167,10 +167,7 @@ public class Allergy  {
 	}
 
 	/**
-	 * <div class="en">Creates the HL7 CDA R2 data type from the given type.<div>
-	 *
-	 * <div class="de">Erstellt den HL7 CDA R2 Datentyp aus dem angegebenen
-	 * Typ.<div>
+	 * Creates the HL7 CDA R2 data type from the given type.
 	 *
 	 * @param index id for attr
 	 * @return the HL7 CDA R2 data typed value
