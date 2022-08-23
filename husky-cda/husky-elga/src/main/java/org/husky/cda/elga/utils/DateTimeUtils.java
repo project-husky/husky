@@ -28,7 +28,7 @@ public class DateTimeUtils {
 				TS.class, DateTimes.toDatetimeTs(startDate)));
 
 		if (stopDate == null) {
-			TS ts = new TS(NullFlavor.UNKNOWN);
+			TS ts = new TS(NullFlavor.UNKNOWN_L1);
 			ivlts.getRest()
 					.add(new JAXBElement<>(
 							new QName(NamespaceUtils.HL7_NAMESPACE, "high", XMLConstants.DEFAULT_NS_PREFIX),

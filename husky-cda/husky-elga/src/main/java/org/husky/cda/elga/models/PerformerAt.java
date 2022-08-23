@@ -87,7 +87,7 @@ public class PerformerAt extends Performer {
 
 		if (assignedEntity.getId().isEmpty()) {
 			Identificator id = new Identificator();
-			id.setNullFlavor(NullFlavor.UNKNOWN);
+			id.setNullFlavor(NullFlavor.UNKNOWN_L1);
 			assignedEntity.getId().add(id.getHl7CdaR2Ii());
 		}
 
@@ -95,7 +95,7 @@ public class PerformerAt extends Performer {
 			assignedEntity.setCode(immunizationRole.getHl7CdaR2Ce());
 		} else {
 			Code code = new Code();
-			code.setNullFlavor(NullFlavor.UNKNOWN);
+			code.setNullFlavor(NullFlavor.UNKNOWN_L1);
 			assignedEntity.setCode(code.getHl7CdaR2Ce());
 		}
 

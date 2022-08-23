@@ -345,7 +345,7 @@ public class PractitionerAt {
 
 		IVLTS time = new IVLTS();
 		if (timeAuthor == null) {
-			time.getNullFlavor().add(NullFlavor.UNKNOWN_CODE);
+			time.getNullFlavor().add(NullFlavor.UNKNOWN_L1_CODE);
 		} else {
 			time.setValue(DateTimes.toDatetimeTs(timeAuthor).getValue());
 		}
@@ -461,7 +461,7 @@ public class PractitionerAt {
 				ads.add(address.getHl7CdaR2Ad());
 			} else {
 				Address addressUnk = new Address(new AddressBaseType());
-				addressUnk.setNullFlavor(NullFlavor.UNKNOWN);
+				addressUnk.setNullFlavor(NullFlavor.UNKNOWN_L1);
 				ads.add(addressUnk.getHl7CdaR2Ad());
 			}
 		}
@@ -476,7 +476,7 @@ public class PractitionerAt {
 				iis.add(id.getHl7CdaR2Ii());
 			} else {
 				Identificator unkId = new Identificator();
-				unkId.setNullFlavor(NullFlavor.UNKNOWN);
+				unkId.setNullFlavor(NullFlavor.UNKNOWN_L1);
 				iis.add(unkId.getHl7CdaR2Ii());
 			}
 		}

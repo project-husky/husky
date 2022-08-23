@@ -45,7 +45,7 @@ public class PractitionerCdaAt extends PractitionerAt {
 		TS time = new TS();
 
 		if (timeAuthor == null) {
-			time.getNullFlavor().add(NullFlavor.UNKNOWN_CODE);
+			time.getNullFlavor().add(NullFlavor.UNKNOWN_L1_CODE);
 		} else {
 			time.setValue(DateTimes.toDatetimeTs(timeAuthor).getValue());
 		}
@@ -66,7 +66,7 @@ public class PractitionerCdaAt extends PractitionerAt {
 		TS time = new TS();
 
 		if (timeLegalAuthen == null) {
-			time.getNullFlavor().add(NullFlavor.UNKNOWN_CODE);
+			time.getNullFlavor().add(NullFlavor.UNKNOWN_L1_CODE);
 		} else {
 			time.setValue(DateTimes.toDatetimeTs(timeLegalAuthen).getValue());
 		}
@@ -84,7 +84,7 @@ public class PractitionerCdaAt extends PractitionerAt {
 			time.setValue(DateTimes.toDatetimeTs(timeAuthor).getValue());
 		} else {
 			time.nullFlavor = new ArrayList<>();
-			time.getNullFlavor().add(NullFlavor.UNKNOWN_CODE);
+			time.getNullFlavor().add(NullFlavor.UNKNOWN_L1_CODE);
 		}
 		author.setTime(time);
 

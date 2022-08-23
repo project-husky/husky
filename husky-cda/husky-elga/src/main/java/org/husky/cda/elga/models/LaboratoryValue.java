@@ -223,7 +223,7 @@ public class LaboratoryValue {
 
 	public TS getTS() {
 		if (dateValue == null) {
-			return new TS(NullFlavor.UNKNOWN_CODE);
+			return new TS(NullFlavor.UNKNOWN_L1);
 		} else {
 			return new TS(DateUtil.formatDateTimeTzon(dateValue));
 		}

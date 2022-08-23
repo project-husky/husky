@@ -65,7 +65,7 @@ class AntibiogramTest extends TestUtils {
 		testSpecimen.setId(new Identificator("2.16.840.1.113883.3.933.1.1", "47110816"));
 
 		Code code = new Code();
-		code.setNullFlavor(NullFlavor.NOT_APPLICABLE);
+		code.setNullFlavor(NullFlavor.NOT_APPLICABLE_L1);
 		code.setOriginalText("vergründende Streptokokken");
 		testSpecimen.setSignificantPathogen(code);
 		return testSpecimen;

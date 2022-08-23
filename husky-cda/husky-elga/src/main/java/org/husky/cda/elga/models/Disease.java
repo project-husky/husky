@@ -190,7 +190,7 @@ public class Disease {
 		entry.setTypeCode(XActRelationshipEntry.DRIV);
 		GesundheitsproblemBedenkenEntry act = new GesundheitsproblemBedenkenEntry();
 		II problemId = new II();
-		problemId.getNullFlavor().add(NullFlavor.UNKNOWN_CODE);
+		problemId.getNullFlavor().add(NullFlavor.UNKNOWN_L1_CODE);
 		act.getId().add(problemId);
 
 		if (!active) {
@@ -217,7 +217,7 @@ public class Disease {
 		observation.getId().add(problemId);
 
 		CD cd = new CD();
-		cd.getNullFlavor().add(NullFlavor.UNKNOWN_CODE);
+		cd.getNullFlavor().add(NullFlavor.UNKNOWN_L1_CODE);
 		observation.setCode(cd);
 
 		if (this.problem != null) {
