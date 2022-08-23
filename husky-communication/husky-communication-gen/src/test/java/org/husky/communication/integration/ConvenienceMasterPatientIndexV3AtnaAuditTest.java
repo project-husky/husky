@@ -113,7 +113,7 @@ class ConvenienceMasterPatientIndexV3AtnaAuditTest {
 		
 		// query patient demographics
 		final MasterPatientIndexQueryResponse response = convenienceMasterPatientIndexV3Client
-				.queryPatientDemographics(mpiQuery, affinityDomain, null);
+				.queryPatientDemographics(mpiQuery, affinityDomain, null, null);
 		assertTrue(response.getSuccess());
 
 		// check audit logging entries
@@ -165,7 +165,7 @@ class ConvenienceMasterPatientIndexV3AtnaAuditTest {
 		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
 		LOGGER.debug(encoded);
 
-		assertTrue(pixV3Query.updatePatient(patient, null));
+		assertTrue(pixV3Query.updatePatient(patient, null, null));
 
 		// check audit logging entries
 		String logContent = checkAuditLogging();
@@ -199,7 +199,7 @@ class ConvenienceMasterPatientIndexV3AtnaAuditTest {
 		identifier.setSystem(FhirCommon.addUrnOid(homeCommunityOid));
 		patient.getIdentifier().add(identifier);
 
-		String patId = pixV3Query.queryPatientId(patient, null);
+		String patId = pixV3Query.queryPatientId(patient, null, null);
 
 		assertEquals("761337610436974489", patId);
 

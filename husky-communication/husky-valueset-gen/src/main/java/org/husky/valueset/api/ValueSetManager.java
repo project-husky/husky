@@ -732,7 +732,7 @@ public class ValueSetManager {
 				// the new entry has a higher level as
 				// the last one. It gets added to the
 				// parent list.
-				if (lastValueSetEntry.getParent().getParent() == null)
+				if (lastValueSetEntry.getParent() == null || lastValueSetEntry.getParent().getParent() == null)
 					// there is no parent. The entry is
 					// added to the main list
 					valueSet.addValueSetEntry(valueSetEntry);

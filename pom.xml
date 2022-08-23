@@ -51,6 +51,7 @@
 		<module>husky-fhir</module>
 		<module>husky-common</module>
 		<module>husky-emed</module>
+		<module>husky-cda</module>
 	</modules>
 
 	<dependencyManagement>
@@ -550,6 +551,11 @@
 				<version>${husky.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>org.husky.common</groupId>
+				<artifactId>husky-common-at</artifactId>
+				<version>${husky.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>org.husky.validation.service</groupId>
 				<artifactId>husky-validation-service</artifactId>
 				<version>${husky.version}</version>
@@ -600,6 +606,18 @@
 				<artifactId>husky-emed-ch-cda</artifactId>
 				<version>${husky.version}</version>
 			</dependency>
+        <dependency>
+			<groupId>com.sun.xml.messaging.saaj</groupId>
+			<artifactId>saaj-impl</artifactId>
+			<version>1.5.1</version>
+									<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>4.3.1</version>
+			<scope>test</scope>
+		</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>

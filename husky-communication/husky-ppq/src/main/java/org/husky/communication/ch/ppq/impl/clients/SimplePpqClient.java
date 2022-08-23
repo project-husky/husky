@@ -64,7 +64,7 @@ public class SimplePpqClient extends CamelService implements PpqClient {
 						serverOutLogger,
 						serverOutLogger, secure, getAuditContext().isAuditEnabled());
 
-				final var exchange = send(endpoint, requestToSend, aAssertion, null);
+				final var exchange = send(endpoint, requestToSend, aAssertion, null, null);
 
 				var response = exchange.getMessage().getBody(ResponseType.class);
 				return new PrivacyPolicyQueryResponseBuilderImpl().create(response);

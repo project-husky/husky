@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.UUID;
 
 import org.husky.common.communication.AffinityDomain;
 import org.husky.common.communication.Destination;
@@ -102,7 +103,8 @@ class ConvenienceCommunicationRetrieveDocumentsTest extends XdsTestUtils {
 		var documentRequest = new DocumentRequest("1.1.4567332.1.75", null,
 				"1.2.820.99999.15031207481211484821638086641062503555190193702785", "urn:oid:1.1.4567334.1.6");
 
-		final RetrievedDocumentSet response = convenienceCommunication.retrieveDocument(documentRequest, null);
+		final RetrievedDocumentSet response = convenienceCommunication.retrieveDocument(documentRequest, null,
+				String.format("test_%s", UUID.randomUUID().toString()));
 
 		// check if request was successful
 		assertEquals(Status.SUCCESS, response.getStatus());
@@ -154,7 +156,7 @@ class ConvenienceCommunicationRetrieveDocumentsTest extends XdsTestUtils {
 		var documentRequest = new DocumentRequest("1.1.4567332.1.75", null,
 				"1.2.820.99999.18508463736145106181926975526539403561455330316563", "urn:oid:1.1.4567334.1.6");
 
-		final RetrievedDocumentSet response = convenienceCommunication.retrieveDocument(documentRequest, null);
+		final RetrievedDocumentSet response = convenienceCommunication.retrieveDocument(documentRequest, null, null);
 
 		// check if request was successful
 		assertEquals(Status.SUCCESS, response.getStatus());
@@ -205,7 +207,7 @@ class ConvenienceCommunicationRetrieveDocumentsTest extends XdsTestUtils {
 		// Here, 1 is set for all identifiers
 		var documentRequest = new DocumentRequest("1", null, "1", "1");
 
-		final RetrievedDocumentSet response = convenienceCommunication.retrieveDocument(documentRequest, null);
+		final RetrievedDocumentSet response = convenienceCommunication.retrieveDocument(documentRequest, null, null);
 
 		// check if request failed
 		assertEquals(Status.FAILURE, response.getStatus());

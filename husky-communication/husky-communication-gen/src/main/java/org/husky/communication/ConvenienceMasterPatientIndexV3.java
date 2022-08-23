@@ -78,7 +78,7 @@ public class ConvenienceMasterPatientIndexV3 {
 	 * @return true, if successful
 	 */
 	public boolean addPatientDemographics(Patient patient, String homeCommunityOid, AffinityDomain affinityDomain,
-			SecurityHeaderElement security) {
+			SecurityHeaderElement security, String messageId) {
 		if (affinityDomain == null) {
 			log.error(AFFINITY_DOMAIN_NOT_SPECIFIED);
 			return false;
@@ -88,7 +88,7 @@ public class ConvenienceMasterPatientIndexV3 {
 		final var fhirPatient = new FhirPatient(patient);
 		log.debug("addPatientDemographics, add patient");
 		var v3PixQuery = new PixV3Query(affinityDomain, homeCommunityOid, context, auditContext);
-		final boolean ret = v3PixQuery.addPatient(fhirPatient, security);
+		final boolean ret = v3PixQuery.addPatient(fhirPatient, security, messageId);
 		log.debug("addPatientDemographics, add patient finished");
 		return ret;
 	}
@@ -121,7 +121,7 @@ public class ConvenienceMasterPatientIndexV3 {
 	 * @return true, if successful
 	 */
 	public boolean mergePatients(Patient finalPatient, String mergeObsoleteId, String homeCommunityOid,
-			AffinityDomain affinityDomain, SecurityHeaderElement security) {
+			AffinityDomain affinityDomain, SecurityHeaderElement security, String messageId) {
 
 		if (affinityDomain == null) {
 			log.error(AFFINITY_DOMAIN_NOT_SPECIFIED);
@@ -134,7 +134,7 @@ public class ConvenienceMasterPatientIndexV3 {
 		}
 
 		var v3PixQuery = new PixV3Query(affinityDomain, homeCommunityOid, context, auditContext);
-		return v3PixQuery.mergePatient(new FhirPatient(finalPatient), mergeObsoleteId, security);
+		return v3PixQuery.mergePatient(new FhirPatient(finalPatient), mergeObsoleteId, security, messageId);
 	}
 
 	/**
@@ -146,7 +146,7 @@ public class ConvenienceMasterPatientIndexV3 {
 	 * @return query response with patients
 	 */
 	public MasterPatientIndexQueryResponse queryPatientDemographics(MasterPatientIndexQuery mpiQuery,
-			AffinityDomain affinityDomain, SecurityHeaderElement security) {
+			AffinityDomain affinityDomain, SecurityHeaderElement security, String messageId) {
 
 		if (affinityDomain == null) {
 			log.error(AFFINITY_DOMAIN_NOT_SPECIFIED);
@@ -155,7 +155,7 @@ public class ConvenienceMasterPatientIndexV3 {
 
 		var query = new PdqV3Query(affinityDomain, null, context, auditContext);
 
-		final V3PdqQueryResponse pdqQueryRespones = query.queryPatients(mpiQuery.getV3PdqQuery(), security);
+		final V3PdqQueryResponse pdqQueryRespones = query.queryPatients(mpiQuery.getV3PdqQuery(), security, messageId);
 		return new MasterPatientIndexQueryResponse(pdqQueryRespones);
 	}
 
@@ -187,7 +187,8 @@ public class ConvenienceMasterPatientIndexV3 {
 	 * @return list of ids
 	 */
 	public List<Identificator> queryPatientId(Patient patient, String homeCommunityOid,
-			List<String> requestedCommunityOIDs, AffinityDomain affinityDomain, SecurityHeaderElement security) {
+			List<String> requestedCommunityOIDs, AffinityDomain affinityDomain, SecurityHeaderElement security,
+			String messageId) {
 
 		if (affinityDomain == null) {
 			log.error(AFFINITY_DOMAIN_NOT_SPECIFIED);
@@ -197,7 +198,7 @@ public class ConvenienceMasterPatientIndexV3 {
 		var query = new PixV3Query(affinityDomain, homeCommunityOid, null, requestedCommunityOIDs.get(0), null,
 				this.context, getAuditContext());
 
-		List<String> ids = query.queryPatientId(new FhirPatient(patient), null, null, security);
+		List<String> ids = query.queryPatientId(new FhirPatient(patient), null, null, security, messageId);
 
 		final List<Identificator> list = new ArrayList<>();
 		for (var i = 0; i < requestedCommunityOIDs.size(); ++i) {
@@ -235,7 +236,7 @@ public class ConvenienceMasterPatientIndexV3 {
 	 * @return true, if successful
 	 */
 	public boolean updatePatientDemographics(Patient patient, String homeCommunityOid, AffinityDomain affinityDomain,
-			SecurityHeaderElement security) {
+			SecurityHeaderElement security, String messageId) {
 
 		if (affinityDomain == null) {
 			log.error(AFFINITY_DOMAIN_NOT_SPECIFIED);
@@ -243,7 +244,7 @@ public class ConvenienceMasterPatientIndexV3 {
 		}
 
 		var v3PixQuery = new PixV3Query(affinityDomain, homeCommunityOid, context, auditContext);
-		return v3PixQuery.updatePatient(new FhirPatient(patient), security);
+		return v3PixQuery.updatePatient(new FhirPatient(patient), security, messageId);
 	}
 
 	public CamelContext getContext() {

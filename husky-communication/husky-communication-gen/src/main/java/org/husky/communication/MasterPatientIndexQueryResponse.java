@@ -38,6 +38,8 @@ public class MasterPatientIndexQueryResponse {
 	/** The total numbers of patients for this query. */
 	private int totalNumbers;
 
+	private MpiQueryResponse mpiQueryResponse;
+
 	/**
 	 * Instantiates a new master patient index query response.
 	 *
@@ -46,6 +48,7 @@ public class MasterPatientIndexQueryResponse {
 	 */
 	protected MasterPatientIndexQueryResponse(MpiQueryResponse mpiQueryResponse) {
 		if (mpiQueryResponse != null) {
+			this.mpiQueryResponse = mpiQueryResponse;
 			this.success = mpiQueryResponse.getSuccess();
 			this.totalNumbers = mpiQueryResponse.getTotalNumbers();
 			this.currentNumbers = mpiQueryResponse.getCurrentNumbers();
@@ -103,6 +106,10 @@ public class MasterPatientIndexQueryResponse {
 	 */
 	public int getTotalNumbers() {
 		return totalNumbers;
+	}
+
+	public MpiQueryResponse getMpiQueryResponse() {
+		return mpiQueryResponse;
 	}
 
 }

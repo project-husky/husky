@@ -20,6 +20,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 import org.husky.common.communication.AffinityDomain;
 import org.husky.common.communication.Destination;
@@ -137,7 +138,7 @@ class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 		
 		// query metadata of documents
 		final QueryResponse response = convenienceCommunication.queryDocuments(findDocumentsQuery,
-				null);
+				null, null);
 
 		// check if errors are returned
 		assertTrue(response.getErrors().isEmpty());
@@ -165,7 +166,7 @@ class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 		convenienceCommunication.setAffinityDomain(affinityDomain);
 
 		// query metadata of documents
-		final QueryResponse response = convenienceCommunication.queryDocuments(findDocumentsQuery, null);
+		final QueryResponse response = convenienceCommunication.queryDocuments(findDocumentsQuery, null, null);
 
 		// check if query failed
 		assertEquals(Status.FAILURE, response.getStatus());
@@ -205,7 +206,7 @@ class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 
 		// query metadata of documents with patient ID and approved as availability
 		// status
-		final QueryResponse response = convenienceCommunication.queryDocuments(findDocumentsQuery, null);
+		final QueryResponse response = convenienceCommunication.queryDocuments(findDocumentsQuery, null, null);
 
 		// check if query was successful
 		assertTrue(response.getErrors().isEmpty());
@@ -347,7 +348,7 @@ class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 		convenienceCommunication.setAffinityDomain(affinityDomain);
 
 		// query metadata of documents
-		final QueryResponse response = convenienceCommunication.queryDocuments(findDocumentsQuery, null);
+		final QueryResponse response = convenienceCommunication.queryDocuments(findDocumentsQuery, null, null);
 
 		// check if query was successful
 		assertTrue(response.getErrors().isEmpty());
@@ -455,7 +456,8 @@ class ConvenienceCommunicationQueryDocumentsTest extends XdsTestUtils {
 
 		convenienceCommunication.setAffinityDomain(affinityDomain);
 
-		final QueryResponse response = convenienceCommunication.queryDocumentReferencesOnly(getDocumentsQuery, null);
+		final QueryResponse response = convenienceCommunication.queryDocumentReferencesOnly(getDocumentsQuery, null,
+				String.format("urn:uuid:testMessage-%s", UUID.randomUUID().toString()));
 
 		// check if query was successful
 		assertTrue(response.getErrors().isEmpty());
