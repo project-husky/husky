@@ -19,8 +19,6 @@ import org.husky.common.hl7cdar2.POCDMT000040Observation;
 
 /**
  * atcdabbr_entry_ExpositionsrisikoProblem
- * <p>
- * <p>
  * Identifier: 1.2.40.0.34.6.0.11.3.21<br>
  * Effective date: 2022-01-26 16:08:41<br>
  * Version: 1.1.0+20220127<br>

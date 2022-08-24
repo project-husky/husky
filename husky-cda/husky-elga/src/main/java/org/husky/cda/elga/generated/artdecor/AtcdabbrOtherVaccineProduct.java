@@ -21,8 +21,6 @@ import org.husky.common.hl7cdar2.RoleClassManufacturedProduct;
 
 /**
  * atcdabbr_other_vaccineProduct
- * <p>
- * <p>
  * Identifier: 1.2.40.0.34.6.0.11.9.32<br>
  * Effective date: 2021-10-01 13:21:55<br>
  * Version: 1.0.1+20220103<br>

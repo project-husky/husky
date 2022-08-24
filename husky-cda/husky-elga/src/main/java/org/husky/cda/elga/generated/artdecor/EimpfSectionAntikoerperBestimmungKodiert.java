@@ -10,14 +10,15 @@
 package org.husky.cda.elga.generated.artdecor;
 
 import java.util.List;
+
 import javax.annotation.processing.Generated;
+
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040Section;
 
 /**
  * eimpf_section_AntikoerperBestimmungKodiert
- * <p>
- * <p>
+ * 
  * Identifier: 1.2.40.0.34.6.0.11.2.7<br>
  * Effective date: 2019-04-12 16:06:34<br>
  * Version: 2019<br>

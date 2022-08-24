@@ -10,14 +10,15 @@
 package org.husky.cda.elga.generated.artdecor;
 
 import java.util.ArrayList;
+
 import javax.annotation.processing.Generated;
+
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040Author;
 
 /**
  * atcdabbr_header_Author
- * <p>
- * <p>
+ * 
  * Identifier: 1.2.40.0.34.6.0.11.1.2<br>
  * Effective date: 2021-08-24 08:35:56<br>
  * Version: 1.0.2+20211213<br>

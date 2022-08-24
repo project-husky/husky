@@ -10,13 +10,13 @@
 package org.husky.cda.elga.generated.artdecor;
 
 import javax.annotation.processing.Generated;
+
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040Component1;
 
 /**
  * atcdabbr_header_ComponentOfEncompassingEncounter
- * <p>
- * <p>
+ * 
  * Identifier: 1.2.40.0.34.6.0.11.1.7<br>
  * Effective date: 2019-03-07 10:44:49<br>
  * Version: 2019<br>

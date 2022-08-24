@@ -19,8 +19,7 @@ import org.husky.common.hl7cdar2.POCDMT000040ParticipantRole;
 
 /**
  * atcdabbr_other_ParticipantBodyTranscriber
- * <p>
- * <p>
+ * 
  * Identifier: 1.2.40.0.34.6.0.11.9.14<br>
  * Effective date: 2021-08-04 15:41:13<br>
  * Version: 1.1.0+20220103<br>

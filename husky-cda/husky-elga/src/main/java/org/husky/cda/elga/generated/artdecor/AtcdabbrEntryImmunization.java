@@ -20,8 +20,7 @@ import org.husky.common.hl7cdar2.SXCMTS;
 
 /**
  * atcdabbr_entry_Immunization
- * <p>
- * <p>
+ * 
  * Identifier: 1.2.40.0.34.6.0.11.3.1<br>
  * Effective date: 2022-01-25 14:21:09<br>
  * Version: 1.3.0+20220127<br>

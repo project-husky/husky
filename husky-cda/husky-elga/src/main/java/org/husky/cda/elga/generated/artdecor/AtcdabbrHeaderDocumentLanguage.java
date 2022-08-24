@@ -15,8 +15,7 @@ import org.husky.common.hl7cdar2.CS;
 
 /**
  * atcdabbr_header_DocumentLanguage
- * <p>
- * <p>
+ * 
  * Identifier: 1.2.40.0.34.6.0.11.1.13<br>
  * Effective date: 2021-02-19 10:36:53<br>
  * Version: 1.0.0+20210219<br>

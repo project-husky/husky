@@ -23,8 +23,7 @@ import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * eimpf_document_KompletterImmunisierungsstatus
- * <p>
- * <p>
+ * 
  * Identifier: 1.2.40.0.34.6.0.11.0.4<br>
  * Effective date: 2022-01-25 12:13:30<br>
  * Version: 1.3.0+20220127<br>

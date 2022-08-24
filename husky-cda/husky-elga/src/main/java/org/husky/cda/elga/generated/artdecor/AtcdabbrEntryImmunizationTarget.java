@@ -21,8 +21,7 @@ import org.husky.common.model.Code;
 
 /**
  * atcdabbr_entry_ImmunizationTarget
- * <p>
- * <p>
+ * 
  * Identifier: 1.2.40.0.34.6.0.11.3.2<br>
  * Effective date: 2021‑10‑28 13:49:14<br>
  * Version: 1.0.1+20220103<br>

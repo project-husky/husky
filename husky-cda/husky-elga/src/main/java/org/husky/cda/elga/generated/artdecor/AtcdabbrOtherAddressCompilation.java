@@ -14,8 +14,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * atcdabbr_other_AddressCompilation
- * <p>
- * <p>
+ * 
  * Identifier: 1.2.40.0.34.6.0.11.9.25<br>
  * Effective date: 2021-02-19 13:05:47<br>
  * Version: 1.0.0+20210219<br>

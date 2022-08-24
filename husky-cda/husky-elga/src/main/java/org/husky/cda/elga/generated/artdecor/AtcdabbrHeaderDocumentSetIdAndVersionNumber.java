@@ -10,12 +10,12 @@
 package org.husky.cda.elga.generated.artdecor;
 
 import javax.annotation.processing.Generated;
+
 import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * atcdabbr_header_DocumentSetIdAndVersionNumber
- * <p>
- * <p>
+ *
  * Identifier: 1.2.40.0.34.6.0.11.1.15<br>
  * Effective date: 2021-02-19 10:57:14<br>
  * Version: 1.0.0+20210219<br>

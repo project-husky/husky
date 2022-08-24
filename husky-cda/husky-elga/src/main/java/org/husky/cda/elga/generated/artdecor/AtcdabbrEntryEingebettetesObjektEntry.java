@@ -10,14 +10,14 @@
 package org.husky.cda.elga.generated.artdecor;
 
 import java.util.List;
+
 import javax.annotation.processing.Generated;
+
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040ObservationMedia;
 
 /**
  * atcdabbr_entry_EingebettetesObjektEntry
- * <p>
- * <p>
  * Identifier: 1.2.40.0.34.6.0.11.3.19<br>
  * Effective date: 2021-06-28 11:13:27<br>
  * Version: 1.0.1+20210628<br>

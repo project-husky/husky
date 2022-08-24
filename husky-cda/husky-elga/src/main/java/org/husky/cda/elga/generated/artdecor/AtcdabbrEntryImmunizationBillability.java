@@ -22,8 +22,7 @@ import org.husky.common.model.Code;
 
 /**
  * atcdabbr_entry_ImmunizationBillability
- * <p>
- * <p>
+ * 
  * Identifier: 1.2.40.0.34.6.0.11.3.5<br>
  * Effective date: 2021-02-19 12:46:42<br>
  * Version: 1.0.0+20210219<br>

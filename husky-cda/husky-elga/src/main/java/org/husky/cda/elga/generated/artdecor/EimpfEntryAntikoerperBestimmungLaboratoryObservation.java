@@ -20,8 +20,7 @@ import org.husky.common.hl7cdar2.XActMoodDocumentObservation;
 
 /**
  * eimpf_entry_AntikoerperBestimmungLaboratoryObservation
- * <p>
- * <p>
+ * 
  * Identifier: 1.2.40.0.34.6.0.11.3.16<br>
  * Effective date: 2022‑01‑26 15:53:38<br>
  * Version: 1.2.0+20220127<br>

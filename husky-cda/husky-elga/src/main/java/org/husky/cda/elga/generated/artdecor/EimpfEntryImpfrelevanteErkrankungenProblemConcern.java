@@ -21,8 +21,6 @@ import org.husky.common.model.Code;
 
 /**
  * eimpf_entry_ImpfrelevanteErkrankungenProblemConcern
- * <p>
- * <p>
  * Identifier: 1.2.40.0.34.6.0.11.3.8<br>
  * Effective date: 2021‑10‑29 14:14:14<br>
  * Version: 1.1.2+20220103<br>

@@ -10,13 +10,13 @@
 package org.husky.cda.elga.generated.artdecor;
 
 import javax.annotation.processing.Generated;
+
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040RelatedDocument;
 
 /**
  * atcdabbr_header_DocumentReplacementRelatedDocument
- * <p>
- * <p>
+ * 
  * Identifier: 1.2.40.0.34.6.0.11.1.14<br>
  * Effective date: 2021-06-28 13:42:15<br>
  * Version: 1.0.1+20210628<br>

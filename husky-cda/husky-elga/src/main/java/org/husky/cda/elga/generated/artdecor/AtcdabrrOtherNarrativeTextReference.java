@@ -10,12 +10,12 @@
 package org.husky.cda.elga.generated.artdecor;
 
 import javax.annotation.processing.Generated;
+
 import org.husky.common.hl7cdar2.ED;
 
 /**
  * atcdabrr_other_NarrativeTextReference
- * <p>
- * <p>
+ * 
  * Identifier: 1.2.40.0.34.6.0.11.9.1<br>
  * Effective date: 2021-05-06 09:38:20<br>
  * Version: 1.0.1+20210512<br>

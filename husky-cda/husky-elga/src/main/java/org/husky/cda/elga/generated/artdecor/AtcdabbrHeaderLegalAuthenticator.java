@@ -10,14 +10,15 @@
 package org.husky.cda.elga.generated.artdecor;
 
 import java.util.ArrayList;
+
 import javax.annotation.processing.Generated;
+
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040LegalAuthenticator;
 
 /**
  * atcdabbr_header_LegalAuthenticator
- * <p>
- * <p>
+ * 
  * Identifier: 1.2.40.0.34.6.0.11.1.5<br>
  * Effective date: 2021-02-19 11:10:59<br>
  * Version: 1.0.0+20210219<br>

@@ -20,8 +20,7 @@ import org.husky.common.hl7cdar2.ParticipationPhysicalPerformer;
 
 /**
  * atcdabbr_other_PerformerBodyImpfendePerson
- * <p>
- * <p>
+ * 
  * Identifier: 1.2.40.0.34.6.0.11.9.21<br>
  * Effective date: 2021-10-13 12:53:37<br>
  * Version: 1.0.2+20220103<br>

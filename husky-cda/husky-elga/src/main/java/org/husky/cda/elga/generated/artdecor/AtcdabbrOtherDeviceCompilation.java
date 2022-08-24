@@ -15,8 +15,7 @@ import org.husky.common.hl7cdar2.POCDMT000040Device;
 
 /**
  * atcdabbr_other_DeviceCompilation
- * <p>
- * <p>
+ * 
  * Identifier: 1.2.40.0.34.6.0.11.9.18<br>
  * Effective date: 2021-06-28 13:57:36<br>
  * Version: 1.0.1+20210628<br>

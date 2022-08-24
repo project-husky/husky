@@ -10,14 +10,15 @@
 package org.husky.cda.elga.generated.artdecor;
 
 import java.util.List;
+
 import javax.annotation.processing.Generated;
+
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040Section;
 
 /**
  * atcdabrr_section_ImpfungenKodiert
- * <p>
- * <p>
+ * 
  * Identifier: 1.2.40.0.34.6.0.11.2.1<br>
  * Effective date: 2021-02-19 11:46:43<br>
  * Version: 1.0.0+20210219<br>

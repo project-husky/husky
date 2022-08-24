@@ -21,8 +21,6 @@ import org.husky.common.hl7cdar2.XActMoodDocumentObservation;
 
 /**
  * eimpf_entry_ImpfrelevanteErkrankungProblemEntry
- * <p>
- * <p>
  * Identifier: 1.2.40.0.34.6.0.11.3.9<br>
  * Effective date: 2022‑01‑25 14:24:26<br>
  * Version: 1.1.0+20220127<br>

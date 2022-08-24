@@ -10,13 +10,12 @@
 package org.husky.cda.elga.generated.artdecor;
 
 import javax.annotation.processing.Generated;
+
 import org.husky.common.hl7cdar2.ObjectFactory;
 import org.husky.common.hl7cdar2.POCDMT000040RecordTarget;
 
 /**
  * atcdabbr_header_RecordTarget_eImpfpass
- * <p>
- * <p>
  * Identifier: 1.2.40.0.34.6.0.11.1.31<br>
  * Effective date: 2021-04-29 10:16:25<br>
  * Version: 1.0.1+20210512<br>

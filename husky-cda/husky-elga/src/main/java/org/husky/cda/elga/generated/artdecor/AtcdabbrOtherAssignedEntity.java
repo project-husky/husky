@@ -19,9 +19,8 @@ import org.husky.common.hl7cdar2.POCDMT000040AssignedEntity;
 import org.husky.common.hl7cdar2.TEL;
 
 /**
- *  atcdabbr_other_AssignedEntity
- * <p>
- * <p>
+ * atcdabbr_other_AssignedEntity
+ * 
  * Identifier: 1.2.40.0.34.6.0.11.9.22<br>
  * Effective date: 2021-05-26 13:50:41<br>
  * Version: 1.0.1+20210526<br>
