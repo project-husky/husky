@@ -1445,12 +1445,20 @@ public class CDAR2Extractor {
 
 		// Updated CP 524, 627 and 628 for IHE ITI TF v9 (2012-2013)
 		// XTN.3
-		xtn.setType("");
-		// XTN.4
-		xtn.setEmail(tel.getValue());
 
-		// XTN.12 - unformatted telephone number
-		// not implemented here
+		if (tel.getValue().contains("tel")) {
+			// XTN.12 - unformatted telephone number
+			// not implemented here
+			xtn.setType("PH");
+			xtn.setUnformattedPhoneNumber(tel.getValue().replace("tel:", ""));
+		} else if (tel.getValue().contains("mailto")) {
+			// XTN.4
+			xtn.setEmail(tel.getValue().replace("mailto:", ""));
+		}
+
+		for (String use : tel.getUse()) {
+			xtn.setUse(use);
+		}
 
 		return xtn;
 	}

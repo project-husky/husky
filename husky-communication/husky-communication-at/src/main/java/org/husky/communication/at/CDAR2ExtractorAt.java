@@ -32,6 +32,8 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.Code;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Identifiable;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.PatientInfo;
 
+import com.google.common.collect.Iterators;
+
 public class CDAR2ExtractorAt extends org.husky.common.communication.CDAR2Extractor {
 
 	/**
@@ -271,11 +273,15 @@ public class CDAR2ExtractorAt extends org.husky.common.communication.CDAR2Extrac
 	public PatientInfo extractSourcePatientInfo() {
 		PatientInfo patientInfo = super.extractSourcePatientInfo();
 
-		LinkedList<Identifiable> list = new LinkedList<>(
-				List.of(new Identifiable(), new Identifiable(), new Identifiable()));
-
 		ListIterator<Identifiable> listIterator = patientInfo.getIds();
 
+		int iteratorSize = Iterators.size(listIterator);
+
+		LinkedList<Identifiable> list = new LinkedList<>();
+		for (int index = 0; index < iteratorSize; index++) {
+			list.add(null);
+		}
+		
 		while (listIterator.hasNext()) {
 			Identifiable next = listIterator.next();
 
@@ -286,7 +292,11 @@ public class CDAR2ExtractorAt extends org.husky.common.communication.CDAR2Extrac
 					&& "1.2.40.0.10.1.4.3.1".equalsIgnoreCase(next.getAssigningAuthority().getUniversalId())) {
 				list.set(1, next);
 			} else {
-				list.set(2, next);
+				if (list.size() < 3) {
+					list.add(next);
+				} else {
+					list.set(2, next);
+				}
 			}
 		}
 

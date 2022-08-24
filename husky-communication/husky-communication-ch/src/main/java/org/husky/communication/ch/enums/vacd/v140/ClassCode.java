@@ -313,7 +313,7 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 */
 	@Override
 	public Code getCode() {
-		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(code, CODE_SYSTEM_OID, displayName);
 		return ehcCode;
 	}
 

@@ -16,7 +16,6 @@ import java.util.Map;
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
-import org.husky.cda.elga.utils.NamespaceUtils;
 import org.husky.common.hl7cdar2.CD;
 import org.husky.common.hl7cdar2.POCDMT000040Entry;
 import org.husky.common.hl7cdar2.POCDMT000040EntryRelationship;
@@ -96,24 +95,23 @@ public class ImmunizationBaseTextGenerator extends BaseTextGenerator {
 		for (POCDMT000040EntryRelationship entryRel : entry.getSubstanceAdministration().getEntryRelationship()) {
 			if (entryRel != null && entryRel.getAct() != null) {
 				var commentReference = "";
-				if (entryRel.getAct().getText() != null && entryRel.getAct().getText().getReference() != null) {
-					commentReference = entryRel.getAct().getText().getReference().getValue();
-				}
 
-				if (entryRel.getObservation().getEntryRelationship() != null
-						&& !entryRel.getObservation().getEntryRelationship().isEmpty()) {
-					for (POCDMT000040EntryRelationship entryRelComment : entryRel.getObservation()
-							.getEntryRelationship()) {
-						if (entryRelComment != null && entryRelComment.getAct() != null
-								&& entryRelComment.getAct().getText() != null
-								&& entryRelComment.getAct().getText().getReference() != null
-								&& entryRelComment.getAct().getText().getReference().getValue() != null) {
-							text.getContent().add(new JAXBElement<>(new QName(NamespaceUtils.HL7_NAMESPACE, "content"),
-									StrucDocContent.class, getCommentContent(comments, commentReference)));
-						}
+				if (entryRel.getAct().getText() != null && entryRel.getAct().getText().getReference() != null
+						&& entryRel.getAct().getText().getReference().getValue() != null) {
+					commentReference = entryRel.getAct().getText().getReference().getValue().replace("#", "");
+
+					StrucDocContent content = new StrucDocContent();
+
+					String commentToAdd = "";
+					if (comments.containsKey(commentReference)) {
+						commentToAdd = comments.get(commentReference);
 					}
-				}
 
+					content.getContent().add(commentToAdd);
+					content.setID(commentReference);
+					text.getContent().add(
+							new JAXBElement<>(new QName("urn:hl7-org:v3", "content"), StrucDocContent.class, content));
+				}
 			}
 		}
 	}

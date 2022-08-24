@@ -311,7 +311,7 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 */
 	@Override
 	public Code getCode() {
-		return new Code(CODE_SYSTEM_OID, code, displayName);
+		return new Code(code, CODE_SYSTEM_OID, displayName);
 	}
 
 	/**

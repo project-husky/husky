@@ -9,7 +9,8 @@
 */
 package org.husky.cda.elga.narrative;
 
-import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -90,14 +91,15 @@ public class ImmunizationRecommendationNarrativeTextGenerator extends Immunizati
 			String lowTime = timeMap.get("low");
 			String highTime = timeMap.get("high");
 
-			var sdf = new SimpleDateFormat("dd.MM.yyyy");
+			var formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+					.withZone(ZoneId.systemDefault());
 			if (lowTime != null) {
-				sb.append(sdf.format(DateTimes.toInstant(Hl7Dtm.fromHl7(lowTime))));
+				sb.append(formatter.format(DateTimes.toInstant(Hl7Dtm.fromHl7(lowTime))));
 				sb.append(" - ");
 			}
 
 			if (highTime != null) {
-				sb.append(sdf.format(DateTimes.toInstant(Hl7Dtm.fromHl7(highTime))));
+				sb.append(formatter.format(DateTimes.toInstant(Hl7Dtm.fromHl7(highTime))));
 			}
 		}
 
