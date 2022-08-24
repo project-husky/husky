@@ -30,8 +30,7 @@ import org.husky.common.model.Identificator;
 
 /**
  * Original ART-DECOR template id: 1.2.40.0.34.11.13 Template description:
- * <div class="yui-wk-div"><br clear="none"/>
- * </div>
+ * 
  */
 @XmlRootElement(name = "ClinicalDocument", namespace = "urn:hl7-org:v3")
 public class ElgapatientConsultationSummary
