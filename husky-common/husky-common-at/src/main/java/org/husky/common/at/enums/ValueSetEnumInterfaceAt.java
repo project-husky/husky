@@ -9,7 +9,6 @@
  */
 package org.husky.common.at.enums;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.husky.common.enums.ValueSetEnumInterface;
 import org.husky.common.hl7cdar2.CE;
 
@@ -31,7 +30,7 @@ public interface ValueSetEnumInterfaceAt extends ValueSetEnumInterface {
 	@Override
 	public default String getDisplayName(
 			org.husky.common.enums.LanguageCode languageCode) {
-		throw new NotImplementedException("Not implemented for the Austrian enums");
+		return getDisplayName();
 	}
 
 	/**
