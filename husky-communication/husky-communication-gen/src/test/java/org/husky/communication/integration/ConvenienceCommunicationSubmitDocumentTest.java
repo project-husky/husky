@@ -112,7 +112,7 @@ class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 
 	/**
 	 * This test checks the behavior of the
-	 * {@link ConvenienceCommunication#submit(SubmissionSetMetadata, org.husky.xua.core.SecurityHeaderElement)}
+	 * {@link ConvenienceCommunication#submit(SubmissionSetMetadata, org.husky.xua.core.SecurityHeaderElement, String)}
 	 * when a PDF document is submitted with separate submission set metadata.
 	 * 
 	 * @throws Exception
@@ -142,7 +142,7 @@ class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 
 	/**
 	 * This test checks the behavior of the
-	 * {@link ConvenienceCommunication#submit(SubmissionSetMetadata, org.husky.xua.core.SecurityHeaderElement)}
+	 * {@link ConvenienceCommunication#submit(SubmissionSetMetadata, org.husky.xua.core.SecurityHeaderElement, String)}
 	 * when a CDA document is submitted with separate submission set metadata.
 	 * 
 	 * @throws Exception
@@ -173,7 +173,7 @@ class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 
 	/**
 	 * This test checks the behavior of the
-	 * {@link ConvenienceCommunication#submit(SubmissionSetMetadata, org.husky.xua.core.SecurityHeaderElement)}
+	 * {@link ConvenienceCommunication#submit(SubmissionSetMetadata, org.husky.xua.core.SecurityHeaderElement, String)}
 	 * when a CDA document is submitted with invalid metadata.
 	 * 
 	 * @throws Exception
@@ -212,7 +212,7 @@ class ConvenienceCommunicationSubmitDocumentTest extends XdsTestUtils {
 
 	/**
 	 * This test checks the behavior of the
-	 * {@link ConvenienceCommunication#submitReplacement(SubmissionSetMetadata, String, org.husky.xua.core.SecurityHeaderElement)}
+	 * {@link ConvenienceCommunication#submitReplacement(SubmissionSetMetadata, String, org.husky.xua.core.SecurityHeaderElement, String)}
 	 * when an existing CDA document is to be replaced by a new one.
 	 * 
 	 * @throws Exception
