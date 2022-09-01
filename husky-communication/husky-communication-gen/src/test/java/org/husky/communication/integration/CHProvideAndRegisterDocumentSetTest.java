@@ -130,60 +130,68 @@ class CHProvideAndRegisterDocumentSetTest extends XdsTestUtils {
 
 		// set the author data
 		final Name name = new Name(new NameBaseType());
-		name.setGiven("Gerald");
-		name.setFamily("Smitty");
+		name.setGiven("Peter");
+		name.setFamily("Müller");
+		name.setPrefix("Dr. med");
 
 		final Author author = new Author();
 		author.addName(name);
 
-		final Code role = new Code("HCP", "2.16.756.5.30.1.127.3.10.1.1.3", "Healthcare professional");
+		final Code role = new Code("HCP", "2.16.756.5.30.1.127.3.10.6", "Healthcare professional");
 		author.setRoleFunction(role);
 
 		documentMetadata.addAuthor(author);
 
 		final Identificator globalPatientId = new Identificator("1.3.6.1.4.1.21367.13.20.1000", "IHERED-1024");
-		documentMetadata.setDestinationPatientId(globalPatientId); // TODO verify
+		documentMetadata.setDestinationPatientId(globalPatientId);
 
 		final Identificator localPatientId = new Identificator("1.2.3.4", "2342134localid");
-		documentMetadata.setSourcePatientId(localPatientId);
+		documentMetadata.setSourcePatientId(localPatientId); // TODO verify the local id
+
+		// TODO add gender to source patient info
 
 		documentMetadata.setCodedLanguage(LanguageCode.GERMAN_CODE);
 
-		final Code type = new Code("419891008", "2.16.840.1.113883.6.96", "Record artifact (record artifact)");
+		/*
+		type code should be ("urn:che:epr:ch-vacd:immunization-administration:2022", "1.3.6.1.4.1.19376.1.2.3", "CH VACD Immunization Administration")
+		but this code is currently not supported by the test system
+		 */
+		final Code type = new Code("41000179103", "2.16.840.1.113883.6.96", "Immunization Record (record artifact)");
 		documentMetadata.setTypeCode(type);
 
-		final Code format = new Code("urn:ihe:iti:xds-sd:pdf:2008", "1.3.6.1.4.1.19376.1.2.3",
-				"1.3.6.1.4.1.19376.1.2.20 (Scanned Document)");
+		final Code format = new Code("urn:che:epr:EPR_Unstructured_Document", "2.16.756.5.30.1.127.3.10.10",
+				"Unstructured EPR document");
 		documentMetadata.setFormatCode(format);
 
 		final Code clazz = new Code("184216000", "2.16.840.1.113883.6.96", "Patient record type (record artifact)");
 		documentMetadata.setClassCode(clazz);
 
-		final Code facility = new Code("394747008", "2.16.840.1.113883.6.96", "Health Authority");
+		final Code facility = new Code("22232009", "2.16.840.1.113883.6.96", "Hospital (environment)");
 		documentMetadata.setHealthcareFacilityTypeCode(facility);
 
 		final Code practice = new Code("394802001", "2.16.840.1.113883.6.96", "General medicine (qualifier value)");
 		documentMetadata.setPracticeSettingCode(practice);
 
-		final Code confidentiality = new Code("17621005", "2.16.840.1.113883.6.96", "Normal (qualifier value)");
+		final Code confidentiality = new Code("17621005", "2.16.840.1.113883.6.96", "Normal");
 		documentMetadata.addConfidentialityCode(confidentiality);
 
 
 		// submission set metadata settings
 		final SubmissionSetMetadata submissionSetMetadata = new SubmissionSetMetadata();
-		setSubmissionMetadata(submissionSetMetadata, globalPatientId);
-
-		submissionSetMetadata.getAuthor().add(authorPerson);
 		submissionSetMetadata.setUniqueId(OidGenerator.uniqueOid().toString());
 
 		submissionSetMetadata.setSourceId(EhcVersions.getCurrentVersion().getOid());
 		submissionSetMetadata.setEntryUUID(UUID.randomUUID().toString());
 
-		submissionSetMetadata.setDestinationPatientId(globalPatientId); // TODO verify
+		submissionSetMetadata.setDestinationPatientId(globalPatientId);
+
+		submissionSetMetadata.getAuthor().add(authorPerson);
 
 		final Code contentType = new Code("71388002", "2.16.840.1.113883.6.96", "Procedure (procedure)");
 		submissionSetMetadata.setContentTypeCode(contentType);
 
+		// Use author data from document metadata
+		submissionSetMetadata.setAuthor(author);
 
 		// provide and register the document
 		final Response response = convenienceCommunication.submit(submissionSetMetadata, null, null);
