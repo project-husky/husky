@@ -141,8 +141,6 @@ class CHProvideAndRegisterDocumentSetTest extends XdsTestUtils {
 		final Identificator localPatientId = new Identificator("1.2.3.4", "2342134localid");
 		documentMetadata.setSourcePatientId(localPatientId);
 
-		// TODO add gender to source patient info
-
 		documentMetadata.setCodedLanguage(LanguageCode.GERMAN_CODE);
 
 		/*
