@@ -184,6 +184,8 @@ class CHProvideAndRegisterDocumentSetTest extends XdsTestUtils {
 		// Use author data from document metadata
 		submissionSetMetadata.setAuthor(author);
 
+		// SecurityHeaderElement shall be an Assertion as retrieved from XuaClient (see XuaClientTest)
+
 		// provide and register the document
 		final Response response = convenienceCommunication.submit(submissionSetMetadata, null, null);
 
