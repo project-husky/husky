@@ -54,16 +54,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @EnableAutoConfiguration
 class CHProvideAndRegisterDocumentSetTest extends XdsTestUtils {
 
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(CHProvideAndRegisterDocumentSetTest.class.getName());
+	static final Logger LOGGER = LoggerFactory.getLogger(CHProvideAndRegisterDocumentSetTest.class.getName());
 
 	@Autowired
 	private ConvenienceCommunication convenienceCommunication;
-
-	final private String applicationName = "2.16.840.1.113883.3.72.6.5.100.1399";
-	final private String facilityName = null;
-
-	final private String senderApplicationOid = "1.2.3.4";
 
 	private AffinityDomain affinityDomain = null;
 
@@ -71,7 +65,7 @@ class CHProvideAndRegisterDocumentSetTest extends XdsTestUtils {
 	/**
 	 * Creates and start spring test application and set the endpoint of XDS Repository.
 	 *
-	 * @throws Exception
+	 * @throws Exception if something unexpected happens
 	 */
 	@BeforeEach
 	public void setUp() throws Exception {
@@ -81,17 +75,26 @@ class CHProvideAndRegisterDocumentSetTest extends XdsTestUtils {
 		app.setWebApplicationType(WebApplicationType.NONE);
 		app.run();
 
-		// sets XDS service endpoint
-		affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
 
+		// set the URL of the community repository you want to store the document to
 		final String repositoryURL = "http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_init_gw_testing/rep/prb";
+
 		dest.setUri(new URI(repositoryURL));
 
+		// add the OID of your application as assigned by the community
+		final String senderApplicationOid = "1.2.3.4";
 		dest.setSenderApplicationOid(senderApplicationOid);
+
+		// add an application name
+		final String applicationName = "Clinical Information System"; //"2.16.840.1.113883.3.72.6.5.100.1399";
 		dest.setReceiverApplicationOid(applicationName);
+
+		// add the name of your institution
+		final String facilityName = "Hospital in Bern";
 		dest.setReceiverFacilityOid(facilityName);
 
+		affinityDomain = new AffinityDomain();
 		affinityDomain.setRegistryDestination(dest);
 		affinityDomain.setRepositoryDestination(dest);
 
@@ -100,24 +103,14 @@ class CHProvideAndRegisterDocumentSetTest extends XdsTestUtils {
 	}
 
 	/**
-	 * This method checks if initialization of {@link ConvenienceCommunication} was
-	 * correct.
-	 */
-	@Test
-	void contextLoads() {
-		assertNotNull(convenienceCommunication);
-		assertNotNull(convenienceCommunication.getCamelContext());
-	}
-
-	/**
-	 * This test checks the behavior of the
+	 * This test checks the
 	 * {@link ConvenienceCommunication#submit(SubmissionSetMetadata, org.husky.xua.core.SecurityHeaderElement, String)}
-	 * when a PDF document is submitted with separate submission set metadata.
+	 * with a JSON Document and Swiss compliant metadata
 	 * 
-	 * @throws Exception
+	 * @throws Exception if something unexpected happens
 	 */
 	@Test
-	void submitJSONDocTest() throws Exception {
+	void submitJSONDocumentTest() throws Exception {
 
 		convenienceCommunication.setAffinityDomain(affinityDomain);
 		convenienceCommunication.clearDocuments();
@@ -146,7 +139,7 @@ class CHProvideAndRegisterDocumentSetTest extends XdsTestUtils {
 		documentMetadata.setDestinationPatientId(globalPatientId);
 
 		final Identificator localPatientId = new Identificator("1.2.3.4", "2342134localid");
-		documentMetadata.setSourcePatientId(localPatientId); // TODO verify the local id
+		documentMetadata.setSourcePatientId(localPatientId);
 
 		// TODO add gender to source patient info
 
