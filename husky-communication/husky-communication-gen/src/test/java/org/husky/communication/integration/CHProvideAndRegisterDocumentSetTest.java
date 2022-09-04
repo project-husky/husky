@@ -25,10 +25,13 @@ import org.husky.common.model.Name;
 import org.husky.communication.ConvenienceCommunication;
 import org.husky.communication.testhelper.TestApplication;
 import org.husky.communication.testhelper.XdsTestUtils;
+import org.husky.xua.saml2.Assertion;
+import org.husky.xua.saml2.impl.AssertionBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openehealth.ipf.commons.core.OidGenerator;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.NameIDType;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,6 +45,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.URI;
+import java.util.GregorianCalendar;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -184,8 +188,17 @@ class CHProvideAndRegisterDocumentSetTest extends XdsTestUtils {
 		// Use author data from document metadata
 		submissionSetMetadata.setAuthor(author);
 
+		// Security shall be an Assertion as retrieved from XuaClient (see XUAClientTest)
+		Assertion assertion = new AssertionBuilderImpl().version("2.0").id(UUID.randomUUID().toString())
+				.issueInstant(new GregorianCalendar()).create();
+
+		var nameIdAdd = new NameIDType();
+		nameIdAdd.setValue("urn:oid:1.3.6.1.4.1.21367.2017.2.6.2");
+		nameIdAdd.setNameQualifier("urn:e-health-suisse:community-index");
+		assertion.setIssuer(nameIdAdd);
+
 		// provide and register the document
-		final Response response = convenienceCommunication.submit(submissionSetMetadata, null, null);
+		final Response response = convenienceCommunication.submit(submissionSetMetadata, assertion, null);
 
 		// checks whether the document has been successfully submitted
 		assertTrue(response.getErrors().isEmpty());
