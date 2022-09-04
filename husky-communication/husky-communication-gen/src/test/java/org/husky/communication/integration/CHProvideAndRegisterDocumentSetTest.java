@@ -33,6 +33,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openehealth.ipf.commons.core.OidGenerator;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.NameIDType;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.*;
+import org.opensaml.core.config.InitializationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +74,8 @@ class CHProvideAndRegisterDocumentSetTest extends XdsTestUtils {
 	 */
 	@BeforeEach
 	public void setUp() throws Exception {
+
+		InitializationService.initialize();
 
 		// create and start spring test application
 		var app = new SpringApplication(TestApplication.class);
