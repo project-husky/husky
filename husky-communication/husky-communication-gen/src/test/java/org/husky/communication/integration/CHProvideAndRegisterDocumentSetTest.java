@@ -261,7 +261,6 @@ class CHProvideAndRegisterDocumentSetTest extends XdsTestUtils {
             // build the  X-User Assertion request
             var assertionRequest = new XUserAssertionRequestBuilderImpl().requestType(RequestType.WST_ISSUE)
                     .tokenType(TokenType.OASIS_WSS_SAML_PROFILE_11_SAMLV20)
-                    // .appliesTo(new AppliesToBuilderImpl().address("https://localhost:17001/services/iti18").create())
                     .purposeOfUse(purposeOfUse).subjectRole(role).resourceId(eprSpid).create();
 
             // query the  X-User Assertion
