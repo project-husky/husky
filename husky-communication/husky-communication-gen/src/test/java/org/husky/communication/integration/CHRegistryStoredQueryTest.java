@@ -10,6 +10,7 @@
  */
 package org.husky.communication.integration;
 
+import org.apache.commons.io.IOUtils;
 import org.husky.common.communication.AffinityDomain;
 import org.husky.common.communication.Destination;
 import org.husky.common.model.Code;
@@ -21,6 +22,19 @@ import org.husky.communication.testhelper.TestApplication;
 import org.husky.communication.testhelper.XdsTestUtils;
 import org.husky.communication.xd.storedquery.FindDocumentsQuery;
 import org.husky.communication.xd.storedquery.GetDocumentsQuery;
+import org.husky.xua.communication.clients.XuaClient;
+import org.husky.xua.communication.clients.impl.ClientFactory;
+import org.husky.xua.communication.config.XuaClientConfig;
+import org.husky.xua.communication.config.impl.XuaClientConfigBuilderImpl;
+import org.husky.xua.communication.xua.RequestType;
+import org.husky.xua.communication.xua.TokenType;
+import org.husky.xua.communication.xua.XUserAssertionResponse;
+import org.husky.xua.communication.xua.impl.XUserAssertionRequestBuilderImpl;
+import org.husky.xua.deserialization.impl.AssertionDeserializerImpl;
+import org.husky.xua.hl7v3.PurposeOfUse;
+import org.husky.xua.hl7v3.Role;
+import org.husky.xua.hl7v3.impl.CodedWithEquivalentsBuilder;
+import org.husky.xua.saml2.Assertion;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,6 +53,9 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.LinkedList;
@@ -48,16 +65,19 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * The purpose of this test class is to check whether document metadata
- * retrieval (XDS ITI-18) works with a wide variety of parameters.
+ * Test class to test the RegistryStoredQuery [ITI-18] transaction with Swiss requirements. This
+ * test performs the following steps:
+ * 1. load a test IdP Assertion from the disk
+ * 2. Use the IdP Assertion in conjunction with the claims (role, purposeOfUse, EPR-SPID of the patient health record)
+ * and request a X-User Assertion.
+ * 3. Use the X-User Assertion for authorization with the RegistryStoredQuery [ITI-18] transaction
  */
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
 @EnableAutoConfiguration
 class CHRegistryStoredQueryTest extends XdsTestUtils {
 
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(CHRegistryStoredQueryTest.class.getName());
+	private static final Logger LOGGER = LoggerFactory.getLogger(CHRegistryStoredQueryTest.class.getName());
 
 	@Autowired
 	private ConvenienceCommunication convenienceCommunication;
@@ -104,16 +124,8 @@ class CHRegistryStoredQueryTest extends XdsTestUtils {
 	}
 
 	/**
-	 * This method checks if initialization of {@link ConvenienceCommunication} was
-	 * correct.
-	 */
-	@Test
-	void contextLoads() {
-		assertNotNull(convenienceCommunication);
-		assertNotNull(convenienceCommunication.getCamelContext());
-	}
-
-	/**
+	 * Query the XDS Registry for documents of a specific type, class and format code.
+	 *
 	 * This test checks the behavior of the
 	 * {@link ConvenienceCommunication#queryDocuments(org.husky.communication.xd.storedquery.AbstractStoredQuery, org.husky.xua.core.SecurityHeaderElement, String messageId)}
 	 * 
@@ -121,105 +133,85 @@ class CHRegistryStoredQueryTest extends XdsTestUtils {
 	 */
 	@Test
 	@SuppressWarnings("java:S5961")
-	void queryFindDocumentsMetadataOfPdf() throws Exception {
+	void queryFindDocuments() throws Exception {
 
 		convenienceCommunication.setAffinityDomain(affinityDomain);
 
 		Identificator patientId = new Identificator("1.3.6.1.4.1.21367.13.20.1000", "IHERED-1024");
 
-		FindDocumentsQuery findDocumentsQuery = new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED);
+		final Code type = new Code("41000179103", "2.16.840.1.113883.6.96", "Immunization Record (record artifact)");
+		final Code clazz = new Code("184216000", "2.16.840.1.113883.6.96", "Patient record type (record artifact)");
+		final Code format = new Code("urn:che:epr:EPR_Unstructured_Document", "2.16.756.5.30.1.127.3.10.10",
+				"Unstructured EPR document");
+
+		FindDocumentsQuery findDocumentsQuery = new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED, type, clazz, format);
+
+		// Get the X-User Assertion to authorize the Document Submission.
+		Assertion xUserAssertion = getXUserAssertion();
+		assertNotNull(xUserAssertion);
 
 		// query metadata of documents with patient ID and approved as availability status
-		final QueryResponse response = convenienceCommunication.queryDocuments(findDocumentsQuery, null, null);
+		final QueryResponse response = convenienceCommunication.queryDocuments(findDocumentsQuery, xUserAssertion, null);
 
 		// check if query was successful
 		assertTrue(response.getErrors().isEmpty());
 		assertEquals(Status.SUCCESS, response.getStatus());
+
+		// check that at least one document is stored
 		assertTrue(response.getDocumentEntries().size() > 0);
 
+		// output details of the first entry found
+		LOGGER.info("**");
+		LOGGER.info("Document Entry size is "+response.getDocumentEntries().size());
 		DocumentEntry documentEntry = response.getDocumentEntries().get(0);
+		LOGGER.info("First document entry is "+documentEntry);
+		LOGGER.info("**");
 
-		// check if identifiers (unique ID, repository ID and home community ID) are
-		// equal
-		assertEquals("1.2.820.99999.15031207481211484821638086641062503555190193702785", documentEntry.getUniqueId());
-		assertEquals("1.1.4567332.1.75", documentEntry.getRepositoryUniqueId());
-		assertEquals("urn:oid:1.1.4567334.1.6", documentEntry.getHomeCommunityId());
-		assertEquals("urn:uuid:b8f37101-8842-4e2c-b1e7-bc421d0dc01f", documentEntry.getEntryUuid());
-
-		assertEquals(AvailabilityStatus.APPROVED, documentEntry.getAvailabilityStatus());
-		assertEquals("application/pdf", documentEntry.getMimeType());
-
-		assertNull(documentEntry.getComments());
-		assertNull(documentEntry.getDocumentAvailability());
-
-		assertEquals("Informed Consent", documentEntry.getTitle().getValue());
-		assertEquals("20211012082534", documentEntry.getCreationTime().toHL7());
-
-		// check different codes
-		assertEquals("de-CH", documentEntry.getLanguageCode());
-
-		assertNotNull(documentEntry.getClassCode());
-		assertEquals("422735006", documentEntry.getClassCode().getCode());
-		assertEquals("2.16.840.1.113883.6.96", documentEntry.getClassCode().getSchemeName());
-		assertEquals("Summary clinical document (record artifact)",
-				documentEntry.getClassCode().getDisplayName().getValue());
-
-		assertNotNull(documentEntry.getConfidentialityCodes().get(0));
-		assertEquals("17621005", documentEntry.getConfidentialityCodes().get(0).getCode());
-		assertEquals("Normal (qualifier value)",
-				documentEntry.getConfidentialityCodes().get(0).getDisplayName().getValue());
-
-		assertTrue(documentEntry.getEventCodeList().isEmpty());
-
-		assertEquals("urn:ihe:iti:xds-sd:pdf:2008", documentEntry.getFormatCode().getCode());
-		assertEquals("1.3.6.1.4.1.19376.1.2.3", documentEntry.getFormatCode().getSchemeName());
-		assertEquals("1.3.6.1.4.1.19376.1.2.20 (Scanned Document)",
-				documentEntry.getFormatCode().getDisplayName().getValue());
-
-		assertEquals("394747008", documentEntry.getHealthcareFacilityTypeCode().getCode());
-		assertEquals("2.16.840.1.113883.6.96", documentEntry.getHealthcareFacilityTypeCode().getSchemeName());
-		assertEquals("Health Authority",
-				documentEntry.getHealthcareFacilityTypeCode().getDisplayName().getValue());
-
-		assertEquals("394810000", documentEntry.getPracticeSettingCode().getCode());
-		assertEquals("Rheumatology (qualifier value)",
-				documentEntry.getPracticeSettingCode().getDisplayName().getValue());
-		assertEquals("2.16.840.1.113883.6.96", documentEntry.getPracticeSettingCode().getSchemeName());
-
-		assertEquals("371535009", documentEntry.getTypeCode().getCode());
-		assertEquals("Transfer summary report (record artifact)",
-				documentEntry.getTypeCode().getDisplayName().getValue());
-		assertEquals("2.16.840.1.113883.6.96", documentEntry.getTypeCode().getSchemeName());
-
-		// check patient details
-		assertEquals("IHERED-1024", documentEntry.getPatientId().getId());
-		assertEquals("1.3.6.1.4.1.21367.13.20.1000",
-				documentEntry.getPatientId().getAssigningAuthority().getUniversalId());
-
-		assertEquals("2342134localid", documentEntry.getSourcePatientId().getId());
-		assertEquals("1.2.3.4", documentEntry.getSourcePatientId().getAssigningAuthority().getUniversalId());
-
-		// check author details
-		assertFalse(documentEntry.getAuthors().isEmpty());
-		assertNotNull(documentEntry.getAuthors().get(0));
-		assertNotNull(documentEntry.getAuthors().get(0).getAuthorPerson());
-		assertNotNull(documentEntry.getAuthors().get(0).getAuthorPerson().getName());
-		assertEquals("Bereit", documentEntry.getAuthors().get(0).getAuthorPerson().getName().getFamilyName());
-		assertEquals("Allzeit", documentEntry.getAuthors().get(0).getAuthorPerson().getName().getGivenName());
-		assertEquals("Dr.", documentEntry.getAuthors().get(0).getAuthorPerson().getName().getPrefix());
-
-		assertNotNull(documentEntry.getAuthors().get(0).getAuthorRole());
-		assertNotNull(documentEntry.getAuthors().get(0).getAuthorRole().get(0));
-		assertEquals("221", documentEntry.getAuthors().get(0).getAuthorRole().get(0).getId());
-		assertEquals("2.16.840.1.113883.2.9.6.2.7",
-				documentEntry.getAuthors().get(0).getAuthorRole().get(0).getAssigningAuthority().getUniversalId());
-
-		assertNotNull(documentEntry.getAuthors().get(0).getAuthorSpecialty());
-		assertNotNull(documentEntry.getAuthors().get(0).getAuthorSpecialty().get(0));
-		assertNull(documentEntry.getAuthors().get(0).getAuthorSpecialty().get(0).getId());
-		assertNull(
-				documentEntry.getAuthors().get(0).getAuthorSpecialty().get(0).getAssigningAuthority().getUniversalId());
 	}
 
+	/**
+	 * Retrieve an X-User Assertion for a Healthcare Provider from the test environment. In this test the IdP Assertion
+	 * required to authenticate the user in the Get X-User Assertion request is loaded from the disk.
+	 *
+	 * @throws Exception if something unexpected happens
+	 */
+	private Assertion getXUserAssertion() throws Exception {
+
+		final String urlToXua = "https://ehealthsuisse.ihe-europe.net:10443/STS?wsdl";
+		final String clientKeyStore = "src/test/resources/testKeystoreXua.jks";
+		final String clientKeyStorePass = "changeit";
+
+		// initialize XUA client to query XUA assertion
+		XuaClientConfig xuaClientConfig = new XuaClientConfigBuilderImpl().clientKeyStore(clientKeyStore)
+				.clientKeyStorePassword(clientKeyStorePass).clientKeyStoreType("jks").url(urlToXua).create();
+
+		XuaClient client = ClientFactory.getXuaClient(xuaClientConfig);
+
+		try (InputStream is = new FileInputStream(new File("src/test/resources/IdPAssertionHCP.xml"))) {
+
+			// for testing load an IdP Assertion from disk.
+			var idpAssertion = new AssertionDeserializerImpl().fromXmlByteArray(IOUtils.toByteArray(is));
+
+			// define the attributes for the X-User Assertion request
+			var role = new CodedWithEquivalentsBuilder().code("HCP").codeSystem("2.16.756.5.30.1.127.3.10.6")
+					.displayName("Behandelnde(r)")
+					.buildObject(Role.DEFAULT_NS_URI, Role.DEFAULT_ELEMENT_LOCAL_NAME, Role.DEFAULT_PREFIX);
+
+			var purposeOfUse = new CodedWithEquivalentsBuilder().code("NORM").codeSystem("2.16.756.5.30.1.127.3.10.6")
+					.displayName("Normal Access").buildObject(PurposeOfUse.DEFAULT_NS_URI,
+							PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME, PurposeOfUse.DEFAULT_PREFIX);
+
+			String eprSpid = "761337610411265304^^^SPID&2.16.756.5.30.1.127.3.10.3&ISO";
+
+			// build the  X-User Assertion request
+			var assertionRequest = new XUserAssertionRequestBuilderImpl().requestType(RequestType.WST_ISSUE)
+					.tokenType(TokenType.OASIS_WSS_SAML_PROFILE_11_SAMLV20)
+					.purposeOfUse(purposeOfUse).subjectRole(role).resourceId(eprSpid).create();
+
+			// query the  X-User Assertion
+			List<XUserAssertionResponse> response = client.send(idpAssertion, assertionRequest);
+			return response.get(0).getAssertion();
+		}
+	}
 
 }

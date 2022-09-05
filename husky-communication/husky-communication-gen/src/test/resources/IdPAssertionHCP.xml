@@ -1,5 +1,5 @@
 <saml2:Assertion xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion"
-                          xmlns:soap11="http://schemas.xmlsoap.org/soap/envelope/"
+                 xmlns:soap11="http://schemas.xmlsoap.org/soap/envelope/"
                           xmlns:saml2p="urn:oasis:names:tc:SAML:2.0:protocol"
                           xmlns:xsd="http://www.w3.org/2001/XMLSchema"
                           ID="_0c24ae2fb154cca9ff7d56f2647aff9b"
