@@ -5,9 +5,13 @@ In Husky the XUA profile is implemented in the `husky-xua-gen-impl` module, more
 
 ## Provide assertion
 
-The transaction to provide a user assertion is called [ITI-40](<https://profiles.ihe.net/ITI/TF/Volume2/ITI-40.html>). This transaction is used by the service user to submit an identity assertion to the service provider. The identity assertion is verified using the third party issuer.
+The transaction to provide a user assertion is called [ITI-40](<https://profiles.ihe.net/ITI/TF/Volume2/ITI-40.html>) 
+in the security header of other transactions (e.g., RetrieveDocumentSet [ITI-43] to read documents from the EPR). 
+The X-User Assertion shall be requested from the community using the Get X-User Assertion.   
 
-An example for providing an identity assertion to service provider can be found in integration tests of husky xua-gen-impl module. The class is called XuaClientTest. To provide an identity assertion you have to create an instance of SimpleXuaClient. Furthermore you must create an instance of XUserAssertionRequest. You must submit the identity assertion and the created request with the method send.
+An example for retrieving an X-User Assertion for authorization can be found in integration tests of husky xua-gen-impl module. 
+The class is called XuaClientTest. To request an X-User Assertion you have to create an instance of SimpleXuaClient and 
+XUserAssertionRequest to convey the claims.
 
 ```java
 XuaClientConfig xuaClientConfig = new XuaClientConfigBuilderImpl().clientKeyStore(clientKeyStore)
@@ -29,3 +33,4 @@ var assertionRequest = new XUserAssertionRequestBuilderImpl().requestType(Reques
 List<XUserAssertionResponse> response = client.send(assertion, assertionRequest);
 
 ```
+
