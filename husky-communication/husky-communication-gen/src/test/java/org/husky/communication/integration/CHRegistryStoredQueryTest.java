@@ -10,6 +10,7 @@
  */
 package org.husky.communication.integration;
 
+import org.apache.commons.io.IOUtils;
 import org.husky.common.communication.AffinityDomain;
 import org.husky.common.communication.Destination;
 import org.husky.common.model.Code;
@@ -21,6 +22,19 @@ import org.husky.communication.testhelper.TestApplication;
 import org.husky.communication.testhelper.XdsTestUtils;
 import org.husky.communication.xd.storedquery.FindDocumentsQuery;
 import org.husky.communication.xd.storedquery.GetDocumentsQuery;
+import org.husky.xua.communication.clients.XuaClient;
+import org.husky.xua.communication.clients.impl.ClientFactory;
+import org.husky.xua.communication.config.XuaClientConfig;
+import org.husky.xua.communication.config.impl.XuaClientConfigBuilderImpl;
+import org.husky.xua.communication.xua.RequestType;
+import org.husky.xua.communication.xua.TokenType;
+import org.husky.xua.communication.xua.XUserAssertionResponse;
+import org.husky.xua.communication.xua.impl.XUserAssertionRequestBuilderImpl;
+import org.husky.xua.deserialization.impl.AssertionDeserializerImpl;
+import org.husky.xua.hl7v3.PurposeOfUse;
+import org.husky.xua.hl7v3.Role;
+import org.husky.xua.hl7v3.impl.CodedWithEquivalentsBuilder;
+import org.husky.xua.saml2.Assertion;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,6 +53,9 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.LinkedList;
@@ -48,16 +65,19 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * The purpose of this test class is to check whether document metadata
- * retrieval (XDS ITI-18) works with a wide variety of parameters.
+ * Test class to test the RegistryStoredQuery [ITI-18] transaction with Swiss requirements. This
+ * test performs the following steps:
+ * 1. load a test IdP Assertion from the disk
+ * 2. Use the IdP Assertion in conjunction with the claims (role, purposeOfUse, EPR-SPID of the patient health record)
+ * and request a X-User Assertion.
+ * 3. Use the X-User Assertion for authorization with the RegistryStoredQuery [ITI-18] transaction
  */
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
 @EnableAutoConfiguration
 class CHRegistryStoredQueryTest extends XdsTestUtils {
 
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(CHRegistryStoredQueryTest.class.getName());
+	private static final Logger LOGGER = LoggerFactory.getLogger(CHRegistryStoredQueryTest.class.getName());
 
 	@Autowired
 	private ConvenienceCommunication convenienceCommunication;
@@ -104,17 +124,7 @@ class CHRegistryStoredQueryTest extends XdsTestUtils {
 	}
 
 	/**
-	 * This method checks if initialization of {@link ConvenienceCommunication} was
-	 * correct.
-	 */
-	@Test
-	void contextLoads() {
-		assertNotNull(convenienceCommunication);
-		assertNotNull(convenienceCommunication.getCamelContext());
-	}
-
-	/**
-	 * Query the XDS Registry for documents of a specific type
+	 * Query the XDS Registry for documents of a specific type, class and format code.
 	 *
 	 * This test checks the behavior of the
 	 * {@link ConvenienceCommunication#queryDocuments(org.husky.communication.xd.storedquery.AbstractStoredQuery, org.husky.xua.core.SecurityHeaderElement, String messageId)}
@@ -136,19 +146,72 @@ class CHRegistryStoredQueryTest extends XdsTestUtils {
 
 		FindDocumentsQuery findDocumentsQuery = new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED, type, clazz, format);
 
+		// Get the X-User Assertion to authorize the Document Submission.
+		Assertion xUserAssertion = getXUserAssertion();
+		assertNotNull(xUserAssertion);
+
 		// query metadata of documents with patient ID and approved as availability status
-		final QueryResponse response = convenienceCommunication.queryDocuments(findDocumentsQuery, null, null);
+		final QueryResponse response = convenienceCommunication.queryDocuments(findDocumentsQuery, xUserAssertion, null);
 
 		// check if query was successful
 		assertTrue(response.getErrors().isEmpty());
 		assertEquals(Status.SUCCESS, response.getStatus());
 
+		// check that at least one document is stored
 		assertTrue(response.getDocumentEntries().size() > 0);
+
+		// output details of the first entry found
+		LOGGER.info("**");
+		LOGGER.info("Document Entry size is "+response.getDocumentEntries().size());
 		DocumentEntry documentEntry = response.getDocumentEntries().get(0);
-
-
+		LOGGER.info("First document entry is "+documentEntry);
+		LOGGER.info("**");
 
 	}
 
+	/**
+	 * Retrieve an X-User Assertion for a Healthcare Provider from the test environment. In this test the IdP Assertion
+	 * required to authenticate the user in the Get X-User Assertion request is loaded from the disk.
+	 *
+	 * @throws Exception if something unexpected happens
+	 */
+	private Assertion getXUserAssertion() throws Exception {
+
+		final String urlToXua = "https://ehealthsuisse.ihe-europe.net:10443/STS?wsdl";
+		final String clientKeyStore = "src/test/resources/testKeystoreXua.jks";
+		final String clientKeyStorePass = "changeit";
+
+		// initialize XUA client to query XUA assertion
+		XuaClientConfig xuaClientConfig = new XuaClientConfigBuilderImpl().clientKeyStore(clientKeyStore)
+				.clientKeyStorePassword(clientKeyStorePass).clientKeyStoreType("jks").url(urlToXua).create();
+
+		XuaClient client = ClientFactory.getXuaClient(xuaClientConfig);
+
+		try (InputStream is = new FileInputStream(new File("src/test/resources/IdPAssertionHCP.xml"))) {
+
+			// for testing load an IdP Assertion from disk.
+			var idpAssertion = new AssertionDeserializerImpl().fromXmlByteArray(IOUtils.toByteArray(is));
+
+			// define the attributes for the X-User Assertion request
+			var role = new CodedWithEquivalentsBuilder().code("HCP").codeSystem("2.16.756.5.30.1.127.3.10.6")
+					.displayName("Behandelnde(r)")
+					.buildObject(Role.DEFAULT_NS_URI, Role.DEFAULT_ELEMENT_LOCAL_NAME, Role.DEFAULT_PREFIX);
+
+			var purposeOfUse = new CodedWithEquivalentsBuilder().code("NORM").codeSystem("2.16.756.5.30.1.127.3.10.6")
+					.displayName("Normal Access").buildObject(PurposeOfUse.DEFAULT_NS_URI,
+							PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME, PurposeOfUse.DEFAULT_PREFIX);
+
+			String eprSpid = "761337610411265304^^^SPID&2.16.756.5.30.1.127.3.10.3&ISO";
+
+			// build the  X-User Assertion request
+			var assertionRequest = new XUserAssertionRequestBuilderImpl().requestType(RequestType.WST_ISSUE)
+					.tokenType(TokenType.OASIS_WSS_SAML_PROFILE_11_SAMLV20)
+					.purposeOfUse(purposeOfUse).subjectRole(role).resourceId(eprSpid).create();
+
+			// query the  X-User Assertion
+			List<XUserAssertionResponse> response = client.send(idpAssertion, assertionRequest);
+			return response.get(0).getAssertion();
+		}
+	}
 
 }

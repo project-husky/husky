@@ -171,13 +171,13 @@ class CHProvideAndRegisterDocumentSetTest extends XdsTestUtils {
 
         documentMetadata.setCodedLanguage(LanguageCode.GERMAN_CODE);
 
-		/*
-		type code should be ("urn:che:epr:ch-vacd:immunization-administration:2022", "1.3.6.1.4.1.19376.1.2.3", "CH VACD Immunization Administration")
-		but this code is currently not supported by the test system
-		 */
         final Code type = new Code("41000179103", "2.16.840.1.113883.6.96", "Immunization Record (record artifact)");
         documentMetadata.setTypeCode(type);
 
+        /*
+		format code for vaccinations shall be ("urn:che:epr:ch-vacd:immunization-administration:2022", "1.3.6.1.4.1.19376.1.2.3", "CH VACD Immunization Administration")
+		but this code is currently not supported by the test system
+		 */
         final Code format = new Code("urn:che:epr:EPR_Unstructured_Document", "2.16.756.5.30.1.127.3.10.10",
                 "Unstructured EPR document");
         documentMetadata.setFormatCode(format);
@@ -242,7 +242,7 @@ class CHProvideAndRegisterDocumentSetTest extends XdsTestUtils {
 
         XuaClient client = ClientFactory.getXuaClient(xuaClientConfig);
 
-        try (InputStream is = new FileInputStream(new File("src/test/resources/IdPAssertion.xml"))) {
+        try (InputStream is = new FileInputStream(new File("src/test/resources/IdPAssertionHCP.xml"))) {
 
             // for testing load an IdP Assertion from disk.
             var idpAssertion = new AssertionDeserializerImpl().fromXmlByteArray(IOUtils.toByteArray(is));
