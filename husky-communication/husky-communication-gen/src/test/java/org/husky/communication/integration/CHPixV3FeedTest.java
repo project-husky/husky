@@ -71,11 +71,11 @@ class CHPixV3FeedTest {
 	final private String receiverApplicationOid = "1.3.6.1.4.1.12559.11.20.1.10";
 	final private String senderApplicationOid = "1.2.3.4";
 
-	final private String homeCommunityOid = "1.3.6.1.4.1.12559.11.20.1";
-	final private String homeCommunityNamespace = "CHPAM2";
+	final private String localAssigningAuthorityOid = "1.2.3.4";
+	final private String localIdNamespace = "WALDSPITAL";
 	
-	final private String spidEprOid = "2.16.756.5.30.1.127.3.10.3";
-	final private String spidEprNamespace = "SPID";
+	final private String spidAssigningAuthorityOid = "2.16.756.5.30.1.127.3.10.3";
+	final private String spidNamespace = "SPID";
 
 	/**
 	 * @throws Exception
@@ -103,7 +103,7 @@ class CHPixV3FeedTest {
 		affinityDomain.setPdqDestination(dest);
 		affinityDomain.setPixDestination(dest);
 
-		PixV3Query pixV3Query = new PixV3Query(affinityDomain, homeCommunityOid, homeCommunityNamespace, spidEprOid, spidEprNamespace,
+		PixV3Query pixV3Query = new PixV3Query(affinityDomain, localAssigningAuthorityOid, localIdNamespace, spidAssigningAuthorityOid, spidNamespace,
 				convenienceMasterPatientIndexV3Client.getContext(),
 				convenienceMasterPatientIndexV3Client.getAuditContext());
 
@@ -111,14 +111,14 @@ class CHPixV3FeedTest {
 
 		// the local ID
 		final Identifier identifier = new Identifier();
-		identifier.setValue("myLocalId-1234");
-		identifier.setSystem(FhirCommon.addUrnOid(homeCommunityOid));
+		identifier.setValue("waldspital-Id-1234");
+		identifier.setSystem(FhirCommon.addUrnOid(localAssigningAuthorityOid));
 		patient.getIdentifier().add(identifier);
 
 		// the EPR SPID
 		final Identifier identifier2 = new Identifier();
-		identifier2.setValue("761337610436974989");
-		identifier2.setSystem(spidEprOid);
+		identifier2.setValue("761337613436974989");
+		identifier2.setSystem(spidAssigningAuthorityOid);
 		patient.getIdentifier().add(identifier2);
 
 		final HumanName humanName = new HumanName().setFamily("Anders").addGiven("Miriam").addGiven("Maria").addPrefix("Dr.").addSuffix("Msc.").setUse(NameUse.OFFICIAL);
@@ -200,7 +200,7 @@ class CHPixV3FeedTest {
 		final Organization org = new Organization();
 		final Identifier identifier = new Identifier();
 		identifier.setValue("Husky");
-		identifier.setSystem(FhirCommon.addUrnOid(homeCommunityOid));
+		identifier.setSystem(FhirCommon.addUrnOid(localAssigningAuthorityOid));
 		org.getIdentifier().add(identifier);
 		return org;
 	}
