@@ -175,9 +175,9 @@ class CHProvideAndRegisterDocumentSetTest extends XdsTestUtils {
         documentMetadata.setTypeCode(type);
 
         /*
-		format code for vaccinations shall be ("urn:che:epr:ch-vacd:immunization-administration:2022", "1.3.6.1.4.1.19376.1.2.3", "CH VACD Immunization Administration")
-		but this code is currently not supported by the test system
-		 */
+		    format code for vaccinations shall be ("urn:che:epr:ch-vacd:immunization-administration:2022", "1.3.6.1.4.1.19376.1.2.3", "CH VACD Immunization Administration")
+		    but this code is currently not supported by the test system
+		    */
         final Code format = new Code("urn:che:epr:EPR_Unstructured_Document", "2.16.756.5.30.1.127.3.10.10",
                 "Unstructured EPR document");
         documentMetadata.setFormatCode(format);
@@ -261,6 +261,7 @@ class CHProvideAndRegisterDocumentSetTest extends XdsTestUtils {
             // build the  X-User Assertion request
             var assertionRequest = new XUserAssertionRequestBuilderImpl().requestType(RequestType.WST_ISSUE)
                     .tokenType(TokenType.OASIS_WSS_SAML_PROFILE_11_SAMLV20)
+                    // .appliesTo(new AppliesToBuilderImpl().address("https://localhost:17001/services/iti18").create())
                     .purposeOfUse(purposeOfUse).subjectRole(role).resourceId(eprSpid).create();
 
             // query the  X-User Assertion
