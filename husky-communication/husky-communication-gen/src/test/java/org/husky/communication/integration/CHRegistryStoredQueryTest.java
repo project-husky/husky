@@ -114,6 +114,8 @@ class CHRegistryStoredQueryTest extends XdsTestUtils {
 	}
 
 	/**
+	 * Query the XDS Registry for documents of a specific type
+	 *
 	 * This test checks the behavior of the
 	 * {@link ConvenienceCommunication#queryDocuments(org.husky.communication.xd.storedquery.AbstractStoredQuery, org.husky.xua.core.SecurityHeaderElement, String messageId)}
 	 * 
@@ -121,7 +123,7 @@ class CHRegistryStoredQueryTest extends XdsTestUtils {
 	 */
 	@Test
 	@SuppressWarnings("java:S5961")
-	void queryFindDocumentsMetadataOfPdf() throws Exception {
+	void queryFindDocuments() throws Exception {
 
 		convenienceCommunication.setAffinityDomain(affinityDomain);
 
