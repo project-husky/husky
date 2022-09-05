@@ -95,6 +95,7 @@ class CHProvideAndRegisterDocumentSetTest extends XdsTestUtils {
     @BeforeEach
     public void setUp() throws Exception {
 
+        // initialize the open saml factories
         InitializationService.initialize();
 
         // create and start spring test application
