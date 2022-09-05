@@ -7,11 +7,14 @@ In Husky the XUA profile is implemented in the `husky-xua-gen-impl` module, more
 
 The transaction to provide a user assertion is called [ITI-40](<https://profiles.ihe.net/ITI/TF/Volume2/ITI-40.html>) 
 in the security header of other transactions (e.g., RetrieveDocumentSet [ITI-43] to read documents from the EPR). 
-The X-User Assertion shall be requested from the community using the Get X-User Assertion.   
+The X-User Assertion shall be requested from the community using the Get X-User Assertion.
 
-An example for retrieving an X-User Assertion for authorization can be found in integration tests of husky xua-gen-impl module. 
-The class is called XuaClientTest. To request an X-User Assertion you have to create an instance of SimpleXuaClient and 
-XUserAssertionRequest to convey the claims.
+The Get X-User Assertion transaction is not profiled in the IHE Technical Framework and therefore depends on the 
+national extensions (e.g., Swiss EPR). 
+
+An example for retrieving an X-User Assertion for authorization in the Swiss EPR can be found in integration tests of 
+husky xua-gen-impl module. The class is called XuaClientTest. To request an X-User Assertion you have to create an 
+instance of SimpleXuaClient and XUserAssertionRequest to convey the claims.
 
 ```java
 XuaClientConfig xuaClientConfig = new XuaClientConfigBuilderImpl().clientKeyStore(clientKeyStore)
@@ -34,3 +37,5 @@ List<XUserAssertionResponse> response = client.send(assertion, assertionRequest)
 
 ```
 
+An example of how to add the X-User Assertion to the ProvideAndRegisterDocumentSet-b [ITI-41] to store documents 
+in the Swiss EPR is given in the test CHProvideAndRegisterDocumentSetTest in the husky-communication-gen module. 
