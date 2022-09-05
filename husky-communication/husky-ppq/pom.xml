@@ -33,15 +33,7 @@
 			</exclusions>
 		</dependency>
 
-		<dependency>
-			<groupId>org.openehealth.ipf.platform-camel</groupId>
-			<artifactId>ipf-platform-camel-ihe-atna</artifactId>
-		</dependency>
 
-		<dependency>
-			<groupId>org.openehealth.ipf.platform-camel</groupId>
-			<artifactId>ipf-platform-camel-ihe-xacml20</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>org.husky.communication</groupId>
@@ -50,17 +42,24 @@
 		<dependency>
 			<groupId>org.husky.communication</groupId>
 			<artifactId>husky-xua-ch-impl</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>xpp3</groupId>
+					<artifactId>xpp3</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.husky.communication</groupId>
 			<artifactId>husky-communication-gen</artifactId>
 		</dependency>
 
+		<!--
 		<dependency>
 			<groupId>javax.xml.ws</groupId>
 			<artifactId>jaxws-api</artifactId>
 		</dependency>
-
+		-->
 		<!-- test stuff -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
