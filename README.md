@@ -15,6 +15,10 @@ The latest Javadoc is published on <a href="https://project-husky.github.io/husk
 
 - **[Install Guide](docs/Installation.md)**
 
+## Development
+
+- **[Development Guidelines](docs/Development.md)**
+
 ## Implemented IHE Profiles
 
 Husky offers support for multiple IHE ITI profiles. For each profile transaction there is a convenience method.
