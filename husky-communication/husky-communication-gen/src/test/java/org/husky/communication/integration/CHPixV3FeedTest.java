@@ -69,17 +69,17 @@ class CHPixV3FeedTest {
 	final String facilityName = "Waldspital Bern"; // "2.16.840.1.113883.3.72.6.1";
 
 	final String receiverApplicationOid = "1.3.6.1.4.1.12559.11.20.1.10";
-	final String senderApplicationOid = "1.2.3.4";
+	final String senderApplicationOid = "1.2.3.4.123456";
 
 	// local ID settings
-	final String localAssigningAuthorityOid = "1.2.3.4";
+	final String localAssigningAuthorityOid = "1.2.3.4.123456.1";
 	final String localIdNamespace = "WALDSPITAL";
 	final String localId = "waldspital-Id-1234";
 
 	// EPR-SPID settings
 	final String spidAssigningAuthorityOid = "2.16.756.5.30.1.127.3.10.3";
 	final String spidNamespace = "SPID";
-	final String eprSPID = "761337613436974989";
+	final String eprSPID = "761337713436974989";
 
 	/**
 	 * @throws Exception

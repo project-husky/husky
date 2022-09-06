@@ -10,7 +10,7 @@
  */
 package org.husky.communication.integration;
 
-import org.hl7.fhir.r4.model.*;
+import org.hl7.fhir.r4.model.Identifier;
 import org.husky.common.communication.AffinityDomain;
 import org.husky.common.communication.Destination;
 import org.husky.communication.ConvenienceMasterPatientIndexV3;
@@ -32,8 +32,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.net.URI;
-
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -54,17 +54,21 @@ class CHPixV3QueryTest {
 
 	final String facilityName = "Waldspital Bern"; // "2.16.840.1.113883.3.72.6.1";
 	final String receiverApplicationOid = "1.3.6.1.4.1.12559.11.20.1.10";
-	final String senderApplicationOid = "1.2.3.4";
+	final String senderApplicationOid = "1.2.3.4.123456";
 
 	// local ID settings
-	final String localAssigningAuthorityOid = "1.3.6.1.4.1.12559.11.20.1";
-	final String localIdNamespace = "CHPAM2";
-	final String localId = "CHPAM4489";
+	final String localAssigningAuthorityOid = "1.2.3.4.123456.1";
+	final String localIdNamespace = "WALDSPITAL";
+	final String localId = "waldspital-Id-1234";
 
 	// EPR-SPID settings
-	final String spidEprOid = "2.16.756.5.30.1.127.3.10.3";
-	final String spidEprNamespace = "SPID";
-	final String eprSPID = "761337610436974489";
+	final String spidAssigningAuthorityOid = "2.16.756.5.30.1.127.3.10.3";
+	final String spidNamespace = "SPID";
+	final String eprSPID = "761337713436974989"; // expected to be returned
+
+	// Community MPI setting
+	final String communityAssigningAuthorityOid = "1.3.6.1.4.1.12559.11.20.1";
+	final String communityIdNamespace = "CHPAM2";
 
 	/**
 	 * @throws Exception
@@ -92,21 +96,32 @@ class CHPixV3QueryTest {
 		affinityDomain.setPdqDestination(dest);
 		affinityDomain.setPixDestination(dest);
 
+		// TODO: spidAssigningAuthorityOid is overridden in data source setting below
 		PixV3Query pixV3Query = new PixV3Query(affinityDomain, localAssigningAuthorityOid, localIdNamespace,
-				spidEprOid, spidEprNamespace,
+				spidAssigningAuthorityOid, spidNamespace,
 				convenienceMasterPatientIndexV3Client.getContext(),
 				convenienceMasterPatientIndexV3Client.getAuditContext());
 
 		//
-		final Identifier identifier = new Identifier();
-		identifier.setValue(localId);
-		identifier.setSystem(FhirCommon.addUrnOid(localAssigningAuthorityOid));
+		final Identifier localIdentifier = new Identifier();
+		localIdentifier.setValue(localId);
+		localIdentifier.setSystem(FhirCommon.addUrnOid(localAssigningAuthorityOid));
 
 		final FhirPatient patient = new FhirPatient();
-		patient.getIdentifier().add(identifier);
+		patient.getIdentifier().add(localIdentifier);
 
-		String actualId = pixV3Query.queryPatientId(patient, null, null);
-		assertEquals(eprSPID, actualId);
+		// data source settings
+		List<String> queryDomainOids = new ArrayList();
+		// queryDomainOids.add(spidAssigningAuthorityOid);
+		// queryDomainOids.add(localAssigningAuthorityOid);
+		queryDomainOids.add(communityAssigningAuthorityOid);
+
+		// String actualId = pixV3Query.queryPatientId(patient, null, null);
+		// assertEquals(eprSPID, actualId);
+
+		List<String> returnedIds = pixV3Query.queryPatientId(patient, queryDomainOids, null, null, null);
+
+		LOGGER.info(returnedIds.toString());
 	}
 
 }

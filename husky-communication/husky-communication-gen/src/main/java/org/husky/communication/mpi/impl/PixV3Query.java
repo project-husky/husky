@@ -77,6 +77,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
      *
      * @return the list of string
      */
+    // TODO: queryDomainNamespaces redundant, not used in method
     public List<String> queryPatientId(org.husky.fhir.structures.gen.FhirPatient patient,
                                        List<String> queryDomainOids, List<String> queryDomainNamespaces, SecurityHeaderElement assertion,
                                        String messageId) {
@@ -93,6 +94,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
             }
         }
 
+        // prepare for call
         var v3PixConsumerQueryRequest = new PixV3QueryRequest();
 
         var senderDev = new Device();
@@ -114,6 +116,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
         final String homeCommunityPatientId = this.getHomeCommunityPatientId(patient);
 
         // return empty result set if the homeCommunityPatientId is not set
+        // TODO: should throw an exception, if null
         if (homeCommunityPatientId == null) {
             LOGGER.error("homeCommunityPatientId not provided");
             return domainToReturnOids;
@@ -268,6 +271,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
      * @return the string
      */
     public String queryPatientId(FhirPatient patient, SecurityHeaderElement assertion, String messageId) {
+
         List<String> ids = queryPatientId(patient, null, null, assertion, messageId);
 
         if (ids != null && !ids.isEmpty()) {
