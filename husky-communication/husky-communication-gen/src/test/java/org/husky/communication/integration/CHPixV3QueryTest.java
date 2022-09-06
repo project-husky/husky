@@ -107,7 +107,7 @@ class CHPixV3QueryTest {
 				convenienceMasterPatientIndexV3Client.getContext(),
 				convenienceMasterPatientIndexV3Client.getAuditContext());
 
-		//
+		// set the local patient id as input for the pix query
 		final Identifier localIdentifier = new Identifier();
 		localIdentifier.setValue(localId);
 		localIdentifier.setSystem(FhirCommon.addUrnOid(localAssigningAuthorityOid));
@@ -115,7 +115,9 @@ class CHPixV3QueryTest {
 		final FhirPatient patient = new FhirPatient();
 		patient.getIdentifier().add(localIdentifier);
 
-		// data source settings
+		// data source settings. By setting the assigning authority oid we tell the PIX Manager to return
+		// the patient Id assigned by the authority. The query should return the patient identifiers
+		// in the order the assigning authority oids are added.
 		List<String> queryDomainOids = new ArrayList();
 		queryDomainOids.add(spidAssigningAuthorityOid);
 		queryDomainOids.add(communityAssigningAuthorityOid);
@@ -126,7 +128,8 @@ class CHPixV3QueryTest {
 
 		assertEquals(returnedIds.get(0), eprSPID);
 
-		// TODO this should return the ids in the order set in the queryDomainIds, but does not so in gazelle test system
+		// In the Swiss EPR the PIX Manager should return the ids in the order set in the queryDomainIds, but does not so in
+		// gazelle test system.
 		// assertEquals(returnedIds.get(1), communityId);
 	}
 
