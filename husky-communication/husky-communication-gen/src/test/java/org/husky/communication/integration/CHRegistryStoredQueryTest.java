@@ -137,14 +137,14 @@ class CHRegistryStoredQueryTest extends XdsTestUtils {
 
 		convenienceCommunication.setAffinityDomain(affinityDomain);
 
-		Identificator patientId = new Identificator("1.3.6.1.4.1.21367.13.20.1000", "IHERED-1024");
+		Identificator globalPatientId = new Identificator("1.3.6.1.4.1.21367.13.20.1000", "IHERED-1024");
 
 		final Code type = new Code("41000179103", "2.16.840.1.113883.6.96", "Immunization Record (record artifact)");
 		final Code clazz = new Code("184216000", "2.16.840.1.113883.6.96", "Patient record type (record artifact)");
 		final Code format = new Code("urn:che:epr:EPR_Unstructured_Document", "2.16.756.5.30.1.127.3.10.10",
 				"Unstructured EPR document");
 
-		FindDocumentsQuery findDocumentsQuery = new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED, type, clazz, format);
+		FindDocumentsQuery findDocumentsQuery = new FindDocumentsQuery(globalPatientId, AvailabilityStatus.APPROVED, type, clazz, format);
 
 		// Get the X-User Assertion to authorize the Document Submission.
 		Assertion xUserAssertion = getXUserAssertion();
