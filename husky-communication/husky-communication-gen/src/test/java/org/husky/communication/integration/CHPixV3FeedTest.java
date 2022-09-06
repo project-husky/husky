@@ -55,6 +55,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @EnableAutoConfiguration
 class CHPixV3FeedTest {
 
+
 	/** The SLF4J logger instance. */
 	protected static Logger LOGGER = LoggerFactory.getLogger(CHPixV3FeedTest.class);
 
@@ -65,17 +66,20 @@ class CHPixV3FeedTest {
 	protected AuditContext auditContext;
 
 	final private String pixUri = "https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PIXManager_Service/PIXManager_PortType";
+	final String facilityName = "Waldspital Bern"; // "2.16.840.1.113883.3.72.6.1";
 
-	final private String facilityName = "Waldspital Bern"; // "2.16.840.1.113883.3.72.6.1";
+	final String receiverApplicationOid = "1.3.6.1.4.1.12559.11.20.1.10";
+	final String senderApplicationOid = "1.2.3.4";
 
-	final private String receiverApplicationOid = "1.3.6.1.4.1.12559.11.20.1.10";
-	final private String senderApplicationOid = "1.2.3.4";
+	// local ID settings
+	final String localAssigningAuthorityOid = "1.2.3.4";
+	final String localIdNamespace = "WALDSPITAL";
+	final String localId = "waldspital-Id-1234";
 
-	final private String localAssigningAuthorityOid = "1.2.3.4";
-	final private String localIdNamespace = "WALDSPITAL";
-	
-	final private String spidAssigningAuthorityOid = "2.16.756.5.30.1.127.3.10.3";
-	final private String spidNamespace = "SPID";
+	// EPR-SPID settings
+	final String spidAssigningAuthorityOid = "2.16.756.5.30.1.127.3.10.3";
+	final String spidNamespace = "SPID";
+	final String eprSPID = "761337613436974989";
 
 	/**
 	 * @throws Exception
@@ -111,13 +115,13 @@ class CHPixV3FeedTest {
 
 		// the local ID
 		final Identifier identifier = new Identifier();
-		identifier.setValue("waldspital-Id-1234");
+		identifier.setValue(localId);
 		identifier.setSystem(FhirCommon.addUrnOid(localAssigningAuthorityOid));
 		patient.getIdentifier().add(identifier);
 
 		// the EPR SPID
 		final Identifier identifier2 = new Identifier();
-		identifier2.setValue("761337613436974989");
+		identifier2.setValue(eprSPID);
 		identifier2.setSystem(spidAssigningAuthorityOid);
 		patient.getIdentifier().add(identifier2);
 

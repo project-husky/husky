@@ -50,18 +50,21 @@ class CHPixV3QueryTest {
 
 	@Autowired
 	protected AuditContext auditContext;
-	final private String pixUri = "https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PIXManager_Service/PIXManager_PortType";
+	final String pixUri = "https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PIXManager_Service/PIXManager_PortType";
 
-	final private String facilityName = "Waldspital Bern"; // "2.16.840.1.113883.3.72.6.1";
+	final String facilityName = "Waldspital Bern"; // "2.16.840.1.113883.3.72.6.1";
+	final String receiverApplicationOid = "1.3.6.1.4.1.12559.11.20.1.10";
+	final String senderApplicationOid = "1.2.3.4";
 
-	final private String receiverApplicationOid = "1.3.6.1.4.1.12559.11.20.1.10";
-	final private String senderApplicationOid = "1.2.3.4";
+	// local ID settings
+	final String localAssigningAuthorityOid = "1.3.6.1.4.1.12559.11.20.1";
+	final String localIdNamespace = "CHPAM2";
+	final String localId = "CHPAM4489";
 
-	final private String homeCommunityOid = "1.3.6.1.4.1.12559.11.20.1";
-	final private String homeCommunityNamespace = "CHPAM2";
-	
-	final private String spidEprOid = "2.16.756.5.30.1.127.3.10.3";
-	final private String spidEprNamespace = "SPID";
+	// EPR-SPID settings
+	final String spidEprOid = "2.16.756.5.30.1.127.3.10.3";
+	final String spidEprNamespace = "SPID";
+	final String eprSPID = "761337610436974489";
 
 	/**
 	 * @throws Exception
@@ -74,12 +77,7 @@ class CHPixV3QueryTest {
 	}
 	
 	/**
-	 * The purpose of this test is to cross reference the id of patient Léo Gerard
-	 * retrieve SPID of patient using home community ID CHPAM4489
-	 * 
-	 * ids of patient in patient manager
-	 * 761337610436974489^^^&1.3.6.1.4.1.21367.2017.2.5.10&
-     * CHPAM4489^^^&1.3.6.1.4.1.12559.11.20.1&
+	 *
 	 */
 	@Test
 	void queryTest() {
@@ -94,22 +92,21 @@ class CHPixV3QueryTest {
 		affinityDomain.setPdqDestination(dest);
 		affinityDomain.setPixDestination(dest);
 
-		PixV3Query pixV3Query = new PixV3Query(affinityDomain, homeCommunityOid, homeCommunityNamespace,
+		PixV3Query pixV3Query = new PixV3Query(affinityDomain, localAssigningAuthorityOid, localIdNamespace,
 				spidEprOid, spidEprNamespace,
 				convenienceMasterPatientIndexV3Client.getContext(),
 				convenienceMasterPatientIndexV3Client.getAuditContext());
 
 		//
 		final Identifier identifier = new Identifier();
-		identifier.setValue("CHPAM4489");
-		identifier.setSystem(FhirCommon.addUrnOid(homeCommunityOid));
+		identifier.setValue(localId);
+		identifier.setSystem(FhirCommon.addUrnOid(localAssigningAuthorityOid));
 
 		final FhirPatient patient = new FhirPatient();
 		patient.getIdentifier().add(identifier);
 
-		String patId = pixV3Query.queryPatientId(patient, null, null);
-
-		assertEquals("761337610436974489", patId);
+		String actualId = pixV3Query.queryPatientId(patient, null, null);
+		assertEquals(eprSPID, actualId);
 	}
 
 }
