@@ -35,6 +35,9 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 /**
  *
  */
@@ -64,11 +67,13 @@ class CHPixV3QueryTest {
 	// EPR-SPID settings
 	final String spidAssigningAuthorityOid = "2.16.756.5.30.1.127.3.10.3";
 	final String spidNamespace = "SPID";
+
 	final String eprSPID = "761337713436974989"; // expected to be returned
 
 	// Community MPI setting
 	final String communityAssigningAuthorityOid = "1.3.6.1.4.1.12559.11.20.1";
 	final String communityIdNamespace = "CHPAM2";
+	final String communityId = "IHE-12361761818786818818"; // adjust to value from community PIX Manager
 
 	/**
 	 * @throws Exception
@@ -96,7 +101,6 @@ class CHPixV3QueryTest {
 		affinityDomain.setPdqDestination(dest);
 		affinityDomain.setPixDestination(dest);
 
-		// TODO: spidAssigningAuthorityOid is overridden in data source setting below
 		PixV3Query pixV3Query = new PixV3Query(affinityDomain, localAssigningAuthorityOid, localIdNamespace,
 				spidAssigningAuthorityOid, spidNamespace,
 				convenienceMasterPatientIndexV3Client.getContext(),
@@ -112,16 +116,17 @@ class CHPixV3QueryTest {
 
 		// data source settings
 		List<String> queryDomainOids = new ArrayList();
-		// queryDomainOids.add(spidAssigningAuthorityOid);
-		// queryDomainOids.add(localAssigningAuthorityOid);
+		queryDomainOids.add(spidAssigningAuthorityOid);
 		queryDomainOids.add(communityAssigningAuthorityOid);
-
-		// String actualId = pixV3Query.queryPatientId(patient, null, null);
-		// assertEquals(eprSPID, actualId);
 
 		List<String> returnedIds = pixV3Query.queryPatientId(patient, queryDomainOids, null, null, null);
 
-		LOGGER.info(returnedIds.toString());
+		assertTrue(returnedIds.size() > 0);
+
+		assertEquals(returnedIds.get(0), eprSPID);
+
+		// TODO this should return the ids in the order set in the queryDomainIds, but does not so in gazelle test system
+		// assertEquals(returnedIds.get(1), communityId);
 	}
 
 }
