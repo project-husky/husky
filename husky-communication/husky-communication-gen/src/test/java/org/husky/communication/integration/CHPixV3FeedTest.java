@@ -71,12 +71,13 @@ class CHPixV3FeedTest {
 	final String receiverApplicationOid = "1.3.6.1.4.1.12559.11.20.1.10";
 	final String senderApplicationOid = "1.2.3.4.123456";
 
-	// local ID settings
+	// The local patient ID to be registered in the PIX Feed transaction. The local id is the
+	// id used in the client system (portal, primary system, etc.) to identify the patient locally.
 	final String localAssigningAuthorityOid = "1.2.3.4.123456.1";
 	final String localIdNamespace = "WALDSPITAL";
 	final String localId = "waldspital-Id-1234";
 
-	// EPR-SPID settings
+	// The Swiss unique patient identifier to be registered with the patient.
 	final String spidAssigningAuthorityOid = "2.16.756.5.30.1.127.3.10.3";
 	final String spidNamespace = "SPID";
 	final String eprSPID = "761337713436974989";
