@@ -6,7 +6,7 @@ bin
 work
 .DS_Store
 .sts4-cache
-/log/*
+log
 /log/
 **/log/*
 .idea/
