@@ -163,11 +163,12 @@ class CHRegistryStoredQueryPGTest extends XdsTestUtils {
 		LOGGER.info("**");
 		LOGGER.info("Document Entry size is "+response.getDocumentEntries().size());
 
+		// log the data required for adjacent RetrieveDocumentSet transactions
 		for (DocumentEntry entry : response.getDocumentEntries()) {
-			DocumentEntry documentEntry = response.getDocumentEntries().get(0);
 			// LOGGER.info("Document entry is " + documentEntry);
-			LOGGER.info("documentId = " + documentEntry.getUniqueId());
-			LOGGER.info("repositoryUniqueId = " + documentEntry.getRepositoryUniqueId());
+			LOGGER.info("documentId = " + entry.getUniqueId());
+			LOGGER.info("repositoryUniqueId = " + entry.getRepositoryUniqueId());
+			LOGGER.info("homeCommunityId = "+ entry.getHomeCommunityId());
 			LOGGER.info("");
 		}
 
