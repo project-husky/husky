@@ -94,7 +94,7 @@ class CHProvideAndRegisterDocumentSetPGTest extends XdsTestUtils {
         final Destination dest = new Destination();
 
         // set the URL of the community repository you want to store the document to
-        final String repositoryURL = "http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_init_gw_testing/rep/prb";
+        final String repositoryURL = "https://epdplayground.i4mi.bfh.ch:6443/Repository/services/RepositoryService";
 
         dest.setUri(new URI(repositoryURL));
 
@@ -149,6 +149,9 @@ class CHProvideAndRegisterDocumentSetPGTest extends XdsTestUtils {
         final Code role = new Code("HCP", "2.16.756.5.30.1.127.3.10.6", "Healthcare professional");
         author.setRoleFunction(role);
 
+        final Code speciality = new Code("1050", "2.16.756.5.30.1.127.3.5", "Other");
+        author.setSpeciality(speciality);
+
         documentMetadata.addAuthor(author);
 
         final Identificator globalId = new Identificator(globalAssigningAuthorityOid, globalPatientId);
@@ -157,7 +160,7 @@ class CHProvideAndRegisterDocumentSetPGTest extends XdsTestUtils {
         final Identificator localId = new Identificator(localAssigningAuthorityOid, localPatientId);
         documentMetadata.setSourcePatientId(localId);
 
-        documentMetadata.setCodedLanguage(LanguageCode.GERMAN_CODE);
+        documentMetadata.setCodedLanguage(LanguageCode.ENGLISH_CODE);
 
         final Code type = new Code("41000179103", "2.16.840.1.113883.6.96", "Immunization Record (record artifact)");
         documentMetadata.setTypeCode(type);
