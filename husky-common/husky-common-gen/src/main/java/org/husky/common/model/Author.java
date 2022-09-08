@@ -511,7 +511,8 @@ public class Author {
      * @return code the speciality code
      */
     public Code getSpeciality() {
-        return new Code(mAuthor.getAssignedAuthor().getCode());
+        CE code = mAuthor.getAssignedAuthor().getCode();
+        return code!=null ? new Code(mAuthor.getAssignedAuthor().getCode()): null;
     }
 
     /**

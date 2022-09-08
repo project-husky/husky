@@ -29,6 +29,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openehealth.ipf.commons.core.OidGenerator;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.Response;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.Status;
 import org.opensaml.core.config.InitializationService;
@@ -44,6 +45,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.URI;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -137,6 +141,15 @@ class CHProvideAndRegisterDocumentSetPGTest extends XdsTestUtils {
 
         documentMetadata.setTitle("Impfung");
 
+        // add a extra metadata attribute
+        String key = "urn:e-health-suisse:2020:originalProviderRole";
+        String code = "HCP^^^&2.16.756.5.30.1.127.3.10.6&ISO"; // TODO should be serialized Code
+        DocumentEntry xDoc = documentMetadata.getXDoc();
+        Map<String, List<String>> extraMetadata = new HashMap();
+        List values = List.of(code);
+        extraMetadata.put(key,values);
+        xDoc.setExtraMetadata(extraMetadata);
+
         // set the author data
         final Name name = new Name(new NameBaseType());
         name.setGiven("Peter");
@@ -149,8 +162,10 @@ class CHProvideAndRegisterDocumentSetPGTest extends XdsTestUtils {
         final Code role = new Code("HCP", "2.16.756.5.30.1.127.3.10.6", "Healthcare professional");
         author.setRoleFunction(role);
 
-        final Code speciality = new Code("1050", "2.16.756.5.30.1.127.3.5", "Other");
-        author.setSpeciality(speciality);
+        var codeS = Code.createHl7CdaR2Cd(role);
+
+        // final Code speciality = new Code("1050", "2.16.756.5.30.1.127.3.5", "Other");
+        // author.setSpeciality(speciality);
 
         documentMetadata.addAuthor(author);
 

@@ -13,9 +13,7 @@ package org.husky.common.communication;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import org.husky.common.enums.ConfidentialityCode;
 import org.husky.common.enums.DocumentDescriptor;
@@ -1077,6 +1075,13 @@ public class DocumentMetadata {
 
 	public POCDMT000040ClinicalDocument getCda() {
 		return cda;
+	}
+
+	/**
+	 * @return the wrapped IPF document entry object (metadata)
+	 */
+	public DocumentEntry getXDoc (){
+		return xDoc;
 	}
 
 }
