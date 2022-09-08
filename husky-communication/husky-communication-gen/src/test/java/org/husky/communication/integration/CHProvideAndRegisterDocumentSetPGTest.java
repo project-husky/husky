@@ -162,11 +162,6 @@ class CHProvideAndRegisterDocumentSetPGTest extends XdsTestUtils {
         final Code role = new Code("HCP", "2.16.756.5.30.1.127.3.10.6", "Healthcare professional");
         author.setRoleFunction(role);
 
-        var codeS = Code.createHl7CdaR2Cd(role);
-
-        // final Code speciality = new Code("1050", "2.16.756.5.30.1.127.3.5", "Other");
-        // author.setSpeciality(speciality);
-
         documentMetadata.addAuthor(author);
 
         final Identificator globalId = new Identificator(globalAssigningAuthorityOid, globalPatientId);
@@ -210,13 +205,27 @@ class CHProvideAndRegisterDocumentSetPGTest extends XdsTestUtils {
 
         submissionSetMetadata.setDestinationPatientId(globalId);
 
-        submissionSetMetadata.getAuthor().add(authorPerson);
+        // set the provider data
+        final Name providerName = new Name(new NameBaseType());
+        providerName.setGiven("Gabriela");
+        providerName.setFamily("Meier");
+        providerName.setPrefix("Dr. med");
+
+        final Author provider = new Author();
+        provider.addName(providerName);
+
+        // TODO:
+        // Workaround for EPD Playground: When adding a submission set author we run into a problem with the
+        // role resulting in a value set error. We need to clarify with ITH icoserve what is expected.
+        // Not setting the submission set author solves the problem, but is not compliant with the Swiss EPR
+        // specifications.
+
+        // final Code providerRole = new Code("HCP", "2.16.756.5.30.1.127.3.10.6", "Healthcare professional");
+        // provider.setRoleFunction(providerRole);
+        // submissionSetMetadata.setAuthor(provider);
 
         final Code contentType = new Code("71388002", "2.16.840.1.113883.6.96", "Procedure (procedure)");
         submissionSetMetadata.setContentTypeCode(contentType);
-
-        // Use author data from document metadata
-        submissionSetMetadata.setAuthor(author);
 
         // provide and register the document
         final Response response = convenienceCommunication.submit(submissionSetMetadata, null, null);
