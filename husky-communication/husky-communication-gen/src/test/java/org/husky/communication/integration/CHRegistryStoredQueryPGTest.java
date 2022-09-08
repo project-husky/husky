@@ -162,8 +162,15 @@ class CHRegistryStoredQueryPGTest extends XdsTestUtils {
 		// output details of the first entry found
 		LOGGER.info("**");
 		LOGGER.info("Document Entry size is "+response.getDocumentEntries().size());
-		DocumentEntry documentEntry = response.getDocumentEntries().get(0);
-		LOGGER.info("First document entry is "+documentEntry);
+
+		for (DocumentEntry entry : response.getDocumentEntries()) {
+			DocumentEntry documentEntry = response.getDocumentEntries().get(0);
+			// LOGGER.info("Document entry is " + documentEntry);
+			LOGGER.info("documentId = " + documentEntry.getUniqueId());
+			LOGGER.info("repositoryUniqueId = " + documentEntry.getRepositoryUniqueId());
+			LOGGER.info("");
+		}
+
 		LOGGER.info("**");
 
 	}
