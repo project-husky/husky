@@ -23,6 +23,7 @@ import org.husky.common.model.Author;
 import org.husky.common.model.Code;
 import org.husky.common.model.Identificator;
 import org.husky.common.model.Name;
+import org.husky.common.utils.datatypes.IheCx;
 import org.husky.communication.ConvenienceCommunication;
 import org.husky.communication.testhelper.TestApplication;
 import org.husky.communication.testhelper.XdsTestUtils;
@@ -270,8 +271,9 @@ class CHProvideAndRegisterDocumentSetTest extends XdsTestUtils {
                     .displayName("Normal Access").buildObject(PurposeOfUse.DEFAULT_NS_URI,
                             PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME, PurposeOfUse.DEFAULT_PREFIX);
 
-            String eprSpid = spid+"^^^SPID&"+spidAssigningAuthorityOid+"&ISO";
-            // String eprSpid = "761337610411265304^^^SPID&2.16.756.5.30.1.127.3.10.3&ISO";
+            // set the EPR SPID patient id
+            final IheCx cx = new IheCx(spid, spidAssigningAuthorityOid);
+            String eprSpid = cx.render();
 
             // build the  X-User Assertion request
             var assertionRequest = new XUserAssertionRequestBuilderImpl().requestType(RequestType.WST_ISSUE)
