@@ -303,11 +303,8 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
             final var address = author.getAddresses().get(0);
             final var addressNodes = new ArrayList<>(7);
 
-            if (address.getStreetName() != null) {
-                nodes.add(narDom.text(address.getStreetName()));
-                if (address.getHouseNumber() != null) {
-                    nodes.add(narDom.text(" " + address.getHouseNumber()));
-                }
+            for (final String addressLine : address.getStreetAddressLines()) {
+                nodes.add(narDom.text(addressLine));
                 nodes.add(narDom.br());
             }
             if (address.getPostalCode() != null || address.getCity() != null) {
