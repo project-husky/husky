@@ -17,7 +17,6 @@ import java.io.StringReader;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 /**
  * Test bench of the {@link AddressReader}
  *
@@ -25,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class AddressReaderTest {
 
-    private final static Class<?> UNMARSHALLED_CLASS = POCDMT000040IntendedRecipient.class;
+    private final static Class<?> UNMARSHALLED_CLASS = AD.class;
     private final Unmarshaller UNMARSHALLER;
 
     public AddressReaderTest() throws JAXBException {
@@ -34,78 +33,53 @@ class AddressReaderTest {
     }
 
     @Test
-    void testGetStreetAddressLines() throws Exception {
+    void testFullAddress() throws Exception {
         var addressReader = this.unmarshall("""
-                <addr>
-                    <country>CH</country>
-                    <city>Musterhausen</city>
-                    <postalCode>9999</postalCode>
-                    <houseNumber>3</houseNumber>
-                    <additionalLocator>OG Ost</additionalLocator>
-                    <streetAddressLine>Chalet Edelweiss</streetAddressLine>
-                    <streetAddressLine>Wegmüller Family</streetAddressLine>
-                    <streetName>Wishard Blvd</streetName>
-                </addr>
+                <country>CH</country>
+                <city>Musterhausen</city>
+                <postalCode>9999</postalCode>
+                <additionalLocator>OG Ost</additionalLocator>
+                <streetAddressLine>Chalet Edelweiss</streetAddressLine>
+                <streetAddressLine>Wegmüller Family</streetAddressLine>
+                <state>GE</state>
+                <postBox>1234</postBox>
                 """);
 
         assertEquals(2, addressReader.getStreetAddressLines().size());
         assertEquals("Chalet Edelweiss", addressReader.getStreetAddressLines().get(0));
         assertEquals("Wegmüller Family", addressReader.getStreetAddressLines().get(1));
+        assertEquals("CH", addressReader.getCountry().orElse(null));
+        assertEquals("Musterhausen", addressReader.getCity().orElse(null));
+        assertEquals("9999", addressReader.getPostalCode().orElse(null));
+        assertEquals("GE", addressReader.getState().orElse(null));
+        assertEquals("1234", addressReader.getPostbox().orElse(null));
+        assertEquals("OG Ost", addressReader.getAdditionalLocator().orElse(null));
     }
 
     @Test
-    void testGetEmptyStreetAddressLines() throws Exception {
-        var addressReader = this.unmarshall("""
-                <addr>
-                    <country>CH</country>
-                    <city>Musterhausen</city>
-                    <postalCode>9999</postalCode>
-                    <houseNumber>3</houseNumber>
-                    <additionalLocator>OG Ost</additionalLocator>
-                    <streetName>Wishard Blvd</streetName>
-                </addr>
-                """);
+    void testEmptyAddress() throws Exception {
+        var addressReader = this.unmarshall("");
 
         assertTrue(addressReader.getStreetAddressLines().isEmpty());
-    }
-
-
-    @Test
-    void testGetState() throws Exception {
-        var addressReader = this.unmarshall("""
-                <addr>
-                    <country>CH</country>
-                    <city>Musterhausen</city>
-                    <postalCode>9999</postalCode>
-                    <houseNumber>3</houseNumber>
-                    <additionalLocator>OG Ost</additionalLocator>
-                    <streetAddressLine>Chalet Edelweiss</streetAddressLine>
-                    <streetAddressLine>Wegmüller Family</streetAddressLine>
-                    <streetName>Wishard Blvd</streetName>
-                </addr>
-                """);
-
-        assertFalse(addressReader.getState().isPresent());
+        assertTrue(addressReader.getAdditionalLocator().isEmpty());
+        assertTrue(addressReader.getCity().isEmpty());
+        assertTrue(addressReader.getCountry().isEmpty());
+        assertTrue(addressReader.getPostbox().isEmpty());
+        assertTrue(addressReader.getPostalCode().isEmpty());
+        assertTrue(addressReader.getState().isEmpty());
     }
 
     private AddressReader unmarshall(final String addr) throws ParserConfigurationException, IOException, SAXException, JAXBException {
-        final var completeElement = "<informationRecipient typeCode=\"PRCP\" xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">"
-                + "<templateId root=\"2.16.756.5.30.1.1.10.2.4\" />"
+        final var completeElement = "<addr xsi:type=\"AD\" xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3" +
+                ".org/2001/XMLSchema-instance\">"
                 + addr
-                + "    <informationRecipient>\n" +
-                "          <name>\n" +
-                "              <family>Wegmüller</family>\n" +
-                "              <given>Monika</given>\n" +
-                "          </name>\n" +
-                "      </informationRecipient>"
-                + "</informationRecipient>";
+                + "</addr>";
 
         final var document =
                 XmlFactories.newSafeDocumentBuilder().parse(new InputSource(new StringReader(completeElement)));
 
         final Object root = UNMARSHALLER.unmarshal(document, UNMARSHALLED_CLASS);
-        final var address = (POCDMT000040IntendedRecipient) JAXBIntrospector.getValue(root);
-        return new AddressReader(address.getAddr().get(0));
+        final var address = (AD) JAXBIntrospector.getValue(root);
+        return new AddressReader(address);
     }
-
 }

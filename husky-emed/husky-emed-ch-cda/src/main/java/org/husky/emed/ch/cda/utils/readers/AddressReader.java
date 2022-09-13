@@ -76,6 +76,20 @@ public record AddressReader(AD address) {
     }
 
     /**
+     * Gets the country, if any.
+     */
+    public Optional<String> getAdditionalLocator() {
+        return this.getField(AdxpAdditionalLocator.class);
+    }
+
+    /**
+     * Gets the country, if any.
+     */
+    public Optional<String> getPostbox() {
+        return this.getField(AdxpPostBox.class);
+    }
+
+    /**
      * Gets a field by its type.
      *
      * @param type The type.
@@ -101,7 +115,9 @@ public record AddressReader(AD address) {
                 this.getStreetAddressLines(),
                 this.getCity().orElse(null),
                 this.getPostalCode().orElse(null),
-                this.getCountry().orElse(null)
-        );
+                this.getCountry().orElse(null),
+                this.getAdditionalLocator().orElse(null),
+                this.getPostbox().orElse(null),
+                this.getState().orElse(null));
     }
 }
