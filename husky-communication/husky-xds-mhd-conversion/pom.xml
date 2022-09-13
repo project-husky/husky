@@ -34,6 +34,11 @@
             <version>5.6.27</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.husky.common</groupId>
+            <artifactId>husky-common-gen</artifactId>
+        </dependency>
+
         <!-- Tests -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -48,6 +53,10 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.husky.communication</groupId>
+            <artifactId>husky-communication-ch</artifactId>
         </dependency>
     </dependencies>
 
