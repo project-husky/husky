@@ -13,6 +13,7 @@ import org.husky.common.hl7cdar2.*;
 import org.husky.emed.ch.models.common.AddressDigest;
 
 import javax.xml.bind.JAXBElement;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -33,9 +34,9 @@ public record AddressReader(AD address) {
     }
 
     /**
-     * Gets the street address, if any.
+     * Gets the street address lines.
      */
-    public Optional<String> getStreetAddress() {
+    public List<String> getStreetAddressLines() {
         return this.address.getContent().stream()
                 .filter(JAXBElement.class::isInstance)
                 .map(JAXBElement.class::cast)
@@ -43,39 +44,7 @@ public record AddressReader(AD address) {
                 .filter(AdxpStreetAddressLine.class::isInstance)
                 .map(AdxpStreetAddressLine.class::cast)
                 .map(AdxpStreetAddressLine::getMergedXmlMixed)
-                .findFirst();
-    }
-
-    /**
-     * Gets the additional street address, if any.
-     */
-    public Optional<String> getAdditionalStreetAddress() {
-        final var addressLines = this.address.getContent().stream()
-                .filter(JAXBElement.class::isInstance)
-                .map(JAXBElement.class::cast)
-                .map(JAXBElement::getValue)
-                .filter(AdxpStreetAddressLine.class::isInstance)
-                .map(AdxpStreetAddressLine.class::cast)
-                .map(AdxpStreetAddressLine::getMergedXmlMixed)
                 .toList();
-        if (addressLines.size() > 1) {
-            return Optional.of(addressLines.get(1));
-        }
-        return Optional.empty();
-    }
-
-    /**
-     * Gets the street name, if any.
-     */
-    public Optional<String> getStreetName() {
-        return this.getField(AdxpStreetName.class);
-    }
-
-    /**
-     * Gets the house number, if any.
-     */
-    public Optional<String> getHouseNumber() {
-        return this.getField(AdxpHouseNumber.class);
     }
 
     /**
@@ -129,8 +98,7 @@ public record AddressReader(AD address) {
      */
     public AddressDigest toDigest() {
         return new AddressDigest(
-                this.getStreetName().orElse(null),
-                this.getHouseNumber().orElse(null),
+                this.getStreetAddressLines(),
                 this.getCity().orElse(null),
                 this.getPostalCode().orElse(null),
                 this.getCountry().orElse(null)

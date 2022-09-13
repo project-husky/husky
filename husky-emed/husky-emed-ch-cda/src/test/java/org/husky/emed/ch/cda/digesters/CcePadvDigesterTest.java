@@ -65,7 +65,7 @@ class CcePadvDigesterTest {
         emedEntryDigestServiceImpl.addAll(this.getEntryDigests(DIR_SAMPLES_BY_HAND_MTP + "MTP_01_valid.xml", digester));
         final var padvDocument = this.loadDoc(DIR_SAMPLES_BY_HAND_PADV + "valid/PADV_01_valid.xml");
         final var digest = digester.digest(padvDocument);
-        
+
         assertNotNull(digest);
         assertInstanceOf(EmedPadvDocumentDigest.class, digest);
         final var padvDigest = (EmedPadvDocumentDigest) digest;
@@ -102,8 +102,6 @@ class CcePadvDigesterTest {
         assertEquals("CH", padvDigest.getRecipients().get(0).getAddresses().get(0).getCountry());
         assertEquals("Zürich", padvDigest.getRecipients().get(0).getAddresses().get(0).getCity());
         assertEquals("8003", padvDigest.getRecipients().get(0).getAddresses().get(0).getPostalCode());
-        assertNull(padvDigest.getRecipients().get(0).getAddresses().get(0).getStreetName());
-        assertNull(padvDigest.getRecipients().get(0).getAddresses().get(0).getHouseNumber());
 
         // Entry
         assertNotNull(padvDigest.getPadvEntryDigest());
@@ -169,8 +167,6 @@ class CcePadvDigesterTest {
         assertEquals("CH", padvDigest.getRecipients().get(0).getAddresses().get(0).getCountry());
         assertEquals("Zürich", padvDigest.getRecipients().get(0).getAddresses().get(0).getCity());
         assertEquals("8003", padvDigest.getRecipients().get(0).getAddresses().get(0).getPostalCode());
-        assertNull(padvDigest.getRecipients().get(0).getAddresses().get(0).getStreetName());
-        assertNull(padvDigest.getRecipients().get(0).getAddresses().get(0).getHouseNumber());
 
         // Entry
         assertNotNull(padvDigest.getPadvEntryDigest());
@@ -246,8 +242,6 @@ class CcePadvDigesterTest {
         assertEquals("CH", padvDigest.getRecipients().get(0).getAddresses().get(0).getCountry());
         assertEquals("Zürich", padvDigest.getRecipients().get(0).getAddresses().get(0).getCity());
         assertEquals("8003", padvDigest.getRecipients().get(0).getAddresses().get(0).getPostalCode());
-        assertNull(padvDigest.getRecipients().get(0).getAddresses().get(0).getStreetName());
-        assertNull(padvDigest.getRecipients().get(0).getAddresses().get(0).getHouseNumber());
 
         // Entry
         assertNotNull(padvDigest.getPadvEntryDigest());
@@ -324,8 +318,6 @@ class CcePadvDigesterTest {
         assertEquals("CH", padvDigest.getRecipients().get(0).getAddresses().get(0).getCountry());
         assertEquals("Zürich", padvDigest.getRecipients().get(0).getAddresses().get(0).getCity());
         assertEquals("8003", padvDigest.getRecipients().get(0).getAddresses().get(0).getPostalCode());
-        assertNull(padvDigest.getRecipients().get(0).getAddresses().get(0).getStreetName());
-        assertNull(padvDigest.getRecipients().get(0).getAddresses().get(0).getHouseNumber());
 
         // Entry
         assertNotNull(padvDigest.getPadvEntryDigest());
@@ -402,8 +394,6 @@ class CcePadvDigesterTest {
         assertEquals("CH", padvDigest.getRecipients().get(0).getAddresses().get(0).getCountry());
         assertEquals("Zürich", padvDigest.getRecipients().get(0).getAddresses().get(0).getCity());
         assertEquals("8003", padvDigest.getRecipients().get(0).getAddresses().get(0).getPostalCode());
-        assertNull(padvDigest.getRecipients().get(0).getAddresses().get(0).getStreetName());
-        assertNull(padvDigest.getRecipients().get(0).getAddresses().get(0).getHouseNumber());
 
         // Entry
         assertNotNull(padvDigest.getPadvEntryDigest());
@@ -468,8 +458,6 @@ class CcePadvDigesterTest {
         assertEquals("CH", padvDigest.getRecipients().get(0).getAddresses().get(0).getCountry());
         assertEquals("Zürich", padvDigest.getRecipients().get(0).getAddresses().get(0).getCity());
         assertEquals("8003", padvDigest.getRecipients().get(0).getAddresses().get(0).getPostalCode());
-        assertNull(padvDigest.getRecipients().get(0).getAddresses().get(0).getStreetName());
-        assertNull(padvDigest.getRecipients().get(0).getAddresses().get(0).getHouseNumber());
 
         // Entry
         assertNotNull(padvDigest.getPadvEntryDigest());
@@ -535,8 +523,6 @@ class CcePadvDigesterTest {
         assertEquals("CH", padvDigest.getRecipients().get(0).getAddresses().get(0).getCountry());
         assertEquals("Zürich", padvDigest.getRecipients().get(0).getAddresses().get(0).getCity());
         assertEquals("8003", padvDigest.getRecipients().get(0).getAddresses().get(0).getPostalCode());
-        assertNull(padvDigest.getRecipients().get(0).getAddresses().get(0).getStreetName());
-        assertNull(padvDigest.getRecipients().get(0).getAddresses().get(0).getHouseNumber());
 
         // Entry
         assertNotNull(padvDigest.getPadvEntryDigest());
@@ -602,8 +588,6 @@ class CcePadvDigesterTest {
         assertEquals("CH", padvDigest.getRecipients().get(0).getAddresses().get(0).getCountry());
         assertEquals("Zürich", padvDigest.getRecipients().get(0).getAddresses().get(0).getCity());
         assertEquals("8003", padvDigest.getRecipients().get(0).getAddresses().get(0).getPostalCode());
-        assertNull(padvDigest.getRecipients().get(0).getAddresses().get(0).getStreetName());
-        assertNull(padvDigest.getRecipients().get(0).getAddresses().get(0).getHouseNumber());
 
         // Entry
         assertNotNull(padvDigest.getPadvEntryDigest());

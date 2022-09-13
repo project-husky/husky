@@ -34,7 +34,7 @@ class AddressReaderTest {
     }
 
     @Test
-    void testGetStreetAddress() throws Exception {
+    void testGetStreetAddressLines() throws Exception {
         var addressReader = this.unmarshall("""
                 <addr>
                     <country>CH</country>
@@ -48,12 +48,13 @@ class AddressReaderTest {
                 </addr>
                 """);
 
-        assertTrue(addressReader.getStreetAddress().isPresent());
-        assertEquals("Chalet Edelweiss", addressReader.getStreetAddress().get());
+        assertEquals(2, addressReader.getStreetAddressLines().size());
+        assertEquals("Chalet Edelweiss", addressReader.getStreetAddressLines().get(0));
+        assertEquals("Wegmüller Family", addressReader.getStreetAddressLines().get(1));
     }
 
     @Test
-    void testGetAdditionalStreetAddress() throws Exception {
+    void testGetEmptyStreetAddressLines() throws Exception {
         var addressReader = this.unmarshall("""
                 <addr>
                     <country>CH</country>
@@ -61,31 +62,11 @@ class AddressReaderTest {
                     <postalCode>9999</postalCode>
                     <houseNumber>3</houseNumber>
                     <additionalLocator>OG Ost</additionalLocator>
-                    <streetAddressLine>Chalet Edelweiss</streetAddressLine>
-                    <streetAddressLine>Wegmüller Family</streetAddressLine>
                     <streetName>Wishard Blvd</streetName>
                 </addr>
                 """);
 
-        assertTrue(addressReader.getAdditionalStreetAddress().isPresent());
-        assertEquals("Wegmüller Family", addressReader.getAdditionalStreetAddress().get());
-    }
-
-    @Test
-    void testGetEmptyAdditionalStreetAddress() throws Exception {
-        var addressReader = this.unmarshall("""
-                <addr>
-                    <country>CH</country>
-                    <city>Musterhausen</city>
-                    <postalCode>9999</postalCode>
-                    <houseNumber>3</houseNumber>
-                    <additionalLocator>OG Ost</additionalLocator>
-                    <streetAddressLine>Chalet Edelweiss</streetAddressLine>
-                    <streetName>Wishard Blvd</streetName>
-                </addr>
-                """);
-
-        assertFalse(addressReader.getAdditionalStreetAddress().isPresent());
+        assertTrue(addressReader.getStreetAddressLines().isEmpty());
     }
 
 

@@ -559,10 +559,6 @@ class CceMtpDigesterTest {
         assertEquals("CH", mtpDigest.getRecipients().get(0).getAddresses().get(0).getCountry());
         assertEquals("Zürich", mtpDigest.getRecipients().get(0).getAddresses().get(0).getCity());
         assertEquals("8003", mtpDigest.getRecipients().get(0).getAddresses().get(0).getPostalCode());
-        assertNull(mtpDigest.getRecipients().get(0).getAddresses().get(0).getStreetName());
-        assertNull(mtpDigest.getRecipients().get(0).getAddresses().get(0).getHouseNumber());
-        assertEquals("3", mtpDigest.getRecipients().get(0).getAddresses().get(1).getHouseNumber());
-        assertEquals("Wishard Blvd", mtpDigest.getRecipients().get(0).getAddresses().get(1).getStreetName());
         assertInstanceOf(PatientDigest.class, mtpDigest.getPatient());
         assertEquals(2, mtpDigest.getPatient().ids().size());
         assertEquals(new QualifiedIdentifier("11111111", "2.998"), mtpDigest.getPatient().ids().get(0));

@@ -36,7 +36,6 @@
                 <postalCode>9999</postalCode>
                 <streetAddressLine>Chalet Edelweiss</streetAddressLine>
                 <streetAddressLine>Wegmüller Family</streetAddressLine>
-                <streetName>Wishard Blvd</streetName>
             </addr>
             <telecom use="PUB" value="mailto:monika.wegmuller@domain.ch" />
             <patient>
@@ -158,11 +157,9 @@
                 <country>CH</country>
                 <city>Musterhausen</city>
                 <postalCode>9999</postalCode>
-                <houseNumber>3</houseNumber>
                 <additionalLocator>OG Ost</additionalLocator>
                 <streetAddressLine>Chalet Edelweiss</streetAddressLine>
                 <streetAddressLine>Wegmüller Family</streetAddressLine>
-                <streetName>Wishard Blvd</streetName>
             </addr>
             <informationRecipient>
                 <name>

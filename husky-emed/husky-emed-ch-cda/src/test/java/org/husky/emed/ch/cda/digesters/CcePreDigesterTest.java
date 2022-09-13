@@ -106,8 +106,6 @@ class CcePreDigesterTest {
         assertEquals("CH", preDigest.getRecipients().get(0).getAddresses().get(0).getCountry());
         assertEquals("Zürich", preDigest.getRecipients().get(0).getAddresses().get(0).getCity());
         assertEquals("8003", preDigest.getRecipients().get(0).getAddresses().get(0).getPostalCode());
-        assertNull(preDigest.getRecipients().get(0).getAddresses().get(0).getStreetName());
-        assertNull(preDigest.getRecipients().get(0).getAddresses().get(0).getHouseNumber());
         assertEquals(Instant.parse("2022-01-01T10:34:00Z"), preDigest.getPrescriptionValidityStart());
         assertNull(preDigest.getPrescriptionValidityStop());
 
@@ -215,8 +213,6 @@ class CcePreDigesterTest {
         assertEquals("CH", preDigest.getRecipients().get(0).getAddresses().get(0).getCountry());
         assertEquals("Zürich", preDigest.getRecipients().get(0).getAddresses().get(0).getCity());
         assertEquals("8003", preDigest.getRecipients().get(0).getAddresses().get(0).getPostalCode());
-        assertNull(preDigest.getRecipients().get(0).getAddresses().get(0).getStreetName());
-        assertNull(preDigest.getRecipients().get(0).getAddresses().get(0).getHouseNumber());
         assertEquals(Instant.parse("2022-01-01T10:34:00Z"), preDigest.getPrescriptionValidityStart());
         assertNull(preDigest.getPrescriptionValidityStop());
 

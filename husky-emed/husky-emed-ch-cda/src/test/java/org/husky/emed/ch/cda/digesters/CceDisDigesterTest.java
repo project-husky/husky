@@ -109,8 +109,6 @@ class CceDisDigesterTest {
         assertEquals("CH", disDigest.getRecipients().get(0).getAddresses().get(0).getCountry());
         assertEquals("Zürich", disDigest.getRecipients().get(0).getAddresses().get(0).getCity());
         assertEquals("8003", disDigest.getRecipients().get(0).getAddresses().get(0).getPostalCode());
-        assertNull(disDigest.getRecipients().get(0).getAddresses().get(0).getStreetName());
-        assertNull(disDigest.getRecipients().get(0).getAddresses().get(0).getHouseNumber());
 
         // Entry
         final var disEntryDigest = disDigest.getDisEntryDigest();
@@ -197,8 +195,6 @@ class CceDisDigesterTest {
         assertEquals("CH", disDigest.getRecipients().get(0).getAddresses().get(0).getCountry());
         assertEquals("Zürich", disDigest.getRecipients().get(0).getAddresses().get(0).getCity());
         assertEquals("8003", disDigest.getRecipients().get(0).getAddresses().get(0).getPostalCode());
-        assertNull(disDigest.getRecipients().get(0).getAddresses().get(0).getStreetName());
-        assertNull(disDigest.getRecipients().get(0).getAddresses().get(0).getHouseNumber());
 
         // Entry
         final var disEntryDigest = disDigest.getDisEntryDigest();
@@ -276,8 +272,6 @@ class CceDisDigesterTest {
         assertEquals("CH", disDigest.getRecipients().get(0).getAddresses().get(0).getCountry());
         assertEquals("Zürich", disDigest.getRecipients().get(0).getAddresses().get(0).getCity());
         assertEquals("8003", disDigest.getRecipients().get(0).getAddresses().get(0).getPostalCode());
-        assertNull(disDigest.getRecipients().get(0).getAddresses().get(0).getStreetName());
-        assertNull(disDigest.getRecipients().get(0).getAddresses().get(0).getHouseNumber());
 
         // Entry
         final var disEntryDigest = disDigest.getDisEntryDigest();
