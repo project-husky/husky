@@ -11,6 +11,8 @@ package org.husky.emed.ch.models.common;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -21,16 +23,9 @@ import java.util.Objects;
 public class AddressDigest {
 
     /**
-     * The street name.
+     * The street address line(s).
      */
-    @Nullable
-    private String streetName;
-
-    /**
-     * The house number.
-     */
-    @Nullable
-    private String houseNumber;
+    private final List<String> streetAddressLines = new ArrayList<>(0);
 
     /**
      * The city.
@@ -53,34 +48,20 @@ public class AddressDigest {
     public AddressDigest() {
     }
 
-    public AddressDigest(@Nullable final String streetName,
-                         @Nullable final String houseNumber,
+    public AddressDigest(@Nullable final List<String> streetAddressLines,
                          @Nullable final String city,
                          @Nullable final String postalCode,
                          @Nullable final String country) {
-        this.streetName = streetName;
-        this.houseNumber = houseNumber;
+        if (streetAddressLines != null) {
+            this.streetAddressLines.addAll(streetAddressLines);
+        }
         this.city = city;
         this.postalCode = postalCode;
         this.country = country;
     }
 
-    @Nullable
-    public String getStreetName() {
-        return streetName;
-    }
-
-    public void setStreetName(@Nullable final String streetName) {
-        this.streetName = streetName;
-    }
-
-    @Nullable
-    public String getHouseNumber() {
-        return houseNumber;
-    }
-
-    public void setHouseNumber(@Nullable final String houseNumber) {
-        this.houseNumber = houseNumber;
+    public List<String> getStreetAddressLines() {
+        return streetAddressLines;
     }
 
     @Nullable
@@ -111,8 +92,7 @@ public class AddressDigest {
     }
 
     public boolean isEmpty() {
-        return this.streetName != null
-                || this.houseNumber != null
+        return !this.streetAddressLines.isEmpty()
                 || this.city != null
                 || this.postalCode != null
                 || this.country != null;
@@ -121,27 +101,23 @@ public class AddressDigest {
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
-        if (!(o instanceof final AddressDigest that)) return false;
-        return Objects.equals(streetName, that.streetName)
-                && Objects.equals(houseNumber, that.houseNumber)
-                && Objects.equals(city, that.city)
-                && Objects.equals(postalCode, that.postalCode)
-                && Objects.equals(country, that.country);
+        if (!(o instanceof AddressDigest)) return false;
+        final AddressDigest that = (AddressDigest) o;
+        return streetAddressLines.equals(that.streetAddressLines) && Objects.equals(city, that.city) && Objects.equals(postalCode, that.postalCode) && Objects.equals(country, that.country);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(streetName, houseNumber, city, postalCode, country);
+        return Objects.hash(streetAddressLines, city, postalCode, country);
     }
 
     @Override
     public String toString() {
         return "AddressDigest{" +
-                "streetName='" + this.streetName + '\'' +
-                ", houseNumber='" + this.houseNumber + '\'' +
-                ", city='" + this.city + '\'' +
-                ", postalCode='" + this.postalCode + '\'' +
-                ", country='" + this.country + '\'' +
+                "streetAddressLines=" + streetAddressLines +
+                ", city='" + city + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", country='" + country + '\'' +
                 '}';
     }
 }
