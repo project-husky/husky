@@ -10,6 +10,7 @@
 package org.husky.emed.ch.models.common;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.checkerframework.checker.units.qual.N;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,22 +29,46 @@ public class AddressDigest {
     private final List<String> streetAddressLines = new ArrayList<>(0);
 
     /**
-     * The city.
+     * Addressed city (in foreign addresses if necessary including province, etc.).
+     * When using the information according to the Swiss Post, the 27-digit city name must be used.
      */
     @Nullable
     private String city;
 
     /**
-     * The postal code.
+     * Postal code given by Swiss Post or postal code issued by a post office abroad, that can consist of numbers,
+     * letters or a combination of both, possibly even special characters.
      */
     @Nullable
     private String postalCode;
 
     /**
-     * The country.
+     * Two-digit, alphanumeric ISO country code according to [ISO 3166-1] of the country in which the address is
+     * located. E.g. 'CH'
      */
     @Nullable
     private String country;
+
+    /**
+     * Number of addressed apartment. This is occasionally necessary for larger buildings. With a maximum length of 30
+     * characters.
+     */
+    @Nullable
+    private String additionalLocator;
+
+    /**
+     * Number of the addressed post box in a maximum length of 8 characters.
+     */
+    @Nullable
+    private String postBox;
+
+    /**
+     * It contains superordinate or subordinate information on a city, such as region, province, state or local
+     * district. In Switzerland: 'AG', 'AI', 'AR', 'BE', 'BL', 'BS', 'FL', 'FR', 'GE', 'GL', 'GR', 'JU', 'LU', 'NE',
+     * 'NW', 'OW', 'SG', 'SH', 'SO', 'SZ', 'TG', 'TI', 'UR', 'VD', 'VS', 'ZG', 'ZH'
+     */
+    @Nullable
+    private String state;
 
     public AddressDigest() {
     }
@@ -51,13 +76,19 @@ public class AddressDigest {
     public AddressDigest(@Nullable final List<String> streetAddressLines,
                          @Nullable final String city,
                          @Nullable final String postalCode,
-                         @Nullable final String country) {
+                         @Nullable final String country,
+                         @Nullable final String additionalLocator,
+                         @Nullable final String postBox,
+                         @Nullable final String state) {
         if (streetAddressLines != null) {
             this.streetAddressLines.addAll(streetAddressLines);
         }
         this.city = city;
         this.postalCode = postalCode;
         this.country = country;
+        this.additionalLocator = additionalLocator;
+        this.postBox = postBox;
+        this.state = state;
     }
 
     public List<String> getStreetAddressLines() {
@@ -91,33 +122,69 @@ public class AddressDigest {
         this.country = country;
     }
 
+    @Nullable
+    public String getAdditionalLocator() {
+        return additionalLocator;
+    }
+
+    public void setAdditionalLocator(@Nullable final String additionalLocator) {
+        this.additionalLocator = additionalLocator;
+    }
+
+    @Nullable
+    public String getPostBox() {
+        return postBox;
+    }
+
+    public void setPostBox(@Nullable final String postBox) {
+        this.postBox = postBox;
+    }
+
+    @Nullable
+    public String getState() {
+        return state;
+    }
+
+    public void setState(@Nullable final String state) {
+        this.state = state;
+    }
+
     public boolean isEmpty() {
         return !this.streetAddressLines.isEmpty()
                 || this.city != null
                 || this.postalCode != null
-                || this.country != null;
+                || this.country != null
+                || this.additionalLocator != null
+                || this.postBox != null
+                || this.state != null;
     }
 
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof AddressDigest)) return false;
-        final AddressDigest that = (AddressDigest) o;
-        return streetAddressLines.equals(that.streetAddressLines) && Objects.equals(city, that.city) && Objects.equals(postalCode, that.postalCode) && Objects.equals(country, that.country);
+        if (o == null || getClass() != o.getClass()) return false;
+        AddressDigest that = (AddressDigest) o;
+        return streetAddressLines.equals(that.streetAddressLines) && Objects.equals(city, that.city)
+                && Objects.equals(postalCode, that.postalCode) && Objects.equals(country, that.country)
+                && Objects.equals(additionalLocator, that.additionalLocator) && Objects.equals(postBox, that.postBox)
+                && Objects.equals(state, that.state);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(streetAddressLines, city, postalCode, country);
+        return Objects.hash(streetAddressLines, city, postalCode, country, additionalLocator, postBox, state);
     }
 
     @Override
     public String toString() {
-        return "AddressDigest{" +
-                "streetAddressLines=" + streetAddressLines +
-                ", city='" + city + '\'' +
-                ", postalCode='" + postalCode + '\'' +
-                ", country='" + country + '\'' +
-                '}';
+        return "AddressDigest{"
+                + "streetAddressLines=" + streetAddressLines
+                + ", city='" + city + '\''
+                + ", postalCode='" + postalCode + '\''
+                + ", country='" + country + '\''
+                + ", additionalLocator='" + additionalLocator + '\''
+                + ", postBox='" + postBox + '\''
+                + ", state='" + state + '\''
+                + '}';
     }
 }
