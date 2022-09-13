@@ -218,12 +218,6 @@ class CHProvideAndRegisterDocumentSetPGTest extends XdsTestUtils {
         final Author provider = new Author();
         provider.addName(providerName);
 
-        // TODO:
-        // Workaround for EPD Playground: When adding a submission set author we run into a problem with the
-        // role resulting in a value set error. We need to clarify with ITH icoserve what is expected.
-        // Not setting the submission set author solves the problem, but is not compliant with the Swiss EPR
-        // specifications.
-
         final Code providerRole = new Code("HCP", "2.16.756.5.30.1.127.3.10.6", "Healthcare professional");
         provider.setRoleFunction(providerRole);
         submissionSetMetadata.addAuthor(provider);
