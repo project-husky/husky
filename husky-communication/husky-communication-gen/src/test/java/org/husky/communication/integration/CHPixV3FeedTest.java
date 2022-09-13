@@ -66,7 +66,7 @@ class CHPixV3FeedTest {
 	protected AuditContext auditContext;
 
 	final private String pixUri = "https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PIXManager_Service/PIXManager_PortType";
-	final String facilityName = "Waldspital Bern"; // "2.16.840.1.113883.3.72.6.1";
+	final String facilityOid = "2.16.840.1.113883.3.72.6.1";
 
 	final String receiverApplicationOid = "1.3.6.1.4.1.12559.11.20.1.10";
 	final String senderApplicationOid = "1.2.3.4.123456";
@@ -104,7 +104,7 @@ class CHPixV3FeedTest {
 		dest.setUri(URI.create(pixUri));
 		dest.setSenderApplicationOid(senderApplicationOid);
 		dest.setReceiverApplicationOid(receiverApplicationOid);
-		dest.setReceiverFacilityOid(facilityName);
+		dest.setReceiverFacilityOid(facilityOid);
 		affinityDomain.setPdqDestination(dest);
 		affinityDomain.setPixDestination(dest);
 

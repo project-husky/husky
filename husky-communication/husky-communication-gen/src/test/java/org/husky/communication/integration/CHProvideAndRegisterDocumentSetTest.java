@@ -130,12 +130,12 @@ class CHProvideAndRegisterDocumentSetTest extends XdsTestUtils {
         dest.setSenderApplicationOid(senderApplicationOid);
 
         // add an application name
-        final String applicationName = "Clinical Information System"; //"2.16.840.1.113883.3.72.6.5.100.1399";
-        dest.setReceiverApplicationOid(applicationName);
+        final String applicationOid = "2.16.840.1.113883.3.72.6.5.100.1399";
+        dest.setReceiverApplicationOid(applicationOid);
 
         // add the name of your institution
-        final String facilityName = "Hospital in Bern";
-        dest.setReceiverFacilityOid(facilityName);
+        final String facilityOid = "2.16.840.1.113883.3.72.6.5";
+        dest.setReceiverFacilityOid(facilityOid);
 
         affinityDomain = new AffinityDomain();
         affinityDomain.setRegistryDestination(dest);
@@ -225,7 +225,7 @@ class CHProvideAndRegisterDocumentSetTest extends XdsTestUtils {
         submissionSetMetadata.setContentTypeCode(contentType);
 
         // Use author data from document metadata
-        submissionSetMetadata.setAuthor(author);
+        submissionSetMetadata.addAuthor(author);
 
         // Get the X-User Assertion to authorize the Document Submission.
         Assertion xUserAssertion = getXUserAssertion();

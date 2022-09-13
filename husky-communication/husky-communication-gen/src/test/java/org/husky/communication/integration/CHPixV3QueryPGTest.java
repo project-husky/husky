@@ -55,7 +55,7 @@ class CHPixV3QueryPGTest {
     protected AuditContext auditContext;
     final String pixUri = "https://epdplayground.i4mi.bfh.ch:7443/PIXPDQ/services/PIXPDQV3ManagerService";
 
-    final String facilityName = "Waldspital Bern"; // "2.16.840.1.113883.3.72.6.1";
+    final String facilityOid = "2.16.840.1.113883.3.72.6.1";
     final String receiverApplicationOid = "1.1.1.99.1";
     final String senderApplicationOid = "1.2.3.4.123456";
 
@@ -97,7 +97,7 @@ class CHPixV3QueryPGTest {
         dest.setUri(URI.create(pixUri));
         dest.setSenderApplicationOid(senderApplicationOid);
         dest.setReceiverApplicationOid(receiverApplicationOid);
-        dest.setReceiverFacilityOid(facilityName);
+        dest.setReceiverFacilityOid(facilityOid);
         affinityDomain.setPdqDestination(dest);
         affinityDomain.setPixDestination(dest);
 

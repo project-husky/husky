@@ -10,7 +10,6 @@
  */
 package org.husky.communication.integration;
 
-import org.apache.commons.io.IOUtils;
 import org.husky.common.communication.AffinityDomain;
 import org.husky.common.communication.Destination;
 import org.husky.common.model.Code;
@@ -19,19 +18,6 @@ import org.husky.communication.ConvenienceCommunication;
 import org.husky.communication.testhelper.TestApplication;
 import org.husky.communication.testhelper.XdsTestUtils;
 import org.husky.communication.xd.storedquery.FindDocumentsQuery;
-import org.husky.xua.communication.clients.XuaClient;
-import org.husky.xua.communication.clients.impl.ClientFactory;
-import org.husky.xua.communication.config.XuaClientConfig;
-import org.husky.xua.communication.config.impl.XuaClientConfigBuilderImpl;
-import org.husky.xua.communication.xua.RequestType;
-import org.husky.xua.communication.xua.TokenType;
-import org.husky.xua.communication.xua.XUserAssertionResponse;
-import org.husky.xua.communication.xua.impl.XUserAssertionRequestBuilderImpl;
-import org.husky.xua.deserialization.impl.AssertionDeserializerImpl;
-import org.husky.xua.hl7v3.PurposeOfUse;
-import org.husky.xua.hl7v3.Role;
-import org.husky.xua.hl7v3.impl.CodedWithEquivalentsBuilder;
-import org.husky.xua.saml2.Assertion;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -50,11 +36,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.net.URI;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -79,8 +61,8 @@ class CHRegistryStoredQueryPGTest extends XdsTestUtils {
 	@Autowired
 	protected AuditContext auditContext;
 
-	final private String applicationName = "2.16.840.1.113883.3.72.6.5.100.1399";
-	final private String facilityName = null;
+	final private String applicationOid = "2.16.840.1.113883.3.72.6.5.100.1399";
+	final private String facilityOid = null;
 
 	final private String senderApplicationOid = "1.2.3.4";
 
@@ -120,8 +102,8 @@ class CHRegistryStoredQueryPGTest extends XdsTestUtils {
 		dest.setUri(new URI("https://epdplayground.i4mi.bfh.ch:7443/Registry/services/RegistryService"));
 
 		dest.setSenderApplicationOid(senderApplicationOid);
-		dest.setReceiverApplicationOid(applicationName);
-		dest.setReceiverFacilityOid(facilityName);
+		dest.setReceiverApplicationOid(applicationOid);
+		dest.setReceiverFacilityOid(facilityOid);
 		affinityDomain.setRegistryDestination(dest);
 		affinityDomain.setRepositoryDestination(dest);
 	}

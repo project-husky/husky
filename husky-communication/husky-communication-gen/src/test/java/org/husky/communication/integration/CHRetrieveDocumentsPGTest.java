@@ -27,7 +27,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -47,8 +46,8 @@ class CHRetrieveDocumentsPGTest extends XdsTestUtils {
     @Autowired
     private ConvenienceCommunication convenienceCommunication;
 
-    final private String applicationName = "2.16.840.1.113883.3.72.6.5.100.1399";
-    final private String facilityName = "Waldpsital Bern";
+    final private String applicationOid = "2.16.840.1.113883.3.72.6.5.100.1399";
+    final private String facilityOid = "Waldpsital Bern";
     final private String senderApplicationOid = "1.2.3.4";
 
     // data taken from the RegistryStoredQuery for two documents
@@ -74,8 +73,8 @@ class CHRetrieveDocumentsPGTest extends XdsTestUtils {
 
         dest.setSenderApplicationOid(senderApplicationOid);
 
-        dest.setReceiverApplicationOid(applicationName);
-        dest.setReceiverFacilityOid(facilityName);
+        dest.setReceiverApplicationOid(applicationOid);
+        dest.setReceiverFacilityOid(facilityOid);
 
         affinityDomain.setRegistryDestination(dest);
         affinityDomain.setRepositoryDestination(dest);

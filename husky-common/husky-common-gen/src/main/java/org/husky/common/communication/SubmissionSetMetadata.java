@@ -212,11 +212,15 @@ public class SubmissionSetMetadata {
 	}
 
 	/**
-	 * Sets the Author of this submission
+	 * Sets the Author of this submission.
 	 *
-	 * @param author
-	 *            the Author
+	 * This method is deprecated, since the author role is not encoded as II serialization and only sets the
+	 * name of the role. E.g. "Heathcare professional" instead of "HCP^^^&amp;2.16.756.5.30.1.127.3.10.6&amp;ISO",
+	 * which is required for the Swiss EPR.
+	 *
+	 * @param author the Author
 	 */
+	@Deprecated
 	public void setAuthor(Author author) {
 		// Workaround for a Bug in the CDAR2Extractor, which causes a
 		// NullpointerException, if no Telecom value is inserted and
@@ -233,6 +237,16 @@ public class SubmissionSetMetadata {
 
 		// Set the extracted author person object
 		s.setAuthor(xAuthor);
+	}
+
+	/**
+	 * add an author object to the SubmissionSetMetadata object. In constrast to the method above, it uses
+	 * the same metada extractor used in the DocumentMetadata
+	 *
+	 * @param author
+	 */
+	public void addAuthor(Author author){
+		s.setAuthor(XdsMetadataUtil.converteHCAuthor(author));
 	}
 
 	/**

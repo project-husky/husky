@@ -15,14 +15,11 @@ import org.husky.common.communication.AffinityDomain;
 import org.husky.common.communication.Destination;
 import org.husky.common.model.Code;
 import org.husky.common.model.Identificator;
-import org.husky.common.model.Name;
-import org.husky.common.model.Person;
 import org.husky.common.utils.datatypes.IheCx;
 import org.husky.communication.ConvenienceCommunication;
 import org.husky.communication.testhelper.TestApplication;
 import org.husky.communication.testhelper.XdsTestUtils;
 import org.husky.communication.xd.storedquery.FindDocumentsQuery;
-import org.husky.communication.xd.storedquery.GetDocumentsQuery;
 import org.husky.xua.communication.clients.XuaClient;
 import org.husky.xua.communication.clients.impl.ClientFactory;
 import org.husky.xua.communication.config.XuaClientConfig;
@@ -42,7 +39,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openehealth.ipf.commons.audit.AuditContext;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.ObjectReference;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.*;
 import org.opensaml.core.config.InitializationService;
 import org.slf4j.Logger;
@@ -58,10 +54,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -86,8 +79,8 @@ class CHRegistryStoredQueryTest extends XdsTestUtils {
 	@Autowired
 	protected AuditContext auditContext;
 
-	final private String applicationName = "2.16.840.1.113883.3.72.6.5.100.1399";
-	final private String facilityName = null;
+	final private String applicationOid = "2.16.840.1.113883.3.72.6.5.100.1399";
+	final private String facilityOid = null;
 
 	final private String senderApplicationOid = "1.2.3.4";
 
@@ -115,6 +108,8 @@ class CHRegistryStoredQueryTest extends XdsTestUtils {
 		// initialize the open saml factories
 		InitializationService.initialize();
 
+		auditContext.setAuditEnabled(true);
+
 		// create and start spring test application
 		var app = new SpringApplication(TestApplication.class);
 		app.setWebApplicationType(WebApplicationType.NONE);
@@ -128,8 +123,8 @@ class CHRegistryStoredQueryTest extends XdsTestUtils {
 					"http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_init_gw_testing/rep/xcq"));
 
 		dest.setSenderApplicationOid(senderApplicationOid);
-		dest.setReceiverApplicationOid(applicationName);
-		dest.setReceiverFacilityOid(facilityName);
+		dest.setReceiverApplicationOid(applicationOid);
+		dest.setReceiverFacilityOid(facilityOid);
 		affinityDomain.setRegistryDestination(dest);
 		affinityDomain.setRepositoryDestination(dest);
 	}

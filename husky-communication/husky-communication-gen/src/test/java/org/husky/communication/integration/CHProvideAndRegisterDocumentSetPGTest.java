@@ -107,12 +107,12 @@ class CHProvideAndRegisterDocumentSetPGTest extends XdsTestUtils {
         dest.setSenderApplicationOid(senderApplicationOid);
 
         // add an application name
-        final String applicationName = "Clinical Information System"; //"2.16.840.1.113883.3.72.6.5.100.1399";
-        dest.setReceiverApplicationOid(applicationName);
+        final String applicationOid = "2.16.840.1.113883.3.72.6.5.100.1399";
+        dest.setReceiverApplicationOid(applicationOid);
 
         // add the name of your institution
-        final String facilityName = "Waldspital Bern";
-        dest.setReceiverFacilityOid(facilityName);
+        final String facilityOid = null; // TODO use OID
+        dest.setReceiverFacilityOid(facilityOid);
 
         affinityDomain = new AffinityDomain();
         affinityDomain.setRegistryDestination(dest);
@@ -220,9 +220,9 @@ class CHProvideAndRegisterDocumentSetPGTest extends XdsTestUtils {
         // Not setting the submission set author solves the problem, but is not compliant with the Swiss EPR
         // specifications.
 
-        // final Code providerRole = new Code("HCP", "2.16.756.5.30.1.127.3.10.6", "Healthcare professional");
-        // provider.setRoleFunction(providerRole);
-        // submissionSetMetadata.setAuthor(provider);
+        final Code providerRole = new Code("HCP", "2.16.756.5.30.1.127.3.10.6", "Healthcare professional");
+        provider.setRoleFunction(providerRole);
+        submissionSetMetadata.addAuthor(provider);
 
         final Code contentType = new Code("71388002", "2.16.840.1.113883.6.96", "Procedure (procedure)");
         submissionSetMetadata.setContentTypeCode(contentType);

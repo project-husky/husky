@@ -14,12 +14,8 @@ package org.husky.communication.integration;
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.context.FhirVersionEnum;
 import org.hl7.fhir.r4.model.*;
-import org.hl7.fhir.r4.model.ContactPoint.ContactPointSystem;
-import org.hl7.fhir.r4.model.ContactPoint.ContactPointUse;
 import org.hl7.fhir.r4.model.Enumerations.AdministrativeGender;
 import org.hl7.fhir.r4.model.HumanName.NameUse;
-import org.hl7.fhir.r4.model.Patient.PatientCommunicationComponent;
-import org.hl7.fhir.r4.model.codesystems.V3MaritalStatus;
 import org.husky.common.communication.AffinityDomain;
 import org.husky.common.communication.Destination;
 import org.husky.common.enums.CountryCode;
@@ -66,7 +62,7 @@ class CHPixV3FeedPGTest {
 	protected AuditContext auditContext;
 
 	final private String pixUri = "https://epdplayground.i4mi.bfh.ch:7443/PIXPDQ/services/PIXPDQV3ManagerService";
-	final String facilityName = "Waldspital Bern"; // "2.16.840.1.113883.3.72.6.1";
+	final String facilityOid = "2.16.840.1.113883.3.72.6.1";
 
 	final String receiverApplicationOid = "1.1.1.99.1";
 	final String senderApplicationOid = "1.2.3.4.123456";
@@ -104,7 +100,7 @@ class CHPixV3FeedPGTest {
 		dest.setUri(URI.create(pixUri));
 		dest.setSenderApplicationOid(senderApplicationOid);
 		dest.setReceiverApplicationOid(receiverApplicationOid);
-		dest.setReceiverFacilityOid(facilityName);
+		dest.setReceiverFacilityOid(facilityOid);
 		affinityDomain.setPdqDestination(dest);
 		affinityDomain.setPixDestination(dest);
 
