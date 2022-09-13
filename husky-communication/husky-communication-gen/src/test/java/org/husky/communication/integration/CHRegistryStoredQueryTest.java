@@ -12,6 +12,7 @@ package org.husky.communication.integration;
 
 import org.apache.commons.io.IOUtils;
 import org.husky.common.communication.AffinityDomain;
+import org.husky.common.communication.AtnaConfig;
 import org.husky.common.communication.Destination;
 import org.husky.common.model.Code;
 import org.husky.common.model.Identificator;
@@ -155,6 +156,11 @@ class CHRegistryStoredQueryTest extends XdsTestUtils {
 		// Get the X-User Assertion to authorize the Document Submission.
 		Assertion xUserAssertion = getXUserAssertion();
 		assertNotNull(xUserAssertion);
+
+		// set the audit config mode to activate the ATNA logs. Please note that you
+		// need to configure additional properties for the ATNA communication
+		// in file application.properties
+		convenienceCommunication.setAtnaConfig(AtnaConfig.AtnaConfigMode.SECURE);
 
 		// query metadata of documents with patient ID and approved as availability status
 		final QueryResponse response = convenienceCommunication.queryDocuments(findDocumentsQuery, xUserAssertion, null);

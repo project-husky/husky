@@ -12,10 +12,7 @@ package org.husky.communication.integration;
 
 import org.apache.commons.io.IOUtils;
 import org.husky.common.basetypes.NameBaseType;
-import org.husky.common.communication.AffinityDomain;
-import org.husky.common.communication.Destination;
-import org.husky.common.communication.DocumentMetadata;
-import org.husky.common.communication.SubmissionSetMetadata;
+import org.husky.common.communication.*;
 import org.husky.common.enums.DocumentDescriptor;
 import org.husky.common.enums.EhcVersions;
 import org.husky.common.enums.LanguageCode;
@@ -230,6 +227,11 @@ class CHProvideAndRegisterDocumentSetTest extends XdsTestUtils {
         // Get the X-User Assertion to authorize the Document Submission.
         Assertion xUserAssertion = getXUserAssertion();
         assertNotNull(xUserAssertion);
+
+        // set the audit config mode to activate the ATNA logs. Please note that you
+        // need to configure additional properties for the ATNA communication
+        // in file application.properties
+        convenienceCommunication.setAtnaConfig(AtnaConfig.AtnaConfigMode.SECURE);
 
         // provide and register the document
         final Response response = convenienceCommunication.submit(submissionSetMetadata, xUserAssertion, null);

@@ -11,10 +11,7 @@
 package org.husky.communication.integration;
 
 import org.husky.common.basetypes.NameBaseType;
-import org.husky.common.communication.AffinityDomain;
-import org.husky.common.communication.Destination;
-import org.husky.common.communication.DocumentMetadata;
-import org.husky.common.communication.SubmissionSetMetadata;
+import org.husky.common.communication.*;
 import org.husky.common.enums.DocumentDescriptor;
 import org.husky.common.enums.EhcVersions;
 import org.husky.common.enums.LanguageCode;
@@ -28,6 +25,12 @@ import org.husky.communication.testhelper.XdsTestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openehealth.ipf.commons.audit.AuditContext;
+import org.openehealth.ipf.commons.audit.TlsParameters;
+import org.openehealth.ipf.commons.audit.handler.AuditExceptionHandler;
+import org.openehealth.ipf.commons.audit.protocol.AuditTransmissionProtocol;
+import org.openehealth.ipf.commons.audit.queue.AuditMessageQueue;
+import org.openehealth.ipf.commons.audit.types.AuditSource;
 import org.openehealth.ipf.commons.core.OidGenerator;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.Response;
@@ -44,6 +47,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.net.InetAddress;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
@@ -226,6 +230,11 @@ class CHProvideAndRegisterDocumentSetPGTest extends XdsTestUtils {
 
         final Code contentType = new Code("71388002", "2.16.840.1.113883.6.96", "Procedure (procedure)");
         submissionSetMetadata.setContentTypeCode(contentType);
+
+        // set the audit config mode to activate the ATNA logs. Please note that you
+        // need to configure additional properties for the ATNA communication
+        // in file application.properties
+        convenienceCommunication.setAtnaConfig(AtnaConfig.AtnaConfigMode.SECURE);
 
         // provide and register the document
         final Response response = convenienceCommunication.submit(submissionSetMetadata, null, null);

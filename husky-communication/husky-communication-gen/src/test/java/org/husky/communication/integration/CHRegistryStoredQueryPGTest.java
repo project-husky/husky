@@ -11,6 +11,7 @@
 package org.husky.communication.integration;
 
 import org.husky.common.communication.AffinityDomain;
+import org.husky.common.communication.AtnaConfig;
 import org.husky.common.communication.Destination;
 import org.husky.common.model.Code;
 import org.husky.common.model.Identificator;
@@ -130,6 +131,11 @@ class CHRegistryStoredQueryPGTest extends XdsTestUtils {
 				"Unstructured EPR document");
 
 		FindDocumentsQuery findDocumentsQuery = new FindDocumentsQuery(globalId, AvailabilityStatus.APPROVED, type, clazz, format);
+
+		// set the audit config mode to activate the ATNA logs. Please note that you
+		// need to configure additional properties for the ATNA communication
+		// in file application.properties
+		convenienceCommunication.setAtnaConfig(AtnaConfig.AtnaConfigMode.SECURE);
 
 		// query metadata of documents with patient ID and approved as availability status
 		final QueryResponse response = convenienceCommunication.queryDocuments(findDocumentsQuery, null, null);

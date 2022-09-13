@@ -241,7 +241,7 @@ public class SubmissionSetMetadata {
 
 	/**
 	 * add an author object to the SubmissionSetMetadata object. In constrast to the method above, it uses
-	 * the same metada extractor used in the DocumentMetadata
+	 * the same metadata extractor used in the DocumentMetadata
 	 *
 	 * @param author
 	 */

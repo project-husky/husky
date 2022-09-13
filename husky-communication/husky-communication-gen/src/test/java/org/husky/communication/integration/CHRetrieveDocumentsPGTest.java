@@ -11,6 +11,7 @@
 package org.husky.communication.integration;
 
 import org.husky.common.communication.AffinityDomain;
+import org.husky.common.communication.AtnaConfig;
 import org.husky.common.communication.Destination;
 import org.husky.communication.ConvenienceCommunication;
 import org.husky.communication.DocumentRequest;
@@ -86,6 +87,11 @@ class CHRetrieveDocumentsPGTest extends XdsTestUtils {
         var documentRequest_2 = new DocumentRequest(repositoryId_2, null, documentId_2, homeCommunityId_2);
 
         var documentRequests = new DocumentRequest[]{documentRequest_1, documentRequest_2};
+
+        // set the audit config mode to activate the ATNA logs. Please note that you
+        // need to configure additional properties for the ATNA communication
+        // in file application.properties
+        convenienceCommunication.setAtnaConfig(AtnaConfig.AtnaConfigMode.SECURE);
 
         final RetrievedDocumentSet response = convenienceCommunication.retrieveDocuments(documentRequests, null,
                 String.format("test_%s", UUID.randomUUID().toString()));
