@@ -4,6 +4,8 @@ import ca.uhn.fhir.rest.server.exceptions.InvalidRequestException;
 import org.hl7.fhir.r4.model.*;
 import org.hl7.fhir.r4.model.Organization;
 import org.husky.common.enums.LanguageCode;
+import org.hl7.fhir.r4.model.ContactPoint.ContactPointSystem;
+import org.hl7.fhir.r4.model.ContactPoint.ContactPointUse;
 import org.husky.communication.ch.enums.SubmissionSetAuthorRole;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.*;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Person;
@@ -205,29 +207,71 @@ public class SubmissionSetConverterUtils {
         if (contactPoint == null) return null;
         Telecom result = new Telecom();
 
-        if (contactPoint.getSystem() == ContactPoint.ContactPointSystem.EMAIL || contactPoint.getSystem() == ContactPoint.ContactPointSystem.URL) {
+        if (contactPoint.getSystem() == ContactPointSystem.EMAIL || contactPoint.getSystem() == ContactPointSystem.URL) {
             result.setEmail(contactPoint.getValue());
             result.setUse("NET");
             result.setType("Internet");
         } else {
             result.setUnformattedPhoneNumber(contactPoint.getValue());
-            if (contactPoint.hasSystem())
-                switch (contactPoint.getSystem()) {
-                    case SMS, PHONE -> result.setType("PH");
-                    case FAX -> result.setType("FX");
-                    case PAGER -> result.setType("BP");
-                }
+            if (contactPoint.hasSystem()) {
+                String system = switch (contactPoint.getSystem()) {
+                    case SMS, PHONE -> "PH";
+                    case FAX -> "FX";
+                    case PAGER -> "BP";
+                    default -> null;
+                };
+                result.setType(system);
+            }
 
-            if (contactPoint.hasUse())
-                switch (contactPoint.getUse()) {
-                    case HOME -> result.setUse("PRN");
-                    case WORK -> result.setUse("WPN");
-                    // ¯\_(ツ)_/¯
-                    case MOBILE -> result.setType("CP");
-                }
+            if (contactPoint.hasUse()) {
+                String use = switch (contactPoint.getUse()) {
+                    // v2.ContactPointUse, v3 is available
+                    case HOME -> "PRN";
+                    case WORK -> "WPN";
+                    case MOBILE -> "PRS";
+                    default -> null;
+                };
+                result.setUse(use);
+                // ¯\_(ツ)_/¯
+                if (contactPoint.getUse() == ContactPointUse.MOBILE) result.setType("CP");
+            }
+        }
+        return result;
+    }
+
+    /**
+     * XDS Telecom -> FHIR ContactPoint
+     * @param telecom
+     * @return
+     */
+    public static ContactPoint transformToContactPoint(Telecom telecom) {
+        ContactPoint result = new ContactPoint();
+
+        String type = telecom.getType();
+        String use = telecom.getUse();
+
+        if ("NET".equals(use) || "X.400".equals(type)) {
+            result.setSystem(ContactPointSystem.EMAIL);
+            result.setValue(telecom.getEmail());
+        } else {
+            result.setValue(telecom.getUnformattedPhoneNumber());
+
+            ContactPointUse cpu = switch (use) {
+                case "WPN" -> ContactPointUse.WORK;
+                case "PRN" -> ContactPointUse.HOME;
+                case "PRS" -> ContactPointUse.MOBILE;
+                default -> null;
+            };
+            result.setUse(cpu);
+
+            ContactPointSystem cps = switch (type) {
+                case "FX" -> ContactPointSystem.FAX;
+                case "BP" -> ContactPointSystem.PAGER;
+                default -> ContactPointSystem.PHONE;
+            };
+            result.setSystem(cps);
 
         }
-
         return result;
     }
 
@@ -237,13 +281,39 @@ public class SubmissionSetConverterUtils {
      * @param org
      * @return
      */
-    public static org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization transformToOrganization(Organization org) {
+    public static org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization transformToXDSOrganization(Organization org) {
         org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization result = new org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization();
         Identifier identifier = org.getIdentifierFirstRep();
 
         result.setOrganizationName(org.getName());
         result.setIdNumber(identifier.getValue());
         result.setAssigningAuthority(new AssigningAuthority(removePrefixOid(identifier.getSystem())));
+
+        return result;
+    }
+
+    /**
+     * XDS Organization -> FHIR Organization
+     *
+     * @param org
+     * @return
+     */
+    public static Organization transformToFHIROrganization(org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization org) {
+        if (org == null) return null;
+
+        Organization result = new Organization();
+        result.setName(org.getOrganizationName());
+
+        String id = org.getIdNumber();
+        // TODO handle system not given
+        // Rule: The organization SHALL at least have a name or an identifier, and possibly more than one
+
+        if (org.getAssigningAuthority() != null) {
+            String system = org.getAssigningAuthority().getUniversalId();
+            result.addIdentifier().setSystem(addPrefixOid(system)).setValue(id);
+        } else {
+            result.addIdentifier().setValue(id);
+        }
 
         return result;
     }
@@ -279,6 +349,23 @@ public class SubmissionSetConverterUtils {
         return new CodeableConcept().addCoding(new Coding().setCode(code.getCode())
                 .setSystem(new SchemeMapper().getSystem(code.getSchemeName()))
                 .setDisplay(display));
+    }
+
+    /**
+     * XDS Identifiable -> FHIR CodeableConcept
+     * @param patient
+     * @return
+     */
+    public static CodeableConcept transformToCodeableConcept(Identifiable patient) {
+        Coding coding = new Coding();
+        coding.setCode(patient.getId());
+
+        if (patient.getAssigningAuthority() != null) {
+            String system = addPrefixOid(patient.getAssigningAuthority().getUniversalId());
+            coding.setSystem(system);
+        }
+
+        return new CodeableConcept().addCoding(coding);
     }
 
     private static boolean isPatientAuthor(Author author) {
@@ -353,7 +440,7 @@ public class SubmissionSetConverterUtils {
 
             Organization org = (Organization) findResource(role.getOrganization(), contained);
             if (org != null)
-                result.getAuthorInstitution().add(transformToOrganization(org));
+                result.getAuthorInstitution().add(transformToXDSOrganization(org));
 
             result.getAuthorRole().addAll(role.getCode().stream()
                     .map(SubmissionSetConverterUtils::transformToIdentifiable)
@@ -378,6 +465,8 @@ public class SubmissionSetConverterUtils {
      * @return
      */
     public static HumanName transformToHumanName(Name name) {
+        if (name == null) return null;
+
         HumanName result = new HumanName();
 
         if (name.getPrefix() != null) {
@@ -405,16 +494,25 @@ public class SubmissionSetConverterUtils {
      * @param person
      * @return
      */
-    public static Patient transformPatient(Person person) {
+    public static Patient transformToPatient(Person person) {
         if (person == null) return null;
-        Patient patient = new Patient();
-        Name name = person.getName();
-        if (name != null) {
-            patient.addName(transformToHumanName(name));
-        }
-        if (person.getId() != null) patient.addIdentifier(transformToIdentifier(person.getId()));
+        HumanName humanName = transformToHumanName(person.getName());
+        Identifier identifier = transformToIdentifier(person.getId());
 
-        return patient;
+        return new Patient().addName(humanName).addIdentifier(identifier);
+    }
+
+    /**
+     * XDS Person -> FHIR Practitioner
+     * @param person
+     * @return
+     */
+    public static Practitioner transformToPractitioner(Person person) {
+        if (person == null) return null;
+        HumanName humanName = transformToHumanName(person.getName());
+        Identifier identifier = transformToIdentifier(person.getId());
+
+        return new Practitioner().addName(humanName).addIdentifier(identifier);
     }
 
     /**
@@ -423,52 +521,55 @@ public class SubmissionSetConverterUtils {
      * @param author
      * @return
      */
-//    public static Reference transformAuthor(Author author) {
-//        Person person = author.getAuthorPerson();
-//
-//        if (isPatientAuthor(author)) {
-//            Patient patient = transformPatient(person);
-//            Reference result = new Reference();
-//            List<Telecom> telecoms = author.getAuthorTelecom();
-//            for (Telecom telecom : telecoms) patient.addTelecom(transform(telecom));
-//            result.setResource(patient);
-//            return result;
-//        }
-//
-//        Practitioner containedPerson = transformPractitioner(person);
-//        PractitionerRole role = null;
-//
-//        List<org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization> orgs = author.getAuthorInstitution();
-//        List<Identifiable> roles = author.getAuthorRole();
-//        List<Identifiable> specialities = author.getAuthorSpecialty();
-//
-//        if (!orgs.isEmpty() || !roles.isEmpty() || !specialities.isEmpty()) {
-//            role = new PractitionerRole();
-//            if (containedPerson != null) role.setPractitioner((Reference) new Reference().setResource(containedPerson));
-//        }
-//
-//        for (org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization org : orgs) {
-//            role.setOrganization((Reference) new Reference().setResource(transform(org)));
-//        }
-//
-//        for (Identifiable roleId : roles) {
-//            role.addCode(transform(roleId));
-//        }
-//
-//        for (Identifiable specId : specialities) {
-//            role.addSpecialty(transform(specId));
-//        }
-//
-//        Reference result = new Reference();
-//        List<Telecom> telecoms = author.getAuthorTelecom();
-//        if (role == null) {
-//            for (Telecom telecom : telecoms) containedPerson.addTelecom(transform(telecom));
-//            result.setResource(containedPerson);
-//        } else {
-//            for (Telecom telecom : telecoms) role.addTelecom(transform(telecom));
-//            result.setResource(role);
-//        }
-//        return result;
-//    }
+    public static Reference transformToReference(Author author) {
+        Person person = author.getAuthorPerson();
 
+        if (isPatientAuthor(author)) {
+            Patient patient = transformToPatient(person);
+
+            for (Telecom telecom : author.getAuthorTelecom()) {
+                patient.addTelecom(transformToContactPoint(telecom));
+            }
+
+            return (Reference) new Reference().setResource(patient);
+        }
+
+        Practitioner containedPerson = transformToPractitioner(person);
+        List<Telecom> telecoms = author.getAuthorTelecom();
+
+        List<org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization> orgs = author.getAuthorInstitution();
+        List<Identifiable> roles = author.getAuthorRole();
+        List<Identifiable> specialities = author.getAuthorSpecialty();
+
+        if (orgs.isEmpty() && roles.isEmpty() && specialities.isEmpty()) {
+            for (Telecom telecom : telecoms) {
+                containedPerson.addTelecom(transformToContactPoint(telecom));
+            }
+
+            return (Reference) new Reference().setResource(containedPerson);
+        }
+
+        PractitionerRole role = new PractitionerRole();
+        if (containedPerson != null) {
+            role.setPractitioner((Reference) new Reference().setResource(containedPerson));
+        }
+
+        for (Telecom telecom : telecoms) {
+            role.addTelecom(transformToContactPoint(telecom));
+        }
+
+        for (var org : orgs) {
+            role.setOrganization((Reference) new Reference().setResource(transformToFHIROrganization(org)));
+        }
+
+        for (var roleId : roles) {
+            role.addCode(transformToCodeableConcept(roleId));
+        }
+
+        for (var specId : specialities) {
+            role.addSpecialty(transformToCodeableConcept(specId));
+        }
+
+        return (Reference) new Reference().setResource(role);
+    }
 }
