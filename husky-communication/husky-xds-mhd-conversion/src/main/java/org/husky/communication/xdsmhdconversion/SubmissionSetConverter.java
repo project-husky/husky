@@ -10,24 +10,18 @@
  */
 package org.husky.communication.xdsmhdconversion;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.instance.model.api.IBaseReference;
-import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.*;
-import org.hl7.fhir.r4.model.Organization;
-import org.hl7.fhir.r4.model.ListResource;
-import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Identifier.IdentifierUse;
 import org.hl7.fhir.r4.model.ListResource.ListMode;
+import org.hl7.fhir.r4.model.Organization;
 import org.hl7.fhir.r4.model.ListResource.ListStatus;
 import org.husky.common.utils.XdsMetadataUtil;
 import org.husky.communication.xdsmhdconversion.utils.SubmissionSetConverterUtils;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.*;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.Person;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * A converter between XDS' SubmissionSet and the equivalent MHD resource.
@@ -61,11 +55,11 @@ public class SubmissionSetConverter {
         // extension (designationType) | SubmissionSet.contentTypeCode
         Extension designationType = list.getExtensionByUrl("https://profiles.ihe.net/ITI/MHD/StructureDefinition/ihe-designationType");
         if (designationType != null && designationType.getValue() instanceof CodeableConcept codeableConcept) {
-            submissionSet.setContentTypeCode(SubmissionSetConverterUtils.transformToCode(codeableConcept));
+            submissionSet.setContentTypeCode(SubmissionSetConverterUtils.transformToCode(codeableConcept, list.getLanguage()));
         }
 
         // extension (sourceId) | SubmissionSet.sourceId
-        Extension source = list.getExtensionByUrl("http://profiles.ihe.net/ITI/MHD/StructureDefinition/ihe-sourceId");
+        Extension source = list.getExtensionByUrl("https://profiles.ihe.net/ITI/MHD/StructureDefinition/ihe-sourceId");
         if (source != null && source.getValue() instanceof Identifier identifier) {
             submissionSet.setSourceId(SubmissionSetConverterUtils.removePrefixOid(identifier.getValue()));
         }
@@ -90,7 +84,7 @@ public class SubmissionSetConverter {
 
         // title | SubmissionSet.title
         if (list.getTitle() != null) {
-            submissionSet.setTitle(SubmissionSetConverterUtils.getLocalizedString(list.getTitle()));
+            submissionSet.setTitle(SubmissionSetConverterUtils.getLocalizedString(list.getTitle(), list.getLanguage()));
         }
 
         // code | shall be 'submissionset'
@@ -105,13 +99,13 @@ public class SubmissionSetConverter {
         // source | SubmissionSet.author
         Extension extensionAuthorRole = list.getExtensionByUrl("http://fhir.ch/ig/ch-epr-mhealth/StructureDefinition/ch-ext-author-authorrole");
         if (list.hasSource() || extensionAuthorRole != null) {
-            submissionSet.setAuthor(getAuthor(list.getSource(), extensionAuthorRole, list.getContained()));
+            submissionSet.setAuthor(getAuthor(list.getSource(), extensionAuthorRole, list.getContained(), list.getLanguage()));
         }
 
         // note | SubmissionSet.comments
         Annotation note = list.getNoteFirstRep();
         if (note != null && note.hasText()) {
-            submissionSet.setComments(SubmissionSetConverterUtils.getLocalizedString(note.getText()));
+            submissionSet.setComments(SubmissionSetConverterUtils.getLocalizedString(note.getText(), list.getLanguage()));
         }
 
         // item | references to DocumentReference and Folder List
@@ -210,15 +204,34 @@ public class SubmissionSetConverter {
         }
     }
 
+    /**
+     * Gets submissionSet uniqueId
+     *
+     * @param identifiers list of identifiers
+     * @return submissionSet uniqueId
+     */
     private String getUniqueId(List<Identifier> identifiers) {
         return identifiers.stream()
                 .filter(id -> id.getUse() == IdentifierUse.USUAL)
                 .map(id -> SubmissionSetConverterUtils.removePrefixOid(id.getValue()))
+                .filter(Objects::nonNull)
                 .findAny()
                 .orElse(null);
     }
 
-    private Author getAuthor(Reference author, Extension extensionAuthorRole, List<Resource> contained) {
+    /**
+     * Gets submissionSet.author
+     *
+     * @param author the author's reference
+     * @param extensionAuthorRole
+     * @param contained the list of resources
+     * @param languageCode language of resource content
+     * @return submissionSet.author
+     */
+    private Author getAuthor(@Nullable Reference author,
+                             @Nullable Extension extensionAuthorRole,
+                             List<Resource> contained,
+                             @Nullable String languageCode) {
         Identifiable identifiable = null;
         if (extensionAuthorRole != null) {
             Coding coding = extensionAuthorRole.castToCoding(extensionAuthorRole.getValue());
@@ -226,10 +239,18 @@ public class SubmissionSetConverter {
                 identifiable = new Identifiable(coding.getCode(), new AssigningAuthority(SubmissionSetConverterUtils.removePrefixOid(coding.getSystem())));
             }
         }
-        return SubmissionSetConverterUtils.transformAuthor(author, contained, identifiable);
+        return SubmissionSetConverterUtils.transformAuthor(author, contained, identifiable, languageCode);
     }
 
-    private List<Recipient> getIntendedRecipients(List<Extension> extensions, List<Resource> contained) {
+    /**
+     * Get submissionSet.intendedRecipient
+     *
+     * @param extensions list of extensions
+     * @param contained list of resources
+     * @return submissionSet.intendedRecipient
+     */
+    private List<Recipient> getIntendedRecipients(List<Extension> extensions,
+                                                  List<Resource> contained) {
         List<Recipient> recipients = new ArrayList<>();
 
         for (Extension extRecipient : extensions) {
@@ -261,15 +282,29 @@ public class SubmissionSetConverter {
         return recipients;
     }
 
+    /**
+     * Gets submissionSet.limitedMetadata
+     *
+     * @param profiles list of profiles
+     * @return submissionSet.limitedMetadata
+     */
     private boolean getLimitedMetadata(List<CanonicalType> profiles) {
         final Set<String> limitedProfiles = Set.of("http://ihe.net/fhir/StructureDefinition/IHE_MHD_Provide_Minimal_DocumentBundle",
-                "http://profiles.ihe.net/ITI/MHD/StructureDefinition/IHE.MHD.Minimal.ProvideBundle");
+                "https://profiles.ihe.net/ITI/MHD/StructureDefinition/IHE.MHD.Minimal.ProvideBundle");
 
         return profiles.stream()
                 .filter(p -> limitedProfiles.contains(p.getValue()))
-                .toList().isEmpty();
+                .toList()
+                .isEmpty();
     }
 
+    /**
+     * Get a recipient reference from a submissionSet.intendedRecipient
+     *
+     * @param recipient submissionSet.intendedRecipient
+     * @return a recipient reference
+     */
+    @Nullable
     private IBaseReference getRecipientReference(Recipient recipient) {
         Practitioner practitioner = SubmissionSetConverterUtils.transformToPractitioner(recipient.getPerson());
         ContactPoint contact = SubmissionSetConverterUtils.transformToContactPoint(recipient.getTelecom());
@@ -278,7 +313,7 @@ public class SubmissionSetConverter {
         if (organization != null && practitioner == null) {
             organization.addTelecom(contact);
             return new Reference().setResource(organization);
-        } else if (organization != null && practitioner != null) {
+        } else if (organization != null) {
             PractitionerRole role = new PractitionerRole();
 
             role.setPractitioner((Reference) new Reference().setResource(practitioner));
@@ -286,8 +321,8 @@ public class SubmissionSetConverter {
             role.addTelecom(contact);
 
             return new Reference().setResource(role);
-        } else if (organization == null && practitioner != null) {
-            // May be a patient, related person or practitioner
+        } else if (practitioner != null) {
+            // Maybe a patient, related person or practitioner
             // ¯\_(ツ)_/¯
         }
         return null;
