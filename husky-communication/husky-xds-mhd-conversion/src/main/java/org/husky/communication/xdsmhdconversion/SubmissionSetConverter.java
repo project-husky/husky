@@ -10,6 +10,7 @@
  */
 package org.husky.communication.xdsmhdconversion;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.instance.model.api.IBaseReference;
 import org.hl7.fhir.r4.model.*;
@@ -44,7 +45,8 @@ public class SubmissionSetConverter {
      * @param list The MHD list to convert.
      * @return the equivalent XDS SubmissionSet.
      */
-    public SubmissionSet convertList(final ListResource list) {
+    @NonNull
+    public SubmissionSet convertList(@NonNull final ListResource list) {
         // TODO: list contient un submission set et peut contenir d'autres resources qui ne sont pas utiles
         SubmissionSet submissionSet = new SubmissionSet();
 
@@ -118,8 +120,8 @@ public class SubmissionSetConverter {
      * @param submissionSet The XDS SubmissionSet to convert.
      * @param list          The MHD list in which to put the created resources.
      */
-    public void convertSubmissionSet(final SubmissionSet submissionSet,
-                                     final ListResource list) {
+    public void convertSubmissionSet(@NonNull final SubmissionSet submissionSet,
+                                     @NonNull final ListResource list) {
 
         // profile | SubmissionSet.limitedMetadata
         if (submissionSet.isLimitedMetadata()) {
@@ -207,7 +209,8 @@ public class SubmissionSetConverter {
      * @param identifiers list of identifiers
      * @return submissionSet uniqueId
      */
-    private String getUniqueId(List<Identifier> identifiers) {
+    @Nullable
+    private String getUniqueId(@NonNull List<Identifier> identifiers) {
         return identifiers.stream()
                 .filter(id -> id.getUse() == IdentifierUse.USUAL)
                 .map(id -> SubmissionSetConverterUtils.removePrefixOid(id.getValue()))
@@ -225,9 +228,10 @@ public class SubmissionSetConverter {
      * @param languageCode language of resource content
      * @return submissionSet.author
      */
+    @Nullable
     private Author getAuthor(@Nullable Reference author,
                              @Nullable Extension extensionAuthorRole,
-                             List<Resource> contained,
+                             @NonNull List<Resource> contained,
                              @Nullable String languageCode) {
         Identifiable identifiable = null;
         if (extensionAuthorRole != null) {
@@ -246,8 +250,9 @@ public class SubmissionSetConverter {
      * @param contained list of resources
      * @return submissionSet.intendedRecipient
      */
-    private List<Recipient> getIntendedRecipients(List<Extension> extensions,
-                                                  List<Resource> contained) {
+    @NonNull
+    private List<Recipient> getIntendedRecipients(@NonNull List<Extension> extensions,
+                                                  @NonNull List<Resource> contained) {
         List<Recipient> recipients = new ArrayList<>();
 
         for (Extension extRecipient : extensions) {
@@ -285,14 +290,11 @@ public class SubmissionSetConverter {
      * @param profiles list of profiles
      * @return submissionSet.limitedMetadata
      */
-    private boolean getLimitedMetadata(List<CanonicalType> profiles) {
+    private boolean getLimitedMetadata(@NonNull List<CanonicalType> profiles) {
         final Set<String> limitedProfiles = Set.of("http://ihe.net/fhir/StructureDefinition/IHE_MHD_Provide_Minimal_DocumentBundle",
                 "https://profiles.ihe.net/ITI/MHD/StructureDefinition/IHE.MHD.Minimal.ProvideBundle");
 
-        return profiles.stream()
-                .filter(p -> limitedProfiles.contains(p.getValue()))
-                .toList()
-                .isEmpty();
+        return profiles.stream().anyMatch(p -> limitedProfiles.contains(p.getValue()));
     }
 
     /**
@@ -302,7 +304,7 @@ public class SubmissionSetConverter {
      * @return a recipient reference
      */
     @Nullable
-    private IBaseReference getRecipientReference(Recipient recipient) {
+    private IBaseReference getRecipientReference(@NonNull Recipient recipient) {
         Practitioner practitioner = SubmissionSetConverterUtils.transformToPractitioner(recipient.getPerson());
         ContactPoint contact = SubmissionSetConverterUtils.transformToContactPoint(recipient.getTelecom());
         var organization = SubmissionSetConverterUtils.transformToFHIROrganization(recipient.getOrganization());

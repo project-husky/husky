@@ -20,6 +20,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Found in MobileAccessGateway project, 19.09.2022,
+ * (https://github.com/i4mi/MobileAccessGateway/blob/master/src/main/java/ch/bfh/ti/i4mi/mag/mhd/SchemeMapper.java)
+ *
  * mapper for code systems to schemes
  *
  * @author alexander kreutz

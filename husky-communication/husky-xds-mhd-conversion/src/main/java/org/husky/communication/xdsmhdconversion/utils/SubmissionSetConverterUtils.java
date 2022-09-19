@@ -1,7 +1,7 @@
 package org.husky.communication.xdsmhdconversion.utils;
 
 import ca.uhn.fhir.rest.server.exceptions.InvalidRequestException;
-import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.*;
 import org.hl7.fhir.r4.model.ContactPoint.ContactPointSystem;
@@ -12,7 +12,6 @@ import org.husky.communication.ch.enums.SubmissionSetAuthorRole;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Person;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.*;
 
-import javax.print.DocFlavor;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -86,8 +85,8 @@ public class SubmissionSetConverterUtils {
      * @return the resource corresponding to the reference if available
      */
     @Nullable
-    public static Resource findResource(Reference ref,
-                                        List<Resource> contained) {
+    public static Resource findResource(@NonNull Reference ref,
+                                        @NonNull List<Resource> contained) {
 
         for (Resource res : contained) {
             if (res.getId().equals(ref.getReference())) {
@@ -118,7 +117,8 @@ public class SubmissionSetConverterUtils {
      * @param identifier FHIR Identifier
      * @return XDS Identifiable
      */
-    public static Identifiable transformToIdentifiable(Identifier identifier) {
+    @NonNull
+    public static Identifiable transformToIdentifiable(@NonNull Identifier identifier) {
         String system = removePrefixOid(identifier.getSystem());
         return new Identifiable(identifier.getValue(), new AssigningAuthority(system));
     }
@@ -164,7 +164,8 @@ public class SubmissionSetConverterUtils {
      * @param patient XDS Identifiable
      * @return FHIR Patient Reference
      */
-    public static Reference transformToPatientReference(Identifiable patient) {
+    @NonNull
+    public static Reference transformToPatientReference(@NonNull Identifiable patient) {
         String system = patient.getAssigningAuthority().getUniversalId();
         String value = patient.getId();
         return new Reference().setReference(system + "-" + value);
@@ -176,8 +177,9 @@ public class SubmissionSetConverterUtils {
      * @param name FHIR HumanName
      * @return XDS Name
      */
-    public static Name transformToName(HumanName name) {
-        Name targetName = new XpnName();
+    @NonNull
+    public static Name<?> transformToName(@NonNull HumanName name) {
+        Name<?> targetName = new XpnName();
 
         if (name.hasPrefix()) targetName.setPrefix(name.getPrefixAsSingleString());
         if (name.hasSuffix()) targetName.setSuffix(name.getSuffixAsSingleString());
@@ -187,7 +189,7 @@ public class SubmissionSetConverterUtils {
 
         if (!givens.isEmpty()) {
             targetName.setGivenName(givens.get(0).getValue());
-            targetName.setSecondAndFurtherGivenNames(String.join(StringUtils.SPACE, givens.stream()
+            targetName.setSecondAndFurtherGivenNames(String.join(" ", givens.stream()
                     .skip(1)
                     .map(StringType::getValue)
                     .toList()));
@@ -235,8 +237,9 @@ public class SubmissionSetConverterUtils {
      * @param identifier FHIR Identifier
      * @return XDS Person
      */
+    @NonNull
     private static Person transformToPerson(@Nullable HumanName name,
-                                            Identifier identifier) {
+                                            @NonNull Identifier identifier) {
         Person result = new Person();
         if (name != null) result.setName(transformToName(name));
         result.setId(transformToIdentifiable(identifier));
@@ -292,7 +295,8 @@ public class SubmissionSetConverterUtils {
      * @param telecom XDS Telecom
      * @return FHIR ContactPoint
      */
-    public static ContactPoint transformToContactPoint(Telecom telecom) {
+    @NonNull
+    public static ContactPoint transformToContactPoint(@NonNull Telecom telecom) {
         ContactPoint result = new ContactPoint();
 
         String type = telecom.getType();
@@ -399,8 +403,9 @@ public class SubmissionSetConverterUtils {
      * @param code XDS code
      * @return FHIR CodeableConcept
      */
-    public static CodeableConcept transformToCodeableConcept(Code code) {
-        String display = code.getDisplayName() == null ? StringUtils.EMPTY : code.getDisplayName().getValue();
+    @NonNull
+    public static CodeableConcept transformToCodeableConcept(@NonNull Code code) {
+        String display = code.getDisplayName() == null ? " ": code.getDisplayName().getValue();
         return new CodeableConcept().addCoding(new Coding().setCode(code.getCode())
                 .setSystem(new SchemeMapper().getSystem(code.getSchemeName()))
                 .setDisplay(display));
@@ -412,7 +417,8 @@ public class SubmissionSetConverterUtils {
      * @param patient XDS Identifiable
      * @return FHIR CodeableConcept
      */
-    public static CodeableConcept transformToCodeableConcept(Identifiable patient) {
+    @NonNull
+    public static CodeableConcept transformToCodeableConcept(@NonNull Identifiable patient) {
         Coding coding = new Coding();
         coding.setCode(patient.getId());
 
@@ -452,7 +458,7 @@ public class SubmissionSetConverterUtils {
      */
     @Nullable
     public static Author transformAuthor(@Nullable Reference author,
-                                         List<Resource> contained,
+                                         @NonNull List<Resource> contained,
                                          @Nullable Identifiable authorRole,
                                          @Nullable String languageCode) {
         if (author == null || author.getReference() == null) {
@@ -555,7 +561,7 @@ public class SubmissionSetConverterUtils {
 
         String more = name.getSecondAndFurtherGivenNames();
         if (more != null) {
-            for (String extraName : more.split(StringUtils.SPACE)) {
+            for (String extraName : more.split(" ")) {
                 result.addGiven(extraName);
             }
         }
@@ -598,7 +604,8 @@ public class SubmissionSetConverterUtils {
      * @param author XDS Author
      * @return FHIR Reference
      */
-    public static Reference transformToReference(Author author) {
+    @NonNull
+    public static Reference transformToReference(@NonNull Author author) {
         Person person = author.getAuthorPerson();
 
         if (isPatientAuthor(author)) {
