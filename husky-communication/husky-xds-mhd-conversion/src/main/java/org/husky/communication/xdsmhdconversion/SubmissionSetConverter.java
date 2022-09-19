@@ -49,7 +49,6 @@ public class SubmissionSetConverter {
         SubmissionSet submissionSet = new SubmissionSet();
 
         // profile | SubmissionSet.limitedMetadata
-        // ¯\_(ツ)_/¯
         submissionSet.setLimitedMetadata(getLimitedMetadata(list.getMeta().getProfile()));
 
         // extension (designationType) | SubmissionSet.contentTypeCode
@@ -58,7 +57,7 @@ public class SubmissionSetConverter {
             submissionSet.setContentTypeCode(SubmissionSetConverterUtils.transformToCode(codeableConcept, list.getLanguage()));
         }
 
-        // extension (sourceId) | SubmissionSet.sourceId
+        // extension (sourceId) | SubmissionSet.sourceId (required)
         Extension source = list.getExtensionByUrl("https://profiles.ihe.net/ITI/MHD/StructureDefinition/ihe-sourceId");
         if (source != null && source.getValue() instanceof Identifier identifier) {
             submissionSet.setSourceId(SubmissionSetConverterUtils.removePrefixOid(identifier.getValue()));
@@ -72,7 +71,6 @@ public class SubmissionSetConverter {
         submissionSet.setUniqueId(this.getUniqueId(list.getIdentifier()));
 
         // identifier | SubmissionSet.entryUUID
-        // ¯\_(ツ)_/¯
         submissionSet.assignEntryUuid();
         list.setId(submissionSet.getEntryUuid());
 
@@ -90,7 +88,7 @@ public class SubmissionSetConverter {
         // code | shall be 'submissionset'
         // ---
 
-        // subject | SubmissionSet.patientId
+        // subject | SubmissionSet.patientId (required)
         submissionSet.setPatientId(SubmissionSetConverterUtils.transformToIdentifiable(list.getSubject().getIdentifier()));
 
         // date | SubmissionSet.submissionTime
@@ -193,7 +191,6 @@ public class SubmissionSetConverter {
         }
 
         // source | SubmissionSet.author
-        // ¯\_(ツ)_/¯
         if (submissionSet.getAuthors().size() == 1) {
             list.setSource(SubmissionSetConverterUtils.transformToReference(submissionSet.getAuthors().get(0)));
         }
@@ -323,7 +320,6 @@ public class SubmissionSetConverter {
             return new Reference().setResource(role);
         } else if (practitioner != null) {
             // Maybe a patient, related person or practitioner
-            // ¯\_(ツ)_/¯
         }
         return null;
     }

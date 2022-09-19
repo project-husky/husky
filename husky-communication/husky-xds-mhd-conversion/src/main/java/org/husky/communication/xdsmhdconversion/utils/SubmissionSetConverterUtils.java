@@ -12,6 +12,7 @@ import org.husky.communication.ch.enums.SubmissionSetAuthorRole;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Person;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.*;
 
+import javax.print.DocFlavor;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -107,7 +108,6 @@ public class SubmissionSetConverterUtils {
     public static LocalizedString getLocalizedString(@Nullable String string,
                                                      @Nullable String languageCode) {
         // FIX FOR CARA
-        // ¯\_(ツ)_/¯
         languageCode = LanguageCode.isInValueSet(languageCode) ? languageCode : null;
         return string != null ? new LocalizedString(string, languageCode, "UTF-8") : null;
     }
@@ -167,7 +167,6 @@ public class SubmissionSetConverterUtils {
     public static Reference transformToPatientReference(Identifiable patient) {
         String system = patient.getAssigningAuthority().getUniversalId();
         String value = patient.getId();
-        // ¯\_(ツ)_/¯
         return new Reference().setReference(system + "-" + value);
     }
 
@@ -188,7 +187,7 @@ public class SubmissionSetConverterUtils {
 
         if (!givens.isEmpty()) {
             targetName.setGivenName(givens.get(0).getValue());
-            targetName.setSecondAndFurtherGivenNames(String.join(" ", givens.stream()
+            targetName.setSecondAndFurtherGivenNames(String.join(StringUtils.SPACE, givens.stream()
                     .skip(1)
                     .map(StringType::getValue)
                     .toList()));
@@ -280,7 +279,7 @@ public class SubmissionSetConverterUtils {
                     default -> null;
                 };
                 result.setUse(use);
-                // ¯\_(ツ)_/¯
+
                 if (contactPoint.getUse() == ContactPointUse.MOBILE) result.setType("CP");
             }
         }
@@ -319,7 +318,6 @@ public class SubmissionSetConverterUtils {
                 default -> ContactPointSystem.PHONE;
             };
             result.setSystem(cps);
-
         }
         return result;
     }
