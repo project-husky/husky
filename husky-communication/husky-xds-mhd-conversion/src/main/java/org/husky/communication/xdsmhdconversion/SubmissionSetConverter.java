@@ -10,7 +10,6 @@
  */
 package org.husky.communication.xdsmhdconversion;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.instance.model.api.IBaseReference;
 import org.hl7.fhir.r4.model.*;
@@ -45,28 +44,26 @@ public class SubmissionSetConverter {
      * @param list The MHD list to convert.
      * @return the equivalent XDS SubmissionSet.
      */
-    @NonNull
-    public SubmissionSet convertList(@NonNull final ListResource list) {
-        // TODO: list contient un submission set et peut contenir d'autres resources qui ne sont pas utiles
-        SubmissionSet submissionSet = new SubmissionSet();
+    public SubmissionSet convertList(final ListResource list) {
+        final SubmissionSet submissionSet = new SubmissionSet();
 
         // profile | SubmissionSet.limitedMetadata
-        submissionSet.setLimitedMetadata(getLimitedMetadata(list.getMeta().getProfile()));
+        submissionSet.setLimitedMetadata(isLimitedMetadata(list.getMeta().getProfile()));
 
         // extension (designationType) | SubmissionSet.contentTypeCode
-        Extension designationType = list.getExtensionByUrl("https://profiles.ihe.net/ITI/MHD/StructureDefinition/ihe-designationType");
+        final Extension designationType = list.getExtensionByUrl("https://profiles.ihe.net/ITI/MHD/StructureDefinition/ihe-designationType");
         if (designationType != null && designationType.getValue() instanceof CodeableConcept codeableConcept) {
             submissionSet.setContentTypeCode(SubmissionSetConverterUtils.transformToCode(codeableConcept, list.getLanguage()));
         }
 
         // extension (sourceId) | SubmissionSet.sourceId (required)
-        Extension source = list.getExtensionByUrl("https://profiles.ihe.net/ITI/MHD/StructureDefinition/ihe-sourceId");
+        final Extension source = list.getExtensionByUrl("https://profiles.ihe.net/ITI/MHD/StructureDefinition/ihe-sourceId");
         if (source != null && source.getValue() instanceof Identifier identifier) {
             submissionSet.setSourceId(SubmissionSetConverterUtils.removePrefixOid(identifier.getValue()));
         }
 
         // extension (intendedRecipient) | SubmissionSet.intendedRecipient
-        List<Extension> extIntentRecipients = list.getExtensionsByUrl("https://profiles.ihe.net/ITI/MHD/StructureDefinition/ihe-intendedRecipient");
+        final List<Extension> extIntentRecipients = list.getExtensionsByUrl("https://profiles.ihe.net/ITI/MHD/StructureDefinition/ihe-intendedRecipient");
         submissionSet.getIntendedRecipients().addAll(getIntendedRecipients(extIntentRecipients, list.getContained()));
 
         // identifier | SubmissionSet.uniqueId
@@ -97,13 +94,13 @@ public class SubmissionSetConverter {
         submissionSet.setSubmissionTime(XdsMetadataUtil.convertDateToDtmString(list.getDate()));
 
         // source | SubmissionSet.author
-        Extension extensionAuthorRole = list.getExtensionByUrl("http://fhir.ch/ig/ch-epr-mhealth/StructureDefinition/ch-ext-author-authorrole");
+        final Extension extensionAuthorRole = list.getExtensionByUrl("http://fhir.ch/ig/ch-epr-mhealth/StructureDefinition/ch-ext-author-authorrole");
         if (list.hasSource() || extensionAuthorRole != null) {
             submissionSet.setAuthor(getAuthor(list.getSource(), extensionAuthorRole, list.getContained(), list.getLanguage()));
         }
 
         // note | SubmissionSet.comments
-        Annotation note = list.getNoteFirstRep();
+        final Annotation note = list.getNoteFirstRep();
         if (note != null && note.hasText()) {
             submissionSet.setComments(SubmissionSetConverterUtils.getLocalizedString(note.getText(), list.getLanguage()));
         }
@@ -120,8 +117,8 @@ public class SubmissionSetConverter {
      * @param submissionSet The XDS SubmissionSet to convert.
      * @param list          The MHD list in which to put the created resources.
      */
-    public void convertSubmissionSet(@NonNull final SubmissionSet submissionSet,
-                                     @NonNull final ListResource list) {
+    public void convertSubmissionSet(final SubmissionSet submissionSet,
+                                     final ListResource list) {
 
         // profile | SubmissionSet.limitedMetadata
         if (submissionSet.isLimitedMetadata()) {
@@ -138,7 +135,7 @@ public class SubmissionSetConverter {
         }
 
         // extension (intendedRecipient) | SubmissionSet.intendedRecipient
-        List<Recipient> recipients = submissionSet.getIntendedRecipients();
+        final List<Recipient> recipients = submissionSet.getIntendedRecipients();
         for (Recipient recipient : recipients) {
             list.addExtension()
                     .setUrl("https://profiles.ihe.net/ITI/MHD/StructureDefinition/ihe-intendedRecipient")
@@ -210,7 +207,7 @@ public class SubmissionSetConverter {
      * @return submissionSet uniqueId
      */
     @Nullable
-    private String getUniqueId(@NonNull List<Identifier> identifiers) {
+    private String getUniqueId(final List<Identifier> identifiers) {
         return identifiers.stream()
                 .filter(id -> id.getUse() == IdentifierUse.USUAL)
                 .map(id -> SubmissionSetConverterUtils.removePrefixOid(id.getValue()))
@@ -229,13 +226,13 @@ public class SubmissionSetConverter {
      * @return submissionSet.author
      */
     @Nullable
-    private Author getAuthor(@Nullable Reference author,
-                             @Nullable Extension extensionAuthorRole,
-                             @NonNull List<Resource> contained,
-                             @Nullable String languageCode) {
+    private Author getAuthor(@Nullable final Reference author,
+                             @Nullable final Extension extensionAuthorRole,
+                             final List<Resource> contained,
+                             @Nullable final String languageCode) {
         Identifiable identifiable = null;
         if (extensionAuthorRole != null) {
-            Coding coding = extensionAuthorRole.castToCoding(extensionAuthorRole.getValue());
+            final Coding coding = extensionAuthorRole.castToCoding(extensionAuthorRole.getValue());
             if (coding != null) {
                 identifiable = new Identifiable(coding.getCode(), new AssigningAuthority(SubmissionSetConverterUtils.removePrefixOid(coding.getSystem())));
             }
@@ -250,15 +247,14 @@ public class SubmissionSetConverter {
      * @param contained list of resources
      * @return submissionSet.intendedRecipient
      */
-    @NonNull
-    private List<Recipient> getIntendedRecipients(@NonNull List<Extension> extensions,
-                                                  @NonNull List<Resource> contained) {
-        List<Recipient> recipients = new ArrayList<>();
+    private List<Recipient> getIntendedRecipients(final List<Extension> extensions,
+                                                  final List<Resource> contained) {
+        final List<Recipient> recipients = new ArrayList<>();
 
         for (Extension extRecipient : extensions) {
-            Reference refRecipient = (Reference) extRecipient.getValue();
-            Resource res = SubmissionSetConverterUtils.findResource(refRecipient, contained);
-            Recipient recipient = new Recipient();
+            final var recipient = new Recipient();
+            final var refRecipient = (Reference) extRecipient.getValue();
+            final Resource res = SubmissionSetConverterUtils.findResource(refRecipient, contained);
 
             if (res instanceof Practitioner practitioner) {
                 recipient.setPerson(SubmissionSetConverterUtils.transformToPerson(practitioner));
@@ -290,7 +286,7 @@ public class SubmissionSetConverter {
      * @param profiles list of profiles
      * @return submissionSet.limitedMetadata
      */
-    private boolean getLimitedMetadata(@NonNull List<CanonicalType> profiles) {
+    private boolean isLimitedMetadata(final List<CanonicalType> profiles) {
         final Set<String> limitedProfiles = Set.of("http://ihe.net/fhir/StructureDefinition/IHE_MHD_Provide_Minimal_DocumentBundle",
                 "https://profiles.ihe.net/ITI/MHD/StructureDefinition/IHE.MHD.Minimal.ProvideBundle");
 
@@ -304,16 +300,16 @@ public class SubmissionSetConverter {
      * @return a recipient reference
      */
     @Nullable
-    private IBaseReference getRecipientReference(@NonNull Recipient recipient) {
-        Practitioner practitioner = SubmissionSetConverterUtils.transformToPractitioner(recipient.getPerson());
-        ContactPoint contact = SubmissionSetConverterUtils.transformToContactPoint(recipient.getTelecom());
-        var organization = SubmissionSetConverterUtils.transformToFHIROrganization(recipient.getOrganization());
+    private IBaseReference getRecipientReference(final Recipient recipient) {
+        final Practitioner practitioner = SubmissionSetConverterUtils.transformToPractitioner(recipient.getPerson());
+        final ContactPoint contact = SubmissionSetConverterUtils.transformToContactPoint(recipient.getTelecom());
+        final var organization = SubmissionSetConverterUtils.transformToFHIROrganization(recipient.getOrganization());
 
         if (organization != null && practitioner == null) {
             organization.addTelecom(contact);
             return new Reference().setResource(organization);
         } else if (organization != null) {
-            PractitionerRole role = new PractitionerRole();
+            final PractitionerRole role = new PractitionerRole();
 
             role.setPractitioner((Reference) new Reference().setResource(practitioner));
             role.setOrganization((Reference) new Reference().setResource(organization));
