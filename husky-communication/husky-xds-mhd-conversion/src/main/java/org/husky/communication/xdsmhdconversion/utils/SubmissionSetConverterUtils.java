@@ -146,10 +146,12 @@ public class SubmissionSetConverterUtils {
     public static Identifier transformToIdentifier(@Nullable final Identifiable identifiable) {
         if (identifiable == null) return null;
 
-        final var result = new Identifier();
         final AssigningAuthority assigningAuthority = identifiable.getAssigningAuthority();
         final String value = identifiable.getId();
 
+        if (assigningAuthority == null && value == null) return null;
+
+        final var result = new Identifier();
         if (assigningAuthority != null) {
             final String system = assigningAuthority.getUniversalId();
             result.setSystem(addPrefixOid(system));
@@ -460,7 +462,7 @@ public class SubmissionSetConverterUtils {
                 final var result = new Author();
                 final var person = new Person();
                 // CARA PMP
-                // At least an authorPerson, authorTelecommunication, or authorInstitution sub-attribute must be present
+                // TODO At least an authorPerson, authorTelecommunication, or authorInstitution sub-attribute must be present
                 // Either authorPerson, authorInstitution or authorTelecom shall be specified in the SubmissionSet [IHE ITI Technical Framework Volume 3 (4.2.3.1.4)].
                 person.setName(transformToName(new HumanName().setFamily("---")));
                 result.setAuthorPerson(person);
@@ -551,7 +553,11 @@ public class SubmissionSetConverterUtils {
             result.addSuffix(name.getSuffix());
         }
 
-        result.setFamily(name.getFamilyName()).addGiven(name.getGivenName());
+        if (name.getGivenName() != null) {
+            result.addGiven(name.getGivenName());
+        }
+
+        result.setFamily(name.getFamilyName());
 
         final String more = name.getSecondAndFurtherGivenNames();
         if (more != null) {

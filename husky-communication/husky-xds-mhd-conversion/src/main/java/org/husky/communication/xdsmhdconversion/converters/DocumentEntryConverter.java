@@ -8,7 +8,7 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-package org.husky.communication.xdsmhdconversion;
+package org.husky.communication.xdsmhdconversion.converters;
 
 import org.hl7.fhir.r4.model.DocumentReference;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
