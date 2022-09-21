@@ -34,7 +34,7 @@ class AddressReaderTest {
 
     @Test
     void testFullAddress() throws Exception {
-        var addressReader = this.unmarshall("""
+        final var addressReader = this.unmarshall("""
                 <country>CH</country>
                 <city>Musterhausen</city>
                 <postalCode>9999</postalCode>
@@ -58,7 +58,28 @@ class AddressReaderTest {
 
     @Test
     void testEmptyAddress() throws Exception {
-        var addressReader = this.unmarshall("");
+        final var addressReader = this.unmarshall("");
+
+        assertTrue(addressReader.getStreetAddressLines().isEmpty());
+        assertTrue(addressReader.getAdditionalLocator().isEmpty());
+        assertTrue(addressReader.getCity().isEmpty());
+        assertTrue(addressReader.getCountry().isEmpty());
+        assertTrue(addressReader.getPostbox().isEmpty());
+        assertTrue(addressReader.getPostalCode().isEmpty());
+        assertTrue(addressReader.getState().isEmpty());
+    }
+
+    @Test
+    void testNullFlavorAddress() throws Exception {
+        final var addressReader = this.unmarshall("""
+                <country nullFlavor="UNK"/>
+                <city nullFlavor="UNK"/>
+                <postalCode nullFlavor="UNK"/>
+                <additionalLocator nullFlavor="UNK"/>
+                <streetAddressLine nullFlavor="UNK"/>
+                <state nullFlavor="UNK"/>
+                <postBox nullFlavor="UNK"/>
+                """);
 
         assertTrue(addressReader.getStreetAddressLines().isEmpty());
         assertTrue(addressReader.getAdditionalLocator().isEmpty());

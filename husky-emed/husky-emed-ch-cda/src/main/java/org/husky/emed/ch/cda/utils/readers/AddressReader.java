@@ -43,7 +43,9 @@ public record AddressReader(AD address) {
                 .map(JAXBElement::getValue)
                 .filter(AdxpStreetAddressLine.class::isInstance)
                 .map(AdxpStreetAddressLine.class::cast)
+                .filter(t -> t.getNullFlavor().isEmpty())
                 .map(AdxpStreetAddressLine::getMergedXmlMixed)
+                .filter(string -> !string.isBlank())
                 .toList();
     }
 
@@ -103,7 +105,9 @@ public record AddressReader(AD address) {
                 .map(JAXBElement::getValue)
                 .filter(type::isInstance)
                 .map(type::cast)
+                .filter(t -> t.getNullFlavor().isEmpty())
                 .map(T::getMergedXmlMixed)
+                .filter(string -> !string.isBlank())
                 .findAny();
     }
 
