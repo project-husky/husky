@@ -26,7 +26,7 @@ public class AddressDigest {
     /**
      * The street address line(s).
      */
-    private final List<String> streetAddressLines = new ArrayList<>(0);
+    private List<String> streetAddressLines = new ArrayList<>(0);
 
     /**
      * Addressed city (in foreign addresses if necessary including province, etc.).
@@ -93,6 +93,10 @@ public class AddressDigest {
 
     public List<String> getStreetAddressLines() {
         return streetAddressLines;
+    }
+
+    public void setStreetAddressLines(final List<String> streetAddressLines) {
+        this.streetAddressLines = streetAddressLines;
     }
 
     @Nullable
