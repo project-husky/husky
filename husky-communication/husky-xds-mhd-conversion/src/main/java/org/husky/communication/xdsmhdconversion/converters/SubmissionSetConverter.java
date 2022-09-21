@@ -18,7 +18,7 @@ import org.hl7.fhir.r4.model.ListResource.ListMode;
 import org.hl7.fhir.r4.model.Organization;
 import org.hl7.fhir.r4.model.ListResource.ListStatus;
 import org.husky.common.utils.XdsMetadataUtil;
-import org.husky.communication.xdsmhdconversion.utils.SubmissionSetConverterUtils;
+import org.husky.communication.xdsmhdconversion.utils.ConverterUtils;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.*;
 
 import java.util.*;
@@ -53,13 +53,13 @@ public class SubmissionSetConverter {
         // extension (designationType) | SubmissionSet.contentTypeCode
         final Extension designationType = list.getExtensionByUrl("https://profiles.ihe.net/ITI/MHD/StructureDefinition/ihe-designationType");
         if (designationType != null && designationType.getValue() instanceof CodeableConcept codeableConcept) {
-            submissionSet.setContentTypeCode(SubmissionSetConverterUtils.transformToCode(codeableConcept, list.getLanguage()));
+            submissionSet.setContentTypeCode(ConverterUtils.transformToCode(codeableConcept, list.getLanguage()));
         }
 
         // extension (sourceId) | SubmissionSet.sourceId (required)
         final Extension source = list.getExtensionByUrl("https://profiles.ihe.net/ITI/MHD/StructureDefinition/ihe-sourceId");
         if (source != null && source.getValue() instanceof Identifier identifier) {
-            submissionSet.setSourceId(SubmissionSetConverterUtils.removePrefixOid(identifier.getValue()));
+            submissionSet.setSourceId(ConverterUtils.removePrefixOid(identifier.getValue()));
         }
 
         // extension (intendedRecipient) | SubmissionSet.intendedRecipient
@@ -81,14 +81,14 @@ public class SubmissionSetConverter {
 
         // title | SubmissionSet.title
         if (list.getTitle() != null) {
-            submissionSet.setTitle(SubmissionSetConverterUtils.getLocalizedString(list.getTitle(), list.getLanguage()));
+            submissionSet.setTitle(ConverterUtils.getLocalizedString(list.getTitle(), list.getLanguage()));
         }
 
         // code | shall be 'submissionset'
         // ---
 
         // subject | SubmissionSet.patientId (required)
-        submissionSet.setPatientId(SubmissionSetConverterUtils.transformToIdentifiable(list.getSubject().getIdentifier()));
+        submissionSet.setPatientId(ConverterUtils.transformToIdentifiable(list.getSubject().getIdentifier()));
 
         // date | SubmissionSet.submissionTime
         submissionSet.setSubmissionTime(XdsMetadataUtil.convertDateToDtmString(list.getDate()));
@@ -102,7 +102,7 @@ public class SubmissionSetConverter {
         // note | SubmissionSet.comments
         final Annotation note = list.getNoteFirstRep();
         if (note != null && note.hasText()) {
-            submissionSet.setComments(SubmissionSetConverterUtils.getLocalizedString(note.getText(), list.getLanguage()));
+            submissionSet.setComments(ConverterUtils.getLocalizedString(note.getText(), list.getLanguage()));
         }
 
         // item | references to DocumentReference and Folder List
@@ -131,7 +131,7 @@ public class SubmissionSetConverter {
         if (submissionSet.getSourceId() != null) {
             list.addExtension()
                     .setUrl("https://profiles.ihe.net/ITI/MHD/StructureDefinition/ihe-sourceId")
-                    .setValue(new Identifier().setValue(SubmissionSetConverterUtils.addPrefixOid(submissionSet.getSourceId())));
+                    .setValue(new Identifier().setValue(ConverterUtils.addPrefixOid(submissionSet.getSourceId())));
         }
 
         // extension (intendedRecipient) | SubmissionSet.intendedRecipient
@@ -146,21 +146,21 @@ public class SubmissionSetConverter {
         if (submissionSet.getContentTypeCode() != null) {
             list.addExtension()
                     .setUrl("https://profiles.ihe.net/ITI/MHD/StructureDefinition/ihe-designationType")
-                    .setValue(SubmissionSetConverterUtils.transformToCodeableConcept(submissionSet.getContentTypeCode()));
+                    .setValue(ConverterUtils.transformToCodeableConcept(submissionSet.getContentTypeCode()));
         }
 
         // identifier | SubmissionSet.uniqueId
         list.addIdentifier(new Identifier().setUse(IdentifierUse.USUAL)
                 .setSystem("urn:ietf:rfc:3986")
-                .setValue(SubmissionSetConverterUtils.addPrefixOid(submissionSet.getUniqueId())));
+                .setValue(ConverterUtils.addPrefixOid(submissionSet.getUniqueId())));
 
         // identifier | SubmissionSet.entryUuid
         if (submissionSet.getEntryUuid() != null) {
             list.addIdentifier(new Identifier().setUse(IdentifierUse.OFFICIAL)
                     .setSystem("urn:ietf:rfc:3986")
-                    .setValue(SubmissionSetConverterUtils.addPrefixUuid(submissionSet.getEntryUuid())));
+                    .setValue(ConverterUtils.addPrefixUuid(submissionSet.getEntryUuid())));
 
-            list.setId(SubmissionSetConverterUtils.removePrefixUuid(submissionSet.getEntryUuid()));
+            list.setId(ConverterUtils.removePrefixUuid(submissionSet.getEntryUuid()));
         }
 
         // status | SubmissionSet.availabilityStatus
@@ -181,17 +181,17 @@ public class SubmissionSetConverter {
 
         // subject | SubmissionSet.patientId
         if (submissionSet.getPatientId() != null) {
-            list.setSubject(SubmissionSetConverterUtils.transformToPatientReference(submissionSet.getPatientId()));
+            list.setSubject(ConverterUtils.transformToPatientReference(submissionSet.getPatientId()));
         }
 
         // date | SubmissionSet.submissionTime
         if (submissionSet.getSubmissionTime() != null) {
-            list.setDate(Date.from(submissionSet.getSubmissionTime().getDateTime().toInstant()));
+            list.setDate(XdsMetadataUtil.convertDtmStringToDate(submissionSet.getSubmissionTime().toHL7()));
         }
 
         // source | SubmissionSet.author
         if (submissionSet.getAuthors().size() == 1) {
-            list.setSource(SubmissionSetConverterUtils.transformToReference(submissionSet.getAuthors().get(0)));
+            list.setSource(ConverterUtils.transformToReference(submissionSet.getAuthors().get(0)));
         }
 
         // note | SubmissionSet.comments
@@ -210,7 +210,7 @@ public class SubmissionSetConverter {
     private String getUniqueId(final List<Identifier> identifiers) {
         return identifiers.stream()
                 .filter(id -> id.getUse() == IdentifierUse.USUAL)
-                .map(id -> SubmissionSetConverterUtils.removePrefixOid(id.getValue()))
+                .map(id -> ConverterUtils.removePrefixOid(id.getValue()))
                 .filter(Objects::nonNull)
                 .findAny()
                 .orElse(null);
@@ -234,10 +234,10 @@ public class SubmissionSetConverter {
         if (extensionAuthorRole != null) {
             final Coding coding = extensionAuthorRole.castToCoding(extensionAuthorRole.getValue());
             if (coding != null) {
-                identifiable = new Identifiable(coding.getCode(), new AssigningAuthority(SubmissionSetConverterUtils.removePrefixOid(coding.getSystem())));
+                identifiable = new Identifiable(coding.getCode(), new AssigningAuthority(ConverterUtils.removePrefixOid(coding.getSystem())));
             }
         }
-        return SubmissionSetConverterUtils.transformAuthor(author, contained, identifiable, languageCode);
+        return ConverterUtils.transformAuthor(author, contained, identifiable, languageCode);
     }
 
     /**
@@ -254,24 +254,24 @@ public class SubmissionSetConverter {
         for (Extension extRecipient : extensions) {
             final var recipient = new Recipient();
             final var refRecipient = (Reference) extRecipient.getValue();
-            final Resource res = SubmissionSetConverterUtils.findResource(refRecipient, contained);
+            final Resource res = ConverterUtils.findResource(refRecipient, contained);
 
             if (res instanceof Practitioner practitioner) {
-                recipient.setPerson(SubmissionSetConverterUtils.transformToPerson(practitioner));
-                recipient.setTelecom(SubmissionSetConverterUtils.transformToTelecom(practitioner.getTelecomFirstRep()));
+                recipient.setPerson(ConverterUtils.transformToPerson(practitioner));
+                recipient.setTelecom(ConverterUtils.transformToTelecom(practitioner.getTelecomFirstRep()));
             } else if (res instanceof Organization organization) {
-                recipient.setOrganization(SubmissionSetConverterUtils.transformToXDSOrganization(organization));
-                recipient.setTelecom(SubmissionSetConverterUtils.transformToTelecom(organization.getTelecomFirstRep()));
+                recipient.setOrganization(ConverterUtils.transformToXDSOrganization(organization));
+                recipient.setTelecom(ConverterUtils.transformToTelecom(organization.getTelecomFirstRep()));
             } else if (res instanceof PractitionerRole practitionerRole) {
-                recipient.setPerson(SubmissionSetConverterUtils.transformToPerson((Practitioner) SubmissionSetConverterUtils.findResource(practitionerRole.getPractitioner(), contained)));
-                recipient.setOrganization(SubmissionSetConverterUtils.transformToXDSOrganization((Organization) SubmissionSetConverterUtils.findResource(practitionerRole.getOrganization(), contained)));
-                recipient.setTelecom(SubmissionSetConverterUtils.transformToTelecom(practitionerRole.getTelecomFirstRep()));
+                recipient.setPerson(ConverterUtils.transformToPerson((Practitioner) ConverterUtils.findResource(practitionerRole.getPractitioner(), contained)));
+                recipient.setOrganization(ConverterUtils.transformToXDSOrganization((Organization) ConverterUtils.findResource(practitionerRole.getOrganization(), contained)));
+                recipient.setTelecom(ConverterUtils.transformToTelecom(practitionerRole.getTelecomFirstRep()));
             } else if (res instanceof Patient person) {
-                recipient.setPerson(SubmissionSetConverterUtils.transformToPerson(person));
-                recipient.setTelecom(SubmissionSetConverterUtils.transformToTelecom(person.getTelecomFirstRep()));
+                recipient.setPerson(ConverterUtils.transformToPerson(person));
+                recipient.setTelecom(ConverterUtils.transformToTelecom(person.getTelecomFirstRep()));
             } else if (res instanceof RelatedPerson relatedPerson) {
-                recipient.setPerson(SubmissionSetConverterUtils.transformToPerson(relatedPerson));
-                recipient.setTelecom(SubmissionSetConverterUtils.transformToTelecom(relatedPerson.getTelecomFirstRep()));
+                recipient.setPerson(ConverterUtils.transformToPerson(relatedPerson));
+                recipient.setTelecom(ConverterUtils.transformToTelecom(relatedPerson.getTelecomFirstRep()));
             }
 
             recipients.add(recipient);
@@ -301,9 +301,9 @@ public class SubmissionSetConverter {
      */
     @Nullable
     private IBaseReference getRecipientReference(final Recipient recipient) {
-        final Practitioner practitioner = SubmissionSetConverterUtils.transformToPractitioner(recipient.getPerson());
-        final ContactPoint contact = SubmissionSetConverterUtils.transformToContactPoint(recipient.getTelecom());
-        final var organization = SubmissionSetConverterUtils.transformToFHIROrganization(recipient.getOrganization());
+        final Practitioner practitioner = ConverterUtils.transformToPractitioner(recipient.getPerson());
+        final ContactPoint contact = ConverterUtils.transformToContactPoint(recipient.getTelecom());
+        final var organization = ConverterUtils.transformToFHIROrganization(recipient.getOrganization());
 
         if (organization != null && practitioner == null) {
             organization.addTelecom(contact);

@@ -5,6 +5,7 @@ import org.hl7.fhir.r4.model.*;
 import org.hl7.fhir.r4.model.Identifier.IdentifierUse;
 import org.hl7.fhir.r4.model.ListResource.ListMode;
 import org.hl7.fhir.r4.model.ListResource.ListStatus;
+import org.husky.common.utils.XdsMetadataUtil;
 import org.husky.common.utils.xml.XmlFactories;
 import org.husky.communication.xdsmhdconversion.converters.SubmissionSetConverter;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,9 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.JAXBIntrospector;
 import javax.xml.bind.Unmarshaller;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.Date;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -54,7 +57,7 @@ class SubmissionSetConverterTest {
                 false,
                 null,
                 "2.16.756.5.30.1.191.1.0.2.1-22701467-5f85-4818-8cd5-202d86c4decc",
-                Instant.parse("2022-09-14T07:28:43.00Z"),
+                XdsMetadataUtil.convertDtmStringToDate("20220914072843"),
                 0);
 
         assertEquals("HCP", ((PractitionerRole) list.getSource().getResource()).getCode().get(0).getCodingFirstRep().getCode());
@@ -77,7 +80,7 @@ class SubmissionSetConverterTest {
                 false,
                 null,
                 "2.16.756.5.30.1.191.1.0.2.1-c55f4ca7-bd4e-4134-8dcd-56b793ade958",
-                Instant.parse("2022-09-19T18:24:49.00Z"),
+                XdsMetadataUtil.convertDtmStringToDate("20220919182449"),
                 0);
 
         assertEquals("HCP", ((PractitionerRole) list.getSource().getResource()).getCode().get(0).getCodingFirstRep().getCode());
@@ -93,7 +96,7 @@ class SubmissionSetConverterTest {
                                   final boolean hasStatus,
                                   @Nullable final String titleVal,
                                   @Nullable final String patientIdVal,
-                                  @Nullable final Instant dateVal,
+                                  @Nullable final Date dateVal,
                                   final int nbNote) {
         final String profile = list.getMeta().getProfile().get(0).getValue();
 
@@ -178,7 +181,7 @@ class SubmissionSetConverterTest {
         }
 
         if (dateVal != null) {
-            assertEquals(dateVal.getEpochSecond(), list.getDate().toInstant().getEpochSecond());
+            assertEquals(dateVal, list.getDate());
         } else {
             assertNull(list.getDate());
         }

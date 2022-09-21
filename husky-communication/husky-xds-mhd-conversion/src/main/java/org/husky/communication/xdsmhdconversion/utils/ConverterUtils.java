@@ -1,26 +1,27 @@
 package org.husky.communication.xdsmhdconversion.utils;
 
+import ca.uhn.fhir.model.api.TemporalPrecisionEnum;
 import ca.uhn.fhir.rest.server.exceptions.InvalidRequestException;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.*;
+import org.hl7.fhir.r4.model.Address;
 import org.hl7.fhir.r4.model.ContactPoint.ContactPointSystem;
 import org.hl7.fhir.r4.model.Organization;
 import org.hl7.fhir.r4.model.ContactPoint.ContactPointUse;
 import org.husky.common.enums.LanguageCode;
+import org.husky.common.utils.XdsMetadataUtil;
 import org.husky.communication.ch.enums.SubmissionSetAuthorRole;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Person;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.*;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Utilities for the converter between XDS' SubmissionSet and the equivalent MHD resource.
  *
  * @author Ronaldo Loureiro
  */
-public class SubmissionSetConverterUtils {
+public class ConverterUtils {
 
     private static final String PREFIX_OID = "urn:oid:";
     private static final String PREFIX_UUID = "urn:uuid:";
@@ -28,7 +29,7 @@ public class SubmissionSetConverterUtils {
     /**
      * Constructor
      */
-    private SubmissionSetConverterUtils() {
+    private ConverterUtils() {
     }
 
     /**
@@ -396,16 +397,58 @@ public class SubmissionSetConverterUtils {
     }
 
     /**
+     * XDS code -> FHIR Coding
+     *
+     * @param code XDS code
+     * @return FHIR CodeableConcept
+     */
+    public static Coding transformToCoding(final Code code) {
+        final String display = code.getDisplayName() == null ? " ": code.getDisplayName().getValue();
+        return new Coding().setCode(code.getCode())
+                .setSystem(new SchemeMapper().getSystem(code.getSchemeName()))
+                .setDisplay(display);
+    }
+
+    /**
      * XDS code -> FHIR CodeableConcept
      *
      * @param code XDS code
      * @return FHIR CodeableConcept
      */
     public static CodeableConcept transformToCodeableConcept(final Code code) {
-        final String display = code.getDisplayName() == null ? " ": code.getDisplayName().getValue();
-        return new CodeableConcept().addCoding(new Coding().setCode(code.getCode())
-                .setSystem(new SchemeMapper().getSystem(code.getSchemeName()))
-                .setDisplay(display));
+        return new CodeableConcept().addCoding(transformToCoding(code));
+    }
+
+    /**
+     * XDS code list -> FHIR CodeableConcept
+     *
+     * @param codes XDS code list
+     * @return FHIR CodeableConcept
+     */
+    public static CodeableConcept transformToCodeableConcept(@Nullable final List<Code> codes) {
+        CodeableConcept cc = new CodeableConcept();
+        if (codes == null) return cc;
+
+        for(Code code: codes) {
+            cc.addCoding(transformToCoding(code));
+        }
+        return cc;
+    }
+
+    /**
+     * XDS code list -> FHIR CodeableConcept list
+     *
+     * @param codes XDS code list
+     * @return FHIR CodeableConcept list
+     */
+    public static List<CodeableConcept> transformToListCodeableConcept(@Nullable final List<Code> codes) {
+        List<CodeableConcept> codeableConcepts = new ArrayList<>();
+        if (codes != null) {
+            for (Code code: codes) {
+                codeableConcepts.add(transformToCodeableConcept(code));
+            }
+        }
+        return codeableConcepts;
     }
 
     /**
@@ -478,7 +521,7 @@ public class SubmissionSetConverterUtils {
             result.setAuthorPerson(transformToPerson(practitioner));
 
             result.getAuthorTelecom().addAll(practitioner.getTelecom().stream()
-                    .map(SubmissionSetConverterUtils::transformToTelecom)
+                    .map(ConverterUtils::transformToTelecom)
                     .filter(Objects::nonNull)
                     .toList());
 
@@ -493,7 +536,7 @@ public class SubmissionSetConverterUtils {
             result.setAuthorPerson(transformToPerson(patient));
 
             result.getAuthorTelecom().addAll(patient.getTelecom().stream()
-                    .map(SubmissionSetConverterUtils::transformToTelecom)
+                    .map(ConverterUtils::transformToTelecom)
                     .filter(Objects::nonNull)
                     .toList());
 
@@ -525,7 +568,7 @@ public class SubmissionSetConverterUtils {
                     .toList());
 
             result.getAuthorTelecom().addAll(role.getTelecom().stream()
-                    .map(SubmissionSetConverterUtils::transformToTelecom)
+                    .map(ConverterUtils::transformToTelecom)
                     .filter(Objects::nonNull)
                     .toList());
 
@@ -658,4 +701,108 @@ public class SubmissionSetConverterUtils {
 
         return (Reference) new Reference().setResource(role);
     }
+
+    /**
+     * XDS Timestamp -> FHIR DateTimeType
+     *
+     * @param timestamp XDS Timestamp
+     * @return FHIR DateTimeType
+     */
+    @Nullable
+    public static DateTimeType transformToDateTimeType(@Nullable Timestamp timestamp) {
+        if (timestamp == null) return null;
+        Date date = XdsMetadataUtil.convertDtmStringToDate(timestamp.toHL7());
+        Timestamp.Precision precision = timestamp.getPrecision();
+
+        TemporalPrecisionEnum fhirPrecision = switch (precision) {
+            case YEAR -> TemporalPrecisionEnum.YEAR;
+            case MONTH -> TemporalPrecisionEnum.MONTH;
+            case DAY -> TemporalPrecisionEnum.DAY;
+            case HOUR, MINUTE, SECOND -> TemporalPrecisionEnum.SECOND;
+        };
+
+        return new DateTimeType(date, fhirPrecision);
+    }
+
+    /**
+     * XDS Timestamp -> FHIR DateType
+     *
+     * @param timestamp XDS Timestamp
+     * @return FHIR DateType
+     */
+    @Nullable
+    public static DateType transformToDateType(@Nullable Timestamp timestamp) {
+        if (timestamp == null) return null;
+        Date date = XdsMetadataUtil.convertDtmStringToDate(timestamp.toHL7());
+        Timestamp.Precision precision = timestamp.getPrecision();
+
+        TemporalPrecisionEnum fhirPrecision = switch (precision) {
+            case YEAR -> TemporalPrecisionEnum.YEAR;
+            case MONTH -> TemporalPrecisionEnum.MONTH;
+            case DAY, HOUR, MINUTE, SECOND -> TemporalPrecisionEnum.DAY;
+        };
+
+        return new DateType(date, fhirPrecision);
+    }
+
+//    /**
+//     * XDS Address -> FHIR Address
+//     *
+//     * @param address XDS Address
+//     * @return FHIR Address
+//     */
+//    @Nullable
+//    public Address transform(final org.openehealth.ipf.commons.ihe.xds.core.metadata.Address address) {
+//        if (address == null) return null;
+//
+//        final var result = new org.hl7.fhir.r4.model.Address()
+//                .setCity(address.getCity())
+//                .setCountry(address.getCountry())
+//                .setDistrict(address.getCountyParishCode())
+//                .setState(address.getStateOrProvince())
+//                .setPostalCode(address.getZipOrPostalCode());
+//
+//        String street = address.getStreetAddress();
+//        if (street != null) result.addLine(street);
+//
+//        String other = address.getOtherDesignation();
+//        if (other != null) result.addLine(other);
+//
+//        return result;
+//    }
+
+    public static Patient transformToPatient(@Nullable Identifiable sourcePatientId,
+                                             @Nullable PatientInfo sourcePatientInfo) {
+        Patient patient = new Patient();
+
+        if (sourcePatientInfo != null) {
+            patient.setBirthDateElement(transformToDateType(sourcePatientInfo.getDateOfBirth()));
+
+            if (sourcePatientInfo.getGender() != null) {
+                Enumerations.AdministrativeGender gender = switch (sourcePatientInfo.getGender()) {
+                    case "F" -> Enumerations.AdministrativeGender.FEMALE;
+                    case "M" -> Enumerations.AdministrativeGender.MALE;
+                    case "A" -> Enumerations.AdministrativeGender.OTHER;
+                    case "U" -> Enumerations.AdministrativeGender.UNKNOWN;
+                    default -> Enumerations.AdministrativeGender.NULL;
+                };
+                patient.setGender(gender);
+            }
+
+            var names = sourcePatientInfo.getNames();
+            while (names.hasNext()) {
+                patient.addName(transformToHumanName(names.next()));
+            }
+
+            var addresses = sourcePatientInfo.getAddresses();
+            while (addresses.hasNext()) {
+                // in progress...
+            }
+
+
+        }
+
+        return patient;
+    }
+
 }
