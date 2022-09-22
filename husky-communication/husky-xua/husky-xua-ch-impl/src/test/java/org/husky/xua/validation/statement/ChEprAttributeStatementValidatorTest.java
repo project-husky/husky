@@ -39,7 +39,7 @@ class ChEprAttributeStatementValidatorTest {
 
     private static final ChEprAttributeStatementValidator VALIDATOR = new ChEprAttributeStatementValidator();
     @MonotonicNonNull
-    private static Unmarshaller UNMARSHALLER = null;
+    private static Unmarshaller UNMARSHALLER;
 
     @BeforeAll
     public static void setUpBeforeClass() throws Exception {
@@ -48,43 +48,52 @@ class ChEprAttributeStatementValidatorTest {
         UNMARSHALLER = XMLObjectSupport.getUnmarshaller(Attribute.TYPE_NAME);
     }
 
-    
     @Test
     void testValidatePurposeOfUse() throws Exception {
-        /*
-        var attribute = this.unmarshal("""
-                <saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:purposeofuse" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion">
-                   <saml2:AttributeValue>
-                       <PurposeOfUse xmlns="urn:hl7-org:v3" code="NORM" codeSystem="2.16.756.5.30.1.127.3.10.5" displayName="Normalzugriff" xsi:type="CE"/>
-                   </saml2:AttributeValue>
-               </saml2:Attribute>
-                """);
-        this.assertInvalid(() -> VALIDATOR.validatePurposeOfUse(attribute, new ValidationContext(), Role.HEALTHCARE_PROFESSIONAL));
-        this.assertInvalid(() -> VALIDATOR.validatePurposeOfUse(attribute, new ValidationContext(), Role.ASSISTANT));
-        this.assertInvalid(() -> VALIDATOR.validatePurposeOfUse(attribute, new ValidationContext(), Role.TECHNICAL_USER));
-        this.assertInvalid(() -> VALIDATOR.validatePurposeOfUse(attribute, new ValidationContext(), Role.POLICY_ADMINISTRATOR));
-        this.assertInvalid(() -> VALIDATOR.validatePurposeOfUse(attribute, new ValidationContext(), Role.DOCUMENT_ADMINISTRATOR));
-        this.assertInvalid(() -> VALIDATOR.validatePurposeOfUse(attribute, new ValidationContext(), Role.PATIENT));
-        this.assertInvalid(() -> VALIDATOR.validatePurposeOfUse(attribute, new ValidationContext(), Role.REPRESENTATIVE));
+        final Attribute attribute = this.unmarshal("""
+                                                            <saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:purposeofuse" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
+                                                                             xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                                                               <saml2:AttributeValue>
+                                                                   <PurposeOfUse xmlns="urn:hl7-org:v3" code="NORM" codeSystem="2.16.756.5.30.1.127.3.10.5" displayName="Normalzugriff" xsi:type="CE"/>
+                                                               </saml2:AttributeValue>
+                                                           </saml2:Attribute>
+                                                            """);
+        this.assertValid(() -> VALIDATOR.validatePurposeOfUse(attribute,
+                                                              new ValidationContext(),
+                                                              Role.HEALTHCARE_PROFESSIONAL));
+        this.assertValid(() -> VALIDATOR.validatePurposeOfUse(attribute, new ValidationContext(), Role.ASSISTANT));
+        this.assertInvalid(() -> VALIDATOR.validatePurposeOfUse(attribute,
+                                                                new ValidationContext(),
+                                                                Role.TECHNICAL_USER));
+        this.assertValid(() -> VALIDATOR.validatePurposeOfUse(attribute,
+                                                              new ValidationContext(),
+                                                              Role.POLICY_ADMINISTRATOR));
+        this.assertValid(() -> VALIDATOR.validatePurposeOfUse(attribute,
+                                                              new ValidationContext(),
+                                                              Role.DOCUMENT_ADMINISTRATOR));
+        this.assertValid(() -> VALIDATOR.validatePurposeOfUse(attribute, new ValidationContext(), Role.PATIENT));
+        this.assertValid(() -> VALIDATOR.validatePurposeOfUse(attribute, new ValidationContext(), Role.REPRESENTATIVE));
 
-        attribute = this.unmarshal("""
-                <saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:purposeofuse" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion">
-                   <saml2:AttributeValue>
-                       <PurposeOfUse xmlns="urn:hl7-org:v3" code="EMER" codeSystem="2.16.756.5.30.1.127.3.10.5" displayName="Normalzugriff" xsi:type="CE"/>
-                   </saml2:AttributeValue>
-               </saml2:Attribute>
-                """);
-        this.assertInvalid(() -> VALIDATOR.validatePurposeOfUse(attribute, new ValidationContext(), Role.HEALTHCARE_PROFESSIONAL));
-        this.assertInvalid(() -> VALIDATOR.validatePurposeOfUse(attribute, new ValidationContext(), Role.ASSISTANT));
-        this.assertInvalid(() -> VALIDATOR.validatePurposeOfUse(attribute, new ValidationContext(), Role.TECHNICAL_USER));
-        this.assertInvalid(() -> VALIDATOR.validatePurposeOfUse(attribute, new ValidationContext(), Role.POLICY_ADMINISTRATOR));
-        this.assertInvalid(() -> VALIDATOR.validatePurposeOfUse(attribute, new ValidationContext(), Role.DOCUMENT_ADMINISTRATOR));
-        this.assertInvalid(() -> VALIDATOR.validatePurposeOfUse(attribute, new ValidationContext(), Role.PATIENT));
-        this.assertInvalid(() -> VALIDATOR.validatePurposeOfUse(attribute, new ValidationContext(), Role.REPRESENTATIVE));
-        */
-    	boolean result = true;
-    	assertTrue(result);
-         
+        final Attribute attribute2 = this.unmarshal("""
+                                                             <saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:purposeofuse" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" 
+                                                                              xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                                                                <saml2:AttributeValue>
+                                                                    <PurposeOfUse xmlns="urn:hl7-org:v3" code="EMER" codeSystem="2.16.756.5.30.1.127.3.10.5" displayName="Normalzugriff" xsi:type="CE"/>
+                                                                </saml2:AttributeValue>
+                                                            </saml2:Attribute>
+                                                             """);
+        this.assertValid(() -> VALIDATOR.validatePurposeOfUse(attribute2, new ValidationContext(),
+                                                              Role.HEALTHCARE_PROFESSIONAL));
+        this.assertValid(() -> VALIDATOR.validatePurposeOfUse(attribute2, new ValidationContext(), Role.ASSISTANT));
+        this.assertInvalid(() -> VALIDATOR.validatePurposeOfUse(attribute2, new ValidationContext(),
+                                                                Role.TECHNICAL_USER));
+        this.assertInvalid(() -> VALIDATOR.validatePurposeOfUse(attribute2, new ValidationContext(),
+                                                                Role.POLICY_ADMINISTRATOR));
+        this.assertInvalid(() -> VALIDATOR.validatePurposeOfUse(attribute2, new ValidationContext(),
+                                                                Role.DOCUMENT_ADMINISTRATOR));
+        this.assertInvalid(() -> VALIDATOR.validatePurposeOfUse(attribute2, new ValidationContext(), Role.PATIENT));
+        this.assertInvalid(() -> VALIDATOR.validatePurposeOfUse(attribute2, new ValidationContext(),
+                                                                Role.REPRESENTATIVE));
     }
 
     private ValidationContext getContext(final Role role) {
@@ -101,16 +110,12 @@ class ChEprAttributeStatementValidatorTest {
     }
 
     private void assertInvalid(final Callable<ValidationResult> callable) throws Exception {
-        final var context = new ValidationContext();
         final var result = callable.call();
         assertEquals(ValidationResult.INVALID, result);
-        assertNotNull(context.getValidationFailureMessage());
     }
 
     private void assertValid(final Callable<ValidationResult> callable) throws Exception {
-        final var context = new ValidationContext();
         final var result = callable.call();
         assertEquals(ValidationResult.VALID, result);
-        assertNull(context.getValidationFailureMessage());
     }
 }
