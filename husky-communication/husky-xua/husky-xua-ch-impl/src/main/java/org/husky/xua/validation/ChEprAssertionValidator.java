@@ -91,13 +91,14 @@ public class ChEprAssertionValidator {
      *                                   {@code null}, the OneTimeUseCondition is not processed.
      * @param signatureTrustEngine       The trust engine to use to validate signatures. This can be an
      *                                   {@link ExplicitKeySignatureTrustEngine} or any other implementation. A
-     *                                   {@link KeyInfoCredentialResolver} is not needed, as we don't expect a
-     *                                   KeyInfo in the CH:XUA assertions.
+     *                                   {@link KeyInfoCredentialResolver} is not needed, as we don't expect a KeyInfo
+     *                                   in the CH:XUA assertions.
      * @throws ComponentInitializationException if the {@link ReplayCache} of the {@link OneTimeUseConditionValidator}
      *                                          fails to initialize.
      */
     public ChEprAssertionValidator(@Nullable final Duration oneTimeUseConditionExpires,
-                                   @Nullable final SignatureTrustEngine signatureTrustEngine) throws ComponentInitializationException {
+                                   @Nullable final SignatureTrustEngine signatureTrustEngine)
+            throws ComponentInitializationException {
         final var conditionValidators = new ArrayList<ConditionValidator>();
         conditionValidators.add(new ChEprAudienceRestrictionConditionValidator());
         conditionValidators.add(new ChEprDelegationRestrictionConditionValidator());
@@ -136,7 +137,8 @@ public class ChEprAssertionValidator {
      * @throws AssertionValidationException if there is a fatal error evaluating the validity of the assertion.
      */
     public ChEprValidationResult validate(final Assertion assertion,
-                                          @Nullable final Map<String, @Nullable Object> staticParameters) throws AssertionValidationException {
+                                          @Nullable final Map<String, @Nullable Object> staticParameters)
+            throws AssertionValidationException {
         Objects.requireNonNull(assertion, "assertion shall not be null in validate()");
 
         // Create a ValidationContext with some of our static parameters
@@ -169,8 +171,10 @@ public class ChEprAssertionValidator {
             return new ChEprValidationResult(result, validationContext);
         }
 
-        validationContext.getDynamicParameters().computeIfAbsent(CH_EPR_ORGANIZATIONS_ID, key -> new ArrayList<String>());
-        validationContext.getDynamicParameters().computeIfAbsent(CH_EPR_ORGANIZATIONS_NAME, key -> new ArrayList<String>());
+        validationContext.getDynamicParameters().computeIfAbsent(CH_EPR_ORGANIZATIONS_ID,
+                                                                 key -> new ArrayList<String>());
+        validationContext.getDynamicParameters().computeIfAbsent(CH_EPR_ORGANIZATIONS_NAME,
+                                                                 key -> new ArrayList<String>());
 
         // Check that all conditions/assertions have been validated and extracted in the context
         result = this.validateRequiredAssertions(assertion, validationContext, role);
@@ -185,8 +189,8 @@ public class ChEprAssertionValidator {
      * @param context   The current validation context.
      * @return the validation result.
      */
-    private ValidationResult validateRole(final Assertion assertion,
-                                          final ValidationContext context) {
+    ValidationResult validateRole(final Assertion assertion,
+                                  final ValidationContext context) {
         final var roleAttribute = Optional.ofNullable(assertion.getAttributeStatements())
                 .map(OptionalUtils::getListOnlyElement)
                 .map(AttributeStatement::getAttributes)
@@ -212,7 +216,7 @@ public class ChEprAssertionValidator {
                 .orElse(null);
         if (role == null) {
             context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ROLE + "' contains " +
-                    "an invalid value");
+                                                        "an invalid value");
             return ValidationResult.INVALID;
         }
 
@@ -251,9 +255,9 @@ public class ChEprAssertionValidator {
      * @param role    The subject's role.
      * @return the validation result.
      */
-    private ValidationResult validateSubject(@Nullable final Subject subject,
-                                             final ValidationContext context,
-                                             final Role role) {
+    ValidationResult validateSubject(@Nullable final Subject subject,
+                                     final ValidationContext context,
+                                     final Role role) {
         if (subject == null) {
             context.setValidationFailureMessage("The Subject is missing");
             return ValidationResult.INVALID;
@@ -296,9 +300,10 @@ public class ChEprAssertionValidator {
      * @param role      The subject's role.
      * @return the validation result.
      */
-    private ValidationResult validateRequiredAssertions(final Assertion assertion,
-                                                        final ValidationContext context,
-                                                        final Role role) {
+    @SuppressWarnings("unchecked")
+    ValidationResult validateRequiredAssertions(final Assertion assertion,
+                                                final ValidationContext context,
+                                                final Role role) {
         if (context.getDynamicParameters().getOrDefault(CH_EPR_PURPOSE_OF_USE, null) == null) {
             context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_PURPOSEOFUSE + ERRMSG_IS_MISSING);
             return ValidationResult.INVALID;
