@@ -13,8 +13,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.utils.OptionalUtils;
 import org.husky.communication.ch.enums.Role;
 import org.husky.xua.validation.ChEprAssertionValidationParameters;
+import org.husky.xua.validation.ValidationUtils;
 import org.opensaml.core.xml.XMLObject;
-import org.opensaml.core.xml.schema.XSString;
 import org.opensaml.saml.common.assertion.ValidationContext;
 import org.opensaml.saml.common.assertion.ValidationResult;
 import org.opensaml.saml.saml2.assertion.SubjectConfirmationValidator;
@@ -128,7 +128,6 @@ public class ChEprSubjectConfirmationBearerValidator implements SubjectConfirmat
                 .filter(attribute -> OASIS_XACML_SUBJECTID.equals(attribute.getName()))
                 .map(Attribute::getAttributeValues)
                 .map(OptionalUtils::getListOnlyElement)
-                .map(attributeValue -> OptionalUtils.castOrNull(attributeValue, XSString.class))
-                .map(XSString::getValue);
+                .map(ValidationUtils::extractXsValue);
     }
 }

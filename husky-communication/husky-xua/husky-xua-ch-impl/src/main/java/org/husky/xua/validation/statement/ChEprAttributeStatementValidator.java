@@ -17,8 +17,7 @@ import org.husky.communication.ch.enums.Role;
 import org.husky.xua.hl7v3.impl.AbstractImpl;
 import org.husky.xua.hl7v3.impl.CodedWithEquivalentImpl;
 import org.husky.xua.validation.ChEprAssertionValidationParameters;
-import org.opensaml.core.xml.schema.XSString;
-import org.opensaml.core.xml.schema.XSURI;
+import org.husky.xua.validation.ValidationUtils;
 import org.opensaml.saml.common.assertion.ValidationContext;
 import org.opensaml.saml.common.assertion.ValidationResult;
 import org.opensaml.saml.saml2.assertion.StatementValidator;
@@ -150,8 +149,7 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                                              final ValidationContext context) {
         var homeCommunityId = Optional.ofNullable(attribute.getAttributeValues())
                 .map(OptionalUtils::getListOnlyElement)
-                .map(xmlObject -> OptionalUtils.castOrNull(xmlObject, XSURI.class))
-                .map(XSURI::getURI)
+                .map(ValidationUtils::extractXsValue)
                 .orElse(null);
         if (homeCommunityId == null) {
             context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + IHE_XCA_HOMECOMMUNITYID + ERRMSG_CONTAINS_INVALID_VALUE);
@@ -173,8 +171,7 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                                         final ValidationContext context) {
         var resourceId = Optional.ofNullable(attribute.getAttributeValues())
                 .map(OptionalUtils::getListOnlyElement)
-                .map(xmlObject -> OptionalUtils.castOrNull(xmlObject, XSString.class))
-                .map(XSString::getValue)
+                .map(ValidationUtils::extractXsValue)
                 .orElse(null);
         final var suffix = "^^^&" + SWISS_EPR_SPID.getCodeSystemId() + "&ISO";
         if (resourceId == null || !resourceId.endsWith(suffix)) {
@@ -198,8 +195,7 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                                        final ValidationContext context) {
         final var subjectId = Optional.ofNullable(attribute.getAttributeValues())
                 .map(OptionalUtils::getListOnlyElement)
-                .map(xmlObject -> OptionalUtils.castOrNull(xmlObject, XSString.class))
-                .map(XSString::getValue)
+                .map(ValidationUtils::extractXsValue)
                 .orElse(null);
         if (subjectId == null) {
             context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_SUBJECTID + ERRMSG_CONTAINS_INVALID_VALUE);
@@ -226,9 +222,7 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 || role == REPRESENTATIVE;
         final var organizationIds = Optional.ofNullable(attribute.getAttributeValues())
                 .orElseGet(Collections::emptyList).stream()
-                .map(xmlObject -> OptionalUtils.castOrNull(xmlObject, XSURI.class))
-                .filter(Objects::nonNull)
-                .map(XSURI::getURI)
+                .map(ValidationUtils::extractXsValue)
                 .filter(Objects::nonNull)
                 .map(Oids::normalize)
                 .toList();
@@ -268,9 +262,7 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 || role == REPRESENTATIVE;
         final var organizationNames = Optional.ofNullable(attribute.getAttributeValues())
                 .orElseGet(Collections::emptyList).stream()
-                .map(xmlObject -> OptionalUtils.castOrNull(xmlObject, XSString.class))
-                .filter(Objects::nonNull)
-                .map(XSString::getValue)
+                .map(ValidationUtils::extractXsValue)
                 .filter(Objects::nonNull)
                 .map(Oids::normalize)
                 .toList();
