@@ -43,28 +43,14 @@
                          NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
             <saml2:AttributeValue xsi:type="xsd:string">Martina Musterarzt</saml2:AttributeValue>
         </saml2:Attribute>
-        <saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:organization-id"
-                         NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+        <saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:organization-id" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
             <saml2:AttributeValue xsi:type="xsd:anyURI">urn:oid:2.2.2.1</saml2:AttributeValue>
-        </saml2:Attribute>
-        <saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:organization-id"
-                         NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
             <saml2:AttributeValue xsi:type="xsd:anyURI">urn:oid:2.2.2.2</saml2:AttributeValue>
-        </saml2:Attribute>
-        <saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:organization-id"
-                         NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
             <saml2:AttributeValue xsi:type="xsd:anyURI">urn:oid:2.2.2.3</saml2:AttributeValue>
         </saml2:Attribute>
-        <saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:organization"
-                         NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+        <saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:organization" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
             <saml2:AttributeValue xsi:type="xsd:string">Name of group with id urn:oid:2.2.2.1</saml2:AttributeValue>
-        </saml2:Attribute>
-        <saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:organization"
-                         NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
             <saml2:AttributeValue xsi:type="xsd:string">Name of group with id urn:oid:2.2.2.2</saml2:AttributeValue>
-        </saml2:Attribute>
-        <saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:organization"
-                         NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
             <saml2:AttributeValue xsi:type="xsd:string">Name of group with id urn:oid:2.2.2.3</saml2:AttributeValue>
         </saml2:Attribute>
         <saml2:Attribute Name="urn:oasis:names:tc:xacml:2.0:subject:role"

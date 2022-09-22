@@ -125,7 +125,7 @@ class ChEprAssertionValidatorTest {
         assertEquals("Martina Musterarzt", result.getSubjectName());
         assertEquals("http://ihe.connectathon.XUA/X-ServiceProvider-IHE-Connectathon", result.getAudienceRestriction());
         assertEquals("3.3.3.1", result.getHomeCommunityId());
-        assertEquals(List.of("urn:oid:2.2.2.1", "urn:oid:2.2.2.2", "urn:oid:2.2.2.3"), result.getOrganizationsId());
+        assertEquals(List.of("2.2.2.1", "2.2.2.2", "2.2.2.3"), result.getOrganizationsId());
         assertEquals(List.of("Name of group with id urn:oid:2.2.2.1", "Name of group with id urn:oid:2.2.2.2", "Name of group with id urn:oid:2.2.2.3"), result.getOrganizationsName());
         assertNull(result.getAssistantGln());
         assertNull(result.getAssistantName());
@@ -191,7 +191,7 @@ class ChEprAssertionValidatorTest {
         assertEquals("Martina Musterarzt", result.getSubjectName());
         assertEquals("urn:e-health-suisse:token-audience:all-communities", result.getAudienceRestriction());
         assertEquals("3.3.3.1", result.getHomeCommunityId());
-        assertEquals(List.of("urn:oid:2.2.2.1", "urn:oid:2.2.2.2", "urn:oid:2.2.2.3"), result.getOrganizationsId());
+        assertEquals(List.of("2.2.2.1", "2.2.2.2", "2.2.2.3"), result.getOrganizationsId());
         assertEquals(List.of("Name of group with id urn:oid:2.2.2.1", "Name of group with id urn:oid:2.2.2.2", "Name of group with id urn:oid:2.2.2.3"), result.getOrganizationsName());
         assertEquals("2000000090108", result.getAssistantGln());
         assertEquals("Dagmar Musterassistent", result.getAssistantName());
@@ -213,7 +213,7 @@ class ChEprAssertionValidatorTest {
         assertEquals("Martina Musterarzt", result.getSubjectName());
         assertEquals("urn:e-health-suisse:token-audience:all-communities", result.getAudienceRestriction());
         assertEquals("3.3.3.1", result.getHomeCommunityId());
-        assertEquals(List.of("urn:oid:2.2.2.1", "urn:oid:2.2.2.2", "urn:oid:2.2.2.3"), result.getOrganizationsId());
+        assertEquals(List.of("2.2.2.1", "2.2.2.2", "2.2.2.3"), result.getOrganizationsId());
         assertEquals(List.of("Name of group with id urn:oid:2.2.2.1", "Name of group with id urn:oid:2.2.2.2", "Name of group with id urn:oid:2.2.2.3"), result.getOrganizationsName());
         assertNull(result.getAssistantGln());
         assertNull(result.getAssistantName());

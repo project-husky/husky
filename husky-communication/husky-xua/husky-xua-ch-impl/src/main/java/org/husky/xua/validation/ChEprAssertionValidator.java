@@ -169,6 +169,9 @@ public class ChEprAssertionValidator {
             return new ChEprValidationResult(result, validationContext);
         }
 
+        validationContext.getDynamicParameters().computeIfAbsent(CH_EPR_ORGANIZATIONS_ID, key -> new ArrayList<String>());
+        validationContext.getDynamicParameters().computeIfAbsent(CH_EPR_ORGANIZATIONS_NAME, key -> new ArrayList<String>());
+
         // Check that all conditions/assertions have been validated and extracted in the context
         result = this.validateRequiredAssertions(assertion, validationContext, role);
         return new ChEprValidationResult(result, validationContext);

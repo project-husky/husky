@@ -9,7 +9,9 @@
  */
 package org.husky.xua.validation.statement;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.husky.common.utils.OptionalUtils;
+import org.husky.common.utils.datatypes.Oids;
 import org.husky.communication.ch.enums.PurposeOfUse;
 import org.husky.communication.ch.enums.Role;
 import org.husky.xua.hl7v3.impl.AbstractImpl;
@@ -28,7 +30,9 @@ import org.opensaml.saml.saml2.core.impl.AttributeValueImpl;
 
 import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.QName;
-import java.util.*;
+import java.util.Collections;
+import java.util.Objects;
+import java.util.Optional;
 
 import static org.husky.common.enums.CodeSystems.SWISS_EPR_SPID;
 import static org.husky.communication.ch.enums.PurposeOfUse.*;
@@ -50,6 +54,7 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
     /**
      * Gets the element or schema type QName of the statement handled by this validator.
      */
+    @NonNull
     public QName getServicedStatement() {
         return AttributeStatement.DEFAULT_ELEMENT_NAME;
     }
@@ -62,6 +67,7 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
      * @param context   The current Assertion validation context.
      * @return The validation result.
      */
+    @NonNull
     public ValidationResult validate(final Statement statement,
                                      final Assertion assertion,
                                      final ValidationContext context) {
@@ -124,8 +130,7 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 || (role == PATIENT && purposeOfUse != NORMAL_ACCESS)
                 || (role == REPRESENTATIVE && purposeOfUse != NORMAL_ACCESS)
                 || (role == DOCUMENT_ADMINISTRATOR && purposeOfUse != NORMAL_ACCESS)
-                || (role == POLICY_ADMINISTRATOR && purposeOfUse != NORMAL_ACCESS)
-        ) {
+                || (role == POLICY_ADMINISTRATOR && purposeOfUse != NORMAL_ACCESS)) {
             context.setValidationFailureMessage(String.format("The attribute '%s' contains an illegal value: %s is " +
                     "not allowed for %s", OASIS_XACML_PURPOSEOFUSE, purposeOfUse, role));
             return ValidationResult.INVALID;
@@ -148,12 +153,11 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 .map(xmlObject -> OptionalUtils.castOrNull(xmlObject, XSURI.class))
                 .map(XSURI::getURI)
                 .orElse(null);
-        final var prefix = "urn:oid:";
-        if (homeCommunityId == null || !homeCommunityId.startsWith(prefix)) {
+        if (homeCommunityId == null) {
             context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + IHE_XCA_HOMECOMMUNITYID + ERRMSG_CONTAINS_INVALID_VALUE);
             return ValidationResult.INVALID;
         }
-        homeCommunityId = homeCommunityId.substring(prefix.length());
+        homeCommunityId = Oids.normalize(homeCommunityId); // Decode the URN (remove the prefix)
         context.getDynamicParameters().put(CH_EPR_HOME_COMMUNITY_ID, homeCommunityId);
         return ValidationResult.VALID;
     }
@@ -213,7 +217,6 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
      * @param role      The subject's role.
      * @return The validation result.
      */
-    @SuppressWarnings("unchecked")
     ValidationResult validateOrganizationsId(final Attribute attribute,
                                              final ValidationContext context,
                                              final Role role) {
@@ -226,23 +229,25 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 .map(xmlObject -> OptionalUtils.castOrNull(xmlObject, XSURI.class))
                 .filter(Objects::nonNull)
                 .map(XSURI::getURI)
+                .filter(Objects::nonNull)
+                .map(Oids::normalize)
                 .toList();
 
-        context.getDynamicParameters().computeIfAbsent(CH_EPR_ORGANIZATIONS_ID, key -> new ArrayList<String>());
-        if (organizationIds.isEmpty()) {
-            if (shallBeEmpty) {
-                return ValidationResult.VALID;
-            }/* else {
-                context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANIZATIONID + ERRMSG_CONTAINS_INVALID_VALUE);
-                return ValidationResult.INVALID;
-            }*/
-        }
         if (shallBeEmpty) {
+            if (organizationIds.isEmpty()) {
+                return ValidationResult.VALID;
+            }
             context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANIZATIONID + "' must be empty");
             return ValidationResult.INVALID;
         }
 
-        ((List<String>) context.getDynamicParameters().get(CH_EPR_ORGANIZATIONS_ID)).addAll(organizationIds);
+        if (context.getDynamicParameters().containsKey(CH_EPR_ORGANIZATIONS_ID)) {
+            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANIZATIONID + "' shall not appear " +
+                                                        "multiple times");
+            return ValidationResult.INVALID;
+        }
+
+        context.getDynamicParameters().put(CH_EPR_ORGANIZATIONS_ID, organizationIds);
         return ValidationResult.VALID;
     }
 
@@ -254,7 +259,6 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
      * @param role      The subject's role.
      * @return The validation result.
      */
-    @SuppressWarnings("unchecked")
     ValidationResult validateOrganizationsName(final Attribute attribute,
                                                final ValidationContext context,
                                                final Role role) {
@@ -267,23 +271,25 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 .map(xmlObject -> OptionalUtils.castOrNull(xmlObject, XSString.class))
                 .filter(Objects::nonNull)
                 .map(XSString::getValue)
+                .filter(Objects::nonNull)
+                .map(Oids::normalize)
                 .toList();
 
-        context.getDynamicParameters().computeIfAbsent(CH_EPR_ORGANIZATIONS_NAME, key -> new ArrayList<String>());
-        if (organizationNames.isEmpty()) {
-            if (shallBeEmpty) {
-                return ValidationResult.VALID;
-            }/* else {
-                context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANISATION + ERRMSG_CONTAINS_INVALID_VALUE);
-                return ValidationResult.INVALID;
-            }*/
-        }
         if (shallBeEmpty) {
+            if (organizationNames.isEmpty()) {
+                return ValidationResult.VALID;
+            }
             context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANISATION + "' must be empty");
             return ValidationResult.INVALID;
         }
 
-        ((List<String>) context.getDynamicParameters().get(CH_EPR_ORGANIZATIONS_NAME)).addAll(organizationNames);
+        if (context.getDynamicParameters().containsKey(CH_EPR_ORGANIZATIONS_NAME)) {
+            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANISATION + "' shall not appear " +
+                                                        "multiple times");
+            return ValidationResult.INVALID;
+        }
+
+        context.getDynamicParameters().put(CH_EPR_ORGANIZATIONS_NAME, organizationNames);
         return ValidationResult.VALID;
     }
 }
