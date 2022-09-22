@@ -13,6 +13,8 @@ import org.husky.common.utils.XdsMetadataUtil;
 import org.husky.communication.ch.enums.SubmissionSetAuthorRole;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Person;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.*;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.*;
 
@@ -83,7 +85,7 @@ public class ConverterUtils {
     /**
      * search a referenced resource from a list of (contained) resources.
      *
-     * @param ref the desired reference
+     * @param ref       the desired reference
      * @param contained the list of resources
      * @return the resource corresponding to the reference if available
      */
@@ -102,7 +104,7 @@ public class ConverterUtils {
     /**
      * Wrap string in localized string
      *
-     * @param string string to wrap
+     * @param string       string to wrap
      * @param languageCode language of the resource content
      * @return the localized string
      */
@@ -119,7 +121,7 @@ public class ConverterUtils {
      * @param identifier FHIR Identifier
      * @return XDS Identifiable
      */
-    public static Identifiable transformToIdentifiable(final Identifier identifier) {
+    public static Identifiable toIdentifiable(final Identifier identifier) {
         final String system = removePrefixOid(identifier.getSystem());
         return new Identifiable(identifier.getValue(), new AssigningAuthority(system));
     }
@@ -131,10 +133,80 @@ public class ConverterUtils {
      * @return XDS Identifiable
      */
     @Nullable
-    public static Identifiable transformToIdentifiable(@Nullable final CodeableConcept cc,
-                                                       @Nullable final String languageCode) {
-        final Code code = transformToCode(cc, languageCode);
+    public static Identifiable toIdentifiable(@Nullable final CodeableConcept cc,
+                                              @Nullable final String languageCode) {
+        final Code code = toCode(cc, languageCode);
         return code != null ? new Identifiable(code.getCode(), new AssigningAuthority(code.getSchemeName())) : null;
+    }
+
+    /**
+     * FHIR Reference -> XDS Identifiable
+     * Only for References to Patients or Encounters
+     * Identifier is extracted from contained resource or from Reference URL
+     *
+     * @param reference FHIR Reference
+     * @param resources FHIR Resource list
+     * @return XDS Identifiable
+     */
+    @Nullable
+    public static Identifiable toIdentifiable(final Reference reference,
+                                              final List<Resource> resources) {
+        if (reference.hasReference()) {
+            String targetRef = reference.getReference();
+            for (Resource resource : resources) {
+                if (targetRef.equals(resource.getId())) {
+                    if (resource instanceof Patient patient) {
+                        return toIdentifiable(patient.getIdentifierFirstRep());
+                    } else if (resource instanceof Encounter encounter) {
+                        return toIdentifiable(encounter.getIdentifierFirstRep());
+                    }
+                }
+            }
+
+            Identifiable result = getPatientReference(reference.getReference());
+            if (result != null) return result;
+
+            MultiValueMap<String, String> vals = UriComponentsBuilder.fromUriString(targetRef).build().getQueryParams();
+            if (vals.containsKey("identifier")) {
+                String ids = vals.getFirst("identifier");
+                if (ids == null) return null;
+
+                String[] identifier = ids.split("\\|");
+                if (identifier.length == 2) {
+                    return new Identifiable(identifier[1], new AssigningAuthority(removePrefixOid(identifier[0])));
+                }
+            }
+
+        } else if (reference.hasIdentifier()) {
+            return toIdentifiable(reference.getIdentifier());
+        }
+        return null;
+    }
+
+    @Nullable
+    private static Identifiable getPatientReference(final String reference) {
+        final String basePath = "Patient/";
+        if (reference.contains(basePath)) {
+            int start = reference.indexOf(basePath) + basePath.length();
+            int end = reference.indexOf("?");
+            if (end < 0) end = reference.length();
+
+            return getPatientId(reference.substring(start, end));
+
+        } else if (!reference.contains("/")) return getPatientId(reference);
+
+        return null;
+    }
+
+    @Nullable
+    private static Identifiable getPatientId(final String fullId) {
+        int splitIdx = fullId.indexOf("-");
+        if (splitIdx > 0 && fullId.substring(0, splitIdx).contains(".")) {
+            final String id = fullId.substring(splitIdx + 1);
+            final AssigningAuthority authority = new AssigningAuthority(new SchemeMapper().getScheme(fullId.substring(0, splitIdx)));
+            return new Identifiable(id, authority);
+        }
+        return null;
     }
 
     /**
@@ -144,7 +216,7 @@ public class ConverterUtils {
      * @return FHIR Identifier
      */
     @Nullable
-    public static Identifier transformToIdentifier(@Nullable final Identifiable identifiable) {
+    public static Identifier toIdentifier(@Nullable final Identifiable identifiable) {
         if (identifiable == null) return null;
 
         final AssigningAuthority assigningAuthority = identifiable.getAssigningAuthority();
@@ -167,7 +239,7 @@ public class ConverterUtils {
      * @param patient XDS Identifiable
      * @return FHIR Patient Reference
      */
-    public static Reference transformToPatientReference(final Identifiable patient) {
+    public static Reference toPatientReference(final Identifiable patient) {
         final String system = patient.getAssigningAuthority().getUniversalId();
         final String value = patient.getId();
         return new Reference().setReference(system + "-" + value);
@@ -179,7 +251,7 @@ public class ConverterUtils {
      * @param name FHIR HumanName
      * @return XDS Name
      */
-    public static XpnName transformToName(final HumanName name) {
+    public static XpnName toName(final HumanName name) {
         final var targetName = new XpnName();
 
         if (name.hasPrefix()) targetName.setPrefix(name.getPrefixAsSingleString());
@@ -205,8 +277,8 @@ public class ConverterUtils {
      * @return XDS Person
      */
     @Nullable
-    public static Person transformToPerson(@Nullable final Practitioner practitioner) {
-        return practitioner != null ? transformToPerson(practitioner.getNameFirstRep(), practitioner.getIdentifierFirstRep()) : null;
+    public static Person toPerson(@Nullable final Practitioner practitioner) {
+        return practitioner != null ? toPerson(practitioner.getNameFirstRep(), practitioner.getIdentifierFirstRep()) : null;
     }
 
     /**
@@ -216,8 +288,8 @@ public class ConverterUtils {
      * @return XDS Person
      */
     @Nullable
-    public static Person transformToPerson(@Nullable final Patient patient) {
-        return patient != null ? transformToPerson(patient.getNameFirstRep(), patient.getIdentifierFirstRep()) : null;
+    public static Person toPerson(@Nullable final Patient patient) {
+        return patient != null ? toPerson(patient.getNameFirstRep(), patient.getIdentifierFirstRep()) : null;
     }
 
     /**
@@ -227,22 +299,22 @@ public class ConverterUtils {
      * @return XDS Person
      */
     @Nullable
-    public static Person transformToPerson(@Nullable final RelatedPerson related) {
-        return related != null ? transformToPerson(related.getNameFirstRep(), related.getIdentifierFirstRep()) : null;
+    public static Person toPerson(@Nullable final RelatedPerson related) {
+        return related != null ? toPerson(related.getNameFirstRep(), related.getIdentifierFirstRep()) : null;
     }
 
     /**
      * FHIR -> XDS Person
      *
-     * @param name the person's name
+     * @param name       the person's name
      * @param identifier FHIR Identifier
      * @return XDS Person
      */
-    private static Person transformToPerson(@Nullable final HumanName name,
-                                            final Identifier identifier) {
+    private static Person toPerson(@Nullable final HumanName name,
+                                   final Identifier identifier) {
         final var result = new Person();
-        if (name != null) result.setName(transformToName(name));
-        result.setId(transformToIdentifiable(identifier));
+        if (name != null) result.setName(toName(name));
+        result.setId(toIdentifiable(identifier));
         return result;
     }
 
@@ -253,7 +325,7 @@ public class ConverterUtils {
      * @return XDS Telecom
      */
     @Nullable
-    public static Telecom transformToTelecom(@Nullable final ContactPoint contactPoint) {
+    public static Telecom toTelecom(@Nullable final ContactPoint contactPoint) {
         if (contactPoint == null) return null;
         final var result = new Telecom();
 
@@ -295,7 +367,7 @@ public class ConverterUtils {
      * @param telecom XDS Telecom
      * @return FHIR ContactPoint
      */
-    public static ContactPoint transformToContactPoint(final Telecom telecom) {
+    public static ContactPoint toContactPoint(final Telecom telecom) {
         final var result = new ContactPoint();
 
         final String type = telecom.getType();
@@ -331,7 +403,7 @@ public class ConverterUtils {
      * @param org FHIR Organization
      * @return XDS Organization
      */
-    public static org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization transformToXDSOrganization(@Nullable final Organization org) {
+    public static org.openehealth.ipf.commons.ihe.xds.core.metadata.@Nullable Organization toXDSOrganization(@Nullable final Organization org) {
         if (org == null) return null;
         final var result = new org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization();
         Identifier identifier = org.getIdentifierFirstRep();
@@ -350,7 +422,7 @@ public class ConverterUtils {
      * @return FHIR Organization
      */
     @Nullable
-    public static Organization transformToFHIROrganization(final org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization org) {
+    public static Organization toFHIROrganization(final org.openehealth.ipf.commons.ihe.xds.core.metadata.@Nullable Organization org) {
         if (org == null) return null;
 
         final var result = new Organization();
@@ -373,27 +445,57 @@ public class ConverterUtils {
     /**
      * FHIR Coding -> XDS Code
      *
-     * @param coding FHIR Coding
+     * @param coding       FHIR Coding
      * @param languageCode the language of the resource content
      * @return XDS Code
      */
     @Nullable
-    public static Code transformToCode(@Nullable final Coding coding,
-                                       @Nullable final String languageCode) {
-        return coding != null ? new Code(coding.getCode(), getLocalizedString(coding.getDisplay(), languageCode), new SchemeMapper().getScheme(coding.getSystem())) : null;
+    public static Code toCode(@Nullable final Coding coding,
+                              @Nullable final String languageCode) {
+        if (coding == null) return null;
+
+        final LocalizedString localizedString = getLocalizedString(coding.getDisplay(), languageCode);
+        final String schemeName = new SchemeMapper().getScheme(coding.getSystem());
+        return new Code(coding.getCode(), localizedString, schemeName);
     }
 
     /**
      * FHIR CodeableConcept -> XDS Code
      *
-     * @param cc FHIR CodeableConcept
+     * @param cc           FHIR CodeableConcept
      * @param languageCode the language of the resource content
      * @return XDS Code
      */
     @Nullable
-    public static Code transformToCode(@Nullable final CodeableConcept cc,
-                                       @Nullable final String languageCode) {
-        return cc != null ? transformToCode(cc.getCodingFirstRep(), languageCode) : null;
+    public static Code toCode(@Nullable final CodeableConcept cc,
+                              @Nullable final String languageCode) {
+        return cc != null ? toCode(cc.getCodingFirstRep(), languageCode) : null;
+    }
+
+    /**
+     * FHIR CodeableConcept list -> XDS code
+     *
+     * @param ccs FHIR CodeableConcept list
+     * @return XDS code
+     */
+    @Nullable
+    public static Code toCode(@Nullable final List<CodeableConcept> ccs,
+                              @Nullable final String languageCode) {
+        if (ccs == null || ccs.isEmpty()) return null;
+        return toCode(ccs.get(0), languageCode);
+    }
+
+    @Nullable
+    public static List<Code> toCodes(@Nullable final List<CodeableConcept> ccs,
+                                     @Nullable final String languageCode) {
+        if (ccs == null || ccs.isEmpty()) return null;
+
+        List<Code> codes = new ArrayList<>();
+        for (CodeableConcept cc : ccs) {
+            Code code = toCode(cc, languageCode);
+            if (code != null) codes.add(code);
+        }
+        return codes;
     }
 
     /**
@@ -402,8 +504,8 @@ public class ConverterUtils {
      * @param code XDS code
      * @return FHIR CodeableConcept
      */
-    public static Coding transformToCoding(final Code code) {
-        final String display = code.getDisplayName() == null ? " ": code.getDisplayName().getValue();
+    public static Coding toCoding(final Code code) {
+        final String display = code.getDisplayName() == null ? " " : code.getDisplayName().getValue();
         return new Coding().setCode(code.getCode())
                 .setSystem(new SchemeMapper().getSystem(code.getSchemeName()))
                 .setDisplay(display);
@@ -415,8 +517,8 @@ public class ConverterUtils {
      * @param code XDS code
      * @return FHIR CodeableConcept
      */
-    public static CodeableConcept transformToCodeableConcept(final Code code) {
-        return new CodeableConcept().addCoding(transformToCoding(code));
+    public static CodeableConcept toCodeableConcept(final Code code) {
+        return new CodeableConcept().addCoding(toCoding(code));
     }
 
     /**
@@ -425,30 +527,14 @@ public class ConverterUtils {
      * @param codes XDS code list
      * @return FHIR CodeableConcept
      */
-    public static CodeableConcept transformToCodeableConcept(@Nullable final List<Code> codes) {
-        CodeableConcept cc = new CodeableConcept();
+    public static CodeableConcept toCodeableConcept(@Nullable final List<Code> codes) {
+        final var cc = new CodeableConcept();
         if (codes == null) return cc;
 
-        for(Code code: codes) {
-            cc.addCoding(transformToCoding(code));
+        for (final Code code : codes) {
+            cc.addCoding(toCoding(code));
         }
         return cc;
-    }
-
-    /**
-     * XDS code list -> FHIR CodeableConcept list
-     *
-     * @param codes XDS code list
-     * @return FHIR CodeableConcept list
-     */
-    public static List<CodeableConcept> transformToListCodeableConcept(@Nullable final List<Code> codes) {
-        List<CodeableConcept> codeableConcepts = new ArrayList<>();
-        if (codes != null) {
-            for (Code code: codes) {
-                codeableConcepts.add(transformToCodeableConcept(code));
-            }
-        }
-        return codeableConcepts;
     }
 
     /**
@@ -457,7 +543,7 @@ public class ConverterUtils {
      * @param patient XDS Identifiable
      * @return FHIR CodeableConcept
      */
-     public static CodeableConcept transformToCodeableConcept(final Identifiable patient) {
+    public static CodeableConcept toCodeableConcept(final Identifiable patient) {
         final var coding = new Coding();
         coding.setCode(patient.getId());
 
@@ -467,6 +553,22 @@ public class ConverterUtils {
         }
 
         return new CodeableConcept().addCoding(coding);
+    }
+
+    /**
+     * XDS code list -> FHIR CodeableConcept list
+     *
+     * @param codes XDS code list
+     * @return FHIR CodeableConcept list
+     */
+    public static List<CodeableConcept> toListCodeableConcept(@Nullable final List<Code> codes) {
+        final List<CodeableConcept> codeableConcepts = new ArrayList<>();
+        if (codes != null) {
+            for (final Code code : codes) {
+                codeableConcepts.add(toCodeableConcept(code));
+            }
+        }
+        return codeableConcepts;
     }
 
     /**
@@ -489,17 +591,17 @@ public class ConverterUtils {
     /**
      * FHIR Reference to Author -> XDS Author
      *
-     * @param author the author's reference
-     * @param contained the list of resources
-     * @param authorRole
+     * @param author       the author's reference
+     * @param contained    the list of resources
+     * @param authorRole   the id of the author's role
      * @param languageCode language of the resource content
      * @return the author
      */
     @Nullable
-    public static Author transformAuthor(@Nullable final Reference author,
-                                         final List<Resource> contained,
-                                         @Nullable Identifiable authorRole,
-                                         @Nullable final String languageCode) {
+    public static Author toAuthor(@Nullable final Reference author,
+                                  final List<Resource> contained,
+                                  @Nullable Identifiable authorRole,
+                                  @Nullable final String languageCode) {
         if (author == null || author.getReference() == null) {
             if (authorRole != null) {
                 final var result = new Author();
@@ -507,7 +609,7 @@ public class ConverterUtils {
                 // CARA PMP
                 // TODO At least an authorPerson, authorTelecommunication, or authorInstitution sub-attribute must be present
                 // Either authorPerson, authorInstitution or authorTelecom shall be specified in the SubmissionSet [IHE ITI Technical Framework Volume 3 (4.2.3.1.4)].
-                person.setName(transformToName(new HumanName().setFamily("---")));
+                person.setName(toName(new HumanName().setFamily("---")));
                 result.setAuthorPerson(person);
                 result.getAuthorRole().add(authorRole);
                 return result;
@@ -518,10 +620,10 @@ public class ConverterUtils {
         final Resource authorObj = findResource(author, contained);
         if (authorObj instanceof Practitioner practitioner) {
             final var result = new Author();
-            result.setAuthorPerson(transformToPerson(practitioner));
+            result.setAuthorPerson(toPerson(practitioner));
 
             result.getAuthorTelecom().addAll(practitioner.getTelecom().stream()
-                    .map(ConverterUtils::transformToTelecom)
+                    .map(ConverterUtils::toTelecom)
                     .filter(Objects::nonNull)
                     .toList());
 
@@ -533,10 +635,10 @@ public class ConverterUtils {
             return result;
         } else if (authorObj instanceof Patient patient) {
             final var result = new Author();
-            result.setAuthorPerson(transformToPerson(patient));
+            result.setAuthorPerson(toPerson(patient));
 
             result.getAuthorTelecom().addAll(patient.getTelecom().stream()
-                    .map(ConverterUtils::transformToTelecom)
+                    .map(ConverterUtils::toTelecom)
                     .filter(Objects::nonNull)
                     .toList());
 
@@ -550,25 +652,26 @@ public class ConverterUtils {
             final var result = new Author();
 
             final var practitioner = (Practitioner) findResource(role.getPractitioner(), contained);
-            if (practitioner != null)
-                result.setAuthorPerson(transformToPerson(practitioner));
+            if (practitioner != null) {
+                result.setAuthorPerson(toPerson(practitioner));
+            }
 
             final var org = (Organization) findResource(role.getOrganization(), contained);
             if (org != null)
-                result.getAuthorInstitution().add(transformToXDSOrganization(org));
+                result.getAuthorInstitution().add(toXDSOrganization(org));
 
             result.getAuthorRole().addAll(role.getCode().stream()
-                    .map(code -> transformToIdentifiable(code, languageCode))
+                    .map(code -> toIdentifiable(code, languageCode))
                     .filter(Objects::nonNull)
                     .toList());
 
             result.getAuthorSpecialty().addAll(role.getSpecialty().stream()
-                    .map(code -> transformToIdentifiable(code, languageCode))
+                    .map(code -> toIdentifiable(code, languageCode))
                     .filter(Objects::nonNull)
                     .toList());
 
             result.getAuthorTelecom().addAll(role.getTelecom().stream()
-                    .map(ConverterUtils::transformToTelecom)
+                    .map(ConverterUtils::toTelecom)
                     .filter(Objects::nonNull)
                     .toList());
 
@@ -583,7 +686,7 @@ public class ConverterUtils {
      * @return FHIR HumanName
      */
     @Nullable
-    public static HumanName transformToHumanName(@Nullable final Name<?> name) {
+    public static HumanName toHumanName(@Nullable final Name<?> name) {
         if (name == null) return null;
 
         final var result = new HumanName();
@@ -618,12 +721,60 @@ public class ConverterUtils {
      * @return FHIR Patient
      */
     @Nullable
-    public static Patient transformToPatient(@Nullable final Person person) {
+    public static Patient toPatient(@Nullable final Person person) {
         if (person == null) return null;
-        final HumanName humanName = transformToHumanName(person.getName());
-        final Identifier identifier = transformToIdentifier(person.getId());
+        final HumanName humanName = toHumanName(person.getName());
+        final Identifier identifier = toIdentifier(person.getId());
 
         return new Patient().addName(humanName).addIdentifier(identifier);
+    }
+
+    /**
+     * XDS sourcePatientInfo -> FHIR Patient
+     *
+     * @param sourcePatientId   XDS Identifiable
+     * @param sourcePatientInfo XDS PatientInfo
+     * @return FHIR Patient
+     */
+    @Nullable
+    public static Patient toPatient(@Nullable final Identifiable sourcePatientId,
+                                    @Nullable final PatientInfo sourcePatientInfo) {
+
+        if (sourcePatientId == null && sourcePatientInfo == null) return null;
+
+        final Patient patient = new Patient();
+
+        if (sourcePatientInfo != null) {
+            patient.setBirthDateElement(toDateType(sourcePatientInfo.getDateOfBirth()));
+
+            if (sourcePatientInfo.getGender() != null) {
+                final Enumerations.AdministrativeGender gender = switch (sourcePatientInfo.getGender()) {
+                    case "F" -> Enumerations.AdministrativeGender.FEMALE;
+                    case "M" -> Enumerations.AdministrativeGender.MALE;
+                    case "A" -> Enumerations.AdministrativeGender.OTHER;
+                    case "U" -> Enumerations.AdministrativeGender.UNKNOWN;
+                    default -> Enumerations.AdministrativeGender.NULL;
+                };
+                patient.setGender(gender);
+            }
+
+            final var names = sourcePatientInfo.getNames();
+            while (names.hasNext()) {
+                patient.addName(toHumanName(names.next()));
+            }
+
+            final var addresses = sourcePatientInfo.getAddresses();
+            while (addresses.hasNext()) {
+                patient.addAddress(toAddress(addresses.next()));
+            }
+        }
+
+        final Identifier patientId = ConverterUtils.toIdentifier(sourcePatientId);
+        if (patientId != null) {
+            patient.addIdentifier(patientId.setUse(Identifier.IdentifierUse.OFFICIAL));
+        }
+
+        return patient;
     }
 
     /**
@@ -633,10 +784,10 @@ public class ConverterUtils {
      * @return FHIR Practitioner
      */
     @Nullable
-    public static Practitioner transformToPractitioner(@Nullable final Person person) {
+    public static Practitioner toPractitioner(@Nullable final Person person) {
         if (person == null) return null;
-        final HumanName humanName = transformToHumanName(person.getName());
-        final Identifier identifier = transformToIdentifier(person.getId());
+        final HumanName humanName = toHumanName(person.getName());
+        final Identifier identifier = toIdentifier(person.getId());
 
         return new Practitioner().addName(humanName).addIdentifier(identifier);
     }
@@ -647,21 +798,21 @@ public class ConverterUtils {
      * @param author XDS Author
      * @return FHIR Reference
      */
-    public static Reference transformToReference(final Author author) {
+    public static Reference toReference(final Author author) {
         final Person person = author.getAuthorPerson();
 
         if (isPatientAuthor(author)) {
-            final Patient patient = transformToPatient(person);
+            final Patient patient = toPatient(person);
             if (patient != null) {
                 for (Telecom telecom : author.getAuthorTelecom()) {
-                    patient.addTelecom(transformToContactPoint(telecom));
+                    patient.addTelecom(toContactPoint(telecom));
                 }
             }
 
             return (Reference) new Reference().setResource(patient);
         }
 
-        final Practitioner containedPerson = transformToPractitioner(person);
+        final Practitioner containedPerson = toPractitioner(person);
         final List<Telecom> telecoms = author.getAuthorTelecom();
 
         final List<org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization> orgs = author.getAuthorInstitution();
@@ -671,7 +822,7 @@ public class ConverterUtils {
         if (orgs.isEmpty() && roles.isEmpty() && specialities.isEmpty()) {
             if (containedPerson != null) {
                 for (Telecom telecom : telecoms) {
-                    containedPerson.addTelecom(transformToContactPoint(telecom));
+                    containedPerson.addTelecom(toContactPoint(telecom));
                 }
             }
 
@@ -684,22 +835,59 @@ public class ConverterUtils {
         }
 
         for (Telecom telecom : telecoms) {
-            role.addTelecom(transformToContactPoint(telecom));
+            role.addTelecom(toContactPoint(telecom));
         }
 
         for (var org : orgs) {
-            role.setOrganization((Reference) new Reference().setResource(transformToFHIROrganization(org)));
+            role.setOrganization((Reference) new Reference().setResource(toFHIROrganization(org)));
         }
 
         for (var roleId : roles) {
-            role.addCode(transformToCodeableConcept(roleId));
+            role.addCode(toCodeableConcept(roleId));
         }
 
         for (var specId : specialities) {
-            role.addSpecialty(transformToCodeableConcept(specId));
+            role.addSpecialty(toCodeableConcept(specId));
         }
 
         return (Reference) new Reference().setResource(role);
+    }
+
+    /**
+     * XDS ReferenceId -> FHIR Reference
+     *
+     * @param refId XDS ReferenceId
+     * @return FHIR Reference
+     */
+    public static Reference toReference(final ReferenceId refId) {
+        final var id = new Identifier().setValue(refId.getId());
+        final CXiAssigningAuthority authority = refId.getAssigningAuthority();
+
+        if (authority != null) {
+            id.setSystem(new SchemeMapper().getSystem(authority.getUniversalId()));
+        }
+        // TODO handle authority not given
+
+        return new Reference().setIdentifier(id);
+    }
+
+    /**
+     * FHIR Identifiable -> XDS ReferenceId
+     *
+     * @param id FHIR Identifiable
+     * @return XDS ReferenceId
+     */
+    public static ReferenceId toReferenceId(Identifiable id) {
+        ReferenceId refId = new ReferenceId();
+
+        refId.setAssigningAuthority(new CXiAssigningAuthority(
+                null,
+                id.getAssigningAuthority().getUniversalId(),
+                id.getAssigningAuthority().getUniversalIdType()));
+
+        refId.setId(id.getId());
+
+        return refId;
     }
 
     /**
@@ -709,12 +897,12 @@ public class ConverterUtils {
      * @return FHIR DateTimeType
      */
     @Nullable
-    public static DateTimeType transformToDateTimeType(@Nullable Timestamp timestamp) {
+    public static DateTimeType toDateTimeType(@Nullable final Timestamp timestamp) {
         if (timestamp == null) return null;
-        Date date = XdsMetadataUtil.convertDtmStringToDate(timestamp.toHL7());
-        Timestamp.Precision precision = timestamp.getPrecision();
+        final Date date = XdsMetadataUtil.convertDtmStringToDate(timestamp.toHL7());
+        final Timestamp.Precision precision = timestamp.getPrecision();
 
-        TemporalPrecisionEnum fhirPrecision = switch (precision) {
+        final TemporalPrecisionEnum fhirPrecision = switch (precision) {
             case YEAR -> TemporalPrecisionEnum.YEAR;
             case MONTH -> TemporalPrecisionEnum.MONTH;
             case DAY -> TemporalPrecisionEnum.DAY;
@@ -731,12 +919,12 @@ public class ConverterUtils {
      * @return FHIR DateType
      */
     @Nullable
-    public static DateType transformToDateType(@Nullable Timestamp timestamp) {
+    public static DateType toDateType(@Nullable final Timestamp timestamp) {
         if (timestamp == null) return null;
-        Date date = XdsMetadataUtil.convertDtmStringToDate(timestamp.toHL7());
-        Timestamp.Precision precision = timestamp.getPrecision();
+        final Date date = XdsMetadataUtil.convertDtmStringToDate(timestamp.toHL7());
+        final Timestamp.Precision precision = timestamp.getPrecision();
 
-        TemporalPrecisionEnum fhirPrecision = switch (precision) {
+        final TemporalPrecisionEnum fhirPrecision = switch (precision) {
             case YEAR -> TemporalPrecisionEnum.YEAR;
             case MONTH -> TemporalPrecisionEnum.MONTH;
             case DAY, HOUR, MINUTE, SECOND -> TemporalPrecisionEnum.DAY;
@@ -745,64 +933,29 @@ public class ConverterUtils {
         return new DateType(date, fhirPrecision);
     }
 
-//    /**
-//     * XDS Address -> FHIR Address
-//     *
-//     * @param address XDS Address
-//     * @return FHIR Address
-//     */
-//    @Nullable
-//    public Address transform(final org.openehealth.ipf.commons.ihe.xds.core.metadata.Address address) {
-//        if (address == null) return null;
-//
-//        final var result = new org.hl7.fhir.r4.model.Address()
-//                .setCity(address.getCity())
-//                .setCountry(address.getCountry())
-//                .setDistrict(address.getCountyParishCode())
-//                .setState(address.getStateOrProvince())
-//                .setPostalCode(address.getZipOrPostalCode());
-//
-//        String street = address.getStreetAddress();
-//        if (street != null) result.addLine(street);
-//
-//        String other = address.getOtherDesignation();
-//        if (other != null) result.addLine(other);
-//
-//        return result;
-//    }
+    /**
+     * XDS Address -> FHIR Address
+     *
+     * @param address XDS Address
+     * @return FHIR Address
+     */
+    @Nullable
+    public static Address toAddress(final org.openehealth.ipf.commons.ihe.xds.core.metadata.@Nullable Address address) {
+        if (address == null) return null;
 
-    public static Patient transformToPatient(@Nullable Identifiable sourcePatientId,
-                                             @Nullable PatientInfo sourcePatientInfo) {
-        Patient patient = new Patient();
+        final var result = new org.hl7.fhir.r4.model.Address()
+                .setCity(address.getCity())
+                .setCountry(address.getCountry())
+                .setDistrict(address.getCountyParishCode())
+                .setState(address.getStateOrProvince())
+                .setPostalCode(address.getZipOrPostalCode());
 
-        if (sourcePatientInfo != null) {
-            patient.setBirthDateElement(transformToDateType(sourcePatientInfo.getDateOfBirth()));
+        final String street = address.getStreetAddress();
+        if (street != null) result.addLine(street);
 
-            if (sourcePatientInfo.getGender() != null) {
-                Enumerations.AdministrativeGender gender = switch (sourcePatientInfo.getGender()) {
-                    case "F" -> Enumerations.AdministrativeGender.FEMALE;
-                    case "M" -> Enumerations.AdministrativeGender.MALE;
-                    case "A" -> Enumerations.AdministrativeGender.OTHER;
-                    case "U" -> Enumerations.AdministrativeGender.UNKNOWN;
-                    default -> Enumerations.AdministrativeGender.NULL;
-                };
-                patient.setGender(gender);
-            }
+        final String other = address.getOtherDesignation();
+        if (other != null) result.addLine(other);
 
-            var names = sourcePatientInfo.getNames();
-            while (names.hasNext()) {
-                patient.addName(transformToHumanName(names.next()));
-            }
-
-            var addresses = sourcePatientInfo.getAddresses();
-            while (addresses.hasNext()) {
-                // in progress...
-            }
-
-
-        }
-
-        return patient;
+        return result;
     }
-
 }

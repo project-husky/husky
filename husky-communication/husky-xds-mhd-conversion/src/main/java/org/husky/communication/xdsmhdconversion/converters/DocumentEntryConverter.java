@@ -20,8 +20,13 @@ import org.hl7.fhir.r4.model.Enumerations.DocumentReferenceStatus;
 import org.hl7.fhir.r4.model.Identifier.IdentifierUse;
 import org.husky.common.utils.XdsMetadataUtil;
 import org.husky.communication.xdsmhdconversion.utils.ConverterUtils;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.Author;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.*;
+
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.List;
 
 /**
  * A converter between XDS' DocumentEntry and MHD's DocumentReference.
@@ -84,29 +89,29 @@ public class DocumentEntryConverter {
 
         // type | DocumentEntry.typeCode
         if (documentEntry.getTypeCode() != null) {
-            documentReference.setType(ConverterUtils.transformToCodeableConcept(documentEntry.getTypeCode()));
+            documentReference.setType(ConverterUtils.toCodeableConcept(documentEntry.getTypeCode()));
         }
 
         // category | DocumentEntry.classCode
         if (documentEntry.getClassCode() != null) {
-            documentReference.addCategory(ConverterUtils.transformToCodeableConcept(documentEntry.getClassCode()));
+            documentReference.addCategory(ConverterUtils.toCodeableConcept(documentEntry.getClassCode()));
         }
 
         // subject | DocumentEntry.patientId
         if (documentEntry.getPatientId() != null) {
-            documentReference.setSubject(ConverterUtils.transformToPatientReference(documentEntry.getPatientId()));
+            documentReference.setSubject(ConverterUtils.toPatientReference(documentEntry.getPatientId()));
         }
 
         // author | DocumentEntry.author
         if (documentEntry.getAuthors() != null) {
             for (Author author : documentEntry.getAuthors()) {
-                documentReference.addAuthor(ConverterUtils.transformToReference(author));
+                documentReference.addAuthor(ConverterUtils.toReference(author));
             }
         }
 
         // authenticator | DocumentEntry.legalAuthenticator
         if (documentEntry.getLegalAuthenticator() != null) {
-            final var practitioner = ConverterUtils.transformToPractitioner(documentEntry.getLegalAuthenticator());
+            final var practitioner = ConverterUtils.toPractitioner(documentEntry.getLegalAuthenticator());
             documentReference.setAuthenticator((Reference) new Reference().setResource(practitioner));
         }
 
@@ -119,104 +124,105 @@ public class DocumentEntryConverter {
 
         // securityLabel | DocumentEntry.confidentialityCode
         if (documentEntry.getConfidentialityCodes() != null) {
-            documentReference.addSecurityLabel(ConverterUtils.transformToCodeableConcept(documentEntry.getConfidentialityCodes()));
+            documentReference.addSecurityLabel(ConverterUtils.toCodeableConcept(documentEntry.getConfidentialityCodes()));
         }
 
         // content
         final DocumentReferenceContentComponent content = documentReference.addContent();
 
-        //// attachment
+        /// attachment
         final Attachment attachment = new Attachment();
         content.setAttachment(attachment);
 
-        ////// contentType | DocumentEntry.mimeType
+        //// contentType | DocumentEntry.mimeType
         if (documentEntry.getMimeType() != null) {
             attachment.setContentType(documentEntry.getMimeType());
         }
 
-        ////// language | DocumentEntry.languageCode
+        //// language | DocumentEntry.languageCode
         if (documentEntry.getLanguageCode() != null) {
             attachment.setLanguage(documentEntry.getLanguageCode());
         }
 
-        ////// url | DocumentEntry.repositoryUniqueId or DocumentEntry.URI
+        //// url | DocumentEntry.repositoryUniqueId or DocumentEntry.URI
         // TODO: check if it's ok
         if (documentEntry.getUri() != null) {
-            attachment.setUrl(documentEntry.getUri());
+            try {
+                attachment.setUrl(new URI(documentEntry.getUri()).toURL().toString());
+            } catch (URISyntaxException | MalformedURLException ignored) {}
         }
 
-        ////// size | DocumentEntry.size
+        //// size | DocumentEntry.size
         if (documentEntry.getSize() != null) {
             attachment.setSize(documentEntry.getSize().intValue());
         }
 
-        ////// hash | DocumentEntry.hash
+        //// hash | DocumentEntry.hash
         if (documentEntry.getHash() != null) {
             try {
                 attachment.setHash(Hex.decodeHex(documentEntry.getHash()));
             } catch (DecoderException ignored) {}
         }
 
-        ////// title | DocumentEntry.title
+        //// title | DocumentEntry.title
         if (documentEntry.getTitle() != null) {
             attachment.setTitle(documentEntry.getTitle().getValue());
         }
 
-        ////// creation | DocumentEntry.creationTime
+        //// creation | DocumentEntry.creationTime
         if (documentEntry.getCreationTime() != null) {
             attachment.setCreation(XdsMetadataUtil.convertDtmStringToDate(documentEntry.getCreationTime().toHL7()));
         }
 
-        //// format | DocumentEntry.formatCode
+        /// format | DocumentEntry.formatCode
         if (documentEntry.getFormatCode() != null) {
-            content.setFormat(ConverterUtils.transformToCoding(documentEntry.getFormatCode()));
+            content.setFormat(ConverterUtils.toCoding(documentEntry.getFormatCode()));
         }
 
         // context
         DocumentReferenceContextComponent context = new DocumentReferenceContextComponent();
 
-        //// event | Document.eventCodeList
+        /// event | Document.eventCodeList
         if (documentEntry.getEventCodeList() != null) {
-            documentReference.getContext().setEvent(ConverterUtils.transformToListCodeableConcept(documentEntry.getEventCodeList()));
+            documentReference.getContext().setEvent(ConverterUtils.toListCodeableConcept(documentEntry.getEventCodeList()));
         }
 
-        //// period
+        /// period
         if (documentEntry.getServiceStartTime() != null || documentEntry.getServiceStopTime() != null) {
             Period period = new Period();
 
-            ////// start | DocumentEntry.serviceStartTime
-            period.setStartElement(ConverterUtils.transformToDateTimeType(documentEntry.getServiceStartTime()));
+            //// start | DocumentEntry.serviceStartTime
+            period.setStartElement(ConverterUtils.toDateTimeType(documentEntry.getServiceStartTime()));
 
-            ////// stop | DocumentEntry.serviceStopTime
-            period.setEndElement(ConverterUtils.transformToDateTimeType(documentEntry.getServiceStopTime()));
+            //// stop | DocumentEntry.serviceStopTime
+            period.setEndElement(ConverterUtils.toDateTimeType(documentEntry.getServiceStopTime()));
 
             documentReference.getContext().setPeriod(period);
         }
 
-        //// facilityType | DocumentEntry.healthcareFacilityTypeCode
+        /// facilityType | DocumentEntry.healthcareFacilityTypeCode
         if (documentEntry.getHealthcareFacilityTypeCode() != null) {
-            context.setFacilityType(ConverterUtils.transformToCodeableConcept(documentEntry.getHealthcareFacilityTypeCode()));
+            context.setFacilityType(ConverterUtils.toCodeableConcept(documentEntry.getHealthcareFacilityTypeCode()));
         }
 
-        //// practiceSetting | DocumentEntry.practiceSettingCode
+        /// practiceSetting | DocumentEntry.practiceSettingCode
         if (documentEntry.getPracticeSettingCode() != null) {
-            context.setPracticeSetting(ConverterUtils.transformToCodeableConcept(documentEntry.getPracticeSettingCode()));
+            context.setPracticeSetting(ConverterUtils.toCodeableConcept(documentEntry.getPracticeSettingCode()));
         }
 
-        //// sourcePatientInfo
-        Patient sourcePatient = new Patient();
-
-        ////// reference | DocumentEntry.sourcePatientInfo
-        if (documentEntry.getSourcePatientInfo() != null) {
-            // in progress...
+        /// sourcePatientInfo
+        Patient sourcePatient = ConverterUtils.toPatient(documentEntry.getSourcePatientId(), documentEntry.getSourcePatientInfo());
+        if (sourcePatient != null) {
+            context.getSourcePatientInfo().setResource(sourcePatient);
         }
 
-        ////// identifier | DocumentEntry.sourcePatientId
-        Identifier sourcePatientId = ConverterUtils.transformToIdentifier(documentEntry.getSourcePatientId());
-        if (sourcePatientId != null) {
-            sourcePatient.addIdentifier(sourcePatientId.setUse(IdentifierUse.OFFICIAL));
+        /// related | DocumentEntry.referenceIdList
+        List<ReferenceId> refIds = documentEntry.getReferenceIdList();
+        if (refIds != null) {
+            for (ReferenceId refId : refIds) {
+                context.getRelated().add(ConverterUtils.toReference(refId));
+            }
         }
-
 
         return documentReference;
     }
@@ -228,6 +234,148 @@ public class DocumentEntryConverter {
      * @return the equivalent XDS DocumentEntry.
      */
     public DocumentEntry convertDocumentReference(final DocumentReference documentReference) {
-        return null;
+        DocumentEntry documentEntry = new DocumentEntry();
+
+        // profile | DocumentEntry.limitedMetadata
+        // No action ¯\_(ツ)_/¯
+
+        // masterIdentifier | DocumentEntry.uniqueId
+        documentEntry.setUniqueId(ConverterUtils.removePrefixOid(documentReference.getMasterIdentifier().getValue()));
+
+        // identifier | DocumentEntry.entryUUID
+        if (documentReference.hasId()) {
+            documentEntry.setEntryUuid(ConverterUtils.removePrefixUuid(documentReference.getId()));
+        } else {
+            documentEntry.assignEntryUuid();
+            documentReference.setId(ConverterUtils.removePrefixUuid(documentEntry.getEntryUuid()));
+        }
+
+        // status | DocumentEntry.availabilityStatus
+        AvailabilityStatus status = switch (documentReference.getStatus()) {
+            case CURRENT -> AvailabilityStatus.APPROVED;
+            case SUPERSEDED -> AvailabilityStatus.DEPRECATED;
+            default -> null;
+        };
+
+        if (status != null) {
+            documentEntry.setAvailabilityStatus(status);
+        }
+
+        // type | DocumentEntry.typeCode
+        documentEntry.setTypeCode(ConverterUtils.toCode(documentReference.getType(), documentReference.getLanguage()));
+
+        // category | DocumentEntry.classCode
+        documentEntry.setClassCode(ConverterUtils.toCode(documentReference.getCategory(), documentReference.getLanguage()));
+
+        // subject | DocumentEntry.patientId
+        documentEntry.setPatientId(ConverterUtils.toIdentifiable(documentReference.getSubject(), documentReference.getContained()));
+
+        // author | DocumentEntry.author
+        for (Reference authorRef : documentReference.getAuthor()) {
+            documentEntry.getAuthors().add(ConverterUtils.toAuthor(authorRef, documentReference.getContained(), null, documentReference.getLanguage()));
+        }
+
+        // authenticator | DocumentEntry.legalAuthenticator
+        if (documentReference.hasAuthenticator()) {
+            Resource authenticator = ConverterUtils.findResource(documentReference.getAuthenticator(), documentReference.getContained());
+            if (authenticator instanceof PractitionerRole practitionerRole) {
+                authenticator = ConverterUtils.findResource(practitionerRole.getPractitioner(), documentReference.getContained());
+            }
+
+            if (authenticator instanceof Practitioner practitioner) {
+                documentEntry.setLegalAuthenticator(ConverterUtils.toPerson(practitioner));
+            }
+        }
+
+        // TODO relatesTo | DocumentEntry Associations
+
+        // description | DocumentEntry.comments
+        if (documentReference.getDescription() != null) {
+            documentEntry.setComments(ConverterUtils.getLocalizedString(documentReference.getDescription(), documentReference.getLanguage()));
+        }
+
+        // securityLabel | DocumentEntry.confidentialityCode
+        List<Code> confidentialityCode = ConverterUtils.toCodes(documentReference.getSecurityLabel(), documentReference.getLanguage());
+        if (confidentialityCode != null && !confidentialityCode.isEmpty()) {
+            documentEntry.getConfidentialityCodes().addAll(confidentialityCode);
+        }
+
+        // content
+        DocumentReferenceContentComponent content = documentReference.getContentFirstRep();
+        if (content != null && content.getAttachment() != null) {
+            /// attachment
+            Attachment attachment = content.getAttachment();
+
+            //// contentType | DocumentEntry.mimeType
+            documentEntry.setMimeType(attachment.getContentType());
+
+            //// language | DocumentEntry.languageCode
+            documentEntry.setLanguageCode(attachment.getLanguage());
+
+            //// url | DocumentEntry.repositoryUniqueId or DocumentEntry.URI
+            if (attachment.hasUrl()) {
+                try {
+                    documentEntry.setUri(new URL(attachment.getUrl()).toURI().toString());
+                } catch (MalformedURLException | URISyntaxException ignored) {}
+            }
+
+            //// size | DocumentEntry.size
+            if (attachment.hasSize()) {
+                documentEntry.setSize((long) attachment.getSize());
+            }
+
+            //// hash | DocumentEntry.hash
+            if (attachment.hasHash()) {
+                documentEntry.setHash(Hex.encodeHexString(attachment.getHash()));
+            }
+
+            //// title | DocumentEntry.title
+            if (attachment.hasTitle()) {
+                documentEntry.setTitle(ConverterUtils.getLocalizedString(attachment.getTitle(), attachment.getLanguage()));
+            }
+
+            //// creation | DocumentEntry.creationTime
+            if (attachment.hasCreation()) {
+                documentEntry.setCreationTime(Timestamp.fromHL7(XdsMetadataUtil.convertDateToDtmString(attachment.getCreation())));
+            }
+        }
+
+        /// format | DocumentEntry.formatCode
+        if (content != null && content.hasFormat()) {
+            documentEntry.setFormatCode(ConverterUtils.toCode(content.getFormat(), documentReference.getLanguage()));
+        }
+
+        // context
+        DocumentReferenceContextComponent context = documentReference.getContext();
+
+        /// event | DocumentEntry.eventCodeList
+        List<Code> eventCodeList = ConverterUtils.toCodes(context.getEvent(), documentReference.getLanguage());
+        if (eventCodeList != null && !eventCodeList.isEmpty()) {
+            documentEntry.getEventCodeList().addAll(eventCodeList);
+        }
+
+        /// period
+        if (context.hasPeriod()) {
+            documentEntry.setServiceStartTime(Timestamp.fromHL7(XdsMetadataUtil.convertDateToDtmString(context.getPeriod().getStart())));
+            documentEntry.setServiceStopTime(Timestamp.fromHL7(XdsMetadataUtil.convertDateToDtmString(context.getPeriod().getEnd())));
+        }
+
+        /// facilityType | DocumentEntry.healthcareFacilityTypeCode
+        documentEntry.setHealthcareFacilityTypeCode(ConverterUtils.toCode(context.getFacilityType(), documentReference.getLanguage()));
+
+        /// practiceSetting | DocumentEntry.practiceSettingCode
+
+        /// sourcePatientInfo
+
+        /// related | DocumentEntry.referenceIdList
+        for (Reference ref : context.getRelated()) {
+            Identifiable refId = ConverterUtils.toIdentifiable(ref, documentReference.getContained());
+            if (refId != null) {
+                documentEntry.getReferenceIdList().add(ConverterUtils.toReferenceId(refId));
+            }
+        }
+
+
+        return documentEntry;
     }
 }

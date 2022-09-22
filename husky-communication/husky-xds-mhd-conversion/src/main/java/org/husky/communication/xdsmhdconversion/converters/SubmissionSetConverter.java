@@ -53,7 +53,7 @@ public class SubmissionSetConverter {
         // extension (designationType) | SubmissionSet.contentTypeCode
         final Extension designationType = list.getExtensionByUrl("https://profiles.ihe.net/ITI/MHD/StructureDefinition/ihe-designationType");
         if (designationType != null && designationType.getValue() instanceof CodeableConcept codeableConcept) {
-            submissionSet.setContentTypeCode(ConverterUtils.transformToCode(codeableConcept, list.getLanguage()));
+            submissionSet.setContentTypeCode(ConverterUtils.toCode(codeableConcept, list.getLanguage()));
         }
 
         // extension (sourceId) | SubmissionSet.sourceId (required)
@@ -88,7 +88,7 @@ public class SubmissionSetConverter {
         // ---
 
         // subject | SubmissionSet.patientId (required)
-        submissionSet.setPatientId(ConverterUtils.transformToIdentifiable(list.getSubject().getIdentifier()));
+        submissionSet.setPatientId(ConverterUtils.toIdentifiable(list.getSubject().getIdentifier()));
 
         // date | SubmissionSet.submissionTime
         submissionSet.setSubmissionTime(XdsMetadataUtil.convertDateToDtmString(list.getDate()));
@@ -146,7 +146,7 @@ public class SubmissionSetConverter {
         if (submissionSet.getContentTypeCode() != null) {
             list.addExtension()
                     .setUrl("https://profiles.ihe.net/ITI/MHD/StructureDefinition/ihe-designationType")
-                    .setValue(ConverterUtils.transformToCodeableConcept(submissionSet.getContentTypeCode()));
+                    .setValue(ConverterUtils.toCodeableConcept(submissionSet.getContentTypeCode()));
         }
 
         // identifier | SubmissionSet.uniqueId
@@ -181,7 +181,7 @@ public class SubmissionSetConverter {
 
         // subject | SubmissionSet.patientId
         if (submissionSet.getPatientId() != null) {
-            list.setSubject(ConverterUtils.transformToPatientReference(submissionSet.getPatientId()));
+            list.setSubject(ConverterUtils.toPatientReference(submissionSet.getPatientId()));
         }
 
         // date | SubmissionSet.submissionTime
@@ -191,7 +191,7 @@ public class SubmissionSetConverter {
 
         // source | SubmissionSet.author
         if (submissionSet.getAuthors().size() == 1) {
-            list.setSource(ConverterUtils.transformToReference(submissionSet.getAuthors().get(0)));
+            list.setSource(ConverterUtils.toReference(submissionSet.getAuthors().get(0)));
         }
 
         // note | SubmissionSet.comments
@@ -237,7 +237,7 @@ public class SubmissionSetConverter {
                 identifiable = new Identifiable(coding.getCode(), new AssigningAuthority(ConverterUtils.removePrefixOid(coding.getSystem())));
             }
         }
-        return ConverterUtils.transformAuthor(author, contained, identifiable, languageCode);
+        return ConverterUtils.toAuthor(author, contained, identifiable, languageCode);
     }
 
     /**
@@ -257,21 +257,21 @@ public class SubmissionSetConverter {
             final Resource res = ConverterUtils.findResource(refRecipient, contained);
 
             if (res instanceof Practitioner practitioner) {
-                recipient.setPerson(ConverterUtils.transformToPerson(practitioner));
-                recipient.setTelecom(ConverterUtils.transformToTelecom(practitioner.getTelecomFirstRep()));
+                recipient.setPerson(ConverterUtils.toPerson(practitioner));
+                recipient.setTelecom(ConverterUtils.toTelecom(practitioner.getTelecomFirstRep()));
             } else if (res instanceof Organization organization) {
-                recipient.setOrganization(ConverterUtils.transformToXDSOrganization(organization));
-                recipient.setTelecom(ConverterUtils.transformToTelecom(organization.getTelecomFirstRep()));
+                recipient.setOrganization(ConverterUtils.toXDSOrganization(organization));
+                recipient.setTelecom(ConverterUtils.toTelecom(organization.getTelecomFirstRep()));
             } else if (res instanceof PractitionerRole practitionerRole) {
-                recipient.setPerson(ConverterUtils.transformToPerson((Practitioner) ConverterUtils.findResource(practitionerRole.getPractitioner(), contained)));
-                recipient.setOrganization(ConverterUtils.transformToXDSOrganization((Organization) ConverterUtils.findResource(practitionerRole.getOrganization(), contained)));
-                recipient.setTelecom(ConverterUtils.transformToTelecom(practitionerRole.getTelecomFirstRep()));
+                recipient.setPerson(ConverterUtils.toPerson((Practitioner) ConverterUtils.findResource(practitionerRole.getPractitioner(), contained)));
+                recipient.setOrganization(ConverterUtils.toXDSOrganization((Organization) ConverterUtils.findResource(practitionerRole.getOrganization(), contained)));
+                recipient.setTelecom(ConverterUtils.toTelecom(practitionerRole.getTelecomFirstRep()));
             } else if (res instanceof Patient person) {
-                recipient.setPerson(ConverterUtils.transformToPerson(person));
-                recipient.setTelecom(ConverterUtils.transformToTelecom(person.getTelecomFirstRep()));
+                recipient.setPerson(ConverterUtils.toPerson(person));
+                recipient.setTelecom(ConverterUtils.toTelecom(person.getTelecomFirstRep()));
             } else if (res instanceof RelatedPerson relatedPerson) {
-                recipient.setPerson(ConverterUtils.transformToPerson(relatedPerson));
-                recipient.setTelecom(ConverterUtils.transformToTelecom(relatedPerson.getTelecomFirstRep()));
+                recipient.setPerson(ConverterUtils.toPerson(relatedPerson));
+                recipient.setTelecom(ConverterUtils.toTelecom(relatedPerson.getTelecomFirstRep()));
             }
 
             recipients.add(recipient);
@@ -301,9 +301,9 @@ public class SubmissionSetConverter {
      */
     @Nullable
     private IBaseReference getRecipientReference(final Recipient recipient) {
-        final Practitioner practitioner = ConverterUtils.transformToPractitioner(recipient.getPerson());
-        final ContactPoint contact = ConverterUtils.transformToContactPoint(recipient.getTelecom());
-        final var organization = ConverterUtils.transformToFHIROrganization(recipient.getOrganization());
+        final Practitioner practitioner = ConverterUtils.toPractitioner(recipient.getPerson());
+        final ContactPoint contact = ConverterUtils.toContactPoint(recipient.getTelecom());
+        final var organization = ConverterUtils.toFHIROrganization(recipient.getOrganization());
 
         if (organization != null && practitioner == null) {
             organization.addTelecom(contact);
