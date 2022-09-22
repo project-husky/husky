@@ -14,6 +14,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.core.xml.schema.XSString;
 import org.opensaml.core.xml.schema.XSURI;
+import org.opensaml.saml.saml2.core.impl.AttributeValueImpl;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -41,10 +42,12 @@ public class ValidationUtils {
     public static String extractXsValue(final XMLObject xmlObject) {
         return Optional.of(xmlObject)
                 .map(object -> {
-                    if (object instanceof final XSString xsString){
+                    if (object instanceof final XSString xsString) { // xs:string
                         return xsString.getValue();
-                    } else if (object instanceof final XSURI xsUri) {
+                    } else if (object instanceof final XSURI xsUri) { // xs:anyURI
                         return xsUri.getURI();
+                    } else if (object instanceof final AttributeValueImpl attributeValue) { // xs:token
+                        return attributeValue.getTextContent();
                     } else {
                         return null;
                     }

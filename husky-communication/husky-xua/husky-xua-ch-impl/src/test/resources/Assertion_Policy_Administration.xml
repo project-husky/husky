@@ -75,11 +75,11 @@ ew==</ds:X509Certificate>
                </saml2:Attribute>
                <saml2:Attribute FriendlyName="GLN" Name="GLN"
                                 NameFormat="urn:oasis:names:tc:ebcore:partyid-type:DataUniversalNumberingSystem:0060">
-                  <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">7601002468963</saml2:AttributeValue>
+                  <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:token">7601002468963</saml2:AttributeValue>
                </saml2:Attribute>
                <saml2:Attribute FriendlyName="gender" Name="urn:oid:1.3.6.1.5.5.7.9.3"
                                 NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
-                  <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">M</saml2:AttributeValue>
+                  <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:token">M</saml2:AttributeValue>
                </saml2:Attribute>
                <saml2:Attribute FriendlyName="displayName" Name="urn:oid:2.16.840.1.113730.3.1.241"
                                 NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">

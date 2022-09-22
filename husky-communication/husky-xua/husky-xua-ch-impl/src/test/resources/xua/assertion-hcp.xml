@@ -70,7 +70,7 @@
         </saml2:Attribute>
         <saml2:Attribute Name="urn:oasis:names:tc:xacml:2.0:resource:resource-id"
                          NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
-            <saml2:AttributeValue xsi:type="xsd:string">761337610411353650^^^&amp;2.16.756.5.30.1.127.3.10.3&amp;ISO</saml2:AttributeValue>
+            <saml2:AttributeValue xsi:type="xsd:token">761337610411353650^^^&amp;2.16.756.5.30.1.127.3.10.3&amp;ISO</saml2:AttributeValue>
         </saml2:Attribute>
         <saml2:Attribute Name="urn:ihe:iti:xca:2010:homeCommunityId"
                          NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
