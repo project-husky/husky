@@ -13,9 +13,9 @@ package org.husky.communication.xdsmhdconversion.converters;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.hl7.fhir.r4.model.*;
-import org.hl7.fhir.r4.model.DocumentReference;
 import org.hl7.fhir.r4.model.DocumentReference.DocumentReferenceContentComponent;
 import org.hl7.fhir.r4.model.DocumentReference.DocumentReferenceContextComponent;
+import org.hl7.fhir.r4.model.DocumentReference.DocumentReferenceRelatesToComponent;
 import org.hl7.fhir.r4.model.Enumerations.DocumentReferenceStatus;
 import org.hl7.fhir.r4.model.Identifier.IdentifierUse;
 import org.husky.common.utils.XdsMetadataUtil;
@@ -180,7 +180,7 @@ public class DocumentEntryConverter {
         }
 
         // context
-        DocumentReferenceContextComponent context = new DocumentReferenceContextComponent();
+        final var context = new DocumentReferenceContextComponent();
 
         /// event | Document.eventCodeList
         if (documentEntry.getEventCodeList() != null) {
@@ -211,13 +211,13 @@ public class DocumentEntryConverter {
         }
 
         /// sourcePatientInfo
-        Patient sourcePatient = ConverterUtils.toPatient(documentEntry.getSourcePatientId(), documentEntry.getSourcePatientInfo());
+        final Patient sourcePatient = ConverterUtils.toPatient(documentEntry.getSourcePatientId(), documentEntry.getSourcePatientInfo());
         if (sourcePatient != null) {
             context.getSourcePatientInfo().setResource(sourcePatient);
         }
 
         /// related | DocumentEntry.referenceIdList
-        List<ReferenceId> refIds = documentEntry.getReferenceIdList();
+        final List<ReferenceId> refIds = documentEntry.getReferenceIdList();
         if (refIds != null) {
             for (ReferenceId refId : refIds) {
                 context.getRelated().add(ConverterUtils.toReference(refId));
@@ -234,7 +234,7 @@ public class DocumentEntryConverter {
      * @return the equivalent XDS DocumentEntry.
      */
     public DocumentEntry convertDocumentReference(final DocumentReference documentReference) {
-        DocumentEntry documentEntry = new DocumentEntry();
+        final var documentEntry = new DocumentEntry();
 
         // profile | DocumentEntry.limitedMetadata
         // No action ¯\_(ツ)_/¯
@@ -251,7 +251,7 @@ public class DocumentEntryConverter {
         }
 
         // status | DocumentEntry.availabilityStatus
-        AvailabilityStatus status = switch (documentReference.getStatus()) {
+        final AvailabilityStatus status = switch (documentReference.getStatus()) {
             case CURRENT -> AvailabilityStatus.APPROVED;
             case SUPERSEDED -> AvailabilityStatus.DEPRECATED;
             default -> null;
@@ -288,23 +288,40 @@ public class DocumentEntryConverter {
         }
 
         // TODO relatesTo | DocumentEntry Associations
+//        for (DocumentReferenceRelatesToComponent relatesTo : documentReference.getRelatesTo()) {
+//            final var association = new Association();
+//
+//            /// code | DocumentEntry Associations.type
+//            final AssociationType associationType = switch (relatesTo.getCode()) {
+//                case REPLACES -> AssociationType.REPLACE;
+//                case TRANSFORMS -> AssociationType.TRANSFORM;
+//                case SIGNS -> AssociationType.SIGNS;
+//                case APPENDS -> AssociationType.APPEND;
+//                default -> null;
+//            };
+//            if (associationType != null) association.setAssociationType(associationType);
+//
+//            /// target | DocumentEntry Associations.reference
+//            association.setTargetUuid(ConverterUtils.toUriString(relatesTo.getTarget()));
+//            association.setSourceUuid(documentEntry.getEntryUuid());
+//        }
 
         // description | DocumentEntry.comments
-        if (documentReference.getDescription() != null) {
+        if (documentReference.hasDescription()) {
             documentEntry.setComments(ConverterUtils.getLocalizedString(documentReference.getDescription(), documentReference.getLanguage()));
         }
 
         // securityLabel | DocumentEntry.confidentialityCode
-        List<Code> confidentialityCode = ConverterUtils.toCodes(documentReference.getSecurityLabel(), documentReference.getLanguage());
+        final List<Code> confidentialityCode = ConverterUtils.toCodes(documentReference.getSecurityLabel(), documentReference.getLanguage());
         if (confidentialityCode != null && !confidentialityCode.isEmpty()) {
             documentEntry.getConfidentialityCodes().addAll(confidentialityCode);
         }
 
         // content
-        DocumentReferenceContentComponent content = documentReference.getContentFirstRep();
-        if (content != null && content.getAttachment() != null) {
+        final DocumentReferenceContentComponent content = documentReference.getContentFirstRep();
+        if (content != null && content.hasAttachment()) {
             /// attachment
-            Attachment attachment = content.getAttachment();
+            final Attachment attachment = content.getAttachment();
 
             //// contentType | DocumentEntry.mimeType
             documentEntry.setMimeType(attachment.getContentType());
@@ -346,10 +363,10 @@ public class DocumentEntryConverter {
         }
 
         // context
-        DocumentReferenceContextComponent context = documentReference.getContext();
+        final DocumentReferenceContextComponent context = documentReference.getContext();
 
         /// event | DocumentEntry.eventCodeList
-        List<Code> eventCodeList = ConverterUtils.toCodes(context.getEvent(), documentReference.getLanguage());
+        final List<Code> eventCodeList = ConverterUtils.toCodes(context.getEvent(), documentReference.getLanguage());
         if (eventCodeList != null && !eventCodeList.isEmpty()) {
             documentEntry.getEventCodeList().addAll(eventCodeList);
         }
@@ -364,17 +381,21 @@ public class DocumentEntryConverter {
         documentEntry.setHealthcareFacilityTypeCode(ConverterUtils.toCode(context.getFacilityType(), documentReference.getLanguage()));
 
         /// practiceSetting | DocumentEntry.practiceSettingCode
+        documentEntry.setPracticeSettingCode(ConverterUtils.toCode(context.getPracticeSetting(), documentReference.getLanguage()));
 
         /// sourcePatientInfo
+        if (context.hasSourcePatientInfo()) {
+            documentEntry.setSourcePatientId(ConverterUtils.toIdentifiable(context.getSourcePatientInfo(), documentReference.getContained()));
+            documentEntry.setSourcePatientInfo(ConverterUtils.toPatientInfo(context.getSourcePatientInfo(), documentReference.getContained()));
+        }
 
         /// related | DocumentEntry.referenceIdList
         for (Reference ref : context.getRelated()) {
-            Identifiable refId = ConverterUtils.toIdentifiable(ref, documentReference.getContained());
+            final Identifiable refId = ConverterUtils.toIdentifiable(ref, documentReference.getContained());
             if (refId != null) {
                 documentEntry.getReferenceIdList().add(ConverterUtils.toReferenceId(refId));
             }
         }
-
 
         return documentEntry;
     }

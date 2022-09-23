@@ -3,8 +3,8 @@ package org.husky.communication.xdsmhdconversion.utils;
 import ca.uhn.fhir.model.api.TemporalPrecisionEnum;
 import ca.uhn.fhir.rest.server.exceptions.InvalidRequestException;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.hl7.fhir.r4.model.*;
 import org.hl7.fhir.r4.model.Address;
+import org.hl7.fhir.r4.model.*;
 import org.hl7.fhir.r4.model.ContactPoint.ContactPointSystem;
 import org.hl7.fhir.r4.model.Organization;
 import org.hl7.fhir.r4.model.ContactPoint.ContactPointUse;
@@ -67,7 +67,7 @@ public class ConverterUtils {
     @Nullable
     public static String removePrefixOid(@Nullable final String urn) {
         if (urn == null) return null;
-        return urn.startsWith(PREFIX_OID) ? urn.substring(8) : urn;
+        return urn.startsWith(PREFIX_OID) ? urn.substring(PREFIX_OID.length()) : urn;
     }
 
     /**
@@ -79,7 +79,7 @@ public class ConverterUtils {
     @Nullable
     public static String removePrefixUuid(@Nullable final String urn) {
         if (urn == null) return null;
-        return urn.startsWith(PREFIX_UUID) ? urn.substring(9) : urn;
+        return urn.startsWith(PREFIX_UUID) ? urn.substring(PREFIX_UUID.length()) : urn;
     }
 
     /**
@@ -92,13 +92,10 @@ public class ConverterUtils {
     @Nullable
     public static Resource findResource(final Reference ref,
                                         final List<Resource> contained) {
-
-        for (Resource res : contained) {
-            if (res.getId().equals(ref.getReference())) {
-                return res;
-            }
-        }
-        return null;
+        return contained.stream()
+                .filter(r -> r.getId().equals(ref.getReference()))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
@@ -152,26 +149,25 @@ public class ConverterUtils {
     public static Identifiable toIdentifiable(final Reference reference,
                                               final List<Resource> resources) {
         if (reference.hasReference()) {
-            String targetRef = reference.getReference();
-            for (Resource resource : resources) {
-                if (targetRef.equals(resource.getId())) {
-                    if (resource instanceof Patient patient) {
-                        return toIdentifiable(patient.getIdentifierFirstRep());
-                    } else if (resource instanceof Encounter encounter) {
-                        return toIdentifiable(encounter.getIdentifierFirstRep());
-                    }
-                }
+            final String targetRef = reference.getReference();
+
+            final Resource resource = findResource(reference, resources);
+
+            if (resource instanceof Patient patient) {
+                return toIdentifiable(patient.getIdentifierFirstRep());
+            } else if (resource instanceof Encounter encounter) {
+                return toIdentifiable(encounter.getIdentifierFirstRep());
             }
 
-            Identifiable result = getPatientReference(reference.getReference());
+            final Identifiable result = getPatientReference(targetRef);
             if (result != null) return result;
 
-            MultiValueMap<String, String> vals = UriComponentsBuilder.fromUriString(targetRef).build().getQueryParams();
+            final MultiValueMap<String, String> vals = UriComponentsBuilder.fromUriString(targetRef).build().getQueryParams();
             if (vals.containsKey("identifier")) {
-                String ids = vals.getFirst("identifier");
+                final String ids = vals.getFirst("identifier");
                 if (ids == null) return null;
 
-                String[] identifier = ids.split("\\|");
+                final String[] identifier = ids.split("\\|");
                 if (identifier.length == 2) {
                     return new Identifiable(identifier[1], new AssigningAuthority(removePrefixOid(identifier[0])));
                 }
@@ -187,7 +183,7 @@ public class ConverterUtils {
     private static Identifiable getPatientReference(final String reference) {
         final String basePath = "Patient/";
         if (reference.contains(basePath)) {
-            int start = reference.indexOf(basePath) + basePath.length();
+            final int start = reference.indexOf(basePath) + basePath.length();
             int end = reference.indexOf("?");
             if (end < 0) end = reference.length();
 
@@ -406,7 +402,7 @@ public class ConverterUtils {
     public static org.openehealth.ipf.commons.ihe.xds.core.metadata.@Nullable Organization toXDSOrganization(@Nullable final Organization org) {
         if (org == null) return null;
         final var result = new org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization();
-        Identifier identifier = org.getIdentifierFirstRep();
+        final Identifier identifier = org.getIdentifierFirstRep();
 
         result.setOrganizationName(org.getName());
         result.setIdNumber(identifier.getValue());
@@ -490,7 +486,7 @@ public class ConverterUtils {
                                      @Nullable final String languageCode) {
         if (ccs == null || ccs.isEmpty()) return null;
 
-        List<Code> codes = new ArrayList<>();
+        final List<Code> codes = new ArrayList<>();
         for (CodeableConcept cc : ccs) {
             Code code = toCode(cc, languageCode);
             if (code != null) codes.add(code);
@@ -752,8 +748,7 @@ public class ConverterUtils {
                     case "F" -> Enumerations.AdministrativeGender.FEMALE;
                     case "M" -> Enumerations.AdministrativeGender.MALE;
                     case "A" -> Enumerations.AdministrativeGender.OTHER;
-                    case "U" -> Enumerations.AdministrativeGender.UNKNOWN;
-                    default -> Enumerations.AdministrativeGender.NULL;
+                    default -> Enumerations.AdministrativeGender.UNKNOWN;
                 };
                 patient.setGender(gender);
             }
@@ -775,6 +770,55 @@ public class ConverterUtils {
         }
 
         return patient;
+    }
+
+    /**
+     * FHIR Reference to Patient -> XDS PatientInfo
+     *
+     * @param ref       FHIR Reference to Patient
+     * @param resources FHIR Resource list
+     * @return XDS PatientInfo
+     */
+    @Nullable
+    public static PatientInfo toPatientInfo(@Nullable final Reference ref,
+                                            @Nullable final List<Resource> resources) {
+        if (ref == null || !ref.hasReference() || resources == null) return null;
+
+        final Resource resource = resources.stream()
+                .filter(r -> r.getId().equals(ref.getReference()))
+                .findFirst()
+                .orElse(null);
+
+        if (resource == null) return null;
+
+        final var patient = (Patient) resource;
+
+        final var patientInfo = new PatientInfo();
+        patientInfo.setDateOfBirth(Timestamp.fromHL7(XdsMetadataUtil.convertDateToDtmString(patient.getBirthDate())));
+
+        if (patient.hasGender()) {
+            final String gender = switch (patient.getGender()) {
+                case MALE -> "M";
+                case FEMALE -> "F";
+                case OTHER -> "A";
+                default -> "U";
+            };
+            patientInfo.setGender(gender);
+        }
+
+        for (HumanName name : patient.getName()) {
+            patientInfo.getNames().add(toName(name));
+        }
+
+        for (Address address : patient.getAddress()) {
+            patientInfo.getAddresses().add(toAddress(address));
+        }
+
+        for (Identifier id : patient.getIdentifier()) {
+            patientInfo.getIds().add(toIdentifiable(id));
+        }
+
+        return patientInfo;
     }
 
     /**
@@ -829,7 +873,7 @@ public class ConverterUtils {
             return (Reference) new Reference().setResource(containedPerson);
         }
 
-        var role = new PractitionerRole();
+        final var role = new PractitionerRole();
         if (containedPerson != null) {
             role.setPractitioner((Reference) new Reference().setResource(containedPerson));
         }
@@ -878,7 +922,7 @@ public class ConverterUtils {
      * @return XDS ReferenceId
      */
     public static ReferenceId toReferenceId(Identifiable id) {
-        ReferenceId refId = new ReferenceId();
+        final var refId = new ReferenceId();
 
         refId.setAssigningAuthority(new CXiAssigningAuthority(
                 null,
@@ -957,5 +1001,46 @@ public class ConverterUtils {
         if (other != null) result.addLine(other);
 
         return result;
+    }
+
+    /**
+     * FHIR Address -> XDS Address
+     *
+     * @param address FHIR Address
+     * @return XDS Address
+     */
+    public static org.openehealth.ipf.commons.ihe.xds.core.metadata.Address toAddress(Address address) {
+        final var targetAddress = new org.openehealth.ipf.commons.ihe.xds.core.metadata.Address();
+
+        targetAddress.setCity(address.getCity());
+        targetAddress.setCountry(address.getCountry());
+        targetAddress.setCountyParishCode(address.getDistrict());
+        targetAddress.setStateOrProvince(address.getState());
+        targetAddress.setZipOrPostalCode(address.getPostalCode());
+
+        final List<String> streetAddressValues = address.getLine().stream()
+                .map(StringType::getValue)
+                .toList();
+
+        targetAddress.setStreetAddress(String.join("\n", streetAddressValues));
+
+        return targetAddress;
+    }
+
+    /**
+     * FHIR Reference -> URI String
+     *
+     * @param ref FHIR Reference
+     * @return URI String
+     */
+    @Nullable
+    public static String toUriString(Reference ref) {
+        if (ref.hasIdentifier()) {
+            return ref.getIdentifier().getValue();
+        }
+
+        final String refId = removePrefixOid(ref.getReference());
+
+        return refId != null ? new IdType(refId).getIdPart() : null;
     }
 }
