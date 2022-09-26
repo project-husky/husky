@@ -82,6 +82,10 @@ public class ConverterUtils {
         return urn.startsWith(PREFIX_UUID) ? urn.substring(PREFIX_UUID.length()) : urn;
     }
 
+    public static boolean isOid(@Nullable final String urn) {
+        return urn != null && urn.matches("^([0-2])((\\.0)|(\\.[1-9]\\d*))*$");
+    }
+
     /**
      * search a referenced resource from a list of (contained) resources.
      *

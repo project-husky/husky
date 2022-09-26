@@ -55,11 +55,10 @@ public class DocumentEntryConverter {
         documentReference.setId(ConverterUtils.removePrefixUuid(documentEntry.getEntryUuid()));
 
         // profile | DocumentEntry.limitedMetadata
-        // ¯\_(ツ)_/¯
         if (documentEntry.isLimitedMetadata()) {
-            documentReference.getMeta().addProfile("http://ihe.net/fhir/StructureDefinition/IHE_MHD_Query_Comprehensive_DocumentReference");
+            documentReference.getMeta().addProfile("http://ihe.net/fhir/ihe.mhd.fhir/StructureDefinition/IHE.MHD.Query.Comprehensive.DocumentReference");
         } else {
-            documentReference.getMeta().addProfile("http://ihe.net/fhir/StructureDefinition/IHE_MHD_Comprehensive_DocumentManifest");
+            documentReference.getMeta().addProfile("http://ihe.net/fhir/ihe.mhd.fhir/StructureDefinition/IHE.MHD.Comprehensive.DocumentManifest");
         }
 
         // masterIdentifier | DocumentEntry.uniqueId
@@ -150,6 +149,8 @@ public class DocumentEntryConverter {
             try {
                 attachment.setUrl(new URI(documentEntry.getUri()).toURL().toString());
             } catch (URISyntaxException | MalformedURLException ignored) {}
+        } else if (documentEntry.getRepositoryUniqueId() != null) {
+            attachment.setUrl(documentEntry.getRepositoryUniqueId());
         }
 
         //// size | DocumentEntry.size
@@ -181,6 +182,7 @@ public class DocumentEntryConverter {
 
         // context
         final var context = new DocumentReferenceContextComponent();
+        documentReference.setContext(context);
 
         /// event | Document.eventCodeList
         if (documentEntry.getEventCodeList() != null) {
@@ -237,7 +239,7 @@ public class DocumentEntryConverter {
         final var documentEntry = new DocumentEntry();
 
         // profile | DocumentEntry.limitedMetadata
-        // No action ¯\_(ツ)_/¯
+        // No action
 
         // masterIdentifier | DocumentEntry.uniqueId
         documentEntry.setUniqueId(ConverterUtils.removePrefixOid(documentReference.getMasterIdentifier().getValue()));
@@ -331,9 +333,13 @@ public class DocumentEntryConverter {
 
             //// url | DocumentEntry.repositoryUniqueId or DocumentEntry.URI
             if (attachment.hasUrl()) {
-                try {
-                    documentEntry.setUri(new URL(attachment.getUrl()).toURI().toString());
-                } catch (MalformedURLException | URISyntaxException ignored) {}
+                if (ConverterUtils.isOid(attachment.getUrl())) {
+                    documentEntry.setRepositoryUniqueId(attachment.getUrl());
+                } else {
+                    try {
+                        documentEntry.setUri(new URL(attachment.getUrl()).toURI().toString());
+                    } catch (MalformedURLException | URISyntaxException ignored) {}
+                }
             }
 
             //// size | DocumentEntry.size
