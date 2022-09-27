@@ -10,6 +10,7 @@ import org.husky.common.utils.xml.XmlFactories;
 import org.husky.communication.xdsmhdconversion.converters.SubmissionSetConverter;
 import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xds.core.ebxml.ebxml30.ProvideAndRegisterDocumentSetRequestType;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
 import org.openehealth.ipf.platform.camel.ihe.xds.core.converters.EbXML30Converters;
 
@@ -59,6 +60,9 @@ class SubmissionSetConverterTest {
                 0);
 
         assertEquals("HCP", ((PractitionerRole) list.getSource().getResource()).getCode().get(0).getCodingFirstRep().getCode());
+
+        SubmissionSet submissionSet = new SubmissionSetConverter().convertList(list);
+        testSubmissionSet(provideAndRegisterDocumentSet.getSubmissionSet(), submissionSet);
     }
 
     @Test
@@ -82,6 +86,9 @@ class SubmissionSetConverterTest {
                 0);
 
         assertEquals("HCP", ((PractitionerRole) list.getSource().getResource()).getCode().get(0).getCodingFirstRep().getCode());
+
+        SubmissionSet submissionSet = new SubmissionSetConverter().convertList(list);
+        testSubmissionSet(provideAndRegisterDocumentSet.getSubmissionSet(), submissionSet);
     }
 
     private void testListResource(final ListResource list,
@@ -185,6 +192,18 @@ class SubmissionSetConverterTest {
         }
 
         assertEquals(nbNote, list.getNote().size());
+    }
+
+    private void testSubmissionSet(SubmissionSet original, SubmissionSet submissionSet) {
+        assertEquals(original.isLimitedMetadata(), submissionSet.isLimitedMetadata());
+        assertEquals(original.getSourceId(), submissionSet.getSourceId());
+        assertEquals(original.getIntendedRecipients(), submissionSet.getIntendedRecipients());
+        assertEquals(original.getUniqueId(), submissionSet.getUniqueId());
+        assertEquals(original.getTitle(), submissionSet.getTitle());
+        assertEquals(original.getPatientId(), submissionSet.getPatientId());
+        assertEquals(original.getSubmissionTime(), submissionSet.getSubmissionTime());
+//        assertEquals(original.getAuthors(), submissionSet.getAuthors());
+        assertEquals(original.getComments(), submissionSet.getComments());
     }
 
     private ProvideAndRegisterDocumentSet unmarshall(final String filename) throws Exception {

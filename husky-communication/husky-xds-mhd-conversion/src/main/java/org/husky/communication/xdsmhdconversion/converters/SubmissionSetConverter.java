@@ -88,7 +88,7 @@ public class SubmissionSetConverter {
         // ---
 
         // subject | SubmissionSet.patientId (required)
-        submissionSet.setPatientId(ConverterUtils.toIdentifiable(list.getSubject().getIdentifier()));
+        submissionSet.setPatientId(ConverterUtils.toIdentifiable(list.getSubject(), list.getContained()));
 
         // date | SubmissionSet.submissionTime
         submissionSet.setSubmissionTime(XdsMetadataUtil.convertDateToDtmString(list.getDate()));
