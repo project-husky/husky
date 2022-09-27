@@ -22,11 +22,11 @@
 		<slf4j.version>1.7.36</slf4j.version>
 		<jaxws-version>2.3.4</jaxws-version>
 		<opensaml.version>4.2.0</opensaml.version>
-		<ph-schematron.version>6.3.2</ph-schematron.version>
+		<ph-schematron.version>6.3.3</ph-schematron.version>
 		<org.apache.ws.commons.axiom.version>1.3.0</org.apache.ws.commons.axiom.version>
 		<apache-httpcomponents>4.5.13</apache-httpcomponents>
 		<apache-httpcore>4.4.15</apache-httpcore>
-		<junit.version>5.8.2</junit.version>
+		<junit.version>5.9.0</junit.version>
 
 		<ipf.version>4.4.0</ipf.version>
 		<!-- The following dependencies should be kept up-to-date with IPF to avoid duplicating dependencies:
@@ -226,7 +226,7 @@
 			<dependency>
 				<groupId>org.jsoup</groupId>
 				<artifactId>jsoup</artifactId>
-				<version>1.14.3</version>
+				<version>1.15.3</version>
 			</dependency>
 
 			<dependency>
@@ -532,7 +532,7 @@
 			<dependency>
 				<groupId>org.checkerframework</groupId>
 				<artifactId>checker-qual</artifactId>
-				<version>3.22.0</version>
+				<version>3.25.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.projectlombok</groupId>
