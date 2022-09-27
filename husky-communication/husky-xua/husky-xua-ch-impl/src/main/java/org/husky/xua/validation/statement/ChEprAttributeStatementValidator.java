@@ -179,6 +179,10 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
             return ValidationResult.INVALID;
         }
         resourceId = resourceId.substring(0, resourceId.length() - suffix.length());
+        if (resourceId.isBlank()) {
+            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_RESOURCEID + ERRMSG_CONTAINS_INVALID_VALUE);
+            return ValidationResult.INVALID;
+        }
         context.getDynamicParameters().put(CH_EPR_PATIENT_EPR_SPID, resourceId);
         return ValidationResult.VALID;
 
