@@ -23,6 +23,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openehealth.ipf.commons.audit.AuditContext;
+import org.openehealth.ipf.commons.audit.DefaultAuditContext;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.QueryResponse;
@@ -42,12 +43,7 @@ import java.net.URI;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Test class to test the RegistryStoredQuery [ITI-18] transaction with Swiss requirements. This
- * test performs the following steps:
- * 1. load a test IdP Assertion from the disk
- * 2. Use the IdP Assertion in conjunction with the claims (role, purposeOfUse, EPR-SPID of the patient health record)
- * and request a X-User Assertion.
- * 3. Use the X-User Assertion for authorization with the RegistryStoredQuery [ITI-18] transaction
+ * Test the RegistryStoredQuery [ITI-18] transaction with the EPR Playground.
  */
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
@@ -56,11 +52,11 @@ class CHRegistryStoredQueryPGTest extends XdsTestUtils {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CHRegistryStoredQueryPGTest.class.getName());
 
+	// Spring dependency injection which sets CamelContext, etc.
 	@Autowired
 	private ConvenienceCommunication convenienceCommunication;
 
-	@Autowired
-	protected AuditContext auditContext;
+	protected AuditContext auditContext = new DefaultAuditContext();
 
 	final private String applicationOid = "2.16.840.1.113883.3.72.6.5.100.1399";
 	final private String facilityOid = null;
@@ -107,6 +103,8 @@ class CHRegistryStoredQueryPGTest extends XdsTestUtils {
 		dest.setReceiverFacilityOid(facilityOid);
 		affinityDomain.setRegistryDestination(dest);
 		affinityDomain.setRepositoryDestination(dest);
+
+		convenienceCommunication.setAffinityDomain(affinityDomain);
 	}
 
 	/**
@@ -120,8 +118,6 @@ class CHRegistryStoredQueryPGTest extends XdsTestUtils {
 	@Test
 	@SuppressWarnings("java:S5961")
 	void queryFindDocuments() throws Exception {
-
-		convenienceCommunication.setAffinityDomain(affinityDomain);
 
 		Identificator globalId = new Identificator(globalAssigningAuthorityOid, globalPatientId);
 

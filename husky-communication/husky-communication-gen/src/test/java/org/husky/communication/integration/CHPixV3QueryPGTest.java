@@ -51,8 +51,6 @@ class CHPixV3QueryPGTest {
     @Autowired
     private ConvenienceMasterPatientIndexV3 convenienceMasterPatientIndexV3Client;
 
-    @Autowired
-    protected AuditContext auditContext;
     final String pixUri = "https://epdplayground.i4mi.bfh.ch:7443/PIXPDQ/services/PIXPDQV3ManagerService";
 
     final String facilityOid = "2.16.840.1.113883.3.72.6.1";

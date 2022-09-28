@@ -19,6 +19,8 @@ import org.husky.communication.testhelper.TestApplication;
 import org.husky.communication.testhelper.XdsTestUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openehealth.ipf.commons.audit.AuditContext;
+import org.openehealth.ipf.commons.audit.DefaultAuditContext;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,8 +35,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * The purpose of this test class is to check whether document retrieval (XDS
- * ITI-43) works.
+ * Test document retrieval (XDS ITI-43) with the EPR Playground.
  */
 @ExtendWith(value = SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = {TestApplication.class})

@@ -334,8 +334,8 @@ public class PixV3Query extends PixPdqV3QueryBase {
     }
 
     private PixV3QueryResponse sendQuery(PixV3QueryRequest request, SecurityHeaderElement assertion, URI pdqDest,
-                                         String messageId)
-            throws Exception {
+                                         String messageId) throws Exception {
+
         final var endpoint = String.format(
                 "pixv3-iti45://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&audit=%s&auditContext=#auditContext",
                 pdqDest.toString().replace("https://", ""), true, getAuditContext().isAuditEnabled());

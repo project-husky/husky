@@ -76,13 +76,13 @@ public abstract class CamelService implements CamelContextAware {
 		Map<QName, org.apache.cxf.headers.Header> soapHeaders = CastUtils
 				.cast((Map<QName, org.apache.cxf.headers.Header>) exchange.getIn()
 						.getHeader(AbstractWsEndpoint.OUTGOING_SOAP_HEADERS));
-		Header newHeader;
+
 		if (soapHeaders == null) {
 			soapHeaders = new HashMap<>();
 		}
 
 		try {
-			newHeader = new Header(wsseQName, wsseElement);
+			Header newHeader = new Header(wsseQName, wsseElement);
 			newHeader.setDirection(Direction.DIRECTION_OUT);
 			soapHeaders.put(wsseQName, newHeader);
 			exchange.getIn().setHeader(AbstractWsEndpoint.OUTGOING_SOAP_HEADERS, soapHeaders);
@@ -114,8 +114,10 @@ public abstract class CamelService implements CamelContextAware {
 	@SuppressWarnings("java:S112")
 	protected Exchange send(String endpoint, Object body, SecurityHeaderElement securityHeaderElement, String messageId,
 			Map<String, String> outgoingHttpHeaders) throws Exception {
+
 		Exchange exchange = new DefaultExchange(camelContext);
 		exchange.getIn().setBody(body);
+
 		if (securityHeaderElement != null) {
 			log.debug("build wss header");
 			addWssHeader(securityHeaderElement, exchange);
@@ -127,6 +129,7 @@ public abstract class CamelService implements CamelContextAware {
 		}
 
 		try (var template = camelContext.createProducerTemplate()) {
+
 			var result = template.send(endpoint, exchange);
 
 			if (result.getException() != null) {

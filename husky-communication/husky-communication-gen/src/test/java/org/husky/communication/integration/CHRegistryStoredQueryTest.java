@@ -38,6 +38,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openehealth.ipf.commons.audit.AuditContext;
+import org.openehealth.ipf.commons.audit.DefaultAuditContext;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.*;
@@ -60,7 +61,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Test class to test the RegistryStoredQuery [ITI-18] transaction with Swiss requirements. This
+ * Test the RegistryStoredQuery [ITI-18] transaction with Swiss requirements and the Reference Environment. This
  * test performs the following steps:
  * 1. load a test IdP Assertion from the disk
  * 2. Use the IdP Assertion in conjunction with the claims (role, purposeOfUse, EPR-SPID of the patient health record)
@@ -74,11 +75,11 @@ class CHRegistryStoredQueryTest extends XdsTestUtils {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CHRegistryStoredQueryTest.class.getName());
 
+	// Spring dependency injection which sets CamelContext, etc.
 	@Autowired
 	private ConvenienceCommunication convenienceCommunication;
 
-	@Autowired
-	protected AuditContext auditContext;
+	protected AuditContext auditContext = new DefaultAuditContext();;
 
 	final private String applicationOid = "2.16.840.1.113883.3.72.6.5.100.1399";
 	final private String facilityOid = null;
@@ -128,6 +129,8 @@ class CHRegistryStoredQueryTest extends XdsTestUtils {
 		dest.setReceiverFacilityOid(facilityOid);
 		affinityDomain.setRegistryDestination(dest);
 		affinityDomain.setRepositoryDestination(dest);
+
+		convenienceCommunication.setAffinityDomain(affinityDomain);
 	}
 
 	/**
@@ -141,8 +144,6 @@ class CHRegistryStoredQueryTest extends XdsTestUtils {
 	@Test
 	@SuppressWarnings("java:S5961")
 	void queryFindDocuments() throws Exception {
-
-		convenienceCommunication.setAffinityDomain(affinityDomain);
 
 		Identificator globalId = new Identificator(globalAssigningAuthorityOid, globalPatientId);
 

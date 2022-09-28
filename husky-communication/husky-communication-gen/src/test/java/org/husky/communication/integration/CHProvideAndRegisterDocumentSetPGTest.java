@@ -15,6 +15,7 @@ import org.husky.common.communication.*;
 import org.husky.common.enums.DocumentDescriptor;
 import org.husky.common.enums.EhcVersions;
 import org.husky.common.enums.LanguageCode;
+import org.husky.common.hl7cdar2.II;
 import org.husky.common.model.Author;
 import org.husky.common.model.Code;
 import org.husky.common.model.Identificator;
@@ -68,6 +69,7 @@ class CHProvideAndRegisterDocumentSetPGTest extends XdsTestUtils {
 
     static final Logger LOGGER = LoggerFactory.getLogger(CHProvideAndRegisterDocumentSetPGTest.class.getName());
 
+    // Spring dependency injection which sets CamelContext, etc.
     @Autowired
     private ConvenienceCommunication convenienceCommunication;
 
@@ -81,7 +83,6 @@ class CHProvideAndRegisterDocumentSetPGTest extends XdsTestUtils {
     // The global patient ID is required in this test as destinationId parameter of the transaction.
     final String globalAssigningAuthorityOid = "1.1.1.99.1";
     final String globalPatientId = "2dc7a783-78b1-4627-94fb-610a23135c42";
-
 
     /**
      * Creates and start spring test application and set the endpoint of XDS Repository.
@@ -122,6 +123,8 @@ class CHProvideAndRegisterDocumentSetPGTest extends XdsTestUtils {
         affinityDomain.setRegistryDestination(dest);
         affinityDomain.setRepositoryDestination(dest);
 
+        convenienceCommunication.setAffinityDomain(affinityDomain);
+
         // remove cached documents in ConvenienceCommunication
         convenienceCommunication.clearDocuments();
     }
@@ -136,9 +139,6 @@ class CHProvideAndRegisterDocumentSetPGTest extends XdsTestUtils {
     @Test
     void submitJSONDocumentTest() throws Exception {
 
-        convenienceCommunication.setAffinityDomain(affinityDomain);
-        convenienceCommunication.clearDocuments();
-
         // read and add file
         final File file = new File("src/test/resources/docSource/FHIR-Vaccination.json");
         final DocumentMetadata documentMetadata = convenienceCommunication.addDocument(DocumentDescriptor.FHIR_JSON, new FileInputStream(file));
@@ -148,6 +148,7 @@ class CHProvideAndRegisterDocumentSetPGTest extends XdsTestUtils {
         // add a extra metadata attribute
         String key = "urn:e-health-suisse:2020:originalProviderRole";
         String code = "HCP^^^&2.16.756.5.30.1.127.3.10.6&ISO"; // TODO should be serialized Code
+
         DocumentEntry xDoc = documentMetadata.getXDoc();
         Map<String, List<String>> extraMetadata = new HashMap();
         List values = List.of(code);

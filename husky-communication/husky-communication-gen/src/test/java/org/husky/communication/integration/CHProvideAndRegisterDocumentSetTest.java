@@ -31,14 +31,12 @@ import org.husky.xua.communication.config.impl.XuaClientConfigBuilderImpl;
 import org.husky.xua.communication.xua.RequestType;
 import org.husky.xua.communication.xua.TokenType;
 import org.husky.xua.communication.xua.XUserAssertionResponse;
-import org.husky.xua.communication.xua.impl.AppliesToBuilderImpl;
 import org.husky.xua.communication.xua.impl.XUserAssertionRequestBuilderImpl;
 import org.husky.xua.deserialization.impl.AssertionDeserializerImpl;
 import org.husky.xua.hl7v3.PurposeOfUse;
 import org.husky.xua.hl7v3.Role;
 import org.husky.xua.hl7v3.impl.CodedWithEquivalentsBuilder;
 import org.husky.xua.saml2.Assertion;
-import org.husky.xua.saml2.impl.AssertionBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -79,6 +77,7 @@ class CHProvideAndRegisterDocumentSetTest extends XdsTestUtils {
 
     static final Logger LOGGER = LoggerFactory.getLogger(CHProvideAndRegisterDocumentSetTest.class.getName());
 
+    // Spring dependency injection which sets CamelContext, etc.
     @Autowired
     private ConvenienceCommunication convenienceCommunication;
 
@@ -138,6 +137,8 @@ class CHProvideAndRegisterDocumentSetTest extends XdsTestUtils {
         affinityDomain.setRegistryDestination(dest);
         affinityDomain.setRepositoryDestination(dest);
 
+        convenienceCommunication.setAffinityDomain(affinityDomain);
+
         // remove cached documents in ConvenienceCommunication
         convenienceCommunication.clearDocuments();
     }
@@ -151,9 +152,6 @@ class CHProvideAndRegisterDocumentSetTest extends XdsTestUtils {
      */
     @Test
     void submitJSONDocumentTest() throws Exception {
-
-        convenienceCommunication.setAffinityDomain(affinityDomain);
-        convenienceCommunication.clearDocuments();
 
         // read and add file
         final File file = new File("src/test/resources/docSource/FHIR-Vaccination.json");

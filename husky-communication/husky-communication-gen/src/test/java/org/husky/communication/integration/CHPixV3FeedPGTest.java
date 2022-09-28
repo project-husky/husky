@@ -27,7 +27,6 @@ import org.husky.fhir.structures.gen.FhirPatient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openehealth.ipf.commons.audit.AuditContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,9 +56,6 @@ class CHPixV3FeedPGTest {
 
 	@Autowired
 	private ConvenienceMasterPatientIndexV3 convenienceMasterPatientIndexV3Client;
-
-	@Autowired
-	protected AuditContext auditContext;
 
 	final private String pixUri = "https://epdplayground.i4mi.bfh.ch:7443/PIXPDQ/services/PIXPDQV3ManagerService";
 	final String facilityOid = "2.16.840.1.113883.3.72.6.1";
