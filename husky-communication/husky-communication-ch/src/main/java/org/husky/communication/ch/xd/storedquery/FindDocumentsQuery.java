@@ -10,17 +10,18 @@
  */
 package org.husky.communication.ch.xd.storedquery;
 
-import java.util.List;
-
-import org.husky.common.ch.enums.ConfidentialityCode;
+import org.husky.common.ch.enums.stable.ConfidentialityCode;
 import org.husky.common.enums.DateTimeRangeAttributes;
 import org.husky.common.model.Author;
 import org.husky.common.model.Identificator;
 import org.husky.common.utils.XdsMetadataUtil;
 import org.husky.communication.ch.enums.AvailabilityStatus;
-import org.husky.communication.ch.enums.HealthcareFacilityTypeCode;
+import org.husky.communication.ch.enums.stable.HealthcareFacilityTypeCode;
+import org.husky.communication.ch.enums.stable.PracticeSettingCode;
 import org.husky.communication.xd.storedquery.AbstractStoredQuery;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.query.StoredQuery;
+
+import java.util.List;
 
 /**
  * Represents a query to find documents in an XDS Registry (XDS
@@ -74,13 +75,13 @@ public class FindDocumentsQuery extends AbstractStoredQuery {
 	/* in use by external libraries */
 	@SuppressWarnings("java:S107")
 	public FindDocumentsQuery(Identificator patientId,
-			org.husky.communication.ch.enums.ClassCode[] classCodes,
-			org.husky.communication.xd.storedquery.DateTimeRange[] dateTimeRanges,
-			org.husky.communication.ch.enums.PracticeSettingCode[] practiceSettingCodes,
-			HealthcareFacilityTypeCode[] healthCareFacilityCodes,
-			org.husky.common.ch.enums.ConfidentialityCode[] confidentialityCodes,
-			org.husky.communication.ch.enums.FormatCode[] formatCodes, Author authorPerson,
-			AvailabilityStatus status) {
+			org.husky.communication.ch.enums.stable.ClassCode[] classCodes,
+							  org.husky.communication.xd.storedquery.DateTimeRange[] dateTimeRanges,
+							  PracticeSettingCode[] practiceSettingCodes,
+							  HealthcareFacilityTypeCode[] healthCareFacilityCodes,
+							  ConfidentialityCode[] confidentialityCodes,
+			org.husky.communication.ch.enums.stable.FormatCode[] formatCodes, Author authorPerson,
+							  AvailabilityStatus status) {
 
 		ipfStoredQuery = new org.openehealth.ipf.commons.ihe.xds.core.requests.query.FindDocumentsQuery();
 		ipfStoredQuery.setPatientId(XdsMetadataUtil.convertEhcIdentificator(patientId));

@@ -9,10 +9,10 @@
  */
 package org.husky.emed.ch.enums;
 
-import org.husky.communication.ch.enums.ClassCode;
-import org.husky.communication.ch.enums.FormatCode;
-import org.husky.communication.ch.enums.MimeType;
-import org.husky.communication.ch.enums.TypeCode;
+import org.husky.communication.ch.enums.stable.ClassCode;
+import org.husky.communication.ch.enums.stable.FormatCode;
+import org.husky.communication.ch.enums.stable.MimeType;
+import org.husky.communication.ch.enums.stable.TypeCode;
 
 import java.util.Objects;
 

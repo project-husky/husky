@@ -12,7 +12,7 @@ package org.husky.communication.ch.camel.chpharm1.validate.requests.query;
 
 import org.husky.communication.ch.camel.chpharm1.requests.query.ChPharm1QueryType;
 import org.husky.communication.ch.camel.validate.CodeEnumValidation;
-import org.husky.communication.ch.enums.FormatCode;
+import org.husky.communication.ch.enums.stable.FormatCode;
 import org.openehealth.ipf.commons.core.modules.api.ValidationException;
 import org.openehealth.ipf.commons.core.modules.api.Validator;
 import org.openehealth.ipf.commons.ihe.xds.core.ebxml.EbXMLAdhocQueryRequest;

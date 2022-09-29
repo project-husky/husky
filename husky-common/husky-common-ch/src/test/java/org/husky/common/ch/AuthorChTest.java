@@ -10,30 +10,23 @@
  */
 package org.husky.common.ch;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.TimeZone;
-
 import org.husky.common.basetypes.AddressBaseType;
-import org.husky.common.ch.enums.AuthorRole;
-import org.husky.common.ch.enums.AuthorSpeciality;
+import org.husky.common.ch.enums.stable.AuthorRole;
+import org.husky.common.ch.enums.stable.AuthorSpeciality;
 import org.husky.common.enums.CodeSystems;
 import org.husky.common.enums.PostalAddressUse;
 import org.husky.common.model.Address;
-import org.husky.common.model.Author;
 import org.husky.common.model.Identificator;
 import org.husky.common.model.Name;
 import org.husky.common.testhelpers.AbstractTestHelper;
 import org.husky.common.utils.DateUtil;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
+import java.util.Date;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AuthorChTest {
 

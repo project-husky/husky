@@ -11,7 +11,7 @@ package org.husky.xua.validation.condition;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.utils.OptionalUtils;
-import org.husky.communication.ch.enums.Role;
+import org.husky.communication.ch.enums.stable.Role;
 import org.husky.xua.validation.ChEprAssertionValidationParameters;
 import org.opensaml.saml.common.assertion.ValidationContext;
 import org.opensaml.saml.common.assertion.ValidationResult;

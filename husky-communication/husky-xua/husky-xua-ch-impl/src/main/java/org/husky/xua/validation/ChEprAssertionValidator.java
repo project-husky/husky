@@ -12,7 +12,7 @@ package org.husky.xua.validation;
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.utils.OptionalUtils;
-import org.husky.communication.ch.enums.Role;
+import org.husky.communication.ch.enums.stable.Role;
 import org.husky.xua.hl7v3.impl.AbstractImpl;
 import org.husky.xua.hl7v3.impl.CodedWithEquivalentImpl;
 import org.husky.xua.validation.condition.ChEprAudienceRestrictionConditionValidator;

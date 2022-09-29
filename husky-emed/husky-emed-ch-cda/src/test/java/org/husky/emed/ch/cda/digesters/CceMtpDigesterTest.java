@@ -10,7 +10,7 @@
  */
 package org.husky.emed.ch.cda.digesters;
 
-import org.husky.common.ch.enums.ConfidentialityCode;
+import org.husky.common.ch.enums.stable.ConfidentialityCode;
 import org.husky.common.enums.AdministrativeGender;
 import org.husky.common.hl7cdar2.POCDMT000040Author;
 import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;

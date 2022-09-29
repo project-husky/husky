@@ -1,17 +1,5 @@
 package org.husky.xua.communication.xua.impl.ch.integration;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.GregorianCalendar;
-import java.util.List;
-
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.apache.commons.io.IOUtils;
 import org.husky.xua.authentication.AuthnRequest;
 import org.husky.xua.authentication.impl.AuthnRequestBuilderImpl;
@@ -43,6 +31,17 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeTy
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.StatementAbstractType;
 import org.opensaml.saml.saml2.core.impl.AttributeValueImpl;
 import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.GregorianCalendar;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * The purpose of this test class is to check if the assertion query works for a
@@ -76,7 +75,7 @@ class XuaClientTest extends ServerTestHelper {
 		var idpAssertion = requestIdpAssertion("ltieche", "azerty");
 
 		// set role of subject
-		var role = new CodedWithEquivalentsBuilder().code(org.husky.communication.ch.enums.Role.ASSISTANT_CODE)
+		var role = new CodedWithEquivalentsBuilder().code(org.husky.communication.ch.enums.stable.Role.ASSISTANT_CODE)
 				.codeSystem("2.16.756.5.30.1.127.3.10.6")
 				.displayName("Behandelnde(r)")
 				.buildObject(Role.DEFAULT_NS_URI, Role.DEFAULT_ELEMENT_LOCAL_NAME,

@@ -10,18 +10,18 @@
  */
 package org.husky.communication.ch.testhelper;
 
-import org.husky.common.ch.enums.AuthorRole;
-import org.husky.common.ch.enums.AuthorSpeciality;
-import org.husky.common.ch.enums.ConfidentialityCode;
+import org.husky.common.ch.enums.stable.AuthorRole;
+import org.husky.common.ch.enums.stable.AuthorSpeciality;
+import org.husky.common.ch.enums.stable.ConfidentialityCode;
 import org.husky.common.enums.LanguageCode;
 import org.husky.communication.ch.enums.AvailabilityStatus;
-import org.husky.communication.ch.enums.ClassCode;
-import org.husky.communication.ch.enums.FormatCode;
-import org.husky.communication.ch.enums.HealthcareFacilityTypeCode;
-import org.husky.communication.ch.enums.MimeType;
-import org.husky.communication.ch.enums.PracticeSettingCode;
-import org.husky.communication.ch.enums.SourcePatientInfo;
-import org.husky.communication.ch.enums.TypeCode;
+import org.husky.communication.ch.enums.stable.ClassCode;
+import org.husky.communication.ch.enums.stable.FormatCode;
+import org.husky.communication.ch.enums.stable.HealthcareFacilityTypeCode;
+import org.husky.communication.ch.enums.stable.MimeType;
+import org.husky.communication.ch.enums.stable.PracticeSettingCode;
+import org.husky.communication.ch.enums.stable.SourcePatientInfo;
+import org.husky.communication.ch.enums.stable.TypeCode;
 import org.husky.communication.testhelper.XdsTestUtils;
 
 public class XdsChTestUtils extends XdsTestUtils {
