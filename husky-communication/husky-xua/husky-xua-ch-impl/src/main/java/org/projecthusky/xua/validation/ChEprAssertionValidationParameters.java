@@ -18,8 +18,8 @@ import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParamete
 public class ChEprAssertionValidationParameters {
 
     /**
-     * Carries a {@link org.projecthusky.communication.ch.enums.Role} specifying the CH-EPR Role. Assistants and technical
-     * users are using their own code here while the SAML role is HCP.
+     * Carries a {@link org.projecthusky.communication.ch.enums.stable.Role} specifying the CH-EPR Role. Assistants and
+     * technical users are using their own code here while the SAML role is HCP.
      */
     public static final String CH_EPR_ROLE = STD_PREFIX + STMT_INFIX + ".ChEprRole";
     /**
@@ -50,7 +50,7 @@ public class ChEprAssertionValidationParameters {
      */
     public static final String CH_EPR_TCU_ID = STD_PREFIX + COND_INFIX + ".ChEprTcuId";
     /**
-     * Carries a {@link org.projecthusky.communication.ch.enums.PurposeOfUse} specifying the purpose of use.
+     * Carries a {@link org.projecthusky.communication.ch.enums.stable.PurposeOfUse} specifying the purpose of use.
      */
     public static final String CH_EPR_PURPOSE_OF_USE = STD_PREFIX + STMT_INFIX + ".ChEprPurposeOfUse";
     /**
