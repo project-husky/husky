@@ -18,7 +18,6 @@
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 
-		<husky.version>2.0-ALPHA</husky.version>
 		<slf4j.version>1.7.36</slf4j.version>
 		<jaxws-version>2.3.4</jaxws-version>
 		<opensaml.version>4.2.0</opensaml.version>
@@ -545,74 +544,74 @@
 			<dependency>
 				<groupId>org.projecthusky.common</groupId>
 				<artifactId>husky-common-gen</artifactId>
-				<version>${husky.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.projecthusky.common</groupId>
 				<artifactId>husky-common-gen</artifactId>
 				<type>test-jar</type>
-				<version>${husky.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.projecthusky.common</groupId>
 				<artifactId>husky-common-ch</artifactId>
-				<version>${husky.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.projecthusky.common</groupId>
 				<artifactId>husky-common-at</artifactId>
-				<version>${husky.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.projecthusky.validation.service</groupId>
 				<artifactId>husky-validation-service</artifactId>
-				<version>${husky.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.projecthusky.communication</groupId>
 				<artifactId>husky-communication-gen</artifactId>
-				<version>${husky.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.projecthusky.communication</groupId>
 				<artifactId>husky-communication-gen</artifactId>
 				<type>test-jar</type>
-				<version>${husky.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.projecthusky.communication</groupId>
 				<artifactId>husky-communication-ch</artifactId>
-				<version>${husky.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.projecthusky.communication</groupId>
 				<artifactId>husky-xua-gen-impl</artifactId>
-				<version>${husky.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.projecthusky.communication</groupId>
 				<artifactId>husky-xua-gen-api</artifactId>
-				<version>${husky.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.projecthusky.communication</groupId>
 				<artifactId>husky-xua-ch-impl</artifactId>
-				<version>${husky.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.projecthusky.fhir.structures</groupId>
 				<artifactId>husky-fhir-structures-gen</artifactId>
-				<version>${husky.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.projecthusky.emed.ch</groupId>
 				<artifactId>husky-emed-ch-common</artifactId>
-				<version>${husky.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.projecthusky.emed.ch.cda</groupId>
 				<artifactId>husky-emed-ch-cda</artifactId>
-				<version>${husky.version}</version>
+				<version>${project.version}</version>
 			</dependency>
         <dependency>
 			<groupId>com.sun.xml.messaging.saaj</groupId>
