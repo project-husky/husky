@@ -9,7 +9,7 @@
  */
 package org.husky.emed.ch.cda.services.digesters;
 
-import org.husky.common.ch.enums.ConfidentialityCode;
+import org.husky.common.ch.enums.stable.ConfidentialityCode;
 import org.husky.emed.ch.cda.TestUtils;
 import org.husky.emed.ch.cda.digesters.*;
 import org.husky.emed.ch.cda.services.EmedEntryDigestService;

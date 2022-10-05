@@ -10,16 +10,8 @@
  */
 package org.husky.communication.ch;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
-import javax.activation.DataHandler;
-import javax.mail.util.ByteArrayDataSource;
-
 import org.husky.common.ch.AuthorCh;
-import org.husky.common.ch.enums.AuthorRole;
+import org.husky.common.ch.enums.stable.AuthorRole;
 import org.husky.common.communication.AffinityDomain;
 import org.husky.common.communication.AtnaConfig.AtnaConfigMode;
 import org.husky.common.communication.DocumentMetadata.DocumentMetadataExtractionMode;
@@ -38,6 +30,13 @@ import org.openehealth.ipf.commons.ihe.xds.core.responses.QueryResponse;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.Response;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import javax.activation.DataHandler;
+import javax.mail.util.ByteArrayDataSource;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  *

@@ -10,25 +10,19 @@
  */
 package org.husky.communication.ch;
 
+import org.husky.common.ch.ChEpr;
+import org.husky.common.ch.enums.stable.ConfidentialityCode;
+import org.husky.common.communication.DocumentMetadata;
+import org.husky.common.enums.LanguageCode;
+import org.husky.common.enums.ValueSetEnumInterface;
+import org.husky.communication.ch.enums.stable.*;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Code;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.husky.common.ch.ChEpr;
-import org.husky.common.ch.enums.ConfidentialityCode;
-import org.husky.common.communication.DocumentMetadata;
-import org.husky.common.enums.LanguageCode;
-import org.husky.common.enums.ValueSetEnumInterface;
-import org.husky.communication.ch.enums.ClassCode;
-import org.husky.communication.ch.enums.FormatCode;
-import org.husky.communication.ch.enums.HealthcareFacilityTypeCode;
-import org.husky.communication.ch.enums.MimeType;
-import org.husky.communication.ch.enums.OriginalProviderRole;
-import org.husky.communication.ch.enums.PracticeSettingCode;
-import org.husky.communication.ch.enums.TypeCode;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.Code;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 
 public class DocumentMetadataCh extends org.husky.common.communication.DocumentMetadata {
 
@@ -75,7 +69,7 @@ public class DocumentMetadataCh extends org.husky.common.communication.DocumentM
 	 *
 	 * @return Code element with classCode as Enum
 	 */
-	public org.husky.communication.ch.enums.ClassCode getClassCodeEnum() {
+	public ClassCode getClassCodeEnum() {
 		return ClassCode.getEnum(getDocumentEntry().getClassCode().getCode());
 	}
 
@@ -101,7 +95,7 @@ public class DocumentMetadataCh extends org.husky.common.communication.DocumentM
 	 *
 	 * @return formatCode as Enum
 	 */
-	public org.husky.communication.ch.enums.FormatCode getFormatCodeEnum() {
+	public FormatCode getFormatCodeEnum() {
 		return FormatCode.getEnum(getDocumentEntry().getFormatCode().getCode());
 	}
 
@@ -110,7 +104,7 @@ public class DocumentMetadataCh extends org.husky.common.communication.DocumentM
 	 *
 	 * @return healthcareFacilityTypeCode as Enum
 	 */
-	public org.husky.communication.ch.enums.HealthcareFacilityTypeCode getHealthcareFacilityTypeCodeEnum() {
+	public HealthcareFacilityTypeCode getHealthcareFacilityTypeCodeEnum() {
 		return HealthcareFacilityTypeCode
 				.getEnum(getDocumentEntry().getHealthcareFacilityTypeCode().getCode());
 	}
@@ -129,7 +123,7 @@ public class DocumentMetadataCh extends org.husky.common.communication.DocumentM
 	 *
 	 * @return the mimetype of the document
 	 */
-	public org.husky.communication.ch.enums.MimeType getMimeTypeCodeEnum() {
+	public MimeType getMimeTypeCodeEnum() {
 		return MimeType.getEnum(getDocumentEntry().getMimeType());
 	}
 
@@ -138,7 +132,7 @@ public class DocumentMetadataCh extends org.husky.common.communication.DocumentM
 	 *
 	 * @return the pactice settings code
 	 */
-	public org.husky.communication.ch.enums.PracticeSettingCode getPracticeSettingCodeEnum() {
+	public PracticeSettingCode getPracticeSettingCodeEnum() {
 		return PracticeSettingCode
 				.getEnum(getDocumentEntry().getPracticeSettingCode().getCode());
 	}
@@ -149,7 +143,7 @@ public class DocumentMetadataCh extends org.husky.common.communication.DocumentM
 	 *
 	 * @return the practiceSettingCode as Enum
 	 */
-	public org.husky.communication.ch.enums.TypeCode getTypeCodeEnum() {
+	public TypeCode getTypeCodeEnum() {
 		return TypeCode.getEnum(getDocumentEntry().getTypeCode().getCode());
 	}
 
@@ -161,7 +155,7 @@ public class DocumentMetadataCh extends org.husky.common.communication.DocumentM
 	 * @param code
 	 *            the new class code
 	 */
-	public void setClassCode(org.husky.communication.ch.enums.ClassCode code) {
+	public void setClassCode(ClassCode code) {
 		getDocumentEntry().setClassCode(code.getIpfCode());
 	}
 

@@ -24,7 +24,7 @@ import org.husky.xua.hl7v3.impl.CodedWithEquivalentsBuilder;
  */
 public interface PurposeOfUseCh {
 
-	private static CE createPurposeOfUse(org.husky.communication.ch.enums.PurposeOfUse code) {
+	private static CE createPurposeOfUse(org.husky.communication.ch.enums.stable.PurposeOfUse code) {
 		return new CodedWithEquivalentsBuilder().code(code.getCodeValue())
 				.codeSystem(code.getCodeSystemId()).codeSystemName(code.getValueSetName())
 				.displayName(code.getDisplayName()).buildObject(PurposeOfUse.DEFAULT_NS_URI,
@@ -37,7 +37,7 @@ public interface PurposeOfUseCh {
 	 * @return the purpose of use
 	 */
 	public static CE auto() {
-		return createPurposeOfUse(org.husky.communication.ch.enums.PurposeOfUse.AUTOMATIC_UPLOAD);
+		return createPurposeOfUse(org.husky.communication.ch.enums.stable.PurposeOfUse.AUTOMATIC_UPLOAD);
 	}
 
 	/**
@@ -46,7 +46,7 @@ public interface PurposeOfUseCh {
 	 * @return the purpose of use
 	 */
 	public static CE emer() {
-		return createPurposeOfUse(org.husky.communication.ch.enums.PurposeOfUse.EMERGENCY_ACCESS);
+		return createPurposeOfUse(org.husky.communication.ch.enums.stable.PurposeOfUse.EMERGENCY_ACCESS);
 	}
 
 	/**
@@ -55,7 +55,7 @@ public interface PurposeOfUseCh {
 	 * @return the purpose of use
 	 */
 	public static CE norm() {
-		return createPurposeOfUse(org.husky.communication.ch.enums.PurposeOfUse.NORMAL_ACCESS);
+		return createPurposeOfUse(org.husky.communication.ch.enums.stable.PurposeOfUse.NORMAL_ACCESS);
 	}
 
 }

@@ -1,37 +1,11 @@
 package org.husky.communication.ch.ppq.integration;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.UUID;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
-
 import org.apache.camel.CamelContext;
 import org.herasaf.xacml.core.combiningAlgorithm.policy.impl.PolicyDenyOverridesAlgorithm;
 import org.herasaf.xacml.core.dataTypeAttribute.impl.StringDataTypeAttribute;
 import org.herasaf.xacml.core.function.impl.equalityPredicates.StringEqualFunction;
-import org.herasaf.xacml.core.policy.impl.AttributeValueType;
-import org.herasaf.xacml.core.policy.impl.EvaluatableIDImpl;
-import org.herasaf.xacml.core.policy.impl.IdReferenceType;
-import org.herasaf.xacml.core.policy.impl.PolicySetType;
-import org.herasaf.xacml.core.policy.impl.ResourceAttributeDesignatorType;
-import org.herasaf.xacml.core.policy.impl.ResourceMatchType;
-import org.herasaf.xacml.core.policy.impl.ResourceType;
-import org.herasaf.xacml.core.policy.impl.ResourcesType;
-import org.herasaf.xacml.core.policy.impl.SubjectAttributeDesignatorType;
-import org.herasaf.xacml.core.policy.impl.SubjectMatchType;
-import org.herasaf.xacml.core.policy.impl.SubjectType;
-import org.herasaf.xacml.core.policy.impl.SubjectsType;
-import org.herasaf.xacml.core.policy.impl.TargetType;
-import org.husky.communication.ch.enums.PurposeOfUse;
+import org.herasaf.xacml.core.policy.impl.*;
+import org.husky.communication.ch.enums.stable.PurposeOfUse;
 import org.husky.communication.ch.ppq.TestApplication;
 import org.husky.communication.ch.ppq.api.PrivacyPolicyFeed;
 import org.husky.communication.ch.ppq.api.PrivacyPolicyFeed.PpfMethod;
@@ -90,6 +64,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * The purpose of this test class is to check whether adding, updating and

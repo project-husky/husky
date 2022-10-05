@@ -10,8 +10,8 @@
  */
 package org.husky.common.ch;
 
-import org.husky.common.ch.enums.AuthorRole;
-import org.husky.common.ch.enums.AuthorSpeciality;
+import org.husky.common.ch.enums.stable.AuthorRole;
+import org.husky.common.ch.enums.stable.AuthorSpeciality;
 import org.husky.common.hl7cdar2.POCDMT000040Author;
 import org.husky.common.model.Author;
 import org.husky.common.model.Name;

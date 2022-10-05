@@ -11,7 +11,7 @@ package org.husky.emed.ch.models.document;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.common.ch.enums.ConfidentialityCode;
+import org.husky.common.ch.enums.stable.ConfidentialityCode;
 import org.husky.common.hl7cdar2.StrucDocText;
 import org.husky.emed.ch.enums.CceDocumentType;
 import org.husky.emed.ch.models.common.AuthorDigest;

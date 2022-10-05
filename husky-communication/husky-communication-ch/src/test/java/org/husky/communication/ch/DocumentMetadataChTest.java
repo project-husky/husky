@@ -11,18 +11,14 @@
 package org.husky.communication.ch;
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.husky.common.ch.enums.ConfidentialityCode;
+import org.husky.common.ch.enums.stable.ConfidentialityCode;
 import org.husky.common.enums.LanguageCode;
-import org.husky.communication.ch.enums.ClassCode;
-import org.husky.communication.ch.enums.HealthcareFacilityTypeCode;
-import org.husky.communication.ch.enums.MimeType;
-import org.husky.communication.ch.enums.PracticeSettingCode;
-import org.husky.communication.ch.enums.TypeCode;
+import org.husky.communication.ch.enums.stable.*;
 import org.husky.communication.testhelper.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DocumentMetadataChTest extends TestUtils {
 

@@ -10,14 +10,14 @@
  */
 package org.husky.communication.ch.xd.storedquery;
 
-import java.util.List;
-
-import org.husky.common.ch.enums.ConfidentialityCode;
+import org.husky.common.ch.enums.stable.ConfidentialityCode;
 import org.husky.common.utils.XdsMetadataUtil;
-import org.husky.communication.ch.enums.FormatCode;
+import org.husky.communication.ch.enums.stable.FormatCode;
 import org.husky.communication.xd.storedquery.AbstractStoredQuery;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntryType;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.query.StoredQuery;
+
+import java.util.List;
 
 /**
  * Represents a query to get folders and its contents (associations, documents)

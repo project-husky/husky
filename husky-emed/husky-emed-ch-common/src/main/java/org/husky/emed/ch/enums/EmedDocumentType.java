@@ -9,8 +9,8 @@
  */
 package org.husky.emed.ch.enums;
 
-import org.husky.communication.ch.enums.ClassCode;
-import org.husky.communication.ch.enums.TypeCode;
+import org.husky.communication.ch.enums.stable.ClassCode;
+import org.husky.communication.ch.enums.stable.TypeCode;
 
 import java.util.Objects;
 

@@ -11,9 +11,9 @@ package org.husky.emed.ch.enums;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.husky.common.enums.LanguageCode;
-import org.husky.communication.ch.enums.ClassCode;
-import org.husky.communication.ch.enums.FormatCode;
-import org.husky.communication.ch.enums.TypeCode;
+import org.husky.communication.ch.enums.stable.ClassCode;
+import org.husky.communication.ch.enums.stable.FormatCode;
+import org.husky.communication.ch.enums.stable.TypeCode;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Code;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.LocalizedString;
 

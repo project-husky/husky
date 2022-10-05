@@ -10,7 +10,7 @@
 package org.husky.xua.validation.statement;
 
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
-import org.husky.communication.ch.enums.Role;
+import org.husky.communication.ch.enums.stable.Role;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.opensaml.core.config.InitializationService;

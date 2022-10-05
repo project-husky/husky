@@ -10,8 +10,8 @@
 package org.husky.xua.validation;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.husky.communication.ch.enums.PurposeOfUse;
-import org.husky.communication.ch.enums.Role;
+import org.husky.communication.ch.enums.stable.PurposeOfUse;
+import org.husky.communication.ch.enums.stable.Role;
 import org.opensaml.saml.common.assertion.ValidationContext;
 import org.opensaml.saml.common.assertion.ValidationResult;
 

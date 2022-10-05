@@ -10,12 +10,12 @@
  */
 package org.husky.communication.ch.ppq.impl.hl7v3;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import org.husky.xua.communication.xua.impl.ch.PurposeOfUseCh;
 import org.husky.xua.hl7v3.CE;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class PurposeOfUseChImplTest {
 
@@ -23,7 +23,7 @@ class PurposeOfUseChImplTest {
 	void testAUTO() {
 		final CE ref = PurposeOfUseCh.auto();
 		assertNotNull(ref);
-		assertEquals(org.husky.communication.ch.enums.PurposeOfUse.AUTOMATIC_UPLOAD_CODE,
+		assertEquals(org.husky.communication.ch.enums.stable.PurposeOfUse.AUTOMATIC_UPLOAD_CODE,
 				ref.getCode());
 	}
 
@@ -31,7 +31,7 @@ class PurposeOfUseChImplTest {
 	void testEMER() {
 		final CE ref = PurposeOfUseCh.emer();
 		assertNotNull(ref);
-		assertEquals(org.husky.communication.ch.enums.PurposeOfUse.EMERGENCY_ACCESS_CODE,
+		assertEquals(org.husky.communication.ch.enums.stable.PurposeOfUse.EMERGENCY_ACCESS_CODE,
 				ref.getCode());
 	}
 
@@ -39,7 +39,7 @@ class PurposeOfUseChImplTest {
 	void testNORM() {
 		final CE ref = PurposeOfUseCh.norm();
 		assertNotNull(ref);
-		assertEquals(org.husky.communication.ch.enums.PurposeOfUse.NORMAL_ACCESS_CODE,
+		assertEquals(org.husky.communication.ch.enums.stable.PurposeOfUse.NORMAL_ACCESS_CODE,
 				ref.getCode());
 	}
 

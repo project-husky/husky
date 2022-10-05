@@ -1,21 +1,15 @@
 package org.husky.emed.ch.cda.digesters;
 
-import org.husky.common.ch.enums.ConfidentialityCode;
+import org.husky.common.ch.enums.stable.ConfidentialityCode;
 import org.husky.common.enums.AdministrativeGender;
-import org.husky.common.hl7cdar2.CE;
 import org.husky.common.hl7cdar2.POCDMT000040ClinicalDocument;
-import org.husky.common.hl7cdar2.POCDMT000040IntendedRecipient;
-import org.husky.common.hl7cdar2.POCDMT000040Material;
 import org.husky.common.utils.xml.XmlFactories;
 import org.husky.emed.ch.cda.services.EmedEntryDigestService;
-import org.husky.emed.ch.cda.utils.readers.ContainerPackagedMedicineReader;
 import org.husky.emed.ch.cda.xml.CceDocumentUnmarshaller;
 import org.husky.emed.ch.errors.InvalidEmedContentException;
 import org.husky.emed.ch.models.common.*;
-import org.husky.emed.ch.models.document.EmedMtpDocumentDigest;
 import org.husky.emed.ch.models.document.EmedPmlcDocumentDigest;
 import org.husky.emed.ch.models.entry.EmedEntryDigest;
-import org.husky.emed.ch.models.entry.EmedMtpEntryDigest;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;

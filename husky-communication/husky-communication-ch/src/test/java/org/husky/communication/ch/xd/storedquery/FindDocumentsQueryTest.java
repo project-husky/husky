@@ -11,13 +11,13 @@
 package org.husky.communication.ch.xd.storedquery;
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.husky.communication.ch.testhelper.XdsChTestUtils;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Test of class FindDocumentsQuery
@@ -29,7 +29,7 @@ class FindDocumentsQueryTest extends XdsChTestUtils {
 
 	/**
 	 * Test method for
-	 * {@link org.husky.communication.ch.xd.storedquery.FindDocumentsQuery#FindDocumentsQuery(org.husky.common.Identificator, org.husky.communication.ch.enums.ClassCode[], org.husky.communication.xd.storedquery.DateTimeRange[], org.husky.communication.ch.enums.PracticeSettingCode[], org.husky.communication.ch.enums.HealthcareFacilityTypeCode[], org.husky.communication.ch.enums.ConfidentialityCode[], org.husky.communication.ch.enums.FormatCode[], org.openhealthtools.ihe.common.hl7v2.XCN, org.husky.communication.ch.enums.AvailabilityStatus)}
+	 * {@link org.husky.communication.ch.xd.storedquery.FindDocumentsQuery#FindDocumentsQuery(org.husky.common.Identificator, org.husky.communication.ch.enums.stable.ClassCode[], org.husky.communication.xd.storedquery.DateTimeRange[], org.husky.communication.ch.enums.stable.PracticeSettingCode[], org.husky.communication.ch.enums.stable.HealthcareFacilityTypeCode[], org.husky.communication.ch.enums.stable.ConfidentialityCode[], org.husky.communication.ch.enums.stable.FormatCode[], org.openhealthtools.ihe.common.hl7v2.XCN, org.husky.communication.ch.enums.AvailabilityStatus)}
 	 * .
 	 */
 	@Test
