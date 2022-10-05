@@ -6,37 +6,37 @@
 
 		<!-- AddPolicyRequest -->
 		<ObjectProvider qualifiedName="epr:AddPolicyRequest">
-			<BuilderClass className="org.husky.communication.ch.ppq.epr.policyadmin.impl.AddPolicyRequestBuilder" />
-			<MarshallingClass className="org.husky.communication.ch.ppq.epr.policyadmin.impl.AddPolicyRequestMarshaller" />
-			<UnmarshallingClass className="org.husky.communication.ch.ppq.epr.policyadmin.impl.AddPolicyRequestUnmarshaller" />
+			<BuilderClass className="org.projecthusky.communication.ch.ppq.epr.policyadmin.impl.AddPolicyRequestBuilder" />
+			<MarshallingClass className="org.projecthusky.communication.ch.ppq.epr.policyadmin.impl.AddPolicyRequestMarshaller" />
+			<UnmarshallingClass className="org.projecthusky.communication.ch.ppq.epr.policyadmin.impl.AddPolicyRequestUnmarshaller" />
 		</ObjectProvider>
 
 		<!-- UpdatePolicyRequest -->
 		<ObjectProvider qualifiedName="epr:UpdatePolicyRequest">
-			<BuilderClass className="org.husky.communication.ch.ppq.epr.policyadmin.impl.UpdatePolicyRequestBuilder" />
-			<MarshallingClass className="org.husky.communication.ch.ppq.epr.policyadmin.impl.UpdatePolicyRequestMarshaller" />
-			<UnmarshallingClass className="org.husky.communication.ch.ppq.epr.policyadmin.impl.UpdatePolicyRequestUnmarshaller" />
+			<BuilderClass className="org.projecthusky.communication.ch.ppq.epr.policyadmin.impl.UpdatePolicyRequestBuilder" />
+			<MarshallingClass className="org.projecthusky.communication.ch.ppq.epr.policyadmin.impl.UpdatePolicyRequestMarshaller" />
+			<UnmarshallingClass className="org.projecthusky.communication.ch.ppq.epr.policyadmin.impl.UpdatePolicyRequestUnmarshaller" />
 		</ObjectProvider>
 
 		<!-- DeletePolicyRequest -->
 		<ObjectProvider qualifiedName="epr:DeletePolicyRequest">
-			<BuilderClass className="org.husky.communication.ch.ppq.epr.policyadmin.impl.DeletePolicyRequestBuilder" />
-			<MarshallingClass className="org.husky.communication.ch.ppq.epr.policyadmin.impl.DeletePolicyRequestMarshaller" />
-			<UnmarshallingClass className="org.husky.communication.ch.ppq.epr.policyadmin.impl.DeletePolicyRequestUnmarshaller" />
+			<BuilderClass className="org.projecthusky.communication.ch.ppq.epr.policyadmin.impl.DeletePolicyRequestBuilder" />
+			<MarshallingClass className="org.projecthusky.communication.ch.ppq.epr.policyadmin.impl.DeletePolicyRequestMarshaller" />
+			<UnmarshallingClass className="org.projecthusky.communication.ch.ppq.epr.policyadmin.impl.DeletePolicyRequestUnmarshaller" />
 		</ObjectProvider>
 
 		<!-- EprPolicyRepositoryResponse -->
 		<ObjectProvider qualifiedName="epr:EprPolicyRepositoryResponse">
-			<BuilderClass className="org.husky.communication.ch.ppq.epr.policyadmin.impl.EprPolicyRepositoryResponseBuilderImpl" />
-			<MarshallingClass className="org.husky.communication.ch.ppq.epr.policyadmin.impl.EprPolicyRepositoryResponseMarshaller" />
-			<UnmarshallingClass className="org.husky.communication.ch.ppq.epr.policyadmin.impl.EprPolicyRepositoryResponseUnmarshaller" />
+			<BuilderClass className="org.projecthusky.communication.ch.ppq.epr.policyadmin.impl.EprPolicyRepositoryResponseBuilderImpl" />
+			<MarshallingClass className="org.projecthusky.communication.ch.ppq.epr.policyadmin.impl.EprPolicyRepositoryResponseMarshaller" />
+			<UnmarshallingClass className="org.projecthusky.communication.ch.ppq.epr.policyadmin.impl.EprPolicyRepositoryResponseUnmarshaller" />
 		</ObjectProvider>
 
 		<!-- UnknownPolicySetId -->
 		<ObjectProvider qualifiedName="epr:UnknownPolicySetId">
-			<BuilderClass className="org.husky.communication.ch.ppq.epr.policyadmin.impl.UnknownPolicySetIdBuilderImpl" />
-			<MarshallingClass className="org.husky.communication.ch.ppq.epr.policyadmin.impl.UnknownPolicySetIdMarshaller" />
-			<UnmarshallingClass className="org.husky.communication.ch.ppq.epr.policyadmin.impl.UnknownPolicySetIdUnmarshaller" />
+			<BuilderClass className="org.projecthusky.communication.ch.ppq.epr.policyadmin.impl.UnknownPolicySetIdBuilderImpl" />
+			<MarshallingClass className="org.projecthusky.communication.ch.ppq.epr.policyadmin.impl.UnknownPolicySetIdMarshaller" />
+			<UnmarshallingClass className="org.projecthusky.communication.ch.ppq.epr.policyadmin.impl.UnknownPolicySetIdUnmarshaller" />
 		</ObjectProvider>
 
 	</ObjectProviders>

@@ -6,23 +6,23 @@
 
 		<!-- PurposeOfUse -->
 		<ObjectProvider qualifiedName="hl7:PurposeOfUse">
-			<BuilderClass className="org.husky.xua.hl7v3.impl.CodedWithEquivalentsBuilder" />
-			<MarshallingClass className="org.husky.xua.hl7v3.impl.CodedWithEquivalentsMarshaller" />
-			<UnmarshallingClass className="org.husky.xua.hl7v3.impl.CodedWithEquivalentsUnmarshaller" />
+			<BuilderClass className="org.projecthusky.xua.hl7v3.impl.CodedWithEquivalentsBuilder" />
+			<MarshallingClass className="org.projecthusky.xua.hl7v3.impl.CodedWithEquivalentsMarshaller" />
+			<UnmarshallingClass className="org.projecthusky.xua.hl7v3.impl.CodedWithEquivalentsUnmarshaller" />
 		</ObjectProvider>
 
 		<!-- InstanceIdentifier -->
 		<ObjectProvider qualifiedName="hl7:InstanceIdentifier">
-			<BuilderClass className="org.husky.xua.hl7v3.impl.InstanceIdentifierBuilder" />
-			<MarshallingClass className="org.husky.xua.hl7v3.impl.InstanceIdentifierMarshaller" />
-			<UnmarshallingClass className="org.husky.xua.hl7v3.impl.InstanceIdentifierUnmarshaller" />
+			<BuilderClass className="org.projecthusky.xua.hl7v3.impl.InstanceIdentifierBuilder" />
+			<MarshallingClass className="org.projecthusky.xua.hl7v3.impl.InstanceIdentifierMarshaller" />
+			<UnmarshallingClass className="org.projecthusky.xua.hl7v3.impl.InstanceIdentifierUnmarshaller" />
 		</ObjectProvider>
 		
 		<!-- Role -->
 		<ObjectProvider qualifiedName="hl7:Role">
-			<BuilderClass className="org.husky.xua.hl7v3.impl.CodedWithEquivalentsBuilder" />
-			<MarshallingClass className="org.husky.xua.hl7v3.impl.CodedWithEquivalentsMarshaller" />
-			<UnmarshallingClass className="org.husky.xua.hl7v3.impl.CodedWithEquivalentsUnmarshaller" />
+			<BuilderClass className="org.projecthusky.xua.hl7v3.impl.CodedWithEquivalentsBuilder" />
+			<MarshallingClass className="org.projecthusky.xua.hl7v3.impl.CodedWithEquivalentsMarshaller" />
+			<UnmarshallingClass className="org.projecthusky.xua.hl7v3.impl.CodedWithEquivalentsUnmarshaller" />
 		</ObjectProvider>
 
 	</ObjectProviders>

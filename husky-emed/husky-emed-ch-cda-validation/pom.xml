@@ -3,23 +3,23 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.husky.emed.ch.cda.validation</groupId>
+    <groupId>org.projecthusky.emed.ch.cda.validation</groupId>
     <artifactId>husky-emed-ch-cda-validation</artifactId>
     <name>Husky eMedication Swiss CDA Validation</name>
 
     <parent>
         <artifactId>husky-emed</artifactId>
-        <groupId>org.husky.emed</groupId>
+        <groupId>org.projecthusky.emed</groupId>
         <version>2.0-ALPHA</version>
     </parent>
 
     <dependencies>
         <dependency>
-            <groupId>org.husky.validation.service</groupId>
+            <groupId>org.projecthusky.validation.service</groupId>
             <artifactId>husky-validation-service</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.husky.emed.ch.cda</groupId>
+            <groupId>org.projecthusky.emed.ch.cda</groupId>
             <artifactId>husky-emed-ch-cda</artifactId>
             <exclusions>
             	<exclusion>

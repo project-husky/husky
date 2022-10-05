@@ -27,7 +27,7 @@ The following code is an excerpt from the test class and shows how to add patien
 
 The following code excerpt shows a simple example of adding a new patient to a patient registry. 
 For a more in depth description of all atrributes that may be asscociated with a patient see the java doc of class FhirPatient
-The complete source code of the test classes can be found in the file PixV3QueryTest in the package package org.husky.communication.integration 
+The complete source code of the test classes can be found in the file PixV3QueryTest in the package package org.projecthusky.communication.integration 
 
 
 Excerpt from test class 

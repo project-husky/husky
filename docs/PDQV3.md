@@ -16,7 +16,7 @@ In order to achieve the described functionality the following IPF component has 
 
 
 The following code excerpt shows how to search for patient by first name birth date and address. In case the query succeeds (no exception occurs) the the success attribute of the response object is set to true. The response object contains a list of all Patient objects that confirm to the given search criteria, which might be empty in case no record was found.
-The complete source code of the test classes can be found in the file PixV3QueryTest in the package package org.husky.communication.integration 
+The complete source code of the test classes can be found in the file PixV3QueryTest in the package package org.projecthusky.communication.integration 
 
 ```
 public void ITI47ConsumerQueryPatientPatientIdMultipleCriteria() {

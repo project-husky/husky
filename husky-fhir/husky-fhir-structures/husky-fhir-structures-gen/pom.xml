@@ -5,7 +5,7 @@
 	<name>Husky FHIR Structures Generic</name>
 
 	<parent>
-		<groupId>org.husky.fhir.structures</groupId>
+		<groupId>org.projecthusky.fhir.structures</groupId>
 		<artifactId>husky-fhir-structures</artifactId>
 		<version>2.0-ALPHA</version>
 	</parent>
@@ -18,7 +18,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.husky.common</groupId>
+			<groupId>org.projecthusky.common</groupId>
 			<artifactId>husky-common-gen</artifactId>
 		</dependency>
 		
