@@ -19,16 +19,24 @@ import java.util.Objects;
  */
 public enum EmedEntryType {
 
-    /** <div class="en"> Medication Treatment Plan Item</div> */
+    /**
+     * Medication Treatment Plan Item
+     */
     MTP("Medication Treatment Plan Item"),
 
-    /** <div class="en"> Prescription Item</div> */
+    /**
+     * Prescription Item
+     */
     PRE("Prescription Item"),
 
-    /** <div class="en"> Dispense Item</div> */
+    /**
+     * Dispense Item
+     */
     DIS("Dispense Item"),
 
-    /** <div class="en"> Pharmaceutical Advice Item</div> */
+    /**
+     * Pharmaceutical Advice Item
+     */
     PADV("Pharmaceutical Advice Item");
 
     /**

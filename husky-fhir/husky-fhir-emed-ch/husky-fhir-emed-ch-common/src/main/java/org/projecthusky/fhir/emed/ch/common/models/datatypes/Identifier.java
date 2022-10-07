@@ -37,4 +37,17 @@ public class Identifier {
         identifier.setSystem("urn:ietf:rfc:3986");
         return identifier;
     }
+
+    /**
+     * Constructs an {@link org.hl7.fhir.r4.model.Identifier} from an OID.
+     *
+     * @param oid The OID to use as identifier.
+     * @return the constructed identifier.
+     */
+    public static org.hl7.fhir.r4.model.Identifier fromUuid(final String oid) {
+        final var identifier = new org.hl7.fhir.r4.model.Identifier();
+        identifier.setValue("urn:oid:" + oid);
+        identifier.setSystem("urn:ietf:rfc:3986"); // TODO ?
+        return identifier;
+    }
 }
