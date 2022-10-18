@@ -15,7 +15,7 @@ import ca.uhn.fhir.context.support.DefaultProfileValidationSupport;
 import ca.uhn.fhir.context.support.IValidationSupport;
 import org.hl7.fhir.common.hapi.validation.support.*;
 import org.hl7.fhir.common.hapi.validation.validator.FhirInstanceValidator;
-import org.hl7.fhir.instance.model.api.IBaseBundle;
+import org.hl7.fhir.r4.model.Bundle;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -49,18 +49,36 @@ public class ChEmedPmpValidator {
                 new DefaultProfileValidationSupport(this.context),
                 new CommonCodeSystemsTerminologyService(this.context),
                 new InMemoryTerminologyServerValidationSupport(this.context),
-                new SnapshotGeneratingValidationSupport(this.context)
+                new SnapshotGeneratingValidationSupport(this.context) // TODO: may not be needed, we generate the
+                // snapshot view in the IG
         );
         this.validationSupport = new CachingValidationSupport(validationSupportChain);
     }
 
     /**
+     * Validates a CH-EMED-EPR document Bundle from its JSON or XML representation. Use this method if you've received a
+     * document that you want to validate.
      *
-     *
-     * @param documentBundle
+     * @param documentRepresentation The JSON or XML representation of the document Bundle to validate.
      * @return
      */
-    public boolean validateDocumentBundle(final IBaseBundle documentBundle) {
+    public boolean validateDocumentBundle(final String documentRepresentation) {
+        final var validator = this.context.newValidator();
+        final var instanceValidator = new FhirInstanceValidator(this.validationSupport);
+        validator.registerValidatorModule(instanceValidator);
+
+        final var result = validator.validateWithResult(documentRepresentation);
+        return result.isSuccessful();
+    }
+
+    /**
+     * Validates a CH-EMED-EPR document Bundle. Use this method if you've generated a document that you want to
+     * validate.
+     *
+     * @param documentBundle The document Bundle to validate.
+     * @return
+     */
+    public boolean validateDocumentBundle(final Bundle documentBundle) {
         final var validator = this.context.newValidator();
         final var instanceValidator = new FhirInstanceValidator(this.validationSupport);
         validator.registerValidatorModule(instanceValidator);

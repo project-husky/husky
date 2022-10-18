@@ -52,6 +52,7 @@
 		<module>husky-validation</module>
 		<module>husky-fhir</module>
 		<module>husky-common</module>
+		<module>husky-emed</module>
 		<module>husky-cda</module>
 	</modules>
 
@@ -655,6 +656,29 @@
 				<version>4.8.1</version>
 				<scope>test</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.projecthusky.fhir.emed.ch</groupId>
+				<artifactId>husky-fhir-emed-ch-common</artifactId>
+				<version>${husky.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.projecthusky.fhir.emed.ch</groupId>
+				<artifactId>husky-fhir-emed-ch-pmp</artifactId>
+				<version>${husky.version}</version>
+			</dependency>
+
+        <dependency>
+			<groupId>com.sun.xml.messaging.saaj</groupId>
+			<artifactId>saaj-impl</artifactId>
+			<version>1.5.1</version>
+									<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>4.3.1</version>
+			<scope>test</scope>
+		</dependency>
 		</dependencies>
 	</dependencyManagement>
 
