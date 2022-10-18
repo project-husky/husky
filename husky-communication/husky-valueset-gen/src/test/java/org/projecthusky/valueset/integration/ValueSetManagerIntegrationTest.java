@@ -10,21 +10,11 @@
  */
 package org.projecthusky.valueset.integration;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.Date;
-import java.util.GregorianCalendar;
-
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.apache.commons.io.IOUtils;
+import org.junit.jupiter.api.Test;
 import org.projecthusky.common.basetypes.IdentificatorBaseType;
 import org.projecthusky.common.utils.LangText;
+import org.projecthusky.valueset.api.ArtDecorValueSetManager;
 import org.projecthusky.valueset.api.ValueSetManager;
 import org.projecthusky.valueset.config.ValueSetConfig;
 import org.projecthusky.valueset.enums.SourceFormatType;
@@ -32,8 +22,18 @@ import org.projecthusky.valueset.enums.SourceSystemType;
 import org.projecthusky.valueset.exceptions.InitializationException;
 import org.projecthusky.valueset.model.ValueSet;
 import org.projecthusky.valueset.model.ValueSetEntry;
-import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * The Test Class for ValueSetManager with downloading value sets from
@@ -124,8 +124,8 @@ class ValueSetManagerIntegrationTest {
 		URL authorRoleSourceUrlJson;
 		String authorRoleSourceUrlJsonString = "";
 
-		authorRoleSourceUrlJson = ValueSetManager.buildValueSetArtDecorUrl(baseUrlJson,
-				authorRoleId, authorRoleTimeStamp);
+		authorRoleSourceUrlJson = ArtDecorValueSetManager.buildValueSetArtDecorUrl(baseUrlJson,
+																				   authorRoleId, authorRoleTimeStamp);
 		authorRoleSourceUrlJsonString = authorRoleSourceUrlJson.toString();
 
 		// configuring the download of value sets in JSON format
@@ -138,7 +138,7 @@ class ValueSetManagerIntegrationTest {
 
 		URL authorRoleSourceUrlIheSvs;
 		String authorRoleSourceUrlIheSvsString = "";
-		authorRoleSourceUrlIheSvs = ValueSetManager.buildValueSetArtDecorUrl(baseUrlIheSvs,
+		authorRoleSourceUrlIheSvs = ArtDecorValueSetManager.buildValueSetArtDecorUrl(baseUrlIheSvs,
 				authorRoleId, authorRoleTimeStamp);
 		authorRoleSourceUrlIheSvsString = authorRoleSourceUrlIheSvs.toString();
 
@@ -153,7 +153,7 @@ class ValueSetManagerIntegrationTest {
 
 		URL authorRoleSourceUrlXml;
 		String authorRoleSourceUrlXmlString = "";
-		authorRoleSourceUrlXml = ValueSetManager.buildValueSetArtDecorUrl(baseUrlXml, authorRoleId,
+		authorRoleSourceUrlXml = ArtDecorValueSetManager.buildValueSetArtDecorUrl(baseUrlXml, authorRoleId,
 				authorRoleTimeStamp);
 		authorRoleSourceUrlXmlString = authorRoleSourceUrlXml.toString();
 

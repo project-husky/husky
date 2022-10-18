@@ -10,17 +10,7 @@
  */
 package org.projecthusky.valueset.api;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.util.Date;
-
+import org.junit.jupiter.api.Test;
 import org.projecthusky.common.basetypes.IdentificatorBaseType;
 import org.projecthusky.common.basetypes.NameBaseType;
 import org.projecthusky.common.basetypes.OrganizationBaseType;
@@ -38,7 +28,15 @@ import org.projecthusky.valueset.exceptions.ConfigurationException;
 import org.projecthusky.valueset.model.ValueSet;
 import org.projecthusky.valueset.model.ValueSetPackage;
 import org.projecthusky.valueset.model.Version;
-import org.junit.jupiter.api.Test;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.util.Date;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * The Test Class for ValueSetPackageManager.
@@ -132,7 +130,7 @@ class ValueSetPackageManagerTest {
 		URL authorRoleSourceUrl;
 		String authorRoleSourceUrlString = "";
 
-		authorRoleSourceUrl = ValueSetManager.buildValueSetArtDecorUrl(baseUrl, authorRoleId,
+		authorRoleSourceUrl = ArtDecorValueSetManager.buildValueSetArtDecorUrl(baseUrl, authorRoleId,
 				authorRoleTimeStamp);
 		authorRoleSourceUrlString = authorRoleSourceUrl.toString();
 
@@ -149,7 +147,7 @@ class ValueSetPackageManagerTest {
 		URL documentAvailabilityStatusSourceUrl;
 		String documentAvailabilityStatusSourceUrlString = "";
 
-		documentAvailabilityStatusSourceUrl = ValueSetManager.buildValueSetArtDecorUrl(baseUrl,
+		documentAvailabilityStatusSourceUrl = ArtDecorValueSetManager.buildValueSetArtDecorUrl(baseUrl,
 				documentAvailabilityStatusId, documentAvailabilityStatusTimeStamp);
 		documentAvailabilityStatusSourceUrlString = documentAvailabilityStatusSourceUrl.toString();
 
