@@ -12,7 +12,7 @@ package org.projecthusky.fhir.emed.ch.pmp.model.common;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.projecthusky.emed.ch.enums.TimingEventAmbu;
+import org.projecthusky.fhir.emed.ch.pmp.enums.TimingEventAmbu;
 
 import java.time.Instant;
 import java.util.ArrayList;

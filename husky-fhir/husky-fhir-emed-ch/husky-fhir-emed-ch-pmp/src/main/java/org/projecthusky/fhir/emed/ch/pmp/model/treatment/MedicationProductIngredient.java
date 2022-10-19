@@ -13,7 +13,7 @@ package org.projecthusky.fhir.emed.ch.pmp.model.treatment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.projecthusky.emed.ch.enums.ActivePharmaceuticalIngredient;
+import org.projecthusky.fhir.emed.ch.common.enums.ActivePharmaceuticalIngredient;
 import org.projecthusky.fhir.emed.ch.pmp.model.common.QuantityWithRegularUnit;
 
 /**
@@ -26,7 +26,7 @@ import org.projecthusky.fhir.emed.ch.pmp.model.common.QuantityWithRegularUnit;
 @AllArgsConstructor
 public class MedicationProductIngredient {
 
-     /**
+    /**
      * The component name.
      */
     private String name;

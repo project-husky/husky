@@ -10,12 +10,11 @@
  */
 package org.projecthusky.fhir.emed.ch.pmp.model.treatment;
 
-import org.projecthusky.fhir.emed.ch.pmp.model.entry.EmedPreEntryDigest;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.projecthusky.emed.ch.enums.DispenseSupplyType;
-import org.projecthusky.emed.ch.enums.PrescriptionStatus;
+import org.projecthusky.fhir.emed.ch.common.enums.DispenseSupplyType;
+import org.projecthusky.fhir.emed.ch.pmp.enums.PrescriptionStatus;
 import org.projecthusky.fhir.emed.ch.pmp.model.common.EmedReference;
 import org.projecthusky.fhir.emed.ch.pmp.model.common.QuantityWithRegularUnit;
 
@@ -24,9 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A data structure that represents a medication prescription. Contrary to a {@link
- * EmedPreEntryDigest}, it contains the full state of the prescription (i.e the initial PRE
- * item and all PADV items that have been aggregated).
+ * A data structure that represents a medication prescription.
  *
  * @author Quentin Ligier
  */
@@ -43,7 +40,7 @@ public class MedicationPrescription {
      * Number of dispense repeats/refills (excluding the initial dispense). {@code null} means no limitation.
      */
     @Nullable
-    private Integer dispenseRepeatNumber = null;
+    private Integer dispenseRepeatNumber;
 
     /**
      * Reference to the PRE items.

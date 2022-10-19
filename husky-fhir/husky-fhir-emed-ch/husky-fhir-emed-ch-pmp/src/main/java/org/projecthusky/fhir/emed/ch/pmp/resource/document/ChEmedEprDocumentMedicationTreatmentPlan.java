@@ -77,7 +77,7 @@ public class ChEmedEprDocumentMedicationTreatmentPlan extends ChEmedEprDocument 
      * @throws InvalidEmedContentException if the composition is missing.
      */
     @ExpectsValidResource
-    public ChEmedEprCompositionMedicationTreatmentPlan getComposition() {
+    public ChEmedEprCompositionMedicationTreatmentPlan resolveComposition() {
         final var entry = this.getEntryByResourceType(ChEmedEprCompositionMedicationTreatmentPlan.class);
         if (entry != null && entry.getResource() instanceof final ChEmedEprCompositionMedicationTreatmentPlan composition) {
             return composition;

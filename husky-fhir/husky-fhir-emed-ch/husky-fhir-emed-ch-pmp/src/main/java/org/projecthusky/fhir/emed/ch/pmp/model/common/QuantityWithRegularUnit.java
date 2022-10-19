@@ -11,7 +11,7 @@
 package org.projecthusky.fhir.emed.ch.pmp.model.common;
 
 import org.projecthusky.common.hl7cdar2.PQ;
-import org.projecthusky.emed.ch.enums.RegularUnitCodeAmbu;
+import org.projecthusky.fhir.emed.ch.pmp.enums.RegularUnitCodeAmbu;
 
 import java.util.Objects;
 
@@ -36,7 +36,7 @@ public class QuantityWithRegularUnit {
      * Constructor.
      *
      * @param value The quantity value.
-     * @param unit The quantity unit.
+     * @param unit  The quantity unit.
      */
     public QuantityWithRegularUnit(final String value,
                                    final RegularUnitCodeAmbu unit) {

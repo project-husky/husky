@@ -10,7 +10,7 @@
  */
 package org.projecthusky.fhir.emed.ch.pmp.model.treatment;
 
-import org.projecthusky.fhir.emed.ch.pmp.model.common.AuthorDigest;
+import org.projecthusky.fhir.emed.ch.pmp.model.common.Author;
 import org.projecthusky.fhir.emed.ch.pmp.model.common.EmedReference;
 
 import java.time.Instant;
@@ -26,7 +26,7 @@ public class MedicationTreatmentComment {
     /**
      * The author of the comment.
      */
-    protected final AuthorDigest author;
+    protected final Author author;
 
     /**
      * The comment content.
@@ -43,7 +43,7 @@ public class MedicationTreatmentComment {
      */
     protected final EmedReference padvReference;
 
-    public MedicationTreatmentComment(final AuthorDigest author,
+    public MedicationTreatmentComment(final Author author,
                                       final String comment,
                                       final Instant created,
                                       final EmedReference padvReference) {
@@ -53,7 +53,7 @@ public class MedicationTreatmentComment {
         this.padvReference = Objects.requireNonNull(padvReference);
     }
 
-    public AuthorDigest getAuthor() {
+    public Author getAuthor() {
         return this.author;
     }
 

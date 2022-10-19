@@ -10,7 +10,7 @@
  */
 package org.projecthusky.fhir.emed.ch.pmp.model.common;
 
-import org.projecthusky.emed.ch.enums.TimingEventAmbu;
+import org.projecthusky.fhir.emed.ch.pmp.enums.TimingEventAmbu;
 
 import java.util.Objects;
 

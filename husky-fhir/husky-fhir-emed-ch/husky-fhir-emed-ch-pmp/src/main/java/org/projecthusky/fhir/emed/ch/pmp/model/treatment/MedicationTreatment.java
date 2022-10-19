@@ -10,16 +10,16 @@
  */
 package org.projecthusky.fhir.emed.ch.pmp.model.treatment;
 
-import org.projecthusky.fhir.emed.ch.pmp.model.common.MedicationDosageInstructions;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.projecthusky.emed.ch.enums.RouteOfAdministrationAmbu;
-import org.projecthusky.emed.ch.enums.TreatmentStatus;
-import org.projecthusky.fhir.emed.ch.pmp.model.common.AuthorDigest;
+import org.projecthusky.fhir.emed.ch.pmp.enums.RouteOfAdministrationAmbu;
+import org.projecthusky.fhir.emed.ch.pmp.enums.TreatmentStatus;
+import org.projecthusky.fhir.emed.ch.pmp.model.common.Author;
 import org.projecthusky.fhir.emed.ch.pmp.model.common.EmedReference;
+import org.projecthusky.fhir.emed.ch.pmp.model.common.MedicationDosageInstructions;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -54,7 +54,7 @@ public class MedicationTreatment {
 
     /**
      * The annotation comment or {@code null} if it isn't provided.
-     *
+     * <p>
      * TODO: Do not use yet, use case is unclear. May be deleted soon.
      */
     @Nullable
@@ -69,7 +69,7 @@ public class MedicationTreatment {
      * Number of dispense repeats/refills (excluding the initial dispense). {@code null} means no limitation.
      */
     @Nullable
-    protected Integer dispenseRepeatNumber = null;
+    protected Integer dispenseRepeatNumber;
 
     /**
      * The dosage instructions.
@@ -96,14 +96,14 @@ public class MedicationTreatment {
      * The author of the last item entry (of any kind) in this treatment. This is the last intervening.
      */
     @Nullable
-    protected AuthorDigest lastInterveningAuthor;
+    protected Author lastInterveningAuthor;
 
     /**
-     * The author of the last item entry (of type MTP, PRE, or any type of PADV except COMMENT that apply to an MTP
-     * or PRE) in this treatment. This is the last "medical" participant.
+     * The author of the last item entry (of type MTP, PRE, or any type of PADV except COMMENT that apply to an MTP or
+     * PRE) in this treatment. This is the last "medical" participant.
      */
     @Nullable
-    protected AuthorDigest lastMedicalAuthor;
+    protected Author lastMedicalAuthor;
 
     /**
      * Reference to the MTP item.

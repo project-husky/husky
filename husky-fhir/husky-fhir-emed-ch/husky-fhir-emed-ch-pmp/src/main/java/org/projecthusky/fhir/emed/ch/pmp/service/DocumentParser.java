@@ -18,11 +18,15 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Bundle;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 
+import javax.annotation.concurrent.ThreadSafe;
+
 /**
  * A parser for the FHIR CH-EMED-EPR IG resources. It can both serialize and parse (deserialize) documents.
  *
  * @author Quentin Ligier
+ * @implNote Parsers are cheap to create and may not be thread-safe. They're created on-the-fly for each operation.
  **/
+@ThreadSafe
 public class DocumentParser {
 
     private final FhirContext context;

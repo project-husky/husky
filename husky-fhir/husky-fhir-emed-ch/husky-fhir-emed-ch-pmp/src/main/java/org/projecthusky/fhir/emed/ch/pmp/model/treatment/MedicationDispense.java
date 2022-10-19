@@ -13,20 +13,16 @@ package org.projecthusky.fhir.emed.ch.pmp.model.treatment;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.projecthusky.emed.ch.enums.DispenseStatus;
-import org.projecthusky.emed.ch.enums.DispenseSupplyType;
-import org.projecthusky.emed.ch.enums.RegularUnitCodeAmbu;
+import org.projecthusky.fhir.emed.ch.common.enums.DispenseSupplyType;
+import org.projecthusky.fhir.emed.ch.pmp.enums.RegularUnitCodeAmbu;
 import org.projecthusky.fhir.emed.ch.pmp.model.common.MedicationDosageInstructions;
-import org.projecthusky.fhir.emed.ch.pmp.model.entry.EmedDisEntryDigest;
 
 import java.util.UUID;
 
 /**
- * A data structure that represents a medication dispense. Contrary to a {@link EmedDisEntryDigest}, it contains the
- * full state of the dispense (i.e. the initial DIS item and all PADV items that have been aggregated).
+ * A data structure that represents a medication dispense.
  * <p>
- * PADV documents that are aggregated can only change the status and dosage instructions; other fields are not
- * updatable.
+ * PADV documents that are aggregated can only change the dosage instructions; other fields are not updatable.
  *
  * @author Quentin Ligier
  */
@@ -61,12 +57,6 @@ public class MedicationDispense {
      * The DIS item ID.
      */
     private UUID itemId;
-
-    /**
-     * The actual status of the dispense.
-     */
-    @Nullable
-    private DispenseStatus status;
 
     /**
      * The dispensed medication quantity. If the dispensed product has information about the medication package, the

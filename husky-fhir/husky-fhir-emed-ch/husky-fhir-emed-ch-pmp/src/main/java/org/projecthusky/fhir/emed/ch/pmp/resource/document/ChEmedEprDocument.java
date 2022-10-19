@@ -13,6 +13,7 @@ package org.projecthusky.fhir.emed.ch.pmp.resource.document;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Identifier;
+import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 
 import java.util.Date;
@@ -48,7 +49,7 @@ public abstract class ChEmedEprDocument extends Bundle {
         this.setType(BundleType.DOCUMENT);
         this.setIdentifier(new Identifier());
         this.getIdentifier().setSystem(FhirSystem.URI);
-        this.getIdentifier().setValue("urn:uuid:" + documentId);
+        this.getIdentifier().setValue(Uuids.URN_PREFIX + documentId);
         this.setTimestamp(timestamp);
     }
 

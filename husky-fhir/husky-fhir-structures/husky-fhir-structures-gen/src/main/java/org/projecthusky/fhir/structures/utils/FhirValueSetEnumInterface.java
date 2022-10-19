@@ -8,23 +8,21 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-package org.projecthusky.fhir.emed.ch.common.util;
+package org.projecthusky.fhir.structures.utils;
+
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
 
 /**
  * husky
  *
  * @author Quentin Ligier
  **/
-public class FhirSystem {
+public interface FhirValueSetEnumInterface {
 
-    public static final String LOINC = "http://loinc.org";
-    public static final String SNOMEDCT = "http://snomed.info/sct";
-    public static final String UCUM = "";
-    public static final String URI = "urn:ietf:rfc:3986";
+    Coding getCoding();
 
-    /**
-     * This class is not instantiable.
-     */
-    private FhirSystem() {
-    }
+    CodeableConcept getCodeableConcept();
+
+    boolean isEqualTo(final Coding coding);
 }

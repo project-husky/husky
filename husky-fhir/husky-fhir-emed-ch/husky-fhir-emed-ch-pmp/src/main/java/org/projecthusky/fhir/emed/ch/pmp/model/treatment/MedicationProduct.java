@@ -12,7 +12,7 @@ package org.projecthusky.fhir.emed.ch.pmp.model.treatment;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.projecthusky.emed.ch.enums.PharmaceuticalDoseFormEdqm;
+import org.projecthusky.fhir.emed.ch.common.enums.PharmaceuticalDoseFormEdqm;
 import org.projecthusky.fhir.emed.ch.pmp.model.common.QuantityWithRegularUnit;
 
 import java.time.LocalDate;
@@ -239,15 +239,23 @@ public class MedicationProduct {
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
-        if (!(o instanceof MedicationProduct)) return false;
-        final MedicationProduct that = (MedicationProduct) o;
-        return Objects.equals(gtinCode, that.gtinCode) && Objects.equals(atcCode, that.atcCode) && Objects.equals(name, that.name) && Objects.equals(lotNumber, that.lotNumber) && formCode == that.formCode && Objects.equals(expirationDate, that.expirationDate) && Objects.equals(packageGtinCode, that.packageGtinCode) && Objects.equals(packageName, that.packageName) && packageFormCode == that.packageFormCode && Objects.equals(packageCapacityQuantity, that.packageCapacityQuantity) && Objects.equals(ingredients, that.ingredients);
+        if (!(o instanceof final MedicationProduct that)) return false;
+        return Objects.equals(gtinCode, that.gtinCode) && Objects.equals(atcCode, that.atcCode) && Objects.equals(name,
+                                                                                                                  that.name) && Objects.equals(
+                lotNumber,
+                that.lotNumber) && formCode == that.formCode && Objects.equals(expirationDate,
+                                                                               that.expirationDate) && Objects.equals(
+                packageGtinCode,
+                that.packageGtinCode) && Objects.equals(packageName,
+                                                        that.packageName) && packageFormCode == that.packageFormCode && Objects.equals(
+                packageCapacityQuantity,
+                that.packageCapacityQuantity) && Objects.equals(ingredients, that.ingredients);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(gtinCode, atcCode, name, lotNumber, formCode, expirationDate, packageGtinCode,
-                packageName, packageFormCode, packageCapacityQuantity, ingredients);
+                            packageName, packageFormCode, packageCapacityQuantity, ingredients);
     }
 
     @Override

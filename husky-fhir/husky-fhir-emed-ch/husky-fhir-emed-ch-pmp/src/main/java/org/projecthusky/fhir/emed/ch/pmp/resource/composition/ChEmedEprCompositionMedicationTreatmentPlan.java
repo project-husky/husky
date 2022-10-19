@@ -13,11 +13,16 @@ package org.projecthusky.fhir.emed.ch.pmp.resource.composition;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Binary;
+import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
+import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.pmp.resource.ChEmedEprMedicationStatementMtp;
+
+import java.util.Date;
+import java.util.UUID;
 
 /**
  * A HAPI custom structure for the CH-EMED-EPR MTP Composition.
@@ -29,6 +34,26 @@ import org.projecthusky.fhir.emed.ch.pmp.resource.ChEmedEprMedicationStatementMt
  **/
 @ResourceDef
 public class ChEmedEprCompositionMedicationTreatmentPlan extends ChEmedEprComposition {
+
+    public ChEmedEprCompositionMedicationTreatmentPlan(final UUID compositionId,
+                                                       final Date date) {
+        super();
+        this.setVersionNumber(1);
+        this.getIdentifier().setSystem(FhirSystem.URI);
+        this.getIdentifier().setValue(Uuids.URN_PREFIX + compositionId);
+        this.setStatus(CompositionStatus.FINAL);
+        this.getType().addCoding(new Coding(FhirSystem.SNOMEDCT, "419891008", "Record artifact (record artifact)"));
+        this.getCategoryFirstRep().addCoding(new Coding(FhirSystem.SNOMEDCT,
+                                                        "440545006",
+                                                        "Prescription record (record artifact)"));
+        this.setDate(date);
+        this.setTitle("TODO");
+        this.setConfidentiality(DocumentConfidentiality.N);
+        final var confidentialityCode = new Coding(FhirSystem.SNOMEDCT, "17621005", "Normal (qualifier value)");
+        this.getConfidentialityElement().addExtension(
+                "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-confidentialitycode",
+                new CodeableConcept().addCoding(confidentialityCode));
+    }
 
     /**
      * Returns whether the original representation section exists.
