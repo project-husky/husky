@@ -21,7 +21,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- * A HAPI custom structure for CH-EMED-EPR Document Bundles.
+ * The HAPI custom structure for CH-EMED-EPR Document Bundles.
  *
  * @author Quentin Ligier
  **/

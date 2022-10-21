@@ -25,7 +25,7 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * A HAPI custom structure for the CH-EMED-EPR MTP Composition.
+ * The HAPI custom structure for the CH-EMED-EPR MTP Composition.
  * <p>
  * It assumes {@code Configuration.status = 0}, i.e. 'auto-create' mode when accessing attributes that have not been
  * set.

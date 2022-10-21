@@ -19,8 +19,14 @@ public class FhirSystem {
 
     public static final String LOINC = "http://loinc.org";
     public static final String SNOMEDCT = "http://snomed.info/sct";
-    public static final String UCUM = "";
+    public static final String UCUM = "http://unitsofmeasure.org";
     public static final String URI = "urn:ietf:rfc:3986";
+    public static final String GLN = "urn:oid:2.51.1.3";
+
+    /**
+     * ZSR-Nummer (de), numero RCC (fr, it)
+     */
+    public static final String ZSR = "urn:oid:2.16.756.5.30.1.123.100.2.1.1";
 
     /**
      * This class is not instantiable.

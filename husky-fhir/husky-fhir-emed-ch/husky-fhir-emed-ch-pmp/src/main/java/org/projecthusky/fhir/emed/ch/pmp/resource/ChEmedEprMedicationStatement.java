@@ -13,7 +13,7 @@ package org.projecthusky.fhir.emed.ch.pmp.resource;
 import org.hl7.fhir.r4.model.MedicationStatement;
 
 /**
- * husky
+ * The HAPI custom structure for CH-EMED-EPR MedicationStatement.
  *
  * @author Quentin Ligier
  **/

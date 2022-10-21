@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * A HAPI custom structure for the CH-EMED-EPR MTP Document Bundle.
+ * The HAPI custom structure for the CH-EMED-EPR MTP Document Bundle.
  *
  * @author Quentin Ligier
  **/

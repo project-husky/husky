@@ -10,12 +10,12 @@
  */
 package org.projecthusky.fhir.emed.ch.common.resource;
 
-import org.hl7.fhir.r4.model.Patient;
+import org.hl7.fhir.r4.model.Address;
 
 /**
- * The HAPI custom structure for CH-CORE PatientEPR.
+ * The HAPI custom structure for CH-CORE Address.
  *
  * @author Quentin Ligier
  **/
-public class ChCorePatientEpr extends Patient {
+public class ChCoreAddress extends Address {
 }

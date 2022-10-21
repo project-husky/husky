@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * A HAPI custom structure for CH-EMED-EPR Compositions.
+ * The HAPI custom structure for CH-EMED-EPR Compositions.
  * <p>
  * It assumes {@code Configuration.status = 0}, i.e. 'auto-create' mode when accessing attributes that have not been
  * set.

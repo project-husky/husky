@@ -18,7 +18,7 @@ import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.pmp.enums.SubstanceAdministrationSubstitutionCode;
 
 /**
- * husky
+ * The HAPI custom structure for CH-EMED-EPR MedicationStatement (MTP).
  *
  * @author Quentin Ligier
  **/

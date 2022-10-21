@@ -15,12 +15,17 @@ import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 
 /**
- * husky
+ * The HAPI custom structure for CH-EMED-EPR PractitionerRole.
  *
  * @author Quentin Ligier
  **/
 public class ChEmedEprPractitionerRole extends PractitionerRole {
 
+    /**
+     * Resolves the practitioner related to this role.
+     *
+     * @return the practitioner.
+     */
     @ExpectsValidResource
     public ChEmedEprPractitioner resolvePractitioner() {
         if (this.practitioner == null || this.practitioner.isEmpty()) {

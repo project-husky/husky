@@ -13,7 +13,7 @@ package org.projecthusky.fhir.emed.ch.common.resource;
 import org.hl7.fhir.r4.model.Organization;
 
 /**
- * husky
+ * The HAPI custom structure for CH-CORE OrganizationEPR.
  *
  * @author Quentin Ligier
  **/
