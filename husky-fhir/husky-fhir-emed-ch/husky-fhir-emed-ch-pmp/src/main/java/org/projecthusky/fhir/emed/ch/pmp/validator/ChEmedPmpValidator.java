@@ -52,7 +52,7 @@ public class ChEmedPmpValidator {
                 new SnapshotGeneratingValidationSupport(this.context) // TODO: may not be needed, we generate the
                 // snapshot view in the IG
         );
-        this.validationSupport = new CachingValidationSupport(validationSupportChain);
+        this.validationSupport = new CachingValidationSupport(validationSupportChain); //TODO: do we need it?
     }
 
     /**

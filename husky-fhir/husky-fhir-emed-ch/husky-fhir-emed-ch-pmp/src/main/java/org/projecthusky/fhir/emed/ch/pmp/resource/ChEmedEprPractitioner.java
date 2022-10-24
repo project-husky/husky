@@ -91,7 +91,7 @@ public class ChEmedEprPractitioner extends Practitioner {
      * @throws InvalidEmedContentException if the human name is missing.
      */
     @ExpectsValidResource
-    public ChCoreHumanName resolveHumanName() {
+    public ChCoreHumanName resolveName() {
         if (!this.name.isEmpty() && this.name.get(0) instanceof final ChCoreHumanName chHumanName) {
             return chHumanName;
         }
@@ -112,10 +112,19 @@ public class ChEmedEprPractitioner extends Practitioner {
         throw new InvalidEmedContentException("The address is missing");
     }
 
-    /*@ExpectsValidResource
+    public boolean setName(final ChCoreHumanName humanName) {
+    } // TODO
+
+    public boolean setAddress(final ChCoreAddress address) {
+    } // TODO
+
+    @ExpectsValidResource
     public void resolveGender() {
-    }
+    } // TODO
+
+    public boolean hasGender() {
+    } // TODO
 
     public void setGender() {
-    }*/
+    } // TODO
 }

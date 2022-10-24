@@ -13,6 +13,7 @@ package org.projecthusky.fhir.emed.ch.pmp.resource;
 import org.hl7.fhir.r4.model.PractitionerRole;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.emed.ch.common.resource.ChCoreOrganizationEpr;
 
 /**
  * The HAPI custom structure for CH-EMED-EPR PractitionerRole.
@@ -37,4 +38,8 @@ public class ChEmedEprPractitionerRole extends PractitionerRole {
         }
         throw new InvalidEmedContentException("The practitioner is invalid");
     }
+
+    @ExpectsValidResource
+    public ChCoreOrganizationEpr resolveOrganization() {
+    } // TODO
 }

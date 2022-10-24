@@ -18,4 +18,5 @@ import org.hl7.fhir.r4.model.HumanName;
  * @author Quentin Ligier
  **/
 public class ChCoreHumanName extends HumanName {
+    // TODO
 }

@@ -47,7 +47,11 @@ public abstract class ChEmedEprComposition extends Composition {
     @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-informationrecipient", definedLocally = false)
     protected List<Reference> informationRecipient;
 
-    // dataEnterer
+    // TODO: dataEnterer
+
+    public ChEmedEprComposition() {
+        // TODO
+    }
 
 
     /**
@@ -134,4 +138,6 @@ public abstract class ChEmedEprComposition extends Composition {
         }
         return false;
     }
+
+
 }

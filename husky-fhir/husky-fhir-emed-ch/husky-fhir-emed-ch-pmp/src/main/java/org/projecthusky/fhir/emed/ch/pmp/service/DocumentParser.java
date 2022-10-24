@@ -49,6 +49,7 @@ public class DocumentParser {
      */
     public void parse(final String resource,
                       final EmedDocumentType type) {
+        // TODO
     }
 
     /**
@@ -95,7 +96,7 @@ public class DocumentParser {
             case NDJSON -> this.context.newNDJsonParser();
             case RDF -> this.context.newRDFParser();
         };
-        //parser.setPreferTypes();
+        //parser.setPreferTypes(); // TODO
         return parser;
     }
 }

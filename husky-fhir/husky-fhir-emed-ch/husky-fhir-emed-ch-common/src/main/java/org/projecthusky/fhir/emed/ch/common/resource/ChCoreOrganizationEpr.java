@@ -18,4 +18,5 @@ import org.hl7.fhir.r4.model.Organization;
  * @author Quentin Ligier
  **/
 public class ChCoreOrganizationEpr extends Organization {
+    // TODO
 }
