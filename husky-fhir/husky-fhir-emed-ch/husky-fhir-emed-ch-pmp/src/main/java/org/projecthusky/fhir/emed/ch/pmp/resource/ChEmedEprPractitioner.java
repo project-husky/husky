@@ -10,6 +10,8 @@
  */
 package org.projecthusky.fhir.emed.ch.pmp.resource;
 
+import org.hl7.fhir.r4.model.Enumerations;
+import org.hl7.fhir.r4.model.Enumerations.AdministrativeGender;
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Practitioner;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
@@ -46,7 +48,7 @@ public class ChEmedEprPractitioner extends Practitioner {
     /**
      * Sets the practitioner's GLN identifier. If the GLN already exists, it's replaced.
      *
-     * @param gln the practitioner's GLN identifier
+     * @param gln the practitioner's GLN identifier.
      * @return the created Identifier.
      */
     public Identifier setGln(final String gln) {
@@ -112,19 +114,49 @@ public class ChEmedEprPractitioner extends Practitioner {
         throw new InvalidEmedContentException("The address is missing");
     }
 
-    public boolean setName(final ChCoreHumanName humanName) {
-    } // TODO
+    /**
+     * Sets the practitioner's name. If the name already exists, it's replaced.
+     *
+     * @param humanName the practitioner's name.
+     * @return this.
+     */
+    public ChEmedEprPractitioner setName(final ChCoreHumanName humanName) {
+        if (this.hasName()) this.getName().set(0, humanName);
+        else this.addName(humanName);
 
-    public boolean setAddress(final ChCoreAddress address) {
-    } // TODO
+        return this;
+    }
 
+    /**
+     * Sets the practitioner's address. If the address already exists, it's replaced.
+     *
+     * @param address the practitioner's address.
+     * @return this.
+     */
+    public ChEmedEprPractitioner setAddress(final ChCoreAddress address) {
+        if (this.hasAddress()) this.getAddress().set(0, address);
+        else this.addAddress(address);
+
+        return this;
+    }
+
+    /**
+     * Resolves practitioner's gender if possible.
+     *
+     * @return practitioner's gender.
+     * @throws InvalidEmedContentException if the gender is not available.
+     */
     @ExpectsValidResource
-    public void resolveGender() {
-    } // TODO
+    public AdministrativeGender resolveGender() throws InvalidEmedContentException {
+        if (!this.hasGender()) throw new InvalidEmedContentException("The gender is not available");
+        return this.getGender();
+    }
 
-    public boolean hasGender() {
-    } // TODO
+//    public boolean hasGender() {
+//
+//    } // TODO
 
-    public void setGender() {
-    } // TODO
+//    public ChEmedEprPractitioner setGender(AdministrativeGender gender) {
+//
+//    } // TODO
 }

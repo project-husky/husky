@@ -39,7 +39,20 @@ public class ChEmedEprPractitionerRole extends PractitionerRole {
         throw new InvalidEmedContentException("The practitioner is invalid");
     }
 
+    /**
+     * Resolves the organization related to this role if possible.
+     *
+     * @return the organization.
+     * @throws InvalidEmedContentException if the organization is unspecified or invalid.
+     */
     @ExpectsValidResource
-    public ChCoreOrganizationEpr resolveOrganization() {
-    } // TODO
+    public ChCoreOrganizationEpr resolveOrganization() throws InvalidEmedContentException {
+        if (!this.hasOrganization()) throw new InvalidEmedContentException("The organization is not specified");
+
+        final var resource = this.getOrganization().getResource();
+        if (resource instanceof final ChCoreOrganizationEpr chOrganization) {
+            return chOrganization;
+        }
+        throw new InvalidEmedContentException("The organization is not specified");
+    }
 }
