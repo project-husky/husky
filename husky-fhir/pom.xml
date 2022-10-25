@@ -2,13 +2,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.husky.fhir</groupId>
+	<groupId>org.projecthusky.fhir</groupId>
 	<artifactId>husky-fhir</artifactId>
 	<name>Husky FHIR</name>
 	<packaging>pom</packaging>
 
 	<parent>
-		<groupId>org.husky</groupId>
+		<groupId>org.projecthusky</groupId>
 		<artifactId>husky-api</artifactId>
 		<version>2.0-ALPHA</version>
 	</parent>

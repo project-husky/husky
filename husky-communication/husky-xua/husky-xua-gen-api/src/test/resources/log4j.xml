@@ -9,7 +9,7 @@
 		</layout>
 	</appender>
 
-	<category name="org.husky">
+	<category name="org.projecthusky">
 		<level value="DEBUG" />
 		<appender-ref ref="stdout" />
 	</category>
