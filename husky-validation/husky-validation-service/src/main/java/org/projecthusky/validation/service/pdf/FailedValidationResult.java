@@ -11,6 +11,7 @@ import org.verapdf.pdfa.validation.profiles.ValidationProfile;
 
 import javax.annotation.concurrent.Immutable;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -72,6 +73,12 @@ final class FailedValidationResult implements ValidationResult {
     @Override
     @Nullable
     public ValidationProfile getValidationProfile() {
+        return null;
+    }
+
+    @Override
+    @Nullable
+    public HashMap<RuleId, Integer> getFailedChecks() {
         return null;
     }
 
