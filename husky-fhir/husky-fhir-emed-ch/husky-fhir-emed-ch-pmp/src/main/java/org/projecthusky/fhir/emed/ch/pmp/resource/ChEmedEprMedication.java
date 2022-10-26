@@ -16,6 +16,7 @@ import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Medication;
 import org.hl7.fhir.r4.model.UriType;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.enums.ActivePharmaceuticalIngredient;
 import org.projecthusky.fhir.emed.ch.common.enums.PharmaceuticalDoseFormEdqm;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCoreOrganizationEpr;
@@ -32,7 +33,7 @@ public class ChEmedEprMedication extends Medication {
      * Constructor
      */
     public ChEmedEprMedication() {
-
+        super();
     }
 
     /**
@@ -171,7 +172,7 @@ public class ChEmedEprMedication extends Medication {
      *
      * @param doseForm the pharmaceutical dose form.
      * @return this.
-     * @throws InvalidEmedContentException if {@param doseForm} is not in the pharmaceutical dose form.
+     * @throws InvalidEmedContentException if doseForm is not in the pharmaceutical dose form.
      */
     public ChEmedEprMedication setForm(final PharmaceuticalDoseFormEdqm doseForm) throws InvalidEmedContentException {
         if (!PharmaceuticalDoseFormEdqm.isInValueSet(doseForm.getCodeValue())) {
@@ -186,6 +187,31 @@ public class ChEmedEprMedication extends Medication {
                 .setDisplay(doseForm.getDisplayName());
 
         this.setForm(new CodeableConcept(coding));
+        return this;
+    }
+
+    /**
+     * Adds active ingredient.
+     *
+     * @param activeIngredient active ingredient.
+     * @return this.
+     */
+    public ChEmedEprMedication addIngredient(final ActivePharmaceuticalIngredient activeIngredient) {
+        final var coding = new Coding()
+                .setSystemElement(UriType.fromOid(activeIngredient.getCodeSystemId()))
+                .setCode(activeIngredient.getCodeValue())
+                .setDisplay(activeIngredient.getDisplayName());
+
+        final var item = new CodeableConcept(coding)
+                .setText(activeIngredient.getDisplayName());
+
+        final var medicationIngredientComponent = new MedicationIngredientComponent();
+        medicationIngredientComponent.setIsActive(true); // TODO ?
+        medicationIngredientComponent.setItem(item);
+
+        // TODO strength
+
+        this.addIngredient(medicationIngredientComponent);
         return this;
     }
 }

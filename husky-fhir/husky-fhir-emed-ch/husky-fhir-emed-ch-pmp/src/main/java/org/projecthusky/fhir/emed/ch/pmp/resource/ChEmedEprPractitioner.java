@@ -10,7 +10,6 @@
  */
 package org.projecthusky.fhir.emed.ch.pmp.resource;
 
-import org.hl7.fhir.r4.model.Enumerations;
 import org.hl7.fhir.r4.model.Enumerations.AdministrativeGender;
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Practitioner;
@@ -152,11 +151,14 @@ public class ChEmedEprPractitioner extends Practitioner {
         return this.getGender();
     }
 
-//    public boolean hasGender() {
-//
-//    } // TODO
-
-//    public ChEmedEprPractitioner setGender(AdministrativeGender gender) {
-//
-//    } // TODO
+    /**
+     * Sets practitioner's gender.
+     *
+     * @param gender Administrative Gender - the gender that the person is considered to have for administration and record keeping purposes.
+     * @return this.
+     */
+    public ChEmedEprPractitioner setGender(AdministrativeGender gender) {
+        super.setGender(gender);
+        return this;
+    } // TODO ?
 }

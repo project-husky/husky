@@ -42,7 +42,11 @@ public class ChEmedPmpValidator {
 
         // Adding all necessary packages
         final var npmPackageSupport = new NpmPackageValidationSupport(this.context);
-        npmPackageSupport.loadPackageFromClasspath("classpath:package/UK.Core.r4-1.1.0.tgz");
+        npmPackageSupport.loadPackageFromClasspath("classpath:package/ch.fhir.ig.ch-core#2.1.0.tgz");
+        npmPackageSupport.loadPackageFromClasspath("classpath:package/ch.fhir.ig.ch-emed#2.1.0.tgz");
+        npmPackageSupport.loadPackageFromClasspath("classpath:package/ch.fhir.ig.ch-epr-term#2.0.7.tgz");
+        npmPackageSupport.loadPackageFromClasspath("classpath:package/hl7.terminology.r4#4.0.0.tgz");
+        npmPackageSupport.loadPackageFromClasspath("classpath:package/ihe.formatcode.fhir#1.0.0.tgz");
 
         final var validationSupportChain = new ValidationSupportChain(
                 npmPackageSupport,
