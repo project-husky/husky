@@ -8,16 +8,22 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-package org.projecthusky.fhir.emed.ch.common.resource;
+package org.projecthusky.fhir.emed.ch.epr.resource.pmlc;
 
-import org.hl7.fhir.r4.model.Address;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationStatement;
+
+import java.util.UUID;
 
 /**
- * The HAPI custom structure for CH-CORE Address.
+ * The HAPI custom structure for CH-EMED-EPR MedicationStatement (PMLC).
  *
  * @author Quentin Ligier
  **/
-public class ChCoreAddress extends Address {
+public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStatement {
 
-    // TODO add support for extensions
+    // TODO: add support for extensions authorDocument, treatmentPlan
+
+    public ChEmedEprMedicationStatementPmlc(final UUID entryUuid) {
+        super(entryUuid);
+    }
 }

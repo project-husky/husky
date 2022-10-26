@@ -8,16 +8,13 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-package org.projecthusky.fhir.emed.ch.common.resource;
-
-import org.hl7.fhir.r4.model.Address;
 
 /**
- * The HAPI custom structure for CH-CORE Address.
+ * Custom HAPI resources (as extension of the official resources) for the CH-CORE and CH-EMED projects.
+ * <p>
+ * It assumes {@code Configuration.status = 0}, i.e. 'auto-create' mode when accessing attributes that have not been
+ * set.
  *
  * @author Quentin Ligier
  **/
-public class ChCoreAddress extends Address {
-
-    // TODO add support for extensions
-}
+package org.projecthusky.fhir.emed.ch.common.resource;

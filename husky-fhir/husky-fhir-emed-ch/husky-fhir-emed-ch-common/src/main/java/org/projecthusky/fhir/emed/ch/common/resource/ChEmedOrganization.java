@@ -10,14 +10,13 @@
  */
 package org.projecthusky.fhir.emed.ch.common.resource;
 
-import org.hl7.fhir.r4.model.Address;
+import org.hl7.fhir.r4.model.Organization;
 
 /**
- * The HAPI custom structure for CH-CORE Address.
+ * The HAPI custom structure for CH-EMED Organization.
  *
  * @author Quentin Ligier
  **/
-public class ChCoreAddress extends Address {
-
-    // TODO add support for extensions
+public class ChEmedOrganization extends Organization {
+    // TODO create methods {resolveX, hasX, setX} for ber, uidb, zsr, gln (strings, nullable); address (CHCoreAddress)
 }

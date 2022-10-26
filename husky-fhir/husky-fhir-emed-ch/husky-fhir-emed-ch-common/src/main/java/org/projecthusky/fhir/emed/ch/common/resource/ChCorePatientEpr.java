@@ -18,5 +18,6 @@ import org.hl7.fhir.r4.model.Patient;
  * @author Quentin Ligier
  **/
 public class ChCorePatientEpr extends Patient {
-    // TODO
+    // TODO add support for extensions
+    // TODO 
 }

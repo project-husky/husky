@@ -8,16 +8,14 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-package org.projecthusky.fhir.emed.ch.common.resource;
-
-import org.hl7.fhir.r4.model.Address;
+package org.projecthusky.fhir.emed.ch.epr.enums;
 
 /**
- * The HAPI custom structure for CH-CORE Address.
+ * The enumeration of all possible prescription statuses.
  *
  * @author Quentin Ligier
- **/
-public class ChCoreAddress extends Address {
+ */
+public enum PrescriptionStatus {
 
-    // TODO add support for extensions
+    SUBMITTED, PROVISIONAL, ACTIVE, CANCELED, REFUSED
 }

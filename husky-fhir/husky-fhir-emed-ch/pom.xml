@@ -13,6 +13,6 @@
 
     <modules>
         <module>husky-fhir-emed-ch-common</module>
-        <module>husky-fhir-emed-ch-pmp</module>
+        <module>husky-fhir-emed-ch-epr</module>
     </modules>
 </project>
