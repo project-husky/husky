@@ -28,6 +28,13 @@ public class FhirSystem {
      */
     public static final String ZSR = "urn:oid:2.16.756.5.30.1.123.100.2.1.1";
 
+    /**
+     * BUR-Nummer (de), numero REE (fr), numero RIS (it)
+     */
+    public static final String BER = "urn:oid:2.16.756.5.45";
+
+    public static final String UIDB = "urn:oid:2.16.756.5.35";
+
     public static final String GTIN = "urn:oid:2.51.1.1";
 
     public static final String ATC = "urn:oid:2.16.840.1.113883.6.73";

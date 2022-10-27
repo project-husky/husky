@@ -48,6 +48,43 @@ public class Identifiers {
     }
 
     /**
+     * Gets the value of a single identifier by its system in a list.
+     *
+     * @param identifiers All identifiers.
+     * @param system      The system to find.
+     * @return the value of first identifier with the given system or {@code null} if none found.
+     */
+    @Nullable
+    public static String getValueBySystem(final List<Identifier> identifiers,
+                                          final String system) {
+        final var identifier = getBySystem(identifiers, system);
+        if (identifier == null || identifier.getValue() == null) {
+            return null;
+        }
+        return identifier.getValue();
+    }
+
+    /**
+     * Sets the value of a single identifier by its system in a list.
+     *
+     * @param identifiers All identifiers.
+     * @param system      The system to find.
+     * @param value       The value to set
+     * @return the created/modified Identifier
+     */
+    public static Identifier setValueBySystem(final List<Identifier> identifiers,
+                                              final String system,
+                                              final String value) {
+        var identifier = getBySystem(identifiers, system);
+        if (identifier == null) {
+            identifier = new Identifier();
+            identifier.setSystem(system);
+        }
+        identifier.setValue(value);
+        return identifier;
+    }
+
+    /**
      * Finds identifiers by their system in a list.
      *
      * @param identifiers All identifiers.

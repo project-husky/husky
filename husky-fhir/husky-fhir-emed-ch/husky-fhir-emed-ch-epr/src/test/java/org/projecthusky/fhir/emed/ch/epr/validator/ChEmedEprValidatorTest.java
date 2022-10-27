@@ -1,6 +1,7 @@
 package org.projecthusky.fhir.emed.ch.epr.validator;
 
 import ca.uhn.fhir.context.FhirContext;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
@@ -8,92 +9,92 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ChEmedEprValidatorTest {
 
+    @Test
     void validateDocumentBundle() throws IOException {
         FhirContext ctx = FhirContext.forR4();
 
         ChEmedPmpValidator validator = new ChEmedPmpValidator(ctx);
 
         final var composition = """
-                <Composition xmlns="http://hl7.org/fhir">
-                    <id value="ZuweisungZurRadiologischenDiagnostik" />
-                    <meta>
-                    <profile value="http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-composition-epr" />
-                    </meta>
-                    <language value="de-CH" />
-                    <text>
-                        <status value="extensions" />
-                        <div xmlns="http://www.w3.org/1999/xhtml" xml:lang="de-CH" lang="de-CH">
-                            <p><b>Generated Narrative</b></p>
-                        </div>
-                    </text>
-                    <extension url="http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-versionnumber">
-                        <valueUnsignedInt value="2" />
-                    </extension>
-                    <extension url="http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-informationrecipient">
-                        <valueReference>
-                            <reference value="Organization/Radiologieinstitut" />
-                        </valueReference>
-                    </extension>
-                    <extension url="http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-dataenterer">
-                        <extension url="enterer">
-                            <valueReference>
-                                <reference value="PractitionerRole/SchreibKraft" />
-                            </valueReference>
-                        </extension>
-                        <extension url="http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time">
-                            <valueDateTime value="2017-10-03T13:15:00+01:00" />
-                        </extension>
-                    </extension>
-                    <identifier>
-                        <system value="urn:ietf:rfc:3986" />
-                        <value value="urn:uuid:31397B31-BE60-47E1-BEC6-F37816D42B0C" />
-                    </identifier>
-                    <status value="final" />
-                    <type>
+                  <Composition xmlns="http://hl7.org/fhir">
+                      <id value="1-1-MedicationTreatmentPlan" />
+                      <meta>
+                      <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-composition-medicationtreatmentplan" />
+                      </meta>
+                      <language value="de-CH" />
+                      <text>
+                          <status value="extensions" />
+                          <div xmlns="http://www.w3.org/1999/xhtml" xml:lang="de-CH" lang="de-CH">
+                            <p>...</p>
+                          </div>
+                      </text>
+                      <extension url="http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-informationrecipient">
+                          <valueReference>
+                              <reference value="Patient/MonikaWegmuellerRecipient" />
+                          </valueReference>
+                      </extension>
+                      <identifier>
+                          <system value="urn:ietf:rfc:3986" />
+                          <value value="urn:uuid:c9f758a1-296c-4710-84d4-e181db8c7478" />
+                      </identifier>
+                      <status value="final" />
+                      <type>
+                          <coding>
+                              <system value="http://loinc.org" />
+                              <code value="77603-9" />
+                              <display value="Medication treatment plan.extended" />
+                          </coding>
+                          <coding>
+                              <system value="http://snomed.info/sct" />
+                              <code value="419891008" />
+                              <display value="Record artifact (record artifact)" />
+                          </coding>
+                      </type>
+                      <subject>
+                          <reference value="Patient/MonikaWegmueller" />
+                      </subject>
+                      <date value="2011-11-29T11:00:00+01:00" />
+                      <author>
+                          <extension url="http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time">
+                              <valueDateTime value="2011-11-29T11:00:00+01:00" />
+                          </extension>
+                          <reference value="PractitionerRole/FamilienHausarztAtHausarzt" />
+                      </author>
+                      <title value="Therapieentscheid Medikation" />
+                      <confidentiality value="N">
+                          <extension url="http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-confidentialitycode">
+                              <valueCodeableConcept>
+                                  <coding>
+                                      <system value="http://snomed.info/sct" />
+                                      <code value="17621005" />
+                                      <display value="Normally accessible" />
+                                  </coding>
+                              </valueCodeableConcept>
+                          </extension>
+                      </confidentiality>
+                      <custodian>
+                          <reference value="Organization/Custodian" />
+                      </custodian>
+                      <section>
+                          <title value="Medikamentöser Behandlungsplan" />
+                          <code>
                         <coding>
-                            <system value="http://loinc.org" />
-                            <code value="28616-1" />
-                            <display value="Physician Transfer note" />
+                          <system value="http://loinc.org"/>
+                          <code value="77604-7"/>
+                          <display value="Medication treatment plan.brief"/>
                         </coding>
-                        <coding>
-                            <system value="http://snomed.info/sct" />
-                            <code value="371535009" />
-                            <display value="Transfer summary report" />
-                        </coding>
-                    </type>
-                    <subject>
-                        <reference value="Patient/MaxMuster" />
-                    </subject>
-                    <date value="2017-10-03T17:33:00+01:00" />
-                    <author>
-                        <extension url="http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time">
-                            <valueDateTime value="2017-10-03T16:09:00+01:00" />
-                        </extension>
-                        <reference value="Practitioner/AllzeitBereit" />
-                    </author>
-                    <title value="Zuweisung zur Radiologischen Diagnostik" />
-                    <confidentiality value="N">
-                        <extension url="http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-confidentialitycode">
-                            <valueCodeableConcept>
-                                <coding>
-                                    <system value="http://snomed.info/sct" />
-                                    <code value="17621005" />
-                                    <display value="Normal" />
-                                </coding>
-                            </valueCodeableConcept>
-                        </extension>
-                    </confidentiality>
-                    <attester>
-                        <mode value="legal" />
-                        <time value="2017-10-03" />
-                        <party>
-                            <reference value="Practitioner/AllzeitBereit" />
-                        </party>
-                    </attester>
-                    <custodian>
-                        <reference value="Organization/GruppenpraxisCH" />
-                    </custodian>
-                </Composition>""";
+                      </code>
+                          <text>
+                              <status value="generated" />
+                              <div xmlns="http://www.w3.org/1999/xhtml">
+                                <p>...</p>
+                              </div>
+                          </text>
+                          <entry>
+                              <reference value="MedicationStatement/1-1-MedStatTriatec" />
+                          </entry>
+                      </section>
+                  </Composition>""";
 
         assertTrue(validator.validateDocumentBundle(composition)); // Pas Ok
 
