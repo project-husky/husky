@@ -10,6 +10,9 @@
  */
 package org.projecthusky.fhir.emed.ch.common.resource;
 
+
+import ca.uhn.fhir.model.api.annotation.Child;
+import ca.uhn.fhir.model.api.annotation.Extension;
 import org.hl7.fhir.r4.model.HumanName;
 
 /**
@@ -19,4 +22,24 @@ import org.hl7.fhir.r4.model.HumanName;
  **/
 public class ChCoreHumanName extends HumanName {
     // TODO add support for extensions
+
+    /*@Child(name = "ech11name")
+    @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-ech-11-name", definedLocally = false)
+    protected ? ech11Name;*/
+
+    /*@Child(name = "ech11firstname")
+    @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-ech-11-firstname", definedLocally = false)
+    protected ? ech11FirstName;*/
+
+    /*@Child(name = "salutationandtitle")
+    @Extension(url = "http://hl7.org/fhir/StructureDefinition/iso21090-EN-qualifier", definedLocally = false)
+    protected ? salutationAndTitle;*/
+
+    /**
+     * Constructor
+     */
+    public ChCoreHumanName() {
+        super();
+    }
+
 }

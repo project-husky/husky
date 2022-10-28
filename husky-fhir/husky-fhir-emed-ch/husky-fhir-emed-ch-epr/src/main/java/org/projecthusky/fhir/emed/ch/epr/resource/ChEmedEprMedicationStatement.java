@@ -10,8 +10,12 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.resource;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.MedicationStatement;
+import org.hl7.fhir.r4.model.Reference;
 import org.projecthusky.common.utils.datatypes.Uuids;
+import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 
 import java.util.UUID;
@@ -30,7 +34,47 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement {
         this.addIdentifier().setValue(Uuids.URN_PREFIX + entryUuid).setSystem(FhirSystem.URI);
     }
 
-    // TODO: create method resolveMedication
-    // TODO: create methods getTreatmentReason (string, nullable) and setTreatmentReason -> reasonCode.text
+    /**
+     * Returns the medication or throws.
+     *
+     * @return the medication.
+     * @throws InvalidEmedContentException if the medication is missing or invalid.
+     */
+    @ExpectsValidResource
+    protected ChEmedEprMedication resolveMedication() throws InvalidEmedContentException {
+        if (!this.hasMedication()) {
+            throw new InvalidEmedContentException("The medication is missing in the medication statement");
+        }
 
+        final var reference = this.getMedication();
+        if (reference instanceof final Reference ref) {
+            final var resource = ref.getResource();
+            if (resource instanceof ChEmedEprMedication chMedication) {
+                return chMedication;
+            }
+        }
+        throw new InvalidEmedContentException("The medication is invalid");
+    }
+
+    /**
+     * Gets the treatment reason if available.
+     *
+     * @return the treatment reason or {@code null}.
+     */
+    @Nullable
+    protected String getTreatmentReason() {
+        if (this.reasonCode == null || !this.getReasonCodeFirstRep().hasText()) return null;
+        return this.getReasonCodeFirstRep().getText();
+    }
+
+    /**
+     * Sets the treatment reason. If the treatment reason already exists, it's replaced.
+     *
+     * @param treatmentReason the treatment reason
+     * @return this.
+     */
+    protected ChEmedEprMedicationStatement setTreatmentReason(final String treatmentReason) {
+        this.getReasonCodeFirstRep().setText(treatmentReason);
+        return this;
+    }
 }

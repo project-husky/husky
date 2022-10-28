@@ -79,6 +79,7 @@ public class Identifiers {
         if (identifier == null) {
             identifier = new Identifier();
             identifier.setSystem(system);
+            identifiers.add(identifier);
         }
         identifier.setValue(value);
         return identifier;

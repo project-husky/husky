@@ -12,33 +12,57 @@ package org.projecthusky.fhir.emed.ch.epr.resource.pml;
 
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.DomainResource;
+import org.hl7.fhir.r4.model.Reference;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.epr.enums.SubstanceAdministrationSubstitutionCode;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationStatement;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
+import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprMedicationStatementPmlc;
 
 import java.util.UUID;
 
 /**
  * The HAPI custom structure for CH-EMED-EPR MedicationStatement (PML).
- * <p>
- * TODO javadoc
  *
  * @author Quentin Ligier
  **/
 public class ChEmedEprMedicationStatementPml extends ChEmedEprMedicationStatement {
 
+    /**
+     * Whether the dispenser can substitute the prescribed medicine/package by another that is deemed equivalent,
+     * for medical or logistical reasons. By default, substitution is authorized.
+     */
     @Child(name = "substitution")
     @Extension(url = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-substitution", definedLocally = false)
     protected CodeableConcept substitution;
 
-    // TODO: add support for extension authorDocument
+    /**
+     * Author of the original document if different from the author of the medical decision
+     * (MedicationStatement.informationSource)
+     */
+    @Child(name = "auhtorDocument")
+    @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author")
+    protected Reference authorDocument;
 
+    /**
+     * Constructor
+     *
+     * @param entryUuid
+     */
     public ChEmedEprMedicationStatementPml(final UUID entryUuid) {
         super(entryUuid);
     }
 
+    /**
+     * Gets the substitution element in the medication statement.
+     *
+     * @return the substitution element.
+     */
     public CodeableConcept getSubstitutionElement() {
         if (this.substitution == null) {
             this.substitution = new CodeableConcept();
@@ -46,8 +70,26 @@ public class ChEmedEprMedicationStatementPml extends ChEmedEprMedicationStatemen
         return this.substitution;
     }
 
+    /**
+     * Gets the author document element in the medication statement.
+     *
+     * @return the author document element.
+     */
+    public Reference getAuthorDocumentElement() {
+        if (this.authorDocument == null) {
+            this.authorDocument = new Reference();
+        }
+        return this.authorDocument;
+    }
+
+    /**
+     * Gets the substitution code in the medication statement.
+     *
+     * @return the substitution code.
+     * @throws InvalidEmedContentException if the substitution code is invalid.
+     */
     @ExpectsValidResource
-    public SubstanceAdministrationSubstitutionCode getSubstitution() {
+    public SubstanceAdministrationSubstitutionCode getSubstitution() throws InvalidEmedContentException {
         if (!this.hasSubstitution()) {
             return SubstanceAdministrationSubstitutionCode.EQUIVALENT;
         }
@@ -59,17 +101,83 @@ public class ChEmedEprMedicationStatementPml extends ChEmedEprMedicationStatemen
         return substitutionCode;
     }
 
+    /**
+     * Gets the last author document resource in the medication statement if available.
+     *
+     * @return the author document resource or {@code null}.
+     * @throws InvalidEmedContentException if the author document resource is invalid.
+     */
+    @Nullable
+    @ExpectsValidResource
+    public DomainResource getAuthorDocument() throws InvalidEmedContentException {
+        final var resource = getAuthorDocumentElement().getResource();
+        if (resource == null) return null;
+
+        if (resource instanceof ChCorePatientEpr || resource instanceof ChEmedEprPractitionerRole) {
+            return (DomainResource) resource;
+        }
+        throw new InvalidEmedContentException("The last author of the original document is invalid");
+    }
+
+    /**
+     * Returns whether substitution code exists.
+     *
+     * @return {@code true} if the substitution code exists, {@code false} otherwise.
+     */
     public boolean hasSubstitution() {
         return this.substitution != null && !this.substitution.isEmpty();
     }
 
+    /**
+     * Returns whether author document exists.
+     *
+     * @return {@code true} if the author document exists, {@code false} otherwise.
+     */
+    public boolean hasAuthorDocument() {
+        return this.authorDocument != null && this.authorDocument.getResource() != null;
+    }
+
+    /**
+     * Sets the substitution element in the medication statement.
+     *
+     * @param value the substitution element.
+     * @return this.
+     */
     public ChEmedEprMedicationStatementPml setSubstitutionElement(final CodeableConcept value) {
         this.substitution = value;
         return this;
     }
 
+    /**
+     * Sets the substitution code in the medication statement.
+     *
+     * @param value the substitution code.
+     * @return this.
+     */
     public ChEmedEprMedicationStatementPml setSubstitution(final SubstanceAdministrationSubstitutionCode value) {
         this.setSubstitutionElement(value.getCodeableConcept());
+        return this;
+    }
+
+    /**
+     * Sets the last author document of the medication statement.
+     *
+     * @param authorDocument the patient.
+     * @return this.
+     */
+    public ChEmedEprMedicationStatementPml setAuthorDocument(ChCorePatientEpr authorDocument) {
+        this.getAuthorDocumentElement().setResource(authorDocument);
+        return this;
+    }
+
+    /**
+     * Sets the last author document of the medication statement.
+     *
+     * @param authorDocument the practitioner role.
+     * @return this.
+     */
+    public ChEmedEprMedicationStatementPml setAuthorDocument(ChEmedEprPractitionerRole authorDocument) {
+        this.getAuthorDocumentElement().setResource(authorDocument);
         return this;
     }
 }

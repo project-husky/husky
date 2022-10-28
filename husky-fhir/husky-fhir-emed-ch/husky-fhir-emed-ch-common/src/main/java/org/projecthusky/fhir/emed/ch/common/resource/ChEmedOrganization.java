@@ -22,8 +22,6 @@ import org.projecthusky.fhir.emed.ch.common.util.Identifiers;
  * @author Quentin Ligier
  **/
 public class ChEmedOrganization extends Organization {
-    // TODO create methods {resolveX, hasX, setX} for ber, uidb, zsr, gln (strings, nullable); address (CHCoreAddress)
-
     /**
      * Constructor
      */
@@ -72,6 +70,19 @@ public class ChEmedOrganization extends Organization {
     }
 
     /**
+     * Resolves the organization's address identifier.
+     *
+     * @return the address or {@code null}.
+     */
+    @Nullable
+    public ChCoreAddress resolveAddress() {
+        if (!this.getAddress().isEmpty() && this.getAddress().get(0) instanceof ChCoreAddress chAddress) {
+            return chAddress;
+        }
+        return null;
+    }
+
+    /**
      * Returns whether BER code exists.
      *
      * @return {@code true} if the BER code exists, {@code false} otherwise.
@@ -105,6 +116,15 @@ public class ChEmedOrganization extends Organization {
      */
     public boolean hasGln() {
         return this.resolveGln() != null;
+    }
+
+    /**
+     * Returns whether address exists.
+     *
+     * @return {@code true} if the address exists, {@code false} otherwise.
+     */
+    public boolean hasAddress() {
+        return !this.getAddress().isEmpty() && this.getAddress().get(0) instanceof ChCoreAddress;
     }
 
     /**
@@ -144,7 +164,21 @@ public class ChEmedOrganization extends Organization {
      * @return the created/modified Identifier.
      */
     public Identifier setGln(final String gln) {
-       return Identifiers.setValueBySystem(this.getIdentifier(), FhirSystem.GLN, gln);
+        return Identifiers.setValueBySystem(this.getIdentifier(), FhirSystem.GLN, gln);
     }
 
+    /**
+     * Sets the organization's address. If the address already exists, it's replaced.
+     *
+     * @param address the organization's address.
+     * @return this.
+     */
+    public ChEmedOrganization setAddress(final ChCoreAddress address) {
+        if (this.hasAddress()) {
+            this.getAddress().set(0, address);
+        } else {
+            this.addAddress(address);
+        }
+        return this;
+    }
 }

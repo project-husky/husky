@@ -173,13 +173,8 @@ public class ChEmedEprMedication extends Medication {
      *
      * @param doseForm the pharmaceutical dose form.
      * @return this.
-     * @throws InvalidEmedContentException if doseForm is not in the pharmaceutical dose form.
      */
-    public ChEmedEprMedication setForm(final PharmaceuticalDoseFormEdqm doseForm) throws InvalidEmedContentException {
-        if (!PharmaceuticalDoseFormEdqm.isInValueSet(doseForm.getCodeValue())) {
-            throw new InvalidEmedContentException("The pharmaceutical dose form is not in the value set");
-        }
-
+    public ChEmedEprMedication setForm(final PharmaceuticalDoseFormEdqm doseForm) {
         final var system = UriType.fromOid(doseForm.getCodeSystemId());
 
         final var coding = new Coding()

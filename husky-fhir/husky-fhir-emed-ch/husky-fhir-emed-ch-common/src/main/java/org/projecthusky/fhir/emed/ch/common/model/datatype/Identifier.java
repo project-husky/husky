@@ -44,7 +44,7 @@ public class Identifier {
      * @param oid The OID to use as identifier.
      * @return the constructed identifier.
      */
-    public static org.hl7.fhir.r4.model.Identifier fromUuid(final String oid) {
+    public static org.hl7.fhir.r4.model.Identifier fromOid(final String oid) {
         final var identifier = new org.hl7.fhir.r4.model.Identifier();
         identifier.setValue("urn:oid:" + oid);
         identifier.setSystem("urn:ietf:rfc:3986"); // TODO ?
