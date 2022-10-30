@@ -11,6 +11,7 @@
 package org.projecthusky.fhir.emed.ch.common.resource;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.Address;
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Organization;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
@@ -21,9 +22,11 @@ import org.projecthusky.fhir.emed.ch.common.util.Identifiers;
  *
  * @author Quentin Ligier
  **/
+
 public class ChEmedOrganization extends Organization {
+
     /**
-     * Constructor
+     * Empty constructor for the parser.
      */
     public ChEmedOrganization() {
         super();
@@ -75,9 +78,9 @@ public class ChEmedOrganization extends Organization {
      * @return the address or {@code null}.
      */
     @Nullable
-    public ChCoreAddress resolveAddress() {
-        if (!this.getAddress().isEmpty() && this.getAddress().get(0) instanceof ChCoreAddress chAddress) {
-            return chAddress;
+    public Address resolveAddress() {
+        if (!this.getAddress().isEmpty()) {
+            return this.getAddress().get(0);
         }
         return null;
     }
@@ -124,7 +127,7 @@ public class ChEmedOrganization extends Organization {
      * @return {@code true} if the address exists, {@code false} otherwise.
      */
     public boolean hasAddress() {
-        return !this.getAddress().isEmpty() && this.getAddress().get(0) instanceof ChCoreAddress;
+        return !this.getAddress().isEmpty();
     }
 
     /**
@@ -173,7 +176,7 @@ public class ChEmedOrganization extends Organization {
      * @param address the organization's address.
      * @return this.
      */
-    public ChEmedOrganization setAddress(final ChCoreAddress address) {
+    public ChEmedOrganization setAddress(final Address address) {
         if (this.hasAddress()) {
             this.getAddress().set(0, address);
         } else {

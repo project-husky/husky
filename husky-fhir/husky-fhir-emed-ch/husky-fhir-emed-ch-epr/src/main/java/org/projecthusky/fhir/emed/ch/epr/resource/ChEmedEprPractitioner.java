@@ -10,13 +10,13 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.resource;
 
+import org.hl7.fhir.r4.model.Address;
 import org.hl7.fhir.r4.model.Enumerations.AdministrativeGender;
+import org.hl7.fhir.r4.model.HumanName;
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Practitioner;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
-import org.projecthusky.fhir.emed.ch.common.resource.ChCoreAddress;
-import org.projecthusky.fhir.emed.ch.common.resource.ChCoreHumanName;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.common.util.Identifiers;
 
@@ -28,6 +28,13 @@ import java.util.List;
  * @author Quentin Ligier
  **/
 public class ChEmedEprPractitioner extends Practitioner {
+
+    /**
+     * Empty constructor for the parser.
+     */
+    public ChEmedEprPractitioner() {
+        super();
+    }
 
     /**
      * Resolves the practitioner's GLN identifier. A single identifier is expected.
@@ -92,9 +99,9 @@ public class ChEmedEprPractitioner extends Practitioner {
      * @throws InvalidEmedContentException if the human name is missing.
      */
     @ExpectsValidResource
-    public ChCoreHumanName resolveName() {
-        if (!this.name.isEmpty() && this.name.get(0) instanceof final ChCoreHumanName chHumanName) {
-            return chHumanName;
+    public HumanName resolveName() {
+        if (!this.name.isEmpty()) {
+            return this.name.get(0);
         }
         throw new InvalidEmedContentException("The human name is missing");
     }
@@ -106,9 +113,9 @@ public class ChEmedEprPractitioner extends Practitioner {
      * @throws InvalidEmedContentException if the address is missing.
      */
     @ExpectsValidResource
-    public ChCoreAddress resolveAddress() {
-        if (!this.address.isEmpty() && this.address.get(0) instanceof final ChCoreAddress chAddress) {
-            return chAddress;
+    public Address resolveAddress() {
+        if (!this.address.isEmpty()) {
+            return this.address.get(0);
         }
         throw new InvalidEmedContentException("The address is missing");
     }
@@ -119,7 +126,7 @@ public class ChEmedEprPractitioner extends Practitioner {
      * @param humanName the practitioner's name.
      * @return this.
      */
-    public ChEmedEprPractitioner setName(final ChCoreHumanName humanName) {
+    public ChEmedEprPractitioner setName(final HumanName humanName) {
         if (this.hasName()) this.getName().set(0, humanName);
         else this.addName(humanName);
 
@@ -132,7 +139,7 @@ public class ChEmedEprPractitioner extends Practitioner {
      * @param address the practitioner's address.
      * @return this.
      */
-    public ChEmedEprPractitioner setAddress(final ChCoreAddress address) {
+    public ChEmedEprPractitioner setAddress(final Address address) {
         if (this.hasAddress()) this.getAddress().set(0, address);
         else this.addAddress(address);
 

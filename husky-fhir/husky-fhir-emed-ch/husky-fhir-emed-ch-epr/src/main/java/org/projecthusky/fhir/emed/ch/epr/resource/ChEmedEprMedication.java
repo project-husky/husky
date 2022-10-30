@@ -30,7 +30,7 @@ import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 public class ChEmedEprMedication extends Medication {
 
     /**
-     * Constructor
+     * Empty constructor for the parser.
      */
     public ChEmedEprMedication() {
         super();

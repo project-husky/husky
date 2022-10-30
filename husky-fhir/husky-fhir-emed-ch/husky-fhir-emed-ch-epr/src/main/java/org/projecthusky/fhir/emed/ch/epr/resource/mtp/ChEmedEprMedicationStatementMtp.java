@@ -12,6 +12,7 @@ package org.projecthusky.fhir.emed.ch.epr.resource.mtp;
 
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
@@ -28,12 +29,20 @@ import java.util.UUID;
 public class ChEmedEprMedicationStatementMtp extends ChEmedEprMedicationStatement {
 
     /**
-     * Whether the dispenser can substitute the prescribed medicine/package by another that is deemed equivalent,
-     * for medical or logistical reasons. By default, substitution is authorized.
+     * Whether the dispenser can substitute the prescribed medicine/package by another that is deemed equivalent, for
+     * medical or logistical reasons. By default, substitution is authorized.
      */
+    @Nullable
     @Child(name = "substitution")
     @Extension(url = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-substitution", definedLocally = false)
     protected CodeableConcept substitution;
+
+    /**
+     * Empty constructor for the parser.
+     */
+    public ChEmedEprMedicationStatementMtp() {
+        super();
+    }
 
     /**
      * Constructor

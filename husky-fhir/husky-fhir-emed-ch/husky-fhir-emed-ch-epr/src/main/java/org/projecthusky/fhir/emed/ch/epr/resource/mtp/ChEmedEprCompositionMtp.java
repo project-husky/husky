@@ -30,10 +30,17 @@ import java.util.UUID;
  * @author Quentin Ligier
  **/
 @ResourceDef
-public class ChEmedEprCompositionMedicationTreatmentPlan extends ChEmedEprComposition {
+public class ChEmedEprCompositionMtp extends ChEmedEprComposition {
 
-    public ChEmedEprCompositionMedicationTreatmentPlan(final UUID compositionId,
-                                                       final Date date) {
+    /**
+     * Empty constructor for the parser.
+     */
+    public ChEmedEprCompositionMtp() {
+        super();
+    }
+
+    public ChEmedEprCompositionMtp(final UUID compositionId,
+                                   final Date date) {
         super();
         this.setVersionNumber(1);
         this.getIdentifier().setSystem(FhirSystem.URI).setValue(Uuids.URN_PREFIX + compositionId);

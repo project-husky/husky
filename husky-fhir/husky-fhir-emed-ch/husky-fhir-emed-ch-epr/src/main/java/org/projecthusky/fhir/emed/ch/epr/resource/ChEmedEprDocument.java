@@ -66,4 +66,8 @@ public abstract class ChEmedEprDocument extends Bundle {
                 .findAny()
                 .orElse(null);
     }
+
+    public abstract ChEmedEprComposition resolveComposition();
+
+    // TODO resolveId, setId (UUID)
 }

@@ -15,10 +15,25 @@ import ca.uhn.fhir.context.FhirVersionEnum;
 import ca.uhn.fhir.parser.IParser;
 import ca.uhn.fhir.rest.api.EncodingEnum;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.Bundle;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
+import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
+import org.projecthusky.fhir.emed.ch.common.resource.ChEmedOrganization;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedication;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitioner;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
+import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprCompositionMtp;
+import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprDocumentMtp;
+import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprMedicationStatementMtp;
+import org.projecthusky.fhir.emed.ch.epr.resource.pml.ChEmedEprMedicationStatementPml;
+import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprMedicationStatementPmlc;
+import org.projecthusky.fhir.emed.ch.epr.validator.ChEmedEprValidator;
 
 import javax.annotation.concurrent.ThreadSafe;
+import java.util.ArrayList;
 
 /**
  * A parser for the FHIR CH-EMED-EPR IG resources. It can both serialize and parse (deserialize) documents.
@@ -27,13 +42,21 @@ import javax.annotation.concurrent.ThreadSafe;
  * @implNote Parsers are cheap to create and may not be thread-safe. They're created on-the-fly for each operation.
  **/
 @ThreadSafe
-public class DocumentParser {
+public class ChEmedEprParser {
 
+    /**
+     * The FHIR context (R4).
+     */
     private final FhirContext context;
 
-    public DocumentParser(final FhirContext fhirR4Context) {
+    /**
+     * Constructor.
+     *
+     * @param fhirR4Context The non-null FHIR context (R4).
+     */
+    public ChEmedEprParser(@Nullable final FhirContext fhirR4Context) {
         if (fhirR4Context == null || fhirR4Context.getVersion().getVersion() != FhirVersionEnum.R4) {
-            throw new IllegalArgumentException("DocumentParser requires a FHIR R4 context");
+            throw new IllegalArgumentException("ChEmedEprParser requires a FHIR R4 context");
         }
         this.context = fhirR4Context;
     }
@@ -41,15 +64,24 @@ public class DocumentParser {
     /**
      * Parses the given string (JSON or XML) as a CH-EMED-EPR document Bundle.
      * <p>
-     * The resource shall be validated before, with
-     * {@link org.projecthusky.fhir.emed.ch.epr.validator.ChEmedPmpValidator}.
+     * The resource shall be validated before, with {@link ChEmedEprValidator}.
      *
      * @param resource The document Bundle representation as XML, JSON or RDF.
-     * @param type
+     * @param type     The type of eMed document.
      */
-    public void parse(final String resource,
-                      final EmedDocumentType type) {
-        // TODO
+    public <T extends ChEmedEprDocument> T parse(final String resource,
+                                                 final EmedDocumentType type) {
+        final EncodingEnum encoding = EncodingEnum.detectEncodingNoDefault(resource);
+        if (encoding == null) {
+            throw new InvalidEmedContentException("Unable to determine the FHIR resource encoding");
+        }
+        final var parsed = this.getParser(encoding, type).parseResource(resource);
+        if (parsed.getClass().getSuperclass() == ChEmedEprDocument.class) {
+            @SuppressWarnings("unchecked") // We've just checked it
+            final var document = (T) parsed;
+            return document;
+        }
+        throw new InvalidEmedContentException("The given resource isn't a CH-EMED Document");
     }
 
     /**
@@ -96,7 +128,35 @@ public class DocumentParser {
             case NDJSON -> this.context.newNDJsonParser();
             case RDF -> this.context.newRDFParser();
         };
-        //parser.setPreferTypes(); // TODO
+        if (type == null) {
+            return parser;
+        }
+        final var preferTypes = new ArrayList<Class<? extends IBaseResource>>(10);
+        preferTypes.add(ChCorePatientEpr.class);
+        preferTypes.add(ChEmedOrganization.class);
+        preferTypes.add(ChEmedEprPractitioner.class);
+        preferTypes.add(ChEmedEprPractitionerRole.class);
+        preferTypes.add(ChEmedEprMedication.class);
+        switch (type) {
+            case MTP -> {
+                preferTypes.add(ChEmedEprDocumentMtp.class);
+                preferTypes.add(ChEmedEprCompositionMtp.class);
+                preferTypes.add(ChEmedEprMedicationStatementMtp.class);
+            }
+            case PRE -> {
+            }
+            case DIS -> {
+            }
+            case PADV -> {
+            }
+            case PML -> {
+                preferTypes.add(ChEmedEprMedicationStatementPml.class);
+            }
+            case PMLC -> {
+                preferTypes.add(ChEmedEprMedicationStatementPmlc.class);
+            }
+        }
+        parser.setPreferTypes(preferTypes);
         return parser;
     }
 }

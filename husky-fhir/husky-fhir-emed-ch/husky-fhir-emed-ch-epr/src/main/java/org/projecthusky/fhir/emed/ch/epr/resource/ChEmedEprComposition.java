@@ -12,6 +12,7 @@ package org.projecthusky.fhir.emed.ch.epr.resource;
 
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.BaseReference;
 import org.hl7.fhir.r4.model.Composition;
 import org.hl7.fhir.r4.model.Reference;
@@ -36,20 +37,27 @@ public abstract class ChEmedEprComposition extends Composition {
     public static final String TREATMENT_PLAN_SECTION_CODE_VALUE = "77604-7";
     public static final String ANNOTATION_SECTION_CODE_VALUE = "48767-8";
 
+    @Nullable
     @Child(name = "versionNumber")
     @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-versionnumber", definedLocally = false)
     protected UnsignedIntType versionNumber;
 
+    @Nullable
     @Child(name = "informationRecipient", min = 1, max = Child.MAX_UNLIMITED)
     @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-informationrecipient", definedLocally = false)
     protected List<Reference> informationRecipient;
 
     // TODO add support for extension dataEnterer
 
+    /**
+     * Empty constructor for the parser.
+     */
     public ChEmedEprComposition() {
+        super();
         // TODO
     }
 
+    // TODO resolveId, setId (UUID)
 
     /**
      * Returns the targeted patient. It's a shortcut for {@code (ChCorePatientEpr) getSubject().getResource()}.
@@ -58,7 +66,7 @@ public abstract class ChEmedEprComposition extends Composition {
      * @throws InvalidEmedContentException if the patient is not set or not an instance of {@link ChCorePatientEpr}.
      */
     @ExpectsValidResource
-    public ChCorePatientEpr getChPatient() throws InvalidEmedContentException {
+    public ChCorePatientEpr resolvePatient() throws InvalidEmedContentException {
         return Optional.ofNullable(this.subject)
                 .map(BaseReference::getResource)
                 .map(ChCorePatientEpr.class::cast)
@@ -74,7 +82,7 @@ public abstract class ChEmedEprComposition extends Composition {
      *                                     {@link ChEmedOrganization}.
      */
     @ExpectsValidResource
-    public ChEmedOrganization getChCustodian() throws InvalidEmedContentException {
+    public ChEmedOrganization resolveCustodian() throws InvalidEmedContentException {
         return Optional.ofNullable(this.custodian)
                 .map(BaseReference::getResource)
                 .map(ChEmedOrganization.class::cast)

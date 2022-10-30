@@ -23,6 +23,13 @@ import org.projecthusky.fhir.emed.ch.common.resource.ChEmedOrganization;
 public class ChEmedEprPractitionerRole extends PractitionerRole {
 
     /**
+     * Empty constructor for the parser.
+     */
+    public ChEmedEprPractitionerRole() {
+        super();
+    }
+
+    /**
      * Resolves the practitioner related to this role.
      *
      * @return the practitioner.

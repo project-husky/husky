@@ -8,7 +8,7 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-package org.projecthusky.fhir.emed.ch.epr.resource.mtp;
+package org.projecthusky.fhir.emed.ch.epr.resource.pml;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
@@ -20,19 +20,19 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * The HAPI custom structure for the CH-EMED-EPR MTP Document Bundle.
+ * The HAPI custom structure for the CH-EMED-EPR PML Document Bundle.
  *
  * @author Quentin Ligier
  **/
-@ResourceDef(profile = "http://example.com/StructureDefinition/mtpDoc")
-public class ChEmedEprDocumentMedicationTreatmentPlan extends ChEmedEprDocument {
+@ResourceDef(profile = "http://example.com/StructureDefinition/pmlDoc")
+public class ChEmedEprDocumentPml extends ChEmedEprDocument {
     @Serial
-    private static final long serialVersionUID = 1095863629301164639L;
+    private static final long serialVersionUID = -1802412421572043644L;
 
     /**
-     * Empty constructor.
+     * Empty constructor for the parser.
      */
-    public ChEmedEprDocumentMedicationTreatmentPlan() {
+    public ChEmedEprDocumentPml() {
         super();
     }
 
@@ -42,8 +42,8 @@ public class ChEmedEprDocumentMedicationTreatmentPlan extends ChEmedEprDocument 
      * @param documentId The document ID.
      * @param timestamp  The document creation date.
      */
-    public ChEmedEprDocumentMedicationTreatmentPlan(final UUID documentId,
-                                                    final Date timestamp) {
+    public ChEmedEprDocumentPml(final UUID documentId,
+                                final Date timestamp) {
         super(documentId, timestamp);
     }
 
@@ -53,7 +53,7 @@ public class ChEmedEprDocumentMedicationTreatmentPlan extends ChEmedEprDocument 
      * @return {@code true} if the composition entry exists, {@code false} otherwise.
      */
     public boolean hasCompositionEntry() {
-        return this.getEntryByResourceType(ChEmedEprCompositionMedicationTreatmentPlan.class) != null;
+        return this.getEntryByResourceType(ChEmedEprCompositionPml.class) != null;
     }
 
     /**
@@ -62,7 +62,7 @@ public class ChEmedEprDocumentMedicationTreatmentPlan extends ChEmedEprDocument 
      * @return the composition entry.
      */
     public BundleEntryComponent getCompositionEntry() {
-        var entry = this.getEntryByResourceType(ChEmedEprCompositionMedicationTreatmentPlan.class);
+        var entry = this.getEntryByResourceType(ChEmedEprCompositionPml.class);
         if (entry == null) {
             entry = new BundleEntryComponent();
             this.getEntry().add(0, entry); // The composition shall go first
@@ -77,12 +77,14 @@ public class ChEmedEprDocumentMedicationTreatmentPlan extends ChEmedEprDocument 
      * @throws InvalidEmedContentException if the composition is missing.
      */
     @ExpectsValidResource
-    public ChEmedEprCompositionMedicationTreatmentPlan resolveComposition() {
-        final var entry = this.getEntryByResourceType(ChEmedEprCompositionMedicationTreatmentPlan.class);
-        if (entry != null && entry.getResource() instanceof final ChEmedEprCompositionMedicationTreatmentPlan composition) {
+    public ChEmedEprCompositionPml resolveComposition() {
+        final var entry = this.getEntryByResourceType(ChEmedEprCompositionPml.class);
+        if (entry != null && entry.getResource() instanceof final ChEmedEprCompositionPml composition) {
             return composition;
         }
         throw new InvalidEmedContentException(
-                "The ChEmedEprCompositionMedicationTreatmentPlan is missing in the document Bundle");
+                "The ChEmedEprCompositionPml is missing in the document Bundle");
     }
+
+    // TODO
 }

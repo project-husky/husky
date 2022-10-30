@@ -8,24 +8,18 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-package org.projecthusky.fhir.emed.ch.common.resource;
+package org.projecthusky.fhir.emed.ch.epr.resource.pmlc;
 
-import org.hl7.fhir.r4.model.Patient;
+import ca.uhn.fhir.model.api.annotation.ResourceDef;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprComposition;
 
 /**
- * The HAPI custom structure for CH-CORE PatientEPR.
+ * The HAPI custom structure for the CH-EMED-EPR PMLC Composition.
  *
  * @author Quentin Ligier
  **/
-public class ChCorePatientEpr extends Patient {
-    // TODO add support for extensions
+@ResourceDef
+public class ChEmedEprCompositionPmlc extends ChEmedEprComposition {
 
-    /**
-     * Empty constructor for the parser.
-     */
-    public ChCorePatientEpr() {
-        super();
-    }
-
-    // TODO resolveGender, setGender with
+    // TODO
 }
