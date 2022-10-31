@@ -14,6 +14,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Address;
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Organization;
+import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.common.util.Identifiers;
 
@@ -73,16 +75,17 @@ public class ChEmedOrganization extends Organization {
     }
 
     /**
-     * Resolves the organization's address identifier.
+     * Resolves the organization's address identifier or throws.
      *
-     * @return the address or {@code null}.
+     * @return the address.
+     * @throws InvalidEmedContentException if the organization's address is missing.
      */
-    @Nullable
-    public Address resolveAddress() {
-        if (!this.getAddress().isEmpty()) {
+    @ExpectsValidResource
+    public Address resolveAddress() throws InvalidEmedContentException {
+        if (!this.hasAddress()) {
             return this.getAddress().get(0);
         }
-        return null;
+        throw new InvalidEmedContentException("The organization's address is missing.");
     }
 
     /**
