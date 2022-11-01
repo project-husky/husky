@@ -10,12 +10,9 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.resource;
 
-import org.hl7.fhir.r4.model.Address;
-import org.hl7.fhir.r4.model.Enumerations.AdministrativeGender;
-import org.hl7.fhir.r4.model.HumanName;
-import org.hl7.fhir.r4.model.Identifier;
-import org.hl7.fhir.r4.model.Practitioner;
+import org.hl7.fhir.r4.model.*;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.enums.AdministrativeGender;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.common.util.Identifiers;
@@ -148,29 +145,29 @@ public class ChEmedEprPractitioner extends Practitioner {
 
     /**
      * Resolves practitioner's gender if possible.
-     * <p>
-     * TODO: create a specific enum.
      *
      * @return practitioner's gender.
      * @throws InvalidEmedContentException if the gender is not available.
      */
     @ExpectsValidResource
     public AdministrativeGender resolveGender() throws InvalidEmedContentException {
-        if (!this.hasGender()) throw new InvalidEmedContentException("The gender is not available");
-        return this.getGender();
+        if (!this.hasGender()) throw new InvalidEmedContentException("The gender is not available.");
+
+        final var gender = AdministrativeGender.getEnum(this.getGender().toCode());
+        if (gender == null) throw new InvalidEmedContentException("The gender is invalid.");
+
+        return gender;
     }
 
     /**
      * Sets practitioner's gender.
-     * <p>
-     * TODO: create a specific enum.
      *
      * @param gender Administrative Gender - the gender that the person is considered to have for administration and
      *               record keeping purposes.
      * @return this.
      */
     public ChEmedEprPractitioner setGender(AdministrativeGender gender) {
-        super.setGender(gender);
+        super.setGender(Enumerations.AdministrativeGender.fromCode(gender.getCodeValue()));
         return this;
     }
 }
