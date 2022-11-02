@@ -22,7 +22,9 @@ class ChEmedEprValidatorTest {
         final var validator = new ChEmedEprValidator(ctx);
 
         final var xml = new String(getClass().getResourceAsStream("/1-1-MedicationTreatmentPlan.xml").readAllBytes());
-        assertTrue(validator.validateDocumentBundle(xml, EmedDocumentType.MTP).isSuccessful());
-        assertFalse(validator.validateDocumentBundle(xml, EmedDocumentType.PRE).isSuccessful());
+        var results = validator.validateDocumentBundle(xml, EmedDocumentType.MTP);
+        assertTrue(results.isSuccessful());
+        results = validator.validateDocumentBundle(xml, EmedDocumentType.PRE);
+        assertFalse(results.isSuccessful());
     }
 }

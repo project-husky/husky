@@ -65,19 +65,14 @@ public class ChEmedEprValidator {
         npmPackageSupport.loadPackageFromClasspath("classpath:package/ch.fhir.ig.ch-core#3.0.0.tgz");
         npmPackageSupport.loadPackageFromClasspath("classpath:package/ch.fhir.ig.ch-emed#3.0.0.tgz");
 
-        // To validate SNOMED CT codes.
-        // final var remoteTermSvc = new RemoteTerminologyServiceValidationSupport(context);
-        // remoteTermSvc.setBaseUrl("http://tx.fhir.org/r4");
-
-        // Thread-safety of all components?
+        // TODO: thread-safety of all components?
 
         final var validationSupportChain = new ValidationSupportChain(
                 npmPackageSupport,
-                new DefaultProfileValidationSupport(this.context),
                 new CommonCodeSystemsTerminologyService(this.context),
                 new InMemoryTerminologyServerValidationSupport(this.context),
-                new SnapshotGeneratingValidationSupport(this.context) // TODO: may not be needed, we generate the
-                // snapshot view in the IG
+                new FakeTerminologyServiceValidationSupport(this.context),
+                new DefaultProfileValidationSupport(this.context)
         );
         this.validationSupport = new CachingValidationSupport(validationSupportChain); //TODO: do we need it?
     }
@@ -120,7 +115,6 @@ public class ChEmedEprValidator {
         instanceValidator.setBestPracticeWarningLevel(BestPracticeWarningLevel.Ignore);
         instanceValidator.setAnyExtensionsAllowed(false);
         instanceValidator.setErrorForUnknownProfiles(true);
-        instanceValidator.setNoTerminologyChecks(true);
 
         final var validator = this.context.newValidator();
         validator.registerValidatorModule(instanceValidator);
