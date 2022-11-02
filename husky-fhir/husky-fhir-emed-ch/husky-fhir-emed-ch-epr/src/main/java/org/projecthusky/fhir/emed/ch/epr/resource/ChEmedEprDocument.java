@@ -14,6 +14,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Identifier;
 import org.projecthusky.common.utils.datatypes.Uuids;
+import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 
 import java.util.Date;
@@ -69,5 +71,33 @@ public abstract class ChEmedEprDocument extends Bundle {
 
     public abstract ChEmedEprComposition resolveComposition();
 
-    // TODO resolveId, setId (UUID)
+    /**
+     * Resolves the document UUID or throws.
+     *
+     * @return the document UUID.
+     * @throws InvalidEmedContentException if the id is missing.
+     */
+    @ExpectsValidResource
+    public UUID resolveIdentfier() throws InvalidEmedContentException {
+        if (!this.hasIdentifier()) throw new InvalidEmedContentException("The ID is missing.");
+        return UUID.fromString(this.getIdentifier().getValue());
+    }
+
+    /**
+     * Sets the document UUID.
+     *
+     * @param documentUUID The document UUID
+     * @return this.
+     */
+    public ChEmedEprDocument setIdentifier(final UUID documentUUID) {
+        var identifier = this.getIdentifier();
+        if (identifier == null) {
+            identifier = new Identifier();
+        }
+
+        identifier.setSystem(FhirSystem.URI);
+        identifier.setValue(documentUUID.toString());
+
+        return this;
+    }
 }

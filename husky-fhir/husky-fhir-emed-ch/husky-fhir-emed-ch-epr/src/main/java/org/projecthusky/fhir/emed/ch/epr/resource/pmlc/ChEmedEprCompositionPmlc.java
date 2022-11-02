@@ -11,7 +11,19 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.pmlc;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.Binary;
+import org.hl7.fhir.r4.model.Coding;
+import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprComposition;
+import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprObservationPadv;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * The HAPI custom structure for the CH-EMED-EPR PMLC Composition.
@@ -22,4 +34,98 @@ import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprComposition;
 public class ChEmedEprCompositionPmlc extends ChEmedEprComposition {
 
     // TODO
+
+    /**
+     * Empty constructor for the parser.
+     */
+    public ChEmedEprCompositionPmlc() {
+        super();
+        this.getType().addCoding(new Coding(FhirSystem.SNOMEDCT, "721912009", "Medication summary document (record artifact)"));
+        this.setTitle("TODO");
+    }
+
+    /**
+     * Constructor
+     *
+     * @param compositionId Version-independent identifier for the Composition
+     * @param date The document's creation date and time
+     */
+    public ChEmedEprCompositionPmlc(final UUID compositionId,
+                                   final Date date) {
+        super(compositionId, date);
+        this.getType().addCoding(new Coding(FhirSystem.SNOMEDCT, "721912009", "Medication summary document (record artifact)"));
+        this.setTitle("TODO");
+    }
+
+    /**
+     * Returns the annotation section; if missing, it creates it.
+     *
+     * @return the annotation section.
+     */
+    public SectionComponent getAnnotationSection() {
+        var section = getSectionByLoincCode(ANNOTATION_SECTION_CODE_VALUE);
+        if (section == null) {
+            section = new SectionComponent();
+            section.getCode().addCoding(new Coding(FhirSystem.LOINC,
+                    ANNOTATION_SECTION_CODE_VALUE, "Annotation comment"));
+        }
+        return section;
+    }
+
+    /**
+     * Returns the card section; if missing, it creates it.
+     *
+     * @return the card section.
+     */
+    public SectionComponent getCardSection() {
+        var section = getSectionByLoincCode(CARD_SECTION_CODE_VALUE);
+        if (section == null) {
+            section = new SectionComponent();
+            section.getCode().addCoding(new Coding(FhirSystem.LOINC,
+                    CARD_SECTION_CODE_VALUE,
+                    "Medication summary"));
+        }
+        return section;
+    }
+
+    /**
+     * Returns the list with medication statement or throws.
+     *
+     * @return the list with medication statement.
+     * @throws InvalidEmedContentException if the section references an invalid resource
+     */
+    @ExpectsValidResource
+    public List<ChEmedEprMedicationStatementPmlc> getMedicationStatements() throws InvalidEmedContentException {
+        final var section = this.getCardSection();
+        final var medicationStatementList = new ArrayList<ChEmedEprMedicationStatementPmlc>();
+
+        for (final var entry : section.getEntry()) {
+            final var resource = entry.getResource();
+            if (resource instanceof final ChEmedEprMedicationStatementPmlc medicationStatementPmlc) {
+                medicationStatementList.add(medicationStatementPmlc);
+            } else {
+                throw new InvalidEmedContentException("The section references an invalid resource");
+            }
+        }
+
+        return medicationStatementList;
+    }
+
+    /**
+     * Returns whether the card section exists.
+     *
+     * @return {@code true} if the card section exists, {@code false} otherwise.
+     */
+    public boolean hasCardSection() {
+        return getSectionByLoincCode(CARD_SECTION_CODE_VALUE) != null;
+    }
+
+    /**
+     * Returns whether the annotation section exists.
+     *
+     * @return {@code true} if the annotation section exists, {@code false} otherwise.
+     */
+    public boolean hasAnnotationSection() {
+        return getSectionByLoincCode(ANNOTATION_SECTION_CODE_VALUE) != null;
+    }
 }

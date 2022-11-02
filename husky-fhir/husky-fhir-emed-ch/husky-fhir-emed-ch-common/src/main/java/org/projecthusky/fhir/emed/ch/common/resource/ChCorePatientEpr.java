@@ -13,13 +13,13 @@ package org.projecthusky.fhir.emed.ch.common.resource;
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.hl7.fhir.r4.model.CodeableConcept;
-import org.hl7.fhir.r4.model.Enumerations;
-import org.hl7.fhir.r4.model.Patient;
+import org.hl7.fhir.r4.model.*;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.AdministrativeGender;
 import org.projecthusky.fhir.emed.ch.common.enums.ReligiousAffiliation;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+
+import java.util.Date;
 
 /**
  * The HAPI custom structure for CH-CORE PatientEPR.
@@ -27,8 +27,21 @@ import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
  * @author Quentin Ligier
  **/
 public class ChCorePatientEpr extends Patient {
+
+    public static final String LOCAL_PID_TYPE_SYSTEM = "http://terminology.hl7.org/CodeSystem/v2-0203";
+    public static final String LOCAL_PID_TYPE_VALUE = "MR";
+
     // TODO add support for extensions
 
+    // TODO placeOfBirth
+
+    // TODO placeOfOrigin
+
+    // TODO citizenship
+
+    // TODO name
+
+    @Nullable
     @Child(name = "religion")
     @Extension(url = "http://hl7.org/fhir/StructureDefinition/patient-religion", definedLocally = false)
     protected CodeableConcept religion;
@@ -57,15 +70,48 @@ public class ChCorePatientEpr extends Patient {
     }
 
     /**
-     * Returns the patient's religion.
+     * Resolves the patient's religion.
      *
      * @return The religion or {@code null}.
      */
     @Nullable
     public ReligiousAffiliation resolveReligion() {
         if (!this.hasReligion()) return null;
-
         return ReligiousAffiliation.getEnum(this.religion.getCodingFirstRep().getCode());
+    }
+
+    /**
+     * Resolves the first local patient identifier or throws.
+     *
+     * @return the first local patient identifier.
+     * @throws InvalidEmedContentException if the identifier is missing or invalid.
+     */
+    @ExpectsValidResource
+    public Identifier resolveIdentifier() throws InvalidEmedContentException {
+        if (!this.hasIdentifier()) throw new InvalidEmedContentException("The identifier is missing.");
+
+        final var identifier = this.getIdentifierFirstRep();
+        final var type = identifier.getType();
+        if (type == null ||
+                type.isEmpty() ||
+                !type.getCodingFirstRep().getSystem().equals(LOCAL_PID_TYPE_SYSTEM) ||
+                !type.getCodingFirstRep().getCode().equals(LOCAL_PID_TYPE_VALUE)) {
+            throw new InvalidEmedContentException("The identifier is invalid");
+        }
+
+        return identifier;
+    }
+
+    /**
+     * Resolves the patient's birthdate or throws.
+     *
+     * @return the patient's birthdate.
+     * @throws InvalidEmedContentException if the patient's birthdate is missing.
+     */
+    @ExpectsValidResource
+    public Date resolveBirthDate() throws InvalidEmedContentException {
+        if (!this.hasBirthDate()) throw new InvalidEmedContentException("The birthdate is missing.");
+        return this.getBirthDate();
     }
 
     /**
@@ -75,8 +121,37 @@ public class ChCorePatientEpr extends Patient {
      *               record keeping purposes.
      * @return this.
      */
-    public ChCorePatientEpr setGender(AdministrativeGender gender) {
+    public ChCorePatientEpr setGender(final AdministrativeGender gender) {
         super.setGender(Enumerations.AdministrativeGender.fromCode(gender.getCodeValue()));
+        return this;
+    }
+
+    /**
+     * Sets patient's religion.
+     *
+     * @param religion Religious Affiliation - the patient's religion.
+     * @return this.
+     */
+    public ChCorePatientEpr setReligion(final ReligiousAffiliation religion) {
+        final var system = UriType.fromOid(religion.getCodeSystemId());
+
+        final var coding = new Coding()
+                .setCode(religion.getCodeValue())
+                .setSystemElement(system)
+                .setDisplay(religion.getDisplayName());
+
+        this.religion = new CodeableConcept(coding);
+        return this;
+    }
+
+    /**
+     * Sets the patient's birthdate.
+     *
+     * @param birthDate the patient's birthdate.
+     * @return this.
+     */
+    public ChCorePatientEpr setBirthDate(final Date birthDate) {
+        super.setBirthDate(birthDate);
         return this;
     }
 
@@ -87,5 +162,30 @@ public class ChCorePatientEpr extends Patient {
      */
     public boolean hasReligion() {
         return this.religion != null && !this.religion.isEmpty();
+    }
+
+    /**
+     * Adds a new local patient identifier.
+     *
+     * @param system The namespace for the identifier value.
+     * @param value  The value that is unique.
+     * @return the created identifier.
+     */
+    // TODO system ?
+    public Identifier addIdentifier(final String system,
+                                    final String value) {
+        final var codingType = new Coding()
+                .setSystem("http://terminology.hl7.org/CodeSystem/v2-0203")
+                .setCode("MR");
+
+        final var type = new CodeableConcept(codingType);
+
+        final var identifier = new Identifier()
+                .setType(type)
+                .setSystem(system)
+                .setValue(value);
+
+        this.addIdentifier(identifier);
+        return identifier;
     }
 }

@@ -13,18 +13,15 @@ package org.projecthusky.fhir.emed.ch.epr.resource;
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.hl7.fhir.r4.model.BaseReference;
-import org.hl7.fhir.r4.model.Composition;
-import org.hl7.fhir.r4.model.Reference;
-import org.hl7.fhir.r4.model.UnsignedIntType;
+import org.hl7.fhir.r4.model.*;
+import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.resource.ChEmedOrganization;
+import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * The HAPI custom structure for CH-EMED-EPR Compositions.
@@ -35,8 +32,16 @@ public abstract class ChEmedEprComposition extends Composition {
 
     public static final String ORIGINAL_REPR_SECTION_CODE_VALUE = "55108-5";
     public static final String TREATMENT_PLAN_SECTION_CODE_VALUE = "77604-7";
+    public static final String PRESCRIPTION_SECTION_CODE_VALUE = "57828-6";
+    public static final String DISPENSE_SECTION_CODE_VALUE = "60590-7";
+    public static final String PHARMACEUTICAL_ADVICE_SECTION_CODE_VALUE = "61357-0";
+    public static final String LIST_SECTION_CODE_VALUE = "56445-0";
+    public static final String CARD_SECTION_CODE_VALUE = "10160-0";
     public static final String ANNOTATION_SECTION_CODE_VALUE = "48767-8";
 
+    /**
+     * Version number
+     */
     @Nullable
     @Child(name = "versionNumber")
     @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-versionnumber", definedLocally = false)
@@ -49,15 +54,35 @@ public abstract class ChEmedEprComposition extends Composition {
 
     // TODO add support for extension dataEnterer
 
+    // TODO language
+
+    // TODO author on each child class
+
     /**
      * Empty constructor for the parser.
      */
     public ChEmedEprComposition() {
         super();
-        // TODO
+        this.setVersionNumber(1);
+        this.setStatus(CompositionStatus.FINAL);
+        this.setConfidentiality(DocumentConfidentiality.N);
+        final var confidentialityCode = new Coding(FhirSystem.SNOMEDCT, "17621005", "Normal (qualifier value)");
+        this.getConfidentialityElement().addExtension(
+                "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-confidentialitycode",
+                new CodeableConcept().addCoding(confidentialityCode));
     }
 
-    // TODO resolveId, setId (UUID)
+    /**
+     * Constructor
+     *
+     * @param compositionId Version-independent identifier for the Composition
+     * @param date The document's creation date and time
+     */
+    public ChEmedEprComposition(final UUID compositionId,
+                                final Date date) {
+        this.getIdentifier().setSystem(FhirSystem.URI).setValue(Uuids.URN_PREFIX + compositionId);
+        this.setDate(date);
+    }
 
     /**
      * Returns the targeted patient. It's a shortcut for {@code (ChCorePatientEpr) getSubject().getResource()}.
@@ -90,11 +115,85 @@ public abstract class ChEmedEprComposition extends Composition {
                                                                            "type"));
     }
 
+    /**
+     * Resolves the document UUID or throws.
+     *
+     * @return the document UUID.
+     * @throws InvalidEmedContentException if the id is missing.
+     */
+    @ExpectsValidResource
+    public UUID resolveIdentifier() throws InvalidEmedContentException {
+        if (!this.hasIdentifier()) throw new InvalidEmedContentException("The ID is missing.");
+        return UUID.fromString(this.getIdentifier().getValue());
+    }
+
+    /**
+     *
+     * @return
+     */
     public UnsignedIntType getVersionNumberElement() {
         if (this.versionNumber == null) {
             this.versionNumber = new UnsignedIntType();
         }
         return this.versionNumber;
+    }
+
+    public int getVersionNumber() {
+        return this.versionNumber == null || this.versionNumber.isEmpty() ? 0 : this.versionNumber.getValue();
+    }
+
+    public List<Reference> getInformationRecipient() {
+        if (this.informationRecipient == null) {
+            this.informationRecipient = new ArrayList<>(0);
+        }
+        return this.informationRecipient;
+    }
+
+    /**
+     * Returns the original representation section; if missing, it creates it.
+     *
+     * @return the original representation section.
+     */
+    public SectionComponent getOriginalRepresentationSection() {
+        var section = getSectionByLoincCode(ORIGINAL_REPR_SECTION_CODE_VALUE);
+        if (section == null) {
+            section = new SectionComponent();
+            section.getCode().addCoding(new Coding(FhirSystem.LOINC,
+                    ORIGINAL_REPR_SECTION_CODE_VALUE, "Clinical presentation"));
+        }
+        return section;
+    }
+
+    /**
+     * Returns the PDF content of the original representation or throws.
+     *
+     * @return the PDF content of the original representation.
+     * @throws InvalidEmedContentException if the original representation is missing.
+     */
+    @ExpectsValidResource
+    public byte[] getOriginalRepresentationPdf() throws InvalidEmedContentException {
+        final var section = this.getOriginalRepresentationSection();
+        if (!section.hasEntry()) {
+            throw new InvalidEmedContentException("The section has no entries");
+        }
+        final var resource = section.getEntry().get(0).getResource();
+        if (resource instanceof final Binary binary && binary.hasData()) {
+            return binary.getData();
+        }
+        throw new InvalidEmedContentException("The section isn't referencing a filled Binary resource");
+    }
+
+    /**
+     * Finds a section by its LOINC code or {@code null}, without creating it.
+     *
+     * @return the section or {@code null}.
+     */
+    @Nullable
+    protected SectionComponent getSectionByLoincCode(final String code) {
+        return this.getSection().stream()
+                .filter(section -> section.getCode().hasCoding(FhirSystem.LOINC, code))
+                .findAny()
+                .orElse(null);
     }
 
     public ChEmedEprComposition setVersionNumberElement(final UnsignedIntType versionNumber) {
@@ -112,24 +211,31 @@ public abstract class ChEmedEprComposition extends Composition {
         return this;
     }
 
-    public int getVersionNumber() {
-        return this.versionNumber == null || this.versionNumber.isEmpty() ? 0 : this.versionNumber.getValue();
+    public ChEmedEprComposition setInformationRecipient(final List<Reference> informationRecipient) {
+        this.informationRecipient = informationRecipient;
+        return this;
+    }
+
+    /**
+     * Sets the document UUID.
+     *
+     * @param documentUUID The document UUID
+     * @return this.
+     */
+    public ChEmedEprComposition setIdentifier(final UUID documentUUID) {
+        var identifier = this.getIdentifier();
+        if (identifier == null) {
+            identifier = new Identifier();
+        }
+
+        identifier.setSystem(FhirSystem.URI);
+        identifier.setValue(documentUUID.toString());
+
+        return this;
     }
 
     public boolean hasVersionNumber() {
         return this.versionNumber != null && !this.versionNumber.isEmpty();
-    }
-
-    public List<Reference> getInformationRecipient() {
-        if (this.informationRecipient == null) {
-            this.informationRecipient = new ArrayList<>(0);
-        }
-        return this.informationRecipient;
-    }
-
-    public ChEmedEprComposition setInformationRecipient(final List<Reference> informationRecipient) {
-        this.informationRecipient = informationRecipient;
-        return this;
     }
 
     public boolean hasInformationRecipient() {
@@ -144,5 +250,12 @@ public abstract class ChEmedEprComposition extends Composition {
         return false;
     }
 
-
+    /**
+     * Returns whether the original representation section exists.
+     *
+     * @return {@code true} if the original representation section exists, {@code false} otherwise.
+     */
+    public boolean hasOriginalRepresentationSection() {
+        return getSectionByLoincCode(ORIGINAL_REPR_SECTION_CODE_VALUE) != null;
+    }
 }

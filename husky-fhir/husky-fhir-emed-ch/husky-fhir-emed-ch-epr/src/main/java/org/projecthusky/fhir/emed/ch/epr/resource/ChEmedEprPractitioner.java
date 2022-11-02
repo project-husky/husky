@@ -118,6 +118,22 @@ public class ChEmedEprPractitioner extends Practitioner {
     }
 
     /**
+     * Resolves practitioner's gender if possible.
+     *
+     * @return practitioner's gender.
+     * @throws InvalidEmedContentException if the gender is not available.
+     */
+    @ExpectsValidResource
+    public AdministrativeGender resolveGender() throws InvalidEmedContentException {
+        if (!this.hasGender()) throw new InvalidEmedContentException("The gender is not available.");
+
+        final var gender = AdministrativeGender.getEnum(this.getGender().toCode());
+        if (gender == null) throw new InvalidEmedContentException("The gender is invalid.");
+
+        return gender;
+    }
+
+    /**
      * Sets the practitioner's name. If the name already exists, it's replaced.
      *
      * @param humanName the practitioner's name.
@@ -141,22 +157,6 @@ public class ChEmedEprPractitioner extends Practitioner {
         else this.addAddress(address);
 
         return this;
-    }
-
-    /**
-     * Resolves practitioner's gender if possible.
-     *
-     * @return practitioner's gender.
-     * @throws InvalidEmedContentException if the gender is not available.
-     */
-    @ExpectsValidResource
-    public AdministrativeGender resolveGender() throws InvalidEmedContentException {
-        if (!this.hasGender()) throw new InvalidEmedContentException("The gender is not available.");
-
-        final var gender = AdministrativeGender.getEnum(this.getGender().toCode());
-        if (gender == null) throw new InvalidEmedContentException("The gender is invalid.");
-
-        return gender;
     }
 
     /**

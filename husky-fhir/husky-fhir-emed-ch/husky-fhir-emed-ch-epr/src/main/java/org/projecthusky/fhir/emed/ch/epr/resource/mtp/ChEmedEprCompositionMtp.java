@@ -37,65 +37,15 @@ public class ChEmedEprCompositionMtp extends ChEmedEprComposition {
      */
     public ChEmedEprCompositionMtp() {
         super();
+        this.getType().addCoding(new Coding(FhirSystem.SNOMEDCT, "419891008", "Record artifact (record artifact)"));
+        this.setTitle("TODO");
     }
 
     public ChEmedEprCompositionMtp(final UUID compositionId,
                                    final Date date) {
-        super();
-        this.setVersionNumber(1);
-        this.getIdentifier().setSystem(FhirSystem.URI).setValue(Uuids.URN_PREFIX + compositionId);
-        this.setStatus(CompositionStatus.FINAL);
+        super(compositionId, date);
         this.getType().addCoding(new Coding(FhirSystem.SNOMEDCT, "419891008", "Record artifact (record artifact)"));
-        this.setDate(date);
         this.setTitle("TODO");
-        this.setConfidentiality(DocumentConfidentiality.N);
-        final var confidentialityCode = new Coding(FhirSystem.SNOMEDCT, "17621005", "Normal (qualifier value)");
-        this.getConfidentialityElement().addExtension(
-                "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-confidentialitycode",
-                new CodeableConcept().addCoding(confidentialityCode));
-    }
-
-    /**
-     * Returns whether the original representation section exists.
-     *
-     * @return {@code true} if the original representation section exists, {@code false} otherwise.
-     */
-    public boolean hasOriginalRepresentationSection() {
-        return getSectionByLoincCode(ORIGINAL_REPR_SECTION_CODE_VALUE) != null;
-    }
-
-    /**
-     * Returns the original representation section; if missing, it creates it.
-     *
-     * @return the original representation section.
-     */
-    public SectionComponent getOriginalRepresentationSection() {
-        var section = getSectionByLoincCode(ORIGINAL_REPR_SECTION_CODE_VALUE);
-        if (section == null) {
-            section = new SectionComponent();
-            section.getCode().addCoding(new Coding(FhirSystem.LOINC,
-                                                   ORIGINAL_REPR_SECTION_CODE_VALUE, "Clinical presentation"));
-        }
-        return section;
-    }
-
-    /**
-     * Returns the PDF content of the original representation or throws.
-     *
-     * @return the PDF content of the original representation.
-     * @throws InvalidEmedContentException if the original representation is missing.
-     */
-    @ExpectsValidResource
-    public byte[] getOriginalRepresentationPdf() throws InvalidEmedContentException {
-        final var section = this.getOriginalRepresentationSection();
-        if (!section.hasEntry()) {
-            throw new InvalidEmedContentException("The section has no entries");
-        }
-        final var resource = section.getEntry().get(0).getResource();
-        if (resource instanceof final Binary binary && binary.hasData()) {
-            return binary.getData();
-        }
-        throw new InvalidEmedContentException("The section isn't referencing a filled Binary resource");
     }
 
     /**
@@ -164,18 +114,5 @@ public class ChEmedEprCompositionMtp extends ChEmedEprComposition {
                                                    ANNOTATION_SECTION_CODE_VALUE, "Annotation comment"));
         }
         return section;
-    }
-
-    /**
-     * Finds a section by its LOINC code or {@code null}, without creating it.
-     *
-     * @return the section or {@code null}.
-     */
-    @Nullable
-    private SectionComponent getSectionByLoincCode(final String code) {
-        return this.getSection().stream()
-                .filter(section -> section.getCode().hasCoding(FhirSystem.LOINC, code))
-                .findAny()
-                .orElse(null);
     }
 }
