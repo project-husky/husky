@@ -24,6 +24,9 @@ import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 
 /**
  * The HAPI custom structure for CH-EMED-EPR Medication.
+ * <p>
+ * Because of the parser limitations, this class can't be extended into DIS and PML flavours. All methods and
+ * extensions are included here, be careful and read the JavaDoc when using these new methods.
  *
  * @author Quentin Ligier
  **/
@@ -37,7 +40,7 @@ public class ChEmedEprMedication extends Medication {
     }
 
     /**
-     * {@return The gtin code or} {@code null}.
+     * @return The gtin code or {@code null}.
      */
     @ExpectsValidResource
     @Nullable
@@ -46,7 +49,7 @@ public class ChEmedEprMedication extends Medication {
     }
 
     /**
-     * {@return The atc code or} {@code null}.
+     * @return The atc code or {@code null}.
      */
     @ExpectsValidResource
     @Nullable
