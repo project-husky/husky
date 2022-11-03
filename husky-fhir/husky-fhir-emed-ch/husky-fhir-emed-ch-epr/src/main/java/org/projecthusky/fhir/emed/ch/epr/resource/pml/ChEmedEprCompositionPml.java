@@ -11,16 +11,15 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.pml;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
-import org.checkerframework.checker.nullness.qual.Nullable;
-import org.hl7.fhir.r4.model.BaseReference;
-import org.hl7.fhir.r4.model.Binary;
-import org.hl7.fhir.r4.model.Coding;
-import org.hl7.fhir.r4.model.DomainResource;
+import org.hl7.fhir.r4.model.*;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.enums.CommonLanguages;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprComposition;
+import org.projecthusky.fhir.emed.ch.epr.util.References;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -32,8 +31,6 @@ import java.util.UUID;
  **/
 @ResourceDef
 public class ChEmedEprCompositionPml extends ChEmedEprComposition {
-
-    // TODO
 
     /**
      * Empty constructor for the parser.
@@ -51,10 +48,34 @@ public class ChEmedEprCompositionPml extends ChEmedEprComposition {
      * @param date The document's creation date and time
      */
     public ChEmedEprCompositionPml(final UUID compositionId,
-                                   final Date date) {
-        super(compositionId, date);
+                                   final Date date,
+                                   final CommonLanguages language) {
+        super(compositionId, date, language);
         this.getType().addCoding(new Coding(FhirSystem.SNOMEDCT, "721912009", "Medication summary document (record artifact)"));
         this.setTitle("TODO");
+    }
+
+    /**
+     * Resolves the authors of the document ({@link Device}).
+     *
+     * @return the list with the authors of the document.
+     * @throws InvalidEmedContentException if no author is specified or if an author is not of type {@link Device}.
+     */
+    @ExpectsValidResource
+    public List<Device> resolveAuthors() throws InvalidEmedContentException {
+        if (!this.hasAuthor()) throw new InvalidEmedContentException("The composition requires at least one author.");
+
+        final var authors = new ArrayList<Device>();
+
+        for (final var reference : this.getAuthor()) {
+            final var resource = reference.getResource();
+            if (resource instanceof Device device) {
+                authors.add(device);
+            } else {
+                throw new InvalidEmedContentException("An author is invalid.");
+            }
+        }
+        return authors;
     }
 
     /**
@@ -96,5 +117,16 @@ public class ChEmedEprCompositionPml extends ChEmedEprComposition {
      */
     public boolean hasListSection() {
         return getSectionByLoincCode(LIST_SECTION_CODE_VALUE) != null;
+    }
+
+    /**
+     * Adds a {@link Device} to the list of document authors.
+     *
+     * @param author the author od the document.
+     * @return this.
+     */
+    public ChEmedEprCompositionPml addAuthor(final Device author) {
+        this.addAuthor(References.createReference(author));
+        return this;
     }
 }

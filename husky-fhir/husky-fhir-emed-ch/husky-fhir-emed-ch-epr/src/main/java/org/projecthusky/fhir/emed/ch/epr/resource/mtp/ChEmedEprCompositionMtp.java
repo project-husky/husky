@@ -12,16 +12,20 @@ package org.projecthusky.fhir.emed.ch.epr.resource.mtp;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.hl7.fhir.r4.model.Binary;
-import org.hl7.fhir.r4.model.CodeableConcept;
-import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.*;
 import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.enums.CommonLanguages;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprComposition;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
+import org.projecthusky.fhir.emed.ch.epr.util.References;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -41,11 +45,42 @@ public class ChEmedEprCompositionMtp extends ChEmedEprComposition {
         this.setTitle("TODO");
     }
 
+    /**
+     * Constructor
+     *
+     * @param compositionId Version-independent identifier for the Composition
+     * @param date          The document's creation date and time
+     * @param language      Language of the document
+     */
     public ChEmedEprCompositionMtp(final UUID compositionId,
-                                   final Date date) {
-        super(compositionId, date);
+                                   final Date date,
+                                   final CommonLanguages language) {
+        super(compositionId, date, language);
         this.getType().addCoding(new Coding(FhirSystem.SNOMEDCT, "419891008", "Record artifact (record artifact)"));
         this.setTitle("TODO");
+    }
+
+    /**
+     * Resolves the authors of the document ({@link ChEmedEprPractitionerRole} | {@link ChCorePatientEpr}).
+     *
+     * @return the list with the authors of the document.
+     * @throws InvalidEmedContentException if no author is specified or if an author is not of type {@link ChEmedEprPractitionerRole} or {@link ChCorePatientEpr}.
+     */
+    @ExpectsValidResource
+    public List<DomainResource> resolveAuthors() throws InvalidEmedContentException {
+        if (!this.hasAuthor()) throw new InvalidEmedContentException("The composition requires at least one author.");
+
+        final var authors = new ArrayList<DomainResource>();
+
+        for (final var reference : this.getAuthor()) {
+            final var resource = reference.getResource();
+            if (resource instanceof ChEmedEprPractitionerRole || resource instanceof ChCorePatientEpr) {
+                authors.add((DomainResource) resource);
+            } else {
+                throw new InvalidEmedContentException("An author is invalid.");
+            }
+        }
+        return authors;
     }
 
     /**
@@ -67,8 +102,8 @@ public class ChEmedEprCompositionMtp extends ChEmedEprComposition {
         if (section == null) {
             section = new SectionComponent();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
-                                                   TREATMENT_PLAN_SECTION_CODE_VALUE,
-                                                   "Medication treatment plan.brief"));
+                    TREATMENT_PLAN_SECTION_CODE_VALUE,
+                    "Medication treatment plan.brief"));
         }
         return section;
     }
@@ -111,8 +146,30 @@ public class ChEmedEprCompositionMtp extends ChEmedEprComposition {
         if (section == null) {
             section = new SectionComponent();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
-                                                   ANNOTATION_SECTION_CODE_VALUE, "Annotation comment"));
+                    ANNOTATION_SECTION_CODE_VALUE, "Annotation comment"));
         }
         return section;
+    }
+
+    /**
+     * Adds a {@link ChEmedEprPractitionerRole} to the list of document authors.
+     *
+     * @param author the author od the document.
+     * @return this.
+     */
+    public ChEmedEprCompositionMtp addAuthor(final ChEmedEprPractitionerRole author) {
+        this.addAuthor(References.createReference(author));
+        return this;
+    }
+
+    /**
+     * Adds a {@link ChCorePatientEpr} to the list of document authors.
+     *
+     * @param author the author od the document.
+     * @return this.
+     */
+    public ChEmedEprCompositionMtp addAuthor(final ChCorePatientEpr author) {
+        this.addAuthor(References.createReference(author));
+        return this;
     }
 }

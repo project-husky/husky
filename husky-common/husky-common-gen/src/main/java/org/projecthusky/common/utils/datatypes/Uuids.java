@@ -53,4 +53,9 @@ public class Uuids {
     public static String generate() {
         return UUID.randomUUID().toString();
     }
+
+    public static UUID parseUrnEncoded(final String urn) {
+        final var uuid = normalize(urn);
+        return UUID.fromString(uuid);
+    }
 }

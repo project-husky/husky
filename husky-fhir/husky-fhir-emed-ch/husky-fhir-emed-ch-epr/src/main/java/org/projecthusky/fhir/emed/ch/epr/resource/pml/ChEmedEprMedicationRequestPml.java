@@ -1,5 +1,12 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.pml;
 
-public class ChEmedEprMedicationRequestPml /* extends ChEmedEprMedicationRequest */ {
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationRequest;
+
+/**
+ * The HAPI custom structure for CH-EMED-EPR MedicationRequest (PML).
+ *
+ * @author Ronaldo Loureiro
+ **/
+public class ChEmedEprMedicationRequestPml  extends ChEmedEprMedicationRequest {
     // TODO
 }

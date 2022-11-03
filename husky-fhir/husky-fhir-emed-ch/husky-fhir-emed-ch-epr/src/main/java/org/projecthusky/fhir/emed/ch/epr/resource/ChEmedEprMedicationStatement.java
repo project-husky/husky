@@ -11,6 +11,7 @@
 package org.projecthusky.fhir.emed.ch.epr.resource;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.MedicationStatement;
 import org.hl7.fhir.r4.model.Reference;
 import org.projecthusky.common.utils.datatypes.Uuids;
@@ -64,6 +65,18 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement {
     }
 
     /**
+     * Resolves the medication statement UUID or throws.
+     *
+     * @return the medication statement UUID.
+     * @throws InvalidEmedContentException if the id is missing.
+     */
+    @ExpectsValidResource
+    public UUID resolveIdentifier() throws InvalidEmedContentException {
+        if (!this.hasIdentifier()) throw new InvalidEmedContentException("The ID is missing.");
+        return Uuids.parseUrnEncoded(this.getIdentifierFirstRep().getValue());
+    }
+
+    /**
      * Gets the treatment reason if available.
      *
      * @return the treatment reason or {@code null}.
@@ -82,6 +95,22 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement {
      */
     protected ChEmedEprMedicationStatement setTreatmentReason(final String treatmentReason) {
         this.getReasonCodeFirstRep().setText(treatmentReason);
+        return this;
+    }
+
+    /**
+     * Sets the medication statement UUID.
+     *
+     * @param documentUUID The medication statement UUID.
+     * @return this.
+     */
+    public ChEmedEprMedicationStatement setIdentifier(final UUID documentUUID) {
+        var identifier = this.getIdentifierFirstRep();
+        if (identifier == null) {
+            identifier = new Identifier();
+            identifier.setSystem(FhirSystem.URI);
+        }
+        identifier.setValue(Uuids.URN_PREFIX + documentUUID);
         return this;
     }
 }

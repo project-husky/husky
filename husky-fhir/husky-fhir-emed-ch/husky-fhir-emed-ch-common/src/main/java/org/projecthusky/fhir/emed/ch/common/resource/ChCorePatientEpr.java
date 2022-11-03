@@ -12,6 +12,7 @@ package org.projecthusky.fhir.emed.ch.common.resource;
 
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
+import org.apache.tomcat.jni.Local;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.*;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
@@ -19,6 +20,8 @@ import org.projecthusky.fhir.emed.ch.common.enums.AdministrativeGender;
 import org.projecthusky.fhir.emed.ch.common.enums.ReligiousAffiliation;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 /**
@@ -109,9 +112,9 @@ public class ChCorePatientEpr extends Patient {
      * @throws InvalidEmedContentException if the patient's birthdate is missing.
      */
     @ExpectsValidResource
-    public Date resolveBirthDate() throws InvalidEmedContentException {
+    public LocalDate resolveBirthDate() throws InvalidEmedContentException {
         if (!this.hasBirthDate()) throw new InvalidEmedContentException("The birthdate is missing.");
-        return this.getBirthDate();
+        return LocalDate.ofInstant(this.getBirthDate().toInstant(), ZoneId.systemDefault());
     }
 
     /**
@@ -150,8 +153,9 @@ public class ChCorePatientEpr extends Patient {
      * @param birthDate the patient's birthdate.
      * @return this.
      */
-    public ChCorePatientEpr setBirthDate(final Date birthDate) {
-        super.setBirthDate(birthDate);
+    public ChCorePatientEpr setBirthDate(final LocalDate birthDate) {
+        final var date = Date.from(birthDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        super.setBirthDate(date);
         return this;
     }
 

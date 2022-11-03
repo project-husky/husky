@@ -82,7 +82,37 @@ public class ChEmedEprDocumentMtp extends ChEmedEprDocument {
         if (entry != null && entry.getResource() instanceof final ChEmedEprCompositionMtp composition) {
             return composition;
         }
-        throw new InvalidEmedContentException(
-                "The ChEmedEprCompositionMtp is missing in the document Bundle");
+        throw new InvalidEmedContentException("The ChEmedEprCompositionMtp is missing in the document Bundle");
+    }
+
+    /**
+     * Returns the medication statement.
+     *
+     * @return the medication statement
+     */
+    @ExpectsValidResource
+    public ChEmedEprMedicationStatementMtp resolveMedicationStatement() {
+        final var entry = this.getEntryByResourceType(ChEmedEprMedicationStatementMtp.class);
+        if (entry != null && entry.getResource() instanceof final ChEmedEprMedicationStatementMtp medicationStatement) {
+            return medicationStatement;
+        }
+        throw new InvalidEmedContentException("The ChEmedEprMedicationStatementMtp is missing in the document Bundle");
+    }
+
+    /**
+     * Sets the medication statement. If it already exists, it will be replaced.
+     *
+     * @param medicationStatement the medication statement.
+     * @return this.
+     */
+    public ChEmedEprDocumentMtp setMedicationStatement(final ChEmedEprMedicationStatementMtp medicationStatement) {
+        var entry = this.getEntryByResourceType(ChEmedEprMedicationStatementMtp.class);
+        if (entry == null) {
+            entry = new BundleEntryComponent();
+        }
+        entry.setFullUrl(medicationStatement.getIdentifierFirstRep().getValue());
+        entry.setResource(medicationStatement);
+
+        return this;
     }
 }

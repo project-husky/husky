@@ -11,15 +11,22 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.pre;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
-import org.checkerframework.checker.nullness.qual.Nullable;
-import org.hl7.fhir.r4.model.Binary;
 import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.DomainResource;
+import org.hl7.fhir.r4.model.Reference;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.enums.CommonLanguages;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprComposition;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
+import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprCompositionMtp;
+import org.projecthusky.fhir.emed.ch.epr.util.References;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -46,10 +53,34 @@ public class ChEmedEprCompositionPre extends ChEmedEprComposition {
      * @param date The document's creation date and time
      */
     public ChEmedEprCompositionPre(final UUID compositionId,
-                                   final Date date) {
-        super(compositionId, date);
+                                   final Date date,
+                                   final CommonLanguages language) {
+        super(compositionId, date, language);
         this.getType().addCoding(new Coding(FhirSystem.SNOMEDCT, "761938008", "Medical prescription record (record artifact)"));
         this.setTitle("TODO");
+    }
+
+    /**
+     * Resolves the authors of the document ({@link ChEmedEprPractitionerRole} | {@link ChCorePatientEpr}).
+     *
+     * @return the list with the authors of the document.
+     * @throws InvalidEmedContentException if no author is specified or if an author is not of type {@link ChEmedEprPractitionerRole} or {@link ChCorePatientEpr}.
+     */
+    @ExpectsValidResource
+    public List<DomainResource> resolveAuthors() throws InvalidEmedContentException {
+        if (!this.hasAuthor()) throw new InvalidEmedContentException("The composition requires at least one author.");
+
+        final var authors = new ArrayList<DomainResource>();
+
+        for (final var reference : this.getAuthor()) {
+            final var resource = reference.getResource();
+            if (resource instanceof ChEmedEprPractitionerRole || resource instanceof ChCorePatientEpr) {
+                authors.add((DomainResource) resource);
+            } else {
+                throw new InvalidEmedContentException("An author is invalid.");
+            }
+        }
+        return authors;
     }
 
     /**
@@ -75,16 +106,16 @@ public class ChEmedEprCompositionPre extends ChEmedEprComposition {
      * @throws InvalidEmedContentException if the medication request is missing.
      */
     @ExpectsValidResource
-    public ChEmedMedicationRequestPre getMedicationRequest() throws InvalidEmedContentException {
+    public ChEmedEprMedicationRequestPre getMedicationRequest() throws InvalidEmedContentException {
         final var section = this.getPrescriptionSection();
         if (!section.hasEntry()) {
             throw new InvalidEmedContentException("The section has no entries");
         }
         final var resource = section.getEntry().get(0).getResource();
-        if (resource instanceof final ChEmedMedicationRequestPre medicationRequest) {
+        if (resource instanceof final ChEmedEprMedicationRequestPre medicationRequest) {
             return medicationRequest;
         }
-        throw new InvalidEmedContentException("The section isn't referencing a ChEmedMedicationRequestPre resource");
+        throw new InvalidEmedContentException("The section isn't referencing a ChEmedEprMedicationRequestPre resource");
     }
 
     /**
@@ -118,5 +149,27 @@ public class ChEmedEprCompositionPre extends ChEmedEprComposition {
      */
     public boolean hasAnnotationSection() {
         return getSectionByLoincCode(ANNOTATION_SECTION_CODE_VALUE) != null;
+    }
+
+    /**
+     * Adds a {@link ChEmedEprPractitionerRole} to the list of document authors.
+     *
+     * @param author the author od the document.
+     * @return this.
+     */
+    public ChEmedEprCompositionPre addAuthor(final ChEmedEprPractitionerRole author) {
+        this.addAuthor(References.createReference(author));
+        return this;
+    }
+
+    /**
+     * Adds a {@link ChCorePatientEpr} to the list of document authors.
+     *
+     * @param author the author od the document.
+     * @return this.
+     */
+    public ChEmedEprCompositionPre addAuthor(final ChCorePatientEpr author) {
+        this.addAuthor(References.createReference(author));
+        return this;
     }
 }

@@ -1,7 +1,5 @@
 package org.projecthusky.fhir.emed.ch.common.enums;
 
-
-
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.common.enums.CodeSystems;
@@ -10,9 +8,19 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
 
 import java.util.Objects;
 
-public enum ReligiousAffiliation implements ValueSetEnumInterface {
+public enum CommonLanguages implements ValueSetEnumInterface {
     // TODO
     ;
+
+    /**
+     * Name of the value set.
+     */
+    public static final String VALUE_SET_NAME = "CommonLanguages";
+
+    /**
+     * Identifier of the code system (all values share the same).
+     */
+    public static final String CODE_SYSTEM_ID = "2.16.840.1.113883.4.642.3.20";
 
     /**
      * Machine interpretable and (inside this class) unique code.
@@ -33,7 +41,7 @@ public enum ReligiousAffiliation implements ValueSetEnumInterface {
     @NonNull
     private final String[] displayNames;
 
-    ReligiousAffiliation(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
+    CommonLanguages(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
         this.code = Objects.requireNonNull(code);
         this.codeSystem = Objects.requireNonNull(codeSystem);
         this.displayNames = new String[5];
@@ -119,8 +127,8 @@ public enum ReligiousAffiliation implements ValueSetEnumInterface {
      * @return the enum value found or {@code null}.
      */
     @Nullable
-    public static ReligiousAffiliation getEnum(@Nullable final String code) {
-        for (final ReligiousAffiliation x : values()) {
+    public static CommonLanguages getEnum(@Nullable final String code) {
+        for (final CommonLanguages x : values()) {
             if (x.getCodeValue().equals(code)) {
                 return x;
             }
@@ -139,7 +147,7 @@ public enum ReligiousAffiliation implements ValueSetEnumInterface {
             return false;
         }
         try {
-            Enum.valueOf(ReligiousAffiliation.class,
+            Enum.valueOf(CommonLanguages.class,
                     enumName);
             return true;
         } catch (final IllegalArgumentException ex) {
@@ -154,7 +162,7 @@ public enum ReligiousAffiliation implements ValueSetEnumInterface {
      * @return {@code true} if the value is found in this value set, {@code false} otherwise.
      */
     public static boolean isInValueSet(@Nullable final String codeValue) {
-        for (final ReligiousAffiliation x : values()) {
+        for (final CommonLanguages x : values()) {
             if (x.getCodeValue().equals(codeValue)) {
                 return true;
             }

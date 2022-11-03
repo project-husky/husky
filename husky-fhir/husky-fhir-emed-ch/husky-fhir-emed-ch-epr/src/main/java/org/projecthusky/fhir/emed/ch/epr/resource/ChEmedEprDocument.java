@@ -16,6 +16,7 @@ import org.hl7.fhir.r4.model.Identifier;
 import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 
 import java.util.Date;
@@ -78,15 +79,30 @@ public abstract class ChEmedEprDocument extends Bundle {
      * @throws InvalidEmedContentException if the id is missing.
      */
     @ExpectsValidResource
-    public UUID resolveIdentfier() throws InvalidEmedContentException {
+    public UUID resolveIdentifier() throws InvalidEmedContentException {
         if (!this.hasIdentifier()) throw new InvalidEmedContentException("The ID is missing.");
-        return UUID.fromString(this.getIdentifier().getValue());
+        return Uuids.parseUrnEncoded(this.getIdentifier().getValue());
+    }
+
+    /**
+     * Resolves the patient targeted by this medication treatment plan.
+     *
+     * @return The patient targeted by this medication treatment plan.
+     * @throws InvalidEmedContentException if the patient is missing.
+     */
+    @ExpectsValidResource
+    public ChCorePatientEpr resolvePatient() throws InvalidEmedContentException {
+        final var entry = this.getEntryByResourceType(ChCorePatientEpr.class);
+        if (entry != null && entry.getResource() instanceof final ChCorePatientEpr patient) {
+            return patient;
+        }
+        throw new InvalidEmedContentException("The ChCorePatientEpr is missing in the document Bundle");
     }
 
     /**
      * Sets the document UUID.
      *
-     * @param documentUUID The document UUID
+     * @param documentUUID The document UUID.
      * @return this.
      */
     public ChEmedEprDocument setIdentifier(final UUID documentUUID) {
@@ -96,7 +112,24 @@ public abstract class ChEmedEprDocument extends Bundle {
         }
 
         identifier.setSystem(FhirSystem.URI);
-        identifier.setValue(documentUUID.toString());
+        identifier.setValue(Uuids.URN_PREFIX + documentUUID);
+
+        return this;
+    }
+
+    /**
+     * Sets the patient targeted by this document.
+     *
+     * @param patient the patient targeted by this document.
+     * @return this.
+     */
+    public ChEmedEprDocument setPatient(final ChCorePatientEpr patient) {
+        var entry = this.getEntryByResourceType(ChCorePatientEpr.class);
+        if (entry == null) {
+            entry = new BundleEntryComponent();
+        }
+        entry.setFullUrl(patient.resolveIdentifier().getValue());
+        entry.setResource(patient);
 
         return this;
     }

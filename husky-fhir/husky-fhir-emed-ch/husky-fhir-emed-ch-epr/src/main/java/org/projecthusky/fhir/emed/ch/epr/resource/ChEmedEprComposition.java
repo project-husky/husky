@@ -16,10 +16,12 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.*;
 import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.enums.CommonLanguages;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.resource.ChEmedOrganization;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
+import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChExtEprDataEnterer;
 
 import java.util.*;
 
@@ -47,16 +49,22 @@ public abstract class ChEmedEprComposition extends Composition {
     @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-versionnumber", definedLocally = false)
     protected UnsignedIntType versionNumber;
 
+    /**
+     * Extension for a list of recipients of this document (corresponds to the addressee of a letter - person or organization),
+     * equivalent to CDA informationRecipient.
+     */
     @Nullable
     @Child(name = "informationRecipient", min = 1, max = Child.MAX_UNLIMITED)
     @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-informationrecipient", definedLocally = false)
     protected List<Reference> informationRecipient;
 
-    // TODO add support for extension dataEnterer
-
-    // TODO language
-
-    // TODO author on each child class
+    /**
+     * Person who entered information into this document if it is a person other than the author.
+     */
+    @Nullable
+    @Child(name = "dataEnterer")
+    @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-dataenterer", definedLocally = false)
+    protected ChExtEprDataEnterer dataEnterer;
 
     /**
      * Empty constructor for the parser.
@@ -76,12 +84,14 @@ public abstract class ChEmedEprComposition extends Composition {
      * Constructor
      *
      * @param compositionId Version-independent identifier for the Composition
-     * @param date The document's creation date and time
+     * @param date          The document's creation date and time
      */
     public ChEmedEprComposition(final UUID compositionId,
-                                final Date date) {
+                                final Date date,
+                                final CommonLanguages language) {
         this.getIdentifier().setSystem(FhirSystem.URI).setValue(Uuids.URN_PREFIX + compositionId);
         this.setDate(date);
+        this.setLanguage(language.getCodeValue());
     }
 
     /**
@@ -96,7 +106,7 @@ public abstract class ChEmedEprComposition extends Composition {
                 .map(BaseReference::getResource)
                 .map(ChCorePatientEpr.class::cast)
                 .orElseThrow(() -> new InvalidEmedContentException("The subject reference is missing or of wrong " +
-                                                                           "type"));
+                        "type"));
     }
 
     /**
@@ -112,7 +122,7 @@ public abstract class ChEmedEprComposition extends Composition {
                 .map(BaseReference::getResource)
                 .map(ChEmedOrganization.class::cast)
                 .orElseThrow(() -> new InvalidEmedContentException("The custodian reference is missing or of wrong " +
-                                                                           "type"));
+                        "type"));
     }
 
     /**
@@ -124,12 +134,29 @@ public abstract class ChEmedEprComposition extends Composition {
     @ExpectsValidResource
     public UUID resolveIdentifier() throws InvalidEmedContentException {
         if (!this.hasIdentifier()) throw new InvalidEmedContentException("The ID is missing.");
-        return UUID.fromString(this.getIdentifier().getValue());
+        return Uuids.parseUrnEncoded(this.getIdentifier().getValue());
     }
 
     /**
+     * Resolves the language of the document.
      *
-     * @return
+     * @return the language of the document.
+     */
+    @ExpectsValidResource
+    public CommonLanguages resolveLanguage() {
+        if (!this.hasLanguage()) throw new InvalidEmedContentException("The language is missing.");
+
+        final var code = CommonLanguages.getEnum(this.getLanguage());
+        if (code == null) {
+            throw new InvalidEmedContentException("The language is invalid.");
+        }
+        return code;
+    }
+
+    /**
+     * Gets the version number element.
+     *
+     * @return the version number element.
      */
     public UnsignedIntType getVersionNumberElement() {
         if (this.versionNumber == null) {
@@ -138,15 +165,97 @@ public abstract class ChEmedEprComposition extends Composition {
         return this.versionNumber;
     }
 
+    /**
+     * Sets the version number element.
+     *
+     * @param versionNumber the version number element.
+     * @return this.
+     */
+    public ChEmedEprComposition setVersionNumberElement(final UnsignedIntType versionNumber) {
+        if (versionNumber.hasValue() && versionNumber.getValue() < 0) {
+            throw new IllegalArgumentException("The version number shall be positive or zero");
+        }
+        this.versionNumber = versionNumber;
+        return this;
+    }
+
+    /**
+     * Gets the version number.
+     *
+     * @return the version number.
+     */
     public int getVersionNumber() {
         return this.versionNumber == null || this.versionNumber.isEmpty() ? 0 : this.versionNumber.getValue();
     }
 
+    /**
+     * Sets the version number.
+     *
+     * @param value the version number.
+     * @return this.
+     */
+    public ChEmedEprComposition setVersionNumber(int value) {
+        if (this.versionNumber == null)
+            this.versionNumber = new UnsignedIntType();
+        this.versionNumber.setValue(value);
+        return this;
+    }
+
+    /**
+     * Gets the list of recipients of this document.
+     *
+     * @return the list of recipients of this document.
+     */
     public List<Reference> getInformationRecipient() {
         if (this.informationRecipient == null) {
             this.informationRecipient = new ArrayList<>(0);
         }
         return this.informationRecipient;
+    }
+
+    /**
+     * Sets list of recipients of this document.
+     *
+     * @param informationRecipient the list of recipients of this document.
+     * @return this.
+     */
+    public ChEmedEprComposition setInformationRecipient(final List<Reference> informationRecipient) {
+        this.informationRecipient = informationRecipient;
+        return this;
+    }
+
+    /**
+     * Gets the person who entered information into this document.
+     *
+     * @return the person who entered information into this document.
+     */
+    public ChExtEprDataEnterer getDataEnterer() {
+        if (this.dataEnterer == null) {
+            this.dataEnterer = new ChExtEprDataEnterer();
+        }
+        return dataEnterer;
+    }
+
+    /**
+     * Sets the person who entered information into this document.
+     *
+     * @param dataEnterer the person who entered information into this document.
+     * @return this.
+     */
+    public ChEmedEprComposition setDataEnterer(final ChExtEprDataEnterer dataEnterer) {
+        this.dataEnterer = dataEnterer;
+        return this;
+    }
+
+    /**
+     * Sets the language of this document.
+     *
+     * @param language the language of this document.
+     * @return this.
+     */
+    public ChEmedEprComposition setLanguage(CommonLanguages language) {
+        this.setLanguage(language.getCodeValue());
+        return this;
     }
 
     /**
@@ -196,26 +305,6 @@ public abstract class ChEmedEprComposition extends Composition {
                 .orElse(null);
     }
 
-    public ChEmedEprComposition setVersionNumberElement(final UnsignedIntType versionNumber) {
-        if (versionNumber.hasValue() && versionNumber.getValue() < 0) {
-            throw new IllegalArgumentException("The version number shall be positive or zero");
-        }
-        this.versionNumber = versionNumber;
-        return this;
-    }
-
-    public ChEmedEprComposition setVersionNumber(int value) {
-        if (this.versionNumber == null)
-            this.versionNumber = new UnsignedIntType();
-        this.versionNumber.setValue(value);
-        return this;
-    }
-
-    public ChEmedEprComposition setInformationRecipient(final List<Reference> informationRecipient) {
-        this.informationRecipient = informationRecipient;
-        return this;
-    }
-
     /**
      * Sets the document UUID.
      *
@@ -229,15 +318,25 @@ public abstract class ChEmedEprComposition extends Composition {
         }
 
         identifier.setSystem(FhirSystem.URI);
-        identifier.setValue(documentUUID.toString());
+        identifier.setValue(Uuids.URN_PREFIX + documentUUID);
 
         return this;
     }
 
+    /**
+     * Returns whether the version number.
+     *
+     * @return {@code true} if the version exists, {@code false} otherwise.
+     */
     public boolean hasVersionNumber() {
         return this.versionNumber != null && !this.versionNumber.isEmpty();
     }
 
+    /**
+     * Returns whether the list of recipients of this document.
+     *
+     * @return {@code true} if the list of recipients of this document exists, {@code false} otherwise.
+     */
     public boolean hasInformationRecipient() {
         if (this.informationRecipient == null) {
             return false;
@@ -257,5 +356,14 @@ public abstract class ChEmedEprComposition extends Composition {
      */
     public boolean hasOriginalRepresentationSection() {
         return getSectionByLoincCode(ORIGINAL_REPR_SECTION_CODE_VALUE) != null;
+    }
+
+    /**
+     * Returns whether the person who entered information into this document.
+     *
+     * @return {@code true} if the person who entered information into this document exists, {@code false} otherwise.
+     */
+    public boolean hasDataEnterer() {
+        return this.dataEnterer != null && this.dataEnterer.hasEnterer();
     }
 }

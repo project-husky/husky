@@ -1,7 +1,12 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.dis;
 
-import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationStatement;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationDispense;
 
-public class ChEmedEprMedicationDispenseDis /* extends ChEmedMedicationDispense */{
+/**
+ * The HAPI custom structure for CH-EMED-EPR MedicationDispense (DIS).
+ *
+ * @author Ronaldo Loureiro
+ **/
+public class ChEmedEprMedicationDispenseDis  extends ChEmedEprMedicationDispense {
     // TODO
 }

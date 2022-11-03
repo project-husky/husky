@@ -17,6 +17,7 @@ import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 
 import java.io.Serial;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -86,5 +87,32 @@ public class ChEmedEprDocumentPre extends ChEmedEprDocument {
                 "The ChEmedEprCompositionPre is missing in the document Bundle");
     }
 
+    /**
+     * Resolves the list with medication requests of this document.
+     *
+     * @return the list with medication requests of this document.
+     */
+    public List<ChEmedEprMedicationRequestPre> resolveMedicationRequest() {
+        return this.getEntry().stream()
+                .map(BundleEntryComponent::getResource)
+                .filter(ChEmedEprMedicationRequestPre.class::isInstance)
+                .map(ChEmedEprMedicationRequestPre.class::cast)
+                .toList();
+    }
+
+    /**
+     * Adds a medication request in the document.
+     *
+     * @param medicationRequest the medication request.
+     * @return this.
+     */
+    public ChEmedEprDocumentPre addMedicationRequest(final ChEmedEprMedicationRequestPre medicationRequest) {
+        final var entry = new BundleEntryComponent()
+                .setFullUrl(medicationRequest.resolveIdentifier().getValue())
+                .setResource(medicationRequest);
+
+        this.addEntry(entry);
+        return this;
+    }
     // TODO
 }
