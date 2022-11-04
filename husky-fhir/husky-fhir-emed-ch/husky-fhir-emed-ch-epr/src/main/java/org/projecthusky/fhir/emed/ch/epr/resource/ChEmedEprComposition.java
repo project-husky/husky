@@ -22,6 +22,7 @@ import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.resource.ChEmedOrganization;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChExtEprDataEnterer;
+import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 import java.util.*;
 
@@ -320,6 +321,17 @@ public abstract class ChEmedEprComposition extends Composition {
         identifier.setSystem(FhirSystem.URI);
         identifier.setValue(Uuids.URN_PREFIX + documentUUID);
 
+        return this;
+    }
+
+    /**
+     * Set the patient targeted.
+     *
+     * @param chCorePatientEpr the patient.
+     * @return this.
+     */
+    public ChEmedEprComposition setPatient(ChCorePatientEpr chCorePatientEpr) {
+        this.setSubject(References.createReference(chCorePatientEpr));
         return this;
     }
 

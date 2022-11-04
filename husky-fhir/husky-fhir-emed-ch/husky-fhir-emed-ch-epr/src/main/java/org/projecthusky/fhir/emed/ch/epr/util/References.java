@@ -1,9 +1,14 @@
 package org.projecthusky.fhir.emed.ch.epr.util;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Device;
 import org.hl7.fhir.r4.model.Reference;
+import org.hl7.fhir.r4.model.Resource;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedication;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
+
+import java.util.List;
 
 /**
  * Reference Utilities
@@ -17,6 +22,21 @@ public class References {
      * This class is not instantiable.
      */
     private References() {
+    }
+
+    /**
+     * Resolves the first resource with the reference.
+     *
+     * @param reference the reference
+     * @param contained the list of resource
+     * @return the first resource with the reference or {@code null}.
+     */
+    @Nullable
+    public static Resource resolveReference(String reference, List<Resource> contained) {
+        return contained.stream()
+                .filter(resource -> resource.getId().equals(reference))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
@@ -38,7 +58,7 @@ public class References {
      * @return the reference
      */
     public static Reference createReference(final ChCorePatientEpr resource) {
-        final var reference = new Reference().setReference(resource.resolveIdentifier().getValue());
+        final var reference = new Reference().setReference(resource.getIdentifierFirstRep().getValue());
         reference.setResource(resource);
         return reference;
     }
@@ -50,6 +70,12 @@ public class References {
      * @return the reference
      */
     public static Reference createReference(final Device resource) {
+        final var reference = new Reference().setReference(resource.getIdentifierFirstRep().getValue());
+        reference.setResource(resource);
+        return reference;
+    }
+
+    public static Reference createReference(final ChEmedEprMedication resource) {
         final var reference = new Reference().setReference(resource.getIdentifierFirstRep().getValue());
         reference.setResource(resource);
         return reference;

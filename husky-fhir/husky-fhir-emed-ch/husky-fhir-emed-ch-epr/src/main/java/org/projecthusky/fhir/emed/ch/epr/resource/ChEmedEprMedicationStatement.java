@@ -29,6 +29,8 @@ import java.util.UUID;
 public abstract class ChEmedEprMedicationStatement extends MedicationStatement {
     // Here goes everything common to MedicationStatement (MTP), (PML) and (PMLC)
 
+    // TODO Dosage
+
     /**
      * Empty constructor for the parser.
      */
@@ -36,6 +38,11 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement {
         super();
     }
 
+    /**
+     * Constructor
+     *
+     * @param entryUuid the medication statement id.
+     */
     protected ChEmedEprMedicationStatement(final UUID entryUuid) {
         super();
         this.setStatus(MedicationStatementStatus.COMPLETED);

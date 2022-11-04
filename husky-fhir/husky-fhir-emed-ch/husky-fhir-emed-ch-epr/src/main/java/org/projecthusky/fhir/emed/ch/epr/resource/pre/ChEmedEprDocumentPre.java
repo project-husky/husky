@@ -108,11 +108,10 @@ public class ChEmedEprDocumentPre extends ChEmedEprDocument {
      */
     public ChEmedEprDocumentPre addMedicationRequest(final ChEmedEprMedicationRequestPre medicationRequest) {
         final var entry = new BundleEntryComponent()
-                .setFullUrl(medicationRequest.resolveIdentifier().getValue())
+                .setFullUrl(medicationRequest.getIdentifierFirstRep().getValue())
                 .setResource(medicationRequest);
 
         this.addEntry(entry);
         return this;
     }
-    // TODO
 }

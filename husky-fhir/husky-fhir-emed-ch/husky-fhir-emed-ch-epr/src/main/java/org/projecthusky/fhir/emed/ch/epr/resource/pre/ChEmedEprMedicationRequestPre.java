@@ -1,8 +1,8 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.pre;
 
-import org.hl7.fhir.r4.model.Identifier;
-import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationRequest;
+
+import java.util.UUID;
 
 /**
  * The HAPI custom structure for CH-EMED-EPR MedicationRequest (PRE).
@@ -10,9 +10,19 @@ import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationRequest;
  * @author Ronaldo Loureiro
  **/
 public class ChEmedEprMedicationRequestPre extends ChEmedEprMedicationRequest {
-    // TODO
+    /**
+     * Empty constructor for the parser.
+     */
+    public ChEmedEprMedicationRequestPre() {
+        super();
+    }
 
-    public Identifier resolveIdentifier() throws InvalidEmedContentException {
-        return new Identifier(); // TODO
+    /**
+     * Constructor
+     *
+     * @param entryUuid the medication request ID.
+     */
+    public ChEmedEprMedicationRequestPre(final UUID entryUuid) {
+        super(entryUuid);
     }
 }
