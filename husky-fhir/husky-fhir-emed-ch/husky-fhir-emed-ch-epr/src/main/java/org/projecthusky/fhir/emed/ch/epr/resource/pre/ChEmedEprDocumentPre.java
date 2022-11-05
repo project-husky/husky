@@ -16,7 +16,7 @@ import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 
 import java.io.Serial;
-import java.util.Date;
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,13 +38,13 @@ public class ChEmedEprDocumentPre extends ChEmedEprDocument {
     }
 
     /**
-     * Constructor.
+     * Constructor that pre-populates fields.
      *
      * @param documentId The document ID.
      * @param timestamp  The document creation date.
      */
     public ChEmedEprDocumentPre(final UUID documentId,
-                                final Date timestamp) {
+                                final Instant timestamp) {
         super(documentId, timestamp);
     }
 

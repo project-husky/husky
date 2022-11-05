@@ -11,7 +11,10 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.pml;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
-import org.hl7.fhir.r4.model.*;
+import org.hl7.fhir.r4.model.BaseReference;
+import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.Device;
+import org.hl7.fhir.r4.model.DomainResource;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.CommonLanguages;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
@@ -19,8 +22,8 @@ import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprComposition;
 import org.projecthusky.fhir.emed.ch.epr.util.References;
 
+import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,21 +40,21 @@ public class ChEmedEprCompositionPml extends ChEmedEprComposition {
      */
     public ChEmedEprCompositionPml() {
         super();
-        this.getType().addCoding(new Coding(FhirSystem.SNOMEDCT, "721912009", "Medication summary document (record artifact)"));
-        this.setTitle("TODO");
     }
 
     /**
-     * Constructor
+     * Constructor that pre-populates fields.
      *
      * @param compositionId Version-independent identifier for the Composition
-     * @param date The document's creation date and time
+     * @param date          The document's creation date and time
      */
     public ChEmedEprCompositionPml(final UUID compositionId,
-                                   final Date date,
+                                   final Instant date,
                                    final CommonLanguages language) {
         super(compositionId, date, language);
-        this.getType().addCoding(new Coding(FhirSystem.SNOMEDCT, "721912009", "Medication summary document (record artifact)"));
+        this.getType().addCoding(new Coding(FhirSystem.SNOMEDCT,
+                                            "721912009",
+                                            "Medication summary document (record artifact)"));
         this.setTitle("TODO");
     }
 
@@ -88,8 +91,8 @@ public class ChEmedEprCompositionPml extends ChEmedEprComposition {
         if (section == null) {
             section = new SectionComponent();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
-                    LIST_SECTION_CODE_VALUE,
-                    "Medication summary"));
+                                                   LIST_SECTION_CODE_VALUE,
+                                                   "Medication summary"));
         }
         return section;
     }

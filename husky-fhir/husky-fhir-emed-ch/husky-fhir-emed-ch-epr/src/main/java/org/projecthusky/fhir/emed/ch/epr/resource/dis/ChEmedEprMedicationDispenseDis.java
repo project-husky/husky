@@ -7,6 +7,6 @@ import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationDispense;
  *
  * @author Ronaldo Loureiro
  **/
-public class ChEmedEprMedicationDispenseDis  extends ChEmedEprMedicationDispense {
+public class ChEmedEprMedicationDispenseDis extends ChEmedEprMedicationDispense {
     // TODO
 }

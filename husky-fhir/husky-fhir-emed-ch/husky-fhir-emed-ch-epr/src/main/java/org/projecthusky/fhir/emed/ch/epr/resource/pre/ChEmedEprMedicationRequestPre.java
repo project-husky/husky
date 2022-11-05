@@ -10,6 +10,7 @@ import java.util.UUID;
  * @author Ronaldo Loureiro
  **/
 public class ChEmedEprMedicationRequestPre extends ChEmedEprMedicationRequest {
+
     /**
      * Empty constructor for the parser.
      */
@@ -18,9 +19,9 @@ public class ChEmedEprMedicationRequestPre extends ChEmedEprMedicationRequest {
     }
 
     /**
-     * Constructor
+     * Constructor that pre-populates fields.
      *
-     * @param entryUuid the medication request ID.
+     * @param entryUuid The medication request ID.
      */
     public ChEmedEprMedicationRequestPre(final UUID entryUuid) {
         super(entryUuid);

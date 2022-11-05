@@ -35,7 +35,7 @@ public class ChEmedEprMedicationRequestPml extends ChEmedEprMedicationRequest {
     }
 
     /**
-     * Constructor
+     * Constructor      * Constructor that pre-populates fields.
      *
      * @param entryUuid the medication request ID.
      */
@@ -47,21 +47,24 @@ public class ChEmedEprMedicationRequestPml extends ChEmedEprMedicationRequest {
      * Resolves the author and her/his organization of the medical decision.
      *
      * @return the author and her/his organization of the medical decision.
-     * @throws InvalidEmedContentException if author and her/his organization of the medical decision are missing or isn't of the right type.
+     * @throws InvalidEmedContentException if author and her/his organization of the medical decision are missing or
+     *                                     isn't of the right type.
      */
     @ExpectsValidResource
     public ChEmedEprPractitionerRole resolvePerformer() throws InvalidEmedContentException {
-        if (!this.hasPerformer()) throw new InvalidEmedContentException("The author and her/his organization of the medical decision are missing.");
+        if (!this.hasPerformer()) throw new InvalidEmedContentException(
+                "The author and her/his organization of the medical decision are missing.");
         final var resource = this.getPerformer().getResource();
         if (resource instanceof ChEmedEprPractitionerRole chEmedEprPractitionerRole) {
             return chEmedEprPractitionerRole;
         }
-        throw new InvalidEmedContentException("The reference to the author and her/his organization of the medical decision isn't of the right type.");
+        throw new InvalidEmedContentException(
+                "The reference to the author and her/his organization of the medical decision isn't of the right type.");
     }
 
     /**
-     * Gets the author reference of the original document if different from the author of the medical decision.
-     * If it doesn't exist, it's created.
+     * Gets the author reference of the original document if different from the author of the medical decision. If it
+     * doesn't exist, it's created.
      *
      * @return the author reference of the original document
      */

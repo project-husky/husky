@@ -25,11 +25,22 @@ import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedication;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitioner;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
+import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprCompositionDis;
+import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprDocumentDis;
+import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprMedicationDispenseDis;
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprCompositionMtp;
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprDocumentMtp;
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprMedicationStatementMtp;
-import org.projecthusky.fhir.emed.ch.epr.resource.pml.ChEmedEprMedicationStatementPml;
+import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprCompositionPadv;
+import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprDocumentPadv;
+import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprObservationPadv;
+import org.projecthusky.fhir.emed.ch.epr.resource.pml.*;
+import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprCompositionPmlc;
+import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprDocumentPmlc;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprMedicationStatementPmlc;
+import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprCompositionPre;
+import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprDocumentPre;
+import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprMedicationRequestPre;
 import org.projecthusky.fhir.emed.ch.epr.validator.ChEmedEprValidator;
 
 import javax.annotation.concurrent.ThreadSafe;
@@ -144,15 +155,31 @@ public class ChEmedEprParser {
                 preferTypes.add(ChEmedEprMedicationStatementMtp.class);
             }
             case PRE -> {
+                preferTypes.add(ChEmedEprDocumentPre.class);
+                preferTypes.add(ChEmedEprCompositionPre.class);
+                preferTypes.add(ChEmedEprMedicationRequestPre.class);
             }
             case DIS -> {
+                preferTypes.add(ChEmedEprDocumentDis.class);
+                preferTypes.add(ChEmedEprCompositionDis.class);
+                preferTypes.add(ChEmedEprMedicationDispenseDis.class);
             }
             case PADV -> {
+                preferTypes.add(ChEmedEprDocumentPadv.class);
+                preferTypes.add(ChEmedEprCompositionPadv.class);
+                preferTypes.add(ChEmedEprObservationPadv.class);
             }
             case PML -> {
+                preferTypes.add(ChEmedEprDocumentPml.class);
+                preferTypes.add(ChEmedEprCompositionPml.class);
                 preferTypes.add(ChEmedEprMedicationStatementPml.class);
+                preferTypes.add(ChEmedEprMedicationRequestPml.class);
+                preferTypes.add(ChEmedEprMedicationDispensePml.class);
+                preferTypes.add(ChEmedEprObservationPml.class);
             }
             case PMLC -> {
+                preferTypes.add(ChEmedEprDocumentPmlc.class);
+                preferTypes.add(ChEmedEprCompositionPmlc.class);
                 preferTypes.add(ChEmedEprMedicationStatementPmlc.class);
             }
         }

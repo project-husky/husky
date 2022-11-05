@@ -26,7 +26,7 @@ import java.util.UUID;
  *
  * @author Quentin Ligier
  **/
-public abstract class ChEmedEprMedicationStatement extends MedicationStatement {
+public abstract class ChEmedEprMedicationStatement extends MedicationStatement implements ChEmedEprEntry {
     // Here goes everything common to MedicationStatement (MTP), (PML) and (PMLC)
 
     // TODO Dosage

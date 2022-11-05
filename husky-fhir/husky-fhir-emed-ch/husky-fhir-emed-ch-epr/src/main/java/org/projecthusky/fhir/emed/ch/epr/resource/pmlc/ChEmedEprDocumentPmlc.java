@@ -11,12 +11,13 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.pmlc;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
+import org.hl7.fhir.r4.model.Resource;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 
 import java.io.Serial;
-import java.util.Date;
+import java.time.Instant;
 import java.util.UUID;
 
 /**
@@ -37,13 +38,13 @@ public class ChEmedEprDocumentPmlc extends ChEmedEprDocument {
     }
 
     /**
-     * Constructor.
+     * Constructor that pre-populates fields.
      *
      * @param documentId The document ID.
      * @param timestamp  The document creation date.
      */
     public ChEmedEprDocumentPmlc(final UUID documentId,
-                                 final Date timestamp) {
+                                 final Instant timestamp) {
         super(documentId, timestamp);
     }
 
@@ -84,6 +85,15 @@ public class ChEmedEprDocumentPmlc extends ChEmedEprDocument {
         }
         throw new InvalidEmedContentException(
                 "The ChEmedEprCompositionPmlc is missing in the document Bundle");
+    }
+
+    /**
+     * Creates a new entry and adds the given resource to it.
+     *
+     * @return the created entry.
+     */
+    public BundleEntryComponent addEntryResource(final Resource resource) {
+        return this.addEntry().setResource(resource);
     }
 
     // TODO

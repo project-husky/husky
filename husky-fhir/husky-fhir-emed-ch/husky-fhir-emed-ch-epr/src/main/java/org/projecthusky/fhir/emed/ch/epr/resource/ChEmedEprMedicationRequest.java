@@ -21,7 +21,7 @@ import java.util.UUID;
  *
  * @author Ronaldo Loureiro
  **/
-public abstract class ChEmedEprMedicationRequest extends MedicationRequest {
+public abstract class ChEmedEprMedicationRequest extends MedicationRequest implements ChEmedEprEntry {
 
     // TODO Update Dosage
     @Child(name = "treatmentplan")
@@ -69,7 +69,8 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest {
      */
     @ExpectsValidResource
     public ChEmedEprMedication resolveMedicationReference() throws InvalidEmedContentException {
-        if (!this.hasMedicationReference()) throw new InvalidEmedContentException("The medication reference is missing.");
+        if (!this.hasMedicationReference())
+            throw new InvalidEmedContentException("The medication reference is missing.");
         final var resource = this.getMedicationReference().getResource();
         if (resource instanceof ChEmedEprMedication chMedication) {
             return chMedication;
@@ -88,7 +89,7 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest {
         if (!this.hasSubject()) throw new InvalidEmedContentException("The patient is missing.");
         final var resource = this.getSubject().getResource();
         if (resource instanceof ChCorePatientEpr chPatient) {
-            return  chPatient;
+            return chPatient;
         }
         throw new InvalidEmedContentException("The patient resource isn't of the right type.");
     }

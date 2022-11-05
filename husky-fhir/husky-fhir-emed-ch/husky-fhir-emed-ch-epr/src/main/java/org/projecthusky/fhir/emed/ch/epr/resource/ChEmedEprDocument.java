@@ -19,7 +19,8 @@ import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 
-import java.util.Date;
+import java.sql.Date;
+import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -31,21 +32,20 @@ import java.util.UUID;
 public abstract class ChEmedEprDocument extends Bundle {
 
     /**
-     * Empty constructor.
+     * Empty constructor for the parser.
      */
     protected ChEmedEprDocument() {
         super();
-        this.setType(BundleType.DOCUMENT);
     }
 
     /**
-     * Constructor.
+     * Constructor that pre-populates fields.
      *
      * @param documentId The document ID.
      * @param timestamp  The document creation date.
      */
     protected ChEmedEprDocument(final UUID documentId,
-                                final Date timestamp) {
+                                final Instant timestamp) {
         super();
         Objects.requireNonNull(documentId, "documentId shall not be null in ChEmedEprDocument()");
         Objects.requireNonNull(timestamp, "timestamp shall not be null in ChEmedEprDocument()");
@@ -53,7 +53,7 @@ public abstract class ChEmedEprDocument extends Bundle {
         this.setIdentifier(new Identifier());
         this.getIdentifier().setSystem(FhirSystem.URI);
         this.getIdentifier().setValue(Uuids.URN_PREFIX + documentId);
-        this.setTimestamp(timestamp);
+        this.setTimestamp(Date.from(timestamp));
     }
 
     /**

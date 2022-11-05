@@ -22,8 +22,8 @@ import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprComposition;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
 import org.projecthusky.fhir.emed.ch.epr.util.References;
 
+import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,18 +40,16 @@ public class ChEmedEprCompositionPadv extends ChEmedEprComposition {
      */
     public ChEmedEprCompositionPadv() {
         super();
-        this.getType().addCoding(new Coding(FhirSystem.SNOMEDCT, "419891008", "Record artifact (record artifact)"));
-        this.setTitle("TODO");
     }
 
     /**
-     * Constructor
+     * Constructor that pre-populates fields.
      *
      * @param compositionId Version-independent identifier for the Composition
      * @param date          The document's creation date and time
      */
     public ChEmedEprCompositionPadv(final UUID compositionId,
-                                    final Date date,
+                                    final Instant date,
                                     final CommonLanguages language) {
         super(compositionId, date, language);
         this.getType().addCoding(new Coding(FhirSystem.SNOMEDCT, "419891008", "Record artifact (record artifact)"));
@@ -62,7 +60,8 @@ public class ChEmedEprCompositionPadv extends ChEmedEprComposition {
      * Resolves the authors of the document ({@link ChEmedEprPractitionerRole} | {@link ChCorePatientEpr}).
      *
      * @return the list with the authors of the document.
-     * @throws InvalidEmedContentException if no author is specified or if an author is not of type {@link ChEmedEprPractitionerRole} or {@link ChCorePatientEpr}.
+     * @throws InvalidEmedContentException if no author is specified or if an author is not of type
+     *                                     {@link ChEmedEprPractitionerRole} or {@link ChCorePatientEpr}.
      */
     @ExpectsValidResource
     public List<DomainResource> resolveAuthors() throws InvalidEmedContentException {
@@ -91,8 +90,8 @@ public class ChEmedEprCompositionPadv extends ChEmedEprComposition {
         if (section == null) {
             section = new SectionComponent();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
-                    PHARMACEUTICAL_ADVICE_SECTION_CODE_VALUE,
-                    "Medication pharmaceutical advice.brief"));
+                                                   PHARMACEUTICAL_ADVICE_SECTION_CODE_VALUE,
+                                                   "Medication pharmaceutical advice.brief"));
         }
         return section;
     }
@@ -126,7 +125,7 @@ public class ChEmedEprCompositionPadv extends ChEmedEprComposition {
         if (section == null) {
             section = new SectionComponent();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
-                    ANNOTATION_SECTION_CODE_VALUE, "Annotation comment"));
+                                                   ANNOTATION_SECTION_CODE_VALUE, "Annotation comment"));
         }
         return section;
     }

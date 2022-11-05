@@ -23,7 +23,8 @@ public class Uuids {
     /**
      * This class is not instantiable.
      */
-    private Uuids() {}
+    private Uuids() {
+    }
 
     /**
      * Pattern that matches a UUID.
@@ -55,7 +56,6 @@ public class Uuids {
     }
 
     public static UUID parseUrnEncoded(final String urn) {
-        final var uuid = normalize(urn);
-        return UUID.fromString(uuid);
+        return UUID.fromString(normalize(urn));
     }
 }

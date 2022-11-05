@@ -24,6 +24,7 @@ import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChExtEprDataEnterer;
 import org.projecthusky.fhir.emed.ch.epr.util.References;
 
+import java.time.Instant;
 import java.util.*;
 
 /**
@@ -51,8 +52,8 @@ public abstract class ChEmedEprComposition extends Composition {
     protected UnsignedIntType versionNumber;
 
     /**
-     * Extension for a list of recipients of this document (corresponds to the addressee of a letter - person or organization),
-     * equivalent to CDA informationRecipient.
+     * Extension for a list of recipients of this document (corresponds to the addressee of a letter - person or
+     * organization), equivalent to CDA informationRecipient.
      */
     @Nullable
     @Child(name = "informationRecipient", min = 1, max = Child.MAX_UNLIMITED)
@@ -72,6 +73,18 @@ public abstract class ChEmedEprComposition extends Composition {
      */
     public ChEmedEprComposition() {
         super();
+    }
+
+    /**
+     * Constructor that pre-populates fields.
+     *
+     * @param compositionId Version-independent identifier for the Composition
+     * @param date          The document's creation date and time
+     */
+    public ChEmedEprComposition(final UUID compositionId,
+                                final Instant date,
+                                final CommonLanguages language) {
+        super();
         this.setVersionNumber(1);
         this.setStatus(CompositionStatus.FINAL);
         this.setConfidentiality(DocumentConfidentiality.N);
@@ -79,19 +92,8 @@ public abstract class ChEmedEprComposition extends Composition {
         this.getConfidentialityElement().addExtension(
                 "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-confidentialitycode",
                 new CodeableConcept().addCoding(confidentialityCode));
-    }
-
-    /**
-     * Constructor
-     *
-     * @param compositionId Version-independent identifier for the Composition
-     * @param date          The document's creation date and time
-     */
-    public ChEmedEprComposition(final UUID compositionId,
-                                final Date date,
-                                final CommonLanguages language) {
         this.getIdentifier().setSystem(FhirSystem.URI).setValue(Uuids.URN_PREFIX + compositionId);
-        this.setDate(date);
+        this.setDate(Date.from(date));
         this.setLanguage(language.getCodeValue());
     }
 
@@ -107,7 +109,7 @@ public abstract class ChEmedEprComposition extends Composition {
                 .map(BaseReference::getResource)
                 .map(ChCorePatientEpr.class::cast)
                 .orElseThrow(() -> new InvalidEmedContentException("The subject reference is missing or of wrong " +
-                        "type"));
+                                                                           "type"));
     }
 
     /**
@@ -123,7 +125,7 @@ public abstract class ChEmedEprComposition extends Composition {
                 .map(BaseReference::getResource)
                 .map(ChEmedOrganization.class::cast)
                 .orElseThrow(() -> new InvalidEmedContentException("The custodian reference is missing or of wrong " +
-                        "type"));
+                                                                           "type"));
     }
 
     /**
@@ -269,7 +271,7 @@ public abstract class ChEmedEprComposition extends Composition {
         if (section == null) {
             section = new SectionComponent();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
-                    ORIGINAL_REPR_SECTION_CODE_VALUE, "Clinical presentation"));
+                                                   ORIGINAL_REPR_SECTION_CODE_VALUE, "Clinical presentation"));
         }
         return section;
     }

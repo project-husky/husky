@@ -12,7 +12,6 @@ package org.projecthusky.fhir.emed.ch.common.resource;
 
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
-import org.apache.tomcat.jni.Local;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.*;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;

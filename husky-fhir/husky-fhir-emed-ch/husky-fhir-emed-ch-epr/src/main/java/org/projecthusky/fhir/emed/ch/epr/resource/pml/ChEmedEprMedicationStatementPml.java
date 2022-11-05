@@ -22,7 +22,6 @@ import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.epr.enums.SubstanceAdministrationSubstitutionCode;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationStatement;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
-import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprMedicationStatementPmlc;
 
 import java.util.UUID;
 
@@ -34,8 +33,8 @@ import java.util.UUID;
 public class ChEmedEprMedicationStatementPml extends ChEmedEprMedicationStatement {
 
     /**
-     * Whether the dispenser can substitute the prescribed medicine/package by another that is deemed equivalent,
-     * for medical or logistical reasons. By default, substitution is authorized.
+     * Whether the dispenser can substitute the prescribed medicine/package by another that is deemed equivalent, for
+     * medical or logistical reasons. By default, substitution is authorized.
      */
     @Child(name = "substitution")
     @Extension(url = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-substitution", definedLocally = false)
@@ -50,7 +49,14 @@ public class ChEmedEprMedicationStatementPml extends ChEmedEprMedicationStatemen
     protected Reference authorDocument;
 
     /**
-     * Constructor
+     * Empty constructor for the parser.
+     */
+    public ChEmedEprMedicationStatementPml() {
+        super();
+    }
+
+    /**
+     * Constructor that pre-populates fields
      *
      * @param entryUuid
      */

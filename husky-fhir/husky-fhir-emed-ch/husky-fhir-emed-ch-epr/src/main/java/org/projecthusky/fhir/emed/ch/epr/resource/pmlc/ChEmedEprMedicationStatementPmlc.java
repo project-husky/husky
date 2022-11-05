@@ -46,7 +46,14 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
     protected Reference authorDocument;
 
     /**
-     * Constructor
+     * Empty constructor for the parser.
+     */
+    public ChEmedEprMedicationStatementPmlc() {
+        super();
+    }
+
+    /**
+     * Constructor that pre-populates fields.
      *
      * @param entryUuid the uuid of the medication statement.
      */

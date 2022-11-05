@@ -45,7 +45,7 @@ public class ChEmedEprMedicationStatementMtp extends ChEmedEprMedicationStatemen
     }
 
     /**
-     * Constructor
+     * Constructor that pre-populates fields.
      *
      * @param entryUuid the uuid of the medication statement.
      */
