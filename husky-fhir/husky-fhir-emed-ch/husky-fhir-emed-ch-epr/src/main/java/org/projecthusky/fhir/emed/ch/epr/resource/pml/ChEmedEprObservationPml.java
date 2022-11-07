@@ -1,7 +1,18 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.pml;
 
+import ca.uhn.fhir.model.api.annotation.Child;
+import ca.uhn.fhir.model.api.annotation.Extension;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.DomainResource;
+import org.hl7.fhir.r4.model.Reference;
+import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedPadvEntryType;
+import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprObservation;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
+import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprMedicationStatementPmlc;
+import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 import java.util.UUID;
 
@@ -11,6 +22,15 @@ import java.util.UUID;
  * @author Ronaldo Loureiro
  **/
 public class ChEmedEprObservationPml extends ChEmedEprObservation {
+
+    /**
+     * Author of the original document if different from the author of the medical decision (Observation.performer),
+     * see also 'Guidance - Different Authors'
+     */
+    @Nullable
+    @Child(name = "auhtorDocument")
+    @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author")
+    protected Reference authorDocument;
 
     /**
      * Empty constructor for the parser.
@@ -31,4 +51,66 @@ public class ChEmedEprObservationPml extends ChEmedEprObservation {
     }
 
     // TODO
+
+    /**
+     * Gets the author document element in the observation.
+     *
+     * @return the author document element.
+     */
+    public Reference getAuthorDocumentElement() {
+        if (this.authorDocument == null) {
+            this.authorDocument = new Reference();
+        }
+        return this.authorDocument;
+    }
+
+    /**
+     * Gets the last author document resource in the observation if available.
+     *
+     * @return the author document resource or {@code null}.
+     * @throws InvalidEmedContentException if the author document resource is invalid.
+     */
+    @Nullable
+    @ExpectsValidResource
+    public DomainResource getAuthorDocument() throws InvalidEmedContentException {
+        final var resource = getAuthorDocumentElement().getResource();
+        if (resource == null) return null;
+
+        if (resource instanceof ChCorePatientEpr || resource instanceof ChEmedEprPractitionerRole) {
+            return (DomainResource) resource;
+        }
+        throw new InvalidEmedContentException("The last author of the original document is invalid");
+    }
+
+    /**
+     * Sets the last author document of the observation.
+     *
+     * @param authorDocument the patient.
+     * @return this.
+     */
+    public ChEmedEprObservationPml setAuthorDocument(final ChCorePatientEpr authorDocument) {
+        this.authorDocument = References.createReference(authorDocument);
+        return this;
+    }
+
+    /**
+     * Sets the last author document of the observation.
+     *
+     * @param authorDocument the practitioner role.
+     * @return this.
+     */
+    public ChEmedEprObservationPml setAuthorDocument(final ChEmedEprPractitionerRole authorDocument) {
+        this.authorDocument = References.createReference(authorDocument);
+        return this;
+    }
+
+    /**
+     * Returns whether author document exists.
+     *
+     * @return {@code true} if the author document exists, {@code false} otherwise.
+     */
+    public boolean hasAuthorDocument() {
+        return this.authorDocument != null && this.authorDocument.getResource() != null;
+    }
+
 }

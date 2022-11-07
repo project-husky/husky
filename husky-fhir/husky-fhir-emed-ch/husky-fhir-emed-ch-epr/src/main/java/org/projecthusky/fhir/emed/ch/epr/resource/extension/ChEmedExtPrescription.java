@@ -10,17 +10,18 @@ import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 
 import java.util.UUID;
 
+
 /**
- * The HAPI custom structure for CH-EMED-Ext TreatmentPlan.
- * Extension to represent the reference to the Medication Treatment Plan document.
- * URL : <a href="https://build.fhir.org/ig/hl7ch/ch-emed//StructureDefinition-ch-emed-ext-treatmentplan.html">...</a>
+ * The HAPI custom structure for CH-EMED-Ext Prescription.
+ * Extension to represent the reference to the Medication Prescription document.
+ * URL : <a href="https://build.fhir.org/ig/hl7ch/ch-emed//StructureDefinition-ch-emed-ext-prescription.html">...</a>
  *
  * @author Ronaldo Loureiro
  */
-public class ChEmedExtTreatmentPlan extends Extension implements ChEmedExtReference {
+public class ChEmedExtPrescription extends Extension implements ChEmedExtReference {
 
     /**
-     * ID of the Medication Treatment Plan document.
+     * ID of the Medication Prescription document.
      */
     @Child(name = "id")
     @ca.uhn.fhir.model.api.annotation.Extension(url = "id", definedLocally = false)
@@ -36,17 +37,17 @@ public class ChEmedExtTreatmentPlan extends Extension implements ChEmedExtRefere
     /**
      * Empty constructor
      */
-    public ChEmedExtTreatmentPlan() {
+    public ChEmedExtPrescription() {
         super();
     }
 
     /**
      * Constructor
      *
-     * @param id the ID of the Medication Treatment Plan document.
+     * @param id the ID of the Medication Prescription document.
      * @param externalDocumentId the ID of the external document.
      */
-    public ChEmedExtTreatmentPlan(final UUID id,
+    public ChEmedExtPrescription(final UUID id,
                                   final UUID externalDocumentId) {
         super();
         this.setIdentifier(id);
@@ -54,14 +55,14 @@ public class ChEmedExtTreatmentPlan extends Extension implements ChEmedExtRefere
     }
 
     /**
-     * Resolves the ID of the Medication Treatment Plan document is missing.
+     * Resolves the ID of the Medication Prescription document is missing.
      *
-     * @return the ID of the Medication Treatment Plan document is missing.
-     * @throws InvalidEmedContentException if the ID of the Medication Treatment Plan document is missing.
+     * @return the ID of the Medication Prescription document is missing.
+     * @throws InvalidEmedContentException if the ID of the Medication Prescription document is missing.
      */
     @ExpectsValidResource
     public UUID resolveIdentifier() throws InvalidEmedContentException {
-        if (!this.hasId()) throw new InvalidEmedContentException("The ID of the Medication Treatment Plan document is missing.");
+        if (!this.hasId()) throw new InvalidEmedContentException("The ID of the Medication Prescription document is missing.");
         return Uuids.parseUrnEncoded(this.identifier.getValue());
     }
 
@@ -78,12 +79,12 @@ public class ChEmedExtTreatmentPlan extends Extension implements ChEmedExtRefere
     }
 
     /**
-     * Sets the ID of the Medication Treatment Plan document, if it's already exists, it's replaced.
+     * Sets the ID of the Medication Prescription document, if it's already exists, it's replaced.
      *
-     * @param identifier the ID of the Medication Treatment Plan document.
+     * @param identifier the ID of the Medication Prescription document.
      * @return this.
      */
-    public ChEmedExtTreatmentPlan setIdentifier(final UUID identifier) {
+    public ChEmedExtPrescription setIdentifier(final UUID identifier) {
         if (this.identifier == null) {
             this.identifier = new Identifier();
             this.identifier.setSystem(FhirSystem.URI);
@@ -98,7 +99,7 @@ public class ChEmedExtTreatmentPlan extends Extension implements ChEmedExtRefere
      * @param externalDocumentId the ID of the external document.
      * @return this.
      */
-    public ChEmedExtTreatmentPlan setExternalDocumentId(final UUID externalDocumentId) {
+    public ChEmedExtPrescription setExternalDocumentId(final UUID externalDocumentId) {
         if (this.externalDocumentId == null) {
             this.externalDocumentId = new Identifier();
             this.externalDocumentId.setSystem(FhirSystem.URI);
@@ -108,9 +109,9 @@ public class ChEmedExtTreatmentPlan extends Extension implements ChEmedExtRefere
     }
 
     /**
-     * Returns whether ID of the Medication Treatment Plan document exists.
+     * Returns whether the ID of the Medication Prescription document exists.
      *
-     * @return {@code true} if the ID of the Medication Treatment Plan document exists, {@code false} otherwise.
+     * @return {@code true} if the ID of the Medication Prescription document exists, {@code false} otherwise.
      */
     public boolean hasId() {
         return this.identifier != null && !this.identifier.isEmpty();

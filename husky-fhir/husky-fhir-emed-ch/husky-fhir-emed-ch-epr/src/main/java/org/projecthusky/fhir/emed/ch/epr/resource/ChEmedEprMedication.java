@@ -21,6 +21,7 @@ import org.projecthusky.fhir.emed.ch.common.enums.PharmaceuticalDoseFormEdqm;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChEmedOrganization;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
+import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedRatioWithEmedUnits;
 
 /**
  * The HAPI custom structure for CH-EMED-EPR Medication.
@@ -195,7 +196,8 @@ public class ChEmedEprMedication extends Medication {
      * @param activeIngredient active ingredient.
      * @return this.
      */
-    public ChEmedEprMedication addIngredient(final ActivePharmaceuticalIngredient activeIngredient) {
+    public ChEmedEprMedication addIngredient(final ActivePharmaceuticalIngredient activeIngredient,
+                                             @Nullable final ChEmedRatioWithEmedUnits strength) {
         final var coding = new Coding()
                 .setSystemElement(UriType.fromOid(activeIngredient.getCodeSystemId()))
                 .setCode(activeIngredient.getCodeValue())
@@ -204,13 +206,12 @@ public class ChEmedEprMedication extends Medication {
         final var item = new CodeableConcept(coding)
                 .setText(activeIngredient.getDisplayName());
 
-        final var medicationIngredientComponent = new MedicationIngredientComponent();
-        medicationIngredientComponent.setIsActive(true); // TODO ?
-        medicationIngredientComponent.setItem(item);
+        this.addIngredient()
+                .setIsActive(true)
+                .setItem(item)
+                .setStrength(strength);
 
-        // TODO strength
 
-        this.addIngredient(medicationIngredientComponent);
         return this;
     }
 }

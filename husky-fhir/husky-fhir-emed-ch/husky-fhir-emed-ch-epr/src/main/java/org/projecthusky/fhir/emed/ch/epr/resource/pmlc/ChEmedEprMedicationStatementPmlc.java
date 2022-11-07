@@ -19,7 +19,10 @@ import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationStatement;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprObservation;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
+import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
+import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 import java.util.UUID;
 
@@ -30,17 +33,18 @@ import java.util.UUID;
  **/
 public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStatement {
 
-    // TODO: add support for extensions treatmentPlan
-
-    // TODO CH EMED Extension MTP ?
-  /*  @Child(name = "treatmentPlan")
+    /**
+     * Reference to the MTP that introduced this medication in the treatment plan
+     */
+    @Child(name = "treatmentPlan")
     @Extension(url = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan", definedLocally = false)
-    protected ? treatmentPlan;*/
+    protected ChEmedExtTreatmentPlan treatmentPlan;
 
     /**
      * "Last" author of the original document if different from the author of the medical decision
      * (MedicationStatement.informationSource)
      */
+    @Nullable
     @Child(name = "auhtorDocument")
     @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author")
     protected Reference authorDocument;
@@ -62,18 +66,16 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
     }
 
     /**
-     * Gets the treatment plan element in the medication statement.
+     * Gets the treatment plan element. If it doesn't exist, it's created.
      *
      * @return the treatment plan element.
-     * @throws InvalidEmedContentException if the reference to the MTP that introduced this medication in the treatment plan is missing.
      */
-/*    @ExpectsValidResource
-    public ? getTreatmentPlanElement() throws InvalidEmedContentException {
-        if (this.treatmentPlan != null) {
-            return treatmentPlan;
+    public ChEmedExtTreatmentPlan getTreatmentPlanElement() {
+        if (this.treatmentPlan == null) {
+            this.treatmentPlan = new ChEmedExtTreatmentPlan();
         }
-        throw new InvalidEmedContentException("The reference to the MTP that introduced this medication in the treatment plan is missing.");
-    }*/
+        return this.treatmentPlan;
+    }
 
     /**
      * Gets the author document element in the medication statement.
@@ -111,8 +113,8 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
      * @param authorDocument the patient.
      * @return this.
      */
-    public ChEmedEprMedicationStatementPmlc setAuthorDocument(ChCorePatientEpr authorDocument) {
-        this.getAuthorDocumentElement().setResource(authorDocument);
+    public ChEmedEprMedicationStatementPmlc setAuthorDocument(final ChCorePatientEpr authorDocument) {
+        this.authorDocument = References.createReference(authorDocument);
         return this;
     }
 
@@ -122,8 +124,19 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
      * @param authorDocument the practitioner role.
      * @return this.
      */
-    public ChEmedEprMedicationStatementPmlc setAuthorDocument(ChEmedEprPractitionerRole authorDocument) {
-        this.getAuthorDocumentElement().setResource(authorDocument);
+    public ChEmedEprMedicationStatementPmlc setAuthorDocument(final ChEmedEprPractitionerRole authorDocument) {
+        this.authorDocument = References.createReference(authorDocument);
+        return this;
+    }
+
+    /**
+     * Sets the treatment plan reference.
+     *
+     * @param treatmentPlan the treatment plan reference.
+     * @return this.
+     */
+    public ChEmedEprMedicationStatementPmlc setTreatmentPlanElement(final ChEmedExtTreatmentPlan treatmentPlan) {
+        this.treatmentPlan = treatmentPlan;
         return this;
     }
 
@@ -134,5 +147,14 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
      */
     public boolean hasAuthorDocument() {
         return this.authorDocument != null && this.authorDocument.getResource() != null;
+    }
+
+    /**
+     * Returns whether the treatment plan reference.
+     *
+     * @return {@code true} if the treatment plan reference exists, {@code false} otherwise.
+     */
+    public boolean hasTreatmentPlan() {
+        return this.treatmentPlan != null;
     }
 }

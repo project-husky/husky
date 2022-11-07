@@ -8,40 +8,17 @@ import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import java.util.List;
 
 /**
- * The HAPI custom structure for CH-EMED-DosageSplitMedicationRequest.
+ * The HAPI custom structure for CH-EMED-DosageMedicationRequest.
  *
  * @author Ronaldo Loureiro
  **/
-public class ChEmedDosageSplitMedicationRequest extends ChEmedDosageSplit {
+public class ChEmedDosageMedicationRequest extends ChEmedDosage {
 
     /**
      * Empty constructor for the parser
      */
-    public ChEmedDosageSplitMedicationRequest() {
+    public ChEmedDosageMedicationRequest() {
         super();
-    }
-
-    /**
-     * Constructor
-     *
-     * @param sequence the order of the dosage instructions
-     */
-    public ChEmedDosageSplitMedicationRequest(final int sequence) {
-        super();
-        this.setSequence(sequence);
-    }
-
-    /**
-     * Gets the order of the dosage instructions.
-     *
-     * @return the order of the dosage instructions.
-     * @throws InvalidEmedContentException if the order of the dosage instructions is less than 1.
-     */
-    @Override
-    @ExpectsValidResource
-    public int getSequence() throws InvalidEmedContentException {
-        if (super.getSequence() < 1) throw new InvalidEmedContentException("The order of the dosage instructions is is less than 1.");
-        return super.getSequence();
     }
 
     /**
@@ -55,7 +32,7 @@ public class ChEmedDosageSplitMedicationRequest extends ChEmedDosageSplit {
     public List<EventTiming> resolveWhen() throws InvalidEmedContentException {
         final var eventTimingList = super.resolveWhen();
         if (eventTimingList == null) {
-            throw new InvalidEmedContentException("ChEmedDosageSplitMedicationRequest requires a minimum one code for time period of occurrence.");
+            throw new InvalidEmedContentException("ChEmedDosageMedicationRequest requires a minimum one code for time period of occurrence.");
         }
         return eventTimingList;
     }

@@ -9,11 +9,12 @@ import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
-import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosageNormalMedicationRequest;
+import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosageMedicationRequest;
 import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosageSplitMedicationRequest;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
 import org.projecthusky.fhir.emed.ch.epr.util.References;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -23,7 +24,6 @@ import java.util.UUID;
  **/
 public abstract class ChEmedEprMedicationRequest extends MedicationRequest implements ChEmedEprEntry {
 
-    // TODO Update Dosage
     @Child(name = "treatmentplan")
     @Extension(url = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan", definedLocally = false)
     protected ChEmedExtTreatmentPlan treatmentPlan;
@@ -38,7 +38,7 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
     }
 
     /**
-     * Constructor
+     * Constructor that pre-populates fields.
      *
      * @param entryUuid the medication request id.
      */
@@ -92,6 +92,33 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
             return chPatient;
         }
         throw new InvalidEmedContentException("The patient resource isn't of the right type.");
+    }
+
+    /**
+     * Resolves the base entry of the dosage instruction.
+     *
+     * @return the base entry of the dosage instruction
+     * @throws InvalidEmedContentException if the base entry of the dosage instruction is missing.
+     */
+    @ExpectsValidResource
+    public ChEmedDosageMedicationRequest resolveDosageBaseEntry() throws InvalidEmedContentException{
+        return this.getDosageInstruction().stream()
+                .filter(ChEmedDosageMedicationRequest.class::isInstance)
+                .map(ChEmedDosageMedicationRequest.class::cast)
+                .findAny()
+                .orElseThrow(() -> new InvalidEmedContentException("Base entry of the dosage instruction is missing."));
+    }
+
+    /**
+     * Gets additional entries of the dosage instruction
+     *
+     * @return additional entries of the dosage instruction.
+     */
+    public List<ChEmedDosageSplitMedicationRequest> getDosageAdditionalEntry() {
+        return this.getDosageInstruction().stream()
+                .filter(ChEmedDosageSplitMedicationRequest.class::isInstance)
+                .map(ChEmedDosageSplitMedicationRequest.class::cast)
+                .toList();
     }
 
     /**
@@ -156,34 +183,31 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
     }
 
     /**
-     * Sets structured normal dosing. If one or more dosages exist, they will be replaced.
+     * Sets the base entry of the dosage instruction. If it already exists, it will be replaced.
      *
-     * @param dosageStructuredNormal the structured normal dosing.
+     * @param dosageBaseEntry the base entry of the dosage instruction.
      * @return this.
      */
-    public ChEmedEprMedicationRequest setDosageStructuredNormal(final ChEmedDosageNormalMedicationRequest dosageStructuredNormal) {
-        if (!this.getDosageInstruction().isEmpty()) {
-            this.getDosageInstruction().clear();
+    public ChEmedEprMedicationRequest setDosageBaseEntry(final ChEmedDosageMedicationRequest dosageBaseEntry) {
+        for (int i = 0; i < this.getDosageInstruction().size(); i++) {
+            if (this.getDosageInstruction().get(i) instanceof ChEmedDosageMedicationRequest) {
+                this.getDosageInstruction().set(i, dosageBaseEntry);
+                return this;
+            }
         }
-        this.getDosageInstruction().add(dosageStructuredNormal);
 
+        this.getDosageInstruction().add(dosageBaseEntry);
         return this;
     }
 
     /**
-     * Sets structured split dosing. If one or more dosages exist, they will be replaced.
+     * Adds additional entry of the dosage instruction.
      *
-     * @param dosageStructuredSplit the structured split dosing.
+     * @param dosageAdditionalEntry additional entry of the dosage instruction.
      * @return this.
      */
-    public ChEmedEprMedicationRequest addDosageStructuredSplit(final ChEmedDosageSplitMedicationRequest dosageStructuredSplit) {
-        final var dosageInstructions = this.getDosageInstruction();
-        if (!dosageInstructions.isEmpty()) {
-            if (!(dosageInstructions.get(0) instanceof ChEmedDosageSplitMedicationRequest)) {
-                dosageInstructions.clear();
-            }
-        }
-        dosageInstructions.add(dosageStructuredSplit);
+    public ChEmedEprMedicationRequest addDosageAdditionalEntry(final ChEmedDosageSplitMedicationRequest dosageAdditionalEntry) {
+        this.getDosageInstruction().add(dosageAdditionalEntry);
         return this;
     }
 
@@ -197,20 +221,22 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
     }
 
     /**
-     * Returns whether the normal structured dosing.
+     * Returns whether the base entry of the dosage instruction.
      *
-     * @return {@code true} if the normal structured dosing exists, {@code false} otherwise.
+     * @return {@code true} if the base entry of the dosage instruction exists, {@code false} otherwise.
      */
-    public boolean hasDosageStructuredNormal() {
-        return this.hasDosageInstruction() && this.getDosageInstructionFirstRep() instanceof ChEmedDosageNormalMedicationRequest;
+    public boolean hasDosageBaseEntry() {
+        return this.hasDosageInstruction() && this.getDosageInstruction().stream()
+                .anyMatch(ChEmedDosageMedicationRequest.class::isInstance);
     }
 
     /**
-     * Returns whether the split structured dosing.
+     * Returns whether additional entry of the dosage instruction.
      *
-     * @return {@code true} if the split structured dosing exists, {@code false} otherwise.
+     * @return {@code true} if additional entry of the dosage instruction exists, {@code false} otherwise.
      */
-    public boolean hasDosageStructuredSplit() {
-        return this.hasDosageInstruction() && this.getDosageInstructionFirstRep() instanceof ChEmedDosageSplitMedicationRequest;
+    public boolean hasDosageAdditionalEntry() {
+        return this.hasDosageInstruction() && this.getDosageInstruction().stream()
+                .anyMatch(ChEmedDosageSplitMedicationRequest.class::isInstance);
     }
 }

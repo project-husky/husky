@@ -18,8 +18,7 @@ import java.util.List;
  *
  * @author Ronaldo Loureiro
  **/
-public abstract class ChEmedDosage extends Dosage {
-    // TODO doseAndRate
+public class ChEmedDosage extends Dosage {
 
     /**
      * Empty constructor
@@ -73,6 +72,51 @@ public abstract class ChEmedDosage extends Dosage {
     }
 
     /**
+     * Resolve the dose quantity.
+     *
+     * @return the dose quantity or {@code null}.
+     * @throws InvalidEmedContentException if the dose quantity isn't of the right type.
+     */
+    @Nullable
+    @ExpectsValidResource
+    public ChEmedQuantityWithEmedUnits resolveDoseQuantity() throws InvalidEmedContentException {
+        if (!this.hasDoseAndRate() || !this.getDoseAndRateFirstRep().hasDoseQuantity()) return null;
+        final var doseQuantity = this.getDoseAndRateFirstRep().getDoseQuantity();
+        if (doseQuantity instanceof ChEmedQuantityWithEmedUnits chDoseQuantity) {
+            return chDoseQuantity;
+        }
+        throw new InvalidEmedContentException("The dose quantity isn't of the right type.");
+    }
+
+    /**
+     * Resolve the dose range.
+     *
+     * @return the dose range or {@code null}.
+     * @throws InvalidEmedContentException if the dose range isn't of the right type.
+     */
+    @Nullable
+    @ExpectsValidResource
+    public ChEmedRangeWithEmedUnits resolveDoseRange() throws InvalidEmedContentException {
+        if (!this.hasDoseAndRate() || !this.getDoseAndRateFirstRep().hasDoseRange()) return null;
+        final var doseRange = this.getDoseAndRateFirstRep().getDoseRange();
+        if (doseRange instanceof ChEmedRangeWithEmedUnits chDoseRange) {
+            return chDoseRange;
+        }
+        throw new InvalidEmedContentException("The dose range isn't of the right type.");
+    }
+
+    /**
+     * Gets the start and/or end of treatment. If it doesn't exist, it's created.
+     *
+     * @return the start and/or end of treatment.
+     */
+    public Period getBoundsPeriod() {
+        return this.getTiming()
+                .getRepeat()
+                .getBoundsPeriod();
+    }
+
+    /**
      * Sets patient medication instructions.
      *
      * @param patientInstruction Instructions in terms that are understood by the patient or consumer.
@@ -113,6 +157,28 @@ public abstract class ChEmedDosage extends Dosage {
     }
 
     /**
+     * Sets the dose quantity.
+     *
+     * @param doseQuantity the dose quantity.
+     * @return this.
+     */
+    public ChEmedDosage setDoseQuantity(final ChEmedQuantityWithEmedUnits doseQuantity) {
+        this.getDoseAndRateFirstRep().setDose(doseQuantity);
+        return this;
+    }
+
+    /**
+     * Sets the dose range.
+     *
+     * @param doseRange the dose range.
+     * @return this.
+     */
+    public ChEmedDosage setDoseRange(final ChEmedQuantityWithEmedUnits doseRange) {
+        this.getDoseAndRateFirstRep().setDose(doseRange);
+        return this;
+    }
+
+    /**
      * Adds an event timing for time period occurrence.
      *
      * @param timing the event timing.
@@ -124,5 +190,27 @@ public abstract class ChEmedDosage extends Dosage {
                 .addWhen(Timing.EventTiming.fromCode(timing.getCodeValue()));
 
         return this;
+    }
+
+    /**
+     * Return whether a code for time period of occurrence.
+     *
+     * @return {@code true} if a code for time period of occurrence exists, {@code false} otherwise.
+     */
+    public boolean hasWhen() {
+        return this.getTiming()
+                .getRepeat()
+                .hasWhen();
+    }
+
+    /**
+     * Return whether the start and/or end of treatment.
+     *
+     * @return {@code true} if the start and/or end of treatment exists, {@code false} otherwise.
+     */
+    public boolean hasBoundsPeriod() {
+        return this.getTiming()
+                .getRepeat()
+                .hasBoundsPeriod();
     }
 }

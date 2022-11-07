@@ -7,6 +7,7 @@ import org.hl7.fhir.r4.model.Resource;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedication;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
+import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprMedicationStatementMtp;
 
 import java.util.List;
 
@@ -14,7 +15,6 @@ import java.util.List;
  * Reference Utilities
  *
  * @author Ronaldo Loureiro
- * // TODO reference.setResource ?
  */
 public class References {
 
@@ -76,6 +76,12 @@ public class References {
     }
 
     public static Reference createReference(final ChEmedEprMedication resource) {
+        final var reference = new Reference().setReference(resource.getIdentifierFirstRep().getValue());
+        reference.setResource(resource);
+        return reference;
+    }
+
+    public static Reference createReference(final ChEmedEprMedicationStatementMtp resource) {
         final var reference = new Reference().setReference(resource.getIdentifierFirstRep().getValue());
         reference.setResource(resource);
         return reference;

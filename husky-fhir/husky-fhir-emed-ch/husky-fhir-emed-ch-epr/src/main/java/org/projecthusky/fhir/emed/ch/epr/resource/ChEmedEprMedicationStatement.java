@@ -18,7 +18,10 @@ import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
+import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosage;
+import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosageSplit;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -29,8 +32,6 @@ import java.util.UUID;
 public abstract class ChEmedEprMedicationStatement extends MedicationStatement implements ChEmedEprEntry {
     // Here goes everything common to MedicationStatement (MTP), (PML) and (PMLC)
 
-    // TODO Dosage
-
     /**
      * Empty constructor for the parser.
      */
@@ -39,7 +40,7 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
     }
 
     /**
-     * Constructor
+     * Constructor that pre-populates fields.
      *
      * @param entryUuid the medication statement id.
      */
@@ -84,6 +85,33 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
     }
 
     /**
+     * Resolves the base entry of the dosage instruction.
+     *
+     * @return the base entry of the dosage instruction
+     * @throws InvalidEmedContentException if the base entry of the dosage instruction is missing.
+     */
+    @ExpectsValidResource
+    public ChEmedDosage resolveDosageBaseEntry() throws InvalidEmedContentException{
+        return this.getDosage().stream()
+                .filter(ChEmedDosage.class::isInstance)
+                .map(ChEmedDosage.class::cast)
+                .findAny()
+                .orElseThrow(() -> new InvalidEmedContentException("Base entry of the dosage instruction is missing."));
+    }
+
+    /**
+     * Gets additional entries of the dosage instruction
+     *
+     * @return additional entries of the dosage instruction.
+     */
+    public List<ChEmedDosageSplit> getDosageAdditionalEntry() {
+        return this.getDosage().stream()
+                .filter(ChEmedDosageSplit.class::isInstance)
+                .map(ChEmedDosageSplit.class::cast)
+                .toList();
+    }
+
+    /**
      * Gets the treatment reason if available.
      *
      * @return the treatment reason or {@code null}.
@@ -119,5 +147,54 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
         }
         identifier.setValue(Uuids.URN_PREFIX + documentUUID);
         return this;
+    }
+
+    /**
+     * Sets the base entry of the dosage instruction. If it already exists, it will be replaced.
+     *
+     * @param dosageBaseEntry the base entry of the dosage instruction.
+     * @return this.
+     */
+    public ChEmedEprMedicationStatement setDosageBaseEntry(final ChEmedDosage dosageBaseEntry) {
+        for (int i = 0; i < this.getDosage().size(); i++) {
+            if (this.getDosage().get(i) instanceof ChEmedDosage) {
+                this.getDosage().set(i, dosageBaseEntry);
+                return this;
+            }
+        }
+
+        this.getDosage().add(dosageBaseEntry);
+        return this;
+    }
+
+    /**
+     * Adds additional entry of the dosage instruction.
+     *
+     * @param dosageAdditionalEntry additional entry of the dosage instruction.
+     * @return this.
+     */
+    public ChEmedEprMedicationStatement addDosageAdditionalEntry(final ChEmedDosageSplit dosageAdditionalEntry) {
+        this.getDosage().add(dosageAdditionalEntry);
+        return this;
+    }
+
+    /**
+     * Returns whether the base entry of the dosage instruction.
+     *
+     * @return {@code true} if the base entry of the dosage instruction exists, {@code false} otherwise.
+     */
+    public boolean hasDosageBaseEntry() {
+        return this.hasDosage() && this.getDosage().stream()
+                .anyMatch(ChEmedDosage.class::isInstance);
+    }
+
+    /**
+     * Returns whether additional entry of the dosage instruction.
+     *
+     * @return {@code true} if additional entry of the dosage instruction exists, {@code false} otherwise.
+     */
+    public boolean hasDosageAdditionalEntry() {
+        return this.hasDosage() && this.getDosage().stream()
+                .anyMatch(ChEmedDosageSplit.class::isInstance);
     }
 }
