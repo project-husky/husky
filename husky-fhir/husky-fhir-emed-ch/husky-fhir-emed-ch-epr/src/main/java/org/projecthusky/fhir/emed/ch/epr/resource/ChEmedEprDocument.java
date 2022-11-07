@@ -15,6 +15,7 @@ import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Identifier;
 import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
@@ -56,21 +57,9 @@ public abstract class ChEmedEprDocument extends Bundle {
         this.setTimestamp(Date.from(timestamp));
     }
 
-    /**
-     * Finds a bundle entry by the type of its resource or {@code null}, without creating it.
-     *
-     * @param resourceType The type of the resource.
-     * @return the bundle entry or {@code null}.
-     */
-    @Nullable
-    protected BundleEntryComponent getEntryByResourceType(final Class<?> resourceType) {
-        return this.getEntry().stream()
-                .filter(entry -> resourceType.isInstance(entry.getResource()))
-                .findAny()
-                .orElse(null);
-    }
-
     public abstract ChEmedEprComposition resolveComposition();
+
+    public abstract EmedDocumentType getEmedType();
 
     /**
      * Resolves the document UUID or throws.
@@ -97,6 +86,11 @@ public abstract class ChEmedEprDocument extends Bundle {
             return patient;
         }
         throw new InvalidEmedContentException("The ChCorePatientEpr is missing in the document Bundle");
+    }
+
+    @ExpectsValidResource
+    public Instant resolveCreationTime() throws InvalidEmedContentException {
+        return null; // TODO from timestamp
     }
 
     /**
@@ -132,5 +126,19 @@ public abstract class ChEmedEprDocument extends Bundle {
         entry.setResource(patient);
 
         return this;
+    }
+
+    /**
+     * Finds a bundle entry by the type of its resource or {@code null}, without creating it.
+     *
+     * @param resourceType The type of the resource.
+     * @return the bundle entry or {@code null}.
+     */
+    @Nullable
+    protected BundleEntryComponent getEntryByResourceType(final Class<?> resourceType) {
+        return this.getEntry().stream()
+                .filter(entry -> resourceType.isInstance(entry.getResource()))
+                .findAny()
+                .orElse(null);
     }
 }

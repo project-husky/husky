@@ -79,7 +79,7 @@ public class ChEmedEprCompositionDis extends ChEmedEprComposition {
      * @throws InvalidEmedContentException if the medication dispense is missing.
      */
     @ExpectsValidResource
-    public ChEmedEprMedicationDispenseDis getMedicationDispense() throws InvalidEmedContentException {
+    public ChEmedEprMedicationDispenseDis resolveMedicationDispense() throws InvalidEmedContentException {
         final var section = this.getDispenseSection();
         if (!section.hasEntry()) {
             throw new InvalidEmedContentException("The section has no entries");

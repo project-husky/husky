@@ -12,11 +12,15 @@ package org.projecthusky.fhir.emed.ch.epr.resource.pml;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprEntry;
 
 import java.io.Serial;
 import java.time.Instant;
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -45,6 +49,11 @@ public class ChEmedEprDocumentPml extends ChEmedEprDocument {
     public ChEmedEprDocumentPml(final UUID documentId,
                                 final Instant timestamp) {
         super(documentId, timestamp);
+    }
+
+    @Override
+    public EmedDocumentType getEmedType() {
+        return EmedDocumentType.PML;
     }
 
     /**
@@ -84,6 +93,11 @@ public class ChEmedEprDocumentPml extends ChEmedEprDocument {
         }
         throw new InvalidEmedContentException(
                 "The ChEmedEprCompositionPml is missing in the document Bundle");
+    }
+
+    @ExpectsValidResource
+    public List<ChEmedEprEntry> resolveEntries() {
+        return Collections.emptyList(); // TODO
     }
 
     // TODO

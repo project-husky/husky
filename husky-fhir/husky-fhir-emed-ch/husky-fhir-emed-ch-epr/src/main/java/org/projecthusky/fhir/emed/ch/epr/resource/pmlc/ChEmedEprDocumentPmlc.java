@@ -13,6 +13,7 @@ package org.projecthusky.fhir.emed.ch.epr.resource.pmlc;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.hl7.fhir.r4.model.Resource;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 
@@ -46,6 +47,11 @@ public class ChEmedEprDocumentPmlc extends ChEmedEprDocument {
     public ChEmedEprDocumentPmlc(final UUID documentId,
                                  final Instant timestamp) {
         super(documentId, timestamp);
+    }
+
+    @Override
+    public EmedDocumentType getEmedType() {
+        return EmedDocumentType.PML;
     }
 
     /**

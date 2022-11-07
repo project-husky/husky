@@ -20,10 +20,12 @@ import org.projecthusky.fhir.emed.ch.common.enums.CommonLanguages;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprComposition;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprEntry;
 import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -111,6 +113,11 @@ public class ChEmedEprCompositionPml extends ChEmedEprComposition {
                 .filter(DomainResource.class::isInstance)
                 .map(DomainResource.class::cast)
                 .toList();
+    }
+
+    @ExpectsValidResource
+    public List<ChEmedEprEntry> resolveEntries() {
+        return Collections.emptyList(); // TODO
     }
 
     /**

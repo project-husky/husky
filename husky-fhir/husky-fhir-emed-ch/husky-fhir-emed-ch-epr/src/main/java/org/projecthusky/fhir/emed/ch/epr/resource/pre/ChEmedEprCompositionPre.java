@@ -103,9 +103,10 @@ public class ChEmedEprCompositionPre extends ChEmedEprComposition {
      *
      * @return the medication request.
      * @throws InvalidEmedContentException if the medication request is missing.
+     * @todo rename to resolveMedicationRequests and return a list
      */
     @ExpectsValidResource
-    public ChEmedEprMedicationRequestPre getMedicationRequest() throws InvalidEmedContentException {
+    public ChEmedEprMedicationRequestPre resolveMedicationRequest() throws InvalidEmedContentException {
         final var section = this.getPrescriptionSection();
         if (!section.hasEntry()) {
             throw new InvalidEmedContentException("The section has no entries");

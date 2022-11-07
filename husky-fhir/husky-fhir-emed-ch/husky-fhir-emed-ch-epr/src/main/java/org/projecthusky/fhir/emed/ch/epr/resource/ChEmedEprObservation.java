@@ -7,6 +7,7 @@ import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Reference;
 import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedPadvEntryType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
@@ -26,7 +27,7 @@ import java.util.UUID;
 public abstract class ChEmedEprObservation extends Observation implements ChEmedEprEntry {
 
     /**
-     * 	Reference to the medication treatment plan
+     * Reference to the medication treatment plan
      */
     @Nullable
     @Child(name = "treatmentPlan")
@@ -42,7 +43,7 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
     protected ChEmedExtPrescription prescription;
 
     /**
-     * 	Reference to the medication dispense
+     * Reference to the medication dispense
      */
     @Nullable
     @Child(name = "dispense")
@@ -78,6 +79,11 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
         this.setStatus(ObservationStatus.FINAL);
         this.addIdentifier().setValue(Uuids.URN_PREFIX + entryUuid).setSystem(FhirSystem.URI);
         this.setCode(padvType.getCodeableConcept());
+    }
+
+    @Override
+    public EmedEntryType getEmedType() {
+        return EmedEntryType.PADV;
     }
 
     /**

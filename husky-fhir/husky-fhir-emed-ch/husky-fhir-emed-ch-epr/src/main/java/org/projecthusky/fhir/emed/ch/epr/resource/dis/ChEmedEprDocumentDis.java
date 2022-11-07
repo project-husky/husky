@@ -12,6 +12,7 @@ package org.projecthusky.fhir.emed.ch.epr.resource.dis;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 
@@ -45,6 +46,11 @@ public class ChEmedEprDocumentDis extends ChEmedEprDocument {
     public ChEmedEprDocumentDis(final UUID documentId,
                                 final Instant timestamp) {
         super(documentId, timestamp);
+    }
+
+    @Override
+    public EmedDocumentType getEmedType() {
+        return EmedDocumentType.DIS;
     }
 
     /**
@@ -84,6 +90,20 @@ public class ChEmedEprDocumentDis extends ChEmedEprDocument {
         }
         throw new InvalidEmedContentException(
                 "The ChEmedEprCompositionDis is missing in the document Bundle");
+    }
+
+    /**
+     * Returns the medication dispense.
+     *
+     * @return the medication dispense
+     */
+    @ExpectsValidResource
+    public ChEmedEprMedicationDispenseDis resolveMedicationDispense() {
+        final var entry = this.getEntryByResourceType(ChEmedEprMedicationDispenseDis.class);
+        if (entry != null && entry.getResource() instanceof final ChEmedEprMedicationDispenseDis medicationDispense) {
+            return medicationDispense;
+        }
+        throw new InvalidEmedContentException("The ChEmedEprMedicationDispenseDis is missing in the document Bundle");
     }
 
     // TODO

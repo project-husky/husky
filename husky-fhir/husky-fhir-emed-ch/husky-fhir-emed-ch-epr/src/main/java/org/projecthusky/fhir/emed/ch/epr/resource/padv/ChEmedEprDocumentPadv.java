@@ -12,6 +12,7 @@ package org.projecthusky.fhir.emed.ch.epr.resource.padv;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 
@@ -45,6 +46,11 @@ public class ChEmedEprDocumentPadv extends ChEmedEprDocument {
     public ChEmedEprDocumentPadv(final UUID documentId,
                                  final Instant timestamp) {
         super(documentId, timestamp);
+    }
+
+    @Override
+    public EmedDocumentType getEmedType() {
+        return EmedDocumentType.PADV;
     }
 
     /**
@@ -84,6 +90,20 @@ public class ChEmedEprDocumentPadv extends ChEmedEprDocument {
         }
         throw new InvalidEmedContentException(
                 "The ChEmedEprCompositionPadv is missing in the document Bundle");
+    }
+
+    /**
+     * Returns the observation.
+     *
+     * @return the observation
+     */
+    @ExpectsValidResource
+    public ChEmedEprObservationPadv resolveObservation() {
+        final var entry = this.getEntryByResourceType(ChEmedEprObservationPadv.class);
+        if (entry != null && entry.getResource() instanceof final ChEmedEprObservationPadv observation) {
+            return observation;
+        }
+        throw new InvalidEmedContentException("The ChEmedEprObservationPadv is missing in the document Bundle");
     }
 
     // TODO

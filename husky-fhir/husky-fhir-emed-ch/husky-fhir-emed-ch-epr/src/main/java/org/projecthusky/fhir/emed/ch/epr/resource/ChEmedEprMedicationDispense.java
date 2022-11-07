@@ -3,6 +3,7 @@ package org.projecthusky.fhir.emed.ch.epr.resource;
 import org.hl7.fhir.r4.model.MedicationDispense;
 import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 
 import java.util.UUID;
@@ -24,5 +25,10 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
     public UUID resolveIdentifier() throws InvalidEmedContentException {
         if (!this.hasIdentifier()) throw new InvalidEmedContentException("The ID is missing.");
         return Uuids.parseUrnEncoded(this.getIdentifierFirstRep().getValue());
+    }
+
+    @Override
+    public EmedEntryType getEmedType() {
+        return EmedEntryType.DIS;
     }
 }

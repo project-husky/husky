@@ -12,6 +12,7 @@ package org.projecthusky.fhir.emed.ch.epr.resource.pre;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 
@@ -46,6 +47,11 @@ public class ChEmedEprDocumentPre extends ChEmedEprDocument {
     public ChEmedEprDocumentPre(final UUID documentId,
                                 final Instant timestamp) {
         super(documentId, timestamp);
+    }
+
+    @Override
+    public EmedDocumentType getEmedType() {
+        return EmedDocumentType.PRE;
     }
 
     /**
@@ -92,7 +98,7 @@ public class ChEmedEprDocumentPre extends ChEmedEprDocument {
      *
      * @return the list with medication requests of this document.
      */
-    public List<ChEmedEprMedicationRequestPre> resolveMedicationRequest() {
+    public List<ChEmedEprMedicationRequestPre> resolveMedicationRequests() {
         return this.getEntry().stream()
                 .map(BundleEntryComponent::getResource)
                 .filter(ChEmedEprMedicationRequestPre.class::isInstance)

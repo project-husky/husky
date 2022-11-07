@@ -6,6 +6,7 @@ import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.MedicationRequest;
 import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
@@ -47,6 +48,11 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
         this.setStatus(MedicationRequestStatus.COMPLETED);
         this.setIntent(MedicationRequestIntent.ORDER);
         this.addIdentifier().setValue(Uuids.URN_PREFIX + entryUuid).setSystem(FhirSystem.URI);
+    }
+
+    @Override
+    public EmedEntryType getEmedType() {
+        return EmedEntryType.PRE;
     }
 
     /**
@@ -101,7 +107,7 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
      * @throws InvalidEmedContentException if the base entry of the dosage instruction is missing.
      */
     @ExpectsValidResource
-    public ChEmedDosageMedicationRequest resolveDosageBaseEntry() throws InvalidEmedContentException{
+    public ChEmedDosageMedicationRequest resolveDosageBaseEntry() throws InvalidEmedContentException {
         return this.getDosageInstruction().stream()
                 .filter(ChEmedDosageMedicationRequest.class::isInstance)
                 .map(ChEmedDosageMedicationRequest.class::cast)

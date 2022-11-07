@@ -15,7 +15,6 @@ import ca.uhn.fhir.model.api.annotation.Extension;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.*;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
-import org.projecthusky.fhir.emed.ch.common.enums.AdministrativeGender;
 import org.projecthusky.fhir.emed.ch.common.enums.ReligiousAffiliation;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 
@@ -62,13 +61,9 @@ public class ChCorePatientEpr extends Patient {
      * @throws InvalidEmedContentException if the gender is not available.
      */
     @ExpectsValidResource
-    public AdministrativeGender resolveGender() throws InvalidEmedContentException {
+    public Enumerations.AdministrativeGender resolveGender() throws InvalidEmedContentException {
         if (!this.hasGender()) throw new InvalidEmedContentException("The gender is not available.");
-
-        final var gender = AdministrativeGender.getEnum(this.getGender().toCode());
-        if (gender == null) throw new InvalidEmedContentException("The gender is invalid.");
-
-        return gender;
+        return this.getGender();
     }
 
     /**
@@ -114,18 +109,6 @@ public class ChCorePatientEpr extends Patient {
     public LocalDate resolveBirthDate() throws InvalidEmedContentException {
         if (!this.hasBirthDate()) throw new InvalidEmedContentException("The birthdate is missing.");
         return LocalDate.ofInstant(this.getBirthDate().toInstant(), ZoneId.systemDefault());
-    }
-
-    /**
-     * Sets patient's gender.
-     *
-     * @param gender Administrative Gender - the gender that the person is considered to have for administration and
-     *               record keeping purposes.
-     * @return this.
-     */
-    public ChCorePatientEpr setGender(final AdministrativeGender gender) {
-        super.setGender(Enumerations.AdministrativeGender.fromCode(gender.getCodeValue()));
-        return this;
     }
 
     /**

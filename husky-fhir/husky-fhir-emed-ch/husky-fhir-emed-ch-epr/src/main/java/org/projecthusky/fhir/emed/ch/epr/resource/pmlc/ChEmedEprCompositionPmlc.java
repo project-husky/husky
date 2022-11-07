@@ -117,7 +117,7 @@ public class ChEmedEprCompositionPmlc extends ChEmedEprComposition {
      * @throws InvalidEmedContentException if the section references an invalid resource
      */
     @ExpectsValidResource
-    public List<ChEmedEprMedicationStatementPmlc> getMedicationStatements() throws InvalidEmedContentException {
+    public List<ChEmedEprMedicationStatementPmlc> resolveMedicationStatements() throws InvalidEmedContentException {
         final var section = this.getCardSection();
         final var medicationStatementList = new ArrayList<ChEmedEprMedicationStatementPmlc>();
 

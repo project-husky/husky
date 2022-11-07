@@ -10,6 +10,8 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.resource;
 
+import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
+
 import java.util.UUID;
 
 /**
@@ -20,4 +22,6 @@ import java.util.UUID;
 public interface ChEmedEprEntry {
 
     UUID resolveIdentifier();
+
+    EmedEntryType getEmedType();
 }
