@@ -878,13 +878,17 @@ public class ConvenienceCommunication extends CamelService {
         if (dest.getKeyStore() == null) {
             System.clearProperty("javax.net.ssl.keyStore");
             System.clearProperty("javax.net.ssl.keyStorePassword");
+            System.clearProperty("javax.net.ssl.keyStoreType");
             System.clearProperty("javax.net.ssl.trustStore");
             System.clearProperty("javax.net.ssl.trustStorePassword");
+            System.clearProperty("javax.net.ssl.trustStoreType");
         } else {
             System.setProperty("javax.net.ssl.keyStore", dest.getKeyStore());
             System.setProperty("javax.net.ssl.keyStorePassword", dest.getKeyStorePassword());
+            System.setProperty("javax.net.ssl.keyStoreType",  dest.getKeyStoreType());
             System.setProperty("javax.net.ssl.trustStore", dest.getTrustStore());
             System.setProperty("javax.net.ssl.trustStorePassword", dest.getTrustStorePassword());
+            System.setProperty("javax.net.ssl.trustStoreType", dest.getTrustStoreType());
         }
     }
 
