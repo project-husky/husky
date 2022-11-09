@@ -29,5 +29,4 @@ public class ChEmedEprObservationPadv extends ChEmedEprObservation {
                                     final EmedPadvEntryType padvType) {
         super(entryUuid, padvType);
     }
-    // TODO
 }

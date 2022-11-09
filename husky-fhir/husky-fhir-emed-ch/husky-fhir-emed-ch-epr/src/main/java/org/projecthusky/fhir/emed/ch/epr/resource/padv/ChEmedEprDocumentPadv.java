@@ -16,6 +16,7 @@ import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
+import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprMedicationStatementMtp;
 
 import java.io.Serial;
 import java.time.Instant;
@@ -108,6 +109,20 @@ public class ChEmedEprDocumentPadv extends ChEmedEprDocument {
     }
 
     /**
+     * Returns the medication statement.
+     *
+     * @return the medication statement.
+     */
+    @ExpectsValidResource
+    public ChEmedEprMedicationStatementMtp resolveMedicationStatement() {
+        final var entry = this.getEntryByResourceType(ChEmedEprMedicationStatementMtp.class);
+        if (entry != null && entry.getResource() instanceof final ChEmedEprMedicationStatementMtp medicationStatemen) {
+            return medicationStatemen;
+        }
+        throw new InvalidEmedContentException("The ChEmedEprMedicationStatementMtp is missing in the document Bundle");
+    }
+
+    /**
      * Sets the composition.
      *
      * @param composition The CH EMED Pharmaceutical Advice Composition.
@@ -127,6 +142,19 @@ public class ChEmedEprDocumentPadv extends ChEmedEprDocument {
      * @return this.
      */
     public ChEmedEprDocumentPadv addObservation(final ChEmedEprObservationPadv observation) {
+        this.addEntry()
+                .setFullUrl(Uuids.URN_PREFIX + observation.resolveIdentifier())
+                .setResource(observation);
+        return this;
+    }
+
+    /**
+     * Sets the medication statement.
+     *
+     * @param observation the medication statement.
+     * @return this.
+     */
+    public ChEmedEprDocumentPadv addMedicationStatement(final ChEmedEprMedicationStatementMtp observation) {
         this.addEntry()
                 .setFullUrl(Uuids.URN_PREFIX + observation.resolveIdentifier())
                 .setResource(observation);

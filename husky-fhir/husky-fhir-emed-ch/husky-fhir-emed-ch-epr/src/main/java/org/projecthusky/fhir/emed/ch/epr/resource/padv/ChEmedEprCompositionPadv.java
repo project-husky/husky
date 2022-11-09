@@ -13,11 +13,13 @@ package org.projecthusky.fhir.emed.ch.epr.resource.padv;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DomainResource;
+import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.CommonLanguages;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
+import org.projecthusky.fhir.emed.ch.epr.enums.CompositionTitle;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprComposition;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
 import org.projecthusky.fhir.emed.ch.epr.util.References;
@@ -50,10 +52,10 @@ public class ChEmedEprCompositionPadv extends ChEmedEprComposition {
      */
     public ChEmedEprCompositionPadv(final UUID compositionId,
                                     final Instant date,
-                                    final CommonLanguages language) {
+                                    final LanguageCode language) {
         super(compositionId, date, language);
         this.getType().addCoding(new Coding(FhirSystem.SNOMEDCT, "419891008", "Record artifact (record artifact)"));
-        this.setTitle("TODO");
+        this.setTitle(CompositionTitle.PADV.getDisplayName(language));
     }
 
     /**

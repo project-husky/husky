@@ -157,7 +157,6 @@ public class ChCorePatientEpr extends Patient {
      * @param value  The value that is unique.
      * @return the created identifier.
      */
-    // TODO system ?
     public Identifier addIdentifier(final String system,
                                     final String value) {
         final var codingType = new Coding()

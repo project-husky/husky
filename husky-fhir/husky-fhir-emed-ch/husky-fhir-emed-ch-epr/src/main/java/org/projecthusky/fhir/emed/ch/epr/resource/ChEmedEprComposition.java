@@ -14,6 +14,7 @@ import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.*;
+import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.CommonLanguages;
@@ -83,7 +84,7 @@ public abstract class ChEmedEprComposition extends Composition {
      */
     public ChEmedEprComposition(final UUID compositionId,
                                 final Instant date,
-                                final CommonLanguages language) {
+                                final LanguageCode language) {
         super();
         this.setVersionNumber(1);
         this.setStatus(CompositionStatus.FINAL);

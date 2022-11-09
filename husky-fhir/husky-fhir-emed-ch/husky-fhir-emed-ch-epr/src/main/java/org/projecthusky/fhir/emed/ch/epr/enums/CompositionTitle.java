@@ -23,7 +23,12 @@ import java.util.Objects;
  **/
 public enum CompositionTitle {
 
-    MTP("", "", "", "");
+    MTP("Medication Treatment Plan", "Therapieentscheid Medikation", "Décision thérapeutique relative à la médication", "Decisione terapeutica di trattamento farmacologico"),
+    PRE("Prescription", "Rezept", "Ordonnance", "Ricetta"),
+    DIS("Dispense", "Abgabe", "Remise", "Dispensazione"),
+    PADV("Pharmaceutical Advice", "Kommentar zur Medikation", "Commentaire relatif à la médication", "Commento sulla terapia farmacologica"),
+    PML("Medication List", "Medikationsliste", "Liste de médication", "Elenco delle terapie farmacologiche"),
+    PMLC("Medication Card", "Medikationsplan", "Plan de médication", "Piano farmacologico");
 
     /**
      * The display names per language. It's always stored in the given order: in English (0), in German (1), in French

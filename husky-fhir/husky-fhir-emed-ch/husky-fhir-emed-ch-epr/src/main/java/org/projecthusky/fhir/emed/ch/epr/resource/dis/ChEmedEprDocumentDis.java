@@ -113,7 +113,7 @@ public class ChEmedEprDocumentDis extends ChEmedEprDocument {
      * @return this.
      */
     public ChEmedEprDocumentDis addMedicationDispense(final ChEmedEprMedicationDispenseDis medicationDispense) {
-        final var entry = this.addEntry()
+        this.addEntry()
                 .setFullUrl(medicationDispense.getIdentifierFirstRep().getValue())
                 .setResource(medicationDispense);
         return this;
