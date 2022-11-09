@@ -106,5 +106,29 @@ public class ChEmedEprDocumentDis extends ChEmedEprDocument {
         throw new InvalidEmedContentException("The ChEmedEprMedicationDispenseDis is missing in the document Bundle");
     }
 
-    // TODO
+    /**
+     * Adds a medication dispense.
+     *
+     * @param medicationDispense the medication dispense.
+     * @return this.
+     */
+    public ChEmedEprDocumentDis addMedicationDispense(final ChEmedEprMedicationDispenseDis medicationDispense) {
+        final var entry = this.addEntry()
+                .setFullUrl(medicationDispense.getIdentifierFirstRep().getValue())
+                .setResource(medicationDispense);
+        return this;
+    }
+
+    /**
+     * Sets the composition.
+     *
+     * @param composition The CH EMED Medication Dispense Composition.
+     * @return this.
+     */
+    public ChEmedEprDocumentDis setComposition(final ChEmedEprCompositionDis composition) {
+        this.getCompositionEntry()
+                .setFullUrl(composition.getIdentifier().getValue())
+                .setResource(composition);
+        return this;
+    }
 }

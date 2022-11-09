@@ -99,11 +99,7 @@ public class ChEmedEprDocumentPre extends ChEmedEprDocument {
      * @return the list with medication requests of this document.
      */
     public List<ChEmedEprMedicationRequestPre> resolveMedicationRequests() {
-        return this.getEntry().stream()
-                .map(BundleEntryComponent::getResource)
-                .filter(ChEmedEprMedicationRequestPre.class::isInstance)
-                .map(ChEmedEprMedicationRequestPre.class::cast)
-                .toList();
+        return this.getEntryResourceByResourceType(ChEmedEprMedicationRequestPre.class);
     }
 
     /**
@@ -118,6 +114,19 @@ public class ChEmedEprDocumentPre extends ChEmedEprDocument {
                 .setResource(medicationRequest);
 
         this.addEntry(entry);
+        return this;
+    }
+
+    /**
+     * Sets the composition.
+     *
+     * @param composition The CH EMED Medication Prescription Composition.
+     * @return this.
+     */
+    public ChEmedEprDocumentPre setComposition(final ChEmedEprCompositionPre composition) {
+        this.getCompositionEntry()
+                .setFullUrl(composition.getIdentifier().getValue())
+                .setResource(composition);
         return this;
     }
 }

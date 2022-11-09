@@ -22,6 +22,7 @@ import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 
 import java.sql.Date;
 import java.time.Instant;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -61,6 +62,8 @@ public abstract class ChEmedEprDocument extends Bundle {
 
     public abstract EmedDocumentType getEmedType();
 
+    public abstract BundleEntryComponent getCompositionEntry();
+
     /**
      * Resolves the document UUID or throws.
      *
@@ -88,9 +91,15 @@ public abstract class ChEmedEprDocument extends Bundle {
         throw new InvalidEmedContentException("The ChCorePatientEpr is missing in the document Bundle");
     }
 
-    @ExpectsValidResource
-    public Instant resolveCreationTime() throws InvalidEmedContentException {
-        return null; // TODO from timestamp
+    /**
+     * Sets the document's creation date and time.
+     *
+     * @param creationTime the document's creation date and time.
+     * @return this.
+     */
+    public ChEmedEprDocument setCreationTime(final Instant creationTime) {
+        this.setTimestamp(Date.from(creationTime));
+        return this;
     }
 
     /**
@@ -120,7 +129,7 @@ public abstract class ChEmedEprDocument extends Bundle {
     public ChEmedEprDocument setPatient(final ChCorePatientEpr patient) {
         var entry = this.getEntryByResourceType(ChCorePatientEpr.class);
         if (entry == null) {
-            entry = new BundleEntryComponent();
+            entry = this.addEntry();
         }
         entry.setFullUrl(patient.resolveIdentifier().getValue());
         entry.setResource(patient);
@@ -140,5 +149,19 @@ public abstract class ChEmedEprDocument extends Bundle {
                 .filter(entry -> resourceType.isInstance(entry.getResource()))
                 .findAny()
                 .orElse(null);
+    }
+
+    /**
+     * Gets the resources in the package entries by the specified resource type.
+     *
+     * @param resourceType The type of the resource.
+     * @return the list with the resource.
+     */
+    protected <T> List<T> getEntryResourceByResourceType(final Class<T> resourceType) {
+        return this.getEntry().stream()
+                .map(BundleEntryComponent::getResource)
+                .filter(resourceType::isInstance)
+                .map(resourceType::cast)
+                .toList();
     }
 }

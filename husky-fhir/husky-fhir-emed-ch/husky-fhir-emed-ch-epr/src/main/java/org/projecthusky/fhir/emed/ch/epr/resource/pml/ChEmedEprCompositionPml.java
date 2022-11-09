@@ -11,10 +11,7 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.pml;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
-import org.hl7.fhir.r4.model.BaseReference;
-import org.hl7.fhir.r4.model.Coding;
-import org.hl7.fhir.r4.model.Device;
-import org.hl7.fhir.r4.model.DomainResource;
+import org.hl7.fhir.r4.model.*;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.CommonLanguages;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
@@ -100,7 +97,7 @@ public class ChEmedEprCompositionPml extends ChEmedEprComposition {
     }
 
     /**
-     * Returns the list with medication statement, medication request, medication dispense and observation or throws.
+     * Returns the list with medication statement, medication request, medication dispense and observation.
      *
      * @return the list with medication statement, medication request, medication dispense and observation
      */
@@ -115,9 +112,22 @@ public class ChEmedEprCompositionPml extends ChEmedEprComposition {
                 .toList();
     }
 
+    /**
+     * Resolves the medication statements, medication requests, medication dispenses
+     * and observations.
+     *
+     * @return the medication statements, medication requests, medication dispenses
+     * and observations.
+     */
     @ExpectsValidResource
     public List<ChEmedEprEntry> resolveEntries() {
-        return Collections.emptyList(); // TODO
+        return this.getListSection()
+                .getEntry()
+                .stream()
+                .map(Reference::getResource)
+                .filter(ChEmedEprEntry.class::isInstance)
+                .map(ChEmedEprEntry.class::cast)
+                .toList();
     }
 
     /**

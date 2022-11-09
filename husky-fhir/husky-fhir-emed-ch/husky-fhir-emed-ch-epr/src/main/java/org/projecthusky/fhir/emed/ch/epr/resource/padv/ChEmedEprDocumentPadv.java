@@ -11,6 +11,7 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.padv;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
+import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
@@ -106,5 +107,29 @@ public class ChEmedEprDocumentPadv extends ChEmedEprDocument {
         throw new InvalidEmedContentException("The ChEmedEprObservationPadv is missing in the document Bundle");
     }
 
-    // TODO
+    /**
+     * Sets the composition.
+     *
+     * @param composition The CH EMED Pharmaceutical Advice Composition.
+     * @return this.
+     */
+    public ChEmedEprDocumentPadv setComposition(final ChEmedEprCompositionPadv composition) {
+        this.getCompositionEntry()
+                .setFullUrl(Uuids.URN_PREFIX + composition.resolveIdentifier())
+                .setResource(composition);
+        return this;
+    }
+
+    /**
+     * Sets the observation.
+     *
+     * @param observation the observation.
+     * @return this.
+     */
+    public ChEmedEprDocumentPadv addObservation(final ChEmedEprObservationPadv observation) {
+        this.addEntry()
+                .setFullUrl(Uuids.URN_PREFIX + observation.resolveIdentifier())
+                .setResource(observation);
+        return this;
+    }
 }

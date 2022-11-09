@@ -170,4 +170,21 @@ public class ChEmedEprCompositionMtp extends ChEmedEprComposition {
         this.addAuthor(References.createReference(author));
         return this;
     }
+
+    /**
+     * Sets the medication statement reference.
+     *
+     * @param medicationStatement the medication statement.
+     * @return this.
+     */
+    public ChEmedEprCompositionMtp setMedicationStatement(final ChEmedEprMedicationStatementMtp medicationStatement) {
+        final var entry = this.getTreatmentPlanSection().getEntry();
+        final var reference = References.createReference(medicationStatement);
+        if (entry.isEmpty()) {
+            entry.add(reference);
+        } else {
+            entry.set(0, reference);
+        }
+        return this;
+    }
 }

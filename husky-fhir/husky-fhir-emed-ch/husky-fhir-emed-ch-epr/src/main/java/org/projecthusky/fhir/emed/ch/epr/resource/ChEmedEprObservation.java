@@ -17,6 +17,8 @@ import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPl
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprMedicationStatementMtp;
 import org.projecthusky.fhir.emed.ch.epr.util.References;
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -64,8 +66,6 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
     public ChEmedEprObservation() {
         super();
     }
-
-    // TODO issued, note
 
     /**
      * Constructor that pre-populates fields.
@@ -130,6 +130,30 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
             return emedPadvEntryType;
         }
         throw new InvalidEmedContentException("The padv entry type is invalid.");
+    }
+
+    /**
+     * Resolves the date/time this version was made available.
+     *
+     * @return the date/time this version was made available.
+     * @throws InvalidEmedContentException if the date/time this version was made available is missing.
+     */
+    @ExpectsValidResource
+    public Instant resolveIssued() throws InvalidEmedContentException {
+        if (!this.hasIssued()) throw new InvalidEmedContentException("The date/time this version was made available is missing.");
+        return this.getIssued().toInstant();
+    }
+
+    /**
+     * Resolves the note.
+     *
+     * @return the note.
+     * @throws InvalidEmedContentException if the note is missing.
+     */
+    @ExpectsValidResource
+    public String resolveNote() throws InvalidEmedContentException {
+        if (!this.hasNote()) throw new InvalidEmedContentException("The note is missing.");
+        return this.getNoteFirstRep().getText();
     }
 
     /**
@@ -220,6 +244,28 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
      */
     public ChEmedEprObservation setPadvEntryType(final EmedPadvEntryType padvEntryType) {
         this.setCode(padvEntryType.getCodeableConcept());
+        return this;
+    }
+
+    /**
+     * Sets the date/time this version was made available.
+     *
+     * @param issued the date/time this version was made available.
+     * @return this.
+     */
+    public ChEmedEprObservation setIssued(final Instant issued) {
+        this.setIssued(Date.from(issued));
+        return this;
+    }
+
+    /**
+     * Sets the note. If it already exists, it's replaced.
+     *
+     * @param note the note.
+     * @return this.
+     */
+    public ChEmedEprObservation setNote(final String note) {
+        this.getNoteFirstRep().setText(note);
         return this;
     }
 

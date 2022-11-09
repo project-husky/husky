@@ -50,7 +50,21 @@ public class ChEmedEprObservationPml extends ChEmedEprObservation {
         super(entryUuid, padvType);
     }
 
-    // TODO
+    /**
+     * Resolves the author and her/his organization of the medical decision.
+     *
+     * @return the author and her/his organization of the medical decision.
+     * @throws InvalidEmedContentException if the author and her/his organization of the medical decision are missing or aren't of the right type.
+     */
+    @ExpectsValidResource
+    public ChEmedEprPractitionerRole resolvePerformer() throws InvalidEmedContentException {
+        if (!this.hasPerformer()) throw new InvalidEmedContentException("The the author and her/his organization of the medical decision is missing.");
+        final var resource = this.getPerformerFirstRep().getResource();
+        if (resource instanceof ChEmedEprPractitionerRole chEmedEprPractitionerRole) {
+            return chEmedEprPractitionerRole;
+        }
+        throw new InvalidEmedContentException("The author and her/his organization of the medical decision resource isn't of the right type.");
+    }
 
     /**
      * Gets the author document element in the observation.
@@ -101,6 +115,22 @@ public class ChEmedEprObservationPml extends ChEmedEprObservation {
      */
     public ChEmedEprObservationPml setAuthorDocument(final ChEmedEprPractitionerRole authorDocument) {
         this.authorDocument = References.createReference(authorDocument);
+        return this;
+    }
+
+    /**
+     * Sets the author and her/his organization of the medical decision.
+     *
+     * @param performer the author and her/his organization of the medical decision.
+     * @return this.
+     */
+    public ChEmedEprObservationPml setPerformer(final ChEmedEprPractitionerRole performer) {
+        final var reference = References.createReference(performer);
+        if (!this.getPerformer().isEmpty()) {
+            this.addPerformer();
+        } else {
+            this.getPerformer().set(0, reference);
+        }
         return this;
     }
 

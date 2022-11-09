@@ -19,6 +19,7 @@ import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprEntry;
 
 import java.io.Serial;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -95,10 +96,128 @@ public class ChEmedEprDocumentPml extends ChEmedEprDocument {
                 "The ChEmedEprCompositionPml is missing in the document Bundle");
     }
 
+    /**
+     * Returns the list with medication statement, medication request, medication dispense and observation.
+     *
+     * @return the list with medication statement, medication request, medication dispense and observation.
+     */
     @ExpectsValidResource
     public List<ChEmedEprEntry> resolveEntries() {
-        return Collections.emptyList(); // TODO
+        final var resources = new ArrayList<ChEmedEprEntry>();
+        for (final var entry : this.getEntry()) {
+            final var resource = entry.getResource();
+
+            if (resource instanceof ChEmedEprMedicationStatementPml medicationStatement) {
+                resources.add(medicationStatement);
+            } else if (resource instanceof ChEmedEprMedicationRequestPml medicationRequest) {
+                resources.add(medicationRequest);
+            } else if (resource instanceof ChEmedEprMedicationDispensePml medicationDispense) {
+                resources.add(medicationDispense);
+            } else if (resource instanceof ChEmedEprObservationPml observation) {
+                resources.add(observation);
+            }
+        }
+        return resources;
     }
 
-    // TODO
+    /**
+     * Returns a list with ChEmedEprMedicationStatementPml resources.
+     *
+     * @return a list with ChEmedEprMedicationStatementPml resources.
+     */
+    public List<ChEmedEprMedicationStatementPml> resolveMedicationStatements() {
+        return this.getEntryResourceByResourceType(ChEmedEprMedicationStatementPml.class);
+    }
+
+    /**
+     * Returns a list with ChEmedEprMedicationRequestPml resources.
+     *
+     * @return a list with ChEmedEprMedicationRequestPml resources.
+     */
+    public List<ChEmedEprMedicationRequestPml> resolveMedicationRequests() {
+        return this.getEntryResourceByResourceType(ChEmedEprMedicationRequestPml.class);
+    }
+
+    /**
+     * Returns a list with ChEmedEprMedicationDispensePml resources.
+     *
+     * @return a list with ChEmedEprMedicationDispensePml resources.
+     */
+    public List<ChEmedEprMedicationDispensePml> resolveMedicationDispenses() {
+        return this.getEntryResourceByResourceType(ChEmedEprMedicationDispensePml.class);
+    }
+
+    /**
+     * Returns a list with ChEmedEprObservationPml resources.
+     *
+     * @return a list with ChEmedEprObservationPml resources.
+     */
+    public List<ChEmedEprObservationPml> resolveObservations() {
+        return this.getEntryResourceByResourceType(ChEmedEprObservationPml.class);
+    }
+
+    /**
+     * Sets the composition.
+     *
+     * @param composition The CH EMED Medication List Composition.
+     * @return this.
+     */
+    public ChEmedEprDocumentPml setComposition(final ChEmedEprCompositionPml composition) {
+        this.getCompositionEntry()
+                .setFullUrl(composition.getIdentifier().getValue())
+                .setResource(composition);
+        return this;
+    }
+
+    /**
+     * Adds a medication statement.
+     *
+     * @param medicationStatement a medication statement.
+     * @return this.
+     */
+    public ChEmedEprDocumentPml addMedicationStatement(final ChEmedEprMedicationStatementPml medicationStatement) {
+        this.addEntry()
+                .setFullUrl(medicationStatement.getIdentifierFirstRep().getValue())
+                .setResource(medicationStatement);
+        return this;
+    }
+
+    /**
+     * Adds a medication request.
+     *
+     * @param medicationRequest a medication request.
+     * @return this.
+     */
+    public ChEmedEprDocumentPml addMedicationRequest(final ChEmedEprMedicationRequestPml medicationRequest) {
+        this.addEntry()
+                .setFullUrl(medicationRequest.getIdentifierFirstRep().getValue())
+                .setResource(medicationRequest);
+        return this;
+    }
+
+    /**
+     * Adds a medication dispense.
+     *
+     * @param medicationDispense a medication dispense.
+     * @return this.
+     */
+    public ChEmedEprDocumentPml addMedicationDispense(final ChEmedEprMedicationDispensePml medicationDispense) {
+        this.addEntry()
+                .setFullUrl(medicationDispense.getIdentifierFirstRep().getValue())
+                .setResource(medicationDispense);
+        return this;
+    }
+
+    /**
+     * Adds an observation.
+     *
+     * @param observation an observation.
+     * @return this.
+     */
+    public ChEmedEprDocumentPml addObservation(final ChEmedEprObservationPml observation) {
+        this.addEntry()
+                .setFullUrl(observation.getIdentifierFirstRep().getValue())
+                .setResource(observation);
+        return this;
+    }
 }

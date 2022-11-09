@@ -169,4 +169,21 @@ public class ChEmedEprCompositionDis extends ChEmedEprComposition {
         this.addAuthor(References.createReference(author));
         return this;
     }
+
+    /**
+     * Sets a {@link ChEmedEprMedicationDispenseDis} reference.
+     *
+     * @param medicationDispense the medication dispense.
+     * @return this.
+     */
+    public ChEmedEprCompositionDis setMedicationDispense(final ChEmedEprMedicationDispenseDis medicationDispense) {
+        final var entry = this.getDispenseSection().getEntry();
+        final var reference = References.createReference(medicationDispense);
+        if (entry.isEmpty()) {
+            entry.add(reference);
+        } else {
+            entry.set(0, reference);
+        }
+        return this;
+    }
 }

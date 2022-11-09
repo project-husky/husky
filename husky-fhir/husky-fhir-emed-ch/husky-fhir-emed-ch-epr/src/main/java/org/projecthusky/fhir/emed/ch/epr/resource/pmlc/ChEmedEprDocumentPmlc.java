@@ -19,6 +19,7 @@ import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 
 import java.io.Serial;
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -94,6 +95,15 @@ public class ChEmedEprDocumentPmlc extends ChEmedEprDocument {
     }
 
     /**
+     * Resolves the medication statements.
+     *
+     * @return the medication statements.
+     */
+    public List<ChEmedEprMedicationStatementPmlc> resolveMedicationStatements() {
+        return this.getEntryResourceByResourceType(ChEmedEprMedicationStatementPmlc.class);
+    }
+
+    /**
      * Creates a new entry and adds the given resource to it.
      *
      * @return the created entry.
@@ -102,5 +112,29 @@ public class ChEmedEprDocumentPmlc extends ChEmedEprDocument {
         return this.addEntry().setResource(resource);
     }
 
-    // TODO
+    /**
+     * Adds a medication statement.
+     *
+     * @param medicationStatement the medication statement.
+     * @return this.
+     */
+    public ChEmedEprDocumentPmlc addMedicationStatement(final ChEmedEprMedicationStatementPmlc medicationStatement) {
+        this.addEntry()
+                .setFullUrl(medicationStatement.getIdentifierFirstRep().getValue())
+                .setResource(medicationStatement);
+        return this;
+    }
+
+    /**
+     * Sets the composition.
+     *
+     * @param composition The CH EMED Medication Card Composition.
+     * @return this.
+     */
+    public ChEmedEprDocumentPmlc setComposition(final ChEmedEprCompositionPmlc composition) {
+        this.getCompositionEntry()
+                .setFullUrl(composition.getIdentifier().getValue())
+                .setResource(composition);
+        return this;
+    }
 }

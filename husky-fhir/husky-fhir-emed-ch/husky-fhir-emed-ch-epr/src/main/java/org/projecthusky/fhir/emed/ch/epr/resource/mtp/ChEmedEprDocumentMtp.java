@@ -106,6 +106,19 @@ public class ChEmedEprDocumentMtp extends ChEmedEprDocument {
     }
 
     /**
+     * Sets the composition.
+     *
+     * @param composition The CH EMED Medication Treatment Plan Composition.
+     * @return this.
+     */
+    public ChEmedEprDocumentMtp setComposition(final ChEmedEprCompositionMtp composition) {
+        this.getCompositionEntry()
+                .setFullUrl(composition.getIdentifier().getValue())
+                .setResource(composition);
+        return this;
+    }
+
+    /**
      * Sets the medication statement. If it already exists, it will be replaced.
      *
      * @param medicationStatement the medication statement.
@@ -114,7 +127,7 @@ public class ChEmedEprDocumentMtp extends ChEmedEprDocument {
     public ChEmedEprDocumentMtp setMedicationStatement(final ChEmedEprMedicationStatementMtp medicationStatement) {
         var entry = this.getEntryByResourceType(ChEmedEprMedicationStatementMtp.class);
         if (entry == null) {
-            entry = new BundleEntryComponent();
+            entry = this.addEntry();
         }
         entry.setFullUrl(medicationStatement.getIdentifierFirstRep().getValue());
         entry.setResource(medicationStatement);

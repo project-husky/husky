@@ -99,23 +99,27 @@ public class ChEmedEprCompositionPre extends ChEmedEprComposition {
     }
 
     /**
-     * Returns the medication request or throws.
+     * Returns the list medication requests or throws.
      *
-     * @return the medication request.
-     * @throws InvalidEmedContentException if the medication request is missing.
-     * @todo rename to resolveMedicationRequests and return a list
+     * @return the list with medication requests.
+     * @throws InvalidEmedContentException if the medication requests is missing or invalid.
      */
     @ExpectsValidResource
-    public ChEmedEprMedicationRequestPre resolveMedicationRequest() throws InvalidEmedContentException {
+    public List<ChEmedEprMedicationRequestPre> resolveMedicationRequests() throws InvalidEmedContentException {
         final var section = this.getPrescriptionSection();
         if (!section.hasEntry()) {
             throw new InvalidEmedContentException("The section has no entries");
         }
-        final var resource = section.getEntry().get(0).getResource();
-        if (resource instanceof final ChEmedEprMedicationRequestPre medicationRequest) {
-            return medicationRequest;
+        final var medicationRequests = new ArrayList<ChEmedEprMedicationRequestPre>(0);
+        for (final var entry : section.getEntry()) {
+            final var resource = entry.getResource();
+            if (resource instanceof final ChEmedEprMedicationRequestPre medicationRequest) {
+                medicationRequests.add(medicationRequest);
+            } else {
+                throw new InvalidEmedContentException("The prescription section has a non ChEmedEprMedicationRequestPre resource");
+            }
         }
-        throw new InvalidEmedContentException("The section isn't referencing a ChEmedEprMedicationRequestPre resource");
+        return medicationRequests;
     }
 
     /**
@@ -170,6 +174,22 @@ public class ChEmedEprCompositionPre extends ChEmedEprComposition {
      */
     public ChEmedEprCompositionPre addAuthor(final ChCorePatientEpr author) {
         this.addAuthor(References.createReference(author));
+        return this;
+    }
+
+    /**
+     * Adds a {@link ChEmedEprMedicationRequestPre}.
+     *
+     * @param medicationRequest the medication request.
+     */
+    public ChEmedEprCompositionPre addMedicationRequest(final ChEmedEprMedicationRequestPre medicationRequest) {
+        final var entry = this.getPrescriptionSection().getEntry();
+        final var reference = References.createReference(medicationRequest);
+        if (entry.isEmpty()) {
+            entry.add(reference);
+        } else {
+            entry.set(0, reference);
+        }
         return this;
     }
 }
