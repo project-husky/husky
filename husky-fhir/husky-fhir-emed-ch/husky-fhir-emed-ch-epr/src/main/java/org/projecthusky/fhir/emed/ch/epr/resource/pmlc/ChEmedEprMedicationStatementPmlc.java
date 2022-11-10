@@ -36,7 +36,7 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
     /**
      * Reference to the MTP that introduced this medication in the treatment plan
      */
-    @Child(name = "treatmentPlan")
+    @Child(name = "treatmentPlan", min = 1)
     @Extension(url = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan", definedLocally = false)
     protected ChEmedExtTreatmentPlan treatmentPlan;
 

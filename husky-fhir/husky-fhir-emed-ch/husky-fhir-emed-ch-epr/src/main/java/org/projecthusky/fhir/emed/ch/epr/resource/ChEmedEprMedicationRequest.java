@@ -25,7 +25,7 @@ import java.util.UUID;
  **/
 public abstract class ChEmedEprMedicationRequest extends MedicationRequest implements ChEmedEprEntry {
 
-    @Child(name = "treatmentplan")
+    @Child(name = "treatmentplan", min = 1)
     @Extension(url = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan", definedLocally = false)
     protected ChEmedExtTreatmentPlan treatmentPlan;
 

@@ -3,7 +3,6 @@ package org.projecthusky.fhir.emed.ch.epr.resource;
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.MedicationDispense;
 import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
@@ -13,7 +12,6 @@ import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprMedicationDis;
 import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosage;
 import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosageSplit;
-import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtDispense;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtPharmaceuticalAdvice;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtPrescription;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
@@ -58,7 +56,7 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
     /**
      * Reference to the medication treatment plan
      */
-    @Child(name = "treatmentPlan")
+    @Child(name = "treatmentPlan", min = 1)
     @Extension(url = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan", definedLocally = false)
     protected ChEmedExtTreatmentPlan treatmentPlan;
 

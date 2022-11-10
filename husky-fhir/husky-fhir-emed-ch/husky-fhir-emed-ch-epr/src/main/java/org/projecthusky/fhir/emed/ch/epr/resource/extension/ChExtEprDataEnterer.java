@@ -1,13 +1,17 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.extension;
 
+import ca.uhn.fhir.model.api.annotation.Block;
 import ca.uhn.fhir.model.api.annotation.Child;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.BackboneElement;
+import org.hl7.fhir.r4.model.DateType;
 import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.Reference;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
 
+import java.io.Serial;
 import java.util.Date;
 
 /**
@@ -18,12 +22,13 @@ import java.util.Date;
  *
  * @author Ronaldo Loureiro
  */
-public class ChExtEprDataEnterer extends Extension {
+@Block
+public class ChExtEprDataEnterer extends BackboneElement {
 
     /**
      * Information about the person and organization that entered data
      */
-    @Child(name = "enterer")
+    @Child(name = "enterer", min = 1)
     @ca.uhn.fhir.model.api.annotation.Extension(url = "enterer", definedLocally = false)
     protected Reference enterer;
 
@@ -33,13 +38,21 @@ public class ChExtEprDataEnterer extends Extension {
     @Nullable
     @Child(name = "timestamp")
     @ca.uhn.fhir.model.api.annotation.Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time", definedLocally = false)
-    protected Date timestamp;
+    protected DateType timestamp;
 
     /**
      * Empty constructor
      */
     public ChExtEprDataEnterer() {
         super();
+    }
+
+    @Override
+    public ChExtEprDataEnterer copy() {
+        final var copy = new ChExtEprDataEnterer();
+        copy.enterer = enterer;
+        copy.timestamp = timestamp;
+        return copy;
     }
 
     /**
@@ -66,7 +79,7 @@ public class ChExtEprDataEnterer extends Extension {
     @Nullable
     public Date getTimestamp() {
         if (!this.hasTimestamp()) return null;
-        return this.timestamp;
+        return this.timestamp.getValue();
     }
 
     /**
@@ -90,7 +103,10 @@ public class ChExtEprDataEnterer extends Extension {
      * @return this.
      */
     public ChExtEprDataEnterer setTimestamp(final Date timestamp) {
-        this.timestamp = timestamp;
+        if (this.timestamp == null) {
+            this.timestamp = new DateType();
+        }
+        this.timestamp.setValue(timestamp);
         return this;
     }
 
@@ -109,6 +125,6 @@ public class ChExtEprDataEnterer extends Extension {
      * @return {@code true} if the timestamp of the authorship/data input exists, {@code false} otherwise.
      */
     public boolean hasTimestamp() {
-        return this.timestamp != null;
+        return this.timestamp != null && this.timestamp.hasValue();
     }
 }
