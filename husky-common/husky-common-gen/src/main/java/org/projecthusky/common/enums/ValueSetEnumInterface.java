@@ -200,4 +200,12 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface, Trans
      */
     @NonNull
     String getValueSetName();
+
+    /**
+     * Get the enum constant name
+     *
+     * @return the name of this enum constant
+     */
+    @NonNull
+    String name();
 }

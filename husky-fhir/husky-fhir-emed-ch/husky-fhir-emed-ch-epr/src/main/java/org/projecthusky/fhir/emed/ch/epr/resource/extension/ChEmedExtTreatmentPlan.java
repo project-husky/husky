@@ -31,14 +31,14 @@ public class ChEmedExtTreatmentPlan extends ChEmedExtensionReference {
     public ChEmedExtTreatmentPlan(final UUID id,
                                   final UUID externalDocumentId) {
         super();
-        this.setIdentifier(id);
+        this.setExtensionId(id);
         this.setExternalDocumentId(externalDocumentId);
     }
 
     @Override
     public ChEmedExtTreatmentPlan copy() {
         final var copy = new ChEmedExtTreatmentPlan();
-        copy.identifier = identifier;
+        copy.extensionId = extensionId;
         copy.externalDocumentId = externalDocumentId;
         return copy;
     }

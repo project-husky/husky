@@ -23,6 +23,8 @@ import org.projecthusky.fhir.emed.ch.common.resource.ChEmedOrganization;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedRatioWithEmedUnits;
 
+import java.util.List;
+
 /**
  * The HAPI custom structure for CH-EMED-EPR Medication.
  * <p>
@@ -173,6 +175,20 @@ public class ChEmedEprMedication extends Medication {
     }
 
     /**
+     * Resolves the active ingredients
+     *
+     * @return the lits with active ingredients
+     */
+    @ExpectsValidResource
+    public List<ChEmedEprMedicationIngredient> resolveActiveIngredients() {
+        return this.getIngredient().stream()
+                .filter(MedicationIngredientComponent::getIsActive)
+                .filter(ChEmedEprMedicationIngredient.class::isInstance)
+                .map(ChEmedEprMedicationIngredient.class::cast)
+                .toList();
+    }
+
+    /**
      * Sets pharmaceutical dose form. If the pharmaceutical dose form already exists, it's replaced.
      *
      * @param doseForm the pharmaceutical dose form.
@@ -193,25 +209,11 @@ public class ChEmedEprMedication extends Medication {
     /**
      * Adds active ingredient.
      *
-     * @param activeIngredient active ingredient.
+     * @param ingredient active ingredient.
      * @return this.
      */
-    public ChEmedEprMedication addIngredient(final ActivePharmaceuticalIngredient activeIngredient,
-                                             @Nullable final ChEmedRatioWithEmedUnits strength) {
-        final var coding = new Coding()
-                .setSystemElement(UriType.fromOid(activeIngredient.getCodeSystemId()))
-                .setCode(activeIngredient.getCodeValue())
-                .setDisplay(activeIngredient.getDisplayName());
-
-        final var item = new CodeableConcept(coding)
-                .setText(activeIngredient.getDisplayName());
-
-        this.addIngredient()
-                .setIsActive(true)
-                .setItem(item)
-                .setStrength(strength);
-
-
+    public ChEmedEprMedication addActiveIngredient(final ChEmedEprMedicationIngredient ingredient) {
+        super.addIngredient(ingredient);
         return this;
     }
 }

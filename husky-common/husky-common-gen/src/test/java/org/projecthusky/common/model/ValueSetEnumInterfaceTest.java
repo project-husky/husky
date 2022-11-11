@@ -83,6 +83,9 @@ public class ValueSetEnumInterfaceTest {
 		public String getValueSetName() {
 			return null;
 		}
+
+		@Override
+		public String name() { return null; }
 	}
 
 	public static void assertValueSetEnumEntries(ValueSetEnumInterface[] enumEntries)

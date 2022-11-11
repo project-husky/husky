@@ -63,7 +63,7 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
      * @throws InvalidEmedContentException if the medication is missing or invalid.
      */
     @ExpectsValidResource
-    protected ChEmedEprMedication resolveMedication() throws InvalidEmedContentException {
+    public ChEmedEprMedication resolveMedication() throws InvalidEmedContentException {
         if (!this.hasMedication()) {
             throw new InvalidEmedContentException("The medication is missing in the medication statement");
         }

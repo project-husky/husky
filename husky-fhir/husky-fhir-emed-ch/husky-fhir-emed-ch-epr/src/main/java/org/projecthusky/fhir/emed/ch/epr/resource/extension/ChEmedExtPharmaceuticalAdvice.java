@@ -31,14 +31,14 @@ public class ChEmedExtPharmaceuticalAdvice extends ChEmedExtensionReference {
     public ChEmedExtPharmaceuticalAdvice(final UUID id,
                                          final UUID externalDocumentId) {
         super();
-        this.setIdentifier(id);
+        this.setExtensionId(id);
         this.setExternalDocumentId(externalDocumentId);
     }
 
     @Override
     public ChEmedExtPharmaceuticalAdvice copy() {
         final var copy = new ChEmedExtPharmaceuticalAdvice();
-        copy.identifier = identifier;
+        copy.extensionId = extensionId;
         copy.externalDocumentId = externalDocumentId;
         return copy;
     }

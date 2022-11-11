@@ -1,0 +1,161 @@
+<html lang="${lang}">
+    <head>
+        <meta charset="utf-8" />
+        <title>${title}</title>
+        <meta name="subject" content="${subject}" />
+        <meta name="author" content="${author}" />
+        <meta name="description" content="${description}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <bookmarks>
+            <bookmark name="${title}" href="#title"/>
+            <bookmark name="Auteur" href="#title_author"/>
+        </bookmarks>
+
+        <style>
+            @page {
+                font-family: arimo, sans-serif;
+                margin: 1cm;
+                size: a4 landscape;
+                @top-center {
+                    font-family: arimo, sans-serif;
+                    content: 'Page ' counter(page) ' de ' counter(pages);
+                    color: #3abdaf;
+                    border: 1px solid rebeccapurple;
+                }
+                @bottom-center {
+                    font-family: arimo, sans-serif;
+                    content: 'Page ' counter(page) ' de ' counter(pages);
+                    color: #3abdaf;
+                }
+                @top-right {
+                    font-family: arimo, sans-serif;
+                    content: 'Généré le ${generationDate}';
+                    color: #3abdaf;
+                    font-style: italic;
+                }
+                @top-left {
+                    font-family: arimo, sans-serif;
+                    content: 'Généré par le PMP';
+                    color: #3abdaf;
+                    font-style: italic;
+                }
+                @bottom-left {
+                    content: element(hug);
+                }
+                @bottom-right {
+                    content: element(cara);
+                }
+            }
+            body {
+                margin: 0;
+                font-family: arimo, sans-serif;
+            }
+
+            table {
+                /* With -fs-table-paginate on, the header and footer
+                 * of a table will be repeated on each page that the table falls on.
+                 */
+                -fs-table-paginate: paginate;
+                border-collapse: collapse;
+                width: 100%;
+                color: #4f4f4f;
+            }
+
+            thead {
+                background: #fbfbfb;
+            }
+
+            thead th {
+                text-align: center;
+                border-bottom: 1px solid #4f4f4f;
+            }
+
+            tr {
+                page-break-inside: avoid;
+                page-break-after: auto;
+            }
+
+            td,
+            th {
+                padding: 0.2cm 0.3cm;
+                text-align: left;
+            }
+
+            .gtin {
+                color: #eb6b08;
+                position: relative;
+                top: -0.5em;
+                font-size: 80%;
+            }
+
+            .gtin:before {
+                content: "GTIN : ";
+                margin-left: 0.5em;
+            }
+
+            table .gtin {
+                display: none;
+            }
+
+            hr {
+                border: 0;
+                border-top: 1px solid #4f4f4f;
+            }
+
+            h3, h4, p{
+                margin: 2px 0;
+            }
+
+            img {
+                margin: 5px;
+                max-width: 20px;
+                max-height: 20px;
+            }
+
+            a {
+                text-decoration: none;
+                color: #3abdaf;
+            }
+
+            .medication-image {
+                padding: 0;
+            }
+
+            .medication-image img {
+                max-width: 50px;
+                max-height: 50px;
+            }
+
+            .comments {
+                background: #fed6dd;
+                border-bottom: 1px solid #4f4f4f;
+            }
+
+            .comments img {
+                margin: 0;
+                padding-right: 5px;
+            }
+
+            .border-bottom {
+                border-bottom: 1px solid #4f4f4f;
+            }
+
+            .border-top {
+                border-top: 1px solid #4f4f4f;
+            }
+
+            .text-center {
+                text-align: center;
+            }
+
+            .th-timing {
+                border-left: 1px solid #cfcfcf;
+                border-right: 1px solid #cfcfcf;
+            }
+
+            .patient-instructions {
+                border-top: 1px solid #cfcfcf;
+            }
+        </style>
+    </head>
+    <body>

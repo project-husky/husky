@@ -158,6 +158,19 @@ public abstract class ChEmedEprComposition extends Composition {
     }
 
     /**
+     * Resolves the document's creation date and time.
+     *
+     * @return the document's creation date and time.
+     */
+    @ExpectsValidResource
+    public Instant resolveDate() {
+        if (!this.hasDate()) {
+            throw new InvalidEmedContentException("The document's creation date and time is missing.");
+        }
+        return this.getDate().toInstant();
+    }
+
+    /**
      * Gets the version number element.
      *
      * @return the version number element.

@@ -31,14 +31,14 @@ public class ChEmedExtDispense extends ChEmedExtensionReference {
     public ChEmedExtDispense(final UUID id,
                              final UUID externalDocumentId) {
         super();
-        this.setIdentifier(id);
+        this.setExtensionId(id);
         this.setExternalDocumentId(externalDocumentId);
     }
 
     @Override
     public ChEmedExtDispense copy() {
         final var copy = new ChEmedExtDispense();
-        copy.identifier = identifier;
+        copy.extensionId = extensionId;
         copy.externalDocumentId = externalDocumentId;
         return copy;
     }

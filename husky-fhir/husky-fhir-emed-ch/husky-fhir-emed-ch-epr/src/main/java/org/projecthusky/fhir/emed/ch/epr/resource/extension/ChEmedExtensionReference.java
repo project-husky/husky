@@ -25,16 +25,16 @@ public abstract class ChEmedExtensionReference extends BackboneElement {
     /**
      * ID of the document.
      */
-    @Child(name = "id", min = 1)
+    @Child(name = "extension:id", min = 1)
     @Extension(url = "id", definedLocally = false)
-    protected Identifier identifier;
+    protected org.hl7.fhir.r4.model.Extension extensionId;
 
     /**
      * ID of the external document.
      */
-    @Child(name = "externalDocumentId", min = 1)
+    @Child(name = "extension:externalDocumentId", min = 1)
     @Extension(url = "externalDocumentId", definedLocally = false)
-    protected Identifier externalDocumentId;
+    protected org.hl7.fhir.r4.model.Extension externalDocumentId;
 
     /**
      * Empty constructor
@@ -52,7 +52,7 @@ public abstract class ChEmedExtensionReference extends BackboneElement {
     public ChEmedExtensionReference(final UUID id,
                                     final UUID externalDocumentId) {
         super();
-        this.setIdentifier(id);
+        this.setExtensionId(id);
         this.setExternalDocumentId(externalDocumentId);
     }
 
@@ -60,26 +60,34 @@ public abstract class ChEmedExtensionReference extends BackboneElement {
      * Resolves the ID of the document.
      *
      * @return the ID of the document.
-     * @throws InvalidEmedContentException if the ID of the document is missing.
+     * @throws InvalidEmedContentException if the ID of the document is missing or invalid.
      */
     @ExpectsValidResource
     public UUID resolveIdentifier() throws InvalidEmedContentException {
-        if (!this.hasId())
+        if (!this.hasExtensionId())
             throw new InvalidEmedContentException("The ID of the document is missing.");
-        return Uuids.parseUrnEncoded(this.identifier.getValue());
+
+        if (this.extensionId.getValue() instanceof Identifier id) {
+            return Uuids.parseUrnEncoded(id.getValue());
+        }
+        throw new InvalidEmedContentException("The ID of the document isn't of the right type.");
     }
 
     /**
      * Resolves the ID of the external document.
      *
      * @return the ID of the external document.
-     * @throws InvalidEmedContentException if the ID of the external document is missing.
+     * @throws InvalidEmedContentException if the ID of the external document is missing or invalid.
      */
     @ExpectsValidResource
     public UUID resolveExternalDocumentId() throws InvalidEmedContentException {
         if (!this.hasExternalDocumentId())
             throw new InvalidEmedContentException("The ID of the external document is missing.");
-        return Uuids.parseUrnEncoded(this.externalDocumentId.getValue());
+
+        if (this.externalDocumentId.getValue() instanceof Identifier id) {
+            return Uuids.parseUrnEncoded(id.getValue());
+        }
+        throw new InvalidEmedContentException("The ID of the external document isn't of the right type.");
     }
 
     /**
@@ -96,15 +104,16 @@ public abstract class ChEmedExtensionReference extends BackboneElement {
     /**
      * Sets the ID of the document, if it's already exists, it's replaced.
      *
-     * @param identifier the ID of the document.
+     * @param extensionId the ID of the document.
      * @return this.
      */
-    public ChEmedExtensionReference setIdentifier(final UUID identifier) {
-        if (this.identifier == null) {
-            this.identifier = new Identifier();
-            this.identifier.setSystem(FhirSystem.URI);
+    public ChEmedExtensionReference setExtensionId(final UUID extensionId) {
+        if (this.extensionId == null) {
+            this.extensionId = new org.hl7.fhir.r4.model.Extension();
         }
-        this.identifier.setValue(Uuids.URN_PREFIX + identifier);
+        this.extensionId.setValue(new Identifier()
+                .setSystem(FhirSystem.URI)
+                .setValue(Uuids.URN_PREFIX + extensionId));
         return this;
     }
 
@@ -116,20 +125,21 @@ public abstract class ChEmedExtensionReference extends BackboneElement {
      */
     public ChEmedExtensionReference setExternalDocumentId(final UUID externalDocumentId) {
         if (this.externalDocumentId == null) {
-            this.externalDocumentId = new Identifier();
-            this.externalDocumentId.setSystem(FhirSystem.URI);
+            this.extensionId = new org.hl7.fhir.r4.model.Extension();
         }
-        this.externalDocumentId.setValue(Uuids.URN_PREFIX + externalDocumentId);
+        this.externalDocumentId.setValue(new Identifier()
+                .setSystem(FhirSystem.URI)
+                .setValue(Uuids.URN_PREFIX + externalDocumentId));
         return this;
     }
 
     /**
-     * Returns whether ID of the Medication Treatment Plan document exists.
+     * Returns whether ID of the document exists.
      *
-     * @return {@code true} if the ID of the Medication Treatment Plan document exists, {@code false} otherwise.
+     * @return {@code true} if the ID of the document exists, {@code false} otherwise.
      */
-    public boolean hasId() {
-        return this.identifier != null && !this.identifier.isEmpty();
+    public boolean hasExtensionId() {
+        return this.extensionId != null && !this.extensionId.isEmpty();
     }
 
     /**

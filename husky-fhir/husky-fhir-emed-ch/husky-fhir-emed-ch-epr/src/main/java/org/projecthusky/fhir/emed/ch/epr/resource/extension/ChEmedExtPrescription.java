@@ -32,14 +32,14 @@ public class ChEmedExtPrescription extends ChEmedExtensionReference {
     public ChEmedExtPrescription(final UUID id,
                                  final UUID externalDocumentId) {
         super();
-        this.setIdentifier(id);
+        this.setExtensionId(id);
         this.setExternalDocumentId(externalDocumentId);
     }
 
     @Override
     public ChEmedExtPrescription copy() {
         final var copy = new ChEmedExtPrescription();
-        copy.identifier = identifier;
+        copy.extensionId = extensionId;
         copy.externalDocumentId = externalDocumentId;
         return copy;
     }
