@@ -15,19 +15,22 @@ import org.projecthusky.xua.deserialization.OpenSaml2Deserializer;
 
 /**
  * Abstract implementation class with the common methods and fields.
+ *
+ * @param <T> the type of the object
+ * @param <U> the type of the object for deserializing
  */
 public abstract class AbstractDeserializerImpl<T, U> implements Deserializer<U> {
 	private OpenSaml2Deserializer<T> openSamlDeserializer;
 
 	/**
-	 * default constructor
+	 * Default constructor
 	 */
 	protected AbstractDeserializerImpl() {
 		openSamlDeserializer = new OpenSaml2DeserializerImpl<>();
 	}
 
 	/**
-	 * Method to get deserializer
+	 * Method to get deserializer.
 	 * 
 	 * @return org.projecthusky.xua.deserialization.OpenSaml2Deserializer
 	 */

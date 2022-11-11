@@ -27,10 +27,18 @@ public class ConditionsImpl
 
 	private org.opensaml.saml.saml2.core.Conditions wrappedObject;
 
+	/**
+	 * Constructor with opensaml equivalent as wrapped object.
+	 * @param aInternalObject the opensaml instance
+	 */
 	protected ConditionsImpl(org.opensaml.saml.saml2.core.Conditions aInternalObject) {
 		wrappedObject = aInternalObject;
 	}
 
+	/**
+	 * Constructor with ConditionsType as param.
+	 * @param aInternalObject the ConditionsType to be set
+	 */
 	protected ConditionsImpl(ConditionsType aInternalObject) {
 		wrappedObject = new ConditionsBuilder().buildObject();
 		
@@ -51,6 +59,10 @@ public class ConditionsImpl
 		}
 	}
 
+	/**
+	 * Method to get the list of AudienceRestrictionTypes.
+	 * @return list of AudienceRestrictionType
+	 */
 	public List<AudienceRestrictionType> getAudienceRestrictions() {	
 		if (wrappedObject.getAudienceRestrictions() != null) {
 			wrappedObject.getAudienceRestrictions().forEach(audienceRestrictions -> 

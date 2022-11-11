@@ -20,33 +20,61 @@ import org.projecthusky.xua.communication.config.IdpClientConfig;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class IdpClientByBrowserAndProtocolHandlerConfigImpl extends AbstractClientConfig
-		implements IdpClientConfig {
+public class IdpClientByBrowserAndProtocolHandlerConfigImpl extends AbstractClientConfig implements IdpClientConfig {
 
+	/**
+	 * Enum for SamlRequestType
+	 */
 	public enum SamlRequestType {
-		SAMLREQUEST, SAMLART
+		/** samlrequest */
+		SAMLREQUEST,
+		/** saml art */
+		SAMLART
 	}
 
 	private String protocolHandlerName;
 
 	private SamlRequestType samlRequestType;
 
+	/**
+	 * Default constructor
+	 */
 	protected IdpClientByBrowserAndProtocolHandlerConfigImpl() {
 
 	}
 
+	/**
+	 * Method to get
+	 * 
+	 * @return protocolHandlerName
+	 */
 	public String getProtocolHandlerName() {
 		return protocolHandlerName;
 	}
 
+	/**
+	 * Method to get
+	 * 
+	 * @return samlRequestType
+	 */
 	public SamlRequestType getSamlRequestType() {
 		return samlRequestType;
 	}
 
+	/**
+	 * Method to set
+	 * 
+	 * @param protocolHandlerName to be set
+	 */
 	public void setProtocolHandlerName(String protocolHandlerName) {
 		this.protocolHandlerName = protocolHandlerName;
 	}
 
+	/**
+	 * Method to set
+	 * 
+	 * @param samlRequestType to be set
+	 */
 	public void setSamlRequestType(SamlRequestType samlRequestType) {
 		this.samlRequestType = samlRequestType;
 	}

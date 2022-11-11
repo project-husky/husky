@@ -209,7 +209,7 @@ class PatientTest {
 
 	/**
 	 * Test method for
-	 * {@link org.projecthusky.common.model.Patient#setTelecoms(java.util.List<Telecom>)}
+	 * {@link org.projecthusky.common.model.Patient#setTelecoms(List)}
 	 * .
 	 */
 	@Test

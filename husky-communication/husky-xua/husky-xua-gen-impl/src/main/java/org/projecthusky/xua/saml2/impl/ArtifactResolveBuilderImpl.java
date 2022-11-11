@@ -29,6 +29,9 @@ public class ArtifactResolveBuilderImpl implements ArtifactResolveBuilder,
 	private org.opensaml.saml.saml2.core.Issuer issuer;
 	private org.opensaml.saml.saml2.core.Artifact artifact;
 
+	/**
+	 * Default constructor.
+	 */
 	public ArtifactResolveBuilderImpl() {
 		wrappedObject = new org.opensaml.saml.saml2.core.impl.ArtifactResolveBuilder()
 				.buildObject();
@@ -49,6 +52,10 @@ public class ArtifactResolveBuilderImpl implements ArtifactResolveBuilder,
 		return this;
 	}
 
+	/**
+	 * Method to create ArtefactResolve instance.
+	 * @return the created artefactresolve instance
+	 */
 	public ArtifactResolve create() {
 		return new ArtifactResolveImpl(wrappedObject);
 	}

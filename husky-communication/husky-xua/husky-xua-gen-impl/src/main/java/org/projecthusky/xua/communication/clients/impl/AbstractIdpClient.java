@@ -98,7 +98,7 @@ public abstract class AbstractIdpClient implements IdpClient {
 	 * Method to get http client
 	 * 
 	 * @return closeable http client
-	 * @throws ClientSendException
+	 * @throws ClientSendException will be thrown if an error occures.
 	 */
 	public abstract CloseableHttpClient getHttpClient() throws ClientSendException;
 

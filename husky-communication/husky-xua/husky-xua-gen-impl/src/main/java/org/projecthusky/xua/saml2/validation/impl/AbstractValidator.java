@@ -41,26 +41,52 @@ public abstract class AbstractValidator {
 	private String password;
 	private KeyStore trustStore;
 
+	/**
+	 * Method to get logger.
+	 * @return returns the logger
+	 */
 	public Logger getLog() {
 		return log;
 	}
 
+	/**
+	 * Method to get password.
+	 * @return returns the password
+	 */
 	public String getPassword() {
 		return password;
 	}
 
+	/**
+	 * Method to get truststore. 
+	 * @return returns the truststore
+	 */
 	public KeyStore getTrustStore() {
 		return trustStore;
 	}
 
+	/**
+	 * Method to set password
+	 * @param password the password to be set
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+	/**
+	 * Method to set trustStore.
+	 * @param trustStore the trustStore to be set
+	 */
 	public void setTrustStore(KeyStore trustStore) {
 		this.trustStore = trustStore;
 	}
 
+	/**
+	 * Method to validate signatures.
+	 * @param aSignature the signature instance
+	 * @param aAlias the alias
+	 * @throws ValidationException will be thrown on validation errors
+	 */
 	public void validate(Signature aSignature, String aAlias) throws ValidationException {
 		try {
 			final var profileValidator = new SAMLSignatureProfileValidator();

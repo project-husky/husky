@@ -25,6 +25,9 @@ import org.projecthusky.common.hl7cdar2.POCDMT000040Section;
 @Generated(value = "org.projecthusky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-02-22")
 public class AbgabeSection extends POCDMT000040Section {
 
+	/**
+	 * Defautl Constructor
+	 */
     public AbgabeSection() {
         super.getClassCode().add("DOCSECT");
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.11.8.2.2.1"));

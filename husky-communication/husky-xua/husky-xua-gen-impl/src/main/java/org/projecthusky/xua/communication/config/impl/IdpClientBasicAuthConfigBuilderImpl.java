@@ -24,20 +24,40 @@ public class IdpClientBasicAuthConfigBuilderImpl implements ClientConfigBuilder 
 
 	private IdpClientBasicAuthConfigImpl config;
 
+	/**
+	 * Default constructor
+	 */
 	public IdpClientBasicAuthConfigBuilderImpl() {
 		config = new IdpClientBasicAuthConfigImpl();
 	}
 
+	/**
+	 * to set basicAuthPassword
+	 * 
+	 * @param aBasicAuthPassword the basicAuthPassword to be set
+	 * @return this instance of builder
+	 */
 	public IdpClientBasicAuthConfigBuilderImpl basicAuthPassword(String aBasicAuthPassword) {
 		config.setBasicAuthPassword(aBasicAuthPassword);
 		return this;
 	}
 
+	/**
+	 * to set aBasicAuthUsername
+	 * 
+	 * @param aBasicAuthUsername the aBasicAuthUsername to be set
+	 * @return this instance of builder
+	 */
 	public IdpClientBasicAuthConfigBuilderImpl basicAuthUsername(String aBasicAuthUsername) {
 		config.setBasicAuthUsername(aBasicAuthUsername);
 		return this;
 	}
 
+	/**
+	 * Method to create instance.
+	 * 
+	 * @return the instance be returned
+	 */
 	public IdpClientBasicAuthConfigImpl create() {
 		return config;
 	}

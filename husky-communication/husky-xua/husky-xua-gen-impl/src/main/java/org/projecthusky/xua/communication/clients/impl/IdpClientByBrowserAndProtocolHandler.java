@@ -53,8 +53,12 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	public IdpClientByBrowserAndProtocolHandler(
-			IdpClientByBrowserAndProtocolHandlerConfigImpl clientConfiguration) {
+	/**
+	 * Constructor with config parameter
+	 * 
+	 * @param clientConfiguration the config to be used.
+	 */
+	public IdpClientByBrowserAndProtocolHandler(IdpClientByBrowserAndProtocolHandlerConfigImpl clientConfiguration) {
 		config = clientConfiguration;
 	}
 
@@ -64,8 +68,7 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 	 * suppressed, because file is only writeable for the owner
 	 */
 	@SuppressWarnings("java:S5443")
-	private void openHtmlFormPage(AuthnRequest aAuthnRequest)
-			throws SerializeException, IOException {
+	private void openHtmlFormPage(AuthnRequest aAuthnRequest) throws SerializeException, IOException {
 		final var serializer = new AuthnRequestSerializerImpl();
 		final byte[] authnByteArray = serializer.toXmlByteArray(aAuthnRequest);
 		final var samlRequest = Base64.getEncoder().encodeToString(authnByteArray);
@@ -101,7 +104,7 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 			}
 		}
 
-		try(final var os = new FileOutputStream(tempFile)){
+		try (final var os = new FileOutputStream(tempFile)) {
 			os.write(template.getBytes());
 		}
 
@@ -110,8 +113,7 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 		tempFile.deleteOnExit();
 	}
 
-	private Response getResponse(String samlReponse)
-			throws DeserializeException {
+	private Response getResponse(String samlReponse) throws DeserializeException {
 		final byte[] samlReponseBytes = Base64.getDecoder().decode(samlReponse);
 		final var deserializer = new ResponseDeserializerImpl();
 		return deserializer.fromXmlByteArray(samlReponseBytes);
@@ -168,7 +170,7 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 		try {
 
 			final var tempFile = new File(System.getProperty("java.io.tmpdir"),
-					config.getProtocolHandlerName() + ".io");			
+					config.getProtocolHandlerName() + ".io");
 			Files.deleteIfExists(tempFile.toPath());
 			openHtmlFormPage(aAuthnRequest);
 
@@ -179,8 +181,7 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 		}
 	}
 
-	private Object startWaitForResponse(File response)
-			throws IOException, ClientSendException, DeserializeException {
+	private Object startWaitForResponse(File response) throws IOException, ClientSendException, DeserializeException {
 		final var end = Calendar.getInstance();
 
 		// This is the timeout to wait for the SAML response
@@ -195,9 +196,9 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 			Thread.currentThread().interrupt();
 		}
 
-		try(final var in = new BufferedReader(new FileReader(response))){
+		try (final var in = new BufferedReader(new FileReader(response))) {
 			String line = in.readLine();
-			
+
 			Files.deleteIfExists(response.toPath());
 			if (line == null) {
 				throw new ClientSendException("No SAML response found");
@@ -215,7 +216,7 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 				return getResponse(samlReponse);
 			}
 		}
-		
+
 	}
 
 }

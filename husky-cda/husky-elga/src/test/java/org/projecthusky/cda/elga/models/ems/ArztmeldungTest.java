@@ -49,7 +49,7 @@ import org.junit.jupiter.api.Test;
 class ArztmeldungTest {
 
 	/**
-	 * Test method for {@link Arztmeldung()}.
+	 * Test method for {@link Arztmeldung}.
 	 *
 	 * @throws JAXBException the JAXB exception
 	 * @throws IOException   Signals that an I/O exception has occurred.

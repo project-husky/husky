@@ -29,22 +29,41 @@ public class IdpClientCertificateAuthConfigImpl extends AbstractClientConfig
 
 	private char[] clientKeyStorePassword;
 
+	/**
+	 * Default constructor
+	 */
 	protected IdpClientCertificateAuthConfigImpl() {
 
 	}
 
+	/**
+	 * Method to get
+	 * @return clientKeyStore the client key store 
+	 */
 	public KeyStore getClientKeyStore() {
 		return clientKeyStore;
 	}
 
+	/**
+	 * Method to get
+	 * @return clientKeyStorePassword the client key store password
+	 */
 	public char[] getClientKeyStorePassword() {
 		return clientKeyStorePassword;
 	}
 
+	/**
+	 * Method to set
+	 * @param clientKeyStore the client key store
+	 */
 	public void setClientKeyStore(KeyStore clientKeyStore) {
 		this.clientKeyStore = clientKeyStore;
 	}
 
+	/**
+	 * Method to set
+	 * @param aPassword the client key store password
+	 */
 	public void setClientKeyStorePassword(String aPassword) {
 		if ((aPassword != null) && !aPassword.isEmpty()) {
 			clientKeyStorePassword = aPassword.toCharArray();

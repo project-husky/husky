@@ -26,6 +26,9 @@ public class UsernameTokenBuilderImpl implements UsernameTokenBuilder,
 	private org.opensaml.soap.wssecurity.Username userName;
 	private org.opensaml.soap.wssecurity.UsernameToken wrappedObject;
 
+	/**
+	 * Default constructor.
+	 */
 	public UsernameTokenBuilderImpl() {
 		wrappedObject = new org.opensaml.soap.wssecurity.impl.UsernameTokenBuilder().buildObject();
 		userName = new org.opensaml.soap.wssecurity.impl.UsernameBuilder().buildObject();

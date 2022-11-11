@@ -6,6 +6,9 @@ import org.herasaf.xacml.core.function.AbstractFunction;
 import org.herasaf.xacml.core.function.Function;
 import org.herasaf.xacml.core.function.FunctionProcessingException;
 
+/**
+ * Class implementing function:interactedPreviously
+ */
 public class FunctionInteractedPreviously extends AbstractFunction {
 
 	/** XACML function ID. */
@@ -22,6 +25,9 @@ public class FunctionInteractedPreviously extends AbstractFunction {
 		return ID;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Object handle(Object... args) throws FunctionProcessingException {
 		try {

@@ -34,8 +34,13 @@ import org.projecthusky.xua.saml2.Response;
  */
 public class IdpClientByCert extends AbstractHttpFormIdpClient {
 
+	/** client config */
 	private IdpClientCertificateAuthConfigImpl config;
 
+	/**
+	 * Constructor with configuration.
+	 * @param clientConfiguration the client configuration
+	 */
 	public IdpClientByCert(IdpClientCertificateAuthConfigImpl clientConfiguration) {
 		config = clientConfiguration;
 

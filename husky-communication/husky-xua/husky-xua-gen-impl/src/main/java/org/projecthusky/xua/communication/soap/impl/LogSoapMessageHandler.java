@@ -42,7 +42,8 @@ public class LogSoapMessageHandler implements SOAPHandler<SOAPMessageContext> {
 
 	/** The Logger. */
 	private Logger mLogger;
-	
+
+	/** msg sep */
 	public static final String MSG_SEPARATOR = "------------------------------------";
 
 	/**
@@ -62,13 +63,16 @@ public class LogSoapMessageHandler implements SOAPHandler<SOAPMessageContext> {
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see javax.xml.ws.handler.Handler#close(javax.xml.ws.handler.MessageContext)
+	 * @see SOAPHandler#close(MessageContext)
 	 */
 	@Override
 	public void close(MessageContext context) {
 		mLogger.debug("close: {}", context);
 	}
 
+	/**
+	 * Method to do before destroy
+	 */
 	@PreDestroy
 	public void destroy() {
 		mLogger.debug(MSG_SEPARATOR);
@@ -80,7 +84,7 @@ public class LogSoapMessageHandler implements SOAPHandler<SOAPMessageContext> {
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see javax.xml.ws.handler.soap.SOAPHandler#getHeaders()
+	 * @see SOAPHandler#getHeaders()
 	 */
 	@Override
 	public Set<QName> getHeaders() {
@@ -90,7 +94,7 @@ public class LogSoapMessageHandler implements SOAPHandler<SOAPMessageContext> {
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see javax.xml.ws.handler.Handler#handleFault(javax.xml.ws.handler.MessageContext)
+	 * @see SOAPHandler#handleFault(MessageContext)
 	 */
 	@Override
 	public boolean handleFault(SOAPMessageContext context) {
@@ -107,15 +111,14 @@ public class LogSoapMessageHandler implements SOAPHandler<SOAPMessageContext> {
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see javax.xml.ws.handler.Handler#handleMessage(javax.xml.ws.handler.MessageContext)
+	 * @see SOAPHandler#handleMessage(MessageContext)
 	 */
 	@Override
 	public boolean handleMessage(SOAPMessageContext context) {
 		mLogger.debug("LogSoapMessageHandler.handleMessage()");
 		try {
 
-			final Boolean outboundProperty = (Boolean) context
-					.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
+			final Boolean outboundProperty = (Boolean) context.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
 			var inout = "";
 
 			if (outboundProperty.booleanValue()) {
@@ -142,6 +145,9 @@ public class LogSoapMessageHandler implements SOAPHandler<SOAPMessageContext> {
 		return true;
 	}
 
+	/**
+	 * Method to do after create
+	 */
 	@PostConstruct
 	public void init() {
 		mLogger.debug(MSG_SEPARATOR);

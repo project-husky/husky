@@ -19,7 +19,10 @@ import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.w3c.dom.Element;
 
 /**
- * Class implementing the corresponding interface {@code OpenSaml2Deserializer<T>}.
+ * Class implementing the corresponding interface
+ * {@code OpenSaml2Deserializer<T>}.
+ * 
+ * @param <T> the type
  */
 public class OpenSaml2DeserializerImpl<T> implements OpenSaml2Deserializer<T> {
 
@@ -49,7 +52,8 @@ public class OpenSaml2DeserializerImpl<T> implements OpenSaml2Deserializer<T> {
 	@Override
 	public Element deserializeFromByteArrayToXmlElement(byte[] aXmlBytes) throws DeserializeException {
 		try {
-			// Use the parser from the OpenSAML ParserPool because its implementation may be different than
+			// Use the parser from the OpenSAML ParserPool because its implementation may be
+			// different than
 			// XmlFactories.newSafeDocumentBuilder()
 			final var document = Objects.requireNonNull(XMLObjectProviderRegistrySupport.getParserPool())
 					.parse(new ByteArrayInputStream(aXmlBytes));
@@ -81,8 +85,7 @@ public class OpenSaml2DeserializerImpl<T> implements OpenSaml2Deserializer<T> {
 	@Override
 	public T deserializeFromXml(Element aXmlElement) throws DeserializeException {
 		try {
-			final var marshallerFactory = XMLObjectProviderRegistrySupport
-					.getUnmarshallerFactory();
+			final var marshallerFactory = XMLObjectProviderRegistrySupport.getUnmarshallerFactory();
 			final var unmarshaller = marshallerFactory.getUnmarshaller(aXmlElement);
 
 			return (T) Objects.requireNonNull(unmarshaller).unmarshall(aXmlElement);

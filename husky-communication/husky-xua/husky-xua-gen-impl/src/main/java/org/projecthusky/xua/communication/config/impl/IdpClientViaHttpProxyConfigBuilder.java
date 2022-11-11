@@ -24,24 +24,50 @@ public class IdpClientViaHttpProxyConfigBuilder implements ClientConfigBuilder {
 
 	private IdpClientViaHttpProxyConfigImpl clientConfig;
 
+	/**
+	 * Default constructor
+	 */
 	public IdpClientViaHttpProxyConfigBuilder() {
 		clientConfig = new IdpClientViaHttpProxyConfigImpl();
 	}
 
+	/**
+	 * Method to create config.
+	 * 
+	 * @return the buildet config
+	 */
 	public IdpClientViaHttpProxyConfigImpl create() {
 		return clientConfig;
 	}
 
+	/**
+	 * Method to set
+	 * 
+	 * @param aProxyHost the proxy host
+	 * @return this instance of the builder
+	 */
 	public IdpClientViaHttpProxyConfigBuilder proxyHost(String aProxyHost) {
 		clientConfig.setProxyHost(aProxyHost);
 		return this;
 	}
 
+	/**
+	 * Method to set
+	 * 
+	 * @param aProxyPort the proxy port
+	 * @return this instance of the builder
+	 */
 	public IdpClientViaHttpProxyConfigBuilder proxyPort(int aProxyPort) {
 		clientConfig.setProxyPort(aProxyPort);
 		return this;
 	}
 
+	/**
+	 * Method to set
+	 * 
+	 * @param aProxyProtocol the proxy protocol
+	 * @return this instance of the builder
+	 */
 	public IdpClientViaHttpProxyConfigBuilder proxyProtocol(String aProxyProtocol) {
 		clientConfig.setProxyProtocol(aProxyProtocol);
 		return this;

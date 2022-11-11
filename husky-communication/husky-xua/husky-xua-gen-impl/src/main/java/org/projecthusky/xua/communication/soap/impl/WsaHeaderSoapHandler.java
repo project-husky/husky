@@ -35,6 +35,7 @@ import jakarta.xml.ws.handler.soap.SOAPMessageContext;
  */
 public class WsaHeaderSoapHandler implements SOAPHandler<SOAPMessageContext> {
 
+	/** in out param */
 	public static final String IN_OUT_PARAM = "InOutExchange";
 	private QName mActionHeader;
 	private Logger mLogger;
@@ -45,11 +46,18 @@ public class WsaHeaderSoapHandler implements SOAPHandler<SOAPMessageContext> {
 
 	private WsaHeaderValue mWsaValues;
 
+	/** namespace uri */
 	public static final String NAMESPACE_SOAPENV_URI = "http://www.w3.org/2003/05/soap-envelope";
 
+	/** wsa */
 	public static final String NAMESPACE_WSA = "wsa";
+	/** wsa uri */
 	public static final String NAMESPACE_WSA_URI = "http://www.w3.org/2005/08/addressing";
 
+	/**
+	 * Constructor with param.
+	 * @param aActionValue the WsaHeaderValue
+	 */
 	public WsaHeaderSoapHandler(WsaHeaderValue aActionValue) {
 		mLogger = LoggerFactory.getLogger(getClass());
 		mLogger.trace("WSAHeaderSoapHandler()");

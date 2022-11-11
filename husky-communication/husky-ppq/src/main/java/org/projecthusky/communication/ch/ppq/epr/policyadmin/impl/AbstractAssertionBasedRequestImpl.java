@@ -27,6 +27,12 @@ public abstract class AbstractAssertionBasedRequestImpl extends AbstractXMLObjec
 
 	private AssertionType assertion;
 
+	/**
+	 * Constructor with params.
+	 * @param namespaceURI the namespace URI
+	 * @param elementLocalName the element local name
+	 * @param namespacePrefix the namespace prefix
+	 */
 	protected AbstractAssertionBasedRequestImpl(String namespaceURI, String elementLocalName,
 			String namespacePrefix) {
 		super(namespaceURI, elementLocalName, namespacePrefix);

@@ -44,6 +44,10 @@ public class HeaderAddAssertionSoapHandler implements SOAPHandler<SOAPMessageCon
 
 	private SecurityHeaderElement mSecurityHeaderElement;
 
+	/**
+	 * Constructor with param
+	 * @param aSecurityHeaderElement the security header element
+	 */
 	public HeaderAddAssertionSoapHandler(SecurityHeaderElement aSecurityHeaderElement) {
 		mLogger = LoggerFactory.getLogger(getClass());
 		mLogger.debug("AssertionSoapHandler()");

@@ -26,7 +26,8 @@ import javax.xml.bind.annotation.XmlType;
  * Java-Klasse für ActClassControlAct.
  *
  * <p>
- * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
+ * Das folgende Schemafragment gibt den erwarteten Content an, der in dieser
+ * Klasse enthalten ist.
  *
  * <pre>
  * &lt;simpleType name="ActClassControlAct"&gt;
@@ -43,15 +44,33 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ActClassControlAct {
 
-    CACT, ACTN, INFO, STC;
+	/** cact */
+	CACT,
+	/** actn */
+	ACTN,
+	/** info */
+	INFO,
+	/** stc */
+	STC;
 
-    @NonNull
-    public static ActClassControlAct fromValue(String v) {
-        return valueOf(v);
-    }
+	/**
+	 * Method to get enum by value.
+	 * 
+	 * @param v the value
+	 * @return the found enum
+	 */
+	@NonNull
+	public static ActClassControlAct fromValue(String v) {
+		return valueOf(v);
+	}
 
-    @NonNull
-    public String value() {
-        return name();
-    }
+	/**
+	 * Method to get the value.
+	 * 
+	 * @return the value of the enum
+	 */
+	@NonNull
+	public String value() {
+		return name();
+	}
 }

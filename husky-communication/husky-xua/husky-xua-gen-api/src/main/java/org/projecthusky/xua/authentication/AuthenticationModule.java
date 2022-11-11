@@ -49,7 +49,7 @@ public interface AuthenticationModule {
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
-	 * @throws ClientSendException
+	 * @throws ClientSendException will be thrown if an error occures.
 	 */
 	Object invokeUserAuthentication(AuthnRequest aAuthnRequest, IdpClientConfig clientConfiguration)
 			throws ClientSendException;

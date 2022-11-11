@@ -24,6 +24,13 @@ public class WsaHeaderValue {
 	private boolean mMustUnderstand;
 	private String mTo;
 
+	/**
+	 * Constructor with params.
+	 * 
+	 * @param messageId the message id
+	 * @param action    the action
+	 * @param to        the to info
+	 */
 	public WsaHeaderValue(String messageId, String action, String to) {
 		super();
 		mMessageId = messageId;
@@ -32,6 +39,14 @@ public class WsaHeaderValue {
 		mMustUnderstand = false;
 	}
 
+	/**
+	 * Constructor with params.
+	 * 
+	 * @param messageId       the message id
+	 * @param action          the action
+	 * @param to              the to info
+	 * @param aMustUnderstand the must understand value
+	 */
 	public WsaHeaderValue(String messageId, String action, String to, boolean aMustUnderstand) {
 		super();
 		mMessageId = messageId;
@@ -40,34 +55,66 @@ public class WsaHeaderValue {
 		mMustUnderstand = aMustUnderstand;
 	}
 
+	/**
+	 * Method to get.
+	 * @return the mAction value
+	 */
 	public String getAction() {
 		return mAction;
 	}
 
+	/**
+	 * Method to get.
+	 * @return the mMessageId value
+	 */
 	public String getMessageId() {
 		return mMessageId;
 	}
 
+	/**
+	 * Method to get.
+	 * @return the mTo value
+	 */
 	public String getTo() {
 		return mTo;
 	}
 
+	/**
+	 * Method to get.
+	 * @return the mMustUnderstand value
+	 */
 	public boolean isMustUnderstand() {
 		return mMustUnderstand;
 	}
 
+	/**
+	 * Method to set.
+	 * @param action the action to be set
+	 */
 	public void setAction(String action) {
 		mAction = action;
 	}
 
+	/**
+	 * Method to set.
+	 * @param messageId the messageId to be set
+	 */
 	public void setMessageId(String messageId) {
 		mMessageId = messageId;
 	}
 
+	/**
+	 * Method to set.
+	 * @param mustUnderstand the mustUnderstand to be set
+	 */
 	public void setMustUnderstand(boolean mustUnderstand) {
 		mMustUnderstand = mustUnderstand;
 	}
 
+	/**
+	 * Method to set.
+	 * @param to the to to be set
+	 */
 	public void setTo(String to) {
 		mTo = to;
 	}

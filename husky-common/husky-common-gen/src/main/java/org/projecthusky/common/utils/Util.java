@@ -130,7 +130,7 @@ public class Util {
 	 * Converts a list of II int a list of Identificators.
 	 *
 	 * @param mII the list to convert
-	 * @return
+	 * @return returns a list of Identificators
 	 * 
 	 * @deprecated (replaced by {@link Identificator#getIdentificatorList(List)}
 	 */
@@ -860,8 +860,8 @@ public class Util {
 	}
 
 	/**
-	 * Extracts a {@link HashMap<String, TelecomAddressUse>} with a given Type from a given eHC
-	 * {@link List<TEL>}.
+	 * Extracts a {@link HashMap} with a given Type from a given eHC.
+	 * {@link List}.
 	 *
 	 * @param telecoms the List with unsorted MDHT TEL objects
 	 * @param type     the type of telecommunication endpoint that should be

@@ -66,12 +66,12 @@ public class ChEprAssertionValidationParameters {
      */
     public static final String CH_EPR_SUBJECT_NAME = STD_PREFIX + STMT_INFIX + ".ChEprSubjectName";
     /**
-     * Carries a {@link java.util.List<String>} specifying a plain text the subject's organization name as registered in
+     * Carries a {@link java.util.List} specifying a plain text the subject's organization name as registered in.
      * the HPD or empty, if not known.
      */
     public static final String CH_EPR_ORGANIZATIONS_NAME = STD_PREFIX + STMT_INFIX + ".ChEprOrganizationsName";
     /**
-     * Carries a {@link java.util.List<String>} specifying the ID of the subject's organization or group registered in
+     * Carries a {@link java.util.List} specifying the ID of the subject's organization or group registered in.
      * the HPD or empty, if not known.
      */
     public static final String CH_EPR_ORGANIZATIONS_ID = STD_PREFIX + STMT_INFIX + ".ChEprOrganizationsId";

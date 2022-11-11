@@ -48,6 +48,8 @@ class ClientFactoryTest {
 
 	/**
 	 * setup the test parameters
+	 * 
+	 * @throws Exception on errors.
 	 */
 	@BeforeEach
 	public void setUp() throws Exception {
@@ -114,8 +116,7 @@ class ClientFactoryTest {
 	 */
 	@Test
 	void testIdpClientByBrowserAndProtocolHandlerConfig() {
-		final IdpClient client = ClientFactory
-				.getIdpClient(testIdpClientByBrowserAndProtocolHandlerConfig);
+		final IdpClient client = ClientFactory.getIdpClient(testIdpClientByBrowserAndProtocolHandlerConfig);
 		assertNotNull(client);
 		assertTrue(client instanceof IdpClientByBrowserAndProtocolHandler);
 	}

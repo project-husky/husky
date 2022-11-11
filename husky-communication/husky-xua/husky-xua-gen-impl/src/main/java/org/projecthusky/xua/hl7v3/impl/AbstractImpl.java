@@ -42,9 +42,9 @@ public abstract class AbstractImpl extends AbstractXMLObject implements CE {
 	/**
 	 * Constructor to create element with certain namespace, name and prefix
 	 * 
-	 * @param namespaceURI
-	 * @param elementLocalName
-	 * @param namespacePrefix
+	 * @param namespaceURI the namespace uri
+	 * @param elementLocalName the element local name
+	 * @param namespacePrefix the namespace prefix
 	 */
 	protected AbstractImpl(String namespaceURI, String elementLocalName, String namespacePrefix) {
 		super(namespaceURI, elementLocalName, namespacePrefix);

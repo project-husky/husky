@@ -25,7 +25,7 @@ public abstract class V3Client extends CamelService {
 	/**
 	 * Constructor
 	 * 
-	 * @param serverURI:
+	 * @param serverURI
 	 *            the URI for the server to use for query requests
 	 */
 	protected V3Client(URI serverURI) {

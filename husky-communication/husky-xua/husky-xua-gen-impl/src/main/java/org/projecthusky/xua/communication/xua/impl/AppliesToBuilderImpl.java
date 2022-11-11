@@ -30,6 +30,9 @@ public class AppliesToBuilderImpl implements AppliesToBuilder,
 
 	private org.opensaml.soap.wspolicy.AppliesTo appliesTo;
 
+	/**
+	 * Default constructor.
+	 */
 	public AppliesToBuilderImpl() {
 		appliesTo = new org.opensaml.soap.wspolicy.impl.AppliesToBuilder().buildObject();
 	}

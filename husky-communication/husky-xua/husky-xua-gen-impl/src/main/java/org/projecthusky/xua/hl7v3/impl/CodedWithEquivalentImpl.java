@@ -23,6 +23,12 @@ import org.projecthusky.xua.hl7v3.OpenSamlCodedWithEquivalent;
  */
 public class CodedWithEquivalentImpl extends AbstractImpl implements OpenSamlCodedWithEquivalent {
 
+	/**
+	 * Constructor with params.
+	 * @param namespaceURI the namespace uri
+	 * @param elementLocalName the element local name
+	 * @param namespacePrefix the prefix
+	 */
 	protected CodedWithEquivalentImpl(String namespaceURI, String elementLocalName, String namespacePrefix) {
 		super(namespaceURI, elementLocalName, namespacePrefix);
 	}

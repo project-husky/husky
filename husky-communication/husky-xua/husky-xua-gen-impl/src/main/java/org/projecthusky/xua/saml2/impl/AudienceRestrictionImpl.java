@@ -32,11 +32,19 @@ public class AudienceRestrictionImpl extends AudienceRestrictionType implements
 
 	private org.opensaml.saml.saml2.core.AudienceRestriction wrappedObject;
 
+	/**
+	 * Constructor with wrapped opensaml instance as param.
+	 * @param aInternalObject the opensaml instance
+	 */
 	protected AudienceRestrictionImpl(
 			org.opensaml.saml.saml2.core.AudienceRestriction aInternalObject) {
 		wrappedObject = aInternalObject;
 	}
 
+	/**
+	 * Constructor with AudienceRestrictionType as param.
+	 * @param aInternalObject the AudienceRestrictionType to be set
+	 */
 	protected AudienceRestrictionImpl(AudienceRestrictionType aInternalObject) {
 		wrappedObject = new AudienceRestrictionBuilder().buildObject();
 
@@ -47,12 +55,19 @@ public class AudienceRestrictionImpl extends AudienceRestrictionType implements
 		}
 	}
 
+	/**
+	 * Method to get audiences.
+	 * @return the list of audiences
+	 */
 	public List<String> getAudiences() {		
 		final List<org.opensaml.saml.saml2.core.Audience> internal = wrappedObject.getAudiences();		
 		internal.forEach(c -> getAudience().add(c.getURI()));
 		return getAudience();
 	}
 
+	/**
+	 * Method to get the wrapped object.
+	 */
 	@Override
 	public org.opensaml.saml.saml2.core.AudienceRestriction getWrappedObject() {
 		return wrappedObject;

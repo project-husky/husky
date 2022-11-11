@@ -34,6 +34,10 @@ public class ArtifactResponseImpl
 
 	private org.opensaml.saml.saml2.core.ArtifactResponse wrappedObject;
 
+	/**
+	 * Constructor with wrapped opensaml instance as param. 
+	 * @param artifactResponse the wrapped instance
+	 */
 	protected ArtifactResponseImpl(org.opensaml.saml.saml2.core.ArtifactResponse artifactResponse) {
 		wrappedObject = artifactResponse;
 	}

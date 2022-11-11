@@ -109,6 +109,12 @@ public class PolicyBuilderImpl
 		return new PolicyType();
 	}
 
+	/**
+	 * Method to create PolicyType.
+	 * 
+	 * @param aInternalObject the PolicyType
+	 * @return the opensaml PolicyType
+	 */
 	public org.opensaml.xacml.policy.PolicyType create(PolicyType aInternalObject) {
 		var policy = new PolicyTypeImplBuilder().buildObject();
 		policy.setVersion(aInternalObject.getVersion());

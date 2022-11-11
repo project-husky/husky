@@ -9,25 +9,28 @@ import org.opensaml.core.xml.AbstractXMLObject;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.xacml.policy.IdReferenceType;
 
+/**
+ * Class implementing XACMLPolicySetIdReferenceStatementImpl
+ */
 public class XACMLPolicySetIdReferenceStatementImpl extends AbstractXMLObject
 		implements XACMLPolicySetIdReferenceStatement {
-
 
 	/** ReferencedPolicie child. */
 	private List<IdReferenceType> policySetIdReference;
 
 	/**
-     * Constructor.
-     * 
-     * @param namespaceURI the namespace the element is in
-     * @param elementLocalName the local name of the XML element this Object represents
-     * @param namespacePrefix the prefix for the given namespace
-     */
+	 * Constructor.
+	 * 
+	 * @param namespaceURI     the namespace the element is in
+	 * @param elementLocalName the local name of the XML element this Object
+	 *                         represents
+	 * @param namespacePrefix  the prefix for the given namespace
+	 */
 	protected XACMLPolicySetIdReferenceStatementImpl(final String namespaceURI, final String elementLocalName,
-            final String namespacePrefix) {
-        super(namespaceURI, elementLocalName, namespacePrefix);
+			final String namespacePrefix) {
+		super(namespaceURI, elementLocalName, namespacePrefix);
 		policySetIdReference = new LinkedList<>();
-    }
+	}
 
 	/** {@inheritDoc} */
 	public List<XMLObject> getOrderedChildren() {
@@ -43,6 +46,5 @@ public class XACMLPolicySetIdReferenceStatementImpl extends AbstractXMLObject
 		return this.policySetIdReference;
 
 	}
-
 
 }

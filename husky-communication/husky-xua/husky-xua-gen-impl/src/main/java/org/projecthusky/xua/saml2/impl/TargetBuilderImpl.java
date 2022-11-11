@@ -109,6 +109,12 @@ public class TargetBuilderImpl
 		return new TargetType();
 	}
 
+	/**
+	 * Method to create TargetType.
+	 * 
+	 * @param aInternalObject the TargetType
+	 * @return the opensaml TargetType
+	 */
 	public org.opensaml.xacml.policy.TargetType create(TargetType aInternalObject) {
 		var targetType = new TargetTypeImplBuilder().buildObject();
 

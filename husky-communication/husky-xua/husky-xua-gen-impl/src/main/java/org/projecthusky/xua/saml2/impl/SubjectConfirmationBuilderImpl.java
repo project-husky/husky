@@ -73,6 +73,12 @@ public class SubjectConfirmationBuilderImpl implements SubjectConfirmationBuilde
 		return new SubjectConfirmationImpl(aInternalObject);
 	}
 
+	/**
+	 * Method to create SubjectConfirmationType.
+	 * 
+	 * @param aInternalObject the SubjectConfirmationType
+	 * @return the opensaml SubjectConfirmationType
+	 */
 	public org.opensaml.saml.saml2.core.SubjectConfirmation create(SubjectConfirmationType aInternalObject) {
 		return new SubjectConfirmationImpl(aInternalObject).getWrappedObject();
 	}

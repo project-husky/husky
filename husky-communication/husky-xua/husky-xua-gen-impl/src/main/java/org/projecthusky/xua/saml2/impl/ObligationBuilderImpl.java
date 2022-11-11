@@ -24,8 +24,7 @@ import org.opensaml.xacml.policy.impl.ObligationTypeImplBuilder;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class ObligationBuilderImpl
-		implements SimpleBuilder<ObligationType>,
+public class ObligationBuilderImpl implements SimpleBuilder<ObligationType>,
 		SecurityObjectBuilder<org.opensaml.xacml.policy.ObligationType, ObligationType> {
 
 	@Override
@@ -42,7 +41,7 @@ public class ObligationBuilderImpl
 		}
 
 		retVal.setFulfillOn(effectType);
-		
+
 		return retVal;
 	}
 
@@ -51,6 +50,12 @@ public class ObligationBuilderImpl
 		return new ObligationType();
 	}
 
+	/**
+	 * Method to create ObligationType.
+	 * 
+	 * @param aInternalObject the ObligationType
+	 * @return the opensaml ObligationType
+	 */
 	public org.opensaml.xacml.policy.ObligationType create(ObligationType aInternalObject) {
 		var retVal = new ObligationTypeImplBuilder().buildObject();
 		retVal.setObligationId(aInternalObject.getObligationId());

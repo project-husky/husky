@@ -70,7 +70,13 @@ public class StatementBuilderImpl
 
 		return retVal;
 	}
-
+	
+	/**
+	 * Method to create XACMLPolicyStatementType.
+	 * 
+	 * @param aInternalObject the XACMLPolicyStatementType
+	 * @return the opensaml XACMLPolicyStatementType
+	 */
 	public org.opensaml.xacml.profile.saml.XACMLPolicyStatementType create(
 			org.openehealth.ipf.commons.ihe.xacml20.stub.xacml20.saml.assertion.XACMLPolicyStatementType aInternalObject) {
 		var retVal = new XACMLPolicyStatementTypeImplBuilder().buildObject();

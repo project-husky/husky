@@ -54,10 +54,14 @@ import net.shibboleth.utilities.java.support.xml.XMLParserException;
  */
 public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 
-	
 	private static final String SOAPNS = "http://schemas.xmlsoap.org/soap/envelope/";
 	private IdpClientBasicAuthConfigImpl config;
 
+	/**
+	 * Constgructor with config as param
+	 * 
+	 * @param clientConfiguration the client configuration
+	 */
 	public IdpSoapBindingClientByBasicAuth(IdpClientBasicAuthConfigImpl clientConfiguration) {
 		config = clientConfiguration;
 
@@ -76,8 +80,7 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 	 */
 	private void addBasicAuthentication(HttpPost post) {
 		final String auth = config.getBasicAuthUsername() + ":" + config.getBasicAuthPassword();
-		final byte[] encodedAuth = Base64.getEncoder()
-				.encode(auth.getBytes(StandardCharsets.ISO_8859_1));
+		final byte[] encodedAuth = Base64.getEncoder().encode(auth.getBytes(StandardCharsets.ISO_8859_1));
 		final String authHeader = "Basic " + new String(encodedAuth);
 		post.setHeader(HttpHeaders.AUTHORIZATION, authHeader);
 	}
@@ -205,8 +208,7 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 			final var deserializer = new ResponseDeserializerImpl();
 			return deserializer.fromXmlElement(doc.getDocumentElement());
 		} catch (UnsupportedOperationException | IOException | DeserializeException
-				| TransformerFactoryConfigurationError 
-				| XMLParserException e) {
+				| TransformerFactoryConfigurationError | XMLParserException e) {
 			throw new ClientSendException(e);
 		}
 
