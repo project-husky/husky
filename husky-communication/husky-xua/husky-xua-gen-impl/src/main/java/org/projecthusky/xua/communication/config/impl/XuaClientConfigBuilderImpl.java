@@ -26,6 +26,9 @@ public class XuaClientConfigBuilderImpl implements XuaClientConfigBuilder {
 
 	private XuaClientConfigImpl config;
 
+	/**
+	 * Default constructor.
+	 */
 	public XuaClientConfigBuilderImpl() {
 		config = new XuaClientConfigImpl();
 		config.setSoapVersion(SoapVersion.SOAP_12);

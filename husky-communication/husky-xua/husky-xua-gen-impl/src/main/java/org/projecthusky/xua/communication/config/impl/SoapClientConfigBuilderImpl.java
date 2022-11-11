@@ -26,6 +26,9 @@ public class SoapClientConfigBuilderImpl implements SoapClientConfigBuilder {
 
 	private SoapClientConfig config;
 
+	/**
+	 * Default Constructor
+	 */
 	public SoapClientConfigBuilderImpl() {
 		config = new BaseSoapClientConfigImpl();
 	}
@@ -48,6 +51,10 @@ public class SoapClientConfigBuilderImpl implements SoapClientConfigBuilder {
 		return this;
 	}
 
+	/**
+	 * Method to create the config.
+	 * @return the config created
+	 */
 	public SoapClientConfig create() {
 		return config;
 	}

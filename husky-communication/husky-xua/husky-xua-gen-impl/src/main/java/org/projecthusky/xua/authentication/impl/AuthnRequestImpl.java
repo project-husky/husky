@@ -32,7 +32,8 @@ public class AuthnRequestImpl
 	private org.opensaml.saml.saml2.core.AuthnRequest authnRequest;
 
 	/**
-	 * Default constructor to instanciate the object
+	 * Constructor to instanciate the object with the wrapped opensaml instance.
+	 * @param aAuthnRequest the wrapping opensaml instance to be set
 	 */
 	protected AuthnRequestImpl(org.opensaml.saml.saml2.core.AuthnRequest aAuthnRequest) {
 		authnRequest = aAuthnRequest;

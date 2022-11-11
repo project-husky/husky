@@ -28,6 +28,9 @@ public class EncryptedAssertionBuilderImpl implements EncryptedAssertionBuilder,
 	/** The encrypted assertion. */
 	private org.opensaml.saml.saml2.core.EncryptedAssertion encryptedAssertion;
 
+	/**
+	 * Default constructor
+	 */
 	public EncryptedAssertionBuilderImpl() {
 		encryptedAssertion = new org.opensaml.saml.saml2.core.impl.EncryptedAssertionBuilder()
 				.buildObject();

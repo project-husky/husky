@@ -31,6 +31,11 @@ public class IdpClientByProxy extends AbstractHttpFormIdpClient {
 
 	private IdpClientViaHttpProxyConfigImpl config;
 
+	/**
+	 * Constgructor with config as param
+	 * 
+	 * @param clientConfiguration the client configuration
+	 */
 	public IdpClientByProxy(IdpClientViaHttpProxyConfigImpl clientConfiguration) {
 		config = clientConfiguration;
 
@@ -43,8 +48,7 @@ public class IdpClientByProxy extends AbstractHttpFormIdpClient {
 
 	@Override
 	public RequestConfig getRequestConfig() {
-		final var proxy = new HttpHost(config.getProxyHost(), config.getProxyPort(),
-				config.getProxyProtocol());
+		final var proxy = new HttpHost(config.getProxyHost(), config.getProxyPort(), config.getProxyProtocol());
 		return RequestConfig.custom().setProxy(proxy).build();
 	}
 

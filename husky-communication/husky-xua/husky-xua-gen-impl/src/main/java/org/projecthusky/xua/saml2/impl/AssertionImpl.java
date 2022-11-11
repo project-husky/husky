@@ -82,17 +82,17 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 	protected AssertionImpl(AssertionType aAssertion) {
 		assertion = new AssertionBuilder().buildObject();
 
-		getStatements(aAssertion.getStatementOrAuthnStatementOrAuthzDecisionStatement());
-		getIssuer(aAssertion.getIssuer());
-		getConditions(aAssertion.getConditions());
-		getId(aAssertion.getID());
-		getIssueInstant(aAssertion.getIssueInstant());
-		getSubject(aAssertion.getSubject());
-		getVersion(aAssertion.getVersion());
+		addStatements(aAssertion.getStatementOrAuthnStatementOrAuthzDecisionStatement());
+		setIssuer(aAssertion.getIssuer());
+		setConditions(aAssertion.getConditions());
+		setId(aAssertion.getID());
+		setIssueInstant(aAssertion.getIssueInstant());
+		setSubject(aAssertion.getSubject());
+		setVersion(aAssertion.getVersion());
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * method to set attributes.
 	 */
 	public void setAttributes() {
 		if (this.statementOrAuthnStatementOrAuthzDecisionStatement == null) {
@@ -114,9 +114,10 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Method to add statements.
+	 * @param statements the list of statements to be added
 	 */
-	public void getStatements(List<StatementAbstractType> statements) {
+	public void addStatements(List<StatementAbstractType> statements) {
 		if (this.assertion == null) {
 			this.assertion = new AssertionBuilder().buildObject();
 		}
@@ -144,8 +145,7 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 	}
 
 	/**
-	 *
-	 * {@inheritDoc}
+	 * method to set authnstatements.
 	 */
 	public void setAuthnStatements() {
 		if (this.statementOrAuthnStatementOrAuthzDecisionStatement == null) {
@@ -158,8 +158,7 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 	}
 
 	/**
-	 *
-	 * {@inheritDoc}
+	 * method to set statements.
 	 */
 	public void setStatements() {
 		if (this.statementOrAuthnStatementOrAuthzDecisionStatement == null) {
@@ -180,18 +179,27 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 		});
 	}
 
+	/**
+	 * method to set conditions.
+	 */
 	public void setConditions() {
 		if (assertion.getConditions() != null) {
 			this.conditions = new ConditionsBuilderImpl().create(assertion.getConditions());
 		}
 	}
 
-	public void getConditions(ConditionsType conditions) {
+	/**
+	 * method to set a conditions.
+	 */
+	public void setConditions(ConditionsType conditions) {
 		if (conditions != null) {
 			this.assertion.setConditions(new ConditionsBuilderImpl().create(conditions));
 		}
 	}
 
+	/**
+	 * method to set condition audience restrictions.
+	 */
 	public void setConditionsAudienceRestrictions() {
 		if (assertion.getConditions() != null && assertion.getConditions().getAudienceRestrictions() != null) {
 			assertion.getConditions().getAudienceRestrictions()
@@ -200,6 +208,9 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 		}
 	}
 
+	/**
+	 * method to set condition not before.
+	 */
 	public void setConditionsNotBefore() {
 		if (assertion.getConditions() != null) {
 			final var retVal = new GregorianCalendar();
@@ -216,6 +227,9 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 		}
 	}
 
+	/**
+	 * method to set condition not on or after.
+	 */
 	public void setConditionsNotOnOrAfter() {
 		if (assertion.getConditions() != null) {
 			final var retVal = Calendar.getInstance();
@@ -232,13 +246,17 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * method to setid
 	 */
 	public void setId() {
 		setID(assertion.getID());
 	}
 
-	public void getId(String id) {
+	/**
+	 * method to an id
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
 		this.assertion.setID(id);
 	}
 
@@ -262,7 +280,11 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 		}
 	}
 
-	public void getIssueInstant(XMLGregorianCalendar cal) {
+	/**
+	 * Method to set IssueInstant
+	 * @param cal the XMLGregorianCalendar to set
+	 */
+	public void setIssueInstant(XMLGregorianCalendar cal) {
 		if (cal != null) {
 			this.assertion.setIssueInstant(cal.toGregorianCalendar().toInstant());
 		}
@@ -285,7 +307,11 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 		}
 	}
 
-	public void getIssuer(NameIDType issuer) {
+	/**
+	 * method to setIssuer
+	 * @param issuer the issue to be set
+	 */
+	public void setIssuer(NameIDType issuer) {
 		if (issuer != null) {
 			Issuer retVal = new IssuerBuilder().buildObject();
 			retVal.setValue(issuer.getValue());
@@ -297,9 +323,7 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.projecthusky.xua.saml2.Assertion#getSubject()
+	 * Method to set subject.
 	 */
 	public void setSubject() {
 		if (assertion.getSubject() != null) {
@@ -308,6 +332,10 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 		}
 	}
 
+	/**
+	 * Method to set a subject.
+	 * @param subject the subject to be set.
+	 */
 	public void getSubject(SubjectType subject) {
 		if (subject != null) {
 			this.assertion.setSubject(new SubjectBuilderImpl().create(subject));
@@ -315,10 +343,7 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 	}
 
 	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see org.projecthusky.xua.saml2.Base#getVersion()
+	 * method to set the version
 	 */
 	public void setVersion() {
 		if (assertion.getVersion() != null) {
@@ -327,7 +352,11 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 		}
 	}
 
-	public void getVersion(String version) {
+	/**
+	 * Method to set a version.
+	 * @param version the version to be set
+	 */
+	public void setVersion(String version) {
 		this.assertion.setVersion(SAMLVersion.valueOf(version));
 	}
 
@@ -342,9 +371,8 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 	}
 
 	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.projecthusky.xua.saml2.Response#hasSignature()
+	 * method to check for signature.
+	 * @return true if signature is available else false
 	 */
 	public boolean hasSignature() {
 		return (assertion.getSignature() != null);

@@ -26,19 +26,39 @@ public class IdpClientCertificateAuthConfigBuilder implements ClientConfigBuilde
 
 	private IdpClientCertificateAuthConfigImpl clientConfig;
 
+	/**
+	 * Default constructor
+	 */
 	public IdpClientCertificateAuthConfigBuilder() {
 		clientConfig = new IdpClientCertificateAuthConfigImpl();
 	}
 
+	/**
+	 * method to create
+	 * 
+	 * @return the client config
+	 */
 	public IdpClientCertificateAuthConfigImpl create() {
 		return clientConfig;
 	}
 
+	/**
+	 * Method to set
+	 * 
+	 * @param clientKeyStore the keystore to be set
+	 * @return this builder instance
+	 */
 	public IdpClientCertificateAuthConfigBuilder keyStore(KeyStore clientKeyStore) {
 		clientConfig.setClientKeyStore(clientKeyStore);
 		return this;
 	}
 
+	/**
+	 * Method to set
+	 * 
+	 * @param testStorePassword the password to be set
+	 * @return this builder instance
+	 */
 	public IdpClientCertificateAuthConfigBuilder keyStorePassword(String testStorePassword) {
 		clientConfig.setClientKeyStorePassword(testStorePassword);
 		return this;

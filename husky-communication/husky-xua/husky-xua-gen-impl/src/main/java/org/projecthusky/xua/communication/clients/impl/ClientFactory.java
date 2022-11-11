@@ -28,10 +28,19 @@ import org.projecthusky.xua.communication.config.impl.IdpClientViaHttpProxyConfi
  * <!-- @formatter:on -->
  */
 public class ClientFactory {
-	
+
+	/**
+	 * Default constructor.
+	 */
 	protected ClientFactory() {
 	}
-	
+
+	/**
+	 * Method to get a IdpClient as instance.
+	 * 
+	 * @param clientConfiguration the configuration to be set
+	 * @return the IdpClient instance be created
+	 */
 	public static IdpClient getIdpClient(IdpClientConfig clientConfiguration) {
 		if (clientConfiguration instanceof IdpClientViaHttpProxyConfigImpl idpClientViaHttpProxyConfigImpl) {
 			return new IdpClientByProxy(idpClientViaHttpProxyConfigImpl);
@@ -45,6 +54,12 @@ public class ClientFactory {
 		return null;
 	}
 
+	/**
+	 * Method to get a XuaClient instance.
+	 * 
+	 * @param clientConfiguration the configuration to be set
+	 * @return the XuaClient instance be created
+	 */
 	public static XuaClient getXuaClient(XuaClientConfig clientConfiguration) {
 		return new SimpleXuaClient(clientConfiguration);
 	}

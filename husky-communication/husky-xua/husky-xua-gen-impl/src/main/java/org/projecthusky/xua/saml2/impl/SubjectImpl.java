@@ -81,6 +81,7 @@ public class SubjectImpl extends SubjectType implements SecurityObject<org.opens
 	/**
 	 *
 	 * {@inheritDoc}
+	 * @return the name id
 	 *
 	 * @see org.projecthusky.xua.saml2.Subject#getNameIDFormat()
 	 */
@@ -102,6 +103,7 @@ public class SubjectImpl extends SubjectType implements SecurityObject<org.opens
 	/**
 	 *
 	 * {@inheritDoc}
+	 * @return the list of SubjectConfirmationType
 	 *
 	 * @see org.projecthusky.xua.saml2.Subject#getSubjectConfirmations()
 	 */

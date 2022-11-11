@@ -20,8 +20,7 @@ import org.projecthusky.xua.communication.config.IdpClientConfig;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class IdpClientViaHttpProxyConfigImpl extends AbstractClientConfig
-		implements IdpClientConfig {
+public class IdpClientViaHttpProxyConfigImpl extends AbstractClientConfig implements IdpClientConfig {
 
 	private String proxyHost;
 
@@ -29,30 +28,63 @@ public class IdpClientViaHttpProxyConfigImpl extends AbstractClientConfig
 
 	private String proxyProtocol;
 
+	/**
+	 * Default constructor
+	 */
 	protected IdpClientViaHttpProxyConfigImpl() {
 
 	}
 
+	/**
+	 * Method to get
+	 * 
+	 * @return the proxyHost
+	 */
 	public String getProxyHost() {
 		return proxyHost;
 	}
 
+	/**
+	 * Method to get
+	 * 
+	 * @return the proxyPort
+	 */
 	public int getProxyPort() {
 		return proxyPort;
 	}
 
+	/**
+	 * Method to get
+	 * 
+	 * @return the proxyProtocol
+	 */
 	public String getProxyProtocol() {
 		return proxyProtocol;
 	}
 
+	/**
+	 * Method to set
+	 * 
+	 * @param proxyHost the proxy host
+	 */
 	public void setProxyHost(String proxyHost) {
 		this.proxyHost = proxyHost;
 	}
 
+	/**
+	 * Method to set
+	 * 
+	 * @param proxyPort the proxy host
+	 */
 	public void setProxyPort(int proxyPort) {
 		this.proxyPort = proxyPort;
 	}
 
+	/**
+	 * Method to set
+	 * 
+	 * @param proxyProtocol the proxy protocol
+	 */
 	public void setProxyProtocol(String proxyProtocol) {
 		this.proxyProtocol = proxyProtocol;
 	}

@@ -3,6 +3,9 @@ package org.projecthusky.xua.saml2;
 import org.opensaml.saml.common.AbstractSAMLObjectBuilder;
 import org.opensaml.saml.saml2.core.Statement;
 
+/**
+ * Class implementing XACMLPolicySetIdReferenceStatementTypeImplBuilder
+ */
 public class XACMLPolicySetIdReferenceStatementTypeImplBuilder
 		extends AbstractSAMLObjectBuilder<XACMLPolicySetIdReferenceStatement> {
 

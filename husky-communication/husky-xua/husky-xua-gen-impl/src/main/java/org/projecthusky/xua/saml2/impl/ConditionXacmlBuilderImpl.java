@@ -142,6 +142,12 @@ public class ConditionXacmlBuilderImpl implements SimpleBuilder<ConditionType>,
 
 	}
 
+	/**
+	 * method to create the ConditionType.
+	 * 
+	 * @param aInternalObject to be set
+	 * @return the created opensaml equivalent
+	 */
 	public org.opensaml.xacml.policy.ConditionType create(ConditionType aInternalObject) {
 		var condition = new ConditionTypeImplBuilder().buildObject();
 

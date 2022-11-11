@@ -26,15 +26,15 @@ import org.opensaml.saml.saml2.core.impl.AttributeValueBuilder;
 /**
  * Class implementing the corresponding interface for Attribute building.
  */
-public class AttributeBuilderImpl implements AttributeBuilder,
-		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Attribute, AttributeType> {
+public class AttributeBuilderImpl
+		implements AttributeBuilder, SecurityObjectBuilder<org.opensaml.saml.saml2.core.Attribute, AttributeType> {
 
 	/** The attribute. */
 	private org.opensaml.saml.saml2.core.Attribute attribute;
 	private AttributeImpl attributeImpl;
 
 	/**
-	 *Default constructor to instanciate the object.
+	 * Default constructor to instanciate the object.
 	 */
 	public AttributeBuilderImpl() {
 		attribute = new org.opensaml.saml.saml2.core.impl.AttributeBuilder().buildObject();
@@ -65,6 +65,12 @@ public class AttributeBuilderImpl implements AttributeBuilder,
 		return this.attributeImpl;
 	}
 
+	/**
+	 * Method to create attribute instance
+	 * 
+	 * @param aInternalObject the wrapped opensaml object
+	 * @return the created instance
+	 */
 	public org.opensaml.saml.saml2.core.Attribute create(AttributeType aInternalObject) {
 		this.attributeImpl = new AttributeImpl(aInternalObject);
 		return this.attributeImpl.getWrappedObject();
@@ -111,6 +117,9 @@ public class AttributeBuilderImpl implements AttributeBuilder,
 		return this;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public AttributeBuilder value(Object aValue) {
 		AttributeValue attrValImpl = new AttributeValueBuilder().buildObject();
@@ -150,6 +159,11 @@ public class AttributeBuilderImpl implements AttributeBuilder,
 		return this;
 	}
 
+	/**
+	 * Method to get the InstanceIdentifier.
+	 * 
+	 * @return the InstanceIdentifier
+	 */
 	public InstanceIdentifier getValueAsInstanceIdentifier() {
 		if (this.attributeImpl != null) {
 			return attributeImpl.getValueAsInstanceIdentifier();
@@ -158,6 +172,11 @@ public class AttributeBuilderImpl implements AttributeBuilder,
 		return null;
 	}
 
+	/**
+	 * Method to get the
+	 * 
+	 * @return PurposeOfUse value
+	 */
 	public CE getValueAsPurposeOfUse() {
 		if (this.attributeImpl != null) {
 			return attributeImpl.getValueAsPurposeOfUse();
@@ -165,6 +184,11 @@ public class AttributeBuilderImpl implements AttributeBuilder,
 		return null;
 	}
 
+	/**
+	 * Method to get the
+	 * 
+	 * @return Role value
+	 */
 	public CE getValueAsRole() {
 		if (this.attributeImpl != null) {
 			return attributeImpl.getValueAsRole();
@@ -172,6 +196,11 @@ public class AttributeBuilderImpl implements AttributeBuilder,
 		return null;
 	}
 
+	/**
+	 * Method to get the
+	 * 
+	 * @return the string value
+	 */
 	public String getValueAsString() {
 		if (this.attributeImpl != null) {
 			return attributeImpl.getValueAsString();

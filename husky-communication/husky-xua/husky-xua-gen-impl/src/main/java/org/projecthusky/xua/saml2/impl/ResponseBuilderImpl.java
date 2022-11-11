@@ -18,11 +18,14 @@ import org.projecthusky.xua.saml2.ResponseBuilder;
  * @since Feb 22, 2018 9:26:34 AM
  *
  */
-public class ResponseBuilderImpl implements ResponseBuilder,
-		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Response, Response> {
+public class ResponseBuilderImpl
+		implements ResponseBuilder, SecurityObjectBuilder<org.opensaml.saml.saml2.core.Response, Response> {
 
 	private org.opensaml.saml.saml2.core.Response wrappedObject;
 
+	/**
+	 * Default constructor.
+	 */
 	public ResponseBuilderImpl() {
 		wrappedObject = new org.opensaml.saml.saml2.core.impl.ResponseBuilder().buildObject();
 	}

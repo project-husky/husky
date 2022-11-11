@@ -46,8 +46,12 @@ import net.shibboleth.utilities.java.support.xml.XMLParserException;
 public class SimpleArtifactResolveClient extends AbstractSoapClient<ArtifactResponse>
 		implements ArtifactResolveClient {
 
-	public SimpleArtifactResolveClient(SoapClientConfig config) {
-		setConfig(config);
+	/**
+	 * Constructor with param.
+	 * @param clientConfiguration the client configuration
+	 */
+	public SimpleArtifactResolveClient(SoapClientConfig clientConfiguration) {
+		setConfig(clientConfiguration);
 	}
 
 	private HttpEntity getSoapEntity(ArtifactResolve aArtifactResolve) throws

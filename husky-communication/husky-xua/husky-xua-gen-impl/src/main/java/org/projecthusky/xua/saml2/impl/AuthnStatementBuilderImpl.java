@@ -31,6 +31,9 @@ public class AuthnStatementBuilderImpl implements AuthnStatementBuilder,
 	private AuthnContextClassRef authnContextClassRef;
 	private org.opensaml.saml.saml2.core.AuthnStatement wrappedObject;
 
+	/**
+	 * Default constructor
+	 */
 	public AuthnStatementBuilderImpl() {
 		wrappedObject = new org.opensaml.saml.saml2.core.impl.AuthnStatementBuilder().buildObject();
 		final var authnContext = new org.opensaml.saml.saml2.core.impl.AuthnContextBuilder()
@@ -67,6 +70,11 @@ public class AuthnStatementBuilderImpl implements AuthnStatementBuilder,
 		return new AuthnStatementImpl(aAuthnStatement);
 	}
 
+	/**
+	 * Method to create opensaml authntatement.
+	 * @param aAuthnStatement the authnstatement to be converted
+	 * @return the opensaml rfepresentation of authnstatement
+	 */
 	public org.opensaml.saml.saml2.core.AuthnStatement create(AuthnStatementType aAuthnStatement) {
 		return new AuthnStatementImpl(aAuthnStatement).getWrappedObject();
 	}

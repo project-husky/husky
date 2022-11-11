@@ -36,10 +36,9 @@ public class XacmlPolicySetIdReferenceStatementBuilderImpl
 	}
 
 	@Override
-	public XACMLPolicySetIdReferenceStatementType create(
-			XACMLPolicySetIdReferenceStatement aInternalObject) {
+	public XACMLPolicySetIdReferenceStatementType create(XACMLPolicySetIdReferenceStatement aInternalObject) {
 		var retVal = new XACMLPolicySetIdReferenceStatementType();
-		
+
 		if (aInternalObject != null) {
 			for (var policySetIdRef : aInternalObject.getPolicySetIdReference()) {
 				if (policySetIdRef != null) {
@@ -53,8 +52,13 @@ public class XacmlPolicySetIdReferenceStatementBuilderImpl
 		return retVal;
 	}
 
-	public XACMLPolicySetIdReferenceStatement create(
-			XACMLPolicySetIdReferenceStatementType aInternalObject) {
+	/**
+	 * Method to create XACMLPolicySetIdReferenceStatementType.
+	 * 
+	 * @param aInternalObject the XACMLPolicySetIdReferenceStatementType
+	 * @return the opensaml XACMLPolicySetIdReferenceStatementType
+	 */
+	public XACMLPolicySetIdReferenceStatement create(XACMLPolicySetIdReferenceStatementType aInternalObject) {
 		var retVal = new XACMLPolicySetIdReferenceStatementTypeImplBuilder().buildObject();
 
 		if (aInternalObject != null) {

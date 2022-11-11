@@ -46,8 +46,7 @@ public class CodedWithEquivalentsBuilder extends AbstractXMLObjectBuilder<CodedW
 	 *      java.lang.String, java.lang.String)
 	 */
 	@Override
-	public CodedWithEquivalentImpl buildObject(String namespaceURI, String localName,
-			String namespacePrefix) {
+	public CodedWithEquivalentImpl buildObject(String namespaceURI, String localName, String namespacePrefix) {
 		// This is just to make the assertion Valid in the Gazelle EVS Client:
 		// https://ehealthsuisse.ihe-europe.net/EVSClient/xml/validator.seam?extension=CH%3AXUA&standard=CH%3AXUA&type=XML
 		// The prefix lead to schema error on 19.7.2018
@@ -71,26 +70,56 @@ public class CodedWithEquivalentsBuilder extends AbstractXMLObjectBuilder<CodedW
 		return ce;
 	}
 
+	/**
+	 * Method to set code.
+	 * 
+	 * @param aCode the code to be set
+	 * @return this instance of builder
+	 */
 	public CodedWithEquivalentsBuilder code(String aCode) {
 		code = aCode;
 		return this;
 	}
 
+	/**
+	 * Method to set codeSystem.
+	 * 
+	 * @param aCodeSystem the codeSystem to be set
+	 * @return this instance of builder
+	 */
 	public CodedWithEquivalentsBuilder codeSystem(String aCodeSystem) {
 		codeSystem = aCodeSystem;
 		return this;
 	}
 
+	/**
+	 * Method to set codeSystemName.
+	 * 
+	 * @param aCodeSystemName the codeSystemName to be set
+	 * @return this instance of builder
+	 */
 	public CodedWithEquivalentsBuilder codeSystemName(String aCodeSystemName) {
 		codeSystemName = aCodeSystemName;
 		return this;
 	}
 
+	/**
+	 * Method to set codeSystemVersion.
+	 * 
+	 * @param aCodeSystemVersion the codeSystemVersion to be set
+	 * @return this instance of builder
+	 */
 	public CodedWithEquivalentsBuilder codeSystemVersion(String aCodeSystemVersion) {
 		codeSystemVersion = aCodeSystemVersion;
 		return this;
 	}
 
+	/**
+	 * Method to set displayName.
+	 * 
+	 * @param aDisplayNamen the displayName to be set
+	 * @return this instance of builder
+	 */
 	public CodedWithEquivalentsBuilder displayName(String aDisplayNamen) {
 		displayName = aDisplayNamen;
 		return this;

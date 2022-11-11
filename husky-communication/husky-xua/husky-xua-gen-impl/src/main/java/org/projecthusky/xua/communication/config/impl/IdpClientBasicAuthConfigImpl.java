@@ -26,22 +26,45 @@ public class IdpClientBasicAuthConfigImpl extends AbstractClientConfig implement
 
 	private String basicAuthUsername;
 
+	/**
+	 * Default constructor
+	 */
 	protected IdpClientBasicAuthConfigImpl() {
 
 	}
 
+	/**
+	 * Method to get the
+	 * 
+	 * @return basicAuthPassword
+	 */
 	public String getBasicAuthPassword() {
 		return basicAuthPassword;
 	}
 
+	/**
+	 * Method to get the
+	 * 
+	 * @return basicAuthUsername
+	 */
 	public String getBasicAuthUsername() {
 		return basicAuthUsername;
 	}
 
+	/**
+	 * Method to set the
+	 * 
+	 * @param basicAuthPassword the auth password
+	 */
 	public void setBasicAuthPassword(String basicAuthPassword) {
 		this.basicAuthPassword = basicAuthPassword;
 	}
 
+	/**
+	 * Method to set the
+	 * 
+	 * @param basicAuthUsername the auth username
+	 */
 	public void setBasicAuthUsername(String basicAuthUsername) {
 		this.basicAuthUsername = basicAuthUsername;
 	}

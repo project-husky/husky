@@ -44,22 +44,35 @@ import org.opensaml.soap.wstrust.impl.TokenTypeBuilder;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBuilder,
-		SecurityObjectBuilder<RequestSecurityToken, XUserAssertionRequest> {
+public class XUserAssertionRequestBuilderImpl
+		implements XUserAssertionRequestBuilder, SecurityObjectBuilder<RequestSecurityToken, XUserAssertionRequest> {
 
 	private Claims claims;
 	private RequestSecurityToken requestSecurityToken;
 
+	/**
+	 * Defualt constructor.
+	 */
 	public XUserAssertionRequestBuilderImpl() {
 		requestSecurityToken = new RequestSecurityTokenBuilder().buildObject();
 		claims = new ClaimsBuilder().buildObject();
 		addXMLObject(claims);
 	}
 
+	/**
+	 * Method to add xmlobject to requestSecurityToken.
+	 * 
+	 * @param aXmlObject the xml object on requestSecurityToken
+	 */
 	protected void addXMLObject(XMLObject aXmlObject) {
 		requestSecurityToken.getUnknownXMLObjects().add(aXmlObject);
 	}
 
+	/**
+	 * Method to add xmlobject to claims.
+	 * 
+	 * @param aXmlObject the xml object on claims
+	 */
 	protected void addXMLObjectToClaims(XMLObject aXmlObject) {
 		claims.getUnknownXMLObjects().add(aXmlObject);
 	}
@@ -128,8 +141,8 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 		attribute.setName(aName);
 
 		final var stringBuilder = new XSStringBuilder();
-		final XSString attributeValue = stringBuilder
-				.buildObject(AttributeValue.DEFAULT_ELEMENT_NAME, XSString.TYPE_NAME);
+		final XSString attributeValue = stringBuilder.buildObject(AttributeValue.DEFAULT_ELEMENT_NAME,
+				XSString.TYPE_NAME);
 		attributeValue.setValue(aValue);
 		attribute.getAttributeValues().add(attributeValue);
 		return attribute;
@@ -149,6 +162,11 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 		return this;
 	}
 
+	/**
+	 * Method get
+	 * 
+	 * @return the claims
+	 */
 	protected Claims getClaims() {
 		return claims;
 	}
@@ -161,8 +179,7 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 	@Override
 	public XUserAssertionRequestBuilder organizationId(String organizationId) {
 		if (organizationId != null) {
-			addXMLObject(createStringAttribute(XUserAssertionConstants.OASIS_XACML_ORGANIZATIONID,
-					organizationId));
+			addXMLObject(createStringAttribute(XUserAssertionConstants.OASIS_XACML_ORGANIZATIONID, organizationId));
 		}
 		return this;
 	}
@@ -175,8 +192,7 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 	@Override
 	public XUserAssertionRequestBuilder organizationName(String organizationName) {
 		if (organizationName != null) {
-			addXMLObject(createStringAttribute(XUserAssertionConstants.OASIS_XACML_ORGANISATION,
-					organizationName));
+			addXMLObject(createStringAttribute(XUserAssertionConstants.OASIS_XACML_ORGANISATION, organizationName));
 		}
 		return this;
 	}
@@ -190,9 +206,8 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 	@Override
 	public XUserAssertionRequestBuilder purposeOfUse(CE purposeOfUse) {
 		if (purposeOfUse != null) {
-			addXMLObjectToClaims(
-					createObjectAttribute(XUserAssertionConstants.OASIS_XACML_PURPOSEOFUSE,
-							(CodedWithEquivalentImpl) purposeOfUse));
+			addXMLObjectToClaims(createObjectAttribute(XUserAssertionConstants.OASIS_XACML_PURPOSEOFUSE,
+					(CodedWithEquivalentImpl) purposeOfUse));
 		}
 		return this;
 	}
@@ -205,8 +220,7 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 	@Override
 	public XUserAssertionRequestBuilder requestType(RequestType requestType) {
 		if (requestType != null) {
-			final var wstRequestType = new RequestTypeBuilder()
-					.buildObject();
+			final var wstRequestType = new RequestTypeBuilder().buildObject();
 			wstRequestType.setURI(requestType.toString());
 			addXMLObject(wstRequestType);
 		}
@@ -221,8 +235,7 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 	@Override
 	public XUserAssertionRequestBuilder resourceId(String resourceId) {
 		if (resourceId != null) {
-			addXMLObjectToClaims(createStringAttribute(
-					XUserAssertionConstants.OASIS_XACML_RESOURCEID, resourceId));
+			addXMLObjectToClaims(createStringAttribute(XUserAssertionConstants.OASIS_XACML_RESOURCEID, resourceId));
 		}
 		return this;
 	}
@@ -250,8 +263,7 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 	@Override
 	public XUserAssertionRequestBuilder subjectName(String subjectName) {
 		if (subjectName != null) {
-			addXMLObject(createStringAttribute(XUserAssertionConstants.OASIS_XACML_SUBJECTID,
-					subjectName));
+			addXMLObject(createStringAttribute(XUserAssertionConstants.OASIS_XACML_SUBJECTID, subjectName));
 		}
 		return this;
 	}
@@ -264,8 +276,8 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 	@Override
 	public XUserAssertionRequestBuilder subjectRole(CE aRole) {
 		if (aRole != null) {
-			addXMLObjectToClaims(createObjectAttribute(XUserAssertionConstants.OASIS_XACML_ROLE,
-					(CodedWithEquivalentImpl) aRole));
+			addXMLObjectToClaims(
+					createObjectAttribute(XUserAssertionConstants.OASIS_XACML_ROLE, (CodedWithEquivalentImpl) aRole));
 		}
 		return this;
 	}
@@ -278,8 +290,7 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 	@Override
 	public XUserAssertionRequestBuilder tokenType(TokenType tokenType) {
 		if (tokenType != null) {
-			final org.opensaml.soap.wstrust.TokenType wstTokeType = new TokenTypeBuilder()
-					.buildObject();
+			final org.opensaml.soap.wstrust.TokenType wstTokeType = new TokenTypeBuilder().buildObject();
 			wstTokeType.setURI(tokenType.toString());
 			addXMLObject(wstTokeType);
 		}

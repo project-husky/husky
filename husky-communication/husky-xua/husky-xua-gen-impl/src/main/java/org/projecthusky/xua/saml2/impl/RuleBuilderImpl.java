@@ -46,6 +46,12 @@ public class RuleBuilderImpl
 		return new RuleType();
 	}
 
+	/**
+	 * Method to create RuleType.
+	 * 
+	 * @param aInternalObject the RuleType
+	 * @return the opensaml RuleType
+	 */
 	public org.opensaml.xacml.policy.RuleType create(RuleType aInternalObject) {
 		var ruleType = new RuleTypeImplBuilder().buildObject();
 

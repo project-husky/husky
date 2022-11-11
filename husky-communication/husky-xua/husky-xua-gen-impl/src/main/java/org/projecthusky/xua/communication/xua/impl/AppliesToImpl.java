@@ -29,10 +29,14 @@ public class AppliesToImpl
 
 	private org.opensaml.soap.wspolicy.AppliesTo appliesTo;
 
+	/**
+	 * Constructor with parameter.
+	 * @param aAppliesTo the opensaml appliesto instance
+	 */
 	protected AppliesToImpl(org.opensaml.soap.wspolicy.AppliesTo aAppliesTo) {
 		appliesTo = aAppliesTo;
 	}
-
+	
 	@Override
 	public String getAddress() {
 		final var wsEndpointReference = new ListXmlObjectHelper<EndpointReference>()

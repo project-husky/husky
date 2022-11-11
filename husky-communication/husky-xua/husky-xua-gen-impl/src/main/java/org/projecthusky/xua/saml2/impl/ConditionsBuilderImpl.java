@@ -17,11 +17,14 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionsT
 /**
  * Class implementing the corresponding interface for Condition building.
  */
-public class ConditionsBuilderImpl implements ConditionsBuilder,
-		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Conditions, ConditionsType> {
+public class ConditionsBuilderImpl
+		implements ConditionsBuilder, SecurityObjectBuilder<org.opensaml.saml.saml2.core.Conditions, ConditionsType> {
 
 	private org.opensaml.saml.saml2.core.Conditions conditions;
 
+	/**
+	 * Default constructor
+	 */
 	public ConditionsBuilderImpl() {
 		conditions = new org.opensaml.saml.saml2.core.impl.ConditionsBuilder().buildObject();
 	}
@@ -42,10 +45,12 @@ public class ConditionsBuilderImpl implements ConditionsBuilder,
 	}
 
 	/**
-	 *
-	 * {@inheritDoc}
-	 *
+	 * Method to create.
+	 * 
 	 * @see org.projecthusky.xua.core.SecurityObjectBuilder#create(java.lang.Object)
+	 * 
+	 * @param aInternalObject the ConditionsType
+	 * @return the opensaml Conditions instance
 	 */
 	public org.opensaml.saml.saml2.core.Conditions create(ConditionsType aInternalObject) {
 		return new ConditionsImpl(aInternalObject).getWrappedObject();

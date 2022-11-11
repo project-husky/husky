@@ -22,8 +22,16 @@ import org.opensaml.core.xml.XMLObject;
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
+ * @param <T> the type
  */
 public class ListXmlObjectHelper<T extends XMLObject> {
+	/**
+	 * Methodt to get compeonent
+	 * 
+	 * @param aType a type
+	 * @param aList the list to fitler
+	 * @return the found element or null
+	 */
 	@SuppressWarnings("unchecked")
 	public T getComponent(Class<? extends XMLObject> aType, List<XMLObject> aList) {
 		for (final XMLObject item : aList) {
@@ -34,6 +42,13 @@ public class ListXmlObjectHelper<T extends XMLObject> {
 		return null;
 	}
 
+	/**
+	 * Methodt to get list filtered by type
+	 * 
+	 * @param aType a type
+	 * @param aList the list to be filtered
+	 * @return the filtered list
+	 */
 	@SuppressWarnings("unchecked")
 	public List<T> getComponentList(Class<? extends XMLObject> aType, List<XMLObject> aList) {
 		final List<T> retVal = new ArrayList<>();

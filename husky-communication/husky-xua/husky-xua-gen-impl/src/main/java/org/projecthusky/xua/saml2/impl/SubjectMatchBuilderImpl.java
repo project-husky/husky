@@ -79,6 +79,12 @@ public class SubjectMatchBuilderImpl
 		return new SubjectMatchType();
 	}
 
+	/**
+	 * Method to create SubjectMatchType.
+	 * 
+	 * @param aInternalObject the SubjectMatchType
+	 * @return the opensaml SubjectMatchType
+	 */
 	public org.opensaml.xacml.policy.SubjectMatchType create(SubjectMatchType aInternalObject) {
 		var retVal = new SubjectMatchTypeImplBuilder().buildObject();
 

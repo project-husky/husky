@@ -59,6 +59,10 @@ import net.shibboleth.utilities.java.support.xml.XMLParserException;
 public class SimpleXuaClient extends AbstractSoapClient<List<XUserAssertionResponse>>
 		implements XuaClient {
 
+	/**
+	 * Constructor with param.
+	 * @param clientConfiguration the client configuration
+	 */
 	public SimpleXuaClient(XuaClientConfig clientConfiguration) {
 		setLogger(LoggerFactory.getLogger(getClass()));
 		setConfig(clientConfiguration);

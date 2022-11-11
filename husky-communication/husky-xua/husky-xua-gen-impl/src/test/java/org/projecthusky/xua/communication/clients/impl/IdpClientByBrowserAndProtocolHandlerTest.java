@@ -111,7 +111,7 @@ public class IdpClientByBrowserAndProtocolHandlerTest extends ServerTestHelper {
 	 * Test method for
 	 * {@link org.projecthusky.xua.communication.clients.impl.IdpClientByBrowserAndProtocolHandler#send(org.projecthusky.xua.authentication.AuthnRequest)}.
 	 *
-	 * @throws ClientSendException
+	 * @throws ClientSendException will be thrown if an error occoures
 	 */
 	@Test
 	@Disabled("This test is not executable in this way.")

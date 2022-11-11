@@ -28,6 +28,10 @@ public class ArtifactResolveImpl
 
 	private org.opensaml.saml.saml2.core.ArtifactResolve wrappedObject;
 
+	/**
+	 * Constructor with wrapped opensaml instance as param. 
+	 * @param aWrappedObject the wrapped instance
+	 */
 	protected ArtifactResolveImpl(org.opensaml.saml.saml2.core.ArtifactResolve aWrappedObject) {
 		wrappedObject = aWrappedObject;
 	}

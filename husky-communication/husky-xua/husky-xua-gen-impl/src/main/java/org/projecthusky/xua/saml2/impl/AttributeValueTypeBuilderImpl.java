@@ -74,6 +74,11 @@ public class AttributeValueTypeBuilderImpl implements SimpleBuilder<AttributeVal
 		return new org.herasaf.xacml.core.policy.impl.AttributeValueType();
 	}
 
+	/**
+	 * Method to create the AttributeValueType
+	 * @param attributeValueInternalObj the AttributeValueType
+	 * @return the AttributeValueType
+	 */
 	public org.opensaml.xacml.policy.AttributeValueType createAttrType(
 			org.herasaf.xacml.core.policy.impl.AttributeValueType attributeValueInternalObj) {
 		var attributeVal = new AttributeValueTypeImplBuilder().buildObject();
@@ -115,6 +120,11 @@ public class AttributeValueTypeBuilderImpl implements SimpleBuilder<AttributeVal
 		return attributeVal;
 	}
 
+	/**
+	 * Method to get the CV from XSAny
+	 * @param anyImpl the XSAny
+	 * @return tge CV
+	 */
 	public CV getCVfromXsAnyImpl(XSAnyImpl anyImpl) {
 		var cv = new CV();
 

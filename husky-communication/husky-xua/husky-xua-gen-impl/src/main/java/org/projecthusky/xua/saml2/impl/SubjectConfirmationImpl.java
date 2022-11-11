@@ -33,11 +33,11 @@ import org.slf4j.LoggerFactory;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class SubjectConfirmationImpl extends SubjectConfirmationType implements
-		SecurityObject<org.opensaml.saml.saml2.core.SubjectConfirmation> {
+public class SubjectConfirmationImpl extends SubjectConfirmationType
+		implements SecurityObject<org.opensaml.saml.saml2.core.SubjectConfirmation> {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SubjectConfirmationImpl.class);
-	
+
 	/** The subject confirmation. */
 	private org.opensaml.saml.saml2.core.SubjectConfirmation subjectConfirmation;
 
@@ -46,11 +46,10 @@ public class SubjectConfirmationImpl extends SubjectConfirmationType implements
 	 *
 	 * @param aInternalObject
 	 */
-	protected SubjectConfirmationImpl(
-			org.opensaml.saml.saml2.core.SubjectConfirmation aInternalObject) {
+	protected SubjectConfirmationImpl(org.opensaml.saml.saml2.core.SubjectConfirmation aInternalObject) {
 		subjectConfirmation = aInternalObject;
 		setSubjectConfirmationData(new SubjectConfirmationDataType());
-		
+
 		getAddress();
 		getInResponseTo();
 		getMethod();
@@ -66,8 +65,8 @@ public class SubjectConfirmationImpl extends SubjectConfirmationType implements
 	 */
 	protected SubjectConfirmationImpl(SubjectConfirmationType aInternalObject) {
 		subjectConfirmation = new SubjectConfirmationBuilder().buildObject();
-		
-		if(aInternalObject.getSubjectConfirmationData() != null) {
+
+		if (aInternalObject.getSubjectConfirmationData() != null) {
 			var subjectConfirmData = new SubjectConfirmationDataBuilder().buildObject();
 			subjectConfirmData.setAddress(aInternalObject.getSubjectConfirmationData().getAddress());
 			subjectConfirmData.setInResponseTo(aInternalObject.getSubjectConfirmationData().getInResponseTo());
@@ -81,7 +80,7 @@ public class SubjectConfirmationImpl extends SubjectConfirmationType implements
 				subjectConfirmData.setNotOnOrAfter(aInternalObject.getSubjectConfirmationData().getNotOnOrAfter()
 						.toGregorianCalendar().toInstant());
 			}
-			
+
 			subjectConfirmData.setRecipient(aInternalObject.getSubjectConfirmationData().getRecipient());
 			subjectConfirmation.setSubjectConfirmationData(subjectConfirmData);
 		}
@@ -112,12 +111,14 @@ public class SubjectConfirmationImpl extends SubjectConfirmationType implements
 	/**
 	 *
 	 * {@inheritDoc}
+	 * 
+	 * @return the address
 	 *
 	 * @see org.projecthusky.xua.saml2.SubjectConfirmation#getAddress()
 	 */
-	public String getAddress() {		
+	public String getAddress() {
 		if (subjectConfirmation.getSubjectConfirmationData() != null) {
-			getSubjectConfirmationData().setAddress(subjectConfirmation.getSubjectConfirmationData().getAddress());			
+			getSubjectConfirmationData().setAddress(subjectConfirmation.getSubjectConfirmationData().getAddress());
 			return getSubjectConfirmationData().getAddress();
 		}
 		return "";
@@ -126,12 +127,15 @@ public class SubjectConfirmationImpl extends SubjectConfirmationType implements
 	/**
 	 *
 	 * {@inheritDoc}
+	 * 
+	 * @return the repsonse to
 	 *
 	 * @see org.projecthusky.xua.saml2.SubjectConfirmation#getInResponseTo()
 	 */
 	public String getInResponseTo() {
 		if (subjectConfirmation.getSubjectConfirmationData() != null) {
-			getSubjectConfirmationData().setInResponseTo(subjectConfirmation.getSubjectConfirmationData().getInResponseTo());	
+			getSubjectConfirmationData()
+					.setInResponseTo(subjectConfirmation.getSubjectConfirmationData().getInResponseTo());
 			return getSubjectConfirmationData().getInResponseTo();
 		}
 		return "";
@@ -151,14 +155,17 @@ public class SubjectConfirmationImpl extends SubjectConfirmationType implements
 	/**
 	 *
 	 * {@inheritDoc}
+	 * 
+	 * @return the not before date
 	 *
 	 * @see org.projecthusky.xua.saml2.SubjectConfirmation#getNotBefore()
 	 */
 	public Calendar getNotBefore() {
-		if (subjectConfirmation.getSubjectConfirmationData() != null && subjectConfirmation.getSubjectConfirmationData().getNotBefore() != null) {
+		if (subjectConfirmation.getSubjectConfirmationData() != null
+				&& subjectConfirmation.getSubjectConfirmationData().getNotBefore() != null) {
 			final var retVal = new GregorianCalendar();
 			retVal.setTimeInMillis(subjectConfirmation.getSubjectConfirmationData().getNotBefore().toEpochMilli());
-			
+
 			XMLGregorianCalendar xmlGregCal = null;
 			try {
 				xmlGregCal = DatatypeFactory.newInstance().newXMLGregorianCalendar(retVal);
@@ -166,7 +173,7 @@ public class SubjectConfirmationImpl extends SubjectConfirmationType implements
 			} catch (DatatypeConfigurationException e) {
 				LOGGER.error(e.getMessage(), e);
 			}
-			
+
 			return retVal;
 		}
 		return Calendar.getInstance();
@@ -175,14 +182,17 @@ public class SubjectConfirmationImpl extends SubjectConfirmationType implements
 	/**
 	 *
 	 * {@inheritDoc}
+	 * 
+	 * @return the not on or after date
 	 *
 	 * @see org.projecthusky.xua.saml2.SubjectConfirmation#getNotOnOrAfter()
 	 */
 	public Calendar getNotOnOrAfter() {
-		if (subjectConfirmation.getSubjectConfirmationData() != null && subjectConfirmation.getSubjectConfirmationData().getNotOnOrAfter() != null) {
+		if (subjectConfirmation.getSubjectConfirmationData() != null
+				&& subjectConfirmation.getSubjectConfirmationData().getNotOnOrAfter() != null) {
 			final var retVal = new GregorianCalendar();
 			retVal.setTimeInMillis(subjectConfirmation.getSubjectConfirmationData().getNotOnOrAfter().toEpochMilli());
-			
+
 			XMLGregorianCalendar xmlGregCal = null;
 			try {
 				xmlGregCal = DatatypeFactory.newInstance().newXMLGregorianCalendar(retVal);
@@ -199,6 +209,7 @@ public class SubjectConfirmationImpl extends SubjectConfirmationType implements
 	/**
 	 *
 	 * {@inheritDoc}
+	 * @return the recipient
 	 *
 	 * @see org.projecthusky.xua.saml2.SubjectConfirmation#getRecipient()
 	 */
@@ -229,8 +240,7 @@ public class SubjectConfirmationImpl extends SubjectConfirmationType implements
 	public int hashCode() {
 		final var prime = 31;
 		var result = 1;
-		result = (prime * result)
-				+ ((subjectConfirmation == null) ? 0 : subjectConfirmation.hashCode());
+		result = (prime * result) + ((subjectConfirmation == null) ? 0 : subjectConfirmation.hashCode());
 		return result;
 	}
 

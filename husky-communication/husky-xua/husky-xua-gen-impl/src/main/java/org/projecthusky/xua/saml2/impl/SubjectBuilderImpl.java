@@ -34,6 +34,9 @@ public class SubjectBuilderImpl implements SubjectBuilder,
 	private NameID nameID;
 	private org.opensaml.saml.saml2.core.Subject subject;
 
+	/**
+	 * Default constructor.
+	 */
 	public SubjectBuilderImpl() {
 		subject = new org.opensaml.saml.saml2.core.impl.SubjectBuilder().buildObject();
 
@@ -62,6 +65,12 @@ public class SubjectBuilderImpl implements SubjectBuilder,
 		return new SubjectImpl(aInternalObject);
 	}
 
+	/**
+	 * Method to create SubjectType.
+	 * 
+	 * @param aInternalObject the SubjectType
+	 * @return the opensaml SubjectType
+	 */
 	public org.opensaml.saml.saml2.core.Subject create(SubjectType aInternalObject) {
 		return new SubjectImpl(aInternalObject).getWrappedObject();
 	}

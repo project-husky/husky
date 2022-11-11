@@ -28,9 +28,11 @@ public class AudienceRestrictionBuilderImpl implements AudienceRestrictionBuilde
 
 	private org.opensaml.saml.saml2.core.AudienceRestriction audienceRestriction;
 
+	/**
+	 * Default constructor
+	 */
 	public AudienceRestrictionBuilderImpl() {
-		audienceRestriction = new org.opensaml.saml.saml2.core.impl.AudienceRestrictionBuilder()
-				.buildObject();
+		audienceRestriction = new org.opensaml.saml.saml2.core.impl.AudienceRestrictionBuilder().buildObject();
 	}
 
 	@Override
@@ -38,12 +40,20 @@ public class AudienceRestrictionBuilderImpl implements AudienceRestrictionBuilde
 		return new AudienceRestrictionImpl(audienceRestriction);
 	}
 
-	public AudienceRestrictionType create(
-			org.opensaml.saml.saml2.core.AudienceRestriction aInternalObject) {
+	/**
+	 * Method to create AudienceRestrictionType
+	 */
+	public AudienceRestrictionType create(org.opensaml.saml.saml2.core.AudienceRestriction aInternalObject) {
 
 		return new AudienceRestrictionImpl(aInternalObject);
 	}
 
+	/**
+	 * Method to create AudienceRestriction
+	 * 
+	 * @param aInternalObject the wrapped object
+	 * @return the opensaml object
+	 */
 	public org.opensaml.saml.saml2.core.AudienceRestriction create(AudienceRestrictionType aInternalObject) {
 		return new AudienceRestrictionImpl(aInternalObject).getWrappedObject();
 	}

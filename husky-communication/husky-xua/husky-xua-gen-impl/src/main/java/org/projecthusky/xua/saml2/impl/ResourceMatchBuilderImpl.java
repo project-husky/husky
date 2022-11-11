@@ -83,6 +83,12 @@ public class ResourceMatchBuilderImpl implements SimpleBuilder<ResourceMatchType
 		return new ResourceMatchType();
 	}
 
+	/**
+	 * Method to create ResourceMatchType.
+	 * 
+	 * @param aInternalObject the ResourceMatchType
+	 * @return the opensaml ResourceMatchType
+	 */
 	public org.opensaml.xacml.policy.ResourceMatchType create(ResourceMatchType aInternalObject) {
 		var retVal = new ResourceMatchTypeImplBuilder().buildObject();
 

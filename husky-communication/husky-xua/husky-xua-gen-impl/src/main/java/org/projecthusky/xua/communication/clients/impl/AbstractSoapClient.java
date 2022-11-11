@@ -75,21 +75,22 @@ import net.shibboleth.utilities.java.support.xml.XMLParserException;
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
+ *  @param <T> the type of the object
  */
 public abstract class AbstractSoapClient<T> {
 
 	/**
-	 * The configuration of the soap client
+	 * The configuration of the soap client.
 	 */
 	private SoapClientConfig config;
 
 	/**
-	 * The logger
+	 * The logger.
 	 */
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	/**
-	 * creates body of soap message
+	 * creates body of soap message.
 	 * 
 	 * @param aBodyElement   body element
 	 * @param envelopElement soap envelope element
@@ -106,11 +107,11 @@ public abstract class AbstractSoapClient<T> {
 	}
 
 	/**
-	 * creates SOAP envelope
+	 * creates SOAP envelope.
 	 * 
 	 * @return created soap envelope
 	 * 
-	 * @throws ParserConfigurationException
+	 * @throws ParserConfigurationException will be thrown on error
 	 */
 	protected Element createEnvelope() throws ParserConfigurationException {
 		// create xml dokument
@@ -127,7 +128,7 @@ public abstract class AbstractSoapClient<T> {
 	}
 
 	/**
-	 * creates SOAP header
+	 * creates SOAP header.
 	 * 
 	 * @param aSecurityHeaderElement SOAP security header element
 	 * @param wsHeaders              WSA headers
@@ -165,12 +166,12 @@ public abstract class AbstractSoapClient<T> {
 	}
 
 	/**
-	 * creates XML String from passed SOAP envelope
+	 * creates XML String from passed SOAP envelope.
 	 * 
 	 * @param aEnvelope soap envelope
 	 * 
 	 * @return XML String
-	 * @throws TransformerException
+	 * @throws TransformerException will be thrown on transform errors
 	 */
 	protected String createXmlString(Element aEnvelope) throws TransformerException {// transform
 																						// to
@@ -188,14 +189,14 @@ public abstract class AbstractSoapClient<T> {
 	}
 
 	/**
-	 * sends soap message
+	 * sends soap message.
 	 * 
 	 * @param post http post
 	 * 
 	 * @return response
 	 * 
-	 * @throws ClientSendException
-	 * @throws IOException
+	 * @throws ClientSendException will be thrown on errors
+	 * @throws IOException will be thrown on errors
 	 */
 	protected T execute(HttpPost post)
 			throws ClientSendException, IOException {
@@ -243,6 +244,11 @@ public abstract class AbstractSoapClient<T> {
 		}
 	}
 
+	/**
+	 * method to get the boundary bytes.
+	 * @param value the value
+	 * @return the boundary as byte array
+	 */
 	protected byte[] getBoundary(String value) {
 		final String[] splits = value.split(";");
 		for (final String split : splits) {
@@ -256,9 +262,9 @@ public abstract class AbstractSoapClient<T> {
 	}
 
 	/**
-	 * Method to get soap client configuration
+	 * Method to get soap client configuration.
 	 * 
-	 * @return configuration
+	 * @return the soap client configuration
 	 */
 	protected SoapClientConfig getConfig() {
 		return config;
@@ -266,10 +272,10 @@ public abstract class AbstractSoapClient<T> {
 
 	/**
 	 * Method to get HTTP client. This HTTP client uses keystore details from
-	 * configuration
+	 * configuration.
 	 * 
 	 * @return closeable HTTP client
-	 * @throws ClientSendException
+	 * @throws ClientSendException will be thrown if an error occures.
 	 */
 	protected CloseableHttpClient getHttpClient() throws ClientSendException {
 		if (!StringUtils.isEmpty(config.getKeyStore())) {
@@ -298,7 +304,7 @@ public abstract class AbstractSoapClient<T> {
 	 * Method to get HTTP Post with URI from configuration. Application/soap+xml ist
 	 * set as content type header.
 	 * 
-	 * @return
+	 * @return the httppost instance
 	 */
 	protected HttpPost getHttpPost() {
 		final var post = new HttpPost(config.getUrl());
@@ -308,9 +314,9 @@ public abstract class AbstractSoapClient<T> {
 	}
 
 	/**
-	 * Method to get Logger
+	 * Method to get Logger.
 	 * 
-	 * @return logger
+	 * @return the logger
 	 */
 	protected Logger getLogger() {
 		return logger;
@@ -323,7 +329,7 @@ public abstract class AbstractSoapClient<T> {
 	 * @param xPathExpression XPath expression
 	 * 
 	 * @return found node
-	 * @throws XPathExpressionException
+	 * @throws XPathExpressionException will be thrown on error
 	 */
 	protected Node getNode(Element element, String xPathExpression)
 			throws XPathExpressionException {
@@ -360,7 +366,7 @@ public abstract class AbstractSoapClient<T> {
 	}
 
 	/**
-	 * Method to get request configuration
+	 * Method to get request configuration.
 	 * 
 	 * @return request configuration
 	 */
@@ -378,9 +384,9 @@ public abstract class AbstractSoapClient<T> {
 	 * 
 	 * @return response element
 	 * 
-	 * @throws UnsupportedOperationException
-	 * @throws XPathExpressionException
-	 * @throws XMLParserException
+	 * @throws UnsupportedOperationException will be thrown on error
+	 * @throws XPathExpressionException will be thrown on error
+	 * @throws XMLParserException will be thrown on error
 	 */
 	protected Element getResponseElement(String content, String nameSpaceUri, String localName)
 			throws UnsupportedOperationException, XPathExpressionException, XMLParserException {
@@ -416,7 +422,7 @@ public abstract class AbstractSoapClient<T> {
 	/**
 	 * Method to get soap exception of Axis2 fault Node.
 	 * 
-	 * @param faultnode
+	 * @param faultnode the fault node
 	 * 
 	 * @return extracted SOAP exception
 	 */
@@ -454,6 +460,10 @@ public abstract class AbstractSoapClient<T> {
 		}
 	}
 
+	/**
+	 * methos to get the soap ns.
+	 * @return the soap ns
+	 */
 	private String getSoapNs() {
 		if (SoapVersion.SOAP_12.equals(config.getSoapVersion())) {
 			return "http://www.w3.org/2003/05/soap-envelope";
@@ -464,24 +474,24 @@ public abstract class AbstractSoapClient<T> {
 	}
 
 	/**
-	 * Method to extract response from XML String
+	 * Method to extract response from XML String.
 	 * 
 	 * @param content XML String
 	 * 
 	 * @return extracted element
 	 * 
-	 * @throws ClientSendException
+	 * @throws ClientSendException will be thrown if an error occures.
 	 */
 	protected abstract T parseResponse(String content) throws ClientSendException;
 
 	/**
-	 * Method to extract error from XML response
+	 * Method to extract error from XML response.
 	 * 
 	 * @param content XML String
 	 * 
 	 * @return extracted error
 	 * 
-	 * @throws ClientSendException
+	 * @throws ClientSendException will be thrown if an error occures
 	 */
 	protected T parseResponseError(String content) throws ClientSendException {
 		logger.debug("parseResponseError: {}", content);
@@ -511,6 +521,13 @@ public abstract class AbstractSoapClient<T> {
 
 	}
 
+	/**
+	 * Method to parse the soap fault from xml string.
+	 * @param retVal the xml string
+	 * @throws XPathExpressionException will be thrown on error
+	 * @throws SoapException will be thrown on error
+	 * @throws XMLParserException will be thrown on error
+	 */
 	private void paserSoapFault(String retVal) throws XPathExpressionException, SoapException, XMLParserException {
 		// Use the parser from the OpenSAML ParserPool because its implementation may be
 		// different than
@@ -529,18 +546,18 @@ public abstract class AbstractSoapClient<T> {
 	}
 
 	/**
-	 * Method to set SOAP client configuration
+	 * Method to set SOAP client configuration.
 	 * 
-	 * @param config
+	 * @param config the soap client configuration
 	 */
 	protected void setConfig(SoapClientConfig config) {
 		this.config = config;
 	}
 
 	/**
-	 * Method to set logger
+	 * Method to set logger.
 	 * 
-	 * @param logger
+	 * @param logger the logger
 	 */
 	protected void setLogger(Logger logger) {
 		this.logger = logger;

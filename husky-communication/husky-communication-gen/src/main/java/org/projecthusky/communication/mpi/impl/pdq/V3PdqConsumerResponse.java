@@ -398,8 +398,8 @@ public class V3PdqConsumerResponse extends V3Response {
 	}
 
 	/**
-	 * @param patientIndex
-	 * @return
+	 * @param patientIndex the patient id
+	 * @return the sex of the patient
 	 */
 	public String getPatientSex(int patientIndex) {
 		return getPatientByIndex(patientIndex).getPatientPerson().getAdministrativeGenderCode().getCode();

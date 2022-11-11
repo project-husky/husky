@@ -61,9 +61,16 @@ public class ADXP extends ST {
     @XmlAttribute(name = "partType")
     protected List<String> partType;
 
+    /**
+     * Default constructor
+     */
     public ADXP() {
     }
 
+    /**
+     * Constructor wit param.
+     * @param ed the ed
+     */
     public ADXP(final String ed) {
         super(ed);
     }

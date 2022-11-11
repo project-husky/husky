@@ -33,6 +33,9 @@ public class BaseSoapClientConfigImpl extends AbstractClientConfig implements So
 	private boolean simple;
 	private SoapVersion version;
 
+	/**
+	 * Default constructor
+	 */
 	protected BaseSoapClientConfigImpl() {
 		version = SoapVersion.SOAP_12;
 	}
@@ -117,6 +120,10 @@ public class BaseSoapClientConfigImpl extends AbstractClientConfig implements So
 		this.serviceNamespace = serviceNamespace;
 	}
 
+	/**
+	 * Method to set simple
+	 * @param aSimple the value to be set
+	 */
 	public void setSimple(boolean aSimple) {
 		simple = aSimple;
 	}

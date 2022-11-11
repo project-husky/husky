@@ -29,6 +29,9 @@ public class XUserAssertionResponseBuilderImpl implements XUserAssertionResponse
 
 	private RequestSecurityTokenResponse response;
 
+	/**
+	 * Default constructor.
+	 */
 	public XUserAssertionResponseBuilderImpl() {
 		response = new RequestSecurityTokenResponseBuilder().buildObject();
 	}

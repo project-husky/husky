@@ -25,14 +25,25 @@ import org.opensaml.core.xml.XMLObject;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class InstanceIdentifierImpl extends AbstractXMLObject
-		implements OpenSamlInstanceIdentifier {
+public class InstanceIdentifierImpl extends AbstractXMLObject implements OpenSamlInstanceIdentifier {
 
+	/**
+	 * the extension
+	 */
 	protected String extension;
+	/**
+	 * the root
+	 */
 	protected String root;
 
-	protected InstanceIdentifierImpl(String namespaceURI, String elementLocalName,
-			String namespacePrefix) {
+	/**
+	 * Constructor with params.
+	 * 
+	 * @param namespaceURI     the namespace URI
+	 * @param elementLocalName the elemetn local name
+	 * @param namespacePrefix  the prefix
+	 */
+	protected InstanceIdentifierImpl(String namespaceURI, String elementLocalName, String namespacePrefix) {
 		super(namespaceURI, elementLocalName, namespacePrefix);
 	}
 

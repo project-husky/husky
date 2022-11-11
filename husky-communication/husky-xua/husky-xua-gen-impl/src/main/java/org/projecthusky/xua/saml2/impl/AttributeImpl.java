@@ -41,7 +41,7 @@ public class AttributeImpl
 	 *
 	 * Default constructor to instanciate the object
 	 *
-	 * @param aAttribute
+	 * @param aAttribute the opensaml instance
 	 */
 	protected AttributeImpl(org.opensaml.saml.saml2.core.Attribute aAttribute) {
 		attribute = aAttribute;
@@ -51,7 +51,7 @@ public class AttributeImpl
 	 *
 	 * Default constructor to instanciate the object
 	 *
-	 * @param aAttribute
+	 * @param aAttribute the attributetype
 	 */
 	protected AttributeImpl(AttributeType aAttribute) {
 		attribute = new AttributeBuilder().buildObject();
@@ -104,6 +104,10 @@ public class AttributeImpl
 		return attribute.getNameFormat();
 	}
 
+	/**
+	 * Method to get value as InstanceIdentifier
+	 * @return the InstanceIdentifier value
+	 */
 	public InstanceIdentifier getValueAsInstanceIdentifier() {
 		if (isValueAInstanceIdentifier()) {
 			var instanceIdentifier = (InstanceIdentifierImpl) ((AttributeValueImpl) attribute.getAttributeValues()
@@ -114,6 +118,10 @@ public class AttributeImpl
 		return null;
 	}
 
+	/**
+	 * Method to get value as PurposeOfUse
+	 * @return teh PurposeOfUse value
+	 */
 	public CE getValueAsPurposeOfUse() {
 		if (isValueAPurposeOfUse()) {
 			var purposeOfUse = (CodedWithEquivalentImpl) ((AttributeValueImpl) attribute.getAttributeValues().get(0))
@@ -124,6 +132,10 @@ public class AttributeImpl
 		return null;
 	}
 
+	/**
+	 * Method to get value as Role
+	 * @return the Role value
+	 */
 	public CE getValueAsRole() {
 		if (isValueARole()) {
 			var role = (CodedWithEquivalentImpl) ((AttributeValueImpl) attribute.getAttributeValues().get(0))
@@ -135,6 +147,10 @@ public class AttributeImpl
 		return null;
 	}
 
+	/**
+	 * Method to get value as String
+	 * @return the value as String
+	 */
 	public String getValueAsString() {
 		if (isValueAString()) {
 			final XSString attributeValue = (XSStringImpl) attribute.getAttributeValues().get(0);
@@ -155,6 +171,10 @@ public class AttributeImpl
 		return attribute;
 	}
 
+	/**
+	 * Method to check if value is of type InstanceIdentifier
+	 * @return true if InstanceIdentifier
+	 */
 	public boolean isValueAInstanceIdentifier() {
 		return (attribute.getAttributeValues() != null) //
 				&& (!attribute.getAttributeValues().isEmpty()) //
@@ -165,6 +185,10 @@ public class AttributeImpl
 						.get(0) instanceof InstanceIdentifierImpl;
 	}
 
+	/**
+	 * Method to check if value is of type PurposeOfUse
+	 * @return true if PurposeOfUse
+	 */
 	public boolean isValueAPurposeOfUse() {
 		return (attribute.getAttributeValues() != null) //
 				&& (!attribute.getAttributeValues().isEmpty()) //
@@ -178,6 +202,10 @@ public class AttributeImpl
 						.equalsIgnoreCase(codedWithEquivalentImpl.getElementQName().getLocalPart());
 	}
 
+	/**
+	 * Method to check if value is of type Role
+	 * @return true if Role
+	 */
 	public boolean isValueARole() {
 		return (attribute.getAttributeValues() != null) //
 				&& (!attribute.getAttributeValues().isEmpty()) //
@@ -190,6 +218,10 @@ public class AttributeImpl
 				&& Role.TYPE_LOCAL_NAME.equalsIgnoreCase(codedWithEquivalentImpl.getElementQName().getLocalPart());
 	}
 
+	/**
+	 * Method to check if value is of type String
+	 * @return true if String
+	 */
 	public boolean isValueAString() {
 		return (attribute.getAttributeValues() != null) //
 				&& (!attribute.getAttributeValues().isEmpty()) //

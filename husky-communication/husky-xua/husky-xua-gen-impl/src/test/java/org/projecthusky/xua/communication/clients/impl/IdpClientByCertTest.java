@@ -155,7 +155,7 @@ public class IdpClientByCertTest extends InitializerTestHelper {
 	 * Test method for
 	 * {@link org.projecthusky.xua.communication.clients.impl.IdpClientByCert#send(org.projecthusky.xua.authentication.AuthnRequest)}.
 	 *
-	 * @throws ClientSendException
+	 * @throws ClientSendException will be thrown if an error occures.
 	 */
 	@Test
 	@Disabled("TODO: client/server ssl stuff has to be resolved.")

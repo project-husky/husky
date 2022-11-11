@@ -135,6 +135,12 @@ public class PolicySetBuilderImpl implements SimpleBuilder<PolicySetType>,
 		return null;
 	}
 
+	/**
+	 * Method to create PolicySetType.
+	 * 
+	 * @param policySetType the PolicySetType
+	 * @return the opensaml PolicySetType
+	 */
 	public org.opensaml.xacml.policy.PolicySetType create(PolicySetType policySetType) {
 		var policySet = new PolicySetTypeImplBuilder().buildObject();
 		policySet.setVersion(policySetType.getVersion());

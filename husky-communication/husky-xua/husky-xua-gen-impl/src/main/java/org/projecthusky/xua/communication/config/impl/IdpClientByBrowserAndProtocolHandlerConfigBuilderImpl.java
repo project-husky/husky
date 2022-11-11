@@ -24,22 +24,38 @@ public class IdpClientByBrowserAndProtocolHandlerConfigBuilderImpl implements Cl
 
 	private IdpClientByBrowserAndProtocolHandlerConfigImpl clientConfig;
 
+	/**
+	 * Default constructor
+	 */
 	public IdpClientByBrowserAndProtocolHandlerConfigBuilderImpl() {
 		clientConfig = new IdpClientByBrowserAndProtocolHandlerConfigImpl();
-		clientConfig.setSamlRequestType(
-				IdpClientByBrowserAndProtocolHandlerConfigImpl.SamlRequestType.SAMLART);
+		clientConfig.setSamlRequestType(IdpClientByBrowserAndProtocolHandlerConfigImpl.SamlRequestType.SAMLART);
 	}
 
+	/**
+	 * Method to create the config
+	 * 
+	 * @return the config buildet
+	 */
 	public IdpClientByBrowserAndProtocolHandlerConfigImpl create() {
 		return clientConfig;
 	}
 
-	public IdpClientByBrowserAndProtocolHandlerConfigBuilderImpl protocolHandlerName(
-			String aProtocolHandlerName) {
+	/**
+	 * Method to set
+	 * @param aProtocolHandlerName the protocol handler name
+	 * @return this builder instance
+	 */
+	public IdpClientByBrowserAndProtocolHandlerConfigBuilderImpl protocolHandlerName(String aProtocolHandlerName) {
 		clientConfig.setProtocolHandlerName(aProtocolHandlerName);
 		return this;
 	}
 
+	/**
+	 * Method to set
+	 * @param samlRequestType the saml request typ
+	 * @return this builder instance
+	 */
 	public IdpClientByBrowserAndProtocolHandlerConfigBuilderImpl samlRequestType(
 			IdpClientByBrowserAndProtocolHandlerConfigImpl.SamlRequestType samlRequestType) {
 		clientConfig.setSamlRequestType(samlRequestType);

@@ -16,14 +16,12 @@ import org.projecthusky.common.hl7cdar2.StrucDocText;
 /**
  * Original ART-DECOR template id: 1.2.40.0.34.11.1.2.2
  */
-public class AbschliessendeBemerkung
-		extends org.projecthusky.common.hl7cdar2.POCDMT000040Section {
+public class AbschliessendeBemerkung extends org.projecthusky.common.hl7cdar2.POCDMT000040Section {
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
-	 * @param code
-	 *            the desired fixed value for this argument.
+	 * @param code the desired fixed value for this argument.
 	 */
 	private static CE createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName,
 			String displayName) {
@@ -38,20 +36,21 @@ public class AbschliessendeBemerkung
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
+	 * @param root the desired fixed value for this argument.
 	 */
-	private static org.projecthusky.common.hl7cdar2.II createHl7TemplateIdFixedValue(
-			String root) {
+	private static org.projecthusky.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		org.projecthusky.common.hl7cdar2.II retVal = new II();
 		retVal.setRoot(root);
 		return retVal;
 	}
 
+	/**
+	 * Default Constructor
+	 */
 	public AbschliessendeBemerkung() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.11.1.2.2"));
-		super.setCode(createHl7CodeFixedValue("ABBEM", "1.2.40.0.34.5.40", "ELGA_Sections",
-				"Abschließende Bemerkungen"));
+		super.setCode(
+				createHl7CodeFixedValue("ABBEM", "1.2.40.0.34.5.40", "ELGA_Sections", "Abschließende Bemerkungen"));
 	}
 
 	/**

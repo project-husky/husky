@@ -34,6 +34,9 @@ public class AssertionBuilderImpl implements AssertionBuilder,
 	private org.opensaml.saml.saml2.core.Issuer issuer;
 	private org.opensaml.saml.saml2.core.Assertion wrappedObject;
 
+	/**
+	 * Default constructor.
+	 */
 	public AssertionBuilderImpl() {
 		final var builder = new org.opensaml.saml.saml2.core.impl.AssertionBuilder();
 		wrappedObject = builder.buildObject();

@@ -28,6 +28,9 @@ public class StatusBuilderImpl implements StatusBuilder,
 	private org.opensaml.saml.saml2.core.StatusCode statusCode;
 	private org.opensaml.saml.saml2.core.StatusMessage statusMessage;
 
+	/**
+	 * Default constructor.
+	 */
 	public StatusBuilderImpl() {
 		status = new org.opensaml.saml.saml2.core.impl.StatusBuilder().buildObject();
 

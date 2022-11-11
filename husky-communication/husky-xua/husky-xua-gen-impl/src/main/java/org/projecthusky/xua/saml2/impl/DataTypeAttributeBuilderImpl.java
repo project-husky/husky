@@ -44,7 +44,11 @@ public class DataTypeAttributeBuilderImpl
 		implements SimpleBuilder<DataTypeAttribute<?>>, SecurityObjectBuilder<String, DataTypeAttribute<?>> {
 
 	
-	/* simple selection function, reducing of complexity not necessary */
+	/**
+	 * simple selection function, reducing of complexity not necessary
+	 * @param aInternalObject string representation of internal object
+	 * @return the DataTypeAttribute representation
+	 */
 	@SuppressWarnings("java:S3776")
 	@Override
 	public DataTypeAttribute<?> create(String aInternalObject) {
@@ -108,7 +112,11 @@ public class DataTypeAttributeBuilderImpl
 		return new AnyURIDataTypeAttribute();
 	}
 
-	/* simple selection function, reducing of complexity not necessary */
+	/** 
+	 * simple selection function, reducing of complexity not necessary
+	 * @param aInternalObject the internal object
+	 * @return the string represenatation 
+	 */
 	@SuppressWarnings("java:S3776")
 	public String create(DataTypeAttribute<?> aInternalObject) {
 		String function = null;
