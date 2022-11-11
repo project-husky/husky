@@ -41,8 +41,8 @@
 	</properties>
 
 	<scm>
-		<connection>scm:git:https://github.com/project-husky/husky/husky.git</connection>
-		<developerConnection>scm:git:https://github.com/project-husky/husky/husky.git</developerConnection>
+		<connection>scm:git:https://github.com/project-husky/husky.git</connection>
+		<developerConnection>scm:git:https://github.com/project-husky/husky.git</developerConnection>
 		<url>https://github.com/project-husky/husky/tree/master</url>
 		<tag>HEAD</tag>
 	</scm>
