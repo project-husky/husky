@@ -70,6 +70,56 @@ Supported profiles are
         * [`husky-validation-service`](https://github.com/project-husky/husky/wiki/Module:-husky-validation-service): The module implements services to validate XML documents with XML Schemas and
           Schematron, as well as PDF documents for the A-1 and A-2 conformance levels.
 
+## Integration in Projects
+
+The generated maven artefacts are located in a maven repository and can easily integrated into your maven project by adding the corresponding dependency in your dependency management. 
+i.e.
+```
+<dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>org.projecthusky.communication</groupId>
+      <artifactId>husky-communication-gen</artifactId>
+      <version>2.0.0</version>
+    </dependency>
+  </dependencies>
+  ...
+</dependencyManagement>
+
+<dependencies>
+  <dependency>
+    <groupId>org.projecthusky.communication</groupId>
+    <artifactId>husky-communication-gen</artifactId>
+    <version>2.0.0</version>
+  </dependency>
+  ...
+</dependencies>
+```
+
+You have to add the repository information into your pom too.
+
+```
+<repositories>
+  <repository>
+    <id>husky-releases</id>
+    <name>husky-releases</name>
+    <url>https://archiva.et-innovations.org/repository/internal/</url>
+    <snapshots>
+      <enabled>false</enabled>
+    </snapshots>
+  </repository>
+  <repository>
+    <id>husky-snapshots</id>
+    <name>husky-snapshots</name>
+    <url>https://archiva.et-innovations.org/repository/snapshots/</url>
+    <snapshots>
+      <enabled>true</enabled>
+    </snapshots>
+  </repository>
+</repositories>
+```
+
+
 ## License
 
 This code is made available under the terms of the Eclipse Public License v1.0 in the
