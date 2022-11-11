@@ -10,6 +10,7 @@ import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
+import org.projecthusky.fhir.emed.ch.epr.model.common.EmedReference;
 import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosageMedicationRequest;
 import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosageSplitMedicationRequest;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
@@ -113,6 +114,20 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
                 .map(ChEmedDosageMedicationRequest.class::cast)
                 .findAny()
                 .orElseThrow(() -> new InvalidEmedContentException("Base entry of the dosage instruction is missing."));
+    }
+
+    /**
+     * Resolves the reference to the treatment plan entry.
+     *
+     * @return the reference to the treatment plan entry.
+     * @throws InvalidEmedContentException if the reference is missing.
+     */
+    @ExpectsValidResource
+    public EmedReference resolveMtpReference() throws InvalidEmedContentException {
+        if (!this.hasTreatmentPlan()) {
+            throw new InvalidEmedContentException("The treatment plan reference is missing");
+        }
+        return this.getTreatmentPlanElement().resolveReference();
     }
 
     /**

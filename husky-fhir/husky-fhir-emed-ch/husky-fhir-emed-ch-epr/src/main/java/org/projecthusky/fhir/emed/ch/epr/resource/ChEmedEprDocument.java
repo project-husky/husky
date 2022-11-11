@@ -92,6 +92,20 @@ public abstract class ChEmedEprDocument extends Bundle {
     }
 
     /**
+     * Resolves the document timestamp.
+     *
+     * @return the document timestamp.
+     * @throws InvalidEmedContentException if the timestamp is missing.
+     */
+    @ExpectsValidResource
+    public Instant resolveTimestamp() throws InvalidEmedContentException {
+        if (!this.hasTimestamp()) {
+            throw new InvalidEmedContentException("The document timestamp is missing");
+        }
+        return this.getTimestamp().toInstant();
+    }
+
+    /**
      * Sets the document's creation date and time.
      *
      * @param creationTime the document's creation date and time.
@@ -144,7 +158,7 @@ public abstract class ChEmedEprDocument extends Bundle {
      * @return the bundle entry or {@code null}.
      */
     @Nullable
-    protected BundleEntryComponent getEntryByResourceType(final Class<?> resourceType) {
+    public BundleEntryComponent getEntryByResourceType(final Class<?> resourceType) {
         return this.getEntry().stream()
                 .filter(entry -> resourceType.isInstance(entry.getResource()))
                 .findAny()

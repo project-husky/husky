@@ -1,14 +1,14 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.extension;
 
 import ca.uhn.fhir.model.api.annotation.Block;
+import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 
 import java.util.UUID;
 
 
 /**
- * The HAPI custom structure for CH-EMED-Ext Dispense.
- * Extension to reference the medication dispense.
- * URL : <a href="https://build.fhir.org/ig/hl7ch/ch-emed//StructureDefinition-ch-emed-ext-dispense.html">...</a>
+ * The HAPI custom structure for CH-EMED-Ext Dispense. Extension to reference the medication dispense. URL : <a
+ * href="https://build.fhir.org/ig/hl7ch/ch-emed//StructureDefinition-ch-emed-ext-dispense.html">...</a>
  *
  * @author Ronaldo Loureiro
  */
@@ -41,5 +41,10 @@ public class ChEmedExtDispense extends ChEmedExtensionReference {
         copy.identifier = identifier;
         copy.externalDocumentId = externalDocumentId;
         return copy;
+    }
+
+    @Override
+    public EmedEntryType getEntryType() {
+        return EmedEntryType.DIS;
     }
 }

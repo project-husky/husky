@@ -9,6 +9,7 @@ import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
+import org.projecthusky.fhir.emed.ch.epr.model.common.EmedReference;
 import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprMedicationDis;
 import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosage;
 import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosageSplit;
@@ -114,7 +115,7 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
      *
      * @return the number of packages.
      * @throws InvalidEmedContentException if the number of packages is missing.
-     * @throws ArithmeticException if this has a nonzero fractional part, or will not fit in an int.
+     * @throws ArithmeticException         if this has a nonzero fractional part, or will not fit in an int.
      */
     @ExpectsValidResource
     public int resolveQuantity() throws InvalidEmedContentException, ArithmeticException {
@@ -130,7 +131,8 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
      */
     @ExpectsValidResource
     public Instant resolveWhenHandedOver() throws InvalidEmedContentException {
-        if (!this.hasWhenHandedOver()) throw new InvalidEmedContentException("the date/time of when the product was distributed is missing.");
+        if (!this.hasWhenHandedOver())
+            throw new InvalidEmedContentException("the date/time of when the product was distributed is missing.");
         return this.getWhenHandedOver().toInstant();
     }
 
@@ -147,6 +149,35 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
                 .map(ChEmedDosage.class::cast)
                 .findAny()
                 .orElseThrow(() -> new InvalidEmedContentException("Base entry of the dosage instruction is missing."));
+    }
+
+    /**
+     * Resolves the reference to the treatment plan entry.
+     *
+     * @return the reference to the treatment plan entry.
+     * @throws InvalidEmedContentException if the reference is missing.
+     */
+    @ExpectsValidResource
+    public EmedReference resolveMtpReference() throws InvalidEmedContentException {
+        if (!this.hasTreatmentPlan()) {
+            throw new InvalidEmedContentException("The treatment plan reference is missing");
+        }
+        return this.getTreatmentPlanElement().resolveReference();
+    }
+
+    /**
+     * Resolves the reference to the prescription entry (if any).
+     *
+     * @return the reference to the prescription entry or {@code null}.
+     * @throws InvalidEmedContentException if one of the IDs is missing.
+     */
+    @ExpectsValidResource
+    @Nullable
+    public EmedReference resolvePreReference() throws InvalidEmedContentException {
+        if (!this.hasPrescription()) {
+            return null;
+        }
+        return this.getPrescriptionElement().resolveReference();
     }
 
     /**
@@ -339,7 +370,7 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
     /**
      * Returns whether the treatment reason.
      *
-     * @return  {@code true} if the treatment reason exists, {@code false} otherwise.
+     * @return {@code true} if the treatment reason exists, {@code false} otherwise.
      */
     public boolean hasTreatmentReason() {
         return this.treatmentReason != null && !this.treatmentReason.isEmpty();

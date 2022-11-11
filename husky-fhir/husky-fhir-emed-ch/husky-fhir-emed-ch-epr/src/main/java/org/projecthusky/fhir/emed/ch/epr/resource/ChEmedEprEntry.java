@@ -10,6 +10,7 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.resource;
 
+import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 
 import java.util.UUID;
@@ -19,7 +20,7 @@ import java.util.UUID;
  *
  * @author Quentin Ligier
  **/
-public interface ChEmedEprEntry {
+public interface ChEmedEprEntry extends IBaseResource {
 
     UUID resolveIdentifier();
 

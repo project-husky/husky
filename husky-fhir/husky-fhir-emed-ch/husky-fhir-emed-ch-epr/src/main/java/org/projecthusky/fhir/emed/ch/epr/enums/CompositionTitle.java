@@ -31,8 +31,8 @@ public enum CompositionTitle {
     PMLC("Medication Card", "Medikationsplan", "Plan de médication", "Piano farmacologico");
 
     /**
-     * The display names per language. It's always stored in the given order: in English (0), in German (1), in French
-     * (2) and in Italian (3).
+     * The display names per language. It's stored in the given order: in English (0), in German (1), in French (2) and
+     * in Italian (3).
      */
     @NonNull
     private final String[] displayNames;

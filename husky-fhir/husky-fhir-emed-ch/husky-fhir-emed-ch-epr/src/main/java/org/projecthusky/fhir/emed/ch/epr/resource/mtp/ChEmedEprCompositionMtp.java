@@ -15,7 +15,6 @@ import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DomainResource;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
-import org.projecthusky.fhir.emed.ch.common.enums.CommonLanguages;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
@@ -115,7 +114,7 @@ public class ChEmedEprCompositionMtp extends ChEmedEprComposition {
      * @throws InvalidEmedContentException if the medication statement is missing.
      */
     @ExpectsValidResource
-    public ChEmedEprMedicationStatementMtp getMedicationStatement() throws InvalidEmedContentException {
+    public ChEmedEprMedicationStatementMtp resolveMedicationStatement() throws InvalidEmedContentException {
         final var section = this.getTreatmentPlanSection();
         if (!section.hasEntry()) {
             throw new InvalidEmedContentException("The section has no entries");

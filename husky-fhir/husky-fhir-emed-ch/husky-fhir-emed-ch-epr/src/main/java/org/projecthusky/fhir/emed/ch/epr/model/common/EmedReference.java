@@ -11,6 +11,8 @@
 package org.projecthusky.fhir.emed.ch.epr.model.common;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
+import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 
 import java.util.UUID;
 
@@ -34,7 +36,19 @@ public class EmedReference {
     private UUID entryId;
 
     /**
-     * Constructs a new eMedication reference from a document ID and/or an entry ID.
+     * The type of eMed document; {@code null} if not specified.
+     */
+    @Nullable
+    private EmedDocumentType documentType;
+
+    /**
+     * The type of eMed entry; {@code null} if not specified.
+     */
+    @Nullable
+    private EmedEntryType entryType;
+
+    /**
+     * Constructs a new eMedication reference from IDs.
      *
      * @param documentId The document ID or {@code null} if not specified.
      * @param entryId    The entry ID or {@code null} if not specified.
@@ -47,6 +61,28 @@ public class EmedReference {
         }
         this.documentId = documentId;
         this.entryId = entryId;
+    }
+
+    /**
+     * Constructs a new eMedication reference from IDs and types.
+     *
+     * @param documentId   The document ID or {@code null} if not specified.
+     * @param entryId      The entry ID or {@code null} if not specified.
+     * @param documentType The document type or {@code null} if not specified.
+     * @param entryType    The entry type or {@code null} if not specified.
+     * @throws IllegalArgumentException if both documentId and entryId are null.
+     */
+    public EmedReference(@Nullable final UUID documentId,
+                         @Nullable final UUID entryId,
+                         @Nullable final EmedDocumentType documentType,
+                         @Nullable final EmedEntryType entryType) {
+        if (documentId == null && entryId == null) {
+            throw new IllegalArgumentException("The document and entry IDs shall not be both null");
+        }
+        this.documentId = documentId;
+        this.entryId = entryId;
+        this.documentType = documentType;
+        this.entryType = entryType;
     }
 
     /**
@@ -84,7 +120,31 @@ public class EmedReference {
         this.entryId = entryId;
     }
 
+    @Nullable
+    public EmedDocumentType getDocumentType() {
+        return this.documentType;
+    }
+
+    public void setDocumentType(@Nullable final EmedDocumentType documentType) {
+        this.documentType = documentType;
+    }
+
+    @Nullable
+    public EmedEntryType getEntryType() {
+        return this.entryType;
+    }
+
+    public void setEntryType(@Nullable final EmedEntryType entryType) {
+        this.entryType = entryType;
+    }
+
+    @Override
     public String toString() {
-        return "EmedReference(documentId=" + this.getDocumentId() + ", entryId=" + this.getEntryId() + ")";
+        return "EmedReference{" +
+                "documentId=" + this.documentId +
+                ", entryId=" + this.entryId +
+                ", documentType=" + this.documentType +
+                ", entryType=" + this.entryType +
+                '}';
     }
 }

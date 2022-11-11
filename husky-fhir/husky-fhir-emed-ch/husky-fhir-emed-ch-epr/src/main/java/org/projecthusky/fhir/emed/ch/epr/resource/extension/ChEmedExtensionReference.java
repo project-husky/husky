@@ -7,14 +7,15 @@ import org.hl7.fhir.r4.model.BackboneElement;
 import org.hl7.fhir.r4.model.Identifier;
 import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
+import org.projecthusky.fhir.emed.ch.epr.model.common.EmedReference;
 
 import java.util.UUID;
 
 /**
- * The HAPI custom structure for CH-EMED-Extension.
- * Extension to represent the reference to the document
+ * The HAPI custom structure for CH-EMED-Extension. Extension to represent the reference to the document
  *
  * @author Ronaldo Loureiro
  */
@@ -69,9 +70,9 @@ public abstract class ChEmedExtensionReference extends BackboneElement {
     }
 
     /**
-     * Resolves the ID of the external document is missing.
+     * Resolves the ID of the external document.
      *
-     * @return the ID of the external document is missing.
+     * @return the ID of the external document.
      * @throws InvalidEmedContentException if the ID of the external document is missing.
      */
     @ExpectsValidResource
@@ -79,6 +80,17 @@ public abstract class ChEmedExtensionReference extends BackboneElement {
         if (!this.hasExternalDocumentId())
             throw new InvalidEmedContentException("The ID of the external document is missing.");
         return Uuids.parseUrnEncoded(this.externalDocumentId.getValue());
+    }
+
+    /**
+     * Resolves the eMed reference.
+     *
+     * @return the eMed reference.
+     * @throws InvalidEmedContentException if the IDs are missing.
+     */
+    @ExpectsValidResource
+    public EmedReference resolveReference() throws InvalidEmedContentException {
+        return new EmedReference(resolveExternalDocumentId(), resolveIdentifier(), null, this.getEntryType());
     }
 
     /**
@@ -128,4 +140,6 @@ public abstract class ChEmedExtensionReference extends BackboneElement {
     public boolean hasExternalDocumentId() {
         return this.externalDocumentId != null && !this.externalDocumentId.isEmpty();
     }
+
+    public abstract EmedEntryType getEntryType();
 }

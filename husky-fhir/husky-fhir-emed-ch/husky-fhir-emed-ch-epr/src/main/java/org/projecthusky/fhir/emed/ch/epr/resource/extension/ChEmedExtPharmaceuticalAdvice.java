@@ -1,13 +1,14 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.extension;
 
 import ca.uhn.fhir.model.api.annotation.Block;
+import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 
 import java.util.UUID;
 
 /**
- * The HAPI custom structure for CH-EMED-Ext PharmaceuticalAdvice.
- * Extension to represent the reference to the Pharmaceutical Advice document.
- * URL : <a href="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-pharmaceuticaladvice">...</a>
+ * The HAPI custom structure for CH-EMED-Ext PharmaceuticalAdvice. Extension to represent the reference to the
+ * Pharmaceutical Advice document. URL : <a
+ * href="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-pharmaceuticaladvice">...</a>
  *
  * @author Ronaldo Loureiro
  */
@@ -40,5 +41,10 @@ public class ChEmedExtPharmaceuticalAdvice extends ChEmedExtensionReference {
         copy.identifier = identifier;
         copy.externalDocumentId = externalDocumentId;
         return copy;
+    }
+
+    @Override
+    public EmedEntryType getEntryType() {
+        return EmedEntryType.PADV;
     }
 }

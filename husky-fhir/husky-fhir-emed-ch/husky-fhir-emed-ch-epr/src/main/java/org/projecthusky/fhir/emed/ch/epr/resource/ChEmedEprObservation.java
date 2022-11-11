@@ -11,6 +11,7 @@ import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedPadvEntryType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
+import org.projecthusky.fhir.emed.ch.epr.model.common.EmedReference;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtDispense;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtPrescription;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
@@ -19,7 +20,9 @@ import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * The HAPI custom structure for CH-EMED-EPR Observation.
@@ -140,7 +143,8 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
      */
     @ExpectsValidResource
     public Instant resolveIssued() throws InvalidEmedContentException {
-        if (!this.hasIssued()) throw new InvalidEmedContentException("The date/time this version was made available is missing.");
+        if (!this.hasIssued())
+            throw new InvalidEmedContentException("The date/time this version was made available is missing.");
         return this.getIssued().toInstant();
     }
 
@@ -154,6 +158,71 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
     public String resolveNote() throws InvalidEmedContentException {
         if (!this.hasNote()) throw new InvalidEmedContentException("The note is missing.");
         return this.getNoteFirstRep().getText();
+    }
+
+    /**
+     * Resolves the reference to the treatment plan entry (if any).
+     *
+     * @return the reference to the treatment plan entry or {@code null}.
+     * @throws InvalidEmedContentException if one of the IDs is missing.
+     */
+    @ExpectsValidResource
+    @Nullable
+    public EmedReference resolveMtpReference() throws InvalidEmedContentException {
+        if (!this.hasTreatmentPlan()) {
+            return null;
+        }
+        return this.getTreatmentPlanElement().resolveReference();
+    }
+
+    /**
+     * Resolves the reference to the prescription entry (if any).
+     *
+     * @return the reference to the prescription entry or {@code null}.
+     * @throws InvalidEmedContentException if one of the IDs is missing.
+     */
+    @ExpectsValidResource
+    @Nullable
+    public EmedReference resolvePreReference() throws InvalidEmedContentException {
+        if (!this.hasPrescription()) {
+            return null;
+        }
+        return this.getPrescriptionElement().resolveReference();
+    }
+
+    /**
+     * Resolves the reference to the dispense entry (if any).
+     *
+     * @return the reference to the dispense entry or {@code null}.
+     * @throws InvalidEmedContentException if one of the IDs is missing.
+     */
+    @ExpectsValidResource
+    @Nullable
+    public EmedReference resolveDisReference() throws InvalidEmedContentException {
+        if (!this.hasDispense()) {
+            return null;
+        }
+        return this.getDispenseElement().resolveReference();
+    }
+
+    /**
+     * Resolves the reference to the entry.
+     *
+     * @return the reference to the entry.
+     * @throws InvalidEmedContentException if there's not a single reference.
+     */
+    @ExpectsValidResource
+    public EmedReference resolveReference() throws InvalidEmedContentException {
+        final var mtpReference = this.resolveMtpReference();
+        final var preReference = this.resolvePreReference();
+        final var disReference = this.resolveDisReference();
+        final var nonnullReferences = Stream.of(mtpReference, preReference, disReference)
+                .filter(Objects::nonNull)
+                .toList();
+        if (nonnullReferences.size() != 1) {
+            throw new InvalidEmedContentException("A PADV Observation must have a single entry reference");
+        }
+        return nonnullReferences.get(0);
     }
 
     /**

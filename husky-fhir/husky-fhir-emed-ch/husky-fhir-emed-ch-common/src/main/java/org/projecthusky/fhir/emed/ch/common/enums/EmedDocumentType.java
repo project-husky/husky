@@ -27,35 +27,35 @@ public enum EmedDocumentType {
             "MTP",
             TypeCode.RECORD_ARTIFACT,
             ClassCode.PRESCRIPTION,
-            FormatCode.COMMUNITY_MEDICATION_TREATMENT_PLAN,
+            FormatCode.COMMUNITY_MEDICATION_TREATMENT_PLAN, // TODO
             "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationtreatmentplan"
     ),
     PRE(
             "PRE",
             TypeCode.DRUG_PRESCRIPTION,
             ClassCode.PRESCRIPTION,
-            FormatCode.COMMUNITY_PRESCRIPTION,
+            FormatCode.COMMUNITY_PRESCRIPTION, // TODO
             "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationprescription"
     ),
     DIS(
             "DIS",
             TypeCode.RECORD_ARTIFACT,
             ClassCode.PRESCRIPTION,
-            FormatCode.COMMUNITY_DISPENSE,
+            FormatCode.COMMUNITY_DISPENSE, // TODO
             "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationdispense"
     ),
     PADV(
             "PADV",
             TypeCode.RECORD_ARTIFACT,
             ClassCode.PRESCRIPTION,
-            FormatCode.COMMUNITY_PHARMACEUTICAL_ADVICE,
+            FormatCode.COMMUNITY_PHARMACEUTICAL_ADVICE, // TODO
             "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-pharmaceuticaladvice"
     ),
     PML(
             "PML",
             TypeCode.MEDICATION_LIST,
             ClassCode.SUMMARY,
-            FormatCode.COMMUNITY_MEDICATION_LIST,
+            FormatCode.COMMUNITY_MEDICATION_LIST, // TODO
             "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationlist"
     ),
     PMLC(
