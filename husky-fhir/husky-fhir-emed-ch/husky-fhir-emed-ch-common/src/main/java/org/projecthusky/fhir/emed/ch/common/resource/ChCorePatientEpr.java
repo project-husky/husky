@@ -40,8 +40,6 @@ public class ChCorePatientEpr extends Patient {
 
     // TODO citizenship
 
-    // TODO name
-
     @Nullable
     @Child(name = "religion")
     @Extension(url = "http://hl7.org/fhir/StructureDefinition/patient-religion", definedLocally = false)
@@ -52,6 +50,34 @@ public class ChCorePatientEpr extends Patient {
      */
     public ChCorePatientEpr() {
         super();
+    }
+
+    /**
+     * Resolves the human name.
+     *
+     * @return the human name.
+     * @throws InvalidEmedContentException if the human name is missing.
+     */
+    @ExpectsValidResource
+    public HumanName resolveName() {
+        if (!this.name.isEmpty()) {
+            return this.name.get(0);
+        }
+        throw new InvalidEmedContentException("The human name is missing");
+    }
+
+    /**
+     * Resolves the address.
+     *
+     * @return the address or {@code null}.
+     */
+    @Nullable
+    @ExpectsValidResource
+    public Address resolveAddress() {
+        if (!this.address.isEmpty()) {
+            return this.address.get(0);
+        }
+        return null;
     }
 
     /**

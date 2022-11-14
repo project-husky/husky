@@ -1,22 +1,17 @@
 package org.projecthusky.fhir.emed.ch.epr.narrative.treatment;
 
-import lombok.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Address;
 import org.hl7.fhir.r4.model.ContactPoint;
 import org.hl7.fhir.r4.model.Enumerations;
+import org.hl7.fhir.r4.model.StringType;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
 import org.projecthusky.fhir.emed.ch.epr.narrative.enums.NarrativeLanguage;
 import org.projecthusky.fhir.emed.ch.epr.narrative.services.ValueSetEnumNarrativeForPatientService;
-import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprComposition;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
-import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitioner;
-import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprCompositionPmlc;
-import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprDocumentPmlc;
-import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprMedicationStatementPmlc;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -71,12 +66,6 @@ public class NarrativeTreatmentDocument {
     private final NarrativeTreatmentAuthor lastInterveningAuthor;
 
     /**
-     * The author of the last item entry (of type MTP, PRE, or any type of PADV except COMMENT that apply to an MTP
-     * or PRE) in this treatment. This is the last "medical" participant.
-     */
-    private final NarrativeTreatmentAuthor lastMedicalAuthor;
-
-    /**
      * The name of patient
      */
     private final String patientName;
@@ -112,10 +101,7 @@ public class NarrativeTreatmentDocument {
         this.documentationTime = Objects.requireNonNull(builder.documentationTime);
         this.activeTreatments = Objects.requireNonNull(builder.activeTreatments);
         this.recentTreatments = Objects.requireNonNull(builder.recentTreatments);
-//        this.lastInterveningAuthor = Objects.requireNonNull(builder.lastInterveningAuthor);
-//        this.lastMedicalAuthor = Objects.requireNonNull(builder.lastMedicalAuthor);
-        this.lastInterveningAuthor = builder.lastInterveningAuthor;
-        this.lastMedicalAuthor = builder.lastMedicalAuthor;
+        this.lastInterveningAuthor = Objects.requireNonNull(builder.lastInterveningAuthor);
         this.patientName = Objects.requireNonNull(builder.patientName);
         this.patientGender = Objects.requireNonNull(builder.patientGender);
         this.patientBirthDate = Objects.requireNonNull(builder.patientBirthDate);
@@ -134,51 +120,46 @@ public class NarrativeTreatmentDocument {
         return new NarrativeTreatmentDocumentBuilder(narrativeLanguage);
     }
 
-    @NonNull
     public NarrativeLanguage getNarrativeLanguage() { return this.narrativeLanguage; }
 
-    @NonNull
+
     public EmedDocumentType getDocumentType() {
         return this.documentType;
     }
 
-    @NonNull
+
     public String getCreationTime() {
         return this.creationTime;
     }
 
-    @NonNull
+
     public String getDocumentationTime() {
         return this.documentationTime;
     }
 
-    @NonNull
+
     public List<NarrativeTreatmentItem> getActiveTreatments() {
         return this.activeTreatments;
     }
 
-    @NonNull
+
     public List<NarrativeTreatmentItem> getRecentTreatments() {
         return this.recentTreatments;
     }
 
-    @NonNull
+
     public NarrativeTreatmentAuthor getLastInterveningAuthor() { return lastInterveningAuthor; }
 
-    @NonNull
-    public NarrativeTreatmentAuthor getLastMedicalAuthor() { return lastMedicalAuthor; }
-
-    @NonNull
     public String getPatientName() {
         return this.patientName;
     }
 
-    @NonNull
+
     public  String getPatientGender() {
         return this.patientGender;
     }
 
-    @NonNull
+
     public String getPatientBirthDate() {
         return this.patientBirthDate;
     }
@@ -203,7 +184,6 @@ public class NarrativeTreatmentDocument {
         private final List<NarrativeTreatmentItem> activeTreatments;
         private final List<NarrativeTreatmentItem> recentTreatments;
         private NarrativeTreatmentAuthor lastInterveningAuthor;
-        private NarrativeTreatmentAuthor lastMedicalAuthor;
         private String patientName;
         private String patientGender;
         private String patientBirthDate;
@@ -244,18 +224,8 @@ public class NarrativeTreatmentDocument {
             return this;
         }
 
-        public NarrativeTreatmentDocumentBuilder addActiveTreatments(final NarrativeTreatmentItem... activeTreatments) {
-            this.activeTreatments.addAll(List.of(activeTreatments));
-            return this;
-        }
-
         public NarrativeTreatmentDocumentBuilder addRecentTreatments(final List<NarrativeTreatmentItem> recentTreatments) {
             this.recentTreatments.addAll(recentTreatments);
-            return this;
-        }
-
-        public NarrativeTreatmentDocumentBuilder addRecentTreatments(final NarrativeTreatmentItem... recentTreatments) {
-            this.recentTreatments.addAll(List.of(recentTreatments));
             return this;
         }
 
@@ -264,16 +234,11 @@ public class NarrativeTreatmentDocument {
             return this;
         }
 
-        public NarrativeTreatmentDocumentBuilder lastMedicalAuthor(final Author author) {
-            this.lastMedicalAuthor = new NarrativeTreatmentAuthor(author);
-            return this;
-        }
-
         public NarrativeTreatmentDocumentBuilder patient(final ChCorePatientEpr patient) {
-            this.patientName(String.format("%s %s", patient.getNameFirstRep().getGivenAsSingleString(), patient.getNameFirstRep().getFamily()));
-            this.patientGender(patient.resolveGender());
-            this.patientBirthDate(patient.resolveBirthDate());
-            return this;
+            return this.patientName(String.format("%s %s", patient.getNameFirstRep().getGivenAsSingleString(), patient.getNameFirstRep().getFamily()))
+                    .patientGender(patient.resolveGender())
+                    .patientBirthDate(patient.resolveBirthDate())
+                    .patientAddress(patient.resolveAddress());
         }
 
         public NarrativeTreatmentDocumentBuilder patientName(final String patientName) {
@@ -291,9 +256,15 @@ public class NarrativeTreatmentDocument {
             return this;
         }
 
-        // TODO with ChCoreAddress
-        public NarrativeTreatmentDocumentBuilder patientAddress(final Address address) {
-            this.patientAddress = String.format("%s, %s %s", address.getLine(), address.getPostalCode(), address.getCity());
+        public NarrativeTreatmentDocumentBuilder patientAddress(@Nullable final Address address) {
+            if (address != null) {
+                final var line = String.join(" ",
+                        address.getLine()
+                                .stream()
+                                .map(StringType::getValue)
+                                .toList());
+                this.patientAddress = String.format("%s, %s %s", line, address.getPostalCode(), address.getCity());
+            }
             return this;
         }
 
@@ -308,12 +279,11 @@ public class NarrativeTreatmentDocument {
             this.creationTime(document.resolveTimestamp());
             this.documentationTime(document.resolveComposition().resolveDate());
             this.patient(document.resolvePatient());
-//            if (document.getAuthors().size() > 0) {
-//                this.lastMedicalAuthor(document.getAuthors().get(document.getAuthors().size() == 2 ? 1 : 0));
-//            }
 
             if (document.resolveComposition() instanceof final ChEmedEprCompositionPmlc composition) {
-                //this.lastInterveningAuthor(composition.resolveAuthors().get(0));
+
+                final var authorDoc = new Author(composition.resolveAuthors().get(0));
+                this.lastInterveningAuthor(authorDoc);
 
                 this.addActiveTreatments(composition
                         .resolveMedicationStatements()

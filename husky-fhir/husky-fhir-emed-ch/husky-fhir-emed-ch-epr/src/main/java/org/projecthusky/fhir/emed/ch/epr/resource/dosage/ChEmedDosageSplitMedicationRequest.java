@@ -2,8 +2,8 @@ package org.projecthusky.fhir.emed.ch.epr.resource.dosage;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
-import org.projecthusky.fhir.emed.ch.common.enums.EventTiming;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.emed.ch.epr.enums.TimingEventAmbu;
 
 import java.util.List;
 
@@ -52,7 +52,7 @@ public class ChEmedDosageSplitMedicationRequest extends ChEmedDosageSplit {
      */
     @Override
     @ExpectsValidResource
-    public List<EventTiming> resolveWhen() throws InvalidEmedContentException {
+    public List<TimingEventAmbu> resolveWhen() throws InvalidEmedContentException {
         final var eventTimingList = super.resolveWhen();
         if (eventTimingList == null) {
             throw new InvalidEmedContentException("ChEmedDosageSplitMedicationRequest requires a minimum one code for time period of occurrence.");

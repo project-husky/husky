@@ -47,10 +47,10 @@ class PdfOriginalRepresentationGeneratorTest {
 
         final var templateHeader = new String(Objects.requireNonNull(PdfOriginalRepresentationGenerator.class.getResourceAsStream("/narrative/default/template.header.html")).readAllBytes(), StandardCharsets.UTF_8);
 
-        PdfOriginalRepresentationGenerator pdfGenerator = new PdfOriginalRepresentationGenerator();
-        var pdf = pdfGenerator.generate(doc, templateHeader, "</body></html>");
+        final PdfOriginalRepresentationGenerator pdfGenerator = new PdfOriginalRepresentationGenerator();
+        final var pdf = pdfGenerator.generate(doc, templateHeader, "</body></html>");
 
-        OutputStream pdfOut = new FileOutputStream("pdtOut.pdf");
+        final OutputStream pdfOut = new FileOutputStream("pdtOut.pdf");
         pdfOut.write(pdf);
         pdfOut.close();
     }

@@ -90,14 +90,14 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
     }
 
     /**
-     * Gets the last author document resource in the medication statement if available.
+     * Resolves the last author document resource in the medication statement if available.
      *
      * @return the author document resource or {@code null}.
      * @throws InvalidEmedContentException if the author document resource is invalid.
      */
     @Nullable
     @ExpectsValidResource
-    public DomainResource getAuthorDocument() throws InvalidEmedContentException {
+    public DomainResource resolveAuthorDocument() throws InvalidEmedContentException {
         final var resource = getAuthorDocumentElement().getResource();
         if (resource == null) return null;
 
@@ -105,6 +105,23 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
             return (DomainResource) resource;
         }
         throw new InvalidEmedContentException("The last author of the original document is invalid");
+    }
+
+    /**
+     * Resolves the last author and her/his organization of the medical decision.
+     *
+     * @return The last author and her/his organization of the medical decision.
+     * @throws InvalidEmedContentException if the last author and her/his organization of the medical decision is missing.
+     */
+    @ExpectsValidResource
+    public ChEmedEprPractitionerRole resolveInformationSource() throws InvalidEmedContentException {
+        if (!this.hasInformationSource()) {
+            throw new InvalidEmedContentException("The last author and her/his organization of the medical decision is missing.");
+        }
+        if (this.getInformationSource().getResource() instanceof ChEmedEprPractitionerRole practitionerRole) {
+            return practitionerRole;
+        }
+        throw new InvalidEmedContentException("The last author and her/his organization of the medical decision isn't of right type.");
     }
 
     /**

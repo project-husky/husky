@@ -1,12 +1,13 @@
 package org.projecthusky.fhir.emed.ch.epr.narrative.treatment;
 
-import lombok.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.fhir.emed.ch.common.enums.PharmaceuticalDoseFormEdqm;
 import org.projecthusky.fhir.emed.ch.common.enums.RouteOfAdministrationEdqm;
 import org.projecthusky.fhir.emed.ch.common.enums.UnitCode;
 import org.projecthusky.fhir.emed.ch.epr.enums.RegularUnitCodeAmbu;
 import org.projecthusky.fhir.emed.ch.epr.enums.RouteOfAdministrationAmbu;
+import org.projecthusky.fhir.emed.ch.epr.enums.TimingEventAmbu;
+import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
 import org.projecthusky.fhir.emed.ch.epr.narrative.enums.NarrativeLanguage;
 import org.projecthusky.fhir.emed.ch.epr.narrative.enums.ProductCodeType;
 import org.projecthusky.fhir.emed.ch.epr.narrative.services.ValueSetEnumNarrativeForPatientService;
@@ -14,6 +15,9 @@ import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedication;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationIngredient;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationStatement;
 import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosage;
+import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosageSplit;
+import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedQuantityWithEmedUnits;
+import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprMedicationStatementPmlc;
 
 import java.io.IOException;
 import java.time.ZoneId;
@@ -30,126 +34,134 @@ import java.util.*;
 public class NarrativeTreatmentItem {
 
     /**
-     * The author of the original parent section or {@code null} if they're not known.
+     * The "last" author and her/his organization of the medical decision.
      */
-    @Nullable
-    private final NarrativeTreatmentAuthor sectionAuthor;
+    private final NarrativeTreatmentAuthor lastMedicalAuthor;
 
     /**
-     * The author of the original parent document or {@code null} if they're not known.
+     * The "last" author of the original document.
      */
-    @Nullable
     private final NarrativeTreatmentAuthor documentAuthor;
 
-    /**
-     * The planning time.
-     */
-    private final String planningTime;
     /**
      * The medication code type in the GTIN system or in the ATC system.
      */
     private final ProductCodeType codeType;
+
     /**
      * The medication code in the GTIN system or in the ATC system
      */
     private final String productCode;
+
     /**
      * The form code
      */
     @Nullable
     private final String productFormCode;
+
     /**
      * The active ingredients
      */
     private final List<NarrativeTreatmentIngredient> productIngredients;
+
     /**
      * The lower bound of the planned item validity period.
      */
     private final String treatmentStart;
+
     /**
      * The higher bound of the planned item validity period or {@code null} if it's not bounded.
      */
     @Nullable
     private final String treatmentStop;
+
     /**
      * The number of doses to take in the morning
      */
     @Nullable
     private final String dosageIntakeMorning;
+
     /**
      * The number of doses to take in the noon
      */
     @Nullable
     private final String dosageIntakeNoon;
+
     /**
      * The number of doses to take in the evening
      */
     @Nullable
     private final String dosageIntakeEvening;
+
     /**
      * The number of doses to take in the night
      */
     @Nullable
     private final String dosageIntakeNight;
+
     /**
      * The unit of dosage
      */
     @Nullable
     private final String dosageUnit;
-    /**
-     * Number of repeats/refills (excluding the initial dispense). It's a non-zero integer if it's limited, it's zero if
-     * no repeat/refill is authorized and {@code null} if unlimited repeats/refills are authorized.
-     */
-    @Nullable
-    private final Integer repeatNumber;
+
     /**
      * The treatment reason or {@code null} if it isn't provided.
      */
     @Nullable
     private final String treatmentReason;
+
     /**
      * Whether the treatment is to be taken regularly ({@code false}) or only if required ({@code true}).
      */
     private final boolean inReserve;
+
     /**
      * The medication name.
      */
     private String productName;
+
     /**
      * The medication icon
      */
     @Nullable
     private String productIcon;
+
     /**
      * The image on the front of the medicine
      */
     @Nullable
     private String productImageFront;
+
     /**
      * The image on the back of the medicine
      */
     @Nullable
     private String productImageBack;
+
     /**
      * The medication route of administration or {@code null} if it's not specified.
      */
     @Nullable
     private String routeOfAdministration;
+
     /**
      * The patient medication instructions or {@code null} if it isn't provided.
      */
     @Nullable
-    private String patientMedicationInstructions;
+    private final String patientMedicationInstructions;
+
     /**
      * The fulfilment instructions or {@code null} if it isn't provided.
      */
     @Nullable
-    private String fulfilmentInstructions;
+    private final String fulfilmentInstructions;
+
     /**
      * The annotation comment or {@code null} if it isn't provided.
      */
     @Nullable
-    private String annotationComment;
+    private final String annotationComment;
 
     /**
      * Constructor
@@ -157,10 +169,8 @@ public class NarrativeTreatmentItem {
      * @param builder the builder
      */
     private NarrativeTreatmentItem(final NarrativeTreatmentItemBuilder builder) {
-        this.sectionAuthor = builder.sectionAuthor;
+        this.lastMedicalAuthor = builder.lastMedicalAuthor;
         this.documentAuthor = builder.documentAuthor;
-//        this.planningTime = Objects.requireNonNull(builder.planningTime);
-        this.planningTime = builder.planningTime;
 
         this.productName = Objects.requireNonNull(builder.productName);
         this.codeType = Objects.requireNonNull(builder.codeType);
@@ -179,7 +189,6 @@ public class NarrativeTreatmentItem {
         this.dosageIntakeEvening = builder.dosageIntakeEvening;
         this.dosageIntakeNight = builder.dosageIntakeNight;
         this.dosageUnit = builder.dosageUnit;
-        this.repeatNumber = builder.repeatNumber;
         this.routeOfAdministration = builder.routeOfAdministration;
         this.treatmentReason = builder.treatmentReason;
         this.patientMedicationInstructions = builder.patientMedicationInstructions;
@@ -206,8 +215,8 @@ public class NarrativeTreatmentItem {
     }
 
     @Nullable
-    public NarrativeTreatmentAuthor getSectionAuthor() {
-        return this.sectionAuthor;
+    public NarrativeTreatmentAuthor getLastMedicalAuthor() {
+        return this.lastMedicalAuthor;
     }
 
     @Nullable
@@ -215,12 +224,6 @@ public class NarrativeTreatmentItem {
         return this.documentAuthor;
     }
 
-    @NonNull
-    public String getPlanningTime() {
-        return this.planningTime;
-    }
-
-    @NonNull
     public String getProductName() {
         return this.productName;
     }
@@ -256,12 +259,10 @@ public class NarrativeTreatmentItem {
         this.productImageBack = productImageBack;
     }
 
-    @NonNull
     public ProductCodeType getCodeType() {
         return this.codeType;
     }
 
-    @NonNull
     public String getProductCode() {
         return this.productCode;
     }
@@ -280,7 +281,6 @@ public class NarrativeTreatmentItem {
         this.productIngredients.addAll(productIngredients);
     }
 
-    @NonNull
     public String getTreatmentStart() {
         return this.treatmentStart;
     }
@@ -316,11 +316,6 @@ public class NarrativeTreatmentItem {
     }
 
     @Nullable
-    public Integer getRepeatNumber() {
-        return this.repeatNumber;
-    }
-
-    @Nullable
     public String getRouteOfAdministration() {
         return this.routeOfAdministration;
     }
@@ -339,17 +334,9 @@ public class NarrativeTreatmentItem {
         return this.patientMedicationInstructions;
     }
 
-    public void setPatientMedicationInstructions(final String patientMedicationInstructions) {
-        this.patientMedicationInstructions = patientMedicationInstructions;
-    }
-
     @Nullable
     public String getFulfilmentInstructions() {
         return this.fulfilmentInstructions;
-    }
-
-    public void setFulfilmentInstructions(final String fulfilmentInstructions) {
-        this.fulfilmentInstructions = fulfilmentInstructions;
     }
 
     public boolean isInReserve() {
@@ -361,10 +348,6 @@ public class NarrativeTreatmentItem {
         return this.annotationComment;
     }
 
-    public void setAnnotationComment(final String annotationComment) {
-        this.annotationComment = annotationComment;
-    }
-
     public static class NarrativeTreatmentItemBuilder {
 
         private final String DATE_PATTERN = "dd.MM.yyyy";
@@ -372,9 +355,8 @@ public class NarrativeTreatmentItem {
 
         private NarrativeLanguage narrativeLanguage;
         private ValueSetEnumNarrativeForPatientService valueSetEnumNarrative;
-        private NarrativeTreatmentAuthor sectionAuthor;
+        private NarrativeTreatmentAuthor lastMedicalAuthor;
         private NarrativeTreatmentAuthor documentAuthor;
-        private String planningTime;
         private String productName;
         private String productIcon;
         private String productImageFront;
@@ -390,7 +372,6 @@ public class NarrativeTreatmentItem {
         private String dosageIntakeEvening;
         private String dosageIntakeNight;
         private String dosageUnit;
-        private Integer repeatNumber;
         private String routeOfAdministration;
         private String treatmentReason;
         private String patientMedicationInstructions;
@@ -411,24 +392,17 @@ public class NarrativeTreatmentItem {
                     .format(temporal);
         }
 
-//        public NarrativeTreatmentItemBuilder sectionAuthor(final AuthorDigest sectionAuthor) {
-//            this.sectionAuthor = sectionAuthor != null ? new NarrativeTreatmentAuthor(sectionAuthor) : null;
-//            return this;
-//        }
-//
-//        public NarrativeTreatmentItemBuilder documentAuthor(final AuthorDigest documentAuthor) {
-//            this.documentAuthor = documentAuthor != null ? new NarrativeTreatmentAuthor(documentAuthor) : null;
-//            return this;
-//        }
+        public NarrativeTreatmentItemBuilder lastMedicalAuthor(final Author lastMedicalAuthor) {
+            this.lastMedicalAuthor = new NarrativeTreatmentAuthor(lastMedicalAuthor);
+            return this;
+        }
 
-        public NarrativeTreatmentItemBuilder planningTime(final TemporalAccessor planningTime) {
-            this.planningTime = this.formatTemporalAccessor(DATE_PATTERN, planningTime);
+        public NarrativeTreatmentItemBuilder documentAuthor(final Author documentAuthor) {
+            this.documentAuthor = new NarrativeTreatmentAuthor(documentAuthor);
             return this;
         }
 
         public NarrativeTreatmentItemBuilder product(final ChEmedEprMedication medication) {
-            this.productName(medication.resolveMedicationName());
-            this.productFormCode(medication.resolveForm());
 
             final var gtin = medication.resolveGtinCode();
             final var atc = medication.resolveAtcCode();
@@ -441,7 +415,9 @@ public class NarrativeTreatmentItem {
                 this.productCode(atc);
             }
 
-            this.addProductIngredients(medication.resolveActiveIngredients());
+            this.productName(medication.resolveMedicationName())
+                    .productFormCode(medication.resolveForm())
+                    .addProductIngredients(medication.resolveActiveIngredients());
 
             return this;
         }
@@ -506,10 +482,6 @@ public class NarrativeTreatmentItem {
             return this;
         }
 
-        public NarrativeTreatmentItemBuilder addProductIngredients(final ChEmedEprMedicationIngredient... productIngredients) {
-            return this.addProductIngredients(Arrays.stream(productIngredients).toList());
-        }
-
         public NarrativeTreatmentItemBuilder dosage(final ChEmedDosage dosage) {
             this.routeOfAdministration(dosage.resolveRouteOfAdministration());
             this.treatmentStart(dosage.getBoundsPeriod().getStart().toInstant());
@@ -521,22 +493,35 @@ public class NarrativeTreatmentItem {
 
             final var whens = dosage.resolveWhen();
             final var doseQuantity = dosage.resolveDoseQuantity();
+            return this.whens(whens, doseQuantity);
+        }
+
+        public NarrativeTreatmentItemBuilder dosage(final List<ChEmedDosageSplit> dosages) {
+            for (final var dosage : dosages) {
+                final var whens = dosage.resolveWhen();
+                final var doseQuantity = dosage.resolveDoseQuantity();
+                this.whens(whens, doseQuantity);
+            }
+
+            return this;
+        }
+
+        public NarrativeTreatmentItemBuilder whens(@Nullable final List<TimingEventAmbu> whens,
+                                                   @Nullable final ChEmedQuantityWithEmedUnits doseQuantity) {
             if (whens != null && !whens.isEmpty() && doseQuantity != null) {
                 final var quantity = doseQuantity.resolveQuantity().toPlainString();
                 for (final var when : whens) {
-//                    switch (when) {
-//                        case MORNING -> dosageIntakeMorning(quantity);  // TODO enum
-//                        case NOON -> dosageIntakeNoon(quantity);
-//                        case EVENING -> dosageIntakeEvening(quantity);
-//                        case NIGHT -> dosageIntakeNight(quantity);
-//                    }
+                    switch (when) {
+                        case MORNING -> dosageIntakeMorning(quantity);
+                        case NOON -> dosageIntakeNoon(quantity);
+                        case EVENING -> dosageIntakeEvening(quantity);
+                        case NIGHT -> dosageIntakeNight(quantity);
+                    }
                 }
                 dosageUnit(doseQuantity.resolveUnitCode());
             }
             return this;
         }
-
-        // TODO Add support ChEmedDosageSplit
 
         public NarrativeTreatmentItemBuilder treatmentStart(final TemporalAccessor treatmentStart) {
             this.treatmentStart = this.formatTemporalAccessor(DATE_PATTERN, treatmentStart);
@@ -580,11 +565,6 @@ public class NarrativeTreatmentItem {
             return this;
         }
 
-        public NarrativeTreatmentItemBuilder repeatNumber(final Integer repeatNumber) {
-            this.repeatNumber = repeatNumber;
-            return this;
-        }
-
         public NarrativeTreatmentItemBuilder routeOfAdministration(final RouteOfAdministrationAmbu routeOfAdministration) {
             if (routeOfAdministration != null) {
                 this.routeOfAdministration = this.valueSetEnumNarrative.getMessage(routeOfAdministration, this.narrativeLanguage);
@@ -592,7 +572,7 @@ public class NarrativeTreatmentItem {
             return this;
         }
 
-        public NarrativeTreatmentItemBuilder routeOfAdministration(final RouteOfAdministrationEdqm routeOfAdministration) {
+        public NarrativeTreatmentItemBuilder routeOfAdministration(@Nullable final RouteOfAdministrationEdqm routeOfAdministration) {
             if (routeOfAdministration != null) {
                 this.routeOfAdministration = this.valueSetEnumNarrative.getMessage(routeOfAdministration, this.narrativeLanguage);
             }
@@ -626,16 +606,22 @@ public class NarrativeTreatmentItem {
 
         public NarrativeTreatmentItemBuilder emedMedicationStatementEntryDigest(final ChEmedEprMedicationStatement medicationStatement) {
             final var medication = medicationStatement.resolveMedication();
-//            this.planningTime(medicationStatement.resolveDate());
-            // TODO
-//            this.documentAuthor(medicationStatement.resolveAuthors().get(0));
-//            this.sectionAuthor(medicationStatement.getSectionAuthor());
+
+            if (medicationStatement instanceof ChEmedEprMedicationStatementPmlc medStatementPmlc) {
+                final var authorMed = new Author(medStatementPmlc.resolveInformationSource());
+                final var authorDoc = medStatementPmlc.resolveAuthorDocument();
+
+                if (authorDoc != null) this.documentAuthor(new Author(authorDoc));
+                else this.documentAuthor(authorMed);
+
+                this.lastMedicalAuthor(authorMed);
+            }
+
             this.annotationComment(medicationStatement.getNoteFirstRep().getText());
 //            this.dosage(medicationStatement.resolveDosageBaseEntry()); // TODO
+//            this.dosage(medicationStatement.resolveDosageAdditionalEntry());
             this.product(medication);
-//            this.repeatNumber(medicationStatement.getRepeatNumber());
             this.treatmentReason(medicationStatement.getReasonCodeFirstRep().getText());
-
 
             return this;
         }

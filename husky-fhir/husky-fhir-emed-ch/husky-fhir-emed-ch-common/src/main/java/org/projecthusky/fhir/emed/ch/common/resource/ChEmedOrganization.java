@@ -83,9 +83,9 @@ public class ChEmedOrganization extends Organization {
     @ExpectsValidResource
     public Address resolveAddress() throws InvalidEmedContentException {
         if (!this.hasAddress()) {
-            return this.getAddress().get(0);
+            throw new InvalidEmedContentException("The organization's address is missing.");
         }
-        throw new InvalidEmedContentException("The organization's address is missing.");
+        return this.getAddress().get(0);
     }
 
     /**

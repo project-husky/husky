@@ -1,14 +1,15 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.dosage;
 
+import ca.uhn.fhir.model.api.annotation.DatatypeDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Dosage;
 import org.hl7.fhir.r4.model.Period;
 import org.hl7.fhir.r4.model.Timing;
 import org.projecthusky.common.utils.datatypes.Oids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
-import org.projecthusky.fhir.emed.ch.common.enums.EventTiming;
 import org.projecthusky.fhir.emed.ch.common.enums.RouteOfAdministrationEdqm;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.emed.ch.epr.enums.TimingEventAmbu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
  *
  * @author Ronaldo Loureiro
  **/
+@DatatypeDef(name = "Dosage", isSpecialization = true, profileOf = Dosage.class)
 public class ChEmedDosage extends Dosage {
 
     /**
@@ -35,13 +37,13 @@ public class ChEmedDosage extends Dosage {
      */
     @Nullable
     @ExpectsValidResource
-    public List<EventTiming> resolveWhen() throws InvalidEmedContentException {
+    public List<TimingEventAmbu> resolveWhen() throws InvalidEmedContentException {
         final var repeat = this.getTiming().getRepeat();
         if (!repeat.hasWhen()) return null;
 
-        final var eventTimings = new ArrayList<EventTiming>();
+        final var eventTimings = new ArrayList<TimingEventAmbu>();
         for (final var event : repeat.getWhen()) {
-            final var eventTiming = EventTiming.getEnum(event.getCode());
+            final var eventTiming = TimingEventAmbu.getEnum(event.getCode());
             if (eventTiming == null) {
                 throw new InvalidEmedContentException("The event timing is invalid.");
             }
@@ -184,7 +186,7 @@ public class ChEmedDosage extends Dosage {
      * @param timing the event timing.
      * @return this.
      */
-    public ChEmedDosage addWhen(final EventTiming timing) {
+    public ChEmedDosage addWhen(final TimingEventAmbu timing) {
         this.getTiming()
                 .getRepeat()
                 .addWhen(Timing.EventTiming.fromCode(timing.getCodeValue()));

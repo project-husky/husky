@@ -22,6 +22,7 @@ import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosage;
 import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosageSplit;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -106,11 +107,11 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
     }
 
     /**
-     * Gets additional entries of the dosage instruction
+     * Resolves additional entries of the dosage instruction
      *
      * @return additional entries of the dosage instruction.
      */
-    public List<ChEmedDosageSplit> getDosageAdditionalEntry() {
+    public List<ChEmedDosageSplit> resolveDosageAdditionalEntry() {
         return this.getDosage().stream()
                 .filter(ChEmedDosageSplit.class::isInstance)
                 .map(ChEmedDosageSplit.class::cast)

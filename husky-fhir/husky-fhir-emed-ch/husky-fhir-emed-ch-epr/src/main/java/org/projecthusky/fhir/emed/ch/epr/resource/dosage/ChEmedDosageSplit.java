@@ -4,11 +4,9 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Dosage;
 import org.hl7.fhir.r4.model.Period;
 import org.hl7.fhir.r4.model.Timing;
-import org.projecthusky.common.utils.datatypes.Oids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
-import org.projecthusky.fhir.emed.ch.common.enums.EventTiming;
-import org.projecthusky.fhir.emed.ch.common.enums.RouteOfAdministrationEdqm;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.emed.ch.epr.enums.TimingEventAmbu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,13 +56,13 @@ public class ChEmedDosageSplit extends Dosage {
      */
     @Nullable
     @ExpectsValidResource
-    public List<EventTiming> resolveWhen() throws InvalidEmedContentException {
+    public List<TimingEventAmbu> resolveWhen() throws InvalidEmedContentException {
         final var repeat = this.getTiming().getRepeat();
         if (!repeat.hasWhen()) return null;
 
-        final var eventTimings = new ArrayList<EventTiming>();
+        final var eventTimings = new ArrayList<TimingEventAmbu>();
         for (final var event : repeat.getWhen()) {
-            final var eventTiming = EventTiming.getEnum(event.getCode());
+            final var eventTiming = TimingEventAmbu.getEnum(event.getCode());
             if (eventTiming == null) {
                 throw new InvalidEmedContentException("The event timing is invalid.");
             }
@@ -159,7 +157,7 @@ public class ChEmedDosageSplit extends Dosage {
      * @param timing the event timing.
      * @return this.
      */
-    public ChEmedDosageSplit addWhen(final EventTiming timing) {
+    public ChEmedDosageSplit addWhen(final TimingEventAmbu timing) {
         this.getTiming()
                 .getRepeat()
                 .addWhen(Timing.EventTiming.fromCode(timing.getCodeValue()));

@@ -78,10 +78,20 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
         this.pdfConverter = Objects.requireNonNull(htmlToPdfAConverter);
     }
 
+    /**
+     * Gets the PDF author
+     *
+     * @return the PDF author
+     */
     public String getAuthor() {
         return author;
     }
 
+    /**
+     * Sets the PDF author
+     *
+     * @param author the PDF author
+     */
     public void setAuthor(final String author) {
         this.author = Objects.requireNonNull(author);
     }
@@ -89,18 +99,18 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
     /**
      * It will use the default template.
      *
-     * @param document
-     * @return
+     * @param document the narrative document.
+     * @return the PDF bytearray.
      */
     public byte[] generate(final NarrativeTreatmentDocument document) throws Exception {
         return this.generate(document, null, null);
     }
 
     /**
-     * @param document
+     * @param document       The narrative document.
      * @param templateHeader The HTML template header (before the main content).
      * @param templateFooter The HTML template footer (after the main content).
-     * @return
+     * @return The PDF bytearray.
      */
     public byte[] generate(final NarrativeTreatmentDocument document,
                            @Nullable String templateHeader,
@@ -158,9 +168,18 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
         return this.pdfConverter.convert(body);
     }
 
+    /**
+     * Creates the array with treatment.
+     *
+     * @param treatments The treatments
+     * @param lang The lang of the PDF.
+     * @param narDom The DOM.
+     * @return The elements with treatments information.
+     * @throws IOException if a resource icon isn't founded.
+     */
     private List<Element> createMedicationTableRows(final List<NarrativeTreatmentItem> treatments,
-                                            final NarrativeLanguage lang,
-                                            final NarrativeDomFactory narDom) throws IOException {
+                                                    final NarrativeLanguage lang,
+                                                    final NarrativeDomFactory narDom) throws IOException {
         final var medicationTableRows = new ArrayList<Element>();
         for (final var treatment : treatments) {
             final var cells = new ArrayList<Element>();
@@ -179,7 +198,7 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
             cells.add(narDom.td(this.formatMedicationName(narDom, treatment, lang), "col name border-top"));
 
             // Medication image
-            var tdImage = narDom.td(null, "medication-image border-top text-center");
+            final var tdImage = narDom.td(null, "medication-image border-top text-center");
             if (treatment.getProductImageFront() != null) {
                 tdImage.appendChild(narDom.img(treatment.getProductImageFront(), this.getMessage("MEDICATION_IMAGE", lang)));
             }
@@ -193,9 +212,11 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
             cells.addAll(this.formatDosageCells(narDom, treatment));
 
             // Date from to
-            var dateFromTo = narDom.p(null);
-            dateFromTo.appendChild(narDom.text(treatment.getTreatmentStart()));
-            dateFromTo.appendChild(narDom.br());
+            final var dateFromTo = narDom.p(null);
+            if (treatment.getTreatmentStart() != null) {
+                dateFromTo.appendChild(narDom.text(treatment.getTreatmentStart()));
+                dateFromTo.appendChild(narDom.br());
+            }
             if (treatment.getTreatmentStop() != null) {
                 dateFromTo.appendChild(narDom.text(treatment.getTreatmentStop()));
             } else {
@@ -207,8 +228,8 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
             cells.add(narDom.td(treatment.getTreatmentReason(), "border-top"));
 
             // Prescribed by
-            if (treatment.getSectionAuthor() != null) {
-                cells.add(narDom.td(treatment.getSectionAuthor().getName(), "border-top"));
+            if (treatment.getLastMedicalAuthor() != null) {
+                cells.add(narDom.td(treatment.getLastMedicalAuthor().getName(), "border-top"));
             } else {
                 cells.add(narDom.td(null, "border-top"));
             }
@@ -217,7 +238,7 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
 
             // Patient's instructions
             if (treatment.getPatientMedicationInstructions() != null) {
-                var td = narDom.td(null, "patient-instructions", null, "10");
+                final var td = narDom.td(null, "patient-instructions", null, "10");
                 td.appendChild(narDom.title4(StringUtils.capitalize(this.getMessage("PATIENT_INSTRUCTIONS", lang)), null));
                 td.appendChild(narDom.text(treatment.getPatientMedicationInstructions()));
                 medicationTableRows.add(narDom.tr(td, null));
@@ -225,7 +246,7 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
 
             // Comments
             if (treatment.getAnnotationComment() != null) {
-                var td = narDom.td(null, "comments", null, "10");
+                final var td = narDom.td(null, "comments", null, "10");
                 byte[] infoCircle = this.getResourceAsStream("/narrative/default/icons/info-circle.png").readAllBytes();
                 td.appendChild(narDom.img("data:image/png;base64," + Base64.getEncoder().encodeToString(infoCircle), this.getMessage("COMMENT", lang)));
                 td.appendChild(narDom.text(treatment.getAnnotationComment()));
@@ -240,7 +261,7 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
             medicationTableRows.add(narDom.tr(td, null));
         }
 
-        return  medicationTableRows;
+        return medicationTableRows;
     }
 
     /**
@@ -261,11 +282,12 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
     /**
      * Gets the name of an author. It may be a person or a device.
      *
-     * @param author
+     * @param narDom The DOM.
+     * @param author The author.
      * @return The author name.
      */
     private Node formatAuthorName(final NarrativeDomFactory narDom,
-                          final NarrativeTreatmentAuthor author) {
+                                  final NarrativeTreatmentAuthor author) {
 
         final var p = narDom.p(null);
         p.appendChild(narDom.text(author.getName()));
@@ -285,17 +307,13 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
     /**
      * Gets information on the dosage of the medicine
      *
-     * @param narDom
-     * @param item The medicine
+     * @param narDom The DOM.
+     * @param item   The medicine
      * @return The dosages of the medicine
      */
     private List<Element> formatDosageCells(final NarrativeDomFactory narDom,
-                                    final NarrativeTreatmentItem item) {
-//        if (item.getNarrativeDosageInstructions() != null) {
-//            final var td = narDom.td(item.getNarrativeDosageInstructions(), "col border-top");
-//            td.setAttribute("colspan", "5");
-//            return List.of(td);
-//        }
+                                            final NarrativeTreatmentItem item) {
+
         final var cells = new ArrayList<Element>(5);
 
         cells.add(displayQuantity(narDom, item.getDosageIntakeMorning()));
@@ -303,17 +321,17 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
         cells.add(displayQuantity(narDom, item.getDosageIntakeEvening()));
         cells.add(displayQuantity(narDom, item.getDosageIntakeNight()));
 
-        if (item.getDosageUnit() != null) {
-            cells.add(narDom.td(narDom.text(item.getDosageUnit()), "text-center unit border-top"));
-        }
+        final var unit = item.getDosageUnit() != null ? item.getDosageUnit() : "Inconnu";
+        cells.add(narDom.td(narDom.text(unit), "text-center unit border-top"));
+
         return cells;
     }
 
     /**
      * Formats the dosage of the medicine
      *
-     * @param narDom
-     * @param quantity the dosage
+     * @param narDom The DOM.
+     * @param quantity The quantity.
      * @return
      */
     final Element displayQuantity(final NarrativeDomFactory narDom,
@@ -327,14 +345,14 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
     /**
      * Gets the patient's personal data
      *
-     * @param narDom
-     * @param document
+     * @param narDom The DOM.
+     * @param document The document.
      * @return the patient's personal data
      */
     private Element formatPatientPersonalData(final NarrativeDomFactory narDom,
                                               final NarrativeTreatmentDocument document) {
-        var patientPersonalData = narDom.div(null, "patient-data");
-        patientPersonalData.appendChild(narDom.title3(StringUtils.capitalize(this.getMessage("PATIENT_PERSONAL_DATA",document.getNarrativeLanguage())), null));
+        final var patientPersonalData = narDom.div(null, "patient-data");
+        patientPersonalData.appendChild(narDom.title3(StringUtils.capitalize(this.getMessage("PATIENT_PERSONAL_DATA", document.getNarrativeLanguage())), null));
         patientPersonalData.appendChild(narDom.text(document.getPatientName()));
         patientPersonalData.appendChild(narDom.br());
         patientPersonalData.appendChild(narDom.text(String.format("%s, %s", document.getPatientBirthDate(), document.getPatientGender())));
@@ -343,26 +361,28 @@ public class PdfOriginalRepresentationGenerator extends AbstractNarrativeGenerat
             patientPersonalData.appendChild(narDom.text(document.getPatientAddress()));
         }
         if (document.getPatientContact() != null) {
-            String separator = document.getPatientAddress() != null ? " / " : "";
+            final String separator = document.getPatientAddress() != null ? " / " : "";
             patientPersonalData.appendChild(narDom.text(separator + document.getPatientContact()));
         }
         return patientPersonalData;
     }
 
     /**
-     * Gets information of the header
-     * @param narDom
-     * @param document
-     * @return the header
+     * Gets information of the header.
+     *
+     * @param narDom The DOM.
+     * @param document The document.
+     * @return the header.
      */
     private Element formatHeader(final NarrativeDomFactory narDom,
-                         final NarrativeTreatmentDocument document) {
+                                 final NarrativeTreatmentDocument document) {
         final var tr = narDom.tr(null, null);
         tr.appendChild(narDom.td(narDom.title1(StringUtils.capitalize(this.getMessage("TITLE", document.getNarrativeLanguage())), "title"), null));
         tr.appendChild(narDom.td(this.formatPatientPersonalData(narDom, document), null));
+
         final var tdAuthor = narDom.td(null, null);
         tdAuthor.appendChild(narDom.title3(StringUtils.capitalize(this.getMessage("AUTHOR_DOCUMENT", document.getNarrativeLanguage())), null));
-        tdAuthor.appendChild(this.formatAuthorName(narDom, document.getLastMedicalAuthor()));
+        tdAuthor.appendChild(this.formatAuthorName(narDom, document.getLastInterveningAuthor()));
 
         tr.appendChild(tdAuthor);
 

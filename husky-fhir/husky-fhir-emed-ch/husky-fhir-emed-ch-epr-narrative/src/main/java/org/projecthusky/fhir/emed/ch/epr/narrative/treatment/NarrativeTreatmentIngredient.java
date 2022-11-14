@@ -35,7 +35,8 @@ public class NarrativeTreatmentIngredient {
      * @param name     the ingredient's name
      * @param quantityWithEmedUnits the ingredient's quantity with the quantity's unit
      */
-    public NarrativeTreatmentIngredient(final String name, final ChEmedQuantityWithEmedUnits quantityWithEmedUnits) {
+    public NarrativeTreatmentIngredient(final String name,
+                                        final ChEmedQuantityWithEmedUnits quantityWithEmedUnits) {
         this.name = Objects.requireNonNull(name);
         this.quantity = Objects.requireNonNull(quantityWithEmedUnits.resolveQuantity().toPlainString());
         this.unit = Objects.requireNonNull(quantityWithEmedUnits.resolveUnitCode().getDisplayName());

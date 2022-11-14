@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class NarrativeTreatmentDocumentTest {
 
-
     @Test
     void testPmlc() throws Exception {
         final var xml = new String(getClass().getResourceAsStream("/2-7-MedicationCard.xml").readAllBytes());
@@ -29,24 +28,23 @@ class NarrativeTreatmentDocumentTest {
                 .emedDocumentDigest(pmlcDocument, EmedDocumentType.PMLC)
                 .build();
 
-//        assertEquals("Familien Hausarzt", document.getLastMedicalAuthor().getName());
-//        assertEquals("Hausarzt", document.getLastMedicalAuthor().getOrganization());
-//        assertNull(document.getLastMedicalAuthor().getAddress());
-//        assertEquals(document.getLastMedicalAuthor(), document.getLastInterveningAuthor());
+        assertEquals("PMP", document.getLastInterveningAuthor().getName());
+        assertEquals("Hausarzt", document.getLastInterveningAuthor().getOrganization());
+        assertEquals("Krankenstrasse 2, 8005 Zürich", document.getLastInterveningAuthor().getAddress());
         assertEquals(EmedDocumentType.PMLC, document.getDocumentType());
         assertEquals("04.02.2012 14:05:00", document.getCreationTime());
         assertEquals("04.02.2012 14:05:00", document.getDocumentationTime());
         assertEquals("Monika Wegmüller", document.getPatientName());
-//        assertEquals("", document.getPatientGender());
+        assertEquals("Female", document.getPatientGender());
         assertEquals("15.05.1943", document.getPatientBirthDate());
-        assertNull(document.getPatientAddress());
+        assertEquals("Wiesenstr. 12, 8003 Zürich", document.getPatientAddress());
 //        assertEquals("", document.getPatientContact());
 
         assertEquals(0, document.getRecentTreatments().size());
         assertEquals(2, document.getActiveTreatments().size());
 
         NarrativeTreatmentItem item1 = document.getActiveTreatments().get(0);
-//        assertEquals("Familien Hausarzt",item1.getSectionAuthor().getName());
+        assertEquals("Familien Hausarzt", item1.getLastMedicalAuthor().getName());
 //        assertEquals("29.11.2011", item1.getPlanningTime());
         assertEquals("BELOC ZOK Ret Tabl 50 mg", item1.getProductName());
         assertEquals(ProductCodeType.GTIN, item1.getCodeType());
@@ -58,13 +56,11 @@ class NarrativeTreatmentDocumentTest {
 //        assertEquals("mg", item1.getProductIngredients().get(0).getUnit());
 //        assertEquals("10.01.2022", item1.getTreatmentStart());
 //        assertEquals("10.03.2022", item1.getTreatmentStop());
-//        assertNull(item1.getNarrativeDosageInstructions());
 //        assertEquals("0.5", item1.getDosageIntakeMorning());
 //        assertNull(item1.getDosageIntakeNoon());
 //        assertNull(item1.getDosageIntakeEvening());
 //        assertNull(item1.getDosageIntakeNight());
 //        assertEquals("mg", item1.getDosageUnit());
-//        assertEquals(1, item1.getRepeatNumber());
 //        assertEquals("voie orale", item1.getRouteOfAdministration());
         assertEquals("Bluthochdruck", item1.getTreatmentReason());
         assertNull(item1.getPatientMedicationInstructions());
