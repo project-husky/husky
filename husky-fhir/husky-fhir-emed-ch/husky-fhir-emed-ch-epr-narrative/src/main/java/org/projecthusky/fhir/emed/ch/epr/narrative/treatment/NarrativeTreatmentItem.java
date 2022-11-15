@@ -1,6 +1,10 @@
 package org.projecthusky.fhir.emed.ch.epr.narrative.treatment;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.Dosage;
+import org.hl7.fhir.r4.model.Enumeration;
+import org.hl7.fhir.r4.model.Medication;
+import org.hl7.fhir.r4.model.Timing;
 import org.projecthusky.fhir.emed.ch.common.enums.PharmaceuticalDoseFormEdqm;
 import org.projecthusky.fhir.emed.ch.common.enums.RouteOfAdministrationEdqm;
 import org.projecthusky.fhir.emed.ch.common.enums.UnitCode;
@@ -111,10 +115,29 @@ public class NarrativeTreatmentItem {
     @Nullable
     private final String treatmentReason;
 
+
     /**
      * Whether the treatment is to be taken regularly ({@code false}) or only if required ({@code true}).
      */
     private final boolean inReserve;
+
+    /**
+     * The patient medication instructions or {@code null} if it isn't provided.
+     */
+    @Nullable
+    private final String patientMedicationInstructions;
+
+    /**
+     * The fulfilment instructions or {@code null} if it isn't provided.
+     */
+    @Nullable
+    private final String fulfilmentInstructions;
+
+    /**
+     * The annotation comment or {@code null} if it isn't provided.
+     */
+    @Nullable
+    private final String annotationComment;
 
     /**
      * The medication name.
@@ -146,24 +169,6 @@ public class NarrativeTreatmentItem {
     private String routeOfAdministration;
 
     /**
-     * The patient medication instructions or {@code null} if it isn't provided.
-     */
-    @Nullable
-    private final String patientMedicationInstructions;
-
-    /**
-     * The fulfilment instructions or {@code null} if it isn't provided.
-     */
-    @Nullable
-    private final String fulfilmentInstructions;
-
-    /**
-     * The annotation comment or {@code null} if it isn't provided.
-     */
-    @Nullable
-    private final String annotationComment;
-
-    /**
      * Constructor
      *
      * @param builder the builder
@@ -176,13 +181,8 @@ public class NarrativeTreatmentItem {
         this.codeType = Objects.requireNonNull(builder.codeType);
         this.productCode = Objects.requireNonNull(builder.productCode);
         this.productFormCode = builder.productFormCode;
-
-//        this.productIngredients = Objects.requireNonNull(builder.productIngredients);
-        this.productIngredients = builder.productIngredients;
-
-//        this.treatmentStart = Objects.requireNonNull(builder.treatmentStart);
-        this.treatmentStart = builder.treatmentStart;
-
+        this.productIngredients = Objects.requireNonNull(builder.productIngredients);
+        this.treatmentStart = Objects.requireNonNull(builder.treatmentStart);
         this.treatmentStop = builder.treatmentStop;
         this.dosageIntakeMorning = builder.dosageIntakeMorning;
         this.dosageIntakeNoon = builder.dosageIntakeNoon;
@@ -379,12 +379,25 @@ public class NarrativeTreatmentItem {
         private boolean inReserve;
         private String annotationComment;
 
+        /**
+         * Constructor
+         *
+         * @param narrativeLanguage The lang of the narrative content.
+         * @throws IOException
+         */
         public NarrativeTreatmentItemBuilder(final NarrativeLanguage narrativeLanguage) throws IOException {
             this.narrativeLanguage = narrativeLanguage;
             this.valueSetEnumNarrative = new ValueSetEnumNarrativeForPatientService();
             this.productIngredients = new ArrayList<>();
         }
 
+        /**
+         * Formats a {@link TemporalAccessor} with the given pattern.
+         *
+         * @param pattern The pattern.
+         * @param temporal The {@link TemporalAccessor}
+         * @return this.
+         */
         private String formatTemporalAccessor(final String pattern,
                                               final TemporalAccessor temporal) {
             return DateTimeFormatter.ofPattern(pattern, this.narrativeLanguage.getLocale())
@@ -392,16 +405,34 @@ public class NarrativeTreatmentItem {
                     .format(temporal);
         }
 
+        /**
+         * Sets the last medical author of the document.
+         *
+         * @param lastMedicalAuthor The last medical author of the document.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder lastMedicalAuthor(final Author lastMedicalAuthor) {
             this.lastMedicalAuthor = new NarrativeTreatmentAuthor(lastMedicalAuthor);
             return this;
         }
 
+        /**
+         * Sets the author of the document.
+         *
+         * @param documentAuthor The author of the document.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder documentAuthor(final Author documentAuthor) {
             this.documentAuthor = new NarrativeTreatmentAuthor(documentAuthor);
             return this;
         }
 
+        /**
+         * Sets the medicine.
+         *
+         * @param medication The medicine.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder product(final ChEmedEprMedication medication) {
 
             final var gtin = medication.resolveGtinCode();
@@ -415,43 +446,89 @@ public class NarrativeTreatmentItem {
                 this.productCode(atc);
             }
 
+//            this.productName(medication.resolveMedicationName()) // TODO
+//                    .productFormCode(medication.resolveForm())
+//                    .addProductIngredients(medication.resolveActiveIngredients());
+
             this.productName(medication.resolveMedicationName())
                     .productFormCode(medication.resolveForm())
-                    .addProductIngredients(medication.resolveActiveIngredients());
+                    .defaultClassAddProductIngredients(medication.getIngredient());
 
             return this;
         }
 
+        /**
+         * Sets the name of the medicine.
+         *
+         * @param productName The name of the medicine.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder productName(final String productName) {
             this.productName = productName;
             return this;
         }
 
+        /**
+         * Sets the icons of the medicine.
+         *
+         * @param icon
+         * @return
+         */
         public NarrativeTreatmentItemBuilder productIcon(final String icon) {
             this.productIcon = icon;
             return this;
         }
 
+        /**
+         * Sets the image of the front of the medicine.
+         *
+         * @param image The image of the front of the medicine.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder productImageFront(final String image) {
             this.productImageFront = image;
             return this;
         }
 
+        /**
+         * Sets the image of the back of the medicine.
+         *
+         * @param image The image of the back of the medicine.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder productImageBack(final String image) {
             this.productImageBack = image;
             return this;
         }
 
+        /**
+         * Sets if the code of the medicine is GTIN or ATC.
+         *
+         * @param codeType GTIN or ATC
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder codeType(final ProductCodeType codeType) {
             this.codeType = codeType;
             return this;
         }
 
+        /**
+         * Sets the GTIN or ATC code of the medicine.
+         *
+         * @param productCode The GTIN or ATC code.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder productCode(final String productCode) {
             this.productCode = productCode;
             return this;
         }
 
+        /**
+         * Sets the form code of the medicine.
+         *
+         * @param formCode The form code.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder productFormCode(final PharmaceuticalDoseFormEdqm formCode) {
             this.productFormCode = this.valueSetEnumNarrative.getMessage(formCode, this.narrativeLanguage);
 
@@ -472,6 +549,12 @@ public class NarrativeTreatmentItem {
             return this;
         }
 
+        /**
+         * Adds the ingredients.
+         *
+         * @param productIngredients The ingredients.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder addProductIngredients(final List<ChEmedEprMedicationIngredient> productIngredients) {
             this.productIngredients.addAll(productIngredients.stream()
                     .filter(ingredient -> ingredient.resolveStrength() != null)
@@ -482,6 +565,23 @@ public class NarrativeTreatmentItem {
             return this;
         }
 
+        // Created while waiting for the parser to work with the ChEmedEprMedicationIngredient type
+        public NarrativeTreatmentItemBuilder defaultClassAddProductIngredients(final List<Medication.MedicationIngredientComponent> productIngredients) {
+            this.productIngredients.addAll(productIngredients.stream()
+                    .filter(ingredient -> ingredient.getStrength() != null)
+                    .map(ingredient -> new NarrativeTreatmentIngredient(
+                            ingredient.getItemCodeableConcept().getText(),
+                            ingredient.getStrength().getNumerator()))
+                    .toList());
+            return this;
+        }
+
+        /**
+         * Sets the dosage, the start and stop date of the treatment and the instructions.
+         *
+         * @param dosage The dosage.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder dosage(final ChEmedDosage dosage) {
             this.routeOfAdministration(dosage.resolveRouteOfAdministration());
             this.treatmentStart(dosage.getBoundsPeriod().getStart().toInstant());
@@ -496,6 +596,12 @@ public class NarrativeTreatmentItem {
             return this.whens(whens, doseQuantity);
         }
 
+        /**
+         * Sets the dosages.
+         *
+         * @param dosages The dosages.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder dosage(final List<ChEmedDosageSplit> dosages) {
             for (final var dosage : dosages) {
                 final var whens = dosage.resolveWhen();
@@ -506,6 +612,52 @@ public class NarrativeTreatmentItem {
             return this;
         }
 
+        // Created while waiting for the parser to work with the ChEmedDosage type
+        public NarrativeTreatmentItemBuilder defaultDosageClass(final List<Dosage> dosages) {
+            for (final var dosage : dosages) {
+                if (this.treatmentStart == null && dosage.getTiming().getRepeat().hasBoundsPeriod()) {
+                    final var start = dosage.getTiming().getRepeat().getBoundsPeriod().getStart();
+                    final var stop = dosage.getTiming().getRepeat().getBoundsPeriod().getEnd();
+                    if (start != null) this.treatmentStart(start.toInstant());
+                    if (stop != null) this.treatmentStop(stop.toInstant());
+                }
+
+                if  (dosage.hasRoute() && this.routeOfAdministration == null) {
+                    this.routeOfAdministration(RouteOfAdministrationAmbu.getEnum(dosage.getRoute().getCodingFirstRep().getCode()));
+                }
+
+                final var whens = dosage.getTiming().getRepeat().getWhen();
+                final var doseQuantity = dosage.getDoseAndRateFirstRep();
+                this.defaultWhensClass(whens, doseQuantity);
+            }
+            return this;
+        }
+
+        // Created while waiting for the parser to work with the ChEmedDosage type
+        public NarrativeTreatmentItemBuilder defaultWhensClass(@Nullable final List<Enumeration<Timing.EventTiming>> whens,
+                                                               final Dosage.@Nullable DosageDoseAndRateComponent doseQuantity) {
+            if (whens != null && !whens.isEmpty() && doseQuantity != null) {
+                final var quantity = doseQuantity.getDoseQuantity().getValue().toPlainString();
+                for (final var when : whens) {
+                    switch (when.getValue()) {
+                        case MORN -> dosageIntakeMorning(quantity);
+                        case NOON -> dosageIntakeNoon(quantity);
+                        case EVE -> dosageIntakeEvening(quantity);
+                        case NIGHT -> dosageIntakeNight(quantity);
+                    }
+                }
+                dosageUnit(UnitCode.getEnum(doseQuantity.getDoseQuantity().getCode()));
+            }
+            return this;
+        }
+
+        /**
+         * Sets the dose for each time of day.
+         *
+         * @param whens The times of day.
+         * @param doseQuantity The dose.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder whens(@Nullable final List<TimingEventAmbu> whens,
                                                    @Nullable final ChEmedQuantityWithEmedUnits doseQuantity) {
             if (whens != null && !whens.isEmpty() && doseQuantity != null) {
@@ -523,11 +675,23 @@ public class NarrativeTreatmentItem {
             return this;
         }
 
+        /**
+         * Sets the start date of the treatment.
+         *
+         * @param treatmentStart the start date of the treatment.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder treatmentStart(final TemporalAccessor treatmentStart) {
             this.treatmentStart = this.formatTemporalAccessor(DATE_PATTERN, treatmentStart);
             return this;
         }
 
+        /**
+         * Sets the end date of the treatment.
+         *
+         * @param treatmentStop  the end date of the treatment.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder treatmentStop(@Nullable final TemporalAccessor treatmentStop) {
             if (treatmentStop != null) {
                 this.treatmentStop = this.formatTemporalAccessor(DATE_PATTERN, treatmentStop);
@@ -535,36 +699,78 @@ public class NarrativeTreatmentItem {
             return this;
         }
 
+        /**
+         * Sets the dosage of the medicine in the morning.
+         *
+         * @param dosageIntakeMorning The dosage of the medicine in the morning.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder dosageIntakeMorning(final String dosageIntakeMorning) {
             this.dosageIntakeMorning = dosageIntakeMorning;
             return this;
         }
 
+        /**
+         * Sets the dosage of the medicine in the noon.
+         *
+         * @param dosageIntakeNoon The dosage of the medicine in the noon.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder dosageIntakeNoon(final String dosageIntakeNoon) {
             this.dosageIntakeNoon = dosageIntakeNoon;
             return this;
         }
 
+        /**
+         * Sets the dosage of the medicine in the evening.
+         *
+         * @param dosageIntakeEvening The dosage of the medicine in the evening.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder dosageIntakeEvening(final String dosageIntakeEvening) {
             this.dosageIntakeEvening = dosageIntakeEvening;
             return this;
         }
 
+        /**
+         * Sets the dosage of the medicine in the night.
+         *
+         * @param dosageIntakeNight The dosage of the medicine in the night.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder dosageIntakeNight(final String dosageIntakeNight) {
             this.dosageIntakeNight = dosageIntakeNight;
             return this;
         }
 
+        /**
+         * Sets the dosage unit.
+         *
+         * @param unit the dosage's unit.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder dosageUnit(final RegularUnitCodeAmbu unit) {
             this.dosageUnit = this.valueSetEnumNarrative.getMessage(unit, this.narrativeLanguage);
             return this;
         }
 
+        /**
+         * Sets the dosage unit.
+         *
+         * @param unit the dosage's unit.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder dosageUnit(final UnitCode unit) {
             this.dosageUnit = this.valueSetEnumNarrative.getMessage(unit, this.narrativeLanguage);
             return this;
         }
 
+        /**
+         * Sets the route of administration.
+         *
+         * @param routeOfAdministration The route of administration.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder routeOfAdministration(final RouteOfAdministrationAmbu routeOfAdministration) {
             if (routeOfAdministration != null) {
                 this.routeOfAdministration = this.valueSetEnumNarrative.getMessage(routeOfAdministration, this.narrativeLanguage);
@@ -572,6 +778,12 @@ public class NarrativeTreatmentItem {
             return this;
         }
 
+        /**
+         * Sets the route of administration.
+         *
+         * @param routeOfAdministration The route of administration.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder routeOfAdministration(@Nullable final RouteOfAdministrationEdqm routeOfAdministration) {
             if (routeOfAdministration != null) {
                 this.routeOfAdministration = this.valueSetEnumNarrative.getMessage(routeOfAdministration, this.narrativeLanguage);
@@ -579,26 +791,56 @@ public class NarrativeTreatmentItem {
             return this;
         }
 
+        /**
+         * Sets the treatment reason.
+         *
+         * @param treatmentReason The treatment reason.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder treatmentReason(final String treatmentReason) {
             this.treatmentReason = treatmentReason;
             return this;
         }
 
+        /**
+         * Sets the patient's medication instructions.
+         *
+         * @param patientMedicationInstructions The patient's medication instructions.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder patientMedicationInstructions(final String patientMedicationInstructions) {
             this.patientMedicationInstructions = patientMedicationInstructions;
             return this;
         }
 
+        /**
+         * Sets the fulfilment instructions.
+         *
+         * @param fulfilmentInstructions The fulfilment instructions
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder fulfilmentInstructions(final String fulfilmentInstructions) {
             this.fulfilmentInstructions = fulfilmentInstructions;
             return this;
         }
 
+        /**
+         * Sets if the treatment is in reserve.
+         *
+         * @param inReserve {@code true} if the treatment is in reserve, {@code false} otherwise.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder inReserve(final boolean inReserve) {
             this.inReserve = inReserve;
             return this;
         }
 
+        /**
+         * Sets the annotation comment.
+         *
+         * @param annotationComment The annotation comment.
+         * @return this.
+         */
         public NarrativeTreatmentItemBuilder annotationComment(final String annotationComment) {
             this.annotationComment = annotationComment;
             return this;
@@ -618,8 +860,11 @@ public class NarrativeTreatmentItem {
             }
 
             this.annotationComment(medicationStatement.getNoteFirstRep().getText());
+
 //            this.dosage(medicationStatement.resolveDosageBaseEntry()); // TODO
 //            this.dosage(medicationStatement.resolveDosageAdditionalEntry());
+            this.defaultDosageClass(medicationStatement.getDosage());
+
             this.product(medication);
             this.treatmentReason(medicationStatement.getReasonCodeFirstRep().getText());
 

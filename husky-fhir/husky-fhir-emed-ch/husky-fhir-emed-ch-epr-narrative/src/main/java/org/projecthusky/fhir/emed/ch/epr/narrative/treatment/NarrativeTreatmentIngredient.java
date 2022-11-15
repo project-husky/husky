@@ -2,6 +2,7 @@ package org.projecthusky.fhir.emed.ch.epr.narrative.treatment;
 
 import lombok.Data;
 import lombok.NonNull;
+import org.hl7.fhir.r4.model.Quantity;
 import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedQuantityWithEmedUnits;
 
 import java.util.Objects;
@@ -32,7 +33,7 @@ public class NarrativeTreatmentIngredient {
     /**
      * Constructor
      *
-     * @param name     the ingredient's name
+     * @param name                  the ingredient's name
      * @param quantityWithEmedUnits the ingredient's quantity with the quantity's unit
      */
     public NarrativeTreatmentIngredient(final String name,
@@ -40,5 +41,13 @@ public class NarrativeTreatmentIngredient {
         this.name = Objects.requireNonNull(name);
         this.quantity = Objects.requireNonNull(quantityWithEmedUnits.resolveQuantity().toPlainString());
         this.unit = Objects.requireNonNull(quantityWithEmedUnits.resolveUnitCode().getDisplayName());
+    }
+
+    // Created while waiting for the parser to work with the ChEmedEprMedicationIngredient type
+    public NarrativeTreatmentIngredient(final String name,
+                                        final Quantity quantityWithEmedUnits) {
+        this.name = Objects.requireNonNull(name);
+        this.quantity = Objects.requireNonNull(quantityWithEmedUnits.getValue().toPlainString());
+        this.unit = Objects.requireNonNull(quantityWithEmedUnits.getCode());
     }
 }

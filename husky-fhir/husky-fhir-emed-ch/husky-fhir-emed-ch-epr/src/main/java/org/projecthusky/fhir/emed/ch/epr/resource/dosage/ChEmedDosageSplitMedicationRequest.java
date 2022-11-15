@@ -1,6 +1,8 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.dosage;
 
+import ca.uhn.fhir.model.api.annotation.DatatypeDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.Dosage;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.enums.TimingEventAmbu;
@@ -12,6 +14,7 @@ import java.util.List;
  *
  * @author Ronaldo Loureiro
  **/
+@DatatypeDef(name = "Dosage", isSpecialization = true, profileOf = ChEmedDosageSplit.class)
 public class ChEmedDosageSplitMedicationRequest extends ChEmedDosageSplit {
 
     /**

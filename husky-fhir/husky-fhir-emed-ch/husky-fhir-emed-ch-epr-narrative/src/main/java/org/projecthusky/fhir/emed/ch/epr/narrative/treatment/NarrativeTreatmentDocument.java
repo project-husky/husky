@@ -190,6 +190,12 @@ public class NarrativeTreatmentDocument {
         private String patientAddress;
         private String patientContact;
 
+        /**
+         * Constructor.
+         *
+         * @param narrativeLanguage the lang of the narrative content.
+         * @throws IOException
+         */
         public NarrativeTreatmentDocumentBuilder(final NarrativeLanguage narrativeLanguage) throws IOException {
             this.narrativeLanguage = narrativeLanguage;
             this.valueSetEnumNarrativeForPatientService = new ValueSetEnumNarrativeForPatientService();
@@ -197,6 +203,13 @@ public class NarrativeTreatmentDocument {
             this.recentTreatments = new ArrayList<>();
         }
 
+        /**
+         * Formats a {@link TemporalAccessor} with the given pattern.
+         *
+         * @param pattern The pattern.
+         * @param temporal The {@link TemporalAccessor}
+         * @return this.
+         */
         private String formatTemporalAccessor(final String pattern,
                                               final TemporalAccessor temporal) {
             return DateTimeFormatter.ofPattern(pattern, this.narrativeLanguage.getLocale())
@@ -204,11 +217,23 @@ public class NarrativeTreatmentDocument {
                     .format(temporal);
         }
 
+        /**
+         * Sets the type of the document.
+         *
+         * @param documentType The type of the document.
+         * @return this.
+         */
         public NarrativeTreatmentDocumentBuilder documentType(final EmedDocumentType documentType) {
             this.documentType = documentType;
             return this;
         }
 
+        /**
+         * Sets the creation time of the document
+         *
+         * @param creationTime The creation time of the document.
+         * @return this.
+         */
         public NarrativeTreatmentDocumentBuilder creationTime(final TemporalAccessor creationTime) {
             this.creationTime = this.formatTemporalAccessor(DATETIME_PATTERN, creationTime);
             return this;
@@ -219,6 +244,12 @@ public class NarrativeTreatmentDocument {
             return this;
         }
 
+        /**
+         * Adds the active treatments
+         *
+         * @param activeTreatments The active treatments
+         * @return this.
+         */
         public NarrativeTreatmentDocumentBuilder addActiveTreatments(final List<NarrativeTreatmentItem> activeTreatments) {
             this.activeTreatments.addAll(activeTreatments);
             return this;
@@ -229,11 +260,23 @@ public class NarrativeTreatmentDocument {
             return this;
         }
 
+        /**
+         * Sets the last intervening author.
+         *
+         * @param author The last intervening author.
+         * @return this.
+         */
         public NarrativeTreatmentDocumentBuilder lastInterveningAuthor(final Author author) {
             this.lastInterveningAuthor = new NarrativeTreatmentAuthor(author);
             return this;
         }
 
+        /**
+         * Sets the patient.
+         *
+         * @param patient The patient.
+         * @return this.
+         */
         public NarrativeTreatmentDocumentBuilder patient(final ChCorePatientEpr patient) {
             return this.patientName(String.format("%s %s", patient.getNameFirstRep().getGivenAsSingleString(), patient.getNameFirstRep().getFamily()))
                     .patientGender(patient.resolveGender())
@@ -241,21 +284,45 @@ public class NarrativeTreatmentDocument {
                     .patientAddress(patient.resolveAddress());
         }
 
+        /**
+         * Sets the patient's name.
+         *
+         * @param patientName The patient's name.
+         * @return this.
+         */
         public NarrativeTreatmentDocumentBuilder patientName(final String patientName) {
             this.patientName = patientName;
             return this;
         }
 
+        /**
+         * Sets the patient's gender.
+         *
+         * @param gender The patient's gender.
+         * @return this.
+         */
         public NarrativeTreatmentDocumentBuilder patientGender(final Enumerations.AdministrativeGender gender) {
             this.patientGender = gender.getDisplay();
             return this;
         }
 
+        /**
+         * Sets the patient's birthdate.
+         *
+         * @param patientBirthDate The patient's birthdate.
+         * @return this.
+         */
         public NarrativeTreatmentDocumentBuilder patientBirthDate(final LocalDate patientBirthDate) {
             this.patientBirthDate = this.formatTemporalAccessor(DATE_PATTERN, patientBirthDate);
             return this;
         }
 
+        /**
+         * Sets the patient's address.
+         *
+         * @param address The patient's address.
+         * @return this.
+         */
         public NarrativeTreatmentDocumentBuilder patientAddress(@Nullable final Address address) {
             if (address != null) {
                 final var line = String.join(" ",
@@ -268,11 +335,24 @@ public class NarrativeTreatmentDocument {
             return this;
         }
 
+        /**
+         * Sets the patient's contact.
+         *
+         * @param contact the patient's contact.
+         * @return this.
+         */
         public NarrativeTreatmentDocumentBuilder patientContact(final ContactPoint contact) {
             this.patientContact = contact.getValue();;
             return this;
         }
 
+        /**
+         * Creates a {@link NarrativeTreatmentDocument}.
+         *
+         * @param document The CH EMED Document.
+         * @param emedDocumentType The type of the CH EMED Document.
+         * @return this.
+         */
         public NarrativeTreatmentDocumentBuilder emedDocumentDigest(final ChEmedEprDocument document,
                                                                     final EmedDocumentType emedDocumentType) {
             this.documentType(emedDocumentType);
@@ -297,7 +377,6 @@ public class NarrativeTreatmentDocument {
                         })
                         .toList());
             }
-
             return this;
         }
 

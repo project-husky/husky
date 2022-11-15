@@ -1,5 +1,6 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.dosage;
 
+import ca.uhn.fhir.model.api.annotation.DatatypeDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Dosage;
 import org.hl7.fhir.r4.model.Period;
@@ -16,6 +17,7 @@ import java.util.List;
  *
  * @author Ronaldo Loureiro
  **/
+@DatatypeDef(name = "Dosage", isSpecialization = true, profileOf = Dosage.class)
 public class ChEmedDosageSplit extends Dosage {
 
     /**

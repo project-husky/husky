@@ -27,7 +27,7 @@ class ValueSetEnumNarrativeForPatientServiceTest {
 
     @Test
     void testValueSetEnumNarrativeIfNonEmptyValues() {
-        ValueSetEnumInterface[] valueSetEnum = Stream.of(
+        final ValueSetEnumInterface[] valueSetEnum = Stream.of(
                 RouteOfAdministrationAmbu.values(),
                 TimingEventAmbu.values())
                 .flatMap(Stream::of)
