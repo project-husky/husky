@@ -12,6 +12,7 @@ package org.projecthusky.fhir.emed.ch.epr.narrative.utils;
 
 import org.hl7.fhir.r4.model.Binary;
 import org.hl7.fhir.r4.model.Composition;
+import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.epr.narrative.enums.NarrativeLanguage;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 
@@ -31,41 +32,21 @@ public class NarrativeUtils {
     /**
      * Creates and inserts in a FHIR CH-EMED document a PDF representation.
      *
-     * @param document The clinical document.
+     * @param document   The clinical document.
      * @param pdfContent The PDF content.
-     * @param pdfLanguage The PDF language.
-     * @return the Original Representation Section created and inserted in the clinical document.
      */
-    public static Composition.SectionComponent setPdfOriginalRepresentation(final ChEmedEprDocument document,
-                                                           final byte[] pdfContent,
-                                                           final NarrativeLanguage pdfLanguage) {
+    public static void setPdfOriginalRepresentation(final ChEmedEprDocument document,
+                                                    final byte[] pdfContent) {
         // Create the new Original Representation Section
-        final var id = "pdfNarrative";
+        final var binary = new Binary()
+                .setData(pdfContent);
+        binary.setId(Uuids.URN_PREFIX + Uuids.generate());
 
-        final var binary = new Binary();
-        binary.setId(id);
-        binary.setData(pdfContent);
+        document.addEntry()
+                .setFullUrl(binary.getId())
+                .setResource(binary);
 
-        final var section = new Composition.SectionComponent();
-        section.addEntry().setReference(binary.getId());
-        section.setTitle("Representation of the original view:");
-
-        // Add or replace it in the CDA document
-//        final var structuredBody = Optional.ofNullable(document.getComponent())
-//                .map(POCDMT000040Component2::getStructuredBody)
-//                .orElseThrow();
-        // TODO set original representation
-//        structuredBody.getComponent().stream()
-//                .filter(component -> component.getSection() != null)
-//                .filter(component -> component.getSection().getId() != null)
-//                .filter(component -> "2.16.756.5.30.1.1.10.3.45".equals(component.getSection().getId().getRoot()))
-//                .findAny()
-//                .orElseGet(() -> {
-//                    final var component = new POCDMT000040Component3();
-//                    structuredBody.getComponent().add(component);
-//                    return component;
-//                })
-//                .setSection(section);
-        return section;
+        document.resolveComposition()
+                .setOriginalRepresentationPdf("Representation of the original view:", binary);
     }
 }

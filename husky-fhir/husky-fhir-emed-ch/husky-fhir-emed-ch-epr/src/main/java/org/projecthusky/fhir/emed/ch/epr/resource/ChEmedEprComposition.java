@@ -283,7 +283,7 @@ public abstract class ChEmedEprComposition extends Composition {
     public SectionComponent getOriginalRepresentationSection() {
         var section = getSectionByLoincCode(ORIGINAL_REPR_SECTION_CODE_VALUE);
         if (section == null) {
-            section = new SectionComponent();
+            section = this.addSection();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    ORIGINAL_REPR_SECTION_CODE_VALUE, "Clinical presentation"));
         }
@@ -307,6 +307,22 @@ public abstract class ChEmedEprComposition extends Composition {
             return binary.getData();
         }
         throw new InvalidEmedContentException("The section isn't referencing a filled Binary resource");
+    }
+
+    /**
+     * Sets the original representation reference.
+     *
+     * @param originalRepresentationPdf The original representation.
+     * @return this.
+     */
+    public ChEmedEprComposition setOriginalRepresentationPdf(final String title,
+                                                             final Binary originalRepresentationPdf) {
+        this.getOriginalRepresentationSection()
+                .setTitle(title)
+                .getEntryFirstRep()
+                .setReference(originalRepresentationPdf.getId())
+                .setResource(originalRepresentationPdf);
+        return this;
     }
 
     /**
