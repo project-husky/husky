@@ -21,6 +21,7 @@ import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 
 /**
  * The HAPI custom structure for CH-CORE PatientEPR.
@@ -107,22 +108,13 @@ public class ChCorePatientEpr extends Patient {
      * Resolves the first local patient identifier or throws.
      *
      * @return the first local patient identifier.
-     * @throws InvalidEmedContentException if the identifier is missing or invalid.
      */
-    @ExpectsValidResource
-    public Identifier resolveIdentifier() throws InvalidEmedContentException {
-        if (!this.hasIdentifier()) throw new InvalidEmedContentException("The identifier is missing.");
-
-        final var identifier = this.getIdentifierFirstRep();
-        final var type = identifier.getType();
-        if (type == null ||
-                type.isEmpty() ||
-                !type.getCodingFirstRep().getSystem().equals(LOCAL_PID_TYPE_SYSTEM) ||
-                !type.getCodingFirstRep().getCode().equals(LOCAL_PID_TYPE_VALUE)) {
-            throw new InvalidEmedContentException("The identifier is invalid");
-        }
-
-        return identifier;
+    public List<Identifier> getLocalIds() throws InvalidEmedContentException {
+        return this.getIdentifier().stream()
+                .filter(identifier -> identifier.getType() != null && !identifier.getType().getCoding().isEmpty())
+                .filter(identifier -> !identifier.getType().getCodingFirstRep().getSystem().equals(LOCAL_PID_TYPE_SYSTEM))
+                .filter(identifier -> !identifier.getType().getCodingFirstRep().getCode().equals(LOCAL_PID_TYPE_VALUE))
+                .toList();
     }
 
     /**
@@ -186,17 +178,10 @@ public class ChCorePatientEpr extends Patient {
     public Identifier addIdentifier(final String system,
                                     final String value) {
         final var codingType = new Coding()
-                .setSystem("http://terminology.hl7.org/CodeSystem/v2-0203")
-                .setCode("MR");
-
-        final var type = new CodeableConcept(codingType);
-
-        final var identifier = new Identifier()
-                .setType(type)
+                .setSystem(LOCAL_PID_TYPE_SYSTEM)
+                .setCode(LOCAL_PID_TYPE_VALUE);
+        return this.addIdentifier().setType(new CodeableConcept(codingType))
                 .setSystem(system)
                 .setValue(value);
-
-        this.addIdentifier(identifier);
-        return identifier;
     }
 }

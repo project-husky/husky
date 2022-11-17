@@ -145,7 +145,6 @@ public abstract class ChEmedEprDocument extends Bundle {
         if (entry == null) {
             entry = this.addEntry();
         }
-        entry.setFullUrl(patient.resolveIdentifier().getValue());
         entry.setResource(patient);
 
         return this;
