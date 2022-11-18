@@ -22,7 +22,6 @@ import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosage;
 import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosageSplit;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -116,6 +115,23 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
                 .filter(ChEmedDosageSplit.class::isInstance)
                 .map(ChEmedDosageSplit.class::cast)
                 .toList();
+    }
+
+    /**
+     * Resolves the information source as a practitioner role.
+     *
+     * @return the practitioner role or {@code null}.
+     */
+    @ExpectsValidResource
+    @Nullable
+    public ChEmedEprPractitionerRole resolveInformationSource() {
+        if (this.getInformationSource().isEmpty()) {
+            return null;
+        }
+        if (this.getInformationSource().getResource() instanceof final ChEmedEprPractitionerRole pr) {
+            return pr;
+        }
+        throw new InvalidEmedContentException("The information source isn't a ChEmedEprPractitionerRole");
     }
 
     /**
