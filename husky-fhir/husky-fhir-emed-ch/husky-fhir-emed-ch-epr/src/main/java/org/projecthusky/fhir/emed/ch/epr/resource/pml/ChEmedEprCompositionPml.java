@@ -14,7 +14,6 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.hl7.fhir.r4.model.*;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
-import org.projecthusky.fhir.emed.ch.common.enums.CommonLanguages;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.enums.CompositionTitle;
@@ -24,7 +23,6 @@ import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -90,7 +88,7 @@ public class ChEmedEprCompositionPml extends ChEmedEprComposition {
     public SectionComponent getListSection() {
         var section = getSectionByLoincCode(LIST_SECTION_CODE_VALUE);
         if (section == null) {
-            section = new SectionComponent();
+            section = this.addSection();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    LIST_SECTION_CODE_VALUE,
                                                    "Medication summary"));
@@ -115,11 +113,9 @@ public class ChEmedEprCompositionPml extends ChEmedEprComposition {
     }
 
     /**
-     * Resolves the medication statements, medication requests, medication dispenses
-     * and observations.
+     * Resolves the medication statements, medication requests, medication dispenses and observations.
      *
-     * @return the medication statements, medication requests, medication dispenses
-     * and observations.
+     * @return the medication statements, medication requests, medication dispenses and observations.
      */
     @ExpectsValidResource
     public List<ChEmedEprEntry> resolveEntries() {

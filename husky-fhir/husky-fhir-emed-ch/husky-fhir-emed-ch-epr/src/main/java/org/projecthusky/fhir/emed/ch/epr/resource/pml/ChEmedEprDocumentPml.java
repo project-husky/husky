@@ -20,7 +20,6 @@ import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprEntry;
 import java.io.Serial;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -160,64 +159,59 @@ public class ChEmedEprDocumentPml extends ChEmedEprDocument {
      * Sets the composition.
      *
      * @param composition The CH EMED Medication List Composition.
-     * @return this.
+     * @return the bundle entry.
      */
-    public ChEmedEprDocumentPml setComposition(final ChEmedEprCompositionPml composition) {
-        this.getCompositionEntry()
+    public BundleEntryComponent setComposition(final ChEmedEprCompositionPml composition) {
+        return this.getCompositionEntry()
                 .setFullUrl(composition.getIdentifier().getValue())
                 .setResource(composition);
-        return this;
     }
 
     /**
      * Adds a medication statement.
      *
      * @param medicationStatement a medication statement.
-     * @return this.
+     * @return the bundle entry.
      */
-    public ChEmedEprDocumentPml addMedicationStatement(final ChEmedEprMedicationStatementPml medicationStatement) {
-        this.addEntry()
+    public BundleEntryComponent addMedicationStatement(final ChEmedEprMedicationStatementPml medicationStatement) {
+        return this.addEntry()
                 .setFullUrl(medicationStatement.getIdentifierFirstRep().getValue())
                 .setResource(medicationStatement);
-        return this;
     }
 
     /**
      * Adds a medication request.
      *
      * @param medicationRequest a medication request.
-     * @return this.
+     * @return the bundle entry.
      */
-    public ChEmedEprDocumentPml addMedicationRequest(final ChEmedEprMedicationRequestPml medicationRequest) {
-        this.addEntry()
+    public BundleEntryComponent addMedicationRequest(final ChEmedEprMedicationRequestPml medicationRequest) {
+        return this.addEntry()
                 .setFullUrl(medicationRequest.getIdentifierFirstRep().getValue())
                 .setResource(medicationRequest);
-        return this;
     }
 
     /**
      * Adds a medication dispense.
      *
      * @param medicationDispense a medication dispense.
-     * @return this.
+     * @return the bundle entry.
      */
-    public ChEmedEprDocumentPml addMedicationDispense(final ChEmedEprMedicationDispensePml medicationDispense) {
-        this.addEntry()
+    public BundleEntryComponent addMedicationDispense(final ChEmedEprMedicationDispensePml medicationDispense) {
+        return this.addEntry()
                 .setFullUrl(medicationDispense.getIdentifierFirstRep().getValue())
                 .setResource(medicationDispense);
-        return this;
     }
 
     /**
      * Adds an observation.
      *
      * @param observation an observation.
-     * @return this.
+     * @return the bundle entry.
      */
-    public ChEmedEprDocumentPml addObservation(final ChEmedEprObservationPml observation) {
-        this.addEntry()
+    public BundleEntryComponent addObservation(final ChEmedEprObservationPml observation) {
+        return this.addEntry()
                 .setFullUrl(observation.getIdentifierFirstRep().getValue())
                 .setResource(observation);
-        return this;
     }
 }

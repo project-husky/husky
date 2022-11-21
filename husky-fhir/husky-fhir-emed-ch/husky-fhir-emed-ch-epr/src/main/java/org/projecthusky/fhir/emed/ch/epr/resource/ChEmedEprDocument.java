@@ -138,16 +138,16 @@ public abstract class ChEmedEprDocument extends Bundle {
      * Sets the patient targeted by this document.
      *
      * @param patient the patient targeted by this document.
-     * @return this.
+     * @return the bundle entry.
      */
-    public ChEmedEprDocument setPatient(final ChCorePatientEpr patient) {
+    public BundleEntryComponent setPatient(final ChCorePatientEpr patient) {
         var entry = this.getEntryByResourceType(ChCorePatientEpr.class);
         if (entry == null) {
             entry = this.addEntry();
         }
         entry.setResource(patient);
 
-        return this;
+        return entry;
     }
 
     /**
