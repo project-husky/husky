@@ -82,7 +82,6 @@ public class FakeTerminologyServiceValidationSupport extends BaseValidationSuppo
                                              final String theCode,
                                              final String theDisplay,
                                              final String theValueSetUrl) {
-        System.out.printf("validateCode %s %s %s%n", theCodeSystem, theCode, theDisplay);
         return this.createSuccessfulCodeValidationResult(theCode, theDisplay);
     }
 
@@ -110,8 +109,6 @@ public class FakeTerminologyServiceValidationSupport extends BaseValidationSuppo
                                                        final String theCode,
                                                        final String theDisplay,
                                                        @NonNull final IBaseResource theValueSet) {
-        System.out.printf("validateCodeInValueSet %s %s %s %s%n", theCodeSystem, theCode, theDisplay,
-                          theValueSet.getIdElement().getValue());
         return this.createSuccessfulCodeValidationResult(theCode, theDisplay);
     }
 

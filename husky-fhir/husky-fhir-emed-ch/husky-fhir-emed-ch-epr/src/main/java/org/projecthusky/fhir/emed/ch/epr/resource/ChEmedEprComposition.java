@@ -40,7 +40,7 @@ public abstract class ChEmedEprComposition extends Composition {
     public static final String PRESCRIPTION_SECTION_CODE_VALUE = "57828-6";
     public static final String DISPENSE_SECTION_CODE_VALUE = "60590-7";
     public static final String PHARMACEUTICAL_ADVICE_SECTION_CODE_VALUE = "61357-0";
-    public static final String LIST_SECTION_CODE_VALUE = "56445-0";
+    public static final String LIST_SECTION_CODE_VALUE = "10160-0";
     public static final String CARD_SECTION_CODE_VALUE = "10160-0";
     public static final String ANNOTATION_SECTION_CODE_VALUE = "48767-8";
 
@@ -86,7 +86,6 @@ public abstract class ChEmedEprComposition extends Composition {
                                 final Instant date,
                                 final LanguageCode language) {
         super();
-        this.setVersionNumber(1);
         this.setStatus(CompositionStatus.FINAL);
         this.setConfidentiality(DocumentConfidentiality.N);
         final var confidentialityCode = new Coding(FhirSystem.SNOMEDCT, "17621005", "Normal (qualifier value)");

@@ -106,7 +106,7 @@ public class ChEmedEprCompositionPmlc extends ChEmedEprComposition {
             section = new SectionComponent();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    CARD_SECTION_CODE_VALUE,
-                                                   "Medication summary"));
+                                                   "History of medication use"));
         }
         return section;
     }

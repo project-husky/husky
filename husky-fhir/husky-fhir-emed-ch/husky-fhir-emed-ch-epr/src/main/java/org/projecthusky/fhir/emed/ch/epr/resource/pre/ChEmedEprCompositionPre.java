@@ -15,7 +15,6 @@ import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DomainResource;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
-import org.projecthusky.fhir.emed.ch.common.enums.CommonLanguages;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
@@ -95,7 +94,7 @@ public class ChEmedEprCompositionPre extends ChEmedEprComposition {
             section = new SectionComponent();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    PRESCRIPTION_SECTION_CODE_VALUE,
-                                                   "PRESCRIPTIONS"));
+                                                   "Prescriptions"));
         }
         return section;
     }
@@ -118,7 +117,8 @@ public class ChEmedEprCompositionPre extends ChEmedEprComposition {
             if (resource instanceof final ChEmedEprMedicationRequestPre medicationRequest) {
                 medicationRequests.add(medicationRequest);
             } else {
-                throw new InvalidEmedContentException("The prescription section has a non ChEmedEprMedicationRequestPre resource");
+                throw new InvalidEmedContentException(
+                        "The prescription section has a non ChEmedEprMedicationRequestPre resource");
             }
         }
         return medicationRequests;
