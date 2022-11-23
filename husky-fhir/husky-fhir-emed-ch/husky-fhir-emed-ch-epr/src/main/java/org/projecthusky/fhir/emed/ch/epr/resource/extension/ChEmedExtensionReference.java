@@ -27,14 +27,14 @@ public abstract class ChEmedExtensionReference extends BackboneElement {
      */
     @Child(name = "extension:id", min = 1)
     @Extension(url = "id", definedLocally = false)
-    protected org.hl7.fhir.r4.model.Extension extensionId;
+    protected Identifier extensionId;
 
     /**
      * ID of the external document.
      */
     @Child(name = "extension:externalDocumentId", min = 1)
     @Extension(url = "externalDocumentId", definedLocally = false)
-    protected org.hl7.fhir.r4.model.Extension externalDocumentId;
+    protected Identifier externalDocumentId;
 
     /**
      * Empty constructor
@@ -67,10 +67,7 @@ public abstract class ChEmedExtensionReference extends BackboneElement {
         if (!this.hasExtensionId())
             throw new InvalidEmedContentException("The ID of the document is missing.");
 
-        if (this.extensionId.getValue() instanceof Identifier id) {
-            return Uuids.parseUrnEncoded(id.getValue());
-        }
-        throw new InvalidEmedContentException("The ID of the document isn't of the right type.");
+        return Uuids.parseUrnEncoded(this.extensionId.getValue());
     }
 
     /**
@@ -84,10 +81,7 @@ public abstract class ChEmedExtensionReference extends BackboneElement {
         if (!this.hasExternalDocumentId())
             throw new InvalidEmedContentException("The ID of the external document is missing.");
 
-        if (this.externalDocumentId.getValue() instanceof Identifier id) {
-            return Uuids.parseUrnEncoded(id.getValue());
-        }
-        throw new InvalidEmedContentException("The ID of the external document isn't of the right type.");
+        return Uuids.parseUrnEncoded(this.externalDocumentId.getValue());
     }
 
     /**
@@ -109,11 +103,10 @@ public abstract class ChEmedExtensionReference extends BackboneElement {
      */
     public ChEmedExtensionReference setExtensionId(final UUID extensionId) {
         if (this.extensionId == null) {
-            this.extensionId = new org.hl7.fhir.r4.model.Extension();
+            this.extensionId = new Identifier();
         }
-        this.extensionId.setValue(new Identifier()
-                .setSystem(FhirSystem.URI)
-                .setValue(Uuids.URN_PREFIX + extensionId));
+        this.extensionId.setSystem(FhirSystem.URI)
+                .setValue(Uuids.URN_PREFIX + extensionId);
         return this;
     }
 
@@ -125,11 +118,10 @@ public abstract class ChEmedExtensionReference extends BackboneElement {
      */
     public ChEmedExtensionReference setExternalDocumentId(final UUID externalDocumentId) {
         if (this.externalDocumentId == null) {
-            this.externalDocumentId = new org.hl7.fhir.r4.model.Extension();
+            this.externalDocumentId = new Identifier();
         }
-        this.externalDocumentId.setValue(new Identifier()
-                .setSystem(FhirSystem.URI)
-                .setValue(Uuids.URN_PREFIX + externalDocumentId));
+        this.externalDocumentId.setSystem(FhirSystem.URI)
+                .setValue(Uuids.URN_PREFIX + externalDocumentId);
         return this;
     }
 
