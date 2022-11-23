@@ -13,8 +13,12 @@ package org.projecthusky.fhir.emed.ch.epr.service;
 import ca.uhn.fhir.context.FhirContext;
 import org.junit.jupiter.api.Test;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
+import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprCompositionDis;
+import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprDocumentDis;
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprCompositionMtp;
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprDocumentMtp;
+import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprCompositionPre;
+import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprDocumentPre;
 
 import java.io.IOException;
 
@@ -29,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class ChEmedEprParserTest {
 
     @Test
-    void testParse() throws IOException {
+    void testParseMtp() throws IOException {
         final var xml = new String(getClass().getResourceAsStream("/1-1-MedicationTreatmentPlan.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.MTP);
@@ -37,5 +41,27 @@ class ChEmedEprParserTest {
         final var mtpDocument = (ChEmedEprDocumentMtp) document;
         assertNotNull(mtpDocument.resolveComposition());
         assertInstanceOf(ChEmedEprCompositionMtp.class, mtpDocument.resolveComposition());
+    }
+
+    @Test
+    void testParsePre() throws IOException {
+        final var xml = new String(getClass().getResourceAsStream("/2-6-MedicationPrescription.xml").readAllBytes());
+        final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
+        final var document = parser.parse(xml, EmedDocumentType.PRE);
+        assertInstanceOf(ChEmedEprDocumentPre.class, document);
+        final var preDocument = (ChEmedEprDocumentPre) document;
+        assertNotNull(preDocument.resolveComposition());
+        assertInstanceOf(ChEmedEprCompositionPre.class, preDocument.resolveComposition());
+    }
+
+    @Test
+    void testParseDis() throws IOException {
+        final var xml = new String(getClass().getResourceAsStream("/1-2-MedicationDispense.xml").readAllBytes());
+        final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
+        final var document = parser.parse(xml, EmedDocumentType.DIS);
+        assertInstanceOf(ChEmedEprDocumentDis.class, document);
+        final var preDocument = (ChEmedEprDocumentDis) document;
+        assertNotNull(preDocument.resolveComposition());
+        assertInstanceOf(ChEmedEprCompositionDis.class, preDocument.resolveComposition());
     }
 }

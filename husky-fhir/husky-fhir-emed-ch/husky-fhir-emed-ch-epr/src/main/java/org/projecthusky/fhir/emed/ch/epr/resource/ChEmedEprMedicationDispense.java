@@ -4,6 +4,7 @@ import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.MedicationDispense;
+import org.hl7.fhir.r4.model.StringType;
 import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
@@ -36,7 +37,7 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
     @Nullable
     @Child(name = "treatmentReason")
     @Extension(url = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentreason", definedLocally = false)
-    protected String treatmentReason;
+    protected StringType treatmentReason;
 
     /**
      * Reference to the medication prescription.
@@ -202,9 +203,9 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
      *
      * @return the treatment reason.
      */
-    public String getTreatmentReason() {
+    public StringType getTreatmentReason() {
         if (this.treatmentReason == null) {
-            this.treatmentReason = "";
+            this.treatmentReason = new StringType();
         }
         return this.treatmentReason;
     }
@@ -267,7 +268,7 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
      * @return this.
      */
     public ChEmedEprMedicationDispense setTreatmentReason(final String treatmentReason) {
-        this.treatmentReason = treatmentReason;
+        this.getTreatmentReason().setValue(treatmentReason);
         return this;
     }
 
