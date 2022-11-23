@@ -13,7 +13,6 @@ import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EmedReference;
 import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprMedicationDis;
 import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosage;
-import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosageSplit;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtPharmaceuticalAdvice;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtPrescription;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
@@ -58,6 +57,7 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
     /**
      * Reference to the medication treatment plan
      */
+    @Nullable
     @Child(name = "treatmentPlan", min = 1)
     @Extension(url = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan", definedLocally = false)
     protected ChEmedExtTreatmentPlan treatmentPlan;
@@ -144,12 +144,11 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
      * @throws InvalidEmedContentException if the base entry of the dosage instruction is missing.
      */
     @ExpectsValidResource
-    public ChEmedDosage resolveDosageBaseEntry() throws InvalidEmedContentException {
-        return this.getDosageInstruction().stream()
-                .filter(ChEmedDosage.class::isInstance)
-                .map(ChEmedDosage.class::cast)
-                .findAny()
-                .orElseThrow(() -> new InvalidEmedContentException("Base entry of the dosage instruction is missing."));
+    public ChEmedDosage resolveBaseDosage() throws InvalidEmedContentException {
+        if (!this.getDosageInstruction().isEmpty() && this.getDosageInstruction().get(0) instanceof final ChEmedDosage dosage) {
+            return dosage;
+        }
+        throw new InvalidEmedContentException("Base entry of the dosage instruction is missing.");
     }
 
     /**
@@ -182,14 +181,15 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
     }
 
     /**
-     * Gets additional entries of the dosage instruction
+     * Resolves additional entries of the dosage instruction. The list may be empty.
      *
      * @return additional entries of the dosage instruction.
      */
-    public List<ChEmedDosageSplit> getDosageAdditionalEntry() {
+    public List<ChEmedDosage> resolveAdditionalDosage() {
         return this.getDosageInstruction().stream()
-                .filter(ChEmedDosageSplit.class::isInstance)
-                .map(ChEmedDosageSplit.class::cast)
+                .filter(ChEmedDosage.class::isInstance)
+                .map(ChEmedDosage.class::cast)
+                .skip(1)
                 .toList();
     }
 
@@ -346,14 +346,7 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
      * @return this.
      */
     public ChEmedEprMedicationDispense setDosageBaseEntry(final ChEmedDosage dosageBaseEntry) {
-        for (int i = 0; i < this.getDosageInstruction().size(); i++) {
-            if (this.getDosageInstruction().get(i) instanceof ChEmedDosage) {
-                this.getDosageInstruction().set(i, dosageBaseEntry);
-                return this;
-            }
-        }
-
-        this.getDosageInstruction().add(dosageBaseEntry);
+        this.getDosageInstruction().set(0, dosageBaseEntry);
         return this;
     }
 
@@ -363,7 +356,7 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
      * @param dosageAdditionalEntry additional entry of the dosage instruction.
      * @return this.
      */
-    public ChEmedEprMedicationDispense addDosageAdditionalEntry(final ChEmedDosageSplit dosageAdditionalEntry) {
+    public ChEmedEprMedicationDispense addDosageAdditionalEntry(final ChEmedDosage dosageAdditionalEntry) {
         this.getDosageInstruction().add(dosageAdditionalEntry);
         return this;
     }
@@ -410,8 +403,7 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
      * @return {@code true} if the base entry of the dosage instruction exists, {@code false} otherwise.
      */
     public boolean hasDosageBaseEntry() {
-        return this.hasDosageInstruction() && this.getDosageInstruction().stream()
-                .anyMatch(ChEmedDosage.class::isInstance);
+        return this.hasDosageInstruction();
     }
 
     /**
@@ -420,7 +412,6 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
      * @return {@code true} if additional entry of the dosage instruction exists, {@code false} otherwise.
      */
     public boolean hasDosageAdditionalEntry() {
-        return this.hasDosageInstruction() && this.getDosageInstruction().stream()
-                .anyMatch(ChEmedDosageSplit.class::isInstance);
+        return this.hasDosageInstruction() && this.getDosageInstruction().size() > 1;
     }
 }

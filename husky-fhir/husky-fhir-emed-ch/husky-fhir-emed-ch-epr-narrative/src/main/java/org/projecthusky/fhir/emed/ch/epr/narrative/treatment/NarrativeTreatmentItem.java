@@ -19,7 +19,6 @@ import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedication;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationIngredient;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationStatement;
 import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosage;
-import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosageSplit;
 import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedQuantityWithEmedUnits;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprMedicationStatementPmlc;
 
@@ -602,7 +601,7 @@ public class NarrativeTreatmentItem {
          * @param dosages The dosages.
          * @return this.
          */
-        public NarrativeTreatmentItemBuilder dosage(final List<ChEmedDosageSplit> dosages) {
+        public NarrativeTreatmentItemBuilder dosage(final List<ChEmedDosage> dosages) {
             for (final var dosage : dosages) {
                 final var whens = dosage.resolveWhen();
                 final var doseQuantity = dosage.resolveDoseQuantity();

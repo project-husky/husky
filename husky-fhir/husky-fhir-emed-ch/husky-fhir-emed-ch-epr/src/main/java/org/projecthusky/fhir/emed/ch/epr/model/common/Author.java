@@ -11,6 +11,7 @@
 package org.projecthusky.fhir.emed.ch.epr.model.common;
 
 import lombok.Data;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.Device;
 import org.hl7.fhir.r4.model.RelatedPerson;
@@ -28,16 +29,22 @@ import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
 @Data
 public class Author {
 
+    @Nullable
     private ChEmedEprPractitioner practitioner;
 
+    @Nullable
     private ChEmedEprPractitionerRole practitionerRole;
 
+    @Nullable
     private Device device;
 
+    @Nullable
     private RelatedPerson relatedPerson;
 
+    @Nullable
     private ChCorePatientEpr patient;
 
+    @Nullable
     private ChEmedOrganization organization;
 
     public Author(final IBaseResource resource) {
@@ -57,5 +64,26 @@ public class Author {
         } else {
             throw new IllegalArgumentException("Passed resource is not a supported author");
         }
+    }
+
+    /**
+     * Returns the first non-null resource or {@code null}.
+     */
+    @Nullable
+    public IBaseResource getFirstNonNull() {
+        if (this.device != null) {
+            return this.device;
+        } else if (this.organization != null) {
+            return this.organization;
+        } else if (this.patient != null) {
+            return this.patient;
+        } else if (this.practitioner != null) {
+            return this.practitioner;
+        } else if (this.practitionerRole != null) {
+            return this.practitionerRole;
+        } else if (this.relatedPerson != null) {
+            return this.relatedPerson;
+        }
+        return null;
     }
 }

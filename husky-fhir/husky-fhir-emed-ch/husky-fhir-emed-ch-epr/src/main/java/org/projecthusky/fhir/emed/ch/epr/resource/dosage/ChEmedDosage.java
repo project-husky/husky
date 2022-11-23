@@ -12,6 +12,7 @@ import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.enums.TimingEventAmbu;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -35,11 +36,10 @@ public class ChEmedDosage extends Dosage {
      * @return the list of with event timings.
      * @throws InvalidEmedContentException if dosage for time period of occurrence is invalid.
      */
-    @Nullable
     @ExpectsValidResource
     public List<TimingEventAmbu> resolveWhen() throws InvalidEmedContentException {
         final var repeat = this.getTiming().getRepeat();
-        if (!repeat.hasWhen()) return null;
+        if (!repeat.hasWhen()) return Collections.emptyList();
 
         final var eventTimings = new ArrayList<TimingEventAmbu>();
         for (final var event : repeat.getWhen()) {
@@ -64,8 +64,8 @@ public class ChEmedDosage extends Dosage {
         if (!this.hasRoute()) return null;
 
         final var routeOfAdministration = RouteOfAdministrationEdqm.getEnum(this.getRoute()
-                .getCodingFirstRep()
-                .getCode());
+                                                                                    .getCodingFirstRep()
+                                                                                    .getCode());
 
         if (routeOfAdministration == null)
             throw new InvalidEmedContentException("The route of administration is invalid.");
@@ -105,6 +105,15 @@ public class ChEmedDosage extends Dosage {
             return chDoseRange;
         }
         throw new InvalidEmedContentException("The dose range isn't of the right type.");
+    }
+
+    /**
+     * Returns whether the dosage is 'as needed'.
+     */
+    public boolean isAsNeeded() {
+        if (this.hasAsNeededBooleanType()) {
+            return this.getAsNeededBooleanType().booleanValue();
+        } else return this.hasAsNeededCodeableConcept();
     }
 
     /**

@@ -2,6 +2,7 @@ package org.projecthusky.fhir.emed.ch.epr.resource;
 
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.MedicationRequest;
 import org.projecthusky.common.utils.datatypes.Uuids;
@@ -11,8 +12,7 @@ import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EmedReference;
-import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosageMedicationRequest;
-import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosageSplitMedicationRequest;
+import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosage;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
 import org.projecthusky.fhir.emed.ch.epr.util.References;
 
@@ -26,6 +26,7 @@ import java.util.UUID;
  **/
 public abstract class ChEmedEprMedicationRequest extends MedicationRequest implements ChEmedEprEntry {
 
+    @Nullable
     @Child(name = "treatmentplan", min = 1)
     @Extension(url = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan", definedLocally = false)
     protected ChEmedExtTreatmentPlan treatmentPlan;
@@ -108,12 +109,11 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
      * @throws InvalidEmedContentException if the base entry of the dosage instruction is missing.
      */
     @ExpectsValidResource
-    public ChEmedDosageMedicationRequest resolveDosageBaseEntry() throws InvalidEmedContentException {
-        return this.getDosageInstruction().stream()
-                .filter(ChEmedDosageMedicationRequest.class::isInstance)
-                .map(ChEmedDosageMedicationRequest.class::cast)
-                .findAny()
-                .orElseThrow(() -> new InvalidEmedContentException("Base entry of the dosage instruction is missing."));
+    public ChEmedDosage resolveBaseDosage() throws InvalidEmedContentException {
+        if (!this.getDosageInstruction().isEmpty() && this.getDosageInstruction().get(0) instanceof final ChEmedDosage dosage) {
+            return dosage;
+        }
+        throw new InvalidEmedContentException("Base entry of the dosage instruction is missing.");
     }
 
     /**
@@ -131,14 +131,15 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
     }
 
     /**
-     * Gets additional entries of the dosage instruction
+     * Resolves additional entries of the dosage instruction. The list may be empty.
      *
      * @return additional entries of the dosage instruction.
      */
-    public List<ChEmedDosageSplitMedicationRequest> getDosageAdditionalEntry() {
+    public List<ChEmedDosage> resolveAdditionalDosage() {
         return this.getDosageInstruction().stream()
-                .filter(ChEmedDosageSplitMedicationRequest.class::isInstance)
-                .map(ChEmedDosageSplitMedicationRequest.class::cast)
+                .filter(ChEmedDosage.class::isInstance)
+                .map(ChEmedDosage.class::cast)
+                .skip(1)
                 .toList();
     }
 
@@ -209,15 +210,8 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
      * @param dosageBaseEntry the base entry of the dosage instruction.
      * @return this.
      */
-    public ChEmedEprMedicationRequest setDosageBaseEntry(final ChEmedDosageMedicationRequest dosageBaseEntry) {
-        for (int i = 0; i < this.getDosageInstruction().size(); i++) {
-            if (this.getDosageInstruction().get(i) instanceof ChEmedDosageMedicationRequest) {
-                this.getDosageInstruction().set(i, dosageBaseEntry);
-                return this;
-            }
-        }
-
-        this.getDosageInstruction().add(dosageBaseEntry);
+    public ChEmedEprMedicationRequest setDosageBaseEntry(final ChEmedDosage dosageBaseEntry) {
+        this.getDosageInstruction().set(0, dosageBaseEntry);
         return this;
     }
 
@@ -227,7 +221,7 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
      * @param dosageAdditionalEntry additional entry of the dosage instruction.
      * @return this.
      */
-    public ChEmedEprMedicationRequest addDosageAdditionalEntry(final ChEmedDosageSplitMedicationRequest dosageAdditionalEntry) {
+    public ChEmedEprMedicationRequest addDosageAdditionalEntry(final ChEmedDosage dosageAdditionalEntry) {
         this.getDosageInstruction().add(dosageAdditionalEntry);
         return this;
     }
@@ -247,8 +241,7 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
      * @return {@code true} if the base entry of the dosage instruction exists, {@code false} otherwise.
      */
     public boolean hasDosageBaseEntry() {
-        return this.hasDosageInstruction() && this.getDosageInstruction().stream()
-                .anyMatch(ChEmedDosageMedicationRequest.class::isInstance);
+        return this.hasDosageInstruction();
     }
 
     /**
@@ -257,7 +250,6 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
      * @return {@code true} if additional entry of the dosage instruction exists, {@code false} otherwise.
      */
     public boolean hasDosageAdditionalEntry() {
-        return this.hasDosageInstruction() && this.getDosageInstruction().stream()
-                .anyMatch(ChEmedDosageSplitMedicationRequest.class::isInstance);
+        return this.hasDosageInstruction() && this.getDosageInstruction().size() > 1;
     }
 }

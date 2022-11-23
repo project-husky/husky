@@ -11,6 +11,7 @@
 package org.projecthusky.fhir.emed.ch.epr.resource;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.Dosage;
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.MedicationStatement;
 import org.hl7.fhir.r4.model.Reference;
@@ -20,8 +21,8 @@ import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosage;
-import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosageSplit;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -97,23 +98,23 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
      * @throws InvalidEmedContentException if the base entry of the dosage instruction is missing.
      */
     @ExpectsValidResource
-    public ChEmedDosage resolveDosageBaseEntry() throws InvalidEmedContentException {
-        return this.getDosage().stream()
-                .filter(ChEmedDosage.class::isInstance)
-                .map(ChEmedDosage.class::cast)
-                .findAny()
-                .orElseThrow(() -> new InvalidEmedContentException("Base entry of the dosage instruction is missing."));
+    public ChEmedDosage resolveBaseDosage() throws InvalidEmedContentException {
+        if (!this.getDosage().isEmpty() && this.getDosage().get(0) instanceof final ChEmedDosage dosage) {
+            return dosage;
+        }
+        throw new InvalidEmedContentException("Base entry of the dosage instruction is missing.");
     }
 
     /**
-     * Resolves additional entries of the dosage instruction
+     * Resolves additional entries of the dosage instruction. The list may be empty.
      *
      * @return additional entries of the dosage instruction.
      */
-    public List<ChEmedDosageSplit> resolveDosageAdditionalEntry() {
+    public List<ChEmedDosage> resolveAdditionalDosage() {
         return this.getDosage().stream()
-                .filter(ChEmedDosageSplit.class::isInstance)
-                .map(ChEmedDosageSplit.class::cast)
+                .filter(ChEmedDosage.class::isInstance)
+                .map(ChEmedDosage.class::cast)
+                .skip(1)
                 .toList();
     }
 
@@ -179,14 +180,7 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
      * @return this.
      */
     public ChEmedEprMedicationStatement setDosageBaseEntry(final ChEmedDosage dosageBaseEntry) {
-        for (int i = 0; i < this.getDosage().size(); i++) {
-            if (this.getDosage().get(i) instanceof ChEmedDosage) {
-                this.getDosage().set(i, dosageBaseEntry);
-                return this;
-            }
-        }
-
-        this.getDosage().add(dosageBaseEntry);
+        this.getDosage().set(0, dosageBaseEntry);
         return this;
     }
 
@@ -196,7 +190,7 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
      * @param dosageAdditionalEntry additional entry of the dosage instruction.
      * @return this.
      */
-    public ChEmedEprMedicationStatement addDosageAdditionalEntry(final ChEmedDosageSplit dosageAdditionalEntry) {
+    public ChEmedEprMedicationStatement addDosageAdditionalEntry(final ChEmedDosage dosageAdditionalEntry) {
         this.getDosage().add(dosageAdditionalEntry);
         return this;
     }
@@ -207,8 +201,7 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
      * @return {@code true} if the base entry of the dosage instruction exists, {@code false} otherwise.
      */
     public boolean hasDosageBaseEntry() {
-        return this.hasDosage() && this.getDosage().stream()
-                .anyMatch(ChEmedDosage.class::isInstance);
+        return this.hasDosage();
     }
 
     /**
@@ -217,7 +210,63 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
      * @return {@code true} if additional entry of the dosage instruction exists, {@code false} otherwise.
      */
     public boolean hasDosageAdditionalEntry() {
-        return this.hasDosage() && this.getDosage().stream()
-                .anyMatch(ChEmedDosageSplit.class::isInstance);
+        return this.hasDosage() && this.getDosage().size() > 1;
+    }
+
+    /**
+     * @return {@link #dosage} (Indicates how the medication is/was or should be taken by the patient.)
+     */
+    @Override
+    public List<Dosage> getDosage() {
+        if (this.dosage == null)
+            this.dosage = new ArrayList<>();
+        else {
+            for (int i = 0; i < this.dosage.size(); ++i) {
+                if (!(this.dosage.get(i) instanceof ChEmedDosage)) {
+                    final var newDosage = new ChEmedDosage();
+                    this.dosage.get(i).copyValues(newDosage);
+                    this.dosage.set(i, newDosage);
+                }
+            }
+        }
+        return this.dosage;
+    }
+
+    /**
+     * @param theDosage
+     * @return Returns a reference to <code>this</code> for easy method chaining
+     */
+    @Override
+    public MedicationStatement setDosage(final List<Dosage> theDosage) {
+        return super.setDosage(theDosage);
+    }
+
+    @Override
+    public ChEmedDosage addDosage() {
+        final var dosage = new ChEmedDosage();
+        this.addDosage(dosage);
+        return dosage;
+    }
+
+    @Override
+    public MedicationStatement addDosage(final Dosage t) {
+        if (t instanceof final ChEmedDosage chEmedDosage) {
+            this.dosage.add(t);
+        }
+        final var newDosage = new ChEmedDosage();
+        t.copyValues(newDosage);
+        this.dosage.add(newDosage);
+        return this;
+    }
+
+    /**
+     * @return The first repetition of repeating field {@link #dosage}, creating it if it does not already exist
+     */
+    @Override
+    public ChEmedDosage getDosageFirstRep() {
+        if (getDosage().isEmpty()) {
+            addDosage();
+        }
+        return (ChEmedDosage) getDosage().get(0);
     }
 }
