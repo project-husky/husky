@@ -26,7 +26,7 @@ import java.util.Objects;
 public enum EmedPadvEntryType implements FhirValueSetEnumInterface {
 
     OK("OK", "urn:oid:1.3.6.1.4.1.19376.1.9.2.1", "OK", "OK", "OK", "OK", "OK"),
-    COMMENT("CHANGE", "urn:oid:1.3.6.1.4.1.19376.1.9.2.1", "CHANGE", "CHANGE", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+    COMMENT("COMMENT", "urn:oid:1.3.6.1.4.1.19376.1.9.2.1", "COMMENT", "COMMENT", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
     CANCEL("CANCEL", "urn:oid:1.3.6.1.4.1.19376.1.9.2.1", "CANCEL", "CANCEL", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
     SUSPEND("SUSPEND", "urn:oid:1.3.6.1.4.1.19376.1.9.2.1", "SUSPEND", "SUSPEND", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
     REFUSE("REFUSE", "urn:oid:1.3.6.1.4.1.19376.1.9.2.1", "REFUSE", "REFUSE", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
