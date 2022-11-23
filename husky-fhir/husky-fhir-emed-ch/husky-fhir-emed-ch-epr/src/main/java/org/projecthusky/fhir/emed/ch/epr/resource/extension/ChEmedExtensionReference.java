@@ -125,7 +125,7 @@ public abstract class ChEmedExtensionReference extends BackboneElement {
      */
     public ChEmedExtensionReference setExternalDocumentId(final UUID externalDocumentId) {
         if (this.externalDocumentId == null) {
-            this.extensionId = new org.hl7.fhir.r4.model.Extension();
+            this.externalDocumentId = new org.hl7.fhir.r4.model.Extension();
         }
         this.externalDocumentId.setValue(new Identifier()
                 .setSystem(FhirSystem.URI)
