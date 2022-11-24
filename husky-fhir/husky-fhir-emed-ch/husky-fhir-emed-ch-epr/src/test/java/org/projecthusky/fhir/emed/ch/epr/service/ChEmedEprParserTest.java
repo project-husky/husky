@@ -83,7 +83,7 @@ class ChEmedEprParserTest {
         assertTrue(padvDocument.resolveObservation().getTreatmentPlanElement().hasExtensionId());
         assertTrue(padvDocument.resolveObservation().getTreatmentPlanElement().hasExternalDocumentId());
 
-        final var serializedDoc = parser.serialize(padvDocument, EncodingEnum.XML);
+        final var serializedDoc = parser.serializePrettyPrint(padvDocument, EncodingEnum.XML);
         final var document2 = parser.parse(serializedDoc, EmedDocumentType.PADV);
         assertInstanceOf(ChEmedEprDocumentPadv.class, document2);
         final var padvDocument2 = (ChEmedEprDocumentPadv) document2;

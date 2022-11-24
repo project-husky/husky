@@ -3,6 +3,7 @@ package org.projecthusky.fhir.emed.ch.epr.resource.extension;
 import ca.uhn.fhir.model.api.annotation.Block;
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
+import ca.uhn.fhir.util.ElementUtil;
 import org.hl7.fhir.r4.model.BackboneElement;
 import org.hl7.fhir.r4.model.Identifier;
 import org.projecthusky.common.utils.datatypes.Uuids;
@@ -141,6 +142,11 @@ public abstract class ChEmedExtensionReference extends BackboneElement {
      */
     public boolean hasExternalDocumentId() {
         return this.externalDocumentId != null && !this.externalDocumentId.isEmpty();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return super.isEmpty() && ElementUtil.isEmpty(extensionId, externalDocumentId);
     }
 
     public abstract EmedEntryType getEntryType();
