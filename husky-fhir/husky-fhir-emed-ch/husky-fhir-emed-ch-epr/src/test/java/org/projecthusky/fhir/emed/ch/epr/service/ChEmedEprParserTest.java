@@ -11,19 +11,22 @@
 package org.projecthusky.fhir.emed.ch.epr.service;
 
 import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.rest.api.EncodingEnum;
 import org.junit.jupiter.api.Test;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprCompositionDis;
 import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprDocumentDis;
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprCompositionMtp;
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprDocumentMtp;
+import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprCompositionPadv;
+import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprDocumentPadv;
+import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprObservationPadv;
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprCompositionPre;
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprDocumentPre;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for {@link ChEmedEprParser}.
@@ -60,8 +63,36 @@ class ChEmedEprParserTest {
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.DIS);
         assertInstanceOf(ChEmedEprDocumentDis.class, document);
-        final var preDocument = (ChEmedEprDocumentDis) document;
-        assertNotNull(preDocument.resolveComposition());
-        assertInstanceOf(ChEmedEprCompositionDis.class, preDocument.resolveComposition());
+        final var disDocument = (ChEmedEprDocumentDis) document;
+        assertNotNull(disDocument.resolveComposition());
+        assertInstanceOf(ChEmedEprCompositionDis.class, disDocument.resolveComposition());
+    }
+
+    @Test
+    void testParseAndSerializePadv() throws IOException {
+        final var xml = new String(getClass().getResourceAsStream("/2-2-PharmaceuticalAdvice.xml").readAllBytes());
+        final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
+        final var document = parser.parse(xml, EmedDocumentType.PADV);
+        assertInstanceOf(ChEmedEprDocumentPadv.class, document);
+        final var padvDocument = (ChEmedEprDocumentPadv) document;
+        assertNotNull(padvDocument.resolveComposition());
+        assertInstanceOf(ChEmedEprCompositionPadv.class, padvDocument.resolveComposition());
+        assertInstanceOf(ChEmedEprObservationPadv.class, padvDocument.resolveObservation());
+
+        assertTrue(padvDocument.resolveObservation().hasTreatmentPlan());
+        assertTrue(padvDocument.resolveObservation().getTreatmentPlanElement().hasExtensionId());
+        assertTrue(padvDocument.resolveObservation().getTreatmentPlanElement().hasExternalDocumentId());
+
+        final var serializedDoc = parser.serialize(padvDocument, EncodingEnum.XML);
+        final var document2 = parser.parse(serializedDoc, EmedDocumentType.PADV);
+        assertInstanceOf(ChEmedEprDocumentPadv.class, document2);
+        final var padvDocument2 = (ChEmedEprDocumentPadv) document2;
+        assertNotNull(padvDocument2.resolveComposition());
+        assertInstanceOf(ChEmedEprCompositionPadv.class, padvDocument2.resolveComposition());
+        assertInstanceOf(ChEmedEprObservationPadv.class, padvDocument2.resolveObservation());
+
+        assertTrue(padvDocument2.resolveObservation().hasTreatmentPlan());
+        assertTrue(padvDocument2.resolveObservation().getTreatmentPlanElement().hasExtensionId());
+        assertTrue(padvDocument2.resolveObservation().getTreatmentPlanElement().hasExternalDocumentId());
     }
 }
