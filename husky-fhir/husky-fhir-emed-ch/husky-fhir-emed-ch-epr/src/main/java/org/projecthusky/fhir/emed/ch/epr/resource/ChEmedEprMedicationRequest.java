@@ -3,6 +3,7 @@ package org.projecthusky.fhir.emed.ch.epr.resource;
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.Dosage;
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.MedicationRequest;
 import org.projecthusky.common.utils.datatypes.Uuids;
@@ -16,6 +17,7 @@ import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosage;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
 import org.projecthusky.fhir.emed.ch.epr.util.References;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -251,5 +253,62 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
      */
     public boolean hasDosageAdditionalEntry() {
         return this.hasDosageInstruction() && this.getDosageInstruction().size() > 1;
+    }
+
+    /**
+     * @return {@link #dosageInstruction} (Indicates how the medication is/was or should be taken by the patient.)
+     */
+    @Override
+    public List<Dosage> getDosageInstruction() {
+        if (this.dosageInstruction == null)
+            this.dosageInstruction = new ArrayList<>();
+        else {
+            for (int i = 0; i < this.dosageInstruction.size(); ++i) {
+                if (!(this.dosageInstruction.get(i) instanceof ChEmedDosage)) {
+                    final var newDosage = new ChEmedDosage();
+                    this.dosageInstruction.get(i).copyValues(newDosage);
+                    this.dosageInstruction.set(i, newDosage);
+                }
+            }
+        }
+        return this.dosageInstruction;
+    }
+
+    /**
+     * @param theDosage
+     * @return Returns a reference to <code>this</code> for easy method chaining
+     */
+    @Override
+    public MedicationRequest setDosageInstruction(final List<Dosage> theDosage) {
+        return super.setDosageInstruction(theDosage);
+    }
+
+    @Override
+    public ChEmedDosage addDosageInstruction() {
+        final var dosage = new ChEmedDosage();
+        this.addDosageInstruction(dosage);
+        return dosage;
+    }
+
+    @Override
+    public MedicationRequest addDosageInstruction(final Dosage t) {
+        if (t instanceof final ChEmedDosage chEmedDosage) {
+            this.dosageInstruction.add(t);
+        }
+        final var newDosage = new ChEmedDosage();
+        t.copyValues(newDosage);
+        this.dosageInstruction.add(newDosage);
+        return this;
+    }
+
+    /**
+     * @return The first repetition of repeating field {@link #dosageInstruction}, creating it if it does not already exist
+     */
+    @Override
+    public ChEmedDosage getDosageInstructionFirstRep() {
+        if (getDosageInstruction().isEmpty()) {
+            addDosageInstruction();
+        }
+        return (ChEmedDosage) getDosageInstruction().get(0);
     }
 }
