@@ -348,7 +348,11 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
      * @return this.
      */
     public ChEmedEprMedicationDispense setDosageBaseEntry(final ChEmedDosage dosageBaseEntry) {
-        this.getDosageInstruction().set(0, dosageBaseEntry);
+        if (this.hasDosageInstruction()) {
+            this.getDosageInstruction().set(0, dosageBaseEntry);
+        } else {
+            this.getDosageInstruction().add(dosageBaseEntry);
+        }
         return this;
     }
 

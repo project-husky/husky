@@ -180,7 +180,11 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
      * @return this.
      */
     public ChEmedEprMedicationStatement setDosageBaseEntry(final ChEmedDosage dosageBaseEntry) {
-        this.getDosage().set(0, dosageBaseEntry);
+        if (this.hasDosage()) {
+            this.getDosage().set(0, dosageBaseEntry);
+        } else {
+            this.getDosage().add(dosageBaseEntry);
+        }
         return this;
     }
 

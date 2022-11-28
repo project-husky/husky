@@ -213,7 +213,11 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
      * @return this.
      */
     public ChEmedEprMedicationRequest setDosageBaseEntry(final ChEmedDosage dosageBaseEntry) {
-        this.getDosageInstruction().set(0, dosageBaseEntry);
+        if (this.hasDosageInstruction()) {
+            this.getDosageInstruction().set(0, dosageBaseEntry);
+        } else {
+            this.getDosageInstruction().add(dosageBaseEntry);
+        }
         return this;
     }
 
