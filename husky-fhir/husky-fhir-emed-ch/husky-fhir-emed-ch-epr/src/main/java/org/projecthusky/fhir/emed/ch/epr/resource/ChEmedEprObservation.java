@@ -262,6 +262,18 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
     }
 
     /**
+     * Gets the reference to the changed medication statement. If it doesn't exist, it's created.
+     *
+     * @return the reference to the changed medication statement.
+     */
+    public Reference getMedicationStatementChangedReference() {
+        if (this.medicationStatementChanged == null) {
+            this.medicationStatementChanged = new Reference();
+        }
+        return this.medicationStatementChanged;
+    }
+
+    /**
      * Sets the treatment plan reference.
      *
      * @param treatmentPlan the treatment plan reference.

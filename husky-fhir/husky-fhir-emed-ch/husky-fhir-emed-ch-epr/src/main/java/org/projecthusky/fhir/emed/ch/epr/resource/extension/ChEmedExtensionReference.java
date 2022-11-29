@@ -97,6 +97,30 @@ public abstract class ChEmedExtensionReference extends BackboneElement {
     }
 
     /**
+     * Gets the extension id element. If it doesn't exist, it's created.
+     *
+     * @return the extension id element.
+     */
+    public Identifier getExtensionIdElement() {
+        if (this.extensionId == null) {
+            this.extensionId = new Identifier();
+        }
+        return this.extensionId;
+    }
+
+    /**
+     * Gets the external document id element. If it doesn't exist, it's created.
+     *
+     * @return the external document id element.
+     */
+    public Identifier getExternalDocumentIdElement() {
+        if (this.externalDocumentId == null) {
+            this.externalDocumentId = new Identifier();
+        }
+        return this.externalDocumentId;
+    }
+
+    /**
      * Sets the ID of the document, if it's already exists, it's replaced.
      *
      * @param extensionId the ID of the document.
