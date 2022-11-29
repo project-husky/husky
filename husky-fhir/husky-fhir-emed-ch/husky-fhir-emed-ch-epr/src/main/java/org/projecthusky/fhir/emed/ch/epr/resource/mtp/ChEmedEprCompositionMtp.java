@@ -99,7 +99,7 @@ public class ChEmedEprCompositionMtp extends ChEmedEprComposition {
     public SectionComponent getTreatmentPlanSection() {
         var section = getSectionByLoincCode(TREATMENT_PLAN_SECTION_CODE_VALUE);
         if (section == null) {
-            section = new SectionComponent();
+            section = this.addSection();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    TREATMENT_PLAN_SECTION_CODE_VALUE,
                                                    "Medication treatment plan.brief"));
@@ -143,7 +143,7 @@ public class ChEmedEprCompositionMtp extends ChEmedEprComposition {
     public SectionComponent getAnnotationSection() {
         var section = getSectionByLoincCode(ANNOTATION_SECTION_CODE_VALUE);
         if (section == null) {
-            section = new SectionComponent();
+            section = this.addSection();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    ANNOTATION_SECTION_CODE_VALUE, "Annotation comment"));
         }

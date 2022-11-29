@@ -88,7 +88,7 @@ public class ChEmedEprCompositionPmlc extends ChEmedEprComposition {
     public SectionComponent getAnnotationSection() {
         var section = getSectionByLoincCode(ANNOTATION_SECTION_CODE_VALUE);
         if (section == null) {
-            section = new SectionComponent();
+            section = this.addSection();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    ANNOTATION_SECTION_CODE_VALUE, "Annotation comment"));
         }
@@ -103,7 +103,7 @@ public class ChEmedEprCompositionPmlc extends ChEmedEprComposition {
     public SectionComponent getCardSection() {
         var section = getSectionByLoincCode(CARD_SECTION_CODE_VALUE);
         if (section == null) {
-            section = new SectionComponent();
+            section = this.addSection();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    CARD_SECTION_CODE_VALUE,
                                                    "History of medication use"));

@@ -15,7 +15,6 @@ import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DomainResource;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
-import org.projecthusky.fhir.emed.ch.common.enums.CommonLanguages;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
@@ -66,7 +65,7 @@ public class ChEmedEprCompositionDis extends ChEmedEprComposition {
     public SectionComponent getDispenseSection() {
         var section = getSectionByLoincCode(DISPENSE_SECTION_CODE_VALUE);
         if (section == null) {
-            section = new SectionComponent();
+            section = this.addSection();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    DISPENSE_SECTION_CODE_VALUE,
                                                    "Medication dispensed.brief"));
@@ -125,7 +124,7 @@ public class ChEmedEprCompositionDis extends ChEmedEprComposition {
     public SectionComponent getAnnotationSection() {
         var section = getSectionByLoincCode(ANNOTATION_SECTION_CODE_VALUE);
         if (section == null) {
-            section = new SectionComponent();
+            section = this.addSection();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    ANNOTATION_SECTION_CODE_VALUE, "Annotation comment"));
         }
