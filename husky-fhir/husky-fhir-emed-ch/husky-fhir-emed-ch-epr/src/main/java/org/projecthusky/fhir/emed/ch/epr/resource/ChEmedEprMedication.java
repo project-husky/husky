@@ -140,23 +140,6 @@ public class ChEmedEprMedication extends Medication {
     }
 
     /**
-     * Returns the manufacturer or throws.
-     *
-     * @return the manufacturer.
-     * @throws InvalidEmedContentException if the manufacturer is missing.
-     */
-    @ExpectsValidResource
-    public ChEmedOrganization resolveManufacturer() throws InvalidEmedContentException {
-        if (!this.hasManufacturer()) throw new InvalidEmedContentException("The manufacturer is not specified");
-
-        final var resource = this.getManufacturer().getResource();
-        if (resource instanceof final ChEmedOrganization chManufacturer) {
-            return chManufacturer;
-        }
-        throw new InvalidEmedContentException("The manufacturer is invalid");
-    }
-
-    /**
      * Returns the pharmaceutical dose form or throws.
      *
      * @return the pharmaceutical dose form.

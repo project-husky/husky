@@ -27,6 +27,7 @@ import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitioner;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
 import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprCompositionDis;
 import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprDocumentDis;
+import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprMedicationDis;
 import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprMedicationDispenseDis;
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprCompositionMtp;
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprDocumentMtp;
@@ -163,6 +164,7 @@ public class ChEmedEprParser {
                 preferTypes.add(ChEmedEprDocumentDis.class);
                 preferTypes.add(ChEmedEprCompositionDis.class);
                 preferTypes.add(ChEmedEprMedicationDispenseDis.class);
+                preferTypes.add(ChEmedEprMedicationDis.class);
             }
             case PADV -> {
                 preferTypes.add(ChEmedEprDocumentPadv.class);

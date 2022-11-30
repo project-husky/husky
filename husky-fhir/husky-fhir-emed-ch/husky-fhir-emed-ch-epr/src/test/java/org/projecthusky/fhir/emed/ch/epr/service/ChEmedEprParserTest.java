@@ -14,10 +14,14 @@ import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.api.EncodingEnum;
 import org.junit.jupiter.api.Test;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedication;
 import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprCompositionDis;
 import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprDocumentDis;
+import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprMedicationDis;
+import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprMedicationDispenseDis;
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprCompositionMtp;
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprDocumentMtp;
+import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprMedicationStatementMtp;
 import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprCompositionPadv;
 import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprDocumentPadv;
 import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprObservationPadv;
@@ -44,6 +48,10 @@ class ChEmedEprParserTest {
         final var mtpDocument = (ChEmedEprDocumentMtp) document;
         assertNotNull(mtpDocument.resolveComposition());
         assertInstanceOf(ChEmedEprCompositionMtp.class, mtpDocument.resolveComposition());
+        assertNotNull(mtpDocument.resolveMedicationStatement());
+        assertInstanceOf(ChEmedEprMedicationStatementMtp.class, mtpDocument.resolveMedicationStatement());
+        assertNotNull(mtpDocument.resolveComposition().resolveMedicationStatement().resolveMedication());
+        assertInstanceOf(ChEmedEprMedication.class, mtpDocument.resolveComposition().resolveMedicationStatement().resolveMedication());
     }
 
     @Test
@@ -66,6 +74,10 @@ class ChEmedEprParserTest {
         final var disDocument = (ChEmedEprDocumentDis) document;
         assertNotNull(disDocument.resolveComposition());
         assertInstanceOf(ChEmedEprCompositionDis.class, disDocument.resolveComposition());
+        assertNotNull(disDocument.resolveMedicationDispense());
+        assertInstanceOf(ChEmedEprMedicationDispenseDis.class, disDocument.resolveMedicationDispense());
+        assertNotNull(disDocument.resolveComposition().resolveMedicationDispense().resolveMedicationReference());
+        assertInstanceOf(ChEmedEprMedicationDis.class, disDocument.resolveComposition().resolveMedicationDispense().resolveMedicationReference());
     }
 
     @Test
