@@ -356,7 +356,7 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
      * @return {@code true} if the treatment plan reference exists, {@code false} otherwise.
      */
     public boolean hasTreatmentPlan() {
-        return this.treatmentPlan != null;
+        return this.treatmentPlan != null && !this.treatmentPlan.isEmpty();
     }
 
     /**
@@ -365,7 +365,7 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
      * @return {@code true} if the prescription reference exists, {@code false} otherwise.
      */
     public boolean hasPrescription() {
-        return this.prescription != null;
+        return this.prescription != null && !this.prescription.isEmpty();
     }
 
     /**
@@ -374,7 +374,7 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
      * @return {@code true} if the medication dispense reference exists, {@code false} otherwise.
      */
     public boolean hasDispense() {
-        return this.dispense != null;
+        return this.dispense != null && !this.dispense.isEmpty();
     }
 
     /**

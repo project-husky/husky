@@ -172,6 +172,6 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
      * @return {@code true} if the treatment plan reference exists, {@code false} otherwise.
      */
     public boolean hasTreatmentPlan() {
-        return this.treatmentPlan != null;
+        return this.treatmentPlan != null && !this.treatmentPlan.isEmpty();
     }
 }

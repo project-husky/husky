@@ -382,7 +382,7 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
      * @return {@code true} if the prescription reference exists, {@code false} otherwise.
      */
     public boolean hasPrescription() {
-        return this.prescription != null;
+        return this.prescription != null && !this.prescription.isEmpty();
     }
 
     /**
@@ -400,7 +400,7 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
      * @return {@code true} if the treatment plan reference exists, {@code false} otherwise.
      */
     public boolean hasTreatmentPlan() {
-        return this.treatmentPlan != null;
+        return this.treatmentPlan != null && !this.treatmentPlan.isEmpty();
     }
 
     /**
