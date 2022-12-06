@@ -26,42 +26,42 @@ public enum EmedDocumentType {
     MTP(
             "MTP",
             TypeCode.RECORD_ARTIFACT,
-            ClassCode.PRESCRIPTION,
-            FormatCode.COMMUNITY_MEDICATION_TREATMENT_PLAN, // TODO
+            ClassCode.PRESCRIPTION_RECORD,
+            FormatCode.CH_EMED_MEDICATION_TREATMENT_PLAN,
             "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationtreatmentplan"
     ),
     PRE(
             "PRE",
-            TypeCode.DRUG_PRESCRIPTION,
-            ClassCode.PRESCRIPTION,
-            FormatCode.COMMUNITY_PRESCRIPTION, // TODO
+            TypeCode.MEDICAL_PRESCRIPTION_RECORD,
+            ClassCode.PRESCRIPTION_RECORD,
+            FormatCode.CH_EMED_MEDICATION_PRESCRIPTION,
             "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationprescription"
     ),
     DIS(
             "DIS",
             TypeCode.RECORD_ARTIFACT,
-            ClassCode.PRESCRIPTION,
-            FormatCode.COMMUNITY_DISPENSE, // TODO
+            ClassCode.PRESCRIPTION_RECORD,
+            FormatCode.CH_EMED_MEDICATION_DISPENSE,
             "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationdispense"
     ),
     PADV(
             "PADV",
             TypeCode.RECORD_ARTIFACT,
-            ClassCode.PRESCRIPTION,
-            FormatCode.COMMUNITY_PHARMACEUTICAL_ADVICE, // TODO
+            ClassCode.PRESCRIPTION_RECORD,
+            FormatCode.CH_EMED_PHARMACEUTICAL_ADVICE,
             "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-pharmaceuticaladvice"
     ),
     PML(
             "PML",
-            TypeCode.MEDICATION_LIST,
-            ClassCode.SUMMARY,
-            FormatCode.COMMUNITY_MEDICATION_LIST, // TODO
+            TypeCode.MEDICATION_SUMMARY_DOCUMENT,
+            ClassCode.SUMMARY_CLINICAL_DOCUMENT,
+            FormatCode.CH_EMED_MEDICATION_LIST,
             "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationlist"
     ),
     PMLC(
             "PMLC",
-            TypeCode.MEDICATION_LIST,
-            ClassCode.SUMMARY,
+            TypeCode.MEDICATION_SUMMARY_DOCUMENT,
+            ClassCode.SUMMARY_CLINICAL_DOCUMENT,
             FormatCode.CH_EMED_MEDICATION_CARD_DOCUMENT,
             "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationcard"
     );
