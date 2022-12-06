@@ -1,5 +1,6 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.dosage;
 
+import ca.uhn.fhir.model.api.annotation.DatatypeDef;
 import org.hl7.fhir.r4.model.SimpleQuantity;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.UnitCode;
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
  *
  * @author Ronaldo Loureiro
  **/
+@DatatypeDef(name="ChEmedQuantityWithEmedUnits", isSpecialization = true, profileOf = SimpleQuantity.class)
 public class ChEmedQuantityWithEmedUnits extends SimpleQuantity {
 
     /**

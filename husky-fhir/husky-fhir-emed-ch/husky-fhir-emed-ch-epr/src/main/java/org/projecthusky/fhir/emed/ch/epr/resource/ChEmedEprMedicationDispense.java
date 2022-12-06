@@ -14,6 +14,7 @@ import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EmedReference;
 import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprMedicationDis;
 import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosage;
+import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedQuantityWithEmedUnits;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtPharmaceuticalAdvice;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtPrescription;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
@@ -114,16 +115,19 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
     }
 
     /**
-     * The number of packages.
+     * Resolves the amount of medication that has been dispensed. Includes unit of measure.
      *
-     * @return the number of packages.
-     * @throws InvalidEmedContentException if the number of packages is missing.
-     * @throws ArithmeticException         if this has a nonzero fractional part, or will not fit in an int.
+     * @return The amount of medication that has been dispensed.
+     * @throws InvalidEmedContentException if the quantity is missing or invalid.
      */
     @ExpectsValidResource
-    public int resolveQuantity() throws InvalidEmedContentException, ArithmeticException {
+    public ChEmedQuantityWithEmedUnits resolveQuantity() throws InvalidEmedContentException {
         if (!this.hasQuantity()) throw new InvalidEmedContentException("The number of packages is missing.");
-        return this.getQuantity().getValue().intValueExact();
+        final var quantity = this.getQuantity();
+        if (quantity instanceof final ChEmedQuantityWithEmedUnits chQuantity) {
+            return chQuantity;
+        }
+        throw new InvalidEmedContentException("The quantity isn't of the right type");
     }
 
     /**

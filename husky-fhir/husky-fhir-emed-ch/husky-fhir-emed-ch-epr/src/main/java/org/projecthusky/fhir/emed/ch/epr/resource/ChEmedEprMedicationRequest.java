@@ -12,6 +12,7 @@ import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
+import org.projecthusky.fhir.emed.ch.epr.enums.PrescriptionStatus;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EmedReference;
 import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosage;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
@@ -143,6 +144,24 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
                 .map(ChEmedDosage.class::cast)
                 .skip(1)
                 .toList();
+    }
+
+    /**
+     * Resolves the medication request status or throws.
+     *
+     * @return the medication request status {@link PrescriptionStatus}.
+     * @throws InvalidEmedContentException if the status is missing or not supported.
+     */
+    @ExpectsValidResource
+    public PrescriptionStatus resolveStatus() throws InvalidEmedContentException {
+        if (!this.hasStatus()) throw new InvalidEmedContentException("The status is missing.");
+        return switch (this.getStatus()) { // TODO check the matching between MedicationRequestStatus and PrescriptionStatus
+            case ACTIVE -> PrescriptionStatus.ACTIVE;
+            case ONHOLD, DRAFT -> PrescriptionStatus.SUBMITTED;
+            case CANCELLED, STOPPED -> PrescriptionStatus.CANCELED;
+            case ENTEREDINERROR -> PrescriptionStatus.REFUSED;
+            case COMPLETED, UNKNOWN, NULL -> throw new InvalidEmedContentException("The status is not supported.");
+        };
     }
 
     /**
