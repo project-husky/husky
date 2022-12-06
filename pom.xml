@@ -659,12 +659,12 @@
             <dependency>
                 <groupId>org.projecthusky.fhir.emed.ch</groupId>
                 <artifactId>husky-fhir-emed-ch-common</artifactId>
-                <version>${husky.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.projecthusky.fhir.emed.ch</groupId>
                 <artifactId>husky-fhir-emed-ch-pmp</artifactId>
-                <version>${husky.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
