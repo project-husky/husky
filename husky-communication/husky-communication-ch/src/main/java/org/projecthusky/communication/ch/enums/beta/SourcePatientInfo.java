@@ -9,36 +9,30 @@
  */
 package org.projecthusky.communication.ch.enums.beta;
 
-import java.util.Objects;
-import javax.annotation.processing.Generated;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.common.enums.CodeSystems;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.enums.ValueSetEnumInterface;
 
+import javax.annotation.processing.Generated;
+import java.util.Objects;
+
 /**
  * Enumeration of DocumentEntry.sourcePatientInfo.PID-8 values
  * <p>
- * EN: Patient’s gender as per Annex 3; EPRO-FDHA.<br>
- * DE: Geschlecht der Patientin oder des Patienten gemäss Anhang 3 EPDV-EDI.<br>
- * FR: Sexe du patient selon l'annexe 3 ODEP-DFI.<br>
- * IT: Sesso del paziente secondo l'allegato 3 OCIP-DFI.<br>
+ * EN: Patient’s gender as per Annex 3; EPRO-FDHA.<br> DE: Geschlecht der Patientin oder des Patienten gemäss Anhang 3
+ * EPDV-EDI.<br> FR: Sexe du patient selon l'annexe 3 ODEP-DFI.<br> IT: Sesso del paziente secondo l'allegato 3
+ * OCIP-DFI.<br>
  * <p>
- * Identifier: 2.16.840.1.113883.4.642.3.1<br>
- * Effective date: 2021-04-01 17:04<br>
- * Version: 202104.0-stable<br>
- * Status: FINAL
+ * Identifier: 2.16.840.1.113883.4.642.3.1<br> Effective date: 2022-11-29 13:56<br> Version: 202212.0-stable<br> Status:
+ * FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-09-29")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-12-06")
 public enum SourcePatientInfo implements ValueSetEnumInterface {
 
     /**
-     * EN: Female.<br>
-     * DE: Weiblich.<br>
-     * FR: Féminin.<br>
-     * IT: Femminile.<br>
+     * EN: Female.<br> DE: Weiblich.<br> FR: Féminin.<br> IT: Femminile.<br>
      */
     FEMALE("female",
            "2.16.840.1.113883.4.642.1.2",
@@ -48,10 +42,7 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
            "Féminin",
            "Femminile"),
     /**
-     * EN: Male.<br>
-     * DE: Männlich.<br>
-     * FR: Masculin.<br>
-     * IT: Maschile.<br>
+     * EN: Male.<br> DE: Männlich.<br> FR: Masculin.<br> IT: Maschile.<br>
      */
     MALE("male",
          "2.16.840.1.113883.4.642.1.2",
@@ -61,10 +52,7 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
          "Masculin",
          "Maschile"),
     /**
-     * EN: Other.<br>
-     * DE: Anderes.<br>
-     * FR: Autre.<br>
-     * IT: Altro.<br>
+     * EN: Other.<br> DE: Anderes.<br> FR: Autre.<br> IT: Altro.<br>
      */
     OTHER("other",
           "2.16.840.1.113883.4.642.1.2",
@@ -74,10 +62,7 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
           "Autre",
           "Altro"),
     /**
-     * EN: Unknown.<br>
-     * DE: Unbekannt.<br>
-     * FR: Inconnu.<br>
-     * IT: Sconosciuto.<br>
+     * EN: Unknown.<br> DE: Unbekannt.<br> FR: Inconnu.<br> IT: Sconosciuto.<br>
      */
     UNKNOWN("unknown",
             "2.16.840.1.113883.4.642.1.2",
@@ -88,34 +73,22 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
             "Sconosciuto");
 
     /**
-     * EN: Code for Female.<br>
-     * DE: Code für Weiblich.<br>
-     * FR: Code de Féminin.<br>
-     * IT: Code per Femminile.<br>
+     * EN: Code for Female.<br> DE: Code für Weiblich.<br> FR: Code de Féminin.<br> IT: Code per Femminile.<br>
      */
     public static final String FEMALE_CODE = "female";
 
     /**
-     * EN: Code for Male.<br>
-     * DE: Code für Männlich.<br>
-     * FR: Code de Masculin.<br>
-     * IT: Code per Maschile.<br>
+     * EN: Code for Male.<br> DE: Code für Männlich.<br> FR: Code de Masculin.<br> IT: Code per Maschile.<br>
      */
     public static final String MALE_CODE = "male";
 
     /**
-     * EN: Code for Other.<br>
-     * DE: Code für Anderes.<br>
-     * FR: Code de Autre.<br>
-     * IT: Code per Altro.<br>
+     * EN: Code for Other.<br> DE: Code für Anderes.<br> FR: Code de Autre.<br> IT: Code per Altro.<br>
      */
     public static final String OTHER_CODE = "other";
 
     /**
-     * EN: Code for Unknown.<br>
-     * DE: Code für Unbekannt.<br>
-     * FR: Code de Inconnu.<br>
-     * IT: Code per Sconosciuto.<br>
+     * EN: Code for Unknown.<br> DE: Code für Unbekannt.<br> FR: Code de Inconnu.<br> IT: Code per Sconosciuto.<br>
      */
     public static final String UNKNOWN_CODE = "unknown";
 
@@ -214,7 +187,13 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
      * @param displayNameFr The display name in French.
      * @param displayNameIt The display name in Italian.
      */
-    SourcePatientInfo(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
+    SourcePatientInfo(@NonNull final String code,
+                      @NonNull final String codeSystem,
+                      @NonNull final String displayName,
+                      @NonNull final String displayNameEn,
+                      @NonNull final String displayNameDe,
+                      @NonNull final String displayNameFr,
+                      @NonNull final String displayNameIt) {
         this.code = Objects.requireNonNull(code);
         this.codeSystem = Objects.requireNonNull(codeSystem);
         this.displayNames = new String[5];
@@ -274,17 +253,12 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
         if (languageCode == null) {
             return this.displayNames[0];
         }
-        return switch(languageCode) {
-            case ENGLISH ->
-                this.displayNames[1];
-            case GERMAN ->
-                this.displayNames[2];
-            case FRENCH ->
-                this.displayNames[3];
-            case ITALIAN ->
-                this.displayNames[4];
-            default ->
-                "TOTRANSLATE";
+        return switch (languageCode) {
+            case ENGLISH -> this.displayNames[1];
+            case GERMAN -> this.displayNames[2];
+            case FRENCH -> this.displayNames[3];
+            case ITALIAN -> this.displayNames[4];
+            default -> "TOTRANSLATE";
         };
     }
 

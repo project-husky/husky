@@ -27,11 +27,11 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * IT: Tipo MIME del documento secondo l'allegato 3 OCIP-DFI.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.127.3.10.1.16<br>
- * Effective date: 2021-04-01 17:07<br>
- * Version: 202104.0-stable<br>
+ * Effective date: 2022-11-29 13:48<br>
+ * Version: 202212.0-stable<br>
  * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-09-29")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-12-06")
 public enum MimeType implements ValueSetEnumInterface {
 
     /**

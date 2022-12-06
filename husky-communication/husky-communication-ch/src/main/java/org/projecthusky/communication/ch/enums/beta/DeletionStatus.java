@@ -21,7 +21,7 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
 /**
  * Enumeration of EprDeletionStatus values
  * <p>
- * EN: Deletion codes as per s upplement 1 to Annex 5 EPRO-FDHA.<br/>.<br>
+ * EN: Deletion codes as per s upplement 1 to Annex 5 EPRO-FDHA.<br/>.<br>
  * DE: No designation found.<br>
  * FR: No designation found.<br>
  * IT: No designation found.<br>
@@ -29,9 +29,9 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * Identifier: 2.16.756.5.30.1.127.3.10.15.3<br>
  * Effective date: 2021-11-29 10:41<br>
  * Version: 202104.0-beta<br>
- * Status: DRAFT
+ * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-09-29")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-12-06")
 public enum DeletionStatus implements ValueSetEnumInterface {
 
     /**

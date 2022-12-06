@@ -31,7 +31,7 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * Version: 202104.0-stable<br>
  * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-09-29")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-12-06")
 public enum SubmissionSetAuthorRole implements ValueSetEnumInterface {
 
     /**

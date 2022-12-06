@@ -9,29 +9,28 @@
  */
 package org.projecthusky.communication.ch.enums.beta;
 
-import java.util.Objects;
-import javax.annotation.processing.Generated;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.common.enums.CodeSystems;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.enums.ValueSetEnumInterface;
 
+import javax.annotation.processing.Generated;
+import java.util.Objects;
+
 /**
  * Enumeration of DocumentEntry.classCode_DocumentEntry.typeCode_mapping values
  * <p>
- * EN: No designation found.<br>
- * DE: Das folgende Valueset zeigt das Mapping zwischen den Dokumentklassen und Dokumenttypen (gemäss Kapitel 2.11 Anhang 3 EPDV). Das Valueset dient als Hilfestellung bei der Implementierung. Für die konkreten Werte in documentTypeCode und documentClassCode dienen weiterhin die beiden definierten Valuesets ( EprDocumentTypeCode resp.  EprDocumentClassCode). <br/>.<br>
- * FR: No designation found.<br>
- * IT: No designation found.<br>
+ * EN: No designation found.<br> DE: Das folgende Valueset zeigt das Mapping zwischen den Dokumentklassen und
+ * Dokumenttypen (gemäss Kapitel 2.11 Anhang 3 EPDV). Das Valueset dient als Hilfestellung bei der Implementierung. Für
+ * die konkreten Werte in documentTypeCode und documentClassCode dienen weiterhin die beiden definierten Valuesets
+ * (EprDocumentTypeCode resp. EprDocumentClassCode). <br/>.<br> FR: No designation found.<br> IT: No designation
+ * found.<br>
  * <p>
- * Identifier: 2.16.756.5.30.1.127.3.10.1.30<br>
- * Effective date: 2022-06-26 16:13<br>
- * Version: 202304.0-beta<br>
- * Status: DRAFT
+ * Identifier: 2.16.756.5.30.1.127.3.10.1.30<br> Effective date: 2022-11-29 13:33<br> Version: 202212.0-stable<br>
+ * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-09-29")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-12-06")
 public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 
     /**
@@ -75,12 +74,12 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
                                        "TOTRANSLATE",
                                        "TOTRANSLATE"),
     /**
-     * EN: Care plan (record artifact).<br>
+     * EN: Care Plan (record artifact).<br>
      */
     CARE_PLAN_RECORD_ARTIFACT("734163000",
                               "2.16.840.1.113883.6.96",
-                              "Care plan (record artifact)",
-                              "Care plan (record artifact)",
+                              "Care Plan (record artifact)",
+                              "Care Plan (record artifact)",
                               "TOTRANSLATE",
                               "TOTRANSLATE",
                               "TOTRANSLATE"),
@@ -95,12 +94,12 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
                                                     "TOTRANSLATE",
                                                     "TOTRANSLATE"),
     /**
-     * EN: Clinical management plan (record artifact).<br>
+     * EN: Clinical Management plan (record artifact).<br>
      */
     CLINICAL_MANAGEMENT_PLAN_RECORD_ARTIFACT_L1("737427001",
                                                 "2.16.840.1.113883.6.96",
-                                                "Clinical management plan (record artifact)",
-                                                "Clinical management plan (record artifact)",
+                                                "Clinical Management plan (record artifact)",
+                                                "Clinical Management plan (record artifact)",
                                                 "TOTRANSLATE",
                                                 "TOTRANSLATE",
                                                 "TOTRANSLATE"),
@@ -124,16 +123,6 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
                                    "TOTRANSLATE",
                                    "TOTRANSLATE",
                                    "TOTRANSLATE"),
-    /**
-     * EN: Digital representation of specimen (record artifact).<br>
-     */
-    DIGITAL_REPRESENTATION_OF_SPECIMEN_RECORD_ARTIFACT_L1("787148009",
-                                                          "2.16.840.1.113883.6.96",
-                                                          "Digital representation of specimen (record artifact)",
-                                                          "Digital representation of specimen (record artifact)",
-                                                          "TOTRANSLATE",
-                                                          "TOTRANSLATE",
-                                                          "TOTRANSLATE"),
     /**
      * EN: Discharge summary (record artifact).<br>
      */
@@ -185,12 +174,12 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
                                                    "TOTRANSLATE",
                                                    "TOTRANSLATE"),
     /**
-     * EN: Imaging order (record artifact).<br>
+     * EN: Imaging Order (record artifact).<br>
      */
     IMAGING_ORDER_RECORD_ARTIFACT_L1("2161000195103",
                                      "2.16.840.1.113883.6.96",
-                                     "Imaging order (record artifact)",
-                                     "Imaging order (record artifact)",
+                                     "Imaging Order (record artifact)",
+                                     "Imaging Order (record artifact)",
                                      "TOTRANSLATE",
                                      "TOTRANSLATE",
                                      "TOTRANSLATE"),
@@ -198,7 +187,7 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
      * EN: Imaging report (record artifact).<br>
      */
     IMAGING_REPORT_RECORD_ARTIFACT_L1("4201000179104",
-                                      "2.16.840.1.113883.6.96",
+                                      "2.16.756.5.30.1.127.3.4",
                                       "Imaging report (record artifact)",
                                       "Imaging report (record artifact)",
                                       "TOTRANSLATE",
@@ -215,12 +204,12 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
                                            "TOTRANSLATE",
                                            "TOTRANSLATE"),
     /**
-     * EN: Laboratory order (record artifact).<br>
+     * EN: Laboratory Order (record artifact).<br>
      */
     LABORATORY_ORDER_RECORD_ARTIFACT_L1("721965002",
                                         "2.16.840.1.113883.6.96",
-                                        "Laboratory order (record artifact)",
-                                        "Laboratory order (record artifact)",
+                                        "Laboratory Order (record artifact)",
+                                        "Laboratory Order (record artifact)",
                                         "TOTRANSLATE",
                                         "TOTRANSLATE",
                                         "TOTRANSLATE"),
@@ -245,6 +234,16 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
                                            "TOTRANSLATE",
                                            "TOTRANSLATE"),
     /**
+     * EN: Medical Prescription record (record artifact).<br>
+     */
+    MEDICAL_PRESCRIPTION_RECORD_RECORD_ARTIFACT_L1("761938008",
+                                                   "2.16.840.1.113883.6.96",
+                                                   "Medical Prescription record (record artifact)",
+                                                   "Medical Prescription record (record artifact)",
+                                                   "TOTRANSLATE",
+                                                   "TOTRANSLATE",
+                                                   "TOTRANSLATE"),
+    /**
      * EN: Medication summary document (record artifact).<br>
      */
     MEDICATION_SUMMARY_DOCUMENT_RECORD_ARTIFACT_L1("721912009",
@@ -254,16 +253,6 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
                                                    "TOTRANSLATE",
                                                    "TOTRANSLATE",
                                                    "TOTRANSLATE"),
-    /**
-     * EN: Medicinal prescription record (record artifact).<br>
-     */
-    MEDICINAL_PRESCRIPTION_RECORD_RECORD_ARTIFACT_L1("761938008",
-                                                     "2.16.840.1.113883.6.96",
-                                                     "Medicinal prescription record (record artifact)",
-                                                     "Medicinal prescription record (record artifact)",
-                                                     "TOTRANSLATE",
-                                                     "TOTRANSLATE",
-                                                     "TOTRANSLATE"),
     /**
      * EN: Non-drug prescription record (record artifact).<br>
      */
@@ -285,12 +274,12 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
                                          "TOTRANSLATE",
                                          "TOTRANSLATE"),
     /**
-     * EN: Obstetrical record (record artifact).<br>
+     * EN: Obstetrical Record (record artifact).<br>
      */
     OBSTETRICAL_RECORD_RECORD_ARTIFACT("2171000195109",
                                        "2.16.756.5.30.1.127.3.4",
-                                       "Obstetrical record (record artifact)",
-                                       "Obstetrical record (record artifact)",
+                                       "Obstetrical Record (record artifact)",
+                                       "Obstetrical Record (record artifact)",
                                        "TOTRANSLATE",
                                        "TOTRANSLATE",
                                        "TOTRANSLATE"),
@@ -325,12 +314,12 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
                                      "TOTRANSLATE",
                                      "TOTRANSLATE"),
     /**
-     * EN: Pathology order (record artifact).<br>
+     * EN: Pathology order (record artifact.<br>
      */
     PATHOLOGY_ORDER_RECORD_ARTIFACT_L1("721966001",
                                        "2.16.840.1.113883.6.96",
-                                       "Pathology order (record artifact)",
-                                       "Pathology order (record artifact)",
+                                       "Pathology order (record artifact",
+                                       "Pathology order (record artifact",
                                        "TOTRANSLATE",
                                        "TOTRANSLATE",
                                        "TOTRANSLATE"),
@@ -486,7 +475,7 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
     public static final String AUDIT_TRAIL_REPORT_RECORD_ARTIFACT_CODE = "722160009";
 
     /**
-     * EN: Code for Care plan (record artifact).<br>
+     * EN: Code for Care Plan (record artifact).<br>
      */
     public static final String CARE_PLAN_RECORD_ARTIFACT_CODE = "734163000";
 
@@ -496,7 +485,7 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
     public static final String CLINICAL_CONSULTATION_REPORT_RECORD_ARTIFACT_L1_CODE = "371530004";
 
     /**
-     * EN: Code for Clinical management plan (record artifact).<br>
+     * EN: Code for Clinical Management plan (record artifact).<br>
      */
     public static final String CLINICAL_MANAGEMENT_PLAN_RECORD_ARTIFACT_L1_CODE = "737427001";
 
@@ -509,11 +498,6 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
      * EN: Code for Consent report (record artifact).<br>
      */
     public static final String CONSENT_REPORT_RECORD_ARTIFACT_CODE = "371537001";
-
-    /**
-     * EN: Code for Digital representation of specimen (record artifact).<br>
-     */
-    public static final String DIGITAL_REPRESENTATION_OF_SPECIMEN_RECORD_ARTIFACT_L1_CODE = "787148009";
 
     /**
      * EN: Code for Discharge summary (record artifact).<br>
@@ -541,7 +525,7 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
     public static final String IMAGE_REFERENCE_FOUNDATION_METADATA_CONCEPT_L1_CODE = "900000000000471006";
 
     /**
-     * EN: Code for Imaging order (record artifact).<br>
+     * EN: Code for Imaging Order (record artifact).<br>
      */
     public static final String IMAGING_ORDER_RECORD_ARTIFACT_L1_CODE = "2161000195103";
 
@@ -556,7 +540,7 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
     public static final String IMMUNIZATION_RECORD_RECORD_ARTIFACT_L1_CODE = "41000179103";
 
     /**
-     * EN: Code for Laboratory order (record artifact).<br>
+     * EN: Code for Laboratory Order (record artifact).<br>
      */
     public static final String LABORATORY_ORDER_RECORD_ARTIFACT_L1_CODE = "721965002";
 
@@ -571,14 +555,14 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
     public static final String MEDICAL_CERTIFICATE_RECORD_ARTIFACT_L1_CODE = "772786005";
 
     /**
+     * EN: Code for Medical Prescription record (record artifact).<br>
+     */
+    public static final String MEDICAL_PRESCRIPTION_RECORD_RECORD_ARTIFACT_L1_CODE = "761938008";
+
+    /**
      * EN: Code for Medication summary document (record artifact).<br>
      */
     public static final String MEDICATION_SUMMARY_DOCUMENT_RECORD_ARTIFACT_L1_CODE = "721912009";
-
-    /**
-     * EN: Code for Medicinal prescription record (record artifact).<br>
-     */
-    public static final String MEDICINAL_PRESCRIPTION_RECORD_RECORD_ARTIFACT_L1_CODE = "761938008";
 
     /**
      * EN: Code for Non-drug prescription record (record artifact).<br>
@@ -591,7 +575,7 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
     public static final String NURSING_CARE_PLAN_RECORD_ARTIFACT_L1_CODE = "773130005";
 
     /**
-     * EN: Code for Obstetrical record (record artifact).<br>
+     * EN: Code for Obstetrical Record (record artifact).<br>
      */
     public static final String OBSTETRICAL_RECORD_RECORD_ARTIFACT_CODE = "2171000195109";
 
@@ -611,7 +595,7 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
     public static final String ORGAN_DONOR_CARD_RECORD_ARTIFACT_CODE = "772790007";
 
     /**
-     * EN: Code for Pathology order (record artifact).<br>
+     * EN: Code for Pathology order (record artifact.<br>
      */
     public static final String PATHOLOGY_ORDER_RECORD_ARTIFACT_L1_CODE = "721966001";
 
@@ -770,7 +754,13 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
      * @param displayNameFr The display name in French.
      * @param displayNameIt The display name in Italian.
      */
-    ClassTypeCodeMapping(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
+    ClassTypeCodeMapping(@NonNull final String code,
+                         @NonNull final String codeSystem,
+                         @NonNull final String displayName,
+                         @NonNull final String displayNameEn,
+                         @NonNull final String displayNameDe,
+                         @NonNull final String displayNameFr,
+                         @NonNull final String displayNameIt) {
         this.code = Objects.requireNonNull(code);
         this.codeSystem = Objects.requireNonNull(codeSystem);
         this.displayNames = new String[5];
@@ -830,17 +820,12 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
         if (languageCode == null) {
             return this.displayNames[0];
         }
-        return switch(languageCode) {
-            case ENGLISH ->
-                this.displayNames[1];
-            case GERMAN ->
-                this.displayNames[2];
-            case FRENCH ->
-                this.displayNames[3];
-            case ITALIAN ->
-                this.displayNames[4];
-            default ->
-                "TOTRANSLATE";
+        return switch (languageCode) {
+            case ENGLISH -> this.displayNames[1];
+            case GERMAN -> this.displayNames[2];
+            case FRENCH -> this.displayNames[3];
+            case ITALIAN -> this.displayNames[4];
+            default -> "TOTRANSLATE";
         };
     }
 

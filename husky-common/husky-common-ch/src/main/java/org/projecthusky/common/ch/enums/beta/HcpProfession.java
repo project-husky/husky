@@ -9,596 +9,473 @@
  */
 package org.projecthusky.common.ch.enums.beta;
 
-import java.util.Objects;
-import javax.annotation.processing.Generated;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.common.enums.CodeSystems;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.enums.ValueSetEnumInterface;
 
+import javax.annotation.processing.Generated;
+import java.util.Objects;
+
 /**
  * Enumeration of HCProfessional.hcProfession values
  * <p>
- * EN: No designation found.<br>
- * DE: No designation found.<br>
- * FR: No designation found.<br>
- * IT: No designation found.<br>
+ * EN: No designation found.<br> DE: No designation found.<br> FR: No designation found.<br> IT: No designation
+ * found.<br>
  * <p>
- * Identifier: 2.16.756.5.30.1.127.3.10.8.1<br>
- * Effective date: 2022-06-26 15:48<br>
- * Version: 202004.1-beta<br>
- * Status: DRAFT
+ * Identifier: 2.16.756.5.30.1.127.3.10.8.1<br> Effective date: 2020-04-23 12:36<br> Version: 202004.0-stable<br>
+ * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-09-29")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-12-06")
 public enum HcpProfession implements ValueSetEnumInterface {
 
     /**
-     * EN: Activation therapy specialist.<br>
-     * DE: Fachperson für Aktivierung.<br>
-     * FR: spécialiste de l'activation.<br>
-     * IT: specialista in attivazione.<br>
+     * EN: Activation Therapy Specialist.<br> DE: Aktivierungsfachfrau/Aktivierungsfachmann.<br> FR: Spécialiste en
+     * activation.<br> IT: Specialista in attivazione.<br>
      */
     ACTIVATION_THERAPY_SPECIALIST("00100",
                                   "2.16.756.5.30.1.127.3.10.9",
                                   "Aktivierungsfachfrau/Aktivierungsfachmann",
-                                  "Activation therapy specialist",
-                                  "Fachperson für Aktivierung",
-                                  "spécialiste de l'activation",
-                                  "specialista in attivazione"),
+                                  "Activation Therapy Specialist",
+                                  "Aktivierungsfachfrau/Aktivierungsfachmann",
+                                  "Spécialiste en activation",
+                                  "Specialista in attivazione"),
     /**
-     * EN: Biomedical analyst.<br>
-     * DE: Biomedizinischer Analytiker/Biomedizinische Analytikerin.<br>
-     * FR: technicien(ne) en analyses biomédicales.<br>
-     * IT: tecnico(-a) in analisi biomediche.<br>
+     * EN: Biomedical analyst.<br> DE: Biomedizinische Analytikerin/Biomedizinischer Analytiker.<br> FR: Analyste
+     * biomédical.<br> IT: Tecnica in analisi biomediche/Tecnico in analisi biomediche.<br>
      */
     BIOMEDICAL_ANALYST("00300",
                        "2.16.756.5.30.1.127.3.10.9",
                        "Biomedizinische Analytikerin/Biomedizinischer Analytiker",
                        "Biomedical analyst",
-                       "Biomedizinischer Analytiker/Biomedizinische Analytikerin",
-                       "technicien(ne) en analyses biomédicales",
-                       "tecnico(-a) in analisi biomediche"),
+                       "Biomedizinische Analytikerin/Biomedizinischer Analytiker",
+                       "Analyste biomédical",
+                       "Tecnica in analisi biomediche/Tecnico in analisi biomediche"),
     /**
-     * EN: Chiropractor.<br>
-     * DE: Chiropraktiker/Chiropraktikerin.<br>
-     * FR: chiropracteur.<br>
-     * IT: chiropratico.<br>
+     * EN: Chiropractor.<br> DE: Chiropraktikerin/Chiropraktiker.<br> FR: Chiropracteur.<br> IT: Chiropratico.<br>
      */
     CHIROPRACTOR("3842006",
                  "2.16.840.1.113883.6.96",
                  "Chiropractor (occupation)",
                  "Chiropractor",
-                 "Chiropraktiker/Chiropraktikerin",
-                 "chiropracteur",
-                 "chiropratico"),
+                 "Chiropraktikerin/Chiropraktiker",
+                 "Chiropracteur",
+                 "Chiropratico"),
     /**
-     * EN: Dental hygienist.<br>
-     * DE: Dentalhygieniker/Dentalhygienikerin.<br>
-     * FR: hygiéniste dentaire.<br>
-     * IT: igienista dentale.<br>
+     * EN: Dental hygienist.<br> DE: Dentalhygienikerin/Dentalhygieniker.<br> FR: Hygiéniste dentaire.<br> IT: Igienista
+     * dentale.<br>
      */
     DENTAL_HYGIENIST("00400",
                      "2.16.756.5.30.1.127.3.10.9",
                      "Dental hygienist",
                      "Dental hygienist",
-                     "Dentalhygieniker/Dentalhygienikerin",
-                     "hygiéniste dentaire",
-                     "igienista dentale"),
+                     "Dentalhygienikerin/Dentalhygieniker",
+                     "Hygiéniste dentaire",
+                     "Igienista dentale"),
     /**
-     * EN: Dentist.<br>
-     * DE: Zahnarzt/Zahnärztin.<br>
-     * FR: dentiste.<br>
-     * IT: dentista.<br>
+     * EN: Dentist.<br> DE: Zahnärztin/Zahnarzt.<br> FR: Dentiste.<br> IT: Dentista.<br>
      */
     DENTIST("106289002",
             "2.16.840.1.113883.6.96",
             "Dentist (occupation)",
             "Dentist",
-            "Zahnarzt/Zahnärztin",
-            "dentiste",
-            "dentista"),
+            "Zahnärztin/Zahnarzt",
+            "Dentiste",
+            "Dentista"),
     /**
-     * EN: Dietitian.<br>
-     * DE: Ernährungsberater/Ernährungsberaterin.<br>
-     * FR: diététicien.<br>
-     * IT: dietista.<br>
+     * EN: Dietitian.<br> DE: Ernährungsberaterin/Ernährungsberater.<br> FR: Diététicien.<br> IT: Dietista.<br>
      */
     DIETITIAN("159033005",
               "2.16.840.1.113883.6.96",
               "Dietitian (occupation)",
               "Dietitian",
-              "Ernährungsberater/Ernährungsberaterin",
-              "diététicien",
-              "dietista"),
+              "Ernährungsberaterin/Ernährungsberater",
+              "Diététicien",
+              "Dietista"),
     /**
-     * EN: Druggist.<br>
-     * DE: Drogist/Drogistin.<br>
-     * FR: droguiste.<br>
-     * IT: droghiere(-a).<br>
+     * EN: Druggist.<br> DE: Drogist/Drogistin.<br> FR: Droguiste.<br> IT: Droghiere/a.<br>
      */
     DRUGGIST("00500",
              "2.16.756.5.30.1.127.3.10.9",
              "Drogist/Drogistin",
              "Druggist",
              "Drogist/Drogistin",
-             "droguiste",
-             "droghiere(-a)"),
+             "Droguiste",
+             "Droghiere/a"),
     /**
-     * EN: Healthcare assistant.<br>
-     * DE: Fachperson Gesundheit.<br>
-     * FR: assistant(e) en soins et santé communautaire.<br>
-     * IT: operatore(-trice) sociosanitario.<br>
+     * EN: Healthcare assistant.<br> DE: Fachfrau Gesundheit/Fachmann Gesundheit.<br> FR: Assistant/e en soins et santé
+     * communautaire.<br> IT: Operatrice sociosanitaria/Operatore sociosanitario.<br>
      */
     HEALTHCARE_ASSISTANT("00700",
                          "2.16.756.5.30.1.127.3.10.9",
                          "Fachfrau Gesundheit/Fachmann Gesundheit",
                          "Healthcare assistant",
-                         "Fachperson Gesundheit",
-                         "assistant(e) en soins et santé communautaire",
-                         "operatore(-trice) sociosanitario"),
+                         "Fachfrau Gesundheit/Fachmann Gesundheit",
+                         "Assistant/e en soins et santé communautaire",
+                         "Operatrice sociosanitaria/Operatore sociosanitario"),
     /**
-     * EN: Medical masseur.<br>
-     * DE: Medizinischer Masseur/Medizinische Masseurin.<br>
-     * FR: masseur(-euse) médical.<br>
-     * IT: massaggiatore(-trice) medicale.<br>
+     * EN: Medical Masseur.<br> DE: Medizinische Masseurin/Medizinischer Masseur.<br> FR: Masseur médical/masseuse
+     * médicale.<br> IT: Massaggiatrice medicale/Massaggiatore medicale.<br>
      */
     MEDICAL_MASSEUR("00900",
                     "2.16.756.5.30.1.127.3.10.9",
                     "Medizinische Masseurin/Medizinischer Masseur",
-                    "Medical masseur",
-                    "Medizinischer Masseur/Medizinische Masseurin",
-                    "masseur(-euse) médical",
-                    "massaggiatore(-trice) medicale"),
+                    "Medical Masseur",
+                    "Medizinische Masseurin/Medizinischer Masseur",
+                    "Masseur médical/masseuse médicale",
+                    "Massaggiatrice medicale/Massaggiatore medicale"),
     /**
-     * EN: Medical-technical radiology assistant.<br>
-     * DE: Fachperson für medizinisch-technische Radiologie.<br>
-     * FR: technicien(ne) en radiologie médicale.<br>
-     * IT: tecnico(-a) di radiologia medica.<br>
+     * EN: Medical-technical Radiology Assistant.<br> DE: Fachfrau für medizinisch-technische Radiologie/Fachmann für
+     * medizinisch-technische Radiologie.<br> FR: Technicien/ne en radiologie médicale.<br> IT: Tecnica di radiologia
+     * medica/Tecnico di radiologia medica.<br>
      */
     MEDICAL_TECHNICAL_RADIOLOGY_ASSISTANT("00600",
                                           "2.16.756.5.30.1.127.3.10.9",
                                           "Fachfrau für medizinisch-technische Radiologie/Fachmann für medizinisch-technische Radiologie",
-                                          "Medical-technical radiology assistant",
-                                          "Fachperson für medizinisch-technische Radiologie",
-                                          "technicien(ne) en radiologie médicale",
-                                          "tecnico(-a) di radiologia medica"),
+                                          "Medical-technical Radiology Assistant",
+                                          "Fachfrau für medizinisch-technische Radiologie/Fachmann für medizinisch-technische Radiologie",
+                                          "Technicien/ne en radiologie médicale",
+                                          "Tecnica di radiologia medica/Tecnico di radiologia medica"),
     /**
-     * EN: Naturopathic practitioner.<br>
-     * DE: Naturheilpraktiker/Naturheilpraktikerin.<br>
-     * FR: naturopathe.<br>
-     * IT: naturopata.<br>
+     * EN: Naturopathic Practitioner.<br> DE: Naturheilpraktikerin/Naturheilpraktiker.<br> FR: Naturopathe.<br> IT:
+     * Naturopata.<br>
      */
     NATUROPATHIC_PRACTITIONER("01000",
                               "2.16.756.5.30.1.127.3.10.9",
                               "Naturheilpraktikerin/Naturheilpraktiker",
-                              "Naturopathic practitioner",
-                              "Naturheilpraktiker/Naturheilpraktikerin",
-                              "naturopathe",
-                              "naturopata"),
+                              "Naturopathic Practitioner",
+                              "Naturheilpraktikerin/Naturheilpraktiker",
+                              "Naturopathe",
+                              "Naturopata"),
     /**
-     * EN: Occupational therapist.<br>
-     * DE: Ergotherapeut/Ergotherapeutin.<br>
-     * FR: ergothérapeute.<br>
-     * IT: ergoterapista.<br>
+     * EN: Occupational therapist.<br> DE: Ergotherapeutin/Ergotherapeut.<br> FR: Ergothérapeute.<br> IT:
+     * Ergoterapista.<br>
      */
     OCCUPATIONAL_THERAPIST("80546007",
                            "2.16.840.1.113883.6.96",
                            "Occupational therapist (occupation)",
                            "Occupational therapist",
-                           "Ergotherapeut/Ergotherapeutin",
-                           "ergothérapeute",
-                           "ergoterapista"),
+                           "Ergotherapeutin/Ergotherapeut",
+                           "Ergothérapeute",
+                           "Ergoterapista"),
     /**
-     * EN: Operating room technician.<br>
-     * DE: Fachperson Operationstechnik.<br>
-     * FR: technicien(ne) en salle d'opération.<br>
-     * IT: tecnica di sala operatoria/tecnico di sala operatoria.<br>
+     * EN: Operating Room Technician.<br> DE: Fachfrau Operationstechnik/Fachmann Operationstechnik.<br> FR:
+     * Technicien/ne en salle d’opération.<br> IT: Tecnica di sala operatoria/Tecnico di sala operatoria.<br>
      */
     OPERATING_ROOM_TECHNICIAN("00800",
                               "2.16.756.5.30.1.127.3.10.9",
                               "Fachfrau Operationstechnik/Fachmann Operationstechnik",
-                              "Operating room technician",
-                              "Fachperson Operationstechnik",
-                              "technicien(ne) en salle d'opération",
-                              "tecnica di sala operatoria/tecnico di sala operatoria"),
+                              "Operating Room Technician",
+                              "Fachfrau Operationstechnik/Fachmann Operationstechnik",
+                              "Technicien/ne en salle d’opération",
+                              "Tecnica di sala operatoria/Tecnico di sala operatoria"),
     /**
-     * EN: Optician.<br>
-     * DE: Optiker/Optikerin.<br>
-     * FR: opticien(ne).<br>
-     * IT: ottico.<br>
+     * EN: Optician.<br> DE: Optikerin/Optiker.<br> FR: Opticien.<br> IT: Ottico.<br>
      */
     OPTICIAN("00200",
              "2.16.756.5.30.1.127.3.10.9",
              "Optician",
              "Optician",
-             "Optiker/Optikerin",
-             "opticien(ne)",
-             "ottico"),
+             "Optikerin/Optiker",
+             "Opticien",
+             "Ottico"),
     /**
-     * EN: Optometrist.<br>
-     * DE: Optometrist/Optometristin.<br>
-     * FR: optométriste.<br>
-     * IT: optometrista.<br>
+     * EN: Optometrist.<br> DE: Optometristin/Optometrist.<br> FR: Optométriste.<br> IT: Optometrista.<br>
      */
     OPTOMETRIST("01100",
                 "2.16.756.5.30.1.127.3.10.9",
                 "Optometrist",
                 "Optometrist",
-                "Optometrist/Optometristin",
-                "optométriste",
-                "optometrista"),
+                "Optometristin/Optometrist",
+                "Optométriste",
+                "Optometrista"),
     /**
-     * EN: orthoptist.<br>
-     * DE: Orthoptist/Orthoptistin.<br>
-     * FR: orthoptiste.<br>
-     * IT: ortottista.<br>
+     * EN: Orthoptist.<br> DE: Orthoptistin/ Orthoptist.<br> FR: Orthoptiste.<br> IT: Ortottista.<br>
      */
     ORTHOPTIST("01200",
                "2.16.756.5.30.1.127.3.10.9",
                "Orthoptist",
-               "orthoptist",
-               "Orthoptist/Orthoptistin",
-               "orthoptiste",
-               "ortottista"),
+               "Orthoptist",
+               "Orthoptistin/ Orthoptist",
+               "Orthoptiste",
+               "Ortottista"),
     /**
-     * EN: Osteopath.<br>
-     * DE: Osteopath/Osteopathin.<br>
-     * FR: ostéopathe.<br>
-     * IT: osteopata.<br>
+     * EN: Osteopath.<br> DE: Osteopathin/Osteopath.<br> FR: Ostéopathe.<br> IT: Osteopata.<br>
      */
     OSTEOPATH("01300",
               "2.16.756.5.30.1.127.3.10.9",
               "Osteopath",
               "Osteopath",
-              "Osteopath/Osteopathin",
-              "ostéopathe",
-              "osteopata"),
+              "Osteopathin/Osteopath",
+              "Ostéopathe",
+              "Osteopata"),
     /**
-     * EN: Other.<br>
-     * DE: Andere.<br>
-     * FR: autre.<br>
-     * IT: altro.<br>
+     * EN: Other.<br> DE: Andere.<br> FR: Autre.<br> IT: Altro.<br>
      */
     OTHER("00000",
           "2.16.756.5.30.1.127.3.10.9",
           "Other",
           "Other",
           "Andere",
-          "autre",
-          "altro"),
+          "Autre",
+          "Altro"),
     /**
-     * EN: Paramedic.<br>
-     * DE: Rettungssanitäter/Rettungssanitäterin.<br>
-     * FR: ambulancier(-ère).<br>
-     * IT: soccorritore(-trice).<br>
+     * EN: Paramedic.<br> DE: Rettungssanitäterin/Rettungssanitäter.<br> FR: Ambulancier/Ambulancière.<br> IT:
+     * Soccorritrice/Soccorritore.<br>
      */
     PARAMEDIC("01500",
               "2.16.756.5.30.1.127.3.10.9",
               "Rettungssanitäterin/Rettungssanitäter",
               "Paramedic",
-              "Rettungssanitäter/Rettungssanitäterin",
-              "ambulancier(-ère)",
-              "soccorritore(-trice)"),
+              "Rettungssanitäterin/Rettungssanitäter",
+              "Ambulancier/Ambulancière",
+              "Soccorritrice/Soccorritore"),
     /**
-     * EN: Pharmacist.<br>
-     * DE: Apotheker/Apothekerin.<br>
-     * FR: pharmacien.<br>
-     * IT: farmacista.<br>
+     * EN: Pharmacist.<br> DE: Apothekerin/Apotheker.<br> FR: Pharmacien.<br> IT: Farmacista.<br>
      */
     PHARMACIST("46255001",
                "2.16.840.1.113883.6.96",
                "Pharmacist (occupation)",
                "Pharmacist",
-               "Apotheker/Apothekerin",
-               "pharmacien",
-               "farmacista"),
+               "Apothekerin/Apotheker",
+               "Pharmacien",
+               "Farmacista"),
     /**
-     * EN: Physician.<br>
-     * DE: Arzt/Ärztin.<br>
-     * FR: médecin.<br>
-     * IT: medico.<br>
+     * EN: Physician.<br> DE: Ärztin/Arzt.<br> FR: Médecin.<br> IT: Medico.<br>
      */
     PHYSICIAN("309343006",
               "2.16.840.1.113883.6.96",
               "Physician (occupation)",
               "Physician",
-              "Arzt/Ärztin",
-              "médecin",
-              "medico"),
+              "Ärztin/Arzt",
+              "Médecin",
+              "Medico"),
     /**
-     * EN: Physiotherapist.<br>
-     * DE: Physiotherapeut/Physiotherapeutin.<br>
-     * FR: physiothérapeute.<br>
-     * IT: fisioterapista.<br>
+     * EN: Physiotherapist.<br> DE: Physiotherapeutin/Physiotherapeut.<br> FR: Physiothérapeute.<br> IT:
+     * Fisioterapista.<br>
      */
     PHYSIOTHERAPIST("36682004",
                     "2.16.840.1.113883.6.96",
                     "Physiotherapist (occupation)",
                     "Physiotherapist",
-                    "Physiotherapeut/Physiotherapeutin",
-                    "physiothérapeute",
-                    "fisioterapista"),
+                    "Physiotherapeutin/Physiotherapeut",
+                    "Physiothérapeute",
+                    "Fisioterapista"),
     /**
-     * EN: Podiatrist.<br>
-     * DE: Podologe/Podologin.<br>
-     * FR: podologue.<br>
-     * IT: podologa/podologo.<br>
+     * EN: Podiatrist.<br> DE: Podologin/Podologe.<br> FR: Podologue.<br> IT: Podologa/Podologo.<br>
      */
     PODIATRIST("01400",
                "2.16.756.5.30.1.127.3.10.9",
                "Podologin/Podologe",
                "Podiatrist",
-               "Podologe/Podologin",
-               "podologue",
-               "podologa/podologo"),
+               "Podologin/Podologe",
+               "Podologue",
+               "Podologa/Podologo"),
     /**
-     * EN: Professional nurse.<br>
-     * DE: Pflegefachmann/Pflegefachfrau.<br>
-     * FR: infirmière professionnelle.<br>
-     * IT: infermiere diplomato.<br>
+     * EN: Professional nurse.<br> DE: Pflegefachfrau/Pflegefachmann.<br> FR: Infirmière professionnelle.<br> IT:
+     * Infermiere diplomato.<br>
      */
     PROFESSIONAL_NURSE("106292003",
                        "2.16.840.1.113883.6.96",
                        "Professional nurse (occupation)",
                        "Professional nurse",
-                       "Pflegefachmann/Pflegefachfrau",
-                       "infirmière professionnelle",
-                       "infermiere diplomato"),
+                       "Pflegefachfrau/Pflegefachmann",
+                       "Infirmière professionnelle",
+                       "Infermiere diplomato"),
     /**
-     * EN: Psychologist.<br>
-     * DE: Psychologe/Psychologin.<br>
-     * FR: psychologue.<br>
-     * IT: psicologo.<br>
+     * EN: Psychologist.<br> DE: Psychologin/Psychologe.<br> FR: Psychologue.<br> IT: Psicologo.<br>
      */
     PSYCHOLOGIST("59944000",
                  "2.16.840.1.113883.6.96",
                  "Psychologist (occupation)",
                  "Psychologist",
-                 "Psychologe/Psychologin",
-                 "psychologue",
-                 "psicologo"),
+                 "Psychologin/Psychologe",
+                 "Psychologue",
+                 "Psicologo"),
     /**
-     * EN: Registered midwife.<br>
-     * DE: Registrierte Hebamme.<br>
-     * FR: sage-femme agréée.<br>
-     * IT: levatrice.<br>
+     * EN: Registered midwife.<br> DE: Registrierte Hebamme.<br> FR: Sage-femme agréée.<br> IT: Levatrice.<br>
      */
     REGISTERED_MIDWIFE("309453006",
                        "2.16.840.1.113883.6.96",
                        "Registered midwife (occupation)",
                        "Registered midwife",
                        "Registrierte Hebamme",
-                       "sage-femme agréée",
-                       "levatrice"),
+                       "Sage-femme agréée",
+                       "Levatrice"),
     /**
-     * EN: Speech/language therapist.<br>
-     * DE: Sprachtherapeut/Sprachtherapeutin.<br>
-     * FR: orthophoniste.<br>
-     * IT: logopedista.<br>
+     * EN: Speech/language therapist.<br> DE: Sprachtherapeutin/Sprachtherapeut.<br> FR: Orthophoniste.<br> IT:
+     * Logopedista.<br>
      */
     SPEECH_LANGUAGE_THERAPIST("159026005",
                               "2.16.840.1.113883.6.96",
                               "Speech/language therapist (occupation)",
                               "Speech/language therapist",
-                              "Sprachtherapeut/Sprachtherapeutin",
-                              "orthophoniste",
-                              "logopedista");
+                              "Sprachtherapeutin/Sprachtherapeut",
+                              "Orthophoniste",
+                              "Logopedista");
 
     /**
-     * EN: Code for Activation therapy specialist.<br>
-     * DE: Code für Fachperson für Aktivierung.<br>
-     * FR: Code de spécialiste de l'activation.<br>
-     * IT: Code per specialista in attivazione.<br>
+     * EN: Code for Activation Therapy Specialist.<br> DE: Code für Aktivierungsfachfrau/Aktivierungsfachmann.<br> FR:
+     * Code de Spécialiste en activation.<br> IT: Code per Specialista in attivazione.<br>
      */
     public static final String ACTIVATION_THERAPY_SPECIALIST_CODE = "00100";
 
     /**
-     * EN: Code for Biomedical analyst.<br>
-     * DE: Code für Biomedizinischer Analytiker/Biomedizinische Analytikerin.<br>
-     * FR: Code de technicien(ne) en analyses biomédicales.<br>
-     * IT: Code per tecnico(-a) in analisi biomediche.<br>
+     * EN: Code for Biomedical analyst.<br> DE: Code für Biomedizinische Analytikerin/Biomedizinischer Analytiker.<br>
+     * FR: Code de Analyste biomédical.<br> IT: Code per Tecnica in analisi biomediche/Tecnico in analisi
+     * biomediche.<br>
      */
     public static final String BIOMEDICAL_ANALYST_CODE = "00300";
 
     /**
-     * EN: Code for Chiropractor.<br>
-     * DE: Code für Chiropraktiker/Chiropraktikerin.<br>
-     * FR: Code de chiropracteur.<br>
-     * IT: Code per chiropratico.<br>
+     * EN: Code for Chiropractor.<br> DE: Code für Chiropraktikerin/Chiropraktiker.<br> FR: Code de Chiropracteur.<br>
+     * IT: Code per Chiropratico.<br>
      */
     public static final String CHIROPRACTOR_CODE = "3842006";
 
     /**
-     * EN: Code for Dental hygienist.<br>
-     * DE: Code für Dentalhygieniker/Dentalhygienikerin.<br>
-     * FR: Code de hygiéniste dentaire.<br>
-     * IT: Code per igienista dentale.<br>
+     * EN: Code for Dental hygienist.<br> DE: Code für Dentalhygienikerin/Dentalhygieniker.<br> FR: Code de Hygiéniste
+     * dentaire.<br> IT: Code per Igienista dentale.<br>
      */
     public static final String DENTAL_HYGIENIST_CODE = "00400";
 
     /**
-     * EN: Code for Dentist.<br>
-     * DE: Code für Zahnarzt/Zahnärztin.<br>
-     * FR: Code de dentiste.<br>
-     * IT: Code per dentista.<br>
+     * EN: Code for Dentist.<br> DE: Code für Zahnärztin/Zahnarzt.<br> FR: Code de Dentiste.<br> IT: Code per
+     * Dentista.<br>
      */
     public static final String DENTIST_CODE = "106289002";
 
     /**
-     * EN: Code for Dietitian.<br>
-     * DE: Code für Ernährungsberater/Ernährungsberaterin.<br>
-     * FR: Code de diététicien.<br>
-     * IT: Code per dietista.<br>
+     * EN: Code for Dietitian.<br> DE: Code für Ernährungsberaterin/Ernährungsberater.<br> FR: Code de Diététicien.<br>
+     * IT: Code per Dietista.<br>
      */
     public static final String DIETITIAN_CODE = "159033005";
 
     /**
-     * EN: Code for Druggist.<br>
-     * DE: Code für Drogist/Drogistin.<br>
-     * FR: Code de droguiste.<br>
-     * IT: Code per droghiere(-a).<br>
+     * EN: Code for Druggist.<br> DE: Code für Drogist/Drogistin.<br> FR: Code de Droguiste.<br> IT: Code per
+     * Droghiere/a.<br>
      */
     public static final String DRUGGIST_CODE = "00500";
 
     /**
-     * EN: Code for Healthcare assistant.<br>
-     * DE: Code für Fachperson Gesundheit.<br>
-     * FR: Code de assistant(e) en soins et santé communautaire.<br>
-     * IT: Code per operatore(-trice) sociosanitario.<br>
+     * EN: Code for Healthcare assistant.<br> DE: Code für Fachfrau Gesundheit/Fachmann Gesundheit.<br> FR: Code de
+     * Assistant/e en soins et santé communautaire.<br> IT: Code per Operatrice sociosanitaria/Operatore
+     * sociosanitario.<br>
      */
     public static final String HEALTHCARE_ASSISTANT_CODE = "00700";
 
     /**
-     * EN: Code for Medical masseur.<br>
-     * DE: Code für Medizinischer Masseur/Medizinische Masseurin.<br>
-     * FR: Code de masseur(-euse) médical.<br>
-     * IT: Code per massaggiatore(-trice) medicale.<br>
+     * EN: Code for Medical Masseur.<br> DE: Code für Medizinische Masseurin/Medizinischer Masseur.<br> FR: Code de
+     * Masseur médical/masseuse médicale.<br> IT: Code per Massaggiatrice medicale/Massaggiatore medicale.<br>
      */
     public static final String MEDICAL_MASSEUR_CODE = "00900";
 
     /**
-     * EN: Code for Medical-technical radiology assistant.<br>
-     * DE: Code für Fachperson für medizinisch-technische Radiologie.<br>
-     * FR: Code de technicien(ne) en radiologie médicale.<br>
-     * IT: Code per tecnico(-a) di radiologia medica.<br>
+     * EN: Code for Medical-technical Radiology Assistant.<br> DE: Code für Fachfrau für medizinisch-technische
+     * Radiologie/Fachmann für medizinisch-technische Radiologie.<br> FR: Code de Technicien/ne en radiologie
+     * médicale.<br> IT: Code per Tecnica di radiologia medica/Tecnico di radiologia medica.<br>
      */
     public static final String MEDICAL_TECHNICAL_RADIOLOGY_ASSISTANT_CODE = "00600";
 
     /**
-     * EN: Code for Naturopathic practitioner.<br>
-     * DE: Code für Naturheilpraktiker/Naturheilpraktikerin.<br>
-     * FR: Code de naturopathe.<br>
-     * IT: Code per naturopata.<br>
+     * EN: Code for Naturopathic Practitioner.<br> DE: Code für Naturheilpraktikerin/Naturheilpraktiker.<br> FR: Code de
+     * Naturopathe.<br> IT: Code per Naturopata.<br>
      */
     public static final String NATUROPATHIC_PRACTITIONER_CODE = "01000";
 
     /**
-     * EN: Code for Occupational therapist.<br>
-     * DE: Code für Ergotherapeut/Ergotherapeutin.<br>
-     * FR: Code de ergothérapeute.<br>
-     * IT: Code per ergoterapista.<br>
+     * EN: Code for Occupational therapist.<br> DE: Code für Ergotherapeutin/Ergotherapeut.<br> FR: Code de
+     * Ergothérapeute.<br> IT: Code per Ergoterapista.<br>
      */
     public static final String OCCUPATIONAL_THERAPIST_CODE = "80546007";
 
     /**
-     * EN: Code for Operating room technician.<br>
-     * DE: Code für Fachperson Operationstechnik.<br>
-     * FR: Code de technicien(ne) en salle d'opération.<br>
-     * IT: Code per tecnica di sala operatoria/tecnico di sala operatoria.<br>
+     * EN: Code for Operating Room Technician.<br> DE: Code für Fachfrau Operationstechnik/Fachmann
+     * Operationstechnik.<br> FR: Code de Technicien/ne en salle d’opération.<br> IT: Code per Tecnica di sala
+     * operatoria/Tecnico di sala operatoria.<br>
      */
     public static final String OPERATING_ROOM_TECHNICIAN_CODE = "00800";
 
     /**
-     * EN: Code for Optician.<br>
-     * DE: Code für Optiker/Optikerin.<br>
-     * FR: Code de opticien(ne).<br>
-     * IT: Code per ottico.<br>
+     * EN: Code for Optician.<br> DE: Code für Optikerin/Optiker.<br> FR: Code de Opticien.<br> IT: Code per
+     * Ottico.<br>
      */
     public static final String OPTICIAN_CODE = "00200";
 
     /**
-     * EN: Code for Optometrist.<br>
-     * DE: Code für Optometrist/Optometristin.<br>
-     * FR: Code de optométriste.<br>
-     * IT: Code per optometrista.<br>
+     * EN: Code for Optometrist.<br> DE: Code für Optometristin/Optometrist.<br> FR: Code de Optométriste.<br> IT: Code
+     * per Optometrista.<br>
      */
     public static final String OPTOMETRIST_CODE = "01100";
 
     /**
-     * EN: Code for orthoptist.<br>
-     * DE: Code für Orthoptist/Orthoptistin.<br>
-     * FR: Code de orthoptiste.<br>
-     * IT: Code per ortottista.<br>
+     * EN: Code for Orthoptist.<br> DE: Code für Orthoptistin/ Orthoptist.<br> FR: Code de Orthoptiste.<br> IT: Code per
+     * Ortottista.<br>
      */
     public static final String ORTHOPTIST_CODE = "01200";
 
     /**
-     * EN: Code for Osteopath.<br>
-     * DE: Code für Osteopath/Osteopathin.<br>
-     * FR: Code de ostéopathe.<br>
-     * IT: Code per osteopata.<br>
+     * EN: Code for Osteopath.<br> DE: Code für Osteopathin/Osteopath.<br> FR: Code de Ostéopathe.<br> IT: Code per
+     * Osteopata.<br>
      */
     public static final String OSTEOPATH_CODE = "01300";
 
     /**
-     * EN: Code for Other.<br>
-     * DE: Code für Andere.<br>
-     * FR: Code de autre.<br>
-     * IT: Code per altro.<br>
+     * EN: Code for Other.<br> DE: Code für Andere.<br> FR: Code de Autre.<br> IT: Code per Altro.<br>
      */
     public static final String OTHER_CODE = "00000";
 
     /**
-     * EN: Code for Paramedic.<br>
-     * DE: Code für Rettungssanitäter/Rettungssanitäterin.<br>
-     * FR: Code de ambulancier(-ère).<br>
-     * IT: Code per soccorritore(-trice).<br>
+     * EN: Code for Paramedic.<br> DE: Code für Rettungssanitäterin/Rettungssanitäter.<br> FR: Code de
+     * Ambulancier/Ambulancière.<br> IT: Code per Soccorritrice/Soccorritore.<br>
      */
     public static final String PARAMEDIC_CODE = "01500";
 
     /**
-     * EN: Code for Pharmacist.<br>
-     * DE: Code für Apotheker/Apothekerin.<br>
-     * FR: Code de pharmacien.<br>
-     * IT: Code per farmacista.<br>
+     * EN: Code for Pharmacist.<br> DE: Code für Apothekerin/Apotheker.<br> FR: Code de Pharmacien.<br> IT: Code per
+     * Farmacista.<br>
      */
     public static final String PHARMACIST_CODE = "46255001";
 
     /**
-     * EN: Code for Physician.<br>
-     * DE: Code für Arzt/Ärztin.<br>
-     * FR: Code de médecin.<br>
-     * IT: Code per medico.<br>
+     * EN: Code for Physician.<br> DE: Code für Ärztin/Arzt.<br> FR: Code de Médecin.<br> IT: Code per Medico.<br>
      */
     public static final String PHYSICIAN_CODE = "309343006";
 
     /**
-     * EN: Code for Physiotherapist.<br>
-     * DE: Code für Physiotherapeut/Physiotherapeutin.<br>
-     * FR: Code de physiothérapeute.<br>
-     * IT: Code per fisioterapista.<br>
+     * EN: Code for Physiotherapist.<br> DE: Code für Physiotherapeutin/Physiotherapeut.<br> FR: Code de
+     * Physiothérapeute.<br> IT: Code per Fisioterapista.<br>
      */
     public static final String PHYSIOTHERAPIST_CODE = "36682004";
 
     /**
-     * EN: Code for Podiatrist.<br>
-     * DE: Code für Podologe/Podologin.<br>
-     * FR: Code de podologue.<br>
-     * IT: Code per podologa/podologo.<br>
+     * EN: Code for Podiatrist.<br> DE: Code für Podologin/Podologe.<br> FR: Code de Podologue.<br> IT: Code per
+     * Podologa/Podologo.<br>
      */
     public static final String PODIATRIST_CODE = "01400";
 
     /**
-     * EN: Code for Professional nurse.<br>
-     * DE: Code für Pflegefachmann/Pflegefachfrau.<br>
-     * FR: Code de infirmière professionnelle.<br>
-     * IT: Code per infermiere diplomato.<br>
+     * EN: Code for Professional nurse.<br> DE: Code für Pflegefachfrau/Pflegefachmann.<br> FR: Code de Infirmière
+     * professionnelle.<br> IT: Code per Infermiere diplomato.<br>
      */
     public static final String PROFESSIONAL_NURSE_CODE = "106292003";
 
     /**
-     * EN: Code for Psychologist.<br>
-     * DE: Code für Psychologe/Psychologin.<br>
-     * FR: Code de psychologue.<br>
-     * IT: Code per psicologo.<br>
+     * EN: Code for Psychologist.<br> DE: Code für Psychologin/Psychologe.<br> FR: Code de Psychologue.<br> IT: Code per
+     * Psicologo.<br>
      */
     public static final String PSYCHOLOGIST_CODE = "59944000";
 
     /**
-     * EN: Code for Registered midwife.<br>
-     * DE: Code für Registrierte Hebamme.<br>
-     * FR: Code de sage-femme agréée.<br>
-     * IT: Code per levatrice.<br>
+     * EN: Code for Registered midwife.<br> DE: Code für Registrierte Hebamme.<br> FR: Code de Sage-femme agréée.<br>
+     * IT: Code per Levatrice.<br>
      */
     public static final String REGISTERED_MIDWIFE_CODE = "309453006";
 
     /**
-     * EN: Code for Speech/language therapist.<br>
-     * DE: Code für Sprachtherapeut/Sprachtherapeutin.<br>
-     * FR: Code de orthophoniste.<br>
-     * IT: Code per logopedista.<br>
+     * EN: Code for Speech/language therapist.<br> DE: Code für Sprachtherapeutin/Sprachtherapeut.<br> FR: Code de
+     * Orthophoniste.<br> IT: Code per Logopedista.<br>
      */
     public static final String SPEECH_LANGUAGE_THERAPIST_CODE = "159026005";
 
@@ -692,7 +569,13 @@ public enum HcpProfession implements ValueSetEnumInterface {
      * @param displayNameFr The display name in French.
      * @param displayNameIt The display name in Italian.
      */
-    HcpProfession(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
+    HcpProfession(@NonNull final String code,
+                  @NonNull final String codeSystem,
+                  @NonNull final String displayName,
+                  @NonNull final String displayNameEn,
+                  @NonNull final String displayNameDe,
+                  @NonNull final String displayNameFr,
+                  @NonNull final String displayNameIt) {
         this.code = Objects.requireNonNull(code);
         this.codeSystem = Objects.requireNonNull(codeSystem);
         this.displayNames = new String[5];
@@ -752,17 +635,12 @@ public enum HcpProfession implements ValueSetEnumInterface {
         if (languageCode == null) {
             return this.displayNames[0];
         }
-        return switch(languageCode) {
-            case ENGLISH ->
-                this.displayNames[1];
-            case GERMAN ->
-                this.displayNames[2];
-            case FRENCH ->
-                this.displayNames[3];
-            case ITALIAN ->
-                this.displayNames[4];
-            default ->
-                "TOTRANSLATE";
+        return switch (languageCode) {
+            case ENGLISH -> this.displayNames[1];
+            case GERMAN -> this.displayNames[2];
+            case FRENCH -> this.displayNames[3];
+            case ITALIAN -> this.displayNames[4];
+            default -> "TOTRANSLATE";
         };
     }
 

@@ -27,11 +27,11 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * IT: No designation found.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.127.3.10.1.8<br>
- * Effective date: 2022-06-26 13:44<br>
- * Version: 202304.0-beta<br>
- * Status: DRAFT
+ * Effective date: 2022-11-29 13:34<br>
+ * Version: 202212.0-stable<br>
+ * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-09-29")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-12-06")
 public enum EventCodeList implements ValueSetEnumInterface {
 
     /**

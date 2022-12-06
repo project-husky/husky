@@ -27,11 +27,11 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * IT: No designation found.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.127.3.10.15.1<br>
- * Effective date: 2022-06-26 15:23<br>
- * Version: 202304.0-beta<br>
- * Status: DRAFT
+ * Effective date: 2019-12-11 17:01<br>
+ * Version: 201907.2-stable<br>
+ * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-09-29")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-12-06")
 public enum Role implements ValueSetEnumInterface {
 
     /**
@@ -49,7 +49,7 @@ public enum Role implements ValueSetEnumInterface {
               "Assistente"),
     /**
      * EN: Document Administrator.<br>
-     * DE: Dokumenten-Administrator.<br>
+     * DE: Dokumentenadministrator.<br>
      * FR: Administrateur des documents.<br>
      * IT: Amministratore documenti.<br>
      */
@@ -57,7 +57,7 @@ public enum Role implements ValueSetEnumInterface {
                            "2.16.756.5.30.1.127.3.10.6",
                            "Document Administrator",
                            "Document Administrator",
-                           "Dokumenten-Administrator",
+                           "Dokumentenadministrator",
                            "Administrateur des documents",
                            "Amministratore documenti"),
     /**
@@ -136,7 +136,7 @@ public enum Role implements ValueSetEnumInterface {
 
     /**
      * EN: Code for Document Administrator.<br>
-     * DE: Code für Dokumenten-Administrator.<br>
+     * DE: Code für Dokumentenadministrator.<br>
      * FR: Code de Administrateur des documents.<br>
      * IT: Code per Amministratore documenti.<br>
      */

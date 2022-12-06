@@ -9,577 +9,452 @@
  */
 package org.projecthusky.communication.ch.enums.beta;
 
-import java.util.Objects;
-import javax.annotation.processing.Generated;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.common.enums.CodeSystems;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.enums.ValueSetEnumInterface;
 
+import javax.annotation.processing.Generated;
+import java.util.Objects;
+
 /**
  * Enumeration of DocumentEntry.typeCode values
  * <p>
- * EN: Type of document as per Annex 3 EPRO-FDHA.<br/><br/>The code defines a document’s type (e.g. discharge report, laboratory report). Each document type should be assigned to precisely one document class.<br/>.<br>
- * DE: Typ des Dokumentes (2.16.756.5.30.1.127.3.10.1.27) gemäss Anhang 3 der Verordnungen zum EPDG.<br/><br/>Der Code definiert den Typ eines Dokuments (z.B. Austrittsbericht, Labor-Bericht). Jeder Dokumenten-Typ sollte genau einer Dokumentenklasse zugeordnet sein.<br/>.<br>
- * FR: Type du document selon l'annexe 3 ODEP-DFI.<br/><br/>Le code définit le type de document (p. ex. rapport de sortie, rapport de laboratoire). Chaque type de document doit être associé à une seule classification.<br/>.<br>
- * IT: Tipo di documento secondo l'allegato 3 OCIP-DFI.<br/><br/>Il codice definisce il tipo di documento (p. es. rapporto di dimissione, rapporto di laboratorio). Ciascun tipo di documento dovrebbe essere associato a una sola classe di documenti.<br/>.<br>
+ * EN: Type of document as per Annex 3 EPRO-FDHA.<br/><br/>The code defines a document’s type (e.g. discharge report,
+ * laboratory report). Each document type should be assigned to precisely one document class.<br/>.<br> DE: Typ des
+ * Dokumentes (2.16.756.5.30.1.127.3.10.1.27) gemäss Anhang 3 der Verordnungen zum EPDG.<br/><br/>Der Code definiert den
+ * Typ eines Dokuments (z.B. Austrittsbericht, Labor-Bericht). Jeder Dokumenten-Typ sollte genau einer Dokumentenklasse
+ * zugeordnet sein.<br/>.<br> FR: Type du document selon l'annexe 3 ODEP-DFI.<br/><br/>Le code définit le type de
+ * document (p. ex. rapport de sortie, rapport de laboratoire). Chaque type de document doit être  associé à une seule
+ * classification.<br/>.<br> IT: Tipo di documento secondo l'allegato 3 OCIP-DFI.<br/><br/>Il codice definisce il tipo
+ * di documento (p. es. rapporto di dimissione, rapporto di laboratorio). Ciascun tipo di documento dovrebbe essere
+ * associato a una sola classe di documenti.<br/>.<br>
  * <p>
- * Identifier: 2.16.756.5.30.1.127.3.10.1.27<br>
- * Effective date: 2021-05-04 11:13<br>
- * Version: 202304.0-beta<br>
- * Status: DRAFT
+ * Identifier: 2.16.756.5.30.1.127.3.10.1.27<br> Effective date: 2022-11-29 13:57<br> Version: 202212.0-stable<br>
+ * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-09-29")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-12-06")
 public enum TypeCode implements ValueSetEnumInterface {
 
     /**
-     * EN: Allergy record.<br>
-     * DE: Allergieausweis.<br>
-     * FR: carnet des allergies.<br>
-     * IT: passaporto delle allergie.<br>
+     * EN: Allergy record.<br> DE: Allergieausweis.<br> FR: Carnet des allergies.<br> IT: Passaporto delle
+     * allergie.<br>
      */
     ALLERGY_RECORD("722446000",
                    "2.16.840.1.113883.6.96",
                    "Allergy record (record artifact)",
                    "Allergy record",
                    "Allergieausweis",
-                   "carnet des allergies",
-                   "passaporto delle allergie"),
+                   "Carnet des allergies",
+                   "Passaporto delle allergie"),
     /**
-     * EN: Consultation report.<br>
-     * DE: Konsultationsbericht.<br>
-     * FR: rapport de consultation.<br>
-     * IT: rapporto di consultazione.<br>
+     * EN: Clinical Management plan.<br> DE: Behandlungsplan.<br> FR: Plan de traitement.<br> IT: Piano di
+     * trattamento.<br>
+     */
+    CLINICAL_MANAGEMENT_PLAN("737427001",
+                             "2.16.840.1.113883.6.96",
+                             "Clinical management plan (record artifact)",
+                             "Clinical Management plan",
+                             "Behandlungsplan",
+                             "Plan de traitement",
+                             "Piano di trattamento"),
+    /**
+     * EN: Consultation report.<br> DE: Beurteilung durch Fachspezialisten.<br> FR: Évaluation par des spécialistes.<br>
+     * IT: Valutazione dello specialista.<br>
      */
     CONSULTATION_REPORT("371530004",
                         "2.16.840.1.113883.6.96",
                         "Clinical consultation report (record artifact)",
                         "Consultation report",
-                        "Konsultationsbericht",
-                        "rapport de consultation",
-                        "rapporto di consultazione"),
+                        "Beurteilung durch Fachspezialisten",
+                        "Évaluation par des spécialistes",
+                        "Valutazione dello specialista"),
     /**
-     * EN: Discharge summary.<br>
-     * DE: Austrittsbericht.<br>
-     * FR: rapport de sortie.<br>
-     * IT: rapporto di dimissione.<br>
+     * EN: Discharge summary.<br> DE: Austrittsbericht.<br> FR: Rapport de sortie.<br> IT: Rapporto di dimissione.<br>
      */
     DISCHARGE_SUMMARY("373942005",
                       "2.16.840.1.113883.6.96",
                       "Discharge summary (record artifact)",
                       "Discharge summary",
                       "Austrittsbericht",
-                      "rapport de sortie",
-                      "rapporto di dimissione"),
+                      "Rapport de sortie",
+                      "Rapporto di dimissione"),
     /**
-     * EN: Drug prescription.<br>
-     * DE: Arzneimittelrezept.<br>
-     * FR: prescription de médicaments.<br>
-     * IT: prescrizione di medicamenti.<br>
+     * EN: Emergency department record.<br> DE: Notfallberichtt.<br> FR: Rapport d’urgence.<br> IT: Referto di pronto
+     * soccorso.<br>
      */
-    DRUG_PRESCRIPTION("761938008",
-                      "2.16.840.1.113883.6.96",
-                      "Medicinal prescription record (record artifact)",
-                      "Drug prescription",
-                      "Arzneimittelrezept",
-                      "prescription de médicaments",
-                      "prescrizione di medicamenti"),
+    EMERGENCY_DEPARTMENT_RECORD("445300006",
+                                "2.16.840.1.113883.6.96",
+                                "Emergency department record (record artifact)",
+                                "Emergency department record",
+                                "Notfallberichtt",
+                                "Rapport d’urgence",
+                                "Referto di pronto soccorso"),
     /**
-     * EN: Emergency report.<br>
-     * DE: Notfallbericht.<br>
-     * FR: rapport d'urgence.<br>
-     * IT: rapporto d'urgenza.<br>
-     */
-    EMERGENCY_REPORT("445300006",
-                     "2.16.840.1.113883.6.96",
-                     "Emergency department record (record artifact)",
-                     "Emergency report",
-                     "Notfallbericht",
-                     "rapport d'urgence",
-                     "rapporto d'urgenza"),
-    /**
-     * EN: History and physical report.<br>
-     * DE: Anamnese.<br>
-     * FR: anamnèse.<br>
-     * IT: anamnesi.<br>
+     * EN: History and physical report.<br> DE: Anamnese / Untersuchungsbericht.<br> FR: Anamnèse / rapport
+     * d’analyse.<br> IT: Anamnesi / Rapporto di visita medica.<br>
      */
     HISTORY_AND_PHYSICAL_REPORT("371529009",
                                 "2.16.840.1.113883.6.96",
                                 "History and physical report (record artifact)",
                                 "History and physical report",
-                                "Anamnese",
-                                "anamnèse",
-                                "anamnesi"),
+                                "Anamnese / Untersuchungsbericht",
+                                "Anamnèse / rapport d’analyse",
+                                "Anamnesi / Rapporto di visita medica"),
     /**
-     * EN: Image.<br>
-     * DE: Bild.<br>
-     * FR: image.<br>
-     * IT: immagine.<br>
+     * EN: Image.<br> DE: Bild.<br> FR: Image.<br> IT: Immagine.<br>
      */
     IMAGE("900000000000471006",
           "2.16.840.1.113883.6.96",
           "Image reference (foundation metadata concept)",
           "Image",
           "Bild",
-          "image",
-          "immagine"),
+          "Image",
+          "Immagine"),
     /**
-     * EN: Imaging order.<br>
-     * DE: Bildgebungsauftrag.<br>
-     * FR: demande d'imagerie.<br>
-     * IT: richiesta di immaginografia.<br>
+     * EN: Imaging Order.<br> DE: Bildgebungsauftrag.<br> FR: Mandat d’imagerie.<br> IT: Richiesta di
+     * immaginografia.<br>
      */
     IMAGING_ORDER("2161000195103",
                   "2.16.756.5.30.1.127.3.4",
                   "Imaging order (record artifact)",
-                  "Imaging order",
+                  "Imaging Order",
                   "Bildgebungsauftrag",
-                  "demande d'imagerie",
-                  "richiesta di immaginografia"),
+                  "Mandat d’imagerie",
+                  "Richiesta di immaginografia"),
     /**
-     * EN: Imaging report.<br>
-     * DE: Bericht zur Bildgebung.<br>
-     * FR: rapport sur l'imagerie.<br>
-     * IT: referto di immaginografia.<br>
+     * EN: Imaging report.<br> DE: Befundbericht zur Bildgebung.<br> FR: Rapport de résultat relatif à l’imagerie.<br>
+     * IT: Referto di immaginografia.<br>
      */
     IMAGING_REPORT("4201000179104",
                    "2.16.840.1.113883.6.96",
                    "Imaging report (record artifact)",
                    "Imaging report",
-                   "Bericht zur Bildgebung",
-                   "rapport sur l'imagerie",
-                   "referto di immaginografia"),
+                   "Befundbericht zur Bildgebung",
+                   "Rapport de résultat relatif à l’imagerie",
+                   "Referto di immaginografia"),
     /**
-     * EN: Immunization record.<br>
-     * DE: Impfdokument.<br>
-     * FR: document de vaccination.<br>
-     * IT: documento di vaccinazione.<br>
+     * EN: Immunization record.<br> DE: Impfausweis.<br> FR: Carnet de vaccination.<br> IT: Certificato di
+     * vaccinazione.<br>
      */
     IMMUNIZATION_RECORD("41000179103",
                         "2.16.840.1.113883.6.96",
                         "Immunization record (record artifact)",
                         "Immunization record",
-                        "Impfdokument",
-                        "document de vaccination",
-                        "documento di vaccinazione"),
+                        "Impfausweis",
+                        "Carnet de vaccination",
+                        "Certificato di vaccinazione"),
     /**
-     * EN: Laboratory order.<br>
-     * DE: Laborauftrag.<br>
-     * FR: demande de laboratoire.<br>
-     * IT: richiesta di laboratorio.<br>
+     * EN: Laboratory Order.<br> DE: Laborauftrag.<br> FR: Mandat d’analyse en laboratoire.<br> IT: Richiesta di analisi
+     * di laboratorio.<br>
      */
     LABORATORY_ORDER("721965002",
                      "2.16.840.1.113883.6.96",
                      "Laboratory order (record artifact)",
-                     "Laboratory order",
+                     "Laboratory Order",
                      "Laborauftrag",
-                     "demande de laboratoire",
-                     "richiesta di laboratorio"),
+                     "Mandat d’analyse en laboratoire",
+                     "Richiesta di analisi di laboratorio"),
     /**
-     * EN: Laboratory report.<br>
-     * DE: Laborbericht.<br>
-     * FR: rapport de laboratoire.<br>
-     * IT: referto di laboratorio.<br>
+     * EN: Laboratory report.<br> DE: Laborbericht.<br> FR: Rapport de laboratoire.<br> IT: Referto di laboratorio.<br>
      */
     LABORATORY_REPORT("4241000179101",
                       "2.16.840.1.113883.6.96",
                       "Laboratory report (record artifact)",
                       "Laboratory report",
                       "Laborbericht",
-                      "rapport de laboratoire",
-                      "referto di laboratorio"),
+                      "Rapport de laboratoire",
+                      "Referto di laboratorio"),
     /**
-     * EN: Medical care plan.<br>
-     * DE: Ärztlicher behandlungsplan.<br>
-     * FR: plan de traitement médical.<br>
-     * IT: piano di cure mediche.<br>
-     */
-    MEDICAL_CARE_PLAN("737427001",
-                      "2.16.840.1.113883.6.96",
-                      "Clinical management plan (record artifact)",
-                      "Medical care plan",
-                      "Ärztlicher behandlungsplan",
-                      "plan de traitement médical",
-                      "piano di cure mediche"),
-    /**
-     * EN: Medical certificate.<br>
-     * DE: Ärztliches Attest.<br>
-     * FR: certificat médical.<br>
-     * IT: certificato medico.<br>
+     * EN: Medical certificate.<br> DE: Ärztliches Attest.<br> FR: Certificat médical.<br> IT: Certificato medico.<br>
      */
     MEDICAL_CERTIFICATE("772786005",
                         "2.16.840.1.113883.6.96",
                         "Medical certificate (record artifact)",
                         "Medical certificate",
                         "Ärztliches Attest",
-                        "certificat médical",
-                        "certificato medico"),
+                        "Certificat médical",
+                        "Certificato medico"),
     /**
-     * EN: Medication list.<br>
-     * DE: Medikationsliste.<br>
-     * FR: liste des médicaments.<br>
-     * IT: elenco dei medicamenti.<br>
+     * EN: Medical Prescription record.<br> DE: Arzneimittel-Verschreibung / Rezept.<br> FR: Prescription de médicaments
+     * / ordonnance.<br> IT: Prescrizione di medicamenti.<br>
      */
-    MEDICATION_LIST("721912009",
-                    "2.16.840.1.113883.6.96",
-                    "Medication summary document (record artifact)",
-                    "Medication list",
-                    "Medikationsliste",
-                    "liste des médicaments",
-                    "elenco dei medicamenti"),
+    MEDICAL_PRESCRIPTION_RECORD("761938008",
+                                "2.16.840.1.113883.6.96",
+                                "Medical prescription record (record artifact)",
+                                "Medical Prescription record",
+                                "Arzneimittel-Verschreibung / Rezept",
+                                "Prescription de médicaments / ordonnance",
+                                "Prescrizione di medicamenti"),
     /**
-     * EN: Non-drug prescription.<br>
-     * DE: Nicht-Arzneimittel-Verschreibung.<br>
-     * FR: prescription non médicamenteuse.<br>
-     * IT: prescripziun senza medischinas.<br>
+     * EN: Medication summary document.<br> DE: Medikationsliste.<br> FR: Liste de médication.<br> IT: Elenco dei
+     * medicamenti.<br>
+     */
+    MEDICATION_SUMMARY_DOCUMENT("721912009",
+                                "2.16.840.1.113883.6.96",
+                                "Medication summary document (record artifact)",
+                                "Medication summary document",
+                                "Medikationsliste",
+                                "Liste de médication",
+                                "Elenco dei medicamenti"),
+    /**
+     * EN: Non-drug prescription.<br> DE: Nicht-Arzneimittel-Verschreibung / Rezept.<br> FR: Prescription sans
+     * médicaments / ordonnance.<br> IT: Prescrizione non di medicamenti.<br>
      */
     NON_DRUG_PRESCRIPTION("765492005",
                           "2.16.840.1.113883.6.96",
                           "Non-drug prescription record (record artifact)",
                           "Non-drug prescription",
-                          "Nicht-Arzneimittel-Verschreibung",
-                          "prescription non médicamenteuse",
-                          "prescripziun senza medischinas"),
+                          "Nicht-Arzneimittel-Verschreibung / Rezept",
+                          "Prescription sans médicaments / ordonnance",
+                          "Prescrizione non di medicamenti"),
     /**
-     * EN: Non-medical report.<br>
-     * DE: Nichtmedizinischer Bericht.<br>
-     * FR: rapport non médical.<br>
-     * IT: rapporto non medico.<br>
-     */
-    NON_MEDICAL_REPORT("445418005",
-                       "2.16.840.1.113883.6.96",
-                       "Professional allied to medicine clinical report (record artifact)",
-                       "Non-medical report",
-                       "Nichtmedizinischer Bericht",
-                       "rapport non médical",
-                       "rapporto non medico"),
-    /**
-     * EN: Nursing care plan.<br>
-     * DE: Pflegeplan.<br>
-     * FR: plan de soins infirmier.<br>
-     * IT: piano di cure infermieristiche.<br>
+     * EN: Nursing care plan.<br> DE: Pflegeplan.<br> FR: Plan de soins.<br> IT: Piano di cura.<br>
      */
     NURSING_CARE_PLAN("773130005",
                       "2.16.840.1.113883.6.96",
                       "Nursing care plan (record artifact)",
                       "Nursing care plan",
                       "Pflegeplan",
-                      "plan de soins infirmier",
-                      "piano di cure infermieristiche"),
+                      "Plan de soins",
+                      "Piano di cura"),
     /**
-     * EN: Operative report.<br>
-     * DE: Operationsbericht.<br>
-     * FR: rapport d'opération.<br>
-     * IT: rapporto operatorio.<br>
+     * EN: Operative report.<br> DE: Operationsbericht.<br> FR: Rapport d’opération.<br> IT: Rapporto operatorio.<br>
      */
     OPERATIVE_REPORT("371526002",
                      "2.16.840.1.113883.6.96",
                      "Operative report (record artifact)",
                      "Operative report",
                      "Operationsbericht",
-                     "rapport d'opération",
-                     "rapporto operatorio"),
+                     "Rapport d’opération",
+                     "Rapporto operatorio"),
     /**
-     * EN: Pathology order.<br>
-     * DE: Pathologieauftrag.<br>
-     * FR: demande de pathologie.<br>
-     * IT: richiesta di patologia.<br>
+     * EN: Pathology order.<br> DE: Pathologieauftrag.<br> FR: Mandat de rapport d’examen pathologique .<br> IT:
+     * Richiesta di esame istologico.<br>
      */
     PATHOLOGY_ORDER("721966001",
                     "2.16.840.1.113883.6.96",
                     "Pathology order (record artifact)",
                     "Pathology order",
                     "Pathologieauftrag",
-                    "demande de pathologie",
-                    "richiesta di patologia"),
+                    "Mandat de rapport d’examen pathologique ",
+                    "Richiesta di esame istologico"),
     /**
-     * EN: Pathology report.<br>
-     * DE: Pathologiebericht.<br>
-     * FR: demande de pathologie.<br>
-     * IT: referto di patologia.<br>
+     * EN: Pathology report.<br> DE: Pathologiebericht.<br> FR: Rapport d’examen pathologique.<br> IT: Referto
+     * istologico.<br>
      */
     PATHOLOGY_REPORT("371528001",
                      "2.16.840.1.113883.6.96",
                      "Pathology report (record artifact)",
                      "Pathology report",
                      "Pathologiebericht",
-                     "demande de pathologie",
-                     "referto di patologia"),
+                     "Rapport d’examen pathologique",
+                     "Referto istologico"),
     /**
-     * EN: Picture/Video/Audio.<br>
-     * DE: Bild/Video/Audio.<br>
-     * FR: image/vidéo/audio.<br>
-     * IT: immagine/video/audio.<br>
+     * EN: Professional allied to medicine clinical report.<br> DE: Dokument ausserhalb des Behandlungskontextes.<br>
+     * FR: Document hors contexte de traitement.<br> IT: Documento al di fuori del contesto trattato.<br>
      */
-    PICTURE_VIDEO_AUDIO("787148009",
-                        "2.16.840.1.113883.6.96",
-                        "Digital representation of specimen (record artifact)  ",
-                        "Picture/Video/Audio",
-                        "Bild/Video/Audio",
-                        "image/vidéo/audio",
-                        "immagine/video/audio"),
+    PROFESSIONAL_ALLIED_TO_MEDICINE_CLINICAL_REPORT("445418005",
+                                                    "2.16.840.1.113883.6.96",
+                                                    "Professional allied to medicine clinical report (record artifact)",
+                                                    "Professional allied to medicine clinical report",
+                                                    "Dokument ausserhalb des Behandlungskontextes",
+                                                    "Document hors contexte de traitement",
+                                                    "Documento al di fuori del contesto trattato"),
     /**
-     * EN: Progress note.<br>
-     * DE: Verlaufsbericht.<br>
-     * FR: rapport de suivi.<br>
-     * IT: referto sul decorso.<br>
+     * EN: Progress note.<br> DE: Verlaufsbericht.<br> FR: Rapport d’historique.<br> IT: Rapporto sul decorso.<br>
      */
     PROGRESS_NOTE("371532007",
                   "2.16.840.1.113883.6.96",
                   "Progress report (record artifact)",
                   "Progress note",
                   "Verlaufsbericht",
-                  "rapport de suivi",
-                  "referto sul decorso"),
+                  "Rapport d’historique",
+                  "Rapporto sul decorso"),
     /**
-     * EN: Record artifact.<br>
-     * DE: Nicht näher bezeichnetes Dokument.<br>
-     * FR: document non précisé.<br>
-     * IT: documento non meglio specificato.<br>
+     * EN: Record artifact.<br> DE: Nicht näher bezeichnetes Dokument.<br> FR: Document non précisé.<br> IT: Documento
+     * non meglio specificato.<br>
      */
     RECORD_ARTIFACT("419891008",
                     "2.16.840.1.113883.6.96",
                     "Record artifact (record artifact)",
                     "Record artifact",
                     "Nicht näher bezeichnetes Dokument",
-                    "document non précisé",
-                    "documento non meglio specificato"),
+                    "Document non précisé",
+                    "Documento non meglio specificato"),
     /**
-     * EN: Rehabilitation care plan.<br>
-     * DE: Rehabilitationsplan.<br>
-     * FR: plan de réhabilitation.<br>
-     * IT: piano di riabilitazione.<br>
+     * EN: Rehabilitation care plan.<br> DE: Rehabilitationsplan.<br> FR: Plan de réhabilitation.<br> IT: Piano di
+     * riabilitazione.<br>
      */
     REHABILITATION_CARE_PLAN("736055001",
                              "2.16.840.1.113883.6.96",
                              "Rehabilitation care plan (record artifact)",
                              "Rehabilitation care plan",
                              "Rehabilitationsplan",
-                             "plan de réhabilitation",
-                             "piano di riabilitazione"),
+                             "Plan de réhabilitation",
+                             "Piano di riabilitazione"),
     /**
-     * EN: Transfer summary.<br>
-     * DE: Überweisungsbericht.<br>
-     * FR: rapport de transfert.<br>
-     * IT: rapporto di trasferimento.<br>
+     * EN: Transfer summary report.<br> DE: Überweisungsbericht.<br> FR: Rapport de transfert.<br> IT: Rapporto di
+     * trasferimento.<br>
      */
-    TRANSFER_SUMMARY("371535009",
-                     "2.16.840.1.113883.6.96",
-                     "Transfer summary report (record artifact)",
-                     "Transfer summary",
-                     "Überweisungsbericht",
-                     "rapport de transfert",
-                     "rapporto di trasferimento");
+    TRANSFER_SUMMARY_REPORT("371535009",
+                            "2.16.840.1.113883.6.96",
+                            "Transfer summary report (record artifact)",
+                            "Transfer summary report",
+                            "Überweisungsbericht",
+                            "Rapport de transfert",
+                            "Rapporto di trasferimento");
 
     /**
-     * EN: Code for Allergy record.<br>
-     * DE: Code für Allergieausweis.<br>
-     * FR: Code de carnet des allergies.<br>
-     * IT: Code per passaporto delle allergie.<br>
+     * EN: Code for Allergy record.<br> DE: Code für Allergieausweis.<br> FR: Code de Carnet des allergies.<br> IT: Code
+     * per Passaporto delle allergie.<br>
      */
     public static final String ALLERGY_RECORD_CODE = "722446000";
 
     /**
-     * EN: Code for Consultation report.<br>
-     * DE: Code für Konsultationsbericht.<br>
-     * FR: Code de rapport de consultation.<br>
-     * IT: Code per rapporto di consultazione.<br>
+     * EN: Code for Clinical Management plan.<br> DE: Code für Behandlungsplan.<br> FR: Code de Plan de traitement.<br>
+     * IT: Code per Piano di trattamento.<br>
+     */
+    public static final String CLINICAL_MANAGEMENT_PLAN_CODE = "737427001";
+
+    /**
+     * EN: Code for Consultation report.<br> DE: Code für Beurteilung durch Fachspezialisten.<br> FR: Code de Évaluation
+     * par des spécialistes.<br> IT: Code per Valutazione dello specialista.<br>
      */
     public static final String CONSULTATION_REPORT_CODE = "371530004";
 
     /**
-     * EN: Code for Discharge summary.<br>
-     * DE: Code für Austrittsbericht.<br>
-     * FR: Code de rapport de sortie.<br>
-     * IT: Code per rapporto di dimissione.<br>
+     * EN: Code for Discharge summary.<br> DE: Code für Austrittsbericht.<br> FR: Code de Rapport de sortie.<br> IT:
+     * Code per Rapporto di dimissione.<br>
      */
     public static final String DISCHARGE_SUMMARY_CODE = "373942005";
 
     /**
-     * EN: Code for Drug prescription.<br>
-     * DE: Code für Arzneimittelrezept.<br>
-     * FR: Code de prescription de médicaments.<br>
-     * IT: Code per prescrizione di medicamenti.<br>
+     * EN: Code for Emergency department record.<br> DE: Code für Notfallberichtt.<br> FR: Code de Rapport
+     * d’urgence.<br> IT: Code per Referto di pronto soccorso.<br>
      */
-    public static final String DRUG_PRESCRIPTION_CODE = "761938008";
+    public static final String EMERGENCY_DEPARTMENT_RECORD_CODE = "445300006";
 
     /**
-     * EN: Code for Emergency report.<br>
-     * DE: Code für Notfallbericht.<br>
-     * FR: Code de rapport d'urgence.<br>
-     * IT: Code per rapporto d'urgenza.<br>
-     */
-    public static final String EMERGENCY_REPORT_CODE = "445300006";
-
-    /**
-     * EN: Code for History and physical report.<br>
-     * DE: Code für Anamnese.<br>
-     * FR: Code de anamnèse.<br>
-     * IT: Code per anamnesi.<br>
+     * EN: Code for History and physical report.<br> DE: Code für Anamnese / Untersuchungsbericht.<br> FR: Code de
+     * Anamnèse / rapport d’analyse.<br> IT: Code per Anamnesi / Rapporto di visita medica.<br>
      */
     public static final String HISTORY_AND_PHYSICAL_REPORT_CODE = "371529009";
 
     /**
-     * EN: Code for Image.<br>
-     * DE: Code für Bild.<br>
-     * FR: Code de image.<br>
-     * IT: Code per immagine.<br>
+     * EN: Code for Image.<br> DE: Code für Bild.<br> FR: Code de Image.<br> IT: Code per Immagine.<br>
      */
     public static final String IMAGE_CODE = "900000000000471006";
 
     /**
-     * EN: Code for Imaging order.<br>
-     * DE: Code für Bildgebungsauftrag.<br>
-     * FR: Code de demande d'imagerie.<br>
-     * IT: Code per richiesta di immaginografia.<br>
+     * EN: Code for Imaging Order.<br> DE: Code für Bildgebungsauftrag.<br> FR: Code de Mandat d’imagerie.<br> IT: Code
+     * per Richiesta di immaginografia.<br>
      */
     public static final String IMAGING_ORDER_CODE = "2161000195103";
 
     /**
-     * EN: Code for Imaging report.<br>
-     * DE: Code für Bericht zur Bildgebung.<br>
-     * FR: Code de rapport sur l'imagerie.<br>
-     * IT: Code per referto di immaginografia.<br>
+     * EN: Code for Imaging report.<br> DE: Code für Befundbericht zur Bildgebung.<br> FR: Code de Rapport de résultat
+     * relatif à l’imagerie.<br> IT: Code per Referto di immaginografia.<br>
      */
     public static final String IMAGING_REPORT_CODE = "4201000179104";
 
     /**
-     * EN: Code for Immunization record.<br>
-     * DE: Code für Impfdokument.<br>
-     * FR: Code de document de vaccination.<br>
-     * IT: Code per documento di vaccinazione.<br>
+     * EN: Code for Immunization record.<br> DE: Code für Impfausweis.<br> FR: Code de Carnet de vaccination.<br> IT:
+     * Code per Certificato di vaccinazione.<br>
      */
     public static final String IMMUNIZATION_RECORD_CODE = "41000179103";
 
     /**
-     * EN: Code for Laboratory order.<br>
-     * DE: Code für Laborauftrag.<br>
-     * FR: Code de demande de laboratoire.<br>
-     * IT: Code per richiesta di laboratorio.<br>
+     * EN: Code for Laboratory Order.<br> DE: Code für Laborauftrag.<br> FR: Code de Mandat d’analyse en
+     * laboratoire.<br> IT: Code per Richiesta di analisi di laboratorio.<br>
      */
     public static final String LABORATORY_ORDER_CODE = "721965002";
 
     /**
-     * EN: Code for Laboratory report.<br>
-     * DE: Code für Laborbericht.<br>
-     * FR: Code de rapport de laboratoire.<br>
-     * IT: Code per referto di laboratorio.<br>
+     * EN: Code for Laboratory report.<br> DE: Code für Laborbericht.<br> FR: Code de Rapport de laboratoire.<br> IT:
+     * Code per Referto di laboratorio.<br>
      */
     public static final String LABORATORY_REPORT_CODE = "4241000179101";
 
     /**
-     * EN: Code for Medical care plan.<br>
-     * DE: Code für Ärztlicher behandlungsplan.<br>
-     * FR: Code de plan de traitement médical.<br>
-     * IT: Code per piano di cure mediche.<br>
-     */
-    public static final String MEDICAL_CARE_PLAN_CODE = "737427001";
-
-    /**
-     * EN: Code for Medical certificate.<br>
-     * DE: Code für Ärztliches Attest.<br>
-     * FR: Code de certificat médical.<br>
-     * IT: Code per certificato medico.<br>
+     * EN: Code for Medical certificate.<br> DE: Code für Ärztliches Attest.<br> FR: Code de Certificat médical.<br> IT:
+     * Code per Certificato medico.<br>
      */
     public static final String MEDICAL_CERTIFICATE_CODE = "772786005";
 
     /**
-     * EN: Code for Medication list.<br>
-     * DE: Code für Medikationsliste.<br>
-     * FR: Code de liste des médicaments.<br>
-     * IT: Code per elenco dei medicamenti.<br>
+     * EN: Code for Medical Prescription record.<br> DE: Code für Arzneimittel-Verschreibung / Rezept.<br> FR: Code de
+     * Prescription de médicaments / ordonnance.<br> IT: Code per Prescrizione di medicamenti.<br>
      */
-    public static final String MEDICATION_LIST_CODE = "721912009";
+    public static final String MEDICAL_PRESCRIPTION_RECORD_CODE = "761938008";
 
     /**
-     * EN: Code for Non-drug prescription.<br>
-     * DE: Code für Nicht-Arzneimittel-Verschreibung.<br>
-     * FR: Code de prescription non médicamenteuse.<br>
-     * IT: Code per prescripziun senza medischinas.<br>
+     * EN: Code for Medication summary document.<br> DE: Code für Medikationsliste.<br> FR: Code de Liste de
+     * médication.<br> IT: Code per Elenco dei medicamenti.<br>
+     */
+    public static final String MEDICATION_SUMMARY_DOCUMENT_CODE = "721912009";
+
+    /**
+     * EN: Code for Non-drug prescription.<br> DE: Code für Nicht-Arzneimittel-Verschreibung / Rezept.<br> FR: Code de
+     * Prescription sans médicaments / ordonnance.<br> IT: Code per Prescrizione non di medicamenti.<br>
      */
     public static final String NON_DRUG_PRESCRIPTION_CODE = "765492005";
 
     /**
-     * EN: Code for Non-medical report.<br>
-     * DE: Code für Nichtmedizinischer Bericht.<br>
-     * FR: Code de rapport non médical.<br>
-     * IT: Code per rapporto non medico.<br>
-     */
-    public static final String NON_MEDICAL_REPORT_CODE = "445418005";
-
-    /**
-     * EN: Code for Nursing care plan.<br>
-     * DE: Code für Pflegeplan.<br>
-     * FR: Code de plan de soins infirmier.<br>
-     * IT: Code per piano di cure infermieristiche.<br>
+     * EN: Code for Nursing care plan.<br> DE: Code für Pflegeplan.<br> FR: Code de Plan de soins.<br> IT: Code per
+     * Piano di cura.<br>
      */
     public static final String NURSING_CARE_PLAN_CODE = "773130005";
 
     /**
-     * EN: Code for Operative report.<br>
-     * DE: Code für Operationsbericht.<br>
-     * FR: Code de rapport d'opération.<br>
-     * IT: Code per rapporto operatorio.<br>
+     * EN: Code for Operative report.<br> DE: Code für Operationsbericht.<br> FR: Code de Rapport d’opération.<br> IT:
+     * Code per Rapporto operatorio.<br>
      */
     public static final String OPERATIVE_REPORT_CODE = "371526002";
 
     /**
-     * EN: Code for Pathology order.<br>
-     * DE: Code für Pathologieauftrag.<br>
-     * FR: Code de demande de pathologie.<br>
-     * IT: Code per richiesta di patologia.<br>
+     * EN: Code for Pathology order.<br> DE: Code für Pathologieauftrag.<br> FR: Code de Mandat de rapport d’examen
+     * pathologique .<br> IT: Code per Richiesta di esame istologico.<br>
      */
     public static final String PATHOLOGY_ORDER_CODE = "721966001";
 
     /**
-     * EN: Code for Pathology report.<br>
-     * DE: Code für Pathologiebericht.<br>
-     * FR: Code de demande de pathologie.<br>
-     * IT: Code per referto di patologia.<br>
+     * EN: Code for Pathology report.<br> DE: Code für Pathologiebericht.<br> FR: Code de Rapport d’examen
+     * pathologique.<br> IT: Code per Referto istologico.<br>
      */
     public static final String PATHOLOGY_REPORT_CODE = "371528001";
 
     /**
-     * EN: Code for Picture/Video/Audio.<br>
-     * DE: Code für Bild/Video/Audio.<br>
-     * FR: Code de image/vidéo/audio.<br>
-     * IT: Code per immagine/video/audio.<br>
+     * EN: Code for Professional allied to medicine clinical report.<br> DE: Code für Dokument ausserhalb des
+     * Behandlungskontextes.<br> FR: Code de Document hors contexte de traitement.<br> IT: Code per Documento al di
+     * fuori del contesto trattato.<br>
      */
-    public static final String PICTURE_VIDEO_AUDIO_CODE = "787148009";
+    public static final String PROFESSIONAL_ALLIED_TO_MEDICINE_CLINICAL_REPORT_CODE = "445418005";
 
     /**
-     * EN: Code for Progress note.<br>
-     * DE: Code für Verlaufsbericht.<br>
-     * FR: Code de rapport de suivi.<br>
-     * IT: Code per referto sul decorso.<br>
+     * EN: Code for Progress note.<br> DE: Code für Verlaufsbericht.<br> FR: Code de Rapport d’historique.<br> IT: Code
+     * per Rapporto sul decorso.<br>
      */
     public static final String PROGRESS_NOTE_CODE = "371532007";
 
     /**
-     * EN: Code for Record artifact.<br>
-     * DE: Code für Nicht näher bezeichnetes Dokument.<br>
-     * FR: Code de document non précisé.<br>
-     * IT: Code per documento non meglio specificato.<br>
+     * EN: Code for Record artifact.<br> DE: Code für Nicht näher bezeichnetes Dokument.<br> FR: Code de Document non
+     * précisé.<br> IT: Code per Documento non meglio specificato.<br>
      */
     public static final String RECORD_ARTIFACT_CODE = "419891008";
 
     /**
-     * EN: Code for Rehabilitation care plan.<br>
-     * DE: Code für Rehabilitationsplan.<br>
-     * FR: Code de plan de réhabilitation.<br>
-     * IT: Code per piano di riabilitazione.<br>
+     * EN: Code for Rehabilitation care plan.<br> DE: Code für Rehabilitationsplan.<br> FR: Code de Plan de
+     * réhabilitation.<br> IT: Code per Piano di riabilitazione.<br>
      */
     public static final String REHABILITATION_CARE_PLAN_CODE = "736055001";
 
     /**
-     * EN: Code for Transfer summary.<br>
-     * DE: Code für Überweisungsbericht.<br>
-     * FR: Code de rapport de transfert.<br>
-     * IT: Code per rapporto di trasferimento.<br>
+     * EN: Code for Transfer summary report.<br> DE: Code für Überweisungsbericht.<br> FR: Code de Rapport de
+     * transfert.<br> IT: Code per Rapporto di trasferimento.<br>
      */
-    public static final String TRANSFER_SUMMARY_CODE = "371535009";
+    public static final String TRANSFER_SUMMARY_REPORT_CODE = "371535009";
 
     /**
      * Identifier of the value set.
@@ -671,7 +546,13 @@ public enum TypeCode implements ValueSetEnumInterface {
      * @param displayNameFr The display name in French.
      * @param displayNameIt The display name in Italian.
      */
-    TypeCode(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
+    TypeCode(@NonNull final String code,
+             @NonNull final String codeSystem,
+             @NonNull final String displayName,
+             @NonNull final String displayNameEn,
+             @NonNull final String displayNameDe,
+             @NonNull final String displayNameFr,
+             @NonNull final String displayNameIt) {
         this.code = Objects.requireNonNull(code);
         this.codeSystem = Objects.requireNonNull(codeSystem);
         this.displayNames = new String[5];
@@ -731,17 +612,12 @@ public enum TypeCode implements ValueSetEnumInterface {
         if (languageCode == null) {
             return this.displayNames[0];
         }
-        return switch(languageCode) {
-            case ENGLISH ->
-                this.displayNames[1];
-            case GERMAN ->
-                this.displayNames[2];
-            case FRENCH ->
-                this.displayNames[3];
-            case ITALIAN ->
-                this.displayNames[4];
-            default ->
-                "TOTRANSLATE";
+        return switch (languageCode) {
+            case ENGLISH -> this.displayNames[1];
+            case GERMAN -> this.displayNames[2];
+            case FRENCH -> this.displayNames[3];
+            case ITALIAN -> this.displayNames[4];
+            default -> "TOTRANSLATE";
         };
     }
 
