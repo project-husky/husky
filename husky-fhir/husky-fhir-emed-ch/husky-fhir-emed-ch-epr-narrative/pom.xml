@@ -9,6 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>husky-fhir-emed-ch-epr-narrative</artifactId>
+    <name>Husky FHIR eMedication Switzerland EPR Narrative</name>
 
     <properties>
         <openhtmltopdf-version>1.0.10</openhtmltopdf-version>

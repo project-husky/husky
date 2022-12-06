@@ -25,11 +25,13 @@ import java.io.StringWriter;
 import java.util.List;
 
 /**
- * husky
+ * A DOM (HTML or StrucDocText, which is XML-based) node factory for the narrative generation.
+ *
+ * It's currently only use
  *
  * @author Quentin Ligier
  **/
-public class NarrativeDomFactory {
+class NarrativeDomFactory {
 
     private static final String NS_HL7 = "urn:hl7-org:v3";
 
@@ -49,7 +51,7 @@ public class NarrativeDomFactory {
      * @param isHtml Whether the generated DOM is for HTML output ({@code true}) or StrucDocText ({@code false}).
      * @throws ParserConfigurationException if there's an issue creating the DOM {@link Document}.
      */
-    public NarrativeDomFactory(final boolean isHtml) throws ParserConfigurationException {
+    NarrativeDomFactory(final boolean isHtml) throws ParserConfigurationException {
         this.isHtml = isHtml;
 
         this.document = XmlFactories.newSafeDocumentBuilder().newDocument();
@@ -105,7 +107,7 @@ public class NarrativeDomFactory {
     }
 
     public Element span(final Object content,
-                       @Nullable final String htmlClass) {
+                        @Nullable final String htmlClass) {
         final var span = this.element("span", "content");
         this.setNodeContent(span, content);
         if (htmlClass != null) {

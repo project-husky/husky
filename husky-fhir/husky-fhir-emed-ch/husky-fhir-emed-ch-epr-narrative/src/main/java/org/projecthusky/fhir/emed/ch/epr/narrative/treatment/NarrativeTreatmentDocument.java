@@ -73,25 +73,30 @@ public class NarrativeTreatmentDocument {
     /**
      * The gender of patient
      */
+    @Nullable
     private final String patientGender;
 
     /**
      * The birth date of patient
      */
+    @Nullable
     private final String patientBirthDate;
 
     /**
      * The address of patient
      */
+    @Nullable
     private final String patientAddress;
 
     /**
      * The number phone of patient
      */
+    @Nullable
     private final String patientContact;
 
     /**
      * Constructor
+     *
      * @param builder the builder
      */
     private NarrativeTreatmentDocument(final NarrativeTreatmentDocumentBuilder builder) {
@@ -111,8 +116,8 @@ public class NarrativeTreatmentDocument {
 
     /**
      * Creates builder to build {@link NarrativeTreatmentDocument}.
-     * @param narrativeLanguage language in which the item should be generated
      *
+     * @param narrativeLanguage language in which the item should be generated
      * @return created builder
      * @throws IOException
      */
@@ -120,7 +125,9 @@ public class NarrativeTreatmentDocument {
         return new NarrativeTreatmentDocumentBuilder(narrativeLanguage);
     }
 
-    public NarrativeLanguage getNarrativeLanguage() { return this.narrativeLanguage; }
+    public NarrativeLanguage getNarrativeLanguage() {
+        return this.narrativeLanguage;
+    }
 
 
     public EmedDocumentType getDocumentType() {
@@ -148,24 +155,28 @@ public class NarrativeTreatmentDocument {
     }
 
 
-    public NarrativeTreatmentAuthor getLastInterveningAuthor() { return lastInterveningAuthor; }
+    public NarrativeTreatmentAuthor getLastInterveningAuthor() {
+        return lastInterveningAuthor;
+    }
 
     public String getPatientName() {
         return this.patientName;
     }
 
-
-    public  String getPatientGender() {
+    @Nullable
+    public String getPatientGender() {
         return this.patientGender;
     }
 
-
+    @Nullable
     public String getPatientBirthDate() {
         return this.patientBirthDate;
     }
 
     @Nullable
-    public String getPatientAddress() { return this.patientAddress; }
+    public String getPatientAddress() {
+        return this.patientAddress;
+    }
 
     @Nullable
     public String getPatientContact() {
@@ -206,7 +217,7 @@ public class NarrativeTreatmentDocument {
         /**
          * Formats a {@link TemporalAccessor} with the given pattern.
          *
-         * @param pattern The pattern.
+         * @param pattern  The pattern.
          * @param temporal The {@link TemporalAccessor}
          * @return this.
          */
@@ -278,7 +289,9 @@ public class NarrativeTreatmentDocument {
          * @return this.
          */
         public NarrativeTreatmentDocumentBuilder patient(final ChCorePatientEpr patient) {
-            return this.patientName(String.format("%s %s", patient.getNameFirstRep().getGivenAsSingleString(), patient.getNameFirstRep().getFamily()))
+            return this.patientName(String.format("%s %s",
+                                                  patient.getNameFirstRep().getGivenAsSingleString(),
+                                                  patient.getNameFirstRep().getFamily()))
                     .patientGender(patient.resolveGender())
                     .patientBirthDate(patient.resolveBirthDate())
                     .patientAddress(patient.resolveAddress());
@@ -326,10 +339,10 @@ public class NarrativeTreatmentDocument {
         public NarrativeTreatmentDocumentBuilder patientAddress(@Nullable final Address address) {
             if (address != null) {
                 final var line = String.join(" ",
-                        address.getLine()
-                                .stream()
-                                .map(StringType::getValue)
-                                .toList());
+                                             address.getLine()
+                                                     .stream()
+                                                     .map(StringType::getValue)
+                                                     .toList());
                 this.patientAddress = String.format("%s, %s %s", line, address.getPostalCode(), address.getCity());
             }
             return this;
@@ -342,14 +355,14 @@ public class NarrativeTreatmentDocument {
          * @return this.
          */
         public NarrativeTreatmentDocumentBuilder patientContact(final ContactPoint contact) {
-            this.patientContact = contact.getValue();;
+            this.patientContact = contact.getValue();
             return this;
         }
 
         /**
          * Creates a {@link NarrativeTreatmentDocument}.
          *
-         * @param document The CH EMED Document.
+         * @param document         The CH EMED Document.
          * @param emedDocumentType The type of the CH EMED Document.
          * @return this.
          */
@@ -366,16 +379,17 @@ public class NarrativeTreatmentDocument {
                 this.lastInterveningAuthor(authorDoc);
 
                 this.addActiveTreatments(composition
-                        .resolveMedicationStatements()
-                        .stream()
-                        .map(medication -> {
-                            try {
-                                return NarrativeTreatmentItem.builder(this.narrativeLanguage).emedMedicationStatementEntryDigest(medication).build();
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                        })
-                        .toList());
+                                                 .resolveMedicationStatements()
+                                                 .stream()
+                                                 .map(medication -> {
+                                                     try {
+                                                         return NarrativeTreatmentItem.builder(this.narrativeLanguage).emedMedicationStatementEntryDigest(
+                                                                 medication).build();
+                                                     } catch (IOException e) {
+                                                         throw new RuntimeException(e);
+                                                     }
+                                                 })
+                                                 .toList());
             }
             return this;
         }

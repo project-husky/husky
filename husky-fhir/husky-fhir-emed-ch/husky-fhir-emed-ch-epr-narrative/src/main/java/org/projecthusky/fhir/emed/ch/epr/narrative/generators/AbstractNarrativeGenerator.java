@@ -1,6 +1,7 @@
 package org.projecthusky.fhir.emed.ch.epr.narrative.generators;
 
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.common.enums.ValueSetEnumInterface;
 import org.projecthusky.fhir.emed.ch.epr.enums.TimingEventAmbu;
 import org.projecthusky.fhir.emed.ch.epr.narrative.enums.NarrativeLanguage;
@@ -25,23 +26,42 @@ import java.util.function.Function;
  *
  * @author Quentin Ligier
  */
-public abstract class AbstractNarrativeGenerator {
+abstract class AbstractNarrativeGenerator {
 
     /**
      * The resource bundle that contains the translations.
      */
     protected final EnumMap<NarrativeLanguage, PropertyResourceBundle> bundles = new EnumMap<>(NarrativeLanguage.class);
 
+    /**
+     * A provider of better display name for enums, targeted at patients.
+     */
     protected final ValueSetEnumNarrativeForPatientService valueSetEnumNarrativeForPatientService = new ValueSetEnumNarrativeForPatientService();
 
-    protected AbstractNarrativeGenerator() throws IOException {
+    /**
+     * A provider of images for medications.
+     */
+    protected MedicationImageProvider medicationImageProvider = MedicationImageProvider.NO_OP_INSTANCE;
+
+    AbstractNarrativeGenerator() throws IOException {
         final Function<String, InputStream> getRes = (final String lang) ->
-                Objects.requireNonNull(AbstractNarrativeGenerator.class.getResourceAsStream("/narrative/translations/Messages." + lang + ".properties"));
+                Objects.requireNonNull(AbstractNarrativeGenerator.class.getResourceAsStream(
+                        "/narrative/translations/Messages." + lang + ".properties"));
 
         this.bundles.put(NarrativeLanguage.ENGLISH, new PropertyResourceBundle(getRes.apply("en")));
         this.bundles.put(NarrativeLanguage.FRENCH, new PropertyResourceBundle(getRes.apply("fr")));
         this.bundles.put(NarrativeLanguage.GERMAN, new PropertyResourceBundle(getRes.apply("de")));
         this.bundles.put(NarrativeLanguage.ITALIAN, new PropertyResourceBundle(getRes.apply("it")));
+    }
+
+    /**
+     * Sets the medication images provider.
+     *
+     * @param medicationImageProvider The medication images provider to use, or {@code null}.
+     */
+    public void setMedicationImageProvider(@Nullable final MedicationImageProvider medicationImageProvider) {
+        this.medicationImageProvider = Objects.requireNonNullElse(medicationImageProvider,
+                                                                  MedicationImageProvider.NO_OP_INSTANCE);
     }
 
     /**
@@ -89,9 +109,9 @@ public abstract class AbstractNarrativeGenerator {
     /**
      * Gets the name of a medication product as a list of {@link Node}s.
      *
-     * @param narDom  The narrative DOM factory.
-     * @param item The medication product.
-     * @param lang    The language of the narrative to be generated.
+     * @param narDom The narrative DOM factory.
+     * @param item   The medication product.
+     * @param lang   The language of the narrative to be generated.
      * @return The medication product name.
      */
     List<Node> formatMedicationName(final NarrativeDomFactory narDom,
@@ -145,15 +165,30 @@ public abstract class AbstractNarrativeGenerator {
                                   final List<Element> bodyRows,
                                   final NarrativeLanguage lang) {
         final var theadRow1 = narDom.tr(null, null);
-        theadRow1.appendChild(narDom.th(StringUtils.capitalize(this.getMessage("PACKAGE_NAME", lang)), null, "3", null));
-        theadRow1.appendChild(narDom.th(formatDosageTh(narDom, TimingEventAmbu.MORNING, lang), null, null, "th-timing"));
+        theadRow1.appendChild(narDom.th(StringUtils.capitalize(this.getMessage("PACKAGE_NAME", lang)),
+                                        null,
+                                        "3",
+                                        null));
+        theadRow1.appendChild(narDom.th(formatDosageTh(narDom, TimingEventAmbu.MORNING, lang),
+                                        null,
+                                        null,
+                                        "th-timing"));
         theadRow1.appendChild(narDom.th(formatDosageTh(narDom, TimingEventAmbu.NOON, lang), null, null, "th-timing"));
-        theadRow1.appendChild(narDom.th(formatDosageTh(narDom, TimingEventAmbu.EVENING, lang), null, null, "th-timing"));
+        theadRow1.appendChild(narDom.th(formatDosageTh(narDom, TimingEventAmbu.EVENING, lang),
+                                        null,
+                                        null,
+                                        "th-timing"));
         theadRow1.appendChild(narDom.th(formatDosageTh(narDom, TimingEventAmbu.NIGHT, lang), null, null, "th-timing"));
         theadRow1.appendChild(narDom.th(StringUtils.capitalize(this.getMessage("DOSE_UNIT", lang)), null, null, null));
-        theadRow1.appendChild(narDom.th(StringUtils.capitalize(this.getMessage("DATE_FROM_TO", lang)), null, null, null));
+        theadRow1.appendChild(narDom.th(StringUtils.capitalize(this.getMessage("DATE_FROM_TO", lang)),
+                                        null,
+                                        null,
+                                        null));
         theadRow1.appendChild(narDom.th(StringUtils.capitalize(this.getMessage("REASON", lang)), null, null, null));
-        theadRow1.appendChild(narDom.th(StringUtils.capitalize(this.getMessage("PRESCRIBED_BY", lang)), null, null, null));
+        theadRow1.appendChild(narDom.th(StringUtils.capitalize(this.getMessage("PRESCRIBED_BY", lang)),
+                                        null,
+                                        null,
+                                        null));
 
         final var thead = narDom.thead();
         thead.appendChild(theadRow1);
@@ -179,7 +214,8 @@ public abstract class AbstractNarrativeGenerator {
                 case MORNING:
                     yield AbstractNarrativeGenerator.class.getResourceAsStream("/narrative/default/icons/sunrise.png").readAllBytes();
                 case NOON:
-                    yield AbstractNarrativeGenerator.class.getResourceAsStream("/narrative/default/icons/brightness-high.png").readAllBytes();
+                    yield AbstractNarrativeGenerator.class.getResourceAsStream(
+                            "/narrative/default/icons/brightness-high.png").readAllBytes();
                 case EVENING:
                     yield AbstractNarrativeGenerator.class.getResourceAsStream("/narrative/default/icons/sunset.png").readAllBytes();
                 case NIGHT:
@@ -190,10 +226,13 @@ public abstract class AbstractNarrativeGenerator {
         }
 
         if (b64 != null) {
-            dosageThNode.appendChild(narDom.img("data:image/png;base64," + Base64.getEncoder().encodeToString(b64), this.valueSetEnumNarrativeForPatientService.getMessage(timing, lang)));
+            dosageThNode.appendChild(narDom.img("data:image/png;base64," + Base64.getEncoder().encodeToString(b64),
+                                                this.valueSetEnumNarrativeForPatientService.getMessage(timing, lang)));
         }
         dosageThNode.appendChild(narDom.br());
-        dosageThNode.appendChild(narDom.text(StringUtils.capitalize(this.valueSetEnumNarrativeForPatientService.getMessage(timing, lang))));
+        dosageThNode.appendChild(narDom.text(StringUtils.capitalize(this.valueSetEnumNarrativeForPatientService.getMessage(
+                timing,
+                lang))));
 
         return dosageThNode;
     }
