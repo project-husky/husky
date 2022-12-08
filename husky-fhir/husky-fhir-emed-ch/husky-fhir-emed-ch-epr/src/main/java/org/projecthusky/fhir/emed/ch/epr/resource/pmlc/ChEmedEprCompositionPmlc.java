@@ -58,26 +58,18 @@ public class ChEmedEprCompositionPmlc extends ChEmedEprComposition {
     }
 
     /**
-     * Resolves the authors of the document ({@link Device}).
+     * Resolves the author of the document ({@link Device}).
      *
-     * @return the list with the authors of the document.
+     * @return the author of the document.
      * @throws InvalidEmedContentException if no author is specified or if an author is not of type {@link Device}.
      */
     @ExpectsValidResource
-    public List<Device> resolveAuthors() throws InvalidEmedContentException {
-        if (!this.hasAuthor()) throw new InvalidEmedContentException("The composition requires at least one author.");
-
-        final var authors = new ArrayList<Device>();
-
-        for (final var reference : this.getAuthor()) {
-            final var resource = reference.getResource();
-            if (resource instanceof Device device) {
-                authors.add(device);
-            } else {
-                throw new InvalidEmedContentException("An author is invalid.");
-            }
+    public Device resolveAuthor() throws InvalidEmedContentException {
+        if (!this.hasAuthor()) throw new InvalidEmedContentException("The composition requires an author.");
+        if (this.getAuthorFirstRep().getResource() instanceof final Device device) {
+            return device;
         }
-        return authors;
+        throw new InvalidEmedContentException("The author is not a device.");
     }
 
     /**
