@@ -61,7 +61,7 @@ public class ChCorePatientEpr extends Patient {
      */
     @ExpectsValidResource
     public HumanName resolveName() {
-        if (!this.name.isEmpty()) {
+        if (this.hasName()) {
             return this.name.get(0);
         }
         throw new InvalidEmedContentException("The human name is missing");
@@ -75,7 +75,7 @@ public class ChCorePatientEpr extends Patient {
     @Nullable
     @ExpectsValidResource
     public Address resolveAddress() {
-        if (!this.hasAddress()) {
+        if (this.hasAddress()) {
             return this.address.get(0);
         }
         return null;
