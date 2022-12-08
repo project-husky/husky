@@ -10,6 +10,7 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.narrative.enums;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.common.enums.LanguageCode;
 
 import java.util.Locale;
@@ -40,7 +41,7 @@ public enum NarrativeLanguage {
     /**
      * Constructor.
      *
-     * @param isoCode The language ISO code.
+     * @param isoCode     The language ISO code.
      * @param displayName The language display name in English.
      */
     NarrativeLanguage(final String isoCode,
@@ -68,12 +69,28 @@ public enum NarrativeLanguage {
      * Returns the related {@link LanguageCode}.
      */
     public LanguageCode getLanguageCode() {
-        return switch(this) {
+        return switch (this) {
             case ENGLISH -> LanguageCode.ENGLISH;
-            case FRENCH  -> LanguageCode.FRENCH;
-            case GERMAN  -> LanguageCode.GERMAN;
+            case FRENCH -> LanguageCode.FRENCH;
+            case GERMAN -> LanguageCode.GERMAN;
             case ITALIAN -> LanguageCode.ITALIAN;
         };
+    }
+
+    /**
+     * Gets the enum with a given ISO code.
+     *
+     * @param isoCode The ISO code value.
+     * @return The enum value found or {@code null}.
+     */
+    @Nullable
+    public static NarrativeLanguage getEnum(@Nullable final String isoCode) {
+        for (final NarrativeLanguage x : values()) {
+            if (x.getIsoCode().equals(isoCode)) {
+                return x;
+            }
+        }
+        return null;
     }
 }
 
