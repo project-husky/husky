@@ -75,7 +75,7 @@ public class ChCorePatientEpr extends Patient {
     @Nullable
     @ExpectsValidResource
     public Address resolveAddress() {
-        if (!this.address.isEmpty()) {
+        if (!this.hasAddress()) {
             return this.address.get(0);
         }
         return null;
