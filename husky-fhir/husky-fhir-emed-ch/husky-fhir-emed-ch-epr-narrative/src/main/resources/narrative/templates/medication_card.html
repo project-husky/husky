@@ -1,0 +1,60 @@
+<!--/*
+  ~ This code is made available under the terms of the Eclipse Public License v1.0
+  ~ in the github project https://github.com/project-husky/husky there you also
+  ~ find a list of the contributors and the license information.
+  ~
+  ~ This project has been developed further and modified by the joined working group Husky
+  ~ on the basis of the eHealth Connector opensource project from June 28, 2021,
+  ~ whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+  */-->
+<th:block th:switch="${lang.name()}">
+    <th:block th:case="'FRENCH'" th:include="~{::medication-card-fr(${resource}, ${lang})}"/>
+    <th:block th:case="*">No template defined in medication_card.html for language [[${lang}]].</th:block>
+
+    <table>
+        <thead>
+        <tr>
+            <td rowspan="2">Nom du médicament</td>
+            <td colspan="4">Dosage</td>
+            <td rowspan="2">Voie et localisation</td>
+        </tr>
+        <tr>
+            <td>Matin</td>
+            <td>Midi</td>
+            <td>Soir</td>
+            <td>Nuit</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="medStmt: ${resource.resolveComposition().resolveMedicationStatements()}">
+            <td th:text="${medStmt.resolveMedication().resolveMedicationName()}"/>
+            <td>Matin</td>
+            <td>Midi</td>
+            <td>Soir</td>
+            <td>Nuit</td>
+            <td th:with="dosage = ${medStmt.resolveBaseDosage()}">
+                <th:block th:if="${dosage.resolveRouteOfAdministration()}" th:text="${dosage.resolveRouteOfAdministration()}"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</th:block>
+
+
+<th:block th:fragment="medication-card-fr(resource, lang)">
+    <h1>Carte de médication</h1>
+
+    <table class="table-header">
+        <tr>
+            <td class="cell-patient">
+                <h2>Patient</h2>
+                <th:block th:include="~{patient :: display-name-address-contact(${resource.resolvePatient()}, ${lang})}"/>
+            </td>
+            <td class="cell-author">
+                <h2>Auteur du document</h2>
+                ${resource.resolveComposition().resolveAuthor()}
+            </td>
+        </tr>
+    </table>
+
+</th:block>

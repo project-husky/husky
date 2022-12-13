@@ -26,8 +26,8 @@ import java.util.List;
 
 /**
  * A DOM (HTML or StrucDocText, which is XML-based) node factory for the narrative generation.
- *
- * It's currently only use
+ * <p>
+ * It's currently only used to generate HTML nodes.
  *
  * @author Quentin Ligier
  **/
