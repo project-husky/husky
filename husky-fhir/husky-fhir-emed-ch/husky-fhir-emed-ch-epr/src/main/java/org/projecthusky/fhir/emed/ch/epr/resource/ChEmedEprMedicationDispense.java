@@ -2,6 +2,7 @@ package org.projecthusky.fhir.emed.ch.epr.resource;
 
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
+import org.apache.commons.lang3.NotImplementedException;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Dosage;
 import org.hl7.fhir.r4.model.MedicationDispense;
@@ -11,6 +12,7 @@ import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
+import org.projecthusky.fhir.emed.ch.epr.model.common.EffectiveDosageInstructions;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EmedReference;
 import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprMedicationDis;
 import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosage;
@@ -217,6 +219,17 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
     }
 
     /**
+     * Sets the treatment reason.
+     *
+     * @param treatmentReason the treatment reason.
+     * @return this.
+     */
+    public ChEmedEprMedicationDispense setTreatmentReason(final String treatmentReason) {
+        this.getTreatmentReason().setValue(treatmentReason);
+        return this;
+    }
+
+    /**
      * Gets the prescription element. If it doesn't exist, it's created.
      *
      * @return the prescription element.
@@ -226,6 +239,17 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
             this.prescription = new ChEmedExtPrescription();
         }
         return this.prescription;
+    }
+
+    /**
+     * Sets the prescription reference.
+     *
+     * @param prescription the prescription reference.
+     * @return this.
+     */
+    public ChEmedEprMedicationDispense setPrescriptionElement(final ChEmedExtPrescription prescription) {
+        this.prescription = prescription;
+        return this;
     }
 
     /**
@@ -241,6 +265,17 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
     }
 
     /**
+     * Sets the pharmaceutical advice reference.
+     *
+     * @param pharmaceuticalAdvice the pharmaceutical advice reference.
+     * @return this.
+     */
+    public ChEmedEprMedicationDispense setPharmaceuticalAdviceElement(final ChEmedExtPharmaceuticalAdvice pharmaceuticalAdvice) {
+        this.pharmaceuticalAdvice = pharmaceuticalAdvice;
+        return this;
+    }
+
+    /**
      * Gets the treatment plan element. If it doesn't exist, it's created.
      *
      * @return the treatment plan element.
@@ -250,6 +285,17 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
             this.treatmentPlan = new ChEmedExtTreatmentPlan();
         }
         return this.treatmentPlan;
+    }
+
+    /**
+     * Sets the treatment plan reference.
+     *
+     * @param treatmentPlan the treatment plan reference.
+     * @return this.
+     */
+    public ChEmedEprMedicationDispense setTreatmentPlanElement(final ChEmedExtTreatmentPlan treatmentPlan) {
+        this.treatmentPlan = treatmentPlan;
+        return this;
     }
 
     /**
@@ -264,50 +310,6 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
         }
         this.getIdentifierFirstRep()
                 .setValue(Uuids.URN_PREFIX + identifier);
-        return this;
-    }
-
-    /**
-     * Sets the treatment reason.
-     *
-     * @param treatmentReason the treatment reason.
-     * @return this.
-     */
-    public ChEmedEprMedicationDispense setTreatmentReason(final String treatmentReason) {
-        this.getTreatmentReason().setValue(treatmentReason);
-        return this;
-    }
-
-    /**
-     * Sets the prescription reference.
-     *
-     * @param prescription the prescription reference.
-     * @return this.
-     */
-    public ChEmedEprMedicationDispense setPrescriptionElement(final ChEmedExtPrescription prescription) {
-        this.prescription = prescription;
-        return this;
-    }
-
-    /**
-     * Sets the pharmaceutical advice reference.
-     *
-     * @param pharmaceuticalAdvice the pharmaceutical advice reference.
-     * @return this.
-     */
-    public ChEmedEprMedicationDispense setPharmaceuticalAdviceElement(final ChEmedExtPharmaceuticalAdvice pharmaceuticalAdvice) {
-        this.pharmaceuticalAdvice = pharmaceuticalAdvice;
-        return this;
-    }
-
-    /**
-     * Sets the treatment plan reference.
-     *
-     * @param treatmentPlan the treatment plan reference.
-     * @return this.
-     */
-    public ChEmedEprMedicationDispense setTreatmentPlanElement(final ChEmedExtTreatmentPlan treatmentPlan) {
-        this.treatmentPlan = treatmentPlan;
         return this;
     }
 
@@ -472,7 +474,8 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
     }
 
     /**
-     * @return The first repetition of repeating field {@link #dosageInstruction}, creating it if it does not already exist
+     * @return The first repetition of repeating field {@link #dosageInstruction}, creating it if it does not already
+     * exist
      */
     @Override
     public ChEmedDosage getDosageInstructionFirstRep() {
@@ -480,5 +483,13 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
             addDosageInstruction();
         }
         return (ChEmedDosage) getDosageInstruction().get(0);
+    }
+
+    /**
+     * Converts the main and additional dosages into a read-only model, containing the effective dosage instructions.
+     */
+    @ExpectsValidResource
+    public EffectiveDosageInstructions resolveEffectiveDosageInstructions() {
+        throw new NotImplementedException();
     }
 }

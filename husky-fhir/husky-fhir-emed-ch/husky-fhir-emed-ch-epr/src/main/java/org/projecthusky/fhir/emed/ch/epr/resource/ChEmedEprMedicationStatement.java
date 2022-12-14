@@ -10,6 +10,7 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.resource;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Dosage;
 import org.hl7.fhir.r4.model.Identifier;
@@ -20,6 +21,7 @@ import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
+import org.projecthusky.fhir.emed.ch.epr.model.common.EffectiveDosageInstructions;
 import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosage;
 
 import java.util.ArrayList;
@@ -255,7 +257,7 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
     @Override
     public MedicationStatement addDosage(final Dosage t) {
         if (t instanceof final ChEmedDosage chEmedDosage) {
-            this.dosage.add(t);
+            this.dosage.add(chEmedDosage);
         }
         final var newDosage = new ChEmedDosage();
         t.copyValues(newDosage);
@@ -272,5 +274,13 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
             addDosage();
         }
         return (ChEmedDosage) getDosage().get(0);
+    }
+
+    /**
+     * Converts the main and additional dosages into a read-only model, containing the effective dosage instructions.
+     */
+    @ExpectsValidResource
+    public EffectiveDosageInstructions resolveEffectiveDosageInstructions() {
+        throw new NotImplementedException();
     }
 }

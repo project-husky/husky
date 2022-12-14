@@ -2,6 +2,7 @@ package org.projecthusky.fhir.emed.ch.epr.resource;
 
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
+import org.apache.commons.lang3.NotImplementedException;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Dosage;
 import org.hl7.fhir.r4.model.Identifier;
@@ -13,6 +14,7 @@ import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.enums.PrescriptionStatus;
+import org.projecthusky.fhir.emed.ch.epr.model.common.EffectiveDosageInstructions;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EmedReference;
 import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosage;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
@@ -177,6 +179,17 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
     }
 
     /**
+     * Sets the treatment plan reference.
+     *
+     * @param treatmentPlan the treatment plan reference.
+     * @return this.
+     */
+    public ChEmedEprMedicationRequest setTreatmentPlanElement(final ChEmedExtTreatmentPlan treatmentPlan) {
+        this.treatmentPlan = treatmentPlan;
+        return this;
+    }
+
+    /**
      * Sets the medication request UUID.
      *
      * @param documentUUID The medication request UUID.
@@ -189,17 +202,6 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
             identifier.setSystem(FhirSystem.URI);
         }
         identifier.setValue(Uuids.URN_PREFIX + documentUUID);
-        return this;
-    }
-
-    /**
-     * Sets the treatment plan reference.
-     *
-     * @param treatmentPlan the treatment plan reference.
-     * @return this.
-     */
-    public ChEmedEprMedicationRequest setTreatmentPlanElement(final ChEmedExtTreatmentPlan treatmentPlan) {
-        this.treatmentPlan = treatmentPlan;
         return this;
     }
 
@@ -325,7 +327,8 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
     }
 
     /**
-     * @return The first repetition of repeating field {@link #dosageInstruction}, creating it if it does not already exist
+     * @return The first repetition of repeating field {@link #dosageInstruction}, creating it if it does not already
+     * exist
      */
     @Override
     public ChEmedDosage getDosageInstructionFirstRep() {
@@ -333,5 +336,13 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
             addDosageInstruction();
         }
         return (ChEmedDosage) getDosageInstruction().get(0);
+    }
+
+    /**
+     * Converts the main and additional dosages into a read-only model, containing the effective dosage instructions.
+     */
+    @ExpectsValidResource
+    public EffectiveDosageInstructions resolveEffectiveDosageInstructions() {
+        throw new NotImplementedException();
     }
 }

@@ -1,14 +1,8 @@
 package org.projecthusky.fhir.emed.ch.epr.util;
 
-import org.hl7.fhir.r4.model.Device;
 import org.hl7.fhir.r4.model.Reference;
 import org.hl7.fhir.r4.model.Resource;
-import org.projecthusky.common.utils.datatypes.Uuids;
-import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
-import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprEntry;
-import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedication;
-import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
-import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprMedicationDis;
+
 
 /**
  * Reference Utilities
