@@ -293,25 +293,6 @@ public class DocumentEntryConverter {
             }
         }
 
-        // TODO relatesTo | DocumentEntry Associations
-//        for (DocumentReferenceRelatesToComponent relatesTo : documentReference.getRelatesTo()) {
-//            final var association = new Association();
-//
-//            /// code | DocumentEntry Associations.type
-//            final AssociationType associationType = switch (relatesTo.getCode()) {
-//                case REPLACES -> AssociationType.REPLACE;
-//                case TRANSFORMS -> AssociationType.TRANSFORM;
-//                case SIGNS -> AssociationType.SIGNS;
-//                case APPENDS -> AssociationType.APPEND;
-//                default -> null;
-//            };
-//            if (associationType != null) association.setAssociationType(associationType);
-//
-//            /// target | DocumentEntry Associations.reference
-//            association.setTargetUuid(ConverterUtils.toUriString(relatesTo.getTarget()));
-//            association.setSourceUuid(documentEntry.getEntryUuid());
-//        }
-
         // description | DocumentEntry.comments
         if (documentReference.hasDescription()) {
             documentEntry.setComments(ConverterUtils.getLocalizedString(documentReference.getDescription(), documentReference.getLanguage()));
