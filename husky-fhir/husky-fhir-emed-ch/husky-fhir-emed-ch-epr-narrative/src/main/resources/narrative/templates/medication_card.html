@@ -33,7 +33,8 @@
             <td>Soir</td>
             <td>Nuit</td>
             <td th:with="dosage = ${medStmt.resolveBaseDosage()}">
-                <th:block th:if="${dosage.resolveRouteOfAdministration()}" th:text="${dosage.resolveRouteOfAdministration()}"/>
+                <th:block th:if="${dosage.resolveRouteOfAdministration()}"
+                          th:text="${fopase.getMessage(dosage.resolveRouteOfAdministration(), lang)}"/>
             </td>
         </tr>
         </tbody>
@@ -48,7 +49,8 @@
         <tr>
             <td class="cell-patient">
                 <h2>Patient</h2>
-                <th:block th:include="~{patient :: display-name-address-contact(${resource.resolvePatient()}, ${lang})}"/>
+                <th:block
+                        th:include="~{patient :: display-name-address-contact(${resource.resolvePatient()}, ${lang})}"/>
             </td>
             <td class="cell-author">
                 <h2>Auteur du document</h2>

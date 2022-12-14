@@ -12,11 +12,14 @@ package org.projecthusky.fhir.emed.ch.epr.narrative.generators;
 
 import ca.uhn.fhir.context.FhirContext;
 import org.projecthusky.fhir.emed.ch.epr.narrative.enums.NarrativeLanguage;
+import org.projecthusky.fhir.emed.ch.epr.narrative.services.ValueSetEnumNarrativeForPatientService;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprDocumentPmlc;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+
+import java.io.IOException;
 
 /**
  * A generator of narrative as HTML content.
@@ -38,7 +41,12 @@ public class HtmlNarrativeGenerator {
      */
     protected final TemplateEngine templateEngine;
 
-    public HtmlNarrativeGenerator() {
+    /**
+     * A service to get better display names for patients.
+     */
+    protected final ValueSetEnumNarrativeForPatientService fopase = new ValueSetEnumNarrativeForPatientService();
+
+    public HtmlNarrativeGenerator() throws IOException {
         this.fhirContext = FhirContext.forR4Cached();
 
         final var templateResolver = new ClassLoaderTemplateResolver(this.getClass().getClassLoader());
@@ -54,10 +62,11 @@ public class HtmlNarrativeGenerator {
     }
 
     public String generate(final ChEmedEprDocumentPmlc document,
-                           final NarrativeLanguage lang) throws Exception {
+                           final NarrativeLanguage lang) {
         final var context = new Context();
         context.setVariable("resource", document);
         context.setVariable("lang", lang);
+        context.setVariable("fopase", this.fopase);
         context.setLocale(lang.getLocale());
         return this.templateEngine.process("medication_card", context);
     }
