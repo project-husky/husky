@@ -20,9 +20,9 @@ import ca.uhn.fhir.validation.ValidationResult;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.common.hapi.validation.support.*;
 import org.hl7.fhir.common.hapi.validation.validator.FhirInstanceValidator;
-import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r5.utils.validation.constants.BestPracticeWarningLevel;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 
 import java.io.IOException;
 
@@ -43,6 +43,11 @@ public class ChEmedEprValidator {
      * The validation support chain.
      */
     private final IValidationSupport validationSupport;
+
+    /**
+     * The logic validator.
+     */
+    private final LogicValidator logicValidator = new LogicValidator();
 
     /**
      * Constructor.
@@ -78,29 +83,22 @@ public class ChEmedEprValidator {
     }
 
     /**
-     * Validates a CH-EMED-EPR document Bundle from its JSON or XML representation. Use this method if you've received a
-     * document that you want to validate.
-     *
-     * @param documentRepresentation The JSON or XML representation of the document Bundle to validate.
-     * @param type                   The eMed type.
-     * @return the validation result.
-     */
-    public ValidationResult validateDocumentBundle(final String documentRepresentation,
-                                                   final EmedDocumentType type) {
-        return this.createValidator().validateWithResult(documentRepresentation, this.createOptions(type));
-    }
-
-    /**
      * Validates a CH-EMED-EPR document Bundle. Use this method if you've generated a document that you want to
      * validate.
      *
-     * @param documentBundle The document Bundle to validate.
-     * @param type           The eMed type.
+     * @param document The document Bundle to validate.
      * @return the validation result.
      */
-    public ValidationResult validateDocumentBundle(final Bundle documentBundle,
-                                                   final EmedDocumentType type) {
-        return this.createValidator().validateWithResult(documentBundle, this.createOptions(type));
+    public ValidationResult validateDocumentBundle(final ChEmedEprDocument document) {
+        final var result = this.createInstanceValidator().validateWithResult(document,
+                this.createOptions(document.getEmedType()));
+        if (!result.isSuccessful()) {
+            return result;
+        }
+        final var newMessages = this.logicValidator.validate(document);
+        newMessages.addAll(result.getMessages());
+        return new ValidationResult(this.context, newMessages);
+
     }
 
     /**
@@ -109,7 +107,7 @@ public class ChEmedEprValidator {
      * @return a configured FHIR validator instance.
      * @todo Re-enable the terminology checks.
      */
-    protected FhirValidator createValidator() {
+    protected FhirValidator createInstanceValidator() {
         final var instanceValidator = new FhirInstanceValidator(this.validationSupport);
         instanceValidator.setCustomExtensionDomains("http://fhir.ch");
         instanceValidator.setBestPracticeWarningLevel(BestPracticeWarningLevel.Ignore);
