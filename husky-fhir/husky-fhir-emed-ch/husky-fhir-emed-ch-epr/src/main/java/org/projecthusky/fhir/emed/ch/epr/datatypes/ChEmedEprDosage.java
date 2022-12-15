@@ -54,11 +54,11 @@ public class ChEmedEprDosage extends Dosage {
         final var repeat = this.getTiming().getRepeat();
         if (!repeat.hasWhen()) return Collections.emptyList();
 
-        final var eventTimings = new ArrayList<TimingEventAmbu>();
+        final var eventTimings = new ArrayList<TimingEventAmbu>(repeat.getWhen().size());
         for (final var event : repeat.getWhen()) {
             final var eventTiming = TimingEventAmbu.getEnum(event.getCode());
             if (eventTiming == null) {
-                throw new InvalidEmedContentException("The event timing is invalid.");
+                throw new InvalidEmedContentException("The event timing '" + event.getCode() + "' is invalid.");
             }
             eventTimings.add(eventTiming);
         }
