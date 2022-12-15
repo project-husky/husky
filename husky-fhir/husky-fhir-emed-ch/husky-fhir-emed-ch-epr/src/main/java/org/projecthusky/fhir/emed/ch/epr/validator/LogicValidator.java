@@ -1,7 +1,8 @@
 package org.projecthusky.fhir.emed.ch.epr.validator;
 
+import ca.uhn.fhir.validation.ResultSeverityEnum;
 import ca.uhn.fhir.validation.SingleValidationMessage;
-import org.hl7.fhir.r4.model.Dosage;
+import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprDocumentDis;
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprDocumentMtp;
@@ -49,11 +50,18 @@ class LogicValidator {
     }
 
 
-    public void validateDosages(final Dosage mainDosage,
-                                final List<Dosage> additionalDosages,
+    public void validateDosages(final ChEmedEprDosage baseDosage,
+                                final List<ChEmedEprDosage> additionalDosages,
                                 final List<SingleValidationMessage> messages) {
-        if (!mainDosage.hasDoseAndRate() && !additionalDosages.isEmpty()) {
-            messages.add();
+        if (!baseDosage.hasDoseAndRate() && !additionalDosages.isEmpty()) {
+            messages.add(new SingleValidationMessage());
         }
+    }
+
+    protected static SingleValidationMessage createError(final String message) {
+        final var error = new SingleValidationMessage();
+        error.setSeverity(ResultSeverityEnum.ERROR);
+        error.setMessage(message);
+        return error;
     }
 }

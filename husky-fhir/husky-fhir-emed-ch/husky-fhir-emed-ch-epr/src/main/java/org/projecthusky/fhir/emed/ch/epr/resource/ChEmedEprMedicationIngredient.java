@@ -6,7 +6,7 @@ import org.projecthusky.common.utils.datatypes.Oids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.ActivePharmaceuticalIngredient;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
-import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedRatioWithEmedUnits;
+import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedRatioWithEmedUnits;
 
 /**
  * The HAPI custom structure for CH-EMED-EPR MedicationIngredient.

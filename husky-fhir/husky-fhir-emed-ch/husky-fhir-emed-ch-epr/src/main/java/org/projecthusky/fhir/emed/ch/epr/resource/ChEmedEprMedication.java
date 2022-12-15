@@ -16,20 +16,17 @@ import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Medication;
 import org.hl7.fhir.r4.model.UriType;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
-import org.projecthusky.fhir.emed.ch.common.enums.ActivePharmaceuticalIngredient;
 import org.projecthusky.fhir.emed.ch.common.enums.PharmaceuticalDoseFormEdqm;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
-import org.projecthusky.fhir.emed.ch.common.resource.ChEmedOrganization;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
-import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedRatioWithEmedUnits;
 
 import java.util.List;
 
 /**
  * The HAPI custom structure for CH-EMED-EPR Medication.
  * <p>
- * Because of the parser limitations, this class can't be extended into DIS and PML flavours. All methods and
- * extensions are included here, be careful and read the JavaDoc when using these new methods.
+ * Because of the parser limitations, this class can't be extended into DIS and PML flavours. All methods and extensions
+ * are included here, be careful and read the JavaDoc when using these new methods.
  *
  * @author Quentin Ligier
  **/

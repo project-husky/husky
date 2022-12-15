@@ -2,7 +2,6 @@ package org.projecthusky.fhir.emed.ch.epr.resource;
 
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
-import org.apache.commons.lang3.NotImplementedException;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Dosage;
 import org.hl7.fhir.r4.model.MedicationDispense;
@@ -12,11 +11,11 @@ import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
+import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
+import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedQuantityWithEmedUnits;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EffectiveDosageInstructions;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EmedReference;
 import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprMedicationDis;
-import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosage;
-import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedQuantityWithEmedUnits;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtPharmaceuticalAdvice;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtPrescription;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
@@ -152,8 +151,8 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
      * @throws InvalidEmedContentException if the base entry of the dosage instruction is missing.
      */
     @ExpectsValidResource
-    public ChEmedDosage resolveBaseDosage() throws InvalidEmedContentException {
-        if (!this.getDosageInstruction().isEmpty() && this.getDosageInstruction().get(0) instanceof final ChEmedDosage dosage) {
+    public ChEmedEprDosage resolveBaseDosage() throws InvalidEmedContentException {
+        if (!this.getDosageInstruction().isEmpty() && this.getDosageInstruction().get(0) instanceof final ChEmedEprDosage dosage) {
             return dosage;
         }
         throw new InvalidEmedContentException("Base entry of the dosage instruction is missing.");
@@ -193,10 +192,10 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
      *
      * @return additional entries of the dosage instruction.
      */
-    public List<ChEmedDosage> resolveAdditionalDosage() {
+    public List<ChEmedEprDosage> resolveAdditionalDosage() {
         return this.getDosageInstruction().stream()
-                .filter(ChEmedDosage.class::isInstance)
-                .map(ChEmedDosage.class::cast)
+                .filter(ChEmedEprDosage.class::isInstance)
+                .map(ChEmedEprDosage.class::cast)
                 .skip(1)
                 .toList();
     }
@@ -353,7 +352,7 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
      * @param dosageBaseEntry the base entry of the dosage instruction.
      * @return this.
      */
-    public ChEmedEprMedicationDispense setDosageBaseEntry(final ChEmedDosage dosageBaseEntry) {
+    public ChEmedEprMedicationDispense setDosageBaseEntry(final ChEmedEprDosage dosageBaseEntry) {
         if (this.hasDosageInstruction()) {
             this.getDosageInstruction().set(0, dosageBaseEntry);
         } else {
@@ -368,7 +367,7 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
      * @param dosageAdditionalEntry additional entry of the dosage instruction.
      * @return this.
      */
-    public ChEmedEprMedicationDispense addDosageAdditionalEntry(final ChEmedDosage dosageAdditionalEntry) {
+    public ChEmedEprMedicationDispense addDosageAdditionalEntry(final ChEmedEprDosage dosageAdditionalEntry) {
         this.getDosageInstruction().add(dosageAdditionalEntry);
         return this;
     }
@@ -436,8 +435,8 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
             this.dosageInstruction = new ArrayList<>();
         else {
             for (int i = 0; i < this.dosageInstruction.size(); ++i) {
-                if (!(this.dosageInstruction.get(i) instanceof ChEmedDosage)) {
-                    final var newDosage = new ChEmedDosage();
+                if (!(this.dosageInstruction.get(i) instanceof ChEmedEprDosage)) {
+                    final var newDosage = new ChEmedEprDosage();
                     this.dosageInstruction.get(i).copyValues(newDosage);
                     this.dosageInstruction.set(i, newDosage);
                 }
@@ -456,18 +455,18 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
     }
 
     @Override
-    public ChEmedDosage addDosageInstruction() {
-        final var dosage = new ChEmedDosage();
+    public ChEmedEprDosage addDosageInstruction() {
+        final var dosage = new ChEmedEprDosage();
         this.addDosageInstruction(dosage);
         return dosage;
     }
 
     @Override
     public MedicationDispense addDosageInstruction(final Dosage t) {
-        if (t instanceof final ChEmedDosage chEmedDosage) {
+        if (t instanceof final ChEmedEprDosage chEmedEprDosage) {
             this.dosageInstruction.add(t);
         }
-        final var newDosage = new ChEmedDosage();
+        final var newDosage = new ChEmedEprDosage();
         t.copyValues(newDosage);
         this.dosageInstruction.add(newDosage);
         return this;
@@ -478,11 +477,11 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
      * exist
      */
     @Override
-    public ChEmedDosage getDosageInstructionFirstRep() {
+    public ChEmedEprDosage getDosageInstructionFirstRep() {
         if (getDosageInstruction().isEmpty()) {
             addDosageInstruction();
         }
-        return (ChEmedDosage) getDosageInstruction().get(0);
+        return (ChEmedEprDosage) getDosageInstruction().get(0);
     }
 
     /**
@@ -490,6 +489,6 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
      */
     @ExpectsValidResource
     public EffectiveDosageInstructions resolveEffectiveDosageInstructions() {
-        throw new NotImplementedException();
+        return EffectiveDosageInstructions.fromDosages(this.resolveBaseDosage(), this.resolveAdditionalDosage());
     }
 }

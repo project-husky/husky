@@ -1,5 +1,7 @@
 package org.projecthusky.fhir.emed.ch.epr.model.common;
 
+import org.hl7.fhir.r4.model.Ratio;
+
 import java.util.Objects;
 
 /**
@@ -20,5 +22,15 @@ public record AmountPerDuration(AmountQuantity amount,
                              final Duration duration) {
         this.amount = Objects.requireNonNull(amount);
         this.duration = Objects.requireNonNull(duration);
+    }
+
+
+    /**
+     * Creates an instance from an HAPI Ratio.
+     */
+    public static AmountPerDuration fromRatio(final Ratio ratio) {
+        final var amount = AmountQuantity.fromQuantity(ratio.getNumerator());
+        final var duration = Duration.fromQuantity(ratio.getDenominator());
+        return new AmountPerDuration(amount, duration);
     }
 }

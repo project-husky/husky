@@ -10,6 +10,7 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.model.common;
 
+import org.hl7.fhir.r4.model.Quantity;
 import org.projecthusky.fhir.emed.ch.epr.enums.RegularUnitCodeAmbu;
 
 import java.util.Objects;
@@ -32,5 +33,26 @@ public record AmountQuantity(String value,
                           final RegularUnitCodeAmbu unit) {
         this.value = Objects.requireNonNull(value);
         this.unit = Objects.requireNonNull(unit);
+    }
+
+    /**
+     * Creates an instance from an HAPI Quantity.
+     */
+    public static AmountQuantity fromQuantity(final Quantity quantity) {
+        if (!quantity.hasCode()) {
+            throw new IllegalArgumentException("AmountQuantity: Missing code in quantity");
+        }
+        if (!quantity.hasValue()) {
+            throw new IllegalArgumentException("AmountQuantity: Missing value in quantity");
+        }
+        if (!quantity.hasSystem()) {
+            throw new IllegalArgumentException("AmountQuantity: Missing system in quantity");
+        }
+        final var unit = RegularUnitCodeAmbu.getEnum(quantity.getCode());
+        if (unit == null || !quantity.getSystem().equals(unit.getCodeSystemId())) {
+            throw new IllegalArgumentException("AmountQuantity: Invalid code in quantity");
+        }
+        return new AmountQuantity(quantity.getValueElement().asStringValue(),
+                                  unit);
     }
 }

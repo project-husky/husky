@@ -1,4 +1,14 @@
-package org.projecthusky.fhir.emed.ch.epr.resource.dosage;
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ *
+ */
+package org.projecthusky.fhir.emed.ch.epr.datatypes;
 
 import ca.uhn.fhir.model.api.annotation.DatatypeDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -10,6 +20,9 @@ import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.RouteOfAdministrationEdqm;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.enums.TimingEventAmbu;
+import org.projecthusky.fhir.emed.ch.epr.model.common.AmountPerDuration;
+import org.projecthusky.fhir.emed.ch.epr.model.common.AmountQuantity;
+import org.projecthusky.fhir.emed.ch.epr.model.common.Duration;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,12 +34,12 @@ import java.util.List;
  * @author Ronaldo Loureiro
  **/
 @DatatypeDef(name = "Dosage", isSpecialization = true, profileOf = Dosage.class)
-public class ChEmedDosage extends Dosage {
+public class ChEmedEprDosage extends Dosage {
 
     /**
      * Empty constructor
      */
-    public ChEmedDosage() {
+    public ChEmedEprDosage() {
         super();
     }
 
@@ -61,16 +74,19 @@ public class ChEmedDosage extends Dosage {
     @Nullable
     @ExpectsValidResource
     public RouteOfAdministrationEdqm resolveRouteOfAdministration() throws InvalidEmedContentException {
-        if (!this.hasRoute()) return null;
-
-        final var routeOfAdministration = RouteOfAdministrationEdqm.getEnum(this.getRoute()
-                                                                                    .getCodingFirstRep()
-                                                                                    .getCode());
-
-        if (routeOfAdministration == null)
-            throw new InvalidEmedContentException("The route of administration is invalid.");
-
-        return routeOfAdministration;
+        if (!this.hasRoute()) {
+            return null;
+        }
+        for (final var coding : this.getRoute().getCoding()) {
+            if (!RouteOfAdministrationEdqm.CODE_SYSTEM_ID.equals(coding.getSystem())) {
+                continue;
+            }
+            final var routeOfAdministration = RouteOfAdministrationEdqm.getEnum(coding.getCode());
+            if (routeOfAdministration != null) {
+                return routeOfAdministration;
+            }
+        }
+        throw new InvalidEmedContentException("The route of administration is invalid.");
     }
 
     /**
@@ -128,12 +144,26 @@ public class ChEmedDosage extends Dosage {
     }
 
     /**
+     * Resolves the treatment duration, if specified.
+     *
+     * @return the treatment duration or {@code null}.
+     */
+    @ExpectsValidResource
+    @Nullable
+    public Duration resolveBoundsDuration() {
+        if (!this.getTiming().getRepeat().hasBoundsDuration()) {
+            return null;
+        }
+        return Duration.fromQuantity(this.getTiming().getRepeat().getBoundsDuration());
+    }
+
+    /**
      * Sets patient medication instructions.
      *
      * @param patientInstruction Instructions in terms that are understood by the patient or consumer.
      * @return this.
      */
-    public ChEmedDosage setPatientInstruction(final String patientInstruction) {
+    public ChEmedEprDosage setPatientInstruction(final String patientInstruction) {
         super.setPatientInstruction(patientInstruction);
         return this;
     }
@@ -144,7 +174,7 @@ public class ChEmedDosage extends Dosage {
      * @param boundsPeriod start and/or end of treatment.
      * @return this.
      */
-    public ChEmedDosage setBoundsPeriod(final Period boundsPeriod) {
+    public ChEmedEprDosage setBoundsPeriod(final Period boundsPeriod) {
         this.getTiming()
                 .getRepeat()
                 .setBounds(boundsPeriod);
@@ -157,7 +187,7 @@ public class ChEmedDosage extends Dosage {
      * @param routeOfAdministration the route of administration.
      * @return this.
      */
-    public ChEmedDosage setRouteOfAdministration(final RouteOfAdministrationEdqm routeOfAdministration) {
+    public ChEmedEprDosage setRouteOfAdministration(final RouteOfAdministrationEdqm routeOfAdministration) {
         this.getRoute()
                 .getCodingFirstRep()
                 .setSystem(Oids.PREFIX_OID + routeOfAdministration.getCodeSystemId())
@@ -173,7 +203,7 @@ public class ChEmedDosage extends Dosage {
      * @param doseQuantity the dose quantity.
      * @return this.
      */
-    public ChEmedDosage setDoseQuantity(final ChEmedQuantityWithEmedUnits doseQuantity) {
+    public ChEmedEprDosage setDoseQuantity(final ChEmedQuantityWithEmedUnits doseQuantity) {
         this.getDoseAndRateFirstRep().setDose(doseQuantity);
         return this;
     }
@@ -184,7 +214,7 @@ public class ChEmedDosage extends Dosage {
      * @param doseRange the dose range.
      * @return this.
      */
-    public ChEmedDosage setDoseRange(final ChEmedQuantityWithEmedUnits doseRange) {
+    public ChEmedEprDosage setDoseRange(final ChEmedQuantityWithEmedUnits doseRange) {
         this.getDoseAndRateFirstRep().setDose(doseRange);
         return this;
     }
@@ -195,7 +225,7 @@ public class ChEmedDosage extends Dosage {
      * @param timing the event timing.
      * @return this.
      */
-    public ChEmedDosage addWhen(final TimingEventAmbu timing) {
+    public ChEmedEprDosage addWhen(final TimingEventAmbu timing) {
         this.getTiming()
                 .getRepeat()
                 .addWhen(Timing.EventTiming.fromCode(timing.getCodeValue()));
@@ -223,5 +253,50 @@ public class ChEmedDosage extends Dosage {
         return this.getTiming()
                 .getRepeat()
                 .hasBoundsPeriod();
+    }
+
+    /**
+     * Returns the site text, either the `site.text` element or the first `site.coding.text` that is filled.
+     */
+    @Nullable
+    public String getSiteText() {
+        if (!this.hasSite()) {
+            return null;
+        }
+        if (this.getSite().hasText()) {
+            return this.getSite().getText();
+        }
+        for (final var code : this.getSite().getCoding()) {
+            if (code.hasDisplay()) {
+                return code.getDisplay();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns the resolved max dose per period, or {@code null} if it's not specified. Throws if it's specified but
+     * invalid.
+     */
+    @ExpectsValidResource
+    @Nullable
+    public AmountPerDuration resolveMaxDosePerPeriod() {
+        if (!this.hasMaxDosePerPeriod()) {
+            return null;
+        }
+        return AmountPerDuration.fromRatio(this.getMaxDosePerPeriod());
+    }
+
+    /**
+     * Returns the resolved max dose per administration, or {@code null} if it's not specified. Throws if it's specified
+     * but invalid.
+     */
+    @ExpectsValidResource
+    @Nullable
+    public AmountQuantity resolveMaxDosePerAdministration() {
+        if (!this.hasMaxDosePerAdministration()) {
+            return null;
+        }
+        return AmountQuantity.fromQuantity(this.getMaxDosePerAdministration());
     }
 }

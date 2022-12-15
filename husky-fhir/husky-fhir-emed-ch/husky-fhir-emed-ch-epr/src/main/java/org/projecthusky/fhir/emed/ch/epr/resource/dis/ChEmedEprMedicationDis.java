@@ -3,8 +3,8 @@ package org.projecthusky.fhir.emed.ch.epr.resource.dis;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChEmedOrganization;
+import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedRatioWithEmedUnits;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedication;
-import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedRatioWithEmedUnits;
 
 /**
  * The HAPI custom structure for CH-EMED-EPR Medication (DIS).

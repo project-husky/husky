@@ -10,7 +10,6 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.resource;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Dosage;
 import org.hl7.fhir.r4.model.Identifier;
@@ -21,8 +20,8 @@ import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
+import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EffectiveDosageInstructions;
-import org.projecthusky.fhir.emed.ch.epr.resource.dosage.ChEmedDosage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,8 +99,8 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
      * @throws InvalidEmedContentException if the base entry of the dosage instruction is missing.
      */
     @ExpectsValidResource
-    public ChEmedDosage resolveBaseDosage() throws InvalidEmedContentException {
-        if (!this.getDosage().isEmpty() && this.getDosage().get(0) instanceof final ChEmedDosage dosage) {
+    public ChEmedEprDosage resolveBaseDosage() throws InvalidEmedContentException {
+        if (!this.getDosage().isEmpty() && this.getDosage().get(0) instanceof final ChEmedEprDosage dosage) {
             return dosage;
         }
         throw new InvalidEmedContentException("Base entry of the dosage instruction is missing.");
@@ -112,10 +111,10 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
      *
      * @return additional entries of the dosage instruction.
      */
-    public List<ChEmedDosage> resolveAdditionalDosage() {
+    public List<ChEmedEprDosage> resolveAdditionalDosage() {
         return this.getDosage().stream()
-                .filter(ChEmedDosage.class::isInstance)
-                .map(ChEmedDosage.class::cast)
+                .filter(ChEmedEprDosage.class::isInstance)
+                .map(ChEmedEprDosage.class::cast)
                 .skip(1)
                 .toList();
     }
@@ -181,7 +180,7 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
      * @param dosageBaseEntry the base entry of the dosage instruction.
      * @return this.
      */
-    public ChEmedEprMedicationStatement setDosageBaseEntry(final ChEmedDosage dosageBaseEntry) {
+    public ChEmedEprMedicationStatement setDosageBaseEntry(final ChEmedEprDosage dosageBaseEntry) {
         if (this.hasDosage()) {
             this.getDosage().set(0, dosageBaseEntry);
         } else {
@@ -196,7 +195,7 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
      * @param dosageAdditionalEntry additional entry of the dosage instruction.
      * @return this.
      */
-    public ChEmedEprMedicationStatement addDosageAdditionalEntry(final ChEmedDosage dosageAdditionalEntry) {
+    public ChEmedEprMedicationStatement addDosageAdditionalEntry(final ChEmedEprDosage dosageAdditionalEntry) {
         this.getDosage().add(dosageAdditionalEntry);
         return this;
     }
@@ -228,8 +227,8 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
             this.dosage = new ArrayList<>();
         else {
             for (int i = 0; i < this.dosage.size(); ++i) {
-                if (!(this.dosage.get(i) instanceof ChEmedDosage)) {
-                    final var newDosage = new ChEmedDosage();
+                if (!(this.dosage.get(i) instanceof ChEmedEprDosage)) {
+                    final var newDosage = new ChEmedEprDosage();
                     this.dosage.get(i).copyValues(newDosage);
                     this.dosage.set(i, newDosage);
                 }
@@ -248,18 +247,18 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
     }
 
     @Override
-    public ChEmedDosage addDosage() {
-        final var dosage = new ChEmedDosage();
+    public ChEmedEprDosage addDosage() {
+        final var dosage = new ChEmedEprDosage();
         this.addDosage(dosage);
         return dosage;
     }
 
     @Override
     public MedicationStatement addDosage(final Dosage t) {
-        if (t instanceof final ChEmedDosage chEmedDosage) {
-            this.dosage.add(chEmedDosage);
+        if (t instanceof final ChEmedEprDosage chEmedEprDosage) {
+            this.dosage.add(chEmedEprDosage);
         }
-        final var newDosage = new ChEmedDosage();
+        final var newDosage = new ChEmedEprDosage();
         t.copyValues(newDosage);
         this.dosage.add(newDosage);
         return this;
@@ -269,11 +268,11 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
      * @return The first repetition of repeating field {@link #dosage}, creating it if it does not already exist
      */
     @Override
-    public ChEmedDosage getDosageFirstRep() {
+    public ChEmedEprDosage getDosageFirstRep() {
         if (getDosage().isEmpty()) {
             addDosage();
         }
-        return (ChEmedDosage) getDosage().get(0);
+        return (ChEmedEprDosage) getDosage().get(0);
     }
 
     /**
@@ -281,6 +280,6 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
      */
     @ExpectsValidResource
     public EffectiveDosageInstructions resolveEffectiveDosageInstructions() {
-        throw new NotImplementedException();
+        return EffectiveDosageInstructions.fromDosages(this.resolveBaseDosage(), this.resolveAdditionalDosage());
     }
 }
