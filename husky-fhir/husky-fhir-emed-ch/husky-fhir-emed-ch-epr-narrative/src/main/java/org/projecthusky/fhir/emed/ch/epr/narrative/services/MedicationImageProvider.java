@@ -8,10 +8,10 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-package org.projecthusky.fhir.emed.ch.epr.narrative.generators;
+package org.projecthusky.fhir.emed.ch.epr.narrative.services;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.hl7.fhir.r4.model.Medication;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedication;
 
 /**
  * A provider of images for medications.
@@ -29,7 +29,7 @@ public interface MedicationImageProvider {
      * @return the data URL containing the medication image or {@code null}.
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs">Data URLs</a>
      */
-    @Nullable String provide(final Medication medication);
+    @Nullable String provide(final ChEmedEprMedication medication);
 
     /**
      * A no-operation instance.

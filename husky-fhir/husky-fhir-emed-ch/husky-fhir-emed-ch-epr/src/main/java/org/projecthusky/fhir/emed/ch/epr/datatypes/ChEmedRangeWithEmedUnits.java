@@ -10,7 +10,6 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.datatypes;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Range;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
@@ -30,15 +29,16 @@ public class ChEmedRangeWithEmedUnits extends Range {
     }
 
     /**
-     * Resolves the low quantity or {@code null}.
+     * Resolves the low quantity.
      *
-     * @return the low quantity or {@code null}.
+     * @return the low quantity.
      * @throws InvalidEmedContentException if the low quantity isn't of the right type.
      */
-    @Nullable
     @ExpectsValidResource
     public ChEmedQuantityWithEmedUnits resolveLow() throws InvalidEmedContentException {
-        if (!this.hasLow()) return null;
+        if (!this.hasLow()) {
+            throw new InvalidEmedContentException("The low quantity is missing");
+        }
         final var low = this.getLow();
         if (low instanceof ChEmedQuantityWithEmedUnits chLow) {
             return chLow;
@@ -46,10 +46,17 @@ public class ChEmedRangeWithEmedUnits extends Range {
         throw new InvalidEmedContentException("The low quantity isn't of the right type.");
     }
 
-    @Nullable
+    /**
+     * Resolves the high quantity.
+     *
+     * @return the high quantity.
+     * @throws InvalidEmedContentException if the high quantity isn't of the right type.
+     */
     @ExpectsValidResource
     public ChEmedQuantityWithEmedUnits resolveHigh() throws InvalidEmedContentException {
-        if (!this.hasHigh()) return null;
+        if (!this.hasHigh()) {
+            throw new InvalidEmedContentException("The high quantity is missing");
+        }
         final var high = this.getHigh();
         if (high instanceof ChEmedQuantityWithEmedUnits chHigh) {
             return chHigh;

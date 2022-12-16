@@ -1,4 +1,4 @@
-package org.projecthusky.fhir.emed.ch.epr.narrative.generators;
+package org.projecthusky.fhir.emed.ch.epr.narrative.html;
 
 import ca.uhn.fhir.context.FhirContext;
 import org.junit.jupiter.api.Test;
@@ -11,11 +11,11 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
- * Tests of the {@link PdfOriginalRepresentationGenerator} class.
+ * Tests of the {@link EmedPdfGenerator} class.
  *
  * @author Ronaldo Loureiro
  */
-class PdfOriginalRepresentationGeneratorTest {
+class EmedPdfGeneratorTest {
 
     @Test
     void testGeneratePdf() throws Exception {

@@ -33,7 +33,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Actuation.<br> DE: Hub.<br> FR: bouffée.<br> IT: erogazione.<br>
      */
     ACTUATION("732981002",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Actuation (unit of presentation)",
               "Actuation",
               "Hub",
@@ -43,7 +43,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Ampule.<br> DE: Ampulle.<br> FR: ampoule.<br> IT: fiala.<br>
      */
     AMPULE("732978007",
-           "2.16.840.1.113883.6.96",
+           "http://snomed.info/sct",
            "Ampule (unit of presentation)",
            "Ampule",
            "Ampulle",
@@ -53,7 +53,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Applicator.<br> DE: Applikator.<br> FR: applicateur.<br> IT: applicatore.<br>
      */
     APPLICATOR("732980001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Applicator (unit of presentation)",
                "Applicator",
                "Applikator",
@@ -63,7 +63,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Bag.<br> DE: Tasche.<br> FR: sac.<br> IT: sacca.<br>
      */
     BAG("732982009",
-        "2.16.840.1.113883.6.96",
+        "http://snomed.info/sct",
         "Bag (unit of presentation)",
         "Bag",
         "Tasche",
@@ -73,7 +73,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Barrel.<br> DE: Kanister.<br> FR: fût.<br> IT: fusto.<br>
      */
     BARREL("732983004",
-           "2.16.840.1.113883.6.96",
+           "http://snomed.info/sct",
            "Barrel (unit of presentation)",
            "Barrel",
            "Kanister",
@@ -83,7 +83,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Blister.<br> DE: Blisterpackung.<br> FR: plaquette.<br> IT: blister.<br>
      */
     BLISTER("732984005",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Blister (unit of presentation)",
             "Blister",
             "Blisterpackung",
@@ -93,7 +93,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Block.<br> DE: Block.<br> FR: bloc.<br> IT: blocco.<br>
      */
     BLOCK("732985006",
-          "2.16.840.1.113883.6.96",
+          "http://snomed.info/sct",
           "Block (unit of presentation)",
           "Block",
           "Block",
@@ -103,7 +103,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Bottle.<br> DE: Flasche.<br> FR: flacon.<br> IT: flacone.<br>
      */
     BOTTLE("732986007",
-           "2.16.840.1.113883.6.96",
+           "http://snomed.info/sct",
            "Bottle (unit of presentation)",
            "Bottle",
            "Flasche",
@@ -113,7 +113,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Cachet.<br> DE: Oblatenkapsel.<br> FR: cachet.<br> IT: cachet.<br>
      */
     CACHET("732987003",
-           "2.16.840.1.113883.6.96",
+           "http://snomed.info/sct",
            "Cachet (unit of presentation)",
            "Cachet",
            "Oblatenkapsel",
@@ -123,7 +123,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Capsule.<br> DE: Kapsel.<br> FR: capsule.<br> IT: capsula.<br>
      */
     CAPSULE("732937005",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Capsule (unit of presentation)",
             "Capsule",
             "Kapsel",
@@ -133,7 +133,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Cartridge.<br> DE: Patrone.<br> FR: cartouche.<br> IT: cartuccia.<br>
      */
     CARTRIDGE("732988008",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Cartridge (unit of presentation)",
               "Cartridge",
               "Patrone",
@@ -153,7 +153,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Chewing gum.<br> DE: Kaugummi.<br> FR: gomme à mâcher.<br> IT: gomma da masticare.<br>
      */
     CHEWING_GUM("732989000",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Chewing gum (unit of presentation)",
                 "Chewing gum",
                 "Kaugummi",
@@ -193,7 +193,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Container.<br> DE: Behältnis.<br> FR: récipient.<br> IT: contenitore.<br>
      */
     CONTAINER("732990009",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Container (unit of presentation)",
               "Container",
               "Behältnis",
@@ -203,7 +203,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Cup.<br> DE: Messbecher.<br> FR: godet.<br> IT: bicchiere dosatore.<br>
      */
     CUP("732991008",
-        "2.16.840.1.113883.6.96",
+        "http://snomed.info/sct",
         "Cup (unit of presentation)",
         "Cup",
         "Messbecher",
@@ -213,7 +213,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Cylinder.<br> DE: Zylinder.<br> FR: cylindre.<br> IT: cilindro.<br>
      */
     CYLINDER("732992001",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Cylinder (unit of presentation)",
              "Cylinder",
              "Zylinder",
@@ -233,7 +233,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Dressing.<br> DE: Verband.<br> FR: compresse.<br> IT: garza.<br>
      */
     DRESSING("732993006",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Dressing (unit of presentation)",
              "Dressing",
              "Verband",
@@ -243,7 +243,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Drop.<br> DE: Tropfen.<br> FR: goutte.<br> IT: goccia.<br>
      */
     DROP("732994000",
-         "2.16.840.1.113883.6.96",
+         "http://snomed.info/sct",
          "Drop (unit of presentation)",
          "Drop",
          "Tropfen",
@@ -253,7 +253,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Film.<br> DE: Film.<br> FR: film.<br> IT: film.<br>
      */
     FILM("732995004",
-         "2.16.840.1.113883.6.96",
+         "http://snomed.info/sct",
          "Film (unit of presentation)",
          "Film",
          "Film",
@@ -273,7 +273,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Implant.<br> DE: Implantat.<br> FR: implant.<br> IT: impianto.<br>
      */
     IMPLANT("732996003",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Implant (unit of presentation)",
             "Implant",
             "Implantat",
@@ -283,7 +283,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Inhaler.<br> DE: Inhalator.<br> FR: inhalateur.<br> IT: inalatore.<br>
      */
     INHALER("732997007",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Inhaler (unit of presentation)",
             "Inhaler",
             "Inhalator",
@@ -293,7 +293,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Insert.<br> DE: Insert.<br> FR: insert.<br> IT: inserto.<br>
      */
     INSERT("732998002",
-           "2.16.840.1.113883.6.96",
+           "http://snomed.info/sct",
            "Insert (unit of presentation)",
            "Insert",
            "Insert",
@@ -314,7 +314,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Jar.<br> DE: Weithalsgefäss.<br> FR: pot.<br> IT: vasetto.<br>
      */
     JAR("732999005",
-        "2.16.840.1.113883.6.96",
+        "http://snomed.info/sct",
         "Jar (unit of presentation)",
         "Jar",
         "Weithalsgefäss",
@@ -364,7 +364,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Lyophilisate.<br> DE: Lyophilisat.<br> FR: lyophilisat.<br> IT: liofilizzato.<br>
      */
     LYOPHILISATE("733001005",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Lyophilisate (unit of presentation)",
                  "Lyophilisate",
                  "Lyophilisat",
@@ -374,7 +374,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Matrix.<br> DE: Matrix.<br> FR: matrice.<br> IT: matrice.<br>
      */
     MATRIX("733002003",
-           "2.16.840.1.113883.6.96",
+           "http://snomed.info/sct",
            "Matrix (unit of presentation)",
            "Matrix",
            "Matrix",
@@ -494,7 +494,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Pad.<br> DE: Pad.<br> FR: tampon applicateur.<br> IT: tampone.<br>
      */
     PAD("733003008",
-        "2.16.840.1.113883.6.96",
+        "http://snomed.info/sct",
         "Pad (unit of presentation)",
         "Pad",
         "Pad",
@@ -504,7 +504,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Pastille.<br> DE: Pastille.<br> FR: pastille molle.<br> IT: pastiglia molle.<br>
      */
     PASTILLE("733004002",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Pastille (unit of presentation)",
              "Pastille",
              "Pastille",
@@ -514,7 +514,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Patch.<br> DE: Patch.<br> FR: patch.<br> IT: cerotto.<br>
      */
     PATCH("733005001",
-          "2.16.840.1.113883.6.96",
+          "http://snomed.info/sct",
           "Patch (unit of presentation)",
           "Patch",
           "Patch",
@@ -524,7 +524,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Pen.<br> DE: Pen.<br> FR: stylo.<br> IT: penna.<br>
      */
     PEN("733006000",
-        "2.16.840.1.113883.6.96",
+        "http://snomed.info/sct",
         "Pen (unit of presentation)",
         "Pen",
         "Pen",
@@ -544,7 +544,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Pessary.<br> DE: Pessar.<br> FR: ovule.<br> IT: ovulo.<br>
      */
     PESSARY("733007009",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Pessary (unit of presentation)",
             "Pessary",
             "Pessar",
@@ -564,7 +564,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Pillule.<br> DE: Streukügelchen.<br> FR: granule.<br> IT: granuli.<br>
      */
     PILLULE("733008004",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Pillule (unit of presentation)",
             "Pillule",
             "Streukügelchen",
@@ -574,7 +574,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Pipette.<br> DE: Pipette.<br> FR: pipette.<br> IT: pipetta.<br>
      */
     PIPETTE("733009007",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Pipette (unit of presentation)",
             "Pipette",
             "Pipette",
@@ -584,7 +584,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Plaster.<br> DE: Pflaster.<br> FR: emplâtre.<br> IT: cerotto.<br>
      */
     PLASTER("733010002",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Plaster (unit of presentation)",
             "Plaster",
             "Pflaster",
@@ -594,7 +594,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Plug.<br> DE: Einsatz.<br> FR: support poreux.<br> IT: supporto.<br>
      */
     PLUG("733011003",
-         "2.16.840.1.113883.6.96",
+         "http://snomed.info/sct",
          "Plug (unit of presentation)",
          "Plug",
          "Einsatz",
@@ -604,7 +604,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Pouch.<br> DE: Beutelchen.<br> FR: pochette.<br> IT: sachetta.<br>
      */
     POUCH("733012005",
-          "2.16.840.1.113883.6.96",
+          "http://snomed.info/sct",
           "Pouch (unit of presentation)",
           "Pouch",
           "Beutelchen",
@@ -624,7 +624,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Sachet.<br> DE: Beutel.<br> FR: sachet.<br> IT: bustina.<br>
      */
     SACHET("733013000",
-           "2.16.840.1.113883.6.96",
+           "http://snomed.info/sct",
            "Sachet (unit of presentation)",
            "Sachet",
            "Beutel",
@@ -634,7 +634,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Sponge.<br> DE: Schwämmchen.<br> FR: eponge.<br> IT: spugna.<br>
      */
     SPONGE("733014006",
-           "2.16.840.1.113883.6.96",
+           "http://snomed.info/sct",
            "Sponge (unit of presentation)",
            "Sponge",
            "Schwämmchen",
@@ -644,7 +644,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Spoonful.<br> DE: ein Löffel voll.<br> FR: cuillerée.<br> IT: cucciaio.<br>
      */
     SPOONFUL("733015007",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Spoonful (unit of presentation)",
              "Spoonful",
              "ein Löffel voll",
@@ -654,7 +654,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Stick.<br> DE: Stäbchen.<br> FR: bâton.<br> IT: stick.<br>
      */
     STICK("733016008",
-          "2.16.840.1.113883.6.96",
+          "http://snomed.info/sct",
           "Stick (unit of presentation)",
           "Stick",
           "Stäbchen",
@@ -664,7 +664,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Straw.<br> DE: Trinkhalm.<br> FR: paille.<br> IT: cannuccia.<br>
      */
     STRAW("733017004",
-          "2.16.840.1.113883.6.96",
+          "http://snomed.info/sct",
           "Straw (unit of presentation)",
           "Straw",
           "Trinkhalm",
@@ -674,7 +674,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Strip.<br> DE: Streifen.<br> FR: bandelette.<br> IT: strip.<br>
      */
     STRIP("733018009",
-          "2.16.840.1.113883.6.96",
+          "http://snomed.info/sct",
           "Strip (unit of presentation)",
           "Strip",
           "Streifen",
@@ -684,7 +684,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Suppository.<br> DE: Zäpfchen.<br> FR: suppositoire.<br> IT: supposta.<br>
      */
     SUPPOSITORY("733019001",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Suppository (unit of presentation)",
                 "Suppository",
                 "Zäpfchen",
@@ -694,7 +694,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Syringe.<br> DE: Spritze.<br> FR: seringue.<br> IT: siringa.<br>
      */
     SYRINGE("733020007",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Syringe (unit of presentation)",
             "Syringe",
             "Spritze",
@@ -704,7 +704,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: System.<br> DE: System.<br> FR: système.<br> IT: sistema.<br>
      */
     SYSTEM("733021006",
-           "2.16.840.1.113883.6.96",
+           "http://snomed.info/sct",
            "System (unit of presentation)",
            "System",
            "System",
@@ -724,7 +724,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Tablet.<br> DE: Tablette.<br> FR: comprimé.<br> IT: compressa.<br>
      */
     TABLET("732936001",
-           "2.16.840.1.113883.6.96",
+           "http://snomed.info/sct",
            "Tablet (unit of presentation)",
            "Tablet",
            "Tablette",
@@ -734,7 +734,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Tampon.<br> DE: Tampon.<br> FR: tampon diffuseur.<br> IT: tampone.<br>
      */
     TAMPON("733022004",
-           "2.16.840.1.113883.6.96",
+           "http://snomed.info/sct",
            "Tampon (unit of presentation)",
            "Tampon",
            "Tampon",
@@ -764,7 +764,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Thread.<br> DE: Faden.<br> FR: fil.<br> IT: filo.<br>
      */
     THREAD("733023009",
-           "2.16.840.1.113883.6.96",
+           "http://snomed.info/sct",
            "Thread (unit of presentation)",
            "Thread",
            "Faden",
@@ -774,7 +774,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Tube.<br> DE: Tube.<br> FR: tube.<br> IT: tubo.<br>
      */
     TUBE("733024003",
-         "2.16.840.1.113883.6.96",
+         "http://snomed.info/sct",
          "Tube (unit of presentation)",
          "Tube",
          "Tube",
@@ -824,7 +824,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Vessel.<br> DE: Gefäss.<br> FR: récipient étanche.<br> IT: recipiente a tenuta.<br>
      */
     VESSEL("733025002",
-           "2.16.840.1.113883.6.96",
+           "http://snomed.info/sct",
            "Vessel (unit of presentation)",
            "Vessel",
            "Gefäss",
@@ -834,7 +834,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Vial.<br> DE: Durchstechflasche.<br> FR: petit flacon.<br> IT: flaconcino.<br>
      */
     VIAL("733026001",
-         "2.16.840.1.113883.6.96",
+         "http://snomed.info/sct",
          "Vial (unit of presentation)",
          "Vial",
          "Durchstechflasche",

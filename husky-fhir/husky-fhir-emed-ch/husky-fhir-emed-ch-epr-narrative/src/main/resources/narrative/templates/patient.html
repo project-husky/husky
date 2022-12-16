@@ -9,9 +9,13 @@
   */-->
 
 <th:block th:fragment="display-name-address-contact(patient, lang)">
-    <th:block th:if="${not patient.name.empty}" th:include="~{datatypes :: human-name(${patient.name[0]}, ${lang})}"/>
-    <th:block th:if="not patient.birthDateElement.empty" th:text="${patient.birthDateElement.value}"/>
-    <th:block th:if="${patient.hasAddress()}" th:include="~{datatypes :: address(${patient.address[0]}, ${lang})}"/>
+    <th:block th:if="${patient.hasName()}">
+        <th:block th:include="~{datatypes :: human-name(${patient.name[0]}, ${lang})}"/>
+    </th:block>
+    <th:block th:if="${patient.hasBirthDateElement()}" th:text="${patient.getBirthDateElement().getValueAsString()}"/>
+    <th:block th:if="${patient.hasAddress()}">
+        <th:block th:include="~{datatypes :: address(${patient.address[0]}, ${lang})}"/>
+    </th:block>
     <th:block th:each="contactPoint: ${patient.telecom}">
         <th:block th:include="~{datatypes :: contact-point(${contactPoint}, ${lang})}"/>
         <br/>

@@ -20,9 +20,21 @@ import org.hl7.fhir.r4.model.Coding;
  **/
 public interface FhirValueSetEnumInterface {
 
+    /**
+     * Returns the enum value as a FHIR Coding.
+     */
     Coding getCoding();
 
+    /**
+     * Returns the enum value as a FHIR CodeableConcept.
+     */
     CodeableConcept getCodeableConcept();
 
+    /**
+     * Compares the enum value to the given FHIR Coding.
+     *
+     * @param coding The FHIR Coding to be compared.
+     * @return {@code true} if they have the same system and value, {@code false} otherwise.
+     */
     boolean isEqualTo(final Coding coding);
 }

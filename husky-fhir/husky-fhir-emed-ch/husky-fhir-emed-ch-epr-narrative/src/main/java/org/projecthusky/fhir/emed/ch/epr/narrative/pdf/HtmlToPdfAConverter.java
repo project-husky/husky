@@ -9,6 +9,10 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.narrative.pdf;
 
+import org.projecthusky.fhir.emed.ch.epr.narrative.enums.NarrativeLanguage;
+
+import java.util.Map;
+
 /**
  * Functional interface of an HTML-to-PDF/A converter.
  *
@@ -20,10 +24,26 @@ public interface HtmlToPdfAConverter {
     /**
      * Converts the HTML content to its PDF/A representation.
      *
-     * @param htmlContent The HTML content to convert.
+     * @param subject     The document subject. It's inserted in a {@code <meta name="subject">} tag.
+     * @param author      The document author. It's inserted in a {@code <meta name="author">} tag.
+     * @param description The document description. It's inserted in a {@code <meta name="description">} tag.
+     * @param title       The document title.
+     * @param lang        The document language, as an ISO code.
+     * @param bookmarks   A list of bookmarks to interesting parts of the document. The keys are labels that are shown
+     *                    to the user, the values are HTML ID references (starting with '#').
+     * @param cssContent  The CSS content to inject.
+     * @param bodyContent The HTML content to convert. It will be inserted in a {@code <body>} tag.
      * @return The content of the generated PDF/A.
      * @throws Exception it may throw any exception.
      */
-    @SuppressWarnings("java:S112") // Allow any exception to be thrown
-    byte[] convert(final String htmlContent) throws Exception;
+    @SuppressWarnings("java:S112")
+    // Allow any exception to be thrown
+    byte[] convert(final String subject,
+                   final String author,
+                   final String description,
+                   final String title,
+                   final NarrativeLanguage lang,
+                   final Map<String, String> bookmarks,
+                   final String cssContent,
+                   final String bodyContent) throws Exception;
 }

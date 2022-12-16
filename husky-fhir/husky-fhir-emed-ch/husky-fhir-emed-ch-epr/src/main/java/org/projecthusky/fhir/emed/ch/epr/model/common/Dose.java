@@ -1,6 +1,8 @@
 package org.projecthusky.fhir.emed.ch.epr.model.common;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.Quantity;
+import org.hl7.fhir.r4.model.Range;
 
 /**
  * A medication dose, either as an amount or as a range. The range may only contain a low or high value.
@@ -22,9 +24,9 @@ public record Dose(@Nullable AmountQuantity quantity,
                 @Nullable final AmountQuantity low,
                 @Nullable final AmountQuantity high) {
         if (quantity == null && low == null && high == null) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("Dose: Either the quantity or the low/high shall be specified");
         } else if (quantity != null && (low != null || high != null)) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("Dose: Either the quantity or the low/high shall be specified");
         }
         this.quantity = quantity;
         this.low = low;
@@ -37,5 +39,22 @@ public record Dose(@Nullable AmountQuantity quantity,
 
     public boolean isQuantity() {
         return this.quantity != null;
+    }
+
+    public static Dose fromQuantityAndRange(final Quantity quantity,
+                                            final Range range) {
+        if (quantity.isEmpty() && range.isEmpty()) {
+            throw new IllegalArgumentException("Dose: Either the quantity or range shall be specified");
+        }
+        if (!quantity.isEmpty() && !range.isEmpty()) {
+            throw new IllegalArgumentException("Dose: Either the quantity or range shall be specified");
+        }
+        if (!quantity.isEmpty()) {
+            return new Dose(AmountQuantity.fromQuantity(quantity), null, null);
+        } else {
+            return new Dose(null,
+                            AmountQuantity.fromQuantity(range.getLow()),
+                            AmountQuantity.fromQuantity(range.getHigh()));
+        }
     }
 }

@@ -8,18 +8,20 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-package org.projecthusky.fhir.emed.ch.epr.narrative.generators;
+package org.projecthusky.fhir.emed.ch.epr.narrative.html;
 
 import ca.uhn.fhir.context.FhirContext;
 import org.projecthusky.fhir.emed.ch.epr.narrative.enums.NarrativeLanguage;
-import org.projecthusky.fhir.emed.ch.epr.narrative.services.ValueSetEnumNarrativeForPatientService;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprDocumentPmlc;
+import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprMedicationStatementPmlc;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * A generator of narrative as HTML content.
@@ -29,7 +31,7 @@ import java.io.IOException;
  *
  * @author Quentin Ligier
  **/
-public class HtmlNarrativeGenerator {
+public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
 
     /**
      * The FHIR context.
@@ -41,12 +43,8 @@ public class HtmlNarrativeGenerator {
      */
     protected final TemplateEngine templateEngine;
 
-    /**
-     * A service to get better display names for patients.
-     */
-    protected final ValueSetEnumNarrativeForPatientService fopase = new ValueSetEnumNarrativeForPatientService();
-
-    public HtmlNarrativeGenerator() throws IOException {
+    public HtmlNarrativeGenerator() throws IOException, ParserConfigurationException {
+        super();
         this.fhirContext = FhirContext.forR4Cached();
 
         final var templateResolver = new ClassLoaderTemplateResolver(this.getClass().getClassLoader());
@@ -63,10 +61,22 @@ public class HtmlNarrativeGenerator {
 
     public String generate(final ChEmedEprDocumentPmlc document,
                            final NarrativeLanguage lang) {
+        final var activeTreatments = new ArrayList<ChEmedEprMedicationStatementPmlc>(5);
+        final var asneededTreatments = new ArrayList<ChEmedEprMedicationStatementPmlc>(5);
+        for (final var treatment : document.resolveComposition().resolveMedicationStatements()) {
+            if (treatment.resolveEffectiveDosageInstructions().isRegular()) {
+                activeTreatments.add(treatment);
+            } else {
+                asneededTreatments.add(treatment);
+            }
+        }
+
         final var context = new Context();
         context.setVariable("resource", document);
         context.setVariable("lang", lang);
-        context.setVariable("fopase", this.fopase);
+        context.setVariable("fopase", this.valueSetEnumNarrativeForPatientService);
+        context.setVariable("activeTreatments", activeTreatments);
+        context.setVariable("asneededTreatments", asneededTreatments);
         context.setLocale(lang.getLocale());
         return this.templateEngine.process("medication_card", context);
     }

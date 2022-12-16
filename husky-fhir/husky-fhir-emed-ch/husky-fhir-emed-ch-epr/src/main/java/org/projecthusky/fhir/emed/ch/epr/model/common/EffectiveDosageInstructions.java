@@ -4,9 +4,11 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Period;
 import org.projecthusky.fhir.emed.ch.common.enums.RouteOfAdministrationEdqm;
 import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
+import org.projecthusky.fhir.emed.ch.epr.enums.TimingEventAmbu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * A model of the effective dosage, resolved from a list of FHIR Dosages.
@@ -16,9 +18,9 @@ import java.util.List;
 public record EffectiveDosageInstructions(
         @Nullable String patientInstructions,
         boolean isAsNeeded,
-        @Nullable List<DosageIntake> intakes,
+        List<DosageIntake> intakes,
         @Nullable String site,
-        @Nullable RouteOfAdministrationEdqm route,
+        @Nullable RouteOfAdministrationEdqm routeOfAdministration,
         @Nullable Period period,
         @Nullable Duration periodDuration,
         @Nullable AmountPerDuration maxDosePerPeriod,
@@ -26,6 +28,39 @@ public record EffectiveDosageInstructions(
 
     public boolean hasPatientInstructions() {
         return this.patientInstructions != null;
+    }
+
+    public boolean hasRouteOfAdministration() {
+        return this.routeOfAdministration != null;
+    }
+
+    public boolean hasIntakes() {
+        return !this.intakes.isEmpty();
+    }
+
+    @Nullable
+    public DosageIntake getMornIntake() {
+        return this.getIntake(TimingEventAmbu.MORNING);
+    }
+
+    @Nullable
+    public DosageIntake getNoonIntake() {
+        return this.getIntake(TimingEventAmbu.NOON);
+    }
+
+    @Nullable
+    public DosageIntake getEveIntake() {
+        return this.getIntake(TimingEventAmbu.EVENING);
+    }
+
+    @Nullable
+    public DosageIntake getNightIntake() {
+        return this.getIntake(TimingEventAmbu.NIGHT);
+    }
+
+    @Nullable
+    public DosageIntake getIntake(final TimingEventAmbu eventTiming) {
+        return this.intakes.stream().filter(intake -> intake.eventTiming() == eventTiming).findAny().orElse(null);
     }
 
     /**
@@ -39,25 +74,35 @@ public record EffectiveDosageInstructions(
      * Creates an instance from the base and additional dosages.
      */
     public static EffectiveDosageInstructions fromDosages(final ChEmedEprDosage baseDosage,
-                                                          final List<ChEmedEprDosage> additionalDosage) {
+                                                          final List<ChEmedEprDosage> additionalDosages) {
         final var patientInstructions = baseDosage.getPatientInstruction();
         final var isAsNeeded = baseDosage.isAsNeeded();
-        final var intakes = new ArrayList<DosageIntake>(0);
         final var site = baseDosage.getSiteText();
-        final var route = baseDosage.resolveRouteOfAdministration();
+        final var routeOfAdministration = baseDosage.resolveRouteOfAdministration();
         final var period = baseDosage.getBoundsPeriod();
         final var duration = baseDosage.resolveBoundsDuration();
         final var maxDosePerPeriod = baseDosage.resolveMaxDosePerPeriod();
         final var maxDosePerAdministration = baseDosage.resolveMaxDosePerAdministration();
 
         // Resolve intakes
-        // todo
+        final var intakes = new ArrayList<DosageIntake>(0);
+        final Consumer<ChEmedEprDosage> processIntakes = (ChEmedEprDosage dosage) -> {
+            final var dose = dosage.resolveDose();
+            final var rate = dosage.resolveRate();
+            for (final var eventTiming : dosage.resolveWhen()) {
+                intakes.add(new DosageIntake(eventTiming, dose, rate));
+            }
+        };
+        processIntakes.accept(baseDosage);
+        for (final var additionalDosage : additionalDosages) {
+            processIntakes.accept(additionalDosage);
+        }
 
         return new EffectiveDosageInstructions(patientInstructions,
                                                isAsNeeded,
                                                intakes,
                                                site,
-                                               route,
+                                               routeOfAdministration,
                                                period,
                                                duration,
                                                maxDosePerPeriod,

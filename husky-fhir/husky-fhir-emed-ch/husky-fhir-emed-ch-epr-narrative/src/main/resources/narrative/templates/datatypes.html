@@ -28,3 +28,17 @@
     <span th:case="'ContactPointSystem.PHONE'" th:text="${contactPoint.value}" class="tel"/>
     <span th:case="'ContactPointSystem.EMAIL'" th:text="${contactPoint.value}" class="email"/>
 </th:block>
+
+<th:block th:fragment="dosage-intake(dosageIntake, lang)">
+    <th:block th:if="${dosageIntake} == null">—</th:block>
+    <th:block th:if="${dosageIntake} != null" th:with="dose = ${dosageIntake.dose()}">
+        <th:block th:if="${dose.isQuantity()}" th:insert="~{::amount-quantity(${dose.quantity()}, ${lang})}"/>
+        <th:block th:if="${dose.isRange()}">
+            [[~{::amount-quantity(${dose.low()}, ${lang})}]] – [[~{::amount-quantity(${dose.high()}, ${lang})}]]
+        </th:block>
+    </th:block>
+</th:block>
+
+<th:block th:fragment="amount-quantity(amountQuantity, lang)">
+    [[${amountQuantity.value()}]] <span class="unit" th:text="${fopase.getMessage(amountQuantity.unit(), lang)}"/>
+</th:block>

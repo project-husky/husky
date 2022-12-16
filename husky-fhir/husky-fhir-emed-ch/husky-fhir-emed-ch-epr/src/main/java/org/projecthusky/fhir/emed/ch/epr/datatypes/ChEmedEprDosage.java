@@ -22,6 +22,7 @@ import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.enums.TimingEventAmbu;
 import org.projecthusky.fhir.emed.ch.epr.model.common.AmountPerDuration;
 import org.projecthusky.fhir.emed.ch.epr.model.common.AmountQuantity;
+import org.projecthusky.fhir.emed.ch.epr.model.common.Dose;
 import org.projecthusky.fhir.emed.ch.epr.model.common.Duration;
 
 import java.util.ArrayList;
@@ -66,10 +67,10 @@ public class ChEmedEprDosage extends Dosage {
     }
 
     /**
-     * Resolve the route of administration.
+     * Resolve the routeOfAdministration of administration.
      *
-     * @return the route of administration or {@code null}.
-     * @throws InvalidEmedContentException if the route of administration is invalid.
+     * @return the routeOfAdministration of administration or {@code null}.
+     * @throws InvalidEmedContentException if the routeOfAdministration of administration is invalid.
      */
     @Nullable
     @ExpectsValidResource
@@ -78,10 +79,7 @@ public class ChEmedEprDosage extends Dosage {
             return null;
         }
         for (final var coding : this.getRoute().getCoding()) {
-            if (!RouteOfAdministrationEdqm.CODE_SYSTEM_ID.equals(coding.getSystem())) {
-                continue;
-            }
-            final var routeOfAdministration = RouteOfAdministrationEdqm.getEnum(coding.getCode());
+            final var routeOfAdministration = RouteOfAdministrationEdqm.getEnum(coding);
             if (routeOfAdministration != null) {
                 return routeOfAdministration;
             }
@@ -90,37 +88,32 @@ public class ChEmedEprDosage extends Dosage {
     }
 
     /**
-     * Resolve the dose quantity.
+     * Resolve the dose.
      *
-     * @return the dose quantity or {@code null}.
-     * @throws InvalidEmedContentException if the dose quantity isn't of the right type.
+     * @return the dose or {@code null} if it's not specified.
      */
     @Nullable
     @ExpectsValidResource
-    public ChEmedQuantityWithEmedUnits resolveDoseQuantity() throws InvalidEmedContentException {
-        if (!this.hasDoseAndRate() || !this.getDoseAndRateFirstRep().hasDoseQuantity()) return null;
-        final var doseQuantity = this.getDoseAndRateFirstRep().getDoseQuantity();
-        if (doseQuantity instanceof ChEmedQuantityWithEmedUnits chDoseQuantity) {
-            return chDoseQuantity;
+    public Dose resolveDose() throws InvalidEmedContentException {
+        if (!this.hasDoseAndRate()) {
+            return null;
         }
-        throw new InvalidEmedContentException("The dose quantity isn't of the right type.");
+        return Dose.fromQuantityAndRange(this.getDoseAndRateFirstRep().getDoseQuantity(),
+                                         this.getDoseAndRateFirstRep().getRateRange());
     }
 
     /**
-     * Resolve the dose range.
+     * Resolves the rate ratio.
      *
-     * @return the dose range or {@code null}.
-     * @throws InvalidEmedContentException if the dose range isn't of the right type.
+     * @return the rate ratio or {@code null} if it's not specified.
      */
     @Nullable
     @ExpectsValidResource
-    public ChEmedRangeWithEmedUnits resolveDoseRange() throws InvalidEmedContentException {
-        if (!this.hasDoseAndRate() || !this.getDoseAndRateFirstRep().hasDoseRange()) return null;
-        final var doseRange = this.getDoseAndRateFirstRep().getDoseRange();
-        if (doseRange instanceof ChEmedRangeWithEmedUnits chDoseRange) {
-            return chDoseRange;
+    public AmountPerDuration resolveRate() {
+        if (!this.hasDoseAndRate() || !this.getDoseAndRateFirstRep().hasRateRatio()) {
+            return null;
         }
-        throw new InvalidEmedContentException("The dose range isn't of the right type.");
+        return AmountPerDuration.fromRatio(this.getDoseAndRateFirstRep().getRateRatio());
     }
 
     /**
@@ -182,9 +175,9 @@ public class ChEmedEprDosage extends Dosage {
     }
 
     /**
-     * Sets route of administration.
+     * Sets routeOfAdministration of administration.
      *
-     * @param routeOfAdministration the route of administration.
+     * @param routeOfAdministration the routeOfAdministration of administration.
      * @return this.
      */
     public ChEmedEprDosage setRouteOfAdministration(final RouteOfAdministrationEdqm routeOfAdministration) {
