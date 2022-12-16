@@ -122,8 +122,8 @@ public class ConverterUtils {
      * @return XDS Identifiable
      */
     public static Identifiable toIdentifiable(final Identifier identifier) {
-        final String system = removePrefixOid(identifier.getSystem());
-        return new Identifiable(identifier.getValue(), new AssigningAuthority(system));
+        final var assigningAuthority = identifier.getSystem() != null ? new AssigningAuthority(identifier.getSystem()) : null;
+        return new Identifiable(identifier.getValue(), assigningAuthority);
     }
 
     /**

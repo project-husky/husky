@@ -40,7 +40,7 @@ class DocumentEntryConverterTest {
         final var provideAndRegisterDocumentSet = this.unmarshall("/ProvideAndRegisterDocumentSetRequest/PARDSR_02.xml");
 
         final var documentEntry = provideAndRegisterDocumentSet.getDocuments().get(0).getDocumentEntry();
-        final var documentReference = new DocumentEntryConverter().convertDocumentEntry(documentEntry);
+        final var documentReference = DocumentEntryConverter.convertDocumentEntry(documentEntry);
 
         testDocumentReference(documentReference,
                 "urn:oid:urn:uuid:c888e8c5-7e12-4bec-b99e-9fd92e10f6da",
@@ -72,7 +72,7 @@ class DocumentEntryConverterTest {
         final var provideAndRegisterDocumentSet = this.unmarshall("/ProvideAndRegisterDocumentSetRequest/PARDSR_02.xml");
 
         final var documentEntry = provideAndRegisterDocumentSet.getDocuments().get(0).getDocumentEntry();
-        final var documentReference = new DocumentEntryConverter().convertDocumentEntry(documentEntry);
+        final var documentReference = DocumentEntryConverter.convertDocumentEntry(documentEntry);
 
         testDocumentReference(documentReference,
                 "urn:oid:urn:uuid:c888e8c5-7e12-4bec-b99e-9fd92e10f6da",
@@ -98,7 +98,7 @@ class DocumentEntryConverterTest {
                 "394802001",
                 null);
 
-        final var documentEntry2 = new DocumentEntryConverter().convertDocumentReference(documentReference);
+        final var documentEntry2 = DocumentEntryConverter.convertDocumentReference(documentReference);
         testDocumentEntry(documentEntry, documentEntry2);
     }
 

@@ -19,6 +19,7 @@ import org.hl7.fhir.r4.model.Organization;
 import org.hl7.fhir.r4.model.ListResource.ListStatus;
 import org.openehealth.ipf.commons.ihe.fhir.iti65.Iti65Constants;
 import org.projecthusky.common.utils.XdsMetadataUtil;
+import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.communication.xdsmhdconversion.utils.ConverterUtils;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.*;
 
@@ -75,7 +76,7 @@ public class SubmissionSetConverter {
         submissionSet.setUniqueId(getUniqueId(list.getIdentifier()));
 
         // identifier | SubmissionSet.entryUUID
-        submissionSet.assignEntryUuid();
+        submissionSet.setEntryUuid(Uuids.URN_PREFIX + UUID.randomUUID());
         list.setId(submissionSet.getEntryUuid());
 
         // status | SubmissionSet.availabilityStatus
@@ -85,9 +86,7 @@ public class SubmissionSetConverter {
         // ---
 
         // title | SubmissionSet.title
-        if (list.getTitle() != null) {
-            submissionSet.setTitle(ConverterUtils.getLocalizedString(list.getTitle(), list.getLanguage()));
-        }
+        submissionSet.setTitle(ConverterUtils.getLocalizedString(Objects.requireNonNullElse(list.getTitle(), ""), list.getLanguage()));
 
         // code | shall be 'submissionset'
         // ---
