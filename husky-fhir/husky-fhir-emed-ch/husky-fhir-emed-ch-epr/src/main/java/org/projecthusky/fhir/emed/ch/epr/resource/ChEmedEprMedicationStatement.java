@@ -136,14 +136,20 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
         throw new InvalidEmedContentException("The information source isn't a ChEmedEprPractitionerRole");
     }
 
+    public boolean hasTreatmentReason() {
+        return this.reasonCode != null && this.getReasonCodeFirstRep().hasText();
+    }
+
     /**
      * Gets the treatment reason if available.
      *
      * @return the treatment reason or {@code null}.
      */
     @Nullable
-    protected String getTreatmentReason() {
-        if (this.reasonCode == null || !this.getReasonCodeFirstRep().hasText()) return null;
+    public String getTreatmentReason() {
+        if (this.reasonCode == null || !this.getReasonCodeFirstRep().hasText()) {
+            return null;
+        }
         return this.getReasonCodeFirstRep().getText();
     }
 
@@ -153,7 +159,7 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
      * @param treatmentReason the treatment reason
      * @return this.
      */
-    protected ChEmedEprMedicationStatement setTreatmentReason(final String treatmentReason) {
+    public ChEmedEprMedicationStatement setTreatmentReason(final String treatmentReason) {
         this.getReasonCodeFirstRep().setText(treatmentReason);
         return this;
     }

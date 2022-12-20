@@ -38,6 +38,10 @@ public record EffectiveDosageInstructions(
         return !this.intakes.isEmpty();
     }
 
+    public boolean hasMaxDose() {
+        return this.maxDosePerPeriod != null || this.maxDosePerAdministration != null;
+    }
+
     @Nullable
     public DosageIntake getMornIntake() {
         return this.getIntake(TimingEventAmbu.MORNING);
@@ -88,7 +92,13 @@ public record EffectiveDosageInstructions(
         final var intakes = new ArrayList<DosageIntake>(0);
         final Consumer<ChEmedEprDosage> processIntakes = (ChEmedEprDosage dosage) -> {
             final var dose = dosage.resolveDose();
+            if (dose != null && dose.isQuantity() && "0".equals(dose.quantity().value())) {
+                return;
+            }
             final var rate = dosage.resolveRate();
+            if (rate != null && "0".equals(rate.amount().value())) {
+                return;
+            }
             for (final var eventTiming : dosage.resolveWhen()) {
                 intakes.add(new DosageIntake(eventTiming, dose, rate));
             }

@@ -42,3 +42,20 @@
 <th:block th:fragment="amount-quantity(amountQuantity, lang)">
     [[${amountQuantity.value()}]] <span class="unit" th:text="${fopase.getMessage(amountQuantity.unit(), lang)}"/>
 </th:block>
+
+<th:block th:fragment="max-doses(effectiveDosageInstructions, lang)">
+    <th:block th:if="effectiveDosageInstructions.maxDosePerPeriod()"
+              th:with="maxDosePerPeriod = ${effectiveDosageInstructions.maxDosePerPeriod()}">
+        Dose maximale :
+        <th:block th:insert="~{::amount-quantity(${maxDosePerPeriod.amount()}, ${lang})}"/>
+        par
+        <th:block th:insert="~{::amount-quantity(${maxDosePerPeriod.duration()}, ${lang})}"/>
+        .
+    </th:block>
+    <th:block th:if="effectiveDosageInstructions.maxDosePerAdministration()"
+              th:with="maxDosePerAdministration = ${effectiveDosageInstructions.maxDosePerAdministration()}">
+        Dose maximale par administration :
+        <th:block th:insert="~{::amount-quantity(${maxDosePerAdministration}, ${lang})}"/>
+        .
+    </th:block>
+</th:block>
