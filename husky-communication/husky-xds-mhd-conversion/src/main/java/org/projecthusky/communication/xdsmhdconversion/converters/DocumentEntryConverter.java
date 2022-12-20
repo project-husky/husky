@@ -25,6 +25,8 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -246,14 +248,14 @@ public class DocumentEntryConverter {
         // No action
 
         // masterIdentifier | DocumentEntry.uniqueId
-        documentEntry.setUniqueId(ConverterUtils.removePrefixOid(documentReference.getMasterIdentifier().getValue()));
+        documentEntry.setUniqueId(documentReference.getMasterIdentifier().getValue());
 
         // identifier | DocumentEntry.entryUUID
         if (documentReference.hasId()) {
-            documentEntry.setEntryUuid(ConverterUtils.removePrefixUuid(documentReference.getId()));
+            documentEntry.setEntryUuid(documentReference.getId());
         } else {
             documentEntry.assignEntryUuid();
-            documentReference.setId(ConverterUtils.removePrefixUuid(documentEntry.getEntryUuid()));
+            documentReference.setId(documentEntry.getEntryUuid());
         }
 
         // status | DocumentEntry.availabilityStatus
@@ -386,6 +388,29 @@ public class DocumentEntryConverter {
             if (refId != null) {
                 documentEntry.getReferenceIdList().add(ConverterUtils.toReferenceId(refId));
             }
+        }
+
+        documentEntry.setExtraMetadata(new HashMap<>());
+        // originalProviderRole
+        final Extension originalRole = documentReference.getExtensionByUrl("http://fhir.ch/ig/ch-epr-mhealth/StructureDefinition/ch-ext-author-authorrole");
+        if (originalRole != null && originalRole.getValue() instanceof final Coding coding) {
+            documentEntry.setExtraMetadata(
+                    Collections.singletonMap(
+                            "urn:e-health-suisse:2020:originalProviderRole",
+                            Collections.singletonList(String.format("%s^^^&%s&ISO", coding.getCode(), ConverterUtils.removePrefixOid(coding.getSystem())))
+                    )
+            );
+        }
+
+        // deletionStatus
+        final Extension deletionStatus = documentReference.getExtensionByUrl("http://fhir.ch/ig/ch-epr-mhealth/StructureDefinition/ch-ext-deletionstatus");
+        if (deletionStatus != null && deletionStatus.getValue() instanceof Coding coding) {
+            documentEntry.setExtraMetadata(
+                    Collections.singletonMap(
+                            "urn:e-health-suisse:2019:deletionStatus",
+                            Collections.singletonList("urn:e-health-suisse:2019:deletionStatus:" + coding.getCode())
+                    )
+            );
         }
 
         return documentEntry;

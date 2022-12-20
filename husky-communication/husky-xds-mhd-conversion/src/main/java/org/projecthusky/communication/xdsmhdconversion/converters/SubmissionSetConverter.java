@@ -76,7 +76,8 @@ public class SubmissionSetConverter {
         submissionSet.setUniqueId(getUniqueId(list.getIdentifier()));
 
         // identifier | SubmissionSet.entryUUID
-        submissionSet.setEntryUuid(Uuids.URN_PREFIX + UUID.randomUUID());
+        submissionSet.assignEntryUuid();
+//        submissionSet.setEntryUuid(Uuids.URN_PREFIX + UUID.randomUUID());
         list.setId(submissionSet.getEntryUuid());
 
         // status | SubmissionSet.availabilityStatus
