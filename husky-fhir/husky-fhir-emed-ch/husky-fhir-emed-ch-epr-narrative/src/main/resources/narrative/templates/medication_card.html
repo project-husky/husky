@@ -14,114 +14,18 @@
         <tr>
             <td class="cell-patient">
                 <h2>Patient</h2>
-                <th:block
-                        th:include="~{patient :: display-name-address-contact(${resource.resolvePatient()}, ${lang})}"/>
+                <th:block th:include="~{patient :: display-name-address-contact(${resource.resolvePatient()}, ${lang})}"/>
             </td>
             <td class="cell-author">
-                <h2>Auteur du document</h2>
-                ${resource.resolveComposition().resolveAuthor()}
+                <h2>Dernière modification</h2>
+                TODO
             </td>
         </tr>
     </table>
 
     <h2>Traitements actifs</h2>
-    <table>
-        <thead>
-        <tr>
-            <td rowspan="2">Nom du médicament</td>
-            <td colspan="4">Dosage</td>
-            <td rowspan="2">Raison</td>
-            <td rowspan="2">Voie et localisation</td>
-        </tr>
-        <tr>
-            <td>Matin</td>
-            <td>Midi</td>
-            <td>Soir</td>
-            <td>Nuit</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="medStmt: ${activeTreatments}"
-            th:with="dosage = ${medStmt.resolveEffectiveDosageInstructions()}">
-            <td>
-                [[${medStmt.resolveMedication().resolveMedicationName()}]]
-                <th:block th:if="${dosage.hasMaxDose()}" th:insert="~{datatypes::max-doses(${dosage}, ${lang})}"/>
-            </td>
-            <th:block th:if="${dosage.hasIntakes()}">
-                <td th:insert="~{datatypes :: dosage-intake(${dosage.getMornIntake()}, ${lang})}"/>
-                <td th:insert="~{datatypes :: dosage-intake(${dosage.getNoonIntake()}, ${lang})}"/>
-                <td th:insert="~{datatypes :: dosage-intake(${dosage.getEveIntake()}, ${lang})}"/>
-                <td th:insert="~{datatypes :: dosage-intake(${dosage.getNightIntake()}, ${lang})}"/>
-            </th:block>
-            <th:block th:if="${not dosage.hasIntakes()}">
-                <td colspan="4" th:text="${dosage.patientInstructions()}"/>
-            </th:block>
-            <td>
-                <th:block th:if="${medStmt.hasTreatmentReason()}"
-                          th:text="${medStmt.getTreatmentReason()}"/>
-                <th:block th:if="${not medStmt.hasTreatmentReason()}"
-                          th:text="'—'"/>
-            </td>
-            <td>
-                <th:block th:if="${dosage.hasRouteOfAdministration()}"
-                          th:text="${fopase.getMessage(dosage.routeOfAdministration(), lang)}"/>
-            </td>
-        </tr>
-
-        <tr th:if="${activeTreatments.empty}">
-            <td colspan="7">Aucun traitement actif</td>
-        </tr>
-        </tbody>
-    </table>
-
+    <th:block th:insert="~{medication_card_fragments :: table(${activeTreatments}, ${lang})}"/>
 
     <h2>Traitements en réserve</h2>
-    <table>
-        <thead>
-        <tr>
-            <td rowspan="2">Nom du médicament</td>
-            <td colspan="4">Dosage</td>
-            <td rowspan="2">Raison</td>
-            <td rowspan="2">Voie et localisation</td>
-        </tr>
-        <tr>
-            <td>Matin</td>
-            <td>Midi</td>
-            <td>Soir</td>
-            <td>Nuit</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="medStmt: ${asneededTreatments}"
-            th:with="dosage = ${medStmt.resolveEffectiveDosageInstructions()}">
-            <td>
-                [[${medStmt.resolveMedication().resolveMedicationName()}]]
-                <th:block th:if="${dosage.hasMaxDose()}" th:insert="~{datatypes::max-doses(${dosage}, ${lang})}"/>
-            </td>
-            <th:block th:if="${dosage.hasIntakes()}">
-                <td th:insert="~{datatypes :: dosage-intake(${dosage.getMornIntake()}, ${lang})}"/>
-                <td th:insert="~{datatypes :: dosage-intake(${dosage.getNoonIntake()}, ${lang})}"/>
-                <td th:insert="~{datatypes :: dosage-intake(${dosage.getEveIntake()}, ${lang})}"/>
-                <td th:insert="~{datatypes :: dosage-intake(${dosage.getNightIntake()}, ${lang})}"/>
-            </th:block>
-            <th:block th:if="${not dosage.hasIntakes()}">
-                <td colspan="4" th:text="${dosage.patientInstructions()}"/>
-            </th:block>
-            <td>
-                <th:block th:if="${medStmt.hasTreatmentReason()}"
-                          th:text="${medStmt.getTreatmentReason()}"/>
-                <th:block th:if="${not medStmt.hasTreatmentReason()}"
-                          th:text="'—'"/>
-            </td>
-            <td>
-                <th:block th:if="${dosage.hasRouteOfAdministration()}"
-                          th:text="${fopase.getMessage(dosage.routeOfAdministration(), lang)}"/>
-            </td>
-        </tr>
-
-        <tr th:if="${asneededTreatments.empty}">
-            <td colspan="7">Aucun traitement en réserve</td>
-        </tr>
-        </tbody>
-    </table>
+    <th:block th:insert="~{medication_card_fragments :: table(${asneededTreatments}, ${lang})}"/>
 </th:block>

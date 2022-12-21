@@ -13,13 +13,6 @@
         <th:block th:include="~{datatypes :: human-name(${patient.name[0]}, ${lang})}"/>
         <br/>
     </th:block>
-    <th:block th:if="${patient.hasBirthDateElement()}" th:text="${patient.getBirthDateElement().getValueAsString()}"/>
-</th:block>
-
-<th:block th:fragment="patient-birth-date(birthDateElement, lang)">
-    <th:block th:switch="${birthDateElement.getPrecision().getName()}" th:with="value = ${birthDateElement.getValueAsString()}">
-        <th:block th:case="'DAY'" th:text="${value.substring(8,10)} + '/' + ${value.substring(5,7)} + '/' + ${value.substring(0,4)}"/>
-        <th:block th:case="'MONTH'" th:text="${value.substring(5,7)} + '/' + ${value.substring(0,4)}"/>
-        <th:block th:case="'YEAR'" th:text="${value}"/>
-    </th:block>
+    <th:block th:if="${patient.hasBirthDateElement()}"
+              th:insert="datatypes :: date-time(${patient.getBirthDateElement()}, ${lang})"/>
 </th:block>

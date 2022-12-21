@@ -59,3 +59,12 @@
         .
     </th:block>
 </th:block>
+
+<th:block th:fragment="date-time(dateTimeElement, lang)">
+    <th:block th:switch="${dateTimeElement.getPrecision().name()}" th:with="value = ${dateTimeElement.getValueAsString()}">
+        <th:block th:case="'MINUTE'" th:text="${value.substring(8,10)} + '/' + ${value.substring(5,7)} + '/' + ${value.substring(0,4)} + ' ' + ${value.substring(11, 15)}"/>
+        <th:block th:case="'DAY'" th:text="${value.substring(8,10)} + '/' + ${value.substring(5,7)} + '/' + ${value.substring(0,4)}"/>
+        <th:block th:case="'MONTH'" th:text="${value.substring(5,7)} + '/' + ${value.substring(0,4)}"/>
+        <th:block th:case="'YEAR'" th:text="${value}"/>
+    </th:block>
+</th:block>
