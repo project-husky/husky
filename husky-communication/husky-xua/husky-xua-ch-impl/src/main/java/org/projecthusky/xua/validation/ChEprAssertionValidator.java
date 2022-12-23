@@ -11,14 +11,6 @@ package org.projecthusky.xua.validation;
 
 import net.shibboleth.utilities.java.support.component.ComponentInitializationException;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.projecthusky.common.utils.OptionalUtils;
-import org.projecthusky.communication.ch.enums.stable.Role;
-import org.projecthusky.xua.hl7v3.impl.AbstractImpl;
-import org.projecthusky.xua.hl7v3.impl.CodedWithEquivalentImpl;
-import org.projecthusky.xua.validation.condition.ChEprAudienceRestrictionConditionValidator;
-import org.projecthusky.xua.validation.condition.ChEprDelegationRestrictionConditionValidator;
-import org.projecthusky.xua.validation.statement.ChEprAttributeStatementValidator;
-import org.projecthusky.xua.validation.subject.ChEprSubjectConfirmationBearerValidator;
 import org.opensaml.core.config.InitializationService;
 import org.opensaml.saml.common.assertion.AssertionValidationException;
 import org.opensaml.saml.common.assertion.ValidationContext;
@@ -29,13 +21,24 @@ import org.opensaml.saml.saml2.assertion.ConditionValidator;
 import org.opensaml.saml.saml2.assertion.SAML20AssertionValidator;
 import org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters;
 import org.opensaml.saml.saml2.assertion.impl.OneTimeUseConditionValidator;
-import org.opensaml.saml.saml2.core.*;
+import org.opensaml.saml.saml2.core.Assertion;
+import org.opensaml.saml.saml2.core.AttributeStatement;
+import org.opensaml.saml.saml2.core.NameIDType;
+import org.opensaml.saml.saml2.core.Subject;
 import org.opensaml.saml.saml2.core.impl.AttributeValueImpl;
 import org.opensaml.storage.ReplayCache;
 import org.opensaml.storage.impl.MemoryStorageService;
 import org.opensaml.xmlsec.keyinfo.KeyInfoCredentialResolver;
 import org.opensaml.xmlsec.signature.support.SignatureTrustEngine;
 import org.opensaml.xmlsec.signature.support.impl.ExplicitKeySignatureTrustEngine;
+import org.projecthusky.common.utils.OptionalUtils;
+import org.projecthusky.communication.ch.enums.stable.Role;
+import org.projecthusky.xua.hl7v3.impl.AbstractImpl;
+import org.projecthusky.xua.hl7v3.impl.CodedWithEquivalentImpl;
+import org.projecthusky.xua.validation.condition.ChEprAudienceRestrictionConditionValidator;
+import org.projecthusky.xua.validation.condition.ChEprDelegationRestrictionConditionValidator;
+import org.projecthusky.xua.validation.statement.ChEprAttributeStatementValidator;
+import org.projecthusky.xua.validation.subject.ChEprSubjectConfirmationBearerValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,12 +47,12 @@ import javax.xml.namespace.QName;
 import java.time.Duration;
 import java.util.*;
 
+import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.CLOCK_SKEW;
+import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.SIGNATURE_REQUIRED;
 import static org.projecthusky.common.ch.ChEpr.EPR_SPID_URN;
 import static org.projecthusky.xua.ChEprXuaSpecifications.*;
 import static org.projecthusky.xua.communication.xua.XUserAssertionConstants.*;
 import static org.projecthusky.xua.validation.ChEprAssertionValidationParameters.*;
-import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.CLOCK_SKEW;
-import static org.opensaml.saml.saml2.assertion.SAML2AssertionValidationParameters.SIGNATURE_REQUIRED;
 
 /**
  * A component capable of performing core validation of SAML version 2.0 {@link Assertion} instances in use in the

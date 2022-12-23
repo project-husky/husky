@@ -19,9 +19,9 @@ import org.opensaml.saml.saml2.core.Assertion;
 import org.opensaml.saml.saml2.core.Condition;
 import org.opensaml.saml.saml2.core.NameIDType;
 import org.projecthusky.common.utils.OptionalUtils;
-import org.projecthusky.common.utils.datatypes.Oids;
 import org.projecthusky.communication.ch.enums.stable.Role;
 import org.projecthusky.xua.validation.ChEprAssertionValidationParameters;
+import org.projecthusky.xua.validation.ValidationUtils;
 
 import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.QName;
@@ -73,7 +73,7 @@ public class ChEprDelegationRestrictionConditionValidator implements ConditionVa
                 .map(OptionalUtils::getListOnlyElement)
                 .map(Delegate::getNameID)
                 .filter(n -> NameIDType.PERSISTENT.equals(n.getFormat()))
-                .filter(n -> n.getValue() == null)
+                .filter(n -> n.getValue() != null)
                 .orElse(null);
         if (nameId == null) {
             context.setValidationFailureMessage("The DelegationRestrictionType Condition doesn't contain a valid " +
@@ -95,11 +95,7 @@ public class ChEprDelegationRestrictionConditionValidator implements ConditionVa
                                                             "technical user unique ID");
                 return ValidationResult.INVALID;
             }
-            String tcuId = nameId.getValue();
-            if (tcuId.startsWith(Oids.PREFIX_OID)) {
-                tcuId = tcuId.substring(Oids.PREFIX_OID.length());
-            }
-            context.getDynamicParameters().put(CH_EPR_TCU_ID, tcuId);
+            context.getDynamicParameters().put(CH_EPR_TCU_ID, ValidationUtils.trimOidUrn(nameId.getValue()));
             return ValidationResult.VALID;
         }
     }

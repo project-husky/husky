@@ -15,6 +15,7 @@ import org.opensaml.core.xml.XMLObject;
 import org.opensaml.core.xml.schema.XSString;
 import org.opensaml.core.xml.schema.XSURI;
 import org.opensaml.saml.saml2.core.impl.AttributeValueImpl;
+import org.projecthusky.common.utils.datatypes.Oids;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -55,5 +56,18 @@ public class ValidationUtils {
                 .filter(Objects::nonNull)
                 .map(String::trim)
                 .orElse(null);
+    }
+
+    /**
+     * Removes the OID URN prefix from a string, if any.
+     */
+    @Nullable
+    public static String trimOidUrn(@Nullable final String oid) {
+        if (oid == null) {
+            return null;
+        } else if (oid.startsWith(Oids.PREFIX_OID)) {
+            return oid.substring(Oids.PREFIX_OID.length());
+        }
+        return oid;
     }
 }

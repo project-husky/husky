@@ -11,9 +11,6 @@ package org.projecthusky.xua.validation;
 
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.projecthusky.communication.ch.enums.stable.PurposeOfUse;
-import org.projecthusky.communication.ch.enums.stable.Role;
-import org.projecthusky.xua.helpers.AssertionSigner;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.opensaml.core.config.InitializationService;
@@ -27,6 +24,9 @@ import org.opensaml.security.credential.Credential;
 import org.opensaml.security.credential.UsageType;
 import org.opensaml.security.credential.impl.CollectionCredentialResolver;
 import org.opensaml.xmlsec.signature.support.impl.ExplicitKeySignatureTrustEngine;
+import org.projecthusky.communication.ch.enums.stable.PurposeOfUse;
+import org.projecthusky.communication.ch.enums.stable.Role;
+import org.projecthusky.xua.helpers.AssertionSigner;
 import org.w3c.dom.Element;
 
 import java.io.StringReader;
@@ -86,9 +86,11 @@ class ChEprAssertionValidatorTest {
         final KeyStore ks = KeyStore.getInstance("JKS");
         ks.load(AssertionSigner.class.getResourceAsStream("/husky_test_keystore1.jks"), "password".toCharArray());
         final RSAPrivateCrtKey privateKey = (RSAPrivateCrtKey) ((KeyStore.PrivateKeyEntry) ks.getEntry("testkey",
-                new KeyStore.PasswordProtection("password".toCharArray()))).getPrivateKey();
+                                                                                                       new KeyStore.PasswordProtection(
+                                                                                                               "password".toCharArray()))).getPrivateKey();
         final var publicKey =
-                KeyFactory.getInstance("RSA").generatePublic(new RSAPublicKeySpec(privateKey.getModulus(), privateKey.getPublicExponent()));
+                KeyFactory.getInstance("RSA").generatePublic(new RSAPublicKeySpec(privateKey.getModulus(),
+                                                                                  privateKey.getPublicExponent()));
 
 
         // Sign the HCP assertion
@@ -126,7 +128,9 @@ class ChEprAssertionValidatorTest {
         assertEquals("http://ihe.connectathon.XUA/X-ServiceProvider-IHE-Connectathon", result.getAudienceRestriction());
         assertEquals("3.3.3.1", result.getHomeCommunityId());
         assertEquals(List.of("2.2.2.1", "2.2.2.2", "2.2.2.3"), result.getOrganizationsId());
-        assertEquals(List.of("Name of group with id urn:oid:2.2.2.1", "Name of group with id urn:oid:2.2.2.2", "Name of group with id urn:oid:2.2.2.3"), result.getOrganizationsName());
+        assertEquals(List.of("Name of group with id urn:oid:2.2.2.1",
+                             "Name of group with id urn:oid:2.2.2.2",
+                             "Name of group with id urn:oid:2.2.2.3"), result.getOrganizationsName());
         assertNull(result.getAssistantGln());
         assertNull(result.getAssistantName());
         assertNull(result.getTechnicalUserId());
@@ -192,7 +196,9 @@ class ChEprAssertionValidatorTest {
         assertEquals("urn:e-health-suisse:token-audience:all-communities", result.getAudienceRestriction());
         assertEquals("3.3.3.1", result.getHomeCommunityId());
         assertEquals(List.of("2.2.2.1", "2.2.2.2", "2.2.2.3"), result.getOrganizationsId());
-        assertEquals(List.of("Name of group with id urn:oid:2.2.2.1", "Name of group with id urn:oid:2.2.2.2", "Name of group with id urn:oid:2.2.2.3"), result.getOrganizationsName());
+        assertEquals(List.of("Name of group with id urn:oid:2.2.2.1",
+                             "Name of group with id urn:oid:2.2.2.2",
+                             "Name of group with id urn:oid:2.2.2.3"), result.getOrganizationsName());
         assertEquals("2000000090108", result.getAssistantGln());
         assertEquals("Dagmar Musterassistent", result.getAssistantName());
         assertNull(result.getTechnicalUserId());
@@ -214,10 +220,12 @@ class ChEprAssertionValidatorTest {
         assertEquals("urn:e-health-suisse:token-audience:all-communities", result.getAudienceRestriction());
         assertEquals("3.3.3.1", result.getHomeCommunityId());
         assertEquals(List.of("2.2.2.1", "2.2.2.2", "2.2.2.3"), result.getOrganizationsId());
-        assertEquals(List.of("Name of group with id urn:oid:2.2.2.1", "Name of group with id urn:oid:2.2.2.2", "Name of group with id urn:oid:2.2.2.3"), result.getOrganizationsName());
+        assertEquals(List.of("Name of group with id urn:oid:2.2.2.1",
+                             "Name of group with id urn:oid:2.2.2.2",
+                             "Name of group with id urn:oid:2.2.2.3"), result.getOrganizationsName());
         assertNull(result.getAssistantGln());
         assertNull(result.getAssistantName());
-        assertEquals("urn:oid:1.3.6.1.4.1.343", result.getTechnicalUserId());
+        assertEquals("1.3.6.1.4.1.343", result.getTechnicalUserId());
     }
 
     @Test
@@ -270,54 +278,68 @@ class ChEprAssertionValidatorTest {
         final var result = UNVALIDATOR.validate(assertion, VALIDATION_PARAMS);
         assertNotNull(result);
         assertEquals(ValidationResult.INVALID, result.getResult());
-        assertEquals("Signature of Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' from Issuer 'xua.hin.ch' was not valid", result.getContext().getValidationFailureMessage());
+        assertEquals(
+                "Signature of Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' from Issuer 'xua.hin.ch' was not valid",
+                result.getContext().getValidationFailureMessage());
     }
 
     @Test
     void testInvalidSignatureWithPublicKey() throws Exception {
         final var assertion = this.unmarshal(SIGNED_HCP_ASSERTION);
         final var signatureValue = assertion.getSignature().getDOM().getElementsByTagNameNS("http://www.w3" +
-                ".org/2000/09/xmldsig#", "SignatureValue").item(0);
+                                                                                                    ".org/2000/09/xmldsig#",
+                                                                                            "SignatureValue").item(0);
         signatureValue.setTextContent(signatureValue.getTextContent().replace('a', 'e')); // Mess with the signature
         final var result = VALIDATOR.validate(assertion, VALIDATION_PARAMS);
         assertNotNull(result);
         assertEquals(ValidationResult.INVALID, result.getResult());
-        assertEquals("Signature of Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' from Issuer 'xua.hin.ch' was not valid", result.getContext().getValidationFailureMessage());
+        assertEquals(
+                "Signature of Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' from Issuer 'xua.hin.ch' was not valid",
+                result.getContext().getValidationFailureMessage());
     }
 
     @Test
     void testInvalidReference() throws Exception {
         final var assertion = this.unmarshal(SIGNED_HCP_ASSERTION);
         final var reference = (Element) assertion.getSignature().getDOM().getElementsByTagNameNS("http://www.w3" +
-                ".org/2000/09/xmldsig#", "Reference").item(0);
+                                                                                                         ".org/2000/09/xmldsig#",
+                                                                                                 "Reference").item(0);
         reference.setAttribute("URI", reference.getAttribute("URI").replace('0', '6')); // Mess with the reference
         final var result = VALIDATOR.validate(assertion, VALIDATION_PARAMS);
         assertNotNull(result);
         assertEquals(ValidationResult.INVALID, result.getResult());
-        assertEquals("Signature of Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' from Issuer 'xua.hin.ch' was not valid", result.getContext().getValidationFailureMessage());
+        assertEquals(
+                "Signature of Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' from Issuer 'xua.hin.ch' was not valid",
+                result.getContext().getValidationFailureMessage());
     }
 
     @Test
     void testInvalidDigest() throws Exception {
         final var assertion = this.unmarshal(SIGNED_HCP_ASSERTION);
         final var digestValue = assertion.getSignature().getDOM().getElementsByTagNameNS("http://www.w3" +
-                ".org/2000/09/xmldsig#", "DigestValue").item(0);
+                                                                                                 ".org/2000/09/xmldsig#",
+                                                                                         "DigestValue").item(0);
         digestValue.setTextContent("abc123"); // Mess with the digest
         final var result = VALIDATOR.validate(assertion, VALIDATION_PARAMS);
         assertNotNull(result);
         assertEquals(ValidationResult.INVALID, result.getResult());
-        assertEquals("Signature of Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' from Issuer 'xua.hin.ch' was not valid", result.getContext().getValidationFailureMessage());
+        assertEquals(
+                "Signature of Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' from Issuer 'xua.hin.ch' was not valid",
+                result.getContext().getValidationFailureMessage());
     }
 
     @Test
     void testModifiedContent() throws Exception {
         final var assertion = this.unmarshal(SIGNED_HCP_ASSERTION);
-        final var audience = assertion.getDOM().getElementsByTagNameNS("urn:oasis:names:tc:SAML:2.0:assertion", "Audience").item(0);
+        final var audience = assertion.getDOM().getElementsByTagNameNS("urn:oasis:names:tc:SAML:2.0:assertion",
+                                                                       "Audience").item(0);
         audience.setTextContent("Not the original content");
         final var result = VALIDATOR.validate(assertion, VALIDATION_PARAMS);
         assertNotNull(result);
         assertEquals(ValidationResult.INVALID, result.getResult());
-        assertEquals("Signature of Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' from Issuer 'xua.hin.ch' was not valid", result.getContext().getValidationFailureMessage());
+        assertEquals(
+                "Signature of Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' from Issuer 'xua.hin.ch' was not valid",
+                result.getContext().getValidationFailureMessage());
     }
 
     @Test
@@ -325,29 +347,31 @@ class ChEprAssertionValidatorTest {
         // NotBefore in the future
         var assertion = this.unmarshal(SIGNED_HCP_ASSERTION);
         var conditions = (Element) assertion.getDOM().getElementsByTagNameNS("urn:oasis:names:tc:SAML:2.0:assertion",
-                "Conditions").item(0);
+                                                                             "Conditions").item(0);
         conditions.setAttribute("NotBefore", Instant.now().plusSeconds(120).toString());
         conditions.setAttribute("NotOnOrAfter", Instant.now().plusSeconds(180).toString());
         assertion = this.signAndUnmarshall(assertion);
         var result = VALIDATOR.validate(assertion, VALIDATION_PARAMS);
         assertEquals(ValidationResult.INVALID, result.getResult());
-        assertTrue(result.getContext().getValidationFailureMessage().startsWith("Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' with NotBefore condition of"));
+        assertTrue(result.getContext().getValidationFailureMessage().startsWith(
+                "Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' with NotBefore condition of"));
 
         // NotOnOrAfter in the past
         assertion = this.unmarshal(SIGNED_HCP_ASSERTION);
         conditions = (Element) assertion.getDOM().getElementsByTagNameNS("urn:oasis:names:tc:SAML:2.0:assertion",
-                "Conditions").item(0);
+                                                                         "Conditions").item(0);
         conditions.setAttribute("NotBefore", Instant.now().minusSeconds(180).toString());
         conditions.setAttribute("NotOnOrAfter", Instant.now().minusSeconds(120).toString());
         assertion = this.signAndUnmarshall(assertion);
         result = VALIDATOR.validate(assertion, VALIDATION_PARAMS);
         assertEquals(ValidationResult.INVALID, result.getResult());
-        assertTrue(result.getContext().getValidationFailureMessage().startsWith("Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' with NotOnOrAfter condition of"));
+        assertTrue(result.getContext().getValidationFailureMessage().startsWith(
+                "Assertion '_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' with NotOnOrAfter condition of"));
 
         // NotOnOrAfter before NotBefore
         assertion = this.unmarshal(SIGNED_HCP_ASSERTION);
         conditions = (Element) assertion.getDOM().getElementsByTagNameNS("urn:oasis:names:tc:SAML:2.0:assertion",
-                "Conditions").item(0);
+                                                                         "Conditions").item(0);
         conditions.setAttribute("NotBefore", Instant.now().plusSeconds(180).toString());
         conditions.setAttribute("NotOnOrAfter", Instant.now().minusSeconds(120).toString());
         assertion = this.signAndUnmarshall(assertion);
@@ -357,7 +381,7 @@ class ChEprAssertionValidatorTest {
         // Assertion is valid in 10 seconds, less than the clock skew
         assertion = this.unmarshal(SIGNED_HCP_ASSERTION);
         conditions = (Element) assertion.getDOM().getElementsByTagNameNS("urn:oasis:names:tc:SAML:2.0:assertion",
-                "Conditions").item(0);
+                                                                         "Conditions").item(0);
         conditions.setAttribute("NotBefore", Instant.now().plusSeconds(10).toString());
         conditions.setAttribute("NotOnOrAfter", Instant.now().plusSeconds(120).toString());
         assertion = this.signAndUnmarshall(assertion);
@@ -367,7 +391,7 @@ class ChEprAssertionValidatorTest {
         // Assertion was valid 10 seconds ago, less than the clock skew
         assertion = this.unmarshal(SIGNED_HCP_ASSERTION);
         conditions = (Element) assertion.getDOM().getElementsByTagNameNS("urn:oasis:names:tc:SAML:2.0:assertion",
-                "Conditions").item(0);
+                                                                         "Conditions").item(0);
         conditions.setAttribute("NotBefore", Instant.now().minusSeconds(180).toString());
         conditions.setAttribute("NotOnOrAfter", Instant.now().minusSeconds(10).toString());
         AssertionSigner.sign(assertion, SIGNING_CRED);
@@ -391,7 +415,8 @@ class ChEprAssertionValidatorTest {
         assertion.setSignature(null);
         var result = VALIDATOR.validate(assertion, VALIDATION_PARAMS);
         assertEquals(ValidationResult.INVALID, result.getResult());
-        assertEquals("Assertion was required to be signed, but was not", result.getContext().getValidationFailureMessage());
+        assertEquals("Assertion was required to be signed, but was not",
+                     result.getContext().getValidationFailureMessage());
     }
 
     @Test
@@ -409,12 +434,14 @@ class ChEprAssertionValidatorTest {
         assertion.setIssuer(null);
         var result = VALIDATOR.validate(assertion, VALIDATION_PARAMS);
         assertEquals(ValidationResult.INVALID, result.getResult());
-        assertEquals("Assertion Issuer was missing and was required", result.getContext().getValidationFailureMessage());
+        assertEquals("Assertion Issuer was missing and was required",
+                     result.getContext().getValidationFailureMessage());
     }
 
     @Test
     void testOneTimeUse() throws Exception {
-        var assertion = this.unmarshal(SIGNED_HCP_ASSERTION.replace("</saml2:AudienceRestriction>", "</saml2:AudienceRestriction><saml2:OneTimeUse/>"));
+        var assertion = this.unmarshal(SIGNED_HCP_ASSERTION.replace("</saml2:AudienceRestriction>",
+                                                                    "</saml2:AudienceRestriction><saml2:OneTimeUse/>"));
         assertion = this.signAndUnmarshall(assertion);
         var result = VALIDATOR.validate(assertion, VALIDATION_PARAMS);
         assertEquals(ValidationResult.VALID, result.getResult());
@@ -423,9 +450,9 @@ class ChEprAssertionValidatorTest {
         result = VALIDATOR.validate(assertion, VALIDATION_PARAMS);
         assertEquals(ValidationResult.INVALID, result.getResult());
         assertEquals("Condition '{urn:oasis:names:tc:SAML:2.0:assertion}OneTimeUse' of type 'null' in assertion " +
-                "'_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' was not valid.: Assertion " +
-                "'_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' has a one time use condition and has been used before",
-                result.getContext().getValidationFailureMessage());
+                             "'_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' was not valid.: Assertion " +
+                             "'_2cfcc382-7e60-44e0-99b5-18e3f718cbc6' has a one time use condition and has been used before",
+                     result.getContext().getValidationFailureMessage());
     }
 
     private Assertion unmarshal(final String assertionXml) throws Exception {
@@ -442,11 +469,13 @@ class ChEprAssertionValidatorTest {
     private static Assertion loadAndPrepareAssertion(final String fileName) throws Exception {
         final Element element = Objects.requireNonNull(XMLObjectProviderRegistrySupport.getParserPool(), "Can't get " +
                         "the parser pool")
-                .parse(Objects.requireNonNull(ChEprAssertionValidatorTest.class.getClassLoader().getResourceAsStream(fileName),
-                        "Can't find the XUA file to sign"))
+                .parse(Objects.requireNonNull(ChEprAssertionValidatorTest.class.getClassLoader().getResourceAsStream(
+                                                      fileName),
+                                              "Can't find the XUA file to sign"))
                 .getDocumentElement();
         element.setAttribute("IssueInstant", Instant.now().minusSeconds(120).toString());
-        final var conditions = (Element) element.getElementsByTagNameNS("urn:oasis:names:tc:SAML:2.0:assertion", "Conditions").item(0);
+        final var conditions = (Element) element.getElementsByTagNameNS("urn:oasis:names:tc:SAML:2.0:assertion",
+                                                                        "Conditions").item(0);
         conditions.setAttribute("NotBefore", Instant.now().minusSeconds(120).toString());
         conditions.setAttribute("NotOnOrAfter", Instant.now().plusSeconds(180).toString());
         return (Assertion) UNMARSHALLER.unmarshall(element);

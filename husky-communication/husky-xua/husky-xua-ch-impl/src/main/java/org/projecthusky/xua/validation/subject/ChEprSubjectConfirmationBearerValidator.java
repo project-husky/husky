@@ -10,10 +10,6 @@
 package org.projecthusky.xua.validation.subject;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.projecthusky.common.utils.OptionalUtils;
-import org.projecthusky.communication.ch.enums.stable.Role;
-import org.projecthusky.xua.validation.ChEprAssertionValidationParameters;
-import org.projecthusky.xua.validation.ValidationUtils;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.saml.common.assertion.ValidationContext;
 import org.opensaml.saml.common.assertion.ValidationResult;
@@ -21,6 +17,10 @@ import org.opensaml.saml.saml2.assertion.SubjectConfirmationValidator;
 import org.opensaml.saml.saml2.core.Assertion;
 import org.opensaml.saml.saml2.core.Attribute;
 import org.opensaml.saml.saml2.core.SubjectConfirmation;
+import org.projecthusky.common.utils.OptionalUtils;
+import org.projecthusky.communication.ch.enums.stable.Role;
+import org.projecthusky.xua.validation.ChEprAssertionValidationParameters;
+import org.projecthusky.xua.validation.ValidationUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -70,33 +70,35 @@ public class ChEprSubjectConfirmationBearerValidator implements SubjectConfirmat
 
         final var nameId = confirmation.getNameID();
         if (nameId == null || nameId.getNameQualifier() == null || nameId.getValue() == null) {
-            log.debug("The SubjectConfirmation NameID is missing");
+            context.setValidationFailureMessage("The SubjectConfirmation NameID is missing");
             return ValidationResult.INVALID;
         }
 
         // Here we compare the value to the one extracted from the DelegationRestrictionType Condition
         if (role == Role.ASSISTANT) {
             if (!"urn:gs1:gln".equals(nameId.getNameQualifier())) {
-                log.debug("The assistant GLN is missing in the SubjectConfirmation");
+                context.setValidationFailureMessage("The assistant GLN is missing in the SubjectConfirmation");
                 return ValidationResult.INVALID;
             }
 
             final var assistantGln = (String) context.getDynamicParameters().get(CH_EPR_ASSISTANT_GLN);
             if (assistantGln == null || !assistantGln.equals(nameId.getValue())) {
-                log.debug("The assistant GLN in the SubjectConfirmation is different from the one in the " +
-                        "DelegationRestrictionType Condition");
+                context.setValidationFailureMessage(
+                        "The assistant GLN in the SubjectConfirmation is different from the one in the " +
+                                "DelegationRestrictionType Condition");
                 return ValidationResult.INVALID;
             }
         } else {
             if (!TECHNICAL_USER_ID.equals(nameId.getNameQualifier())) {
-                log.debug("The technical user unique ID is missing in the SubjectConfirmation");
+                context.setValidationFailureMessage("The technical user unique ID is missing in the SubjectConfirmation");
                 return ValidationResult.INVALID;
             }
 
-            final var technicalUserUniqueId = (String) context.getDynamicParameters().get(CH_EPR_TCU_ID);
-            if (technicalUserUniqueId == null || !technicalUserUniqueId.equals(nameId.getValue())) {
-                log.debug("The technical user unique ID in the SubjectConfirmation is different from the one in the " +
-                        "DelegationRestrictionType Condition");
+            String technicalUserUniqueId = (String) context.getDynamicParameters().get(CH_EPR_TCU_ID);
+            if (technicalUserUniqueId == null || !technicalUserUniqueId.equals(ValidationUtils.trimOidUrn(nameId.getValue()))) {
+                context.setValidationFailureMessage(
+                        "The technical user unique ID in the SubjectConfirmation is different from the one in the " +
+                                "DelegationRestrictionType Condition");
                 return ValidationResult.INVALID;
             }
         }
@@ -105,7 +107,7 @@ public class ChEprSubjectConfirmationBearerValidator implements SubjectConfirmat
         if (role == Role.ASSISTANT) {
             final var assistantName = extractAssistantName(confirmation);
             if (assistantName.isEmpty()) {
-                log.debug("The assistant name is missing in the SubjectConfirmation");
+                context.setValidationFailureMessage("The assistant name is missing in the SubjectConfirmation");
                 return ValidationResult.INVALID;
             }
             context.getDynamicParameters().put(CH_EPR_ASSISTANT_NAME, assistantName.get());
