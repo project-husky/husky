@@ -10,9 +10,6 @@
 package org.projecthusky.xua.validation.condition;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.projecthusky.common.utils.OptionalUtils;
-import org.projecthusky.communication.ch.enums.stable.Role;
-import org.projecthusky.xua.validation.ChEprAssertionValidationParameters;
 import org.opensaml.saml.common.assertion.ValidationContext;
 import org.opensaml.saml.common.assertion.ValidationResult;
 import org.opensaml.saml.ext.saml2delrestrict.Delegate;
@@ -21,6 +18,10 @@ import org.opensaml.saml.saml2.assertion.ConditionValidator;
 import org.opensaml.saml.saml2.core.Assertion;
 import org.opensaml.saml.saml2.core.Condition;
 import org.opensaml.saml.saml2.core.NameIDType;
+import org.projecthusky.common.utils.OptionalUtils;
+import org.projecthusky.common.utils.datatypes.Oids;
+import org.projecthusky.communication.ch.enums.stable.Role;
+import org.projecthusky.xua.validation.ChEprAssertionValidationParameters;
 
 import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.QName;
@@ -64,7 +65,7 @@ public class ChEprDelegationRestrictionConditionValidator implements ConditionVa
         final Role role = (Role) context.getDynamicParameters().get(CH_EPR_ROLE);
         if (role != Role.ASSISTANT && role != Role.TECHNICAL_USER) {
             context.setValidationFailureMessage("The DelegationRestrictionType Condition shall not appear for other " +
-                    "extensions than TCU and ASS");
+                                                        "extensions than TCU and ASS");
             return ValidationResult.INVALID;
         }
 
@@ -72,17 +73,18 @@ public class ChEprDelegationRestrictionConditionValidator implements ConditionVa
                 .map(OptionalUtils::getListOnlyElement)
                 .map(Delegate::getNameID)
                 .filter(n -> NameIDType.PERSISTENT.equals(n.getFormat()))
+                .filter(n -> n.getValue() == null)
                 .orElse(null);
         if (nameId == null) {
             context.setValidationFailureMessage("The DelegationRestrictionType Condition doesn't contain a valid " +
-                    "NameID");
+                                                        "NameID");
             return ValidationResult.INVALID;
         }
 
         if (role == Role.ASSISTANT) {
             if (!"urn:gs1:gln".equals(nameId.getNameQualifier())) {
                 context.setValidationFailureMessage("The DelegationRestrictionType Condition doesn't contain the " +
-                        "assistant GLN");
+                                                            "assistant GLN");
                 return ValidationResult.INVALID;
             }
             context.getDynamicParameters().put(CH_EPR_ASSISTANT_GLN, nameId.getValue());
@@ -90,10 +92,14 @@ public class ChEprDelegationRestrictionConditionValidator implements ConditionVa
         } else {
             if (!TECHNICAL_USER_ID.equals(nameId.getNameQualifier())) {
                 context.setValidationFailureMessage("The DelegationRestrictionType Condition doesn't contain the " +
-                        "technical user unique ID");
+                                                            "technical user unique ID");
                 return ValidationResult.INVALID;
             }
-            context.getDynamicParameters().put(CH_EPR_TCU_ID, nameId.getValue());
+            String tcuId = nameId.getValue();
+            if (tcuId.startsWith(Oids.PREFIX_OID)) {
+                tcuId = tcuId.substring(Oids.PREFIX_OID.length());
+            }
+            context.getDynamicParameters().put(CH_EPR_TCU_ID, tcuId);
             return ValidationResult.VALID;
         }
     }

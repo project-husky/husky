@@ -237,7 +237,7 @@ public class ChEprAssertionValidator {
                 } else if (TECHNICAL_USER_ID.equals(nameQualifier)) {
                     role = Role.TECHNICAL_USER;
                 } else {
-                    return ValidationResult.INDETERMINATE;
+                    return ValidationResult.INVALID;
                 }
             }
         }
