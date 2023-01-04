@@ -10,9 +10,6 @@
  */
 package org.projecthusky.communication.ch.camel.chpharm1.validate.requests.query;
 
-import org.projecthusky.communication.ch.camel.chpharm1.requests.query.ChPharm1QueryType;
-import org.projecthusky.communication.ch.camel.validate.CodeEnumValidation;
-import org.projecthusky.communication.ch.enums.stable.FormatCode;
 import org.openehealth.ipf.commons.core.modules.api.ValidationException;
 import org.openehealth.ipf.commons.core.modules.api.Validator;
 import org.openehealth.ipf.commons.ihe.xds.core.ebxml.EbXMLAdhocQueryRequest;
@@ -20,14 +17,17 @@ import org.openehealth.ipf.commons.ihe.xds.core.requests.query.QueryReturnType;
 import org.openehealth.ipf.commons.ihe.xds.core.transform.requests.QueryParameter;
 import org.openehealth.ipf.commons.ihe.xds.core.validate.*;
 import org.openehealth.ipf.commons.ihe.xds.core.validate.query.*;
+import org.projecthusky.communication.ch.camel.chpharm1.requests.query.ChPharm1QueryType;
+import org.projecthusky.communication.ch.camel.validate.CodeEnumValidation;
+import org.projecthusky.communication.ch.enums.beta.FormatCode;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.projecthusky.communication.ch.camel.chpharm1.requests.query.ChPharm1QueryType.*;
 import static org.openehealth.ipf.commons.ihe.xds.core.transform.requests.QueryParameter.*;
 import static org.openehealth.ipf.commons.ihe.xds.core.validate.ValidationMessage.*;
 import static org.openehealth.ipf.commons.ihe.xds.core.validate.ValidatorAssertions.metaDataAssert;
+import static org.projecthusky.communication.ch.camel.chpharm1.requests.query.ChPharm1QueryType.*;
 
 /**
  * Validates a CH:PHARM-1 {@link EbXMLAdhocQueryRequest}.
@@ -45,28 +45,28 @@ public class ChPharm1RequestValidator implements Validator<EbXMLAdhocQueryReques
         ALLOWED_MULTIPLE_SLOTS = new EnumMap<>(ChPharm1QueryType.class);
 
         addAllowedMultipleSlots(CH_FIND_MEDICATION_TREATMENT_PLANS,
-                DOC_ENTRY_EVENT_CODE,
-                DOC_ENTRY_CONFIDENTIALITY_CODE);
+                                DOC_ENTRY_EVENT_CODE,
+                                DOC_ENTRY_CONFIDENTIALITY_CODE);
 
         addAllowedMultipleSlots(CH_FIND_PRESCRIPTIONS,
-                DOC_ENTRY_EVENT_CODE,
-                DOC_ENTRY_CONFIDENTIALITY_CODE);
+                                DOC_ENTRY_EVENT_CODE,
+                                DOC_ENTRY_CONFIDENTIALITY_CODE);
 
         addAllowedMultipleSlots(CH_FIND_DISPENSES,
-                DOC_ENTRY_EVENT_CODE,
-                DOC_ENTRY_CONFIDENTIALITY_CODE);
+                                DOC_ENTRY_EVENT_CODE,
+                                DOC_ENTRY_CONFIDENTIALITY_CODE);
 
         addAllowedMultipleSlots(CH_FIND_MEDICATION_ADMINISTRATIONS,
-                DOC_ENTRY_EVENT_CODE,
-                DOC_ENTRY_CONFIDENTIALITY_CODE);
+                                DOC_ENTRY_EVENT_CODE,
+                                DOC_ENTRY_CONFIDENTIALITY_CODE);
 
         addAllowedMultipleSlots(CH_FIND_PRESCRIPTIONS_FOR_VALIDATION,
-                DOC_ENTRY_EVENT_CODE,
-                DOC_ENTRY_CONFIDENTIALITY_CODE);
+                                DOC_ENTRY_EVENT_CODE,
+                                DOC_ENTRY_CONFIDENTIALITY_CODE);
 
         addAllowedMultipleSlots(CH_FIND_PRESCRIPTIONS_FOR_DISPENSE,
-                DOC_ENTRY_EVENT_CODE,
-                DOC_ENTRY_CONFIDENTIALITY_CODE);
+                                DOC_ENTRY_EVENT_CODE,
+                                DOC_ENTRY_CONFIDENTIALITY_CODE);
     }
 
 
@@ -81,11 +81,6 @@ public class ChPharm1RequestValidator implements Validator<EbXMLAdhocQueryReques
     private QueryParameterValidation[] getValidators(ChPharm1QueryType queryType, ValidationProfile profile) {
         var homeCommunityIdOptionality = profile.getInteractionProfile().getHomeCommunityIdOptionality(); // TODO
 
-        /**
-         * TODO:
-         *
-         * CodeEnumValidation for DOC_ENTRY_FORMAT_CODE (Table 22, page 78)
-         */
         return switch (queryType) {
             case CH_FIND_MEDICATION_TREATMENT_PLANS,
                     CH_FIND_PRESCRIPTIONS,
@@ -111,12 +106,9 @@ public class ChPharm1RequestValidator implements Validator<EbXMLAdhocQueryReques
                     new StatusValidation(DOC_ENTRY_STATUS),
                     new CodeValidation(DOC_ENTRY_FORMAT_CODE),
                     new CodeEnumValidation(DOC_ENTRY_FORMAT_CODE, true, EnumSet.of(
-                            FormatCode.COMMUNITY_MEDICATION_TREATMENT_PLAN,
-                            FormatCode.COMMUNITY_PRESCRIPTION,
-                            FormatCode.COMMUNITY_DISPENSE
-                            // TODO CH-EMED MTP
-                            // TODO CH-EMED PRE
-                            // TODO CH-EMED DIS
+                            FormatCode.CH_EMED_MEDICATION_TREATMENT_PLAN,
+                            FormatCode.CH_EMED_MEDICATION_PRESCRIPTION,
+                            FormatCode.CH_EMED_MEDICATION_DISPENSE
                     )),
             };
             case CH_FIND_MEDICATION_LIST -> new QueryParameterValidation[]{
@@ -126,12 +118,9 @@ public class ChPharm1RequestValidator implements Validator<EbXMLAdhocQueryReques
                     new NumberValidation(DOC_ENTRY_SERVICE_END_FROM, timeValidator),
                     new NumberValidation(DOC_ENTRY_SERVICE_END_TO, timeValidator),
                     new CodeEnumValidation(DOC_ENTRY_FORMAT_CODE, true, EnumSet.of(
-                            FormatCode.COMMUNITY_MEDICATION_TREATMENT_PLAN,
-                            FormatCode.COMMUNITY_PRESCRIPTION,
-                            FormatCode.COMMUNITY_DISPENSE
-                            // TODO CH-EMED MTP
-                            // TODO CH-EMED PRE
-                            // TODO CH-EMED DIS
+                            FormatCode.CH_EMED_MEDICATION_TREATMENT_PLAN,
+                            FormatCode.CH_EMED_MEDICATION_PRESCRIPTION,
+                            FormatCode.CH_EMED_MEDICATION_DISPENSE
                     )),
                     new StatusValidation(DOC_ENTRY_STATUS),
                     new DocumentEntryTypeValidation(),
@@ -143,10 +132,8 @@ public class ChPharm1RequestValidator implements Validator<EbXMLAdhocQueryReques
                     new NumberValidation(DOC_ENTRY_SERVICE_END_FROM, timeValidator),
                     new NumberValidation(DOC_ENTRY_SERVICE_END_TO, timeValidator),
                     new CodeEnumValidation(DOC_ENTRY_FORMAT_CODE, true, EnumSet.of(
-                            FormatCode.COMMUNITY_MEDICATION_LIST // TODO: remove
-                            // TODO CDA-CH-EMED Medication Card
-                            // TODO Medication Card PDF
-                            // TODO CH-EMED Medication Card
+                            FormatCode.CH_EMED_MEDICATION_CARD_DOCUMENT,
+                            FormatCode.UNSTRUCTURED_EPR_DOCUMENT
                     )),
                     new StatusValidation(DOC_ENTRY_STATUS),
                     new DocumentEntryTypeValidation(),
@@ -166,8 +153,8 @@ public class ChPharm1RequestValidator implements Validator<EbXMLAdhocQueryReques
         Objects.requireNonNull(profile, "profile shall not be null in validate()");
 
         metaDataAssert(QueryReturnType.LEAF_CLASS.getCode().equals(request.getReturnType())
-                        || QueryReturnType.OBJECT_REF.getCode().equals(request.getReturnType()),
-                UNKNOWN_RETURN_TYPE, request.getReturnType());
+                               || QueryReturnType.OBJECT_REF.getCode().equals(request.getReturnType()),
+                       UNKNOWN_RETURN_TYPE, request.getReturnType());
 
         var queryType = ChPharm1QueryType.valueOfId(request.getId());
         metaDataAssert(queryType != null, UNKNOWN_QUERY_TYPE, request.getId());
