@@ -23,6 +23,7 @@ import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.communication.xdsmhdconversion.utils.ConverterUtils;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.*;
 
+import java.time.ZoneId;
 import java.util.*;
 
 /**
@@ -96,7 +97,11 @@ public class SubmissionSetConverter {
         submissionSet.setPatientId(ConverterUtils.toIdentifiable(list.getSubject(), list.getContained()));
 
         // date | SubmissionSet.submissionTime
-        submissionSet.setSubmissionTime(XdsMetadataUtil.convertDateToDtmString(list.getDate()));
+        submissionSet.setSubmissionTime(
+                new Timestamp(
+                        list.getDate().toInstant().atZone(ZoneId.systemDefault()),
+                        Timestamp.Precision.SECOND)
+        );
 
         // source | SubmissionSet.author
         final Extension extensionAuthorRole = list.getExtensionByUrl("http://fhir.ch/ig/ch-epr-mhealth/StructureDefinition/ch-ext-author-authorrole");

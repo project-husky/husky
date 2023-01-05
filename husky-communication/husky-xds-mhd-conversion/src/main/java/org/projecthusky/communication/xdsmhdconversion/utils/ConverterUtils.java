@@ -18,6 +18,7 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.*;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.time.ZoneId;
 import java.util.*;
 
 /**
@@ -627,7 +628,7 @@ public class ConverterUtils {
                     .toList());
 
             if (authorRole == null) {
-                authorRole = new Identifiable(SubmissionSetAuthorRole.HEALTHCARE_PROFESSIONAL_CODE, new AssigningAuthority(SubmissionSetAuthorRole.VALUE_SET_ID));
+                authorRole = new Identifiable(SubmissionSetAuthorRole.HEALTHCARE_PROFESSIONAL_CODE, new AssigningAuthority(SubmissionSetAuthorRole.CODE_SYSTEM_ID));
             }
 
             result.getAuthorRole().add(authorRole);
@@ -642,7 +643,7 @@ public class ConverterUtils {
                     .toList());
 
             if (authorRole == null) {
-                authorRole = new Identifiable(SubmissionSetAuthorRole.PATIENT_CODE, new AssigningAuthority(SubmissionSetAuthorRole.VALUE_SET_ID));
+                authorRole = new Identifiable(SubmissionSetAuthorRole.PATIENT_CODE, new AssigningAuthority(SubmissionSetAuthorRole.CODE_SYSTEM_ID));
             }
 
             result.getAuthorRole().add(authorRole);
@@ -797,7 +798,12 @@ public class ConverterUtils {
         final var patient = (Patient) resource;
 
         final var patientInfo = new PatientInfo();
-        patientInfo.setDateOfBirth(Timestamp.fromHL7(XdsMetadataUtil.convertDateToDtmString(patient.getBirthDate())));
+        if (patient.hasBirthDate()) {
+            patientInfo.setDateOfBirth(
+                    new Timestamp(patient.getBirthDate().toInstant().atZone(ZoneId.systemDefault()), Timestamp.Precision.SECOND)
+            );
+        }
+
 
         if (patient.hasGender()) {
             final String gender = switch (patient.getGender()) {

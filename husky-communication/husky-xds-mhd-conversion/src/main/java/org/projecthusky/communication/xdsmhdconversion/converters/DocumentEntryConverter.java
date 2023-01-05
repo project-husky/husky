@@ -25,6 +25,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.time.ZoneId;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -346,7 +347,10 @@ public class DocumentEntryConverter {
 
             //// creation | DocumentEntry.creationTime
             if (attachment.hasCreation()) {
-                documentEntry.setCreationTime(Timestamp.fromHL7(XdsMetadataUtil.convertDateToDtmString(attachment.getCreation())));
+                documentEntry.setCreationTime(new Timestamp(
+                        attachment.getCreation().toInstant().atZone(ZoneId.systemDefault()),
+                        Timestamp.Precision.SECOND)
+                );
             }
         }
 
@@ -366,8 +370,17 @@ public class DocumentEntryConverter {
 
         /// period
         if (context.hasPeriod()) {
-            documentEntry.setServiceStartTime(Timestamp.fromHL7(XdsMetadataUtil.convertDateToDtmString(context.getPeriod().getStart())));
-            documentEntry.setServiceStopTime(Timestamp.fromHL7(XdsMetadataUtil.convertDateToDtmString(context.getPeriod().getEnd())));
+            documentEntry.setServiceStartTime(
+                    new Timestamp(
+                            context.getPeriod().getStart().toInstant().atZone(ZoneId.systemDefault()),
+                            Timestamp.Precision.SECOND)
+            );
+
+            documentEntry.setServiceStopTime(
+                    new Timestamp(
+                            context.getPeriod().getEnd().toInstant().atZone(ZoneId.systemDefault()),
+                            Timestamp.Precision.SECOND)
+            );
         }
 
         /// facilityType | DocumentEntry.healthcareFacilityTypeCode
