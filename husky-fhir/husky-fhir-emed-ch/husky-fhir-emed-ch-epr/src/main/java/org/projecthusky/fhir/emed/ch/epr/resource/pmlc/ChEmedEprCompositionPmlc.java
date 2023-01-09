@@ -83,6 +83,7 @@ public class ChEmedEprCompositionPmlc extends ChEmedEprComposition {
             section = this.addSection();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    ANNOTATION_SECTION_CODE_VALUE, "Annotation comment"));
+            section.setTitle("Comment");
         }
         return section;
     }
@@ -99,6 +100,24 @@ public class ChEmedEprCompositionPmlc extends ChEmedEprComposition {
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    CARD_SECTION_CODE_VALUE,
                                                    "History of medication use"));
+            section.setTitle("Medication List");
+        }
+        return section;
+    }
+
+    /**
+     * Returns the original representation section; if missing, it creates it.
+     *
+     * @return the original representation section.
+     */
+    public SectionComponent getOriginalRepresentationSection() {
+        var section = getSectionByLoincCode(ORIGINAL_REPR_SECTION_CODE_VALUE);
+        if (section == null) {
+            section = this.addSection();
+            section.getCode().addCoding(new Coding(FhirSystem.LOINC,
+                                                   ORIGINAL_REPR_SECTION_CODE_VALUE,
+                                                   "Clinical presentation"));
+            section.setTitle("Original representation");
         }
         return section;
     }
