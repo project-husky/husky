@@ -70,7 +70,7 @@ public class DocumentEntryConverter {
 
         // masterIdentifier | DocumentEntry.uniqueId
         if (documentEntry.getUniqueId() != null) {
-            final var masterId = new Identifier().setValue(ConverterUtils.addPrefixOid(documentEntry.getUniqueId()));
+            final var masterId = new Identifier().setValue(documentEntry.getUniqueId());
             documentReference.setMasterIdentifier(masterId);
         }
 
@@ -155,9 +155,12 @@ public class DocumentEntryConverter {
         if (documentEntry.getUri() != null) {
             try {
                 attachment.setUrl(new URI(documentEntry.getUri()).toURL().toString());
+
+                if (documentEntry.getRepositoryUniqueId() != null) {
+                    final var url = String.format("%s&repositoryUniqueId=%s", attachment.getUrl(), documentEntry.getRepositoryUniqueId());
+                    attachment.setUrl(url);
+                }
             } catch (URISyntaxException | MalformedURLException ignored) {}
-        } else if (documentEntry.getRepositoryUniqueId() != null) {
-            attachment.setUrl(documentEntry.getRepositoryUniqueId());
         }
 
         //// size | DocumentEntry.size
