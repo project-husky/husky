@@ -170,6 +170,8 @@ public class ChEmedEprParser {
                 preferTypes.add(ChEmedEprDocumentPadv.class);
                 preferTypes.add(ChEmedEprCompositionPadv.class);
                 preferTypes.add(ChEmedEprObservationPadv.class);
+                preferTypes.add(ChEmedEprMedicationStatementMtp.class);
+                preferTypes.add(ChEmedEprMedicationRequestPre.class);
             }
             case PML -> {
                 preferTypes.add(ChEmedEprDocumentPml.class);
