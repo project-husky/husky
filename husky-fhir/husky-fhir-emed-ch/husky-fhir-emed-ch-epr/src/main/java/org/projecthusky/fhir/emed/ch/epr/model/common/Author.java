@@ -62,7 +62,7 @@ public class Author {
         } else if (resource instanceof final RelatedPerson relatedPerson) {
             this.setRelatedPerson(relatedPerson);
         } else {
-            throw new IllegalArgumentException("Passed resource is not a supported author");
+            throw new IllegalArgumentException("Passed resource is not a supported author: " + resource.getClass().getName());
         }
     }
 
