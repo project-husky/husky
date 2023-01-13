@@ -24,6 +24,8 @@ public class References {
      * @return the reference
      */
     public static Reference createReference(final Resource resource) {
-        return new Reference().setReference(resource.getId());
+        final var reference = new Reference();
+        reference.setResource(resource);
+        return reference;
     }
 }
