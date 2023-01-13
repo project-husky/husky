@@ -2,7 +2,9 @@ package org.projecthusky.fhir.emed.ch.epr.resource.pml;
 
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
+import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.Reference;
+import org.hl7.fhir.r4.model.Resource;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationDispense;
@@ -72,6 +74,17 @@ public class ChEmedEprMedicationDispensePml extends ChEmedEprMedicationDispense 
             this.authorDocument = new Reference();
         }
         return this.authorDocument;
+    }
+
+    /**
+     * Sets the author of the original document.
+     *
+     * @param author the author.
+     * @return this.
+     */
+    public ChEmedEprMedicationDispensePml setAuthorDocument(final IBaseResource author) {
+        this.authorDocument = References.createReference((Resource) author);
+        return this;
     }
 
     /**
