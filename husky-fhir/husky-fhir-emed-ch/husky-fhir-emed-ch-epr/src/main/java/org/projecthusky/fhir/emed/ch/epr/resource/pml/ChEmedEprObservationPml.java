@@ -3,15 +3,16 @@ package org.projecthusky.fhir.emed.ch.epr.resource.pml;
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.DomainResource;
 import org.hl7.fhir.r4.model.Reference;
+import org.hl7.fhir.r4.model.Resource;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedPadvEntryType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprObservation;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
-import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprMedicationStatementPmlc;
 import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 import java.util.UUID;
@@ -24,8 +25,8 @@ import java.util.UUID;
 public class ChEmedEprObservationPml extends ChEmedEprObservation {
 
     /**
-     * Author of the original document if different from the author of the medical decision (Observation.performer),
-     * see also 'Guidance - Different Authors'
+     * Author of the original document if different from the author of the medical decision (Observation.performer), see
+     * also 'Guidance - Different Authors'
      */
     @Nullable
     @Child(name = "auhtorDocument")
@@ -54,16 +55,19 @@ public class ChEmedEprObservationPml extends ChEmedEprObservation {
      * Resolves the author and her/his organization of the medical decision.
      *
      * @return the author and her/his organization of the medical decision.
-     * @throws InvalidEmedContentException if the author and her/his organization of the medical decision are missing or aren't of the right type.
+     * @throws InvalidEmedContentException if the author and her/his organization of the medical decision are missing or
+     *                                     aren't of the right type.
      */
     @ExpectsValidResource
     public ChEmedEprPractitionerRole resolvePerformer() throws InvalidEmedContentException {
-        if (!this.hasPerformer()) throw new InvalidEmedContentException("The the author and her/his organization of the medical decision is missing.");
+        if (!this.hasPerformer()) throw new InvalidEmedContentException(
+                "The the author and her/his organization of the medical decision is missing.");
         final var resource = this.getPerformerFirstRep().getResource();
         if (resource instanceof ChEmedEprPractitionerRole chEmedEprPractitionerRole) {
             return chEmedEprPractitionerRole;
         }
-        throw new InvalidEmedContentException("The author and her/his organization of the medical decision resource isn't of the right type.");
+        throw new InvalidEmedContentException(
+                "The author and her/his organization of the medical decision resource isn't of the right type.");
     }
 
     /**
@@ -97,24 +101,13 @@ public class ChEmedEprObservationPml extends ChEmedEprObservation {
     }
 
     /**
-     * Sets the last author document of the observation.
+     * Sets the author of the original document.
      *
-     * @param authorDocument the patient.
+     * @param author the author.
      * @return this.
      */
-    public ChEmedEprObservationPml setAuthorDocument(final ChCorePatientEpr authorDocument) {
-        this.authorDocument = References.createReference(authorDocument);
-        return this;
-    }
-
-    /**
-     * Sets the last author document of the observation.
-     *
-     * @param authorDocument the practitioner role.
-     * @return this.
-     */
-    public ChEmedEprObservationPml setAuthorDocument(final ChEmedEprPractitionerRole authorDocument) {
-        this.authorDocument = References.createReference(authorDocument);
+    public ChEmedEprObservationPml setAuthorDocument(final IBaseResource author) {
+        this.authorDocument = References.createReference((Resource) author);
         return this;
     }
 

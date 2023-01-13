@@ -13,13 +13,14 @@ package org.projecthusky.fhir.emed.ch.epr.resource.pmlc;
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.DomainResource;
 import org.hl7.fhir.r4.model.Reference;
+import org.hl7.fhir.r4.model.Resource;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationStatement;
-import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprObservation;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
 import org.projecthusky.fhir.emed.ch.epr.util.References;
@@ -111,38 +112,30 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
      * Resolves the last author and her/his organization of the medical decision.
      *
      * @return The last author and her/his organization of the medical decision.
-     * @throws InvalidEmedContentException if the last author and her/his organization of the medical decision is missing.
+     * @throws InvalidEmedContentException if the last author and her/his organization of the medical decision is
+     *                                     missing.
      */
     @ExpectsValidResource
     public ChEmedEprPractitionerRole resolveInformationSource() throws InvalidEmedContentException {
         if (!this.hasInformationSource()) {
-            throw new InvalidEmedContentException("The last author and her/his organization of the medical decision is missing.");
+            throw new InvalidEmedContentException(
+                    "The last author and her/his organization of the medical decision is missing.");
         }
         if (this.getInformationSource().getResource() instanceof ChEmedEprPractitionerRole practitionerRole) {
             return practitionerRole;
         }
-        throw new InvalidEmedContentException("The last author and her/his organization of the medical decision isn't of right type.");
+        throw new InvalidEmedContentException(
+                "The last author and her/his organization of the medical decision isn't of right type.");
     }
 
     /**
-     * Sets the last author document of the medication statement.
+     * Sets the author of the original document.
      *
-     * @param authorDocument the patient.
+     * @param author the author.
      * @return this.
      */
-    public ChEmedEprMedicationStatementPmlc setAuthorDocument(final ChCorePatientEpr authorDocument) {
-        this.authorDocument = References.createReference(authorDocument);
-        return this;
-    }
-
-    /**
-     * Sets the last author document of the medication statement.
-     *
-     * @param authorDocument the practitioner role.
-     * @return this.
-     */
-    public ChEmedEprMedicationStatementPmlc setAuthorDocument(final ChEmedEprPractitionerRole authorDocument) {
-        this.authorDocument = References.createReference(authorDocument);
+    public ChEmedEprMedicationStatementPmlc setAuthorDocument(final IBaseResource author) {
+        this.authorDocument = References.createReference((Resource) author);
         return this;
     }
 

@@ -3,10 +3,11 @@ package org.projecthusky.fhir.emed.ch.epr.resource.pml;
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.Reference;
+import org.hl7.fhir.r4.model.Resource;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
-import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationRequest;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
 import org.projecthusky.fhir.emed.ch.epr.util.References;
@@ -78,22 +79,11 @@ public class ChEmedEprMedicationRequestPml extends ChEmedEprMedicationRequest {
     /**
      * Sets the author of the original document.
      *
-     * @param patient the patient.
+     * @param author the author.
      * @return this.
      */
-    public ChEmedEprMedicationRequestPml setAuthorDocument(final ChCorePatientEpr patient) {
-        this.authorDocument = References.createReference(patient);
-        return this;
-    }
-
-    /**
-     * Sets the author of the original document.
-     *
-     * @param practitionerRole the practitioner role.
-     * @return this.
-     */
-    public ChEmedEprMedicationRequestPml setAuthorDocument(final ChEmedEprPractitionerRole practitionerRole) {
-        this.authorDocument = References.createReference(practitionerRole);
+    public ChEmedEprMedicationRequestPml setAuthorDocument(final IBaseResource author) {
+        this.authorDocument = References.createReference((Resource) author);
         return this;
     }
 
