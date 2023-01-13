@@ -120,7 +120,7 @@ public class ChEmedEprObservationPml extends ChEmedEprObservation {
     public ChEmedEprObservationPml setPerformer(final ChEmedEprPractitionerRole performer) {
         final var reference = References.createReference(performer);
         if (this.getPerformer().isEmpty()) {
-            this.addPerformer();
+            this.addPerformer(reference);
         } else {
             this.getPerformer().set(0, reference);
         }
