@@ -83,6 +83,23 @@ public class ChEmedEprCompositionPml extends ChEmedEprComposition {
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    LIST_SECTION_CODE_VALUE,
                                                    "History of medication use"));
+            section.setTitle("Medication List");
+        }
+        return section;
+    }
+
+    /**
+     * Returns the annotation section; if missing, it creates it.
+     *
+     * @return the annotation section.
+     */
+    public SectionComponent getAnnotationSection() {
+        var section = getSectionByLoincCode(ANNOTATION_SECTION_CODE_VALUE);
+        if (section == null) {
+            section = this.addSection();
+            section.getCode().addCoding(new Coding(FhirSystem.LOINC,
+                                                   ANNOTATION_SECTION_CODE_VALUE, "Annotation comment"));
+            section.setTitle("Comment");
         }
         return section;
     }
