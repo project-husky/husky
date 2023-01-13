@@ -56,7 +56,6 @@ public class DocumentEntryConverter {
      * @return the equivalent MHD DocumentReference.
      */
     public static DocumentReference convertDocumentEntry(final DocumentEntry documentEntry) {
-        // TODO: est-ce qu'on passe un Bundle au lieu de retourner un DocumentReference ?
         final DocumentReference documentReference = new DocumentReference();
 
         documentReference.setId(ConverterUtils.removePrefixUuid(documentEntry.getEntryUuid()));
@@ -121,8 +120,6 @@ public class DocumentEntryConverter {
             documentReference.setAuthenticator((Reference) new Reference().setResource(practitioner));
         }
 
-        // TODO: relatesTo | DocumentEntry Associations
-
         // description | DocumentEntry.comments
         if (documentEntry.getComments() != null) {
             documentReference.setDescription(documentEntry.getComments().getValue());
@@ -151,7 +148,6 @@ public class DocumentEntryConverter {
         }
 
         //// url | DocumentEntry.repositoryUniqueId or DocumentEntry.URI
-        // TODO: check if it's ok
         if (documentEntry.getUri() != null) {
             try {
                 attachment.setUrl(new URI(documentEntry.getUri()).toURL().toString());
