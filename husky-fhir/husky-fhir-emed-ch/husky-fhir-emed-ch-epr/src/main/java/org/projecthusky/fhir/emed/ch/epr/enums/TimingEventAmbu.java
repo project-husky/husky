@@ -33,7 +33,7 @@ public enum TimingEventAmbu implements ValueSetEnumInterface {
      * EN: Evening.<br> DE: Abend.<br> FR: Soirée.<br> IT: Sera.<br>
      */
     EVENING("EVE",
-            "2.16.840.1.113883.4.642.4.76",
+            "http://fhir.ch/ig/ch-emed/CodeSystem/event-timing",
             "Evening",
             "Evening",
             "Abend",
@@ -43,7 +43,7 @@ public enum TimingEventAmbu implements ValueSetEnumInterface {
      * EN: Morning.<br> DE: Morgen.<br> FR: Matinée.<br> IT: Mattina.<br>
      */
     MORNING("MORN",
-            "2.16.840.1.113883.4.642.4.76",
+            "http://fhir.ch/ig/ch-emed/CodeSystem/event-timing",
             "Morning",
             "Morning",
             "Morgen",
@@ -53,7 +53,7 @@ public enum TimingEventAmbu implements ValueSetEnumInterface {
      * EN: Night.<br> DE: Nacht.<br> FR: Nuit.<br> IT: Notte.<br>
      */
     NIGHT("NIGHT",
-          "2.16.840.1.113883.4.642.4.76",
+          "http://fhir.ch/ig/ch-emed/CodeSystem/event-timing",
           "Night",
           "Night",
           "Nacht",
@@ -63,7 +63,7 @@ public enum TimingEventAmbu implements ValueSetEnumInterface {
      * EN: Noon.<br> DE: Mittag.<br> FR: Midi.<br> IT: Mezzogiorno.<br>
      */
     NOON("NOON",
-         "2.16.840.1.113883.4.642.4.76",
+         "http://fhir.ch/ig/ch-emed/CodeSystem/event-timing",
          "Noon",
          "Noon",
          "Mittag",
@@ -103,7 +103,7 @@ public enum TimingEventAmbu implements ValueSetEnumInterface {
     /**
      * Identifier of the code system (all values share the same).
      */
-    public static final String CODE_SYSTEM_ID = "2.16.840.1.113883.4.642.4.76";
+    public static final String CODE_SYSTEM_ID = "http://fhir.ch/ig/ch-emed/CodeSystem/event-timing";
 
     /**
      * Gets the Enum with a given code.

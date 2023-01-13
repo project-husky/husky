@@ -34,7 +34,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * EN: Auricular use.<br> DE: Anwendung am Ohr.<br> FR: Voie auriculaire.<br> IT: Uso auricolare.<br>
      */
     AURICULAR_USE("20001000",
-                  "0.4.0.127.0.16.1.1.2.1",
+                  "urn:oid:0.4.0.127.0.16.1.1.2.1",
                   "Auricular use",
                   "Auricular use",
                   "Anwendung am Ohr",
@@ -44,7 +44,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * EN: Buccal use.<br> DE: Buccale Anwendung.<br> FR: Voie buccogingivale.<br> IT: Somministrazione buccale.<br>
      */
     BUCCAL_USE("20002500",
-               "0.4.0.127.0.16.1.1.2.1",
+               "urn:oid:0.4.0.127.0.16.1.1.2.1",
                "Buccal use",
                "Buccal use",
                "Buccale Anwendung",
@@ -54,7 +54,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * EN: Cutaneous use.<br> DE: Anwendung auf der Haut.<br> FR: Voie cutanée.<br> IT: Uso cutaneo.<br>
      */
     CUTANEOUS_USE("20003000",
-                  "0.4.0.127.0.16.1.1.2.1",
+                  "urn:oid:0.4.0.127.0.16.1.1.2.1",
                   "Cutaneous use",
                   "Cutaneous use",
                   "Anwendung auf der Haut",
@@ -64,7 +64,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * EN: Dental use.<br> DE: dentale Anwendung.<br> FR: Voie dentaire.<br> IT: Uso dentale.<br>
      */
     DENTAL_USE("20004000",
-               "0.4.0.127.0.16.1.1.2.1",
+               "urn:oid:0.4.0.127.0.16.1.1.2.1",
                "Dental use",
                "Dental use",
                "dentale Anwendung",
@@ -75,7 +75,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * Uso endotracheobronchiale.<br>
      */
     ENDOTRACHEOPULMONARY_USE("20008000",
-                             "0.4.0.127.0.16.1.1.2.1",
+                             "urn:oid:0.4.0.127.0.16.1.1.2.1",
                              "Endotracheopulmonary use",
                              "Endotracheopulmonary use",
                              "endotracheopulmonale Anwendung",
@@ -86,7 +86,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * epilesionale.<br>
      */
     EPILESIONAL_USE("20010000",
-                    "0.4.0.127.0.16.1.1.2.1",
+                    "urn:oid:0.4.0.127.0.16.1.1.2.1",
                     "Epilesional use",
                     "Epilesional use",
                     "zum Auftragen auf die Wunde",
@@ -96,7 +96,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * EN: Gastric use.<br> DE: zur Anwendung mittels Magensonde.<br> FR: Voie gastrique.<br> IT: Uso gastrico.<br>
      */
     GASTRIC_USE("20013500",
-                "0.4.0.127.0.16.1.1.2.1",
+                "urn:oid:0.4.0.127.0.16.1.1.2.1",
                 "Gastric use",
                 "Gastric use",
                 "zur Anwendung mittels Magensonde",
@@ -107,7 +107,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * gastrointestinale.<br>
      */
     GASTROENTERAL_USE("20013000",
-                      "0.4.0.127.0.16.1.1.2.1",
+                      "urn:oid:0.4.0.127.0.16.1.1.2.1",
                       "Gastroenteral use",
                       "Gastroenteral use",
                       "gastrointestinale Anwendung",
@@ -117,7 +117,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * EN: Gingival use.<br> DE: Anwendung am Zahnfleisch.<br> FR: Voie gingivale.<br> IT: Uso gengivale.<br>
      */
     GINGIVAL_USE("20014000",
-                 "0.4.0.127.0.16.1.1.2.1",
+                 "urn:oid:0.4.0.127.0.16.1.1.2.1",
                  "Gingival use",
                  "Gingival use",
                  "Anwendung am Zahnfleisch",
@@ -127,7 +127,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * EN: Haemodialysis.<br> DE: Hämodialyse.<br> FR: Hémodialyse.<br> IT: Emodialisi.<br>
      */
     HAEMODIALYSIS("20015000",
-                  "0.4.0.127.0.16.1.1.2.1",
+                  "urn:oid:0.4.0.127.0.16.1.1.2.1",
                   "Haemodialysis",
                   "Haemodialysis",
                   "Hämodialyse",
@@ -137,7 +137,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * EN: Inhalation use.<br> DE: zur Inhalation.<br> FR: Voie inhalée.<br> IT: Uso inalatorio.<br>
      */
     INHALATION_USE("20020000",
-                   "0.4.0.127.0.16.1.1.2.1",
+                   "urn:oid:0.4.0.127.0.16.1.1.2.1",
                    "Inhalation use",
                    "Inhalation use",
                    "zur Inhalation",
@@ -147,7 +147,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * EN: Intestinal use.<br> DE: intestinale Anwendung.<br> FR: Voie intestinale.<br> IT: Uso intestinale.<br>
      */
     INTESTINAL_USE("20021000",
-                   "0.4.0.127.0.16.1.1.2.1",
+                   "urn:oid:0.4.0.127.0.16.1.1.2.1",
                    "Intestinal use",
                    "Intestinal use",
                    "intestinale Anwendung",
@@ -158,7 +158,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * intraepidermico.<br>
      */
     INTRAEPIDERMAL_USE("20031500",
-                       "0.4.0.127.0.16.1.1.2.1",
+                       "urn:oid:0.4.0.127.0.16.1.1.2.1",
                        "Intraepidermal use",
                        "Intraepidermal use",
                        "intraepidermale Anwendung",
@@ -169,7 +169,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * intralesionale.<br>
      */
     INTRALESIONAL_USE("20032000",
-                      "0.4.0.127.0.16.1.1.2.1",
+                      "urn:oid:0.4.0.127.0.16.1.1.2.1",
                       "Intralesional use",
                       "Intralesional use",
                       "intraläsionale Anwendung",
@@ -180,7 +180,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * intramuscolare.<br>
      */
     INTRAMUSCULAR_USE("20035000",
-                      "0.4.0.127.0.16.1.1.2.1",
+                      "urn:oid:0.4.0.127.0.16.1.1.2.1",
                       "Intramuscular use",
                       "Intramuscular use",
                       "intramuskuläre Anwendung",
@@ -191,7 +191,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * intrapleurico.<br>
      */
     INTRAPLEURAL_USE("20039000",
-                     "0.4.0.127.0.16.1.1.2.1",
+                     "urn:oid:0.4.0.127.0.16.1.1.2.1",
                      "Intrapleural use",
                      "Intrapleural use",
                      "intrapleurale Anwendung",
@@ -201,7 +201,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * EN: Intrauterine use.<br> DE: intrauterine Anwendung.<br> FR: Voie intra-utérine.<br> IT: Uso intrauterino.<br>
      */
     INTRAUTERINE_USE("20044000",
-                     "0.4.0.127.0.16.1.1.2.1",
+                     "urn:oid:0.4.0.127.0.16.1.1.2.1",
                      "Intrauterine use",
                      "Intrauterine use",
                      "intrauterine Anwendung",
@@ -211,7 +211,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * EN: Intravenous use.<br> DE: intravenöse Anwendung.<br> FR: Voie intraveineuse.<br> IT: Uso endovenoso.<br>
      */
     INTRAVENOUS_USE("20045000",
-                    "0.4.0.127.0.16.1.1.2.1",
+                    "urn:oid:0.4.0.127.0.16.1.1.2.1",
                     "Intravenous use",
                     "Intravenous use",
                     "intravenöse Anwendung",
@@ -222,7 +222,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * endovescicale.<br>
      */
     INTRAVESICAL_USE("20046000",
-                     "0.4.0.127.0.16.1.1.2.1",
+                     "urn:oid:0.4.0.127.0.16.1.1.2.1",
                      "Intravesical use",
                      "Intravesical use",
                      "intravesikale Anwendung",
@@ -232,7 +232,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * EN: Nasal use.<br> DE: nasale Anwendung.<br> FR: Voie nasale.<br> IT: Uso nasale.<br>
      */
     NASAL_USE("20049000",
-              "0.4.0.127.0.16.1.1.2.1",
+              "urn:oid:0.4.0.127.0.16.1.1.2.1",
               "Nasal use",
               "Nasal use",
               "nasale Anwendung",
@@ -242,7 +242,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * EN: Ocular use.<br> DE: Anwendung am Auge.<br> FR: Voie ophtalmique.<br> IT: Uso oftalmico.<br>
      */
     OCULAR_USE("20051000",
-               "0.4.0.127.0.16.1.1.2.1",
+               "urn:oid:0.4.0.127.0.16.1.1.2.1",
                "Ocular use",
                "Ocular use",
                "Anwendung am Auge",
@@ -252,7 +252,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * EN: Oral use.<br> DE: zum Einnehmen.<br> FR: Voie orale.<br> IT: Uso orale.<br>
      */
     ORAL_USE("20053000",
-             "0.4.0.127.0.16.1.1.2.1",
+             "urn:oid:0.4.0.127.0.16.1.1.2.1",
              "Oral use",
              "Oral use",
              "zum Einnehmen",
@@ -262,7 +262,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * EN: Oromucosal use.<br> DE: Anwendung in der Mundhöhle.<br> FR: Voie buccale.<br> IT: Per mucosa orale.<br>
      */
     OROMUCOSAL_USE("20054000",
-                   "0.4.0.127.0.16.1.1.2.1",
+                   "urn:oid:0.4.0.127.0.16.1.1.2.1",
                    "Oromucosal use",
                    "Oromucosal use",
                    "Anwendung in der Mundhöhle",
@@ -273,7 +273,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * orofaringeo.<br>
      */
     OROPHARYNGEAL_USE("20055000",
-                      "0.4.0.127.0.16.1.1.2.1",
+                      "urn:oid:0.4.0.127.0.16.1.1.2.1",
                       "Oropharyngeal use",
                       "Oropharyngeal use",
                       "zur Anwendung im Mund- und Rachenraum",
@@ -283,7 +283,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * EN: Rectal use.<br> DE: rektale Anwendung.<br> FR: Voie rectale.<br> IT: Uso rettale.<br>
      */
     RECTAL_USE("20061000",
-               "0.4.0.127.0.16.1.1.2.1",
+               "urn:oid:0.4.0.127.0.16.1.1.2.1",
                "Rectal use",
                "Rectal use",
                "rektale Anwendung",
@@ -293,7 +293,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * EN: Subcutaneous use.<br> DE: subkutane Anwendung.<br> FR: Voie sous-cutanée.<br> IT: Uso sottocutaneo.<br>
      */
     SUBCUTANEOUS_USE("20066000",
-                     "0.4.0.127.0.16.1.1.2.1",
+                     "urn:oid:0.4.0.127.0.16.1.1.2.1",
                      "Subcutaneous use",
                      "Subcutaneous use",
                      "subkutane Anwendung",
@@ -303,7 +303,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * EN: Sublingual use.<br> DE: Sublingual.<br> FR: Voie sublinguale.<br> IT: Uso sublinguale.<br>
      */
     SUBLINGUAL_USE("20067000",
-                   "0.4.0.127.0.16.1.1.2.1",
+                   "urn:oid:0.4.0.127.0.16.1.1.2.1",
                    "Sublingual use",
                    "Sublingual use",
                    "Sublingual",
@@ -313,7 +313,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * EN: Transdermal use.<br> DE: transdermale Anwendung.<br> FR: Voie transdermique.<br> IT: Uso transdermico.<br>
      */
     TRANSDERMAL_USE("20070000",
-                    "0.4.0.127.0.16.1.1.2.1",
+                    "urn:oid:0.4.0.127.0.16.1.1.2.1",
                     "Transdermal use",
                     "Transdermal use",
                     "transdermale Anwendung",
@@ -323,7 +323,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * EN: Urethral use.<br> DE: Anwendung in der Harnröhre.<br> FR: Voie urétrale.<br> IT: Uso uretrale.<br>
      */
     URETHRAL_USE("20071000",
-                 "0.4.0.127.0.16.1.1.2.1",
+                 "urn:oid:0.4.0.127.0.16.1.1.2.1",
                  "Urethral use",
                  "Urethral use",
                  "Anwendung in der Harnröhre",
@@ -333,7 +333,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
      * EN: Vaginal use.<br> DE: vaginale Anwendung.<br> FR: Voie vaginale.<br> IT: Uso vaginale.<br>
      */
     VAGINAL_USE("20072000",
-                "0.4.0.127.0.16.1.1.2.1",
+                "urn:oid:0.4.0.127.0.16.1.1.2.1",
                 "Vaginal use",
                 "Vaginal use",
                 "vaginale Anwendung",
@@ -533,7 +533,7 @@ public enum RouteOfAdministrationAmbu implements ValueSetEnumInterface {
     /**
      * Identifier of the code system (all values share the same).
      */
-    public static final String CODE_SYSTEM_ID = "0.4.0.127.0.16.1.1.2.1";
+    public static final String CODE_SYSTEM_ID = "urn:oid:0.4.0.127.0.16.1.1.2.1";
 
     /**
      * Gets the Enum with a given code.

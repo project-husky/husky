@@ -143,7 +143,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: CFU.<br> DE: CFU.<br> FR: CFU.<br> IT: CFU.<br>
      */
     CFU("[CFU]",
-        "2.16.840.1.113883.6.8",
+        "http://unitsofmeasure.org",
         "Colony Forming Units",
         "CFU",
         "CFU",
@@ -163,7 +163,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: cm.<br> DE: cm.<br> FR: cm.<br> IT: cm.<br>
      */
     CM("cm",
-       "2.16.840.1.113883.6.8",
+       "http://unitsofmeasure.org",
        "centimeter",
        "cm",
        "cm",
@@ -173,7 +173,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: cm2.<br> DE: cm2.<br> FR: cm2.<br> IT: cm2.<br>
      */
     CM2("cm2",
-        "2.16.840.1.113883.6.8",
+        "http://unitsofmeasure.org",
         "square centimeter",
         "cm2",
         "cm2",
@@ -183,7 +183,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: cm3.<br> DE: cm3.<br> FR: cm3.<br> IT: cm3.<br>
      */
     CM3("cm3",
-        "2.16.840.1.113883.6.8",
+        "http://unitsofmeasure.org",
         "cubic centimeter",
         "cm3",
         "cm3",
@@ -223,7 +223,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Dose.<br> DE: Dos.<br> FR: dose.<br> IT: dose.<br>
      */
     DOSE("{Dose}",
-         "2.16.840.1.113883.6.8",
+         "http://unitsofmeasure.org",
          "Dose",
          "Dose",
          "Dos",
@@ -263,7 +263,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: g.<br> DE: g.<br> FR: g.<br> IT: g.<br>
      */
     G("g",
-      "2.16.840.1.113883.6.8",
+      "http://unitsofmeasure.org",
       "gram",
       "g",
       "g",
@@ -304,7 +304,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * internazionale(i).<br>
      */
     INTERNATIONAL_UNIT("[iU]",
-                       "2.16.840.1.113883.6.8",
+                       "http://unitsofmeasure.org",
                        "international unit",
                        "international unit",
                        "Internationale Einheit",
@@ -324,7 +324,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: kcal.<br> DE: kcal.<br> FR: kcal.<br> IT: kcal.<br>
      */
     KCAL("kcal",
-         "2.16.840.1.113883.6.8",
+         "http://unitsofmeasure.org",
          "kilocalorie",
          "kcal",
          "kcal",
@@ -334,7 +334,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: kg.<br> DE: kg.<br> FR: kg.<br> IT: kg.<br>
      */
     KG("kg",
-       "2.16.840.1.113883.6.8",
+       "http://unitsofmeasure.org",
        "kilogram",
        "kg",
        "kg",
@@ -344,7 +344,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: kJ.<br> DE: kJ.<br> FR: kJ.<br> IT: kJ.<br>
      */
     KJ("kJ",
-       "2.16.840.1.113883.6.8",
+       "http://unitsofmeasure.org",
        "kilojoule",
        "kJ",
        "kJ",
@@ -354,7 +354,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: lt.<br> DE: lt.<br> FR: lt.<br> IT: l.<br>
      */
     LT("L",
-       "2.16.840.1.113883.6.8",
+       "http://unitsofmeasure.org",
        "liter",
        "lt",
        "lt",
@@ -384,7 +384,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: meq.<br> DE: meq.<br> FR: mEq.<br> IT: mEq.<br>
      */
     MEQ("meq",
-        "2.16.840.1.113883.6.8",
+        "http://unitsofmeasure.org",
         "milliequivalent",
         "meq",
         "meq",
@@ -394,7 +394,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: mg.<br> DE: mg.<br> FR: mg.<br> IT: mg.<br>
      */
     MG("mg",
-       "2.16.840.1.113883.6.8",
+       "http://unitsofmeasure.org",
        "milligram",
        "mg",
        "mg",
@@ -404,7 +404,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: MillionInternationalUnit.<br> DE: MioUI.<br> FR: MioUI.<br> IT: MioUI.<br>
      */
     MILLIONINTERNATIONALUNIT("10*6.[iU]",
-                             "2.16.840.1.113883.6.8",
+                             "http://unitsofmeasure.org",
                              "MillionInternationalUnit",
                              "MillionInternationalUnit",
                              "MioUI",
@@ -414,7 +414,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: MioU.<br> DE: MioU.<br> FR: MioU.<br> IT: MioU.<br>
      */
     MIOU("10*6.{Unit}",
-         "2.16.840.1.113883.6.8",
+         "http://unitsofmeasure.org",
          "(the number ten for arbitrary powers ^ 6) * Unit",
          "MioU",
          "MioU",
@@ -424,7 +424,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: ml.<br> DE: ml.<br> FR: ml.<br> IT: ml.<br>
      */
     ML("mL",
-       "2.16.840.1.113883.6.8",
+       "http://unitsofmeasure.org",
        "milliliter",
        "ml",
        "ml",
@@ -434,7 +434,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: mm2.<br> DE: mm2.<br> FR: mm2.<br> IT: mm2.<br>
      */
     MM2("mm2",
-        "2.16.840.1.113883.6.8",
+        "http://unitsofmeasure.org",
         "square millimeter",
         "mm2",
         "mm2",
@@ -444,7 +444,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: mmol.<br> DE: mmol.<br> FR: mmol.<br> IT: mmol.<br>
      */
     MMOL("mmol",
-         "2.16.840.1.113883.6.8",
+         "http://unitsofmeasure.org",
          "millimole",
          "mmol",
          "mmol",
@@ -454,7 +454,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: mol.<br> DE: mol.<br> FR: mol.<br> IT: mol.<br>
      */
     MOL("mol",
-        "2.16.840.1.113883.6.8",
+        "http://unitsofmeasure.org",
         "mole",
         "mol",
         "mol",
@@ -464,7 +464,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: ng.<br> DE: ng.<br> FR: ng.<br> IT: ng.<br>
      */
     NG("ng",
-       "2.16.840.1.113883.6.8",
+       "http://unitsofmeasure.org",
        "nanogram",
        "ng",
        "ng",
@@ -474,7 +474,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: nl.<br> DE: nl.<br> FR: nl.<br> IT: nl.<br>
      */
     NL("nL",
-       "2.16.840.1.113883.6.8",
+       "http://unitsofmeasure.org",
        "nanoliter",
        "nl",
        "nl",
@@ -484,7 +484,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Package.<br> DE: Packung.<br> FR: emballage.<br> IT: confezione.<br>
      */
     PACKAGE("{Package}",
-            "2.16.840.1.113883.6.8",
+            "http://unitsofmeasure.org",
             "Package",
             "Package",
             "Packung",
@@ -534,7 +534,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: %.<br> DE: %.<br> FR: %.<br> IT: %.<br>
      */
     PERCENT("%",
-            "2.16.840.1.113883.6.8",
+            "http://unitsofmeasure.org",
             "percent",
             "%",
             "%",
@@ -554,7 +554,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Piece(s).<br> DE: Stk.<br> FR: pce.<br> IT: pz.<br>
      */
     PIECE("{Piece}",
-          "2.16.840.1.113883.6.8",
+          "http://unitsofmeasure.org",
           "Piece",
           "Piece(s)",
           "Stk",
@@ -614,7 +614,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: ppm.<br> DE: ppm.<br> FR: ppm.<br> IT: ppm.<br>
      */
     PPM("[ppm]",
-        "2.16.840.1.113883.6.8",
+        "http://unitsofmeasure.org",
         "Parts Per Million",
         "ppm",
         "ppm",
@@ -714,7 +714,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: tablespoon - metric.<br> DE: Esslöffel.<br> FR: c. à soupe.<br> IT: cucchiaio da minestra.<br>
      */
     TABLESPOON_METRIC("[tbs_m]",
-                      "2.16.840.1.113883.6.8",
+                      "http://unitsofmeasure.org",
                       "tablespoon - metric",
                       "tablespoon - metric",
                       "Esslöffel",
@@ -744,7 +744,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: teaspoon - metric.<br> DE: Teelöffel.<br> FR: c. à café.<br> IT: cucchiaino da caffè.<br>
      */
     TEASPOON_METRIC("[tsp_m]",
-                    "2.16.840.1.113883.6.8",
+                    "http://unitsofmeasure.org",
                     "teaspoon - metric",
                     "teaspoon - metric",
                     "Teelöffel",
@@ -754,7 +754,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: Thousand Per * Unit.<br> DE: Tausend Einheiten.<br> FR: millier d'unités.<br> IT: mille per unità *.<br>
      */
     THOUSAND_PER_STAR_UNIT("10*3.{Unit}",
-                           "2.16.840.1.113883.6.8",
+                           "http://unitsofmeasure.org",
                            "Thousand Per * Unit",
                            "Thousand Per * Unit",
                            "Tausend Einheiten",
@@ -784,7 +784,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: µg.<br> DE: µg.<br> FR: µg.<br> IT: µg.<br>
      */
     UG("ug",
-       "2.16.840.1.113883.6.8",
+       "http://unitsofmeasure.org",
        "microgram",
        "µg",
        "µg",
@@ -794,7 +794,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: µl.<br> DE: µl.<br> FR: µl.<br> IT: µl.<br>
      */
     UL("uL",
-       "2.16.840.1.113883.6.8",
+       "http://unitsofmeasure.org",
        "microliter",
        "µl",
        "µl",
@@ -804,7 +804,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: µmol.<br> DE: µmol.<br> FR: µmol.<br> IT: µmol.<br>
      */
     UMOL("umol",
-         "2.16.840.1.113883.6.8",
+         "http://unitsofmeasure.org",
          "micromole",
          "µmol",
          "µmol",
@@ -814,7 +814,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * EN: unit.<br> DE: Einheit.<br> FR: unité(s).<br> IT: unità.<br>
      */
     UNIT("{Unit}",
-         "2.16.840.1.113883.6.8",
+         "http://unitsofmeasure.org",
          "Unit",
          "unit",
          "Einheit",
