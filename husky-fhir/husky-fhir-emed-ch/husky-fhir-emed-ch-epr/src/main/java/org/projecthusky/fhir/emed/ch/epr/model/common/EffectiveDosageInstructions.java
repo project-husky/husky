@@ -17,6 +17,7 @@ import java.util.function.Consumer;
  */
 public record EffectiveDosageInstructions(
         @Nullable String patientInstructions,
+        String narrative,
         boolean isAsNeeded,
         List<DosageIntake> intakes,
         @Nullable String site,
@@ -80,6 +81,7 @@ public record EffectiveDosageInstructions(
     public static EffectiveDosageInstructions fromDosages(final ChEmedEprDosage baseDosage,
                                                           final List<ChEmedEprDosage> additionalDosages) {
         final var patientInstructions = baseDosage.getPatientInstruction();
+        final var narrative = baseDosage.getText();
         final var isAsNeeded = baseDosage.isAsNeeded();
         final var site = baseDosage.getSiteText();
         final var routeOfAdministration = baseDosage.resolveRouteOfAdministration();
@@ -109,6 +111,7 @@ public record EffectiveDosageInstructions(
         }
 
         return new EffectiveDosageInstructions(patientInstructions,
+                                               narrative,
                                                isAsNeeded,
                                                intakes,
                                                site,

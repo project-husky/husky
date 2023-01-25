@@ -44,7 +44,7 @@
             <td th:insert="~{datatypes :: dosage-intake(${dosage.getNightIntake()}, ${lang})}"/>
         </th:block>
         <th:block th:if="${not dosage.hasIntakes()}">
-            <td colspan="4" th:text="${dosage.patientInstructions()}"/>
+            <td colspan="4" th:text="${dosage.narrative()}"/>
         </th:block>
         <td>
             <th:block th:if="${medStmt.hasTreatmentReason()}"
