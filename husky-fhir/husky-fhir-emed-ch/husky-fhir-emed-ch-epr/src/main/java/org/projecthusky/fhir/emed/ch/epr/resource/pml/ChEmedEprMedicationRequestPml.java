@@ -4,10 +4,12 @@ import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.instance.model.api.IBaseResource;
+import org.hl7.fhir.r4.model.DomainResource;
 import org.hl7.fhir.r4.model.Reference;
 import org.hl7.fhir.r4.model.Resource;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationRequest;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
 import org.projecthusky.fhir.emed.ch.epr.util.References;
@@ -36,7 +38,7 @@ public class ChEmedEprMedicationRequestPml extends ChEmedEprMedicationRequest {
     }
 
     /**
-     * Constructor      * Constructor that pre-populates fields.
+     * Constructor that pre-populates fields.
      *
      * @param entryUuid the medication request ID.
      */
@@ -74,6 +76,24 @@ public class ChEmedEprMedicationRequestPml extends ChEmedEprMedicationRequest {
             this.authorDocument = new Reference();
         }
         return this.authorDocument;
+    }
+
+    /**
+     * Gets the last author document resource in the medication statement if available.
+     *
+     * @return the author document resource or {@code null}.
+     * @throws InvalidEmedContentException if the author document resource is invalid.
+     */
+    @Nullable
+    @ExpectsValidResource
+    public DomainResource getAuthorDocument() throws InvalidEmedContentException {
+        final var resource = getAuthorDocumentElement().getResource();
+        if (resource == null) return null;
+
+        if (resource instanceof ChCorePatientEpr || resource instanceof ChEmedEprPractitionerRole) {
+            return (DomainResource) resource;
+        }
+        throw new InvalidEmedContentException("The last author of the original document is invalid");
     }
 
     /**

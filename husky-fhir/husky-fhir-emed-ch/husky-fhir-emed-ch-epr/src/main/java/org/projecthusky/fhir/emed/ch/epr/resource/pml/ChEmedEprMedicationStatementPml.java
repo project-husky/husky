@@ -39,6 +39,7 @@ public class ChEmedEprMedicationStatementPml extends ChEmedEprMedicationStatemen
      * Whether the dispenser can substitute the prescribed medicine/package by another that is deemed equivalent, for
      * medical or logistical reasons. By default, substitution is authorized.
      */
+    @Nullable
     @Child(name = "substitution")
     @Extension(url = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-substitution", definedLocally = false)
     protected CodeableConcept substitution;
@@ -47,6 +48,7 @@ public class ChEmedEprMedicationStatementPml extends ChEmedEprMedicationStatemen
      * Author of the original document if different from the author of the medical decision
      * (MedicationStatement.informationSource)
      */
+    @Nullable
     @Child(name = "auhtorDocument")
     @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author")
     protected Reference authorDocument;
