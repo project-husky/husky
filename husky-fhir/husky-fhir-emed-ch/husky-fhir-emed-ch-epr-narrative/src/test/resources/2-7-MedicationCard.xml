@@ -1,0 +1,517 @@
+<!--
+  ~ This code is made available under the terms of the Eclipse Public License v1.0
+  ~ in the github project https://github.com/project-husky/husky there you also
+  ~ find a list of the contributors and the license information.
+  ~
+  ~ This project has been developed further and modified by the joined working group Husky
+  ~ on the basis of the eHealth Connector opensource project from June 28, 2021,
+  ~ whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+  ~
+  -->
+<Bundle xmlns="http://hl7.org/fhir">
+  <id value="2-7-MedicationCard-UUIDfullUrl"/>
+  <meta>
+    <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationcard"/>
+  </meta>
+  <identifier>
+    <system value="urn:ietf:rfc:3986"/>
+    <value value="urn:uuid:6b6ed376-a7da-44cb-92d1-e75ce1ae73b0"/>
+  </identifier>
+  <type value="document"/>
+  <timestamp value="2012-02-04T14:05:00+01:00"/>
+  <entry>
+    <fullUrl value="urn:uuid:d543ae7b-3a94-4a2a-a120-6ce2ee3027fc"/>
+    <resource>
+      <Composition>
+        <language value="de-CH"/>
+        <text>
+          <status value="extensions"/><div xmlns="http://www.w3.org/1999/xhtml" xml:lang="de-CH" lang="de-CH"><p><b>Generated Narrative: Composition</b></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Composition  (Language "de-CH") </p></div><p><b>EPR Information Recipient</b>: <a href="#urnuuid8f1b85a0-3c98-4a23-beb3-f514897743e4">See above (urn:uuid:8f1b85a0-3c98-4a23-beb3-f514897743e4)</a></p><p><b>identifier</b>: id: urn:uuid:6b6ed376-a7da-44cb-92d1-e75ce1ae73b0</p><p><b>status</b>: final</p><p><b>type</b>: Medication summary <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="https://loinc.org/">LOINC</a>#56445-0; <a href="https://browser.ihtsdotools.org/">SNOMED CT</a>#721912009 "Medication summary document (record artifact)")</span></p><p><b>date</b>: 2012-02-04 02:05:00+0100</p><p><b>author</b>: <a href="#urnuuid9837b87a-aaa7-4389-aa03-39442cee2c45">See above (urn:uuid:9837b87a-aaa7-4389-aa03-39442cee2c45)</a></p><p><b>title</b>: Medikationsplan</p><p><b>confidentiality</b>: N</p><p><b>custodian</b>: <a href="#urnuuid6631b79a-7b32-48b4-9294-c9f4160727af">See above (urn:uuid:6631b79a-7b32-48b4-9294-c9f4160727af)</a></p></div>
+        </text>
+        <extension url="http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-informationrecipient">
+          <valueReference>
+            <reference value="urn:uuid:8f1b85a0-3c98-4a23-beb3-f514897743e4"/>
+          </valueReference>
+        </extension>
+        <identifier>
+          <system value="urn:ietf:rfc:3986"/>
+          <value value="urn:uuid:6b6ed376-a7da-44cb-92d1-e75ce1ae73b0"/>
+        </identifier>
+        <status value="final"/>
+        <type>
+          <coding>
+            <system value="http://loinc.org"/>
+            <code value="56445-0"/>
+            <display value="Medication summary"/>
+          </coding>
+          <coding>
+            <system value="http://snomed.info/sct"/>
+            <code value="721912009"/>
+            <display value="Medication summary document (record artifact)"/>
+          </coding>
+        </type>
+        <subject>
+          <reference value="urn:uuid:9616e879-c4d0-411e-88c3-e001cb7a8fcd"/>
+        </subject>
+        <date value="2012-02-04T14:05:00+01:00"/>
+        <author>
+          <reference value="urn:uuid:1923d866-f10f-4d94-8b1f-e87c82b3e98c"/>
+        </author>
+        <title value="Medikationsplan"/>
+        <confidentiality value="N">
+          <extension url="http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-confidentialitycode">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://snomed.info/sct"/>
+                <code value="17621005"/>
+                <display value="Normally accessible"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+        </confidentiality>
+        <custodian>
+          <reference value="urn:uuid:6631b79a-7b32-48b4-9294-c9f4160727af"/>
+        </custodian>
+        <section>
+          <title value="Medikamentenliste"/>
+          <code>
+            <coding>
+              <system value="http://loinc.org"/>
+              <code value="10160-0"/>
+              <display value="History of medication use"/>
+            </coding>
+          </code>
+          <entry>
+            <reference value="urn:uuid:be797d45-82c7-4d4a-8d1e-82a7fd26e44e"/>
+          </entry>
+          <entry>
+            <reference value="urn:uuid:99e5810c-1afa-43da-8a0e-e7f9086e300a"/>
+          </entry>
+        </section>
+        <section>
+          <title value="Kommentar"/>
+          <code>
+            <coding>
+              <system value="http://loinc.org"/>
+              <code value="48767-8"/>
+              <display value="Annotation comment"/>
+            </coding>
+          </code>
+          <text>
+            <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml">
+              <span id="co1">
+                  Kommentar zu Medication Treatment
+              </span>
+            </div>
+          </text>
+        </section>
+      </Composition>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="urn:uuid:9616e879-c4d0-411e-88c3-e001cb7a8fcd"/>
+    <resource>
+      <Patient>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Patient</b></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"></div><p><b>identifier</b>: Medical record number: 11111111</p><p><b>name</b>: Monika Wegmüller </p><p><b>gender</b>: female</p><p><b>birthDate</b>: 1943-05-15</p><p><b>address</b>: Wiesenstr. 12 Zürich 8003 CH </p></div>
+        </text>
+        <identifier>
+          <type>
+            <coding>
+              <system value="http://terminology.hl7.org/CodeSystem/v2-0203"/>
+              <code value="MR"/>
+            </coding>
+          </type>
+          <system value="urn:oid:2.999.1"/>
+          <value value="11111111"/>
+        </identifier>
+        <name>
+          <family value="Wegmüller"/>
+          <given value="Monika"/>
+        </name>
+        <gender value="female"/>
+        <birthDate value="1943-05-15"/>
+        <address>
+          <line value="Wiesenstr. 12"/>
+          <city value="Zürich"/>
+          <postalCode value="8003"/>
+          <country value="CH"/>
+        </address>
+      </Patient>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="urn:uuid:9837b87a-aaa7-4389-aa03-39442cee2c45"/>
+    <resource>
+      <PractitionerRole>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: PractitionerRole</b></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"></div><p><b>practitioner</b>: <a href="#urnuuid34dc227e-fac0-4104-958e-33510f453631">See above (urn:uuid:34dc227e-fac0-4104-958e-33510f453631)</a></p><p><b>organization</b>: <a href="#urnuuid7801bb18-5c19-4d4c-bcb5-536a1f51f83e">See above (urn:uuid:7801bb18-5c19-4d4c-bcb5-536a1f51f83e)</a></p></div>
+        </text>
+        <practitioner>
+          <reference value="urn:uuid:34dc227e-fac0-4104-958e-33510f453631"/>
+        </practitioner>
+        <organization>
+          <reference value="urn:uuid:7801bb18-5c19-4d4c-bcb5-536a1f51f83e"/>
+        </organization>
+      </PractitionerRole>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="urn:uuid:34dc227e-fac0-4104-958e-33510f453631"/>
+    <resource>
+      <Practitioner>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Practitioner</b></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"></div><p><b>identifier</b>: id: 7601000234438</p><p><b>name</b>: Familien Hausarzt </p></div>
+        </text>
+        <identifier>
+          <system value="urn:oid:2.51.1.3"/>
+          <value value="7601000234438"/>
+        </identifier>
+        <name>
+          <family value="Hausarzt"/>
+          <given value="Familien"/>
+        </name>
+      </Practitioner>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="urn:uuid:7801bb18-5c19-4d4c-bcb5-536a1f51f83e"/>
+    <resource>
+      <Organization>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Organization</b></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"></div><p><b>identifier</b>: id: 7601000234438</p><p><b>name</b>: Hausarzt</p><p><b>address</b>: Krankenstrasse 2 Zürich 8005 CH </p></div>
+        </text>
+        <identifier>
+          <system value="urn:oid:2.51.1.3"/>
+          <value value="7601000234438"/>
+        </identifier>
+        <name value="Hausarzt"/>
+        <address>
+          <line value="Krankenstrasse 2"/>
+          <city value="Zürich"/>
+          <postalCode value="8005"/>
+          <country value="CH"/>
+        </address>
+      </Organization>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="urn:uuid:6631b79a-7b32-48b4-9294-c9f4160727af"/>
+    <resource>
+      <Organization>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Organization</b></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"></div><p><b>identifier</b>: id: 7601000234438</p><p><b>name</b>: Hausarzt</p></div>
+        </text>
+        <identifier>
+          <system value="urn:oid:2.51.1.3"/>
+          <value value="7601000234438"/>
+        </identifier>
+        <name value="Hausarzt"/>
+      </Organization>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="urn:uuid:8f1b85a0-3c98-4a23-beb3-f514897743e4"/>
+    <resource>
+      <Patient>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Patient</b></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"></div><p><b>name</b>: Monika Wegmüller </p><p><b>address</b>: Wiesenstr. 12 Zürich 8003 CH </p></div>
+        </text>
+        <name>
+          <family value="Wegmüller"/>
+          <given value="Monika"/>
+        </name>
+        <address>
+          <line value="Wiesenstr. 12"/>
+          <city value="Zürich"/>
+          <postalCode value="8003"/>
+          <country value="CH"/>
+        </address>
+      </Patient>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="urn:uuid:be797d45-82c7-4d4a-8d1e-82a7fd26e44e"/>
+    <resource>
+      <MedicationStatement>
+        <text>
+          <status value="extensions"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: MedicationStatement</b></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"></div><blockquote><p><b>CH EMED Extension Treatment Plan</b></p><p><b>value</b>: id: urn:uuid:5712fffe-20c6-11e6-b67b-9e71128cae77</p><p><b>value</b>: id: urn:uuid:5712fffe-20c6-11e6-b67b-9e71128cae77</p></blockquote><p><b>identifier</b>: id: urn:uuid:d0f885ca-afa6-4e7e-905d-f7698f9607aa</p><p><b>status</b>: completed</p><p><b>medication</b>: <a name="med"> </a></p><blockquote><p></p><p><a name="med"> </a></p><p><b>code</b>: BELOC ZOK Ret Tabl 50 mg <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (unknown#7680521101306 "BELOC ZOK Ret Tabl 50 mg 30 Stk")</span></p><p><b>form</b>: Tablet <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="CodeSystem-edqm-standardterms.html">EDQM - Standard Terms</a>#10219000)</span></p><p><b>amount</b>: 30 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 732936001 = 'Tablet (unit of presentation)')</span>/1 Package<span style="background: LightGoldenRodYellow"> (Details: UCUM code {Package} = '{Package}')</span></p><h3>Ingredients</h3><table class="grid"><tr><td>-</td><td><b>Item[x]</b></td><td><b>Strength</b></td></tr><tr><td>*</td><td>Metoprolol <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="https://browser.ihtsdotools.org/">SNOMED CT</a>#372826007 "Metoprolol (substance)")</span></td><td>50 milligram<span style="background: LightGoldenRodYellow"> (Details: UCUM code mg = 'mg')</span>/1 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 732936001 = 'Tablet (unit of presentation)')</span></td></tr></table></blockquote><p><b>subject</b>: <a href="#urnuuid9616e879-c4d0-411e-88c3-e001cb7a8fcd">See above (urn:uuid:9616e879-c4d0-411e-88c3-e001cb7a8fcd)</a></p><p><b>reasonCode</b>: Bluthochdruck <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> ()</span></p><blockquote><p><b>dosage</b></p><p><b>sequence</b>: 1</p><p><b>patientInstruction</b>: -</p><p><b>timing</b>: Starting 2012-02-04, Do , ?ngen-6?</p><p><b>route</b>: Oral use <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="CodeSystem-edqm-standardterms.html">EDQM - Standard Terms</a>#20053000)</span></p></blockquote><blockquote><p><b>dosage</b></p><p><b>sequence</b>: 2</p><p><b>timing</b>: Do , ?ngen-6?</p></blockquote><hr/><blockquote><p><b>Generated Narrative: Medication #med</b><a name="med"> </a></p><p><b>code</b>: BELOC ZOK Ret Tabl 50 mg <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (unknown#7680521101306 "BELOC ZOK Ret Tabl 50 mg 30 Stk")</span></p><p><b>form</b>: Tablet <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="CodeSystem-edqm-standardterms.html">EDQM - Standard Terms</a>#10219000)</span></p><p><b>amount</b>: 30 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 732936001 = 'Tablet (unit of presentation)')</span>/1 Package<span style="background: LightGoldenRodYellow"> (Details: UCUM code {Package} = '{Package}')</span></p><h3>Ingredients</h3><table class="grid"><tr><td>-</td><td><b>Item[x]</b></td><td><b>Strength</b></td></tr><tr><td>*</td><td>Metoprolol <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="https://browser.ihtsdotools.org/">SNOMED CT</a>#372826007 "Metoprolol (substance)")</span></td><td>50 milligram<span style="background: LightGoldenRodYellow"> (Details: UCUM code mg = 'mg')</span>/1 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 732936001 = 'Tablet (unit of presentation)')</span></td></tr></table></blockquote></div>
+        </text>
+        <contained>
+          <Medication>
+            <id value="med"/>
+            <code>
+              <coding>
+                <system value="urn:oid:2.51.1.1"/>
+                <code value="7680521101306"/>
+                <display value="BELOC ZOK Ret Tabl 50 mg 30 Stk"/>
+              </coding>
+              <text value="BELOC ZOK Ret Tabl 50 mg"/>
+            </code>
+            <form>
+              <coding>
+                <system value="urn:oid:0.4.0.127.0.16.1.1.2.1"/>
+                <code value="10219000"/>
+                <display value="Tablet"/>
+              </coding>
+            </form>
+            <amount>
+              <numerator>
+                <value value="30"/>
+                <unit value="Tablet (unit of presentation)"/>
+                <system value="http://snomed.info/sct"/>
+                <code value="732936001"/>
+              </numerator>
+              <denominator>
+                <value value="1"/>
+                <unit value="Package"/>
+                <system value="http://unitsofmeasure.org"/>
+                <code value="{Package}"/>
+              </denominator>
+            </amount>
+            <ingredient>
+              <itemCodeableConcept>
+                <coding>
+                  <system value="http://snomed.info/sct"/>
+                  <code value="372826007"/>
+                  <display value="Metoprolol (substance)"/>
+                </coding>
+                <text value="Metoprolol"/>
+              </itemCodeableConcept>
+              <strength>
+                <numerator>
+                  <value value="50"/>
+                  <unit value="milligram"/>
+                  <system value="http://unitsofmeasure.org"/>
+                  <code value="mg"/>
+                </numerator>
+                <denominator>
+                  <value value="1"/>
+                  <unit value="Tablet (unit of presentation)"/>
+                  <system value="http://snomed.info/sct"/>
+                  <code value="732936001"/>
+                </denominator>
+              </strength>
+            </ingredient>
+          </Medication>
+        </contained>
+        <extension url="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan">
+          <extension url="id">
+            <valueIdentifier>
+              <system value="urn:ietf:rfc:3986"/>
+              <value value="urn:uuid:5712fffe-20c6-11e6-b67b-9e71128cae77"/>
+            </valueIdentifier>
+          </extension>
+          <extension url="externalDocumentId">
+            <valueIdentifier>
+              <system value="urn:ietf:rfc:3986"/>
+              <value value="urn:uuid:5712fffe-20c6-11e6-b67b-9e71128cae77"/>
+            </valueIdentifier>
+          </extension>
+        </extension>
+        <identifier>
+          <system value="urn:ietf:rfc:3986"/>
+          <value value="urn:uuid:d0f885ca-afa6-4e7e-905d-f7698f9607aa"/>
+        </identifier>
+        <status value="completed"/>
+        <medicationReference>
+          <reference value="#med"/>
+        </medicationReference>
+        <subject>
+          <reference value="urn:uuid:9616e879-c4d0-411e-88c3-e001cb7a8fcd"/>
+        </subject>
+        <informationSource>
+          <reference value="urn:uuid:9837b87a-aaa7-4389-aa03-39442cee2c45" />
+        </informationSource>
+        <reasonCode>
+          <text value="Bluthochdruck"/>
+        </reasonCode>
+        <dosage>
+          <sequence value="1"/>
+          <patientInstruction value="-"/>
+          <timing>
+            <repeat>
+              <boundsPeriod>
+                <start value="2012-02-04"/>
+              </boundsPeriod>
+              <when value="MORN"/>
+            </repeat>
+          </timing>
+          <route>
+            <coding>
+              <system value="urn:oid:0.4.0.127.0.16.1.1.2.1"/>
+              <code value="20053000"/>
+              <display value="Oral use"/>
+            </coding>
+          </route>
+          <doseAndRate>
+            <doseQuantity>
+              <value value="1"/>
+              <unit value="Tablet (unit of presentation)"/>
+              <system value="http://snomed.info/sct"/>
+              <code value="732936001"/>
+            </doseQuantity>
+          </doseAndRate>
+        </dosage>
+        <dosage>
+          <sequence value="2"/>
+          <timing>
+            <repeat>
+              <when value="EVE"/>
+            </repeat>
+          </timing>
+          <doseAndRate>
+            <doseQuantity>
+              <value value="0.5"/>
+              <unit value="Tablet (unit of presentation)"/>
+              <system value="http://snomed.info/sct"/>
+              <code value="732936001"/>
+            </doseQuantity>
+          </doseAndRate>
+        </dosage>
+      </MedicationStatement>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="urn:uuid:99e5810c-1afa-43da-8a0e-e7f9086e300a"/>
+    <resource>
+      <MedicationStatement>
+        <text>
+          <status value="extensions"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: MedicationStatement</b></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"></div><blockquote><p><b>CH EMED Extension Treatment Plan</b></p><p><b>value</b>: id: urn:uuid:5712fffe-20c6-11e6-b67b-9e71128cae77</p><p><b>value</b>: id: urn:uuid:5712fffe-20c6-11e6-b67b-9e71128cae77</p></blockquote><p><b>identifier</b>: id: urn:uuid:534996fe-5e45-40ed-9388-06fa268e13d8</p><p><b>status</b>: completed</p><p><b>medication</b>: <a name="med"> </a></p><blockquote><p></p><p><a name="med"> </a></p><p><b>code</b>: NORVASC Tabl 10 mg <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (unknown#7680500440334)</span></p><p><b>form</b>: Tablet <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="CodeSystem-edqm-standardterms.html">EDQM - Standard Terms</a>#10219000)</span></p><p><b>amount</b>: 30 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 732936001 = 'Tablet (unit of presentation)')</span>/1 Package<span style="background: LightGoldenRodYellow"> (Details: UCUM code {Package} = '{Package}')</span></p><h3>Ingredients</h3><table class="grid"><tr><td>-</td><td><b>Item[x]</b></td><td><b>Strength</b></td></tr><tr><td>*</td><td>Amlodipine <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="https://browser.ihtsdotools.org/">SNOMED CT</a>#386864001 "Amlodipine (substance)")</span></td><td>10 milligram<span style="background: LightGoldenRodYellow"> (Details: UCUM code mg = 'mg')</span>/1 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 732936001 = 'Tablet (unit of presentation)')</span></td></tr></table></blockquote><p><b>subject</b>: <a href="#urnuuid9616e879-c4d0-411e-88c3-e001cb7a8fcd">See above (urn:uuid:9616e879-c4d0-411e-88c3-e001cb7a8fcd)</a></p><p><b>reasonCode</b>: Bluthochdruck <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> ()</span></p><blockquote><p><b>dosage</b></p><p><b>patientInstruction</b>: -</p><p><b>timing</b>: Starting 2012-02-04, Do , ?ngen-6?, ?ngen-6?</p><p><b>route</b>: Oral use <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="CodeSystem-edqm-standardterms.html">EDQM - Standard Terms</a>#20053000)</span></p></blockquote><hr/><blockquote><p><b>Generated Narrative: Medication #med</b><a name="med"> </a></p><p><b>code</b>: NORVASC Tabl 10 mg <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (unknown#7680500440334)</span></p><p><b>form</b>: Tablet <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="CodeSystem-edqm-standardterms.html">EDQM - Standard Terms</a>#10219000)</span></p><p><b>amount</b>: 30 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 732936001 = 'Tablet (unit of presentation)')</span>/1 Package<span style="background: LightGoldenRodYellow"> (Details: UCUM code {Package} = '{Package}')</span></p><h3>Ingredients</h3><table class="grid"><tr><td>-</td><td><b>Item[x]</b></td><td><b>Strength</b></td></tr><tr><td>*</td><td>Amlodipine <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="https://browser.ihtsdotools.org/">SNOMED CT</a>#386864001 "Amlodipine (substance)")</span></td><td>10 milligram<span style="background: LightGoldenRodYellow"> (Details: UCUM code mg = 'mg')</span>/1 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 732936001 = 'Tablet (unit of presentation)')</span></td></tr></table></blockquote></div>
+        </text>
+        <contained>
+          <Medication>
+            <id value="med"/>
+            <code>
+              <coding>
+                <system value="urn:oid:2.51.1.1"/>
+                <code value="7680500440334"/>
+                <display value="NORVASC Tabl 10 mg"/>
+              </coding>
+              <text value="NORVASC Tabl 10 mg"/>
+            </code>
+            <form>
+              <coding>
+                <system value="urn:oid:0.4.0.127.0.16.1.1.2.1"/>
+                <code value="10219000"/>
+                <display value="Tablet"/>
+              </coding>
+            </form>
+            <amount>
+              <numerator>
+                <value value="30"/>
+                <unit value="Tablet (unit of presentation)"/>
+                <system value="http://snomed.info/sct"/>
+                <code value="732936001"/>
+              </numerator>
+              <denominator>
+                <value value="1"/>
+                <unit value="Package"/>
+                <system value="http://unitsofmeasure.org"/>
+                <code value="{Package}"/>
+              </denominator>
+            </amount>
+            <ingredient>
+              <itemCodeableConcept>
+                <coding>
+                  <system value="http://snomed.info/sct"/>
+                  <code value="386864001"/>
+                  <display value="Amlodipine (substance)"/>
+                </coding>
+                <text value="Amlodipine"/>
+              </itemCodeableConcept>
+              <strength>
+                <numerator>
+                  <value value="10"/>
+                  <unit value="milligram"/>
+                  <system value="http://unitsofmeasure.org"/>
+                  <code value="mg"/>
+                </numerator>
+                <denominator>
+                  <value value="1"/>
+                  <unit value="Tablet (unit of presentation)"/>
+                  <system value="http://snomed.info/sct"/>
+                  <code value="732936001"/>
+                </denominator>
+              </strength>
+            </ingredient>
+          </Medication>
+        </contained>
+        <extension url="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan">
+          <extension url="id">
+            <valueIdentifier>
+              <system value="urn:ietf:rfc:3986"/>
+              <value value="urn:uuid:5712fffe-20c6-11e6-b67b-9e71128cae77"/>
+            </valueIdentifier>
+          </extension>
+          <extension url="externalDocumentId">
+            <valueIdentifier>
+              <system value="urn:ietf:rfc:3986"/>
+              <value value="urn:uuid:5712fffe-20c6-11e6-b67b-9e71128cae77"/>
+            </valueIdentifier>
+          </extension>
+        </extension>
+        <identifier>
+          <system value="urn:ietf:rfc:3986"/>
+          <value value="urn:uuid:534996fe-5e45-40ed-9388-06fa268e13d8"/>
+        </identifier>
+        <status value="completed"/>
+        <medicationReference>
+          <reference value="#med"/>
+        </medicationReference>
+        <subject>
+          <reference value="urn:uuid:9616e879-c4d0-411e-88c3-e001cb7a8fcd"/>
+        </subject>
+        <informationSource>
+          <reference value="urn:uuid:9837b87a-aaa7-4389-aa03-39442cee2c45" />
+        </informationSource>
+        <reasonCode>
+          <text value="Bluthochdruck"/>
+        </reasonCode>
+        <note>
+          <text value="Annotation Comment" />
+        </note>
+        <dosage>
+          <patientInstruction value="-"/>
+          <timing>
+            <repeat>
+              <boundsPeriod>
+                <start value="2012-02-04"/>
+              </boundsPeriod>
+              <when value="MORN"/>
+              <when value="EVE"/>
+            </repeat>
+          </timing>
+          <route>
+            <coding>
+              <system value="urn:oid:0.4.0.127.0.16.1.1.2.1"/>
+              <code value="20053000"/>
+              <display value="Oral use"/>
+            </coding>
+          </route>
+          <doseAndRate>
+            <doseQuantity>
+              <value value="1"/>
+              <unit value="Tablet (unit of presentation)"/>
+              <system value="http://snomed.info/sct"/>
+              <code value="732936001"/>
+            </doseQuantity>
+          </doseAndRate>
+        </dosage>
+      </MedicationStatement>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="urn:uuid:1923d866-f10f-4d94-8b1f-e87c82b3e98c"/>
+    <resource>
+      <Device>
+        <deviceName>
+          <name value="PMP" />
+          <type value="model-name" />
+        </deviceName>
+        <owner>
+          <reference value="urn:uuid:7801bb18-5c19-4d4c-bcb5-536a1f51f83e" />
+        </owner>
+      </Device>
+    </resource>
+  </entry>
+</Bundle>

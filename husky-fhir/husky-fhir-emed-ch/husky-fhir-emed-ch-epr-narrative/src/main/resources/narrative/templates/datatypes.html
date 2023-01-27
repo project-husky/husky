@@ -1,0 +1,70 @@
+<!--/*
+  ~ This code is made available under the terms of the Eclipse Public License v1.0
+  ~ in the github project https://github.com/project-husky/husky there you also
+  ~ find a list of the contributors and the license information.
+  ~
+  ~ This project has been developed further and modified by the joined working group Husky
+  ~ on the basis of the eHealth Connector opensource project from June 28, 2021,
+  ~ whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+  */-->
+
+<th:block th:fragment="human-name(humanName, lang)">
+    <!--/* <th:block th:each="prefix : ${humanName.prefix}" th:if="${!prefix.empty}" th:text="${prefix.value} + ' '"/> */-->
+    <th:block th:each="givenName : ${humanName.given}" th:if="${!givenName.empty}" th:text="${givenName.value} + ' '"/>
+    <th:block th:if="${!humanName.familyElement.empty}" th:text="${#strings.toUpperCase(humanName.family)} + ' '"/>
+    <!--/* <th:block th:each="suffix : ${humanName.suffix}" th:if="${!suffix.empty}" th:text="${suffix.value} + ' '"/> */-->
+</th:block>
+
+<span th:fragment="address(address, lang)">
+    <th:block th:each="line : ${address.line}">
+        <span th:text="${line} + ' '"/><br/>
+    </th:block>
+    <span th:if="${not address.cityElement.empty}" th:text="${address.city} + ' '"/>
+    <span th:if="${not address.stateElement.empty}" th:text="${address.state} + ' '"/>
+    <span th:if="${not address.countryElement.empty}" th:text="${address.country}+ ' '"/>
+</span>
+
+<th:block th:fragment="contact-point(contactPoint, lang)" th:swith="${contactPoint.system}">
+    <span th:case="'ContactPointSystem.PHONE'" th:text="${contactPoint.value}" class="tel"/>
+    <span th:case="'ContactPointSystem.EMAIL'" th:text="${contactPoint.value}" class="email"/>
+</th:block>
+
+<th:block th:fragment="dosage-intake(dosageIntake, lang)">
+    <th:block th:if="${dosageIntake} == null">—</th:block>
+    <th:block th:if="${dosageIntake} != null" th:with="dose = ${dosageIntake.dose()}">
+        <th:block th:if="${dose.isQuantity()}" th:insert="~{::amount-quantity(${dose.quantity()}, ${lang})}"/>
+        <th:block th:if="${dose.isRange()}">
+            [[~{::amount-quantity(${dose.low()}, ${lang})}]] – [[~{::amount-quantity(${dose.high()}, ${lang})}]]
+        </th:block>
+    </th:block>
+</th:block>
+
+<th:block th:fragment="amount-quantity(amountQuantity, lang)">
+    [[${amountQuantity.value()}]] <span class="unit" th:text="${fopase.getMessage(amountQuantity.unit(), lang)}"/>
+</th:block>
+
+<th:block th:fragment="max-doses(effectiveDosageInstructions, lang)">
+    <th:block th:if="effectiveDosageInstructions.maxDosePerPeriod()"
+              th:with="maxDosePerPeriod = ${effectiveDosageInstructions.maxDosePerPeriod()}">
+        Dose maximale :
+        <th:block th:insert="~{::amount-quantity(${maxDosePerPeriod.amount()}, ${lang})}"/>
+        par
+        <th:block th:insert="~{::amount-quantity(${maxDosePerPeriod.duration()}, ${lang})}"/>
+        .
+    </th:block>
+    <th:block th:if="effectiveDosageInstructions.maxDosePerAdministration()"
+              th:with="maxDosePerAdministration = ${effectiveDosageInstructions.maxDosePerAdministration()}">
+        Dose maximale par administration :
+        <th:block th:insert="~{::amount-quantity(${maxDosePerAdministration}, ${lang})}"/>
+        .
+    </th:block>
+</th:block>
+
+<th:block th:fragment="date-time(dateTimeElement, lang)">
+    <th:block th:switch="${dateTimeElement.getPrecision().name()}" th:with="value = ${dateTimeElement.getValueAsString()}">
+        <th:block th:case="'MINUTE'" th:text="${value.substring(8,10)} + '/' + ${value.substring(5,7)} + '/' + ${value.substring(0,4)} + ' ' + ${value.substring(11, 15)}"/>
+        <th:block th:case="'DAY'" th:text="${value.substring(8,10)} + '/' + ${value.substring(5,7)} + '/' + ${value.substring(0,4)}"/>
+        <th:block th:case="'MONTH'" th:text="${value.substring(5,7)} + '/' + ${value.substring(0,4)}"/>
+        <th:block th:case="'YEAR'" th:text="${value}"/>
+    </th:block>
+</th:block>

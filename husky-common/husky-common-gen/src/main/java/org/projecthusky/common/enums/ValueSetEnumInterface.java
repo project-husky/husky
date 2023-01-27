@@ -12,11 +12,11 @@ package org.projecthusky.common.enums;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.LocalizedString;
 import org.projecthusky.common.hl7cdar2.CD;
 import org.projecthusky.common.hl7cdar2.CE;
 import org.projecthusky.common.model.Code;
 import org.projecthusky.common.utils.datatypes.Hl7v25;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.LocalizedString;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -24,7 +24,7 @@ import java.util.Objects;
 /**
  * Interface for all dynamically created/updated value sets.
  */
-public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
+public interface ValueSetEnumInterface extends CodedMetadataEnumInterface, TranslatedEnumInterface {
 
     /**
      * Gets the HL7 {@link CE}.
@@ -114,11 +114,11 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
      */
     @Override
     default org.openehealth.ipf.commons.ihe.xds.core.metadata.@NonNull Code getIpfCode() {
-		return new org.openehealth.ipf.commons.ihe.xds.core.metadata.Code(
-				this.getCodeValue(),
-				new LocalizedString(this.getDisplayName(), LanguageCode.ENGLISH_CODE, "UTF-8"),
-				this.getCodeSystemId()
-		);
+        return new org.openehealth.ipf.commons.ihe.xds.core.metadata.Code(
+                this.getCodeValue(),
+                new LocalizedString(this.getDisplayName(), LanguageCode.ENGLISH_CODE, "UTF-8"),
+                this.getCodeSystemId()
+        );
     }
 
     /**
@@ -186,25 +186,6 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
     String getCodeValue();
 
     /**
-     * Gets the default display name.
-     *
-     * @return the default display name.
-     */
-    @NonNull
-    default String getDisplayName() {
-        return getDisplayName(null);
-    }
-
-    /**
-     * Gets the display name defined by the language param.
-     *
-     * @param languageCode The language code to get the display name for, {@code null} to get the default display name.
-     * @return the display name in the desired language.
-     */
-    @NonNull
-    String getDisplayName(@Nullable final LanguageCode languageCode);
-
-    /**
      * Gets the value set identifier.
      *
      * @return the value set identifier.
@@ -219,4 +200,12 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
      */
     @NonNull
     String getValueSetName();
+
+    /**
+     * Get the enum constant name
+     *
+     * @return the name of this enum constant
+     */
+    @NonNull
+    String name();
 }

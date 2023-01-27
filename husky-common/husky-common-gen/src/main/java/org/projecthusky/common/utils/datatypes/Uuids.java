@@ -23,7 +23,8 @@ public class Uuids {
     /**
      * This class is not instantiable.
      */
-    private Uuids() {}
+    private Uuids() {
+    }
 
     /**
      * Pattern that matches a UUID.
@@ -52,5 +53,9 @@ public class Uuids {
      */
     public static String generate() {
         return UUID.randomUUID().toString();
+    }
+
+    public static UUID parseUrnEncoded(final String urn) {
+        return UUID.fromString(normalize(urn));
     }
 }

@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Bundle xmlns="http://hl7.org/fhir">
+  <id value="2-2-PharmaceuticalAdvice"/>
+  <meta>
+    <lastUpdated value="2020-03-09T12:31:59.738+00:00"/>
+    <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-pharmaceuticaladvice"/>
+  </meta>
+  <identifier>
+    <system value="urn:ietf:rfc:3986"/>
+    <value value="urn:uuid:8ed02d0a-2971-11e6-b67b-9e71128cae77"/>
+  </identifier>
+  <type value="document"/>
+  <timestamp value="2012-02-04T14:00:00+01:00"/>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/Composition/2-2-PharmaceuticalAdvice"/>
+    <resource>
+      <Composition>
+        <id value="2-2-PharmaceuticalAdvice"/>
+        <language value="de-CH"/>
+        <text>
+          <status value="extensions"/><div xmlns="http://www.w3.org/1999/xhtml" xml:lang="de-CH" lang="de-CH"><p><b>Generated Narrative: Composition</b><a name="2-2-PharmaceuticalAdvice"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Composition "2-2-PharmaceuticalAdvice"  (Language "de-CH") </p></div><p><b>EPR Information Recipient</b>: <a href="#Patient_MonikaWegmuellerRecipient">See above (Patient/MonikaWegmuellerRecipient)</a></p><p><b>identifier</b>: id: urn:uuid:8ed02d0a-2971-11e6-b67b-9e71128cae77</p><p><b>status</b>: final</p><p><b>type</b>: Medication pharmaceutical advice.extended <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="https://loinc.org/">LOINC</a>#61356-2; <a href="https://browser.ihtsdotools.org/">SNOMED CT</a>#419891008 "Record artifact (record artifact)")</span></p><p><b>date</b>: 2012-02-04 02:00:00+0100</p><p><b>author</b>: <a href="#PractitionerRole_FamilienHausarztAtHausarzt">See above (PractitionerRole/FamilienHausarztAtHausarzt)</a></p><p><b>title</b>: Kommentar zur Medikation</p><p><b>confidentiality</b>: N</p><p><b>custodian</b>: <a href="#Organization_Custodian">See above (Organization/Custodian)</a></p></div>
+        </text>
+        <extension url="http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-informationrecipient">
+          <valueReference>
+            <reference value="Patient/MonikaWegmuellerRecipient"/>
+          </valueReference>
+        </extension>
+        <identifier>
+          <system value="urn:ietf:rfc:3986"/>
+          <value value="urn:uuid:8ed02d0a-2971-11e6-b67b-9e71128cae77"/>
+        </identifier>
+        <status value="final"/>
+        <type>
+          <coding>
+            <system value="http://loinc.org"/>
+            <code value="61356-2"/>
+            <display value="Medication pharmaceutical advice.extended"/>
+          </coding>
+          <coding>
+            <system value="http://snomed.info/sct"/>
+            <code value="419891008"/>
+            <display value="Record artifact (record artifact)"/>
+          </coding>
+        </type>
+        <subject>
+          <reference value="Patient/MonikaWegmueller"/>
+        </subject>
+        <date value="2012-02-04T14:00:00+01:00"/>
+        <author>
+          <reference value="PractitionerRole/FamilienHausarztAtHausarzt"/>
+        </author>
+        <title value="Kommentar zur Medikation"/>
+        <confidentiality value="N">
+          <extension url="http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-confidentialitycode">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://snomed.info/sct"/>
+                <code value="17621005"/>
+                <display value="Normally accessible"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+        </confidentiality>
+        <custodian>
+          <reference value="Organization/Custodian"/>
+        </custodian>
+        <section>
+          <title value="Hinweise zur Medikation"/>
+          <code>
+            <coding>
+              <system value="http://loinc.org"/>
+              <code value="61357-0"/>
+              <display value="Medication pharmaceutical advice.brief"/>
+            </coding>
+          </code>
+          <text>
+            <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Präpartename</th>
+                                        <th>Wirkstoffname</th>
+                                        <th>Galenische Form</th>
+                                        <th>Dosis pro Einheit</th>
+                                        <th>Dos.Morgen</th>
+                                        <th>Dos.Mittag</th>
+                                        <th>Dos.Abend</th>
+                                        <th>Dos.Nacht</th>
+                                        <th>Verabreichungsweg</th>
+                                        <th>Anwendungsdauer</th>
+                                        <th>Behandlungsgrund</th>
+                                        <th>Kommentar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="padv.1">
+                                        <td id="padv.1.brandedmedication">Triatec</td>
+                                        <td id="padv.1.ingredient">Ramipril</td>
+                                        <td id="padv.1.packageform">Tbl</td>
+                                        <td id="padv.1.dosequantity">2.5 mg</td>
+                                        <td id="padv.1.dosagemorning">0.5</td>
+                                        <td id="padv.1.dosagelunch">0</td>
+                                        <td id="padv.1.dosageevening">0</td>
+                                        <td id="padv.1.dosagenight">0</td>
+                                        <td id="padv.1.routecode">oral</td>
+                                        <td id="padv.1.datefromto"/>
+                                        <td id="padv.1.reason">Bluthochdruck</td>
+                                        <td id="padv.1.note">Abgesetzt aufgrund UAW trockener Husten</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+          </text>
+          <entry>
+            <reference value="Observation/2-2-PharmaceuticalAdvice"/>
+          </entry>
+        </section>
+      </Composition>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/Patient/MonikaWegmueller"/>
+    <resource>
+      <Patient>
+        <id value="MonikaWegmueller"/>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Patient</b><a name="MonikaWegmueller"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Patient "MonikaWegmueller" </p></div><p><b>identifier</b>: Medical record number: 11111111</p><p><b>name</b>: Monika Wegmüller </p><p><b>gender</b>: female</p><p><b>birthDate</b>: 1943-05-15</p><p><b>address</b>: Wiesenstr. 12 Zürich 8003 CH </p></div>
+        </text>
+        <identifier>
+          <type>
+            <coding>
+              <system value="http://terminology.hl7.org/CodeSystem/v2-0203"/>
+              <code value="MR"/>
+            </coding>
+          </type>
+          <system value="urn:oid:2.999.1"/>
+          <value value="11111111"/>
+        </identifier>
+        <name>
+          <family value="Wegmüller"/>
+          <given value="Monika"/>
+        </name>
+        <gender value="female"/>
+        <birthDate value="1943-05-15"/>
+        <address>
+          <line value="Wiesenstr. 12"/>
+          <city value="Zürich"/>
+          <postalCode value="8003"/>
+          <country value="CH"/>
+        </address>
+      </Patient>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/PractitionerRole/FamilienHausarztAtHausarzt"/>
+    <resource>
+      <PractitionerRole>
+        <id value="FamilienHausarztAtHausarzt"/>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: PractitionerRole</b><a name="FamilienHausarztAtHausarzt"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource PractitionerRole "FamilienHausarztAtHausarzt" </p></div><p><b>practitioner</b>: <a href="#Practitioner_FamilienHausarzt">See above (Practitioner/FamilienHausarzt)</a></p><p><b>organization</b>: <a href="#Organization_Hausarzt">See above (Organization/Hausarzt)</a></p></div>
+        </text>
+        <practitioner>
+          <reference value="Practitioner/FamilienHausarzt"/>
+        </practitioner>
+        <organization>
+          <reference value="Organization/Hausarzt"/>
+        </organization>
+      </PractitionerRole>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/Practitioner/FamilienHausarzt"/>
+    <resource>
+      <Practitioner>
+        <id value="FamilienHausarzt"/>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Practitioner</b><a name="FamilienHausarzt"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Practitioner "FamilienHausarzt" </p></div><p><b>identifier</b>: id: 7601000234438</p><p><b>name</b>: Familien Hausarzt </p></div>
+        </text>
+        <identifier>
+          <system value="urn:oid:2.51.1.3"/>
+          <value value="7601000234438"/>
+        </identifier>
+        <name>
+          <family value="Hausarzt"/>
+          <given value="Familien"/>
+        </name>
+      </Practitioner>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/Organization/Hausarzt"/>
+    <resource>
+      <Organization>
+        <id value="Hausarzt"/>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Organization</b><a name="Hausarzt"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Organization "Hausarzt" </p></div><p><b>identifier</b>: id: 7601000234438</p><p><b>name</b>: Hausarzt</p><p><b>address</b>: Krankenstrasse 2 Zürich 8005 CH </p></div>
+        </text>
+        <identifier>
+          <system value="urn:oid:2.51.1.3"/>
+          <value value="7601000234438"/>
+        </identifier>
+        <name value="Hausarzt"/>
+        <address>
+          <line value="Krankenstrasse 2"/>
+          <city value="Zürich"/>
+          <postalCode value="8005"/>
+          <country value="CH"/>
+        </address>
+      </Organization>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/Organization/Custodian"/>
+    <resource>
+      <Organization>
+        <id value="Custodian"/>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Organization</b><a name="Custodian"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Organization "Custodian" </p></div><p><b>identifier</b>: id: 7601000234438</p><p><b>name</b>: Hausarzt</p></div>
+        </text>
+        <identifier>
+          <system value="urn:oid:2.51.1.3"/>
+          <value value="7601000234438"/>
+        </identifier>
+        <name value="Hausarzt"/>
+      </Organization>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/Patient/MonikaWegmuellerRecipient"/>
+    <resource>
+      <Patient>
+        <id value="MonikaWegmuellerRecipient"/>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Patient</b><a name="MonikaWegmuellerRecipient"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Patient "MonikaWegmuellerRecipient" </p></div><p><b>name</b>: Monika Wegmüller </p><p><b>address</b>: Wiesenstr. 12 Zürich 8003 CH </p></div>
+        </text>
+        <name>
+          <family value="Wegmüller"/>
+          <given value="Monika"/>
+        </name>
+        <address>
+          <line value="Wiesenstr. 12"/>
+          <city value="Zürich"/>
+          <postalCode value="8003"/>
+          <country value="CH"/>
+        </address>
+      </Patient>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/Observation/2-2-PharmaceuticalAdvice"/>
+    <resource>
+      <Observation>
+        <id value="2-2-PharmaceuticalAdvice"/>
+        <text>
+          <status value="extensions"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Observation</b><a name="2-2-PharmaceuticalAdvice"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Observation "2-2-PharmaceuticalAdvice" </p></div><blockquote><p><b>CH EMED Extension Treatment Plan</b></p><p><b>value</b>: id: urn:uuid:c9f758a1-296c-4710-84d4-e181db8c7478</p><p><b>value</b>: id: urn:uuid:c9f758a1-296c-4710-84d4-e181db8c7478</p></blockquote><p><b>identifier</b>: id: urn:uuid:8ed02d0a-2971-11e6-b67b-9e71128cae77</p><p><b>status</b>: final</p><p><b>code</b>: CANCEL <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="CodeSystem-ihe-pharmaceuticaladvicestatuslist.html">IHE Pharmaceutical Advice Status List</a>#CANCEL)</span></p><p><b>subject</b>: <a href="#Patient_MonikaWegmueller">See above (Patient/MonikaWegmueller)</a></p><p><b>effective</b>: 2012-02-04 02:00:00+0100</p><p><b>note</b>: Abgesetzt aufgrund UAW trockener Husten</p></div>
+        </text>
+        <extension url="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan">
+          <extension url="id">
+            <valueIdentifier>
+              <system value="urn:ietf:rfc:3986"/>
+              <value value="urn:uuid:c9f758a1-296c-4710-84d4-e181db8c7478"/>
+            </valueIdentifier>
+          </extension>
+          <extension url="externalDocumentId">
+            <valueIdentifier>
+              <system value="urn:ietf:rfc:3986"/>
+              <value value="urn:uuid:c9f758a1-296c-4710-84d4-e181db8c7478"/>
+            </valueIdentifier>
+          </extension>
+        </extension>
+        <identifier>
+          <system value="urn:ietf:rfc:3986"/>
+          <value value="urn:uuid:8ed02d0a-2971-11e6-b67b-9e71128cae77"/>
+        </identifier>
+        <status value="final"/>
+        <code>
+          <coding>
+            <system value="urn:oid:1.3.6.1.4.1.19376.1.9.2.1"/>
+            <code value="CANCEL"/>
+          </coding>
+        </code>
+        <subject>
+          <reference value="Patient/MonikaWegmueller"/>
+        </subject>
+        <effectiveDateTime value="2012-02-04T14:00:00+01:00"/>
+        <note>
+          <extension url="http://hl7.org/fhir/StructureDefinition/narrativeLink">
+            <valueUrl value="#padv.1.note"/>
+          </extension>
+          <text value="Abgesetzt aufgrund UAW trockener Husten"/>
+        </note>
+      </Observation>
+    </resource>
+  </entry>
+</Bundle>

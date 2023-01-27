@@ -1,0 +1,65 @@
+package org.projecthusky.fhir.emed.ch.epr.resource.dis;
+
+import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.emed.ch.common.resource.ChEmedOrganization;
+import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedRatioWithEmedUnits;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedication;
+
+/**
+ * The HAPI custom structure for CH-EMED-EPR Medication (DIS).
+ *
+ * @author Ronaldo Loureiro
+ **/
+public class ChEmedEprMedicationDis extends ChEmedEprMedication {
+    /**
+     * Empty constructor for the parser.
+     */
+    public ChEmedEprMedicationDis() {
+        super();
+    }
+
+    /**
+     * Returns the manufacturer or throws.
+     *
+     * @return the manufacturer.
+     * @throws InvalidEmedContentException if the manufacturer is missing.
+     */
+    @ExpectsValidResource
+    public ChEmedOrganization resolveManufacturer() throws InvalidEmedContentException {
+        if (!this.hasManufacturer()) throw new InvalidEmedContentException("The manufacturer is not specified");
+
+        final var resource = this.getManufacturer().getResource();
+        if (resource instanceof final ChEmedOrganization chManufacturer) {
+            return chManufacturer;
+        }
+        throw new InvalidEmedContentException("The manufacturer is invalid");
+    }
+
+    /**
+     * Resolves the package size.
+     *
+     * @return the package size.
+     * @throws InvalidEmedContentException if the package size is missing or of the wrong type.
+     */
+    @ExpectsValidResource
+    public ChEmedRatioWithEmedUnits resolveAmount() throws InvalidEmedContentException {
+        if (!this.hasAmount()) throw new InvalidEmedContentException("The package size is missing.");
+
+        if (this.getAmount() instanceof ChEmedRatioWithEmedUnits chRatio) {
+            return chRatio;
+        }
+        throw new InvalidEmedContentException("The package size isn't of the right type.");
+    }
+
+    /**
+     * Sets the package size.
+     *
+     * @param amount the package size.
+     * @return this.
+     */
+    public ChEmedEprMedicationDis setAmount(final ChEmedRatioWithEmedUnits amount) {
+        super.setAmount(amount);
+        return this;
+    }
+}
