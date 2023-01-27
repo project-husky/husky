@@ -35,7 +35,7 @@
         </dependency>
 
         <dependency>
-            <groupId>org.husky.common</groupId>
+            <groupId>org.projecthusky.common</groupId>
             <artifactId>husky-common-gen</artifactId>
         </dependency>
 
@@ -55,7 +55,7 @@
             <artifactId>slf4j-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.husky.communication</groupId>
+            <groupId>org.projecthusky.communication</groupId>
             <artifactId>husky-communication-ch</artifactId>
         </dependency>
     </dependencies>

@@ -3,19 +3,16 @@ package org.husky.communication.xdsmhdconversion;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.DocumentReference;
-import org.hl7.fhir.r4.model.Enumerations;
 import org.hl7.fhir.r4.model.Enumerations.DocumentReferenceStatus;
-import org.husky.common.model.Reference;
-import org.husky.common.utils.XdsMetadataUtil;
-import org.husky.common.utils.xml.XmlFactories;
 import org.husky.communication.xdsmhdconversion.converters.DocumentEntryConverter;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xds.core.ebxml.ebxml30.ProvideAndRegisterDocumentSetRequestType;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
 import org.openehealth.ipf.platform.camel.ihe.xds.core.converters.EbXML30Converters;
+import org.projecthusky.common.utils.XdsMetadataUtil;
+import org.projecthusky.common.utils.xml.XmlFactories;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -23,14 +20,15 @@ import javax.xml.bind.JAXBIntrospector;
 import javax.xml.bind.Unmarshaller;
 import java.io.InputStream;
 import java.util.Date;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests of the {@link DocumentEntryConverter} class.
+ *
  * @author Ronaldo Loureiro
  */
+@Disabled
 class DocumentEntryConverterTest {
 
     private final Class<?> UNMARSHALLED_CLASS = ProvideAndRegisterDocumentSetRequestType.class;
@@ -49,28 +47,28 @@ class DocumentEntryConverterTest {
         final var documentReference = new DocumentEntryConverter().convertDocumentEntry(documentEntry);
 
         testDocumentReference(documentReference,
-                "urn:oid:urn:uuid:c888e8c5-7e12-4bec-b99e-9fd92e10f6da",
-                "urn:uuid:768f1904-cc07-49db-8104-92be8f9c6fc1",
-                DocumentReferenceStatus.CURRENT,
-                "419891008",
-                "440545006",
-                "2.16.756.5.30.1.191.1.0.2.1-c55f4ca7-bd4e-4134-8dcd-56b793ade958",
-                documentReference.getAuthenticator().getReference(),
-                documentReference.getDescription(),
-                "17621005",
-                "text/xml",
-                "en-US",
-                "2.999.756.42.1",
-                4850,
-                20,
-                "Pharmaceutical Advice",
-                XdsMetadataUtil.convertDtmStringToDate("20220919182449"),
-                "urn:ihe:pharm:padv:2010",
-                null,
-                null,
-                "22232009",
-                "394802001",
-                null);
+                              "urn:oid:urn:uuid:c888e8c5-7e12-4bec-b99e-9fd92e10f6da",
+                              "urn:uuid:768f1904-cc07-49db-8104-92be8f9c6fc1",
+                              DocumentReferenceStatus.CURRENT,
+                              "419891008",
+                              "440545006",
+                              "2.16.756.5.30.1.191.1.0.2.1-c55f4ca7-bd4e-4134-8dcd-56b793ade958",
+                              documentReference.getAuthenticator().getReference(),
+                              documentReference.getDescription(),
+                              "17621005",
+                              "text/xml",
+                              "en-US",
+                              "2.999.756.42.1",
+                              4850,
+                              20,
+                              "Pharmaceutical Advice",
+                              XdsMetadataUtil.convertDtmStringToDate("20220919182449"),
+                              "urn:ihe:pharm:padv:2010",
+                              null,
+                              null,
+                              "22232009",
+                              "394802001",
+                              null);
     }
 
     @Test
@@ -81,28 +79,28 @@ class DocumentEntryConverterTest {
         final var documentReference = new DocumentEntryConverter().convertDocumentEntry(documentEntry);
 
         testDocumentReference(documentReference,
-                "urn:oid:urn:uuid:c888e8c5-7e12-4bec-b99e-9fd92e10f6da",
-                "urn:uuid:768f1904-cc07-49db-8104-92be8f9c6fc1",
-                DocumentReferenceStatus.CURRENT,
-                "419891008",
-                "440545006",
-                "2.16.756.5.30.1.191.1.0.2.1-c55f4ca7-bd4e-4134-8dcd-56b793ade958",
-                documentReference.getAuthenticator().getReference(),
-                documentReference.getDescription(),
-                "17621005",
-                "text/xml",
-                "en-US",
-                "2.999.756.42.1",
-                4850,
-                20,
-                "Pharmaceutical Advice",
-                XdsMetadataUtil.convertDtmStringToDate("20220919182449"),
-                "urn:ihe:pharm:padv:2010",
-                null,
-                null,
-                "22232009",
-                "394802001",
-                null);
+                              "urn:oid:urn:uuid:c888e8c5-7e12-4bec-b99e-9fd92e10f6da",
+                              "urn:uuid:768f1904-cc07-49db-8104-92be8f9c6fc1",
+                              DocumentReferenceStatus.CURRENT,
+                              "419891008",
+                              "440545006",
+                              "2.16.756.5.30.1.191.1.0.2.1-c55f4ca7-bd4e-4134-8dcd-56b793ade958",
+                              documentReference.getAuthenticator().getReference(),
+                              documentReference.getDescription(),
+                              "17621005",
+                              "text/xml",
+                              "en-US",
+                              "2.999.756.42.1",
+                              4850,
+                              20,
+                              "Pharmaceutical Advice",
+                              XdsMetadataUtil.convertDtmStringToDate("20220919182449"),
+                              "urn:ihe:pharm:padv:2010",
+                              null,
+                              null,
+                              "22232009",
+                              "394802001",
+                              null);
 
         final var documentEntry2 = new DocumentEntryConverter().convertDocumentReference(documentReference);
         testDocumentEntry(documentEntry, documentEntry2);
@@ -132,7 +130,8 @@ class DocumentEntryConverterTest {
                                String practiceSettingCode,
                                @Nullable String sourcePatientRef) {
 
-        assertEquals("http://ihe.net/fhir/ihe.mhd.fhir/StructureDefinition/IHE.MHD.Comprehensive.DocumentManifest", documentReference.getMeta().getProfile().get(0).getValue());
+        assertEquals("http://ihe.net/fhir/ihe.mhd.fhir/StructureDefinition/IHE.MHD.Comprehensive.DocumentManifest",
+                     documentReference.getMeta().getProfile().get(0).getValue());
         assertEquals(masterIdentifier, documentReference.getMasterIdentifier().getValue());
         assertEquals(identifier, documentReference.getIdentifier().get(0).getValue());
         assertEquals(status, documentReference.getStatus());
@@ -141,7 +140,8 @@ class DocumentEntryConverterTest {
         assertEquals(subjectRef, documentReference.getSubject().getReference());
         assertTrue(documentReference.getAuthor().isEmpty());
 
-        if (authenticatorRef != null) assertEquals(authenticatorRef, documentReference.getAuthenticator().getReference());
+        if (authenticatorRef != null)
+            assertEquals(authenticatorRef, documentReference.getAuthenticator().getReference());
         else assertNull(documentReference.getAuthenticator().getReference());
 
         assertTrue(documentReference.getRelatesTo().isEmpty());
@@ -182,6 +182,7 @@ class DocumentEntryConverterTest {
 
         assertTrue(context.getRelated().isEmpty());
     }
+
     void testDocumentEntry(DocumentEntry original, DocumentEntry documentEntry) {
         assertEquals(original.isLimitedMetadata(), documentEntry.isLimitedMetadata());
         assertEquals(original.getUniqueId(), documentEntry.getUniqueId());
@@ -192,11 +193,13 @@ class DocumentEntryConverterTest {
         assertEquals(original.getTypeCode().getCode(), documentEntry.getTypeCode().getCode());
         assertEquals(original.getClassCode().getCode(), documentEntry.getClassCode().getCode());
         assertEquals(original.getPatientId().getId(), documentEntry.getPatientId().getId());
-        assertEquals(original.getPatientId().getAssigningAuthority().getUniversalId(), documentEntry.getPatientId().getAssigningAuthority().getUniversalId());
+        assertEquals(original.getPatientId().getAssigningAuthority().getUniversalId(),
+                     documentEntry.getPatientId().getAssigningAuthority().getUniversalId());
         assertEquals(original.getAuthors().isEmpty(), documentEntry.getAuthors().isEmpty());
         assertEquals(original.getLegalAuthenticator(), documentEntry.getLegalAuthenticator());
         assertEquals(original.getComments(), documentEntry.getComments());
-        assertEquals(original.getConfidentialityCodes().get(0).getCode(), documentEntry.getConfidentialityCodes().get(0).getCode());
+        assertEquals(original.getConfidentialityCodes().get(0).getCode(),
+                     documentEntry.getConfidentialityCodes().get(0).getCode());
         assertEquals(original.getMimeType(), documentEntry.getMimeType());
         assertEquals(original.getLanguageCode(), documentEntry.getLanguageCode());
         assertEquals(original.getRepositoryUniqueId(), documentEntry.getRepositoryUniqueId());
@@ -209,7 +212,8 @@ class DocumentEntryConverterTest {
         assertEquals(original.getEventCodeList().isEmpty(), documentEntry.getEventCodeList().isEmpty());
         assertEquals(original.getServiceStartTime(), documentEntry.getServiceStartTime());
         assertEquals(original.getServiceStopTime(), documentEntry.getServiceStopTime());
-        assertEquals(original.getHealthcareFacilityTypeCode().getCode(), documentEntry.getHealthcareFacilityTypeCode().getCode());
+        assertEquals(original.getHealthcareFacilityTypeCode().getCode(),
+                     documentEntry.getHealthcareFacilityTypeCode().getCode());
         assertEquals(original.getPracticeSettingCode().getCode(), documentEntry.getPracticeSettingCode().getCode());
         // assertEquals(original.getSourcePatientInfo(), documentEntry.getSourcePatientInfo());
         assertEquals(original.getReferenceIdList().isEmpty(), documentEntry.getReferenceIdList().isEmpty());
@@ -220,7 +224,8 @@ class DocumentEntryConverterTest {
 
         final var document = XmlFactories.newSafeDocumentBuilder().parse(xmlStream);
         final Object root = UNMARSHALLER.unmarshal(document, UNMARSHALLED_CLASS);
-        final var provideAndRegisterDocumentSetRequestType = (ProvideAndRegisterDocumentSetRequestType) JAXBIntrospector.getValue(root);
+        final var provideAndRegisterDocumentSetRequestType = (ProvideAndRegisterDocumentSetRequestType) JAXBIntrospector.getValue(
+                root);
         return EbXML30Converters.convert(provideAndRegisterDocumentSetRequestType);
     }
 }

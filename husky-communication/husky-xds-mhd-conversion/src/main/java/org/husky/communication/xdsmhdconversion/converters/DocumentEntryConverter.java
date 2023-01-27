@@ -15,12 +15,11 @@ import org.apache.commons.codec.binary.Hex;
 import org.hl7.fhir.r4.model.*;
 import org.hl7.fhir.r4.model.DocumentReference.DocumentReferenceContentComponent;
 import org.hl7.fhir.r4.model.DocumentReference.DocumentReferenceContextComponent;
-import org.hl7.fhir.r4.model.DocumentReference.DocumentReferenceRelatesToComponent;
 import org.hl7.fhir.r4.model.Enumerations.DocumentReferenceStatus;
 import org.hl7.fhir.r4.model.Identifier.IdentifierUse;
-import org.husky.common.utils.XdsMetadataUtil;
-import org.husky.communication.xdsmhdconversion.utils.ConverterUtils;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.*;
+import org.projecthusky.common.utils.XdsMetadataUtil;
+import org.projecthusky.communication.xdsmhdconversion.utils.ConverterUtils;
 
 import java.net.MalformedURLException;
 import java.net.URI;

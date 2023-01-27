@@ -17,8 +17,8 @@ import org.hl7.fhir.r4.model.Identifier.IdentifierUse;
 import org.hl7.fhir.r4.model.ListResource.ListMode;
 import org.hl7.fhir.r4.model.Organization;
 import org.hl7.fhir.r4.model.ListResource.ListStatus;
-import org.husky.common.utils.XdsMetadataUtil;
-import org.husky.communication.xdsmhdconversion.utils.ConverterUtils;
+import org.projecthusky.common.utils.XdsMetadataUtil;
+import org.projecthusky.communication.xdsmhdconversion.utils.ConverterUtils;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.*;
 
 import java.util.*;
