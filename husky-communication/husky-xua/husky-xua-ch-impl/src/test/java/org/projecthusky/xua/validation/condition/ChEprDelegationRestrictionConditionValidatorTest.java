@@ -11,7 +11,6 @@ package org.projecthusky.xua.validation.condition;
 
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.opensaml.core.config.InitializationService;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
@@ -36,7 +35,6 @@ import static org.projecthusky.xua.validation.ChEprAssertionValidationParameters
  *
  * @author Quentin Ligier
  */
-@Disabled
 class ChEprDelegationRestrictionConditionValidatorTest {
 
     private static final ConditionValidator VALIDATOR = new ChEprDelegationRestrictionConditionValidator();
