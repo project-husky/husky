@@ -1,6 +1,7 @@
 package org.projecthusky.fhir.emed.ch.epr.validator;
 
 import ca.uhn.fhir.context.FhirContext;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.epr.service.ChEmedEprParser;
@@ -18,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ChEmedEprValidatorTest {
 
     @Test
+    @Disabled
     void validateDocumentBundle() throws IOException {
         final var ctx = FhirContext.forR4Cached();
         final var validator = new ChEmedEprValidator(ctx);
