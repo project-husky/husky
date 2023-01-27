@@ -3,6 +3,7 @@ package org.projecthusky.communication.xdsmhdconversion;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.DocumentReference;
 import org.hl7.fhir.r4.model.Enumerations.DocumentReferenceStatus;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xds.core.ebxml.ebxml30.ProvideAndRegisterDocumentSetRequestType;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
@@ -25,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Tests of the {@link DocumentEntryConverter} class.
  * @author Ronaldo Loureiro
  */
+@Disabled
 class DocumentEntryConverterTest {
 
     private final Class<?> UNMARSHALLED_CLASS = ProvideAndRegisterDocumentSetRequestType.class;

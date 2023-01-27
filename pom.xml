@@ -24,7 +24,7 @@
         <slf4j.version>1.7.36</slf4j.version>
         <jaxws-version>2.3.4</jaxws-version>
         <opensaml.version>4.3.0</opensaml.version>
-        <ph-schematron.version>7.0.0</ph-schematron.version>
+        <ph-schematron.version>6.3.4</ph-schematron.version>
         <org.apache.ws.commons.axiom.version>1.3.0</org.apache.ws.commons.axiom.version>
         <apache-httpcomponents>4.5.14</apache-httpcomponents>
         <apache-httpcore>4.4.16</apache-httpcore>
@@ -810,7 +810,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                    <useDefaultManifestFile>true</useDefaultManifestFile>
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
@@ -832,13 +831,6 @@
                         </manifestSections>
                     </archive>
                 </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>jar</goal> <!-- Exclude tests -->
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
