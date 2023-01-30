@@ -12,7 +12,9 @@ package org.projecthusky.fhir.emed.ch.epr.resource.padv;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.Device;
 import org.hl7.fhir.r4.model.DomainResource;
+import org.hl7.fhir.r4.model.Resource;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
@@ -58,27 +60,48 @@ public class ChEmedEprCompositionPadv extends ChEmedEprComposition {
     }
 
     /**
-     * Resolves the authors of the document ({@link ChEmedEprPractitionerRole} | {@link ChCorePatientEpr}).
+     * Resolves the authors of the document ({@link ChEmedEprPractitionerRole}, {@link ChCorePatientEpr} or
+     * {@link Device}).
      *
      * @return the list with the authors of the document.
      * @throws InvalidEmedContentException if no author is specified or if an author is not of type
-     *                                     {@link ChEmedEprPractitionerRole} or {@link ChCorePatientEpr}.
+     *                                     {@link ChEmedEprPractitionerRole}, {@link ChCorePatientEpr} or
+     *                                     {@link Device}.
      */
     @ExpectsValidResource
     public List<DomainResource> resolveAuthors() throws InvalidEmedContentException {
-        if (!this.hasAuthor()) throw new InvalidEmedContentException("The composition requires at least one author.");
+        if (!this.hasAuthor()) {
+            throw new InvalidEmedContentException("The composition requires at least one author.");
+        }
 
         final var authors = new ArrayList<DomainResource>();
 
         for (final var reference : this.getAuthor()) {
             final var resource = reference.getResource();
-            if (resource instanceof ChEmedEprPractitionerRole || resource instanceof ChCorePatientEpr) {
+            if (resource instanceof ChEmedEprPractitionerRole
+                    || resource instanceof ChCorePatientEpr
+                    || resource instanceof Device) {
                 authors.add((DomainResource) resource);
             } else {
                 throw new InvalidEmedContentException("An author is invalid.");
             }
         }
         return authors;
+    }
+
+    /**
+     * Resolves the main human author of the document.
+     *
+     * @return the main human author.
+     * @throws InvalidEmedContentException if no author is specified or if an author is not of type
+     *                                     {@link ChEmedEprPractitionerRole} or {@link ChCorePatientEpr}.
+     */
+    @ExpectsValidResource
+    public Resource resolveMainHumanAuthor() {
+        return this.resolveAuthors().stream()
+                .filter(author -> author instanceof ChEmedEprPractitionerRole || author instanceof ChCorePatientEpr)
+                .findFirst()
+                .orElseThrow(() -> new InvalidEmedContentException(""));
     }
 
     /**
