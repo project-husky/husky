@@ -54,14 +54,17 @@ public class ChCoreAddressAdapter {
 
     /**
      * Returns the underlying address.
+     *
+     * @return the address.
      */
     public Address getAddress() {
         return this.address;
     }
 
     /**
-     * Returns the city BFS or {@code null} if it's not present.
+     * Returns the city BFS or {@code null} if it is not present.
      *
+     * @return the city BFS or {@code null}.
      * @see <a href="https://www.bfs.admin.ch/bfs/de/home/grundlagen/agvch.html">BFS-Nummer</a>
      * @see <a
      * href="https://www.bfs.admin.ch/bfs/fr/home/bases-statistiques/repertoire-officiel-communes-suisse.html">Numéro
@@ -77,6 +80,7 @@ public class ChCoreAddressAdapter {
     /**
      * Sets the city BFS.
      *
+     * @param bfs The city BFS.
      * @see <a href="https://www.bfs.admin.ch/bfs/de/home/grundlagen/agvch.html">BFS-Nummer</a>
      * @see <a
      * href="https://www.bfs.admin.ch/bfs/fr/home/bases-statistiques/repertoire-officiel-communes-suisse.html">Numéro
@@ -90,6 +94,8 @@ public class ChCoreAddressAdapter {
 
     /**
      * Gets the country code (ISO Country Alpha-2 or ISO Country Alpha-3 code), or {@code null}.
+     *
+     * @return the country code or {@code null}.
      */
     @Nullable
     public String getCountryCode() {
@@ -98,6 +104,8 @@ public class ChCoreAddressAdapter {
 
     /**
      * Sets the country code (ISO Country Alpha-2 or ISO Country Alpha-3 code).
+     *
+     * @param countryCode The country code (ISO Country Alpha-2 or ISO Country Alpha-3 code).
      */
     public void setCountryCode(@Nullable final String countryCode) {
         this.address.getCountryElement().addExtension(COUNTRY_CODE_EXTENSION, new StringType(countryCode));
@@ -105,6 +113,8 @@ public class ChCoreAddressAdapter {
 
     /**
      * Returns the list of address lines.
+     *
+     * @return a list of address line adapters.
      */
     public List<AddressLineAdapter> getLines() {
         return this.address.getLine().stream().map(AddressLineAdapter::new).toList();
@@ -112,6 +122,8 @@ public class ChCoreAddressAdapter {
 
     /**
      * Adds an address line.
+     *
+     * @param addressLineAdapter The address line adapter.
      */
     public void addLine(final AddressLineAdapter addressLineAdapter) {
         this.address.getLine().add(addressLineAdapter.getLine());

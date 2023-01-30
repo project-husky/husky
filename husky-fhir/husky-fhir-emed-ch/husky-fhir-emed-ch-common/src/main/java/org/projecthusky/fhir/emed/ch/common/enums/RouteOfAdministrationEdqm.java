@@ -1572,7 +1572,7 @@ public enum RouteOfAdministrationEdqm implements ValueSetEnumInterface, FhirValu
     /**
      * Gets the Enum with a given FHIR Coding.
      *
-     * @param code The FHIR Coding.
+     * @param coding The FHIR Coding.
      * @return the enum value found or {@code null}.
      */
     @Nullable
@@ -1588,7 +1588,7 @@ public enum RouteOfAdministrationEdqm implements ValueSetEnumInterface, FhirValu
     /**
      * Checks if a given FHIR Coding is in this value set.
      *
-     * @param codeValue The FHIR Coding.
+     * @param coding The FHIR Coding.
      * @return {@code true} if the value is found in this value set, {@code false} otherwise.
      */
     public static boolean isInValueSet(@Nullable final Coding coding) {

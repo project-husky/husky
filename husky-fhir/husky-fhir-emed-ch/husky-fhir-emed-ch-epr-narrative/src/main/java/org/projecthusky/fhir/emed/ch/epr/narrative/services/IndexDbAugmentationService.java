@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 /**
- * Adds information to a {@link NarrativeTreatmentItem} using the INDEX database
+ * Adds information to a treatment using the INDEX database
  *
  * @author Ronaldo Loureiro
  */
@@ -37,22 +37,22 @@ public class IndexDbAugmentationService {
     /**
      * Adds information to the item using the INDEX database.
      *
-     * @param item the narrative item to be improved.
-     *             <p>
-     *             public void augment(final NarrativeTreatmentItem item, final NarrativeLanguage lang) { if
-     *             (item.getCodeType() == ProductCodeType.GTIN) { final var gtin = item.getProductCode();
-     *             <p>
-     *             if (item.getProductIngredients().size() == 0) { final var activeIngredients =
-     *             this.getActiveIngredients(gtin); item.setProductIngredients(activeIngredients); }
-     *             <p>
-     *             this.getProductName(gtin).ifPresent(item::setProductName);
-     *             <p>
-     *             this.getImage(String.format("https://index.hcisolutions.ch/files/pics/%s_PIF_F.jpg?key=gtin", gtin))
-     *             .ifPresent(item::setProductImageFront);
-     *             this.getImage(String.format("https://index.hcisolutions.ch/files/pics/%s_PIB_F.jpg?key=gtin", gtin))
-     *             .ifPresent(item::setProductImageBack); } }
-     *             <p>
-     *             /** Gets the database connection.
+     * <p>
+     * public void augment(final NarrativeTreatmentItem item, final NarrativeLanguage lang) { if (item.getCodeType() ==
+     * ProductCodeType.GTIN) { final var gtin = item.getProductCode();
+     * <p>
+     * if (item.getProductIngredients().size() == 0) { final var activeIngredients = this.getActiveIngredients(gtin);
+     * item.setProductIngredients(activeIngredients); }
+     * <p>
+     * this.getProductName(gtin).ifPresent(item::setProductName);
+     * <p>
+     * this.getImage(String.format("https://index.hcisolutions.ch/files/pics/%s_PIF_F.jpg?key=gtin", gtin))
+     * .ifPresent(item::setProductImageFront);
+     * this.getImage(String.format("https://index.hcisolutions.ch/files/pics/%s_PIB_F.jpg?key=gtin", gtin))
+     * .ifPresent(item::setProductImageBack); } }
+     * <p>
+     * /** Gets the database connection.
+     *
      * @return the database connection.
      * @throws SQLException if a database access error occurs or the url is null
      */
