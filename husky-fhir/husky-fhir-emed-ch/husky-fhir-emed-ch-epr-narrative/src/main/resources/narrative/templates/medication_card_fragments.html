@@ -12,7 +12,7 @@
     <tr>
         <td rowspan="2">Nom du médicament</td>
         <td colspan="4">Dosage</td>
-        <td rowspan="2">Raison</td>
+        <td rowspan="2">Commentaire</td>
         <td rowspan="2">Voie et localisation</td>
     </tr>
     <tr>
@@ -34,9 +34,12 @@
 
 <th:block th:fragment="table-line(medStmt, dosage, lang)">
     <tr>
+        <!-- Nom du médicament -->
         <td>
             [[${medStmt.resolveMedication().resolveMedicationName()}]]
         </td>
+
+        <!-- Dosage -->
         <th:block th:if="${dosage.hasIntakes()}">
             <td th:insert="~{datatypes :: dosage-intake(${dosage.getMornIntake()}, ${lang})}"/>
             <td th:insert="~{datatypes :: dosage-intake(${dosage.getNoonIntake()}, ${lang})}"/>
@@ -46,12 +49,17 @@
         <th:block th:if="${not dosage.hasIntakes()}">
             <td colspan="4" th:text="${dosage.narrative()}"/>
         </th:block>
+
+        <!-- Commentaire (raison et instructions au patient -->
         <td>
+            <th:block th:if="${dosage.hasPatientInstructions()}"
+                      th:text="${dosage.patientInstructions()}"/>
+            <th:block th:if="${dosage.hasPatientInstructions() && medStmt.hasTreatmentReason()}"><br/></th:block>
             <th:block th:if="${medStmt.hasTreatmentReason()}"
                       th:text="${medStmt.getTreatmentReason()}"/>
-            <th:block th:if="${not medStmt.hasTreatmentReason()}"
-                      th:text="'—'"/>
         </td>
+
+        <!-- Voie et localisation -->
         <td>
             <th:block th:if="${dosage.hasRouteOfAdministration()}"
                       th:text="${fopase.getMessage(dosage.routeOfAdministration(), lang)}"/>
