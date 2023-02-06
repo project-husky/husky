@@ -60,10 +60,11 @@ import static org.projecthusky.xua.validation.ChEprAssertionValidationParameters
  *
  * <p>The calling application needs to initiate the SAML library by calling {@link InitializationService#initialize()}.
  *
- * <p>Supports the following {@link ValidationContext} static parameters:
+ * <p>Supports all static validation parameters (see {@link SAML2AssertionValidationParameters)}. The following are
+ * recommended:
  * <ul>
  *     <li>{@link SAML2AssertionValidationParameters#CLOCK_SKEW}: Optional. If not present the default clock skew of
- *     {@link Duration#ZERO} will be used.
+ *     {@link Duration#ZERO} will be used. The SAML 2.0 specification recommend supporting a clock skew.
  *     <li>{@link SAML2AssertionValidationParameters#COND_VALID_AUDIENCES}: Optional. The set of allowed audiences.
  * </ul>
  *
@@ -91,7 +92,7 @@ public class ChEprAssertionValidator {
      * Constructor.
      *
      * @param oneTimeUseConditionExpires The time for disposal of tracked assertion from the replay cache. If
-     *                                   {@code null}, the OneTimeUseCondition is not processed.
+     *                                   {@code null}, the OneTimeUseCondition is not enforced.
      * @param signatureTrustEngine       The trust engine to use to validate signatures. This can be an
      *                                   {@link ExplicitKeySignatureTrustEngine} or any other implementation. A
      *                                   {@link KeyInfoCredentialResolver} is not needed, as we don't expect a KeyInfo
