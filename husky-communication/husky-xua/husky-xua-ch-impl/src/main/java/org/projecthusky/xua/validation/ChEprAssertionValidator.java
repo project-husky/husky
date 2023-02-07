@@ -60,7 +60,7 @@ import static org.projecthusky.xua.validation.ChEprAssertionValidationParameters
  *
  * <p>The calling application needs to initiate the SAML library by calling {@link InitializationService#initialize()}.
  *
- * <p>Supports all static validation parameters (see {@link SAML2AssertionValidationParameters)}. The following are
+ * <p>Supports all static validation parameters (see {@link SAML2AssertionValidationParameters}). The following are
  * recommended:
  * <ul>
  *     <li>{@link SAML2AssertionValidationParameters#CLOCK_SKEW}: Optional. If not present the default clock skew of
