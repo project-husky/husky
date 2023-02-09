@@ -29,7 +29,7 @@ public class ChEmedEprMedicationDispensePml extends ChEmedEprMedicationDispense 
      * (MedicationDispense.performer.actor).
      */
     @Nullable
-    @Child(name = "auhtorDocument")
+    @Child(name = "authorDocument")
     @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author")
     protected Reference authorDocument;
 
@@ -55,18 +55,21 @@ public class ChEmedEprMedicationDispensePml extends ChEmedEprMedicationDispense 
      * Resolves the author and her/his organization of the medical decision.
      *
      * @return the author and her/his organization of the medical decision.
-     * @throws InvalidEmedContentException if the author and her/his organization of the medical decision are missing or aren't of the right type.
+     * @throws InvalidEmedContentException if the author and her/his organization of the medical decision are missing or
+     *                                     aren't of the right type.
      */
     @ExpectsValidResource
     public ChEmedEprPractitionerRole resolvePerformerActor() throws InvalidEmedContentException {
         if (!this.hasPerformer()) {
-            throw new InvalidEmedContentException("The the author and her/his organization of the medical decision is missing.");
+            throw new InvalidEmedContentException(
+                    "The the author and her/his organization of the medical decision is missing.");
         }
         final var resource = this.getPerformerFirstRep().getActor().getResource();
         if (resource instanceof ChEmedEprPractitionerRole chEmedEprPractitionerRole) {
             return chEmedEprPractitionerRole;
         }
-        throw new InvalidEmedContentException("The author and her/his organization of the medical decision resource isn't of the right type.");
+        throw new InvalidEmedContentException(
+                "The author and her/his organization of the medical decision resource isn't of the right type.");
     }
 
     /**
