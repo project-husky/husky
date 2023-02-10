@@ -18,6 +18,9 @@ import java.util.regex.Pattern;
 @DefaultQualifier(value = NonNull.class, locations = {TypeUseLocation.PARAMETER, TypeUseLocation.RETURN})
 public class Uuids {
 
+    /**
+     * The prefix for URN encoding.
+     */
     public static final String URN_PREFIX = "urn:uuid:";
 
     /**
@@ -55,6 +58,9 @@ public class Uuids {
         return UUID.randomUUID().toString();
     }
 
+    /**
+     * Parses a URN-encoded UUID.
+     */
     public static UUID parseUrnEncoded(final String urn) {
         return UUID.fromString(normalize(urn));
     }

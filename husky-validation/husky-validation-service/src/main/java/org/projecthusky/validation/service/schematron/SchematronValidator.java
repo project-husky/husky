@@ -71,8 +71,8 @@ public class SchematronValidator {
     /**
      * Constructs a Schematron validator from a Schematron file ({@code .sch}).
      *
-     * <p>If you're often using this method, you should consider transforming the Schematron file with the
-     * {@link SchematronTransformer} and storing the result as it's an expensive operation.
+     * <p>If you are often using this method, you should consider transforming the Schematron file with the
+     * {@link SchematronTransformer} and storing the result as it is an expensive operation.
      *
      * @param schematronFile The Schematron file.
      * @return the constructed Schematron validator.
@@ -87,8 +87,8 @@ public class SchematronValidator {
     /**
      * Constructs a Schematron validator from a Schematron content ({@code .sch}).
      *
-     * <p>If you're often using this method, you should consider transforming the Schematron content with the
-     * {@link SchematronTransformer} and storing the result as it's an expensive operation.
+     * <p>If you are often using this method, you should consider transforming the Schematron content with the
+     * {@link SchematronTransformer} and storing the result as it is an expensive operation.
      *
      * @param schematronContent The Schematron content.
      * @return the constructed Schematron validator.
