@@ -95,6 +95,7 @@ public class ChEprSubjectConfirmationBearerValidator implements SubjectConfirmat
             }
 
             String technicalUserUniqueId = (String) context.getDynamicParameters().get(CH_EPR_TCU_ID);
+            // May or may not be URN-encoded, see https://github.com/ehealthsuisse/EPD-by-example/issues/14
             if (technicalUserUniqueId == null || !technicalUserUniqueId.equals(ValidationUtils.trimOidUrn(nameId.getValue()))) {
                 context.setValidationFailureMessage(
                         "The technical user unique ID in the SubjectConfirmation is different from the one in the " +

@@ -95,6 +95,7 @@ public class ChEprDelegationRestrictionConditionValidator implements ConditionVa
                                                             "technical user unique ID");
                 return ValidationResult.INVALID;
             }
+            // May or may not be URN-encoded, see https://github.com/ehealthsuisse/EPD-by-example/issues/14
             context.getDynamicParameters().put(CH_EPR_TCU_ID, ValidationUtils.trimOidUrn(nameId.getValue()));
             return ValidationResult.VALID;
         }
