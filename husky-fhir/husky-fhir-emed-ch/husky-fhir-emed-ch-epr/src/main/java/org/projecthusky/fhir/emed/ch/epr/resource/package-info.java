@@ -14,6 +14,9 @@
  * <p>
  * It assumes {@code Configuration.status = 0}, i.e. 'auto-create' mode when accessing attributes that have not been
  * set.
+ * <p>
+ * Some resources are not redefined here (such as CHEMEDEPRPatient, CHEMEDEPROrganization and others) because there
+ * would be no new code to write for them.
  *
  * @author Quentin Ligier
  **/

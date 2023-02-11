@@ -2,23 +2,24 @@ package org.projecthusky.fhir.emed.ch.epr.resource.extension;
 
 import ca.uhn.fhir.model.api.annotation.Block;
 import ca.uhn.fhir.model.api.annotation.Child;
+import ca.uhn.fhir.model.api.annotation.Extension;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.BackboneElement;
 import org.hl7.fhir.r4.model.DateType;
-import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.Reference;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
 
-import java.io.Serial;
 import java.util.Date;
 
 /**
  * The HAPI custom structure for CH-EXT-EPR DataEnterer.
- * Extension to define the information about the person and organisation that entered data and
- * the time of the data input, equivalent to the dataEnterer from a CDA document.
- * URL : <a href="http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-dataenterer">...</a>
+ * <p>
+ * Extension to define the information about the person and organization that entered data and the time of the data
+ * input, equivalent to the dataEnterer from a CDA document.
+ * <p>
+ * URL : <a href="http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-dataenterer">Extension: EPR Data Enterer</a>
  *
  * @author Ronaldo Loureiro
  */
@@ -28,8 +29,9 @@ public class ChExtEprDataEnterer extends BackboneElement {
     /**
      * Information about the person and organization that entered data
      */
+    @Nullable
     @Child(name = "enterer", min = 1)
-    @ca.uhn.fhir.model.api.annotation.Extension(url = "enterer", definedLocally = false)
+    @Extension(url = "enterer", definedLocally = false)
     protected Reference enterer;
 
     /**
@@ -37,7 +39,7 @@ public class ChExtEprDataEnterer extends BackboneElement {
      */
     @Nullable
     @Child(name = "timestamp")
-    @ca.uhn.fhir.model.api.annotation.Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time", definedLocally = false)
+    @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time", definedLocally = false)
     protected DateType timestamp;
 
     /**
@@ -63,7 +65,8 @@ public class ChExtEprDataEnterer extends BackboneElement {
      */
     @ExpectsValidResource
     public ChEmedEprPractitionerRole resolveEnterer() throws InvalidEmedContentException {
-        if (!this.hasEnterer()) throw new InvalidEmedContentException("Information about the person and organization that entered data is missing.");
+        if (!this.hasEnterer()) throw new InvalidEmedContentException(
+                "Information about the person and organization that entered data is missing.");
         final var resource = this.enterer.getResource();
         if (resource instanceof ChEmedEprPractitionerRole chPractitionerRole) {
             return chPractitionerRole;
@@ -83,7 +86,7 @@ public class ChExtEprDataEnterer extends BackboneElement {
     }
 
     /**
-     * Sets the data entered resource. If the data entered resource already exists, it's replaced.
+     * Sets the data entered resource. If the data entered resource already exists, it is replaced.
      *
      * @param practitionerRole the person and organization that entered data.
      * @return this.

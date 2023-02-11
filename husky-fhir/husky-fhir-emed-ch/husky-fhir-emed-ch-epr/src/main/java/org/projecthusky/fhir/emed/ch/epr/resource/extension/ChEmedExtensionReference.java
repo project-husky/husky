@@ -4,6 +4,7 @@ import ca.uhn.fhir.model.api.annotation.Block;
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import ca.uhn.fhir.util.ElementUtil;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.BackboneElement;
 import org.hl7.fhir.r4.model.Identifier;
 import org.projecthusky.common.utils.datatypes.Uuids;
@@ -26,6 +27,7 @@ public abstract class ChEmedExtensionReference extends BackboneElement {
     /**
      * ID of the document.
      */
+    @Nullable
     @Child(name = "extension:id", min = 1)
     @Extension(url = "id", definedLocally = false)
     protected Identifier extensionId;
@@ -33,6 +35,7 @@ public abstract class ChEmedExtensionReference extends BackboneElement {
     /**
      * ID of the external document.
      */
+    @Nullable
     @Child(name = "extension:externalDocumentId", min = 1)
     @Extension(url = "externalDocumentId", definedLocally = false)
     protected Identifier externalDocumentId;
@@ -97,7 +100,7 @@ public abstract class ChEmedExtensionReference extends BackboneElement {
     }
 
     /**
-     * Gets the extension id element. If it doesn't exist, it's created.
+     * Gets the extension id element. If it doesn't exist, it is created.
      *
      * @return the extension id element.
      */
@@ -109,7 +112,7 @@ public abstract class ChEmedExtensionReference extends BackboneElement {
     }
 
     /**
-     * Gets the external document id element. If it doesn't exist, it's created.
+     * Gets the external document id element. If it doesn't exist, it is created.
      *
      * @return the external document id element.
      */
@@ -121,7 +124,7 @@ public abstract class ChEmedExtensionReference extends BackboneElement {
     }
 
     /**
-     * Sets the ID of the document, if it's already exists, it's replaced.
+     * Sets the ID of the document, if it already exists, it is replaced.
      *
      * @param extensionId the ID of the document.
      * @return this.
@@ -136,7 +139,7 @@ public abstract class ChEmedExtensionReference extends BackboneElement {
     }
 
     /**
-     * Sets the ID of the external document, if it's already exists, it's replaced.
+     * Sets the ID of the external document, if it already exists, it is replaced.
      *
      * @param externalDocumentId the ID of the external document.
      * @return this.
