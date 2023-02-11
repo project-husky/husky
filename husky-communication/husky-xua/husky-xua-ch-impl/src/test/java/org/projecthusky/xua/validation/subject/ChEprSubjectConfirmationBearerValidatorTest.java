@@ -49,7 +49,7 @@ class ChEprSubjectConfirmationBearerValidatorTest {
     }
 
     /**
-     * The context is dirtied by each call to validate(), recreate it each time.
+     * Each call to validate() dirties the context, recreate it each time.
      */
     /* simple test function to compare results for various roles, no use reducing complexity */
     @Test
@@ -245,6 +245,21 @@ class ChEprSubjectConfirmationBearerValidatorTest {
         context.getDynamicParameters().put(CH_EPR_ASSISTANT_GLN, "2000000090108");
         result = VALIDATOR.validate(subjectConfirmation, null, context);
         assertEquals(ValidationResult.INVALID, result);
+
+        // Valid
+        subjectConfirmation = this.unmarshal(
+                """
+                               <saml2:NameID Format="urn:oasis:names:tc:SAML:2.0:nameid-format:persistent" NameQualifier="urn:gs1:gln">2000000090108</saml2:NameID>
+                               <saml2:SubjectConfirmationData>
+                                   <saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:subject-id" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+                                       <saml2:AttributeValue xsi:type="xsd:string">Dagmar Musterassistent</saml2:AttributeValue>
+                                   </saml2:Attribute>
+                               </saml2:SubjectConfirmationData>
+                        """);
+        context = this.getContext(Role.ASSISTANT);
+        context.getDynamicParameters().put(CH_EPR_ASSISTANT_GLN, "2000000090108");
+        result = VALIDATOR.validate(subjectConfirmation, null, context);
+        assertEquals(ValidationResult.VALID, result);
     }
 
     @Test
@@ -269,7 +284,7 @@ class ChEprSubjectConfirmationBearerValidatorTest {
         result = VALIDATOR.validate(subjectConfirmation, null, context);
         assertEquals(ValidationResult.INVALID, result);
 
-        // Wrong ID
+        // Wrong identifier
         subjectConfirmation = this.unmarshal(
                 """
                                <saml2:NameID Format="urn:oasis:names:tc:SAML:2.0:nameid-format:persistent" NameQualifier="urn:e-health-suisse:technical-user-id">urn:oid:1.3.6.1.4.1.343</saml2:NameID>
@@ -278,6 +293,26 @@ class ChEprSubjectConfirmationBearerValidatorTest {
         context.getDynamicParameters().put(CH_EPR_TCU_ID, "1.2.3");
         result = VALIDATOR.validate(subjectConfirmation, null, context);
         assertEquals(ValidationResult.INVALID, result);
+
+        // Valid, URN-encoded identifier
+        subjectConfirmation = this.unmarshal(
+                """
+                               <saml2:NameID Format="urn:oasis:names:tc:SAML:2.0:nameid-format:persistent" NameQualifier="urn:e-health-suisse:technical-user-id">urn:oid:1.3.6.1.4.1.343</saml2:NameID>
+                        """);
+        context = this.getContext(Role.TECHNICAL_USER);
+        context.getDynamicParameters().put(CH_EPR_TCU_ID, "1.3.6.1.4.1.343");
+        result = VALIDATOR.validate(subjectConfirmation, null, context);
+        assertEquals(ValidationResult.VALID, result);
+
+        // Valid, non-URN-encoded identifier
+        subjectConfirmation = this.unmarshal(
+                """
+                               <saml2:NameID Format="urn:oasis:names:tc:SAML:2.0:nameid-format:persistent" NameQualifier="urn:e-health-suisse:technical-user-id">1.3.6.1.4.1.343</saml2:NameID>
+                        """);
+        context = this.getContext(Role.TECHNICAL_USER);
+        context.getDynamicParameters().put(CH_EPR_TCU_ID, "1.3.6.1.4.1.343");
+        result = VALIDATOR.validate(subjectConfirmation, null, context);
+        assertEquals(ValidationResult.VALID, result);
     }
 
     private ValidationContext getContext(final Role role) {
