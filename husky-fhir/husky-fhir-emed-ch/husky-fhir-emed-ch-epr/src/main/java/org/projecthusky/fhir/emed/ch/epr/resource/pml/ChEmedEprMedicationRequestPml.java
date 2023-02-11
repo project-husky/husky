@@ -2,6 +2,7 @@ package org.projecthusky.fhir.emed.ch.epr.resource.pml;
 
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
+import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.DomainResource;
@@ -21,6 +22,7 @@ import java.util.UUID;
  *
  * @author Ronaldo Loureiro
  **/
+@ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-medicationrequest-list")
 public class ChEmedEprMedicationRequestPml extends ChEmedEprMedicationRequest {
     /**
      * Author of the original document if different from the author of the medical decision.

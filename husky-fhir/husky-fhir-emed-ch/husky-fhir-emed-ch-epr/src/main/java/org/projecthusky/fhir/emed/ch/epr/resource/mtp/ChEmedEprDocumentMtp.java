@@ -25,7 +25,7 @@ import java.util.UUID;
  *
  * @author Quentin Ligier
  **/
-@ResourceDef(profile = "http://example.com/StructureDefinition/mtpDoc")
+@ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-document-medicationtreatmentplan")
 public class ChEmedEprDocumentMtp extends ChEmedEprDocument {
     @Serial
     private static final long serialVersionUID = 1095863629301164639L;

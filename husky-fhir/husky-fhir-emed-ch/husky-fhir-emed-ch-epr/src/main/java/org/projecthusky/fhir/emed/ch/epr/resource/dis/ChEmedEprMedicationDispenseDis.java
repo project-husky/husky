@@ -1,5 +1,6 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.dis;
 
+import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationDispense;
 
 import java.time.Instant;
@@ -10,6 +11,7 @@ import java.util.UUID;
  *
  * @author Ronaldo Loureiro
  **/
+@ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-medicationdispense")
 public class ChEmedEprMedicationDispenseDis extends ChEmedEprMedicationDispense {
 
     /**

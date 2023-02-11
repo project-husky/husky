@@ -10,6 +10,7 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.resource;
 
+import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.hl7.fhir.r4.model.PractitionerRole;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
@@ -20,6 +21,7 @@ import org.projecthusky.fhir.emed.ch.common.resource.ChEmedOrganization;
  *
  * @author Quentin Ligier
  **/
+@ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-practitionerrole")
 public class ChEmedEprPractitionerRole extends PractitionerRole {
 
     /**

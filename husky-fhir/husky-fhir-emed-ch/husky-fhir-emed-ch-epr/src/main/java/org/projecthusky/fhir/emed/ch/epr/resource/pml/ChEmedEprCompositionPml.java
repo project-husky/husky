@@ -30,7 +30,7 @@ import java.util.UUID;
  *
  * @author Quentin Ligier
  **/
-@ResourceDef
+@ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-composition-medicationlist")
 public class ChEmedEprCompositionPml extends ChEmedEprComposition {
 
     /**

@@ -10,6 +10,7 @@
  */
 package org.projecthusky.fhir.emed.ch.common.resource;
 
+import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Address;
 import org.hl7.fhir.r4.model.Identifier;
@@ -24,7 +25,7 @@ import org.projecthusky.fhir.emed.ch.common.util.Identifiers;
  *
  * @author Quentin Ligier
  **/
-
+@ResourceDef(profile = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-organization")
 public class ChEmedOrganization extends Organization {
 
     /**

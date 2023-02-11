@@ -10,6 +10,7 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.resource;
 
+import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
@@ -30,6 +31,7 @@ import java.util.List;
  *
  * @author Quentin Ligier
  **/
+@ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-medication")
 public class ChEmedEprMedication extends Medication {
 
     /**

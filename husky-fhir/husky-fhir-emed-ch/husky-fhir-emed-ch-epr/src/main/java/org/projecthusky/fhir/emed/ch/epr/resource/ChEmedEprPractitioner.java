@@ -10,6 +10,7 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.resource;
 
+import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.hl7.fhir.r4.model.Address;
 import org.hl7.fhir.r4.model.HumanName;
 import org.hl7.fhir.r4.model.Identifier;
@@ -26,6 +27,7 @@ import java.util.List;
  *
  * @author Quentin Ligier
  **/
+@ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-practitioner")
 public class ChEmedEprPractitioner extends Practitioner {
 
     /**

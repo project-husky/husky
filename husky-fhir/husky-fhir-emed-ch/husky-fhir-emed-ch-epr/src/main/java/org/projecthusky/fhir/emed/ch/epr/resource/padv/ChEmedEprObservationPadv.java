@@ -1,5 +1,6 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.padv;
 
+import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedPadvEntryType;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprObservation;
 
@@ -10,6 +11,7 @@ import java.util.UUID;
  *
  * @author Ronaldo Loureiro
  **/
+@ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-observation")
 public class ChEmedEprObservationPadv extends ChEmedEprObservation {
 
     /**

@@ -12,6 +12,7 @@ package org.projecthusky.fhir.emed.ch.epr.resource.mtp;
 
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
+import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
@@ -26,6 +27,7 @@ import java.util.UUID;
  *
  * @author Quentin Ligier
  **/
+@ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-medicationstatement-treatmentplan")
 public class ChEmedEprMedicationStatementMtp extends ChEmedEprMedicationStatement {
 
     /**

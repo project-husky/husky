@@ -27,7 +27,7 @@ import java.util.UUID;
  *
  * @author Quentin Ligier
  **/
-@ResourceDef(profile = "http://example.com/StructureDefinition/pmlcDoc")
+@ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-document-medicationcard")
 public class ChEmedEprDocumentPmlc extends ChEmedEprDocument {
     @Serial
     private static final long serialVersionUID = 9089732845195396799L;
