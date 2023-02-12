@@ -16,6 +16,7 @@ import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtDispense;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtPrescription;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprMedicationStatementMtp;
+import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprMedicationRequestPre;
 import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 import java.time.Instant;
@@ -32,7 +33,7 @@ import java.util.stream.Stream;
 public abstract class ChEmedEprObservation extends Observation implements ChEmedEprEntry {
 
     /**
-     * Reference to the medication treatment plan
+     * Reference to the medication treatment plan.
      */
     @Nullable
     @Child(name = "treatmentPlan")
@@ -40,7 +41,7 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
     protected ChEmedExtTreatmentPlan treatmentPlan;
 
     /**
-     * Reference to the medication prescription
+     * Reference to the medication prescription.
      */
     @Nullable
     @Child(name = "prescription")
@@ -48,7 +49,7 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
     protected ChEmedExtPrescription prescription;
 
     /**
-     * Reference to the medication dispense
+     * Reference to the medication dispense.
      */
     @Nullable
     @Child(name = "dispense")
@@ -56,12 +57,20 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
     protected ChEmedExtDispense dispense;
 
     /**
-     * Reference to the changed medication statement
+     * Reference to the changed medication statement.
      */
     @Nullable
     @Child(name = "medicationStatementChanged")
     @Extension(url = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-medicationstatement-changed", definedLocally = false)
     protected Reference medicationStatementChanged;
+
+    /**
+     * Reference to the changed medication request.
+     */
+    @Nullable
+    @Child(name = "medicationRequestChanged")
+    @Extension(url = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-medicationrequest-changed", definedLocally = false)
+    protected Reference medicationRequestChanged;
 
     /**
      * Empty constructor for the parser.
@@ -110,8 +119,9 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
     @Nullable
     @ExpectsValidResource
     public ChEmedEprMedicationStatementMtp resolveMedicationStatementChanged() throws InvalidEmedContentException {
-        if (this.medicationStatementChanged == null) return null;
-
+        if (!this.hasMedicationStatementChanged()) {
+            return null;
+        }
         final var resource = this.medicationStatementChanged.getResource();
         if (resource instanceof ChEmedEprMedicationStatementMtp chEmedEprMedicationStatementMtp) {
             return chEmedEprMedicationStatementMtp;
@@ -120,19 +130,40 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
     }
 
     /**
-     * Resolves the padv entry type.
+     * Resolves the changed medication request.
      *
-     * @return the padv entry type.
-     * @throws InvalidEmedContentException if the padv entry type is missing or invalid.
+     * @return the changed medication request or {@code null}.
+     * @throws InvalidEmedContentException if the changed medication request isn't of the right type.
+     */
+    @Nullable
+    @ExpectsValidResource
+    public ChEmedEprMedicationRequestPre resolveMedicationRequestChanged() throws InvalidEmedContentException {
+        if (!this.hasMedicationRequestChanged()) {
+            return null;
+        }
+        final var resource = this.medicationRequestChanged.getResource();
+        if (resource instanceof ChEmedEprMedicationRequestPre chEmedEprMedicationRequestPre) {
+            return chEmedEprMedicationRequestPre;
+        }
+        throw new InvalidEmedContentException("The medication request resource isn't of the right type.");
+    }
+
+    /**
+     * Resolves the PADV entry type.
+     *
+     * @return the PADV entry type.
+     * @throws InvalidEmedContentException if the PADV entry type is missing or invalid.
      */
     @ExpectsValidResource
     public EmedPadvEntryType resolvePadvEntryType() throws InvalidEmedContentException {
-        if (!this.hasCode()) throw new InvalidEmedContentException("The padv entry type is missing.");
+        if (!this.hasCode()) {
+            throw new InvalidEmedContentException("The PADV entry type is missing.");
+        }
         final var emedPadvEntryType = EmedPadvEntryType.getEnum(this.getCode().getCodingFirstRep());
         if (emedPadvEntryType != null) {
             return emedPadvEntryType;
         }
-        throw new InvalidEmedContentException("The padv entry type is invalid.");
+        throw new InvalidEmedContentException("The PADV entry type is invalid.");
     }
 
     /**
@@ -143,8 +174,9 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
      */
     @ExpectsValidResource
     public Instant resolveIssued() throws InvalidEmedContentException {
-        if (!this.hasIssued())
+        if (!this.hasIssued()) {
             throw new InvalidEmedContentException("The date/time this version was made available is missing.");
+        }
         return this.getIssued().toInstant();
     }
 
@@ -156,7 +188,9 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
      */
     @ExpectsValidResource
     public String resolveNote() throws InvalidEmedContentException {
-        if (!this.hasNote()) throw new InvalidEmedContentException("The note is missing.");
+        if (!this.hasNote()) {
+            throw new InvalidEmedContentException("The note is missing.");
+        }
         return this.getNoteFirstRep().getText();
     }
 
@@ -226,7 +260,7 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
     }
 
     /**
-     * Gets the treatment plan element. If it doesn't exist, it's created.
+     * Gets the treatment plan element. If it doesn't exist, it is created.
      *
      * @return the treatment plan element.
      */
@@ -238,7 +272,7 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
     }
 
     /**
-     * Gets the prescription element. If it doesn't exist, it's created.
+     * Gets the prescription element. If it doesn't exist, it is created.
      *
      * @return the prescription element.
      */
@@ -250,7 +284,7 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
     }
 
     /**
-     * Gets the medication dispense element. If it doesn't exist, it's created.
+     * Gets the medication dispense element. If it doesn't exist, it is created.
      *
      * @return the medication dispense element.
      */
@@ -262,7 +296,7 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
     }
 
     /**
-     * Gets the reference to the changed medication statement. If it doesn't exist, it's created.
+     * Gets the reference to the changed medication statement. If it doesn't exist, it is created.
      *
      * @return the reference to the changed medication statement.
      */
@@ -271,6 +305,18 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
             this.medicationStatementChanged = new Reference();
         }
         return this.medicationStatementChanged;
+    }
+
+    /**
+     * Gets the reference to the changed medication request. If it doesn't exist, it is created.
+     *
+     * @return the reference to the changed medication request.
+     */
+    public Reference getMedicationRequestChangedReference() {
+        if (this.medicationRequestChanged == null) {
+            this.medicationRequestChanged = new Reference();
+        }
+        return this.medicationRequestChanged;
     }
 
     /**
@@ -318,9 +364,20 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
     }
 
     /**
-     * Sets the padv entry type.
+     * Sets the changed medication request.
      *
-     * @param padvEntryType the padv entry type.
+     * @param medicationRequest the changed medication request.
+     * @return this.
+     */
+    public ChEmedEprObservation setMedicationRequestChanged(final ChEmedEprMedicationRequestPre medicationRequest) {
+        this.medicationRequestChanged = References.createReference(medicationRequest);
+        return this;
+    }
+
+    /**
+     * Sets the PADV entry type.
+     *
+     * @param padvEntryType the PADV entry type.
      * @return this.
      */
     public ChEmedEprObservation setPadvEntryType(final EmedPadvEntryType padvEntryType) {
@@ -340,7 +397,7 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
     }
 
     /**
-     * Sets the note. If it already exists, it's replaced.
+     * Sets the note. If it already exists, it is replaced.
      *
      * @param note the note.
      * @return this.
@@ -387,11 +444,32 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
     }
 
     /**
+     * Returns whether the changed medication request reference.
+     *
+     * @return {@code true} if the changed medication request reference exists, {@code false} otherwise.
+     */
+    public boolean hasMedicationRequestChanged() {
+        return this.medicationRequestChanged != null && !this.medicationRequestChanged.isEmpty();
+    }
+
+    /**
      * Returns whether the padv entry type.
      *
      * @return {@code true} if the padv entry type exists, {@code false} otherwise.
      */
     public boolean hasPadvEntryType() {
         return this.hasCode();
+    }
+
+    @Override
+    public void copyValues(final Observation dst) {
+        super.copyValues(dst);
+        if (dst instanceof ChEmedEprObservation obs) {
+            obs.treatmentPlan = treatmentPlan == null ? null : treatmentPlan.copy();
+            obs.prescription = prescription == null ? null : prescription.copy();
+            obs.dispense = dispense == null ? null : dispense.copy();
+            obs.medicationStatementChanged = medicationStatementChanged == null ? null : medicationStatementChanged.copy();
+            obs.medicationRequestChanged = medicationRequestChanged == null ? null : medicationRequestChanged.copy();
+        }
     }
 }

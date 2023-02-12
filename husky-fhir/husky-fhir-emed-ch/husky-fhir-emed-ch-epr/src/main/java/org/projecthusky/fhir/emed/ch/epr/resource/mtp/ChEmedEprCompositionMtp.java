@@ -222,4 +222,11 @@ public class ChEmedEprCompositionMtp extends ChEmedEprComposition {
         }
         return this;
     }
+
+    @Override
+    public ChEmedEprCompositionMtp copy() {
+        final var copy = new ChEmedEprCompositionMtp();
+        this.copyValues(copy);
+        return copy;
+    }
 }

@@ -214,4 +214,11 @@ public class ChEmedEprDocumentPml extends ChEmedEprDocument {
                 .setFullUrl(observation.getIdentifierFirstRep().getValue())
                 .setResource(observation);
     }
+
+    @Override
+    public ChEmedEprDocumentPml copy() {
+        final var copy = new ChEmedEprDocumentPml();
+        this.copyValues(copy);
+        return copy;
+    }
 }

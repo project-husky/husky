@@ -131,4 +131,11 @@ public class ChEmedEprDocumentDis extends ChEmedEprDocument {
                 .setResource(composition);
         return this;
     }
+
+    @Override
+    public ChEmedEprDocumentDis copy() {
+        final var copy = new ChEmedEprDocumentDis();
+        this.copyValues(copy);
+        return copy;
+    }
 }

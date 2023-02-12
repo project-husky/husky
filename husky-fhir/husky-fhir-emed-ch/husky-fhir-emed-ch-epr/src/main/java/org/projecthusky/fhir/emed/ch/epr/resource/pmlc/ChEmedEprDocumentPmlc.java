@@ -137,4 +137,11 @@ public class ChEmedEprDocumentPmlc extends ChEmedEprDocument {
                 .setResource(composition);
         return this;
     }
+
+    @Override
+    public ChEmedEprDocumentPmlc copy() {
+        final var copy = new ChEmedEprDocumentPmlc();
+        this.copyValues(copy);
+        return copy;
+    }
 }

@@ -186,4 +186,19 @@ public class ChCorePatientEpr extends Patient {
                 .setSystem(system)
                 .setValue(value);
     }
+
+    @Override
+    public ChCorePatientEpr copy() {
+        final var copy = new ChCorePatientEpr();
+        this.copyValues(copy);
+        return copy;
+    }
+
+    @Override
+    public void copyValues(final Patient dst) {
+        super.copyValues(dst);
+        if (dst instanceof final ChCorePatientEpr als) {
+            als.religion = religion == null ? null : religion.copy();
+        }
+    }
 }

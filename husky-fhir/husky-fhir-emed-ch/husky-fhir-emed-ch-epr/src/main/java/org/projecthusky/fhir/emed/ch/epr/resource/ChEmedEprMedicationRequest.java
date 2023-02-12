@@ -344,4 +344,12 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
     public EffectiveDosageInstructions resolveEffectiveDosageInstructions() {
         return EffectiveDosageInstructions.fromDosages(this.resolveBaseDosage(), this.resolveAdditionalDosage());
     }
+
+    @Override
+    public void copyValues(final MedicationRequest dst) {
+        super.copyValues(dst);
+        if (dst instanceof final ChEmedEprMedicationRequest rst) {
+            rst.treatmentPlan = treatmentPlan == null ? null : treatmentPlan.copy();
+        }
+    }
 }

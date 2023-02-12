@@ -79,4 +79,11 @@ public class ChEmedRatioWithEmedUnits extends Ratio {
         super.setDenominator(denominator);
         return this;
     }
+
+    @Override
+    public ChEmedRatioWithEmedUnits copy() {
+        final var copy = new ChEmedRatioWithEmedUnits();
+        this.copyValues(copy);
+        return copy;
+    }
 }

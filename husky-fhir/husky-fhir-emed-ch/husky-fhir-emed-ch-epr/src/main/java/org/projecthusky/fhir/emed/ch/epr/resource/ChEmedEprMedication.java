@@ -198,4 +198,11 @@ public class ChEmedEprMedication extends Medication {
         super.addIngredient(ingredient);
         return this;
     }
+
+    @Override
+    public ChEmedEprMedication copy() {
+        final var copy = new ChEmedEprMedication();
+        this.copyValues(copy);
+        return copy;
+    }
 }

@@ -188,4 +188,11 @@ public class ChEmedOrganization extends Organization {
         }
         return this;
     }
+
+    @Override
+    public ChEmedOrganization copy() {
+        final var copy = new ChEmedOrganization();
+        this.copyValues(copy);
+        return copy;
+    }
 }

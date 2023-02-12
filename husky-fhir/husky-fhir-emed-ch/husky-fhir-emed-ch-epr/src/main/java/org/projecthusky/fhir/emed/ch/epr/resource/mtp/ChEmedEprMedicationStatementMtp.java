@@ -15,6 +15,7 @@ import ca.uhn.fhir.model.api.annotation.Extension;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.MedicationStatement;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.enums.SubstanceAdministrationSubstitutionCode;
@@ -115,5 +116,20 @@ public class ChEmedEprMedicationStatementMtp extends ChEmedEprMedicationStatemen
     public ChEmedEprMedicationStatementMtp setSubstitution(final SubstanceAdministrationSubstitutionCode value) {
         this.setSubstitutionElement(value.getCodeableConcept());
         return this;
+    }
+
+    @Override
+    public ChEmedEprMedicationStatementMtp copy() {
+        final var copy = new ChEmedEprMedicationStatementMtp();
+        this.copyValues(copy);
+        return copy;
+    }
+
+    @Override
+    public void copyValues(final MedicationStatement dst) {
+        super.copyValues(dst);
+        if (dst instanceof final ChEmedEprMedicationStatementMtp als) {
+            als.substitution = substitution == null ? null : substitution.copy();
+        }
     }
 }

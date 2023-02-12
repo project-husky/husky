@@ -30,4 +30,11 @@ public class ChEmedEprMedicationDispenseDis extends ChEmedEprMedicationDispense 
                                           final Instant whenHandedOver) {
         super(entryUuid, whenHandedOver);
     }
+
+    @Override
+    public ChEmedEprMedicationDispenseDis copy() {
+        final var copy = new ChEmedEprMedicationDispenseDis();
+        this.copyValues(copy);
+        return copy;
+    }
 }

@@ -6,6 +6,7 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.DomainResource;
+import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Reference;
 import org.hl7.fhir.r4.model.Resource;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
@@ -138,4 +139,18 @@ public class ChEmedEprObservationPml extends ChEmedEprObservation {
         return this.authorDocument != null && this.authorDocument.getResource() != null;
     }
 
+    @Override
+    public ChEmedEprObservationPml copy() {
+        final var copy = new ChEmedEprObservationPml();
+        this.copyValues(copy);
+        return copy;
+    }
+
+    @Override
+    public void copyValues(final Observation dst) {
+        super.copyValues(dst);
+        if (dst instanceof final ChEmedEprObservationPml als) {
+            als.authorDocument = authorDocument == null ? null : authorDocument.copy();
+        }
+    }
 }

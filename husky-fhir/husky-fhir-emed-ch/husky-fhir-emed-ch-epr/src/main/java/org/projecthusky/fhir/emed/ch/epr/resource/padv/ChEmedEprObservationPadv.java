@@ -31,4 +31,11 @@ public class ChEmedEprObservationPadv extends ChEmedEprObservation {
                                     final EmedPadvEntryType padvType) {
         super(entryUuid, padvType);
     }
+
+    @Override
+    public ChEmedEprObservationPadv copy() {
+        final var copy = new ChEmedEprObservationPadv();
+        this.copyValues(copy);
+        return copy;
+    }
 }

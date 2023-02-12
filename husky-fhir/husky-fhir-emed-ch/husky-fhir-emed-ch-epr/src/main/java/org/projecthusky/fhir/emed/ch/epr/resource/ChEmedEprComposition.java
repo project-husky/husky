@@ -409,4 +409,18 @@ public abstract class ChEmedEprComposition extends Composition {
     public boolean hasDataEnterer() {
         return this.dataEnterer != null && this.dataEnterer.hasEnterer();
     }
+
+    @Override
+    public void copyValues(final Composition dst) {
+        super.copyValues(dst);
+        if (dst instanceof final ChEmedEprComposition als) {
+            als.versionNumber = versionNumber == null ? null : versionNumber.copy();
+            als.dataEnterer = dataEnterer == null ? null : dataEnterer.copy();
+            if (informationRecipient != null) {
+                als.informationRecipient = new ArrayList<>();
+                for (final var i : informationRecipient)
+                    als.informationRecipient.add(i.copy());
+            }
+        }
+    }
 }

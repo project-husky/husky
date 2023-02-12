@@ -38,8 +38,7 @@ public class ChEmedExtTreatmentPlan extends ChEmedExtensionReference {
     @Override
     public ChEmedExtTreatmentPlan copy() {
         final var copy = new ChEmedExtTreatmentPlan();
-        copy.extensionId = extensionId;
-        copy.externalDocumentId = externalDocumentId;
+        this.copyValues(copy);
         return copy;
     }
 

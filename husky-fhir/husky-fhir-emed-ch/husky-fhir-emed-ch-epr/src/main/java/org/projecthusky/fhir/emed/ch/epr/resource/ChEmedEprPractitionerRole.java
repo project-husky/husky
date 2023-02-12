@@ -64,4 +64,11 @@ public class ChEmedEprPractitionerRole extends PractitionerRole {
         }
         throw new InvalidEmedContentException("The organization is not specified");
     }
+
+    @Override
+    public ChEmedEprPractitionerRole copy() {
+      final var copy = new ChEmedEprPractitionerRole();
+      this.copyValues(copy);
+      return copy;
+    }
 }

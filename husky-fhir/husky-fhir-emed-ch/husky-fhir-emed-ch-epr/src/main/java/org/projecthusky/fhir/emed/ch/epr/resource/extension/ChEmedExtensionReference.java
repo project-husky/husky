@@ -177,4 +177,13 @@ public abstract class ChEmedExtensionReference extends BackboneElement {
     }
 
     public abstract EmedEntryType getEntryType();
+
+    @Override
+    public void copyValues(final BackboneElement dst) {
+        super.copyValues(dst);
+        if (dst instanceof final ChEmedExtensionReference als) {
+            als.extensionId = extensionId == null ? null : extensionId.copy();
+            als.externalDocumentId = externalDocumentId == null ? null : externalDocumentId.copy();
+        }
+    }
 }

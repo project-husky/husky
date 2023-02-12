@@ -206,7 +206,7 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
     }
 
     /**
-     * Gets the treatment reason. If it doesn't exist, it's created.
+     * Gets the treatment reason. If it doesn't exist, it is created.
      *
      * @return the treatment reason.
      */
@@ -229,7 +229,7 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
     }
 
     /**
-     * Gets the prescription element. If it doesn't exist, it's created.
+     * Gets the prescription element. If it doesn't exist, it is created.
      *
      * @return the prescription element.
      */
@@ -252,7 +252,7 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
     }
 
     /**
-     * Gets the pharmaceutical advice element. If it doesn't exist, it's created.
+     * Gets the pharmaceutical advice element. If it doesn't exist, it is created.
      *
      * @return the pharmaceutical advice element.
      */
@@ -275,7 +275,7 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
     }
 
     /**
-     * Gets the treatment plan element. If it doesn't exist, it's created.
+     * Gets the treatment plan element. If it doesn't exist, it is created.
      *
      * @return the treatment plan element.
      */
@@ -298,7 +298,7 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
     }
 
     /**
-     * Sets the ID of a medication dispense, if it's already exists, it's replaced.
+     * Sets the ID of a medication dispense, if it is already exists, it is replaced.
      *
      * @param identifier the ID of a medication dispense.
      * @return this.
@@ -490,5 +490,16 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
     @ExpectsValidResource
     public EffectiveDosageInstructions resolveEffectiveDosageInstructions() {
         return EffectiveDosageInstructions.fromDosages(this.resolveBaseDosage(), this.resolveAdditionalDosage());
+    }
+
+    @Override
+    public void copyValues(final MedicationDispense dst) {
+        super.copyValues(dst);
+        if (dst instanceof final ChEmedEprMedicationDispense als) {
+            als.treatmentReason = treatmentReason == null ? null : treatmentReason.copy();
+            als.prescription = prescription == null ? null : prescription.copy();
+            als.pharmaceuticalAdvice = pharmaceuticalAdvice == null ? null : pharmaceuticalAdvice.copy();
+            als.treatmentPlan = treatmentPlan == null ? null : treatmentPlan.copy();
+        }
     }
 }

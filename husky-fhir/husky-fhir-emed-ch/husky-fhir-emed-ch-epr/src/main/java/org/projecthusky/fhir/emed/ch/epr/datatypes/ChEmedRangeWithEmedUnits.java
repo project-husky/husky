@@ -85,4 +85,11 @@ public class ChEmedRangeWithEmedUnits extends Range {
         super.setHigh(high);
         return this;
     }
+
+    @Override
+    public ChEmedRangeWithEmedUnits copy() {
+        final var copy = new ChEmedRangeWithEmedUnits();
+        this.copyValues(copy);
+        return copy;
+    }
 }

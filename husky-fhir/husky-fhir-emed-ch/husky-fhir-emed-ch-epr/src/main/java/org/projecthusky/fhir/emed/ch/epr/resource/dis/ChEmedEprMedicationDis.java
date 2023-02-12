@@ -64,4 +64,11 @@ public class ChEmedEprMedicationDis extends ChEmedEprMedication {
         super.setAmount(amount);
         return this;
     }
+
+    @Override
+    public ChEmedEprMedicationDis copy() {
+        final var copy = new ChEmedEprMedicationDis();
+        this.copyValues(copy);
+        return copy;
+    }
 }

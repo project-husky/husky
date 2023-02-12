@@ -292,4 +292,11 @@ public class ChEmedEprDosage extends Dosage {
         }
         return AmountQuantity.fromQuantity(this.getMaxDosePerAdministration());
     }
+
+    @Override
+    public ChEmedEprDosage copy() {
+        final var copy = new ChEmedEprDosage();
+        this.copyValues(copy);
+        return copy;
+    }
 }

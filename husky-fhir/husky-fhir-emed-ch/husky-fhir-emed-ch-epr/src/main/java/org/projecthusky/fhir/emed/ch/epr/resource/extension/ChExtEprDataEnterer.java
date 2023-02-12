@@ -49,14 +49,6 @@ public class ChExtEprDataEnterer extends BackboneElement {
         super();
     }
 
-    @Override
-    public ChExtEprDataEnterer copy() {
-        final var copy = new ChExtEprDataEnterer();
-        copy.enterer = enterer;
-        copy.timestamp = timestamp;
-        return copy;
-    }
-
     /**
      * Resolves the person and organization that entered data or throws.
      *
@@ -129,5 +121,21 @@ public class ChExtEprDataEnterer extends BackboneElement {
      */
     public boolean hasTimestamp() {
         return this.timestamp != null && this.timestamp.hasValue();
+    }
+
+    @Override
+    public ChExtEprDataEnterer copy() {
+        final var copy = new ChExtEprDataEnterer();
+        this.copyValues(copy);
+        return copy;
+    }
+
+    @Override
+    public void copyValues(final BackboneElement dst) {
+        super.copyValues(dst);
+        if (dst instanceof final ChExtEprDataEnterer als) {
+            als.enterer = enterer == null ? null : enterer.copy();
+            als.timestamp = timestamp == null ? null : timestamp.copy();
+        }
     }
 }

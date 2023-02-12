@@ -173,4 +173,11 @@ public class ChEmedEprCompositionPmlc extends ChEmedEprComposition {
         this.addAuthor(References.createReference(author));
         return this;
     }
+
+    @Override
+    public ChEmedEprCompositionPmlc copy() {
+        final var copy = new ChEmedEprCompositionPmlc();
+        this.copyValues(copy);
+        return copy;
+    }
 }

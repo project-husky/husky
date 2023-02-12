@@ -146,4 +146,11 @@ public class ChEmedEprPractitioner extends Practitioner {
 
         return this;
     }
+
+    @Override
+    public ChEmedEprPractitioner copy() {
+      final var copy = new ChEmedEprPractitioner();
+      this.copyValues(copy);
+      return copy;
+    }
 }

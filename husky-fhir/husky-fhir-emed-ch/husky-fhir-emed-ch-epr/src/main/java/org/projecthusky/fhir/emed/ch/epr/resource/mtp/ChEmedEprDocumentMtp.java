@@ -134,4 +134,11 @@ public class ChEmedEprDocumentMtp extends ChEmedEprDocument {
 
         return this;
     }
+
+    @Override
+    public ChEmedEprDocumentMtp copy() {
+        final var copy = new ChEmedEprDocumentMtp();
+        this.copyValues(copy);
+        return copy;
+    }
 }

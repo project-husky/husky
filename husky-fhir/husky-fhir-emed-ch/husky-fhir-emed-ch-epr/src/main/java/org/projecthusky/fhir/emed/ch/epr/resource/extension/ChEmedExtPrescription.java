@@ -39,8 +39,7 @@ public class ChEmedExtPrescription extends ChEmedExtensionReference {
     @Override
     public ChEmedExtPrescription copy() {
         final var copy = new ChEmedExtPrescription();
-        copy.extensionId = extensionId;
-        copy.externalDocumentId = externalDocumentId;
+        this.copyValues(copy);
         return copy;
     }
 

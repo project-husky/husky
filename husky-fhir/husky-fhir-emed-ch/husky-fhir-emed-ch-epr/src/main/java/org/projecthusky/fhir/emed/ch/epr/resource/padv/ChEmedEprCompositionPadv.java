@@ -193,4 +193,11 @@ public class ChEmedEprCompositionPadv extends ChEmedEprComposition {
         this.addAuthor(References.createReference(author));
         return this;
     }
+
+    @Override
+    public ChEmedEprCompositionPadv copy() {
+        final var copy = new ChEmedEprCompositionPadv();
+        this.copyValues(copy);
+        return copy;
+    }
 }

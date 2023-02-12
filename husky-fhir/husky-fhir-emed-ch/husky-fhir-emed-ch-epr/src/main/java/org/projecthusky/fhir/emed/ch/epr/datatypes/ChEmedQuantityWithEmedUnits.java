@@ -94,4 +94,11 @@ public class ChEmedQuantityWithEmedUnits extends SimpleQuantity {
     public boolean hasQuantity() {
         return this.hasValue();
     }
+
+    @Override
+    public ChEmedQuantityWithEmedUnits copy() {
+        final var copy = new ChEmedQuantityWithEmedUnits();
+        this.copyValues(copy);
+        return copy;
+    }
 }

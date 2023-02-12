@@ -84,5 +84,10 @@ public class ChEmedEprMedicationIngredient extends Medication.MedicationIngredie
         return this;
     }
 
-
+    @Override
+    public ChEmedEprMedicationIngredient copy() {
+      final var copy = new ChEmedEprMedicationIngredient();
+      this.copyValues(copy);
+      return copy;
+    }
 }

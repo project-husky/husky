@@ -15,10 +15,7 @@ import ca.uhn.fhir.model.api.annotation.Extension;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.instance.model.api.IBaseResource;
-import org.hl7.fhir.r4.model.CodeableConcept;
-import org.hl7.fhir.r4.model.DomainResource;
-import org.hl7.fhir.r4.model.Reference;
-import org.hl7.fhir.r4.model.Resource;
+import org.hl7.fhir.r4.model.*;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
@@ -201,5 +198,21 @@ public class ChEmedEprMedicationStatementPml extends ChEmedEprMedicationStatemen
     public ChEmedEprMedicationStatementPml setAuthorDocument(final IBaseResource author) {
         this.authorDocument = References.createReference((Resource) author);
         return this;
+    }
+
+    @Override
+    public ChEmedEprMedicationStatementPml copy() {
+        final var copy = new ChEmedEprMedicationStatementPml();
+        this.copyValues(copy);
+        return copy;
+    }
+
+    @Override
+    public void copyValues(final MedicationStatement dst) {
+        super.copyValues(dst);
+        if (dst instanceof final ChEmedEprMedicationStatementPml als) {
+            als.substitution = substitution == null ? null : substitution.copy();
+            als.authorDocument = authorDocument == null ? null : authorDocument.copy();
+        }
     }
 }

@@ -28,4 +28,11 @@ public class ChEmedEprMedicationRequestPre extends ChEmedEprMedicationRequest {
     public ChEmedEprMedicationRequestPre(final UUID entryUuid) {
         super(entryUuid);
     }
+
+    @Override
+    public ChEmedEprMedicationRequestPre copy() {
+        final var copy = new ChEmedEprMedicationRequestPre();
+        this.copyValues(copy);
+        return copy;
+    }
 }

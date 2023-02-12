@@ -16,6 +16,7 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.DomainResource;
+import org.hl7.fhir.r4.model.MedicationStatement;
 import org.hl7.fhir.r4.model.Reference;
 import org.hl7.fhir.r4.model.Resource;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
@@ -169,5 +170,21 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
      */
     public boolean hasTreatmentPlan() {
         return this.treatmentPlan != null && !this.treatmentPlan.isEmpty();
+    }
+
+    @Override
+    public ChEmedEprMedicationStatementPmlc copy() {
+        final var copy = new ChEmedEprMedicationStatementPmlc();
+        this.copyValues(copy);
+        return copy;
+    }
+
+    @Override
+    public void copyValues(final MedicationStatement dst) {
+        super.copyValues(dst);
+        if (dst instanceof final ChEmedEprMedicationStatementPmlc als) {
+            als.treatmentPlan = treatmentPlan == null ? null : treatmentPlan.copy();
+            als.authorDocument = authorDocument == null ? null : authorDocument.copy();
+        }
     }
 }

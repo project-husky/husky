@@ -38,8 +38,7 @@ public class ChEmedExtDispense extends ChEmedExtensionReference {
     @Override
     public ChEmedExtDispense copy() {
         final var copy = new ChEmedExtDispense();
-        copy.extensionId = extensionId;
-        copy.externalDocumentId = externalDocumentId;
+        this.copyValues(copy);
         return copy;
     }
 

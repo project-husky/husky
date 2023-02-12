@@ -160,4 +160,11 @@ public class ChEmedEprDocumentPadv extends ChEmedEprDocument {
                 .setResource(observation);
         return this;
     }
+
+    @Override
+    public ChEmedEprDocumentPadv copy() {
+        final var copy = new ChEmedEprDocumentPadv();
+        this.copyValues(copy);
+        return copy;
+    }
 }
