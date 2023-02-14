@@ -55,9 +55,9 @@ public class ChEmedEprCompositionPre extends ChEmedEprComposition {
                                    final Instant date,
                                    final LanguageCode language) {
         super(compositionId, date, language);
-        this.getType().addCoding(new Coding(FhirSystem.SNOMEDCT,
-                                            "761938008",
-                                            "Medical prescription record (record artifact)"));
+        this.getType().addCoding(new Coding(FhirSystem.LOINC,
+                                            "57833-6",
+                                            "Prescription for medication"));
         this.setTitle(CompositionTitle.PRE.getDisplayName(language));
     }
 

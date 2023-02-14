@@ -50,9 +50,9 @@ public class ChEmedEprCompositionPml extends ChEmedEprComposition {
                                    final Instant date,
                                    final LanguageCode language) {
         super(compositionId, date, language);
-        this.getType().addCoding(new Coding(FhirSystem.SNOMEDCT,
-                                            "721912009",
-                                            "Medication summary document (record artifact)"));
+        this.getType().addCoding(new Coding(FhirSystem.LOINC,
+                                            "56445-0",
+                                            "Medication summary Document"));
         this.setTitle(CompositionTitle.PML.getDisplayName(language));
     }
 

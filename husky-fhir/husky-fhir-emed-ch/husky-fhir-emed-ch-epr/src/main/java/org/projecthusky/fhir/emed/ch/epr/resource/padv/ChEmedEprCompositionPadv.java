@@ -55,7 +55,9 @@ public class ChEmedEprCompositionPadv extends ChEmedEprComposition {
                                     final Instant date,
                                     final LanguageCode language) {
         super(compositionId, date, language);
-        this.getType().addCoding(new Coding(FhirSystem.SNOMEDCT, "419891008", "Record artifact (record artifact)"));
+        this.getType().addCoding(new Coding(FhirSystem.LOINC,
+                                            "61356-2",
+                                            "Medication pharmaceutical advice.extended Document"));
         this.setTitle(CompositionTitle.PADV.getDisplayName(language));
     }
 
