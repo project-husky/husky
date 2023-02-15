@@ -5,10 +5,7 @@ import ca.uhn.fhir.model.api.annotation.Extension;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.instance.model.api.IBaseResource;
-import org.hl7.fhir.r4.model.DomainResource;
-import org.hl7.fhir.r4.model.Observation;
-import org.hl7.fhir.r4.model.Reference;
-import org.hl7.fhir.r4.model.Resource;
+import org.hl7.fhir.r4.model.*;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedPadvEntryType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
@@ -121,6 +118,38 @@ public class ChEmedEprObservationPml extends ChEmedEprObservation {
      * @return this.
      */
     public ChEmedEprObservationPml setPerformer(final ChEmedEprPractitionerRole performer) {
+        final var reference = References.createReference(performer);
+        if (this.getPerformer().isEmpty()) {
+            this.addPerformer(reference);
+        } else {
+            this.getPerformer().set(0, reference);
+        }
+        return this;
+    }
+
+    /**
+     * Sets the author and her/his organization of the medical decision.
+     *
+     * @param performer the author and her/his organization of the medical decision.
+     * @return this.
+     */
+    public ChEmedEprObservationPml setPerformer(final ChCorePatientEpr performer) {
+        final var reference = References.createReference(performer);
+        if (this.getPerformer().isEmpty()) {
+            this.addPerformer(reference);
+        } else {
+            this.getPerformer().set(0, reference);
+        }
+        return this;
+    }
+
+    /**
+     * Sets the author and her/his organization of the medical decision.
+     *
+     * @param performer the author and her/his organization of the medical decision.
+     * @return this.
+     */
+    public ChEmedEprObservationPml setPerformer(final RelatedPerson performer) {
         final var reference = References.createReference(performer);
         if (this.getPerformer().isEmpty()) {
             this.addPerformer(reference);
