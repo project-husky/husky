@@ -91,7 +91,7 @@ public class ChEmedEprValidator {
      */
     public ValidationResult validateDocumentBundle(final ChEmedEprDocument document) {
         final var result = this.createInstanceValidator().validateWithResult(document,
-                this.createOptions(document.getEmedType()));
+                                                                             this.createOptions(document.getEmedType()));
         if (!result.isSuccessful()) {
             return result;
         }
@@ -124,17 +124,16 @@ public class ChEmedEprValidator {
      *
      * @param type The eMed type.
      * @return the validator options.
-     * @todo Update the URLs.
      */
     protected ValidationOptions createOptions(final EmedDocumentType type) {
         final var options = new ValidationOptions();
         options.addProfile(switch (type) {
-            case MTP -> "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationtreatmentplan";
-            case PRE -> "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationprescription";
-            case DIS -> "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationdispense";
-            case PADV -> "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-pharmaceuticaladvice";
-            case PML -> "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationlist";
-            case PMLC -> "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationcard";
+            case MTP -> "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-document-medicationtreatmentplan";
+            case PRE -> "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-document-medicationprescription";
+            case DIS -> "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-document-medicationdispense";
+            case PADV -> "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-document-pharmaceuticaladvice";
+            case PML -> "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-document-medicationlist";
+            case PMLC -> "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-document-medicationcard";
         });
         return options;
     }
