@@ -56,6 +56,7 @@ public class ChEmedEprCompositionMtp extends ChEmedEprComposition {
                                    final Instant date,
                                    final LanguageCode language) {
         super(compositionId, date, language);
+        this.getType().addCoding(new Coding(FhirSystem.SNOMEDCT, "419891008", "Record artifact (record artifact)"));
         this.getType().addCoding(new Coding(FhirSystem.LOINC,
                                             "77603-9",
                                             "Medication treatment plan.extended Document"));
