@@ -52,7 +52,7 @@ public class ChEmedEprDocumentPmlc extends ChEmedEprDocument {
 
     @Override
     public EmedDocumentType getEmedType() {
-        return EmedDocumentType.PML;
+        return EmedDocumentType.PMLC;
     }
 
     /**
