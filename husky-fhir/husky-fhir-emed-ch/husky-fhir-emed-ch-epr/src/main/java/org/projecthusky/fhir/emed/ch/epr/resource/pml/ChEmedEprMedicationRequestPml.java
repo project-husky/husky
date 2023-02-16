@@ -14,6 +14,7 @@ import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationRequest;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
+import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtPrescription;
 import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 import java.util.UUID;
@@ -25,6 +26,7 @@ import java.util.UUID;
  **/
 @ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-medicationrequest-list")
 public class ChEmedEprMedicationRequestPml extends ChEmedEprMedicationRequest {
+
     /**
      * Author of the original document if different from the author of the medical decision.
      */
@@ -32,6 +34,14 @@ public class ChEmedEprMedicationRequestPml extends ChEmedEprMedicationRequest {
     @Child(name = "authorDocument")
     @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author", definedLocally = false)
     protected Reference authorDocument;
+
+    /**
+     * Reference to the original document.
+     */
+    @Nullable
+    @Child(name = "parentDocument")
+    @Extension(url = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-prescription")
+    protected ChEmedExtPrescription parentDocument;
 
     /**
      * Empty constructor for the parser.
@@ -130,6 +140,38 @@ public class ChEmedEprMedicationRequestPml extends ChEmedEprMedicationRequest {
         return this.authorDocument != null && !this.authorDocument.isEmpty();
     }
 
+    /**
+     * Gets the parent document element. If it doesn't exist, it is created.
+     *
+     * @return the parent document element.
+     */
+    public ChEmedExtPrescription getParentDocumentElement() {
+        if (this.parentDocument == null) {
+            this.parentDocument = new ChEmedExtPrescription();
+        }
+        return this.parentDocument;
+    }
+
+    /**
+     * Sets the parent document reference.
+     *
+     * @param parentDocument the parent document reference.
+     * @return this.
+     */
+    public ChEmedEprMedicationRequestPml setParentDocumentElement(final ChEmedExtPrescription parentDocument) {
+        this.parentDocument = parentDocument;
+        return this;
+    }
+
+    /**
+     * Returns whether the parent document reference exists.
+     *
+     * @return {@code true} if the parent document reference exists, {@code false} otherwise.
+     */
+    public boolean hasParentDocument() {
+        return this.parentDocument != null && !this.parentDocument.isEmpty();
+    }
+
     @Override
     public ChEmedEprMedicationRequestPml copy() {
         final var copy = new ChEmedEprMedicationRequestPml();
@@ -142,6 +184,7 @@ public class ChEmedEprMedicationRequestPml extends ChEmedEprMedicationRequest {
         super.copyValues(dst);
         if (dst instanceof final ChEmedEprMedicationRequestPml als) {
             als.authorDocument = authorDocument == null ? null : authorDocument.copy();
+            als.parentDocument = parentDocument == null ? null : parentDocument.copy();
         }
     }
 }

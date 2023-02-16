@@ -12,6 +12,7 @@ import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprObservation;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
+import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtPharmaceuticalAdvice;
 import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 import java.util.UUID;
@@ -32,6 +33,14 @@ public class ChEmedEprObservationPml extends ChEmedEprObservation {
     @Child(name = "authorDocument")
     @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author")
     protected Reference authorDocument;
+
+    /**
+     * Reference to the original document.
+     */
+    @Nullable
+    @Child(name = "parentDocument")
+    @Extension(url = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-pharmaceuticaladvice")
+    protected ChEmedExtPharmaceuticalAdvice parentDocument;
 
     /**
      * Empty constructor for the parser.
@@ -168,6 +177,38 @@ public class ChEmedEprObservationPml extends ChEmedEprObservation {
         return this.authorDocument != null && this.authorDocument.getResource() != null;
     }
 
+    /**
+     * Gets the parent document element. If it doesn't exist, it is created.
+     *
+     * @return the parent document element.
+     */
+    public ChEmedExtPharmaceuticalAdvice getParentDocumentElement() {
+        if (this.parentDocument == null) {
+            this.parentDocument = new ChEmedExtPharmaceuticalAdvice();
+        }
+        return this.parentDocument;
+    }
+
+    /**
+     * Sets the parent document reference.
+     *
+     * @param parentDocument the parent document reference.
+     * @return this.
+     */
+    public ChEmedEprObservationPml setParentDocumentElement(final ChEmedExtPharmaceuticalAdvice parentDocument) {
+        this.parentDocument = parentDocument;
+        return this;
+    }
+
+    /**
+     * Returns whether the parent document reference exists.
+     *
+     * @return {@code true} if the parent document reference exists, {@code false} otherwise.
+     */
+    public boolean hasParentDocument() {
+        return this.parentDocument != null && !this.parentDocument.isEmpty();
+    }
+
     @Override
     public ChEmedEprObservationPml copy() {
         final var copy = new ChEmedEprObservationPml();
@@ -180,6 +221,7 @@ public class ChEmedEprObservationPml extends ChEmedEprObservation {
         super.copyValues(dst);
         if (dst instanceof final ChEmedEprObservationPml als) {
             als.authorDocument = authorDocument == null ? null : authorDocument.copy();
+            als.parentDocument = parentDocument == null ? null : parentDocument.copy();
         }
     }
 }
