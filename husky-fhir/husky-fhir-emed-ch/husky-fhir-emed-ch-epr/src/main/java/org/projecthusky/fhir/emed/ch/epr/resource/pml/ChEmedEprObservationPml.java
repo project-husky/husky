@@ -29,7 +29,7 @@ public class ChEmedEprObservationPml extends ChEmedEprObservation {
      * also 'Guidance - Different Authors'
      */
     @Nullable
-    @Child(name = "auhtorDocument")
+    @Child(name = "authorDocument")
     @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author")
     protected Reference authorDocument;
 

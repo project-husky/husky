@@ -50,7 +50,7 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
      * (MedicationStatement.informationSource)
      */
     @Nullable
-    @Child(name = "auhtorDocument")
+    @Child(name = "authorDocument")
     @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author")
     protected Reference authorDocument;
 
