@@ -22,6 +22,7 @@ import org.hl7.fhir.r4.model.Resource;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
+import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationStatement;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
@@ -113,26 +114,6 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
     }
 
     /**
-     * Resolves the last author and her/his organization of the medical decision.
-     *
-     * @return The last author and her/his organization of the medical decision.
-     * @throws InvalidEmedContentException if the last author and her/his organization of the medical decision is
-     *                                     missing.
-     */
-    @ExpectsValidResource
-    public ChEmedEprPractitionerRole resolveInformationSource() throws InvalidEmedContentException {
-        if (!this.hasInformationSource()) {
-            throw new InvalidEmedContentException(
-                    "The last author and her/his organization of the medical decision is missing.");
-        }
-        if (this.getInformationSource().getResource() instanceof ChEmedEprPractitionerRole practitionerRole) {
-            return practitionerRole;
-        }
-        throw new InvalidEmedContentException(
-                "The last author and her/his organization of the medical decision isn't of right type.");
-    }
-
-    /**
      * Sets the author of the original document.
      *
      * @param author the author.
@@ -170,6 +151,21 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
      */
     public boolean hasTreatmentPlan() {
         return this.treatmentPlan != null && !this.treatmentPlan.isEmpty();
+    }
+
+    /**
+     * Resolves the information source.
+     *
+     * @return the information source.
+     */
+    @Override
+    @ExpectsValidResource
+    public Author resolveInformationSource() {
+        if (!this.hasInformationSource()) {
+            throw new InvalidEmedContentException(
+                    "The information source is missing.");
+        }
+        return new Author(this.getInformationSource().getResource());
     }
 
     @Override

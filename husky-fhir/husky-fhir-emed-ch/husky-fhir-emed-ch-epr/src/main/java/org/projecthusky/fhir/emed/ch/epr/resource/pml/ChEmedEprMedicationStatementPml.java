@@ -20,6 +20,7 @@ import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.epr.enums.SubstanceAdministrationSubstitutionCode;
+import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationStatement;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
@@ -139,26 +140,6 @@ public class ChEmedEprMedicationStatementPml extends ChEmedEprMedicationStatemen
     }
 
     /**
-     * Resolves the last author and her/his organization of the medical decision.
-     *
-     * @return The last author and her/his organization of the medical decision.
-     * @throws InvalidEmedContentException if the last author and her/his organization of the medical decision is
-     *                                     missing.
-     */
-    @ExpectsValidResource
-    public ChEmedEprPractitionerRole resolveInformationSource() throws InvalidEmedContentException {
-        if (!this.hasInformationSource()) {
-            throw new InvalidEmedContentException(
-                    "The last author and her/his organization of the medical decision is missing.");
-        }
-        if (this.getInformationSource().getResource() instanceof ChEmedEprPractitionerRole practitionerRole) {
-            return practitionerRole;
-        }
-        throw new InvalidEmedContentException(
-                "The last author and her/his organization of the medical decision isn't of right type.");
-    }
-
-    /**
      * Returns whether substitution code exists.
      *
      * @return {@code true} if the substitution code exists, {@code false} otherwise.
@@ -239,6 +220,21 @@ public class ChEmedEprMedicationStatementPml extends ChEmedEprMedicationStatemen
      */
     public boolean hasParentDocument() {
         return this.parentDocument != null && !this.parentDocument.isEmpty();
+    }
+
+    /**
+     * Resolves the information source.
+     *
+     * @return the information source.
+     */
+    @Override
+    @ExpectsValidResource
+    public Author resolveInformationSource() {
+        if (!this.hasInformationSource()) {
+            throw new InvalidEmedContentException(
+                    "The information source is missing.");
+        }
+        return new Author(this.getInformationSource().getResource());
     }
 
     @Override

@@ -21,6 +21,7 @@ import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
+import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EffectiveDosageInstructions;
 
 import java.util.ArrayList;
@@ -117,23 +118,6 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
                 .map(ChEmedEprDosage.class::cast)
                 .skip(1)
                 .toList();
-    }
-
-    /**
-     * Resolves the information source as a practitioner role.
-     *
-     * @return the practitioner role or {@code null}.
-     */
-    @ExpectsValidResource
-    @Nullable
-    public ChEmedEprPractitionerRole resolveInformationSource() {
-        if (this.getInformationSource().isEmpty()) {
-            return null;
-        }
-        if (this.getInformationSource().getResource() instanceof final ChEmedEprPractitionerRole pr) {
-            return pr;
-        }
-        throw new InvalidEmedContentException("The information source isn't a ChEmedEprPractitionerRole");
     }
 
     public boolean hasTreatmentReason() {
@@ -287,5 +271,19 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
     @ExpectsValidResource
     public EffectiveDosageInstructions resolveEffectiveDosageInstructions() {
         return EffectiveDosageInstructions.fromDosages(this.resolveBaseDosage(), this.resolveAdditionalDosage());
+    }
+
+    /**
+     * Resolves the information source.
+     *
+     * @return the information source or {@code null}.
+     */
+    @ExpectsValidResource
+    @Nullable
+    public Author resolveInformationSource() {
+        if (!this.hasInformationSource()) {
+            return null;
+        }
+        return new Author(this.getInformationSource().getResource());
     }
 }
