@@ -15,9 +15,10 @@ import org.hl7.fhir.r4.model.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
- * Identifier utilities.
+ * Helper for HAPI {@link Identifier}s.
  *
  * @author Quentin Ligier
  **/
@@ -101,5 +102,31 @@ public class Identifiers {
             }
         }
         return foundIdentifiers;
+    }
+
+    /**
+     * Constructs an {@link Identifier} from a {@link UUID}.
+     *
+     * @param uuid The UUID to use as identifier.
+     * @return the constructed identifier.
+     */
+    public static Identifier fromUuid(final UUID uuid) {
+        final var identifier = new Identifier();
+        identifier.setValue("urn:uuid:" + uuid.toString());
+        identifier.setSystem("urn:ietf:rfc:3986");
+        return identifier;
+    }
+
+    /**
+     * Constructs an {@link Identifier} from an OID.
+     *
+     * @param oid The OID to use as identifier.
+     * @return the constructed identifier.
+     */
+    public static Identifier fromOid(final String oid) {
+        final var identifier = new Identifier();
+        identifier.setValue("urn:oid:" + oid);
+        identifier.setSystem("urn:ietf:rfc:3986"); // TODO ?
+        return identifier;
     }
 }

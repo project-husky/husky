@@ -123,7 +123,7 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
         if (!this.hasMedicationStatementChanged()) {
             return null;
         }
-        final var resource = this.medicationStatementChanged.getResource();
+        final var resource = this.getMedicationStatementChangedReference().getResource();
         if (resource instanceof ChEmedEprMedicationStatementMtp chEmedEprMedicationStatementMtp) {
             return chEmedEprMedicationStatementMtp;
         }
@@ -142,7 +142,7 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
         if (!this.hasMedicationRequestChanged()) {
             return null;
         }
-        final var resource = this.medicationRequestChanged.getResource();
+        final var resource = this.getMedicationRequestChangedReference().getResource();
         if (resource instanceof ChEmedEprMedicationRequestPre chEmedEprMedicationRequestPre) {
             return chEmedEprMedicationRequestPre;
         }

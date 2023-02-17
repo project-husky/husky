@@ -11,7 +11,7 @@
 package org.projecthusky.fhir.emed.ch.common.util;
 
 /**
- * husky
+ * Constants for the common FHIR systems.
  *
  * @author Quentin Ligier
  **/

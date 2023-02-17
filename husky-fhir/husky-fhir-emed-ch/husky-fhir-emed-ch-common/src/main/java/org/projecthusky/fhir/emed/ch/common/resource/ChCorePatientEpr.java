@@ -25,7 +25,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * The HAPI custom structure for CH-CORE PatientEPR.
+ * The HAPI custom structure for CH-Core PatientEPR.
  *
  * @author Quentin Ligier
  **/
