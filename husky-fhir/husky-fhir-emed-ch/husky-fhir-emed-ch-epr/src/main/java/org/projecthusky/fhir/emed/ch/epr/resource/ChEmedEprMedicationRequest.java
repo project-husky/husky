@@ -345,6 +345,19 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
         return EffectiveDosageInstructions.fromDosages(this.resolveBaseDosage(), this.resolveAdditionalDosage());
     }
 
+    /**
+     * Resolves the subject as a {@link ChCorePatientEpr}.
+     *
+     * @return the subject.
+     */
+    @ExpectsValidResource
+    public ChCorePatientEpr resolveSubject() {
+        if (this.hasSubject() && this.getSubject().getResource() instanceof final ChCorePatientEpr patient) {
+            return patient;
+        }
+        throw new InvalidEmedContentException("The subject (Patient) is missing");
+    }
+
     @Override
     public void copyValues(final MedicationRequest dst) {
         super.copyValues(dst);

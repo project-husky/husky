@@ -10,6 +10,7 @@ import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
 import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedQuantityWithEmedUnits;
@@ -490,6 +491,19 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
     @ExpectsValidResource
     public EffectiveDosageInstructions resolveEffectiveDosageInstructions() {
         return EffectiveDosageInstructions.fromDosages(this.resolveBaseDosage(), this.resolveAdditionalDosage());
+    }
+
+    /**
+     * Resolves the subject as a {@link ChCorePatientEpr}.
+     *
+     * @return the subject.
+     */
+    @ExpectsValidResource
+    public ChCorePatientEpr resolveSubject() {
+        if (this.hasSubject() && this.getSubject().getResource() instanceof final ChCorePatientEpr patient) {
+            return patient;
+        }
+        throw new InvalidEmedContentException("The subject (Patient) is missing");
     }
 
     @Override

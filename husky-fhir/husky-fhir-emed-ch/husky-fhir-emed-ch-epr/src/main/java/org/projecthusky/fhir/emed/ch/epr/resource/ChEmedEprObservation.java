@@ -10,6 +10,7 @@ import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedPadvEntryType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EmedReference;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtDispense;
@@ -459,6 +460,19 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
      */
     public boolean hasPadvEntryType() {
         return this.hasCode();
+    }
+
+    /**
+     * Resolves the subject as a {@link ChCorePatientEpr}.
+     *
+     * @return the subject.
+     */
+    @ExpectsValidResource
+    public ChCorePatientEpr resolveSubject() {
+        if (this.hasSubject() && this.getSubject().getResource() instanceof final ChCorePatientEpr patient) {
+            return patient;
+        }
+        throw new InvalidEmedContentException("The subject (Patient) is missing");
     }
 
     @Override
