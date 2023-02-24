@@ -1,7 +1,6 @@
 package org.projecthusky.fhir.emed.ch.epr.validator;
 
-import ca.uhn.fhir.validation.ResultSeverityEnum;
-import ca.uhn.fhir.validation.SingleValidationMessage;
+import org.hl7.fhir.r4.model.OperationOutcome;
 import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
 import org.projecthusky.fhir.emed.ch.epr.enums.TimingEventAmbu;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
@@ -19,7 +18,7 @@ import java.util.List;
 /**
  * A logic validator for CH-EMED-EPR documents. It contains checks that are too difficult to implement in the FHIR IG.
  * <p>
- * It's to be executed by the public class {@link ChEmedEprValidator}.
+ * It is to be executed by the public class {@link ChEmedEprValidator}.
  *
  * @author Quentin Ligier
  */
@@ -31,8 +30,8 @@ class LogicValidator {
      * @param document The document to validate.
      * @return a list of validation messages.
      */
-    public List<SingleValidationMessage> validate(final ChEmedEprDocument document) {
-        final var messages = new ArrayList<SingleValidationMessage>(0);
+    public List<OperationOutcome.OperationOutcomeIssueComponent> validate(final ChEmedEprDocument document) {
+        final var messages = new ArrayList<OperationOutcome.OperationOutcomeIssueComponent>(0);
 
         if (document instanceof final ChEmedEprDocumentMtp mtpDocument) {
 
@@ -54,7 +53,7 @@ class LogicValidator {
 
     public void validateDosages(final ChEmedEprDosage baseDosage,
                                 final List<ChEmedEprDosage> additionalDosages,
-                                final List<SingleValidationMessage> messages) {
+                                final List<OperationOutcome.OperationOutcomeIssueComponent> messages) {
 
 
         if (additionalDosages.isEmpty()) {
@@ -83,10 +82,10 @@ class LogicValidator {
         }
     }
 
-    protected static SingleValidationMessage createError(final String message) {
-        final var error = new SingleValidationMessage();
-        error.setSeverity(ResultSeverityEnum.ERROR);
-        error.setMessage(message);
+    protected static OperationOutcome.OperationOutcomeIssueComponent createError(final String message) {
+        final var error = new OperationOutcome.OperationOutcomeIssueComponent();
+        error.setSeverity(OperationOutcome.IssueSeverity.ERROR);
+        error.getDetails().setText(message);
         return error;
     }
 }
