@@ -15,12 +15,9 @@
             <artifactId>husky-fhir-emed-ch-common</artifactId>
         </dependency>
         <dependency>
-            <groupId>ca.uhn.hapi.fhir</groupId>
-            <artifactId>hapi-fhir-validation</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ca.uhn.hapi.fhir</groupId>
-            <artifactId>hapi-fhir-validation-resources-r4</artifactId>
+            <groupId>matchbox.health</groupId>
+            <artifactId>matchbox-engine</artifactId>
+            <version>3.2.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
