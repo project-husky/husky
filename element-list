@@ -84,7 +84,6 @@ org.projecthusky.fhir.emed.ch.common.annotation
 org.projecthusky.fhir.emed.ch.common.datatype
 org.projecthusky.fhir.emed.ch.common.enums
 org.projecthusky.fhir.emed.ch.common.error
-org.projecthusky.fhir.emed.ch.common.model.datatype
 org.projecthusky.fhir.emed.ch.common.resource
 org.projecthusky.fhir.emed.ch.common.util
 org.projecthusky.fhir.emed.ch.epr
