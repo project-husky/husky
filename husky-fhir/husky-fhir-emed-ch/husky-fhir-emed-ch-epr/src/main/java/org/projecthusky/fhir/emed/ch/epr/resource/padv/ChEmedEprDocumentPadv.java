@@ -95,34 +95,6 @@ public class ChEmedEprDocumentPadv extends ChEmedEprDocument {
     }
 
     /**
-     * Returns the observation.
-     *
-     * @return the observation
-     */
-    @ExpectsValidResource
-    public ChEmedEprObservationPadv resolveObservation() {
-        final var entry = this.getEntryByResourceType(ChEmedEprObservationPadv.class);
-        if (entry != null && entry.getResource() instanceof final ChEmedEprObservationPadv observation) {
-            return observation;
-        }
-        throw new InvalidEmedContentException("The ChEmedEprObservationPadv is missing in the document Bundle");
-    }
-
-    /**
-     * Returns the medication statement.
-     *
-     * @return the medication statement.
-     */
-    @ExpectsValidResource
-    public ChEmedEprMedicationStatementMtp resolveMedicationStatement() {
-        final var entry = this.getEntryByResourceType(ChEmedEprMedicationStatementMtp.class);
-        if (entry != null && entry.getResource() instanceof final ChEmedEprMedicationStatementMtp medicationStatemen) {
-            return medicationStatemen;
-        }
-        throw new InvalidEmedContentException("The ChEmedEprMedicationStatementMtp is missing in the document Bundle");
-    }
-
-    /**
      * Sets the composition.
      *
      * @param composition The CH EMED Pharmaceutical Advice Composition.

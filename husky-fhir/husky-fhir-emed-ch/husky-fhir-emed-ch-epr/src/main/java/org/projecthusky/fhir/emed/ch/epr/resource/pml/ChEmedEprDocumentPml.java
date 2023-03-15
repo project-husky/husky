@@ -19,8 +19,6 @@ import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprEntry;
 
 import java.io.Serial;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -93,66 +91,6 @@ public class ChEmedEprDocumentPml extends ChEmedEprDocument {
         }
         throw new InvalidEmedContentException(
                 "The ChEmedEprCompositionPml is missing in the document Bundle");
-    }
-
-    /**
-     * Returns the list with medication statement, medication request, medication dispense and observation.
-     *
-     * @return the list with medication statement, medication request, medication dispense and observation.
-     */
-    @ExpectsValidResource
-    public List<ChEmedEprEntry> resolveEntries() {
-        final var resources = new ArrayList<ChEmedEprEntry>();
-        for (final var entry : this.getEntry()) {
-            final var resource = entry.getResource();
-
-            if (resource instanceof ChEmedEprMedicationStatementPml medicationStatement) {
-                resources.add(medicationStatement);
-            } else if (resource instanceof ChEmedEprMedicationRequestPml medicationRequest) {
-                resources.add(medicationRequest);
-            } else if (resource instanceof ChEmedEprMedicationDispensePml medicationDispense) {
-                resources.add(medicationDispense);
-            } else if (resource instanceof ChEmedEprObservationPml observation) {
-                resources.add(observation);
-            }
-        }
-        return resources;
-    }
-
-    /**
-     * Returns a list with ChEmedEprMedicationStatementPml resources.
-     *
-     * @return a list with ChEmedEprMedicationStatementPml resources.
-     */
-    public List<ChEmedEprMedicationStatementPml> resolveMedicationStatements() {
-        return this.getEntryResourceByResourceType(ChEmedEprMedicationStatementPml.class);
-    }
-
-    /**
-     * Returns a list with ChEmedEprMedicationRequestPml resources.
-     *
-     * @return a list with ChEmedEprMedicationRequestPml resources.
-     */
-    public List<ChEmedEprMedicationRequestPml> resolveMedicationRequests() {
-        return this.getEntryResourceByResourceType(ChEmedEprMedicationRequestPml.class);
-    }
-
-    /**
-     * Returns a list with ChEmedEprMedicationDispensePml resources.
-     *
-     * @return a list with ChEmedEprMedicationDispensePml resources.
-     */
-    public List<ChEmedEprMedicationDispensePml> resolveMedicationDispenses() {
-        return this.getEntryResourceByResourceType(ChEmedEprMedicationDispensePml.class);
-    }
-
-    /**
-     * Returns a list with ChEmedEprObservationPml resources.
-     *
-     * @return a list with ChEmedEprObservationPml resources.
-     */
-    public List<ChEmedEprObservationPml> resolveObservations() {
-        return this.getEntryResourceByResourceType(ChEmedEprObservationPml.class);
     }
 
     /**

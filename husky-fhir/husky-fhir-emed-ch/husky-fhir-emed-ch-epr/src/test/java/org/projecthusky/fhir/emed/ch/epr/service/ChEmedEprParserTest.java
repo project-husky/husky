@@ -18,19 +18,17 @@ import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedication;
 import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprCompositionDis;
 import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprDocumentDis;
 import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprMedicationDis;
-import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprMedicationDispenseDis;
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprCompositionMtp;
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprDocumentMtp;
-import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprMedicationStatementMtp;
 import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprCompositionPadv;
 import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprDocumentPadv;
-import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprObservationPadv;
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprCompositionPre;
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprDocumentPre;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Tests for {@link ChEmedEprParser}.
@@ -48,10 +46,9 @@ class ChEmedEprParserTest {
         final var mtpDocument = (ChEmedEprDocumentMtp) document;
         assertNotNull(mtpDocument.resolveComposition());
         assertInstanceOf(ChEmedEprCompositionMtp.class, mtpDocument.resolveComposition());
-        assertNotNull(mtpDocument.resolveMedicationStatement());
-        assertInstanceOf(ChEmedEprMedicationStatementMtp.class, mtpDocument.resolveMedicationStatement());
         assertNotNull(mtpDocument.resolveComposition().resolveMedicationStatement().resolveMedication());
-        assertInstanceOf(ChEmedEprMedication.class, mtpDocument.resolveComposition().resolveMedicationStatement().resolveMedication());
+        assertInstanceOf(ChEmedEprMedication.class,
+                         mtpDocument.resolveComposition().resolveMedicationStatement().resolveMedication());
     }
 
     @Test
@@ -74,10 +71,9 @@ class ChEmedEprParserTest {
         final var disDocument = (ChEmedEprDocumentDis) document;
         assertNotNull(disDocument.resolveComposition());
         assertInstanceOf(ChEmedEprCompositionDis.class, disDocument.resolveComposition());
-        assertNotNull(disDocument.resolveMedicationDispense());
-        assertInstanceOf(ChEmedEprMedicationDispenseDis.class, disDocument.resolveMedicationDispense());
         assertNotNull(disDocument.resolveComposition().resolveMedicationDispense().resolveMedicationReference());
-        assertInstanceOf(ChEmedEprMedicationDis.class, disDocument.resolveComposition().resolveMedicationDispense().resolveMedicationReference());
+        assertInstanceOf(ChEmedEprMedicationDis.class,
+                         disDocument.resolveComposition().resolveMedicationDispense().resolveMedicationReference());
     }
 
     @Test
@@ -89,11 +85,6 @@ class ChEmedEprParserTest {
         final var padvDocument = (ChEmedEprDocumentPadv) document;
         assertNotNull(padvDocument.resolveComposition());
         assertInstanceOf(ChEmedEprCompositionPadv.class, padvDocument.resolveComposition());
-        assertInstanceOf(ChEmedEprObservationPadv.class, padvDocument.resolveObservation());
-
-        assertTrue(padvDocument.resolveObservation().hasTreatmentPlan());
-        assertTrue(padvDocument.resolveObservation().getTreatmentPlanElement().hasExtensionId());
-        assertTrue(padvDocument.resolveObservation().getTreatmentPlanElement().hasExternalDocumentId());
 
         final var serializedDoc = parser.serializePrettyPrint(padvDocument, EncodingEnum.XML);
         final var document2 = parser.parse(serializedDoc, EmedDocumentType.PADV);
@@ -101,10 +92,5 @@ class ChEmedEprParserTest {
         final var padvDocument2 = (ChEmedEprDocumentPadv) document2;
         assertNotNull(padvDocument2.resolveComposition());
         assertInstanceOf(ChEmedEprCompositionPadv.class, padvDocument2.resolveComposition());
-        assertInstanceOf(ChEmedEprObservationPadv.class, padvDocument2.resolveObservation());
-
-        assertTrue(padvDocument2.resolveObservation().hasTreatmentPlan());
-        assertTrue(padvDocument2.resolveObservation().getTreatmentPlanElement().hasExtensionId());
-        assertTrue(padvDocument2.resolveObservation().getTreatmentPlanElement().hasExternalDocumentId());
     }
 }

@@ -93,20 +93,6 @@ public class ChEmedEprDocumentDis extends ChEmedEprDocument {
     }
 
     /**
-     * Returns the medication dispense.
-     *
-     * @return the medication dispense
-     */
-    @ExpectsValidResource
-    public ChEmedEprMedicationDispenseDis resolveMedicationDispense() {
-        final var entry = this.getEntryByResourceType(ChEmedEprMedicationDispenseDis.class);
-        if (entry != null && entry.getResource() instanceof final ChEmedEprMedicationDispenseDis medicationDispense) {
-            return medicationDispense;
-        }
-        throw new InvalidEmedContentException("The ChEmedEprMedicationDispenseDis is missing in the document Bundle");
-    }
-
-    /**
      * Adds a medication dispense.
      *
      * @param medicationDispense the medication dispense.

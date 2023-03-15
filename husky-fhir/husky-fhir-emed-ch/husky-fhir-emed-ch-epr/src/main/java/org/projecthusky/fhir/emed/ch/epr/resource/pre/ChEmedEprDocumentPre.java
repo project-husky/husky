@@ -18,7 +18,6 @@ import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 
 import java.io.Serial;
 import java.time.Instant;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -91,15 +90,6 @@ public class ChEmedEprDocumentPre extends ChEmedEprDocument {
         }
         throw new InvalidEmedContentException(
                 "The ChEmedEprCompositionPre is missing in the document Bundle");
-    }
-
-    /**
-     * Resolves the list with medication requests of this document.
-     *
-     * @return the list with medication requests of this document.
-     */
-    public List<ChEmedEprMedicationRequestPre> resolveMedicationRequests() {
-        return this.getEntryResourceByResourceType(ChEmedEprMedicationRequestPre.class);
     }
 
     /**

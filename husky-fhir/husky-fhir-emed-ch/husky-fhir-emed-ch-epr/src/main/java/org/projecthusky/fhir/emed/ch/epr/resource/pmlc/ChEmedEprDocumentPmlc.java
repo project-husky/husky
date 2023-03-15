@@ -19,7 +19,6 @@ import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 
 import java.io.Serial;
 import java.time.Instant;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -92,15 +91,6 @@ public class ChEmedEprDocumentPmlc extends ChEmedEprDocument {
         }
         throw new InvalidEmedContentException(
                 "The ChEmedEprCompositionPmlc is missing in the document Bundle");
-    }
-
-    /**
-     * Resolves the medication statements.
-     *
-     * @return the medication statements.
-     */
-    public List<ChEmedEprMedicationStatementPmlc> resolveMedicationStatements() {
-        return this.getEntryResourceByResourceType(ChEmedEprMedicationStatementPmlc.class);
     }
 
     /**

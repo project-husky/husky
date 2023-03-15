@@ -92,20 +92,6 @@ public class ChEmedEprDocumentMtp extends ChEmedEprDocument {
     }
 
     /**
-     * Returns the medication statement.
-     *
-     * @return the medication statement
-     */
-    @ExpectsValidResource
-    public ChEmedEprMedicationStatementMtp resolveMedicationStatement() {
-        final var entry = this.getEntryByResourceType(ChEmedEprMedicationStatementMtp.class);
-        if (entry != null && entry.getResource() instanceof final ChEmedEprMedicationStatementMtp medicationStatement) {
-            return medicationStatement;
-        }
-        throw new InvalidEmedContentException("The ChEmedEprMedicationStatementMtp is missing in the document Bundle");
-    }
-
-    /**
      * Sets the composition.
      *
      * @param composition The CH EMED Medication Treatment Plan Composition.
