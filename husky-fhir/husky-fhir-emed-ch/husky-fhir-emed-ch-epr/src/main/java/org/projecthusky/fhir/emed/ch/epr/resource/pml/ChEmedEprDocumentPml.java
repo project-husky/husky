@@ -15,7 +15,8 @@ import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
-import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprEntry;
+import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprMedicationStatementMtp;
+import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprMedicationRequestPre;
 
 import java.io.Serial;
 import java.time.Instant;
@@ -118,12 +119,36 @@ public class ChEmedEprDocumentPml extends ChEmedEprDocument {
     }
 
     /**
+     * Adds a medication statement.
+     *
+     * @param medicationStatement a medication statement.
+     * @return the bundle entry.
+     */
+    public BundleEntryComponent addMedicationStatement(final ChEmedEprMedicationStatementMtp medicationStatement) {
+        return this.addEntry()
+                .setFullUrl(medicationStatement.getIdentifierFirstRep().getValue())
+                .setResource(medicationStatement);
+    }
+
+    /**
      * Adds a medication request.
      *
      * @param medicationRequest a medication request.
      * @return the bundle entry.
      */
     public BundleEntryComponent addMedicationRequest(final ChEmedEprMedicationRequestPml medicationRequest) {
+        return this.addEntry()
+                .setFullUrl(medicationRequest.getIdentifierFirstRep().getValue())
+                .setResource(medicationRequest);
+    }
+
+    /**
+     * Adds a medication request.
+     *
+     * @param medicationRequest a medication request.
+     * @return the bundle entry.
+     */
+    public BundleEntryComponent addMedicationRequest(final ChEmedEprMedicationRequestPre medicationRequest) {
         return this.addEntry()
                 .setFullUrl(medicationRequest.getIdentifierFirstRep().getValue())
                 .setResource(medicationRequest);
