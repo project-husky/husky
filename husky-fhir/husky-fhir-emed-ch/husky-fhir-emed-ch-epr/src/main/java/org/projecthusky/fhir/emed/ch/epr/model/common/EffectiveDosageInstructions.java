@@ -94,15 +94,11 @@ public record EffectiveDosageInstructions(
         final var intakes = new ArrayList<DosageIntake>(0);
         final Consumer<ChEmedEprDosage> processIntakes = (ChEmedEprDosage dosage) -> {
             final var dose = dosage.resolveDose();
-            if (dose != null && dose.isQuantity() && "0".equals(dose.quantity().value())) {
-                return;
-            }
-            final var rate = dosage.resolveRate();
-            if (rate != null && "0".equals(rate.amount().value())) {
+            if (dose == null || dose.isQuantity() && "0".equals(dose.quantity().value())) {
                 return;
             }
             for (final var eventTiming : dosage.resolveWhen()) {
-                intakes.add(new DosageIntake(eventTiming, dose, rate));
+                intakes.add(new DosageIntake(eventTiming, dose));
             }
         };
         processIntakes.accept(baseDosage);
