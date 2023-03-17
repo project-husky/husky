@@ -124,13 +124,13 @@ public class ChEmedEprCompositionPadv extends ChEmedEprComposition {
     }
 
     /**
-     * Returns the medication observation or throws.
+     * Returns the observation or throws.
      *
-     * @return the medication observation.
-     * @throws InvalidEmedContentException if the medication observation is missing.
+     * @return the observation.
+     * @throws InvalidEmedContentException if the observation is missing.
      */
     @ExpectsValidResource
-    public ChEmedEprObservationPadv resolveMedicationObservation() throws InvalidEmedContentException {
+    public ChEmedEprObservationPadv resolveObservation() throws InvalidEmedContentException {
         final var section = this.getPharmaceuticalAdviceSection();
         if (!section.hasEntry()) {
             throw new InvalidEmedContentException("The section has no entries");
