@@ -43,6 +43,7 @@ public abstract class ChEmedEprComposition extends Composition {
     public static final String LIST_SECTION_CODE_VALUE = "10160-0";
     public static final String CARD_SECTION_CODE_VALUE = "10160-0";
     public static final String ANNOTATION_SECTION_CODE_VALUE = "48767-8";
+    public static final String VITAL_SIGNS_SECTION_CODE_VALUE = "29463-7";
 
     /**
      * Version number
@@ -402,6 +403,31 @@ public abstract class ChEmedEprComposition extends Composition {
     }
 
     /**
+     * Returns whether the vital signs section exists.
+     *
+     * @return {@code true} if the vital signs section exists, {@code false} otherwise.
+     */
+    public boolean hasVitalSignsSection() {
+        return getSectionByLoincCode(VITAL_SIGNS_SECTION_CODE_VALUE) != null;
+    }
+
+    /**
+     * Returns the patient weight observation if any, or {@code null}.
+     *
+     * @return the patient weight observation  or {@code null}.
+     */
+    @Nullable
+    @ExpectsValidResource
+    public Observation resolvePatientWeightObservation() throws InvalidEmedContentException {
+        return Optional.ofNullable(getSectionByLoincCode(VITAL_SIGNS_SECTION_CODE_VALUE))
+                .map(SectionComponent::getEntry)
+                .map(entries -> !entries.isEmpty() ? entries.get(0) : null)
+                .map(BaseReference::getResource)
+                .map(Observation.class::cast)
+                .orElse(null);
+    }
+
+    /**
      * Returns whether the person who entered information into this document.
      *
      * @return {@code true} if the person who entered information into this document exists, {@code false} otherwise.
@@ -421,6 +447,17 @@ public abstract class ChEmedEprComposition extends Composition {
                 for (final var i : informationRecipient)
                     als.informationRecipient.add(i.copy());
             }
+        }
+    }
+
+    /**
+     * The 'vital signs' section.
+     */
+    public static class VitalSignsSection extends SectionComponent {
+        public VitalSignsSection() {
+            this.getCode().getCodingFirstRep()
+                    .setCode(VITAL_SIGNS_SECTION_CODE_VALUE)
+                    .setSystem(FhirSystem.LOINC);
         }
     }
 }
