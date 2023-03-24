@@ -10,6 +10,7 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.resource;
 
+import ca.uhn.fhir.model.api.annotation.Block;
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -453,6 +454,7 @@ public abstract class ChEmedEprComposition extends Composition {
     /**
      * The 'vital signs' section.
      */
+    @Block()
     public static class VitalSignsSection extends SectionComponent {
         public VitalSignsSection() {
             this.getCode().getCodingFirstRep()

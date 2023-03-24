@@ -27,6 +27,19 @@ import java.time.LocalDate;
 public class ChEmedEprObservationBodyWeight extends Observation {
 
     /**
+     * Initializes the Observation.
+     */
+    public ChEmedEprObservationBodyWeight() {
+        this.getValueQuantity()
+                .setUnit("kg")
+                .setCode("kg")
+                .setSystem(FhirSystem.UCUM);
+        this.getCode().getCodingFirstRep()
+                .setCode("29463-7")
+                .setSystem(FhirSystem.LOINC);
+    }
+
+    /**
      * Initializes the Observation with the given weight value and date.
      *
      * @param weightValue The value of the body weight. It is a FHIR
@@ -35,15 +48,10 @@ public class ChEmedEprObservationBodyWeight extends Observation {
      */
     public ChEmedEprObservationBodyWeight(final String weightValue,
                                           final LocalDate weightDate) {
+        this();
         this.getValueQuantity()
-                .setUnit("kg")
-                .setCode("kg")
-                .setSystem(FhirSystem.UCUM)
                 .getValueElement().setValueAsString(weightValue);
         this.getEffectiveDateTimeType().setValue(Date.valueOf(weightDate));
-        this.getCode().getCodingFirstRep()
-                .setCode("29463-7")
-                .setSystem(FhirSystem.LOINC);
     }
 
     /**
