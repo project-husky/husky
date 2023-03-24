@@ -90,7 +90,7 @@ public class ChEmedEprDosage extends Dosage {
     /**
      * Resolve the dose.
      *
-     * @return the dose or {@code null} if it's not specified.
+     * @return the dose or {@code null} if it is not specified.
      */
     @Nullable
     @ExpectsValidResource
@@ -103,20 +103,6 @@ public class ChEmedEprDosage extends Dosage {
     }
 
     /**
-     * Resolves the rate ratio.
-     *
-     * @return the rate ratio or {@code null} if it's not specified.
-     */
-    @Nullable
-    @ExpectsValidResource
-    public AmountPerDuration resolveRate() {
-        if (!this.hasDoseAndRate() || !this.getDoseAndRateFirstRep().hasRateRatio()) {
-            return null;
-        }
-        return AmountPerDuration.fromRatio(this.getDoseAndRateFirstRep().getRateRatio());
-    }
-
-    /**
      * Returns whether the dosage is 'as needed'.
      */
     public boolean isAsNeeded() {
@@ -126,7 +112,7 @@ public class ChEmedEprDosage extends Dosage {
     }
 
     /**
-     * Gets the start and/or end of treatment. If it doesn't exist, it's created.
+     * Gets the start and/or end of treatment. If it doesn't exist, it is created.
      *
      * @return the start and/or end of treatment.
      */
@@ -268,7 +254,7 @@ public class ChEmedEprDosage extends Dosage {
     }
 
     /**
-     * Returns the resolved max dose per period, or {@code null} if it's not specified. Throws if it's specified but
+     * Returns the resolved max dose per period, or {@code null} if it is not specified. Throws if it is specified but
      * invalid.
      */
     @ExpectsValidResource
@@ -281,7 +267,7 @@ public class ChEmedEprDosage extends Dosage {
     }
 
     /**
-     * Returns the resolved max dose per administration, or {@code null} if it's not specified. Throws if it's specified
+     * Returns the resolved max dose per administration, or {@code null} if it is not specified. Throws if it is specified
      * but invalid.
      */
     @ExpectsValidResource

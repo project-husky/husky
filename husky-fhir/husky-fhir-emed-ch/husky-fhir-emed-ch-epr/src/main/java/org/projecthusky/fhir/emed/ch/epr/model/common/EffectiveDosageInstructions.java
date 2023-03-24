@@ -20,10 +20,11 @@ public record EffectiveDosageInstructions(
         String narrative,
         boolean isAsNeeded,
         List<DosageIntake> intakes,
+        @Nullable Dose simpleDose,
+        @Nullable List<TimingEventAmbu> simpleEventTimings,
         @Nullable String site,
         @Nullable RouteOfAdministrationEdqm routeOfAdministration,
         @Nullable Period period,
-        @Nullable Duration periodDuration,
         @Nullable AmountPerDuration maxDosePerPeriod,
         @Nullable AmountQuantity maxDosePerAdministration) {
 
@@ -41,6 +42,14 @@ public record EffectiveDosageInstructions(
 
     public boolean hasMaxDose() {
         return this.maxDosePerPeriod != null || this.maxDosePerAdministration != null;
+    }
+
+    public boolean hasSimpleDose() {
+        return this.simpleDose != null;
+    }
+
+    public boolean hasSimpleEventTimings() {
+        return this.simpleEventTimings != null;
     }
 
     @Nullable
@@ -86,34 +95,45 @@ public record EffectiveDosageInstructions(
         final var site = baseDosage.getSiteText();
         final var routeOfAdministration = baseDosage.resolveRouteOfAdministration();
         final var period = baseDosage.getBoundsPeriod();
-        final var duration = baseDosage.resolveBoundsDuration();
         final var maxDosePerPeriod = baseDosage.resolveMaxDosePerPeriod();
         final var maxDosePerAdministration = baseDosage.resolveMaxDosePerAdministration();
 
         // Resolve intakes
-        final var intakes = new ArrayList<DosageIntake>(0);
+        final List<DosageIntake> intakes = new ArrayList<>(0);
         final Consumer<ChEmedEprDosage> processIntakes = (ChEmedEprDosage dosage) -> {
-            final var dose = dosage.resolveDose();
+            final Dose dose = dosage.resolveDose();
             if (dose == null || dose.isQuantity() && "0".equals(dose.quantity().value())) {
                 return;
             }
-            for (final var eventTiming : dosage.resolveWhen()) {
+            for (final TimingEventAmbu eventTiming : dosage.resolveWhen()) {
                 intakes.add(new DosageIntake(eventTiming, dose));
             }
         };
         processIntakes.accept(baseDosage);
-        for (final var additionalDosage : additionalDosages) {
+        for (final ChEmedEprDosage additionalDosage : additionalDosages) {
             processIntakes.accept(additionalDosage);
+        }
+
+        Dose simpleDose = null;
+        List<TimingEventAmbu> simpleEventTimings = null;
+        if (intakes.isEmpty()) {
+            if (baseDosage.hasDoseAndRate() && baseDosage.getDoseAndRateFirstRep().hasDoseQuantity()) {
+                simpleDose = baseDosage.resolveDose();
+            }
+            if (baseDosage.hasTiming() && baseDosage.getTiming().hasRepeat() && baseDosage.getTiming().getRepeat().hasWhen()) {
+                simpleEventTimings = baseDosage.resolveWhen();
+            }
         }
 
         return new EffectiveDosageInstructions(patientInstructions,
                                                narrative,
                                                isAsNeeded,
                                                intakes,
+                                               simpleDose,
+                                               simpleEventTimings,
                                                site,
                                                routeOfAdministration,
                                                period,
-                                               duration,
                                                maxDosePerPeriod,
                                                maxDosePerAdministration);
     }
