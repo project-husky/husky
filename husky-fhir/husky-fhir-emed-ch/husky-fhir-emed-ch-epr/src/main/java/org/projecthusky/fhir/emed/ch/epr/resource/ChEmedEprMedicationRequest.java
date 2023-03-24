@@ -14,6 +14,7 @@ import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
 import org.projecthusky.fhir.emed.ch.epr.enums.PrescriptionStatus;
+import org.projecthusky.fhir.emed.ch.epr.enums.SubstanceAdministrationSubstitutionCode;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EffectiveDosageInstructions;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EmedReference;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
@@ -69,25 +70,25 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
      */
     @ExpectsValidResource
     public UUID resolveIdentifier() throws InvalidEmedContentException {
-        if (!this.hasIdentifier()) throw new InvalidEmedContentException("The ID is missing.");
+        if (!this.hasIdentifier()) throw new InvalidEmedContentException("The ID is missing");
         return Uuids.parseUrnEncoded(this.getIdentifierFirstRep().getValue());
     }
 
     /**
-     * Resolves the medication reference.
+     * Resolves the medication or throws.
      *
-     * @return the medication reference.
-     * @throws InvalidEmedContentException if the medication reference is missing or if it isn't the right type.
+     * @return the medication.
+     * @throws InvalidEmedContentException if the medication is missing or if it isn't of the right type.
      */
     @ExpectsValidResource
-    public ChEmedEprMedication resolveMedicationReference() throws InvalidEmedContentException {
+    public ChEmedEprMedication resolveMedication() throws InvalidEmedContentException {
         if (!this.hasMedicationReference())
-            throw new InvalidEmedContentException("The medication reference is missing.");
+            throw new InvalidEmedContentException("The medication reference is missing");
         final var resource = this.getMedicationReference().getResource();
         if (resource instanceof ChEmedEprMedication chMedication) {
             return chMedication;
         }
-        throw new InvalidEmedContentException("The medication resource isn't the right type.");
+        throw new InvalidEmedContentException("The medication resource isn't of the right type");
     }
 
     /**
@@ -98,12 +99,12 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
      */
     @ExpectsValidResource
     public ChCorePatientEpr resolvePatient() throws InvalidEmedContentException {
-        if (!this.hasSubject()) throw new InvalidEmedContentException("The patient is missing.");
+        if (!this.hasSubject()) throw new InvalidEmedContentException("The patient is missing");
         final var resource = this.getSubject().getResource();
         if (resource instanceof ChCorePatientEpr chPatient) {
             return chPatient;
         }
-        throw new InvalidEmedContentException("The patient resource isn't of the right type.");
+        throw new InvalidEmedContentException("The patient resource isn't of the right type");
     }
 
     /**
@@ -117,7 +118,7 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
         if (!this.getDosageInstruction().isEmpty() && this.getDosageInstruction().get(0) instanceof final ChEmedEprDosage dosage) {
             return dosage;
         }
-        throw new InvalidEmedContentException("Base entry of the dosage instruction is missing.");
+        throw new InvalidEmedContentException("Base entry of the dosage instruction is missing");
     }
 
     /**
@@ -161,12 +162,12 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
             case ONHOLD, DRAFT -> PrescriptionStatus.SUBMITTED;
             case CANCELLED, STOPPED -> PrescriptionStatus.CANCELED;
             case ENTEREDINERROR -> PrescriptionStatus.REFUSED;
-            case COMPLETED, UNKNOWN, NULL -> throw new InvalidEmedContentException("The status is not supported.");
+            case COMPLETED, UNKNOWN, NULL -> throw new InvalidEmedContentException("The status is not supported");
         };
     }
 
     /**
-     * Gets the treatment plan element. If it doesn't exist, it's created.
+     * Gets the treatment plan element. If it doesn't exist, it is created.
      *
      * @return the treatment plan element.
      */
@@ -356,6 +357,25 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
             return patient;
         }
         throw new InvalidEmedContentException("The subject (Patient) is missing");
+    }
+
+    /**
+     * Gets the substitution code in the medication statement.
+     *
+     * @return the substitution code.
+     * @throws InvalidEmedContentException if the substitution code is invalid.
+     */
+    @ExpectsValidResource
+    public SubstanceAdministrationSubstitutionCode resolveSubstitution() throws InvalidEmedContentException {
+        if (!this.hasSubstitution() || !this.getSubstitution().hasAllowedCodeableConcept()) {
+            return SubstanceAdministrationSubstitutionCode.EQUIVALENT;
+        }
+        final var substitutionCode =
+                SubstanceAdministrationSubstitutionCode.fromCoding(this.getSubstitution().getAllowedCodeableConcept().getCodingFirstRep());
+        if (substitutionCode == null) {
+            throw new InvalidEmedContentException("The substitution code is invalid");
+        }
+        return substitutionCode;
     }
 
     @Override

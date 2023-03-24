@@ -3,8 +3,10 @@ package org.projecthusky.fhir.emed.ch.epr.resource;
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.Dosage;
 import org.hl7.fhir.r4.model.MedicationDispense;
+import org.hl7.fhir.r4.model.Quantity;
 import org.hl7.fhir.r4.model.StringType;
 import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
@@ -95,25 +97,28 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
      */
     @ExpectsValidResource
     public UUID resolveIdentifier() throws InvalidEmedContentException {
-        if (!this.hasIdentifier()) throw new InvalidEmedContentException("The ID is missing.");
+        if (!this.hasIdentifier()) {
+            throw new InvalidEmedContentException("The ID is missing");
+        }
         return Uuids.parseUrnEncoded(this.getIdentifierFirstRep().getValue());
     }
 
     /**
-     * Resolves the medication reference.
+     * Resolves the medication or throws.
      *
-     * @return the medication reference.
-     * @throws InvalidEmedContentException if the medication reference is missing or if it isn't the right type.
+     * @return the medication.
+     * @throws InvalidEmedContentException if the medication is missing or if it isn't of the right type.
      */
     @ExpectsValidResource
-    public ChEmedEprMedicationDis resolveMedicationReference() throws InvalidEmedContentException {
-        if (!this.hasMedicationReference())
-            throw new InvalidEmedContentException("The medication reference is missing.");
-        final var resource = this.getMedicationReference().getResource();
+    public ChEmedEprMedicationDis resolveMedication() throws InvalidEmedContentException {
+        if (!this.hasMedicationReference()) {
+            throw new InvalidEmedContentException("The medication reference is missing");
+        }
+        final IBaseResource resource = this.getMedicationReference().getResource();
         if (resource instanceof ChEmedEprMedicationDis chMedication) {
             return chMedication;
         }
-        throw new InvalidEmedContentException("The medication resource isn't the right type.");
+        throw new InvalidEmedContentException("The medication resource isn't of the right type");
     }
 
     /**
@@ -124,8 +129,10 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
      */
     @ExpectsValidResource
     public ChEmedQuantityWithEmedUnits resolveQuantity() throws InvalidEmedContentException {
-        if (!this.hasQuantity()) throw new InvalidEmedContentException("The number of packages is missing.");
-        final var quantity = this.getQuantity();
+        if (!this.hasQuantity()) {
+            throw new InvalidEmedContentException("The number of packages is missing");
+        }
+        final Quantity quantity = this.getQuantity();
         if (quantity instanceof final ChEmedQuantityWithEmedUnits chQuantity) {
             return chQuantity;
         }
@@ -140,8 +147,9 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
      */
     @ExpectsValidResource
     public Instant resolveWhenHandedOver() throws InvalidEmedContentException {
-        if (!this.hasWhenHandedOver())
+        if (!this.hasWhenHandedOver()) {
             throw new InvalidEmedContentException("the date/time of when the product was distributed is missing.");
+        }
         return this.getWhenHandedOver().toInstant();
     }
 
@@ -156,7 +164,7 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
         if (!this.getDosageInstruction().isEmpty() && this.getDosageInstruction().get(0) instanceof final ChEmedEprDosage dosage) {
             return dosage;
         }
-        throw new InvalidEmedContentException("Base entry of the dosage instruction is missing.");
+        throw new InvalidEmedContentException("Base entry of the dosage instruction is missing");
     }
 
     /**

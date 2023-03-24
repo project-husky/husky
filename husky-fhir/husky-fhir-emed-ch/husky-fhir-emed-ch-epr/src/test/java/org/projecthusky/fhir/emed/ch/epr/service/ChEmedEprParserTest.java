@@ -71,9 +71,9 @@ class ChEmedEprParserTest {
         final var disDocument = (ChEmedEprDocumentDis) document;
         assertNotNull(disDocument.resolveComposition());
         assertInstanceOf(ChEmedEprCompositionDis.class, disDocument.resolveComposition());
-        assertNotNull(disDocument.resolveComposition().resolveMedicationDispense().resolveMedicationReference());
+        assertNotNull(disDocument.resolveComposition().resolveMedicationDispense().resolveMedication());
         assertInstanceOf(ChEmedEprMedicationDis.class,
-                         disDocument.resolveComposition().resolveMedicationDispense().resolveMedicationReference());
+                         disDocument.resolveComposition().resolveMedicationDispense().resolveMedication());
     }
 
     @Test

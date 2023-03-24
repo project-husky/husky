@@ -61,7 +61,7 @@ public class ChEmedEprMedicationStatementMtp extends ChEmedEprMedicationStatemen
      *
      * @return the substitution element.
      */
-    public CodeableConcept getSubstitutionElement() {
+    public CodeableConcept getSubstitution() {
         if (this.substitution == null) {
             this.substitution = new CodeableConcept();
         }
@@ -75,12 +75,12 @@ public class ChEmedEprMedicationStatementMtp extends ChEmedEprMedicationStatemen
      * @throws InvalidEmedContentException if the substitution code is invalid.
      */
     @ExpectsValidResource
-    public SubstanceAdministrationSubstitutionCode getSubstitution() throws InvalidEmedContentException {
+    public SubstanceAdministrationSubstitutionCode resolveSubstitution() throws InvalidEmedContentException {
         if (!this.hasSubstitution()) {
             return SubstanceAdministrationSubstitutionCode.EQUIVALENT;
         }
         final var substitutionCode =
-                SubstanceAdministrationSubstitutionCode.fromCoding(this.getSubstitution().getCoding());
+                SubstanceAdministrationSubstitutionCode.fromCoding(this.getSubstitution().getCodingFirstRep());
         if (substitutionCode == null) {
             throw new InvalidEmedContentException("The substitution code is invalid");
         }
