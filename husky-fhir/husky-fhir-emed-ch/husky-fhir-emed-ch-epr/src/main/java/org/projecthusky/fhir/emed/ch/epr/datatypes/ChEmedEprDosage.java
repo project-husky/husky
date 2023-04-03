@@ -16,6 +16,8 @@ import org.hl7.fhir.r4.model.Dosage;
 import org.hl7.fhir.r4.model.Period;
 import org.hl7.fhir.r4.model.Timing;
 import org.projecthusky.common.utils.datatypes.Oids;
+import org.projecthusky.common.utils.time.DateTimes;
+import org.projecthusky.common.utils.time.Hl7Dtm;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.RouteOfAdministrationEdqm;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
@@ -25,6 +27,7 @@ import org.projecthusky.fhir.emed.ch.epr.model.common.AmountQuantity;
 import org.projecthusky.fhir.emed.ch.epr.model.common.Dose;
 import org.projecthusky.fhir.emed.ch.epr.model.common.Duration;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -235,6 +238,44 @@ public class ChEmedEprDosage extends Dosage {
     }
 
     /**
+     * Returns the bounds period start time as an inclusive instant, or {@code null} if it is not specified.
+     *
+     * @return the bounds period start time or {@code null}.
+     */
+    @Nullable
+    public Instant getInclusiveStartTime() {
+        if (!this.hasBoundsPeriod()) {
+            return null;
+        }
+        final Period boundsPeriod = this.getBoundsPeriod();
+        if (!boundsPeriod.hasStart()) {
+            return null;
+        }
+        return boundsPeriod.getStart().toInstant();
+    }
+
+    /**
+     * Returns the bounds period end time as an inclusive instant, or {@code null} if it is not specified.
+     *
+     * @return the bounds period end time or {@code null}.
+     * @implNote {@code boundsPeriod.getEnd().toInstant()} returns the earliest instant covered by the partial date.
+     * Here, we want the latest instant so we use Husky's time utilities.
+     */
+    @Nullable
+    public Instant getInclusiveEndTime() {
+        if (!this.hasBoundsPeriod()) {
+            return null;
+        }
+        final Period boundsPeriod = this.getBoundsPeriod();
+        if (!boundsPeriod.hasEnd()) {
+            return null;
+        }
+        Hl7Dtm dtm = Hl7Dtm.fromHl7(boundsPeriod.getEndElement().getAsV3());
+        dtm = DateTimes.completeToLatestInstant(dtm);
+        return dtm.toInstant();
+    }
+
+    /**
      * Returns the site text, either the `site.text` element or the first `site.coding.text` that is filled.
      */
     @Nullable
@@ -267,8 +308,8 @@ public class ChEmedEprDosage extends Dosage {
     }
 
     /**
-     * Returns the resolved max dose per administration, or {@code null} if it is not specified. Throws if it is specified
-     * but invalid.
+     * Returns the resolved max dose per administration, or {@code null} if it is not specified. Throws if it is
+     * specified but invalid.
      */
     @ExpectsValidResource
     @Nullable
