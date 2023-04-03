@@ -25,6 +25,7 @@ import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationStatement;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
+import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtPrescription;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
 import org.projecthusky.fhir.emed.ch.epr.util.References;
 
@@ -39,12 +40,20 @@ import java.util.UUID;
 public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStatement {
 
     /**
-     * Reference to the MTP that introduced this medication in the treatment plan
+     * Reference to the MTP that introduced this medication in the treatment plan.
      */
     @Nullable
     @Child(name = "treatmentPlan", min = 1)
     @Extension(url = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan", definedLocally = false)
     protected ChEmedExtTreatmentPlan treatmentPlan;
+
+    /**
+     * Reference to the PRE that introduced this medication in the treatment plan.
+     */
+    @Nullable
+    @Child(name = "prescription")
+    @Extension(url = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-prescription", definedLocally = false)
+    protected ChEmedExtPrescription prescription;
 
     /**
      * "Last" author of the original document if different from the author of the medical decision
@@ -72,7 +81,7 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
     }
 
     /**
-     * Gets the treatment plan element. If it doesn't exist, it's created.
+     * Gets the treatment plan element. If it doesn't exist, it is created.
      *
      * @return the treatment plan element.
      */
@@ -81,6 +90,18 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
             this.treatmentPlan = new ChEmedExtTreatmentPlan();
         }
         return this.treatmentPlan;
+    }
+
+    /**
+     * Gets the prescription element. If it doesn't exist, it is created.
+     *
+     * @return the prescription element.
+     */
+    public ChEmedExtPrescription getPrescriptionElement() {
+        if (this.prescription == null) {
+            this.prescription = new ChEmedExtPrescription();
+        }
+        return this.prescription;
     }
 
     /**
@@ -136,7 +157,18 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
     }
 
     /**
-     * Returns whether author document exists.
+     * Sets the prescription reference.
+     *
+     * @param prescription the prescription reference.
+     * @return this.
+     */
+    public ChEmedEprMedicationStatementPmlc setTreatmentPlanElement(final ChEmedExtPrescription prescription) {
+        this.prescription = prescription;
+        return this;
+    }
+
+    /**
+     * Returns whether the author document exists.
      *
      * @return {@code true} if the author document exists, {@code false} otherwise.
      */
@@ -151,6 +183,15 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
      */
     public boolean hasTreatmentPlan() {
         return this.treatmentPlan != null && !this.treatmentPlan.isEmpty();
+    }
+
+    /**
+     * Returns whether the prescription reference.
+     *
+     * @return {@code true} if the prescription reference exists, {@code false} otherwise.
+     */
+    public boolean hasPrescription() {
+        return this.prescription != null && !this.prescription.isEmpty();
     }
 
     /**
