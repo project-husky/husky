@@ -19,7 +19,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Generate Javadoc
-        run: mvn javadoc:aggregate -f pom.xml
+        run: mvn javadoc:aggregate --batch-mode --no-transfer-progress --file pom.xml
       - name: Publish Javadoc 🚀
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
