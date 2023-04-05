@@ -653,6 +653,11 @@
                 <artifactId>husky-fhir-emed-ch-pmp</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>health.matchbox</groupId>
+                <artifactId>matchbox-engine</artifactId>
+                <version>3.2.1</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
