@@ -2,7 +2,7 @@
 
 [![GitHub license](https://img.shields.io/github/license/project-husky/husky)](https://github.com/project-husky/husky/blob/master/License.md)
 ![JDK17](https://img.shields.io/badge/java-JDK17-blue)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/project-husky/husky/Java%20CI%20with%20Maven%20and%20CodeQL)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/project-husky/husky/java_ci.yml?branch=master)
 ![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/project-husky/husky)
 
 This convenience API for IHE transactions and CDA documents allows easy access and conformity to eHealth affinity
