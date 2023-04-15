@@ -29,7 +29,7 @@
         <apache-httpcomponents>4.5.14</apache-httpcomponents>
         <apache-httpcore>4.4.16</apache-httpcore>
         <junit.version>5.9.2</junit.version>
-        <maven-surefire-plugin.version>3.0.0-M6</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
 
         <ipf.version>4.5.0</ipf.version>
         <!-- The following dependencies should be kept up-to-date with IPF to avoid duplicating dependencies:
@@ -250,7 +250,7 @@
             <dependency>
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
-                <version>1.15.3</version>
+                <version>1.15.4</version>
             </dependency>
 
             <dependency>
@@ -287,7 +287,7 @@
             <dependency>
                 <groupId>commons-fileupload</groupId>
                 <artifactId>commons-fileupload</artifactId>
-                <version>1.4</version>
+                <version>1.5</version>
             </dependency>
 
             <!-- configuration stuff (e.g. for value set handling) -->
@@ -338,7 +338,7 @@
             <dependency>
                 <groupId>net.sf.saxon</groupId>
                 <artifactId>Saxon-HE</artifactId>
-                <version>12.0</version>
+                <version>12.1</version>
                 <exclusions>
                     <exclusion>
                         <groupId>xml-apis</groupId>
@@ -549,12 +549,12 @@
             <dependency>
                 <groupId>org.checkerframework</groupId>
                 <artifactId>checker-qual</artifactId>
-                <version>3.29.0</version>
+                <version>3.33.0</version>
             </dependency>
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
-                <version>1.18.24</version>
+                <version>1.18.26</version>
                 <scope>provided</scope>
             </dependency>
 
@@ -640,7 +640,7 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>5.0.0</version>
+                <version>5.3.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -802,7 +802,7 @@
                     <dependency>
                         <groupId>org.apache.maven.surefire</groupId>
                         <artifactId>surefire-junit-platform</artifactId>
-                        <version>3.0.0-M8</version>
+                        <version>${maven-surefire-plugin.version}</version>
                     </dependency>
                     <dependency>
                         <groupId>org.junit.jupiter</groupId>
