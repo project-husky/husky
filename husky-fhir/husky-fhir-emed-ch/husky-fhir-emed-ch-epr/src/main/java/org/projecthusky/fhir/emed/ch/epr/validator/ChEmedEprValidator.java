@@ -12,6 +12,7 @@ package org.projecthusky.fhir.emed.ch.epr.validator;
 
 import ch.ahdis.matchbox.engine.MatchboxEngine;
 import org.hl7.fhir.r4.model.OperationOutcome;
+import org.hl7.fhir.r5.elementmodel.Manager;
 import org.hl7.fhir.r5.utils.EOperationOutcome;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
@@ -19,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 
 /**
@@ -44,33 +46,35 @@ public class ChEmedEprValidator {
      * Constructor.
      *
      * @throws IOException if the NPM packages can't be found in the classpath.
-     * @todo Update the packages.
      */
     public ChEmedEprValidator() throws IOException, URISyntaxException {
-        this.matchboxEngine = new MatchboxEngine.MatchboxEngineBuilder()
-                .getEngineR4();
+        this.matchboxEngine = new MatchboxEngine.MatchboxEngineBuilder().getEngineR4();
 
         // Adding all necessary packages
         log.debug("Start loading IGs");
-        this.loadIg("/iheformatcodefhir.tgz");
-        this.loadIg("/chfhirigcheprterm.tgz");
-        this.loadIg("/chfhirigchcore.tgz");
-        this.loadIg("/chfhirigchemed.tgz");
-        this.loadIg("/chcarafhirepremedr4.tgz");
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ihe.formatcode.fhir#1.1.0.tgz"));
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-epr-term#2.0.8.tgz"));
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-core#20230415.tgz"));
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-emed#20230415.tgz"));
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.cara.fhir.epr.emed#20230415.tgz"));
         log.debug("Stop loading IGs");
     }
 
     /**
-     * Validates a CH-EMED-EPR document Bundle. Use this method if you've generated a document that you want to
-     * validate.
+     * Validates a CH-EMED-EPR document Bundle.
      *
-     * @param document The document Bundle to validate.
+     * @param documentStream The document Bundle to validate as a stream.
      * @return the validation result.
+     * @implNote We need the parsed document for the logical validator and the serialized document for the instance
+     * validator, because HAPI's parser messes with resource IDs.
      */
-    public ValidationResult validateDocumentBundle(final ChEmedEprDocument document)
+    public ValidationResult validateDocumentBundle(final InputStream documentStream,
+                                                   final ChEmedEprDocument document,
+                                                   final Manager.FhirFormat streamFormat)
             throws EOperationOutcome, IOException {
         final OperationOutcome outcome = this.matchboxEngine.validate(
-                document,
+                documentStream,
+                streamFormat,
                 this.getProfileUrl(document.getEmedType())
         );
         final var result = new ValidationResult(outcome.getIssue());
@@ -80,7 +84,6 @@ public class ChEmedEprValidator {
         final var newMessages = this.logicValidator.validate(document);
         result.getMessages().addAll(newMessages);
         return result;
-
     }
 
     /**
@@ -98,18 +101,5 @@ public class ChEmedEprValidator {
             case PML -> "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-document-medicationlist";
             case PMLC -> "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-document-medicationcard";
         };
-    }
-
-    /**
-     * Loads a FHIR IG from its NPM package (TGZ file). The path shall start with a slash and points to an existing
-     * resource.
-     *
-     * @param resourcePath The IG file path.
-     */
-    protected void loadIg(final String resourcePath) throws IOException {
-        this.matchboxEngine.getIgLoader().loadIg(this.matchboxEngine.getIgs(),
-                                                 this.matchboxEngine.getBinaries(),
-                                                 resourcePath,
-                                                 true);
     }
 }
