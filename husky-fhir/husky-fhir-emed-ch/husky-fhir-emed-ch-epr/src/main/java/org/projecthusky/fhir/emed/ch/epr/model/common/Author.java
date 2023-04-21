@@ -13,12 +13,7 @@ package org.projecthusky.fhir.emed.ch.epr.model.common;
 import lombok.Data;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.instance.model.api.IBaseResource;
-import org.hl7.fhir.r4.model.Device;
-import org.hl7.fhir.r4.model.RelatedPerson;
-import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
-import org.projecthusky.fhir.emed.ch.common.resource.ChEmedOrganization;
-import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitioner;
-import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
+import org.projecthusky.fhir.emed.ch.epr.resource.*;
 
 /**
  * An author in the CH-EMED-EPR IG. It can be made up of a single (e.g. patient) or multiple resources (e.g.
@@ -36,30 +31,30 @@ public class Author {
     private ChEmedEprPractitionerRole practitionerRole;
 
     @Nullable
-    private Device device;
+    private ChEmedEprDevice device;
 
     @Nullable
-    private RelatedPerson relatedPerson;
+    private ChEmedEprRelatedPerson relatedPerson;
 
     @Nullable
-    private ChCorePatientEpr patient;
+    private ChEmedEprPatient patient;
 
     @Nullable
-    private ChEmedOrganization organization;
+    private ChEmedEprOrganization organization;
 
     public Author(final IBaseResource resource) {
         super();
-        if (resource instanceof final Device device) {
+        if (resource instanceof final ChEmedEprDevice device) {
             this.setDevice(device);
-        } else if (resource instanceof final ChEmedOrganization organization) {
+        } else if (resource instanceof final ChEmedEprOrganization organization) {
             this.setOrganization(organization);
-        } else if (resource instanceof final ChCorePatientEpr patient) {
+        } else if (resource instanceof final ChEmedEprPatient patient) {
             this.setPatient(patient);
         } else if (resource instanceof final ChEmedEprPractitioner practitioner) {
             this.setPractitioner(practitioner);
         } else if (resource instanceof final ChEmedEprPractitionerRole practitionerRole) {
             this.setPractitionerRole(practitionerRole);
-        } else if (resource instanceof final RelatedPerson relatedPerson) {
+        } else if (resource instanceof final ChEmedEprRelatedPerson relatedPerson) {
             this.setRelatedPerson(relatedPerson);
         } else {
             throw new IllegalArgumentException("Passed resource is not a supported author: " + resource.getClass().getName());

@@ -19,12 +19,7 @@ import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.Bundle;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
-import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
-import org.projecthusky.fhir.emed.ch.common.resource.ChEmedOrganization;
-import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
-import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedication;
-import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitioner;
-import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
+import org.projecthusky.fhir.emed.ch.epr.resource.*;
 import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprCompositionDis;
 import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprDocumentDis;
 import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprMedicationDis;
@@ -144,10 +139,12 @@ public class ChEmedEprParser {
             return parser;
         }
         final var preferTypes = new ArrayList<Class<? extends IBaseResource>>(10);
-        preferTypes.add(ChCorePatientEpr.class);
-        preferTypes.add(ChEmedOrganization.class);
+        preferTypes.add(ChEmedEprDevice.class);
+        preferTypes.add(ChEmedEprPatient.class);
+        preferTypes.add(ChEmedEprOrganization.class);
         preferTypes.add(ChEmedEprPractitioner.class);
         preferTypes.add(ChEmedEprPractitionerRole.class);
+        preferTypes.add(ChEmedEprRelatedPerson.class);
         preferTypes.add(ChEmedEprMedication.class);
         switch (type) {
             case MTP -> {
