@@ -53,7 +53,9 @@ public class ChPharm5AuditStrategy extends FhirQueryAuditStrategy {
         if (endpointUrl != null && endpointUrl.lastIndexOf("$") >= 0) {
             operation = endpointUrl.substring(endpointUrl.lastIndexOf("$"));
         }
-        return new QueryInformationBuilder<>(auditContext, auditDataset, FhirEventTypeCode.QueryPharmacyDocumentsOverMhd)
+        return new QueryInformationBuilder<>(auditContext,
+                                             auditDataset,
+                                             FhirEventTypeCode.QueryPharmacyDocumentsOverMhd)
                 .addPatients(auditDataset.getPatientIds())
                 .setQueryParameters(
                         operation,
@@ -92,9 +94,8 @@ public class ChPharm5AuditStrategy extends FhirQueryAuditStrategy {
             if (tokenParams != null) {
                 tokenParams.forEach(t -> addPatientId.accept(t.getValue(), t.getSystem()));
             }
-        } else if (request instanceof Parameters) {
-            final var bodyParameters = (Parameters) request;
-            final var patientIdentifier = bodyParameters.getParameter(ChPharm5ResourceProvider.SP_PATIENT_IDENTIFIER);
+        } else if (request instanceof final Parameters bodyParameters) {
+            final var patientIdentifier = bodyParameters.getParameterValues(ChPharm5ResourceProvider.SP_PATIENT_IDENTIFIER);
             if (patientIdentifier instanceof StringType) {
                 final var parts = ((StringType) patientIdentifier).getValue().split("\\|");
                 addPatientId.accept(parts[1], parts[0]);
