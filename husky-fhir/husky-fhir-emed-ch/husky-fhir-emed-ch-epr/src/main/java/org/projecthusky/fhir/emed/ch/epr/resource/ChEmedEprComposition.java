@@ -14,6 +14,7 @@ import ca.uhn.fhir.model.api.annotation.Block;
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.*;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.utils.datatypes.Uuids;
@@ -169,6 +170,21 @@ public abstract class ChEmedEprComposition extends Composition {
             throw new InvalidEmedContentException("The document's creation date and time is missing.");
         }
         return this.getDate().toInstant();
+    }
+
+    /**
+     * Resolves the composition first human author (the main one).
+     */
+    @ExpectsValidResource
+    public IBaseResource resolveFirstHumanAuthor() {
+        for (final var author : this.getAuthor()) {
+            if (author.getResource() instanceof Patient
+                    || author.getResource() instanceof RelatedPerson
+                    || author.getResource() instanceof PractitionerRole) {
+                return author.getResource();
+            }
+        }
+        throw new InvalidEmedContentException("The composition has no human author");
     }
 
     /**
