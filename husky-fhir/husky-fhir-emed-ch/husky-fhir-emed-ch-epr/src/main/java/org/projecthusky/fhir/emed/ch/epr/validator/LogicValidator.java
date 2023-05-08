@@ -1,5 +1,6 @@
 package org.projecthusky.fhir.emed.ch.epr.validator;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.hl7.fhir.r4.model.OperationOutcome;
 import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
 import org.projecthusky.fhir.emed.ch.epr.enums.TimingEventAmbu;
@@ -23,6 +24,7 @@ import java.util.List;
  * @author Quentin Ligier
  */
 class LogicValidator {
+    public static final String SOURCE = "LogicValidator";
 
     /**
      * Validates a CH-EMED-EPR document.
@@ -30,15 +32,25 @@ class LogicValidator {
      * @param document The document to validate.
      * @return a list of validation messages.
      */
-    public List<OperationOutcome.OperationOutcomeIssueComponent> validate(final ChEmedEprDocument document) {
-        final var messages = new ArrayList<OperationOutcome.OperationOutcomeIssueComponent>(0);
+    public List<@NonNull ValidationIssue> validate(final ChEmedEprDocument document) {
+        final var issues = new ArrayList<@NonNull ValidationIssue>(0);
 
         if (document instanceof final ChEmedEprDocumentMtp mtpDocument) {
-
+            final var mtpEntry = mtpDocument.resolveComposition().resolveMedicationStatement();
+            this.validateDosages(
+                    mtpEntry.resolveBaseDosage(),
+                    mtpEntry.resolveAdditionalDosage(),
+                    issues
+            );
         } else if (document instanceof final ChEmedEprDocumentPre preDocument) {
 
         } else if (document instanceof final ChEmedEprDocumentDis disDocument) {
-
+            final var disEntry = disDocument.resolveComposition().resolveMedicationDispense();
+            this.validateDosages(
+                    disEntry.resolveBaseDosage(),
+                    disEntry.resolveAdditionalDosage(),
+                    issues
+            );
         } else if (document instanceof final ChEmedEprDocumentPadv padvDocument) {
 
         } else if (document instanceof final ChEmedEprDocumentPml pmlDocument) {
@@ -47,13 +59,13 @@ class LogicValidator {
 
         }
 
-        return messages;
+        return issues;
     }
 
 
     public void validateDosages(final ChEmedEprDosage baseDosage,
-                                final List<ChEmedEprDosage> additionalDosages,
-                                final List<OperationOutcome.OperationOutcomeIssueComponent> messages) {
+                                final List<@NonNull ChEmedEprDosage> additionalDosages,
+                                final List<@NonNull ValidationIssue> issues) {
 
 
         if (additionalDosages.isEmpty()) {
@@ -62,30 +74,36 @@ class LogicValidator {
         // From here, there are additional dosages
 
         if (!baseDosage.hasDoseAndRate()) {
-            messages.add(createError("Additional dosages shall not be present if the main dosage has no dose or rate"));
+            issues.add(createError("Additional dosages shall not be present if the main dosage has no dose or rate"));
         }
 
         final var timingEventSeen = EnumSet.noneOf(TimingEventAmbu.class);
         for (final var timingEvent : baseDosage.resolveWhen()) {
             if (timingEventSeen.contains(timingEvent)) {
-                messages.add(createError("The timing event '" + timingEvent.getCodeValue() + "' shall not appear multiple times"));
+                issues.add(createError("The timing event '" + timingEvent.getCodeValue() + "' shall not appear multiple times"));
             }
             timingEventSeen.add(timingEvent);
         }
         for (final var additionDosage : additionalDosages) {
             for (final var timingEvent : additionDosage.resolveWhen()) {
                 if (timingEventSeen.contains(timingEvent)) {
-                    messages.add(createError("The timing event '" + timingEvent.getCodeValue() + "' shall not appear multiple times"));
+                    issues.add(createError("The timing event '" + timingEvent.getCodeValue() + "' shall not appear multiple times"));
                 }
                 timingEventSeen.add(timingEvent);
             }
         }
     }
 
-    protected static OperationOutcome.OperationOutcomeIssueComponent createError(final String message) {
-        final var error = new OperationOutcome.OperationOutcomeIssueComponent();
-        error.setSeverity(OperationOutcome.IssueSeverity.ERROR);
-        error.getDetails().setText(message);
-        return error;
+    protected static ValidationIssue createError(final String message) {
+        return new ValidationIssue(
+                OperationOutcome.IssueSeverity.ERROR,
+                null,
+                null,
+                message,
+                null,
+                null,
+                SOURCE,
+                null
+        );
     }
 }

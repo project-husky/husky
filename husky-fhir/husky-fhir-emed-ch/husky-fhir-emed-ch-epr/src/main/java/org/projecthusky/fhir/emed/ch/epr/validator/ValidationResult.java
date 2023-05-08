@@ -10,51 +10,54 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.validator;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.hl7.fhir.r4.model.OperationOutcome;
 
 import java.util.List;
 import java.util.Objects;
 
 /**
- * husky
+ * The model that contains the result of a FHIR resource validation. It contains a list of issues of different
+ * severity.
  *
  * @author Quentin Ligier
  **/
 public class ValidationResult {
 
-    private final List<OperationOutcome.OperationOutcomeIssueComponent> messages;
+    private final List<@NonNull ValidationIssue> issues;
 
-    public ValidationResult(final List<OperationOutcome.OperationOutcomeIssueComponent> messages) {
-        this.messages = Objects.requireNonNull(messages);
+    public ValidationResult(final List<@NonNull ValidationIssue> issues) {
+        this.issues = Objects.requireNonNull(issues);
     }
 
     public boolean isSuccessful() {
         return this.getErrors().isEmpty() && this.getFatals().isEmpty();
     }
-    public List<OperationOutcome.OperationOutcomeIssueComponent> getMessages() {
-        return this.messages;
+
+    public List<@NonNull ValidationIssue> getIssues() {
+        return this.issues;
     }
 
-    public List<OperationOutcome.OperationOutcomeIssueComponent> getFatals() {
-        return this.messages.stream()
+    public List<@NonNull ValidationIssue> getFatals() {
+        return this.issues.stream()
                 .filter(message -> message.getSeverity() == OperationOutcome.IssueSeverity.FATAL)
                 .toList();
     }
 
-    public List<OperationOutcome.OperationOutcomeIssueComponent> getErrors() {
-        return this.messages.stream()
+    public List<@NonNull ValidationIssue> getErrors() {
+        return this.issues.stream()
                 .filter(message -> message.getSeverity() == OperationOutcome.IssueSeverity.ERROR)
                 .toList();
     }
 
-    public List<OperationOutcome.OperationOutcomeIssueComponent> getWarnings() {
-        return this.messages.stream()
+    public List<@NonNull ValidationIssue> getWarnings() {
+        return this.issues.stream()
                 .filter(message -> message.getSeverity() == OperationOutcome.IssueSeverity.WARNING)
                 .toList();
     }
 
-    public List<OperationOutcome.OperationOutcomeIssueComponent> getInformations() {
-        return this.messages.stream()
+    public List<@NonNull ValidationIssue> getInformations() {
+        return this.issues.stream()
                 .filter(message -> message.getSeverity() == OperationOutcome.IssueSeverity.INFORMATION)
                 .toList();
     }
