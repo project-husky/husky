@@ -473,7 +473,8 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
     @Override
     public MedicationDispense addDosageInstruction(final Dosage t) {
         if (t instanceof final ChEmedEprDosage chEmedEprDosage) {
-            this.dosageInstruction.add(t);
+            this.dosageInstruction.add(chEmedEprDosage);
+            return this;
         }
         final var newDosage = new ChEmedEprDosage();
         t.copyValues(newDosage);
