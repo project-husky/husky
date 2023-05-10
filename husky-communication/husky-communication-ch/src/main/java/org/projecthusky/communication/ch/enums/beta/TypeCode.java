@@ -9,37 +9,36 @@
  */
 package org.projecthusky.communication.ch.enums.beta;
 
+import java.util.Objects;
+import javax.annotation.processing.Generated;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.common.enums.CodeSystems;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.enums.ValueSetEnumInterface;
 
-import javax.annotation.processing.Generated;
-import java.util.Objects;
-
 /**
  * Enumeration of DocumentEntry.typeCode values
  * <p>
- * EN: Type of document as per Annex 3 EPRO-FDHA.<br/><br/>The code defines a document’s type (e.g. discharge report,
- * laboratory report). Each document type should be assigned to precisely one document class.<br/>.<br> DE: Typ des
- * Dokumentes (2.16.756.5.30.1.127.3.10.1.27) gemäss Anhang 3 der Verordnungen zum EPDG.<br/><br/>Der Code definiert den
- * Typ eines Dokuments (z.B. Austrittsbericht, Labor-Bericht). Jeder Dokumenten-Typ sollte genau einer Dokumentenklasse
- * zugeordnet sein.<br/>.<br> FR: Type du document selon l'annexe 3 ODEP-DFI.<br/><br/>Le code définit le type de
- * document (p. ex. rapport de sortie, rapport de laboratoire). Chaque type de document doit être  associé à une seule
- * classification.<br/>.<br> IT: Tipo di documento secondo l'allegato 3 OCIP-DFI.<br/><br/>Il codice definisce il tipo
- * di documento (p. es. rapporto di dimissione, rapporto di laboratorio). Ciascun tipo di documento dovrebbe essere
- * associato a una sola classe di documenti.<br/>.<br>
+ * EN: Type of document as per Annex 3 EPRO-FDHA.<br/><br/>The code defines a document’s type (e.g. discharge report, laboratory report). Each document type should be assigned to precisely one document class.<br/>.<br>
+ * DE: Typ des Dokumentes (2.16.756.5.30.1.127.3.10.1.27) gemäss Anhang 3 der Verordnungen zum EPDG.<br/><br/>Der Code definiert den Typ eines Dokuments (z.B. Austrittsbericht, Labor-Bericht). Jeder Dokumenten-Typ sollte genau einer Dokumentenklasse zugeordnet sein.<br/>.<br>
+ * FR: Type du document selon l'annexe 3 ODEP-DFI.<br/><br/>Le code définit le type de document (p. ex. rapport de sortie, rapport de laboratoire). Chaque type de document doit être  associé à une seule classification.<br/>.<br>
+ * IT: Tipo di documento secondo l'allegato 3 OCIP-DFI.<br/><br/>Il codice definisce il tipo di documento (p. es. rapporto di dimissione, rapporto di laboratorio). Ciascun tipo di documento dovrebbe essere associato a una sola classe di documenti.<br/>.<br>
  * <p>
- * Identifier: 2.16.756.5.30.1.127.3.10.1.27<br> Effective date: 2022-11-29 13:57<br> Version: 202212.0-stable<br>
- * Status: FINAL
+ * Identifier: 2.16.756.5.30.1.127.3.10.1.27<br>
+ * Effective date: 2023-05-01 14:35<br>
+ * Version: 202404.0-beta<br>
+ * Status: DRAFT
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-12-06")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2023-05-10")
 public enum TypeCode implements ValueSetEnumInterface {
 
     /**
-     * EN: Allergy record.<br> DE: Allergieausweis.<br> FR: Carnet des allergies.<br> IT: Passaporto delle
-     * allergie.<br>
+     * EN: Allergy record.<br>
+     * DE: Allergieausweis.<br>
+     * FR: Carnet des allergies.<br>
+     * IT: Passaporto delle allergie.<br>
      */
     ALLERGY_RECORD("722446000",
                    "2.16.840.1.113883.6.96",
@@ -49,8 +48,10 @@ public enum TypeCode implements ValueSetEnumInterface {
                    "Carnet des allergies",
                    "Passaporto delle allergie"),
     /**
-     * EN: Clinical Management plan.<br> DE: Behandlungsplan.<br> FR: Plan de traitement.<br> IT: Piano di
-     * trattamento.<br>
+     * EN: Clinical Management plan.<br>
+     * DE: Behandlungsplan.<br>
+     * FR: Plan de traitement.<br>
+     * IT: Piano di trattamento.<br>
      */
     CLINICAL_MANAGEMENT_PLAN("737427001",
                              "2.16.840.1.113883.6.96",
@@ -60,7 +61,9 @@ public enum TypeCode implements ValueSetEnumInterface {
                              "Plan de traitement",
                              "Piano di trattamento"),
     /**
-     * EN: Consultation report.<br> DE: Beurteilung durch Fachspezialisten.<br> FR: Évaluation par des spécialistes.<br>
+     * EN: Consultation report.<br>
+     * DE: Beurteilung durch Fachspezialisten.<br>
+     * FR: Évaluation par des spécialistes.<br>
      * IT: Valutazione dello specialista.<br>
      */
     CONSULTATION_REPORT("371530004",
@@ -71,7 +74,10 @@ public enum TypeCode implements ValueSetEnumInterface {
                         "Évaluation par des spécialistes",
                         "Valutazione dello specialista"),
     /**
-     * EN: Discharge summary.<br> DE: Austrittsbericht.<br> FR: Rapport de sortie.<br> IT: Rapporto di dimissione.<br>
+     * EN: Discharge summary.<br>
+     * DE: Austrittsbericht.<br>
+     * FR: Rapport de sortie.<br>
+     * IT: Rapporto di dimissione.<br>
      */
     DISCHARGE_SUMMARY("373942005",
                       "2.16.840.1.113883.6.96",
@@ -81,8 +87,10 @@ public enum TypeCode implements ValueSetEnumInterface {
                       "Rapport de sortie",
                       "Rapporto di dimissione"),
     /**
-     * EN: Emergency department record.<br> DE: Notfallberichtt.<br> FR: Rapport d’urgence.<br> IT: Referto di pronto
-     * soccorso.<br>
+     * EN: Emergency department record.<br>
+     * DE: Notfallberichtt.<br>
+     * FR: Rapport d’urgence.<br>
+     * IT: Referto di pronto soccorso.<br>
      */
     EMERGENCY_DEPARTMENT_RECORD("445300006",
                                 "2.16.840.1.113883.6.96",
@@ -92,8 +100,10 @@ public enum TypeCode implements ValueSetEnumInterface {
                                 "Rapport d’urgence",
                                 "Referto di pronto soccorso"),
     /**
-     * EN: History and physical report.<br> DE: Anamnese / Untersuchungsbericht.<br> FR: Anamnèse / rapport
-     * d’analyse.<br> IT: Anamnesi / Rapporto di visita medica.<br>
+     * EN: History and physical report.<br>
+     * DE: Anamnese / Untersuchungsbericht.<br>
+     * FR: Anamnèse / rapport d’analyse.<br>
+     * IT: Anamnesi / Rapporto di visita medica.<br>
      */
     HISTORY_AND_PHYSICAL_REPORT("371529009",
                                 "2.16.840.1.113883.6.96",
@@ -103,7 +113,10 @@ public enum TypeCode implements ValueSetEnumInterface {
                                 "Anamnèse / rapport d’analyse",
                                 "Anamnesi / Rapporto di visita medica"),
     /**
-     * EN: Image.<br> DE: Bild.<br> FR: Image.<br> IT: Immagine.<br>
+     * EN: Image.<br>
+     * DE: Bild.<br>
+     * FR: Image.<br>
+     * IT: Immagine.<br>
      */
     IMAGE("900000000000471006",
           "2.16.840.1.113883.6.96",
@@ -113,8 +126,10 @@ public enum TypeCode implements ValueSetEnumInterface {
           "Image",
           "Immagine"),
     /**
-     * EN: Imaging Order.<br> DE: Bildgebungsauftrag.<br> FR: Mandat d’imagerie.<br> IT: Richiesta di
-     * immaginografia.<br>
+     * EN: Imaging Order.<br>
+     * DE: Bildgebungsauftrag.<br>
+     * FR: Mandat d’imagerie.<br>
+     * IT: Richiesta di immaginografia.<br>
      */
     IMAGING_ORDER("2161000195103",
                   "2.16.756.5.30.1.127.3.4",
@@ -124,7 +139,9 @@ public enum TypeCode implements ValueSetEnumInterface {
                   "Mandat d’imagerie",
                   "Richiesta di immaginografia"),
     /**
-     * EN: Imaging report.<br> DE: Befundbericht zur Bildgebung.<br> FR: Rapport de résultat relatif à l’imagerie.<br>
+     * EN: Imaging report.<br>
+     * DE: Befundbericht zur Bildgebung.<br>
+     * FR: Rapport de résultat relatif à l’imagerie.<br>
      * IT: Referto di immaginografia.<br>
      */
     IMAGING_REPORT("4201000179104",
@@ -135,8 +152,10 @@ public enum TypeCode implements ValueSetEnumInterface {
                    "Rapport de résultat relatif à l’imagerie",
                    "Referto di immaginografia"),
     /**
-     * EN: Immunization record.<br> DE: Impfausweis.<br> FR: Carnet de vaccination.<br> IT: Certificato di
-     * vaccinazione.<br>
+     * EN: Immunization record.<br>
+     * DE: Impfausweis.<br>
+     * FR: Carnet de vaccination.<br>
+     * IT: Certificato di vaccinazione.<br>
      */
     IMMUNIZATION_RECORD("41000179103",
                         "2.16.840.1.113883.6.96",
@@ -146,8 +165,10 @@ public enum TypeCode implements ValueSetEnumInterface {
                         "Carnet de vaccination",
                         "Certificato di vaccinazione"),
     /**
-     * EN: Laboratory Order.<br> DE: Laborauftrag.<br> FR: Mandat d’analyse en laboratoire.<br> IT: Richiesta di analisi
-     * di laboratorio.<br>
+     * EN: Laboratory Order.<br>
+     * DE: Laborauftrag.<br>
+     * FR: Mandat d’analyse en laboratoire.<br>
+     * IT: Richiesta di analisi di laboratorio.<br>
      */
     LABORATORY_ORDER("721965002",
                      "2.16.840.1.113883.6.96",
@@ -157,7 +178,10 @@ public enum TypeCode implements ValueSetEnumInterface {
                      "Mandat d’analyse en laboratoire",
                      "Richiesta di analisi di laboratorio"),
     /**
-     * EN: Laboratory report.<br> DE: Laborbericht.<br> FR: Rapport de laboratoire.<br> IT: Referto di laboratorio.<br>
+     * EN: Laboratory report.<br>
+     * DE: Laborbericht.<br>
+     * FR: Rapport de laboratoire.<br>
+     * IT: Referto di laboratorio.<br>
      */
     LABORATORY_REPORT("4241000179101",
                       "2.16.840.1.113883.6.96",
@@ -167,7 +191,10 @@ public enum TypeCode implements ValueSetEnumInterface {
                       "Rapport de laboratoire",
                       "Referto di laboratorio"),
     /**
-     * EN: Medical certificate.<br> DE: Ärztliches Attest.<br> FR: Certificat médical.<br> IT: Certificato medico.<br>
+     * EN: Medical certificate.<br>
+     * DE: Ärztliches Attest.<br>
+     * FR: Certificat médical.<br>
+     * IT: Certificato medico.<br>
      */
     MEDICAL_CERTIFICATE("772786005",
                         "2.16.840.1.113883.6.96",
@@ -177,8 +204,10 @@ public enum TypeCode implements ValueSetEnumInterface {
                         "Certificat médical",
                         "Certificato medico"),
     /**
-     * EN: Medical Prescription record.<br> DE: Arzneimittel-Verschreibung / Rezept.<br> FR: Prescription de médicaments
-     * / ordonnance.<br> IT: Prescrizione di medicamenti.<br>
+     * EN: Medical Prescription record.<br>
+     * DE: Arzneimittel-Verschreibung / Rezept.<br>
+     * FR: Prescription de médicaments / ordonnance.<br>
+     * IT: Prescrizione di medicamenti.<br>
      */
     MEDICAL_PRESCRIPTION_RECORD("761938008",
                                 "2.16.840.1.113883.6.96",
@@ -188,8 +217,36 @@ public enum TypeCode implements ValueSetEnumInterface {
                                 "Prescription de médicaments / ordonnance",
                                 "Prescrizione di medicamenti"),
     /**
-     * EN: Medication summary document.<br> DE: Medikationsliste.<br> FR: Liste de médication.<br> IT: Elenco dei
-     * medicamenti.<br>
+     * EN: Medication Card document.<br>
+     * DE: Medikationsplan.<br>
+     * FR: Plan de médication.<br>
+     * IT: Piano dei medicamenti.<br>
+     */
+    MEDICATION_CARD_DOCUMENT("736378000",
+                             "2.16.840.1.113883.6.96",
+                             "Medication management plan (record artifact)",
+                             "Medication Card document",
+                             "Medikationsplan",
+                             "Plan de médication",
+                             "Piano dei medicamenti"),
+    /**
+     * EN: Medication dispense document.<br>
+     * DE: Dokument zur Medikamentenabgabe.<br>
+     * FR: Document de dispense de médicaments.<br>
+     * IT: Documento di dispensazione del farmaco.<br>
+     */
+    MEDICATION_DISPENSE_DOCUMENT("294121000195110",
+                                 "2.16.756.5.30.1.127.3.4",
+                                 "Medication dispense document (record artifact)",
+                                 "Medication dispense document",
+                                 "Dokument zur Medikamentenabgabe",
+                                 "Document de dispense de médicaments",
+                                 "Documento di dispensazione del farmaco"),
+    /**
+     * EN: Medication summary document.<br>
+     * DE: Medikationsliste.<br>
+     * FR: Liste de médication.<br>
+     * IT: Elenco dei medicamenti.<br>
      */
     MEDICATION_SUMMARY_DOCUMENT("721912009",
                                 "2.16.840.1.113883.6.96",
@@ -199,8 +256,23 @@ public enum TypeCode implements ValueSetEnumInterface {
                                 "Liste de médication",
                                 "Elenco dei medicamenti"),
     /**
-     * EN: Non-drug prescription.<br> DE: Nicht-Arzneimittel-Verschreibung / Rezept.<br> FR: Prescription sans
-     * médicaments / ordonnance.<br> IT: Prescrizione non di medicamenti.<br>
+     * EN: Medication treatment plan.<br>
+     * DE: Therapieentscheid Medikation.<br>
+     * FR: Décision thérapeutique relative à la médication.<br>
+     * IT: Decisione terapeutica sui medicamenti.<br>
+     */
+    MEDICATION_TREATMENT_PLAN("761931002",
+                              "2.16.840.1.113883.6.96",
+                              "Medication treatment plan report (record artifact)",
+                              "Medication treatment plan",
+                              "Therapieentscheid Medikation",
+                              "Décision thérapeutique relative à la médication",
+                              "Decisione terapeutica sui medicamenti"),
+    /**
+     * EN: Non-drug prescription.<br>
+     * DE: Nicht-Arzneimittel-Verschreibung / Rezept.<br>
+     * FR: Prescription sans médicaments / ordonnance.<br>
+     * IT: Prescrizione non di medicamenti.<br>
      */
     NON_DRUG_PRESCRIPTION("765492005",
                           "2.16.840.1.113883.6.96",
@@ -210,7 +282,10 @@ public enum TypeCode implements ValueSetEnumInterface {
                           "Prescription sans médicaments / ordonnance",
                           "Prescrizione non di medicamenti"),
     /**
-     * EN: Nursing care plan.<br> DE: Pflegeplan.<br> FR: Plan de soins.<br> IT: Piano di cura.<br>
+     * EN: Nursing care plan.<br>
+     * DE: Pflegeplan.<br>
+     * FR: Plan de soins.<br>
+     * IT: Piano di cura.<br>
      */
     NURSING_CARE_PLAN("773130005",
                       "2.16.840.1.113883.6.96",
@@ -220,7 +295,10 @@ public enum TypeCode implements ValueSetEnumInterface {
                       "Plan de soins",
                       "Piano di cura"),
     /**
-     * EN: Operative report.<br> DE: Operationsbericht.<br> FR: Rapport d’opération.<br> IT: Rapporto operatorio.<br>
+     * EN: Operative report.<br>
+     * DE: Operationsbericht.<br>
+     * FR: Rapport d’opération.<br>
+     * IT: Rapporto operatorio.<br>
      */
     OPERATIVE_REPORT("371526002",
                      "2.16.840.1.113883.6.96",
@@ -230,8 +308,10 @@ public enum TypeCode implements ValueSetEnumInterface {
                      "Rapport d’opération",
                      "Rapporto operatorio"),
     /**
-     * EN: Pathology order.<br> DE: Pathologieauftrag.<br> FR: Mandat de rapport d’examen pathologique .<br> IT:
-     * Richiesta di esame istologico.<br>
+     * EN: Pathology order.<br>
+     * DE: Pathologieauftrag.<br>
+     * FR: Mandat de rapport d’examen pathologique .<br>
+     * IT: Richiesta di esame istologico.<br>
      */
     PATHOLOGY_ORDER("721966001",
                     "2.16.840.1.113883.6.96",
@@ -241,8 +321,10 @@ public enum TypeCode implements ValueSetEnumInterface {
                     "Mandat de rapport d’examen pathologique ",
                     "Richiesta di esame istologico"),
     /**
-     * EN: Pathology report.<br> DE: Pathologiebericht.<br> FR: Rapport d’examen pathologique.<br> IT: Referto
-     * istologico.<br>
+     * EN: Pathology report.<br>
+     * DE: Pathologiebericht.<br>
+     * FR: Rapport d’examen pathologique.<br>
+     * IT: Referto istologico.<br>
      */
     PATHOLOGY_REPORT("371528001",
                      "2.16.840.1.113883.6.96",
@@ -252,8 +334,10 @@ public enum TypeCode implements ValueSetEnumInterface {
                      "Rapport d’examen pathologique",
                      "Referto istologico"),
     /**
-     * EN: Professional allied to medicine clinical report.<br> DE: Dokument ausserhalb des Behandlungskontextes.<br>
-     * FR: Document hors contexte de traitement.<br> IT: Documento al di fuori del contesto trattato.<br>
+     * EN: Professional allied to medicine clinical report.<br>
+     * DE: Dokument ausserhalb des Behandlungskontextes.<br>
+     * FR: Document hors contexte de traitement.<br>
+     * IT: Documento al di fuori del contesto trattato.<br>
      */
     PROFESSIONAL_ALLIED_TO_MEDICINE_CLINICAL_REPORT("445418005",
                                                     "2.16.840.1.113883.6.96",
@@ -263,7 +347,10 @@ public enum TypeCode implements ValueSetEnumInterface {
                                                     "Document hors contexte de traitement",
                                                     "Documento al di fuori del contesto trattato"),
     /**
-     * EN: Progress note.<br> DE: Verlaufsbericht.<br> FR: Rapport d’historique.<br> IT: Rapporto sul decorso.<br>
+     * EN: Progress note.<br>
+     * DE: Verlaufsbericht.<br>
+     * FR: Rapport d’historique.<br>
+     * IT: Rapporto sul decorso.<br>
      */
     PROGRESS_NOTE("371532007",
                   "2.16.840.1.113883.6.96",
@@ -273,8 +360,10 @@ public enum TypeCode implements ValueSetEnumInterface {
                   "Rapport d’historique",
                   "Rapporto sul decorso"),
     /**
-     * EN: Record artifact.<br> DE: Nicht näher bezeichnetes Dokument.<br> FR: Document non précisé.<br> IT: Documento
-     * non meglio specificato.<br>
+     * EN: Record artifact.<br>
+     * DE: Nicht näher bezeichnetes Dokument.<br>
+     * FR: Document non précisé.<br>
+     * IT: Documento non meglio specificato.<br>
      */
     RECORD_ARTIFACT("419891008",
                     "2.16.840.1.113883.6.96",
@@ -284,8 +373,10 @@ public enum TypeCode implements ValueSetEnumInterface {
                     "Document non précisé",
                     "Documento non meglio specificato"),
     /**
-     * EN: Rehabilitation care plan.<br> DE: Rehabilitationsplan.<br> FR: Plan de réhabilitation.<br> IT: Piano di
-     * riabilitazione.<br>
+     * EN: Rehabilitation care plan.<br>
+     * DE: Rehabilitationsplan.<br>
+     * FR: Plan de réhabilitation.<br>
+     * IT: Piano di riabilitazione.<br>
      */
     REHABILITATION_CARE_PLAN("736055001",
                              "2.16.840.1.113883.6.96",
@@ -295,8 +386,10 @@ public enum TypeCode implements ValueSetEnumInterface {
                              "Plan de réhabilitation",
                              "Piano di riabilitazione"),
     /**
-     * EN: Transfer summary report.<br> DE: Überweisungsbericht.<br> FR: Rapport de transfert.<br> IT: Rapporto di
-     * trasferimento.<br>
+     * EN: Transfer summary report.<br>
+     * DE: Überweisungsbericht.<br>
+     * FR: Rapport de transfert.<br>
+     * IT: Rapporto di trasferimento.<br>
      */
     TRANSFER_SUMMARY_REPORT("371535009",
                             "2.16.840.1.113883.6.96",
@@ -307,152 +400,226 @@ public enum TypeCode implements ValueSetEnumInterface {
                             "Rapporto di trasferimento");
 
     /**
-     * EN: Code for Allergy record.<br> DE: Code für Allergieausweis.<br> FR: Code de Carnet des allergies.<br> IT: Code
-     * per Passaporto delle allergie.<br>
+     * EN: Code for Allergy record.<br>
+     * DE: Code für Allergieausweis.<br>
+     * FR: Code de Carnet des allergies.<br>
+     * IT: Code per Passaporto delle allergie.<br>
      */
     public static final String ALLERGY_RECORD_CODE = "722446000";
 
     /**
-     * EN: Code for Clinical Management plan.<br> DE: Code für Behandlungsplan.<br> FR: Code de Plan de traitement.<br>
+     * EN: Code for Clinical Management plan.<br>
+     * DE: Code für Behandlungsplan.<br>
+     * FR: Code de Plan de traitement.<br>
      * IT: Code per Piano di trattamento.<br>
      */
     public static final String CLINICAL_MANAGEMENT_PLAN_CODE = "737427001";
 
     /**
-     * EN: Code for Consultation report.<br> DE: Code für Beurteilung durch Fachspezialisten.<br> FR: Code de Évaluation
-     * par des spécialistes.<br> IT: Code per Valutazione dello specialista.<br>
+     * EN: Code for Consultation report.<br>
+     * DE: Code für Beurteilung durch Fachspezialisten.<br>
+     * FR: Code de Évaluation par des spécialistes.<br>
+     * IT: Code per Valutazione dello specialista.<br>
      */
     public static final String CONSULTATION_REPORT_CODE = "371530004";
 
     /**
-     * EN: Code for Discharge summary.<br> DE: Code für Austrittsbericht.<br> FR: Code de Rapport de sortie.<br> IT:
-     * Code per Rapporto di dimissione.<br>
+     * EN: Code for Discharge summary.<br>
+     * DE: Code für Austrittsbericht.<br>
+     * FR: Code de Rapport de sortie.<br>
+     * IT: Code per Rapporto di dimissione.<br>
      */
     public static final String DISCHARGE_SUMMARY_CODE = "373942005";
 
     /**
-     * EN: Code for Emergency department record.<br> DE: Code für Notfallberichtt.<br> FR: Code de Rapport
-     * d’urgence.<br> IT: Code per Referto di pronto soccorso.<br>
+     * EN: Code for Emergency department record.<br>
+     * DE: Code für Notfallberichtt.<br>
+     * FR: Code de Rapport d’urgence.<br>
+     * IT: Code per Referto di pronto soccorso.<br>
      */
     public static final String EMERGENCY_DEPARTMENT_RECORD_CODE = "445300006";
 
     /**
-     * EN: Code for History and physical report.<br> DE: Code für Anamnese / Untersuchungsbericht.<br> FR: Code de
-     * Anamnèse / rapport d’analyse.<br> IT: Code per Anamnesi / Rapporto di visita medica.<br>
+     * EN: Code for History and physical report.<br>
+     * DE: Code für Anamnese / Untersuchungsbericht.<br>
+     * FR: Code de Anamnèse / rapport d’analyse.<br>
+     * IT: Code per Anamnesi / Rapporto di visita medica.<br>
      */
     public static final String HISTORY_AND_PHYSICAL_REPORT_CODE = "371529009";
 
     /**
-     * EN: Code for Image.<br> DE: Code für Bild.<br> FR: Code de Image.<br> IT: Code per Immagine.<br>
+     * EN: Code for Image.<br>
+     * DE: Code für Bild.<br>
+     * FR: Code de Image.<br>
+     * IT: Code per Immagine.<br>
      */
     public static final String IMAGE_CODE = "900000000000471006";
 
     /**
-     * EN: Code for Imaging Order.<br> DE: Code für Bildgebungsauftrag.<br> FR: Code de Mandat d’imagerie.<br> IT: Code
-     * per Richiesta di immaginografia.<br>
+     * EN: Code for Imaging Order.<br>
+     * DE: Code für Bildgebungsauftrag.<br>
+     * FR: Code de Mandat d’imagerie.<br>
+     * IT: Code per Richiesta di immaginografia.<br>
      */
     public static final String IMAGING_ORDER_CODE = "2161000195103";
 
     /**
-     * EN: Code for Imaging report.<br> DE: Code für Befundbericht zur Bildgebung.<br> FR: Code de Rapport de résultat
-     * relatif à l’imagerie.<br> IT: Code per Referto di immaginografia.<br>
+     * EN: Code for Imaging report.<br>
+     * DE: Code für Befundbericht zur Bildgebung.<br>
+     * FR: Code de Rapport de résultat relatif à l’imagerie.<br>
+     * IT: Code per Referto di immaginografia.<br>
      */
     public static final String IMAGING_REPORT_CODE = "4201000179104";
 
     /**
-     * EN: Code for Immunization record.<br> DE: Code für Impfausweis.<br> FR: Code de Carnet de vaccination.<br> IT:
-     * Code per Certificato di vaccinazione.<br>
+     * EN: Code for Immunization record.<br>
+     * DE: Code für Impfausweis.<br>
+     * FR: Code de Carnet de vaccination.<br>
+     * IT: Code per Certificato di vaccinazione.<br>
      */
     public static final String IMMUNIZATION_RECORD_CODE = "41000179103";
 
     /**
-     * EN: Code for Laboratory Order.<br> DE: Code für Laborauftrag.<br> FR: Code de Mandat d’analyse en
-     * laboratoire.<br> IT: Code per Richiesta di analisi di laboratorio.<br>
+     * EN: Code for Laboratory Order.<br>
+     * DE: Code für Laborauftrag.<br>
+     * FR: Code de Mandat d’analyse en laboratoire.<br>
+     * IT: Code per Richiesta di analisi di laboratorio.<br>
      */
     public static final String LABORATORY_ORDER_CODE = "721965002";
 
     /**
-     * EN: Code for Laboratory report.<br> DE: Code für Laborbericht.<br> FR: Code de Rapport de laboratoire.<br> IT:
-     * Code per Referto di laboratorio.<br>
+     * EN: Code for Laboratory report.<br>
+     * DE: Code für Laborbericht.<br>
+     * FR: Code de Rapport de laboratoire.<br>
+     * IT: Code per Referto di laboratorio.<br>
      */
     public static final String LABORATORY_REPORT_CODE = "4241000179101";
 
     /**
-     * EN: Code for Medical certificate.<br> DE: Code für Ärztliches Attest.<br> FR: Code de Certificat médical.<br> IT:
-     * Code per Certificato medico.<br>
+     * EN: Code for Medical certificate.<br>
+     * DE: Code für Ärztliches Attest.<br>
+     * FR: Code de Certificat médical.<br>
+     * IT: Code per Certificato medico.<br>
      */
     public static final String MEDICAL_CERTIFICATE_CODE = "772786005";
 
     /**
-     * EN: Code for Medical Prescription record.<br> DE: Code für Arzneimittel-Verschreibung / Rezept.<br> FR: Code de
-     * Prescription de médicaments / ordonnance.<br> IT: Code per Prescrizione di medicamenti.<br>
+     * EN: Code for Medical Prescription record.<br>
+     * DE: Code für Arzneimittel-Verschreibung / Rezept.<br>
+     * FR: Code de Prescription de médicaments / ordonnance.<br>
+     * IT: Code per Prescrizione di medicamenti.<br>
      */
     public static final String MEDICAL_PRESCRIPTION_RECORD_CODE = "761938008";
 
     /**
-     * EN: Code for Medication summary document.<br> DE: Code für Medikationsliste.<br> FR: Code de Liste de
-     * médication.<br> IT: Code per Elenco dei medicamenti.<br>
+     * EN: Code for Medication Card document.<br>
+     * DE: Code für Medikationsplan.<br>
+     * FR: Code de Plan de médication.<br>
+     * IT: Code per Piano dei medicamenti.<br>
+     */
+    public static final String MEDICATION_CARD_DOCUMENT_CODE = "736378000";
+
+    /**
+     * EN: Code for Medication dispense document.<br>
+     * DE: Code für Dokument zur Medikamentenabgabe.<br>
+     * FR: Code de Document de dispense de médicaments.<br>
+     * IT: Code per Documento di dispensazione del farmaco.<br>
+     */
+    public static final String MEDICATION_DISPENSE_DOCUMENT_CODE = "294121000195110";
+
+    /**
+     * EN: Code for Medication summary document.<br>
+     * DE: Code für Medikationsliste.<br>
+     * FR: Code de Liste de médication.<br>
+     * IT: Code per Elenco dei medicamenti.<br>
      */
     public static final String MEDICATION_SUMMARY_DOCUMENT_CODE = "721912009";
 
     /**
-     * EN: Code for Non-drug prescription.<br> DE: Code für Nicht-Arzneimittel-Verschreibung / Rezept.<br> FR: Code de
-     * Prescription sans médicaments / ordonnance.<br> IT: Code per Prescrizione non di medicamenti.<br>
+     * EN: Code for Medication treatment plan.<br>
+     * DE: Code für Therapieentscheid Medikation.<br>
+     * FR: Code de Décision thérapeutique relative à la médication.<br>
+     * IT: Code per Decisione terapeutica sui medicamenti.<br>
+     */
+    public static final String MEDICATION_TREATMENT_PLAN_CODE = "761931002";
+
+    /**
+     * EN: Code for Non-drug prescription.<br>
+     * DE: Code für Nicht-Arzneimittel-Verschreibung / Rezept.<br>
+     * FR: Code de Prescription sans médicaments / ordonnance.<br>
+     * IT: Code per Prescrizione non di medicamenti.<br>
      */
     public static final String NON_DRUG_PRESCRIPTION_CODE = "765492005";
 
     /**
-     * EN: Code for Nursing care plan.<br> DE: Code für Pflegeplan.<br> FR: Code de Plan de soins.<br> IT: Code per
-     * Piano di cura.<br>
+     * EN: Code for Nursing care plan.<br>
+     * DE: Code für Pflegeplan.<br>
+     * FR: Code de Plan de soins.<br>
+     * IT: Code per Piano di cura.<br>
      */
     public static final String NURSING_CARE_PLAN_CODE = "773130005";
 
     /**
-     * EN: Code for Operative report.<br> DE: Code für Operationsbericht.<br> FR: Code de Rapport d’opération.<br> IT:
-     * Code per Rapporto operatorio.<br>
+     * EN: Code for Operative report.<br>
+     * DE: Code für Operationsbericht.<br>
+     * FR: Code de Rapport d’opération.<br>
+     * IT: Code per Rapporto operatorio.<br>
      */
     public static final String OPERATIVE_REPORT_CODE = "371526002";
 
     /**
-     * EN: Code for Pathology order.<br> DE: Code für Pathologieauftrag.<br> FR: Code de Mandat de rapport d’examen
-     * pathologique .<br> IT: Code per Richiesta di esame istologico.<br>
+     * EN: Code for Pathology order.<br>
+     * DE: Code für Pathologieauftrag.<br>
+     * FR: Code de Mandat de rapport d’examen pathologique .<br>
+     * IT: Code per Richiesta di esame istologico.<br>
      */
     public static final String PATHOLOGY_ORDER_CODE = "721966001";
 
     /**
-     * EN: Code for Pathology report.<br> DE: Code für Pathologiebericht.<br> FR: Code de Rapport d’examen
-     * pathologique.<br> IT: Code per Referto istologico.<br>
+     * EN: Code for Pathology report.<br>
+     * DE: Code für Pathologiebericht.<br>
+     * FR: Code de Rapport d’examen pathologique.<br>
+     * IT: Code per Referto istologico.<br>
      */
     public static final String PATHOLOGY_REPORT_CODE = "371528001";
 
     /**
-     * EN: Code for Professional allied to medicine clinical report.<br> DE: Code für Dokument ausserhalb des
-     * Behandlungskontextes.<br> FR: Code de Document hors contexte de traitement.<br> IT: Code per Documento al di
-     * fuori del contesto trattato.<br>
+     * EN: Code for Professional allied to medicine clinical report.<br>
+     * DE: Code für Dokument ausserhalb des Behandlungskontextes.<br>
+     * FR: Code de Document hors contexte de traitement.<br>
+     * IT: Code per Documento al di fuori del contesto trattato.<br>
      */
     public static final String PROFESSIONAL_ALLIED_TO_MEDICINE_CLINICAL_REPORT_CODE = "445418005";
 
     /**
-     * EN: Code for Progress note.<br> DE: Code für Verlaufsbericht.<br> FR: Code de Rapport d’historique.<br> IT: Code
-     * per Rapporto sul decorso.<br>
+     * EN: Code for Progress note.<br>
+     * DE: Code für Verlaufsbericht.<br>
+     * FR: Code de Rapport d’historique.<br>
+     * IT: Code per Rapporto sul decorso.<br>
      */
     public static final String PROGRESS_NOTE_CODE = "371532007";
 
     /**
-     * EN: Code for Record artifact.<br> DE: Code für Nicht näher bezeichnetes Dokument.<br> FR: Code de Document non
-     * précisé.<br> IT: Code per Documento non meglio specificato.<br>
+     * EN: Code for Record artifact.<br>
+     * DE: Code für Nicht näher bezeichnetes Dokument.<br>
+     * FR: Code de Document non précisé.<br>
+     * IT: Code per Documento non meglio specificato.<br>
      */
     public static final String RECORD_ARTIFACT_CODE = "419891008";
 
     /**
-     * EN: Code for Rehabilitation care plan.<br> DE: Code für Rehabilitationsplan.<br> FR: Code de Plan de
-     * réhabilitation.<br> IT: Code per Piano di riabilitazione.<br>
+     * EN: Code for Rehabilitation care plan.<br>
+     * DE: Code für Rehabilitationsplan.<br>
+     * FR: Code de Plan de réhabilitation.<br>
+     * IT: Code per Piano di riabilitazione.<br>
      */
     public static final String REHABILITATION_CARE_PLAN_CODE = "736055001";
 
     /**
-     * EN: Code for Transfer summary report.<br> DE: Code für Überweisungsbericht.<br> FR: Code de Rapport de
-     * transfert.<br> IT: Code per Rapporto di trasferimento.<br>
+     * EN: Code for Transfer summary report.<br>
+     * DE: Code für Überweisungsbericht.<br>
+     * FR: Code de Rapport de transfert.<br>
+     * IT: Code per Rapporto di trasferimento.<br>
      */
     public static final String TRANSFER_SUMMARY_REPORT_CODE = "371535009";
 
@@ -546,13 +713,7 @@ public enum TypeCode implements ValueSetEnumInterface {
      * @param displayNameFr The display name in French.
      * @param displayNameIt The display name in Italian.
      */
-    TypeCode(@NonNull final String code,
-             @NonNull final String codeSystem,
-             @NonNull final String displayName,
-             @NonNull final String displayNameEn,
-             @NonNull final String displayNameDe,
-             @NonNull final String displayNameFr,
-             @NonNull final String displayNameIt) {
+    TypeCode(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
         this.code = Objects.requireNonNull(code);
         this.codeSystem = Objects.requireNonNull(codeSystem);
         this.displayNames = new String[5];
@@ -612,12 +773,17 @@ public enum TypeCode implements ValueSetEnumInterface {
         if (languageCode == null) {
             return this.displayNames[0];
         }
-        return switch (languageCode) {
-            case ENGLISH -> this.displayNames[1];
-            case GERMAN -> this.displayNames[2];
-            case FRENCH -> this.displayNames[3];
-            case ITALIAN -> this.displayNames[4];
-            default -> "TOTRANSLATE";
+        return switch(languageCode) {
+            case ENGLISH ->
+                this.displayNames[1];
+            case GERMAN ->
+                this.displayNames[2];
+            case FRENCH ->
+                this.displayNames[3];
+            case ITALIAN ->
+                this.displayNames[4];
+            default ->
+                "TOTRANSLATE";
         };
     }
 

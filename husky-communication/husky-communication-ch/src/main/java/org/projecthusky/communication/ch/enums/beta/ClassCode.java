@@ -31,7 +31,7 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * Version: 202212.0-stable<br>
  * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-12-06")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2023-05-10")
 public enum ClassCode implements ValueSetEnumInterface {
 
     /**

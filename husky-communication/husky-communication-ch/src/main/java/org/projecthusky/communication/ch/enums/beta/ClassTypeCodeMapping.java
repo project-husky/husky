@@ -9,28 +9,29 @@
  */
 package org.projecthusky.communication.ch.enums.beta;
 
+import java.util.Objects;
+import javax.annotation.processing.Generated;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.common.enums.CodeSystems;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.enums.ValueSetEnumInterface;
 
-import javax.annotation.processing.Generated;
-import java.util.Objects;
-
 /**
  * Enumeration of DocumentEntry.classCode_DocumentEntry.typeCode_mapping values
  * <p>
- * EN: No designation found.<br> DE: Das folgende Valueset zeigt das Mapping zwischen den Dokumentklassen und
- * Dokumenttypen (gemäss Kapitel 2.11 Anhang 3 EPDV). Das Valueset dient als Hilfestellung bei der Implementierung. Für
- * die konkreten Werte in documentTypeCode und documentClassCode dienen weiterhin die beiden definierten Valuesets
- * (EprDocumentTypeCode resp. EprDocumentClassCode). <br/>.<br> FR: No designation found.<br> IT: No designation
- * found.<br>
+ * EN: No designation found.<br>
+ * DE: Das folgende Valueset zeigt das Mapping zwischen den Dokumentklassen und Dokumenttypen (gemäss Kapitel 2.11 Anhang 3 EPDV). Das Valueset dient als Hilfestellung bei der Implementierung. Für die konkreten Werte in documentTypeCode und documentClassCode dienen weiterhin die beiden definierten Valuesets (EprDocumentTypeCode resp. EprDocumentClassCode). <br/>.<br>
+ * FR: No designation found.<br>
+ * IT: No designation found.<br>
  * <p>
- * Identifier: 2.16.756.5.30.1.127.3.10.1.30<br> Effective date: 2022-11-29 13:33<br> Version: 202212.0-stable<br>
+ * Identifier: 2.16.756.5.30.1.127.3.10.1.30<br>
+ * Effective date: 2022-11-29 13:33<br>
+ * Version: 202212.0-stable<br>
  * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-12-06")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2023-05-10")
 public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 
     /**
@@ -754,13 +755,7 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
      * @param displayNameFr The display name in French.
      * @param displayNameIt The display name in Italian.
      */
-    ClassTypeCodeMapping(@NonNull final String code,
-                         @NonNull final String codeSystem,
-                         @NonNull final String displayName,
-                         @NonNull final String displayNameEn,
-                         @NonNull final String displayNameDe,
-                         @NonNull final String displayNameFr,
-                         @NonNull final String displayNameIt) {
+    ClassTypeCodeMapping(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
         this.code = Objects.requireNonNull(code);
         this.codeSystem = Objects.requireNonNull(codeSystem);
         this.displayNames = new String[5];
@@ -820,12 +815,17 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
         if (languageCode == null) {
             return this.displayNames[0];
         }
-        return switch (languageCode) {
-            case ENGLISH -> this.displayNames[1];
-            case GERMAN -> this.displayNames[2];
-            case FRENCH -> this.displayNames[3];
-            case ITALIAN -> this.displayNames[4];
-            default -> "TOTRANSLATE";
+        return switch(languageCode) {
+            case ENGLISH ->
+                this.displayNames[1];
+            case GERMAN ->
+                this.displayNames[2];
+            case FRENCH ->
+                this.displayNames[3];
+            case ITALIAN ->
+                this.displayNames[4];
+            default ->
+                "TOTRANSLATE";
         };
     }
 

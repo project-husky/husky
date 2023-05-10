@@ -9,32 +9,36 @@
  */
 package org.projecthusky.common.ch.enums.beta;
 
+import java.util.Objects;
+import javax.annotation.processing.Generated;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.common.enums.CodeSystems;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.enums.ValueSetEnumInterface;
 
-import javax.annotation.processing.Generated;
-import java.util.Objects;
-
 /**
  * Enumeration of DocumentEntry.author.authorRole values
  * <p>
- * EN: Role of the author. This code defines the role of the author of the document. This is a sub-attribute of
- * epd_xds_author.<br> DE: Rolle des Autors. Dieser Code definiert die Rolle des Authors vom Dokument. Dies ist ein
- * Sub-Attribut von epd_xds_author.<br> FR: Rôle de l'auteur. Ce code définit le rôle de l'auteur du document. Il s'agit
- * d'un sous-attribut de epd_xds_author.<br> IT: Ruolo dell'autore. Questo codice definisce il ruolo dell'autore del
- * documento. È un sottoattributo di epd_xds_author.<br>
+ * EN: Role of the author. This code defines the role of the author of the document. This is a sub-attribute of epd_xds_author.<br>
+ * DE: Rolle des Autors. Dieser Code definiert die Rolle des Authors vom Dokument. Dies ist ein Sub-Attribut von epd_xds_author.<br>
+ * FR: Rôle de l'auteur. Ce code définit le rôle de l'auteur du document. Il s'agit d'un sous-attribut de epd_xds_author.<br>
+ * IT: Ruolo dell'autore. Questo codice definisce il ruolo dell'autore del documento. È un sottoattributo di epd_xds_author.<br>
  * <p>
- * Identifier: 2.16.756.5.30.1.127.3.10.1.1.3<br> Effective date: 2022-11-29 13:25<br> Version: 202212.0-stable<br>
+ * Identifier: 2.16.756.5.30.1.127.3.10.1.1.3<br>
+ * Effective date: 2022-11-29 13:25<br>
+ * Version: 202212.0-stable<br>
  * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-12-06")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2023-05-10")
 public enum AuthorRole implements ValueSetEnumInterface {
 
     /**
-     * EN: Assistant.<br> DE: Hilfsperson.<br> FR: Auxiliaire.<br> IT: Persona ausiliara.<br>
+     * EN: Assistant.<br>
+     * DE: Hilfsperson.<br>
+     * FR: Auxiliaire.<br>
+     * IT: Persona ausiliara.<br>
      */
     ASSISTANT("ASS",
               "2.16.756.5.30.1.127.3.10.6",
@@ -44,8 +48,10 @@ public enum AuthorRole implements ValueSetEnumInterface {
               "Auxiliaire",
               "Persona ausiliara"),
     /**
-     * EN: Healthcare professional.<br> DE: Gesundheitsfachperson.<br> FR: Professionnel de la santé.<br> IT:
-     * Professionista della salute.<br>
+     * EN: Healthcare professional.<br>
+     * DE: Gesundheitsfachperson.<br>
+     * FR: Professionnel de la santé.<br>
+     * IT: Professionista della salute.<br>
      */
     HEALTHCARE_PROFESSIONAL("HCP",
                             "2.16.756.5.30.1.127.3.10.6",
@@ -55,7 +61,10 @@ public enum AuthorRole implements ValueSetEnumInterface {
                             "Professionnel de la santé",
                             "Professionista della salute"),
     /**
-     * EN: Patient.<br> DE: Patient.<br> FR: Patient.<br> IT: Paziente.<br>
+     * EN: Patient.<br>
+     * DE: Patient.<br>
+     * FR: Patient.<br>
+     * IT: Paziente.<br>
      */
     PATIENT("PAT",
             "2.16.756.5.30.1.127.3.10.6",
@@ -65,7 +74,10 @@ public enum AuthorRole implements ValueSetEnumInterface {
             "Patient",
             "Paziente"),
     /**
-     * EN: Representative.<br> DE: Stellvertretung.<br> FR: Représentant.<br> IT: Rappresentante.<br>
+     * EN: Representative.<br>
+     * DE: Stellvertretung.<br>
+     * FR: Représentant.<br>
+     * IT: Rappresentante.<br>
      */
     REPRESENTATIVE("REP",
                    "2.16.756.5.30.1.127.3.10.6",
@@ -75,7 +87,10 @@ public enum AuthorRole implements ValueSetEnumInterface {
                    "Représentant",
                    "Rappresentante"),
     /**
-     * EN: Technical user.<br> DE: Technischer Benutzer.<br> FR: Utilisateur technique.<br> IT: Utente tecnico.<br>
+     * EN: Technical user.<br>
+     * DE: Technischer Benutzer.<br>
+     * FR: Utilisateur technique.<br>
+     * IT: Utente tecnico.<br>
      */
     TECHNICAL_USER("TCU",
                    "2.16.756.5.30.1.127.3.10.6",
@@ -86,30 +101,41 @@ public enum AuthorRole implements ValueSetEnumInterface {
                    "Utente tecnico");
 
     /**
-     * EN: Code for Assistant.<br> DE: Code für Hilfsperson.<br> FR: Code de Auxiliaire.<br> IT: Code per Persona
-     * ausiliara.<br>
+     * EN: Code for Assistant.<br>
+     * DE: Code für Hilfsperson.<br>
+     * FR: Code de Auxiliaire.<br>
+     * IT: Code per Persona ausiliara.<br>
      */
     public static final String ASSISTANT_CODE = "ASS";
 
     /**
-     * EN: Code for Healthcare professional.<br> DE: Code für Gesundheitsfachperson.<br> FR: Code de Professionnel de la
-     * santé.<br> IT: Code per Professionista della salute.<br>
+     * EN: Code for Healthcare professional.<br>
+     * DE: Code für Gesundheitsfachperson.<br>
+     * FR: Code de Professionnel de la santé.<br>
+     * IT: Code per Professionista della salute.<br>
      */
     public static final String HEALTHCARE_PROFESSIONAL_CODE = "HCP";
 
     /**
-     * EN: Code for Patient.<br> DE: Code für Patient.<br> FR: Code de Patient.<br> IT: Code per Paziente.<br>
+     * EN: Code for Patient.<br>
+     * DE: Code für Patient.<br>
+     * FR: Code de Patient.<br>
+     * IT: Code per Paziente.<br>
      */
     public static final String PATIENT_CODE = "PAT";
 
     /**
-     * EN: Code for Representative.<br> DE: Code für Stellvertretung.<br> FR: Code de Représentant.<br> IT: Code per
-     * Rappresentante.<br>
+     * EN: Code for Representative.<br>
+     * DE: Code für Stellvertretung.<br>
+     * FR: Code de Représentant.<br>
+     * IT: Code per Rappresentante.<br>
      */
     public static final String REPRESENTATIVE_CODE = "REP";
 
     /**
-     * EN: Code for Technical user.<br> DE: Code für Technischer Benutzer.<br> FR: Code de Utilisateur technique.<br>
+     * EN: Code for Technical user.<br>
+     * DE: Code für Technischer Benutzer.<br>
+     * FR: Code de Utilisateur technique.<br>
      * IT: Code per Utente tecnico.<br>
      */
     public static final String TECHNICAL_USER_CODE = "TCU";
@@ -209,13 +235,7 @@ public enum AuthorRole implements ValueSetEnumInterface {
      * @param displayNameFr The display name in French.
      * @param displayNameIt The display name in Italian.
      */
-    AuthorRole(@NonNull final String code,
-               @NonNull final String codeSystem,
-               @NonNull final String displayName,
-               @NonNull final String displayNameEn,
-               @NonNull final String displayNameDe,
-               @NonNull final String displayNameFr,
-               @NonNull final String displayNameIt) {
+    AuthorRole(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
         this.code = Objects.requireNonNull(code);
         this.codeSystem = Objects.requireNonNull(codeSystem);
         this.displayNames = new String[5];
@@ -275,12 +295,17 @@ public enum AuthorRole implements ValueSetEnumInterface {
         if (languageCode == null) {
             return this.displayNames[0];
         }
-        return switch (languageCode) {
-            case ENGLISH -> this.displayNames[1];
-            case GERMAN -> this.displayNames[2];
-            case FRENCH -> this.displayNames[3];
-            case ITALIAN -> this.displayNames[4];
-            default -> "TOTRANSLATE";
+        return switch(languageCode) {
+            case ENGLISH ->
+                this.displayNames[1];
+            case GERMAN ->
+                this.displayNames[2];
+            case FRENCH ->
+                this.displayNames[3];
+            case ITALIAN ->
+                this.displayNames[4];
+            default ->
+                "TOTRANSLATE";
         };
     }
 

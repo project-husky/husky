@@ -9,25 +9,29 @@
  */
 package org.projecthusky.communication.ch.enums.beta;
 
+import java.util.Objects;
+import javax.annotation.processing.Generated;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.common.enums.CodeSystems;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.enums.ValueSetEnumInterface;
 
-import javax.annotation.processing.Generated;
-import java.util.Objects;
-
 /**
  * Enumeration of EprAgentRole values
  * <p>
- * EN: Role codes as per Annex 5 EPRO-FDHA, CH:ATC, version July 2019 <br/>.<br> DE: No designation found.<br> FR: No
- * designation found.<br> IT: No designation found.<br>
+ * EN: Role codes as per Annex 5 EPRO-FDHA, CH:ATC, version July 2019 <br/>.<br>
+ * DE: No designation found.<br>
+ * FR: No designation found.<br>
+ * IT: No designation found.<br>
  * <p>
- * Identifier: 2.16.756.5.30.1.127.3.10.13.1<br> Effective date: 2019-11-03 14:34<br> Version: 201907.1-stable<br>
+ * Identifier: 2.16.756.5.30.1.127.3.10.13.1<br>
+ * Effective date: 2019-11-03 14:34<br>
+ * Version: 201907.1-stable<br>
  * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-12-06")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2023-05-10")
 public enum AgentRole implements ValueSetEnumInterface {
 
     /**
@@ -141,13 +145,7 @@ public enum AgentRole implements ValueSetEnumInterface {
      * @param displayNameFr The display name in French.
      * @param displayNameIt The display name in Italian.
      */
-    AgentRole(@NonNull final String code,
-              @NonNull final String codeSystem,
-              @NonNull final String displayName,
-              @NonNull final String displayNameEn,
-              @NonNull final String displayNameDe,
-              @NonNull final String displayNameFr,
-              @NonNull final String displayNameIt) {
+    AgentRole(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
         this.code = Objects.requireNonNull(code);
         this.codeSystem = Objects.requireNonNull(codeSystem);
         this.displayNames = new String[5];
@@ -207,12 +205,17 @@ public enum AgentRole implements ValueSetEnumInterface {
         if (languageCode == null) {
             return this.displayNames[0];
         }
-        return switch (languageCode) {
-            case ENGLISH -> this.displayNames[1];
-            case GERMAN -> this.displayNames[2];
-            case FRENCH -> this.displayNames[3];
-            case ITALIAN -> this.displayNames[4];
-            default -> "TOTRANSLATE";
+        return switch(languageCode) {
+            case ENGLISH ->
+                this.displayNames[1];
+            case GERMAN ->
+                this.displayNames[2];
+            case FRENCH ->
+                this.displayNames[3];
+            case ITALIAN ->
+                this.displayNames[4];
+            default ->
+                "TOTRANSLATE";
         };
     }
 

@@ -27,11 +27,11 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * IT: No designation found.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.127.3.10.15.2<br>
- * Effective date: 2020-02-26 17:24<br>
- * Version: 201907.2-stable<br>
- * Status: FINAL
+ * Effective date: 2023-04-12 15:23<br>
+ * Version: 202306.0-beta<br>
+ * Status: DRAFT
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-12-06")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2023-05-10")
 public enum PurposeOfUse implements ValueSetEnumInterface {
 
     /**
@@ -47,6 +47,19 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
                      "Automatischer Upload",
                      "Upload automatique",
                      "Upload automatico"),
+    /**
+     * EN: DICOM_AUTO.<br>
+     * DE: DICOM_AUTO.<br>
+     * FR: DICOM_AUTO.<br>
+     * IT: DICOM_AUTO.<br>
+     */
+    DICOM_AUTO("DICOM_AUTO",
+               "2.16.756.5.30.1.127.3.10.5",
+               "DICOM_AUTO",
+               "DICOM_AUTO",
+               "DICOM_AUTO",
+               "DICOM_AUTO",
+               "DICOM_AUTO"),
     /**
      * EN: Emergency Access.<br>
      * DE: Notfallzugriff.<br>
@@ -81,6 +94,14 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
      * IT: Code per Upload automatico.<br>
      */
     public static final String AUTOMATIC_UPLOAD_CODE = "AUTO";
+
+    /**
+     * EN: Code for DICOM_AUTO.<br>
+     * DE: Code für DICOM_AUTO.<br>
+     * FR: Code de DICOM_AUTO.<br>
+     * IT: Code per DICOM_AUTO.<br>
+     */
+    public static final String DICOM_AUTO_CODE = "DICOM_AUTO";
 
     /**
      * EN: Code for Emergency Access.<br>
