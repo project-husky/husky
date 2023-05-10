@@ -248,6 +248,7 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
     public MedicationStatement addDosage(final Dosage t) {
         if (t instanceof final ChEmedEprDosage chEmedEprDosage) {
             this.dosage.add(chEmedEprDosage);
+            return this;
         }
         final var newDosage = new ChEmedEprDosage();
         t.copyValues(newDosage);
