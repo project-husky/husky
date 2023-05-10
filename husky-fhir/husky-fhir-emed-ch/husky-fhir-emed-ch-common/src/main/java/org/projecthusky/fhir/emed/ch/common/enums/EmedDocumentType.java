@@ -25,7 +25,7 @@ public enum EmedDocumentType {
 
     MTP(
             "MTP",
-            TypeCode.RECORD_ARTIFACT,
+            TypeCode.MEDICATION_TREATMENT_PLAN,
             ClassCode.PRESCRIPTION_RECORD,
             FormatCode.CH_EMED_MEDICATION_TREATMENT_PLAN,
             "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationtreatmentplan"
@@ -39,7 +39,7 @@ public enum EmedDocumentType {
     ),
     DIS(
             "DIS",
-            TypeCode.RECORD_ARTIFACT,
+            TypeCode.MEDICATION_DISPENSE_DOCUMENT,
             ClassCode.PRESCRIPTION_RECORD,
             FormatCode.CH_EMED_MEDICATION_DISPENSE,
             "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationdispense"
@@ -60,7 +60,7 @@ public enum EmedDocumentType {
     ),
     PMLC(
             "PMLC",
-            TypeCode.MEDICATION_SUMMARY_DOCUMENT,
+            TypeCode.MEDICATION_CARD_DOCUMENT,
             ClassCode.SUMMARY_CLINICAL_DOCUMENT,
             FormatCode.CH_EMED_MEDICATION_CARD_DOCUMENT,
             "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationcard"

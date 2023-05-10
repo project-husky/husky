@@ -52,8 +52,8 @@ public class ChEmedEprCompositionPmlc extends ChEmedEprComposition {
                                     final LanguageCode language) {
         super(compositionId, date, language);
         this.getType().addCoding(new Coding(FhirSystem.SNOMEDCT,
-                                            "721912009",
-                                            "Medication summary document (record artifact)"));
+                                            "736378000",
+                                            "Medication management plan (record artifact)"));
         this.setTitle(CompositionTitle.PMLC.getDisplayName(language));
     }
 
