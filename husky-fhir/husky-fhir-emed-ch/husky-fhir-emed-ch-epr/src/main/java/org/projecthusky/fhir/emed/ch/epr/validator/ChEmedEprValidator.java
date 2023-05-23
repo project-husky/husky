@@ -55,10 +55,10 @@ public class ChEmedEprValidator {
         // Adding all necessary packages
         log.debug("Start loading IGs");
         this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ihe.formatcode.fhir#1.1.0.tgz"));
-        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-epr-term#2.0.8.tgz"));
-        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-core#20230415.tgz"));
-        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-emed#20230415.tgz"));
-        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.cara.fhir.epr.emed#20230508.tgz"));
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-epr-term#20230523.tgz"));
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-core#20230523.tgz"));
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-emed#20230523.tgz"));
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.cara.fhir.epr.emed#20230523.tgz"));
         log.debug("Stop loading IGs");
     }
 
