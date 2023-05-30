@@ -10,11 +10,10 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.resource;
 
+import ca.uhn.fhir.model.api.annotation.Child;
+import ca.uhn.fhir.model.api.annotation.Extension;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.hl7.fhir.r4.model.Dosage;
-import org.hl7.fhir.r4.model.Identifier;
-import org.hl7.fhir.r4.model.MedicationStatement;
-import org.hl7.fhir.r4.model.Reference;
+import org.hl7.fhir.r4.model.*;
 import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
@@ -22,8 +21,11 @@ import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
+import org.projecthusky.fhir.emed.ch.epr.enums.SubstanceAdministrationSubstitutionCode;
 import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EffectiveDosageInstructions;
+import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprMedicationStatementMtp;
+import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprMedicationStatementChanged;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,15 @@ import java.util.UUID;
  **/
 public abstract class ChEmedEprMedicationStatement extends MedicationStatement implements ChEmedEprEntry {
     // Here goes everything common to MedicationStatement (MTP), (PML) and (PMLC)
+
+    /**
+     * Whether the dispenser can substitute the prescribed medicine/package by another that is deemed equivalent, for
+     * medical or logistical reasons. By default, substitution is authorized.
+     */
+    @Nullable
+    @Child(name = "substitution")
+    @Extension(url = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-substitution", definedLocally = false)
+    protected CodeableConcept substitution;
 
     /**
      * Empty constructor for the parser.
@@ -58,6 +69,37 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
     @Override
     public EmedEntryType getEmedType() {
         return EmedEntryType.MTP;
+    }
+
+    /**
+     * Gets the substitution element in the medication statement.
+     *
+     * @return the substitution element.
+     */
+    public CodeableConcept getSubstitution() {
+        if (this.substitution == null) {
+            this.substitution = new CodeableConcept();
+        }
+        return this.substitution;
+    }
+
+    /**
+     * Gets the substitution code in the medication statement.
+     *
+     * @return the substitution code.
+     * @throws InvalidEmedContentException if the substitution code is invalid.
+     */
+    @ExpectsValidResource
+    public SubstanceAdministrationSubstitutionCode resolveSubstitution() throws InvalidEmedContentException {
+        if (!this.hasSubstitution()) {
+            return SubstanceAdministrationSubstitutionCode.EQUIVALENT;
+        }
+        final var substitutionCode =
+                SubstanceAdministrationSubstitutionCode.fromCoding(this.getSubstitution().getCodingFirstRep());
+        if (substitutionCode == null) {
+            throw new InvalidEmedContentException("The substitution code is invalid");
+        }
+        return substitutionCode;
     }
 
     /**
@@ -181,6 +223,28 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
     }
 
     /**
+     * Sets the substitution element in the medication statement.
+     *
+     * @param value the substitution element.
+     * @return this.
+     */
+    public ChEmedEprMedicationStatement setSubstitutionElement(final CodeableConcept value) {
+        this.substitution = value;
+        return this;
+    }
+
+    /**
+     * Sets the substitution code in the medication statement.
+     *
+     * @param value the substitution code.
+     * @return this.
+     */
+    public ChEmedEprMedicationStatement setSubstitution(final SubstanceAdministrationSubstitutionCode value) {
+        this.setSubstitutionElement(value.getCodeableConcept());
+        return this;
+    }
+
+    /**
      * Adds additional entry of the dosage instruction.
      *
      * @param dosageAdditionalEntry additional entry of the dosage instruction.
@@ -189,6 +253,15 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
     public ChEmedEprMedicationStatement addDosageAdditionalEntry(final ChEmedEprDosage dosageAdditionalEntry) {
         this.getDosage().add(dosageAdditionalEntry);
         return this;
+    }
+
+    /**
+     * Returns whether substitution code exists.
+     *
+     * @return {@code true} if the substitution code exists, {@code false} otherwise.
+     */
+    public boolean hasSubstitution() {
+        return this.substitution != null && !this.substitution.isEmpty();
     }
 
     /**
@@ -300,5 +373,13 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
             return patient;
         }
         throw new InvalidEmedContentException("The subject (Patient) is missing");
+    }
+
+    @Override
+    public void copyValues(final MedicationStatement dst) {
+        super.copyValues(dst);
+        if (dst instanceof final ChEmedEprMedicationStatement als) {
+            als.substitution = substitution == null ? null : substitution.copy();
+        }
     }
 }

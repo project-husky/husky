@@ -19,7 +19,6 @@ import org.hl7.fhir.r4.model.*;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
-import org.projecthusky.fhir.emed.ch.epr.enums.SubstanceAdministrationSubstitutionCode;
 import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationStatement;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
@@ -103,25 +102,6 @@ public class ChEmedEprMedicationStatementPml extends ChEmedEprMedicationStatemen
     }
 
     /**
-     * Gets the substitution code in the medication statement.
-     *
-     * @return the substitution code.
-     * @throws InvalidEmedContentException if the substitution code is invalid.
-     */
-    @ExpectsValidResource
-    public SubstanceAdministrationSubstitutionCode getSubstitution() throws InvalidEmedContentException {
-        if (!this.hasSubstitution()) {
-            return SubstanceAdministrationSubstitutionCode.EQUIVALENT;
-        }
-        final var substitutionCode =
-                SubstanceAdministrationSubstitutionCode.fromCoding(this.getSubstitution().getCoding());
-        if (substitutionCode == null) {
-            throw new InvalidEmedContentException("The substitution code is invalid");
-        }
-        return substitutionCode;
-    }
-
-    /**
      * Gets the last author document resource in the medication statement if available.
      *
      * @return the author document resource or {@code null}.
@@ -140,43 +120,12 @@ public class ChEmedEprMedicationStatementPml extends ChEmedEprMedicationStatemen
     }
 
     /**
-     * Returns whether substitution code exists.
-     *
-     * @return {@code true} if the substitution code exists, {@code false} otherwise.
-     */
-    public boolean hasSubstitution() {
-        return this.substitution != null && !this.substitution.isEmpty();
-    }
-
-    /**
      * Returns whether author document exists.
      *
      * @return {@code true} if the author document exists, {@code false} otherwise.
      */
     public boolean hasAuthorDocument() {
         return this.authorDocument != null && this.authorDocument.getResource() != null;
-    }
-
-    /**
-     * Sets the substitution element in the medication statement.
-     *
-     * @param value the substitution element.
-     * @return this.
-     */
-    public ChEmedEprMedicationStatementPml setSubstitutionElement(final CodeableConcept value) {
-        this.substitution = value;
-        return this;
-    }
-
-    /**
-     * Sets the substitution code in the medication statement.
-     *
-     * @param value the substitution code.
-     * @return this.
-     */
-    public ChEmedEprMedicationStatementPml setSubstitution(final SubstanceAdministrationSubstitutionCode value) {
-        this.setSubstitutionElement(value.getCodeableConcept());
-        return this;
     }
 
     /**
@@ -248,7 +197,6 @@ public class ChEmedEprMedicationStatementPml extends ChEmedEprMedicationStatemen
     public void copyValues(final MedicationStatement dst) {
         super.copyValues(dst);
         if (dst instanceof final ChEmedEprMedicationStatementPml als) {
-            als.substitution = substitution == null ? null : substitution.copy();
             als.authorDocument = authorDocument == null ? null : authorDocument.copy();
             als.parentDocument = parentDocument == null ? null : parentDocument.copy();
         }
