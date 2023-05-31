@@ -19,7 +19,6 @@ import org.hl7.fhir.r4.model.*;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
-import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationStatement;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
@@ -34,16 +33,6 @@ import java.util.UUID;
  **/
 @ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-medicationstatement-list")
 public class ChEmedEprMedicationStatementPml extends ChEmedEprMedicationStatement {
-
-    /**
-     * Whether the dispenser can substitute the prescribed medicine/package by another that is deemed equivalent, for
-     * medical or logistical reasons. By default, substitution is authorized.
-     */
-    @Nullable
-    @Child(name = "substitution")
-    @Extension(url = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-substitution", definedLocally = false)
-    protected CodeableConcept substitution;
-
     /**
      * Author of the original document if different from the author of the medical decision
      * (MedicationStatement.informationSource)
@@ -75,18 +64,6 @@ public class ChEmedEprMedicationStatementPml extends ChEmedEprMedicationStatemen
      */
     public ChEmedEprMedicationStatementPml(final UUID entryUuid) {
         super(entryUuid);
-    }
-
-    /**
-     * Gets the substitution element in the medication statement.
-     *
-     * @return the substitution element.
-     */
-    public CodeableConcept getSubstitutionElement() {
-        if (this.substitution == null) {
-            this.substitution = new CodeableConcept();
-        }
-        return this.substitution;
     }
 
     /**
@@ -169,21 +146,6 @@ public class ChEmedEprMedicationStatementPml extends ChEmedEprMedicationStatemen
      */
     public boolean hasParentDocument() {
         return this.parentDocument != null && !this.parentDocument.isEmpty();
-    }
-
-    /**
-     * Resolves the information source.
-     *
-     * @return the information source.
-     */
-    @Override
-    @ExpectsValidResource
-    public Author resolveInformationSource() {
-        if (!this.hasInformationSource()) {
-            throw new InvalidEmedContentException(
-                    "The information source is missing.");
-        }
-        return new Author(this.getInformationSource().getResource());
     }
 
     @Override
