@@ -104,8 +104,7 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 		internalAttributes.forEach(c -> {
 			List<AttributeType> attributes = new LinkedList<>();
 			final List<org.opensaml.saml.saml2.core.Attribute> listOfAttributes = c.getAttributes();
-			listOfAttributes.forEach(d -> attributes
-					.add(new AttributeBuilderImpl().create(d)));
+			listOfAttributes.forEach(d -> attributes.add(new AttributeBuilderImpl().create(d)));
 
 			var statement = new AttributeStatementType();
 			statement.getAttributeOrEncryptedAttribute().addAll(attributes);
@@ -115,6 +114,7 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 
 	/**
 	 * Method to add statements.
+	 * 
 	 * @param statements the list of statements to be added
 	 */
 	public void addStatements(List<StatementAbstractType> statements) {
@@ -127,13 +127,13 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 				this.assertion.getStatements().add(new StatementBuilderImpl().create(policyStat));
 			} else if (statement instanceof AttributeStatementType attrStat) {
 				var retVal = new AttributeStatementBuilder().buildObject();
-				
-				for(Object obj: attrStat.getAttributeOrEncryptedAttribute()) {
+
+				for (Object obj : attrStat.getAttributeOrEncryptedAttribute()) {
 					if (obj instanceof AttributeType attributeType) {
 						retVal.getAttributes().add(new AttributeBuilderImpl().create(attributeType));
 					}
 				}
-				
+
 				this.assertion.getStatements().add(retVal);
 			} else if (statement instanceof AuthnStatementType attrStat) {
 				this.assertion.getAuthnStatements().add(new AuthnStatementBuilderImpl().create(attrStat));
@@ -171,9 +171,8 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 				this.statementOrAuthnStatementOrAuthzDecisionStatement
 						.add(new StatementBuilderImpl().create(xacmlPolicyStatementType));
 			} else if (c instanceof XACMLPolicySetIdReferenceStatement xacmlPolicySetIdReferenceStatement) {
-				this.statementOrAuthnStatementOrAuthzDecisionStatement
-						.add(new XacmlPolicySetIdReferenceStatementBuilderImpl()
-								.create(xacmlPolicySetIdReferenceStatement));
+				this.statementOrAuthnStatementOrAuthzDecisionStatement.add(
+						new XacmlPolicySetIdReferenceStatementBuilderImpl().create(xacmlPolicySetIdReferenceStatement));
 			}
 
 		});
@@ -254,6 +253,7 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 
 	/**
 	 * method to an id
+	 * 
 	 * @param id the id to set
 	 */
 	public void setId(String id) {
@@ -282,6 +282,7 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 
 	/**
 	 * Method to set IssueInstant
+	 * 
 	 * @param cal the XMLGregorianCalendar to set
 	 */
 	public void setIssueInstant(XMLGregorianCalendar cal) {
@@ -304,11 +305,13 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 			nameIdType.setSPNameQualifier(assertion.getIssuer().getSPNameQualifier());
 			nameIdType.setSPProvidedID(assertion.getIssuer().getSPProvidedID());
 			setIssuer(nameIdType);
+			super.setIssuer(nameIdType);
 		}
 	}
 
 	/**
 	 * method to setIssuer
+	 * 
 	 * @param issuer the issue to be set
 	 */
 	public void setIssuer(NameIDType issuer) {
@@ -319,6 +322,7 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 			retVal.setSPNameQualifier(issuer.getSPNameQualifier());
 			retVal.setSPProvidedID(issuer.getSPProvidedID());
 			assertion.setIssuer(retVal);
+
 		}
 	}
 
@@ -334,6 +338,7 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 
 	/**
 	 * Method to set a subject.
+	 * 
 	 * @param subject the subject to be set.
 	 */
 	public void getSubject(SubjectType subject) {
@@ -354,10 +359,13 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 
 	/**
 	 * Method to set a version.
+	 * 
 	 * @param version the version to be set
 	 */
 	public void setVersion(String version) {
-		this.assertion.setVersion(SAMLVersion.valueOf(version));
+		if (version != null) {
+			this.assertion.setVersion(SAMLVersion.valueOf(version));
+		}
 	}
 
 	/**
@@ -372,6 +380,7 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 
 	/**
 	 * method to check for signature.
+	 * 
 	 * @return true if signature is available else false
 	 */
 	public boolean hasSignature() {
