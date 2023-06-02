@@ -11,3 +11,4 @@ log
 **/log/*
 .idea/
 *.iml
+.factorypath
