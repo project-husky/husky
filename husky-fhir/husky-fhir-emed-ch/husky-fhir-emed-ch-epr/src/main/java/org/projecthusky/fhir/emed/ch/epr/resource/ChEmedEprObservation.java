@@ -17,6 +17,7 @@ import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtDispense;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtPrescription;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprMedicationStatementMtp;
+import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprMedicationStatementChanged;
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprMedicationRequestPre;
 import org.projecthusky.fhir.emed.ch.epr.util.References;
 
@@ -119,13 +120,13 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
      */
     @Nullable
     @ExpectsValidResource
-    public ChEmedEprMedicationStatementMtp resolveMedicationStatementChanged() throws InvalidEmedContentException {
+    public ChEmedEprMedicationStatementChanged resolveMedicationStatementChanged() throws InvalidEmedContentException {
         if (!this.hasMedicationStatementChanged()) {
             return null;
         }
         final var resource = this.getMedicationStatementChangedReference().getResource();
-        if (resource instanceof ChEmedEprMedicationStatementMtp chEmedEprMedicationStatementMtp) {
-            return chEmedEprMedicationStatementMtp;
+        if (resource instanceof ChEmedEprMedicationStatementChanged chEmedEprMedicationStatementChanged) {
+            return chEmedEprMedicationStatementChanged;
         }
         throw new InvalidEmedContentException("The medication statement resource isn't of the right type.");
     }
