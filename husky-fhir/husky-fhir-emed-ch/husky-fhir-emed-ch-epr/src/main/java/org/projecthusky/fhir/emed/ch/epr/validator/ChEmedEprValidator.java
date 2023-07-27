@@ -15,10 +15,9 @@ import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.OperationOutcome;
 import org.hl7.fhir.r5.elementmodel.Manager;
 import org.hl7.fhir.r5.utils.EOperationOutcome;
+import org.hl7.fhir.utilities.npm.FilesystemPackageCacheManager;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,7 +31,6 @@ import java.util.stream.Collectors;
  * @author Quentin Ligier
  **/
 public class ChEmedEprValidator {
-    private static final Logger log = LoggerFactory.getLogger(ChEmedEprValidator.class);
 
     /**
      * The instance validator.
@@ -50,16 +48,17 @@ public class ChEmedEprValidator {
      * @throws IOException if the NPM packages can't be found in the classpath.
      */
     public ChEmedEprValidator() throws IOException, URISyntaxException {
-        this.matchboxEngine = new MatchboxEngine.MatchboxEngineBuilder().getEngineR4();
+        final var builder = new MatchboxEngine.MatchboxEngineBuilder();
+        builder.setTxServer(null);
+        builder.setPackageCacheMode(FilesystemPackageCacheManager.FilesystemPackageCacheMode.TESTING);
+        this.matchboxEngine = builder.getEngineR4();
 
         // Adding all necessary packages
-        log.debug("Start loading IGs");
         this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ihe.formatcode.fhir#1.1.0.tgz"));
-        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-epr-term#20230523.tgz"));
-        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-core#20230523.tgz"));
-        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-emed#20230523.tgz"));
-        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.cara.fhir.epr.emed#20230523.tgz"));
-        log.debug("Stop loading IGs");
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-epr-term#2.0.9.tgz"));
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-core#4.0.0-ballot.tgz"));
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-emed#4.0.0-ballot.tgz"));
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.cara.fhir.epr.emed#20230717.tgz"));
     }
 
     /**
