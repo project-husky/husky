@@ -25,7 +25,6 @@ import org.projecthusky.communication.ch.camel.chpharm5.ChPharm5Operations;
  **/
 public class ChPharm5RequestConverter {
 
-
     /**
      * Validates a PHARM-5 request, throwing an {@link UnprocessableEntityException} on validation failure
      */

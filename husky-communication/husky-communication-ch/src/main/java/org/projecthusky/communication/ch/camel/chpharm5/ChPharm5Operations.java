@@ -25,7 +25,8 @@ public enum ChPharm5Operations {
     FIND_MEDICATION_ADMINISTRATIONS("$find-medication-administrations"),
     FIND_PRESCRIPTIONS_FOR_VALIDATION("$find-prescriptions-for-validation"),
     FIND_PRESCRIPTIONS_FOR_DISPENSE("$find-prescriptions-for-dispense"),
-    FIND_MEDICATION_LIST("$find-medication-list");
+    FIND_MEDICATION_LIST("$find-medication-list"),
+    FIND_MEDICATION_CARD("$find-medication-card");
 
     private final String operation;
 
