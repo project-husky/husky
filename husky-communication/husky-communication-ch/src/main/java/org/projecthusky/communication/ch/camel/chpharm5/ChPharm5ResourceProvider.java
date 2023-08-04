@@ -44,6 +44,7 @@ public class ChPharm5ResourceProvider extends AbstractPlainProvider {
     public static final String SP_PATIENT_IDENTIFIER = DocumentReference.SP_PATIENT + "." + Patient.SP_IDENTIFIER;
     public static final String SP_AUTHOR_FAMILY = DocumentReference.SP_AUTHOR + "." + Practitioner.SP_FAMILY;
     public static final String SP_AUTHOR_GIVEN = DocumentReference.SP_AUTHOR + "." + Practitioner.SP_GIVEN;
+    public static final String SP_CREATION = "creation";
 
     @Operation(name = "$find-medication-treatment-plans", type = DocumentReference.class, idempotent = true,
             bundleType = BundleTypeEnum.SEARCHSET)
@@ -52,7 +53,7 @@ public class ChPharm5ResourceProvider extends AbstractPlainProvider {
             @OperationParam(name = DocumentReference.SP_STATUS, min = 1, max = 2) TokenOrListParam status,
             @OperationParam(name = DocumentReference.SP_IDENTIFIER) TokenParam identifier,
             @OperationParam(name = DocumentReference.SP_SETTING) TokenOrListParam setting,
-            @OperationParam(name = DocumentReference.SP_DATE) DateRangeParam date,
+            @OperationParam(name = SP_CREATION) DateRangeParam creation,
             @OperationParam(name = DocumentReference.SP_PERIOD) DateRangeParam period,
             @OperationParam(name = DocumentReference.SP_FORMAT) TokenOrListParam format,
             @OperationParam(name = DocumentReference.SP_FACILITY) TokenOrListParam facility,
@@ -65,8 +66,8 @@ public class ChPharm5ResourceProvider extends AbstractPlainProvider {
             RequestDetails requestDetails,
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse) {
-        return this.searchRequestBundleProvider(patient, identifier, setting, date, period, format, facility, event, securityLabel,
-                                                authorFamily, authorGiven, status, sortSpec, includeSpec, requestDetails, httpServletRequest,
+        return this.searchRequestBundleProvider(patient, identifier, setting, creation, period, format, facility, event, securityLabel,
+                                                authorFamily, authorGiven, status, null, sortSpec, includeSpec, requestDetails, httpServletRequest,
                                                 httpServletResponse, ChPharm5Operations.FIND_MEDICATION_TREATMENT_PLANS);
     }
 
@@ -77,7 +78,7 @@ public class ChPharm5ResourceProvider extends AbstractPlainProvider {
             @OperationParam(name = DocumentReference.SP_STATUS, min = 1, max = 2) TokenOrListParam status,
             @OperationParam(name = DocumentReference.SP_IDENTIFIER) TokenParam identifier,
             @OperationParam(name = DocumentReference.SP_SETTING) TokenOrListParam setting,
-            @OperationParam(name = DocumentReference.SP_DATE) DateRangeParam date,
+            @OperationParam(name = SP_CREATION) DateRangeParam creation,
             @OperationParam(name = DocumentReference.SP_PERIOD) DateRangeParam period,
             @OperationParam(name = DocumentReference.SP_FORMAT) TokenOrListParam format,
             @OperationParam(name = DocumentReference.SP_FACILITY) TokenOrListParam facility,
@@ -90,8 +91,8 @@ public class ChPharm5ResourceProvider extends AbstractPlainProvider {
             RequestDetails requestDetails,
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse) {
-        return this.searchRequestBundleProvider(patient, identifier, setting, date, period, format, facility, event, securityLabel,
-                                                authorFamily, authorGiven, status, sortSpec, includeSpec, requestDetails, httpServletRequest, httpServletResponse,
+        return this.searchRequestBundleProvider(patient, identifier, setting, creation, period, format, facility, event, securityLabel,
+                                                authorFamily, authorGiven, status, null, sortSpec, includeSpec, requestDetails, httpServletRequest, httpServletResponse,
                                                 ChPharm5Operations.FIND_PRESCRIPTIONS);
     }
 
@@ -102,7 +103,7 @@ public class ChPharm5ResourceProvider extends AbstractPlainProvider {
             @OperationParam(name = DocumentReference.SP_STATUS, min = 1, max = 2) TokenOrListParam status,
             @OperationParam(name = DocumentReference.SP_IDENTIFIER) TokenParam identifier,
             @OperationParam(name = DocumentReference.SP_SETTING) TokenOrListParam setting,
-            @OperationParam(name = DocumentReference.SP_DATE) DateRangeParam date,
+            @OperationParam(name = SP_CREATION) DateRangeParam creation,
             @OperationParam(name = DocumentReference.SP_PERIOD) DateRangeParam period,
             @OperationParam(name = DocumentReference.SP_FORMAT) TokenOrListParam format,
             @OperationParam(name = DocumentReference.SP_FACILITY) TokenOrListParam facility,
@@ -115,8 +116,8 @@ public class ChPharm5ResourceProvider extends AbstractPlainProvider {
             RequestDetails requestDetails,
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse) {
-        return this.searchRequestBundleProvider(patient, identifier, setting, date, period, format, facility, event, securityLabel,
-                                                authorFamily, authorGiven, status, sortSpec, includeSpec, requestDetails, httpServletRequest, httpServletResponse,
+        return this.searchRequestBundleProvider(patient, identifier, setting, creation, period, format, facility, event, securityLabel,
+                                                authorFamily, authorGiven, status, null, sortSpec, includeSpec, requestDetails, httpServletRequest, httpServletResponse,
                                                 ChPharm5Operations.FIND_DISPENSES);
     }
 
@@ -127,7 +128,7 @@ public class ChPharm5ResourceProvider extends AbstractPlainProvider {
             @OperationParam(name = DocumentReference.SP_STATUS, min = 1, max = 2) TokenOrListParam status,
             @OperationParam(name = DocumentReference.SP_IDENTIFIER) TokenParam identifier,
             @OperationParam(name = DocumentReference.SP_SETTING) TokenOrListParam setting,
-            @OperationParam(name = DocumentReference.SP_DATE) DateRangeParam date,
+            @OperationParam(name = SP_CREATION) DateRangeParam creation,
             @OperationParam(name = DocumentReference.SP_PERIOD) DateRangeParam period,
             @OperationParam(name = DocumentReference.SP_FORMAT) TokenOrListParam format,
             @OperationParam(name = DocumentReference.SP_FACILITY) TokenOrListParam facility,
@@ -140,8 +141,8 @@ public class ChPharm5ResourceProvider extends AbstractPlainProvider {
             RequestDetails requestDetails,
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse) {
-        return this.searchRequestBundleProvider(patient, identifier, setting, date, period, format, facility, event, securityLabel,
-                                                authorFamily, authorGiven, status, sortSpec, includeSpec, requestDetails, httpServletRequest, httpServletResponse,
+        return this.searchRequestBundleProvider(patient, identifier, setting, creation, period, format, facility, event, securityLabel,
+                                                authorFamily, authorGiven, status, null, sortSpec, includeSpec, requestDetails, httpServletRequest, httpServletResponse,
                                                 ChPharm5Operations.FIND_MEDICATION_ADMINISTRATIONS);
     }
 
@@ -152,7 +153,7 @@ public class ChPharm5ResourceProvider extends AbstractPlainProvider {
             @OperationParam(name = DocumentReference.SP_STATUS, min = 1, max = 2) TokenOrListParam status,
             @OperationParam(name = DocumentReference.SP_IDENTIFIER) TokenParam identifier,
             @OperationParam(name = DocumentReference.SP_SETTING) TokenOrListParam setting,
-            @OperationParam(name = DocumentReference.SP_DATE) DateRangeParam date,
+            @OperationParam(name = SP_CREATION) DateRangeParam creation,
             @OperationParam(name = DocumentReference.SP_PERIOD) DateRangeParam period,
             @OperationParam(name = DocumentReference.SP_FORMAT) TokenOrListParam format,
             @OperationParam(name = DocumentReference.SP_FACILITY) TokenOrListParam facility,
@@ -165,8 +166,8 @@ public class ChPharm5ResourceProvider extends AbstractPlainProvider {
             RequestDetails requestDetails,
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse) {
-        return this.searchRequestBundleProvider(patient, identifier, setting, date, period, format, facility, event, securityLabel,
-                                                authorFamily, authorGiven, status, sortSpec, includeSpec, requestDetails, httpServletRequest, httpServletResponse,
+        return this.searchRequestBundleProvider(patient, identifier, setting, creation, period, format, facility, event, securityLabel,
+                                                authorFamily, authorGiven, status, null, sortSpec, includeSpec, requestDetails, httpServletRequest, httpServletResponse,
                                                 ChPharm5Operations.FIND_PRESCRIPTIONS_FOR_VALIDATION);
     }
 
@@ -177,7 +178,7 @@ public class ChPharm5ResourceProvider extends AbstractPlainProvider {
             @OperationParam(name = DocumentReference.SP_STATUS, min = 1, max = 2) TokenOrListParam status,
             @OperationParam(name = DocumentReference.SP_IDENTIFIER) TokenParam identifier,
             @OperationParam(name = DocumentReference.SP_SETTING) TokenOrListParam setting,
-            @OperationParam(name = DocumentReference.SP_DATE) DateRangeParam date,
+            @OperationParam(name = SP_CREATION) DateRangeParam creation,
             @OperationParam(name = DocumentReference.SP_PERIOD) DateRangeParam period,
             @OperationParam(name = DocumentReference.SP_FORMAT) TokenOrListParam format,
             @OperationParam(name = DocumentReference.SP_FACILITY) TokenOrListParam facility,
@@ -190,8 +191,8 @@ public class ChPharm5ResourceProvider extends AbstractPlainProvider {
             RequestDetails requestDetails,
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse) {
-        return this.searchRequestBundleProvider(patient, identifier, setting, date, period, format, facility, event, securityLabel,
-                                                authorFamily, authorGiven, status, sortSpec, includeSpec, requestDetails, httpServletRequest, httpServletResponse,
+        return this.searchRequestBundleProvider(patient, identifier, setting, creation, period, format, facility, event, securityLabel,
+                                                authorFamily, authorGiven, status, null, sortSpec, includeSpec, requestDetails, httpServletRequest, httpServletResponse,
                                                 ChPharm5Operations.FIND_PRESCRIPTIONS_FOR_DISPENSE);
     }
 
@@ -209,7 +210,7 @@ public class ChPharm5ResourceProvider extends AbstractPlainProvider {
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse) {
         return this.searchRequestBundleProvider(patient, null, null, null, period, format, null, null, null,
-                                                null, null, status, sortSpec, includeSpec, requestDetails, httpServletRequest, httpServletResponse,
+                                                null, null, status, null, sortSpec, includeSpec, requestDetails, httpServletRequest, httpServletResponse,
                                                 ChPharm5Operations.FIND_MEDICATION_LIST);
     }
 
@@ -221,20 +222,22 @@ public class ChPharm5ResourceProvider extends AbstractPlainProvider {
             @OperationParam(name = DocumentReference.SP_STATUS, min = 1, max = 2) TokenOrListParam status,
             @OperationParam(name = DocumentReference.SP_PERIOD) DateRangeParam period,
             @OperationParam(name = DocumentReference.SP_FORMAT) TokenOrListParam format,
+            @OperationParam(name = DocumentReference.SP_LANGUAGE) TokenParam language,
             @Sort SortSpec sortSpec,
             @IncludeParam Set<Include> includeSpec,
             RequestDetails requestDetails,
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse) {
         return this.searchRequestBundleProvider(patient, null, null, null, period, format, null, null, null,
-                                                null, null, status, sortSpec, includeSpec, requestDetails, httpServletRequest, httpServletResponse,
+                                                null, null, status, language, sortSpec, includeSpec, requestDetails,
+                                                httpServletRequest, httpServletResponse,
                                                 ChPharm5Operations.FIND_MEDICATION_LIST);
     }
 
-    IBundleProvider searchRequestBundleProvider(final @Nullable TokenParam patient,
+    IBundleProvider searchRequestBundleProvider(final TokenParam patient,
                                                 final @Nullable TokenParam identifier,
                                                 final @Nullable TokenOrListParam setting,
-                                                final @Nullable DateRangeParam date,
+                                                final @Nullable DateRangeParam creation,
                                                 final @Nullable DateRangeParam period,
                                                 final @Nullable TokenOrListParam format,
                                                 final @Nullable TokenOrListParam facility,
@@ -243,6 +246,7 @@ public class ChPharm5ResourceProvider extends AbstractPlainProvider {
                                                 final @Nullable StringParam authorFamily,
                                                 final @Nullable StringParam authorGiven,
                                                 final @Nullable TokenOrListParam status,
+                                                final @Nullable TokenParam language,
                                                 final @Nullable SortSpec sortSpec,
                                                 final @Nullable Set<Include> includeSpec,
                                                 final RequestDetails requestDetails,
@@ -254,7 +258,7 @@ public class ChPharm5ResourceProvider extends AbstractPlainProvider {
                 .status(status)
                 .identifier(identifier)
                 .setting(setting)
-                .date(date)
+                .creation(creation)
                 .period(period)
                 .facility(facility)
                 .event(event)
@@ -262,6 +266,7 @@ public class ChPharm5ResourceProvider extends AbstractPlainProvider {
                 .format(format)
                 .authorFamilyName(authorFamily)
                 .authorGivenName(authorGiven)
+                .language(language)
                 .sortSpec(sortSpec)
                 .includeSpec(includeSpec)
                 .fhirContext(getFhirContext())

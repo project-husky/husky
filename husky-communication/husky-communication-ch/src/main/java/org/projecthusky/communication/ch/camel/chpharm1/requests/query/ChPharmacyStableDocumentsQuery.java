@@ -192,7 +192,7 @@ public abstract class ChPharmacyStableDocumentsQuery extends ChPharmacyDocuments
                 "type=" + this.type +
                 ", homeCommunityId='" + this.homeCommunityId + '\'' +
                 ", extraParameters=" + this.extraParameters +
-                ", patientEprSpid=" + this.patientEprSpid +
+                ", patientEprSpid=" + this.patientId +
                 ", status=" + this.status +
                 ", metadataLevel=" + this.metadataLevel +
                 ", formatCodes=" + this.formatCodes +

@@ -29,7 +29,7 @@ import java.util.Objects;
  * @author Quentin Ligier
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PharmacyDocumentsQuery", propOrder = {"homeCommunityId", "extraParameters", "patientEprSpid", "status",
+@XmlType(name = "PharmacyDocumentsQuery", propOrder = {"homeCommunityId", "extraParameters", "patientId", "status",
         "metadataLevel", "formatCodes"})
 @XmlRootElement(name = "pharmacyDocumentsQuery")
 public abstract class ChPharmacyDocumentsQuery implements PatientIdBasedStoredQuery, Serializable {
@@ -40,7 +40,7 @@ public abstract class ChPharmacyDocumentsQuery implements PatientIdBasedStoredQu
     protected ChPharm1QueryType type;
     protected String homeCommunityId;
     protected final Map<String, QueryList<String>> extraParameters = new HashMap<>();
-    protected Identifiable patientEprSpid;
+    protected Identifiable patientId;
     protected List<AvailabilityStatus> status;
     protected Integer metadataLevel;
     @XmlElement(name = "formatCode")
@@ -63,7 +63,7 @@ public abstract class ChPharmacyDocumentsQuery implements PatientIdBasedStoredQu
     }
 
     public ChPharm1QueryType getType() {
-        return type;
+        return this.type;
     }
 
     public String getHomeCommunityId() {
@@ -79,11 +79,11 @@ public abstract class ChPharmacyDocumentsQuery implements PatientIdBasedStoredQu
     }
 
     public Identifiable getPatientId() {
-        return patientEprSpid;
+        return patientId;
     }
 
-    public void setPatientId(final Identifiable patientEprSpid) {
-        this.patientEprSpid = patientEprSpid;
+    public void setPatientId(final Identifiable patientId) {
+        this.patientId = patientId;
     }
 
     public List<AvailabilityStatus> getStatus() {
@@ -139,7 +139,7 @@ public abstract class ChPharmacyDocumentsQuery implements PatientIdBasedStoredQu
         return type == that.type
                 && Objects.equals(homeCommunityId, that.homeCommunityId)
                 && Objects.equals(extraParameters, that.extraParameters)
-                && Objects.equals(patientEprSpid, that.patientEprSpid)
+                && Objects.equals(patientId, that.patientId)
                 && Objects.equals(status, that.status)
                 && Objects.equals(metadataLevel, that.metadataLevel)
                 && Objects.equals(formatCodes, that.formatCodes);
@@ -147,7 +147,7 @@ public abstract class ChPharmacyDocumentsQuery implements PatientIdBasedStoredQu
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, homeCommunityId, extraParameters, patientEprSpid, status, metadataLevel, formatCodes);
+        return Objects.hash(type, homeCommunityId, extraParameters, patientId, status, metadataLevel, formatCodes);
     }
 
     @Override
@@ -156,7 +156,7 @@ public abstract class ChPharmacyDocumentsQuery implements PatientIdBasedStoredQu
                 "type=" + this.type +
                 ", homeCommunityId='" + this.homeCommunityId + '\'' +
                 ", extraParameters=" + this.extraParameters +
-                ", patientId=" + this.patientEprSpid +
+                ", patientId=" + this.patientId +
                 ", status=" + this.status +
                 ", metadataLevel=" + this.metadataLevel +
                 ", formatCodes=" + this.formatCodes +

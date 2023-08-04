@@ -12,12 +12,12 @@
 package org.projecthusky.communication.ch.camel.chpharm1.requests.query;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntryType;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.TimeRange;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.io.Serial;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -26,19 +26,13 @@ import java.util.Objects;
  * @author Quentin Ligier
  **/
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "FindMedicationCardQuery", propOrder = {
-        "documentEntryTypes", "serviceStart", "serviceEnd"})
+@XmlType(name = "FindMedicationCardQuery", propOrder = {"languageCode"})
 @XmlRootElement(name = "findMedicationCardQuery")
 public class ChFindMedicationCardQuery extends ChPharmacyDocumentsQuery {
     @Serial
     private static final long serialVersionUID = 7643647733043294769L;
 
-    @Nullable @XmlElement(name = "documentEntryType")
-    private List<DocumentEntryType> documentEntryTypes;
-    private final TimeRange serviceStart = new TimeRange();
-    private final TimeRange serviceEnd = new TimeRange();
-    @Nullable
-    private String languageCode;
+    private @Nullable String languageCode;
 
     /**
      * Constructs the query.
@@ -50,23 +44,6 @@ public class ChFindMedicationCardQuery extends ChPharmacyDocumentsQuery {
     @Override
     public void accept(final Visitor visitor) {
         visitor.visit(this);
-    }
-
-    @Nullable
-    public List<DocumentEntryType> getDocumentEntryTypes() {
-        return documentEntryTypes;
-    }
-
-    public void setDocumentEntryTypes(@Nullable final List<DocumentEntryType> documentEntryTypes) {
-        this.documentEntryTypes = documentEntryTypes;
-    }
-
-    public TimeRange getServiceStart() {
-        return serviceStart;
-    }
-
-    public TimeRange getServiceEnd() {
-        return serviceEnd;
     }
 
     @Nullable
@@ -82,28 +59,22 @@ public class ChFindMedicationCardQuery extends ChPharmacyDocumentsQuery {
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof final ChFindMedicationCardQuery that)) return false;
-        return Objects.equals(documentEntryTypes, that.documentEntryTypes)
-                && Objects.equals(serviceStart, that.serviceStart)
-                && Objects.equals(serviceEnd, that.serviceEnd)
-                && Objects.equals(languageCode, that.languageCode);
+        return Objects.equals(languageCode, that.languageCode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), documentEntryTypes, serviceStart, serviceEnd, languageCode);
+        return Objects.hash(super.hashCode(), languageCode);
     }
 
     @Override
     public String toString() {
         return "ChFindMedicationCardQuery{" +
-                "documentEntryTypes=" + this.documentEntryTypes +
-                ", serviceStart=" + this.serviceStart +
-                ", serviceEnd=" + this.serviceEnd +
-                ", languageCode='" + this.languageCode + '\'' +
+                "languageCode='" + this.languageCode + '\'' +
                 ", type=" + this.type +
                 ", homeCommunityId='" + this.homeCommunityId + '\'' +
                 ", extraParameters=" + this.extraParameters +
-                ", patientEprSpid=" + this.patientEprSpid +
+                ", patientEprSpid=" + this.patientId +
                 ", status=" + this.status +
                 ", metadataLevel=" + this.metadataLevel +
                 ", formatCodes=" + this.formatCodes +

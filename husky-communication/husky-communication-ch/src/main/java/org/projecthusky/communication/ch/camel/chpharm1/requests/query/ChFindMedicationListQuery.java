@@ -90,7 +90,7 @@ public class ChFindMedicationListQuery extends ChPharmacyDocumentsQuery {
                 ", type=" + this.type +
                 ", homeCommunityId='" + this.homeCommunityId + '\'' +
                 ", extraParameters=" + this.extraParameters +
-                ", patientId=" + this.patientEprSpid +
+                ", patientId=" + this.patientId +
                 ", status=" + this.status +
                 ", metadataLevel=" + this.metadataLevel +
                 ", formatCodes=" + this.formatCodes +

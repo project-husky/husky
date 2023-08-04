@@ -38,30 +38,33 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  *
  * @author Quentin Ligier
  **/
+@Getter
+@Setter
 @ToString
 public class ChPharm5SearchParameters extends FhirSearchAndSortParameters<DocumentReference> {
 
-    @Getter @Setter protected @Nullable TokenParam patientIdentifier;
-    @Getter @Setter protected @Nullable DateRangeParam date;
-    @Getter @Setter protected @Nullable StringParam authorFamilyName;
-    @Getter @Setter protected @Nullable StringParam authorGivenName;
-    @Getter @Setter protected @Nullable TokenParam identifier;
-    @Getter @Setter protected @Nullable TokenOrListParam status;
-    @Getter @Setter protected @Nullable TokenOrListParam setting;
-    @Getter @Setter protected @Nullable DateRangeParam period;
-    @Getter @Setter protected @Nullable TokenOrListParam facility;
-    @Getter @Setter protected @Nullable TokenOrListParam event;
-    @Getter @Setter protected @Nullable TokenOrListParam securityLabel;
-    @Getter @Setter protected @Nullable TokenOrListParam format;
-    @Getter @Setter protected @Nullable ChPharm5Operations operation;
+    protected TokenParam patientIdentifier;
+    protected @Nullable DateRangeParam creation;
+    protected @Nullable StringParam authorFamilyName;
+    protected @Nullable StringParam authorGivenName;
+    protected @Nullable TokenParam identifier;
+    protected @Nullable TokenOrListParam status;
+    protected @Nullable TokenOrListParam setting;
+    protected @Nullable DateRangeParam period;
+    protected @Nullable TokenOrListParam facility;
+    protected @Nullable TokenOrListParam event;
+    protected @Nullable TokenOrListParam securityLabel;
+    protected @Nullable TokenOrListParam format;
+    protected @Nullable TokenParam language;
+    protected ChPharm5Operations operation;
 
-    @Getter @Setter protected @Nullable SortSpec sortSpec;
-    @Getter @Setter protected @Nullable Set<Include> includeSpec;
+    protected @Nullable SortSpec sortSpec;
+    protected @Nullable Set<Include> includeSpec;
 
-    @Getter protected FhirContext fhirContext;
+    protected FhirContext fhirContext;
 
-    ChPharm5SearchParameters(final @Nullable TokenParam patientIdentifier,
-                             final @Nullable DateRangeParam date,
+    ChPharm5SearchParameters(final TokenParam patientIdentifier,
+                             final @Nullable DateRangeParam creation,
                              final @Nullable StringParam authorFamilyName,
                              final @Nullable StringParam authorGivenName,
                              final @Nullable TokenParam identifier,
@@ -72,12 +75,13 @@ public class ChPharm5SearchParameters extends FhirSearchAndSortParameters<Docume
                              final @Nullable TokenOrListParam event,
                              final @Nullable TokenOrListParam securityLabel,
                              final @Nullable TokenOrListParam format,
-                             final @Nullable ChPharm5Operations operation,
+                             final @Nullable TokenParam language,
+                             final ChPharm5Operations operation,
                              final @Nullable SortSpec sortSpec,
                              final @Nullable Set<Include> includeSpec,
                              final FhirContext fhirContext) {
-        this.patientIdentifier = patientIdentifier;
-        this.date = date;
+        this.patientIdentifier = Objects.requireNonNull(patientIdentifier);
+        this.creation = creation;
         this.authorFamilyName = authorFamilyName;
         this.authorGivenName = authorGivenName;
         this.identifier = identifier;
@@ -88,10 +92,11 @@ public class ChPharm5SearchParameters extends FhirSearchAndSortParameters<Docume
         this.event = event;
         this.securityLabel = securityLabel;
         this.format = format;
-        this.operation = operation;
+        this.language = language;
+        this.operation = Objects.requireNonNull(operation);
         this.sortSpec = sortSpec;
         this.includeSpec = includeSpec;
-        this.fhirContext = fhirContext;
+        this.fhirContext = Objects.requireNonNull(fhirContext);
     }
 
     public static ChPharm5SearchParametersBuilder builder() {
@@ -100,10 +105,10 @@ public class ChPharm5SearchParameters extends FhirSearchAndSortParameters<Docume
 
     @Override
     public List<TokenParam> getPatientIdParam() {
-        return (patientIdentifier != null) ? List.of(patientIdentifier) : Collections.emptyList();
+        return List.of(this.patientIdentifier);
     }
 
-    public ChPharm5SearchParameters setAuthor(final ReferenceAndListParam author) {
+    public ChPharm5SearchParameters setAuthor(final @Nullable ReferenceAndListParam author) {
         if (author != null) {
             author.getValuesAsQueryTokens().forEach(param -> {
                 var ref = param.getValuesAsQueryTokens().get(0);
@@ -143,9 +148,9 @@ public class ChPharm5SearchParameters extends FhirSearchAndSortParameters<Docume
             parameters.addParameter(Pharm5ResourceProvider.SP_PATIENT_IDENTIFIER,
                                     new StringType(this.getPatientIdentifier().getValueAsQueryToken(fhirContext)));
         }
-        if (this.getDate() != null) {
-            this.getDate().getValuesAsQueryTokens().forEach(dateParam -> parameters.addParameter(DocumentReference.SP_DATE,
-                                                                                                 new StringType(
+        if (this.getCreation() != null) {
+            this.getCreation().getValuesAsQueryTokens().forEach(dateParam -> parameters.addParameter(DocumentReference.SP_DATE,
+                                                                                                     new StringType(
                                                                                                          dateParam.getValueAsQueryToken(
                                                                                                                  fhirContext))));
         }
@@ -209,6 +214,10 @@ public class ChPharm5SearchParameters extends FhirSearchAndSortParameters<Docume
                             .collect(Collectors.joining(","))
             ));
         }
+        if (this.getLanguage() != null) {
+            parameters.addParameter(DocumentReference.SP_LANGUAGE,
+                                    new StringType(this.getLanguage().getValueNotNull()));
+        }
 
         if (this.getSortSpec() != null) {
             SortSpec sort = this.getSortSpec();
@@ -251,27 +260,33 @@ public class ChPharm5SearchParameters extends FhirSearchAndSortParameters<Docume
     private static final Comparator<DocumentReference> CP_DATE = nullsLast(comparing(DocumentReference::getDate));
 
     private static final Comparator<DocumentReference> CP_AUTHOR = nullsLast(comparing(documentReference -> {
-        if (!documentReference.hasAuthor()) return null;
+        if (!documentReference.hasAuthor()) {
+            return "";
+        }
         var author = documentReference.getAuthorFirstRep();
-        if (author.getResource() instanceof PractitionerRole) {
-            var practitionerRole = (PractitionerRole) author.getResource();
-            if (!practitionerRole.hasPractitioner()) return null;
+        if (author.getResource() instanceof final PractitionerRole practitionerRole) {
+            if (!practitionerRole.hasPractitioner()) {
+                return "";
+            }
             author = practitionerRole.getPractitioner();
         }
-        if (author.getResource() == null) return null;
-        if (author.getResource() instanceof Practitioner) {
-            var practitioner = (Practitioner) author.getResource();
-            if (!practitioner.hasName()) return null;
-            var name = practitioner.getNameFirstRep();
+        if (author.getResource() == null) {
+            return "";
+        }
+        if (author.getResource() instanceof final Practitioner practitioner) {
+            if (!practitioner.hasName()) {
+                return "";
+            }
+            final var name = practitioner.getNameFirstRep();
             return name.getFamilyElement().getValueNotNull() + name.getGivenAsSingleString();
         }
-        return null;
+        return "";
     }));
 
 
     public static class ChPharm5SearchParametersBuilder {
-        private @Nullable TokenParam patientIdentifier;
-        private @Nullable DateRangeParam date;
+        private TokenParam patientIdentifier;
+        private @Nullable DateRangeParam creation;
         private @Nullable StringParam authorFamilyName;
         private @Nullable StringParam authorGivenName;
         private @Nullable TokenParam identifier;
@@ -282,7 +297,8 @@ public class ChPharm5SearchParameters extends FhirSearchAndSortParameters<Docume
         private @Nullable TokenOrListParam event;
         private @Nullable TokenOrListParam securityLabel;
         private @Nullable TokenOrListParam format;
-        private @Nullable ChPharm5Operations operation;
+        private @Nullable TokenParam language;
+        private ChPharm5Operations operation;
         private @Nullable SortSpec sortSpec;
         private @Nullable Set<Include> includeSpec;
         private FhirContext fhirContext;
@@ -290,77 +306,82 @@ public class ChPharm5SearchParameters extends FhirSearchAndSortParameters<Docume
         ChPharm5SearchParametersBuilder() {
         }
 
-        public ChPharm5SearchParametersBuilder patientIdentifier(@Nullable final TokenParam patientIdentifier) {
+        public ChPharm5SearchParametersBuilder patientIdentifier(final TokenParam patientIdentifier) {
             this.patientIdentifier = patientIdentifier;
             return this;
         }
 
-        public ChPharm5SearchParametersBuilder date(@Nullable final DateRangeParam date) {
-            this.date = date;
+        public ChPharm5SearchParametersBuilder creation(final @Nullable DateRangeParam creation) {
+            this.creation = creation;
             return this;
         }
 
-        public ChPharm5SearchParametersBuilder authorFamilyName(@Nullable final StringParam authorFamilyName) {
+        public ChPharm5SearchParametersBuilder authorFamilyName(final @Nullable StringParam authorFamilyName) {
             this.authorFamilyName = authorFamilyName;
             return this;
         }
 
-        public ChPharm5SearchParametersBuilder authorGivenName(@Nullable final StringParam authorGivenName) {
+        public ChPharm5SearchParametersBuilder authorGivenName(final @Nullable StringParam authorGivenName) {
             this.authorGivenName = authorGivenName;
             return this;
         }
 
-        public ChPharm5SearchParametersBuilder identifier(@Nullable final TokenParam identifier) {
+        public ChPharm5SearchParametersBuilder identifier(final @Nullable TokenParam identifier) {
             this.identifier = identifier;
             return this;
         }
 
-        public ChPharm5SearchParametersBuilder status(@Nullable final TokenOrListParam status) {
+        public ChPharm5SearchParametersBuilder status(final @Nullable TokenOrListParam status) {
             this.status = status;
             return this;
         }
 
-        public ChPharm5SearchParametersBuilder setting(@Nullable final TokenOrListParam setting) {
+        public ChPharm5SearchParametersBuilder setting(final @Nullable TokenOrListParam setting) {
             this.setting = setting;
             return this;
         }
 
-        public ChPharm5SearchParametersBuilder period(@Nullable final DateRangeParam period) {
+        public ChPharm5SearchParametersBuilder period(final @Nullable DateRangeParam period) {
             this.period = period;
             return this;
         }
 
-        public ChPharm5SearchParametersBuilder facility(@Nullable final TokenOrListParam facility) {
+        public ChPharm5SearchParametersBuilder facility(final @Nullable TokenOrListParam facility) {
             this.facility = facility;
             return this;
         }
 
-        public ChPharm5SearchParametersBuilder event(@Nullable final TokenOrListParam event) {
+        public ChPharm5SearchParametersBuilder event(final @Nullable TokenOrListParam event) {
             this.event = event;
             return this;
         }
 
-        public ChPharm5SearchParametersBuilder securityLabel(@Nullable final TokenOrListParam securityLabel) {
+        public ChPharm5SearchParametersBuilder securityLabel(final @Nullable TokenOrListParam securityLabel) {
             this.securityLabel = securityLabel;
             return this;
         }
 
-        public ChPharm5SearchParametersBuilder format(@Nullable final TokenOrListParam format) {
+        public ChPharm5SearchParametersBuilder format(final @Nullable TokenOrListParam format) {
             this.format = format;
             return this;
         }
 
-        public ChPharm5SearchParametersBuilder operation(@Nullable final ChPharm5Operations operation) {
+        public ChPharm5SearchParametersBuilder language(final @Nullable TokenParam language) {
+            this.language = language;
+            return this;
+        }
+
+        public ChPharm5SearchParametersBuilder operation(final ChPharm5Operations operation) {
             this.operation = operation;
             return this;
         }
 
-        public ChPharm5SearchParametersBuilder sortSpec(@Nullable final SortSpec sortSpec) {
+        public ChPharm5SearchParametersBuilder sortSpec(final @Nullable SortSpec sortSpec) {
             this.sortSpec = sortSpec;
             return this;
         }
 
-        public ChPharm5SearchParametersBuilder includeSpec(@Nullable final Set<Include> includeSpec) {
+        public ChPharm5SearchParametersBuilder includeSpec(final @Nullable Set<Include> includeSpec) {
             this.includeSpec = includeSpec;
             return this;
         }
@@ -372,7 +393,7 @@ public class ChPharm5SearchParameters extends FhirSearchAndSortParameters<Docume
 
         public ChPharm5SearchParameters build() {
             return new ChPharm5SearchParameters(this.patientIdentifier,
-                                                this.date,
+                                                this.creation,
                                                 this.authorFamilyName,
                                                 this.authorGivenName,
                                                 this.identifier,
@@ -383,14 +404,35 @@ public class ChPharm5SearchParameters extends FhirSearchAndSortParameters<Docume
                                                 this.event,
                                                 this.securityLabel,
                                                 this.format,
+                                                this.language,
                                                 this.operation,
                                                 this.sortSpec,
                                                 this.includeSpec,
                                                 this.fhirContext);
         }
 
+
+        @Override
         public String toString() {
-            return "ChPharm5SearchParametersBuilder(date=" + this.date + ", period=" + this.period + ", identifier=" + this.identifier + ", facility=" + this.facility + ", setting=" + this.setting + ", event=" + this.event + ", securityLabel=" + this.securityLabel + ", authorFamilyName=" + this.authorFamilyName + ", authorGivenName=" + this.authorGivenName + ")";
+            return "ChPharm5SearchParametersBuilder{" +
+                    "patientIdentifier=" + patientIdentifier +
+                    ", creation=" + creation +
+                    ", authorFamilyName=" + authorFamilyName +
+                    ", authorGivenName=" + authorGivenName +
+                    ", identifier=" + identifier +
+                    ", status=" + status +
+                    ", setting=" + setting +
+                    ", period=" + period +
+                    ", facility=" + facility +
+                    ", event=" + event +
+                    ", securityLabel=" + securityLabel +
+                    ", format=" + format +
+                    ", language=" + language +
+                    ", operation=" + operation +
+                    ", sortSpec=" + sortSpec +
+                    ", includeSpec=" + includeSpec +
+                    ", fhirContext=" + fhirContext +
+                    '}';
         }
     }
 }

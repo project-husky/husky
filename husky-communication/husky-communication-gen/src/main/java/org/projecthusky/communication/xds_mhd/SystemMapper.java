@@ -8,7 +8,7 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-package org.projecthusky.fhir.structures.utils;
+package org.projecthusky.communication.xds_mhd;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -126,6 +126,34 @@ public class SystemMapper {
      */
     public static boolean hasName(final String name) {
         return findByName(name) != null;
+    }
+
+    /**
+     * Converts an OID to a URI, or returns {@code null} if the system is not found.
+     *
+     * @param oid The system OID.
+     * @return the URI string or {@code null}.
+     */
+    public static @Nullable String oidToUri(final String oid) {
+        final SystemEntry system = findByOid(oid);
+        if (system != null) {
+            return system.systemUri();
+        }
+        return null;
+    }
+
+    /**
+     * Converts a URI to an OID, or returns {@code null} if the system is not found.
+     *
+     * @param uri The system URI.
+     * @return the OID string or {@code null}.
+     */
+    public static @Nullable String uriToOid(final String uri) {
+        final SystemEntry system = findByUri(uri);
+        if (system != null) {
+            return system.systemOid();
+        }
+        return null;
     }
 
     /**
