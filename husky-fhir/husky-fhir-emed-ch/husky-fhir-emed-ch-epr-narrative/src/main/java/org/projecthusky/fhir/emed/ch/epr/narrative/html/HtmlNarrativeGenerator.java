@@ -21,7 +21,8 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.time.Instant;
+import java.util.*;
 
 /**
  * A generator of narrative as HTML content.
@@ -61,13 +62,16 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
 
     public String generate(final ChEmedEprDocumentPmlc document,
                            final NarrativeLanguage lang) {
-        final var activeTreatments = new ArrayList<ChEmedEprMedicationStatementPmlc>(5);
-        final var asneededTreatments = new ArrayList<ChEmedEprMedicationStatementPmlc>(5);
-        for (final var treatment : document.resolveComposition().resolveMedicationStatements()) {
-            if (treatment.resolveEffectiveDosageInstructions().isRegular()) {
-                activeTreatments.add(treatment);
-            } else {
-                asneededTreatments.add(treatment);
+        final var asneededTreatments = new HashMap<UUID, List<ChEmedEprMedicationStatementPmlc>>(5);
+        final var activeTreatments = new HashMap<UUID, List<ChEmedEprMedicationStatementPmlc>>(5);
+        ChEmedEprMedicationStatementPmlc lastStatement = null;
+        for (final var statement : document.resolveComposition().resolveMedicationStatements()) {
+            addStatementToTreatments(statement,
+                    statement.resolveEffectiveDosageInstructions().isRegular()? activeTreatments : asneededTreatments);
+            if (lastStatement == null) lastStatement = statement;
+            else {
+                if (getStatementAuthorshipDate(lastStatement).compareTo(getStatementAuthorshipDate(statement)) < 0)
+                    lastStatement = statement;
             }
         }
 
@@ -77,7 +81,34 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
         context.setVariable("fopase", this.valueSetEnumNarrativeForPatientService);
         context.setVariable("activeTreatments", activeTreatments);
         context.setVariable("asneededTreatments", asneededTreatments);
+        context.setVariable("lastStatement", lastStatement);
+
         context.setLocale(lang.getLocale());
         return this.templateEngine.process("medication_card", context);
+    }
+
+    /**
+     * Adds a medication (instance) statement to the map of treatments.
+     * @param statement The statement to be added.
+     * @param treatments The map of treatments.
+     */
+    private static void addStatementToTreatments(final ChEmedEprMedicationStatementPmlc statement,
+                                                 final Map<UUID, List<ChEmedEprMedicationStatementPmlc>> treatments) {
+        final var planId = statement.getTreatmentPlanElement().resolveIdentifier();
+        if (treatments.containsKey(planId)) treatments.get(planId).add(statement);
+        else {
+            final var treatmentsList = new ArrayList<ChEmedEprMedicationStatementPmlc>(5);
+            treatmentsList.add(statement);
+            treatments.put(planId, treatmentsList);
+        }
+    }
+
+    /**
+     * Gets the statement medical authorship timestamp.
+     * @param statement The medication statement for which to determine the medical authorship timestamp.
+     * @return The timestamp of the medical authorship.
+     */
+    private Instant getStatementAuthorshipDate(final ChEmedEprMedicationStatementPmlc statement) {
+        return statement.resolveInformationSource().getTime();
     }
 }

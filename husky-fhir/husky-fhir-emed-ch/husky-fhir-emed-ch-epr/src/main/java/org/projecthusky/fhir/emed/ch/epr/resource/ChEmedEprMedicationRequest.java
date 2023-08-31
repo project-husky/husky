@@ -15,6 +15,7 @@ import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
 import org.projecthusky.fhir.emed.ch.epr.enums.PrescriptionStatus;
 import org.projecthusky.fhir.emed.ch.epr.enums.SubstanceAdministrationSubstitutionCode;
+import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EffectiveDosageInstructions;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EmedReference;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
@@ -300,7 +301,7 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
     }
 
     /**
-     * @param theDosage
+     * @param theDosage The dosage(s) to be set.
      * @return Returns a reference to <code>this</code> for easy method chaining
      */
     @Override
@@ -377,6 +378,15 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
             throw new InvalidEmedContentException("The substitution code is invalid");
         }
         return substitutionCode;
+    }
+
+    /**
+     * Sets the requester of the medication request.
+     * @param author The author to be set as requester.
+     * @return this.
+     */
+    public MedicationRequest setRequester(Author author) {
+        return setRequester(References.createAuthorReference(author));
     }
 
     @Override

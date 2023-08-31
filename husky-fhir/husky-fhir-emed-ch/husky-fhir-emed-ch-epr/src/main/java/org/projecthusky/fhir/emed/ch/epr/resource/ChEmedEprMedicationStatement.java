@@ -24,8 +24,7 @@ import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
 import org.projecthusky.fhir.emed.ch.epr.enums.SubstanceAdministrationSubstitutionCode;
 import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EffectiveDosageInstructions;
-import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprMedicationStatementMtp;
-import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprMedicationStatementChanged;
+import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -302,7 +301,7 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
     }
 
     /**
-     * @param theDosage
+     * @param theDosage The dosage(s) to be set.
      * @return Returns a reference to <code>this</code> for easy method chaining
      */
     @Override
@@ -382,4 +381,17 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
             als.substitution = substitution == null ? null : substitution.copy();
         }
     }
+
+    /**
+     * Sets the information source (medical author) of the statement.
+     * It creates a reference from the received author and sets it as information source.
+     * @param author The medical author of the statement.
+     * @return this.
+     */
+    public ChEmedEprMedicationStatement setInformationSource(final Author author) {
+        this.setInformationSource(References.createAuthorReference(author));
+        return this;
+    }
+
+
 }

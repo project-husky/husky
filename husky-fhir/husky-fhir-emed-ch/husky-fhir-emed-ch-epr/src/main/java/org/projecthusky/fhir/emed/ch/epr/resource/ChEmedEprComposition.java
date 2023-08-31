@@ -187,6 +187,21 @@ public abstract class ChEmedEprComposition extends Composition {
         throw new InvalidEmedContentException("The composition has no human author");
     }
 
+    @ExpectsValidResource
+    public @Nullable Instant resolveFirstHumanAuthorTime() {
+        for (final var author : this.getAuthor()) {
+            if (author.getResource() instanceof Patient
+                    || author.getResource() instanceof RelatedPerson
+                    || author.getResource() instanceof PractitionerRole) {
+                org.hl7.fhir.r4.model.Extension extension =
+                        author.getExtensionByUrl("http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time");
+                if (extension != null) return ((DateTimeType) extension.getValue()).getValue().toInstant();
+                return null;
+            }
+        }
+        throw new InvalidEmedContentException("The composition has no human author");
+    }
+
     /**
      * Gets the version number element.
      *

@@ -13,6 +13,8 @@ package org.projecthusky.fhir.emed.ch.epr.narrative.enums;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.common.enums.LanguageCode;
 
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -39,6 +41,15 @@ public enum NarrativeLanguage {
     private final String displayName;
 
     /**
+     * The precision-specific datetime formatters.
+     */
+    private final DateTimeFormatter yearPrecisionFormatter,
+                                    monthPrecisionFormatter,
+                                    dayPrecisionFormatter,
+                                    hourPrecisionFormatter,
+                                    minutePrecisionFormatter;
+
+    /**
      * Constructor.
      *
      * @param isoCode     The language ISO code.
@@ -48,6 +59,16 @@ public enum NarrativeLanguage {
                       final String displayName) {
         this.isoCode = Objects.requireNonNull(isoCode);
         this.displayName = Objects.requireNonNull(displayName);
+        this.yearPrecisionFormatter =
+                DateTimeFormatter.ofPattern("yyyy", getLocale()).withZone(ZoneId.systemDefault());
+        this.monthPrecisionFormatter =
+                DateTimeFormatter.ofPattern("MM/yyyy", getLocale()).withZone(ZoneId.systemDefault());
+        this.dayPrecisionFormatter =
+                DateTimeFormatter.ofPattern("dd/MM/yyyy", getLocale()).withZone(ZoneId.systemDefault());
+        this.hourPrecisionFormatter =
+                DateTimeFormatter.ofPattern("dd/MM/yyyy HH", getLocale()).withZone(ZoneId.systemDefault());
+        this.minutePrecisionFormatter =
+                DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm", getLocale()).withZone(ZoneId.systemDefault());
     }
 
     public String getIsoCode() {
@@ -64,6 +85,12 @@ public enum NarrativeLanguage {
     public Locale getLocale() {
         return new Locale(this.isoCode, "ch");
     }
+
+    public DateTimeFormatter getYearPrecisionFormatter() {return yearPrecisionFormatter;}
+    public DateTimeFormatter getMonthPrecisionFormatter() {return monthPrecisionFormatter;}
+    public DateTimeFormatter getDayPrecisionFormatter() {return dayPrecisionFormatter;}
+    public DateTimeFormatter getHourPrecisionFormatter() {return hourPrecisionFormatter;}
+    public DateTimeFormatter getMinutePrecisionFormatter() {return minutePrecisionFormatter;}
 
     /**
      * Returns the related {@link LanguageCode}.
