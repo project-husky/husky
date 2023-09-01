@@ -317,6 +317,19 @@ public class ChEmedEprDosage extends Dosage {
         }
         return AmountQuantity.fromQuantity(this.getMaxDosePerAdministration());
     }
+    /**
+     * Returns the resolved max dose per lifetime, or {@code null} if it is not specified. Throws if it is
+     * specified but invalid.
+     */
+    @ExpectsValidResource
+    @Nullable
+    public AmountQuantity resolveMaxDosePerLifetime() {
+        if (!this.hasMaxDosePerLifetime()) {
+            return null;
+        }
+        return AmountQuantity.fromQuantity(this.getMaxDosePerLifetime());
+    }
+
 
     @Override
     public ChEmedEprDosage copy() {

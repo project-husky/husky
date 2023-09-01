@@ -3,18 +3,20 @@ package org.projecthusky.fhir.emed.ch.epr.validator;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.hl7.fhir.r4.model.OperationOutcome;
 import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
+import org.projecthusky.fhir.emed.ch.epr.enums.RegularUnitCodeAmbu;
 import org.projecthusky.fhir.emed.ch.epr.enums.TimingEventAmbu;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprDocumentDis;
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprDocumentMtp;
 import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprDocumentPadv;
-import org.projecthusky.fhir.emed.ch.epr.resource.pml.ChEmedEprDocumentPml;
+import org.projecthusky.fhir.emed.ch.epr.resource.pml.*;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprDocumentPmlc;
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprDocumentPre;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * A logic validator for CH-EMED-EPR documents. It contains checks that are too difficult to implement in the FHIR IG.
@@ -37,26 +39,60 @@ class LogicValidator {
 
         if (document instanceof final ChEmedEprDocumentMtp mtpDocument) {
             final var mtpEntry = mtpDocument.resolveComposition().resolveMedicationStatement();
-            this.validateDosages(
-                    mtpEntry.resolveBaseDosage(),
-                    mtpEntry.resolveAdditionalDosage(),
-                    issues
-            );
+            validateDosages(mtpEntry.resolveBaseDosage(), mtpEntry.resolveAdditionalDosage(), issues);
         } else if (document instanceof final ChEmedEprDocumentPre preDocument) {
-
+            final var preEntries = preDocument.resolveComposition().resolveMedicationRequests();
+            for (final var preEntry : preEntries)
+                validateDosages(preEntry.resolveBaseDosage(), preEntry.resolveAdditionalDosage(), issues);
         } else if (document instanceof final ChEmedEprDocumentDis disDocument) {
             final var disEntry = disDocument.resolveComposition().resolveMedicationDispense();
-            this.validateDosages(
-                    disEntry.resolveBaseDosage(),
-                    disEntry.resolveAdditionalDosage(),
-                    issues
-            );
+            validateDosages(disEntry.resolveBaseDosage(), disEntry.resolveAdditionalDosage(), issues);
         } else if (document instanceof final ChEmedEprDocumentPadv padvDocument) {
-
+            final var medReqChangedEntry =
+                    padvDocument.resolveComposition().resolveObservation().resolveMedicationRequestChanged();
+            if (medReqChangedEntry != null) validateDosages(medReqChangedEntry.resolveBaseDosage(),
+                                                            medReqChangedEntry.resolveAdditionalDosage(),
+                                                            issues
+                                                            );
+            final var statementChangedEntry =
+                    padvDocument.resolveComposition().resolveObservation().resolveMedicationStatementChanged();
+            if (statementChangedEntry != null) validateDosages(statementChangedEntry.resolveBaseDosage(),
+                                                               statementChangedEntry.resolveAdditionalDosage(),
+                                                               issues
+                                                               );
         } else if (document instanceof final ChEmedEprDocumentPml pmlDocument) {
-
+            for(final var entry : pmlDocument.resolveComposition().resolveEntries()) {
+                switch (entry.getEmedType()) {
+                    case MTP -> {
+                        final var mtpEntry = (ChEmedEprMedicationStatementPml) entry;
+                        validateDosages(mtpEntry.resolveBaseDosage(), mtpEntry.resolveAdditionalDosage(), issues);
+                    }
+                    case PRE -> {
+                        final var preEntry = (ChEmedEprMedicationRequestPml) entry;
+                        validateDosages(preEntry.resolveBaseDosage(), preEntry.resolveAdditionalDosage(), issues);
+                    }
+                    case DIS -> {
+                        final var disEntry = (ChEmedEprMedicationDispensePml) entry;
+                        validateDosages(disEntry.resolveBaseDosage(), disEntry.resolveAdditionalDosage(), issues);
+                    }
+                    case PADV -> {
+                        final var padvEntry = (ChEmedEprObservationPml) entry;
+                        final var medReqChangedEntry = padvEntry.resolveMedicationRequestChanged();
+                        if (medReqChangedEntry != null) validateDosages(medReqChangedEntry.resolveBaseDosage(),
+                                medReqChangedEntry.resolveAdditionalDosage(),
+                                issues
+                        );
+                        final var statementChangedEntry = padvEntry.resolveMedicationStatementChanged();
+                        if (statementChangedEntry != null) validateDosages(statementChangedEntry.resolveBaseDosage(),
+                                statementChangedEntry.resolveAdditionalDosage(),
+                                issues
+                        );
+                    }
+                }
+            }
         } else if (document instanceof final ChEmedEprDocumentPmlc pmlcDocument) {
-
+            for (final var statement : pmlcDocument.resolveComposition().resolveMedicationStatements())
+                validateDosages(statement.resolveBaseDosage(), statement.resolveAdditionalDosage(), issues);
         }
 
         return issues;
@@ -67,6 +103,8 @@ class LogicValidator {
                                 final List<@NonNull ChEmedEprDosage> additionalDosages,
                                 final List<@NonNull ValidationIssue> issues) {
 
+        validateDosageQuantities(baseDosage, issues);
+        for (final var additionalDosage : additionalDosages) validateDosageQuantities(additionalDosage, issues);
 
         if (additionalDosages.isEmpty()) {
             return;
@@ -91,6 +129,35 @@ class LogicValidator {
                 }
                 timingEventSeen.add(timingEvent);
             }
+        }
+    }
+
+    /**
+     * Validates that the usage of the {@link RegularUnitCodeAmbu} value set are respected.
+     *
+     * @param dosage The dosage to be validated.
+     * @param issues The list of issues to which newfound issues should be appended.
+     */
+    private void validateDosageQuantities(final ChEmedEprDosage dosage, final List<@NonNull ValidationIssue> issues) {
+        resolveQuantity(dosage::resolveMaxDosePerAdministration, issues, "Error in maxDosePerAdministration: ");
+        resolveQuantity(dosage::resolveMaxDosePerLifetime, issues, "Error in maxDosePerLifetime: ");
+        resolveQuantity(dosage::resolveMaxDosePerPeriod, issues, "Error in maxDosePerLifetime: ");
+        resolveQuantity(dosage::resolveDose, issues, "Error in dosage quantity/rate: ");
+    }
+
+    /**
+     * Convenience method to test that a received supplier method does not throw an {@link IllegalArgumentException}. If
+     * it does, an issue with the specified errorMessage plus the IllegalArgumentException message is added to the list
+     * of issues.
+     * @param supplier The supplier method to be executed.
+     * @param issues The list of validation issues to which to append newfound issues.
+     * @param errorMessage The error message to use as prefix if new issues are found.
+     */
+    private void resolveQuantity(Supplier supplier, final List<@NonNull ValidationIssue> issues, final String errorMessage) {
+        try {
+            supplier.get();
+        } catch (IllegalArgumentException iae) {
+            issues.add(createError(errorMessage + iae.getMessage()));
         }
     }
 
