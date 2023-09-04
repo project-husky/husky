@@ -157,7 +157,18 @@ class LogicValidator {
         try {
             supplier.get();
         } catch (IllegalArgumentException iae) {
-            issues.add(createError(errorMessage + iae.getMessage()));
+            issues.add(
+                    new ValidationIssue(
+                        OperationOutcome.IssueSeverity.ERROR,
+                        OperationOutcome.IssueType.CODEINVALID,
+                        null,
+                        errorMessage + iae.getMessage(),
+                        null,
+                        null,
+                        SOURCE,
+                        null
+                    )
+            );
         }
     }
 
