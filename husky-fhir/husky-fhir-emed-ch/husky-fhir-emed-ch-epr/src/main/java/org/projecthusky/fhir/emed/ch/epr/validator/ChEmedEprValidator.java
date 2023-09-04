@@ -17,6 +17,7 @@ import org.hl7.fhir.r5.elementmodel.Manager;
 import org.hl7.fhir.r5.utils.EOperationOutcome;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
+import org.projecthusky.fhir.emed.ch.epr.validator.logicvalidator.LogicValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
