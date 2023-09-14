@@ -80,7 +80,7 @@ public interface ChEmedEprDocumentAuthorable<T> {
             final var author = new Author(getAuthorDocument().getResource());
             org.hl7.fhir.r4.model.Extension extension =
                     getAuthorDocument().getExtensionByUrl("http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time");
-            if (extension != null) author.setTime(((DateTimeType) extension.getValue()).getValue().toInstant());
+            if (extension != null) author.setTime(((DateTimeType) extension.getValue()).getValueAsCalendar().toInstant());
             return author;
         }
         throw new InvalidEmedContentException("The last author of the original document is invalid");

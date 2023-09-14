@@ -72,7 +72,7 @@ public abstract class ChEmedEprMedicationStatementPmlBase
         org.hl7.fhir.r4.model.Extension extension =
                 getInformationSource().getExtensionByUrl("http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time");
         if (extension == null) throw new InvalidEmedContentException("The information source time extension is missing.");
-        author.setTime(((DateTimeType) extension.getValue()).getValue().toInstant());
+        author.setTime(((DateTimeType) extension.getValue()).getValueAsCalendar().toInstant());
         return author;
     }
 

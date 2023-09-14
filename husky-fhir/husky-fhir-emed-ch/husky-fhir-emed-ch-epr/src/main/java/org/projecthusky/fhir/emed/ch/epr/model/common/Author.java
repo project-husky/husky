@@ -74,7 +74,7 @@ public class Author {
 
     public Author(final IBaseResource resource, @Nullable DateTimeType time) {
         this(resource);
-        this.time = (time == null)? null : time.getValue().toInstant();
+        this.time = (time == null)? null : time.getValueAsCalendar().toInstant();
     }
 
     public Author(final IBaseResource resource, @Nullable Instant time) {

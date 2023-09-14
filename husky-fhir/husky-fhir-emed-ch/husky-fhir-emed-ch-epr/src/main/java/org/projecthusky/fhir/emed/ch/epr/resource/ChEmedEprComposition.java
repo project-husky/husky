@@ -195,7 +195,7 @@ public abstract class ChEmedEprComposition extends Composition {
                     || author.getResource() instanceof PractitionerRole) {
                 org.hl7.fhir.r4.model.Extension extension =
                         author.getExtensionByUrl("http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time");
-                if (extension != null) return ((DateTimeType) extension.getValue()).getValue().toInstant();
+                if (extension != null) return ((DateTimeType) extension.getValue()).getValueAsCalendar().toInstant();
                 return null;
             }
         }

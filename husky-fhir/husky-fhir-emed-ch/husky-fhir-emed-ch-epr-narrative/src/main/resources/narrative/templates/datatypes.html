@@ -71,12 +71,12 @@
 
 <th:block th:fragment="date-time(dateTimeElement, lang)">
     <th:block th:switch="${dateTimeElement.getPrecision().name()}">
-        <th:block th:case="'MILLI'" th:text="${lang.getMinutePrecisionFormatter().format(dateTimeElement.getValue().toInstant())}"/>
-        <th:block th:case="'SECOND'" th:text="${lang.getMinutePrecisionFormatter().format(dateTimeElement.getValue().toInstant())}"/>
-        <th:block th:case="'MINUTE'" th:text="${lang.getMinutePrecisionFormatter().format(dateTimeElement.getValue().toInstant())}"/>
-        <th:block th:case="'DAY'" th:text="${lang.getDayPrecisionFormatter().format(dateTimeElement.getValue().toInstant())}"/>
-        <th:block th:case="'MONTH'" th:text="${lang.getMonthPrecisionFormatter().format(dateTimeElement.getValue().toInstant())}"/>
-        <th:block th:case="'YEAR'" th:text="${lang.getHourPrecisionFormatter().format(dateTimeElement.getValue().toInstant())}"/>
+        <th:block th:case="'MILLI'" th:text="${lang.getMinutePrecisionFormatter().format(dateTimeElement.getValueAsCalendar().toInstant())}"/>
+        <th:block th:case="'SECOND'" th:text="${lang.getMinutePrecisionFormatter().format(dateTimeElement.getValueAsCalendar().toInstant())}"/>
+        <th:block th:case="'MINUTE'" th:text="${lang.getMinutePrecisionFormatter().format(dateTimeElement.getValueAsCalendar().toInstant())}"/>
+        <th:block th:case="'DAY'" th:text="${lang.getDayPrecisionFormatter().format(dateTimeElement.getValueAsCalendar().toInstant())}"/>
+        <th:block th:case="'MONTH'" th:text="${lang.getMonthPrecisionFormatter().format(dateTimeElement.getValueAsCalendar().toInstant())}"/>
+        <th:block th:case="'YEAR'" th:text="${lang.getHourPrecisionFormatter().format(dateTimeElement.getValueAsCalendar().toInstant())}"/>
     </th:block>
 </th:block>
 
