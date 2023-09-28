@@ -14,6 +14,7 @@ import org.projecthusky.communication.ch.ppq.api.PrivacyPolicyFeed;
 import org.projecthusky.communication.ch.ppq.impl.PrivacyPolicyFeedBuilderImpl;
 import org.projecthusky.xua.deserialization.impl.AbstractDeserializerImpl;
 import org.projecthusky.xua.exceptions.DeserializeException;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.opensaml.saml.saml2.core.Assertion;
 import org.w3c.dom.Element;
 
@@ -21,12 +22,12 @@ import org.w3c.dom.Element;
  * Class implementing the corresponding interface {@code Deserializer<Response>}.
  */
 public class PrivacyPolicyFeedDeserialiser
-		extends AbstractDeserializerImpl<Assertion, PrivacyPolicyFeed> {
+		extends AbstractDeserializerImpl<AssertionType, PrivacyPolicyFeed> {
 
 	@Override
 	public PrivacyPolicyFeed fromXmlByteArray(byte[] aByteArray) throws DeserializeException {
 		try {
-			final Assertion response = getOpenSamlDeserializer()
+			final AssertionType response = getOpenSamlDeserializer()
 					.deserializeFromByteArray(aByteArray);
 			return new PrivacyPolicyFeedBuilderImpl().create(response);
 		} catch (final Exception e) {
@@ -37,7 +38,7 @@ public class PrivacyPolicyFeedDeserialiser
 	@Override
 	public PrivacyPolicyFeed fromXmlElement(Element aXmlElement) throws DeserializeException {
 		try {
-			final Assertion response = getOpenSamlDeserializer().deserializeFromXml(aXmlElement);
+			final AssertionType response = getOpenSamlDeserializer().deserializeFromXml(aXmlElement);
 			return new PrivacyPolicyFeedBuilderImpl().create(response);
 		} catch (final Exception e) {
 			throw new DeserializeException(e);
@@ -47,7 +48,7 @@ public class PrivacyPolicyFeedDeserialiser
 	@Override
 	public PrivacyPolicyFeed fromXmlString(String aXmlString) throws DeserializeException {
 		try {
-			final Assertion response = getOpenSamlDeserializer().deserializeFromString(aXmlString);
+			final AssertionType response = getOpenSamlDeserializer().deserializeFromString(aXmlString);
 			return new PrivacyPolicyFeedBuilderImpl().create(response);
 		} catch (final Exception e) {
 			throw new DeserializeException(e);

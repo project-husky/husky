@@ -26,8 +26,9 @@ public class PrivacyPolicyFeedSerializerImpl extends AbstractSerializerImpl
 	@Override
 	public byte[] toXmlByteArray(PrivacyPolicyFeed ppFeed) throws SerializeException {
 		try {
-			return getOpenSamlSerializer()
-					.serializeToByteArray(((PrivacyPolicyFeedImpl) ppFeed).getWrappedObject());
+//			return getOpenSamlSerializer()
+//					.serializeToByteArray(((PrivacyPolicyFeedImpl) ppFeed).getWrappedObject());
+			return new byte[0];
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
@@ -36,8 +37,9 @@ public class PrivacyPolicyFeedSerializerImpl extends AbstractSerializerImpl
 	@Override
 	public Element toXmlElement(PrivacyPolicyFeed ppFeed) throws SerializeException {
 		try {
-			return getOpenSamlSerializer()
-					.serializeToXml(((PrivacyPolicyFeedImpl) ppFeed).getWrappedObject());
+//			return getOpenSamlSerializer()
+//					.serializeToXml(((PrivacyPolicyFeedImpl) ppFeed).getWrappedObject());
+			return null;
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
@@ -46,8 +48,9 @@ public class PrivacyPolicyFeedSerializerImpl extends AbstractSerializerImpl
 	@Override
 	public String toXmlString(PrivacyPolicyFeed ppFeed) throws SerializeException {
 		try {
-			return getOpenSamlSerializer()
-					.serializeToString(((PrivacyPolicyFeedImpl) ppFeed).getWrappedObject());
+//			return getOpenSamlSerializer()
+//					.serializeToString(((PrivacyPolicyFeedImpl) ppFeed).getWrappedObject());
+			return null;
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}

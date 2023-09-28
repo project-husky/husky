@@ -19,20 +19,20 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionTy
  * Class implementing the corresponding interface for PrivacyPolicyFeed.
  */
 public class PrivacyPolicyFeedImpl
-		implements PrivacyPolicyFeed, SecurityObject<org.opensaml.saml.saml2.core.Assertion> {
+		implements PrivacyPolicyFeed, SecurityObject<AssertionType/*org.opensaml.saml.saml2.core.Assertion*/> {
 
-	private org.opensaml.saml.saml2.core.Assertion mAssertion;
+	private AssertionType/*org.opensaml.saml.saml2.core.Assertion*/ mAssertion;
 	private PpfMethod mPpfMethod;
 
 	protected PrivacyPolicyFeedImpl(PpfMethod ppfMethod,
-			org.opensaml.saml.saml2.core.Assertion aInternalObject) {
+			AssertionType/*org.opensaml.saml.saml2.core.Assertion*/ aInternalObject) {
 		mPpfMethod = ppfMethod;
 		mAssertion = aInternalObject;
 	}
 
 	@Override
 	public AssertionType getAssertion() {
-		return new AssertionBuilderImpl().create(mAssertion);
+		return mAssertion;//new AssertionBuilderImpl().create(mAssertion);
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class PrivacyPolicyFeedImpl
 	}
 
 	@Override
-	public org.opensaml.saml.saml2.core.Assertion getWrappedObject() {
+	public AssertionType/*org.opensaml.saml.saml2.core.Assertion*/ getWrappedObject() {
 		return mAssertion;
 	}
 

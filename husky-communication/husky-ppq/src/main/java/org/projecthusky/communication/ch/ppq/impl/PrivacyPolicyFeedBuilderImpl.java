@@ -10,28 +10,29 @@
  */
 package org.projecthusky.communication.ch.ppq.impl;
 
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.projecthusky.communication.ch.ppq.api.PrivacyPolicyFeed;
 import org.projecthusky.communication.ch.ppq.api.PrivacyPolicyFeed.PpfMethod;
 import org.projecthusky.communication.ch.ppq.api.PrivacyPolicyFeedBuilder;
 import org.projecthusky.xua.core.SecurityObjectBuilder;
-import org.opensaml.saml.saml2.core.Assertion;
-import org.opensaml.saml.saml2.core.impl.AssertionBuilder;
+//import org.opensaml.saml.saml2.core.Assertion;
+//import org.opensaml.saml.saml2.core.impl.AssertionBuilder;
 
 /**
  * Class implementing the interfaces PrivacyPolicyFeedBuilder and SecurityObjectBuilder.
  */
 public class PrivacyPolicyFeedBuilderImpl
-		implements PrivacyPolicyFeedBuilder, SecurityObjectBuilder<Assertion, PrivacyPolicyFeed> {
+		implements PrivacyPolicyFeedBuilder, SecurityObjectBuilder<AssertionType, PrivacyPolicyFeed> {
 
 	private PpfMethod ppfMethod;
 
 	@Override
 	public PrivacyPolicyFeed create() {
-		return new PrivacyPolicyFeedImpl(ppfMethod, new AssertionBuilder().buildObject());
+		return new PrivacyPolicyFeedImpl(ppfMethod, new AssertionType());//new AssertionBuilder().buildObject());
 	}
 
 	@Override
-	public PrivacyPolicyFeed create(org.opensaml.saml.saml2.core.Assertion aInternalObject) {
+	public PrivacyPolicyFeed create(AssertionType /*org.opensaml.saml.saml2.core.Assertion*/ aInternalObject) {
 		return new PrivacyPolicyFeedImpl(ppfMethod, aInternalObject);
 	}
 
