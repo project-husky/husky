@@ -13,6 +13,7 @@ import javax.annotation.processing.Generated;
 import javax.xml.bind.annotation.XmlElement;
 
 import org.projecthusky.cda.elga.models.ems.EpimsPatientRole;
+import org.projecthusky.common.hl7cdar2.POCDMT000040PatientRole;
 import org.projecthusky.common.hl7cdar2.POCDMT000040RecordTarget;
 
 /**
@@ -27,8 +28,8 @@ import org.projecthusky.common.hl7cdar2.POCDMT000040RecordTarget;
 @Generated(value = "org.projecthusky.codegenerator.cda.ArtDecor2JavaGenerator", date = "2022-02-01")
 public class EpimsHeaderRecordTarget extends POCDMT000040RecordTarget {
 
-	@XmlElement(name = "patientRole", namespace = "urn:hl7-org:v3")
-	protected EpimsPatientRole patientRole;
+	@XmlElement(required = true, type = EpimsPatientRole.class)
+	protected POCDMT000040PatientRole patientRole;
 
     public EpimsHeaderRecordTarget() {
         super.getTypeCode().add("RCT");
@@ -50,8 +51,9 @@ public class EpimsHeaderRecordTarget extends POCDMT000040RecordTarget {
     /**
      * Gets the hl7PatientRole
      */
+	@Override
 	public EpimsPatientRole getPatientRole() {
-		return patientRole;
+		return (EpimsPatientRole) patientRole;
     }
 
     /**

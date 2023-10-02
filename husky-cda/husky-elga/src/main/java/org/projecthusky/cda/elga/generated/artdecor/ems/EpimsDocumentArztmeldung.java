@@ -9,7 +9,6 @@
  */
 package org.projecthusky.cda.elga.generated.artdecor.ems;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -202,16 +201,6 @@ public class EpimsDocumentArztmeldung extends POCDMT000040ClinicalDocument {
     }
 
     /**
-     * Gets the hl7RecordTarget
-     */
-	public List<EpimsHeaderRecordTarget> getHl7RecordTarget() {
-		if (recordTarget == null) {
-			recordTarget = new LinkedList<>();
-		}
-		return recordTarget;
-    }
-
-    /**
      * Gets the hl7SetId
      */
     public org.projecthusky.common.hl7cdar2.II getHl7SetId() {
@@ -391,14 +380,6 @@ public class EpimsDocumentArztmeldung extends POCDMT000040ClinicalDocument {
     public void setHl7RealmCode(org.projecthusky.common.hl7cdar2.CS value) {
         getRealmCode().clear();
         getRealmCode().add(value);
-    }
-
-    /**
-     * Sets the hl7RecordTarget
-     */
-	public void setHl7RecordTarget(EpimsHeaderRecordTarget value) {
-		getHl7RecordTarget().clear();
-		getHl7RecordTarget().add(value);
     }
 
     /**

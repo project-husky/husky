@@ -75,7 +75,7 @@ public class PatientCdaAt extends PatientAt {
 			}
 		}
 
-		patientRole.setEpimsPatient(getEpimsPatient());
+		patientRole.setPatient(getEpimsPatient());
 		recordTarget.setPatientRole(patientRole);
 		return recordTarget;
 	}

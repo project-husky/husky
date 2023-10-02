@@ -9,11 +9,12 @@ public class EpimsPatientRole extends POCDMT000040PatientRole {
 	@XmlElement(name = "patient", namespace = "urn:hl7-org:v3")
 	protected EpimsPatient patient;
 
-	public EpimsPatient getEpimsPatient() {
+	@Override
+	public EpimsPatient getPatient() {
 		return patient;
 	}
 
-	public void setEpimsPatient(EpimsPatient epimsPatient) {
+	public void setPatient(EpimsPatient epimsPatient) {
 		this.patient = epimsPatient;
 	}
 

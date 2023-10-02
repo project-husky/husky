@@ -25,15 +25,19 @@ import org.projecthusky.cda.elga.models.PractitionerCdaAt;
 import org.projecthusky.cda.elga.narrative.ArztmeldungNarrativeTextGenerator;
 import org.projecthusky.cda.elga.utils.DateTimeUtils;
 import org.projecthusky.common.at.OrganizationAt;
+import org.projecthusky.common.at.enums.ConfidentialityCode;
+import org.projecthusky.common.hl7cdar2.CS;
 import org.projecthusky.common.hl7cdar2.INT;
 import org.projecthusky.common.hl7cdar2.IVLTS;
 import org.projecthusky.common.hl7cdar2.POCDMT000040Component2;
 import org.projecthusky.common.hl7cdar2.POCDMT000040Component3;
 import org.projecthusky.common.hl7cdar2.POCDMT000040DocumentationOf;
 import org.projecthusky.common.hl7cdar2.POCDMT000040Entry;
+import org.projecthusky.common.hl7cdar2.POCDMT000040InfrastructureRootTypeId;
 import org.projecthusky.common.hl7cdar2.POCDMT000040RelatedDocument;
 import org.projecthusky.common.hl7cdar2.POCDMT000040ServiceEvent;
 import org.projecthusky.common.hl7cdar2.POCDMT000040StructuredBody;
+import org.projecthusky.common.hl7cdar2.ST;
 import org.projecthusky.common.hl7cdar2.StrucDocText;
 import org.projecthusky.common.model.Code;
 import org.projecthusky.common.model.Identificator;
@@ -279,6 +283,7 @@ public class Arztmeldung {
 		}
 
 		EpimsSectionEmssectionArztmeldung section = new EpimsSectionEmssectionArztmeldung();
+		section.setTitle(new ST("Arztmeldung"));
 		section.getEntry().clear();
 		section.getEntry().add(this.caseIdentification.getEpimsEntryCaseIdenticationArzt());
 
@@ -300,6 +305,14 @@ public class Arztmeldung {
 
 	public EpimsDocumentArztmeldung getArztmeldung() {
 		EpimsDocumentArztmeldung cda = new EpimsDocumentArztmeldung();
+		cda.setHl7RealmCode(new CS("AT"));
+		POCDMT000040InfrastructureRootTypeId typeId = new POCDMT000040InfrastructureRootTypeId();
+		typeId.setExtension("POCD_HD000040");
+		typeId.setRoot("2.16.840.1.113883.1.3");
+		cda.setTypeId(typeId);
+		cda.setLanguageCode(new CS("de-AT"));
+		cda.setTitle(new ST("Arztmeldung"));
+		cda.setConfidentialityCode(ConfidentialityCode.NORMAL.getCE());
 
 		addHeader(cda);
 
@@ -326,8 +339,8 @@ public class Arztmeldung {
 		cda.setVersionNumber(new INT(this.version));
 
 		if (patient != null) {
-			cda.getHl7RecordTarget().clear();
-			cda.getHl7RecordTarget().add(patient.getHeaderRecordTarget());
+			cda.getRecordTarget().clear();
+			cda.getRecordTarget().add(patient.getHeaderRecordTarget());
 		}
 
 		if (this.getAuthors() != null && !this.getAuthors().isEmpty()) {

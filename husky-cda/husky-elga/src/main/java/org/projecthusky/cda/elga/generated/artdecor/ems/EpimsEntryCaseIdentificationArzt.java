@@ -10,7 +10,9 @@
 package org.projecthusky.cda.elga.generated.artdecor.ems;
 
 import java.util.List;
+
 import javax.annotation.processing.Generated;
+
 import org.projecthusky.common.hl7cdar2.ObjectFactory;
 import org.projecthusky.common.hl7cdar2.POCDMT000040Observation;
 
@@ -29,7 +31,6 @@ public class EpimsEntryCaseIdentificationArzt extends POCDMT000040Observation {
     public EpimsEntryCaseIdentificationArzt() {
         super.getClassCode().add("CASE");
         super.setMoodCode(org.projecthusky.common.hl7cdar2.XActMoodDocumentObservation.EVN);
-        super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.6.0.11.3.57"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.1.2"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.11.6.3.2"));
     }
