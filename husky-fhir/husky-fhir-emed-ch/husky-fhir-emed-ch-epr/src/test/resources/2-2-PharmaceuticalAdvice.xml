@@ -71,7 +71,7 @@
             <coding>
               <system value="http://loinc.org"/>
               <code value="61357-0"/>
-              <display value="Medication pharmaceutical advice.brief"/>
+              <display value="Medication pharmaceutical advice.brief Document"/>
             </coding>
           </code>
           <text>

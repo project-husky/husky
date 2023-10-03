@@ -317,7 +317,7 @@ public abstract class ChEmedEprComposition extends Composition {
         if (section == null) {
             section = this.addSection();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
-                                                   ORIGINAL_REPR_SECTION_CODE_VALUE, "Clinical presentation"));
+                                                   ORIGINAL_REPR_SECTION_CODE_VALUE, "Clinical presentation Document"));
         }
         return section;
     }

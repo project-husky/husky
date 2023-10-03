@@ -71,7 +71,7 @@
             <coding>
               <system value="http://loinc.org"/>
               <code value="60590-7"/>
-              <display value="Medication dispensed.brief"/>
+              <display value="Medication dispensed.brief Document"/>
             </coding>
           </code>
           <text>

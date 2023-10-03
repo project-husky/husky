@@ -82,7 +82,7 @@ public class ChEmedEprCompositionPmlc extends ChEmedEprComposition {
         if (section == null) {
             section = this.addSection();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
-                                                   ANNOTATION_SECTION_CODE_VALUE, "Annotation comment"));
+                                                   ANNOTATION_SECTION_CODE_VALUE, "Annotation comment [Interpretation] Narrative"));
             section.setTitle("Comment");
         }
         return section;
@@ -99,7 +99,7 @@ public class ChEmedEprCompositionPmlc extends ChEmedEprComposition {
             section = this.addSection();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    CARD_SECTION_CODE_VALUE,
-                                                   "History of medication use"));
+                                                   "History of Medication use Narrative"));
             section.setTitle("Medication List");
         }
         return section;
@@ -116,7 +116,7 @@ public class ChEmedEprCompositionPmlc extends ChEmedEprComposition {
             section = this.addSection();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    ORIGINAL_REPR_SECTION_CODE_VALUE,
-                                                   "Clinical presentation"));
+                                                   "Clinical presentation Document"));
             section.setTitle("Original representation");
         }
         return section;
