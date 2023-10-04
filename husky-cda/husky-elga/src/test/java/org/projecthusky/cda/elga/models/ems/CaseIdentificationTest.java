@@ -97,8 +97,9 @@ class CaseIdentificationTest extends TestUtils {
 		assertNotNull(organizer);
 		assertEquals(XActClassDocumentEntryOrganizer.CLUSTER, organizer.getClassCode());
 		assertEquals("EVN", organizer.getMoodCode().get(0));
-		assertEquals(1, organizer.getTemplateId().size());
-		assertEquals("1.3.6.1.4.1.19376.1.3.1.1", organizer.getTemplateId().get(0).getRoot());
+		assertEquals(2, organizer.getTemplateId().size());
+		assertEquals("1.2.40.0.34.6.0.11.3.56", organizer.getTemplateId().get(0).getRoot());
+		assertEquals("1.3.6.1.4.1.19376.1.3.1.1", organizer.getTemplateId().get(1).getRoot());
 
 		assertEquals("completed", organizer.getStatusCode().getCode());
 
@@ -110,7 +111,8 @@ class CaseIdentificationTest extends TestUtils {
 		assertEquals("CASE", observation.getClassCode().get(0));
 		assertEquals(XActMoodDocumentObservation.EVN, observation.getMoodCode());
 
-		assertEquals("1.3.6.1.4.1.19376.1.3.1.1.2", observation.getTemplateId().get(0).getRoot());
+		assertEquals("1.2.40.0.34.6.0.11.3.57", observation.getTemplateId().get(0).getRoot());
+		assertEquals("1.3.6.1.4.1.19376.1.3.1.1.2", observation.getTemplateId().get(1).getRoot());
 	}
 
 

@@ -31,6 +31,7 @@ public class EpimsEntryNotificationOrganizerArzt extends POCDMT000040Organizer {
     public EpimsEntryNotificationOrganizerArzt() {
         super.setClassCode(org.projecthusky.common.hl7cdar2.XActClassDocumentEntryOrganizer.CLUSTER);
         super.getMoodCode().add("EVN");
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.6.0.11.3.56"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.1"));
         super.setStatusCode(createHl7StatusCodeFixedValue("completed",
                                                           null,

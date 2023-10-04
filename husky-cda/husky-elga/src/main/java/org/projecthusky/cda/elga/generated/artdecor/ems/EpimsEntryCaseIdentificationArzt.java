@@ -31,9 +31,24 @@ public class EpimsEntryCaseIdentificationArzt extends POCDMT000040Observation {
     public EpimsEntryCaseIdentificationArzt() {
         super.getClassCode().add("CASE");
         super.setMoodCode(org.projecthusky.common.hl7cdar2.XActMoodDocumentObservation.EVN);
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.6.0.11.3.57"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.1.2"));
         super.getTemplateId().add(createHl7TemplateIdFixedValue("1.2.40.0.34.11.6.3.2"));
+		super.setStatusCode(createHl7StatusCodeFixedValue("completed"));
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7StatusCode
+	 *
+	 * @param code the desired fixed value for this argument.
+	 */
+	private static org.projecthusky.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
+		ObjectFactory factory = new ObjectFactory();
+		org.projecthusky.common.hl7cdar2.CS retVal = factory.createCS();
+		retVal.setCode(code);
+		return retVal;
     }
+
 
     /**
      * Creates fixed contents for CDA Element hl7Id
