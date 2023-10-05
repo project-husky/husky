@@ -10,18 +10,25 @@
  */
 package org.projecthusky.common.model;
 
-import org.apache.commons.lang3.NotImplementedException;
-import org.projecthusky.common.basetypes.NameBaseType;
-import org.projecthusky.common.enums.EntityNameUse;
-import org.projecthusky.common.enums.NullFlavor;
-import org.projecthusky.common.hl7cdar2.*;
-import org.openehealth.ipf.commons.ihe.xds.core.metadata.XpnName;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
+
+import org.apache.commons.lang3.NotImplementedException;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.XpnName;
+import org.projecthusky.common.basetypes.NameBaseType;
+import org.projecthusky.common.enums.EntityNameUse;
+import org.projecthusky.common.enums.NullFlavor;
+import org.projecthusky.common.hl7cdar2.EN;
+import org.projecthusky.common.hl7cdar2.EnDelimiter;
+import org.projecthusky.common.hl7cdar2.EnFamily;
+import org.projecthusky.common.hl7cdar2.EnGiven;
+import org.projecthusky.common.hl7cdar2.EnPrefix;
+import org.projecthusky.common.hl7cdar2.EnSuffix;
+import org.projecthusky.common.hl7cdar2.PN;
 
 /**
  * The class Name contains all fields for different name parts such as given or
@@ -34,11 +41,12 @@ public class Name extends NameBaseType {
 	 */
 	private static final long serialVersionUID = 1233422782853908534L;
 
-	private static final String ELEMENT_NAME_NAMESPACE_DELIMITER = "hl7:delimiter";
-	private static final String ELEMENT_NAME_NAMESPACE_FAMILY = "hl7:family";
-	private static final String ELEMENT_NAME_NAMESPACE_GIVEN = "hl7:given";
-	private static final String ELEMENT_NAME_NAMESPACE_SUFFIX = "hl7:suffix";
-	private static final String ELEMENT_NAME_NAMESPACE_PREFIX = "hl7:prefix";
+	private static final String ELEMENT_NAME_NAMESPACE_DELIMITER = "delimiter";
+	private static final String ELEMENT_NAME_NAMESPACE_FAMILY = "family";
+	private static final String ELEMENT_NAME_NAMESPACE_GIVEN = "given";
+	private static final String ELEMENT_NAME_NAMESPACE_SUFFIX = "suffix";
+	private static final String ELEMENT_NAME_NAMESPACE_PREFIX = "prefix";
+	private static final String HL7_NAMESPACE = "urn:hl7-org:v3";
 
 	/**
 	 * Instantiates a new instance. Default constructor.
@@ -209,21 +217,24 @@ public class Name extends NameBaseType {
 			var obj = new EnDelimiter();
 			obj.setXmlMixed(value);
 			content.add(
-					new JAXBElement<EnDelimiter>(new QName(ELEMENT_NAME_NAMESPACE_DELIMITER), EnDelimiter.class, obj));
+					new JAXBElement<EnDelimiter>(new QName(HL7_NAMESPACE, ELEMENT_NAME_NAMESPACE_DELIMITER, ""),
+							EnDelimiter.class, obj));
 		}
 
 		value = baseType.getFamily();
 		if (value != null) {
 			var obj = new EnFamily();
 			obj.setXmlMixed(value);
-			content.add(new JAXBElement<EnFamily>(new QName(ELEMENT_NAME_NAMESPACE_FAMILY), EnFamily.class, obj));
+			content.add(new JAXBElement<EnFamily>(new QName(HL7_NAMESPACE, ELEMENT_NAME_NAMESPACE_FAMILY, ""),
+					EnFamily.class, obj));
 		}
 
 		value = baseType.getGiven();
 		if (value != null) {
 			var obj = new EnGiven();
 			obj.setXmlMixed(value);
-			content.add(new JAXBElement<EnGiven>(new QName(ELEMENT_NAME_NAMESPACE_GIVEN), EnGiven.class, obj));
+			content.add(new JAXBElement<EnGiven>(new QName(HL7_NAMESPACE, ELEMENT_NAME_NAMESPACE_GIVEN, ""),
+					EnGiven.class, obj));
 		}
 
 		value = baseType.getPrefix();
@@ -233,14 +244,16 @@ public class Name extends NameBaseType {
 			// Note: This need probably to become more dynamic. Feel free to
 			// contribute.
 			obj.getQualifier().add("AC");
-			content.add(new JAXBElement<EnPrefix>(new QName(ELEMENT_NAME_NAMESPACE_PREFIX), EnPrefix.class, obj));
+			content.add(new JAXBElement<EnPrefix>(new QName(HL7_NAMESPACE, ELEMENT_NAME_NAMESPACE_PREFIX, ""),
+					EnPrefix.class, obj));
 		}
 
 		value = baseType.getSuffix();
 		if (value != null) {
 			var obj = new EnSuffix();
 			obj.setXmlMixed(value);
-			content.add(new JAXBElement<EnSuffix>(new QName(ELEMENT_NAME_NAMESPACE_SUFFIX), EnSuffix.class, obj));
+			content.add(new JAXBElement<EnSuffix>(new QName(HL7_NAMESPACE, ELEMENT_NAME_NAMESPACE_SUFFIX, ""),
+					EnSuffix.class, obj));
 		}
 
 		return content;
