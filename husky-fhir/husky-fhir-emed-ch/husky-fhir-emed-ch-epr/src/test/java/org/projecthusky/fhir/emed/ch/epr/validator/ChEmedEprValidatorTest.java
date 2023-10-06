@@ -25,7 +25,6 @@ class ChEmedEprValidatorTest {
     private static final Logger log = LoggerFactory.getLogger(ChEmedEprValidatorTest.class);
 
     @Test
-    @Disabled
     void validateDocumentBundle() throws IOException, URISyntaxException, EOperationOutcome {
         final var ctx = FhirContext.forR4Cached();
         final var validator = new ChEmedEprValidator();
