@@ -43,7 +43,7 @@ public class AtcdabbrOtherPersonNameCompilationG2M extends PN {
     public void addHl7Family(org.projecthusky.common.hl7cdar2.ENXP value) {
         EnFamily obj = new EnFamily();
 		obj.setXmlMixed(value.getXmlMixed());
-        getContent().add(new JAXBElement<EnFamily>(new QName("hl7:family"),
+		getContent().add(new JAXBElement<EnFamily>(new QName("family"),
                                                    EnFamily.class,
                                                    obj));
     }
@@ -54,7 +54,7 @@ public class AtcdabbrOtherPersonNameCompilationG2M extends PN {
     public void addHl7Given(org.projecthusky.common.hl7cdar2.ENXP value) {
         EnGiven obj = new EnGiven();
 		obj.setXmlMixed(value.getXmlMixed());
-        getContent().add(new JAXBElement<EnGiven>(new QName("hl7:given"),
+		getContent().add(new JAXBElement<EnGiven>(new QName("given"),
                                                   EnGiven.class,
                                                   obj));
     }
@@ -65,7 +65,7 @@ public class AtcdabbrOtherPersonNameCompilationG2M extends PN {
     public void addHl7Prefix(org.projecthusky.common.hl7cdar2.ENXP value) {
         EnPrefix obj = new EnPrefix();
 		obj.setXmlMixed(value.getXmlMixed());
-        getContent().add(new JAXBElement<EnPrefix>(new QName("hl7:prefix"),
+		getContent().add(new JAXBElement<EnPrefix>(new QName("prefix"),
                                                    EnPrefix.class,
                                                    obj));
     }
@@ -76,7 +76,7 @@ public class AtcdabbrOtherPersonNameCompilationG2M extends PN {
     public void addHl7Suffix(org.projecthusky.common.hl7cdar2.ENXP value) {
         EnSuffix obj = new EnSuffix();
 		obj.setXmlMixed(value.getXmlMixed());
-        getContent().add(new JAXBElement<EnSuffix>(new QName("hl7:suffix"),
+		getContent().add(new JAXBElement<EnSuffix>(new QName("suffix"),
                                                    EnSuffix.class,
                                                    obj));
     }

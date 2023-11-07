@@ -12,8 +12,8 @@ package org.projecthusky.cda.elga.models;
 import org.projecthusky.cda.elga.generated.artdecor.AtcdabbrHeaderRecordTargetEImpfpass;
 import org.projecthusky.cda.elga.generated.artdecor.base.HeaderRecordTarget;
 import org.projecthusky.cda.elga.generated.artdecor.ems.EpimsHeaderRecordTarget;
-import org.projecthusky.cda.elga.models.ems.EpimsPatient;
-import org.projecthusky.cda.elga.models.ems.EpimsPatientRole;
+import org.projecthusky.cda.elga.generated.artdecor.ems.EpimsPatient;
+import org.projecthusky.cda.elga.generated.artdecor.ems.EpimsPatientRole;
 import org.projecthusky.common.at.Guardian;
 import org.projecthusky.common.at.PatientAt;
 import org.projecthusky.common.hl7cdar2.AD;
@@ -25,7 +25,6 @@ import org.projecthusky.common.hl7cdar2.POCDMT000040RecordTarget;
 import org.projecthusky.common.model.Address;
 import org.projecthusky.common.model.Code;
 import org.projecthusky.common.model.Identificator;
-import org.projecthusky.common.model.Name;
 import org.projecthusky.common.model.Telecom;
 import org.projecthusky.common.utils.time.DateTimes;
 
@@ -75,7 +74,7 @@ public class PatientCdaAt extends PatientAt {
 			}
 		}
 
-		patientRole.setEpimsPatient(getEpimsPatient());
+		patientRole.setPatient(getEpimsPatient());
 		recordTarget.setPatientRole(patientRole);
 		return recordTarget;
 	}
@@ -84,14 +83,8 @@ public class PatientCdaAt extends PatientAt {
 		EpimsPatient patient = new EpimsPatient();
 		patient.getClassCode().add("PSN");
 		patient.setDeterminerCode("INSTANCE");
-
-		if (getNames() != null) {
-			for (Name nam : getNames()) {
-				if (nam != null) {
-					patient.getName().add(nam.getHl7CdaR2Pn());
-				}
-			}
-		}
+		
+		patient.getName().add(getName().getHl7CdaR2Pn());
 
 		if (getAdministrativeGenderCode() != null) {
 			patient.setAdministrativeGenderCode(createGenderTag(getAdministrativeGenderCode().getCode()));

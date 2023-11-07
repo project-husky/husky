@@ -22,6 +22,7 @@ import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.IntegerType;
 import org.hl7.fhir.r4.model.Organization;
 import org.hl7.fhir.r4.model.Patient.PatientCommunicationComponent;
+import org.hl7.fhir.r4.model.StringType;
 import org.hl7.fhir.r4.model.Type;
 import org.projecthusky.common.communication.AffinityDomain;
 import org.projecthusky.common.enums.TelecomAddressUse;
@@ -942,6 +943,28 @@ public class PixPdqV3QueryBase extends CamelService {
 				address.addLine(getMixedValue(addressStreetLine.getMixed()));
 			}
 		}
+
+		if (ad.getStreetName() != null && !ad.getStreetName().isEmpty() && ad.getStreetName().get(0) != null) {
+			org.hl7.fhir.r4.model.Extension streetNameExt = new org.hl7.fhir.r4.model.Extension(
+					"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName",
+					new StringType(getMixedValue(ad.getStreetName().get(0).getMixed())));
+			address.addExtension(streetNameExt);
+		}
+
+		if (ad.getHouseNumberNumeric() != null && !ad.getHouseNumberNumeric().isEmpty()
+				&& ad.getHouseNumberNumeric().get(0) != null) {
+			org.hl7.fhir.r4.model.Extension houseNumberExt = new org.hl7.fhir.r4.model.Extension(
+					"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber",
+					new StringType(getMixedValue(ad.getHouseNumberNumeric().get(0).getMixed())));
+			address.addExtension(houseNumberExt);
+		} else if (ad.getHouseNumber() != null && !ad.getHouseNumber().isEmpty()
+				&& ad.getHouseNumber().get(0) != null) {
+			org.hl7.fhir.r4.model.Extension houseNumberExt = new org.hl7.fhir.r4.model.Extension(
+					"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber",
+					new StringType(getMixedValue(ad.getHouseNumber().get(0).getMixed())));
+			address.addExtension(houseNumberExt);
+		}
+
 		if ((ad.getCity() != null) && (!ad.getCity().isEmpty())) {
 			address.setCity(getMixedValue(ad.getCity().get(0).getMixed()));
 		}

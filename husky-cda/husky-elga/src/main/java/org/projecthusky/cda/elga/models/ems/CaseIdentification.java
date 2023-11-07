@@ -127,6 +127,11 @@ public class CaseIdentification {
 			observationCaseIdentication.setEffectiveTime(new IVLTS(DateTimes.toDateTs(diagnosisDate).getValue()));
 		}
 
+		CD cd = new CD();
+		cd.setCode("416341003");
+		cd.setCodeSystem("2.16.840.1.113883.6.96");
+		observationCaseIdentication.setCode(cd);
+
 		CD diseaseCD = this.disease.getHl7CdaR2Cd();
 		ObjectFactory factory = new ObjectFactory();
 		CR cr = factory.createCR();

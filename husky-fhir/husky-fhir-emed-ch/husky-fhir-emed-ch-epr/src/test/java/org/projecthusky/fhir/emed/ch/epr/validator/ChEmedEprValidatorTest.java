@@ -3,7 +3,6 @@ package org.projecthusky.fhir.emed.ch.epr.validator;
 import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.r5.elementmodel.Manager;
 import org.hl7.fhir.r5.utils.EOperationOutcome;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.epr.service.ChEmedEprParser;

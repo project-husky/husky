@@ -18,11 +18,14 @@ import org.projecthusky.cda.elga.generated.artdecor.AtcdabbrHeaderLegalAuthentic
 import org.projecthusky.cda.elga.generated.artdecor.AtcdabbrOtherAuthorBodyEImpfpass;
 import org.projecthusky.cda.elga.generated.artdecor.ps.AuthorBodyPs;
 import org.projecthusky.common.at.PractitionerAt;
+import org.projecthusky.common.basetypes.AddressBaseType;
 import org.projecthusky.common.enums.NullFlavor;
 import org.projecthusky.common.hl7cdar2.POCDMT000040AssignedEntity;
 import org.projecthusky.common.hl7cdar2.POCDMT000040Author;
 import org.projecthusky.common.hl7cdar2.POCDMT000040LegalAuthenticator;
+import org.projecthusky.common.hl7cdar2.POCDMT000040Performer1;
 import org.projecthusky.common.hl7cdar2.TS;
+import org.projecthusky.common.model.Address;
 import org.projecthusky.common.utils.time.DateTimes;
 
 public class PractitionerCdaAt extends PractitionerAt {
@@ -125,6 +128,37 @@ public class PractitionerCdaAt extends PractitionerAt {
 		author.setTime(DateTimes.toDatetimeTs(authTime));
 		author.setAssignedAuthor(getHl7CdaR2Pocdmt000040AssignedAuthor(author.getAssignedAuthor()));
 		return author;
+	}
+
+	public POCDMT000040Performer1 getPerformer() {
+		POCDMT000040Performer1 performer = new POCDMT000040Performer1();
+		POCDMT000040AssignedEntity assignedEntity = new POCDMT000040AssignedEntity();
+
+		if (getIdentifier() != null && !getIdentifier().isEmpty()) {
+			assignedEntity.getId().addAll(getIis());
+		}
+
+		if (this.getAddresses() != null && !this.getAddresses().isEmpty()) {
+			assignedEntity.getAddr().addAll(getAds());
+		} else {
+			Address addressUnk = new Address(new AddressBaseType());
+			addressUnk.setNullFlavor(NullFlavor.UNKNOWN_L1);
+			assignedEntity.getAddr().add(addressUnk.getHl7CdaR2Ad());
+		}
+
+		assignedEntity.setAssignedPerson(getHl7CdaR2Pocdmt000040Person(assignedEntity.getAssignedPerson()));
+
+		if (getTelecom() != null && !getTelecom().isEmpty()) {
+			assignedEntity.getTelecom().addAll(getTels());
+		}
+
+		if (getOrganization() != null) {
+			assignedEntity.setRepresentedOrganization(getOrganization().getHl7CdaR2Pocdmt000040Organization());
+		}
+
+		performer.setAssignedEntity(assignedEntity);
+
+		return performer;
 	}
 
 }

@@ -88,7 +88,7 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 
 			if (mdhtAddr.getStreetName() != null) {
 				org.hl7.fhir.r4.model.Extension streetNameExt = new org.hl7.fhir.r4.model.Extension(
-						"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber",
+						"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName",
 						new StringType(mdhtAddr.getStreetName()));
 				fhirAddr.addExtension(streetNameExt);
 			}
