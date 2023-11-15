@@ -29,6 +29,7 @@ public class ChFindMedicationCardQueryTransformer extends ChPharmacyDocumentsQue
      * This parameter doesn't exist in {@link org.openehealth.ipf.commons.ihe.xds.core.transform.requests.QueryParameter}.
      */
     public static final String DOC_ENTRY_LANGUAGE_CODE = "$XDSDocumentEntryLanguageCode";
+    public static final String PMLC_QUERY_INCLUDE_NON_ACTIVE = "$PMLCIncludeNonActive";
 
     /**
      * Transforms the query into its EbXML representation.
@@ -60,6 +61,10 @@ public class ChFindMedicationCardQueryTransformer extends ChPharmacyDocumentsQue
         if (query.getLanguageCode() != null) {
             ebXML.addSlot(DOC_ENTRY_LANGUAGE_CODE, QuerySlotHelper.encodeAsString(query.getLanguageCode()));
         }
+
+        if (query.getIncludeNonActive() != null) {
+            ebXML.addSlot(PMLC_QUERY_INCLUDE_NON_ACTIVE, QuerySlotHelper.encodeAsString(query.getIncludeNonActive().toString()));
+        }
     }
 
     /**
@@ -90,5 +95,6 @@ public class ChFindMedicationCardQueryTransformer extends ChPharmacyDocumentsQue
         query.getServiceEnd().setTo(slots.toNumber(DOC_ENTRY_SERVICE_END_TO));
 
         query.setLanguageCode(QuerySlotHelper.decodeString(ebXML.getSingleSlotValue(DOC_ENTRY_LANGUAGE_CODE)));
+        query.setIncludeNonActive(Boolean.valueOf(QuerySlotHelper.decodeString(ebXML.getSingleSlotValue(PMLC_QUERY_INCLUDE_NON_ACTIVE))));
     }
 }

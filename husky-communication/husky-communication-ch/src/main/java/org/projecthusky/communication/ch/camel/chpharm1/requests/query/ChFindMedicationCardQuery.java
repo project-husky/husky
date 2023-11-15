@@ -39,6 +39,11 @@ public class ChFindMedicationCardQuery extends ChPharmacyDocumentsQuery {
     private final TimeRange serviceEnd = new TimeRange();
     @Nullable
     private String languageCode;
+    /**
+     * Whether to include only active treatments (false, default) or also non-active treatments (true).
+     */
+    @Nullable
+    private Boolean includeNonActive;
 
     /**
      * Constructs the query.
@@ -78,6 +83,10 @@ public class ChFindMedicationCardQuery extends ChPharmacyDocumentsQuery {
         this.languageCode = languageCode;
     }
 
+    @Nullable
+    public Boolean getIncludeNonActive() { return includeNonActive; }
+    public void setIncludeNonActive(@Nullable final Boolean includeNonActive) {this.includeNonActive = includeNonActive;}
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
@@ -85,12 +94,13 @@ public class ChFindMedicationCardQuery extends ChPharmacyDocumentsQuery {
         return Objects.equals(documentEntryTypes, that.documentEntryTypes)
                 && Objects.equals(serviceStart, that.serviceStart)
                 && Objects.equals(serviceEnd, that.serviceEnd)
-                && Objects.equals(languageCode, that.languageCode);
+                && Objects.equals(languageCode, that.languageCode)
+                && Objects.equals(includeNonActive, that.includeNonActive);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), documentEntryTypes, serviceStart, serviceEnd, languageCode);
+        return Objects.hash(super.hashCode(), documentEntryTypes, serviceStart, serviceEnd, languageCode, includeNonActive);
     }
 
     @Override
@@ -100,6 +110,7 @@ public class ChFindMedicationCardQuery extends ChPharmacyDocumentsQuery {
                 ", serviceStart=" + this.serviceStart +
                 ", serviceEnd=" + this.serviceEnd +
                 ", languageCode='" + this.languageCode + '\'' +
+                ", includeNonActive='" + this.includeNonActive + '\'' +
                 ", type=" + this.type +
                 ", homeCommunityId='" + this.homeCommunityId + '\'' +
                 ", extraParameters=" + this.extraParameters +
