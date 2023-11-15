@@ -179,7 +179,7 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
         if (!this.hasIssued()) {
             throw new InvalidEmedContentException("The date/time this version was made available is missing.");
         }
-        return this.getIssued().toInstant();
+        return this.getIssuedElement().getValueAsCalendar().toInstant();
     }
 
     /**

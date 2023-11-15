@@ -169,7 +169,7 @@ public abstract class ChEmedEprComposition extends Composition {
         if (!this.hasDate()) {
             throw new InvalidEmedContentException("The document's creation date and time is missing.");
         }
-        return this.getDate().toInstant();
+        return this.getDateElement().getValueAsCalendar().toInstant();
     }
 
     /**

@@ -251,7 +251,7 @@ public class ChEmedEprDosage extends Dosage {
         if (!boundsPeriod.hasStart()) {
             return null;
         }
-        return boundsPeriod.getStart().toInstant();
+        return boundsPeriod.getStartElement().getValueAsCalendar().toInstant();
     }
 
     /**

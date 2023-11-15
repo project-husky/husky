@@ -26,6 +26,7 @@ import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EffectiveDosageInstructions;
 import org.projecthusky.fhir.emed.ch.epr.util.References;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -393,5 +394,11 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
         return this;
     }
 
-
+    /**
+     *
+     * @return The asserted date as an Instant.
+     */
+    public Instant resolveAssertedTimestamp() {
+        return this.getDateAssertedElement().getValueAsCalendar().toInstant();
+    }
 }

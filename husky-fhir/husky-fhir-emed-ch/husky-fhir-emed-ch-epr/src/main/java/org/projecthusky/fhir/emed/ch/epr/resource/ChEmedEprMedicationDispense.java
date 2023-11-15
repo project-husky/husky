@@ -150,7 +150,7 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
         if (!this.hasWhenHandedOver()) {
             throw new InvalidEmedContentException("the date/time of when the product was distributed is missing.");
         }
-        return this.getWhenHandedOver().toInstant();
+        return this.getWhenHandedOverElement().getValueAsCalendar().toInstant();
     }
 
     /**
