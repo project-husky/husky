@@ -66,12 +66,14 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
         final var activeTreatments = new HashMap<UUID, List<ChEmedEprMedicationStatementPmlc>>(5);
         ChEmedEprMedicationStatementPmlc lastStatement = null;
         for (final var statement : document.resolveComposition().resolveMedicationStatements()) {
-            addStatementToTreatments(statement,
-                    statement.resolveEffectiveDosageInstructions().isRegular()? activeTreatments : asneededTreatments);
-            if (lastStatement == null) lastStatement = statement;
-            else {
-                if (getStatementAuthorshipDate(lastStatement).compareTo(getStatementAuthorshipDate(statement)) < 0)
-                    lastStatement = statement;
+            if (statement.isShownInMedicationCard(document.resolveTimestamp())) {
+                addStatementToTreatments(statement,
+                        statement.resolveEffectiveDosageInstructions().isRegular() ? activeTreatments : asneededTreatments);
+                if (lastStatement == null) lastStatement = statement;
+                else {
+                    if (getStatementAuthorshipDate(lastStatement).compareTo(getStatementAuthorshipDate(statement)) < 0)
+                        lastStatement = statement;
+                }
             }
         }
 
@@ -111,4 +113,6 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
     private Instant getStatementAuthorshipDate(final ChEmedEprMedicationStatementPmlc statement) {
         return statement.resolveInformationSource().getTime();
     }
+
+
 }

@@ -15,10 +15,13 @@ import ca.uhn.fhir.model.api.annotation.Extension;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.*;
+import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationStatementPmlBase;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtPrescription;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
 
+import java.time.Instant;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -137,5 +140,37 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
         if (dst instanceof final ChEmedEprMedicationStatementPmlc als) {
             als.treatmentPlan = treatmentPlan == null ? null : treatmentPlan.copy();
         }
+    }
+
+
+    /**
+     * Checks whether a medication statement with the specified status and base dosage is to be included in a generated
+     * medication card at the specified evaluation time or not. Relies on isPmlcStatementShownInMedicationCard().
+     * @param evaluationTime Time of generation of the medication card.
+     * @return               True if a medication statement with the specified status and base dosage is to be included
+     *                       in a generated medication card at the specified time. False otherwise.
+     */
+    public boolean isShownInMedicationCard(final Instant evaluationTime) {
+        return isPmlcStatementShownInMedicationCard(evaluationTime, this.getStatus(), this.resolveBaseDosage());
+    }
+
+    /**
+     * Checks whether a medication statement with the specified status and base dosage is to be included in a generated
+     * medication card at the specified evaluation time or not.
+     *
+     * @param evaluationTime Time of generation of the medication card.
+     * @param status         The status of the medication statement.
+     * @param baseDosage     The base dosage resource of the medication statement.
+     * @return               True if a medication statement with the specified status and base dosage is to be included
+     *                       in a generated medication card at the specified time. False otherwise.
+     */
+    public static boolean isPmlcStatementShownInMedicationCard(final Instant evaluationTime,
+                                                               final MedicationStatementStatus status,
+                                                               final ChEmedEprDosage baseDosage) {
+        return status == MedicationStatementStatus.ACTIVE &&
+                (!baseDosage.hasBoundsPeriod() ||
+                 !baseDosage.getBoundsPeriod().hasEnd() ||
+                 !evaluationTime.isAfter(Objects.requireNonNull(baseDosage.getInclusiveEndTime()))
+                );
     }
 }
