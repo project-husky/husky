@@ -10,10 +10,12 @@
 package org.projecthusky.common.at;
 
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.projecthusky.common.hl7cdar2.POCDMT000040RecordTarget;
 import org.projecthusky.common.model.Address;
+import org.projecthusky.common.model.Name;
 import org.projecthusky.common.model.Patient;
 
 public class PatientAt extends Patient {
@@ -21,6 +23,8 @@ public class PatientAt extends Patient {
 	private LocalDate dateOfDeath;
 	private List<Guardian> guardians;
 	private Address birthPlace;
+	private Name name;
+	private List<Address> addresses;
 
 	public PatientAt() {
 		super();
@@ -59,5 +63,25 @@ public class PatientAt extends Patient {
 		this.dateOfDeath = dateOfDeath;
 	}
 
+	@Override
+	public Name getName() {
+		return name;
+	}
+
+	public void setName(Name name) {
+		this.name = name;
+	}
+
+	@Override
+	public List<Address> getAddresses() {
+		if (addresses == null) {
+			this.addresses = new LinkedList<>();
+		}
+		return addresses;
+	}
+
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
+	}
 
 }
