@@ -28,6 +28,7 @@ import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -301,15 +302,6 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
         return this.dosage;
     }
 
-    /**
-     * @param theDosage The dosage(s) to be set.
-     * @return Returns a reference to <code>this</code> for easy method chaining
-     */
-    @Override
-    public MedicationStatement setDosage(final List<Dosage> theDosage) {
-        return super.setDosage(theDosage);
-    }
-
     @Override
     public ChEmedEprDosage addDosage() {
         final var dosage = new ChEmedEprDosage();
@@ -354,12 +346,10 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
      * @return the information source or {@code null}.
      */
     @ExpectsValidResource
-    @Nullable
     public Author resolveInformationSource() {
-        if (!this.hasInformationSource()) {
-            return null;
-        }
-        return new Author(this.getInformationSource().getResource());
+        if (!this.hasInformationSource())
+            throw new InvalidEmedContentException("Missing informationSource.");
+        return new Author(this.getInformationSource().getResource(), resolveAsserted());
     }
 
     /**
@@ -386,11 +376,13 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
     /**
      * Sets the information source (medical author) of the statement.
      * It creates a reference from the received author and sets it as information source.
+     * If the author has a timestamp, it sets the asserted field.
      * @param author The medical author of the statement.
      * @return this.
      */
     public ChEmedEprMedicationStatement setInformationSource(final Author author) {
         this.setInformationSource(References.createAuthorReference(author));
+        if (author.getTime() != null) this.setDateAsserted(Date.from(author.getTime()));
         return this;
     }
 
@@ -398,7 +390,30 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
      *
      * @return The asserted date as an Instant.
      */
-    public Instant resolveAssertedTimestamp() {
+    @ExpectsValidResource
+    public Instant resolveAsserted() {
+        if (this.getDateAssertedElement() == null)
+            throw new InvalidEmedContentException("The asserted timestamp is missing");
         return this.getDateAssertedElement().getValueAsCalendar().toInstant();
+    }
+
+    /**
+     *
+     * @return The information source as Author and the asserted timestamp as its time.
+     */
+    @Override
+    @ExpectsValidResource
+    public Author resolveMedicalAuthor() {
+        return resolveInformationSource();
+    }
+
+    /**
+     *
+     * @return The asserted timestamp.
+     */
+    @Override
+    @ExpectsValidResource
+    public Instant resolveMedicalAuthorshipTimestamp() {
+        return resolveAsserted();
     }
 }

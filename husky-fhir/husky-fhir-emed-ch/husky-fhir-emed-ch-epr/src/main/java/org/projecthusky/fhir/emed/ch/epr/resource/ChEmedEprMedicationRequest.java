@@ -21,6 +21,8 @@ import org.projecthusky.fhir.emed.ch.epr.model.common.EmedReference;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
 import org.projecthusky.fhir.emed.ch.epr.util.References;
 
+import java.sql.Date;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -300,15 +302,6 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
         return this.dosageInstruction;
     }
 
-    /**
-     * @param theDosage The dosage(s) to be set.
-     * @return Returns a reference to <code>this</code> for easy method chaining
-     */
-    @Override
-    public MedicationRequest setDosageInstruction(final List<Dosage> theDosage) {
-        return super.setDosageInstruction(theDosage);
-    }
-
     @Override
     public ChEmedEprDosage addDosageInstruction() {
         final var dosage = new ChEmedEprDosage();
@@ -381,12 +374,33 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
     }
 
     /**
-     * Sets the requester of the medication request.
+     * Sets the requester of the medication request. If the author has a timestamp, it sets it as authoredOn field.
      * @param author The author to be set as requester.
      * @return this.
      */
     public MedicationRequest setRequester(Author author) {
-        return setRequester(References.createAuthorReference(author));
+        setRequester(References.createAuthorReference(author));
+        if (author.getTime() != null) this.setAuthoredOn(Date.from(author.getTime()));
+        return this;
+    }
+
+    /**
+     *
+     * @return The requester as an Author, including the authoredOn date as timestamp.
+     */
+    @ExpectsValidResource
+    public Author resolveRequester() {
+        if (this.hasRequester()) return new Author(getRequester().getResource(), resolveAuthoredOn());
+        throw new InvalidEmedContentException("Missing requester.");
+    }
+
+    /**
+     * @return Gets the authoredOn date as an Instant.
+     */
+    @ExpectsValidResource
+    public Instant resolveAuthoredOn() {
+        if (hasAuthoredOn()) return getAuthoredOnElement().getValueAsCalendar().toInstant();
+        throw new InvalidEmedContentException("The authoredOn field is missing.");
     }
 
     @Override
@@ -395,5 +409,25 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
         if (dst instanceof final ChEmedEprMedicationRequest rst) {
             rst.treatmentPlan = treatmentPlan == null ? null : treatmentPlan.copy();
         }
+    }
+
+    /**
+     *
+     * @return The requester as medical Author, including authoredOn as its timestamp.
+     */
+    @Override
+    @ExpectsValidResource
+    public Author resolveMedicalAuthor() {
+        return resolveRequester();
+    }
+
+    /**
+     *
+     * @return The authoredOn date as medical authorship timestamp.
+     */
+    @Override
+    @ExpectsValidResource
+    public Instant resolveMedicalAuthorshipTimestamp() {
+        return resolveAuthoredOn();
     }
 }

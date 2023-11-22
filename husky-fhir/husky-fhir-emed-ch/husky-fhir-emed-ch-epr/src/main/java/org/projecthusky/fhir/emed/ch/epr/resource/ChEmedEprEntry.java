@@ -11,8 +11,11 @@
 package org.projecthusky.fhir.emed.ch.epr.resource;
 
 import org.hl7.fhir.instance.model.api.IBaseResource;
+import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
+import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
 
+import java.time.Instant;
 import java.util.UUID;
 
 /**
@@ -25,4 +28,18 @@ public interface ChEmedEprEntry extends IBaseResource {
     UUID resolveIdentifier();
 
     EmedEntryType getEmedType();
+
+    /**
+     *
+     * @return The medical author as an Author, including the timestamp of the authorship.
+     */
+    @ExpectsValidResource
+    Author resolveMedicalAuthor();
+
+    /**
+     *
+     * @return The time of medical authorship as an Instant.
+     */
+    @ExpectsValidResource
+    Instant resolveMedicalAuthorshipTimestamp();
 }
