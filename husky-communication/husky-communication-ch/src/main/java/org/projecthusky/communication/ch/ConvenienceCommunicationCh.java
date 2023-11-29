@@ -10,6 +10,7 @@
  */
 package org.projecthusky.communication.ch;
 
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 import org.projecthusky.common.ch.AuthorCh;
 import org.projecthusky.common.ch.enums.stable.AuthorRole;
 import org.projecthusky.common.communication.AffinityDomain;
@@ -122,6 +123,7 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 			}
 		var doc = new Document();
 		var doc4Metadata = new Document();
+		doc4Metadata.setDocumentEntry(new DocumentEntry());
 		InputStream unicodeStream = null;
 		try {
 
