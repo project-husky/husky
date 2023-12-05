@@ -4,12 +4,11 @@ import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.*;
-import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedPadvEntryType;
-import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
+import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocumentAuthorable;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprObservation;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtPharmaceuticalAdvice;
@@ -23,7 +22,8 @@ import java.util.UUID;
  * @author Ronaldo Loureiro
  **/
 @ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-observation-list")
-public class ChEmedEprObservationPml extends ChEmedEprObservation {
+public class ChEmedEprObservationPml
+        extends ChEmedEprObservation implements ChEmedEprDocumentAuthorable<ChEmedEprObservationPml> {
 
     /**
      * Author of the original document if different from the author of the medical decision (Observation.performer), see
@@ -61,30 +61,12 @@ public class ChEmedEprObservationPml extends ChEmedEprObservation {
     }
 
     /**
-     * Resolves the author and her/his organization of the medical decision.
-     *
-     * @return the author and her/his organization of the medical decision.
-     * @throws InvalidEmedContentException if the author and her/his organization of the medical decision are missing or
-     *                                     aren't of the right type.
-     */
-    @ExpectsValidResource
-    public ChEmedEprPractitionerRole resolvePerformer() throws InvalidEmedContentException {
-        if (!this.hasPerformer()) throw new InvalidEmedContentException(
-                "The the author and her/his organization of the medical decision is missing.");
-        final var resource = this.getPerformerFirstRep().getResource();
-        if (resource instanceof ChEmedEprPractitionerRole chEmedEprPractitionerRole) {
-            return chEmedEprPractitionerRole;
-        }
-        throw new InvalidEmedContentException(
-                "The author and her/his organization of the medical decision resource isn't of the right type.");
-    }
-
-    /**
      * Gets the author document element in the observation.
      *
      * @return the author document element.
      */
-    public Reference getAuthorDocumentElement() {
+    @Override
+    public Reference getAuthorDocument() {
         if (this.authorDocument == null) {
             this.authorDocument = new Reference();
         }
@@ -92,31 +74,13 @@ public class ChEmedEprObservationPml extends ChEmedEprObservation {
     }
 
     /**
-     * Gets the last author document resource in the observation if available.
-     *
-     * @return the author document resource or {@code null}.
-     * @throws InvalidEmedContentException if the author document resource is invalid.
-     */
-    @Nullable
-    @ExpectsValidResource
-    public DomainResource getAuthorDocument() throws InvalidEmedContentException {
-        final var resource = getAuthorDocumentElement().getResource();
-        if (resource == null) return null;
-
-        if (resource instanceof ChCorePatientEpr || resource instanceof ChEmedEprPractitionerRole) {
-            return (DomainResource) resource;
-        }
-        throw new InvalidEmedContentException("The last author of the original document is invalid");
-    }
-
-    /**
-     * Sets the author of the original document.
-     *
-     * @param author the author.
+     * Sets the reference to the original author of the document.
+     * @param reference The reference to be set as authorDocument.
      * @return this.
      */
-    public ChEmedEprObservationPml setAuthorDocument(final IBaseResource author) {
-        this.authorDocument = References.createReference((Resource) author);
+    @Override
+    public ChEmedEprObservationPml setAuthorDocument(final Reference reference) {
+        this.authorDocument = reference;
         return this;
     }
 
@@ -169,12 +133,18 @@ public class ChEmedEprObservationPml extends ChEmedEprObservation {
     }
 
     /**
-     * Returns whether author document exists.
-     *
-     * @return {@code true} if the author document exists, {@code false} otherwise.
+     * Sets a reference to the received auhor as performer (medical author)
+     * @param performer The author to be referenced as performer (medical author).
+     * @return this.
      */
-    public boolean hasAuthorDocument() {
-        return this.authorDocument != null && this.authorDocument.getResource() != null;
+    public ChEmedEprObservationPml setPerformer(final Author performer) {
+        final var reference = References.createAuthorReference(performer);
+        if (getPerformer().isEmpty()) {
+            addPerformer(reference);
+        } else {
+            getPerformer().set(0, reference);
+        }
+        return this;
     }
 
     /**
@@ -216,11 +186,15 @@ public class ChEmedEprObservationPml extends ChEmedEprObservation {
         return copy;
     }
 
+    /**
+     * Copies the content of the observation to another observation.
+     * @param dst The destination observation.
+     */
     @Override
     public void copyValues(final Observation dst) {
         super.copyValues(dst);
+        copyAuthorDocumentValues(dst);
         if (dst instanceof final ChEmedEprObservationPml als) {
-            als.authorDocument = authorDocument == null ? null : authorDocument.copy();
             als.parentDocument = parentDocument == null ? null : parentDocument.copy();
         }
     }

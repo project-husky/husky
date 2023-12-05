@@ -4,14 +4,12 @@ import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.hl7.fhir.instance.model.api.IBaseResource;
-import org.hl7.fhir.r4.model.DomainResource;
 import org.hl7.fhir.r4.model.MedicationDispense;
 import org.hl7.fhir.r4.model.Reference;
-import org.hl7.fhir.r4.model.Resource;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
-import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
+import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocumentAuthorable;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationDispense;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtDispense;
@@ -26,7 +24,8 @@ import java.util.UUID;
  * @author Ronaldo Loureiro
  **/
 @ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-medicationdispense-list")
-public class ChEmedEprMedicationDispensePml extends ChEmedEprMedicationDispense {
+public class ChEmedEprMedicationDispensePml
+        extends ChEmedEprMedicationDispense implements ChEmedEprDocumentAuthorable<ChEmedEprMedicationDispensePml> {
 
     /**
      * Author of the original document if different from the author of the medical decision
@@ -89,39 +88,17 @@ public class ChEmedEprMedicationDispensePml extends ChEmedEprMedicationDispense 
      *
      * @return the author document element.
      */
-    public Reference getAuthorDocumentElement() {
+    @Override
+    public Reference getAuthorDocument() {
         if (this.authorDocument == null) {
             this.authorDocument = new Reference();
         }
         return this.authorDocument;
     }
 
-    /**
-     * Gets the last author document resource in the medication statement if available.
-     *
-     * @return the author document resource or {@code null}.
-     * @throws InvalidEmedContentException if the author document resource is invalid.
-     */
-    @Nullable
-    @ExpectsValidResource
-    public DomainResource getAuthorDocument() throws InvalidEmedContentException {
-        final var resource = getAuthorDocumentElement().getResource();
-        if (resource == null) return null;
-
-        if (resource instanceof ChCorePatientEpr || resource instanceof ChEmedEprPractitionerRole) {
-            return (DomainResource) resource;
-        }
-        throw new InvalidEmedContentException("The last author of the original document is invalid");
-    }
-
-    /**
-     * Sets the author of the original document.
-     *
-     * @param author the author.
-     * @return this.
-     */
-    public ChEmedEprMedicationDispensePml setAuthorDocument(final IBaseResource author) {
-        this.authorDocument = References.createReference((Resource) author);
+    @Override
+    public ChEmedEprMedicationDispensePml setAuthorDocument(final Reference reference) {
+        this.authorDocument = reference;
         return this;
     }
 
@@ -137,12 +114,13 @@ public class ChEmedEprMedicationDispensePml extends ChEmedEprMedicationDispense 
     }
 
     /**
-     * Returns whether author document exists.
-     *
-     * @return {@code true} if the author document exists, {@code false} otherwise.
+     * Sets the author as performer (medical author) of the dispense.
+     * @param actor The author to set as performer.
+     * @return this.
      */
-    public boolean hasAuthorDocument() {
-        return this.authorDocument != null && !this.authorDocument.getReference().isEmpty();
+    public ChEmedEprMedicationDispensePml setPerformer(final Author actor) {
+        this.getPerformerFirstRep().setActor(References.createAuthorReference(actor));
+        return this;
     }
 
     /**
@@ -187,8 +165,8 @@ public class ChEmedEprMedicationDispensePml extends ChEmedEprMedicationDispense 
     @Override
     public void copyValues(final MedicationDispense dst) {
         super.copyValues(dst);
+        copyAuthorDocumentValues(dst);
         if (dst instanceof final ChEmedEprMedicationDispensePml als) {
-            als.authorDocument = authorDocument == null ? null : authorDocument.copy();
             als.parentDocument = parentDocument == null ? null : parentDocument.copy();
         }
     }

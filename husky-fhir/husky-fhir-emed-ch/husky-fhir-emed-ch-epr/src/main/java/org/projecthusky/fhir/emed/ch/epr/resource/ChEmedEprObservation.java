@@ -12,6 +12,7 @@ import org.projecthusky.fhir.emed.ch.common.enums.EmedPadvEntryType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
+import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EmedReference;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtDispense;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtPrescription;
@@ -179,7 +180,7 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
         if (!this.hasIssued()) {
             throw new InvalidEmedContentException("The date/time this version was made available is missing.");
         }
-        return this.getIssued().toInstant();
+        return this.getIssuedElement().getValueAsCalendar().toInstant();
     }
 
     /**
@@ -486,5 +487,36 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
             obs.medicationStatementChanged = medicationStatementChanged == null ? null : medicationStatementChanged.copy();
             obs.medicationRequestChanged = medicationRequestChanged == null ? null : medicationRequestChanged.copy();
         }
+    }
+
+    /**
+     *
+     * @return The first performer of type ChEmedEprPractitionerRole, ChCorePatientEpr or ChEmedEprRelatedPerson as an
+     *         Author with the time set to the medical authorship timestamp, i.e. when issued.
+     */
+    @Override
+    @ExpectsValidResource
+    public Author resolveMedicalAuthor() {
+        if (hasPerformer()) {
+            for (final var performer : getPerformer()) {
+                final var performerResource = performer.getResource();
+                if (performerResource instanceof ChEmedEprPractitionerRole ||
+                    performerResource instanceof ChCorePatientEpr ||
+                    performerResource instanceof ChEmedEprRelatedPerson)
+                    return new Author(performerResource, resolveMedicalAuthorshipTimestamp());
+            }
+            throw new InvalidEmedContentException("No suitable performer for medical authorship.");
+        }
+        throw new InvalidEmedContentException("Performer is missing.");
+    }
+
+    /**
+     *
+     * @return The time of medical authorship, i.e. when issued.
+     */
+    @Override
+    @ExpectsValidResource
+    public Instant resolveMedicalAuthorshipTimestamp() {
+        return resolveIssued();
     }
 }

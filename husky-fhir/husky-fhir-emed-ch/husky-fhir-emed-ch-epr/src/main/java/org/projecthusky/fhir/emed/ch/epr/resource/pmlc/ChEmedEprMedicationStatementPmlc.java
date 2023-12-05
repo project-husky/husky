@@ -14,21 +14,14 @@ import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.hl7.fhir.instance.model.api.IBaseResource;
-import org.hl7.fhir.r4.model.DomainResource;
-import org.hl7.fhir.r4.model.MedicationStatement;
-import org.hl7.fhir.r4.model.Reference;
-import org.hl7.fhir.r4.model.Resource;
-import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
-import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
-import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
-import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
-import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationStatement;
-import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
+import org.hl7.fhir.r4.model.*;
+import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationStatementPmlBase;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtPrescription;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
-import org.projecthusky.fhir.emed.ch.epr.util.References;
 
+import java.time.Instant;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -37,8 +30,7 @@ import java.util.UUID;
  * @author Quentin Ligier
  **/
 @ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-medicationstatement-card")
-public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStatement {
-
+public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStatementPmlBase {
     /**
      * Reference to the MTP that introduced this medication in the treatment plan.
      */
@@ -54,15 +46,6 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
     @Child(name = "prescription")
     @Extension(url = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-prescription", definedLocally = false)
     protected ChEmedExtPrescription prescription;
-
-    /**
-     * "Last" author of the original document if different from the author of the medical decision
-     * (MedicationStatement.informationSource)
-     */
-    @Nullable
-    @Child(name = "authorDocument")
-    @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author")
-    protected Reference authorDocument;
 
     /**
      * Empty constructor for the parser.
@@ -105,47 +88,6 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
     }
 
     /**
-     * Gets the author document element in the medication statement.
-     *
-     * @return the author document element.
-     */
-    public Reference getAuthorDocumentElement() {
-        if (this.authorDocument == null) {
-            this.authorDocument = new Reference();
-        }
-        return this.authorDocument;
-    }
-
-    /**
-     * Resolves the last author document resource in the medication statement if available.
-     *
-     * @return the author document resource or {@code null}.
-     * @throws InvalidEmedContentException if the author document resource is invalid.
-     */
-    @Nullable
-    @ExpectsValidResource
-    public DomainResource resolveAuthorDocument() throws InvalidEmedContentException {
-        final var resource = getAuthorDocumentElement().getResource();
-        if (resource == null) return null;
-
-        if (resource instanceof ChCorePatientEpr || resource instanceof ChEmedEprPractitionerRole) {
-            return (DomainResource) resource;
-        }
-        throw new InvalidEmedContentException("The last author of the original document is invalid");
-    }
-
-    /**
-     * Sets the author of the original document.
-     *
-     * @param author the author.
-     * @return this.
-     */
-    public ChEmedEprMedicationStatementPmlc setAuthorDocument(final IBaseResource author) {
-        this.authorDocument = References.createReference((Resource) author);
-        return this;
-    }
-
-    /**
      * Sets the treatment plan reference.
      *
      * @param treatmentPlan the treatment plan reference.
@@ -168,15 +110,6 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
     }
 
     /**
-     * Returns whether the author document exists.
-     *
-     * @return {@code true} if the author document exists, {@code false} otherwise.
-     */
-    public boolean hasAuthorDocument() {
-        return this.authorDocument != null && this.authorDocument.getResource() != null;
-    }
-
-    /**
      * Returns whether the treatment plan reference.
      *
      * @return {@code true} if the treatment plan reference exists, {@code false} otherwise.
@@ -194,21 +127,6 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
         return this.prescription != null && !this.prescription.isEmpty();
     }
 
-    /**
-     * Resolves the information source.
-     *
-     * @return the information source.
-     */
-    @Override
-    @ExpectsValidResource
-    public Author resolveInformationSource() {
-        if (!this.hasInformationSource()) {
-            throw new InvalidEmedContentException(
-                    "The information source is missing.");
-        }
-        return new Author(this.getInformationSource().getResource());
-    }
-
     @Override
     public ChEmedEprMedicationStatementPmlc copy() {
         final var copy = new ChEmedEprMedicationStatementPmlc();
@@ -221,7 +139,38 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
         super.copyValues(dst);
         if (dst instanceof final ChEmedEprMedicationStatementPmlc als) {
             als.treatmentPlan = treatmentPlan == null ? null : treatmentPlan.copy();
-            als.authorDocument = authorDocument == null ? null : authorDocument.copy();
         }
+    }
+
+
+    /**
+     * Checks whether a medication statement with the specified status and base dosage is to be included in a generated
+     * medication card at the specified evaluation time or not. Relies on isPmlcStatementShownInMedicationCard().
+     * @param evaluationTime Time of generation of the medication card.
+     * @return               True if a medication statement with the specified status and base dosage is to be included
+     *                       in a generated medication card at the specified time. False otherwise.
+     */
+    public boolean isShownInMedicationCard(final Instant evaluationTime) {
+        return isPmlcStatementShownInMedicationCard(evaluationTime, this.getStatus(), this.resolveBaseDosage());
+    }
+
+    /**
+     * Checks whether a medication statement with the specified status and base dosage is to be included in a generated
+     * medication card at the specified evaluation time or not.
+     *
+     * @param evaluationTime Time of generation of the medication card.
+     * @param status         The status of the medication statement.
+     * @param baseDosage     The base dosage resource of the medication statement.
+     * @return               True if a medication statement with the specified status and base dosage is to be included
+     *                       in a generated medication card at the specified time. False otherwise.
+     */
+    public static boolean isPmlcStatementShownInMedicationCard(final Instant evaluationTime,
+                                                               final MedicationStatementStatus status,
+                                                               final ChEmedEprDosage baseDosage) {
+        return status == MedicationStatementStatus.ACTIVE &&
+                (!baseDosage.hasBoundsPeriod() ||
+                 !baseDosage.getBoundsPeriod().hasEnd() ||
+                 !evaluationTime.isAfter(Objects.requireNonNull(baseDosage.getInclusiveEndTime()))
+                );
     }
 }

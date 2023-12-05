@@ -124,7 +124,7 @@ public class ChEmedEprMedication extends Medication {
      * @return {@code true} if the GTIN code exists, {@code false} otherwise.
      */
     public boolean hasGtin() {
-        if (!this.hasCode() && !this.getCode().hasCoding()) return false;
+        if (!this.hasCode() || !this.getCode().hasCoding()) return false;
         return this.getCode().getCodingFirstRep().getSystem().equals(FhirSystem.GTIN);
     }
 
@@ -134,7 +134,7 @@ public class ChEmedEprMedication extends Medication {
      * @return {@code true} if the ATC code exists, {@code false} otherwise.
      */
     public boolean hasAtc() {
-        if (!this.hasCode() && !this.getCode().hasCoding()) return false;
+        if (!this.hasCode() || !this.getCode().hasCoding()) return false;
         return this.getCode().getCodingFirstRep().getSystem().equals(FhirSystem.ATC);
     }
 

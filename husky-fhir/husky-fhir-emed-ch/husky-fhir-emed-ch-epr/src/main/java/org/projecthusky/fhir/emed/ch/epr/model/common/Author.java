@@ -13,7 +13,11 @@ package org.projecthusky.fhir.emed.ch.epr.model.common;
 import lombok.Data;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.instance.model.api.IBaseResource;
+import org.hl7.fhir.r4.model.DateTimeType;
 import org.projecthusky.fhir.emed.ch.epr.resource.*;
+
+import java.time.Instant;
+import java.util.Objects;
 
 /**
  * An author in the CH-EMED-EPR IG. It can be made up of a single (e.g. patient) or multiple resources (e.g.
@@ -42,8 +46,15 @@ public class Author {
     @Nullable
     private ChEmedEprOrganization organization;
 
+    /**
+     * The time of authorship, if specified.
+     */
+    @Nullable
+    private Instant time;
+
     public Author(final IBaseResource resource) {
         super();
+        Objects.requireNonNull(resource);
         if (resource instanceof final ChEmedEprDevice device) {
             this.setDevice(device);
         } else if (resource instanceof final ChEmedEprOrganization organization) {
@@ -59,6 +70,16 @@ public class Author {
         } else {
             throw new IllegalArgumentException("Passed resource is not a supported author: " + resource.getClass().getName());
         }
+    }
+
+    public Author(final IBaseResource resource, @Nullable DateTimeType time) {
+        this(resource);
+        this.time = (time == null)? null : time.getValueAsCalendar().toInstant();
+    }
+
+    public Author(final IBaseResource resource, @Nullable Instant time) {
+        this(resource);
+        this.time = time;
     }
 
     /**

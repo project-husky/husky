@@ -120,7 +120,7 @@ public class ChEmedEprCompositionPre extends ChEmedEprComposition {
             section = this.addSection();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    PRESCRIPTION_SECTION_CODE_VALUE,
-                                                   "Prescriptions"));
+                                                   "Prescription list"));
         }
         return section;
     }
@@ -160,7 +160,7 @@ public class ChEmedEprCompositionPre extends ChEmedEprComposition {
         if (section == null) {
             section = this.addSection();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
-                                                   ANNOTATION_SECTION_CODE_VALUE, "Annotation comment"));
+                                                   ANNOTATION_SECTION_CODE_VALUE, "Annotation comment [Interpretation] Narrative"));
         }
         return section;
     }

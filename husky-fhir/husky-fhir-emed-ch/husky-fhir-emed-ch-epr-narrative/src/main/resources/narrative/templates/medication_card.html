@@ -8,7 +8,7 @@
   ~ whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
   */-->
 <th:block th:switch="${lang.name()}">
-    <h1>Carte de médication</h1>
+    <h1 id="card-title">Carte de médication</h1>
 
     <table class="table-header">
         <tr>
@@ -16,16 +16,21 @@
                 <h2>Patient</h2>
                 <th:block th:include="~{patient :: display-name-address-contact(${resource.resolvePatient()}, ${lang})}"/>
             </td>
-            <td class="cell-author">
-                <h2>Dernière modification</h2>
-                TODO
-            </td>
+            <th:block th:if="${lastStatement != null}">
+                <td class="cell-author">
+                    <h2>Dernière modification</h2>
+                    <th:block th:include="~{last_modif :: display-last-modification(${lastStatement}, ${lang})}"/>
+                </td>
+            </th:block>
         </tr>
     </table>
 
-    <h2>Traitements actifs</h2>
-    <th:block th:insert="~{medication_card_fragments :: table(${activeTreatments}, ${lang})}"/>
-
-    <h2>Traitements en réserve</h2>
-    <th:block th:insert="~{medication_card_fragments :: table(${asneededTreatments}, ${lang})}"/>
+    <div id="active-treatments">
+        <h2 id="active-treatments-header">Traitements actifs</h2>
+        <th:block th:insert="~{medication_card_fragments :: table(${activeTreatments}, ${lang})}"/>
+    </div>
+    <div id="reserve-treatments">
+        <h2 id="reserve-treatments-header">Traitements en réserve</h2>
+        <th:block th:insert="~{medication_card_fragments :: table(${asneededTreatments}, ${lang})}"/>
+    </div>
 </th:block>
