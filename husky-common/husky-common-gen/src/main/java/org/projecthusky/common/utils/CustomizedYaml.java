@@ -10,14 +10,14 @@
  */
 package org.projecthusky.common.utils;
 
-import java.util.Calendar;
-
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.introspector.Property;
 import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
+
+import java.util.Calendar;
 
 /**
  * The Class CustomizedYaml is just used internally in order to simplify and
@@ -35,7 +35,7 @@ public class CustomizedYaml extends Yaml {
 		DumperOptions options = new DumperOptions();
 		options.setTimeZone(Calendar.getInstance().getTimeZone());
 
-		Representer representer = new Representer() {
+		Representer representer = new Representer(options) {
 			@Override
 			protected NodeTuple representJavaBeanProperty(Object javaBean, Property property,
 					Object propertyValue, Tag customTag) {
