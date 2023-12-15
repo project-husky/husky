@@ -37,6 +37,7 @@ org.projecthusky.common.utils.xml
 org.projecthusky.communication
 org.projecthusky.communication.at
 org.projecthusky.communication.at.xd.storedquery
+org.projecthusky.communication.atna
 org.projecthusky.communication.ch
 org.projecthusky.communication.ch.camel
 org.projecthusky.communication.ch.camel.chpharm1
@@ -108,6 +109,7 @@ org.projecthusky.fhir.emed.ch.epr.resource.pre
 org.projecthusky.fhir.emed.ch.epr.service
 org.projecthusky.fhir.emed.ch.epr.util
 org.projecthusky.fhir.emed.ch.epr.validator
+org.projecthusky.fhir.emed.ch.epr.validator.logicvalidator
 org.projecthusky.fhir.structures.ch
 org.projecthusky.fhir.structures.gen
 org.projecthusky.fhir.structures.utils
