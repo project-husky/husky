@@ -14,15 +14,9 @@ import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.*;
-import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
-import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
-import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
-import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationStatement;
-import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationStatementPmlBase;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
-import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 import java.util.UUID;
 
@@ -32,16 +26,7 @@ import java.util.UUID;
  * @author Quentin Ligier
  **/
 @ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-medicationstatement-list")
-public class ChEmedEprMedicationStatementPml extends ChEmedEprMedicationStatement {
-    /**
-     * Author of the original document if different from the author of the medical decision
-     * (MedicationStatement.informationSource)
-     */
-    @Nullable
-    @Child(name = "authorDocument")
-    @Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author")
-    protected Reference authorDocument;
-
+public class ChEmedEprMedicationStatementPml extends ChEmedEprMedicationStatementPmlBase {
     /**
      * Reference to the original document.
      */
@@ -60,60 +45,10 @@ public class ChEmedEprMedicationStatementPml extends ChEmedEprMedicationStatemen
     /**
      * Constructor that pre-populates fields
      *
-     * @param entryUuid
+     * @param entryUuid The entry's UUID.
      */
     public ChEmedEprMedicationStatementPml(final UUID entryUuid) {
         super(entryUuid);
-    }
-
-    /**
-     * Gets the author document element in the medication statement.
-     *
-     * @return the author document element.
-     */
-    public Reference getAuthorDocumentElement() {
-        if (this.authorDocument == null) {
-            this.authorDocument = new Reference();
-        }
-        return this.authorDocument;
-    }
-
-    /**
-     * Gets the last author document resource in the medication statement if available.
-     *
-     * @return the author document resource or {@code null}.
-     * @throws InvalidEmedContentException if the author document resource is invalid.
-     */
-    @Nullable
-    @ExpectsValidResource
-    public DomainResource getAuthorDocument() throws InvalidEmedContentException {
-        final var resource = getAuthorDocumentElement().getResource();
-        if (resource == null) return null;
-
-        if (resource instanceof ChCorePatientEpr || resource instanceof ChEmedEprPractitionerRole) {
-            return (DomainResource) resource;
-        }
-        throw new InvalidEmedContentException("The last author of the original document is invalid");
-    }
-
-    /**
-     * Returns whether author document exists.
-     *
-     * @return {@code true} if the author document exists, {@code false} otherwise.
-     */
-    public boolean hasAuthorDocument() {
-        return this.authorDocument != null && this.authorDocument.getResource() != null;
-    }
-
-    /**
-     * Sets the author of the original document.
-     *
-     * @param author the author.
-     * @return this.
-     */
-    public ChEmedEprMedicationStatementPml setAuthorDocument(final IBaseResource author) {
-        this.authorDocument = References.createReference((Resource) author);
-        return this;
     }
 
     /**
@@ -159,7 +94,6 @@ public class ChEmedEprMedicationStatementPml extends ChEmedEprMedicationStatemen
     public void copyValues(final MedicationStatement dst) {
         super.copyValues(dst);
         if (dst instanceof final ChEmedEprMedicationStatementPml als) {
-            als.authorDocument = authorDocument == null ? null : authorDocument.copy();
             als.parentDocument = parentDocument == null ? null : parentDocument.copy();
         }
     }

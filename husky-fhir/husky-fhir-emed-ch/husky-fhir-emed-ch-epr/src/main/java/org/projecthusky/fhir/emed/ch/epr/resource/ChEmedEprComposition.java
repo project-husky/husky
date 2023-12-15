@@ -169,7 +169,7 @@ public abstract class ChEmedEprComposition extends Composition {
         if (!this.hasDate()) {
             throw new InvalidEmedContentException("The document's creation date and time is missing.");
         }
-        return this.getDate().toInstant();
+        return this.getDateElement().getValueAsCalendar().toInstant();
     }
 
     /**
@@ -182,6 +182,21 @@ public abstract class ChEmedEprComposition extends Composition {
                     || author.getResource() instanceof RelatedPerson
                     || author.getResource() instanceof PractitionerRole) {
                 return author.getResource();
+            }
+        }
+        throw new InvalidEmedContentException("The composition has no human author");
+    }
+
+    @ExpectsValidResource
+    public @Nullable Instant resolveFirstHumanAuthorTime() {
+        for (final var author : this.getAuthor()) {
+            if (author.getResource() instanceof Patient
+                    || author.getResource() instanceof RelatedPerson
+                    || author.getResource() instanceof PractitionerRole) {
+                org.hl7.fhir.r4.model.Extension extension =
+                        author.getExtensionByUrl("http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-time");
+                if (extension != null) return ((DateTimeType) extension.getValue()).getValueAsCalendar().toInstant();
+                return null;
             }
         }
         throw new InvalidEmedContentException("The composition has no human author");
@@ -302,7 +317,7 @@ public abstract class ChEmedEprComposition extends Composition {
         if (section == null) {
             section = this.addSection();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
-                                                   ORIGINAL_REPR_SECTION_CODE_VALUE, "Clinical presentation"));
+                                                   ORIGINAL_REPR_SECTION_CODE_VALUE, "Clinical presentation Document"));
         }
         return section;
     }

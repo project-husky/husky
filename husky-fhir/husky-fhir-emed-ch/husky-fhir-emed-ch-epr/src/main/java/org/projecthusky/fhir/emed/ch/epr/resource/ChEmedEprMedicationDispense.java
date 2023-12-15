@@ -4,10 +4,7 @@ import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.instance.model.api.IBaseResource;
-import org.hl7.fhir.r4.model.Dosage;
-import org.hl7.fhir.r4.model.MedicationDispense;
-import org.hl7.fhir.r4.model.Quantity;
-import org.hl7.fhir.r4.model.StringType;
+import org.hl7.fhir.r4.model.*;
 import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
@@ -16,6 +13,7 @@ import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
 import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedQuantityWithEmedUnits;
+import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EffectiveDosageInstructions;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EmedReference;
 import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprMedicationDis;
@@ -150,7 +148,7 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
         if (!this.hasWhenHandedOver()) {
             throw new InvalidEmedContentException("the date/time of when the product was distributed is missing.");
         }
-        return this.getWhenHandedOver().toInstant();
+        return this.getWhenHandedOverElement().getValueAsCalendar().toInstant();
     }
 
     /**
@@ -454,15 +452,6 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
         return this.dosageInstruction;
     }
 
-    /**
-     * @param theDosage
-     * @return Returns a reference to <code>this</code> for easy method chaining
-     */
-    @Override
-    public MedicationDispense setDosageInstruction(final List<Dosage> theDosage) {
-        return super.setDosageInstruction(theDosage);
-    }
-
     @Override
     public ChEmedEprDosage addDosageInstruction() {
         final var dosage = new ChEmedEprDosage();
@@ -524,5 +513,48 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
             als.pharmaceuticalAdvice = pharmaceuticalAdvice == null ? null : pharmaceuticalAdvice.copy();
             als.treatmentPlan = treatmentPlan == null ? null : treatmentPlan.copy();
         }
+    }
+
+    /**
+     * Checks the list of performers and returns the first performer with a final checker function and a valid medical
+     * author resource (i.e. ChEmedEprPractitionerRole or ChCorePatientEpr or ChEmedEprRelatedPerson) and sets the time
+     * to the value of the whenHandedOver field.
+     *
+     * @return the medical Author with the relevant timestamp attached.
+     */
+    @Override
+    @ExpectsValidResource
+    public Author resolveMedicalAuthor() {
+        if (hasPerformer()) {
+            for (var performer : getPerformer()) {
+                if (performer.hasFunction()) {
+                    //if (performer.getFunction().hasCoding() && !performer.getFunction().getCoding().isEmpty()) {
+                    //    if (MedicationdispensePerformerFunction.FINALCHECKER.toCode().equals(performer.getFunction().getCodingFirstRep().getCode())) {
+                            if (performer.hasActor()) {
+                                final var actorResource = performer.getActor().getResource();
+                                if (       actorResource instanceof ChEmedEprPractitionerRole
+                                        || actorResource instanceof ChCorePatientEpr
+                                        || actorResource instanceof ChEmedEprRelatedPerson
+                                ) {
+                                    return new Author(actorResource, resolveMedicalAuthorshipTimestamp());
+                                } else throw new InvalidEmedContentException("The performer actor has to be a PractitionerRole or a Patient or a RelatedPerson.");
+                            } else throw new InvalidEmedContentException("The performer has no actor.");
+                        //}
+                    //} else throw new InvalidEmedContentException("There are performers without a specified coding for their function.");
+                } else throw new InvalidEmedContentException("There are performers without specified function.");
+            }
+            throw new InvalidEmedContentException("The dispense resource has performer(s) but is missing at least one final checker performer.");
+        }
+        throw new InvalidEmedContentException("Missing performer.");
+    }
+
+    /**
+     *
+     * @return The time of medical authorship, i.e. whenHandedOver.
+     */
+    @Override
+    @ExpectsValidResource
+    public Instant resolveMedicalAuthorshipTimestamp() {
+        return resolveWhenHandedOver();
     }
 }

@@ -102,7 +102,7 @@ public abstract class ChEmedEprDocument extends Bundle {
         if (!this.hasTimestamp()) {
             throw new InvalidEmedContentException("The document timestamp is missing");
         }
-        return this.getTimestamp().toInstant();
+        return this.getTimestampElement().getValueAsCalendar().toInstant();
     }
 
     /**

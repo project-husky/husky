@@ -17,12 +17,12 @@ import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.xml.bind.JAXBException;
 
+import org.junit.jupiter.api.Test;
 import org.projecthusky.cda.elga.generated.artdecor.ems.enums.ElgaDiagnosesicherheit;
 import org.projecthusky.cda.elga.generated.artdecor.ems.enums.EpimsMeldepflichtigeKrankheiten;
 import org.projecthusky.cda.elga.models.PatientCdaAt;
@@ -34,12 +34,13 @@ import org.projecthusky.common.basetypes.NameBaseType;
 import org.projecthusky.common.basetypes.OrganizationBaseType;
 import org.projecthusky.common.basetypes.TelecomBaseType;
 import org.projecthusky.common.enums.AdministrativeGender;
+import org.projecthusky.common.enums.TelecomAddressUse;
 import org.projecthusky.common.model.Address;
 import org.projecthusky.common.model.Code;
 import org.projecthusky.common.model.Identificator;
 import org.projecthusky.common.model.Name;
 import org.projecthusky.common.model.Organization;
-import org.junit.jupiter.api.Test;
+import org.projecthusky.common.model.Telecom;
 
 /**
  * Test of {@link Arztmeldung}.
@@ -70,17 +71,17 @@ class ArztmeldungTest {
 		patientName.setFamily("Musterpatient");
 		patientName.setGiven("Max");
 		patientName.setUsage(null);
-		patient.getNames().addAll(Arrays.asList(patientName));
+		patient.setName(patientName);
 
 		AddressBaseType patAddress = new AddressBaseType();
 		patAddress.setStreetName("Teststraße");
 		patAddress.setBuildingNumber("58b");
 		patAddress.setCity("Graz");
 		patAddress.setPostalCode("8020");
-		patAddress.setCountry("Österreich");
+		patAddress.setCountry("AUT");
 		patAddress.setUsage(null);
 		Address patAddress1 = new Address(patAddress);
-		patient.getAddresses().addAll(Arrays.asList(patAddress1));
+		patient.setAddresses(List.of(patAddress1));
 
 		patient.setBirthday(ZonedDateTime.now());
 		patient.setAdministrativeGender(AdministrativeGender.MALE);
@@ -128,7 +129,7 @@ class ArztmeldungTest {
 		addressBaseTypeCust.setStreetAddressLine1("Radetzkystraße 2");
 		addressBaseTypeCust.setPostalCode("1030");
 		addressBaseTypeCust.setCity("Wien");
-		addressBaseTypeCust.setCountry("Österreich");
+		addressBaseTypeCust.setCountry("AUT");
 		addressCustodian.add(addressBaseTypeCust);
 		custodian.setAddressList(addressCustodian);
 		OrganizationAt custodianOrg = new OrganizationAt(custodian);
@@ -148,7 +149,7 @@ class ArztmeldungTest {
 		informationRecipient.setName("BMGF");
 
 		Identificator recipientIdentificator = new Identificator("1.2.40.0.34.3.1.1");
-		recipientIdentificator.setAssigningAuthorityName("BMGF");
+		recipientIdentificator.setAssigningAuthorityName("moh-at");
 		informationRecipient.setId(recipientIdentificator);
 		Organization recipientOrganization = new Organization(new OrganizationBaseType());
 		Identificator recId = new Identificator("1.2.40.0.34.3.1.1", "BMSGPK");
@@ -165,7 +166,7 @@ class ArztmeldungTest {
 		addressBaseType.setStreetAddressLine1("Radetzkystraße 2");
 		addressBaseType.setPostalCode("1030");
 		addressBaseType.setCity("Wien");
-		addressBaseType.setCountry("Österreich");
+		addressBaseType.setCountry("AUT");
 		addressOrgList.add(addressBaseType);
 		recipientOrganization.setAddressList(addressOrgList);
 		ArrayList<TelecomBaseType> telecomList = new ArrayList<>();
@@ -175,6 +176,29 @@ class ArztmeldungTest {
 		recipientOrganization.setTelecomList(telecomList);
 		informationRecipient.setReceivedOrganization(recipientOrganization);
 		document.setInformationRecipient(informationRecipient);
+
+		document.setStartPossibleInfection(ZonedDateTime.now());
+		document.setStartPhysicianVisit(ZonedDateTime.now());
+
+		PractitionerCdaAt reportingPhysician = new PractitionerCdaAt();
+		reportingPhysician.setIdentifier(List.of(new Identificator("1.2.3.4.5.6", "123")));
+		reportingPhysician.setNames(List.of(authName));
+		reportingPhysician.setOrganization(author);
+
+		Telecom telecom = new Telecom();
+		telecom.setPhone("0630111234232");
+		telecom.setUsage(TelecomAddressUse.BUSINESS);
+		reportingPhysician.getTelecom().add(telecom);
+
+		AddressBaseType physicianAddress = new AddressBaseType();
+		physicianAddress.setStreetName("Testgasse");
+		physicianAddress.setBuildingNumber("56");
+		physicianAddress.setPostalCode("1020");
+		physicianAddress.setCity("Wien");
+		physicianAddress.setCountry("AUT");
+		Address address = new Address(physicianAddress);
+		reportingPhysician.getAddresses().add(address);
+		document.setReportingPhysician(reportingPhysician);
 
 		CaseIdentification caseIdentification = new CaseIdentification();
 		caseIdentification.setDiagnosisDate(ZonedDateTime.of(2020, 9, 8, 0, 0, 0, 0, ZoneOffset.systemDefault()));

@@ -118,7 +118,7 @@ public class ChEmedEprCompositionPadv extends ChEmedEprComposition {
             section = this.addSection();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    PHARMACEUTICAL_ADVICE_SECTION_CODE_VALUE,
-                                                   "Medication pharmaceutical advice.brief"));
+                                                   "Medication pharmaceutical advice.brief Document"));
         }
         return section;
     }
@@ -152,7 +152,7 @@ public class ChEmedEprCompositionPadv extends ChEmedEprComposition {
         if (section == null) {
             section = this.addSection();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
-                                                   ANNOTATION_SECTION_CODE_VALUE, "Annotation comment"));
+                                                   ANNOTATION_SECTION_CODE_VALUE, "Annotation comment [Interpretation] Narrative"));
         }
         return section;
     }

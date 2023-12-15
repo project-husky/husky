@@ -100,7 +100,7 @@ public class ConvenienceCommunication extends CamelService {
     /**
      * The affinity domain set-up
      */
-    private AffinityDomain affinityDomain = null;
+    private final ThreadLocal<AffinityDomain> affinityDomain = new ThreadLocal<>();
 
     /**
      * The ATNA config mode (secure or unsecure)
@@ -119,14 +119,13 @@ public class ConvenienceCommunication extends CamelService {
     /**
      * The IPF transaction data to send XDS Documents
      */
-	private ProvideAndRegisterDocumentSet txnData = null;
+    private final ThreadLocal<ProvideAndRegisterDocumentSet> txnData = new ThreadLocal<>();
 
     /**
      * Instantiates a new convenience communication without affinity domain set-up. ATNA audit is disabled (unsecure)
      */
     public ConvenienceCommunication() {
         super();
-        this.affinityDomain = null;
         this.atnaConfigMode = AtnaConfigMode.UNSECURE;
     }
 
@@ -137,7 +136,7 @@ public class ConvenienceCommunication extends CamelService {
      * @param affinityDomain the affinity domain configuration
      */
     public ConvenienceCommunication(AffinityDomain affinityDomain) {
-        this.affinityDomain = affinityDomain;
+        this.affinityDomain.set(affinityDomain);
         this.atnaConfigMode = AtnaConfigMode.UNSECURE;
     }
 
@@ -156,7 +155,7 @@ public class ConvenienceCommunication extends CamelService {
     public ConvenienceCommunication(AffinityDomain affinityDomain, AtnaConfigMode atnaConfigMode,
                                     DocumentMetadataExtractionMode documentMetadataExtractionMode,
                                     SubmissionSetMetadataExtractionMode submissionSetMetadataExtractionMode) {
-        this.affinityDomain = affinityDomain;
+        this.affinityDomain.set(affinityDomain);
         this.atnaConfigMode = atnaConfigMode;
         this.documentMetadataExtractionMode = documentMetadataExtractionMode;
         this.submissionSetMetadataExtractionMode = submissionSetMetadataExtractionMode;
@@ -309,7 +308,7 @@ public class ConvenienceCommunication extends CamelService {
         var association = new Association(AssociationType.HAS_MEMBER, UUID.randomUUID().toString(),
                 folderEntryUUID,
                 documentEntryUUID);
-        txnData.getAssociations().add(association);
+        getTxnData().getAssociations().add(association);
     }
 
     /**
@@ -319,10 +318,11 @@ public class ConvenienceCommunication extends CamelService {
      * @return the metadata of the new folder
      */
     public FolderMetadata addFolder(Code submissionSetContentType) {
-        if (txnData == null) {
-            txnData = new ProvideAndRegisterDocumentSet();
+        if (getTxnData() == null) {
+            this.txnData.set(new ProvideAndRegisterDocumentSet());
         }
-
+        
+        ProvideAndRegisterDocumentSet txnData = getTxnData();
         var folder = new Folder();
         folder.assignEntryUuid();
 
@@ -362,10 +362,11 @@ public class ConvenienceCommunication extends CamelService {
      * @return the doc to get the metadata from
      */
     protected DocumentMetadata addXdsDocument(Document doc, DocumentDescriptor desc, Document metadataDoc) {
-        if (txnData == null) {
-            txnData = new ProvideAndRegisterDocumentSet();
+        if (getTxnData() == null) {
+            this.txnData.set(new ProvideAndRegisterDocumentSet());
         }
-
+    
+        ProvideAndRegisterDocumentSet txnData = getTxnData();
         DocumentMetadata docMetadata = null;
 
         if (metadataDoc != null) {
@@ -416,7 +417,7 @@ public class ConvenienceCommunication extends CamelService {
      * Resets the transaction data (SubmissionSet and DocumentMetadata)
      */
     public void clearDocuments() {
-        txnData = new ProvideAndRegisterDocumentSet();
+        txnData.set(new ProvideAndRegisterDocumentSet());
     }
 
     /**
@@ -427,9 +428,11 @@ public class ConvenienceCommunication extends CamelService {
      */
     public XdmContents createXdmContents(OutputStream outputStream) {
         if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
-            txnData.setSubmissionSet(generateDefaultSubmissionSetAttributes());
+            getTxnData().setSubmissionSet(generateDefaultSubmissionSetAttributes());
             linkDocumentEntryWithSubmissionSet();
         }
+      
+        ProvideAndRegisterDocumentSet txnData = getTxnData();
         final var xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData));
         xdmContents.createZip(outputStream, txnData);
         return xdmContents;
@@ -444,10 +447,12 @@ public class ConvenienceCommunication extends CamelService {
      * @return the XdmContents object
      */
     public XdmContents createXdmContents(OutputStream outputStream, XdmContents xdmContents) {
+        ProvideAndRegisterDocumentSet txnData = getTxnData();
         if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
             txnData.setSubmissionSet(generateDefaultSubmissionSetAttributes());
             linkDocumentEntryWithSubmissionSet();
         }
+        
         xdmContents.createZip(outputStream, txnData);
         return xdmContents;
     }
@@ -459,6 +464,7 @@ public class ConvenienceCommunication extends CamelService {
      * @return the XdmContents object
      */
     public XdmContents createXdmContents(String filePath) {
+        ProvideAndRegisterDocumentSet txnData = getTxnData();
         if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
             txnData.setSubmissionSet(generateDefaultSubmissionSetAttributes());
             linkDocumentEntryWithSubmissionSet();
@@ -476,6 +482,7 @@ public class ConvenienceCommunication extends CamelService {
      * @return the XdmContents object
      */
     public XdmContents createXdmContents(String filePath, XdmContents xdmContents) {
+        ProvideAndRegisterDocumentSet txnData = getTxnData();
         if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
             txnData.setSubmissionSet(generateDefaultSubmissionSetAttributes());
             linkDocumentEntryWithSubmissionSet();
@@ -492,6 +499,7 @@ public class ConvenienceCommunication extends CamelService {
      * @return the XdmContents object
      */
     public XdmContents createXdmContents(SubmissionSetMetadata submissionSetMetadata, OutputStream outputStream) {
+        ProvideAndRegisterDocumentSet txnData = getTxnData();
         if (txnData.getSubmissionSet() == null) {
             txnData.setSubmissionSet(new SubmissionSet());
         }
@@ -541,28 +549,28 @@ public class ConvenienceCommunication extends CamelService {
     }
 
     private void linkDocumentEntryWithSubmissionSet() {
-
-        for (Document document : this.txnData.getDocuments()) {
+        ProvideAndRegisterDocumentSet txnData = getTxnData();
+        for (Document document : txnData.getDocuments()) {
             // link document entry to submission set
             var association = new Association();
 
             association.setAssociationType(AssociationType.HAS_MEMBER);
-            association.setSourceUuid(this.txnData.getSubmissionSet().getEntryUuid());
+            association.setSourceUuid(txnData.getSubmissionSet().getEntryUuid());
             association.setTargetUuid(document.getDocumentEntry().getEntryUuid());
             association.setLabel(AssociationLabel.ORIGINAL);
             association.assignEntryUuid();
 
-            this.txnData.getAssociations().add(association);
+            txnData.getAssociations().add(association);
         }
 
-        for (Folder folder : this.txnData.getFolders()) {
+        for (Folder folder : txnData.getFolders()) {
             // link folder to submission set
             var association = new Association(AssociationType.HAS_MEMBER,
-                    this.txnData.getSubmissionSet().getEntryUuid(), txnData.getSubmissionSet().getEntryUuid(),
+                    txnData.getSubmissionSet().getEntryUuid(), txnData.getSubmissionSet().getEntryUuid(),
                     folder.getEntryUuid());
             association.assignEntryUuid();
 
-            this.txnData.getAssociations().add(association);
+            txnData.getAssociations().add(association);
         }
 
     }
@@ -573,7 +581,7 @@ public class ConvenienceCommunication extends CamelService {
      * @return the submission set
      */
     public SubmissionSet generateDefaultSubmissionSetAttributes() {
-
+        ProvideAndRegisterDocumentSet txnData = getTxnData();
         if (txnData.getSubmissionSet() == null) {
             txnData.setSubmissionSet(new SubmissionSet());
         }
@@ -590,7 +598,8 @@ public class ConvenienceCommunication extends CamelService {
     }
 
 	private void setSubSetDetailsFromDocument(SubmissionSet subSet) {
-		log.info("count of documents {}", txnData.getDocuments().size());
+        ProvideAndRegisterDocumentSet txnData = getTxnData();
+        log.info("count of documents {}", txnData.getDocuments().size());
 		for (Document document : txnData.getDocuments()) {
 			final var docEntry = document.getDocumentEntry();
 			
@@ -608,7 +617,8 @@ public class ConvenienceCommunication extends CamelService {
 	}
 
 	private void setSubSetDetailsFromFolder(SubmissionSet subSet) {
-		for (Folder folder : txnData.getFolders()) {
+        ProvideAndRegisterDocumentSet txnData = getTxnData();
+        for (Folder folder : txnData.getFolders()) {
 			if (folder.getPatientId() == null) {
 				throw new IllegalStateException(
 						"Missing destination patient ID in DocumentMetadata of first document.");
@@ -666,9 +676,11 @@ public class ConvenienceCommunication extends CamelService {
      * @return the affinity domain
      */
     public AffinityDomain getAffinityDomain() {
-        if (affinityDomain == null)
-            affinityDomain = new AffinityDomain(null, null, new ArrayList<>());
-        return affinityDomain;
+        if (affinityDomain.get() == null) {
+            affinityDomain.set(new AffinityDomain(null, null, new ArrayList<>()));
+        }
+        
+        return affinityDomain.get();
     }
 
     /**
@@ -677,7 +689,7 @@ public class ConvenienceCommunication extends CamelService {
      * @param affinityDomain the affinity domain set-up
      */
     public void setAffinityDomain(AffinityDomain affinityDomain) {
-        this.affinityDomain = affinityDomain;
+        this.affinityDomain.set(affinityDomain);
     }
 
     /**
@@ -715,7 +727,7 @@ public class ConvenienceCommunication extends CamelService {
      * @return the transaction data object
      */
     public ProvideAndRegisterDocumentSet getTxnData() {
-        return this.txnData;
+        return this.txnData.get();
     }
 
     /**
@@ -781,14 +793,15 @@ public class ConvenienceCommunication extends CamelService {
     protected QueryResponse queryDocumentQuery(AbstractStoredQuery query, SecurityHeaderElement securityHeader,
 			QueryReturnType returnType, String messageId)
             throws Exception {
+        AffinityDomain affinityDomain = getAffinityDomain();
         final var queryRegistry = new QueryRegistry(query.getIpfQuery());
         queryRegistry.setReturnType(returnType);
 
-		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains(HTTPS_LITERAL);
+		boolean secure = affinityDomain.getRepositoryDestination().getUri().toString().contains(HTTPS_LITERAL);
 
         final var endpoint = String.format(
                 "xds-iti18://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=%s",
-				this.affinityDomain.getRepositoryDestination().getUri().toString().replace(HTTPS_LITERAL, "")
+				affinityDomain.getRepositoryDestination().getUri().toString().replace(HTTPS_LITERAL, "")
 						.replace(HTTP_LITERAL, ""),
                 SERVER_IN_LOGGER, SERVER_IN_LOGGER, SERVER_OUT_LOGGER, SERVER_OUT_LOGGER, secure,
                 this.atnaConfigMode.equals(AtnaConfigMode.SECURE), AUDIT_CONTEXT);
@@ -838,6 +851,7 @@ public class ConvenienceCommunication extends CamelService {
 	public RetrievedDocumentSet retrieveDocuments(DocumentRequest[] docReq, SecurityHeaderElement security,
 			String messageId)
             throws Exception {
+	    AffinityDomain affinityDomain = getAffinityDomain();
         final var retrieveDocumentSet = new RetrieveDocumentSet();
 
         for (final DocumentRequest element : docReq) {
@@ -846,10 +860,10 @@ public class ConvenienceCommunication extends CamelService {
             }
         }
 
-		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains(HTTPS_LITERAL);
+		boolean secure = affinityDomain.getRepositoryDestination().getUri().toString().contains(HTTPS_LITERAL);
         final var endpoint = String.format(
                 "xds-iti43://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=%s",
-				this.affinityDomain.getRepositoryDestination().getUri().toString().replace(HTTPS_LITERAL, "")
+				affinityDomain.getRepositoryDestination().getUri().toString().replace(HTTPS_LITERAL, "")
 						.replace(HTTP_LITERAL, ""),
                 SERVER_IN_LOGGER, SERVER_IN_LOGGER, SERVER_OUT_LOGGER, SERVER_OUT_LOGGER, secure,
                 this.atnaConfigMode.equals(AtnaConfigMode.SECURE), AUDIT_CONTEXT);
@@ -919,6 +933,7 @@ public class ConvenienceCommunication extends CamelService {
 	public Response submit(SubmissionSetMetadata submissionSetMetadata, SecurityHeaderElement security,
 			String messageId)
             throws Exception {
+	    ProvideAndRegisterDocumentSet txnData = getTxnData();
         if (txnData.getSubmissionSet() == null) {
             txnData.setSubmissionSet(new SubmissionSet());
         }
@@ -944,6 +959,7 @@ public class ConvenienceCommunication extends CamelService {
     public Response submitReplacement(SubmissionSetMetadata submissionSetMetadata, String idOfOriginDocument,
 			SecurityHeaderElement security, String messageId)
             throws Exception {
+        ProvideAndRegisterDocumentSet txnData = getTxnData();
         if (txnData.getSubmissionSet() == null) {
             txnData.setSubmissionSet(new SubmissionSet());
         }
@@ -971,7 +987,9 @@ public class ConvenienceCommunication extends CamelService {
 	private Response submit(SecurityHeaderElement security, Association association, String messageId)
 			throws Exception {
 		log.debug("submit document");
-		setDefaultKeystoreTruststore(affinityDomain.getRepositoryDestination());
+		AffinityDomain affinityDomain = getAffinityDomain();
+		ProvideAndRegisterDocumentSet txnData = getTxnData();
+        setDefaultKeystoreTruststore(affinityDomain.getRepositoryDestination());
 
         if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
 			log.debug("extract submission set metadata");
@@ -991,10 +1009,10 @@ public class ConvenienceCommunication extends CamelService {
         }
 
 		log.debug("prepare submit of document");
-		boolean secure = this.affinityDomain.getRepositoryDestination().getUri().toString().contains(HTTPS_LITERAL);
+		boolean secure = affinityDomain.getRepositoryDestination().getUri().toString().contains(HTTPS_LITERAL);
 		final var endpoint = String.format(
 				"xds-iti41://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=%s",
-				this.affinityDomain.getRepositoryDestination().getUri().toString().replace(HTTPS_LITERAL, "")
+				affinityDomain.getRepositoryDestination().getUri().toString().replace(HTTPS_LITERAL, "")
 						.replace(HTTP_LITERAL, ""),
                 SERVER_IN_LOGGER, SERVER_IN_LOGGER, SERVER_OUT_LOGGER, SERVER_OUT_LOGGER, secure,
 				this.atnaConfigMode.equals(AtnaConfigMode.SECURE), AUDIT_CONTEXT);

@@ -130,7 +130,7 @@ public class ChEmedEprCompositionMtp extends ChEmedEprComposition {
             section = this.addSection();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    TREATMENT_PLAN_SECTION_CODE_VALUE,
-                                                   "Medication treatment plan.brief"));
+                                                   "Medication treatment plan.brief Document"));
         }
         return section;
     }
@@ -173,7 +173,7 @@ public class ChEmedEprCompositionMtp extends ChEmedEprComposition {
         if (section == null) {
             section = this.addSection();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
-                                                   ANNOTATION_SECTION_CODE_VALUE, "Annotation comment"));
+                                                   ANNOTATION_SECTION_CODE_VALUE, "Annotation comment [Interpretation] Narrative"));
         }
         return section;
     }

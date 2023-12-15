@@ -16,11 +16,10 @@ import org.hl7.fhir.r4.model.Dosage;
 import org.hl7.fhir.r4.model.Period;
 import org.hl7.fhir.r4.model.Timing;
 import org.projecthusky.common.utils.datatypes.Oids;
-import org.projecthusky.common.utils.time.DateTimes;
-import org.projecthusky.common.utils.time.Hl7Dtm;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.RouteOfAdministrationEdqm;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.emed.ch.common.util.FhirDateTimes;
 import org.projecthusky.fhir.emed.ch.epr.enums.TimingEventAmbu;
 import org.projecthusky.fhir.emed.ch.epr.model.common.AmountPerDuration;
 import org.projecthusky.fhir.emed.ch.epr.model.common.AmountQuantity;
@@ -145,6 +144,7 @@ public class ChEmedEprDosage extends Dosage {
      * @param patientInstruction Instructions in terms that are understood by the patient or consumer.
      * @return this.
      */
+    @Override
     public ChEmedEprDosage setPatientInstruction(final String patientInstruction) {
         super.setPatientInstruction(patientInstruction);
         return this;
@@ -251,7 +251,7 @@ public class ChEmedEprDosage extends Dosage {
         if (!boundsPeriod.hasStart()) {
             return null;
         }
-        return boundsPeriod.getStart().toInstant();
+        return boundsPeriod.getStartElement().getValueAsCalendar().toInstant();
     }
 
     /**
@@ -270,9 +270,7 @@ public class ChEmedEprDosage extends Dosage {
         if (!boundsPeriod.hasEnd()) {
             return null;
         }
-        Hl7Dtm dtm = Hl7Dtm.fromHl7(boundsPeriod.getEndElement().getAsV3());
-        dtm = DateTimes.completeToLatestInstant(dtm);
-        return dtm.toInstant();
+        return FhirDateTimes.completeToLatestInstant(boundsPeriod.getEndElement());
     }
 
     /**
@@ -319,6 +317,19 @@ public class ChEmedEprDosage extends Dosage {
         }
         return AmountQuantity.fromQuantity(this.getMaxDosePerAdministration());
     }
+    /**
+     * Returns the resolved max dose per lifetime, or {@code null} if it is not specified. Throws if it is
+     * specified but invalid.
+     */
+    @ExpectsValidResource
+    @Nullable
+    public AmountQuantity resolveMaxDosePerLifetime() {
+        if (!this.hasMaxDosePerLifetime()) {
+            return null;
+        }
+        return AmountQuantity.fromQuantity(this.getMaxDosePerLifetime());
+    }
+
 
     @Override
     public ChEmedEprDosage copy() {

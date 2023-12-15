@@ -162,6 +162,9 @@ public class PractitionerAt {
 	}
 
 	public List<Address> getAddresses() {
+		if (this.addresses == null) {
+			this.addresses = new LinkedList<>();
+		}
 		return addresses;
 	}
 

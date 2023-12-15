@@ -3,7 +3,6 @@ package org.projecthusky.fhir.emed.ch.epr.validator;
 import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.r5.elementmodel.Manager;
 import org.hl7.fhir.r5.utils.EOperationOutcome;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.epr.service.ChEmedEprParser;
@@ -25,7 +24,6 @@ class ChEmedEprValidatorTest {
     private static final Logger log = LoggerFactory.getLogger(ChEmedEprValidatorTest.class);
 
     @Test
-    @Disabled
     void validateDocumentBundle() throws IOException, URISyntaxException, EOperationOutcome {
         final var ctx = FhirContext.forR4Cached();
         final var validator = new ChEmedEprValidator();

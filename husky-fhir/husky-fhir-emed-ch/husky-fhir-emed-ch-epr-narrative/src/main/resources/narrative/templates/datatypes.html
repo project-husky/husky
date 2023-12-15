@@ -31,11 +31,20 @@
 
 <th:block th:fragment="dosage-intake(dosageIntake, lang)">
     <th:block th:if="${dosageIntake} == null">—</th:block>
-    <th:block th:if="${dosageIntake} != null" th:with="dose = ${dosageIntake.dose()}">
-        <th:block th:if="${dose.isQuantity()}" th:insert="~{::amount-quantity(${dose.quantity()}, ${lang})}"/>
-        <th:block th:if="${dose.isRange()}">
-            [[~{::amount-quantity(${dose.low()}, ${lang})}]] – [[~{::amount-quantity(${dose.high()}, ${lang})}]]
-        </th:block>
+    <th:block th:if="${dosageIntake} != null">
+        <th:block th:insert="~{::simple-dose(${dosageIntake.dose}, ${lang})}"/>
+    </th:block>
+</th:block>
+
+<th:block th:fragment="intake-timing(hasTiming, lang)">
+    <th:block th:unless="${hasTiming}">—</th:block>
+    <th:block th:if="${hasTiming}">à prendre</th:block>
+</th:block>
+
+<th:block th:fragment="simple-dose(dose, lang)">
+    <th:block th:if="${dose.isQuantity()}" th:insert="~{::amount-quantity(${dose.quantity()}, ${lang})}"/>
+    <th:block th:if="${dose.isRange()}">
+        [[~{::amount-quantity(${dose.low()}, ${lang})}]] – [[~{::amount-quantity(${dose.high()}, ${lang})}]]
     </th:block>
 </th:block>
 
@@ -61,10 +70,16 @@
 </th:block>
 
 <th:block th:fragment="date-time(dateTimeElement, lang)">
-    <th:block th:switch="${dateTimeElement.getPrecision().name()}" th:with="value = ${dateTimeElement.getValueAsString()}">
-        <th:block th:case="'MINUTE'" th:text="${value.substring(8,10)} + '/' + ${value.substring(5,7)} + '/' + ${value.substring(0,4)} + ' ' + ${value.substring(11, 15)}"/>
-        <th:block th:case="'DAY'" th:text="${value.substring(8,10)} + '/' + ${value.substring(5,7)} + '/' + ${value.substring(0,4)}"/>
-        <th:block th:case="'MONTH'" th:text="${value.substring(5,7)} + '/' + ${value.substring(0,4)}"/>
-        <th:block th:case="'YEAR'" th:text="${value}"/>
+    <th:block th:switch="${dateTimeElement.getPrecision().name()}">
+        <th:block th:case="'MILLI'" th:text="${lang.getMinutePrecisionFormatter().format(dateTimeElement.getValueAsCalendar().toInstant())}"/>
+        <th:block th:case="'SECOND'" th:text="${lang.getMinutePrecisionFormatter().format(dateTimeElement.getValueAsCalendar().toInstant())}"/>
+        <th:block th:case="'MINUTE'" th:text="${lang.getMinutePrecisionFormatter().format(dateTimeElement.getValueAsCalendar().toInstant())}"/>
+        <th:block th:case="'DAY'" th:text="${lang.getDayPrecisionFormatter().format(dateTimeElement.getValueAsCalendar().toInstant())}"/>
+        <th:block th:case="'MONTH'" th:text="${lang.getMonthPrecisionFormatter().format(dateTimeElement.getValueAsCalendar().toInstant())}"/>
+        <th:block th:case="'YEAR'" th:text="${lang.getHourPrecisionFormatter().format(dateTimeElement.getValueAsCalendar().toInstant())}"/>
     </th:block>
 </th:block>
+
+<th:block th:fragment="date-time-time-part(dateTimeElement, lang)" th:text=""/>
+
+<th:block th:fragment="instant(instantElement, lang)" th:text="${lang.getMinutePrecisionFormatter().format(instantElement)}"/>

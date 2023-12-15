@@ -16,6 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.projecthusky.cda.TestUtils;
 import org.projecthusky.cda.elga.generated.artdecor.ems.enums.ElgaDiagnosesicherheit;
 import org.projecthusky.cda.elga.generated.artdecor.ems.enums.EpimsMeldepflichtigeKrankheiten;
@@ -30,8 +32,6 @@ import org.projecthusky.common.hl7cdar2.XActMoodDocumentObservation;
 import org.projecthusky.common.hl7cdar2.XActRelationshipEntry;
 import org.projecthusky.common.hl7cdar2.XDocumentActMood;
 import org.projecthusky.common.model.Code;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 /**
  * Test of {@link CaseIdentification}.
@@ -113,7 +113,6 @@ class CaseIdentificationTest extends TestUtils {
 
 		assertEquals("1.2.40.0.34.6.0.11.3.57", observation.getTemplateId().get(0).getRoot());
 		assertEquals("1.3.6.1.4.1.19376.1.3.1.1.2", observation.getTemplateId().get(1).getRoot());
-
 	}
 
 
