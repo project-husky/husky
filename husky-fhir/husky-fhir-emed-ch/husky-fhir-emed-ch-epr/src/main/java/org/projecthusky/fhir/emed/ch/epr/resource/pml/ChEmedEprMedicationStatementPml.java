@@ -25,7 +25,7 @@ import java.util.UUID;
  *
  * @author Quentin Ligier
  **/
-@ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-medicationstatement-list")
+@ResourceDef(profile = "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationstatement-list")
 public class ChEmedEprMedicationStatementPml extends ChEmedEprMedicationStatementPmlBase {
     /**
      * Reference to the original document.

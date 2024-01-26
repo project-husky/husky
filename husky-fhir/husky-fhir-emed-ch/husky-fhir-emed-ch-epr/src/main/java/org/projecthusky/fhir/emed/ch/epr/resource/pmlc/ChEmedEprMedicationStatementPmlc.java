@@ -29,7 +29,7 @@ import java.util.UUID;
  *
  * @author Quentin Ligier
  **/
-@ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-medicationstatement-card")
+@ResourceDef(profile = "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationstatement-card")
 public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStatementPmlBase {
     /**
      * Reference to the MTP that introduced this medication in the treatment plan.

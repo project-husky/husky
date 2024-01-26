@@ -18,6 +18,6 @@ import org.hl7.fhir.r4.model.RelatedPerson;
  *
  * @author Quentin Ligier
  **/
-@ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-related-person")
+@ResourceDef(profile = "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-related-person")
 public class ChEmedEprRelatedPerson extends RelatedPerson {
 }
