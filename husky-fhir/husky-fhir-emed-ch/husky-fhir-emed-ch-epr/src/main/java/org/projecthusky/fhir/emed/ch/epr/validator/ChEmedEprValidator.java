@@ -19,8 +19,6 @@ import org.hl7.fhir.utilities.npm.FilesystemPackageCacheManager;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 import org.projecthusky.fhir.emed.ch.epr.validator.logicvalidator.LogicValidator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -58,10 +56,10 @@ public class ChEmedEprValidator {
 
         // Adding all necessary packages
         this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ihe.formatcode.fhir#1.1.0.tgz"));
-        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-epr-term#2.0.9.tgz"));
-        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-core#4.0.0-ballot.tgz"));
-        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-emed#4.0.0-ballot.tgz"));
-        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.cara.fhir.epr.emed#20230717.tgz"));
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-epr-term#2.0.10.tgz"));
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-core#4.0.1.tgz"));
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-emed#4.0.1.tgz"));
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-emed-epr#1.0.0.tgz"));
     }
 
     /**
@@ -100,12 +98,12 @@ public class ChEmedEprValidator {
      */
     protected String getProfileUrl(final EmedDocumentType type) {
         return switch (type) {
-            case MTP -> "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-document-medicationtreatmentplan";
-            case PRE -> "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-document-medicationprescription";
-            case DIS -> "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-document-medicationdispense";
-            case PADV -> "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-document-pharmaceuticaladvice";
-            case PML -> "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-document-medicationlist";
-            case PMLC -> "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-document-medicationcard";
+            case MTP -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationtreatmentplan";
+            case PRE -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationprescription";
+            case DIS -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationdispense";
+            case PADV -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-pharmaceuticaladvice";
+            case PML -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationlist";
+            case PMLC -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationcard";
         };
     }
 
