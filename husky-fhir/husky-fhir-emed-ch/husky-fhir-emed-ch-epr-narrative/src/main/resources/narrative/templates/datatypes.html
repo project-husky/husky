@@ -44,7 +44,7 @@
 <th:block th:fragment="simple-dose(dose, lang)">
     <th:block th:if="${dose.isQuantity()}" th:insert="~{::amount-quantity(${dose.quantity()}, ${lang})}"/>
     <th:block th:if="${dose.isRange()}">
-        [[~{::amount-quantity(${dose.low()}, ${lang})}]] – [[~{::amount-quantity(${dose.high()}, ${lang})}]]
+        <span th:insert="~{::amount-quantity(${dose.low()}, ${lang})}"/> - <span th:insert="~{::amount-quantity(${dose.high()}, ${lang})}"/>
     </th:block>
 </th:block>
 
