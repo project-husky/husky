@@ -9,28 +9,25 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.enums;
 
+import java.util.Objects;
+import javax.annotation.processing.Generated;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.common.enums.CodeSystems;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.enums.ValueSetEnumInterface;
 
-import javax.annotation.processing.Generated;
-import java.util.Objects;
-
 /**
- * Enumeration of RegularUnitCodeAmbu values
- * <p>
- * EN: No designation found.<br> DE: No designation found.<br> FR: No designation found.<br> IT: No designation
- * found.<br>
- * <p>
- * Identifier: 2.16.756.5.30.1.127.77.12.11.3<br> Effective date: 2022-04-15 09:05<br> Version: 2022<br> Status: DRAFT
- */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-07-11")
+ * Based on generated org.projecthusky.fhir.emed.ch.common.enums.UnitCode minus time units.
+*/
 public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
 
     /**
-     * EN: Actuation.<br> DE: Hub.<br> FR: bouffée.<br> IT: erogazione.<br>
+     * EN: Actuation.<br>
+     * DE: Hub.<br>
+     * FR: bouffée.<br>
+     * IT: erogazione.<br>
      */
     ACTUATION("732981002",
               "http://snomed.info/sct",
@@ -40,7 +37,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
               "bouffée",
               "erogazione"),
     /**
-     * EN: Ampule.<br> DE: Ampulle.<br> FR: ampoule.<br> IT: fiala.<br>
+     * EN: Ampule.<br>
+     * DE: Ampulle.<br>
+     * FR: ampoule.<br>
+     * IT: fiala.<br>
      */
     AMPULE("732978007",
            "http://snomed.info/sct",
@@ -50,7 +50,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
            "ampoule",
            "fiala"),
     /**
-     * EN: Applicator.<br> DE: Applikator.<br> FR: applicateur.<br> IT: applicatore.<br>
+     * EN: Applicator.<br>
+     * DE: Applikator.<br>
+     * FR: applicateur.<br>
+     * IT: applicatore.<br>
      */
     APPLICATOR("732980001",
                "http://snomed.info/sct",
@@ -60,7 +63,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
                "applicateur",
                "applicatore"),
     /**
-     * EN: Bag.<br> DE: Tasche.<br> FR: sac.<br> IT: sacca.<br>
+     * EN: Bag.<br>
+     * DE: Tasche.<br>
+     * FR: sac.<br>
+     * IT: sacca.<br>
      */
     BAG("732982009",
         "http://snomed.info/sct",
@@ -70,7 +76,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
         "sac",
         "sacca"),
     /**
-     * EN: Barrel.<br> DE: Kanister.<br> FR: fût.<br> IT: fusto.<br>
+     * EN: Barrel.<br>
+     * DE: Kanister.<br>
+     * FR: fût.<br>
+     * IT: fusto.<br>
      */
     BARREL("732983004",
            "http://snomed.info/sct",
@@ -80,7 +89,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
            "fût",
            "fusto"),
     /**
-     * EN: Blister.<br> DE: Blisterpackung.<br> FR: plaquette.<br> IT: blister.<br>
+     * EN: Blister.<br>
+     * DE: Blisterpackung.<br>
+     * FR: plaquette.<br>
+     * IT: blister.<br>
      */
     BLISTER("732984005",
             "http://snomed.info/sct",
@@ -90,7 +102,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
             "plaquette",
             "blister"),
     /**
-     * EN: Block.<br> DE: Block.<br> FR: bloc.<br> IT: blocco.<br>
+     * EN: Block.<br>
+     * DE: Block.<br>
+     * FR: bloc.<br>
+     * IT: blocco.<br>
      */
     BLOCK("732985006",
           "http://snomed.info/sct",
@@ -100,7 +115,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
           "bloc",
           "blocco"),
     /**
-     * EN: Bottle.<br> DE: Flasche.<br> FR: flacon.<br> IT: flacone.<br>
+     * EN: Bottle.<br>
+     * DE: Flasche.<br>
+     * FR: flacon.<br>
+     * IT: flacone.<br>
      */
     BOTTLE("732986007",
            "http://snomed.info/sct",
@@ -110,7 +128,23 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
            "flacon",
            "flacone"),
     /**
-     * EN: Cachet.<br> DE: Oblatenkapsel.<br> FR: cachet.<br> IT: cachet.<br>
+     * EN: Bq.<br>
+     * DE: Bq.<br>
+     * FR: Bq.<br>
+     * IT: Bq.<br>
+     */
+    BQ("Bq",
+       "http://unitsofmeasure.org",
+       "Becquerel",
+       "Bq",
+       "Bq",
+       "Bq",
+       "Bq"),
+    /**
+     * EN: Cachet.<br>
+     * DE: Oblatenkapsel.<br>
+     * FR: cachet.<br>
+     * IT: cachet.<br>
      */
     CACHET("732987003",
            "http://snomed.info/sct",
@@ -120,7 +154,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
            "cachet",
            "cachet"),
     /**
-     * EN: Capsule.<br> DE: Kapsel.<br> FR: capsule.<br> IT: capsula.<br>
+     * EN: Capsule.<br>
+     * DE: Kapsel.<br>
+     * FR: capsule.<br>
+     * IT: capsula.<br>
      */
     CAPSULE("732937005",
             "http://snomed.info/sct",
@@ -130,7 +167,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
             "capsule",
             "capsula"),
     /**
-     * EN: Cartridge.<br> DE: Patrone.<br> FR: cartouche.<br> IT: cartuccia.<br>
+     * EN: Cartridge.<br>
+     * DE: Patrone.<br>
+     * FR: cartouche.<br>
+     * IT: cartuccia.<br>
      */
     CARTRIDGE("732988008",
               "http://snomed.info/sct",
@@ -140,7 +180,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
               "cartouche",
               "cartuccia"),
     /**
-     * EN: CFU.<br> DE: CFU.<br> FR: CFU.<br> IT: CFU.<br>
+     * EN: CFU.<br>
+     * DE: CFU.<br>
+     * FR: CFU.<br>
+     * IT: CFU.<br>
      */
     CFU("[CFU]",
         "http://unitsofmeasure.org",
@@ -150,7 +193,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
         "CFU",
         "CFU"),
     /**
-     * EN: Chewing gum.<br> DE: Kaugummi.<br> FR: gomme à mâcher.<br> IT: gomma da masticare.<br>
+     * EN: Chewing gum.<br>
+     * DE: Kaugummi.<br>
+     * FR: gomme à mâcher.<br>
+     * IT: gomma da masticare.<br>
      */
     CHEWING_GUM("732989000",
                 "http://snomed.info/sct",
@@ -160,7 +206,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
                 "gomme à mâcher",
                 "gomma da masticare"),
     /**
-     * EN: cm.<br> DE: cm.<br> FR: cm.<br> IT: cm.<br>
+     * EN: cm.<br>
+     * DE: cm.<br>
+     * FR: cm.<br>
+     * IT: cm.<br>
      */
     CM("cm",
        "http://unitsofmeasure.org",
@@ -170,7 +219,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
        "cm",
        "cm"),
     /**
-     * EN: cm2.<br> DE: cm2.<br> FR: cm2.<br> IT: cm2.<br>
+     * EN: cm2.<br>
+     * DE: cm2.<br>
+     * FR: cm2.<br>
+     * IT: cm2.<br>
      */
     CM2("cm2",
         "http://unitsofmeasure.org",
@@ -180,7 +232,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
         "cm2",
         "cm2"),
     /**
-     * EN: cm3.<br> DE: cm3.<br> FR: cm3.<br> IT: cm3.<br>
+     * EN: cm3.<br>
+     * DE: cm3.<br>
+     * FR: cm3.<br>
+     * IT: cm3.<br>
      */
     CM3("cm3",
         "http://unitsofmeasure.org",
@@ -190,7 +245,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
         "cm3",
         "cm3"),
     /**
-     * EN: Container.<br> DE: Behältnis.<br> FR: récipient.<br> IT: contenitore.<br>
+     * EN: Container.<br>
+     * DE: Behältnis.<br>
+     * FR: récipient.<br>
+     * IT: contenitore.<br>
      */
     CONTAINER("732990009",
               "http://snomed.info/sct",
@@ -200,7 +258,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
               "récipient",
               "contenitore"),
     /**
-     * EN: Cup.<br> DE: Messbecher.<br> FR: godet.<br> IT: bicchiere dosatore.<br>
+     * EN: Cup.<br>
+     * DE: Messbecher.<br>
+     * FR: godet.<br>
+     * IT: bicchiere dosatore.<br>
      */
     CUP("732991008",
         "http://snomed.info/sct",
@@ -210,7 +271,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
         "godet",
         "bicchiere dosatore"),
     /**
-     * EN: Cylinder.<br> DE: Zylinder.<br> FR: cylindre.<br> IT: cilindro.<br>
+     * EN: Cylinder.<br>
+     * DE: Zylinder.<br>
+     * FR: cylindre.<br>
+     * IT: cilindro.<br>
      */
     CYLINDER("732992001",
              "http://snomed.info/sct",
@@ -220,17 +284,23 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
              "cylindre",
              "cilindro"),
     /**
-     * EN: Dose.<br> DE: Dos.<br> FR: dose.<br> IT: dose.<br>
+     * EN: Dose.<br>
+     * DE: Dos.<br>
+     * FR: dose.<br>
+     * IT: dose.<br>
      */
-    DOSE("{Dose}",
-         "http://unitsofmeasure.org",
+    DOSE("408102007",
+         "http://snomed.info/sct",
          "Dose",
          "Dose",
          "Dos",
          "dose",
          "dose"),
     /**
-     * EN: Dressing.<br> DE: Verband.<br> FR: compresse.<br> IT: garza.<br>
+     * EN: Dressing.<br>
+     * DE: Verband.<br>
+     * FR: compresse.<br>
+     * IT: garza.<br>
      */
     DRESSING("732993006",
              "http://snomed.info/sct",
@@ -240,7 +310,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
              "compresse",
              "garza"),
     /**
-     * EN: Drop.<br> DE: Tropfen.<br> FR: goutte.<br> IT: goccia.<br>
+     * EN: Drop.<br>
+     * DE: Tropfen.<br>
+     * FR: goutte.<br>
+     * IT: goccia.<br>
      */
     DROP("732994000",
          "http://snomed.info/sct",
@@ -250,7 +323,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
          "goutte",
          "goccia"),
     /**
-     * EN: Film.<br> DE: Film.<br> FR: film.<br> IT: film.<br>
+     * EN: Film.<br>
+     * DE: Film.<br>
+     * FR: film.<br>
+     * IT: film.<br>
      */
     FILM("732995004",
          "http://snomed.info/sct",
@@ -260,7 +336,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
          "film",
          "film"),
     /**
-     * EN: g.<br> DE: g.<br> FR: g.<br> IT: g.<br>
+     * EN: g.<br>
+     * DE: g.<br>
+     * FR: g.<br>
+     * IT: g.<br>
      */
     G("g",
       "http://unitsofmeasure.org",
@@ -270,7 +349,23 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
       "g",
       "g"),
     /**
-     * EN: Implant.<br> DE: Implantat.<br> FR: implant.<br> IT: impianto.<br>
+     * EN: GBq.<br>
+     * DE: GBq.<br>
+     * FR: GBq.<br>
+     * IT: GBq.<br>
+     */
+    GBQ("GBq",
+        "http://unitsofmeasure.org",
+        "gigaBecquerel",
+        "GBq",
+        "GBq",
+        "GBq",
+        "GBq"),
+    /**
+     * EN: Implant.<br>
+     * DE: Implantat.<br>
+     * FR: implant.<br>
+     * IT: impianto.<br>
      */
     IMPLANT("732996003",
             "http://snomed.info/sct",
@@ -280,7 +375,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
             "implant",
             "impianto"),
     /**
-     * EN: Inhaler.<br> DE: Inhalator.<br> FR: inhalateur.<br> IT: inalatore.<br>
+     * EN: Inhaler.<br>
+     * DE: Inhalator.<br>
+     * FR: inhalateur.<br>
+     * IT: inalatore.<br>
      */
     INHALER("732997007",
             "http://snomed.info/sct",
@@ -290,7 +388,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
             "inhalateur",
             "inalatore"),
     /**
-     * EN: Insert.<br> DE: Insert.<br> FR: insert.<br> IT: inserto.<br>
+     * EN: Insert.<br>
+     * DE: Insert.<br>
+     * FR: insert.<br>
+     * IT: inserto.<br>
      */
     INSERT("732998002",
            "http://snomed.info/sct",
@@ -300,8 +401,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
            "insert",
            "inserto"),
     /**
-     * EN: international unit.<br> DE: Internationale Einheit.<br> FR: unité(s) internationale(s).<br> IT: unità
-     * internazionale(i).<br>
+     * EN: international unit.<br>
+     * DE: Internationale Einheit.<br>
+     * FR: unité(s) internationale(s).<br>
+     * IT: unità internazionale(i).<br>
      */
     INTERNATIONAL_UNIT("[iU]",
                        "http://unitsofmeasure.org",
@@ -311,7 +414,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
                        "unité(s) internationale(s)",
                        "unità internazionale(i)"),
     /**
-     * EN: Jar.<br> DE: Weithalsgefäss.<br> FR: pot.<br> IT: vasetto.<br>
+     * EN: Jar.<br>
+     * DE: Weithalsgefäss.<br>
+     * FR: pot.<br>
+     * IT: vasetto.<br>
      */
     JAR("732999005",
         "http://snomed.info/sct",
@@ -321,7 +427,23 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
         "pot",
         "vasetto"),
     /**
-     * EN: kcal.<br> DE: kcal.<br> FR: kcal.<br> IT: kcal.<br>
+     * EN: kBq.<br>
+     * DE: kBq.<br>
+     * FR: kBq.<br>
+     * IT: kBq.<br>
+     */
+    KBQ("kBq",
+        "http://unitsofmeasure.org",
+        "kiloBecquerel",
+        "kBq",
+        "kBq",
+        "kBq",
+        "kBq"),
+    /**
+     * EN: kcal.<br>
+     * DE: kcal.<br>
+     * FR: kcal.<br>
+     * IT: kcal.<br>
      */
     KCAL("kcal",
          "http://unitsofmeasure.org",
@@ -331,7 +453,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
          "kcal",
          "kcal"),
     /**
-     * EN: kg.<br> DE: kg.<br> FR: kg.<br> IT: kg.<br>
+     * EN: kg.<br>
+     * DE: kg.<br>
+     * FR: kg.<br>
+     * IT: kg.<br>
      */
     KG("kg",
        "http://unitsofmeasure.org",
@@ -341,7 +466,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
        "kg",
        "kg"),
     /**
-     * EN: kJ.<br> DE: kJ.<br> FR: kJ.<br> IT: kJ.<br>
+     * EN: kJ.<br>
+     * DE: kJ.<br>
+     * FR: kJ.<br>
+     * IT: kJ.<br>
      */
     KJ("kJ",
        "http://unitsofmeasure.org",
@@ -351,7 +479,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
        "kJ",
        "kJ"),
     /**
-     * EN: lt.<br> DE: lt.<br> FR: lt.<br> IT: l.<br>
+     * EN: lt.<br>
+     * DE: lt.<br>
+     * FR: lt.<br>
+     * IT: l.<br>
      */
     LT("L",
        "http://unitsofmeasure.org",
@@ -361,7 +492,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
        "lt",
        "l"),
     /**
-     * EN: Lyophilisate.<br> DE: Lyophilisat.<br> FR: lyophilisat.<br> IT: liofilizzato.<br>
+     * EN: Lyophilisate.<br>
+     * DE: Lyophilisat.<br>
+     * FR: lyophilisat.<br>
+     * IT: liofilizzato.<br>
      */
     LYOPHILISATE("733001005",
                  "http://snomed.info/sct",
@@ -371,7 +505,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
                  "lyophilisat",
                  "liofilizzato"),
     /**
-     * EN: Matrix.<br> DE: Matrix.<br> FR: matrice.<br> IT: matrice.<br>
+     * EN: Matrix.<br>
+     * DE: Matrix.<br>
+     * FR: matrice.<br>
+     * IT: matrice.<br>
      */
     MATRIX("733002003",
            "http://snomed.info/sct",
@@ -381,7 +518,23 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
            "matrice",
            "matrice"),
     /**
-     * EN: meq.<br> DE: meq.<br> FR: mEq.<br> IT: mEq.<br>
+     * EN: MBq.<br>
+     * DE: MBq.<br>
+     * FR: MBq.<br>
+     * IT: MBq.<br>
+     */
+    MBQ("MBq",
+        "http://unitsofmeasure.org",
+        "megaBecquerel",
+        "MBq",
+        "MBq",
+        "MBq",
+        "MBq"),
+    /**
+     * EN: meq.<br>
+     * DE: meq.<br>
+     * FR: mEq.<br>
+     * IT: mEq.<br>
      */
     MEQ("meq",
         "http://unitsofmeasure.org",
@@ -391,7 +544,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
         "mEq",
         "mEq"),
     /**
-     * EN: mg.<br> DE: mg.<br> FR: mg.<br> IT: mg.<br>
+     * EN: mg.<br>
+     * DE: mg.<br>
+     * FR: mg.<br>
+     * IT: mg.<br>
      */
     MG("mg",
        "http://unitsofmeasure.org",
@@ -401,7 +557,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
        "mg",
        "mg"),
     /**
-     * EN: MillionInternationalUnit.<br> DE: MioUI.<br> FR: MioUI.<br> IT: MioUI.<br>
+     * EN: MillionInternationalUnit.<br>
+     * DE: MioUI.<br>
+     * FR: MioUI.<br>
+     * IT: MioUI.<br>
      */
     MILLIONINTERNATIONALUNIT("10*6.[iU]",
                              "http://unitsofmeasure.org",
@@ -411,17 +570,23 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
                              "MioUI",
                              "MioUI"),
     /**
-     * EN: MioU.<br> DE: MioU.<br> FR: MioU.<br> IT: MioU.<br>
+     * EN: MioU.<br>
+     * DE: MioU.<br>
+     * FR: MioU.<br>
+     * IT: MioU.<br>
      */
-    MIOU("10*6.{Unit}",
-         "http://unitsofmeasure.org",
+    MIOU("396186001",
+         "http://snomed.info/sct",
          "(the number ten for arbitrary powers ^ 6) * Unit",
          "MioU",
          "MioU",
          "MioU",
          "MioU"),
     /**
-     * EN: ml.<br> DE: ml.<br> FR: ml.<br> IT: ml.<br>
+     * EN: ml.<br>
+     * DE: ml.<br>
+     * FR: ml.<br>
+     * IT: ml.<br>
      */
     ML("mL",
        "http://unitsofmeasure.org",
@@ -431,7 +596,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
        "ml",
        "ml"),
     /**
-     * EN: mm2.<br> DE: mm2.<br> FR: mm2.<br> IT: mm2.<br>
+     * EN: mm2.<br>
+     * DE: mm2.<br>
+     * FR: mm2.<br>
+     * IT: mm2.<br>
      */
     MM2("mm2",
         "http://unitsofmeasure.org",
@@ -441,7 +609,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
         "mm2",
         "mm2"),
     /**
-     * EN: mmol.<br> DE: mmol.<br> FR: mmol.<br> IT: mmol.<br>
+     * EN: mmol.<br>
+     * DE: mmol.<br>
+     * FR: mmol.<br>
+     * IT: mmol.<br>
      */
     MMOL("mmol",
          "http://unitsofmeasure.org",
@@ -451,7 +622,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
          "mmol",
          "mmol"),
     /**
-     * EN: mol.<br> DE: mol.<br> FR: mol.<br> IT: mol.<br>
+     * EN: mol.<br>
+     * DE: mol.<br>
+     * FR: mol.<br>
+     * IT: mol.<br>
      */
     MOL("mol",
         "http://unitsofmeasure.org",
@@ -461,7 +635,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
         "mol",
         "mol"),
     /**
-     * EN: ng.<br> DE: ng.<br> FR: ng.<br> IT: ng.<br>
+     * EN: ng.<br>
+     * DE: ng.<br>
+     * FR: ng.<br>
+     * IT: ng.<br>
      */
     NG("ng",
        "http://unitsofmeasure.org",
@@ -471,7 +648,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
        "ng",
        "ng"),
     /**
-     * EN: nl.<br> DE: nl.<br> FR: nl.<br> IT: nl.<br>
+     * EN: nl.<br>
+     * DE: nl.<br>
+     * FR: nl.<br>
+     * IT: nl.<br>
      */
     NL("nL",
        "http://unitsofmeasure.org",
@@ -481,17 +661,23 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
        "nl",
        "nl"),
     /**
-     * EN: Package.<br> DE: Packung.<br> FR: emballage.<br> IT: confezione.<br>
+     * EN: Package.<br>
+     * DE: Packung.<br>
+     * FR: emballage.<br>
+     * IT: confezione.<br>
      */
-    PACKAGE("{Package}",
-            "http://unitsofmeasure.org",
+    PACKAGE("1681000175101",
+            "http://snomed.info/sct",
             "Package",
             "Package",
             "Packung",
             "emballage",
             "confezione"),
     /**
-     * EN: Pad.<br> DE: Pad.<br> FR: tampon applicateur.<br> IT: tampone.<br>
+     * EN: Pad.<br>
+     * DE: Pad.<br>
+     * FR: tampon applicateur.<br>
+     * IT: tampone.<br>
      */
     PAD("733003008",
         "http://snomed.info/sct",
@@ -501,7 +687,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
         "tampon applicateur",
         "tampone"),
     /**
-     * EN: Pastille.<br> DE: Pastille.<br> FR: pastille molle.<br> IT: pastiglia molle.<br>
+     * EN: Pastille.<br>
+     * DE: Pastille.<br>
+     * FR: pastille molle.<br>
+     * IT: pastiglia molle.<br>
      */
     PASTILLE("733004002",
              "http://snomed.info/sct",
@@ -511,7 +700,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
              "pastille molle",
              "pastiglia molle"),
     /**
-     * EN: Patch.<br> DE: Patch.<br> FR: patch.<br> IT: cerotto.<br>
+     * EN: Patch.<br>
+     * DE: Patch.<br>
+     * FR: patch.<br>
+     * IT: cerotto.<br>
      */
     PATCH("733005001",
           "http://snomed.info/sct",
@@ -521,7 +713,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
           "patch",
           "cerotto"),
     /**
-     * EN: Pen.<br> DE: Pen.<br> FR: stylo.<br> IT: penna.<br>
+     * EN: Pen.<br>
+     * DE: Pen.<br>
+     * FR: stylo.<br>
+     * IT: penna.<br>
      */
     PEN("733006000",
         "http://snomed.info/sct",
@@ -531,7 +726,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
         "stylo",
         "penna"),
     /**
-     * EN: %.<br> DE: %.<br> FR: %.<br> IT: %.<br>
+     * EN: %.<br>
+     * DE: %.<br>
+     * FR: %.<br>
+     * IT: %.<br>
      */
     PERCENT("%",
             "http://unitsofmeasure.org",
@@ -541,7 +739,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
             "%",
             "%"),
     /**
-     * EN: Pessary.<br> DE: Pessar.<br> FR: ovule.<br> IT: ovulo.<br>
+     * EN: Pessary.<br>
+     * DE: Pessar.<br>
+     * FR: ovule.<br>
+     * IT: ovulo.<br>
      */
     PESSARY("733007009",
             "http://snomed.info/sct",
@@ -551,7 +752,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
             "ovule",
             "ovulo"),
     /**
-     * EN: Piece(s).<br> DE: Stk.<br> FR: pce.<br> IT: pz.<br>
+     * EN: Piece(s).<br>
+     * DE: Stk.<br>
+     * FR: pce.<br>
+     * IT: pz.<br>
      */
     PIECE("{Piece}",
           "http://unitsofmeasure.org",
@@ -561,7 +765,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
           "pce",
           "pz"),
     /**
-     * EN: Pillule.<br> DE: Streukügelchen.<br> FR: granule.<br> IT: granuli.<br>
+     * EN: Pillule.<br>
+     * DE: Streukügelchen.<br>
+     * FR: granule.<br>
+     * IT: granuli.<br>
      */
     PILLULE("733008004",
             "http://snomed.info/sct",
@@ -571,7 +778,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
             "granule",
             "granuli"),
     /**
-     * EN: Pipette.<br> DE: Pipette.<br> FR: pipette.<br> IT: pipetta.<br>
+     * EN: Pipette.<br>
+     * DE: Pipette.<br>
+     * FR: pipette.<br>
+     * IT: pipetta.<br>
      */
     PIPETTE("733009007",
             "http://snomed.info/sct",
@@ -581,7 +791,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
             "pipette",
             "pipetta"),
     /**
-     * EN: Plaster.<br> DE: Pflaster.<br> FR: emplâtre.<br> IT: cerotto.<br>
+     * EN: Plaster.<br>
+     * DE: Pflaster.<br>
+     * FR: emplâtre.<br>
+     * IT: cerotto.<br>
      */
     PLASTER("733010002",
             "http://snomed.info/sct",
@@ -591,7 +804,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
             "emplâtre",
             "cerotto"),
     /**
-     * EN: Plug.<br> DE: Einsatz.<br> FR: support poreux.<br> IT: supporto.<br>
+     * EN: Plug.<br>
+     * DE: Einsatz.<br>
+     * FR: support poreux.<br>
+     * IT: supporto.<br>
      */
     PLUG("733011003",
          "http://snomed.info/sct",
@@ -601,7 +817,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
          "support poreux",
          "supporto"),
     /**
-     * EN: Pouch.<br> DE: Beutelchen.<br> FR: pochette.<br> IT: sachetta.<br>
+     * EN: Pouch.<br>
+     * DE: Beutelchen.<br>
+     * FR: pochette.<br>
+     * IT: sachetta.<br>
      */
     POUCH("733012005",
           "http://snomed.info/sct",
@@ -611,7 +830,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
           "pochette",
           "sachetta"),
     /**
-     * EN: ppm.<br> DE: ppm.<br> FR: ppm.<br> IT: ppm.<br>
+     * EN: ppm.<br>
+     * DE: ppm.<br>
+     * FR: ppm.<br>
+     * IT: ppm.<br>
      */
     PPM("[ppm]",
         "http://unitsofmeasure.org",
@@ -621,7 +843,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
         "ppm",
         "ppm"),
     /**
-     * EN: Sachet.<br> DE: Beutel.<br> FR: sachet.<br> IT: bustina.<br>
+     * EN: Sachet.<br>
+     * DE: Beutel.<br>
+     * FR: sachet.<br>
+     * IT: bustina.<br>
      */
     SACHET("733013000",
            "http://snomed.info/sct",
@@ -631,7 +856,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
            "sachet",
            "bustina"),
     /**
-     * EN: Sponge.<br> DE: Schwämmchen.<br> FR: eponge.<br> IT: spugna.<br>
+     * EN: Sponge.<br>
+     * DE: Schwämmchen.<br>
+     * FR: eponge.<br>
+     * IT: spugna.<br>
      */
     SPONGE("733014006",
            "http://snomed.info/sct",
@@ -641,7 +869,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
            "eponge",
            "spugna"),
     /**
-     * EN: Spoonful.<br> DE: ein Löffel voll.<br> FR: cuillerée.<br> IT: cucciaio.<br>
+     * EN: Spoonful.<br>
+     * DE: ein Löffel voll.<br>
+     * FR: cuillerée.<br>
+     * IT: cucciaio.<br>
      */
     SPOONFUL("733015007",
              "http://snomed.info/sct",
@@ -651,7 +882,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
              "cuillerée",
              "cucciaio"),
     /**
-     * EN: Stick.<br> DE: Stäbchen.<br> FR: bâton.<br> IT: stick.<br>
+     * EN: Stick.<br>
+     * DE: Stäbchen.<br>
+     * FR: bâton.<br>
+     * IT: stick.<br>
      */
     STICK("733016008",
           "http://snomed.info/sct",
@@ -661,7 +895,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
           "bâton",
           "stick"),
     /**
-     * EN: Straw.<br> DE: Trinkhalm.<br> FR: paille.<br> IT: cannuccia.<br>
+     * EN: Straw.<br>
+     * DE: Trinkhalm.<br>
+     * FR: paille.<br>
+     * IT: cannuccia.<br>
      */
     STRAW("733017004",
           "http://snomed.info/sct",
@@ -671,7 +908,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
           "paille",
           "cannuccia"),
     /**
-     * EN: Strip.<br> DE: Streifen.<br> FR: bandelette.<br> IT: strip.<br>
+     * EN: Strip.<br>
+     * DE: Streifen.<br>
+     * FR: bandelette.<br>
+     * IT: strip.<br>
      */
     STRIP("733018009",
           "http://snomed.info/sct",
@@ -681,7 +921,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
           "bandelette",
           "strip"),
     /**
-     * EN: Suppository.<br> DE: Zäpfchen.<br> FR: suppositoire.<br> IT: supposta.<br>
+     * EN: Suppository.<br>
+     * DE: Zäpfchen.<br>
+     * FR: suppositoire.<br>
+     * IT: supposta.<br>
      */
     SUPPOSITORY("733019001",
                 "http://snomed.info/sct",
@@ -691,7 +934,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
                 "suppositoire",
                 "supposta"),
     /**
-     * EN: Syringe.<br> DE: Spritze.<br> FR: seringue.<br> IT: siringa.<br>
+     * EN: Syringe.<br>
+     * DE: Spritze.<br>
+     * FR: seringue.<br>
+     * IT: siringa.<br>
      */
     SYRINGE("733020007",
             "http://snomed.info/sct",
@@ -701,7 +947,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
             "seringue",
             "siringa"),
     /**
-     * EN: System.<br> DE: System.<br> FR: système.<br> IT: sistema.<br>
+     * EN: System.<br>
+     * DE: System.<br>
+     * FR: système.<br>
+     * IT: sistema.<br>
      */
     SYSTEM("733021006",
            "http://snomed.info/sct",
@@ -711,7 +960,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
            "système",
            "sistema"),
     /**
-     * EN: tablespoon - metric.<br> DE: Esslöffel.<br> FR: c. à soupe.<br> IT: cucchiaio da minestra.<br>
+     * EN: tablespoon - metric.<br>
+     * DE: Esslöffel.<br>
+     * FR: c. à soupe.<br>
+     * IT: cucchiaio da minestra.<br>
      */
     TABLESPOON_METRIC("[tbs_m]",
                       "http://unitsofmeasure.org",
@@ -721,7 +973,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
                       "c. à soupe",
                       "cucchiaio da minestra"),
     /**
-     * EN: Tablet.<br> DE: Tablette.<br> FR: comprimé.<br> IT: compressa.<br>
+     * EN: Tablet.<br>
+     * DE: Tablette.<br>
+     * FR: comprimé.<br>
+     * IT: compressa.<br>
      */
     TABLET("732936001",
            "http://snomed.info/sct",
@@ -731,7 +986,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
            "comprimé",
            "compressa"),
     /**
-     * EN: Tampon.<br> DE: Tampon.<br> FR: tampon diffuseur.<br> IT: tampone.<br>
+     * EN: Tampon.<br>
+     * DE: Tampon.<br>
+     * FR: tampon diffuseur.<br>
+     * IT: tampone.<br>
      */
     TAMPON("733022004",
            "http://snomed.info/sct",
@@ -741,7 +999,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
            "tampon diffuseur",
            "tampone"),
     /**
-     * EN: teaspoon - metric.<br> DE: Teelöffel.<br> FR: c. à café.<br> IT: cucchiaino da caffè.<br>
+     * EN: teaspoon - metric.<br>
+     * DE: Teelöffel.<br>
+     * FR: c. à café.<br>
+     * IT: cucchiaino da caffè.<br>
      */
     TEASPOON_METRIC("[tsp_m]",
                     "http://unitsofmeasure.org",
@@ -751,17 +1012,23 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
                     "c. à café",
                     "cucchiaino da caffè"),
     /**
-     * EN: Thousand Per * Unit.<br> DE: Tausend Einheiten.<br> FR: millier d'unités.<br> IT: mille per unità *.<br>
+     * EN: Thousand Per * Unit.<br>
+     * DE: Tausend Einheiten.<br>
+     * FR: millier d'unités.<br>
+     * IT: mille per unità *.<br>
      */
-    THOUSAND_PER_STAR_UNIT("10*3.{Unit}",
-                           "http://unitsofmeasure.org",
+    THOUSAND_PER_STAR_UNIT("2011000175108",
+                           "http://snomed.info/sct",
                            "Thousand Per * Unit",
                            "Thousand Per * Unit",
                            "Tausend Einheiten",
                            "millier d'unités",
                            "mille per unità *"),
     /**
-     * EN: Thread.<br> DE: Faden.<br> FR: fil.<br> IT: filo.<br>
+     * EN: Thread.<br>
+     * DE: Faden.<br>
+     * FR: fil.<br>
+     * IT: filo.<br>
      */
     THREAD("733023009",
            "http://snomed.info/sct",
@@ -771,7 +1038,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
            "fil",
            "filo"),
     /**
-     * EN: Tube.<br> DE: Tube.<br> FR: tube.<br> IT: tubo.<br>
+     * EN: Tube.<br>
+     * DE: Tube.<br>
+     * FR: tube.<br>
+     * IT: tubo.<br>
      */
     TUBE("733024003",
          "http://snomed.info/sct",
@@ -781,7 +1051,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
          "tube",
          "tubo"),
     /**
-     * EN: µg.<br> DE: µg.<br> FR: µg.<br> IT: µg.<br>
+     * EN: µg.<br>
+     * DE: µg.<br>
+     * FR: µg.<br>
+     * IT: µg.<br>
      */
     UG("ug",
        "http://unitsofmeasure.org",
@@ -791,7 +1064,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
        "µg",
        "µg"),
     /**
-     * EN: µl.<br> DE: µl.<br> FR: µl.<br> IT: µl.<br>
+     * EN: µl.<br>
+     * DE: µl.<br>
+     * FR: µl.<br>
+     * IT: µl.<br>
      */
     UL("uL",
        "http://unitsofmeasure.org",
@@ -801,7 +1077,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
        "µl",
        "µl"),
     /**
-     * EN: µmol.<br> DE: µmol.<br> FR: µmol.<br> IT: µmol.<br>
+     * EN: µmol.<br>
+     * DE: µmol.<br>
+     * FR: µmol.<br>
+     * IT: µmol.<br>
      */
     UMOL("umol",
          "http://unitsofmeasure.org",
@@ -811,17 +1090,23 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
          "µmol",
          "µmol"),
     /**
-     * EN: unit.<br> DE: Einheit.<br> FR: unité(s).<br> IT: unità.<br>
+     * EN: unit.<br>
+     * DE: Einheit.<br>
+     * FR: unité(s).<br>
+     * IT: unità.<br>
      */
-    UNIT("{Unit}",
-         "http://unitsofmeasure.org",
+    UNIT("767525000",
+         "http://snomed.info/sct",
          "Unit",
          "unit",
          "Einheit",
          "unité(s)",
          "unità"),
     /**
-     * EN: Vessel.<br> DE: Gefäss.<br> FR: récipient étanche.<br> IT: recipiente a tenuta.<br>
+     * EN: Vessel.<br>
+     * DE: Gefäss.<br>
+     * FR: récipient étanche.<br>
+     * IT: recipiente a tenuta.<br>
      */
     VESSEL("733025002",
            "http://snomed.info/sct",
@@ -831,7 +1116,10 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
            "récipient étanche",
            "recipiente a tenuta"),
     /**
-     * EN: Vial.<br> DE: Durchstechflasche.<br> FR: petit flacon.<br> IT: flaconcino.<br>
+     * EN: Vial.<br>
+     * DE: Durchstechflasche.<br>
+     * FR: petit flacon.<br>
+     * IT: flaconcino.<br>
      */
     VIAL("733026001",
          "http://snomed.info/sct",
@@ -842,420 +1130,682 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
          "flaconcino");
 
     /**
-     * EN: Code for Actuation.<br> DE: Code für Hub.<br> FR: Code de bouffée.<br> IT: Code per erogazione.<br>
+     * EN: Code for Actuation.<br>
+     * DE: Code für Hub.<br>
+     * FR: Code de bouffée.<br>
+     * IT: Code per erogazione.<br>
      */
     public static final String ACTUATION_CODE = "732981002";
 
     /**
-     * EN: Code for Ampule.<br> DE: Code für Ampulle.<br> FR: Code de ampoule.<br> IT: Code per fiala.<br>
+     * EN: Code for Ampule.<br>
+     * DE: Code für Ampulle.<br>
+     * FR: Code de ampoule.<br>
+     * IT: Code per fiala.<br>
      */
     public static final String AMPULE_CODE = "732978007";
 
     /**
-     * EN: Code for Applicator.<br> DE: Code für Applikator.<br> FR: Code de applicateur.<br> IT: Code per
-     * applicatore.<br>
+     * EN: Code for Applicator.<br>
+     * DE: Code für Applikator.<br>
+     * FR: Code de applicateur.<br>
+     * IT: Code per applicatore.<br>
      */
     public static final String APPLICATOR_CODE = "732980001";
 
     /**
-     * EN: Code for Bag.<br> DE: Code für Tasche.<br> FR: Code de sac.<br> IT: Code per sacca.<br>
+     * EN: Code for Bag.<br>
+     * DE: Code für Tasche.<br>
+     * FR: Code de sac.<br>
+     * IT: Code per sacca.<br>
      */
     public static final String BAG_CODE = "732982009";
 
     /**
-     * EN: Code for Barrel.<br> DE: Code für Kanister.<br> FR: Code de fût.<br> IT: Code per fusto.<br>
+     * EN: Code for Barrel.<br>
+     * DE: Code für Kanister.<br>
+     * FR: Code de fût.<br>
+     * IT: Code per fusto.<br>
      */
     public static final String BARREL_CODE = "732983004";
 
     /**
-     * EN: Code for Blister.<br> DE: Code für Blisterpackung.<br> FR: Code de plaquette.<br> IT: Code per blister.<br>
+     * EN: Code for Blister.<br>
+     * DE: Code für Blisterpackung.<br>
+     * FR: Code de plaquette.<br>
+     * IT: Code per blister.<br>
      */
     public static final String BLISTER_CODE = "732984005";
 
     /**
-     * EN: Code for Block.<br> DE: Code für Block.<br> FR: Code de bloc.<br> IT: Code per blocco.<br>
+     * EN: Code for Block.<br>
+     * DE: Code für Block.<br>
+     * FR: Code de bloc.<br>
+     * IT: Code per blocco.<br>
      */
     public static final String BLOCK_CODE = "732985006";
 
     /**
-     * EN: Code for Bottle.<br> DE: Code für Flasche.<br> FR: Code de flacon.<br> IT: Code per flacone.<br>
+     * EN: Code for Bottle.<br>
+     * DE: Code für Flasche.<br>
+     * FR: Code de flacon.<br>
+     * IT: Code per flacone.<br>
      */
     public static final String BOTTLE_CODE = "732986007";
 
     /**
-     * EN: Code for Cachet.<br> DE: Code für Oblatenkapsel.<br> FR: Code de cachet.<br> IT: Code per cachet.<br>
+     * EN: Code for Bq.<br>
+     * DE: Code für Bq.<br>
+     * FR: Code de Bq.<br>
+     * IT: Code per Bq.<br>
+     */
+    public static final String BQ_CODE = "Bq";
+
+    /**
+     * EN: Code for Cachet.<br>
+     * DE: Code für Oblatenkapsel.<br>
+     * FR: Code de cachet.<br>
+     * IT: Code per cachet.<br>
      */
     public static final String CACHET_CODE = "732987003";
 
     /**
-     * EN: Code for Capsule.<br> DE: Code für Kapsel.<br> FR: Code de capsule.<br> IT: Code per capsula.<br>
+     * EN: Code for Capsule.<br>
+     * DE: Code für Kapsel.<br>
+     * FR: Code de capsule.<br>
+     * IT: Code per capsula.<br>
      */
     public static final String CAPSULE_CODE = "732937005";
 
     /**
-     * EN: Code for Cartridge.<br> DE: Code für Patrone.<br> FR: Code de cartouche.<br> IT: Code per cartuccia.<br>
+     * EN: Code for Cartridge.<br>
+     * DE: Code für Patrone.<br>
+     * FR: Code de cartouche.<br>
+     * IT: Code per cartuccia.<br>
      */
     public static final String CARTRIDGE_CODE = "732988008";
 
     /**
-     * EN: Code for CFU.<br> DE: Code für CFU.<br> FR: Code de CFU.<br> IT: Code per CFU.<br>
+     * EN: Code for CFU.<br>
+     * DE: Code für CFU.<br>
+     * FR: Code de CFU.<br>
+     * IT: Code per CFU.<br>
      */
     public static final String CFU_CODE = "[CFU]";
 
     /**
-     * EN: Code for Chewing gum.<br> DE: Code für Kaugummi.<br> FR: Code de gomme à mâcher.<br> IT: Code per gomma da
-     * masticare.<br>
+     * EN: Code for Chewing gum.<br>
+     * DE: Code für Kaugummi.<br>
+     * FR: Code de gomme à mâcher.<br>
+     * IT: Code per gomma da masticare.<br>
      */
     public static final String CHEWING_GUM_CODE = "732989000";
 
     /**
-     * EN: Code for cm.<br> DE: Code für cm.<br> FR: Code de cm.<br> IT: Code per cm.<br>
+     * EN: Code for cm.<br>
+     * DE: Code für cm.<br>
+     * FR: Code de cm.<br>
+     * IT: Code per cm.<br>
      */
     public static final String CM_CODE = "cm";
 
     /**
-     * EN: Code for cm2.<br> DE: Code für cm2.<br> FR: Code de cm2.<br> IT: Code per cm2.<br>
+     * EN: Code for cm2.<br>
+     * DE: Code für cm2.<br>
+     * FR: Code de cm2.<br>
+     * IT: Code per cm2.<br>
      */
     public static final String CM2_CODE = "cm2";
 
     /**
-     * EN: Code for cm3.<br> DE: Code für cm3.<br> FR: Code de cm3.<br> IT: Code per cm3.<br>
+     * EN: Code for cm3.<br>
+     * DE: Code für cm3.<br>
+     * FR: Code de cm3.<br>
+     * IT: Code per cm3.<br>
      */
     public static final String CM3_CODE = "cm3";
 
     /**
-     * EN: Code for Container.<br> DE: Code für Behältnis.<br> FR: Code de récipient.<br> IT: Code per contenitore.<br>
+     * EN: Code for Container.<br>
+     * DE: Code für Behältnis.<br>
+     * FR: Code de récipient.<br>
+     * IT: Code per contenitore.<br>
      */
     public static final String CONTAINER_CODE = "732990009";
 
     /**
-     * EN: Code for Cup.<br> DE: Code für Messbecher.<br> FR: Code de godet.<br> IT: Code per bicchiere dosatore.<br>
+     * EN: Code for Cup.<br>
+     * DE: Code für Messbecher.<br>
+     * FR: Code de godet.<br>
+     * IT: Code per bicchiere dosatore.<br>
      */
     public static final String CUP_CODE = "732991008";
 
     /**
-     * EN: Code for Cylinder.<br> DE: Code für Zylinder.<br> FR: Code de cylindre.<br> IT: Code per cilindro.<br>
+     * EN: Code for Cylinder.<br>
+     * DE: Code für Zylinder.<br>
+     * FR: Code de cylindre.<br>
+     * IT: Code per cilindro.<br>
      */
     public static final String CYLINDER_CODE = "732992001";
 
     /**
-     * EN: Code for Dose.<br> DE: Code für Dos.<br> FR: Code de dose.<br> IT: Code per dose.<br>
+     * EN: Code for Dose.<br>
+     * DE: Code für Dos.<br>
+     * FR: Code de dose.<br>
+     * IT: Code per dose.<br>
      */
-    public static final String DOSE_CODE = "{Dose}";
+    public static final String DOSE_CODE = "408102007";
 
     /**
-     * EN: Code for Dressing.<br> DE: Code für Verband.<br> FR: Code de compresse.<br> IT: Code per garza.<br>
+     * EN: Code for Dressing.<br>
+     * DE: Code für Verband.<br>
+     * FR: Code de compresse.<br>
+     * IT: Code per garza.<br>
      */
     public static final String DRESSING_CODE = "732993006";
 
     /**
-     * EN: Code for Drop.<br> DE: Code für Tropfen.<br> FR: Code de goutte.<br> IT: Code per goccia.<br>
+     * EN: Code for Drop.<br>
+     * DE: Code für Tropfen.<br>
+     * FR: Code de goutte.<br>
+     * IT: Code per goccia.<br>
      */
     public static final String DROP_CODE = "732994000";
 
     /**
-     * EN: Code for Film.<br> DE: Code für Film.<br> FR: Code de film.<br> IT: Code per film.<br>
+     * EN: Code for Film.<br>
+     * DE: Code für Film.<br>
+     * FR: Code de film.<br>
+     * IT: Code per film.<br>
      */
     public static final String FILM_CODE = "732995004";
 
     /**
-     * EN: Code for g.<br> DE: Code für g.<br> FR: Code de g.<br> IT: Code per g.<br>
+     * EN: Code for g.<br>
+     * DE: Code für g.<br>
+     * FR: Code de g.<br>
+     * IT: Code per g.<br>
      */
     public static final String G_CODE = "g";
 
     /**
-     * EN: Code for Implant.<br> DE: Code für Implantat.<br> FR: Code de implant.<br> IT: Code per impianto.<br>
+     * EN: Code for GBq.<br>
+     * DE: Code für GBq.<br>
+     * FR: Code de GBq.<br>
+     * IT: Code per GBq.<br>
+     */
+    public static final String GBQ_CODE = "GBq";
+
+    /**
+     * EN: Code for Implant.<br>
+     * DE: Code für Implantat.<br>
+     * FR: Code de implant.<br>
+     * IT: Code per impianto.<br>
      */
     public static final String IMPLANT_CODE = "732996003";
 
     /**
-     * EN: Code for Inhaler.<br> DE: Code für Inhalator.<br> FR: Code de inhalateur.<br> IT: Code per inalatore.<br>
+     * EN: Code for Inhaler.<br>
+     * DE: Code für Inhalator.<br>
+     * FR: Code de inhalateur.<br>
+     * IT: Code per inalatore.<br>
      */
     public static final String INHALER_CODE = "732997007";
 
     /**
-     * EN: Code for Insert.<br> DE: Code für Insert.<br> FR: Code de insert.<br> IT: Code per inserto.<br>
+     * EN: Code for Insert.<br>
+     * DE: Code für Insert.<br>
+     * FR: Code de insert.<br>
+     * IT: Code per inserto.<br>
      */
     public static final String INSERT_CODE = "732998002";
 
     /**
-     * EN: Code for international unit.<br> DE: Code für Internationale Einheit.<br> FR: Code de unité(s)
-     * internationale(s).<br> IT: Code per unità internazionale(i).<br>
+     * EN: Code for international unit.<br>
+     * DE: Code für Internationale Einheit.<br>
+     * FR: Code de unité(s) internationale(s).<br>
+     * IT: Code per unità internazionale(i).<br>
      */
     public static final String INTERNATIONAL_UNIT_CODE = "[iU]";
 
     /**
-     * EN: Code for Jar.<br> DE: Code für Weithalsgefäss.<br> FR: Code de pot.<br> IT: Code per vasetto.<br>
+     * EN: Code for Jar.<br>
+     * DE: Code für Weithalsgefäss.<br>
+     * FR: Code de pot.<br>
+     * IT: Code per vasetto.<br>
      */
     public static final String JAR_CODE = "732999005";
 
     /**
-     * EN: Code for kcal.<br> DE: Code für kcal.<br> FR: Code de kcal.<br> IT: Code per kcal.<br>
+     * EN: Code for kBq.<br>
+     * DE: Code für kBq.<br>
+     * FR: Code de kBq.<br>
+     * IT: Code per kBq.<br>
+     */
+    public static final String KBQ_CODE = "kBq";
+
+    /**
+     * EN: Code for kcal.<br>
+     * DE: Code für kcal.<br>
+     * FR: Code de kcal.<br>
+     * IT: Code per kcal.<br>
      */
     public static final String KCAL_CODE = "kcal";
 
     /**
-     * EN: Code for kg.<br> DE: Code für kg.<br> FR: Code de kg.<br> IT: Code per kg.<br>
+     * EN: Code for kg.<br>
+     * DE: Code für kg.<br>
+     * FR: Code de kg.<br>
+     * IT: Code per kg.<br>
      */
     public static final String KG_CODE = "kg";
 
     /**
-     * EN: Code for kJ.<br> DE: Code für kJ.<br> FR: Code de kJ.<br> IT: Code per kJ.<br>
+     * EN: Code for kJ.<br>
+     * DE: Code für kJ.<br>
+     * FR: Code de kJ.<br>
+     * IT: Code per kJ.<br>
      */
     public static final String KJ_CODE = "kJ";
 
     /**
-     * EN: Code for lt.<br> DE: Code für lt.<br> FR: Code de lt.<br> IT: Code per l.<br>
+     * EN: Code for lt.<br>
+     * DE: Code für lt.<br>
+     * FR: Code de lt.<br>
+     * IT: Code per l.<br>
      */
     public static final String LT_CODE = "L";
 
     /**
-     * EN: Code for Lyophilisate.<br> DE: Code für Lyophilisat.<br> FR: Code de lyophilisat.<br> IT: Code per
-     * liofilizzato.<br>
+     * EN: Code for Lyophilisate.<br>
+     * DE: Code für Lyophilisat.<br>
+     * FR: Code de lyophilisat.<br>
+     * IT: Code per liofilizzato.<br>
      */
     public static final String LYOPHILISATE_CODE = "733001005";
 
     /**
-     * EN: Code for Matrix.<br> DE: Code für Matrix.<br> FR: Code de matrice.<br> IT: Code per matrice.<br>
+     * EN: Code for Matrix.<br>
+     * DE: Code für Matrix.<br>
+     * FR: Code de matrice.<br>
+     * IT: Code per matrice.<br>
      */
     public static final String MATRIX_CODE = "733002003";
 
     /**
-     * EN: Code for meq.<br> DE: Code für meq.<br> FR: Code de mEq.<br> IT: Code per mEq.<br>
+     * EN: Code for MBq.<br>
+     * DE: Code für MBq.<br>
+     * FR: Code de MBq.<br>
+     * IT: Code per MBq.<br>
+     */
+    public static final String MBQ_CODE = "MBq";
+
+    /**
+     * EN: Code for meq.<br>
+     * DE: Code für meq.<br>
+     * FR: Code de mEq.<br>
+     * IT: Code per mEq.<br>
      */
     public static final String MEQ_CODE = "meq";
 
     /**
-     * EN: Code for mg.<br> DE: Code für mg.<br> FR: Code de mg.<br> IT: Code per mg.<br>
+     * EN: Code for mg.<br>
+     * DE: Code für mg.<br>
+     * FR: Code de mg.<br>
+     * IT: Code per mg.<br>
      */
     public static final String MG_CODE = "mg";
 
     /**
-     * EN: Code for MillionInternationalUnit.<br> DE: Code für MioUI.<br> FR: Code de MioUI.<br> IT: Code per
-     * MioUI.<br>
+     * EN: Code for MillionInternationalUnit.<br>
+     * DE: Code für MioUI.<br>
+     * FR: Code de MioUI.<br>
+     * IT: Code per MioUI.<br>
      */
     public static final String MILLIONINTERNATIONALUNIT_CODE = "10*6.[iU]";
 
     /**
-     * EN: Code for MioU.<br> DE: Code für MioU.<br> FR: Code de MioU.<br> IT: Code per MioU.<br>
+     * EN: Code for MioU.<br>
+     * DE: Code für MioU.<br>
+     * FR: Code de MioU.<br>
+     * IT: Code per MioU.<br>
      */
-    public static final String MIOU_CODE = "10*6.{Unit}";
+    public static final String MIOU_CODE = "396186001";
 
     /**
-     * EN: Code for ml.<br> DE: Code für ml.<br> FR: Code de ml.<br> IT: Code per ml.<br>
+     * EN: Code for ml.<br>
+     * DE: Code für ml.<br>
+     * FR: Code de ml.<br>
+     * IT: Code per ml.<br>
      */
     public static final String ML_CODE = "mL";
 
     /**
-     * EN: Code for mm2.<br> DE: Code für mm2.<br> FR: Code de mm2.<br> IT: Code per mm2.<br>
+     * EN: Code for mm2.<br>
+     * DE: Code für mm2.<br>
+     * FR: Code de mm2.<br>
+     * IT: Code per mm2.<br>
      */
     public static final String MM2_CODE = "mm2";
 
     /**
-     * EN: Code for mmol.<br> DE: Code für mmol.<br> FR: Code de mmol.<br> IT: Code per mmol.<br>
+     * EN: Code for mmol.<br>
+     * DE: Code für mmol.<br>
+     * FR: Code de mmol.<br>
+     * IT: Code per mmol.<br>
      */
     public static final String MMOL_CODE = "mmol";
 
     /**
-     * EN: Code for mol.<br> DE: Code für mol.<br> FR: Code de mol.<br> IT: Code per mol.<br>
+     * EN: Code for mol.<br>
+     * DE: Code für mol.<br>
+     * FR: Code de mol.<br>
+     * IT: Code per mol.<br>
      */
     public static final String MOL_CODE = "mol";
 
     /**
-     * EN: Code for ng.<br> DE: Code für ng.<br> FR: Code de ng.<br> IT: Code per ng.<br>
+     * EN: Code for ng.<br>
+     * DE: Code für ng.<br>
+     * FR: Code de ng.<br>
+     * IT: Code per ng.<br>
      */
     public static final String NG_CODE = "ng";
 
     /**
-     * EN: Code for nl.<br> DE: Code für nl.<br> FR: Code de nl.<br> IT: Code per nl.<br>
+     * EN: Code for nl.<br>
+     * DE: Code für nl.<br>
+     * FR: Code de nl.<br>
+     * IT: Code per nl.<br>
      */
     public static final String NL_CODE = "nL";
 
     /**
-     * EN: Code for Package.<br> DE: Code für Packung.<br> FR: Code de emballage.<br> IT: Code per confezione.<br>
+     * EN: Code for Package.<br>
+     * DE: Code für Packung.<br>
+     * FR: Code de emballage.<br>
+     * IT: Code per confezione.<br>
      */
-    public static final String PACKAGE_CODE = "{Package}";
+    public static final String PACKAGE_CODE = "1681000175101";
 
     /**
-     * EN: Code for Pad.<br> DE: Code für Pad.<br> FR: Code de tampon applicateur.<br> IT: Code per tampone.<br>
+     * EN: Code for Pad.<br>
+     * DE: Code für Pad.<br>
+     * FR: Code de tampon applicateur.<br>
+     * IT: Code per tampone.<br>
      */
     public static final String PAD_CODE = "733003008";
 
     /**
-     * EN: Code for Pastille.<br> DE: Code für Pastille.<br> FR: Code de pastille molle.<br> IT: Code per pastiglia
-     * molle.<br>
+     * EN: Code for Pastille.<br>
+     * DE: Code für Pastille.<br>
+     * FR: Code de pastille molle.<br>
+     * IT: Code per pastiglia molle.<br>
      */
     public static final String PASTILLE_CODE = "733004002";
 
     /**
-     * EN: Code for Patch.<br> DE: Code für Patch.<br> FR: Code de patch.<br> IT: Code per cerotto.<br>
+     * EN: Code for Patch.<br>
+     * DE: Code für Patch.<br>
+     * FR: Code de patch.<br>
+     * IT: Code per cerotto.<br>
      */
     public static final String PATCH_CODE = "733005001";
 
     /**
-     * EN: Code for Pen.<br> DE: Code für Pen.<br> FR: Code de stylo.<br> IT: Code per penna.<br>
+     * EN: Code for Pen.<br>
+     * DE: Code für Pen.<br>
+     * FR: Code de stylo.<br>
+     * IT: Code per penna.<br>
      */
     public static final String PEN_CODE = "733006000";
 
     /**
-     * EN: Code for %.<br> DE: Code für %.<br> FR: Code de %.<br> IT: Code per %.<br>
+     * EN: Code for %.<br>
+     * DE: Code für %.<br>
+     * FR: Code de %.<br>
+     * IT: Code per %.<br>
      */
     public static final String PERCENT_CODE = "%";
 
     /**
-     * EN: Code for Pessary.<br> DE: Code für Pessar.<br> FR: Code de ovule.<br> IT: Code per ovulo.<br>
+     * EN: Code for Pessary.<br>
+     * DE: Code für Pessar.<br>
+     * FR: Code de ovule.<br>
+     * IT: Code per ovulo.<br>
      */
     public static final String PESSARY_CODE = "733007009";
 
     /**
-     * EN: Code for Piece(s).<br> DE: Code für Stk.<br> FR: Code de pce.<br> IT: Code per pz.<br>
+     * EN: Code for Piece(s).<br>
+     * DE: Code für Stk.<br>
+     * FR: Code de pce.<br>
+     * IT: Code per pz.<br>
      */
     public static final String PIECE_CODE = "{Piece}";
 
     /**
-     * EN: Code for Pillule.<br> DE: Code für Streukügelchen.<br> FR: Code de granule.<br> IT: Code per granuli.<br>
+     * EN: Code for Pillule.<br>
+     * DE: Code für Streukügelchen.<br>
+     * FR: Code de granule.<br>
+     * IT: Code per granuli.<br>
      */
     public static final String PILLULE_CODE = "733008004";
 
     /**
-     * EN: Code for Pipette.<br> DE: Code für Pipette.<br> FR: Code de pipette.<br> IT: Code per pipetta.<br>
+     * EN: Code for Pipette.<br>
+     * DE: Code für Pipette.<br>
+     * FR: Code de pipette.<br>
+     * IT: Code per pipetta.<br>
      */
     public static final String PIPETTE_CODE = "733009007";
 
     /**
-     * EN: Code for Plaster.<br> DE: Code für Pflaster.<br> FR: Code de emplâtre.<br> IT: Code per cerotto.<br>
+     * EN: Code for Plaster.<br>
+     * DE: Code für Pflaster.<br>
+     * FR: Code de emplâtre.<br>
+     * IT: Code per cerotto.<br>
      */
     public static final String PLASTER_CODE = "733010002";
 
     /**
-     * EN: Code for Plug.<br> DE: Code für Einsatz.<br> FR: Code de support poreux.<br> IT: Code per supporto.<br>
+     * EN: Code for Plug.<br>
+     * DE: Code für Einsatz.<br>
+     * FR: Code de support poreux.<br>
+     * IT: Code per supporto.<br>
      */
     public static final String PLUG_CODE = "733011003";
 
     /**
-     * EN: Code for Pouch.<br> DE: Code für Beutelchen.<br> FR: Code de pochette.<br> IT: Code per sachetta.<br>
+     * EN: Code for Pouch.<br>
+     * DE: Code für Beutelchen.<br>
+     * FR: Code de pochette.<br>
+     * IT: Code per sachetta.<br>
      */
     public static final String POUCH_CODE = "733012005";
 
     /**
-     * EN: Code for ppm.<br> DE: Code für ppm.<br> FR: Code de ppm.<br> IT: Code per ppm.<br>
+     * EN: Code for ppm.<br>
+     * DE: Code für ppm.<br>
+     * FR: Code de ppm.<br>
+     * IT: Code per ppm.<br>
      */
     public static final String PPM_CODE = "[ppm]";
 
     /**
-     * EN: Code for Sachet.<br> DE: Code für Beutel.<br> FR: Code de sachet.<br> IT: Code per bustina.<br>
+     * EN: Code for Sachet.<br>
+     * DE: Code für Beutel.<br>
+     * FR: Code de sachet.<br>
+     * IT: Code per bustina.<br>
      */
     public static final String SACHET_CODE = "733013000";
 
     /**
-     * EN: Code for Sponge.<br> DE: Code für Schwämmchen.<br> FR: Code de eponge.<br> IT: Code per spugna.<br>
+     * EN: Code for Sponge.<br>
+     * DE: Code für Schwämmchen.<br>
+     * FR: Code de eponge.<br>
+     * IT: Code per spugna.<br>
      */
     public static final String SPONGE_CODE = "733014006";
 
     /**
-     * EN: Code for Spoonful.<br> DE: Code für ein Löffel voll.<br> FR: Code de cuillerée.<br> IT: Code per
-     * cucciaio.<br>
+     * EN: Code for Spoonful.<br>
+     * DE: Code für ein Löffel voll.<br>
+     * FR: Code de cuillerée.<br>
+     * IT: Code per cucciaio.<br>
      */
     public static final String SPOONFUL_CODE = "733015007";
 
     /**
-     * EN: Code for Stick.<br> DE: Code für Stäbchen.<br> FR: Code de bâton.<br> IT: Code per stick.<br>
+     * EN: Code for Stick.<br>
+     * DE: Code für Stäbchen.<br>
+     * FR: Code de bâton.<br>
+     * IT: Code per stick.<br>
      */
     public static final String STICK_CODE = "733016008";
 
     /**
-     * EN: Code for Straw.<br> DE: Code für Trinkhalm.<br> FR: Code de paille.<br> IT: Code per cannuccia.<br>
+     * EN: Code for Straw.<br>
+     * DE: Code für Trinkhalm.<br>
+     * FR: Code de paille.<br>
+     * IT: Code per cannuccia.<br>
      */
     public static final String STRAW_CODE = "733017004";
 
     /**
-     * EN: Code for Strip.<br> DE: Code für Streifen.<br> FR: Code de bandelette.<br> IT: Code per strip.<br>
+     * EN: Code for Strip.<br>
+     * DE: Code für Streifen.<br>
+     * FR: Code de bandelette.<br>
+     * IT: Code per strip.<br>
      */
     public static final String STRIP_CODE = "733018009";
 
     /**
-     * EN: Code for Suppository.<br> DE: Code für Zäpfchen.<br> FR: Code de suppositoire.<br> IT: Code per
-     * supposta.<br>
+     * EN: Code for Suppository.<br>
+     * DE: Code für Zäpfchen.<br>
+     * FR: Code de suppositoire.<br>
+     * IT: Code per supposta.<br>
      */
     public static final String SUPPOSITORY_CODE = "733019001";
 
     /**
-     * EN: Code for Syringe.<br> DE: Code für Spritze.<br> FR: Code de seringue.<br> IT: Code per siringa.<br>
+     * EN: Code for Syringe.<br>
+     * DE: Code für Spritze.<br>
+     * FR: Code de seringue.<br>
+     * IT: Code per siringa.<br>
      */
     public static final String SYRINGE_CODE = "733020007";
 
     /**
-     * EN: Code for System.<br> DE: Code für System.<br> FR: Code de système.<br> IT: Code per sistema.<br>
+     * EN: Code for System.<br>
+     * DE: Code für System.<br>
+     * FR: Code de système.<br>
+     * IT: Code per sistema.<br>
      */
     public static final String SYSTEM_CODE = "733021006";
 
     /**
-     * EN: Code for tablespoon - metric.<br> DE: Code für Esslöffel.<br> FR: Code de c. à soupe.<br> IT: Code per
-     * cucchiaio da minestra.<br>
+     * EN: Code for tablespoon - metric.<br>
+     * DE: Code für Esslöffel.<br>
+     * FR: Code de c. à soupe.<br>
+     * IT: Code per cucchiaio da minestra.<br>
      */
     public static final String TABLESPOON_METRIC_CODE = "[tbs_m]";
 
     /**
-     * EN: Code for Tablet.<br> DE: Code für Tablette.<br> FR: Code de comprimé.<br> IT: Code per compressa.<br>
+     * EN: Code for Tablet.<br>
+     * DE: Code für Tablette.<br>
+     * FR: Code de comprimé.<br>
+     * IT: Code per compressa.<br>
      */
     public static final String TABLET_CODE = "732936001";
 
     /**
-     * EN: Code for Tampon.<br> DE: Code für Tampon.<br> FR: Code de tampon diffuseur.<br> IT: Code per tampone.<br>
+     * EN: Code for Tampon.<br>
+     * DE: Code für Tampon.<br>
+     * FR: Code de tampon diffuseur.<br>
+     * IT: Code per tampone.<br>
      */
     public static final String TAMPON_CODE = "733022004";
 
     /**
-     * EN: Code for teaspoon - metric.<br> DE: Code für Teelöffel.<br> FR: Code de c. à café.<br> IT: Code per
-     * cucchiaino da caffè.<br>
+     * EN: Code for teaspoon - metric.<br>
+     * DE: Code für Teelöffel.<br>
+     * FR: Code de c. à café.<br>
+     * IT: Code per cucchiaino da caffè.<br>
      */
     public static final String TEASPOON_METRIC_CODE = "[tsp_m]";
 
     /**
-     * EN: Code for Thousand Per * Unit.<br> DE: Code für Tausend Einheiten.<br> FR: Code de millier d'unités.<br> IT:
-     * Code per mille per unità *.<br>
+     * EN: Code for Thousand Per * Unit.<br>
+     * DE: Code für Tausend Einheiten.<br>
+     * FR: Code de millier d'unités.<br>
+     * IT: Code per mille per unità *.<br>
      */
-    public static final String THOUSAND_PER_STAR_UNIT_CODE = "10*3.{Unit}";
+    public static final String THOUSAND_PER_STAR_UNIT_CODE = "2011000175108";
 
     /**
-     * EN: Code for Thread.<br> DE: Code für Faden.<br> FR: Code de fil.<br> IT: Code per filo.<br>
+     * EN: Code for Thread.<br>
+     * DE: Code für Faden.<br>
+     * FR: Code de fil.<br>
+     * IT: Code per filo.<br>
      */
     public static final String THREAD_CODE = "733023009";
 
     /**
-     * EN: Code for Tube.<br> DE: Code für Tube.<br> FR: Code de tube.<br> IT: Code per tubo.<br>
+     * EN: Code for Tube.<br>
+     * DE: Code für Tube.<br>
+     * FR: Code de tube.<br>
+     * IT: Code per tubo.<br>
      */
     public static final String TUBE_CODE = "733024003";
 
     /**
-     * EN: Code for µg.<br> DE: Code für µg.<br> FR: Code de µg.<br> IT: Code per µg.<br>
+     * EN: Code for µg.<br>
+     * DE: Code für µg.<br>
+     * FR: Code de µg.<br>
+     * IT: Code per µg.<br>
      */
     public static final String UG_CODE = "ug";
 
     /**
-     * EN: Code for µl.<br> DE: Code für µl.<br> FR: Code de µl.<br> IT: Code per µl.<br>
+     * EN: Code for µl.<br>
+     * DE: Code für µl.<br>
+     * FR: Code de µl.<br>
+     * IT: Code per µl.<br>
      */
     public static final String UL_CODE = "uL";
 
     /**
-     * EN: Code for µmol.<br> DE: Code für µmol.<br> FR: Code de µmol.<br> IT: Code per µmol.<br>
+     * EN: Code for µmol.<br>
+     * DE: Code für µmol.<br>
+     * FR: Code de µmol.<br>
+     * IT: Code per µmol.<br>
      */
     public static final String UMOL_CODE = "umol";
 
     /**
-     * EN: Code for unit.<br> DE: Code für Einheit.<br> FR: Code de unité(s).<br> IT: Code per unità.<br>
+     * EN: Code for unit.<br>
+     * DE: Code für Einheit.<br>
+     * FR: Code de unité(s).<br>
+     * IT: Code per unità.<br>
      */
-    public static final String UNIT_CODE = "{Unit}";
+    public static final String UNIT_CODE = "767525000";
 
     /**
-     * EN: Code for Vessel.<br> DE: Code für Gefäss.<br> FR: Code de récipient étanche.<br> IT: Code per recipiente a
-     * tenuta.<br>
+     * EN: Code for Vessel.<br>
+     * DE: Code für Gefäss.<br>
+     * FR: Code de récipient étanche.<br>
+     * IT: Code per recipiente a tenuta.<br>
      */
     public static final String VESSEL_CODE = "733025002";
 
     /**
-     * EN: Code for Vial.<br> DE: Code für Durchstechflasche.<br> FR: Code de petit flacon.<br> IT: Code per
-     * flaconcino.<br>
+     * EN: Code for Vial.<br>
+     * DE: Code für Durchstechflasche.<br>
+     * FR: Code de petit flacon.<br>
+     * IT: Code per flaconcino.<br>
      */
     public static final String VIAL_CODE = "733026001";
 
@@ -1349,13 +1899,7 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
      * @param displayNameFr The display name in French.
      * @param displayNameIt The display name in Italian.
      */
-    RegularUnitCodeAmbu(@NonNull final String code,
-                        @NonNull final String codeSystem,
-                        @NonNull final String displayName,
-                        @NonNull final String displayNameEn,
-                        @NonNull final String displayNameDe,
-                        @NonNull final String displayNameFr,
-                        @NonNull final String displayNameIt) {
+    RegularUnitCodeAmbu(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
         this.code = Objects.requireNonNull(code);
         this.codeSystem = Objects.requireNonNull(codeSystem);
         this.displayNames = new String[5];
@@ -1415,12 +1959,17 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
         if (languageCode == null) {
             return this.displayNames[0];
         }
-        return switch (languageCode) {
-            case ENGLISH -> this.displayNames[1];
-            case GERMAN -> this.displayNames[2];
-            case FRENCH -> this.displayNames[3];
-            case ITALIAN -> this.displayNames[4];
-            default -> "TOTRANSLATE";
+        return switch(languageCode) {
+            case ENGLISH ->
+                this.displayNames[1];
+            case GERMAN ->
+                this.displayNames[2];
+            case FRENCH ->
+                this.displayNames[3];
+            case ITALIAN ->
+                this.displayNames[4];
+            default ->
+                "TOTRANSLATE";
         };
     }
 
