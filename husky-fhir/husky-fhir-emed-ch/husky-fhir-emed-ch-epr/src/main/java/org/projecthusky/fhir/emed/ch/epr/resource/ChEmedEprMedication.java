@@ -31,7 +31,7 @@ import java.util.List;
  *
  * @author Quentin Ligier
  **/
-@ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-medication")
+@ResourceDef(profile = "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medication")
 public class ChEmedEprMedication extends Medication {
 
     /**

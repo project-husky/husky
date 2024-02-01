@@ -527,21 +527,15 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
     public Author resolveMedicalAuthor() {
         if (hasPerformer()) {
             for (var performer : getPerformer()) {
-                if (performer.hasFunction()) {
-                    //if (performer.getFunction().hasCoding() && !performer.getFunction().getCoding().isEmpty()) {
-                    //    if (MedicationdispensePerformerFunction.FINALCHECKER.toCode().equals(performer.getFunction().getCodingFirstRep().getCode())) {
-                            if (performer.hasActor()) {
-                                final var actorResource = performer.getActor().getResource();
-                                if (       actorResource instanceof ChEmedEprPractitionerRole
-                                        || actorResource instanceof ChCorePatientEpr
-                                        || actorResource instanceof ChEmedEprRelatedPerson
-                                ) {
-                                    return new Author(actorResource, resolveMedicalAuthorshipTimestamp());
-                                } else throw new InvalidEmedContentException("The performer actor has to be a PractitionerRole or a Patient or a RelatedPerson.");
-                            } else throw new InvalidEmedContentException("The performer has no actor.");
-                        //}
-                    //} else throw new InvalidEmedContentException("There are performers without a specified coding for their function.");
-                } else throw new InvalidEmedContentException("There are performers without specified function.");
+                if (performer.hasActor()) {
+                    final var actorResource = performer.getActor().getResource();
+                    if (       actorResource instanceof ChEmedEprPractitionerRole
+                            || actorResource instanceof ChCorePatientEpr
+                            || actorResource instanceof ChEmedEprRelatedPerson
+                    ) {
+                        return new Author(actorResource, resolveMedicalAuthorshipTimestamp());
+                    } else throw new InvalidEmedContentException("The performer actor has to be a PractitionerRole or a Patient or a RelatedPerson.");
+                } else throw new InvalidEmedContentException("The performer has no actor.");
             }
             throw new InvalidEmedContentException("The dispense resource has performer(s) but is missing at least one final checker performer.");
         }

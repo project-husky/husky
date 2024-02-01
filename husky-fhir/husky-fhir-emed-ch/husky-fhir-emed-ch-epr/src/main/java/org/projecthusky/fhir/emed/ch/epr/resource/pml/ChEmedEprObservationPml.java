@@ -21,7 +21,7 @@ import java.util.UUID;
  *
  * @author Ronaldo Loureiro
  **/
-@ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-observation-list")
+@ResourceDef(profile = "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-observation-list")
 public class ChEmedEprObservationPml
         extends ChEmedEprObservation implements ChEmedEprDocumentAuthorable<ChEmedEprObservationPml> {
 
