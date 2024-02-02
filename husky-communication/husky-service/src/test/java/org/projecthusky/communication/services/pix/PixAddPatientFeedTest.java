@@ -1,0 +1,72 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0
+ * in the github project https://github.com/project-husky/husky there you also
+ * find a list of the contributors and the license information.
+ *
+ * This project has been developed further and modified by the joined working group Husky
+ * on the basis of the eHealth Connector opensource project from June 28, 2021,
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ *
+ */
+package org.projecthusky.communication.services.pix;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.hl7.fhir.r4.model.Organization;
+import org.junit.jupiter.api.Test;
+import org.projecthusky.common.communication.Destination;
+import org.projecthusky.communication.requests.pix.PixAddPatientFeed;
+
+public class PixAddPatientFeedTest {
+
+	@Test
+	public void whenNoDestinationIsSet_thenBuildingTheQueryThrowsAnException() {
+		NullPointerException resultingException = assertThrows(NullPointerException.class, () -> {
+			PixAddPatientFeed.builder().build();
+		});
+		assertEquals("destination is marked non-null but is null", resultingException.getMessage());
+	}
+
+	@Test
+	public void whenDestinationIsSetToNull_thenExceptionIsThrown() {
+		NullPointerException resultingException = assertThrows(NullPointerException.class, () -> {
+			PixAddPatientFeed.builder().destination(null);
+		});
+		assertEquals("destination is marked non-null but is null", resultingException.getMessage());
+	}
+
+	@Test
+	void whenDestinationIsNotNull_butScopingOrganizationIsNotSet_thenExceptionIsThrown() throws Exception {
+		NullPointerException resultingException = assertThrows(NullPointerException.class, () -> {
+			PixAddPatientFeed.builder().destination(new Destination()).build();
+		});
+		assertEquals("scopingOrganization is marked non-null but is null", resultingException.getMessage());
+	}
+
+	@Test
+	void whenDestinationIsNotNull_andScopingOrganizationIsSetToNull_thenExceptionIsThrown() throws Exception {
+		NullPointerException resultingException = assertThrows(NullPointerException.class, () -> {
+			PixAddPatientFeed.builder().destination(new Destination()).scopingOrganization(null);
+		});
+		assertEquals("scopingOrganization is marked non-null but is null", resultingException.getMessage());
+	}
+
+	@Test
+	public void whenBuilderIsBuilt_withMinimalParameters_thenListsAreInitializedByLombokAsEmplty() {
+		PixAddPatientFeed addPatientQuery = PixAddPatientFeed.builder().destination(new Destination()).scopingOrganization(new Organization()).build();
+		assertNotNull(addPatientQuery);
+		assertNotNull(addPatientQuery.getIdentifiers());
+		assertNotNull(addPatientQuery.getNonMedicalIdentifiers());
+		assertNotNull(addPatientQuery.getAddresses());
+		assertNotNull(addPatientQuery.getLanguages());
+		assertNotNull(addPatientQuery.getTelecomContacts());
+		assertEquals(0, addPatientQuery.getIdentifiers().size());
+		assertEquals(0, addPatientQuery.getNonMedicalIdentifiers().size());
+		assertEquals(0, addPatientQuery.getAddresses().size());
+		assertEquals(0, addPatientQuery.getLanguages().size());
+		assertEquals(0, addPatientQuery.getTelecomContacts().size());
+	}
+
+}

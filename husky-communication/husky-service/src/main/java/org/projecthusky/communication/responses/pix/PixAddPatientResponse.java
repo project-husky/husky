@@ -1,0 +1,84 @@
+/*
+ * This code is made available under the terms of the Eclipse Public License v1.0 
+ * in the github project https://github.com/project-husky/husky there you also 
+ * find a list of the contributors and the license information.
+ * 
+ * This project has been developed further and modified by the joined working group Husky 
+ * on the basis of the eHealth Connector opensource project from June 28, 2021, 
+ * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+ */
+package org.projecthusky.communication.responses.pix;
+
+import org.projecthusky.communication.mpi.V3Acknowledgement;
+
+import net.ihe.gazelle.hl7v3.mcciin000002UV01.MCCIIN000002UV01Type;
+import org.projecthusky.communication.responses.BaseResponse;
+
+/**
+ * Response class that contains all XML elements for a {@link PixAddPatientQuery}.<br/>
+ * Mostly a copy of {@link V3Acknowledgement} class.
+ * @author szalai
+ */
+public class PixAddPatientResponse extends BaseResponse {
+	private MCCIIN000002UV01Type rootElement = null;
+
+	// right now the only constructor takes in xml element
+	/**
+	 * Constructor that accepts the XML containing the Acknowledgement message (MCCIIN000002UV01).
+	 * 
+	 * @param v3Acknowledgement
+	 */
+	public PixAddPatientResponse(MCCIIN000002UV01Type v3Acknowledgement) {
+
+		// get the pix response
+		rootElement = v3Acknowledgement;
+
+		// set the id
+		this.messageId = rootElement.getId();
+
+		// get sender information
+		this.sendingApplication = rootElement.getSender().getDevice().getId().get(0).getRoot();
+		if (null != rootElement.getSender().getDevice().getAsAgent()
+				&& null != rootElement.getSender().getDevice().getAsAgent().getRepresentedOrganization()
+				&& !rootElement.getSender().getDevice().getAsAgent().getRepresentedOrganization().getId().isEmpty())
+			this.sendingFacility = rootElement.getSender().getDevice().getAsAgent().getRepresentedOrganization().getId()
+					.get(0).getRoot();
+
+		// find how many receivers there are
+		int numReceivers = rootElement.getReceiver().size();
+
+		// for each reciever
+		for (var i = 0; i < numReceivers; i++) {
+			// get the application and (if available) facility
+			receivingApplication.add(rootElement.getReceiver().get(i).getDevice().getId().get(0).getRoot());
+			if (null != rootElement.getReceiver().get(i).getDevice().getAsAgent())
+				receivingFacility.add(rootElement.getReceiver().get(i).getDevice().getAsAgent()
+						.getRepresentedOrganization().getId().get(0).getRoot());
+		}
+
+		// get the ack code
+		this.setAcknowledgementCode(rootElement.getAcknowledgement().get(0).getTypeCode().getCode());
+
+		// if there is acknowledgement detail
+		if (!rootElement.getAcknowledgement().get(0).getAcknowledgementDetail().isEmpty()) {
+			var detailCode = "";
+			var detailText = "";
+
+			if (null != rootElement.getAcknowledgement().get(0).getAcknowledgementDetail().get(0).getCode())
+				detailCode = rootElement.getAcknowledgement().get(0).getAcknowledgementDetail().get(0).getCode()
+						.getCode();
+
+			if (null != rootElement.getAcknowledgement().get(0).getAcknowledgementDetail().get(0).getText())
+				detailText = rootElement.getAcknowledgement().get(0).getAcknowledgementDetail().get(0).getText()
+						.getMixed().get(0).toString();
+
+			if (rootElement.getAcknowledgement().get(0).getAcknowledgementDetail().get(0).getLocation() != null
+					&& !rootElement.getAcknowledgement().get(0).getAcknowledgementDetail().get(0).getLocation()
+							.isEmpty())
+				detailText += " Location: " + rootElement.getAcknowledgement().get(0).getAcknowledgementDetail().get(0)
+						.getLocation().get(0).getMixed().get(0).toString();
+
+			this.setAcknowledgementDetail(detailCode, detailText, null, null);
+		}
+	}
+}

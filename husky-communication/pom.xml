@@ -15,6 +15,7 @@
   	<module>husky-xua</module>
   	<module>husky-valueset-gen</module>
   	<module>husky-ppq</module>
+    <module>husky-service</module>
   	<module>husky-communication-at</module>
     <module>husky-xds-mhd-conversion</module>
   </modules>
