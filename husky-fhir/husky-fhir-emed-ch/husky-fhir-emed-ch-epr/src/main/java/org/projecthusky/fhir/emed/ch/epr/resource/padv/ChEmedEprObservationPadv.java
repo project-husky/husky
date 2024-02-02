@@ -11,7 +11,7 @@ import java.util.UUID;
  *
  * @author Ronaldo Loureiro
  **/
-@ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-observation")
+@ResourceDef(profile = "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-observation")
 public class ChEmedEprObservationPadv extends ChEmedEprObservation {
 
     /**

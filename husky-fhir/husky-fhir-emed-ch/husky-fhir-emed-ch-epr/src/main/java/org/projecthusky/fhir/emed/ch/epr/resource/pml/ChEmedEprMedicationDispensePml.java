@@ -23,7 +23,7 @@ import java.util.UUID;
  *
  * @author Ronaldo Loureiro
  **/
-@ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-medicationdispense-list")
+@ResourceDef(profile = "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationdispense-list")
 public class ChEmedEprMedicationDispensePml
         extends ChEmedEprMedicationDispense implements ChEmedEprDocumentAuthorable<ChEmedEprMedicationDispensePml> {
 

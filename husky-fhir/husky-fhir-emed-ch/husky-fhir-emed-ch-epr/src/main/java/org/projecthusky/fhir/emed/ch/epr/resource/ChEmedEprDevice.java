@@ -18,6 +18,6 @@ import org.hl7.fhir.r4.model.Device;
  *
  * @author Quentin Ligier
  **/
-@ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-device")
+@ResourceDef(profile = "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-device")
 public class ChEmedEprDevice extends Device {
 }

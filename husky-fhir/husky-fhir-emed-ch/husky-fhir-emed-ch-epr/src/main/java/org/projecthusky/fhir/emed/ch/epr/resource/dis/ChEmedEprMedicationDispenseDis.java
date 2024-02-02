@@ -11,7 +11,7 @@ import java.util.UUID;
  *
  * @author Ronaldo Loureiro
  **/
-@ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-medicationdispense")
+@ResourceDef(profile = "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationdispense")
 public class ChEmedEprMedicationDispenseDis extends ChEmedEprMedicationDispense {
 
     /**

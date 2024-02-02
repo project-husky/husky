@@ -100,8 +100,7 @@ public class ChEmedEprDosage extends Dosage {
         if (!this.hasDoseAndRate()) {
             return null;
         }
-        return Dose.fromQuantityAndRange(this.getDoseAndRateFirstRep().getDoseQuantity(),
-                                         this.getDoseAndRateFirstRep().getRateRange());
+        return Dose.fromDosageDoseAndRateComponent(this.getDoseAndRateFirstRep());
     }
 
     /**

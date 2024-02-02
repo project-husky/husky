@@ -1,6 +1,7 @@
 package org.projecthusky.fhir.emed.ch.epr.model.common;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.Dosage;
 import org.hl7.fhir.r4.model.Quantity;
 import org.hl7.fhir.r4.model.Range;
 
@@ -41,20 +42,18 @@ public record Dose(@Nullable AmountQuantity quantity,
         return this.quantity != null;
     }
 
-    public static Dose fromQuantityAndRange(final Quantity quantity,
-                                            final Range range) {
-        if (quantity.isEmpty() && range.isEmpty()) {
-            throw new IllegalArgumentException("Dose: Either the quantity or range shall be specified");
+    public static Dose fromDosageDoseAndRateComponent(final Dosage.DosageDoseAndRateComponent doseAndRate) {
+        if (doseAndRate.hasDoseQuantity()) {
+            if (doseAndRate.hasDoseRange())
+                throw new IllegalArgumentException("Dose: Either the quantity or range shall be specified");
+            else return new Dose(AmountQuantity.fromQuantity(doseAndRate.getDoseQuantity()), null, null);
         }
-        if (!quantity.isEmpty() && !range.isEmpty()) {
-            throw new IllegalArgumentException("Dose: Either the quantity or range shall be specified");
-        }
-        if (!quantity.isEmpty()) {
-            return new Dose(AmountQuantity.fromQuantity(quantity), null, null);
-        } else {
-            return new Dose(null,
-                            AmountQuantity.fromQuantity(range.getLow()),
-                            AmountQuantity.fromQuantity(range.getHigh()));
-        }
+        if (doseAndRate.hasDoseRange())
+            return new Dose(
+                null,
+                AmountQuantity.fromQuantity(doseAndRate.getDoseRange().getLow()),
+                AmountQuantity.fromQuantity(doseAndRate.getDoseRange().getHigh())
+            );
+        else throw new IllegalArgumentException("Dose: Either the quantity or range shall be specified");
     }
 }
