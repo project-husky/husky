@@ -4,8 +4,9 @@ import lombok.Getter;
 
 /**
  * Refer to the following
- * <a href="https://www.ihe.net/uploadedFiles/Documents/ITI/IHE_ITI_Suppl_HPD.pdf"></a>
- * <a href="https://www.fedlex.admin.ch/filestore/fedlex.data.admin.ch/eli/oce/2022/39/de/pdf-a/fedlex-data-admin-ch-eli-oce-2022-39-de-pdf-a.pdf></a>
+ * {@linkplain }
+ * @see <a href="https://www.ihe.net/uploadedFiles/Documents/ITI/IHE_ITI_Suppl_HPD.pdf">IHE_ITI_Suppl_HPD.pdf</a>
+ * @see <a href="https://www.fedlex.admin.ch/filestore/fedlex.data.admin.ch/eli/oce/2022/39/de/pdf-a/fedlex-data-admin-ch-eli-oce-2022-39-de-pdf-a.pdf">fedlex-data-admin-ch-eli-oce-2022-39-de-pdf-a.pdf</a>
  *  for the enum values
  */
 @Getter
