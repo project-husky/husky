@@ -26,6 +26,8 @@ public class SvsValueSetRequest {
   private SourceSystemType sourceSystemType;
   private String sourceUrl;
 
+  public static class SvsValueSetRequestBuilder {}
+  
   /**
    * Builds the ValueSetConfig object.
    *

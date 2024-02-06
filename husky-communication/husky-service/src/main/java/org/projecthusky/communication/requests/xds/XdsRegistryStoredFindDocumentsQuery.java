@@ -72,7 +72,9 @@ public class XdsRegistryStoredFindDocumentsQuery {
 	@Singular
 	private List<DateTimeRange> dateTimeRanges;
 	private Person authorPerson;
-
+	
+	public static abstract class XdsRegistryStoredFindDocumentsQueryBuilder<C extends XdsRegistryStoredFindDocumentsQuery, B extends XdsRegistryStoredFindDocumentsQuery.XdsRegistryStoredFindDocumentsQueryBuilder<C, B>> {}
+	
 	public StoredQuery getIpfQuery() {
 		var findDocumentsQuery = new org.openehealth.ipf.commons.ihe.xds.core.requests.query.FindDocumentsQuery();
 		findDocumentsQuery.setPatientId(XdsMetadataUtil.convertEhcIdentificator(this.patientID));

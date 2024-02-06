@@ -22,7 +22,9 @@ import org.projecthusky.common.utils.XdsMetadataUtil;
 @SuperBuilder
 @ToString
 public class XdsFindFoldersStoredQuery extends XdsRegistryStoredFindDocumentsQuery {
-
+	
+	public static abstract class XdsFindFoldersStoredQueryBuilder<C extends XdsFindFoldersStoredQuery, B extends XdsFindFoldersStoredQuery.XdsFindFoldersStoredQueryBuilder<C, B>> extends XdsRegistryStoredFindDocumentsQuery.XdsRegistryStoredFindDocumentsQueryBuilder<C, B> {}
+	
   public StoredQuery getIpfQuery() {
     var findFoldersQuery = new FindFoldersQuery();
     findFoldersQuery.setPatientId(XdsMetadataUtil.convertEhcIdentificator(this.getPatientID()));
@@ -30,4 +32,5 @@ public class XdsFindFoldersStoredQuery extends XdsRegistryStoredFindDocumentsQue
 
     return findFoldersQuery;
   }
+  
 }

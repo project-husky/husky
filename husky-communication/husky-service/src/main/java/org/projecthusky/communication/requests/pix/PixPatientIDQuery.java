@@ -43,6 +43,8 @@ public class PixPatientIDQuery {
 	@Singular
 	private List<String> queryDomainOids;
 
+	public static class PixPatientIDQueryBuilder {}
+	
 	public PixV3QueryRequest build() {
 		var v3PixConsumerQueryRequest = new PixV3QueryRequest();
 		String senderApplicationOid = this.destination.getSenderApplicationOid();

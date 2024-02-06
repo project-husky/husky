@@ -30,5 +30,7 @@ public class XdsDocumentWithMetadata {
   private InputStream dataStream;
   @NotNull
   private DocumentDescriptor documentDescriptor;
+  
+  public static class XdsDocumentWithMetadataBuilder {}
 
 }

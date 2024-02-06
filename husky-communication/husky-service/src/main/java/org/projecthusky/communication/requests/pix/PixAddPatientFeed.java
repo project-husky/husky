@@ -76,6 +76,8 @@ public class PixAddPatientFeed {
   @Singular
   private List<ContactPoint> telecomContacts;
   private CodeableConcept employeeOccupation;
+  
+  public static class PixAddPatientFeedBuilder {}
 
   public PixAddPatientRequest build() {
     PixAddPatientRequest request = new PixAddPatientRequest(this.destination.getSenderApplicationOid(), null,
