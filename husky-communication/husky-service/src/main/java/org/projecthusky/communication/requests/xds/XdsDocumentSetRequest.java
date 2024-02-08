@@ -33,4 +33,7 @@ public class XdsDocumentSetRequest {
 	private Destination destination;
 	@Singular
 	private List<DocumentRequest> documentRequests;
+	
+	
+	public static class XdsDocumentSetRequestBuilder {} 
 }

@@ -50,7 +50,6 @@ import org.projecthusky.communication.responses.hpd.HpdResponse;
 import org.projecthusky.communication.responses.pix.PixPatientIDResult;
 import org.projecthusky.communication.responses.pdq.PdqSearchQueryResponse;
 import org.projecthusky.communication.responses.pdq.PdqSearchResults;
-import org.projecthusky.communication.responses.pix.PixPatientIDResult.PixPatientIDResultBuilder;
 import org.projecthusky.communication.responses.svs.SvsValueSetResponse;
 import org.projecthusky.communication.responses.xua.XuaResponse;
 import org.projecthusky.communication.utils.PdqUtils;
@@ -400,7 +399,7 @@ public class HuskyService {
     Assert.notNull(searchPatientIDQuery, "The patient ID search query can not be null.");
     PixV3QueryResponse response = this.wsClient.sendQuery(searchPatientIDQuery.build(), null,
         searchPatientIDQuery.getDestination().getUri(), null);
-    PixPatientIDResultBuilder result = PixPatientIDResult.builder();
+    PixPatientIDResult.PixPatientIDResultBuilder result = PixPatientIDResult.builder();
     for (String domainId : searchPatientIDQuery.getQueryDomainOids()) {
       result.patientID(PdqUtils.getPatientDomainId(response, domainId));
     }

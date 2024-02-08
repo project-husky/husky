@@ -79,6 +79,8 @@ public class PixMergePatientFeed {
   @Singular
   private List<ContactPoint> telecomContacts;
   private CodeableConcept employeeOccupation;
+  
+  public static class PixMergePatientFeedBuilder {}
 
   public PixMergePatientRequest build() {
     PixMergePatientRequest request = new PixMergePatientRequest(this.destination.getSenderApplicationOid(), null,

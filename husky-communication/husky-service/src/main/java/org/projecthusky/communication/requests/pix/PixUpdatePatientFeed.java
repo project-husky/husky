@@ -80,6 +80,8 @@ public class PixUpdatePatientFeed {
 	@Singular
 	private List<ContactPoint> telecomContacts;
 	private CodeableConcept employeeOccupation;
+	
+	public static class PixUpdatePatientFeedBuilder {}
 
 	public PixUpdatePatientRequest build() {
 		PixUpdatePatientRequest request = new PixUpdatePatientRequest(this.destination.getSenderApplicationOid(), null, this.destination.getReceiverApplicationOid(), null);

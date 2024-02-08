@@ -24,8 +24,8 @@ import org.springframework.util.Assert;
  * </ul>
  * @implNote The conversions lack serious details and need to be extended in the future.
  * @author szalai
- * @see PdqSearchQuery
- * @see ConverterUtilTest for missing conversions in {@link ContactPoint}s.
+ * @see {@link PdqSearchQuery}
+ * @see {@link ConverterUtilTest} for missing conversions in {@link ContactPoint}s.
  */
 public class ConverterUtil {
 	

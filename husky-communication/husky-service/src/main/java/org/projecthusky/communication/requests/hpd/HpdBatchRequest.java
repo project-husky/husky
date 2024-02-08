@@ -38,6 +38,9 @@ public class HpdBatchRequest {
   private RequestErrorHandlingType errorHandlingType;
   /** Used for creating the endpoint of the webservice */
   private Destination destination;
+  
+  
+  public static class HpdBatchRequestBuilder {}
 
   public boolean isValid() {
     if (hpdRequests.stream().anyMatch(request -> !request.isValid())) {

@@ -58,6 +58,8 @@ public class XuaRequest {
   private String clientKeyStore;
   @NotBlank
   private String clientKeyStorePass;
+  
+  public static class XuaRequestBuilder {}
 
   public XUserAssertionRequest build() {
     return createXUserAssertionRequest();

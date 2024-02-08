@@ -59,7 +59,7 @@ import net.ihe.gazelle.hl7v3.voc.HomeAddressUse;
 import net.ihe.gazelle.hl7v3.voc.WorkPlaceAddressUse;
 
 /**
- * A util class designed specifically to extract a list of {@link FhirPatient}s from a {@link PdqSearchQueryResponse}.<br!>
+ * A util class designed specifically to extract a list of {@link FhirPatient}s from a {@link PdqSearchQueryResponse}.<br/>
  * Most code was copied over from {@link PdqV3Query} and {@link PixPdqV3QueryBase}.
  *
  * @author szalai

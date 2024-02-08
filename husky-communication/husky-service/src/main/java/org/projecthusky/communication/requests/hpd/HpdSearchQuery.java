@@ -54,6 +54,8 @@ public class HpdSearchQuery extends HpdRequest {
   private final Long sizeLimit;
   private final Long timeLimit;
   private final Boolean typesOnly;
+  
+  public static class HpdSearchQueryBuilder {} 
 
   @Builder
   public HpdSearchQuery(String distinguishedName, boolean isAndRequest, boolean isOrRequest, boolean isNegated,

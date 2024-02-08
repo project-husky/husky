@@ -85,6 +85,9 @@ public class PdqSearchQuery {
 
 	@Singular("domainToReturn")
 	private final List<String> domainsToReturn;
+	
+	
+	public static class PdqSearchQueryBuilder {}
 
 	/**
 	 * This method will take all parameters, which are set into the SearchQuery and fill a {@link PdqQuery} with them. Not set params are ignored.

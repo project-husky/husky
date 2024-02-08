@@ -36,4 +36,5 @@ public class XdsProvideAndRetrieveDocumentSetQuery {
   /** If the Association field is not null the ProvideAndRetrieveDocumentSetQuery will be a replacement of an already existing document */
   private Association association;
 
+  public static class XdsProvideAndRetrieveDocumentSetQueryBuilder {};
 }
