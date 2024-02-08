@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <Bundle xmlns="http://hl7.org/fhir">
   <id value="PharmaceuticalAdvice-ChangeDosage"/>
   <meta>
@@ -19,7 +21,7 @@
         </meta>
         <language value="de-CH"/>
         <text>
-          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml" xml:lang="de-CH" lang="de-CH"><p><b>Generated Narrative: Composition</b><a name="Comp-ChangeDosage"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Composition &quot;Comp-ChangeDosage&quot;  (Language &quot;de-CH&quot;) </p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-composition-pharmaceuticaladvice.html">CH EMED Pharmaceutical Advice Composition</a></p></div><p><b>identifier</b>: id: urn:uuid:adab8d2d-ae14-48d6-8d15-b726d6ea82c5</p><p><b>status</b>: final</p><p><b>type</b>: Medication pharmaceutical advice.extended Document <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="https://loinc.org/">LOINC</a>#61356-2; <a href="https://browser.ihtsdotools.org/">SNOMED CT[??]</a>#419891008 &quot;Record artifact (record artifact)&quot;)</span></p><p><b>date</b>: 2012-02-04 14:00:00+0100</p><p><b>author</b>: <a href="#PractitionerRole_FamilienHausarztAtHausarzt">See above (PractitionerRole/FamilienHausarztAtHausarzt)</a></p><p><b>title</b>: Kommentar zur Medikation</p><p><b>confidentiality</b>: N</p></div>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml" xml:lang="de-CH" lang="de-CH"><p><b>Generated Narrative: Composition</b><a name="Comp-ChangeDosage"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Composition &quot;Comp-ChangeDosage&quot;  (Language &quot;de-CH&quot;) </p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-composition-pharmaceuticaladvice.html">CH EMED Pharmaceutical Advice Composition</a></p></div><p><b>identifier</b>: id: <a href="http://terminology.hl7.org/5.4.0/NamingSystem-uri.html">#</a>urn:uuid:adab8d2d-ae14-48d6-8d15-b726d6ea82c5</p><p><b>status</b>: final</p><p><b>type</b>: Medication pharmaceutical advice.extended Document <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="https://loinc.org/">LOINC</a>#61356-2; <a href="https://browser.ihtsdotools.org/">SNOMED CT</a>#419891008 &quot;Record artifact (record artifact)&quot;)</span></p><p><b>date</b>: 2012-02-04 14:00:00+0100</p><p><b>author</b>: <a href="#PractitionerRole_FamilienHausarztAtHausarzt">See above (PractitionerRole/FamilienHausarztAtHausarzt)</a></p><p><b>title</b>: Kommentar zur Medikation</p><p><b>confidentiality</b>: N</p></div>
         </text>
         <identifier>
           <system value="urn:ietf:rfc:3986"/>
@@ -34,7 +36,6 @@
           </coding>
           <coding>
             <system value="http://snomed.info/sct"/>
-            <version value="http://snomed.info/sct/2011000195101"/>
             <code value="419891008"/>
             <display value="Record artifact (record artifact)"/>
           </coding>
@@ -52,7 +53,6 @@
             <valueCodeableConcept>
               <coding>
                 <system value="http://snomed.info/sct"/>
-                <version value="http://snomed.info/sct/2011000195101"/>
                 <code value="17621005"/>
                 <display value="Normal (qualifier value)"/>
               </coding>
@@ -87,7 +87,7 @@
           <profile value="http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-patient-epr"/>
         </meta>
         <text>
-          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Patient</b><a name="MonikaWegmueller"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Patient &quot;MonikaWegmueller&quot; </p><p style="margin-bottom: 0px">Profile: <a href="http://fhir.ch/ig/ch-core/4.0.0-ballot/StructureDefinition-ch-core-patient-epr.html">CH Core Patient EPR</a></p></div><p><b>identifier</b>: Medical record number: 11111111</p><p><b>name</b>: Monika Wegmüller </p><p><b>gender</b>: female</p><p><b>birthDate</b>: 1943-05-15</p><p><b>address</b>: Wiesenstr. 12 Zürich 8003 CH </p></div>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Patient</b><a name="MonikaWegmueller"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Patient &quot;MonikaWegmueller&quot; </p><p style="margin-bottom: 0px">Profile: <a href="file:///home/michaela/github/ch-core/output/StructureDefinition-ch-core-patient-epr.html">CH Core Patient EPR</a></p></div><p><b>identifier</b>: Medical record number: 11111111</p><p><b>name</b>: Monika Wegmüller </p><p><b>gender</b>: female</p><p><b>birthDate</b>: 1943-05-15</p><p><b>address</b>: Wiesenstr. 12 Zürich 8003 CH </p></div>
         </text>
         <identifier>
           <type>
@@ -190,7 +190,7 @@
           <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-observation"/>
         </meta>
         <text>
-          <status value="extensions"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Observation</b><a name="Obs-ChangeDosage"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Observation &quot;Obs-ChangeDosage&quot; </p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-observation.html">CH EMED Observation (PADV)</a></p></div><blockquote><p><b>CH EMED Extension Treatment Plan</b></p><blockquote><p><b>url</b></p><a href="http://hl7.org/fhir/R4/datatypes.html#id">id</a></blockquote><p><b>value</b>: id: urn:uuid:c9f758a1-296c-4710-84d4-e181db8c7478</p><blockquote><p><b>url</b></p><code>externalDocumentId</code></blockquote><p><b>value</b>: id: urn:uuid:c9f758a1-296c-4710-84d4-e181db8c7478</p></blockquote><p><b>CH EMED Extension MedicationStatement Changed</b>: <a href="#MedicationStatement_MedStatTriatec-ChangeDosage">See above (MedicationStatement/MedStatTriatec-ChangeDosage)</a></p><p><b>identifier</b>: id: urn:uuid:adab8d2d-ae14-48d6-8d15-b726d6ea82c5</p><p><b>status</b>: final</p><p><b>code</b>: CHANGE <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="CodeSystem-ihe-pharmaceuticaladvicestatuslist.html">IHE Pharmaceutical Advice Status List</a>#CHANGE)</span></p><p><b>subject</b>: <a href="#Patient_MonikaWegmueller">See above (Patient/MonikaWegmueller)</a></p><p><b>effective</b>: 2012-02-04 14:00:00+0100</p><p><b>note</b>: Dosierungsänderung: Morgens 1 Tablette anstatt 0.5 Tablette</p></div>
+          <status value="extensions"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Observation</b><a name="Obs-ChangeDosage"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Observation &quot;Obs-ChangeDosage&quot; </p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-observation.html">CH EMED Observation (PADV)</a></p></div><blockquote><p><b>CH EMED Extension Treatment Plan</b></p><blockquote><p><b>url</b></p><a href="http://hl7.org/fhir/R4/datatypes.html#id">id</a></blockquote><p><b>value</b>: id: <a href="http://terminology.hl7.org/5.4.0/NamingSystem-uri.html">#</a>urn:uuid:c9f758a1-296c-4710-84d4-e181db8c7478</p><blockquote><p><b>url</b></p><code>externalDocumentId</code></blockquote><p><b>value</b>: id: <a href="http://terminology.hl7.org/5.4.0/NamingSystem-uri.html">#</a>urn:uuid:c9f758a1-296c-4710-84d4-e181db8c7478</p></blockquote><p><b>CH EMED Extension MedicationStatement Changed</b>: <a href="#MedicationStatement_MedStatTriatec-ChangeDosage">See above (MedicationStatement/MedStatTriatec-ChangeDosage)</a></p><p><b>identifier</b>: id: <a href="http://terminology.hl7.org/5.4.0/NamingSystem-uri.html">#</a>urn:uuid:adab8d2d-ae14-48d6-8d15-b726d6ea82c5</p><p><b>status</b>: final</p><p><b>code</b>: CHANGE <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="CodeSystem-ihe-pharmaceuticaladvicestatuslist.html">IHE Pharmaceutical Advice Status List</a>#CHANGE)</span></p><p><b>subject</b>: <a href="#Patient_MonikaWegmueller">See above (Patient/MonikaWegmueller)</a></p><p><b>effective</b>: 2012-02-04 14:00:00+0100</p><p><b>issued</b>: Feb 4, 2012, 1:00:00 PM</p><p><b>performer</b>: <a href="#PractitionerRole_FamilienHausarztAtHausarzt">See above (PractitionerRole/FamilienHausarztAtHausarzt)</a></p><p><b>note</b>: Dosierungsänderung: Morgens 1 Tablette anstatt 0.5 Tablette</p></div>
         </text>
         <extension url="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan">
           <extension url="id">
@@ -226,10 +226,11 @@
           <reference value="Patient/MonikaWegmueller"/>
         </subject>
         <effectiveDateTime value="2012-02-04T14:00:00+01:00"/>
+        <issued value="2012-02-04T14:00:00+01:00"/>
+        <performer>
+          <reference value="PractitionerRole/FamilienHausarztAtHausarzt"/>
+        </performer>
         <note>
-          <extension url="http://hl7.org/fhir/StructureDefinition/narrativeLink">
-            <valueUrl value="#padv.1.note"/>
-          </extension>
           <text value="Dosierungsänderung: Morgens 1 Tablette anstatt 0.5 Tablette"/>
         </note>
       </Observation>
@@ -244,7 +245,7 @@
           <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-medicationstatement-changed"/>
         </meta>
         <text>
-          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: MedicationStatement</b><a name="MedStatTriatec-ChangeDosage"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource MedicationStatement &quot;MedStatTriatec-ChangeDosage&quot; </p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-medicationstatement-changed.html">CH EMED MedicationStatement Changed</a></p></div><p><b>identifier</b>: id: urn:uuid:c9f758a1-296c-4710-84d4-e181db8c7478</p><p><b>partOf</b>: <a href="Observation-PharmaceuticalAdvice-ChangeDosage.html">Observation/PharmaceuticalAdvice-ChangeDosage</a></p><p><b>status</b>: active</p><p><b>medication</b>: <a name="Amlodipin"> </a></p><blockquote><p/><p><a name="Amlodipin"> </a></p><p><b>code</b>: AMLODIPIN Spirig HC Tabl 10 mg <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (unknown#7680588620079)</span></p><p><b>form</b>: Tablette <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="CodeSystem-edqm-standardterms.html">EDQM - Standard Terms</a>#10219000 &quot;Tablet&quot;)</span></p><p><b>amount</b>: 30 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 732936001 = 'Tablet (unit of presentation)')</span>/1 Package<span style="background: LightGoldenRodYellow"> (Details: UCUM code {Package} = '{Package}')</span></p><h3>Ingredients</h3><table class="grid"><tr><td>-</td><td><b>Item[x]</b></td><td><b>Strength</b></td></tr><tr><td>*</td><td>Amlodipine <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="https://browser.ihtsdotools.org/">SNOMED CT[??]</a>#386864001 &quot;Amlodipine (substance)&quot;)</span></td><td>10 milligram<span style="background: LightGoldenRodYellow"> (Details: UCUM code mg = 'mg')</span>/1 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 732936001 = 'Tablet (unit of presentation)')</span></td></tr></table></blockquote><p><b>subject</b>: <a href="#Patient_MonikaWegmueller">See above (Patient/MonikaWegmueller)</a></p><p><b>reasonCode</b>: Bluthochdruck <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> ()</span></p><blockquote><p><b>dosage</b></p><p><b>patientInstruction</b>: -</p><p><b>timing</b>: Starting 2011-11-29, , ?ngen-6?</p><p><b>route</b>: zum Einnehmen <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="CodeSystem-edqm-standardterms.html">EDQM - Standard Terms</a>#20053000 &quot;Oral use&quot;)</span></p><blockquote><p><b>doseAndRate</b></p></blockquote></blockquote><hr/><blockquote><p><b>Generated Narrative: Medication #Amlodipin</b><a name="Amlodipin"> </a></p><p><b>code</b>: AMLODIPIN Spirig HC Tabl 10 mg <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (unknown#7680588620079)</span></p><p><b>form</b>: Tablette <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="CodeSystem-edqm-standardterms.html">EDQM - Standard Terms</a>#10219000 &quot;Tablet&quot;)</span></p><p><b>amount</b>: 30 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 732936001 = 'Tablet (unit of presentation)')</span>/1 Package<span style="background: LightGoldenRodYellow"> (Details: UCUM code {Package} = '{Package}')</span></p><h3>Ingredients</h3><table class="grid"><tr><td>-</td><td><b>Item[x]</b></td><td><b>Strength</b></td></tr><tr><td>*</td><td>Amlodipine <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="https://browser.ihtsdotools.org/">SNOMED CT[??]</a>#386864001 &quot;Amlodipine (substance)&quot;)</span></td><td>10 milligram<span style="background: LightGoldenRodYellow"> (Details: UCUM code mg = 'mg')</span>/1 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 732936001 = 'Tablet (unit of presentation)')</span></td></tr></table></blockquote></div>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: MedicationStatement</b><a name="MedStatTriatec-ChangeDosage"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource MedicationStatement &quot;MedStatTriatec-ChangeDosage&quot; </p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-medicationstatement-changed.html">CH EMED MedicationStatement Changed</a></p></div><p><b>identifier</b>: id: <a href="http://terminology.hl7.org/5.4.0/NamingSystem-uri.html">#</a>urn:uuid:c9f758a1-296c-4710-84d4-e181db8c7478</p><p><b>partOf</b>: <a href="#Observation_Obs-ChangeDosage">See above (Observation/Obs-ChangeDosage)</a></p><p><b>status</b>: active</p><p><b>medication</b>: <a name="Amlodipin"> </a></p><blockquote><p/><p><a name="Amlodipin"> </a></p><p><b>code</b>: AMLODIPIN Spirig HC Tabl 10 mg <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (unknown#7680588620079)</span></p><p><b>form</b>: Tablette <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="CodeSystem-edqm-standardterms.html">EDQM - Standard Terms</a>#10219000 &quot;Tablet&quot;)</span></p><p><b>amount</b>: 30 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 732936001 = 'Tablet (unit of presentation)')</span>/1 Package - unit of product usage (qualifier value)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 1681000175101 = 'Package - unit of product usage')</span></p><h3>Ingredients</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Item[x]</b></td><td><b>Strength</b></td></tr><tr><td style="display: none">*</td><td>Amlodipine <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="https://browser.ihtsdotools.org/">SNOMED CT</a>#386864001 &quot;Amlodipine (substance)&quot;)</span></td><td>10 milligram<span style="background: LightGoldenRodYellow"> (Details: UCUM code mg = 'mg')</span>/1 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 732936001 = 'Tablet (unit of presentation)')</span></td></tr></table></blockquote><p><b>subject</b>: <a href="#Patient_MonikaWegmueller">See above (Patient/MonikaWegmueller)</a></p><p><b>dateAsserted</b>: 2012-02-04 14:00:00+0100</p><p><b>informationSource</b>: <a href="#PractitionerRole_FamilienHausarztAtHausarzt">See above (PractitionerRole/FamilienHausarztAtHausarzt)</a></p><p><b>reasonCode</b>: Bluthochdruck <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> ()</span></p><blockquote><p><b>dosage</b></p><p><b>patientInstruction</b>: -</p><p><b>timing</b>: Starting 2011-11-29, , ?ngen-6?</p><p><b>route</b>: zum Einnehmen <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="CodeSystem-edqm-standardterms.html">EDQM - Standard Terms</a>#20053000 &quot;Oral use&quot;)</span></p><blockquote><p><b>doseAndRate</b></p></blockquote></blockquote><hr/><blockquote><p><b>Generated Narrative: Medication #Amlodipin</b><a name="Amlodipin"> </a></p><p><b>code</b>: AMLODIPIN Spirig HC Tabl 10 mg <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (unknown#7680588620079)</span></p><p><b>form</b>: Tablette <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="CodeSystem-edqm-standardterms.html">EDQM - Standard Terms</a>#10219000 &quot;Tablet&quot;)</span></p><p><b>amount</b>: 30 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 732936001 = 'Tablet (unit of presentation)')</span>/1 Package - unit of product usage (qualifier value)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 1681000175101 = 'Package - unit of product usage')</span></p><h3>Ingredients</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Item[x]</b></td><td><b>Strength</b></td></tr><tr><td style="display: none">*</td><td>Amlodipine <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="https://browser.ihtsdotools.org/">SNOMED CT</a>#386864001 &quot;Amlodipine (substance)&quot;)</span></td><td>10 milligram<span style="background: LightGoldenRodYellow"> (Details: UCUM code mg = 'mg')</span>/1 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 732936001 = 'Tablet (unit of presentation)')</span></td></tr></table></blockquote></div>
         </text>
         <contained>
           <Medication>
@@ -277,16 +278,15 @@
               </numerator>
               <denominator>
                 <value value="1"/>
-                <unit value="Package"/>
-                <system value="http://unitsofmeasure.org"/>
-                <code value="{Package}"/>
+                <unit value="Package - unit of product usage (qualifier value)"/>
+                <system value="http://snomed.info/sct"/>
+                <code value="1681000175101"/>
               </denominator>
             </amount>
             <ingredient>
               <itemCodeableConcept>
                 <coding>
                   <system value="http://snomed.info/sct"/>
-                  <version value="http://snomed.info/sct/2011000195101"/>
                   <code value="386864001"/>
                   <display value="Amlodipine (substance)"/>
                 </coding>
@@ -314,7 +314,7 @@
           <value value="urn:uuid:c9f758a1-296c-4710-84d4-e181db8c7478"/>
         </identifier>
         <partOf>
-          <reference value="Observation/PharmaceuticalAdvice-ChangeDosage"/>
+          <reference value="Observation/Obs-ChangeDosage"/>
         </partOf>
         <status value="active"/>
         <medicationReference>
@@ -323,6 +323,10 @@
         <subject>
           <reference value="Patient/MonikaWegmueller"/>
         </subject>
+        <dateAsserted value="2012-02-04T14:00:00+01:00"/>
+        <informationSource>
+          <reference value="PractitionerRole/FamilienHausarztAtHausarzt"/>
+        </informationSource>
         <reasonCode>
           <extension url="http://hl7.org/fhir/StructureDefinition/narrativeLink">
             <valueUrl value="#padv.1.reason"/>

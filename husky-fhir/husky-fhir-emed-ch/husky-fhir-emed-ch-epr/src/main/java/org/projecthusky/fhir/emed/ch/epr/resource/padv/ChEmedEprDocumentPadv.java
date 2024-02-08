@@ -27,7 +27,7 @@ import java.util.UUID;
  *
  * @author Quentin Ligier
  **/
-@ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-document-pharmaceuticaladvice")
+@ResourceDef(profile = "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-pharmaceuticaladvice")
 public class ChEmedEprDocumentPadv extends ChEmedEprDocument {
     @Serial
     private static final long serialVersionUID = -4904031873679621597L;

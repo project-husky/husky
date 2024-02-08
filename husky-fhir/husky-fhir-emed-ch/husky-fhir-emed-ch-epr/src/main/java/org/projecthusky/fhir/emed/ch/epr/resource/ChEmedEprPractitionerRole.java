@@ -21,7 +21,7 @@ import org.projecthusky.fhir.emed.ch.common.resource.ChEmedOrganization;
  *
  * @author Quentin Ligier
  **/
-@ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-practitionerrole")
+@ResourceDef(profile = "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitionerrole")
 public class ChEmedEprPractitionerRole extends PractitionerRole {
 
     /**

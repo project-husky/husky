@@ -12,7 +12,7 @@ import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedication;
  *
  * @author Ronaldo Loureiro
  **/
-@ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-medication-medicationdispense")
+@ResourceDef(profile = "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medication-medicationdispense")
 public class ChEmedEprMedicationDis extends ChEmedEprMedication {
     /**
      * Empty constructor for the parser.

@@ -18,6 +18,6 @@ import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
  *
  * @author Quentin Ligier
  **/
-@ResourceDef(profile = "https://fhir.cara.ch/StructureDefinition/ch-emed-epr-patient")
+@ResourceDef(profile = "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient")
 public class ChEmedEprPatient extends ChCorePatientEpr {
 }

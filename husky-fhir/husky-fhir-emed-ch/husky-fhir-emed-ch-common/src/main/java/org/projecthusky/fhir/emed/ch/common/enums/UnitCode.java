@@ -9,14 +9,14 @@
  */
 package org.projecthusky.fhir.emed.ch.common.enums;
 
+import java.util.Objects;
+import javax.annotation.processing.Generated;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.common.enums.CodeSystems;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.enums.ValueSetEnumInterface;
-
-import javax.annotation.processing.Generated;
-import java.util.Objects;
 
 /**
  * Enumeration of UnitCode values
@@ -28,10 +28,10 @@ import java.util.Objects;
  * <p>
  * Identifier: 2.16.756.5.30.1.1.11.83<br>
  * Effective date: 2022-06-08 15:00<br>
- * Version: 2022<br>
+ * Version: 2023<br>
  * Status: DRAFT
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-07-11")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-01-29")
 public enum UnitCode implements ValueSetEnumInterface {
 
     /**
@@ -326,8 +326,8 @@ public enum UnitCode implements ValueSetEnumInterface {
      * FR: dose.<br>
      * IT: dose.<br>
      */
-    DOSE("{Dose}",
-         "http://unitsofmeasure.org",
+    DOSE("408102007",
+         "http://snomed.info/sct",
          "Dose",
          "Dose",
          "Dos",
@@ -638,8 +638,8 @@ public enum UnitCode implements ValueSetEnumInterface {
      * FR: MioU.<br>
      * IT: MioU.<br>
      */
-    MIOU("10*6.{Unit}",
-         "http://unitsofmeasure.org",
+    MIOU("396186001",
+         "http://snomed.info/sct",
          "(the number ten for arbitrary powers ^ 6) * Unit",
          "MioU",
          "MioU",
@@ -742,8 +742,8 @@ public enum UnitCode implements ValueSetEnumInterface {
      * FR: emballage.<br>
      * IT: confezione.<br>
      */
-    PACKAGE("{Package}",
-            "http://unitsofmeasure.org",
+    PACKAGE("1681000175101",
+            "http://snomed.info/sct",
             "Package",
             "Package",
             "Packung",
@@ -1106,8 +1106,8 @@ public enum UnitCode implements ValueSetEnumInterface {
      * FR: millier d'unités.<br>
      * IT: mille per unità *.<br>
      */
-    THOUSAND_PER_STAR_UNIT("10*3.{Unit}",
-                           "http://unitsofmeasure.org",
+    THOUSAND_PER_STAR_UNIT("2011000175108",
+                           "http://snomed.info/sct",
                            "Thousand Per * Unit",
                            "Thousand Per * Unit",
                            "Tausend Einheiten",
@@ -1184,8 +1184,8 @@ public enum UnitCode implements ValueSetEnumInterface {
      * FR: unité(s).<br>
      * IT: unità.<br>
      */
-    UNIT("{Unit}",
-         "http://unitsofmeasure.org",
+    UNIT("767525000",
+         "http://snomed.info/sct",
          "Unit",
          "unit",
          "Einheit",
@@ -1400,7 +1400,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * FR: Code de dose.<br>
      * IT: Code per dose.<br>
      */
-    public static final String DOSE_CODE = "{Dose}";
+    public static final String DOSE_CODE = "408102007";
 
     /**
      * EN: Code for Dressing.<br>
@@ -1592,7 +1592,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * FR: Code de MioU.<br>
      * IT: Code per MioU.<br>
      */
-    public static final String MIOU_CODE = "10*6.{Unit}";
+    public static final String MIOU_CODE = "396186001";
 
     /**
      * EN: Code for ml.<br>
@@ -1656,7 +1656,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * FR: Code de emballage.<br>
      * IT: Code per confezione.<br>
      */
-    public static final String PACKAGE_CODE = "{Package}";
+    public static final String PACKAGE_CODE = "1681000175101";
 
     /**
      * EN: Code for Pad.<br>
@@ -1880,7 +1880,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * FR: Code de millier d'unités.<br>
      * IT: Code per mille per unità *.<br>
      */
-    public static final String THOUSAND_PER_STAR_UNIT_CODE = "10*3.{Unit}";
+    public static final String THOUSAND_PER_STAR_UNIT_CODE = "2011000175108";
 
     /**
      * EN: Code for Thread.<br>
@@ -1928,7 +1928,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * FR: Code de unité(s).<br>
      * IT: Code per unità.<br>
      */
-    public static final String UNIT_CODE = "{Unit}";
+    public static final String UNIT_CODE = "767525000";
 
     /**
      * EN: Code for Vessel.<br>

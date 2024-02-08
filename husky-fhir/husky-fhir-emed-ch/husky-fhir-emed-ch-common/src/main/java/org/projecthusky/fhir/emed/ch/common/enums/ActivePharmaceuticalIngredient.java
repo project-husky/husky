@@ -6,7 +6,6 @@
  * This project has been developed further and modified by the joined working group Husky
  * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
- *
  */
 package org.projecthusky.fhir.emed.ch.common.enums;
 
@@ -28,11 +27,11 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * IT: No designation found.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.1.11.82<br>
- * Effective date: 2022-03-02 15:25<br>
+ * Effective date: 2023-10-27 13:24<br>
  * Version: 2022<br>
- * Status: FINAL
+ * Status: DRAFT
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-07-11")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-01-29")
 public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
 
     /**
@@ -7263,6 +7262,19 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
                      "Immunglobulin M human (IgM)",
                      "immunoglobuline M humaine (IgM)",
                      "Immunoglobulina M umana (IgM)"),
+    /**
+     * EN: Immunologic substance.<br>
+     * DE: Immunologic substance.<br>
+     * FR: substance immunologique.<br>
+     * IT: Immunologic substance.<br>
+     */
+    IMMUNOLOGIC_SUBSTANCE("106181007",
+                          "2.16.840.1.113883.6.96",
+                          "Immunologic substance (substance)",
+                          "Immunologic substance",
+                          "Immunologic substance",
+                          "substance immunologique",
+                          "Immunologic substance"),
     /**
      * EN: Indacaterol.<br>
      * DE: Indacaterol.<br>
@@ -19043,6 +19055,14 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Code per Immunoglobulina M umana (IgM).<br>
      */
     public static final String IMMUNOGLOBULIN_M_CODE = "74889000";
+
+    /**
+     * EN: Code for Immunologic substance.<br>
+     * DE: Code für Immunologic substance.<br>
+     * FR: Code de substance immunologique.<br>
+     * IT: Code per Immunologic substance.<br>
+     */
+    public static final String IMMUNOLOGIC_SUBSTANCE_CODE = "106181007";
 
     /**
      * EN: Code for Indacaterol.<br>
