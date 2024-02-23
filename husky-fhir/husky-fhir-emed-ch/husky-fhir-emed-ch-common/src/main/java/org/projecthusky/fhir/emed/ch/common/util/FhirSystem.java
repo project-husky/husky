@@ -37,7 +37,7 @@ public class FhirSystem {
 
     public static final String GTIN = "urn:oid:2.51.1.1";
 
-    public static final String ATC = "urn:oid:2.16.840.1.113883.6.73";
+    public static final String ATC = "http://www.whocc.no/atc";
 
     /**
      * This class is not instantiable.

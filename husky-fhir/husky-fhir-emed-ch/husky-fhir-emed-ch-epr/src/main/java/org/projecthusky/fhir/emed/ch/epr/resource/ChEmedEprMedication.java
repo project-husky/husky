@@ -22,6 +22,7 @@ import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The HAPI custom structure for CH-EMED-EPR Medication.
@@ -47,7 +48,7 @@ public class ChEmedEprMedication extends Medication {
     @ExpectsValidResource
     @Nullable
     public String resolveGtinCode() {
-        return this.hasGtin() ? this.getCode().getCodingFirstRep().getCode() : null;
+        return resolveCodeForSystem(FhirSystem.GTIN);
     }
 
     /**
@@ -56,7 +57,22 @@ public class ChEmedEprMedication extends Medication {
     @ExpectsValidResource
     @Nullable
     public String resolveAtcCode() {
-        return this.hasAtc() ? this.getCode().getCodingFirstRep().getCode() : null;
+        return resolveCodeForSystem(FhirSystem.ATC);
+    }
+
+    /**
+     * @param system The system for which to resolve the code.
+     * @return The code for the specified system or {@code null} if no code for that system is present.
+     */
+    @ExpectsValidResource
+    @Nullable
+    public String resolveCodeForSystem(final String system) {
+        Objects.requireNonNull(system);
+        if (!this.hasCode() || !this.getCode().hasCoding()) return null;
+        return this.getCode().getCoding().stream()
+                .filter(coding -> system.equals(coding.getSystem()))
+                .map(Coding::getCode)
+                .findAny().orElse(null);
     }
 
     /**
@@ -124,8 +140,7 @@ public class ChEmedEprMedication extends Medication {
      * @return {@code true} if the GTIN code exists, {@code false} otherwise.
      */
     public boolean hasGtin() {
-        if (!this.hasCode() || !this.getCode().hasCoding()) return false;
-        return this.getCode().getCodingFirstRep().getSystem().equals(FhirSystem.GTIN);
+        return hasCodeForSystem(FhirSystem.GTIN);
     }
 
     /**
@@ -134,8 +149,17 @@ public class ChEmedEprMedication extends Medication {
      * @return {@code true} if the ATC code exists, {@code false} otherwise.
      */
     public boolean hasAtc() {
+        return hasCodeForSystem(FhirSystem.ATC);
+    }
+
+    /**
+     * Returns whether the medication coding contains a code for the specified system.
+     * @param system The system for which to check if a code exists.
+     * @return {@code true} if the ATC code exists, {@code false} otherwise.
+     */
+    public boolean hasCodeForSystem(final String system) {
         if (!this.hasCode() || !this.getCode().hasCoding()) return false;
-        return this.getCode().getCodingFirstRep().getSystem().equals(FhirSystem.ATC);
+        return this.getCode().getCoding().stream().anyMatch(coding -> system.equals(coding.getSystem()));
     }
 
     /**
