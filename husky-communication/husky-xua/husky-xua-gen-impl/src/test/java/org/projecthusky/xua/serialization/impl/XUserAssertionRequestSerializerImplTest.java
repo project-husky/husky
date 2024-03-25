@@ -35,7 +35,7 @@ class XUserAssertionRequestSerializerImplTest {
 	public void setUp() throws Exception {
 		testSerializer = new XUserAssertionRequestSerializerImpl();
 
-		testDialect = "http://bag.admin.ch/epr/2017/annex/5/addendum/2";
+		testDialect = "http://www.bag.admin.ch/epr/2017/annex/5/amendment/2";
 		testContext = "This is my Context";
 		
 		InitializationService.initialize();
