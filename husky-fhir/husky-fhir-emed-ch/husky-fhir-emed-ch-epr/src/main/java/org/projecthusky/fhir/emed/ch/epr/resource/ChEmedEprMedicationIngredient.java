@@ -75,7 +75,7 @@ public class ChEmedEprMedicationIngredient extends Medication.MedicationIngredie
         this.getItemCodeableConcept()
                 .setText(ingredient.getDisplayName())
                 .getCodingFirstRep()
-                .setSystem(Oids.PREFIX_OID + ingredient.getCodeSystemId())
+                .setSystem(Oids.PREFIX_OID + Oids.normalize(ingredient.getCodeSystemId()))
                 .setCode(ingredient.getCodeValue())
                 .setDisplay(ingredient.getDisplayName());
 
