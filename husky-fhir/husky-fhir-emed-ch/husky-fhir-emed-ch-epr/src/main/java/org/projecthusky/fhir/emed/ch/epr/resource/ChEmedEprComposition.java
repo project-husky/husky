@@ -16,6 +16,7 @@ import ca.uhn.fhir.model.api.annotation.Extension;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.*;
+import org.projecthusky.common.enums.EnumConstants;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
@@ -318,6 +319,16 @@ public abstract class ChEmedEprComposition extends Composition {
             section = this.addSection();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    ORIGINAL_REPR_SECTION_CODE_VALUE, "Clinical presentation Document"));
+            if (EnumConstants.FRENCH_CODE.equals(this.getLanguage())) {
+                this.setTitle("Représentation originale");
+            } else if (EnumConstants.GERMAN_CODE.equals(this.getLanguage())) {
+                this.setTitle("Original Darstellung");
+            } else if (EnumConstants.ITALIAN_CODE.equals(this.getLanguage())) {
+                this.setTitle("Rappresentazione originale");
+            } else {
+                this.setTitle("Original representation");
+            }
+            this.getText().setStatus(Narrative.NarrativeStatus.ADDITIONAL).setDivAsString(this.getTitle());
         }
         return section;
     }
