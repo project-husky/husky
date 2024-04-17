@@ -369,6 +369,21 @@ public abstract class ChEmedEprComposition extends Composition {
     }
 
     /**
+     * Sets the original representation from the PDF content.
+     *
+     * @param pdfContent The byte content of the PDF representation.
+     * @return the original representation section.
+     */
+    public ChEmedEprComposition setOriginalRepresentationPdf(final byte[] pdfContent) {
+        final var binary = new Binary()
+                .setData(pdfContent)
+                .setContentType("application/pdf")
+                .setId("binary-original-representation");
+        this.getOriginalRepresentationSection().addEntry().setResource(binary);
+        return this;
+    }
+
+    /**
      * Finds a section by its LOINC code or {@code null}, without creating it.
      *
      * @return the section or {@code null}.
