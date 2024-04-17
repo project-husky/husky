@@ -211,13 +211,7 @@ public class ChEmedEprCompositionPre extends ChEmedEprComposition {
      * @param medicationRequest the medication request.
      */
     public ChEmedEprCompositionPre addMedicationRequest(final ChEmedEprMedicationRequestPre medicationRequest) {
-        final var entry = this.getPrescriptionSection().getEntry();
-        final var reference = References.createReference(medicationRequest);
-        if (entry.isEmpty()) {
-            entry.add(reference);
-        } else {
-            entry.set(0, reference);
-        }
+        this.getPrescriptionSection().getEntry().add(References.createReference(medicationRequest));
         return this;
     }
 
