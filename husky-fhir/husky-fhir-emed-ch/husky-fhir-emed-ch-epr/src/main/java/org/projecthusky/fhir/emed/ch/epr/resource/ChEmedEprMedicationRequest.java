@@ -44,7 +44,6 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
      */
     public ChEmedEprMedicationRequest() {
         super();
-        this.setStatus(MedicationRequestStatus.COMPLETED);
         this.setIntent(MedicationRequestIntent.ORDER);
     }
 
@@ -55,7 +54,6 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
      */
     public ChEmedEprMedicationRequest(final UUID entryUuid) {
         super();
-        this.setStatus(MedicationRequestStatus.COMPLETED);
         this.setIntent(MedicationRequestIntent.ORDER);
         this.addIdentifier().setValue(Uuids.URN_PREFIX + entryUuid).setSystem(FhirSystem.URI);
     }
