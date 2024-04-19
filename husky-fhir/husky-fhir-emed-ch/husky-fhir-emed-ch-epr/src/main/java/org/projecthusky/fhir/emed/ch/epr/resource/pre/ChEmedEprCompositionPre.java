@@ -15,6 +15,7 @@ import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Device;
 import org.hl7.fhir.r4.model.DomainResource;
 import org.hl7.fhir.r4.model.Resource;
+import org.projecthusky.common.enums.EnumConstants;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
@@ -121,6 +122,15 @@ public class ChEmedEprCompositionPre extends ChEmedEprComposition {
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    PRESCRIPTION_SECTION_CODE_VALUE,
                                                    "Prescription list"));
+            if (EnumConstants.FRENCH_CODE.equals(this.getLanguage())) {
+                section.setTitle("Prescription médicamenteuse");
+            } else if (EnumConstants.GERMAN_CODE.equals(this.getLanguage())) {
+                section.setTitle("Arzneimittelverordnung");
+            } else if (EnumConstants.ITALIAN_CODE.equals(this.getLanguage())) {
+                section.setTitle("Prescrizione di droga");
+            } else {
+                section.setTitle("Prescription for medication");
+            }
         }
         return section;
     }
