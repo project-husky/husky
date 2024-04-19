@@ -377,9 +377,8 @@ public abstract class ChEmedEprComposition extends Composition {
     public ChEmedEprComposition setOriginalRepresentationPdf(final byte[] pdfContent) {
         final var binary = new Binary()
                 .setData(pdfContent)
-                .setContentType("application/pdf")
-                .setId("binary-original-representation");
-        this.getOriginalRepresentationSection().addEntry().setResource(binary);
+                .setContentType("application/pdf");
+        this.getOriginalRepresentationSection().getEntryFirstRep().setResource(binary);
         return this;
     }
 
