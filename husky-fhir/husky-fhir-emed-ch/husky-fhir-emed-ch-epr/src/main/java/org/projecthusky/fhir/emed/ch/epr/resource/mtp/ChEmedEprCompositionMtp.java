@@ -11,10 +11,7 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.mtp;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
-import org.hl7.fhir.r4.model.Coding;
-import org.hl7.fhir.r4.model.Device;
-import org.hl7.fhir.r4.model.DomainResource;
-import org.hl7.fhir.r4.model.Resource;
+import org.hl7.fhir.r4.model.*;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
@@ -185,7 +182,7 @@ public class ChEmedEprCompositionMtp extends ChEmedEprComposition {
      * @return this.
      */
     public ChEmedEprCompositionMtp addAuthor(final ChEmedEprPractitionerRole author) {
-        this.addAuthor(References.createReference(author));
+        this.addAuthor(new Reference(author));
         return this;
     }
 
@@ -196,7 +193,7 @@ public class ChEmedEprCompositionMtp extends ChEmedEprComposition {
      * @return this.
      */
     public ChEmedEprCompositionMtp addAuthor(final ChCorePatientEpr author) {
-        this.addAuthor(References.createReference(author));
+        this.addAuthor(new Reference(author));
         return this;
     }
 
@@ -207,7 +204,7 @@ public class ChEmedEprCompositionMtp extends ChEmedEprComposition {
      * @return this.
      */
     public ChEmedEprCompositionMtp addAuthor(final Device author) {
-        this.addAuthor(References.createReference(author));
+        this.addAuthor(new Reference(author));
         return this;
     }
 
@@ -219,7 +216,7 @@ public class ChEmedEprCompositionMtp extends ChEmedEprComposition {
      */
     public ChEmedEprCompositionMtp setMedicationStatement(final ChEmedEprMedicationStatementMtp medicationStatement) {
         final var entry = this.getTreatmentPlanSection().getEntry();
-        final var reference = References.createReference(medicationStatement);
+        final var reference = new Reference(medicationStatement);
         if (entry.isEmpty()) {
             entry.add(reference);
         } else {

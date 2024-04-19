@@ -420,7 +420,7 @@ public abstract class ChEmedEprComposition extends Composition {
      * @return this.
      */
     public ChEmedEprComposition setPatient(ChCorePatientEpr chCorePatientEpr) {
-        this.setSubject(References.createReference(chCorePatientEpr));
+        this.setSubject(new Reference(chCorePatientEpr));
         return this;
     }
 

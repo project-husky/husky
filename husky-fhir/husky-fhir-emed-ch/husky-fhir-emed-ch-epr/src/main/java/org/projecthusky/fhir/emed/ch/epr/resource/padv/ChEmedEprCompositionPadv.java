@@ -11,10 +11,7 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.padv;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
-import org.hl7.fhir.r4.model.Coding;
-import org.hl7.fhir.r4.model.Device;
-import org.hl7.fhir.r4.model.DomainResource;
-import org.hl7.fhir.r4.model.Resource;
+import org.hl7.fhir.r4.model.*;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
@@ -182,7 +179,7 @@ public class ChEmedEprCompositionPadv extends ChEmedEprComposition {
      * @return this.
      */
     public ChEmedEprCompositionPadv addAuthor(final ChEmedEprPractitionerRole author) {
-        this.addAuthor(References.createReference(author));
+        this.addAuthor(new Reference(author));
         return this;
     }
 
@@ -193,7 +190,7 @@ public class ChEmedEprCompositionPadv extends ChEmedEprComposition {
      * @return this.
      */
     public ChEmedEprCompositionPadv addAuthor(final ChCorePatientEpr author) {
-        this.addAuthor(References.createReference(author));
+        this.addAuthor(new Reference(author));
         return this;
     }
 

@@ -11,10 +11,7 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.pre;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
-import org.hl7.fhir.r4.model.Coding;
-import org.hl7.fhir.r4.model.Device;
-import org.hl7.fhir.r4.model.DomainResource;
-import org.hl7.fhir.r4.model.Resource;
+import org.hl7.fhir.r4.model.*;
 import org.projecthusky.common.enums.EnumConstants;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
@@ -24,7 +21,6 @@ import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.enums.CompositionTitle;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprComposition;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
-import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -200,7 +196,7 @@ public class ChEmedEprCompositionPre extends ChEmedEprComposition {
      * @return this.
      */
     public ChEmedEprCompositionPre addAuthor(final ChEmedEprPractitionerRole author) {
-        this.addAuthor(References.createReference(author));
+        this.addAuthor(new Reference(author));
         return this;
     }
 
@@ -211,7 +207,7 @@ public class ChEmedEprCompositionPre extends ChEmedEprComposition {
      * @return this.
      */
     public ChEmedEprCompositionPre addAuthor(final ChCorePatientEpr author) {
-        this.addAuthor(References.createReference(author));
+        this.addAuthor(new Reference(author));
         return this;
     }
 
@@ -221,7 +217,7 @@ public class ChEmedEprCompositionPre extends ChEmedEprComposition {
      * @param medicationRequest the medication request.
      */
     public ChEmedEprCompositionPre addMedicationRequest(final ChEmedEprMedicationRequestPre medicationRequest) {
-        this.getPrescriptionSection().getEntry().add(References.createReference(medicationRequest));
+        this.getPrescriptionSection().getEntry().add(new Reference(medicationRequest));
         return this;
     }
 

@@ -6,6 +6,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Dosage;
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.MedicationRequest;
+import org.hl7.fhir.r4.model.Reference;
 import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
@@ -213,7 +214,7 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
      * @return this.
      */
     public ChEmedEprMedicationRequest setMedicationReference(final ChEmedEprMedication chEmedEprMedication) {
-        this.setMedication(References.createReference(chEmedEprMedication));
+        this.setMedication(new Reference(chEmedEprMedication));
         return this;
     }
 
@@ -224,7 +225,7 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
      * @return this.
      */
     public ChEmedEprMedicationRequest setPatient(final ChCorePatientEpr chCorePatientEpr) {
-        this.setSubject(References.createReference(chCorePatientEpr));
+        this.setSubject(new Reference(chCorePatientEpr));
         return this;
     }
 

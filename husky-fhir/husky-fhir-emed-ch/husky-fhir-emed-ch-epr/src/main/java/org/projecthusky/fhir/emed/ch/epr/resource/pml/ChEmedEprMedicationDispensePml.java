@@ -109,7 +109,7 @@ public class ChEmedEprMedicationDispensePml
      * @return this.
      */
     public ChEmedEprMedicationDispensePml setPerformer(final ChEmedEprPractitionerRole actor) {
-        this.getPerformerFirstRep().setActor(References.createReference(actor));
+        this.getPerformerFirstRep().setActor(new Reference(actor));
         return this;
     }
 

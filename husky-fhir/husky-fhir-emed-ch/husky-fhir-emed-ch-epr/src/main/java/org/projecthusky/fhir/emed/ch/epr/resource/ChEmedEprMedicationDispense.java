@@ -326,7 +326,7 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
      * @return this.
      */
     public ChEmedEprMedicationDispense setMedicationReference(final ChEmedEprMedicationDis chEmedEprMedication) {
-        this.setMedication(References.createReference(chEmedEprMedication));
+        this.setMedication(new Reference(chEmedEprMedication));
         this.addContained(chEmedEprMedication);
         return this;
     }

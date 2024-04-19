@@ -155,7 +155,7 @@ public class ChEmedEprCompositionPml extends ChEmedEprComposition {
      * @return this.
      */
     public ChEmedEprCompositionPml addAuthor(final Device author) {
-        this.addAuthor(References.createReference(author));
+        this.addAuthor(new Reference(author));
         return this;
     }
 

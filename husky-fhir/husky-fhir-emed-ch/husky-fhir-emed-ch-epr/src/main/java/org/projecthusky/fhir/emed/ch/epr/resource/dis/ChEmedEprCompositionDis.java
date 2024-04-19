@@ -11,10 +11,7 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.dis;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
-import org.hl7.fhir.r4.model.Coding;
-import org.hl7.fhir.r4.model.Device;
-import org.hl7.fhir.r4.model.DomainResource;
-import org.hl7.fhir.r4.model.Resource;
+import org.hl7.fhir.r4.model.*;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
@@ -182,7 +179,7 @@ public class ChEmedEprCompositionDis extends ChEmedEprComposition {
      * @return this.
      */
     public ChEmedEprCompositionDis addAuthor(final ChEmedEprPractitionerRole author) {
-        this.addAuthor(References.createReference(author));
+        this.addAuthor(new Reference(author));
         return this;
     }
 
@@ -193,7 +190,7 @@ public class ChEmedEprCompositionDis extends ChEmedEprComposition {
      * @return this.
      */
     public ChEmedEprCompositionDis addAuthor(final ChCorePatientEpr author) {
-        this.addAuthor(References.createReference(author));
+        this.addAuthor(new Reference(author));
         return this;
     }
 
@@ -205,7 +202,7 @@ public class ChEmedEprCompositionDis extends ChEmedEprComposition {
      */
     public ChEmedEprCompositionDis setMedicationDispense(final ChEmedEprMedicationDispenseDis medicationDispense) {
         final var entry = this.getDispenseSection().getEntry();
-        final var reference = References.createReference(medicationDispense);
+        final var reference = new Reference(medicationDispense);
         if (entry.isEmpty()) {
             entry.add(reference);
         } else {
