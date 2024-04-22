@@ -26,7 +26,6 @@ import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.resource.ChEmedOrganization;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChExtEprDataEnterer;
-import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 import java.time.Instant;
 import java.util.*;
@@ -380,6 +379,30 @@ public abstract class ChEmedEprComposition extends Composition {
                 .setContentType("application/pdf");
         this.getOriginalRepresentationSection().getEntryFirstRep().setResource(binary);
         return this;
+    }
+
+    /**
+     * Returns the annotation section; if missing, it creates it.
+     *
+     * @return the annotation section.
+     */
+    public SectionComponent getAnnotationSection() {
+        var section = getSectionByLoincCode(ANNOTATION_SECTION_CODE_VALUE);
+        if (section == null) {
+            section = this.addSection();
+            section.getCode().addCoding(new Coding(FhirSystem.LOINC,
+                                                   ANNOTATION_SECTION_CODE_VALUE, "Annotation comment [Interpretation] Narrative"));
+            if (EnumConstants.FRENCH_CODE.equals(this.getLanguage())) {
+                section.setTitle("Commentaire");
+            } else if (EnumConstants.GERMAN_CODE.equals(this.getLanguage())) {
+                section.setTitle("Kommentar");
+            } else if (EnumConstants.ITALIAN_CODE.equals(this.getLanguage())) {
+                section.setTitle("Osservazione");
+            } else {
+                section.setTitle("Comment");
+            }
+        }
+        return section;
     }
 
     /**

@@ -157,21 +157,6 @@ public class ChEmedEprCompositionPre extends ChEmedEprComposition {
     }
 
     /**
-     * Returns the annotation section; if missing, it creates it.
-     *
-     * @return the annotation section.
-     */
-    public SectionComponent getAnnotationSection() {
-        var section = getSectionByLoincCode(ANNOTATION_SECTION_CODE_VALUE);
-        if (section == null) {
-            section = this.addSection();
-            section.getCode().addCoding(new Coding(FhirSystem.LOINC,
-                                                   ANNOTATION_SECTION_CODE_VALUE, "Annotation comment [Interpretation] Narrative"));
-        }
-        return section;
-    }
-
-    /**
      * Returns whether the prescription section exists.
      *
      * @return {@code true} if the prescription section exists, {@code false} otherwise.

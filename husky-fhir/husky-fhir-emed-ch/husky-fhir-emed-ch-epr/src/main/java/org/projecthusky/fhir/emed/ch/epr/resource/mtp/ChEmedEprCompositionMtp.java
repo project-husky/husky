@@ -161,21 +161,6 @@ public class ChEmedEprCompositionMtp extends ChEmedEprComposition {
     }
 
     /**
-     * Returns the annotation section; if missing, it creates it.
-     *
-     * @return the annotation section.
-     */
-    public SectionComponent getAnnotationSection() {
-        var section = getSectionByLoincCode(ANNOTATION_SECTION_CODE_VALUE);
-        if (section == null) {
-            section = this.addSection();
-            section.getCode().addCoding(new Coding(FhirSystem.LOINC,
-                                                   ANNOTATION_SECTION_CODE_VALUE, "Annotation comment [Interpretation] Narrative"));
-        }
-        return section;
-    }
-
-    /**
      * Adds a {@link ChEmedEprPractitionerRole} to the list of document authors.
      *
      * @param author the author od the document.

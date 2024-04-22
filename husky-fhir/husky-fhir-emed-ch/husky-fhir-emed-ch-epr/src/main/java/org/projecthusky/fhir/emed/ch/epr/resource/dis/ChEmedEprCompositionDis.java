@@ -20,7 +20,6 @@ import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.enums.CompositionTitle;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprComposition;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
-import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -137,21 +136,6 @@ public class ChEmedEprCompositionDis extends ChEmedEprComposition {
                 .filter(author -> author instanceof ChEmedEprPractitionerRole || author instanceof ChCorePatientEpr)
                 .findFirst()
                 .orElseThrow(() -> new InvalidEmedContentException(""));
-    }
-
-    /**
-     * Returns the annotation section; if missing, it creates it.
-     *
-     * @return the annotation section.
-     */
-    public SectionComponent getAnnotationSection() {
-        var section = getSectionByLoincCode(ANNOTATION_SECTION_CODE_VALUE);
-        if (section == null) {
-            section = this.addSection();
-            section.getCode().addCoding(new Coding(FhirSystem.LOINC,
-                                                   ANNOTATION_SECTION_CODE_VALUE, "Annotation comment [Interpretation] Narrative"));
-        }
-        return section;
     }
 
     /**
