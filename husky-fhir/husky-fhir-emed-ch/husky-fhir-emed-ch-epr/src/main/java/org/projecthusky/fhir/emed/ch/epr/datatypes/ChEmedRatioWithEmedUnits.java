@@ -24,12 +24,21 @@ import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 @DatatypeDef(name = "ChEmedRatioWithEmedUnits", isSpecialization = true, profileOf = Ratio.class)
 public class ChEmedRatioWithEmedUnits extends Ratio {
 
-
     /**
      * Empty constructor for the parser.
      */
     public ChEmedRatioWithEmedUnits() {
         super();
+    }
+
+    /**
+     * Empty constructor for the parser.
+     */
+    public ChEmedRatioWithEmedUnits(final ChEmedQuantityWithEmedUnits numerator,
+                                    final ChEmedQuantityWithEmedUnits denominator) {
+        super();
+        this.setNumerator(numerator);
+        this.setDenominator(denominator);
     }
 
     /**
