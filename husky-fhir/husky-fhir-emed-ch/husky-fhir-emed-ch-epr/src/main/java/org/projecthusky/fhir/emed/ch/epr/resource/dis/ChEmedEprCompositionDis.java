@@ -54,7 +54,8 @@ public class ChEmedEprCompositionDis extends ChEmedEprComposition {
         super(compositionId, date, language);
         this.getType().addCoding(new Coding(FhirSystem.SNOMEDCT,
                                             "82291000195104",
-                                            "Medication dispense document (record artifact)"));
+                                            "Medication dispense document (record artifact)")
+                                         .setVersion("http://snomed.info/sct/2011000195101"));
         this.getType().addCoding(new Coding(FhirSystem.LOINC, "60593-1", "Medication dispensed.extended Document"));
         this.setTitle(CompositionTitle.DIS.getDisplayName(language));
     }
