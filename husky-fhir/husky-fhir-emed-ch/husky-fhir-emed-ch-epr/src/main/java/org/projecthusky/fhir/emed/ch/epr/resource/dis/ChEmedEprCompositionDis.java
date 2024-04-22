@@ -12,6 +12,7 @@ package org.projecthusky.fhir.emed.ch.epr.resource.dis;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.hl7.fhir.r4.model.*;
+import org.projecthusky.common.enums.EnumConstants;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
@@ -70,6 +71,16 @@ public class ChEmedEprCompositionDis extends ChEmedEprComposition {
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    DISPENSE_SECTION_CODE_VALUE,
                                                    "Medication dispensed.brief Document"));
+            if (EnumConstants.FRENCH_CODE.equals(this.getLanguage())) {
+                section.setTitle("Dispensation d'un médicament");
+            } else if (EnumConstants.GERMAN_CODE.equals(this.getLanguage())) {
+                section.setTitle("Abgabe eines Medikaments");
+            } else if (EnumConstants.ITALIAN_CODE.equals(this.getLanguage())) {
+                section.setTitle("Dispensazione di un medicamento");
+            } else {
+                section.setTitle("Medication dispensed");
+            }
+            section.getText().setStatus(Narrative.NarrativeStatus.ADDITIONAL).setDivAsString(section.getTitle());
         }
         return section;
     }
