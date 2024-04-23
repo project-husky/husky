@@ -4,14 +4,17 @@ import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.MedicationDispense;
 import org.hl7.fhir.r4.model.Reference;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocumentAuthorable;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedication;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationDispense;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
+import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprMedicationDis;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtDispense;
 import org.projecthusky.fhir.emed.ch.epr.util.References;
 
@@ -81,6 +84,33 @@ public class ChEmedEprMedicationDispensePml
         }
         throw new InvalidEmedContentException(
                 "The author and her/his organization of the medical decision resource isn't of the right type.");
+    }
+
+    /**
+     * Resolves the medication or throws.
+     * <p>
+     * In a PML, the parser has unserialized a ChEmedEprMedication instead of a ChEmedEprMedicationDis, so this
+     * method will convert it to the right class.
+     *
+     * @return the medication.
+     * @throws InvalidEmedContentException if the medication is missing or if it isn't of the right type.
+     */
+    @ExpectsValidResource
+    @Override
+    public ChEmedEprMedicationDis resolveMedication() throws InvalidEmedContentException {
+        if (!this.hasMedicationReference()) {
+            throw new InvalidEmedContentException("The medication reference is missing");
+        }
+        final IBaseResource resource = this.getMedicationReference().getResource();
+        if (resource instanceof ChEmedEprMedicationDis chMedication) {
+            return chMedication;
+        } else if (resource instanceof ChEmedEprMedication chMedication) {
+            final var newMedication = new ChEmedEprMedicationDis();
+            chMedication.copyValues(newMedication);
+            this.getMedicationReference().setResource(newMedication);
+            return newMedication;
+        }
+        throw new InvalidEmedContentException("The medication resource isn't of the right type");
     }
 
     /**
