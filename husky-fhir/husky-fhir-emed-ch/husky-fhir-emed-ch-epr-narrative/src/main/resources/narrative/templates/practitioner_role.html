@@ -9,7 +9,7 @@
   ~
   -->
 
-<th:block th:fragment="display-name(device, lang)">
-    <th:block th:each="deviceName: ${device.deviceName}">[[${deviceName.name}]] ([[${deviceName.type.getDisplay()}]])</th:block>
-    <th:block th:if="${device.hasManufacturer()}">Manufacturer: [[${device.manufacturer}]]</th:block>
+<th:block th:fragment="display(practitionerrole, lang)">
+    <th:block th:insert="~{practitioner :: display-name-gln(${practitionerrole.resolvePractitioner()}, ${lang})}"/>
+    <th:block th:insert="~{organization :: display-name-address-contact(${practitionerrole.resolveOrganization()}, ${lang})}"/>
 </th:block>
