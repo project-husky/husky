@@ -429,4 +429,21 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
     public Instant resolveMedicalAuthorshipTimestamp() {
         return resolveAuthoredOn();
     }
+
+    public boolean hasTreatmentReason() {
+        return this.reasonCode != null && this.getReasonCodeFirstRep().hasText();
+    }
+
+    /**
+     * Gets the treatment reason if available.
+     *
+     * @return the treatment reason or {@code null}.
+     */
+    @Nullable
+    public String getTreatmentReason() {
+        if (this.reasonCode == null || !this.getReasonCodeFirstRep().hasText()) {
+            return null;
+        }
+        return this.getReasonCodeFirstRep().getText();
+    }
 }
