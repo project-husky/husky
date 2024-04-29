@@ -12,7 +12,7 @@
 <table th:fragment="table(requests, lang)">
     <thead>
     <tr>
-        <td rowspan="2" colspan="2">Nom du médicament</td>
+        <td rowspan="2">Nom du médicament</td>
         <td colspan="4">Dosage</td>
         <td rowspan="2">Commentaire</td>
         <td rowspan="2">Voie et localisation</td>
@@ -32,10 +32,7 @@
 </table>
 
 <th:block th:fragment="table-line(request, dosage, index, size, lang)">
-    <tr class="request-row" th:classappend="${(index == 0)? ' request-first-row' : ''}">
-        <th:block th:if="${index} == 0">
-            <td class="request-common-cell" th:rowspan="${size} * 2"/>
-        </th:block>
+    <tr class="request-row">
         <!-- Nom du médicament -->
         <td>
             [[${request.resolveMedication().resolveMedicationName()}]]
@@ -79,7 +76,7 @@
         </td>
     </tr>
     <tr>
-        <td colspan="8" class="description">
+        <td colspan="7" class="description">
             <th:block th:if="${dosage.period().hasStart() and dosage.period().hasEnd()}">
                 À prendre du
                 <th:block th:insert="~{datatypes :: date-time(${dosage.period().getStartElement()}, ${lang})}"/>
