@@ -9,9 +9,7 @@
   */-->
 
 <th:block th:fragment="display-name-address-contact(patient, lang)">
-    <th:block th:if="${patient.hasName()}">
-        <th:block th:insert="~{datatypes :: human-name(${patient.name[0]}, ${lang})}"/>
-    </th:block>
-    (<th:block th:if="${patient.hasBirthDateElement()}"
-               th:insert="~{datatypes :: date-time(${patient.getBirthDateElement()}, ${lang})}"/>)
+    <th:block th:insert="~{datatypes :: human-name(${patient.name[0]}, ${lang})}"/><br/>
+    <th:block th:text="${#strings.substring(patient.resolveGender().getDisplay(), 0, 1)}"/> /
+    <th:block th:insert="~{datatypes :: date-time(${patient.getBirthDateElement()}, ${lang})}"/>
 </th:block>

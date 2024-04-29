@@ -10,6 +10,6 @@
   -->
 
 <th:block th:fragment="display-name-gln(practitioner, lang)">
-    <th:block th:insert="~{datatypes :: human-name(${practitioner.name[0]}, ${lang})}"/>
+    <th:block th:insert="~{datatypes :: human-name(${practitioner.name[0]}, ${lang})}"/><br/>
     GLN: <span th:text="${practitioner.resolveGln()}"/>
 </th:block>

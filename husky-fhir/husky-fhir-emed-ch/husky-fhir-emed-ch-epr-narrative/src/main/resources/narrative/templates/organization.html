@@ -10,13 +10,13 @@
   -->
 
 <th:block th:fragment="display-name-address-contact(organization, lang)">
-    <th:block th:if="${organization.hasName()}">[[${organization.name}]]</th:block>
-    <th:block th:if="${!organization.hasName() && organization.hasAlias()}">[[${organization.alias[0]}]]</th:block>
+    <th:block th:if="${organization.hasName()}">[[${organization.name}]]<br/></th:block>
+    <th:block th:if="${!organization.hasName() && organization.hasAlias()}">[[${organization.alias[0]}]]<br/></th:block>
 
     <th:block th:insert="~{datatypes :: address(${organization.resolveAddress()}, ${lang})}"/>
     <th:block th:if="${organization.hasTelecom()}">
         <th:block th:each="contactPoint : ${organization.telecom}">
-            <th:block th:insert="~{datatypes :: contact-point(${contactPoint}, ${lang})}"/>
+            <th:block th:insert="~{datatypes :: contact-point(${contactPoint}, ${lang})}"/><br/>
         </th:block>
     </th:block>
 </th:block>
