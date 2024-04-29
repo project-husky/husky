@@ -431,7 +431,7 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
     }
 
     public boolean hasTreatmentReason() {
-        return this.reasonCode != null && this.getReasonCodeFirstRep().hasText();
+        return this.hasReasonCode() && !this.getReasonCode().isEmpty() && this.getReasonCodeFirstRep().hasText();
     }
 
     /**
@@ -441,7 +441,7 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
      */
     @Nullable
     public String getTreatmentReason() {
-        if (this.reasonCode == null || !this.getReasonCodeFirstRep().hasText()) {
+        if (!this.hasTreatmentReason()) {
             return null;
         }
         return this.getReasonCodeFirstRep().getText();
