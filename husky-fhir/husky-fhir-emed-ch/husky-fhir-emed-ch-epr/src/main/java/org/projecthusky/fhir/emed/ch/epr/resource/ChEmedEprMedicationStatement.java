@@ -392,7 +392,7 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
      */
     @ExpectsValidResource
     public Instant resolveAsserted() {
-        if (this.getDateAssertedElement() == null)
+        if (!this.hasDateAsserted())
             throw new InvalidEmedContentException("The asserted timestamp is missing");
         return this.getDateAssertedElement().getValueAsCalendar().toInstant();
     }
