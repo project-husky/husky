@@ -627,6 +627,12 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 			patientAddress.setStreetAddressLine2(addressline2);
 		}
 
+		final var extension = fhirAddress.getExtensionByUrl("http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName");
+		Optional.ofNullable(extension)
+				.map(ext -> (StringType) ext.getValue())
+				.map(StringType::getValue)
+				.ifPresent(patientAddress::setStreetName);
+
 		patientAddress.setPostalCode(zip);
 		patientAddress.setCity(city);
 		patientAddress.setUsage(addressUse);
