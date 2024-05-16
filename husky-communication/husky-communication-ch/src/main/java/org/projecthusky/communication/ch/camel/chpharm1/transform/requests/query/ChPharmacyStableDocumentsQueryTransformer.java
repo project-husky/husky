@@ -15,7 +15,6 @@ import org.projecthusky.communication.ch.camel.chpharm1.requests.query.ChPharmac
 import org.openehealth.ipf.commons.ihe.xds.core.ebxml.EbXMLAdhocQueryRequest;
 import org.openehealth.ipf.commons.ihe.xds.core.transform.requests.query.QuerySlotHelper;
 
-import static org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp.toHL7;
 import static org.openehealth.ipf.commons.ihe.xds.core.transform.requests.QueryParameter.*;
 import static org.openehealth.ipf.commons.ihe.xds.core.transform.requests.QueryParameter.DOC_ENTRY_SERVICE_STOP_TIME_TO;
 
@@ -48,18 +47,18 @@ public class ChPharmacyStableDocumentsQueryTransformer<T extends ChPharmacyStabl
         slots.fromStringList(DOC_ENTRY_AUTHOR_PERSON, query.getAuthorPersons());
         slots.fromStringList(DOC_ENTRY_UUID, query.getUuids());
         slots.fromStringList(DOC_ENTRY_UNIQUE_ID, query.getUniqueIds());
-        slots.fromNumber(DOC_ENTRY_CREATION_TIME_FROM, toHL7(query.getCreationTime().getFrom()));
-        slots.fromNumber(DOC_ENTRY_CREATION_TIME_TO, toHL7(query.getCreationTime().getTo()));
+        slots.fromTimestamp(DOC_ENTRY_CREATION_TIME_FROM, query.getCreationTime().getFrom());
+        slots.fromTimestamp(DOC_ENTRY_CREATION_TIME_TO, query.getCreationTime().getTo());
         slots.fromCode(DOC_ENTRY_HEALTHCARE_FACILITY_TYPE_CODE, query.getHealthcareFacilityTypeCodes());
         slots.fromCode(DOC_ENTRY_PRACTICE_SETTING_CODE, query.getPracticeSettingCodes());
         slots.fromCode(DOC_ENTRY_EVENT_CODE, query.getEventCodes());
         slots.fromCode(DOC_ENTRY_CONFIDENTIALITY_CODE, query.getConfidentialityCodes());
 
-        slots.fromNumber(DOC_ENTRY_SERVICE_START_TIME_FROM, toHL7(query.getServiceStartTime().getFrom()));
-        slots.fromNumber(DOC_ENTRY_SERVICE_START_TIME_TO, toHL7(query.getServiceStartTime().getTo()));
+        slots.fromTimestamp(DOC_ENTRY_SERVICE_START_TIME_FROM, query.getServiceStartTime().getFrom());
+        slots.fromTimestamp(DOC_ENTRY_SERVICE_START_TIME_TO, query.getServiceStartTime().getTo());
 
-        slots.fromNumber(DOC_ENTRY_SERVICE_STOP_TIME_FROM, toHL7(query.getServiceStopTime().getFrom()));
-        slots.fromNumber(DOC_ENTRY_SERVICE_STOP_TIME_TO, toHL7(query.getServiceStopTime().getTo()));
+        slots.fromTimestamp(DOC_ENTRY_SERVICE_STOP_TIME_FROM, query.getServiceStopTime().getFrom());
+        slots.fromTimestamp(DOC_ENTRY_SERVICE_STOP_TIME_TO, query.getServiceStopTime().getTo());
     }
 
     /**
@@ -83,18 +82,18 @@ public class ChPharmacyStableDocumentsQueryTransformer<T extends ChPharmacyStabl
 
         query.setAuthorPersons(slots.toStringList(DOC_ENTRY_AUTHOR_PERSON));
         query.setConfidentialityCodes(slots.toCodeList(DOC_ENTRY_CONFIDENTIALITY_CODE));
-        query.getCreationTime().setFrom(slots.toNumber(DOC_ENTRY_CREATION_TIME_FROM));
-        query.getCreationTime().setTo(slots.toNumber(DOC_ENTRY_CREATION_TIME_TO));
+        query.getCreationTime().setFrom(slots.toTimestamp(DOC_ENTRY_CREATION_TIME_FROM));
+        query.getCreationTime().setTo(slots.toTimestamp(DOC_ENTRY_CREATION_TIME_TO));
         query.setEventCodes(slots.toCodeList(DOC_ENTRY_EVENT_CODE));
         query.setHealthcareFacilityTypeCodes(slots.toCodeList(DOC_ENTRY_HEALTHCARE_FACILITY_TYPE_CODE));
         query.setPracticeSettingCodes(slots.toCodeList(DOC_ENTRY_PRACTICE_SETTING_CODE));
         query.setUniqueIds(slots.toStringList(DOC_ENTRY_UNIQUE_ID));
         query.setUuids(slots.toStringList(DOC_ENTRY_UUID));
 
-        query.getServiceStartTime().setFrom(slots.toNumber(DOC_ENTRY_SERVICE_START_TIME_FROM));
-        query.getServiceStartTime().setTo(slots.toNumber(DOC_ENTRY_SERVICE_START_TIME_TO));
+        query.getServiceStartTime().setFrom(slots.toTimestamp(DOC_ENTRY_SERVICE_START_TIME_FROM));
+        query.getServiceStartTime().setTo(slots.toTimestamp(DOC_ENTRY_SERVICE_START_TIME_TO));
 
-        query.getServiceStopTime().setFrom(slots.toNumber(DOC_ENTRY_SERVICE_STOP_TIME_FROM));
-        query.getServiceStopTime().setTo(slots.toNumber(DOC_ENTRY_SERVICE_STOP_TIME_TO));
+        query.getServiceStopTime().setFrom(slots.toTimestamp(DOC_ENTRY_SERVICE_STOP_TIME_FROM));
+        query.getServiceStopTime().setTo(slots.toTimestamp(DOC_ENTRY_SERVICE_STOP_TIME_TO));
     }
 }
