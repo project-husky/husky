@@ -14,6 +14,7 @@ import ca.uhn.fhir.context.FhirContext;
 import org.projecthusky.fhir.emed.ch.epr.narrative.enums.NarrativeLanguage;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprDocumentPmlc;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprMedicationStatementPmlc;
+import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprDocumentPre;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.templatemode.TemplateMode;
@@ -60,6 +61,13 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
         this.templateEngine.setTemplateResolver(templateResolver);
     }
 
+    /**
+     * Generates the narrative for a medication card and return it as HTML content.
+     *
+     * @param document The medication card document.
+     * @param lang The language of the narrative.
+     * @return The HTML content of the narrative.
+     */
     public String generate(final ChEmedEprDocumentPmlc document,
                            final NarrativeLanguage lang) {
         final var asneededTreatments = new HashMap<UUID, List<ChEmedEprMedicationStatementPmlc>>(5);
@@ -90,6 +98,26 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
     }
 
     /**
+     * Generates the narrative for a prescription and return it as HTML content.
+     *
+     * @param document The prescription document.
+     * @param lang The language of the narrative.
+     * @return The HTML content of the narrative.
+     */
+    public String generate(final ChEmedEprDocumentPre document,
+                           final NarrativeLanguage lang) {
+        final var context = new Context();
+        context.setVariable("resource", document);
+        context.setVariable("lang", lang);
+        context.setVariable("fopase", this.valueSetEnumNarrativeForPatientService);
+        context.setVariable("treatments", document.resolveComposition().resolveMedicationRequests());
+        context.setVariable("author", document.resolveComposition().resolveFirstHumanAuthor());
+
+        context.setLocale(lang.getLocale());
+        return this.templateEngine.process("prescription", context);
+    }
+
+    /**
      * Adds a medication (instance) statement to the map of treatments.
      * @param statement The statement to be added.
      * @param treatments The map of treatments.
@@ -113,6 +141,4 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
     private Instant getStatementAuthorshipDate(final ChEmedEprMedicationStatementPmlc statement) {
         return statement.resolveInformationSource().getTime();
     }
-
-
 }

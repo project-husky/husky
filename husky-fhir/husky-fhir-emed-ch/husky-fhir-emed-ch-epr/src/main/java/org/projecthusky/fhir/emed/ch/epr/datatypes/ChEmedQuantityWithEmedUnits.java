@@ -34,6 +34,17 @@ public class ChEmedQuantityWithEmedUnits extends SimpleQuantity {
     }
 
     /**
+     * Constructor that pre-populates fields.
+     *
+     * @param quantity the quantity.
+     * @param unitCode the coded form of the unit.
+     */
+    public ChEmedQuantityWithEmedUnits(final BigDecimal quantity, final UnitCode unitCode) {
+        this.setQuantity(quantity);
+        this.setUnitCode(unitCode);
+    }
+
+    /**
      * Resolves the coded form of the unit.
      *
      * @return the coded form of the unit.

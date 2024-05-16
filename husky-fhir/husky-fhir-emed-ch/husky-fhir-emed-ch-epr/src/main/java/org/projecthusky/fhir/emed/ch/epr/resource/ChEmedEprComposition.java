@@ -16,6 +16,7 @@ import ca.uhn.fhir.model.api.annotation.Extension;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.*;
+import org.projecthusky.common.enums.EnumConstants;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
@@ -25,7 +26,6 @@ import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.resource.ChEmedOrganization;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChExtEprDataEnterer;
-import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 import java.time.Instant;
 import java.util.*;
@@ -318,6 +318,16 @@ public abstract class ChEmedEprComposition extends Composition {
             section = this.addSection();
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    ORIGINAL_REPR_SECTION_CODE_VALUE, "Clinical presentation Document"));
+            if (EnumConstants.FRENCH_CODE.equals(this.getLanguage())) {
+                section.setTitle("Représentation originale");
+            } else if (EnumConstants.GERMAN_CODE.equals(this.getLanguage())) {
+                section.setTitle("Original Darstellung");
+            } else if (EnumConstants.ITALIAN_CODE.equals(this.getLanguage())) {
+                section.setTitle("Rappresentazione originale");
+            } else {
+                section.setTitle("Original representation");
+            }
+            section.getText().setStatus(Narrative.NarrativeStatus.ADDITIONAL).setDivAsString(this.getTitle());
         }
         return section;
     }
@@ -358,6 +368,44 @@ public abstract class ChEmedEprComposition extends Composition {
     }
 
     /**
+     * Sets the original representation from the PDF content.
+     *
+     * @param pdfContent The byte content of the PDF representation.
+     * @return the original representation section.
+     */
+    public ChEmedEprComposition setOriginalRepresentationPdf(final byte[] pdfContent) {
+        final var binary = new Binary()
+                .setData(pdfContent)
+                .setContentType("application/pdf");
+        this.getOriginalRepresentationSection().getEntryFirstRep().setResource(binary);
+        return this;
+    }
+
+    /**
+     * Returns the annotation section; if missing, it creates it.
+     *
+     * @return the annotation section.
+     */
+    public SectionComponent getAnnotationSection() {
+        var section = getSectionByLoincCode(ANNOTATION_SECTION_CODE_VALUE);
+        if (section == null) {
+            section = this.addSection();
+            section.getCode().addCoding(new Coding(FhirSystem.LOINC,
+                                                   ANNOTATION_SECTION_CODE_VALUE, "Annotation comment [Interpretation] Narrative"));
+            if (EnumConstants.FRENCH_CODE.equals(this.getLanguage())) {
+                section.setTitle("Commentaire");
+            } else if (EnumConstants.GERMAN_CODE.equals(this.getLanguage())) {
+                section.setTitle("Kommentar");
+            } else if (EnumConstants.ITALIAN_CODE.equals(this.getLanguage())) {
+                section.setTitle("Osservazione");
+            } else {
+                section.setTitle("Comment");
+            }
+        }
+        return section;
+    }
+
+    /**
      * Finds a section by its LOINC code or {@code null}, without creating it.
      *
      * @return the section or {@code null}.
@@ -395,7 +443,7 @@ public abstract class ChEmedEprComposition extends Composition {
      * @return this.
      */
     public ChEmedEprComposition setPatient(ChCorePatientEpr chCorePatientEpr) {
-        this.setSubject(References.createReference(chCorePatientEpr));
+        this.setSubject(new Reference(chCorePatientEpr));
         return this;
     }
 

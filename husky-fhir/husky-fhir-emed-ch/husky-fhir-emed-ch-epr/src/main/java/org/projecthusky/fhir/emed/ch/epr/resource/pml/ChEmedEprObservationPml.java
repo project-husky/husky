@@ -102,7 +102,7 @@ public class ChEmedEprObservationPml
      * @return this.
      */
     public ChEmedEprObservationPml setPerformer(final ChEmedEprPractitionerRole performer) {
-        final var reference = References.createReference(performer);
+        final var reference = new Reference(performer);
         if (this.getPerformer().isEmpty()) {
             this.addPerformer(reference);
         } else {
@@ -118,7 +118,7 @@ public class ChEmedEprObservationPml
      * @return this.
      */
     public ChEmedEprObservationPml setPerformer(final ChCorePatientEpr performer) {
-        final var reference = References.createReference(performer);
+        final var reference = new Reference(performer);
         if (this.getPerformer().isEmpty()) {
             this.addPerformer(reference);
         } else {
@@ -134,7 +134,7 @@ public class ChEmedEprObservationPml
      * @return this.
      */
     public ChEmedEprObservationPml setPerformer(final RelatedPerson performer) {
-        final var reference = References.createReference(performer);
+        final var reference = new Reference(performer);
         if (this.getPerformer().isEmpty()) {
             this.addPerformer(reference);
         } else {

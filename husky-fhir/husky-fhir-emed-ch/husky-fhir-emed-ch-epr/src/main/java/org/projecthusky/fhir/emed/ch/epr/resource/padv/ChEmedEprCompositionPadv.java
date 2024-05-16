@@ -11,10 +11,7 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.padv;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
-import org.hl7.fhir.r4.model.Coding;
-import org.hl7.fhir.r4.model.Device;
-import org.hl7.fhir.r4.model.DomainResource;
-import org.hl7.fhir.r4.model.Resource;
+import org.hl7.fhir.r4.model.*;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
@@ -143,21 +140,6 @@ public class ChEmedEprCompositionPadv extends ChEmedEprComposition {
     }
 
     /**
-     * Returns the annotation section; if missing, it creates it.
-     *
-     * @return the annotation section.
-     */
-    public SectionComponent getAnnotationSection() {
-        var section = getSectionByLoincCode(ANNOTATION_SECTION_CODE_VALUE);
-        if (section == null) {
-            section = this.addSection();
-            section.getCode().addCoding(new Coding(FhirSystem.LOINC,
-                                                   ANNOTATION_SECTION_CODE_VALUE, "Annotation comment [Interpretation] Narrative"));
-        }
-        return section;
-    }
-
-    /**
      * Returns whether the pharmaceutical advice section exists.
      *
      * @return {@code true} if the pharmaceutical advice section exists, {@code false} otherwise.
@@ -182,7 +164,7 @@ public class ChEmedEprCompositionPadv extends ChEmedEprComposition {
      * @return this.
      */
     public ChEmedEprCompositionPadv addAuthor(final ChEmedEprPractitionerRole author) {
-        this.addAuthor(References.createReference(author));
+        this.addAuthor(new Reference(author));
         return this;
     }
 
@@ -193,7 +175,7 @@ public class ChEmedEprCompositionPadv extends ChEmedEprComposition {
      * @return this.
      */
     public ChEmedEprCompositionPadv addAuthor(final ChCorePatientEpr author) {
-        this.addAuthor(References.createReference(author));
+        this.addAuthor(new Reference(author));
         return this;
     }
 
