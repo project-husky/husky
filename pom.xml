@@ -31,16 +31,16 @@
 		<apache-httpcore>4.4.16</apache-httpcore>
 		<junit.version>5.9.2</junit.version>
 		<maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
-		<ipf.version>4.7.0</ipf.version>
+		<ipf.version>4.8.0</ipf.version>
 		<!-- The following dependencies should be kept up-to-date with IPF to
 		avoid duplicating dependencies:
             https://github.com/oehf/ipf/blob/master/dependencies/pom.xml (select the right
 		version in the tags) -->
 		<spring.version>5.3.31</spring.version>
 		<spring.boot.version>2.7.18</spring.boot.version>
-		<hapi.fhir.version>6.6.1</hapi.fhir.version>
+		<hapi.fhir.version>6.10.2</hapi.fhir.version>
 		<jakarta-jwsapi-version>2.1.0</jakarta-jwsapi-version>
-		<camel.version>3.21.0</camel.version>
+		<camel.version>3.21.4</camel.version>
 	</properties>
 	<scm>
 		<connection>scm:git:https://github.com/project-husky/husky.git</connection>
@@ -529,7 +529,7 @@
 			<dependency>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
-				<version>1.18.26</version>
+				<version>1.18.32</version>
 				<scope>provided</scope>
 			</dependency>
 			<!-- Own modules -->

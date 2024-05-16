@@ -37,7 +37,6 @@ import static org.projecthusky.communication.ch.camel.chpharm1.requests.query.Ch
  **/
 public class ChPharm1RequestValidator implements Validator<EbXMLAdhocQueryRequest, ValidationProfile> {
     private static final CXValidator cxValidator = new CXValidator(true);
-    private static final TimeValidator timeValidator = new TimeValidator();
     private static final NopValidator nopValidator = new NopValidator();
     private static final Map<ChPharm1QueryType, Set<String>> ALLOWED_MULTIPLE_SLOTS;
 
@@ -93,12 +92,12 @@ public class ChPharm1RequestValidator implements Validator<EbXMLAdhocQueryReques
                     new StringListValidation(FOLDER_UUID, nopValidator),
                     new StringListValidation(FOLDER_UNIQUE_ID, nopValidator),
                     new CodeValidation(DOC_ENTRY_PRACTICE_SETTING_CODE),
-                    new NumberValidation(DOC_ENTRY_CREATION_TIME_FROM, timeValidator),
-                    new NumberValidation(DOC_ENTRY_CREATION_TIME_TO, timeValidator),
-                    new NumberValidation(DOC_ENTRY_SERVICE_START_TIME_FROM, timeValidator),
-                    new NumberValidation(DOC_ENTRY_SERVICE_START_TIME_TO, timeValidator),
-                    new NumberValidation(DOC_ENTRY_SERVICE_STOP_TIME_FROM, timeValidator),
-                    new NumberValidation(DOC_ENTRY_SERVICE_STOP_TIME_TO, timeValidator),
+                    new TimestampValidation(DOC_ENTRY_CREATION_TIME_FROM),
+                    new TimestampValidation(DOC_ENTRY_CREATION_TIME_TO),
+                    new TimestampValidation(DOC_ENTRY_SERVICE_START_TIME_FROM),
+                    new TimestampValidation(DOC_ENTRY_SERVICE_START_TIME_TO),
+                    new TimestampValidation(DOC_ENTRY_SERVICE_STOP_TIME_FROM),
+                    new TimestampValidation(DOC_ENTRY_SERVICE_STOP_TIME_TO),
                     new CodeValidation(DOC_ENTRY_HEALTHCARE_FACILITY_TYPE_CODE),
                     new CodeValidation(DOC_ENTRY_EVENT_CODE),
                     new CodeValidation(DOC_ENTRY_CONFIDENTIALITY_CODE),
@@ -113,10 +112,10 @@ public class ChPharm1RequestValidator implements Validator<EbXMLAdhocQueryReques
             };
             case CH_FIND_MEDICATION_LIST -> new QueryParameterValidation[]{
                     new StringValidation(DOC_ENTRY_PATIENT_ID, cxValidator, false),
-                    new NumberValidation(DOC_ENTRY_SERVICE_START_FROM, timeValidator),
-                    new NumberValidation(DOC_ENTRY_SERVICE_START_TO, timeValidator),
-                    new NumberValidation(DOC_ENTRY_SERVICE_END_FROM, timeValidator),
-                    new NumberValidation(DOC_ENTRY_SERVICE_END_TO, timeValidator),
+                    new TimestampValidation(DOC_ENTRY_SERVICE_START_FROM),
+                    new TimestampValidation(DOC_ENTRY_SERVICE_START_TO),
+                    new TimestampValidation(DOC_ENTRY_SERVICE_END_FROM),
+                    new TimestampValidation(DOC_ENTRY_SERVICE_END_TO),
                     new CodeEnumValidation(DOC_ENTRY_FORMAT_CODE, true, EnumSet.of(
                             FormatCode.CH_EMED_MEDICATION_TREATMENT_PLAN,
                             FormatCode.CH_EMED_MEDICATION_PRESCRIPTION,
@@ -127,10 +126,10 @@ public class ChPharm1RequestValidator implements Validator<EbXMLAdhocQueryReques
             };
             case CH_FIND_MEDICATION_CARD -> new QueryParameterValidation[]{
                     new StringValidation(DOC_ENTRY_PATIENT_ID, cxValidator, false),
-                    new NumberValidation(DOC_ENTRY_SERVICE_START_FROM, timeValidator),
-                    new NumberValidation(DOC_ENTRY_SERVICE_START_TO, timeValidator),
-                    new NumberValidation(DOC_ENTRY_SERVICE_END_FROM, timeValidator),
-                    new NumberValidation(DOC_ENTRY_SERVICE_END_TO, timeValidator),
+                    new TimestampValidation(DOC_ENTRY_SERVICE_START_FROM),
+                    new TimestampValidation(DOC_ENTRY_SERVICE_START_TO),
+                    new TimestampValidation(DOC_ENTRY_SERVICE_END_FROM),
+                    new TimestampValidation(DOC_ENTRY_SERVICE_END_TO),
                     new CodeEnumValidation(DOC_ENTRY_FORMAT_CODE, true, EnumSet.of(
                             FormatCode.CH_EMED_MEDICATION_CARD_DOCUMENT,
                             FormatCode.UNSTRUCTURED_EPR_DOCUMENT
@@ -170,7 +169,7 @@ public class ChPharm1RequestValidator implements Validator<EbXMLAdhocQueryReques
                 CH_FIND_MEDICATION_CARD);
         metaDataAssert(allowedQueryTypes.contains(queryType), UNSUPPORTED_QUERY_TYPE, queryType);
 
-        new SlotLengthAndNameUniquenessValidator().validateQuerySlots(
+        SlotLengthAndNameUniquenessValidator.validateQuerySlots(
                 request.getSlots(),
                 ALLOWED_MULTIPLE_SLOTS.getOrDefault(queryType, Collections.emptySet()));
         for (var validation : getValidators(queryType, profile)) {

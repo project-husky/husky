@@ -55,7 +55,7 @@ class XUserAssertionRequestBuilderImplTest {
 	@BeforeEach
 	public void setUp() throws Exception {
 		builder = new XUserAssertionRequestBuilderImpl();
-		testDialect = "http://bag.admin.ch/epr/2017/annex/5/addendum/2";
+		testDialect = "http://www.bag.admin.ch/epr/2017/annex/5/amendment/2";
 		testContext = "This is my Context";
 		testSubjectId = UUID.randomUUID().toString();
 		testSubjectName = "Harry Hirsch";

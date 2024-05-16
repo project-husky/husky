@@ -171,7 +171,7 @@ public class ChEmedEprDosage extends Dosage {
     public ChEmedEprDosage setRouteOfAdministration(final RouteOfAdministrationEdqm routeOfAdministration) {
         this.getRoute()
                 .getCodingFirstRep()
-                .setSystem(Oids.PREFIX_OID + routeOfAdministration.getCodeSystemId())
+                .setSystem(Oids.PREFIX_OID + Oids.normalize(routeOfAdministration.getCodeSystemId()))
                 .setCode(routeOfAdministration.getCodeValue())
                 .setDisplay(routeOfAdministration.getDisplayName());
 

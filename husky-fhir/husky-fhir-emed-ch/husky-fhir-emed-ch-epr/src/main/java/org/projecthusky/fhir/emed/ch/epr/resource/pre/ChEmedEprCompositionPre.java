@@ -11,10 +11,8 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.pre;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
-import org.hl7.fhir.r4.model.Coding;
-import org.hl7.fhir.r4.model.Device;
-import org.hl7.fhir.r4.model.DomainResource;
-import org.hl7.fhir.r4.model.Resource;
+import org.hl7.fhir.r4.model.*;
+import org.projecthusky.common.enums.EnumConstants;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
@@ -23,7 +21,6 @@ import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.enums.CompositionTitle;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprComposition;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPractitionerRole;
-import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -121,6 +118,15 @@ public class ChEmedEprCompositionPre extends ChEmedEprComposition {
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    PRESCRIPTION_SECTION_CODE_VALUE,
                                                    "Prescription list"));
+            if (EnumConstants.FRENCH_CODE.equals(this.getLanguage())) {
+                section.setTitle("Prescription médicamenteuse");
+            } else if (EnumConstants.GERMAN_CODE.equals(this.getLanguage())) {
+                section.setTitle("Arzneimittelverordnung");
+            } else if (EnumConstants.ITALIAN_CODE.equals(this.getLanguage())) {
+                section.setTitle("Prescrizione di droga");
+            } else {
+                section.setTitle("Prescription for medication");
+            }
         }
         return section;
     }
@@ -151,21 +157,6 @@ public class ChEmedEprCompositionPre extends ChEmedEprComposition {
     }
 
     /**
-     * Returns the annotation section; if missing, it creates it.
-     *
-     * @return the annotation section.
-     */
-    public SectionComponent getAnnotationSection() {
-        var section = getSectionByLoincCode(ANNOTATION_SECTION_CODE_VALUE);
-        if (section == null) {
-            section = this.addSection();
-            section.getCode().addCoding(new Coding(FhirSystem.LOINC,
-                                                   ANNOTATION_SECTION_CODE_VALUE, "Annotation comment [Interpretation] Narrative"));
-        }
-        return section;
-    }
-
-    /**
      * Returns whether the prescription section exists.
      *
      * @return {@code true} if the prescription section exists, {@code false} otherwise.
@@ -190,7 +181,7 @@ public class ChEmedEprCompositionPre extends ChEmedEprComposition {
      * @return this.
      */
     public ChEmedEprCompositionPre addAuthor(final ChEmedEprPractitionerRole author) {
-        this.addAuthor(References.createReference(author));
+        this.addAuthor(new Reference(author));
         return this;
     }
 
@@ -201,7 +192,7 @@ public class ChEmedEprCompositionPre extends ChEmedEprComposition {
      * @return this.
      */
     public ChEmedEprCompositionPre addAuthor(final ChCorePatientEpr author) {
-        this.addAuthor(References.createReference(author));
+        this.addAuthor(new Reference(author));
         return this;
     }
 
@@ -211,13 +202,7 @@ public class ChEmedEprCompositionPre extends ChEmedEprComposition {
      * @param medicationRequest the medication request.
      */
     public ChEmedEprCompositionPre addMedicationRequest(final ChEmedEprMedicationRequestPre medicationRequest) {
-        final var entry = this.getPrescriptionSection().getEntry();
-        final var reference = References.createReference(medicationRequest);
-        if (entry.isEmpty()) {
-            entry.add(reference);
-        } else {
-            entry.set(0, reference);
-        }
+        this.getPrescriptionSection().getEntry().add(new Reference(medicationRequest));
         return this;
     }
 

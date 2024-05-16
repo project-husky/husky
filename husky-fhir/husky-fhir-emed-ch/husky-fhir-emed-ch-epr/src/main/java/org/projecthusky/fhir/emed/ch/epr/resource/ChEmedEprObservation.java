@@ -31,9 +31,14 @@ import java.util.stream.Stream;
 /**
  * The HAPI custom structure for CH-EMED-EPR Observation.
  *
+ * @param <T> The type of {@link ChEmedEprMedicationStatement} to be returned by resolveMedicationStatementChanged().
+ *            This is needed for documents that might contain several subtypes of MedicationStatement, e.g. a PML doc.
+ *            since the parser cannot discriminate between them and hence these resources might be parsed as a different
+ *            ChEmedEprMedicationStatement than the PADV attached {@link ChEmedEprMedicationStatementChanged}.
+ *
  * @author Ronaldo Loureiro
  **/
-public abstract class ChEmedEprObservation extends Observation implements ChEmedEprEntry {
+public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatement> extends Observation implements ChEmedEprEntry {
 
     /**
      * Reference to the medication treatment plan.
@@ -121,16 +126,22 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
      */
     @Nullable
     @ExpectsValidResource
-    public ChEmedEprMedicationStatementChanged resolveMedicationStatementChanged() throws InvalidEmedContentException {
+    public T resolveMedicationStatementChanged() throws InvalidEmedContentException {
         if (!this.hasMedicationStatementChanged()) {
             return null;
         }
         final var resource = this.getMedicationStatementChangedReference().getResource();
-        if (resource instanceof ChEmedEprMedicationStatementChanged chEmedEprMedicationStatementChanged) {
-            return chEmedEprMedicationStatementChanged;
-        }
+        if (getMedicationStatementChangedType().isInstance(resource))
+            return getMedicationStatementChangedType().cast(resource);
         throw new InvalidEmedContentException("The medication statement resource isn't of the right type.");
     }
+
+    /**
+     *
+     * @return The class (type) of medication statement resource that is to be returned by
+     *          resolveMedicationStatementChanged().
+     */
+    protected abstract Class<T> getMedicationStatementChangedType();
 
     /**
      * Resolves the changed medication request.
@@ -328,7 +339,7 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
      * @param treatmentPlan the treatment plan reference.
      * @return this.
      */
-    public ChEmedEprObservation setTreatmentPlanElement(final ChEmedExtTreatmentPlan treatmentPlan) {
+    public ChEmedEprObservation<T> setTreatmentPlanElement(final ChEmedExtTreatmentPlan treatmentPlan) {
         this.treatmentPlan = treatmentPlan;
         return this;
     }
@@ -339,7 +350,7 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
      * @param prescription the prescription reference.
      * @return this.
      */
-    public ChEmedEprObservation setPrescriptionElement(final ChEmedExtPrescription prescription) {
+    public ChEmedEprObservation<T> setPrescriptionElement(final ChEmedExtPrescription prescription) {
         this.prescription = prescription;
         return this;
     }
@@ -350,7 +361,7 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
      * @param dispense the medication dispense reference.
      * @return this.
      */
-    public ChEmedEprObservation setDispenseElement(final ChEmedExtDispense dispense) {
+    public ChEmedEprObservation<T> setDispenseElement(final ChEmedExtDispense dispense) {
         this.dispense = dispense;
         return this;
     }
@@ -361,8 +372,8 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
      * @param medicationStatement the changed medication statement.
      * @return this.
      */
-    public ChEmedEprObservation setMedicationStatementChanged(final ChEmedEprMedicationStatementMtp medicationStatement) {
-        this.medicationStatementChanged = References.createReference(medicationStatement);
+    public ChEmedEprObservation<T> setMedicationStatementChanged(final ChEmedEprMedicationStatementMtp medicationStatement) {
+        this.medicationStatementChanged = new Reference(medicationStatement);
         return this;
     }
 
@@ -372,8 +383,8 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
      * @param medicationRequest the changed medication request.
      * @return this.
      */
-    public ChEmedEprObservation setMedicationRequestChanged(final ChEmedEprMedicationRequestPre medicationRequest) {
-        this.medicationRequestChanged = References.createReference(medicationRequest);
+    public ChEmedEprObservation<T> setMedicationRequestChanged(final ChEmedEprMedicationRequestPre medicationRequest) {
+        this.medicationRequestChanged = new Reference(medicationRequest);
         return this;
     }
 
@@ -383,7 +394,7 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
      * @param padvEntryType the PADV entry type.
      * @return this.
      */
-    public ChEmedEprObservation setPadvEntryType(final EmedPadvEntryType padvEntryType) {
+    public ChEmedEprObservation<T> setPadvEntryType(final EmedPadvEntryType padvEntryType) {
         this.setCode(padvEntryType.getCodeableConcept());
         return this;
     }
@@ -394,7 +405,7 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
      * @param issued the date/time this version was made available.
      * @return this.
      */
-    public ChEmedEprObservation setIssued(final Instant issued) {
+    public ChEmedEprObservation<T> setIssued(final Instant issued) {
         this.setIssued(Date.from(issued));
         return this;
     }
@@ -405,7 +416,7 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
      * @param note the note.
      * @return this.
      */
-    public ChEmedEprObservation setNote(final String note) {
+    public ChEmedEprObservation<T> setNote(final String note) {
         this.getNoteFirstRep().setText(note);
         return this;
     }
@@ -480,7 +491,7 @@ public abstract class ChEmedEprObservation extends Observation implements ChEmed
     @Override
     public void copyValues(final Observation dst) {
         super.copyValues(dst);
-        if (dst instanceof ChEmedEprObservation obs) {
+        if (dst instanceof ChEmedEprObservation<?> obs) {
             obs.treatmentPlan = treatmentPlan == null ? null : treatmentPlan.copy();
             obs.prescription = prescription == null ? null : prescription.copy();
             obs.dispense = dispense == null ? null : dispense.copy();

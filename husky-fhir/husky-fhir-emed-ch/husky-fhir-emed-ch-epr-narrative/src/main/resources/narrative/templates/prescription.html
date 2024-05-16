@@ -1,4 +1,4 @@
-<!--/*
+<!--
   ~ This code is made available under the terms of the Eclipse Public License v1.0
   ~ in the github project https://github.com/project-husky/husky there you also
   ~ find a list of the contributors and the license information.
@@ -6,9 +6,10 @@
   ~ This project has been developed further and modified by the joined working group Husky
   ~ on the basis of the eHealth Connector opensource project from June 28, 2021,
   ~ whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
-  */-->
+  ~
+  -->
 <th:block th:switch="${lang.name()}">
-    <h1 id="card-title">Carte de médication</h1>
+    <h1 id="card-title">Prescription</h1>
 
     <table class="table-header">
         <tr>
@@ -16,21 +17,15 @@
                 <h2>Patient</h2>
                 <th:block th:insert="~{patient :: display-name-address-contact(${resource.resolvePatient()}, ${lang})}"/>
             </td>
-            <th:block th:if="${lastStatement != null}">
-                <td class="cell-author">
-                    <h2>Dernière modification</h2>
-                    <th:block th:insert="~{last_modif :: display-last-modification(${lastStatement}, ${lang})}"/>
-                </td>
-            </th:block>
+            <td class="cell-author">
+                <h2>Auteur</h2>
+                <th:block th:insert="~{practitioner_role :: display(${author}, ${lang})}"/>
+            </td>
         </tr>
     </table>
 
-    <div id="active-treatments">
-        <h2 id="active-treatments-header">Traitements actifs</h2>
-        <th:block th:insert="~{medication_card_fragments :: table(${activeTreatments}, ${lang})}"/>
-    </div>
-    <div id="reserve-treatments">
-        <h2 id="reserve-treatments-header">Traitements en réserve</h2>
-        <th:block th:insert="~{medication_card_fragments :: table(${asneededTreatments}, ${lang})}"/>
+    <div id="treatments">
+        <h2 id="treatments-header">Traitements</h2>
+        <th:block th:insert="~{prescription_fragments :: table(${treatments}, ${lang})}"/>
     </div>
 </th:block>

@@ -23,7 +23,8 @@ import java.util.UUID;
  **/
 @ResourceDef(profile = "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-observation-list")
 public class ChEmedEprObservationPml
-        extends ChEmedEprObservation implements ChEmedEprDocumentAuthorable<ChEmedEprObservationPml> {
+        extends ChEmedEprObservation<ChEmedEprMedicationStatementPml>
+        implements ChEmedEprDocumentAuthorable<ChEmedEprObservationPml> {
 
     /**
      * Author of the original document if different from the author of the medical decision (Observation.performer), see
@@ -61,6 +62,16 @@ public class ChEmedEprObservationPml
     }
 
     /**
+     *
+     * @return The {@link ChEmedEprMedicationStatementPml} class, since it is the resulting class of parsing the
+     * medication statement changed resources in a PML document (parser limitation).
+     */
+    @Override
+    protected Class<ChEmedEprMedicationStatementPml> getMedicationStatementChangedType() {
+        return ChEmedEprMedicationStatementPml.class;
+    }
+
+    /**
      * Gets the author document element in the observation.
      *
      * @return the author document element.
@@ -79,7 +90,7 @@ public class ChEmedEprObservationPml
      * @return this.
      */
     @Override
-    public ChEmedEprObservationPml setAuthorDocument(final Reference reference) {
+    public ChEmedEprObservationPml setAuthorDocument(final @Nullable Reference reference) {
         this.authorDocument = reference;
         return this;
     }
@@ -91,7 +102,7 @@ public class ChEmedEprObservationPml
      * @return this.
      */
     public ChEmedEprObservationPml setPerformer(final ChEmedEprPractitionerRole performer) {
-        final var reference = References.createReference(performer);
+        final var reference = new Reference(performer);
         if (this.getPerformer().isEmpty()) {
             this.addPerformer(reference);
         } else {
@@ -107,7 +118,7 @@ public class ChEmedEprObservationPml
      * @return this.
      */
     public ChEmedEprObservationPml setPerformer(final ChCorePatientEpr performer) {
-        final var reference = References.createReference(performer);
+        final var reference = new Reference(performer);
         if (this.getPerformer().isEmpty()) {
             this.addPerformer(reference);
         } else {
@@ -123,7 +134,7 @@ public class ChEmedEprObservationPml
      * @return this.
      */
     public ChEmedEprObservationPml setPerformer(final RelatedPerson performer) {
-        final var reference = References.createReference(performer);
+        final var reference = new Reference(performer);
         if (this.getPerformer().isEmpty()) {
             this.addPerformer(reference);
         } else {
@@ -198,4 +209,6 @@ public class ChEmedEprObservationPml
             als.parentDocument = parentDocument == null ? null : parentDocument.copy();
         }
     }
+
+
 }

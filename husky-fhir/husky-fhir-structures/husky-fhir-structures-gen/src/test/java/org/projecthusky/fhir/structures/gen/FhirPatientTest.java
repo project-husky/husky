@@ -103,6 +103,11 @@ class FhirPatientTest {
 		fhirPatient.getName().add(humanName);
 		final Address address = new Address().addLine("1 PINETREE").setPostalCode("63119")
 				.setCity("WEBSTER").setState("MO");
+		org.hl7.fhir.r4.model.Extension streetNameExt = new org.hl7.fhir.r4.model.Extension(
+				"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName",
+		 new StringType("StreetName"));
+		address.addExtension(streetNameExt);
+
 		final Identifier identifier = new Identifier();
 		identifier.setValue("PIX");
 		identifier.setSystem(FhirCommon.addUrnOid("2.16.840.1.113883.3.72.5.9.1"));
@@ -121,6 +126,7 @@ class FhirPatientTest {
 		assertEquals("WEBSTER", patient.getAddress().getCity());
 		assertEquals("ALPHA", patient.getName().getFamily());
 		assertEquals("ALAN", patient.getName().getGiven());
+		assertEquals("StreetName", patient.getAddress().getStreetName());
 
 		II ii = patient.getMdhtPatientRole()
 				.getProviderOrganization().getId().get(0);
@@ -454,7 +460,7 @@ class FhirPatientTest {
 		address.setUsage(org.projecthusky.common.enums.PostalAddressUse.PRIMARY_HOME);
 		address.setCountry("cty");
 		address.setState("state");
-
+		address.setStreetName("StreetName");
 		conveniencePatient.addAddress(address);
 
 		final FhirPatient fhirPatient = new FhirPatient(conveniencePatient);
@@ -465,6 +471,9 @@ class FhirPatientTest {
 		assertEquals("city", fhirPatient.getAddressFirstRep().getCity());
 		assertEquals("cty", fhirPatient.getAddressFirstRep().getCountry());
 		assertEquals("state", fhirPatient.getAddressFirstRep().getState());
+		assertEquals("StreetName", ((StringType) fhirPatient.getAddressFirstRep().getExtensionByUrl(
+				"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName"
+		).getValue()).getValue());
 	}
 
 	@Test

@@ -10,6 +10,7 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.datatypes;
 
+import ca.uhn.fhir.model.api.annotation.DatatypeDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Ratio;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
@@ -20,14 +21,24 @@ import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
  *
  * @author Ronaldo Loureiro
  **/
+@DatatypeDef(name = "ChEmedRatioWithEmedUnits", isSpecialization = true, profileOf = Ratio.class)
 public class ChEmedRatioWithEmedUnits extends Ratio {
-
 
     /**
      * Empty constructor for the parser.
      */
     public ChEmedRatioWithEmedUnits() {
         super();
+    }
+
+    /**
+     * Empty constructor for the parser.
+     */
+    public ChEmedRatioWithEmedUnits(final ChEmedQuantityWithEmedUnits numerator,
+                                    final ChEmedQuantityWithEmedUnits denominator) {
+        super();
+        this.setNumerator(numerator);
+        this.setDenominator(denominator);
     }
 
     /**
