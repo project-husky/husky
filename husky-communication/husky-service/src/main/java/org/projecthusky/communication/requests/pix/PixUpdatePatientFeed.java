@@ -57,8 +57,10 @@ import net.ihe.gazelle.hl7v3.prpamt201302UV02.PRPAMT201302UV02PatientPatientPers
 public class PixUpdatePatientFeed {
 	@NonNull
 	private Destination destination;
-	@NonNull
+	/** Use providingOrganization instead */
+	@Deprecated
 	private Organization scopingOrganization;
+	private Organization providerOrganization;
 	private String homeCommunityOID;
 	private String homeCommunityNamespace;
 
@@ -97,7 +99,7 @@ public class PixUpdatePatientFeed {
 		addMaritalStatus(request);
 		addLanguages(request);
 		addTelecomContacts(request);
-		addScopingOrganization(request);
+		addProviderOrganization(request);
 		addEmployeeOccupation(request);
 		return request;
 	}
@@ -114,31 +116,28 @@ public class PixUpdatePatientFeed {
 		}
 	}
 
-	private void addScopingOrganization(PixUpdatePatientRequest request) {
-		if (this.scopingOrganization != null) {
-			String organizationOID = "";
-			String organizationName = "";
-			String telecomValue = "NOTPROVIDED";
-			if (this.scopingOrganization.getIdentifier() != null && !this.scopingOrganization.getIdentifier().isEmpty()) {
-				Identifier organizationId = this.scopingOrganization.getIdentifier().get(0);
-				if (organizationId.getSystem().startsWith(FhirCommon.OID_URN)) {
-					organizationOID = FhirCommon.removeUrnOidPrefix(organizationId.getSystem());
-				}
-			}
+	private void addProviderOrganization(PixUpdatePatientRequest request) {
+	    if (providerOrganization == null && scopingOrganization != null) {
+	      providerOrganization = scopingOrganization;
+	    }
 
-			if (this.scopingOrganization.getName() != null) {
-				organizationName = this.scopingOrganization.getName();
-			}
+	    if (providerOrganization != null) {
+	      String organizationName = "";
+	      String telecomValue = "NOTPROVIDED";
+	      
+	      if (providerOrganization.getName() != null) {
+	        organizationName = providerOrganization.getName();
+	      }
 
-			if (this.scopingOrganization.getTelecom() != null && !this.scopingOrganization.getTelecom().isEmpty()) {
-				var contactPoint = this.scopingOrganization.getTelecomFirstRep();
-				if (contactPoint != null) {
-					telecomValue = contactPoint.getValue();
-				}
-			}
-			request.setScopingOrganization(organizationOID, organizationName, telecomValue);
-		}
-	}
+	      if (providerOrganization.getTelecom() != null && !providerOrganization.getTelecom().isEmpty()) {
+	        var contactPoint = providerOrganization.getTelecomFirstRep();
+	        if (contactPoint != null) {
+	          telecomValue = contactPoint.getValue();
+	        }
+	      }
+	      request.setProviderOrganization(providerOrganization.getIdentifier(), organizationName, telecomValue);
+	    }
+	  }
 
 	private void addTelecomContacts(PixUpdatePatientRequest request) {
 		PRPAIN201302UV02Type rootElement = request.getRootElement();

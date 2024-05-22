@@ -1,5 +1,7 @@
 package org.projecthusky.communication.mpi.impl;
 
+import java.util.List;
+
 import org.projecthusky.communication.utils.PixPdqV3Utils;
 
 import net.ihe.gazelle.hl7v3.datatypes.CS;
@@ -114,19 +116,26 @@ public class PixPdqSubjectPatient {
 
 	}
 
+	/**
+	 * @deprecated use {@link #setProviderOrganization(List, String, String)} instead to ensure all Identifiers are considered
+	 */
+	@Deprecated
 	public void setProviderOrganization(String organizationOID, String organizationName, String telecomValue) {
-		if (internalObj instanceof PRPAMT201301UV02Patient) {
-			getPRPAMT201301UV02Patient().setProviderOrganization(
-					PixPdqV3Utils.createCOCTMT150003UV03Organization(organizationOID, organizationName, telecomValue));
-		} else if (internalObj instanceof PRPAMT201302UV02Patient) {
-			getPRPAMT201302UV02Patient().setProviderOrganization(
-					PixPdqV3Utils.createCOCTMT150003UV03Organization(organizationOID, organizationName, telecomValue));
-		} else if (internalObj instanceof PRPAMT201303UV02Patient) {
-			getPRPAMT201303UV02Patient().setProviderOrganization(
-					PixPdqV3Utils.createCOCTMT150003UV03Organization(organizationOID, organizationName, telecomValue));
-		}
-
+	  setProviderOrganization(List.of(organizationOID), organizationName, telecomValue);
 	}
+	
+    public void setProviderOrganization(List<String> organizationOIDs, String organizationName, String telecomValue) {
+      if (internalObj instanceof PRPAMT201301UV02Patient) {
+        getPRPAMT201301UV02Patient().setProviderOrganization(
+            PixPdqV3Utils.createCOCTMT150003UV03Organization(organizationOIDs, organizationName, telecomValue));
+      } else if (internalObj instanceof PRPAMT201302UV02Patient) {
+        getPRPAMT201302UV02Patient().setProviderOrganization(
+            PixPdqV3Utils.createCOCTMT150003UV03Organization(organizationOIDs, organizationName, telecomValue));
+      } else if (internalObj instanceof PRPAMT201303UV02Patient) {
+        getPRPAMT201303UV02Patient().setProviderOrganization(
+            PixPdqV3Utils.createCOCTMT150003UV03Organization(organizationOIDs, organizationName, telecomValue));
+      }
+    }
 
 	/**
 	 * Get the patient ID

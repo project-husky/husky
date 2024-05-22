@@ -53,8 +53,10 @@ public class PixMergePatientFeed {
 
   @NonNull
   private Destination destination;
-  @NonNull
+  /** Use providingOrganization instead */
+  @Deprecated
   private Organization scopingOrganization;
+  private Organization providerOrganization;
   @NonNull
   private String obsolatePatientID;
   @NonNull
@@ -98,7 +100,7 @@ public class PixMergePatientFeed {
     addMaritalStatus(request);
     addLanguages(request);
     addTelecomContacts(request);
-    addScopingOrganization(request);
+    addProviderOrganization(request);
     addEmployeeOccupation(request);
     return request;
   }
@@ -119,27 +121,26 @@ public class PixMergePatientFeed {
     }
   }
 
-  private void addScopingOrganization(PixMergePatientRequest request) {
-    if (this.scopingOrganization != null) {
-      String organizationOID = "", organizationName = "", telecomValue = "NOTPROVIDED";
-      if (this.scopingOrganization.getIdentifier() != null && !this.scopingOrganization.getIdentifier().isEmpty()) {
-        Identifier organizationId = this.scopingOrganization.getIdentifier().get(0);
-        if (organizationId.getSystem().startsWith(FhirCommon.OID_URN)) {
-          organizationOID = FhirCommon.removeUrnOidPrefix(organizationId.getSystem());
-        }
+  private void addProviderOrganization(PixMergePatientRequest request) {
+    if (providerOrganization == null && scopingOrganization != null) {
+      providerOrganization = scopingOrganization;
+    }
+
+    if (providerOrganization != null) {
+      String organizationName = "";
+      String telecomValue = "NOTPROVIDED";
+      
+      if (providerOrganization.getName() != null) {
+        organizationName = providerOrganization.getName();
       }
 
-      if (this.scopingOrganization.getName() != null) {
-        organizationName = this.scopingOrganization.getName();
-      }
-
-      if (this.scopingOrganization.getTelecom() != null && !this.scopingOrganization.getTelecom().isEmpty()) {
-        var contactPoint = this.scopingOrganization.getTelecomFirstRep();
+      if (providerOrganization.getTelecom() != null && !providerOrganization.getTelecom().isEmpty()) {
+        var contactPoint = providerOrganization.getTelecomFirstRep();
         if (contactPoint != null) {
           telecomValue = contactPoint.getValue();
         }
       }
-      request.setScopingOrganization(organizationOID, organizationName, telecomValue);
+      request.setProviderOrganization(providerOrganization.getIdentifier(), organizationName, telecomValue);
     }
   }
 
