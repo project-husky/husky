@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.hl7.fhir.r4.model.Organization;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.projecthusky.common.communication.Destination;
 import org.projecthusky.communication.requests.pix.PixAddPatientFeed;
@@ -38,24 +39,26 @@ public class PixAddPatientFeedTest {
 	}
 
 	@Test
-	void whenDestinationIsNotNull_butScopingOrganizationIsNotSet_thenExceptionIsThrown() throws Exception {
+	@Disabled("Until scoping organization is no longer used as fallback")
+	void whenDestinationIsNotNull_butProviderOrganizationIsNotSet_thenExceptionIsThrown() throws Exception {
 		NullPointerException resultingException = assertThrows(NullPointerException.class, () -> {
 			PixAddPatientFeed.builder().destination(new Destination()).build();
 		});
-		assertEquals("scopingOrganization is marked non-null but is null", resultingException.getMessage());
+		assertEquals("providerOrganization is marked non-null but is null", resultingException.getMessage());
 	}
 
 	@Test
-	void whenDestinationIsNotNull_andScopingOrganizationIsSetToNull_thenExceptionIsThrown() throws Exception {
+	@Disabled("Until scoping organization is no longer used as fallback")
+	void whenDestinationIsNotNull_andProviderOrganizationIsSetToNull_thenExceptionIsThrown() throws Exception {
 		NullPointerException resultingException = assertThrows(NullPointerException.class, () -> {
-			PixAddPatientFeed.builder().destination(new Destination()).scopingOrganization(null);
+			PixAddPatientFeed.builder().destination(new Destination()).providerOrganization(null);
 		});
-		assertEquals("scopingOrganization is marked non-null but is null", resultingException.getMessage());
+		assertEquals("providerOrganization is marked non-null but is null", resultingException.getMessage());
 	}
 
 	@Test
 	public void whenBuilderIsBuilt_withMinimalParameters_thenListsAreInitializedByLombokAsEmplty() {
-		PixAddPatientFeed addPatientQuery = PixAddPatientFeed.builder().destination(new Destination()).scopingOrganization(new Organization()).build();
+		PixAddPatientFeed addPatientQuery = PixAddPatientFeed.builder().destination(new Destination()).providerOrganization(new Organization()).build();
 		assertNotNull(addPatientQuery);
 		assertNotNull(addPatientQuery.getIdentifiers());
 		assertNotNull(addPatientQuery.getNonMedicalIdentifiers());

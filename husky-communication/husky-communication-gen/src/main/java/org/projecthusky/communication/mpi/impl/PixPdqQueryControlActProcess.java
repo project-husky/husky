@@ -1,5 +1,7 @@
 package org.projecthusky.communication.mpi.impl;
 
+import java.util.List;
+
 import org.projecthusky.communication.utils.PixPdqV3Utils;
 
 import net.ihe.gazelle.hl7v3.datatypes.AD;
@@ -237,7 +239,10 @@ public class PixPdqQueryControlActProcess {
 	 * @param organizationOID
 	 * @param organizationName
 	 * @param telecomValue
+	 * 
+	 * @deprecated use {@link #setProviderOrganization(List, String, String)} instead
 	 */
+	@Deprecated
 	public void setScopingOrganization(String organizationOID, String organizationName, String telecomValue) {
 		// The Patient class is scoped by the provider organization where this
 		// person is a patient.
@@ -458,7 +463,11 @@ public class PixPdqQueryControlActProcess {
 	}
 
 	public void setProviderOrganization(String organizationOID, String organizationName, String telecomValue) {
-		subjectPatient.setProviderOrganization(organizationOID, organizationName, telecomValue);
+	  setProviderOrganization(List.of(organizationOID), organizationName, telecomValue);
+	}
+	
+	public void setProviderOrganization(List<String> organizationOIDs, String organizationName, String telecomValue) {
+		subjectPatient.setProviderOrganization(organizationOIDs, organizationName, telecomValue);
 		addSubjectPatient();
 	}
 
@@ -559,5 +568,4 @@ public class PixPdqQueryControlActProcess {
 	public PRPAMT201303UV02Patient getPRPAMT201303UV02Patient() {
 		return (PRPAMT201303UV02Patient) internalObj;
 	}
-
 }
