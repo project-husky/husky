@@ -14,6 +14,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import org.hl7.fhir.r4.model.Address;
 import org.hl7.fhir.r4.model.Address.AddressUse;
@@ -626,6 +627,12 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 		if (!addressline2.isEmpty()) {
 			patientAddress.setStreetAddressLine2(addressline2);
 		}
+
+		final var extension = fhirAddress.getExtensionByUrl("http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName");
+		Optional.ofNullable(extension)
+				.map(ext -> (StringType) ext.getValue())
+				.map(StringType::getValue)
+				.ifPresent(patientAddress::setStreetName);
 
 		patientAddress.setPostalCode(zip);
 		patientAddress.setCity(city);

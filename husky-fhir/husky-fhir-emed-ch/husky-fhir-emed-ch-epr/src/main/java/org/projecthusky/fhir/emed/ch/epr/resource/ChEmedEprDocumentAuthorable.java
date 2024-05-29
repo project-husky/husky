@@ -41,7 +41,7 @@ public interface ChEmedEprDocumentAuthorable<T> {
      * @return this.
      */
     default T setAuthorDocument(final IBaseResource author) {
-        return setAuthorDocument(References.createReference((Resource) author));
+        return setAuthorDocument(new Reference((Resource) author));
     }
 
     /**

@@ -13,13 +13,13 @@ package org.projecthusky.fhir.emed.ch.epr.resource.pmlc;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Device;
+import org.hl7.fhir.r4.model.Reference;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.enums.CompositionTitle;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprComposition;
-import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -70,22 +70,6 @@ public class ChEmedEprCompositionPmlc extends ChEmedEprComposition {
             return device;
         }
         throw new InvalidEmedContentException("The author is not a device.");
-    }
-
-    /**
-     * Returns the annotation section; if missing, it creates it.
-     *
-     * @return the annotation section.
-     */
-    public SectionComponent getAnnotationSection() {
-        var section = getSectionByLoincCode(ANNOTATION_SECTION_CODE_VALUE);
-        if (section == null) {
-            section = this.addSection();
-            section.getCode().addCoding(new Coding(FhirSystem.LOINC,
-                                                   ANNOTATION_SECTION_CODE_VALUE, "Annotation comment [Interpretation] Narrative"));
-            section.setTitle("Comment");
-        }
-        return section;
     }
 
     /**
@@ -170,7 +154,7 @@ public class ChEmedEprCompositionPmlc extends ChEmedEprComposition {
      * @return this.
      */
     public ChEmedEprCompositionPmlc addAuthor(final Device author) {
-        this.addAuthor(References.createReference(author));
+        this.addAuthor(new Reference(author));
         return this;
     }
 

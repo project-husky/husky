@@ -27,7 +27,9 @@ public class References {
      *
      * @param resource The {@link Resource} resource.
      * @return the reference
+     * @deprecated Use {@link Reference#Reference(IAnyResource)} directly instead.
      */
+    @Deprecated(forRemoval = true, since = "2024-04-19")
     public static Reference createReference(final Resource resource) {
         final var reference = new Reference();
         reference.setResource(resource);

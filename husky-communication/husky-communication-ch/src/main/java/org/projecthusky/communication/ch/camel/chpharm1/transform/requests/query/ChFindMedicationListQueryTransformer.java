@@ -15,7 +15,6 @@ import org.projecthusky.communication.ch.camel.chpharm1.requests.query.ChFindMed
 import org.openehealth.ipf.commons.ihe.xds.core.ebxml.EbXMLAdhocQueryRequest;
 import org.openehealth.ipf.commons.ihe.xds.core.transform.requests.query.QuerySlotHelper;
 
-import static org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp.toHL7;
 import static org.openehealth.ipf.commons.ihe.xds.core.transform.requests.QueryParameter.*;
 
 /**
@@ -46,11 +45,11 @@ public class ChFindMedicationListQueryTransformer extends ChPharmacyDocumentsQue
         slots.fromCode(DOC_ENTRY_FORMAT_CODE, query.getFormatCodes());
         slots.fromDocumentEntryType(DOC_ENTRY_TYPE, query.getDocumentEntryTypes());
 
-        slots.fromNumber(DOC_ENTRY_SERVICE_START_FROM, toHL7(query.getServiceStart().getFrom()));
-        slots.fromNumber(DOC_ENTRY_SERVICE_START_TO, toHL7(query.getServiceStart().getTo()));
+        slots.fromTimestamp(DOC_ENTRY_SERVICE_START_FROM, query.getServiceStart().getFrom());
+        slots.fromTimestamp(DOC_ENTRY_SERVICE_START_TO, query.getServiceStart().getTo());
 
-        slots.fromNumber(DOC_ENTRY_SERVICE_END_FROM, toHL7(query.getServiceEnd().getFrom()));
-        slots.fromNumber(DOC_ENTRY_SERVICE_END_TO, toHL7(query.getServiceEnd().getTo()));
+        slots.fromTimestamp(DOC_ENTRY_SERVICE_END_FROM, query.getServiceEnd().getFrom());
+        slots.fromTimestamp(DOC_ENTRY_SERVICE_END_TO, query.getServiceEnd().getTo());
     }
 
     /**
@@ -74,10 +73,10 @@ public class ChFindMedicationListQueryTransformer extends ChPharmacyDocumentsQue
         query.setFormatCodes(slots.toCodeList(DOC_ENTRY_FORMAT_CODE));
         query.setDocumentEntryTypes(slots.toDocumentEntryType(DOC_ENTRY_TYPE));
 
-        query.getServiceStart().setFrom(slots.toNumber(DOC_ENTRY_SERVICE_START_FROM));
-        query.getServiceStart().setTo(slots.toNumber(DOC_ENTRY_SERVICE_START_TO));
+        query.getServiceStart().setFrom(slots.toTimestamp(DOC_ENTRY_SERVICE_START_FROM));
+        query.getServiceStart().setTo(slots.toTimestamp(DOC_ENTRY_SERVICE_START_TO));
 
-        query.getServiceEnd().setFrom(slots.toNumber(DOC_ENTRY_SERVICE_END_FROM));
-        query.getServiceEnd().setTo(slots.toNumber(DOC_ENTRY_SERVICE_END_TO));
+        query.getServiceEnd().setFrom(slots.toTimestamp(DOC_ENTRY_SERVICE_END_FROM));
+        query.getServiceEnd().setTo(slots.toTimestamp(DOC_ENTRY_SERVICE_END_TO));
     }
 }

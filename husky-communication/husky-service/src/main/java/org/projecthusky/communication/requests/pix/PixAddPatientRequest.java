@@ -9,6 +9,7 @@
  */
 package org.projecthusky.communication.requests.pix;
 
+import java.util.List;
 
 import net.ihe.gazelle.hl7v3.prpain201301UV02.PRPAIN201301UV02MFMIMT700701UV01ControlActProcess;
 import net.ihe.gazelle.hl7v3.prpain201301UV02.PRPAIN201301UV02Type;
@@ -66,6 +67,7 @@ public class PixAddPatientRequest extends BaseRequest {
 		getRootElement().getReceiver().add(PixPdqV3Utils.createMCCIMT000100UV01Receiver(applicationOID, facilityOID));
 	}
 
+	
 	/**
 	 * Get the root element
 	 * @return {@link PRPAIN201301UV02Type} - the root element
@@ -119,13 +121,14 @@ public class PixAddPatientRequest extends BaseRequest {
 	 * @param organizationOID
 	 * @param organizationName
 	 * @param telecomValue
+	 * 
+	 * @deprecated use {@link #setProviderOrganization(List, String, String)} instead
 	 */
-	@Override
 	public void setScopingOrganization(String organizationOID, String organizationName, String telecomValue) {
-		super.setScopingOrganization(organizationOID, organizationName, telecomValue);
-		// add this orgnaization as custodian as well
-		queryControlActProcess.setCustodian(organizationOID, organizationName);
-		addControlActProcess();
+	  super.setProviderOrganization(organizationName, telecomValue, List.of(organizationOID));
+	  // add this organization as custodian as well
+	  queryControlActProcess.setCustodian(organizationOID, organizationName);
+	  addControlActProcess();
 	}
 
 	/**

@@ -87,9 +87,11 @@ public class ChCoreAddressAdapter {
      * OFS</a>
      * @see <a href="https://www.bfs.admin.ch/bfs/it/home/basi-statistiche/elenco-ufficiale-comuni-svizzera.html">Numero
      * UST</a>
+     * @return this.
      */
-    public void setCityBfs(@Nullable final String bfs) {
+    public ChCoreAddressAdapter setCityBfs(@Nullable final String bfs) {
         this.address.getCityElement().addExtension(BFS_EXTENSION, new StringType(bfs));
+        return this;
     }
 
     /**
@@ -106,9 +108,11 @@ public class ChCoreAddressAdapter {
      * Sets the country code (ISO Country Alpha-2 or ISO Country Alpha-3 code).
      *
      * @param countryCode The country code (ISO Country Alpha-2 or ISO Country Alpha-3 code).
+     * @return this.
      */
-    public void setCountryCode(@Nullable final String countryCode) {
+    public ChCoreAddressAdapter setCountryCode(@Nullable final String countryCode) {
         this.address.getCountryElement().addExtension(COUNTRY_CODE_EXTENSION, new StringType(countryCode));
+        return this;
     }
 
     /**
@@ -124,9 +128,11 @@ public class ChCoreAddressAdapter {
      * Adds an address line.
      *
      * @param addressLineAdapter The address line adapter.
+     * @return this.
      */
-    public void addLine(final AddressLineAdapter addressLineAdapter) {
+    public ChCoreAddressAdapter addLine(final AddressLineAdapter addressLineAdapter) {
         this.address.getLine().add(addressLineAdapter.getLine());
+        return this;
     }
 
     public static final class AddressLineAdapter {

@@ -61,7 +61,7 @@ public class ChEmedEprPractitioner extends Practitioner {
     public Identifier setGln(final String gln) {
         var identifier = Identifiers.getBySystem(this.getIdentifier(), FhirSystem.GLN);
         if (identifier == null) {
-            identifier = new Identifier();
+            identifier = this.addIdentifier();
             identifier.setSystem(FhirSystem.GLN);
         }
         identifier.setValue(gln);

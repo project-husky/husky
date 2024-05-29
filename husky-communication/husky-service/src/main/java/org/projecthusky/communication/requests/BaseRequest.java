@@ -11,13 +11,13 @@ package org.projecthusky.communication.requests;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import net.ihe.gazelle.hl7v3.datatypes.AD;
+import net.ihe.gazelle.hl7v3.datatypes.II;
+import org.hl7.fhir.r4.model.Identifier;
 import org.projecthusky.communication.mpi.V3Message;
 import org.projecthusky.communication.mpi.impl.PixPdqQueryControlActProcess;
 import org.projecthusky.communication.utils.PixPdqV3Utils;
-
-import net.ihe.gazelle.hl7v3.datatypes.AD;
-import net.ihe.gazelle.hl7v3.datatypes.II;
+import org.projecthusky.fhir.structures.gen.FhirCommon;
 
 /**
  * Baseclass for requests. Is essentially a copy of {@link V3Message} and for sake of speed it was not reworked.
@@ -349,21 +349,24 @@ public abstract class BaseRequest {
 		addControlActProcess();
 	}
 
-	public void setProviderOrganization(String organizationOID, String organizationName, String telecomValue) {
-		queryControlActProcess.setProviderOrganization(organizationOID, organizationName, telecomValue);
-		addControlActProcess();
-	}
+	public void setProviderOrganization(List<Identifier> organizationIdentifiers, String organizationName, String telecomValue) {
+	  List<String> listOrgOIDs = organizationIdentifiers.stream()
+	      .map(orgID -> {
+	        if (orgID.getSystem().startsWith(FhirCommon.OID_URN)) {
+	          return FhirCommon.removeUrnOidPrefix(orgID.getSystem());
+	        }
 
-	/**
-	 * Set the scoping organization for the patient
-	 *
-	 * @param organizationOID
-	 * @param organizationName
-	 * @param telecomValue
-	 */
-	public void setScopingOrganization(String organizationOID, String organizationName, String telecomValue) {
-		// add this orgnaization as custodian as well
-		queryControlActProcess.setScopingOrganization(organizationOID, organizationName, telecomValue);
-		addControlActProcess();
+	        return orgID.getSystem();
+        }).toList();
+
+	  setProviderOrganization(organizationName, telecomValue, listOrgOIDs);
 	}
+	
+	/**
+	 * Please note that given organizationOIDs must be without {@link FhirCommon#OID_URN} prefix.
+	 */
+    public void setProviderOrganization(String organizationName, String telecomValue, List<String> organizationOIDs) {
+      queryControlActProcess.setProviderOrganization(organizationOIDs, organizationName, telecomValue);
+      addControlActProcess();
+    }
 }

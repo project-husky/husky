@@ -1,0 +1,98 @@
+<!--
+  ~ This code is made available under the terms of the Eclipse Public License v1.0
+  ~ in the github project https://github.com/project-husky/husky there you also
+  ~ find a list of the contributors and the license information.
+  ~
+  ~ This project has been developed further and modified by the joined working group Husky
+  ~ on the basis of the eHealth Connector opensource project from June 28, 2021,
+  ~ whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+  ~
+  -->
+
+<table th:fragment="table(requests, lang)">
+    <thead>
+    <tr>
+        <td rowspan="2">Nom du médicament</td>
+        <td colspan="4">Dosage</td>
+        <td rowspan="2">Commentaire</td>
+        <td rowspan="2">Voie et localisation</td>
+    </tr>
+    <tr>
+        <td>Matin</td>
+        <td>Midi</td>
+        <td>Soir</td>
+        <td>Nuit</td>
+    </tr>
+    </thead>
+    <tbody class="prescription-body">
+    <th:block th:each="request, index: ${requests}">
+        <th:block th:insert="~{::table-line(${request}, ${request.resolveEffectiveDosageInstructions()}, ${index.index}, ${index.size}, ${lang})}"/>
+    </th:block>
+    </tbody>
+</table>
+
+<th:block th:fragment="table-line(request, dosage, index, size, lang)">
+    <tr class="request-row">
+        <!-- Nom du médicament -->
+        <td>
+            [[${request.resolveMedication().resolveMedicationName()}]]
+        </td>
+
+        <!-- Dosage -->
+        <th:block th:if="${dosage.hasIntakes()}">
+            <td th:insert="~{datatypes :: dosage-intake(${dosage.getMornIntake()}, ${lang})}"/>
+            <td th:insert="~{datatypes :: dosage-intake(${dosage.getNoonIntake()}, ${lang})}"/>
+            <td th:insert="~{datatypes :: dosage-intake(${dosage.getEveIntake()}, ${lang})}"/>
+            <td th:insert="~{datatypes :: dosage-intake(${dosage.getNightIntake()}, ${lang})}"/>
+        </th:block>
+        <th:block th:if="${dosage.hasSimpleEventTimings}">
+            <td th:insert="~{datatypes :: intake-timing(${dosage.hasMorningSimpleEventTiming}, ${lang})}"/>
+            <td th:insert="~{datatypes :: intake-timing(${dosage.hasNoonSimpleEventTiming}, ${lang})}"/>
+            <td th:insert="~{datatypes :: intake-timing(${dosage.hasEveningSimpleEventTiming}, ${lang})}"/>
+            <td th:insert="~{datatypes :: intake-timing(${dosage.hasNightSimpleEventTiming}, ${lang})}"/>
+        </th:block>
+        <th:block th:if="${dosage.hasSimpleDose}">
+            <td colspan="4" th:insert="~{datatypes :: simple-dose(${dosage.simpleDose}, ${lang})}"/>
+        </th:block>
+        <th:block th:unless="${dosage.hasIntakes or dosage.hasSimpleEventTimings or dosage.hasSimpleDose}">
+            <td colspan="4" th:text="${dosage.patientInstructions}"/>
+        </th:block>
+
+        <!-- Commentaire (raison et instructions au patient -->
+        <td>
+            <th:block th:if="${dosage.hasIntakes or dosage.hasSimpleEventTimings or dosage.hasSimpleDose}">
+                <th:block th:if="${dosage.hasPatientInstructions()}"
+                          th:text="${dosage.patientInstructions()}"/>
+                <th:block th:if="${dosage.hasPatientInstructions() && request.hasTreatmentReason()}"><br/></th:block>
+            </th:block>
+            <th:block th:if="${request.hasTreatmentReason()}"
+                      th:text="${request.getTreatmentReason()}"/>
+        </td>
+
+        <!-- Voie et localisation -->
+        <td>
+            <th:block th:if="${dosage.hasRouteOfAdministration()}"
+                      th:text="${fopase.getMessage(dosage.routeOfAdministration(), lang)}"/>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="7" class="description">
+            <th:block th:if="${dosage.period().hasStart() and dosage.period().hasEnd()}">
+                À prendre du
+                <th:block th:insert="~{datatypes :: date-time(${dosage.period().getStartElement()}, ${lang})}"/>
+                au
+                <th:block th:insert="~{datatypes :: date-time(${dosage.period().getEndElement()}, ${lang})}"/>
+            </th:block>
+            <th:block th:if="${dosage.period().hasStart() and not dosage.period().hasEnd()}">
+                À prendre dès le
+                <th:block th:insert="~{datatypes :: date-time(${dosage.period().getStartElement()}, ${lang})}"/>
+            </th:block>
+            <th:block th:if="${not dosage.period().hasStart() and dosage.period().hasEnd()}">
+                À prendre jusqu'au
+                <th:block th:insert="~{datatypes :: date-time(${dosage.period().getEndElement()}, ${lang})}"/>
+            </th:block>
+
+            <th:block th:if="${dosage.hasMaxDose()}" th:insert="~{datatypes::max-doses(${dosage}, ${lang})}"/>
+        </td>
+    </tr>
+</th:block>

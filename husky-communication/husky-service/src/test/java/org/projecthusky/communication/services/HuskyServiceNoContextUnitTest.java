@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Organization;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.projecthusky.common.communication.Destination;
 import org.projecthusky.communication.requests.pdq.PdqSearchQuery;
@@ -65,6 +66,7 @@ public class HuskyServiceNoContextUnitTest {
 	}
 	
 	@Test
+	@Disabled("Until scoping organization is no longer used as fallback")
 	public void whenNoScopingOrganizationIsPresentInAddFeed_thenExceptionIsThrown() {
 		NullPointerException exception = assertThrows(NullPointerException.class, () -> {
 			this.service.createPixAddPatientFeed(new Destination(), null).build();

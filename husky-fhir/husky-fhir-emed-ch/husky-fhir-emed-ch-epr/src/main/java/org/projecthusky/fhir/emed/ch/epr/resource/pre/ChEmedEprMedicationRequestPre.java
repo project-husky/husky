@@ -18,6 +18,7 @@ public class ChEmedEprMedicationRequestPre extends ChEmedEprMedicationRequest {
      */
     public ChEmedEprMedicationRequestPre() {
         super();
+        this.setStatus(MedicationRequestStatus.ACTIVE);
     }
 
     /**
@@ -27,6 +28,7 @@ public class ChEmedEprMedicationRequestPre extends ChEmedEprMedicationRequest {
      */
     public ChEmedEprMedicationRequestPre(final UUID entryUuid) {
         super(entryUuid);
+        this.setStatus(MedicationRequestStatus.ACTIVE);
     }
 
     @Override

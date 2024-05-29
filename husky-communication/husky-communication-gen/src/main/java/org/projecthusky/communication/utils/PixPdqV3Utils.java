@@ -425,7 +425,7 @@ public class PixPdqV3Utils {
 	}
 
 	/**
-	 * Create a COCTMT150003UV03Organization with the provided organization ID, name
+	 * Create a COCTMT150003UV03Organization with the provided organizationOID, name
 	 * and telecom
 	 *
 	 * @param organizationOID
@@ -435,19 +435,36 @@ public class PixPdqV3Utils {
 	 */
 	public static COCTMT150003UV03Organization createCOCTMT150003UV03Organization(String organizationOID,
 			String organizationName, String telecomValue) {
-		var organization = new COCTMT150003UV03Organization();
-		organization.setClassCode(EntityClassOrganization.ORG);
-		organization.setDeterminerCode(EntityDeterminer.INSTANCE);
-		organization.getId().add(createII(organizationOID, "", ""));
-		var on = new ON();
-		on.getMixed().add(organizationName);
-		organization.getName().add(on);
-		var contactParty = new COCTMT150003UV03ContactParty();
-		contactParty.setClassCode(net.ihe.gazelle.hl7v3.voc.RoleClassContact.CON);
-		contactParty.getTelecom().add(createTEL(telecomValue, ""));
-		organization.getContactParty().add(contactParty);
-		return organization;
+		return createCOCTMT150003UV03Organization(List.of(organizationOID), organizationName, telecomValue);
 	}
+
+	
+    /**
+     * Create a COCTMT150003UV03Organization with the provided list of organization identifiers, name
+     * and telecom
+     *
+     * @param organizationOID
+     * @param organizationName
+     * @param telecomValue
+     * @return COCTMT150003UV03Organization object populated with provided values.
+     */
+    public static COCTMT150003UV03Organization createCOCTMT150003UV03Organization(List<String> organizationIdentifiers,
+            String organizationName, String telecomValue) {
+        var organization = new COCTMT150003UV03Organization();
+        organization.setClassCode(EntityClassOrganization.ORG);
+        organization.setDeterminerCode(EntityDeterminer.INSTANCE);
+        for(String organizationOID : organizationIdentifiers) {
+          organization.getId().add(createII(organizationOID, "", ""));
+        }
+        var on = new ON();
+        on.getMixed().add(organizationName);
+        organization.getName().add(on);
+        var contactParty = new COCTMT150003UV03ContactParty();
+        contactParty.setClassCode(net.ihe.gazelle.hl7v3.voc.RoleClassContact.CON);
+        contactParty.getTelecom().add(createTEL(telecomValue, ""));
+        organization.getContactParty().add(contactParty);
+        return organization;
+    }
 
 	/**
 	 * Create a CS1 type with the supplied code set.

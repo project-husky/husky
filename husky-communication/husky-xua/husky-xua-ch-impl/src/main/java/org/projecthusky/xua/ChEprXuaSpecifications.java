@@ -59,5 +59,5 @@ public class ChEprXuaSpecifications {
     /**
      * The claims dialect (in Get X-User Assertion requests).
      */
-    public static final String CLAIMS_DIALECT = "http://bag.admin.ch/epr/2017/annex/5/addendum/2";
+    public static final String CLAIMS_DIALECT = "http://www.bag.admin.ch/epr/2017/annex/5/amendment/2";
 }

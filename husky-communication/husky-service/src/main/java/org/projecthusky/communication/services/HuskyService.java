@@ -174,8 +174,8 @@ public class HuskyService {
    * Query</a>
    */
   public PixAddPatientFeed.PixAddPatientFeedBuilder createPixAddPatientFeed(Destination destination,
-      Organization scopingOrganization) {
-    return PixAddPatientFeed.builder().destination(destination).scopingOrganization(scopingOrganization);
+      Organization providerOrganization) {
+    return PixAddPatientFeed.builder().destination(destination).providerOrganization(providerOrganization);
   }
 
   /**
@@ -183,12 +183,12 @@ public class HuskyService {
    * patient in the system.<br/> The properties of an {@link FhirPatient} are used, fill them accordingly.
    *
    * @param destination
-   * @param scopingOrganization
+   * @param providerOrganization
    * @return PixUpdatePatientFeedBuilder
    */
   public PixUpdatePatientFeed.PixUpdatePatientFeedBuilder createPixUpdatePatientFeed(Destination destination,
-      Organization scopingOrganization) {
-    return PixUpdatePatientFeed.builder().destination(destination).scopingOrganization(scopingOrganization);
+      Organization providerOrganization) {
+    return PixUpdatePatientFeed.builder().destination(destination).providerOrganization(providerOrganization);
   }
 
   /**
@@ -197,16 +197,15 @@ public class HuskyService {
    * person is entered into a system multiple times and needs to be merged into one.
    *
    * @param destination
-   * @param scopingOrganization
+   * @param providerOrganization
    * @param obsolatePatientId
    * @param homeCommunityOID
    * @param homeCommunityNamespace
    * @return
    */
   public PixMergePatientFeed.PixMergePatientFeedBuilder createPixMergePatientFeed(Destination destination,
-      Organization scopingOrganization,
-      String obsolatePatientId, String homeCommunityOID, String homeCommunityNamespace) {
-    return PixMergePatientFeed.builder().destination(destination).scopingOrganization(scopingOrganization)
+      Organization providerOrganization, String obsolatePatientId, String homeCommunityOID, String homeCommunityNamespace) {
+    return PixMergePatientFeed.builder().destination(destination).providerOrganization(providerOrganization)
         .obsolatePatientID(obsolatePatientId).homeCommunityOID(homeCommunityOID)
         .homeCommunityNamespace(homeCommunityNamespace);
   }

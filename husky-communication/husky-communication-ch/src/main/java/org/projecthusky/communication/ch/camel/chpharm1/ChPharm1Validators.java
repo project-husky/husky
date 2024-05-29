@@ -44,7 +44,7 @@ public class ChPharm1Validators {
         }
         var message =
                 new EbXMLQueryResponse30(exchange.getIn().getBody(AdhocQueryResponse.class));
-        new QueryResponseValidator().validate(message, PHARM_1);
+        QueryResponseValidator.getInstance().validate(message, PHARM_1);
     };
 
     /**

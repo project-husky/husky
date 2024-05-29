@@ -373,7 +373,7 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
      * @return this.
      */
     public ChEmedEprObservation<T> setMedicationStatementChanged(final ChEmedEprMedicationStatementMtp medicationStatement) {
-        this.medicationStatementChanged = References.createReference(medicationStatement);
+        this.medicationStatementChanged = new Reference(medicationStatement);
         return this;
     }
 
@@ -384,7 +384,7 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
      * @return this.
      */
     public ChEmedEprObservation<T> setMedicationRequestChanged(final ChEmedEprMedicationRequestPre medicationRequest) {
-        this.medicationRequestChanged = References.createReference(medicationRequest);
+        this.medicationRequestChanged = new Reference(medicationRequest);
         return this;
     }
 
