@@ -21,10 +21,11 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
 import org.apache.camel.CamelContext;
+import org.openehealth.ipf.commons.audit.AuditContext;
 import org.projecthusky.communication.CamelService;
 import org.projecthusky.communication.mpi.V3Acknowledgement;
+import org.projecthusky.communication.utils.HuskyUtils;
 import org.projecthusky.xua.core.SecurityHeaderElement;
-import org.openehealth.ipf.commons.audit.AuditContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -75,16 +76,15 @@ public class V3PixSource extends CamelService {
 	 * @return V3PixSourceAcknowledgement - The Server Ack
 	 * @throws Exception
 	 */
-	public V3Acknowledgement sendMergePatients(V3PixSourceMergePatients v3query,
-			SecurityHeaderElement assertion, String messageId)
-			throws Exception {
+	public V3Acknowledgement sendMergePatients(V3PixSourceMergePatients v3query, SecurityHeaderElement assertion,
+			String messageId) throws Exception {
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Beginning Send Patient Record Duplicates Resolved (V3)");
 		}
 
 		// send the request
-		var v3response = new V3Acknowledgement(sendITI44Query(v3query.getRootElement(), assertion,
-				getServerURI(), "urn:hl7-org:v3:PRPA_IN201304UV02", messageId));
+		var v3response = new V3Acknowledgement(sendITI44Query(v3query.getRootElement(), assertion, getServerURI(),
+				"urn:hl7-org:v3:PRPA_IN201304UV02", messageId));
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Ending Send Patient Record Duplicates Resolved (V3)");
@@ -102,15 +102,14 @@ public class V3PixSource extends CamelService {
 	 * @throws Exception
 	 */
 	public V3Acknowledgement sendRecordAdded(V3PixSourceRecordAdded v3query, SecurityHeaderElement assertion,
-			String messageId)
-			throws Exception {
+			String messageId) throws Exception {
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Beginning Send Patient Record Added (V3)");
 		}
 
 		// send the request
-		var v3response = new V3Acknowledgement(sendITI44Query(v3query.getRootElement(), assertion,
-				getServerURI(), "urn:hl7-org:v3:PRPA_IN201301UV02", messageId));
+		var v3response = new V3Acknowledgement(sendITI44Query(v3query.getRootElement(), assertion, getServerURI(),
+				"urn:hl7-org:v3:PRPA_IN201301UV02", messageId));
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Ending Send Patient Record Added (V3)");
@@ -128,17 +127,15 @@ public class V3PixSource extends CamelService {
 	 * @throws Exception
 	 */
 	public V3Acknowledgement sendRecordRevised(V3PixSourceRecordRevised v3query, SecurityHeaderElement assertion,
-			String messageId)
-			throws Exception {
+			String messageId) throws Exception {
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Beginning Send Patient Record Revised (V3)");
 		}
 
 		// send the request
-		var v3response = new V3Acknowledgement(
-				sendITI44Query(v3query.getRootElement(), assertion, getServerURI(),
-						"urn:hl7-org:v3:PRPA_IN201302UV02", messageId));
-				
+		var v3response = new V3Acknowledgement(sendITI44Query(v3query.getRootElement(), assertion, getServerURI(),
+				"urn:hl7-org:v3:PRPA_IN201302UV02", messageId));
+
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Ending Send Patient Record Revised (V3)");
 		}
@@ -146,7 +143,7 @@ public class V3PixSource extends CamelService {
 		// return the response
 		return v3response;
 	}
-	
+
 	private MCCIIN000002UV01Type sendITI44Query(PRPAIN201304UV02Type request, SecurityHeaderElement assertion,
 			URI pdqDest, String action, String messageId) throws Exception {
 
@@ -181,10 +178,8 @@ public class V3PixSource extends CamelService {
 				.unmarshal(new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8)));
 	}
 
-	private MCCIIN000002UV01Type sendITI44Query(PRPAIN201301UV02Type request,
-			SecurityHeaderElement assertion,
+	private MCCIIN000002UV01Type sendITI44Query(PRPAIN201301UV02Type request, SecurityHeaderElement assertion,
 			URI pdqDest, String action, String messageId) throws Exception {
-
 
 		final var marshaller = JAXBContext.newInstance(PRPAIN201301UV02Type.class).createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);
@@ -201,12 +196,10 @@ public class V3PixSource extends CamelService {
 	}
 
 	private String sendITI44Query(String request, SecurityHeaderElement assertion, URI pdqDest, String action,
-			String messageId)
-			throws Exception {
+			String messageId) throws Exception {
 
-		final var endpoint = String.format(
-				"pixv3-iti44://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&audit=%s&auditContext=#auditContext",
-				pdqDest.toString().replace("https://", ""), true, getAuditContext().isAuditEnabled());
+		final String endpoint = HuskyUtils.createEndpoint(HuskyUtils.PIXV3_ITI44, pdqDest, true,
+				getAuditContext().isAuditEnabled());
 
 		LOGGER.info("Sending request to '{}' endpoint", endpoint);
 

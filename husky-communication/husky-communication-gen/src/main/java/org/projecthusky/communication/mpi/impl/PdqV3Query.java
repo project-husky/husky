@@ -18,6 +18,7 @@ import org.projecthusky.communication.mpi.impl.pdq.V3PdqContinuationCancel;
 import org.projecthusky.communication.mpi.impl.pdq.V3PdqContinuationQuery;
 import org.projecthusky.communication.mpi.impl.pdq.V3PdqQuery;
 import org.projecthusky.communication.mpi.impl.pdq.V3PdqQueryResponse;
+import org.projecthusky.communication.utils.HuskyUtils;
 import org.projecthusky.fhir.structures.gen.FhirPatient;
 import org.projecthusky.xua.core.SecurityHeaderElement;
 import org.openehealth.ipf.commons.audit.AuditContext;
@@ -112,8 +113,8 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 						mpiQuery.getV3PdqConsumerQuery().getSendingFacility(),
 						mpiQuery.getV3PdqConsumerQuery().getReceivingApplication(0),
 						mpiQuery.getV3PdqConsumerQuery().getReceivingFacility(0), lastPdqConsumerResponse);
-				var response = sendITI47ContinuationQuery(continuationCancel, assertion,
-						this.pdqConsumerUri, messageId);
+				var response = sendITI47ContinuationQuery(continuationCancel, assertion, this.pdqConsumerUri,
+						messageId);
 
 				lastPdqConsumerResponse = new V3PdqConsumerResponse(response);
 				queryResponse.setSuccess(!lastPdqConsumerResponse.hasError());
@@ -163,9 +164,9 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 
 	private PRPAIN201306UV02Type sendITI47Query(V3PdqConsumerQuery request, SecurityHeaderElement assertion,
 			URI pdqDest, String messageId) throws Exception {
-		final var endpoint = String.format(
-				"pdqv3-iti47://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&audit=%s&auditContext=#auditContext",
-				pdqDest.toString().replace("https://", ""), true, getAuditContext().isAuditEnabled());
+		final String endpoint = HuskyUtils.createEndpoint(HuskyUtils.PDQV3_ITI47, pdqDest, true,
+				getAuditContext().isAuditEnabled());
+
 		LOGGER.info("Sending request to '{}' endpoint", endpoint);
 
 		String message = XmlMarshaller.marshall(request.getRootElement());
@@ -184,9 +185,10 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 
 	private PRPAIN201306UV02Type sendITI47ContinuationQuery(V3PdqContinuationBase request,
 			SecurityHeaderElement assertion, URI pdqDest, String messageId) throws Exception {
-		final var endpoint = String.format(
-				"pdqv3-iti47://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&supportContinuation=%s&defaultContinuationThreshold=50&audit=%s&auditContext=#auditContext",
-				pdqDest.toString().replace("https://", ""), true, true, getAuditContext().isAuditEnabled());
+
+		String endpoint = HuskyUtils.createEndpoint(HuskyUtils.PDQV3_ITI47, pdqDest, true,
+				getAuditContext().isAuditEnabled());
+		endpoint += "&defaultContinuationThreshold=50&supportContinuation=true";
 		LOGGER.info("Sending request to '{}' endpoint", endpoint);
 
 		String message = XmlMarshaller.marshall(request.getRootElement());

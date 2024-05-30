@@ -16,6 +16,7 @@ import org.projecthusky.communication.ch.ppq.api.PrivacyPolicyFeedResponse;
 import org.projecthusky.communication.ch.ppq.api.clients.PpfClient;
 import org.projecthusky.communication.ch.ppq.api.config.PpClientConfig;
 import org.projecthusky.communication.ch.ppq.impl.PrivacyPolicyFeedResponseBuilderImpl;
+import org.projecthusky.communication.utils.HuskyUtils;
 import org.projecthusky.xua.core.SecurityHeaderElement;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.ehealthswiss.AddPolicyRequest;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.ehealthswiss.AssertionBasedRequestType;
@@ -26,43 +27,34 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.ehealthswiss.UpdatePolicyReq
 /**
  * Class implementing the simple ppq client.
  */
-public class SimplePpfClient extends CamelService
-		implements PpfClient {
+public class SimplePpfClient extends CamelService implements PpfClient {
 
 	private PpClientConfig config;
-	
 
-	//PrivacyPolicyFeedResponse
+	// PrivacyPolicyFeedResponse
 	public SimplePpfClient(PpClientConfig clientConfiguration) {
 		this.config = clientConfiguration;
 	}
-	
-	public PrivacyPolicyFeedResponse send(SecurityHeaderElement aAssertion,
-			PrivacyPolicyFeed request) {
-		
+
+	public PrivacyPolicyFeedResponse send(SecurityHeaderElement aAssertion, PrivacyPolicyFeed request) {
+
 		try {
 			AssertionBasedRequestType requestToSend = null;
-			if(request != null) {
-				if(PrivacyPolicyFeed.PpfMethod.ADD_POLICY.equals(request.getMethod())) {
-					requestToSend = new AddPolicyRequest();			
-				} else if(PrivacyPolicyFeed.PpfMethod.DELETE_POLICY.equals(request.getMethod())) {
+			if (request != null) {
+				if (PrivacyPolicyFeed.PpfMethod.ADD_POLICY.equals(request.getMethod())) {
+					requestToSend = new AddPolicyRequest();
+				} else if (PrivacyPolicyFeed.PpfMethod.DELETE_POLICY.equals(request.getMethod())) {
 					requestToSend = new DeletePolicyRequest();
-				} else if(PrivacyPolicyFeed.PpfMethod.UPDATE_POLICY.equals(request.getMethod())) {
+				} else if (PrivacyPolicyFeed.PpfMethod.UPDATE_POLICY.equals(request.getMethod())) {
 					requestToSend = new UpdatePolicyRequest();
 				}
-				
+
 				if (requestToSend != null) {
 					requestToSend.setAssertion(request.getAssertion());
 
 					boolean secure = config.getUrl().contains("https://");
-
-					final var serverInLogger = "#serverInLogger";
-					final var serverOutLogger = "#serverOutLogger";
-					final var endpoint = String.format(
-							"ch-ppq1://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=#auditContext",
-							config.getUrl().replace("https://", "").replace("http://", ""),
-							serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
-							secure, getAuditContext().isAuditEnabled());
+					final var endpoint = HuskyUtils.createEndpoint(HuskyUtils.CH_PPQ1, config.getUrl(), secure,
+							getAuditContext().isAuditEnabled());
 
 					final var exchange = send(endpoint, requestToSend, aAssertion, null, null);
 
@@ -75,12 +67,12 @@ public class SimplePpfClient extends CamelService
 					return new PrivacyPolicyFeedResponseBuilderImpl().status(response.getStatus())
 							.method(request.getMethod()).create();
 				}
-			}	
+			}
 		} catch (Exception e) {
 			return new PrivacyPolicyFeedResponseBuilderImpl().exception(e).method(request.getMethod()).create();
 		}
-		
-		return null;		
+
+		return null;
 	}
 
 }

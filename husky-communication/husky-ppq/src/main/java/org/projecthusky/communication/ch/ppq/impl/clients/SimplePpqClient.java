@@ -27,6 +27,7 @@ import org.projecthusky.communication.ch.ppq.api.PrivacyPolicyQueryResponse;
 import org.projecthusky.communication.ch.ppq.api.clients.PpqClient;
 import org.projecthusky.communication.ch.ppq.api.config.PpClientConfig;
 import org.projecthusky.communication.ch.ppq.impl.PrivacyPolicyQueryResponseBuilderImpl;
+import org.projecthusky.communication.utils.HuskyUtils;
 import org.projecthusky.xua.core.SecurityHeaderElement;
 import org.openehealth.ipf.commons.ihe.xacml20.herasaf.types.IiDataTypeAttribute;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.II;
@@ -56,14 +57,7 @@ public class SimplePpqClient extends CamelService implements PpqClient {
 				XACMLPolicyQueryType requestToSend = convertPrivacyPolicyQuery(query);
 
 				var secure = config.getUrl().contains("https://");
-				final var serverInLogger = "#serverInLogger";
-				final var serverOutLogger = "#serverOutLogger";
-				final var endpoint = String.format(
-						"ch-ppq2://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s&audit=%s&auditContext=#auditContext",
-						config.getUrl().replace("http://", "").replace("https://", ""), serverInLogger, serverInLogger,
-						serverOutLogger,
-						serverOutLogger, secure, getAuditContext().isAuditEnabled());
-
+				final var endpoint = HuskyUtils.createEndpoint(HuskyUtils.CH_PPQ2,config.getUrl(), secure, getAuditContext().isAuditEnabled());
 				final var exchange = send(endpoint, requestToSend, aAssertion, null, null);
 
 				var response = exchange.getMessage().getBody(ResponseType.class);

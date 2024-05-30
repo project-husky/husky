@@ -12,6 +12,7 @@ import org.projecthusky.common.communication.AffinityDomain;
 import org.projecthusky.communication.mpi.V3Acknowledgement;
 import org.projecthusky.communication.mpi.impl.pix.V3PixSource;
 import org.projecthusky.communication.mpi.impl.pix.V3PixSourceMessageHelper;
+import org.projecthusky.communication.utils.HuskyUtils;
 import org.projecthusky.communication.utils.PixPdqV3Utils;
 import org.projecthusky.fhir.structures.gen.FhirCommon;
 import org.projecthusky.fhir.structures.gen.FhirPatient;
@@ -336,9 +337,8 @@ public class PixV3Query extends PixPdqV3QueryBase {
     private PixV3QueryResponse sendQuery(PixV3QueryRequest request, SecurityHeaderElement assertion, URI pdqDest,
                                          String messageId) throws Exception {
 
-        final var endpoint = String.format(
-                "pixv3-iti45://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&audit=%s&auditContext=#auditContext",
-                pdqDest.toString().replace("https://", ""), true, getAuditContext().isAuditEnabled());
+		final String endpoint = HuskyUtils.createEndpoint(HuskyUtils.PIXV3_ITI45, pdqDest, true,
+				getAuditContext().isAuditEnabled());
         LOGGER.info("Sending request to '{}' endpoint", endpoint);
 
         Map<String, String> outgoingHeaders = new HashMap<>();
