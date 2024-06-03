@@ -505,20 +505,14 @@ public class HuskyWebServiceClient {
 		BatchResponse batchResponse = exchange.getMessage().getBody(BatchResponse.class);
 
 		handleErrorResponse(batchResponse);
-		
-//		private static final String HPD_ITI_58 = HPD.ReadInteractions.ITI_58.getWsTransactionConfiguration().getName();
-//		private static final String HPD_ITI_59 = HPD.FeedInteractions.ITI_59.getWsTransactionConfiguration().getName();
 
-//		return switch (protocolPrefix) {
-//		case HPD_ITI_58:
-//			yield new HpdQueryResponse().build(batchResponse);
-//		case HPD_ITI_59:
-//			yield new HpdFeedResponse().build(batchResponse);
-//		default:
-//			yield null;
-//		};
-		
-		return (HPD.ReadInteractions.ITI_58.getWsTransactionConfiguration().getName().equals(protocolPrefix)) ? new HpdQueryResponse().build(batchResponse) : ((HPD.FeedInteractions.ITI_59.getWsTransactionConfiguration().getName().equals(protocolPrefix) ? new HpdFeedResponse().build(batchResponse): null));
+		return (HPD.ReadInteractions.ITI_58.getWsTransactionConfiguration().getName()
+				.equals(protocolPrefix)) ? //
+						new HpdQueryResponse().build(batchResponse) : //
+						((HPD.FeedInteractions.ITI_59.getWsTransactionConfiguration().getName()
+								.equals(protocolPrefix)) ? //
+										new HpdFeedResponse().build(batchResponse) : //
+										null);
 	}
 
 	/**
