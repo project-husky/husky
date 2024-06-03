@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class HuskyConfiguration {
 
-	@Value("${husky.communication.timeout:0}")
+	@Value("${husky.communication.timeout:60000}")
 	private Long communicationTimeout;
 
 	/**

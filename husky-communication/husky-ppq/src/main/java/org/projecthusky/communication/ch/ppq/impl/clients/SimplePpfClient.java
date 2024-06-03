@@ -18,6 +18,8 @@ import org.projecthusky.communication.ch.ppq.api.config.PpClientConfig;
 import org.projecthusky.communication.ch.ppq.impl.PrivacyPolicyFeedResponseBuilderImpl;
 import org.projecthusky.communication.utils.HuskyUtils;
 import org.projecthusky.xua.core.SecurityHeaderElement;
+import org.openehealth.ipf.commons.ihe.hl7v3.PIXV3;
+import org.openehealth.ipf.commons.ihe.xacml20.CH_PPQ;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.ehealthswiss.AddPolicyRequest;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.ehealthswiss.AssertionBasedRequestType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.ehealthswiss.DeletePolicyRequest;
@@ -36,7 +38,8 @@ public class SimplePpfClient extends CamelService implements PpfClient {
 		this.config = clientConfiguration;
 	}
 
-	public PrivacyPolicyFeedResponse send(SecurityHeaderElement aAssertion, PrivacyPolicyFeed request) {
+	public PrivacyPolicyFeedResponse send(SecurityHeaderElement aAssertion,
+			PrivacyPolicyFeed request) {
 
 		try {
 			AssertionBasedRequestType requestToSend = null;
@@ -53,14 +56,19 @@ public class SimplePpfClient extends CamelService implements PpfClient {
 					requestToSend.setAssertion(request.getAssertion());
 
 					boolean secure = config.getUrl().contains("https://");
-					final var endpoint = HuskyUtils.createEndpoint(HuskyUtils.CH_PPQ1, config.getUrl(), secure,
+
+					final var endpoint = HuskyUtils.createEndpoint(
+							CH_PPQ.Interactions.CH_PPQ_1.getWsTransactionConfiguration().getName(), //
+							config.getUrl(), //
+							secure, //
 							getAuditContext().isAuditEnabled());
 
 					final var exchange = send(endpoint, requestToSend, aAssertion, null, null);
 
 					if (exchange.getException() != null) {
-						return new PrivacyPolicyFeedResponseBuilderImpl().exception(exchange.getException())
-								.method(request.getMethod()).create();
+						return new PrivacyPolicyFeedResponseBuilderImpl()
+								.exception(exchange.getException()).method(request.getMethod())
+								.create();
 					}
 
 					var response = exchange.getMessage().getBody(EprPolicyRepositoryResponse.class);
@@ -69,7 +77,8 @@ public class SimplePpfClient extends CamelService implements PpfClient {
 				}
 			}
 		} catch (Exception e) {
-			return new PrivacyPolicyFeedResponseBuilderImpl().exception(e).method(request.getMethod()).create();
+			return new PrivacyPolicyFeedResponseBuilderImpl().exception(e)
+					.method(request.getMethod()).create();
 		}
 
 		return null;

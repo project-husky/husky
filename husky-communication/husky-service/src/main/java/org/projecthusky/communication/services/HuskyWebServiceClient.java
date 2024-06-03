@@ -43,12 +43,16 @@ import org.apache.camel.util.CastUtils;
 import org.apache.cxf.headers.Header;
 import org.apache.cxf.headers.Header.Direction;
 import org.openehealth.ipf.commons.audit.AuditContext;
+import org.openehealth.ipf.commons.ihe.hl7v3.PDQV3;
+import org.openehealth.ipf.commons.ihe.hl7v3.PIXV3;
 import org.openehealth.ipf.commons.ihe.hl7v3.core.requests.PixV3QueryRequest;
 import org.openehealth.ipf.commons.ihe.hl7v3.core.responses.PixV3QueryResponse;
+import org.openehealth.ipf.commons.ihe.hpd.HPD;
 import org.openehealth.ipf.commons.ihe.hpd.stub.dsmlv2.BatchRequest;
 import org.openehealth.ipf.commons.ihe.hpd.stub.dsmlv2.BatchResponse;
 import org.openehealth.ipf.commons.ihe.hpd.stub.dsmlv2.DsmlMessage;
 import org.openehealth.ipf.commons.ihe.hpd.stub.dsmlv2.ErrorResponse;
+import org.openehealth.ipf.commons.ihe.xds.XDS;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.QueryRegistry;
@@ -114,11 +118,6 @@ import org.xml.sax.SAXException;
 @Component
 @Slf4j
 public class HuskyWebServiceClient {
-//	private static final String SERVER_IN_LOGGER = "#serverInLogger";
-//	private static final String SERVER_OUT_LOGGER = "#serverOutLogger";
-//	private static final String AUDIT_CONTEXT = "#auditContext";
-//	private static final String HTTPS_LITERAL = "https://";
-//	private static final String HTTP_LITERAL = "http://";
 	private static final String LOG_SEND_REQUEST = "Sending request to '{}' endpoint";
 
 	@Getter
@@ -156,9 +155,11 @@ public class HuskyWebServiceClient {
 		Document doc = docBuilder.newDocument();
 
 		Element wsseElement = doc.createElementNS(
-				"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd", "wsse:Security");
+				"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd",
+				"wsse:Security");
 
-		QName wsseQName = new QName("http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd",
+		QName wsseQName = new QName(
+				"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd",
 				"Security", "wsse");
 
 		Node replaceNode = wsseElement.getOwnerDocument().importNode(wssElement, true);
@@ -185,8 +186,8 @@ public class HuskyWebServiceClient {
 
 	protected void addHttpHeader(Exchange exchange, Map<String, String> outgoingHttpHeaders) {
 		log.debug("Adding HTTP Headers...");
-		Map<String, String> outgoingHeaders = CastUtils
-				.cast((Map<String, String>) exchange.getIn().getHeader(AbstractWsEndpoint.OUTGOING_HTTP_HEADERS));
+		Map<String, String> outgoingHeaders = CastUtils.cast((Map<String, String>) exchange.getIn()
+				.getHeader(AbstractWsEndpoint.OUTGOING_HTTP_HEADERS));
 
 		if (outgoingHeaders == null) {
 			outgoingHeaders = new HashMap<>();
@@ -201,8 +202,8 @@ public class HuskyWebServiceClient {
 		exchange.getIn().setHeader(AbstractWsEndpoint.OUTGOING_HTTP_HEADERS, outgoingHeaders);
 	}
 
-	public Exchange send(String endpoint, Object body, SecurityHeaderElement securityHeaderElement, String messageId,
-			Map<String, String> outgoingHttpHeaders)
+	public Exchange send(String endpoint, Object body, SecurityHeaderElement securityHeaderElement,
+			String messageId, Map<String, String> outgoingHttpHeaders)
 			throws SerializeException, ParserConfigurationException, IOException {
 		log.debug("Sending message...");
 		Exchange exchange = new DefaultExchange(camelContext);
@@ -225,11 +226,12 @@ public class HuskyWebServiceClient {
 		}
 	}
 
-	public PRPAIN201306UV02Type sendPdqSearchQueryRequest(PdqQuery request, SecurityHeaderElement security, URI pdqDest,
-			String messageId)
-			throws JAXBException, DataBindingException, ParserConfigurationException, SerializeException, IOException {
+	public PRPAIN201306UV02Type sendPdqSearchQueryRequest(PdqQuery request,
+			SecurityHeaderElement security, URI pdqDest, String messageId) throws JAXBException,
+			DataBindingException, ParserConfigurationException, SerializeException, IOException {
 
-		String endpoint = HuskyUtils.createEndpoint(HuskyUtils.PDQV3_ITI47, //
+		String endpoint = HuskyUtils.createEndpoint(
+				PDQV3.Interactions.ITI_47.getWsTransactionConfiguration().getName(), //
 				pdqDest, //
 				pdqDest.toString().contains(HuskyUtils.HTTPS_LITERAL), //
 				this.atnaConfigMode.equals(AtnaConfigMode.SECURE));
@@ -248,17 +250,19 @@ public class HuskyWebServiceClient {
 		return XmlUnmarshaller.unmarshallStringAsType(xml, PRPAIN201306UV02Type.class);
 	}
 
-	public MCCIIN000002UV01Type sendPixAddPatientRequest(PRPAIN201301UV02Type request, SecurityHeaderElement assertion,
-			URI pdqDest, String action, String messageId)
+	public MCCIIN000002UV01Type sendPixAddPatientRequest(PRPAIN201301UV02Type request,
+			SecurityHeaderElement assertion, URI pdqDest, String action, String messageId)
 			throws JAXBException, SerializeException, ParserConfigurationException, IOException {
-		Marshaller marshaller = createMarshaller(JAXBContext.newInstance(PRPAIN201301UV02Type.class));
+		Marshaller marshaller = createMarshaller(
+				JAXBContext.newInstance(PRPAIN201301UV02Type.class));
 
 		StringWriter stringWriter = new StringWriter();
 		marshaller.marshal(request, stringWriter);
 
 		String xml = sendITI44Query(stringWriter.toString(), assertion, pdqDest, action, messageId);
 
-		Unmarshaller unmarshaller = JAXBContext.newInstance(MCCIIN000002UV01Type.class).createUnmarshaller();
+		Unmarshaller unmarshaller = JAXBContext.newInstance(MCCIIN000002UV01Type.class)
+				.createUnmarshaller();
 		return (MCCIIN000002UV01Type) unmarshaller
 				.unmarshal(new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8)));
 	}
@@ -266,37 +270,43 @@ public class HuskyWebServiceClient {
 	public MCCIIN000002UV01Type sendPixUpdatePatientRequest(PRPAIN201302UV02Type request,
 			SecurityHeaderElement assertion, URI pdqDest, String action, String messageId)
 			throws JAXBException, SerializeException, ParserConfigurationException, IOException {
-		Marshaller marshaller = createMarshaller(JAXBContext.newInstance(PRPAIN201302UV02Type.class));
+		Marshaller marshaller = createMarshaller(
+				JAXBContext.newInstance(PRPAIN201302UV02Type.class));
 
 		StringWriter stringWriter = new StringWriter();
 		marshaller.marshal(request, stringWriter);
 
 		String xml = sendITI44Query(stringWriter.toString(), assertion, pdqDest, action, messageId);
 
-		Unmarshaller unmarshaller = JAXBContext.newInstance(MCCIIN000002UV01Type.class).createUnmarshaller();
+		Unmarshaller unmarshaller = JAXBContext.newInstance(MCCIIN000002UV01Type.class)
+				.createUnmarshaller();
 		return (MCCIIN000002UV01Type) unmarshaller
 				.unmarshal(new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8)));
 	}
 
-	public MCCIIN000002UV01Type sendITI44Query(PRPAIN201304UV02Type request, SecurityHeaderElement assertion,
-			URI pdqDest, String action, String messageId)
+	public MCCIIN000002UV01Type sendITI44Query(PRPAIN201304UV02Type request,
+			SecurityHeaderElement assertion, URI pdqDest, String action, String messageId)
 			throws JAXBException, SerializeException, ParserConfigurationException, IOException {
 
-		Marshaller marshaller = createMarshaller(JAXBContext.newInstance(PRPAIN201304UV02Type.class));
+		Marshaller marshaller = createMarshaller(
+				JAXBContext.newInstance(PRPAIN201304UV02Type.class));
 
 		StringWriter stringWriter = new StringWriter();
 		marshaller.marshal(request, stringWriter);
 
 		String xml = sendITI44Query(stringWriter.toString(), assertion, pdqDest, action, messageId);
 
-		Unmarshaller unmarshaller = JAXBContext.newInstance(MCCIIN000002UV01Type.class).createUnmarshaller();
+		Unmarshaller unmarshaller = JAXBContext.newInstance(MCCIIN000002UV01Type.class)
+				.createUnmarshaller();
 		return (MCCIIN000002UV01Type) unmarshaller
 				.unmarshal(new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8)));
 	}
 
-	private String sendITI44Query(String request, SecurityHeaderElement assertion, URI pdqDest, String action,
-			String messageId) throws SerializeException, ParserConfigurationException, IOException {
-		String endpoint = HuskyUtils.createEndpoint(HuskyUtils.PIXV3_ITI44, //
+	private String sendITI44Query(String request, SecurityHeaderElement assertion, URI pdqDest,
+			String action, String messageId)
+			throws SerializeException, ParserConfigurationException, IOException {
+		String endpoint = HuskyUtils.createEndpoint(
+				PIXV3.Interactions.ITI_44_PIX.getWsTransactionConfiguration().getName(), //
 				pdqDest, //
 				pdqDest.toString().contains(HuskyUtils.HTTPS_LITERAL), //
 				this.atnaConfigMode.equals(AtnaConfigMode.SECURE));
@@ -313,9 +323,10 @@ public class HuskyWebServiceClient {
 		return exchange.getMessage().getBody(String.class);
 	}
 
-	public PixV3QueryResponse sendQuery(PixV3QueryRequest request, SecurityHeaderElement assertion, URI pdqDest,
-			String messageId) throws Exception {
-		String endpoint = HuskyUtils.createEndpoint(HuskyUtils.PIXV3_ITI45, //
+	public PixV3QueryResponse sendQuery(PixV3QueryRequest request, SecurityHeaderElement assertion,
+			URI pdqDest, String messageId) throws Exception {
+		String endpoint = HuskyUtils.createEndpoint(
+				PIXV3.Interactions.ITI_45.getWsTransactionConfiguration().getName(), //
 				pdqDest, //
 				pdqDest.toString().contains(HuskyUtils.HTTPS_LITERAL), //
 				this.atnaConfigMode.equals(AtnaConfigMode.SECURE));
@@ -330,16 +341,18 @@ public class HuskyWebServiceClient {
 		return exchange.getMessage().getBody(PixV3QueryResponse.class);
 	}
 
-	public QueryResponse sendRegistryStoredFindDocumentsQuery(XdsRegistryStoredFindDocumentsQuery query,
-			SecurityHeaderElement securityHeader, URI destination, QueryReturnType returnType, String messageId)
+	public QueryResponse sendRegistryStoredFindDocumentsQuery(
+			XdsRegistryStoredFindDocumentsQuery query, SecurityHeaderElement securityHeader,
+			URI destination, QueryReturnType returnType, String messageId)
 			throws SerializeException, ParserConfigurationException, IOException {
 		QueryRegistry queryRegistry = new QueryRegistry(query.getIpfQuery());
 		queryRegistry.setReturnType(returnType);
 
-//		String endpoint = createEndpoint(destination.toString(), XDS_ITI18);
-		final String strippedUrl = destination.toString()
-				.replace(HuskyUtils.HTTPS_LITERAL, "").replace(HuskyUtils.HTTP_LITERAL, "");
-		String endpoint = HuskyUtils.createEndpoint(HuskyUtils.XDS_ITI18, //
+		// String endpoint = createEndpoint(destination.toString(), XDS_ITI18);
+		final String strippedUrl = destination.toString().replace(HuskyUtils.HTTPS_LITERAL, "")
+				.replace(HuskyUtils.HTTP_LITERAL, "");
+		String endpoint = HuskyUtils.createEndpoint(
+				XDS.Interactions.ITI_18.getWsTransactionConfiguration().getName(), //
 				strippedUrl, //
 				destination.toString().contains(HuskyUtils.HTTPS_LITERAL), //
 				this.atnaConfigMode.equals(AtnaConfigMode.SECURE));
@@ -348,8 +361,9 @@ public class HuskyWebServiceClient {
 		return exchange.getMessage().getBody(QueryResponse.class);
 	}
 
-	public RetrievedDocumentSet send(XdsDocumentSetRequest request, SecurityHeaderElement securityHeader,
-			URI destination, String messageId) throws SerializeException, ParserConfigurationException, IOException {
+	public RetrievedDocumentSet send(XdsDocumentSetRequest request,
+			SecurityHeaderElement securityHeader, URI destination, String messageId)
+			throws SerializeException, ParserConfigurationException, IOException {
 		RetrieveDocumentSet retrieveDocumentSet = new RetrieveDocumentSet();
 
 		for (final DocumentRequest element : request.getDocumentRequests()) {
@@ -358,7 +372,8 @@ public class HuskyWebServiceClient {
 			}
 		}
 
-		String endpoint = HuskyUtils.createEndpoint(HuskyUtils.XDS_ITI43, //
+		String endpoint = HuskyUtils.createEndpoint(
+				XDS.Interactions.ITI_43.getWsTransactionConfiguration().getName(), //
 				destination, //
 				this.atnaConfigMode.equals(AtnaConfigMode.SECURE));
 		Exchange exchange = send(endpoint, retrieveDocumentSet, securityHeader, messageId, null);
@@ -373,7 +388,8 @@ public class HuskyWebServiceClient {
 	public XuaResponse send(XuaRequest xuaRequest) throws ClientSendException {
 		SimpleXuaClient xuaClient = new SimpleXuaClient(createXuaClientConfig(xuaRequest));
 
-		List<XUserAssertionResponse> xuaResponses = xuaClient.send(xuaRequest.getIdpAssertion(), xuaRequest.build());
+		List<XUserAssertionResponse> xuaResponses = xuaClient.send(xuaRequest.getIdpAssertion(),
+				xuaRequest.build());
 
 		// TODO: Fix implementation of the AssertionBuilderImpl to retrieve the
 		// Assertion with the signature in place
@@ -381,20 +397,21 @@ public class HuskyWebServiceClient {
 	}
 
 	/**
-	 * It implements the following IHE transaction: [ITI-41] Provide and Register
-	 * Document Set – b
+	 * It implements the following IHE transaction: [ITI-41] Provide and
+	 * Register Document Set – b
 	 * <p>
-	 * Using this method, both extraction modes can be set explicitly, e.g. if the
-	 * default option is not suitable for all kinds of request.
+	 * Using this method, both extraction modes can be set explicitly, e.g. if
+	 * the default option is not suitable for all kinds of request.
 	 */
-	public Response sendProvideAndRegisterDocumentSetRequest(XdsProvideAndRetrieveDocumentSetQuery documentSet,
+	public Response sendProvideAndRegisterDocumentSetRequest(
+			XdsProvideAndRetrieveDocumentSetQuery documentSet,
 			SubmissionSetMetadataExtractionMode extractionMode,
 			DocumentMetadataExtractionMode documentMetadataExtractionMode)
 			throws SerializeException, ParserConfigurationException, IOException {
 		ProvideAndRegisterDocumentSet txnData = createProvideAndRegisterDocumentSet(documentSet);
 
-		documentSet.getDocumentWithMetadata()
-				.forEach(docMetadata -> XDSUtils.addDocument(docMetadata, txnData, documentMetadataExtractionMode));
+		documentSet.getDocumentWithMetadata().forEach(docMetadata -> XDSUtils
+				.addDocument(docMetadata, txnData, documentMetadataExtractionMode));
 
 		XDSUtils.setDefaultKeystoreTruststore(documentSet.getDestination());
 
@@ -409,28 +426,31 @@ public class HuskyWebServiceClient {
 			log.debug("set association data");
 			if (txnData.getDocuments() != null && !txnData.getDocuments().isEmpty()
 					&& txnData.getDocuments().get(0) != null) {
-				documentSet.getAssociation()
-						.setSourceUuid(txnData.getDocuments().get(0).getDocumentEntry().getEntryUuid());
+				documentSet.getAssociation().setSourceUuid(
+						txnData.getDocuments().get(0).getDocumentEntry().getEntryUuid());
 			} else if (txnData.getFolders() != null && !txnData.getFolders().isEmpty()
 					&& txnData.getFolders().get(0) != null) {
-				documentSet.getAssociation().setSourceUuid(txnData.getFolders().get(0).getEntryUuid());
+				documentSet.getAssociation()
+						.setSourceUuid(txnData.getFolders().get(0).getEntryUuid());
 			}
 		}
 
 		log.debug("prepare submit of document");
-		String endpoint = HuskyUtils.createEndpoint(HuskyUtils.XDS_ITI41, //
+		String endpoint = HuskyUtils.createEndpoint(
+				XDS.Interactions.ITI_41.getWsTransactionConfiguration().getName(), //
 				documentSet.getDestination().getUri(), //
 				this.atnaConfigMode.equals(AtnaConfigMode.SECURE));
-		
+
 		Exchange exchange = send(endpoint, txnData, documentSet.getXuaToken(), null, null);
 
 		return exchange.getMessage().getBody(Response.class);
 	}
 
-	public Response sendProvideAndRegisterDocumentSetRequest(XdsProvideAndRetrieveDocumentSetQuery documentSet)
+	public Response sendProvideAndRegisterDocumentSetRequest(
+			XdsProvideAndRetrieveDocumentSetQuery documentSet)
 			throws SerializeException, ParserConfigurationException, IOException {
-		return sendProvideAndRegisterDocumentSetRequest(documentSet, submissionSetMetadataExtractionMode,
-				documentMetadataExtractionMode);
+		return sendProvideAndRegisterDocumentSetRequest(documentSet,
+				submissionSetMetadataExtractionMode, documentMetadataExtractionMode);
 	}
 
 	/** It implements the following IHE transaction: [ITI-18] Find folders */
@@ -441,29 +461,37 @@ public class HuskyWebServiceClient {
 	}
 
 	/**
-	 * It implements the following IHE transaction: [ITI-48] Retrieve value set and
-	 * value set raw
+	 * It implements the following IHE transaction: [ITI-48] Retrieve value set
+	 * and value set raw
 	 */
-	public SvsValueSetResponse downloadValueSet(SvsValueSetRequest valueSetRequest, boolean isUseRaw)
-			throws IOException, ParserConfigurationException, InitializationException, SAXException {
+	public SvsValueSetResponse downloadValueSet(SvsValueSetRequest valueSetRequest,
+			boolean isUseRaw) throws IOException, ParserConfigurationException,
+			InitializationException, SAXException {
 		ValueSetConfig valueSetConfig = valueSetRequest.build();
 		ValueSetManager valueSetManager = new ValueSetManager();
 		return isUseRaw
-				? SvsValueSetResponse.builder().valueSetRaw(valueSetManager.downloadValueSetRaw(valueSetConfig)).build()
-				: SvsValueSetResponse.builder().valueSet(valueSetManager.downloadValueSet(valueSetConfig)).build();
+				? SvsValueSetResponse.builder()
+						.valueSetRaw(valueSetManager.downloadValueSetRaw(valueSetConfig)).build()
+				: SvsValueSetResponse.builder()
+						.valueSet(valueSetManager.downloadValueSet(valueSetConfig)).build();
 	}
 
 	/**
-	 * It implements the following IHE transactions: [ITI-58] Provider Information
-	 * Query - Search Request [ITI-59] Provider Information Feed - Add Request
-	 * [ITI-59] Provider Information Feed - Delete Request
+	 * It implements the following IHE transactions: [ITI-58] Provider
+	 * Information Query - Search Request [ITI-59] Provider Information Feed -
+	 * Add Request [ITI-59] Provider Information Feed - Delete Request
 	 */
 	public HpdResponse sendHpdBatchRequest(HpdBatchRequest hpdBatchRequest)
 			throws SerializeException, ParserConfigurationException, IOException {
 		BatchRequest request = new BatchRequest();
+
+		HPD.ReadInteractions.ITI_58.getWsTransactionConfiguration().getName();
+
 		String protocolPrefix = hpdBatchRequest.getHpdRequests().stream()
-				.map(hpdRequest -> hpdRequest instanceof HpdSearchQuery ? HuskyUtils.HPD_ITI_58 : HuskyUtils.HPD_ITI_59).findFirst()
-				.orElseThrow();
+				.map(hpdRequest -> hpdRequest instanceof HpdSearchQuery
+						? HPD.ReadInteractions.ITI_58.getWsTransactionConfiguration().getName()
+						: HPD.FeedInteractions.ITI_59.getWsTransactionConfiguration().getName())
+				.findFirst().orElseThrow();
 
 		hpdBatchRequest.getHpdRequests().forEach(hpdRequest -> {
 			DsmlMessage dsmlMessage = hpdRequest.build();
@@ -477,15 +505,20 @@ public class HuskyWebServiceClient {
 		BatchResponse batchResponse = exchange.getMessage().getBody(BatchResponse.class);
 
 		handleErrorResponse(batchResponse);
+		
+//		private static final String HPD_ITI_58 = HPD.ReadInteractions.ITI_58.getWsTransactionConfiguration().getName();
+//		private static final String HPD_ITI_59 = HPD.FeedInteractions.ITI_59.getWsTransactionConfiguration().getName();
 
-		return switch (protocolPrefix) {
-		case HuskyUtils.HPD_ITI_58:
-			yield new HpdQueryResponse().build(batchResponse);
-		case HuskyUtils.HPD_ITI_59:
-			yield new HpdFeedResponse().build(batchResponse);
-		default:
-			yield null;
-		};
+//		return switch (protocolPrefix) {
+//		case HPD_ITI_58:
+//			yield new HpdQueryResponse().build(batchResponse);
+//		case HPD_ITI_59:
+//			yield new HpdFeedResponse().build(batchResponse);
+//		default:
+//			yield null;
+//		};
+		
+		return (HPD.ReadInteractions.ITI_58.getWsTransactionConfiguration().getName().equals(protocolPrefix)) ? new HpdQueryResponse().build(batchResponse) : ((HPD.FeedInteractions.ITI_59.getWsTransactionConfiguration().getName().equals(protocolPrefix) ? new HpdFeedResponse().build(batchResponse): null));
 	}
 
 	/**
@@ -509,7 +542,8 @@ public class HuskyWebServiceClient {
 	private XuaClientConfig createXuaClientConfig(XuaRequest xuaRequest) {
 		return new XuaClientConfigBuilderImpl().clientKeyStore(xuaRequest.getClientKeyStore())
 				.clientKeyStorePassword(xuaRequest.getClientKeyStorePass())
-				.clientKeyStoreType(xuaRequest.getClientKeyStoreType()).url(xuaRequest.getRepositoryUri()).create();
+				.clientKeyStoreType(xuaRequest.getClientKeyStoreType())
+				.url(xuaRequest.getRepositoryUri()).create();
 	}
 
 	private ProvideAndRegisterDocumentSet createProvideAndRegisterDocumentSet(

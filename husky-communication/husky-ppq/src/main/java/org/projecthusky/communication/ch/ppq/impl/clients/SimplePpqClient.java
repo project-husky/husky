@@ -29,6 +29,7 @@ import org.projecthusky.communication.ch.ppq.api.config.PpClientConfig;
 import org.projecthusky.communication.ch.ppq.impl.PrivacyPolicyQueryResponseBuilderImpl;
 import org.projecthusky.communication.utils.HuskyUtils;
 import org.projecthusky.xua.core.SecurityHeaderElement;
+import org.openehealth.ipf.commons.ihe.xacml20.CH_PPQ;
 import org.openehealth.ipf.commons.ihe.xacml20.herasaf.types.IiDataTypeAttribute;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.II;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.protocol.ResponseType;
@@ -50,14 +51,19 @@ public class SimplePpqClient extends CamelService implements PpqClient {
 		this.config = clientConfiguration;
 	}
 
-	public PrivacyPolicyQueryResponse send(SecurityHeaderElement aAssertion, PrivacyPolicyQuery query) {
+	public PrivacyPolicyQueryResponse send(SecurityHeaderElement aAssertion,
+			PrivacyPolicyQuery query) {
 
 		try {
 			if (query != null) {
 				XACMLPolicyQueryType requestToSend = convertPrivacyPolicyQuery(query);
 
 				var secure = config.getUrl().contains("https://");
-				final var endpoint = HuskyUtils.createEndpoint(HuskyUtils.CH_PPQ2,config.getUrl(), secure, getAuditContext().isAuditEnabled());
+				final var endpoint = HuskyUtils.createEndpoint(
+						CH_PPQ.Interactions.CH_PPQ_2.getWsTransactionConfiguration().getName(), //
+						config.getUrl(), //
+						secure, //
+						getAuditContext().isAuditEnabled());
 				final var exchange = send(endpoint, requestToSend, aAssertion, null, null);
 
 				var response = exchange.getMessage().getBody(ResponseType.class);
@@ -100,8 +106,8 @@ public class SimplePpqClient extends CamelService implements PpqClient {
 			var instanceIdent = new II();
 			instanceIdent.setExtension(query.getInstanceIdentifier().getExtension());
 			instanceIdent.setRoot(query.getInstanceIdentifier().getRoot());
-			attributeValueType.getContent()
-					.add(new JAXBElement<>(new QName("urn:hl7-org:v3", "InstanceIdentifier"), II.class, instanceIdent));
+			attributeValueType.getContent().add(new JAXBElement<>(
+					new QName("urn:hl7-org:v3", "InstanceIdentifier"), II.class, instanceIdent));
 		}
 
 		attributeType.getAttributeValues().add(attributeValueType);
@@ -109,7 +115,8 @@ public class SimplePpqClient extends CamelService implements PpqClient {
 		requestType.getResources().add(resourceType);
 
 		request.getRequestOrPolicySetIdReferenceOrPolicyIdReference()
-				.add(new JAXBElement<>(new QName("urn:oasis:names:tc:xacml:2.0:context:schema:os", "Request"),
+				.add(new JAXBElement<>(
+						new QName("urn:oasis:names:tc:xacml:2.0:context:schema:os", "Request"),
 						RequestType.class, requestType));
 
 		return request;

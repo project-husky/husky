@@ -13,6 +13,7 @@ package org.projecthusky.communication;
 import org.apache.camel.CamelContext;
 import org.apache.commons.text.StringEscapeUtils;
 import org.openehealth.ipf.commons.core.OidGenerator;
+import org.openehealth.ipf.commons.ihe.xds.XDS;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.*;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp.Precision;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
@@ -820,7 +821,7 @@ public class ConvenienceCommunication extends CamelService {
 		final var queryRegistry = new QueryRegistry(query.getIpfQuery());
 		queryRegistry.setReturnType(returnType);
 
-		final String endpoint = HuskyUtils.createEndpoint(HuskyUtils.XDS_ITI18,
+		final String endpoint = HuskyUtils.createEndpoint(XDS.Interactions.ITI_18.getWsTransactionConfiguration().getName(),
 				affinityDomain.getRepositoryDestination().getUri(), //
 				atnaConfigMode.equals(AtnaConfigMode.SECURE));
 		log.info(LOG_SEND_REQUEST, endpoint);
@@ -876,7 +877,7 @@ public class ConvenienceCommunication extends CamelService {
 				retrieveDocumentSet.addReferenceTo(element.getIpfDocumentEntry());
 			}
 		}
-		final String endpoint = HuskyUtils.createEndpoint(HuskyUtils.XDS_ITI43,
+		final String endpoint = HuskyUtils.createEndpoint(XDS.Interactions.ITI_43.getWsTransactionConfiguration().getName(),
 				affinityDomain.getRepositoryDestination().getUri(), //
 				atnaConfigMode.equals(AtnaConfigMode.SECURE));
 
@@ -1033,7 +1034,7 @@ public class ConvenienceCommunication extends CamelService {
 		}
 
 		log.debug("prepare submit of document");
-		final String endpoint = HuskyUtils.createEndpoint(HuskyUtils.XDS_ITI41,
+		final String endpoint = HuskyUtils.createEndpoint(XDS.Interactions.ITI_41.getWsTransactionConfiguration().getName(),
 				affinityDomain.getRepositoryDestination().getUri(), atnaConfigMode.equals(AtnaConfigMode.SECURE));
 		log.debug(LOG_SEND_REQUEST, endpoint);
 
