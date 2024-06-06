@@ -18,9 +18,12 @@ import org.projecthusky.communication.mpi.impl.pdq.V3PdqContinuationCancel;
 import org.projecthusky.communication.mpi.impl.pdq.V3PdqContinuationQuery;
 import org.projecthusky.communication.mpi.impl.pdq.V3PdqQuery;
 import org.projecthusky.communication.mpi.impl.pdq.V3PdqQueryResponse;
+import org.projecthusky.communication.utils.HuskyUtils;
 import org.projecthusky.fhir.structures.gen.FhirPatient;
 import org.projecthusky.xua.core.SecurityHeaderElement;
 import org.openehealth.ipf.commons.audit.AuditContext;
+import org.openehealth.ipf.commons.ihe.hl7v3.PDQV3;
+import org.openehealth.ipf.commons.ihe.xds.XDS;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -49,8 +52,8 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 		setAuditContext(auditContext);
 	}
 
-	public PdqV3Query(AffinityDomain affinityDomain, String homeCommunityOid, String homeCommunityNameSpace,
-			CamelContext context, AuditContext auditContext) {
+	public PdqV3Query(AffinityDomain affinityDomain, String homeCommunityOid,
+			String homeCommunityNameSpace, CamelContext context, AuditContext auditContext) {
 		super(affinityDomain, homeCommunityOid, homeCommunityNameSpace, null, null, context);
 		setAuditContext(auditContext);
 	}
@@ -58,11 +61,14 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 	/**
 	 * Performs a PDQ Query (ITI-47)
 	 *
-	 * @param mpiQuery  the mpi query object
-	 * @param assertion a security header element for example an assertion
+	 * @param mpiQuery
+	 *            the mpi query object
+	 * @param assertion
+	 *            a security header element for example an assertion
 	 * @return the v3 pdq query response
 	 */
-	public V3PdqQueryResponse queryPatients(V3PdqQuery mpiQuery, SecurityHeaderElement assertion, String messageId) {
+	public V3PdqQueryResponse queryPatients(V3PdqQuery mpiQuery, SecurityHeaderElement assertion,
+			String messageId) {
 		final var queryResponse = new V3PdqQueryResponse();
 
 		/* The last pdq consumer response. */
@@ -71,8 +77,8 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 			if (!mpiQuery.doCancelQuery()) {
 				PRPAIN201306UV02Type lastPdqConsumerResponse = null;
 				if (!mpiQuery.doContinueQuery()) {
-					lastPdqConsumerResponse = sendITI47Query(mpiQuery.getV3PdqConsumerQuery(), assertion,
-							this.pdqConsumerUri, messageId);
+					lastPdqConsumerResponse = sendITI47Query(mpiQuery.getV3PdqConsumerQuery(),
+							assertion, this.pdqConsumerUri, messageId);
 				} else {
 					final var continuationQuery = new V3PdqContinuationQuery(
 							mpiQuery.getV3PdqConsumerQuery().getSendingApplication(),
@@ -81,8 +87,8 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 							mpiQuery.getV3PdqConsumerQuery().getReceivingFacility(0),
 							mpiQuery.getLastPdqConsumerResponse(), mpiQuery.getPageCount());
 					continuationQuery.setProcessingCode("T");
-					lastPdqConsumerResponse = sendITI47ContinuationQuery(continuationQuery, assertion,
-							this.pdqConsumerUri, messageId);
+					lastPdqConsumerResponse = sendITI47ContinuationQuery(continuationQuery,
+							assertion, this.pdqConsumerUri, messageId);
 				}
 
 				var response = new V3PdqConsumerResponse(lastPdqConsumerResponse);
@@ -98,20 +104,22 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 					queryResponse.setInfoTexts(List.of(response.getAcknowledgementDetailText()));
 				}
 				queryResponse.setErrorText(response.getErrorText());
-				final INT totalNumbers = response.getPdqResponse().getControlActProcess().getQueryAck()
-						.getResultTotalQuantity();
+				final INT totalNumbers = response.getPdqResponse().getControlActProcess()
+						.getQueryAck().getResultTotalQuantity();
 				if (totalNumbers != null) {
 					queryResponse.setTotalNumbers(totalNumbers.getValue());
 				}
 
 				mpiQuery.setLastPdqConsumerResponse(response);
 			} else {
-				V3PdqConsumerResponse lastPdqConsumerResponse = mpiQuery.getLastPdqConsumerResponse();
+				V3PdqConsumerResponse lastPdqConsumerResponse = mpiQuery
+						.getLastPdqConsumerResponse();
 				final var continuationCancel = new V3PdqContinuationCancel(
 						mpiQuery.getV3PdqConsumerQuery().getSendingApplication(),
 						mpiQuery.getV3PdqConsumerQuery().getSendingFacility(),
 						mpiQuery.getV3PdqConsumerQuery().getReceivingApplication(0),
-						mpiQuery.getV3PdqConsumerQuery().getReceivingFacility(0), lastPdqConsumerResponse);
+						mpiQuery.getV3PdqConsumerQuery().getReceivingFacility(0),
+						lastPdqConsumerResponse);
 				var response = sendITI47ContinuationQuery(continuationCancel, assertion,
 						this.pdqConsumerUri, messageId);
 
@@ -129,7 +137,8 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 	/**
 	 * Gets the patients from pdq query.
 	 *
-	 * @param response the response
+	 * @param response
+	 *            the response
 	 * @return the patients from pdq query
 	 */
 	public List<FhirPatient> getPatientsFromPdqQuery(V3PdqConsumerResponse response) {
@@ -137,7 +146,8 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 		if (response != null) {
 			success = !response.hasError();
 			if (success) {
-				final List<FhirPatient> listFhirPatients = new ArrayList<>(response.getNumRecordsCurrent());
+				final List<FhirPatient> listFhirPatients = new ArrayList<>(
+						response.getNumRecordsCurrent());
 				for (var i = 0; i < response.getNumRecordsCurrent(); ++i) {
 					final var fhirPatient = new FhirPatient();
 					addDemographicData(getPatientByIndex(response, i), fhirPatient);
@@ -152,20 +162,28 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 	/**
 	 * Get the specified patient object.
 	 *
-	 * @param v3PdqConsumerResponse the consumer response
-	 * @param patientIndex          the patient index
-	 * @return PRPAMT201310UV02Patient - the patient object at the specified index.
+	 * @param v3PdqConsumerResponse
+	 *            the consumer response
+	 * @param patientIndex
+	 *            the patient index
+	 * @return PRPAMT201310UV02Patient - the patient object at the specified
+	 *         index.
 	 */
-	protected PRPAMT201310UV02Patient getPatientByIndex(V3PdqConsumerResponse v3PdqConsumerResponse, int patientIndex) {
-		return v3PdqConsumerResponse.getPdqResponse().getControlActProcess().getSubject().get(patientIndex)
-				.getRegistrationEvent().getSubject1().getPatient();
+	protected PRPAMT201310UV02Patient getPatientByIndex(V3PdqConsumerResponse v3PdqConsumerResponse,
+			int patientIndex) {
+		return v3PdqConsumerResponse.getPdqResponse().getControlActProcess().getSubject()
+				.get(patientIndex).getRegistrationEvent().getSubject1().getPatient();
 	}
 
-	private PRPAIN201306UV02Type sendITI47Query(V3PdqConsumerQuery request, SecurityHeaderElement assertion,
-			URI pdqDest, String messageId) throws Exception {
-		final var endpoint = String.format(
-				"pdqv3-iti47://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&audit=%s&auditContext=#auditContext",
-				pdqDest.toString().replace("https://", ""), true, getAuditContext().isAuditEnabled());
+	private PRPAIN201306UV02Type sendITI47Query(V3PdqConsumerQuery request,
+			SecurityHeaderElement assertion, URI pdqDest, String messageId) throws Exception {
+
+		final String endpoint = HuskyUtils.createEndpoint(
+				PDQV3.Interactions.ITI_47.getWsTransactionConfiguration().getName(), //
+				pdqDest, //
+				true, //
+				getAuditContext().isAuditEnabled());
+
 		LOGGER.info("Sending request to '{}' endpoint", endpoint);
 
 		String message = XmlMarshaller.marshall(request.getRootElement());
@@ -184,9 +202,13 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 
 	private PRPAIN201306UV02Type sendITI47ContinuationQuery(V3PdqContinuationBase request,
 			SecurityHeaderElement assertion, URI pdqDest, String messageId) throws Exception {
-		final var endpoint = String.format(
-				"pdqv3-iti47://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&supportContinuation=%s&defaultContinuationThreshold=50&audit=%s&auditContext=#auditContext",
-				pdqDest.toString().replace("https://", ""), true, true, getAuditContext().isAuditEnabled());
+
+		String endpoint = HuskyUtils.createEndpoint(
+				PDQV3.Interactions.ITI_47.getWsTransactionConfiguration().getName(), //
+				pdqDest, //
+				true, //
+				getAuditContext().isAuditEnabled());
+		endpoint += "&defaultContinuationThreshold=50&supportContinuation=true";
 		LOGGER.info("Sending request to '{}' endpoint", endpoint);
 
 		String message = XmlMarshaller.marshall(request.getRootElement());

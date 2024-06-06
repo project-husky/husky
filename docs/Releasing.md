@@ -28,19 +28,19 @@ This does create the correct version number and the new working version as SNAPS
 There are different possibilities to do. The simples way with a lot of prompts for inputs will be:
 
 ``` 
-mvn release:prepare
+mvn release:prepare -Prelease
 ```
 
 or with the following command you will only be prompted for the release version, the tag name and the new development version and the submodules will be automatically set to the correct version:
 
 ``` 
-mvn release:prepare -DautoVersionSubmodules=true
+mvn release:prepare -DautoVersionSubmodules=true  -Prelease
 ```
 
 it's also possible to set the releas version and the next development version:
 
 ``` 
-mvn release:prepare -DautoVersionSubmodules=true -DdevelopmentVersion=2.0.1-SNAPSHOT -DreleaseVersion=2.0.0
+mvn release:prepare -DautoVersionSubmodules=true -DdevelopmentVersion=2.0.1-SNAPSHOT -DreleaseVersion=2.0.0  -Prelease
 ```
 
 If you are not sure you can make a dryRun to check if everything will go well.
