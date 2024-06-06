@@ -70,6 +70,7 @@ org.projecthusky.communication.ch.ppq.impl.config
 org.projecthusky.communication.ch.ppq.impl.deserialization
 org.projecthusky.communication.ch.ppq.impl.serialization
 org.projecthusky.communication.ch.xd.storedquery
+org.projecthusky.communication.configuration
 org.projecthusky.communication.enums
 org.projecthusky.communication.exceptions
 org.projecthusky.communication.mpi
