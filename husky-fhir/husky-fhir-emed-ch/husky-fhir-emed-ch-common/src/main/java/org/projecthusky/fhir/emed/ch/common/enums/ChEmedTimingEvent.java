@@ -6,18 +6,20 @@
  * This project has been developed further and modified by the joined working group Husky
  * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
- *
  */
 package org.projecthusky.fhir.emed.ch.common.enums;
 
+import java.util.Objects;
+import javax.annotation.processing.Generated;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
 import org.projecthusky.common.enums.CodeSystems;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.enums.ValueSetEnumInterface;
-
-import javax.annotation.processing.Generated;
-import java.util.Objects;
+import org.projecthusky.fhir.structures.utils.FhirValueSetEnumInterface;
 
 /**
  * Enumeration of CH-EMED-TimingEvent values
@@ -32,8 +34,8 @@ import java.util.Objects;
  * Version: 2022<br>
  * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-07-11")
-public enum ChEmedTimingEvent implements ValueSetEnumInterface {
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-06-24")
+public enum ChEmedTimingEvent implements ValueSetEnumInterface, FhirValueSetEnumInterface {
 
     /**
      * EN: Afternoon.<br>
@@ -42,7 +44,7 @@ public enum ChEmedTimingEvent implements ValueSetEnumInterface {
      * IT: Pomeriggio.<br>
      */
     AFTERNOON("AFT",
-              "2.16.840.1.113883.4.642.4.76",
+              "http://fhir.ch/ig/ch-emed/CodeSystem/event-timing",
               "Afternoon",
               "Afternoon",
               "Nachmittag",
@@ -94,7 +96,7 @@ public enum ChEmedTimingEvent implements ValueSetEnumInterface {
      * IT: Dopo il sonno.<br>
      */
     AFTER_SLEEP("PHS",
-                "2.16.840.1.113883.4.642.4.76",
+                "http://fhir.ch/ig/ch-emed/CodeSystem/event-timing",
                 "After Sleep",
                 "After Sleep",
                 "Nach dem Einschlafen",
@@ -237,7 +239,7 @@ public enum ChEmedTimingEvent implements ValueSetEnumInterface {
      * IT: Primo pomeriggio.<br>
      */
     EARLY_AFTERNOON("AFT.early",
-                    "2.16.840.1.113883.4.642.4.76",
+                    "http://fhir.ch/ig/ch-emed/CodeSystem/event-timing",
                     "Early Afternoon",
                     "Early Afternoon",
                     "Früher Nachmittag",
@@ -250,7 +252,7 @@ public enum ChEmedTimingEvent implements ValueSetEnumInterface {
      * IT: Prima serata.<br>
      */
     EARLY_EVENING("EVE.early",
-                  "2.16.840.1.113883.4.642.4.76",
+                  "http://fhir.ch/ig/ch-emed/CodeSystem/event-timing",
                   "Early Evening",
                   "Early Evening",
                   "Früher Abend",
@@ -263,7 +265,7 @@ public enum ChEmedTimingEvent implements ValueSetEnumInterface {
      * IT: Prima mattina.<br>
      */
     EARLY_MORNING("MORN.early",
-                  "2.16.840.1.113883.4.642.4.76",
+                  "http://fhir.ch/ig/ch-emed/CodeSystem/event-timing",
                   "Early Morning",
                   "Early Morning",
                   "Früher Morgen",
@@ -276,7 +278,7 @@ public enum ChEmedTimingEvent implements ValueSetEnumInterface {
      * IT: Sera.<br>
      */
     EVENING("EVE",
-            "2.16.840.1.113883.4.642.4.76",
+            "http://fhir.ch/ig/ch-emed/CodeSystem/event-timing",
             "Evening",
             "Evening",
             "Abend",
@@ -289,7 +291,7 @@ public enum ChEmedTimingEvent implements ValueSetEnumInterface {
      * IT: Tardo pomeriggio.<br>
      */
     LATE_AFTERNOON("AFT.late",
-                   "2.16.840.1.113883.4.642.4.76",
+                   "http://fhir.ch/ig/ch-emed/CodeSystem/event-timing",
                    "Late Afternoon",
                    "Late Afternoon",
                    "Später Nachmittag",
@@ -302,7 +304,7 @@ public enum ChEmedTimingEvent implements ValueSetEnumInterface {
      * IT: Tarda serata.<br>
      */
     LATE_EVENING("EVE.late",
-                 "2.16.840.1.113883.4.642.4.76",
+                 "http://fhir.ch/ig/ch-emed/CodeSystem/event-timing",
                  "Late Evening",
                  "Late Evening",
                  "Später Abend",
@@ -315,7 +317,7 @@ public enum ChEmedTimingEvent implements ValueSetEnumInterface {
      * IT: Tarda mattinata.<br>
      */
     LATE_MORNING("MORN.late",
-                 "2.16.840.1.113883.4.642.4.76",
+                 "http://fhir.ch/ig/ch-emed/CodeSystem/event-timing",
                  "Late Morning",
                  "Late Morning",
                  "Später Morgen",
@@ -328,7 +330,7 @@ public enum ChEmedTimingEvent implements ValueSetEnumInterface {
      * IT: Mattina.<br>
      */
     MORNING("MORN",
-            "2.16.840.1.113883.4.642.4.76",
+            "http://fhir.ch/ig/ch-emed/CodeSystem/event-timing",
             "Morning",
             "Morning",
             "Morgen",
@@ -341,7 +343,7 @@ public enum ChEmedTimingEvent implements ValueSetEnumInterface {
      * IT: Notte.<br>
      */
     NIGHT("NIGHT",
-          "2.16.840.1.113883.4.642.4.76",
+          "http://fhir.ch/ig/ch-emed/CodeSystem/event-timing",
           "Night",
           "Night",
           "Nacht",
@@ -354,7 +356,7 @@ public enum ChEmedTimingEvent implements ValueSetEnumInterface {
      * IT: Mezzogiorno.<br>
      */
     NOON("NOON",
-         "2.16.840.1.113883.4.642.4.76",
+         "http://fhir.ch/ig/ch-emed/CodeSystem/event-timing",
          "Noon",
          "Noon",
          "Mittag",
@@ -593,56 +595,6 @@ public enum ChEmedTimingEvent implements ValueSetEnumInterface {
     public static final String VALUE_SET_NAME = "CH-EMED-TimingEvent";
 
     /**
-     * Gets the Enum with a given code.
-     *
-     * @param code The code value.
-     * @return the enum value found or {@code null}.
-     */
-    @Nullable
-    public static ChEmedTimingEvent getEnum(@Nullable final String code) {
-        for (final ChEmedTimingEvent x : values()) {
-            if (x.getCodeValue().equals(code)) {
-                return x;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Checks if a given enum is part of this value set.
-     *
-     * @param enumName The name of the enum.
-     * @return {@code true} if the name is found in this value set, {@code false} otherwise.
-     */
-    public static boolean isEnumOfValueSet(@Nullable final String enumName) {
-        if (enumName == null) {
-            return false;
-        }
-        try {
-            Enum.valueOf(ChEmedTimingEvent.class,
-                         enumName);
-            return true;
-        } catch (final IllegalArgumentException ex) {
-            return false;
-        }
-    }
-
-    /**
-     * Checks if a given code value is in this value set.
-     *
-     * @param codeValue The code value.
-     * @return {@code true} if the value is found in this value set, {@code false} otherwise.
-     */
-    public static boolean isInValueSet(@Nullable final String codeValue) {
-        for (final ChEmedTimingEvent x : values()) {
-            if (x.getCodeValue().equals(codeValue)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * Machine interpretable and (inside this class) unique code.
      */
     @NonNull
@@ -766,5 +718,115 @@ public enum ChEmedTimingEvent implements ValueSetEnumInterface {
     @NonNull
     public String getValueSetName() {
         return VALUE_SET_NAME;
+    }
+
+    /**
+     * Returns the enum value as a FHIR Coding.
+     */
+    @Override
+    public Coding getCoding() {
+        return new Coding(this.getCodeSystemId(),
+                          this.getCodeValue(),
+                          this.getCodeSystemName());
+    }
+
+    /**
+     * Returns the enum value as a FHIR CodeableConcept.
+     */
+    @Override
+    public CodeableConcept getCodeableConcept() {
+        return new CodeableConcept().setText(this.getCodeSystemName()).addCoding(this.getCoding());
+    }
+
+    /**
+     * Compares the enum value to the given FHIR Coding.
+     *
+     * @param coding The FHIR Coding to be compared.
+     * @return {@code true} if they have the same system and value, {@code false} otherwise.
+     */
+    @Override
+    public boolean isEqualTo(final Coding coding) {
+        return this.getCodeSystemId().equals(coding.getSystem()) && this.getCodeValue().equals(coding.getCode());
+    }
+
+    /**
+     * Gets the Enum with a given code.
+     *
+     * @param code The code value.
+     * @return the enum value found or {@code null}.
+     */
+    @Nullable
+    public static ChEmedTimingEvent getEnum(@Nullable final String code) {
+        for (final ChEmedTimingEvent x : values()) {
+            if (x.getCodeValue().equals(code)) {
+                return x;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Checks if a given enum is part of this value set.
+     *
+     * @param enumName The name of the enum.
+     * @return {@code true} if the name is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isEnumOfValueSet(@Nullable final String enumName) {
+        if (enumName == null) {
+            return false;
+        }
+        try {
+            Enum.valueOf(ChEmedTimingEvent.class,
+                         enumName);
+            return true;
+        } catch (final IllegalArgumentException ex) {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if a given code value is in this value set.
+     *
+     * @param codeValue The code value.
+     * @return {@code true} if the value is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isInValueSet(@Nullable final String codeValue) {
+        for (final ChEmedTimingEvent x : values()) {
+            if (x.getCodeValue().equals(codeValue)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Gets the Enum with a given FHIR Coding.
+     *
+     * @param coding The FHIR Coding.
+     * @return the enum value found or {@code null}.
+     */
+    @Nullable
+    public static ChEmedTimingEvent getEnum(@Nullable final Coding coding) {
+        for (final var x : values()) {
+            if (x.isEqualTo(coding)) {
+                return x;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Checks if a given FHIR Coding is in this value set.
+     *
+     * @param coding The FHIR Coding.
+     * @return {@code true} if the value is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isInValueSet(@Nullable final Coding coding) {
+        for (final var x : values()) {
+            if (x.isEqualTo(coding)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

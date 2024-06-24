@@ -14,9 +14,12 @@ import javax.annotation.processing.Generated;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
 import org.projecthusky.common.enums.CodeSystems;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.enums.ValueSetEnumInterface;
+import org.projecthusky.fhir.structures.utils.FhirValueSetEnumInterface;
 
 /**
  * Enumeration of ActivePharmaceuticalIngredient values
@@ -28,11 +31,11 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * <p>
  * Identifier: 2.16.756.5.30.1.1.11.82<br>
  * Effective date: 2023-10-27 13:24<br>
- * Version: 2022<br>
- * Status: DRAFT
+ * Version: 2023<br>
+ * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-01-29")
-public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-06-24")
+public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface, FhirValueSetEnumInterface {
 
     /**
      * EN: Abacavir.<br>
@@ -41,7 +44,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Abacavir.<br>
      */
     ABACAVIR("387005008",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Abacavir (substance)",
              "Abacavir",
              "Abacavir",
@@ -54,7 +57,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Abatacept.<br>
      */
     ABATACEPT("421777009",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Abatacept (substance)",
               "Abatacept",
               "Abatacept",
@@ -67,7 +70,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Abciximab.<br>
      */
     ABCIXIMAB("386951001",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Abciximab (substance)",
               "Abciximab",
               "Abciximab",
@@ -80,7 +83,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Abemaciclib.<br>
      */
     ABEMACICLIB("761851004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Abemaciclib (substance)",
                 "Abemaciclib",
                 "Abemaciclib",
@@ -93,7 +96,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Abiraterone.<br>
      */
     ABIRATERONE("699678007",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Abiraterone (substance)",
                 "Abiraterone",
                 "Abirateron",
@@ -106,7 +109,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acamprosato.<br>
      */
     ACAMPROSATE("391698009",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Acamprosate (substance)",
                 "Acamprosate",
                 "Acamprosat",
@@ -119,7 +122,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acarbosio.<br>
      */
     ACARBOSE("386965004",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Acarbose (substance)",
              "Acarbose",
              "Acarbose",
@@ -132,7 +135,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acemetacina.<br>
      */
     ACEMETACIN("391704009",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Acemetacin (substance)",
                "Acemetacin",
                "Acemetacin",
@@ -145,7 +148,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acenocumarolo.<br>
      */
     ACENOCOUMAROL("387457003",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Acenocoumarol (substance)",
                   "Acenocoumarol",
                   "Acenocoumarol",
@@ -158,7 +161,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acetazolamide.<br>
      */
     ACETAZOLAMIDE("372709008",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Acetazolamide (substance)",
                   "Acetazolamide",
                   "Acetazolamid",
@@ -171,7 +174,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acetilcisteina.<br>
      */
     ACETYLCYSTEINE("387440002",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Acetylcysteine (substance)",
                    "Acetylcysteine",
                    "Acetylcystein",
@@ -184,7 +187,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Aciclovir.<br>
      */
     ACICLOVIR("372729009",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Aciclovir (substance)",
               "Aciclovir",
               "Aciclovir",
@@ -197,7 +200,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acipimox.<br>
      */
     ACIPIMOX("391711008",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Acipimox (substance)",
              "Acipimox",
              "Acipimox",
@@ -210,7 +213,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acitretina.<br>
      */
     ACITRETIN("386938006",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Acitretin (substance)",
               "Acitretin",
               "Acitretin",
@@ -223,7 +226,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Aclidinio.<br>
      */
     ACLIDINIUM("703921008",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Aclidinium (substance)",
                "Aclidinium",
                "Aclidinium-Kation",
@@ -236,7 +239,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Carbone attivo.<br>
      */
     ACTIVATED_CHARCOAL("32519007",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Activated charcoal (substance)",
                        "Activated charcoal",
                        "Kohle, medizinische",
@@ -249,7 +252,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Adalimumab.<br>
      */
     ADALIMUMAB("407317001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Adalimumab (substance)",
                "Adalimumab",
                "Adalimumab",
@@ -262,7 +265,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Adapalene.<br>
      */
     ADAPALENE("386934008",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Adapalene (substance)",
               "Adapalene",
               "Adapalen",
@@ -275,7 +278,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Adefovir.<br>
      */
     ADEFOVIR("412072006",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Adefovir (substance)",
              "Adefovir",
              "Adefovir",
@@ -288,7 +291,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Adenosina.<br>
      */
     ADENOSINE("35431001",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Adenosine (substance)",
               "Adenosine",
               "Adenosin",
@@ -301,7 +304,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Afatinib.<br>
      */
     AFATINIB("703579002",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Afatinib (substance)",
              "Afatinib",
              "Afatinib",
@@ -314,7 +317,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Aflibercept.<br>
      */
     AFLIBERCEPT("703840003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Aflibercept (substance)",
                 "Aflibercept",
                 "Aflibercept",
@@ -327,7 +330,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Agalsidasi alfa.<br>
      */
     AGALSIDASE_ALFA("424905009",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Agalsidase alfa (substance)",
                     "Agalsidase alfa",
                     "Agalsidase alfa",
@@ -340,7 +343,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Agalsidasi beta.<br>
      */
     AGALSIDASE_BETA("424725004",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Agalsidase beta (substance)",
                     "Agalsidase beta",
                     "Agalsidase beta",
@@ -353,7 +356,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Agomelatina.<br>
      */
     AGOMELATINE("698012009",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Agomelatine (substance)",
                 "Agomelatine",
                 "Agomelatin",
@@ -366,7 +369,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: ajmaline.<br>
      */
     AJMALINE("1156230005",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Ajmaline (substance)",
              "Ajmaline",
              "Ajmalin",
@@ -379,7 +382,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Alanina.<br>
      */
     ALANINE("58753009",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Alanine (substance)",
             "Alanine",
             "Alanin",
@@ -392,7 +395,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Alanil glutammina.<br>
      */
     ALANYLGLUTAMINE("703391005",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Alanylglutamine (substance)",
                     "Alanylglutamine",
                     "Alanyl glutamin",
@@ -405,7 +408,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Albendazolo.<br>
      */
     ALBENDAZOLE("387558006",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Albendazole (substance)",
                 "Albendazole",
                 "Albendazol",
@@ -418,7 +421,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Albiglutide.<br>
      */
     ALBIGLUTIDE("703129009",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Albiglutide (substance)",
                 "Albiglutide",
                 "Albiglutid",
@@ -431,7 +434,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Albumina.<br>
      */
     ALBUMIN("52454007",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Albumin (substance)",
             "Albumin",
             "Albumine",
@@ -444,7 +447,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Albutrepenonacog alfa.<br>
      */
     ALBUTREPENONACOG_ALFA("718928008",
-                          "2.16.840.1.113883.6.96",
+                          "http://snomed.info/sct",
                           "Albutrepenonacog alfa (substance)",
                           "Albutrepenonacog alfa",
                           "Albutrepenonacog alfa",
@@ -457,7 +460,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Alcol etilico.<br>
      */
     ALCOHOL("53041004",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Alcohol (substance)",
             "Alcohol",
             "Ethanol",
@@ -470,7 +473,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Aldesleuchina.<br>
      */
     ALDESLEUKIN("386917000",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Aldesleukin (substance)",
                 "Aldesleukin",
                 "Aldesleukin",
@@ -483,7 +486,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Alectinib.<br>
      */
     ALECTINIB("716039000",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Alectinib (substance)",
               "Alectinib",
               "Alectinib",
@@ -496,7 +499,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Alemtuzumab.<br>
      */
     ALEMTUZUMAB("129472003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Alemtuzumab (substance)",
                 "Alemtuzumab",
                 "Alemtuzumab",
@@ -509,7 +512,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido Alendronico.<br>
      */
     ALENDRONIC_ACID("391730008",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Alendronic acid (substance)",
                     "Alendronic acid",
                     "Alendronsäure",
@@ -522,7 +525,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Alfentanil.<br>
      */
     ALFENTANIL("387560008",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Alfentanil (substance)",
                "Alfentanil",
                "Alfentanil",
@@ -535,7 +538,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Alfuzosina.<br>
      */
     ALFUZOSIN("395954002",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Alfuzosin (substance)",
               "Alfuzosin",
               "Alfuzosin",
@@ -548,7 +551,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Alirocumab.<br>
      */
     ALIROCUMAB("715186005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Alirocumab (substance)",
                "Alirocumab",
                "Alirocumab",
@@ -561,7 +564,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Aliskiren.<br>
      */
     ALISKIREN("426725002",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Aliskiren (substance)",
               "Aliskiren",
               "Aliskiren",
@@ -574,7 +577,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Allopurinolo.<br>
      */
     ALLOPURINOL("387135004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Allopurinol (substance)",
                 "Allopurinol",
                 "Allopurinol",
@@ -587,7 +590,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Almotriptan.<br>
      */
     ALMOTRIPTAN("363569003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Almotriptan (substance)",
                 "Almotriptan",
                 "Almotriptan",
@@ -600,7 +603,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Alogliptin.<br>
      */
     ALOGLIPTIN("702799001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Alogliptin (substance)",
                "Alogliptin",
                "Alogliptin",
@@ -613,7 +616,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Alprazolam.<br>
      */
     ALPRAZOLAM("386983007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Alprazolam (substance)",
                "Alprazolam",
                "Alprazolam",
@@ -626,7 +629,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Alprostadil.<br>
      */
     ALPROSTADIL("48988008",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Alprostadil (substance)",
                 "Alprostadil",
                 "Alprostadil",
@@ -639,7 +642,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Alteplase.<br>
      */
     ALTEPLASE("387152000",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Alteplase (substance)",
               "Alteplase",
               "Alteplase",
@@ -652,7 +655,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Idrossido di alluminio.<br>
      */
     ALUMINIUM_HYDROXIDE("273944007",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Aluminium hydroxide (substance)",
                         "Aluminium hydroxide",
                         "Aluminiumoxid, wasserhaltig (Algeldrat)",
@@ -665,7 +668,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Amantadina.<br>
      */
     AMANTADINE("372763006",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Amantadine (substance)",
                "Amantadine",
                "Amantadin",
@@ -678,7 +681,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ambrisentan.<br>
      */
     AMBRISENTAN("428159003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Ambrisentan (substance)",
                 "Ambrisentan",
                 "Ambrisentan",
@@ -691,7 +694,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ambroxolo.<br>
      */
     AMBROXOL("698024002",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Ambroxol (substance)",
              "Ambroxol",
              "Ambroxol",
@@ -704,7 +707,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Amikacina.<br>
      */
     AMIKACIN("387266001",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Amikacin (substance)",
              "Amikacin",
              "Amikacin",
@@ -717,7 +720,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Amiloride.<br>
      */
     AMILORIDE("387503008",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Amiloride (substance)",
               "Amiloride",
               "Amilorid",
@@ -730,7 +733,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Aminofillina.<br>
      */
     AMINOPHYLLINE("373508009",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Aminophylline (substance)",
                   "Aminophylline",
                   "Aminophyllin",
@@ -743,7 +746,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Amiodarone.<br>
      */
     AMIODARONE("372821002",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Amiodarone (substance)",
                "Amiodarone",
                "Amiodaron",
@@ -756,7 +759,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Amisulpride.<br>
      */
     AMISULPRIDE("391761004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Amisulpride (substance)",
                 "Amisulpride",
                 "Amisulprid",
@@ -769,7 +772,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Amitriptilina.<br>
      */
     AMITRIPTYLINE("372726002",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Amitriptyline (substance)",
                   "Amitriptyline",
                   "Amitriptylin",
@@ -782,7 +785,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Amlodipina.<br>
      */
     AMLODIPINE("386864001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Amlodipine (substance)",
                "Amlodipine",
                "Amlodipin",
@@ -795,7 +798,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Amorolfina.<br>
      */
     AMOROLFINE("391769002",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Amorolfine (substance)",
                "Amorolfine",
                "Amorolfin",
@@ -808,7 +811,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Amoxicillina.<br>
      */
     AMOXICILLIN("372687004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Amoxicillin (substance)",
                 "Amoxicillin",
                 "Amoxicillin",
@@ -821,7 +824,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Amoxicillina sodica.<br>
      */
     AMOXICILLIN_SODIUM("427483001",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Amoxicillin sodium (substance)",
                        "Amoxicillin sodium",
                        "Amoxicillin-Natrium",
@@ -834,7 +837,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Amoxicillina triidrato.<br>
      */
     AMOXICILLIN_TRIHYDRATE("96068000",
-                           "2.16.840.1.113883.6.96",
+                           "http://snomed.info/sct",
                            "Amoxicillin trihydrate (substance)",
                            "Amoxicillin trihydrate",
                            "Amoxicillin-3-Wasser",
@@ -847,7 +850,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Amfotericina B.<br>
      */
     AMPHOTERICIN_B("77703004",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Amphotericin B (substance)",
                    "Amphotericin B",
                    "Amphotericin B",
@@ -860,7 +863,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ampicillina.<br>
      */
     AMPICILLIN("387170002",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Ampicillin (substance)",
                "Ampicillin",
                "Ampicillin",
@@ -873,7 +876,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Amilasi.<br>
      */
     AMYLASE("387031005",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Amylase (substance)",
             "Amylase",
             "Amylase",
@@ -886,7 +889,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Anagrelide.<br>
      */
     ANAGRELIDE("372561005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Anagrelide (substance)",
                "Anagrelide",
                "Anagrelid",
@@ -899,7 +902,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Anakinra.<br>
      */
     ANAKINRA("385549000",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Anakinra (substance)",
              "Anakinra",
              "Anakinra",
@@ -912,7 +915,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Anastrozolo.<br>
      */
     ANASTROZOLE("386910003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Anastrozole (substance)",
                 "Anastrozole",
                 "Anastrozol",
@@ -925,7 +928,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Anetoltritione.<br>
      */
     ANETHOLTRITHION("703112006",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Anetholtrithion (substance)",
                     "Anetholtrithion",
                     "Anetholtrithion",
@@ -938,7 +941,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Anidulafungina.<br>
      */
     ANIDULAFUNGIN("422157006",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Anidulafungin (substance)",
                   "Anidulafungin",
                   "Anidulafungin",
@@ -951,7 +954,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Antazolina.<br>
      */
     ANTAZOLINE("373544004",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Antazoline (substance)",
                "Antazoline",
                "Antazolin",
@@ -964,7 +967,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Immunoglobulina anti-linfociti T umani.<br>
      */
     ANTILYMPHOCYTE_IMMUNOGLOBULIN("391784006",
-                                  "2.16.840.1.113883.6.96",
+                                  "http://snomed.info/sct",
                                   "Antilymphocyte immunoglobulin (substance)",
                                   "Antilymphocyte immunoglobulin",
                                   "Immunglobuline anti-Lymphozyten human",
@@ -977,7 +980,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Immunoglobulina antitimociti umani.<br>
      */
     ANTITHYMOCYTE_IMMUNOGLOBULIN("768651008",
-                                 "2.16.840.1.113883.6.96",
+                                 "http://snomed.info/sct",
                                  "Antithymocyte immunoglobulin (substance)",
                                  "Antithymocyte immunoglobulin",
                                  "Immunglobulin anti-T-Lymphozyten human",
@@ -990,7 +993,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Apixaban.<br>
      */
     APIXABAN("698090000",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Apixaban (substance)",
              "Apixaban",
              "Apixaban",
@@ -1003,7 +1006,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Apomorfina.<br>
      */
     APOMORPHINE("387375001",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Apomorphine (substance)",
                 "Apomorphine",
                 "Apomorphin",
@@ -1016,7 +1019,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Aprepitant.<br>
      */
     APREPITANT("409205009",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Aprepitant (substance)",
                "Aprepitant",
                "Aprepitant",
@@ -1029,7 +1032,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Aprotinina.<br>
      */
     APROTININ("386961008",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Aprotinin (substance)",
               "Aprotinin",
               "Aprotinin",
@@ -1042,7 +1045,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Argatroban.<br>
      */
     ARGATROBAN("116508003",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Argatroban (substance)",
                "Argatroban",
                "Argatroban",
@@ -1055,7 +1058,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Arginina.<br>
      */
     ARGININE("52625008",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Arginine (substance)",
              "Arginine",
              "Arginin",
@@ -1068,7 +1071,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Argipressina (Vasopressina).<br>
      */
     ARGIPRESSIN("421078009",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Argipressin (substance)",
                 "Argipressin",
                 "Argipressin (Vasopressin)",
@@ -1081,7 +1084,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Aripirazolo.<br>
      */
     ARIPIPRAZOLE("406784005",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Aripiprazole (substance)",
                  "Aripiprazole",
                  "Aripiprazol",
@@ -1094,7 +1097,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Arsenico triossido.<br>
      */
     ARSENIC_TRIOXIDE("72251000",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Arsenic trioxide (substance)",
                      "Arsenic trioxide",
                      "Arsentrioxid",
@@ -1107,7 +1110,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Artemetere.<br>
      */
     ARTEMETHER("420578008",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Artemether (substance)",
                "Artemether",
                "Artemether",
@@ -1120,7 +1123,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Artesunato.<br>
      */
     ARTESUNATE("432410005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Artesunate (substance)",
                "Artesunate",
                "Artesunat",
@@ -1133,7 +1136,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Articaina.<br>
      */
     ARTICAINE("703107005",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Articaine (substance)",
               "Articaine",
               "Articain",
@@ -1146,7 +1149,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido ascorbico (Vitamina C, E300).<br>
      */
     ASCORBIC_ACID("43706004",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Ascorbic acid (substance)",
                   "Ascorbic acid",
                   "Ascorbinsäure (Vitamin C, E300)",
@@ -1159,7 +1162,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Asparaginasi.<br>
      */
     ASPARAGINASE("371014004",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Asparaginase (substance)",
                  "Asparaginase",
                  "Asparaginase",
@@ -1172,7 +1175,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido aspartico.<br>
      */
     ASPARTIC_ACID("44970006",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Aspartic acid (substance)",
                   "Aspartic acid",
                   "Aspartinsäure",
@@ -1185,7 +1188,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido acetilsalicilico.<br>
      */
     ASPIRIN("387458008",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Aspirin (substance)",
             "Aspirin",
             "Acetylsalicylsäure",
@@ -1198,7 +1201,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Atazanavir.<br>
      */
     ATAZANAVIR("413592000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Atazanavir (substance)",
                "Atazanavir",
                "Atazanavir",
@@ -1211,7 +1214,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Atenololo.<br>
      */
     ATENOLOL("387506000",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Atenolol (substance)",
              "Atenolol",
              "Atenolol",
@@ -1224,7 +1227,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Atezolizumab.<br>
      */
     ATEZOLIZUMAB("719371003",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Atezolizumab (substance)",
                  "Atezolizumab",
                  "Atezolizumab",
@@ -1237,7 +1240,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Atomoxetina.<br>
      */
     ATOMOXETINE("407037005",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Atomoxetine (substance)",
                 "Atomoxetine",
                 "Atomoxetin",
@@ -1250,7 +1253,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Atorvastatina.<br>
      */
     ATORVASTATIN("373444002",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Atorvastatin (substance)",
                  "Atorvastatin",
                  "Atorvastatin",
@@ -1263,7 +1266,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Atosiban.<br>
      */
     ATOSIBAN("391792002",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Atosiban (substance)",
              "Atosiban",
              "Atosiban",
@@ -1276,7 +1279,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Atovaquone.<br>
      */
     ATOVAQUONE("386899002",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Atovaquone (substance)",
                "Atovaquone",
                "Atovaquon",
@@ -1289,7 +1292,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Atracurio.<br>
      */
     ATRACURIUM("372835000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Atracurium (substance)",
                "Atracurium",
                "Atracurium",
@@ -1302,7 +1305,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Atropina.<br>
      */
     ATROPINE("372832002",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Atropine (substance)",
              "Atropine",
              "Atropin",
@@ -1315,7 +1318,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Avafanil.<br>
      */
     AVANAFIL("703956007",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Avanafil (substance)",
              "Avanafil",
              "Avanafil",
@@ -1328,7 +1331,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Avelumab.<br>
      */
     AVELUMAB("733055009",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Avelumab (substance)",
              "Avelumab",
              "Avelumab",
@@ -1341,7 +1344,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Azacitidina.<br>
      */
     AZACITIDINE("412328000",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Azacitidine (substance)",
                 "Azacitidine",
                 "Azacitidin",
@@ -1354,7 +1357,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Azatioprina.<br>
      */
     AZATHIOPRINE("372574004",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Azathioprine (substance)",
                  "Azathioprine",
                  "Azathioprin",
@@ -1367,7 +1370,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido azelaico.<br>
      */
     AZELAIC_ACID("386936005",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Azelaic acid (substance)",
                  "Azelaic acid",
                  "Azelainsäure",
@@ -1380,7 +1383,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Azelastina.<br>
      */
     AZELASTINE("372520005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Azelastine (substance)",
                "Azelastine",
                "Azelastin",
@@ -1393,7 +1396,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Azitromicina.<br>
      */
     AZITHROMYCIN("387531004",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Azithromycin (substance)",
                  "Azithromycin",
                  "Azithromycin",
@@ -1406,7 +1409,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Aztreonam.<br>
      */
     AZTREONAM("387386004",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Aztreonam (substance)",
               "Aztreonam",
               "Aztreonam",
@@ -1419,7 +1422,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Bacitracina.<br>
      */
     BACITRACIN("5220000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Bacitracin (substance)",
                "Bacitracin",
                "Bacitracin",
@@ -1432,7 +1435,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Baclofene.<br>
      */
     BACLOFEN("387342009",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Baclofen (substance)",
              "Baclofen",
              "Baclofen",
@@ -1445,7 +1448,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Basiliximab.<br>
      */
     BASILIXIMAB("386978004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Basiliximab (substance)",
                 "Basiliximab",
                 "Basiliximab",
@@ -1458,7 +1461,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Beclometasone.<br>
      */
     BECLOMETASONE("116574000",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Beclometasone (substance)",
                   "Beclometasone",
                   "Beclometason",
@@ -1471,7 +1474,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Beclometasone dipropionato.<br>
      */
     BECLOMETASONE_DIPROPIONATE("116575004",
-                               "2.16.840.1.113883.6.96",
+                               "http://snomed.info/sct",
                                "Beclometasone dipropionate (substance)",
                                "Beclometasone dipropionate",
                                "Beclometason dipropionat",
@@ -1484,7 +1487,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Belatacept.<br>
      */
     BELATACEPT("713475001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Belatacept (substance)",
                "Belatacept",
                "Belatacept",
@@ -1497,7 +1500,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Belimumab.<br>
      */
     BELIMUMAB("449043000",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Belimumab (substance)",
               "Belimumab",
               "Belimumab",
@@ -1510,7 +1513,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Benazepril.<br>
      */
     BENAZEPRIL("372511001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Benazepril (substance)",
                "Benazepril",
                "Benazepril",
@@ -1523,7 +1526,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Bendamustina.<br>
      */
     BENDAMUSTINE("428012008",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Bendamustine (substance)",
                  "Bendamustine",
                  "Bendamustin",
@@ -1536,7 +1539,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Benserazide.<br>
      */
     BENSERAZIDE("391821005",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Benserazide (substance)",
                 "Benserazide",
                 "Benserazid",
@@ -1549,7 +1552,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Benzocaina.<br>
      */
     BENZOCAINE("387357002",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Benzocaine (substance)",
                "Benzocaine",
                "Benzocain",
@@ -1562,7 +1565,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Benzidamina.<br>
      */
     BENZYDAMINE("421319000",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Benzydamine (substance)",
                 "Benzydamine",
                 "Benzydamin",
@@ -1575,7 +1578,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Benzilpenicillina.<br>
      */
     BENZYLPENICILLIN("323389000",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Benzylpenicillin (substance)",
                      "Benzylpenicillin",
                      "Benzylpenicillin",
@@ -1588,7 +1591,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Betaistina.<br>
      */
     BETAHISTINE("418067008",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Betahistine (substance)",
                 "Betahistine",
                 "Betahistin",
@@ -1601,7 +1604,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Betaina.<br>
      */
     BETAINE("43356007",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Betaine (substance)",
             "Betaine",
             "Betain",
@@ -1614,7 +1617,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Betametasone.<br>
      */
     BETAMETHASONE("116571008",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Betamethasone (substance)",
                   "Betamethasone",
                   "Betamethason",
@@ -1627,7 +1630,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Betaxololo.<br>
      */
     BETAXOLOL("409276006",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Betaxolol (substance)",
               "Betaxolol",
               "Betaxolol",
@@ -1640,7 +1643,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tilattasi.<br>
      */
     BETA_GALACTOSIDASE("28530008",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Beta-galactosidase (substance)",
                        "Beta-galactosidase",
                        "Tilactase",
@@ -1653,7 +1656,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Bevacizumab.<br>
      */
     BEVACIZUMAB("409406007",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Bevacizumab (substance)",
                 "Bevacizumab",
                 "Bevacizumab",
@@ -1666,7 +1669,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Bezafibrato.<br>
      */
     BEZAFIBRATE("396025003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Bezafibrate (substance)",
                 "Bezafibrate",
                 "Bezafibrat",
@@ -1679,7 +1682,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Bicalutamide.<br>
      */
     BICALUTAMIDE("386908000",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Bicalutamide (substance)",
                  "Bicalutamide",
                  "Bicalutamid",
@@ -1692,7 +1695,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Bictegravir.<br>
      */
     BICTEGRAVIR("772193003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Bictegravir (substance)",
                 "Bictegravir",
                 "Bictegravir",
@@ -1705,7 +1708,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Bilastina.<br>
      */
     BILASTINE("697973006",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Bilastine (substance)",
               "Bilastine",
               "Bilastin",
@@ -1718,7 +1721,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Bimatoprost.<br>
      */
     BIMATOPROST("129492005",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Bimatoprost (substance)",
                 "Bimatoprost",
                 "Bimatoprost",
@@ -1731,7 +1734,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Binimetinib.<br>
      */
     BINIMETINIB("772195005",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Binimetinib (substance)",
                 "Binimetinib",
                 "Binimetinib",
@@ -1744,7 +1747,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Biotina.<br>
      */
     BIOTIN("8919000",
-           "2.16.840.1.113883.6.96",
+           "http://snomed.info/sct",
            "Biotin (substance)",
            "Biotin",
            "Biotin",
@@ -1757,7 +1760,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Biperidene.<br>
      */
     BIPERIDEN("387359004",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Biperiden (substance)",
               "Biperiden",
               "Biperiden",
@@ -1770,7 +1773,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Bisacodile.<br>
      */
     BISACODYL("387075009",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Bisacodyl (substance)",
               "Bisacodyl",
               "Bisacodyl",
@@ -1783,7 +1786,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Bisoprololo.<br>
      */
     BISOPROLOL("386868003",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Bisoprolol (substance)",
                "Bisoprolol",
                "Bisoprolol",
@@ -1796,7 +1799,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Bivalirudina.<br>
      */
     BIVALIRUDIN("129498009",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Bivalirudin (substance)",
                 "Bivalirudin",
                 "Bivalirudin",
@@ -1809,7 +1812,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Bleomicina.<br>
      */
     BLEOMYCIN("372843005",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Bleomycin (substance)",
               "Bleomycin",
               "Bleomycin",
@@ -1822,7 +1825,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Bortezomib.<br>
      */
     BORTEZOMIB("407097007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Bortezomib (substance)",
                "Bortezomib",
                "Bortezomib",
@@ -1835,7 +1838,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Bosentan.<br>
      */
     BOSENTAN("385559004",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Bosentan (substance)",
              "Bosentan",
              "Bosentan",
@@ -1848,7 +1851,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Bosutinib.<br>
      */
     BOSUTINIB("703128001",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Bosutinib (substance)",
               "Bosutinib",
               "Bosutinib",
@@ -1861,7 +1864,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tossina botulinica tipo A.<br>
      */
     BOTULINUM_TOXIN_TYPE_A("108890005",
-                           "2.16.840.1.113883.6.96",
+                           "http://snomed.info/sct",
                            "Botulinum toxin type A (substance)",
                            "Botulinum toxin type A",
                            "Botulinumtoxin Typ A",
@@ -1874,7 +1877,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Brentuximab.<br>
      */
     BRENTUXIMAB_VEDOTIN("713395006",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Brentuximab vedotin (substance)",
                         "Brentuximab vedotin",
                         "Brentuximab vedotin",
@@ -1887,7 +1890,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Brexpiprazolo.<br>
      */
     BREXPIPRAZOLE("716069007",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Brexpiprazole (substance)",
                   "Brexpiprazole",
                   "Brexpiprazol",
@@ -1900,7 +1903,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Brimonidina.<br>
      */
     BRIMONIDINE("372547000",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Brimonidine (substance)",
                 "Brimonidine",
                 "Brimonidin",
@@ -1913,7 +1916,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Brinzolamide.<br>
      */
     BRINZOLAMIDE("386925003",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Brinzolamide (substance)",
                  "Brinzolamide",
                  "Brinzolamid",
@@ -1926,7 +1929,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Brivaracetam.<br>
      */
     BRIVARACETAM("420813001",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Brivaracetam (substance)",
                  "Brivaracetam",
                  "Brivaracetam",
@@ -1939,7 +1942,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Brivudina.<br>
      */
     BRIVUDINE("698049003",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Brivudine (substance)",
               "Brivudine",
               "Brivudin",
@@ -1952,7 +1955,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Bromazepam.<br>
      */
     BROMAZEPAM("387571009",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Bromazepam (substance)",
                "Bromazepam",
                "Bromazepam",
@@ -1965,7 +1968,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Bromfenac.<br>
      */
     BROMFENAC("108520008",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Bromfenac (substance)",
               "Bromfenac",
               "Bromfenac",
@@ -1978,7 +1981,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Bromocriptina.<br>
      */
     BROMOCRIPTINE("387039007",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Bromocriptine (substance)",
                   "Bromocriptine",
                   "Bromocriptin",
@@ -1991,7 +1994,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Budesonide.<br>
      */
     BUDESONIDE("395726003",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Budesonide (substance)",
                "Budesonide",
                "Budesonid",
@@ -2004,7 +2007,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Bufexamac.<br>
      */
     BUFEXAMAC("273952005",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Bufexamac (substance)",
               "Bufexamac",
               "Bufexamac",
@@ -2017,7 +2020,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Bupivacaina.<br>
      */
     BUPIVACAINE("387150008",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Bupivacaine (substance)",
                 "Bupivacaine",
                 "Bupivacain",
@@ -2030,7 +2033,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Buprenorfina.<br>
      */
     BUPRENORPHINE("387173000",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Buprenorphine (substance)",
                   "Buprenorphine",
                   "Buprenorphin",
@@ -2043,7 +2046,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Buproprione.<br>
      */
     BUPROPION("387564004",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Bupropion (substance)",
               "Bupropion",
               "Bupropion",
@@ -2056,7 +2059,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Buserelina.<br>
      */
     BUSERELIN("395744006",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Buserelin (substance)",
               "Buserelin",
               "Buserelin",
@@ -2069,7 +2072,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: butilscopolamina.<br>
      */
     BUTYLSCOPOLAMINE("1156229000",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Butylscopolamine (substance)",
                      "Butylscopolamine",
                      "Butylscopolamin",
@@ -2082,7 +2085,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cabazitaxel.<br>
      */
     CABAZITAXEL("446706007",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Cabazitaxel (substance)",
                 "Cabazitaxel",
                 "Cabazitaxel",
@@ -2095,7 +2098,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cabergolina.<br>
      */
     CABERGOLINE("386979007",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Cabergoline (substance)",
                 "Cabergoline",
                 "Cabergolin",
@@ -2108,7 +2111,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Caffeina.<br>
      */
     CAFFEINE("255641001",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Caffeine (substance)",
              "Caffeine",
              "Coffein",
@@ -2121,7 +2124,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Calcipotriolo.<br>
      */
     CALCIPOTRIOL("395766004",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Calcipotriol (substance)",
                  "Calcipotriol",
                  "Calcipotriol",
@@ -2134,7 +2137,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Calcitriolo.<br>
      */
     CALCITRIOL("259333003",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Calcitriol (substance)",
                "Calcitriol",
                "Calcitriol",
@@ -2147,7 +2150,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Calcio acetato.<br>
      */
     CALCIUM_ACETATE("387019008",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Calcium acetate (substance)",
                     "Calcium acetate",
                     "Calcium acetat",
@@ -2160,7 +2163,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Calcio alginato.<br>
      */
     CALCIUM_ALGINATE_SOLUTION("256620003",
-                              "2.16.840.1.113883.6.96",
+                              "http://snomed.info/sct",
                               "Calcium alginate solution (substance)",
                               "Calcium alginate solution",
                               "Calcium alginat",
@@ -2173,7 +2176,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Calcio carbasalato.<br>
      */
     CALCIUM_CARBASPIRIN("111122008",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Calcium carbaspirin (substance)",
                         "Calcium carbaspirin",
                         "Carbasalat calcium",
@@ -2186,7 +2189,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Calcio carbonato.<br>
      */
     CALCIUM_CARBONATE("387307005",
-                      "2.16.840.1.113883.6.96",
+                      "http://snomed.info/sct",
                       "Calcium carbonate (substance)",
                       "Calcium carbonate",
                       "Calcium carbonat",
@@ -2199,7 +2202,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Calcio cloruro.<br>
      */
     CALCIUM_CHLORIDE("387377009",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Calcium chloride (substance)",
                      "Calcium chloride",
                      "Calciumchlorid",
@@ -2212,7 +2215,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Calcio glubionato.<br>
      */
     CALCIUM_GLUBIONATE("32445001",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Calcium glubionate (substance)",
                        "Calcium glubionate",
                        "Calcium glubionat",
@@ -2225,7 +2228,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Calcio gluconato.<br>
      */
     CALCIUM_GLUCONATE("387292008",
-                      "2.16.840.1.113883.6.96",
+                      "http://snomed.info/sct",
                       "Calcium gluconate (substance)",
                       "Calcium gluconate",
                       "Calcium gluconat",
@@ -2238,7 +2241,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Calcio folinato.<br>
      */
     CALCIUM_LEUCOVORIN("126223008",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Calcium leucovorin (substance)",
                        "Calcium leucovorin",
                        "Calcium folinat",
@@ -2251,7 +2254,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Canaglifozin.<br>
      */
     CANAGLIFLOZIN("703676004",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Canagliflozin (substance)",
                   "Canagliflozin",
                   "Canagliflozin",
@@ -2264,7 +2267,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Canakinumab.<br>
      */
     CANAKINUMAB("698091001",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Canakinumab (substance)",
                 "Canakinumab",
                 "Canakinumab",
@@ -2277,7 +2280,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Candesartan.<br>
      */
     CANDESARTAN("372512008",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Candesartan (substance)",
                 "Candesartan",
                 "Candesartan",
@@ -2290,7 +2293,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cangrelor.<br>
      */
     CANGRELOR("716118009",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Cangrelor (substance)",
               "Cangrelor",
               "Cangrelor",
@@ -2303,7 +2306,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cannabidiolo.<br>
      */
     CANNABIDIOL("96223000",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Cannabidiol (substance)",
                 "Cannabidiol",
                 "Cannabidiol (CBD)",
@@ -2316,7 +2319,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Capecitabina.<br>
      */
     CAPECITABINE("386906001",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Capecitabine (substance)",
                  "Capecitabine",
                  "Capecitabin",
@@ -2329,7 +2332,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Capsaicina.<br>
      */
     CAPSAICIN("95995002",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Capsaicin (substance)",
               "Capsaicin",
               "Capsaicin",
@@ -2342,7 +2345,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Captopril.<br>
      */
     CAPTOPRIL("387160004",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Captopril (substance)",
               "Captopril",
               "Captopril",
@@ -2355,7 +2358,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Carbacolo.<br>
      */
     CARBACHOL("387183001",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Carbachol (substance)",
               "Carbachol",
               "Carbachol",
@@ -2368,7 +2371,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Carbamazepina.<br>
      */
     CARBAMAZEPINE("387222003",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Carbamazepine (substance)",
                   "Carbamazepine",
                   "Carbamazepin",
@@ -2381,7 +2384,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Carbetocina.<br>
      */
     CARBETOCIN("425003007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Carbetocin (substance)",
                "Carbetocin",
                "Carbetocin",
@@ -2394,7 +2397,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Carbidopa.<br>
      */
     CARBIDOPA("73579000",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Carbidopa (substance)",
               "Carbidopa",
               "Carbidopa",
@@ -2407,7 +2410,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Carbimazolo.<br>
      */
     CARBIMAZOLE("395831005",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Carbimazole (substance)",
                 "Carbimazole",
                 "Carbimazol",
@@ -2420,7 +2423,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Carbocisteina.<br>
      */
     CARBOCISTEINE("395842001",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Carbocisteine (substance)",
                   "Carbocisteine",
                   "Carbocistein",
@@ -2433,7 +2436,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Carboplatino.<br>
      */
     CARBOPLATIN("386905002",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Carboplatin (substance)",
                 "Carboplatin",
                 "Carboplatin",
@@ -2446,7 +2449,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Carfilzomib.<br>
      */
     CARFILZOMIB("713463006",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Carfilzomib (substance)",
                 "Carfilzomib",
                 "Carfilzomib",
@@ -2459,7 +2462,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cariprazina.<br>
      */
     CARIPRAZINE("715295006",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Cariprazine (substance)",
                 "Cariprazine",
                 "Cariprazin",
@@ -2472,7 +2475,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Carmustina.<br>
      */
     CARMUSTINE("387281007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Carmustine (substance)",
                "Carmustine",
                "Carmustin",
@@ -2485,7 +2488,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Carteololo.<br>
      */
     CARTEOLOL("386866004",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Carteolol (substance)",
               "Carteolol",
               "Carteolol",
@@ -2498,7 +2501,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Carvedilolo.<br>
      */
     CARVEDILOL("386870007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Carvedilol (substance)",
                "Carvedilol",
                "Carvedilol",
@@ -2511,7 +2514,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Caspofungin.<br>
      */
     CASPOFUNGIN("413770001",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Caspofungin (substance)",
                 "Caspofungin",
                 "Caspofungin",
@@ -2524,7 +2527,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cefaclor.<br>
      */
     CEFACLOR("387270009",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Cefaclor (substance)",
              "Cefaclor",
              "Cefaclor",
@@ -2537,7 +2540,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cefazolina.<br>
      */
     CEFAZOLIN("387470007",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Cefazolin (substance)",
               "Cefazolin",
               "Cefazolin",
@@ -2550,7 +2553,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cefepime.<br>
      */
     CEFEPIME("96048006",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Cefepime (substance)",
              "Cefepime",
              "Cefepim",
@@ -2563,7 +2566,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cefixima.<br>
      */
     CEFIXIME_ANHYDROUS("785697003",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Cefixime anhydrous (substance)",
                        "Cefixime anhydrous",
                        "Cefixim",
@@ -2576,7 +2579,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cefpodoxima.<br>
      */
     CEFPODOXIME("387534007",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Cefpodoxime (substance)",
                 "Cefpodoxime",
                 "Cefpodoxim",
@@ -2589,7 +2592,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ceftazidime.<br>
      */
     CEFTAZIDIME("387200005",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Ceftazidime (substance)",
                 "Ceftazidime",
                 "Ceftazidim",
@@ -2602,7 +2605,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ceftriaxone.<br>
      */
     CEFTRIAXONE("372670001",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Ceftriaxone (substance)",
                 "Ceftriaxone",
                 "Ceftriaxon",
@@ -2615,7 +2618,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cefuroxime.<br>
      */
     CEFUROXIME("372833007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Cefuroxime (substance)",
                "Cefuroxime",
                "Cefuroxim",
@@ -2628,7 +2631,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Celecoxib.<br>
      */
     CELECOXIB("116081000",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Celecoxib (substance)",
               "Celecoxib",
               "Celecoxib",
@@ -2641,7 +2644,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cetirizina.<br>
      */
     CETIRIZINE("372523007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Cetirizine (substance)",
                "Cetirizine",
                "Cetirizin",
@@ -2654,7 +2657,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cetilpiridinio.<br>
      */
     CETYLPYRIDINIUM("387043006",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Cetylpyridinium (substance)",
                     "Cetylpyridinium",
                     "Cetylpyridinium",
@@ -2667,7 +2670,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cloramfenicolo.<br>
      */
     CHLORAMPHENICOL("372777009",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Chloramphenicol (substance)",
                     "Chloramphenicol",
                     "Chloramphenicol",
@@ -2680,7 +2683,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clordiazepossido.<br>
      */
     CHLORDIAZEPOXIDE("372866006",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Chlordiazepoxide (substance)",
                      "Chlordiazepoxide",
                      "Chlordiazepoxid",
@@ -2693,7 +2696,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clorexidina.<br>
      */
     CHLORHEXIDINE("373568007",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Chlorhexidine (substance)",
                   "Chlorhexidine",
                   "Chlorhexidin",
@@ -2706,7 +2709,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clormadinone.<br>
      */
     CHLORMADINONE("734645001",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Chlormadinone (substance)",
                   "Chlormadinone",
                   "Chlormadinon",
@@ -2719,7 +2722,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clorochina.<br>
      */
     CHLOROQUINE("373468005",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Chloroquine (substance)",
                 "Chloroquine",
                 "Chloroquin",
@@ -2732,7 +2735,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clorfenamina.<br>
      */
     CHLORPHENAMINE("372914003",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Chlorphenamine (substance)",
                    "Chlorphenamine",
                    "Chlorphenamin",
@@ -2745,7 +2748,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clorpromazina.<br>
      */
     CHLORPROMAZINE("387258005",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Chlorpromazine (substance)",
                    "Chlorpromazine",
                    "Chlorpromazin",
@@ -2758,7 +2761,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clorprotixene.<br>
      */
     CHLORPROTHIXENE("387317000",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Chlorprothixene (substance)",
                     "Chlorprothixene",
                     "Chlorprothixen",
@@ -2771,7 +2774,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clortalidone.<br>
      */
     CHLORTALIDONE("387324004",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Chlortalidone (substance)",
                   "Chlortalidone",
                   "Chlortalidon",
@@ -2784,7 +2787,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Condroitinsolfato.<br>
      */
     CHONDROITIN_SULFATE("4104007",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Chondroitin sulfate (substance)",
                         "Chondroitin sulfate",
                         "Chondroitinsulfate-Gemisch",
@@ -2797,7 +2800,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Coriogonadotropina alfa.<br>
      */
     CHORIOGONADOTROPIN_ALFA("129494006",
-                            "2.16.840.1.113883.6.96",
+                            "http://snomed.info/sct",
                             "Choriogonadotropin alfa (substance)",
                             "Choriogonadotropin alfa",
                             "Choriogonadotropin alfa",
@@ -2810,7 +2813,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ciclesonide.<br>
      */
     CICLESONIDE("417420004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Ciclesonide (substance)",
                 "Ciclesonide",
                 "Ciclesonid",
@@ -2823,7 +2826,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ciclopirox.<br>
      */
     CICLOPIROX("372854000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Ciclopirox (substance)",
                "Ciclopirox",
                "Ciclopirox",
@@ -2836,7 +2839,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ciclosporina.<br>
      */
     CICLOSPORIN("387467008",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Ciclosporin (substance)",
                 "Ciclosporin",
                 "Ciclosporin",
@@ -2849,7 +2852,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cilastatina.<br>
      */
     CILASTATIN("96058005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Cilastatin (substance)",
                "Cilastatin",
                "Cilastatin",
@@ -2862,7 +2865,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cilazapril.<br>
      */
     CILAZAPRIL("395947008",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Cilazapril (substance)",
                "Cilazapril",
                "Cilazapril",
@@ -2875,7 +2878,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cimetidina.<br>
      */
     CIMETIDINE("373541007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Cimetidine (substance)",
                "Cimetidine",
                "Cimetidin",
@@ -2888,7 +2891,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cinacalcet.<br>
      */
     CINACALCET("409392004",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Cinacalcet (substance)",
                "Cinacalcet",
                "Cinacalcet",
@@ -2901,7 +2904,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cincocaina.<br>
      */
     CINCHOCAINE("395953008",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Cinchocaine (substance)",
                 "Cinchocaine",
                 "Cinchocain",
@@ -2914,7 +2917,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cinnarizina.<br>
      */
     CINNARIZINE("395955001",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Cinnarizine (substance)",
                 "Cinnarizine",
                 "Cinnarizin",
@@ -2927,7 +2930,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ciprofloxacina.<br>
      */
     CIPROFLOXACIN("372840008",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Ciprofloxacin (substance)",
                   "Ciprofloxacin",
                   "Ciprofloxacin",
@@ -2940,7 +2943,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cisatracurio.<br>
      */
     CISATRACURIUM("372495006",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Cisatracurium (substance)",
                   "Cisatracurium",
                   "Cisatracurium",
@@ -2953,7 +2956,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cisplatino.<br>
      */
     CISPLATIN("387318005",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Cisplatin (substance)",
               "Cisplatin",
               "Cisplatin",
@@ -2966,7 +2969,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Citalopram.<br>
      */
     CITALOPRAM("372596005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Citalopram (substance)",
                "Citalopram",
                "Citalopram",
@@ -2979,7 +2982,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido citrico monoidrato.<br>
      */
     CITRIC_ACID_MONOHYDRATE("725962006",
-                            "2.16.840.1.113883.6.96",
+                            "http://snomed.info/sct",
                             "Citric acid monohydrate (substance)",
                             "Citric acid monohydrate",
                             "Citronensäure-Monohydrat",
@@ -2992,7 +2995,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cladribina.<br>
      */
     CLADRIBINE("386916009",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Cladribine (substance)",
                "Cladribine",
                "Cladribin",
@@ -3005,7 +3008,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Claritromicina.<br>
      */
     CLARITHROMYCIN("387487009",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Clarithromycin (substance)",
                    "Clarithromycin",
                    "Clarithromycin",
@@ -3018,7 +3021,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido clavulanico.<br>
      */
     CLAVULANIC_ACID("395939008",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Clavulanic acid (substance)",
                     "Clavulanic acid",
                     "Clavulansäure",
@@ -3031,7 +3034,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clemastina.<br>
      */
     CLEMASTINE("372744005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Clemastine (substance)",
                "Clemastine",
                "Clemastin",
@@ -3044,7 +3047,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clevidipina.<br>
      */
     CLEVIDIPINE("439471002",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Clevidipine (substance)",
                 "Clevidipine",
                 "Clevidipin",
@@ -3057,7 +3060,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clindamicina.<br>
      */
     CLINDAMYCIN("372786004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Clindamycin (substance)",
                 "Clindamycin",
                 "Clindamycin",
@@ -3070,7 +3073,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cliochinolo.<br>
      */
     CLIOQUINOL("387291001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Clioquinol (substance)",
                "Clioquinol",
                "Clioquinol",
@@ -3083,7 +3086,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clobazam.<br>
      */
     CLOBAZAM("387572002",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Clobazam (substance)",
              "Clobazam",
              "Clobazam",
@@ -3096,7 +3099,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clobetasolo.<br>
      */
     CLOBETASOL("419129004",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Clobetasol (substance)",
                "Clobetasol",
                "Clobetasol",
@@ -3109,7 +3112,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clobetasone.<br>
      */
     CLOBETASONE("395963000",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Clobetasone (substance)",
                 "Clobetasone",
                 "Clobetason",
@@ -3122,7 +3125,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clofarabina.<br>
      */
     CLOFARABINE("413873006",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Clofarabine (substance)",
                 "Clofarabine",
                 "Clofarabin",
@@ -3135,7 +3138,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clofazimina.<br>
      */
     CLOFAZIMINE("387410004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Clofazimine (substance)",
                 "Clofazimine",
                 "Clofazimin",
@@ -3148,7 +3151,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clometiazolo.<br>
      */
     CLOMETHIAZOLE("395978007",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Clomethiazole (substance)",
                   "Clomethiazole",
                   "Clomethiazol",
@@ -3161,7 +3164,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clomipramina.<br>
      */
     CLOMIPRAMINE("372903001",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Clomipramine (substance)",
                  "Clomipramine",
                  "Clomipramin",
@@ -3174,7 +3177,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clonazepam.<br>
      */
     CLONAZEPAM("387383007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Clonazepam (substance)",
                "Clonazepam",
                "Clonazepam",
@@ -3187,7 +3190,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clonidina.<br>
      */
     CLONIDINE("372805007",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Clonidine (substance)",
               "Clonidine",
               "Clonidin",
@@ -3200,7 +3203,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clopidogrel.<br>
      */
     CLOPIDOGREL("386952008",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Clopidogrel (substance)",
                 "Clopidogrel",
                 "Clopidogrel",
@@ -3213,7 +3216,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clotiapina.<br>
      */
     CLOTIAPINE("698028004",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Clotiapine (substance)",
                "Clotiapine",
                "Clotiapin",
@@ -3226,7 +3229,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clotrimazolo.<br>
      */
     CLOTRIMAZOLE("387325003",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Clotrimazole (substance)",
                  "Clotrimazole",
                  "Clotrimazol",
@@ -3239,7 +3242,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clozapina.<br>
      */
     CLOZAPINE("387568001",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Clozapine (substance)",
               "Clozapine",
               "Clozapin",
@@ -3252,7 +3255,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fattore II di coagulazione umano (protrombina).<br>
      */
     COAGULATION_FACTOR_II("7348004",
-                          "2.16.840.1.113883.6.96",
+                          "http://snomed.info/sct",
                           "Coagulation factor II (substance)",
                           "Coagulation factor II",
                           "Blutgerinnungsfaktor II human (Prothrombin)",
@@ -3265,7 +3268,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fattore IX di coagulazione umano.<br>
      */
     COAGULATION_FACTOR_IX("54378000",
-                          "2.16.840.1.113883.6.96",
+                          "http://snomed.info/sct",
                           "Coagulation factor IX (substance)",
                           "Coagulation factor IX",
                           "Blutgerinnungsfaktor IX human",
@@ -3278,7 +3281,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fattore VII di coagulazione umano.<br>
      */
     COAGULATION_FACTOR_VII("30804005",
-                           "2.16.840.1.113883.6.96",
+                           "http://snomed.info/sct",
                            "Coagulation factor VII (substance)",
                            "Coagulation factor VII",
                            "Blutgerinnungsfaktor VII human",
@@ -3291,7 +3294,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fattore X di coagulazione umano.<br>
      */
     COAGULATION_FACTOR_X("81444003",
-                         "2.16.840.1.113883.6.96",
+                         "http://snomed.info/sct",
                          "Coagulation factor X (substance)",
                          "Coagulation factor X",
                          "Blutgerinnungsfaktor X human",
@@ -3304,7 +3307,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fattore XIII di coagulazione umano.<br>
      */
     COAGULATION_FACTOR_XIII("51161000",
-                            "2.16.840.1.113883.6.96",
+                            "http://snomed.info/sct",
                             "Coagulation factor XIII (substance)",
                             "Coagulation factor XIII",
                             "Blutgerinnungsfaktor XIII human",
@@ -3317,7 +3320,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cobicistat.<br>
      */
     COBICISTAT("710109003",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Cobicistat (substance)",
                "Cobicistat",
                "Cobicistat",
@@ -3330,7 +3333,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cocaina.<br>
      */
     COCAINE("387085005",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Cocaine (substance)",
             "Cocaine",
             "Cocain",
@@ -3343,7 +3346,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Codeina.<br>
      */
     CODEINE("387494007",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Codeine (substance)",
             "Codeine",
             "Codein",
@@ -3356,7 +3359,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Codeina fosfato emiidrato.<br>
      */
     CODEINE_PHOSPHATE_HEMIHYDRATE("725666006",
-                                  "2.16.840.1.113883.6.96",
+                                  "http://snomed.info/sct",
                                   "Codeine phosphate hemihydrate (substance)",
                                   "Codeine phosphate hemihydrate",
                                   "Codein phosphat hemihydrat",
@@ -3369,7 +3372,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Colchicina.<br>
      */
     COLCHICINE("387413002",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Colchicine (substance)",
                "Colchicine",
                "Colchicin",
@@ -3382,7 +3385,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Colecalciferolo.<br>
      */
     COLECALCIFEROL("18414002",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Colecalciferol (substance)",
                    "Colecalciferol",
                    "Colecalciferol (Vitamin D3)",
@@ -3395,7 +3398,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Colestiramina.<br>
      */
     COLESTYRAMINE("387408001",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Colestyramine (substance)",
                   "Colestyramine",
                   "Colestyramin",
@@ -3408,7 +3411,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Colistina.<br>
      */
     COLISTIN("387412007",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Colistin (substance)",
              "Colistin",
              "Colistin",
@@ -3421,7 +3424,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Rame solfato.<br>
      */
     COPPER_SULFATE("70168001",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Copper sulfate (substance)",
                    "Copper sulfate",
                    "Kupfer(II)-sulfat, wasserfreies",
@@ -3434,7 +3437,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sodio cromoglicato.<br>
      */
     CROMOGLICATE_SODIUM("387221005",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Cromoglicate sodium (substance)",
                         "Cromoglicate sodium",
                         "Cromoglicinsäure, Dinatriumsalz",
@@ -3447,7 +3450,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido cromoglicico.<br>
      */
     CROMOGLICIC_ACID("372672009",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Cromoglicic acid (substance)",
                      "Cromoglicic acid",
                      "Cromoglicinsäure",
@@ -3460,7 +3463,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cianocobalamina.<br>
      */
     CYANOCOBALAMIN("419382002",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Cyanocobalamin (substance)",
                    "Cyanocobalamin",
                    "Cyanocobalamin (Vitamin B12)",
@@ -3473,7 +3476,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ciclofosfamide.<br>
      */
     CYCLOPHOSPHAMIDE("387420009",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Cyclophosphamide (substance)",
                      "Cyclophosphamide",
                      "Cyclophosphamid",
@@ -3486,7 +3489,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cicloserina.<br>
      */
     CYCLOSERINE("387282000",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Cycloserine (substance)",
                 "Cycloserine",
                 "Cycloserin",
@@ -3499,7 +3502,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ciproterone.<br>
      */
     CYPROTERONE("126119006",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Cyproterone (substance)",
                 "Cyproterone",
                 "Cyproteron",
@@ -3512,7 +3515,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Citarabina.<br>
      */
     CYTARABINE("387511003",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Cytarabine (substance)",
                "Cytarabine",
                "Cytarabin",
@@ -3525,7 +3528,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Immunoglobulina umana anti-citomegalovirus.<br>
      */
     CYTOMEGALOVIRUS_ANTIBODY("120941004",
-                             "2.16.840.1.113883.6.96",
+                             "http://snomed.info/sct",
                              "Cytomegalovirus antibody (substance)",
                              "Cytomegalovirus antibody",
                              "Cytomegalie-Immunglobulin human",
@@ -3538,7 +3541,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dabigratan etexilato.<br>
      */
     DABIGATRAN_ETEXILATE("700029008",
-                         "2.16.840.1.113883.6.96",
+                         "http://snomed.info/sct",
                          "Dabigatran etexilate (substance)",
                          "Dabigatran etexilate",
                          "Dabigatran etexilat",
@@ -3551,7 +3554,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dabrafenib.<br>
      */
     DABRAFENIB("703641001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Dabrafenib (substance)",
                "Dabrafenib",
                "Dabrafenib",
@@ -3564,7 +3567,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dacarbazina.<br>
      */
     DACARBAZINE("387441003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Dacarbazine (substance)",
                 "Dacarbazine",
                 "Dacarbazin",
@@ -3577,7 +3580,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Daclatasvir.<br>
      */
     DACLATASVIR("712519008",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Daclatasvir (substance)",
                 "Daclatasvir",
                 "Daclatasvir",
@@ -3590,7 +3593,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dactinomicina.<br>
      */
     DACTINOMYCIN("387353003",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Dactinomycin (substance)",
                  "Dactinomycin",
                  "Dactinomycin",
@@ -3603,7 +3606,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dalteparina sodica.<br>
      */
     DALTEPARIN_SODIUM("108987000",
-                      "2.16.840.1.113883.6.96",
+                      "http://snomed.info/sct",
                       "Dalteparin sodium (substance)",
                       "Dalteparin sodium",
                       "Dalteparin natrium",
@@ -3616,7 +3619,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Danaparoid.<br>
      */
     DANAPAROID("372564002",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Danaparoid (substance)",
                "Danaparoid",
                "Danaparoid",
@@ -3629,7 +3632,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dantrolene.<br>
      */
     DANTROLENE("372819007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Dantrolene (substance)",
                "Dantrolene",
                "Dantrolen",
@@ -3642,7 +3645,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dapaglifozin.<br>
      */
     DAPAGLIFLOZIN("703674001",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Dapagliflozin (substance)",
                   "Dapagliflozin",
                   "Dapagliflozin",
@@ -3655,7 +3658,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dapoxetina.<br>
      */
     DAPOXETINE("702794006",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Dapoxetine (substance)",
                "Dapoxetine",
                "Dapoxetin",
@@ -3668,7 +3671,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Daptomicina.<br>
      */
     DAPTOMYCIN("406439009",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Daptomycin (substance)",
                "Daptomycin",
                "Daptomycin",
@@ -3681,7 +3684,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Daratumumab.<br>
      */
     DARATUMUMAB("716016006",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Daratumumab (substance)",
                 "Daratumumab",
                 "Daratumumab",
@@ -3694,7 +3697,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Darbeaoetina alfa.<br>
      */
     DARBEPOETIN_ALFA("385608005",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Darbepoetin alfa (substance)",
                      "Darbepoetin alfa",
                      "Darbepoetin alfa",
@@ -3707,7 +3710,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Darifenacina.<br>
      */
     DARIFENACIN("416140008",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Darifenacin (substance)",
                 "Darifenacin",
                 "Darifenacin",
@@ -3720,7 +3723,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Darunavir.<br>
      */
     DARUNAVIR("423888002",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Darunavir (substance)",
               "Darunavir",
               "Darunavir",
@@ -3733,7 +3736,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: darvadstrocel.<br>
      */
     DARVADSTROCEL("1156228008",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Darvadstrocel (substance)",
                   "Darvadstrocel",
                   "Darvadstrocel",
@@ -3746,7 +3749,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dasatinib.<br>
      */
     DASATINIB("423658008",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Dasatinib (substance)",
               "Dasatinib",
               "Dasatinib",
@@ -3759,7 +3762,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Daunorubicina.<br>
      */
     DAUNORUBICIN("372715008",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Daunorubicin (substance)",
                  "Daunorubicin",
                  "Daunorubicin",
@@ -3772,7 +3775,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Decitabina.<br>
      */
     DECITABINE("420759005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Decitabine (substance)",
                "Decitabine",
                "Decitabin",
@@ -3785,7 +3788,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Deferasirox.<br>
      */
     DEFERASIROX("419985007",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Deferasirox (substance)",
                 "Deferasirox",
                 "Deferasirox",
@@ -3798,7 +3801,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Deferiprone.<br>
      */
     DEFERIPRONE("396011004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Deferiprone (substance)",
                 "Deferiprone",
                 "Deferipron",
@@ -3811,7 +3814,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Deferoxamina.<br>
      */
     DEFEROXAMINE("372825006",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Deferoxamine (substance)",
                  "Deferoxamine",
                  "Deferoxamin",
@@ -3824,7 +3827,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Defibrotide.<br>
      */
     DEFIBROTIDE("442263003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Defibrotide (substance)",
                 "Defibrotide",
                 "Defibrotid",
@@ -3837,7 +3840,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Deflazacort.<br>
      */
     DEFLAZACORT("396012006",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Deflazacort (substance)",
                 "Deflazacort",
                 "Deflazacort",
@@ -3850,7 +3853,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Degarelix.<br>
      */
     DEGARELIX("441864003",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Degarelix (substance)",
               "Degarelix",
               "Degarelix",
@@ -3863,7 +3866,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Delta-9-tetracannabinolo (THC).<br>
      */
     DELTA_9_TETRAHYDROCANNABINOL("96225007",
-                                 "2.16.840.1.113883.6.96",
+                                 "http://snomed.info/sct",
                                  "Delta-9-tetrahydrocannabinol (substance)",
                                  "Delta-9-tetrahydrocannabinol",
                                  "Delta-9-Tetrahydrocannabinol (THC)",
@@ -3876,7 +3879,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Denosumab.<br>
      */
     DENOSUMAB("446321003",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Denosumab (substance)",
               "Denosumab",
               "Denosumab",
@@ -3889,7 +3892,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Desflurano.<br>
      */
     DESFLURANE("386841003",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Desflurane (substance)",
                "Desflurane",
                "Desfluran",
@@ -3902,7 +3905,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Desloratadina.<br>
      */
     DESLORATADINE("396015008",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Desloratadine (substance)",
                   "Desloratadine",
                   "Desloratadin",
@@ -3915,7 +3918,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Desmopressina.<br>
      */
     DESMOPRESSIN("126189002",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Desmopressin (substance)",
                  "Desmopressin",
                  "Desmopressin",
@@ -3928,7 +3931,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Desogestrel.<br>
      */
     DESOGESTREL("126108008",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Desogestrel (substance)",
                 "Desogestrel",
                 "Desogestrel",
@@ -3941,7 +3944,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Desametasone.<br>
      */
     DEXAMETHASONE("372584003",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Dexamethasone (substance)",
                   "Dexamethasone",
                   "Dexamethason",
@@ -3954,7 +3957,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dexamfetamina.<br>
      */
     DEXAMFETAMINE("387278002",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Dexamfetamine (substance)",
                   "Dexamfetamine",
                   "Dexamfetamin",
@@ -3967,7 +3970,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dexibuprofene.<br>
      */
     DEXIBUPROFEN("418868002",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Dexibuprofen (substance)",
                  "Dexibuprofen",
                  "Dexibuprofen",
@@ -3980,7 +3983,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Desketoprofene.<br>
      */
     DEXKETOPROFEN("396018005",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Dexketoprofen (substance)",
                   "Dexketoprofen",
                   "Dexketoprofen",
@@ -3993,7 +3996,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dexlansoprazolo.<br>
      */
     DEXLANSOPRAZOLE("441863009",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Dexlansoprazole (substance)",
                     "Dexlansoprazole",
                     "Dexlansoprazol",
@@ -4006,7 +4009,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dexmedetomidina.<br>
      */
     DEXMEDETOMIDINE("437750002",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Dexmedetomidine (substance)",
                     "Dexmedetomidine",
                     "Dexmedetomidin",
@@ -4019,7 +4022,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dexmetilfenidato.<br>
      */
     DEXMETHYLPHENIDATE("767715008",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Dexmethylphenidate (substance)",
                        "Dexmethylphenidate",
                        "Dexmethylphenidat",
@@ -4032,7 +4035,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Despantenolo.<br>
      */
     DEXPANTHENOL("126226000",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Dexpanthenol (substance)",
                  "Dexpanthenol",
                  "Dexpanthenol",
@@ -4045,7 +4048,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dexrazoxano.<br>
      */
     DEXRAZOXANE("108825009",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Dexrazoxane (substance)",
                 "Dexrazoxane",
                 "Dexrazoxan",
@@ -4058,7 +4061,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Destrometorfano.<br>
      */
     DEXTROMETHORPHAN("387114001",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Dextromethorphan (substance)",
                      "Dextromethorphan",
                      "Dextromethorphan",
@@ -4071,7 +4074,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Eroina.<br>
      */
     DIAMORPHINE("387341002",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Diamorphine (substance)",
                 "Diamorphine",
                 "Heroin",
@@ -4084,7 +4087,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Diazepam.<br>
      */
     DIAZEPAM("387264003",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Diazepam (substance)",
              "Diazepam",
              "Diazepam",
@@ -4097,7 +4100,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Diclofenac.<br>
      */
     DICLOFENAC("7034005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Diclofenac (substance)",
                "Diclofenac",
                "Diclofenac",
@@ -4110,7 +4113,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dienogest.<br>
      */
     DIENOGEST("703097002",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Dienogest (substance)",
               "Dienogest",
               "Dienogest",
@@ -4123,7 +4126,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Diflucortolone.<br>
      */
     DIFLUCORTOLONE("395965007",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Diflucortolone (substance)",
                    "Diflucortolone",
                    "Diflucortolon",
@@ -4136,7 +4139,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Digitossina.<br>
      */
     DIGITOXIN("373534001",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Digitoxin (substance)",
               "Digitoxin",
               "Digitoxin",
@@ -4149,7 +4152,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Digossina.<br>
      */
     DIGOXIN("387461009",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Digoxin (substance)",
             "Digoxin",
             "Digoxin",
@@ -4162,7 +4165,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Diidralazina.<br>
      */
     DIHYDRALAZINE("703113001",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Dihydralazine (substance)",
                   "Dihydralazine",
                   "Dihydralazin",
@@ -4175,7 +4178,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Diidrocodeina.<br>
      */
     DIHYDROCODEINE("387322000",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Dihydrocodeine (substance)",
                    "Dihydrocodeine",
                    "Dihydrocodein",
@@ -4188,7 +4191,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Diltiazem.<br>
      */
     DILTIAZEM("372793000",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Diltiazem (substance)",
               "Diltiazem",
               "Diltiazem",
@@ -4201,7 +4204,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dimenidrinato.<br>
      */
     DIMENHYDRINATE("387469006",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Dimenhydrinate (substance)",
                    "Dimenhydrinate",
                    "Dimenhydrinat",
@@ -4214,7 +4217,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dimetilsolfossido (DMSO).<br>
      */
     DIMETHYL_SULFOXIDE("115535002",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Dimethyl sulfoxide (substance)",
                        "Dimethyl sulfoxide",
                        "Dimethylsulfoxid",
@@ -4227,7 +4230,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dimeticone.<br>
      */
     DIMETICONE("396031000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Dimeticone (substance)",
                "Dimeticone",
                "Dimeticon",
@@ -4240,7 +4243,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dimetindene.<br>
      */
     DIMETINDENE("387142004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Dimetindene (substance)",
                 "Dimetindene",
                 "Dimetinden",
@@ -4253,7 +4256,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dinoprostone.<br>
      */
     DINOPROSTONE("387245009",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Dinoprostone (substance)",
                  "Dinoprostone",
                  "Dinoproston",
@@ -4266,7 +4269,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Diosmina.<br>
      */
     DIOSMIN("8143001",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Diosmin (substance)",
             "Diosmin",
             "Diosmin",
@@ -4279,7 +4282,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Difenidramina.<br>
      */
     DIPHENHYDRAMINE("372682005",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Diphenhydramine (substance)",
                     "Diphenhydramine",
                     "Diphenhydramin",
@@ -4292,7 +4295,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Clorazepato potassico.<br>
      */
     DIPOTASSIUM_CLORAZEPATE("387453004",
-                            "2.16.840.1.113883.6.96",
+                            "http://snomed.info/sct",
                             "Dipotassium clorazepate (substance)",
                             "Dipotassium clorazepate",
                             "Dikalium clorazepat",
@@ -4305,7 +4308,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Disulfiram.<br>
      */
     DISULFIRAM("387212009",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Disulfiram (substance)",
                "Disulfiram",
                "Disulfiram",
@@ -4318,7 +4321,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Calcio dobesilato.<br>
      */
     DOBESILATE_CALCIUM("83438009",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Dobesilate calcium (substance)",
                        "Dobesilate calcium",
                        "Calcium dobesilat",
@@ -4331,7 +4334,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dobutamina.<br>
      */
     DOBUTAMINE("387145002",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Dobutamine (substance)",
                "Dobutamine",
                "Dobutamin",
@@ -4344,7 +4347,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Docetaxel.<br>
      */
     DOCETAXEL("386918005",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Docetaxel (substance)",
               "Docetaxel",
               "Docetaxel",
@@ -4357,7 +4360,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido docosaesaenoico (DHA).<br>
      */
     DOCOSAHEXAENOIC_ACID("226368001",
-                         "2.16.840.1.113883.6.96",
+                         "http://snomed.info/sct",
                          "Docosahexaenoic acid (substance)",
                          "Docosahexaenoic acid",
                          "Docosahexaensäure DHA",
@@ -4370,7 +4373,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dolutegravir.<br>
      */
     DOLUTEGRAVIR("713464000",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Dolutegravir (substance)",
                  "Dolutegravir",
                  "Dolutegravir",
@@ -4383,7 +4386,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Domperidone.<br>
      */
     DOMPERIDONE("387181004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Domperidone (substance)",
                 "Domperidone",
                 "Domperidon",
@@ -4396,7 +4399,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Donepezil.<br>
      */
     DONEPEZIL("386855006",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Donepezil (substance)",
               "Donepezil",
               "Donepezil",
@@ -4409,7 +4412,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dopamina.<br>
      */
     DOPAMINE("412383006",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Dopamine (substance)",
              "Dopamine",
              "Dopamin",
@@ -4422,7 +4425,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dornase alfa.<br>
      */
     DORNASE_ALFA("386882003",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Dornase alfa (substance)",
                  "Dornase alfa",
                  "Dornase alfa",
@@ -4435,7 +4438,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dorzolamide.<br>
      */
     DORZOLAMIDE("373447009",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Dorzolamide (substance)",
                 "Dorzolamide",
                 "Dorzolamid",
@@ -4448,7 +4451,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Doxapram.<br>
      */
     DOXAPRAM("373339005",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Doxapram (substance)",
              "Doxapram",
              "Doxapram",
@@ -4461,7 +4464,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Doxazosina.<br>
      */
     DOXAZOSIN("372508002",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Doxazosin (substance)",
               "Doxazosin",
               "Doxazosin",
@@ -4474,7 +4477,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Doxepina.<br>
      */
     DOXEPIN("372587005",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Doxepin (substance)",
             "Doxepin",
             "Doxepin",
@@ -4487,7 +4490,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Doxorubicina.<br>
      */
     DOXORUBICIN("372817009",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Doxorubicin (substance)",
                 "Doxorubicin",
                 "Doxorubicin",
@@ -4500,7 +4503,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Doxiciclina.<br>
      */
     DOXYCYCLINE("372478003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Doxycycline (substance)",
                 "Doxycycline",
                 "Doxycyclin",
@@ -4513,7 +4516,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Doxiciclina iclato.<br>
      */
     DOXYCYCLINE_HYCLATE("71417000",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Doxycycline hyclate (substance)",
                         "Doxycycline hyclate",
                         "Doxycyclin hyclat",
@@ -4526,7 +4529,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Doxilamina.<br>
      */
     DOXYLAMINE("44068004",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Doxylamine (substance)",
                "Doxylamine",
                "Doxylamin",
@@ -4539,7 +4542,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dronedarone.<br>
      */
     DRONEDARONE("443195003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Dronedarone (substance)",
                 "Dronedarone",
                 "Dronedaron",
@@ -4552,7 +4555,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Droperidolo.<br>
      */
     DROPERIDOL("387146001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Droperidol (substance)",
                "Droperidol",
                "Droperidol",
@@ -4565,7 +4568,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Drospirenone.<br>
      */
     DROSPIRENONE("410919000",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Drospirenone (substance)",
                  "Drospirenone",
                  "Drospirenon",
@@ -4578,7 +4581,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dulaglutide.<br>
      */
     DULAGLUTIDE("714080005",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Dulaglutide (substance)",
                 "Dulaglutide",
                 "Dulaglutid",
@@ -4591,7 +4594,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Duloxetina.<br>
      */
     DULOXETINE("407032004",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Duloxetine (substance)",
                "Duloxetine",
                "Duloxetin",
@@ -4604,7 +4607,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dupilumab.<br>
      */
     DUPILUMAB("733487000",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Dupilumab (substance)",
               "Dupilumab",
               "Dupilumab",
@@ -4617,7 +4620,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Durvalumab.<br>
      */
     DURVALUMAB("735230005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Durvalumab (substance)",
                "Durvalumab",
                "Durvalumab",
@@ -4630,7 +4633,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Dutasteride.<br>
      */
     DUTASTERIDE("385572003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Dutasteride (substance)",
                 "Dutasteride",
                 "Dutasterid",
@@ -4643,7 +4646,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Didrogesterone.<br>
      */
     DYDROGESTERONE("126093005",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Dydrogesterone (substance)",
                    "Dydrogesterone",
                    "Dydrogesteron",
@@ -4656,7 +4659,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: D-alfa-tocoferolo (vitamina E).<br>
      */
     D_ALPHA_TOCOPHEROL("116776001",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "D-alpha-tocopherol (substance)",
                        "D-alpha-tocopherol",
                        "Tocopherol D-alpha (Vitamin E)",
@@ -4669,7 +4672,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Econazolo.<br>
      */
     ECONAZOLE("373471002",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Econazole (substance)",
               "Econazole",
               "Econazol",
@@ -4682,7 +4685,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Eculizumab.<br>
      */
     ECULIZUMAB("427429004",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Eculizumab (substance)",
                "Eculizumab",
                "Eculizumab",
@@ -4695,7 +4698,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Edoxaban.<br>
      */
     EDOXABAN("712778008",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Edoxaban (substance)",
              "Edoxaban",
              "Edoxaban",
@@ -4708,7 +4711,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Efavirenz.<br>
      */
     EFAVIRENZ("387001004",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Efavirenz (substance)",
               "Efavirenz",
               "Efavirenz",
@@ -4721,7 +4724,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido eicosapentaenoico EPA.<br>
      */
     EICOSAPENTAENOIC_ACID("226367006",
-                          "2.16.840.1.113883.6.96",
+                          "http://snomed.info/sct",
                           "Eicosapentaenoic acid (substance)",
                           "Eicosapentaenoic acid",
                           "Eicosapentaensäure EPA",
@@ -4734,7 +4737,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Eletriptan.<br>
      */
     ELETRIPTAN("410843003",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Eletriptan (substance)",
                "Eletriptan",
                "Eletriptan",
@@ -4747,7 +4750,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Elotuzumab.<br>
      */
     ELOTUZUMAB("715660001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Elotuzumab (substance)",
                "Elotuzumab",
                "Elotuzumab",
@@ -4760,7 +4763,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Eltrombopag.<br>
      */
     ELTROMBOPAG("432005001",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Eltrombopag (substance)",
                 "Eltrombopag",
                 "Eltrombopag",
@@ -4773,7 +4776,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Elvitegravir.<br>
      */
     ELVITEGRAVIR("708828000",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Elvitegravir (substance)",
                  "Elvitegravir",
                  "Elvitegravir",
@@ -4786,7 +4789,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Emedastina.<br>
      */
     EMEDASTINE("372551003",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Emedastine (substance)",
                "Emedastine",
                "Emedastin",
@@ -4799,7 +4802,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Emicizumab.<br>
      */
     EMICIZUMAB("763611007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Emicizumab (substance)",
                "Emicizumab",
                "Emicizumab",
@@ -4812,7 +4815,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Empagliflozin.<br>
      */
     EMPAGLIFLOZIN("703894008",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Empagliflozin (substance)",
                   "Empagliflozin",
                   "Empagliflozin",
@@ -4825,7 +4828,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Emtricitabina.<br>
      */
     EMTRICITABINE("404856006",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Emtricitabine (substance)",
                   "Emtricitabine",
                   "Emtricitabin",
@@ -4838,7 +4841,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Enalapril.<br>
      */
     ENALAPRIL("372658000",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Enalapril (substance)",
               "Enalapril",
               "Enalapril",
@@ -4851,7 +4854,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Encorafenib.<br>
      */
     ENCORAFENIB("772201002",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Encorafenib (substance)",
                 "Encorafenib",
                 "Encorafenib",
@@ -4864,7 +4867,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Enoxaparina sodica.<br>
      */
     ENOXAPARIN_SODIUM("108983001",
-                      "2.16.840.1.113883.6.96",
+                      "http://snomed.info/sct",
                       "Enoxaparin sodium (substance)",
                       "Enoxaparin sodium",
                       "Enoxaparin natrium",
@@ -4877,7 +4880,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Entacapone.<br>
      */
     ENTACAPONE("387018000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Entacapone (substance)",
                "Entacapone",
                "Entacapon",
@@ -4890,7 +4893,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Entacavir.<br>
      */
     ENTECAVIR("416644000",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Entecavir (substance)",
               "Entecavir",
               "Entecavir",
@@ -4903,7 +4906,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Eosina.<br>
      */
     EOSINE("256012001",
-           "2.16.840.1.113883.6.96",
+           "http://snomed.info/sct",
            "Eosine (substance)",
            "Eosine",
            "Eosin",
@@ -4916,7 +4919,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Efedrina.<br>
      */
     EPHEDRINE("387358007",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Ephedrine (substance)",
               "Ephedrine",
               "Ephedrin",
@@ -4929,7 +4932,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Efedrina solfato.<br>
      */
     EPHEDRINE_SULFATE("76525000",
-                      "2.16.840.1.113883.6.96",
+                      "http://snomed.info/sct",
                       "Ephedrine sulfate (substance)",
                       "Ephedrine sulfate",
                       "Ephedrin sulfat",
@@ -4942,7 +4945,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Epinastine.<br>
      */
     EPINASTINE("407068009",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Epinastine (substance)",
                "Epinastine",
                "Epinastin",
@@ -4955,7 +4958,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Adrenalina (epinefrina).<br>
      */
     EPINEPHRINE("387362001",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Epinephrine (substance)",
                 "Epinephrine",
                 "Adrenalin (Epinephrin)",
@@ -4968,7 +4971,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Epirubicina.<br>
      */
     EPIRUBICIN("417916005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Epirubicin (substance)",
                "Epirubicin",
                "Epirubicin",
@@ -4981,7 +4984,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Eplerenone.<br>
      */
     EPLERENONE("407010008",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Eplerenone (substance)",
                "Eplerenone",
                "Eplerenon",
@@ -4994,7 +4997,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Epoetina alfa ricombinante.<br>
      */
     EPOETIN_ALFA("386947003",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Epoetin alfa (substance)",
                  "Epoetin alfa",
                  "Epoetin alfa rekombiniert",
@@ -5007,7 +5010,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Epoetina beta ricombinante.<br>
      */
     EPOETIN_BETA("396043004",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Epoetin beta (substance)",
                  "Epoetin beta",
                  "Epoetin beta rekombiniert",
@@ -5020,7 +5023,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Epoetina teta ricombinante.<br>
      */
     EPOETIN_THETA("708829008",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Epoetin theta (substance)",
                   "Epoetin theta",
                   "Epoetin theta",
@@ -5033,7 +5036,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Epoprostenolo.<br>
      */
     EPOPROSTENOL("372513003",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Epoprostenol (substance)",
                  "Epoprostenol",
                  "Epoprostenol",
@@ -5046,7 +5049,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Eprosartan.<br>
      */
     EPROSARTAN("396044005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Eprosartan (substance)",
                "Eprosartan",
                "Eprosartan",
@@ -5059,7 +5062,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Eptacog alfa (attivato).<br>
      */
     EPTACOG_ALFA("116066006",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Eptacog alfa (substance)",
                  "Eptacog alfa",
                  "Eptacog alfa (aktiviert)",
@@ -5072,7 +5075,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Eptifibatide.<br>
      */
     EPTIFIBATIDE("386998009",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Eptifibatide (substance)",
                  "Eptifibatide",
                  "Eptifibatid",
@@ -5085,7 +5088,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Erdosteina.<br>
      */
     ERDOSTEINE("426292005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Erdosteine (substance)",
                "Erdosteine",
                "Erdostein",
@@ -5098,7 +5101,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Erenumab.<br>
      */
     ERENUMAB("771590007",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Erenumab (substance)",
              "Erenumab",
              "Erenumab",
@@ -5111,7 +5114,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Eribulina.<br>
      */
     ERIBULIN("708166000",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Eribulin (substance)",
              "Eribulin",
              "Eribulin",
@@ -5124,7 +5127,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Erlotinib.<br>
      */
     ERLOTINIB("414123001",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Erlotinib (substance)",
               "Erlotinib",
               "Erlotinib",
@@ -5137,7 +5140,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ertapenem.<br>
      */
     ERTAPENEM("396346003",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Ertapenem (substance)",
               "Ertapenem",
               "Ertapenem",
@@ -5150,7 +5153,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ertugliflozin.<br>
      */
     ERTUGLIFLOZIN("764274008",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Ertugliflozin (substance)",
                   "Ertugliflozin",
                   "Ertugliflozin",
@@ -5163,7 +5166,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Eritromicina.<br>
      */
     ERYTHROMYCIN("372694001",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Erythromycin (substance)",
                  "Erythromycin",
                  "Erythromycin",
@@ -5176,7 +5179,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Escitalopram.<br>
      */
     ESCITALOPRAM("400447003",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Escitalopram (substance)",
                  "Escitalopram",
                  "Escitalopram",
@@ -5189,7 +5192,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Esmololo.<br>
      */
     ESMOLOL("372847006",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Esmolol (substance)",
             "Esmolol",
             "Esmolol",
@@ -5202,7 +5205,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Esomeprazolo.<br>
      */
     ESOMEPRAZOLE("396047003",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Esomeprazole (substance)",
                  "Esomeprazole",
                  "Esomeprazol",
@@ -5215,7 +5218,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Estradiolo.<br>
      */
     ESTRADIOL("126172005",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Estradiol (substance)",
               "Estradiol",
               "Estradiol",
@@ -5228,7 +5231,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Estradiolo emiidrato.<br>
      */
     ESTRADIOL_HEMIHYDRATE("116070003",
-                          "2.16.840.1.113883.6.96",
+                          "http://snomed.info/sct",
                           "Estradiol hemihydrate (substance)",
                           "Estradiol hemihydrate",
                           "Estradiol hemihydrat",
@@ -5241,7 +5244,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Estradiolo valerato.<br>
      */
     ESTRADIOL_VALERATE("96350008",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Estradiol valerate (substance)",
                        "Estradiol valerate",
                        "Estradiol valerat",
@@ -5254,7 +5257,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Estriolo.<br>
      */
     ESTRIOL("73723004",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Estriol (substance)",
             "Estriol",
             "Estriol",
@@ -5267,7 +5270,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Etanercept.<br>
      */
     ETANERCEPT("387045004",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Etanercept (substance)",
                "Etanercept",
                "Etanercept",
@@ -5280,7 +5283,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Etelcalcetide.<br>
      */
     ETELCALCETIDE("723539000",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Etelcalcetide (substance)",
                   "Etelcalcetide",
                   "Etelcalcetid",
@@ -5293,7 +5296,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Etacridina.<br>
      */
     ETHACRIDINE("711320003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Ethacridine (substance)",
                 "Ethacridine",
                 "Ethacridin",
@@ -5306,7 +5309,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Etambutolo.<br>
      */
     ETHAMBUTOL("387129004",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Ethambutol (substance)",
                "Ethambutol",
                "Ethambutol",
@@ -5319,7 +5322,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Etinilestradiolo.<br>
      */
     ETHINYLESTRADIOL("126097006",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Ethinylestradiol (substance)",
                      "Ethinylestradiol",
                      "Ethinylestradiol",
@@ -5332,7 +5335,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Etionamide.<br>
      */
     ETHIONAMIDE("32800009",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Ethionamide (substance)",
                 "Ethionamide",
                 "Ethionamid",
@@ -5345,7 +5348,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Etosuccimide.<br>
      */
     ETHOSUXIMIDE("387244008",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Ethosuximide (substance)",
                  "Ethosuximide",
                  "Ethosuximid",
@@ -5358,7 +5361,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Cloruro di etile.<br>
      */
     ETHYL_CHLORIDE("22005007",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Ethyl chloride (substance)",
                    "Ethyl chloride",
                    "Chlorethan",
@@ -5371,7 +5374,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Etilefrina.<br>
      */
     ETILEFRINE("96255000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Etilefrine (substance)",
                "Etilefrine",
                "Etilefrin",
@@ -5384,7 +5387,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Etodolac.<br>
      */
     ETODOLAC("386860005",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Etodolac (substance)",
              "Etodolac",
              "Etodolac",
@@ -5397,7 +5400,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Etomidato.<br>
      */
     ETOMIDATE("387218008",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Etomidate (substance)",
               "Etomidate",
               "Etomidat",
@@ -5410,7 +5413,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Etonogestrel.<br>
      */
     ETONOGESTREL("396050000",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Etonogestrel (substance)",
                  "Etonogestrel",
                  "Etonogestrel",
@@ -5423,7 +5426,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Etoposide.<br>
      */
     ETOPOSIDE("387316009",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Etoposide (substance)",
               "Etoposide",
               "Etoposid",
@@ -5436,7 +5439,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Etoricoxib.<br>
      */
     ETORICOXIB("409134009",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Etoricoxib (substance)",
                "Etoricoxib",
                "Etoricoxib",
@@ -5449,7 +5452,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Etravirina.<br>
      */
     ETRAVIRINE("432121008",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Etravirine (substance)",
                "Etravirine",
                "Etravirin",
@@ -5462,7 +5465,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Everolimus.<br>
      */
     EVEROLIMUS("428698007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Everolimus (substance)",
                "Everolimus",
                "Everolimus",
@@ -5475,7 +5478,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Exemestane.<br>
      */
     EXEMESTANE("387017005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Exemestane (substance)",
                "Exemestane",
                "Exemestan",
@@ -5488,7 +5491,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Exenatide.<br>
      */
     EXENATIDE("416859008",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Exenatide (substance)",
               "Exenatide",
               "Exenatid",
@@ -5501,7 +5504,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ezetimibe.<br>
      */
     EZETIMIBE("409149001",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Ezetimibe (substance)",
               "Ezetimibe",
               "Ezetimib",
@@ -5514,7 +5517,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fattore VIII di coagulazione umano.<br>
      */
     FACTOR_VIII("278910002",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Factor VIII (substance)",
                 "Factor VIII",
                 "Blutgerinnungsfaktor VIII human",
@@ -5527,7 +5530,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Famciclovir.<br>
      */
     FAMCICLOVIR("387557001",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Famciclovir (substance)",
                 "Famciclovir",
                 "Famciclovir",
@@ -5540,7 +5543,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Febuxostat.<br>
      */
     FEBUXOSTAT("441743008",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Febuxostat (substance)",
                "Febuxostat",
                "Febuxostat",
@@ -5553,7 +5556,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Felbamato.<br>
      */
     FELBAMATE("96194006",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Felbamate (substance)",
               "Felbamate",
               "Felbamat",
@@ -5566,7 +5569,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Felodipina.<br>
      */
     FELODIPINE("386863007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Felodipine (substance)",
                "Felodipine",
                "Felodipin",
@@ -5579,7 +5582,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fenofibrato.<br>
      */
     FENOFIBRATE("386879008",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Fenofibrate (substance)",
                 "Fenofibrate",
                 "Fenofibrat",
@@ -5592,7 +5595,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fenoterolo.<br>
      */
     FENOTEROL("395976006",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Fenoterol (substance)",
               "Fenoterol",
               "Fenoterol",
@@ -5605,7 +5608,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fentanil.<br>
      */
     FENTANYL("373492002",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Fentanyl (substance)",
              "Fentanyl",
              "Fentanyl",
@@ -5618,7 +5621,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Esacianoferrato (II) di ferro (III).<br>
      */
     FERRIC_HEXACYANOFERRATE_II("406452004",
-                               "2.16.840.1.113883.6.96",
+                               "http://snomed.info/sct",
                                "Ferric hexacyanoferrate-II (substance)",
                                "Ferric hexacyanoferrate-II",
                                "Eisen(III)-hexacyanoferrat(II)",
@@ -5631,7 +5634,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ferro (II) fumarato.<br>
      */
     FERROUS_FUMARATE("387289009",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Ferrous fumarate (substance)",
                      "Ferrous fumarate",
                      "Eisen(II) fumarat",
@@ -5644,7 +5647,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Solfato ferroso.<br>
      */
     FERROUS_SULFATE("387402000",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Ferrous sulfate (substance)",
                     "Ferrous sulfate",
                     "Eisen(II)-sulfat",
@@ -5657,7 +5660,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fesoterodine fumarato.<br>
      */
     FESOTERODINE_FUMARATE("441469003",
-                          "2.16.840.1.113883.6.96",
+                          "http://snomed.info/sct",
                           "Fesoterodine fumarate (substance)",
                           "Fesoterodine fumarate",
                           "Fesoterodin fumarat",
@@ -5670,7 +5673,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fexofenadina.<br>
      */
     FEXOFENADINE("372522002",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Fexofenadine (substance)",
                  "Fexofenadine",
                  "Fexofenadin",
@@ -5683,7 +5686,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fidaxomicina.<br>
      */
     FIDAXOMICIN("703664004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Fidaxomicin (substance)",
                 "Fidaxomicin",
                 "Fidaxomicin",
@@ -5696,7 +5699,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Filgrastim.<br>
      */
     FILGRASTIM("386948008",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Filgrastim (substance)",
                "Filgrastim",
                "Filgrastim rekombiniert",
@@ -5709,7 +5712,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Finasteride.<br>
      */
     FINASTERIDE("386963006",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Finasteride (substance)",
                 "Finasteride",
                 "Finasterid",
@@ -5722,7 +5725,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fingolimod.<br>
      */
     FINGOLIMOD("449000008",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Fingolimod (substance)",
                "Fingolimod",
                "Fingolimod",
@@ -5735,7 +5738,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Pesce olio.<br>
      */
     FISH_OIL("735341005",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Fish oil (substance)",
              "Fish oil",
              "Fischkörperöl",
@@ -5748,7 +5751,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido 5-aminolevulinico.<br>
      */
     FIVE_AMINOLEVULINIC_ACID("259496005",
-                             "2.16.840.1.113883.6.96",
+                             "http://snomed.info/sct",
                              "5-aminolevulinic acid (substance)",
                              "5-aminolevulinic acid",
                              "5-Aminolevulinsäure",
@@ -5761,7 +5764,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Flavossato.<br>
      */
     FLAVOXATE("372768002",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Flavoxate (substance)",
               "Flavoxate",
               "Flavoxat",
@@ -5774,7 +5777,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Flecainide.<br>
      */
     FLECAINIDE("372751001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Flecainide (substance)",
                "Flecainide",
                "Flecainid",
@@ -5787,7 +5790,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Flucloxacillina.<br>
      */
     FLUCLOXACILLIN("387544009",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Flucloxacillin (substance)",
                    "Flucloxacillin",
                    "Flucloxacillin",
@@ -5800,7 +5803,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fluconazolo.<br>
      */
     FLUCONAZOLE("387174006",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Fluconazole (substance)",
                 "Fluconazole",
                 "Fluconazol",
@@ -5813,7 +5816,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fludarabina.<br>
      */
     FLUDARABINE("386907005",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Fludarabine (substance)",
                 "Fludarabine",
                 "Fludarabin",
@@ -5826,7 +5829,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fludrocortisone.<br>
      */
     FLUDROCORTISONE("116586002",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Fludrocortisone (substance)",
                     "Fludrocortisone",
                     "Fludrocortison",
@@ -5839,7 +5842,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: acido flufenamico.<br>
      */
     FLUFENAMIC_ACID("1156232002",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Flufenamic acid (substance)",
                     "Flufenamic acid",
                     "Flufenaminsäure",
@@ -5852,7 +5855,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Flumazenil.<br>
      */
     FLUMAZENIL("387575000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Flumazenil (substance)",
                "Flumazenil",
                "Flumazenil",
@@ -5865,7 +5868,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Flumetasone.<br>
      */
     FLUMETASONE("116598007",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Flumetasone (substance)",
                 "Flumetasone",
                 "Flumetason",
@@ -5878,7 +5881,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Flunarizina.<br>
      */
     FLUNARIZINE("418221001",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Flunarizine (substance)",
                 "Flunarizine",
                 "Flunarizin",
@@ -5891,7 +5894,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Flunitrazepam.<br>
      */
     FLUNITRAZEPAM("387573007",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Flunitrazepam (substance)",
                   "Flunitrazepam",
                   "Flunitrazepam",
@@ -5904,7 +5907,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fluocinonide.<br>
      */
     FLUOCINONIDE("396060009",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Fluocinonide (substance)",
                  "Fluocinonide",
                  "Fluocinonid",
@@ -5917,7 +5920,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fluorometolone.<br>
      */
     FLUOROMETHOLONE("2925007",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Fluorometholone (substance)",
                     "Fluorometholone",
                     "Fluorometholon",
@@ -5930,7 +5933,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fluorouracile.<br>
      */
     FLUOROURACIL("387172005",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Fluorouracil (substance)",
                  "Fluorouracil",
                  "Fluorouracil",
@@ -5943,7 +5946,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fluoxetina.<br>
      */
     FLUOXETINE("372767007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Fluoxetine (substance)",
                "Fluoxetine",
                "Fluoxetin",
@@ -5956,7 +5959,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Flupentixolo.<br>
      */
     FLUPENTIXOL("387567006",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Flupentixol (substance)",
                 "Flupentixol",
                 "Flupentixol",
@@ -5969,7 +5972,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Flupentixolo decanoato.<br>
      */
     FLUPENTIXOL_DECANOATE("396062001",
-                          "2.16.840.1.113883.6.96",
+                          "http://snomed.info/sct",
                           "Flupentixol decanoate (substance)",
                           "Flupentixol decanoate",
                           "Flupentixol decanoat",
@@ -5982,7 +5985,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Flurazepam.<br>
      */
     FLURAZEPAM("387109000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Flurazepam (substance)",
                "Flurazepam",
                "Flurazepam",
@@ -5995,7 +5998,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Flurbiprofene.<br>
      */
     FLURBIPROFEN("373506008",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Flurbiprofen (substance)",
                  "Flurbiprofen",
                  "Flurbiprofen",
@@ -6008,7 +6011,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fluticasone.<br>
      */
     FLUTICASONE("397192001",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Fluticasone (substance)",
                 "Fluticasone",
                 "Fluticason",
@@ -6021,7 +6024,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fluvastatina.<br>
      */
     FLUVASTATIN("387585004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Fluvastatin (substance)",
                 "Fluvastatin",
                 "Fluvastatin",
@@ -6034,7 +6037,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fluvoxamina.<br>
      */
     FLUVOXAMINE("372905008",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Fluvoxamine (substance)",
                 "Fluvoxamine",
                 "Fluvoxamin",
@@ -6047,7 +6050,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido folico.<br>
      */
     FOLIC_ACID("63718003",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Folic acid (substance)",
                "Folic acid",
                "Folsäure",
@@ -6060,7 +6063,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido folinico.<br>
      */
     FOLINIC_ACID("396065004",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Folinic acid (substance)",
                  "Folinic acid",
                  "Folinsäure",
@@ -6073,7 +6076,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Follitropina alfa.<br>
      */
     FOLLITROPIN_ALFA("395862009",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Follitropin alfa (substance)",
                      "Follitropin alfa",
                      "Follitropin alfa",
@@ -6086,7 +6089,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Follitropina beta.<br>
      */
     FOLLITROPIN_BETA("103028007",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Follitropin beta (substance)",
                      "Follitropin beta",
                      "Follitropin beta",
@@ -6099,7 +6102,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fomepizolo.<br>
      */
     FOMEPIZOLE("386970006",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Fomepizole (substance)",
                "Fomepizole",
                "Fomepizol",
@@ -6112,7 +6115,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fondaparinux sodico.<br>
      */
     FONDAPARINUX_SODIUM("385517000",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Fondaparinux sodium (substance)",
                         "Fondaparinux sodium",
                         "Fondaparinux natrium",
@@ -6125,7 +6128,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Formoterolo.<br>
      */
     FORMOTEROL("414289007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Formoterol (substance)",
                "Formoterol",
                "Formoterol",
@@ -6138,7 +6141,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fosamprenavir.<br>
      */
     FOSAMPRENAVIR("407017006",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Fosamprenavir (substance)",
                   "Fosamprenavir",
                   "Fosamprenavir",
@@ -6151,7 +6154,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Foscarnet.<br>
      */
     FOSCARNET("372902006",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Foscarnet (substance)",
               "Foscarnet",
               "Foscarnet",
@@ -6164,7 +6167,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fosfomicina.<br>
      */
     FOSFOMYCIN("372534005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Fosfomycin (substance)",
                "Fosfomycin",
                "Fosfomycin",
@@ -6177,7 +6180,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fosinopril.<br>
      */
     FOSINOPRIL("372510000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Fosinopril (substance)",
                "Fosinopril",
                "Fosinopril",
@@ -6190,7 +6193,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Frovatriptan.<br>
      */
     FROVATRIPTAN("411990007",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Frovatriptan (substance)",
                  "Frovatriptan",
                  "Frovatriptan",
@@ -6203,7 +6206,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Bromelina.<br>
      */
     FRUIT_BROMELAIN("130663004",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Fruit bromelain (substance)",
                     "Fruit bromelain",
                     "Bromelain",
@@ -6216,7 +6219,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fulvestrant.<br>
      */
     FULVESTRANT("385519002",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Fulvestrant (substance)",
                 "Fulvestrant",
                 "Fulvestrant",
@@ -6229,7 +6232,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Furosemide.<br>
      */
     FUROSEMIDE("387475002",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Furosemide (substance)",
                "Furosemide",
                "Furosemid",
@@ -6242,7 +6245,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido fusidico.<br>
      */
     FUSIDIC_ACID("387530003",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Fusidic acid (substance)",
                  "Fusidic acid",
                  "Fusidinsäure",
@@ -6255,7 +6258,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Gabapentin.<br>
      */
     GABAPENTIN("386845007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Gabapentin (substance)",
                "Gabapentin",
                "Gabapentin",
@@ -6268,7 +6271,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Gadobutrolo.<br>
      */
     GADOBUTROL("418351005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Gadobutrol (substance)",
                "Gadobutrol",
                "Gadobutrol",
@@ -6281,7 +6284,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido gadoterico.<br>
      */
     GADOTERIC_ACID("710812003",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Gadoteric acid (substance)",
                    "Gadoteric acid",
                    "Gadotersäure",
@@ -6294,7 +6297,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Galattosio.<br>
      */
     GALACTOSE("38182007",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Galactose (substance)",
               "Galactose",
               "Galactose",
@@ -6307,7 +6310,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Galantamina.<br>
      */
     GALANTAMINE("395727007",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Galantamine (substance)",
                 "Galantamine",
                 "Galantamin",
@@ -6320,7 +6323,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ganciclovir.<br>
      */
     GANCICLOVIR("372848001",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Ganciclovir (substance)",
                 "Ganciclovir",
                 "Ganciclovir",
@@ -6333,7 +6336,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ganirelix.<br>
      */
     GANIRELIX("395728002",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Ganirelix (substance)",
               "Ganirelix",
               "Ganirelix",
@@ -6346,7 +6349,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Gemcitabina.<br>
      */
     GEMCITABINE("386920008",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Gemcitabine (substance)",
                 "Gemcitabine",
                 "Gemcitabin",
@@ -6359,7 +6362,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Gemfibrozil.<br>
      */
     GEMFIBROZIL("387189002",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Gemfibrozil (substance)",
                 "Gemfibrozil",
                 "Gemfibrozil",
@@ -6372,7 +6375,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Gentamicina.<br>
      */
     GENTAMICIN("387321007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Gentamicin (substance)",
                "Gentamicin",
                "Gentamicin",
@@ -6385,7 +6388,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Gestodene.<br>
      */
     GESTODENE("395945000",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Gestodene (substance)",
               "Gestodene",
               "Gestoden",
@@ -6398,7 +6401,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ginko (Ginko biloba L.).<br>
      */
     GINKGO_BILOBA("420733007",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Ginkgo biloba (substance)",
                   "Ginkgo biloba",
                   "Ginkgo (Ginkgo biloba L.)",
@@ -6411,7 +6414,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Glatiramer.<br>
      */
     GLATIRAMER("372535006",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Glatiramer (substance)",
                "Glatiramer",
                "Glatiramer",
@@ -6424,7 +6427,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Glibenclamide.<br>
      */
     GLIBENCLAMIDE("384978002",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Glibenclamide (substance)",
                   "Glibenclamide",
                   "Glibenclamid",
@@ -6437,7 +6440,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Gliclazide.<br>
      */
     GLICLAZIDE("395731001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Gliclazide (substance)",
                "Gliclazide",
                "Gliclazid",
@@ -6450,7 +6453,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Glimepiride.<br>
      */
     GLIMEPIRIDE("386966003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Glimepiride (substance)",
                 "Glimepiride",
                 "Glimepirid",
@@ -6463,7 +6466,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Glucagone.<br>
      */
     GLUCAGON("66603002",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Glucagon (substance)",
              "Glucagon",
              "Glucagon",
@@ -6476,7 +6479,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Glucosio.<br>
      */
     GLUCOSE("67079006",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Glucose (substance)",
             "Glucose",
             "Glucose",
@@ -6489,7 +6492,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nitroglicerina.<br>
      */
     GLYCERYL_TRINITRATE("387404004",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Glyceryl trinitrate (substance)",
                         "Glyceryl trinitrate",
                         "Nitroglycerin",
@@ -6502,7 +6505,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Glicina.<br>
      */
     GLYCINE("15331006",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Glycine (substance)",
             "Glycine",
             "Glycin",
@@ -6515,7 +6518,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido glicocolico.<br>
      */
     GLYCOCHOLIC_ACID("96314001",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Glycocholic acid (substance)",
                      "Glycocholic acid",
                      "Glycocholsäure",
@@ -6528,7 +6531,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Glicopirronio.<br>
      */
     GLYCOPYRRONIUM("769097000",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Glycopyrronium (substance)",
                    "Glycopyrronium",
                    "Glycopyrronium-Kation",
@@ -6541,7 +6544,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Golimumab.<br>
      */
     GOLIMUMAB("442435002",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Golimumab (substance)",
               "Golimumab",
               "Golimumab",
@@ -6554,7 +6557,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Gonadorelina.<br>
      */
     GONADORELIN("397197007",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Gonadorelin (substance)",
                 "Gonadorelin",
                 "Gonadorelin",
@@ -6567,7 +6570,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Goserelin.<br>
      */
     GOSERELIN("108771008",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Goserelin (substance)",
               "Goserelin",
               "Goserelin",
@@ -6580,7 +6583,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Gramicidina.<br>
      */
     GRAMICIDIN("387524003",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Gramicidin (substance)",
                "Gramicidin",
                "Gramicidin",
@@ -6593,7 +6596,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Granisetron.<br>
      */
     GRANISETRON("372489005",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Granisetron (substance)",
                 "Granisetron",
                 "Granisetron",
@@ -6606,7 +6609,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Guaifenesina.<br>
      */
     GUAIFENESIN("87174009",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Guaifenesin (substance)",
                 "Guaifenesin",
                 "Guaifenesin",
@@ -6619,7 +6622,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Guanfacina.<br>
      */
     GUANFACINE("372507007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Guanfacine (substance)",
                "Guanfacine",
                "Guanfacin",
@@ -6632,7 +6635,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Alcinonide.<br>
      */
     HALCINONIDE("395735005",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Halcinonide (substance)",
                 "Halcinonide",
                 "Halcinonid",
@@ -6645,7 +6648,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Alometasone.<br>
      */
     HALOMETASONE("704673003",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Halometasone (substance)",
                  "Halometasone",
                  "Halometason",
@@ -6658,7 +6661,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Aloperidolo.<br>
      */
     HALOPERIDOL("386837002",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Haloperidol (substance)",
                 "Haloperidol",
                 "Haloperidol",
@@ -6671,7 +6674,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Eparina.<br>
      */
     HEPARIN("372877000",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Heparin (substance)",
             "Heparin",
             "Heparin",
@@ -6684,7 +6687,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Epatite B antigene purificato.<br>
      */
     HEPATITIS_B_ANTIGEN("303233001",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Hepatitis B antigen (substance)",
                         "Hepatitis B antigen",
                         "Hepatitis B Antigen",
@@ -6697,7 +6700,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Esamidina.<br>
      */
     HEXAMIDINE("703831002",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Hexamidine (substance)",
                "Hexamidine",
                "Hexamidin",
@@ -6710,7 +6713,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Esetidina.<br>
      */
     HEXETIDINE("387132001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Hexetidine (substance)",
                "Hexetidine",
                "Hexetidin",
@@ -6723,7 +6726,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Esoprenalina.<br>
      */
     HEXOPRENALINE("704987001",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Hexoprenaline (substance)",
                   "Hexoprenaline",
                   "Hexoprenalin",
@@ -6736,7 +6739,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Istidina.<br>
      */
     HISTIDINE("60260004",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Histidine (substance)",
               "Histidine",
               "Histidin",
@@ -6749,7 +6752,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Antitrombina III umana.<br>
      */
     HUMAN_ANTITHROMBIN_III("412564003",
-                           "2.16.840.1.113883.6.96",
+                           "http://snomed.info/sct",
                            "Human antithrombin III (substance)",
                            "Human antithrombin III",
                            "Antithrombin III human",
@@ -6762,7 +6765,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Immunoglobulina umana anti-D.<br>
      */
     HUMAN_ANTI_D_IMMUNOGLOBULIN("769102002",
-                                "2.16.840.1.113883.6.96",
+                                "http://snomed.info/sct",
                                 "Human anti-D immunoglobulin (substance)",
                                 "Human anti-D immunoglobulin",
                                 "Anti-D-Immunglobulin vom Menschen",
@@ -6775,7 +6778,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Gonadotropina corionica umana (HCG).<br>
      */
     HUMAN_CHORIONIC_GONADOTROPIN("59433001",
-                                 "2.16.840.1.113883.6.96",
+                                 "http://snomed.info/sct",
                                  "Human chorionic gonadotropin (substance)",
                                  "Human chorionic gonadotropin",
                                  "Choriongonadotropin",
@@ -6788,7 +6791,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fibrinogeno umano.<br>
      */
     HUMAN_FIBRINOGEN("418326009",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Human fibrinogen (substance)",
                      "Human fibrinogen",
                      "Fibrinogen (human)",
@@ -6801,7 +6804,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Immunoglobulina umana.<br>
      */
     HUMAN_IMMUNOGLOBULIN("420084002",
-                         "2.16.840.1.113883.6.96",
+                         "http://snomed.info/sct",
                          "Human immunoglobulin (substance)",
                          "Human immunoglobulin",
                          "Immunglobulin vom Menschen",
@@ -6814,7 +6817,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Immunoglobulina G umana (IgG).<br>
      */
     HUMAN_IMMUNOGLOBULIN_G("722197004",
-                           "2.16.840.1.113883.6.96",
+                           "http://snomed.info/sct",
                            "Human immunoglobulin G (substance)",
                            "Human immunoglobulin G",
                            "Immunglobulin G human (IgG)",
@@ -6827,7 +6830,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Insulina umana.<br>
      */
     HUMAN_INSULIN("96367001",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Human insulin (substance)",
                   "Human insulin",
                   "Insulin human",
@@ -6840,7 +6843,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Menotropina.<br>
      */
     HUMAN_MENOPAUSAL_GONADOTROPIN("8203003",
-                                  "2.16.840.1.113883.6.96",
+                                  "http://snomed.info/sct",
                                   "Human menopausal gonadotropin (substance)",
                                   "Human menopausal gonadotropin",
                                   "Menotropin",
@@ -6853,7 +6856,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido ialuronico.<br>
      */
     HYALURONIC_ACID("38218009",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Hyaluronic acid (substance)",
                     "Hyaluronic acid",
                     "Hyaluronsäure",
@@ -6866,7 +6869,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Idrocloratiazide.<br>
      */
     HYDROCHLOROTHIAZIDE("387525002",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Hydrochlorothiazide (substance)",
                         "Hydrochlorothiazide",
                         "Hydrochlorothiazid",
@@ -6879,7 +6882,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Idrocodone.<br>
      */
     HYDROCODONE("372671002",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Hydrocodone (substance)",
                 "Hydrocodone",
                 "Hydrocodon",
@@ -6892,7 +6895,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Idrocortisone.<br>
      */
     HYDROCORTISONE("396458002",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Hydrocortisone (substance)",
                    "Hydrocortisone",
                    "Hydrocortison",
@@ -6905,7 +6908,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Idrocortisone acetato.<br>
      */
     HYDROCORTISONE_ACETATE("79380007",
-                           "2.16.840.1.113883.6.96",
+                           "http://snomed.info/sct",
                            "Hydrocortisone acetate (substance)",
                            "Hydrocortisone acetate",
                            "Hydrocortison acetat",
@@ -6918,7 +6921,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Idrogeno perossido.<br>
      */
     HYDROGEN_PEROXIDE("387171003",
-                      "2.16.840.1.113883.6.96",
+                      "http://snomed.info/sct",
                       "Hydrogen peroxide (substance)",
                       "Hydrogen peroxide",
                       "Wasserstoffperoxid",
@@ -6931,7 +6934,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Idromorfone.<br>
      */
     HYDROMORPHONE("44508008",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Hydromorphone (substance)",
                   "Hydromorphone",
                   "Hydromorphon",
@@ -6944,7 +6947,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Idrochinone.<br>
      */
     HYDROQUINONE("387422001",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Hydroquinone (substance)",
                  "Hydroquinone",
                  "Hydrochinon",
@@ -6957,7 +6960,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Idrotalcite.<br>
      */
     HYDROTALCITE("395738007",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Hydrotalcite (substance)",
                  "Hydrotalcite",
                  "Hydrotalcit",
@@ -6970,7 +6973,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Idrossocobalamina.<br>
      */
     HYDROXOCOBALAMIN("409258004",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Hydroxocobalamin (substance)",
                      "Hydroxocobalamin",
                      "Hydroxocobalamin",
@@ -6983,7 +6986,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Idrossicarbamide.<br>
      */
     HYDROXYCARBAMIDE("387314007",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Hydroxycarbamide (substance)",
                      "Hydroxycarbamide",
                      "Hydroxycarbamid",
@@ -6996,7 +6999,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Idrossiclorochina.<br>
      */
     HYDROXYCHLOROQUINE("373540008",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Hydroxychloroquine (substance)",
                        "Hydroxychloroquine",
                        "Hydroxychloroquin",
@@ -7009,7 +7012,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Idrossizina.<br>
      */
     HYDROXYZINE("372856003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Hydroxyzine (substance)",
                 "Hydroxyzine",
                 "Hydroxyzin",
@@ -7022,7 +7025,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ipericina.<br>
      */
     HYPERICIN("123681008",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Hypericin (substance)",
               "Hypericin",
               "Hypericin",
@@ -7035,7 +7038,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Iperico (Hypericum perforatum L.).<br>
      */
     HYPERICUM_PERFORATUM_EXTRACT("412515006",
-                                 "2.16.840.1.113883.6.96",
+                                 "http://snomed.info/sct",
                                  "Hypericum perforatum extract (substance)",
                                  "Hypericum perforatum extract",
                                  "Johanniskraut (Hypericum perforatum L.)",
@@ -7048,7 +7051,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido ibandronico.<br>
      */
     IBANDRONIC_ACID("420936009",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Ibandronic acid (substance)",
                     "Ibandronic acid",
                     "Ibandronsäure",
@@ -7061,7 +7064,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ibuprofene.<br>
      */
     IBUPROFEN("387207008",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Ibuprofen (substance)",
               "Ibuprofen",
               "Ibuprofen",
@@ -7074,7 +7077,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ibuprofene lisina.<br>
      */
     IBUPROFEN_LYSINE("425516000",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Ibuprofen lysine (substance)",
                      "Ibuprofen lysine",
                      "Ibuprofen lysin",
@@ -7087,7 +7090,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Icatibant.<br>
      */
     ICATIBANT("703834005",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Icatibant (substance)",
               "Icatibant",
               "Icatibant",
@@ -7100,7 +7103,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Idarubicina.<br>
      */
     IDARUBICIN("372539000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Idarubicin (substance)",
                "Idarubicin",
                "Idarubicin",
@@ -7113,7 +7116,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Idarucizumab.<br>
      */
     IDARUCIZUMAB("716017002",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Idarucizumab (substance)",
                  "Idarucizumab",
                  "Idarucizumab",
@@ -7126,7 +7129,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Idebenone.<br>
      */
     IDEBENONE("429666007",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Idebenone (substance)",
               "Idebenone",
               "Idebenon",
@@ -7139,7 +7142,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Idelalisib.<br>
      */
     IDELALISIB("710278000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Idelalisib (substance)",
                "Idelalisib",
                "Idelalisib",
@@ -7152,7 +7155,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ifosfamide.<br>
      */
     IFOSFAMIDE("386904003",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Ifosfamide (substance)",
                "Ifosfamide",
                "Ifosfamid",
@@ -7165,7 +7168,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Iloprost.<br>
      */
     ILOPROST("395740002",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Iloprost (substance)",
              "Iloprost",
              "Iloprost",
@@ -7178,7 +7181,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Imatinib.<br>
      */
     IMATINIB("414460008",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Imatinib (substance)",
              "Imatinib",
              "Imatinib",
@@ -7191,7 +7194,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Imiglucerasi.<br>
      */
     IMIGLUCERASE("386968002",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Imiglucerase (substance)",
                  "Imiglucerase",
                  "Imiglucerase",
@@ -7204,7 +7207,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Imipenem.<br>
      */
     IMIPENEM("46558003",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Imipenem (substance)",
              "Imipenem",
              "Imipenem",
@@ -7217,7 +7220,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Imipramina.<br>
      */
     IMIPRAMINE("372718005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Imipramine (substance)",
                "Imipramine",
                "Imipramin",
@@ -7230,7 +7233,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Imiquimod.<br>
      */
     IMIQUIMOD("386941002",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Imiquimod (substance)",
               "Imiquimod",
               "Imiquimod",
@@ -7243,7 +7246,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Immunoglobulina A umana (IgA).<br>
      */
     IMMUNOGLOBULIN_A("46046006",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Immunoglobulin A (substance)",
                      "Immunoglobulin A",
                      "Immunglobulin A human (IgA)",
@@ -7256,7 +7259,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Immunoglobulina M umana (IgM).<br>
      */
     IMMUNOGLOBULIN_M("74889000",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Immunoglobulin M (substance)",
                      "Immunoglobulin M",
                      "Immunglobulin M human (IgM)",
@@ -7269,7 +7272,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Immunologic substance.<br>
      */
     IMMUNOLOGIC_SUBSTANCE("106181007",
-                          "2.16.840.1.113883.6.96",
+                          "http://snomed.info/sct",
                           "Immunologic substance (substance)",
                           "Immunologic substance",
                           "Immunologic substance",
@@ -7282,7 +7285,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Indacaterol.<br>
      */
     INDACATEROL("702801003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Indacaterol (substance)",
                 "Indacaterol",
                 "Indacaterol",
@@ -7295,7 +7298,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Indapamide.<br>
      */
     INDAPAMIDE("387419003",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Indapamide (substance)",
                "Indapamide",
                "Indapamid",
@@ -7308,7 +7311,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Indometacina.<br>
      */
     INDOMETACIN("373513008",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Indometacin (substance)",
                 "Indometacin",
                 "Indometacin",
@@ -7321,7 +7324,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Infliximab.<br>
      */
     INFLIXIMAB("386891004",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Infliximab (substance)",
                "Infliximab",
                "Infliximab",
@@ -7334,7 +7337,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Inositolo.<br>
      */
     INOSITOL("72164009",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Inositol (substance)",
              "Inositol",
              "Inositol",
@@ -7347,7 +7350,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Insulina aspartat.<br>
      */
     INSULIN_ASPART("325072002",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Insulin aspart (substance)",
                    "Insulin aspart",
                    "Insulin aspart",
@@ -7360,7 +7363,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Insulina degludec.<br>
      */
     INSULIN_DEGLUDEC("710281005",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Insulin degludec (substance)",
                      "Insulin degludec",
                      "Insulin degludec",
@@ -7373,7 +7376,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Insulina detemir.<br>
      */
     INSULIN_DETEMIR("414515005",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Insulin detemir (substance)",
                     "Insulin detemir",
                     "Insulin detemir",
@@ -7386,7 +7389,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Insulina glargine.<br>
      */
     INSULIN_GLARGINE("411529005",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Insulin glargine (substance)",
                      "Insulin glargine",
                      "Insulin glargin",
@@ -7399,7 +7402,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Insulina glulisina.<br>
      */
     INSULIN_GLULISINE("411530000",
-                      "2.16.840.1.113883.6.96",
+                      "http://snomed.info/sct",
                       "Insulin glulisine (substance)",
                       "Insulin glulisine",
                       "Insulin glulisin",
@@ -7412,7 +7415,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Insulina lispro.<br>
      */
     INSULIN_LISPRO("412210000",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Insulin lispro (substance)",
                    "Insulin lispro",
                    "Insulin lispro",
@@ -7425,7 +7428,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Interferone alfa 2a.<br>
      */
     INTERFERON_ALFA_2A("386914007",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Interferon alfa-2a (substance)",
                        "Interferon alfa-2a",
                        "Interferon alfa-2a",
@@ -7438,7 +7441,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Interferone alfa 2b.<br>
      */
     INTERFERON_ALFA_2B("386915008",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Interferon alfa-2b (substance)",
                        "Interferon alfa-2b",
                        "Interferon alfa-2b",
@@ -7451,7 +7454,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Interferone beta 1a.<br>
      */
     INTERFERON_BETA_1A("386902004",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Interferon beta-1a (substance)",
                        "Interferon beta-1a",
                        "Interferon beta-1a",
@@ -7464,7 +7467,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Interferone beta 1b.<br>
      */
     INTERFERON_BETA_1B("386903009",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Interferon beta-1b (substance)",
                        "Interferon beta-1b",
                        "Interferon beta-1b",
@@ -7477,7 +7480,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Interferone gamma 1b.<br>
      */
     INTERFERON_GAMMA_1B("386901006",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Interferon gamma-1b (substance)",
                         "Interferon gamma-1b",
                         "Interferon gamma-1b",
@@ -7490,7 +7493,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Inulina.<br>
      */
     INULIN("32154009",
-           "2.16.840.1.113883.6.96",
+           "http://snomed.info/sct",
            "Inulin (substance)",
            "Inulin",
            "Inulin",
@@ -7503,7 +7506,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Iodixanolo.<br>
      */
     IODIXANOL("395750001",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Iodixanol (substance)",
               "Iodixanol",
               "Iodixanol",
@@ -7516,7 +7519,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ioexolo.<br>
      */
     IOHEXOL("395751002",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Iohexol (substance)",
             "Iohexol",
             "Iohexol",
@@ -7529,7 +7532,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Iopamidolo.<br>
      */
     IOPAMIDOL("395754005",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Iopamidol (substance)",
               "Iopamidol",
               "Iopamidol",
@@ -7542,7 +7545,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Iopromide.<br>
      */
     IOPROMIDE("395756007",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Iopromide (substance)",
               "Iopromide",
               "Iopromid",
@@ -7555,7 +7558,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ipilimumab.<br>
      */
     IPILIMUMAB("697995005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Ipilimumab (substance)",
                "Ipilimumab",
                "Ipilimumab",
@@ -7568,7 +7571,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ipratropio.<br>
      */
     IPRATROPIUM("372518007",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Ipratropium (substance)",
                 "Ipratropium",
                 "Ipratropium",
@@ -7581,7 +7584,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Irbesartan.<br>
      */
     IRBESARTAN("386877005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Irbesartan (substance)",
                "Irbesartan",
                "Irbesartan",
@@ -7594,7 +7597,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Irinotecan.<br>
      */
     IRINOTECAN("372538008",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Irinotecan (substance)",
                "Irinotecan",
                "Irinotecan",
@@ -7607,7 +7610,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ferro.<br>
      */
     IRON("3829006",
-         "2.16.840.1.113883.6.96",
+         "http://snomed.info/sct",
          "Iron (substance)",
          "Iron",
          "Eisen",
@@ -7620,7 +7623,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ferro (III) idrossido polimaltosato.<br>
      */
     IRON_POLYMALTOSE("708805001",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Iron polymaltose (substance)",
                      "Iron polymaltose",
                      "Eisen(III)-hydroxid-Polymaltose-Komplex",
@@ -7633,7 +7636,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Isavuconazolo.<br>
      */
     ISAVUCONAZOLE("765386003",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Isavuconazole (substance)",
                   "Isavuconazole",
                   "Isavuconazol",
@@ -7646,7 +7649,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Isoconazolo.<br>
      */
     ISOCONAZOLE("418371001",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Isoconazole (substance)",
                 "Isoconazole",
                 "Isoconazol",
@@ -7659,7 +7662,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Isoleucina.<br>
      */
     ISOLEUCINE("14971004",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Isoleucine (substance)",
                "Isoleucine",
                "Isoleucin",
@@ -7672,7 +7675,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Isoniazide.<br>
      */
     ISONIAZID("387472004",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Isoniazid (substance)",
               "Isoniazid",
               "Isoniazid",
@@ -7685,7 +7688,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Isoprenalina.<br>
      */
     ISOPRENALINE("372781009",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Isoprenaline (substance)",
                  "Isoprenaline",
                  "Isoprenalin",
@@ -7698,7 +7701,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Alcol isopropilico.<br>
      */
     ISOPROPYL_ALCOHOL("259268001",
-                      "2.16.840.1.113883.6.96",
+                      "http://snomed.info/sct",
                       "Isopropyl alcohol (substance)",
                       "Isopropyl alcohol",
                       "Isopropylalkohol",
@@ -7711,7 +7714,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Isosorbide dinitrato.<br>
      */
     ISOSORBIDE_DINITRATE("387332007",
-                         "2.16.840.1.113883.6.96",
+                         "http://snomed.info/sct",
                          "Isosorbide dinitrate (substance)",
                          "Isosorbide dinitrate",
                          "Isosorbid dinitrat",
@@ -7724,7 +7727,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Isotretinoina.<br>
      */
     ISOTRETINOIN("387208003",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Isotretinoin (substance)",
                  "Isotretinoin",
                  "Isotretinoin",
@@ -7737,7 +7740,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Itraconazolo.<br>
      */
     ITRACONAZOLE("387532006",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Itraconazole (substance)",
                  "Itraconazole",
                  "Itraconazol",
@@ -7750,7 +7753,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ivabradina.<br>
      */
     IVABRADINE("421228002",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Ivabradine (substance)",
                "Ivabradine",
                "Ivabradin",
@@ -7763,7 +7766,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ivacaftor.<br>
      */
     IVACAFTOR("703823007",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Ivacaftor (substance)",
               "Ivacaftor",
               "Ivacaftor",
@@ -7776,7 +7779,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ivermectina.<br>
      */
     IVERMECTIN("387559003",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Ivermectin (substance)",
                "Ivermectin",
                "Ivermectin",
@@ -7789,7 +7792,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ixekizumab.<br>
      */
     IXEKIZUMAB("724037000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Ixekizumab (substance)",
                "Ixekizumab",
                "Ixekizumab",
@@ -7802,7 +7805,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ketamina.<br>
      */
     KETAMINE("373464007",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Ketamine (substance)",
              "Ketamine",
              "Ketamin",
@@ -7815,7 +7818,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ketoconazolo.<br>
      */
     KETOCONAZOLE("387216007",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Ketoconazole (substance)",
                  "Ketoconazole",
                  "Ketoconazol",
@@ -7828,7 +7831,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ketoprofene.<br>
      */
     KETOPROFEN("386832008",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Ketoprofen (substance)",
                "Ketoprofen",
                "Ketoprofen",
@@ -7841,7 +7844,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ketorolac.<br>
      */
     KETOROLAC("372501008",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Ketorolac (substance)",
               "Ketorolac",
               "Ketorolac",
@@ -7854,7 +7857,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ketotifene.<br>
      */
     KETOTIFEN("372642003",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Ketotifen (substance)",
               "Ketotifen",
               "Ketotifen",
@@ -7867,7 +7870,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Labetalolo.<br>
      */
     LABETALOL("372750000",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Labetalol (substance)",
               "Labetalol",
               "Labetalol",
@@ -7880,7 +7883,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lacosamide.<br>
      */
     LACOSAMIDE("441647003",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Lacosamide (substance)",
                "Lacosamide",
                "Lacosamid",
@@ -7893,7 +7896,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lattilolo.<br>
      */
     LACTITOL("418929008",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Lactitol (substance)",
              "Lactitol",
              "Lactitol",
@@ -7906,7 +7909,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lattosio.<br>
      */
     LACTOSE("47703008",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Lactose (substance)",
             "Lactose",
             "Lactose",
@@ -7919,7 +7922,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lattulosio.<br>
      */
     LACTULOSE("273945008",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Lactulose (substance)",
               "Lactulose",
               "Lactulose",
@@ -7932,7 +7935,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lamivudina.<br>
      */
     LAMIVUDINE("386897000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Lamivudine (substance)",
                "Lamivudine",
                "Lamivudin",
@@ -7945,7 +7948,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lamotrigina.<br>
      */
     LAMOTRIGINE("387562000",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Lamotrigine (substance)",
                 "Lamotrigine",
                 "Lamotrigin",
@@ -7958,7 +7961,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lanreotide.<br>
      */
     LANREOTIDE("395765000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Lanreotide (substance)",
                "Lanreotide",
                "Lanreotid",
@@ -7971,7 +7974,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lansoprazolo.<br>
      */
     LANSOPRAZOLE("386888004",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Lansoprazole (substance)",
                  "Lansoprazole",
                  "Lansoprazol",
@@ -7984,7 +7987,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lantanio carbonato.<br>
      */
     LANTHANUM_CARBONATE("414571007",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Lanthanum carbonate (substance)",
                         "Lanthanum carbonate",
                         "Lanthan(III) carbonat",
@@ -7997,7 +8000,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Latanoprost.<br>
      */
     LATANOPROST("386926002",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Latanoprost (substance)",
                 "Latanoprost",
                 "Latanoprost",
@@ -8010,7 +8013,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lauromacrogol.<br>
      */
     LAUROMACROGOL_400("427905004",
-                      "2.16.840.1.113883.6.96",
+                      "http://snomed.info/sct",
                       "Lauromacrogol 400 (substance)",
                       "Lauromacrogol 400",
                       "Lauromacrogol 400",
@@ -8023,7 +8026,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Leflunomide.<br>
      */
     LEFLUNOMIDE("386981009",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Leflunomide (substance)",
                 "Leflunomide",
                 "Leflunomid",
@@ -8036,7 +8039,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lenalidomide.<br>
      */
     LENALIDOMIDE("421471009",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Lenalidomide (substance)",
                  "Lenalidomide",
                  "Lenalidomid",
@@ -8049,7 +8052,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lenograstim.<br>
      */
     LENOGRASTIME("395767008",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Lenograstime (substance)",
                  "Lenograstime",
                  "Lenograstim",
@@ -8062,7 +8065,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lercanidipina.<br>
      */
     LERCANIDIPINE("395986007",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Lercanidipine (substance)",
                   "Lercanidipine",
                   "Lercanidipin",
@@ -8075,7 +8078,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Letrozolo.<br>
      */
     LETROZOLE("386911004",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Letrozole (substance)",
               "Letrozole",
               "Letrozol",
@@ -8088,7 +8091,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Leucina.<br>
      */
     LEUCINE("83797003",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Leucine (substance)",
             "Leucine",
             "Leucin",
@@ -8101,7 +8104,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Leuprorelina.<br>
      */
     LEUPRORELIN("397198002",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Leuprorelin (substance)",
                 "Leuprorelin",
                 "Leuprorelin",
@@ -8114,7 +8117,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Levetiracetam.<br>
      */
     LEVETIRACETAM("387000003",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Levetiracetam (substance)",
                   "Levetiracetam",
                   "Levetiracetam",
@@ -8127,7 +8130,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Levobupivacaina.<br>
      */
     LEVOBUPIVACAINE("387011006",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Levobupivacaine (substance)",
                     "Levobupivacaine",
                     "Levobupivacain",
@@ -8140,7 +8143,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Levocabastina.<br>
      */
     LEVOCABASTINE("372554006",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Levocabastine (substance)",
                   "Levocabastine",
                   "Levocabastin",
@@ -8153,7 +8156,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Levocarnitina.<br>
      */
     LEVOCARNITINE("372601001",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Levocarnitine (substance)",
                   "Levocarnitine",
                   "Levocarnitin",
@@ -8166,7 +8169,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Levocetirizina.<br>
      */
     LEVOCETIRIZINE("421889003",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Levocetirizine (substance)",
                    "Levocetirizine",
                    "Levocetirizin",
@@ -8179,7 +8182,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Levodopa.<br>
      */
     LEVODOPA("387086006",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Levodopa (substance)",
              "Levodopa",
              "Levodopa",
@@ -8192,7 +8195,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Levofloxacina.<br>
      */
     LEVOFLOXACIN("387552007",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Levofloxacin (substance)",
                  "Levofloxacin",
                  "Levofloxacin",
@@ -8205,7 +8208,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Levomepromazina.<br>
      */
     LEVOMEPROMAZINE("387509007",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Levomepromazine (substance)",
                     "Levomepromazine",
                     "Levomepromazin",
@@ -8218,7 +8221,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: levomethadone.<br>
      */
     LEVOMETHADONE("1156227003",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Levomethadone (substance)",
                   "Levomethadone",
                   "Levomethadon",
@@ -8231,7 +8234,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Levonorgestrel.<br>
      */
     LEVONORGESTREL("126109000",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Levonorgestrel (substance)",
                    "Levonorgestrel",
                    "Levonorgestrel",
@@ -8244,7 +8247,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Levosimendan.<br>
      */
     LEVOSIMENDAN("442795003",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Levosimendan (substance)",
                  "Levosimendan",
                  "Levosimendan",
@@ -8257,7 +8260,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Levotiroxina.<br>
      */
     LEVOTHYROXINE("710809001",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Levothyroxine (substance)",
                   "Levothyroxine",
                   "Levothyroxin",
@@ -8270,7 +8273,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lidocaina.<br>
      */
     LIDOCAINE("387480006",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Lidocaine (substance)",
               "Lidocaine",
               "Lidocain",
@@ -8283,7 +8286,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Linagliptin.<br>
      */
     LINAGLIPTIN("702798009",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Linagliptin (substance)",
                 "Linagliptin",
                 "Linagliptin",
@@ -8296,7 +8299,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Linezolid.<br>
      */
     LINEZOLID("387056004",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Linezolid (substance)",
               "Linezolid",
               "Linezolid",
@@ -8309,7 +8312,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Liotironina.<br>
      */
     LIOTHYRONINE("61275002",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Liothyronine (substance)",
                  "Liothyronine",
                  "Liothyronin",
@@ -8322,7 +8325,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Liraglutide.<br>
      */
     LIRAGLUTIDE("444828003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Liraglutide (substance)",
                 "Liraglutide",
                 "Liraglutid",
@@ -8335,7 +8338,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lisdexamfetamina.<br>
      */
     LISDEXAMFETAMINE("425597005",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Lisdexamfetamine (substance)",
                      "Lisdexamfetamine",
                      "Lisdexamfetamin",
@@ -8348,7 +8351,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lisinopril.<br>
      */
     LISINOPRIL("386873009",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Lisinopril (substance)",
                "Lisinopril",
                "Lisinopril",
@@ -8361,7 +8364,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Litio acetato.<br>
      */
     LITHIUM_ACETATE("111080000",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Lithium acetate (substance)",
                     "Lithium acetate",
                     "Lithium acetat",
@@ -8374,7 +8377,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Litio carbonato.<br>
      */
     LITHIUM_CARBONATE("387095003",
-                      "2.16.840.1.113883.6.96",
+                      "http://snomed.info/sct",
                       "Lithium carbonate (substance)",
                       "Lithium carbonate",
                       "Lithium carbonat",
@@ -8387,7 +8390,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Litio solfato.<br>
      */
     LITHIUM_SULFATE("708197001",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Lithium sulfate (substance)",
                     "Lithium sulfate",
                     "Lithiumsulfat",
@@ -8400,7 +8403,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lixisenatide.<br>
      */
     LIXISENATIDE("708808004",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Lixisenatide (substance)",
                  "Lixisenatide",
                  "Lixisenatid",
@@ -8413,7 +8416,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lomustina.<br>
      */
     LOMUSTINE("387227009",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Lomustine (substance)",
               "Lomustine",
               "Lomustin",
@@ -8426,7 +8429,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lonoctocog alfa.<br>
      */
     LONOCTOCOG_ALFA("1012961000168107",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Lonoctocog alfa (substance)",
                     "Lonoctocog alfa",
                     "Lonoctocog alfa",
@@ -8439,7 +8442,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Loperamide.<br>
      */
     LOPERAMIDE("387040009",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Loperamide (substance)",
                "Loperamide",
                "Loperamid",
@@ -8452,7 +8455,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lopinavir.<br>
      */
     LOPINAVIR("387067003",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Lopinavir (substance)",
               "Lopinavir",
               "Lopinavir",
@@ -8465,7 +8468,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Loratadina.<br>
      */
     LORATADINE("386884002",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Loratadine (substance)",
                "Loratadine",
                "Loratadin",
@@ -8478,7 +8481,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lorazepam.<br>
      */
     LORAZEPAM("387106007",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Lorazepam (substance)",
               "Lorazepam",
               "Lorazepam",
@@ -8491,7 +8494,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lormetazepam.<br>
      */
     LORMETAZEPAM("387570005",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Lormetazepam (substance)",
                  "Lormetazepam",
                  "Lormetazepam",
@@ -8504,7 +8507,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Losartan.<br>
      */
     LOSARTAN("373567002",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Losartan (substance)",
              "Losartan",
              "Losartan",
@@ -8517,7 +8520,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lumefantrina.<br>
      */
     LUMEFANTRINE("420307001",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Lumefantrine (substance)",
                  "Lumefantrine",
                  "Lumefantrin",
@@ -8530,7 +8533,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lurasidone.<br>
      */
     LURASIDONE("703115008",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Lurasidone (substance)",
                "Lurasidone",
                "Lurasidon",
@@ -8543,7 +8546,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lutropina alfa.<br>
      */
     LUTROPIN_ALFA("415248001",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Lutropin alfa (substance)",
                   "Lutropin alfa",
                   "Lutropin alfa",
@@ -8556,7 +8559,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lisina.<br>
      */
     LYSINE("75799006",
-           "2.16.840.1.113883.6.96",
+           "http://snomed.info/sct",
            "Lysine (substance)",
            "Lysine",
            "Lysin",
@@ -8569,7 +8572,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Macitentan.<br>
      */
     MACITENTAN("710283008",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Macitentan (substance)",
                "Macitentan",
                "Macitentan",
@@ -8582,7 +8585,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Macrogol.<br>
      */
     MACROGOL("8030004",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Macrogol (substance)",
              "Macrogol",
              "Macrogol",
@@ -8595,7 +8598,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Macrogol 3350.<br>
      */
     MACROGOL_3350("712566007",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Macrogol 3350 (substance)",
                   "Macrogol 3350",
                   "Macrogol 3350",
@@ -8608,7 +8611,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Macrogol 4000.<br>
      */
     MACROGOL_4000("712567003",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Macrogol 4000 (substance)",
                   "Macrogol 4000",
                   "Macrogol 4000",
@@ -8621,7 +8624,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Magaldrato.<br>
      */
     MAGALDRATE("387240004",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Magaldrate (substance)",
                "Magaldrate",
                "Magaldrat",
@@ -8634,7 +8637,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Magnesio.<br>
      */
     MAGNESIUM("72717003",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Magnesium (substance)",
               "Magnesium",
               "Magnesium",
@@ -8647,7 +8650,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Magnesio acetato tetraidrato.<br>
      */
     MAGNESIUM_ACETATE_TETRAHYDRATE("723586001",
-                                   "2.16.840.1.113883.6.96",
+                                   "http://snomed.info/sct",
                                    "Magnesium acetate tetrahydrate (substance)",
                                    "Magnesium acetate tetrahydrate",
                                    "Magnesium diacetat-4-Wasser",
@@ -8660,7 +8663,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Magnesio carbonato.<br>
      */
     MAGNESIUM_CARBONATE("387401007",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Magnesium carbonate (substance)",
                         "Magnesium carbonate",
                         "Magnesium carbonat",
@@ -8673,7 +8676,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Magnesio cloruro.<br>
      */
     MAGNESIUM_CHLORIDE("45733002",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Magnesium chloride (substance)",
                        "Magnesium chloride",
                        "Magnesiumchlorid",
@@ -8686,7 +8689,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Magnesio gluconato.<br>
      */
     MAGNESIUM_GLUCONATE("116126005",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Magnesium gluconate (substance)",
                         "Magnesium gluconate",
                         "Magnesium digluconat wasserfrei",
@@ -8699,7 +8702,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Magnesio idrossido.<br>
      */
     MAGNESIUM_HYDROXIDE("387337001",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Magnesium hydroxide (substance)",
                         "Magnesium hydroxide",
                         "Magnesiumhydroxid",
@@ -8712,7 +8715,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Magnesio solfato.<br>
      */
     MAGNESIUM_SULFATE("387202002",
-                      "2.16.840.1.113883.6.96",
+                      "http://snomed.info/sct",
                       "Magnesium sulfate (substance)",
                       "Magnesium sulfate",
                       "Magnesiumsulfat",
@@ -8725,7 +8728,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Mannitolo.<br>
      */
     MANNITOL("387168006",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Mannitol (substance)",
              "Mannitol",
              "Mannitol",
@@ -8738,7 +8741,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Maraviroc.<br>
      */
     MARAVIROC("429603001",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Maraviroc (substance)",
               "Maraviroc",
               "Maraviroc",
@@ -8751,7 +8754,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Mebendazolo.<br>
      */
     MEBENDAZOLE("387311004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Mebendazole (substance)",
                 "Mebendazole",
                 "Mebendazol",
@@ -8764,7 +8767,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Mebeverina.<br>
      */
     MEBEVERINE("419830007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Mebeverine (substance)",
                "Mebeverine",
                "Mebeverin",
@@ -8777,7 +8780,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Meclozina.<br>
      */
     MECLOZINE("372879002",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Meclozine (substance)",
               "Meclozine",
               "Meclozin",
@@ -8790,7 +8793,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Trigliceridi a catena media.<br>
      */
     MEDIUM_CHAIN_TRIGLYCERIDE("395781005",
-                              "2.16.840.1.113883.6.96",
+                              "http://snomed.info/sct",
                               "Medium chain triglyceride (substance)",
                               "Medium chain triglyceride",
                               "Triglyceride mittelkettige",
@@ -8803,7 +8806,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Medrossiprogesterone acetato.<br>
      */
     MEDROXYPROGESTERONE("126113007",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Medroxyprogesterone (substance)",
                         "Medroxyprogesterone",
                         "Medroxyprogesteron",
@@ -8816,7 +8819,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido mefenamico.<br>
      */
     MEFENAMIC_ACID("387185008",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Mefenamic acid (substance)",
                    "Mefenamic acid",
                    "Mefenaminsäure",
@@ -8829,7 +8832,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Meflochina.<br>
      */
     MEFLOQUINE("387505001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Mefloquine (substance)",
                "Mefloquine",
                "Mefloquin",
@@ -8842,7 +8845,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Meglumina.<br>
      */
     MEGLUMINE("769091004",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Meglumine (substance)",
               "Meglumine",
               "Meglumin",
@@ -8855,7 +8858,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Melatonina.<br>
      */
     MELATONIN("41199001",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Melatonin (substance)",
               "Melatonin",
               "Melatonin",
@@ -8868,7 +8871,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Melitracene.<br>
      */
     MELITRACEN("712683007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Melitracen (substance)",
                "Melitracen",
                "Melitracen",
@@ -8881,7 +8884,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Melperone.<br>
      */
     MELPERONE("442519006",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Melperone (substance)",
               "Melperone",
               "Melperon",
@@ -8894,7 +8897,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Melphalan.<br>
      */
     MELPHALAN("387297002",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Melphalan (substance)",
               "Melphalan",
               "Melphalan",
@@ -8907,7 +8910,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Memantina.<br>
      */
     MEMANTINE("406458000",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Memantine (substance)",
               "Memantine",
               "Memantin",
@@ -8920,7 +8923,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Mepicacaina.<br>
      */
     MEPIVACAINE("59560006",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Mepivacaine (substance)",
                 "Mepivacaine",
                 "Mepivacain",
@@ -8933,7 +8936,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Mercaptamina.<br>
      */
     MERCAPTAMINE("373457005",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Mercaptamine (substance)",
                  "Mercaptamine",
                  "Mercaptamin",
@@ -8946,7 +8949,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Meropenem.<br>
      */
     MEROPENEM("387540000",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Meropenem (substance)",
               "Meropenem",
               "Meropenem",
@@ -8959,7 +8962,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Mesalazina.<br>
      */
     MESALAZINE("387501005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Mesalazine (substance)",
                "Mesalazine",
                "Mesalazin",
@@ -8972,7 +8975,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Mesna.<br>
      */
     MESNA("386922000",
-          "2.16.840.1.113883.6.96",
+          "http://snomed.info/sct",
           "Mesna (substance)",
           "Mesna",
           "Mesna",
@@ -8985,7 +8988,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Metamizolo.<br>
      */
     METAMIZOLE("780831000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Metamizole (substance)",
                "Metamizole",
                "Metamizol",
@@ -8998,7 +9001,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Metformina.<br>
      */
     METFORMIN("372567009",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Metformin (substance)",
               "Metformin",
               "Metformin",
@@ -9011,7 +9014,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Metadone.<br>
      */
     METHADONE("387286002",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Methadone (substance)",
               "Methadone",
               "Methadon",
@@ -9024,7 +9027,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Metionina.<br>
      */
     METHIONINE("70288006",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Methionine (substance)",
                "Methionine",
                "Methionin",
@@ -9037,7 +9040,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Metotrexato.<br>
      */
     METHOTREXATE("387381009",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Methotrexate (substance)",
                  "Methotrexate",
                  "Methotrexat",
@@ -9050,7 +9053,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Metoxsalene.<br>
      */
     METHOXSALEN("41062004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Methoxsalen (substance)",
                 "Methoxsalen",
                 "Methoxsalen",
@@ -9063,7 +9066,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Metossipolietilenglicole-epoetina beta.<br>
      */
     METHOXY_POLYETHYLENE_GLYCOL_EPOETIN_BETA("425913002",
-                                             "2.16.840.1.113883.6.96",
+                                             "http://snomed.info/sct",
                                              "Methoxy polyethylene glycol-epoetin beta (substance)",
                                              "Methoxy polyethylene glycol-epoetin beta",
                                              "PEG-Epoetin beta",
@@ -9076,7 +9079,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Metildopa.<br>
      */
     METHYLDOPA_ANHYDROUS("768043006",
-                         "2.16.840.1.113883.6.96",
+                         "http://snomed.info/sct",
                          "Methyldopa anhydrous (substance)",
                          "Methyldopa anhydrous",
                          "Methyldopa",
@@ -9089,7 +9092,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Metiltioninio cloruro.<br>
      */
     METHYLENE_BLUE_STAIN("6725000",
-                         "2.16.840.1.113883.6.96",
+                         "http://snomed.info/sct",
                          "Methylene blue stain (substance)",
                          "Methylene blue stain",
                          "Methylthioninium chlorid",
@@ -9102,7 +9105,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Metilergometrina.<br>
      */
     METHYLERGOMETRINE("126074008",
-                      "2.16.840.1.113883.6.96",
+                      "http://snomed.info/sct",
                       "Methylergometrine (substance)",
                       "Methylergometrine",
                       "Methylergometrin",
@@ -9115,7 +9118,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Metilfenidato.<br>
      */
     METHYLPHENIDATE("373337007",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Methylphenidate (substance)",
                     "Methylphenidate",
                     "Methylphenidat",
@@ -9128,7 +9131,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Metilprednisolone.<br>
      */
     METHYLPREDNISOLONE("116593003",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Methylprednisolone (substance)",
                        "Methylprednisolone",
                        "Methylprednisolon",
@@ -9141,7 +9144,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Metoclopramide.<br>
      */
     METOCLOPRAMIDE("372776000",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Metoclopramide (substance)",
                    "Metoclopramide",
                    "Metoclopramid",
@@ -9154,7 +9157,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Metolazone.<br>
      */
     METOLAZONE("387123003",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Metolazone (substance)",
                "Metolazone",
                "Metolazon",
@@ -9167,7 +9170,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Metoprololo.<br>
      */
     METOPROLOL("372826007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Metoprolol (substance)",
                "Metoprolol",
                "Metoprolol",
@@ -9180,7 +9183,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Metronidazolo.<br>
      */
     METRONIDAZOLE("372602008",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Metronidazole (substance)",
                   "Metronidazole",
                   "Metronidazol",
@@ -9193,7 +9196,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Mianserina HCL.<br>
      */
     MIANSERIN_HYDROCHLORIDE("395795008",
-                            "2.16.840.1.113883.6.96",
+                            "http://snomed.info/sct",
                             "Mianserin hydrochloride (substance)",
                             "Mianserin hydrochloride",
                             "Mianserin hydrochlorid",
@@ -9206,7 +9209,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Miconazolo.<br>
      */
     MICONAZOLE("372738006",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Miconazole (substance)",
                "Miconazole",
                "Miconazol",
@@ -9219,7 +9222,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Midazolam.<br>
      */
     MIDAZOLAM("373476007",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Midazolam (substance)",
               "Midazolam",
               "Midazolam",
@@ -9232,7 +9235,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Midodrina.<br>
      */
     MIDODRINE("372504000",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Midodrine (substance)",
               "Midodrine",
               "Midodrin",
@@ -9245,7 +9248,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Miferpristone.<br>
      */
     MIFEPRISTONE("395796009",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Mifepristone (substance)",
                  "Mifepristone",
                  "Mifepriston",
@@ -9258,7 +9261,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Milrinone.<br>
      */
     MILRINONE("373441005",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Milrinone (substance)",
               "Milrinone",
               "Milrinon",
@@ -9271,7 +9274,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Minociclina.<br>
      */
     MINOCYCLINE("372653009",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Minocycline (substance)",
                 "Minocycline",
                 "Minocyclin",
@@ -9284,7 +9287,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Minoxidil.<br>
      */
     MINOXIDIL("387272001",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Minoxidil (substance)",
               "Minoxidil",
               "Minoxidil",
@@ -9297,7 +9300,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Mirabegron.<br>
      */
     MIRABEGRON("703803006",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Mirabegron (substance)",
                "Mirabegron",
                "Mirabegron",
@@ -9310,7 +9313,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Mirtazapina.<br>
      */
     MIRTAZAPINE("386847004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Mirtazapine (substance)",
                 "Mirtazapine",
                 "Mirtazapin",
@@ -9323,7 +9326,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Misoprostolo.<br>
      */
     MISOPROSTOL("387242007",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Misoprostol (substance)",
                 "Misoprostol",
                 "Misoprostol",
@@ -9336,7 +9339,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Mitomicina.<br>
      */
     MITOMYCIN("387331000",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Mitomycin (substance)",
               "Mitomycin",
               "Mitomycin",
@@ -9349,7 +9352,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Mitoxantrone.<br>
      */
     MITOXANTRONE("386913001",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Mitoxantrone (substance)",
                  "Mitoxantrone",
                  "Mitoxantron",
@@ -9362,7 +9365,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Mivacurio cloruro.<br>
      */
     MIVACURIUM_CHLORIDE("108447000",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Mivacurium chloride (substance)",
                         "Mivacurium chloride",
                         "Mivacurium chlorid",
@@ -9375,7 +9378,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Moclobemide.<br>
      */
     MOCLOBEMIDE("395800003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Moclobemide (substance)",
                 "Moclobemide",
                 "Moclobemid",
@@ -9388,7 +9391,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Modafinil.<br>
      */
     MODAFINIL("387004007",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Modafinil (substance)",
               "Modafinil",
               "Modafinil",
@@ -9401,7 +9404,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Molsidomina.<br>
      */
     MOLSIDOMINE("698196008",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Molsidomine (substance)",
                 "Molsidomine",
                 "Molsidomin",
@@ -9414,7 +9417,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Mometasone.<br>
      */
     MOMETASONE("395990009",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Mometasone (substance)",
                "Mometasone",
                "Mometason",
@@ -9427,7 +9430,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Montelukast.<br>
      */
     MONTELUKAST("373728005",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Montelukast (substance)",
                 "Montelukast",
                 "Montelukast",
@@ -9440,7 +9443,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Moroctocog alfa.<br>
      */
     MOROCTOCOG_ALFA("441764007",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Moroctocog alfa (substance)",
                     "Moroctocog alfa",
                     "Moroctocog alfa",
@@ -9453,7 +9456,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Morfina.<br>
      */
     MORPHINE("373529000",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Morphine (substance)",
              "Morphine",
              "Morphin",
@@ -9466,7 +9469,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Moxifloxacina.<br>
      */
     MOXIFLOXACIN("412439003",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Moxifloxacin (substance)",
                  "Moxifloxacin",
                  "Moxifloxacin",
@@ -9479,7 +9482,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Moxonidina.<br>
      */
     MOXONIDINE("395805008",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Moxonidine (substance)",
                "Moxonidine",
                "Moxonidin",
@@ -9492,7 +9495,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Mupirocina.<br>
      */
     MUPIROCIN("387397004",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Mupirocin (substance)",
               "Mupirocin",
               "Mupirocin",
@@ -9505,7 +9508,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Micofenolato mofetile.<br>
      */
     MYCOPHENOLATE_MOFETIL("386976000",
-                          "2.16.840.1.113883.6.96",
+                          "http://snomed.info/sct",
                           "Mycophenolate mofetil (substance)",
                           "Mycophenolate mofetil",
                           "Mycophenolat mofetil",
@@ -9518,7 +9521,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido micofenolico.<br>
      */
     MYCOPHENOLIC_ACID("409330005",
-                      "2.16.840.1.113883.6.96",
+                      "http://snomed.info/sct",
                       "Mycophenolic acid (substance)",
                       "Mycophenolic acid",
                       "Mycophenolsäure",
@@ -9531,7 +9534,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nadololo.<br>
      */
     NADOLOL("387482003",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Nadolol (substance)",
             "Nadolol",
             "Nadolol",
@@ -9544,7 +9547,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nadroparina.<br>
      */
     NADROPARINE("699946002",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Nadroparine (substance)",
                 "Nadroparine",
                 "Nadroparin",
@@ -9557,7 +9560,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nadroparina calcica.<br>
      */
     NADROPARIN_CALCIUM("698278006",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Nadroparin calcium (substance)",
                        "Nadroparin calcium",
                        "Nadroparin calcium",
@@ -9570,7 +9573,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Naftazone.<br>
      */
     NAFTAZONE("713428001",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Naftazone (substance)",
               "Naftazone",
               "Naftazon",
@@ -9583,7 +9586,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Naftidrofurile.<br>
      */
     NAFTIDROFURYL("395992001",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Naftidrofuryl (substance)",
                   "Naftidrofuryl",
                   "Naftidrofuryl",
@@ -9596,7 +9599,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nalmefene.<br>
      */
     NALMEFENE("109098006",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Nalmefene (substance)",
               "Nalmefene",
               "Nalmefen",
@@ -9609,7 +9612,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Naloxone.<br>
      */
     NALOXONE("372890007",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Naloxone (substance)",
              "Naloxone",
              "Naloxon",
@@ -9622,7 +9625,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Naltrexone.<br>
      */
     NALTREXONE("373546002",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Naltrexone (substance)",
                "Naltrexone",
                "Naltrexon",
@@ -9635,7 +9638,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nafazolina.<br>
      */
     NAPHAZOLINE("372803000",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Naphazoline (substance)",
                 "Naphazoline",
                 "Naphazolin",
@@ -9648,7 +9651,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Naprossene.<br>
      */
     NAPROXEN("372588000",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Naproxen (substance)",
              "Naproxen",
              "Naproxen",
@@ -9661,7 +9664,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Naratriptan.<br>
      */
     NARATRIPTAN("363571003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Naratriptan (substance)",
                 "Naratriptan",
                 "Naratriptan",
@@ -9674,7 +9677,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Natalizumab.<br>
      */
     NATALIZUMAB("414805007",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Natalizumab (substance)",
                 "Natalizumab",
                 "Natalizumab",
@@ -9687,7 +9690,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nateglinide.<br>
      */
     NATEGLINIDE("387070004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Nateglinide (substance)",
                 "Nateglinide",
                 "Nateglinid",
@@ -9700,7 +9703,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nebivololo.<br>
      */
     NEBIVOLOL("395808005",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Nebivolol (substance)",
               "Nebivolol",
               "Nebivolol",
@@ -9713,7 +9716,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nelfinavir.<br>
      */
     NELFINAVIR("373445001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Nelfinavir (substance)",
                "Nelfinavir",
                "Nelfinavir",
@@ -9726,7 +9729,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Neomicina.<br>
      */
     NEOMYCIN("373528008",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Neomycin (substance)",
              "Neomycin",
              "Neomycin",
@@ -9739,7 +9742,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Neostigmina.<br>
      */
     NEOSTIGMINE("373346001",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Neostigmine (substance)",
                 "Neostigmine",
                 "Neostigmin",
@@ -9752,7 +9755,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nevirapina.<br>
      */
     NEVIRAPINE("386898005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Nevirapine (substance)",
                "Nevirapine",
                "Nevirapin",
@@ -9765,7 +9768,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nicardipina.<br>
      */
     NICARDIPINE("372502001",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Nicardipine (substance)",
                 "Nicardipine",
                 "Nicardipin",
@@ -9778,7 +9781,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nicorandil.<br>
      */
     NICORANDIL("395809002",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Nicorandil (substance)",
                "Nicorandil",
                "Nicorandil",
@@ -9791,7 +9794,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nicotinamide.<br>
      */
     NICOTINAMIDE("173196005",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Nicotinamide (substance)",
                  "Nicotinamide",
                  "Nicotinamid",
@@ -9804,7 +9807,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nicotina.<br>
      */
     NICOTINE("68540007",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Nicotine (substance)",
              "Nicotine",
              "Nicotin",
@@ -9817,7 +9820,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nifedipina.<br>
      */
     NIFEDIPINE("387490003",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Nifedipine (substance)",
                "Nifedipine",
                "Nifedipin",
@@ -9830,7 +9833,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nimesulide.<br>
      */
     NIMESULIDE("703479000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Nimesulide (substance)",
                "Nimesulide",
                "Nimesulid",
@@ -9843,7 +9846,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nimodipina.<br>
      */
     NIMODIPINE("387502003",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Nimodipine (substance)",
                "Nimodipine",
                "Nimodipin",
@@ -9856,7 +9859,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nintedanib.<br>
      */
     NINTEDANIB("712494002",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Nintedanib (substance)",
                "Nintedanib",
                "Nintedanib",
@@ -9869,7 +9872,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nitazoxanide.<br>
      */
     NITAZOXANIDE("407148001",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Nitazoxanide (substance)",
                  "Nitazoxanide",
                  "Nitazoxanid",
@@ -9882,7 +9885,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nitisinone.<br>
      */
     NITISINONE("385996000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Nitisinone (substance)",
                "Nitisinone",
                "Nitisinon",
@@ -9895,7 +9898,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nitrazepam.<br>
      */
     NITRAZEPAM("387449001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Nitrazepam (substance)",
                "Nitrazepam",
                "Nitrazepam",
@@ -9908,7 +9911,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nitrendipina.<br>
      */
     NITRENDIPINE("444757009",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Nitrendipine (substance)",
                  "Nitrendipine",
                  "Nitrendipin",
@@ -9921,7 +9924,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nitrofurantoina.<br>
      */
     NITROFURANTOIN("373543005",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Nitrofurantoin (substance)",
                    "Nitrofurantoin",
                    "Nitrofurantoin",
@@ -9934,7 +9937,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nivolumab.<br>
      */
     NIVOLUMAB("704191007",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Nivolumab (substance)",
               "Nivolumab",
               "Nivolumab",
@@ -9947,7 +9950,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nomegestrolo acetato.<br>
      */
     NOMEGESTROL_ACETATE("698277001",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Nomegestrol acetate (substance)",
                         "Nomegestrol acetate",
                         "Nomegestrol acetat",
@@ -9960,7 +9963,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Noradrenalina (norepinefrina).<br>
      */
     NOREPINEPHRINE("45555007",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Norepinephrine (substance)",
                    "Norepinephrine",
                    "Noradrenalin (Norepinephrin)",
@@ -9973,7 +9976,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Noretisterone.<br>
      */
     NORETHISTERONE("126102009",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Norethisterone (substance)",
                    "Norethisterone",
                    "Norethisteron",
@@ -9986,7 +9989,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Norfloxacina.<br>
      */
     NORFLOXACIN("387271008",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Norfloxacin (substance)",
                 "Norfloxacin",
                 "Norfloxacin",
@@ -9999,7 +10002,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Norgestimato.<br>
      */
     NORGESTIMATE("126115000",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Norgestimate (substance)",
                  "Norgestimate",
                  "Norgestimat",
@@ -10012,7 +10015,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Norgestrel.<br>
      */
     NORGESTREL("126106007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Norgestrel (substance)",
                "Norgestrel",
                "Norgestrel",
@@ -10025,7 +10028,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Immunoglobulina umana normale.<br>
      */
     NORMAL_IMMUNOGLOBULIN_HUMAN("713355009",
-                                "2.16.840.1.113883.6.96",
+                                "http://snomed.info/sct",
                                 "Normal immunoglobulin human (substance)",
                                 "Normal immunoglobulin human",
                                 "Immunglobulin vom Menschen",
@@ -10038,7 +10041,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nortriptilina.<br>
      */
     NORTRIPTYLINE("372652004",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Nortriptyline (substance)",
                   "Nortriptyline",
                   "Nortriptylin",
@@ -10051,7 +10054,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Noscapina.<br>
      */
     NOSCAPINE("387437002",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Noscapine (substance)",
               "Noscapine",
               "Noscapin",
@@ -10064,7 +10067,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Nistatina.<br>
      */
     NYSTATIN("387048002",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Nystatin (substance)",
              "Nystatin",
              "Nystatin",
@@ -10077,7 +10080,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido obeticolico.<br>
      */
     OBETICHOLIC_ACID("720257002",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Obeticholic acid (substance)",
                      "Obeticholic acid",
                      "Obeticholsäure",
@@ -10090,7 +10093,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: obidoxima cloruro.<br>
      */
     OBIDOXIME_CHLORIDE("1156231009",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Obidoxime chloride (substance)",
                        "Obidoxime chloride",
                        "Obidoxim chlorid",
@@ -10103,7 +10106,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Obinutuzumab.<br>
      */
     OBINUTUZUMAB("710287009",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Obinutuzumab (substance)",
                  "Obinutuzumab",
                  "Obinutuzumab",
@@ -10116,7 +10119,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ocrelizumab.<br>
      */
     OCRELIZUMAB("733464008",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Ocrelizumab (substance)",
                 "Ocrelizumab",
                 "Ocrelizumab",
@@ -10129,7 +10132,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Octenidina.<br>
      */
     OCTENIDINE("430477008",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Octenidine (substance)",
                "Octenidine",
                "Octenidin",
@@ -10142,7 +10145,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Octocog alfa.<br>
      */
     OCTOCOG_ALFA("418888003",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Octocog alfa (substance)",
                  "Octocog alfa",
                  "Octocog alfa",
@@ -10155,7 +10158,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Octreotide.<br>
      */
     OCTREOTIDE("109053000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Octreotide (substance)",
                "Octreotide",
                "Octreotid",
@@ -10168,7 +10171,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ofloxacina.<br>
      */
     OFLOXACIN("387551000",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Ofloxacin (substance)",
               "Ofloxacin",
               "Ofloxacin",
@@ -10181,7 +10184,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Olanzapina.<br>
      */
     OLANZAPINE("386849001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Olanzapine (substance)",
                "Olanzapine",
                "Olanzapin",
@@ -10194,7 +10197,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Olanzapina embonato.<br>
      */
     OLANZAPINE_EMBONATE("725800004",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Olanzapine embonate (substance)",
                         "Olanzapine embonate",
                         "Olanzapin embonat-1-Wasser",
@@ -10207,7 +10210,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Oliva olio.<br>
      */
     OLIVE_OIL("41834005",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Olive oil (substance)",
               "Olive oil",
               "Olivenöl",
@@ -10220,7 +10223,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Olmesartan.<br>
      */
     OLMESARTAN("412259001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Olmesartan (substance)",
                "Olmesartan",
                "Olmesartan",
@@ -10233,7 +10236,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Olodaterolo.<br>
      */
     OLODATEROL("704459002",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Olodaterol (substance)",
                "Olodaterol",
                "Olodaterol",
@@ -10246,7 +10249,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Omalizumab.<br>
      */
     OMALIZUMAB("406443008",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Omalizumab (substance)",
                "Omalizumab",
                "Omalizumab",
@@ -10259,7 +10262,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acidi grassi omega 3.<br>
      */
     OMEGA_3_FATTY_ACID("226365003",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Omega 3 fatty acid (substance)",
                        "Omega 3 fatty acid",
                        "Omega-3-Fettsäuren",
@@ -10272,7 +10275,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Omeprazolo.<br>
      */
     OMEPRAZOLE("387137007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Omeprazole (substance)",
                "Omeprazole",
                "Omeprazol",
@@ -10285,7 +10288,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ondansetron.<br>
      */
     ONDANSETRON("372487007",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Ondansetron (substance)",
                 "Ondansetron",
                 "Ondansetron",
@@ -10298,7 +10301,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: opipramolo.<br>
      */
     OPIPRAMOL("1156223004",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Opipramol (substance)",
               "Opipramol",
               "Opipramol",
@@ -10311,7 +10314,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Orlistat.<br>
      */
     ORLISTAT("387007000",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Orlistat (substance)",
              "Orlistat",
              "Orlistat",
@@ -10324,7 +10327,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ornidazolo.<br>
      */
     ORNIDAZOLE("442924004",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Ornidazole (substance)",
                "Ornidazole",
                "Ornidazol",
@@ -10337,7 +10340,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Oseltamivir.<br>
      */
     OSELTAMIVIR("412261005",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Oseltamivir (substance)",
                 "Oseltamivir",
                 "Oseltamivir",
@@ -10350,7 +10353,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Oxaliplatino.<br>
      */
     OXALIPLATIN("395814003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Oxaliplatin (substance)",
                 "Oxaliplatin",
                 "Oxaliplatin",
@@ -10363,7 +10366,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Oxandrolone.<br>
      */
     OXANDROLONE("126128007",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Oxandrolone (substance)",
                 "Oxandrolone",
                 "Oxandrolon",
@@ -10376,7 +10379,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Oxazepam.<br>
      */
     OXAZEPAM("387455006",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Oxazepam (substance)",
              "Oxazepam",
              "Oxazepam",
@@ -10389,7 +10392,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Oxcarbazepina.<br>
      */
     OXCARBAZEPINE("387025007",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Oxcarbazepine (substance)",
                   "Oxcarbazepine",
                   "Oxcarbazepin",
@@ -10402,7 +10405,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Oxomemazina.<br>
      */
     OXOMEMAZINE("772837001",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Oxomemazine (substance)",
                 "Oxomemazine",
                 "Oxomemazin",
@@ -10415,7 +10418,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Oxibuprocaina.<br>
      */
     OXYBUPROCAINE("52140009",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Oxybuprocaine (substance)",
                   "Oxybuprocaine",
                   "Oxybuprocain",
@@ -10428,7 +10431,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ossibutinina.<br>
      */
     OXYBUTYNIN("372717000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Oxybutynin (substance)",
                "Oxybutynin",
                "Oxybutynin",
@@ -10441,7 +10444,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ossicodone.<br>
      */
     OXYCODONE("55452001",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Oxycodone (substance)",
               "Oxycodone",
               "Oxycodon",
@@ -10454,7 +10457,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ossimetazolina.<br>
      */
     OXYMETAZOLINE("387158001",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Oxymetazoline (substance)",
                   "Oxymetazoline",
                   "Oxymetazolin",
@@ -10467,7 +10470,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ossitetraciclina.<br>
      */
     OXYTETRACYCLINE("372675006",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Oxytetracycline (substance)",
                     "Oxytetracycline",
                     "Oxytetracyclin",
@@ -10480,7 +10483,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ossitocina.<br>
      */
     OXYTOCIN("112115002",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Oxytocin (substance)",
              "Oxytocin",
              "Oxytocin",
@@ -10493,7 +10496,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Paclitaxel.<br>
      */
     PACLITAXEL("387374002",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Paclitaxel (substance)",
                "Paclitaxel",
                "Paclitaxel",
@@ -10506,7 +10509,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Paliperidone.<br>
      */
     PALIPERIDONE("426276000",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Paliperidone (substance)",
                  "Paliperidone",
                  "Paliperidon",
@@ -10519,7 +10522,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Palivizumab.<br>
      */
     PALIVIZUMAB("386900007",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Palivizumab (substance)",
                 "Palivizumab",
                 "Palivizumab",
@@ -10532,7 +10535,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Palonosetron.<br>
      */
     PALONOSETRON("404852008",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Palonosetron (substance)",
                  "Palonosetron",
                  "Palonosetron",
@@ -10545,7 +10548,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Pancuronio.<br>
      */
     PANCURONIUM("373738000",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Pancuronium (substance)",
                 "Pancuronium",
                 "Pancuronium",
@@ -10558,7 +10561,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Pantoprazolo.<br>
      */
     PANTOPRAZOLE("395821003",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Pantoprazole (substance)",
                  "Pantoprazole",
                  "Pantoprazol",
@@ -10571,7 +10574,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido pantotenico.<br>
      */
     PANTOTHENIC_ACID("86431009",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Pantothenic acid (substance)",
                      "Pantothenic acid",
                      "Pantothensäure",
@@ -10584,7 +10587,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Papaverina.<br>
      */
     PAPAVERINE("372784001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Papaverine (substance)",
                "Papaverine",
                "Papaverin",
@@ -10597,7 +10600,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Paracetamolo.<br>
      */
     PARACETAMOL("387517004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Paracetamol (substance)",
                 "Paracetamol",
                 "Paracetamol",
@@ -10610,7 +10613,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Paraffina.<br>
      */
     PARAFFIN("255667006",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Paraffin (substance)",
              "Paraffin",
              "Paraffin",
@@ -10623,7 +10626,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Paracalcitolo.<br>
      */
     PARICALCITOL("108946001",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Paricalcitol (substance)",
                  "Paricalcitol",
                  "Paricalcitol",
@@ -10636,7 +10639,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Paroxetina.<br>
      */
     PAROXETINE("372595009",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Paroxetine (substance)",
                "Paroxetine",
                "Paroxetin",
@@ -10649,7 +10652,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Pegaspargase.<br>
      */
     PEGASPARGASE("108814000",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Pegaspargase (substance)",
                  "Pegaspargase",
                  "Pegaspargase",
@@ -10662,7 +10665,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Pegfilgrastim.<br>
      */
     PEGFILGRASTIM("385544005",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Pegfilgrastim (substance)",
                   "Pegfilgrastim",
                   "Pegfilgrastim",
@@ -10675,7 +10678,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Peginterferone alfa-2a.<br>
      */
     PEGINTERFERON_ALFA_2A("421559001",
-                          "2.16.840.1.113883.6.96",
+                          "http://snomed.info/sct",
                           "Peginterferon alfa-2a (substance)",
                           "Peginterferon alfa-2a",
                           "Peginterferon alfa-2a",
@@ -10688,7 +10691,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Pembrolizumab.<br>
      */
     PEMBROLIZUMAB("716125002",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Pembrolizumab (substance)",
                   "Pembrolizumab",
                   "Pembrolizumab",
@@ -10701,7 +10704,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Pemetrexed.<br>
      */
     PEMETREXED("409159000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Pemetrexed (substance)",
                "Pemetrexed",
                "Pemetrexed",
@@ -10714,7 +10717,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Penciclovir.<br>
      */
     PENCICLOVIR("386939003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Penciclovir (substance)",
                 "Penciclovir",
                 "Penciclovir",
@@ -10727,7 +10730,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Pentamidina.<br>
      */
     PENTAMIDINE_ISETHIONATE("16826009",
-                            "2.16.840.1.113883.6.96",
+                            "http://snomed.info/sct",
                             "Pentamidine isethionate (substance)",
                             "Pentamidine isethionate",
                             "Pentamidin diisetionat",
@@ -10740,7 +10743,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Pentossifillina.<br>
      */
     PENTOXIFYLLINE("387522004",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Pentoxifylline (substance)",
                    "Pentoxifylline",
                    "Pentoxifyllin",
@@ -10753,7 +10756,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Perampanel.<br>
      */
     PERAMPANEL("703127006",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Perampanel (substance)",
                "Perampanel",
                "Perampanel",
@@ -10766,7 +10769,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Perindopril.<br>
      */
     PERINDOPRIL("372916001",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Perindopril (substance)",
                 "Perindopril",
                 "Perindopril",
@@ -10779,7 +10782,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Permetrina.<br>
      */
     PERMETHRIN("410457007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Permethrin (substance)",
                "Permethrin",
                "Permethrin",
@@ -10792,7 +10795,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Pertuzumab.<br>
      */
     PERTUZUMAB("704226002",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Pertuzumab (substance)",
                "Pertuzumab",
                "Pertuzumab",
@@ -10805,7 +10808,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Petidina.<br>
      */
     PETHIDINE("387298007",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Pethidine (substance)",
               "Pethidine",
               "Pethidin",
@@ -10818,7 +10821,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fenazone.<br>
      */
     PHENAZONE("55486005",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Phenazone (substance)",
               "Phenazone",
               "Phenazon",
@@ -10831,7 +10834,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Feniramina.<br>
      */
     PHENIRAMINE("373500002",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Pheniramine (substance)",
                 "Pheniramine",
                 "Pheniramin",
@@ -10844,7 +10847,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fenobarbital.<br>
      */
     PHENOBARBITAL("373505007",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Phenobarbital (substance)",
                   "Phenobarbital",
                   "Phenobarbital",
@@ -10857,7 +10860,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fenossibenzamina.<br>
      */
     PHENOXYBENZAMINE("372838003",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Phenoxybenzamine (substance)",
                      "Phenoxybenzamine",
                      "Phenoxybenzamin",
@@ -10870,7 +10873,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fenossimetilpenicillina potassica.<br>
      */
     PHENOXYMETHYLPENICILLIN_POTASSIUM("56723006",
-                                      "2.16.840.1.113883.6.96",
+                                      "http://snomed.info/sct",
                                       "Phenoxymethylpenicillin potassium (substance)",
                                       "Phenoxymethylpenicillin potassium",
                                       "Phenoxymethylpenicillin kalium",
@@ -10883,7 +10886,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fenprocumone.<br>
      */
     PHENPROCOUMON("59488002",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Phenprocoumon (substance)",
                   "Phenprocoumon",
                   "Phenprocoumon",
@@ -10896,7 +10899,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fentolamina.<br>
      */
     PHENTOLAMINE("372863003",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Phentolamine (substance)",
                  "Phentolamine",
                  "Phentolamin",
@@ -10909,7 +10912,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fenilalanina.<br>
      */
     PHENYLALANINE("63004003",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Phenylalanine (substance)",
                   "Phenylalanine",
                   "Phenylalanin",
@@ -10922,7 +10925,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fenilefrina.<br>
      */
     PHENYLEPHRINE("372771005",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Phenylephrine (substance)",
                   "Phenylephrine",
                   "Phenylephrin",
@@ -10935,7 +10938,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fenitoina.<br>
      */
     PHENYTOIN("387220006",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Phenytoin (substance)",
               "Phenytoin",
               "Phenytoin",
@@ -10948,7 +10951,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Folcodina.<br>
      */
     PHOLCODINE("396486005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Pholcodine (substance)",
                "Pholcodine",
                "Pholcodin",
@@ -10961,7 +10964,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fosfolipidi.<br>
      */
     PHOSPHOLIPID("78447009",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Phospholipid (substance)",
                  "Phospholipid",
                  "Phospholipide",
@@ -10974,7 +10977,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fisostigmina.<br>
      */
     PHYSOSTIGMINE("373347005",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Physostigmine (substance)",
                   "Physostigmine",
                   "Physostigmin",
@@ -10987,7 +10990,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Fitomenadione (vitamina K1).<br>
      */
     PHYTOMENADIONE("66656000",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Phytomenadione (substance)",
                    "Phytomenadione",
                    "Phytomenadion (Vitamin K1)",
@@ -11000,7 +11003,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Pilocarpina.<br>
      */
     PILOCARPINE("372895002",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Pilocarpine (substance)",
                 "Pilocarpine",
                 "Pilocarpin",
@@ -11013,7 +11016,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Pimecrolimus.<br>
      */
     PIMECROLIMUS("385580005",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Pimecrolimus (substance)",
                  "Pimecrolimus",
                  "Pimecrolimus",
@@ -11026,7 +11029,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Pioglitazone.<br>
      */
     PIOGLITAZONE("395828009",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Pioglitazone (substance)",
                  "Pioglitazone",
                  "Pioglitazon",
@@ -11039,7 +11042,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Pipamperone.<br>
      */
     PIPAMPERONE("703362007",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Pipamperone (substance)",
                 "Pipamperone",
                 "Pipamperon",
@@ -11052,7 +11055,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Piperacillina.<br>
      */
     PIPERACILLIN("372836004",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Piperacillin (substance)",
                  "Piperacillin",
                  "Piperacillin",
@@ -11065,7 +11068,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Piracetam.<br>
      */
     PIRACETAM("395833008",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Piracetam (substance)",
               "Piracetam",
               "Piracetam",
@@ -11078,7 +11081,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Piretanide.<br>
      */
     PIRETANIDE("419451002",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Piretanide (substance)",
                "Piretanide",
                "Piretanid",
@@ -11091,7 +11094,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Piroxicam.<br>
      */
     PIROXICAM("387153005",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Piroxicam (substance)",
               "Piroxicam",
               "Piroxicam",
@@ -11104,7 +11107,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Pitavastatina.<br>
      */
     PITAVASTATIN("443586000",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Pitavastatin (substance)",
                  "Pitavastatin",
                  "Pitavastatin",
@@ -11117,7 +11120,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ormone luteinizzante umano, hLH.<br>
      */
     PITUITARY_LUTEINIZING_HORMONE("64182005",
-                                  "2.16.840.1.113883.6.96",
+                                  "http://snomed.info/sct",
                                   "Pituitary luteinizing hormone (substance)",
                                   "Pituitary luteinizing hormone",
                                   "Lutropin (hLH)",
@@ -11130,7 +11133,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Plerixafor.<br>
      */
     PLERIXAFOR("442264009",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Plerixafor (substance)",
                "Plerixafor",
                "Plerixafor",
@@ -11143,7 +11146,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Poliesanide.<br>
      */
     POLIHEXANIDE("421952002",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Polihexanide (substance)",
                  "Polihexanide",
                  "Polihexanid",
@@ -11156,7 +11159,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Polimixina B.<br>
      */
     POLYMYXIN("373224006",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Polymyxin (substance)",
               "Polymyxin",
               "Polymyxin B",
@@ -11169,7 +11172,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Posaconazolo.<br>
      */
     POSACONAZOLE("421747003",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Posaconazole (substance)",
                  "Posaconazole",
                  "Posaconazol",
@@ -11182,7 +11185,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Potassio acetato.<br>
      */
     POTASSIUM_ACETATE("52394008",
-                      "2.16.840.1.113883.6.96",
+                      "http://snomed.info/sct",
                       "Potassium acetate (substance)",
                       "Potassium acetate",
                       "Kaliumacetat",
@@ -11195,7 +11198,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Potassio cloruro.<br>
      */
     POTASSIUM_CHLORIDE("8631001",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Potassium chloride (substance)",
                        "Potassium chloride",
                        "Kaliumchlorid",
@@ -11208,7 +11211,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Potassio citrato (E332).<br>
      */
     POTASSIUM_CITRATE("387450001",
-                      "2.16.840.1.113883.6.96",
+                      "http://snomed.info/sct",
                       "Potassium citrate (substance)",
                       "Potassium citrate",
                       "Kalium citrat (E332)",
@@ -11221,7 +11224,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Potassio gluconato.<br>
      */
     POTASSIUM_GLUCONATE("89219006",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Potassium gluconate (substance)",
                         "Potassium gluconate",
                         "Kalium D-gluconat wasserfrei",
@@ -11234,7 +11237,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Potassio permanganato.<br>
      */
     POTASSIUM_PERMANGANATE("4681002",
-                           "2.16.840.1.113883.6.96",
+                           "http://snomed.info/sct",
                            "Potassium permanganate (substance)",
                            "Potassium permanganate",
                            "Kaliumpermanganat",
@@ -11247,7 +11250,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Potassio fosfato.<br>
      */
     POTASSIUM_PHOSPHATE("80916004",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Potassium phosphate (substance)",
                         "Potassium phosphate",
                         "Kalium phosphat",
@@ -11260,7 +11263,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Iodopovidone.<br>
      */
     POVIDONE_IODINE("386989006",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Povidone iodine (substance)",
                     "Povidone iodine",
                     "Povidon iod",
@@ -11273,7 +11276,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Pramipexolo.<br>
      */
     PRAMIPEXOLE("386852009",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Pramipexole (substance)",
                 "Pramipexole",
                 "Pramipexol",
@@ -11286,7 +11289,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Prasugrel.<br>
      */
     PRASUGREL("443129001",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Prasugrel (substance)",
               "Prasugrel",
               "Prasugrel",
@@ -11299,7 +11302,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Pravastatina.<br>
      */
     PRAVASTATIN("373566006",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Pravastatin (substance)",
                 "Pravastatin",
                 "Pravastatin",
@@ -11312,7 +11315,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Prazepam.<br>
      */
     PRAZEPAM("387417001",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Prazepam (substance)",
              "Prazepam",
              "Prazepam",
@@ -11325,7 +11328,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Praziquantel.<br>
      */
     PRAZIQUANTEL("387310003",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Praziquantel (substance)",
                  "Praziquantel",
                  "Praziquantel",
@@ -11338,7 +11341,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Prednicarbato.<br>
      */
     PREDNICARBATE("126086006",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Prednicarbate (substance)",
                   "Prednicarbate",
                   "Prednicarbat",
@@ -11351,7 +11354,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Prednisolone.<br>
      */
     PREDNISOLONE("116601002",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Prednisolone (substance)",
                  "Prednisolone",
                  "Prednisolon",
@@ -11364,7 +11367,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Prednisone.<br>
      */
     PREDNISONE("116602009",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Prednisone (substance)",
                "Prednisone",
                "Prednison",
@@ -11377,7 +11380,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Pregabalin.<br>
      */
     PREGABALIN("415160008",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Pregabalin (substance)",
                "Pregabalin",
                "Pregabalin",
@@ -11390,7 +11393,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Prilocaina.<br>
      */
     PRILOCAINE("387107003",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Prilocaine (substance)",
                "Prilocaine",
                "Prilocain",
@@ -11403,7 +11406,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Primachina.<br>
      */
     PRIMAQUINE("429663004",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Primaquine (substance)",
                "Primaquine",
                "Primaquin",
@@ -11416,7 +11419,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Primidone.<br>
      */
     PRIMIDONE("387256009",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Primidone (substance)",
               "Primidone",
               "Primidon",
@@ -11429,7 +11432,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Probenecid.<br>
      */
     PROBENECID("387365004",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Probenecid (substance)",
                "Probenecid",
                "Probenecid",
@@ -11442,7 +11445,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Procainamide.<br>
      */
     PROCAINAMIDE("372589008",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Procainamide (substance)",
                  "Procainamide",
                  "Procainamid",
@@ -11455,7 +11458,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Procaina.<br>
      */
     PROCAINE("387238009",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Procaine (substance)",
              "Procaine",
              "Procain",
@@ -11468,7 +11471,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Prociclidina.<br>
      */
     PROCYCLIDINE("387247001",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Procyclidine (substance)",
                  "Procyclidine",
                  "Procyclidin",
@@ -11481,7 +11484,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Progesterone.<br>
      */
     PROGESTERONE("16683002",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Progesterone (substance)",
                  "Progesterone",
                  "Progesteron",
@@ -11494,7 +11497,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Proguanil.<br>
      */
     PROGUANIL("387094004",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Proguanil (substance)",
               "Proguanil",
               "Proguanil",
@@ -11507,7 +11510,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Prolina.<br>
      */
     PROLINE("52541003",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Proline (substance)",
             "Proline",
             "Prolin",
@@ -11520,7 +11523,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Promazina.<br>
      */
     PROMAZINE_HYDROCHLORIDE("79135001",
-                            "2.16.840.1.113883.6.96",
+                            "http://snomed.info/sct",
                             "Promazine hydrochloride (substance)",
                             "Promazine hydrochloride",
                             "Promazin hydrochlorid",
@@ -11533,7 +11536,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Prometazina.<br>
      */
     PROMETHAZINE("372871004",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Promethazine (substance)",
                  "Promethazine",
                  "Promethazin",
@@ -11546,7 +11549,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Propafenone.<br>
      */
     PROPAFENONE("372910007",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Propafenone (substance)",
                 "Propafenone",
                 "Propafenon",
@@ -11559,7 +11562,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Propofol.<br>
      */
     PROPOFOL("387423006",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Propofol (substance)",
              "Propofol",
              "Propofol",
@@ -11572,7 +11575,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Propranololo.<br>
      */
     PROPRANOLOL("372772003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Propranolol (substance)",
                 "Propranolol",
                 "Propranolol",
@@ -11585,7 +11588,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Propifenazone.<br>
      */
     PROPYPHENAZONE("699188007",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Propyphenazone (substance)",
                    "Propyphenazone",
                    "Propyphenazon",
@@ -11598,7 +11601,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Protamina.<br>
      */
     PROTAMINE("372630008",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Protamine (substance)",
               "Protamine",
               "Protamin",
@@ -11611,7 +11614,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Proteina C (umana).<br>
      */
     PROTEIN_C("25525005",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Protein C (substance)",
               "Protein C",
               "Protein C (human)",
@@ -11624,7 +11627,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Proteina S (umana).<br>
      */
     PROTEIN_S("56898001",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Protein S (substance)",
               "Protein S",
               "Protein S (human)",
@@ -11637,7 +11640,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Protionamide.<br>
      */
     PROTIONAMIDE("703589003",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Protionamide (substance)",
                  "Protionamide",
                  "Protionamid",
@@ -11650,7 +11653,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Protirelina.<br>
      */
     PROTIRELINE("412495007",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Protireline (substance)",
                 "Protireline",
                 "Protirelin",
@@ -11663,7 +11666,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Prucalopride.<br>
      */
     PRUCALOPRIDE("699273008",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Prucalopride (substance)",
                  "Prucalopride",
                  "Prucaloprid",
@@ -11676,7 +11679,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Pseudoefedrina.<br>
      */
     PSEUDOEPHEDRINE("372900003",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Pseudoephedrine (substance)",
                     "Pseudoephedrine",
                     "Pseudoephedrin",
@@ -11689,7 +11692,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Pirazinamide.<br>
      */
     PYRAZINAMIDE("387076005",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Pyrazinamide (substance)",
                  "Pyrazinamide",
                  "Pyrazinamid",
@@ -11702,7 +11705,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Piridostigmina bromuro.<br>
      */
     PYRIDOSTIGMINE_BROMIDE("34915005",
-                           "2.16.840.1.113883.6.96",
+                           "http://snomed.info/sct",
                            "Pyridostigmine bromide (substance)",
                            "Pyridostigmine bromide",
                            "Pyridostigmin bromid",
@@ -11715,7 +11718,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Piridossal fosfato.<br>
      */
     PYRIDOXAL_PHOSPHATE("259663004",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Pyridoxal phosphate (substance)",
                         "Pyridoxal phosphate",
                         "Pyridoxal-5-phosphat",
@@ -11728,7 +11731,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Piridossina (vitamina B6).<br>
      */
     PYRIDOXINE("430469009",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Pyridoxine (substance)",
                "Pyridoxine",
                "Pyridoxin (Vitamin B6)",
@@ -11741,7 +11744,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Pirimetamina.<br>
      */
     PYRIMETHAMINE("373769001",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Pyrimethamine (substance)",
                   "Pyrimethamine",
                   "Pyrimethamin",
@@ -11754,7 +11757,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Quetiapina.<br>
      */
     QUETIAPINE("386850001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Quetiapine (substance)",
                "Quetiapine",
                "Quetiapin",
@@ -11767,7 +11770,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Quinapril.<br>
      */
     QUINAPRIL("386874003",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Quinapril (substance)",
               "Quinapril",
               "Quinapril",
@@ -11780,7 +11783,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Chinina.<br>
      */
     QUININE("373497008",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Quinine (substance)",
             "Quinine",
             "Chinin",
@@ -11793,7 +11796,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Rabeprazolo.<br>
      */
     RABEPRAZOLE("422225001",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Rabeprazole (substance)",
                 "Rabeprazole",
                 "Rabeprazol",
@@ -11806,7 +11809,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Immunoglobulina umana antirabbica.<br>
      */
     RABIES_HUMAN_IMMUNE_GLOBULIN("422303009",
-                                 "2.16.840.1.113883.6.96",
+                                 "http://snomed.info/sct",
                                  "Rabies human immune globulin (substance)",
                                  "Rabies human immune globulin",
                                  "Tollwut-Immunglobulin vom Menschen",
@@ -11819,7 +11822,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Raloxifene.<br>
      */
     RALOXIFENE("109029006",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Raloxifene (substance)",
                "Raloxifene",
                "Raloxifen",
@@ -11832,7 +11835,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Raltegravir.<br>
      */
     RALTEGRAVIR("429707008",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Raltegravir (substance)",
                 "Raltegravir",
                 "Raltegravir",
@@ -11845,7 +11848,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Raltitrexed.<br>
      */
     RALTITREXED("395857008",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Raltitrexed (substance)",
                 "Raltitrexed",
                 "Raltitrexed",
@@ -11858,7 +11861,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ramipril.<br>
      */
     RAMIPRIL("386872004",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Ramipril (substance)",
              "Ramipril",
              "Ramipril",
@@ -11871,7 +11874,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ramucirumab.<br>
      */
     RAMUCIRUMAB("704259004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Ramucirumab (substance)",
                 "Ramucirumab",
                 "Ramucirumab",
@@ -11884,7 +11887,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ranitidina.<br>
      */
     RANITIDINE("372755005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Ranitidine (substance)",
                "Ranitidine",
                "Ranitidin",
@@ -11897,7 +11900,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ranolazina.<br>
      */
     RANOLAZINE("420365007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Ranolazine (substance)",
                "Ranolazine",
                "Ranolazin",
@@ -11910,7 +11913,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Rasagilina.<br>
      */
     RASAGILINE("418734001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Rasagiline (substance)",
                "Rasagiline",
                "Rasagilin",
@@ -11923,7 +11926,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Rasburicase.<br>
      */
     RASBURICASE("395858003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Rasburicase (substance)",
                 "Rasburicase",
                 "Rasburicase",
@@ -11936,7 +11939,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Reboxetina.<br>
      */
     REBOXETINE("395859006",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Reboxetine (substance)",
                "Reboxetine",
                "Reboxetin",
@@ -11949,7 +11952,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Remifentanil.<br>
      */
     REMIFENTANIL("386839004",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Remifentanil (substance)",
                  "Remifentanil",
                  "Remifentanil",
@@ -11962,7 +11965,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Repaglinide.<br>
      */
     REPAGLINIDE("386964000",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Repaglinide (substance)",
                 "Repaglinide",
                 "Repaglinid",
@@ -11975,7 +11978,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Retigabina.<br>
      */
     RETIGABINE("699271005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Retigabine (substance)",
                "Retigabine",
                "Retigabin",
@@ -11988,7 +11991,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Retinolo (vitamina A).<br>
      */
     RETINOL("82622003",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Retinol (substance)",
             "Retinol",
             "Retinol (Vitamin A)",
@@ -12001,7 +12004,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ribavirina.<br>
      */
     RIBAVIRIN("387188005",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Ribavirin (substance)",
               "Ribavirin",
               "Ribavirin",
@@ -12014,7 +12017,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Riboflavina (vitamina B2, E 101).<br>
      */
     RIBOFLAVIN("13235001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Riboflavin (substance)",
                "Riboflavin",
                "Riboflavin (Vitamin B2, E101)",
@@ -12027,7 +12030,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Rifabutina.<br>
      */
     RIFABUTIN("386893001",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Rifabutin (substance)",
               "Rifabutin",
               "Rifabutin",
@@ -12040,7 +12043,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Rifampicina.<br>
      */
     RIFAMPICIN("387159009",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Rifampicin (substance)",
                "Rifampicin",
                "Rifampicin",
@@ -12053,7 +12056,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Rifaximina.<br>
      */
     RIFAXIMIN("412553001",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Rifaximin (substance)",
               "Rifaximin",
               "Rifaximin",
@@ -12066,7 +12069,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Rilpivirina.<br>
      */
     RILPIVIRINE("703123005",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Rilpivirine (substance)",
                 "Rilpivirine",
                 "Rilpivirin",
@@ -12079,7 +12082,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Riluzolo.<br>
      */
     RILUZOLE("386980005",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Riluzole (substance)",
              "Riluzole",
              "Riluzol",
@@ -12092,7 +12095,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Rimexolone.<br>
      */
     RIMEXOLONE("387046003",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Rimexolone (substance)",
                "Rimexolone",
                "Rimexolon",
@@ -12105,7 +12108,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Riociguat.<br>
      */
     RIOCIGUAT("713333001",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Riociguat (substance)",
               "Riociguat",
               "Riociguat",
@@ -12118,7 +12121,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sodio risedronato.<br>
      */
     RISEDRONATE_SODIUM("387064005",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Risedronate sodium (substance)",
                        "Risedronate sodium",
                        "Risedronat natrium",
@@ -12131,7 +12134,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido risedronico.<br>
      */
     RISEDRONIC_ACID("768539002",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Risedronic acid (substance)",
                     "Risedronic acid",
                     "Risedronsäure",
@@ -12144,7 +12147,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Risperidone.<br>
      */
     RISPERIDONE("386840002",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Risperidone (substance)",
                 "Risperidone",
                 "Risperidon",
@@ -12157,7 +12160,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ritonavir.<br>
      */
     RITONAVIR("386896009",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Ritonavir (substance)",
               "Ritonavir",
               "Ritonavir",
@@ -12170,7 +12173,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Rituximab.<br>
      */
     RITUXIMAB("386919002",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Rituximab (substance)",
               "Rituximab",
               "Rituximab",
@@ -12183,7 +12186,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Rivaroxaban.<br>
      */
     RIVAROXABAN("442031002",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Rivaroxaban (substance)",
                 "Rivaroxaban",
                 "Rivaroxaban",
@@ -12196,7 +12199,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Rivastigmina.<br>
      */
     RIVASTIGMINE("395868008",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Rivastigmine (substance)",
                  "Rivastigmine",
                  "Rivastigmin",
@@ -12209,7 +12212,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Rizatriptan.<br>
      */
     RIZATRIPTAN("363573000",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Rizatriptan (substance)",
                 "Rizatriptan",
                 "Rizatriptan",
@@ -12222,7 +12225,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Rocuronio bromuro.<br>
      */
     ROCURONIUM_BROMIDE("108450002",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Rocuronium bromide (substance)",
                        "Rocuronium bromide",
                        "Rocuronium bromid",
@@ -12235,7 +12238,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Roflumilast.<br>
      */
     ROFLUMILAST("448971002",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Roflumilast (substance)",
                 "Roflumilast",
                 "Roflumilast",
@@ -12248,7 +12251,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Romiplostim.<br>
      */
     ROMIPLOSTIM("439122000",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Romiplostim (substance)",
                 "Romiplostim",
                 "Romiplostim",
@@ -12261,7 +12264,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ropinirolo.<br>
      */
     ROPINIROLE("372499000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Ropinirole (substance)",
                "Ropinirole",
                "Ropinirol",
@@ -12274,7 +12277,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ropivacaina.<br>
      */
     ROPIVACAINE("386969005",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Ropivacaine (substance)",
                 "Ropivacaine",
                 "Ropivacain",
@@ -12287,7 +12290,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Rosuvastatina.<br>
      */
     ROSUVASTATIN("700067006",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Rosuvastatin (substance)",
                  "Rosuvastatin",
                  "Rosuvastatin",
@@ -12300,7 +12303,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Rotigotina.<br>
      */
     ROTIGOTINE("421924006",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Rotigotine (substance)",
                "Rotigotine",
                "Rotigotin",
@@ -12313,7 +12316,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Rufinamide.<br>
      */
     RUFINAMIDE("429835003",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Rufinamide (substance)",
                "Rufinamide",
                "Rufinamid",
@@ -12326,7 +12329,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Saccharomyces boulardii.<br>
      */
     SACCHAROMYCES_BOULARDII("700441006",
-                            "2.16.840.1.113883.6.96",
+                            "http://snomed.info/sct",
                             "Saccharomyces boulardii (substance)",
                             "Saccharomyces boulardii",
                             "Saccharomyces boulardii",
@@ -12339,7 +12342,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sacubitril.<br>
      */
     SACUBITRIL("716072000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Sacubitril (substance)",
                "Sacubitril",
                "Sacubitril",
@@ -12352,7 +12355,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Safinamide.<br>
      */
     SAFINAMIDE("718852000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Safinamide (substance)",
                "Safinamide",
                "Safinamid",
@@ -12365,7 +12368,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Salbutamolo.<br>
      */
     SALBUTAMOL("372897005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Salbutamol (substance)",
                "Salbutamol",
                "Salbutamol",
@@ -12378,7 +12381,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Salicilamide.<br>
      */
     SALICYLAMIDE("22192002",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Salicylamide (substance)",
                  "Salicylamide",
                  "Salicylamid",
@@ -12391,7 +12394,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido salicilico.<br>
      */
     SALICYLIC_ACID("387253001",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Salicylic acid (substance)",
                    "Salicylic acid",
                    "Salicylsäure",
@@ -12404,7 +12407,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Salmeterolo.<br>
      */
     SALMETEROL("372515005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Salmeterol (substance)",
                "Salmeterol",
                "Salmeterol",
@@ -12417,7 +12420,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sapropterina.<br>
      */
     SAPROPTERIN("432859002",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Sapropterin (substance)",
                 "Sapropterin",
                 "Sapropterin",
@@ -12430,7 +12433,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Saquinavir.<br>
      */
     SAQUINAVIR("372530001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Saquinavir (substance)",
                "Saquinavir",
                "Saquinavir",
@@ -12443,7 +12446,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sarilumab.<br>
      */
     SARILUMAB("735231009",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Sarilumab (substance)",
               "Sarilumab",
               "Sarilumab",
@@ -12456,7 +12459,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Saxagliptin.<br>
      */
     SAXAGLIPTIN("443087004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Saxagliptin (substance)",
                 "Saxagliptin",
                 "Saxagliptin",
@@ -12469,7 +12472,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Scopolamina.<br>
      */
     SCOPOLAMINE("387409009",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Scopolamine (substance)",
                 "Scopolamine",
                 "Scopolamin",
@@ -12482,7 +12485,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Scopolamina butilbromuro.<br>
      */
     SCOPOLAMINE_BUTYLBROMIDE("395739004",
-                             "2.16.840.1.113883.6.96",
+                             "http://snomed.info/sct",
                              "Scopolamine butylbromide (substance)",
                              "Scopolamine butylbromide",
                              "Scopolamin butylbromid",
@@ -12495,7 +12498,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Secretina.<br>
      */
     SECRETIN("19205004",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Secretin (substance)",
              "Secretin",
              "Secretin",
@@ -12508,7 +12511,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Secukinumab.<br>
      */
     SECUKINUMAB("708822004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Secukinumab (substance)",
                 "Secukinumab",
                 "Secukinumab",
@@ -12521,7 +12524,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Serina.<br>
      */
     SERINE("14125007",
-           "2.16.840.1.113883.6.96",
+           "http://snomed.info/sct",
            "Serine (substance)",
            "Serine",
            "L-Serin",
@@ -12534,7 +12537,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sertralina.<br>
      */
     SERTRALINE("372594008",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Sertraline (substance)",
                "Sertraline",
                "Sertralin",
@@ -12547,7 +12550,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sevelamer.<br>
      */
     SEVELAMER("395871000",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Sevelamer (substance)",
               "Sevelamer",
               "Sevelamer",
@@ -12560,7 +12563,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sevoflurano.<br>
      */
     SEVOFLURANE("386842005",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Sevoflurane (substance)",
                 "Sevoflurane",
                 "Sevofluran",
@@ -12573,7 +12576,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sildenafil.<br>
      */
     SILDENAFIL("372572000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Sildenafil (substance)",
                "Sildenafil",
                "Sildenafil",
@@ -12586,7 +12589,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Silibina.<br>
      */
     SILIBININ("720527007",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Silibinin (substance)",
               "Silibinin",
               "Silibinin",
@@ -12599,7 +12602,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Silodosina.<br>
      */
     SILODOSIN("442042006",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Silodosin (substance)",
               "Silodosin",
               "Silodosin",
@@ -12612,7 +12615,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Simeticone.<br>
      */
     SIMETICONE("387442005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Simeticone (substance)",
                "Simeticone",
                "Simeticon",
@@ -12625,7 +12628,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Simoctocog alfa.<br>
      */
     SIMOCTOCOG_ALFA("718853005",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Simoctocog alfa (substance)",
                     "Simoctocog alfa",
                     "Simoctocog alfa",
@@ -12638,7 +12641,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Simvastatina.<br>
      */
     SIMVASTATIN("387584000",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Simvastatin (substance)",
                 "Simvastatin",
                 "Simvastatin",
@@ -12651,7 +12654,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sirolimus.<br>
      */
     SIROLIMUS("387014003",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Sirolimus (substance)",
               "Sirolimus",
               "Sirolimus",
@@ -12664,7 +12667,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sitagliptin.<br>
      */
     SITAGLIPTIN("423307000",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Sitagliptin (substance)",
                 "Sitagliptin",
                 "Sitagliptin",
@@ -12677,7 +12680,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sodio acetato triidrato.<br>
      */
     SODIUM_ACETATE_TRIHYDRAT("726006002",
-                             "2.16.840.1.113883.6.96",
+                             "http://snomed.info/sct",
                              "Sodium acetate trihydrat (substance)",
                              "Sodium acetate trihydrat",
                              "Natrium acetat-3-Wasser",
@@ -12690,7 +12693,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Bicarbonato di sodio.<br>
      */
     SODIUM_BICARBONATE("387319002",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Sodium bicarbonate (substance)",
                        "Sodium bicarbonate",
                        "Natriumhydrogencarbonat",
@@ -12703,7 +12706,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sodio cloruro.<br>
      */
     SODIUM_CHLORIDE("387390002",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Sodium chloride (substance)",
                     "Sodium chloride",
                     "Natriumchlorid",
@@ -12716,7 +12719,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sodio citrato.<br>
      */
     SODIUM_CITRATE("412546005",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Sodium citrate (substance)",
                    "Sodium citrate",
                    "Natriumcitrat",
@@ -12729,7 +12732,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sodio fosfato monobasico diidrato.<br>
      */
     SODIUM_DIHYDROGEN_PHOSPHATE_DIHYDRATE("726716000",
-                                          "2.16.840.1.113883.6.96",
+                                          "http://snomed.info/sct",
                                           "Sodium dihydrogen phosphate dihydrate (substance)",
                                           "Sodium dihydrogen phosphate dihydrate",
                                           "Natrium dihydrogenphosphat-2-Wasser",
@@ -12742,7 +12745,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sodio idrossido.<br>
      */
     SODIUM_HYDROXIDE("23423003",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Sodium hydroxide (substance)",
                      "Sodium hydroxide",
                      "Natriumhydroxid",
@@ -12755,7 +12758,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sodio nitroprussiato.<br>
      */
     SODIUM_NITROPRUSSIDE("387139005",
-                         "2.16.840.1.113883.6.96",
+                         "http://snomed.info/sct",
                          "Sodium nitroprusside (substance)",
                          "Sodium nitroprusside",
                          "Nitroprussidnatrium, wasserfrei",
@@ -12768,7 +12771,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sodio picosolfato.<br>
      */
     SODIUM_PICOSULFATE("395881001",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Sodium picosulfate (substance)",
                        "Sodium picosulfate",
                        "Natrium picosulfat",
@@ -12781,7 +12784,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sodio selenito.<br>
      */
     SODIUM_SELENITE("96277001",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Sodium selenite (substance)",
                     "Sodium selenite",
                     "Dinatrium-selenit",
@@ -12794,7 +12797,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sodio tiosolfato.<br>
      */
     SODIUM_THIOSULFATE("387209006",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Sodium thiosulfate (substance)",
                        "Sodium thiosulfate",
                        "Dinatrium-thiosulfat",
@@ -12807,7 +12810,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sofosbuvir.<br>
      */
     SOFOSBUVIR("710806008",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Sofosbuvir (substance)",
                "Sofosbuvir",
                "Sofosbuvir",
@@ -12820,7 +12823,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Solifenacina.<br>
      */
     SOLIFENACIN("407030007",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Solifenacin (substance)",
                 "Solifenacin",
                 "Solifenacin",
@@ -12833,7 +12836,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Somatostatina.<br>
      */
     SOMATOSTATIN("49722008",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Somatostatin (substance)",
                  "Somatostatin",
                  "Somatostatin",
@@ -12846,7 +12849,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Somatorelina.<br>
      */
     SOMATOTROPIN_RELEASING_FACTOR("16628008",
-                                  "2.16.840.1.113883.6.96",
+                                  "http://snomed.info/sct",
                                   "Somatotropin releasing factor (substance)",
                                   "Somatotropin releasing factor",
                                   "Somatorelin",
@@ -12859,7 +12862,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Somatropina.<br>
      */
     SOMATROPIN("395883003",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Somatropin (substance)",
                "Somatropin",
                "Somatropin",
@@ -12872,7 +12875,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sorafenib.<br>
      */
     SORAFENIB("422042001",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Sorafenib (substance)",
               "Sorafenib",
               "Sorafenib",
@@ -12885,7 +12888,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sotalolo.<br>
      */
     SOTALOL("372911006",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Sotalol (substance)",
             "Sotalol",
             "Sotalol",
@@ -12898,7 +12901,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Soia olio.<br>
      */
     SOY_BEAN_OIL("226911007",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Soy bean oil (substance)",
                  "Soy bean oil",
                  "Sojabohnenöl",
@@ -12911,7 +12914,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Spironolattone.<br>
      */
     SPIRONOLACTONE("387078006",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Spironolactone (substance)",
                    "Spironolactone",
                    "Spironolacton",
@@ -12924,7 +12927,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Stiripentolo.<br>
      */
     STIRIPENTOL("428221002",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Stiripentol (substance)",
                 "Stiripentol",
                 "Stiripentol",
@@ -12937,7 +12940,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Proteasi.<br>
      */
     SUBSTANCE_WITH_PROTEASE_MECHANISM_OF_ACTION("387033008",
-                                                "2.16.840.1.113883.6.96",
+                                                "http://snomed.info/sct",
                                                 "Substance with protease mechanism of action (substance)",
                                                 "Substance with protease mechanism of action",
                                                 "Protease",
@@ -12950,7 +12953,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Succinilcolina cloruro.<br>
      */
     SUCCINYLCHOLINE_CHLORIDE("58907007",
-                             "2.16.840.1.113883.6.96",
+                             "http://snomed.info/sct",
                              "Succinylcholine chloride (substance)",
                              "Succinylcholine chloride",
                              "Suxamethonium chlorid",
@@ -12963,7 +12966,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sufentanil.<br>
      */
     SUFENTANIL("49998007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Sufentanil (substance)",
                "Sufentanil",
                "Sufentanil",
@@ -12976,7 +12979,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sugammadex.<br>
      */
     SUGAMMADEX("442340006",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Sugammadex (substance)",
                "Sugammadex",
                "Sugammadex",
@@ -12989,7 +12992,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sulfadiazina.<br>
      */
     SULFADIAZINE("74523009",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Sulfadiazine (substance)",
                  "Sulfadiazine",
                  "Sulfadiazin",
@@ -13002,7 +13005,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sulfametossazolo.<br>
      */
     SULFAMETHOXAZOLE("363528007",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Sulfamethoxazole (substance)",
                      "Sulfamethoxazole",
                      "Sulfamethoxazol",
@@ -13015,7 +13018,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sulfasalazina.<br>
      */
     SULFASALAZINE("387248006",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Sulfasalazine (substance)",
                   "Sulfasalazine",
                   "Sulfasalazin",
@@ -13028,7 +13031,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Zolfo esafluoruro.<br>
      */
     SULFUR_HEXAFLUORIDE("259276004",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Sulfur hexafluoride (substance)",
                         "Sulfur hexafluoride",
                         "Schwefelhexafluorid",
@@ -13041,7 +13044,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sulpiride.<br>
      */
     SULPIRIDE("395891007",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Sulpiride (substance)",
               "Sulpiride",
               "Sulpirid",
@@ -13054,7 +13057,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sulprostone.<br>
      */
     SULPROSTONE("713461008",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Sulprostone (substance)",
                 "Sulprostone",
                 "Sulproston",
@@ -13067,7 +13070,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sultiame.<br>
      */
     SULTHIAMINE("50580004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Sulthiamine (substance)",
                 "Sulthiamine",
                 "Sultiam",
@@ -13080,7 +13083,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Sumatriptan.<br>
      */
     SUMATRIPTAN("395892000",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Sumatriptan (substance)",
                 "Sumatriptan",
                 "Sumatriptan",
@@ -13093,7 +13096,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tacrolimus.<br>
      */
     TACROLIMUS("386975001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Tacrolimus (substance)",
                "Tacrolimus",
                "Tacrolimus",
@@ -13106,7 +13109,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tadalafil.<br>
      */
     TADALAFIL("407111005",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Tadalafil (substance)",
               "Tadalafil",
               "Tadalafil",
@@ -13119,7 +13122,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tafluprost.<br>
      */
     TAFLUPROST("699181001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Tafluprost (substance)",
                "Tafluprost",
                "Tafluprost",
@@ -13132,7 +13135,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tamoxifene.<br>
      */
     TAMOXIFEN("373345002",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Tamoxifen (substance)",
               "Tamoxifen",
               "Tamoxifen",
@@ -13145,7 +13148,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tamsulosina.<br>
      */
     TAMSULOSIN("372509005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Tamsulosin (substance)",
                "Tamsulosin",
                "Tamsulosin",
@@ -13158,7 +13161,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tapentadolo.<br>
      */
     TAPENTADOL("441757005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Tapentadol (substance)",
                "Tapentadol",
                "Tapentadol",
@@ -13171,7 +13174,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Taurina.<br>
      */
     TAURINE("10944007",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Taurine (substance)",
             "Taurine",
             "Taurin",
@@ -13184,7 +13187,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tazobactam.<br>
      */
     TAZOBACTAM("96007008",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Tazobactam (substance)",
                "Tazobactam",
                "Tazobactam",
@@ -13197,7 +13200,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Teicoplanina.<br>
      */
     TEICOPLANIN("387529008",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Teicoplanin (substance)",
                 "Teicoplanin",
                 "Teicoplanin",
@@ -13210,7 +13213,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Telmisartan.<br>
      */
     TELMISARTAN("387069000",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Telmisartan (substance)",
                 "Telmisartan",
                 "Telmisartan",
@@ -13223,7 +13226,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Temazepam.<br>
      */
     TEMAZEPAM("387300007",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Temazepam (substance)",
               "Temazepam",
               "Temazepam",
@@ -13236,7 +13239,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Temozolomide.<br>
      */
     TEMOZOLOMIDE("387009002",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Temozolomide (substance)",
                  "Temozolomide",
                  "Temozolomid",
@@ -13249,7 +13252,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tenofovir.<br>
      */
     TENOFOVIR("422091007",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Tenofovir (substance)",
               "Tenofovir",
               "Tenofovir",
@@ -13262,7 +13265,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Terbinafina.<br>
      */
     TERBINAFINE("373450007",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Terbinafine (substance)",
                 "Terbinafine",
                 "Terbinafin",
@@ -13275,7 +13278,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Terbutalina.<br>
      */
     TERBUTALINE_SULFATE("24583009",
-                        "2.16.840.1.113883.6.96",
+                        "http://snomed.info/sct",
                         "Terbutaline sulfate (substance)",
                         "Terbutaline sulfate",
                         "Terbutalin sulfat",
@@ -13288,7 +13291,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Teriparatide.<br>
      */
     TERIPARATIDE("425438001",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Teriparatide (substance)",
                  "Teriparatide",
                  "Teriparatid",
@@ -13301,7 +13304,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Terlipressina.<br>
      */
     TERLIPRESSIN("395899009",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Terlipressin (substance)",
                  "Terlipressin",
                  "Terlipressin",
@@ -13314,7 +13317,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Testosterone.<br>
      */
     TESTOSTERONE("43688007",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Testosterone (substance)",
                  "Testosterone",
                  "Testosteron",
@@ -13327,7 +13330,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Immunoglobulina umana antitetanica.<br>
      */
     TETANUS_IMMUNOGLOBULIN_OF_HUMAN_ORIGIN("428527002",
-                                           "2.16.840.1.113883.6.96",
+                                           "http://snomed.info/sct",
                                            "Tetanus immunoglobulin of human origin (substance)",
                                            "Tetanus immunoglobulin of human origin",
                                            "Tetanus-Immunglobulin vom Menschen",
@@ -13340,7 +13343,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tetracaina.<br>
      */
     TETRACAINE("387309008",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Tetracaine (substance)",
                "Tetracaine",
                "Tetracain",
@@ -13353,7 +13356,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tetracosactide.<br>
      */
     TETRACOSACTIDE("96363002",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Tetracosactide (substance)",
                    "Tetracosactide",
                    "Tetracosactid",
@@ -13366,7 +13369,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tetraciclina.<br>
      */
     TETRACYCLINE("372809001",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Tetracycline (substance)",
                  "Tetracycline",
                  "Tetracyclin",
@@ -13379,7 +13382,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tetrizolina.<br>
      */
     TETRYZOLINE("372673004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Tetryzoline (substance)",
                 "Tetryzoline",
                 "Tetryzolin",
@@ -13392,7 +13395,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Teofillina.<br>
      */
     THEOPHYLLINE("372810006",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Theophylline (substance)",
                  "Theophylline",
                  "Theophyllin",
@@ -13405,7 +13408,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tiamina (vitamina B1).<br>
      */
     THIAMINE("259659006",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Thiamine (substance)",
              "Thiamine",
              "Thiamin (Vitamin B1)",
@@ -13418,7 +13421,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tiotepa.<br>
      */
     THIOTEPA("387508004",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Thiotepa (substance)",
              "Thiotepa",
              "Thiotepa",
@@ -13431,7 +13434,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Treonina.<br>
      */
     THREONINE("52736009",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Threonine (substance)",
               "Threonine",
               "Threonin",
@@ -13444,7 +13447,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tiapride.<br>
      */
     TIAPRIDE("699180000",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Tiapride (substance)",
              "Tiapride",
              "Tiaprid",
@@ -13457,7 +13460,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tibolone.<br>
      */
     TIBOLONE("395903002",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Tibolone (substance)",
              "Tibolone",
              "Tibolon",
@@ -13470,7 +13473,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ticagrelor.<br>
      */
     TICAGRELOR("698805004",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Ticagrelor (substance)",
                "Ticagrelor",
                "Ticagrelor",
@@ -13483,7 +13486,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tigeciclina.<br>
      */
     TIGECYCLINE("418313005",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Tigecycline (substance)",
                 "Tigecycline",
                 "Tigecyclin",
@@ -13496,7 +13499,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tilidina cloridrato.<br>
      */
     TILIDINE_HYDROCHLORIDE("96186004",
-                           "2.16.840.1.113883.6.96",
+                           "http://snomed.info/sct",
                            "Tilidine hydrochloride (substance)",
                            "Tilidine hydrochloride",
                            "Tilidin hydrochlorid",
@@ -13509,7 +13512,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Timololo.<br>
      */
     TIMOLOL("372880004",
-            "2.16.840.1.113883.6.96",
+            "http://snomed.info/sct",
             "Timolol (substance)",
             "Timolol",
             "Timolol",
@@ -13522,7 +13525,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tioguanina.<br>
      */
     TIOGUANINE("387407006",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Tioguanine (substance)",
                "Tioguanine",
                "Tioguanin",
@@ -13535,7 +13538,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tiotropio.<br>
      */
     TIOTROPIUM("409169006",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Tiotropium (substance)",
                "Tiotropium",
                "Tiotropium",
@@ -13548,7 +13551,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tipranavir.<br>
      */
     TIPRANAVIR("419409009",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Tipranavir (substance)",
                "Tipranavir",
                "Tipranavir",
@@ -13561,7 +13564,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tizanidina.<br>
      */
     TIZANIDINE("373440006",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Tizanidine (substance)",
                "Tizanidine",
                "Tizanidin",
@@ -13574,7 +13577,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tobramicina.<br>
      */
     TOBRAMYCINE("373548001",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Tobramycine (substance)",
                 "Tobramycine",
                 "Tobramycin",
@@ -13587,7 +13590,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tocilizumab.<br>
      */
     TOCILIZUMAB("444648007",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Tocilizumab (substance)",
                 "Tocilizumab",
                 "Tocilizumab",
@@ -13600,7 +13603,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tolcapone.<br>
      */
     TOLCAPONE("386851002",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Tolcapone (substance)",
               "Tolcapone",
               "Tolcapon",
@@ -13613,7 +13616,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tolperisone.<br>
      */
     TOLPERISONE("703717006",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Tolperisone (substance)",
                 "Tolperisone",
                 "Tolperison",
@@ -13626,7 +13629,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tolterodina.<br>
      */
     TOLTERODINE("372570008",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Tolterodine (substance)",
                 "Tolterodine",
                 "Tolterodin",
@@ -13639,7 +13642,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tolvaptan.<br>
      */
     TOLVAPTAN("443058000",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Tolvaptan (substance)",
               "Tolvaptan",
               "Tolvaptan",
@@ -13652,7 +13655,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Topiramato.<br>
      */
     TOPIRAMATE("386844006",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Topiramate (substance)",
                "Topiramate",
                "Topiramat",
@@ -13665,7 +13668,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Topotecan.<br>
      */
     TOPOTECAN("372536007",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Topotecan (substance)",
               "Topotecan",
               "Topotecan",
@@ -13678,7 +13681,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Torasemide.<br>
      */
     TORASEMIDE("108476002",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Torasemide (substance)",
                "Torasemide",
                "Torasemid",
@@ -13691,7 +13694,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Trabectedina.<br>
      */
     TRABECTEDIN("433127001",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Trabectedin (substance)",
                 "Trabectedin",
                 "Trabectedin",
@@ -13704,7 +13707,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tramadol.<br>
      */
     TRAMADOL("386858008",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Tramadol (substance)",
              "Tramadol",
              "Tramadol",
@@ -13717,7 +13720,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Trametinib.<br>
      */
     TRAMETINIB("708711009",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Trametinib (substance)",
                "Trametinib",
                "Trametinib",
@@ -13730,7 +13733,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Trandolapril.<br>
      */
     TRANDOLAPRIL("386871006",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Trandolapril (substance)",
                  "Trandolapril",
                  "Trandolapril",
@@ -13743,7 +13746,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido tranexamico.<br>
      */
     TRANEXAMIC_ACID("386960009",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Tranexamic acid (substance)",
                     "Tranexamic acid",
                     "Tranexamsäure",
@@ -13756,7 +13759,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tranilcipromina.<br>
      */
     TRANYLCYPROMINE("372891006",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Tranylcypromine (substance)",
                     "Tranylcypromine",
                     "Tranylcypromin",
@@ -13769,7 +13772,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Trastuzumab.<br>
      */
     TRASTUZUMAB("387003001",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Trastuzumab (substance)",
                 "Trastuzumab",
                 "Trastuzumab",
@@ -13782,7 +13785,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Travoprost.<br>
      */
     TRAVOPROST("129493000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Travoprost (substance)",
                "Travoprost",
                "Travoprost",
@@ -13795,7 +13798,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Trazodone.<br>
      */
     TRAZODONE("372829000",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Trazodone (substance)",
               "Trazodone",
               "Trazodon",
@@ -13808,7 +13811,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Treprostinil.<br>
      */
     TREPROSTINIL("443570007",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Treprostinil (substance)",
                  "Treprostinil",
                  "Treprostinil",
@@ -13821,7 +13824,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tretinoina.<br>
      */
     TRETINOIN("387305002",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Tretinoin (substance)",
               "Tretinoin",
               "Tretinoin",
@@ -13834,7 +13837,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Lipasi.<br>
      */
     TRIACYLGLYCEROL_LIPASE("72993008",
-                           "2.16.840.1.113883.6.96",
+                           "http://snomed.info/sct",
                            "Triacylglycerol lipase (substance)",
                            "Triacylglycerol lipase",
                            "Lipase",
@@ -13847,7 +13850,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Triamcinolone.<br>
      */
     TRIAMCINOLONE("116594009",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Triamcinolone (substance)",
                   "Triamcinolone",
                   "Triamcinolon",
@@ -13860,7 +13863,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Triamcinolone acetonide.<br>
      */
     TRIAMCINOLONE_ACETONIDE("395913005",
-                            "2.16.840.1.113883.6.96",
+                            "http://snomed.info/sct",
                             "Triamcinolone acetonide (substance)",
                             "Triamcinolone acetonide",
                             "Triamcinolon acetonid",
@@ -13873,7 +13876,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Triazolam.<br>
      */
     TRIAZOLAM("386984001",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Triazolam (substance)",
               "Triazolam",
               "Triazolam",
@@ -13886,7 +13889,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Triclosan.<br>
      */
     TRICLOSAN("387054001",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Triclosan (substance)",
               "Triclosan",
               "Triclosan",
@@ -13899,7 +13902,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Trimetoprim.<br>
      */
     TRIMETHOPRIM("387179001",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Trimethoprim (substance)",
                  "Trimethoprim",
                  "Trimethoprim",
@@ -13912,7 +13915,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Trimipramina.<br>
      */
     TRIMIPRAMINE("373550009",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Trimipramine (substance)",
                  "Trimipramine",
                  "Trimipramin",
@@ -13925,7 +13928,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Triptorelina.<br>
      */
     TRIPTORELIN("395915003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Triptorelin (substance)",
                 "Triptorelin",
                 "Triptorelin",
@@ -13938,7 +13941,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: trofosfamide.<br>
      */
     TROFOSFAMIDE("1156222009",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Trofosfamide (substance)",
                  "Trofosfamide",
                  "Trofosfamide",
@@ -13951,7 +13954,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tropicamide.<br>
      */
     TROPICAMIDE("387526001",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Tropicamide (substance)",
                 "Tropicamide",
                 "Tropicamid",
@@ -13964,7 +13967,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Trospio cloruro.<br>
      */
     TROSPIUM_CHLORIDE("326557004",
-                      "2.16.840.1.113883.6.96",
+                      "http://snomed.info/sct",
                       "Trospium chloride (substance)",
                       "Trospium chloride",
                       "Trospium chlorid",
@@ -13977,7 +13980,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Triptofano.<br>
      */
     TRYPTOPHAN("54821000",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Tryptophan (substance)",
                "Tryptophan",
                "Tryptophan",
@@ -13990,7 +13993,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tubercolina derivato proteico purificato (PPD).<br>
      */
     TUBERCULIN_PURIFIED_PROTEIN_DERIVATIVE("108731003",
-                                           "2.16.840.1.113883.6.96",
+                                           "http://snomed.info/sct",
                                            "Tuberculin purified protein derivative (substance)",
                                            "Tuberculin purified protein derivative",
                                            "Tuberkulin, gereinigtes PPD",
@@ -14003,7 +14006,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Turoctocog alfa.<br>
      */
     TUROCTOCOG_ALFA("735055007",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Turoctocog alfa (substance)",
                     "Turoctocog alfa",
                     "Turoctocog alfa",
@@ -14016,7 +14019,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tirosina.<br>
      */
     TYROSINE("27378009",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Tyrosine (substance)",
              "Tyrosine",
              "Tyrosin",
@@ -14029,7 +14032,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Tirotricina.<br>
      */
     TYROTHRICIN("36661005",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Tyrothricin (substance)",
                 "Tyrothricin",
                 "Tyrothricin",
@@ -14042,7 +14045,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ulipristal.<br>
      */
     ULIPRISTAL("703249005",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Ulipristal (substance)",
                "Ulipristal",
                "Ulipristal",
@@ -14055,7 +14058,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Umeclidinio.<br>
      */
     UMECLIDINIUM("706898002",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Umeclidinium (substance)",
                  "Umeclidinium",
                  "Umeclidinium",
@@ -14068,7 +14071,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Urapidil.<br>
      */
     URAPIDIL("698807007",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Urapidil (substance)",
              "Urapidil",
              "Urapidil",
@@ -14081,7 +14084,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Urochinasi.<br>
      */
     UROKINASE("59082006",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Urokinase (substance)",
               "Urokinase",
               "Urokinase",
@@ -14094,7 +14097,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido ursodesossicolico.<br>
      */
     URSODEOXYCHOLIC_ACID("41143004",
-                         "2.16.840.1.113883.6.96",
+                         "http://snomed.info/sct",
                          "Ursodeoxycholic acid (substance)",
                          "Ursodeoxycholic acid",
                          "Ursodeoxycholsäure",
@@ -14107,7 +14110,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Ustekinumab.<br>
      */
     USTEKINUMAB("443465002",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Ustekinumab (substance)",
                 "Ustekinumab",
                 "Ustekinumab",
@@ -14120,7 +14123,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Valaciclovir.<br>
      */
     VALACICLOVIR("96098007",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Valaciclovir (substance)",
                  "Valaciclovir",
                  "Valaciclovir",
@@ -14133,7 +14136,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Valeriana estratto.<br>
      */
     VALERIAN_EXTRACT("412266000",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Valerian extract (substance)",
                      "Valerian extract",
                      "Baldrianwurzel-Extrakt",
@@ -14146,7 +14149,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Valganciclovit.<br>
      */
     VALGANCICLOVIR("129476000",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Valganciclovir (substance)",
                    "Valganciclovir",
                    "Valganciclovir",
@@ -14159,7 +14162,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Valina.<br>
      */
     VALINE("72840006",
-           "2.16.840.1.113883.6.96",
+           "http://snomed.info/sct",
            "Valine (substance)",
            "Valine",
            "Valin",
@@ -14172,7 +14175,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Valproato semisodico.<br>
      */
     VALPROATE_SEMISODIUM("5641004",
-                         "2.16.840.1.113883.6.96",
+                         "http://snomed.info/sct",
                          "Valproate semisodium (substance)",
                          "Valproate semisodium",
                          "Valproat seminatrium",
@@ -14185,7 +14188,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Valproato sodico.<br>
      */
     VALPROATE_SODIUM("387481005",
-                     "2.16.840.1.113883.6.96",
+                     "http://snomed.info/sct",
                      "Valproate sodium (substance)",
                      "Valproate sodium",
                      "Valproat natrium",
@@ -14198,7 +14201,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido valproico.<br>
      */
     VALPROIC_ACID("387080000",
-                  "2.16.840.1.113883.6.96",
+                  "http://snomed.info/sct",
                   "Valproic acid (substance)",
                   "Valproic acid",
                   "Valproinsäure",
@@ -14211,7 +14214,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Valsartan.<br>
      */
     VALSARTAN("386876001",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Valsartan (substance)",
               "Valsartan",
               "Valsartan",
@@ -14224,7 +14227,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Vancomicina.<br>
      */
     VANCOMYCIN("372735009",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Vancomycin (substance)",
                "Vancomycin",
                "Vancomycin",
@@ -14237,7 +14240,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Vardenafil.<br>
      */
     VARDENAFIL("404858007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Vardenafil (substance)",
                "Vardenafil",
                "Vardenafil",
@@ -14250,7 +14253,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Vareniclina.<br>
      */
     VARENICLINE("421772003",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Varenicline (substance)",
                 "Varenicline",
                 "Vareniclin",
@@ -14263,7 +14266,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Immunoglobulina umana antivaricella.<br>
      */
     VARICELLA_ZOSTER_VIRUS_ANTIBODY("259858000",
-                                    "2.16.840.1.113883.6.96",
+                                    "http://snomed.info/sct",
                                     "Varicella-zoster virus antibody (substance)",
                                     "Varicella-zoster virus antibody",
                                     "Varizellen-Immunglobulin vom Menschen",
@@ -14276,7 +14279,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Vecuronio bromuro.<br>
      */
     VECURONIUM_BROMIDE("87472002",
-                       "2.16.840.1.113883.6.96",
+                       "http://snomed.info/sct",
                        "Vecuronium bromide (substance)",
                        "Vecuronium bromide",
                        "Vecuronium bromid",
@@ -14289,7 +14292,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Vedolizumab.<br>
      */
     VEDOLIZUMAB("704256006",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Vedolizumab (substance)",
                 "Vedolizumab",
                 "Vedolizumab",
@@ -14302,7 +14305,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Venlafaxina.<br>
      */
     VENLAFAXINE("372490001",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Venlafaxine (substance)",
                 "Venlafaxine",
                 "Venlafaxin",
@@ -14315,7 +14318,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Verapamil.<br>
      */
     VERAPAMIL("372754009",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Verapamil (substance)",
               "Verapamil",
               "Verapamil",
@@ -14328,7 +14331,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Vigabatrin.<br>
      */
     VIGABATRIN("310283001",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Vigabatrin (substance)",
                "Vigabatrin",
                "Vigabatrin",
@@ -14341,7 +14344,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Vilanterolo.<br>
      */
     VILANTEROL("702408004",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Vilanterol (substance)",
                "Vilanterol",
                "Vilanterol",
@@ -14354,7 +14357,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Vildagliptin.<br>
      */
     VILDAGLIPTIN("428611002",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Vildagliptin (substance)",
                  "Vildagliptin",
                  "Vildagliptin",
@@ -14367,7 +14370,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Vinblastina.<br>
      */
     VINBLASTINE("387051009",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Vinblastine (substance)",
                 "Vinblastine",
                 "Vinblastin",
@@ -14380,7 +14383,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Vincristina.<br>
      */
     VINCRISTINE("387126006",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Vincristine (substance)",
                 "Vincristine",
                 "Vincristin",
@@ -14393,7 +14396,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Vindesina.<br>
      */
     VINDESINE("409198005",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Vindesine (substance)",
               "Vindesine",
               "Vindesin",
@@ -14406,7 +14409,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Vinorelbina.<br>
      */
     VINORELBINE("372541004",
-                "2.16.840.1.113883.6.96",
+                "http://snomed.info/sct",
                 "Vinorelbine (substance)",
                 "Vinorelbine",
                 "Vinorelbin",
@@ -14419,7 +14422,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Alfa-Tocoferolo (vitamina E, E307).<br>
      */
     VITAMIN_E("37237003",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Vitamin E (substance)",
               "Vitamin E",
               "Tocopherol DL-alpha (E307)",
@@ -14432,7 +14435,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Voriconazolo.<br>
      */
     VORICONAZOLE("385469007",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Voriconazole (substance)",
                  "Voriconazole",
                  "Voriconazol",
@@ -14445,7 +14448,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Vortioxetina.<br>
      */
     VORTIOXETINE("708717008",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Vortioxetine (substance)",
                  "Vortioxetine",
                  "Vortioxetin",
@@ -14458,7 +14461,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Warfarin.<br>
      */
     WARFARIN("372756006",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Warfarin (substance)",
              "Warfarin",
              "Warfarin",
@@ -14471,7 +14474,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Xilometazolina.<br>
      */
     XYLOMETAZOLINE("372841007",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Xylometazoline (substance)",
                    "Xylometazoline",
                    "Xylometazolin",
@@ -14484,7 +14487,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Zanamivir.<br>
      */
     ZANAMIVIR("387010007",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Zanamivir (substance)",
               "Zanamivir",
               "Zanamivir",
@@ -14497,7 +14500,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Zidovudina.<br>
      */
     ZIDOVUDINE("387151007",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Zidovudine (substance)",
                "Zidovudine",
                "Zidovudin",
@@ -14510,7 +14513,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Zinco acetato diidrato.<br>
      */
     ZINC_ACETATE_DIHYDRATE("725761005",
-                           "2.16.840.1.113883.6.96",
+                           "http://snomed.info/sct",
                            "Zinc acetate dihydrate (substance)",
                            "Zinc acetate dihydrate",
                            "Zinkdiacetat-2-Wasser",
@@ -14523,7 +14526,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Zinco piritione.<br>
      */
     ZINC_PYRITHIONE("255954005",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Zinc pyrithione (substance)",
                     "Zinc pyrithione",
                     "Pyrithion zink",
@@ -14536,7 +14539,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Acido zoledronico.<br>
      */
     ZOLEDRONIC_ACID("395926009",
-                    "2.16.840.1.113883.6.96",
+                    "http://snomed.info/sct",
                     "Zoledronic acid (substance)",
                     "Zoledronic acid",
                     "Zoledronsäure",
@@ -14549,7 +14552,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Zolmitriptan.<br>
      */
     ZOLMITRIPTAN("363582006",
-                 "2.16.840.1.113883.6.96",
+                 "http://snomed.info/sct",
                  "Zolmitriptan (substance)",
                  "Zolmitriptan",
                  "Zolmitriptan",
@@ -14562,7 +14565,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Zolpidem.<br>
      */
     ZOLPIDEM("387569009",
-             "2.16.840.1.113883.6.96",
+             "http://snomed.info/sct",
              "Zolpidem (substance)",
              "Zolpidem",
              "Zolpidem",
@@ -14575,7 +14578,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Zonisamide.<br>
      */
     ZONISAMIDE("125693002",
-               "2.16.840.1.113883.6.96",
+               "http://snomed.info/sct",
                "Zonisamide (substance)",
                "Zonisamide",
                "Zonisamid",
@@ -14588,7 +14591,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Zopiclone.<br>
      */
     ZOPICLONE("395929002",
-              "2.16.840.1.113883.6.96",
+              "http://snomed.info/sct",
               "Zopiclone (substance)",
               "Zopiclone",
               "Zopiclon",
@@ -14601,7 +14604,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
      * IT: Zuclopentixolo.<br>
      */
     ZUCLOPENTHIXOL("428715002",
-                   "2.16.840.1.113883.6.96",
+                   "http://snomed.info/sct",
                    "Zuclopenthixol (substance)",
                    "Zuclopenthixol",
                    "Zuclopenthixol",
@@ -23589,57 +23592,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
     /**
      * Identifier of the code system (all values share the same).
      */
-    public static final String CODE_SYSTEM_ID = "2.16.840.1.113883.6.96";
-
-    /**
-     * Gets the Enum with a given code.
-     *
-     * @param code The code value.
-     * @return the enum value found or {@code null}.
-     */
-    @Nullable
-    public static ActivePharmaceuticalIngredient getEnum(@Nullable final String code) {
-        for (final ActivePharmaceuticalIngredient x : values()) {
-            if (x.getCodeValue().equals(code)) {
-                return x;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Checks if a given enum is part of this value set.
-     *
-     * @param enumName The name of the enum.
-     * @return {@code true} if the name is found in this value set, {@code false} otherwise.
-     */
-    public static boolean isEnumOfValueSet(@Nullable final String enumName) {
-        if (enumName == null) {
-            return false;
-        }
-        try {
-            Enum.valueOf(ActivePharmaceuticalIngredient.class,
-                         enumName);
-            return true;
-        } catch (final IllegalArgumentException ex) {
-            return false;
-        }
-    }
-
-    /**
-     * Checks if a given code value is in this value set.
-     *
-     * @param codeValue The code value.
-     * @return {@code true} if the value is found in this value set, {@code false} otherwise.
-     */
-    public static boolean isInValueSet(@Nullable final String codeValue) {
-        for (final ActivePharmaceuticalIngredient x : values()) {
-            if (x.getCodeValue().equals(codeValue)) {
-                return true;
-            }
-        }
-        return false;
-    }
+    public static final String CODE_SYSTEM_ID = "http://snomed.info/sct";
 
     /**
      * Machine interpretable and (inside this class) unique code.
@@ -23765,5 +23718,115 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface {
     @NonNull
     public String getValueSetName() {
         return VALUE_SET_NAME;
+    }
+
+    /**
+     * Returns the enum value as a FHIR Coding.
+     */
+    @Override
+    public Coding getCoding() {
+        return new Coding(this.getCodeSystemId(),
+                          this.getCodeValue(),
+                          this.getCodeSystemName());
+    }
+
+    /**
+     * Returns the enum value as a FHIR CodeableConcept.
+     */
+    @Override
+    public CodeableConcept getCodeableConcept() {
+        return new CodeableConcept().setText(this.getCodeSystemName()).addCoding(this.getCoding());
+    }
+
+    /**
+     * Compares the enum value to the given FHIR Coding.
+     *
+     * @param coding The FHIR Coding to be compared.
+     * @return {@code true} if they have the same system and value, {@code false} otherwise.
+     */
+    @Override
+    public boolean isEqualTo(final Coding coding) {
+        return this.getCodeSystemId().equals(coding.getSystem()) && this.getCodeValue().equals(coding.getCode());
+    }
+
+    /**
+     * Gets the Enum with a given code.
+     *
+     * @param code The code value.
+     * @return the enum value found or {@code null}.
+     */
+    @Nullable
+    public static ActivePharmaceuticalIngredient getEnum(@Nullable final String code) {
+        for (final ActivePharmaceuticalIngredient x : values()) {
+            if (x.getCodeValue().equals(code)) {
+                return x;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Checks if a given enum is part of this value set.
+     *
+     * @param enumName The name of the enum.
+     * @return {@code true} if the name is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isEnumOfValueSet(@Nullable final String enumName) {
+        if (enumName == null) {
+            return false;
+        }
+        try {
+            Enum.valueOf(ActivePharmaceuticalIngredient.class,
+                         enumName);
+            return true;
+        } catch (final IllegalArgumentException ex) {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if a given code value is in this value set.
+     *
+     * @param codeValue The code value.
+     * @return {@code true} if the value is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isInValueSet(@Nullable final String codeValue) {
+        for (final ActivePharmaceuticalIngredient x : values()) {
+            if (x.getCodeValue().equals(codeValue)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Gets the Enum with a given FHIR Coding.
+     *
+     * @param coding The FHIR Coding.
+     * @return the enum value found or {@code null}.
+     */
+    @Nullable
+    public static ActivePharmaceuticalIngredient getEnum(@Nullable final Coding coding) {
+        for (final var x : values()) {
+            if (x.isEqualTo(coding)) {
+                return x;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Checks if a given FHIR Coding is in this value set.
+     *
+     * @param coding The FHIR Coding.
+     * @return {@code true} if the value is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isInValueSet(@Nullable final Coding coding) {
+        for (final var x : values()) {
+            if (x.isEqualTo(coding)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

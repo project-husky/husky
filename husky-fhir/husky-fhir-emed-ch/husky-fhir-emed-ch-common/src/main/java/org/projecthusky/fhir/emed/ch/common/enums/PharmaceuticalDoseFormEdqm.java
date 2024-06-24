@@ -14,9 +14,12 @@ import javax.annotation.processing.Generated;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
 import org.projecthusky.common.enums.CodeSystems;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.enums.ValueSetEnumInterface;
+import org.projecthusky.fhir.structures.utils.FhirValueSetEnumInterface;
 
 /**
  * Enumeration of PharmaceuticalDoseFormEDQM values
@@ -27,12 +30,12 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * IT: No designation found.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.1.11.3<br>
- * Effective date: 2023-01-25 08:04<br>
- * Version: 2023<br>
+ * Effective date: 2024-01-30 14:03<br>
+ * Version: 2024<br>
  * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-01-29")
-public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface {
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-06-24")
+public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface, FhirValueSetEnumInterface {
 
     /**
      * EN: Anticoagulant and preservative solution for blood.<br>
@@ -8997,56 +9000,6 @@ public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface {
     public static final String CODE_SYSTEM_ID = "0.4.0.127.0.16.1.1.2.1";
 
     /**
-     * Gets the Enum with a given code.
-     *
-     * @param code The code value.
-     * @return the enum value found or {@code null}.
-     */
-    @Nullable
-    public static PharmaceuticalDoseFormEdqm getEnum(@Nullable final String code) {
-        for (final PharmaceuticalDoseFormEdqm x : values()) {
-            if (x.getCodeValue().equals(code)) {
-                return x;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Checks if a given enum is part of this value set.
-     *
-     * @param enumName The name of the enum.
-     * @return {@code true} if the name is found in this value set, {@code false} otherwise.
-     */
-    public static boolean isEnumOfValueSet(@Nullable final String enumName) {
-        if (enumName == null) {
-            return false;
-        }
-        try {
-            Enum.valueOf(PharmaceuticalDoseFormEdqm.class,
-                         enumName);
-            return true;
-        } catch (final IllegalArgumentException ex) {
-            return false;
-        }
-    }
-
-    /**
-     * Checks if a given code value is in this value set.
-     *
-     * @param codeValue The code value.
-     * @return {@code true} if the value is found in this value set, {@code false} otherwise.
-     */
-    public static boolean isInValueSet(@Nullable final String codeValue) {
-        for (final PharmaceuticalDoseFormEdqm x : values()) {
-            if (x.getCodeValue().equals(codeValue)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * Machine interpretable and (inside this class) unique code.
      */
     @NonNull
@@ -9170,5 +9123,115 @@ public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface {
     @NonNull
     public String getValueSetName() {
         return VALUE_SET_NAME;
+    }
+
+    /**
+     * Returns the enum value as a FHIR Coding.
+     */
+    @Override
+    public Coding getCoding() {
+        return new Coding(this.getCodeSystemId(),
+                          this.getCodeValue(),
+                          this.getCodeSystemName());
+    }
+
+    /**
+     * Returns the enum value as a FHIR CodeableConcept.
+     */
+    @Override
+    public CodeableConcept getCodeableConcept() {
+        return new CodeableConcept().setText(this.getCodeSystemName()).addCoding(this.getCoding());
+    }
+
+    /**
+     * Compares the enum value to the given FHIR Coding.
+     *
+     * @param coding The FHIR Coding to be compared.
+     * @return {@code true} if they have the same system and value, {@code false} otherwise.
+     */
+    @Override
+    public boolean isEqualTo(final Coding coding) {
+        return this.getCodeSystemId().equals(coding.getSystem()) && this.getCodeValue().equals(coding.getCode());
+    }
+
+    /**
+     * Gets the Enum with a given code.
+     *
+     * @param code The code value.
+     * @return the enum value found or {@code null}.
+     */
+    @Nullable
+    public static PharmaceuticalDoseFormEdqm getEnum(@Nullable final String code) {
+        for (final PharmaceuticalDoseFormEdqm x : values()) {
+            if (x.getCodeValue().equals(code)) {
+                return x;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Checks if a given enum is part of this value set.
+     *
+     * @param enumName The name of the enum.
+     * @return {@code true} if the name is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isEnumOfValueSet(@Nullable final String enumName) {
+        if (enumName == null) {
+            return false;
+        }
+        try {
+            Enum.valueOf(PharmaceuticalDoseFormEdqm.class,
+                         enumName);
+            return true;
+        } catch (final IllegalArgumentException ex) {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if a given code value is in this value set.
+     *
+     * @param codeValue The code value.
+     * @return {@code true} if the value is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isInValueSet(@Nullable final String codeValue) {
+        for (final PharmaceuticalDoseFormEdqm x : values()) {
+            if (x.getCodeValue().equals(codeValue)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Gets the Enum with a given FHIR Coding.
+     *
+     * @param coding The FHIR Coding.
+     * @return the enum value found or {@code null}.
+     */
+    @Nullable
+    public static PharmaceuticalDoseFormEdqm getEnum(@Nullable final Coding coding) {
+        for (final var x : values()) {
+            if (x.isEqualTo(coding)) {
+                return x;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Checks if a given FHIR Coding is in this value set.
+     *
+     * @param coding The FHIR Coding.
+     * @return {@code true} if the value is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isInValueSet(@Nullable final Coding coding) {
+        for (final var x : values()) {
+            if (x.isEqualTo(coding)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

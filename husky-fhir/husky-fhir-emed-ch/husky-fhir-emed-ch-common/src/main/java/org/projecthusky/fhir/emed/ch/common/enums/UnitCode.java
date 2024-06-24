@@ -14,9 +14,12 @@ import javax.annotation.processing.Generated;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
 import org.projecthusky.common.enums.CodeSystems;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.enums.ValueSetEnumInterface;
+import org.projecthusky.fhir.structures.utils.FhirValueSetEnumInterface;
 
 /**
  * Enumeration of UnitCode values
@@ -27,12 +30,12 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * IT: No designation found.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.1.11.83<br>
- * Effective date: 2022-06-08 15:00<br>
- * Version: 2023<br>
- * Status: DRAFT
+ * Effective date: 2024-03-26 15:58<br>
+ * Version: 2024<br>
+ * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-01-29")
-public enum UnitCode implements ValueSetEnumInterface {
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-06-24")
+public enum UnitCode implements ValueSetEnumInterface, FhirValueSetEnumInterface {
 
     /**
      * EN: a.<br>
@@ -73,6 +76,19 @@ public enum UnitCode implements ValueSetEnumInterface {
            "Ampulle",
            "ampoule",
            "fiala"),
+    /**
+     * EN: Application - unit of product usage (qualifier value).<br>
+     * DE: Application - unit of product usage (qualifier value).<br>
+     * FR: Application - unit of product usage (qualifier value).<br>
+     * IT: Application - unit of product usage (qualifier value).<br>
+     */
+    APPLICATION_UNIT_OF_PRODUCT_USAGE_QUALIFIER_VALUE("413568008",
+                                                      "http://snomed.info/sct",
+                                                      "Application - unit of product usage (qualifier value)",
+                                                      "Application - unit of product usage (qualifier value)",
+                                                      "Application - unit of product usage (qualifier value)",
+                                                      "Application - unit of product usage (qualifier value)",
+                                                      "Application - unit of product usage (qualifier value)"),
     /**
      * EN: Applicator.<br>
      * DE: Applikator.<br>
@@ -737,6 +753,19 @@ public enum UnitCode implements ValueSetEnumInterface {
        "nl",
        "nl"),
     /**
+     * EN: nmol.<br>
+     * DE: nmol.<br>
+     * FR: nmol.<br>
+     * IT: nmol.<br>
+     */
+    NMOL("nmol",
+         "http://unitsofmeasure.org",
+         "nanomole",
+         "nmol",
+         "nmol",
+         "nmol",
+         "nmol"),
+    /**
      * EN: Package.<br>
      * DE: Packung.<br>
      * FR: emballage.<br>
@@ -833,9 +862,9 @@ public enum UnitCode implements ValueSetEnumInterface {
      * FR: pce.<br>
      * IT: pz.<br>
      */
-    PIECE("{Piece}",
-          "http://unitsofmeasure.org",
-          "Piece",
+    PIECE("246205007",
+          "http://snomed.info/sct",
+          "Quantity (attribute)",
           "Piece(s)",
           "Stk",
           "pce",
@@ -1241,6 +1270,14 @@ public enum UnitCode implements ValueSetEnumInterface {
      * IT: Code per fiala.<br>
      */
     public static final String AMPULE_CODE = "732978007";
+
+    /**
+     * EN: Code for Application - unit of product usage (qualifier value).<br>
+     * DE: Code für Application - unit of product usage (qualifier value).<br>
+     * FR: Code de Application - unit of product usage (qualifier value).<br>
+     * IT: Code per Application - unit of product usage (qualifier value).<br>
+     */
+    public static final String APPLICATION_UNIT_OF_PRODUCT_USAGE_QUALIFIER_VALUE_CODE = "413568008";
 
     /**
      * EN: Code for Applicator.<br>
@@ -1651,6 +1688,14 @@ public enum UnitCode implements ValueSetEnumInterface {
     public static final String NL_CODE = "nL";
 
     /**
+     * EN: Code for nmol.<br>
+     * DE: Code für nmol.<br>
+     * FR: Code de nmol.<br>
+     * IT: Code per nmol.<br>
+     */
+    public static final String NMOL_CODE = "nmol";
+
+    /**
      * EN: Code for Package.<br>
      * DE: Code für Packung.<br>
      * FR: Code de emballage.<br>
@@ -1712,7 +1757,7 @@ public enum UnitCode implements ValueSetEnumInterface {
      * FR: Code de pce.<br>
      * IT: Code per pz.<br>
      */
-    public static final String PIECE_CODE = "{Piece}";
+    public static final String PIECE_CODE = "246205007";
 
     /**
      * EN: Code for Pillule.<br>
@@ -1957,56 +2002,6 @@ public enum UnitCode implements ValueSetEnumInterface {
     public static final String VALUE_SET_NAME = "UnitCode";
 
     /**
-     * Gets the Enum with a given code.
-     *
-     * @param code The code value.
-     * @return the enum value found or {@code null}.
-     */
-    @Nullable
-    public static UnitCode getEnum(@Nullable final String code) {
-        for (final UnitCode x : values()) {
-            if (x.getCodeValue().equals(code)) {
-                return x;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Checks if a given enum is part of this value set.
-     *
-     * @param enumName The name of the enum.
-     * @return {@code true} if the name is found in this value set, {@code false} otherwise.
-     */
-    public static boolean isEnumOfValueSet(@Nullable final String enumName) {
-        if (enumName == null) {
-            return false;
-        }
-        try {
-            Enum.valueOf(UnitCode.class,
-                         enumName);
-            return true;
-        } catch (final IllegalArgumentException ex) {
-            return false;
-        }
-    }
-
-    /**
-     * Checks if a given code value is in this value set.
-     *
-     * @param codeValue The code value.
-     * @return {@code true} if the value is found in this value set, {@code false} otherwise.
-     */
-    public static boolean isInValueSet(@Nullable final String codeValue) {
-        for (final UnitCode x : values()) {
-            if (x.getCodeValue().equals(codeValue)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * Machine interpretable and (inside this class) unique code.
      */
     @NonNull
@@ -2130,5 +2125,115 @@ public enum UnitCode implements ValueSetEnumInterface {
     @NonNull
     public String getValueSetName() {
         return VALUE_SET_NAME;
+    }
+
+    /**
+     * Returns the enum value as a FHIR Coding.
+     */
+    @Override
+    public Coding getCoding() {
+        return new Coding(this.getCodeSystemId(),
+                          this.getCodeValue(),
+                          this.getCodeSystemName());
+    }
+
+    /**
+     * Returns the enum value as a FHIR CodeableConcept.
+     */
+    @Override
+    public CodeableConcept getCodeableConcept() {
+        return new CodeableConcept().setText(this.getCodeSystemName()).addCoding(this.getCoding());
+    }
+
+    /**
+     * Compares the enum value to the given FHIR Coding.
+     *
+     * @param coding The FHIR Coding to be compared.
+     * @return {@code true} if they have the same system and value, {@code false} otherwise.
+     */
+    @Override
+    public boolean isEqualTo(final Coding coding) {
+        return this.getCodeSystemId().equals(coding.getSystem()) && this.getCodeValue().equals(coding.getCode());
+    }
+
+    /**
+     * Gets the Enum with a given code.
+     *
+     * @param code The code value.
+     * @return the enum value found or {@code null}.
+     */
+    @Nullable
+    public static UnitCode getEnum(@Nullable final String code) {
+        for (final UnitCode x : values()) {
+            if (x.getCodeValue().equals(code)) {
+                return x;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Checks if a given enum is part of this value set.
+     *
+     * @param enumName The name of the enum.
+     * @return {@code true} if the name is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isEnumOfValueSet(@Nullable final String enumName) {
+        if (enumName == null) {
+            return false;
+        }
+        try {
+            Enum.valueOf(UnitCode.class,
+                         enumName);
+            return true;
+        } catch (final IllegalArgumentException ex) {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if a given code value is in this value set.
+     *
+     * @param codeValue The code value.
+     * @return {@code true} if the value is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isInValueSet(@Nullable final String codeValue) {
+        for (final UnitCode x : values()) {
+            if (x.getCodeValue().equals(codeValue)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Gets the Enum with a given FHIR Coding.
+     *
+     * @param coding The FHIR Coding.
+     * @return the enum value found or {@code null}.
+     */
+    @Nullable
+    public static UnitCode getEnum(@Nullable final Coding coding) {
+        for (final var x : values()) {
+            if (x.isEqualTo(coding)) {
+                return x;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Checks if a given FHIR Coding is in this value set.
+     *
+     * @param coding The FHIR Coding.
+     * @return {@code true} if the value is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isInValueSet(@Nullable final Coding coding) {
+        for (final var x : values()) {
+            if (x.isEqualTo(coding)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
