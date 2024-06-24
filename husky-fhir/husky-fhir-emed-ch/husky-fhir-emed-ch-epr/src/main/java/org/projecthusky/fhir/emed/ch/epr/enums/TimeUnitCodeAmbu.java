@@ -7,7 +7,7 @@
  * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  */
-package org.projecthusky.fhir.emed.ch.common.enums;
+package org.projecthusky.fhir.emed.ch.epr.enums;
 
 import java.util.Objects;
 import javax.annotation.processing.Generated;
@@ -22,204 +22,99 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
 import org.projecthusky.fhir.structures.utils.FhirValueSetEnumInterface;
 
 /**
- * Enumeration of ActSubstanceAdminSubstitutionCode values
+ * Enumeration of TimeUnitCodeAmbu values
  * <p>
  * EN: No designation found.<br>
  * DE: No designation found.<br>
  * FR: No designation found.<br>
  * IT: No designation found.<br>
  * <p>
- * Identifier: 2.16.756.5.30.1.1.11.81<br>
- * Effective date: 2020-07-10 00:52<br>
- * Version: 2020<br>
+ * Identifier: 2.16.756.5.30.1.127.77.12.11.4<br>
+ * Effective date: 2022-04-15 09:05<br>
+ * Version: 2022<br>
  * Status: DRAFT
  */
 @Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-06-24")
-public enum ActSubstanceAdminSubstitutionCode implements ValueSetEnumInterface, FhirValueSetEnumInterface {
+public enum TimeUnitCodeAmbu implements ValueSetEnumInterface, FhirValueSetEnumInterface {
 
     /**
-     * EN: brand composition.<br>
-     * DE: Äquivalent, andere Marke.<br>
-     * FR: équivalent autre fabriquant.<br>
-     * IT: equivalente altra marca.<br>
+     * EN: h.<br>
+     * DE: h.<br>
+     * FR: h.<br>
+     * IT: h.<br>
      */
-    BRAND_COMPOSITION_L3("BC",
-                         "2.16.840.1.113883.5.1070",
-                         "brand composition",
-                         "brand composition",
-                         "Äquivalent, andere Marke",
-                         "équivalent autre fabriquant",
-                         "equivalente altra marca"),
+    H("h",
+      "http://unitsofmeasure.org",
+      "Hour",
+      "h",
+      "h",
+      "h",
+      "h"),
     /**
-     * EN: equivalent composition.<br>
-     * DE: äquivalente Zusammensetzung.<br>
-     * FR: composition équivalente.<br>
-     * IT: composizione simile.<br>
+     * EN: min.<br>
+     * DE: min.<br>
+     * FR: min.<br>
+     * IT: min.<br>
      */
-    EQUIVALENT_COMPOSITION_L2("EC",
-                              "2.16.840.1.113883.5.1070",
-                              "equivalent composition",
-                              "equivalent composition",
-                              "äquivalente Zusammensetzung",
-                              "composition équivalente",
-                              "composizione simile"),
+    MIN("min",
+        "http://unitsofmeasure.org",
+        "Minute",
+        "min",
+        "min",
+        "min",
+        "min"),
     /**
-     * EN: equivalent.<br>
-     * DE: Äquivalent.<br>
-     * FR: équivalent.<br>
-     * IT: equivalente.<br>
+     * EN: sec.<br>
+     * DE: sec.<br>
+     * FR: sec.<br>
+     * IT: sec.<br>
      */
-    EQUIVALENT_L1("E",
-                  "2.16.840.1.113883.5.1070",
-                  "equivalent",
-                  "equivalent",
-                  "Äquivalent",
-                  "équivalent",
-                  "equivalente"),
-    /**
-     * EN: generic composition.<br>
-     * DE: Äquivalent, Generikum.<br>
-     * FR: équivalent générique.<br>
-     * IT: equivalente generico.<br>
-     */
-    GENERIC_COMPOSITION_L3("G",
-                           "2.16.840.1.113883.5.1070",
-                           "generic composition",
-                           "generic composition",
-                           "Äquivalent, Generikum",
-                           "équivalent générique",
-                           "equivalente generico"),
-    /**
-     * EN: none.<br>
-     * DE: nicht autorisiert.<br>
-     * FR: non autorisé.<br>
-     * IT: non autorizzato.<br>
-     */
-    NONE_L1("N",
-            "2.16.840.1.113883.5.1070",
-            "none",
-            "none",
-            "nicht autorisiert",
-            "non autorisé",
-            "non autorizzato"),
-    /**
-     * EN: therapeutic alternative.<br>
-     * DE: therapeutische Alternative.<br>
-     * FR: alternative thérapeutique.<br>
-     * IT: alternativa terapeutica.<br>
-     */
-    THERAPEUTIC_ALTERNATIVE_L2("TE",
-                               "2.16.840.1.113883.5.1070",
-                               "therapeutic alternative",
-                               "therapeutic alternative",
-                               "therapeutische Alternative",
-                               "alternative thérapeutique",
-                               "alternativa terapeutica"),
-    /**
-     * EN: therapeutic brand.<br>
-     * DE: therapeutische Alternative, andere Marke.<br>
-     * FR: lternative thérapeutique autre marque.<br>
-     * IT: alternativa terapeutica altra marca.<br>
-     */
-    THERAPEUTIC_BRAND_L3("TB",
-                         "2.16.840.1.113883.5.1070",
-                         "therapeutic brand",
-                         "therapeutic brand",
-                         "therapeutische Alternative, andere Marke",
-                         "lternative thérapeutique autre marque",
-                         "alternativa terapeutica altra marca"),
-    /**
-     * EN: therapeutic generic.<br>
-     * DE: therapeutische Alternative, Generikum.<br>
-     * FR: alternative thérapeutique générique.<br>
-     * IT: alternativa terapeutica generico.<br>
-     */
-    THERAPEUTIC_GENERIC_L3("TG",
-                           "2.16.840.1.113883.5.1070",
-                           "therapeutic generic",
-                           "therapeutic generic",
-                           "therapeutische Alternative, Generikum",
-                           "alternative thérapeutique générique",
-                           "alternativa terapeutica generico");
+    SEC("s",
+        "http://unitsofmeasure.org",
+        "Second",
+        "sec",
+        "sec",
+        "sec",
+        "sec");
 
     /**
-     * EN: Code for brand composition.<br>
-     * DE: Code für Äquivalent, andere Marke.<br>
-     * FR: Code de équivalent autre fabriquant.<br>
-     * IT: Code per equivalente altra marca.<br>
+     * EN: Code for h.<br>
+     * DE: Code für h.<br>
+     * FR: Code de h.<br>
+     * IT: Code per h.<br>
      */
-    public static final String BRAND_COMPOSITION_L3_CODE = "BC";
+    public static final String H_CODE = "h";
 
     /**
-     * EN: Code for equivalent composition.<br>
-     * DE: Code für äquivalente Zusammensetzung.<br>
-     * FR: Code de composition équivalente.<br>
-     * IT: Code per composizione simile.<br>
+     * EN: Code for min.<br>
+     * DE: Code für min.<br>
+     * FR: Code de min.<br>
+     * IT: Code per min.<br>
      */
-    public static final String EQUIVALENT_COMPOSITION_L2_CODE = "EC";
+    public static final String MIN_CODE = "min";
 
     /**
-     * EN: Code for equivalent.<br>
-     * DE: Code für Äquivalent.<br>
-     * FR: Code de équivalent.<br>
-     * IT: Code per equivalente.<br>
+     * EN: Code for sec.<br>
+     * DE: Code für sec.<br>
+     * FR: Code de sec.<br>
+     * IT: Code per sec.<br>
      */
-    public static final String EQUIVALENT_L1_CODE = "E";
-
-    /**
-     * EN: Code for generic composition.<br>
-     * DE: Code für Äquivalent, Generikum.<br>
-     * FR: Code de équivalent générique.<br>
-     * IT: Code per equivalente generico.<br>
-     */
-    public static final String GENERIC_COMPOSITION_L3_CODE = "G";
-
-    /**
-     * EN: Code for none.<br>
-     * DE: Code für nicht autorisiert.<br>
-     * FR: Code de non autorisé.<br>
-     * IT: Code per non autorizzato.<br>
-     */
-    public static final String NONE_L1_CODE = "N";
-
-    /**
-     * EN: Code for therapeutic alternative.<br>
-     * DE: Code für therapeutische Alternative.<br>
-     * FR: Code de alternative thérapeutique.<br>
-     * IT: Code per alternativa terapeutica.<br>
-     */
-    public static final String THERAPEUTIC_ALTERNATIVE_L2_CODE = "TE";
-
-    /**
-     * EN: Code for therapeutic brand.<br>
-     * DE: Code für therapeutische Alternative, andere Marke.<br>
-     * FR: Code de lternative thérapeutique autre marque.<br>
-     * IT: Code per alternativa terapeutica altra marca.<br>
-     */
-    public static final String THERAPEUTIC_BRAND_L3_CODE = "TB";
-
-    /**
-     * EN: Code for therapeutic generic.<br>
-     * DE: Code für therapeutische Alternative, Generikum.<br>
-     * FR: Code de alternative thérapeutique générique.<br>
-     * IT: Code per alternativa terapeutica generico.<br>
-     */
-    public static final String THERAPEUTIC_GENERIC_L3_CODE = "TG";
+    public static final String SEC_CODE = "s";
 
     /**
      * Identifier of the value set.
      */
-    public static final String VALUE_SET_ID = "2.16.756.5.30.1.1.11.81";
+    public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.77.12.11.4";
 
     /**
      * Name of the value set.
      */
-    public static final String VALUE_SET_NAME = "ActSubstanceAdminSubstitutionCode";
+    public static final String VALUE_SET_NAME = "TimeUnitCodeAmbu";
 
     /**
      * Identifier of the code system (all values share the same).
      */
-    public static final String CODE_SYSTEM_ID = "2.16.840.1.113883.5.1070";
+    public static final String CODE_SYSTEM_ID = "http://unitsofmeasure.org";
 
     /**
      * Machine interpretable and (inside this class) unique code.
@@ -251,7 +146,7 @@ public enum ActSubstanceAdminSubstitutionCode implements ValueSetEnumInterface, 
      * @param displayNameFr The display name in French.
      * @param displayNameIt The display name in Italian.
      */
-    ActSubstanceAdminSubstitutionCode(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
+    TimeUnitCodeAmbu(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
         this.code = Objects.requireNonNull(code);
         this.codeSystem = Objects.requireNonNull(codeSystem);
         this.displayNames = new String[5];
@@ -383,8 +278,8 @@ public enum ActSubstanceAdminSubstitutionCode implements ValueSetEnumInterface, 
      * @return the enum value found or {@code null}.
      */
     @Nullable
-    public static ActSubstanceAdminSubstitutionCode getEnum(@Nullable final String code) {
-        for (final ActSubstanceAdminSubstitutionCode x : values()) {
+    public static TimeUnitCodeAmbu getEnum(@Nullable final String code) {
+        for (final TimeUnitCodeAmbu x : values()) {
             if (x.getCodeValue().equals(code)) {
                 return x;
             }
@@ -403,7 +298,7 @@ public enum ActSubstanceAdminSubstitutionCode implements ValueSetEnumInterface, 
             return false;
         }
         try {
-            Enum.valueOf(ActSubstanceAdminSubstitutionCode.class,
+            Enum.valueOf(TimeUnitCodeAmbu.class,
                          enumName);
             return true;
         } catch (final IllegalArgumentException ex) {
@@ -418,7 +313,7 @@ public enum ActSubstanceAdminSubstitutionCode implements ValueSetEnumInterface, 
      * @return {@code true} if the value is found in this value set, {@code false} otherwise.
      */
     public static boolean isInValueSet(@Nullable final String codeValue) {
-        for (final ActSubstanceAdminSubstitutionCode x : values()) {
+        for (final TimeUnitCodeAmbu x : values()) {
             if (x.getCodeValue().equals(codeValue)) {
                 return true;
             }
@@ -433,7 +328,7 @@ public enum ActSubstanceAdminSubstitutionCode implements ValueSetEnumInterface, 
      * @return the enum value found or {@code null}.
      */
     @Nullable
-    public static ActSubstanceAdminSubstitutionCode getEnum(@Nullable final Coding coding) {
+    public static TimeUnitCodeAmbu getEnum(@Nullable final Coding coding) {
         for (final var x : values()) {
             if (x.isEqualTo(coding)) {
                 return x;
