@@ -12,6 +12,7 @@ package org.projecthusky.fhir.emed.ch.epr.resource.mtp;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.hl7.fhir.r4.model.*;
+import org.projecthusky.common.enums.EnumConstants;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
@@ -128,6 +129,16 @@ public class ChEmedEprCompositionMtp extends ChEmedEprComposition {
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    TREATMENT_PLAN_SECTION_CODE_VALUE,
                                                    "Medication treatment plan.brief Document"));
+            if (EnumConstants.FRENCH_CODE.equals(this.getLanguage())) {
+                section.setTitle("Plan de traitement médicamenteux");
+            } else if (EnumConstants.GERMAN_CODE.equals(this.getLanguage())) {
+                section.setTitle("Medikamentöser Behandlungsplan");
+            } else if (EnumConstants.ITALIAN_CODE.equals(this.getLanguage())) {
+                section.setTitle("Piano terapeutico farmacologico");
+            } else {
+                section.setTitle("Medication Treatment Plan");
+            }
+            section.getText().setStatus(Narrative.NarrativeStatus.ADDITIONAL).setDivAsString(section.getTitle());
         }
         return section;
     }
