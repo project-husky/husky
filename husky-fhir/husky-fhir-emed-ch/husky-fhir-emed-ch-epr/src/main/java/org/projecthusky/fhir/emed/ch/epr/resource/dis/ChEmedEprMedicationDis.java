@@ -7,6 +7,8 @@ import org.projecthusky.fhir.emed.ch.common.resource.ChEmedOrganization;
 import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedRatioWithEmedUnits;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedication;
 
+import java.util.Objects;
+
 /**
  * The HAPI custom structure for CH-EMED-EPR Medication (DIS).
  *
@@ -46,12 +48,10 @@ public class ChEmedEprMedicationDis extends ChEmedEprMedication {
      */
     @ExpectsValidResource
     public ChEmedRatioWithEmedUnits resolveAmount() throws InvalidEmedContentException {
-        if (!this.hasAmount()) throw new InvalidEmedContentException("The package size is missing.");
-
-        if (this.getAmount() instanceof ChEmedRatioWithEmedUnits chRatio) {
-            return chRatio;
+        if (!this.hasAmount()) {
+            throw new InvalidEmedContentException("The package size is missing");
         }
-        throw new InvalidEmedContentException("The package size isn't of the right type.");
+        return Objects.requireNonNull(super.resolveAmount());
     }
 
     /**
