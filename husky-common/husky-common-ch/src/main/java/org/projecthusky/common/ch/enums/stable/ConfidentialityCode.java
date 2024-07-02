@@ -27,74 +27,74 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * IT: Grado di riservatezza secondo l'allegato 3 OCIP-DFI.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.127.3.10.1.5<br>
- * Effective date: 2021-04-01 17:05<br>
- * Version: 202104.0-stable<br>
+ * Effective date: 2022-06-26 13:35<br>
+ * Version: 202306.0-stable<br>
  * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-09-29")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-07-02")
 public enum ConfidentialityCode implements ValueSetEnumInterface {
 
     /**
-     * EN: Normally accessible.<br>
-     * DE: Normal zugängliche Dokumente.<br>
-     * FR: Normal.<br>
-     * IT: Dati normalmente accessibili.<br>
+     * EN: Normal.<br>
+     * DE: Normal.<br>
+     * FR: normal.<br>
+     * IT: normale.<br>
      */
-    NORMALLY_ACCESSIBLE("17621005",
-                        "2.16.840.1.113883.6.96",
-                        "Normal (qualifier value)",
-                        "Normally accessible",
-                        "Normal zugängliche Dokumente",
-                        "Normal",
-                        "Dati normalmente accessibili"),
+    NORMAL("17621005",
+           "2.16.840.1.113883.6.96",
+           "Normal (qualifier value)",
+           "Normal",
+           "Normal",
+           "normal",
+           "normale"),
     /**
-     * EN: Restricted accessible.<br>
-     * DE: Eingeschränkt zugängliche Dokumente.<br>
-     * FR: Restreint.<br>
-     * IT: Dati limitatamente accessibili.<br>
+     * EN: Restricted.<br>
+     * DE: Eingeschränkt.<br>
+     * FR: restreint.<br>
+     * IT: limitato.<br>
      */
-    RESTRICTED_ACCESSIBLE("263856008",
-                          "2.16.840.1.113883.6.96",
-                          "Restricted (qualifier value)",
-                          "Restricted accessible",
-                          "Eingeschränkt zugängliche Dokumente",
-                          "Restreint",
-                          "Dati limitatamente accessibili"),
+    RESTRICTED("263856008",
+               "2.16.840.1.113883.6.96",
+               "Restricted (qualifier value)",
+               "Restricted",
+               "Eingeschränkt",
+               "restreint",
+               "limitato"),
     /**
      * EN: Secret.<br>
-     * DE: Geheime Dokumente.<br>
-     * FR: Secret.<br>
-     * IT: Dati segreti.<br>
+     * DE: Geheim.<br>
+     * FR: secret.<br>
+     * IT: segreto.<br>
      */
     SECRET("1141000195107",
            "2.16.756.5.30.1.127.3.4",
            "Secret (qualifier value)",
            "Secret",
-           "Geheime Dokumente",
-           "Secret",
-           "Dati segreti");
+           "Geheim",
+           "secret",
+           "segreto");
 
     /**
-     * EN: Code for Normally accessible.<br>
-     * DE: Code für Normal zugängliche Dokumente.<br>
-     * FR: Code de Normal.<br>
-     * IT: Code per Dati normalmente accessibili.<br>
+     * EN: Code for Normal.<br>
+     * DE: Code für Normal.<br>
+     * FR: Code de normal.<br>
+     * IT: Code per normale.<br>
      */
-    public static final String NORMALLY_ACCESSIBLE_CODE = "17621005";
+    public static final String NORMAL_CODE = "17621005";
 
     /**
-     * EN: Code for Restricted accessible.<br>
-     * DE: Code für Eingeschränkt zugängliche Dokumente.<br>
-     * FR: Code de Restreint.<br>
-     * IT: Code per Dati limitatamente accessibili.<br>
+     * EN: Code for Restricted.<br>
+     * DE: Code für Eingeschränkt.<br>
+     * FR: Code de restreint.<br>
+     * IT: Code per limitato.<br>
      */
-    public static final String RESTRICTED_ACCESSIBLE_CODE = "263856008";
+    public static final String RESTRICTED_CODE = "263856008";
 
     /**
      * EN: Code for Secret.<br>
-     * DE: Code für Geheime Dokumente.<br>
-     * FR: Code de Secret.<br>
-     * IT: Code per Dati segreti.<br>
+     * DE: Code für Geheim.<br>
+     * FR: Code de secret.<br>
+     * IT: Code per segreto.<br>
      */
     public static final String SECRET_CODE = "1141000195107";
 

@@ -27,11 +27,11 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * IT: No designation found.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.127.3.10.8.3<br>
- * Effective date: 2020-05-18 20:00<br>
- * Version: 202004.1-stable<br>
+ * Effective date: 2023-05-22 16:57<br>
+ * Version: 202306.0-stable<br>
  * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-09-29")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-07-02")
 public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
 
     /**

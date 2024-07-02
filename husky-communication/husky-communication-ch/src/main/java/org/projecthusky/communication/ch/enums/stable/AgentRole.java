@@ -21,7 +21,7 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
 /**
  * Enumeration of EprAgentRole values
  * <p>
- * EN: Role codes as per Annex 5 EPRO-FDHA, CH:ATC, version July 2019 <br/>.<br>
+ * EN: &lt;span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;"&gt;Role codes as per Annex 5 EPRO-FDHA, CH:ATC, &lt;/span&gt; &lt;span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;"&gt;version&lt;/span&gt;   &lt;span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;"&gt;July 2019 &lt;/span&gt; &lt;br/&gt;.<br>
  * DE: No designation found.<br>
  * FR: No designation found.<br>
  * IT: No designation found.<br>
@@ -31,7 +31,7 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * Version: 201907.1-stable<br>
  * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-09-29")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-07-02")
 public enum AgentRole implements ValueSetEnumInterface {
 
     /**

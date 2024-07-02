@@ -9,29 +9,29 @@
  */
 package org.projecthusky.communication.ch.enums.stable;
 
+import java.util.Objects;
+import javax.annotation.processing.Generated;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.common.enums.CodeSystems;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.enums.ValueSetEnumInterface;
 
-import javax.annotation.processing.Generated;
-import java.util.Objects;
-
 /**
  * Enumeration of EprDeletionStatus values
  * <p>
- * EN: Deletion codes as per s upplement 1 to Annex 5 EPRO-FDHA.<br/>.<br>
+ * EN: &lt;span style="font-family: Verdana, Arial, sans-serif; font-size: 12px; color: rgb(51, 51, 51);"&gt;Deletion codes as per &lt;/span&gt; &lt;span style="font-family: Verdana, Arial, sans-serif; font-size: 12px; color: rgb(51, 51, 51);"&gt;s&lt;/span&gt; &lt;font color="#333333" face="Verdana, Arial, sans-serif"&gt; &lt;span style="font-size: 12px;"&gt;upplement 1 to&lt;/span&gt;&lt;/font&gt; &lt;span style="font-family: Verdana, Arial, sans-serif; font-size: 12px; color: rgb(51, 51, 51);"&gt; Annex 5 EPRO-FDHA.&lt;/span&gt; &lt;br/&gt;.<br>
  * DE: No designation found.<br>
  * FR: No designation found.<br>
  * IT: No designation found.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.127.3.10.15.3<br>
- * Effective date: 2021-11-29 10:41<br>
- * Version: 202104.0-beta<br>
- * Status: DRAFT
+ * Effective date: 2023-05-31 20:04<br>
+ * Version: 202104.0-stable<br>
+ * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-09-29")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-07-02")
 public enum DeletionStatus implements ValueSetEnumInterface {
 
     /**

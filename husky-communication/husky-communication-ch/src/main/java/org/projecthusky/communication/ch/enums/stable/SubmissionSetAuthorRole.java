@@ -27,11 +27,11 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * IT: No designation found.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.127.3.10.1.41<br>
- * Effective date: 2021-04-01 17:12<br>
- * Version: 202104.0-stable<br>
+ * Effective date: 2023-05-22 17:58<br>
+ * Version: 202306.0-stable<br>
  * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-09-29")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-07-02")
 public enum SubmissionSetAuthorRole implements ValueSetEnumInterface {
 
     /**
