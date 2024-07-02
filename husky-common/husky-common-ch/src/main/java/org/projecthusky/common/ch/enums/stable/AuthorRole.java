@@ -27,11 +27,11 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * IT: Ruolo dell'autore. Questo codice definisce il ruolo dell'autore del documento. È un sottoattributo di epd_xds_author.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.127.3.10.1.1.3<br>
- * Effective date: 2021-04-01 08:55<br>
- * Version: 202104.0-stable<br>
+ * Effective date: 2022-06-24 10:44<br>
+ * Version: 202306.0-stable<br>
  * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-09-29")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-07-02")
 public enum AuthorRole implements ValueSetEnumInterface {
 
     /**

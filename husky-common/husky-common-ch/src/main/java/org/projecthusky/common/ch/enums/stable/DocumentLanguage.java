@@ -27,11 +27,11 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * IT: Lingua del documento secondo l'allegato 3 OCIP-DFI. Definisce la lingua nella quale è stato redatto il documento.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.127.3.10.1.13<br>
- * Effective date: 2021-04-01 17:03<br>
- * Version: 202104.0-stable<br>
+ * Effective date: 2023-05-22 17:37<br>
+ * Version: 202306.0-stable<br>
  * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-09-29")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-07-02")
 public enum DocumentLanguage implements ValueSetEnumInterface {
 
     /**
