@@ -952,7 +952,9 @@ public class PixPdqV3Utils {
 	 * @param organizationOID
 	 * @param organizationName
 	 * @return MFMIMT700701UV01Custodian with the supplied Organization ID and name.
+	 * @deprecated Use {@link #createRegistrationCustodian(List, String)} instead
 	 */
+	@Deprecated
 	public static MFMIMT700701UV01Custodian createRegistrationCustodian(String organizationOID,
 			String organizationName) {
 		var custodian = new MFMIMT700701UV01Custodian();
@@ -961,6 +963,34 @@ public class PixPdqV3Utils {
 		custodian.setAssignedEntity(assignedEntity);
 		assignedEntity.setClassCode(RoleClassAssignedEntity.ASSIGNED);
 		assignedEntity.addId(createII(organizationOID, "", ""));
+		var assignedOrganization = new COCTMT090003UV01Organization();
+		assignedEntity.setAssignedOrganization(assignedOrganization);
+		assignedOrganization.setClassCode(EntityClassOrganization.ORG);
+		assignedOrganization.setDeterminerCode(EntityDeterminer.INSTANCE);
+		var name = new EN();
+		name.setMixed(List.of(organizationName));
+		assignedOrganization.setName(List.of(name));
+		return custodian;
+	}
+
+	/**
+	 * Creates a MFMIMT700701UV01Custodian with the supplied Organization ID and
+	 * name
+	 *
+	 * @param organizationOids
+	 * @param organizationName
+	 * @return MFMIMT700701UV01Custodian with the supplied Organization ID and name.
+	 */
+	public static MFMIMT700701UV01Custodian createRegistrationCustodian(final List<String> organizationOids,
+																		final String organizationName) {
+		var custodian = new MFMIMT700701UV01Custodian();
+		custodian.setTypeCode(ParticipationType.CST);
+		var assignedEntity = new COCTMT090003UV01AssignedEntity();
+		custodian.setAssignedEntity(assignedEntity);
+		assignedEntity.setClassCode(RoleClassAssignedEntity.ASSIGNED);
+		for (final var organizationOid : organizationOids) {
+			assignedEntity.addId(createII(organizationOid, "", ""));
+		}
 		var assignedOrganization = new COCTMT090003UV01Organization();
 		assignedEntity.setAssignedOrganization(assignedOrganization);
 		assignedOrganization.setClassCode(EntityClassOrganization.ORG);
