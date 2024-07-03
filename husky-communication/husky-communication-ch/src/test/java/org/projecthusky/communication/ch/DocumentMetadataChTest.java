@@ -38,8 +38,8 @@ class DocumentMetadataChTest extends TestUtils {
 
 	@Test
 	void testConfidentialityCodeEnum() {
-		m.addConfidentialityCode(ConfidentialityCode.NORMALLY_ACCESSIBLE);
-		assertTrue(isEqual(ConfidentialityCode.NORMALLY_ACCESSIBLE.getCode(),
+		m.addConfidentialityCode(ConfidentialityCode.NORMAL);
+		assertTrue(isEqual(ConfidentialityCode.NORMAL.getCode(),
 				m.getConfidentialityCodesEnum().get(0).getCode()));
 	}
 
