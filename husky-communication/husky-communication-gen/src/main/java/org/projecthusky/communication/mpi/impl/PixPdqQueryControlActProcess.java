@@ -211,14 +211,23 @@ public class PixPdqQueryControlActProcess {
 
 		if (this.internalObj instanceof PRPAIN201301UV02MFMIMT700701UV01ControlActProcess) {
 			// add the patient to the subject
+			if (getPRPAIN201301UV02MFMIMT700701UV01Subject2().getPatient() == null) {
+				getPRPAIN201301UV02MFMIMT700701UV01Subject2().setPatient(new PRPAMT201301UV02Patient());
+			}
 			getPRPAIN201301UV02MFMIMT700701UV01Subject2().getPatient()
 					.setPatientPerson(patientPerson.getPRPAMT201301UV02Person());
 		} else if (this.internalObj instanceof PRPAIN201302UV02MFMIMT700701UV01ControlActProcess) {
 			// add the patient to the subject
+			if (getPRPAIN201302UV02MFMIMT700701UV01Subject2().getPatient() == null) {
+				getPRPAIN201302UV02MFMIMT700701UV01Subject2().setPatient(new PRPAMT201302UV02Patient());
+			}
 			getPRPAIN201302UV02MFMIMT700701UV01Subject2().getPatient()
 					.setPatientPerson(patientPerson.getPRPAMT201302UV02PatientPatientPerson());
 		} else if (this.internalObj instanceof PRPAIN201304UV02MFMIMT700701UV01ControlActProcess) {
 			// add the patient to the subject
+			if (getPRPAIN201304UV02MFMIMT700701UV01Subject2().getPatient() == null) {
+				getPRPAIN201304UV02MFMIMT700701UV01Subject2().setPatient(new PRPAMT201303UV02Patient());
+			}
 			getPRPAIN201304UV02MFMIMT700701UV01Subject2().getPatient()
 					.setPatientPerson(patientPerson.getPRPAMT201303UV02Person());
 
