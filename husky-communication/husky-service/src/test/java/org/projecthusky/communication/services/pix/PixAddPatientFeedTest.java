@@ -10,10 +10,6 @@
  */
 package org.projecthusky.communication.services.pix;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import org.hl7.fhir.r4.model.HumanName;
 import org.hl7.fhir.r4.model.Organization;
 import org.hl7.fhir.r4.model.Identifier;
@@ -24,6 +20,8 @@ import org.projecthusky.communication.requests.pix.PixAddPatientFeed;
 
 import java.util.Date;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PixAddPatientFeedTest {
 
@@ -104,6 +102,8 @@ public class PixAddPatientFeedTest {
 		assertNotNull(root.getControlActProcess().getSubject());
 		final var subject = root.getControlActProcess().getSubject().get(0);
 		assertNotNull(subject);
+		assertFalse(subject.getContextConductionInd());
+		assertEquals("SUBJ", subject.getTypeCode());
 		assertNotNull(subject.getRegistrationEvent());
 		assertNotNull(subject.getRegistrationEvent().getCustodian());
 		assertNotNull(subject.getRegistrationEvent().getSubject1());
