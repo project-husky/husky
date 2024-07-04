@@ -20,6 +20,7 @@ import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.PharmaceuticalDoseFormEdqm;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
+import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedRatioWithEmedUnits;
 
 import java.util.List;
 import java.util.Objects;
@@ -221,6 +222,25 @@ public class ChEmedEprMedication extends Medication {
     public ChEmedEprMedication addActiveIngredient(final ChEmedEprMedicationIngredient ingredient) {
         super.addIngredient(ingredient);
         return this;
+    }
+
+    /**
+     * Resolves the package size.
+     *
+     * @return the package size.
+     * @throws InvalidEmedContentException if the package size is missing or of the wrong type.
+     */
+    @Nullable
+    public ChEmedRatioWithEmedUnits resolveAmount() {
+        if (!this.hasAmount()) {
+            return null;
+        }
+        if (this.getAmount() instanceof ChEmedRatioWithEmedUnits chRatio) {
+            return chRatio;
+        }
+        final var chRatio = new ChEmedRatioWithEmedUnits();
+        this.getAmount().copyValues(chRatio);
+        return chRatio;
     }
 
     @Override

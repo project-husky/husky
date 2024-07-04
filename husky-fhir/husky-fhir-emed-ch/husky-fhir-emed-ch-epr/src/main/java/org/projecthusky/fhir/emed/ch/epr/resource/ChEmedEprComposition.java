@@ -327,7 +327,7 @@ public abstract class ChEmedEprComposition extends Composition {
             } else {
                 section.setTitle("Original representation");
             }
-            section.getText().setStatus(Narrative.NarrativeStatus.ADDITIONAL).setDivAsString(this.getTitle());
+            section.getText().setStatus(Narrative.NarrativeStatus.ADDITIONAL).setDivAsString(section.getTitle());
         }
         return section;
     }
