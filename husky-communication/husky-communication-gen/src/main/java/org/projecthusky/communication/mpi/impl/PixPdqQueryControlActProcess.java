@@ -42,6 +42,8 @@ public class PixPdqQueryControlActProcess {
 		this.internalObj = obj;
 
 		if (obj instanceof PRPAIN201301UV02MFMIMT700701UV01ControlActProcess) {
+			// Patient Registry Record Added
+
 			// set the class code
 			getPRPAIN201301UV02MFMIMT700701UV01ControlActProcess().setClassCode(ActClassControlAct.CACT);
 
@@ -56,6 +58,7 @@ public class PixPdqQueryControlActProcess {
 
 			// set the subject type code
 			getPRPAIN201301UV02MFMIMT700701UV01Subject1().setTypeCode("SUBJ");
+			getPRPAIN201301UV02MFMIMT700701UV01Subject1().setContextConductionInd(false);
 
 			subjectPatient = new PixPdqSubjectPatient(new PRPAMT201301UV02Patient());
 
@@ -70,6 +73,7 @@ public class PixPdqQueryControlActProcess {
 					.setRegistrationEvent(getPRPAIN201301UV02MFMIMT700701UV01RegistrationEvent());
 
 		} else if (obj instanceof PRPAIN201302UV02MFMIMT700701UV01ControlActProcess) {
+			// Patient Registry Record Revised
 
 			// set the class code
 			getPRPAIN201302UV02MFMIMT700701UV01ControlActProcess().setClassCode(ActClassControlAct.CACT);
@@ -85,6 +89,7 @@ public class PixPdqQueryControlActProcess {
 
 			// set the subject type code
 			getPRPAIN201302UV02MFMIMT700701UV01Subject1().setTypeCode("SUBJ");
+			getPRPAIN201302UV02MFMIMT700701UV01Subject1().setContextConductionInd(false);
 
 			subjectPatient = new PixPdqSubjectPatient(new PRPAMT201302UV02Patient());
 
@@ -100,6 +105,7 @@ public class PixPdqQueryControlActProcess {
 					.setRegistrationEvent(getPRPAIN201302UV02MFMIMT700701UV01RegistrationEvent());
 
 		} else if (obj instanceof PRPAIN201304UV02MFMIMT700701UV01ControlActProcess) {
+			// Patient Registry Duplicates Resolved
 
 			// set the class code
 			getPRPAIN201304UV02MFMIMT700701UV01ControlActProcess().setClassCode(ActClassControlAct.CACT);
@@ -115,6 +121,7 @@ public class PixPdqQueryControlActProcess {
 
 			// set the subject type code
 			getPRPAIN201304UV02MFMIMT700701UV01Subject1().setTypeCode("SUBJ");
+			getPRPAIN201304UV02MFMIMT700701UV01Subject1().setContextConductionInd(false);
 
 			subjectPatient = new PixPdqSubjectPatient(new PRPAMT201303UV02Patient());
 
