@@ -9,28 +9,39 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.enums;
 
+import java.util.Objects;
+import javax.annotation.processing.Generated;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
 import org.projecthusky.common.enums.CodeSystems;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.enums.ValueSetEnumInterface;
-
-import javax.annotation.processing.Generated;
-import java.util.Objects;
+import org.projecthusky.fhir.structures.utils.FhirValueSetEnumInterface;
 
 /**
  * Enumeration of TimingEventAmbu values
  * <p>
- * EN: No designation found.<br> DE: No designation found.<br> FR: No designation found.<br> IT: No designation
- * found.<br>
+ * EN: No designation found.<br>
+ * DE: No designation found.<br>
+ * FR: No designation found.<br>
+ * IT: No designation found.<br>
  * <p>
- * Identifier: 2.16.756.5.30.1.127.77.12.11.2<br> Effective date: 2022-04-15 09:00<br> Version: 2022<br> Status: DRAFT
+ * Identifier: 2.16.756.5.30.1.127.77.12.11.2<br>
+ * Effective date: 2022-04-15 09:00<br>
+ * Version: 2022<br>
+ * Status: DRAFT
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-07-11")
-public enum TimingEventAmbu implements ValueSetEnumInterface {
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-06-24")
+public enum TimingEventAmbu implements ValueSetEnumInterface, FhirValueSetEnumInterface {
 
     /**
-     * EN: Evening.<br> DE: Abend.<br> FR: Soirée.<br> IT: Sera.<br>
+     * EN: Evening.<br>
+     * DE: Abend.<br>
+     * FR: Soirée.<br>
+     * IT: Sera.<br>
      */
     EVENING("EVE",
             "http://fhir.ch/ig/ch-emed/CodeSystem/event-timing",
@@ -40,7 +51,10 @@ public enum TimingEventAmbu implements ValueSetEnumInterface {
             "Soirée",
             "Sera"),
     /**
-     * EN: Morning.<br> DE: Morgen.<br> FR: Matinée.<br> IT: Mattina.<br>
+     * EN: Morning.<br>
+     * DE: Morgen.<br>
+     * FR: Matinée.<br>
+     * IT: Mattina.<br>
      */
     MORNING("MORN",
             "http://fhir.ch/ig/ch-emed/CodeSystem/event-timing",
@@ -50,7 +64,10 @@ public enum TimingEventAmbu implements ValueSetEnumInterface {
             "Matinée",
             "Mattina"),
     /**
-     * EN: Night.<br> DE: Nacht.<br> FR: Nuit.<br> IT: Notte.<br>
+     * EN: Night.<br>
+     * DE: Nacht.<br>
+     * FR: Nuit.<br>
+     * IT: Notte.<br>
      */
     NIGHT("NIGHT",
           "http://fhir.ch/ig/ch-emed/CodeSystem/event-timing",
@@ -60,7 +77,10 @@ public enum TimingEventAmbu implements ValueSetEnumInterface {
           "Nuit",
           "Notte"),
     /**
-     * EN: Noon.<br> DE: Mittag.<br> FR: Midi.<br> IT: Mezzogiorno.<br>
+     * EN: Noon.<br>
+     * DE: Mittag.<br>
+     * FR: Midi.<br>
+     * IT: Mezzogiorno.<br>
      */
     NOON("NOON",
          "http://fhir.ch/ig/ch-emed/CodeSystem/event-timing",
@@ -71,22 +91,34 @@ public enum TimingEventAmbu implements ValueSetEnumInterface {
          "Mezzogiorno");
 
     /**
-     * EN: Code for Evening.<br> DE: Code für Abend.<br> FR: Code de Soirée.<br> IT: Code per Sera.<br>
+     * EN: Code for Evening.<br>
+     * DE: Code für Abend.<br>
+     * FR: Code de Soirée.<br>
+     * IT: Code per Sera.<br>
      */
     public static final String EVENING_CODE = "EVE";
 
     /**
-     * EN: Code for Morning.<br> DE: Code für Morgen.<br> FR: Code de Matinée.<br> IT: Code per Mattina.<br>
+     * EN: Code for Morning.<br>
+     * DE: Code für Morgen.<br>
+     * FR: Code de Matinée.<br>
+     * IT: Code per Mattina.<br>
      */
     public static final String MORNING_CODE = "MORN";
 
     /**
-     * EN: Code for Night.<br> DE: Code für Nacht.<br> FR: Code de Nuit.<br> IT: Code per Notte.<br>
+     * EN: Code for Night.<br>
+     * DE: Code für Nacht.<br>
+     * FR: Code de Nuit.<br>
+     * IT: Code per Notte.<br>
      */
     public static final String NIGHT_CODE = "NIGHT";
 
     /**
-     * EN: Code for Noon.<br> DE: Code für Mittag.<br> FR: Code de Midi.<br> IT: Code per Mezzogiorno.<br>
+     * EN: Code for Noon.<br>
+     * DE: Code für Mittag.<br>
+     * FR: Code de Midi.<br>
+     * IT: Code per Mezzogiorno.<br>
      */
     public static final String NOON_CODE = "NOON";
 
@@ -104,56 +136,6 @@ public enum TimingEventAmbu implements ValueSetEnumInterface {
      * Identifier of the code system (all values share the same).
      */
     public static final String CODE_SYSTEM_ID = "http://fhir.ch/ig/ch-emed/CodeSystem/event-timing";
-
-    /**
-     * Gets the Enum with a given code.
-     *
-     * @param code The code value.
-     * @return the enum value found or {@code null}.
-     */
-    @Nullable
-    public static TimingEventAmbu getEnum(@Nullable final String code) {
-        for (final TimingEventAmbu x : values()) {
-            if (x.getCodeValue().equals(code)) {
-                return x;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Checks if a given enum is part of this value set.
-     *
-     * @param enumName The name of the enum.
-     * @return {@code true} if the name is found in this value set, {@code false} otherwise.
-     */
-    public static boolean isEnumOfValueSet(@Nullable final String enumName) {
-        if (enumName == null) {
-            return false;
-        }
-        try {
-            Enum.valueOf(TimingEventAmbu.class,
-                         enumName);
-            return true;
-        } catch (final IllegalArgumentException ex) {
-            return false;
-        }
-    }
-
-    /**
-     * Checks if a given code value is in this value set.
-     *
-     * @param codeValue The code value.
-     * @return {@code true} if the value is found in this value set, {@code false} otherwise.
-     */
-    public static boolean isInValueSet(@Nullable final String codeValue) {
-        for (final TimingEventAmbu x : values()) {
-            if (x.getCodeValue().equals(codeValue)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     /**
      * Machine interpretable and (inside this class) unique code.
@@ -185,13 +167,7 @@ public enum TimingEventAmbu implements ValueSetEnumInterface {
      * @param displayNameFr The display name in French.
      * @param displayNameIt The display name in Italian.
      */
-    TimingEventAmbu(@NonNull final String code,
-                    @NonNull final String codeSystem,
-                    @NonNull final String displayName,
-                    @NonNull final String displayNameEn,
-                    @NonNull final String displayNameDe,
-                    @NonNull final String displayNameFr,
-                    @NonNull final String displayNameIt) {
+    TimingEventAmbu(@NonNull final String code, @NonNull final String codeSystem, @NonNull final String displayName, @NonNull final String displayNameEn, @NonNull final String displayNameDe, @NonNull final String displayNameFr, @NonNull final String displayNameIt) {
         this.code = Objects.requireNonNull(code);
         this.codeSystem = Objects.requireNonNull(codeSystem);
         this.displayNames = new String[5];
@@ -251,12 +227,17 @@ public enum TimingEventAmbu implements ValueSetEnumInterface {
         if (languageCode == null) {
             return this.displayNames[0];
         }
-        return switch (languageCode) {
-            case ENGLISH -> this.displayNames[1];
-            case GERMAN -> this.displayNames[2];
-            case FRENCH -> this.displayNames[3];
-            case ITALIAN -> this.displayNames[4];
-            default -> "TOTRANSLATE";
+        return switch(languageCode) {
+            case ENGLISH ->
+                this.displayNames[1];
+            case GERMAN ->
+                this.displayNames[2];
+            case FRENCH ->
+                this.displayNames[3];
+            case ITALIAN ->
+                this.displayNames[4];
+            default ->
+                "TOTRANSLATE";
         };
     }
 
@@ -280,5 +261,115 @@ public enum TimingEventAmbu implements ValueSetEnumInterface {
     @NonNull
     public String getValueSetName() {
         return VALUE_SET_NAME;
+    }
+
+    /**
+     * Returns the enum value as a FHIR Coding.
+     */
+    @Override
+    public Coding getCoding() {
+        return new Coding(this.getCodeSystemId(),
+                          this.getCodeValue(),
+                          this.getCodeSystemName());
+    }
+
+    /**
+     * Returns the enum value as a FHIR CodeableConcept.
+     */
+    @Override
+    public CodeableConcept getCodeableConcept() {
+        return new CodeableConcept().setText(this.getCodeSystemName()).addCoding(this.getCoding());
+    }
+
+    /**
+     * Compares the enum value to the given FHIR Coding.
+     *
+     * @param coding The FHIR Coding to be compared.
+     * @return {@code true} if they have the same system and value, {@code false} otherwise.
+     */
+    @Override
+    public boolean isEqualTo(final Coding coding) {
+        return this.getCodeSystemId().equals(coding.getSystem()) && this.getCodeValue().equals(coding.getCode());
+    }
+
+    /**
+     * Gets the Enum with a given code.
+     *
+     * @param code The code value.
+     * @return the enum value found or {@code null}.
+     */
+    @Nullable
+    public static TimingEventAmbu getEnum(@Nullable final String code) {
+        for (final TimingEventAmbu x : values()) {
+            if (x.getCodeValue().equals(code)) {
+                return x;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Checks if a given enum is part of this value set.
+     *
+     * @param enumName The name of the enum.
+     * @return {@code true} if the name is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isEnumOfValueSet(@Nullable final String enumName) {
+        if (enumName == null) {
+            return false;
+        }
+        try {
+            Enum.valueOf(TimingEventAmbu.class,
+                         enumName);
+            return true;
+        } catch (final IllegalArgumentException ex) {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if a given code value is in this value set.
+     *
+     * @param codeValue The code value.
+     * @return {@code true} if the value is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isInValueSet(@Nullable final String codeValue) {
+        for (final TimingEventAmbu x : values()) {
+            if (x.getCodeValue().equals(codeValue)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Gets the Enum with a given FHIR Coding.
+     *
+     * @param coding The FHIR Coding.
+     * @return the enum value found or {@code null}.
+     */
+    @Nullable
+    public static TimingEventAmbu getEnum(@Nullable final Coding coding) {
+        for (final var x : values()) {
+            if (x.isEqualTo(coding)) {
+                return x;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Checks if a given FHIR Coding is in this value set.
+     *
+     * @param coding The FHIR Coding.
+     * @return {@code true} if the value is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isInValueSet(@Nullable final Coding coding) {
+        for (final var x : values()) {
+            if (x.isEqualTo(coding)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
