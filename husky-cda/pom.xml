@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.projecthusky</groupId>
     <artifactId>husky-api</artifactId>
-    <version>2.4.2-SNAPSHOT</version>
+    <version>2.5.0</version>
   </parent>
   <artifactId>husky-cda</artifactId>
   <packaging>pom</packaging>
