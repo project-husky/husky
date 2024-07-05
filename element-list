@@ -143,6 +143,7 @@ org.projecthusky.valueset.config
 org.projecthusky.valueset.enums
 org.projecthusky.valueset.exceptions
 org.projecthusky.valueset.model
+org.projecthusky.valueset.utils
 org.projecthusky.xua
 org.projecthusky.xua.authentication
 org.projecthusky.xua.authentication.impl
