@@ -68,6 +68,7 @@ import org.projecthusky.valueset.model.Designation;
 import org.projecthusky.valueset.model.ValueSet;
 import org.projecthusky.valueset.model.ValueSetEntry;
 import org.projecthusky.valueset.model.Version;
+import org.projecthusky.valueset.utils.VsUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -147,7 +148,7 @@ public class ValueSetManager {
 			var sourceUrlString = valueSetConfig.getSourceUrl();
 			var downloadedString = "";
 			try {
-				downloadedString = IOUtils.toString(new URL(sourceUrlString), StandardCharsets.UTF_8);
+				downloadedString = VsUtils.downloadAsString(new URL(sourceUrlString));
 				downloadedString = downloadedString.replace("&lt;", "<");
 				downloadedString = downloadedString.replace("&gt;", ">");
 				downloadedString = downloadedString.replace("&amp;", "&");
@@ -196,7 +197,7 @@ public class ValueSetManager {
 	public byte[] downloadValueSetRaw(ValueSetConfig valueSetConfig) throws IOException {
 		byte[] retVal = null;
 		if (valueSetConfig != null && SourceSystemType.ARTDECOR_FHIR.equals(valueSetConfig.getSourceSystemType())) {
-			retVal = IOUtils.toByteArray(new URL(valueSetConfig.getSourceUrl()));
+			retVal = VsUtils.downloadAsByteArray(new URL(valueSetConfig.getSourceUrl()));
 		}
 		return retVal;
 	}
