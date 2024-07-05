@@ -27,26 +27,39 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * IT: No designation found.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.127.3.10.15.2<br>
- * Effective date: 2020-02-26 17:24<br>
- * Version: 201907.2-stable<br>
+ * Effective date: 2023-04-12 15:23<br>
+ * Version: 202306.0-stable<br>
  * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-09-29")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-07-02")
 public enum PurposeOfUse implements ValueSetEnumInterface {
 
     /**
      * EN: Automatic Upload.<br>
-     * DE: Automatischer Upload.<br>
-     * FR: Upload automatique.<br>
-     * IT: Upload automatico.<br>
+     * DE: Automatisches Hochladen.<br>
+     * FR: Téléchargement automatique.<br>
+     * IT: Caricamento automatico.<br>
      */
     AUTOMATIC_UPLOAD("AUTO",
                      "2.16.756.5.30.1.127.3.10.5",
                      "Automatic Upload",
                      "Automatic Upload",
-                     "Automatischer Upload",
-                     "Upload automatique",
-                     "Upload automatico"),
+                     "Automatisches Hochladen",
+                     "Téléchargement automatique",
+                     "Caricamento automatico"),
+    /**
+     * EN: Automatic upload of radiological contents.<br>
+     * DE: Automatisches Hochladen von radiologischen Inhalten.<br>
+     * FR: Téléchargement automatique de contenus radiologiques.<br>
+     * IT: Caricamento automatico del contenuto radiologico.<br>
+     */
+    AUTOMATIC_UPLOAD_OF_RADIOLOGICAL_CONTENTS("DICOM_AUTO",
+                                              "2.16.756.5.30.1.127.3.10.5",
+                                              "Automatic upload of radiological contents",
+                                              "Automatic upload of radiological contents",
+                                              "Automatisches Hochladen von radiologischen Inhalten",
+                                              "Téléchargement automatique de contenus radiologiques",
+                                              "Caricamento automatico del contenuto radiologico"),
     /**
      * EN: Emergency Access.<br>
      * DE: Notfallzugriff.<br>
@@ -76,11 +89,19 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
 
     /**
      * EN: Code for Automatic Upload.<br>
-     * DE: Code für Automatischer Upload.<br>
-     * FR: Code de Upload automatique.<br>
-     * IT: Code per Upload automatico.<br>
+     * DE: Code für Automatisches Hochladen.<br>
+     * FR: Code de Téléchargement automatique.<br>
+     * IT: Code per Caricamento automatico.<br>
      */
     public static final String AUTOMATIC_UPLOAD_CODE = "AUTO";
+
+    /**
+     * EN: Code for Automatic upload of radiological contents.<br>
+     * DE: Code für Automatisches Hochladen von radiologischen Inhalten.<br>
+     * FR: Code de Téléchargement automatique de contenus radiologiques.<br>
+     * IT: Code per Caricamento automatico del contenuto radiologico.<br>
+     */
+    public static final String AUTOMATIC_UPLOAD_OF_RADIOLOGICAL_CONTENTS_CODE = "DICOM_AUTO";
 
     /**
      * EN: Code for Emergency Access.<br>

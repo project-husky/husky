@@ -12,6 +12,7 @@ package org.projecthusky.fhir.emed.ch.epr.resource.padv;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.hl7.fhir.r4.model.*;
+import org.projecthusky.common.enums.EnumConstants;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
@@ -116,6 +117,16 @@ public class ChEmedEprCompositionPadv extends ChEmedEprComposition {
             section.getCode().addCoding(new Coding(FhirSystem.LOINC,
                                                    PHARMACEUTICAL_ADVICE_SECTION_CODE_VALUE,
                                                    "Medication pharmaceutical advice.brief Document"));
+            if (EnumConstants.FRENCH_CODE.equals(this.getLanguage())) {
+                section.setTitle("Conseils sur les médicaments");
+            } else if (EnumConstants.GERMAN_CODE.equals(this.getLanguage())) {
+                section.setTitle("Hinweise zur Medikation");
+            } else if (EnumConstants.ITALIAN_CODE.equals(this.getLanguage())) {
+                section.setTitle("Consigli sui medicamenti");
+            } else {
+                section.setTitle("Pharmaceutical Advice");
+            }
+            section.getText().setStatus(Narrative.NarrativeStatus.ADDITIONAL).setDivAsString(section.getTitle());
         }
         return section;
     }

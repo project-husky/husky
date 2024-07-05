@@ -42,6 +42,8 @@ public class PixPdqQueryControlActProcess {
 		this.internalObj = obj;
 
 		if (obj instanceof PRPAIN201301UV02MFMIMT700701UV01ControlActProcess) {
+			// Patient Registry Record Added
+
 			// set the class code
 			getPRPAIN201301UV02MFMIMT700701UV01ControlActProcess().setClassCode(ActClassControlAct.CACT);
 
@@ -56,6 +58,7 @@ public class PixPdqQueryControlActProcess {
 
 			// set the subject type code
 			getPRPAIN201301UV02MFMIMT700701UV01Subject1().setTypeCode("SUBJ");
+			getPRPAIN201301UV02MFMIMT700701UV01Subject1().setContextConductionInd(false);
 
 			subjectPatient = new PixPdqSubjectPatient(new PRPAMT201301UV02Patient());
 
@@ -70,6 +73,7 @@ public class PixPdqQueryControlActProcess {
 					.setRegistrationEvent(getPRPAIN201301UV02MFMIMT700701UV01RegistrationEvent());
 
 		} else if (obj instanceof PRPAIN201302UV02MFMIMT700701UV01ControlActProcess) {
+			// Patient Registry Record Revised
 
 			// set the class code
 			getPRPAIN201302UV02MFMIMT700701UV01ControlActProcess().setClassCode(ActClassControlAct.CACT);
@@ -85,6 +89,7 @@ public class PixPdqQueryControlActProcess {
 
 			// set the subject type code
 			getPRPAIN201302UV02MFMIMT700701UV01Subject1().setTypeCode("SUBJ");
+			getPRPAIN201302UV02MFMIMT700701UV01Subject1().setContextConductionInd(false);
 
 			subjectPatient = new PixPdqSubjectPatient(new PRPAMT201302UV02Patient());
 
@@ -100,6 +105,7 @@ public class PixPdqQueryControlActProcess {
 					.setRegistrationEvent(getPRPAIN201302UV02MFMIMT700701UV01RegistrationEvent());
 
 		} else if (obj instanceof PRPAIN201304UV02MFMIMT700701UV01ControlActProcess) {
+			// Patient Registry Duplicates Resolved
 
 			// set the class code
 			getPRPAIN201304UV02MFMIMT700701UV01ControlActProcess().setClassCode(ActClassControlAct.CACT);
@@ -115,6 +121,7 @@ public class PixPdqQueryControlActProcess {
 
 			// set the subject type code
 			getPRPAIN201304UV02MFMIMT700701UV01Subject1().setTypeCode("SUBJ");
+			getPRPAIN201304UV02MFMIMT700701UV01Subject1().setContextConductionInd(false);
 
 			subjectPatient = new PixPdqSubjectPatient(new PRPAMT201303UV02Patient());
 
@@ -211,25 +218,43 @@ public class PixPdqQueryControlActProcess {
 
 		if (this.internalObj instanceof PRPAIN201301UV02MFMIMT700701UV01ControlActProcess) {
 			// add the patient to the subject
+			if (getPRPAIN201301UV02MFMIMT700701UV01Subject2().getPatient() == null) {
+				getPRPAIN201301UV02MFMIMT700701UV01Subject2().setPatient(new PRPAMT201301UV02Patient());
+			}
 			getPRPAIN201301UV02MFMIMT700701UV01Subject2().getPatient()
 					.setPatientPerson(patientPerson.getPRPAMT201301UV02Person());
 		} else if (this.internalObj instanceof PRPAIN201302UV02MFMIMT700701UV01ControlActProcess) {
 			// add the patient to the subject
+			if (getPRPAIN201302UV02MFMIMT700701UV01Subject2().getPatient() == null) {
+				getPRPAIN201302UV02MFMIMT700701UV01Subject2().setPatient(new PRPAMT201302UV02Patient());
+			}
 			getPRPAIN201302UV02MFMIMT700701UV01Subject2().getPatient()
 					.setPatientPerson(patientPerson.getPRPAMT201302UV02PatientPatientPerson());
 		} else if (this.internalObj instanceof PRPAIN201304UV02MFMIMT700701UV01ControlActProcess) {
 			// add the patient to the subject
+			if (getPRPAIN201304UV02MFMIMT700701UV01Subject2().getPatient() == null) {
+				getPRPAIN201304UV02MFMIMT700701UV01Subject2().setPatient(new PRPAMT201303UV02Patient());
+			}
 			getPRPAIN201304UV02MFMIMT700701UV01Subject2().getPatient()
 					.setPatientPerson(patientPerson.getPRPAMT201303UV02Person());
 
 		}
 	}
 
+	@Deprecated
 	public void setCustodian(String organizationOID, String organizationName) {
 		if (this.internalObj instanceof PRPAIN201301UV02MFMIMT700701UV01ControlActProcess) {
 			// add this orgnaization as custodian as well
 			getPRPAIN201301UV02MFMIMT700701UV01RegistrationEvent()
 					.setCustodian(PixPdqV3Utils.createRegistrationCustodian(organizationOID, organizationName));
+		}
+	}
+
+	public void setCustodian(final List<String> organizationOids, final String organizationName) {
+		if (this.internalObj instanceof PRPAIN201301UV02MFMIMT700701UV01ControlActProcess) {
+			// add this orgnaization as custodian as well
+			getPRPAIN201301UV02MFMIMT700701UV01RegistrationEvent()
+					.setCustodian(PixPdqV3Utils.createRegistrationCustodian(organizationOids, organizationName));
 		}
 	}
 
@@ -462,6 +487,7 @@ public class PixPdqQueryControlActProcess {
 		addSubjectPatient();
 	}
 
+	@Deprecated
 	public void setProviderOrganization(String organizationOID, String organizationName, String telecomValue) {
 	  setProviderOrganization(List.of(organizationOID), organizationName, telecomValue);
 	}
@@ -469,6 +495,18 @@ public class PixPdqQueryControlActProcess {
 	public void setProviderOrganization(List<String> organizationOIDs, String organizationName, String telecomValue) {
 		subjectPatient.setProviderOrganization(organizationOIDs, organizationName, telecomValue);
 		addSubjectPatient();
+
+		// add this orgnaization as custodian as well
+		if (this.internalObj instanceof PRPAIN201304UV02MFMIMT700701UV01ControlActProcess) {
+			getPRPAIN201304UV02MFMIMT700701UV01RegistrationEvent()
+					.setCustodian(PixPdqV3Utils.createRegistrationCustodian(organizationOIDs, organizationName));
+		} else if (this.internalObj instanceof PRPAIN201302UV02MFMIMT700701UV01ControlActProcess) {
+			getPRPAIN201302UV02MFMIMT700701UV01RegistrationEvent()
+					.setCustodian(PixPdqV3Utils.createRegistrationCustodian(organizationOIDs, organizationName));
+		} else if (this.internalObj instanceof PRPAIN201301UV02MFMIMT700701UV01ControlActProcess) {
+			getPRPAIN201301UV02MFMIMT700701UV01RegistrationEvent()
+					.setCustodian(PixPdqV3Utils.createRegistrationCustodian(organizationOIDs, organizationName));
+		}
 	}
 
 	public PRPAIN201301UV02MFMIMT700701UV01ControlActProcess getPRPAIN201301UV02MFMIMT700701UV01ControlActProcess() {

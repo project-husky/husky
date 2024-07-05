@@ -134,7 +134,9 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
         if (quantity instanceof final ChEmedQuantityWithEmedUnits chQuantity) {
             return chQuantity;
         }
-        throw new InvalidEmedContentException("The quantity isn't of the right type");
+        final var chQuantity = new ChEmedQuantityWithEmedUnits();
+        quantity.copyValues(chQuantity);
+        return chQuantity;
     }
 
     /**

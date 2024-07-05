@@ -27,1294 +27,1378 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * IT: Specialità medica dei dati inseriti nel documento secondo l'allegato 3 OCIP-DFI. Questo attributo intende associare il contenuto di un documento a una specialità medica. È ipotizzabile che questa informazione fornisca un aiuto al paziente per impostare o modificare il grado di riservatezza dei documenti, rilevante per il controllo degli accessi.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.127.3.10.1.18<br>
- * Effective date: 2021-04-01 16:19<br>
- * Version: 202104.0-stable<br>
+ * Effective date: 2024-05-31 15:49<br>
+ * Version: 202306.1-stable<br>
  * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-09-29")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-07-02")
 public enum PracticeSettingCode implements ValueSetEnumInterface {
 
     /**
      * EN: Accident &amp; emergency.<br>
      * DE: Notfall- und Rettungsmedizin.<br>
-     * FR: Médecine d'urgence et de sauvetage.<br>
-     * IT: Medicina d'urgenza e di salvataggio.<br>
+     * FR: médecine d'urgence et de sauvetage.<br>
+     * IT: medicina d'urgenza e di salvataggio.<br>
      */
-    ACCIDENT_EMERGENCY("394576009",
-                       "2.16.840.1.113883.6.96",
-                       "Accident & emergency (qualifier value)",
-                       "Accident & emergency",
-                       "Notfall- und Rettungsmedizin",
-                       "Médecine d'urgence et de sauvetage",
-                       "Medicina d'urgenza e di salvataggio"),
+    ACCIDENT_AND_EMERGENCY("394576009",
+                           "2.16.840.1.113883.6.96",
+                           "Accident &amp; emergency (qualifier value)",
+                           "Accident &amp; emergency",
+                           "Notfall- und Rettungsmedizin",
+                           "médecine d'urgence et de sauvetage",
+                           "medicina d'urgenza e di salvataggio"),
     /**
      * EN: Anaesthesiology.<br>
      * DE: Anästhesiologie.<br>
-     * FR: Anesthésiologie.<br>
-     * IT: Anestesiologia.<br>
+     * FR: anesthésiologie.<br>
+     * IT: anestesiologia.<br>
      */
     ANAESTHESIOLOGY("394577000",
                     "2.16.840.1.113883.6.96",
                     "Anesthetics (qualifier value)",
                     "Anaesthesiology",
                     "Anästhesiologie",
-                    "Anesthésiologie",
-                    "Anestesiologia"),
+                    "anesthésiologie",
+                    "anestesiologia"),
     /**
      * EN: Cardiac surgery.<br>
      * DE: Herzchirurgie.<br>
-     * FR: Chirurgie cardiovasculaire.<br>
-     * IT: Chirurgia cardiovascolare.<br>
+     * FR: chirurgie cardiaque.<br>
+     * IT: chirurgia cardiaca.<br>
      */
     CARDIAC_SURGERY("408466002",
                     "2.16.840.1.113883.6.96",
                     "Cardiac surgery (qualifier value)",
                     "Cardiac surgery",
                     "Herzchirurgie",
-                    "Chirurgie cardiovasculaire",
-                    "Chirurgia cardiovascolare"),
+                    "chirurgie cardiaque",
+                    "chirurgia cardiaca"),
     /**
      * EN: Cardiology.<br>
      * DE: Kardiologie.<br>
-     * FR: Cardiologie.<br>
-     * IT: Cardiologia.<br>
+     * FR: cardiologie.<br>
+     * IT: cardiologia.<br>
      */
     CARDIOLOGY("394579002",
                "2.16.840.1.113883.6.96",
                "Cardiology (qualifier value)",
                "Cardiology",
                "Kardiologie",
-               "Cardiologie",
-               "Cardiologia"),
+               "cardiologie",
+               "cardiologia"),
     /**
      * EN: Chiropractic service.<br>
      * DE: Chiropraktik.<br>
-     * FR: Chiropractie.<br>
-     * IT: Chiropratica.<br>
+     * FR: chiropractie.<br>
+     * IT: chiropratica.<br>
      */
     CHIROPRACTIC_SERVICE("722170006",
                          "2.16.840.1.113883.6.96",
                          "Chiropractic service (qualifier value)",
                          "Chiropractic service",
                          "Chiropraktik",
-                         "Chiropractie",
-                         "Chiropratica"),
+                         "chiropractie",
+                         "chiropratica"),
     /**
      * EN: Clinical genetics.<br>
      * DE: Medizinische Genetik.<br>
-     * FR: Génétique médicale.<br>
-     * IT: Genetica medica.<br>
+     * FR: génétique médicale.<br>
+     * IT: genetica medica.<br>
      */
     CLINICAL_GENETICS("394580004",
                       "2.16.840.1.113883.6.96",
                       "Clinical genetics (qualifier value)",
                       "Clinical genetics",
                       "Medizinische Genetik",
-                      "Génétique médicale",
-                      "Genetica medica"),
+                      "génétique médicale",
+                      "genetica medica"),
     /**
      * EN: Clinical haematology.<br>
      * DE: Hämatologie.<br>
-     * FR: Hématologie.<br>
-     * IT: Ematologia.<br>
+     * FR: hématologie.<br>
+     * IT: ematologia.<br>
      */
     CLINICAL_HAEMATOLOGY("394803006",
                          "2.16.840.1.113883.6.96",
                          "Clinical hematology (qualifier value)",
                          "Clinical haematology",
                          "Hämatologie",
-                         "Hématologie",
-                         "Ematologia"),
+                         "hématologie",
+                         "ematologia"),
     /**
      * EN: Clinical immunology.<br>
      * DE: Immunologie.<br>
-     * FR: Immunologie.<br>
-     * IT: Immunologia.<br>
+     * FR: immunologie.<br>
+     * IT: immunologia.<br>
      */
     CLINICAL_IMMUNOLOGY("408480009",
                         "2.16.840.1.113883.6.96",
                         "Clinical immunology (qualifier value)",
                         "Clinical immunology",
                         "Immunologie",
-                        "Immunologie",
-                        "Immunologia"),
+                        "immunologie",
+                        "immunologia"),
     /**
      * EN: Clinical immunology/allergy.<br>
      * DE: Immunologie/Allergologie.<br>
-     * FR: Immunologie/Allergologie.<br>
-     * IT: Allergologia e immunologia clinica.<br>
+     * FR: immunologie/allergologie.<br>
+     * IT: allergologia e immunologia clinica.<br>
      */
     CLINICAL_IMMUNOLOGY_ALLERGY("394805004",
                                 "2.16.840.1.113883.6.96",
                                 "Clinical immunology/allergy (qualifier value)",
                                 "Clinical immunology/allergy",
                                 "Immunologie/Allergologie",
-                                "Immunologie/Allergologie",
-                                "Allergologia e immunologia clinica"),
+                                "immunologie/allergologie",
+                                "allergologia e immunologia clinica"),
     /**
      * EN: Clinical oncology.<br>
      * DE: Onkologie.<br>
-     * FR: Oncologie.<br>
-     * IT: Oncologia medica.<br>
+     * FR: oncologie.<br>
+     * IT: oncologia medica.<br>
      */
     CLINICAL_ONCOLOGY("394592004",
                       "2.16.840.1.113883.6.96",
                       "Clinical oncology (qualifier value)",
                       "Clinical oncology",
                       "Onkologie",
-                      "Oncologie",
-                      "Oncologia medica"),
+                      "oncologie",
+                      "oncologia medica"),
     /**
      * EN: Clinical pharmacology.<br>
      * DE: Klinische Pharmakologie.<br>
-     * FR: Pharmacologie clinique.<br>
-     * IT: Farmacologia clinica.<br>
+     * FR: pharmacologie clinique.<br>
+     * IT: farmacologia clinica.<br>
      */
     CLINICAL_PHARMACOLOGY("394600006",
                           "2.16.840.1.113883.6.96",
                           "Clinical pharmacology (qualifier value)",
                           "Clinical pharmacology",
                           "Klinische Pharmakologie",
-                          "Pharmacologie clinique",
-                          "Farmacologia clinica"),
+                          "pharmacologie clinique",
+                          "farmacologia clinica"),
     /**
      * EN: Complementary therapy.<br>
      * DE: Komplementärmedizin.<br>
-     * FR: Médecine alternative et complémentaire.<br>
-     * IT: Medicina complementare.<br>
+     * FR: médecine alternative et complémentaire.<br>
+     * IT: medicina complementare.<br>
      */
     COMPLEMENTARY_THERAPY("310025004",
                           "2.16.840.1.113883.6.96",
                           "Complementary therapy service (qualifier value)",
                           "Complementary therapy",
                           "Komplementärmedizin",
-                          "Médecine alternative et complémentaire",
-                          "Medicina complementare"),
+                          "médecine alternative et complémentaire",
+                          "medicina complementare"),
     /**
      * EN: Critical care medicine.<br>
      * DE: Intensivmedizin.<br>
-     * FR: Médecine intensive.<br>
-     * IT: Medicina intensiva.<br>
+     * FR: médecine intensive.<br>
+     * IT: medicina intensiva.<br>
      */
     CRITICAL_CARE_MEDICINE("408478003",
                            "2.16.840.1.113883.6.96",
                            "Critical care medicine (qualifier value)",
                            "Critical care medicine",
                            "Intensivmedizin",
-                           "Médecine intensive",
-                           "Medicina intensiva"),
+                           "médecine intensive",
+                           "medicina intensiva"),
     /**
      * EN: Dental medicine.<br>
      * DE: Zahnheilkunde.<br>
-     * FR: Odontologie.<br>
-     * IT: Odontoiatria.<br>
+     * FR: odontologie.<br>
+     * IT: odontoiatria.<br>
      */
     DENTAL_MEDICINE("394812008",
                     "2.16.840.1.113883.6.96",
                     "Dental medicine specialties (qualifier value)",
                     "Dental medicine",
                     "Zahnheilkunde",
-                    "Odontologie",
-                    "Odontoiatria"),
+                    "odontologie",
+                    "odontoiatria"),
+    /**
+     * EN: Dentistry.<br>
+     * DE: Zahnmedizin.<br>
+     * FR: dentisterie.<br>
+     * IT: odontoiatria.<br>
+     */
+    DENTISTRY("722163006",
+              "2.16.840.1.113883.6.96",
+              "Dentistry (qualifier value)",
+              "Dentistry",
+              "Zahnmedizin",
+              "dentisterie",
+              "odontoiatria"),
     /**
      * EN: Dermatology.<br>
      * DE: Dermatologie und Venerologie.<br>
-     * FR: Dermatologie et vénérologie.<br>
-     * IT: Dermatologia e venereologia.<br>
+     * FR: dermatologie et vénérologie.<br>
+     * IT: dermatologia e venereologia.<br>
      */
     DERMATOLOGY("394582007",
                 "2.16.840.1.113883.6.96",
                 "Dermatology (qualifier value)",
                 "Dermatology",
                 "Dermatologie und Venerologie",
-                "Dermatologie et vénérologie",
-                "Dermatologia e venereologia"),
+                "dermatologie et vénérologie",
+                "dermatologia e venereologia"),
     /**
      * EN: Dietetics and nutrition.<br>
      * DE: Ernährungsberatung.<br>
-     * FR: Conseil en nutrition et diététique.<br>
-     * IT: Dietetica.<br>
+     * FR: conseil en nutrition et diététique.<br>
+     * IT: dietetica.<br>
      */
     DIETETICS_AND_NUTRITION("722164000",
                             "2.16.840.1.113883.6.96",
                             "Dietetics and nutrition (qualifier value)",
                             "Dietetics and nutrition",
                             "Ernährungsberatung",
-                            "Conseil en nutrition et diététique",
-                            "Dietetica"),
+                            "conseil en nutrition et diététique",
+                            "dietetica"),
+    /**
+     * EN: Emergency medicine.<br>
+     * DE: Notfallmedizin.<br>
+     * FR: médecine d'urgence.<br>
+     * IT: medicina d'urgenza.<br>
+     */
+    EMERGENCY_MEDICINE("773568002",
+                       "2.16.840.1.113883.6.96",
+                       "Emergency medicine (qualifier value)",
+                       "Emergency medicine",
+                       "Notfallmedizin",
+                       "médecine d'urgence",
+                       "medicina d'urgenza"),
     /**
      * EN: Endocrinology.<br>
      * DE: Endokrinologie/Diabetologie.<br>
-     * FR: Endocrinologie/diabétologie.<br>
-     * IT: Endocrinologia/diabetologia.<br>
+     * FR: endocrinologie/diabétologie.<br>
+     * IT: endocrinologia/diabetologia.<br>
      */
     ENDOCRINOLOGY("394583002",
                   "2.16.840.1.113883.6.96",
                   "Endocrinology (qualifier value)",
                   "Endocrinology",
                   "Endokrinologie/Diabetologie",
-                  "Endocrinologie/diabétologie",
-                  "Endocrinologia/diabetologia"),
+                  "endocrinologie/diabétologie",
+                  "endocrinologia/diabetologia"),
     /**
      * EN: Gastroenterology.<br>
      * DE: Gastroenterologie.<br>
-     * FR: Gastroentérologie.<br>
-     * IT: Gastroenterologia.<br>
+     * FR: gastroentérologie.<br>
+     * IT: gastroenterologia.<br>
      */
     GASTROENTEROLOGY("394584008",
                      "2.16.840.1.113883.6.96",
                      "Gastroenterology (qualifier value)",
                      "Gastroenterology",
                      "Gastroenterologie",
-                     "Gastroentérologie",
-                     "Gastroenterologia"),
+                     "gastroentérologie",
+                     "gastroenterologia"),
     /**
      * EN: General medicine.<br>
      * DE: Allgemeinmedizin.<br>
-     * FR: Médecine générale.<br>
-     * IT: Medicina generale.<br>
+     * FR: médecine générale.<br>
+     * IT: medicina generale.<br>
      */
     GENERAL_MEDICINE("394802001",
                      "2.16.840.1.113883.6.96",
                      "General medicine (qualifier value)",
                      "General medicine",
                      "Allgemeinmedizin",
-                     "Médecine générale",
-                     "Medicina generale"),
+                     "médecine générale",
+                     "medicina generale"),
     /**
      * EN: General surgery.<br>
      * DE: Chirurgie.<br>
-     * FR: Chirurgie.<br>
-     * IT: Chirurgia.<br>
+     * FR: chirurgie.<br>
+     * IT: chirurgia.<br>
      */
     GENERAL_SURGERY("394609007",
                     "2.16.840.1.113883.6.96",
                     "General surgery (qualifier value)",
                     "General surgery",
                     "Chirurgie",
-                    "Chirurgie",
-                    "Chirurgia"),
+                    "chirurgie",
+                    "chirurgia"),
     /**
      * EN: Geriatric medicine.<br>
      * DE: Geriatrie.<br>
-     * FR: Gériatrie.<br>
-     * IT: Geriatria.<br>
+     * FR: gériatrie.<br>
+     * IT: geriatria.<br>
      */
     GERIATRIC_MEDICINE("394811001",
                        "2.16.840.1.113883.6.96",
                        "Geriatric medicine (qualifier value)",
                        "Geriatric medicine",
                        "Geriatrie",
-                       "Gériatrie",
-                       "Geriatria"),
+                       "gériatrie",
+                       "geriatria"),
     /**
-     * EN: Gynecology and Obstretrics.<br>
-     * DE: Gynäkologie und Geburtshilfe.<br>
-     * FR: Gynécologie et obstétrique.<br>
-     * IT: Ginecologia e ostetricia.<br>
+     * EN: Gynecology.<br>
+     * DE: Gynäkologie.<br>
+     * FR: gynécologie.<br>
+     * IT: ginecologia.<br>
      */
-    GYNECOLOGY_AND_OBSTRETRICS("394586005",
-                               "2.16.840.1.113883.6.96",
-                               "Gynecology (qualifier value)",
-                               "Gynecology and Obstretrics",
-                               "Gynäkologie und Geburtshilfe",
-                               "Gynécologie et obstétrique",
-                               "Ginecologia e ostetricia"),
+    GYNECOLOGY("394586005",
+               "2.16.840.1.113883.6.96",
+               "Gynecology (qualifier value)",
+               "Gynecology",
+               "Gynäkologie",
+               "gynécologie",
+               "ginecologia"),
     /**
      * EN: Infectious diseases.<br>
      * DE: Infektionskrankheiten.<br>
-     * FR: Maladies infectieuses.<br>
-     * IT: Malattia infettiva.<br>
+     * FR: maladies infectieuses.<br>
+     * IT: malattia infettiva.<br>
      */
     INFECTIOUS_DISEASES("394807007",
                         "2.16.840.1.113883.6.96",
                         "Infectious diseases (specialty) (qualifier value)",
                         "Infectious diseases",
                         "Infektionskrankheiten",
-                        "Maladies infectieuses",
-                        "Malattia infettiva"),
+                        "maladies infectieuses",
+                        "malattia infettiva"),
     /**
      * EN: Internal medicine.<br>
      * DE: Innere Medizin.<br>
-     * FR: Médecine interne.<br>
-     * IT: Medicina interna.<br>
+     * FR: médecine interne.<br>
+     * IT: medicina interna.<br>
      */
     INTERNAL_MEDICINE("419192003",
                       "2.16.840.1.113883.6.96",
                       "Internal medicine (qualifier value)",
                       "Internal medicine",
                       "Innere Medizin",
-                      "Médecine interne",
-                      "Medicina interna"),
+                      "médecine interne",
+                      "medicina interna"),
     /**
      * EN: Laboratory service.<br>
      * DE: Labormedizin.<br>
-     * FR: Médecin de laboratoire.<br>
-     * IT: Medicina di laboratorio.<br>
+     * FR: médecin de laboratoire.<br>
+     * IT: medicina di laboratorio.<br>
      */
     LABORATORY_SERVICE("708184003",
                        "2.16.840.1.113883.6.96",
                        "Clinical pathology service (qualifier value)",
                        "Laboratory service",
                        "Labormedizin",
-                       "Médecin de laboratoire",
-                       "Medicina di laboratorio"),
+                       "médecin de laboratoire",
+                       "medicina di laboratorio"),
     /**
      * EN: Legal medicine.<br>
      * DE: Rechtsmedizin.<br>
-     * FR: Médecine légale.<br>
-     * IT: Medicina legale.<br>
+     * FR: médecine légale.<br>
+     * IT: medicina legale.<br>
      */
     LEGAL_MEDICINE("722204007",
                    "2.16.840.1.113883.6.96",
                    "Legal medicine (qualifier value)",
                    "Legal medicine",
                    "Rechtsmedizin",
-                   "Médecine légale",
-                   "Medicina legale"),
+                   "médecine légale",
+                   "medicina legale"),
     /**
      * EN: Nephrology.<br>
      * DE: Nephrologie.<br>
-     * FR: Néphrologie.<br>
-     * IT: Nefrologia.<br>
+     * FR: néphrologie.<br>
+     * IT: nefrologia.<br>
      */
     NEPHROLOGY("394589003",
                "2.16.840.1.113883.6.96",
                "Nephrology (qualifier value)",
                "Nephrology",
                "Nephrologie",
-               "Néphrologie",
-               "Nefrologia"),
+               "néphrologie",
+               "nefrologia"),
     /**
      * EN: Neurology.<br>
      * DE: Neurologie.<br>
-     * FR: Neurologie.<br>
-     * IT: Neurologia.<br>
+     * FR: neurologie.<br>
+     * IT: neurologia.<br>
      */
     NEUROLOGY("394591006",
               "2.16.840.1.113883.6.96",
               "Neurology (qualifier value)",
               "Neurology",
               "Neurologie",
-              "Neurologie",
-              "Neurologia"),
+              "neurologie",
+              "neurologia"),
     /**
      * EN: Neurosurgery.<br>
      * DE: Neurochirurgie.<br>
-     * FR: Neurochirurgie.<br>
-     * IT: Neurochirurgia.<br>
+     * FR: neurochirurgie.<br>
+     * IT: neurochirurgia.<br>
      */
     NEUROSURGERY("394610002",
                  "2.16.840.1.113883.6.96",
                  "Neurosurgery (qualifier value)",
                  "Neurosurgery",
                  "Neurochirurgie",
-                 "Neurochirurgie",
-                 "Neurochirurgia"),
+                 "neurochirurgie",
+                 "neurochirurgia"),
     /**
      * EN: Nuclear medicine.<br>
      * DE: Nuklearmedizin.<br>
-     * FR: Médecine nucléaire.<br>
-     * IT: Medicina nucleare.<br>
+     * FR: médecine nucléaire.<br>
+     * IT: medicina nucleare.<br>
      */
     NUCLEAR_MEDICINE("394649004",
                      "2.16.840.1.113883.6.96",
                      "Nuclear medicine - specialty (qualifier value)",
                      "Nuclear medicine",
                      "Nuklearmedizin",
-                     "Médecine nucléaire",
-                     "Medicina nucleare"),
+                     "médecine nucléaire",
+                     "medicina nucleare"),
     /**
      * EN: Nursing.<br>
      * DE: Pflege.<br>
-     * FR: Soins.<br>
-     * IT: Cure infermieristiche.<br>
+     * FR: soins.<br>
+     * IT: cure infermieristiche.<br>
      */
     NURSING("722165004",
             "2.16.840.1.113883.6.96",
             "Nursing (qualifier value)",
             "Nursing",
             "Pflege",
-            "Soins",
-            "Cure infermieristiche"),
+            "soins",
+            "cure infermieristiche"),
+    /**
+     * EN: Obstetrics.<br>
+     * DE: Geburtshilfe.<br>
+     * FR: obstétrique.<br>
+     * IT: ostetricia.<br>
+     */
+    OBSTETRICS("408470005",
+               "2.16.840.1.113883.6.96",
+               "Obstetrics (qualifier value)",
+               "Obstetrics",
+               "Geburtshilfe",
+               "obstétrique",
+               "ostetricia"),
     /**
      * EN: Occupational therapy service.<br>
      * DE: Ergotherapie.<br>
-     * FR: Ergothérapie.<br>
-     * IT: Ergoterapia.<br>
+     * FR: ergothérapie.<br>
+     * IT: ergoterapia.<br>
      */
     OCCUPATIONAL_THERAPY_SERVICE("310093001",
                                  "2.16.840.1.113883.6.96",
                                  "Occupational therapy service (qualifier value)",
                                  "Occupational therapy service",
                                  "Ergotherapie",
-                                 "Ergothérapie",
-                                 "Ergoterapia"),
+                                 "ergothérapie",
+                                 "ergoterapia"),
     /**
      * EN: Ophthalmology.<br>
      * DE: Ophthalmologie.<br>
-     * FR: Ophtalmologie.<br>
-     * IT: Oftalmologia.<br>
+     * FR: ophtalmologie.<br>
+     * IT: oftalmologia.<br>
      */
     OPHTHALMOLOGY("394594003",
                   "2.16.840.1.113883.6.96",
                   "Ophthalmology (qualifier value)",
                   "Ophthalmology",
                   "Ophthalmologie",
-                  "Ophtalmologie",
-                  "Oftalmologia"),
+                  "ophtalmologie",
+                  "oftalmologia"),
     /**
      * EN: Oral and maxillofacial surgery.<br>
      * DE: Mund-, Kiefer- und Gesichtschirurgie.<br>
-     * FR: Chirurgie dento-maxillo-faciale.<br>
-     * IT: Chirurgia oro-maxillo-facciale.<br>
+     * FR: chirurgie dento-maxillo-faciale.<br>
+     * IT: chirurgia oro-maxillo-facciale.<br>
      */
     ORAL_AND_MAXILLOFACIAL_SURGERY("408465003",
                                    "2.16.840.1.113883.6.96",
                                    "Oral and maxillofacial surgery (qualifier value)",
                                    "Oral and maxillofacial surgery",
                                    "Mund-, Kiefer- und Gesichtschirurgie",
-                                   "Chirurgie dento-maxillo-faciale",
-                                   "Chirurgia oro-maxillo-facciale"),
+                                   "chirurgie dento-maxillo-faciale",
+                                   "chirurgia oro-maxillo-facciale"),
     /**
      * EN: Osteopathic manipulative medicine.<br>
      * DE: Osteopathie.<br>
-     * FR: Ostéopathie.<br>
-     * IT: Osteopatia.<br>
+     * FR: ostéopathie.<br>
+     * IT: osteopatia.<br>
      */
     OSTEOPATHIC_MANIPULATIVE_MEDICINE("416304004",
                                       "2.16.840.1.113883.6.96",
                                       "Osteopathic manipulative medicine (qualifier value)",
                                       "Osteopathic manipulative medicine",
                                       "Osteopathie",
-                                      "Ostéopathie",
-                                      "Osteopatia"),
+                                      "ostéopathie",
+                                      "osteopatia"),
     /**
      * EN: Other clinical specialty.<br>
      * DE: Andere nicht näher spezifizierte medizinische Fachrichtung.<br>
-     * FR: Autres spécialisations non spécifiées.<br>
-     * IT: Altre specialità mediche non meglio precisate.<br>
+     * FR: autres spécialisations non spécifiées.<br>
+     * IT: altre specialità mediche non meglio precisate.<br>
      */
     OTHER_CLINICAL_SPECIALTY("394658006",
                              "2.16.840.1.113883.6.96",
                              "Clinical specialty (qualifier value)",
                              "Other clinical specialty",
                              "Andere nicht näher spezifizierte medizinische Fachrichtung",
-                             "Autres spécialisations non spécifiées",
-                             "Altre specialità mediche non meglio precisate"),
+                             "autres spécialisations non spécifiées",
+                             "altre specialità mediche non meglio precisate"),
     /**
      * EN: Otolaryngology.<br>
      * DE: Oto-Rhino-Laryngologie.<br>
-     * FR: Oto-rhino-laryngologie.<br>
-     * IT: Otorinolaringoiatria.<br>
+     * FR: oto-rhino-laryngologie.<br>
+     * IT: otorinolaringoiatria.<br>
      */
     OTOLARYNGOLOGY("418960008",
                    "2.16.840.1.113883.6.96",
                    "Otolaryngology (qualifier value)",
                    "Otolaryngology",
                    "Oto-Rhino-Laryngologie",
-                   "Oto-rhino-laryngologie",
-                   "Otorinolaringoiatria"),
+                   "oto-rhino-laryngologie",
+                   "otorinolaringoiatria"),
     /**
      * EN: Palliative medicine.<br>
      * DE: Palliativmedizin.<br>
-     * FR: Médecine palliative.<br>
-     * IT: Medicina palliativa.<br>
+     * FR: médecine palliative.<br>
+     * IT: medicina palliativa.<br>
      */
     PALLIATIVE_MEDICINE("394806003",
                         "2.16.840.1.113883.6.96",
                         "Palliative medicine (qualifier value)",
                         "Palliative medicine",
                         "Palliativmedizin",
-                        "Médecine palliative",
-                        "Medicina palliativa"),
+                        "médecine palliative",
+                        "medicina palliativa"),
     /**
      * EN: Pathology.<br>
      * DE: Pathologie.<br>
-     * FR: Pathologie.<br>
-     * IT: Patologia.<br>
+     * FR: pathologie.<br>
+     * IT: patologia.<br>
      */
     PATHOLOGY("394595002",
               "2.16.840.1.113883.6.96",
               "Pathology (qualifier value)",
               "Pathology",
               "Pathologie",
-              "Pathologie",
-              "Patologia"),
+              "pathologie",
+              "patologia"),
     /**
      * EN: Pediatrics.<br>
      * DE: Pädiatrie.<br>
-     * FR: Pédiatrie.<br>
-     * IT: Pediatria.<br>
+     * FR: pédiatrie.<br>
+     * IT: pediatria.<br>
      */
     PEDIATRICS("394537008",
                "2.16.840.1.113883.6.96",
                "Pediatric specialty (qualifier value)",
                "Pediatrics",
                "Pädiatrie",
-               "Pédiatrie",
-               "Pediatria"),
+               "pédiatrie",
+               "pediatria"),
     /**
      * EN: Pharmacy service.<br>
-     * DE: Pharmazie-Dienstleistung.<br>
-     * FR: Service pharmaceutique.<br>
-     * IT: Farmacia.<br>
+     * DE: Pharmazeutische Dienstleistungen.<br>
+     * FR: service pharmaceutique.<br>
+     * IT: servizio farmaceutico.<br>
      */
     PHARMACY_SERVICE("310080006",
                      "2.16.840.1.113883.6.96",
                      "Pharmacy service (qualifier value)",
                      "Pharmacy service",
-                     "Pharmazie-Dienstleistung",
-                     "Service pharmaceutique",
-                     "Farmacia"),
+                     "Pharmazeutische Dienstleistungen",
+                     "service pharmaceutique",
+                     "servizio farmaceutico"),
     /**
      * EN: Physiotherapy.<br>
      * DE: Physiotherapie.<br>
-     * FR: Physiothérapie.<br>
-     * IT: Fisioterapia.<br>
+     * FR: physiothérapie.<br>
+     * IT: fisioterapia.<br>
      */
     PHYSIOTHERAPY("722138006",
                   "2.16.840.1.113883.6.96",
                   "Physiotherapy (qualifier value)",
                   "Physiotherapy",
                   "Physiotherapie",
-                  "Physiothérapie",
-                  "Fisioterapia"),
+                  "physiothérapie",
+                  "fisioterapia"),
     /**
      * EN: Plastic surgery.<br>
      * DE: Plastische, Rekonstruktive und Ästhetische Chirurgie.<br>
-     * FR: Chirurgie plastique, reconstructrice et esthétique.<br>
-     * IT: Chirurgia plastica, ricostruttiva ed estetica.<br>
+     * FR: chirurgie plastique, reconstructrice et esthétique.<br>
+     * IT: chirurgia plastica, ricostruttiva ed estetica.<br>
      */
     PLASTIC_SURGERY("394611003",
                     "2.16.840.1.113883.6.96",
                     "Plastic surgery - specialty (qualifier value)",
                     "Plastic surgery",
                     "Plastische, Rekonstruktive und Ästhetische Chirurgie",
-                    "Chirurgie plastique, reconstructrice et esthétique",
-                    "Chirurgia plastica, ricostruttiva ed estetica"),
+                    "chirurgie plastique, reconstructrice et esthétique",
+                    "chirurgia plastica, ricostruttiva ed estetica"),
     /**
      * EN: Podiatry service.<br>
      * DE: Podologie.<br>
-     * FR: Podologie.<br>
-     * IT: Podologia.<br>
+     * FR: podologie.<br>
+     * IT: podologia.<br>
      */
     PODIATRY_SERVICE("310087009",
                      "2.16.840.1.113883.6.96",
                      "Podiatry service (qualifier value)",
                      "Podiatry service",
                      "Podologie",
-                     "Podologie",
-                     "Podologia"),
+                     "podologie",
+                     "podologia"),
     /**
      * EN: Preventive medicine.<br>
      * DE: Präventionsmedizin.<br>
-     * FR: Médecine préventive .<br>
-     * IT: Prevenzione.<br>
+     * FR: médecine préventive.<br>
+     * IT: prevenzione.<br>
      */
     PREVENTIVE_MEDICINE("409968004",
                         "2.16.840.1.113883.6.96",
                         "Preventive medicine (qualifier value)",
                         "Preventive medicine",
                         "Präventionsmedizin",
-                        "Médecine préventive ",
-                        "Prevenzione"),
+                        "médecine préventive",
+                        "prevenzione"),
     /**
      * EN: Psychiatry.<br>
      * DE: Psychiatrie und Psychotherapie.<br>
-     * FR: Psychiatrie et psychothérapie.<br>
-     * IT: Psichiatria e psicoterapia.<br>
+     * FR: psychiatrie et psychothérapie.<br>
+     * IT: psichiatria e psicoterapia.<br>
      */
     PSYCHIATRY("394587001",
                "2.16.840.1.113883.6.96",
                "Psychiatry (qualifier value)",
                "Psychiatry",
                "Psychiatrie und Psychotherapie",
-               "Psychiatrie et psychothérapie",
-               "Psichiatria e psicoterapia"),
+               "psychiatrie et psychothérapie",
+               "psichiatria e psicoterapia"),
     /**
      * EN: Psychology.<br>
      * DE: Psychologie.<br>
-     * FR: Psychologie.<br>
-     * IT: Psicologia.<br>
+     * FR: psychologie.<br>
+     * IT: psicologia.<br>
      */
     PSYCHOLOGY("722162001",
                "2.16.840.1.113883.6.96",
                "Psychology (qualifier value)",
                "Psychology",
                "Psychologie",
-               "Psychologie",
-               "Psicologia"),
+               "psychologie",
+               "psicologia"),
     /**
-     * EN: Psycho-Somatic medicine.<br>
+     * EN: Psychosomatic medicine.<br>
      * DE: Psychosomatik.<br>
-     * FR: Psychosomatique.<br>
-     * IT: Medicina psicosomatica.<br>
+     * FR: psychosomatique.<br>
+     * IT: medicina psicosomatica.<br>
      */
-    PSYCHO_SOMATIC_MEDICINE("721961006",
-                            "2.16.840.1.113883.6.96",
-                            "Psychosomatic medicine (qualifier value)",
-                            "Psycho-Somatic medicine",
-                            "Psychosomatik",
-                            "Psychosomatique",
-                            "Medicina psicosomatica"),
+    PSYCHOSOMATIC_MEDICINE("721961006",
+                           "2.16.840.1.113883.6.96",
+                           "Psychosomatic medicine (qualifier value)",
+                           "Psychosomatic medicine",
+                           "Psychosomatik",
+                           "psychosomatique",
+                           "medicina psicosomatica"),
     /**
      * EN: Pulmonary medicine.<br>
      * DE: Pneumologie.<br>
-     * FR: Pneumologie.<br>
-     * IT: Pneumologia.<br>
+     * FR: pneumologie.<br>
+     * IT: pneumologia.<br>
      */
     PULMONARY_MEDICINE("418112009",
                        "2.16.840.1.113883.6.96",
                        "Pulmonary medicine (qualifier value)",
                        "Pulmonary medicine",
                        "Pneumologie",
-                       "Pneumologie",
-                       "Pneumologia"),
+                       "pneumologie",
+                       "pneumologia"),
     /**
      * EN: Radiation oncology.<br>
-     * DE: Radio-Onkologie/Strahlentherapie.<br>
-     * FR: Radio-oncologie / radiothérapie.<br>
-     * IT: Radio-oncologia / radioterapia.<br>
+     * DE: Radio-Onkologie.<br>
+     * FR: radio-oncologie.<br>
+     * IT: radio-oncologia.<br>
      */
     RADIATION_ONCOLOGY("419815003",
                        "2.16.840.1.113883.6.96",
                        "Radiation oncology (qualifier value)",
                        "Radiation oncology",
-                       "Radio-Onkologie/Strahlentherapie",
-                       "Radio-oncologie / radiothérapie",
-                       "Radio-oncologia / radioterapia"),
+                       "Radio-Onkologie",
+                       "radio-oncologie",
+                       "radio-oncologia"),
     /**
      * EN: Radiology.<br>
      * DE: Radiologie.<br>
-     * FR: Radiologie.<br>
-     * IT: Radiologia.<br>
+     * FR: radiologie.<br>
+     * IT: radiologia.<br>
      */
     RADIOLOGY("394914008",
               "2.16.840.1.113883.6.96",
               "Radiology - specialty (qualifier value)",
               "Radiology",
               "Radiologie",
-              "Radiologie",
-              "Radiologia"),
+              "radiologie",
+              "radiologia"),
     /**
      * EN: Rehabilitation.<br>
      * DE: Rehabilitation.<br>
-     * FR: Réadaptation.<br>
-     * IT: Riabilitazione.<br>
+     * FR: réadaptation.<br>
+     * IT: riabilitazione.<br>
      */
     REHABILITATION("394602003",
                    "2.16.840.1.113883.6.96",
                    "Rehabilitation - specialty (qualifier value)",
                    "Rehabilitation",
                    "Rehabilitation",
-                   "Réadaptation",
-                   "Riabilitazione"),
+                   "réadaptation",
+                   "riabilitazione"),
     /**
      * EN: Rheumatology.<br>
      * DE: Rheumatologie.<br>
-     * FR: Rhumatologie.<br>
-     * IT: Reumatologia.<br>
+     * FR: rhumatologie.<br>
+     * IT: reumatologia.<br>
      */
     RHEUMATOLOGY("394810000",
                  "2.16.840.1.113883.6.96",
                  "Rheumatology (qualifier value)",
                  "Rheumatology",
                  "Rheumatologie",
-                 "Rhumatologie",
-                 "Reumatologia"),
+                 "rhumatologie",
+                 "reumatologia"),
     /**
      * EN: Speech and language therapy service.<br>
      * DE: Logopädie.<br>
-     * FR: Logopédie.<br>
-     * IT: Logopedia.<br>
+     * FR: logopédie.<br>
+     * IT: logopedia.<br>
      */
     SPEECH_AND_LANGUAGE_THERAPY_SERVICE("310101009",
                                         "2.16.840.1.113883.6.96",
                                         "Speech and language therapy service (qualifier value)",
                                         "Speech and language therapy service",
                                         "Logopädie",
-                                        "Logopédie",
-                                        "Logopedia"),
+                                        "logopédie",
+                                        "logopedia"),
     /**
      * EN: Thoracic surgery.<br>
      * DE: Thoraxchirurgie.<br>
-     * FR: Chirurgie thoracique.<br>
-     * IT: Chirurgia toracica.<br>
+     * FR: chirurgie thoracique.<br>
+     * IT: chirurgia toracica.<br>
      */
     THORACIC_SURGERY("408456005",
                      "2.16.840.1.113883.6.96",
                      "Thoracic surgery (qualifier value)",
                      "Thoracic surgery",
                      "Thoraxchirurgie",
-                     "Chirurgie thoracique",
-                     "Chirurgia toracica"),
+                     "chirurgie thoracique",
+                     "chirurgia toracica"),
     /**
      * EN: Transfusion medicine.<br>
      * DE: Transfusionsmedizin.<br>
-     * FR: Médecine transfusionnelle.<br>
-     * IT: Medicina trasfusionale.<br>
+     * FR: médecine transfusionnelle.<br>
+     * IT: medicina trasfusionale.<br>
      */
     TRANSFUSION_MEDICINE("394819004",
                          "2.16.840.1.113883.6.96",
                          "Blood transfusion (specialty) (qualifier value)",
                          "Transfusion medicine",
                          "Transfusionsmedizin",
-                         "Médecine transfusionnelle",
-                         "Medicina trasfusionale"),
+                         "médecine transfusionnelle",
+                         "medicina trasfusionale"),
     /**
      * EN: Transplant surgery.<br>
-     * DE: Transplantationsmedizin.<br>
-     * FR: Médecine de la transplantation.<br>
-     * IT: Medicina dei trapianti.<br>
+     * DE: Transplatationschirurgie.<br>
+     * FR: chirurgie de transplantation.<br>
+     * IT: chirurgia dei trapianti.<br>
      */
     TRANSPLANT_SURGERY("408477008",
                        "2.16.840.1.113883.6.96",
                        "Transplantation surgery (qualifier value)",
                        "Transplant surgery",
-                       "Transplantationsmedizin",
-                       "Médecine de la transplantation",
-                       "Medicina dei trapianti"),
+                       "Transplatationschirurgie",
+                       "chirurgie de transplantation",
+                       "chirurgia dei trapianti"),
     /**
      * EN: Trauma and orthopedics.<br>
      * DE: Orthopädie und Traumatologie.<br>
-     * FR: Chirurgie orthopédique et traumatologie de l'appareil locomoteur.<br>
-     * IT: Chirurgia ortopedica e traumatologia dell'apparato locomotore.<br>
+     * FR: chirurgie orthopédique et traumatologie de l'appareil locomoteur.<br>
+     * IT: chirurgia ortopedica e traumatologia dell'apparato locomotore.<br>
      */
     TRAUMA_AND_ORTHOPEDICS("394801008",
                            "2.16.840.1.113883.6.96",
                            "Trauma and orthopedics (qualifier value)",
                            "Trauma and orthopedics",
                            "Orthopädie und Traumatologie",
-                           "Chirurgie orthopédique et traumatologie de l'appareil locomoteur",
-                           "Chirurgia ortopedica e traumatologia dell'apparato locomotore"),
+                           "chirurgie orthopédique et traumatologie de l'appareil locomoteur",
+                           "chirurgia ortopedica e traumatologia dell'apparato locomotore"),
     /**
      * EN: Tropical medicine.<br>
      * DE: Tropen- und Reisemedizin.<br>
-     * FR: Médecine tropicale et des voyages.<br>
-     * IT: Medicina tropicale e di viaggio.<br>
+     * FR: médecine tropicale et des voyages.<br>
+     * IT: medicina tropicale e di viaggio.<br>
      */
     TROPICAL_MEDICINE("408448007",
                       "2.16.840.1.113883.6.96",
                       "Tropical medicine (qualifier value)",
                       "Tropical medicine",
                       "Tropen- und Reisemedizin",
-                      "Médecine tropicale et des voyages",
-                      "Medicina tropicale e di viaggio"),
+                      "médecine tropicale et des voyages",
+                      "medicina tropicale e di viaggio"),
     /**
      * EN: Urology.<br>
      * DE: Urologie.<br>
-     * FR: Urologie.<br>
-     * IT: Urologia.<br>
+     * FR: urologie.<br>
+     * IT: urologia.<br>
      */
     UROLOGY("394612005",
             "2.16.840.1.113883.6.96",
             "Urology (qualifier value)",
             "Urology",
             "Urologie",
-            "Urologie",
-            "Urologia"),
+            "urologie",
+            "urologia"),
     /**
      * EN: Vascular medicine.<br>
      * DE: Angiologie.<br>
-     * FR: Angiologie.<br>
-     * IT: Angiologia.<br>
+     * FR: angiologie.<br>
+     * IT: angiologia.<br>
      */
     VASCULAR_MEDICINE("722414000",
                       "2.16.840.1.113883.6.96",
                       "Vascular medicine (qualifier value)",
                       "Vascular medicine",
                       "Angiologie",
-                      "Angiologie",
-                      "Angiologia");
+                      "angiologie",
+                      "angiologia"),
+    /**
+     * EN: Vascular surgery.<br>
+     * DE: Gefässchirurgie.<br>
+     * FR: chirurgie vasculaire.<br>
+     * IT: chirurgia vascolare.<br>
+     */
+    VASCULAR_SURGERY("408463005",
+                     "2.16.840.1.113883.6.96",
+                     "Vascular surgery (qualifier value)",
+                     "Vascular surgery",
+                     "Gefässchirurgie",
+                     "chirurgie vasculaire",
+                     "chirurgia vascolare");
 
     /**
      * EN: Code for Accident &amp; emergency.<br>
      * DE: Code für Notfall- und Rettungsmedizin.<br>
-     * FR: Code de Médecine d'urgence et de sauvetage.<br>
-     * IT: Code per Medicina d'urgenza e di salvataggio.<br>
+     * FR: Code de médecine d'urgence et de sauvetage.<br>
+     * IT: Code per medicina d'urgenza e di salvataggio.<br>
      */
-    public static final String ACCIDENT_EMERGENCY_CODE = "394576009";
+    public static final String ACCIDENT_AND_EMERGENCY_CODE = "394576009";
 
     /**
      * EN: Code for Anaesthesiology.<br>
      * DE: Code für Anästhesiologie.<br>
-     * FR: Code de Anesthésiologie.<br>
-     * IT: Code per Anestesiologia.<br>
+     * FR: Code de anesthésiologie.<br>
+     * IT: Code per anestesiologia.<br>
      */
     public static final String ANAESTHESIOLOGY_CODE = "394577000";
 
     /**
      * EN: Code for Cardiac surgery.<br>
      * DE: Code für Herzchirurgie.<br>
-     * FR: Code de Chirurgie cardiovasculaire.<br>
-     * IT: Code per Chirurgia cardiovascolare.<br>
+     * FR: Code de chirurgie cardiaque.<br>
+     * IT: Code per chirurgia cardiaca.<br>
      */
     public static final String CARDIAC_SURGERY_CODE = "408466002";
 
     /**
      * EN: Code for Cardiology.<br>
      * DE: Code für Kardiologie.<br>
-     * FR: Code de Cardiologie.<br>
-     * IT: Code per Cardiologia.<br>
+     * FR: Code de cardiologie.<br>
+     * IT: Code per cardiologia.<br>
      */
     public static final String CARDIOLOGY_CODE = "394579002";
 
     /**
      * EN: Code for Chiropractic service.<br>
      * DE: Code für Chiropraktik.<br>
-     * FR: Code de Chiropractie.<br>
-     * IT: Code per Chiropratica.<br>
+     * FR: Code de chiropractie.<br>
+     * IT: Code per chiropratica.<br>
      */
     public static final String CHIROPRACTIC_SERVICE_CODE = "722170006";
 
     /**
      * EN: Code for Clinical genetics.<br>
      * DE: Code für Medizinische Genetik.<br>
-     * FR: Code de Génétique médicale.<br>
-     * IT: Code per Genetica medica.<br>
+     * FR: Code de génétique médicale.<br>
+     * IT: Code per genetica medica.<br>
      */
     public static final String CLINICAL_GENETICS_CODE = "394580004";
 
     /**
      * EN: Code for Clinical haematology.<br>
      * DE: Code für Hämatologie.<br>
-     * FR: Code de Hématologie.<br>
-     * IT: Code per Ematologia.<br>
+     * FR: Code de hématologie.<br>
+     * IT: Code per ematologia.<br>
      */
     public static final String CLINICAL_HAEMATOLOGY_CODE = "394803006";
 
     /**
      * EN: Code for Clinical immunology.<br>
      * DE: Code für Immunologie.<br>
-     * FR: Code de Immunologie.<br>
-     * IT: Code per Immunologia.<br>
+     * FR: Code de immunologie.<br>
+     * IT: Code per immunologia.<br>
      */
     public static final String CLINICAL_IMMUNOLOGY_CODE = "408480009";
 
     /**
      * EN: Code for Clinical immunology/allergy.<br>
      * DE: Code für Immunologie/Allergologie.<br>
-     * FR: Code de Immunologie/Allergologie.<br>
-     * IT: Code per Allergologia e immunologia clinica.<br>
+     * FR: Code de immunologie/allergologie.<br>
+     * IT: Code per allergologia e immunologia clinica.<br>
      */
     public static final String CLINICAL_IMMUNOLOGY_ALLERGY_CODE = "394805004";
 
     /**
      * EN: Code for Clinical oncology.<br>
      * DE: Code für Onkologie.<br>
-     * FR: Code de Oncologie.<br>
-     * IT: Code per Oncologia medica.<br>
+     * FR: Code de oncologie.<br>
+     * IT: Code per oncologia medica.<br>
      */
     public static final String CLINICAL_ONCOLOGY_CODE = "394592004";
 
     /**
      * EN: Code for Clinical pharmacology.<br>
      * DE: Code für Klinische Pharmakologie.<br>
-     * FR: Code de Pharmacologie clinique.<br>
-     * IT: Code per Farmacologia clinica.<br>
+     * FR: Code de pharmacologie clinique.<br>
+     * IT: Code per farmacologia clinica.<br>
      */
     public static final String CLINICAL_PHARMACOLOGY_CODE = "394600006";
 
     /**
      * EN: Code for Complementary therapy.<br>
      * DE: Code für Komplementärmedizin.<br>
-     * FR: Code de Médecine alternative et complémentaire.<br>
-     * IT: Code per Medicina complementare.<br>
+     * FR: Code de médecine alternative et complémentaire.<br>
+     * IT: Code per medicina complementare.<br>
      */
     public static final String COMPLEMENTARY_THERAPY_CODE = "310025004";
 
     /**
      * EN: Code for Critical care medicine.<br>
      * DE: Code für Intensivmedizin.<br>
-     * FR: Code de Médecine intensive.<br>
-     * IT: Code per Medicina intensiva.<br>
+     * FR: Code de médecine intensive.<br>
+     * IT: Code per medicina intensiva.<br>
      */
     public static final String CRITICAL_CARE_MEDICINE_CODE = "408478003";
 
     /**
      * EN: Code for Dental medicine.<br>
      * DE: Code für Zahnheilkunde.<br>
-     * FR: Code de Odontologie.<br>
-     * IT: Code per Odontoiatria.<br>
+     * FR: Code de odontologie.<br>
+     * IT: Code per odontoiatria.<br>
      */
     public static final String DENTAL_MEDICINE_CODE = "394812008";
 
     /**
+     * EN: Code for Dentistry.<br>
+     * DE: Code für Zahnmedizin.<br>
+     * FR: Code de dentisterie.<br>
+     * IT: Code per odontoiatria.<br>
+     */
+    public static final String DENTISTRY_CODE = "722163006";
+
+    /**
      * EN: Code for Dermatology.<br>
      * DE: Code für Dermatologie und Venerologie.<br>
-     * FR: Code de Dermatologie et vénérologie.<br>
-     * IT: Code per Dermatologia e venereologia.<br>
+     * FR: Code de dermatologie et vénérologie.<br>
+     * IT: Code per dermatologia e venereologia.<br>
      */
     public static final String DERMATOLOGY_CODE = "394582007";
 
     /**
      * EN: Code for Dietetics and nutrition.<br>
      * DE: Code für Ernährungsberatung.<br>
-     * FR: Code de Conseil en nutrition et diététique.<br>
-     * IT: Code per Dietetica.<br>
+     * FR: Code de conseil en nutrition et diététique.<br>
+     * IT: Code per dietetica.<br>
      */
     public static final String DIETETICS_AND_NUTRITION_CODE = "722164000";
 
     /**
+     * EN: Code for Emergency medicine.<br>
+     * DE: Code für Notfallmedizin.<br>
+     * FR: Code de médecine d'urgence.<br>
+     * IT: Code per medicina d'urgenza.<br>
+     */
+    public static final String EMERGENCY_MEDICINE_CODE = "773568002";
+
+    /**
      * EN: Code for Endocrinology.<br>
      * DE: Code für Endokrinologie/Diabetologie.<br>
-     * FR: Code de Endocrinologie/diabétologie.<br>
-     * IT: Code per Endocrinologia/diabetologia.<br>
+     * FR: Code de endocrinologie/diabétologie.<br>
+     * IT: Code per endocrinologia/diabetologia.<br>
      */
     public static final String ENDOCRINOLOGY_CODE = "394583002";
 
     /**
      * EN: Code for Gastroenterology.<br>
      * DE: Code für Gastroenterologie.<br>
-     * FR: Code de Gastroentérologie.<br>
-     * IT: Code per Gastroenterologia.<br>
+     * FR: Code de gastroentérologie.<br>
+     * IT: Code per gastroenterologia.<br>
      */
     public static final String GASTROENTEROLOGY_CODE = "394584008";
 
     /**
      * EN: Code for General medicine.<br>
      * DE: Code für Allgemeinmedizin.<br>
-     * FR: Code de Médecine générale.<br>
-     * IT: Code per Medicina generale.<br>
+     * FR: Code de médecine générale.<br>
+     * IT: Code per medicina generale.<br>
      */
     public static final String GENERAL_MEDICINE_CODE = "394802001";
 
     /**
      * EN: Code for General surgery.<br>
      * DE: Code für Chirurgie.<br>
-     * FR: Code de Chirurgie.<br>
-     * IT: Code per Chirurgia.<br>
+     * FR: Code de chirurgie.<br>
+     * IT: Code per chirurgia.<br>
      */
     public static final String GENERAL_SURGERY_CODE = "394609007";
 
     /**
      * EN: Code for Geriatric medicine.<br>
      * DE: Code für Geriatrie.<br>
-     * FR: Code de Gériatrie.<br>
-     * IT: Code per Geriatria.<br>
+     * FR: Code de gériatrie.<br>
+     * IT: Code per geriatria.<br>
      */
     public static final String GERIATRIC_MEDICINE_CODE = "394811001";
 
     /**
-     * EN: Code for Gynecology and Obstretrics.<br>
-     * DE: Code für Gynäkologie und Geburtshilfe.<br>
-     * FR: Code de Gynécologie et obstétrique.<br>
-     * IT: Code per Ginecologia e ostetricia.<br>
+     * EN: Code for Gynecology.<br>
+     * DE: Code für Gynäkologie.<br>
+     * FR: Code de gynécologie.<br>
+     * IT: Code per ginecologia.<br>
      */
-    public static final String GYNECOLOGY_AND_OBSTRETRICS_CODE = "394586005";
+    public static final String GYNECOLOGY_CODE = "394586005";
 
     /**
      * EN: Code for Infectious diseases.<br>
      * DE: Code für Infektionskrankheiten.<br>
-     * FR: Code de Maladies infectieuses.<br>
-     * IT: Code per Malattia infettiva.<br>
+     * FR: Code de maladies infectieuses.<br>
+     * IT: Code per malattia infettiva.<br>
      */
     public static final String INFECTIOUS_DISEASES_CODE = "394807007";
 
     /**
      * EN: Code for Internal medicine.<br>
      * DE: Code für Innere Medizin.<br>
-     * FR: Code de Médecine interne.<br>
-     * IT: Code per Medicina interna.<br>
+     * FR: Code de médecine interne.<br>
+     * IT: Code per medicina interna.<br>
      */
     public static final String INTERNAL_MEDICINE_CODE = "419192003";
 
     /**
      * EN: Code for Laboratory service.<br>
      * DE: Code für Labormedizin.<br>
-     * FR: Code de Médecin de laboratoire.<br>
-     * IT: Code per Medicina di laboratorio.<br>
+     * FR: Code de médecin de laboratoire.<br>
+     * IT: Code per medicina di laboratorio.<br>
      */
     public static final String LABORATORY_SERVICE_CODE = "708184003";
 
     /**
      * EN: Code for Legal medicine.<br>
      * DE: Code für Rechtsmedizin.<br>
-     * FR: Code de Médecine légale.<br>
-     * IT: Code per Medicina legale.<br>
+     * FR: Code de médecine légale.<br>
+     * IT: Code per medicina legale.<br>
      */
     public static final String LEGAL_MEDICINE_CODE = "722204007";
 
     /**
      * EN: Code for Nephrology.<br>
      * DE: Code für Nephrologie.<br>
-     * FR: Code de Néphrologie.<br>
-     * IT: Code per Nefrologia.<br>
+     * FR: Code de néphrologie.<br>
+     * IT: Code per nefrologia.<br>
      */
     public static final String NEPHROLOGY_CODE = "394589003";
 
     /**
      * EN: Code for Neurology.<br>
      * DE: Code für Neurologie.<br>
-     * FR: Code de Neurologie.<br>
-     * IT: Code per Neurologia.<br>
+     * FR: Code de neurologie.<br>
+     * IT: Code per neurologia.<br>
      */
     public static final String NEUROLOGY_CODE = "394591006";
 
     /**
      * EN: Code for Neurosurgery.<br>
      * DE: Code für Neurochirurgie.<br>
-     * FR: Code de Neurochirurgie.<br>
-     * IT: Code per Neurochirurgia.<br>
+     * FR: Code de neurochirurgie.<br>
+     * IT: Code per neurochirurgia.<br>
      */
     public static final String NEUROSURGERY_CODE = "394610002";
 
     /**
      * EN: Code for Nuclear medicine.<br>
      * DE: Code für Nuklearmedizin.<br>
-     * FR: Code de Médecine nucléaire.<br>
-     * IT: Code per Medicina nucleare.<br>
+     * FR: Code de médecine nucléaire.<br>
+     * IT: Code per medicina nucleare.<br>
      */
     public static final String NUCLEAR_MEDICINE_CODE = "394649004";
 
     /**
      * EN: Code for Nursing.<br>
      * DE: Code für Pflege.<br>
-     * FR: Code de Soins.<br>
-     * IT: Code per Cure infermieristiche.<br>
+     * FR: Code de soins.<br>
+     * IT: Code per cure infermieristiche.<br>
      */
     public static final String NURSING_CODE = "722165004";
 
     /**
+     * EN: Code for Obstetrics.<br>
+     * DE: Code für Geburtshilfe.<br>
+     * FR: Code de obstétrique.<br>
+     * IT: Code per ostetricia.<br>
+     */
+    public static final String OBSTETRICS_CODE = "408470005";
+
+    /**
      * EN: Code for Occupational therapy service.<br>
      * DE: Code für Ergotherapie.<br>
-     * FR: Code de Ergothérapie.<br>
-     * IT: Code per Ergoterapia.<br>
+     * FR: Code de ergothérapie.<br>
+     * IT: Code per ergoterapia.<br>
      */
     public static final String OCCUPATIONAL_THERAPY_SERVICE_CODE = "310093001";
 
     /**
      * EN: Code for Ophthalmology.<br>
      * DE: Code für Ophthalmologie.<br>
-     * FR: Code de Ophtalmologie.<br>
-     * IT: Code per Oftalmologia.<br>
+     * FR: Code de ophtalmologie.<br>
+     * IT: Code per oftalmologia.<br>
      */
     public static final String OPHTHALMOLOGY_CODE = "394594003";
 
     /**
      * EN: Code for Oral and maxillofacial surgery.<br>
      * DE: Code für Mund-, Kiefer- und Gesichtschirurgie.<br>
-     * FR: Code de Chirurgie dento-maxillo-faciale.<br>
-     * IT: Code per Chirurgia oro-maxillo-facciale.<br>
+     * FR: Code de chirurgie dento-maxillo-faciale.<br>
+     * IT: Code per chirurgia oro-maxillo-facciale.<br>
      */
     public static final String ORAL_AND_MAXILLOFACIAL_SURGERY_CODE = "408465003";
 
     /**
      * EN: Code for Osteopathic manipulative medicine.<br>
      * DE: Code für Osteopathie.<br>
-     * FR: Code de Ostéopathie.<br>
-     * IT: Code per Osteopatia.<br>
+     * FR: Code de ostéopathie.<br>
+     * IT: Code per osteopatia.<br>
      */
     public static final String OSTEOPATHIC_MANIPULATIVE_MEDICINE_CODE = "416304004";
 
     /**
      * EN: Code for Other clinical specialty.<br>
      * DE: Code für Andere nicht näher spezifizierte medizinische Fachrichtung.<br>
-     * FR: Code de Autres spécialisations non spécifiées.<br>
-     * IT: Code per Altre specialità mediche non meglio precisate.<br>
+     * FR: Code de autres spécialisations non spécifiées.<br>
+     * IT: Code per altre specialità mediche non meglio precisate.<br>
      */
     public static final String OTHER_CLINICAL_SPECIALTY_CODE = "394658006";
 
     /**
      * EN: Code for Otolaryngology.<br>
      * DE: Code für Oto-Rhino-Laryngologie.<br>
-     * FR: Code de Oto-rhino-laryngologie.<br>
-     * IT: Code per Otorinolaringoiatria.<br>
+     * FR: Code de oto-rhino-laryngologie.<br>
+     * IT: Code per otorinolaringoiatria.<br>
      */
     public static final String OTOLARYNGOLOGY_CODE = "418960008";
 
     /**
      * EN: Code for Palliative medicine.<br>
      * DE: Code für Palliativmedizin.<br>
-     * FR: Code de Médecine palliative.<br>
-     * IT: Code per Medicina palliativa.<br>
+     * FR: Code de médecine palliative.<br>
+     * IT: Code per medicina palliativa.<br>
      */
     public static final String PALLIATIVE_MEDICINE_CODE = "394806003";
 
     /**
      * EN: Code for Pathology.<br>
      * DE: Code für Pathologie.<br>
-     * FR: Code de Pathologie.<br>
-     * IT: Code per Patologia.<br>
+     * FR: Code de pathologie.<br>
+     * IT: Code per patologia.<br>
      */
     public static final String PATHOLOGY_CODE = "394595002";
 
     /**
      * EN: Code for Pediatrics.<br>
      * DE: Code für Pädiatrie.<br>
-     * FR: Code de Pédiatrie.<br>
-     * IT: Code per Pediatria.<br>
+     * FR: Code de pédiatrie.<br>
+     * IT: Code per pediatria.<br>
      */
     public static final String PEDIATRICS_CODE = "394537008";
 
     /**
      * EN: Code for Pharmacy service.<br>
-     * DE: Code für Pharmazie-Dienstleistung.<br>
-     * FR: Code de Service pharmaceutique.<br>
-     * IT: Code per Farmacia.<br>
+     * DE: Code für Pharmazeutische Dienstleistungen.<br>
+     * FR: Code de service pharmaceutique.<br>
+     * IT: Code per servizio farmaceutico.<br>
      */
     public static final String PHARMACY_SERVICE_CODE = "310080006";
 
     /**
      * EN: Code for Physiotherapy.<br>
      * DE: Code für Physiotherapie.<br>
-     * FR: Code de Physiothérapie.<br>
-     * IT: Code per Fisioterapia.<br>
+     * FR: Code de physiothérapie.<br>
+     * IT: Code per fisioterapia.<br>
      */
     public static final String PHYSIOTHERAPY_CODE = "722138006";
 
     /**
      * EN: Code for Plastic surgery.<br>
      * DE: Code für Plastische, Rekonstruktive und Ästhetische Chirurgie.<br>
-     * FR: Code de Chirurgie plastique, reconstructrice et esthétique.<br>
-     * IT: Code per Chirurgia plastica, ricostruttiva ed estetica.<br>
+     * FR: Code de chirurgie plastique, reconstructrice et esthétique.<br>
+     * IT: Code per chirurgia plastica, ricostruttiva ed estetica.<br>
      */
     public static final String PLASTIC_SURGERY_CODE = "394611003";
 
     /**
      * EN: Code for Podiatry service.<br>
      * DE: Code für Podologie.<br>
-     * FR: Code de Podologie.<br>
-     * IT: Code per Podologia.<br>
+     * FR: Code de podologie.<br>
+     * IT: Code per podologia.<br>
      */
     public static final String PODIATRY_SERVICE_CODE = "310087009";
 
     /**
      * EN: Code for Preventive medicine.<br>
      * DE: Code für Präventionsmedizin.<br>
-     * FR: Code de Médecine préventive .<br>
-     * IT: Code per Prevenzione.<br>
+     * FR: Code de médecine préventive.<br>
+     * IT: Code per prevenzione.<br>
      */
     public static final String PREVENTIVE_MEDICINE_CODE = "409968004";
 
     /**
      * EN: Code for Psychiatry.<br>
      * DE: Code für Psychiatrie und Psychotherapie.<br>
-     * FR: Code de Psychiatrie et psychothérapie.<br>
-     * IT: Code per Psichiatria e psicoterapia.<br>
+     * FR: Code de psychiatrie et psychothérapie.<br>
+     * IT: Code per psichiatria e psicoterapia.<br>
      */
     public static final String PSYCHIATRY_CODE = "394587001";
 
     /**
      * EN: Code for Psychology.<br>
      * DE: Code für Psychologie.<br>
-     * FR: Code de Psychologie.<br>
-     * IT: Code per Psicologia.<br>
+     * FR: Code de psychologie.<br>
+     * IT: Code per psicologia.<br>
      */
     public static final String PSYCHOLOGY_CODE = "722162001";
 
     /**
-     * EN: Code for Psycho-Somatic medicine.<br>
+     * EN: Code for Psychosomatic medicine.<br>
      * DE: Code für Psychosomatik.<br>
-     * FR: Code de Psychosomatique.<br>
-     * IT: Code per Medicina psicosomatica.<br>
+     * FR: Code de psychosomatique.<br>
+     * IT: Code per medicina psicosomatica.<br>
      */
-    public static final String PSYCHO_SOMATIC_MEDICINE_CODE = "721961006";
+    public static final String PSYCHOSOMATIC_MEDICINE_CODE = "721961006";
 
     /**
      * EN: Code for Pulmonary medicine.<br>
      * DE: Code für Pneumologie.<br>
-     * FR: Code de Pneumologie.<br>
-     * IT: Code per Pneumologia.<br>
+     * FR: Code de pneumologie.<br>
+     * IT: Code per pneumologia.<br>
      */
     public static final String PULMONARY_MEDICINE_CODE = "418112009";
 
     /**
      * EN: Code for Radiation oncology.<br>
-     * DE: Code für Radio-Onkologie/Strahlentherapie.<br>
-     * FR: Code de Radio-oncologie / radiothérapie.<br>
-     * IT: Code per Radio-oncologia / radioterapia.<br>
+     * DE: Code für Radio-Onkologie.<br>
+     * FR: Code de radio-oncologie.<br>
+     * IT: Code per radio-oncologia.<br>
      */
     public static final String RADIATION_ONCOLOGY_CODE = "419815003";
 
     /**
      * EN: Code for Radiology.<br>
      * DE: Code für Radiologie.<br>
-     * FR: Code de Radiologie.<br>
-     * IT: Code per Radiologia.<br>
+     * FR: Code de radiologie.<br>
+     * IT: Code per radiologia.<br>
      */
     public static final String RADIOLOGY_CODE = "394914008";
 
     /**
      * EN: Code for Rehabilitation.<br>
      * DE: Code für Rehabilitation.<br>
-     * FR: Code de Réadaptation.<br>
-     * IT: Code per Riabilitazione.<br>
+     * FR: Code de réadaptation.<br>
+     * IT: Code per riabilitazione.<br>
      */
     public static final String REHABILITATION_CODE = "394602003";
 
     /**
      * EN: Code for Rheumatology.<br>
      * DE: Code für Rheumatologie.<br>
-     * FR: Code de Rhumatologie.<br>
-     * IT: Code per Reumatologia.<br>
+     * FR: Code de rhumatologie.<br>
+     * IT: Code per reumatologia.<br>
      */
     public static final String RHEUMATOLOGY_CODE = "394810000";
 
     /**
      * EN: Code for Speech and language therapy service.<br>
      * DE: Code für Logopädie.<br>
-     * FR: Code de Logopédie.<br>
-     * IT: Code per Logopedia.<br>
+     * FR: Code de logopédie.<br>
+     * IT: Code per logopedia.<br>
      */
     public static final String SPEECH_AND_LANGUAGE_THERAPY_SERVICE_CODE = "310101009";
 
     /**
      * EN: Code for Thoracic surgery.<br>
      * DE: Code für Thoraxchirurgie.<br>
-     * FR: Code de Chirurgie thoracique.<br>
-     * IT: Code per Chirurgia toracica.<br>
+     * FR: Code de chirurgie thoracique.<br>
+     * IT: Code per chirurgia toracica.<br>
      */
     public static final String THORACIC_SURGERY_CODE = "408456005";
 
     /**
      * EN: Code for Transfusion medicine.<br>
      * DE: Code für Transfusionsmedizin.<br>
-     * FR: Code de Médecine transfusionnelle.<br>
-     * IT: Code per Medicina trasfusionale.<br>
+     * FR: Code de médecine transfusionnelle.<br>
+     * IT: Code per medicina trasfusionale.<br>
      */
     public static final String TRANSFUSION_MEDICINE_CODE = "394819004";
 
     /**
      * EN: Code for Transplant surgery.<br>
-     * DE: Code für Transplantationsmedizin.<br>
-     * FR: Code de Médecine de la transplantation.<br>
-     * IT: Code per Medicina dei trapianti.<br>
+     * DE: Code für Transplatationschirurgie.<br>
+     * FR: Code de chirurgie de transplantation.<br>
+     * IT: Code per chirurgia dei trapianti.<br>
      */
     public static final String TRANSPLANT_SURGERY_CODE = "408477008";
 
     /**
      * EN: Code for Trauma and orthopedics.<br>
      * DE: Code für Orthopädie und Traumatologie.<br>
-     * FR: Code de Chirurgie orthopédique et traumatologie de l'appareil locomoteur.<br>
-     * IT: Code per Chirurgia ortopedica e traumatologia dell'apparato locomotore.<br>
+     * FR: Code de chirurgie orthopédique et traumatologie de l'appareil locomoteur.<br>
+     * IT: Code per chirurgia ortopedica e traumatologia dell'apparato locomotore.<br>
      */
     public static final String TRAUMA_AND_ORTHOPEDICS_CODE = "394801008";
 
     /**
      * EN: Code for Tropical medicine.<br>
      * DE: Code für Tropen- und Reisemedizin.<br>
-     * FR: Code de Médecine tropicale et des voyages.<br>
-     * IT: Code per Medicina tropicale e di viaggio.<br>
+     * FR: Code de médecine tropicale et des voyages.<br>
+     * IT: Code per medicina tropicale e di viaggio.<br>
      */
     public static final String TROPICAL_MEDICINE_CODE = "408448007";
 
     /**
      * EN: Code for Urology.<br>
      * DE: Code für Urologie.<br>
-     * FR: Code de Urologie.<br>
-     * IT: Code per Urologia.<br>
+     * FR: Code de urologie.<br>
+     * IT: Code per urologia.<br>
      */
     public static final String UROLOGY_CODE = "394612005";
 
     /**
      * EN: Code for Vascular medicine.<br>
      * DE: Code für Angiologie.<br>
-     * FR: Code de Angiologie.<br>
-     * IT: Code per Angiologia.<br>
+     * FR: Code de angiologie.<br>
+     * IT: Code per angiologia.<br>
      */
     public static final String VASCULAR_MEDICINE_CODE = "722414000";
+
+    /**
+     * EN: Code for Vascular surgery.<br>
+     * DE: Code für Gefässchirurgie.<br>
+     * FR: Code de chirurgie vasculaire.<br>
+     * IT: Code per chirurgia vascolare.<br>
+     */
+    public static final String VASCULAR_SURGERY_CODE = "408463005";
 
     /**
      * Identifier of the value set.

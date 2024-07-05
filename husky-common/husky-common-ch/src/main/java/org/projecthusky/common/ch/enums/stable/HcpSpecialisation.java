@@ -27,11 +27,11 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * IT: No designation found.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.127.3.10.8.2<br>
- * Effective date: 2020-05-18 19:54<br>
- * Version: 202004.1-stable<br>
+ * Effective date: 2022-06-26 16:02<br>
+ * Version: 202306.0-stable<br>
  * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-09-29")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-07-02")
 public enum HcpSpecialisation implements ValueSetEnumInterface {
 
     /**
@@ -115,16 +115,16 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
     /**
      * EN: Child and adolescent psychology.<br>
      * DE: Kinder- und Jugendpsychologie.<br>
-     * FR: psychologie des enfants et des adolescents.<br>
-     * IT: psicologia dell’età evolutiva.<br>
+     * FR: Psychologie des enfants et des adolescents.<br>
+     * IT: Psicologia dell’età evolutiva.<br>
      */
     CHILD_AND_ADOLESCENT_PSYCHOLOGY("1055",
                                     "2.16.756.5.30.1.127.3.5",
                                     "Child and adolescent psychology",
                                     "Child and adolescent psychology",
                                     "Kinder- und Jugendpsychologie",
-                                    "psychologie des enfants et des adolescents",
-                                    "psicologia dell’età evolutiva"),
+                                    "Psychologie des enfants et des adolescents",
+                                    "Psicologia dell’età evolutiva"),
     /**
      * EN: Chiropractic specialist.<br>
      * DE: Fachchiropraktik.<br>
@@ -154,16 +154,16 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
     /**
      * EN: Clinical psychology.<br>
      * DE: Klinische Psychologie.<br>
-     * FR: psychologie clinique.<br>
-     * IT: psicologia clinica.<br>
+     * FR: Psychologie clinique.<br>
+     * IT: Psicologia clinica.<br>
      */
     CLINICAL_PSYCHOLOGY("1056",
                         "2.16.756.5.30.1.127.3.5",
                         "Clinical psychology",
                         "Clinical psychology",
                         "Klinische Psychologie",
-                        "psychologie clinique",
-                        "psicologia clinica"),
+                        "Psychologie clinique",
+                        "Psicologia clinica"),
     /**
      * EN: Community pharmacy.<br>
      * DE: Offizinpharmazie.<br>
@@ -191,18 +191,18 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
                                 "Dermatologie et vénéréologie",
                                 "Dermatologia e venereologia"),
     /**
-     * EN: Endocrinology – Diabetology.<br>
-     * DE: Endokrinologie-Diabetologie.<br>
-     * FR: Endocrinologie-diabétologie.<br>
+     * EN: Endocrinology and diabetology.<br>
+     * DE: Endokrinologie und Diabetologie.<br>
+     * FR: Endocrinologie et diabétologie.<br>
      * IT: Endocrinologia e diabetologia.<br>
      */
-    ENDOCRINOLOGY_DIABETOLOGY("1022",
-                              "2.16.756.5.30.1.127.3.5",
-                              "Endocrinology – Diabetology",
-                              "Endocrinology – Diabetology",
-                              "Endokrinologie-Diabetologie",
-                              "Endocrinologie-diabétologie",
-                              "Endocrinologia e diabetologia"),
+    ENDOCRINOLOGY_AND_DIABETOLOGY("1022",
+                                  "2.16.756.5.30.1.127.3.5",
+                                  "Endocrinology – Diabetology",
+                                  "Endocrinology and diabetology",
+                                  "Endokrinologie und Diabetologie",
+                                  "Endocrinologie et diabétologie",
+                                  "Endocrinologia e diabetologia"),
     /**
      * EN: Forensic medicine.<br>
      * DE: Rechtsmedizin.<br>
@@ -244,7 +244,7 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
                               "Medicina interna generale"),
     /**
      * EN: General medical practitioner.<br>
-     * DE: Praktische Ärztin _ Praktischer Arzt.<br>
+     * DE: Praktischer Arzt/Praktische Ärztin.<br>
      * FR: Médecin praticien.<br>
      * IT: Medico generico.<br>
      */
@@ -252,7 +252,7 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
                                  "2.16.756.5.30.1.127.3.5",
                                  "General medical practitioner",
                                  "General medical practitioner",
-                                 "Praktische Ärztin _ Praktischer Arzt",
+                                 "Praktischer Arzt/Praktische Ärztin",
                                  "Médecin praticien",
                                  "Medico generico"),
     /**
@@ -297,16 +297,16 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
     /**
      * EN: Health psychology.<br>
      * DE: Gesundheitspsychologie.<br>
-     * FR: psychologie de la santé.<br>
-     * IT: psicologia della salute.<br>
+     * FR: Psychologie de la santé.<br>
+     * IT: Psicologia della salute.<br>
      */
     HEALTH_PSYCHOLOGY("1058",
                       "2.16.756.5.30.1.127.3.5",
                       "Health psychology",
                       "Health psychology",
                       "Gesundheitspsychologie",
-                      "psychologie de la santé",
-                      "psicologia della salute"),
+                      "Psychologie de la santé",
+                      "Psicologia della salute"),
     /**
      * EN: Hospital pharmacy.<br>
      * DE: Spitalpharmazie.<br>
@@ -401,16 +401,16 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
     /**
      * EN: Neuropsychology.<br>
      * DE: Neuropsychologie.<br>
-     * FR: neuropsychologie.<br>
-     * IT: neuropsicologia.<br>
+     * FR: Neuropsychologie.<br>
+     * IT: Neuropsicologia.<br>
      */
     NEUROPSYCHOLOGY("1057",
                     "2.16.756.5.30.1.127.3.5",
                     "Neuropsychology",
                     "Neuropsychology",
                     "Neuropsychologie",
-                    "neuropsychologie",
-                    "neuropsicologia"),
+                    "Neuropsychologie",
+                    "Neuropsicologia"),
     /**
      * EN: Neurosurgery.<br>
      * DE: Neurochirurgie.<br>
@@ -674,16 +674,16 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
     /**
      * EN: Psychotherapy.<br>
      * DE: Psychotherapie.<br>
-     * FR: psychothérapie.<br>
-     * IT: psicoterapia.<br>
+     * FR: Psychothérapie.<br>
+     * IT: Psicoterapia.<br>
      */
     PSYCHOTHERAPY("1054",
                   "2.16.756.5.30.1.127.3.5",
                   "Psychotherapy",
                   "Psychotherapy",
                   "Psychotherapie",
-                  "psychothérapie",
-                  "psicoterapia"),
+                  "Psychothérapie",
+                  "Psicoterapia"),
     /**
      * EN: Radiology.<br>
      * DE: Radiologie.<br>
@@ -698,18 +698,18 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
               "Radiologie",
               "Radiologia"),
     /**
-     * EN: Radio-oncology / radiotherapy.<br>
-     * DE: Radio-Onkologie_Strahlentherapie.<br>
-     * FR: Radio-oncologie_radiothérapie.<br>
-     * IT: Radio-oncologia_radioterapia.<br>
+     * EN: Radio-oncology/radiotherapy.<br>
+     * DE: Radio-Onkologie/Strahlentherapie.<br>
+     * FR: Radio-oncologie/radiothérapie.<br>
+     * IT: Radio-oncologia/radioterapia.<br>
      */
     RADIO_ONCOLOGY_RADIOTHERAPY("1032",
                                 "2.16.756.5.30.1.127.3.5",
                                 "Radio-oncology / radiotherapy",
-                                "Radio-oncology / radiotherapy",
-                                "Radio-Onkologie_Strahlentherapie",
-                                "Radio-oncologie_radiothérapie",
-                                "Radio-oncologia_radioterapia"),
+                                "Radio-oncology/radiotherapy",
+                                "Radio-Onkologie/Strahlentherapie",
+                                "Radio-oncologie/radiothérapie",
+                                "Radio-oncologia/radioterapia"),
     /**
      * EN: Reconstructive dentistry.<br>
      * DE: Rekonstruktive Zahnmedizin.<br>
@@ -853,8 +853,8 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
     /**
      * EN: Code for Child and adolescent psychology.<br>
      * DE: Code für Kinder- und Jugendpsychologie.<br>
-     * FR: Code de psychologie des enfants et des adolescents.<br>
-     * IT: Code per psicologia dell’età evolutiva.<br>
+     * FR: Code de Psychologie des enfants et des adolescents.<br>
+     * IT: Code per Psicologia dell’età evolutiva.<br>
      */
     public static final String CHILD_AND_ADOLESCENT_PSYCHOLOGY_CODE = "1055";
 
@@ -877,8 +877,8 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
     /**
      * EN: Code for Clinical psychology.<br>
      * DE: Code für Klinische Psychologie.<br>
-     * FR: Code de psychologie clinique.<br>
-     * IT: Code per psicologia clinica.<br>
+     * FR: Code de Psychologie clinique.<br>
+     * IT: Code per Psicologia clinica.<br>
      */
     public static final String CLINICAL_PSYCHOLOGY_CODE = "1056";
 
@@ -899,12 +899,12 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
     public static final String DERMATOLOGY_AND_VENEREOLOGY_CODE = "1021";
 
     /**
-     * EN: Code for Endocrinology – Diabetology.<br>
-     * DE: Code für Endokrinologie-Diabetologie.<br>
-     * FR: Code de Endocrinologie-diabétologie.<br>
+     * EN: Code for Endocrinology and diabetology.<br>
+     * DE: Code für Endokrinologie und Diabetologie.<br>
+     * FR: Code de Endocrinologie et diabétologie.<br>
      * IT: Code per Endocrinologia e diabetologia.<br>
      */
-    public static final String ENDOCRINOLOGY_DIABETOLOGY_CODE = "1022";
+    public static final String ENDOCRINOLOGY_AND_DIABETOLOGY_CODE = "1022";
 
     /**
      * EN: Code for Forensic medicine.<br>
@@ -932,7 +932,7 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
 
     /**
      * EN: Code for General medical practitioner.<br>
-     * DE: Code für Praktische Ärztin _ Praktischer Arzt.<br>
+     * DE: Code für Praktischer Arzt/Praktische Ärztin.<br>
      * FR: Code de Médecin praticien.<br>
      * IT: Code per Medico generico.<br>
      */
@@ -965,8 +965,8 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
     /**
      * EN: Code for Health psychology.<br>
      * DE: Code für Gesundheitspsychologie.<br>
-     * FR: Code de psychologie de la santé.<br>
-     * IT: Code per psicologia della salute.<br>
+     * FR: Code de Psychologie de la santé.<br>
+     * IT: Code per Psicologia della salute.<br>
      */
     public static final String HEALTH_PSYCHOLOGY_CODE = "1058";
 
@@ -1029,8 +1029,8 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
     /**
      * EN: Code for Neuropsychology.<br>
      * DE: Code für Neuropsychologie.<br>
-     * FR: Code de neuropsychologie.<br>
-     * IT: Code per neuropsicologia.<br>
+     * FR: Code de Neuropsychologie.<br>
+     * IT: Code per Neuropsicologia.<br>
      */
     public static final String NEUROPSYCHOLOGY_CODE = "1057";
 
@@ -1197,8 +1197,8 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
     /**
      * EN: Code for Psychotherapy.<br>
      * DE: Code für Psychotherapie.<br>
-     * FR: Code de psychothérapie.<br>
-     * IT: Code per psicoterapia.<br>
+     * FR: Code de Psychothérapie.<br>
+     * IT: Code per Psicoterapia.<br>
      */
     public static final String PSYCHOTHERAPY_CODE = "1054";
 
@@ -1211,10 +1211,10 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
     public static final String RADIOLOGY_CODE = "1030";
 
     /**
-     * EN: Code for Radio-oncology / radiotherapy.<br>
-     * DE: Code für Radio-Onkologie_Strahlentherapie.<br>
-     * FR: Code de Radio-oncologie_radiothérapie.<br>
-     * IT: Code per Radio-oncologia_radioterapia.<br>
+     * EN: Code for Radio-oncology/radiotherapy.<br>
+     * DE: Code für Radio-Onkologie/Strahlentherapie.<br>
+     * FR: Code de Radio-oncologie/radiothérapie.<br>
+     * IT: Code per Radio-oncologia/radioterapia.<br>
      */
     public static final String RADIO_ONCOLOGY_RADIOTHERAPY_CODE = "1032";
 

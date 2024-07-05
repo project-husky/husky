@@ -229,25 +229,19 @@ public class PixAddPatientFeed {
 
   private void addNonMedicalIdentifiers(PixAddPatientRequest request) {
     for (Identifier identifier : this.nonMedicalIdentifiers) {
-      if ((identifier.getSystem().length() > 8)) {
-        final String oid = FhirCommon.removeUrnOidPrefix(identifier.getSystem());
-        request.addPatientOtherID(identifier.getValue(), oid);
-      }
+      final String oid = FhirCommon.removeUrnOidPrefix(identifier.getSystem());
+      request.addPatientOtherID(identifier.getValue(), oid);
     }
-
   }
 
   private void addIdentifiers(PixAddPatientRequest request) {
     for (Identifier identifier : this.identifiers) {
-      if ((identifier.getSystem().length() > 8)) {
-        final String oid = FhirCommon.removeUrnOidPrefix(identifier.getSystem());
-        if (this.homeCommunityOID != null && this.homeCommunityOID.equals(oid)) {
-          request.addPatientID(identifier.getValue(), this.homeCommunityOID, this.homeCommunityNamespace);
-        } else {
-          request.addPatientID(identifier.getValue(), oid, "");
-        }
+      final String oid = FhirCommon.removeUrnOidPrefix(identifier.getSystem());
+      if (this.homeCommunityOID != null && this.homeCommunityOID.equals(oid)) {
+        request.addPatientID(identifier.getValue(), this.homeCommunityOID, this.homeCommunityNamespace);
+      } else {
+        request.addPatientID(identifier.getValue(), oid, "");
       }
     }
   }
-
 }

@@ -33,14 +33,14 @@ public class XdsChTestUtils extends XdsTestUtils {
 			AuthorSpeciality.ANAESTHESIOLOGY, AuthorSpeciality.BIOMEDICAL_ANALYSIS };
 	public static AvailabilityStatus avaiabilityStatus = AvailabilityStatus.APPROVED;
 	public static ClassCode[] classCodes = new ClassCode[] { ClassCode.CARE_PLAN,
-			ClassCode.AUDIT_TRAIL_REPORT };
+			ClassCode.RECORD_ACCESS };
 	public static ConfidentialityCode[] confidentialityCodes = new ConfidentialityCode[] {
-			ConfidentialityCode.NORMALLY_ACCESSIBLE, ConfidentialityCode.SECRET };
+			ConfidentialityCode.NORMAL, ConfidentialityCode.SECRET };
 	public static FormatCode[] formatCodes = new FormatCode[] { FormatCode.IMMUNIZATION_CONTENT,
 			FormatCode.UNSTRUCTURED_EPR_DOCUMENT };
 	public static HealthcareFacilityTypeCode[] healthCareFacilityCodes = new HealthcareFacilityTypeCode[] {
 			HealthcareFacilityTypeCode.AMBULATORY_CARE_SITE,
-			HealthcareFacilityTypeCode.OTHER_SITE_OF_CARE };
+			HealthcareFacilityTypeCode.SITE_OF_CARE };
 	public static LanguageCode[] languageCodes = new LanguageCode[] { LanguageCode.GERMAN,
 			LanguageCode.ENGLISH };
 	public static MimeType[] mimeTypes = new MimeType[] { MimeType.CDA_LEVEL_1_MULTIPART,
