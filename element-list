@@ -25,6 +25,8 @@ org.projecthusky.common.ch
 org.projecthusky.common.ch.enums.beta
 org.projecthusky.common.ch.enums.r202104
 org.projecthusky.common.ch.enums.r202212
+org.projecthusky.common.ch.enums.r202306
+org.projecthusky.common.ch.enums.r202406
 org.projecthusky.common.ch.enums.stable
 org.projecthusky.common.communication
 org.projecthusky.common.enums
@@ -54,6 +56,8 @@ org.projecthusky.communication.ch.enums
 org.projecthusky.communication.ch.enums.beta
 org.projecthusky.communication.ch.enums.r202104
 org.projecthusky.communication.ch.enums.r202212
+org.projecthusky.communication.ch.enums.r202306
+org.projecthusky.communication.ch.enums.r202406
 org.projecthusky.communication.ch.enums.stable
 org.projecthusky.communication.ch.enums.vacd.v140
 org.projecthusky.communication.ch.ppq
