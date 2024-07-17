@@ -91,7 +91,7 @@ public class ChEmedEprMedication extends Medication {
     }
 
     /**
-     * Sets the GTIN.  If a code already exists, it's replaced.
+     * Sets the GTIN. If a GTIN code already exists, it's replaced. The text is set only if it doesn't exist yet.
      *
      * @param gtin        The GTIN code.
      * @param displayName The name associate with GTIN.
@@ -99,22 +99,32 @@ public class ChEmedEprMedication extends Medication {
      */
     public ChEmedEprMedication setGtin(final String gtin,
                                        final String displayName) {
+        Coding coding = null;
+        if (this.hasCode() && this.getCode().hasCoding()) {
+            // Find any existing GTIN coding
+            coding = this.getCode().getCoding().stream()
+                    .filter(c -> FhirSystem.GTIN.equals(c.getSystem()))
+                    .findAny()
+                    .orElse(null);
+        }
+        if (coding == null) {
+            // Otherwise, add a new coding
+            coding = this.getCode().addCoding();
+        }
 
-        final var system = new UriType(FhirSystem.GTIN);
-        final var coding = new Coding()
-                .setSystemElement(system)
+        coding.setSystemElement(new UriType(FhirSystem.GTIN))
                 .setCode(gtin)
                 .setDisplay(displayName);
 
-        final var code = new CodeableConcept(coding).setText(displayName);
-
-        this.setCode(code);
-
+        if (!this.getCode().hasText()) {
+            // Only set the text if it is not already set
+            this.getCode().setText(displayName);
+        }
         return this;
     }
 
     /**
-     * Sets the ATC. If a code already exists, it's replaced.
+     * Sets the ATC. If an ATC code already exists, it's replaced. The text is set only if it doesn't exist yet.
      *
      * @param atc         The ATC code.
      * @param displayName The name associate with ATC.
@@ -122,16 +132,27 @@ public class ChEmedEprMedication extends Medication {
      */
     public ChEmedEprMedication setAtc(final String atc,
                                       final String displayName) {
-        final var system = new UriType(FhirSystem.ATC);
-        final var coding = new Coding()
-                .setSystemElement(system)
+        Coding coding = null;
+        if (this.hasCode() && this.getCode().hasCoding()) {
+            // Find any existing ATC coding
+            coding = this.getCode().getCoding().stream()
+                    .filter(c -> FhirSystem.ATC.equals(c.getSystem()))
+                    .findAny()
+                    .orElse(null);
+        }
+        if (coding == null) {
+            // Otherwise, add a new coding
+            coding = this.getCode().addCoding();
+        }
+
+        coding.setSystemElement(new UriType(FhirSystem.ATC))
                 .setCode(atc)
                 .setDisplay(displayName);
 
-        final var code = new CodeableConcept(coding).setText(displayName);
-
-        this.setCode(code);
-
+        if (!this.getCode().hasText()) {
+            // Only set the text if it is not already set
+            this.getCode().setText(displayName);
+        }
         return this;
     }
 
