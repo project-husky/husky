@@ -202,14 +202,7 @@ public class ChEmedEprMedication extends Medication {
      * @return this.
      */
     public ChEmedEprMedication setForm(final PharmaceuticalDoseFormEdqm doseForm) {
-        final var system = UriType.fromOid(doseForm.getCodeSystemId());
-
-        final var coding = new Coding()
-                .setSystemElement(system)
-                .setCode(doseForm.getCodeValue())
-                .setDisplay(doseForm.getDisplayName());
-
-        this.setForm(new CodeableConcept(coding));
+        this.setForm(doseForm.getCodeableConcept());
         return this;
     }
 
