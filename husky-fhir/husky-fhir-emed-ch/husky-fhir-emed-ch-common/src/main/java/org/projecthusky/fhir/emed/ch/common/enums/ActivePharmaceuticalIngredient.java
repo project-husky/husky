@@ -19,6 +19,7 @@ import org.hl7.fhir.r4.model.Coding;
 import org.projecthusky.common.enums.CodeSystems;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.enums.ValueSetEnumInterface;
+import org.projecthusky.common.utils.datatypes.Oids;
 import org.projecthusky.fhir.structures.utils.FhirValueSetEnumInterface;
 
 /**
@@ -34,7 +35,7 @@ import org.projecthusky.fhir.structures.utils.FhirValueSetEnumInterface;
  * Version: 2023<br>
  * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-06-24")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-07-18")
 public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface, FhirValueSetEnumInterface {
 
     /**
@@ -23721,21 +23722,35 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface, Fhi
     }
 
     /**
+     * Returns the code system, as used in FHIR.
+     */
+    @Override
+    @NonNull
+    public String getFhirSystem() {
+        if (this.getCodeSystemId().startsWith("http")) {
+            return this.getCodeSystemId();
+        }
+        return Oids.PREFIX_OID + this.getCodeSystemId();
+    }
+
+    /**
      * Returns the enum value as a FHIR Coding.
      */
     @Override
+    @NonNull
     public Coding getCoding() {
-        return new Coding(this.getCodeSystemId(),
+        return new Coding(this.getFhirSystem(),
                           this.getCodeValue(),
-                          this.getCodeSystemName());
+                          this.displayNames[0]);
     }
 
     /**
      * Returns the enum value as a FHIR CodeableConcept.
      */
     @Override
+    @NonNull
     public CodeableConcept getCodeableConcept() {
-        return new CodeableConcept().setText(this.getCodeSystemName()).addCoding(this.getCoding());
+        return new CodeableConcept().setText(this.displayNames[0]).addCoding(this.getCoding());
     }
 
     /**
@@ -23746,7 +23761,7 @@ public enum ActivePharmaceuticalIngredient implements ValueSetEnumInterface, Fhi
      */
     @Override
     public boolean isEqualTo(final Coding coding) {
-        return this.getCodeSystemId().equals(coding.getSystem()) && this.getCodeValue().equals(coding.getCode());
+        return this.getFhirSystem().equals(coding.getSystem()) && this.getCodeValue().equals(coding.getCode());
     }
 
     /**
