@@ -506,42 +506,32 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
         throw new InvalidEmedContentException("The subject (Patient) is missing");
     }
 
-    @Override
-    public void copyValues(final MedicationDispense dst) {
-        super.copyValues(dst);
-        if (dst instanceof final ChEmedEprMedicationDispense als) {
-            als.treatmentReason = treatmentReason == null ? null : treatmentReason.copy();
-            als.prescription = prescription == null ? null : prescription.copy();
-            als.pharmaceuticalAdvice = pharmaceuticalAdvice == null ? null : pharmaceuticalAdvice.copy();
-            als.treatmentPlan = treatmentPlan == null ? null : treatmentPlan.copy();
+    /**
+     * Resolves the performer as a {@link ChEmedEprPractitionerRole}.
+     *
+     * @return the performer.
+     */
+    @ExpectsValidResource
+    public ChEmedEprPractitionerRole resolvePerformer() {
+        if (!this.hasPerformer() || !this.getPerformerFirstRep().hasActor()) {
+            throw new InvalidEmedContentException("The performer is missing");
         }
+        if (this.getPerformerFirstRep().getActor().getResource() instanceof final ChEmedEprPractitionerRole performer) {
+            return performer;
+        }
+        throw new InvalidEmedContentException("The performer resource isn't of the right type");
     }
 
     /**
      * Checks the list of performers and returns the first performer with a final checker function and a valid medical
-     * author resource (i.e. ChEmedEprPractitionerRole or ChCorePatientEpr or ChEmedEprRelatedPerson) and sets the time
-     * to the value of the whenHandedOver field.
+     * author resource (ChEmedEprPractitionerRole) and sets the time to the value of the whenHandedOver field.
      *
      * @return the medical Author with the relevant timestamp attached.
      */
     @Override
     @ExpectsValidResource
     public Author resolveMedicalAuthor() {
-        if (hasPerformer()) {
-            for (var performer : getPerformer()) {
-                if (performer.hasActor()) {
-                    final var actorResource = performer.getActor().getResource();
-                    if (       actorResource instanceof ChEmedEprPractitionerRole
-                            || actorResource instanceof ChCorePatientEpr
-                            || actorResource instanceof ChEmedEprRelatedPerson
-                    ) {
-                        return new Author(actorResource, resolveMedicalAuthorshipTimestamp());
-                    } else throw new InvalidEmedContentException("The performer actor has to be a PractitionerRole or a Patient or a RelatedPerson.");
-                } else throw new InvalidEmedContentException("The performer has no actor.");
-            }
-            throw new InvalidEmedContentException("The dispense resource has performer(s) but is missing at least one final checker performer.");
-        }
-        throw new InvalidEmedContentException("Missing performer.");
+        return new Author(this.resolvePerformer(), this.resolveWhenHandedOver());
     }
 
     /**
@@ -552,5 +542,16 @@ public abstract class ChEmedEprMedicationDispense extends MedicationDispense imp
     @ExpectsValidResource
     public Instant resolveMedicalAuthorshipTimestamp() {
         return resolveWhenHandedOver();
+    }
+
+    @Override
+    public void copyValues(final MedicationDispense dst) {
+        super.copyValues(dst);
+        if (dst instanceof final ChEmedEprMedicationDispense als) {
+            als.treatmentReason = treatmentReason == null ? null : treatmentReason.copy();
+            als.prescription = prescription == null ? null : prescription.copy();
+            als.pharmaceuticalAdvice = pharmaceuticalAdvice == null ? null : pharmaceuticalAdvice.copy();
+            als.treatmentPlan = treatmentPlan == null ? null : treatmentPlan.copy();
+        }
     }
 }
