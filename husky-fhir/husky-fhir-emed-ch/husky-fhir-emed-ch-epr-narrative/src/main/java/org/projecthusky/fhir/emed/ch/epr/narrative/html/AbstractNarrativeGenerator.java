@@ -4,6 +4,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.fhir.emed.ch.epr.narrative.enums.NarrativeLanguage;
 import org.projecthusky.fhir.emed.ch.epr.narrative.services.MedicationImageProvider;
 import org.projecthusky.fhir.emed.ch.epr.narrative.services.ValueSetEnumNarrativeForPatientService;
+import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprDocumentPmlc;
+import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprDocumentPre;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
@@ -55,4 +57,27 @@ abstract class AbstractNarrativeGenerator {
         this.medicationImageProvider = Objects.requireNonNullElse(medicationImageProvider,
                                                                   MedicationImageProvider.NO_OP_INSTANCE);
     }
+
+    /**
+     * Generates the narrative for a medication card and return it as HTML content.
+     *
+     * @param document The medication card document.
+     * @param lang The language of the narrative.
+     * @param format   The format in which to generate the narrative.
+     * @return The HTML content of the narrative.
+     */
+    abstract public String generate(final ChEmedEprDocumentPmlc document,
+                                    final NarrativeLanguage lang,
+                                    final NarrativeFormat format
+                                    );
+
+    /**
+     * Generates the narrative for a prescription and return it as HTML content.
+     *
+     * @param document The prescription document.
+     * @param lang The language of the narrative.
+     * @return The HTML content of the narrative.
+     */
+     abstract public String generate(final ChEmedEprDocumentPre document,
+                                     final NarrativeLanguage lang);
 }

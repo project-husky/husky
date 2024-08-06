@@ -61,15 +61,11 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
         this.templateEngine.setTemplateResolver(templateResolver);
     }
 
-    /**
-     * Generates the narrative for a medication card and return it as HTML content.
-     *
-     * @param document The medication card document.
-     * @param lang The language of the narrative.
-     * @return The HTML content of the narrative.
-     */
+    @Override
     public String generate(final ChEmedEprDocumentPmlc document,
-                           final NarrativeLanguage lang) {
+                           final NarrativeLanguage lang,
+                           final NarrativeFormat format
+                           ) {
         final var asneededTreatments = new HashMap<UUID, List<ChEmedEprMedicationStatementPmlc>>(5);
         final var activeTreatments = new HashMap<UUID, List<ChEmedEprMedicationStatementPmlc>>(5);
         ChEmedEprMedicationStatementPmlc lastStatement = null;
@@ -97,13 +93,7 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
         return this.templateEngine.process("medication_card", context);
     }
 
-    /**
-     * Generates the narrative for a prescription and return it as HTML content.
-     *
-     * @param document The prescription document.
-     * @param lang The language of the narrative.
-     * @return The HTML content of the narrative.
-     */
+    @Override
     public String generate(final ChEmedEprDocumentPre document,
                            final NarrativeLanguage lang) {
         final var context = new Context();
