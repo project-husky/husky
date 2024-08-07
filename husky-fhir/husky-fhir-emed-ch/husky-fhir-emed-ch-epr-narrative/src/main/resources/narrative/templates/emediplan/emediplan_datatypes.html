@@ -20,3 +20,5 @@
     <span th:if="${not address.stateElement.empty}" th:text="${address.state} + ', '"/>
     <span th:if="${not address.countryElement.empty}" th:text="${address.country}"/>
 </span>
+
+<th:block th:fragment="instant(instantElement, lang)" th:text="${lang.getEmediplanDateTimeFormatter().format(instantElement)}"/>

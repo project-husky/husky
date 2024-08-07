@@ -10,6 +10,7 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.narrative.enums;
 
+import lombok.Getter;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.common.enums.LanguageCode;
 
@@ -47,7 +48,11 @@ public enum NarrativeLanguage {
                                     monthPrecisionFormatter,
                                     dayPrecisionFormatter,
                                     hourPrecisionFormatter,
-                                    minutePrecisionFormatter;
+                                    minutePrecisionFormatter,
+                                    emediplanMinutePrecisionFormatter,
+                                    emediPlanDayPrecisionFormatter;
+
+    private final Locale locale;
 
     /**
      * Constructor.
@@ -59,16 +64,21 @@ public enum NarrativeLanguage {
                       final String displayName) {
         this.isoCode = Objects.requireNonNull(isoCode);
         this.displayName = Objects.requireNonNull(displayName);
+        this.locale = new Locale(this.isoCode, "ch");
         this.yearPrecisionFormatter =
-                DateTimeFormatter.ofPattern("yyyy", getLocale()).withZone(ZoneId.systemDefault());
+                DateTimeFormatter.ofPattern("yyyy", locale).withZone(ZoneId.systemDefault());
         this.monthPrecisionFormatter =
-                DateTimeFormatter.ofPattern("MM/yyyy", getLocale()).withZone(ZoneId.systemDefault());
+                DateTimeFormatter.ofPattern("MM/yyyy", locale).withZone(ZoneId.systemDefault());
         this.dayPrecisionFormatter =
-                DateTimeFormatter.ofPattern("dd/MM/yyyy", getLocale()).withZone(ZoneId.systemDefault());
+                DateTimeFormatter.ofPattern("dd/MM/yyyy", locale).withZone(ZoneId.systemDefault());
         this.hourPrecisionFormatter =
-                DateTimeFormatter.ofPattern("dd/MM/yyyy HH", getLocale()).withZone(ZoneId.systemDefault());
+                DateTimeFormatter.ofPattern("dd/MM/yyyy HH", locale).withZone(ZoneId.systemDefault());
         this.minutePrecisionFormatter =
-                DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm", getLocale()).withZone(ZoneId.systemDefault());
+                DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm", locale).withZone(ZoneId.systemDefault());
+        this.emediplanMinutePrecisionFormatter =
+                DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm", locale).withZone(ZoneId.systemDefault());
+        this.emediPlanDayPrecisionFormatter =
+                DateTimeFormatter.ofPattern("dd.MM.yyyy", locale).withZone(ZoneId.systemDefault());
     }
 
     public String getIsoCode() {
@@ -83,7 +93,7 @@ public enum NarrativeLanguage {
      * Returns the related {@link Locale}.
      */
     public Locale getLocale() {
-        return new Locale(this.isoCode, "ch");
+        return locale;
     }
 
     public DateTimeFormatter getYearPrecisionFormatter() {return yearPrecisionFormatter;}
@@ -91,6 +101,8 @@ public enum NarrativeLanguage {
     public DateTimeFormatter getDayPrecisionFormatter() {return dayPrecisionFormatter;}
     public DateTimeFormatter getHourPrecisionFormatter() {return hourPrecisionFormatter;}
     public DateTimeFormatter getMinutePrecisionFormatter() {return minutePrecisionFormatter;}
+    public DateTimeFormatter getEmediplanMinutePrecisionFormatter() {return emediplanMinutePrecisionFormatter;}
+    public DateTimeFormatter getEmediPlanDayPrecisionFormatter() {return emediPlanDayPrecisionFormatter;}
 
     /**
      * Returns the related {@link LanguageCode}.

@@ -4,11 +4,14 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Period;
 import org.projecthusky.fhir.emed.ch.common.enums.RouteOfAdministrationEdqm;
 import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
+import org.projecthusky.fhir.emed.ch.epr.enums.RegularUnitCodeAmbu;
 import org.projecthusky.fhir.emed.ch.epr.enums.TimingEventAmbu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * A model of the effective dosage, resolved from a list of FHIR Dosages.
@@ -84,6 +87,20 @@ public record EffectiveDosageInstructions(
     @Nullable
     public DosageIntake getIntake(final TimingEventAmbu eventTiming) {
         return this.intakes.stream().filter(intake -> intake.eventTiming() == eventTiming).findAny().orElse(null);
+    }
+
+    @Nullable
+    public RegularUnitCodeAmbu getUnit() {
+        Function<Dose, RegularUnitCodeAmbu> extractUnit = (Dose dose) -> {
+            if (dose.isQuantity()) return dose.quantity().unit();
+            if (dose.low() != null) return dose.low().unit();
+            return dose.high().unit();
+        };
+        if (hasIntakes())
+            return intakes.stream().filter(Objects::nonNull).map(DosageIntake::dose).map(extractUnit).findAny().orElse(null);
+        if (hasSimpleDose())
+            return extractUnit.apply(simpleDose);
+        return null;
     }
 
     /**
