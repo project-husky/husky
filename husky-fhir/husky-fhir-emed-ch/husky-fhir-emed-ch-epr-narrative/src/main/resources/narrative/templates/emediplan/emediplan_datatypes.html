@@ -21,4 +21,11 @@
     <span th:if="${not address.countryElement.empty}" th:text="${address.country}"/>
 </span>
 
-<th:block th:fragment="instant(instantElement, lang)" th:text="${lang.getEmediplanDateTimeFormatter().format(instantElement)}"/>
+<th:block th:fragment="instant(instantElement, lang)"
+          th:text="${lang.getEmediplanMinutePrecisionFormatter().format(instantElement)}"/>
+
+<th:block th:fragment="date(instantElement, lang)"
+          th:text="${lang.getEmediPlanDayPrecisionFormatter().format(instantElement)}"/>
+
+<th:block th:fragment="fhirDate(fhirDateTime, lang)"
+          th:insert="~{::date(${fhirDateTime.getValueAsCalendar().toInstant()}, ${lang})}"/>

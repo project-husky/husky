@@ -1,0 +1,110 @@
+<!--/*
+  ~ This code is made available under the terms of the Eclipse Public License v1.0
+  ~ in the github project https://github.com/project-husky/husky there you also
+  ~ find a list of the contributors and the license information.
+  ~
+  ~ This project has been developed further and modified by the joined working group Husky
+  ~ on the basis of the eHealth Connector opensource project from June 28, 2021,
+  ~ whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+*/-->
+<html th:lang="${lang.getLanguageCode().getCodeValue()}">
+<head>
+    <meta charset="utf-8"/>
+    <title th:text="${title}"/>
+    <meta name="subject" th:content="${subject}"/>
+    <meta name="author" th:content="${author}"/>
+    <meta name="description" th:content="${description}"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <bookmarks>
+        <bookmark th:each="bookmark: ${bookmarks.instanceMap}"
+                  th:href="${bookmark.value}"
+                  th:name="${bookmark.key}"/>
+    </bookmarks>
+    <style>
+        @page {
+            font-family: arimo, serif;
+            font-size: 8.5pt;
+            margin: 0.8cm;
+            size: a4 landscape;
+            @top-left {
+                font-size: 11pt;
+                font-weight: bold;
+                /*TODO add logo*/
+                content: 'Le plan suisse de médication';
+                width: 7cm;
+                min-height:4cm;
+            }
+            @top-center {
+                width: 10cm;
+                min-height: 4cm;
+                content: element(header-patient-info);
+            }
+            @top-right {
+                min-height: 4cm;
+                width: 6.5cm;
+                content: element(header-service-provider);
+            }
+            @top-right-corner {
+                min-height: 4cm;
+                /*TODO margin of 0.3cm should be maintained all around the barcode*/
+                content: element(header-qrcode);
+            }
+            @bottom-left {
+                content: element(footer-left);
+            }
+            @bottom-center {
+                content: element(footer-center);
+            }
+            @bottom-right {
+                content: 'Page ' counter(page) ' de ' counter(pages);
+            }
+        }
+
+        #emediplan-header-patient-info {
+            position: running(header-patient-info);
+        }
+
+        #emediplan-header-service-provider {
+            position: running(header-service-provider);
+        }
+
+        #emediplan-header-qrcode {
+            position: running(header-qrcode);
+        }
+
+        #emediplan-footer-left {
+            position: running(footer-left);
+        }
+
+        #emediplan-footer-center {
+            position: running(footer-center);
+        }
+    </style>
+</head>
+<body>
+    <!--
+    <div class="emediplan-header-left">
+        <span class="emediplan-header-title">Plan de médication</span>
+    </div>
+    -->
+    <div class="emediplan-header-centre" id="emediplan-header-patient-info">
+        <th:block th:insert="~{emediplan_patient :: patient-data(${resource.resolvePatient()}, ${lang})}"/>
+    </div>
+    <!--<div class="emediplan-header-right">-->
+        <div class="emediplan-header-service-provider" id="emediplan-header-service-provider"><!-- TODO -->SERVICE PROVIDER PLACEHOLDER</div>
+        <div class="emediplan-header-qrcode" id="emediplan-header-qrcode">
+            <img th:src="@{'data:image/png;base64,' + ${qrcode}}"/>
+        </div>
+    <!--</div>-->
+
+    <div class="emediplan-body" th:utext="${content}">eMediplan content placeholder</div>
+
+    <!-- footer is defined in the style section as part of the @page rules -->
+    <div class="emediplan-footer-left" id="emediplan-footer-left"
+         th:insert="~{emediplan_patient :: short-patient-data(${resource.resolvePatient()}, ${lang})}">
+        Peter Muster (20.11.1999)
+    </div>
+    <!-- todo implement software provider line -->
+    <div class="emediplan-footer-center" id="emediplan-footer-center">eMediplan by Softwareprovider (V1.0)</div>
+</body>
+</html>

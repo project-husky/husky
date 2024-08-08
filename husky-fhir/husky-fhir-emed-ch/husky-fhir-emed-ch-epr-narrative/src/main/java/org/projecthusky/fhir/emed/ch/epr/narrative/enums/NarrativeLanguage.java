@@ -10,7 +10,6 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.narrative.enums;
 
-import lombok.Getter;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.common.enums.LanguageCode;
 
@@ -50,7 +49,7 @@ public enum NarrativeLanguage {
                                     hourPrecisionFormatter,
                                     minutePrecisionFormatter,
                                     emediplanMinutePrecisionFormatter,
-                                    emediPlanDayPrecisionFormatter;
+                                    emediplanDayPrecisionFormatter;
 
     private final Locale locale;
 
@@ -77,7 +76,7 @@ public enum NarrativeLanguage {
                 DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm", locale).withZone(ZoneId.systemDefault());
         this.emediplanMinutePrecisionFormatter =
                 DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm", locale).withZone(ZoneId.systemDefault());
-        this.emediPlanDayPrecisionFormatter =
+        this.emediplanDayPrecisionFormatter =
                 DateTimeFormatter.ofPattern("dd.MM.yyyy", locale).withZone(ZoneId.systemDefault());
     }
 
@@ -102,7 +101,7 @@ public enum NarrativeLanguage {
     public DateTimeFormatter getHourPrecisionFormatter() {return hourPrecisionFormatter;}
     public DateTimeFormatter getMinutePrecisionFormatter() {return minutePrecisionFormatter;}
     public DateTimeFormatter getEmediplanMinutePrecisionFormatter() {return emediplanMinutePrecisionFormatter;}
-    public DateTimeFormatter getEmediPlanDayPrecisionFormatter() {return emediPlanDayPrecisionFormatter;}
+    public DateTimeFormatter getEmediplanDayPrecisionFormatter() {return emediplanDayPrecisionFormatter;}
 
     /**
      * Returns the related {@link LanguageCode}.

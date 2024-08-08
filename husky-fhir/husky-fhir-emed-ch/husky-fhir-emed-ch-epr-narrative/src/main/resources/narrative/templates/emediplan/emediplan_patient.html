@@ -16,3 +16,8 @@
 
     <!-- TODO add medical and risk parameters -->
 </th:block>
+
+<th:block th:fragment="short-patient-data(patient, lang)">
+    <th:block th:insert="~{datatypes :: human-name(${patient.name[0]}, ${lang})}"/>
+    (<th:block th:insert="~{datatypes :: date-time(${patient.getBirthDateElement()}, ${lang})}"/>)
+</th:block>

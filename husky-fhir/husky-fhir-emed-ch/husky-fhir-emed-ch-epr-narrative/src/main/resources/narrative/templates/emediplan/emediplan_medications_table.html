@@ -10,7 +10,7 @@
 <table th:fragment="table(treatments, lang)">
     <thead>
         <tr>
-            <th>Médication</th>
+            <th colspan="2">Médication</th>
             <th>Matin</th>
             <th>Midi</th>
             <th>Soir</th>
@@ -31,7 +31,7 @@
         </th:block>
         <th:block th:if="${treatments.isEmpty()}">
             <tr>
-                <td colspan="11" class="no-treatment">Aucun traitement</td>
+                <td colspan="12" class="no-treatment">Aucun traitement</td>
             </tr>
         </th:block>
     </tbody>
@@ -39,7 +39,8 @@
 
 <th:block th:fragment="statement(statement, dosage, lang)">
     <tr>
-        <td>[[${statement.resolveMedication().resolveMedicationName()}]]</td>
+        <!-- TODO divide medication name column in two when adding medication thumbnails -->
+        <td colspan="2">[[${statement.resolveMedication().resolveMedicationName()}]]</td>
         <th:block th:if="${dosage.hasIntakes() or dosage.hasSimpleEventTimings()}">
             <td>
                 <th:block th:if="${dosage.hasIntakes()}">
@@ -75,11 +76,33 @@
             <td colspan="4">voir les instructions</td>
         </th:block>
         <td th:insert="~{::dosageUnit(${dosage.getUnit}, ${lang})}"></td>
-        <td><!-- TODO from --></td>
-        <td><!-- TODO to --></td>
-        <td><!-- TODO instructions --></td>
-        <td><!-- TODO reason --></td>
-        <td><!-- TODO prescribed by (or medical author?) --></td>
+        <td>
+            <th:block th:if="${dosage.hasPeriod() and dosage.hasStart()}"
+                      th:insert="~{emediplan_datatypes :: fhirDate(${dosage.getStartElement()}, ${lang})}"/>
+            <!-- TODO add a start date if boundsPeriod does not have it? -->
+        </td>
+        <td>
+            <th:block th:if="${dosage.hasPeriod() and dosage.hasEnd()}"
+                      th:insert="~{emediplan_datatypes :: fhirDate(${dosage.getEndElement()}, ${lang})}"/>
+        </td>
+        <td>
+            <th:block th:if="${dosage.hasPatientInstructions()}" th:text="${dosage.patientInstructions}"/>
+        </td>
+        <td>
+            <th:block th:if="${statement.hasTreatmentReason()}" th:text="${statement.getTreatmentReason()}"/>
+        </td>
+        <td>
+            <th:block th:if="${statement.resolveMedicalAuthor().getPractitionerRole() != null}"
+                      th:insert="~{datatypes :: human-name(${statement.resolveMedicalAuthor().getPractitionerRole().resolvePractitioner().resolveName()}, ${lang})}"/>
+            <!-- if self-medication we will just write that instead of displaying the name of the medical author
+            <th:block th:if="${statement.resolveMedicalAuthor().getPatient() != null}"
+                      th:insert="~{datatypes :: human-name(${statement.resolveMedicalAuthor().getPatient().resolveName()}, ${lang})}"/>
+            <th:block th:if="${statement.resolveMedicalAuthor().getRelatedPerson() != null}"
+                      th:insert="~{datatypes :: human-name(${statement.resolveMedicalAuthor().getRelatedPerson().getNameFirstRep()}, ${lang})}"/>
+            -->
+            <th:block th:unless="${statement.resolveMedicalAuthor().getPractitionerRole() != null}"
+                      th:text="Automédication"/>
+        </td>
     </tr>
 </th:block>
 

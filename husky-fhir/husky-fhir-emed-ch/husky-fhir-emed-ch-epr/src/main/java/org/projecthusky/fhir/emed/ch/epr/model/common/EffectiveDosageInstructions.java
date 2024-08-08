@@ -64,6 +64,8 @@ public record EffectiveDosageInstructions(
     public boolean hasEveningSimpleEventTiming() {return hasSimpleEventTiming(TimingEventAmbu.EVENING);}
     public boolean hasNightSimpleEventTiming() {return hasSimpleEventTiming(TimingEventAmbu.NIGHT);}
 
+    public boolean hasPeriod() {return period != null;}
+
     @Nullable
     public DosageIntake getMornIntake() {
         return this.getIntake(TimingEventAmbu.MORNING);

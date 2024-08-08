@@ -8,7 +8,7 @@
   ~ whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
 */-->
 <div class="emediplan-body-issue-date">
-    <th:block th:insert="~{emediplan_datatypes :: instant(${issuedDate}, ${lang})}"/>
+    Date d'émission: <th:block th:insert="~{emediplan_datatypes :: instant(${issuedDate}, ${lang})}"/>
 </div>
 <div class="emediplan-body-medications-table">
     <div class="emediplan-body-regular-medications-table">
@@ -20,5 +20,5 @@
     </div>
 </div>
 <div class="emediplan-body-general-comments">
-    <!-- TODO -->
+    <!-- The PMP does not support this concept, hence this optional section of the eMediplan will always be empty. -->
 </div>
