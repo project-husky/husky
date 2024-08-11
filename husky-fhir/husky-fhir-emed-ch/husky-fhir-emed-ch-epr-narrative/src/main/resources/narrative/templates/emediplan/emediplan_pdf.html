@@ -99,12 +99,14 @@
 
     <div class="emediplan-body" th:utext="${content}">eMediplan content placeholder</div>
 
-    <!-- footer is defined in the style section as part of the @page rules -->
     <div class="emediplan-footer-left" id="emediplan-footer-left"
          th:insert="~{emediplan_patient :: short-patient-data(${resource.resolvePatient()}, ${lang})}">
         Peter Muster (20.11.1999)
     </div>
-    <!-- todo implement software provider line -->
-    <div class="emediplan-footer-center" id="emediplan-footer-center">eMediplan by Softwareprovider (V1.0)</div>
+    <div class="emediplan-footer-center" id="emediplan-footer-center">eMediplan by Softwareprovider (V1.0)
+        <span th:if="${softwareMetadata.hasSoftwareName()}" th:text="${softwareMetadata.softwareName}">eMediplan </span>
+        <span th:if="${softwareMetadata.hasSoftwareProvider()}" th:text="by ${softwareMetadata.softwareProvider}">by Softwareprovider </span>
+        <span th:if="${softwareMetadata.hasSoftwareVersion()}" th:text="(${softwareMetadata.softwareVersion})">(V1.0)</span>
+    </div>
 </body>
 </html>
