@@ -37,7 +37,7 @@ abstract class AbstractNarrativeGenerator {
      */
     protected MedicationImageProvider medicationImageProvider = MedicationImageProvider.NO_OP_INSTANCE;
 
-    AbstractNarrativeGenerator() throws IOException, ParserConfigurationException {
+    AbstractNarrativeGenerator() throws IOException {
         final Function<String, InputStream> getRes = (final String lang) ->
                 Objects.requireNonNull(AbstractNarrativeGenerator.class.getResourceAsStream(
                         "/narrative/translations/Messages." + lang + ".properties"));
@@ -63,12 +63,10 @@ abstract class AbstractNarrativeGenerator {
      *
      * @param document The medication card document.
      * @param lang The language of the narrative.
-     * @param format   The format in which to generate the narrative.
      * @return The HTML content of the narrative.
      */
     abstract public String generate(final ChEmedEprDocumentPmlc document,
-                                    final NarrativeLanguage lang,
-                                    final NarrativeFormat format
+                                    final NarrativeLanguage lang
                                     );
 
     /**

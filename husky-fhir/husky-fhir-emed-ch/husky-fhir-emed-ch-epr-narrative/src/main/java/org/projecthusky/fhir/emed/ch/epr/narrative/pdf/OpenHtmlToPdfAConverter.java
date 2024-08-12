@@ -15,6 +15,7 @@ import com.openhtmltopdf.outputdevice.helper.BaseRendererBuilder;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import com.openhtmltopdf.slf4j.Slf4jLogger;
 import com.openhtmltopdf.util.XRLog;
+import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.fhir.emed.ch.epr.narrative.enums.NarrativeLanguage;
@@ -25,7 +26,6 @@ import org.thymeleaf.templateresolver.StringTemplateResolver;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
@@ -35,6 +35,7 @@ import java.util.function.Consumer;
  *
  * @author Quentin Ligier
  **/
+@Slf4j
 public class OpenHtmlToPdfAConverter implements HtmlToPdfAConverter {
 
     /**
@@ -60,21 +61,13 @@ public class OpenHtmlToPdfAConverter implements HtmlToPdfAConverter {
     private final TemplateEngine templateEngine;
 
     /**
-     * The default Thymeleaf template content.
-     */
-    private final String defaultTemplateContent;
-
-    /**
      * Constructor.
      */
-    public OpenHtmlToPdfAConverter() throws IOException {
+    public OpenHtmlToPdfAConverter() {
         XRLog.setLoggerImpl(new Slf4jLogger());
 
         this.templateEngine = new TemplateEngine();
         this.templateEngine.setTemplateResolver(new StringTemplateResolver());
-        this.defaultTemplateContent =
-                new String(getClass().getResourceAsStream("/narrative/templates/pdfa.html").readAllBytes(),
-                           StandardCharsets.UTF_8);
     }
 
     /**
@@ -126,76 +119,23 @@ public class OpenHtmlToPdfAConverter implements HtmlToPdfAConverter {
     }
 
     /**
-     * Converts the HTML content to its PDF/A representation, with the default template.
-     *
-     * @param subject     The document subject. It's inserted in a {@code <meta name="subject">} tag.
-     * @param author      The document author. It's inserted in a {@code <meta name="author">} tag.
-     * @param description The document description. It's inserted in a {@code <meta name="description">} tag.
-     * @param title       The document title.
-     * @param lang        The document language, as an ISO code.
-     * @param bookmarks   A list of bookmarks to interesting parts of the document. The keys are labels that are shown
-     *                    to the user, the values are HTML ID references (starting with '#').
-     * @param cssContent  The CSS content to inject.
-     * @param bodyContent The HTML content to convert. It will be inserted in a {@code <body>} tag.
-     * @return The content of the generated PDF/A.
-     * @throws IOException if a font cannot be read.
-     */
-    @Override
-    public byte[] convert(final String subject,
-                          final String author,
-                          final String description,
-                          final String title,
-                          final NarrativeLanguage lang,
-                          final Map<String, String> bookmarks,
-                          final String cssContent,
-                          final String bodyContent) throws IOException {
-        return this.convert(subject,
-                            author,
-                            description,
-                            title,
-                            lang,
-                            bookmarks,
-                            cssContent,
-                            bodyContent,
-                            this.defaultTemplateContent);
-    }
-
-    /**
      * Converts the HTML content to its PDF/A representation, with a custom template.
      *
-     * @param subject         The document subject. It's inserted in a {@code <meta name="subject">} tag.
-     * @param author          The document author. It's inserted in a {@code <meta name="author">} tag.
-     * @param description     The document description. It's inserted in a {@code <meta name="description">} tag.
-     * @param title           The document title.
-     * @param lang            The document language, as an ISO code.
-     * @param bookmarks       A list of bookmarks to interesting parts of the document. The keys are labels that are
-     *                        shown to the user, the values are HTML ID references (starting with '#').
-     * @param cssContent      The CSS content to inject.
-     * @param bodyContent     The HTML content to convert. It will be inserted in a {@code <body>} tag.
+     * @param lang             The document language, as an ISO code.
+     * @param contextVariables The context variables to be added to the template processing. Note that {@code "lang"} is
+     *                         automatically added with the code value of the received {@code lang} parameter.
      * @param templateContent The custom Thymeleaf content.
      * @return The content of the generated PDF/A.
-     * @throws IOException if a font cannot be read.
      */
     @SuppressWarnings("java:S2093") // Cannot use try-with-resources with font input streams
-    public byte[] convert(final String subject,
-                          final String author,
-                          final String description,
-                          final String title,
-                          final NarrativeLanguage lang,
-                          final Map<String, String> bookmarks,
-                          final String cssContent,
-                          final String bodyContent,
-                          final String templateContent) throws IOException {
+    public byte[] convert(final NarrativeLanguage lang,
+                          final Map<String, Object> contextVariables,
+                          //final Map<String, String> bookmarks,
+                          final String templateContent) {
         // Prepare the full HTML content
         final var context = new Context();
         context.setVariable("lang", lang.getLanguageCode().getCodeValue());
-        context.setVariable("subject", subject);
-        context.setVariable("author", author);
-        context.setVariable("description", description);
-        context.setVariable("title", title);
-        context.setVariable("bookmarks", bookmarks);
-        context.setVariable("css", cssContent);
-        context.setVariable("content", bodyContent);
+        contextVariables.forEach(context::setVariable);
         context.setLocale(lang.getLocale());
         final var htmlContent = this.templateEngine.process(templateContent, context);
 
@@ -234,10 +174,16 @@ public class OpenHtmlToPdfAConverter implements HtmlToPdfAConverter {
             builder.toStream(baosPdf);
             builder.run();
             pdfBytes = baosPdf.toByteArray();
+        } catch (final IOException ex) {
+            throw new RuntimeException(ex);
         } finally {
             // Clean resources
             for (final var inputStream : inputStreams) {
-                inputStream.close();
+                try {
+                    inputStream.close();
+                } catch(final IOException ex) {
+                    log.error("Failed to close input stream.");
+                }
             }
         }
         return pdfBytes;

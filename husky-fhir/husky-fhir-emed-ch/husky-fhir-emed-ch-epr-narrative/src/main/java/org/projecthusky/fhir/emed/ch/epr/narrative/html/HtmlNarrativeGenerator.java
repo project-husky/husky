@@ -45,9 +45,12 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
      */
     protected final TemplateEngine templateEngine;
 
-    public HtmlNarrativeGenerator() throws IOException, ParserConfigurationException {
+    protected final NarrativeFormat narrativeFormat;
+
+    public HtmlNarrativeGenerator(final NarrativeFormat format) throws IOException, ParserConfigurationException {
         super();
         this.fhirContext = FhirContext.forR4Cached();
+        this.narrativeFormat = Objects.requireNonNull(format);
 
         final var templateResolver = new ClassLoaderTemplateResolver(this.getClass().getClassLoader());
         templateResolver.setTemplateMode(TemplateMode.HTML);
@@ -63,8 +66,7 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
 
     @Override
     public String generate(final ChEmedEprDocumentPmlc document,
-                           final NarrativeLanguage lang,
-                           final NarrativeFormat format
+                           final NarrativeLanguage lang
                            ) {
         final var asneededTreatments = new HashMap<UUID, List<ChEmedEprMedicationStatementPmlc>>(5);
         final var activeTreatments = new HashMap<UUID, List<ChEmedEprMedicationStatementPmlc>>(5);
@@ -88,9 +90,11 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
         context.setVariable("activeTreatments", activeTreatments);
         context.setVariable("asneededTreatments", asneededTreatments);
         context.setVariable("lastStatement", lastStatement);
+        context.setVariable("issuedDate", document.resolveTimestamp());
 
         context.setLocale(lang.getLocale());
-        return this.templateEngine.process("medication_card", context);
+        return templateEngine
+                .process(narrativeFormat == NarrativeFormat.CH_EMED_EPR ? "medication_card" : "/emediplan/emediplan_body", context);
     }
 
     @Override

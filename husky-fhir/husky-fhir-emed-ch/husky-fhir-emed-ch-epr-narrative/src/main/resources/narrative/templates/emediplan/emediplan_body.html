@@ -11,10 +11,10 @@
     Date d'émission: <th:block th:insert="~{emediplan_datatypes :: instant(${issuedDate}, ${lang})}"/>
 </div>
 <div class="emediplan-body-medications-table">
-    <div class="emediplan-body-regular-medications-table">
+    <div class="emediplan-body-regular-medications-table" id="active-treatments">
         <th:block th:insert="~{emediplan_medications_table :: table(${activeTreatments}, ${lang})}"/>
     </div>
-    <div class="emediplan-body-reserve-medications-table">
+    <div class="emediplan-body-reserve-medications-table" id="reserve-treatments">
         <span class="emediplan-body-reserve-medications-table-header">Médicaments en réserve</span>
         <th:block th:insert="~{emediplan_medications_table :: table(${asneededTreatments}, ${lang})}"/>
     </div>

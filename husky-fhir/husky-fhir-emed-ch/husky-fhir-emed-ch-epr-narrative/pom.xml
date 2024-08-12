@@ -49,6 +49,12 @@
             <artifactId>openhtmltopdf-slf4j</artifactId>
             <version>${openhtmltopdf-version}</version>
         </dependency>
+        <dependency>
+            <!-- SVG support plugin. -->
+            <groupId>com.openhtmltopdf</groupId>
+            <artifactId>openhtmltopdf-svg-support</artifactId>
+            <version>${openhtmltopdf-version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -71,6 +77,10 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projecthusky.validation.service</groupId>
+            <artifactId>husky-validation-service</artifactId>
         </dependency>
 
     </dependencies>
