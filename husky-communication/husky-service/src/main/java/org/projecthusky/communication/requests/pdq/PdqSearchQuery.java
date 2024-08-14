@@ -94,7 +94,7 @@ public class PdqSearchQuery {
 	 * @return a {@link PdqQuery} ready to be sent with the {@link HuskyWebServiceClient} to the webservice.
 	 */
 	public PdqQuery build() {
-		PdqQuery consumerQueryRequestMessage = new PdqQuery(this.destination.getSenderApplicationOid(), null, null, null);
+		PdqQuery consumerQueryRequestMessage = new PdqQuery(this.destination.getSenderApplicationOid(), null, this.destination.getReceiverApplicationOid(), null);
 
 		addPatientNameToSearchQueryRequestIfSet(consumerQueryRequestMessage);
 		addMothersMaidenNameToSearchQueryRequestIfSet(consumerQueryRequestMessage);
