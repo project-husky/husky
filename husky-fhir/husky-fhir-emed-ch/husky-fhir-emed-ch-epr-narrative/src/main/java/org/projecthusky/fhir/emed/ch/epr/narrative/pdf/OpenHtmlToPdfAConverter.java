@@ -15,6 +15,7 @@ import com.openhtmltopdf.outputdevice.helper.BaseRendererBuilder;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import com.openhtmltopdf.slf4j.Slf4jLogger;
 import com.openhtmltopdf.util.XRLog;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -58,6 +59,7 @@ public class OpenHtmlToPdfAConverter implements HtmlToPdfAConverter {
     /**
      * The Thymeleaf template engine.
      */
+    @Getter
     private final TemplateEngine templateEngine;
 
     /**
@@ -134,7 +136,7 @@ public class OpenHtmlToPdfAConverter implements HtmlToPdfAConverter {
                           final String templateContent) {
         // Prepare the full HTML content
         final var context = new Context();
-        context.setVariable("lang", lang.getLanguageCode().getCodeValue());
+        context.setVariable("lang", lang);
         contextVariables.forEach(context::setVariable);
         context.setLocale(lang.getLocale());
         final var htmlContent = this.templateEngine.process(templateContent, context);

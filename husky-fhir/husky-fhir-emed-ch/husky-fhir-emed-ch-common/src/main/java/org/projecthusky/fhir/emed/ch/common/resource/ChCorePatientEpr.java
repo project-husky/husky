@@ -13,14 +13,18 @@ package org.projecthusky.fhir.emed.ch.common.resource;
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.*;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.ReligiousAffiliation;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.emed.ch.common.util.FhirDateTimes;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -185,6 +189,101 @@ public class ChCorePatientEpr extends Patient {
         return this.addIdentifier().setType(new CodeableConcept(codingType))
                 .setSystem(system)
                 .setValue(value);
+    }
+
+    /**
+     * Resolves the language of correspondence (i.e. preferred communication language) of the patient.
+     * @return the preferred patient component with the language of correspondence.
+     */
+    public @Nullable PatientCommunicationComponent resolveLanguageOfCorrespondence() {
+        return getCommunication().stream().filter( com -> com != null && com.getPreferred()).findAny().orElse(null);
+    }
+
+    /**
+     * Fetches the list of contact points which are an email address.
+     * @return The list of contact points.
+     */
+    public List<@NonNull ContactPoint> resolveEmailAddresses() {
+        return resolveTelecom(ContactPoint.ContactPointSystem.EMAIL);
+    }
+
+    /**
+     * Fetches the list of email addresses values. It does not check their period.
+     * @return The list of email addresses values.
+     */
+    public List<@NonNull String> resolveEmailAddressesAsStrings() {
+        return resolveEmailAddressesAsStrings(false);
+    }
+
+    /**
+     * Fetches the list of email address values, optionally checking if the period is valid at the moment.
+     * @param activeOnly If true, the method will filter out email address for which the current timestamp is not within
+     *                   the period boundaries, if defined.
+     * @return The list of matching email addresses, as strings.
+     */
+    public List<@NonNull String> resolveEmailAddressesAsStrings(boolean activeOnly) {
+        return resolveTelecomAsStrings(ContactPoint.ContactPointSystem.EMAIL, activeOnly);
+    }
+
+    /**
+     * Fetches the list of contact points which are a phone number.
+     * @return The list of contact points.
+     */
+    public List<@NonNull ContactPoint> resolvePhoneNumbers() {
+        return resolveTelecom(ContactPoint.ContactPointSystem.PHONE);
+    }
+
+    /**
+     * Fetches the list of phone number values. It does not check their period.
+     * @return The list of phone number values as strings.
+     */
+    public List<@NonNull String> resolvePhoneNumbersAsStrings() {
+        return resolvePhoneNumbersAsStrings(false);
+    }
+
+    /**
+     * Fetches the list of email address values, optionally checking if the period is valid at the moment.
+     * @param activeOnly If true, the method will filter out email address for which the current timestamp is not within
+     *                   the period boundaries, if defined.
+     * @return The list of matching email addresses, as strings.
+     */
+    public List<@NonNull String> resolvePhoneNumbersAsStrings(boolean activeOnly) {
+        return resolveTelecomAsStrings(ContactPoint.ContactPointSystem.PHONE, activeOnly);
+    }
+
+    /**
+     * Fetches the list of telecom contact point values for the specified system and optionally checking whether they
+     * are valid at the current time.
+     *
+     * @param system     The contact point system that must match.
+     * @param activeOnly Whether to return only contact points for which the current timestamp is within the specified
+     *                   boundaries (if any).
+     * @return The list of strings with the matching contact points values.
+     */
+    private List<@NonNull String> resolveTelecomAsStrings(final ContactPoint.ContactPointSystem system,
+                                                          boolean activeOnly) {
+        return resolveTelecom(system).stream().filter(telecom -> {
+            if (telecom.hasValue()) {
+                if (activeOnly) {
+                    if (telecom.hasPeriod() && (telecom.getPeriod().hasStart() || telecom.getPeriod().hasEnd())) {
+                        if (telecom.getPeriod().hasStart() && telecom.getPeriod().getStartElement().getValueAsCalendar().after(Calendar.getInstance()))
+                            return false;
+                        if (telecom.getPeriod().hasEnd() && FhirDateTimes.completeToLatestInstant(telecom.getPeriod().getEndElement()).isBefore(Instant.now()))
+                            return false;
+                    } else return true;
+                } else return true;
+            }
+            return false;
+        }).map(ContactPoint::getValue).toList();
+    }
+
+    /**
+     * Gets the list of telecom contact points that match the specified system.
+     * @param system The specific system for which to fetch all the contact points.
+     * @return The list of contact points.
+     */
+    private List<@NonNull ContactPoint> resolveTelecom(final ContactPoint.ContactPointSystem system) {
+        return getTelecom().stream().filter(telecom -> telecom.getSystem() == system).toList();
     }
 
     @Override

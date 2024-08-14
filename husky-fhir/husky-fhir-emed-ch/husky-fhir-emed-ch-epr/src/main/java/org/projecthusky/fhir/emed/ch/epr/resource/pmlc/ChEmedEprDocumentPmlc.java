@@ -134,4 +134,9 @@ public class ChEmedEprDocumentPmlc extends ChEmedEprDocument {
         this.copyValues(copy);
         return copy;
     }
+
+    /*@ExpectsValidResource
+    public String toEMediplan() {
+
+    }*/
 }

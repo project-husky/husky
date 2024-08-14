@@ -25,7 +25,7 @@
           th:text="${lang.getEmediplanMinutePrecisionFormatter().format(instantElement)}"/>
 
 <th:block th:fragment="date(instantElement, lang)"
-          th:text="${lang.getEmediPlanDayPrecisionFormatter().format(instantElement)}"/>
+          th:text="${lang.getEmediplanDayPrecisionFormatter().format(instantElement)}"/>
 
 <th:block th:fragment="fhirDate(fhirDateTime, lang)"
           th:insert="~{::date(${fhirDateTime.getValueAsCalendar().toInstant()}, ${lang})}"/>

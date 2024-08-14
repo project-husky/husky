@@ -17,8 +17,6 @@ import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprMedicationStatem
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprDocumentPre;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-import org.thymeleaf.templatemode.TemplateMode;
-import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
@@ -47,21 +45,12 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
 
     protected final NarrativeFormat narrativeFormat;
 
-    public HtmlNarrativeGenerator(final NarrativeFormat format) throws IOException, ParserConfigurationException {
+    public HtmlNarrativeGenerator(final NarrativeFormat format) throws IOException {
         super();
         this.fhirContext = FhirContext.forR4Cached();
         this.narrativeFormat = Objects.requireNonNull(format);
-
-        final var templateResolver = new ClassLoaderTemplateResolver(this.getClass().getClassLoader());
-        templateResolver.setTemplateMode(TemplateMode.HTML);
-        templateResolver.setCharacterEncoding("UTF-8");
-        templateResolver.setCacheable(true);
-        templateResolver.setCacheTTLMs(300000L);
-        templateResolver.setPrefix("/narrative/templates/");
-        templateResolver.setSuffix(".html");
-
         this.templateEngine = new TemplateEngine();
-        this.templateEngine.setTemplateResolver(templateResolver);
+        this.templateEngine.setTemplateResolver(ChEmedEprTemplateResolver.get());
     }
 
     @Override
@@ -94,7 +83,7 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
 
         context.setLocale(lang.getLocale());
         return templateEngine
-                .process(narrativeFormat == NarrativeFormat.CH_EMED_EPR ? "medication_card" : "/emediplan/emediplan_body", context);
+                .process(narrativeFormat == NarrativeFormat.CH_EMED_EPR ? "medication_card" : "emediplan/emediplan_body", context);
     }
 
     @Override

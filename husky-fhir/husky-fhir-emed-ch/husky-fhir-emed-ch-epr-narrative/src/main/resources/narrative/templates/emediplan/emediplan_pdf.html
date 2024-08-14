@@ -88,7 +88,7 @@
     </div>
     -->
     <div class="emediplan-header-centre" id="emediplan-header-patient-info">
-        <th:block th:insert="~{emediplan_patient :: patient-data(${resource.resolvePatient()}, ${lang})}"/>
+        <th:block th:insert="~{emediplan/emediplan_patient :: patient-data(${resource.resolvePatient()}, ${lang})}"/>
     </div>
     <!--<div class="emediplan-header-right">-->
         <div class="emediplan-header-service-provider" id="emediplan-header-service-provider"><!-- TODO -->SERVICE PROVIDER PLACEHOLDER</div>
@@ -100,13 +100,13 @@
     <div class="emediplan-body" th:utext="${content}">eMediplan content placeholder</div>
 
     <div class="emediplan-footer-left" id="emediplan-footer-left"
-         th:insert="~{emediplan_patient :: short-patient-data(${resource.resolvePatient()}, ${lang})}">
+         th:insert="~{emediplan/emediplan_patient :: short-patient-data(${resource.resolvePatient()}, ${lang})}">
         Peter Muster (20.11.1999)
     </div>
     <div class="emediplan-footer-center" id="emediplan-footer-center">eMediplan by Softwareprovider (V1.0)
-        <span th:if="${softwareMetadata.hasSoftwareName()}" th:text="${softwareMetadata.softwareName}">eMediplan </span>
-        <span th:if="${softwareMetadata.hasSoftwareProvider()}" th:text="by ${softwareMetadata.softwareProvider}">by Softwareprovider </span>
-        <span th:if="${softwareMetadata.hasSoftwareVersion()}" th:text="(${softwareMetadata.softwareVersion})">(V1.0)</span>
+        <span th:if="${softwareMetadata.hasSoftwareName()}" th:text="|${softwareMetadata.softwareName()} |">eMediplan </span>
+        <span th:if="${softwareMetadata.hasSoftwareProvider()}" th:text="|par ${softwareMetadata.softwareProvider()} |">by Softwareprovider </span>
+        <span th:if="${softwareMetadata.hasSoftwareVersion()}" th:text="|(${softwareMetadata.softwareVersion()})|">(V1.0)</span>
     </div>
 </body>
 </html>

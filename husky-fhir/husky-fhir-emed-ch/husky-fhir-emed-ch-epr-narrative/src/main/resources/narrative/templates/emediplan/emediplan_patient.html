@@ -10,8 +10,10 @@
 <th:block th:fragment="patient-data(patient, lang)">
     <th:block th:insert="~{datatypes :: human-name(${patient.name[0]}, ${lang})}"/><br/>
     <th:block th:insert="~{datatypes :: date-time(${patient.getBirthDateElement()}, ${lang})}"/>
-    <th:block th:insert="~{emediplan_datatypes :: admin-gender(${patient.resolveGender()}, ${lang})}"/><br/>
-    <th:block th:insert="~{emediplan_datatypes :: address(${patient.resolveAddress()}, ${lang})}"/>
+    <th:block th:insert="~{emediplan/emediplan_datatypes :: admin-gender(${patient.resolveGender()}, ${lang})}"/><br/>
+    <th:block th:if="${patient.resolveAddress() != null}">
+        <th:block th:insert="~{emediplan/emediplan_datatypes :: address(${patient.resolveAddress()}, ${lang})}"/>
+    </th:block>
     <!-- TODO add phone number -->
 
     <!-- TODO add medical and risk parameters -->

@@ -149,8 +149,8 @@ public abstract class PdfMedicationCardGenerator {
         return getTemplate("/narrative/templates/pdfa_pmlc.html");
     }
 
-    public static String getDefaultEmediplanPdfTemplate() throws IOException {
-        return getTemplate("/narrative/templates/emediplan/emediplan_pdf.html");
+    public static String getDefaultEmediplanPdfTemplate() {
+        return "emediplan/emediplan_pdf";
     }
 
     static String getTemplate(final String resource) throws IOException {

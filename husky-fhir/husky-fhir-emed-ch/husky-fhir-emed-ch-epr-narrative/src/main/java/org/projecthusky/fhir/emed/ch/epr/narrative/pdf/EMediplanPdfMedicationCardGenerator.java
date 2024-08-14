@@ -1,6 +1,7 @@
 package org.projecthusky.fhir.emed.ch.epr.narrative.pdf;
 
 import org.projecthusky.fhir.emed.ch.epr.narrative.enums.NarrativeLanguage;
+import org.projecthusky.fhir.emed.ch.epr.narrative.html.ChEmedEprTemplateResolver;
 import org.projecthusky.fhir.emed.ch.epr.narrative.html.NarrativeFormat;
 import org.projecthusky.fhir.emed.ch.epr.narrative.html.SoftwareProviderMetadataProvider;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprDocumentPmlc;
@@ -21,6 +22,10 @@ public class EMediplanPdfMedicationCardGenerator extends PdfMedicationCardGenera
     public EMediplanPdfMedicationCardGenerator(final SoftwareProviderMetadataProvider softwareProviderMetadataProvider)
             throws IOException, ParserConfigurationException {
         super(NarrativeFormat.EMEDIPLAN, softwareProviderMetadataProvider);
+        /* When using the default emediplan template, we need the internal template resolver since there are fragments
+           within the PDF template.
+         */
+        pdfConverter.getTemplateEngine().setTemplateResolver(ChEmedEprTemplateResolver.get());
     }
 
     public byte[] generate(final ChEmedEprDocumentPmlc pmlcDocument, final NarrativeLanguage lang) {

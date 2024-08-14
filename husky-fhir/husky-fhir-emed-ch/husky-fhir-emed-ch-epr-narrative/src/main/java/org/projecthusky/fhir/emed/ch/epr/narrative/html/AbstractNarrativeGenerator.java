@@ -7,7 +7,6 @@ import org.projecthusky.fhir.emed.ch.epr.narrative.services.ValueSetEnumNarrativ
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprDocumentPmlc;
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprDocumentPre;
 
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.EnumMap;

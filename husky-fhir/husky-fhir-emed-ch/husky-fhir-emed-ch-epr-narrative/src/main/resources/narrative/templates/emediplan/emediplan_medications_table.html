@@ -24,8 +24,8 @@
         </tr>
     </thead>
     <tbody>
-        <th:block th:each="statements: ${treatments}">
-            <th:block th:each="statement: ${statements}">
+        <th:block th:each="treatment: ${treatments}">
+            <th:block th:each="statement: ${treatment.value}">
                 <th:block th:insert="~{::statement(${statement}, ${statement.resolveEffectiveDosageInstructions()}, ${lang})}"/>
             </th:block>
         </th:block>
@@ -77,13 +77,15 @@
         </th:block>
         <td th:insert="~{::dosageUnit(${dosage.getUnit}, ${lang})}"></td>
         <td>
-            <th:block th:if="${dosage.hasPeriod() and dosage.hasStart()}"
-                      th:insert="~{emediplan_datatypes :: fhirDate(${dosage.getStartElement()}, ${lang})}"/>
+            <th:block th:if="${dosage.hasPeriod() and dosage.period().hasStart()}">
+                <th:block th:insert="~{emediplan/emediplan_datatypes :: fhirDate(${dosage.period().getStartElement()}, ${lang})}"/>
+            </th:block>
             <!-- TODO add a start date if boundsPeriod does not have it? -->
         </td>
         <td>
-            <th:block th:if="${dosage.hasPeriod() and dosage.hasEnd()}"
-                      th:insert="~{emediplan_datatypes :: fhirDate(${dosage.getEndElement()}, ${lang})}"/>
+            <th:block th:if="${dosage.hasPeriod() and dosage.period().hasEnd()}">
+                <th:block th:insert="~{emediplan/emediplan_datatypes :: fhirDate(${dosage.period().getEndElement()}, ${lang})}"/>
+            </th:block>
         </td>
         <td>
             <th:block th:if="${dosage.hasPatientInstructions()}" th:text="${dosage.patientInstructions}"/>
@@ -92,8 +94,9 @@
             <th:block th:if="${statement.hasTreatmentReason()}" th:text="${statement.getTreatmentReason()}"/>
         </td>
         <td>
-            <th:block th:if="${statement.resolveMedicalAuthor().getPractitionerRole() != null}"
-                      th:insert="~{datatypes :: human-name(${statement.resolveMedicalAuthor().getPractitionerRole().resolvePractitioner().resolveName()}, ${lang})}"/>
+            <th:block th:if="${statement.resolveMedicalAuthor().getPractitionerRole() != null}">
+                <th:block th:insert="~{datatypes :: human-name(${statement.resolveMedicalAuthor().getPractitionerRole().resolvePractitioner().resolveName()}, ${lang})}"/>
+            </th:block>
             <!-- if self-medication we will just write that instead of displaying the name of the medical author
             <th:block th:if="${statement.resolveMedicalAuthor().getPatient() != null}"
                       th:insert="~{datatypes :: human-name(${statement.resolveMedicalAuthor().getPatient().resolveName()}, ${lang})}"/>
@@ -107,12 +110,14 @@
 </th:block>
 
 <th:block th:fragment="singleIntake(intake, lang)">
-    <th:block th:if="${intake} == null">—</th:block>
-    <th:block th:if="${intake} != null" th:insert="~{::doseQuantity(${intake.dose}, ${lang})}"/>
+    <th:block th:if="${intake == null}">—</th:block>
+    <th:block th:if="${intake != null}">
+        <th:block th:insert="~{::doseQuantity(${intake.dose()}, ${lang})}"/>
+    </th:block>
 </th:block>
 
 <th:block th:fragment="doseQuantity(dose, lang)">
-    <span th:if="${dose.isQuantity()}" th:text="${dose.quantity.value}">25</span>
+    <span th:if="${dose.isQuantity()}" th:text="${dose.quantity().value()}">25</span>
     <th:block th:if="${dose.isRange()}">
         <th:block th:if="${dose.low != null}">
             [[${dose.low.value}]] <th:block th:if="${dose.high != null}"> -</th:block>

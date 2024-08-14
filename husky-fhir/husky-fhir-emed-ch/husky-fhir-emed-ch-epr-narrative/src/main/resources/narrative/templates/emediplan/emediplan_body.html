@@ -8,15 +8,15 @@
   ~ whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
 */-->
 <div class="emediplan-body-issue-date">
-    Date d'émission: <th:block th:insert="~{emediplan_datatypes :: instant(${issuedDate}, ${lang})}"/>
+    Date d'émission: <th:block th:insert="~{emediplan/emediplan_datatypes :: instant(${issuedDate}, ${lang})}"/>
 </div>
 <div class="emediplan-body-medications-table">
     <div class="emediplan-body-regular-medications-table" id="active-treatments">
-        <th:block th:insert="~{emediplan_medications_table :: table(${activeTreatments}, ${lang})}"/>
+        <th:block th:insert="~{emediplan/emediplan_medications_table :: table(${activeTreatments}, ${lang})}"/>
     </div>
     <div class="emediplan-body-reserve-medications-table" id="reserve-treatments">
         <span class="emediplan-body-reserve-medications-table-header">Médicaments en réserve</span>
-        <th:block th:insert="~{emediplan_medications_table :: table(${asneededTreatments}, ${lang})}"/>
+        <th:block th:insert="~{emediplan/emediplan_medications_table :: table(${asneededTreatments}, ${lang})}"/>
     </div>
 </div>
 <div class="emediplan-body-general-comments">
