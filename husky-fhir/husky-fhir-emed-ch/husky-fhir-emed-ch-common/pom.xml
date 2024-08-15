@@ -2,7 +2,7 @@
     <parent>
         <groupId>org.projecthusky.fhir.emed.ch</groupId>
         <artifactId>husky-fhir-emed-ch</artifactId>
-        <version>2.5.1</version>
+        <version>2.5.2-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>husky-fhir-emed-ch-common</artifactId>
