@@ -1,6 +1,7 @@
 package org.projecthusky.fhir.emed.ch.epr.model.emediplan;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.MedicamentIdType;
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * Information about a medication as well as its dosage.
  */
+@Data
 public class EMediplanMedicament {
     /**
      * The id defined of the type specified by idType. If idType is NONE, then add a free text description here.

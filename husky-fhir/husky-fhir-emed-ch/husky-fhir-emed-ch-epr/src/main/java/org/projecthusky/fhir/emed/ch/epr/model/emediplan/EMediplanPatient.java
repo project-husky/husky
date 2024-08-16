@@ -2,21 +2,19 @@ package org.projecthusky.fhir.emed.ch.epr.model.emediplan;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Coding;
-import org.hl7.fhir.r4.model.PrimitiveType;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.Gender;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -44,24 +42,10 @@ public class EMediplanPatient {
      */
     protected Gender gender;
     /**
-     * Street.
+     * Postal address of the patient.
      */
-    protected @Nullable String street;
-    /**
-     * Postcode.
-     */
-    @JsonProperty("zip")
-    protected @Nullable String postalCode;
-    /**
-     * City.
-     */
-    protected @Nullable String city;
-    /**
-     * Country. If the address is in Switzerland, this property does not need to be set, as it is assumed by default
-     * that the address is in Switzerland.
-     * Format: Alpha-2 code (ISO 3166 5Country Codes), e.g. {@code FR} for France.
-     */
-    protected @Nullable String country;
+    @JsonUnwrapped
+    protected EMediplanPostalAddress address;
     /**
      * The patient's language (ISO 639-16 language code) (e.g. de). Note that while the lowercase version is preferred,
      * the codes are also valid in uppercase (e.g. DE).
@@ -83,22 +67,15 @@ public class EMediplanPatient {
      */
     protected List<@NonNull String> emails;
 
+    /**
+     * Gets an EMediplanPatient from an CH EPR patient.
+     *
+     * @param eprFhirPatient The CH EPR patient to be converted.
+     * @return The eMediplan patient.
+     */
     public static EMediplanPatient fromEprFhir(final ChCorePatientEpr eprFhirPatient) {
-        String street = null, postalCode = null, city = null, country = null, language = null;
+        String language = null;
         final var fhirAddress = eprFhirPatient.resolveAddress();
-        if (fhirAddress != null) {
-            if (fhirAddress.hasLine())
-                street = fhirAddress.getLine().stream().map(PrimitiveType::getValue).collect(Collectors.joining("\n"));
-            if (fhirAddress.hasPostalCode()) postalCode = fhirAddress.getPostalCode();
-            if (fhirAddress.hasCity()) city = fhirAddress.getCity();
-            if (fhirAddress.hasCountryElement()) {
-                final var countryElement = fhirAddress.getCountryElement();
-                final var countryCode = countryElement.getExtensionByUrl("http://hl7.org/fhir/StructureDefinition/iso21090-SC-coding");
-                if (countryCode != null && countryCode.hasValue() && countryCode.getValue() instanceof Coding countryCoding) {
-                    country = countryCoding.getCode();
-                }
-            }
-        }
         final var preferredLanguage = eprFhirPatient.resolveLanguageOfCorrespondence();
         if (preferredLanguage != null && preferredLanguage.hasLanguage() && preferredLanguage.getLanguage().hasCoding()) {
             language = preferredLanguage.getLanguage().getCoding().stream().filter(Coding::hasCode)
@@ -118,10 +95,7 @@ public class EMediplanPatient {
                 eprFhirPatient.getNameFirstRep().getFamily(),
                 eprFhirPatient.resolveBirthDate(),
                 Gender.fromFhirAdministrativeGender(eprFhirPatient.resolveGender()),
-                street,
-                postalCode,
-                city,
-                country,
+                fhirAddress == null? null : EMediplanPostalAddress.fromFhirAddress(fhirAddress),
                 language,
                 eprFhirPatient.getIdentifier().stream().map(EMediplanPatientId::fromFhirIdentifier).toList(),
                 eprFhirPatient.resolvePhoneNumbersAsStrings(true),

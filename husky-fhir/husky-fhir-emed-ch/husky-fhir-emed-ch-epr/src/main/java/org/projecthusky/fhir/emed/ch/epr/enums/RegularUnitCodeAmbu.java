@@ -10,7 +10,6 @@
 package org.projecthusky.fhir.emed.ch.epr.enums;
 
 import java.util.Objects;
-import javax.annotation.processing.Generated;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -660,6 +659,19 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
        "nl",
        "nl",
        "nl"),
+    /**
+     * EN: nmol.<br>
+     * DE: nmol.<br>
+     * FR: nmol.<br>
+     * IT: nmol.<br>
+     */
+    NMOL("nmol",
+        "http://unitsofmeasure.org",
+        "nanomole",
+        "nmol",
+        "nmol",
+        "nmol",
+        "nmol"),
     /**
      * EN: Package.<br>
      * DE: Packung.<br>

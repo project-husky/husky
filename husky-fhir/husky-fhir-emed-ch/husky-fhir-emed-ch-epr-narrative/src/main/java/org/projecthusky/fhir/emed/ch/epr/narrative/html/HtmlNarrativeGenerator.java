@@ -18,7 +18,6 @@ import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprDocumentPre;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.*;
@@ -59,6 +58,7 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
                            ) {
         final var asneededTreatments = new HashMap<UUID, List<ChEmedEprMedicationStatementPmlc>>(5);
         final var activeTreatments = new HashMap<UUID, List<ChEmedEprMedicationStatementPmlc>>(5);
+        //TODO replace last statement computation with call to ChEmedEprDocumentPmlc.resolveLastStatement()
         ChEmedEprMedicationStatementPmlc lastStatement = null;
         for (final var statement : document.resolveComposition().resolveMedicationStatements()) {
             if (statement.isShownInMedicationCard(document.resolveTimestamp())) {
