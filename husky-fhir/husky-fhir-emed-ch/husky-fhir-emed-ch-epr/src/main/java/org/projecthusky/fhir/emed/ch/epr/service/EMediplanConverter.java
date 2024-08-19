@@ -1,20 +1,29 @@
 package org.projecthusky.fhir.emed.ch.epr.service;
 
+import com.google.common.collect.Streams;
 import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
 import org.projecthusky.fhir.emed.ch.epr.enums.SubstanceAdministrationSubstitutionCode;
 import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
+import org.projecthusky.fhir.emed.ch.epr.model.common.Dose;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.*;
-import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.CdTyp9;
-import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.EMediplanAuthor;
-import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.EMediplanType;
-import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.MedicamentIdType;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.*;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.EMediplanPosology;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.DailyDosage;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.FreeTextDosage;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.SingleDosage;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.application.ApplicationInSegment;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.dose.EMediplanDose;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.dose.RangeDose;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.dose.SimpleDose;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.timed.DaySegmentsDosage;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.timed.DoseOnlyDosage;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprDocumentPmlc;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 @Slf4j
 public class EMediplanConverter {
@@ -80,6 +89,7 @@ public class EMediplanConverter {
 
     protected static EMediplanPosology toPosology(final ChEmedEprDosage baseDosage,
                                                   List<@NonNull ChEmedEprDosage> additionalDosages) {
+        boolean freeTextDosage = false;
         final var posology = new EMediplanPosology();
         if (baseDosage.hasBoundsPeriod()) {
             if (baseDosage.getBoundsPeriod().hasStart())
@@ -88,16 +98,93 @@ public class EMediplanConverter {
                 posology.setEnd(baseDosage.getBoundsPeriod().getEndElement().getValueAsCalendar().toInstant());
         }
         posology.setAsNeeded(baseDosage.isAsNeeded());
-        //TODO detail
-        //TODO relative to meal
-        if (baseDosage.hasDoseAndRate()) {
-            final var dose = baseDosage.resolveDose();
-            if (dose.isQuantity())
-                posology.setUnit(CdTyp9.fromRegularUnitCodeAmbu(dose.quantity().unit()));
-            else
-                posology.setUnit(CdTyp9.fromRegularUnitCodeAmbu(dose.low().unit()));
+        final var baseDose = baseDosage.resolveDose();
+        if (baseDosage.hasTiming() && baseDosage.hasWhen() && baseDosage.hasDoseAndRate()) {
+            if (baseDose.isQuantity() &&
+                    additionalDosages.stream()
+                            .noneMatch(additionalDosage -> additionalDosage.resolveDose().isRange())
+            ) {
+                // simplest and most common case: quantity (not range) dosages per day segments
+                final var dailyDosage = new DailyDosage();
+                Streams.concat(additionalDosages.stream(), Stream.of(baseDosage))
+                        .forEach(dosage ->
+                            dosage.resolveWhen().forEach(when -> {
+                                final var quantity = Double.parseDouble(dosage.resolveDose().quantity().value());
+                                switch (when) {
+                                    case MORNING -> dailyDosage.setMorningDose(quantity);
+                                    case NOON -> dailyDosage.setNoonDose(quantity);
+                                    case EVENING -> dailyDosage.setEveningDose(quantity);
+                                    case NIGHT -> dailyDosage.setNightDose(quantity);
+                                }
+                            })
+                        );
+                posology.setDetail(dailyDosage);
+            } else {
+                /* there is a when and rate/quantity, but either the base dosage does not have range/quantity or some
+                    additional dosages have range instead of quantity, a complex posology detail must be used
+                 */
+                final var segmentsDosage = new DaySegmentsDosage();
+                Streams.concat(Stream.of(baseDosage), additionalDosages.stream())
+                        .forEach(dosage ->
+                            dosage.resolveWhen().forEach(when ->
+                                    segmentsDosage.addApplication(new ApplicationInSegment(
+                                            getEMediplanDoseFromChEmedEpr(dosage.resolveDose()),
+                                            DaySegment.fromTimingEventAmbu(when)
+                                    ))
+                            )
+                        );
+                posology.setDetail(new SingleDosage(segmentsDosage));
+            }
+        } else {
+            // No when or no dose/rate, hence there cannot be split dosage, we only care about base dosage
+            // if we miss when, can we assume it is a single dosage with a dose only dosage?
+            if (baseDosage.hasDoseAndRate()) {
+                posology.setDetail(new SingleDosage(new DoseOnlyDosage(getEMediplanDoseFromChEmedEpr(baseDose))));
+            } else {
+                // if we miss dose/rate, we cannot add anything structured to emediplan, use free text
+                // if when is present, in this case, we should try to use text, since we cannot translate the when part
+                if (baseDosage.hasWhen()) {
+                    posology.setDetail(new FreeTextDosage(
+                            (baseDosage.hasText() || !baseDosage.hasPatientInstruction())?
+                                    baseDosage.getText() : baseDosage.getPatientInstruction()
+                    ));
+                } else {
+                    //nothing is structured, use patient instruction
+                    posology.setDetail(new FreeTextDosage(baseDosage.getPatientInstruction()));
+                }
+                freeTextDosage = true;
+            }
         }
-        //TODO application instructions
+
+        // relative to meal is a best effort case, if it is one of the example codes of additionalInstruction, good,
+        // no further effort will be done otherwise
+        if (baseDosage.hasAdditionalInstruction()) {
+            for (final var additionalInstruction : baseDosage.getAdditionalInstruction()) {
+                final var relativeToMeal = RelativeToMeal.fromCodeableConcept(additionalInstruction);
+                if (relativeToMeal != null) {
+                    // only one relative to meal instruction is supported by eMediplan...
+                    posology.setRelativeToMeal(relativeToMeal);
+                    break;
+                }
+            }
+        }
+
+        if (baseDosage.hasDoseAndRate()) {
+            if (baseDose.isQuantity())
+                posology.setUnit(CdTyp9.fromRegularUnitCodeAmbu(baseDose.quantity().unit()));
+            else
+                posology.setUnit(CdTyp9.fromRegularUnitCodeAmbu(baseDose.low().unit()));
+        }
+
+        // The tricky part of adding patient instructions is whether to know if they were already added as part of
+        // free dosage text, or if they should be added as patient instructions.
+        // Coded additionalInstruction can be ignored, since the IG specifies that they should also be part of
+        // patientInstruction
+        // If they were already added as free text dosage to the posology object, they should not be added as eMediplan
+        // patient instructions, since the specs say that this should not contain the information stated as free text
+        // dosage.
+        if (!freeTextDosage) posology.setApplicationInstructions(baseDosage.getPatientInstruction());
+
         if (baseDosage.hasRoute())
             posology.setRouteOfAdministration(baseDosage.resolveRouteOfAdministration().getCodeValue());
         if (baseDosage.hasMethod())
@@ -106,17 +193,12 @@ public class EMediplanConverter {
         return posology;
     }
 
-    /*
-    protected static boolean identifiersMatcher(final List<@NonNull Identifier> identifiersA,
-                                                final List<@NonNull Identifier> identifiersB) {
-        for (final var a : identifiersA) {
-            for (final var b : identifiersB) {
-                if (a.hasSystem() && b.hasSystem() && !a.getSystem().equals(b.getSystem())) continue;
-                if (a.hasValue() && b.hasValue() && a.getValue().equals(b.getValue())) return true;
-            }
-        }
-        return false;
+    protected static EMediplanDose getEMediplanDoseFromChEmedEpr(final Dose chEmedEprDose) {
+        if (chEmedEprDose.isQuantity())
+            return new SimpleDose(Double.parseDouble(chEmedEprDose.quantity().value()));
+        else return new RangeDose(
+                Double.parseDouble(chEmedEprDose.low().value()),
+                Double.parseDouble(chEmedEprDose.high().value())
+                );
     }
-
-     */
 }

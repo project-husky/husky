@@ -5,13 +5,13 @@ import lombok.Getter;
 
 @Getter
 public enum PatientIdType implements EMediplanEnum {
-    INSURANCE_CARD_NUMBER(1),
-    LOCAL_PID(2);
+    INSURANCE_CARD_NUMBER("1"),
+    LOCAL_PID("2");
 
     @JsonValue
-    private final int code;
+    private final String code;
 
-    PatientIdType(int code) {
+    PatientIdType(String code) {
         this.code = code;
     }
 }

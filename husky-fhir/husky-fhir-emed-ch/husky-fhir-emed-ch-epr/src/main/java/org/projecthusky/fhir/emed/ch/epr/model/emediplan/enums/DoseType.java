@@ -5,14 +5,14 @@ import lombok.Getter;
 
 @Getter
 public enum DoseType implements EMediplanEnum {
-    SIMPLE(1),
-    FROM_TO(2),
-    RANGE(3);
+    SIMPLE("1"),
+    FROM_TO("2"),
+    RANGE("3");
 
     @JsonValue
-    private final int code;
+    private final String code;
 
-    DoseType(int code) {
+    DoseType(String code) {
         this.code = code;
     }
 }

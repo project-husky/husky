@@ -1,13 +1,20 @@
 package org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.PosologyType;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.TimeUnit;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.timed.TimedDosage;
 
 /**
  * Describes the application of a medication at constant intervals.
  */
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = true)
 public class CyclicDosage extends PosologyDetail {
     /**
      * The cycle duration unit.
@@ -30,4 +37,8 @@ public class CyclicDosage extends PosologyDetail {
      */
     @JsonProperty("tdpc")
     protected @Nullable Integer numberOfDosesPerCycle;
+
+    public CyclicDosage() {
+        super(PosologyType.CYCLIC);
+    }
 }

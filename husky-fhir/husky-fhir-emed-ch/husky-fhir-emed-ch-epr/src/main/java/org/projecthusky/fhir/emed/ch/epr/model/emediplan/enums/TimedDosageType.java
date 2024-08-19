@@ -5,17 +5,17 @@ import lombok.Getter;
 
 @Getter
 public enum TimedDosageType implements EMediplanEnum {
-    DOSAGE_ONLY(1),
-    TIMES(2),
-    DAY_SEGMENTS(3),
-    WEEK_DAYS(4),
-    DAYS_OF_MONTH(5),
-    INTERVAL(6);
+    DOSAGE_ONLY("1"),
+    TIMES("2"),
+    DAY_SEGMENTS("3"),
+    WEEK_DAYS("4"),
+    DAYS_OF_MONTH("5"),
+    INTERVAL("6");
 
     @JsonValue
-    private final int code;
+    private final String code;
 
-    TimedDosageType(int code) {
+    TimedDosageType(String code) {
         this.code = code;
     }
 }

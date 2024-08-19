@@ -5,13 +5,13 @@ import lombok.Getter;
 
 @Getter
 public enum DosageSequenceType implements EMediplanEnum{
-    DOSAGE(1),
-    PAUSE(2);
+    DOSAGE("1"),
+    PAUSE("2");
 
     @JsonValue
-    private final int code;
+    private final String code;
 
-    DosageSequenceType(int code) {
+    DosageSequenceType(String code) {
         this.code = code;
     }
 }

@@ -6,14 +6,14 @@ import org.projecthusky.common.enums.AdministrativeGender;
 
 @Getter
 public enum Gender implements EMediplanEnum {
-    MALE(1),
-    FEMALE(2),
-    OTHER(3);
+    MALE("1"),
+    FEMALE("2"),
+    OTHER("3");
 
     @JsonValue
-    private final int code;
+    private final String code;
 
-    Gender(int code) {
+    Gender(String code) {
         this.code = code;
     }
 

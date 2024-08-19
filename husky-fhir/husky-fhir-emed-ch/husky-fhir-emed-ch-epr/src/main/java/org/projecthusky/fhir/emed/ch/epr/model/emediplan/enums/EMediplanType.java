@@ -8,14 +8,14 @@ import lombok.Getter;
  */
 @Getter
 public enum EMediplanType implements EMediplanEnum {
-    MEDICATION_PLAN(1),
-    @Deprecated POLYMEDICATION_CHECK(2),
-    PRESCRIPTION(3);
+    MEDICATION_PLAN("1"),
+    @Deprecated POLYMEDICATION_CHECK("2"),
+    PRESCRIPTION("3");
 
     @JsonValue
-    private final int code;
+    private final String code;
 
-    EMediplanType(int code) {
+    EMediplanType(String code) {
         this.code = code;
     }
 }

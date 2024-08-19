@@ -1,14 +1,21 @@
 package org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.timed;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.DayOfWeek;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.TimedDosageType;
 
 import java.util.List;
 
 /**
  * Specifies on which days of the week a medication must be applied.
  */
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = true)
 public class WeekDaysDosage extends TimedDosage {
     /**
      * The days of the week for which the embedded timed dosage must be applied.
@@ -21,4 +28,8 @@ public class WeekDaysDosage extends TimedDosage {
      */
     @JsonProperty("tdo")
     protected EmbeddableTimedDosage dosage;
+
+    public WeekDaysDosage() {
+        super(TimedDosageType.WEEK_DAYS);
+    }
 }

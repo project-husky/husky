@@ -2,14 +2,21 @@ package org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanMedicament;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.PosologyType;
 
 /**
  * Describes when (morning, moon, evening, night) and how much of a medication must be applied daily, in a structured
  * form.
  */
+@EqualsAndHashCode(callSuper = true)
 @Slf4j
+@Getter
+@Setter
 public class DailyDosage extends PosologyDetail {
     /**
      * The doses specify the amount of the medication to be applied in a day segment.
@@ -19,6 +26,10 @@ public class DailyDosage extends PosologyDetail {
      * Note that the unit of dosage is specified at the {@link EMediplanMedicament} level.
      */
     protected double morningDose, noonDose, eveningDose, nightDose;
+
+    public DailyDosage() {
+        super(PosologyType.DAILY);
+    }
 
     @JsonGetter("ds")
     public double[] getDoses() {

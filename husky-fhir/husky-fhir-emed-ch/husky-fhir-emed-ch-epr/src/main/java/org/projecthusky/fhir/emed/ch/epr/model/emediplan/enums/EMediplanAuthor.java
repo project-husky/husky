@@ -8,13 +8,13 @@ import lombok.Getter;
  */
 @Getter
 public enum EMediplanAuthor implements EMediplanEnum {
-    HEALTHCARE_PERSON(1),
-    PATIENT(2);
+    HEALTHCARE_PERSON("1"),
+    PATIENT("2");
 
     @JsonValue
-    private final int code;
+    private final String code;
 
-    EMediplanAuthor(int code) {
+    EMediplanAuthor(String code) {
         this.code = code;
     }
 }
