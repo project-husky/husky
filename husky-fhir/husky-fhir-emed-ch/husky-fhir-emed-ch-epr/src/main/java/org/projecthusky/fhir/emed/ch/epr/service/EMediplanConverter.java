@@ -25,10 +25,18 @@ import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprDocumentPmlc;
 import java.util.List;
 import java.util.stream.Stream;
 
+/**
+ * Utility class to convert CH EMED EPR documents to an eMediplan object equivalent.
+ */
 @Slf4j
 public class EMediplanConverter {
     private EMediplanConverter() {}
 
+    /**
+     * Converts the received PMLC document to an eMediplan object.
+     * @param pmlc The PMLC document to be converted.
+     * @return An equivalent eMediplan object.
+     */
     public static EMediplan toEMediplan(final ChEmedEprDocumentPmlc pmlc) {
         final EMediplan emediplan = new EMediplan();
         emediplan.setPatient(EMediplanPatient.fromEprFhir(pmlc.resolvePatient()));
@@ -81,12 +89,27 @@ public class EMediplanConverter {
         return emediplan;
     }
 
+    /**
+     * Translates a {@link Author} to a prescriber string for eMediplan. The prescriber string, according to the
+     * eMediplan specifications, consists of the prescriber's GLN number.
+     *
+     * @param author The CH EMED EPR Author from which to get a prescriber string.
+     * @return The GLN of the practitioner author, if a professional author, {@code null} otherwise.
+     */
     protected static @Nullable String medicalAuthorToPrescriber(final Author author) {
         if (author.getPractitionerRole() != null)
             return author.getPractitionerRole().resolvePractitioner().resolveGln();
         return null;
     }
 
+    /**
+     * Converts the list of Dosage objects of a CH EMED EPR resource (either medication statement or medication request)
+     * to an {@link EMediplanPosology} object.
+     *
+     * @param baseDosage        The CH EMED EPR resource base dosage.
+     * @param additionalDosages The CH EMED EPR list of additional dosages (if split dose). It can be empty.
+     * @return The equivalent eMediplan posology object.
+     */
     protected static EMediplanPosology toPosology(final ChEmedEprDosage baseDosage,
                                                   List<@NonNull ChEmedEprDosage> additionalDosages) {
         boolean freeTextDosage = false;
@@ -193,6 +216,19 @@ public class EMediplanConverter {
         return posology;
     }
 
+    /**
+     * Converts a CH EMED EPR {@link Dose} to the appropriate {@link EMediplanDose} object.
+     * <p>
+     *     Depending on whether the dose is a simple quantity or a range, the returned object will be an instance of
+     *     {@link SimpleDose} or {@link RangeDose} respectively.
+     * </p>
+     * <p>
+     *     Note that the unit of the dose is ignored. The aim of this method is just to convert the quantity part of the
+     *     dose object, since the unit is specified at a higher level in the eMediplan model.
+     * </p>
+     * @param chEmedEprDose The CH EMED EPR dose to be converted.
+     * @return The resulting {@link EMediplanDose} object.
+     */
     protected static EMediplanDose getEMediplanDoseFromChEmedEpr(final Dose chEmedEprDose) {
         if (chEmedEprDose.isQuantity())
             return new SimpleDose(Double.parseDouble(chEmedEprDose.quantity().value()));
