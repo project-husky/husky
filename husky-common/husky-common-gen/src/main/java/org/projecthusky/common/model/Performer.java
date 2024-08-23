@@ -17,6 +17,7 @@ import org.projecthusky.common.enums.NullFlavor;
 import org.projecthusky.common.hl7cdar2.*;
 import org.projecthusky.common.utils.time.DateTimes;
 
+import java.time.ZoneId;
 import java.util.*;
 
 /**
@@ -343,7 +344,7 @@ public class Performer {
 		if (eurDate == null) {
 			mPerfomer.setTime(new IVLTS(NullFlavor.UNKNOWN_L1));
 		} else {
-			mPerfomer.setTime(new IVLTS(DateTimes.toHl7Dtm(eurDate.toInstant())));
+			mPerfomer.setTime(new IVLTS(DateTimes.toHl7Dtm(eurDate.toInstant(), ZoneId.systemDefault())));
 		}
     }
 
