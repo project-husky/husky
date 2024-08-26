@@ -14,7 +14,7 @@
     <div class="emediplan-body-regular-medications-table" id="active-treatments">
         <th:block th:insert="~{emediplan/emediplan_medications_table :: table(${activeTreatments}, ${lang})}"/>
     </div>
-    <div class="emediplan-body-reserve-medications-table" id="reserve-treatments">
+    <div class="emediplan-body-reserve-medications-table" id="reserve-treatments" th:if="${!asneededTreatments.isEmpty()}">
         <span class="emediplan-body-reserve-medications-table-header">Médicaments en réserve</span>
         <th:block th:insert="~{emediplan/emediplan_medications_table :: table(${asneededTreatments}, ${lang})}"/>
     </div>

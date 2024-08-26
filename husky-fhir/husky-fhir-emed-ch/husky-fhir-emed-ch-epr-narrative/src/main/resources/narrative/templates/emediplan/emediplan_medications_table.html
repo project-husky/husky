@@ -42,28 +42,28 @@
         <!-- TODO divide medication name column in two when adding medication thumbnails -->
         <td colspan="2">[[${statement.resolveMedication().resolveMedicationName()}]]</td>
         <th:block th:if="${dosage.hasIntakes() or dosage.hasSimpleEventTimings()}">
-            <td>
+            <td class="emediplan-day-segment-intake">
                 <th:block th:if="${dosage.hasIntakes()}">
                     <th:block th:insert="~{::singleIntake(${dosage.getMornIntake()}, ${lang})}"/>
                 </th:block>
                 <th:block th:if="${dosage.hasMorningSimpleEventTiming}" th:text="X"/>
                 <th:block th:unless="${dosage.hasIntakes or dosage.hasMorningSimpleEventTiming}">—</th:block>
             </td>
-            <td>
+            <td class="emediplan-day-segment-intake">
                 <th:block th:if="${dosage.hasIntakes()}">
                     <th:block th:insert="~{::singleIntake(${dosage.getNoonIntake()}, ${lang})}"/>
                 </th:block>
                 <th:block th:if="${dosage.hasNoonSimpleEventTiming}" th:text="X"/>
                 <th:block th:unless="${dosage.hasIntakes or dosage.hasNoonSimpleEventTiming}">—</th:block>
             </td>
-            <td>
+            <td class="emediplan-day-segment-intake">
                 <th:block th:if="${dosage.hasIntakes()}">
                     <th:block th:insert="~{::singleIntake(${dosage.getEveIntake()}, ${lang})}"/>
                 </th:block>
                 <th:block th:if="${dosage.hasEveningSimpleEventTiming}" th:text="X"/>
                 <th:block th:unless="${dosage.hasIntakes or dosage.hasEveningSimpleEventTiming}">—</th:block>
             </td>
-            <td>
+            <td class="emediplan-day-segment-intake">
                 <th:block th:if="${dosage.hasIntakes()}">
                     <th:block th:insert="~{::singleIntake(${dosage.getNightIntake()}, ${lang})}"/>
                 </th:block>

@@ -1,6 +1,7 @@
 package org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -25,7 +26,7 @@ public class DailyDosage extends PosologyDetail {
      * </p>
      * Note that the unit of dosage is specified at the {@link EMediplanMedicament} level.
      */
-    protected double morningDose, noonDose, eveningDose, nightDose;
+    protected @JsonIgnore double  morningDose, noonDose, eveningDose, nightDose;
 
     public DailyDosage() {
         super(PosologyType.DAILY);

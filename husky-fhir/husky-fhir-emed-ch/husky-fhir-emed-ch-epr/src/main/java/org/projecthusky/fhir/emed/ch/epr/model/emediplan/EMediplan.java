@@ -4,14 +4,24 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.Data;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.EMediplanAuthor;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.EMediplanType;
 
+import java.io.*;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+import java.util.Objects;
+import java.util.zip.GZIPOutputStream;
 
 /**
  * This is the main eMediplan object, called {@code Medication} in ChMed23A specification. It contains exactly one
@@ -36,8 +46,13 @@ public class EMediplan {
     /**
      * List of medications.
      */
-    protected List<@NonNull EMediplanMedicament> meds;
-    //TODO add exts?
+    @JsonProperty("meds")
+    protected List<@NonNull EMediplanMedicament> medicaments;
+    /**
+     * The list of extensions. Optional if empty.
+     */
+    @JsonProperty("exts")
+    protected @Nullable List<@NonNull EMediplanExtension> extensions;
     /**
      * The type of Medication object, @see MedicationType.
      */
@@ -62,7 +77,7 @@ public class EMediplan {
      * The date of creation. Format: yyyy-mm-ddThh:mm:ss+02:00 (ISO 86012 Combined date and time in UTC)
      * (e.g. 2016-06-16T16:26:15+02:00)
      */
-    @JsonFormat(pattern = "yyyy-MM-ddThh:mm:ssXXX")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssXXX", timezone = "Europe/Zurich")
     @JsonProperty("dt")
     protected Instant timestamp;
     /**
@@ -70,4 +85,62 @@ public class EMediplan {
      */
     @JsonProperty("mk")
     protected @Nullable String remark;
+
+    public List<@NonNull EMediplanMedicament> getMedicaments() {
+        if (medicaments == null) medicaments = new ArrayList<>();
+        return medicaments;
+    }
+
+    public void addMedicament(final @NonNull EMediplanMedicament medicament) {
+        getMedicaments().add(Objects.requireNonNull(medicament));
+    }
+
+    public List<@NonNull EMediplanExtension> getExtensions() {
+        if (extensions == null) extensions = new ArrayList<>();
+        return extensions;
+    }
+
+    public void addExtension(final @NonNull EMediplanExtension extension) {
+        getExtensions().add(Objects.requireNonNull(extension));
+    }
+
+    public @Nullable EMediplanExtension findExtension(final String schema, final String name) {
+        return EMediplanExtension.findExtension(extensions, schema, name);
+    }
+
+    /**
+     * Converts the eMediplan format to the ChTransmissionFormat specified by ChMed23A. This is useful for data
+     * transmission as well as used for the QR code to be embedded in the eMediplan paper/PDF format.
+     *
+     * @return The ChTransmissionFormat string with the eMediplan object information.
+     * @throws JsonProcessingException The eMediplan object could not be serialized to JSON.
+     */
+    @ExpectsValidResource
+    public String toChTransmissionFormat() throws IOException {
+        final var objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+        final var rawJson = objectMapper.writeValueAsString(this);
+        return "ChMed23A." + Base64.getEncoder().encodeToString(compressJson(rawJson));
+    }
+
+    /**
+     * Compresses the serialized eMediplan (JSON) using GZIP, as specified by CHMED23A.
+     * @param rawJson The raw JSON to be compressed.
+     * @return The GZIP compressed byte array.
+     * @throws IOException In case of error compressing the JSON content.
+     */
+    private static byte[] compressJson(final String rawJson) throws IOException {
+        final var inputstream = new ByteArrayInputStream(rawJson.getBytes());
+        final var outputStream = new ByteArrayOutputStream();
+        final var gzipOutputStream = new GZIPOutputStream(outputStream);
+        byte[] buffer = new byte[512];
+        int bytesRead = 0;
+        while ((bytesRead = inputstream.read(buffer)) > -1) {
+            gzipOutputStream.write(buffer, 0, bytesRead);
+        }
+        gzipOutputStream.close();
+        return outputStream.toByteArray();
+    }
 }

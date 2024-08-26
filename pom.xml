@@ -41,6 +41,8 @@
 		<hapi.fhir.version>6.10.2</hapi.fhir.version>
 		<jakarta-jwsapi-version>2.1.0</jakarta-jwsapi-version>
 		<camel.version>3.21.4</camel.version>
+
+		<zxing.version>3.5.3</zxing.version>
 	</properties>
 	<scm>
 		<connection>scm:git:https://github.com/project-husky/husky.git</connection>
@@ -637,6 +639,18 @@
 						<artifactId>hapi-base</artifactId>
 					</exclusion>
 				</exclusions>
+			</dependency>
+
+			<!-- QR code generation -->
+			<dependency>
+				<groupId>com.google.zxing</groupId>
+				<artifactId>core</artifactId>
+				<version>${zxing.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.zxing</groupId>
+				<artifactId>javase</artifactId>
+				<version>${zxing.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

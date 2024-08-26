@@ -8,12 +8,12 @@
   ~ whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
 */-->
 <th:block th:fragment="patient-data(patient, lang)">
-    <th:block th:insert="~{datatypes :: human-name(${patient.name[0]}, ${lang})}"/><br/>
-    <th:block th:insert="~{datatypes :: date-time(${patient.getBirthDateElement()}, ${lang})}"/>
-    <th:block th:insert="~{emediplan/emediplan_datatypes :: admin-gender(${patient.resolveGender()}, ${lang})}"/><br/>
-    <th:block th:if="${patient.resolveAddress() != null}">
+    <span class="emediplan-patient-data-name" th:insert="~{datatypes :: human-name(${patient.name[0]}, ${lang})}"/>
+    <span class="emediplan-patient-data-birthdate" th:insert="~{emediplan/emediplan_datatypes :: fhirDate(${patient.getBirthDateElement()}, ${lang})}"/>
+    <span class="emediplan-patient-data-admin-gender" th:insert="~{emediplan/emediplan_datatypes :: admin-gender(${patient.resolveGender()}, ${lang})}"/>
+    <span class="emediplan-patient-data-address" th:if="${patient.hasAddress()}">
         <th:block th:insert="~{emediplan/emediplan_datatypes :: address(${patient.resolveAddress()}, ${lang})}"/>
-    </th:block>
+    </span>
     <!-- TODO add phone number -->
 
     <!-- TODO add medical and risk parameters -->
@@ -21,5 +21,5 @@
 
 <th:block th:fragment="short-patient-data(patient, lang)">
     <th:block th:insert="~{datatypes :: human-name(${patient.name[0]}, ${lang})}"/>
-    (<th:block th:insert="~{datatypes :: date-time(${patient.getBirthDateElement()}, ${lang})}"/>)
+    (<th:block th:insert="~{emediplan/emediplan_datatypes :: fhirDate(${patient.getBirthDateElement()}, ${lang})}"/>)
 </th:block>

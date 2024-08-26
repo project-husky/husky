@@ -79,6 +79,8 @@ public class EMediplanConverter {
             }
             if (statement.hasSubstitution())
                 medicament.setForbidSubstitution(statement.resolveSubstitution() == SubstanceAdministrationSubstitutionCode.EQUIVALENT);
+
+            emediplan.addMedicament(medicament);
         }
 
         emediplan.setType(EMediplanType.MEDICATION_PLAN);

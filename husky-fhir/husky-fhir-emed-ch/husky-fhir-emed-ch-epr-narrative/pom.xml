@@ -10,7 +10,7 @@
     <name>Husky FHIR eMedication Switzerland EPR Narrative</name>
 
     <properties>
-        <openhtmltopdf-version>1.0.10</openhtmltopdf-version>
+        <openhtmltopdf-version>1.1.21</openhtmltopdf-version>
     </properties>
 
     <dependencies>
@@ -35,23 +35,23 @@
 
         <!-- HTML to PDF conversion -->
         <dependency>
-            <groupId>com.openhtmltopdf</groupId>
+            <groupId>io.github.openhtmltopdf</groupId>
             <artifactId>openhtmltopdf-core</artifactId> <!-- LGPL -->
             <version>${openhtmltopdf-version}</version>
         </dependency>
         <dependency>
-            <groupId>com.openhtmltopdf</groupId>
+            <groupId>io.github.openhtmltopdf</groupId>
             <artifactId>openhtmltopdf-pdfbox</artifactId> <!-- LGPL -->
             <version>${openhtmltopdf-version}</version>
         </dependency>
         <dependency>
-            <groupId>com.openhtmltopdf</groupId>
+            <groupId>io.github.openhtmltopdf</groupId>
             <artifactId>openhtmltopdf-slf4j</artifactId>
             <version>${openhtmltopdf-version}</version>
         </dependency>
         <dependency>
             <!-- SVG support plugin. -->
-            <groupId>com.openhtmltopdf</groupId>
+            <groupId>io.github.openhtmltopdf</groupId>
             <artifactId>openhtmltopdf-svg-support</artifactId>
             <version>${openhtmltopdf-version}</version>
         </dependency>
@@ -65,6 +65,16 @@
             <!-- The Checker Framework enhances Java's type system to make it more powerful and useful. -->
             <groupId>org.checkerframework</groupId>
             <artifactId>checker-qual</artifactId> <!-- MIT -->
+        </dependency>
+
+        <!-- QR code generator -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
         </dependency>
 
         <!-- Tests (EPL 2.0) -->

@@ -20,7 +20,7 @@ public class EMediplanPosology {
      * or date only) (e.g. 2016-06-16T16:26:15+02:00).
      */
     @JsonProperty("dtFrom")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Europe/Zurich")
     protected @Nullable Instant start;
     /**
      * To date. Format: YYYY-MM-DDThh:mm:ss+02:00 or YYYY-MM-DD (ISO 860114 Combined date and time including time zone
@@ -29,7 +29,7 @@ public class EMediplanPosology {
      * also on 2015-05-01.
      */
     @JsonProperty("dtTo")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Europe/Zurich")
     protected @Nullable Instant end;
     /**
      * Reserve medication. True if in reserve, false otherwise. By default, false is assumed.
