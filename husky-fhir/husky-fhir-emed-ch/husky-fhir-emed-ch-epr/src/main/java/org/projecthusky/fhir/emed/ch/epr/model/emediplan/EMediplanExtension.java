@@ -7,6 +7,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ import java.util.List;
  */
 @Data
 @AllArgsConstructor
-public class EMediplanExtension {
+public class EMediplanExtension implements EMediplanExtendable {
     /**
      * Name of the field. Mandatory.
      */
@@ -36,6 +37,11 @@ public class EMediplanExtension {
     @JsonProperty("exts")
     protected @Nullable List<@NonNull EMediplanExtension> extensions;
 
+    public List<@NonNull EMediplanExtension> getExtensions() {
+        if (extensions == null) extensions = new ArrayList<>();
+        return extensions;
+    }
+
     /**
      * Finds an extension within the provided list of extensions whose schema and name match the provided ones. If the
      * list of extensions is null or empty, or if no match is found, {@code null} is returned.
@@ -55,17 +61,5 @@ public class EMediplanExtension {
             }
         }
         return null;
-    }
-
-    /**
-     * Finds an extension within the embedded list of extensions whose schema and name match the provided ones. If the
-     * list of embedded extensions is null or empty, or if no match is found, {@code null} is returned.
-     *
-     * @param schema     The schema to be matched.
-     * @param name       The field name to be matched.
-     * @return The matching extension, if any, {@code null} otherwise.
-     */
-    public @Nullable EMediplanExtension findExtension(final String schema, final String name) {
-        return findExtension(extensions, schema, name);
     }
 }

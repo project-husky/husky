@@ -7,15 +7,15 @@ import lombok.Getter;
  * Called {@code MedicationType} in ChMed23A specifications.
  */
 @Getter
-public enum EMediplanType implements EMediplanEnum {
-    MEDICATION_PLAN("1"),
-    @Deprecated POLYMEDICATION_CHECK("2"),
-    PRESCRIPTION("3");
+public enum EMediplanType implements EMediplanEnum<Integer> {
+    MEDICATION_PLAN(1),
+    @Deprecated POLYMEDICATION_CHECK(2),
+    PRESCRIPTION(3);
 
     @JsonValue
-    private final String code;
+    private final Integer code;
 
-    EMediplanType(String code) {
+    EMediplanType(int code) {
         this.code = code;
     }
 }

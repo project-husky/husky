@@ -8,7 +8,7 @@ import org.projecthusky.fhir.emed.ch.epr.enums.RegularUnitCodeAmbu;
  * HCI INDEX CdTyp9 table.
  */
 @Getter
-public enum CdTyp9 implements EMediplanEnum{
+public enum CdTyp9 implements EMediplanEnum<String>{
     PERCENT("%"),
     APPLICATION("Appl"),
     BLISTER("Blist"),

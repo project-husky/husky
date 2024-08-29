@@ -4,14 +4,14 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 
 @Getter
-public enum DosageSequenceType implements EMediplanEnum{
-    DOSAGE("1"),
-    PAUSE("2");
+public enum DosageSequenceType implements EMediplanEnum<Integer> {
+    DOSAGE(1),
+    PAUSE(2);
 
     @JsonValue
-    private final String code;
+    private final Integer code;
 
-    DosageSequenceType(String code) {
+    DosageSequenceType(int code) {
         this.code = code;
     }
 }

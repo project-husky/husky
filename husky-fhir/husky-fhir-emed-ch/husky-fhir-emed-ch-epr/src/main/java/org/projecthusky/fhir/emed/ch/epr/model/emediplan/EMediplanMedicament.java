@@ -6,14 +6,17 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.MedicamentIdType;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.EMediplanPosology;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.repetition.Repetition;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.repetition.RepetitionDuration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Information about a medication as well as its dosage.
  */
 @Data
-public class EMediplanMedicament {
+public class EMediplanMedicament implements EMediplanExtendable {
     /**
      * The id defined of the type specified by idType. If idType is NONE, then add a free text description here.
      */
@@ -42,7 +45,20 @@ public class EMediplanMedicament {
      */
     @JsonProperty("prscbBy")
     protected @Nullable String prescriber;
-    //TODO add reps
+    /**
+     * The repetition object indicates how often a prescription can be repeated or how long the prescription is valid.
+     * <p>
+     * If no repetition object is set, a {@link RepetitionDuration} is assumed with value 1, that is: the prescription
+     * can be repeated once. This means the prescription would be allow to be dispensed <b>twice</b>: the initial
+     * dispense that is always allowed plus the one repetition that is assumed by default.
+     * </p>
+     * <p>
+     * If the dispense is not to be allowed to be done more than once, it is required to set a repetition object with
+     * value 0 (no repetition).
+     * </p>
+     */
+    @JsonProperty("reps")
+    protected @Nullable Repetition repetition;
     /**
      * {@code true} if the medication should not be substituted, {@code false} otherwise. By default, false is assumed.
      */
@@ -60,5 +76,14 @@ public class EMediplanMedicament {
      */
     @JsonProperty("nbPack")
     protected @Nullable Double numberOfPackages;
-    //TODO add exts
+    /**
+     * The list of extensions. Optional if empty.
+     */
+    @JsonProperty("exts")
+    protected @Nullable List<@NonNull EMediplanExtension> extensions;
+
+    public List<@NonNull EMediplanExtension> getExtensions() {
+        if (extensions == null) extensions = new ArrayList<>();
+        return extensions;
+    }
 }

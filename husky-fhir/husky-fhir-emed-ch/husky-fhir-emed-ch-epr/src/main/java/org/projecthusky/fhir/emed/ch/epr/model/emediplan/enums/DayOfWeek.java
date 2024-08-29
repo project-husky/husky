@@ -4,19 +4,19 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 
 @Getter
-public enum DayOfWeek implements EMediplanEnum {
-    MONDAY("1"),
-    TUESDAY("2"),
-    WEDNESDAY("3"),
-    THURSDAY("4"),
-    FRIDAY("5"),
-    SATURDAY("6"),
-    SUNDAY("7");
+public enum DayOfWeek implements EMediplanEnum<Integer> {
+    MONDAY(1),
+    TUESDAY(2),
+    WEDNESDAY(3),
+    THURSDAY(4),
+    FRIDAY(5),
+    SATURDAY(6),
+    SUNDAY(7);
 
     @JsonValue
-    private final String code;
+    private final Integer code;
 
-    DayOfWeek(String code) {
+    DayOfWeek(int code) {
         this.code = code;
     }
 }

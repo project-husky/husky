@@ -39,7 +39,11 @@ public class EMediplanConverter {
      */
     public static EMediplan toEMediplan(final ChEmedEprDocumentPmlc pmlc) {
         final EMediplan emediplan = new EMediplan();
-        emediplan.setPatient(EMediplanPatient.fromEprFhir(pmlc.resolvePatient()));
+
+        emediplan.setPatient(EMediplanPatient.fromEprFhir(
+                pmlc.resolvePatient(),
+                pmlc.resolveComposition().resolvePatientWeightObservation()
+        ));
 
         final var lastStatement = pmlc.resolveLastStatement();
         if (lastStatement != null) {

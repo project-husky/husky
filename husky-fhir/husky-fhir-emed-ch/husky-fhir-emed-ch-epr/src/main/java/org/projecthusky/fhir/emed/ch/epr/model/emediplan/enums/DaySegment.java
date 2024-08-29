@@ -5,16 +5,16 @@ import lombok.Getter;
 import org.projecthusky.fhir.emed.ch.epr.enums.TimingEventAmbu;
 
 @Getter
-public enum DaySegment implements EMediplanEnum {
-    MORNING("1"),
-    NOON("2"),
-    EVENING("3"),
-    NIGHT("4");
+public enum DaySegment implements EMediplanEnum<Integer> {
+    MORNING(1),
+    NOON(2),
+    EVENING(3),
+    NIGHT(4);
 
     @JsonValue
-    private final String code;
+    private final Integer code;
 
-    DaySegment(String code) {
+    DaySegment(int code) {
         this.code = code;
     }
 

@@ -5,15 +5,15 @@ import lombok.Getter;
 import org.projecthusky.common.enums.AdministrativeGender;
 
 @Getter
-public enum Gender implements EMediplanEnum {
-    MALE("1"),
-    FEMALE("2"),
-    OTHER("3");
+public enum Gender implements EMediplanEnum<Integer> {
+    MALE(1),
+    FEMALE(2),
+    OTHER(3);
 
     @JsonValue
-    private final String code;
+    private final Integer code;
 
-    Gender(String code) {
+    Gender(int code) {
         this.code = code;
     }
 

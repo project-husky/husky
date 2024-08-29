@@ -8,11 +8,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.Observation;
 import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.Gender;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,7 +23,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Slf4j
-public class EMediplanPatient {
+public class EMediplanPatient implements EMediplanExtendable {
     /**
      * First name.
      */
@@ -56,8 +59,16 @@ public class EMediplanPatient {
      * List of patient identifiers.
      */
     protected List<EMediplanPatientId> ids;
-    //TODO add exts
-    //TODO add mData
+    /**
+     * The list of extensions. Optional if empty.
+     */
+    @JsonProperty("exts")
+    protected @Nullable List<@NonNull EMediplanExtension> extensions;
+    /**
+     * Medical data information.
+     */
+    @JsonProperty("mData")
+    protected @Nullable EMediplanPatientMedicalData medicalData;
     /**
      * List of phone numbers.
      */
@@ -67,13 +78,19 @@ public class EMediplanPatient {
      */
     protected List<@NonNull String> emails;
 
+    public List<@NonNull EMediplanExtension> getExtensions() {
+        if (extensions == null) extensions = new ArrayList<>();
+        return extensions;
+    }
+
     /**
      * Gets an EMediplanPatient from an CH EPR patient.
      *
      * @param eprFhirPatient The CH EPR patient to be converted.
      * @return The eMediplan patient.
      */
-    public static EMediplanPatient fromEprFhir(final ChCorePatientEpr eprFhirPatient) {
+    public static EMediplanPatient fromEprFhir(final ChCorePatientEpr eprFhirPatient,
+                                               final @Nullable Observation weightObservation) {
         String language = null;
         final var fhirAddress = eprFhirPatient.resolveAddress();
         final var preferredLanguage = eprFhirPatient.resolveLanguageOfCorrespondence();
@@ -90,6 +107,15 @@ public class EMediplanPatient {
                         return null;
                     });
         }
+        EMediplanPatientMedicalData medicalData = null;
+        if (weightObservation != null &&
+                weightObservation.hasValueQuantity() &&
+                weightObservation.getValueQuantity().hasCode() &&
+                "kg".equals(weightObservation.getValueQuantity().getCode())
+        ) {
+            medicalData = new EMediplanPatientMedicalData();
+            medicalData.setWeight(weightObservation.getValueQuantity().getValue().doubleValue());
+        }
         return new EMediplanPatient(
                 eprFhirPatient.getNameFirstRep().getGivenAsSingleString(),
                 eprFhirPatient.getNameFirstRep().getFamily(),
@@ -98,6 +124,8 @@ public class EMediplanPatient {
                 fhirAddress == null? null : EMediplanPostalAddress.fromFhirAddress(fhirAddress),
                 language,
                 eprFhirPatient.getIdentifier().stream().map(EMediplanPatientId::fromFhirIdentifier).toList(),
+                null,
+                medicalData,
                 eprFhirPatient.resolvePhoneNumbersAsStrings(true),
                 eprFhirPatient.resolveEmailAddressesAsStrings(true)
         );

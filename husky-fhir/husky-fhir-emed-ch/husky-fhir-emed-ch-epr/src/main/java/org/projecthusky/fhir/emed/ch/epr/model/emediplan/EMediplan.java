@@ -27,10 +27,10 @@ import java.util.zip.GZIPOutputStream;
  * This is the main eMediplan object, called {@code Medication} in ChMed23A specification. It contains exactly one
  * patient and a list of medications (named medicament in ChMed23A).
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @Data
-public class EMediplan {
+public class EMediplan implements EMediplanExtendable {
     /**
      * The patient.
      */
@@ -100,20 +100,13 @@ public class EMediplan {
         return extensions;
     }
 
-    public void addExtension(final @NonNull EMediplanExtension extension) {
-        getExtensions().add(Objects.requireNonNull(extension));
-    }
-
-    public @Nullable EMediplanExtension findExtension(final String schema, final String name) {
-        return EMediplanExtension.findExtension(extensions, schema, name);
-    }
-
     /**
      * Converts the eMediplan format to the ChTransmissionFormat specified by ChMed23A. This is useful for data
      * transmission as well as used for the QR code to be embedded in the eMediplan paper/PDF format.
      *
      * @return The ChTransmissionFormat string with the eMediplan object information.
      * @throws JsonProcessingException The eMediplan object could not be serialized to JSON.
+     * @throws IOException The eMediplan object could not be serialized and compressed to ChTransmissionFormat.
      */
     @ExpectsValidResource
     public String toChTransmissionFormat() throws IOException {

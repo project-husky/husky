@@ -4,14 +4,14 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 
 @Getter
-public enum PatientIdType implements EMediplanEnum {
-    INSURANCE_CARD_NUMBER("1"),
-    LOCAL_PID("2");
+public enum PatientIdType implements EMediplanEnum<Integer> {
+    INSURANCE_CARD_NUMBER(1),
+    LOCAL_PID(2);
 
     @JsonValue
-    private final String code;
+    private final Integer code;
 
-    PatientIdType(String code) {
+    PatientIdType(int code) {
         this.code = code;
     }
 }
