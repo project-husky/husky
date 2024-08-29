@@ -31,6 +31,8 @@ import java.util.zip.GZIPOutputStream;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @Data
 public class EMediplan implements EMediplanExtendable {
+    public static final String EMEDIPLAN_VERSION = "ChMed23A";
+
     /**
      * The patient.
      */
@@ -115,7 +117,7 @@ public class EMediplan implements EMediplanExtendable {
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
         final var rawJson = objectMapper.writeValueAsString(this);
-        return "ChMed23A." + Base64.getEncoder().encodeToString(compressJson(rawJson));
+        return EMEDIPLAN_VERSION + "." + Base64.getEncoder().encodeToString(compressJson(rawJson));
     }
 
     /**
