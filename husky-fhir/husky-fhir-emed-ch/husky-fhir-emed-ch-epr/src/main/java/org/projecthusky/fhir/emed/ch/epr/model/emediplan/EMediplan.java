@@ -11,9 +11,13 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.Data;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.OperationOutcome;
+import org.projecthusky.common.utils.datatypes.Gln;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.EMediplanAuthor;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.EMediplanType;
+import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
 import java.io.*;
 import java.time.Instant;
@@ -26,11 +30,14 @@ import java.util.zip.GZIPOutputStream;
 /**
  * This is the main eMediplan object, called {@code Medication} in ChMed23A specification. It contains exactly one
  * patient and a list of medications (named medicament in ChMed23A).
+ * <p>
+ * Based on the CHMed23A specs doc version 2.1 and the CHMed23A posology specs doc version 2.1.
+ * </p>
  */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @Data
-public class EMediplan implements EMediplanExtendable {
+public class EMediplan implements EMediplanExtendable, EMediplanObject {
     public static final String EMEDIPLAN_VERSION = "ChMed23A";
 
     /**
@@ -56,10 +63,11 @@ public class EMediplan implements EMediplanExtendable {
     @JsonProperty("exts")
     protected @Nullable List<@NonNull EMediplanExtension> extensions;
     /**
-     * The type of Medication object, @see MedicationType.
+     * The type of Medication object, see {@link EMediplanType}. It is allowed to be missing if the author is a person,
+     * in which case it is assumed that it is a {@link EMediplanType#MEDICATION_PLAN}.
      */
     @JsonProperty("medType")
-    protected EMediplanType type;
+    protected @Nullable EMediplanType type;
     /**
      * The id of the Medication object. The eMediplan document creator is responsible for assigning the id.
      */
@@ -100,6 +108,135 @@ public class EMediplan implements EMediplanExtendable {
     public List<@NonNull EMediplanExtension> getExtensions() {
         if (extensions == null) extensions = new ArrayList<>();
         return extensions;
+    }
+
+    /**
+     * Resolves the eMediplan type, which can be missing for eMediplan objects authored by a patient, because a
+     * Medication Plan is assumed (since they are not allowed to author prescriptions).
+     * @return The resolved {@link EMediplanType}.
+     */
+    @ExpectsValidResource
+    public EMediplanType resolveType() {
+        if (type == null) {
+            if (author == null) throw new InvalidEmedContentException("The medication object author cannot be missing or empty.");
+            if (author == EMediplanAuthor.HEALTHCARE_PERSON)
+                throw new InvalidEmedContentException("The medication object type cannot be missing if the author is a healthcare person.");
+            return EMediplanType.MEDICATION_PLAN;
+        } else return type;
+    }
+
+    public ValidationResult validate() {
+        final var result = new ValidationResult();
+
+        if (author == null)
+            result.add(getRequiredFieldValidationIssue(
+                    "Medication.auth",
+                    "The author type is missing but it is mandatory."
+            ));
+        else {
+            final var resolvedType = resolveType();
+
+            // Certain checks need the author to be present to determine the validation result
+            if (hcPerson == null) {
+                if (author == EMediplanAuthor.HEALTHCARE_PERSON)
+                    result.add(getRequiredFieldValidationIssue(
+                            "Medication.hcPerson",
+                            "The hcPerson object is missing, but it is required when the author is a healthcare person."
+                    ));
+            } else {
+                //TODO validate hcperson object
+                if (author == EMediplanAuthor.PATIENT) {
+                    result.add(getValidationIssue(
+                            OperationOutcome.IssueSeverity.WARNING,
+                            OperationOutcome.IssueType.INVALID,
+                       "Medication.hcPerson",
+                    "The healthcare person object is present, but the author type is a patient."
+                    ));
+                }
+            }
+
+            if (hcOrg == null) {
+                if (author == EMediplanAuthor.HEALTHCARE_PERSON)
+                    result.add(getRequiredFieldValidationIssue(
+                            "Medication.hcOrg",
+                            "The hcOrg object is missing, but it is required when the author is a healthcare person."
+                    ));
+            } else {
+                //TODO validate hcorg
+            }
+
+            if (medicaments == null || medicaments.isEmpty()) {
+                if (resolvedType == EMediplanType.PRESCRIPTION)
+                    result.add(getRequiredFieldValidationIssue(
+                            "Medication.meds",
+                            "The list of medicaments is missing or empty, but it is required to have at least one element when the Medication type is a Prescription."
+                    ));
+            } else {
+                //TODO validate meds
+            }
+
+            if (resolvedType == EMediplanType.POLYMEDICATION_CHECK)
+                result.add(getValidationIssue(
+                        OperationOutcome.IssueSeverity.ERROR,
+                        OperationOutcome.IssueType.CODEINVALID,
+                        "Medication.medType",
+                        "The PolymedicationCheck (PMC) medication type is deprecated and should not be used."
+                ));
+
+            if (author == EMediplanAuthor.PATIENT && resolvedType == EMediplanType.PRESCRIPTION)
+                result.add(getValidationIssue(
+                        OperationOutcome.IssueSeverity.ERROR,
+                        OperationOutcome.IssueType.CODEINVALID,
+                        "Medication.medType",
+                        "If the author is a patient, the medication type cannot be a prescription."
+                ));
+
+            if (recipient != null) {
+                if (!Gln.match(recipient))
+                    result.add(getValidationIssue(
+                            OperationOutcome.IssueSeverity.ERROR,
+                            OperationOutcome.IssueType.VALUE,
+                            "Medication.rec",
+                            "The medication recipient content is not a valid GLN."
+                    ));
+                if (resolvedType == EMediplanType.MEDICATION_PLAN)
+                    result.add(getValidationIssue(
+                            OperationOutcome.IssueSeverity.WARNING,
+                            OperationOutcome.IssueType.INVALID,
+                            "Medication.rec",
+                            "The recipient object is present, but the medication type is not a prescription."
+                    ));
+            }
+        }
+
+        if (patient == null)
+            result.add(getRequiredFieldValidationIssue(
+                    "Medication.patient",
+                    "The patient object is missing, but it is required."
+            ));
+        else {
+            //TODO validate patient
+        }
+
+        //TODO validate exts?
+
+        if (timestamp == null)
+            result.add(getRequiredFieldValidationIssue(
+                    "Medication.dt",
+                    "The date of creation field is missing but it is mandatory"
+            ));
+
+        return result;
+    }
+
+    public void trim() {
+        //TODO trim patient
+        //TODO trim hcperson
+        //TODO trim hcorg
+        //TODO trim meds
+        //TODO trim exts?
+        if (type != null && type == EMediplanType.MEDICATION_PLAN && author != null && author == EMediplanAuthor.PATIENT)
+            type = null;
     }
 
     /**
