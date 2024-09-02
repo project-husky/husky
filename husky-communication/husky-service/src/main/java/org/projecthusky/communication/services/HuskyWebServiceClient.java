@@ -341,10 +341,8 @@ public class HuskyWebServiceClient {
 		return exchange.getMessage().getBody(PixV3QueryResponse.class);
 	}
 
-	public QueryResponse sendRegistryStoredFindDocumentsQuery(
-			XdsRegistryStoredFindDocumentsQuery query, SecurityHeaderElement securityHeader,
-			URI destination, QueryReturnType returnType, String messageId)
-			throws SerializeException, ParserConfigurationException, IOException {
+	public QueryResponse sendRegistryStoredFindDocumentsQuery(XdsRegistryStoredFindDocumentsQuery query, URI destination,
+			QueryReturnType returnType, String messageId) throws SerializeException, ParserConfigurationException, IOException {
 		QueryRegistry queryRegistry = new QueryRegistry(query.getIpfQuery());
 		queryRegistry.setReturnType(returnType);
 
@@ -356,13 +354,12 @@ public class HuskyWebServiceClient {
 				strippedUrl, //
 				destination.toString().contains(HuskyUtils.HTTPS_LITERAL), //
 				this.atnaConfigMode.equals(AtnaConfigMode.SECURE));
-		Exchange exchange = send(endpoint, queryRegistry, securityHeader, messageId, null);
+		Exchange exchange = send(endpoint, queryRegistry, query.getXuaToken(), messageId, null);
 
 		return exchange.getMessage().getBody(QueryResponse.class);
 	}
 
-	public RetrievedDocumentSet send(XdsDocumentSetRequest request,
-			SecurityHeaderElement securityHeader, URI destination, String messageId)
+	public RetrievedDocumentSet send(XdsDocumentSetRequest request, URI destination, String messageId)
 			throws SerializeException, ParserConfigurationException, IOException {
 		RetrieveDocumentSet retrieveDocumentSet = new RetrieveDocumentSet();
 
@@ -376,7 +373,7 @@ public class HuskyWebServiceClient {
 				XDS.Interactions.ITI_43.getWsTransactionConfiguration().getName(), //
 				destination, //
 				this.atnaConfigMode.equals(AtnaConfigMode.SECURE));
-		Exchange exchange = send(endpoint, retrieveDocumentSet, securityHeader, messageId, null);
+		Exchange exchange = send(endpoint, retrieveDocumentSet, request.getXuaToken(), messageId, null);
 
 		return exchange.getMessage().getBody(RetrievedDocumentSet.class);
 	}
@@ -456,8 +453,8 @@ public class HuskyWebServiceClient {
 	/** It implements the following IHE transaction: [ITI-18] Find folders */
 	public QueryResponse sendQueryFoldersRequest(XdsFindFoldersStoredQuery findFoldersStoredQuery)
 			throws SerializeException, ParserConfigurationException, IOException {
-		return this.sendRegistryStoredFindDocumentsQuery(findFoldersStoredQuery, null,
-				findFoldersStoredQuery.getDestination().getUri(), QueryReturnType.LEAF_CLASS, null);
+		return this.sendRegistryStoredFindDocumentsQuery(findFoldersStoredQuery, findFoldersStoredQuery.getDestination().getUri(),
+				QueryReturnType.LEAF_CLASS, null);
 	}
 
 	/**

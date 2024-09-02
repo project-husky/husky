@@ -418,8 +418,7 @@ public class HuskyService {
   public RetrievedDocumentSet send(XdsDocumentSetRequest retrievedDocumentsRequest)
       throws SerializeException, ParserConfigurationException, IOException {
     Assert.notNull(retrievedDocumentsRequest, "The document set request query can not be null.");
-    return this.wsClient.send(retrievedDocumentsRequest, null, retrievedDocumentsRequest.getDestination().getUri(),
-        null);
+    return this.wsClient.send(retrievedDocumentsRequest, retrievedDocumentsRequest.getDestination().getUri(), null);
   }
 
   /**
@@ -431,8 +430,8 @@ public class HuskyService {
    */
   public QueryResponse send(XdsRegistryStoredFindDocumentsQuery query) throws Exception {
     Assert.notNull(query, "The find documents query can not be null.");
-    return this.wsClient.sendRegistryStoredFindDocumentsQuery(query, null,
-        query.getDestination().getUri(), QueryReturnType.LEAF_CLASS, null);
+    return this.wsClient.sendRegistryStoredFindDocumentsQuery(query, query.getDestination().getUri(),
+        QueryReturnType.LEAF_CLASS, null);
   }
 
   /**
