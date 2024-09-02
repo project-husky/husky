@@ -18,6 +18,7 @@ import org.projecthusky.common.utils.time.DateTimes;
 import org.projecthusky.common.utils.time.Hl7Dtm;
 
 import java.time.Instant;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -113,7 +114,7 @@ public class Participant {
 		if (date == null) {
 			mParticipant.setTime(new IVLTS(NullFlavor.UNKNOWN_L1));
 		} else {
-			mParticipant.setTime(new IVLTS(DateTimes.toHl7Dtm(date.toInstant())));
+			mParticipant.setTime(new IVLTS(DateTimes.toHl7Dtm(date.toInstant(), ZoneId.systemDefault())));
 		}
     }
 
