@@ -20,6 +20,7 @@ import org.projecthusky.common.utils.time.DateTimes;
 import org.projecthusky.common.utils.time.Hl7Dtm;
 
 import java.time.Instant;
+import java.time.ZoneId;
 import java.util.*;
 
 /**
@@ -49,7 +50,7 @@ public class Author {
         Date dateTime = getTimeAsDate();
 
 		if (dateTime != null) {
-			mAuthor.setTime(DateTimes.toDateTs(dateTime.toInstant()));
+			mAuthor.setTime(DateTimes.toDateTs(dateTime.toInstant(), ZoneId.systemDefault()));
 		}
 
         setTime(null);
@@ -126,7 +127,7 @@ public class Author {
 		Date dateTime = getTimeAsDate();
 
 		if (dateTime != null) {
-			mAuthor.setTime(DateTimes.toDateTs(dateTime.toInstant()));
+			mAuthor.setTime(DateTimes.toDateTs(dateTime.toInstant(), ZoneId.systemDefault()));
 		}
 
         setTime(null);
@@ -656,7 +657,7 @@ public class Author {
 		if (date != null) {
 			mAuthor.setTime(DateTimes.toDateTs(date.toInstant(), date.getTimeZone().toZoneId()));
         } else {
-			mAuthor.setTime(DateTimes.toDateTs(new Date().toInstant()));
+			mAuthor.setTime(DateTimes.toDateTs(new Date().toInstant(), ZoneId.systemDefault()));
         }
     }
 

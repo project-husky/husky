@@ -14,6 +14,7 @@ package org.projecthusky.common.model;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -297,7 +298,7 @@ public class Patient extends Person {
      * @param birthDay the new birthday
      */
     public void setBirthday(ZonedDateTime birthDay) {
-		mPatient.setBirthTime(DateTimes.toDateTs(birthDay));
+		mPatient.setBirthTime(DateTimes.toDateTs(birthDay, birthDay.getZone()));
     }
 
     /**
