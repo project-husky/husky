@@ -38,12 +38,14 @@ public final class DateTimes {
      */
     private static final DateTimeFormatter TS_DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMddHHmmssZ")
         .withZone(ZoneId.systemDefault());
+    private static final String TS_DATETIME_FORMAT = "yyyyMMddHHmmssZ";
 
     /**
      * The TS.CH.TZ (TS) date format.
      */
     private static final DateTimeFormatter TS_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd")
         .withZone(ZoneId.systemDefault());
+    private static final String TS_DATE_FORMAT = "yyyyMMdd";
 
     /**
      * This class is not instantiable.
@@ -228,21 +230,49 @@ public final class DateTimes {
      *
      * @param instant The instant to convert.
      * @return the equivalent zoned date time.
+     * @deprecated use {@link DateTimes#getZonedDateTime(Instant, ZoneId)} instead, to control the time zone.
      */
     @NonNull
+    @Deprecated(since = "2024-08-23", forRemoval = true)
     public static ZonedDateTime getZonedDateTime(@NonNull final Instant instant) {
         return ZonedDateTime.ofInstant(instant, ZoneId.of("Europe/Zurich"));
     }
 
     /**
-     * Formats an {@link Instant} to an HL7 DTM. UTC is assumed.
+     * Converts an {@link Instant} to a {@link ZonedDateTime}.
+     *
+     * @param instant The instant to convert.
+     * @param zone    The time zone to use.
+     * @return the equivalent zoned date time.
+     */
+    @NonNull
+    public static ZonedDateTime getZonedDateTime(@NonNull final Instant instant, @NonNull final ZoneId zone) {
+        return ZonedDateTime.ofInstant(instant, zone);
+    }
+
+    /**
+     * Formats an {@link Instant} to an HL7 DTM. Local time zone is assumed.
      *
      * @param instant The instant to convert.
      * @return the resulting HL7 DTM.
+     * @deprecated use {@link DateTimes#toHl7Dtm(Instant, ZoneId)} instead, to control the time zone.
      */
     @NonNull
+    @Deprecated(since = "2024-08-23", forRemoval = true)
     public static String toHl7Dtm(@NonNull final Instant instant) {
         return HL7_DATETIME_FORMATTER.format(instant);
+    }
+
+    /**
+     * Formats an {@link Instant} to an HL7 DTM.
+     *
+     * @param instant The instant to convert.
+     * @param zone    The time zone to use.
+     * @return the resulting HL7 DTM.
+     */
+    @NonNull
+    public static String toHl7Dtm(@NonNull final Instant instant, @NonNull final ZoneId zone) {
+        return DateTimeFormatter.ofPattern(TS_DATETIME_FORMAT).withZone(zone).format(instant);
     }
 
     /**
@@ -251,11 +281,27 @@ public final class DateTimes {
      *
      * @param temporal The temporal object to convert.
      * @return the resulting timestamp.
+     * @deprecated use {@link DateTimes#toDatetimeTs(TemporalAccessor, ZoneId)} instead, to control the time zone.
      */
     @NonNull
+    @Deprecated(since = "2024-08-23", forRemoval = true)
     public static TS toDatetimeTs(@NonNull final TemporalAccessor temporal) {
         final TS ts = new TS();
         ts.setValue(TS_DATETIME_FORMATTER.format(temporal));
+        return ts;
+    }
+
+    /**
+     * Converts an {@link Instant} to a {@link TS} (TS.CH.TZ, Time Stamp) with a precision to the second.
+     *
+     * @param temporal The temporal object to convert.
+     * @param zone     The time zone to use.
+     * @return the resulting timestamp.
+     */
+    @NonNull
+    public static TS toDatetimeTs(@NonNull final TemporalAccessor temporal, @NonNull final ZoneId zone) {
+        final TS ts = new TS();
+        ts.setValue(DateTimeFormatter.ofPattern(TS_DATETIME_FORMAT).withZone(zone).format(temporal));
         return ts;
     }
 
@@ -264,8 +310,10 @@ public final class DateTimes {
      *
      * @param temporal The temporal object to convert.
      * @return the resulting timestamp.
+     * @deprecated use {@link DateTimes#toDateTs(TemporalAccessor, ZoneId)} instead, to control the time zone.
      */
     @NonNull
+    @Deprecated(since = "2024-08-23", forRemoval = true)
     public static TS toDateTs(@NonNull final TemporalAccessor temporal) {
         final TS ts = new TS();
         ts.setValue(TS_DATE_FORMATTER.format(temporal));
@@ -283,7 +331,7 @@ public final class DateTimes {
 	@NonNull
 	public static TS toDateTs(@NonNull final TemporalAccessor temporal, ZoneId zone) {
 		final TS ts = new TS();
-		ts.setValue(DateTimeFormatter.ofPattern("yyyyMMdd").withZone(zone).format(temporal));
+		ts.setValue(DateTimeFormatter.ofPattern(TS_DATE_FORMAT).withZone(zone).format(temporal));
 		return ts;
 	}
 
