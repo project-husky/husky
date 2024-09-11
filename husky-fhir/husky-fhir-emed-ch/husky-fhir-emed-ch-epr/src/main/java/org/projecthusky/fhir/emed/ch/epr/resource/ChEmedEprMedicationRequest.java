@@ -373,13 +373,12 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
     }
 
     /**
-     * Sets the requester of the medication request. If the author has a timestamp, it sets it as authoredOn field.
+     * Sets the requester of the medication request.
      * @param author The author to be set as requester.
      * @return this.
      */
-    public MedicationRequest setRequester(Author author) {
-        setRequester(References.createAuthorReference(author));
-        if (author.getTime() != null) this.setAuthoredOn(Date.from(author.getTime()));
+    public ChEmedEprMedicationRequest setRequester(final ChEmedEprPractitionerRole author) {
+        this.setRequester(new Reference(author));
         return this;
     }
 
@@ -388,9 +387,14 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
      * @return The requester as an Author, including the authoredOn date as timestamp.
      */
     @ExpectsValidResource
-    public Author resolveRequester() {
-        if (this.hasRequester()) return new Author(getRequester().getResource(), resolveAuthoredOn());
-        throw new InvalidEmedContentException("Missing requester.");
+    public ChEmedEprPractitionerRole resolveRequester() {
+        if (!this.hasRequester()) {
+            throw new InvalidEmedContentException("Missing requester.");
+        }
+        if (this.getRequester().getResource() instanceof final ChEmedEprPractitionerRole requester) {
+            return requester;
+        }
+        throw new InvalidEmedContentException("The requester resource isn't of the right type.");
     }
 
     /**
@@ -417,7 +421,7 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
     @Override
     @ExpectsValidResource
     public Author resolveMedicalAuthor() {
-        return resolveRequester();
+        return new Author(this.resolveRequester(), this.resolveAuthoredOn());
     }
 
     /**

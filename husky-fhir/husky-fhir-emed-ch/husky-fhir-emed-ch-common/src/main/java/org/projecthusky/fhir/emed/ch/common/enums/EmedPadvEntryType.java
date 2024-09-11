@@ -63,6 +63,15 @@ public enum EmedPadvEntryType implements FhirValueSetEnumInterface {
     }
 
     /**
+     * Returns the code system, as used in FHIR.
+     */
+    @Override
+    @NonNull
+    public String getFhirSystem() {
+        return this.system;
+    }
+
+    /**
      * Gets the Coding with current enum.
      *
      * @return the Coding with current enum.
