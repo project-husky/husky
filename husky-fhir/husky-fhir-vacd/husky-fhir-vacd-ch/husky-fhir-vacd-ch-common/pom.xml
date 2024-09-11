@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>husky-fhir-vacd-ch-common</artifactId>
+
+	<parent>
+		<groupId>org.projecthusky.fhir.vacd.ch</groupId>
+		<artifactId>husky-fhir-vacd-ch</artifactId>
+		<version>2.5.3-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.projecthusky.fhi.core.ch</groupId>
+			<artifactId>husky-fhir-core-ch</artifactId>
+			<version>2.5.3-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.15.3</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+</project>
