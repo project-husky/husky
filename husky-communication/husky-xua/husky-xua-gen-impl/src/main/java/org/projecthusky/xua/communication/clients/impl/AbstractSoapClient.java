@@ -206,16 +206,28 @@ public abstract class AbstractSoapClient<T> {
 		final HttpEntity responseEntity = response.getEntity();
 		logger.debug(responseEntity.getContentType().getValue());
 
-		var content = EntityUtils.toString(responseEntity);
+		var content = extractResponse(responseEntity); 
+		logger.debug("SOAP Message\n {}", content);
+
+		if ((response.getStatusLine() != null)
+				&& (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)) {
+			return parseResponse(content);
+		} else {
+			return parseResponseError(content);
+		}
+	}
+
+	protected String extractResponse(HttpEntity responseEntity) throws ParseException, IOException {
+		String content = EntityUtils.toString(responseEntity, "UTF-8");
 
 		if (responseEntity.getContentType().getValue().startsWith("multipart")) {
 			logger.debug("Multiparted Message\n {}", content);
 
 			final byte[] boundary = getBoundary(responseEntity.getContentType().getValue());
 			logger.debug("Boundary: {}", boundary);
-
+			
 			final var multipartStream = new MultipartStream(
-					new ByteArrayInputStream(content.getBytes()), boundary, 16384, null);
+					new ByteArrayInputStream(content.getBytes("UTF-8")), boundary, 16384, null);
 
 			boolean nextPart = multipartStream.skipPreamble();
 			while (nextPart) {
@@ -226,7 +238,7 @@ public abstract class AbstractSoapClient<T> {
 				logger.debug("Body:");
 				final var out = new ByteArrayOutputStream();
 				multipartStream.readBodyData(out);
-				content = out.toString();
+				content = out.toString("UTF-8");
 				logger.debug(content);
 				out.close();
 				logger.debug("");
@@ -234,14 +246,7 @@ public abstract class AbstractSoapClient<T> {
 			}
 
 		}
-		logger.debug("SOAP Message\n {}", content);
-
-		if ((response.getStatusLine() != null)
-				&& (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)) {
-			return parseResponse(content);
-		} else {
-			return parseResponseError(content);
-		}
+		return content;
 	}
 
 	/**
