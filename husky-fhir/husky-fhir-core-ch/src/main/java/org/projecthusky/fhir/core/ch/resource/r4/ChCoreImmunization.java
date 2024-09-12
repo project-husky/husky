@@ -8,9 +8,7 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-package org.projecthusky.fhir.core.ch;
-
-import java.util.List;
+package org.projecthusky.fhir.core.ch.resource.r4;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Immunization;
@@ -22,6 +20,8 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
 
 /**
  * The HAPI custom structure for CH-Core Immunization.
+ * 
+ * @author <a href="roeland.luykx@raly.ch">Roeland Luykx</a>
  */
 @ResourceDef(profile = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-immunization")
 public class ChCoreImmunization extends Immunization {
@@ -37,7 +37,7 @@ public class ChCoreImmunization extends Immunization {
 	public ChCoreImmunization() {
 		super();
 	}
-	
+
 	public boolean hasRecorder() {
 		return recorder != null;
 	}

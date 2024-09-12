@@ -1,25 +1,20 @@
 /**
  * 
  */
-package org.projecthusky.fhir.vacd.ch.common.resource;
-
-import static org.junit.jupiter.api.Assertions.*;
+package org.projecthusky.fhir.core.ch.resource.r4;
 
 import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Reference;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.projecthusky.fhir.core.ch.ChCoreImmunization;
+import org.projecthusky.fhir.core.ch.TestHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import ca.uhn.fhir.context.FhirContext;
 
 /**
  * 
  */
-class ChCoreImmunizationTest {
-	private Logger logger = LoggerFactory.getLogger(ChCoreImmunizationTest.class);
+class ChCoreImmunizationTest extends TestHelper {
 
 	private Patient testPatient;
 
@@ -35,15 +30,14 @@ class ChCoreImmunizationTest {
 
 	/**
 	 * Test method for
-	 * {@link org.projecthusky.fhir.core.ch.ChCoreImmunization#setRecorder(org.hl7.fhir.r4.model.Reference)}.
+	 * {@link org.projecthusky.fhir.core.ch.resource.r4.ChCoreImmunization#setRecorder(org.hl7.fhir.r4.model.Reference)}.
 	 */
 	@Test
 	void testSetGetRecorder() {
 		ChCoreImmunization ref = new ChCoreImmunization();
 		ref.setRecorder(new Reference(testPatient));
 
-		FhirContext ctx = FhirContext.forR4();
-		System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(ref));
+		prettyPrint(ref);
 
 	}
 

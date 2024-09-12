@@ -8,13 +8,16 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-package org.projecthusky.fhir.vacd.ch.common;
+package org.projecthusky.fhir.core.ch.datatype.r4;
 
-import org.projecthusky.fhir.core.ch.ChCoreImmunization;
+import org.hl7.fhir.r4.model.Address;
 
-import ca.uhn.fhir.model.api.annotation.ResourceDef;
+import ca.uhn.fhir.model.api.annotation.DatatypeDef;
 
-@ResourceDef(profile = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-immunization")
-public class ChVacdImmunization extends ChCoreImmunization {
+/**
+ * 
+ */
+@DatatypeDef(name = "CHCoreAddressECH11PlaceOfOrigin", isSpecialization = true, profileOf = Address.class)
+public class CHCoreAddressECH11PlaceOfOrigin extends ChCoreAddress {
 
 }
