@@ -125,12 +125,12 @@ public class EMediplan implements EMediplanExtendable, EMediplanObject {
         } else return type;
     }
 
-    public ValidationResult validate() {
+    public ValidationResult validate(final @Nullable String basePath) {
         final var result = new ValidationResult();
 
         if (author == null)
             result.add(getRequiredFieldValidationIssue(
-                    "Medication.auth",
+                    getFieldValidationPath(basePath, "auth"),
                     "The author type is missing but it is mandatory."
             ));
         else {
@@ -140,17 +140,15 @@ public class EMediplan implements EMediplanExtendable, EMediplanObject {
             if (hcPerson == null) {
                 if (author == EMediplanAuthor.HEALTHCARE_PERSON)
                     result.add(getRequiredFieldValidationIssue(
-                            "Medication.hcPerson",
+                            getFieldValidationPath(basePath, "hcPerson"),
                             "The hcPerson object is missing, but it is required when the author is a healthcare person."
                     ));
             } else {
-                //TODO validate hcperson object
+                result.add(hcPerson.validate(getFieldValidationPath(basePath, "hcPerson"), resolvedType));
                 if (author == EMediplanAuthor.PATIENT) {
-                    result.add(getValidationIssue(
-                            OperationOutcome.IssueSeverity.WARNING,
-                            OperationOutcome.IssueType.INVALID,
-                       "Medication.hcPerson",
-                    "The healthcare person object is present, but the author type is a patient."
+                    result.add(getIgnoredFieldValidationIssue(
+                            getFieldValidationPath(basePath,"hcPerson"),
+                            "The healthcare person object is present, but the author type is a patient."
                     ));
                 }
             }
@@ -158,17 +156,31 @@ public class EMediplan implements EMediplanExtendable, EMediplanObject {
             if (hcOrg == null) {
                 if (author == EMediplanAuthor.HEALTHCARE_PERSON)
                     result.add(getRequiredFieldValidationIssue(
-                            "Medication.hcOrg",
+                            getFieldValidationPath(basePath, "hcOrg"),
                             "The hcOrg object is missing, but it is required when the author is a healthcare person."
                     ));
             } else {
                 //TODO validate hcorg
             }
 
+            if (hcPerson != null && hcOrg != null && hcPerson.getZsr() != null && !hcPerson.getZsr().isBlank() && hcOrg.getZsr() != null && !hcOrg.getZsr().isBlank())
+                result.add(getValidationIssue(
+                        OperationOutcome.IssueSeverity.ERROR,
+                        OperationOutcome.IssueType.BUSINESSRULE,
+                        basePath,
+                        "The ZSR number may be present either in the healthcare person object or the healthcare organization object but not both."
+                ));
+
+            if (resolvedType == EMediplanType.MEDICATION_PLAN && (hcPerson == null || hcPerson.getGln() == null || hcPerson.getGln().isBlank()) && (hcOrg == null || hcOrg.getGln() == null || hcOrg.getGln().isBlank()))
+                result.add(getRequiredFieldValidationIssue(
+                        basePath,
+                        "The GLN of either the healthcare professional or the healthcare organization is mandatory for eMediplan treatment plan documents done by a healthcare professional."
+                ));
+
             if (medicaments == null || medicaments.isEmpty()) {
                 if (resolvedType == EMediplanType.PRESCRIPTION)
                     result.add(getRequiredFieldValidationIssue(
-                            "Medication.meds",
+                            getFieldValidationPath(basePath, "meds"),
                             "The list of medicaments is missing or empty, but it is required to have at least one element when the Medication type is a Prescription."
                     ));
             } else {
@@ -179,7 +191,7 @@ public class EMediplan implements EMediplanExtendable, EMediplanObject {
                 result.add(getValidationIssue(
                         OperationOutcome.IssueSeverity.ERROR,
                         OperationOutcome.IssueType.CODEINVALID,
-                        "Medication.medType",
+                        getFieldValidationPath(basePath, "medType"),
                         "The PolymedicationCheck (PMC) medication type is deprecated and should not be used."
                 ));
 
@@ -187,7 +199,7 @@ public class EMediplan implements EMediplanExtendable, EMediplanObject {
                 result.add(getValidationIssue(
                         OperationOutcome.IssueSeverity.ERROR,
                         OperationOutcome.IssueType.CODEINVALID,
-                        "Medication.medType",
+                        getFieldValidationPath(basePath, "medType"),
                         "If the author is a patient, the medication type cannot be a prescription."
                 ));
 
@@ -196,33 +208,35 @@ public class EMediplan implements EMediplanExtendable, EMediplanObject {
                     result.add(getValidationIssue(
                             OperationOutcome.IssueSeverity.ERROR,
                             OperationOutcome.IssueType.VALUE,
-                            "Medication.rec",
+                            getFieldValidationPath(basePath, "rec"),
                             "The medication recipient content is not a valid GLN."
                     ));
                 if (resolvedType == EMediplanType.MEDICATION_PLAN)
-                    result.add(getValidationIssue(
-                            OperationOutcome.IssueSeverity.WARNING,
-                            OperationOutcome.IssueType.INVALID,
-                            "Medication.rec",
+                    result.add(getIgnoredFieldValidationIssue(
+                            getFieldValidationPath(basePath, "rec"),
                             "The recipient object is present, but the medication type is not a prescription."
                     ));
             }
+
+            if (patient == null)
+                result.add(getRequiredFieldValidationIssue(
+                        getFieldValidationPath(basePath, "patient"),
+                        "The patient object is missing, but it is required."
+                ));
+            else  result.add(patient.validate(basePath + ".patient", type));
         }
 
-        if (patient == null)
-            result.add(getRequiredFieldValidationIssue(
-                    "Medication.patient",
-                    "The patient object is missing, but it is required."
-            ));
-        else {
-            //TODO validate patient
+        if (extensions != null && !extensions.isEmpty()) {
+            final var extensionsIterator = extensions.listIterator();
+            while (extensionsIterator.hasNext()) {
+                final var index = extensionsIterator.nextIndex();
+                result.add(extensionsIterator.next().validate(getFieldValidationPath(basePath, "exts", index)));
+            }
         }
-
-        //TODO validate exts?
 
         if (timestamp == null)
             result.add(getRequiredFieldValidationIssue(
-                    "Medication.dt",
+                    getFieldValidationPath(basePath, "dt"),
                     "The date of creation field is missing but it is mandatory"
             ));
 
@@ -230,11 +244,13 @@ public class EMediplan implements EMediplanExtendable, EMediplanObject {
     }
 
     public void trim() {
-        //TODO trim patient
-        //TODO trim hcperson
+        if (patient != null) patient.trim();
+        if (hcPerson != null) hcPerson.trim();
         //TODO trim hcorg
         //TODO trim meds
-        //TODO trim exts?
+
+        if (extensions != null && !extensions.isEmpty()) extensions.forEach(EMediplanExtension::trim);
+
         if (type != null && type == EMediplanType.MEDICATION_PLAN && author != null && author == EMediplanAuthor.PATIENT)
             type = null;
     }

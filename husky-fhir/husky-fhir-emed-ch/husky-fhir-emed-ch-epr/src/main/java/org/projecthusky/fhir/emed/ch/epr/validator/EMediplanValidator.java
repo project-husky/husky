@@ -9,6 +9,7 @@ public class EMediplanValidator {
      * that might be empty if no issues are found.
      */
     public ValidationResult validate(final EMediplan emediplan) {
-
+        //TODO implement
+        return null;
     }
 }

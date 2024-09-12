@@ -5,12 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.EMediplanType;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprOrganization;
+import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EMediplanHealthcareOrganization {
+public class EMediplanHealthcareOrganization implements EMediplanObject {
     /**
      * The GLN. Required if not set in the HealthcarePerson object, otherwise optional.
      */
@@ -29,6 +31,50 @@ public class EMediplanHealthcareOrganization {
      * HealthcareOrganization object.
      */
     protected @Nullable String zsr;
+
+    public ValidationResult validate(final @Nullable String basePath) {
+        final var result = new ValidationResult();
+
+        if (name == null || !name.isBlank()) result.add(getRequiredFieldValidationIssue(
+                getFieldValidationPath(basePath, "name"),
+                "The healthcare organization's name is missing but it is mandatory."
+        ));
+
+        if (address == null) result.add(getRequiredFieldValidationIssue(
+                basePath,
+                "The healthcare organization's address is missing but it is mandatory."
+        ));
+        else {
+            result.add(address.validate(basePath));
+            if (address.getStreet() == null || address.getStreet().isBlank()) result.add(getRequiredFieldValidationIssue(
+                    getFieldValidationPath(basePath, "street"),
+                    "The healthcare organization's address is missing the street, but it is mandatory."
+            ));
+            if (address.getPostalCode() == null || address.getPostalCode().isBlank()) result.add(getRequiredFieldValidationIssue(
+                    getFieldValidationPath(basePath, "zip"),
+                    "The healthcare organization's address is missing the postal code, but it is mandatory."
+            ));
+            if (address.getCity() == null || address.getCity().isBlank()) result.add(getRequiredFieldValidationIssue(
+                    getFieldValidationPath(basePath, "city"),
+                    "The healthcare organization's city is missing but it is mandatory."
+            ));
+        }
+
+        return result;
+    }
+
+    public ValidationResult validate(final @Nullable String basePath, final EMediplanType mediplanType) {
+        final var result = validate(basePath);
+
+        if (mediplanType == EMediplanType.PRESCRIPTION) {
+            if (gln != null && !gln.isEmpty()) result.add(getIgnoredFieldValidationIssue(
+                    getFieldValidationPath(basePath, "gln"),
+                    "The healthcare organization's GLN is present but should not be included in eMediplan prescription documents. the healthcare professional GLN should be filled instead."
+            ));
+        }
+
+        return result;
+    }
 
     /**
      * Gets an eMediplan organization object from a CH EMED EPR organization object.

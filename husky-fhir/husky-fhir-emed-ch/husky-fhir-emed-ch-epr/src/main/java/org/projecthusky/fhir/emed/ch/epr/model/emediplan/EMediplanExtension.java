@@ -6,6 +6,7 @@ import lombok.Data;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 @Data
 @AllArgsConstructor
-public class EMediplanExtension implements EMediplanExtendable {
+public class EMediplanExtension implements EMediplanExtendable, EMediplanObject {
     /**
      * Name of the field. Mandatory.
      */
@@ -40,6 +41,30 @@ public class EMediplanExtension implements EMediplanExtendable {
     public List<@NonNull EMediplanExtension> getExtensions() {
         if (extensions == null) extensions = new ArrayList<>();
         return extensions;
+    }
+
+    public ValidationResult validate(final @Nullable String basePath) {
+        final var result = new ValidationResult();
+
+        if (name == null || name.isBlank()) result.add(getRequiredFieldValidationIssue(
+                 getFieldValidationPath(basePath, "nm"),
+                "The extension name is required but it is missing"
+        ));
+
+        if (schema == null || schema.isBlank()) result.add(getRequiredFieldValidationIssue(
+                getFieldValidationPath(basePath, "schema"),
+                "The extension schema is required but it is missing"
+        ));
+
+        if (extensions != null && !extensions.isEmpty()) {
+            final var extensionIterator = extensions.listIterator();
+            while (extensionIterator.hasNext()) {
+                final var index = extensionIterator.nextIndex();
+                result.add(extensionIterator.next().validate(getFieldValidationPath(basePath, "exts", index)));
+            }
+        }
+
+        return result;
     }
 
     /**

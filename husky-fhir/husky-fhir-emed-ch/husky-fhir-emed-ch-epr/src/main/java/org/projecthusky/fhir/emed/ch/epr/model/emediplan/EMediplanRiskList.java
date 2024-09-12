@@ -1,5 +1,6 @@
 package org.projecthusky.fhir.emed.ch.epr.model.emediplan;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.RiskCategory;
+import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +25,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EMediplanRiskList {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class EMediplanRiskList implements EMediplanObject {
     /**
      * The id of the risk category.
      */
@@ -44,5 +47,9 @@ public class EMediplanRiskList {
         this.category = category;
         this.risks = new ArrayList<>(risks.length);
         this.risks.addAll(Arrays.asList(risks));
+    }
+
+    public ValidationResult validate(final @Nullable String basePath) {
+        return new ValidationResult();
     }
 }
