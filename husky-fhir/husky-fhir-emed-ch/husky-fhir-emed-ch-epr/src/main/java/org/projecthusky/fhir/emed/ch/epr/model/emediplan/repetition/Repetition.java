@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanObject;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.RepetitionType;
 
 /**
@@ -12,7 +13,7 @@ import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.RepetitionType;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class Repetition {
+public abstract class Repetition implements EMediplanObject {
     @JsonProperty("t")
     protected RepetitionType type;
 }

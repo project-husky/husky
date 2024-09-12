@@ -76,6 +76,10 @@ public class EMediplanHealthcareOrganization implements EMediplanObject {
         return result;
     }
 
+    public void trim() {
+        if (address != null) address.trim();
+    }
+
     /**
      * Gets an eMediplan organization object from a CH EMED EPR organization object.
      * @param organization The CH EMED EPR organization object to be converted.

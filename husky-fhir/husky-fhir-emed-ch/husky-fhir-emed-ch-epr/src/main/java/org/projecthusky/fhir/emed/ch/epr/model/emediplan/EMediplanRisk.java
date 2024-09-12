@@ -2,7 +2,9 @@ package org.projecthusky.fhir.emed.ch.epr.model.emediplan;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Data;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.RiskCategory;
+import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
 /**
  * This sould be an enum representation of the CDSCODE table of HCI INDEX used by the
@@ -19,9 +21,11 @@ import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.RiskCategory;
  * there is no provided mapping by HCI between their own codes and the SNOMED CT ones to be used by the FHIR IGs in both
  * Swiss and international contexts, and the size of this table (more than 700 elements), this will just be a regular
  * class with no code validation or enforcement.
+ * Furthermore, the eMediplan own model and validator software neither provides the risk codes (or categories) as an
+ * enumeration, nor performs any code validation on them.
  */
 @Data
-public class EMediplanRisk {
+public class EMediplanRisk implements EMediplanObject {
     /*
     TERMINAL_RENAL_INSUFFICIENCY(RiskCategory.RENAL_INSUFFICIENCY, 597),
     ACUTE_RENAL_INSUFFICIENCY(RiskCategory.RENAL_INSUFFICIENCY, 575),
@@ -88,4 +92,9 @@ public class EMediplanRisk {
     protected RiskCategory category;
     @JsonValue
     protected int code;
+
+    @Override
+    public ValidationResult validate(@Nullable String basePath) {
+        return new ValidationResult();
+    }
 }

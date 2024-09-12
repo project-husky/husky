@@ -4,9 +4,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.OperationOutcome;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanObject;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.CdTyp9;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.EMediplanType;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.RelativeToMeal;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.PosologyDetail;
+import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
 import java.time.Instant;
 
@@ -14,7 +18,12 @@ import java.time.Instant;
  * Describes when and what amount of medication must be taken.
  */
 @Data
-public class EMediplanPosology {
+public class EMediplanPosology implements EMediplanObject {
+    protected static final boolean DEFAULT_AS_NEEDED_VALUE = false;
+
+    protected static final String DETAIL_FIELD_NAME = "po";
+    protected static final String UNIT_FIELD_NAME = "unit";
+
     /**
      * From date. Format: YYYY-MM-DDThh:mm:ss+02:00 or YYYY-MM-DD (ISO 860113 Combined date and time including time zone
      * or date only) (e.g. 2016-06-16T16:26:15+02:00).
@@ -39,7 +48,7 @@ public class EMediplanPosology {
     /**
      * Dosage details.
      */
-    @JsonProperty("po")
+    @JsonProperty(DETAIL_FIELD_NAME)
     protected PosologyDetail detail;
     /**
      * Indicates whether a medication has to be taken relative to a meal.
@@ -67,4 +76,52 @@ public class EMediplanPosology {
      */
     @JsonProperty("moa")
     protected @Nullable String methodOfAdministration;
+
+    protected boolean isAsNeeded() {
+        return isInReserve();
+    }
+
+    protected boolean isInReserve() {
+        if (asNeeded == null) return DEFAULT_AS_NEEDED_VALUE;
+        return asNeeded;
+    }
+
+    @Override
+    public ValidationResult validate(final @Nullable String basePath) {
+        final var result = new ValidationResult();
+
+        if (detail == null) result.add(getRequiredFieldValidationIssue(
+                getFieldValidationPath(basePath, DETAIL_FIELD_NAME),
+                "The detail of the posology is missing."
+        ));
+        //todo else validate detail
+
+        if (start != null && end != null && end.isBefore(start)) result.add(getValidationIssue(
+                OperationOutcome.IssueSeverity.ERROR,
+                OperationOutcome.IssueType.INVALID,
+                basePath == null? "" : basePath,
+                "The end (to) date of the posology object cannot be lesser than the start (from) date."
+        ));
+
+        return result;
+    }
+
+    public ValidationResult validate(final @Nullable String basePath, final EMediplanType mediplanType) {
+        final var result = validate(basePath);
+
+        if (mediplanType == EMediplanType.MEDICATION_PLAN) {
+            if (unit == null) result.add(getRequiredFieldValidationIssue(
+                    getFieldValidationPath(basePath, UNIT_FIELD_NAME),
+                    "The dosage unit is missing, but it is required for medication plans."
+            ));
+        }
+
+        return result;
+    }
+
+    @Override
+    public void trim() {
+        if (asNeeded != null && asNeeded == DEFAULT_AS_NEEDED_VALUE) asNeeded = null;
+        //TODO trim detail
+    }
 }

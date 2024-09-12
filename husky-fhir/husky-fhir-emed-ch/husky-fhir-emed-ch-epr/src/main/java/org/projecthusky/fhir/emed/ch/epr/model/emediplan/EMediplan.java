@@ -159,9 +159,7 @@ public class EMediplan implements EMediplanExtendable, EMediplanObject {
                             getFieldValidationPath(basePath, "hcOrg"),
                             "The hcOrg object is missing, but it is required when the author is a healthcare person."
                     ));
-            } else {
-                //TODO validate hcorg
-            }
+            } else hcOrg.validate(getFieldValidationPath(basePath, "hcOrg"), type);
 
             if (hcPerson != null && hcOrg != null && hcPerson.getZsr() != null && !hcPerson.getZsr().isBlank() && hcOrg.getZsr() != null && !hcOrg.getZsr().isBlank())
                 result.add(getValidationIssue(
@@ -184,7 +182,11 @@ public class EMediplan implements EMediplanExtendable, EMediplanObject {
                             "The list of medicaments is missing or empty, but it is required to have at least one element when the Medication type is a Prescription."
                     ));
             } else {
-                //TODO validate meds
+                final var medsIterator = medicaments.listIterator();
+                while (medsIterator.hasNext()) {
+                    final var index = medsIterator.nextIndex();
+                    result.add(medsIterator.next().validate(getFieldValidationPath(basePath, "meds"), resolvedType));
+                }
             }
 
             if (resolvedType == EMediplanType.POLYMEDICATION_CHECK)
@@ -246,8 +248,9 @@ public class EMediplan implements EMediplanExtendable, EMediplanObject {
     public void trim() {
         if (patient != null) patient.trim();
         if (hcPerson != null) hcPerson.trim();
-        //TODO trim hcorg
-        //TODO trim meds
+        if (hcOrg != null) hcOrg.trim();
+
+        if (medicaments != null && !medicaments.isEmpty()) medicaments.forEach(EMediplanMedicament::trim);
 
         if (extensions != null && !extensions.isEmpty()) extensions.forEach(EMediplanExtension::trim);
 

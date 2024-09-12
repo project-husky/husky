@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanObject;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.dose.EMediplanDose;
 
 /**
@@ -13,7 +14,7 @@ import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.dose.EM
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class Application {
+public abstract class Application implements EMediplanObject {
     @JsonProperty("do")
     protected EMediplanDose dose;
 }

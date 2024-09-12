@@ -47,7 +47,7 @@ public class EMediplanHealthcarePerson implements EMediplanObject {
 
         if (lastName == null || lastName.isBlank()) result.add(getRequiredFieldValidationIssue(
                 getFieldValidationPath(basePath, "lName"),
-                "The healthcare professional's last name is missing but is mandataroy."
+                "The healthcare professional's last name is missing but is mandatory."
         ));
 
         return result;

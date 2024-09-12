@@ -50,6 +50,23 @@ public class EMediplanRiskList implements EMediplanObject {
     }
 
     public ValidationResult validate(final @Nullable String basePath) {
-        return new ValidationResult();
+        final var result = new ValidationResult();
+
+        if (category == null) result.add(getRequiredFieldValidationIssue(
+                getFieldValidationPath(basePath, "id"),
+                "The risk category code is missing but it is required."
+                ));
+
+        final var risksIterator = getRisks().listIterator();
+        while (risksIterator.hasNext()) {
+            final var index = risksIterator.nextIndex();
+            result.add(risksIterator.next().validate(getFieldValidationPath(basePath, "rIds", index)));
+        }
+
+        return result;
+    }
+
+    public void trim() {
+        getRisks().forEach(EMediplanRisk::trim);
     }
 }

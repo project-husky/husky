@@ -76,6 +76,12 @@ public class EMediplanPatientMedicalData implements EMediplanExtendable, EMedipl
         final var result = new ValidationResult();
 
         if (!getRisks().isEmpty()) {
+            final var risksIterator = getRisks().listIterator();
+            while(risksIterator.hasNext()) {
+                final var index = risksIterator.nextIndex();
+                result.add(risksIterator.next().validate(getFieldValidationPath(basePath, "rcs", index)));
+            }
+
             if (risks.stream().anyMatch(riskList -> riskList.getCategory() == RiskCategory.REPRODUCTION && riskList.getRisks().stream().anyMatch(risk -> risk.getCode() == 78)) && lastMenstruation == null)
                 result.add(getValidationIssue(
                         OperationOutcome.IssueSeverity.WARNING,
@@ -89,7 +95,7 @@ public class EMediplanPatientMedicalData implements EMediplanExtendable, EMedipl
         //or to be checked at a higher level
 
         if (timeOfGestation != null && !timeOfGestation.isBlank()) {
-            if (!prematureBaby) result.add( getValidationIssue(
+            if (prematureBaby == null || !prematureBaby) result.add( getValidationIssue(
                     OperationOutcome.IssueSeverity.WARNING,
                     OperationOutcome.IssueType.VALUE,
                     getFieldValidationPath(basePath, "toG"),
@@ -131,6 +137,7 @@ public class EMediplanPatientMedicalData implements EMediplanExtendable, EMedipl
 
     @Override
     public void trim() {
+        getRisks().forEach(EMediplanRiskList::trim);
         getExtensions().forEach(EMediplanExtension::trim);
     }
 
