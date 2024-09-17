@@ -95,4 +95,21 @@ public class ChCorePatient extends Patient {
 		this.religion = religion;
 	}
 
+	@Override
+	public ChCorePatient copy() {
+		final var copy = new ChCorePatient();
+		this.copyValues(copy);
+		return copy;
+	}
+
+	@Override
+	public void copyValues(final Patient dst) {
+		super.copyValues(dst);
+		if (dst instanceof final ChCorePatient als) {
+			als.placeOfBirth = placeOfBirth == null ? null : placeOfBirth.copy();
+			als.placeOfOrigin = placeOfOrigin == null ? null : placeOfOrigin;
+			als.citizenship = citizenship == null ? null : citizenship;
+			als.religion = religion == null ? null : religion.copy();
+		}
+	}
 }

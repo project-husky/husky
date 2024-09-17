@@ -13,6 +13,7 @@ package org.projecthusky.fhir.core.ch.resource.extension.r4;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.BackboneElement;
 import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Element;
 import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.Period;
 
@@ -20,7 +21,7 @@ import ca.uhn.fhir.model.api.annotation.Block;
 import ca.uhn.fhir.model.api.annotation.Child;
 
 /**
- * 
+ * @author <a href="roeland.luykx@raly.ch">Roeland Luykx</a>
  */
 @Block
 public class ChCoreCitizenshipExt extends BackboneElement {
@@ -30,7 +31,7 @@ public class ChCoreCitizenshipExt extends BackboneElement {
 	@Nullable
 	@Child(name = "code", min = 0, max = 1)
 	@ca.uhn.fhir.model.api.annotation.Extension(url = "code", definedLocally = false)
-	protected CodeableConcept code; 
+	protected CodeableConcept code;
 
 	/**
 	 * Extension for a placeOfBirth.
@@ -58,8 +59,18 @@ public class ChCoreCitizenshipExt extends BackboneElement {
 
 	@Override
 	public BackboneElement copy() {
-		// TODO Auto-generated method stub
-		return null;
+		final var copy = new ChCoreCitizenshipExt();
+		this.copyValues(copy);
+		return copy;
+	}
+
+	@Override
+	public void copyValues(final BackboneElement dst) {
+		super.copyValues(dst);
+		if (dst instanceof final ChCoreCitizenshipExt als) {
+			als.code = code == null ? null : code.copy();
+			als.period = period == null ? null : period.copy();
+		}
 	}
 
 }

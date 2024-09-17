@@ -10,27 +10,25 @@
  */
 package org.projecthusky.fhir.core.ch.resource.r4;
 
-import java.util.Optional;
-
-import org.hl7.fhir.r4.model.Coding;
-import org.hl7.fhir.r4.model.Composition;
+import org.hl7.fhir.r4.model.Condition;
+import org.projecthusky.fhir.core.ch.exceptions.InvalidContentException;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 
 /**
- * The HAPI custom structure for CH-Core Composition.
- * 
  * @author <a href="roeland.luykx@raly.ch">Roeland Luykx</a>
  */
-@ResourceDef(profile = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-immunization")
-public class ChCoreComposition extends Composition {
+@ResourceDef(profile = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-condition")
+public class ChCoreCondition extends Condition {
 
-	public Optional<SectionComponent> resolveSectionByCode(Coding code) {
-		return this.getSection().stream()
-				.filter(section -> section.getCode().getCoding().stream()
-						.anyMatch(coding -> (code.getSystem().equals(coding.getSystem())
-								&& code.getCode().equals(coding.getCode()))))
-				.findFirst();
+	public ChCorePatient resolvePatient() {
+		final var reference = this.getSubject();
+		if (reference != null) {
+			if (reference.getResource() instanceof ChCorePatient) {
+				return (ChCorePatient) reference.getResource();
+			}
+		}
+		throw new InvalidContentException("The ChCorePatient is missing as subject in the Condition");
 	}
 
 }

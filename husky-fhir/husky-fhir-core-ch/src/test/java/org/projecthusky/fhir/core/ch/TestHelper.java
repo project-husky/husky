@@ -10,6 +10,7 @@
  */
 package org.projecthusky.fhir.core.ch;
 
+import org.hl7.fhir.instance.model.api.IBaseBackboneElement;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,4 +29,5 @@ public class TestHelper {
 //		System.out.println(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(ref));
 		logger.info(ctx.newJsonParser().setPrettyPrint(true).encodeResourceToString(ref));
 	}
+	
 }

@@ -58,25 +58,81 @@ public class ChVacdImmunizationAdministrationDocument extends ChCoreDocumentEpr 
 				"The ChVacdImmunizationAdministrationComposition is missing in the document Bundle");
 	}
 
+	/**
+	 * Adds an immunization to the document.
+	 * 
+	 * @param immunization
+	 *            the immunization to add.
+	 */
 	public void addImmunization(ChVacdImmunization immunization) {
-		if(this.resolveComposition().hasSubject()) {
+		if (this.resolveComposition().hasSubject()) {
 			immunization.setPatient(this.resolveComposition().getSubject());
 		}
-		
+
 		this.getEntry().add(new BundleEntryComponent().setResource(immunization)
 				.setFullUrl("urn:uuid:" + immunization.getId()));
 		this.resolveComposition().resolveAdministrationSection()
 				.addEntry(new Reference(immunization));
 	}
 
+	/**
+	 * Adds an immunization to the document.
+	 * 
+	 * @return the created immunization resource.
+	 */
+	public ChVacdImmunization addImmunization() {
+		ChVacdImmunization immunization = new ChVacdImmunization();
+		addImmunization(immunization);
+		return immunization;
+	}
+
+	/**
+	 * Adds a basic immunization to the document.
+	 * 
+	 * @param basicImmunization
+	 *            the basic immunization to add.
+	 */
+	public void addBasicImmunization(ChVacdBasicImmunization basicImmunization) {
+		if (this.resolveComposition().hasSubject()) {
+			basicImmunization.setSubject(this.resolveComposition().getSubject());
+		}
+
+		this.getEntry().add(new BundleEntryComponent().setResource(basicImmunization)
+				.setFullUrl("urn:uuid:" + basicImmunization.getId()));
+		this.resolveComposition().resolveAdministrationSection()
+				.addEntry(new Reference(basicImmunization));
+	}
+
+	/**
+	 * Adds a basic immunization to the document.
+	 * 
+	 * @return the created basic immunization resource
+	 */
+	public ChVacdBasicImmunization addBasicImmunization() {
+		ChVacdBasicImmunization basicImmunization = new ChVacdBasicImmunization();
+		addBasicImmunization(basicImmunization);
+		return basicImmunization;
+	}
+
+	/**
+	 * get all immunization resources from the document.
+	 * 
+	 * @return list of immunization resources.
+	 */
 	public List<ChVacdImmunization> resolveImmunizations() {
 		return this.getEntryResourceByResourceType(ChVacdImmunization.class);
 	}
 
-	public void setPatient(Patient testPatient) {
-		this.getEntry().add(new BundleEntryComponent().setResource(testPatient)
-				.setFullUrl("urn:uuid:" + testPatient.getId()));
-		this.resolveComposition().setSubject(new Reference(testPatient));
+	/**
+	 * Set the patient for the document.
+	 * 
+	 * @param testPatient
+	 *            the patient to set.
+	 */
+	public void setPatient(Patient subject) {
+		this.getEntry().add(new BundleEntryComponent().setResource(subject).setFullUrl("urn:uuid:"
+				+ (subject.getId() != null ? subject.getId() : UUID.randomUUID().toString())));
+		this.resolveComposition().setSubject(new Reference(subject));
 	}
 
 }

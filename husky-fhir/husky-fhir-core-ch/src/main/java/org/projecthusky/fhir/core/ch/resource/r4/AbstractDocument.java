@@ -17,29 +17,9 @@ import org.hl7.fhir.r4.model.Bundle;
 
 /**	
  * 
+ * @author <a href="roeland.luykx@raly.ch">Roeland Luykx</a>
  */
-// public abstract class AbstractDocument<T extends Composition> extends Bundle
-// {
 public abstract class AbstractDocument extends Bundle {
-
-	// public abstract <T> T resolveComposition();
-
-	// /**
-	// * Finds a bundle entry by the type of its resource or {@code null},
-	// without
-	// * creating it.
-	// *
-	// * @param resourceType
-	// * The type of the resource.
-	// * @return the bundle entry or {@code null}.
-	// */
-	// @Nullable
-	// public BundleEntryComponent getEntryByResourceType(final Class<?>
-	// resourceType) {
-	// return this.getEntry().stream()
-	// .filter(entry -> resourceType.isInstance(entry.getResource())).findAny()
-	// .orElse(null);
-	// }
 
 	@Nullable
 	public <T> T getEntryByResourceType(final Class<T> resourceType) {
