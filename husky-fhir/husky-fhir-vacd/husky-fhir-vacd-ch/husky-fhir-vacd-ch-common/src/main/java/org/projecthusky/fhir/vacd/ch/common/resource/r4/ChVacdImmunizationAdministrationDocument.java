@@ -18,6 +18,7 @@ import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Reference;
 import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.core.ch.exceptions.InvalidContentException;
+import org.projecthusky.fhir.core.ch.resource.r4.ChCoreCompositionEpr;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCoreDocumentEpr;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
@@ -30,6 +31,8 @@ public class ChVacdImmunizationAdministrationDocument extends ChCoreDocumentEpr 
 
 	public ChVacdImmunizationAdministrationDocument() {
 		super();
+	
+		this.getEntry().clear();
 
 		ChVacdImmunizationAdministrationComposition composition = new ChVacdImmunizationAdministrationComposition();
 		composition.setId(UUID.randomUUID().toString());
