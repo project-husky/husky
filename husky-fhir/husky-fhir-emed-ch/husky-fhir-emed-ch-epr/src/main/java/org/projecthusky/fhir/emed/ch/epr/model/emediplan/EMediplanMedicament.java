@@ -5,6 +5,7 @@ import lombok.Data;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.OperationOutcome;
+import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.EMediplanType;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.MedicamentIdType;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.EMediplanPosology;
@@ -118,6 +119,12 @@ public class EMediplanMedicament implements EMediplanExtendable, EMediplanObject
     public Double resolveNumberOfPackages() {
         if (numberOfPackages == null) return DEFAULT_NUMBER_OF_PACKAGES;
         return numberOfPackages;
+    }
+
+    @ExpectsValidResource
+    public boolean isSelfMedication() {
+        if (selfMedication == null) return false;
+        return selfMedication;
     }
 
     @Override
