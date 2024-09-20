@@ -10,6 +10,12 @@
  */
 package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 
+import java.util.Date;
+
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.DateTimeType;
+
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 
 /**
@@ -21,5 +27,12 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
 public class ChVacdPastIllness extends ChVacdCondition {
 
 	private static final long serialVersionUID = 3517515728306272464L;
+
+	public ChVacdPastIllness() {
+		this.setClinicalStatus(new CodeableConcept(
+				new Coding("http://terminology.hl7.org/CodeSystem/condition-clinical", "resolved",
+						"resolved")));
+		this.setOnset(new DateTimeType(new Date()));
+	}
 
 }

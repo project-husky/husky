@@ -63,6 +63,7 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	 */
 	public ChVacdImmunization addImmunization() {
 		ChVacdImmunization immunization = new ChVacdImmunization();
+		immunization.setId(UUID.randomUUID().toString());
 		addImmunization(immunization);
 		return immunization;
 	}
@@ -100,6 +101,7 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	 */
 	public ChVacdBasicImmunization addBasicImmunization() {
 		ChVacdBasicImmunization basicImmunization = new ChVacdBasicImmunization();
+		basicImmunization.setId(UUID.randomUUID().toString());
 		addBasicImmunization(basicImmunization);
 		return basicImmunization;
 	}
@@ -120,6 +122,7 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	 */
 	public ChVacdMedicalProblem addMedicalProblem() {
 		ChVacdMedicalProblem medicalProblem = new ChVacdMedicalProblem();
+		medicalProblem.setId(UUID.randomUUID().toString());
 		addMedicalProblem(medicalProblem);
 		return medicalProblem;
 	}
@@ -157,6 +160,7 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	 */
 	public ChVacdLaboratoryAndSerology addLaboratoryAndSerology() {
 		ChVacdLaboratoryAndSerology labandser = new ChVacdLaboratoryAndSerology();
+		labandser.setId(UUID.randomUUID().toString());
 		addLaboratoryAndSerology(labandser);
 		return labandser;
 	}
@@ -194,6 +198,7 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	 */
 	public ChVacdAllergyIntolerance addAllergyIntolerance() {
 		ChVacdAllergyIntolerance allInt = new ChVacdAllergyIntolerance();
+		allInt.setId(UUID.randomUUID().toString());
 		addAllergyIntolerance(allInt);
 		return allInt;
 	}
@@ -229,6 +234,7 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 	 */
 	public ChVacdPastIllness addPastIllness() {
 		ChVacdPastIllness pastill = new ChVacdPastIllness();
+		pastill.setId(UUID.randomUUID().toString());
 		addPastIllness(pastill);
 		return pastill;
 
