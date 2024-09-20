@@ -10,32 +10,16 @@
  */
 package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 
-import java.util.Date;
-
-import org.hl7.fhir.r4.model.DateTimeType;
-
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 
 /**
- * The HAPI custom structure for CH-VACD BasicImmunization.
+ * The HAPI custom structure for CH-VACD PastIllness.
  * 
  * @author <a href="roeland.luykx@raly.ch">Roeland Luykx</a>
  */
-@ResourceDef(profile = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-basic-immunization")
-public class ChVacdBasicImmunization extends ChVacdCondition {
+@ResourceDef(profile = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-pastillnesses")
+public class ChVacdPastIllness extends ChVacdCondition {
 
-	private static final long serialVersionUID = -5553941659934919134L;
-
-	public ChVacdBasicImmunization() {
-		super();
-		addCategory().addCoding()
-				.setSystem("http://terminology.hl7.org/CodeSystem/condition-category")
-				.setCode("encounter-diagnosis");
-		setOnset(new DateTimeType().setValue(new Date()));
-	}
-
-	public Date resolveOnsetDate() {
-		return getOnsetDateTimeType().getValue();
-	}
+	private static final long serialVersionUID = 3517515728306272464L;
 
 }

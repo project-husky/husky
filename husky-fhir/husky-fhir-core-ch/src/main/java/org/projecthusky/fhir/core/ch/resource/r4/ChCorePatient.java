@@ -31,6 +31,8 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
 @ResourceDef(profile = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-patient")
 public class ChCorePatient extends Patient {
 
+	private static final long serialVersionUID = -5096298481688744771L;
+
 	/**
 	 * Extension for a placeOfBirth.
 	 */

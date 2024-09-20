@@ -25,6 +25,8 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
 @ResourceDef(profile = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-immunization")
 public class ChCoreComposition extends Composition {
 
+	private static final long serialVersionUID = -5411389020203169082L;
+
 	public Optional<SectionComponent> resolveSectionByCode(Coding code) {
 		return this.getSection().stream()
 				.filter(section -> section.getCode().getCoding().stream()

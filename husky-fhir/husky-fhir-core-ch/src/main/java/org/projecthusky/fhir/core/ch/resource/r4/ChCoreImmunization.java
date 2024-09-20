@@ -26,6 +26,7 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
 @ResourceDef(profile = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-immunization")
 public class ChCoreImmunization extends Immunization {
 
+	private static final long serialVersionUID = 3968587463653263409L;
 	/**
 	 * Extension for a recorder (Patient, RelatedPerson, PractitionerRole).
 	 */

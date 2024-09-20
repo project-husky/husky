@@ -16,10 +16,13 @@ import org.projecthusky.fhir.core.ch.exceptions.InvalidContentException;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 
 /**
+ * The HAPI custom structure for CH-Core Condition.
  * @author <a href="roeland.luykx@raly.ch">Roeland Luykx</a>
  */
 @ResourceDef(profile = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-condition")
 public class ChCoreCondition extends Condition {
+
+	private static final long serialVersionUID = -3632827230730919633L;
 
 	public ChCorePatient resolvePatient() {
 		final var reference = this.getSubject();

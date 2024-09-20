@@ -23,6 +23,8 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
 @ResourceDef(profile = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-document-epr")
 public class ChCoreDocumentEpr  extends AbstractDocument {
 
+	private static final long serialVersionUID = -2385277944968532844L;
+
 	public ChCoreDocumentEpr() {
 		super();
 		this.getEntry().add(new BundleEntryComponent().setResource(new ChCoreCompositionEpr()));

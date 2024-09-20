@@ -14,51 +14,45 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.BackboneElement;
 import org.hl7.fhir.r4.model.CodeType;
 import org.hl7.fhir.r4.model.Reference;
-import org.projecthusky.fhir.core.ch.resource.extension.r4.ChCoreResourceCrossReferenceExt;
 
 import ca.uhn.fhir.model.api.annotation.Block;
 import ca.uhn.fhir.model.api.annotation.Child;
 
 /**
- * 
+ * 	
  */
 @Block
-public class ChVacdExtMergingConflict extends BackboneElement {
+public class ChVacdMergingConflictExt extends BackboneElement {
 
 	@Nullable
 	@Child(name = "entry", min = 0, max = 1)
 	@ca.uhn.fhir.model.api.annotation.Extension(url = "entry", definedLocally = false)
 	protected Reference entry;
-	
+
 	@Nullable
 	@Child(name = "conflict", min = 0, max = 1)
 	@ca.uhn.fhir.model.api.annotation.Extension(url = "conflict", definedLocally = false)
 	protected CodeType conflict;
 
-
 	public Reference getEntry() {
 		return entry;
 	}
-
 
 	public void setEntry(Reference entry) {
 		this.entry = entry;
 	}
 
-
 	public CodeType getConflict() {
 		return conflict;
 	}
-
 
 	public void setConflict(CodeType conflict) {
 		this.conflict = conflict;
 	}
 
-
 	@Override
-	public BackboneElement copy() {
-		final var copy = new ChCoreResourceCrossReferenceExt();
+	public ChVacdMergingConflictExt copy() {
+		final var copy = new ChVacdMergingConflictExt();
 		this.copyValues(copy);
 		return copy;
 	}
@@ -66,7 +60,7 @@ public class ChVacdExtMergingConflict extends BackboneElement {
 	@Override
 	public void copyValues(BackboneElement dst) {
 		super.copyValues(dst);
-		if (dst instanceof final ChVacdExtMergingConflict als) {
+		if (dst instanceof final ChVacdMergingConflictExt als) {
 			als.entry = entry == null ? null : entry.copy();
 			als.conflict = conflict == null ? null : conflict.copy();
 		}

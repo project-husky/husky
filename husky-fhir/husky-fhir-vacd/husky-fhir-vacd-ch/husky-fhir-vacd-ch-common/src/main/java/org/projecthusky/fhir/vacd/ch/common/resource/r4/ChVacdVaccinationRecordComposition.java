@@ -20,23 +20,23 @@ import org.hl7.fhir.r4.model.Identifier;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 
 /**
- * The HAPI custom structure for CH-VACD ImmunizationAdministrationComposition.
+ * The HAPI custom structure for CH-VACD VaccinationRecordComposition.
  * 
  * @author <a href="roeland.luykx@raly.ch">Roeland Luykx</a>
  */
-@ResourceDef(profile = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-composition-immunization-administration")
-public class ChVacdImmunizationAdministrationComposition extends ChVacdAbstractComposition {
+@ResourceDef(profile = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-composition-vaccination-record")
+public class ChVacdVaccinationRecordComposition extends ChVacdAbstractComposition {
 
-	private static final long serialVersionUID = -6486580355822938801L;
+	private static final long serialVersionUID = -5286974478521158717L;
 
-	public ChVacdImmunizationAdministrationComposition() {
+	public ChVacdVaccinationRecordComposition() {
 		super();
 		setStatus(CompositionStatus.FINAL);
 		setDate(new Date());
-		setTitle("Immunization Administration");
+		setTitle("Vaccination Record");
 		setType(new CodeableConcept(new Coding("http://snomed.info/sct", "41000179103", "")));
 		addCategory(new CodeableConcept(new Coding("urn:oid:2.16.756.5.30.1.127.3.10.10",
-				"urn:che:epr:ch-vacd:immunization-administration:2022", "")));
+				"urn:che:epr:ch-vacd:vaccination-record:2022", "Vaccination Record")));
 		setIdentifier(new Identifier().setSystem("urn:ietf:rfc:3986")
 				.setValue("urn:uuid:" + UUID.randomUUID().toString()));
 		setConfidentiality(DocumentConfidentiality.N);

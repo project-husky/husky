@@ -10,22 +10,21 @@
  */
 package org.projecthusky.fhir.core.ch.resource.r4;
 
+import org.hl7.fhir.r4.model.Medication;
+
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 
 /**
- * The HAPI custom structure for CH-Core Composition.
- * 
+ * The HAPI custom structure for CH-Core Medication.
  * @author <a href="roeland.luykx@raly.ch">Roeland Luykx</a>
  */
-@ResourceDef(profile = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-composition-epr")
-public class ChCoreCompositionEpr extends ChCoreComposition {
+@ResourceDef(profile = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-medication")
+public class ChCoreMedication extends Medication {
 
-	
-	private static final long serialVersionUID = 6290265510559327928L;
+	private static final long serialVersionUID = -3638693566702447832L;
 
-	public ChCoreCompositionEpr() {
-		super();
-		setLanguage("de-CH");
+	public ChCoreMedication() {
+
 	}
-	
+
 }

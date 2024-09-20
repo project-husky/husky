@@ -10,31 +10,23 @@
  */
 package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import java.util.UUID;
 
-import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Reference;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.projecthusky.fhir.vacd.ch.common.TestHelper;
-import org.slf4j.LoggerFactory;
 
-import ca.uhn.fhir.context.FhirContext;
-
-/**	
+/**
  * 
  */
-class ChVacdImmunizationAdministrationDocumentTest extends TestHelper {
+class ChVacdVaccinationRecordDocumentTest extends TestHelper {
 
 	private Patient testPatient;
-
-	private ChVacdMedicationForImmunization testMedication;
 
 	/**
 	 * @throws java.lang.Exception
@@ -44,63 +36,54 @@ class ChVacdImmunizationAdministrationDocumentTest extends TestHelper {
 		testPatient = new Patient();
 		testPatient.setId("testPatient");
 		testPatient.addName().setFamily("Test").addGiven("Patient");
-
-		testMedication = new ChVacdMedicationForImmunization();
 	}
-
-	@Test
-	void testResolveComposion() {
-		ChVacdImmunizationAdministrationDocument doc = new ChVacdImmunizationAdministrationDocument();
-		ChVacdImmunizationAdministrationComposition ref = doc.resolveComposition();
-		assertNotNull(ref);
-
-		prettyPrint(doc);
-	}
-
+	
 	@Test
 	void testAddImmunization() {
-		ChVacdImmunizationAdministrationDocument doc = new ChVacdImmunizationAdministrationDocument();
+		ChVacdVaccinationRecordDocument doc = new ChVacdVaccinationRecordDocument();
 		ChVacdImmunization imm = new ChVacdImmunization();
 		imm.setId(UUID.randomUUID().toString());
 		imm.setRecorder(new Reference(testPatient));
-		imm.setMedication(testMedication);
-
+		
 		doc.addImmunization(imm);
-
+		
 		prettyPrint(doc);
 	}
-
+	
+	
 	@Test
 	void testResolveImmunizations() {
-		ChVacdImmunizationAdministrationDocument doc = new ChVacdImmunizationAdministrationDocument();
-
+		ChVacdVaccinationRecordDocument doc = new ChVacdVaccinationRecordDocument();
+		
 		doc.setPatient(testPatient);
-
+		
 		ChVacdImmunization imm1 = new ChVacdImmunization();
 		imm1.setId(UUID.randomUUID().toString());
 		imm1.setRecorder(new Reference(testPatient));
 		doc.addImmunization(imm1);
-
+		
 		ChVacdImmunization imm2 = new ChVacdImmunization();
 		imm2.setId(UUID.randomUUID().toString());
 		imm2.setRecorder(new Reference(testPatient));
 		doc.addImmunization(imm2);
-
+		
 		prettyPrint(doc);
-
+		
 		List<ChVacdImmunization> ref = doc.resolveImmunizations();
 		assertNotNull(ref);
 		assertTrue(ref.size() == 2);
-
+		
+		
 	}
-
+	
+	
 	@Test
 	void testSerialize() {
-		ChVacdImmunizationAdministrationDocument ref = new ChVacdImmunizationAdministrationDocument();
+		ChVacdVaccinationRecordDocument ref = new ChVacdVaccinationRecordDocument();
 		ref.setPatient(testPatient);
 		prettyPrint(ref);
 	}
-
+	
 	/**
 	 * Test method for
 	 * {@link org.projecthusky.fhir.vacd.ch.common.resource.r4.ChVacdAbstractDocument#addBasicImmunization()}.
@@ -170,5 +153,6 @@ class ChVacdImmunizationAdministrationDocumentTest extends TestHelper {
 		assertNotNull(ref);
 		assertNotNull(doc.resolvePastIllnesses());
 	}
+
 
 }

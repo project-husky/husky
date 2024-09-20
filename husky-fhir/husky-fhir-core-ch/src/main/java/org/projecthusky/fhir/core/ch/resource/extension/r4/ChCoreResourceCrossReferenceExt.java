@@ -64,7 +64,7 @@ public class ChCoreResourceCrossReferenceExt extends BackboneElement {
 	}
 
 	@Override
-	public BackboneElement copy() {
+	public ChCoreResourceCrossReferenceExt copy() {
 		final var copy = new ChCoreResourceCrossReferenceExt();
 		this.copyValues(copy);
 		return copy;

@@ -17,25 +17,20 @@ import org.hl7.fhir.r4.model.DateTimeType;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 
 /**
- * The HAPI custom structure for CH-VACD BasicImmunization.
+ * The HAPI custom structure for CH-V ACD MedicalProblem.
  * 
  * @author <a href="roeland.luykx@raly.ch">Roeland Luykx</a>
  */
-@ResourceDef(profile = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-basic-immunization")
-public class ChVacdBasicImmunization extends ChVacdCondition {
+@ResourceDef(profile = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-medical-problems")
+public class ChVacdMedicalProblem extends ChVacdCondition {
 
-	private static final long serialVersionUID = -5553941659934919134L;
+	private static final long serialVersionUID = 4299327185023027123L;
 
-	public ChVacdBasicImmunization() {
+	public ChVacdMedicalProblem() {
 		super();
 		addCategory().addCoding()
 				.setSystem("http://terminology.hl7.org/CodeSystem/condition-category")
-				.setCode("encounter-diagnosis");
+				.setCode("problem-list-item");
 		setOnset(new DateTimeType().setValue(new Date()));
 	}
-
-	public Date resolveOnsetDate() {
-		return getOnsetDateTimeType().getValue();
-	}
-
 }

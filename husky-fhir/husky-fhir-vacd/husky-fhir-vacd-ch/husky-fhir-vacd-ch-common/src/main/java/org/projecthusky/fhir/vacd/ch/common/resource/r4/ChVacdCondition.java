@@ -10,21 +10,27 @@
  */
 package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 
+import java.util.UUID;
+
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.projecthusky.fhir.core.ch.datatype.r4.CHCoreAddressEch11PlaceOfBirth;
+import org.hl7.fhir.r4.model.Condition;
 import org.projecthusky.fhir.core.ch.resource.extension.r4.ChCoreResourceCrossReferenceExt;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCoreCondition;
-import org.projecthusky.fhir.vacd.ch.common.resource.extension.r4.ChVacdExtMergingConflict;
+import org.projecthusky.fhir.vacd.ch.common.resource.extension.r4.ChVacdMergingConflictExt;
 
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 
 /**
+ * The HAPI custom structure for CH-VACD Condition.
  * 
+ * @author <a href="roeland.luykx@raly.ch">Roeland Luykx</a>
  */
 @ResourceDef(profile = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-condition")
 public class ChVacdCondition extends ChCoreCondition {
+
+	private static final long serialVersionUID = -3030953292200998968L;
 
 	@Nullable
 	@Child(name = "relatesTo", min = 0, max = 1)
@@ -34,7 +40,12 @@ public class ChVacdCondition extends ChCoreCondition {
 	@Nullable
 	@Child(name = "conflict", min = 0, max = 1)
 	@Extension(url = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-ext-merging-conflict-entry-reference", definedLocally = false)
-	protected ChVacdExtMergingConflict conflict;
+	protected ChVacdMergingConflictExt conflict;
+
+	public ChVacdCondition() {
+		addIdentifier().setSystem("urn:ietf:rfc:3986")
+				.setValue("urn:uuid:" + UUID.randomUUID().toString());
+	}
 
 	public ChCoreResourceCrossReferenceExt getRelatesTo() {
 		return relatesTo;
@@ -44,14 +55,28 @@ public class ChVacdCondition extends ChCoreCondition {
 		this.relatesTo = relatesTo;
 	}
 
-	public ChVacdExtMergingConflict getConflict() {
+	public ChVacdMergingConflictExt getConflict() {
 		return conflict;
 	}
 
-	public void setConflict(ChVacdExtMergingConflict conflict) {
+	public void setConflict(ChVacdMergingConflictExt conflict) {
 		this.conflict = conflict;
 	}
-	
-	
+
+	@Override
+	public ChVacdCondition copy() {
+		final var copy = new ChVacdCondition();
+		this.copyValues(copy);
+		return copy;
+	}
+
+	@Override
+	public void copyValues(Condition dst) {
+		super.copyValues(dst);
+		if (dst instanceof final ChVacdCondition als) {
+			als.relatesTo = relatesTo == null ? null : relatesTo.copy();
+			als.conflict = conflict == null ? null : conflict.copy();
+		}
+	}
 
 }

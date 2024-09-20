@@ -19,10 +19,11 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
  * The HAPI custom structure for CH-Core Document.
  * 
  * @author <a href="roeland.luykx@raly.ch">Roeland Luykx</a>
- * @param <T>
  */
 @ResourceDef(profile = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-document")
 public class ChCoreDocument extends AbstractDocument {
+
+	private static final long serialVersionUID = -7561913084951681147L;
 
 	public ChCoreDocument() {
 		super();

@@ -21,6 +21,8 @@ import org.hl7.fhir.r4.model.Bundle;
  */
 public abstract class AbstractDocument extends Bundle {
 
+	private static final long serialVersionUID = 3421606160600710334L;
+
 	@Nullable
 	public <T> T getEntryByResourceType(final Class<T> resourceType) {
 		return this.getEntry().stream()

@@ -10,32 +10,24 @@
  */
 package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 
-import java.util.Date;
+import java.util.UUID;
 
-import org.hl7.fhir.r4.model.DateTimeType;
+import org.hl7.fhir.r4.model.Observation;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 
 /**
- * The HAPI custom structure for CH-VACD BasicImmunization.
+ * The HAPI custom structure for CH-VACD LaboratoryAndSerology.
  * 
  * @author <a href="roeland.luykx@raly.ch">Roeland Luykx</a>
  */
-@ResourceDef(profile = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-basic-immunization")
-public class ChVacdBasicImmunization extends ChVacdCondition {
+@ResourceDef(profile = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-laboratory-serology")
+public class ChVacdLaboratoryAndSerology extends Observation {
 
-	private static final long serialVersionUID = -5553941659934919134L;
+	private static final long serialVersionUID = -5282679759940081789L;
 
-	public ChVacdBasicImmunization() {
-		super();
-		addCategory().addCoding()
-				.setSystem("http://terminology.hl7.org/CodeSystem/condition-category")
-				.setCode("encounter-diagnosis");
-		setOnset(new DateTimeType().setValue(new Date()));
+	public ChVacdLaboratoryAndSerology() {
+		addIdentifier().setSystem("urn:ietf:rfc:3986")
+				.setValue("urn:uuid:" + UUID.randomUUID().toString());
 	}
-
-	public Date resolveOnsetDate() {
-		return getOnsetDateTimeType().getValue();
-	}
-
 }

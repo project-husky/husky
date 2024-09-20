@@ -19,22 +19,21 @@ import org.projecthusky.fhir.core.ch.exceptions.InvalidContentException;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 
 /**
- * The HAPI custom structure for CH-VACD ImmunizationAdministrationDocument.
+ * The HAPI custom structure for CH-VACD VaccinationRecordDocument.
  * 
  * @author <a href="roeland.luykx@raly.ch">Roeland Luykx</a>
  */
-@ResourceDef(profile = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-document-immunization-administration")
-public class ChVacdImmunizationAdministrationDocument extends ChVacdAbstractDocument {
+@ResourceDef(profile = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-document-vaccination-record")
+public class ChVacdVaccinationRecordDocument extends ChVacdAbstractDocument {
 
-	private static final long serialVersionUID = -5008469947339799878L;
+	private static final long serialVersionUID = 6984812668517079767L;
 
-	public ChVacdImmunizationAdministrationDocument() {
+	public ChVacdVaccinationRecordDocument() {
 		super();
 		this.setLanguage("en-US");
 
 		this.getEntry().clear();
-
-		ChVacdImmunizationAdministrationComposition composition = new ChVacdImmunizationAdministrationComposition();
+		ChVacdVaccinationRecordComposition composition = new ChVacdVaccinationRecordComposition();
 		composition.setId(UUID.randomUUID().toString());
 		composition.setStatus(CompositionStatus.FINAL);
 		composition.setDate(getTimestamp());
@@ -51,14 +50,13 @@ public class ChVacdImmunizationAdministrationDocument extends ChVacdAbstractDocu
 	 *             if the composition is missing.
 	 */
 	@ExpectsValidResource
-	public ChVacdImmunizationAdministrationComposition resolveComposition() {
-		final var entry = this
-				.getEntryByResourceType(ChVacdImmunizationAdministrationComposition.class);
+	public ChVacdVaccinationRecordComposition resolveComposition() {
+		final var entry = this.getEntryByResourceType(ChVacdVaccinationRecordComposition.class);
 		if (entry != null) {
 			return entry;
 		}
 		throw new InvalidContentException(
-				"The ChVacdImmunizationAdministrationComposition is missing in the document Bundle");
+				"The ChVacdVaccinationRecordComposition is missing in the document Bundle");
 	}
 
 }
