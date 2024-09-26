@@ -13,6 +13,7 @@ import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.Posolog
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
 import java.time.Instant;
+import java.util.Objects;
 
 /**
  * Describes when and what amount of medication must be taken.
@@ -94,7 +95,7 @@ public class EMediplanPosology implements EMediplanObject {
                 getFieldValidationPath(basePath, DETAIL_FIELD_NAME),
                 "The detail of the posology is missing."
         ));
-        //todo else validate detail
+        else result.add(detail.validate(getFieldValidationPath(basePath, DETAIL_FIELD_NAME)));
 
         if (start != null && end != null && end.isBefore(start)) result.add(getValidationIssue(
                 OperationOutcome.IssueSeverity.ERROR,
@@ -106,10 +107,19 @@ public class EMediplanPosology implements EMediplanObject {
         return result;
     }
 
+    /**
+     * Performs validation of the eMediplan object taking into account whether it belongs to an eMediplan medication
+     * plan document or to an eMediplan prescription document. This performs the base checks of {@link #validate(String)}
+     * plus extra validation checks tied to the eMediplan document type.
+     *
+     * @param basePath     The base path of the object.
+     * @param mediplanType The type of eMediplan document.
+     * @return The validation result.
+     */
     public ValidationResult validate(final @Nullable String basePath, final EMediplanType mediplanType) {
         final var result = validate(basePath);
 
-        if (mediplanType == EMediplanType.MEDICATION_PLAN) {
+        if (Objects.requireNonNull(mediplanType) == EMediplanType.MEDICATION_PLAN) {
             if (unit == null) result.add(getRequiredFieldValidationIssue(
                     getFieldValidationPath(basePath, UNIT_FIELD_NAME),
                     "The dosage unit is missing, but it is required for medication plans."
@@ -122,6 +132,6 @@ public class EMediplanPosology implements EMediplanObject {
     @Override
     public void trim() {
         if (asNeeded != null && asNeeded == DEFAULT_AS_NEEDED_VALUE) asNeeded = null;
-        //TODO trim detail
+        if (detail != null) detail.trim();
     }
 }

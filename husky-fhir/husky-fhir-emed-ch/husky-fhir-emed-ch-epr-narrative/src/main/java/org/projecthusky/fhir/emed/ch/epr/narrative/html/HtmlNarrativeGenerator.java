@@ -19,7 +19,6 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import java.io.IOException;
-import java.time.Instant;
 import java.util.*;
 
 /**
@@ -58,17 +57,11 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
                            ) {
         final var asneededTreatments = new HashMap<UUID, List<ChEmedEprMedicationStatementPmlc>>(5);
         final var activeTreatments = new HashMap<UUID, List<ChEmedEprMedicationStatementPmlc>>(5);
-        //TODO replace last statement computation with call to ChEmedEprDocumentPmlc.resolveLastStatement()
-        ChEmedEprMedicationStatementPmlc lastStatement = null;
+        ChEmedEprMedicationStatementPmlc lastStatement = document.resolveLastStatement();
         for (final var statement : document.resolveComposition().resolveMedicationStatements()) {
             if (statement.isShownInMedicationCard(document.resolveTimestamp())) {
                 addStatementToTreatments(statement,
                         statement.resolveEffectiveDosageInstructions().isRegular() ? activeTreatments : asneededTreatments);
-                if (lastStatement == null) lastStatement = statement;
-                else {
-                    if (getStatementAuthorshipDate(lastStatement).compareTo(getStatementAuthorshipDate(statement)) < 0)
-                        lastStatement = statement;
-                }
             }
         }
 
@@ -114,14 +107,5 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
             treatmentsList.add(statement);
             treatments.put(planId, treatmentsList);
         }
-    }
-
-    /**
-     * Gets the statement medical authorship timestamp.
-     * @param statement The medication statement for which to determine the medical authorship timestamp.
-     * @return The timestamp of the medical authorship.
-     */
-    private Instant getStatementAuthorshipDate(final ChEmedEprMedicationStatementPmlc statement) {
-        return statement.resolveInformationSource().getTime();
     }
 }

@@ -132,6 +132,15 @@ public class EMediplanMedicament implements EMediplanExtendable, EMediplanObject
         return validateBase(basePath, false);
     }
 
+    /**
+     *
+     * @param basePath           The object's JSON path.
+     * @param contextAwareCaller Whether the method was called from a basic object validation (i.e.
+     *                           {@link #validate(String)}) or with context (i.e. {@link #validate(String, EMediplanType)}).
+     *                           This allows avoiding redundant checks, if the context-aware caller will also invoke
+     *                           children validation that are context-aware, thus the basic validator will skip those.
+     * @return
+     */
     protected ValidationResult validateBase(final @Nullable String basePath, boolean contextAwareCaller) {
         final var result = new ValidationResult();
 
@@ -166,6 +175,14 @@ public class EMediplanMedicament implements EMediplanExtendable, EMediplanObject
         return result;
     }
 
+    /**
+     * Context-aware validation, that takes into account whether the eMediplan document is a treatment plan or a
+     * prescription.
+     *
+     * @param basePath     The object's JSON path.
+     * @param mediplanType The eMediplan document type.
+     * @return The validation result.
+     */
     public ValidationResult validate(final @Nullable String basePath, final EMediplanType mediplanType) {
         final var result = validateBase(basePath, true);
 

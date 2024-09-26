@@ -44,6 +44,13 @@ public class EMediplanConverter {
                 pmlc.resolvePatient(),
                 pmlc.resolveComposition().resolvePatientWeightObservation()
         ));
+        // If the patient did not have a preferred language, we still need to fill it in the eMediplan since it is
+        // mandatory for medication plans. The PMLC document language will be used in this case.
+        if (emediplan.getPatient().getLanguageCode() == null || emediplan.getPatient().getLanguageCode().isBlank())
+            emediplan.getPatient().setLanguageCode(
+                    EMediplanPatient.fhirLanguageCodeToEMediplanLanguageCode(pmlc.resolveComposition().getLanguage()
+                    )
+            );
 
         final var lastStatement = pmlc.resolveLastStatement();
         if (lastStatement != null) {

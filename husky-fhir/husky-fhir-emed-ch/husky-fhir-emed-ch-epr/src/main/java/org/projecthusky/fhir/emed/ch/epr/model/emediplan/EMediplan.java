@@ -39,6 +39,7 @@ import java.util.zip.GZIPOutputStream;
 @Data
 public class EMediplan implements EMediplanExtendable, EMediplanObject {
     public static final String EMEDIPLAN_VERSION = "ChMed23A";
+    public static final String EMEDIPLAN_TIMEZONE = "Europe/Zurich";
 
     /**
      * The patient.
@@ -87,7 +88,7 @@ public class EMediplan implements EMediplanExtendable, EMediplanObject {
      * The date of creation. Format: yyyy-mm-ddThh:mm:ss+02:00 (ISO 86012 Combined date and time in UTC)
      * (e.g. 2016-06-16T16:26:15+02:00)
      */
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssXXX", timezone = "Europe/Zurich")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssXXX", timezone = EMEDIPLAN_TIMEZONE)
     @JsonProperty("dt")
     protected Instant timestamp;
     /**
@@ -159,7 +160,7 @@ public class EMediplan implements EMediplanExtendable, EMediplanObject {
                             getFieldValidationPath(basePath, "hcOrg"),
                             "The hcOrg object is missing, but it is required when the author is a healthcare person."
                     ));
-            } else hcOrg.validate(getFieldValidationPath(basePath, "hcOrg"), type);
+            } else hcOrg.validate(getFieldValidationPath(basePath, "hcOrg"), resolvedType);
 
             if (hcPerson != null && hcOrg != null && hcPerson.getZsr() != null && !hcPerson.getZsr().isBlank() && hcOrg.getZsr() != null && !hcOrg.getZsr().isBlank())
                 result.add(getValidationIssue(
@@ -169,7 +170,7 @@ public class EMediplan implements EMediplanExtendable, EMediplanObject {
                         "The ZSR number may be present either in the healthcare person object or the healthcare organization object but not both."
                 ));
 
-            if (resolvedType == EMediplanType.MEDICATION_PLAN && (hcPerson == null || hcPerson.getGln() == null || hcPerson.getGln().isBlank()) && (hcOrg == null || hcOrg.getGln() == null || hcOrg.getGln().isBlank()))
+            if (resolvedType == EMediplanType.MEDICATION_PLAN && author == EMediplanAuthor.HEALTHCARE_PERSON && (hcPerson == null || hcPerson.getGln() == null || hcPerson.getGln().isBlank()) && (hcOrg == null || hcOrg.getGln() == null || hcOrg.getGln().isBlank()))
                 result.add(getRequiredFieldValidationIssue(
                         basePath,
                         "The GLN of either the healthcare professional or the healthcare organization is mandatory for eMediplan treatment plan documents done by a healthcare professional."
@@ -225,7 +226,7 @@ public class EMediplan implements EMediplanExtendable, EMediplanObject {
                         getFieldValidationPath(basePath, "patient"),
                         "The patient object is missing, but it is required."
                 ));
-            else  result.add(patient.validate(basePath + ".patient", type));
+            else  result.add(patient.validate(basePath + ".patient", resolvedType, timestamp));
         }
 
         if (extensions != null && !extensions.isEmpty()) {

@@ -11,6 +11,7 @@ import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.RiskCategory;
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -18,6 +19,8 @@ import java.util.regex.Pattern;
 @Data
 public class EMediplanPatientMedicalData implements EMediplanExtendable, EMediplanObject {
     public final static Pattern TIME_OF_GESTATION_PATTERN = Pattern.compile("[0-3]?[0-9]-[1-6]?");
+
+    protected static final String PREMATURE_BABY_FIELD_NAME = "prem";
 
     /**
      * First day of last menstruation, format: yyyy-mm-dd (ISO 86017 Date).
@@ -29,7 +32,7 @@ public class EMediplanPatientMedicalData implements EMediplanExtendable, EMedipl
     /**
      * True if it is a premature baby (and only if age <= 18 months), false otherwise.
      */
-    @JsonProperty("prem")
+    @JsonProperty(PREMATURE_BABY_FIELD_NAME)
     protected @Nullable Boolean prematureBaby;
     /**
      * The time of gestation, should usually only be filled if prematureBaby is true.
@@ -67,11 +70,13 @@ public class EMediplanPatientMedicalData implements EMediplanExtendable, EMedipl
         return risks;
     }
 
+    @Override
     public List<@NonNull EMediplanExtension> getExtensions() {
         if (extensions == null) extensions = new ArrayList<>();
         return extensions;
     }
 
+    @Override
     public ValidationResult validate(final @Nullable String basePath) {
         final var result = new ValidationResult();
 
@@ -90,9 +95,6 @@ public class EMediplanPatientMedicalData implements EMediplanExtendable, EMedipl
                         "The date of the last menstruation is missing but should be included due to having risk 78."
                 ));
         }
-
-        //TODO check if premature is present when older than 18month? this requires to have the age passed as a parameter
-        //or to be checked at a higher level
 
         if (timeOfGestation != null && !timeOfGestation.isBlank()) {
             if (prematureBaby == null || !prematureBaby) result.add( getValidationIssue(
@@ -131,6 +133,26 @@ public class EMediplanPatientMedicalData implements EMediplanExtendable, EMedipl
                 result.add(extsIterator.next().validate(getFieldValidationPath(basePath, "exts",index)));
             }
         }
+
+        return result;
+    }
+
+    /**
+     * Performs context-aware validation of the object, including the base context-unaware validation.
+     *
+     * @param basePath The object's JSON path.
+     * @param age      The age of the patient at the time of the document creation.
+     * @return         The validation result.
+     */
+    public ValidationResult validate(final @Nullable String basePath, final @Nullable Period age) {
+        final var result = validate(basePath);
+
+        if (age != null && prematureBaby != null && age.getMonths() > 18) result.add(getValidationIssue(
+                OperationOutcome.IssueSeverity.WARNING,
+                OperationOutcome.IssueType.INVALID,
+                getFieldValidationPath(basePath, PREMATURE_BABY_FIELD_NAME),
+                "The premature baby flag is present but the age of the patient at the time of the document creation is greater than 18 months. The flag should not be present."
+        ));
 
         return result;
     }

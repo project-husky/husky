@@ -17,7 +17,10 @@ import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.EMediplanType;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.Gender;
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -32,6 +35,8 @@ public class EMediplanPatient implements EMediplanExtendable, EMediplanObject {
     private static final Pattern PHONE_NUMBER_PATTERN = Pattern.compile("\\+?[0-9]+[ 0-9]*");
     private static final Pattern EMAIL_PATTERN =
             Pattern.compile("^(?=.{1,64}@)[\\\\p{L}0-9_-]+(\\\\.[\\\\p{L}0-9_-]+)*@[^-][\\\\p{L}0-9-]+(\\\\.[\\\\p{L}0-9-]+)*(\\\\.[\\\\p{L}]{2,})$");
+
+    protected static final String MEDICAL_DATA_FIELD_NAME = "mData";
 
     /**
      * First name.
@@ -76,7 +81,7 @@ public class EMediplanPatient implements EMediplanExtendable, EMediplanObject {
     /**
      * Medical data information.
      */
-    @JsonProperty("mData")
+    @JsonProperty(MEDICAL_DATA_FIELD_NAME)
     protected @Nullable EMediplanPatientMedicalData medicalData;
     /**
      * List of phone numbers.
@@ -94,6 +99,19 @@ public class EMediplanPatient implements EMediplanExtendable, EMediplanObject {
 
     @Override
     public ValidationResult validate(final @Nullable String basePath) {
+        return validateBase(basePath, false);
+    }
+
+    /**
+     * Base validation that performs or skips certain validation checks depending on whether the caller is context-aware
+     * or not. This prevents redundant validation checks when the caller is context-aware and will also call children
+     * context-aware validation methods instead of their basic counterparts, that will be skipped by this method.
+     *
+     * @param basePath           The object's JSON path.
+     * @param contextAwareCaller Whether caller is context aware or not. If true, some validation checks might be skipped.
+     * @return The validation result.
+     */
+    protected ValidationResult validateBase(final @Nullable String basePath, boolean contextAwareCaller) {
         final var result = new ValidationResult();
 
         if (firstName == null || firstName.isBlank())
@@ -151,7 +169,8 @@ public class EMediplanPatient implements EMediplanExtendable, EMediplanObject {
             }
         }
 
-        if (medicalData != null) result.add(medicalData.validate(basePath + ".mData"));
+        if (medicalData != null && !contextAwareCaller)
+            result.add(medicalData.validate(getFieldValidationPath(basePath, MEDICAL_DATA_FIELD_NAME)));
 
         if (phones != null && !phones.isEmpty()) {
             final var phonesIterator = phones.listIterator();
@@ -183,8 +202,21 @@ public class EMediplanPatient implements EMediplanExtendable, EMediplanObject {
         return result;
     }
 
-    public ValidationResult validate(final @Nullable String basePath, final EMediplanType mediplanType) {
-        final var result = validate(basePath);
+    /**
+     * Validates the patient object taking into account which type of eMediplan document it belongs to. It performs the
+     * basic check done by {@link #validate(String)} plus extra validation taking into account the document type.
+     *
+     * @param basePath     The base path of the JSON object.
+     * @param mediplanType The type of eMediplan document.
+     * @param timestamp    The timestamp of the eMediplan document creation.
+     * @return The validation result.
+     */
+    public ValidationResult validate(final @Nullable String basePath,
+                                     final EMediplanType mediplanType,
+                                     final Instant timestamp) {
+        Objects.requireNonNull(mediplanType);
+        Objects.requireNonNull(timestamp);
+        final var result = validateBase(basePath, true);
 
         if (mediplanType == EMediplanType.MEDICATION_PLAN) {
             if ((languageCode == null || languageCode.isBlank())) result.add(getRequiredFieldValidationIssue(
@@ -199,10 +231,16 @@ public class EMediplanPatient implements EMediplanExtendable, EMediplanObject {
             ));
 
             if (medicalData != null) result.add(getIgnoredFieldValidationIssue(
-                    getFieldValidationPath(basePath, "mData"),
+                    getFieldValidationPath(basePath, MEDICAL_DATA_FIELD_NAME),
                     "The patient's medical data object should not be present in a prescription eMediplan document."
             ));
         }
+
+        if (medicalData != null)
+            result.add(medicalData.validate(
+                    getFieldValidationPath(basePath, MEDICAL_DATA_FIELD_NAME),
+                    Period.between(birthDate, LocalDate.ofInstant(timestamp, ZoneId.of(EMediplan.EMEDIPLAN_TIMEZONE)))
+                    ));
 
         return result;
     }
@@ -229,13 +267,8 @@ public class EMediplanPatient implements EMediplanExtendable, EMediplanObject {
         final var preferredLanguage = eprFhirPatient.resolveLanguageOfCorrespondence();
         if (preferredLanguage != null && preferredLanguage.hasLanguage() && preferredLanguage.getLanguage().hasCoding()) {
             language = preferredLanguage.getLanguage().getCoding().stream().filter(Coding::hasCode)
-                    .map(Coding::getCode).map(code -> {
-                        if (code.length() == 2)
-                            return code;
-                        if (code.length() == 5 && code.toUpperCase().endsWith("-CH"))
-                            return code.substring(0, code.length() - 3);
-                        return null;
-                    }).filter(Objects::nonNull).findAny().orElseGet(() -> {
+                    .map(Coding::getCode).map(EMediplanPatient::fhirLanguageCodeToEMediplanLanguageCode)
+                    .filter(Objects::nonNull).findAny().orElseGet(() -> {
                         log.warn("Could not fetch a 2 letter code for the patient's language, but it is needed for eMediplan.");
                         return null;
                     });
@@ -262,5 +295,24 @@ public class EMediplanPatient implements EMediplanExtendable, EMediplanObject {
                 eprFhirPatient.resolvePhoneNumbersAsStrings(true),
                 eprFhirPatient.resolveEmailAddressesAsStrings(true)
         );
+    }
+
+    /**
+     * Translates a code value from a FHIR language coding to an eMediplan language code.
+     * <p>
+     *     It expects a language code that would be either a 2-character ISO language code or one of the 5 characters
+     *     long Swiss variants (e.g. fr-CH). Matching is not case-sensitive. A 5-character language code will be
+     *     shortened to a 2 character code to comply with eMediplan specifications.
+     * </p>
+     *
+     * @param code The language code.
+     * @return The eMediplan language code.
+     */
+    public static @Nullable String fhirLanguageCodeToEMediplanLanguageCode(final String code) {
+        if (code.length() == 2)
+            return code;
+        if (code.length() == 5 && code.toUpperCase().endsWith("-CH"))
+            return code.substring(0, code.length() - 3);
+        return null;
     }
 }
