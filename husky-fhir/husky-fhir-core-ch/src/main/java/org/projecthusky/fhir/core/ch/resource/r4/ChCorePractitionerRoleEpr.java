@@ -12,6 +12,7 @@ package org.projecthusky.fhir.core.ch.resource.r4;
 
 import java.util.UUID;
 
+import org.hl7.fhir.instance.model.api.IBaseReference;
 import org.hl7.fhir.r4.model.Reference;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
@@ -28,7 +29,9 @@ public class ChCorePractitionerRoleEpr extends ChCorePractitionerRole {
 	public ChCorePractitionerEpr addPractitioner() {
 		ChCorePractitionerEpr practitioner = new ChCorePractitionerEpr();
 		practitioner.setId(UUID.randomUUID().toString());
-		this.setPractitioner(new Reference(practitioner));
+		Reference ref = new Reference();
+		ref.setReference("urn:uuid:" + practitioner.getId()).setResource(practitioner);
+		this.setPractitioner(ref);
 		return practitioner;
 	}
 
@@ -36,7 +39,9 @@ public class ChCorePractitionerRoleEpr extends ChCorePractitionerRole {
 	public ChCoreOrganizationEpr addOrganization() {
 		ChCoreOrganizationEpr organization = new ChCoreOrganizationEpr();
 		organization.setId(UUID.randomUUID().toString());
-		this.setOrganization(new Reference(organization));
+		Reference ref = new Reference();
+		ref.setReference("urn:uuid:" + organization.getId()).setResource(organization);
+		this.setOrganization(ref);
 		return organization;
 	}
 

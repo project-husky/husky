@@ -78,7 +78,7 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 		this.getEntry().add(new BundleEntryComponent().setResource(immunization)
 				.setFullUrl("urn:uuid:" + immunization.getId()));
 		this.resolveComposition().resolveAdministrationSection()
-				.addEntry(new Reference(immunization));
+				.addEntry(new Reference("urn:uuid:" + immunization.getId()));
 	}
 
 	/**
