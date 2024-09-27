@@ -14,9 +14,12 @@ import java.util.List;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Patient;
+import org.hl7.fhir.r4.model.UriType;
 import org.projecthusky.fhir.core.ch.datatype.r4.CHCoreAddressECH11PlaceOfOrigin;
 import org.projecthusky.fhir.core.ch.datatype.r4.CHCoreAddressEch11PlaceOfBirth;
+import org.projecthusky.fhir.core.ch.enums.ReligiousAffiliation;
 import org.projecthusky.fhir.core.ch.resource.extension.r4.ChCoreCitizenshipExt;
 
 import ca.uhn.fhir.model.api.annotation.Child;
@@ -69,32 +72,48 @@ public class ChCorePatient extends Patient {
 		return placeOfBirth;
 	}
 
-	public void setPlaceOfBirth(CHCoreAddressEch11PlaceOfBirth placeOfBirth) {
+	public ChCorePatient setPlaceOfBirth(CHCoreAddressEch11PlaceOfBirth placeOfBirth) {
 		this.placeOfBirth = placeOfBirth;
+		return this;
 	}
 
 	public List<CHCoreAddressECH11PlaceOfOrigin> getPlaceOfOrigin() {
 		return placeOfOrigin;
 	}
 
-	public void setPlaceOfOrigin(List<CHCoreAddressECH11PlaceOfOrigin> placeOfOrigin) {
+	public ChCorePatient setPlaceOfOrigin(List<CHCoreAddressECH11PlaceOfOrigin> placeOfOrigin) {
 		this.placeOfOrigin = placeOfOrigin;
+		return this;
 	}
 
 	public List<ChCoreCitizenshipExt> getCitizenship() {
 		return citizenship;
 	}
 
-	public void setCitizenship(List<ChCoreCitizenshipExt> citizenship) {
+	public ChCorePatient setCitizenship(List<ChCoreCitizenshipExt> citizenship) {
 		this.citizenship = citizenship;
+		return this;
 	}
 
 	public CodeableConcept getReligion() {
 		return religion;
 	}
 
-	public void setReligion(CodeableConcept religion) {
-		this.religion = religion;
+	/**
+	 * Sets patient's religion.
+	 *
+	 * @param religion
+	 *            Religious Affiliation - the patient's religion.
+	 * @return this.
+	 */
+	public ChCorePatient setReligion(final ReligiousAffiliation religion) {
+		final var system = UriType.fromOid(religion.getCodeSystemId());
+
+		final var coding = new Coding().setCode(religion.getCodeValue()).setSystemElement(system)
+				.setDisplay(religion.getDisplayName());
+
+		this.religion = new CodeableConcept(coding);
+		return this;
 	}
 
 	@Override

@@ -53,11 +53,6 @@ public class ChCorePatientEpr extends ChCorePatient {
 
 	// TODO citizenship
 
-	@Nullable
-	@Child(name = "religion")
-	@Extension(url = "http://hl7.org/fhir/StructureDefinition/patient-religion", definedLocally = false)
-	protected CodeableConcept religion;
-
 	/**
 	 * Empty constructor for the parser.
 	 */
@@ -150,22 +145,7 @@ public class ChCorePatientEpr extends ChCorePatient {
 		return LocalDate.ofInstant(this.getBirthDate().toInstant(), ZoneId.systemDefault());
 	}
 
-	/**
-	 * Sets patient's religion.
-	 *
-	 * @param religion
-	 *            Religious Affiliation - the patient's religion.
-	 * @return this.
-	 */
-	public ChCorePatientEpr setReligion(final ReligiousAffiliation religion) {
-		final var system = UriType.fromOid(religion.getCodeSystemId());
-
-		final var coding = new Coding().setCode(religion.getCodeValue()).setSystemElement(system)
-				.setDisplay(religion.getDisplayName());
-
-		this.religion = new CodeableConcept(coding);
-		return this;
-	}
+	
 
 	/**
 	 * Sets the patient's birthdate.
