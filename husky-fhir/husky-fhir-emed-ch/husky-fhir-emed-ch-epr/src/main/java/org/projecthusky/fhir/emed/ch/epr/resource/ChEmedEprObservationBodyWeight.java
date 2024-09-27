@@ -11,9 +11,9 @@
 package org.projecthusky.fhir.emed.ch.epr.resource;
 
 import org.hl7.fhir.r4.model.Observation;
+import org.projecthusky.fhir.core.ch.resource.r4.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
-import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
 
 import java.sql.Date;

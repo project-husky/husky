@@ -1,4 +1,4 @@
-package org.projecthusky.fhir.emed.ch.common.enums;
+package org.projecthusky.fhir.core.ch.enums;
 
 
 

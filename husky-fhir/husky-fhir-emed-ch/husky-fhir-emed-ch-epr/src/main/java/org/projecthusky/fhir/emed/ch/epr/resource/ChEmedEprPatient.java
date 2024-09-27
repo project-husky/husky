@@ -10,8 +10,9 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.resource;
 
+import org.projecthusky.fhir.core.ch.resource.r4.ChCorePatientEpr;
+
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
-import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
 
 /**
  * The HAPI custom structure for CH-EMED-EPR Patient.
