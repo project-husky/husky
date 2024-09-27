@@ -41,7 +41,7 @@ public class ChVacdVaccinationRecordComposition extends ChVacdAbstractCompositio
 				.setValue("urn:uuid:" + UUID.randomUUID().toString()));
 		setConfidentiality(DocumentConfidentiality.N);
 		getConfidentialityElement().addExtension().setUrl(
-				"http://fhir.ch/ig/ch-core/5.0.0-ballot/StructureDefinition-ch-ext-epr-confidentialitycode.html")
+				"http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-confidentialitycode")
 				.setValue(new CodeableConcept(new Coding("http://snomed.info/sct", "17621005",
 						"Normal (qualifier value)")));
 	}

@@ -14,8 +14,9 @@ import java.util.List;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Bundle;
+import org.hl7.fhir.r4.model.DomainResource;
 
-/**	
+/**
  * 
  * @author <a href="roeland.luykx@raly.ch">Roeland Luykx</a>
  */
@@ -41,5 +42,22 @@ public abstract class AbstractDocument extends Bundle {
 	public <T> List<T> getEntryResourceByResourceType(final Class<T> resourceType) {
 		return this.getEntry().stream().map(BundleEntryComponent::getResource)
 				.filter(resourceType::isInstance).map(resourceType::cast).toList();
+	}
+
+	/**
+	 * Checks if the document has an entry with the specified resource type and
+	 * id.
+	 * 
+	 * @param res
+	 *            the resource to search for
+	 * @return true if the document has an entry with the specified resource
+	 *         type and id, false otherwise
+	 */
+	public boolean hasEntryByResourceTypeAndId(DomainResource res) {
+		return this.getEntry().stream()
+				.filter(entry -> res.getResourceType()
+						.equals(entry.getResource().getResourceType()))
+				.map(BundleEntryComponent::getResource)
+				.filter(entry1 -> entry1.getId().equals(res.getId())).findAny().isPresent();
 	}
 }

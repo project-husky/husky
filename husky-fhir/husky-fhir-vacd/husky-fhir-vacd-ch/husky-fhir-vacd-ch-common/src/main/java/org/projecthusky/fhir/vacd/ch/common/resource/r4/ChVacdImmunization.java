@@ -43,6 +43,7 @@ public class ChVacdImmunization extends ChCoreImmunization {
 	public ChVacdImmunization() {
 		addIdentifier().setSystem("urn:ietf:rfc:3986")
 				.setValue("urn:uuid:" + UUID.randomUUID().toString());
+		setStatus(ImmunizationStatus.COMPLETED);
 	}
 
 	public ChVacdMergingConflictExt getConflict() {

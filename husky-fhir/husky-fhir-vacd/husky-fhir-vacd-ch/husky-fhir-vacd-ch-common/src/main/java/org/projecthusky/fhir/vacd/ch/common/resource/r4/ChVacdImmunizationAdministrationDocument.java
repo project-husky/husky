@@ -30,14 +30,8 @@ public class ChVacdImmunizationAdministrationDocument extends ChVacdAbstractDocu
 
 	public ChVacdImmunizationAdministrationDocument() {
 		super();
-		this.setLanguage("en-US");
-
-		this.getEntry().clear();
-
 		ChVacdImmunizationAdministrationComposition composition = new ChVacdImmunizationAdministrationComposition();
 		composition.setId(UUID.randomUUID().toString());
-		composition.setStatus(CompositionStatus.FINAL);
-		composition.setDate(getTimestamp());
 
 		this.getEntry().add(new BundleEntryComponent().setResource(composition)
 				.setFullUrl("urn:uuid:" + composition.getId()));

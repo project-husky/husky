@@ -30,9 +30,6 @@ public class ChVacdVaccinationRecordDocument extends ChVacdAbstractDocument {
 
 	public ChVacdVaccinationRecordDocument() {
 		super();
-		this.setLanguage("en-US");
-
-		this.getEntry().clear();
 		ChVacdVaccinationRecordComposition composition = new ChVacdVaccinationRecordComposition();
 		composition.setId(UUID.randomUUID().toString());
 		composition.setStatus(CompositionStatus.FINAL);
