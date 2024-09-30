@@ -135,6 +135,21 @@ public abstract class PdfMedicationCardGenerator {
         }
     }
 
+    protected String getPdfAuthor() {
+        if (softwareProviderMetadata != null) {
+            final var author = new StringBuilder();
+
+            if (softwareProviderMetadata.hasSoftwareName())
+                author.append(softwareProviderMetadata.softwareName()).append(" ");
+            if (softwareProviderMetadata.hasSoftwareProvider())
+                author.append("by ").append(softwareProviderMetadata.softwareProvider()).append(" ");
+            if (softwareProviderMetadata.hasSoftwareVersion())
+                author.append("(").append(softwareProviderMetadata.softwareVersion()).append(")");
+
+            return author.toString();
+        }
+        return "";
+    }
 
     static InputStream getResourceAsStream(String resource) throws FileNotFoundException {
         InputStream is = PdfMedicationCardGenerator.class.getResourceAsStream("/emed/pdf/fonts/" + resource);
