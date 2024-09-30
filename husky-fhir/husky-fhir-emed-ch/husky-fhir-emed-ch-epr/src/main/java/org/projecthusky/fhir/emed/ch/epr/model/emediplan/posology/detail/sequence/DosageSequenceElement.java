@@ -8,6 +8,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.OperationOutcome;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.DosageSequenceType;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.PosologyDetail;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.SequenceDosage;
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
 @EqualsAndHashCode(callSuper = true)
@@ -16,6 +17,10 @@ import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 public class DosageSequenceElement extends SequenceElement {
     protected static final String DETAIL_FIELD_NAME = "po";
 
+    /**
+     * The sequence's posology detail. Note that {@link SequenceDosage} details are not allowed (at validation time) to
+     * prevent nested sequences.
+     */
     @JsonProperty(DETAIL_FIELD_NAME)
     protected PosologyDetail detail;
 
@@ -43,6 +48,14 @@ public class DosageSequenceElement extends SequenceElement {
                 getFieldValidationPath(basePath, DETAIL_FIELD_NAME),
                 "The posology detail is missing but it is mandatory for a posology sequence element."
         ));
+        else {
+            if (detail instanceof SequenceDosage) result.add(getValidationIssue(
+                    OperationOutcome.IssueSeverity.ERROR,
+                    OperationOutcome.IssueType.INVALID,
+                    getFieldValidationPath(basePath, DETAIL_FIELD_NAME),
+                    "Sequence nesting is not allowed."
+            ));
+        }
 
         return result;
     }

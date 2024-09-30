@@ -4,6 +4,7 @@ import com.google.common.collect.Streams;
 import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
 import org.projecthusky.fhir.emed.ch.epr.enums.SubstanceAdministrationSubstitutionCode;
 import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
@@ -37,6 +38,7 @@ public class EMediplanConverter {
      * @param pmlc The PMLC document to be converted.
      * @return An equivalent eMediplan object.
      */
+    @ExpectsValidResource
     public static EMediplan toEMediplan(final ChEmedEprDocumentPmlc pmlc) {
         final EMediplan emediplan = new EMediplan();
 
