@@ -97,12 +97,6 @@
             <th:block th:if="${statement.resolveMedicalAuthor().getPractitionerRole() != null}">
                 <th:block th:insert="~{datatypes :: human-name(${statement.resolveMedicalAuthor().getPractitionerRole().resolvePractitioner().resolveName()}, ${lang})}"/>
             </th:block>
-            <!-- if self-medication we will just write that instead of displaying the name of the medical author
-            <th:block th:if="${statement.resolveMedicalAuthor().getPatient() != null}"
-                      th:insert="~{datatypes :: human-name(${statement.resolveMedicalAuthor().getPatient().resolveName()}, ${lang})}"/>
-            <th:block th:if="${statement.resolveMedicalAuthor().getRelatedPerson() != null}"
-                      th:insert="~{datatypes :: human-name(${statement.resolveMedicalAuthor().getRelatedPerson().getNameFirstRep()}, ${lang})}"/>
-            -->
             <th:block th:unless="${statement.resolveMedicalAuthor().getPractitionerRole() != null}"
                       th:text="Automédication"/>
         </td>

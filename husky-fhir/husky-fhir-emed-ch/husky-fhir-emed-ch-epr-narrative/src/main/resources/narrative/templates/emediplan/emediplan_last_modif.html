@@ -16,5 +16,5 @@
   <span th:if="${lastStatement.resolveInformationSource.practitionerRole != null}">
     <th:block th:replace="~{datatypes :: human-name(${lastStatement.resolveInformationSource.practitionerRole.resolvePractitioner.name[0]}, ${lang})}"/>
   </span>
-  <span>(<th:block th:replace="~{datatypes :: instant(${lastStatement.resolveInformationSource.time}, ${lang})}"/>)</span>
+  <span>(<th:block th:replace="~{datatypes :: instant(${lastStatement.resolveMedicalAuthorshipTimestamp()}, ${lang})}"/>)</span>
 </th:block>

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.epr.narrative.enums.NarrativeLanguage;
-import org.projecthusky.fhir.emed.ch.epr.narrative.pdf.ChEmedEprPdfMedicationCardGenerator;
+import org.projecthusky.fhir.emed.ch.epr.narrative.pdf.EMediplanPdfMedicationCardGenerator;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprCompositionPmlc;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprDocumentPmlc;
 import org.projecthusky.fhir.emed.ch.epr.service.ChEmedEprParser;
@@ -18,12 +18,7 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Tests of the {@link ChEmedEprPdfMedicationCardGenerator} class.
- *
- * @author Ronaldo Loureiro
- */
-class EmedPdfGeneratorTest {
+public class EMediplanPdfGeneratorTest {
     private static final SoftwareProviderMetadata softwareProviderMetadata = new SoftwareProviderMetadata(
             "Husky",
             "test",
@@ -31,7 +26,7 @@ class EmedPdfGeneratorTest {
     );
 
     @Test
-    void testGeneratePdf() throws Exception {
+    void testGeneratePdf() throws IOException, ParserConfigurationException, ValidationException {
         final var xml = new String(getClass().getResourceAsStream("/2-7-MedicationCard.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var documents = parser.parse(xml, EmedDocumentType.PMLC);
@@ -40,7 +35,7 @@ class EmedPdfGeneratorTest {
         assertNotNull(pmlcDocument.resolveComposition());
         assertInstanceOf(ChEmedEprCompositionPmlc.class, pmlcDocument.resolveComposition());
 
-        final var pdfGenerator = new ChEmedEprPdfMedicationCardGenerator(() -> softwareProviderMetadata);
+        final var pdfGenerator = new EMediplanPdfMedicationCardGenerator(() -> softwareProviderMetadata);
         final var generatedPdf = pdfGenerator.generate(pmlcDocument, NarrativeLanguage.FRENCH);
         assertNotNull(generatedPdf);
 
@@ -59,7 +54,7 @@ class EmedPdfGeneratorTest {
         assertNotNull(pmlcDocument.resolveComposition());
         assertInstanceOf(ChEmedEprCompositionPmlc.class, pmlcDocument.resolveComposition());
 
-        final var pdfGenerator = new ChEmedEprPdfMedicationCardGenerator(() -> softwareProviderMetadata);
+        final var pdfGenerator = new EMediplanPdfMedicationCardGenerator(() -> softwareProviderMetadata);
         final var generatedPdf = pdfGenerator.generate(pmlcDocument, NarrativeLanguage.FRENCH);
         assertNotNull(generatedPdf);
 

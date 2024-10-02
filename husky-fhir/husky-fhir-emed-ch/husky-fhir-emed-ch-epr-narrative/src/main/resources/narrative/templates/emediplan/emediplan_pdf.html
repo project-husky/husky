@@ -174,7 +174,7 @@
                 <span class="emediplan-header-title">Le plan suisse de médication</span>
             </td>
             <td class="emediplan-header-patient" id="emediplan-header-patient-info"
-                th:insert="~{emediplan/emediplan_patient :: patient-data(${resource.resolvePatient()}, ${lang})}">
+                th:insert="~{emediplan/emediplan_patient :: patient-data(${resource.resolvePatient()}, ${resource.resolveComposition.resolvePatientWeightObservation()}, ${lang})}">
             </td>
             <th:block th:with="lastStatement = ${resource.resolveLastStatement()}">
                 <td class="emediplan-header-service-provider" id="emediplan-header-service-provider" th:if="${lastStatement != null}">

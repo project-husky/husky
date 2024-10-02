@@ -152,7 +152,7 @@ public abstract class PdfMedicationCardGenerator {
     }
 
     static InputStream getResourceAsStream(String resource) throws FileNotFoundException {
-        InputStream is = PdfMedicationCardGenerator.class.getResourceAsStream("/emed/pdf/fonts/" + resource);
+        InputStream is = PdfMedicationCardGenerator.class.getClassLoader().getResourceAsStream("narrative/default/font/" + resource);
         if (is == null) {
             throw new FileNotFoundException("The resource '" + resource + "' is not found");
         } else {

@@ -7,9 +7,6 @@ import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprDocumentPmlc;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,21 +31,13 @@ public class ChEmedEprPdfMedicationCardGenerator extends PdfMedicationCardGenera
         bookmarks.put("Traitements actifs", "#active-treatments");
         bookmarks.put("Traitements en réserve", "#asneeded-treatments");
 
-        final var generationDate =
-                DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm", lang.getLocale()).withZone(ZoneId.systemDefault()).format(Instant.now());
-        final var subjectDateOfBirth =
-                DateTimeFormatter.ofPattern("dd/MM/yyyy", lang.getLocale()).withZone(ZoneId.systemDefault()).format(pmlcDocument.resolvePatient().resolveBirthDate());
-
-        // TODO change template to remove this substitution
-        final var template = this.template.replace("#generationDate", generationDate)
-                .replace("#subjectDateOfBirth", subjectDateOfBirth);
-
         final Map<String, Object> contextVariables = Map.of(
                 "subject", formatHumanName(pmlcDocument.resolvePatient().resolveName()),
                 "author", getPdfAuthor(),
                 "description", "Une carte de médication pour le sujet, générée à la demande",
                 "title", "Carte de médication",
                 "bookmarks", bookmarks,
+                "resource", pmlcDocument,
                 "content", body
         );
 

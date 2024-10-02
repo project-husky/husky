@@ -243,7 +243,7 @@ public class ChCorePatientEpr extends Patient {
 
     /**
      * Fetches the list of email address values, optionally checking if the period is valid at the moment.
-     * @param activeOnly If true, the method will filter out email address for which the current timestamp is not within
+     * @param activeOnly If true, the method will filter out phone numbers for which the current timestamp is not within
      *                   the period boundaries, if defined.
      * @return The list of matching email addresses, as strings.
      */

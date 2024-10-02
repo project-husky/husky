@@ -70,7 +70,7 @@ public class EMediplanPdfMedicationCardGenerator extends PdfMedicationCardGenera
 
         final Map<String, Object> contextVariables = Map.of(
                 "subject", formatHumanName(pmlcDocument.resolvePatient().resolveName()),
-                "author", getPdfAuthor(), // TODO implement
+                "author", getPdfAuthor(),
                 "description", "Une carte de médication pour le sujet, générée à la demande",
                 "title", "Carte de médication",
                 "bookmarks", bookmarks,
