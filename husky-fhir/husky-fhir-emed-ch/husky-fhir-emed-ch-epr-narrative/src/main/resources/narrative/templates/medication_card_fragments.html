@@ -7,33 +7,6 @@
   ~ on the basis of the eHealth Connector opensource project from June 28, 2021,
   ~ whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
   */-->
-<table th:fragment="table(treatments, lang)">
-    <thead>
-        <tr>
-            <td rowspan="2" colspan="2">Nom du médicament</td>
-            <td colspan="4">Dosage</td>
-            <td rowspan="2">Commentaire</td>
-            <td rowspan="2">Voie et localisation</td>
-        </tr>
-        <tr>
-            <td>Matin</td>
-            <td>Midi</td>
-            <td>Soir</td>
-            <td>Nuit</td>
-        </tr>
-    </thead>
-    <th:block th:each="statements: ${treatments}">
-        <th:block th:insert="~{::treatmentPlan(${statements.value}, ${lang})}"/>
-    </th:block>
-    <th:block th:if="${treatments.isEmpty()}">
-        <tbody>
-            <tr>
-                <td colspan="8" class="no-treatment">Aucun traitement</td>
-            </tr>
-        </tbody>
-    </th:block>
-</table>
-
 <th:block th:fragment="treatmentPlan(statements, lang)">
     <tbody class="treatment-plan-body">
         <th:block th:each="statement, iStat: ${statements}">
