@@ -106,6 +106,7 @@ public class EMediplan implements EMediplanExtendable, EMediplanObject {
         getMedicaments().add(Objects.requireNonNull(medicament));
     }
 
+    @Override
     public List<@NonNull EMediplanExtension> getExtensions() {
         if (extensions == null) extensions = new ArrayList<>();
         return extensions;
@@ -126,6 +127,7 @@ public class EMediplan implements EMediplanExtendable, EMediplanObject {
         } else return type;
     }
 
+    @Override
     public ValidationResult validate(final @Nullable String basePath) {
         final var result = new ValidationResult();
 
@@ -246,6 +248,7 @@ public class EMediplan implements EMediplanExtendable, EMediplanObject {
         return result;
     }
 
+    @Override
     public void trim() {
         if (patient != null) patient.trim();
         if (hcPerson != null) hcPerson.trim();
