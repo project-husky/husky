@@ -39,10 +39,14 @@
             <td th:insert="~{datatypes :: intake-timing(${dosage.hasNightSimpleEventTiming}, ${lang})}"/>
         </th:block>
         <th:block th:if="${dosage.hasSimpleDose}">
-            <td colspan="4" th:insert="~{datatypes :: simple-dose(${dosage.simpleDose}, ${lang})}"/>
+            <td colspan="4" class="daily-intake">
+                *** <th:block th:insert="~{datatypes :: simple-dose(${dosage.simpleDose}, ${lang})}"/> par jour ***
+            </td>
         </th:block>
         <th:block th:unless="${dosage.hasIntakes or dosage.hasSimpleEventTimings or dosage.hasSimpleDose}">
-            <td colspan="4" th:text="${dosage.patientInstructions}"/>
+            <td colspan="4" class="daily-instructions">
+                *** <th:block th:text="${dosage.patientInstructions}"/> ***
+            </td>
         </th:block>
 
         <!-- Commentaire (raison et instructions au patient -->
