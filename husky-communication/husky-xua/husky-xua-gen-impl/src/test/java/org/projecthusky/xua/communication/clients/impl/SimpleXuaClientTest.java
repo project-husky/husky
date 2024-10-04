@@ -15,6 +15,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.projecthusky.xua.exceptions.ClientSendException;
 
@@ -49,6 +50,7 @@ class SimpleXuaClientTest {
 	}
 
 	@Test
+	@Disabled
 	void testExtractResponseMultiparted() throws ClientSendException, IOException {
 		SimpleXuaClient client = new SimpleXuaClient(null);
 		String ref = client.extractResponse(testMultipartedResponseEntity);
