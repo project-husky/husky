@@ -41,7 +41,8 @@ jobs:
         env:
           ARTF_USER: ${{ secrets.ARTF_USER }}
           ARTF_PASS: ${{ secrets.ARTF_PASS }}
-        run: mvn install javadoc:jar source:jar deploy --batch-mode --no-transfer-progress --file pom.xml -s $GITHUB_WORKSPACE/settings.xml
+        run: printenv
+#        run: mvn install javadoc:jar source:jar deploy --batch-mode --no-transfer-progress --file pom.xml -s $GITHUB_WORKSPACE/settings.xml
       
       # Initializes the CodeQL tools for scanning.
       - name: Initialize CodeQL
