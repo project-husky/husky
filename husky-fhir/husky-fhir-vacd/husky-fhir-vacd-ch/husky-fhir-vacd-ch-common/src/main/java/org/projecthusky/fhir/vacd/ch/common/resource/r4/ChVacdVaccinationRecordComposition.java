@@ -36,7 +36,7 @@ public class ChVacdVaccinationRecordComposition extends ChVacdAbstractCompositio
 		setTitle("Vaccination Record");
 		setType(new CodeableConcept(new Coding("http://snomed.info/sct", "41000179103", "")));
 		addCategory(new CodeableConcept(new Coding("urn:oid:2.16.756.5.30.1.127.3.10.10",
-				"urn:che:epr:ch-vacd:vaccination-record:2022", "Vaccination Record")));
+				"urn:che:epr:ch-vacd:vaccination-record:2022", "CH VACD Vaccination Record")));
 		setIdentifier(new Identifier().setSystem("urn:ietf:rfc:3986")
 				.setValue("urn:uuid:" + UUID.randomUUID().toString()));
 		setConfidentiality(DocumentConfidentiality.N);

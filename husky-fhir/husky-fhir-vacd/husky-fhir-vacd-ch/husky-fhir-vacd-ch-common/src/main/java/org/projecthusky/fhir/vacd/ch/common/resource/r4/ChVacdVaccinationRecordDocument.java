@@ -32,8 +32,6 @@ public class ChVacdVaccinationRecordDocument extends ChVacdAbstractDocument {
 		super();
 		ChVacdVaccinationRecordComposition composition = new ChVacdVaccinationRecordComposition();
 		composition.setId(UUID.randomUUID().toString());
-		composition.setStatus(CompositionStatus.FINAL);
-		composition.setDate(getTimestamp());
 
 		this.getEntry().add(new BundleEntryComponent().setResource(composition)
 				.setFullUrl("urn:uuid:" + composition.getId()));

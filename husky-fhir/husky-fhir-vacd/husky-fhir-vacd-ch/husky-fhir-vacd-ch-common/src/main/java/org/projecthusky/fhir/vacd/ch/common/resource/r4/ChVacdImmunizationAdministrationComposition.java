@@ -36,7 +36,7 @@ public class ChVacdImmunizationAdministrationComposition extends ChVacdAbstractC
 		setTitle("Immunization Administration");
 		setType(new CodeableConcept(new Coding("http://snomed.info/sct", "41000179103", "")));
 		addCategory(new CodeableConcept(new Coding("urn:oid:2.16.756.5.30.1.127.3.10.10",
-				"urn:che:epr:ch-vacd:immunization-administration:2022", "")));
+				"urn:che:epr:ch-vacd:immunization-administration:2022", "CH VACD Immunization Administration")));
 		setIdentifier(new Identifier().setSystem("urn:ietf:rfc:3986")
 				.setValue("urn:uuid:" + UUID.randomUUID().toString()));
 		setConfidentiality(DocumentConfidentiality.N);
