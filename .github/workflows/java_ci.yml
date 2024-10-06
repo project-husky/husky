@@ -36,13 +36,6 @@ jobs:
 
       - name: Build and test with Maven
         run: mvn clean install --batch-mode --no-transfer-progress --file pom.xml
-
-      - name: Deploy snapshot
-        env:
-          ARTF_USER: ${{ secrets.ARTF_USER }}
-          ARTF_PASS: ${{ secrets.ARTF_PASS }}
-        run: printenv
-#        run: mvn install javadoc:jar source:jar deploy --batch-mode --no-transfer-progress --file pom.xml -s $GITHUB_WORKSPACE/settings.xml
       
       # Initializes the CodeQL tools for scanning.
       - name: Initialize CodeQL
