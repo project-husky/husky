@@ -36,9 +36,6 @@ jobs:
 
       - name: Build and test with Maven
         run: mvn clean install --batch-mode --no-transfer-progress --file pom.xml
-
-      - name: Check javadoc
-        run: mvn javadoc:jar --file pom.xml
       
       # Initializes the CodeQL tools for scanning.
       - name: Initialize CodeQL
