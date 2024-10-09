@@ -11,7 +11,7 @@ package org.projecthusky.cda.elga.models;
 
 import java.util.ArrayList;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 import org.projecthusky.common.hl7cdar2.CE;

@@ -17,7 +17,7 @@
 /**
  * Generated classes from the HL7 CDA R2 specifications with JAXB.
  */
-@XmlSchema(namespace = "urn:hl7-org:v3", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@XmlSchema(namespace = "urn:hl7-org:v3", elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED)
 @DefaultQualifier(value = Nullable.class, locations = {TypeUseLocation.PARAMETER, TypeUseLocation.RETURN,
         TypeUseLocation.FIELD})
 package org.projecthusky.common.hl7cdar2;
@@ -26,4 +26,4 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.framework.qual.DefaultQualifier;
 import org.checkerframework.framework.qual.TypeUseLocation;
 
-import javax.xml.bind.annotation.XmlSchema;
+import jakarta.xml.bind.annotation.XmlSchema;

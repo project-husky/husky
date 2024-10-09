@@ -13,7 +13,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 import org.projecthusky.cda.elga.generated.artdecor.EimpfEntryAntikoerperBestimmungBatteryOrganizer;

@@ -15,7 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 
 import org.projecthusky.common.hl7cdar2.CE;
 import org.projecthusky.common.hl7cdar2.II;

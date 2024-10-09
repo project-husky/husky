@@ -22,6 +22,7 @@ import org.opensaml.saml.saml2.core.Condition;
 
 import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.QName;
+
 import java.util.Optional;
 
 import static org.projecthusky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_AUDIENCE;

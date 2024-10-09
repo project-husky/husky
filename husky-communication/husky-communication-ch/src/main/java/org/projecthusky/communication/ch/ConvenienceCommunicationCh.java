@@ -32,8 +32,8 @@ import org.openehealth.ipf.commons.ihe.xds.core.responses.Response;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import javax.activation.DataHandler;
-import javax.mail.util.ByteArrayDataSource;
+import jakarta.activation.DataHandler;
+import jakarta.mail.util.ByteArrayDataSource;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;

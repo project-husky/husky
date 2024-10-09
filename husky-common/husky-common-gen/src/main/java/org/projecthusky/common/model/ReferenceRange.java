@@ -10,7 +10,7 @@
  */
 package org.projecthusky.common.model;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 
 import org.projecthusky.common.enums.ObservationInterpretation;
 import org.projecthusky.common.hl7cdar2.BL;

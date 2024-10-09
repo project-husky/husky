@@ -12,11 +12,11 @@ package org.projecthusky.cda.elga.generated.artdecor.ps;
 import org.projecthusky.common.hl7cdar2.*;
 import org.projecthusky.common.model.Identificator;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 import java.io.IOException;

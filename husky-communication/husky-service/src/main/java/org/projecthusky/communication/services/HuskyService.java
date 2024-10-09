@@ -11,8 +11,8 @@ package org.projecthusky.communication.services;
 
 import java.io.IOException;
 
-import javax.xml.bind.DataBindingException;
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.DataBindingException;
+import jakarta.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.hl7.fhir.r4.model.Organization;

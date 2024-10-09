@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>husky-service</artifactId>
 	<name>Husky Service</name>
@@ -66,8 +68,13 @@
 		</dependency>
 
 		<dependency>
-			<groupId>javax.xml.ws</groupId>
-			<artifactId>jaxws-api</artifactId>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
 		</dependency>
 
 		<!-- ipf stuff -->
@@ -84,6 +91,10 @@
 		<dependency>
 			<groupId>org.openehealth.ipf.platform-camel</groupId>
 			<artifactId>ipf-platform-camel-ihe-hl7v3</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.openehealth.ipf.commons</groupId>
+			<artifactId>ipf-commons-ihe-hl7v3model</artifactId>
 		</dependency>
 
 		<dependency>
