@@ -20,11 +20,13 @@
         <dependency>
             <groupId>org.projecthusky.common</groupId>
             <artifactId>husky-common-gen</artifactId>
+            <version>${ipf.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.projecthusky.communication</groupId>
             <artifactId>husky-communication-ch</artifactId>
+            <version>${ipf.version}</version>
         </dependency>
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>

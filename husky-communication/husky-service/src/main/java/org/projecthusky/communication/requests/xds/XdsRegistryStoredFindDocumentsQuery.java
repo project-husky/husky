@@ -21,6 +21,7 @@ import org.projecthusky.common.model.Identificator;
 import org.projecthusky.common.model.Person;
 import org.projecthusky.common.utils.XdsMetadataUtil;
 import org.projecthusky.communication.xd.storedquery.DateTimeRange;
+import org.projecthusky.xua.core.SecurityHeaderElement;
 
 import lombok.Getter;
 import lombok.NonNull;
@@ -44,7 +45,6 @@ import lombok.ToString;
  * <li>Author</li>
  * </ul>
  * @author szalai
- * @see RegistryStoredFindDocumentsQueryTest
  */
 @Getter
 @SuperBuilder
@@ -54,6 +54,8 @@ public class XdsRegistryStoredFindDocumentsQuery {
 	private Destination destination;
 	@NonNull
 	private Identificator patientID;
+	/** may be null for testing environments like the EPD Playground */
+	private SecurityHeaderElement xuaToken;
 
 	@Singular("availabilityStatus")
 	private List<AvailabilityStatus> availabilityStatus;

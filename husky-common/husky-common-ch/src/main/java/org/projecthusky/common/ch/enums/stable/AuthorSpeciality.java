@@ -27,11 +27,11 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * IT: No designation found.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.127.3.10.1.1.4<br>
- * Effective date: 2021-04-01 10:38<br>
- * Version: 202104.0-stable<br>
+ * Effective date: 2022-06-24 11:01<br>
+ * Version: 202306.0-stable<br>
  * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-09-29")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-07-02")
 public enum AuthorSpeciality implements ValueSetEnumInterface {
 
     /**
@@ -128,29 +128,29 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
     /**
      * EN: Child and adolescent psychiatry and psychotherapy.<br>
      * DE: Kinder- und Jugendpsychiatrie und -psychotherapie.<br>
-     * FR: Psychiatrie et psychothérapie d’enfants et d’adolescents.<br>
-     * IT: Psichiatria e psicoterapia infantile e dell’adolescenza.<br>
+     * FR: Psychiatrie et psychothérapie d'enfants et d’adolescents.<br>
+     * IT: Psichiatria e psicoterapia infantile e dell'adolescenza.<br>
      */
     CHILD_AND_ADOLESCENT_PSYCHIATRY_AND_PSYCHOTHERAPY("1027",
                                                       "2.16.756.5.30.1.127.3.5",
                                                       "Child and adolescent psychiatry and psychotherapy",
                                                       "Child and adolescent psychiatry and psychotherapy",
                                                       "Kinder- und Jugendpsychiatrie und -psychotherapie",
-                                                      "Psychiatrie et psychothérapie d’enfants et d’adolescents",
-                                                      "Psichiatria e psicoterapia infantile e dell’adolescenza"),
+                                                      "Psychiatrie et psychothérapie d'enfants et d’adolescents",
+                                                      "Psichiatria e psicoterapia infantile e dell'adolescenza"),
     /**
-     * EN: Child and Adolescent Psychology.<br>
+     * EN: Child and adolescent psychology.<br>
      * DE: Kinder- und Jugendpsychologie.<br>
      * FR: psychologie des enfants et des adolescents.<br>
-     * IT: psicologia dell’età evolutiva.<br>
+     * IT: psicologia dell'età evolutiva.<br>
      */
     CHILD_AND_ADOLESCENT_PSYCHOLOGY("1055",
                                     "2.16.756.5.30.1.127.3.5",
-                                    "Child and Adolescent Psychology",
-                                    "Child and Adolescent Psychology",
+                                    "Child and adolescent psychology",
+                                    "Child and adolescent psychology",
                                     "Kinder- und Jugendpsychologie",
                                     "psychologie des enfants et des adolescents",
-                                    "psicologia dell’età evolutiva"),
+                                    "psicologia dell'età evolutiva"),
     /**
      * EN: Chiropractic specialist.<br>
      * DE: Fachchiropraktik.<br>
@@ -178,18 +178,31 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
                                          "Pharmacologie et toxicologie cliniques",
                                          "Farmacologia e tossicologia cliniche"),
     /**
-     * EN: Clinical Psychology.<br>
+     * EN: Clinical psychology.<br>
      * DE: Klinische Psychologie.<br>
      * FR: psychologie clinique.<br>
      * IT: psicologia clinica.<br>
      */
     CLINICAL_PSYCHOLOGY("1056",
                         "2.16.756.5.30.1.127.3.5",
-                        "Clinical Psychology",
-                        "Clinical Psychology",
+                        "Clinical psychology",
+                        "Clinical psychology",
                         "Klinische Psychologie",
                         "psychologie clinique",
                         "psicologia clinica"),
+    /**
+     * EN: Community pharmacy.<br>
+     * DE: Offizinpharmazie.<br>
+     * FR: Pharmacie d'officine.<br>
+     * IT: Farmacia d'officina.<br>
+     */
+    COMMUNITY_PHARMACY("1052",
+                       "2.16.756.5.30.1.127.3.5",
+                       "Community pharmacy",
+                       "Community pharmacy",
+                       "Offizinpharmazie",
+                       "Pharmacie d'officine",
+                       "Farmacia d'officina"),
     /**
      * EN: Dental hygiene.<br>
      * DE: Dentalhygiene.<br>
@@ -217,18 +230,18 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
                                 "Dermatologie et vénéréologie",
                                 "Dermatologia e venereologia"),
     /**
-     * EN: Endocrinology – Diabetology.<br>
-     * DE: Endokrinologie-Diabetologie.<br>
-     * FR: Endocrinologie-diabétologie.<br>
+     * EN: Endocrinology and diabetology.<br>
+     * DE: Endokrinologie und Diabetologie.<br>
+     * FR: Endocrinologie et diabétologie.<br>
      * IT: Endocrinologia e diabetologia.<br>
      */
-    ENDOCRINOLOGY_DIABETOLOGY("1022",
-                              "2.16.756.5.30.1.127.3.5",
-                              "Endocrinology – Diabetology",
-                              "Endocrinology – Diabetology",
-                              "Endokrinologie-Diabetologie",
-                              "Endocrinologie-diabétologie",
-                              "Endocrinologia e diabetologia"),
+    ENDOCRINOLOGY_AND_DIABETOLOGY("1022",
+                                  "2.16.756.5.30.1.127.3.5",
+                                  "Endocrinology – Diabetology",
+                                  "Endocrinology and diabetology",
+                                  "Endokrinologie und Diabetologie",
+                                  "Endocrinologie et diabétologie",
+                                  "Endocrinologia e diabetologia"),
     /**
      * EN: Forensic medicine.<br>
      * DE: Rechtsmedizin.<br>
@@ -256,21 +269,21 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
                      "Gastroentérologie",
                      "Gastroenterologia"),
     /**
-     * EN: General Internal Medicine.<br>
+     * EN: General internal medicine.<br>
      * DE: Allgemeine Innere Medizin.<br>
      * FR: Médecine interne générale.<br>
      * IT: Medicina interna generale.<br>
      */
     GENERAL_INTERNAL_MEDICINE("1051",
                               "2.16.756.5.30.1.127.3.5",
-                              "General Internal Medicine",
-                              "General Internal Medicine",
+                              "General Internal medicine",
+                              "General internal medicine",
                               "Allgemeine Innere Medizin",
                               "Médecine interne générale",
                               "Medicina interna generale"),
     /**
      * EN: General medical practitioner.<br>
-     * DE: Praktische Ärztin _ Praktischer Arzt.<br>
+     * DE: Praktischer Arzt/Praktische Ärztin.<br>
      * FR: Médecin praticien.<br>
      * IT: Medico generico.<br>
      */
@@ -278,7 +291,7 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
                                  "2.16.756.5.30.1.127.3.5",
                                  "General medical practitioner",
                                  "General medical practitioner",
-                                 "Praktische Ärztin _ Praktischer Arzt",
+                                 "Praktischer Arzt/Praktische Ärztin",
                                  "Médecin praticien",
                                  "Medico generico"),
     /**
@@ -321,18 +334,31 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
                  "Chirurgie de la main",
                  "Chirurgia della mano"),
     /**
-     * EN: Health Psychology.<br>
+     * EN: Health psychology.<br>
      * DE: Gesundheitspsychologie.<br>
      * FR: Psychologie de la santé.<br>
      * IT: Psicologia della salute.<br>
      */
     HEALTH_PSYCHOLOGY("1058",
                       "2.16.756.5.30.1.127.3.5",
-                      "Health Psychology",
-                      "Health Psychology",
+                      "Health psychology",
+                      "Health psychology",
                       "Gesundheitspsychologie",
                       "Psychologie de la santé",
                       "Psicologia della salute"),
+    /**
+     * EN: Hospital pharmacy.<br>
+     * DE: Spitalpharmazie.<br>
+     * FR: Pharmacie hospitalière.<br>
+     * IT: Farmacia d'ospedale.<br>
+     */
+    HOSPITAL_PHARMACY("1053",
+                      "2.16.756.5.30.1.127.3.5",
+                      "Hospital pharmacy",
+                      "Hospital pharmacy",
+                      "Spitalpharmazie",
+                      "Pharmacie hospitalière",
+                      "Farmacia d'ospedale"),
     /**
      * EN: Infectology.<br>
      * DE: Infektiologie.<br>
@@ -400,19 +426,19 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
                      "Oncologia medica"),
     /**
      * EN: Midwifery.<br>
-     * DE: Geburtshilfe - Hebamme.<br>
-     * FR: Sage-femme.<br>
+     * DE: Geburtshilfe.<br>
+     * FR: Obstétrique.<br>
      * IT: Ostetricia.<br>
      */
     MIDWIFERY("5010",
               "2.16.756.5.30.1.127.3.6",
               "Midwifery",
               "Midwifery",
-              "Geburtshilfe - Hebamme",
-              "Sage-femme",
+              "Geburtshilfe",
+              "Obstétrique",
               "Ostetricia"),
     /**
-     * EN: Naturopathy Ayurveda Medicine.<br>
+     * EN: Naturopathy ayurveda medicine.<br>
      * DE: Naturheilpraktiker/-in Ayurveda-Medizin.<br>
      * FR: Naturopathe médecine ayurvédique.<br>
      * IT: Naturopata medicina ayurvedica.<br>
@@ -420,25 +446,12 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
     NATUROPATHY_AYURVEDA_MEDICINE("5021",
                                   "2.16.756.5.30.1.127.3.6",
                                   "Naturopathy Ayurveda Medicine",
-                                  "Naturopathy Ayurveda Medicine",
+                                  "Naturopathy ayurveda medicine",
                                   "Naturheilpraktiker/-in Ayurveda-Medizin",
                                   "Naturopathe médecine ayurvédique",
                                   "Naturopata medicina ayurvedica"),
     /**
-     * EN: Naturopathy European Traditional Medicine.<br>
-     * DE: Naturheilpraktiker/-in Trad. Europäische Naturheilkunde.<br>
-     * FR: Naturopathe médecine naturelle trad. européenne.<br>
-     * IT: Naturopata medicina naturale trad. europea.<br>
-     */
-    NATUROPATHY_EUROPEAN_TRADITIONAL_MEDICINE("5024",
-                                              "2.16.756.5.30.1.127.3.6",
-                                              "Naturopathy European Traditional Medicine",
-                                              "Naturopathy European Traditional Medicine",
-                                              "Naturheilpraktiker/-in Trad. Europäische Naturheilkunde",
-                                              "Naturopathe médecine naturelle trad. européenne",
-                                              "Naturopata medicina naturale trad. europea"),
-    /**
-     * EN: Naturopathy Homeopathy.<br>
+     * EN: Naturopathy homeopathy.<br>
      * DE: Naturheilpraktiker/-in Homöopathie.<br>
      * FR: Naturopathe homéopathie.<br>
      * IT: Naturopata omeopatia.<br>
@@ -446,12 +459,12 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
     NATUROPATHY_HOMEOPATHY("5022",
                            "2.16.756.5.30.1.127.3.6",
                            "Naturopathy Homeopathy",
-                           "Naturopathy Homeopathy",
+                           "Naturopathy homeopathy",
                            "Naturheilpraktiker/-in Homöopathie",
                            "Naturopathe homéopathie",
                            "Naturopata omeopatia"),
     /**
-     * EN: Naturopathy Traditional Chinese Medicine.<br>
+     * EN: Naturopathy traditional chinese medicine.<br>
      * DE: Naturheilpraktiker/-in Trad. Chinesische Medizin.<br>
      * FR: Naturopathe médecine trad. chinoise.<br>
      * IT: Naturopata medicina trad. cinese.<br>
@@ -459,10 +472,23 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
     NATUROPATHY_TRADITIONAL_CHINESE_MEDICINE("5023",
                                              "2.16.756.5.30.1.127.3.6",
                                              "Naturopathy Traditional Chinese Medicine",
-                                             "Naturopathy Traditional Chinese Medicine",
+                                             "Naturopathy traditional chinese medicine",
                                              "Naturheilpraktiker/-in Trad. Chinesische Medizin",
                                              "Naturopathe médecine trad. chinoise",
                                              "Naturopata medicina trad. cinese"),
+    /**
+     * EN: Naturopathy traditional european medicine.<br>
+     * DE: Naturheilpraktiker/-in Trad. Europäische Naturheilkunde.<br>
+     * FR: Naturopathe médecine naturelle trad. européenne.<br>
+     * IT: Naturopata medicina naturale trad. europea.<br>
+     */
+    NATUROPATHY_TRADITIONAL_EUROPEAN_MEDICINE("5024",
+                                              "2.16.756.5.30.1.127.3.6",
+                                              "Naturopathy European Traditional Medicine",
+                                              "Naturopathy traditional european medicine",
+                                              "Naturheilpraktiker/-in Trad. Europäische Naturheilkunde",
+                                              "Naturopathe médecine naturelle trad. européenne",
+                                              "Naturopata medicina naturale trad. europea"),
     /**
      * EN: Nephrology.<br>
      * DE: Nephrologie.<br>
@@ -542,7 +568,7 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
             "Soins infirmiers",
             "Cure infermieristiche"),
     /**
-     * EN: Nutrition and Dietetics.<br>
+     * EN: Nutrition and dietetics.<br>
      * DE: Ernährungsberatung.<br>
      * FR: Diététique.<br>
      * IT: Consulenza alimentare.<br>
@@ -550,7 +576,7 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
     NUTRITION_AND_DIETETICS("5007",
                             "2.16.756.5.30.1.127.3.6",
                             "Nutrition and Dietetics",
-                            "Nutrition and Dietetics",
+                            "Nutrition and dietetics",
                             "Ernährungsberatung",
                             "Diététique",
                             "Consulenza alimentare"),
@@ -568,7 +594,7 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
                           "Médecine du travail",
                           "Medicina del lavoro"),
     /**
-     * EN: Occupational Therapy.<br>
+     * EN: Occupational therapy.<br>
      * DE: Ergotherapie.<br>
      * FR: Ergothérapie.<br>
      * IT: Ergoterapia.<br>
@@ -576,23 +602,10 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
     OCCUPATIONAL_THERAPY("5006",
                          "2.16.756.5.30.1.127.3.6",
                          "Occupational Therapy",
-                         "Occupational Therapy",
+                         "Occupational therapy",
                          "Ergotherapie",
                          "Ergothérapie",
                          "Ergoterapia"),
-    /**
-     * EN: Offizinpharmazie.<br>
-     * DE: Offizinpharmazie.<br>
-     * FR: Pharmacie d’officine.<br>
-     * IT: Farmacia d’officina.<br>
-     */
-    OFFIZINPHARMAZIE("1052",
-                     "2.16.756.5.30.1.127.3.5",
-                     "Offizinpharmazie",
-                     "Offizinpharmazie",
-                     "Offizinpharmazie",
-                     "Pharmacie d’officine",
-                     "Farmacia d’officina"),
     /**
      * EN: Ophthalmology.<br>
      * DE: Ophthalmologie.<br>
@@ -675,7 +688,7 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
      * EN: Orthopaedic surgery and traumatology of the locomotor apparatus.<br>
      * DE: Orthopädische Chirurgie und Traumatologie des Bewegungsapparates.<br>
      * FR: Chirurgie orthopédique et traumatologie de l’appareil locomoteur.<br>
-     * IT: Chirurgia ortopedica e traumatologia dell’apparato locomotore.<br>
+     * IT: Chirurgia ortopedica e traumatologia dell'apparato locomotore.<br>
      */
     ORTHOPAEDIC_SURGERY_AND_TRAUMATOLOGY_OF_THE_LOCOMOTOR_APPARATUS("1015",
                                                                     "2.16.756.5.30.1.127.3.5",
@@ -683,7 +696,7 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
                                                                     "Orthopaedic surgery and traumatology of the locomotor apparatus",
                                                                     "Orthopädische Chirurgie und Traumatologie des Bewegungsapparates",
                                                                     "Chirurgie orthopédique et traumatologie de l’appareil locomoteur",
-                                                                    "Chirurgia ortopedica e traumatologia dell’apparato locomotore"),
+                                                                    "Chirurgia ortopedica e traumatologia dell'apparato locomotore"),
     /**
      * EN: Orthoptics.<br>
      * DE: Orthoptik.<br>
@@ -932,7 +945,7 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
                   "Psychothérapie",
                   "Psicoterapia"),
     /**
-     * EN: Radiologic Technology.<br>
+     * EN: Radiologic technology.<br>
      * DE: Medizinisch-technische Radiologie.<br>
      * FR: Technique en radiologie médicale.<br>
      * IT: Tecniche di radiologia medica.<br>
@@ -940,7 +953,7 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
     RADIOLOGIC_TECHNOLOGY("5008",
                           "2.16.756.5.30.1.127.3.6",
                           "Radiologic Technology",
-                          "Radiologic Technology",
+                          "Radiologic technology",
                           "Medizinisch-technische Radiologie",
                           "Technique en radiologie médicale",
                           "Tecniche di radiologia medica"),
@@ -958,18 +971,18 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
               "Radiologie",
               "Radiologia"),
     /**
-     * EN: Radio-oncology / radiotherapy.<br>
-     * DE: Radio-Onkologie_Strahlentherapie.<br>
-     * FR: Radio-oncologie_radiothérapie.<br>
-     * IT: Radio-oncologia_radioterapia.<br>
+     * EN: Radio-oncology/radiotherapy.<br>
+     * DE: Radio-Onkologie/Strahlentherapie.<br>
+     * FR: Radio-oncologie/radiothérapie.<br>
+     * IT: Radio-oncologia/radioterapia.<br>
      */
     RADIO_ONCOLOGY_RADIOTHERAPY("1032",
                                 "2.16.756.5.30.1.127.3.5",
                                 "Radio-oncology / radiotherapy",
-                                "Radio-oncology / radiotherapy",
-                                "Radio-Onkologie_Strahlentherapie",
-                                "Radio-oncologie_radiothérapie",
-                                "Radio-oncologia_radioterapia"),
+                                "Radio-oncology/radiotherapy",
+                                "Radio-Onkologie/Strahlentherapie",
+                                "Radio-oncologie/radiothérapie",
+                                "Radio-oncologia/radioterapia"),
     /**
      * EN: Reconstructive dentistry.<br>
      * DE: Rekonstruktive Zahnmedizin.<br>
@@ -997,7 +1010,7 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
                  "Rhumatologie",
                  "Reumatologia"),
     /**
-     * EN: Speech and Language Therapy.<br>
+     * EN: Speech and language therapy.<br>
      * DE: Logopädie.<br>
      * FR: Logopédie.<br>
      * IT: Logopedia.<br>
@@ -1005,23 +1018,10 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
     SPEECH_AND_LANGUAGE_THERAPY("5011",
                                 "2.16.756.5.30.1.127.3.6",
                                 "Speech and Language Therapy",
-                                "Speech and Language Therapy",
+                                "Speech and language therapy",
                                 "Logopädie",
                                 "Logopédie",
                                 "Logopedia"),
-    /**
-     * EN: Spitalpharmazie.<br>
-     * DE: Spitalpharmazie.<br>
-     * FR: Pharmacie hospitalière.<br>
-     * IT: Farmacia d’ospedale.<br>
-     */
-    SPITALPHARMAZIE("1053",
-                    "2.16.756.5.30.1.127.3.5",
-                    "Spitalpharmazie",
-                    "Spitalpharmazie",
-                    "Spitalpharmazie",
-                    "Pharmacie hospitalière",
-                    "Farmacia d’ospedale"),
     /**
      * EN: Surgery.<br>
      * DE: Chirurgie.<br>
@@ -1036,7 +1036,7 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
             "Chirurgie",
             "Chirurgia"),
     /**
-     * EN: Surgical Technology.<br>
+     * EN: Surgical technology.<br>
      * DE: Operationstechnik.<br>
      * FR: Technique opératoire.<br>
      * IT: Tecnica operatoria.<br>
@@ -1044,7 +1044,7 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
     SURGICAL_TECHNOLOGY("5009",
                         "2.16.756.5.30.1.127.3.6",
                         "Surgical Technology",
-                        "Surgical Technology",
+                        "Surgical technology",
                         "Operationstechnik",
                         "Technique opératoire",
                         "Tecnica operatoria"),
@@ -1160,16 +1160,16 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
     /**
      * EN: Code for Child and adolescent psychiatry and psychotherapy.<br>
      * DE: Code für Kinder- und Jugendpsychiatrie und -psychotherapie.<br>
-     * FR: Code de Psychiatrie et psychothérapie d’enfants et d’adolescents.<br>
-     * IT: Code per Psichiatria e psicoterapia infantile e dell’adolescenza.<br>
+     * FR: Code de Psychiatrie et psychothérapie d'enfants et d’adolescents.<br>
+     * IT: Code per Psichiatria e psicoterapia infantile e dell'adolescenza.<br>
      */
     public static final String CHILD_AND_ADOLESCENT_PSYCHIATRY_AND_PSYCHOTHERAPY_CODE = "1027";
 
     /**
-     * EN: Code for Child and Adolescent Psychology.<br>
+     * EN: Code for Child and adolescent psychology.<br>
      * DE: Code für Kinder- und Jugendpsychologie.<br>
      * FR: Code de psychologie des enfants et des adolescents.<br>
-     * IT: Code per psicologia dell’età evolutiva.<br>
+     * IT: Code per psicologia dell'età evolutiva.<br>
      */
     public static final String CHILD_AND_ADOLESCENT_PSYCHOLOGY_CODE = "1055";
 
@@ -1190,12 +1190,20 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
     public static final String CLINICAL_PHARMACOLOGY_AND_TOXICOLOGY_CODE = "1029";
 
     /**
-     * EN: Code for Clinical Psychology.<br>
+     * EN: Code for Clinical psychology.<br>
      * DE: Code für Klinische Psychologie.<br>
      * FR: Code de psychologie clinique.<br>
      * IT: Code per psicologia clinica.<br>
      */
     public static final String CLINICAL_PSYCHOLOGY_CODE = "1056";
+
+    /**
+     * EN: Code for Community pharmacy.<br>
+     * DE: Code für Offizinpharmazie.<br>
+     * FR: Code de Pharmacie d'officine.<br>
+     * IT: Code per Farmacia d'officina.<br>
+     */
+    public static final String COMMUNITY_PHARMACY_CODE = "1052";
 
     /**
      * EN: Code for Dental hygiene.<br>
@@ -1214,12 +1222,12 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
     public static final String DERMATOLOGY_AND_VENEREOLOGY_CODE = "1021";
 
     /**
-     * EN: Code for Endocrinology – Diabetology.<br>
-     * DE: Code für Endokrinologie-Diabetologie.<br>
-     * FR: Code de Endocrinologie-diabétologie.<br>
+     * EN: Code for Endocrinology and diabetology.<br>
+     * DE: Code für Endokrinologie und Diabetologie.<br>
+     * FR: Code de Endocrinologie et diabétologie.<br>
      * IT: Code per Endocrinologia e diabetologia.<br>
      */
-    public static final String ENDOCRINOLOGY_DIABETOLOGY_CODE = "1022";
+    public static final String ENDOCRINOLOGY_AND_DIABETOLOGY_CODE = "1022";
 
     /**
      * EN: Code for Forensic medicine.<br>
@@ -1238,7 +1246,7 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
     public static final String GASTROENTEROLOGY_CODE = "1023";
 
     /**
-     * EN: Code for General Internal Medicine.<br>
+     * EN: Code for General internal medicine.<br>
      * DE: Code für Allgemeine Innere Medizin.<br>
      * FR: Code de Médecine interne générale.<br>
      * IT: Code per Medicina interna generale.<br>
@@ -1247,7 +1255,7 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
 
     /**
      * EN: Code for General medical practitioner.<br>
-     * DE: Code für Praktische Ärztin _ Praktischer Arzt.<br>
+     * DE: Code für Praktischer Arzt/Praktische Ärztin.<br>
      * FR: Code de Médecin praticien.<br>
      * IT: Code per Medico generico.<br>
      */
@@ -1278,12 +1286,20 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
     public static final String HAND_SURGERY_CODE = "1059";
 
     /**
-     * EN: Code for Health Psychology.<br>
+     * EN: Code for Health psychology.<br>
      * DE: Code für Gesundheitspsychologie.<br>
      * FR: Code de Psychologie de la santé.<br>
      * IT: Code per Psicologia della salute.<br>
      */
     public static final String HEALTH_PSYCHOLOGY_CODE = "1058";
+
+    /**
+     * EN: Code for Hospital pharmacy.<br>
+     * DE: Code für Spitalpharmazie.<br>
+     * FR: Code de Pharmacie hospitalière.<br>
+     * IT: Code per Farmacia d'ospedale.<br>
+     */
+    public static final String HOSPITAL_PHARMACY_CODE = "1053";
 
     /**
      * EN: Code for Infectology.<br>
@@ -1327,14 +1343,14 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
 
     /**
      * EN: Code for Midwifery.<br>
-     * DE: Code für Geburtshilfe - Hebamme.<br>
-     * FR: Code de Sage-femme.<br>
+     * DE: Code für Geburtshilfe.<br>
+     * FR: Code de Obstétrique.<br>
      * IT: Code per Ostetricia.<br>
      */
     public static final String MIDWIFERY_CODE = "5010";
 
     /**
-     * EN: Code for Naturopathy Ayurveda Medicine.<br>
+     * EN: Code for Naturopathy ayurveda medicine.<br>
      * DE: Code für Naturheilpraktiker/-in Ayurveda-Medizin.<br>
      * FR: Code de Naturopathe médecine ayurvédique.<br>
      * IT: Code per Naturopata medicina ayurvedica.<br>
@@ -1342,15 +1358,7 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
     public static final String NATUROPATHY_AYURVEDA_MEDICINE_CODE = "5021";
 
     /**
-     * EN: Code for Naturopathy European Traditional Medicine.<br>
-     * DE: Code für Naturheilpraktiker/-in Trad. Europäische Naturheilkunde.<br>
-     * FR: Code de Naturopathe médecine naturelle trad. européenne.<br>
-     * IT: Code per Naturopata medicina naturale trad. europea.<br>
-     */
-    public static final String NATUROPATHY_EUROPEAN_TRADITIONAL_MEDICINE_CODE = "5024";
-
-    /**
-     * EN: Code for Naturopathy Homeopathy.<br>
+     * EN: Code for Naturopathy homeopathy.<br>
      * DE: Code für Naturheilpraktiker/-in Homöopathie.<br>
      * FR: Code de Naturopathe homéopathie.<br>
      * IT: Code per Naturopata omeopatia.<br>
@@ -1358,12 +1366,20 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
     public static final String NATUROPATHY_HOMEOPATHY_CODE = "5022";
 
     /**
-     * EN: Code for Naturopathy Traditional Chinese Medicine.<br>
+     * EN: Code for Naturopathy traditional chinese medicine.<br>
      * DE: Code für Naturheilpraktiker/-in Trad. Chinesische Medizin.<br>
      * FR: Code de Naturopathe médecine trad. chinoise.<br>
      * IT: Code per Naturopata medicina trad. cinese.<br>
      */
     public static final String NATUROPATHY_TRADITIONAL_CHINESE_MEDICINE_CODE = "5023";
+
+    /**
+     * EN: Code for Naturopathy traditional european medicine.<br>
+     * DE: Code für Naturheilpraktiker/-in Trad. Europäische Naturheilkunde.<br>
+     * FR: Code de Naturopathe médecine naturelle trad. européenne.<br>
+     * IT: Code per Naturopata medicina naturale trad. europea.<br>
+     */
+    public static final String NATUROPATHY_TRADITIONAL_EUROPEAN_MEDICINE_CODE = "5024";
 
     /**
      * EN: Code for Nephrology.<br>
@@ -1414,7 +1430,7 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
     public static final String NURSING_CODE = "5015";
 
     /**
-     * EN: Code for Nutrition and Dietetics.<br>
+     * EN: Code for Nutrition and dietetics.<br>
      * DE: Code für Ernährungsberatung.<br>
      * FR: Code de Diététique.<br>
      * IT: Code per Consulenza alimentare.<br>
@@ -1430,20 +1446,12 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
     public static final String OCCUPATIONAL_MEDICINE_CODE = "1020";
 
     /**
-     * EN: Code for Occupational Therapy.<br>
+     * EN: Code for Occupational therapy.<br>
      * DE: Code für Ergotherapie.<br>
      * FR: Code de Ergothérapie.<br>
      * IT: Code per Ergoterapia.<br>
      */
     public static final String OCCUPATIONAL_THERAPY_CODE = "5006";
-
-    /**
-     * EN: Code for Offizinpharmazie.<br>
-     * DE: Code für Offizinpharmazie.<br>
-     * FR: Code de Pharmacie d’officine.<br>
-     * IT: Code per Farmacia d’officina.<br>
-     */
-    public static final String OFFIZINPHARMAZIE_CODE = "1052";
 
     /**
      * EN: Code for Ophthalmology.<br>
@@ -1497,7 +1505,7 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
      * EN: Code for Orthopaedic surgery and traumatology of the locomotor apparatus.<br>
      * DE: Code für Orthopädische Chirurgie und Traumatologie des Bewegungsapparates.<br>
      * FR: Code de Chirurgie orthopédique et traumatologie de l’appareil locomoteur.<br>
-     * IT: Code per Chirurgia ortopedica e traumatologia dell’apparato locomotore.<br>
+     * IT: Code per Chirurgia ortopedica e traumatologia dell'apparato locomotore.<br>
      */
     public static final String ORTHOPAEDIC_SURGERY_AND_TRAUMATOLOGY_OF_THE_LOCOMOTOR_APPARATUS_CODE = "1015";
 
@@ -1654,7 +1662,7 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
     public static final String PSYCHOTHERAPY_CODE = "1054";
 
     /**
-     * EN: Code for Radiologic Technology.<br>
+     * EN: Code for Radiologic technology.<br>
      * DE: Code für Medizinisch-technische Radiologie.<br>
      * FR: Code de Technique en radiologie médicale.<br>
      * IT: Code per Tecniche di radiologia medica.<br>
@@ -1670,10 +1678,10 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
     public static final String RADIOLOGY_CODE = "1030";
 
     /**
-     * EN: Code for Radio-oncology / radiotherapy.<br>
-     * DE: Code für Radio-Onkologie_Strahlentherapie.<br>
-     * FR: Code de Radio-oncologie_radiothérapie.<br>
-     * IT: Code per Radio-oncologia_radioterapia.<br>
+     * EN: Code for Radio-oncology/radiotherapy.<br>
+     * DE: Code für Radio-Onkologie/Strahlentherapie.<br>
+     * FR: Code de Radio-oncologie/radiothérapie.<br>
+     * IT: Code per Radio-oncologia/radioterapia.<br>
      */
     public static final String RADIO_ONCOLOGY_RADIOTHERAPY_CODE = "1032";
 
@@ -1694,20 +1702,12 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
     public static final String RHEUMATOLOGY_CODE = "1037";
 
     /**
-     * EN: Code for Speech and Language Therapy.<br>
+     * EN: Code for Speech and language therapy.<br>
      * DE: Code für Logopädie.<br>
      * FR: Code de Logopédie.<br>
      * IT: Code per Logopedia.<br>
      */
     public static final String SPEECH_AND_LANGUAGE_THERAPY_CODE = "5011";
-
-    /**
-     * EN: Code for Spitalpharmazie.<br>
-     * DE: Code für Spitalpharmazie.<br>
-     * FR: Code de Pharmacie hospitalière.<br>
-     * IT: Code per Farmacia d’ospedale.<br>
-     */
-    public static final String SPITALPHARMAZIE_CODE = "1053";
 
     /**
      * EN: Code for Surgery.<br>
@@ -1718,7 +1718,7 @@ public enum AuthorSpeciality implements ValueSetEnumInterface {
     public static final String SURGERY_CODE = "1002";
 
     /**
-     * EN: Code for Surgical Technology.<br>
+     * EN: Code for Surgical technology.<br>
      * DE: Code für Operationstechnik.<br>
      * FR: Code de Technique opératoire.<br>
      * IT: Code per Tecnica operatoria.<br>

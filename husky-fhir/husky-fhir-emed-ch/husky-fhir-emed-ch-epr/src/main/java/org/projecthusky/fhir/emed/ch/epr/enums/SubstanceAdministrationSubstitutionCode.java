@@ -264,13 +264,19 @@ public enum SubstanceAdministrationSubstitutionCode implements ValueSetEnumInter
     }
 
     @Override
+    @NonNull
+    public String getFhirSystem() {
+        return this.codeSystem;
+    }
+
+    @Override
     public Coding getCoding() {
         return new Coding(this.codeSystem, this.code, this.getDisplayName());
     }
 
     @Override
     public CodeableConcept getCodeableConcept() {
-        return new CodeableConcept(this.getCoding());
+        return new CodeableConcept().setText(this.getDisplayName()).addCoding(this.getCoding());
     }
 
     @Override

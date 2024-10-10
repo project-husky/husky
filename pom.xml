@@ -116,6 +116,22 @@
 				<version>${ipf.version}</version>
 			</dependency>
 			<dependency>
+                                <groupId>org.openehealth.ipf.commons</groupId>
+                                <artifactId>ipf-commons-ihe-fhir-core</artifactId>
+                                <version>${ipf.version}</version>
+                        </dependency>
+			<dependency>
+                                <groupId>org.openehealth.ipf.platform-camel</groupId>
+                                <artifactId>ipf-platform-camel-ihe-fhir-core</artifactId>
+                                <version>${ipf.version}</version>
+                        </dependency>
+			<dependency>
+                                <groupId>org.openehealth.ipf.commons</groupId>
+                                <artifactId>ipf-commons-ihe-fhir-r4-mhd</artifactId>
+                                <version>${ipf.version}</version>
+                        </dependency>
+
+			<dependency>
 				<groupId>org.openehealth.ipf.boot</groupId>
 				<artifactId>ipf-xds-spring-boot-starter</artifactId>
 				<version>${ipf.version}</version>
@@ -128,6 +144,10 @@
 						<groupId>org.springframework.boot</groupId>
 						<artifactId>spring-boot-starter-logging</artifactId>
 					</exclusion>
+ 	                                <exclusion>
+        	                                <groupId>org.ogce</groupId>
+                	                        <artifactId>xpp3</artifactId>
+                        	        </exclusion>
 				</exclusions>
 			</dependency>
 			<dependency>
@@ -538,6 +558,7 @@
 				<scope>provided</scope>
 			</dependency>
 			<!-- Own modules -->
+			<!--
 			<dependency>
 				<groupId>org.projecthusky.common</groupId>
 				<artifactId>husky-common-gen</artifactId>
@@ -611,18 +632,6 @@
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.sun.xml.messaging.saaj</groupId>
-				<artifactId>saaj-impl</artifactId>
-				<version>1.5.3</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.mockito</groupId>
-				<artifactId>mockito-core</artifactId>
-				<version>5.3.0</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
 				<groupId>org.projecthusky.fhir.emed.ch</groupId>
 				<artifactId>husky-fhir-emed-ch-common</artifactId>
 				<version>${project.version}</version>
@@ -632,6 +641,20 @@
 				<artifactId>husky-fhir-emed-ch-pmp</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			-->
+                        <dependency>
+                                <groupId>com.sun.xml.messaging.saaj</groupId>
+                                <artifactId>saaj-impl</artifactId>
+                                <version>1.5.3</version>
+                                <scope>test</scope>
+                        </dependency>
+                        <dependency>
+                                <groupId>org.mockito</groupId>
+                                <artifactId>mockito-core</artifactId>
+                                <version>5.3.0</version>
+                                <scope>test</scope>
+                        </dependency>
+
 			<dependency>
 				<groupId>health.matchbox</groupId>
 				<artifactId>matchbox-engine</artifactId>
@@ -651,16 +674,6 @@
 		<!-- !!!!  NEVER ADD DEPENDENCIES HERE IN THE MAIN POM  !!! -->
 		<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 		<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-		<dependency>
-			<groupId>org.openehealth.ipf.boot</groupId>
-			<artifactId>ipf-xds-spring-boot-starter</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.ogce</groupId>
-					<artifactId>xpp3</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
 	</dependencies>
 	<repositories>
 		<repository>

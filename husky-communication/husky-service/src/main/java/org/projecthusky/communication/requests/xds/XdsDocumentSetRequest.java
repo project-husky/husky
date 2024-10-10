@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.projecthusky.common.communication.Destination;
 import org.projecthusky.communication.DocumentRequest;
+import org.projecthusky.xua.core.SecurityHeaderElement;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -31,9 +32,10 @@ import lombok.ToString;
 public class XdsDocumentSetRequest {
 	@NonNull
 	private Destination destination;
+	/** may be null for testing environments like the EPD Playground */
+	private SecurityHeaderElement xuaToken;
 	@Singular
 	private List<DocumentRequest> documentRequests;
-	
 	
 	public static class XdsDocumentSetRequestBuilder {} 
 }

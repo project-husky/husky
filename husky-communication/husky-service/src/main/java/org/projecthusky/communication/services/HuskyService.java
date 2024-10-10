@@ -9,6 +9,7 @@
  */
 package org.projecthusky.communication.services;
 
+import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 
 import jakarta.xml.bind.DataBindingException;
@@ -16,6 +17,7 @@ import jakarta.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.hl7.fhir.r4.model.Organization;
+import org.openehealth.ipf.commons.audit.AuditContext;
 import org.openehealth.ipf.commons.ihe.hl7v3.core.responses.PixV3QueryResponse;
 import org.openehealth.ipf.commons.ihe.hpd.stub.dsmlv2.BatchResponse;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.query.QueryReturnType;
@@ -29,41 +31,34 @@ import org.projecthusky.common.communication.SubmissionSetMetadata.SubmissionSet
 import org.projecthusky.common.model.Identificator;
 import org.projecthusky.common.model.Name;
 import org.projecthusky.common.model.Patient;
-import org.projecthusky.communication.requests.xds.XdsDocumentWithMetadata;
-import org.projecthusky.communication.requests.xds.XdsFindFoldersStoredQuery;
+import org.projecthusky.communication.requests.hpd.HpdAddFeed;
+import org.projecthusky.communication.requests.hpd.HpdBatchRequest;
+import org.projecthusky.communication.requests.hpd.HpdDeleteFeed;
+import org.projecthusky.communication.requests.hpd.HpdSearchQuery;
 import org.projecthusky.communication.requests.pdq.PdqSearchQuery;
 import org.projecthusky.communication.requests.pix.PixAddPatientFeed;
 import org.projecthusky.communication.requests.pix.PixMergePatientFeed;
 import org.projecthusky.communication.requests.pix.PixPatientIDQuery;
 import org.projecthusky.communication.requests.pix.PixUpdatePatientFeed;
-import org.projecthusky.communication.requests.xds.XdsRegistryStoredFindDocumentsQuery;
-import org.projecthusky.communication.requests.xds.XdsDocumentSetRequest;
-import org.projecthusky.communication.requests.xds.XdsProvideAndRetrieveDocumentSetQuery;
-import org.projecthusky.communication.requests.hpd.HpdAddFeed;
-import org.projecthusky.communication.requests.hpd.HpdBatchRequest;
-import org.projecthusky.communication.requests.hpd.HpdDeleteFeed;
-import org.projecthusky.communication.requests.hpd.HpdSearchQuery;
 import org.projecthusky.communication.requests.svs.SvsValueSetRequest;
+import org.projecthusky.communication.requests.xds.XdsDocumentSetRequest;
+import org.projecthusky.communication.requests.xds.XdsDocumentWithMetadata;
+import org.projecthusky.communication.requests.xds.XdsFindFoldersStoredQuery;
+import org.projecthusky.communication.requests.xds.XdsProvideAndRetrieveDocumentSetQuery;
+import org.projecthusky.communication.requests.xds.XdsRegistryStoredFindDocumentsQuery;
 import org.projecthusky.communication.requests.xua.XuaRequest;
-import org.projecthusky.communication.responses.pix.PixAddPatientResponse;
 import org.projecthusky.communication.responses.hpd.HpdResponse;
-import org.projecthusky.communication.responses.pix.PixPatientIDResult;
 import org.projecthusky.communication.responses.pdq.PdqSearchQueryResponse;
 import org.projecthusky.communication.responses.pdq.PdqSearchResults;
+import org.projecthusky.communication.responses.pix.PixAddPatientResponse;
+import org.projecthusky.communication.responses.pix.PixPatientIDResult;
 import org.projecthusky.communication.responses.svs.SvsValueSetResponse;
 import org.projecthusky.communication.responses.xua.XuaResponse;
 import org.projecthusky.communication.utils.PdqUtils;
 import org.projecthusky.fhir.structures.gen.FhirPatient;
-import org.projecthusky.valueset.exceptions.InitializationException;
 import org.projecthusky.xua.exceptions.ClientSendException;
-import org.projecthusky.xua.exceptions.SerializeException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
-
-import lombok.extern.slf4j.Slf4j;
-import net.ihe.gazelle.hl7v3.mcciin000002UV01.MCCIIN000002UV01Type;
-import net.ihe.gazelle.hl7v3.prpain201306UV02.PRPAIN201306UV02Type;
-import org.xml.sax.SAXException;
 
 /**
  * The main service class to use when working with the EPD web services. As it is marked as a @Component, it will be
@@ -121,16 +116,75 @@ public class HuskyService {
     this.wsClient = wsClient;
   }
 
-  public void configAtna(AtnaConfig.AtnaConfigMode atna) {
-    this.wsClient.setAtnaConfigMode(atna);
+  /**
+   * Gets the auditcontext used by the IPF Framework.
+   *
+   * @return {@link AuditContext}
+   */
+  public AuditContext configAuditContext() {
+    return wsClient.getAuditContext();
   }
 
-  public void configSubmissionMode(SubmissionSetMetadataExtractionMode submissionSetExtractionMode) {
-    this.wsClient.setSubmissionSetMetadataExtractionMode(submissionSetExtractionMode);
+  public void configAtna(AtnaConfig.AtnaConfigMode atna) {
+    wsClient.setAtnaConfigMode(atna);
   }
 
   public void configMetadataExtractionMode(DocumentMetadataExtractionMode documentExtractionMode) {
-    this.wsClient.setDocumentMetadataExtractionMode(documentExtractionMode);
+    wsClient.setDocumentMetadataExtractionMode(documentExtractionMode);
+  }
+
+  public void configSubmissionMode(SubmissionSetMetadataExtractionMode submissionSetExtractionMode) {
+    wsClient.setSubmissionSetMetadataExtractionMode(submissionSetExtractionMode);
+  }
+
+  /**
+   * This method will start building a {@link XdsDocumentSetRequest}, which allows the user to download the documents ofa
+   * Patient.
+   *
+   * @param destination {@link Destination}
+   * @return builder
+   */
+  public XdsDocumentSetRequest.XdsDocumentSetRequestBuilder createDocumentSetRequest(Destination destination) {
+    return XdsDocumentSetRequest.builder().destination(destination);
+  }
+
+  /**
+   * This method will start building a {@link XdsDocumentWithMetadata}, which will be used to build the
+   * {@link XdsProvideAndRetrieveDocumentSetQuery}
+   */
+  public XdsDocumentWithMetadata.XdsDocumentWithMetadataBuilder createDocumentWithMetadata() {
+    return XdsDocumentWithMetadata.builder();
+  }
+
+  /**
+   * This method will start building a {@link XdsFindFoldersStoredQuery}, which allows the user to search the folders of a
+   * Patient.
+   */
+  public XdsFindFoldersStoredQuery.XdsFindFoldersStoredQueryBuilder<?, ?> createFindFoldersStoredQuery() {
+    return XdsFindFoldersStoredQuery.builder();
+  }
+
+  /** This method will start building a {@link HpdAddFeed}, which is needed to create the HPD request */
+  public HpdAddFeed createHpdAddFeed() {
+    return new HpdAddFeed();
+  }
+
+  /** This method will start building a {@link HpdBatchRequest}, which contain multiple HPD requests.
+   * The request also provides more options like how to process the request (sequential or in parallel),
+   * how to retrieve the response (sequential or unordered) and how to proceed in case of an error (resume or exit).
+   */
+  public HpdBatchRequest.HpdBatchRequestBuilder createHpdBatchRequest() {
+    return HpdBatchRequest.builder();
+  }
+
+  /** This method will start building a {@link HpdDeleteFeed}, which is needed to create the HPD request */
+  public HpdDeleteFeed createHpdDeleteFeed() {
+    return new HpdDeleteFeed();
+  }
+
+  /**  This method will start building a {@link HpdSearchQuery}, which is needed to create the HPD request */
+  public HpdSearchQuery.HpdSearchQueryBuilder createHpdSearchQuery() {
+    return HpdSearchQuery.builder();
   }
 
   /**
@@ -157,18 +211,11 @@ public class HuskyService {
   }
 
   /**
-   * Use this method to build a {@link PixPatientIDQuery}, where the user can ask for all IDs known of a patient.
-   */
-  public PixPatientIDQuery.PixPatientIDQueryBuilder createPixPatientIDQuery(Destination destination) {
-    return PixPatientIDQuery.builder().destination(destination);
-  }
-
-  /**
    * This method will start building a {@link PixAddPatientFeed}, which allows the user to create a new Patient in the
    * system.<br/> The properties of an {@link FhirPatient} are used as a template and expected to be filled.
    *
-   * @param destination
-   * @return PixAddPatientQueryBuilder
+   * @param destination {@link Destination}
+   * @return PixAddPatientQueryBuilder - to build the query
    * @see <a
    * href="https://www.e-health-suisse.ch/technik-semantik/epd-anbindung/informatikverantwortliche.html">Registry Stored
    * Query</a>
@@ -179,11 +226,37 @@ public class HuskyService {
   }
 
   /**
+   * Use this method to build a {@link PixMergePatientFeed}, with which the user can merge two know patient objects
+   * into one in case those two are the same person.<br/> This case is mostly used to correct user errors when the same
+   * person is entered into a system multiple times and needs to be merged into one.
+   *
+   * @param destination {@link Destination}
+   * @param providerOrganization {@link Organization}
+   * @param obsoletePatientId - the ID of the patient that should be merged into the new one.
+   * @param homeCommunityOID - the OID of the home community
+   * @param homeCommunityNamespace - the namespace of the home community
+   * @return builder filled with default parameters
+   */
+  public PixMergePatientFeed.PixMergePatientFeedBuilder createPixMergePatientFeed(Destination destination,
+      Organization providerOrganization, String obsoletePatientId, String homeCommunityOID, String homeCommunityNamespace) {
+    return PixMergePatientFeed.builder().destination(destination).providerOrganization(providerOrganization)
+        .obsoletePatientID(obsoletePatientId).homeCommunityOID(homeCommunityOID)
+        .homeCommunityNamespace(homeCommunityNamespace);
+  }
+
+  /**
+   * Use this method to build a {@link PixPatientIDQuery}, where the user can ask for all IDs known of a patient.
+   */
+  public PixPatientIDQuery.PixPatientIDQueryBuilder createPixPatientIDQuery(Destination destination) {
+    return PixPatientIDQuery.builder().destination(destination);
+  }
+
+  /**
    * This method will start building a {@link PixUpdatePatientFeed}, which allows the user to update an existing
    * patient in the system.<br/> The properties of an {@link FhirPatient} are used, fill them accordingly.
    *
-   * @param destination
-   * @param providerOrganization
+   * @param destination {@link Destination}
+   * @param providerOrganization {@link Organization}
    * @return PixUpdatePatientFeedBuilder
    */
   public PixUpdatePatientFeed.PixUpdatePatientFeedBuilder createPixUpdatePatientFeed(Destination destination,
@@ -192,22 +265,11 @@ public class HuskyService {
   }
 
   /**
-   * Use this method to build a {@link PixMergePatientFeed}, with which the user can merge two know patient objects
-   * into one in case those two are the same person.<br/> This case is mostly used to correct user errors when the same
-   * person is entered into a system multiple times and needs to be merged into one.
-   *
-   * @param destination
-   * @param providerOrganization
-   * @param obsolatePatientId
-   * @param homeCommunityOID
-   * @param homeCommunityNamespace
-   * @return
+   * This method will start building a {@link XdsProvideAndRetrieveDocumentSetQuery}, which will be sent to the webservice
+   * and allows the user to add or replace an existing document
    */
-  public PixMergePatientFeed.PixMergePatientFeedBuilder createPixMergePatientFeed(Destination destination,
-      Organization providerOrganization, String obsolatePatientId, String homeCommunityOID, String homeCommunityNamespace) {
-    return PixMergePatientFeed.builder().destination(destination).providerOrganization(providerOrganization)
-        .obsolatePatientID(obsolatePatientId).homeCommunityOID(homeCommunityOID)
-        .homeCommunityNamespace(homeCommunityNamespace);
+  public XdsProvideAndRetrieveDocumentSetQuery.XdsProvideAndRetrieveDocumentSetQueryBuilder createProvideAndRetrieveDocumentSetQuery() {
+    return XdsProvideAndRetrieveDocumentSetQuery.builder();
   }
 
   /**
@@ -225,30 +287,10 @@ public class HuskyService {
   }
 
   /**
-   * This method will start building a {@link XdsDocumentSetRequest}, which allows the user to download the documents ofa
-   * Patient.
-   *
-   * @param destination
-   * @return
+   * This method will start building a {@link SvsValueSetRequest}, which allows to download a value set
    */
-  public XdsDocumentSetRequest.XdsDocumentSetRequestBuilder createDocumentSetRequest(Destination destination) {
-    return XdsDocumentSetRequest.builder().destination(destination);
-  }
-
-  /**
-   * This method will start building a {@link XdsDocumentWithMetadata}, which will be used to build the
-   * {@link XdsProvideAndRetrieveDocumentSetQuery}
-   */
-  public XdsDocumentWithMetadata.XdsDocumentWithMetadataBuilder createDocumentWithMetadata() {
-    return XdsDocumentWithMetadata.builder();
-  }
-
-  /**
-   * This method will start building a {@link XdsProvideAndRetrieveDocumentSetQuery}, which will be sent to the webservice
-   * and allows the user to add or replace an existing document
-   */
-  public XdsProvideAndRetrieveDocumentSetQuery.XdsProvideAndRetrieveDocumentSetQueryBuilder createProvideAndRetrieveDocumentSetQuery() {
-    return XdsProvideAndRetrieveDocumentSetQuery.builder();
+  public SvsValueSetRequest.SvsValueSetRequestBuilder createValueSetRequest() {
+    return SvsValueSetRequest.builder();
   }
 
   /**
@@ -257,237 +299,6 @@ public class HuskyService {
    */
   public XuaRequest.XuaRequestBuilder createXuaRequest() {
     return XuaRequest.builder();
-  }
-
-  /**
-   * This method will start building a {@link XdsFindFoldersStoredQuery}, which allows the user to search the folders of a
-   * Patient.
-   */
-  public XdsFindFoldersStoredQuery.XdsFindFoldersStoredQueryBuilder<?, ?> createFindFoldersStoredQuery() {
-    return XdsFindFoldersStoredQuery.builder();
-  }
-
-  /**
-   * This method will start building a {@link SvsValueSetRequest}, which allows to download a value set
-   */
-  public SvsValueSetRequest.SvsValueSetRequestBuilder createValueSetRequest() {
-    return SvsValueSetRequest.builder();
-  }
-
-  /**  This method will start building a {@link HpdSearchQuery}, which is needed to create the HPD request */
-  public HpdSearchQuery.HpdSearchQueryBuilder createHpdSearchQuery() {
-    return HpdSearchQuery.builder();
-  }
-
-  /** This method will start building a {@link HpdAddFeed}, which is needed to create the HPD request */
-  public HpdAddFeed createHpdAddFeed() {
-    return new HpdAddFeed();
-  }
-
-  /** This method will start building a {@link HpdDeleteFeed}, which is needed to create the HPD request */
-  public HpdDeleteFeed createHpdDeleteFeed() {
-    return new HpdDeleteFeed();
-  }
-
-  /** This method will start building a {@link HpdBatchRequest}, which contain multiple HPD requests.
-   * The request also provides more options like how to process the request (sequential or in parallel),
-   * how to retrieve the response (sequential or unordered) and how to proceed in case of an error (resume or exit).
-   */
-  public HpdBatchRequest.HpdBatchRequestBuilder createHpdBatchRequest() {
-    return HpdBatchRequest.builder();
-  }
-
-  /**
-   * Send your built {@link PdqSearchQuery} through the Internet and receive the results from the webservice.
-   *
-   * @param patientSearchQuery A {@link PdqSearchQuery} previously built.
-   * @return A {@link PdqSearchResults} object containing the matching {@link FhirPatient} objects in a list.
-   * @throws DataBindingException
-   * @throws JAXBException
-   * @throws ParserConfigurationException
-   * @throws SerializeException
-   * @throws IOException
-   * @throws RuntimeException             - For errors/exceptions happening in the webservice there will be a
-   *                                      RuntimeException wrapped SOAPException thrown.
-   */
-  public PdqSearchResults send(PdqSearchQuery patientSearchQuery)
-      throws DataBindingException, JAXBException, ParserConfigurationException, SerializeException, IOException {
-    Assert.notNull(patientSearchQuery, "The search query can not be null.");
-    log.debug("A Search Query is initiated for send: {}", patientSearchQuery);
-    PRPAIN201306UV02Type sendITI47Query = this.wsClient.sendPdqSearchQueryRequest(patientSearchQuery.build(), null,
-        patientSearchQuery.getDestination().getUri(), null);
-    PdqSearchQueryResponse response = new PdqSearchQueryResponse(sendITI47Query);
-    PdqSearchResults results = new PdqSearchResults(
-        PdqUtils.getPatientsFromSearchQueryResponse(response));
-    log.debug("Patients found for the properties: {}", results.getPatients().size());
-    return results;
-  }
-
-  /**
-   * Send your built {@link PixAddPatientFeed} through the Internet to the webservice and receive an answer, whether
-   * the Patient was added or not.
-   *
-   * @param addPatientFeed
-   * @return True if the patient was added without error. Errors are reported as exceptions.
-   * @throws JAXBException
-   * @throws SerializeException
-   * @throws ParserConfigurationException
-   * @throws IOException
-   * @throws RuntimeException             - For errors/exceptions happening in the webservice there will be a
-   *                                      RuntimeException wrapped SOAPException thrown.
-   */
-  public boolean send(PixAddPatientFeed addPatientFeed)
-      throws JAXBException, SerializeException, ParserConfigurationException, IOException {
-    Assert.notNull(addPatientFeed, "The patient creation query can not be null.");
-    MCCIIN000002UV01Type iti44QueryResponseType = this.wsClient.sendPixAddPatientRequest(
-        addPatientFeed.build().getRootElement(), null, addPatientFeed.getDestination().getUri(),
-        "urn:hl7-org:v3:PRPA_IN201301UV02", null);
-    PixAddPatientResponse response = new PixAddPatientResponse(iti44QueryResponseType);
-    return !response.hasError(); //Inverting error flag to indicate success with true returned.
-  }
-
-  /**
-   * Send your built {@link PixUpdatePatientFeed} through the Internet to the webservice and receive an answer (updated
-   * or error).
-   *
-   * @param updatePatientFeed
-   * @return True if the patient was updated without error. Errors are reported as exceptions.
-   * @throws JAXBException
-   * @throws SerializeException
-   * @throws ParserConfigurationException
-   * @throws IOException
-   */
-  public boolean send(PixUpdatePatientFeed updatePatientFeed)
-      throws JAXBException, SerializeException, ParserConfigurationException, IOException {
-    Assert.notNull(updatePatientFeed, "The patient update query can not be null.");
-    MCCIIN000002UV01Type iti44QueryResponseType = this.wsClient.sendPixUpdatePatientRequest(
-        updatePatientFeed.build().getRootElement(), null, updatePatientFeed.getDestination().getUri(),
-        "urn:hl7-org:v3:PRPA_IN201302UV02", null);
-    PixAddPatientResponse response = new PixAddPatientResponse(iti44QueryResponseType);
-    return !response.hasError(); //Inverting error flag to indicate success with true returned.
-  }
-
-  /**
-   * Send the built {@link PixMergePatientFeed} through the Internet to the webservice and receive an answer.
-   *
-   * @param mergePatientFeed
-   * @return
-   * @throws JAXBException
-   * @throws SerializeException
-   * @throws ParserConfigurationException
-   * @throws IOException
-   */
-  public boolean send(PixMergePatientFeed mergePatientFeed)
-      throws JAXBException, SerializeException, ParserConfigurationException, IOException {
-    Assert.notNull(mergePatientFeed, "The patient merge query can not be null.");
-    MCCIIN000002UV01Type mergePatientXMLResponse = this.wsClient.sendITI44Query(
-        mergePatientFeed.build().getRootElement(), null, mergePatientFeed.getDestination().getUri(),
-        "urn:hl7-org:v3:PRPA_IN201304UV02", null);
-    PixAddPatientResponse response = new PixAddPatientResponse(mergePatientXMLResponse);
-    return !response.hasError(); //Inverting error flag to indicate success with true returned.
-  }
-
-  /**
-   * Send the built {@link PixPatientIDQuery} through the Internet to the webservice and receive an answer.
-   *
-   * @param searchPatientIDQuery
-   * @return
-   * @throws Exception
-   */
-  public PixPatientIDResult send(PixPatientIDQuery searchPatientIDQuery) throws Exception {
-    Assert.notNull(searchPatientIDQuery, "The patient ID search query can not be null.");
-    PixV3QueryResponse response = this.wsClient.sendQuery(searchPatientIDQuery.build(), null,
-        searchPatientIDQuery.getDestination().getUri(), null);
-    PixPatientIDResult.PixPatientIDResultBuilder result = PixPatientIDResult.builder();
-    for (String domainId : searchPatientIDQuery.getQueryDomainOids()) {
-      result.patientID(PdqUtils.getPatientDomainId(response, domainId));
-    }
-    return result.build();
-  }
-
-  /**
-   * Send your built {@link XdsDocumentSetRequest} through the Internet to the webservice and receive the documents of the
-   * Patient.
-   *
-   * @param retrievedDocumentsRequest
-   * @return
-   * @throws SerializeException
-   * @throws ParserConfigurationException
-   * @throws IOException
-   */
-  public RetrievedDocumentSet send(XdsDocumentSetRequest retrievedDocumentsRequest)
-      throws SerializeException, ParserConfigurationException, IOException {
-    Assert.notNull(retrievedDocumentsRequest, "The document set request query can not be null.");
-    return this.wsClient.send(retrievedDocumentsRequest, null, retrievedDocumentsRequest.getDestination().getUri(),
-        null);
-  }
-
-  /**
-   * Send your built {@link XdsRegistryStoredFindDocumentsQuery} through the Internet to the webservice and receive the
-   * document handlers.
-   *
-   * @return {@link QueryResponse}
-   * @throws Exception
-   */
-  public QueryResponse send(XdsRegistryStoredFindDocumentsQuery query) throws Exception {
-    Assert.notNull(query, "The find documents query can not be null.");
-    return this.wsClient.sendRegistryStoredFindDocumentsQuery(query, null,
-        query.getDestination().getUri(), QueryReturnType.LEAF_CLASS, null);
-  }
-
-  /**
-   * Use the {@link XuaRequest} which is sent to the webservice and returns details about the identity of the authenticated user
-   *
-   * @return {@link XuaResponse}
-   * @throws ClientSendException
-   */
-  public XuaResponse send(XuaRequest xuaRequest) throws ClientSendException {
-    return this.wsClient.send(xuaRequest);
-  }
-
-  /**
-   * Use the {@link XdsProvideAndRetrieveDocumentSetQuery} to build the ProvideAndRetrieveDocumentSet request which is
-   * sent to the webservice and adds or replaces an existing document
-   *
-   * @return {@link Response}
-   * @throws SerializeException
-   * @throws ParserConfigurationException
-   * @throws IOException
-   */
-  public Response send(XdsProvideAndRetrieveDocumentSetQuery documentSet)
-      throws SerializeException, ParserConfigurationException, IOException {
-    return this.wsClient.sendProvideAndRegisterDocumentSetRequest(documentSet);
-  }
-
-  /**
-   * Send your built {@link XdsFindFoldersStoredQuery} to the webservice to find folders (XDSFolder objects) in the
-   * registry for a given patientID with matching 'status' attribute
-   *
-   * @return {@link QueryResponse}
-   * @throws SerializeException
-   * @throws ParserConfigurationException
-   * @throws IOException
-   */
-  public QueryResponse send(XdsFindFoldersStoredQuery findFoldersStoredQuery)
-      throws SerializeException, ParserConfigurationException, IOException {
-    return this.wsClient.sendQueryFoldersRequest(findFoldersStoredQuery);
-  }
-
-  /**
-   * <div class="en">Downloads a value set as defined in the given configuration,
-   * or in raw dformat exactly as downloaded </div>
-   * @param valueSetRequest request used to create the value set config
-   * @param isUseRaw flag that signals if the response is needed in raw dformat
-   * @return ValueSetResponse object that contains both formats of the response
-   * @throws IOException                  Signals that an I/O exception has
-   *                                      occurred.
-   * @throws SAXException
-   * @throws ParserConfigurationException
-   * @throws InitializationException
-   */
-  public SvsValueSetResponse send(SvsValueSetRequest valueSetRequest, boolean isUseRaw)
-      throws IOException, ParserConfigurationException, InitializationException, SAXException {
-    return this.wsClient.downloadValueSet(valueSetRequest, isUseRaw);
   }
 
   /**
@@ -508,16 +319,178 @@ public class HuskyService {
    * @param hpdBatchRequest contains a batch of {@link org.projecthusky.communication.requests.hpd.HpdRequest}
    *
    * @return {@link HpdResponse}
-   * @throws SerializeException
-   * @throws JAXBException
-   * @throws ParserConfigurationException
-   * @throws IOException
+   * @throws Exception thrown in the webservice call
    */
-  public HpdResponse send(HpdBatchRequest hpdBatchRequest)
-      throws SerializeException, JAXBException, ParserConfigurationException, IOException {
+  public HpdResponse send(HpdBatchRequest hpdBatchRequest) throws Exception {
     if (!hpdBatchRequest.isValid()) {
       throw new IllegalArgumentException("Invalid request: mandatory constraints are not fulfilled!");
     }
-    return this.wsClient.sendHpdBatchRequest(hpdBatchRequest);
+
+    return wsClient.sendHpdBatchRequest(hpdBatchRequest);
+  }
+
+  /**
+   * Send your built {@link PdqSearchQuery} through the Internet and receive the results from the webservice.
+   *
+   * @param patientSearchQuery A {@link PdqSearchQuery} previously built.
+   * @return A {@link PdqSearchResults} object containing the matching {@link FhirPatient} objects in a list.
+   * @throws Exception errors occurring in the webservice client
+   * @throws RuntimeException  For errors/exceptions happening in the webservice there will be a RuntimeException wrapped SOAPException thrown.
+   */
+  public PdqSearchResults send(PdqSearchQuery patientSearchQuery) throws Exception {
+    Assert.notNull(patientSearchQuery, "The search query can not be null.");
+    log.debug("A Search Query is initiated for send: {}", patientSearchQuery);
+    PRPAIN201306UV02Type sendITI47Query = wsClient.sendPdqSearchQueryRequest(patientSearchQuery.build(), null,
+        patientSearchQuery.getDestination().getUri(), null);
+    PdqSearchQueryResponse response = new PdqSearchQueryResponse(sendITI47Query);
+    PdqSearchResults results = new PdqSearchResults(
+        PdqUtils.getPatientsFromSearchQueryResponse(response));
+    log.debug("Patients found for the properties: {}", results.getPatients().size());
+    return results;
+  }
+
+  /**
+   * Send your built {@link PixAddPatientFeed} through the Internet to the webservice and receive an answer, whether
+   * the Patient was added or not.
+   *
+   * @param addPatientFeed {@link PixAddPatientFeed}
+   * @return True if the patient was added without error. Errors are reported as exceptions.
+   * @throws Exception errors occurring in the webservice client
+   * @throws RuntimeException  For errors/exceptions happening in the webservice there will be a RuntimeException wrapped SOAPException thrown.
+   */
+  public boolean send(PixAddPatientFeed addPatientFeed) throws Exception {
+    Assert.notNull(addPatientFeed, "The patient creation query can not be null.");
+    MCCIIN000002UV01Type iti44QueryResponseType = wsClient.sendPixAddPatientRequest(
+        addPatientFeed.build().getRootElement(), null, addPatientFeed.getDestination().getUri(),
+        "urn:hl7-org:v3:PRPA_IN201301UV02", null);
+    PixAddPatientResponse response = new PixAddPatientResponse(iti44QueryResponseType);
+    return !response.hasError(); //Inverting error flag to indicate success with true returned.
+  }
+
+  /**
+   * Send the built {@link PixMergePatientFeed} through the Internet to the webservice and receive an answer.
+   *
+   * @param mergePatientFeed {@link PixMergePatientFeed}
+   * @return True if the patient was updated without error. Errors are reported as exceptions.
+   * @throws Exception errors occurring in the webservice client
+   * @throws RuntimeException  For errors/exceptions happening in the webservice there will be a RuntimeException wrapped SOAPException thrown.
+   */
+  public boolean send(PixMergePatientFeed mergePatientFeed) throws Exception {
+    Assert.notNull(mergePatientFeed, "The patient merge query can not be null.");
+    MCCIIN000002UV01Type mergePatientXMLResponse = wsClient.sendITI44Query(
+        mergePatientFeed.build().getRootElement(), null, mergePatientFeed.getDestination().getUri(),
+        "urn:hl7-org:v3:PRPA_IN201304UV02", null);
+    PixAddPatientResponse response = new PixAddPatientResponse(mergePatientXMLResponse);
+    return !response.hasError(); //Inverting error flag to indicate success with true returned.
+  }
+
+  /**
+   * Send the built {@link PixPatientIDQuery} through the Internet to the webservice and receive an answer.
+   *
+   * @param searchPatientIDQuery {@link PixPatientIDQuery}
+   * @return {@link PixPatientIDResult}
+   * @throws Exception thrown in the webservice call
+   */
+  public PixPatientIDResult send(PixPatientIDQuery searchPatientIDQuery) throws Exception {
+    Assert.notNull(searchPatientIDQuery, "The patient ID search query can not be null.");
+    PixV3QueryResponse response = wsClient.sendQuery(searchPatientIDQuery.build(), null,
+        searchPatientIDQuery.getDestination().getUri(), null);
+    PixPatientIDResult.PixPatientIDResultBuilder result = PixPatientIDResult.builder();
+    for (String domainId : searchPatientIDQuery.getQueryDomainOids()) {
+      result.patientID(PdqUtils.getPatientDomainId(response, domainId));
+    }
+
+    return result.build();
+  }
+
+  /**
+   * Send your built {@link PixUpdatePatientFeed} through the Internet to the webservice and receive an answer (updated
+   * or error).
+   *
+   * @param updatePatientFeed {@link PixUpdatePatientFeed}
+   * @return True if the patient was updated without error. Errors are reported as exceptions.
+   * @throws Exception errors occurring in the webservice client
+   * @throws RuntimeException  For errors/exceptions happening in the webservice there will be a RuntimeException wrapped SOAPException thrown.
+   */
+  public boolean send(PixUpdatePatientFeed updatePatientFeed) throws Exception {
+    Assert.notNull(updatePatientFeed, "The patient update query can not be null.");
+    MCCIIN000002UV01Type iti44QueryResponseType = wsClient.sendPixUpdatePatientRequest(
+        updatePatientFeed.build().getRootElement(), null, updatePatientFeed.getDestination().getUri(),
+        "urn:hl7-org:v3:PRPA_IN201302UV02", null);
+    PixAddPatientResponse response = new PixAddPatientResponse(iti44QueryResponseType);
+    return !response.hasError(); //Inverting error flag to indicate success with true returned.
+  }
+
+  /**
+   * <div class="en">Downloads a value set as defined in the given configuration,
+   * or in raw dformat exactly as downloaded </div>
+   * @param valueSetRequest request used to create the value set config
+   * @param isUseRaw flag that signals if the response is needed in raw dformat
+   * @return ValueSetResponse object that contains both formats of the response
+   * @throws Exception thrown in the webservice call
+   */
+  public SvsValueSetResponse send(SvsValueSetRequest valueSetRequest, boolean isUseRaw) throws Exception {
+    return wsClient.downloadValueSet(valueSetRequest, isUseRaw);
+  }
+
+  /**
+   * Send your built {@link XdsDocumentSetRequest} through the Internet to the webservice and receive the documents of the
+   * Patient.
+   *
+   * @param retrievedDocumentsRequest {@link XdsDocumentSetRequest}
+   * @return {@link RetrievedDocumentSet}
+   * @throws Exception errors occurring in the webservice client
+   * @throws RuntimeException  For errors/exceptions happening in the webservice there will be a RuntimeException wrapped SOAPException thrown.
+   */
+  public RetrievedDocumentSet send(XdsDocumentSetRequest retrievedDocumentsRequest)
+      throws Exception {
+    Assert.notNull(retrievedDocumentsRequest, "The document set request query can not be null.");
+    return wsClient.send(retrievedDocumentsRequest, retrievedDocumentsRequest.getDestination().getUri(), null);
+  }
+
+  /**
+   * Send your built {@link XdsFindFoldersStoredQuery} to the webservice to find folders (XDSFolder objects) in the
+   * registry for a given patientID with matching 'status' attribute
+   *
+   * @return {@link QueryResponse}
+   * @throws Exception thrown in the webservice call
+   */
+  public QueryResponse send(XdsFindFoldersStoredQuery findFoldersStoredQuery) throws Exception {
+    return wsClient.sendQueryFoldersRequest(findFoldersStoredQuery);
+  }
+
+  /**
+   * Use the {@link XdsProvideAndRetrieveDocumentSetQuery} to build the ProvideAndRetrieveDocumentSet request which is
+   * sent to the webservice and adds or replaces an existing document
+   *
+   * @return {@link Response}
+   * @throws Exception thrown in the webservice call
+   */
+  public Response send(XdsProvideAndRetrieveDocumentSetQuery documentSet) throws Exception {
+    return wsClient.sendProvideAndRegisterDocumentSetRequest(documentSet);
+  }
+
+  /**
+   * Send your built {@link XdsRegistryStoredFindDocumentsQuery} through the Internet to the webservice and receive the
+   * document handlers.
+   *
+   * @return {@link QueryResponse}
+   * @throws Exception errors occurring in the webservice client
+   * @throws RuntimeException  For errors/exceptions happening in the webservice there will be a RuntimeException wrapped SOAPException thrown.
+   */
+  public QueryResponse send(XdsRegistryStoredFindDocumentsQuery query) throws Exception {
+    Assert.notNull(query, "The find documents query can not be null.");
+    return wsClient.sendRegistryStoredFindDocumentsQuery(query, query.getDestination().getUri(),
+        QueryReturnType.LEAF_CLASS, null);
+  }
+
+  /**
+   * Use the {@link XuaRequest} which is sent to the webservice and returns details about the identity of the authenticated user
+   *
+   * @return {@link XuaResponse}
+   * @throws ClientSendException thrown in the xua call
+   */
+  public XuaResponse send(XuaRequest xuaRequest) throws ClientSendException {
+    return wsClient.send(xuaRequest);
   }
 }

@@ -27,13 +27,26 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * IT: Formato del documento secondo l'allegato 3 OCIP-DFI. Questo codice univoco definisce il formato del documento XDS. Insieme al tipo MIME, intende fornire al potenziale consumatore sufficienti informazioni per capire se è in grado o meno di elaborare il documento.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.127.3.10.1.9<br>
- * Effective date: 2021-04-01 17:06<br>
- * Version: 202104.0-stable<br>
+ * Effective date: 2022-11-30 14:44<br>
+ * Version: 202406.0-stable<br>
  * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-09-29")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-07-02")
 public enum FormatCode implements ValueSetEnumInterface {
 
+    /**
+     * EN: CDA-CH-EMED Medication Card document.<br>
+     * DE: CDA-CH-EMED Medication Card document.<br>
+     * FR: CDA-CH-EMED Medication Card document.<br>
+     * IT: CDA-CH-EMED Medication Card document.<br>
+     */
+    CDA_CH_EMED_MEDICATION_CARD_DOCUMENT("urn:che:epr:cda-ch-emed:medication-card:2022",
+                                         "2.16.756.5.30.1.127.3.10.10",
+                                         "CDA-CH-EMED Medication Card document",
+                                         "CDA-CH-EMED Medication Card document",
+                                         "CDA-CH-EMED Medication Card document",
+                                         "CDA-CH-EMED Medication Card document",
+                                         "CDA-CH-EMED Medication Card document"),
     /**
      * EN: CDA Imaging Report with Structured Headings.<br>
      * DE: CDA Imaging Report with Structured Headings.<br>
@@ -73,6 +86,123 @@ public enum FormatCode implements ValueSetEnumInterface {
                             "CDA Wrapped Text Report",
                             "CDA Wrapped Text Report",
                             "CDA Wrapped Text Report"),
+    /**
+     * EN: CH AllergyIntolerance document.<br>
+     * DE: CH AllergyIntolerance document.<br>
+     * FR: CH AllergyIntolerance document.<br>
+     * IT: CH AllergyIntolerance document.<br>
+     */
+    CH_ALLERGYINTOLERANCE_DOCUMENT("urn:che:epr:ch-allergyintolerance:2024",
+                                   "2.16.756.5.30.1.127.3.10.10",
+                                   "CH AllergyIntolerance document",
+                                   "CH AllergyIntolerance document",
+                                   "CH AllergyIntolerance document",
+                                   "CH AllergyIntolerance document",
+                                   "CH AllergyIntolerance document"),
+    /**
+     * EN: CH EMED Medication Card document.<br>
+     * DE: CH EMED Medication Card document.<br>
+     * FR: CH EMED Medication Card document.<br>
+     * IT: CH EMED Medication Card document.<br>
+     */
+    CH_EMED_MEDICATION_CARD_DOCUMENT("urn:che:epr:ch-emed:medication-card:2022",
+                                     "2.16.756.5.30.1.127.3.10.10",
+                                     "CH EMED Medication Card document",
+                                     "CH EMED Medication Card document",
+                                     "CH EMED Medication Card document",
+                                     "CH EMED Medication Card document",
+                                     "CH EMED Medication Card document"),
+    /**
+     * EN: CH EMED Medication Dispense document.<br>
+     * DE: CH EMED Medication Dispense document.<br>
+     * FR: CH EMED Medication Dispense document.<br>
+     * IT: CH EMED Medication Dispense document.<br>
+     */
+    CH_EMED_MEDICATION_DISPENSE_DOCUMENT("urn:che:epr:ch-emed:dis:2024",
+                                         "2.16.756.5.30.1.127.3.10.10",
+                                         "CH EMED Medication Dispense document",
+                                         "CH EMED Medication Dispense document",
+                                         "CH EMED Medication Dispense document",
+                                         "CH EMED Medication Dispense document",
+                                         "CH EMED Medication Dispense document"),
+    /**
+     * EN: CH EMED Medication List document.<br>
+     * DE: CH EMED Medication List document.<br>
+     * FR: CH EMED Medication List document.<br>
+     * IT: CH EMED Medication List document.<br>
+     */
+    CH_EMED_MEDICATION_LIST_DOCUMENT("urn:che:epr:ch-emed:pml:2024",
+                                     "2.16.756.5.30.1.127.3.10.10",
+                                     "CH EMED Medication List",
+                                     "CH EMED Medication List document",
+                                     "CH EMED Medication List document",
+                                     "CH EMED Medication List document",
+                                     "CH EMED Medication List document"),
+    /**
+     * EN: CH EMED Medication Prescription document.<br>
+     * DE: CH EMED Medication Prescription document.<br>
+     * FR: CH EMED Medication Prescription document.<br>
+     * IT: CH EMED Medication Prescription document.<br>
+     */
+    CH_EMED_MEDICATION_PRESCRIPTION_DOCUMENT("urn:che:epr:ch-emed:pre:2024",
+                                             "2.16.756.5.30.1.127.3.10.10",
+                                             "CH EMED Medication Prescription document",
+                                             "CH EMED Medication Prescription document",
+                                             "CH EMED Medication Prescription document",
+                                             "CH EMED Medication Prescription document",
+                                             "CH EMED Medication Prescription document"),
+    /**
+     * EN: CH EMED Medication Treatment Plan document.<br>
+     * DE: CH EMED Medication Treatment Plan document.<br>
+     * FR: CH EMED Medication Treatment Plan document.<br>
+     * IT: CH EMED Medication Treatment Plan document.<br>
+     */
+    CH_EMED_MEDICATION_TREATMENT_PLAN_DOCUMENT("urn:che:epr:ch-emed:mtp:2024",
+                                               "2.16.756.5.30.1.127.3.10.10",
+                                               "CH EMED Medication Treatment Plan document",
+                                               "CH EMED Medication Treatment Plan document",
+                                               "CH EMED Medication Treatment Plan document",
+                                               "CH EMED Medication Treatment Plan document",
+                                               "CH EMED Medication Treatment Plan document"),
+    /**
+     * EN: CH EMED Pharmaceutical Advice document.<br>
+     * DE: CH EMED Pharmaceutical Advice document.<br>
+     * FR: CH EMED Pharmaceutical Advice document.<br>
+     * IT: CH EMED Pharmaceutical Advice document.<br>
+     */
+    CH_EMED_PHARMACEUTICAL_ADVICE_DOCUMENT("urn:che:epr:ch-emed:padv:2024",
+                                           "2.16.756.5.30.1.127.3.10.10",
+                                           "CH EMED Pharmaceutical Advice",
+                                           "CH EMED Pharmaceutical Advice document",
+                                           "CH EMED Pharmaceutical Advice document",
+                                           "CH EMED Pharmaceutical Advice document",
+                                           "CH EMED Pharmaceutical Advice document"),
+    /**
+     * EN: CH VACD Immunization Administration.<br>
+     * DE: CH VACD Immunization Administration.<br>
+     * FR: CH VACD Immunization Administration.<br>
+     * IT: CH VACD Immunization Administration.<br>
+     */
+    CH_VACD_IMMUNIZATION_ADMINISTRATION("urn:che:epr:ch-vacd:immunization-administration:2022",
+                                        "2.16.756.5.30.1.127.3.10.10",
+                                        "CH VACD Immunization Administration",
+                                        "CH VACD Immunization Administration",
+                                        "CH VACD Immunization Administration",
+                                        "CH VACD Immunization Administration",
+                                        "CH VACD Immunization Administration"),
+    /**
+     * EN: CH VACD Vaccination Record.<br>
+     * DE: CH VACD Vaccination Record.<br>
+     * FR: CH VACD Vaccination Record.<br>
+     * IT: CH VACD Vaccination Record.<br>
+     */
+    CH_VACD_VACCINATION_RECORD("urn:che:epr:ch-vacd:vaccination-record:2022",
+                               "2.16.756.5.30.1.127.3.10.10",
+                               "CH VACD Vaccination Record",
+                               "CH VACD Vaccination Record",
+                               "CH VACD Vaccination Record",
+                               "CH VACD Vaccination Record",
+                               "CH VACD Vaccination Record"),
     /**
      * EN: Community Dispense.<br>
      * DE: Community Dispense.<br>
@@ -165,6 +295,19 @@ public enum FormatCode implements ValueSetEnumInterface {
                          "Immunization Content (IC)",
                          "Immunization Content (IC)"),
     /**
+     * EN: Immunization Registry Content (IRC).<br>
+     * DE: Immunization Registry Content (IRC).<br>
+     * FR: Immunization Registry Content (IRC).<br>
+     * IT: Immunization Registry Content (IRC).<br>
+     */
+    IMMUNIZATION_REGISTRY_CONTENT_IRC("urn:ihe:pcc:ic:2008",
+                                      "1.3.6.1.4.1.19376.1.2.3",
+                                      "Immunization Registry Content (IRC)",
+                                      "Immunization Registry Content (IRC)",
+                                      "Immunization Registry Content (IRC)",
+                                      "Immunization Registry Content (IRC)",
+                                      "Immunization Registry Content (IRC)"),
+    /**
      * EN: MimeType sufficient.<br>
      * DE: MimeType sufficient.<br>
      * FR: MimeType sufficient.<br>
@@ -231,6 +374,14 @@ public enum FormatCode implements ValueSetEnumInterface {
                               "Documento CIP non strutturato");
 
     /**
+     * EN: Code for CDA-CH-EMED Medication Card document.<br>
+     * DE: Code für CDA-CH-EMED Medication Card document.<br>
+     * FR: Code de CDA-CH-EMED Medication Card document.<br>
+     * IT: Code per CDA-CH-EMED Medication Card document.<br>
+     */
+    public static final String CDA_CH_EMED_MEDICATION_CARD_DOCUMENT_CODE = "urn:che:epr:cda-ch-emed:medication-card:2022";
+
+    /**
      * EN: Code for CDA Imaging Report with Structured Headings.<br>
      * DE: Code für CDA Imaging Report with Structured Headings.<br>
      * FR: Code de CDA Imaging Report with Structured Headings.<br>
@@ -253,6 +404,78 @@ public enum FormatCode implements ValueSetEnumInterface {
      * IT: Code per CDA Wrapped Text Report.<br>
      */
     public static final String CDA_WRAPPED_TEXT_REPORT_CODE = "urn:ihe:rad:TEXT";
+
+    /**
+     * EN: Code for CH AllergyIntolerance document.<br>
+     * DE: Code für CH AllergyIntolerance document.<br>
+     * FR: Code de CH AllergyIntolerance document.<br>
+     * IT: Code per CH AllergyIntolerance document.<br>
+     */
+    public static final String CH_ALLERGYINTOLERANCE_DOCUMENT_CODE = "urn:che:epr:ch-allergyintolerance:2024";
+
+    /**
+     * EN: Code for CH EMED Medication Card document.<br>
+     * DE: Code für CH EMED Medication Card document.<br>
+     * FR: Code de CH EMED Medication Card document.<br>
+     * IT: Code per CH EMED Medication Card document.<br>
+     */
+    public static final String CH_EMED_MEDICATION_CARD_DOCUMENT_CODE = "urn:che:epr:ch-emed:medication-card:2022";
+
+    /**
+     * EN: Code for CH EMED Medication Dispense document.<br>
+     * DE: Code für CH EMED Medication Dispense document.<br>
+     * FR: Code de CH EMED Medication Dispense document.<br>
+     * IT: Code per CH EMED Medication Dispense document.<br>
+     */
+    public static final String CH_EMED_MEDICATION_DISPENSE_DOCUMENT_CODE = "urn:che:epr:ch-emed:dis:2024";
+
+    /**
+     * EN: Code for CH EMED Medication List document.<br>
+     * DE: Code für CH EMED Medication List document.<br>
+     * FR: Code de CH EMED Medication List document.<br>
+     * IT: Code per CH EMED Medication List document.<br>
+     */
+    public static final String CH_EMED_MEDICATION_LIST_DOCUMENT_CODE = "urn:che:epr:ch-emed:pml:2024";
+
+    /**
+     * EN: Code for CH EMED Medication Prescription document.<br>
+     * DE: Code für CH EMED Medication Prescription document.<br>
+     * FR: Code de CH EMED Medication Prescription document.<br>
+     * IT: Code per CH EMED Medication Prescription document.<br>
+     */
+    public static final String CH_EMED_MEDICATION_PRESCRIPTION_DOCUMENT_CODE = "urn:che:epr:ch-emed:pre:2024";
+
+    /**
+     * EN: Code for CH EMED Medication Treatment Plan document.<br>
+     * DE: Code für CH EMED Medication Treatment Plan document.<br>
+     * FR: Code de CH EMED Medication Treatment Plan document.<br>
+     * IT: Code per CH EMED Medication Treatment Plan document.<br>
+     */
+    public static final String CH_EMED_MEDICATION_TREATMENT_PLAN_DOCUMENT_CODE = "urn:che:epr:ch-emed:mtp:2024";
+
+    /**
+     * EN: Code for CH EMED Pharmaceutical Advice document.<br>
+     * DE: Code für CH EMED Pharmaceutical Advice document.<br>
+     * FR: Code de CH EMED Pharmaceutical Advice document.<br>
+     * IT: Code per CH EMED Pharmaceutical Advice document.<br>
+     */
+    public static final String CH_EMED_PHARMACEUTICAL_ADVICE_DOCUMENT_CODE = "urn:che:epr:ch-emed:padv:2024";
+
+    /**
+     * EN: Code for CH VACD Immunization Administration.<br>
+     * DE: Code für CH VACD Immunization Administration.<br>
+     * FR: Code de CH VACD Immunization Administration.<br>
+     * IT: Code per CH VACD Immunization Administration.<br>
+     */
+    public static final String CH_VACD_IMMUNIZATION_ADMINISTRATION_CODE = "urn:che:epr:ch-vacd:immunization-administration:2022";
+
+    /**
+     * EN: Code for CH VACD Vaccination Record.<br>
+     * DE: Code für CH VACD Vaccination Record.<br>
+     * FR: Code de CH VACD Vaccination Record.<br>
+     * IT: Code per CH VACD Vaccination Record.<br>
+     */
+    public static final String CH_VACD_VACCINATION_RECORD_CODE = "urn:che:epr:ch-vacd:vaccination-record:2022";
 
     /**
      * EN: Code for Community Dispense.<br>
@@ -309,6 +532,14 @@ public enum FormatCode implements ValueSetEnumInterface {
      * IT: Code per Immunization Content (IC).<br>
      */
     public static final String IMMUNIZATION_CONTENT_CODE = "urn:ihe:pcc:ic:2009";
+
+    /**
+     * EN: Code for Immunization Registry Content (IRC).<br>
+     * DE: Code für Immunization Registry Content (IRC).<br>
+     * FR: Code de Immunization Registry Content (IRC).<br>
+     * IT: Code per Immunization Registry Content (IRC).<br>
+     */
+    public static final String IMMUNIZATION_REGISTRY_CONTENT_IRC_CODE = "urn:ihe:pcc:ic:2008";
 
     /**
      * EN: Code for MimeType sufficient.<br>

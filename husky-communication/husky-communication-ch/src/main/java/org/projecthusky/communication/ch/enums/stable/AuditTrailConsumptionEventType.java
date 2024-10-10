@@ -27,11 +27,11 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * IT: No designation found.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.127.3.10.13.2<br>
- * Effective date: 2019-12-11 09:03<br>
- * Version: 201907.2-stable<br>
+ * Effective date: 2023-06-08 14:48<br>
+ * Version: 202306.1-stable<br>
  * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-09-29")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-07-02")
 public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
 
     /**
@@ -126,6 +126,19 @@ public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
                        "Récupération de documents",
                        "Ricerca di un documento"),
     /**
+     * EN: Document search.<br>
+     * DE: Dokumentensuche.<br>
+     * FR: Recherche de documents.<br>
+     * IT: Ricerca documenti.<br>
+     */
+    DOCUMENT_SEARCH("ATC_DOC_SEARCH",
+                    "2.16.756.5.30.1.127.3.10.7",
+                    "Document search",
+                    "Document search",
+                    "Dokumentensuche",
+                    "Recherche de documents",
+                    "Ricerca documenti"),
+    /**
      * EN: Document upload.<br>
      * DE: Dokument-Upload.<br>
      * FR: Chargement de documents.<br>
@@ -151,6 +164,19 @@ public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
                               "Notfall-Zugriff aktivieren",
                               "Autoriser l’accès d’urgence",
                               "Abilitare l'accesso di emergenza"),
+    /**
+     * EN: Entry of healthcare professionals into a group.<br>
+     * DE: Aufnahme von Gesundheitsfachpersonal in eine Gruppe.<br>
+     * FR: Entrée des professionnels de santé dans un groupe.<br>
+     * IT: Inserimento di operatori sanitari in un gruppo.<br>
+     */
+    ENTRY_OF_HEALTHCARE_PROFESSIONALS_INTO_A_GROUP("ATC_HPD_GROUP_ENTRY_NOTIFY",
+                                                   "2.16.756.5.30.1.127.3.10.7",
+                                                   "Entry of healthcare professionals into a group",
+                                                   "Entry of healthcare professionals into a group",
+                                                   "Aufnahme von Gesundheitsfachpersonal in eine Gruppe",
+                                                   "Entrée des professionnels de santé dans un groupe",
+                                                   "Inserimento di operatori sanitari in un gruppo"),
     /**
      * EN: Exclude a Healthcare Professional from Blacklist.<br>
      * DE: Gesundheitsfachperson von der schwarzen Liste streichen.<br>
@@ -261,6 +287,14 @@ public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
     public static final String DOCUMENT_RETRIEVAL_CODE = "ATC_DOC_READ";
 
     /**
+     * EN: Code for Document search.<br>
+     * DE: Code für Dokumentensuche.<br>
+     * FR: Code de Recherche de documents.<br>
+     * IT: Code per Ricerca documenti.<br>
+     */
+    public static final String DOCUMENT_SEARCH_CODE = "ATC_DOC_SEARCH";
+
+    /**
      * EN: Code for Document upload.<br>
      * DE: Code für Dokument-Upload.<br>
      * FR: Code de Chargement de documents.<br>
@@ -275,6 +309,14 @@ public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
      * IT: Code per Abilitare l'accesso di emergenza.<br>
      */
     public static final String ENABLING_EMERGENCY_ACCESS_CODE = "ATC_POL_ENA_EMER_USE";
+
+    /**
+     * EN: Code for Entry of healthcare professionals into a group.<br>
+     * DE: Code für Aufnahme von Gesundheitsfachpersonal in eine Gruppe.<br>
+     * FR: Code de Entrée des professionnels de santé dans un groupe.<br>
+     * IT: Code per Inserimento di operatori sanitari in un gruppo.<br>
+     */
+    public static final String ENTRY_OF_HEALTHCARE_PROFESSIONALS_INTO_A_GROUP_CODE = "ATC_HPD_GROUP_ENTRY_NOTIFY";
 
     /**
      * EN: Code for Exclude a Healthcare Professional from Blacklist.<br>

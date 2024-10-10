@@ -6,24 +6,27 @@
  * This project has been developed further and modified by the joined working group Husky
  * on the basis of the eHealth Connector opensource project from June 28, 2021,
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
- *
  */
 package org.projecthusky.fhir.emed.ch.common.enums;
 
+import java.util.Objects;
+import javax.annotation.processing.Generated;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
 import org.projecthusky.common.enums.CodeSystems;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.enums.ValueSetEnumInterface;
-
-import javax.annotation.processing.Generated;
-import java.util.Objects;
+import org.projecthusky.common.utils.datatypes.Oids;
+import org.projecthusky.fhir.structures.utils.FhirValueSetEnumInterface;
 
 /**
  * Enumeration of DispenseSupplyType values
  * <p>
  * EN: No designation found.<br>
- * DE: IHE DIS 6.3.4.5.3.4 Code.<br>
+ * DE: IHE DIS 6.3.4.5.3.4 Code.<br>
  * FR: No designation found.<br>
  * IT: No designation found.<br>
  * <p>
@@ -32,8 +35,8 @@ import java.util.Objects;
  * Version: 2021<br>
  * Status: DRAFT
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2022-07-11")
-public enum DispenseSupplyType implements ValueSetEnumInterface {
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-07-18")
+public enum DispenseSupplyType implements ValueSetEnumInterface, FhirValueSetEnumInterface {
 
     /**
      * EN: First Fill - Complete.<br>
@@ -134,56 +137,6 @@ public enum DispenseSupplyType implements ValueSetEnumInterface {
      * Identifier of the code system (all values share the same).
      */
     public static final String CODE_SYSTEM_ID = "2.16.840.1.113883.5.4";
-
-    /**
-     * Gets the Enum with a given code.
-     *
-     * @param code The code value.
-     * @return the enum value found or {@code null}.
-     */
-    @Nullable
-    public static DispenseSupplyType getEnum(@Nullable final String code) {
-        for (final DispenseSupplyType x : values()) {
-            if (x.getCodeValue().equals(code)) {
-                return x;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Checks if a given enum is part of this value set.
-     *
-     * @param enumName The name of the enum.
-     * @return {@code true} if the name is found in this value set, {@code false} otherwise.
-     */
-    public static boolean isEnumOfValueSet(@Nullable final String enumName) {
-        if (enumName == null) {
-            return false;
-        }
-        try {
-            Enum.valueOf(DispenseSupplyType.class,
-                         enumName);
-            return true;
-        } catch (final IllegalArgumentException ex) {
-            return false;
-        }
-    }
-
-    /**
-     * Checks if a given code value is in this value set.
-     *
-     * @param codeValue The code value.
-     * @return {@code true} if the value is found in this value set, {@code false} otherwise.
-     */
-    public static boolean isInValueSet(@Nullable final String codeValue) {
-        for (final DispenseSupplyType x : values()) {
-            if (x.getCodeValue().equals(codeValue)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     /**
      * Machine interpretable and (inside this class) unique code.
@@ -309,5 +262,129 @@ public enum DispenseSupplyType implements ValueSetEnumInterface {
     @NonNull
     public String getValueSetName() {
         return VALUE_SET_NAME;
+    }
+
+    /**
+     * Returns the code system, as used in FHIR.
+     */
+    @Override
+    @NonNull
+    public String getFhirSystem() {
+        if (this.getCodeSystemId().startsWith("http")) {
+            return this.getCodeSystemId();
+        }
+        return Oids.PREFIX_OID + this.getCodeSystemId();
+    }
+
+    /**
+     * Returns the enum value as a FHIR Coding.
+     */
+    @Override
+    @NonNull
+    public Coding getCoding() {
+        return new Coding(this.getFhirSystem(),
+                          this.getCodeValue(),
+                          this.displayNames[0]);
+    }
+
+    /**
+     * Returns the enum value as a FHIR CodeableConcept.
+     */
+    @Override
+    @NonNull
+    public CodeableConcept getCodeableConcept() {
+        return new CodeableConcept().setText(this.displayNames[0]).addCoding(this.getCoding());
+    }
+
+    /**
+     * Compares the enum value to the given FHIR Coding.
+     *
+     * @param coding The FHIR Coding to be compared.
+     * @return {@code true} if they have the same system and value, {@code false} otherwise.
+     */
+    @Override
+    public boolean isEqualTo(final Coding coding) {
+        return this.getFhirSystem().equals(coding.getSystem()) && this.getCodeValue().equals(coding.getCode());
+    }
+
+    /**
+     * Gets the Enum with a given code.
+     *
+     * @param code The code value.
+     * @return the enum value found or {@code null}.
+     */
+    @Nullable
+    public static DispenseSupplyType getEnum(@Nullable final String code) {
+        for (final DispenseSupplyType x : values()) {
+            if (x.getCodeValue().equals(code)) {
+                return x;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Checks if a given enum is part of this value set.
+     *
+     * @param enumName The name of the enum.
+     * @return {@code true} if the name is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isEnumOfValueSet(@Nullable final String enumName) {
+        if (enumName == null) {
+            return false;
+        }
+        try {
+            Enum.valueOf(DispenseSupplyType.class,
+                         enumName);
+            return true;
+        } catch (final IllegalArgumentException ex) {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if a given code value is in this value set.
+     *
+     * @param codeValue The code value.
+     * @return {@code true} if the value is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isInValueSet(@Nullable final String codeValue) {
+        for (final DispenseSupplyType x : values()) {
+            if (x.getCodeValue().equals(codeValue)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Gets the Enum with a given FHIR Coding.
+     *
+     * @param coding The FHIR Coding.
+     * @return the enum value found or {@code null}.
+     */
+    @Nullable
+    public static DispenseSupplyType getEnum(@Nullable final Coding coding) {
+        for (final var x : values()) {
+            if (x.isEqualTo(coding)) {
+                return x;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Checks if a given FHIR Coding is in this value set.
+     *
+     * @param coding The FHIR Coding.
+     * @return {@code true} if the value is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isInValueSet(@Nullable final Coding coding) {
+        for (final var x : values()) {
+            if (x.isEqualTo(coding)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

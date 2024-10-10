@@ -29,7 +29,7 @@ public class XdsProvideAndRetrieveDocumentSetQuery {
   private List<XdsDocumentWithMetadata> documentWithMetadata;
   @NotNull
   private SubmissionSetMetadata submissionSetMetadata;
-  @NotNull
+  /** may be null for testing environments like the EPD Playground */
   private SecurityHeaderElement xuaToken;
   @NotNull
   private Destination destination;

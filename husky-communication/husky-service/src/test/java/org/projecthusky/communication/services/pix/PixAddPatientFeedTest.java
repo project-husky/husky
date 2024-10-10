@@ -10,15 +10,18 @@
  */
 package org.projecthusky.communication.services.pix;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import org.hl7.fhir.r4.model.HumanName;
 import org.hl7.fhir.r4.model.Organization;
+import org.hl7.fhir.r4.model.Identifier;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.projecthusky.common.communication.Destination;
 import org.projecthusky.communication.requests.pix.PixAddPatientFeed;
+
+import java.util.Date;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PixAddPatientFeedTest {
 
@@ -72,4 +75,40 @@ public class PixAddPatientFeedTest {
 		assertEquals(0, addPatientQuery.getTelecomContacts().size());
 	}
 
+	@Test
+	public void testBuilding() {
+		PixAddPatientFeed.PixAddPatientFeedBuilder pixAddPatientFeed = PixAddPatientFeed.builder().destination(new Destination()).providerOrganization(new Organization());
+		pixAddPatientFeed.homeCommunityOID("1.2.3");
+
+		Identifier localPatientIdentifier = new Identifier();
+		localPatientIdentifier.setSystem("4.5.6");
+		localPatientIdentifier.setValue("localId");
+
+		Identifier eprPatientIdentifier = new Identifier();
+		eprPatientIdentifier.setSystem("7.8.9");
+		eprPatientIdentifier.setValue("7654554452452");
+
+		pixAddPatientFeed.identifiers(List.of(localPatientIdentifier, eprPatientIdentifier));
+		pixAddPatientFeed.birthday(new Date());
+
+		HumanName patientName = new HumanName();
+		patientName.addGiven("Hector");
+		patientName.setFamily("Jones");
+		pixAddPatientFeed.patientName(patientName);
+
+		final var root = pixAddPatientFeed.build().build().getRootElement();
+		assertNotNull(root);
+		assertNotNull(root.getControlActProcess());
+		assertNotNull(root.getControlActProcess().getSubject());
+		final var subject = root.getControlActProcess().getSubject().get(0);
+		assertNotNull(subject);
+		assertFalse(subject.getContextConductionInd());
+		assertEquals("SUBJ", subject.getTypeCode());
+		assertNotNull(subject.getRegistrationEvent());
+		assertNotNull(subject.getRegistrationEvent().getCustodian());
+		assertNotNull(subject.getRegistrationEvent().getSubject1());
+		final var patient = subject.getRegistrationEvent().getSubject1().getPatient();
+		assertNotNull(patient);
+		assertEquals(2, patient.getId().size());
+	}
 }

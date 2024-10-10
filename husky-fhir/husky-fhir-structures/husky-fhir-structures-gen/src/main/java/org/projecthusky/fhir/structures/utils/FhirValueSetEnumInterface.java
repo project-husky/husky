@@ -10,24 +10,33 @@
  */
 package org.projecthusky.fhir.structures.utils;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 
 /**
- * husky
+ * An interface for all FHIR value set enums.
  *
  * @author Quentin Ligier
  **/
 public interface FhirValueSetEnumInterface {
 
     /**
+     * Returns the code system, as used in FHIR.
+     */
+    @NonNull
+    String getFhirSystem();
+
+    /**
      * Returns the enum value as a FHIR Coding.
      */
+    @NonNull
     Coding getCoding();
 
     /**
      * Returns the enum value as a FHIR CodeableConcept.
      */
+    @NonNull
     CodeableConcept getCodeableConcept();
 
     /**

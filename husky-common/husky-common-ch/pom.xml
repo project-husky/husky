@@ -14,12 +14,14 @@
 		<dependency>
 			<groupId>org.projecthusky.common</groupId>
 			<artifactId>husky-common-gen</artifactId>
+			<version>3.0.0-SNAPSHOT</version>
 		</dependency>
 
 		<!-- test stuff -->
 		<dependency>
 			<groupId>org.projecthusky.common</groupId>
 			<artifactId>husky-common-gen</artifactId>
+			<version>3.0.0-SNAPSHOT</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
