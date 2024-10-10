@@ -2161,6 +2161,26 @@ public enum UnitCode implements ValueSetEnumInterface, FhirValueSetEnumInterface
     }
 
     /**
+     * Returns the enum value as a FHIR Coding, translated in the requested language.
+     */
+    @Override
+    @NonNull
+    public Coding getCoding(final LanguageCode languageCode) {
+        return new Coding(this.getFhirSystem(),
+                          this.getCodeValue(),
+                          this.getDisplayName(languageCode));
+    }
+
+    /**
+     * Returns the enum value as a FHIR CodeableConcept, translated in the requested language.
+     */
+    @Override
+    @NonNull
+    public CodeableConcept getCodeableConcept(final LanguageCode languageCode) {
+        return new CodeableConcept().setText(this.getDisplayName(languageCode)).addCoding(this.getCoding(languageCode));
+    }
+
+    /**
      * Compares the enum value to the given FHIR Coding.
      *
      * @param coding The FHIR Coding to be compared.

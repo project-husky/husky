@@ -14,6 +14,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
+import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.fhir.structures.utils.FhirValueSetEnumInterface;
 
 import java.util.Objects;
@@ -63,6 +64,31 @@ public enum EmedPadvEntryType implements FhirValueSetEnumInterface {
     }
 
     /**
+     * Gets the display name defined by the language param.
+     *
+     * @param languageCode The language code to get the display name for, {@code null} to get the default display name.
+     * @return the display name in the desired language.
+     */
+    @NonNull
+    public String getDisplayName(@Nullable final LanguageCode languageCode) {
+        if (languageCode == null) {
+            return this.displayNames[0];
+        }
+        return switch(languageCode) {
+            case ENGLISH ->
+                    this.displayNames[1];
+            case GERMAN ->
+                    this.displayNames[2];
+            case FRENCH ->
+                    this.displayNames[3];
+            case ITALIAN ->
+                    this.displayNames[4];
+            default ->
+                    "TOTRANSLATE";
+        };
+    }
+
+    /**
      * Returns the code system, as used in FHIR.
      */
     @Override
@@ -94,6 +120,26 @@ public enum EmedPadvEntryType implements FhirValueSetEnumInterface {
         return new CodeableConcept()
                 .addCoding(this.getCoding())
                 .setText(this.displayNames[0]);
+    }
+
+    /**
+     * Returns the enum value as a FHIR Coding, translated in the requested language.
+     */
+    @Override
+    @NonNull
+    public Coding getCoding(final LanguageCode languageCode) {
+        return new Coding(this.getFhirSystem(),
+                          this.code,
+                          this.getDisplayName(languageCode));
+    }
+
+    /**
+     * Returns the enum value as a FHIR CodeableConcept, translated in the requested language.
+     */
+    @Override
+    @NonNull
+    public CodeableConcept getCodeableConcept(final LanguageCode languageCode) {
+        return new CodeableConcept().setText(this.getDisplayName(languageCode)).addCoding(this.getCoding(languageCode));
     }
 
     /**

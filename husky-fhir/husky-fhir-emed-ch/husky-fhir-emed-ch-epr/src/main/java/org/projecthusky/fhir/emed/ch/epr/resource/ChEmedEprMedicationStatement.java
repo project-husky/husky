@@ -14,6 +14,7 @@ import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.*;
+import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
@@ -235,13 +236,26 @@ public abstract class ChEmedEprMedicationStatement extends MedicationStatement i
     }
 
     /**
-     * Sets the substitution code in the medication statement.
+     * Sets the substitution code in the medication statement, with an English display name.
      *
      * @param value the substitution code.
      * @return this.
      */
     public ChEmedEprMedicationStatement setSubstitution(final SubstanceAdministrationSubstitutionCode value) {
         this.setSubstitutionElement(value.getCodeableConcept());
+        return this;
+    }
+
+    /**
+     * Sets the substitution code in the medication statement, with a display name in the requested language.
+     *
+     * @param value        the substitution code.
+     * @param languageCode the requested language for the display name.
+     * @return this.
+     */
+    public ChEmedEprMedicationStatement setSubstitution(final SubstanceAdministrationSubstitutionCode value,
+                                                        final LanguageCode languageCode) {
+        this.setSubstitutionElement(value.getCodeableConcept(languageCode));
         return this;
     }
 
