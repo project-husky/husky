@@ -10,6 +10,9 @@
 package org.projecthusky.communication.services;
 
 import lombok.extern.slf4j.Slf4j;
+import net.ihe.gazelle.hl7v3.mcciin000002UV01.MCCIIN000002UV01Type;
+import net.ihe.gazelle.hl7v3.prpain201306UV02.PRPAIN201306UV02Type;
+
 import java.io.IOException;
 
 import jakarta.xml.bind.DataBindingException;

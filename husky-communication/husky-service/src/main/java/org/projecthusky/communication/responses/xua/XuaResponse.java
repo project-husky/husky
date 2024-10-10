@@ -9,6 +9,9 @@
  */
 package org.projecthusky.communication.responses.xua;
 
+import javax.xml.namespace.QName;
+
+import java.lang.reflect.Field;
 import java.util.List;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
