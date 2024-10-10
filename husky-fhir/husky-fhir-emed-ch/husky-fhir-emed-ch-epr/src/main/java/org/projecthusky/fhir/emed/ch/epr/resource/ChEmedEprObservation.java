@@ -5,6 +5,7 @@ import ca.uhn.fhir.model.api.annotation.Extension;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Reference;
+import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
@@ -20,7 +21,6 @@ import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPl
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprMedicationStatementMtp;
 import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprMedicationStatementChanged;
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprMedicationRequestPre;
-import org.projecthusky.fhir.emed.ch.epr.util.References;
 
 import java.time.Instant;
 import java.util.Date;
@@ -88,7 +88,7 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
     }
 
     /**
-     * Constructor that pre-populates fields.
+     * Constructor that pre-populates fields. The advice type dispay name is in English.
      *
      * @param entryUuid The medication statement id.
      * @param padvType  The pharmaceutical advice type.
@@ -99,6 +99,22 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
         this.setStatus(ObservationStatus.FINAL);
         this.addIdentifier().setValue(Uuids.URN_PREFIX + entryUuid).setSystem(FhirSystem.URI);
         this.setCode(padvType.getCodeableConcept());
+    }
+
+    /**
+     * Constructor that pre-populates fields. The advice type display name is in the requested language.
+     *
+     * @param entryUuid    The medication statement id.
+     * @param padvType     The pharmaceutical advice type.
+     * @param languageCode The requested language for the display name.
+     */
+    public ChEmedEprObservation(final UUID entryUuid,
+                                final EmedPadvEntryType padvType,
+                                final LanguageCode languageCode) {
+        super();
+        this.setStatus(ObservationStatus.FINAL);
+        this.addIdentifier().setValue(Uuids.URN_PREFIX + entryUuid).setSystem(FhirSystem.URI);
+        this.setCode(padvType.getCodeableConcept(languageCode));
     }
 
     @Override
@@ -389,13 +405,26 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
     }
 
     /**
-     * Sets the PADV entry type.
+     * Sets the PADV entry type, with an English display name.
      *
      * @param padvEntryType the PADV entry type.
      * @return this.
      */
     public ChEmedEprObservation<T> setPadvEntryType(final EmedPadvEntryType padvEntryType) {
         this.setCode(padvEntryType.getCodeableConcept());
+        return this;
+    }
+
+    /**
+     * Sets the PADV entry type, with a display name in the requested language.
+     *
+     * @param padvEntryType the PADV entry type.
+     * @param languageCode  the requested language for the display name.
+     * @return this.
+     */
+    public ChEmedEprObservation<T> setPadvEntryType(final EmedPadvEntryType padvEntryType,
+                                                    final LanguageCode languageCode) {
+        this.setCode(padvEntryType.getCodeableConcept(languageCode));
         return this;
     }
 
