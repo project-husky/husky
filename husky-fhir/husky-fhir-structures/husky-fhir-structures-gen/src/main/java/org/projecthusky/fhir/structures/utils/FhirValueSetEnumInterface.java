@@ -13,6 +13,7 @@ package org.projecthusky.fhir.structures.utils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
+import org.projecthusky.common.enums.LanguageCode;
 
 /**
  * An interface for all FHIR value set enums.
@@ -38,6 +39,18 @@ public interface FhirValueSetEnumInterface {
      */
     @NonNull
     CodeableConcept getCodeableConcept();
+
+    /**
+     * Returns the enum value as a FHIR Coding, translated in the requested language.
+     */
+    @NonNull
+    Coding getCoding(final LanguageCode languageCode);
+
+    /**
+     * Returns the enum value as a FHIR CodeableConcept, translated in the requested language.
+     */
+    @NonNull
+    CodeableConcept getCodeableConcept(final LanguageCode languageCode);
 
     /**
      * Compares the enum value to the given FHIR Coding.

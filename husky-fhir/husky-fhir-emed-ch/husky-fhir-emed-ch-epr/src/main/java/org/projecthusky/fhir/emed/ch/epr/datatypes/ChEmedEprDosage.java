@@ -15,7 +15,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Dosage;
 import org.hl7.fhir.r4.model.Period;
 import org.hl7.fhir.r4.model.Timing;
-import org.projecthusky.common.utils.datatypes.Oids;
+import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.RouteOfAdministrationEdqm;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
@@ -163,13 +163,26 @@ public class ChEmedEprDosage extends Dosage {
     }
 
     /**
-     * Sets routeOfAdministration of administration.
+     * Sets the route of administration, with an English display name.
      *
      * @param routeOfAdministration the routeOfAdministration of administration.
      * @return this.
      */
     public ChEmedEprDosage setRouteOfAdministration(final RouteOfAdministrationEdqm routeOfAdministration) {
         this.setRoute(routeOfAdministration.getCodeableConcept());
+        return this;
+    }
+
+    /**
+     * Sets the route of administration, with a display in the given language.
+     *
+     * @param routeOfAdministration the route of administration.
+     * @param languageCode          the requested language for the display name.
+     * @return this.
+     */
+    public ChEmedEprDosage setRouteOfAdministration(final RouteOfAdministrationEdqm routeOfAdministration,
+                                                    final LanguageCode languageCode) {
+        this.setRoute(routeOfAdministration.getCodeableConcept(languageCode));
         return this;
     }
 
