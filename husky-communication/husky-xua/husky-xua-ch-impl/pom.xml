@@ -25,13 +25,13 @@
 			<artifactId>husky-communication-ch</artifactId>
 		<version>3.0.0-SNAPSHOT</version>
 		</dependency>
-
+<!--
 		<dependency>
 			<groupId>xerces</groupId>
 			<artifactId>xercesImpl</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
+-->
 		<dependency>
 			<groupId>org.opensaml</groupId>
 			<artifactId>opensaml-storage-impl</artifactId>
