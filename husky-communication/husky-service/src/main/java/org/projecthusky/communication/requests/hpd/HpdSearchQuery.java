@@ -11,7 +11,7 @@ package org.projecthusky.communication.requests.hpd;
 
 import java.util.List;
 import java.util.Objects;
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import lombok.Builder;
 import lombok.Getter;

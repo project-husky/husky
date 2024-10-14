@@ -16,7 +16,7 @@
 
 package org.projecthusky.common.hl7cdar2;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * An identifier that uniquely identifies a thing or object. Examples are object identifier for HL7 RIM objects, medical

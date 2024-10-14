@@ -12,7 +12,7 @@ package org.projecthusky.cda.elga.narrative;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 import org.projecthusky.cda.elga.utils.NamespaceUtils;

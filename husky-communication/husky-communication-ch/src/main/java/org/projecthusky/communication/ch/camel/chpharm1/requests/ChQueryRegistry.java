@@ -13,7 +13,7 @@ package org.projecthusky.communication.ch.camel.chpharm1.requests;
 import org.projecthusky.communication.ch.camel.chpharm1.requests.query.*;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.query.*;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;

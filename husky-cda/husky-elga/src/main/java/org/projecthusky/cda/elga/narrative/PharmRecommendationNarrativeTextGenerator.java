@@ -14,7 +14,7 @@ import java.time.Instant;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 import org.projecthusky.common.hl7cdar2.POCDMT000040Entry;

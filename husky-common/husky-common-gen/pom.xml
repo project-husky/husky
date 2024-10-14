@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>husky-common-gen</artifactId>
 	<name>Husky Common Generic</name>
@@ -7,7 +9,7 @@
 	<parent>
 		<groupId>org.projecthusky.common</groupId>
 		<artifactId>husky-common</artifactId>
-		<version>2.5.3-SNAPSHOT</version>
+		<version>3.0.0-SNAPSHOT</version>
 	</parent>
 
 
@@ -22,16 +24,16 @@
 			</dependency> <dependency> <groupId>javax.xml.bind</groupId> <artifactId>javax.xml.bind-api</artifactId> 
 			</dependency> -->
 
-			<dependency>
-				<groupId>org.openehealth.ipf.platform-camel</groupId>
-				<artifactId>ipf-platform-camel-ihe-xds</artifactId>
-				<exclusions>
-					<exclusion>
-						<groupId>xml-apis</groupId>
-						<artifactId>xml-apis</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
+		<dependency>
+			<groupId>org.openehealth.ipf.platform-camel</groupId>
+			<artifactId>ipf-platform-camel-ihe-xds</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
 		<!-- Configuration file stuff -->
 		<dependency>
@@ -51,7 +53,8 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-text</artifactId>
 		</dependency>
-		<!-- even if it is probably not used in the Convenience API, it is required 
+		<!-- even if it is probably not used in the Convenience API, it is
+		required 
 			in order to make it available for the .Net Demo by IKVM.net -->
 		<dependency>
 			<groupId>commons-cli</groupId>
@@ -60,6 +63,10 @@
 
 		<!-- IPF stuff -->
 
+		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.slf4j</groupId>

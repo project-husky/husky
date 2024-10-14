@@ -16,7 +16,7 @@ import org.projecthusky.common.enums.NullFlavor;
 import org.projecthusky.common.enums.PostalAddressUse;
 import org.projecthusky.common.hl7cdar2.*;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import java.io.Serializable;
 import java.util.ArrayList;

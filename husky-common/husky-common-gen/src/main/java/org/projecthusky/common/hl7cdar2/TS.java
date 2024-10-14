@@ -18,7 +18,7 @@ package org.projecthusky.common.hl7cdar2;
 
 import org.projecthusky.common.enums.NullFlavor;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 import java.util.Objects;
 
 /**

@@ -12,7 +12,7 @@ package org.projecthusky.cda.elga.narrative;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 import org.projecthusky.common.hl7cdar2.POCDMT000040Entry;

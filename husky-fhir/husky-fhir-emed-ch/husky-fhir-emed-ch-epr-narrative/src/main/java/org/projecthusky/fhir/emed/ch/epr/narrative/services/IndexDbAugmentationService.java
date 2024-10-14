@@ -1,13 +1,13 @@
 package org.projecthusky.fhir.emed.ch.epr.narrative.services;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.xerces.impl.dv.util.Base64;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Base64;
 import java.util.Optional;
 
 /**
@@ -130,7 +130,7 @@ public class IndexDbAugmentationService {
     private Optional<String> getImage(final String url) {
         try {
             final var inputStream = new URL(url).openStream();
-            final var b64Img = Base64.encode(IOUtils.toByteArray(inputStream));
+            final var b64Img = Base64.getEncoder().encode(IOUtils.toByteArray(inputStream));
             inputStream.close();
             return Optional.of("data:image/png;base64," + b64Img);
         } catch (IOException e) {

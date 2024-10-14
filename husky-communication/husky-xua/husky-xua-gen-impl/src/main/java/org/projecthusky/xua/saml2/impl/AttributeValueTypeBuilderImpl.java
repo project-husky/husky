@@ -12,7 +12,7 @@ package org.projecthusky.xua.saml2.impl;
 
 import java.util.Map.Entry;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 import org.herasaf.xacml.core.policy.impl.AttributeValueType;

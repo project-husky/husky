@@ -10,7 +10,7 @@
 package org.projecthusky.cda.elga.generated.artdecor.ems;
 
 import javax.annotation.processing.Generated;
-import javax.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlTransient;
 
 /**
  * atcdabbr_other_AddressCompilationMinimal

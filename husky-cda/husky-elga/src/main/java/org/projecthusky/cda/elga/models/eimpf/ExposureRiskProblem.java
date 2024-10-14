@@ -12,7 +12,7 @@ package org.projecthusky.cda.elga.models.eimpf;
 import java.time.ZonedDateTime;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 import org.projecthusky.cda.elga.generated.artdecor.AtcdabbrEntryExpositionsrisikoProblem;
