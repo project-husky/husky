@@ -15,6 +15,8 @@ import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 import java.time.Instant;
 import java.util.Objects;
 
+import static org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplan.EMEDIPLAN_TIMEZONE;
+
 /**
  * Describes when and what amount of medication must be taken.
  */
@@ -30,7 +32,7 @@ public class EMediplanPosology implements EMediplanObject {
      * or date only) (e.g. 2016-06-16T16:26:15+02:00).
      */
     @JsonProperty("dtFrom")
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Europe/Zurich")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssXXX", timezone = EMEDIPLAN_TIMEZONE)
     protected @Nullable Instant start;
     /**
      * To date. Format: YYYY-MM-DDThh:mm:ss+02:00 or YYYY-MM-DD (ISO 860114 Combined date and time including time zone
@@ -39,7 +41,7 @@ public class EMediplanPosology implements EMediplanObject {
      * also on 2015-05-01.
      */
     @JsonProperty("dtTo")
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Europe/Zurich")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssXXX", timezone = EMEDIPLAN_TIMEZONE)
     protected @Nullable Instant end;
     /**
      * Reserve medication. True if in reserve, false otherwise. By default, false is assumed.

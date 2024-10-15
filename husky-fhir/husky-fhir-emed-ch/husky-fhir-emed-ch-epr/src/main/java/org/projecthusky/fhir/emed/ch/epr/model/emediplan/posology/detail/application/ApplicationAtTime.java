@@ -23,7 +23,7 @@ public class ApplicationAtTime extends Application {
      * The time format hh:mm is also supported (e.g. 08:00).
      */
     @JsonProperty(APPLICATION_TIME_FIELD_NAME)
-    @JsonFormat(pattern = "HH:mm")
+    @JsonFormat(pattern = "HH:mm:ss")
     protected LocalTime applicationTime;
 
     @Override
