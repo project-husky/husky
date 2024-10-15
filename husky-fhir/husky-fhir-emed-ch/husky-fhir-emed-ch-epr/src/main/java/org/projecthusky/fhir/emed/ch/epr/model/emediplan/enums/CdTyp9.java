@@ -68,6 +68,14 @@ public enum CdTyp9 implements EMediplanEnum<String>{
         this.code = code;
     }
 
+    /**
+     * Converts a {@link RegularUnitCodeAmbu} unit to a {@link CdTyp9} unit. The mapping on which this conversion is
+     * based can be found
+     * <a href="https://docs.google.com/spreadsheets/d/1lJeAPtZ7bO3OOarjSVolpn9Hl3y1Xlp-WOR_37fa6R8">here</a>.
+     *
+     * @param unit The {@link RegularUnitCodeAmbu} unit to be converted.
+     * @return The resulting {@link CdTyp9} unit.
+     */
     public static CdTyp9 fromRegularUnitCodeAmbu(final RegularUnitCodeAmbu unit){
         return switch(unit) {
             case AMPULE, APPLICATOR, BAG, BARREL, BLOCK, CACHET, CAPSULE, CHEWING_GUM, CFU, CM, CM2, CM3, CONTAINER, CYLINDER, DRESSING, FILM,
