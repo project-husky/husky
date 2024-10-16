@@ -120,19 +120,10 @@ public class OpenHtmlToPdfAConverter implements HtmlToPdfAConverter {
         this.pdfRendererBuilderConsumer = pdfRendererBuilderConsumer;
     }
 
-    /**
-     * Converts the HTML content to its PDF/A representation, with a custom template.
-     *
-     * @param lang             The document language, as an ISO code.
-     * @param contextVariables The context variables to be added to the template processing. Note that {@code "lang"} is
-     *                         automatically added with the code value of the received {@code lang} parameter.
-     * @param templateContent The custom Thymeleaf content.
-     * @return The content of the generated PDF/A.
-     */
+    @Override
     @SuppressWarnings("java:S2093") // Cannot use try-with-resources with font input streams
     public byte[] convert(final NarrativeLanguage lang,
                           final Map<String, Object> contextVariables,
-                          //final Map<String, String> bookmarks,
                           final String templateContent) {
         // Prepare the full HTML content
         final var context = new Context();
