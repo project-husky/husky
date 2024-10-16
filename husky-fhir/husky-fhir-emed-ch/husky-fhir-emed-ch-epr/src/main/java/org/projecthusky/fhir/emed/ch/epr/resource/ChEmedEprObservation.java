@@ -22,6 +22,7 @@ import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprMedicationStateme
 import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprMedicationStatementChanged;
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprMedicationRequestPre;
 
+import java.lang.reflect.InvocationTargetException;
 import java.time.Instant;
 import java.util.Date;
 import java.util.Objects;
@@ -149,7 +150,11 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
         final var resource = this.getMedicationStatementChangedReference().getResource();
         if (getMedicationStatementChangedType().isInstance(resource))
             return getMedicationStatementChangedType().cast(resource);
-        throw new InvalidEmedContentException("The medication statement resource isn't of the right type.");
+        throw new InvalidEmedContentException(String.format(
+                "The medication statement resource isn't of the right type. Expected %s. Found %s",
+                getMedicationStatementChangedType().getName(),
+                resource.getClass().getName()
+        ));
     }
 
     /**
@@ -524,7 +529,25 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
             obs.treatmentPlan = treatmentPlan == null ? null : treatmentPlan.copy();
             obs.prescription = prescription == null ? null : prescription.copy();
             obs.dispense = dispense == null ? null : dispense.copy();
-            obs.medicationStatementChanged = medicationStatementChanged == null ? null : medicationStatementChanged.copy();
+            if (medicationStatementChanged == null) obs.medicationStatementChanged = null;
+            else {
+                obs.medicationStatementChanged = Objects.requireNonNull(medicationStatementChanged.copy());
+                final var medStatementChangedResource = resolveMedicationStatementChanged();
+                if (medStatementChangedResource != null) {
+                    try {
+                        final var newMedStatementChangedResource = obs.getMedicationStatementChangedType().getDeclaredConstructor().newInstance();
+                        medStatementChangedResource.copyValues(newMedStatementChangedResource);
+                        obs.medicationStatementChanged.setResource(newMedStatementChangedResource);
+                    } catch (NoSuchMethodException |
+                             SecurityException |
+                             InstantiationException |
+                             IllegalAccessException |
+                             InvocationTargetException exception) {
+                        throw new RuntimeException("Uncaught exception when trying to copy the medication statement changed resource.", exception);
+                    }
+                }
+            }
+            //obs.medicationStatementChanged = medicationStatementChanged == null ? null : medicationStatementChanged.copy();
             obs.medicationRequestChanged = medicationRequestChanged == null ? null : medicationRequestChanged.copy();
         }
     }

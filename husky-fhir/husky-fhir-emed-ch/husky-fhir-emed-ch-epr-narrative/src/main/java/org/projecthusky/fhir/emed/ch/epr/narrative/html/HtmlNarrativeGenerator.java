@@ -17,12 +17,8 @@ import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprMedicationStatem
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprDocumentPre;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-import org.thymeleaf.templatemode.TemplateMode;
-import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.time.Instant;
 import java.util.*;
 
 /**
@@ -45,43 +41,27 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
      */
     protected final TemplateEngine templateEngine;
 
-    public HtmlNarrativeGenerator() throws IOException, ParserConfigurationException {
+    protected final NarrativeFormat narrativeFormat;
+
+    public HtmlNarrativeGenerator(final NarrativeFormat format) throws IOException {
         super();
         this.fhirContext = FhirContext.forR4Cached();
-
-        final var templateResolver = new ClassLoaderTemplateResolver(this.getClass().getClassLoader());
-        templateResolver.setTemplateMode(TemplateMode.HTML);
-        templateResolver.setCharacterEncoding("UTF-8");
-        templateResolver.setCacheable(true);
-        templateResolver.setCacheTTLMs(300000L);
-        templateResolver.setPrefix("/narrative/templates/");
-        templateResolver.setSuffix(".html");
-
+        this.narrativeFormat = Objects.requireNonNull(format);
         this.templateEngine = new TemplateEngine();
-        this.templateEngine.setTemplateResolver(templateResolver);
+        this.templateEngine.setTemplateResolver(ChEmedEprTemplateResolver.get());
     }
 
-    /**
-     * Generates the narrative for a medication card and return it as HTML content.
-     *
-     * @param document The medication card document.
-     * @param lang The language of the narrative.
-     * @return The HTML content of the narrative.
-     */
+    @Override
     public String generate(final ChEmedEprDocumentPmlc document,
-                           final NarrativeLanguage lang) {
+                           final NarrativeLanguage lang
+                           ) {
         final var asneededTreatments = new HashMap<UUID, List<ChEmedEprMedicationStatementPmlc>>(5);
         final var activeTreatments = new HashMap<UUID, List<ChEmedEprMedicationStatementPmlc>>(5);
-        ChEmedEprMedicationStatementPmlc lastStatement = null;
+        ChEmedEprMedicationStatementPmlc lastStatement = document.resolveLastStatement();
         for (final var statement : document.resolveComposition().resolveMedicationStatements()) {
             if (statement.isShownInMedicationCard(document.resolveTimestamp())) {
                 addStatementToTreatments(statement,
                         statement.resolveEffectiveDosageInstructions().isRegular() ? activeTreatments : asneededTreatments);
-                if (lastStatement == null) lastStatement = statement;
-                else {
-                    if (getStatementAuthorshipDate(lastStatement).compareTo(getStatementAuthorshipDate(statement)) < 0)
-                        lastStatement = statement;
-                }
             }
         }
 
@@ -92,18 +72,14 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
         context.setVariable("activeTreatments", activeTreatments);
         context.setVariable("asneededTreatments", asneededTreatments);
         context.setVariable("lastStatement", lastStatement);
+        context.setVariable("issuedDate", document.resolveTimestamp());
 
         context.setLocale(lang.getLocale());
-        return this.templateEngine.process("medication_card", context);
+        return templateEngine
+                .process(narrativeFormat == NarrativeFormat.CH_EMED_EPR ? "medication_card" : "emediplan/emediplan_body", context);
     }
 
-    /**
-     * Generates the narrative for a prescription and return it as HTML content.
-     *
-     * @param document The prescription document.
-     * @param lang The language of the narrative.
-     * @return The HTML content of the narrative.
-     */
+    @Override
     public String generate(final ChEmedEprDocumentPre document,
                            final NarrativeLanguage lang) {
         final var context = new Context();
@@ -131,14 +107,5 @@ public class HtmlNarrativeGenerator extends AbstractNarrativeGenerator {
             treatmentsList.add(statement);
             treatments.put(planId, treatmentsList);
         }
-    }
-
-    /**
-     * Gets the statement medical authorship timestamp.
-     * @param statement The medication statement for which to determine the medical authorship timestamp.
-     * @return The timestamp of the medical authorship.
-     */
-    private Instant getStatementAuthorshipDate(final ChEmedEprMedicationStatementPmlc statement) {
-        return statement.resolveInformationSource().getTime();
     }
 }

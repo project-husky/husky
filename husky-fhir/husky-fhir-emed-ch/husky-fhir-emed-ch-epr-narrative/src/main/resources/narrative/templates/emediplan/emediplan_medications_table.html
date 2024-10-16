@@ -1,0 +1,127 @@
+<!--/*
+  ~ This code is made available under the terms of the Eclipse Public License v1.0
+  ~ in the github project https://github.com/project-husky/husky there you also
+  ~ find a list of the contributors and the license information.
+  ~
+  ~ This project has been developed further and modified by the joined working group Husky
+  ~ on the basis of the eHealth Connector opensource project from June 28, 2021,
+  ~ whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+  */-->
+<table th:fragment="table(treatments, lang)">
+    <thead>
+        <tr>
+            <th colspan="2">Médication</th>
+            <th>Matin</th>
+            <th>Midi</th>
+            <th>Soir</th>
+            <th>Nuit</th>
+            <th>Unité</th>
+            <th>De</th>
+            <th>Jusqu'à y c.</th>
+            <th>Instructions</th>
+            <th>Raison</th>
+            <th>Prescrit par</th>
+        </tr>
+    </thead>
+    <tbody>
+        <th:block th:each="treatment: ${treatments}">
+            <th:block th:each="statement: ${treatment.value}">
+                <th:block th:insert="~{::statement(${statement}, ${statement.resolveEffectiveDosageInstructions()}, ${lang})}"/>
+            </th:block>
+        </th:block>
+        <th:block th:if="${treatments.isEmpty()}">
+            <tr>
+                <td colspan="12" class="no-treatment">Aucun traitement</td>
+            </tr>
+        </th:block>
+    </tbody>
+</table>
+
+<th:block th:fragment="statement(statement, dosage, lang)">
+    <tr>
+        <!-- TODO divide medication name column in two when adding medication thumbnails -->
+        <td colspan="2">[[${statement.resolveMedication().resolveMedicationName()}]]</td>
+        <th:block th:if="${dosage.hasIntakes() or dosage.hasSimpleEventTimings()}">
+            <td class="emediplan-day-segment-intake">
+                <th:block th:if="${dosage.hasIntakes()}">
+                    <th:block th:insert="~{::singleIntake(${dosage.getMornIntake()}, ${lang})}"/>
+                </th:block>
+                <th:block th:if="${dosage.hasMorningSimpleEventTiming}" th:text="X"/>
+                <th:block th:unless="${dosage.hasIntakes or dosage.hasMorningSimpleEventTiming}">—</th:block>
+            </td>
+            <td class="emediplan-day-segment-intake">
+                <th:block th:if="${dosage.hasIntakes()}">
+                    <th:block th:insert="~{::singleIntake(${dosage.getNoonIntake()}, ${lang})}"/>
+                </th:block>
+                <th:block th:if="${dosage.hasNoonSimpleEventTiming}" th:text="X"/>
+                <th:block th:unless="${dosage.hasIntakes or dosage.hasNoonSimpleEventTiming}">—</th:block>
+            </td>
+            <td class="emediplan-day-segment-intake">
+                <th:block th:if="${dosage.hasIntakes()}">
+                    <th:block th:insert="~{::singleIntake(${dosage.getEveIntake()}, ${lang})}"/>
+                </th:block>
+                <th:block th:if="${dosage.hasEveningSimpleEventTiming}" th:text="X"/>
+                <th:block th:unless="${dosage.hasIntakes or dosage.hasEveningSimpleEventTiming}">—</th:block>
+            </td>
+            <td class="emediplan-day-segment-intake">
+                <th:block th:if="${dosage.hasIntakes()}">
+                    <th:block th:insert="~{::singleIntake(${dosage.getNightIntake()}, ${lang})}"/>
+                </th:block>
+                <th:block th:if="${dosage.hasNightSimpleEventTiming}" th:text="X"/>
+                <th:block th:unless="${dosage.hasIntakes or dosage.hasNightSimpleEventTiming}">—</th:block>
+            </td>
+        </th:block>
+        <!-- TODO extend the following colspan to the unit column if no unit is present either -->
+        <th:block th:unless="${dosage.hasIntakes() or dosage.hasSimpleEventTimings()}">
+            <td colspan="4">voir les instructions</td>
+        </th:block>
+        <td th:insert="~{::dosageUnit(${dosage.getUnit}, ${lang})}"></td>
+        <td>
+            <th:block th:if="${dosage.hasPeriod() and dosage.period().hasStart()}">
+                <th:block th:insert="~{emediplan/emediplan_datatypes :: fhirDate(${dosage.period().getStartElement()}, ${lang})}"/>
+            </th:block>
+            <!-- TODO add a start date if boundsPeriod does not have it? -->
+        </td>
+        <td>
+            <th:block th:if="${dosage.hasPeriod() and dosage.period().hasEnd()}">
+                <th:block th:insert="~{emediplan/emediplan_datatypes :: fhirDate(${dosage.period().getEndElement()}, ${lang})}"/>
+            </th:block>
+        </td>
+        <td>
+            <th:block th:if="${dosage.hasPatientInstructions()}" th:text="${dosage.patientInstructions}"/>
+        </td>
+        <td>
+            <th:block th:if="${statement.hasTreatmentReason()}" th:text="${statement.getTreatmentReason()}"/>
+        </td>
+        <td>
+            <th:block th:if="${statement.resolveMedicalAuthor().getPractitionerRole() != null}">
+                <th:block th:insert="~{datatypes :: human-name(${statement.resolveMedicalAuthor().getPractitionerRole().resolvePractitioner().resolveName()}, ${lang})}"/>
+            </th:block>
+            <th:block th:unless="${statement.resolveMedicalAuthor().getPractitionerRole() != null}"
+                      th:text="Automédication"/>
+        </td>
+    </tr>
+</th:block>
+
+<th:block th:fragment="singleIntake(intake, lang)">
+    <th:block th:if="${intake == null}">—</th:block>
+    <th:block th:if="${intake != null}">
+        <th:block th:insert="~{::doseQuantity(${intake.dose()}, ${lang})}"/>
+    </th:block>
+</th:block>
+
+<th:block th:fragment="doseQuantity(dose, lang)">
+    <span th:if="${dose.isQuantity()}" th:text="${dose.quantity().value()}">25</span>
+    <th:block th:if="${dose.isRange()}">
+        <th:block th:if="${dose.low != null}">
+            [[${dose.low.value}]] <th:block th:if="${dose.high != null}"> -</th:block>
+        </th:block>
+        <th:block th:if="${dose.high != null}">
+            <th:block th:if="${dose.low == null}"> - </th:block> [[${dose.high.value}]]
+        </th:block>
+    </th:block>
+</th:block>
+
+<th:block th:fragment="dosageUnit(unit, lang)">
+    <span th:if="${unit} != null" th:text="${fopase.getMessage(unit, lang)}">mg</span>
+</th:block>

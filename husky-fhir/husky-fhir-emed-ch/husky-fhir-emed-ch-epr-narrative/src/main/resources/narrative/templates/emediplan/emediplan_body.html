@@ -1,0 +1,24 @@
+<!--/*
+  ~ This code is made available under the terms of the Eclipse Public License v1.0
+  ~ in the github project https://github.com/project-husky/husky there you also
+  ~ find a list of the contributors and the license information.
+  ~
+  ~ This project has been developed further and modified by the joined working group Husky
+  ~ on the basis of the eHealth Connector opensource project from June 28, 2021,
+  ~ whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+*/-->
+<div class="emediplan-body-issue-date">
+    Date d'émission: <th:block th:insert="~{emediplan/emediplan_datatypes :: instant(${issuedDate}, ${lang})}"/>
+</div>
+<div class="emediplan-body-medications-table">
+    <div class="emediplan-body-regular-medications-table" id="active-treatments">
+        <th:block th:insert="~{emediplan/emediplan_medications_table :: table(${activeTreatments}, ${lang})}"/>
+    </div>
+    <div class="emediplan-body-reserve-medications-table" id="reserve-treatments" th:if="${!asneededTreatments.isEmpty()}">
+        <span class="emediplan-body-reserve-medications-table-header">Médicaments en réserve</span>
+        <th:block th:insert="~{emediplan/emediplan_medications_table :: table(${asneededTreatments}, ${lang})}"/>
+    </div>
+</div>
+<div class="emediplan-body-general-comments">
+    <!-- The PMP does not support this concept, hence this optional section of the eMediplan will always be empty. -->
+</div>

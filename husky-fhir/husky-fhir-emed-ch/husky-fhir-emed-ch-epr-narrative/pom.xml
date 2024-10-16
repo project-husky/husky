@@ -9,10 +9,6 @@
     <artifactId>husky-fhir-emed-ch-epr-narrative</artifactId>
     <name>Husky FHIR eMedication Switzerland EPR Narrative</name>
 
-    <properties>
-        <openhtmltopdf-version>1.0.10</openhtmltopdf-version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.projecthusky.fhir.emed.ch</groupId>
@@ -35,19 +31,21 @@
 
         <!-- HTML to PDF conversion -->
         <dependency>
-            <groupId>com.openhtmltopdf</groupId>
+            <groupId>io.github.openhtmltopdf</groupId>
             <artifactId>openhtmltopdf-core</artifactId> <!-- LGPL -->
-            <version>${openhtmltopdf-version}</version>
         </dependency>
         <dependency>
-            <groupId>com.openhtmltopdf</groupId>
+            <groupId>io.github.openhtmltopdf</groupId>
             <artifactId>openhtmltopdf-pdfbox</artifactId> <!-- LGPL -->
-            <version>${openhtmltopdf-version}</version>
         </dependency>
         <dependency>
-            <groupId>com.openhtmltopdf</groupId>
+            <groupId>io.github.openhtmltopdf</groupId>
             <artifactId>openhtmltopdf-slf4j</artifactId>
-            <version>${openhtmltopdf-version}</version>
+        </dependency>
+        <dependency>
+            <!-- SVG support plugin. -->
+            <groupId>io.github.openhtmltopdf</groupId>
+            <artifactId>openhtmltopdf-svg-support</artifactId>
         </dependency>
 
         <dependency>
@@ -61,6 +59,16 @@
             <artifactId>checker-qual</artifactId> <!-- MIT -->
         </dependency>
 
+        <!-- QR code generator -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+        </dependency>
+
         <!-- Tests (EPL 2.0) -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -71,6 +79,10 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projecthusky.validation.service</groupId>
+            <artifactId>husky-validation-service</artifactId>
         </dependency>
 
     </dependencies>

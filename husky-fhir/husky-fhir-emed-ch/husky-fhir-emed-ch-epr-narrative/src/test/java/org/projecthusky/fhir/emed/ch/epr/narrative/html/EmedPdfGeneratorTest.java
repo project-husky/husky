@@ -1,21 +1,34 @@
 package org.projecthusky.fhir.emed.ch.epr.narrative.html;
 
 import ca.uhn.fhir.context.FhirContext;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
+import org.projecthusky.fhir.emed.ch.epr.narrative.enums.NarrativeLanguage;
+import org.projecthusky.fhir.emed.ch.epr.narrative.pdf.ChEmedEprPdfMedicationCardGenerator;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprCompositionPmlc;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprDocumentPmlc;
 import org.projecthusky.fhir.emed.ch.epr.service.ChEmedEprParser;
+import org.projecthusky.validation.service.pdf.PdfA12Validator;
+import org.verapdf.core.ValidationException;
 
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Tests of the {@link EmedPdfGenerator} class.
+ * Tests of the {@link ChEmedEprPdfMedicationCardGenerator} class.
  *
  * @author Ronaldo Loureiro
  */
 class EmedPdfGeneratorTest {
+    private static final SoftwareProviderMetadata softwareProviderMetadata = new SoftwareProviderMetadata(
+            "Husky",
+            "test",
+            "Husky"
+    );
 
     @Test
     void testGeneratePdf() throws Exception {
@@ -27,25 +40,35 @@ class EmedPdfGeneratorTest {
         assertNotNull(pmlcDocument.resolveComposition());
         assertInstanceOf(ChEmedEprCompositionPmlc.class, pmlcDocument.resolveComposition());
 
-//        final var doc = NarrativeTreatmentDocument.builder(NarrativeLanguage.FRENCH)
-//                .emedDocumentDigest(pmlcDocument, EmedDocumentType.PMLC)
-//                .build();
+        final var pdfGenerator = new ChEmedEprPdfMedicationCardGenerator(() -> softwareProviderMetadata);
+        final var generatedPdf = pdfGenerator.generate(pmlcDocument, NarrativeLanguage.FRENCH);
+        assertNotNull(generatedPdf);
 
-//        final var indexDbAugmentationService = new IndexDbAugmentationService("jdbc:postgresql://localhost:5432/pharmINDEX", "postgres", "root");
-//        for (var i : doc.getActiveTreatments()) {
-//            indexDbAugmentationService.augment(i, doc.getNarrativeLanguage());
-//        }
+        final var pdfValidator = new PdfA12Validator();
+        final var validationResult = pdfValidator.validate(generatedPdf);
+        assertTrue(validationResult.isCompliant());
+    }
 
-//        final var templateHeader = new String(Objects.requireNonNull(PdfOriginalRepresentationGenerator.class.getResourceAsStream("/narrative/default/template.header.html")).readAllBytes(), StandardCharsets.UTF_8);
-//
-//        final var pdfGenerator = new PdfOriginalRepresentationGenerator();
-//        final var pdf = pdfGenerator.generate(doc, templateHeader, "</body></html>");
-//
-//        NarrativeUtils.setPdfOriginalRepresentation(pmlcDocument, pdf);
-//        assertArrayEquals(pdf, pmlcDocument.resolveComposition().getOriginalRepresentationPdf());
-//
-//        final var pdfOut = new FileOutputStream("pdtOut.pdf");
-//        pdfOut.write(pdf);
-//        pdfOut.close();
+    @Test @Disabled
+    void testGenerateAndWritePdf() throws IOException, ParserConfigurationException, ValidationException {
+        final var xml = new String(getClass().getResourceAsStream("/2-7-MedicationCard.xml").readAllBytes());
+        final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
+        final var documents = parser.parse(xml, EmedDocumentType.PMLC);
+        assertInstanceOf(ChEmedEprDocumentPmlc.class, documents);
+        final var pmlcDocument = (ChEmedEprDocumentPmlc) documents;
+        assertNotNull(pmlcDocument.resolveComposition());
+        assertInstanceOf(ChEmedEprCompositionPmlc.class, pmlcDocument.resolveComposition());
+
+        final var pdfGenerator = new ChEmedEprPdfMedicationCardGenerator(() -> softwareProviderMetadata);
+        final var generatedPdf = pdfGenerator.generate(pmlcDocument, NarrativeLanguage.FRENCH);
+        assertNotNull(generatedPdf);
+
+        final var pdfValidator = new PdfA12Validator();
+        final var validationResult = pdfValidator.validate(generatedPdf);
+        assertTrue(validationResult.isCompliant());
+
+        final var pdfOut = new FileOutputStream("pdfOut.pdf");
+        pdfOut.write(generatedPdf);
+        pdfOut.close();
     }
 }

@@ -1,0 +1,28 @@
+<!--/*
+  ~ This code is made available under the terms of the Eclipse Public License v1.0
+  ~ in the github project https://github.com/project-husky/husky there you also
+  ~ find a list of the contributors and the license information.
+  ~
+  ~ This project has been developed further and modified by the joined working group Husky
+  ~ on the basis of the eHealth Connector opensource project from June 28, 2021,
+  ~ whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+*/-->
+<th:block th:fragment="patient-data(patient, weightObservation, lang)">
+    <span class="emediplan-patient-data-name" th:insert="~{datatypes :: human-name(${patient.name[0]}, ${lang})}"/>
+    <span class="emediplan-patient-data-birthdate" th:insert="~{emediplan/emediplan_datatypes :: fhirDate(${patient.getBirthDateElement()}, ${lang})}"/>
+    <span class="emediplan-patient-data-admin-gender" th:insert="~{emediplan/emediplan_datatypes :: admin-gender(${patient.resolveGender()}, ${lang})}"/>
+    <th:block th:with="phoneNumbers=${patient.resolvePhoneNumbersAsStrings(true)}">
+        <span class="emediplan-patient-data-address" th:if="${patient.hasAddress()}">
+            <th:block th:insert="~{emediplan/emediplan_datatypes :: address(${patient.resolveAddress()}, ${lang})}"/>
+        </span>
+        <span class="emediplan-patient-phone-number" th:each="phoneNumber : ${phoneNumbers}"> / [[${phoneNumber}]]</span>
+    </th:block>
+    <th:block  th:if="${weightObservation != null}">
+        <span class="emediplan-patient-data-weight">Poids: <th:block th:replace="~{datatypes :: amount-quantity}">80 Kg</th:block></span>
+    </th:block>
+</th:block>
+
+<th:block th:fragment="short-patient-data(patient, lang)">
+    <th:block th:insert="~{datatypes :: human-name(${patient.name[0]}, ${lang})}"/>
+    (<th:block th:insert="~{emediplan/emediplan_datatypes :: fhirDate(${patient.getBirthDateElement()}, ${lang})}"/>)
+</th:block>

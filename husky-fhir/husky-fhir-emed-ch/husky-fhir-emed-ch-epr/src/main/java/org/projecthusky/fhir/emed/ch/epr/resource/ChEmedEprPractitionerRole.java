@@ -14,7 +14,6 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.hl7.fhir.r4.model.PractitionerRole;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
-import org.projecthusky.fhir.emed.ch.common.resource.ChEmedOrganization;
 
 /**
  * The HAPI custom structure for CH-EMED-EPR PractitionerRole.
@@ -55,11 +54,11 @@ public class ChEmedEprPractitionerRole extends PractitionerRole {
      * @throws InvalidEmedContentException if the organization is unspecified or invalid.
      */
     @ExpectsValidResource
-    public ChEmedOrganization resolveOrganization() throws InvalidEmedContentException {
+    public ChEmedEprOrganization resolveOrganization() throws InvalidEmedContentException {
         if (!this.hasOrganization()) throw new InvalidEmedContentException("The organization is not specified");
 
         final var resource = this.getOrganization().getResource();
-        if (resource instanceof final ChEmedOrganization chOrganization) {
+        if (resource instanceof final ChEmedEprOrganization chOrganization) {
             return chOrganization;
         }
         throw new InvalidEmedContentException("The organization is not specified");
