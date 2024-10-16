@@ -660,19 +660,6 @@ public enum RegularUnitCodeAmbu implements ValueSetEnumInterface {
        "nl",
        "nl"),
     /**
-     * EN: nmol.<br>
-     * DE: nmol.<br>
-     * FR: nmol.<br>
-     * IT: nmol.<br>
-     */
-    NMOL("nmol",
-        "http://unitsofmeasure.org",
-        "nanomole",
-        "nmol",
-        "nmol",
-        "nmol",
-        "nmol"),
-    /**
      * EN: Package.<br>
      * DE: Packung.<br>
      * FR: emballage.<br>

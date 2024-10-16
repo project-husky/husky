@@ -105,7 +105,7 @@ public enum CdTyp9 implements EMediplanEnum<String>{
             case MMOL -> MILLIMOLE;
             case MOL -> MOLE;
             case NG -> NANOGRAM;
-            case NMOL -> NANOMOLE;
+            //case NMOL -> NANOMOLE;
             case PACKAGE -> PACKAGE;
             case PATCH -> PLASTER;
             case PERCENT -> PERCENT;
