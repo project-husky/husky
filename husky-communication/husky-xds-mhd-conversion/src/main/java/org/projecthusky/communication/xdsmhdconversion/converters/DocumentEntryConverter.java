@@ -17,7 +17,9 @@ import org.hl7.fhir.r4.model.DocumentReference.DocumentReferenceContentComponent
 import org.hl7.fhir.r4.model.DocumentReference.DocumentReferenceContextComponent;
 import org.hl7.fhir.r4.model.Enumerations.DocumentReferenceStatus;
 import org.hl7.fhir.r4.model.Identifier.IdentifierUse;
+import org.projecthusky.common.ch.ChEpr;
 import org.projecthusky.common.utils.XdsMetadataUtil;
+import org.projecthusky.common.utils.datatypes.Oids;
 import org.projecthusky.communication.xdsmhdconversion.utils.ConverterUtils;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.*;
 
@@ -39,7 +41,7 @@ import java.util.List;
  * href="https://ihe.github.io/publications/ITI/MHD/StructureDefinition-IHE.MHD.Comprehensive.DocumentReference.html">Resource
  * Profile: MHD DocumentReference Comprehensive</a>
  * @see <a
- * href="http://build.fhir.org/ig/ehealthsuisse/ch-epr-mhealth/StructureDefinition-ch-mhd-documentreference-comprehensive.html">Resource
+ * href="http://fhir.ch/ig/ch-epr-fhir/StructureDefinition/ch-mhd-documentreference-comprehensive">Resource
  * Profile: CH MHD DocumentReference Comprehensive</a>
  **/
 public class DocumentEntryConverter {
@@ -244,19 +246,27 @@ public class DocumentEntryConverter {
     public static DocumentEntry convertDocumentReference(final DocumentReference documentReference) {
         final var documentEntry = new DocumentEntry();
 
-        // profile | DocumentEntry.limitedMetadata
-        // No action
+        documentEntry.setExtraMetadata(new HashMap<>());
+
+        // deletionStatus
+        final Extension deletionStatus = documentReference.getExtensionByUrl("http://fhir.ch/ig/ch-epr-fhir/StructureDefinition/ch-ext-deletionstatus");
+        if (deletionStatus != null && deletionStatus.getValue() instanceof Coding coding)
+            documentEntry.getExtraMetadata().put(ChEpr.DELETION_STATUS_URN, Collections.singletonList(coding.getCode()));
+
+        // originalProviderRole
+        final Extension originalRole = documentReference.getExtensionByUrl("http://fhir.ch/ig/ch-epr-fhir/StructureDefinition/ch-ext-author-authorrole");
+        if (originalRole != null && originalRole.getValue() instanceof final Coding coding) {
+            documentEntry.getExtraMetadata().put(
+                    ChEpr.ORIGINAL_PROVIDER_ROLE_URN,
+                    Collections.singletonList(String.format("%s^^^&%s&ISO", coding.getCode(), Oids.normalize(coding.getSystem())))
+            );
+        }
 
         // masterIdentifier | DocumentEntry.uniqueId
         documentEntry.setUniqueId(documentReference.getMasterIdentifier().getValue());
 
         // identifier | DocumentEntry.entryUUID
-        if (documentReference.hasId()) {
-            documentEntry.setEntryUuid(documentReference.getId());
-        } else {
-            documentEntry.assignEntryUuid();
-            documentReference.setId(documentEntry.getEntryUuid());
-        }
+        documentEntry.setEntryUuid(documentReference.getIdentifierFirstRep().getValue());
 
         // status | DocumentEntry.availabilityStatus
         final AvailabilityStatus status = switch (documentReference.getStatus()) {
@@ -264,10 +274,7 @@ public class DocumentEntryConverter {
             case SUPERSEDED -> AvailabilityStatus.DEPRECATED;
             default -> null;
         };
-
-        if (status != null) {
-            documentEntry.setAvailabilityStatus(status);
-        }
+        if (status != null) documentEntry.setAvailabilityStatus(status);
 
         // type | DocumentEntry.typeCode
         documentEntry.setTypeCode(ConverterUtils.toCode(documentReference.getType(), documentReference.getLanguage()));
@@ -308,66 +315,70 @@ public class DocumentEntryConverter {
 
         // content
         final DocumentReferenceContentComponent content = documentReference.getContentFirstRep();
-        if (content != null && content.hasAttachment()) {
-            /// attachment
-            final Attachment attachment = content.getAttachment();
+        if (content != null) {
+            if (content.hasAttachment()) {
+                //// attachment
+                final Attachment attachment = content.getAttachment();
 
-            //// contentType | DocumentEntry.mimeType
-            documentEntry.setMimeType(attachment.getContentType());
+                //// contentType | DocumentEntry.mimeType
+                documentEntry.setMimeType(attachment.getContentType());
 
-            //// language | DocumentEntry.languageCode
-            documentEntry.setLanguageCode(attachment.getLanguage());
+                //// language | DocumentEntry.languageCode
+                documentEntry.setLanguageCode(attachment.getLanguage());
 
-            //// url | DocumentEntry.repositoryUniqueId or DocumentEntry.URI
-            if (attachment.hasUrl()) {
-                if (ConverterUtils.isOid(attachment.getUrl())) {
-                    documentEntry.setRepositoryUniqueId(attachment.getUrl());
-                } else {
-                    try {
-                        documentEntry.setUri(new URL(attachment.getUrl()).toURI().toString());
-                    } catch (MalformedURLException | URISyntaxException ignored) {}
+                //tODO REVIEW THIS!!
+                //// url | DocumentEntry.repositoryUniqueId or DocumentEntry.URI
+                if (attachment.hasUrl()) {
+                    if (ConverterUtils.isOid(attachment.getUrl())) {
+                        documentEntry.setRepositoryUniqueId(attachment.getUrl());
+                    } else {
+                        try {
+                            documentEntry.setUri(new URL(attachment.getUrl()).toURI().toString());
+                        } catch (MalformedURLException | URISyntaxException ignored) {
+                        }
+                    }
+                }
+
+                //// size | DocumentEntry.size
+                if (attachment.hasSize()) {
+                    documentEntry.setSize((long) attachment.getSize());
+                }
+
+                //// hash | DocumentEntry.hash
+                if (attachment.hasHash()) {
+                    documentEntry.setHash(Hex.encodeHexString(attachment.getHash()));
+                }
+
+                //// title | DocumentEntry.title
+                if (attachment.hasTitle()) {
+                    documentEntry.setTitle(ConverterUtils.getLocalizedString(attachment.getTitle(), attachment.getLanguage()));
+                }
+
+                //// creation | DocumentEntry.creationTime
+                if (attachment.hasCreation()) {
+                    documentEntry.setCreationTime(new Timestamp(
+                            attachment.getCreation().toInstant().atZone(ZoneId.systemDefault()),
+                            Timestamp.Precision.SECOND)
+                    );
                 }
             }
 
-            //// size | DocumentEntry.size
-            if (attachment.hasSize()) {
-                documentEntry.setSize((long) attachment.getSize());
+            //// format | DocumentEntry.formatCode
+            if (content.hasFormat()) {
+                documentEntry.setFormatCode(ConverterUtils.toCode(content.getFormat(), documentReference.getLanguage()));
             }
-
-            //// hash | DocumentEntry.hash
-            if (attachment.hasHash()) {
-                documentEntry.setHash(Hex.encodeHexString(attachment.getHash()));
-            }
-
-            //// title | DocumentEntry.title
-            if (attachment.hasTitle()) {
-                documentEntry.setTitle(ConverterUtils.getLocalizedString(attachment.getTitle(), attachment.getLanguage()));
-            }
-
-            //// creation | DocumentEntry.creationTime
-            if (attachment.hasCreation()) {
-                documentEntry.setCreationTime(new Timestamp(
-                        attachment.getCreation().toInstant().atZone(ZoneId.systemDefault()),
-                        Timestamp.Precision.SECOND)
-                );
-            }
-        }
-
-        /// format | DocumentEntry.formatCode
-        if (content != null && content.hasFormat()) {
-            documentEntry.setFormatCode(ConverterUtils.toCode(content.getFormat(), documentReference.getLanguage()));
         }
 
         // context
         final DocumentReferenceContextComponent context = documentReference.getContext();
 
-        /// event | DocumentEntry.eventCodeList
+        //// event | DocumentEntry.eventCodeList
         final List<Code> eventCodeList = ConverterUtils.toCodes(context.getEvent(), documentReference.getLanguage());
         if (eventCodeList != null && !eventCodeList.isEmpty()) {
             documentEntry.getEventCodeList().addAll(eventCodeList);
         }
 
-        /// period
+        //// period
         if (context.hasPeriod()) {
             documentEntry.setServiceStartTime(
                     new Timestamp(
@@ -382,47 +393,24 @@ public class DocumentEntryConverter {
             );
         }
 
-        /// facilityType | DocumentEntry.healthcareFacilityTypeCode
+        //// facilityType | DocumentEntry.healthcareFacilityTypeCode
         documentEntry.setHealthcareFacilityTypeCode(ConverterUtils.toCode(context.getFacilityType(), documentReference.getLanguage()));
 
-        /// practiceSetting | DocumentEntry.practiceSettingCode
+        //// practiceSetting | DocumentEntry.practiceSettingCode
         documentEntry.setPracticeSettingCode(ConverterUtils.toCode(context.getPracticeSetting(), documentReference.getLanguage()));
 
-        /// sourcePatientInfo
+        //// sourcePatientInfo
         if (context.hasSourcePatientInfo()) {
             documentEntry.setSourcePatientId(ConverterUtils.toIdentifiable(context.getSourcePatientInfo(), documentReference.getContained()));
             documentEntry.setSourcePatientInfo(ConverterUtils.toPatientInfo(context.getSourcePatientInfo(), documentReference.getContained()));
         }
 
-        /// related | DocumentEntry.referenceIdList
+        //// related | DocumentEntry.referenceIdList
         for (Reference ref : context.getRelated()) {
             final Identifiable refId = ConverterUtils.toIdentifiable(ref, documentReference.getContained());
             if (refId != null) {
                 documentEntry.getReferenceIdList().add(ConverterUtils.toReferenceId(refId));
             }
-        }
-
-        documentEntry.setExtraMetadata(new HashMap<>());
-        // originalProviderRole
-        final Extension originalRole = documentReference.getExtensionByUrl("http://fhir.ch/ig/ch-epr-mhealth/StructureDefinition/ch-ext-author-authorrole");
-        if (originalRole != null && originalRole.getValue() instanceof final Coding coding) {
-            documentEntry.setExtraMetadata(
-                    Collections.singletonMap(
-                            "urn:e-health-suisse:2020:originalProviderRole",
-                            Collections.singletonList(String.format("%s^^^&%s&ISO", coding.getCode(), ConverterUtils.removePrefixOid(coding.getSystem())))
-                    )
-            );
-        }
-
-        // deletionStatus
-        final Extension deletionStatus = documentReference.getExtensionByUrl("http://fhir.ch/ig/ch-epr-mhealth/StructureDefinition/ch-ext-deletionstatus");
-        if (deletionStatus != null && deletionStatus.getValue() instanceof Coding coding) {
-            documentEntry.setExtraMetadata(
-                    Collections.singletonMap(
-                            "urn:e-health-suisse:2019:deletionStatus",
-                            Collections.singletonList("urn:e-health-suisse:2019:deletionStatus:" + coding.getCode())
-                    )
-            );
         }
 
         return documentEntry;
