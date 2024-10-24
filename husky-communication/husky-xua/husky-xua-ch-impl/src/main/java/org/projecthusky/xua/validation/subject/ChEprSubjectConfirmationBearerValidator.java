@@ -70,34 +70,34 @@ public class ChEprSubjectConfirmationBearerValidator implements SubjectConfirmat
 
         final var nameId = confirmation.getNameID();
         if (nameId == null || nameId.getNameQualifier() == null || nameId.getValue() == null) {
-            context.setValidationFailureMessage("The SubjectConfirmation NameID is missing");
+            context.getValidationFailureMessages().add("The SubjectConfirmation NameID is missing");
             return ValidationResult.INVALID;
         }
 
         // Here we compare the value to the one extracted from the DelegationRestrictionType Condition
         if (role == Role.ASSISTANT) {
             if (!"urn:gs1:gln".equals(nameId.getNameQualifier())) {
-                context.setValidationFailureMessage("The assistant GLN is missing in the SubjectConfirmation");
+                context.getValidationFailureMessages().add("The assistant GLN is missing in the SubjectConfirmation");
                 return ValidationResult.INVALID;
             }
 
             final var assistantGln = (String) context.getDynamicParameters().get(CH_EPR_ASSISTANT_GLN);
             if (assistantGln == null || !assistantGln.equals(nameId.getValue())) {
-                context.setValidationFailureMessage(
+                context.getValidationFailureMessages().add(
                         "The assistant GLN in the SubjectConfirmation is different from the one in the " +
                                 "DelegationRestrictionType Condition");
                 return ValidationResult.INVALID;
             }
         } else {
             if (!TECHNICAL_USER_ID.equals(nameId.getNameQualifier())) {
-                context.setValidationFailureMessage("The technical user unique ID is missing in the SubjectConfirmation");
+                context.getValidationFailureMessages().add("The technical user unique ID is missing in the SubjectConfirmation");
                 return ValidationResult.INVALID;
             }
 
             String technicalUserUniqueId = (String) context.getDynamicParameters().get(CH_EPR_TCU_ID);
             // May or may not be URN-encoded, see https://github.com/ehealthsuisse/EPD-by-example/issues/14
             if (technicalUserUniqueId == null || !technicalUserUniqueId.equals(ValidationUtils.trimOidUrn(nameId.getValue()))) {
-                context.setValidationFailureMessage(
+                context.getValidationFailureMessages().add(
                         "The technical user unique ID in the SubjectConfirmation is different from the one in the " +
                                 "DelegationRestrictionType Condition");
                 return ValidationResult.INVALID;
@@ -108,7 +108,7 @@ public class ChEprSubjectConfirmationBearerValidator implements SubjectConfirmat
         if (role == Role.ASSISTANT) {
             final var assistantName = extractAssistantName(confirmation);
             if (assistantName.isEmpty()) {
-                context.setValidationFailureMessage("The assistant name is missing in the SubjectConfirmation");
+                context.getValidationFailureMessages().add("The assistant name is missing in the SubjectConfirmation");
                 return ValidationResult.INVALID;
             }
             context.getDynamicParameters().put(CH_EPR_ASSISTANT_NAME, assistantName.get());

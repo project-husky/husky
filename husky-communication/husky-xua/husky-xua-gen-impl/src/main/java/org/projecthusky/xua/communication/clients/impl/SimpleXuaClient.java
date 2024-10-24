@@ -46,7 +46,7 @@ import org.opensaml.soap.wstrust.impl.RequestSecurityTokenResponseCollectionUnma
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 
-import net.shibboleth.utilities.java.support.xml.XMLParserException;
+import net.shibboleth.shared.xml.XMLParserException;
 
 /**
  * <!-- @formatter:off -->

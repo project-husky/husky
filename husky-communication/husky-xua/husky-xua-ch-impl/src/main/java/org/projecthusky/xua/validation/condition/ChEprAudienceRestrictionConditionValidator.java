@@ -66,7 +66,7 @@ public class ChEprAudienceRestrictionConditionValidator implements ConditionVali
                 .map(Audience::getURI)
                 .orElse(null);
         if (audienceUri == null) {
-            context.setValidationFailureMessage("The AudienceRestriction Condition doesn't contain a valid " +
+            context.getValidationFailureMessages().add("The AudienceRestriction Condition doesn't contain a valid " +
                     "URI");
             return ValidationResult.INVALID;
         }

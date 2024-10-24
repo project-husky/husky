@@ -40,9 +40,11 @@ import org.projecthusky.xua.exceptions.DeserializeException;
 import org.projecthusky.xua.exceptions.SerializeException;
 import org.projecthusky.xua.saml2.Response;
 import org.projecthusky.xua.serialization.impl.AuthnRequestSerializerImpl;
+
+import net.shibboleth.shared.xml.XMLParserException;
+
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 
-import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
 /**
  * <!-- @formatter:off -->

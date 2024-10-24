@@ -64,7 +64,7 @@ public class ChEprDelegationRestrictionConditionValidator implements ConditionVa
         }
         final Role role = (Role) context.getDynamicParameters().get(CH_EPR_ROLE);
         if (role != Role.ASSISTANT && role != Role.TECHNICAL_USER) {
-            context.setValidationFailureMessage("The DelegationRestrictionType Condition shall not appear for other " +
+            context.getValidationFailureMessages().add("The DelegationRestrictionType Condition shall not appear for other " +
                                                         "extensions than TCU and ASS");
             return ValidationResult.INVALID;
         }
@@ -76,14 +76,14 @@ public class ChEprDelegationRestrictionConditionValidator implements ConditionVa
                 .filter(n -> n.getValue() != null)
                 .orElse(null);
         if (nameId == null) {
-            context.setValidationFailureMessage("The DelegationRestrictionType Condition doesn't contain a valid " +
+            context.getValidationFailureMessages().add("The DelegationRestrictionType Condition doesn't contain a valid " +
                                                         "NameID");
             return ValidationResult.INVALID;
         }
 
         if (role == Role.ASSISTANT) {
             if (!"urn:gs1:gln".equals(nameId.getNameQualifier())) {
-                context.setValidationFailureMessage("The DelegationRestrictionType Condition doesn't contain the " +
+                context.getValidationFailureMessages().add("The DelegationRestrictionType Condition doesn't contain the " +
                                                             "assistant GLN");
                 return ValidationResult.INVALID;
             }
@@ -91,7 +91,7 @@ public class ChEprDelegationRestrictionConditionValidator implements ConditionVa
             return ValidationResult.VALID;
         } else {
             if (!TECHNICAL_USER_ID.equals(nameId.getNameQualifier())) {
-                context.setValidationFailureMessage("The DelegationRestrictionType Condition doesn't contain the " +
+                context.getValidationFailureMessages().add("The DelegationRestrictionType Condition doesn't contain the " +
                                                             "technical user unique ID");
                 return ValidationResult.INVALID;
             }
