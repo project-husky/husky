@@ -13,6 +13,7 @@ package org.projecthusky.fhir.emed.ch.epr.validator;
 import ch.ahdis.matchbox.engine.MatchboxEngine;
 import ch.ahdis.matchbox.engine.MatchboxEngine.FilesystemPackageCacheMode;
 
+import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.OperationOutcome;
 import org.hl7.fhir.r5.elementmodel.Manager;
@@ -62,6 +63,8 @@ public class ChEmedEprValidator {
         this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-core#4.0.1.tgz"));
         this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-emed#4.0.1.tgz"));
         this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-emed-epr#1.0.0.tgz"));
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-epr-fhir#4.0.1-ballot.tgz"));
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ihe.iti.mhd#4.2.2.tgz"));
     }
 
     /**
@@ -89,6 +92,20 @@ public class ChEmedEprValidator {
 
         // Second validation pass with the logic validator
         result.getIssues().addAll(this.logicValidator.validate(document));
+        return result;
+    }
+
+    public ValidationResult validateDocumentBundle(final Bundle bundle,
+                                                   final String profile
+                                                   ) throws EOperationOutcome, IOException {
+        // First validation pass with the instance validator (matchbox-engine)
+        final OperationOutcome outcome = this.matchboxEngine.validate(bundle, profile);
+
+        final var result = new ValidationResult(outcome.getIssue().stream().map(this::mapIssue).collect(Collectors.toList()));
+        if (!result.isSuccessful()) {
+            return result;
+        }
+
         return result;
     }
 
