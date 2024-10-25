@@ -21,6 +21,8 @@ import org.projecthusky.xua.deserialization.impl.OpenSaml2DeserializerImpl;
 import org.projecthusky.xua.exceptions.DeserializeException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.opensaml.saml.saml2.core.StatusCode;
+import org.opensaml.saml.saml2.core.impl.StatusCodeBuilder;
 import org.w3c.dom.Element;
 
 class PrivacyPolicyQueryResponseDeserialiserTest extends InitializerTestHelper {
@@ -72,6 +74,8 @@ class PrivacyPolicyQueryResponseDeserialiserTest extends InitializerTestHelper {
 	 */
 	@Test
 	void testFromXmlString() throws DeserializeException {
+		
+		
 		final PrivacyPolicyQueryResponse ref = testDeserializer.fromXmlString(testXmlString);
 		assertNotNull(ref);
 	}
