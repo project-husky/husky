@@ -1,6 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>husky-service</artifactId>
 	<name>Husky Service</name>
@@ -8,34 +6,34 @@
 	<parent>
 		<groupId>org.projecthusky.communication</groupId>
 		<artifactId>husky-communication</artifactId>
-		<version>3.0.0-SNAPSHOT</version>
+		<version>3.0.1-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.projecthusky.fhir.structures</groupId>
 			<artifactId>husky-fhir-structures-gen</artifactId>
-			<version>3.0.0-SNAPSHOT</version>
+			<version>3.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projecthusky.communication</groupId>
 			<artifactId>husky-xua-gen-impl</artifactId>
-			<version>3.0.0-SNAPSHOT</version>
+			<version>3.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projecthusky.communication</groupId>
 			<artifactId>husky-xua-ch-impl</artifactId>
-			<version>3.0.0-SNAPSHOT</version>
+			<version>3.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projecthusky.communication</groupId>
 			<artifactId>husky-communication-gen</artifactId>
-			<version>3.0.0-SNAPSHOT</version>
+			<version>3.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projecthusky.communication</groupId>
 			<artifactId>husky-valueset-gen</artifactId>
-			<version>3.0.0-SNAPSHOT</version>
+			<version>3.0.1-SNAPSHOT</version>
 		</dependency>
 
 
