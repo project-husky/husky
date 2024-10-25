@@ -1,0 +1,31 @@
+<!--/*
+  ~ This code is made available under the terms of the Eclipse Public License v1.0
+  ~ in the github project https://github.com/project-husky/husky there you also
+  ~ find a list of the contributors and the license information.
+  ~
+  ~ This project has been developed further and modified by the joined working group Husky
+  ~ on the basis of the eHealth Connector opensource project from June 28, 2021,
+  ~ whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
+*/-->
+<th:block th:fragment="admin-gender(gender, lang)">
+    <span th:if="${gender.name() == 'FEMALE'}">(F)</span>
+    <span th:if="${gender.name() == 'MALE'}">(M)</span>
+</th:block>
+
+<span th:fragment="address(address, lang)">
+    <th:block th:each="line : ${address.line}">
+        <span th:text="${line} + ', '"/>
+    </th:block>
+    <span th:if="${not address.cityElement.empty}" th:text="${address.city} + ', '"/>
+    <span th:if="${not address.stateElement.empty}" th:text="${address.state} + ', '"/>
+    <span th:if="${not address.countryElement.empty}" th:text="${address.country}"/>
+</span>
+
+<th:block th:fragment="instant(instantElement, lang)"
+          th:text="${lang.getEmediplanMinutePrecisionFormatter().format(instantElement)}"/>
+
+<th:block th:fragment="date(instantElement, lang)"
+          th:text="${lang.getEmediplanDayPrecisionFormatter().format(instantElement)}"/>
+
+<th:block th:fragment="fhirDate(fhirDateTime, lang)"
+          th:insert="~{::date(${fhirDateTime.getValueAsCalendar().toInstant()}, ${lang})}"/>
