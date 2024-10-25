@@ -22,28 +22,44 @@ import java.util.Map;
 public interface HtmlToPdfAConverter {
 
     /**
-     * Converts the HTML content to its PDF/A representation.
+     * Converts the HTML content to its PDF/A representation, with a custom template.
      *
-     * @param subject     The document subject. It's inserted in a {@code <meta name="subject">} tag.
-     * @param author      The document author. It's inserted in a {@code <meta name="author">} tag.
-     * @param description The document description. It's inserted in a {@code <meta name="description">} tag.
-     * @param title       The document title.
-     * @param lang        The document language, as an ISO code.
-     * @param bookmarks   A list of bookmarks to interesting parts of the document. The keys are labels that are shown
-     *                    to the user, the values are HTML ID references (starting with '#').
-     * @param cssContent  The CSS content to inject.
-     * @param bodyContent The HTML content to convert. It will be inserted in a {@code <body>} tag.
+     * @param lang             The document language, as an ISO code.
+     * @param contextVariables The context variables to be added to the template processing. Note that a context
+     *                         variable {@code lang} is automatically added with the code value of the received
+     *                         {@code lang} parameter.
+     *                         Furthermore, the following context variables – and, possibly, others – are expected by
+     *                         the default templates provided with this module, since they are needed to produce a valid
+     *                         PDF/A document:
+     *                         <ul>
+     *                          <li>{@code title} - a string with the document's title.</li>
+     *                          <li>{@code subject} - a string with the document's subject</li>
+     *                          <li>{@code author} - a string with the document's author</li>
+     *                          <li>{@code description} - a string with the document's description</li>
+     *                          <li>{@code bookmarks} - a map of {@code <String, String>} pairs:
+     *                              <ul>
+     *                                  <li>Key: a string with the bookmark link reference, that is, the value of the
+     *                                      href attribute of an anchor element within the processed template.
+     *                                  </li>
+     *                                  <li>Value: the value of the bookmark, that is, the string that will be used to
+     *                                      display the bookmark itself.
+     *                                  </li>
+     *                              </ul>
+     *                              For instance, the pair {@code ("Active Treatments", "#active-treatments")} should
+     *                              be used to produce a bookmark to be rendered as {@code Active Treatments} that
+     *                              would point to the HTML element with id {@code active-treatments} in the processed
+     *                              template.
+     *                          </li>
+     *                         </ul>
+     *                         Any callers using custom templates must make sure they are still setting these in their
+     *                         templates either by means of these context variables or by any other method (e.g.
+     *                         hardcoded in the template), as well as providing any other context variables that might
+     *                         be required by said templates.
+     * @param templateContent The custom Thymeleaf content.
      * @return The content of the generated PDF/A.
-     * @throws Exception it may throw any exception.
      */
-    @SuppressWarnings("java:S112")
     // Allow any exception to be thrown
-    byte[] convert(final String subject,
-                   final String author,
-                   final String description,
-                   final String title,
-                   final NarrativeLanguage lang,
-                   final Map<String, String> bookmarks,
-                   final String cssContent,
-                   final String bodyContent) throws Exception;
+    byte[] convert(final NarrativeLanguage lang,
+                   final Map<String, Object> contextVariables,
+                   final String templateContent);
 }

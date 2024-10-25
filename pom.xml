@@ -45,6 +45,8 @@
 		<hapi.fhir.version>7.4.0</hapi.fhir.version>
 		<jakarta-jwsapi-version>2.1.0</jakarta-jwsapi-version>
 		<camel.version>4.8.0</camel.version>
+		<zxing.version>3.5.3</zxing.version>
+		<openhtmltopdf-version>1.1.22</openhtmltopdf-version>
 	</properties>
 	<scm>
 		<connection>scm:git:https://github.com/project-husky/husky.git</connection>
@@ -676,6 +678,41 @@
 						<artifactId>hapi-base</artifactId>
 					</exclusion>
 				</exclusions>
+			</dependency>
+
+			<!-- HTML to PDF conversion -->
+			<dependency>
+				<groupId>io.github.openhtmltopdf</groupId>
+				<artifactId>openhtmltopdf-core</artifactId> <!-- LGPL -->
+				<version>${openhtmltopdf-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.openhtmltopdf</groupId>
+				<artifactId>openhtmltopdf-pdfbox</artifactId> <!-- LGPL -->
+				<version>${openhtmltopdf-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.openhtmltopdf</groupId>
+				<artifactId>openhtmltopdf-slf4j</artifactId>
+				<version>${openhtmltopdf-version}</version>
+			</dependency>
+			<dependency>
+				<!-- SVG support plugin. -->
+				<groupId>io.github.openhtmltopdf</groupId>
+				<artifactId>openhtmltopdf-svg-support</artifactId>
+				<version>${openhtmltopdf-version}</version>
+			</dependency>
+
+			<!-- QR code generation -->
+			<dependency>
+				<groupId>com.google.zxing</groupId>
+				<artifactId>core</artifactId>
+				<version>${zxing.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.zxing</groupId>
+				<artifactId>javase</artifactId>
+				<version>${zxing.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

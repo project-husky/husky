@@ -11,6 +11,7 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.pmlc;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Resource;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
@@ -19,6 +20,7 @@ import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 
 import java.io.Serial;
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -126,6 +128,30 @@ public class ChEmedEprDocumentPmlc extends ChEmedEprDocument {
                 .setFullUrl(composition.getIdentifier().getValue())
                 .setResource(composition);
         return this;
+    }
+
+    /**
+     * It resolves the last medication statement from the PMLC. The last statement is the statement with the most recent
+     * medical authorship timestamp. Should several statements share the same last timestamp instant, one among them
+     * will be returned, arbitrarily, depending on the order of execution.
+     *
+     * @return The medication statement with the last medication authorship timestamp. {@code null} if the PMLC contains
+     *         no medication statements.
+     */
+    @ExpectsValidResource
+    public @Nullable ChEmedEprMedicationStatementPmlc resolveLastStatement() {
+        return resolveComposition().resolveMedicationStatements().stream()
+                .reduce(null,(lastStatement, statement) -> {
+                    if (lastStatement == null) return statement;
+                    if (lastStatement.resolveMedicalAuthorshipTimestamp().isBefore(statement.resolveMedicalAuthorshipTimestamp()))
+                        return statement;
+                    return lastStatement;
+                });
+    }
+
+    @ExpectsValidResource
+    public List<ChEmedEprMedicationStatementPmlc> resolveStatements() {
+        return resolveComposition().resolveMedicationStatements();
     }
 
     @Override

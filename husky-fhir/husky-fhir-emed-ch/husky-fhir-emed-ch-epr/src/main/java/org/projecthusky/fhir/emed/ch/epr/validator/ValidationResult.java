@@ -13,6 +13,8 @@ package org.projecthusky.fhir.emed.ch.epr.validator;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.hl7.fhir.r4.model.OperationOutcome;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,6 +27,10 @@ import java.util.Objects;
 public class ValidationResult {
 
     private final List<@NonNull ValidationIssue> issues;
+
+    public ValidationResult() {
+        this.issues = new ArrayList<>();
+    }
 
     public ValidationResult(final List<@NonNull ValidationIssue> issues) {
         this.issues = Objects.requireNonNull(issues);
@@ -60,5 +66,24 @@ public class ValidationResult {
         return this.issues.stream()
                 .filter(message -> message.getSeverity() == OperationOutcome.IssueSeverity.INFORMATION)
                 .toList();
+    }
+
+    public static ValidationResult concat(final ValidationResult... results) {
+        return new ValidationResult(Arrays.stream(results).flatMap(result -> result.getIssues().stream()).toList());
+    }
+
+    public ValidationResult add(final ValidationResult... results) {
+        for (final var result : results) issues.addAll(result.getIssues());
+        return this;
+    }
+
+    public ValidationResult add(final ValidationIssue... issues) {
+        this.issues.addAll(Arrays.asList(issues));
+        return this;
+    }
+
+    public ValidationResult add(final List<@NonNull ValidationIssue> issues) {
+        this.issues.addAll(issues);
+        return this;
     }
 }
