@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.projecthusky.fhir</groupId>
 		<artifactId>husky-fhir</artifactId>
-		<version>3.0.0</version>
+		<version>3.0.1-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.projecthusky.fhir.structures</groupId>
 			<artifactId>husky-fhir-structures-gen</artifactId>
-			<version>3.0.0</version>
+			<version>3.0.1-SNAPSHOT</version>
 		</dependency>
 		
 		<!-- test stuff -->
