@@ -54,7 +54,7 @@ public class XdsRegistryStoredFindDocumentsQuery {
 	private Destination destination;
 	@NonNull
 	private Identificator patientID;
-	@NonNull
+	/** may be null for testing environments like the EPD Playground */
 	private SecurityHeaderElement xuaToken;
 
 	@Singular("availabilityStatus")

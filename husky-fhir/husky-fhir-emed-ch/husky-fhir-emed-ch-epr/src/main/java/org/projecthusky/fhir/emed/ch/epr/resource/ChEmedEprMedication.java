@@ -16,6 +16,7 @@ import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Medication;
 import org.hl7.fhir.r4.model.UriType;
+import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.PharmaceuticalDoseFormEdqm;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
@@ -217,13 +218,27 @@ public class ChEmedEprMedication extends Medication {
     }
 
     /**
-     * Sets pharmaceutical dose form. If the pharmaceutical dose form already exists, it's replaced.
+     * Sets the pharmaceutical dose form, with an English display name. If the pharmaceutical dose form already exists,
+     * it's replaced.
      *
      * @param doseForm the pharmaceutical dose form.
      * @return this.
      */
     public ChEmedEprMedication setForm(final PharmaceuticalDoseFormEdqm doseForm) {
         this.setForm(doseForm.getCodeableConcept());
+        return this;
+    }
+
+    /**
+     * Sets the pharmaceutical dose form, with a display name in the requested language. If the pharmaceutical dose
+     * form already exists, it's replaced.
+     *
+     * @param doseForm     the pharmaceutical dose form.
+     * @param languageCode the requested language for the display name.
+     * @return this.
+     */
+    public ChEmedEprMedication setForm(final PharmaceuticalDoseFormEdqm doseForm, final LanguageCode languageCode) {
+        this.setForm(doseForm.getCodeableConcept(languageCode));
         return this;
     }
 

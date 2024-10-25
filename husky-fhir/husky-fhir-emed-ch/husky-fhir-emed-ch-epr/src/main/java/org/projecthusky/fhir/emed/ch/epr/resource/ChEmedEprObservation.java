@@ -5,6 +5,7 @@ import ca.uhn.fhir.model.api.annotation.Extension;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.Reference;
+import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
@@ -20,8 +21,8 @@ import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPl
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprMedicationStatementMtp;
 import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprMedicationStatementChanged;
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprMedicationRequestPre;
-import org.projecthusky.fhir.emed.ch.epr.util.References;
 
+import java.lang.reflect.InvocationTargetException;
 import java.time.Instant;
 import java.util.Date;
 import java.util.Objects;
@@ -88,7 +89,7 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
     }
 
     /**
-     * Constructor that pre-populates fields.
+     * Constructor that pre-populates fields. The advice type dispay name is in English.
      *
      * @param entryUuid The medication statement id.
      * @param padvType  The pharmaceutical advice type.
@@ -99,6 +100,22 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
         this.setStatus(ObservationStatus.FINAL);
         this.addIdentifier().setValue(Uuids.URN_PREFIX + entryUuid).setSystem(FhirSystem.URI);
         this.setCode(padvType.getCodeableConcept());
+    }
+
+    /**
+     * Constructor that pre-populates fields. The advice type display name is in the requested language.
+     *
+     * @param entryUuid    The medication statement id.
+     * @param padvType     The pharmaceutical advice type.
+     * @param languageCode The requested language for the display name.
+     */
+    public ChEmedEprObservation(final UUID entryUuid,
+                                final EmedPadvEntryType padvType,
+                                final LanguageCode languageCode) {
+        super();
+        this.setStatus(ObservationStatus.FINAL);
+        this.addIdentifier().setValue(Uuids.URN_PREFIX + entryUuid).setSystem(FhirSystem.URI);
+        this.setCode(padvType.getCodeableConcept(languageCode));
     }
 
     @Override
@@ -133,7 +150,11 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
         final var resource = this.getMedicationStatementChangedReference().getResource();
         if (getMedicationStatementChangedType().isInstance(resource))
             return getMedicationStatementChangedType().cast(resource);
-        throw new InvalidEmedContentException("The medication statement resource isn't of the right type.");
+        throw new InvalidEmedContentException(String.format(
+                "The medication statement resource isn't of the right type. Expected %s. Found %s",
+                getMedicationStatementChangedType().getName(),
+                resource.getClass().getName()
+        ));
     }
 
     /**
@@ -389,13 +410,26 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
     }
 
     /**
-     * Sets the PADV entry type.
+     * Sets the PADV entry type, with an English display name.
      *
      * @param padvEntryType the PADV entry type.
      * @return this.
      */
     public ChEmedEprObservation<T> setPadvEntryType(final EmedPadvEntryType padvEntryType) {
         this.setCode(padvEntryType.getCodeableConcept());
+        return this;
+    }
+
+    /**
+     * Sets the PADV entry type, with a display name in the requested language.
+     *
+     * @param padvEntryType the PADV entry type.
+     * @param languageCode  the requested language for the display name.
+     * @return this.
+     */
+    public ChEmedEprObservation<T> setPadvEntryType(final EmedPadvEntryType padvEntryType,
+                                                    final LanguageCode languageCode) {
+        this.setCode(padvEntryType.getCodeableConcept(languageCode));
         return this;
     }
 
@@ -495,7 +529,25 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
             obs.treatmentPlan = treatmentPlan == null ? null : treatmentPlan.copy();
             obs.prescription = prescription == null ? null : prescription.copy();
             obs.dispense = dispense == null ? null : dispense.copy();
-            obs.medicationStatementChanged = medicationStatementChanged == null ? null : medicationStatementChanged.copy();
+            if (medicationStatementChanged == null) obs.medicationStatementChanged = null;
+            else {
+                obs.medicationStatementChanged = Objects.requireNonNull(medicationStatementChanged.copy());
+                final var medStatementChangedResource = resolveMedicationStatementChanged();
+                if (medStatementChangedResource != null) {
+                    try {
+                        final var newMedStatementChangedResource = obs.getMedicationStatementChangedType().getDeclaredConstructor().newInstance();
+                        medStatementChangedResource.copyValues(newMedStatementChangedResource);
+                        obs.medicationStatementChanged.setResource(newMedStatementChangedResource);
+                    } catch (NoSuchMethodException |
+                             SecurityException |
+                             InstantiationException |
+                             IllegalAccessException |
+                             InvocationTargetException exception) {
+                        throw new RuntimeException("Uncaught exception when trying to copy the medication statement changed resource.", exception);
+                    }
+                }
+            }
+            //obs.medicationStatementChanged = medicationStatementChanged == null ? null : medicationStatementChanged.copy();
             obs.medicationRequestChanged = medicationRequestChanged == null ? null : medicationRequestChanged.copy();
         }
     }

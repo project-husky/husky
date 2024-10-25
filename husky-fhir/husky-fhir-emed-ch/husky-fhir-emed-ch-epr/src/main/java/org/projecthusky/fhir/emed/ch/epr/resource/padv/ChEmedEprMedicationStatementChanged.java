@@ -7,11 +7,11 @@ import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprMedicationStatement;
 import java.util.UUID;
 
 /**
- * The HAPI custom structure for CH EMED MedicationStatement Changed (PADV).
+ * The HAPI custom structure for CH EMED EPR MedicationStatement Changed (PADV).
  *
  * @author Ronaldo Loureiro
  **/
-@ResourceDef(profile = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-medicationstatement-changed")
+@ResourceDef(profile = "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationstatement-changed")
 public class ChEmedEprMedicationStatementChanged extends ChEmedEprMedicationStatement {
 
     /**
