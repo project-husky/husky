@@ -33,6 +33,7 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.NameIDType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.StatementAbstractType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectType;
 import org.opensaml.saml.common.SAMLVersion;
+import org.opensaml.saml.saml2.core.AttributeStatement;
 import org.opensaml.saml.saml2.core.Issuer;
 import org.opensaml.saml.saml2.core.impl.AssertionBuilder;
 import org.opensaml.saml.saml2.core.impl.AttributeStatementBuilder;
@@ -385,6 +386,15 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 	 */
 	public boolean hasSignature() {
 		return (assertion.getSignature() != null);
+	}
+	
+	
+
+	public List<AttributeStatement> getAttributeStatements() {
+		
+		
+		return assertion.getAttributeStatements();
+
 	}
 
 }
