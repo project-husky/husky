@@ -114,6 +114,15 @@ org.projecthusky.fhir.emed.ch.epr
 org.projecthusky.fhir.emed.ch.epr.datatypes
 org.projecthusky.fhir.emed.ch.epr.enums
 org.projecthusky.fhir.emed.ch.epr.model.common
+org.projecthusky.fhir.emed.ch.epr.model.emediplan
+org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums
+org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology
+org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail
+org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.application
+org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.dose
+org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.sequence
+org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.timed
+org.projecthusky.fhir.emed.ch.epr.model.emediplan.repetition
 org.projecthusky.fhir.emed.ch.epr.narrative
 org.projecthusky.fhir.emed.ch.epr.narrative.enums
 org.projecthusky.fhir.emed.ch.epr.narrative.html
