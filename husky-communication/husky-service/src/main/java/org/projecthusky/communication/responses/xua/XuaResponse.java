@@ -9,10 +9,12 @@
  */
 package org.projecthusky.communication.responses.xua;
 
+import javax.xml.namespace.QName;
+
 import java.lang.reflect.Field;
 import java.util.List;
-import javax.validation.constraints.NotNull;
-import javax.xml.namespace.QName;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;

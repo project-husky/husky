@@ -15,7 +15,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntryType;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.TimeRange;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 import java.io.Serial;
 import java.util.List;
 import java.util.Objects;

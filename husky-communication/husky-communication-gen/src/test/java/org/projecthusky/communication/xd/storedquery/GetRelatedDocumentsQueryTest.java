@@ -50,9 +50,9 @@ class GetRelatedDocumentsQueryTest extends XdsTestUtils {
 
 		assertEquals("1234", sqpl.getUuid());
 		assertTrue(sqpl.getAssociationTypes().stream()
-				.anyMatch(t -> t != null && t.getOpcode21().equals(parentRelation.get(0).getOpcode21())));
+				.anyMatch(t -> t != null && t.getOpcode30().equals(parentRelation.get(0).getOpcode30())));
 		assertTrue(sqpl.getAssociationTypes().stream()
-				.anyMatch(t -> t != null && t.getOpcode21().equals(parentRelation.get(1).getOpcode21())));
+				.anyMatch(t -> t != null && t.getOpcode30().equals(parentRelation.get(1).getOpcode30())));
 
 	}
 

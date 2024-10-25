@@ -16,8 +16,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
-import javax.activation.DataHandler;
-import javax.mail.util.ByteArrayDataSource;
+import jakarta.activation.DataHandler;
+import jakarta.mail.util.ByteArrayDataSource;
 
 import org.projecthusky.common.at.AuthorAt;
 import org.projecthusky.common.at.enums.ConfidentialityCode;

@@ -11,6 +11,8 @@
 package org.projecthusky.fhir.emed.ch.epr.validator;
 
 import ch.ahdis.matchbox.engine.MatchboxEngine;
+import ch.ahdis.matchbox.engine.MatchboxEngine.FilesystemPackageCacheMode;
+
 import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.OperationOutcome;
 import org.hl7.fhir.r5.elementmodel.Manager;
@@ -51,7 +53,7 @@ public class ChEmedEprValidator {
     public ChEmedEprValidator() throws IOException, URISyntaxException {
         final var builder = new MatchboxEngine.MatchboxEngineBuilder();
         builder.setTxServer(null);
-        builder.setPackageCacheMode(FilesystemPackageCacheManager.FilesystemPackageCacheMode.TESTING);
+        builder.setPackageCacheMode(FilesystemPackageCacheMode.TESTING);
         this.matchboxEngine = builder.getEngineR4();
 
         // Adding all necessary packages

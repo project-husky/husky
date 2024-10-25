@@ -3,7 +3,7 @@ package org.projecthusky.cda.elga.utils;
 import java.time.ZonedDateTime;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 import org.projecthusky.common.enums.NullFlavor;

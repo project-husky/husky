@@ -13,7 +13,7 @@ package org.projecthusky.xua.saml2.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 
 import org.projecthusky.xua.core.SecurityObject;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.NameIDType;

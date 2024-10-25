@@ -9,11 +9,12 @@
  */
 package org.projecthusky.xua.validation;
 
-import net.shibboleth.utilities.java.support.resolver.CriteriaSet;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.opensaml.security.credential.Credential;
 import org.opensaml.xmlsec.keyinfo.KeyInfoCredentialResolver;
+
+import net.shibboleth.shared.resolver.CriteriaSet;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.Collections;

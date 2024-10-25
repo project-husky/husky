@@ -13,10 +13,10 @@ import org.projecthusky.common.utils.XdsMetadataUtil;
 import org.projecthusky.common.utils.xml.XmlFactories;
 import org.projecthusky.communication.xdsmhdconversion.converters.DocumentEntryConverter;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.JAXBIntrospector;
-import javax.xml.bind.Unmarshaller;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBIntrospector;
+import jakarta.xml.bind.Unmarshaller;
 import java.io.InputStream;
 import java.util.Date;
 

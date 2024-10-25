@@ -22,6 +22,7 @@ import org.opensaml.saml.saml2.core.Condition;
 
 import javax.annotation.concurrent.ThreadSafe;
 import javax.xml.namespace.QName;
+
 import java.util.Optional;
 
 import static org.projecthusky.xua.validation.ChEprAssertionValidationParameters.CH_EPR_AUDIENCE;
@@ -65,7 +66,7 @@ public class ChEprAudienceRestrictionConditionValidator implements ConditionVali
                 .map(Audience::getURI)
                 .orElse(null);
         if (audienceUri == null) {
-            context.setValidationFailureMessage("The AudienceRestriction Condition doesn't contain a valid " +
+            context.getValidationFailureMessages().add("The AudienceRestriction Condition doesn't contain a valid " +
                     "URI");
             return ValidationResult.INVALID;
         }

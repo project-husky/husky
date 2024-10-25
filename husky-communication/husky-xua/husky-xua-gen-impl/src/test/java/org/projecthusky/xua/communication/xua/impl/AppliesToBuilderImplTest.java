@@ -35,7 +35,7 @@ class AppliesToBuilderImplTest {
 		testFromOutsietAppliesTo = new org.opensaml.soap.wspolicy.impl.AppliesToBuilder()
 				.buildObject();
 		final Address wsaAddress = new AddressBuilder().buildObject();
-		wsaAddress.setValue(testAddress);
+		wsaAddress.setURI(testAddress);
 		final EndpointReference enpointRef = new EndpointReferenceBuilder().buildObject();
 		enpointRef.setAddress(wsaAddress);
 		testFromOutsietAppliesTo.getUnknownXMLObjects().add(enpointRef);

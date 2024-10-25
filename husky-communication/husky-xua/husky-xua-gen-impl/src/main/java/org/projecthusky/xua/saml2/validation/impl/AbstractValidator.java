@@ -17,14 +17,15 @@ import java.util.Map;
 import org.projecthusky.xua.exceptions.ValidationException;
 import org.opensaml.core.criterion.EntityIdCriterion;
 import org.opensaml.saml.security.impl.SAMLSignatureProfileValidator;
+import org.opensaml.security.credential.Credential;
 import org.opensaml.security.credential.impl.KeyStoreCredentialResolver;
 import org.opensaml.xmlsec.signature.Signature;
 import org.opensaml.xmlsec.signature.support.SignatureValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.shibboleth.utilities.java.support.resolver.CriteriaSet;
-import net.shibboleth.utilities.java.support.resolver.Criterion;
+import net.shibboleth.shared.resolver.CriteriaSet;
+import net.shibboleth.shared.resolver.Criterion;
 
 /**
  * <!-- @formatter:off -->
@@ -43,6 +44,7 @@ public abstract class AbstractValidator {
 
 	/**
 	 * Method to get logger.
+	 * 
 	 * @return returns the logger
 	 */
 	public Logger getLog() {
@@ -51,6 +53,7 @@ public abstract class AbstractValidator {
 
 	/**
 	 * Method to get password.
+	 * 
 	 * @return returns the password
 	 */
 	public String getPassword() {
@@ -58,7 +61,8 @@ public abstract class AbstractValidator {
 	}
 
 	/**
-	 * Method to get truststore. 
+	 * Method to get truststore.
+	 * 
 	 * @return returns the truststore
 	 */
 	public KeyStore getTrustStore() {
@@ -67,7 +71,9 @@ public abstract class AbstractValidator {
 
 	/**
 	 * Method to set password
-	 * @param password the password to be set
+	 * 
+	 * @param password
+	 *            the password to be set
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -75,7 +81,9 @@ public abstract class AbstractValidator {
 
 	/**
 	 * Method to set trustStore.
-	 * @param trustStore the trustStore to be set
+	 * 
+	 * @param trustStore
+	 *            the trustStore to be set
 	 */
 	public void setTrustStore(KeyStore trustStore) {
 		this.trustStore = trustStore;
@@ -83,9 +91,13 @@ public abstract class AbstractValidator {
 
 	/**
 	 * Method to validate signatures.
-	 * @param aSignature the signature instance
-	 * @param aAlias the alias
-	 * @throws ValidationException will be thrown on validation errors
+	 * 
+	 * @param aSignature
+	 *            the signature instance
+	 * @param aAlias
+	 *            the alias
+	 * @throws ValidationException
+	 *             will be thrown on validation errors
 	 */
 	public void validate(Signature aSignature, String aAlias) throws ValidationException {
 		try {
@@ -96,13 +108,11 @@ public abstract class AbstractValidator {
 		}
 		try {
 			final Map<String, String> passwordMap = new HashMap<>();
-			final var resolver = new KeyStoreCredentialResolver(trustStore,
-					passwordMap);
+			final var resolver = new KeyStoreCredentialResolver(trustStore, passwordMap);
 
-			final Criterion criterion = new EntityIdCriterion(aAlias);
-			final var criteriaSet = new CriteriaSet(criterion);
-			final var credential = resolver.resolveSingle(criteriaSet);
-
+			Criterion criterion = new EntityIdCriterion(aAlias);
+			CriteriaSet criteriaSet = new CriteriaSet(criterion);
+			Credential credential = resolver.resolveSingle(criteriaSet);
 			SignatureValidator.validate(aSignature, credential);
 
 		} catch (final Exception e) {

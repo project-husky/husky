@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 
 import org.projecthusky.cda.elga.generated.artdecor.enums.EImpfImpfrollenVs;
 import org.projecthusky.cda.elga.models.Appendix;

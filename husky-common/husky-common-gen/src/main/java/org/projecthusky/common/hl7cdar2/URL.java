@@ -16,7 +16,7 @@
 
 package org.projecthusky.common.hl7cdar2;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * A telecommunications address specified according to Internet standard RFC 1738 [http://www.ietf.org/rfc/rfc1738.txt].

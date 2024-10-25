@@ -119,7 +119,7 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 .map(PurposeOfUse::getEnum)
                 .orElse(null);
         if (purposeOfUse == null) {
-            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_PURPOSEOFUSE + ERRMSG_CONTAINS_INVALID_VALUE);
+            context.getValidationFailureMessages().add(ERRMSG_ATTRIBUTE + OASIS_XACML_PURPOSEOFUSE + ERRMSG_CONTAINS_INVALID_VALUE);
             return ValidationResult.INVALID;
         }
 
@@ -130,7 +130,7 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 || (role == REPRESENTATIVE && purposeOfUse != NORMAL_ACCESS)
                 || (role == DOCUMENT_ADMINISTRATOR && purposeOfUse != NORMAL_ACCESS)
                 || (role == POLICY_ADMINISTRATOR && purposeOfUse != NORMAL_ACCESS)) {
-            context.setValidationFailureMessage(String.format("The attribute '%s' contains an illegal value: %s is " +
+            context.getValidationFailureMessages().add(String.format("The attribute '%s' contains an illegal value: %s is " +
                     "not allowed for %s", OASIS_XACML_PURPOSEOFUSE, purposeOfUse, role));
             return ValidationResult.INVALID;
         }
@@ -152,7 +152,7 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 .map(ValidationUtils::extractXsValue)
                 .orElse(null);
         if (homeCommunityId == null) {
-            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + IHE_XCA_HOMECOMMUNITYID + ERRMSG_CONTAINS_INVALID_VALUE);
+            context.getValidationFailureMessages().add(ERRMSG_ATTRIBUTE + IHE_XCA_HOMECOMMUNITYID + ERRMSG_CONTAINS_INVALID_VALUE);
             return ValidationResult.INVALID;
         }
         homeCommunityId = Oids.normalize(homeCommunityId); // Decode the URN (remove the prefix)
@@ -175,12 +175,12 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 .orElse(null);
         final var suffix = "^^^&" + SWISS_EPR_SPID.getCodeSystemId() + "&ISO";
         if (resourceId == null || !resourceId.endsWith(suffix)) {
-            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_RESOURCEID + ERRMSG_CONTAINS_INVALID_VALUE);
+            context.getValidationFailureMessages().add(ERRMSG_ATTRIBUTE + OASIS_XACML_RESOURCEID + ERRMSG_CONTAINS_INVALID_VALUE);
             return ValidationResult.INVALID;
         }
         resourceId = resourceId.substring(0, resourceId.length() - suffix.length());
         if (resourceId.isBlank()) {
-            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_RESOURCEID + ERRMSG_CONTAINS_INVALID_VALUE);
+            context.getValidationFailureMessages().add(ERRMSG_ATTRIBUTE + OASIS_XACML_RESOURCEID + ERRMSG_CONTAINS_INVALID_VALUE);
             return ValidationResult.INVALID;
         }
         context.getDynamicParameters().put(CH_EPR_PATIENT_EPR_SPID, resourceId);
@@ -202,7 +202,7 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
                 .map(ValidationUtils::extractXsValue)
                 .orElse(null);
         if (subjectId == null) {
-            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_SUBJECTID + ERRMSG_CONTAINS_INVALID_VALUE);
+            context.getValidationFailureMessages().add(ERRMSG_ATTRIBUTE + OASIS_XACML_SUBJECTID + ERRMSG_CONTAINS_INVALID_VALUE);
             return ValidationResult.INVALID;
         }
         context.getDynamicParameters().put(CH_EPR_SUBJECT_NAME, subjectId);
@@ -235,12 +235,12 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
             if (organizationIds.isEmpty()) {
                 return ValidationResult.VALID;
             }
-            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANIZATIONID + "' must be empty");
+            context.getValidationFailureMessages().add(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANIZATIONID + "' must be empty");
             return ValidationResult.INVALID;
         }
 
         if (context.getDynamicParameters().containsKey(CH_EPR_ORGANIZATIONS_ID)) {
-            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANIZATIONID + "' shall not appear " +
+            context.getValidationFailureMessages().add(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANIZATIONID + "' shall not appear " +
                                                         "multiple times");
             return ValidationResult.INVALID;
         }
@@ -275,12 +275,12 @@ public class ChEprAttributeStatementValidator implements StatementValidator {
             if (organizationNames.isEmpty()) {
                 return ValidationResult.VALID;
             }
-            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANISATION + "' must be empty");
+            context.getValidationFailureMessages().add(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANISATION + "' must be empty");
             return ValidationResult.INVALID;
         }
 
         if (context.getDynamicParameters().containsKey(CH_EPR_ORGANIZATIONS_NAME)) {
-            context.setValidationFailureMessage(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANISATION + "' shall not appear " +
+            context.getValidationFailureMessages().add(ERRMSG_ATTRIBUTE + OASIS_XACML_ORGANISATION + "' shall not appear " +
                                                         "multiple times");
             return ValidationResult.INVALID;
         }
