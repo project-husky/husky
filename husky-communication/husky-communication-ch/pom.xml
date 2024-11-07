@@ -21,12 +21,8 @@
 			<artifactId>ipf-commons-ihe-fhir-core</artifactId>
 			<exclusions>
 				<exclusion>
-					<groupId>xpp3</groupId>
-					<artifactId>xpp3</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.ogce</groupId>
-					<artifactId>xpp3</artifactId>
+					<groupId>ca.uhn.hapi.fhir</groupId>
+					<artifactId>org.hl7.fhir.utilities</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
@@ -37,6 +33,17 @@
 		<dependency>
 			<groupId>org.openehealth.ipf.commons</groupId>
 			<artifactId>ipf-commons-ihe-fhir-r4-mhd</artifactId>
+			<exclusions>
+				<!-- Excluded hapi.fhir libraries because newer versions are already imported -->
+				<exclusion>
+					<groupId>ca.uhn.hapi.fhir</groupId>
+					<artifactId>org.hl7.fhir.r5</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>ca.uhn.hapi.fhir</groupId>
+					<artifactId>org.hl7.fhir.utilities</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -80,7 +87,7 @@
 		<dependency>
 			<groupId>org.projecthusky.communication</groupId>
 			<artifactId>husky-communication-gen</artifactId>
-		<version>3.0.1-SNAPSHOT</version>
+			<version>3.0.1-SNAPSHOT</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
@@ -96,6 +103,5 @@
 			<artifactId>lombok</artifactId>
 			<scope>compile</scope>
 		</dependency>
-
 	</dependencies>
 </project>

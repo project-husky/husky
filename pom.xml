@@ -38,13 +38,19 @@
             https://github.com/oehf/ipf/blob/master/dependencies/pom.xml (select the right
 		version in the tags) -->
 		<jaxb.version>4.0.5</jaxb.version>
-		<spring.version>6.1.13</spring.version>
+		<spring.version>6.1.14</spring.version>
 		<spring.boot.version>3.3.4</spring.boot.version>
-		<hapi.fhir.version>7.4.0</hapi.fhir.version>
+		<hapi.fhir.version>7.4.5</hapi.fhir.version>
 		<jakarta-jwsapi-version>2.1.0</jakarta-jwsapi-version>
 		<camel.version>4.8.0</camel.version>
 		<zxing.version>3.5.3</zxing.version>
 		<openhtmltopdf-version>1.1.22</openhtmltopdf-version>
+		<verapdf.version>1.24.2</verapdf.version>
+		<snakeyaml.version>2.3</snakeyaml.version>
+		<commons-io.version>2.17.0</commons-io.version>
+		<json-path.version>2.9.0</json-path.version>
+		<json-smart.version>2.5.1</json-smart.version>
+		<angus-mail.version>2.0.3</angus-mail.version>
 	</properties>
 	<scm>
 		<connection>scm:git:https://github.com/project-husky/husky.git</connection>
@@ -315,7 +321,7 @@
 			<dependency>
 				<groupId>commons-io</groupId>
 				<artifactId>commons-io</artifactId>
-				<version>2.11.0</version>
+				<version>${commons-io.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>commons-fileupload</groupId>
@@ -326,7 +332,7 @@
 			<dependency>
 				<groupId>com.jayway.jsonpath</groupId>
 				<artifactId>json-path</artifactId>
-				<version>2.7.0</version>
+				<version>${json-path.version}</version>
 				<exclusions>
 					<exclusion>
 						<!-- Newer version imported -->
@@ -336,9 +342,19 @@
 				</exclusions>
 			</dependency>
 			<dependency>
+				<groupId>net.minidev</groupId>
+				<artifactId>json-smart</artifactId>
+				<version>${json-smart.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.angus</groupId>
+				<artifactId>angus-mail</artifactId>
+				<version>${angus-mail.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>org.yaml</groupId>
 				<artifactId>snakeyaml</artifactId>
-				<version>1.33</version>
+				<version>${snakeyaml.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
@@ -349,12 +365,6 @@
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-jdk14</artifactId>
 				<version>${slf4j.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>javax.servlet-api</artifactId>
-				<version>4.0.1</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>javax.annotation</groupId>
@@ -381,7 +391,7 @@
 			<dependency>
 				<groupId>org.verapdf</groupId>
 				<artifactId>validation-model</artifactId>
-				<version>1.22.2</version>
+				<version>${verapdf.version}</version>
 			</dependency>
 			<!-- JAXB binding stuff -->
 			<dependency>
@@ -395,7 +405,6 @@
 				<artifactId>jakarta.xml.bind-api</artifactId>
 				<version>4.0.1</version>
 			</dependency>
-
 			<dependency>
 				<groupId>jakarta.jws</groupId>
 				<artifactId>jakarta.jws-api</artifactId>
@@ -412,9 +421,9 @@
 				<version>2.1.1</version>
 			</dependency>
 			<dependency>
-				<groupId>javax.mail</groupId>
-				<artifactId>javax.mail-api</artifactId>
-				<version>1.6.2</version>
+				<groupId>jakarta.mail</groupId>
+				<artifactId>jakarta.mail-api</artifactId>
+				<version>2.1.3</version>
 			</dependency>
 			<!-- PPQ stuff -->
 			<dependency>
@@ -671,9 +680,30 @@
 				<artifactId>matchbox-engine</artifactId>
 				<version>3.8.0</version>
 				<exclusions>
+					<!-- Excluded hapi.fhir libraries because newer versions are already imported -->
 					<exclusion>
 						<groupId>ca.uhn.hapi</groupId>
 						<artifactId>hapi-base</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>ca.uhn.hapi.fhir</groupId>
+						<artifactId>org.hl7.fhir.utilities</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>ca.uhn.hapi.fhir</groupId>
+						<artifactId>org.hl7.fhir.validation</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>ca.uhn.hapi.fhir</groupId>
+						<artifactId>org.hl7.fhir.r5</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>ca.uhn.hapi.fhir</groupId>
+						<artifactId>org.hl7.fhir.r4</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>ca.uhn.hapi.fhir</groupId>
+						<artifactId>org.hl7.fhir.r4b</artifactId>
 					</exclusion>
 				</exclusions>
 			</dependency>
@@ -725,16 +755,16 @@
 			<artifactId>ipf-hl7v3-spring-boot-starter</artifactId>
 			<exclusions>
 				<exclusion>
+					<groupId>org.apache.cxf</groupId>
+					<artifactId>cxf-spring-boot-starter-jaxws</artifactId>
+				</exclusion>
+				<exclusion>
 					<groupId>org.apache.tomcat.embed</groupId>
 					<artifactId>tomcat-embed-websocket</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-logging</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>ca.uhn.hapi.fhir</groupId>
-					<artifactId>org.hl7.fhir.dstu2016may</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>org.ogce</groupId>
@@ -753,6 +783,11 @@
 				<exclusion>
 					<groupId>org.ogce</groupId>
 					<artifactId>xpp3</artifactId>
+				</exclusion>
+				<!-- Excluded because a newer version of the library e.g 6.3.23 already exists -->
+				<exclusion>
+					<groupId>ca.uhn.hapi.fhir</groupId>
+					<artifactId>org.hl7.fhir.utilities</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>

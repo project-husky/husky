@@ -60,8 +60,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>javax.mail-api</artifactId>
+			<groupId>jakarta.mail</groupId>
+			<artifactId>jakarta.mail-api</artifactId>
 		</dependency>
 		<!--
 		<dependency>
@@ -74,6 +74,12 @@
 		<dependency>
 			<groupId>org.openehealth.ipf.boot</groupId>
 			<artifactId>ipf-hl7v3-spring-boot-starter</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-webmvc</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>

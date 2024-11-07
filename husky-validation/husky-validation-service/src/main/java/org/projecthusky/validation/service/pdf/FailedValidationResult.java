@@ -5,9 +5,11 @@ import org.verapdf.pdfa.flavours.PDFAFlavour;
 import org.verapdf.pdfa.results.Location;
 import org.verapdf.pdfa.results.TestAssertion;
 import org.verapdf.pdfa.results.ValidationResult;
+import org.verapdf.pdfa.validation.profiles.ErrorArgument;
 import org.verapdf.pdfa.validation.profiles.ProfileDetails;
 import org.verapdf.pdfa.validation.profiles.RuleId;
 import org.verapdf.pdfa.validation.profiles.ValidationProfile;
+import org.verapdf.processor.reports.enums.JobEndStatus;
 
 import javax.annotation.concurrent.Immutable;
 import java.util.Collections;
@@ -77,6 +79,11 @@ final class FailedValidationResult implements ValidationResult {
     }
 
     @Override
+    public JobEndStatus getJobEndStatus() {
+        return JobEndStatus.NORMAL;
+    }
+
+    @Override
     @Nullable
     public HashMap<RuleId, Integer> getFailedChecks() {
         return null;
@@ -117,7 +124,7 @@ final class FailedValidationResult implements ValidationResult {
         }
 
         @Override
-        public List<String> getErrorArguments() {
+        public List<ErrorArgument> getErrorArguments() {
             return Collections.emptyList();
         }
 
