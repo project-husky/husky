@@ -17,16 +17,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.openehealth.ipf.commons</groupId>
-			<artifactId>ipf-commons-ihe-fhir-core</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>ca.uhn.hapi.fhir</groupId>
-					<artifactId>org.hl7.fhir.utilities</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
 			<groupId>org.openehealth.ipf.platform-camel</groupId>
 			<artifactId>ipf-platform-camel-ihe-fhir-core</artifactId>
 		</dependency>
