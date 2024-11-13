@@ -35,7 +35,7 @@ jobs:
           cache: maven
 
       - name: Build and test with Maven
-        run: mvn clean install --batch-mode --no-transfer-progress --file pom.xml
+        run: mvn clean install --batch-mode --no-transfer-progress --file pom.xml -Powasp
       
       # Initializes the CodeQL tools for scanning.
       - name: Initialize CodeQL
