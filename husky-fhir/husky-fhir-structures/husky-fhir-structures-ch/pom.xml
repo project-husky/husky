@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.projecthusky.fhir.structures</groupId>
 		<artifactId>husky-fhir-structures</artifactId>
-		<version>3.0.1</version>
+		<version>3.0.2-SNAPSHOT</version>
 	</parent>
 
 
@@ -13,7 +13,7 @@
 		<dependency>
 			<groupId>org.projecthusky.fhir.structures</groupId>
 			<artifactId>husky-fhir-structures-gen</artifactId>
-			<version>3.0.1</version>
+			<version>3.0.2-SNAPSHOT</version>
 		</dependency>
 
 		<!-- test stuff -->
