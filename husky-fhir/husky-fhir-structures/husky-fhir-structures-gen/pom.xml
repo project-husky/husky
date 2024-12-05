@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>husky-fhir-structures-gen</artifactId>
 	<name>Husky FHIR Structures Generic</name>
@@ -14,9 +16,9 @@
 	<dependencies>
 		<!-- own modules -->
 		<dependency>
-                        <groupId>org.projecthusky.common</groupId>
-                        <artifactId>husky-common-gen</artifactId>
-                        <version>3.0.2-SNAPSHOT</version>
+			<groupId>org.projecthusky.common</groupId>
+			<artifactId>husky-common-gen</artifactId>
+			<version>3.0.2-SNAPSHOT</version>
 		</dependency>
 
 		<!-- other dependencies -->
@@ -25,9 +27,9 @@
 			<artifactId>hapi-fhir-structures-r4</artifactId>
 		</dependency>
 		<dependency>
-                        <groupId>ca.uhn.hapi.fhir</groupId>
-                        <artifactId>hapi-fhir-validation-resources-r4</artifactId>
-                </dependency>
+			<groupId>ca.uhn.hapi.fhir</groupId>
+			<artifactId>hapi-fhir-validation-resources-r4</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -47,15 +49,6 @@
 	</dependencies>
 
 	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>2.6</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
