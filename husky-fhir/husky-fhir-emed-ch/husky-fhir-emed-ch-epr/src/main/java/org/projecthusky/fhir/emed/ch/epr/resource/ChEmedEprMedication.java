@@ -12,7 +12,6 @@ package org.projecthusky.fhir.emed.ch.epr.resource;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Medication;
 import org.hl7.fhir.r4.model.UriType;
@@ -212,8 +211,10 @@ public class ChEmedEprMedication extends Medication {
     public List<ChEmedEprMedicationIngredient> resolveActiveIngredients() {
         return this.getIngredient().stream()
                 .filter(MedicationIngredientComponent::getIsActive)
-                .filter(ChEmedEprMedicationIngredient.class::isInstance)
-                .map(ChEmedEprMedicationIngredient.class::cast)
+                .map(ingredient -> {
+                    if (ingredient instanceof ChEmedEprMedicationIngredient chEmedEprIngredient) return  chEmedEprIngredient;
+                    else return new ChEmedEprMedicationIngredient(ingredient);
+                })
                 .toList();
     }
 

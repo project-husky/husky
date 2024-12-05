@@ -27,10 +27,41 @@
 
     <div id="active-treatments">
         <h2 id="active-treatments-header">Traitements actifs</h2>
-        <th:block th:insert="~{medication_card_fragments :: table(${activeTreatments}, ${lang})}"/>
-    </div>
-    <div id="reserve-treatments">
-        <h2 id="reserve-treatments-header">Traitements en réserve</h2>
-        <th:block th:insert="~{medication_card_fragments :: table(${asneededTreatments}, ${lang})}"/>
+        <table class="treatments">
+            <thead>
+            <tr>
+                <td rowspan="2" colspan="2">Nom du médicament</td>
+                <td colspan="4">Dosage</td>
+                <td rowspan="2">Commentaire</td>
+                <td rowspan="2">Voie et localisation</td>
+            </tr>
+            <tr>
+                <td>Matin</td>
+                <td>Midi</td>
+                <td>Soir</td>
+                <td>Nuit</td>
+            </tr>
+            </thead>
+            <th:block th:each="statements: ${activeTreatments}">
+                <th:block th:insert="~{medication_card_fragments::treatmentPlan(${statements.value}, ${lang})}"/>
+            </th:block>
+            <th:block th:if="${!asneededTreatments.isEmpty()}">
+                <tbody>
+                <tr>
+                    <td colspan="8" class="as-needed-treatments-header">Traitements en réserve:</td>
+                </tr>
+                </tbody>
+                <th:block th:each="statements: ${asneededTreatments}">
+                    <th:block th:insert="~{medication_card_fragments::treatmentPlan(${statements.value}, ${lang})}"/>
+                </th:block>
+            </th:block>
+            <th:block th:if="${activeTreatments.isEmpty() && asneededTreatments.isEmpty()}">
+                <tbody>
+                    <tr>
+                        <td colspan="8" class="no-treatment">Aucun traitement</td>
+                    </tr>
+                </tbody>
+            </th:block>
+        </table>
     </div>
 </th:block>
