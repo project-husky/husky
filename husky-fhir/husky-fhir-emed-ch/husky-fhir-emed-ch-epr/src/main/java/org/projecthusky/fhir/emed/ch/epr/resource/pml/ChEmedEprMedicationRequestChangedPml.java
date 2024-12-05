@@ -4,8 +4,10 @@ import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.MedicationRequest;
 import org.hl7.fhir.r4.model.Reference;
+import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocumentAuthorable;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtPharmaceuticalAdvice;
 import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprMedicationRequestChanged;
@@ -15,6 +17,7 @@ import java.util.UUID;
 @ResourceDef(profile = "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medication-request-changed-list")
 public class ChEmedEprMedicationRequestChangedPml extends ChEmedEprMedicationRequestChanged
         implements ChEmedEprDocumentAuthorable<ChEmedEprMedicationRequestChangedPml> {
+
     /**
      * Author of the original document if different from the author of the medical decision.
      */
@@ -28,7 +31,7 @@ public class ChEmedEprMedicationRequestChangedPml extends ChEmedEprMedicationReq
      */
     @Nullable
     @Child(name = "parentDocument")
-    @Extension(url = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-pharmaceuticaladvice")
+    @Extension(url = ChEmedExtPharmaceuticalAdvice.URL)
     protected ChEmedExtPharmaceuticalAdvice parentDocument;
 
     /**
@@ -45,6 +48,32 @@ public class ChEmedEprMedicationRequestChangedPml extends ChEmedEprMedicationReq
      */
     public ChEmedEprMedicationRequestChangedPml(final UUID entryUuid) {
         super(entryUuid);
+    }
+
+    /**
+     * Constructor that copies the content of the PML med request to a PML changed request. This is used as a workaround
+     * due to the limitations of HAPI's parser that will only parse all the medication requests to a single type. This
+     * method allows a custom parser (or other) to create a {@link ChEmedEprMedicationRequestChangedPml} by copying the
+     * values from a parsed {@link ChEmedEprMedicationRequestPml} request.
+     * <p>
+     *     If the passed medication request has the parentDocument extension (as it should if it passed validation), it
+     *     will be part of the extensions (and not recognized as parentDocument by the
+     *     {@link ChEmedEprMedicationRequestChangedPml} class, since the URLs differ). This constructor will move it
+     *     from the extensions to the {@link #parentDocument} custom property of this class.
+     * </p>
+     * @param request The PML simple request.
+     */
+    public ChEmedEprMedicationRequestChangedPml(final ChEmedEprMedicationRequestPml request) {
+        request.copyValues(this);
+        if (hasExtension(ChEmedExtPharmaceuticalAdvice.URL)) {
+            final var extension = getExtensionByUrl(ChEmedExtPharmaceuticalAdvice.URL);
+            final var parentDocumentExtension = new ChEmedExtPharmaceuticalAdvice(
+                    Uuids.parseUrnEncoded(((Identifier) extension.getExtensionByUrl(ChEmedExtPharmaceuticalAdvice.ID_URL).getValue()).getValue()),
+                    Uuids.parseUrnEncoded(((Identifier) extension.getExtensionByUrl(ChEmedExtPharmaceuticalAdvice.EXTERNAL_DOCUMENT_ID_URL).getValue()).getValue())
+            );
+            setParentDocumentElement(parentDocumentExtension);
+            getExtension().remove(extension);
+        }
     }
 
     /**

@@ -17,9 +17,8 @@ import org.projecthusky.fhir.emed.ch.epr.model.common.EmedReference;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtDispense;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtPrescription;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
-import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprMedicationStatementMtp;
+import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprMedicationRequestChanged;
 import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprMedicationStatementChanged;
-import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprMedicationRequestPre;
 
 import java.lang.reflect.InvocationTargetException;
 import java.time.Instant;
@@ -31,14 +30,19 @@ import java.util.stream.Stream;
 /**
  * The HAPI custom structure for CH-EMED-EPR Observation.
  *
- * @param <T> The type of {@link ChEmedEprMedicationStatement} to be returned by resolveMedicationStatementChanged().
+ * @param <S> The type of {@link ChEmedEprMedicationStatementChanged} to be returned by resolveMedicationStatementChanged().
  *            This is needed for documents that might contain several subtypes of MedicationStatement, e.g. a PML doc.
  *            since the parser cannot discriminate between them and hence these resources might be parsed as a different
  *            ChEmedEprMedicationStatement than the PADV attached {@link ChEmedEprMedicationStatementChanged}.
+ * @param <R> The type of {@link ChEmedEprMedicationRequestChanged} to be returned by resolveMedicationRequestChanged().
+ *            This is needed for documents that might contain several subtypes of MedicationRequest, e.g. a PML doc.
+ *            since the parser cannot discriminate between them and hence these resources might be parsed as a different
+ *            ChEmedEprMedicationRequest than the PADV attached {@link ChEmedEprMedicationRequestChanged}.
  *
  * @author Ronaldo Loureiro
  **/
-public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatement> extends Observation implements ChEmedEprEntry {
+public abstract class ChEmedEprObservation<S extends ChEmedEprMedicationStatementChanged, R extends ChEmedEprMedicationRequestChanged>
+        extends Observation implements ChEmedEprEntry {
 
     /**
      * Reference to the medication treatment plan.
@@ -126,7 +130,7 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
      */
     @Nullable
     @ExpectsValidResource
-    public T resolveMedicationStatementChanged() throws InvalidEmedContentException {
+    public S resolveMedicationStatementChanged() throws InvalidEmedContentException {
         if (!this.hasMedicationStatementChanged()) {
             return null;
         }
@@ -145,7 +149,7 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
      * @return The class (type) of medication statement resource that is to be returned by
      *          resolveMedicationStatementChanged().
      */
-    protected abstract Class<T> getMedicationStatementChangedType();
+    protected abstract Class<S> getMedicationStatementChangedType();
 
     /**
      * Resolves the changed medication request.
@@ -155,16 +159,26 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
      */
     @Nullable
     @ExpectsValidResource
-    public ChEmedEprMedicationRequestPre resolveMedicationRequestChanged() throws InvalidEmedContentException {
+    public R resolveMedicationRequestChanged() throws InvalidEmedContentException {
         if (!this.hasMedicationRequestChanged()) {
             return null;
         }
         final var resource = this.getMedicationRequestChangedReference().getResource();
-        if (resource instanceof ChEmedEprMedicationRequestPre chEmedEprMedicationRequestPre) {
-            return chEmedEprMedicationRequestPre;
-        }
-        throw new InvalidEmedContentException("The medication request resource isn't of the right type.");
+        if (getMedicationRequestChangedType().isInstance(resource))
+            return getMedicationRequestChangedType().cast(resource);
+        throw new InvalidEmedContentException(String.format(
+                "The medication request resource isn't of the right type. Expected %s. Found %s",
+                getMedicationRequestChangedType().getName(),
+                resource.getClass().getName()
+        ));
     }
+
+    /**
+     *
+     * @return The class (type) of medication statement resource that is to be returned by
+     *          resolveMedicationRequestChanged().
+     */
+    protected abstract Class<R> getMedicationRequestChangedType();
 
     /**
      * Resolves the PADV entry type.
@@ -343,7 +357,7 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
      * @param treatmentPlan the treatment plan reference.
      * @return this.
      */
-    public ChEmedEprObservation<T> setTreatmentPlanElement(final ChEmedExtTreatmentPlan treatmentPlan) {
+    public ChEmedEprObservation<S,R> setTreatmentPlanElement(final ChEmedExtTreatmentPlan treatmentPlan) {
         this.treatmentPlan = treatmentPlan;
         return this;
     }
@@ -354,7 +368,7 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
      * @param prescription the prescription reference.
      * @return this.
      */
-    public ChEmedEprObservation<T> setPrescriptionElement(final ChEmedExtPrescription prescription) {
+    public ChEmedEprObservation<S,R> setPrescriptionElement(final ChEmedExtPrescription prescription) {
         this.prescription = prescription;
         return this;
     }
@@ -365,7 +379,7 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
      * @param dispense the medication dispense reference.
      * @return this.
      */
-    public ChEmedEprObservation<T> setDispenseElement(final ChEmedExtDispense dispense) {
+    public ChEmedEprObservation<S,R> setDispenseElement(final ChEmedExtDispense dispense) {
         this.dispense = dispense;
         return this;
     }
@@ -376,7 +390,7 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
      * @param medicationStatement the changed medication statement.
      * @return this.
      */
-    public ChEmedEprObservation<T> setMedicationStatementChanged(final ChEmedEprMedicationStatementMtp medicationStatement) {
+    public ChEmedEprObservation<S,R> setMedicationStatementChanged(final ChEmedEprMedicationStatementChanged medicationStatement) {
         this.medicationStatementChanged = new Reference(medicationStatement);
         return this;
     }
@@ -387,7 +401,7 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
      * @param medicationRequest the changed medication request.
      * @return this.
      */
-    public ChEmedEprObservation<T> setMedicationRequestChanged(final ChEmedEprMedicationRequestPre medicationRequest) {
+    public ChEmedEprObservation<S,R> setMedicationRequestChanged(final ChEmedEprMedicationRequestChanged medicationRequest) {
         this.medicationRequestChanged = new Reference(medicationRequest);
         return this;
     }
@@ -398,7 +412,7 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
      * @param padvEntryType the PADV entry type.
      * @return this.
      */
-    public ChEmedEprObservation<T> setPadvEntryType(final EmedPadvEntryType padvEntryType) {
+    public ChEmedEprObservation<S,R> setPadvEntryType(final EmedPadvEntryType padvEntryType) {
         this.setCode(padvEntryType.getCodeableConcept());
         return this;
     }
@@ -409,7 +423,7 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
      * @param issued the date/time this version was made available.
      * @return this.
      */
-    public ChEmedEprObservation<T> setIssued(final Instant issued) {
+    public ChEmedEprObservation<S,R> setIssued(final Instant issued) {
         this.setIssued(Date.from(issued));
         return this;
     }
@@ -420,7 +434,7 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
      * @param note the note.
      * @return this.
      */
-    public ChEmedEprObservation<T> setNote(final String note) {
+    public ChEmedEprObservation<S,R> setNote(final String note) {
         this.getNoteFirstRep().setText(note);
         return this;
     }
@@ -495,7 +509,7 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
     @Override
     public void copyValues(final Observation dst) {
         super.copyValues(dst);
-        if (dst instanceof ChEmedEprObservation<?> obs) {
+        if (dst instanceof ChEmedEprObservation<?,?> obs) {
             obs.treatmentPlan = treatmentPlan == null ? null : treatmentPlan.copy();
             obs.prescription = prescription == null ? null : prescription.copy();
             obs.dispense = dispense == null ? null : dispense.copy();
@@ -517,8 +531,25 @@ public abstract class ChEmedEprObservation<T extends ChEmedEprMedicationStatemen
                     }
                 }
             }
-            //obs.medicationStatementChanged = medicationStatementChanged == null ? null : medicationStatementChanged.copy();
-            obs.medicationRequestChanged = medicationRequestChanged == null ? null : medicationRequestChanged.copy();
+            if (medicationRequestChanged == null) obs.medicationRequestChanged = null;
+            else {
+                obs.medicationRequestChanged = Objects.requireNonNull(medicationRequestChanged.copy());
+                final var medRequestChangedResource = resolveMedicationRequestChanged();
+                if (medRequestChangedResource != null) {
+                    try {
+                        final var newMedRequestChangedResource =
+                                obs.getMedicationRequestChangedType().getDeclaredConstructor().newInstance();
+                        medRequestChangedResource.copyValues(newMedRequestChangedResource);
+                        obs.medicationRequestChanged.setResource(newMedRequestChangedResource);
+                    } catch (NoSuchMethodException |
+                            SecurityException |
+                            InstantiationException |
+                            IllegalAccessException |
+                            InvocationTargetException exception) {
+                        throw new RuntimeException("Uncaught exception when trying to copy the medication request changed resource.", exception);
+                    }
+                }
+            }
         }
     }
 
