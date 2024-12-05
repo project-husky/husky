@@ -22,6 +22,8 @@ import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprCompositionMtp;
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprDocumentMtp;
 import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprCompositionPadv;
 import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprDocumentPadv;
+import org.projecthusky.fhir.emed.ch.epr.resource.pml.ChEmedEprCompositionPml;
+import org.projecthusky.fhir.emed.ch.epr.resource.pml.ChEmedEprDocumentPml;
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprCompositionPre;
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprDocumentPre;
 
@@ -92,5 +94,16 @@ class ChEmedEprParserTest {
         final var padvDocument2 = (ChEmedEprDocumentPadv) document2;
         assertNotNull(padvDocument2.resolveComposition());
         assertInstanceOf(ChEmedEprCompositionPadv.class, padvDocument2.resolveComposition());
+    }
+
+    @Test
+    void testParsePml() throws IOException {
+        final var xml = new String(getClass().getResourceAsStream("/Bundle-BundleUtc6bPml.xml").readAllBytes());
+        final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
+        final var document = parser.parse(xml, EmedDocumentType.PML);
+        assertInstanceOf(ChEmedEprDocumentPml.class, document);
+        final var pml = (ChEmedEprDocumentPml) document;
+        assertNotNull(pml.resolveComposition());
+        assertInstanceOf(ChEmedEprCompositionPml.class, pml.resolveComposition());
     }
 }

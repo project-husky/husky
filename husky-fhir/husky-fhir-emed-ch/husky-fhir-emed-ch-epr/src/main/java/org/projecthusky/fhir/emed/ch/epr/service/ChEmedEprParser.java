@@ -27,10 +27,7 @@ import org.projecthusky.fhir.emed.ch.epr.resource.dis.ChEmedEprMedicationDispens
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprCompositionMtp;
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprDocumentMtp;
 import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprMedicationStatementMtp;
-import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprCompositionPadv;
-import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprDocumentPadv;
-import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprMedicationStatementChanged;
-import org.projecthusky.fhir.emed.ch.epr.resource.padv.ChEmedEprObservationPadv;
+import org.projecthusky.fhir.emed.ch.epr.resource.padv.*;
 import org.projecthusky.fhir.emed.ch.epr.resource.pml.*;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprCompositionPmlc;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprDocumentPmlc;
@@ -87,6 +84,7 @@ public class ChEmedEprParser {
         if (parsed.getClass().getSuperclass() == ChEmedEprDocument.class) {
             @SuppressWarnings("unchecked") // We've just checked it
             final var document = (T) parsed;
+            postHapiParsing(document);
             return document;
         }
         throw new InvalidEmedContentException("The given resource isn't a CH-EMED Document");
@@ -169,7 +167,7 @@ public class ChEmedEprParser {
                 preferTypes.add(ChEmedEprCompositionPadv.class);
                 preferTypes.add(ChEmedEprObservationPadv.class);
                 preferTypes.add(ChEmedEprMedicationStatementChanged.class);
-                preferTypes.add(ChEmedEprMedicationRequestPre.class);
+                preferTypes.add(ChEmedEprMedicationRequestChanged.class);
             }
             case PML -> {
                 preferTypes.add(ChEmedEprDocumentPml.class);
@@ -187,5 +185,43 @@ public class ChEmedEprParser {
         }
         parser.setPreferTypes(preferTypes);
         return parser;
+    }
+
+    /**
+     * Post-processing for further needed refining/transformations after the initial HAPI parsing.
+     * <p>
+     *     For the moment being, it is used for replacing medication statement|request changed resources within the PML,
+     *     that are parsed as simple medication statement|request within the PML (but not as changed) due to limitations
+     *     of the HAPI parser, with resources of the actual {@link ChEmedEprMedicationStatementChangedPml} and
+     *     {@link ChEmedEprMedicationRequestChangedPml} as needed.
+     * </p>
+     * @param doc
+     */
+    protected void postHapiParsing(final ChEmedEprDocument doc) {
+        if (doc instanceof ChEmedEprDocumentPml pml) {
+            if (pml.hasCompositionEntry()) {
+                pml.resolveComposition().resolveEntries().stream()
+                        .filter(ChEmedEprObservationPml.class::isInstance)
+                        .map(ChEmedEprObservationPml.class::cast)
+                        .forEach(observation -> {
+                            if (observation.hasMedicationStatementChanged() && observation.getMedicationStatementChangedReference().getResource() instanceof ChEmedEprMedicationStatementPml statementPml) {
+                                final var changedStatementPml = new ChEmedEprMedicationStatementChangedPml(statementPml);
+                                pml.getEntry().stream()
+                                        .filter(entry -> entry.getResource() == statementPml)
+                                        .findAny().orElseThrow(InvalidEmedContentException::new)
+                                        .setResource(changedStatementPml);
+                                observation.getMedicationStatementChangedReference().setResource(changedStatementPml);
+                            }
+                            if (observation.hasMedicationRequestChanged() && observation.getMedicationRequestChangedReference().getResource() instanceof ChEmedEprMedicationRequestPml requestPml) {
+                                final var changedRequestPml = new ChEmedEprMedicationRequestChangedPml(requestPml);
+                                pml.getEntry().stream()
+                                        .filter(entry -> entry.getResource() == requestPml)
+                                        .findAny().orElseThrow(InvalidEmedContentException::new)
+                                        .setResource(changedRequestPml);
+                                observation.getMedicationStatementChangedReference().setResource(changedRequestPml);
+                            }
+                        });
+            }
+        }
     }
 }
