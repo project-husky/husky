@@ -2,7 +2,7 @@
     <parent>
         <groupId>org.projecthusky.fhir.emed.ch</groupId>
         <artifactId>husky-fhir-emed-ch</artifactId>
-        <version>3.0.2</version>
+        <version>3.0.3-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>husky-fhir-emed-ch-epr</artifactId>
@@ -12,7 +12,7 @@
         <dependency>
             <groupId>org.projecthusky.fhir.emed.ch</groupId>
 	    	    <artifactId>husky-fhir-emed-ch-common</artifactId>
-	   		    <version>3.0.2</version>
+	   		    <version>3.0.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <!-- Used for FHIR resource validation -->
