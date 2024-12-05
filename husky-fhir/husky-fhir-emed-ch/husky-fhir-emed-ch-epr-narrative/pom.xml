@@ -1,29 +1,27 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>husky-fhir-emed-ch-epr-narrative</artifactId>
 	<name>Husky FHIR eMed EPR Narrative</name>
 	<parent>
 		<artifactId>husky-fhir-emed-ch</artifactId>
 		<groupId>org.projecthusky.fhir.emed.ch</groupId>
-		<version>3.0.2-SNAPSHOT</version>
+		<version>3.0.2</version>
 	</parent>
 	<dependencies>
 		<dependency>
 			<groupId>org.projecthusky.fhir.emed.ch</groupId>
 			<artifactId>husky-fhir-emed-ch-common</artifactId>
-			<version>3.0.2-SNAPSHOT</version>
+			<version>3.0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projecthusky.fhir.emed.ch</groupId>
 			<artifactId>husky-fhir-emed-ch-epr</artifactId>
-			<version>3.0.2-SNAPSHOT</version>
+			<version>3.0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projecthusky.validation.service</groupId>
 			<artifactId>husky-validation-service</artifactId>
-			<version>3.0.2-SNAPSHOT</version>
+			<version>3.0.2</version>
 		</dependency>
 
 		<dependency>
