@@ -1236,7 +1236,7 @@
 				</repository>
 			</distributionManagement>
 			<build>
-				<pluginManagement>
+				<!--<pluginManagement>
 					<plugins>
 						<plugin>
 							<groupId>org.sonatype.plugins</groupId>
@@ -1249,7 +1249,7 @@
 							<version>3.2.7</version>
 						</plugin>
 					</plugins>
-				</pluginManagement>
+				</pluginManagement>-->
 				<plugins>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
