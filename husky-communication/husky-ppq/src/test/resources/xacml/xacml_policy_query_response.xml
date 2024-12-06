@@ -1,11 +1,31 @@
-<samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="4v7a68d0-5d67-557e-def4-8e5858676abc2" Version="2.0" IssueInstant="2016-02-09T09:30:10.5Z">
-	<saml:Assertion ID="3b5a66d0-5d86-477e-afc4-8e561084edc9" Version="2.0" IssueInstant="2016-02-09T09:30:10.5Z">
-		<saml:Issuer NameQualifier="urn:e-health-suisse:community-index">urn:oid:2.999.1</saml:Issuer>
-		<saml:Status>
-			<samlp:StatusCode>urn:oasis:names:tc:SAML:2.0:status:Success</samlp:StatusCode>
-		</saml:Status>
-		<saml:Statement xsi:type="xacml-saml:XACMLPolicyStatementType">
-		</saml:Statement>
-	</saml:Assertion>
-</samlp:Response>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns11:Response ID="_286d7a79-6a46-4794-abc4-f717a9575458" Version="2.0" IssueInstant="2021-09-04T23:46:45.732Z" xmlns="urn:oasis:names:tc:xacml:2.0:context:schema:os" xmlns:ns6="http://www.w3.org/2004/08/xop/include" xmlns:ns5="http://www.w3.org/2001/04/xmlenc#" xmlns:ns8="urn:oasis:names:tc:SAML:2.0:conditions:delegation" xmlns:ns7="urn:e-health-suisse:2015:policy-administration" xmlns:ns9="urn:oasis:names:tc:xacml:2.0:profile:saml2.0:v2:schema:assertion" xmlns:ns12="urn:oasis:names:tc:xacml:2.0:profile:saml2.0:v2:schema:protocol" xmlns:ns11="urn:oasis:names:tc:SAML:2.0:protocol" xmlns:ns10="urn:hl7-org:v3" xmlns:ns2="urn:oasis:names:tc:xacml:2.0:policy:schema:os" xmlns:ns4="http://www.w3.org/2000/09/xmldsig#" xmlns:ns3="urn:oasis:names:tc:SAML:2.0:assertion">
+    <ns11:Status>
+        <ns11:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success"/>
+    </ns11:Status>
+    <ns3:Assertion Version="2.0" ID="_f97349a2-2461-4292-a3ad-05de0ad6221f" IssueInstant="2021-09-04T23:46:45.732Z">
+        <ns3:Issuer NameQualifier="urn:e-health-suisse:community-index">urn:oid:1.44.567</ns3:Issuer>
+        <ns3:Statement xsi:type="ns9:XACMLAuthzDecisionStatementType" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <Response>
+                <Result ResourceId="urn:uuid:5a478b92-0b20-40a9-9bee-30ce7d831ca2">
+                    <Decision>Permit</Decision>
+                    <Status>
+                        <StatusCode Value="urn:oasis:names:tc:xacml:1.0:status:ok"/>
+                    </Status>
+                </Result>
+                <Result ResourceId="urn:uuid:a43e8041-5afd-40bf-9c7c-9d9fc6f8c1a8">
+                    <Decision>Permit</Decision>
+                    <Status>
+                        <StatusCode Value="urn:oasis:names:tc:xacml:1.0:status:ok"/>
+                    </Status>
+                </Result>
+                <Result ResourceId="urn:uuid:1d78d91d-73c9-49b7-94f5-76b2a44e1c9c">
+                    <Decision>NotApplicable</Decision>
+                    <Status>
+                        <StatusCode Value="urn:oasis:names:tc:xacml:1.0:status:ok"/>
+                    </Status>
+                </Result>
+            </Response>
+        </ns3:Statement>
+    </ns3:Assertion>
+</ns11:Response>

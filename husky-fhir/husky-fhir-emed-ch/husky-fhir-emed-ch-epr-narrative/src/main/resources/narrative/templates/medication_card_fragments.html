@@ -7,33 +7,6 @@
   ~ on the basis of the eHealth Connector opensource project from June 28, 2021,
   ~ whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
   */-->
-<table th:fragment="table(treatments, lang)">
-    <thead>
-        <tr>
-            <td rowspan="2" colspan="2">Nom du médicament</td>
-            <td colspan="4">Dosage</td>
-            <td rowspan="2">Commentaire</td>
-            <td rowspan="2">Voie et localisation</td>
-        </tr>
-        <tr>
-            <td>Matin</td>
-            <td>Midi</td>
-            <td>Soir</td>
-            <td>Nuit</td>
-        </tr>
-    </thead>
-    <th:block th:each="statements: ${treatments}">
-        <th:block th:insert="~{::treatmentPlan(${statements.value}, ${lang})}"/>
-    </th:block>
-    <th:block th:if="${treatments.isEmpty()}">
-        <tbody>
-            <tr>
-                <td colspan="8" class="no-treatment">Aucun traitement</td>
-            </tr>
-        </tbody>
-    </th:block>
-</table>
-
 <th:block th:fragment="treatmentPlan(statements, lang)">
     <tbody class="treatment-plan-body">
         <th:block th:each="statement, iStat: ${statements}">
@@ -45,11 +18,37 @@
 <th:block th:fragment="table-line(medStmt, dosage, index, size, lang)">
     <tr class="statement-row" th:classappend="${(index == 0)? ' treatment-first-row' : ''}">
         <th:block th:if="${index} == 0">
-            <td class="treatment-plan-common-cell" th:rowspan="${size} * 2"/>
+            <td class="treatment-plan-common-cell" th:rowspan="${size}"/>
         </th:block>
         <!-- Nom du médicament -->
-        <td>
-            [[${medStmt.resolveMedication().resolveMedicationName()}]]
+        <td class="medication" th:with="medication=${medStmt.resolveMedication()}">
+            <div class="medication-name">[[${medication.resolveMedicationName()}]]</div>
+            <div class="medication-description">
+                <th:block th:with="activeIngredients=${medication.resolveActiveIngredients()}">
+                    <ul class="medication-active-ingredients" th:unless="${activeIngredients.isEmpty}">
+                        <li th:each="activeIngredient : ${activeIngredients}">
+                            [[${activeIngredient.resolveActiveIngredient().getDisplayName(lang.getLanguageCode())}]]
+                        </li>
+                    </ul>
+                </th:block>
+
+                <div class="treatment-line-period" th:if="${dosage.period().hasStart() and dosage.period().hasEnd()}">
+                    À prendre du
+                    <th:block th:insert="~{datatypes :: date-time(${dosage.period().getStartElement()}, ${lang})}"/>
+                    au
+                    <th:block th:insert="~{datatypes :: date-time(${dosage.period().getEndElement()}, ${lang})}"/>
+                </div>
+                <div class="treatment-line-period" th:if="${dosage.period().hasStart() and not dosage.period().hasEnd()}">
+                    À prendre dès le
+                    <th:block th:insert="~{datatypes :: date-time(${dosage.period().getStartElement()}, ${lang})}"/>
+                </div>
+                <div class="treatment-line-period" th:if="${not dosage.period().hasStart() and dosage.period().hasEnd()}">
+                    À prendre jusqu'au
+                    <th:block th:insert="~{datatypes :: date-time(${dosage.period().getEndElement()}, ${lang})}"/>
+                </div>
+
+                <div class="treatment-line-max-dose" th:if="${dosage.hasMaxDose()}" th:insert="~{datatypes::max-doses(${dosage}, ${lang})}"/>
+            </div>
         </td>
 
         <!-- Dosage -->
@@ -66,10 +65,14 @@
             <td th:insert="~{datatypes :: intake-timing(${dosage.hasNightSimpleEventTiming}, ${lang})}"/>
         </th:block>
         <th:block th:if="${dosage.hasSimpleDose}">
-            <td colspan="4" th:insert="~{datatypes :: simple-dose(${dosage.simpleDose}, ${lang})}"/>
+            <td colspan="4" class="daily-intake">
+                *** <th:block th:insert="~{datatypes :: simple-dose(${dosage.simpleDose}, ${lang})}"/> par jour ***
+            </td>
         </th:block>
         <th:block th:unless="${dosage.hasIntakes or dosage.hasSimpleEventTimings or dosage.hasSimpleDose}">
-            <td colspan="4" th:text="${dosage.patientInstructions}"/>
+            <td colspan="4" class="daily-instructions">
+                *** <th:block th:text="${dosage.patientInstructions}"/> ***
+            </td>
         </th:block>
 
         <!-- Commentaire (raison et instructions au patient -->
@@ -87,26 +90,6 @@
         <td>
             <th:block th:if="${dosage.hasRouteOfAdministration()}"
                       th:text="${fopase.getMessage(dosage.routeOfAdministration(), lang)}"/>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="8" class="description">
-            <th:block th:if="${dosage.period().hasStart() and dosage.period().hasEnd()}">
-                À prendre du
-                <th:block th:insert="~{datatypes :: date-time(${dosage.period().getStartElement()}, ${lang})}"/>
-                au
-                <th:block th:insert="~{datatypes :: date-time(${dosage.period().getEndElement()}, ${lang})}"/>
-            </th:block>
-            <th:block th:if="${dosage.period().hasStart() and not dosage.period().hasEnd()}">
-                À prendre dès le
-                <th:block th:insert="~{datatypes :: date-time(${dosage.period().getStartElement()}, ${lang})}"/>
-            </th:block>
-            <th:block th:if="${not dosage.period().hasStart() and dosage.period().hasEnd()}">
-                À prendre jusqu'au
-                <th:block th:insert="~{datatypes :: date-time(${dosage.period().getEndElement()}, ${lang})}"/>
-            </th:block>
-
-            <th:block th:if="${dosage.hasMaxDose()}" th:insert="~{datatypes::max-doses(${dosage}, ${lang})}"/>
         </td>
     </tr>
 </th:block>

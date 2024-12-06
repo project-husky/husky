@@ -43,7 +43,7 @@ public abstract class ServerTestHelper extends InitializerTestHelper {
 
 	private static int httpPort;
 
-	private static ServerBootstrap bootstrap;
+	protected static ServerBootstrap bootstrap;
 
 	protected static int getHttpPort() {
 		return httpPort;

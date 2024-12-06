@@ -11,7 +11,7 @@
 package org.projecthusky.communication.requests.xds;
 
 import java.util.List;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Singular;
@@ -29,7 +29,7 @@ public class XdsProvideAndRetrieveDocumentSetQuery {
   private List<XdsDocumentWithMetadata> documentWithMetadata;
   @NotNull
   private SubmissionSetMetadata submissionSetMetadata;
-  @NotNull
+  /** may be null for testing environments like the EPD Playground */
   private SecurityHeaderElement xuaToken;
   @NotNull
   private Destination destination;

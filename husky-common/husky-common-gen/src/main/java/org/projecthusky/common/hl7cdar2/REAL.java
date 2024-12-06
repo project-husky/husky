@@ -16,7 +16,7 @@
 
 package org.projecthusky.common.hl7cdar2;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * Fractional numbers. Typically used whenever quantities are measured, estimated, or computed from other real numbers.

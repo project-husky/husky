@@ -87,7 +87,7 @@ public class PdfA12Validator {
                     return new FailedValidationResult(parser.getFlavour(), "The PDF does not conform to PDF/A-1 or " +
                             "PDF/A-2 levels");
                 }
-                try (final var validator = foundry.createFailFastValidator(parser.getFlavour(), 1)) {
+                try (final var validator = foundry.createFailFastValidator(parser.getFlavour(), 1, 1, false, true, false)) {
                     return validator.validate(parser);
                 }
             } catch (final EncryptedPdfException e) {

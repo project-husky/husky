@@ -32,7 +32,7 @@ import lombok.ToString;
 public class XdsDocumentSetRequest {
 	@NonNull
 	private Destination destination;
-	@NonNull
+	/** may be null for testing environments like the EPD Playground */
 	private SecurityHeaderElement xuaToken;
 	@Singular
 	private List<DocumentRequest> documentRequests;

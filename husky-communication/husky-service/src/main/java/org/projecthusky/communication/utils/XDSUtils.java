@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.ZonedDateTime;
 import java.util.UUID;
-import javax.activation.DataHandler;
-import javax.mail.util.ByteArrayDataSource;
+import jakarta.activation.DataHandler;
+import jakarta.mail.util.ByteArrayDataSource;
 import org.openehealth.ipf.commons.core.OidGenerator;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Association;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationLabel;
@@ -17,7 +17,6 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp.Precision;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
-import org.projecthusky.common.communication.Destination;
 import org.projecthusky.common.communication.DocumentMetadata;
 import org.projecthusky.common.communication.DocumentMetadata.DocumentMetadataExtractionMode;
 import org.projecthusky.common.enums.DocumentDescriptor;
@@ -49,6 +48,80 @@ public class XDSUtils {
     } catch (final IOException e) {
       log.error("Error adding document from inputstream.", e);
       log.error(e.getMessage(), e);
+    }
+  }
+
+  public static void generateDefaultSubmissionSetAttributes(ProvideAndRegisterDocumentSet txnData) {
+    if (txnData.getSubmissionSet() == null) {
+      txnData.setSubmissionSet(new SubmissionSet());
+    }
+
+    // Create SubmissionSet
+    final var subSet = txnData.getSubmissionSet();
+
+    if (txnData.getDocuments() != null && !txnData.getDocuments().isEmpty()) {
+      setSubSetDetailsFromDocument(subSet, txnData);
+    } else if (txnData.getFolders() != null && !txnData.getFolders().isEmpty()) {
+      setSubSetDetailsFromFolder(subSet, txnData);
+    }
+  }
+
+  public static void linkDocumentEntryWithSubmissionSet(ProvideAndRegisterDocumentSet txnData) {
+    for (Document document : txnData.getDocuments()) {
+      // link document entry to submission set
+      var association = new Association();
+      association.setAssociationType(AssociationType.HAS_MEMBER);
+      association.setSourceUuid(txnData.getSubmissionSet().getEntryUuid());
+      association.setTargetUuid(document.getDocumentEntry().getEntryUuid());
+      association.setLabel(AssociationLabel.ORIGINAL);
+      association.assignEntryUuid();
+
+      txnData.getAssociations().add(association);
+    }
+
+    for (Folder folder : txnData.getFolders()) {
+      // link folder to submission set
+      var association = new Association(AssociationType.HAS_MEMBER,
+          txnData.getSubmissionSet().getEntryUuid(), txnData.getSubmissionSet().getEntryUuid(),
+          folder.getEntryUuid());
+      association.assignEntryUuid();
+
+      txnData.getAssociations().add(association);
+    }
+  }
+
+  protected static String getSourceId(Identifiable patientId) {
+    if (patientId != null) {
+      return patientId.getAssigningAuthority().getUniversalId();
+    }
+    return EhcVersions.getCurrentVersion().getOid();
+  }
+
+  protected static void setGeneralSubSetDetails(SubmissionSet subSet, Identifiable patientId) {
+    // set submission time
+    if (subSet.getSubmissionTime() == null) {
+      subSet.setSubmissionTime(new Timestamp(ZonedDateTime.now(), Precision.SECOND));
+    }
+
+    if (subSet.getEntryUuid() == null) {
+      subSet.setEntryUuid(UUID.randomUUID().toString());
+    }
+
+    if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
+
+      if (subSet.getUniqueId() == null) {
+        subSet.assignUniqueId();
+      }
+
+      // set submission set source id
+      if (subSet.getSourceId() == null) {
+        subSet.setSourceId(getSourceId(patientId));
+      }
+    }
+
+    // Use the PatientId of the first Document for the Submission set ID
+    if (subSet.getPatientId() == null) {
+      subSet.setPatientId(patientId);
     }
   }
 
@@ -118,22 +191,6 @@ public class XDSUtils {
     }
   }
 
-  public static void generateDefaultSubmissionSetAttributes(ProvideAndRegisterDocumentSet txnData) {
-
-    if (txnData.getSubmissionSet() == null) {
-      txnData.setSubmissionSet(new SubmissionSet());
-    }
-
-    // Create SubmissionSet
-    final var subSet = txnData.getSubmissionSet();
-
-    if (txnData.getDocuments() != null && !txnData.getDocuments().isEmpty()) {
-      setSubSetDetailsFromDocument(subSet, txnData);
-    } else if (txnData.getFolders() != null && !txnData.getFolders().isEmpty()) {
-      setSubSetDetailsFromFolder(subSet, txnData);
-    }
-  }
-
   private static void setSubSetDetailsFromDocument(SubmissionSet subSet, ProvideAndRegisterDocumentSet txnData) {
     log.info("count of documents {}", txnData.getDocuments().size());
     for (Document document : txnData.getDocuments()) {
@@ -165,86 +222,6 @@ public class XDSUtils {
       }
 
       setGeneralSubSetDetails(subSet, folder.getPatientId());
-    }
-  }
-
-  protected static void setGeneralSubSetDetails(SubmissionSet subSet, Identifiable patientId) {
-    // set submission time
-    if (subSet.getSubmissionTime() == null) {
-      subSet.setSubmissionTime(new Timestamp(ZonedDateTime.now(), Precision.SECOND));
-    }
-
-    if (subSet.getEntryUuid() == null) {
-      subSet.setEntryUuid(UUID.randomUUID().toString());
-    }
-
-    if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
-
-      if (subSet.getUniqueId() == null) {
-        subSet.assignUniqueId();
-      }
-
-      // set submission set source id
-      if (subSet.getSourceId() == null) {
-        subSet.setSourceId(getSourceId(patientId));
-      }
-    }
-
-    // Use the PatientId of the first Document for the Submission set ID
-    if (subSet.getPatientId() == null) {
-      subSet.setPatientId(patientId);
-    }
-  }
-
-  protected static String getSourceId(Identifiable patientId) {
-    if (patientId != null) {
-      return patientId.getAssigningAuthority().getUniversalId();
-    } else {
-      return EhcVersions.getCurrentVersion().getOid();
-    }
-  }
-
-  public static void setDefaultKeystoreTruststore(Destination dest) {
-    if (dest.getKeyStore() == null) {
-      System.clearProperty("javax.net.ssl.keyStore");
-      System.clearProperty("javax.net.ssl.keyStorePassword");
-      System.clearProperty("javax.net.ssl.keyStoreType");
-      System.clearProperty("javax.net.ssl.trustStore");
-      System.clearProperty("javax.net.ssl.trustStorePassword");
-      System.clearProperty("javax.net.ssl.trustStoreType");
-    } else {
-      System.setProperty("javax.net.ssl.keyStore", dest.getKeyStore());
-      System.setProperty("javax.net.ssl.keyStorePassword", dest.getKeyStorePassword());
-      System.setProperty("javax.net.ssl.keyStoreType", dest.getKeyStoreType());
-      System.setProperty("javax.net.ssl.trustStore", dest.getTrustStore());
-      System.setProperty("javax.net.ssl.trustStorePassword", dest.getTrustStorePassword());
-      System.setProperty("javax.net.ssl.trustStoreType", dest.getTrustStoreType());
-    }
-  }
-
-  public static void linkDocumentEntryWithSubmissionSet(ProvideAndRegisterDocumentSet txnData) {
-
-    for (Document document : txnData.getDocuments()) {
-      // link document entry to submission set
-      var association = new Association();
-
-      association.setAssociationType(AssociationType.HAS_MEMBER);
-      association.setSourceUuid(txnData.getSubmissionSet().getEntryUuid());
-      association.setTargetUuid(document.getDocumentEntry().getEntryUuid());
-      association.setLabel(AssociationLabel.ORIGINAL);
-      association.assignEntryUuid();
-
-      txnData.getAssociations().add(association);
-    }
-
-    for (Folder folder : txnData.getFolders()) {
-      // link folder to submission set
-      var association = new Association(AssociationType.HAS_MEMBER,
-          txnData.getSubmissionSet().getEntryUuid(), txnData.getSubmissionSet().getEntryUuid(),
-          folder.getEntryUuid());
-      association.assignEntryUuid();
-
-      txnData.getAssociations().add(association);
     }
   }
 }

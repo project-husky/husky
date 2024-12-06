@@ -10,7 +10,6 @@
 package org.projecthusky.fhir.emed.ch.epr.enums;
 
 import java.util.Objects;
-import javax.annotation.processing.Generated;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;

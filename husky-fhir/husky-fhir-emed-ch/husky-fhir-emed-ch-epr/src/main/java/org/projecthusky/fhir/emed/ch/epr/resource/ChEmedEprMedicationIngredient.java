@@ -23,6 +23,14 @@ public class ChEmedEprMedicationIngredient extends Medication.MedicationIngredie
     }
 
     /**
+     * Constructor from {@link Medication.MedicationIngredientComponent} object.
+     * @param ingredientComponent the ingredient
+     */
+    public ChEmedEprMedicationIngredient(final Medication.MedicationIngredientComponent ingredientComponent) {
+        ingredientComponent.copyValues(this);
+    }
+
+    /**
      * Resolves the dose per unit.
      *
      * @return the dose per unit.

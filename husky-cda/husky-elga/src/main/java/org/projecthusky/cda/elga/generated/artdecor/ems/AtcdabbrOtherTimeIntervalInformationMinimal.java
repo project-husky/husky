@@ -12,7 +12,7 @@ package org.projecthusky.cda.elga.generated.artdecor.ems;
 import java.util.ArrayList;
 
 import javax.annotation.processing.Generated;
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 import org.projecthusky.common.hl7cdar2.IVLTS;

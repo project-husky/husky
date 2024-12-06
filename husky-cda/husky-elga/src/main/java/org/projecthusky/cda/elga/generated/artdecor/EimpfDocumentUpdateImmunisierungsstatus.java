@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.processing.Generated;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 import org.projecthusky.common.hl7cdar2.CD;
 import org.projecthusky.common.hl7cdar2.CS;

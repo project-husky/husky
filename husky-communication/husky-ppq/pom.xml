@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>husky-ppq</artifactId>
 	<name>Husky CH:PPQ</name>
@@ -7,10 +9,32 @@
 	<parent>
 		<groupId>org.projecthusky.communication</groupId>
 		<artifactId>husky-communication</artifactId>
-		<version>2.6.0-SNAPSHOT</version>
+		<version>3.0.3-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.projecthusky.communication</groupId>
+			<artifactId>husky-xua-gen-impl</artifactId>
+			<version>3.0.3-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projecthusky.communication</groupId>
+			<artifactId>husky-xua-ch-impl</artifactId>
+			<version>3.0.3-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>xpp3</groupId>
+					<artifactId>xpp3</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.projecthusky.communication</groupId>
+			<artifactId>husky-communication-gen</artifactId>
+			<version>3.0.3-SNAPSHOT</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.opensaml</groupId>
 			<artifactId>opensaml-xacml-saml-impl</artifactId>
@@ -31,32 +55,10 @@
 			</exclusions>
 		</dependency>
 
-
 		<dependency>
-			<groupId>org.projecthusky.communication</groupId>
-			<artifactId>husky-xua-gen-impl</artifactId>
+			<groupId>jakarta.xml.ws</groupId>
+			<artifactId>jakarta.xml.ws-api</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.projecthusky.communication</groupId>
-			<artifactId>husky-xua-ch-impl</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>xpp3</groupId>
-					<artifactId>xpp3</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.projecthusky.communication</groupId>
-			<artifactId>husky-communication-gen</artifactId>
-		</dependency>
-
-		<!--
-		<dependency>
-			<groupId>javax.xml.ws</groupId>
-			<artifactId>jaxws-api</artifactId>
-		</dependency>
-		-->
 		<!-- test stuff -->
 		<dependency>
 			<groupId>net.bytebuddy</groupId>

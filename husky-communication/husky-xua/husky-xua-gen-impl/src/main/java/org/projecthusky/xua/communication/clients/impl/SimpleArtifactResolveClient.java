@@ -29,10 +29,12 @@ import org.projecthusky.xua.exceptions.DeserializeException;
 import org.projecthusky.xua.saml2.ArtifactResolve;
 import org.projecthusky.xua.saml2.ArtifactResponse;
 import org.projecthusky.xua.saml2.impl.ArtifactResolveImpl;
+
+import net.shibboleth.shared.xml.XMLParserException;
+
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.opensaml.core.xml.io.MarshallingException;
 
-import net.shibboleth.utilities.java.support.xml.XMLParserException;
 
 /**
  * <!-- @formatter:off -->

@@ -12,10 +12,11 @@
 package org.projecthusky.communication.ch.camel.chpharm1.requests.query;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Code;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntryType;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.TimeRange;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 import java.io.Serial;
 import java.util.List;
 import java.util.Objects;
@@ -44,6 +45,11 @@ public class ChFindMedicationCardQuery extends ChPharmacyDocumentsQuery {
      */
     @Nullable
     private Boolean includeNonActive;
+    /**
+     * Specific paper/print format for the PMLC PDF (original representation).
+     */
+    @Nullable
+    private Code paperFormat;
 
     /**
      * Constructs the query.
@@ -87,6 +93,10 @@ public class ChFindMedicationCardQuery extends ChPharmacyDocumentsQuery {
     public Boolean getIncludeNonActive() { return includeNonActive; }
     public void setIncludeNonActive(@Nullable final Boolean includeNonActive) {this.includeNonActive = includeNonActive;}
 
+    @Nullable
+    public Code getPaperFormat() { return paperFormat; }
+    public void setPaperFormat(@Nullable final Code paperFormat) {this.paperFormat = paperFormat;}
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
@@ -95,12 +105,13 @@ public class ChFindMedicationCardQuery extends ChPharmacyDocumentsQuery {
                 && Objects.equals(serviceStart, that.serviceStart)
                 && Objects.equals(serviceEnd, that.serviceEnd)
                 && Objects.equals(languageCode, that.languageCode)
-                && Objects.equals(includeNonActive, that.includeNonActive);
+                && Objects.equals(includeNonActive, that.includeNonActive)
+                && Objects.equals(paperFormat, that.paperFormat);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), documentEntryTypes, serviceStart, serviceEnd, languageCode, includeNonActive);
+        return Objects.hash(super.hashCode(), documentEntryTypes, serviceStart, serviceEnd, languageCode, includeNonActive, paperFormat);
     }
 
     @Override
@@ -111,6 +122,7 @@ public class ChFindMedicationCardQuery extends ChPharmacyDocumentsQuery {
                 ", serviceEnd=" + this.serviceEnd +
                 ", languageCode='" + this.languageCode + '\'' +
                 ", includeNonActive='" + this.includeNonActive + '\'' +
+                ", paperFormat='" + this.paperFormat + '\'' +
                 ", type=" + this.type +
                 ", homeCommunityId='" + this.homeCommunityId + '\'' +
                 ", extraParameters=" + this.extraParameters +

@@ -18,7 +18,7 @@ package org.projecthusky.common.hl7cdar2;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 /**
  * Binary data is a raw block of bits. Binary data is a protected type that MUST not be used outside the data type

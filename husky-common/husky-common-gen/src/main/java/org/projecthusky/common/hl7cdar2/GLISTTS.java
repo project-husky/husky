@@ -16,7 +16,7 @@
 
 package org.projecthusky.common.hl7cdar2;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 import java.math.BigInteger;
 
 /**

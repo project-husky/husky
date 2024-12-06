@@ -55,7 +55,7 @@ public class ChEprValidationResult {
 
     public static ChEprValidationResult invalid(final ValidationContext context,
                                                 final String message) {
-        context.setValidationFailureMessage(message);
+        context.getValidationFailureMessages().add(message);
         return new ChEprValidationResult(ValidationResult.INVALID, context);
     }
 

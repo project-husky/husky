@@ -1,71 +1,81 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>org.projecthusky.validation.service</groupId>
-    <artifactId>husky-validation-service</artifactId>
-    <name>Husky Validation Service</name>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.projecthusky.validation.service</groupId>
+	<artifactId>husky-validation-service</artifactId>
+	<name>Husky Validation Service</name>
 
-    <parent>
-        <groupId>org.projecthusky.validation</groupId>
-        <artifactId>husky-validation</artifactId>
-        <version>2.6.0-SNAPSHOT</version>
-    </parent>
+	<parent>
+		<groupId>org.projecthusky.validation</groupId>
+		<artifactId>husky-validation</artifactId>
+		<version>3.0.3-SNAPSHOT</version>
+	</parent>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.projecthusky.common</groupId>
-            <artifactId>husky-common-gen</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.verapdf</groupId>
-            <artifactId>validation-model</artifactId>
-            <exclusions>
-                <!-- Exclude unused dependencies -->
-                <exclusion>
-                    <groupId>net.java.dev.stax-utils</groupId>
-                    <artifactId>stax-utils</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.verapdf</groupId>
-                    <artifactId>feature-reporting</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.verapdf</groupId>
-                    <artifactId>metadata-fixer</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+	<dependencies>
+		<dependency>
+			<groupId>org.projecthusky.common</groupId>
+			<artifactId>husky-common-gen</artifactId>
+			<version>3.0.3-SNAPSHOT</version>
+		</dependency>
 
-        <!-- Schematron validator (Apache 2.0) -->
-        <dependency>
-            <groupId>com.helger.schematron</groupId>
-            <artifactId>ph-schematron-api</artifactId>
-            <exclusions>
-                <!-- Exclude unused dependencies -->
-                <exclusion>
-                    <groupId>org.apache.httpcomponents</groupId>
-                    <artifactId>*</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>xml-apis</groupId>
-                    <artifactId>xml-apis</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.helger.schematron</groupId>
-            <artifactId>ph-schematron-xslt</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>org.verapdf</groupId>
+			<artifactId>validation-model</artifactId>
+			<exclusions>
+				<!-- Exclude unused dependencies or for which newer versions
+				already exist -->
+				<exclusion>
+					<groupId>net.java.dev.stax-utils</groupId>
+					<artifactId>stax-utils</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.verapdf</groupId>
+					<artifactId>feature-reporting</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.verapdf</groupId>
+					<artifactId>metadata-fixer</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-databind</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+		<!-- Schematron validator (Apache 2.0) -->
+		<dependency>
+			<groupId>com.helger.schematron</groupId>
+			<artifactId>ph-schematron-api</artifactId>
+			<exclusions>
+				<!-- Exclude unused dependencies -->
+				<exclusion>
+					<groupId>org.apache.httpcomponents</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.helger.schematron</groupId>
+			<artifactId>ph-schematron-xslt</artifactId>
+		</dependency>
+
+		<!-- test dependencies -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>
