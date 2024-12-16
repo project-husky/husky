@@ -48,6 +48,25 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
     protected ChEmedExtPrescription prescription;
 
     /**
+     * The identifier of the last document to have <i>touched</i> the treatment instance.
+     * <p>
+     *     This extension conveys the identifier of the document that was last considered to consolidate this medication
+     *     statement. For instance, in the case of a treatment instance for which the last document was a PADV that
+     *     modified it, this extension will convey the identifier of said PADV document.
+     * </p>
+     * <p>
+     *     Beside the direct use of being able to retrieve said last document using the identifier, this extension
+     *     allows systems reading a PMLC document to easily detect whether a treatment instance has changed since the
+     *     last read/sync with the eMedication service, by checking whether the identifier of the lastConsideredDocument
+     *     has changed or not.
+     * </p>
+     */
+    @Nullable
+    @Child(name = "lastConsideredDocument", min = 1)
+    @Extension(url = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-last-considered-document", definedLocally = false)
+    protected Identifier lastConsideredDocument;
+
+    /**
      * Empty constructor for the parser.
      */
     public ChEmedEprMedicationStatementPmlc() {
@@ -88,6 +107,18 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
     }
 
     /**
+     * Gets the lats considered document element. If it does not exist, it is created empty.
+     *
+     * @return The last considered document element.
+     */
+    public Identifier getLastConsideredDocumentElement() {
+        if (this.lastConsideredDocument == null) {
+            this.lastConsideredDocument = new Identifier();
+        }
+        return this.lastConsideredDocument;
+    }
+
+    /**
      * Sets the treatment plan reference.
      *
      * @param treatmentPlan the treatment plan reference.
@@ -106,6 +137,17 @@ public class ChEmedEprMedicationStatementPmlc extends ChEmedEprMedicationStateme
      */
     public ChEmedEprMedicationStatementPmlc setTreatmentPlanElement(final ChEmedExtPrescription prescription) {
         this.prescription = prescription;
+        return this;
+    }
+
+    /**
+     * Sets the last considered document identifier.
+     *
+     * @param lastConsideredDocument the identifier of the last document on this treatment instance/line.
+     * @return this.
+     */
+    public ChEmedEprMedicationStatementPmlc setLastConsideredDocumentElement(final Identifier lastConsideredDocument) {
+        this.lastConsideredDocument = lastConsideredDocument;
         return this;
     }
 
