@@ -69,23 +69,25 @@ public enum CdTyp9 implements EMediplanEnum<String>{
     }
 
     /**
-     * Converts a {@link RegularUnitCodeAmbu} unit to a {@link CdTyp9} unit. The mapping on which this conversion is
-     * based can be found
-     * <a href="https://docs.google.com/spreadsheets/d/1lJeAPtZ7bO3OOarjSVolpn9Hl3y1Xlp-WOR_37fa6R8">here</a>.
+     * Converts a {@link RegularUnitCodeAmbu} unit to a {@link CdTyp9} unit, based on the
+     * <a href="http://fhir.ch/ig/ch-emed-epr/ConceptMap/CHEMEDEPRAmountQuantityUnitCodeToCdTyp9">
+     * CHEMEDEPRAmountQuantityUnitCodeToCdTyp9</a> concept map.
      *
      * @param unit The {@link RegularUnitCodeAmbu} unit to be converted.
      * @return The resulting {@link CdTyp9} unit.
      */
     public static CdTyp9 fromRegularUnitCodeAmbu(final RegularUnitCodeAmbu unit){
         return switch(unit) {
-            case AMPULE, APPLICATOR, BAG, BARREL, BLOCK, CACHET, CAPSULE, CHEWING_GUM, CFU, CM, CM2, CM3, CONTAINER, CYLINDER, DRESSING, FILM,
+            case AMPULE, APPLICATOR, BARREL, BLOCK, CACHET, CAPSULE, CHEWING_GUM, CFU, CM, CM2, CONTAINER, CYLINDER, DRESSING, FILM,
                  IMPLANT, INHALER, INSERT, JAR, LYOPHILISATE, MATRIX, MEQ, MM2, NL, PAD, PASTILLE, PEN, PESSARY, PILLULE,
-                 PLUG, PPM, POUCH, SPONGE, STICK, STRAW, STRIP, SUPPOSITORY, SYSTEM, TAMPON, THREAD, VESSEL, VIAL -> UNKNOWN;
+                 PLUG, PPM, SPONGE, STICK, STRAW, STRIP, SUPPOSITORY, SYSTEM, TAMPON, THREAD, VESSEL, VIAL -> UNKNOWN;
             case ACTUATION -> ACTUATION;
+            case BAG -> SACHET;
             case BQ -> BECQUEREL;
             case BLISTER -> BLISTER;
             case BOTTLE -> BOTTLE;
             case CARTRIDGE -> CARTRIDGE;
+            case CM3 -> MILLILITRE;
             case CUP -> CUP;
             case DOSE -> DOSE;
             case DROP -> DROP;
@@ -112,6 +114,7 @@ public enum CdTyp9 implements EMediplanEnum<String>{
             case PIECE -> PIECE;
             case PIPETTE -> PIPETTE;
             case PLASTER -> PLASTER;
+            case POUCH -> SACHET;
             case SACHET -> SACHET;
             case SPOONFUL -> SPOONFUL;
             case SYRINGE -> SYRINGE;
