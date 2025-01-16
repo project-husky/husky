@@ -19,7 +19,7 @@ import org.openehealth.ipf.commons.ihe.xds.core.validate.*;
 import org.openehealth.ipf.commons.ihe.xds.core.validate.query.*;
 import org.projecthusky.communication.ch.camel.chpharm1.requests.query.ChPharm1QueryType;
 import org.projecthusky.communication.ch.camel.validate.CodeEnumValidation;
-import org.projecthusky.communication.ch.enums.beta.FormatCode;
+import org.projecthusky.communication.ch.enums.stable.FormatCode;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -105,9 +105,9 @@ public class ChPharm1RequestValidator implements Validator<EbXMLAdhocQueryReques
                     new StatusValidation(DOC_ENTRY_STATUS),
                     new CodeValidation(DOC_ENTRY_FORMAT_CODE),
                     new CodeEnumValidation(DOC_ENTRY_FORMAT_CODE, true, EnumSet.of(
-                            FormatCode.CH_EMED_MEDICATION_TREATMENT_PLAN,
-                            FormatCode.CH_EMED_MEDICATION_PRESCRIPTION,
-                            FormatCode.CH_EMED_MEDICATION_DISPENSE
+                            FormatCode.CH_EMED_MEDICATION_TREATMENT_PLAN_DOCUMENT,
+                            FormatCode.CH_EMED_MEDICATION_PRESCRIPTION_DOCUMENT,
+                            FormatCode.CH_EMED_MEDICATION_DISPENSE_DOCUMENT
                     )),
             };
             case CH_FIND_MEDICATION_LIST -> new QueryParameterValidation[]{
@@ -117,9 +117,9 @@ public class ChPharm1RequestValidator implements Validator<EbXMLAdhocQueryReques
                     new TimestampValidation(DOC_ENTRY_SERVICE_END_FROM),
                     new TimestampValidation(DOC_ENTRY_SERVICE_END_TO),
                     new CodeEnumValidation(DOC_ENTRY_FORMAT_CODE, true, EnumSet.of(
-                            FormatCode.CH_EMED_MEDICATION_TREATMENT_PLAN,
-                            FormatCode.CH_EMED_MEDICATION_PRESCRIPTION,
-                            FormatCode.CH_EMED_MEDICATION_DISPENSE
+                            FormatCode.CH_EMED_MEDICATION_TREATMENT_PLAN_DOCUMENT,
+                            FormatCode.CH_EMED_MEDICATION_PRESCRIPTION_DOCUMENT,
+                            FormatCode.CH_EMED_MEDICATION_DISPENSE_DOCUMENT
                     )),
                     new StatusValidation(DOC_ENTRY_STATUS),
                     new DocumentEntryTypeValidation(),
