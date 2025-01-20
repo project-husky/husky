@@ -82,6 +82,7 @@ public enum CdTyp9 implements EMediplanEnum<String>{
                  IMPLANT, INHALER, INSERT, JAR, LYOPHILISATE, MATRIX, MEQ, MM2, NL, PAD, PASTILLE, PEN, PESSARY, PILLULE,
                  PLUG, PPM, SPONGE, STICK, STRAW, STRIP, SUPPOSITORY, SYSTEM, TAMPON, THREAD, VESSEL, VIAL -> UNKNOWN;
             case ACTUATION -> ACTUATION;
+            case APPLICATION_UNIT_OF_PRODUCT_USAGE_QUALIFIER_VALUE -> APPLICATION;
             case BAG -> SACHET;
             case BQ -> BECQUEREL;
             case BLISTER -> BLISTER;
@@ -107,7 +108,7 @@ public enum CdTyp9 implements EMediplanEnum<String>{
             case MMOL -> MILLIMOLE;
             case MOL -> MOLE;
             case NG -> NANOGRAM;
-            //case NMOL -> NANOMOLE;
+            case NMOL -> NANOMOLE;
             case PACKAGE -> PACKAGE;
             case PATCH -> PLASTER;
             case PERCENT -> PERCENT;
