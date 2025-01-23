@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ChEMediplanConverterTest {
     @Test
     void convertAndValidateMedicationCard() throws IOException {
-        final var xml = new String(getClass().getResourceAsStream("/2-7-MedicationCard.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/Bundle-2-7-MedicationCard-UUIDfullUrl.xml").readAllBytes());
         final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
         final var document = parser.parse(xml, EmedDocumentType.PMLC);
         assertInstanceOf(ChEmedEprDocumentPmlc.class, document);

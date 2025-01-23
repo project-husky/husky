@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Bundle xmlns="http://hl7.org/fhir">
+  <id value="2-1-MedicationList"/>
+  <meta>
+    <lastUpdated value="2020-03-10T12:31:59.738+00:00"/>
+    <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationlist"/>
+  </meta>
+  <identifier>
+    <system value="urn:ietf:rfc:3986"/>
+    <value value="urn:uuid:67a4e752-c39a-4620-9516-a02b36ff5061"/>
+  </identifier>
+  <type value="document"/>
+  <timestamp value="2012-02-04T13:55:00+01:00"/>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/Composition/2-1-Composition"/>
+    <resource>
+      <Composition>
+        <id value="2-1-Composition"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-composition-medicationlist"/>
+        </meta>
+        <language value="de-CH"/>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml" xml:lang="de-CH" lang="de-CH"><a name="Composition_2-1-Composition"> </a><p class="res-header-id"><b>Generated Narrative: Composition 2-1-Composition</b></p><a name="2-1-Composition"> </a><a name="hc2-1-Composition"> </a><a name="2-1-Composition-en-US"> </a><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Language: de-CH</p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-composition-medicationlist.html">CH EMED Medication List Composition</a></p></div><p><b>identifier</b>: <a href="http://terminology.hl7.org/6.1.0/NamingSystem-uri.html" title="As defined by RFC 3986 (http://www.ietf.org/rfc/rfc3986.txt)(with many schemes defined in many RFCs). For OIDs and UUIDs, use the URN form (urn:oid:(note: lowercase) and urn:uuid:). See http://www.ietf.org/rfc/rfc3001.txt and http://www.ietf.org/rfc/rfc4122.txt 
+
+This oid is used as an identifier II.root to indicate the the extension is an absolute URI (technically, an IRI). Typically, this is used for OIDs and GUIDs. Note that when this OID is used with OIDs and GUIDs, the II.extension should start with urn:oid or urn:uuid: 
+
+Note that this OID is created to aid with interconversion between CDA and FHIR - FHIR uses urn:ietf:rfc:3986 as equivalent to this OID. URIs as identifiers appear more commonly in FHIR.
+
+This OID may also be used in CD.codeSystem.">Uniform Resource Identifier (URI)</a>/urn:uuid:67a4e752-c39a-4620-9516-a02b36ff5061</p><p><b>status</b>: Final</p><p><b>type</b>: <span title="Codes:{http://loinc.org 56445-0}, {http://snomed.info/sct 721912009}">Medication summary Document</span></p><p><b>date</b>: 2012-02-04 13:55:00+0100</p><p><b>author</b>: <a href="Device-ExampleDevice.html">Device</a></p><p><b>title</b>: Medikationsliste</p><p><b>confidentiality</b>: normal</p></div>
+        </text>
+        <identifier>
+          <system value="urn:ietf:rfc:3986"/>
+          <value value="urn:uuid:67a4e752-c39a-4620-9516-a02b36ff5061"/>
+        </identifier>
+        <status value="final"/>
+        <type>
+          <coding>
+            <system value="http://loinc.org"/>
+            <code value="56445-0"/>
+            <display value="Medication summary Document"/>
+          </coding>
+          <coding>
+            <system value="http://snomed.info/sct"/>
+            <code value="721912009"/>
+            <display value="Medication summary document (record artifact)"/>
+          </coding>
+        </type>
+        <subject>
+          <reference value="Patient/MonikaWegmueller"/>
+        </subject>
+        <date value="2012-02-04T13:55:00+01:00"/>
+        <author>
+          <reference value="Device/ExampleDevice"/>
+        </author>
+        <title value="Medikationsliste"/>
+        <confidentiality value="N">
+          <extension url="http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-confidentialitycode">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://snomed.info/sct"/>
+                <code value="17621005"/>
+                <display value="Normal (qualifier value)"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+        </confidentiality>
+        <section>
+          <title value="Medikamentenliste"/>
+          <code>
+            <coding>
+              <system value="http://loinc.org"/>
+              <code value="10160-0"/>
+              <display value="History of Medication use Narrative"/>
+            </coding>
+          </code>
+          <text>
+            <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><table><thead><tr><th>Präpartename</th><th>Wirkstoffname</th><th>Galenische Form</th><th>Dosis pro Einheit</th><th>Dos.Morgen</th><th>Dos.Mittag</th><th>Dos.Abend</th><th>Dos.Nacht</th><th>Verabreichungsweg</th><th>Kommentar</th><th>Anwendungsdauer</th><th>Behandlungsgrund</th></tr></thead><tbody><tr id="mtp.1"><td id="mtp.1.brandedmedication">Triatec</td><td id="mtp.1.ingredient">Ramipril</td><td id="mtp.1.packageform">Tbl</td><td id="mtp.1.dosequantity">2.5 mg</td><td id="mtp.1.dosagemorning">0.5</td><td id="mtp.1.dosagelunch">0</td><td id="mtp.1.dosageevening">0</td><td id="mtp.1.dosagenight">0</td><td id="mtp.1.routecode">oral</td><td id="mtp.1.note"/><td id="mtp.1.datefromto"/><td id="mtp.1.reason">Bluthochdruck</td></tr></tbody></table></div>
+          </text>
+          <entry>
+            <reference value="MedicationStatement/2-1-MedStatTriatec"/>
+          </entry>
+          <entry>
+            <reference value="MedicationDispense/2-1-MedDispTriatec"/>
+          </entry>
+        </section>
+      </Composition>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/Device/ExampleDevice"/>
+    <resource>
+      <Device>
+        <id value="ExampleDevice"/>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="Device_ExampleDevice"> </a><p class="res-header-id"><b>Generated Narrative: Device ExampleDevice</b></p><a name="ExampleDevice"> </a><a name="hcExampleDevice"> </a><a name="ExampleDevice-en-US"> </a><h3>DeviceNames</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Name</b></td><td><b>Type</b></td></tr><tr><td style="display: none">*</td><td>Device name</td><td>Manufacturer name</td></tr></table></div>
+        </text>
+        <deviceName>
+          <name value="Device name"/>
+          <type value="manufacturer-name"/>
+        </deviceName>
+      </Device>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/Patient/MonikaWegmueller"/>
+    <resource>
+      <Patient>
+        <id value="MonikaWegmueller"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-patient-epr"/>
+        </meta>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="Patient_MonikaWegmueller"> </a><p class="res-header-id"><b>Generated Narrative: Patient MonikaWegmueller</b></p><a name="MonikaWegmueller"> </a><a name="hcMonikaWegmueller"> </a><a name="MonikaWegmueller-en-US"> </a><p style="border: 1px #661aff solid; background-color: #e6e6ff; padding: 10px;">Monika Wegmüller  Female, DoB: 1943-05-15 ( Medical record number)</p><hr/><table class="grid"><tr><td style="background-color: #f3f5da" title="Ways to contact the Patient">Contact Detail</td><td colspan="3">Wiesenstr. 12 Zürich 8003 CH </td></tr></table></div>
+        </text>
+        <identifier>
+          <type>
+            <coding>
+              <system value="http://terminology.hl7.org/CodeSystem/v2-0203"/>
+              <code value="MR"/>
+            </coding>
+          </type>
+          <system value="urn:oid:2.999.1"/>
+          <value value="11111111"/>
+        </identifier>
+        <name>
+          <family value="Wegmüller"/>
+          <given value="Monika"/>
+        </name>
+        <gender value="female"/>
+        <birthDate value="1943-05-15"/>
+        <address>
+          <line value="Wiesenstr. 12"/>
+          <city value="Zürich"/>
+          <postalCode value="8003"/>
+          <country value="CH"/>
+        </address>
+      </Patient>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/PractitionerRole/FamilienHausarztAtHausarzt"/>
+    <resource>
+      <PractitionerRole>
+        <id value="FamilienHausarztAtHausarzt"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-practitionerrole"/>
+        </meta>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="PractitionerRole_FamilienHausarztAtHausarzt"> </a><p class="res-header-id"><b>Generated Narrative: PractitionerRole FamilienHausarztAtHausarzt</b></p><a name="FamilienHausarztAtHausarzt"> </a><a name="hcFamilienHausarztAtHausarzt"> </a><a name="FamilienHausarztAtHausarzt-en-US"> </a><p><b>practitioner</b>: <a href="Practitioner-FamilienHausarzt.html">Practitioner Familien Hausarzt </a></p><p><b>organization</b>: <a href="Organization-Hausarzt.html">Organization Hausarzt</a></p></div>
+        </text>
+        <practitioner>
+          <reference value="Practitioner/FamilienHausarzt"/>
+        </practitioner>
+        <organization>
+          <reference value="Organization/Hausarzt"/>
+        </organization>
+      </PractitionerRole>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/Practitioner/FamilienHausarzt"/>
+    <resource>
+      <Practitioner>
+        <id value="FamilienHausarzt"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-practitioner"/>
+        </meta>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="Practitioner_FamilienHausarzt"> </a><p class="res-header-id"><b>Generated Narrative: Practitioner FamilienHausarzt</b></p><a name="FamilienHausarzt"> </a><a name="hcFamilienHausarzt"> </a><a name="FamilienHausarzt-en-US"> </a><p><b>identifier</b>: <a href="https://www.gs1.org/standards/id-keys/gln" title="Global Location Number">GLN</a>/7601000234438</p><p><b>name</b>: Familien Hausarzt </p></div>
+        </text>
+        <identifier>
+          <system value="urn:oid:2.51.1.3"/>
+          <value value="7601000234438"/>
+        </identifier>
+        <name>
+          <family value="Hausarzt"/>
+          <given value="Familien"/>
+        </name>
+      </Practitioner>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/Organization/Hausarzt"/>
+    <resource>
+      <Organization>
+        <id value="Hausarzt"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-organization"/>
+        </meta>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="Organization_Hausarzt"> </a><p class="res-header-id"><b>Generated Narrative: Organization Hausarzt</b></p><a name="Hausarzt"> </a><a name="hcHausarzt"> </a><a name="Hausarzt-en-US"> </a><p><b>identifier</b>: <a href="https://www.gs1.org/standards/id-keys/gln" title="Global Location Number">GLN</a>/7601000234438</p><p><b>name</b>: Hausarzt</p><p><b>address</b>: Krankenstrasse 2 Zürich 8005 CH </p></div>
+        </text>
+        <identifier>
+          <system value="urn:oid:2.51.1.3"/>
+          <value value="7601000234438"/>
+        </identifier>
+        <name value="Hausarzt"/>
+        <address>
+          <line value="Krankenstrasse 2"/>
+          <city value="Zürich"/>
+          <postalCode value="8005"/>
+          <country value="CH"/>
+        </address>
+      </Organization>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/MedicationStatement/2-1-MedStatTriatec"/>
+    <resource>
+      <MedicationStatement>
+        <id value="2-1-MedStatTriatec"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-medicationstatement-list"/>
+        </meta>
+        <text>
+          <status value="extensions"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="MedicationStatement_2-1-MedStatTriatec"> </a><p class="res-header-id"><b>Generated Narrative: MedicationStatement 2-1-MedStatTriatec</b></p><a name="2-1-MedStatTriatec"> </a><a name="hc2-1-MedStatTriatec"> </a><a name="2-1-MedStatTriatec-en-US"> </a><blockquote><p><b>CH EMED Extension Treatment Plan</b></p><ul><li>id: <a href="http://terminology.hl7.org/6.1.0/NamingSystem-uri.html" title="As defined by RFC 3986 (http://www.ietf.org/rfc/rfc3986.txt)(with many schemes defined in many RFCs). For OIDs and UUIDs, use the URN form (urn:oid:(note: lowercase) and urn:uuid:). See http://www.ietf.org/rfc/rfc3001.txt and http://www.ietf.org/rfc/rfc4122.txt 
+
+This oid is used as an identifier II.root to indicate the the extension is an absolute URI (technically, an IRI). Typically, this is used for OIDs and GUIDs. Note that when this OID is used with OIDs and GUIDs, the II.extension should start with urn:oid or urn:uuid: 
+
+Note that this OID is created to aid with interconversion between CDA and FHIR - FHIR uses urn:ietf:rfc:3986 as equivalent to this OID. URIs as identifiers appear more commonly in FHIR.
+
+This OID may also be used in CD.codeSystem.">Uniform Resource Identifier (URI)</a>/urn:uuid:7aa20b27-eac0-4fef-a7b9-b10196718b9f</li><li>externalDocumentId: <a href="http://terminology.hl7.org/6.1.0/NamingSystem-uri.html" title="As defined by RFC 3986 (http://www.ietf.org/rfc/rfc3986.txt)(with many schemes defined in many RFCs). For OIDs and UUIDs, use the URN form (urn:oid:(note: lowercase) and urn:uuid:). See http://www.ietf.org/rfc/rfc3001.txt and http://www.ietf.org/rfc/rfc4122.txt 
+
+This oid is used as an identifier II.root to indicate the the extension is an absolute URI (technically, an IRI). Typically, this is used for OIDs and GUIDs. Note that when this OID is used with OIDs and GUIDs, the II.extension should start with urn:oid or urn:uuid: 
+
+Note that this OID is created to aid with interconversion between CDA and FHIR - FHIR uses urn:ietf:rfc:3986 as equivalent to this OID. URIs as identifiers appear more commonly in FHIR.
+
+This OID may also be used in CD.codeSystem.">Uniform Resource Identifier (URI)</a>/urn:uuid:7aa20b27-eac0-4fef-a7b9-b10196718b9f</li></ul></blockquote><p><b>identifier</b>: <a href="http://terminology.hl7.org/6.1.0/NamingSystem-uri.html" title="As defined by RFC 3986 (http://www.ietf.org/rfc/rfc3986.txt)(with many schemes defined in many RFCs). For OIDs and UUIDs, use the URN form (urn:oid:(note: lowercase) and urn:uuid:). See http://www.ietf.org/rfc/rfc3001.txt and http://www.ietf.org/rfc/rfc4122.txt 
+
+This oid is used as an identifier II.root to indicate the the extension is an absolute URI (technically, an IRI). Typically, this is used for OIDs and GUIDs. Note that when this OID is used with OIDs and GUIDs, the II.extension should start with urn:oid or urn:uuid: 
+
+Note that this OID is created to aid with interconversion between CDA and FHIR - FHIR uses urn:ietf:rfc:3986 as equivalent to this OID. URIs as identifiers appear more commonly in FHIR.
+
+This OID may also be used in CD.codeSystem.">Uniform Resource Identifier (URI)</a>/urn:uuid:7aa20b27-eac0-4fef-a7b9-b10196718b9f</p><p><b>status</b>: Active</p><p><b>medication</b>: <a href="#hc2-1-MedStatTriatec/Triatec">Medication TRIATEC Tabl 2.5 mg 20 Stk</a></p><p><b>subject</b>: <a href="Patient-MonikaWegmueller.html">Monika Wegmüller  Female, DoB: 1943-05-15 ( Medical record number)</a></p><p><b>dateAsserted</b>: 2011-11-29 11:00:00+0100</p><p><b>informationSource</b>: <a href="PractitionerRole-FamilienHausarztAtHausarzt.html">PractitionerRole</a></p><p><b>reasonCode</b>: <span title="Codes:">Bluthochdruck</span></p><blockquote><p><b>dosage</b></p><p><b>patientInstruction</b>: -</p><p><b>timing</b>: , ?ngen-6?</p><p><b>route</b>: <span title="Codes:{urn:oid:0.4.0.127.0.16.1.1.2.1 20053000}">zum Einnehmen</span></p><h3>DoseAndRates</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Dose[x]</b></td></tr><tr><td style="display: none">*</td><td>0.5 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT  code732936001 = 'Tablet (unit of presentation)')</span></td></tr></table></blockquote><hr/><blockquote><p class="res-header-id"><b>Generated Narrative: Medication  #Triatec</b></p><a name="2-1-MedStatTriatec/Triatec"> </a><a name="hc2-1-MedStatTriatec/Triatec"> </a><a name="2-1-MedStatTriatec/Triatec-en-US"> </a><p><b>code</b>: <span title="Codes:{urn:oid:2.51.1.1 7680538751228}">TRIATEC Tabl 2.5 mg</span></p><p><b>form</b>: <span title="Codes:{urn:oid:0.4.0.127.0.16.1.1.2.1 10219000}">Tablette</span></p><p><b>amount</b>: 20 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT  code732936001 = 'Tablet (unit of presentation)')</span>/1 Package - unit of product usage (qualifier value)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT  code1681000175101 = 'Package - unit of product usage')</span></p><h3>Ingredients</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Item[x]</b></td><td><b>Strength</b></td></tr><tr><td style="display: none">*</td><td><span title="Codes:{http://snomed.info/sct 386872004}">Ramipril</span></td><td>2.5 milligram<span style="background: LightGoldenRodYellow"> (Details: UCUM  codemg = 'mg')</span>/1 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT  code732936001 = 'Tablet (unit of presentation)')</span></td></tr></table></blockquote></div>
+        </text>
+        <contained>
+          <Medication>
+            <id value="Triatec"/>
+            <meta>
+              <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-medication"/>
+            </meta>
+            <code>
+              <coding>
+                <system value="urn:oid:2.51.1.1"/>
+                <code value="7680538751228"/>
+                <display value="TRIATEC Tabl 2.5 mg 20 Stk"/>
+              </coding>
+              <text value="TRIATEC Tabl 2.5 mg"/>
+            </code>
+            <form>
+              <coding>
+                <system value="urn:oid:0.4.0.127.0.16.1.1.2.1"/>
+                <code value="10219000"/>
+                <display value="Tablet"/>
+              </coding>
+              <text value="Tablette"/>
+            </form>
+            <amount>
+              <numerator>
+                <value value="20"/>
+                <unit value="Tablet (unit of presentation)"/>
+                <system value="http://snomed.info/sct"/>
+                <code value="732936001"/>
+              </numerator>
+              <denominator>
+                <value value="1"/>
+                <unit value="Package - unit of product usage (qualifier value)"/>
+                <system value="http://snomed.info/sct"/>
+                <code value="1681000175101"/>
+              </denominator>
+            </amount>
+            <ingredient>
+              <itemCodeableConcept>
+                <coding>
+                  <system value="http://snomed.info/sct"/>
+                  <code value="386872004"/>
+                  <display value="Ramipril (substance)"/>
+                </coding>
+                <text value="Ramipril"/>
+              </itemCodeableConcept>
+              <strength>
+                <numerator>
+                  <value value="2.5"/>
+                  <unit value="milligram"/>
+                  <system value="http://unitsofmeasure.org"/>
+                  <code value="mg"/>
+                </numerator>
+                <denominator>
+                  <value value="1"/>
+                  <unit value="Tablet (unit of presentation)"/>
+                  <system value="http://snomed.info/sct"/>
+                  <code value="732936001"/>
+                </denominator>
+              </strength>
+            </ingredient>
+          </Medication>
+        </contained>
+        <extension url="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan">
+          <extension url="id">
+            <valueIdentifier>
+              <system value="urn:ietf:rfc:3986"/>
+              <value value="urn:uuid:7aa20b27-eac0-4fef-a7b9-b10196718b9f"/>
+            </valueIdentifier>
+          </extension>
+          <extension url="externalDocumentId">
+            <valueIdentifier>
+              <system value="urn:ietf:rfc:3986"/>
+              <value value="urn:uuid:7aa20b27-eac0-4fef-a7b9-b10196718b9f"/>
+            </valueIdentifier>
+          </extension>
+        </extension>
+        <identifier>
+          <system value="urn:ietf:rfc:3986"/>
+          <value value="urn:uuid:7aa20b27-eac0-4fef-a7b9-b10196718b9f"/>
+        </identifier>
+        <status value="active"/>
+        <medicationReference>
+          <reference value="#Triatec"/>
+        </medicationReference>
+        <subject>
+          <reference value="Patient/MonikaWegmueller"/>
+        </subject>
+        <dateAsserted value="2011-11-29T11:00:00+01:00"/>
+        <informationSource>
+          <reference value="PractitionerRole/FamilienHausarztAtHausarzt"/>
+        </informationSource>
+        <reasonCode>
+          <text value="Bluthochdruck"/>
+        </reasonCode>
+        <dosage>
+          <patientInstruction value="-"/>
+          <timing>
+            <repeat>
+              <boundsPeriod>
+                <start value="2011-11-29"/>
+              </boundsPeriod>
+              <when value="MORN"/>
+            </repeat>
+          </timing>
+          <route>
+            <coding>
+              <system value="urn:oid:0.4.0.127.0.16.1.1.2.1"/>
+              <code value="20053000"/>
+              <display value="Oral use"/>
+            </coding>
+            <text value="zum Einnehmen"/>
+          </route>
+          <doseAndRate>
+            <doseQuantity>
+              <value value="0.5"/>
+              <unit value="Tablet (unit of presentation)"/>
+              <system value="http://snomed.info/sct"/>
+              <code value="732936001"/>
+            </doseQuantity>
+          </doseAndRate>
+        </dosage>
+      </MedicationStatement>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/MedicationDispense/2-1-MedDispTriatec"/>
+    <resource>
+      <MedicationDispense>
+        <id value="2-1-MedDispTriatec"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-medicationdispense-list"/>
+        </meta>
+        <text>
+          <status value="extensions"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="MedicationDispense_2-1-MedDispTriatec"> </a><p class="res-header-id"><b>Generated Narrative: MedicationDispense 2-1-MedDispTriatec</b></p><a name="2-1-MedDispTriatec"> </a><a name="hc2-1-MedDispTriatec"> </a><a name="2-1-MedDispTriatec-en-US"> </a><blockquote><p><b>CH EMED Extension Treatment Plan</b></p><ul><li>id: <a href="http://terminology.hl7.org/6.1.0/NamingSystem-uri.html" title="As defined by RFC 3986 (http://www.ietf.org/rfc/rfc3986.txt)(with many schemes defined in many RFCs). For OIDs and UUIDs, use the URN form (urn:oid:(note: lowercase) and urn:uuid:). See http://www.ietf.org/rfc/rfc3001.txt and http://www.ietf.org/rfc/rfc4122.txt 
+
+This oid is used as an identifier II.root to indicate the the extension is an absolute URI (technically, an IRI). Typically, this is used for OIDs and GUIDs. Note that when this OID is used with OIDs and GUIDs, the II.extension should start with urn:oid or urn:uuid: 
+
+Note that this OID is created to aid with interconversion between CDA and FHIR - FHIR uses urn:ietf:rfc:3986 as equivalent to this OID. URIs as identifiers appear more commonly in FHIR.
+
+This OID may also be used in CD.codeSystem.">Uniform Resource Identifier (URI)</a>/urn:uuid:7aa20b27-eac0-4fef-a7b9-b10196718b9f</li><li>externalDocumentId: <a href="http://terminology.hl7.org/6.1.0/NamingSystem-uri.html" title="As defined by RFC 3986 (http://www.ietf.org/rfc/rfc3986.txt)(with many schemes defined in many RFCs). For OIDs and UUIDs, use the URN form (urn:oid:(note: lowercase) and urn:uuid:). See http://www.ietf.org/rfc/rfc3001.txt and http://www.ietf.org/rfc/rfc4122.txt 
+
+This oid is used as an identifier II.root to indicate the the extension is an absolute URI (technically, an IRI). Typically, this is used for OIDs and GUIDs. Note that when this OID is used with OIDs and GUIDs, the II.extension should start with urn:oid or urn:uuid: 
+
+Note that this OID is created to aid with interconversion between CDA and FHIR - FHIR uses urn:ietf:rfc:3986 as equivalent to this OID. URIs as identifiers appear more commonly in FHIR.
+
+This OID may also be used in CD.codeSystem.">Uniform Resource Identifier (URI)</a>/urn:uuid:7aa20b27-eac0-4fef-a7b9-b10196718b9f</li></ul></blockquote><blockquote><p><b>CH EMED Extension Dispense</b></p><ul><li>id: <a href="http://terminology.hl7.org/6.1.0/NamingSystem-uri.html" title="As defined by RFC 3986 (http://www.ietf.org/rfc/rfc3986.txt)(with many schemes defined in many RFCs). For OIDs and UUIDs, use the URN form (urn:oid:(note: lowercase) and urn:uuid:). See http://www.ietf.org/rfc/rfc3001.txt and http://www.ietf.org/rfc/rfc4122.txt 
+
+This oid is used as an identifier II.root to indicate the the extension is an absolute URI (technically, an IRI). Typically, this is used for OIDs and GUIDs. Note that when this OID is used with OIDs and GUIDs, the II.extension should start with urn:oid or urn:uuid: 
+
+Note that this OID is created to aid with interconversion between CDA and FHIR - FHIR uses urn:ietf:rfc:3986 as equivalent to this OID. URIs as identifiers appear more commonly in FHIR.
+
+This OID may also be used in CD.codeSystem.">Uniform Resource Identifier (URI)</a>/urn:uuid:d428e837-46fe-49cc-9212-245d153c68ee</li><li>externalDocumentId: <a href="http://terminology.hl7.org/6.1.0/NamingSystem-uri.html" title="As defined by RFC 3986 (http://www.ietf.org/rfc/rfc3986.txt)(with many schemes defined in many RFCs). For OIDs and UUIDs, use the URN form (urn:oid:(note: lowercase) and urn:uuid:). See http://www.ietf.org/rfc/rfc3001.txt and http://www.ietf.org/rfc/rfc4122.txt 
+
+This oid is used as an identifier II.root to indicate the the extension is an absolute URI (technically, an IRI). Typically, this is used for OIDs and GUIDs. Note that when this OID is used with OIDs and GUIDs, the II.extension should start with urn:oid or urn:uuid: 
+
+Note that this OID is created to aid with interconversion between CDA and FHIR - FHIR uses urn:ietf:rfc:3986 as equivalent to this OID. URIs as identifiers appear more commonly in FHIR.
+
+This OID may also be used in CD.codeSystem.">Uniform Resource Identifier (URI)</a>/urn:uuid:d428e837-46fe-49cc-9212-245d153c68ee</li></ul></blockquote><p><b>identifier</b>: <a href="http://terminology.hl7.org/6.1.0/NamingSystem-uri.html" title="As defined by RFC 3986 (http://www.ietf.org/rfc/rfc3986.txt)(with many schemes defined in many RFCs). For OIDs and UUIDs, use the URN form (urn:oid:(note: lowercase) and urn:uuid:). See http://www.ietf.org/rfc/rfc3001.txt and http://www.ietf.org/rfc/rfc4122.txt 
+
+This oid is used as an identifier II.root to indicate the the extension is an absolute URI (technically, an IRI). Typically, this is used for OIDs and GUIDs. Note that when this OID is used with OIDs and GUIDs, the II.extension should start with urn:oid or urn:uuid: 
+
+Note that this OID is created to aid with interconversion between CDA and FHIR - FHIR uses urn:ietf:rfc:3986 as equivalent to this OID. URIs as identifiers appear more commonly in FHIR.
+
+This OID may also be used in CD.codeSystem.">Uniform Resource Identifier (URI)</a>/urn:uuid:d428e837-46fe-49cc-9212-245d153c68ee</p><p><b>status</b>: Completed</p><p><b>medication</b>: <a href="#hc2-1-MedDispTriatec/Triatec">Medication TRIATEC Tabl 2.5 mg 20 Stk</a></p><p><b>subject</b>: <a href="Patient-MonikaWegmueller.html">Monika Wegmüller  Female, DoB: 1943-05-15 ( Medical record number)</a></p><h3>Performers</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Actor</b></td></tr><tr><td style="display: none">*</td><td><a href="PractitionerRole-FamilienHausarztAtHausarzt.html">PractitionerRole</a></td></tr></table><p><b>quantity</b>: 1 Package - unit of product usage (qualifier value)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT  code1681000175101 = 'Package - unit of product usage')</span></p><p><b>whenHandedOver</b>: 2011-11-29 11:01:00+0100</p><blockquote><p><b>dosageInstruction</b></p><p><b>patientInstruction</b>: -</p><p><b>timing</b>: , ?ngen-6?</p><p><b>route</b>: <span title="Codes:{urn:oid:0.4.0.127.0.16.1.1.2.1 20053000}">zum Einnehmen</span></p><h3>DoseAndRates</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Dose[x]</b></td></tr><tr><td style="display: none">*</td><td>0.5 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT  code732936001 = 'Tablet (unit of presentation)')</span></td></tr></table></blockquote><h3>Substitutions</h3><table class="grid"><tr><td style="display: none">-</td><td><b>WasSubstituted</b></td><td><b>Type</b></td></tr><tr><td style="display: none">*</td><td>true</td><td><span title="Codes:{http://terminology.hl7.org/CodeSystem/v3-substanceAdminSubstitution E}">equivalent</span></td></tr></table><hr/><blockquote><p class="res-header-id"><b>Generated Narrative: Medication  #Triatec</b></p><a name="2-1-MedDispTriatec/Triatec"> </a><a name="hc2-1-MedDispTriatec/Triatec"> </a><a name="2-1-MedDispTriatec/Triatec-en-US"> </a><p><b>code</b>: <span title="Codes:{urn:oid:2.51.1.1 7680538751228}">TRIATEC Tabl 2.5 mg</span></p><p><b>form</b>: <span title="Codes:{urn:oid:0.4.0.127.0.16.1.1.2.1 10219000}">Tablette</span></p><p><b>amount</b>: 20 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT  code732936001 = 'Tablet (unit of presentation)')</span>/1 Package - unit of product usage (qualifier value)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT  code1681000175101 = 'Package - unit of product usage')</span></p><h3>Ingredients</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Item[x]</b></td><td><b>Strength</b></td></tr><tr><td style="display: none">*</td><td><span title="Codes:{http://snomed.info/sct 386872004}">Ramipril</span></td><td>2.5 milligram<span style="background: LightGoldenRodYellow"> (Details: UCUM  codemg = 'mg')</span>/1 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT  code732936001 = 'Tablet (unit of presentation)')</span></td></tr></table></blockquote></div>
+        </text>
+        <contained>
+          <Medication>
+            <id value="Triatec"/>
+            <meta>
+              <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-medication"/>
+            </meta>
+            <code>
+              <coding>
+                <system value="urn:oid:2.51.1.1"/>
+                <code value="7680538751228"/>
+                <display value="TRIATEC Tabl 2.5 mg 20 Stk"/>
+              </coding>
+              <text value="TRIATEC Tabl 2.5 mg"/>
+            </code>
+            <form>
+              <coding>
+                <system value="urn:oid:0.4.0.127.0.16.1.1.2.1"/>
+                <code value="10219000"/>
+                <display value="Tablet"/>
+              </coding>
+              <text value="Tablette"/>
+            </form>
+            <amount>
+              <numerator>
+                <value value="20"/>
+                <unit value="Tablet (unit of presentation)"/>
+                <system value="http://snomed.info/sct"/>
+                <code value="732936001"/>
+              </numerator>
+              <denominator>
+                <value value="1"/>
+                <unit value="Package - unit of product usage (qualifier value)"/>
+                <system value="http://snomed.info/sct"/>
+                <code value="1681000175101"/>
+              </denominator>
+            </amount>
+            <ingredient>
+              <itemCodeableConcept>
+                <coding>
+                  <system value="http://snomed.info/sct"/>
+                  <code value="386872004"/>
+                  <display value="Ramipril (substance)"/>
+                </coding>
+                <text value="Ramipril"/>
+              </itemCodeableConcept>
+              <strength>
+                <numerator>
+                  <value value="2.5"/>
+                  <unit value="milligram"/>
+                  <system value="http://unitsofmeasure.org"/>
+                  <code value="mg"/>
+                </numerator>
+                <denominator>
+                  <value value="1"/>
+                  <unit value="Tablet (unit of presentation)"/>
+                  <system value="http://snomed.info/sct"/>
+                  <code value="732936001"/>
+                </denominator>
+              </strength>
+            </ingredient>
+          </Medication>
+        </contained>
+        <extension url="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan">
+          <extension url="id">
+            <valueIdentifier>
+              <system value="urn:ietf:rfc:3986"/>
+              <value value="urn:uuid:7aa20b27-eac0-4fef-a7b9-b10196718b9f"/>
+            </valueIdentifier>
+          </extension>
+          <extension url="externalDocumentId">
+            <valueIdentifier>
+              <system value="urn:ietf:rfc:3986"/>
+              <value value="urn:uuid:7aa20b27-eac0-4fef-a7b9-b10196718b9f"/>
+            </valueIdentifier>
+          </extension>
+        </extension>
+        <extension url="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-dispense">
+          <extension url="id">
+            <valueIdentifier>
+              <system value="urn:ietf:rfc:3986"/>
+              <value value="urn:uuid:d428e837-46fe-49cc-9212-245d153c68ee"/>
+            </valueIdentifier>
+          </extension>
+          <extension url="externalDocumentId">
+            <valueIdentifier>
+              <system value="urn:ietf:rfc:3986"/>
+              <value value="urn:uuid:d428e837-46fe-49cc-9212-245d153c68ee"/>
+            </valueIdentifier>
+          </extension>
+        </extension>
+        <identifier>
+          <system value="urn:ietf:rfc:3986"/>
+          <value value="urn:uuid:d428e837-46fe-49cc-9212-245d153c68ee"/>
+        </identifier>
+        <status value="completed"/>
+        <medicationReference>
+          <reference value="#Triatec"/>
+        </medicationReference>
+        <subject>
+          <reference value="Patient/MonikaWegmueller"/>
+        </subject>
+        <performer>
+          <actor>
+            <reference value="PractitionerRole/FamilienHausarztAtHausarzt"/>
+          </actor>
+        </performer>
+        <quantity>
+          <value value="1"/>
+          <unit value="Package - unit of product usage (qualifier value)"/>
+          <system value="http://snomed.info/sct"/>
+          <code value="1681000175101"/>
+        </quantity>
+        <whenHandedOver value="2011-11-29T11:01:00+01:00"/>
+        <dosageInstruction>
+          <patientInstruction value="-"/>
+          <timing>
+            <repeat>
+              <boundsPeriod>
+                <start value="2011-11-29"/>
+              </boundsPeriod>
+              <when value="MORN"/>
+            </repeat>
+          </timing>
+          <route>
+            <coding>
+              <system value="urn:oid:0.4.0.127.0.16.1.1.2.1"/>
+              <code value="20053000"/>
+              <display value="Oral use"/>
+            </coding>
+            <text value="zum Einnehmen"/>
+          </route>
+          <doseAndRate>
+            <doseQuantity>
+              <value value="0.5"/>
+              <unit value="Tablet (unit of presentation)"/>
+              <system value="http://snomed.info/sct"/>
+              <code value="732936001"/>
+            </doseQuantity>
+          </doseAndRate>
+        </dosageInstruction>
+        <substitution>
+          <wasSubstituted value="true"/>
+          <type>
+            <coding>
+              <system value="http://terminology.hl7.org/CodeSystem/v3-substanceAdminSubstitution"/>
+              <code value="E"/>
+              <display value="equivalent"/>
+            </coding>
+          </type>
+        </substitution>
+      </MedicationDispense>
+    </resource>
+  </entry>
+</Bundle>

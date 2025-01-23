@@ -29,10 +29,10 @@ class ChEmedEprValidatorTest {
         final var validator = new ChEmedEprValidator();
         final var parser = new ChEmedEprParser(ctx);
 
-        final var xml = new String(getClass().getResourceAsStream("/1-1-MedicationTreatmentPlan.xml").readAllBytes());
+        final var xml = new String(getClass().getResourceAsStream("/Bundle-1-1-MedicationTreatmentPlan.xml").readAllBytes());
         final var mtpDocument = parser.parse(xml, EmedDocumentType.MTP);
         ValidationResult results = validator.validateDocumentBundle(getClass().getResourceAsStream(
-                "/1-1-MedicationTreatmentPlan.xml"), mtpDocument, Manager.FhirFormat.XML);
+                "/Bundle-1-1-MedicationTreatmentPlan.xml"), mtpDocument, Manager.FhirFormat.XML);
 
         for (final var message : results.getIssues()) {
             log.info(String.format("[%s][%s] %s", message.getSeverity().name(), message.getType().name(),
@@ -41,7 +41,7 @@ class ChEmedEprValidatorTest {
 
         assertTrue(results.isSuccessful());
         final var preDocument = parser.parse(xml, EmedDocumentType.PRE);
-        results = validator.validateDocumentBundle(getClass().getResourceAsStream("/1-1-MedicationTreatmentPlan.xml"),
+        results = validator.validateDocumentBundle(getClass().getResourceAsStream("/Bundle-1-1-MedicationTreatmentPlan.xml"),
                                                    preDocument,
                                                    Manager.FhirFormat.XML);
         assertFalse(results.isSuccessful());
