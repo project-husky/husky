@@ -8,7 +8,7 @@
   </meta>
   <identifier>
     <system value="urn:ietf:rfc:3986"/>
-    <value value="urn:uuid:c9f758a1-296c-4710-84d4-e181db8c7478"/>
+    <value value="urn:uuid:7aa20b27-eac0-4fef-a7b9-b10196718b9f"/>
   </identifier>
   <type value="document"/>
   <timestamp value="2011-11-29T11:00:00+01:00"/>
@@ -22,11 +22,17 @@
         </meta>
         <language value="de-CH"/>
         <text>
-          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml" xml:lang="de-CH" lang="de-CH"><p><b>Generated Narrative: Composition</b><a name="1-1-Composition"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Composition &quot;1-1-Composition&quot;  (Language &quot;de-CH&quot;) </p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-composition-medicationtreatmentplan.html">CH EMED Medication Treatment Plan Composition</a></p></div><p><b>identifier</b>: id: <a href="http://terminology.hl7.org/5.4.0/NamingSystem-uri.html">#</a>urn:uuid:c9f758a1-296c-4710-84d4-e181db8c7478</p><p><b>status</b>: final</p><p><b>type</b>: Medication treatment plan.extended Document <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="https://loinc.org/">LOINC</a>#77603-9; <a href="https://browser.ihtsdotools.org/">SNOMED CT</a>#761931002 &quot;Medication treatment plan report (record artifact)&quot;)</span></p><p><b>date</b>: 2011-11-29 11:00:00+0100</p><p><b>author</b>: <a href="#PractitionerRole_FamilienHausarztAtHausarzt">See above (PractitionerRole/FamilienHausarztAtHausarzt)</a></p><p><b>title</b>: Therapieentscheid Medikation</p><p><b>confidentiality</b>: N</p></div>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml" xml:lang="de-CH" lang="de-CH"><a name="Composition_1-1-Composition"> </a><p class="res-header-id"><b>Generated Narrative: Composition 1-1-Composition</b></p><a name="1-1-Composition"> </a><a name="hc1-1-Composition"> </a><a name="1-1-Composition-en-US"> </a><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Language: de-CH</p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-composition-medicationtreatmentplan.html">CH EMED Medication Treatment Plan Composition</a></p></div><p><b>identifier</b>: <a href="http://terminology.hl7.org/6.1.0/NamingSystem-uri.html" title="As defined by RFC 3986 (http://www.ietf.org/rfc/rfc3986.txt)(with many schemes defined in many RFCs). For OIDs and UUIDs, use the URN form (urn:oid:(note: lowercase) and urn:uuid:). See http://www.ietf.org/rfc/rfc3001.txt and http://www.ietf.org/rfc/rfc4122.txt 
+
+This oid is used as an identifier II.root to indicate the the extension is an absolute URI (technically, an IRI). Typically, this is used for OIDs and GUIDs. Note that when this OID is used with OIDs and GUIDs, the II.extension should start with urn:oid or urn:uuid: 
+
+Note that this OID is created to aid with interconversion between CDA and FHIR - FHIR uses urn:ietf:rfc:3986 as equivalent to this OID. URIs as identifiers appear more commonly in FHIR.
+
+This OID may also be used in CD.codeSystem.">Uniform Resource Identifier (URI)</a>/urn:uuid:7aa20b27-eac0-4fef-a7b9-b10196718b9f</p><p><b>status</b>: Final</p><p><b>type</b>: <span title="Codes:{http://loinc.org 77603-9}, {http://snomed.info/sct 761931002}">Medication treatment plan.extended Document</span></p><p><b>date</b>: 2011-11-29 11:00:00+0100</p><p><b>author</b>: <a href="PractitionerRole-FamilienHausarztAtHausarzt.html">PractitionerRole</a></p><p><b>title</b>: Therapieentscheid Medikation</p><p><b>confidentiality</b>: normal</p></div>
         </text>
         <identifier>
           <system value="urn:ietf:rfc:3986"/>
-          <value value="urn:uuid:c9f758a1-296c-4710-84d4-e181db8c7478"/>
+          <value value="urn:uuid:7aa20b27-eac0-4fef-a7b9-b10196718b9f"/>
         </identifier>
         <status value="final"/>
         <type>
@@ -88,7 +94,7 @@
           <profile value="http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-patient-epr"/>
         </meta>
         <text>
-          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Patient</b><a name="MonikaWegmueller"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Patient &quot;MonikaWegmueller&quot; </p><p style="margin-bottom: 0px">Profile: <a href="file:///home/michaela/github/ch-core/output/StructureDefinition-ch-core-patient-epr.html">CH Core Patient EPR</a></p></div><p><b>identifier</b>: Medical record number: 11111111</p><p><b>name</b>: Monika Wegmüller </p><p><b>gender</b>: female</p><p><b>birthDate</b>: 1943-05-15</p><p><b>address</b>: Wiesenstr. 12 Zürich 8003 CH </p></div>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="Patient_MonikaWegmueller"> </a><p class="res-header-id"><b>Generated Narrative: Patient MonikaWegmueller</b></p><a name="MonikaWegmueller"> </a><a name="hcMonikaWegmueller"> </a><a name="MonikaWegmueller-en-US"> </a><p style="border: 1px #661aff solid; background-color: #e6e6ff; padding: 10px;">Monika Wegmüller  Female, DoB: 1943-05-15 ( Medical record number)</p><hr/><table class="grid"><tr><td style="background-color: #f3f5da" title="Ways to contact the Patient">Contact Detail</td><td colspan="3">Wiesenstr. 12 Zürich 8003 CH </td></tr></table></div>
         </text>
         <identifier>
           <type>
@@ -124,7 +130,7 @@
           <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-practitionerrole"/>
         </meta>
         <text>
-          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: PractitionerRole</b><a name="FamilienHausarztAtHausarzt"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource PractitionerRole &quot;FamilienHausarztAtHausarzt&quot; </p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-practitionerrole.html">CH EMED PractitionerRole</a></p></div><p><b>practitioner</b>: <a href="#Practitioner_FamilienHausarzt">See above (Practitioner/FamilienHausarzt)</a></p><p><b>organization</b>: <a href="#Organization_Hausarzt">See above (Organization/Hausarzt)</a></p></div>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="PractitionerRole_FamilienHausarztAtHausarzt"> </a><p class="res-header-id"><b>Generated Narrative: PractitionerRole FamilienHausarztAtHausarzt</b></p><a name="FamilienHausarztAtHausarzt"> </a><a name="hcFamilienHausarztAtHausarzt"> </a><a name="FamilienHausarztAtHausarzt-en-US"> </a><p><b>practitioner</b>: <a href="Practitioner-FamilienHausarzt.html">Practitioner Familien Hausarzt </a></p><p><b>organization</b>: <a href="Organization-Hausarzt.html">Organization Hausarzt</a></p></div>
         </text>
         <practitioner>
           <reference value="Practitioner/FamilienHausarzt"/>
@@ -144,7 +150,7 @@
           <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-practitioner"/>
         </meta>
         <text>
-          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Practitioner</b><a name="FamilienHausarzt"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Practitioner &quot;FamilienHausarzt&quot; </p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-practitioner.html">CH EMED Practitioner</a></p></div><p><b>identifier</b>: id: 7601000234438</p><p><b>name</b>: Familien Hausarzt </p></div>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="Practitioner_FamilienHausarzt"> </a><p class="res-header-id"><b>Generated Narrative: Practitioner FamilienHausarzt</b></p><a name="FamilienHausarzt"> </a><a name="hcFamilienHausarzt"> </a><a name="FamilienHausarzt-en-US"> </a><p><b>identifier</b>: <a href="https://www.gs1.org/standards/id-keys/gln" title="Global Location Number">GLN</a>/7601000234438</p><p><b>name</b>: Familien Hausarzt </p></div>
         </text>
         <identifier>
           <system value="urn:oid:2.51.1.3"/>
@@ -166,7 +172,7 @@
           <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-organization"/>
         </meta>
         <text>
-          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: Organization</b><a name="Hausarzt"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource Organization &quot;Hausarzt&quot; </p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-organization.html">CH EMED Organization</a></p></div><p><b>identifier</b>: id: 7601000234438</p><p><b>name</b>: Hausarzt</p><p><b>address</b>: Krankenstrasse 2 Zürich 8005 CH </p></div>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="Organization_Hausarzt"> </a><p class="res-header-id"><b>Generated Narrative: Organization Hausarzt</b></p><a name="Hausarzt"> </a><a name="hcHausarzt"> </a><a name="Hausarzt-en-US"> </a><p><b>identifier</b>: <a href="https://www.gs1.org/standards/id-keys/gln" title="Global Location Number">GLN</a>/7601000234438</p><p><b>name</b>: Hausarzt</p><p><b>address</b>: Krankenstrasse 2 Zürich 8005 CH </p></div>
         </text>
         <identifier>
           <system value="urn:oid:2.51.1.3"/>
@@ -191,7 +197,13 @@
           <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-medicationstatement"/>
         </meta>
         <text>
-          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative: MedicationStatement</b><a name="1-1-MedStatTriatec"> </a></p><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Resource MedicationStatement &quot;1-1-MedStatTriatec&quot; </p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-medicationstatement.html">CH EMED MedicationStatement</a></p></div><p><b>identifier</b>: id: <a href="http://terminology.hl7.org/5.4.0/NamingSystem-uri.html">#</a>urn:uuid:c9f758a1-296c-4710-84d4-e181db8c7478</p><p><b>status</b>: active</p><p><b>medication</b>: <a name="Triatec"> </a></p><blockquote><p/><p><a name="Triatec"> </a></p><p><b>code</b>: TRIATEC Tabl 2.5 mg <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (unknown#7680538751228 &quot;TRIATEC Tabl 2.5 mg 20 Stk&quot;)</span></p><p><b>form</b>: Tablette <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="CodeSystem-edqm-standardterms.html">EDQM - Standard Terms</a>#10219000 &quot;Tablet&quot;)</span></p><p><b>amount</b>: 20 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 732936001 = 'Tablet (unit of presentation)')</span>/1 Package - unit of product usage (qualifier value)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 1681000175101 = 'Package - unit of product usage')</span></p><h3>Ingredients</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Item[x]</b></td><td><b>Strength</b></td></tr><tr><td style="display: none">*</td><td>Ramipril <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="https://browser.ihtsdotools.org/">SNOMED CT</a>#386872004 &quot;Ramipril (substance)&quot;)</span></td><td>2.5 milligram<span style="background: LightGoldenRodYellow"> (Details: UCUM code mg = 'mg')</span>/1 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 732936001 = 'Tablet (unit of presentation)')</span></td></tr></table></blockquote><p><b>subject</b>: <a href="#Patient_MonikaWegmueller">See above (Patient/MonikaWegmueller)</a></p><p><b>dateAsserted</b>: 2011-11-29 11:00:00+0100</p><p><b>informationSource</b>: <a href="#PractitionerRole_FamilienHausarztAtHausarzt">See above (PractitionerRole/FamilienHausarztAtHausarzt)</a></p><p><b>reasonCode</b>: Bluthochdruck <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> ()</span></p><blockquote><p><b>dosage</b></p><p><b>patientInstruction</b>: -</p><p><b>timing</b>: Starting 2011-11-29, , ?ngen-6?</p><p><b>route</b>: zum Einnehmen <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="CodeSystem-edqm-standardterms.html">EDQM - Standard Terms</a>#20053000 &quot;Oral use&quot;)</span></p><blockquote><p><b>doseAndRate</b></p></blockquote></blockquote><hr/><blockquote><p><b>Generated Narrative: Medication #Triatec</b><a name="Triatec"> </a></p><p><b>code</b>: TRIATEC Tabl 2.5 mg <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (unknown#7680538751228 &quot;TRIATEC Tabl 2.5 mg 20 Stk&quot;)</span></p><p><b>form</b>: Tablette <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="CodeSystem-edqm-standardterms.html">EDQM - Standard Terms</a>#10219000 &quot;Tablet&quot;)</span></p><p><b>amount</b>: 20 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 732936001 = 'Tablet (unit of presentation)')</span>/1 Package - unit of product usage (qualifier value)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 1681000175101 = 'Package - unit of product usage')</span></p><h3>Ingredients</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Item[x]</b></td><td><b>Strength</b></td></tr><tr><td style="display: none">*</td><td>Ramipril <span style="background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki"> (<a href="https://browser.ihtsdotools.org/">SNOMED CT</a>#386872004 &quot;Ramipril (substance)&quot;)</span></td><td>2.5 milligram<span style="background: LightGoldenRodYellow"> (Details: UCUM code mg = 'mg')</span>/1 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT code 732936001 = 'Tablet (unit of presentation)')</span></td></tr></table></blockquote></div>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="MedicationStatement_1-1-MedStatTriatec"> </a><p class="res-header-id"><b>Generated Narrative: MedicationStatement 1-1-MedStatTriatec</b></p><a name="1-1-MedStatTriatec"> </a><a name="hc1-1-MedStatTriatec"> </a><a name="1-1-MedStatTriatec-en-US"> </a><p><b>identifier</b>: <a href="http://terminology.hl7.org/6.1.0/NamingSystem-uri.html" title="As defined by RFC 3986 (http://www.ietf.org/rfc/rfc3986.txt)(with many schemes defined in many RFCs). For OIDs and UUIDs, use the URN form (urn:oid:(note: lowercase) and urn:uuid:). See http://www.ietf.org/rfc/rfc3001.txt and http://www.ietf.org/rfc/rfc4122.txt 
+
+This oid is used as an identifier II.root to indicate the the extension is an absolute URI (technically, an IRI). Typically, this is used for OIDs and GUIDs. Note that when this OID is used with OIDs and GUIDs, the II.extension should start with urn:oid or urn:uuid: 
+
+Note that this OID is created to aid with interconversion between CDA and FHIR - FHIR uses urn:ietf:rfc:3986 as equivalent to this OID. URIs as identifiers appear more commonly in FHIR.
+
+This OID may also be used in CD.codeSystem.">Uniform Resource Identifier (URI)</a>/urn:uuid:7aa20b27-eac0-4fef-a7b9-b10196718b9f</p><p><b>status</b>: Active</p><p><b>medication</b>: <a href="#hc1-1-MedStatTriatec/Triatec">Medication TRIATEC Tabl 2.5 mg 20 Stk</a></p><p><b>subject</b>: <a href="Patient-MonikaWegmueller.html">Monika Wegmüller  Female, DoB: 1943-05-15 ( Medical record number)</a></p><p><b>dateAsserted</b>: 2011-11-29 11:00:00+0100</p><p><b>informationSource</b>: <a href="PractitionerRole-FamilienHausarztAtHausarzt.html">PractitionerRole</a></p><p><b>reasonCode</b>: <span title="Codes:">Bluthochdruck</span></p><blockquote><p><b>dosage</b></p><p><b>patientInstruction</b>: -</p><p><b>timing</b>: , ?ngen-6?</p><p><b>route</b>: <span title="Codes:{urn:oid:0.4.0.127.0.16.1.1.2.1 20053000}">zum Einnehmen</span></p><p><b>method</b>: <span title="Codes:{urn:oid:0.4.0.127.0.16.1.1.2.1 0019}">Schlucken</span></p><h3>DoseAndRates</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Dose[x]</b></td></tr><tr><td style="display: none">*</td><td>0.5 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT  code732936001 = 'Tablet (unit of presentation)')</span></td></tr></table></blockquote><hr/><blockquote><p class="res-header-id"><b>Generated Narrative: Medication  #Triatec</b></p><a name="1-1-MedStatTriatec/Triatec"> </a><a name="hc1-1-MedStatTriatec/Triatec"> </a><a name="1-1-MedStatTriatec/Triatec-en-US"> </a><p><b>code</b>: <span title="Codes:{urn:oid:2.51.1.1 7680538751228}">TRIATEC Tabl 2.5 mg</span></p><p><b>form</b>: <span title="Codes:{urn:oid:0.4.0.127.0.16.1.1.2.1 10219000}">Tablette</span></p><p><b>amount</b>: 20 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT  code732936001 = 'Tablet (unit of presentation)')</span>/1 Package - unit of product usage (qualifier value)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT  code1681000175101 = 'Package - unit of product usage')</span></p><h3>Ingredients</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Item[x]</b></td><td><b>Strength</b></td></tr><tr><td style="display: none">*</td><td><span title="Codes:{http://snomed.info/sct 386872004}">Ramipril</span></td><td>2.5 milligram<span style="background: LightGoldenRodYellow"> (Details: UCUM  codemg = 'mg')</span>/1 Tablet (unit of presentation)<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT  code732936001 = 'Tablet (unit of presentation)')</span></td></tr></table></blockquote></div>
         </text>
         <contained>
           <Medication>
@@ -257,7 +269,7 @@
         </contained>
         <identifier>
           <system value="urn:ietf:rfc:3986"/>
-          <value value="urn:uuid:c9f758a1-296c-4710-84d4-e181db8c7478"/>
+          <value value="urn:uuid:7aa20b27-eac0-4fef-a7b9-b10196718b9f"/>
         </identifier>
         <status value="active"/>
         <medicationReference>
@@ -291,6 +303,14 @@
             </coding>
             <text value="zum Einnehmen"/>
           </route>
+          <method>
+            <coding>
+              <system value="urn:oid:0.4.0.127.0.16.1.1.2.1"/>
+              <code value="0019"/>
+              <display value="Swallowing"/>
+            </coding>
+            <text value="Schlucken"/>
+          </method>
           <doseAndRate>
             <doseQuantity>
               <value value="0.5"/>

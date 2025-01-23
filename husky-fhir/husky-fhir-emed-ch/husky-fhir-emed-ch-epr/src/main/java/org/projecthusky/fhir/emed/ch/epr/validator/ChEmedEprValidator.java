@@ -58,12 +58,12 @@ public class ChEmedEprValidator {
         this.matchboxEngine = builder.getEngineR4();
 
         // Adding all necessary packages
-        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ihe.formatcode.fhir#1.1.0.tgz"));
-        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-term#3.1.0-20241204.tgz"));
-        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-core#5.0.0-20241204.tgz"));
-        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-emed#5.0.0-20241204.tgz"));
-        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-emed-epr#1.0.1-20241204.tgz"));
-        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-epr-fhir#4.0.1-ballot.tgz"));
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ihe.formatcode.fhir#1.3.0.tgz"));
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-term#3.1.0.tgz"));
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-core#5.0.0.tgz"));
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-emed#5.0.0.tgz"));
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-emed-epr#2.0.0.tgz"));
+        this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ch.fhir.ig.ch-epr-fhir#4.0.1.tgz"));
         this.matchboxEngine.loadPackage(getClass().getResourceAsStream("/package/ihe.iti.mhd#4.2.2.tgz"));
     }
 

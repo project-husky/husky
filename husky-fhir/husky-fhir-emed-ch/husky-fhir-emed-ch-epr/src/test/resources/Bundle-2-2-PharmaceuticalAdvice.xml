@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Bundle xmlns="http://hl7.org/fhir">
+  <id value="2-2-PharmaceuticalAdvice"/>
+  <meta>
+    <lastUpdated value="2020-03-09T12:31:59.738+00:00"/>
+    <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-pharmaceuticaladvice"/>
+  </meta>
+  <identifier>
+    <system value="urn:ietf:rfc:3986"/>
+    <value value="urn:uuid:e68055ce-1540-4b26-b72d-d9c3e595416a"/>
+  </identifier>
+  <type value="document"/>
+  <timestamp value="2012-02-04T14:00:00+01:00"/>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/Composition/2-2-Composition"/>
+    <resource>
+      <Composition>
+        <id value="2-2-Composition"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-composition-pharmaceuticaladvice"/>
+        </meta>
+        <language value="de-CH"/>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml" xml:lang="de-CH" lang="de-CH"><a name="Composition_2-2-Composition"> </a><p class="res-header-id"><b>Generated Narrative: Composition 2-2-Composition</b></p><a name="2-2-Composition"> </a><a name="hc2-2-Composition"> </a><a name="2-2-Composition-en-US"> </a><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Language: de-CH</p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-composition-pharmaceuticaladvice.html">CH EMED Pharmaceutical Advice Composition</a></p></div><p><b>identifier</b>: <a href="http://terminology.hl7.org/6.1.0/NamingSystem-uri.html" title="As defined by RFC 3986 (http://www.ietf.org/rfc/rfc3986.txt)(with many schemes defined in many RFCs). For OIDs and UUIDs, use the URN form (urn:oid:(note: lowercase) and urn:uuid:). See http://www.ietf.org/rfc/rfc3001.txt and http://www.ietf.org/rfc/rfc4122.txt 
+
+This oid is used as an identifier II.root to indicate the the extension is an absolute URI (technically, an IRI). Typically, this is used for OIDs and GUIDs. Note that when this OID is used with OIDs and GUIDs, the II.extension should start with urn:oid or urn:uuid: 
+
+Note that this OID is created to aid with interconversion between CDA and FHIR - FHIR uses urn:ietf:rfc:3986 as equivalent to this OID. URIs as identifiers appear more commonly in FHIR.
+
+This OID may also be used in CD.codeSystem.">Uniform Resource Identifier (URI)</a>/urn:uuid:e68055ce-1540-4b26-b72d-d9c3e595416a</p><p><b>status</b>: Final</p><p><b>type</b>: <span title="Codes:{http://loinc.org 61356-2}, {http://snomed.info/sct 419891008}">Medication pharmaceutical advice.extended Document</span></p><p><b>date</b>: 2012-02-04 14:00:00+0100</p><p><b>author</b>: <a href="PractitionerRole-FamilienHausarztAtHausarzt.html">PractitionerRole</a></p><p><b>title</b>: Kommentar zur Medikation</p><p><b>confidentiality</b>: normal</p></div>
+        </text>
+        <identifier>
+          <system value="urn:ietf:rfc:3986"/>
+          <value value="urn:uuid:e68055ce-1540-4b26-b72d-d9c3e595416a"/>
+        </identifier>
+        <status value="final"/>
+        <type>
+          <coding>
+            <system value="http://loinc.org"/>
+            <code value="61356-2"/>
+            <display value="Medication pharmaceutical advice.extended Document"/>
+          </coding>
+          <coding>
+            <system value="http://snomed.info/sct"/>
+            <code value="419891008"/>
+            <display value="Record artifact (record artifact)"/>
+          </coding>
+        </type>
+        <subject>
+          <reference value="Patient/MonikaWegmueller"/>
+        </subject>
+        <date value="2012-02-04T14:00:00+01:00"/>
+        <author>
+          <reference value="PractitionerRole/FamilienHausarztAtHausarzt"/>
+        </author>
+        <title value="Kommentar zur Medikation"/>
+        <confidentiality value="N">
+          <extension url="http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-confidentialitycode">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://snomed.info/sct"/>
+                <code value="17621005"/>
+                <display value="Normal (qualifier value)"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+        </confidentiality>
+        <section>
+          <title value="Hinweise zur Medikation"/>
+          <code>
+            <coding>
+              <system value="http://loinc.org"/>
+              <code value="61357-0"/>
+              <display value="Medication pharmaceutical advice.brief Document"/>
+            </coding>
+          </code>
+          <text>
+            <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><table><thead><tr><th>Präpartename</th><th>Wirkstoffname</th><th>Galenische Form</th><th>Dosis pro Einheit</th><th>Dos.Morgen</th><th>Dos.Mittag</th><th>Dos.Abend</th><th>Dos.Nacht</th><th>Verabreichungsweg</th><th>Anwendungsdauer</th><th>Behandlungsgrund</th><th>Kommentar</th></tr></thead><tbody><tr id="padv.1"><td id="padv.1.brandedmedication">Triatec</td><td id="padv.1.ingredient">Ramipril</td><td id="padv.1.packageform">Tbl</td><td id="padv.1.dosequantity">2.5 mg</td><td id="padv.1.dosagemorning">0.5</td><td id="padv.1.dosagelunch">0</td><td id="padv.1.dosageevening">0</td><td id="padv.1.dosagenight">0</td><td id="padv.1.routecode">oral</td><td id="padv.1.datefromto"/><td id="padv.1.reason">Bluthochdruck</td><td id="padv.1.note">Abgesetzt aufgrund UAW trockener Husten</td></tr></tbody></table></div>
+          </text>
+          <entry>
+            <reference value="Observation/2-2-ObsPharmaceuticalAdvice"/>
+          </entry>
+        </section>
+      </Composition>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/Patient/MonikaWegmueller"/>
+    <resource>
+      <Patient>
+        <id value="MonikaWegmueller"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-patient-epr"/>
+        </meta>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="Patient_MonikaWegmueller"> </a><p class="res-header-id"><b>Generated Narrative: Patient MonikaWegmueller</b></p><a name="MonikaWegmueller"> </a><a name="hcMonikaWegmueller"> </a><a name="MonikaWegmueller-en-US"> </a><p style="border: 1px #661aff solid; background-color: #e6e6ff; padding: 10px;">Monika Wegmüller  Female, DoB: 1943-05-15 ( Medical record number)</p><hr/><table class="grid"><tr><td style="background-color: #f3f5da" title="Ways to contact the Patient">Contact Detail</td><td colspan="3">Wiesenstr. 12 Zürich 8003 CH </td></tr></table></div>
+        </text>
+        <identifier>
+          <type>
+            <coding>
+              <system value="http://terminology.hl7.org/CodeSystem/v2-0203"/>
+              <code value="MR"/>
+            </coding>
+          </type>
+          <system value="urn:oid:2.999.1"/>
+          <value value="11111111"/>
+        </identifier>
+        <name>
+          <family value="Wegmüller"/>
+          <given value="Monika"/>
+        </name>
+        <gender value="female"/>
+        <birthDate value="1943-05-15"/>
+        <address>
+          <line value="Wiesenstr. 12"/>
+          <city value="Zürich"/>
+          <postalCode value="8003"/>
+          <country value="CH"/>
+        </address>
+      </Patient>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/PractitionerRole/FamilienHausarztAtHausarzt"/>
+    <resource>
+      <PractitionerRole>
+        <id value="FamilienHausarztAtHausarzt"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-practitionerrole"/>
+        </meta>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="PractitionerRole_FamilienHausarztAtHausarzt"> </a><p class="res-header-id"><b>Generated Narrative: PractitionerRole FamilienHausarztAtHausarzt</b></p><a name="FamilienHausarztAtHausarzt"> </a><a name="hcFamilienHausarztAtHausarzt"> </a><a name="FamilienHausarztAtHausarzt-en-US"> </a><p><b>practitioner</b>: <a href="Practitioner-FamilienHausarzt.html">Practitioner Familien Hausarzt </a></p><p><b>organization</b>: <a href="Organization-Hausarzt.html">Organization Hausarzt</a></p></div>
+        </text>
+        <practitioner>
+          <reference value="Practitioner/FamilienHausarzt"/>
+        </practitioner>
+        <organization>
+          <reference value="Organization/Hausarzt"/>
+        </organization>
+      </PractitionerRole>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/Practitioner/FamilienHausarzt"/>
+    <resource>
+      <Practitioner>
+        <id value="FamilienHausarzt"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-practitioner"/>
+        </meta>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="Practitioner_FamilienHausarzt"> </a><p class="res-header-id"><b>Generated Narrative: Practitioner FamilienHausarzt</b></p><a name="FamilienHausarzt"> </a><a name="hcFamilienHausarzt"> </a><a name="FamilienHausarzt-en-US"> </a><p><b>identifier</b>: <a href="https://www.gs1.org/standards/id-keys/gln" title="Global Location Number">GLN</a>/7601000234438</p><p><b>name</b>: Familien Hausarzt </p></div>
+        </text>
+        <identifier>
+          <system value="urn:oid:2.51.1.3"/>
+          <value value="7601000234438"/>
+        </identifier>
+        <name>
+          <family value="Hausarzt"/>
+          <given value="Familien"/>
+        </name>
+      </Practitioner>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/Organization/Hausarzt"/>
+    <resource>
+      <Organization>
+        <id value="Hausarzt"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-organization"/>
+        </meta>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="Organization_Hausarzt"> </a><p class="res-header-id"><b>Generated Narrative: Organization Hausarzt</b></p><a name="Hausarzt"> </a><a name="hcHausarzt"> </a><a name="Hausarzt-en-US"> </a><p><b>identifier</b>: <a href="https://www.gs1.org/standards/id-keys/gln" title="Global Location Number">GLN</a>/7601000234438</p><p><b>name</b>: Hausarzt</p><p><b>address</b>: Krankenstrasse 2 Zürich 8005 CH </p></div>
+        </text>
+        <identifier>
+          <system value="urn:oid:2.51.1.3"/>
+          <value value="7601000234438"/>
+        </identifier>
+        <name value="Hausarzt"/>
+        <address>
+          <line value="Krankenstrasse 2"/>
+          <city value="Zürich"/>
+          <postalCode value="8005"/>
+          <country value="CH"/>
+        </address>
+      </Organization>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="http://test.fhir.ch/r4/Observation/2-2-ObsPharmaceuticalAdvice"/>
+    <resource>
+      <Observation>
+        <id value="2-2-ObsPharmaceuticalAdvice"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-observation"/>
+        </meta>
+        <text>
+          <status value="extensions"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="Observation_2-2-ObsPharmaceuticalAdvice"> </a><p class="res-header-id"><b>Generated Narrative: Observation 2-2-ObsPharmaceuticalAdvice</b></p><a name="2-2-ObsPharmaceuticalAdvice"> </a><a name="hc2-2-ObsPharmaceuticalAdvice"> </a><a name="2-2-ObsPharmaceuticalAdvice-en-US"> </a><blockquote><p><b>CH EMED Extension Treatment Plan</b></p><ul><li>id: <a href="http://terminology.hl7.org/6.1.0/NamingSystem-uri.html" title="As defined by RFC 3986 (http://www.ietf.org/rfc/rfc3986.txt)(with many schemes defined in many RFCs). For OIDs and UUIDs, use the URN form (urn:oid:(note: lowercase) and urn:uuid:). See http://www.ietf.org/rfc/rfc3001.txt and http://www.ietf.org/rfc/rfc4122.txt 
+
+This oid is used as an identifier II.root to indicate the the extension is an absolute URI (technically, an IRI). Typically, this is used for OIDs and GUIDs. Note that when this OID is used with OIDs and GUIDs, the II.extension should start with urn:oid or urn:uuid: 
+
+Note that this OID is created to aid with interconversion between CDA and FHIR - FHIR uses urn:ietf:rfc:3986 as equivalent to this OID. URIs as identifiers appear more commonly in FHIR.
+
+This OID may also be used in CD.codeSystem.">Uniform Resource Identifier (URI)</a>/urn:uuid:7aa20b27-eac0-4fef-a7b9-b10196718b9f</li><li>externalDocumentId: <a href="http://terminology.hl7.org/6.1.0/NamingSystem-uri.html" title="As defined by RFC 3986 (http://www.ietf.org/rfc/rfc3986.txt)(with many schemes defined in many RFCs). For OIDs and UUIDs, use the URN form (urn:oid:(note: lowercase) and urn:uuid:). See http://www.ietf.org/rfc/rfc3001.txt and http://www.ietf.org/rfc/rfc4122.txt 
+
+This oid is used as an identifier II.root to indicate the the extension is an absolute URI (technically, an IRI). Typically, this is used for OIDs and GUIDs. Note that when this OID is used with OIDs and GUIDs, the II.extension should start with urn:oid or urn:uuid: 
+
+Note that this OID is created to aid with interconversion between CDA and FHIR - FHIR uses urn:ietf:rfc:3986 as equivalent to this OID. URIs as identifiers appear more commonly in FHIR.
+
+This OID may also be used in CD.codeSystem.">Uniform Resource Identifier (URI)</a>/urn:uuid:7aa20b27-eac0-4fef-a7b9-b10196718b9f</li></ul></blockquote><p><b>identifier</b>: <a href="http://terminology.hl7.org/6.1.0/NamingSystem-uri.html" title="As defined by RFC 3986 (http://www.ietf.org/rfc/rfc3986.txt)(with many schemes defined in many RFCs). For OIDs and UUIDs, use the URN form (urn:oid:(note: lowercase) and urn:uuid:). See http://www.ietf.org/rfc/rfc3001.txt and http://www.ietf.org/rfc/rfc4122.txt 
+
+This oid is used as an identifier II.root to indicate the the extension is an absolute URI (technically, an IRI). Typically, this is used for OIDs and GUIDs. Note that when this OID is used with OIDs and GUIDs, the II.extension should start with urn:oid or urn:uuid: 
+
+Note that this OID is created to aid with interconversion between CDA and FHIR - FHIR uses urn:ietf:rfc:3986 as equivalent to this OID. URIs as identifiers appear more commonly in FHIR.
+
+This OID may also be used in CD.codeSystem.">Uniform Resource Identifier (URI)</a>/urn:uuid:e68055ce-1540-4b26-b72d-d9c3e595416a</p><p><b>status</b>: Final</p><p><b>code</b>: <span title="Codes:{urn:oid:1.3.6.1.4.1.19376.1.9.2.1 CANCEL}">CANCEL</span></p><p><b>subject</b>: <a href="Patient-MonikaWegmueller.html">Monika Wegmüller  Female, DoB: 1943-05-15 ( Medical record number)</a></p><p><b>effective</b>: 2012-02-04 14:00:00+0100</p><p><b>issued</b>: 2012-02-04 14:00:00+0100</p><p><b>performer</b>: <a href="PractitionerRole-FamilienHausarztAtHausarzt.html">PractitionerRole</a></p><p><b>note</b>: Abgesetzt aufgrund UAW trockener Husten</p></div>
+        </text>
+        <extension url="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan">
+          <extension url="id">
+            <valueIdentifier>
+              <system value="urn:ietf:rfc:3986"/>
+              <value value="urn:uuid:7aa20b27-eac0-4fef-a7b9-b10196718b9f"/>
+            </valueIdentifier>
+          </extension>
+          <extension url="externalDocumentId">
+            <valueIdentifier>
+              <system value="urn:ietf:rfc:3986"/>
+              <value value="urn:uuid:7aa20b27-eac0-4fef-a7b9-b10196718b9f"/>
+            </valueIdentifier>
+          </extension>
+        </extension>
+        <identifier>
+          <system value="urn:ietf:rfc:3986"/>
+          <value value="urn:uuid:e68055ce-1540-4b26-b72d-d9c3e595416a"/>
+        </identifier>
+        <status value="final"/>
+        <code>
+          <coding>
+            <system value="urn:oid:1.3.6.1.4.1.19376.1.9.2.1"/>
+            <code value="CANCEL"/>
+          </coding>
+        </code>
+        <subject>
+          <reference value="Patient/MonikaWegmueller"/>
+        </subject>
+        <effectiveDateTime value="2012-02-04T14:00:00+01:00"/>
+        <issued value="2012-02-04T14:00:00+01:00"/>
+        <performer>
+          <reference value="PractitionerRole/FamilienHausarztAtHausarzt"/>
+        </performer>
+        <note>
+          <text value="Abgesetzt aufgrund UAW trockener Husten"/>
+        </note>
+      </Observation>
+    </resource>
+  </entry>
+</Bundle>
