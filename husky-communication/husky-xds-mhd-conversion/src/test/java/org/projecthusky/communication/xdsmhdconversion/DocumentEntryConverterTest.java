@@ -3,13 +3,12 @@ package org.projecthusky.communication.xdsmhdconversion;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.DocumentReference;
 import org.hl7.fhir.r4.model.Enumerations.DocumentReferenceStatus;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xds.core.ebxml.ebxml30.ProvideAndRegisterDocumentSetRequestType;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
 import org.openehealth.ipf.platform.camel.ihe.xds.core.converters.EbXML30Converters;
-import org.projecthusky.common.utils.XdsMetadataUtil;
+import org.projecthusky.common.utils.time.Hl7Dtm;
 import org.projecthusky.common.utils.xml.XmlFactories;
 import org.projecthusky.communication.xdsmhdconversion.converters.DocumentEntryConverter;
 
@@ -18,6 +17,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.JAXBIntrospector;
 import javax.xml.bind.Unmarshaller;
 import java.io.InputStream;
+import java.time.Instant;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,7 +26,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * Tests of the {@link DocumentEntryConverter} class.
  * @author Ronaldo Loureiro
  */
-@Disabled
 class DocumentEntryConverterTest {
 
     private final Class<?> UNMARSHALLED_CLASS = ProvideAndRegisterDocumentSetRequestType.class;
@@ -45,12 +44,12 @@ class DocumentEntryConverterTest {
         final var documentReference = DocumentEntryConverter.convertDocumentEntry(documentEntry);
 
         testDocumentReference(documentReference,
-                "urn:oid:urn:uuid:c888e8c5-7e12-4bec-b99e-9fd92e10f6da",
+                "urn:uuid:c888e8c5-7e12-4bec-b99e-9fd92e10f6da",
                 "urn:uuid:768f1904-cc07-49db-8104-92be8f9c6fc1",
                 DocumentReferenceStatus.CURRENT,
                 "419891008",
                 "440545006",
-                "2.16.756.5.30.1.191.1.0.2.1-c55f4ca7-bd4e-4134-8dcd-56b793ade958",
+                "2.16.756.5.30.1.191.1.0.2.1|c55f4ca7-bd4e-4134-8dcd-56b793ade958",
                 documentReference.getAuthenticator().getReference(),
                 documentReference.getDescription(),
                 "17621005",
@@ -60,7 +59,7 @@ class DocumentEntryConverterTest {
                 4850,
                 20,
                 "Pharmaceutical Advice",
-                XdsMetadataUtil.convertDtmStringToDate("20220919182449"),
+                Hl7Dtm.fromHl7("20220919182449").toInstant(),
                 "urn:ihe:pharm:padv:2010",
                 null,
                 null,
@@ -77,12 +76,12 @@ class DocumentEntryConverterTest {
         final var documentReference = DocumentEntryConverter.convertDocumentEntry(documentEntry);
 
         testDocumentReference(documentReference,
-                "urn:oid:urn:uuid:c888e8c5-7e12-4bec-b99e-9fd92e10f6da",
+                "urn:uuid:c888e8c5-7e12-4bec-b99e-9fd92e10f6da",
                 "urn:uuid:768f1904-cc07-49db-8104-92be8f9c6fc1",
                 DocumentReferenceStatus.CURRENT,
                 "419891008",
                 "440545006",
-                "2.16.756.5.30.1.191.1.0.2.1-c55f4ca7-bd4e-4134-8dcd-56b793ade958",
+                "2.16.756.5.30.1.191.1.0.2.1|c55f4ca7-bd4e-4134-8dcd-56b793ade958",
                 documentReference.getAuthenticator().getReference(),
                 documentReference.getDescription(),
                 "17621005",
@@ -92,7 +91,7 @@ class DocumentEntryConverterTest {
                 4850,
                 20,
                 "Pharmaceutical Advice",
-                XdsMetadataUtil.convertDtmStringToDate("20220919182449"),
+                Hl7Dtm.fromHl7("20220919182449").toInstant(),
                 "urn:ihe:pharm:padv:2010",
                 null,
                 null,
@@ -120,7 +119,7 @@ class DocumentEntryConverterTest {
                                int size,
                                int hashLength,
                                @Nullable String title,
-                               Date creation,
+                               Instant creation,
                                String formatCode,
                                @Nullable Date startContext,
                                @Nullable Date stopContext,
@@ -128,13 +127,19 @@ class DocumentEntryConverterTest {
                                String practiceSettingCode,
                                @Nullable String sourcePatientRef) {
 
-        assertEquals("http://ihe.net/fhir/ihe.mhd.fhir/StructureDefinition/IHE.MHD.Comprehensive.DocumentManifest", documentReference.getMeta().getProfile().get(0).getValue());
+        assertEquals(DocumentEntryConverter.COMPREHENSIVE_DOCUMENT_REFERENCE_PROFILE, documentReference.getMeta().getProfile().get(0).getValue());
         assertEquals(masterIdentifier, documentReference.getMasterIdentifier().getValue());
         assertEquals(identifier, documentReference.getIdentifier().get(0).getValue());
         assertEquals(status, documentReference.getStatus());
         assertEquals(codeType, documentReference.getType().getCodingFirstRep().getCode());
         assertEquals(categoryCode, documentReference.getCategoryFirstRep().getCodingFirstRep().getCode());
-        assertEquals(subjectRef, documentReference.getSubject().getReference());
+        assertEquals(
+                subjectRef,
+                String.format(
+                        "%s|%s",
+                        documentReference.getSubject().getIdentifier().getSystem(),
+                        documentReference.getSubject().getIdentifier().getValue()
+                ));
         assertTrue(documentReference.getAuthor().isEmpty());
 
         if (authenticatorRef != null) assertEquals(authenticatorRef, documentReference.getAuthenticator().getReference());
@@ -158,7 +163,7 @@ class DocumentEntryConverterTest {
         if (title != null) assertEquals(title, attachment.getTitle());
         else assertNull(attachment.getTitle());
 
-        assertEquals(creation, attachment.getCreation());
+        assertEquals(creation, attachment.getCreation().toInstant());
         assertEquals(formatCode, content.getFormat().getCode());
 
         final var context = documentReference.getContext();

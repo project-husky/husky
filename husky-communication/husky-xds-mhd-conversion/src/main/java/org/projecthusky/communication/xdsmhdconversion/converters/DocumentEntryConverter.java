@@ -17,9 +17,7 @@ import org.hl7.fhir.r4.model.DocumentReference.DocumentReferenceContentComponent
 import org.hl7.fhir.r4.model.DocumentReference.DocumentReferenceContextComponent;
 import org.hl7.fhir.r4.model.Enumerations.DocumentReferenceStatus;
 import org.hl7.fhir.r4.model.Identifier.IdentifierUse;
-import org.projecthusky.common.ch.ChEpr;
-import org.projecthusky.common.utils.XdsMetadataUtil;
-import org.projecthusky.common.utils.datatypes.Oids;
+import org.projecthusky.common.utils.time.Hl7Dtm;
 import org.projecthusky.communication.xdsmhdconversion.utils.ConverterUtils;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.*;
 
@@ -28,7 +26,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.ZoneId;
-import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -40,16 +38,17 @@ import java.util.List;
  * @see <a
  * href="https://ihe.github.io/publications/ITI/MHD/StructureDefinition-IHE.MHD.Comprehensive.DocumentReference.html">Resource
  * Profile: MHD DocumentReference Comprehensive</a>
- * @see <a
- * href="http://fhir.ch/ig/ch-epr-fhir/StructureDefinition/ch-mhd-documentreference-comprehensive">Resource
- * Profile: CH MHD DocumentReference Comprehensive</a>
  **/
 public class DocumentEntryConverter {
+    public final static String COMPREHENSIVE_DOCUMENT_REFERENCE_PROFILE =
+            "https://profiles.ihe.net/ITI/MHD/StructureDefinition-IHE.MHD.Comprehensive.DocumentReference.html";
+    public final static String MINIMAL_DOCUMENT_REFERENCE_PROFILE =
+            "https://profiles.ihe.net/ITI/MHD/StructureDefinition-IHE.MHD.Minimal.DocumentReference.html";
 
     /**
      * Constructor.
      */
-    private DocumentEntryConverter() {}
+    protected DocumentEntryConverter() {}
 
     /**
      * Convert an XDS DocumentEntry to an MHD DocumentReference.
@@ -64,9 +63,9 @@ public class DocumentEntryConverter {
 
         // profile | DocumentEntry.limitedMetadata
         if (documentEntry.isLimitedMetadata()) {
-            documentReference.getMeta().addProfile("http://ihe.net/fhir/ihe.mhd.fhir/StructureDefinition/IHE.MHD.Query.Comprehensive.DocumentReference");
+            documentReference.getMeta().addProfile(MINIMAL_DOCUMENT_REFERENCE_PROFILE);
         } else {
-            documentReference.getMeta().addProfile("http://ihe.net/fhir/ihe.mhd.fhir/StructureDefinition/IHE.MHD.Comprehensive.DocumentManifest");
+            documentReference.getMeta().addProfile(COMPREHENSIVE_DOCUMENT_REFERENCE_PROFILE);
         }
 
         // masterIdentifier | DocumentEntry.uniqueId
@@ -153,13 +152,13 @@ public class DocumentEntryConverter {
         if (documentEntry.getUri() != null) {
             try {
                 attachment.setUrl(new URI(documentEntry.getUri()).toURL().toString());
-
                 if (documentEntry.getRepositoryUniqueId() != null) {
                     final var url = String.format("%s&repositoryUniqueId=%s", attachment.getUrl(), documentEntry.getRepositoryUniqueId());
                     attachment.setUrl(url);
                 }
             } catch (URISyntaxException | MalformedURLException ignored) {}
-        }
+        } else if (documentEntry.getRepositoryUniqueId() != null)
+            attachment.setUrl(documentEntry.getRepositoryUniqueId());
 
         //// size | DocumentEntry.size
         if (documentEntry.getSize() != null) {
@@ -180,7 +179,8 @@ public class DocumentEntryConverter {
 
         //// creation | DocumentEntry.creationTime
         if (documentEntry.getCreationTime() != null) {
-            attachment.setCreation(XdsMetadataUtil.convertDtmStringToDate(documentEntry.getCreationTime().toHL7()));
+            final var creationTime = Hl7Dtm.fromHl7(documentEntry.getCreationTime().toHL7());
+            attachment.setCreation(Date.from(creationTime.toInstant()));
         }
 
         /// format | DocumentEntry.formatCode
@@ -248,20 +248,6 @@ public class DocumentEntryConverter {
 
         documentEntry.setExtraMetadata(new HashMap<>());
 
-        // deletionStatus
-        final Extension deletionStatus = documentReference.getExtensionByUrl("http://fhir.ch/ig/ch-epr-fhir/StructureDefinition/ch-ext-deletionstatus");
-        if (deletionStatus != null && deletionStatus.getValue() instanceof Coding coding)
-            documentEntry.getExtraMetadata().put(ChEpr.DELETION_STATUS_URN, Collections.singletonList(coding.getCode()));
-
-        // originalProviderRole
-        final Extension originalRole = documentReference.getExtensionByUrl("http://fhir.ch/ig/ch-epr-fhir/StructureDefinition/ch-ext-author-authorrole");
-        if (originalRole != null && originalRole.getValue() instanceof final Coding coding) {
-            documentEntry.getExtraMetadata().put(
-                    ChEpr.ORIGINAL_PROVIDER_ROLE_URN,
-                    Collections.singletonList(String.format("%s^^^&%s&ISO", coding.getCode(), Oids.normalize(coding.getSystem())))
-            );
-        }
-
         // masterIdentifier | DocumentEntry.uniqueId
         documentEntry.setUniqueId(documentReference.getMasterIdentifier().getValue());
 
@@ -326,14 +312,14 @@ public class DocumentEntryConverter {
                 //// language | DocumentEntry.languageCode
                 documentEntry.setLanguageCode(attachment.getLanguage());
 
-                //tODO REVIEW THIS!!
                 //// url | DocumentEntry.repositoryUniqueId or DocumentEntry.URI
                 if (attachment.hasUrl()) {
                     if (ConverterUtils.isOid(attachment.getUrl())) {
                         documentEntry.setRepositoryUniqueId(attachment.getUrl());
                     } else {
                         try {
-                            documentEntry.setUri(new URL(attachment.getUrl()).toURI().toString());
+                            final var url = new URL(attachment.getUrl()).toURI();
+                            documentEntry.setUri(url.toString());
                         } catch (MalformedURLException | URISyntaxException ignored) {
                         }
                     }
@@ -357,7 +343,7 @@ public class DocumentEntryConverter {
                 //// creation | DocumentEntry.creationTime
                 if (attachment.hasCreation()) {
                     documentEntry.setCreationTime(new Timestamp(
-                            attachment.getCreation().toInstant().atZone(ZoneId.systemDefault()),
+                            attachment.getCreationElement().getValueAsCalendar().toZonedDateTime(),
                             Timestamp.Precision.SECOND)
                     );
                 }
