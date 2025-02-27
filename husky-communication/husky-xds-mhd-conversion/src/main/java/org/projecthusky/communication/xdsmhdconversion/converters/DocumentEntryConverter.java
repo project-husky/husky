@@ -46,17 +46,12 @@ public class DocumentEntryConverter {
             "https://profiles.ihe.net/ITI/MHD/StructureDefinition-IHE.MHD.Minimal.DocumentReference.html";
 
     /**
-     * Constructor.
-     */
-    protected DocumentEntryConverter() {}
-
-    /**
      * Convert an XDS DocumentEntry to an MHD DocumentReference.
      *
      * @param documentEntry The XDS DocumentEntry to convert.
      * @return the equivalent MHD DocumentReference.
      */
-    public static DocumentReference convertDocumentEntry(final DocumentEntry documentEntry) {
+    public DocumentReference convertDocumentEntry(final DocumentEntry documentEntry) {
         final DocumentReference documentReference = new DocumentReference();
 
         documentReference.setId(ConverterUtils.removePrefixUuid(documentEntry.getEntryUuid()));
@@ -71,6 +66,7 @@ public class DocumentEntryConverter {
         // masterIdentifier | DocumentEntry.uniqueId
         if (documentEntry.getUniqueId() != null) {
             final var masterId = new Identifier().setValue(documentEntry.getUniqueId());
+            masterId.setSystem("urn:ietf:rfc:3986");
             documentReference.setMasterIdentifier(masterId);
         }
 
@@ -238,12 +234,53 @@ public class DocumentEntryConverter {
     }
 
     /**
+     * Convert an XDS DocumentEntry to an MHD DocumentReference.
+     *
+     * @param documentEntry The XDS DocumentEntry to convert.
+     * @param associations  The XDS associations having this document entry as a source and another document entry as a
+     *                      target. Associations are added to the relatesTo element of the document reference.
+     * @return the equivalent MHD DocumentReference.
+     */
+    public DocumentReference convertDocumentEntry(final DocumentEntry documentEntry,
+                                                  final List<Association> associations) {
+        final var docRef = convertDocumentEntry(documentEntry);
+
+        if (associations != null && !associations.isEmpty()) {
+            for (final Association association : associations) {
+                if (association.getAssociationType() == null) throw new IllegalArgumentException("Association type cannot be null");
+                if (association.getSourceUuid() == null || !association.getSourceUuid().equals(documentEntry.getEntryUuid()))
+                    throw new IllegalArgumentException("Association source uuid does not match the document entry uuid");
+                if (association.getTargetUuid() == null) throw new IllegalArgumentException("Association target uuid cannot be null");
+                final var relatesTo = docRef.addRelatesTo();
+                relatesTo.setCode(
+                        switch (association.getAssociationType()) {
+                            case APPEND -> DocumentReference.DocumentRelationshipType.APPENDS;
+                            case REPLACE, TRANSFORM_AND_REPLACE -> DocumentReference.DocumentRelationshipType.REPLACES;
+                            case TRANSFORM, IS_SNAPSHOT_OF -> DocumentReference.DocumentRelationshipType.TRANSFORMS;
+                            case SIGNS -> DocumentReference.DocumentRelationshipType.SIGNS;
+                            case HAS_MEMBER, UPDATE_AVAILABILITY_STATUS, SUBMIT_ASSOCIATION, NON_VERSIONING_UPDATE ->
+                                throw new IllegalArgumentException("Unsupported association type for document entry " + association.getAssociationType().name());
+                        }
+                );
+                relatesTo.setTarget(new Reference().setIdentifier(
+                        new Identifier()
+                                .setSystem("urn:ietf:rfc:3986")
+                                .setValue(ConverterUtils.addPrefixUuid(association.getTargetUuid()))
+                                .setUse(IdentifierUse.OFFICIAL)
+                ));
+            }
+        }
+
+        return docRef;
+    }
+
+    /**
      * Convert an MHD DocumentReference to an XDS DocumentEntry.
      *
      * @param documentReference The MHD DocumentReference to convert.
      * @return the equivalent XDS DocumentEntry.
      */
-    public static DocumentEntry convertDocumentReference(final DocumentReference documentReference) {
+    public DocumentEntry convertDocumentReference(final DocumentReference documentReference) {
         final var documentEntry = new DocumentEntry();
 
         documentEntry.setExtraMetadata(new HashMap<>());
