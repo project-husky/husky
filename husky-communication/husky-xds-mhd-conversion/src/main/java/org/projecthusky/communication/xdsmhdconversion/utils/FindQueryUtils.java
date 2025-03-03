@@ -216,8 +216,12 @@ public class FindQueryUtils {
                         "The modifier '%s' is unexpected",
                         token.getModifier().getValue()
                 );
-            final SystemMapper.SystemEntry system =
-                    (token.getSystem() != null) ? SystemMapper.findByUri(token.getSystem()) : null;
+            SystemMapper.SystemEntry system = null;
+            if (token.getSystem() != null) {
+                system = (Oids.match(token.getSystem()))?
+                        SystemMapper.findByOid(Oids.normalize(token.getSystem())) :
+                        SystemMapper.findByUri(token.getSystem());
+            }
             codes.add(new Code(
                     token.getValue(),
                     null,
