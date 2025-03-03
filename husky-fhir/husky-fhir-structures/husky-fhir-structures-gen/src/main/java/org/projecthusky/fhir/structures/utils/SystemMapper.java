@@ -12,7 +12,6 @@ package org.projecthusky.fhir.structures.utils;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.projecthusky.common.utils.datatypes.Oids;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +57,7 @@ public class SystemMapper {
     public static SystemEntry findByUri(final String uri) {
         Objects.requireNonNull(uri, "uri shall not be null in findByUri()");
         for (final SystemEntry systemEntry : systems) {
-            if ((Oids.normalize(uri)).equals(systemEntry.systemUri)) {
+            if (uri.equals(systemEntry.systemUri)) {
                 return systemEntry;
             }
         }
