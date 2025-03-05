@@ -7,32 +7,31 @@
 	<parent>
 		<groupId>org.projecthusky.communication</groupId>
 		<artifactId>husky-communication</artifactId>
-		<version>3.0.0-SNAPSHOT</version>
+		<version>3.0.3-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
-                        <groupId>org.projecthusky.communication</groupId>
-                        <artifactId>husky-xua-gen-impl</artifactId>
-			<version>3.0.0-SNAPSHOT</version>
-                </dependency>
-                <dependency>
-                        <groupId>org.projecthusky.communication</groupId>
-                        <artifactId>husky-xua-ch-impl</artifactId>
-			<version>3.0.0-SNAPSHOT</version>
-                        <exclusions>
-                                <exclusion>
-                                        <groupId>xpp3</groupId>
-                                        <artifactId>xpp3</artifactId>
-                                </exclusion>
-                        </exclusions>
-                </dependency>
-                <dependency>
-                        <groupId>org.projecthusky.communication</groupId>
-                        <artifactId>husky-communication-gen</artifactId>
-			<version>3.0.0-SNAPSHOT</version>
-                </dependency>
-
+			<groupId>org.projecthusky.communication</groupId>
+			<artifactId>husky-xua-gen-impl</artifactId>
+			<version>3.0.3-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projecthusky.communication</groupId>
+			<artifactId>husky-xua-ch-impl</artifactId>
+			<version>3.0.3-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>xpp3</groupId>
+					<artifactId>xpp3</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.projecthusky.communication</groupId>
+			<artifactId>husky-communication-gen</artifactId>
+			<version>3.0.3-SNAPSHOT</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.opensaml</groupId>
@@ -54,13 +53,10 @@
 			</exclusions>
 		</dependency>
 
-
-		<!--
 		<dependency>
-			<groupId>javax.xml.ws</groupId>
-			<artifactId>jaxws-api</artifactId>
+			<groupId>jakarta.xml.ws</groupId>
+			<artifactId>jakarta.xml.ws-api</artifactId>
 		</dependency>
-		-->
 		<!-- test stuff -->
 		<dependency>
 			<groupId>net.bytebuddy</groupId>

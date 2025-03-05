@@ -35,7 +35,7 @@ public class CustomizedYaml extends Yaml {
 		DumperOptions options = new DumperOptions();
 		options.setTimeZone(Calendar.getInstance().getTimeZone());
 
-		Representer representer = new Representer() {
+		Representer representer = new Representer(options) {
 			@Override
 			protected NodeTuple representJavaBeanProperty(Object javaBean, Property property,
 					Object propertyValue, Tag customTag) {

@@ -4,7 +4,7 @@ name: Test Javadoc
 
 on:
   pull_request:
-    branches: [ master, develop ]
+    branches: [ master, develop-3.x, develop-2.x ]
 
 jobs:
   publish:

@@ -2,7 +2,7 @@
     <parent>
         <groupId>org.projecthusky.fhir.emed.ch</groupId>
         <artifactId>husky-fhir-emed-ch</artifactId>
-        <version>3.0.0-SNAPSHOT</version>
+        <version>3.0.3-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>husky-fhir-emed-ch-epr</artifactId>
@@ -11,13 +11,20 @@
     <dependencies>
         <dependency>
             <groupId>org.projecthusky.fhir.emed.ch</groupId>
-	    	<artifactId>husky-fhir-emed-ch-common</artifactId>
-	   		<version>3.0.0-SNAPSHOT</version>
+	    	    <artifactId>husky-fhir-emed-ch-common</artifactId>
+	   		    <version>3.0.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <!-- Used for FHIR resource validation -->
             <groupId>health.matchbox</groupId>
             <artifactId>matchbox-engine</artifactId>
+            <exclusions>
+                <!-- Exclude dependencies because newer versions already exist -->
+                <exclusion>
+                    <groupId>ca.uhn.hapi.fhir</groupId>
+                    <artifactId>org.hl7.fhir.convertors</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>

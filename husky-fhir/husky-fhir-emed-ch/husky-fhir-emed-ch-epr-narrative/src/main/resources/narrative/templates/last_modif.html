@@ -15,5 +15,5 @@
   <th:block th:if="${lastStatement.resolveInformationSource.practitionerRole != null}">
     <th:block th:insert="~{datatypes :: human-name(${lastStatement.resolveInformationSource.practitionerRole.resolvePractitioner.name[0]}, ${lang})}"/>
   </th:block>
-  (<th:block th:insert="~{datatypes :: instant(${lastStatement.resolveInformationSource.time}, ${lang})}"/>)
+  (<th:block th:insert="~{datatypes :: instant(${lastStatement.resolveMedicalAuthorshipTimestamp()}, ${lang})}"/>)
 </th:block>

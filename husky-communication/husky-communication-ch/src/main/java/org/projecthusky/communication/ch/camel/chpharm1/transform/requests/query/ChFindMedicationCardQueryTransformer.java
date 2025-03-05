@@ -11,6 +11,8 @@
 package org.projecthusky.communication.ch.camel.chpharm1.transform.requests.query;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Code;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Hl7v2Based;
 import org.projecthusky.communication.ch.camel.chpharm1.requests.query.ChFindMedicationCardQuery;
 import org.openehealth.ipf.commons.ihe.xds.core.ebxml.EbXMLAdhocQueryRequest;
 import org.openehealth.ipf.commons.ihe.xds.core.transform.requests.query.QuerySlotHelper;
@@ -29,6 +31,7 @@ public class ChFindMedicationCardQueryTransformer extends ChPharmacyDocumentsQue
      */
     public static final String DOC_ENTRY_LANGUAGE_CODE = "$XDSDocumentEntryLanguageCode";
     public static final String PMLC_QUERY_INCLUDE_NON_ACTIVE = "$PMLCIncludeNonActive";
+    public static final String PMLC_QUERY_PAPER_FORMAT = "$PMLCPaperFormat";
 
     /**
      * Transforms the query into its EbXML representation.
@@ -64,6 +67,11 @@ public class ChFindMedicationCardQueryTransformer extends ChPharmacyDocumentsQue
         if (query.getIncludeNonActive() != null) {
             ebXML.addSlot(PMLC_QUERY_INCLUDE_NON_ACTIVE, QuerySlotHelper.encodeAsString(query.getIncludeNonActive().toString()));
         }
+
+        if (query.getPaperFormat() != null) {
+
+            ebXML.addSlot(PMLC_QUERY_PAPER_FORMAT, QuerySlotHelper.encodeAsString(Hl7v2Based.render(query.getPaperFormat())));
+        }
     }
 
     /**
@@ -95,5 +103,6 @@ public class ChFindMedicationCardQueryTransformer extends ChPharmacyDocumentsQue
 
         query.setLanguageCode(QuerySlotHelper.decodeString(ebXML.getSingleSlotValue(DOC_ENTRY_LANGUAGE_CODE)));
         query.setIncludeNonActive(Boolean.valueOf(QuerySlotHelper.decodeString(ebXML.getSingleSlotValue(PMLC_QUERY_INCLUDE_NON_ACTIVE))));
+        query.setPaperFormat(Hl7v2Based.parse(QuerySlotHelper.decodeString(ebXML.getSingleSlotValue(PMLC_QUERY_PAPER_FORMAT)), Code.class));
     }
 }
