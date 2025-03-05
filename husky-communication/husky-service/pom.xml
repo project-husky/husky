@@ -6,34 +6,34 @@
 	<parent>
 		<groupId>org.projecthusky.communication</groupId>
 		<artifactId>husky-communication</artifactId>
-		<version>3.0.3-SNAPSHOT</version>
+		<version>3.1.0-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.projecthusky.fhir.structures</groupId>
 			<artifactId>husky-fhir-structures-gen</artifactId>
-			<version>3.0.3-SNAPSHOT</version>
+			<version>3.1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projecthusky.communication</groupId>
 			<artifactId>husky-xua-gen-impl</artifactId>
-			<version>3.0.3-SNAPSHOT</version>
+			<version>3.1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projecthusky.communication</groupId>
 			<artifactId>husky-xua-ch-impl</artifactId>
-			<version>3.0.3-SNAPSHOT</version>
+			<version>3.1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projecthusky.communication</groupId>
 			<artifactId>husky-communication-gen</artifactId>
-			<version>3.0.3-SNAPSHOT</version>
+			<version>3.1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projecthusky.communication</groupId>
 			<artifactId>husky-valueset-gen</artifactId>
-			<version>3.0.3-SNAPSHOT</version>
+			<version>3.1.0-SNAPSHOT</version>
 		</dependency>
 
 
