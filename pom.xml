@@ -42,7 +42,7 @@
 		<spring.boot.version>3.4.3</spring.boot.version>
 		<hapi.fhir.version>7.4.5</hapi.fhir.version>
 		<jakarta-jwsapi-version>2.1.0</jakarta-jwsapi-version>
-		<camel.version>4.8.0</camel.version>
+		<camel.version>4.8.3</camel.version>
 		<zxing.version>3.5.3</zxing.version>
 		<openhtmltopdf-version>1.1.22</openhtmltopdf-version>
 		<org.hl7.fhir.version>6.4.1</org.hl7.fhir.version>
