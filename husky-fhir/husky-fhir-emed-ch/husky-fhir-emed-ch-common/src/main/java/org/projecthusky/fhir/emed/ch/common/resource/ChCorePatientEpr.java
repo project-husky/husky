@@ -16,8 +16,8 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.*;
+import org.projecthusky.fhir.core.ch.enums.ReligiousAffiliation;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
-import org.projecthusky.fhir.emed.ch.common.enums.ReligiousAffiliation;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.util.FhirDateTimes;
 
