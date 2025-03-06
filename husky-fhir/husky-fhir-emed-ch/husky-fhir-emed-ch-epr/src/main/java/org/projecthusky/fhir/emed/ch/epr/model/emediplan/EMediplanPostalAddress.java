@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EMediplanPostalAddress implements EMediplanObject {
-    protected static final Pattern COUNTRY_CODE_PATTERN = Pattern.compile( "[a-zA-Z]{2}" );
+    protected static final Pattern COUNTRY_CODE_PATTERN = Pattern.compile( "^[a-zA-Z]{2}$" );
 
     /**
      * All information at lower leven than the postal code, can be several lines.
