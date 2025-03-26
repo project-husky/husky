@@ -13,6 +13,7 @@ package org.projecthusky.fhir.emed.ch.common.datatype;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Address;
 import org.hl7.fhir.r4.model.StringType;
+import org.projecthusky.fhir.emed.ch.common.enums.AddressLineType;
 
 import java.util.List;
 import java.util.Objects;
@@ -140,7 +141,11 @@ public class ChCoreAddressAdapter {
         /**
          * URLs of extensions.
          */
-        public static final String LINE_TYPE = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-ech-10-linetype";
+        public static final String LINE_TYPE_URL = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-ech-10-linetype";
+        public static final String STREET_NAME_URL = "http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName";
+        public static final String HOUSE_NUMBER_URL = "http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber";
+        public static final String UNIT_ID_URL = "http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-unitID";
+        public static final String POSTBOX_URL = "http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-postBox";
 
         /**
          * The underlying address line.
@@ -164,10 +169,101 @@ public class ChCoreAddressAdapter {
         }
 
         /**
+         * Constructor for a string. A string type containing the received string will be implicitly created.
+         * @param line The address line string to use.
+         */
+        public AddressLineAdapter(final String line) {
+            this.line = new StringType(Objects.requireNonNull(line));
+        }
+
+        /**
          * Gets the underlying address line.
          */
         public StringType getLine() {
             return this.line;
+        }
+
+        /**
+         * Gets the address line type from the <a href="">ECH0010AddressLineType</a> extension if present and matching a
+         * proper value. {@code null} otherwise.
+         */
+        public @Nullable AddressLineType getLineType() {
+            final var lineTypeExtension = line.getExtensionByUrl(LINE_TYPE_URL);
+            if (lineTypeExtension != null)
+                return AddressLineType.getEnum(lineTypeExtension.getValueAsPrimitive().getValueAsString());
+            else return null;
+        }
+
+        /**
+         * Gets the street name extension content from the address line.
+         * @return The string containing the street name from the extension, if it exists, {@code null} otherwise.
+         */
+        public @Nullable String getStreetName() {
+            return line.getExtensionString(STREET_NAME_URL);
+        }
+
+        /**
+         * Sets the street name extension for the wrapped address line.
+         * @param streetName The street name to be set in the extension.
+         * @return The address line adapter itself.
+         */
+        public AddressLineAdapter setStreetName(final String streetName) {
+            line.addExtension(STREET_NAME_URL, new StringType(streetName));
+            return this;
+        }
+
+        /**
+         * Gets the house number extension content from the address line.
+         * @return The string containing the house number from the extension if it exists, otherwise {@code null}.
+         */
+        public @Nullable String getHouseNumber() {
+            return line.getExtensionString(HOUSE_NUMBER_URL);
+        }
+
+        /**
+         * Sets the house number extension for the wrapped address line.
+         * @param houseNumber The house number to be set in the extension.
+         * @return The address line adapter itself.
+         */
+        public AddressLineAdapter setHouseNumber(final String houseNumber) {
+            line.addExtension(HOUSE_NUMBER_URL, new StringType(houseNumber));
+            return this;
+        }
+
+        /**
+         * Gets the unit id extension content from the address line.
+         * @return The string containing the unit id from the extension if it exists, otherwise {@code null}.
+         */
+        public @Nullable String getUnitId() {
+            return line.getExtensionString(UNIT_ID_URL);
+        }
+
+        /**
+         * Sets the unit id extension for the wrapped address line.
+         * @param unitId The unit id to be set in the extension.
+         * @return The address line adapter itself.
+         */
+        public AddressLineAdapter setUnitId(final String unitId) {
+            line.addExtension(UNIT_ID_URL, new StringType(unitId));
+            return this;
+        }
+
+        /**
+         * Gets the postbox extension content from the address line.
+         * @return The string containing the postbox from the extension if it exists, otherwise {@code null}.
+         */
+        public @Nullable String getPostBox() {
+            return line.getExtensionString(POSTBOX_URL);
+        }
+
+        /**
+         * Sets the postbox extension for the wrapped address line.
+         * @param postBox The postbox to be set in the extension.
+         * @return The address line adapter itself.
+         */
+        public AddressLineAdapter setPostBox(final String postBox) {
+            line.addExtension(POSTBOX_URL, new StringType(postBox));
+            return this;
         }
     }
 }
