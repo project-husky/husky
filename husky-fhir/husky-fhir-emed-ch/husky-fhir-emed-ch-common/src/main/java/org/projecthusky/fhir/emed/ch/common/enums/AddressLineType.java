@@ -221,6 +221,18 @@ public enum AddressLineType implements ValueSetEnumInterface, FhirValueSetEnumIn
         return new CodeableConcept().setText(this.displayNames[0]).addCoding(this.getCoding());
     }
 
+    @Override
+    public @NonNull Coding getCoding(LanguageCode languageCode) {
+        return new Coding(this.getFhirSystem(),
+                this.getCodeValue(),
+                this.getDisplayName(languageCode));
+    }
+
+    @Override
+    public @NonNull CodeableConcept getCodeableConcept(LanguageCode languageCode) {
+        return new CodeableConcept().setText(this.getDisplayName(languageCode)).addCoding(this.getCoding(languageCode));
+    }
+
     /**
      * Compares the enum value to the given FHIR Coding.
      *
