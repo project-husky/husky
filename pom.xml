@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.projecthusky</groupId>
 	<artifactId>husky-api</artifactId>
-	<version>3.0.3-SNAPSHOT</version>
+	<version>3.1.0-SNAPSHOT</version>
 	<url>https://github.com/project-husky/husky</url>
 	<name>Husky</name>
 	<packaging>pom</packaging>
@@ -18,7 +18,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-		<java.version>17</java.version>
+		<java.version>21</java.version>
 		<maven.compiler.release>${java.version}</maven.compiler.release>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
@@ -32,17 +32,17 @@
 		<apache-httpcore>4.4.16</apache-httpcore>
 		<junit.version>5.10.0</junit.version>
 		<maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
-		<ipf.version>5.0-m3</ipf.version>
+		<ipf.version>5.0.0</ipf.version>
 		<!-- The following dependencies should be kept up-to-date with IPF to
 		avoid duplicating dependencies:
             https://github.com/oehf/ipf/blob/master/dependencies/pom.xml (select the right
 		version in the tags) -->
 		<jaxb.version>4.0.5</jaxb.version>
-		<spring.version>6.1.14</spring.version>
-		<spring.boot.version>3.3.4</spring.boot.version>
+		<spring.version>6.2.2</spring.version>
+		<spring.boot.version>3.4.3</spring.boot.version>
 		<hapi.fhir.version>7.4.5</hapi.fhir.version>
 		<jakarta-jwsapi-version>2.1.0</jakarta-jwsapi-version>
-		<camel.version>4.8.0</camel.version>
+		<camel.version>4.8.3</camel.version>
 		<zxing.version>3.5.3</zxing.version>
 		<openhtmltopdf-version>1.1.22</openhtmltopdf-version>
 		<org.hl7.fhir.version>6.4.1</org.hl7.fhir.version>
@@ -50,6 +50,7 @@
 		<jakarta.xml.version>3.0.1</jakarta.xml.version>
 		<tomcat.embed.version>10.1.31</tomcat.embed.version>
 		<bouncycastle.version>1.79</bouncycastle.version>
+		<logback.version>1.5.16</logback.version>
 	</properties>
 	<scm>
 		<connection>scm:git:https://github.com/project-husky/husky.git</connection>
@@ -326,7 +327,7 @@
 			<dependency>
 				<groupId>net.minidev</groupId>
 				<artifactId>json-smart</artifactId>
-				<version>2.5.1</version>
+				<version>2.5.2</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.angus</groupId>
@@ -380,7 +381,7 @@
 			<dependency>
 				<groupId>jakarta.xml.bind</groupId>
 				<artifactId>jakarta.xml.bind-api</artifactId>
-				<version>4.0.1</version>
+				<version>4.0.2</version>
 			</dependency>
 			<dependency>
 				<groupId>jakarta.jws</groupId>
@@ -512,10 +513,11 @@
 			-->
 
 
+
 			<dependency>
 				<groupId>health.matchbox</groupId>
 				<artifactId>matchbox-engine</artifactId>
-				<version>3.8.0</version>
+				<version>3.9.13</version>
 				<exclusions>
 					<exclusion>
 						<groupId>ca.uhn.hapi</groupId>
@@ -899,6 +901,17 @@
 		<dependency>
 			<groupId>org.eclipse.angus</groupId>
 			<artifactId>angus-mail</artifactId>
+		</dependency>
+		
+		<dependency>
+    		<groupId>org.fhir</groupId>
+    		<artifactId>ucum</artifactId>
+    		<version>1.0.9</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
 		</dependency>
 
 
@@ -1297,7 +1310,7 @@
 					<plugin>
 						<groupId>org.owasp</groupId>
 						<artifactId>dependency-check-maven</artifactId>
-						<version>11.1.0</version>
+						<version>12.1.0</version>
 						<configuration>
 							<skipProvidedScope>true</skipProvidedScope>
 							<skipRuntimeScope>true</skipRuntimeScope>
@@ -1309,6 +1322,7 @@
 								<format>HTML</format>
 								<format>JSON</format>
 							</formats>
+							<nvdApiServerId>nvd-server</nvdApiServerId>
 						</configuration>
 						<executions>
 							<execution>

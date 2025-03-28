@@ -10,7 +10,6 @@
  */
 package org.projecthusky.communication.ch.camel;
 
-import org.projecthusky.communication.ch.camel.chpharm1.ChPharm1PortType;
 import org.openehealth.ipf.commons.ihe.core.InteractionId;
 import org.openehealth.ipf.commons.ihe.ws.WsTransactionConfiguration;
 import org.openehealth.ipf.commons.ihe.xds.XdsIntegrationProfile;
@@ -18,6 +17,7 @@ import org.openehealth.ipf.commons.ihe.xds.XdsInteractionId;
 import org.openehealth.ipf.commons.ihe.xds.core.audit.XdsAuditDataset;
 import org.openehealth.ipf.commons.ihe.xds.core.audit.XdsQueryAuditDataset;
 import org.openehealth.ipf.commons.ihe.xds.pharm1.Pharm1AuditStrategy;
+import org.projecthusky.communication.ch.camel.chpharm1.ChPharm1PortType;
 
 import javax.xml.namespace.QName;
 import java.util.Arrays;
@@ -52,7 +52,6 @@ public class ChCmpd implements XdsIntegrationProfile {
         }
     }
 
-    @Override
     public boolean isEbXml30Based() {
         return true;
     }
