@@ -441,7 +441,7 @@ public abstract class ChEmedEprObservation<S extends ChEmedEprMedicationStatemen
      * @param languageCode  the requested language for the display name.
      * @return this.
      */
-    public ChEmedEprObservation<T> setPadvEntryType(final EmedPadvEntryType padvEntryType,
+    public ChEmedEprObservation<S, R> setPadvEntryType(final EmedPadvEntryType padvEntryType,
                                                     final LanguageCode languageCode) {
         this.setCode(padvEntryType.getCodeableConcept(languageCode));
         return this;
