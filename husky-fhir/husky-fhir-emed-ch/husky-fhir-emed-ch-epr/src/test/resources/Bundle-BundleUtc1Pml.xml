@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Bundle xmlns="http://hl7.org/fhir">
+  <id value="BundleUtc1Pml"/>
+  <meta>
+    <profile value="http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationlist"/>
+  </meta>
+  <identifier>
+    <system value="urn:ietf:rfc:3986"/>
+    <value value="urn:uuid:87f151e3-9e67-48aa-8cfe-f816ae5fc084"/>
+  </identifier>
+  <type value="document"/>
+  <timestamp value="2023-10-01T00:00:00+02:00"/>
+  <entry>
+    <fullUrl value="urn:uuid:87f151e3-9e67-48aa-8cfe-f816ae5fc084"/>
+    <resource>
+      <Composition>
+        <id value="Inline-composition-for-utc-1-pml"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-composition-medicationlist"/>
+        </meta>
+        <language value="fr-CH"/>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr-CH" lang="fr-CH"><a name="Composition_Inline-composition-for-utc-1-pml"> </a><p class="res-header-id"><b>Generated Narrative: Composition Inline-composition-for-utc-1-pml</b></p><a name="Inline-composition-for-utc-1-pml"> </a><a name="hcInline-composition-for-utc-1-pml"> </a><a name="Inline-composition-for-utc-1-pml-en-US"> </a><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Language: fr-CH</p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-epr-composition-medicationlist.html">PML Composition</a></p></div><p><b>identifier</b>: <a href="http://terminology.hl7.org/6.1.0/NamingSystem-uri.html" title="As defined by RFC 3986 (http://www.ietf.org/rfc/rfc3986.txt)(with many schemes defined in many RFCs). For OIDs and UUIDs, use the URN form (urn:oid:(note: lowercase) and urn:uuid:). See http://www.ietf.org/rfc/rfc3001.txt and http://www.ietf.org/rfc/rfc4122.txt 
+
+This oid is used as an identifier II.root to indicate the the extension is an absolute URI (technically, an IRI). Typically, this is used for OIDs and GUIDs. Note that when this OID is used with OIDs and GUIDs, the II.extension should start with urn:oid or urn:uuid: 
+
+Note that this OID is created to aid with interconversion between CDA and FHIR - FHIR uses urn:ietf:rfc:3986 as equivalent to this OID. URIs as identifiers appear more commonly in FHIR.
+
+This OID may also be used in CD.codeSystem.">Uniform Resource Identifier (URI)</a>/urn:uuid:87f151e3-9e67-48aa-8cfe-f816ae5fc084</p><p><b>status</b>: Final</p><p><b>type</b>: <span title="Codes:{http://snomed.info/sct 721912009}, {http://loinc.org 56445-0}">Medication summary document (record artifact)</span></p><p><b>date</b>: 2023-10-01 00:00:00+0200</p><p><b>author</b>: <a href="Bundle-BundleUtc1Pml.html#urn-uuid-f5090ee8-b8b1-4b1e-b529-b6d55fad08d4">Bundle: identifier = UUID:87f151e3-9e67-48aa-8cfe-f816ae5fc084; type = document; timestamp = 2023-10-01 00:00:00+0200</a></p><p><b>title</b>: Liste de médication</p><p><b>confidentiality</b>: normal</p><p><b>custodian</b>: <a href="Bundle-BundleUtc1Pml.html#urn-uuid-dd9fd2e4-92d4-4a56-bda2-cf921e432eea">Bundle: identifier = UUID:87f151e3-9e67-48aa-8cfe-f816ae5fc084; type = document; timestamp = 2023-10-01 00:00:00+0200</a></p></div>
+        </text>
+        <identifier>
+          <system value="urn:ietf:rfc:3986"/>
+          <value value="urn:uuid:87f151e3-9e67-48aa-8cfe-f816ae5fc084"/>
+        </identifier>
+        <status value="final"/>
+        <type>
+          <coding>
+            <system value="http://snomed.info/sct"/>
+            <code value="721912009"/>
+            <display value="Medication summary document (record artifact)"/>
+          </coding>
+          <coding>
+            <system value="http://loinc.org"/>
+            <code value="56445-0"/>
+            <display value="Medication summary Document"/>
+          </coding>
+        </type>
+        <subject>
+          <reference value="urn:uuid:9b00e81e-1165-4039-9d60-698ef838ae1a"/>
+        </subject>
+        <date value="2023-10-01T00:00:00+02:00"/>
+        <author>
+          <reference value="urn:uuid:f5090ee8-b8b1-4b1e-b529-b6d55fad08d4"/>
+        </author>
+        <title value="Liste de médication"/>
+        <confidentiality value="N">
+          <extension url="http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-confidentialitycode">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://snomed.info/sct"/>
+                <code value="17621005"/>
+                <display value="Normal (qualifier value)"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+        </confidentiality>
+        <custodian>
+          <reference value="urn:uuid:dd9fd2e4-92d4-4a56-bda2-cf921e432eea"/>
+        </custodian>
+        <section>
+          <title value="Medication List"/>
+          <code>
+            <coding>
+              <system value="http://loinc.org"/>
+              <code value="10160-0"/>
+              <display value="History of Medication use Narrative"/>
+            </coding>
+          </code>
+          <text>
+            <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml">Cette liste de médication a été générée automatiquement par le service eMedication CARA le 1 octore 2023 à 00:00:00 CEST. Les paramètres utilisés pour la génération du document sont : les éléments de type Medication Treatment Plan Item, Prescription Item, Dispense Item et PADV sont inclus ; tous les traitements sont considérés.</div>
+          </text>
+        </section>
+      </Composition>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="urn:uuid:9b00e81e-1165-4039-9d60-698ef838ae1a"/>
+    <resource>
+      <Patient>
+        <id value="PatientCARAPMP004"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"/>
+        </meta>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="Patient_PatientCARAPMP004"> </a><p class="res-header-id"><b>Generated Narrative: Patient PatientCARAPMP004</b></p><a name="PatientCARAPMP004"> </a><a name="hcPatientCARAPMP004"> </a><a name="PatientCARAPMP004-en-US"> </a><p style="border: 1px #661aff solid; background-color: #e6e6ff; padding: 10px;">Michaël Christopher Karce  Male, DoB: 1973-12-25 ( Medical record number (use: official, ))</p><hr/><table class="grid"><tr><td style="background-color: #f3f5da" title="Record is active">Active:</td><td>true</td><td style="background-color: #f3f5da" title="Known Marital status of Patient">Marital Status:</td><td colspan="3"><span title="Codes:{http://fhir.ch/ig/ch-core/CodeSystem/ech-11-maritalstatus 9}">unbekannt</span></td></tr><tr><td style="background-color: #f3f5da" title="Other Id (see the one above)">Other Id:</td><td colspan="3">Medical record number/CARAPMP004 (use: secondary, )</td></tr></table></div>
+        </text>
+        <identifier>
+          <use value="official"/>
+          <type>
+            <coding>
+              <system value="http://terminology.hl7.org/CodeSystem/v2-0203"/>
+              <code value="MR"/>
+            </coding>
+          </type>
+          <system value="urn:oid:2.16.756.5.30.1.191.1.0.2.1"/>
+          <value value="9b00e81e-1165-4039-9d60-698ef838ae1a"/>
+        </identifier>
+        <identifier>
+          <use value="secondary"/>
+          <type>
+            <coding>
+              <system value="http://terminology.hl7.org/CodeSystem/v2-0203"/>
+              <code value="MR"/>
+            </coding>
+          </type>
+          <system value="urn:oid:2.16.756.5.30.1.196.3.2.1"/>
+          <value value="CARAPMP004"/>
+        </identifier>
+        <active value="true"/>
+        <name>
+          <family value="Karce"/>
+          <given value="Michaël Christopher"/>
+        </name>
+        <gender value="male"/>
+        <birthDate value="1973-12-25"/>
+        <maritalStatus>
+          <coding>
+            <system value="http://fhir.ch/ig/ch-core/CodeSystem/ech-11-maritalstatus"/>
+            <code value="9"/>
+            <display value="unbekannt"/>
+          </coding>
+        </maritalStatus>
+      </Patient>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="urn:uuid:f5090ee8-b8b1-4b1e-b529-b6d55fad08d4"/>
+    <resource>
+      <Device>
+        <id value="DevicePmp"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-device"/>
+        </meta>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="Device_DevicePmp"> </a><p class="res-header-id"><b>Generated Narrative: Device DevicePmp</b></p><a name="DevicePmp"> </a><a name="hcDevicePmp"> </a><a name="DevicePmp-en-US"> </a><h3>DeviceNames</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Name</b></td><td><b>Type</b></td></tr><tr><td style="display: none">*</td><td>PMP CARA v0.1</td><td>Model name</td></tr></table><p><b>type</b>: <span title="Codes:{http://snomed.info/sct 701612004}">Pharmaceutical information system application software (physical object)</span></p><h3>Versions</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Value</b></td></tr><tr><td style="display: none">*</td><td>8153cba</td></tr></table><p><b>owner</b>: <a href="Bundle-BundleUtc1Pml.html#urn-uuid-dd9fd2e4-92d4-4a56-bda2-cf921e432eea">Bundle: identifier = UUID:87f151e3-9e67-48aa-8cfe-f816ae5fc084; type = document; timestamp = 2023-10-01 00:00:00+0200</a></p></div>
+        </text>
+        <deviceName>
+          <name value="PMP CARA v0.1"/>
+          <type value="model-name"/>
+        </deviceName>
+        <type>
+          <coding>
+            <system value="http://snomed.info/sct"/>
+            <code value="701612004"/>
+            <display value="Pharmaceutical information system application software (physical object)"/>
+          </coding>
+        </type>
+        <version>
+          <value value="8153cba"/>
+        </version>
+        <owner>
+          <reference value="urn:uuid:dd9fd2e4-92d4-4a56-bda2-cf921e432eea"/>
+        </owner>
+      </Device>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="urn:uuid:dd9fd2e4-92d4-4a56-bda2-cf921e432eea"/>
+    <resource>
+      <Organization>
+        <id value="OrganizationCara"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-organization"/>
+        </meta>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="Organization_OrganizationCara"> </a><p class="res-header-id"><b>Generated Narrative: Organization OrganizationCara</b></p><a name="OrganizationCara"> </a><a name="hcOrganizationCara"> </a><a name="OrganizationCara-en-US"> </a><p><b>identifier</b>: <a href="https://www.gs1.org/standards/id-keys/gln" title="Global Location Number">GLN</a>/7601001407428</p><p><b>name</b>: Association CARA</p><p><b>address</b>: Route de la Corniche 3a Épalinges Vaud 1066 CH </p></div>
+        </text>
+        <identifier>
+          <system value="urn:oid:2.51.1.3"/>
+          <value value="7601001407428"/>
+        </identifier>
+        <name value="Association CARA"/>
+        <address>
+          <line value="Route de la Corniche 3a"/>
+          <city value="Épalinges"/>
+          <state value="Vaud"/>
+          <postalCode value="1066"/>
+          <country value="CH"/>
+        </address>
+      </Organization>
+    </resource>
+  </entry>
+</Bundle>

@@ -10,9 +10,9 @@
  */
 package org.projecthusky.fhir.emed.ch.common.enums;
 
-import org.projecthusky.communication.ch.enums.beta.ClassCode;
-import org.projecthusky.communication.ch.enums.beta.FormatCode;
-import org.projecthusky.communication.ch.enums.beta.TypeCode;
+import org.projecthusky.communication.ch.enums.stable.ClassCode;
+import org.projecthusky.communication.ch.enums.stable.FormatCode;
+import org.projecthusky.communication.ch.enums.stable.TypeCode;
 
 import java.util.Objects;
 
@@ -26,42 +26,42 @@ public enum EmedDocumentType {
     MTP(
             "MTP",
             TypeCode.MEDICATION_TREATMENT_PLAN,
-            ClassCode.PRESCRIPTION_RECORD,
-            FormatCode.CH_EMED_MEDICATION_TREATMENT_PLAN,
+            ClassCode.CARE_PLAN,
+            FormatCode.CH_EMED_MEDICATION_TREATMENT_PLAN_DOCUMENT,
             "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationtreatmentplan"
     ),
     PRE(
             "PRE",
             TypeCode.MEDICAL_PRESCRIPTION_RECORD,
-            ClassCode.PRESCRIPTION_RECORD,
-            FormatCode.CH_EMED_MEDICATION_PRESCRIPTION,
+            ClassCode.PRESCRIPTION,
+            FormatCode.CH_EMED_MEDICATION_PRESCRIPTION_DOCUMENT,
             "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationprescription"
     ),
     DIS(
             "DIS",
-            TypeCode.MEDICATION_DISPENSE_DOCUMENT,
-            ClassCode.PRESCRIPTION_RECORD,
-            FormatCode.CH_EMED_MEDICATION_DISPENSE,
+            TypeCode.MEDICATION_DISPENSE,
+            ClassCode.EVENT_REPORT,
+            FormatCode.CH_EMED_MEDICATION_DISPENSE_DOCUMENT,
             "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationdispense"
     ),
     PADV(
             "PADV",
             TypeCode.RECORD_ARTIFACT,
-            ClassCode.PRESCRIPTION_RECORD,
-            FormatCode.CH_EMED_PHARMACEUTICAL_ADVICE,
+            ClassCode.PRESCRIPTION,
+            FormatCode.CH_EMED_PHARMACEUTICAL_ADVICE_DOCUMENT,
             "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-pharmaceuticaladvice"
     ),
     PML(
             "PML",
-            TypeCode.MEDICATION_SUMMARY_DOCUMENT,
-            ClassCode.SUMMARY_CLINICAL_DOCUMENT,
-            FormatCode.CH_EMED_MEDICATION_LIST,
+            TypeCode.MEDICATION_LIST,
+            ClassCode.SUMMARY,
+            FormatCode.CH_EMED_MEDICATION_LIST_DOCUMENT,
             "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationlist"
     ),
     PMLC(
             "PMLC",
             TypeCode.MEDICATION_CARD_DOCUMENT,
-            ClassCode.SUMMARY_CLINICAL_DOCUMENT,
+            ClassCode.SUMMARY,
             FormatCode.CH_EMED_MEDICATION_CARD_DOCUMENT,
             "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-document-medicationcard"
     );

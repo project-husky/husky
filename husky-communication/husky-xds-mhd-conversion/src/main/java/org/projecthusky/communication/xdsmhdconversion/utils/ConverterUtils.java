@@ -242,7 +242,7 @@ public class ConverterUtils {
     public static Reference toPatientReference(final Identifiable patient) {
         final String system = patient.getAssigningAuthority().getUniversalId();
         final String value = patient.getId();
-        return new Reference().setReference(system + "-" + value);
+        return new Reference().setIdentifier(new Identifier().setSystem(system).setValue(value));
     }
 
     /**
