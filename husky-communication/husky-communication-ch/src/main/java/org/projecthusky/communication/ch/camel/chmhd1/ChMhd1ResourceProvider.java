@@ -9,8 +9,8 @@ import org.hl7.fhir.r4.model.DocumentReference;
 import org.hl7.fhir.r4.model.IdType;
 import org.openehealth.ipf.commons.ihe.fhir.AbstractPlainProvider;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * A resource provider for the <a href="https://fhir.ch/ig/ch-epr-fhir/ch-mhd-1.html">CH:MHD-1</a> transaction.
