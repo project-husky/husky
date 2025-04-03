@@ -14,6 +14,7 @@ import java.util.UUID;
  */
 @Block
 public class ChEmedExtPharmaceuticalAdvice extends ChEmedExtensionReference {
+    public static final String URL = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-pharmaceuticaladvice";
 
     /**
      * Empty constructor
