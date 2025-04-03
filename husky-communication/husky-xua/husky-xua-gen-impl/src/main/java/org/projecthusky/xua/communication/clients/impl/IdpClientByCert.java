@@ -10,15 +10,22 @@
  */
 package org.projecthusky.xua.communication.clients.impl;
 
+import java.io.FileInputStream;
 import java.security.KeyManagementException;
+import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
+import java.security.cert.X509Certificate;
 
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.ssl.SSLContexts;
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
+import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;
+import org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy;
+import org.apache.hc.core5.ssl.SSLContexts;
+import org.apache.hc.core5.ssl.TrustStrategy;
 import org.projecthusky.xua.authentication.AuthnRequest;
 import org.projecthusky.xua.communication.config.impl.IdpClientCertificateAuthConfigImpl;
 import org.projecthusky.xua.exceptions.ClientSendException;
@@ -49,10 +56,23 @@ public class IdpClientByCert extends AbstractHttpFormIdpClient {
 	@Override
 	public CloseableHttpClient getHttpClient() throws ClientSendException {
 		try {
-			final var sslContext = SSLContexts.custom()
-					.loadKeyMaterial(config.getClientKeyStore(), config.getClientKeyStorePassword())
+//			final var sslContext = SSLContexts.custom()
+//					.loadKeyMaterial(config.getClientKeyStore(), config.getClientKeyStorePassword())
+//					.build();
+//			return HttpClients.custom().setSSLContext(sslContext).build();
+			KeyStore keyStore = config.getClientKeyStore();
+			final TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain,
+					String authType) -> true;
+			final var sslContext = SSLContexts.custom()//
+					.loadKeyMaterial(keyStore, config.getClientKeyStorePassword())//
+					.loadTrustMaterial(keyStore, acceptingTrustStrategy)//
 					.build();
-			return HttpClients.custom().setSSLContext(sslContext).build();
+			PoolingHttpClientConnectionManager connectionManager = PoolingHttpClientConnectionManagerBuilder
+					.create()//
+					.setTlsSocketStrategy(new DefaultClientTlsStrategy(sslContext)).build();
+			return HttpClients.custom().setConnectionManager(connectionManager).build();
+			
+			
 		} catch (KeyManagementException | UnrecoverableKeyException | NoSuchAlgorithmException
 				| KeyStoreException e) {
 			throw new ClientSendException(e);

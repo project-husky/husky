@@ -15,22 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.io.IOException;
 import java.net.URL;
 import java.security.KeyStore;
+import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.SSLContext;
 
-import org.apache.http.HttpException;
-import org.apache.http.HttpRequest;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.config.SocketConfig;
-import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.bootstrap.HttpServer;
-import org.apache.http.impl.bootstrap.ServerBootstrap;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.protocol.HttpContext;
-import org.apache.http.protocol.HttpRequestHandler;
-import org.apache.http.ssl.SSLContexts;
 import org.projecthusky.xua.authentication.AuthnRequest;
 import org.projecthusky.xua.communication.config.impl.IdpClientCertificateAuthConfigBuilder;
 import org.projecthusky.xua.communication.config.impl.IdpClientCertificateAuthConfigImpl;
@@ -39,6 +27,20 @@ import org.projecthusky.xua.exceptions.ClientSendException;
 import org.projecthusky.xua.pki.impl.PkiManagerImpl;
 import org.projecthusky.xua.saml2.Response;
 import org.projecthusky.xua.utilities.impl.InitializerTestHelper;
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.ssl.TrustSelfSignedStrategy;
+import org.apache.hc.core5.http.ClassicHttpRequest;
+import org.apache.hc.core5.http.ClassicHttpResponse;
+import org.apache.hc.core5.http.HttpException;
+import org.apache.hc.core5.http.HttpRequest;
+import org.apache.hc.core5.http.impl.bootstrap.HttpServer;
+import org.apache.hc.core5.http.impl.bootstrap.ServerBootstrap;
+import org.apache.hc.core5.http.io.HttpRequestHandler;
+import org.apache.hc.core5.http.io.SocketConfig;
+import org.apache.hc.core5.http.io.entity.StringEntity;
+import org.apache.hc.core5.http.protocol.HttpContext;
+import org.apache.hc.core5.ssl.SSLContexts;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -62,7 +64,7 @@ public class IdpClientByCertTest extends InitializerTestHelper {
 	@BeforeAll
 	public static void setUpBeforeClass() throws Exception {
 		InitializerTestHelper.setUpBeforeClass();
-		final SocketConfig socketConfig = SocketConfig.custom().setSoTimeout(15000)
+		final SocketConfig socketConfig = SocketConfig.custom().setSoTimeout(15000, TimeUnit.MILLISECONDS)
 				.setTcpNoDelay(true).build();
 
 		final URL url = IdpClientByCertTest.class.getResource("/testserver.p12");
@@ -75,17 +77,17 @@ public class IdpClientByCertTest extends InitializerTestHelper {
 					.build();
 
 			server = ServerBootstrap.bootstrap()//
-					.setServerInfo("Test/1.1")//
+//					.setServerInfo("Test/1.1")//
 					.setSocketConfig(socketConfig)//
 					.setSslContext(sslContext)//
 					.setSslSetupHandler(socket -> socket.setNeedClientAuth(true))//
-					.registerHandler("*", new HttpRequestHandler() {
+					.register("*", new HttpRequestHandler() {
 
 						@Override
-						public void handle(HttpRequest request, HttpResponse response,
+						public void handle(ClassicHttpRequest request, ClassicHttpResponse response,
 								HttpContext context) throws HttpException, IOException {
-							logger.debug("The request %s", request.getRequestLine());
-							response.setStatusCode(500);
+							logger.debug("The request %s", request.getRequestUri());
+							response.setCode(500);
 							response.setEntity(new StringEntity("Hello this is a testserver"));
 						}
 

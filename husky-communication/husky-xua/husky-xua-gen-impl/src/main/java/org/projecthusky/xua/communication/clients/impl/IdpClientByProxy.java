@@ -10,10 +10,11 @@
  */
 package org.projecthusky.xua.communication.clients.impl;
 
-import org.apache.http.HttpHost;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.core5.http.HttpHost;
 import org.projecthusky.xua.authentication.AuthnRequest;
 import org.projecthusky.xua.communication.config.impl.IdpClientViaHttpProxyConfigImpl;
 import org.projecthusky.xua.exceptions.ClientSendException;
@@ -48,7 +49,8 @@ public class IdpClientByProxy extends AbstractHttpFormIdpClient {
 
 	@Override
 	public RequestConfig getRequestConfig() {
-		final var proxy = new HttpHost(config.getProxyHost(), config.getProxyPort(), config.getProxyProtocol());
+		final var proxy = new HttpHost(config.getProxyHost(), config.getProxyPort());
+		
 		return RequestConfig.custom().setProxy(proxy).build();
 	}
 

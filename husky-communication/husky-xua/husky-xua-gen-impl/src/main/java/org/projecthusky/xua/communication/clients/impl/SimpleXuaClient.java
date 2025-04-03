@@ -20,8 +20,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.xpath.XPathExpressionException;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.entity.StringEntity;
+
 import org.projecthusky.xua.communication.clients.XuaClient;
 import org.projecthusky.xua.communication.config.XuaClientConfig;
 import org.projecthusky.xua.communication.soap.impl.WsaHeaderValue;
@@ -38,6 +37,9 @@ import org.projecthusky.xua.serialization.impl.EncryptedAssertionSerializerImpl;
 import org.projecthusky.xua.serialization.impl.UsernameTokenSerializerImpl;
 import org.projecthusky.xua.serialization.impl.XUserAssertionRequestSerializerImpl;
 import org.projecthusky.xua.wssecurity.UsernameToken;
+import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.opensaml.core.xml.io.UnmarshallingException;
 import org.opensaml.soap.wstrust.RequestSecurityTokenResponse;
 import org.opensaml.soap.wstrust.RequestSecurityTokenResponseCollection;
@@ -98,8 +100,7 @@ public class SimpleXuaClient extends AbstractSoapClient<List<XUserAssertionRespo
 		getLogger().debug("SOAP Message\n {}", body);
 
 		// add string as body to httpentity
-		final var stringEntity = new StringEntity(body, "UTF-8");
-		stringEntity.setChunked(false);
+		final var stringEntity = new StringEntity(body, ContentType.APPLICATION_SOAP_XML, null, false);
 
 		return stringEntity;
 	}
