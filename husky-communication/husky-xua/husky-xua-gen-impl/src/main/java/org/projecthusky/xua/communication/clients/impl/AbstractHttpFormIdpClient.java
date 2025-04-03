@@ -12,8 +12,8 @@ package org.projecthusky.xua.communication.clients.impl;
 
 import java.io.UnsupportedEncodingException;
 
-import org.apache.http.HttpHeaders;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.core5.http.HttpHeaders;
 import org.projecthusky.xua.authentication.AuthnRequest;
 import org.projecthusky.xua.communication.config.IdpClientConfig;
 import org.projecthusky.xua.exceptions.SerializeException;

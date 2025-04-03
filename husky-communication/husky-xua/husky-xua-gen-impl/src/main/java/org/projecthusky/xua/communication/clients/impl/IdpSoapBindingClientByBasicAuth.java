@@ -24,14 +24,7 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpHeaders;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+
 import org.projecthusky.xua.authentication.AuthnRequest;
 import org.projecthusky.xua.communication.config.impl.IdpClientBasicAuthConfigImpl;
 import org.projecthusky.xua.deserialization.impl.ResponseDeserializerImpl;
@@ -43,6 +36,15 @@ import org.projecthusky.xua.serialization.impl.AuthnRequestSerializerImpl;
 
 import net.shibboleth.shared.xml.XMLParserException;
 
+import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.HttpHeaders;
+import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 
 
@@ -178,8 +180,7 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 		final var body = writer.toString();
 
 		// add string as body to httpentity
-		final var stringEntity = new StringEntity(body, "UTF-8");
-		stringEntity.setChunked(true);
+		final var stringEntity = new StringEntity(body, ContentType.APPLICATION_SOAP_XML, null, false); 
 		return stringEntity;
 	}
 

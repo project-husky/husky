@@ -17,9 +17,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactoryConfigurationError;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpHeaders;
-import org.apache.http.entity.StringEntity;
 import org.projecthusky.xua.communication.clients.ArtifactResolveClient;
 import org.projecthusky.xua.communication.config.SoapClientConfig;
 import org.projecthusky.xua.communication.soap.impl.WsaHeaderValue;
@@ -32,6 +29,10 @@ import org.projecthusky.xua.saml2.impl.ArtifactResolveImpl;
 
 import net.shibboleth.shared.xml.XMLParserException;
 
+import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.HttpHeaders;
+import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.opensaml.core.xml.io.MarshallingException;
 
@@ -82,8 +83,7 @@ public class SimpleArtifactResolveClient extends AbstractSoapClient<ArtifactResp
 		getLogger().debug("SOAP Message\n {}", body);
 
 		// add string as body to httpentity
-		final var stringEntity = new StringEntity(body, "UTF-8");
-		stringEntity.setChunked(false);
+		final var stringEntity = new StringEntity(body, ContentType.APPLICATION_SOAP_XML, null, false);
 
 		return stringEntity;
 	}
