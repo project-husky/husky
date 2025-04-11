@@ -61,7 +61,6 @@
 		<dependency>
 			<groupId>net.bytebuddy</groupId>
 			<artifactId>byte-buddy</artifactId>
-			<version>1.12.14</version>
 		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
