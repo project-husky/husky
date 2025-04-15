@@ -46,7 +46,7 @@
 		<camel.version>4.10.2</camel.version>
 		<zxing.version>3.5.3</zxing.version>
 		<openhtmltopdf-version>1.1.26</openhtmltopdf-version>
-		<org.hl7.fhir.version>6.5.17</org.hl7.fhir.version>
+		<org.hl7.fhir.version>6.5.18</org.hl7.fhir.version>
 		<fasterxml.version>2.17.2</fasterxml.version>
 		<jakarta.xml.version>3.0.1</jakarta.xml.version>
 		<jakarta.xml.ws-api.version>4.0.2</jakarta.xml.ws-api.version>
@@ -530,7 +530,7 @@
 			<dependency>
 				<groupId>health.matchbox</groupId>
 				<artifactId>matchbox-engine</artifactId>
-				<version>3.9.13</version>
+				<version>4.0.1</version>
 				<exclusions>
 					<exclusion>
 						<groupId>ca.uhn.hapi</groupId>
