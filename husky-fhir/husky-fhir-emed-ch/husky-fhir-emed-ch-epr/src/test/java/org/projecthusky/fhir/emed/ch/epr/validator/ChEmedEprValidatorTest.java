@@ -26,7 +26,7 @@ class ChEmedEprValidatorTest {
     @Test
     void validateDocumentBundle() throws IOException, URISyntaxException, EOperationOutcome {
         final var ctx = FhirContext.forR4Cached();
-        final var validator = new ChEmedEprValidator("http://tx.fhir.org/");
+        final var validator = new ChEmedEprValidator("https://tx.fhir.org/");
         final var parser = new ChEmedEprParser(ctx);
 
         final var xml = new String(getClass().getResourceAsStream("/Bundle-1-1-MedicationTreatmentPlan.xml").readAllBytes());
