@@ -3,7 +3,6 @@ package org.projecthusky.fhir.emed.ch.epr.validator;
 import ca.uhn.fhir.context.FhirContext;
 import org.hl7.fhir.r5.elementmodel.Manager;
 import org.hl7.fhir.r5.utils.EOperationOutcome;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.epr.service.ChEmedEprParser;
@@ -25,10 +24,9 @@ class ChEmedEprValidatorTest {
     private static final Logger log = LoggerFactory.getLogger(ChEmedEprValidatorTest.class);
 
     @Test
-    @Disabled("TODO: Due to new version of matchbox? failure!")
     void validateDocumentBundle() throws IOException, URISyntaxException, EOperationOutcome {
         final var ctx = FhirContext.forR4Cached();
-        final var validator = new ChEmedEprValidator();
+        final var validator = new ChEmedEprValidator("http://tx.fhir.org/");
         final var parser = new ChEmedEprParser(ctx);
 
         final var xml = new String(getClass().getResourceAsStream("/Bundle-1-1-MedicationTreatmentPlan.xml").readAllBytes());

@@ -13,12 +13,12 @@ package org.projecthusky.fhir.emed.ch.epr.validator;
 import ch.ahdis.matchbox.engine.MatchboxEngine;
 import ch.ahdis.matchbox.engine.MatchboxEngine.FilesystemPackageCacheMode;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.OperationOutcome;
 import org.hl7.fhir.r5.elementmodel.Manager;
 import org.hl7.fhir.r5.utils.EOperationOutcome;
-import org.hl7.fhir.utilities.npm.FilesystemPackageCacheManager;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 import org.projecthusky.fhir.emed.ch.epr.validator.logicvalidator.LogicValidator;
@@ -52,8 +52,18 @@ public class ChEmedEprValidator {
      * @throws IOException if the NPM packages can't be found in the classpath.
      */
     public ChEmedEprValidator() throws IOException, URISyntaxException {
+        this(null);
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param txServer The URL of the terminology server to be used for validation.
+     * @throws IOException if the NPM packages can't be found in the classpath.
+     */
+    public ChEmedEprValidator(final @Nullable String txServer)  throws IOException, URISyntaxException {
         final var builder = new MatchboxEngine.MatchboxEngineBuilder();
-        builder.setTxServer(null);
+        builder.setTxServer(txServer);
         builder.setPackageCacheMode(FilesystemPackageCacheMode.TESTING);
         this.matchboxEngine = builder.getEngineR4();
 
