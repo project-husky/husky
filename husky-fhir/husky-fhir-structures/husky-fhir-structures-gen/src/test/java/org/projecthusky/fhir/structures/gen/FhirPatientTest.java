@@ -106,7 +106,7 @@ class FhirPatientTest {
 		org.hl7.fhir.r4.model.Extension streetNameExt = new org.hl7.fhir.r4.model.Extension(
 				"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName",
 		 new StringType("StreetName"));
-		address.addExtension(streetNameExt);
+		address.getLine().get(0).addExtension(streetNameExt);
 
 		final Identifier identifier = new Identifier();
 		identifier.setValue("PIX");
@@ -471,7 +471,7 @@ class FhirPatientTest {
 		assertEquals("city", fhirPatient.getAddressFirstRep().getCity());
 		assertEquals("cty", fhirPatient.getAddressFirstRep().getCountry());
 		assertEquals("state", fhirPatient.getAddressFirstRep().getState());
-		assertEquals("StreetName", ((StringType) fhirPatient.getAddressFirstRep().getExtensionByUrl(
+		assertEquals("StreetName", ((StringType) fhirPatient.getAddressFirstRep().getLine().get(0).getExtensionByUrl(
 				"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName"
 		).getValue()).getValue());
 	}

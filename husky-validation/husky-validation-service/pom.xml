@@ -20,7 +20,7 @@
 
         <dependency>
             <groupId>org.verapdf</groupId>
-            <artifactId>validation-model</artifactId>
+            <artifactId>validation-model-jakarta</artifactId>
             <exclusions>
                 <!-- Exclude unused dependencies or for which newer versions already exist -->
                 <exclusion>
@@ -61,6 +61,14 @@
         <dependency>
             <groupId>com.helger.schematron</groupId>
             <artifactId>ph-schematron-xslt</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
         </dependency>
 
 	<!-- test dependencies -->
