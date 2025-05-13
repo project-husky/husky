@@ -38,7 +38,7 @@
 		version in the tags) -->
 		<spring.version>5.3.31</spring.version>
 		<spring.boot.version>2.7.18</spring.boot.version>
-		<hapi.fhir.version>6.10.2</hapi.fhir.version>
+		<hapi.fhir.version>6.10.5</hapi.fhir.version>
 		<jakarta-jwsapi-version>2.1.0</jakarta-jwsapi-version>
 		<camel.version>3.21.4</camel.version>
 
@@ -633,7 +633,7 @@
 			<dependency>
 				<groupId>health.matchbox</groupId>
 				<artifactId>matchbox-engine</artifactId>
-				<version>3.5.3</version>
+				<version>3.5.0</version>
 				<exclusions>
 					<exclusion>
 						<groupId>ca.uhn.hapi</groupId>

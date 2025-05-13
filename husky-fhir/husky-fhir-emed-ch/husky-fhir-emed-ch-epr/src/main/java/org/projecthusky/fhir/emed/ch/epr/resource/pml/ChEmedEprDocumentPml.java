@@ -161,6 +161,18 @@ public class ChEmedEprDocumentPml extends ChEmedEprDocument {
      * @param medicationRequest a medication request.
      * @return the bundle entry.
      */
+    public BundleEntryComponent addMedicationRequest(final ChEmedEprMedicationRequestChangedPml medicationRequest) {
+        return this.addEntry()
+                .setFullUrl(medicationRequest.getIdentifierFirstRep().getValue())
+                .setResource(medicationRequest);
+    }
+
+    /**
+     * Adds a medication request.
+     *
+     * @param medicationRequest a medication request.
+     * @return the bundle entry.
+     */
     public BundleEntryComponent addMedicationRequest(final ChEmedEprMedicationRequestPre medicationRequest) {
         return this.addEntry()
                 .setFullUrl(medicationRequest.getIdentifierFirstRep().getValue())
