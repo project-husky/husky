@@ -42,6 +42,7 @@ org.projecthusky.communication.at.xd.storedquery
 org.projecthusky.communication.atna
 org.projecthusky.communication.ch
 org.projecthusky.communication.ch.camel
+org.projecthusky.communication.ch.camel.chmhd1
 org.projecthusky.communication.ch.camel.chpharm1
 org.projecthusky.communication.ch.camel.chpharm1.requests
 org.projecthusky.communication.ch.camel.chpharm1.requests.query
@@ -101,6 +102,7 @@ org.projecthusky.communication.xd.storedquery
 org.projecthusky.communication.xd.xdm
 org.projecthusky.communication.xdsmhdconversion
 org.projecthusky.communication.xdsmhdconversion.converters
+org.projecthusky.communication.xdsmhdconversion.model
 org.projecthusky.communication.xdsmhdconversion.utils
 org.projecthusky.fhir.communication
 org.projecthusky.fhir.emed.ch.common
@@ -109,6 +111,7 @@ org.projecthusky.fhir.emed.ch.common.datatype
 org.projecthusky.fhir.emed.ch.common.enums
 org.projecthusky.fhir.emed.ch.common.error
 org.projecthusky.fhir.emed.ch.common.resource
+org.projecthusky.fhir.emed.ch.common.resource.extension
 org.projecthusky.fhir.emed.ch.common.util
 org.projecthusky.fhir.emed.ch.epr
 org.projecthusky.fhir.emed.ch.epr.datatypes
