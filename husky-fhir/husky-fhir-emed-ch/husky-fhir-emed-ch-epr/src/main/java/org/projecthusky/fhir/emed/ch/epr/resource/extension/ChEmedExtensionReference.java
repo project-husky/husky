@@ -23,21 +23,23 @@ import java.util.UUID;
  */
 @Block
 public abstract class ChEmedExtensionReference extends BackboneElement {
+    public static final String ID_URL = "id";
+    public static final String EXTERNAL_DOCUMENT_ID_URL = "externalDocumentId";
 
     /**
      * ID of the document.
      */
     @Nullable
-    @Child(name = "extension:id", min = 1)
-    @Extension(url = "id", definedLocally = false)
+    @Child(name = "extension:" + ID_URL, min = 1)
+    @Extension(url = ID_URL, definedLocally = false)
     protected Identifier extensionId;
 
     /**
      * ID of the external document.
      */
     @Nullable
-    @Child(name = "extension:externalDocumentId", min = 1)
-    @Extension(url = "externalDocumentId", definedLocally = false)
+    @Child(name = "extension:" + EXTERNAL_DOCUMENT_ID_URL, min = 1)
+    @Extension(url = EXTERNAL_DOCUMENT_ID_URL, definedLocally = false)
     protected Identifier externalDocumentId;
 
     /**

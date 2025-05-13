@@ -10,6 +10,9 @@
  */
 package org.projecthusky.communication.ch.camel.chpharm5;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.openehealth.ipf.commons.ihe.fhir.pharm5.Pharm5Operations;
+
 import java.util.Objects;
 
 /**
@@ -25,7 +28,8 @@ public enum ChPharm5Operations {
     FIND_MEDICATION_ADMINISTRATIONS("$find-medication-administrations"),
     FIND_PRESCRIPTIONS_FOR_VALIDATION("$find-prescriptions-for-validation"),
     FIND_PRESCRIPTIONS_FOR_DISPENSE("$find-prescriptions-for-dispense"),
-    FIND_MEDICATION_LIST("$find-medication-list");
+    FIND_MEDICATION_LIST("$find-medication-list"),
+    FIND_MEDICATION_CARD("$find-medication-card");
 
     private final String operation;
 
@@ -35,5 +39,39 @@ public enum ChPharm5Operations {
 
     public String getOperation() {
         return this.operation;
+    }
+
+    public static ChPharm5Operations fromPharm5Operation(final Pharm5Operations pharm5Operation) {
+        return switch(pharm5Operation) {
+            case FIND_MEDICATION_TREATMENT_PLANS -> FIND_MEDICATION_TREATMENT_PLANS;
+            case FIND_PRESCRIPTIONS -> FIND_PRESCRIPTIONS;
+            case FIND_DISPENSES -> FIND_DISPENSES;
+            case FIND_MEDICATION_ADMINISTRATIONS -> FIND_MEDICATION_ADMINISTRATIONS;
+            case FIND_PRESCRIPTIONS_FOR_VALIDATION -> FIND_PRESCRIPTIONS_FOR_VALIDATION;
+            case FIND_PRESCRIPTIONS_FOR_DISPENSE -> FIND_PRESCRIPTIONS_FOR_DISPENSE;
+            case FIND_MEDICATION_LIST -> FIND_MEDICATION_LIST;
+        };
+    }
+
+    public static @Nullable ChPharm5Operations fromOperation(String operation) {
+        if (operation == null || operation.isBlank()) return null;
+        if (!operation.startsWith("$")) operation = "$" + operation;
+        for (final var chPharm5Operation : ChPharm5Operations.values()) {
+            if (chPharm5Operation.getOperation().equals(operation)) return chPharm5Operation;
+        }
+        return null;
+    }
+
+    public @Nullable Pharm5Operations toPharm5Operation() {
+        return switch (this) {
+            case FIND_MEDICATION_TREATMENT_PLANS -> Pharm5Operations.FIND_MEDICATION_TREATMENT_PLANS;
+            case FIND_PRESCRIPTIONS -> Pharm5Operations.FIND_PRESCRIPTIONS;
+            case FIND_DISPENSES -> Pharm5Operations.FIND_DISPENSES;
+            case FIND_MEDICATION_ADMINISTRATIONS -> Pharm5Operations.FIND_MEDICATION_ADMINISTRATIONS;
+            case FIND_PRESCRIPTIONS_FOR_VALIDATION -> Pharm5Operations.FIND_PRESCRIPTIONS_FOR_VALIDATION;
+            case FIND_PRESCRIPTIONS_FOR_DISPENSE -> Pharm5Operations.FIND_PRESCRIPTIONS_FOR_DISPENSE;
+            case FIND_MEDICATION_LIST -> Pharm5Operations.FIND_MEDICATION_LIST;
+            case FIND_MEDICATION_CARD -> null;
+        };
     }
 }

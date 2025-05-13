@@ -17,7 +17,7 @@ import org.openehealth.ipf.commons.audit.codes.ParticipantObjectTypeCode;
 import org.openehealth.ipf.commons.audit.codes.ParticipantObjectTypeCodeRole;
 import org.openehealth.ipf.commons.audit.model.AuditMessage;
 import org.openehealth.ipf.commons.audit.model.TypeValuePairType;
-import org.openehealth.ipf.commons.ihe.core.atna.event.QueryInformationBuilder;
+import org.openehealth.ipf.commons.ihe.core.atna.event.DefaultQueryInformationBuilder;
 import org.openehealth.ipf.commons.ihe.fhir.Constants;
 import org.openehealth.ipf.commons.ihe.fhir.audit.FhirQueryAuditDataset;
 import org.openehealth.ipf.commons.ihe.fhir.audit.FhirQueryAuditStrategy;
@@ -53,7 +53,7 @@ public class ChPharm5AuditStrategy extends FhirQueryAuditStrategy {
         if (endpointUrl != null && endpointUrl.lastIndexOf("$") >= 0) {
             operation = endpointUrl.substring(endpointUrl.lastIndexOf("$"));
         }
-        return new QueryInformationBuilder<>(auditContext,
+        return new DefaultQueryInformationBuilder(auditContext,
                                              auditDataset,
                                              FhirEventTypeCode.QueryPharmacyDocumentsOverMhd)
                 .addPatients(auditDataset.getPatientIds())

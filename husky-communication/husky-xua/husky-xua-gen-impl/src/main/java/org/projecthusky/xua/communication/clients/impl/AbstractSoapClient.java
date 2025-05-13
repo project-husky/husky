@@ -15,6 +15,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -39,18 +40,21 @@ import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.fileupload.MultipartStream;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpHeaders;
-import org.apache.http.HttpStatus;
-import org.apache.http.ParseException;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.conn.ssl.TrustStrategy;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.ssl.SSLContexts;
-import org.apache.http.util.EntityUtils;
+import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
+import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.HttpHeaders;
+import org.apache.hc.core5.http.HttpStatus;
+import org.apache.hc.core5.http.ParseException;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
+import org.apache.hc.core5.ssl.SSLContexts;
+import org.apache.hc.core5.ssl.TrustStrategy;
+import org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy;
 import org.projecthusky.common.utils.xml.XmlFactories;
 import org.projecthusky.xua.communication.config.SoapClientConfig;
 import org.projecthusky.xua.communication.config.SoapClientConfig.SoapVersion;
@@ -67,7 +71,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import net.shibboleth.shared.xml.XMLParserException;
-
 
 /**
  * <!-- @formatter:off -->
@@ -93,13 +96,14 @@ public abstract class AbstractSoapClient<T> {
 	/**
 	 * creates body of soap message.
 	 * 
-	 * @param aBodyElement   body element
-	 * @param envelopElement soap envelope element
+	 * @param aBodyElement
+	 *            body element
+	 * @param envelopElement
+	 *            soap envelope element
 	 */
 	protected void createBody(Element aBodyElement, Element envelopElement) {
 		// create soap body
-		final var soapBody = envelopElement.getOwnerDocument().createElementNS(getSoapNs(),
-				"Body");
+		final var soapBody = envelopElement.getOwnerDocument().createElementNS(getSoapNs(), "Body");
 		envelopElement.appendChild(soapBody);
 
 		// add authnrequest to soap body
@@ -112,7 +116,8 @@ public abstract class AbstractSoapClient<T> {
 	 * 
 	 * @return created soap envelope
 	 * 
-	 * @throws ParserConfigurationException will be thrown on error
+	 * @throws ParserConfigurationException
+	 *             will be thrown on error
 	 */
 	protected Element createEnvelope() throws ParserConfigurationException {
 		// create xml dokument
@@ -131,9 +136,12 @@ public abstract class AbstractSoapClient<T> {
 	/**
 	 * creates SOAP header.
 	 * 
-	 * @param aSecurityHeaderElement SOAP security header element
-	 * @param wsHeaders              WSA headers
-	 * @param envelopElement         soap envelope
+	 * @param aSecurityHeaderElement
+	 *            SOAP security header element
+	 * @param wsHeaders
+	 *            WSA headers
+	 * @param envelopElement
+	 *            soap envelope
 	 */
 	protected void createHeader(Element aSecurityHeaderElement, WsaHeaderValue wsHeaders,
 			Element envelopElement) {
@@ -169,10 +177,12 @@ public abstract class AbstractSoapClient<T> {
 	/**
 	 * creates XML String from passed SOAP envelope.
 	 * 
-	 * @param aEnvelope soap envelope
+	 * @param aEnvelope
+	 *            soap envelope
 	 * 
 	 * @return XML String
-	 * @throws TransformerException will be thrown on transform errors
+	 * @throws TransformerException
+	 *             will be thrown on transform errors
 	 */
 	protected String createXmlString(Element aEnvelope) throws TransformerException {// transform
 																						// to
@@ -192,67 +202,75 @@ public abstract class AbstractSoapClient<T> {
 	/**
 	 * sends soap message.
 	 * 
-	 * @param post http post
+	 * @param post
+	 *            http post
 	 * 
 	 * @return response
 	 * 
-	 * @throws ClientSendException will be thrown on errors
-	 * @throws IOException will be thrown on errors
+	 * @throws ClientSendException
+	 *             will be thrown on errors
+	 * @throws IOException
+	 *             will be thrown on errors
 	 */
-	protected T execute(HttpPost post)
-			throws ClientSendException, IOException {
+	protected T execute(HttpPost post) throws ClientSendException, IOException {
 		final CloseableHttpClient httpclient = getHttpClient();
 		final CloseableHttpResponse response = httpclient.execute(post);
 
 		final HttpEntity responseEntity = response.getEntity();
-		logger.debug(responseEntity.getContentType().getValue());
+		logger.debug(responseEntity.getContentType());
 
-		var content = extractResponse(responseEntity); 
+		var content = extractResponse(responseEntity);
 		logger.debug("SOAP Message\n {}", content);
 
-		if ((response.getStatusLine() != null)
-				&& (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)) {
+		if ((response.getCode() == HttpStatus.SC_OK)) {
 			return parseResponse(content);
 		} else {
 			return parseResponseError(content);
 		}
 	}
 
-	protected String extractResponse(HttpEntity responseEntity) throws ParseException, IOException {
-		String content = EntityUtils.toString(responseEntity, "UTF-8");
+	protected String extractResponse(HttpEntity responseEntity) throws IOException, ClientSendException {
+		String content;
+		try {
+			content = EntityUtils.toString(responseEntity, "UTF-8");
 
-		if (responseEntity.getContentType().getValue().startsWith("multipart")) {
-			logger.debug("Multiparted Message\n {}", content);
+			if (responseEntity.getContentType().startsWith("multipart")) {
+				logger.debug("Multiparted Message\n {}", content);
 
-			final byte[] boundary = getBoundary(responseEntity.getContentType().getValue());
-			logger.debug("Boundary: {}", boundary);
-			
-			final var multipartStream = new MultipartStream(
-					new ByteArrayInputStream(content.getBytes("UTF-8")), boundary, 16384, null);
+				final byte[] boundary = getBoundary(responseEntity.getContentType());
+				logger.debug("Boundary: {}", boundary);
 
-			boolean nextPart = multipartStream.skipPreamble();
-			while (nextPart) {
-				final String header = multipartStream.readHeaders();
-				logger.debug("");
-				logger.debug("Headers:");
-				logger.debug(header);
-				logger.debug("Body:");
-				final var out = new ByteArrayOutputStream();
-				multipartStream.readBodyData(out);
-				content = out.toString("UTF-8");
-				logger.debug(content);
-				out.close();
-				logger.debug("");
-				nextPart = multipartStream.readBoundary();
+				final var multipartStream = new MultipartStream(
+						new ByteArrayInputStream(content.getBytes("UTF-8")), boundary, 16384, null);
+
+				boolean nextPart = multipartStream.skipPreamble();
+				while (nextPart) {
+					final String header = multipartStream.readHeaders();
+					logger.debug("");
+					logger.debug("Headers:");
+					logger.debug(header);
+					logger.debug("Body:");
+					final var out = new ByteArrayOutputStream();
+					multipartStream.readBodyData(out);
+					content = out.toString("UTF-8");
+					logger.debug(content);
+					out.close();
+					logger.debug("");
+					nextPart = multipartStream.readBoundary();
+				}
+
 			}
-
+		} catch (ParseException e) {
+			throw new ClientSendException(e);
 		}
 		return content;
 	}
 
 	/**
 	 * method to get the boundary bytes.
-	 * @param value the value
+	 * 
+	 * @param value
+	 *            the value
 	 * @return the boundary as byte array
 	 */
 	protected byte[] getBoundary(String value) {
@@ -281,22 +299,26 @@ public abstract class AbstractSoapClient<T> {
 	 * configuration.
 	 * 
 	 * @return closeable HTTP client
-	 * @throws ClientSendException will be thrown if an error occures.
+	 * @throws ClientSendException
+	 *             will be thrown if an error occures.
 	 */
 	protected CloseableHttpClient getHttpClient() throws ClientSendException {
 		if (!StringUtils.isEmpty(config.getKeyStore())) {
 			try (var fis = new FileInputStream(config.getKeyStore())) {
 				final PkiManager pki = new PkiManagerImpl();
-				final var keyStore = pki.loadStore(fis,
-						config.getKeyStorePassword(), config.getKeyStoreType());
+				final var keyStore = pki.loadStore(fis, config.getKeyStorePassword(),
+						config.getKeyStoreType());
 
 				final TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain,
 						String authType) -> true;
-				final var sslcontext = SSLContexts.custom()//
+				final var sslContext = SSLContexts.custom()//
 						.loadKeyMaterial(keyStore, config.getKeyStorePassword().toCharArray())//
 						.loadTrustMaterial(keyStore, acceptingTrustStrategy)//
 						.build();
-				return HttpClients.custom().setSSLContext(sslcontext).build();
+				PoolingHttpClientConnectionManager connectionManager = PoolingHttpClientConnectionManagerBuilder
+						.create()//
+						.setTlsSocketStrategy(new DefaultClientTlsStrategy(sslContext)).build();
+				return HttpClients.custom().setConnectionManager(connectionManager).build();
 			} catch (KeyStoreException | KeyManagementException | UnrecoverableKeyException
 					| NoSuchAlgorithmException | IOException e) {
 				throw new ClientSendException(e);
@@ -307,8 +329,8 @@ public abstract class AbstractSoapClient<T> {
 	}
 
 	/**
-	 * Method to get HTTP Post with URI from configuration. Application/soap+xml ist
-	 * set as content type header.
+	 * Method to get HTTP Post with URI from configuration. Application/soap+xml
+	 * ist set as content type header.
 	 * 
 	 * @return the httppost instance
 	 */
@@ -331,11 +353,14 @@ public abstract class AbstractSoapClient<T> {
 	/**
 	 * Method to get Node of element with passed XPath expression.
 	 * 
-	 * @param element         element to search in
-	 * @param xPathExpression XPath expression
+	 * @param element
+	 *            element to search in
+	 * @param xPathExpression
+	 *            XPath expression
 	 * 
 	 * @return found node
-	 * @throws XPathExpressionException will be thrown on error
+	 * @throws XPathExpressionException
+	 *             will be thrown on error
 	 */
 	protected Node getNode(Element element, String xPathExpression)
 			throws XPathExpressionException {
@@ -381,28 +406,34 @@ public abstract class AbstractSoapClient<T> {
 	}
 
 	/**
-	 * Method to get response element as {@link Element} from content. The passed
-	 * local name and namespace is used to filter the response element.
+	 * Method to get response element as {@link Element} from content. The
+	 * passed local name and namespace is used to filter the response element.
 	 * 
-	 * @param content      response as xml
-	 * @param nameSpaceUri namespace
-	 * @param localName    name of element
+	 * @param content
+	 *            response as xml
+	 * @param nameSpaceUri
+	 *            namespace
+	 * @param localName
+	 *            name of element
 	 * 
 	 * @return response element
 	 * 
-	 * @throws UnsupportedOperationException will be thrown on error
-	 * @throws XPathExpressionException will be thrown on error
-	 * @throws XMLParserException will be thrown on error
+	 * @throws UnsupportedOperationException
+	 *             will be thrown on error
+	 * @throws XPathExpressionException
+	 *             will be thrown on error
+	 * @throws XMLParserException
+	 *             will be thrown on error
 	 */
 	protected Element getResponseElement(String content, String nameSpaceUri, String localName)
 			throws UnsupportedOperationException, XPathExpressionException, XMLParserException {
 
-		// Use the parser from the OpenSAML ParserPool because its implementation may be
+		// Use the parser from the OpenSAML ParserPool because its
+		// implementation may be
 		// different than
 		// XmlFactories.newSafeDocumentBuilder()
 		final var docBuilder = XMLObjectProviderRegistrySupport.getParserPool();
-		final var soapDocument = docBuilder
-				.parse(new ByteArrayInputStream(content.getBytes()));
+		final var soapDocument = docBuilder.parse(new ByteArrayInputStream(content.getBytes()));
 
 		String prefix = soapDocument.getDocumentElement().getPrefix();
 		if (!StringUtils.isEmpty(prefix)) {
@@ -428,7 +459,8 @@ public abstract class AbstractSoapClient<T> {
 	/**
 	 * Method to get soap exception of Axis2 fault Node.
 	 * 
-	 * @param faultnode the fault node
+	 * @param faultnode
+	 *            the fault node
 	 * 
 	 * @return extracted SOAP exception
 	 */
@@ -468,6 +500,7 @@ public abstract class AbstractSoapClient<T> {
 
 	/**
 	 * methos to get the soap ns.
+	 * 
 	 * @return the soap ns
 	 */
 	private String getSoapNs() {
@@ -482,22 +515,26 @@ public abstract class AbstractSoapClient<T> {
 	/**
 	 * Method to extract response from XML String.
 	 * 
-	 * @param content XML String
+	 * @param content
+	 *            XML String
 	 * 
 	 * @return extracted element
 	 * 
-	 * @throws ClientSendException will be thrown if an error occures.
+	 * @throws ClientSendException
+	 *             will be thrown if an error occures.
 	 */
 	protected abstract T parseResponse(String content) throws ClientSendException;
 
 	/**
 	 * Method to extract error from XML response.
 	 * 
-	 * @param content XML String
+	 * @param content
+	 *            XML String
 	 * 
 	 * @return extracted error
 	 * 
-	 * @throws ClientSendException will be thrown if an error occures
+	 * @throws ClientSendException
+	 *             will be thrown if an error occures
 	 */
 	protected T parseResponseError(String content) throws ClientSendException {
 		logger.debug("parseResponseError: {}", content);
@@ -506,8 +543,8 @@ public abstract class AbstractSoapClient<T> {
 			if (content.trim().startsWith("<") && content.trim().endsWith(">")) {
 				retVal = content;
 			} else {
-				final var regex = Pattern
-						.compile("<([a-zA-Z:]{0,200})Envelope(.{0,10000})>(.{1,100000})</([a-zA-Z:]{0,200})Envelope>");
+				final var regex = Pattern.compile(
+						"<([a-zA-Z:]{0,200})Envelope(.{0,10000})>(.{1,100000})</([a-zA-Z:]{0,200})Envelope>");
 				final var matcher = regex.matcher(content);
 				while (matcher.find()) {
 					retVal = matcher.group();
@@ -520,22 +557,29 @@ public abstract class AbstractSoapClient<T> {
 			}
 			throw new ClientSendException(
 					"Error occurred. No detailed error information available");
-		} catch (UnsupportedOperationException | TransformerFactoryConfigurationError
-				| ParseException | XPathExpressionException | XMLParserException e) {
-			throw new ClientSendException(e);
+		} catch (XPathExpressionException | XMLParserException e) {
+			throw new ClientSendException(
+					"Error occurred. No detailed error information available");
 		}
 
 	}
 
 	/**
 	 * Method to parse the soap fault from xml string.
-	 * @param retVal the xml string
-	 * @throws XPathExpressionException will be thrown on error
-	 * @throws SoapException will be thrown on error
-	 * @throws XMLParserException will be thrown on error
+	 * 
+	 * @param retVal
+	 *            the xml string
+	 * @throws XPathExpressionException
+	 *             will be thrown on error
+	 * @throws SoapException
+	 *             will be thrown on error
+	 * @throws XMLParserException
+	 *             will be thrown on error
 	 */
-	private void paserSoapFault(String retVal) throws XPathExpressionException, SoapException, XMLParserException {
-		// Use the parser from the OpenSAML ParserPool because its implementation may be
+	private void paserSoapFault(String retVal)
+			throws XPathExpressionException, SoapException, XMLParserException {
+		// Use the parser from the OpenSAML ParserPool because its
+		// implementation may be
 		// different than
 		// XmlFactories.newSafeDocumentBuilder()
 		final var docBuilder = XMLObjectProviderRegistrySupport.getParserPool();
@@ -554,7 +598,8 @@ public abstract class AbstractSoapClient<T> {
 	/**
 	 * Method to set SOAP client configuration.
 	 * 
-	 * @param config the soap client configuration
+	 * @param config
+	 *            the soap client configuration
 	 */
 	protected void setConfig(SoapClientConfig config) {
 		this.config = config;
@@ -563,7 +608,8 @@ public abstract class AbstractSoapClient<T> {
 	/**
 	 * Method to set logger.
 	 * 
-	 * @param logger the logger
+	 * @param logger
+	 *            the logger
 	 */
 	protected void setLogger(Logger logger) {
 		this.logger = logger;

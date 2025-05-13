@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Bundle xmlns="http://hl7.org/fhir">
+  <id value="DocumentPreParacetamolAxapharmCARAPMP004"/>
+  <meta>
+    <profile value="http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationprescription"/>
+  </meta>
+  <identifier>
+    <system value="urn:ietf:rfc:3986"/>
+    <value value="urn:uuid:e0c06f3c-1b63-468a-9c46-e800d39b6a15"/>
+  </identifier>
+  <type value="document"/>
+  <timestamp value="2023-10-01T00:00:00+02:00"/>
+  <entry>
+    <fullUrl value="urn:uuid:e0c06f3c-1b63-468a-9c46-e800d39b6a15"/>
+    <resource>
+      <Composition>
+        <id value="CompositionPreParacetamolAxapharmCARAPMP004"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-composition-medicationprescription"/>
+        </meta>
+        <language value="fr-CH"/>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr-CH" lang="fr-CH"><a name="Composition_CompositionPreParacetamolAxapharmCARAPMP004"> </a><p class="res-header-id"><b>Generated Narrative: Composition CompositionPreParacetamolAxapharmCARAPMP004</b></p><a name="CompositionPreParacetamolAxapharmCARAPMP004"> </a><a name="hcCompositionPreParacetamolAxapharmCARAPMP004"> </a><a name="CompositionPreParacetamolAxapharmCARAPMP004-en-US"> </a><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Language: fr-CH</p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-epr-composition-medicationprescription.html">PRE Composition</a></p></div><p><b>identifier</b>: <a href="http://terminology.hl7.org/6.1.0/NamingSystem-uri.html" title="As defined by RFC 3986 (http://www.ietf.org/rfc/rfc3986.txt)(with many schemes defined in many RFCs). For OIDs and UUIDs, use the URN form (urn:oid:(note: lowercase) and urn:uuid:). See http://www.ietf.org/rfc/rfc3001.txt and http://www.ietf.org/rfc/rfc4122.txt 
+
+This oid is used as an identifier II.root to indicate the the extension is an absolute URI (technically, an IRI). Typically, this is used for OIDs and GUIDs. Note that when this OID is used with OIDs and GUIDs, the II.extension should start with urn:oid or urn:uuid: 
+
+Note that this OID is created to aid with interconversion between CDA and FHIR - FHIR uses urn:ietf:rfc:3986 as equivalent to this OID. URIs as identifiers appear more commonly in FHIR.
+
+This OID may also be used in CD.codeSystem.">Uniform Resource Identifier (URI)</a>/urn:uuid:e0c06f3c-1b63-468a-9c46-e800d39b6a15</p><p><b>status</b>: Final</p><p><b>type</b>: <span title="Codes:{http://snomed.info/sct 761938008}, {http://loinc.org 57833-6}">Medicinal prescription record (record artifact)</span></p><p><b>date</b>: 2023-10-01 00:00:00+0200</p><p><b>author</b>: <a href="Bundle-BundleUtc6bPml.html#urn-uuid-213d609a-1164-459a-bb10-727516ae3d0c">Bundle: identifier = UUID:90561ab0-6b84-4c46-8d97-f205e028b1a5; type = document; timestamp = 2023-10-01 00:00:00+0200</a></p><p><b>title</b>: Ordonnance</p><p><b>confidentiality</b>: normal</p></div>
+        </text>
+        <identifier>
+          <system value="urn:ietf:rfc:3986"/>
+          <value value="urn:uuid:e0c06f3c-1b63-468a-9c46-e800d39b6a15"/>
+        </identifier>
+        <status value="final"/>
+        <type>
+          <coding>
+            <system value="http://snomed.info/sct"/>
+            <code value="761938008"/>
+            <display value="Medicinal prescription record (record artifact)"/>
+          </coding>
+          <coding>
+            <system value="http://loinc.org"/>
+            <code value="57833-6"/>
+            <display value="Prescription for medication"/>
+          </coding>
+        </type>
+        <subject>
+          <reference value="urn:uuid:9b00e81e-1165-4039-9d60-698ef838ae1a"/>
+        </subject>
+        <date value="2023-10-01T00:00:00+02:00"/>
+        <author>
+          <reference value="urn:uuid:213d609a-1164-459a-bb10-727516ae3d0c"/>
+        </author>
+        <title value="Ordonnance"/>
+        <confidentiality value="N">
+          <extension url="http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-epr-confidentialitycode">
+            <valueCodeableConcept>
+              <coding>
+                <system value="http://snomed.info/sct"/>
+                <code value="17621005"/>
+                <display value="Normal (qualifier value)"/>
+              </coding>
+            </valueCodeableConcept>
+          </extension>
+        </confidentiality>
+        <section>
+          <title value="Prescription médicamenteuse"/>
+          <code>
+            <coding>
+              <system value="http://loinc.org"/>
+              <code value="57828-6"/>
+              <display value="Prescription list"/>
+            </coding>
+          </code>
+          <text>
+            <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml">L'ordonnance #1 pour paracétamol Axapharm comprimé 1g - 1 comprimé MATIN MIDI SOIR - à prendre avec des repas</div>
+          </text>
+          <entry>
+            <reference value="urn:uuid:ac8ad5cd-aa46-49d6-a5ec-fbc48a9287b4"/>
+          </entry>
+        </section>
+        <section>
+          <title value="Représentation originale"/>
+          <code>
+            <coding>
+              <system value="http://loinc.org"/>
+              <code value="55108-5"/>
+              <display value="Clinical presentation Document"/>
+            </coding>
+          </code>
+          <text>
+            <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml">Placeholder original representation of a prescription: not a valid binary</div>
+          </text>
+          <entry>
+            <reference value="urn:uuid:a4f624e3-fa5a-4889-9bd1-821c8fefff60"/>
+          </entry>
+        </section>
+      </Composition>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="urn:uuid:9b00e81e-1165-4039-9d60-698ef838ae1a"/>
+    <resource>
+      <Patient>
+        <id value="PatientCARAPMP004"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-patient"/>
+        </meta>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="Patient_PatientCARAPMP004"> </a><p class="res-header-id"><b>Generated Narrative: Patient PatientCARAPMP004</b></p><a name="PatientCARAPMP004"> </a><a name="hcPatientCARAPMP004"> </a><a name="PatientCARAPMP004-en-US"> </a><p style="border: 1px #661aff solid; background-color: #e6e6ff; padding: 10px;">Michaël Christopher Karce  Male, DoB: 1973-12-25 ( Medical record number (use: official, ))</p><hr/><table class="grid"><tr><td style="background-color: #f3f5da" title="Record is active">Active:</td><td>true</td><td style="background-color: #f3f5da" title="Known Marital status of Patient">Marital Status:</td><td colspan="3"><span title="Codes:{http://fhir.ch/ig/ch-core/CodeSystem/ech-11-maritalstatus 9}">unbekannt</span></td></tr><tr><td style="background-color: #f3f5da" title="Other Id (see the one above)">Other Id:</td><td colspan="3">Medical record number/CARAPMP004 (use: secondary, )</td></tr></table></div>
+        </text>
+        <identifier>
+          <use value="official"/>
+          <type>
+            <coding>
+              <system value="http://terminology.hl7.org/CodeSystem/v2-0203"/>
+              <code value="MR"/>
+            </coding>
+          </type>
+          <system value="urn:oid:2.16.756.5.30.1.191.1.0.2.1"/>
+          <value value="9b00e81e-1165-4039-9d60-698ef838ae1a"/>
+        </identifier>
+        <identifier>
+          <use value="secondary"/>
+          <type>
+            <coding>
+              <system value="http://terminology.hl7.org/CodeSystem/v2-0203"/>
+              <code value="MR"/>
+            </coding>
+          </type>
+          <system value="urn:oid:2.16.756.5.30.1.196.3.2.1"/>
+          <value value="CARAPMP004"/>
+        </identifier>
+        <active value="true"/>
+        <name>
+          <family value="Karce"/>
+          <given value="Michaël Christopher"/>
+        </name>
+        <gender value="male"/>
+        <birthDate value="1973-12-25"/>
+        <maritalStatus>
+          <coding>
+            <system value="http://fhir.ch/ig/ch-core/CodeSystem/ech-11-maritalstatus"/>
+            <code value="9"/>
+            <display value="unbekannt"/>
+          </coding>
+        </maritalStatus>
+      </Patient>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="urn:uuid:9fc8530b-b77d-4b53-8a21-fc786b697edf"/>
+    <resource>
+      <Practitioner>
+        <id value="PractitionerCox"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitioner"/>
+        </meta>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="Practitioner_PractitionerCox"> </a><p class="res-header-id"><b>Generated Narrative: Practitioner PractitionerCox</b></p><a name="PractitionerCox"> </a><a name="hcPractitionerCox"> </a><a name="PractitionerCox-en-US"> </a><p><b>identifier</b>: <a href="https://www.gs1.org/standards/id-keys/gln" title="Global Location Number">GLN</a>/7601000234438</p><p><b>name</b>: Perry Cox </p></div>
+        </text>
+        <identifier>
+          <system value="urn:oid:2.51.1.3"/>
+          <value value="7601000234438"/>
+        </identifier>
+        <name>
+          <family value="Cox"/>
+          <given value="Perry"/>
+        </name>
+      </Practitioner>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="urn:uuid:213d609a-1164-459a-bb10-727516ae3d0c"/>
+    <resource>
+      <PractitionerRole>
+        <id value="PractitionerRoleCoxAtHug"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-practitionerrole"/>
+        </meta>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="PractitionerRole_PractitionerRoleCoxAtHug"> </a><p class="res-header-id"><b>Generated Narrative: PractitionerRole PractitionerRoleCoxAtHug</b></p><a name="PractitionerRoleCoxAtHug"> </a><a name="hcPractitionerRoleCoxAtHug"> </a><a name="PractitionerRoleCoxAtHug-en-US"> </a><p><b>practitioner</b>: <a href="Bundle-BundleUtc6bPml.html#urn-uuid-9fc8530b-b77d-4b53-8a21-fc786b697edf">Bundle: identifier = UUID:90561ab0-6b84-4c46-8d97-f205e028b1a5; type = document; timestamp = 2023-10-01 00:00:00+0200</a></p><p><b>organization</b>: <a href="Bundle-BundleUtc6bPml.html#urn-uuid-580fbe82-8734-4edf-ad4b-48124cdd03c6">Bundle: identifier = UUID:90561ab0-6b84-4c46-8d97-f205e028b1a5; type = document; timestamp = 2023-10-01 00:00:00+0200</a></p></div>
+        </text>
+        <practitioner>
+          <reference value="urn:uuid:9fc8530b-b77d-4b53-8a21-fc786b697edf"/>
+        </practitioner>
+        <organization>
+          <reference value="urn:uuid:580fbe82-8734-4edf-ad4b-48124cdd03c6"/>
+        </organization>
+      </PractitionerRole>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="urn:uuid:580fbe82-8734-4edf-ad4b-48124cdd03c6"/>
+    <resource>
+      <Organization>
+        <id value="OrganizationHug"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-organization"/>
+        </meta>
+        <text>
+          <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><a name="Organization_OrganizationHug"> </a><p class="res-header-id"><b>Generated Narrative: Organization OrganizationHug</b></p><a name="OrganizationHug"> </a><a name="hcOrganizationHug"> </a><a name="OrganizationHug-en-US"> </a><p><b>identifier</b>: <a href="https://www.gs1.org/standards/id-keys/gln" title="Global Location Number">GLN</a>/7601000234438</p><p><b>name</b>: Hôpitaux universitaires de Genève</p><p><b>address</b>: Rue Gabrielle-Perret-Gentil 4 Genève 1205 CH </p></div>
+        </text>
+        <identifier>
+          <system value="urn:oid:2.51.1.3"/>
+          <value value="7601000234438"/>
+        </identifier>
+        <name value="Hôpitaux universitaires de Genève"/>
+        <address>
+          <line value="Rue Gabrielle-Perret-Gentil 4"/>
+          <city value="Genève"/>
+          <postalCode value="1205"/>
+          <country value="CH"/>
+        </address>
+      </Organization>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="urn:uuid:ac8ad5cd-aa46-49d6-a5ec-fbc48a9287b4"/>
+    <resource>
+      <MedicationRequest>
+        <id value="MedicationRequestParacetamolAxapharmPre"/>
+        <meta>
+          <profile value="http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medicationrequest"/>
+        </meta>
+        <language value="fr-CH"/>
+        <text>
+          <status value="extensions"/><div xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr-CH" lang="fr-CH"><a name="MedicationRequest_MedicationRequestParacetamolAxapharmPre"> </a><p class="res-header-id"><b>Generated Narrative: MedicationRequest MedicationRequestParacetamolAxapharmPre</b></p><a name="MedicationRequestParacetamolAxapharmPre"> </a><a name="hcMedicationRequestParacetamolAxapharmPre"> </a><a name="MedicationRequestParacetamolAxapharmPre-en-US"> </a><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Language: fr-CH</p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-epr-medicationrequest.html">PRE MedicationRequest</a></p></div><blockquote><p><b>CH EMED Extension Treatment Plan</b></p><ul><li>id: <a href="http://terminology.hl7.org/6.1.0/NamingSystem-uri.html" title="As defined by RFC 3986 (http://www.ietf.org/rfc/rfc3986.txt)(with many schemes defined in many RFCs). For OIDs and UUIDs, use the URN form (urn:oid:(note: lowercase) and urn:uuid:). See http://www.ietf.org/rfc/rfc3001.txt and http://www.ietf.org/rfc/rfc4122.txt 
+
+This oid is used as an identifier II.root to indicate the the extension is an absolute URI (technically, an IRI). Typically, this is used for OIDs and GUIDs. Note that when this OID is used with OIDs and GUIDs, the II.extension should start with urn:oid or urn:uuid: 
+
+Note that this OID is created to aid with interconversion between CDA and FHIR - FHIR uses urn:ietf:rfc:3986 as equivalent to this OID. URIs as identifiers appear more commonly in FHIR.
+
+This OID may also be used in CD.codeSystem.">Uniform Resource Identifier (URI)</a>/urn:uuid:17837392-0340-414d-a3bf-fa9f237b91ff</li><li>externalDocumentId: <a href="http://terminology.hl7.org/6.1.0/NamingSystem-uri.html" title="As defined by RFC 3986 (http://www.ietf.org/rfc/rfc3986.txt)(with many schemes defined in many RFCs). For OIDs and UUIDs, use the URN form (urn:oid:(note: lowercase) and urn:uuid:). See http://www.ietf.org/rfc/rfc3001.txt and http://www.ietf.org/rfc/rfc4122.txt 
+
+This oid is used as an identifier II.root to indicate the the extension is an absolute URI (technically, an IRI). Typically, this is used for OIDs and GUIDs. Note that when this OID is used with OIDs and GUIDs, the II.extension should start with urn:oid or urn:uuid: 
+
+Note that this OID is created to aid with interconversion between CDA and FHIR - FHIR uses urn:ietf:rfc:3986 as equivalent to this OID. URIs as identifiers appear more commonly in FHIR.
+
+This OID may also be used in CD.codeSystem.">Uniform Resource Identifier (URI)</a>/urn:uuid:0399ef84-c71b-413b-8a66-b5a835f4f4c5</li></ul></blockquote><p><b>identifier</b>: <a href="http://terminology.hl7.org/6.1.0/NamingSystem-uri.html" title="As defined by RFC 3986 (http://www.ietf.org/rfc/rfc3986.txt)(with many schemes defined in many RFCs). For OIDs and UUIDs, use the URN form (urn:oid:(note: lowercase) and urn:uuid:). See http://www.ietf.org/rfc/rfc3001.txt and http://www.ietf.org/rfc/rfc4122.txt 
+
+This oid is used as an identifier II.root to indicate the the extension is an absolute URI (technically, an IRI). Typically, this is used for OIDs and GUIDs. Note that when this OID is used with OIDs and GUIDs, the II.extension should start with urn:oid or urn:uuid: 
+
+Note that this OID is created to aid with interconversion between CDA and FHIR - FHIR uses urn:ietf:rfc:3986 as equivalent to this OID. URIs as identifiers appear more commonly in FHIR.
+
+This OID may also be used in CD.codeSystem.">Uniform Resource Identifier (URI)</a>/urn:uuid:ac8ad5cd-aa46-49d6-a5ec-fbc48a9287b4</p><p><b>status</b>: Active</p><p><b>intent</b>: Order</p><p><b>medication</b>: <a href="#hcMedicationRequestParacetamolAxapharmPre/MedicationParacetamolAxapharm">Medication PARACETAMOL Axapharm cpr pell 1g blister 20pce</a></p><p><b>subject</b>: <a href="Bundle-BundleUtc1Pml.html#urn-uuid-9b00e81e-1165-4039-9d60-698ef838ae1a">Bundle: identifier = UUID:87f151e3-9e67-48aa-8cfe-f816ae5fc084; type = document; timestamp = 2023-10-01 00:00:00+0200</a></p><p><b>authoredOn</b>: 2023-10-01 00:00:00+0200</p><p><b>requester</b>: <a href="Bundle-BundleUtc6bPml.html#urn-uuid-213d609a-1164-459a-bb10-727516ae3d0c">Bundle: identifier = UUID:90561ab0-6b84-4c46-8d97-f205e028b1a5; type = document; timestamp = 2023-10-01 00:00:00+0200</a></p><blockquote><p><b>dosageInstruction</b></p><p><b>text</b>: Un comprimé à avaler et prendre pendant les repas avec de l'eau le matin, le midi et le soir du 2023-10-01 au 2024-01-05.</p><p><b>additionalInstruction</b>: <span title="Codes:{http://snomed.info/sct 311504000}">À prendre pendant les repas</span></p><p><b>patientInstruction</b>: À prendre pendant les repas avec de l'eau</p><p><b>timing</b>: Morning, Noon, Evening, Once</p><p><b>route</b>: <span title="Codes:{urn:oid:0.4.0.127.0.16.1.1.2.1 20053000}">À avaler</span></p><h3>DoseAndRates</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Dose[x]</b></td></tr><tr><td style="display: none">*</td><td>1 comprimé<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT  code732936001 = 'Tablet (unit of presentation)')</span></td></tr></table></blockquote><hr/><blockquote><p class="res-header-id"><b>Generated Narrative: Medication #MedicationParacetamolAxapharm</b></p><a name="MedicationRequestParacetamolAxapharmPre/MedicationParacetamolAxapharm"> </a><a name="hcMedicationRequestParacetamolAxapharmPre/MedicationParacetamolAxapharm"> </a><a name="MedicationRequestParacetamolAxapharmPre/MedicationParacetamolAxapharm-en-US"> </a><div style="display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%"><p style="margin-bottom: 0px">Language: fr-CH</p><p style="margin-bottom: 0px">Profile: <a href="StructureDefinition-ch-emed-epr-medication.html">CH EMED EPR Medication</a></p></div><p><b>code</b>: <span title="Codes:{urn:oid:2.51.1.1 7680669830045}, {http://www.whocc.no/atc N02BE01}">PARACETAMOL Axapharm cpr pell 1g</span></p><p><b>form</b>: <span title="Codes:{urn:oid:0.4.0.127.0.16.1.1.2.1 10221000}">Comprimé pelliculé</span></p><p><b>amount</b>: 20 comprimé<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT  code732936001 = 'Tablet (unit of presentation)')</span>/1 plaquette<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT  code732984005 = 'Blister (unit of presentation)')</span></p><h3>Ingredients</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Item[x]</b></td><td><b>IsActive</b></td><td><b>Strength</b></td></tr><tr><td style="display: none">*</td><td><span title="Codes:{http://snomed.info/sct 387517004}">Paracétamol</span></td><td>true</td><td>1 g<span style="background: LightGoldenRodYellow"> (Details: UCUM  codeg = 'g')</span>/1 comprimé<span style="background: LightGoldenRodYellow"> (Details: SNOMED CT  code732936001 = 'Tablet (unit of presentation)')</span></td></tr></table></blockquote></div>
+        </text>
+        <contained>
+          <Medication>
+            <id value="MedicationParacetamolAxapharm"/>
+            <meta>
+              <profile value="http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-medication"/>
+            </meta>
+            <language value="fr-CH"/>
+            <code>
+              <coding>
+                <system value="urn:oid:2.51.1.1"/>
+                <code value="7680669830045"/>
+                <display value="PARACETAMOL Axapharm cpr pell 1g blister 20pce"/>
+              </coding>
+              <coding>
+                <system value="http://www.whocc.no/atc"/>
+                <code value="N02BE01"/>
+                <display value="paracetamol"/>
+              </coding>
+              <text value="PARACETAMOL Axapharm cpr pell 1g"/>
+            </code>
+            <form>
+              <coding>
+                <system value="urn:oid:0.4.0.127.0.16.1.1.2.1"/>
+                <code value="10221000"/>
+                <display value="Comprimé pelliculé"/>
+              </coding>
+              <text value="Comprimé pelliculé"/>
+            </form>
+            <amount>
+              <numerator>
+                <value value="20"/>
+                <unit value="comprimé"/>
+                <system value="http://snomed.info/sct"/>
+                <code value="732936001"/>
+              </numerator>
+              <denominator>
+                <value value="1"/>
+                <unit value="plaquette"/>
+                <system value="http://snomed.info/sct"/>
+                <code value="732984005"/>
+              </denominator>
+            </amount>
+            <ingredient>
+              <itemCodeableConcept>
+                <coding>
+                  <system value="http://snomed.info/sct"/>
+                  <code value="387517004"/>
+                  <display value="Paracetamol (substance)"/>
+                </coding>
+                <text value="Paracétamol"/>
+              </itemCodeableConcept>
+              <isActive value="true"/>
+              <strength>
+                <numerator>
+                  <value value="1"/>
+                  <unit value="g"/>
+                  <system value="http://unitsofmeasure.org"/>
+                  <code value="g"/>
+                </numerator>
+                <denominator>
+                  <value value="1"/>
+                  <unit value="comprimé"/>
+                  <system value="http://snomed.info/sct"/>
+                  <code value="732936001"/>
+                </denominator>
+              </strength>
+            </ingredient>
+          </Medication>
+        </contained>
+        <extension url="http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-ext-treatmentplan">
+          <extension url="id">
+            <valueIdentifier>
+              <system value="urn:ietf:rfc:3986"/>
+              <value value="urn:uuid:17837392-0340-414d-a3bf-fa9f237b91ff"/>
+            </valueIdentifier>
+          </extension>
+          <extension url="externalDocumentId">
+            <valueIdentifier>
+              <system value="urn:ietf:rfc:3986"/>
+              <value value="urn:uuid:0399ef84-c71b-413b-8a66-b5a835f4f4c5"/>
+            </valueIdentifier>
+          </extension>
+        </extension>
+        <identifier>
+          <system value="urn:ietf:rfc:3986"/>
+          <value value="urn:uuid:ac8ad5cd-aa46-49d6-a5ec-fbc48a9287b4"/>
+        </identifier>
+        <status value="active"/>
+        <intent value="order"/>
+        <medicationReference>
+          <reference value="#MedicationParacetamolAxapharm"/>
+        </medicationReference>
+        <subject>
+          <reference value="urn:uuid:9b00e81e-1165-4039-9d60-698ef838ae1a"/>
+        </subject>
+        <authoredOn value="2023-10-01T00:00:00+02:00"/>
+        <requester>
+          <reference value="urn:uuid:213d609a-1164-459a-bb10-727516ae3d0c"/>
+        </requester>
+        <dosageInstruction>
+          <text value="Un comprimé à avaler et prendre pendant les repas avec de l'eau le matin, le midi et le soir du 2023-10-01 au 2024-01-05."/>
+          <additionalInstruction>
+            <coding>
+              <system value="http://snomed.info/sct"/>
+              <code value="311504000"/>
+              <display value="With or after food"/>
+            </coding>
+            <text value="À prendre pendant les repas"/>
+          </additionalInstruction>
+          <patientInstruction value="À prendre pendant les repas avec de l'eau"/>
+          <timing>
+            <repeat>
+              <boundsPeriod>
+                <start value="2023-10-01"/>
+                <end value="2024-01-05"/>
+              </boundsPeriod>
+              <when value="MORN"/>
+              <when value="NOON"/>
+              <when value="EVE"/>
+            </repeat>
+          </timing>
+          <route>
+            <coding>
+              <system value="urn:oid:0.4.0.127.0.16.1.1.2.1"/>
+              <code value="20053000"/>
+              <display value="Oral use"/>
+            </coding>
+            <text value="À avaler"/>
+          </route>
+          <doseAndRate>
+            <doseQuantity>
+              <value value="1"/>
+              <unit value="comprimé"/>
+              <system value="http://snomed.info/sct"/>
+              <code value="732936001"/>
+            </doseQuantity>
+          </doseAndRate>
+        </dosageInstruction>
+      </MedicationRequest>
+    </resource>
+  </entry>
+  <entry>
+    <fullUrl value="urn:uuid:a4f624e3-fa5a-4889-9bd1-821c8fefff60"/>
+    <resource>
+      <Binary>
+        <id value="original-representation-pdf"/>
+        <contentType value="application/pdf"/>
+      </Binary>
+    </resource>
+  </entry>
+</Bundle>

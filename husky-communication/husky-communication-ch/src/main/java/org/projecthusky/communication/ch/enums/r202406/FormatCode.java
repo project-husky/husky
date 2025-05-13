@@ -27,26 +27,13 @@ import org.projecthusky.common.enums.ValueSetEnumInterface;
  * IT: Formato del documento secondo l'allegato 3 OCIP-DFI. Questo codice univoco definisce il formato del documento XDS. Insieme al tipo MIME, intende fornire al potenziale consumatore sufficienti informazioni per capire se è in grado o meno di elaborare il documento.<br>
  * <p>
  * Identifier: 2.16.756.5.30.1.127.3.10.1.9<br>
- * Effective date: 2022-11-30 14:44<br>
- * Version: 202406.0-stable<br>
+ * Effective date: 2024-11-19 16:26<br>
+ * Version: 202406.2-stable<br>
  * Status: FINAL
  */
-@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2024-07-02")
+@Generated(value = "org.projecthusky.codegenerator.ch.valuesets.UpdateValueSets", date = "2025-03-03")
 public enum FormatCode implements ValueSetEnumInterface {
 
-    /**
-     * EN: CDA-CH-EMED Medication Card document.<br>
-     * DE: CDA-CH-EMED Medication Card document.<br>
-     * FR: CDA-CH-EMED Medication Card document.<br>
-     * IT: CDA-CH-EMED Medication Card document.<br>
-     */
-    CDA_CH_EMED_MEDICATION_CARD_DOCUMENT("urn:che:epr:cda-ch-emed:medication-card:2022",
-                                         "2.16.756.5.30.1.127.3.10.10",
-                                         "CDA-CH-EMED Medication Card document",
-                                         "CDA-CH-EMED Medication Card document",
-                                         "CDA-CH-EMED Medication Card document",
-                                         "CDA-CH-EMED Medication Card document",
-                                         "CDA-CH-EMED Medication Card document"),
     /**
      * EN: CDA Imaging Report with Structured Headings.<br>
      * DE: CDA Imaging Report with Structured Headings.<br>
@@ -105,7 +92,7 @@ public enum FormatCode implements ValueSetEnumInterface {
      * FR: CH EMED Medication Card document.<br>
      * IT: CH EMED Medication Card document.<br>
      */
-    CH_EMED_MEDICATION_CARD_DOCUMENT("urn:che:epr:ch-emed:medication-card:2022",
+    CH_EMED_MEDICATION_CARD_DOCUMENT("urn:che:epr:ch-emed:medication-card:2023",
                                      "2.16.756.5.30.1.127.3.10.10",
                                      "CH EMED Medication Card document",
                                      "CH EMED Medication Card document",
@@ -133,7 +120,7 @@ public enum FormatCode implements ValueSetEnumInterface {
      */
     CH_EMED_MEDICATION_LIST_DOCUMENT("urn:che:epr:ch-emed:pml:2024",
                                      "2.16.756.5.30.1.127.3.10.10",
-                                     "CH EMED Medication List",
+                                     "CH EMED Medication List document",
                                      "CH EMED Medication List document",
                                      "CH EMED Medication List document",
                                      "CH EMED Medication List document",
@@ -172,7 +159,7 @@ public enum FormatCode implements ValueSetEnumInterface {
      */
     CH_EMED_PHARMACEUTICAL_ADVICE_DOCUMENT("urn:che:epr:ch-emed:padv:2024",
                                            "2.16.756.5.30.1.127.3.10.10",
-                                           "CH EMED Pharmaceutical Advice",
+                                           "CH EMED Pharmaceutical Advice document",
                                            "CH EMED Pharmaceutical Advice document",
                                            "CH EMED Pharmaceutical Advice document",
                                            "CH EMED Pharmaceutical Advice document",
@@ -374,14 +361,6 @@ public enum FormatCode implements ValueSetEnumInterface {
                               "Documento CIP non strutturato");
 
     /**
-     * EN: Code for CDA-CH-EMED Medication Card document.<br>
-     * DE: Code für CDA-CH-EMED Medication Card document.<br>
-     * FR: Code de CDA-CH-EMED Medication Card document.<br>
-     * IT: Code per CDA-CH-EMED Medication Card document.<br>
-     */
-    public static final String CDA_CH_EMED_MEDICATION_CARD_DOCUMENT_CODE = "urn:che:epr:cda-ch-emed:medication-card:2022";
-
-    /**
      * EN: Code for CDA Imaging Report with Structured Headings.<br>
      * DE: Code für CDA Imaging Report with Structured Headings.<br>
      * FR: Code de CDA Imaging Report with Structured Headings.<br>
@@ -419,7 +398,7 @@ public enum FormatCode implements ValueSetEnumInterface {
      * FR: Code de CH EMED Medication Card document.<br>
      * IT: Code per CH EMED Medication Card document.<br>
      */
-    public static final String CH_EMED_MEDICATION_CARD_DOCUMENT_CODE = "urn:che:epr:ch-emed:medication-card:2022";
+    public static final String CH_EMED_MEDICATION_CARD_DOCUMENT_CODE = "urn:che:epr:ch-emed:medication-card:2023";
 
     /**
      * EN: Code for CH EMED Medication Dispense document.<br>

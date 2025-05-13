@@ -16,17 +16,17 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
-import org.apache.http.HttpStatus;
-import org.apache.http.NameValuePair;
-import org.apache.http.NoHttpResponseException;
-import org.apache.http.ParseException;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
+import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.client5.http.entity.UrlEncodedFormEntity;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.core5.http.HttpStatus;
+import org.apache.hc.core5.http.NameValuePair;
+import org.apache.hc.core5.http.NoHttpResponseException;
+import org.apache.hc.core5.http.ParseException;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
+import org.apache.hc.core5.http.message.BasicNameValuePair;
 import org.projecthusky.xua.authentication.AuthnRequest;
 import org.projecthusky.xua.communication.clients.IdpClient;
 import org.projecthusky.xua.communication.config.IdpClientConfig;
@@ -85,9 +85,7 @@ public abstract class AbstractIdpClient implements IdpClient {
 		final CloseableHttpClient httpclient = getHttpClient();
 
 		final CloseableHttpResponse response = httpclient.execute(post);
-		if ((response.getStatusLine() != null)
-				&& (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)) {
-
+		if ((response.getCode() == HttpStatus.SC_OK)) {
 			return parseResponse(response);
 		} else {
 			throw new NoHttpResponseException("No valid response found: " + response);
@@ -98,7 +96,8 @@ public abstract class AbstractIdpClient implements IdpClient {
 	 * Method to get http client
 	 * 
 	 * @return closeable http client
-	 * @throws ClientSendException will be thrown if an error occures.
+	 * @throws ClientSendException
+	 *             will be thrown if an error occures.
 	 */
 	public abstract CloseableHttpClient getHttpClient() throws ClientSendException;
 
@@ -157,7 +156,8 @@ public abstract class AbstractIdpClient implements IdpClient {
 		final var serializer = new AuthnRequestSerializerImpl();
 		final byte[] authnByteArray = serializer.toXmlByteArray(aAuthnRequest);
 
-		final List<NameValuePair> urlParameters = new ArrayList<>();
+		final List<BasicNameValuePair> urlParameters = new ArrayList<>();
+		
 		urlParameters.add(new BasicNameValuePair("SAMLRequest",
 				Base64.getEncoder().encodeToString(authnByteArray)));
 
@@ -203,8 +203,18 @@ public abstract class AbstractIdpClient implements IdpClient {
 			final var deserializer = new ResponseDeserializerImpl();
 
 			return deserializer.fromXmlByteArray(reponseByteArray);
-		} catch (ParseException | IOException | DeserializeException e) {
-			throw new ClientSendException(e);
+		} catch (final DeserializeException e) {
+			throw new ClientSendException("Error while deserializing the response", e);
+		} catch (final IOException e) {
+			throw new ClientSendException("Error while reading the response", e);
+		} catch (ParseException e) {
+			throw new ClientSendException("Error while parsing the response", e);
+		} finally {
+			try {
+				EntityUtils.consume(response.getEntity());
+			} catch (final IOException e) {
+				logger.error("Error while closing the response entity", e);
+			}
 		}
 	}
 }

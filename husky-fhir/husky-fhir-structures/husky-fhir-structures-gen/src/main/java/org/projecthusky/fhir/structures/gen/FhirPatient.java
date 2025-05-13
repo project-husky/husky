@@ -91,14 +91,14 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 				org.hl7.fhir.r4.model.Extension streetNameExt = new org.hl7.fhir.r4.model.Extension(
 						"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName",
 						new StringType(mdhtAddr.getStreetName()));
-				fhirAddr.addExtension(streetNameExt);
+				addAddressLineExtension(fhirAddr, streetNameExt);
 			}
 
 			if (mdhtAddr.getBuildingNumber() != null) {
 				org.hl7.fhir.r4.model.Extension houseNumberExt = new org.hl7.fhir.r4.model.Extension(
 						"http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-houseNumber",
 						new StringType(mdhtAddr.getBuildingNumber()));
-				fhirAddr.addExtension(houseNumberExt);
+				addAddressLineExtension(fhirAddr, houseNumberExt);
 			}
 
 			if (mdhtAddr.getCity() != null) {
@@ -119,6 +119,15 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 
 		}
 		return fhirAddr;
+	}
+
+	private static void addAddressLineExtension(final Address address,
+												final org.hl7.fhir.r4.model.Extension extension) {
+		if (address.getLine().isEmpty()) {
+			address.addLineElement().addExtension(extension);
+		} else {
+			address.getLine().get(0).addExtension(extension);
+		}
 	}
 
 	private static List<StringType> getStreetAdddressLines(org.projecthusky.common.model.Address huskyAddr) {
@@ -628,8 +637,9 @@ public class FhirPatient extends org.hl7.fhir.r4.model.Patient {
 			patientAddress.setStreetAddressLine2(addressline2);
 		}
 
-		final var extension = fhirAddress.getExtensionByUrl("http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName");
-		Optional.ofNullable(extension)
+		final var firstLine = fhirAddress.hasLine() ? fhirAddress.getLine().get(0) : null;
+		Optional.ofNullable(firstLine)
+				.map(line -> line.getExtensionByUrl("http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-streetName"))
 				.map(ext -> (StringType) ext.getValue())
 				.map(StringType::getValue)
 				.ifPresent(patientAddress::setStreetName);
