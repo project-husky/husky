@@ -19,7 +19,6 @@ import org.hl7.fhir.r4.model.Organization;
 import org.hl7.fhir.r4.model.ListResource.ListStatus;
 import org.openehealth.ipf.commons.ihe.fhir.iti65.Iti65Constants;
 import org.projecthusky.common.utils.XdsMetadataUtil;
-import org.projecthusky.common.utils.datatypes.Uuids;
 import org.projecthusky.communication.xdsmhdconversion.utils.ConverterUtils;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.*;
 
@@ -104,7 +103,7 @@ public class SubmissionSetConverter {
         );
 
         // source | SubmissionSet.author
-        final Extension extensionAuthorRole = list.getExtensionByUrl("http://fhir.ch/ig/ch-epr-mhealth/StructureDefinition/ch-ext-author-authorrole");
+        final Extension extensionAuthorRole = list.getExtensionByUrl("http://fhir.ch/ig/ch-epr-fhir/StructureDefinition/ch-ext-author-authorrole");
         if (list.hasSource() || extensionAuthorRole != null) {
             submissionSet.setAuthor(getAuthor(list.getSource(), extensionAuthorRole, list.getContained(), list.getLanguage()));
         }

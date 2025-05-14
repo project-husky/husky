@@ -12,7 +12,8 @@ import java.util.UUID;
  * @author Ronaldo Loureiro
  **/
 @ResourceDef(profile = "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-observation")
-public class ChEmedEprObservationPadv extends ChEmedEprObservation<ChEmedEprMedicationStatementChanged> {
+public class ChEmedEprObservationPadv
+        extends ChEmedEprObservation<ChEmedEprMedicationStatementChanged, ChEmedEprMedicationRequestChanged> {
 
     /**
      * Empty constructor for the parser.
@@ -35,6 +36,11 @@ public class ChEmedEprObservationPadv extends ChEmedEprObservation<ChEmedEprMedi
     @Override
     protected Class<ChEmedEprMedicationStatementChanged> getMedicationStatementChangedType() {
         return ChEmedEprMedicationStatementChanged.class;
+    }
+
+    @Override
+    protected Class<ChEmedEprMedicationRequestChanged> getMedicationRequestChangedType() {
+        return ChEmedEprMedicationRequestChanged.class;
     }
 
     @Override

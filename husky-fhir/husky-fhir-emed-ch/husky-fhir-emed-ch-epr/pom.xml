@@ -1,38 +1,31 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<parent>
-		<groupId>org.projecthusky.fhir.emed.ch</groupId>
-		<artifactId>husky-fhir-emed-ch</artifactId>
-		<version>3.0.3-SNAPSHOT</version>
-	</parent>
-	<modelVersion>4.0.0</modelVersion>
-	<artifactId>husky-fhir-emed-ch-epr</artifactId>
-	<name>Husky FHIR eMedication Switzerland EPR</name>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>org.projecthusky.fhir.emed.ch</groupId>
+        <artifactId>husky-fhir-emed-ch</artifactId>
+        <version>3.1.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>husky-fhir-emed-ch-epr</artifactId>
+    <name>Husky FHIR eMedication Switzerland EPR</name>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.projecthusky.fhir.core.ch</groupId>
-			<artifactId>husky-fhir-core-ch</artifactId>
-			<version>3.0.3-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.projecthusky.fhir.emed.ch</groupId>
-			<artifactId>husky-fhir-emed-ch-common</artifactId>
-			<version>3.0.3-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<!-- Used for FHIR resource validation -->
-			<groupId>health.matchbox</groupId>
-			<artifactId>matchbox-engine</artifactId>
-			<exclusions>
-				<!-- Exclude dependencies because newer versions already exist -->
-				<exclusion>
-					<groupId>ca.uhn.hapi.fhir</groupId>
-					<artifactId>org.hl7.fhir.convertors</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.projecthusky.fhir.emed.ch</groupId>
+	    	    <artifactId>husky-fhir-emed-ch-common</artifactId>
+	   		    <version>3.1.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <!-- Used for FHIR resource validation -->
+            <groupId>health.matchbox</groupId>
+            <artifactId>matchbox-engine</artifactId>
+            <exclusions>
+                <!-- Exclude dependencies because newer versions already exist -->
+                <exclusion>
+                    <groupId>ca.uhn.hapi.fhir</groupId>
+                    <artifactId>org.hl7.fhir.convertors</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
 		<dependency>
 			<!-- The Checker Framework enhances Java's type system to make it

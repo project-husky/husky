@@ -7,23 +7,23 @@
 	<parent>
 		<artifactId>husky-fhir-emed-ch</artifactId>
 		<groupId>org.projecthusky.fhir.emed.ch</groupId>
-		<version>3.0.3-SNAPSHOT</version>
+		<version>3.1.1-SNAPSHOT</version>
 	</parent>
 	<dependencies>
 		<dependency>
 			<groupId>org.projecthusky.fhir.emed.ch</groupId>
 			<artifactId>husky-fhir-emed-ch-common</artifactId>
-			<version>3.0.3-SNAPSHOT</version>
+			<version>3.1.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projecthusky.fhir.emed.ch</groupId>
 			<artifactId>husky-fhir-emed-ch-epr</artifactId>
-			<version>3.0.3-SNAPSHOT</version>
+			<version>3.1.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projecthusky.validation.service</groupId>
 			<artifactId>husky-validation-service</artifactId>
-			<version>3.0.3-SNAPSHOT</version>
+			<version>3.1.1-SNAPSHOT</version>
 		</dependency>
 
 

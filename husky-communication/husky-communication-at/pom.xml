@@ -1,25 +1,24 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<artifactId>husky-communication-at</artifactId>
-	<name>Husky Communication AT</name>
-	<parent>
-		<groupId>org.projecthusky.communication</groupId>
-		<artifactId>husky-communication</artifactId>
-		<version>3.0.3-SNAPSHOT</version>
-	</parent>
-
-	<dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>husky-communication-at</artifactId>
+  <name>Husky Communication AT</name>
+  <parent>
+    <groupId>org.projecthusky.communication</groupId>
+    <artifactId>husky-communication</artifactId>
+    <version>3.1.1-SNAPSHOT</version>
+  </parent>
+  
+  <dependencies>
 		<dependency>
 			<groupId>org.projecthusky.communication</groupId>
 			<artifactId>husky-communication-gen</artifactId>
-			<version>3.0.3-SNAPSHOT</version>
+    			<version>3.1.1-SNAPSHOT</version>
+
 		</dependency>
 		<dependency>
 			<groupId>org.projecthusky.common</groupId>
 			<artifactId>husky-common-at</artifactId>
-			<version>3.0.3-SNAPSHOT</version>
+    			<version>3.1.1-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
@@ -49,14 +48,14 @@
 		<dependency>
 			<groupId>org.projecthusky.communication</groupId>
 			<artifactId>husky-communication-gen</artifactId>
-			<version>3.0.3-SNAPSHOT</version>
+			<version>3.1.1-SNAPSHOT</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.projecthusky.common</groupId>
 			<artifactId>husky-common-gen</artifactId>
-			<version>3.0.3-SNAPSHOT</version>
+			<version>3.1.1-SNAPSHOT</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>

@@ -23,7 +23,7 @@ import java.util.UUID;
  **/
 @ResourceDef(profile = "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-observation-list")
 public class ChEmedEprObservationPml
-        extends ChEmedEprObservation<ChEmedEprMedicationStatementPml>
+        extends ChEmedEprObservation<ChEmedEprMedicationStatementChangedPml, ChEmedEprMedicationRequestChangedPml>
         implements ChEmedEprDocumentAuthorable<ChEmedEprObservationPml> {
 
     /**
@@ -67,8 +67,18 @@ public class ChEmedEprObservationPml
      * medication statement changed resources in a PML document (parser limitation).
      */
     @Override
-    protected Class<ChEmedEprMedicationStatementPml> getMedicationStatementChangedType() {
-        return ChEmedEprMedicationStatementPml.class;
+    protected Class<ChEmedEprMedicationStatementChangedPml> getMedicationStatementChangedType() {
+        return ChEmedEprMedicationStatementChangedPml.class;
+    }
+
+    /**
+     *
+     * @return The {@link ChEmedEprMedicationRequestChangedPml} class, since it is the resulting class of parsing the
+     * medication request changed resources in a PML document (parser limitation).
+     */
+    @Override
+    protected Class<ChEmedEprMedicationRequestChangedPml> getMedicationRequestChangedType() {
+        return ChEmedEprMedicationRequestChangedPml.class;
     }
 
     /**

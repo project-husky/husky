@@ -32,10 +32,10 @@ import java.util.regex.Pattern;
 @AllArgsConstructor
 @Slf4j
 public class EMediplanPatient implements EMediplanExtendable, EMediplanObject {
-    private static final Pattern LANGUAGE_CODE_PATTERN = Pattern.compile("[a-zA-Z]{2}" );
-    private static final Pattern PHONE_NUMBER_PATTERN = Pattern.compile("\\+?[0-9]+[ 0-9]*");
+    private static final Pattern LANGUAGE_CODE_PATTERN = Pattern.compile("^[a-zA-Z]{2}$" );
+    private static final Pattern PHONE_NUMBER_PATTERN = Pattern.compile("^\\+?[0-9]+[ 0-9]*$");
     private static final Pattern EMAIL_PATTERN =
-            Pattern.compile("^(?=.{1,64}@)[\\\\p{L}0-9_-]+(\\\\.[\\\\p{L}0-9_-]+)*@[^-][\\\\p{L}0-9-]+(\\\\.[\\\\p{L}0-9-]+)*(\\\\.[\\\\p{L}]{2,})$");
+            Pattern.compile("^(?=.{1,64}@)[\\p{L}0-9/_-]+(\\.[\\p{L}0-9/_-]+)*@[^-][\\p{L}0-9-]+(\\.[\\p{L}0-9-]+)*(\\.[\\p{L}]{2,})$");
 
     protected static final String MEDICAL_DATA_FIELD_NAME = "mData";
 
@@ -138,7 +138,7 @@ public class EMediplanPatient implements EMediplanExtendable, EMediplanObject {
                     "The patient's gender is missing, but it is mandatory."
             ));
 
-        if (address != null) address.validate(basePath);
+        if (address != null) result.add(address.validate(basePath));
 
         if ((languageCode != null && !languageCode.isBlank())) {
             final var matcher = LANGUAGE_CODE_PATTERN.matcher(languageCode);

@@ -1,36 +1,29 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<artifactId>husky-fhir-emed-ch-common</artifactId>
-	<name>Husky FHIR eMedication Switzerland Common</name>
-	<parent>
-		<groupId>org.projecthusky.fhir.emed.ch</groupId>
-		<artifactId>husky-fhir-emed-ch</artifactId>
-		<version>3.0.3-SNAPSHOT</version>
-	</parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>husky-fhir-emed-ch-common</artifactId>
+    <name>Husky FHIR eMedication Switzerland Common</name>
+    <parent>
+        <groupId>org.projecthusky.fhir.emed.ch</groupId>
+        <artifactId>husky-fhir-emed-ch</artifactId>
+        <version>3.1.1-SNAPSHOT</version>
+    </parent>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.projecthusky.fhir.structures</groupId>
-			<artifactId>husky-fhir-structures-gen</artifactId>
-			<version>3.0.3-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.projecthusky.fhir.core.ch</groupId>
-			<artifactId>husky-fhir-core-ch</artifactId>
-			<version>3.0.3-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.projecthusky.common</groupId>
-			<artifactId>husky-common-gen</artifactId>
-			<version>3.0.3-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.projecthusky.communication</groupId>
-			<artifactId>husky-communication-ch</artifactId>
-			<version>3.0.3-SNAPSHOT</version>
-		</dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.projecthusky.fhir.structures</groupId>
+            <artifactId>husky-fhir-structures-gen</artifactId>
+       	    <version>3.1.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projecthusky.common</groupId>
+            <artifactId>husky-common-gen</artifactId>
+       	    <version>3.1.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projecthusky.communication</groupId>
+            <artifactId>husky-communication-ch</artifactId>
+       	    <version>3.1.1-SNAPSHOT</version>
+        </dependency>
 
 		<dependency>
 			<!-- The Checker Framework enhances Java's type system to make it

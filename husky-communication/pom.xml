@@ -3,23 +3,23 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.projecthusky</groupId>
-		<artifactId>husky-api</artifactId>
-		<version>3.0.3-SNAPSHOT</version>
-	</parent>
-	<groupId>org.projecthusky.communication</groupId>
-	<artifactId>husky-communication</artifactId>
-	<packaging>pom</packaging>
-	<name>Husky Communication</name>
-	<modules>
-		<module>husky-communication-gen</module>
-		<module>husky-communication-ch</module>
-		<module>husky-xua</module>
-		<module>husky-valueset-gen</module>
-		<module>husky-ppq</module>
-		<module>husky-service</module>
-		<module>husky-communication-at</module>
-		<module>husky-xds-mhd-conversion</module>
-	</modules>
+  <parent>
+	<groupId>org.projecthusky</groupId>
+	<artifactId>husky-api</artifactId>
+	<version>3.1.1-SNAPSHOT</version>
+  </parent>
+  <groupId>org.projecthusky.communication</groupId>
+  <artifactId>husky-communication</artifactId>
+  <packaging>pom</packaging>
+  <name>Husky Communication</name>
+  <modules>
+  	<module>husky-communication-gen</module>
+  	<module>husky-communication-ch</module>
+  	<module>husky-xua</module>
+  	<module>husky-valueset-gen</module>
+  	<module>husky-ppq</module>
+    <module>husky-service</module>
+  	<module>husky-communication-at</module>
+    <module>husky-xds-mhd-conversion</module>
+  </modules>
 </project>
