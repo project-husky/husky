@@ -12,9 +12,10 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Observation;
 import org.hl7.fhir.r4.model.OperationOutcome;
-import org.projecthusky.fhir.emed.ch.common.resource.ChCorePatientEpr;
+import org.projecthusky.fhir.core.ch.resource.r4.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.EMediplanType;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.Gender;
+import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprPatient;
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
 import java.time.Instant;
@@ -260,7 +261,7 @@ public class EMediplanPatient implements EMediplanExtendable, EMediplanObject {
      * @param eprFhirPatient The CH EPR patient to be converted.
      * @return The eMediplan patient.
      */
-    public static EMediplanPatient fromEprFhir(final ChCorePatientEpr eprFhirPatient,
+    public static EMediplanPatient fromEprFhir(final ChEmedEprPatient eprFhirPatient,
                                                final @Nullable Observation weightObservation) {
         String language = null;
         final var fhirAddress = eprFhirPatient.resolveAddress();

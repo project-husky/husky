@@ -25,10 +25,11 @@
        	    <version>3.1.1-SNAPSHOT</version>
         </dependency>
 
-        <dependency>
-            <!-- The Checker Framework enhances Java's type system to make it more powerful and useful. -->
-            <groupId>org.checkerframework</groupId>
-            <artifactId>checker-qual</artifactId> <!-- MIT -->
-        </dependency>
-    </dependencies>
+		<dependency>
+			<!-- The Checker Framework enhances Java's type system to make it
+			more powerful and useful. -->
+			<groupId>org.checkerframework</groupId>
+			<artifactId>checker-qual</artifactId> <!-- MIT -->
+		</dependency>
+	</dependencies>
 </project>

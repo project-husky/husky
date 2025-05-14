@@ -9,10 +9,9 @@
     <artifactId>husky-fhir-emed-ch</artifactId>
     <name>Husky FHIR eMedication Switzerland</name>
     <packaging>pom</packaging>
-
-    <modules>
-        <module>husky-fhir-emed-ch-common</module>
-        <module>husky-fhir-emed-ch-epr</module>
-        <module>husky-fhir-emed-ch-epr-narrative</module>
-    </modules>
+	<modules>
+		<module>husky-fhir-emed-ch-common</module>
+		<module>husky-fhir-emed-ch-epr</module>
+		<module>husky-fhir-emed-ch-epr-narrative</module>
+	</modules>
 </project>
