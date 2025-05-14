@@ -24,6 +24,11 @@
             <artifactId>husky-communication-ch</artifactId>
        	    <version>3.1.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+        	<groupId>org.projecthusky.fhir.core.ch</groupId>
+			<artifactId>husky-fhir-core-ch</artifactId>
+			<version>3.1.1-SNAPSHOT</version>
+		</dependency>
 
 		<dependency>
 			<!-- The Checker Framework enhances Java's type system to make it

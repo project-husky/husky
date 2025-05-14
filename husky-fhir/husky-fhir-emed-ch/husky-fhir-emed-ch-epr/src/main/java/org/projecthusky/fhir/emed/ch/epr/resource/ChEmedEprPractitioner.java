@@ -15,10 +15,10 @@ import org.hl7.fhir.r4.model.Address;
 import org.hl7.fhir.r4.model.HumanName;
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Practitioner;
+import org.projecthusky.fhir.core.ch.common.util.FhirSystem;
+import org.projecthusky.fhir.core.ch.common.util.Identifiers;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
-import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
-import org.projecthusky.fhir.emed.ch.common.util.Identifiers;
 
 import java.util.List;
 

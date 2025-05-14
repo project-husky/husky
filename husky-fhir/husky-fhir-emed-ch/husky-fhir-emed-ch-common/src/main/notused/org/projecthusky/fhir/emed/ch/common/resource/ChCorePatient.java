@@ -9,7 +9,6 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.*;
 import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
-import org.projecthusky.fhir.emed.ch.common.enums.ReligiousAffiliation;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.extension.PatientCitizenship;
 import org.projecthusky.fhir.emed.ch.common.util.FhirDateTimes;
@@ -104,17 +103,6 @@ public class ChCorePatient extends Patient{
     }
 
     /**
-     * Resolves the patient's religion.
-     *
-     * @return The religion or {@code null}.
-     */
-    @Nullable
-    public ReligiousAffiliation resolveReligion() {
-        if (!this.hasReligion()) return null;
-        return ReligiousAffiliation.getEnum(this.religion.getCodingFirstRep().getCode());
-    }
-
-    /**
      * Resolves the first local patient identifier or throws.
      *
      * @return the first local patient identifier.
@@ -137,24 +125,6 @@ public class ChCorePatient extends Patient{
     public LocalDate resolveBirthDate() throws InvalidEmedContentException {
         if (!this.hasBirthDate()) throw new InvalidEmedContentException("The birthdate is missing.");
         return LocalDate.ofInstant(this.getBirthDate().toInstant(), ZoneId.systemDefault());
-    }
-
-    /**
-     * Sets patient's religion.
-     *
-     * @param religion Religious Affiliation - the patient's religion.
-     * @return this.
-     */
-    public ChCorePatient setReligion(final ReligiousAffiliation religion) {
-        final var system = UriType.fromOid(religion.getCodeSystemId());
-
-        final var coding = new Coding()
-                .setCode(religion.getCodeValue())
-                .setSystemElement(system)
-                .setDisplay(religion.getDisplayName());
-
-        this.religion = new CodeableConcept(coding);
-        return this;
     }
 
     /**

@@ -258,14 +258,14 @@ public class EMediplanPatient implements EMediplanExtendable, EMediplanObject {
     /**
      * Gets an EMediplanPatient from an CH EPR patient.
      *
-     * @param eprFhirPatient The CH EPR patient to be converted.
+     * @param chCorePatientEpr The CH EPR patient to be converted.
      * @return The eMediplan patient.
      */
-    public static EMediplanPatient fromEprFhir(final ChEmedEprPatient eprFhirPatient,
+    public static EMediplanPatient fromEprFhir(final ChCorePatientEpr chCorePatientEpr,
                                                final @Nullable Observation weightObservation) {
         String language = null;
-        final var fhirAddress = eprFhirPatient.resolveAddress();
-        final var preferredLanguage = eprFhirPatient.resolveLanguageOfCorrespondence();
+        final var fhirAddress = chCorePatientEpr.resolveAddress();
+        final var preferredLanguage = chCorePatientEpr.resolveLanguageOfCorrespondence();
         if (preferredLanguage != null && preferredLanguage.hasLanguage() && preferredLanguage.getLanguage().hasCoding()) {
             language = preferredLanguage.getLanguage().getCoding().stream().filter(Coding::hasCode)
                     .map(Coding::getCode).map(EMediplanPatient::fhirLanguageCodeToEMediplanLanguageCode)
@@ -284,17 +284,17 @@ public class EMediplanPatient implements EMediplanExtendable, EMediplanObject {
             medicalData.setWeight(weightObservation.getValueQuantity().getValue().doubleValue());
         }
         return new EMediplanPatient(
-                eprFhirPatient.getNameFirstRep().getGivenAsSingleString(),
-                eprFhirPatient.getNameFirstRep().getFamily(),
-                eprFhirPatient.resolveBirthDate(),
-                Gender.fromFhirAdministrativeGender(eprFhirPatient.resolveGender()),
+                chCorePatientEpr.getNameFirstRep().getGivenAsSingleString(),
+                chCorePatientEpr.getNameFirstRep().getFamily(),
+                chCorePatientEpr.resolveBirthDate(),
+                Gender.fromFhirAdministrativeGender(chCorePatientEpr.resolveGender()),
                 fhirAddress == null? null : EMediplanPostalAddress.fromFhirAddress(fhirAddress),
                 language,
-                eprFhirPatient.getIdentifier().stream().map(EMediplanPatientId::fromFhirIdentifier).toList(),
+                chCorePatientEpr.getIdentifier().stream().map(EMediplanPatientId::fromFhirIdentifier).toList(),
                 null,
                 medicalData,
-                eprFhirPatient.resolvePhoneNumbersAsStrings(true),
-                eprFhirPatient.resolveEmailAddressesAsStrings(true)
+                chCorePatientEpr.resolvePhoneNumbersAsStrings(true),
+                chCorePatientEpr.resolveEmailAddressesAsStrings(true)
         );
     }
 

@@ -18,7 +18,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.common.hapi.validation.support.BaseValidationSupport;
 import org.hl7.fhir.instance.model.api.IBaseResource;
-import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
+import org.projecthusky.fhir.core.ch.common.util.FhirSystem;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.ArrayList;

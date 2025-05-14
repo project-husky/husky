@@ -5,12 +5,13 @@
 
 	<groupId>org.projecthusky.fhir.vacd</groupId>
 	<artifactId>husky-fhir-vacd</artifactId>
+	<name>Husky FHIR eVaccination</name>
 	<packaging>pom</packaging>
 
 	<parent>
 		<groupId>org.projecthusky.fhir</groupId>
 		<artifactId>husky-fhir</artifactId>
-		<version>3.0.3-SNAPSHOT</version>
+		<version>3.1.1-SNAPSHOT</version>
 	</parent>
 
 
