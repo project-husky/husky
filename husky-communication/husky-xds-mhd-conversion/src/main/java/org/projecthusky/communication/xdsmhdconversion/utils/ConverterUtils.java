@@ -82,10 +82,6 @@ public class ConverterUtils {
         return urn.startsWith(Uuids.URN_PREFIX) ? urn.substring(Uuids.URN_PREFIX.length()) : urn;
     }
 
-    public static boolean isOid(@Nullable final String urn) {
-        return urn != null && urn.matches("^([0-2])((\\.0)|(\\.[1-9]\\d*))*$");
-    }
-
     /**
      * search a referenced resource from a list of (contained) resources.
      *
@@ -261,7 +257,7 @@ public class ConverterUtils {
         final List<StringType> givens = name.getGiven();
 
         if (!givens.isEmpty()) {
-            targetName.setGivenName(givens.get(0).getValue());
+            targetName.setGivenName(givens.getFirst().getValue());
             targetName.setSecondAndFurtherGivenNames(String.join(" ", givens.stream()
                     .skip(1)
                     .map(StringType::getValue)
@@ -482,7 +478,7 @@ public class ConverterUtils {
     public static Code toCode(@Nullable final List<CodeableConcept> ccs,
                               @Nullable final String languageCode) {
         if (ccs == null || ccs.isEmpty()) return null;
-        return toCode(ccs.get(0), languageCode);
+        return toCode(ccs.getFirst(), languageCode);
     }
 
     @Nullable

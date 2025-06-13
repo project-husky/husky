@@ -1,7 +1,7 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.dis;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
-import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChEmedOrganization;
 import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedRatioWithEmedUnits;

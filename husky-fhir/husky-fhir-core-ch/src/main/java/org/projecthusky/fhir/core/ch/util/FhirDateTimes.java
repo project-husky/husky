@@ -1,4 +1,4 @@
-package org.projecthusky.fhir.emed.ch.common.util;
+package org.projecthusky.fhir.core.ch.util;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.BaseDateTimeType;

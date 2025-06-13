@@ -8,11 +8,11 @@ import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.MedicationRequest;
 import org.hl7.fhir.r4.model.Reference;
 import org.projecthusky.common.utils.datatypes.Uuids;
+import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCorePatientEpr;
-import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
-import org.projecthusky.fhir.emed.ch.common.util.FhirSystem;
+import org.projecthusky.fhir.core.ch.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
 import org.projecthusky.fhir.emed.ch.epr.enums.PrescriptionStatus;
 import org.projecthusky.fhir.emed.ch.epr.enums.SubstanceAdministrationSubstitutionCode;
@@ -20,9 +20,7 @@ import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EffectiveDosageInstructions;
 import org.projecthusky.fhir.emed.ch.epr.model.common.EmedReference;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChEmedExtTreatmentPlan;
-import org.projecthusky.fhir.emed.ch.epr.util.References;
 
-import java.sql.Date;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -117,7 +115,7 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
      */
     @ExpectsValidResource
     public ChEmedEprDosage resolveBaseDosage() throws InvalidEmedContentException {
-        if (!this.getDosageInstruction().isEmpty() && this.getDosageInstruction().get(0) instanceof final ChEmedEprDosage dosage) {
+        if (!this.getDosageInstruction().isEmpty() && this.getDosageInstruction().getFirst() instanceof final ChEmedEprDosage dosage) {
             return dosage;
         }
         throw new InvalidEmedContentException("Base entry of the dosage instruction is missing");
@@ -329,7 +327,7 @@ public abstract class ChEmedEprMedicationRequest extends MedicationRequest imple
         if (getDosageInstruction().isEmpty()) {
             addDosageInstruction();
         }
-        return (ChEmedEprDosage) getDosageInstruction().get(0);
+        return (ChEmedEprDosage) getDosageInstruction().getFirst();
     }
 
     /**

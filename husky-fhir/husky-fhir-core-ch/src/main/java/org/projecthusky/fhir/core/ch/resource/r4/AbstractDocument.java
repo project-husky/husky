@@ -10,6 +10,7 @@
  */
 package org.projecthusky.fhir.core.ch.resource.r4;
 
+import java.io.Serial;
 import java.util.List;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -22,7 +23,22 @@ import org.hl7.fhir.r4.model.DomainResource;
  */
 public abstract class AbstractDocument extends Bundle {
 
+	@Serial
 	private static final long serialVersionUID = 3421606160600710334L;
+
+	/**
+	 * Finds a bundle entry component by the type of its resource or {@code null}, without creating it.
+	 *
+	 * @param resourceType The type of the resource.
+	 * @return the bundle entry component or {@code null}.
+	 */
+	@Nullable
+	public BundleEntryComponent getEntryComponentByResourceType(final Class<?> resourceType) {
+		return this.getEntry().stream()
+				.filter(entry -> resourceType.isInstance(entry.getResource()))
+				.findAny()
+				.orElse(null);
+	}
 
 	@Nullable
 	public <T> T getEntryByResourceType(final Class<T> resourceType) {
@@ -58,6 +74,6 @@ public abstract class AbstractDocument extends Bundle {
 				.filter(entry -> res.getResourceType()
 						.equals(entry.getResource().getResourceType()))
 				.map(BundleEntryComponent::getResource)
-				.filter(entry1 -> entry1.getId().equals(res.getId())).findAny().isPresent();
+				.anyMatch(entry1 -> entry1.getId().equals(res.getId()));
 	}
 }

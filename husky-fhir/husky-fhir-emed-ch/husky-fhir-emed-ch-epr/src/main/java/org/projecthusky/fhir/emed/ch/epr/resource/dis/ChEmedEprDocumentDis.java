@@ -11,7 +11,7 @@
 package org.projecthusky.fhir.emed.ch.epr.resource.dis;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
-import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
@@ -68,10 +68,10 @@ public class ChEmedEprDocumentDis extends ChEmedEprDocument {
      * @return the composition entry.
      */
     public BundleEntryComponent getCompositionEntry() {
-        var entry = this.getEntryByResourceType(ChEmedEprCompositionDis.class);
+        var entry = this.getEntryComponentByResourceType(ChEmedEprCompositionDis.class);
         if (entry == null) {
             entry = new BundleEntryComponent();
-            this.getEntry().add(0, entry); // The composition shall go first
+            this.getEntry().addFirst(entry); // The composition shall go first
         }
         return entry;
     }
@@ -85,7 +85,7 @@ public class ChEmedEprDocumentDis extends ChEmedEprDocument {
     @ExpectsValidResource
     public ChEmedEprCompositionDis resolveComposition() {
         final var entry = this.getEntryByResourceType(ChEmedEprCompositionDis.class);
-        if (entry != null && entry.getResource() instanceof final ChEmedEprCompositionDis composition) {
+        if (entry instanceof final ChEmedEprCompositionDis composition) {
             return composition;
         }
         throw new InvalidEmedContentException(

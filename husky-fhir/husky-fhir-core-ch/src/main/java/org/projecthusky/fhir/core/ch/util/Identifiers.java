@@ -8,7 +8,7 @@
  * whereas medshare GmbH is the initial and main contributor/author of the eHealth Connector.
  *
  */
-package org.projecthusky.fhir.emed.ch.common.util;
+package org.projecthusky.fhir.core.ch.util;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Identifier;
@@ -112,7 +112,7 @@ public class Identifiers {
      */
     public static Identifier fromUuid(final UUID uuid) {
         final var identifier = new Identifier();
-        identifier.setValue("urn:uuid:" + uuid.toString());
+        identifier.setValue("urn:uuid:" + uuid);
         identifier.setSystem("urn:ietf:rfc:3986");
         return identifier;
     }

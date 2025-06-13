@@ -12,7 +12,7 @@ package org.projecthusky.fhir.emed.ch.epr.resource.padv;
 
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.projecthusky.common.utils.datatypes.Uuids;
-import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
@@ -70,10 +70,10 @@ public class ChEmedEprDocumentPadv extends ChEmedEprDocument {
      * @return the composition entry.
      */
     public BundleEntryComponent getCompositionEntry() {
-        var entry = this.getEntryByResourceType(ChEmedEprCompositionPadv.class);
+        var entry = this.getEntryComponentByResourceType(ChEmedEprCompositionPadv.class);
         if (entry == null) {
             entry = new BundleEntryComponent();
-            this.getEntry().add(0, entry); // The composition shall go first
+            this.getEntry().addFirst(entry); // The composition shall go first
         }
         return entry;
     }
@@ -87,7 +87,7 @@ public class ChEmedEprDocumentPadv extends ChEmedEprDocument {
     @ExpectsValidResource
     public ChEmedEprCompositionPadv resolveComposition() {
         final var entry = this.getEntryByResourceType(ChEmedEprCompositionPadv.class);
-        if (entry != null && entry.getResource() instanceof final ChEmedEprCompositionPadv composition) {
+        if (entry instanceof final ChEmedEprCompositionPadv composition) {
             return composition;
         }
         throw new InvalidEmedContentException(
