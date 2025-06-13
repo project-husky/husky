@@ -106,6 +106,7 @@ public class EMediplanMedicament implements EMediplanExtendable, EMediplanObject
         return extensions;
     }
 
+    @JsonProperty("isNotSub")
     public boolean isSubstitutionForbidden() {
         if (forbidSubstitution == null) return false;
         return forbidSubstitution;
