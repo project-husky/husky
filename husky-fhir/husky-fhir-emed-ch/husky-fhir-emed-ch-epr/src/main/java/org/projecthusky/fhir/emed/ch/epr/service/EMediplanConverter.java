@@ -83,7 +83,7 @@ public class EMediplanConverter {
                 medicament.setIdType(MedicamentIdType.NONE);
             }
 
-            medicament.setPosology(List.of(toPosology(statement.resolveBaseDosage(), statement.resolveAdditionalDosage())));
+            medicament.setPosology(List.of(toPosology(statement.resolveBaseDosage(), statement.resolveAdditionalDosage(), true)));
 
             medicament.setReason(statement.getTreatmentReason());
             medicament.setSelfMedication(medicalAuthor.getPatient() != null || medicalAuthor.getRelatedPerson() != null);
@@ -123,10 +123,14 @@ public class EMediplanConverter {
      *
      * @param baseDosage        The CH EMED EPR resource base dosage.
      * @param additionalDosages The CH EMED EPR list of additional dosages (if split dose). It can be empty.
+     * @param setUnitIfAbsent   The eMediplan posology object unit will be set to N/A if the CH EMED EPR object has no
+     *                          specified structured unit.
      * @return The equivalent eMediplan posology object.
      */
     protected static EMediplanPosology toPosology(final ChEmedEprDosage baseDosage,
-                                                  List<@NonNull ChEmedEprDosage> additionalDosages) {
+                                                  List<@NonNull ChEmedEprDosage> additionalDosages,
+                                                  boolean setUnitIfAbsent
+                                                  ) {
         boolean freeTextDosage = false;
         final var posology = new EMediplanPosology();
         if (baseDosage.hasBoundsPeriod()) {
@@ -212,7 +216,7 @@ public class EMediplanConverter {
                 posology.setUnit(CdTyp9.fromRegularUnitCodeAmbu(baseDose.quantity().unit()));
             else
                 posology.setUnit(CdTyp9.fromRegularUnitCodeAmbu(baseDose.low().unit()));
-        }
+        } else if (setUnitIfAbsent) posology.setUnit(CdTyp9.UNKNOWN);
 
         // The tricky part of adding patient instructions is whether to know if they were already added as part of
         // free dosage text, or if they should be added as patient instructions.
