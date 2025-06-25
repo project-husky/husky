@@ -12,6 +12,7 @@ import org.projecthusky.fhir.emed.ch.epr.model.common.Dose;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.*;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.*;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.EMediplanPosology;
+import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.CyclicDosage;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.DailyDosage;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.FreeTextDosage;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.posology.detail.SingleDosage;
@@ -179,9 +180,9 @@ public class EMediplanConverter {
             }
         } else {
             // No when or no dose/rate, hence there cannot be split dosage, we only care about base dosage
-            // if we miss when, can we assume it is a single dosage with a dose only dosage?
             if (baseDosage.hasDoseAndRate()) {
-                posology.setDetail(new SingleDosage(new DoseOnlyDosage(getEMediplanDoseFromChEmedEpr(baseDose))));
+                // if we miss when, but there is doseAndRate, the CH EMED EPR convention is that it is a daily dosage.
+                posology.setDetail(new CyclicDosage(TimeUnit.DAY, 1, new DoseOnlyDosage(getEMediplanDoseFromChEmedEpr(baseDose))));
             } else {
                 // if we miss dose/rate, we cannot add anything structured to emediplan, use free text
                 // if when is present, in this case, we should try to use text, since we cannot translate the when part
