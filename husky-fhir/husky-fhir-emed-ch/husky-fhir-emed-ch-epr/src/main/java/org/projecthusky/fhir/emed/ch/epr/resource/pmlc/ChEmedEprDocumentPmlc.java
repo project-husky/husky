@@ -13,7 +13,7 @@ package org.projecthusky.fhir.emed.ch.epr.resource.pmlc;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Resource;
-import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
@@ -71,10 +71,10 @@ public class ChEmedEprDocumentPmlc extends ChEmedEprDocument {
      * @return the composition entry.
      */
     public BundleEntryComponent getCompositionEntry() {
-        var entry = this.getEntryByResourceType(ChEmedEprCompositionPmlc.class);
+        var entry = this.getEntryComponentByResourceType(ChEmedEprCompositionPmlc.class);
         if (entry == null) {
             entry = new BundleEntryComponent();
-            this.getEntry().add(0, entry); // The composition shall go first
+            this.getEntry().addFirst(entry); // The composition shall go first
         }
         return entry;
     }
@@ -88,7 +88,7 @@ public class ChEmedEprDocumentPmlc extends ChEmedEprDocument {
     @ExpectsValidResource
     public ChEmedEprCompositionPmlc resolveComposition() {
         final var entry = this.getEntryByResourceType(ChEmedEprCompositionPmlc.class);
-        if (entry != null && entry.getResource() instanceof final ChEmedEprCompositionPmlc composition) {
+        if (entry instanceof final ChEmedEprCompositionPmlc composition) {
             return composition;
         }
         throw new InvalidEmedContentException(

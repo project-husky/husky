@@ -4,22 +4,19 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.DocumentReference;
 import org.hl7.fhir.r4.model.Enumerations.DocumentReferenceStatus;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.openehealth.ipf.commons.ihe.xds.core.XdsJaxbDataBinding;
 import org.openehealth.ipf.commons.ihe.xds.core.ebxml.ebxml30.ProvideAndRegisterDocumentSetRequestType;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
 import org.openehealth.ipf.platform.camel.ihe.xds.core.converters.EbXML30Converters;
+import org.projecthusky.common.utils.datatypes.Oids;
 import org.projecthusky.common.utils.time.Hl7Dtm;
-import org.projecthusky.common.utils.xml.XmlFactories;
 import org.projecthusky.communication.ch.enums.stable.OriginalProviderRole;
 import org.projecthusky.communication.xdsmhdconversion.converters.ChEprFhirDocumentEntryConverter;
 import org.projecthusky.communication.xdsmhdconversion.converters.DocumentEntryConverter;
 
 import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.JAXBException;
-import jakarta.xml.bind.JAXBIntrospector;
-import jakarta.xml.bind.Unmarshaller;
 import java.io.InputStream;
 import java.time.Instant;
 import java.util.Date;
@@ -31,20 +28,11 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Ronaldo Loureiro
  */
 class DocumentEntryConverterTest {
-
-    private final Class<?> UNMARSHALLED_CLASS = ProvideAndRegisterDocumentSetRequestType.class;
-    private final Unmarshaller UNMARSHALLER;
-
-    public DocumentEntryConverterTest() throws JAXBException {
-        final var context = JAXBContext.newInstance(UNMARSHALLED_CLASS);
-        UNMARSHALLER = context.createUnmarshaller();
-    }
-
     @Test
     void testConvertDocumentReference1() throws Exception {
         final var provideAndRegisterDocumentSet = this.unmarshall("/ProvideAndRegisterDocumentSetRequest/PARDSR_02.xml");
 
-        final var documentEntry = provideAndRegisterDocumentSet.getDocuments().get(0).getDocumentEntry();
+        final var documentEntry = provideAndRegisterDocumentSet.getDocuments().getFirst().getDocumentEntry();
         final var documentReference = new DocumentEntryConverter().convertDocumentEntry(documentEntry);
 
         testDocumentReference(documentReference,
@@ -59,7 +47,7 @@ class DocumentEntryConverterTest {
                 "17621005",
                 "text/xml",
                 "en-US",
-                "2.999.756.42.1",
+                "urn:oid:2.999.756.42.1",
                 4850,
                 20,
                 "Pharmaceutical Advice",
@@ -76,7 +64,7 @@ class DocumentEntryConverterTest {
     void testConvertDocumentReference2() throws Exception {
         final var provideAndRegisterDocumentSet = this.unmarshall("/ProvideAndRegisterDocumentSetRequest/PARDSR_02.xml");
 
-        final var documentEntry = provideAndRegisterDocumentSet.getDocuments().get(0).getDocumentEntry();
+        final var documentEntry = provideAndRegisterDocumentSet.getDocuments().getFirst().getDocumentEntry();
         final var documentReference = new DocumentEntryConverter().convertDocumentEntry(documentEntry);
 
         testDocumentReference(documentReference,
@@ -91,7 +79,7 @@ class DocumentEntryConverterTest {
                 "17621005",
                 "text/xml",
                 "en-US",
-                "2.999.756.42.1",
+                "urn:oid:2.999.756.42.1",
                 4850,
                 20,
                 "Pharmaceutical Advice",
@@ -107,12 +95,12 @@ class DocumentEntryConverterTest {
         testDocumentEntry(documentEntry, documentEntry2);
     }
 
-    @Disabled
     @Test
     void testConvertChEprFhirDocumentReference2() throws Exception {
         final var provideAndRegisterDocumentSet = this.unmarshall("/ProvideAndRegisterDocumentSetRequest/PARDSR_02.xml");
+        //final var provideAndRegisterDocumentSet = this.unmarshall("/ProvideAndRegisterDocumentSetRequest/ProvideAndRegisterDocumentSetRequestPMP.xml");
 
-        final var documentEntry = provideAndRegisterDocumentSet.getDocuments().get(0).getDocumentEntry();
+        final var documentEntry = provideAndRegisterDocumentSet.getDocuments().getFirst().getDocumentEntry();
         final var documentReference = new ChEprFhirDocumentEntryConverter().convertDocumentEntry(documentEntry);
 
         testDocumentReference(documentReference,
@@ -127,7 +115,7 @@ class DocumentEntryConverterTest {
                 "17621005",
                 "text/xml",
                 "en-US",
-                "2.999.756.42.1",
+                "urn:oid:2.999.756.42.1",
                 4850,
                 20,
                 "Pharmaceutical Advice",
@@ -139,9 +127,11 @@ class DocumentEntryConverterTest {
                 "394802001",
                 null);
 
-        assertEquals(
-                documentReference.getExtensionByUrl(ChEprFhirDocumentEntryConverter.ORIGINAL_PROVIDER_ROLE_EXTENSION_URL).getValue(),
-                new Coding(OriginalProviderRole.CODE_SYSTEM_ID, OriginalProviderRole.HEALTHCARE_PROFESSIONAL_CODE, OriginalProviderRole.HEALTHCARE_PROFESSIONAL.getDisplayName())
+        assertTrue(
+                documentReference.getExtensionByUrl(ChEprFhirDocumentEntryConverter.ORIGINAL_PROVIDER_ROLE_EXTENSION_URL).getValue()
+                        .equalsDeep(
+                new Coding(Oids.PREFIX_OID + OriginalProviderRole.CODE_SYSTEM_ID, OriginalProviderRole.HEALTHCARE_PROFESSIONAL_CODE, OriginalProviderRole.HEALTHCARE_PROFESSIONAL.getDisplayName())
+                        )
         );
 
         final var documentEntry2 = new DocumentEntryConverter().convertDocumentReference(documentReference);
@@ -263,10 +253,10 @@ class DocumentEntryConverterTest {
 
     private ProvideAndRegisterDocumentSet unmarshall(final String filename) throws Exception {
         final InputStream xmlStream = SubmissionSetConverterTest.class.getResourceAsStream(filename);
-
-        final var document = XmlFactories.newSafeDocumentBuilder().parse(xmlStream);
-        final Object root = UNMARSHALLER.unmarshal(document, UNMARSHALLED_CLASS);
-        final var provideAndRegisterDocumentSetRequestType = (ProvideAndRegisterDocumentSetRequestType) JAXBIntrospector.getValue(root);
-        return EbXML30Converters.convert(provideAndRegisterDocumentSetRequestType);
+        final var jaxbContext = JAXBContext.newInstance(ProvideAndRegisterDocumentSetRequestType.class);
+        final var unmarshaller = jaxbContext.createUnmarshaller();
+        unmarshaller.setListener(new XdsJaxbDataBinding.UnmarshallerListener());
+        final var unmarshalledContent = (ProvideAndRegisterDocumentSetRequestType) unmarshaller.unmarshal(xmlStream);
+        return EbXML30Converters.convert(unmarshalledContent);
     }
 }

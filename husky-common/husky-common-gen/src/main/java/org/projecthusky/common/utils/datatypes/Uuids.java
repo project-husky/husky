@@ -64,4 +64,12 @@ public class Uuids {
     public static UUID parseUrnEncoded(final String urn) {
         return UUID.fromString(normalize(urn));
     }
+
+    /**
+     * Checks if a string matches the UUID format (with or without URN encoding).
+     */
+    public static boolean match(final String string) {
+        Objects.requireNonNull(string);
+        return PATTERN.matcher(string).matches() || PATTERN_WITH_URN.matcher(string).matches();
+    }
 }

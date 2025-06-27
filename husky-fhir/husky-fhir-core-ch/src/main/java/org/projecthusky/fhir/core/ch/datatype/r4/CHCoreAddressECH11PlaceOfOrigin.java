@@ -19,5 +19,10 @@ import ca.uhn.fhir.model.api.annotation.DatatypeDef;
  */
 @DatatypeDef(name = "CHCoreAddressECH11PlaceOfOrigin", isSpecialization = true, profileOf = Address.class)
 public class CHCoreAddressECH11PlaceOfOrigin extends ChCoreAddress {
-
+    @Override
+    public CHCoreAddressECH11PlaceOfOrigin copy() {
+        final var copy = new CHCoreAddressECH11PlaceOfOrigin();
+        copyValues(copy);
+        return copy;
+    }
 }

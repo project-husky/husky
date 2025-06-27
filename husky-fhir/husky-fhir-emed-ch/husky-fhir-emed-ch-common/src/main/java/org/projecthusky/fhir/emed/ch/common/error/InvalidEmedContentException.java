@@ -10,14 +10,19 @@
  */
 package org.projecthusky.fhir.emed.ch.common.error;
 
+import org.projecthusky.fhir.core.ch.exceptions.InvalidContentException;
+
+import java.io.Serial;
+
 /**
  * An exception thrown when trying to read, parse or validate an Emed content (e.g. a document) that is invalid
  * regarding its specification.
  *
  * @author Quentin Ligier
  */
-public class InvalidEmedContentException extends RuntimeException {
-    static final long serialVersionUID = -5742843912864698384L;
+public class InvalidEmedContentException extends InvalidContentException {
+    @Serial
+    private static final long serialVersionUID = -5742843912864698384L;
 
     public InvalidEmedContentException() {
     }

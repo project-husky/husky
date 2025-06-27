@@ -12,7 +12,7 @@ package org.projecthusky.fhir.emed.ch.epr.datatypes;
 
 import ca.uhn.fhir.model.api.annotation.DatatypeDef;
 import org.hl7.fhir.r4.model.Range;
-import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 
 /**

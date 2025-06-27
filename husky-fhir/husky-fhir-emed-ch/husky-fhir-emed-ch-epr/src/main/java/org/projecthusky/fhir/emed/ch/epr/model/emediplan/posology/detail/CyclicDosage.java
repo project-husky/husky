@@ -53,6 +53,15 @@ public class CyclicDosage extends PosologyDetail {
         super(PosologyType.CYCLIC);
     }
 
+    public CyclicDosage(final TimeUnit cycleDurationUnit,
+                        final int cycleDuration,
+                        final TimedDosage timedDosage) {
+        this();
+        this.cycleDurationUnit = cycleDurationUnit;
+        this.cycleDuration = cycleDuration;
+        this.timedDosage = timedDosage;
+    }
+
     public int getNumberOfDosesPerCycle() {
         if (numberOfDosesPerCycle == null) return DEFAULT_NUMBER_OF_DOSES_PER_CYCLE;
         else return numberOfDosesPerCycle;

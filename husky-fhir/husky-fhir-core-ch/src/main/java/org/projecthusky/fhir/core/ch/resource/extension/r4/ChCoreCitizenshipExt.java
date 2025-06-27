@@ -13,8 +13,6 @@ package org.projecthusky.fhir.core.ch.resource.extension.r4;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.BackboneElement;
 import org.hl7.fhir.r4.model.CodeableConcept;
-import org.hl7.fhir.r4.model.Element;
-import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.Period;
 
 import ca.uhn.fhir.model.api.annotation.Block;
@@ -41,7 +39,7 @@ public class ChCoreCitizenshipExt extends BackboneElement {
 	@ca.uhn.fhir.model.api.annotation.Extension(url = "period", definedLocally = false)
 	protected Period period;
 
-	public CodeableConcept getCode() {
+	public @Nullable CodeableConcept getCode() {
 		return code;
 	}
 
@@ -49,7 +47,11 @@ public class ChCoreCitizenshipExt extends BackboneElement {
 		this.code = code;
 	}
 
-	public Period getPeriod() {
+	public boolean hasCode() {
+		return this.code != null && !this.code.isEmpty();
+	}
+
+	public @Nullable Period getPeriod() {
 		return period;
 	}
 
@@ -58,7 +60,7 @@ public class ChCoreCitizenshipExt extends BackboneElement {
 	}
 
 	@Override
-	public BackboneElement copy() {
+	public ChCoreCitizenshipExt copy() {
 		final var copy = new ChCoreCitizenshipExt();
 		this.copyValues(copy);
 		return copy;

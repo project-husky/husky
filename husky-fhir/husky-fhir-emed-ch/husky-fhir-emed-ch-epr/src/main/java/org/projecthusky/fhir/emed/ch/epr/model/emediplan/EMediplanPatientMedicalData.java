@@ -6,7 +6,7 @@ import lombok.Data;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.OperationOutcome;
-import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.enums.RiskCategory;
 import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
