@@ -76,7 +76,7 @@ public class ChEmedEprMatchboxValidator implements ChEmedEprValidator {
         final OperationOutcome outcome = this.matchboxEngine.validate(
                 documentStream,
                 streamFormat,
-                document.getEmedType().getProfile()
+                ChEmedEprValidator.getProfileUrl(document.getEmedType())
         );
         final var result = ChEmedEprValidator.toHuskyValidationResult(outcome);
         if (!result.isSuccessful()) {
