@@ -13,6 +13,7 @@ package org.projecthusky.communication.atna;
 import org.openehealth.ipf.commons.audit.AuditContext;
 import org.openehealth.ipf.commons.audit.AuditException;
 import org.openehealth.ipf.commons.audit.AuditMetadataProvider;
+import org.openehealth.ipf.commons.audit.TlsParameters;
 import org.openehealth.ipf.commons.audit.protocol.AuditTransmissionProtocol;
 import org.openehealth.ipf.commons.audit.protocol.RFC5425Protocol;
 import org.openehealth.ipf.commons.audit.protocol.TLSSyslogSenderImpl;
@@ -74,6 +75,13 @@ public class TcpSyslogSender extends RFC5425Protocol implements AuditTransmissio
      */
     public TcpSyslogSender(final SocketFactory socketFactory) {
         this(socketFactory, TLSSyslogSenderImpl.SocketTestPolicy.TEST_BEFORE_WRITE);
+    }
+
+    /**
+     * Constructor for IPF's ATNA autoconfiguration feature.
+     */
+    public TcpSyslogSender(final TlsParameters ignored) {
+        this();
     }
 
     /**
