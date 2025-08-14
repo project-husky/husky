@@ -5,6 +5,7 @@ import org.hl7.fhir.r4.model.Extension;
 import org.hl7.fhir.r4.model.OperationOutcome;
 import org.hl7.fhir.r5.elementmodel.Manager;
 import org.hl7.fhir.r5.utils.EOperationOutcome;
+import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.epr.resource.ChEmedEprDocument;
 
 import java.io.IOException;
@@ -96,5 +97,22 @@ public interface ChEmedEprValidator {
      */
     static ValidationResult toHuskyValidationResult(final OperationOutcome operationOutcome) {
         return new ValidationResult(operationOutcome.getIssue().stream().map(ChEmedEprValidator::mapIssue).collect(Collectors.toList()));
+    }
+
+    /**
+     * Returns the profile URL from the eMed type.
+     *
+     * @param type The eMed type.
+     * @return the profile URL.
+     */
+    static String getProfileUrl(final EmedDocumentType type) {
+        return switch (type) {
+            case MTP -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationtreatmentplan";
+            case PRE -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationprescription";
+            case DIS -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationdispense";
+            case PADV -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-pharmaceuticaladvice";
+            case PML -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationlist";
+            case PMLC -> "http://fhir.ch/ig/ch-emed-epr/StructureDefinition/ch-emed-epr-document-medicationcard";
+        };
     }
 }
