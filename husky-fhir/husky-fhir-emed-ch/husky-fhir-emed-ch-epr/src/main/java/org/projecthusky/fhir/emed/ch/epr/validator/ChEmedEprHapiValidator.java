@@ -66,7 +66,7 @@ public class ChEmedEprHapiValidator implements ChEmedEprValidator{
                                                    final Manager.FhirFormat streamFormat)
             throws IOException {
         final var validationOptions = new ValidationOptions();
-        validationOptions.addProfile(document.getEmedType().getProfile());
+        validationOptions.addProfile(ChEmedEprValidator.getProfileUrl(document.getEmedType()));
         final var result =
                 validator.validateWithResult(new String(documentStream.readAllBytes(), StandardCharsets.UTF_8), validationOptions);
         final var huskyResult = ChEmedEprValidator.toHuskyValidationResult((OperationOutcome) result.toOperationOutcome());
