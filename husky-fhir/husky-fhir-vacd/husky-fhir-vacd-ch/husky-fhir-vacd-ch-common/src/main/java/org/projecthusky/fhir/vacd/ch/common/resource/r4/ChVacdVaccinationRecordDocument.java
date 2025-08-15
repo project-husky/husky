@@ -30,11 +30,7 @@ public class ChVacdVaccinationRecordDocument extends ChVacdAbstractDocument {
 
 	public ChVacdVaccinationRecordDocument() {
 		super();
-		ChVacdVaccinationRecordComposition composition = new ChVacdVaccinationRecordComposition();
-		composition.setId(UUID.randomUUID().toString());
 
-		this.getEntry().add(new BundleEntryComponent().setResource(composition)
-				.setFullUrl("urn:uuid:" + composition.getId()));
 	}
 
 	/**
@@ -49,9 +45,16 @@ public class ChVacdVaccinationRecordDocument extends ChVacdAbstractDocument {
 		final var entry = this.getEntryByResourceType(ChVacdVaccinationRecordComposition.class);
 		if (entry != null) {
 			return entry;
+		} else {
+			ChVacdVaccinationRecordComposition composition = new ChVacdVaccinationRecordComposition();
+			composition.setId(UUID.randomUUID().toString());
+
+			this.getEntry().add(new BundleEntryComponent().setResource(composition)
+					.setFullUrl("urn:uuid:" + composition.getId()));
+			return composition;
 		}
-		throw new InvalidContentException(
-				"The ChVacdVaccinationRecordComposition is missing in the document Bundle");
+//		throw new InvalidContentException(
+//				"The ChVacdVaccinationRecordComposition is missing in the document Bundle");
 	}
 
 }

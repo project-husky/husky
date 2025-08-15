@@ -124,6 +124,23 @@
 				<groupId>org.openehealth.ipf.commons</groupId>
 				<artifactId>ipf-commons-ihe-fhir-core</artifactId>
 				<version>${ipf.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>xpp3</groupId>
+						<artifactId>xpp3</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.ogce</groupId>
+						<artifactId>xpp3</artifactId>
+					</exclusion>
+					<!-- Excluded because a newer version of the library e.g
+					6.3.23
+				already exists -->
+					<exclusion>
+						<groupId>ca.uhn.hapi.fhir</groupId>
+						<artifactId>org.hl7.fhir.utilities</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.openehealth.ipf.platform-camel</groupId>
@@ -172,6 +189,14 @@
 						<groupId>ca.uhn.hapi.fhir</groupId>
 						<artifactId>org.hl7.fhir.dstu2016may</artifactId>
 					</exclusion>
+					<exclusion>
+						<groupId>org.apache.cxf</groupId>
+						<artifactId>cxf-spring-boot-starter-jaxws</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.ogce</groupId>
+						<artifactId>xpp3</artifactId>
+					</exclusion>
 				</exclusions>
 			</dependency>
 
@@ -206,38 +231,7 @@
     			<artifactId>spring-boot-starter-web</artifactId>
     			<version>${spring.boot.version}</version>
 			</dependency>
-			<!-- hapi fhir -->
-			<dependency>
-				<groupId>ca.uhn.hapi</groupId> <!-- HAPI Java HL7 API Base
-				Module, (GPL + MPL 1.1) -->
-				<artifactId>hapi-base</artifactId>
-			</dependency>
-			<dependency>
-				<groupId>ca.uhn.hapi.fhir</groupId>
-				<artifactId>hapi-fhir-structures-r4</artifactId>
-				<version>${hapi.fhir.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>commons-httpclient</groupId>
-						<artifactId>commons-httpclient</artifactId>
-					</exclusion>
-					<exclusion>
-						<!-- Newer version already imported -->
-						<groupId>org.slf4j</groupId>
-						<artifactId>jcl-over-slf4j</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-			<dependency>
-				<groupId>ca.uhn.hapi.fhir</groupId>
-				<artifactId>hapi-fhir-validation-resources-r4</artifactId>
-				<version>${hapi.fhir.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>ca.uhn.hapi.fhir</groupId>
-				<artifactId>hapi-fhir-validation</artifactId>
-				<version>${hapi.fhir.version}</version>
-			</dependency>
+			
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpmime</artifactId>
@@ -575,6 +569,43 @@
 			</dependency>
 
 			<!-- Hapi Hl7 Fhir section-->
+			<!-- hapi fhir -->
+			<dependency>
+				<groupId>ca.uhn.hapi</groupId> <!-- HAPI Java HL7 API Base
+				Module, (GPL + MPL 1.1) -->
+				<artifactId>hapi-base</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>ca.uhn.hapi.fhir</groupId>
+				<artifactId>hapi-fhir-structures-r4</artifactId>
+				<version>${hapi.fhir.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-httpclient</groupId>
+						<artifactId>commons-httpclient</artifactId>
+					</exclusion>
+					<exclusion>
+						<!-- Newer version already imported -->
+						<groupId>org.slf4j</groupId>
+						<artifactId>jcl-over-slf4j</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>ca.uhn.hapi.fhir</groupId>
+				<artifactId>hapi-fhir-validation-resources-r4</artifactId>
+				<version>${hapi.fhir.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ca.uhn.hapi.fhir</groupId>
+				<artifactId>hapi-fhir-validation</artifactId>
+				<version>${hapi.fhir.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ca.uhn.hapi.fhir</groupId>
+				<artifactId>hapi-fhir-base</artifactId>
+				<version>${hapi.fhir.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>ca.uhn.hapi.fhir</groupId>
 				<artifactId>org.hl7.fhir.utilities</artifactId>
@@ -584,6 +615,16 @@
 				<groupId>ca.uhn.hapi.fhir</groupId>
 				<artifactId>org.hl7.fhir.validation</artifactId>
 				<version>${org.hl7.fhir.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>junit</groupId>
+						<artifactId>junit</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.ogce</groupId>
+						<artifactId>xpp3</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>ca.uhn.hapi.fhir</groupId>
@@ -792,6 +833,18 @@
 				<version>1.15.4</version>
 			</dependency>
 
+
+			<dependency>
+				<groupId>org.fhir</groupId>
+				<artifactId>ucum</artifactId>
+				<version>1.0.9</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
@@ -800,152 +853,9 @@
 		<!-- !!!!  NEVER ADD DEPENDENCIES HERE IN THE MAIN POM  !!! -->
 		<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 		<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-		<dependency>
-			<groupId>org.openehealth.ipf.boot</groupId>
-			<artifactId>ipf-hl7v3-spring-boot-starter</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.apache.cxf</groupId>
-					<artifactId>cxf-spring-boot-starter-jaxws</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.tomcat.embed</groupId>
-					<artifactId>tomcat-embed-websocket</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-logging</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.ogce</groupId>
-					<artifactId>xpp3</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.openehealth.ipf.commons</groupId>
-			<artifactId>ipf-commons-ihe-fhir-core</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>xpp3</groupId>
-					<artifactId>xpp3</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.ogce</groupId>
-					<artifactId>xpp3</artifactId>
-				</exclusion>
-				<!-- Excluded because a newer version of the library e.g 6.3.23
-				already exists -->
-				<exclusion>
-					<groupId>ca.uhn.hapi.fhir</groupId>
-					<artifactId>org.hl7.fhir.utilities</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+		<!--
 
-		<!-- upgrade version dependencies due to vulnerability issues -->
-		<!-- bouncycastel -->
-		<dependency>
-			<groupId>org.bouncycastle</groupId>
-			<artifactId>bcprov-jdk18on</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.bouncycastle</groupId>
-			<artifactId>bcpkix-jdk18on</artifactId>
-		</dependency>
-
-		<!-- HL7 FHIR-->
-		
-		<dependency>
-			<groupId>ca.uhn.hapi.fhir</groupId>
-			<artifactId>hapi-fhir-base</artifactId>
-			<version>${hapi.fhir.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>ca.uhn.hapi.fhir</groupId>
-			<artifactId>org.hl7.fhir.utilities</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>ca.uhn.hapi.fhir</groupId>
-			<artifactId>org.hl7.fhir.validation</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>junit</groupId>
-					<artifactId>junit</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.ogce</groupId>
-					<artifactId>xpp3</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>ca.uhn.hapi.fhir</groupId>
-			<artifactId>org.hl7.fhir.r5</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>ca.uhn.hapi.fhir</groupId>
-			<artifactId>org.hl7.fhir.r4</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>ca.uhn.hapi.fhir</groupId>
-			<artifactId>org.hl7.fhir.r4b</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>ca.uhn.hapi.fhir</groupId>
-			<artifactId>org.hl7.fhir.convertors</artifactId>
-		</dependency>
-		<!-- spring -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-messaging</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity-engine-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.angus</groupId>
-			<artifactId>angus-mail</artifactId>
-		</dependency>
-		
-		<dependency>
-    		<groupId>org.fhir</groupId>
-    		<artifactId>ucum</artifactId>
-    		<version>1.0.9</version>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>${logback.version}</version>
-		</dependency>
-
+-->
 
 	</dependencies>
 	<repositories>
