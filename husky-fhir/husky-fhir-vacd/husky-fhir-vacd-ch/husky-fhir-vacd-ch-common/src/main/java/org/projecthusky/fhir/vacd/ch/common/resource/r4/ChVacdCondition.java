@@ -45,6 +45,10 @@ public class ChVacdCondition extends ChCoreCondition {
 	public ChVacdCondition() {
 		addIdentifier().setSystem("urn:ietf:rfc:3986")
 				.setValue("urn:uuid:" + UUID.randomUUID().toString());
+		setVerificationStatus(new org.hl7.fhir.r4.model.CodeableConcept()
+				.addCoding(new org.hl7.fhir.r4.model.Coding()
+						.setSystem("http://terminology.hl7.org/CodeSystem/condition-ver-status")
+						.setCode("confirmed").setDisplay("Confirmed")));
 	}
 
 	public ChCoreResourceCrossReferenceExt getRelatesTo() {
