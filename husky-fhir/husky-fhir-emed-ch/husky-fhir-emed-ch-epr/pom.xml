@@ -14,7 +14,6 @@
 	    	    <artifactId>husky-fhir-emed-ch-common</artifactId>
 	   		    <version>3.1.1-SNAPSHOT</version>
         </dependency>
-        
         <dependency>
             <!-- Used for FHIR resource validation -->
             <groupId>health.matchbox</groupId>

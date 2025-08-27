@@ -19,7 +19,6 @@ import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.core.ch.util.FhirSystem;
 
-
 import java.sql.Date;
 import java.time.Instant;
 import java.util.Objects;

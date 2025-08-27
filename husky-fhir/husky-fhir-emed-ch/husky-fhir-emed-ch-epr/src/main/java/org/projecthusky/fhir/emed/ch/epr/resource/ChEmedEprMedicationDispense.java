@@ -6,15 +6,11 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.*;
 import org.projecthusky.common.utils.datatypes.Uuids;
-
 import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
-
 import org.projecthusky.fhir.core.ch.resource.r4.ChCorePatientEpr;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
-
 import org.projecthusky.fhir.core.ch.util.FhirSystem;
-
 import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedEprDosage;
 import org.projecthusky.fhir.emed.ch.epr.datatypes.ChEmedQuantityWithEmedUnits;
 import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
