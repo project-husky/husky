@@ -10,19 +10,18 @@
  */
 package org.projecthusky.fhir.emed.ch.epr.resource;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
-import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Identifier;
 import org.projecthusky.common.utils.datatypes.Uuids;
-import org.projecthusky.fhir.core.ch.common.util.FhirSystem;
+import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.core.ch.resource.r4.ChCoreDocumentEpr;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCorePatientEpr;
-import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedDocumentType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.core.ch.util.FhirSystem;
+
 
 import java.sql.Date;
 import java.time.Instant;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -31,7 +30,7 @@ import java.util.UUID;
  *
  * @author Quentin Ligier
  **/
-public abstract class ChEmedEprDocument extends Bundle {
+public abstract class ChEmedEprDocument extends ChCoreDocumentEpr {
 
     /**
      * Empty constructor for the parser.
@@ -58,7 +57,10 @@ public abstract class ChEmedEprDocument extends Bundle {
         this.setTimestamp(Date.from(timestamp));
     }
 
-    public abstract ChEmedEprComposition resolveComposition();
+    @Override
+    public ChEmedEprComposition resolveComposition() {
+        throw new UnsupportedOperationException("Child ChEmedEprDocument objects must override resolveComposition()");
+    }
 
     public abstract EmedDocumentType getEmedType();
 
@@ -83,9 +85,9 @@ public abstract class ChEmedEprDocument extends Bundle {
      * @throws InvalidEmedContentException if the patient is missing.
      */
     @ExpectsValidResource
-    public ChCorePatientEpr resolvePatient() throws InvalidEmedContentException {
+    public ChEmedEprPatient resolvePatient() throws InvalidEmedContentException {
         final var entry = this.getEntryByResourceType(ChCorePatientEpr.class);
-        if (entry != null && entry.getResource() instanceof final ChCorePatientEpr patient) {
+        if (entry instanceof final ChEmedEprPatient patient) {
             return patient;
         }
         throw new InvalidEmedContentException("The ChCorePatientEpr is missing in the document Bundle");
@@ -132,49 +134,5 @@ public abstract class ChEmedEprDocument extends Bundle {
         identifier.setValue(Uuids.URN_PREFIX + documentUUID);
 
         return this;
-    }
-
-    /**
-     * Sets the patient targeted by this document.
-     *
-     * @param patient the patient targeted by this document.
-     * @return the bundle entry.
-     */
-    public BundleEntryComponent setPatient(final ChCorePatientEpr patient) {
-        var entry = this.getEntryByResourceType(ChCorePatientEpr.class);
-        if (entry == null) {
-            entry = this.addEntry();
-        }
-        entry.setResource(patient);
-
-        return entry;
-    }
-
-    /**
-     * Finds a bundle entry by the type of its resource or {@code null}, without creating it.
-     *
-     * @param resourceType The type of the resource.
-     * @return the bundle entry or {@code null}.
-     */
-    @Nullable
-    public BundleEntryComponent getEntryByResourceType(final Class<?> resourceType) {
-        return this.getEntry().stream()
-                .filter(entry -> resourceType.isInstance(entry.getResource()))
-                .findAny()
-                .orElse(null);
-    }
-
-    /**
-     * Gets the resources in the package entries by the specified resource type.
-     *
-     * @param resourceType The type of the resource.
-     * @return the list with the resource.
-     */
-    protected <T> List<T> getEntryResourceByResourceType(final Class<T> resourceType) {
-        return this.getEntry().stream()
-                .map(BundleEntryComponent::getResource)
-                .filter(resourceType::isInstance)
-                .map(resourceType::cast)
-                .toList();
     }
 }

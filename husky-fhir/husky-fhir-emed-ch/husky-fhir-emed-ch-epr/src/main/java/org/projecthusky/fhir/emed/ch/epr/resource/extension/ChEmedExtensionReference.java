@@ -8,10 +8,12 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.BackboneElement;
 import org.hl7.fhir.r4.model.Identifier;
 import org.projecthusky.common.utils.datatypes.Uuids;
-import org.projecthusky.fhir.core.ch.common.util.FhirSystem;
-import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+
+import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.core.ch.util.FhirSystem;
+
 import org.projecthusky.fhir.emed.ch.epr.model.common.EmedReference;
 
 import java.util.UUID;

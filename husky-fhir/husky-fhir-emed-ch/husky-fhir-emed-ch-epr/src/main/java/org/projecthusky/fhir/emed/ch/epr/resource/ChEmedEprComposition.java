@@ -13,18 +13,20 @@ package org.projecthusky.fhir.emed.ch.epr.resource;
 import ca.uhn.fhir.model.api.annotation.Block;
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
+
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.r4.model.*;
 import org.projecthusky.common.enums.EnumConstants;
 import org.projecthusky.common.enums.LanguageCode;
 import org.projecthusky.common.utils.datatypes.Uuids;
-import org.projecthusky.fhir.core.ch.common.util.FhirSystem;
+import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.core.ch.resource.r4.ChCoreCompositionEpr;
 import org.projecthusky.fhir.core.ch.resource.r4.ChCorePatientEpr;
-import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.CommonLanguages;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
 import org.projecthusky.fhir.emed.ch.common.resource.ChEmedOrganization;
+import org.projecthusky.fhir.core.ch.util.FhirSystem;
 import org.projecthusky.fhir.emed.ch.epr.resource.extension.ChExtEprDataEnterer;
 
 import java.time.Instant;
@@ -35,7 +37,7 @@ import java.util.*;
  *
  * @author Quentin Ligier
  **/
-public abstract class ChEmedEprComposition extends Composition {
+public abstract class ChEmedEprComposition extends ChCoreCompositionEpr {
 
     public static final String ORIGINAL_REPR_SECTION_CODE_VALUE = "55108-5";
     public static final String TREATMENT_PLAN_SECTION_CODE_VALUE = "77604-7";
@@ -77,6 +79,7 @@ public abstract class ChEmedEprComposition extends Composition {
      */
     public ChEmedEprComposition() {
         super();
+        setLanguage("en-US");
     }
 
     /**
@@ -501,7 +504,7 @@ public abstract class ChEmedEprComposition extends Composition {
     public Observation resolvePatientWeightObservation() throws InvalidEmedContentException {
         return Optional.ofNullable(getSectionByLoincCode(VITAL_SIGNS_SECTION_CODE_VALUE))
                 .map(SectionComponent::getEntry)
-                .map(entries -> !entries.isEmpty() ? entries.get(0) : null)
+                .map(entries -> !entries.isEmpty() ? entries.getFirst() : null)
                 .map(BaseReference::getResource)
                 .map(Observation.class::cast)
                 .orElse(null);

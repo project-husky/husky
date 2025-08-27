@@ -15,10 +15,12 @@ import org.hl7.fhir.r4.model.Address;
 import org.hl7.fhir.r4.model.HumanName;
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Practitioner;
-import org.projecthusky.fhir.core.ch.common.util.FhirSystem;
-import org.projecthusky.fhir.core.ch.common.util.Identifiers;
-import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+
+import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
+import org.projecthusky.fhir.core.ch.util.FhirSystem;
+import org.projecthusky.fhir.core.ch.util.Identifiers;
+
 
 import java.util.List;
 
@@ -102,7 +104,7 @@ public class ChEmedEprPractitioner extends Practitioner {
     @ExpectsValidResource
     public HumanName resolveName() {
         if (!this.name.isEmpty()) {
-            return this.name.get(0);
+            return this.name.getFirst();
         }
         throw new InvalidEmedContentException("The human name is missing");
     }
@@ -116,7 +118,7 @@ public class ChEmedEprPractitioner extends Practitioner {
     @ExpectsValidResource
     public Address resolveAddress() {
         if (!this.address.isEmpty()) {
-            return this.address.get(0);
+            return this.address.getFirst();
         }
         throw new InvalidEmedContentException("The address is missing");
     }

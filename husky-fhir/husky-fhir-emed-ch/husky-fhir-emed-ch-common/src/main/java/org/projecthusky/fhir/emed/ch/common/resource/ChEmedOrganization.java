@@ -14,11 +14,11 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Address;
 import org.hl7.fhir.r4.model.Identifier;
-import org.hl7.fhir.r4.model.Organization;
-import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.core.ch.resource.r4.ChCoreOrganizationEpr;
 import org.projecthusky.fhir.emed.ch.common.error.InvalidEmedContentException;
-import org.projecthusky.fhir.core.ch.common.util.FhirSystem;
-import org.projecthusky.fhir.core.ch.common.util.Identifiers;
+import org.projecthusky.fhir.core.ch.util.FhirSystem;
+import org.projecthusky.fhir.core.ch.util.Identifiers;
 
 /**
  * The HAPI custom structure for CH-EMED Organization.
@@ -26,7 +26,7 @@ import org.projecthusky.fhir.core.ch.common.util.Identifiers;
  * @author Quentin Ligier
  **/
 @ResourceDef(profile = "http://fhir.ch/ig/ch-emed/StructureDefinition/ch-emed-organization")
-public class ChEmedOrganization extends Organization {
+public class ChEmedOrganization extends ChCoreOrganizationEpr {
 
     /**
      * Empty constructor for the parser.
@@ -86,7 +86,7 @@ public class ChEmedOrganization extends Organization {
         if (!this.hasAddress()) {
             throw new InvalidEmedContentException("The organization's address is missing.");
         }
-        return this.getAddress().get(0);
+        return this.getAddress().getFirst();
     }
 
     /**

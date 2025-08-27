@@ -10,8 +10,8 @@
  */
 
 /**
- * Java annotations.
+ * Some utilities.
  *
  * @author Quentin Ligier
  **/
-package org.projecthusky.fhir.emed.ch.common.annotation;
+package org.projecthusky.fhir.core.ch.util;

@@ -11,7 +11,7 @@
 package org.projecthusky.fhir.emed.ch.epr.resource;
 
 import org.hl7.fhir.instance.model.api.IBaseResource;
-import org.projecthusky.fhir.emed.ch.common.annotation.ExpectsValidResource;
+import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.common.enums.EmedEntryType;
 import org.projecthusky.fhir.emed.ch.epr.model.common.Author;
 

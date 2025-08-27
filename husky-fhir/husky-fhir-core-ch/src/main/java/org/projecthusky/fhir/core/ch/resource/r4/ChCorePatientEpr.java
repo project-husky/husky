@@ -36,7 +36,10 @@ import org.projecthusky.fhir.core.ch.exceptions.InvalidContentException;
 
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
+
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
+
+import java.io.Serial;
 
 /**
  * The HAPI custom structure for CH-Core patient EPR.
@@ -46,18 +49,8 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
 @ResourceDef(profile = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-patient-epr")
 public class ChCorePatientEpr extends ChCorePatient {
 
+	@Serial
 	private static final long serialVersionUID = -1433886416088854398L;
-
-	public static final String LOCAL_PID_TYPE_SYSTEM = "http://terminology.hl7.org/CodeSystem/v2-0203";
-	public static final String LOCAL_PID_TYPE_VALUE = "MR";
-
-	// TODO add support for extensions
-
-	// TODO placeOfBirth
-
-	// TODO placeOfOrigin
-
-	// TODO citizenship
 
 	/**
 	 * Empty constructor for the parser.
@@ -301,4 +294,5 @@ public class ChCorePatientEpr extends ChCorePatient {
     private List<@NonNull ContactPoint> resolveTelecom(final ContactPoint.ContactPointSystem system) {
         return getTelecom().stream().filter(telecom -> telecom.getSystem() == system).toList();
     }
+
 }
