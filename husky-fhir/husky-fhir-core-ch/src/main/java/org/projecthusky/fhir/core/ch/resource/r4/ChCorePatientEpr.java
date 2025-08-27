@@ -30,9 +30,9 @@ import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.UriType;
 import org.hl7.fhir.r4.model.Patient.PatientCommunicationComponent;
 import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
-import org.projecthusky.fhir.core.ch.common.util.FhirDateTimes;
 import org.projecthusky.fhir.core.ch.enums.ReligiousAffiliation;
 import org.projecthusky.fhir.core.ch.exceptions.InvalidContentException;
+import org.projecthusky.fhir.core.ch.util.FhirDateTimes;
 
 import ca.uhn.fhir.model.api.annotation.Child;
 import ca.uhn.fhir.model.api.annotation.Extension;
