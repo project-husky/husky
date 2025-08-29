@@ -24,11 +24,14 @@ import ca.uhn.fhir.model.api.annotation.ResourceDef;
 @ResourceDef(profile = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-allergyintolerances")
 public class ChVacdAllergyIntolerance extends ChCoreAllergyIntolerance {
 
-	
 	private static final long serialVersionUID = -2697939310227979001L;
 
 	public ChVacdAllergyIntolerance() {
 		addIdentifier().setSystem("urn:ietf:rfc:3986")
-		.setValue("urn:uuid:" + UUID.randomUUID().toString());
+				.setValue("urn:uuid:" + UUID.randomUUID().toString());
+		setVerificationStatus(new org.hl7.fhir.r4.model.CodeableConcept()
+				.addCoding(new org.hl7.fhir.r4.model.Coding().setSystem(
+						"http://terminology.hl7.org/CodeSystem/allergyintolerance-verification")
+						.setCode("confirmed").setDisplay("Confirmed")));
 	}
 }

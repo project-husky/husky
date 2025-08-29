@@ -12,8 +12,15 @@ package org.projecthusky.fhir.vacd.ch.common.resource.r4;
 
 import java.util.UUID;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.Reference;
+import org.projecthusky.fhir.core.ch.resource.extension.r4.ChCoreResourceCrossReferenceExt;
+import org.projecthusky.fhir.vacd.ch.common.resource.extension.r4.ChVacdExtensionVerificationStatusExt;
+import org.projecthusky.fhir.vacd.ch.common.resource.extension.r4.ChVacdMergingConflictExt;
 
+import ca.uhn.fhir.model.api.annotation.Child;
+import ca.uhn.fhir.model.api.annotation.Extension;
 import ca.uhn.fhir.model.api.annotation.ResourceDef;
 
 /**
@@ -26,8 +33,74 @@ public class ChVacdLaboratoryAndSerology extends Observation {
 
 	private static final long serialVersionUID = -5282679759940081789L;
 
+	@Nullable
+	@Child(name = "recorder", min = 0, max = 1)
+	@Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-ext-author", definedLocally = false)
+	protected Reference recorder;
+
+	@Nullable
+	@Child(name = "relatesTo", min = 0, max = 1)
+	@Extension(url = "http://fhir.ch/ig/ch-core/StructureDefinition/ch-core-ext-entry-resource-cross-references", definedLocally = false)
+	protected ChCoreResourceCrossReferenceExt relatesTo;
+
+	@Nullable
+	@Child(name = "conflict", min = 0, max = 1)
+	@Extension(url = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-ext-merging-conflict-entry-reference", definedLocally = false)
+	protected ChVacdMergingConflictExt conflict;
+
+	@Nullable
+	@Child(name = "verificationStatus", min = 0, max = 1)
+	@Extension(url = "http://fhir.ch/ig/ch-vacd/StructureDefinition/ch-vacd-ext-verification-status", definedLocally = false)
+	protected ChVacdExtensionVerificationStatusExt verificationStatus;
+
 	public ChVacdLaboratoryAndSerology() {
 		addIdentifier().setSystem("urn:ietf:rfc:3986")
 				.setValue("urn:uuid:" + UUID.randomUUID().toString());
+		setVerificationStatus(new ChVacdExtensionVerificationStatusExt());
+	}
+
+	public boolean hasRecorder() {
+		return recorder != null;
+	}
+
+	public Reference getRecorder() {
+		return recorder;
+	}
+
+	public void setRecorder(Reference recorder) {
+		this.recorder = recorder;
+	}
+
+	public ChCoreResourceCrossReferenceExt getRelatesTo() {
+		return relatesTo;
+	}
+
+	public void setRelatesTo(ChCoreResourceCrossReferenceExt relatesTo) {
+		this.relatesTo = relatesTo;
+	}
+
+	public ChVacdExtensionVerificationStatusExt getVerificationStatus() {
+		return verificationStatus;
+	}
+
+	public void setVerificationStatus(ChVacdExtensionVerificationStatusExt verificationStatus) {
+		this.verificationStatus = verificationStatus;
+	}
+
+	@Override
+	public ChVacdLaboratoryAndSerology copy() {
+		final var copy = new ChVacdLaboratoryAndSerology();
+		this.copyValues(copy);
+		return copy;
+	}
+
+	@Override
+	public void copyValues(final Observation dst) {
+		super.copyValues(dst);
+		if (dst instanceof final ChVacdLaboratoryAndSerology als) {
+			als.recorder = recorder == null ? null : recorder.copy();
+			als.relatesTo = relatesTo == null ? null : relatesTo.copy();
+			als.verificationStatus = verificationStatus == null ? null : verificationStatus.copy();
+		}
 	}
 }

@@ -297,9 +297,10 @@ public abstract class ChVacdAbstractDocument extends ChCoreDocumentEpr {
 		if (subject.getId() == null) {
 			subject.setId(UUID.randomUUID().toString());
 		}
+		this.resolveComposition().setSubject(new Reference("urn:uuid:" + subject.getId()));
 		this.getEntry().add(new BundleEntryComponent().setResource(subject)
 				.setFullUrl("urn:uuid:" + subject.getId()));
-		this.resolveComposition().setSubject(new Reference("urn:uuid:" + subject.getId()));
+//		this.resolveComposition().setSubject(new Reference("urn:uuid:" + subject.getId()));
 	}
 
 	public void addAuthor(DomainResource author, Date timeOfDataInput) {

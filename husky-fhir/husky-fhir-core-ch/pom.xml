@@ -18,6 +18,16 @@
 			<groupId>org.projecthusky.fhir.structures</groupId>
 			<artifactId>husky-fhir-structures-gen</artifactId>
 			<version>3.1.1-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-test</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.openehealth.ipf.platform-camel</groupId>
+					<artifactId>ipf-platform-camel-ihe-xds</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.checkerframework</groupId>
