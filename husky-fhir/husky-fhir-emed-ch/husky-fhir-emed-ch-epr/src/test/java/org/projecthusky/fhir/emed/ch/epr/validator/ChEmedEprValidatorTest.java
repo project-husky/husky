@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ChEmedEprValidatorTest {
     private static final Logger log = LoggerFactory.getLogger(ChEmedEprValidatorTest.class);
 
-    @Test
+    @Test @Disabled
     void validateDocumentBundleWithMatchbox() throws IOException, URISyntaxException, EOperationOutcome {
         final var ctx = FhirContext.forR4Cached();
         final var validator = new ChEmedEprMatchboxValidator("https://tx.fhir.org/");

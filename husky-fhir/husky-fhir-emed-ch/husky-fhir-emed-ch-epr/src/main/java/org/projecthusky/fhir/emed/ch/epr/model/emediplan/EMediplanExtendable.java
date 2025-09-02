@@ -1,41 +1,56 @@
 package org.projecthusky.fhir.emed.ch.epr.model.emediplan;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
 
 import java.util.List;
 import java.util.Objects;
 
 /**
- * Interface for objects that contain extensions. The extension property itself is to be defined by the implementing
- * object, so that the JSON field name can be customized in principle. This interface provides convenience methods for
- * extensions with a default implementation.
- * @see EMediplanExtension
+ * Base interface for an eMediplan object that is extendable, that is, that may contain a list of extensions.
+ * @param <E> The type of the extension object.
  */
-public interface EMediplanExtendable {
+public interface EMediplanExtendable<E extends EMediplanObject> extends EMediplanObject {
     /**
      * Gets the list of this object's extensions.
      * @return The list of extensions.
      */
-    List<@NonNull EMediplanExtension> getExtensions();
+    List<@NonNull E> getExtensions();
+
+    /**
+     *
+     * @return The field name of the extensions.
+     */
+    @JsonIgnore
+    String getExtensionsFieldName();
 
     /**
      * Adds an extension to the list of this object's extensions.
      * @param extension The extension to be added.
      */
-    default void addExtension(final @NonNull EMediplanExtension extension) {
+    default void addExtension(final @NonNull E extension) {
         getExtensions().add(Objects.requireNonNull(extension));
     }
 
+    @Override
+    default void trim() {
+        getExtensions().forEach(EMediplanObject::trim);
+    }
+
     /**
-     * Finds an extension within the embedded list of extensions whose schema and name match the provided ones. If the
-     * list of embedded extensions is null or empty, or if no match is found, {@code null} is returned.
-     *
-     * @param schema     The schema to be matched.
-     * @param name       The field name to be matched.
-     * @return The matching extension, if any, {@code null} otherwise.
+     * Validates the object extensions.
+     * @param basePath The base path of this object for the validation feedback.
+     * @return The validation result.
      */
-    default @Nullable EMediplanExtension findExtension(final String schema, final String name) {
-        return EMediplanExtension.findExtension(getExtensions(), schema, name);
+    default ValidationResult validateExtensions(final @Nullable String basePath) {
+        final ValidationResult result = new ValidationResult();
+        final var extensionsIterator = getExtensions().listIterator();
+        while (extensionsIterator.hasNext()) {
+            final var index = extensionsIterator.nextIndex();
+            result.add(extensionsIterator.next().validate(getFieldValidationPath(basePath, getExtensionsFieldName(), index)));
+        }
+        return result;
     }
 }

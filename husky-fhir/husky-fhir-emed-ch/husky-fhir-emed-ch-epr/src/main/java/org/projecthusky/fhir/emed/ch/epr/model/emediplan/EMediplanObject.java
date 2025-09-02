@@ -125,4 +125,12 @@ public interface EMediplanObject {
     default String getFieldValidationPath(final @Nullable String basePath, final String field, final int index) {
         return getFieldValidationPath(basePath, Objects.requireNonNull(field)) + "[" + index + "]";
     }
+
+    /**
+     * Whether the eMediplan object has any extension or not.
+     * @param inDepth If {@code true}, the called object, and all its children objects, are subject to the check. If
+     *                {@code false}, only the called object is checked for extensions.
+     * @return {@code true} if the object contains any extensions; {@code false} otherwise.
+     */
+    boolean hasExtensions(boolean inDepth);
 }
