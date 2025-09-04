@@ -308,7 +308,7 @@ class ChEmedEprParserTest {
         final var pml = (ChEmedEprDocumentPml) document;
         assertNotNull(pml.resolveComposition());
         assertInstanceOf(ChEmedEprCompositionPml.class, pml.resolveComposition());
-        assertNotNull(pml.findMtpEntryForObservation(pml.getEntryByResourceType(ChEmedEprObservationPml.class)));
+        assertNotNull(pml.findMtpEntryForObservation((ChEmedEprObservationPml) pml.getEntryByResourceType(ChEmedEprObservationPml.class).getResource()));
     }
 
     @Test
@@ -320,6 +320,6 @@ class ChEmedEprParserTest {
         final var pml = (ChEmedEprDocumentPml) document;
         assertNotNull(pml.resolveComposition());
         assertInstanceOf(ChEmedEprCompositionPml.class, pml.resolveComposition());
-        assertNotNull(pml.findMtpEntryForObservation(pml.getEntryByResourceType(ChEmedEprObservationPml.class)));
+        assertNotNull(pml.findMtpEntryForObservation((ChEmedEprObservationPml) pml.getEntryByResourceType(ChEmedEprObservationPml.class).getResource()));
     }
 }

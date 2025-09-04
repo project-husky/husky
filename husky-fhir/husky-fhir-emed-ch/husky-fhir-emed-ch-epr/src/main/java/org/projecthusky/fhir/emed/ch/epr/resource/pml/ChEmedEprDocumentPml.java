@@ -250,7 +250,7 @@ public class ChEmedEprDocumentPml extends ChEmedEprDocument {
                 .toList();
         if (statements.isEmpty()) throw new InvalidEmedContentException("No medication statements found for the given observation.");
         if (statements.size() > 1) throw new InvalidEmedContentException("Multiple original medication statements found for the given observation.");
-        return statements.getFirst();
+        return statements.get(0);
     }
 
     @Override
