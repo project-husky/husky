@@ -218,7 +218,7 @@ public class ChEmedEprParser {
                                         .filter(entry -> entry.getResource() == requestPml)
                                         .findAny().orElseThrow(InvalidEmedContentException::new)
                                         .setResource(changedRequestPml);
-                                observation.getMedicationStatementChangedReference().setResource(changedRequestPml);
+                                observation.getMedicationRequestChangedReference().setResource(changedRequestPml);
                             }
                         });
             }
