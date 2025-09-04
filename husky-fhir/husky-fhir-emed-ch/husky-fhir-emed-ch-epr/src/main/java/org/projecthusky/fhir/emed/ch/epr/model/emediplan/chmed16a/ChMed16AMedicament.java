@@ -1,5 +1,6 @@
 package org.projecthusky.fhir.emed.ch.epr.model.emediplan.chmed16a;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -138,6 +139,18 @@ public class ChMed16AMedicament extends EMediplanMedicament<ChMed16AExtension> i
     public boolean isSelfMedication() {
         if (selfMedication == null) return false;
         return selfMedication == 1;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isSubstitutionForbidden() {
+        return forbidSubstitution != null && forbidSubstitution == 1;
+    }
+
+    @Override
+    public void forbidSubstitution(final @Nullable Boolean substitutionForbidden) {
+        if (substitutionForbidden == null) forbidSubstitution = null;
+        else this.forbidSubstitution = substitutionForbidden ? 1 : 0;
     }
 
     @Override

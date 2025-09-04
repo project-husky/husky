@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.hl7.fhir.r4.model.OperationOutcome;
 import org.projecthusky.fhir.core.ch.annotation.ExpectsValidResource;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanMedicament;
 import org.projecthusky.fhir.emed.ch.epr.model.emediplan.EMediplanType;
@@ -112,6 +111,10 @@ public class ChMed23AMedicament extends EMediplanMedicament<ChMed23AExtension> i
     public boolean isSubstitutionForbidden() {
         if (forbidSubstitution == null) return false;
         return forbidSubstitution;
+    }
+
+    public void forbidSubstitution(final @Nullable Boolean selfMedication) {
+        setForbidSubstitution(selfMedication);
     }
 
     public boolean isSic() {

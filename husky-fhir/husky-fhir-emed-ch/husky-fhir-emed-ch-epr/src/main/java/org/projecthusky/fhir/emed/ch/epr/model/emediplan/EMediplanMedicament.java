@@ -12,7 +12,7 @@ import org.projecthusky.fhir.emed.ch.epr.validator.ValidationResult;
  * @param <E> The type of extension object.
  */
 public abstract class EMediplanMedicament<E extends EMediplanObject> implements EMediplanExtendable<E> {
-    protected final static Double DEFAULT_NUMBER_OF_PACKAGES = 1.0;
+    public final static Double DEFAULT_NUMBER_OF_PACKAGES = 1.0;
 
     public abstract String getId();
     public abstract MedicamentIdType getIdType();
@@ -31,6 +31,8 @@ public abstract class EMediplanMedicament<E extends EMediplanObject> implements 
      */
     @ExpectsValidResource
     public abstract boolean isSelfMedication();
+    public abstract boolean isSubstitutionForbidden();
+    public abstract void forbidSubstitution(final @Nullable Boolean selfMedication);
 
     /**
      * Resolves the actual number of packages, taking into account that the default is 1 if the actual number is not

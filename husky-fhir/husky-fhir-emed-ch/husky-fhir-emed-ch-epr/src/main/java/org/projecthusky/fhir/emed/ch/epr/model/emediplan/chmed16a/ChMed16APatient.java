@@ -179,34 +179,42 @@ public class ChMed16APatient extends EMediplanPatient<ChMed16AExtension> impleme
     /**
      * Gets an EMediplanPatient from an CH EPR patient.
      *
-     * @param eprFhirPatient The CH EPR patient to be converted.
+     * @param eprFhirPatient    The CH EMED EPR patient to be converted.
+     * @param weightObservation The CH EMED EPR weight observation, if any.
+     * @param mediplanType      The type of eMediplan document for which to get the patient. Some fields should be
+     *                          omitted depending on the document type.
      * @return The eMediplan patient.
      */
     public static ChMed16APatient fromEprFhir(final ChEmedEprPatient eprFhirPatient,
-                                              final @Nullable Observation weightObservation) {
+                                              final @Nullable Observation weightObservation,
+                                              final EMediplanType mediplanType) {
         String language = null;
-        final var fhirAddress = eprFhirPatient.resolveAddress();
-        final var preferredLanguage = eprFhirPatient.resolveLanguageOfCorrespondence();
-        if (preferredLanguage != null && preferredLanguage.hasLanguage() && preferredLanguage.getLanguage().hasCoding()) {
-            language = preferredLanguage.getLanguage().getCoding().stream().filter(Coding::hasCode)
-                    .map(Coding::getCode).map(ChMed16APatient::fhirLanguageCodeToEMediplanLanguageCode)
-                    .filter(Objects::nonNull).findAny().orElseGet(() -> {
-                        log.warn("Could not fetch a 2 letter code for the patient's language, but it is needed for eMediplan.");
-                        return null;
-                    });
-        }
         ChMed16APatientMedicalData medicalData = null;
-        if (weightObservation != null &&
-                weightObservation.hasValueQuantity() &&
-                weightObservation.getValueQuantity().hasCode() &&
-                "kg".equals(weightObservation.getValueQuantity().getCode())
-        ) {
-            medicalData = new ChMed16APatientMedicalData();
-            medicalData.addMeasurement(new ChMed16APatientMedicalDataMeasurement(
-                    ChMed16AMeasurementType.WEIGHT,
-                    weightObservation.getValueQuantity().getValue().toString(),
-                    ChMed16AMeasurementUnit.KILOGRAM
-                    ));
+        final var fhirAddress = eprFhirPatient.resolveAddress();
+
+        if (mediplanType == EMediplanType.MEDICATION_PLAN) {
+            final var preferredLanguage = eprFhirPatient.resolveLanguageOfCorrespondence();
+            if (preferredLanguage != null && preferredLanguage.hasLanguage() && preferredLanguage.getLanguage().hasCoding()) {
+                language = preferredLanguage.getLanguage().getCoding().stream().filter(Coding::hasCode)
+                        .map(Coding::getCode).map(ChMed16APatient::fhirLanguageCodeToEMediplanLanguageCode)
+                        .filter(Objects::nonNull).findAny().orElseGet(() -> {
+                            log.warn("Could not fetch a 2 letter code for the patient's language, but it is needed for eMediplan.");
+                            return null;
+                        });
+            }
+
+            if (weightObservation != null &&
+                    weightObservation.hasValueQuantity() &&
+                    weightObservation.getValueQuantity().hasCode() &&
+                    "kg".equals(weightObservation.getValueQuantity().getCode())
+            ) {
+                medicalData = new ChMed16APatientMedicalData();
+                medicalData.addMeasurement(new ChMed16APatientMedicalDataMeasurement(
+                        ChMed16AMeasurementType.WEIGHT,
+                        weightObservation.getValueQuantity().getValue().toString(),
+                        ChMed16AMeasurementUnit.KILOGRAM
+                ));
+            }
         }
 
         final var phones = eprFhirPatient.resolvePhoneNumbersAsStrings(true);
