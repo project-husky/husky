@@ -25,6 +25,7 @@ import org.projecthusky.fhir.emed.ch.epr.resource.mtp.ChEmedEprDocumentMtp;
 import org.projecthusky.fhir.emed.ch.epr.resource.padv.*;
 import org.projecthusky.fhir.emed.ch.epr.resource.pml.ChEmedEprCompositionPml;
 import org.projecthusky.fhir.emed.ch.epr.resource.pml.ChEmedEprDocumentPml;
+import org.projecthusky.fhir.emed.ch.epr.resource.pml.ChEmedEprObservationPml;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprCompositionPmlc;
 import org.projecthusky.fhir.emed.ch.epr.resource.pmlc.ChEmedEprDocumentPmlc;
 import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprCompositionPre;
@@ -307,5 +308,18 @@ class ChEmedEprParserTest {
         final var pml = (ChEmedEprDocumentPml) document;
         assertNotNull(pml.resolveComposition());
         assertInstanceOf(ChEmedEprCompositionPml.class, pml.resolveComposition());
+        assertNotNull(pml.findMtpEntryForObservation(pml.getEntryByResourceType(ChEmedEprObservationPml.class)));
+    }
+
+    @Test
+    void testParseChEmedEprCaseAlternativeFlowPmlWithChangedResourceJson() throws IOException {
+        final var json = new String(getClass().getResourceAsStream("/Bundle-BundleUtc6bPml.json").readAllBytes());
+        final var parser = new ChEmedEprParser(FhirContext.forR4Cached());
+        final var document = parser.parse(json, EmedDocumentType.PML);
+        assertInstanceOf(ChEmedEprDocumentPml.class, document);
+        final var pml = (ChEmedEprDocumentPml) document;
+        assertNotNull(pml.resolveComposition());
+        assertInstanceOf(ChEmedEprCompositionPml.class, pml.resolveComposition());
+        assertNotNull(pml.findMtpEntryForObservation(pml.getEntryByResourceType(ChEmedEprObservationPml.class)));
     }
 }
