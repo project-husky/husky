@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.projecthusky</groupId>
 	<artifactId>husky-api</artifactId>
-	<version>3.1.1-SNAPSHOT</version>
+	<version>3.2.0-SNAPSHOT</version>
 	<url>https://github.com/project-husky/husky</url>
 	<name>Husky</name>
 	<packaging>pom</packaging>
@@ -42,12 +42,12 @@
 		<jaxb.version>4.0.5</jaxb.version>
 		<spring.version>6.2.10</spring.version>
 		<spring.boot.version>3.5.5</spring.boot.version>
-		<hapi.fhir.version>8.0.0</hapi.fhir.version>
+		<hapi.fhir.version>8.2.1</hapi.fhir.version>
 		<jakarta-jwsapi-version>2.1.0</jakarta-jwsapi-version>
 		<camel.version>4.10.6</camel.version>
 		<zxing.version>3.5.3</zxing.version>
 		<openhtmltopdf-version>1.1.26</openhtmltopdf-version>
-		<org.hl7.fhir.version>6.5.20</org.hl7.fhir.version>
+		<org.hl7.fhir.version>6.5.22</org.hl7.fhir.version>
 		<fasterxml.version>2.17.2</fasterxml.version>
 		<jakarta.xml.version>3.0.1</jakarta.xml.version>
 		<jakarta.xml.ws-api.version>4.0.2</jakarta.xml.ws-api.version>
@@ -299,7 +299,7 @@
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
-				<version>3.12.0</version>
+				<version>3.18.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.commons</groupId>
@@ -334,7 +334,7 @@
 			<dependency>
 				<groupId>commons-fileupload</groupId>
 				<artifactId>commons-fileupload</artifactId>
-				<version>1.5</version>
+				<version>1.6.0</version>
 			</dependency>
 			<!-- configuration stuff (e.g. for value set handling) -->
 			<dependency>
@@ -357,7 +357,7 @@
 			<dependency>
 				<groupId>org.eclipse.angus</groupId>
 				<artifactId>angus-mail</artifactId>
-				<version>2.0.3</version>
+				<version>2.0.4</version>
 			</dependency>
 			<dependency>
 				<groupId>org.yaml</groupId>
@@ -487,7 +487,7 @@
 			<dependency>
     			<groupId>org.xerial</groupId>
     			<artifactId>sqlite-jdbc</artifactId>
-    			<version>3.49.1.0</version>
+    			<version>3.50.3.0</version>
 			</dependency>
 
 			<dependency>
@@ -571,7 +571,7 @@
 			</dependency>
 
 			<!-- Tomcat Embed section -->
-			<dependency>
+			<!--<dependency>
 				<groupId>org.apache.tomcat.embed</groupId>
 				<artifactId>tomcat-embed-core</artifactId>
 				<version>${tomcat.embed.version}</version>
@@ -580,7 +580,7 @@
 				<groupId>org.apache.tomcat.embed</groupId>
 				<artifactId>tomcat-embed-el</artifactId>
 				<version>${tomcat.embed.version}</version>
-			</dependency>
+			</dependency>-->
 
 			<!-- Hapi Hl7 Fhir section-->
 			<!-- hapi fhir -->
@@ -857,6 +857,22 @@
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-classic</artifactId>
 				<version>${logback.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.ibm.icu</groupId>
+				<artifactId>icu4j</artifactId>
+				<version>77.1</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.code.gson</groupId>
+				<artifactId>gson</artifactId>
+				<version>2.11.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.jena</groupId>
+				<artifactId>jena-shex</artifactId>
+				<version>5.5.0</version>
 			</dependency>
 
 		</dependencies>
@@ -1289,6 +1305,7 @@
 							<skipRuntimeScope>true</skipRuntimeScope>
 							<skipSystemScope>true</skipSystemScope>
 							<skipTestScope>true</skipTestScope>
+							<failBuildOnCVSS>9</failBuildOnCVSS>
 							<formats>
 								<format>XML</format>
 								<format>HTML</format>
