@@ -230,13 +230,13 @@ public class ChEmedEprDocumentPml extends ChEmedEprDocument {
                     if (observation.hasPrescription())
                         // we have to find the original prescription
                         mtpStatementId = getEntryResourceByResourceType(ChEmedEprMedicationRequestPml.class).stream()
-                                .filter(request -> request.getIdentifierFirstRep().getValue().equals(observation.resolvePreReference().getEntryId().toString()))
+                                .filter(request -> request.getIdentifierFirstRep().getValue().equals(observation.getPrescriptionElement().getExtensionIdElement().getValue()))
                                 .map(request -> request.getTreatmentPlanElement().resolveIdentifier().toString())
                                 .findAny().orElse(null);
                     else {
                         if (observation.hasDispense())
                             mtpStatementId = getEntryResourceByResourceType(ChEmedEprMedicationDispensePml.class).stream()
-                                    .filter(dispense -> dispense.getIdentifierFirstRep().getValue().equals(observation.resolveDisReference().getEntryId().toString()))
+                                    .filter(dispense -> dispense.getIdentifierFirstRep().getValue().equals(observation.getDispenseElement().getExtensionIdElement().getValue()))
                                     .map(dispense -> dispense.getTreatmentPlanElement().resolveIdentifier().toString())
                                     .findAny().orElse(null);
                         else throw new InvalidEmedContentException("Could not resolve the treatment plan identifier from the observation.");
