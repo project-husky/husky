@@ -21,6 +21,7 @@ import org.projecthusky.fhir.emed.ch.epr.resource.pre.ChEmedEprMedicationRequest
 
 import java.io.Serial;
 import java.time.Instant;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -201,6 +202,55 @@ public class ChEmedEprDocumentPml extends ChEmedEprDocument {
         return this.addEntry()
                 .setFullUrl(observation.getIdentifierFirstRep().getValue())
                 .setResource(observation);
+    }
+
+    /**
+     * Finds the original medication statement for the received observation. The observation must be part of this PML
+     * document and the document must be valid.
+     *
+     * @param observation The observation for which to find the root MTP medication statement within the PML.
+     * @return The medication statement.
+     * @throws InvalidEmedContentException If the medication statement cannot be found.
+     */
+    @ExpectsValidResource
+    public ChEmedEprMedicationStatementPml findMtpEntryForObservation(final ChEmedEprObservationPml observation)
+    throws InvalidEmedContentException {
+        Objects.requireNonNull(observation, "observation must not be null");
+
+        String mtpStatementId;
+        if (observation.hasTreatmentPlan()) mtpStatementId = observation.resolveMtpReference().getEntryId().toString();
+        else {
+            if (observation.hasMedicationStatementChanged())
+                mtpStatementId = observation.resolveMedicationStatementChanged().getIdentifierFirstRep().getValue();
+            else {
+                if (observation.hasMedicationRequestChanged())
+                    mtpStatementId = observation.resolveMedicationRequestChanged().getTreatmentPlanElement().resolveIdentifier().toString();
+                else {
+                    // this is a padv not change against a PRE or DIS
+                    if (observation.hasPrescription())
+                        // we have to find the original prescription
+                        mtpStatementId = getEntryResourceByResourceType(ChEmedEprMedicationRequestPml.class).stream()
+                                .filter(request -> request.getIdentifierFirstRep().getValue().equals(observation.resolvePreReference().getEntryId().toString()))
+                                .map(request -> request.getTreatmentPlanElement().resolveIdentifier().toString())
+                                .findAny().orElse(null);
+                    else {
+                        if (observation.hasDispense())
+                            mtpStatementId = getEntryResourceByResourceType(ChEmedEprMedicationDispensePml.class).stream()
+                                    .filter(dispense -> dispense.getIdentifierFirstRep().getValue().equals(observation.resolveDisReference().getEntryId().toString()))
+                                    .map(dispense -> dispense.getTreatmentPlanElement().resolveIdentifier().toString())
+                                    .findAny().orElse(null);
+                        else throw new InvalidEmedContentException("Could not resolve the treatment plan identifier from the observation.");
+                    }
+                }
+            }
+        }
+        if (mtpStatementId == null) throw new InvalidEmedContentException("Could not resolve the treatment plan identifier from the observation.");
+        final var statements = getEntryResourceByResourceType(ChEmedEprMedicationStatementPml.class).stream()
+                .filter(statement -> statement.getParentDocumentElement().resolveIdentifier().toString().equals(mtpStatementId))
+                .toList();
+        if (statements.isEmpty()) throw new InvalidEmedContentException("No medication statements found for the given observation.");
+        if (statements.size() > 1) throw new InvalidEmedContentException("Multiple original medication statements found for the given observation.");
+        return statements.get(0);
     }
 
     @Override
